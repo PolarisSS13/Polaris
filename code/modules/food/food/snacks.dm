@@ -1,5 +1,5 @@
 //Food items that are eaten normally and don't leave anything behind.
-/obj/item/weapon/reagent_containers/food/snacks
+/obj/item/reagent_containers/food/snacks
 	name = "snack"
 	desc = "yummy"
 	icon = 'icons/obj/food.dmi'
@@ -18,13 +18,13 @@
 	w_class = ITEMSIZE_SMALL
 	force = 0
 
-/obj/item/weapon/reagent_containers/food/snacks/Initialize()
+/obj/item/reagent_containers/food/snacks/Initialize()
 	. = ..()
 	if(nutriment_amt)
 		reagents.add_reagent("nutriment",(nutriment_amt*2),nutriment_desc)
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
-/obj/item/weapon/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
+/obj/item/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
 	if(!usr)
 		usr = M
 	if(!reagents.total_volume)
@@ -40,10 +40,10 @@
 		qdel(src)
 	return
 
-/obj/item/weapon/reagent_containers/food/snacks/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/snacks/attack_self(mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/food/snacks/attack(mob/living/M as mob, mob/user as mob, def_zone)
+/obj/item/reagent_containers/food/snacks/attack(mob/living/M as mob, mob/user as mob, def_zone)
 	if(reagents && !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		user.drop_from_inventory(src)
@@ -132,7 +132,7 @@
 
 	return 0
 
-/obj/item/weapon/reagent_containers/food/snacks/examine(mob/user)
+/obj/item/reagent_containers/food/snacks/examine(mob/user)
 	. = ..()
 	if(Adjacent(user))
 		if(bitecount==0)
@@ -144,14 +144,14 @@
 		else
 			. += "<span class='notice'>It was bitten multiple times!</span>"
 
-/obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/storage))
+/obj/item/reagent_containers/food/snacks/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/storage))
 		..() // -> item/attackby()
 		return
 
 	// Eating with forks
-	if(istype(W,/obj/item/weapon/material/kitchen/utensil))
-		var/obj/item/weapon/material/kitchen/utensil/U = W
+	if(istype(W,/obj/item/material/kitchen/utensil))
+		var/obj/item/material/kitchen/utensil/U = W
 		if(U.scoop_food)
 			if(!U.reagents)
 				U.create_reagents(5)
@@ -180,7 +180,7 @@
 
 	if (is_sliceable())
 		//these are used to allow hiding edge items in food that is not on a table/tray
-		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/weapon/tray) in src.loc))
+		var/can_slice_here = isturf(src.loc) && ((locate(/obj/structure/table) in src.loc) || (locate(/obj/machinery/optable) in src.loc) || (locate(/obj/item/tray) in src.loc))
 		var/hide_item = !has_edge(W) || !can_slice_here
 
 		if (hide_item)
@@ -212,10 +212,10 @@
 			qdel(src)
 			return
 
-/obj/item/weapon/reagent_containers/food/snacks/proc/is_sliceable()
+/obj/item/reagent_containers/food/snacks/proc/is_sliceable()
 	return (slices_num && slice_path && slices_num > 0)
 
-/obj/item/weapon/reagent_containers/food/snacks/Destroy()
+/obj/item/reagent_containers/food/snacks/Destroy()
 	if(contents)
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
@@ -224,7 +224,7 @@
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
-/obj/item/weapon/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
+/obj/item/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
 	if(!isanimal(user) && !isalien(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
@@ -254,7 +254,7 @@
 //	the bites. No more contained reagents = no more bites.
 
 //Here is an example of the new formatting for anyone who wants to add more food items.
-///obj/item/weapon/reagent_containers/food/snacks/xenoburger			//Identification path for the object.
+///obj/item/reagent_containers/food/snacks/xenoburger			//Identification path for the object.
 //	name = "Xenoburger"													//Name that displays in the UI.
 //	desc = "Smells caustic. Tastes like heresy."						//Duh
 //	icon_state = "xburger"												//Refers to an icon in food.dmi
@@ -267,7 +267,7 @@
 
 
 
-/obj/item/weapon/reagent_containers/food/snacks/aesirsalad
+/obj/item/reagent_containers/food/snacks/aesirsalad
 	name = "Aesir salad"
 	desc = "Probably too incredible for mortal men to fully enjoy."
 	icon_state = "aesirsalad"
@@ -277,13 +277,13 @@
 	nutriment_amt = 8
 	nutriment_desc = list("apples" = 3,"salad" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/aesirsalad/Initialize()
+/obj/item/reagent_containers/food/snacks/aesirsalad/Initialize()
 	. = ..()
 	reagents.add_reagent("doctorsdelight", 8)
 	reagents.add_reagent("tricordrazine", 8)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/candy
+/obj/item/reagent_containers/food/snacks/candy
 	name = "candy"
 	desc = "Nougat, love it or hate it."
 	icon_state = "candy"
@@ -293,12 +293,12 @@
 	nutriment_amt = 1
 	nutriment_desc = list("candy" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/candy/Initialize()
+/obj/item/reagent_containers/food/snacks/candy/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
+/obj/item/reagent_containers/food/snacks/candy/proteinbar
 	name = "protein bar"
 	desc = "SwoleMAX brand protein bars, guaranteed to get you feeling perfectly overconfident."
 	icon_state = "proteinbar"
@@ -306,25 +306,25 @@
 	nutriment_amt = 9
 	nutriment_desc = list("candy" = 1, "protein" = 8)
 
-/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar/Initialize()
+/obj/item/reagent_containers/food/snacks/candy/proteinbar/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("sugar", 4)
 	bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/candy/donor
+/obj/item/reagent_containers/food/snacks/candy/donor
 	name = "Donor Candy"
 	desc = "A little treat for blood donors."
 	trash = /obj/item/trash/candy
 	nutriment_amt = 9
 	nutriment_desc = list("candy" = 10)
 
-/obj/item/weapon/reagent_containers/food/snacks/candy/donor/Initialize()
+/obj/item/reagent_containers/food/snacks/candy/donor/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 3)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/candy_corn
+/obj/item/reagent_containers/food/snacks/candy_corn
 	name = "candy corn"
 	desc = "It's a handful of candy corn. Cannot be stored in a detective's hat, alas."
 	icon_state = "candy_corn"
@@ -333,12 +333,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("candy corn" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/candy_corn/Initialize()
+/obj/item/reagent_containers/food/snacks/candy_corn/Initialize()
 	..()
 	reagents.add_reagent("sugar", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/chips
+/obj/item/reagent_containers/food/snacks/chips
 	name = "chips"
 	desc = "Commander Riker's What-The-Crisps"
 	icon_state = "chips"
@@ -348,11 +348,11 @@
 	nutriment_amt = 3
 	nutriment_desc = list("salt" = 1, "chips" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/chips/Initialize()
+/obj/item/reagent_containers/food/snacks/chips/Initialize()
 	. = ..()
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/cookie
+/obj/item/reagent_containers/food/snacks/cookie
 	name = "cookie"
 	desc = "COOKIE!!!"
 	icon_state = "COOKIE!!!"
@@ -361,11 +361,11 @@
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/cookie/Initialize()
+/obj/item/reagent_containers/food/snacks/cookie/Initialize()
 	. = ..()
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolatebar
+/obj/item/reagent_containers/food/snacks/chocolatebar
 	name = "Chocolate Bar"
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolatebar"
@@ -374,13 +374,13 @@
 	nutriment_amt = 2
 	nutriment_desc = list("chocolate" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolatebar/Initialize()
+/obj/item/reagent_containers/food/snacks/chocolatebar/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 2)
 	reagents.add_reagent("coco", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolatepiece
+/obj/item/reagent_containers/food/snacks/chocolatepiece
 	name = "chocolate piece"
 	desc = "A luscious milk chocolate piece filled with gooey caramel."
 	icon_state =  "chocolatepiece"
@@ -390,20 +390,20 @@
 	nutriment_desc = list("chocolate" = 3, "caramel" = 2, "lusciousness" = 1)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolatepiece/white
+/obj/item/reagent_containers/food/snacks/chocolatepiece/white
 	name = "white chocolate piece"
 	desc = "A creamy white chocolate piece drizzled in milk chocolate."
 	icon_state = "chocolatepiece_white"
 	filling_color = "#E2DAD3"
 	nutriment_desc = list("white chocolate" = 3, "creaminess" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolatepiece/truffle
+/obj/item/reagent_containers/food/snacks/chocolatepiece/truffle
 	name = "chocolate truffle"
 	desc = "A bite-sized milk chocolate truffle that could buy anyone's love."
 	icon_state = "chocolatepiece_truffle"
 	nutriment_desc = list("chocolate" = 3, "undying devotion" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolateegg
+/obj/item/reagent_containers/food/snacks/chocolateegg
 	name = "Chocolate Egg"
 	desc = "Such sweet, fattening food."
 	icon_state = "chocolateegg"
@@ -412,13 +412,13 @@
 	nutriment_amt = 3
 	nutriment_desc = list("chocolate" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/chocolateegg/Initialize()
+/obj/item/reagent_containers/food/snacks/chocolateegg/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 2)
 	reagents.add_reagent("coco", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/donut
+/obj/item/reagent_containers/food/snacks/donut
 	name = "donut"
 	desc = "Goes great with Robust Coffee."
 	icon_state = "donut1"
@@ -427,13 +427,13 @@
 	center_of_mass = list("x"=13, "y"=16)
 	nutriment_desc = list("sweetness", "donut")
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/normal
+/obj/item/reagent_containers/food/snacks/donut/normal
 	name = "donut"
 	desc = "Goes great with Robust Coffee."
 	icon_state = "donut1"
 	nutriment_amt = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/normal/Initialize()
+/obj/item/reagent_containers/food/snacks/donut/normal/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 3)
 	reagents.add_reagent("sprinkles", 1)
@@ -445,14 +445,14 @@
 		reagents.add_reagent("sprinkles", 2)
 		center_of_mass = list("x"=19, "y"=16)
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/chaos
+/obj/item/reagent_containers/food/snacks/donut/chaos
 	name = "Chaos Donut"
 	desc = "Like life, it never quite tastes the same."
 	icon_state = "donut1"
 	filling_color = "#ED11E6"
 	nutriment_amt = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/chaos/Initialize()
+/obj/item/reagent_containers/food/snacks/donut/chaos/Initialize()
 	. = ..()
 	reagents.add_reagent("sprinkles", 1)
 	bitesize = 10
@@ -484,7 +484,7 @@
 		src.name = "Frosted Chaos Donut"
 		reagents.add_reagent("sprinkles", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/jelly
+/obj/item/reagent_containers/food/snacks/donut/jelly
 	name = "Jelly Donut"
 	desc = "You jelly?"
 	icon_state = "jdonut1"
@@ -492,7 +492,7 @@
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/jelly/Initialize()
+/obj/item/reagent_containers/food/snacks/donut/jelly/Initialize()
 	. = ..()
 	reagents.add_reagent("sprinkles", 1)
 	reagents.add_reagent("berryjuice", 5)
@@ -503,7 +503,7 @@
 		src.name = "Frosted Jelly Donut"
 		reagents.add_reagent("sprinkles", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/poisonberry
+/obj/item/reagent_containers/food/snacks/donut/poisonberry
 	name = "Jelly Donut"
 	desc = "You jelly?"
 	icon_state = "jdonut1"
@@ -511,7 +511,7 @@
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/poisonberry/Initialize()
+/obj/item/reagent_containers/food/snacks/donut/poisonberry/Initialize()
 	. = ..()
 	reagents.add_reagent("sprinkles", 1)
 	reagents.add_reagent("poisonberryjuice", 5)
@@ -522,7 +522,7 @@
 		src.name = "Frosted Jelly Donut"
 		reagents.add_reagent("sprinkles", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/slimejelly
+/obj/item/reagent_containers/food/snacks/donut/slimejelly
 	name = "Jelly Donut"
 	desc = "You jelly?"
 	icon_state = "jdonut1"
@@ -530,7 +530,7 @@
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/slimejelly/Initialize()
+/obj/item/reagent_containers/food/snacks/donut/slimejelly/Initialize()
 	. = ..()
 	reagents.add_reagent("sprinkles", 1)
 	reagents.add_reagent("slimejelly", 5)
@@ -541,7 +541,7 @@
 		src.name = "Frosted Jelly Donut"
 		reagents.add_reagent("sprinkles", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly
+/obj/item/reagent_containers/food/snacks/donut/cherryjelly
 	name = "Jelly Donut"
 	desc = "You jelly?"
 	icon_state = "jdonut1"
@@ -549,7 +549,7 @@
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly/Initialize()
+/obj/item/reagent_containers/food/snacks/donut/cherryjelly/Initialize()
 	. = ..()
 	reagents.add_reagent("sprinkles", 1)
 	reagents.add_reagent("cherryjelly", 5)
@@ -560,7 +560,7 @@
 		src.name = "Frosted Jelly Donut"
 		reagents.add_reagent("sprinkles", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg
+/obj/item/reagent_containers/food/snacks/egg
 	name = "egg"
 	desc = "An egg!"
 	icon_state = "egg"
@@ -568,11 +568,11 @@
 	volume = 10
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/Initialize()
+/obj/item/reagent_containers/food/snacks/egg/Initialize()
 	. = ..()
 	reagents.add_reagent("egg", 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/food/snacks/egg/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(istype(O,/obj/machinery/microwave))
 		return ..()
 	if(!(proximity && O.is_open_container()))
@@ -582,16 +582,16 @@
 	user.drop_from_inventory(src)
 	qdel(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
+/obj/item/reagent_containers/food/snacks/egg/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/egg_smudge(src.loc)
 	src.reagents.splash(hit_atom, reagents.total_volume)
 	src.visible_message("<font color='red'>[src.name] has been squashed.</font>","<font color='red'>You hear a smack.</font>")
 	qdel(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype( W, /obj/item/weapon/pen/crayon ))
-		var/obj/item/weapon/pen/crayon/C = W
+/obj/item/reagent_containers/food/snacks/egg/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype( W, /obj/item/pen/crayon ))
+		var/obj/item/pen/crayon/C = W
 		var/clr = C.colourName
 
 		if(!(clr in list("blue","green","mime","orange","purple","rainbow","red","yellow")))
@@ -603,55 +603,55 @@
 	else
 		..()
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/blue
+/obj/item/reagent_containers/food/snacks/egg/blue
 	icon_state = "egg-blue"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/green
+/obj/item/reagent_containers/food/snacks/egg/green
 	icon_state = "egg-green"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/mime
+/obj/item/reagent_containers/food/snacks/egg/mime
 	icon_state = "egg-mime"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/orange
+/obj/item/reagent_containers/food/snacks/egg/orange
 	icon_state = "egg-orange"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/purple
+/obj/item/reagent_containers/food/snacks/egg/purple
 	icon_state = "egg-purple"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/rainbow
+/obj/item/reagent_containers/food/snacks/egg/rainbow
 	icon_state = "egg-rainbow"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/red
+/obj/item/reagent_containers/food/snacks/egg/red
 	icon_state = "egg-red"
 
-/obj/item/weapon/reagent_containers/food/snacks/egg/yellow
+/obj/item/reagent_containers/food/snacks/egg/yellow
 	icon_state = "egg-yellow"
 
-/obj/item/weapon/reagent_containers/food/snacks/friedegg
+/obj/item/reagent_containers/food/snacks/friedegg
 	name = "Fried egg"
 	desc = "A fried egg, with a touch of salt and pepper."
 	icon_state = "friedegg"
 	filling_color = "#FFDF78"
 	center_of_mass = list("x"=16, "y"=14)
 
-/obj/item/weapon/reagent_containers/food/snacks/friedegg/Initialize()
+/obj/item/reagent_containers/food/snacks/friedegg/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	reagents.add_reagent("sodiumchloride", 1)
 	reagents.add_reagent("blackpepper", 1)
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledegg
+/obj/item/reagent_containers/food/snacks/boiledegg
 	name = "Boiled egg"
 	desc = "A hard boiled egg."
 	icon_state = "egg"
 	filling_color = "#FFFFFF"
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledegg/Initialize()
+/obj/item/reagent_containers/food/snacks/boiledegg/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/organ
+/obj/item/reagent_containers/food/snacks/organ
 	name = "organ"
 	desc = "It's good for you."
 	icon = 'icons/obj/surgery.dmi'
@@ -659,13 +659,13 @@
 	filling_color = "#E00D34"
 	center_of_mass = list("x"=16, "y"=16)
 
-/obj/item/weapon/reagent_containers/food/snacks/organ/Initialize()
+/obj/item/reagent_containers/food/snacks/organ/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", rand(3,5))
 	reagents.add_reagent("toxin", rand(1,3))
 	src.bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/tofu
+/obj/item/reagent_containers/food/snacks/tofu
 	name = "Tofu"
 	icon_state = "tofu"
 	desc = "We all love tofu."
@@ -674,11 +674,11 @@
 	nutriment_amt = 3
 	nutriment_desc = list("tofu" = 3, "goeyness" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/tofu/Initialize()
+/obj/item/reagent_containers/food/snacks/tofu/Initialize()
 	. = ..()
 	src.bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/tofurkey
+/obj/item/reagent_containers/food/snacks/tofurkey
 	name = "Tofurkey"
 	desc = "A fake turkey made from tofu."
 	icon_state = "tofurkey"
@@ -687,12 +687,12 @@
 	nutriment_amt = 12
 	nutriment_desc = list("turkey" = 3, "tofu" = 5, "goeyness" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/tofurkey/Initialize()
+/obj/item/reagent_containers/food/snacks/tofurkey/Initialize()
 	. = ..()
 	reagents.add_reagent("stoxin", 3)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/stuffing
+/obj/item/reagent_containers/food/snacks/stuffing
 	name = "Stuffing"
 	desc = "Moist, peppery breadcrumbs for filling the body cavities of dead birds. Dig in!"
 	icon_state = "stuffing"
@@ -701,11 +701,11 @@
 	nutriment_amt = 3
 	nutriment_desc = list("dryness" = 2, "bread" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/stuffing/Initialize()
+/obj/item/reagent_containers/food/snacks/stuffing/Initialize()
 	. = ..()
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat
+/obj/item/reagent_containers/food/snacks/carpmeat
 	name = "fillet"
 	desc = "A fillet of carp meat"
 	icon_state = "fishfillet"
@@ -715,52 +715,52 @@
 	var/toxin_type = "carpotoxin"
 	var/toxin_amount = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/Initialize()
+/obj/item/reagent_containers/food/snacks/carpmeat/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	reagents.add_reagent(toxin_type, toxin_amount)
 	src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif
+/obj/item/reagent_containers/food/snacks/carpmeat/sif
 	desc = "A fillet of sivian fish meat."
 	filling_color = "#2c2cff"
 	color = "#2c2cff"
 	toxin_type = "neurotoxic_protein"
 	toxin_amount = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif/murkfish
+/obj/item/reagent_containers/food/snacks/carpmeat/sif/murkfish
 	toxin_type = "murk_protein"
 
-/obj/item/weapon/reagent_containers/food/snacks/carpmeat/fish
+/obj/item/reagent_containers/food/snacks/carpmeat/fish
 	desc = "A fillet of fish meat."
 	toxin_type = "neurotoxic_protein"
 	toxin_amount = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/fishfingers
+/obj/item/reagent_containers/food/snacks/fishfingers
 	name = "Fish Fingers"
 	desc = "A finger of fish."
 	icon_state = "fishfingers"
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/fishfingers/Initialize()
+/obj/item/reagent_containers/food/snacks/fishfingers/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/zestfish
+/obj/item/reagent_containers/food/snacks/zestfish
 	name = "Zesty Fish"
 	desc = "Lightly seasoned fish fillets."
 	icon_state = "zestfish"
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/zestfish/Initialize()
+/obj/item/reagent_containers/food/snacks/zestfish/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/hugemushroomslice
+/obj/item/reagent_containers/food/snacks/hugemushroomslice
 	name = "huge mushroom slice"
 	desc = "A slice from a huge mushroom."
 	icon_state = "hugemushroomslice"
@@ -769,12 +769,12 @@
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "mushroom" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/hugemushroomslice/Initialize()
+/obj/item/reagent_containers/food/snacks/hugemushroomslice/Initialize()
 	. = ..()
 	reagents.add_reagent("psilocybin", 3)
 	src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/tomatomeat
+/obj/item/reagent_containers/food/snacks/tomatomeat
 	name = "tomato slice"
 	desc = "A slice from a huge tomato"
 	icon_state = "tomatomeat"
@@ -783,74 +783,74 @@
 	nutriment_amt = 3
 	nutriment_desc = list("raw" = 2, "tomato" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/tomatomeat/Initialize()
+/obj/item/reagent_containers/food/snacks/tomatomeat/Initialize()
 	. = ..()
 	src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/bearmeat
+/obj/item/reagent_containers/food/snacks/bearmeat
 	name = "bear meat"
 	desc = "A very manly slab of meat."
 	icon_state = "bearmeat"
 	filling_color = "#DB0000"
 	center_of_mass = list("x"=16, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/bearmeat/Initialize()
+/obj/item/reagent_containers/food/snacks/bearmeat/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 12)
 	reagents.add_reagent("hyperzine", 5)
 	src.bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/xenomeat
+/obj/item/reagent_containers/food/snacks/xenomeat
 	name = "xenomeat"
 	desc = "A slab of green meat. Smells like acid."
 	icon_state = "xenomeat"
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=16, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/xenomeat/Initialize()
+/obj/item/reagent_containers/food/snacks/xenomeat/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	reagents.add_reagent("pacid",6)
 	src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/xenomeat/spidermeat // Substitute for recipes requiring xeno meat.
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat // Substitute for recipes requiring xeno meat.
 	name = "spider meat"
 	desc = "A slab of green meat."
 	icon_state = "xenomeat"
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=16, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/xenomeat/spidermeat/Initialize()
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/Initialize()
 	. = ..()
 	reagents.add_reagent("spidertoxin",6)
 	reagents.remove_reagent("pacid",6)
 	src.bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/meatball
+/obj/item/reagent_containers/food/snacks/meatball
 	name = "meatball"
 	desc = "A great meal all round."
 	icon_state = "meatball"
 	filling_color = "#DB0000"
 	center_of_mass = list("x"=16, "y"=16)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatball/Initialize()
+/obj/item/reagent_containers/food/snacks/meatball/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/sausage
+/obj/item/reagent_containers/food/snacks/sausage
 	name = "Sausage"
 	desc = "A piece of mixed, long meat."
 	icon_state = "sausage"
 	filling_color = "#DB0000"
 	center_of_mass = list("x"=16, "y"=16)
 
-/obj/item/weapon/reagent_containers/food/snacks/sausage/Initialize()
+/obj/item/reagent_containers/food/snacks/sausage/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket
+/obj/item/reagent_containers/food/snacks/donkpocket
 	name = "Donk-pocket"
 	desc = "The food of choice for the seasoned traitor."
 	icon_state = "donkpocket"
@@ -859,7 +859,7 @@
 	var/warm
 	var/list/heated_reagents
 
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket/Initialize()
+/obj/item/reagent_containers/food/snacks/donkpocket/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 2)
 	reagents.add_reagent("protein", 2)
@@ -867,7 +867,7 @@
 	warm = 0
 	heated_reagents = list("tricordrazine" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket/proc/heat()
+/obj/item/reagent_containers/food/snacks/donkpocket/proc/heat()
 	warm = 1
 	for(var/reagent in heated_reagents)
 		reagents.add_reagent(reagent, heated_reagents[reagent])
@@ -875,7 +875,7 @@
 	name = "Warm " + name
 	cooltime()
 
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket/proc/cooltime()
+/obj/item/reagent_containers/food/snacks/donkpocket/proc/cooltime()
 	if (src.warm)
 		spawn(4200)
 			src.warm = 0
@@ -884,14 +884,14 @@
 			src.name = initial(name)
 	return
 
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket
+/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket
 	name = "\improper Sin-pocket"
 	desc = "The food of choice for the veteran. Do <B>NOT</B> overconsume."
 	filling_color = "#6D6D00"
 	heated_reagents = list("doctorsdelight" = 5, "hyperzine" = 0.75, "synaptizine" = 0.25)
 	var/has_been_heated = 0
 
-/obj/item/weapon/reagent_containers/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
+/obj/item/reagent_containers/food/snacks/donkpocket/sinpocket/attack_self(mob/user)
 	if(has_been_heated)
 		to_chat(user, "<span class='notice'>The heating chemicals have already been spent.</span>")
 		return
@@ -901,20 +901,20 @@
 		to_chat(user, "You think \the [src] is ready to eat about now.")
 		heat()
 
-/obj/item/weapon/reagent_containers/food/snacks/brainburger
+/obj/item/reagent_containers/food/snacks/brainburger
 	name = "brainburger"
 	desc = "A strange looking burger. It looks almost sentient."
 	icon_state = "brainburger"
 	filling_color = "#F2B6EA"
 	center_of_mass = list("x"=15, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/brainburger/Initialize()
+/obj/item/reagent_containers/food/snacks/brainburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	reagents.add_reagent("alkysine", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/ghostburger
+/obj/item/reagent_containers/food/snacks/ghostburger
 	name = "Ghost Burger"
 	desc = "Spooky! It doesn't look very filling."
 	icon_state = "ghostburger"
@@ -923,27 +923,27 @@
 	nutriment_desc = list("buns" = 3, "spookiness" = 3)
 	nutriment_amt = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/ghostburger/Initialize()
+/obj/item/reagent_containers/food/snacks/ghostburger/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/human
+/obj/item/reagent_containers/food/snacks/human
 	var/hname = ""
 	var/job = null
 	filling_color = "#D63C3C"
 
-/obj/item/weapon/reagent_containers/food/snacks/human/burger
+/obj/item/reagent_containers/food/snacks/human/burger
 	name = "-burger"
 	desc = "A bloody burger."
 	icon_state = "hburger"
 	center_of_mass = list("x"=16, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/human/burger/Initialize()
+/obj/item/reagent_containers/food/snacks/human/burger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/cheeseburger
+/obj/item/reagent_containers/food/snacks/cheeseburger
 	name = "cheeseburger"
 	desc = "The cheese adds a good flavor."
 	icon_state = "cheeseburger"
@@ -951,11 +951,11 @@
 	nutriment_amt = 2
 	nutriment_desc = list("cheese" = 2, "bun" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/cheeseburger/Initialize()
+/obj/item/reagent_containers/food/snacks/cheeseburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeyburger
+/obj/item/reagent_containers/food/snacks/monkeyburger
 	name = "burger"
 	desc = "The cornerstone of every nutritious breakfast."
 	icon_state = "hburger"
@@ -964,24 +964,24 @@
 	nutriment_amt = 3
 	nutriment_desc = list("bun" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeyburger/Initialize()
+/obj/item/reagent_containers/food/snacks/monkeyburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/fishburger
+/obj/item/reagent_containers/food/snacks/fishburger
 	name = "Fillet -o- Carp Sandwich"
 	desc = "Almost like a carp is yelling somewhere... Give me back that fillet -o- carp, give me that carp."
 	icon_state = "fishburger"
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=16, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/fishburger/Initialize()
+/obj/item/reagent_containers/food/snacks/fishburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/tofuburger
+/obj/item/reagent_containers/food/snacks/tofuburger
 	name = "Tofu Burger"
 	desc = "What.. is that meat?"
 	icon_state = "tofuburger"
@@ -990,11 +990,11 @@
 	nutriment_amt = 6
 	nutriment_desc = list("bun" = 2, "pseudo-soy meat" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/tofuburger/Initialize()
+/obj/item/reagent_containers/food/snacks/tofuburger/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/roburger
+/obj/item/reagent_containers/food/snacks/roburger
 	name = "roburger"
 	desc = "The lettuce is the only organic component. Beep."
 	icon_state = "roburger"
@@ -1003,11 +1003,11 @@
 	nutriment_amt = 2
 	nutriment_desc = list("bun" = 2, "metal" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/roburger/Initialize()
+/obj/item/reagent_containers/food/snacks/roburger/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/roburgerbig
+/obj/item/reagent_containers/food/snacks/roburgerbig
 	name = "roburger"
 	desc = "This massive patty looks like poison. Beep."
 	icon_state = "roburger"
@@ -1015,23 +1015,23 @@
 	volume = 100
 	center_of_mass = list("x"=16, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/roburgerbig/Initialize()
+/obj/item/reagent_containers/food/snacks/roburgerbig/Initialize()
 	. = ..()
 	bitesize = 0.1
 
-/obj/item/weapon/reagent_containers/food/snacks/xenoburger
+/obj/item/reagent_containers/food/snacks/xenoburger
 	name = "xenoburger"
 	desc = "Smells caustic. Tastes like heresy."
 	icon_state = "xburger"
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=16, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/xenoburger/Initialize()
+/obj/item/reagent_containers/food/snacks/xenoburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/clownburger
+/obj/item/reagent_containers/food/snacks/clownburger
 	name = "Clown Burger"
 	desc = "This tastes funny..."
 	icon_state = "clownburger"
@@ -1040,11 +1040,11 @@
 	nutriment_amt = 6
 	nutriment_desc = list("bun" = 2, "clown shoe" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/clownburger/Initialize()
+/obj/item/reagent_containers/food/snacks/clownburger/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/mimeburger
+/obj/item/reagent_containers/food/snacks/mimeburger
 	name = "Mime Burger"
 	desc = "Its taste defies language."
 	icon_state = "mimeburger"
@@ -1053,12 +1053,12 @@
 	nutriment_amt = 6
 	nutriment_desc = list("bun" = 2, "face paint" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/mimeburger/Initialize()
+/obj/item/reagent_containers/food/snacks/mimeburger/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/omelette
+/obj/item/reagent_containers/food/snacks/omelette
 	name = "Omelette Du Fromage"
 	desc = "That's all you can say!"
 	icon_state = "omelette"
@@ -1066,12 +1066,12 @@
 	filling_color = "#FFF9A8"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/omelette/Initialize()
+/obj/item/reagent_containers/food/snacks/omelette/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/muffin
+/obj/item/reagent_containers/food/snacks/muffin
 	name = "Muffin"
 	desc = "A delicious and spongy little cake"
 	icon_state = "muffin"
@@ -1080,12 +1080,12 @@
 	nutriment_amt = 6
 	nutriment_desc = list("sweetness" = 3, "muffin" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/muffin/Initialize()
+/obj/item/reagent_containers/food/snacks/muffin/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/pie
+/obj/item/reagent_containers/food/snacks/pie
 	name = "Banana Cream Pie"
 	desc = "Just like back home, on clown planet! HONK!"
 	icon_state = "pie"
@@ -1095,18 +1095,18 @@
 	nutriment_amt = 4
 	nutriment_desc = list("pie" = 3, "cream" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/pie/Initialize()
+/obj/item/reagent_containers/food/snacks/pie/Initialize()
 	. = ..()
 	reagents.add_reagent("banana",5)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/pie/throw_impact(atom/hit_atom)
+/obj/item/reagent_containers/food/snacks/pie/throw_impact(atom/hit_atom)
 	..()
 	new/obj/effect/decal/cleanable/pie_smudge(src.loc)
 	src.visible_message("<span class='danger'>\The [src.name] splats.</span>","<span class='danger'>You hear a splat.</span>")
 	qdel(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/berryclafoutis
+/obj/item/reagent_containers/food/snacks/berryclafoutis
 	name = "Berry Clafoutis"
 	desc = "No black birds, this is a good sign."
 	icon_state = "berryclafoutis"
@@ -1115,19 +1115,19 @@
 	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 2, "pie" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/berryclafoutis/Initialize()
+/obj/item/reagent_containers/food/snacks/berryclafoutis/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/berryclafoutis/berry/Initialize()
+/obj/item/reagent_containers/food/snacks/berryclafoutis/berry/Initialize()
 	. = ..()
 	reagents.add_reagent("berryjuice", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/berryclafoutis/poison/Initialize()
+/obj/item/reagent_containers/food/snacks/berryclafoutis/poison/Initialize()
 	. = ..()
 	reagents.add_reagent("poisonberryjuice", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/waffles
+/obj/item/reagent_containers/food/snacks/waffles
 	name = "waffles"
 	desc = "Mmm, waffles"
 	icon_state = "waffles"
@@ -1137,11 +1137,11 @@
 	nutriment_amt = 8
 	nutriment_desc = list("waffle" = 8)
 
-/obj/item/weapon/reagent_containers/food/snacks/waffles/Initialize()
+/obj/item/reagent_containers/food/snacks/waffles/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/eggplantparm
+/obj/item/reagent_containers/food/snacks/eggplantparm
 	name = "Eggplant Parmigiana"
 	desc = "The only good recipe for eggplant."
 	icon_state = "eggplantparm"
@@ -1151,11 +1151,11 @@
 	nutriment_amt = 6
 	nutriment_desc = list("cheese" = 3, "eggplant" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/eggplantparm/Initialize()
+/obj/item/reagent_containers/food/snacks/eggplantparm/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/soylentgreen
+/obj/item/reagent_containers/food/snacks/soylentgreen
 	name = "Soylent Green"
 	desc = "Not made of people. Honest." //Totally people.
 	icon_state = "soylent_green"
@@ -1163,12 +1163,12 @@
 	filling_color = "#B8E6B5"
 	center_of_mass = list("x"=15, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/soylentgreen/Initialize()
+/obj/item/reagent_containers/food/snacks/soylentgreen/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/soylenviridians
+/obj/item/reagent_containers/food/snacks/soylenviridians
 	name = "Soylen Virdians"
 	desc = "Not made of people. Honest." //Actually honest for once.
 	icon_state = "soylent_yellow"
@@ -1178,11 +1178,11 @@
 	nutriment_amt = 10
 	nutriment_desc = list("some sort of protein" = 10)  //seasoned VERY well.
 
-/obj/item/weapon/reagent_containers/food/snacks/soylenviridians/Initialize()
+/obj/item/reagent_containers/food/snacks/soylenviridians/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/meatpie
+/obj/item/reagent_containers/food/snacks/meatpie
 	name = "Meat-pie"
 	icon_state = "meatpie"
 	desc = "An old barber recipe, very delicious!"
@@ -1190,12 +1190,12 @@
 	filling_color = "#948051"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatpie/Initialize()
+/obj/item/reagent_containers/food/snacks/meatpie/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/tofupie
+/obj/item/reagent_containers/food/snacks/tofupie
 	name = "Tofu-pie"
 	icon_state = "meatpie"
 	desc = "A delicious tofu pie."
@@ -1205,11 +1205,11 @@
 	nutriment_amt = 10
 	nutriment_desc = list("tofu" = 2, "pie" = 8)
 
-/obj/item/weapon/reagent_containers/food/snacks/tofupie/Initialize()
+/obj/item/reagent_containers/food/snacks/tofupie/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/amanita_pie
+/obj/item/reagent_containers/food/snacks/amanita_pie
 	name = "amanita pie"
 	desc = "Sweet and tasty poison pie."
 	icon_state = "amanita_pie"
@@ -1218,13 +1218,13 @@
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 3, "mushroom" = 3, "pie" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/amanita_pie/Initialize()
+/obj/item/reagent_containers/food/snacks/amanita_pie/Initialize()
 	..()
 	reagents.add_reagent("amatoxin", 3)
 	reagents.add_reagent("psilocybin", 1)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/plump_pie
+/obj/item/reagent_containers/food/snacks/plump_pie
 	name = "plump pie"
 	desc = "I bet you love stuff made out of plump helmets!"
 	icon_state = "plump_pie"
@@ -1233,7 +1233,7 @@
 	nutriment_amt = 8
 	nutriment_desc = list("heartiness" = 2, "mushroom" = 3, "pie" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/plump_pie/Initialize()
+/obj/item/reagent_containers/food/snacks/plump_pie/Initialize()
 	..()
 	if(prob(10))
 		name = "exceptional plump pie"
@@ -1244,7 +1244,7 @@
 	else
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/xemeatpie
+/obj/item/reagent_containers/food/snacks/xemeatpie
 	name = "Xeno-pie"
 	icon_state = "xenomeatpie"
 	desc = "A delicious meatpie. Probably heretical."
@@ -1252,12 +1252,12 @@
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/xemeatpie/Initialize()
+/obj/item/reagent_containers/food/snacks/xemeatpie/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/wingfangchu
+/obj/item/reagent_containers/food/snacks/wingfangchu
 	name = "Wing Fang Chu"
 	desc = "A savory dish of alien wing wang in soy."
 	icon_state = "wingfangchu"
@@ -1265,12 +1265,12 @@
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=17, "y"=9)
 
-/obj/item/weapon/reagent_containers/food/snacks/wingfangchu/Initialize()
+/obj/item/reagent_containers/food/snacks/wingfangchu/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/human/kabob
+/obj/item/reagent_containers/food/snacks/human/kabob
 	name = "-kabob"
 	icon_state = "kabob"
 	desc = "A human meat, on a stick."
@@ -1278,12 +1278,12 @@
 	filling_color = "#A85340"
 	center_of_mass = list("x"=17, "y"=15)
 
-/obj/item/weapon/reagent_containers/food/snacks/human/kabob/Initialize()
+/obj/item/reagent_containers/food/snacks/human/kabob/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeykabob
+/obj/item/reagent_containers/food/snacks/monkeykabob
 	name = "Meat-kabob"
 	icon_state = "kabob"
 	desc = "Delicious meat, on a stick."
@@ -1291,12 +1291,12 @@
 	filling_color = "#A85340"
 	center_of_mass = list("x"=17, "y"=15)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeykabob/Initialize()
+/obj/item/reagent_containers/food/snacks/monkeykabob/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/tofukabob
+/obj/item/reagent_containers/food/snacks/tofukabob
 	name = "Tofu-kabob"
 	icon_state = "kabob"
 	desc = "Vegan meat, on a stick."
@@ -1307,11 +1307,11 @@
 	nutriment_amt = 8
 	nutriment_desc = list("tofu" = 3, "metal" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/tofukabob/Initialize()
+/obj/item/reagent_containers/food/snacks/tofukabob/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/cubancarp
+/obj/item/reagent_containers/food/snacks/cubancarp
 	name = "Cuban Carp"
 	desc = "A sandwich that burns your tongue and then leaves it numb!"
 	icon_state = "cubancarp"
@@ -1321,13 +1321,13 @@
 	nutriment_amt = 3
 	nutriment_desc = list("toasted bread" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/cubancarp/Initialize()
+/obj/item/reagent_containers/food/snacks/cubancarp/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	reagents.add_reagent("capsaicin", 3)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/popcorn
+/obj/item/reagent_containers/food/snacks/popcorn
 	name = "Popcorn"
 	desc = "Now let's find some cinema."
 	icon_state = "popcorn"
@@ -1339,18 +1339,18 @@
 	nutriment_desc = list("popcorn" = 3)
 
 
-/obj/item/weapon/reagent_containers/food/snacks/popcorn/Initialize()
+/obj/item/reagent_containers/food/snacks/popcorn/Initialize()
 	. = ..()
 	unpopped = rand(1,10)
 	bitesize = 0.1 //this snack is supposed to be eating during looooong time. And this it not dinner food! --rastaf0
 
-/obj/item/weapon/reagent_containers/food/snacks/popcorn/On_Consume()
+/obj/item/reagent_containers/food/snacks/popcorn/On_Consume()
 	if(prob(unpopped))	//lol ...what's the point?
 		to_chat(usr, "<font color='red'>You bite down on an un-popped kernel!</font>")
 		unpopped = max(0, unpopped-1)
 	..()
 
-/obj/item/weapon/reagent_containers/food/snacks/sosjerky
+/obj/item/reagent_containers/food/snacks/sosjerky
 	name = "Scaredy's Private Reserve Beef Jerky"
 	icon_state = "sosjerky"
 	desc = "Beef jerky made from the finest space cows."
@@ -1358,12 +1358,12 @@
 	filling_color = "#631212"
 	center_of_mass = list("x"=15, "y"=9)
 
-/obj/item/weapon/reagent_containers/food/snacks/sosjerky/Initialize()
+/obj/item/reagent_containers/food/snacks/sosjerky/Initialize()
 		..()
 		reagents.add_reagent("protein", 4)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/no_raisin
+/obj/item/reagent_containers/food/snacks/no_raisin
 	name = "4no Raisins"
 	icon_state = "4no_raisins"
 	desc = "Best raisins in the universe. Not sure why."
@@ -1373,23 +1373,23 @@
 	nutriment_amt = 6
 	nutriment_desc = list("dried raisins" = 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/no_raisin/Initialize()
+/obj/item/reagent_containers/food/snacks/no_raisin/Initialize()
 	..()
 	reagents.add_reagent("nutriment", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie
+/obj/item/reagent_containers/food/snacks/spacetwinkie
 	name = "Space Twinkie"
 	icon_state = "space_twinkie"
 	desc = "Guaranteed to survive longer then you will."
 	filling_color = "#FFE591"
 	center_of_mass = list("x"=15, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/Initialize()
+/obj/item/reagent_containers/food/snacks/spacetwinkie/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
+/obj/item/reagent_containers/food/snacks/cheesiehonkers
 	name = "Cheesie Honkers"
 	icon_state = "cheesie_honkers"
 	desc = "Bite sized cheesie snacks that will honk all over your mouth"
@@ -1399,11 +1399,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("cheese" = 5, "chips" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers/Initialize()
+/obj/item/reagent_containers/food/snacks/cheesiehonkers/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/syndicake
+/obj/item/reagent_containers/food/snacks/syndicake
 	name = "Syndi-Cakes"
 	icon_state = "syndi_cakes"
 	desc = "An extremely moist snack cake that tastes just as good after being nuked."
@@ -1413,12 +1413,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 3, "cake" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/syndicake/Initialize()
+/obj/item/reagent_containers/food/snacks/syndicake/Initialize()
 	. = ..()
 	reagents.add_reagent("doctorsdelight", 5)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/loadedbakedpotato
+/obj/item/reagent_containers/food/snacks/loadedbakedpotato
 	name = "Loaded Baked Potato"
 	desc = "Totally baked."
 	icon_state = "loadedbakedpotato"
@@ -1427,12 +1427,12 @@
 	nutriment_amt = 3
 	nutriment_desc = list("baked potato" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/loadedbakedpotato/Initialize()
+/obj/item/reagent_containers/food/snacks/loadedbakedpotato/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/fries
+/obj/item/reagent_containers/food/snacks/fries
 	name = "Space Fries"
 	desc = "AKA: French Fries, Freedom Fries, etc."
 	icon_state = "fries"
@@ -1442,11 +1442,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("fresh fries" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/fries/Initialize()
+/obj/item/reagent_containers/food/snacks/fries/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/mashedpotato
+/obj/item/reagent_containers/food/snacks/mashedpotato
 	name = "Mashed Potato"
 	desc = "Pillowy mounds of mashed potato."
 	icon_state = "mashedpotato"
@@ -1456,11 +1456,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("fluffy mashed potatoes" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/mashedpotato/Initialize()
+/obj/item/reagent_containers/food/snacks/mashedpotato/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bangersandmash
+/obj/item/reagent_containers/food/snacks/bangersandmash
 	name = "Bangers and Mash"
 	desc = "An English treat."
 	icon_state = "bangersandmash"
@@ -1470,12 +1470,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("fluffy potato" = 3, "sausage" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/bangersandmash/Initialize()
+/obj/item/reagent_containers/food/snacks/bangersandmash/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesymash
+/obj/item/reagent_containers/food/snacks/cheesymash
 	name = "Cheesy Mashed Potato"
 	desc = "The only thing that could make mash better."
 	icon_state = "cheesymash"
@@ -1485,25 +1485,25 @@
 	nutriment_amt = 4
 	nutriment_desc = list("cheesy potato" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesymash/Initialize()
+/obj/item/reagent_containers/food/snacks/cheesymash/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/blackpudding
+/obj/item/reagent_containers/food/snacks/blackpudding
 	name = "Black Pudding"
 	desc = "This doesn't seem like a pudding at all."
 	icon_state = "blackpudding"
 	filling_color = "#FF0000"
 	center_of_mass = list("x"=16, "y"=7)
 
-/obj/item/weapon/reagent_containers/food/snacks/blackpudding/Initialize()
+/obj/item/reagent_containers/food/snacks/blackpudding/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 	reagents.add_reagent("blood", 5)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/soydope
+/obj/item/reagent_containers/food/snacks/soydope
 	name = "Soy Dope"
 	desc = "Dope from a soy."
 	icon_state = "soydope"
@@ -1513,11 +1513,11 @@
 	nutriment_amt = 2
 	nutriment_desc = list("slime" = 2, "soy" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/soydope/Initialize()
+/obj/item/reagent_containers/food/snacks/soydope/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/spagetti
+/obj/item/reagent_containers/food/snacks/spagetti
 	name = "Spaghetti"
 	desc = "A bundle of raw spaghetti."
 	icon_state = "spagetti"
@@ -1526,11 +1526,11 @@
 	nutriment_amt = 1
 	nutriment_desc = list("noodles" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/spagetti/Initialize()
+/obj/item/reagent_containers/food/snacks/spagetti/Initialize()
 	. = ..()
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesyfries
+/obj/item/reagent_containers/food/snacks/cheesyfries
 	name = "Cheesy Fries"
 	desc = "Fries. Covered in cheese. Duh."
 	icon_state = "cheesyfries"
@@ -1540,12 +1540,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("fresh fries" = 3, "cheese" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesyfries/Initialize()
+/obj/item/reagent_containers/food/snacks/cheesyfries/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/fortunecookie
+/obj/item/reagent_containers/food/snacks/fortunecookie
 	name = "Fortune cookie"
 	desc = "A true prophecy in each cookie!"
 	icon_state = "fortune_cookie"
@@ -1554,24 +1554,24 @@
 	nutriment_amt = 3
 	nutriment_desc = list("fortune cookie" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/fortunecookie/Initialize()
+/obj/item/reagent_containers/food/snacks/fortunecookie/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/badrecipe
+/obj/item/reagent_containers/food/snacks/badrecipe
 	name = "Burned mess"
 	desc = "Someone should be demoted from chef for this."
 	icon_state = "badrecipe"
 	filling_color = "#211F02"
 	center_of_mass = list("x"=16, "y"=12)
 
-/obj/item/weapon/reagent_containers/food/snacks/badrecipe/Initialize()
+/obj/item/reagent_containers/food/snacks/badrecipe/Initialize()
 	. = ..()
 	reagents.add_reagent("toxin", 1)
 	reagents.add_reagent("carbon", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/meatsteak
+/obj/item/reagent_containers/food/snacks/meatsteak
 	name = "Meat steak"
 	desc = "A piece of hot spicy meat."
 	icon_state = "meatstake"
@@ -1579,14 +1579,14 @@
 	filling_color = "#7A3D11"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatsteak/Initialize()
+/obj/item/reagent_containers/food/snacks/meatsteak/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("sodiumchloride", 1)
 	reagents.add_reagent("blackpepper", 1)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/spacylibertyduff
+/obj/item/reagent_containers/food/snacks/spacylibertyduff
 	name = "Spacy Liberty Duff"
 	desc = "Jello gelatin, from Alfred Hubbard's cookbook"
 	icon_state = "spacylibertyduff"
@@ -1596,12 +1596,12 @@
 	nutriment_amt = 6
 	nutriment_desc = list("mushroom" = 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/spacylibertyduff/Initialize()
+/obj/item/reagent_containers/food/snacks/spacylibertyduff/Initialize()
 	. = ..()
 	reagents.add_reagent("psilocybin", 6)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/amanitajelly
+/obj/item/reagent_containers/food/snacks/amanitajelly
 	name = "Amanita Jelly"
 	desc = "Looks curiously toxic"
 	icon_state = "amanitajelly"
@@ -1611,13 +1611,13 @@
 	nutriment_amt = 6
 	nutriment_desc = list("jelly" = 3, "mushroom" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/amanitajelly/Initialize()
+/obj/item/reagent_containers/food/snacks/amanitajelly/Initialize()
 	. = ..()
 	reagents.add_reagent("amatoxin", 6)
 	reagents.add_reagent("psilocybin", 3)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/poppypretzel
+/obj/item/reagent_containers/food/snacks/poppypretzel
 	name = "Poppy pretzel"
 	desc = "It's all twisted up!"
 	icon_state = "poppypretzel"
@@ -1627,11 +1627,11 @@
 	nutriment_amt = 5
 	nutriment_desc = list("poppy seeds" = 2, "pretzel" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/poppypretzel/Initialize()
+/obj/item/reagent_containers/food/snacks/poppypretzel/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/meatballsoup
+/obj/item/reagent_containers/food/snacks/meatballsoup
 	name = "Meatball soup"
 	desc = "You've got balls kid, BALLS!"
 	icon_state = "meatballsoup"
@@ -1639,39 +1639,39 @@
 	filling_color = "#785210"
 	center_of_mass = list("x"=16, "y"=8)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatballsoup/Initialize()
+/obj/item/reagent_containers/food/snacks/meatballsoup/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
 	reagents.add_reagent("water", 5)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/slimesoup
+/obj/item/reagent_containers/food/snacks/slimesoup
 	name = "slime soup"
 	desc = "If no water is available, you may substitute tears."
 	icon_state = "rorosoup" //nonexistant? - 3/1/2020 FIXED. roro's live on.
 	filling_color = "#C4DBA0"
 
-/obj/item/weapon/reagent_containers/food/snacks/slimesoup/Initialize()
+/obj/item/reagent_containers/food/snacks/slimesoup/Initialize()
 	. = ..()
 	reagents.add_reagent("slimejelly", 5)
 	reagents.add_reagent("water", 10)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/bloodsoup
+/obj/item/reagent_containers/food/snacks/bloodsoup
 	name = "Tomato soup"
 	desc = "Smells like copper."
 	icon_state = "tomatosoup"
 	filling_color = "#FF0000"
 	center_of_mass = list("x"=16, "y"=7)
 
-/obj/item/weapon/reagent_containers/food/snacks/bloodsoup/Initialize()
+/obj/item/reagent_containers/food/snacks/bloodsoup/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 	reagents.add_reagent("blood", 10)
 	reagents.add_reagent("water", 5)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/clownstears
+/obj/item/reagent_containers/food/snacks/clownstears
 	name = "Clown's Tears"
 	desc = "Not very funny."
 	icon_state = "clownstears"
@@ -1680,13 +1680,13 @@
 	nutriment_amt = 4
 	nutriment_desc = list("salt" = 1, "the worst joke" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/clownstears/Initialize()
+/obj/item/reagent_containers/food/snacks/clownstears/Initialize()
 	. = ..()
 	reagents.add_reagent("banana", 5)
 	reagents.add_reagent("water", 10)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/vegetablesoup
+/obj/item/reagent_containers/food/snacks/vegetablesoup
 	name = "Vegetable soup"
 	desc = "A true vegan meal" //TODO
 	icon_state = "vegetablesoup"
@@ -1696,12 +1696,12 @@
 	nutriment_amt = 8
 	nutriment_desc = list("carot" = 2, "corn" = 2, "eggplant" = 2, "potato" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/vegetablesoup/Initialize()
+/obj/item/reagent_containers/food/snacks/vegetablesoup/Initialize()
 	. = ..()
 	reagents.add_reagent("water", 5)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/nettlesoup
+/obj/item/reagent_containers/food/snacks/nettlesoup
 	name = "Nettle soup"
 	desc = "To think, the botanist would've beat you to death with one of these."
 	icon_state = "nettlesoup"
@@ -1711,13 +1711,13 @@
 	nutriment_amt = 8
 	nutriment_desc = list("salad" = 4, "egg" = 2, "potato" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/nettlesoup/Initialize()
+/obj/item/reagent_containers/food/snacks/nettlesoup/Initialize()
 	. = ..()
 	reagents.add_reagent("water", 5)
 	reagents.add_reagent("tricordrazine", 5)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/mysterysoup
+/obj/item/reagent_containers/food/snacks/mysterysoup
 	name = "Mystery soup"
 	desc = "The mystery is, why aren't you eating it?"
 	icon_state = "mysterysoup"
@@ -1727,7 +1727,7 @@
 	nutriment_amt = 1
 	nutriment_desc = list("backwash" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/mysterysoup/Initialize()
+/obj/item/reagent_containers/food/snacks/mysterysoup/Initialize()
 	. = ..()
 	var/mysteryselect = pick(1,2,3,4,5,6,7,8,9,10)
 	switch(mysteryselect)
@@ -1767,7 +1767,7 @@
 			reagents.add_reagent("imidazoline", 5)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/wishsoup
+/obj/item/reagent_containers/food/snacks/wishsoup
 	name = "Wish Soup"
 	desc = "I wish this was soup."
 	icon_state = "wishsoup"
@@ -1775,7 +1775,7 @@
 	filling_color = "#D1F4FF"
 	center_of_mass = list("x"=16, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/wishsoup/Initialize()
+/obj/item/reagent_containers/food/snacks/wishsoup/Initialize()
 	. = ..()
 	reagents.add_reagent("water", 10)
 	bitesize = 5
@@ -1783,7 +1783,7 @@
 		src.desc = "A wish come true!"
 		reagents.add_reagent("nutriment", 8, list("something good" = 8))
 
-/obj/item/weapon/reagent_containers/food/snacks/hotchili
+/obj/item/reagent_containers/food/snacks/hotchili
 	name = "Hot Chili"
 	desc = "A five alarm Texan Chili!"
 	icon_state = "hotchili"
@@ -1793,14 +1793,14 @@
 	nutriment_amt = 3
 	nutriment_desc = list("chilli peppers" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/hotchili/Initialize()
+/obj/item/reagent_containers/food/snacks/hotchili/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	reagents.add_reagent("capsaicin", 3)
 	reagents.add_reagent("tomatojuice", 2)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/coldchili
+/obj/item/reagent_containers/food/snacks/coldchili
 	name = "Cold Chili"
 	desc = "This slush is barely a liquid!"
 	icon_state = "coldchili"
@@ -1810,14 +1810,14 @@
 	nutriment_amt = 3
 	nutriment_desc = list("ice peppers" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/coldchili/Initialize()
+/obj/item/reagent_containers/food/snacks/coldchili/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	reagents.add_reagent("frostoil", 3)
 	reagents.add_reagent("tomatojuice", 2)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube
+/obj/item/reagent_containers/food/snacks/monkeycube
 	name = "monkey cube"
 	desc = "Just add water!"
 	flags = OPENCONTAINER
@@ -1829,15 +1829,15 @@
 	var/wrapped = 0
 	var/monkey_type = "Monkey"
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/Initialize()
+/obj/item/reagent_containers/food/snacks/monkeycube/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/attack_self(mob/user as mob)
+/obj/item/reagent_containers/food/snacks/monkeycube/attack_self(mob/user as mob)
 	if(wrapped)
 		Unwrap(user)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Expand()
+/obj/item/reagent_containers/food/snacks/monkeycube/proc/Expand()
 	src.visible_message("<span class='notice'>\The [src] expands!</span>")
 	var/mob/living/carbon/human/H = new(get_turf(src))
 	H.set_species(monkey_type)
@@ -1849,7 +1849,7 @@
 	qdel(src)
 	return 1
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/proc/Unwrap(mob/user as mob)
+/obj/item/reagent_containers/food/snacks/monkeycube/proc/Unwrap(mob/user as mob)
 	icon_state = "monkeycube"
 	desc = "Just add water!"
 	to_chat(user, "You unwrap the cube.")
@@ -1857,7 +1857,7 @@
 	flags |= OPENCONTAINER
 	return
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
+/obj/item/reagent_containers/food/snacks/monkeycube/On_Consume(var/mob/M)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")
@@ -1865,41 +1865,41 @@
 		organ.take_damage(50, 0, 0, "Animal escaping the ribcage")
 	Expand()
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/on_reagent_change()
+/obj/item/reagent_containers/food/snacks/monkeycube/on_reagent_change()
 	if(reagents.has_reagent("water"))
 		Expand()
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped
+/obj/item/reagent_containers/food/snacks/monkeycube/wrapped
 	desc = "Still wrapped in some paper."
 	icon_state = "monkeycubewrap"
 	flags = 0
 	wrapped = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/farwacube
+/obj/item/reagent_containers/food/snacks/monkeycube/farwacube
 	name = "farwa cube"
 	monkey_type = "Farwa"
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube
+/obj/item/reagent_containers/food/snacks/monkeycube/wrapped/farwacube
 	name = "farwa cube"
 	monkey_type = "Farwa"
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/stokcube
+/obj/item/reagent_containers/food/snacks/monkeycube/stokcube
 	name = "stok cube"
 	monkey_type = "Stok"
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
+/obj/item/reagent_containers/food/snacks/monkeycube/wrapped/stokcube
 	name = "stok cube"
 	monkey_type = "Stok"
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/neaeracube
+/obj/item/reagent_containers/food/snacks/monkeycube/neaeracube
 	name = "neaera cube"
 	monkey_type = "Neaera"
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
+/obj/item/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube
 	name = "neaera cube"
 	monkey_type = "Neaera"
 
-/obj/item/weapon/reagent_containers/food/snacks/spellburger
+/obj/item/reagent_containers/food/snacks/spellburger
 	name = "Spell Burger"
 	desc = "This is absolutely Ei Nath."
 	icon_state = "spellburger"
@@ -1907,11 +1907,11 @@
 	nutriment_amt = 6
 	nutriment_desc = list("magic" = 3, "buns" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/spellburger/Initialize()
+/obj/item/reagent_containers/food/snacks/spellburger/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bigbiteburger
+/obj/item/reagent_containers/food/snacks/bigbiteburger
 	name = "Big Bite Burger"
 	desc = "Forget the Big Mac. THIS is the future!"
 	icon_state = "bigbiteburger"
@@ -1920,12 +1920,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("buns" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/bigbiteburger/Initialize()
+/obj/item/reagent_containers/food/snacks/bigbiteburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/enchiladas
+/obj/item/reagent_containers/food/snacks/enchiladas
 	name = "Enchiladas"
 	desc = "Viva La Mexico!"
 	icon_state = "enchiladas"
@@ -1935,13 +1935,13 @@
 	nutriment_amt = 2
 	nutriment_desc = list("tortilla" = 3, "corn" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/enchiladas/Initialize()
+/obj/item/reagent_containers/food/snacks/enchiladas/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	reagents.add_reagent("capsaicin", 6)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeysdelight
+/obj/item/reagent_containers/food/snacks/monkeysdelight
 	name = "monkey's Delight"
 	desc = "Eeee Eee!"
 	icon_state = "monkeysdelight"
@@ -1949,7 +1949,7 @@
 	filling_color = "#5C3C11"
 	center_of_mass = list("x"=16, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/monkeysdelight/Initialize()
+/obj/item/reagent_containers/food/snacks/monkeysdelight/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 	reagents.add_reagent("banana", 5)
@@ -1957,7 +1957,7 @@
 	reagents.add_reagent("sodiumchloride", 1)
 	bitesize = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/baguette
+/obj/item/reagent_containers/food/snacks/baguette
 	name = "Baguette"
 	desc = "Bon appetit!"
 	icon_state = "baguette"
@@ -1966,13 +1966,13 @@
 	nutriment_amt = 6
 	nutriment_desc = list("french bread" = 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/baguette/Initialize()
+/obj/item/reagent_containers/food/snacks/baguette/Initialize()
 	. = ..()
 	reagents.add_reagent("blackpepper", 1)
 	reagents.add_reagent("sodiumchloride", 1)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/fishandchips
+/obj/item/reagent_containers/food/snacks/fishandchips
 	name = "Fish and Chips"
 	desc = "I do say so myself chap."
 	icon_state = "fishandchips"
@@ -1981,12 +1981,12 @@
 	nutriment_amt = 3
 	nutriment_desc = list("salt" = 1, "chips" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/fishandchips/Initialize()
+/obj/item/reagent_containers/food/snacks/fishandchips/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/sandwich
+/obj/item/reagent_containers/food/snacks/sandwich
 	name = "Sandwich"
 	desc = "A grand creation of meat, cheese, bread, and several leaves of lettuce! Arthur Dent would be proud."
 	icon_state = "sandwich"
@@ -1996,12 +1996,12 @@
 	nutriment_amt = 3
 	nutriment_desc = list("bread" = 3, "cheese" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/sandwich/Initialize()
+/obj/item/reagent_containers/food/snacks/sandwich/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/toastedsandwich
+/obj/item/reagent_containers/food/snacks/toastedsandwich
 	name = "Toasted Sandwich"
 	desc = "Now if you only had a pepper bar."
 	icon_state = "toastedsandwich"
@@ -2011,13 +2011,13 @@
 	nutriment_amt = 3
 	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/toastedsandwich/Initialize()
+/obj/item/reagent_containers/food/snacks/toastedsandwich/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	reagents.add_reagent("carbon", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/grilledcheese
+/obj/item/reagent_containers/food/snacks/grilledcheese
 	name = "Grilled Cheese Sandwich"
 	desc = "Goes great with Tomato soup!"
 	icon_state = "toastedsandwich"
@@ -2026,12 +2026,12 @@
 	nutriment_amt = 3
 	nutriment_desc = list("toasted bread" = 3, "cheese" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/grilledcheese/Initialize()
+/obj/item/reagent_containers/food/snacks/grilledcheese/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/tomatosoup
+/obj/item/reagent_containers/food/snacks/tomatosoup
 	name = "Tomato Soup"
 	desc = "Drinking this feels like being a vampire! A tomato vampire..."
 	icon_state = "tomatosoup"
@@ -2041,12 +2041,12 @@
 	nutriment_amt = 5
 	nutriment_desc = list("soup" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/tomatosoup/Initialize()
+/obj/item/reagent_containers/food/snacks/tomatosoup/Initialize()
 	. = ..()
 	reagents.add_reagent("tomatojuice", 10)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/onionsoup
+/obj/item/reagent_containers/food/snacks/onionsoup
 	name = "Onion Soup"
 	desc = "A soup with layers."
 	icon_state = "onionsoup"
@@ -2056,11 +2056,11 @@
 	nutriment_amt = 5
 	nutriment_desc = list("onion" = 2, "soup" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/onionsoup/Initialize()
+/obj/item/reagent_containers/food/snacks/onionsoup/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/onionrings
+/obj/item/reagent_containers/food/snacks/onionrings
 	name = "Onion Rings"
 	desc = "Crispy rings."
 	icon_state = "onionrings"
@@ -2070,11 +2070,11 @@
 	nutriment_amt = 5
 	nutriment_desc = list("onion" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/onionrings/Initialize()
+/obj/item/reagent_containers/food/snacks/onionrings/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/rofflewaffles
+/obj/item/reagent_containers/food/snacks/rofflewaffles
 	name = "Roffle Waffles"
 	desc = "Waffles from Roffle. Co."
 	icon_state = "rofflewaffles"
@@ -2084,12 +2084,12 @@
 	nutriment_amt = 8
 	nutriment_desc = list("waffle" = 7, "sweetness" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/rofflewaffles/Initialize()
+/obj/item/reagent_containers/food/snacks/rofflewaffles/Initialize()
 	. = ..()
 	reagents.add_reagent("psilocybin", 8)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/stew
+/obj/item/reagent_containers/food/snacks/stew
 	name = "Stew"
 	desc = "A nice and warm stew. Healthy and strong."
 	icon_state = "stew"
@@ -2098,7 +2098,7 @@
 	nutriment_amt = 6
 	nutriment_desc = list("tomato" = 2, "potato" = 2, "carrot" = 2, "eggplant" = 2, "mushroom" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/stew/Initialize()
+/obj/item/reagent_containers/food/snacks/stew/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("tomatojuice", 5)
@@ -2106,7 +2106,7 @@
 	reagents.add_reagent("water", 5)
 	bitesize = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast
+/obj/item/reagent_containers/food/snacks/jelliedtoast
 	name = "Jellied Toast"
 	desc = "A slice of bread covered with delicious jam."
 	icon_state = "jellytoast"
@@ -2116,19 +2116,19 @@
 	nutriment_amt = 1
 	nutriment_desc = list("toasted bread" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast/Initialize()
+/obj/item/reagent_containers/food/snacks/jelliedtoast/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast/cherry/Initialize()
+/obj/item/reagent_containers/food/snacks/jelliedtoast/cherry/Initialize()
 	. = ..()
 	reagents.add_reagent("cherryjelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jelliedtoast/slime/Initialize()
+/obj/item/reagent_containers/food/snacks/jelliedtoast/slime/Initialize()
 	. = ..()
 	reagents.add_reagent("slimejelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jellyburger
+/obj/item/reagent_containers/food/snacks/jellyburger
 	name = "Jelly Burger"
 	desc = "Culinary delight..?"
 	icon_state = "jellyburger"
@@ -2137,19 +2137,19 @@
 	nutriment_amt = 5
 	nutriment_desc = list("buns" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jellyburger/Initialize()
+/obj/item/reagent_containers/food/snacks/jellyburger/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/jellyburger/slime/Initialize()
+/obj/item/reagent_containers/food/snacks/jellyburger/slime/Initialize()
 	. = ..()
 	reagents.add_reagent("slimejelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jellyburger/cherry/Initialize()
+/obj/item/reagent_containers/food/snacks/jellyburger/cherry/Initialize()
 	. = ..()
 	reagents.add_reagent("cherryjelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/milosoup
+/obj/item/reagent_containers/food/snacks/milosoup
 	name = "Milosoup"
 	desc = "The universes best soup! Yum!!!"
 	icon_state = "milosoup"
@@ -2158,12 +2158,12 @@
 	nutriment_amt = 8
 	nutriment_desc = list("soy" = 8)
 
-/obj/item/weapon/reagent_containers/food/snacks/milosoup/Initialize()
+/obj/item/reagent_containers/food/snacks/milosoup/Initialize()
 	. = ..()
 	reagents.add_reagent("water", 5)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/stewedsoymeat
+/obj/item/reagent_containers/food/snacks/stewedsoymeat
 	name = "Stewed Soy Meat"
 	desc = "Even non-vegetarians will LOVE this!"
 	icon_state = "stewedsoymeat"
@@ -2172,11 +2172,11 @@
 	nutriment_amt = 8
 	nutriment_desc = list("soy" = 4, "tomato" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/stewedsoymeat/Initialize()
+/obj/item/reagent_containers/food/snacks/stewedsoymeat/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledspagetti
+/obj/item/reagent_containers/food/snacks/boiledspagetti
 	name = "Boiled Spaghetti"
 	desc = "A plain dish of noodles, this sucks."
 	icon_state = "spagettiboiled"
@@ -2186,11 +2186,11 @@
 	nutriment_amt = 2
 	nutriment_desc = list("noodles" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledspagetti/Initialize()
+/obj/item/reagent_containers/food/snacks/boiledspagetti/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledrice
+/obj/item/reagent_containers/food/snacks/boiledrice
 	name = "Boiled Rice"
 	desc = "A boring dish of boring rice."
 	icon_state = "boiledrice"
@@ -2200,11 +2200,11 @@
 	nutriment_amt = 2
 	nutriment_desc = list("rice" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledrice/Initialize()
+/obj/item/reagent_containers/food/snacks/boiledrice/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/ricepudding
+/obj/item/reagent_containers/food/snacks/ricepudding
 	name = "Rice Pudding"
 	desc = "Where's the jam?"
 	icon_state = "rpudding"
@@ -2214,11 +2214,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("rice" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/ricepudding/Initialize()
+/obj/item/reagent_containers/food/snacks/ricepudding/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/kudzudonburi
+/obj/item/reagent_containers/food/snacks/kudzudonburi
 	name = "Zhan-Kudzu Overtaker"
 	desc = "Seasoned Kudzu and fish donburi."
 	icon_state = "kudzudonburi"
@@ -2228,12 +2228,12 @@
 	nutriment_amt = 16
 	nutriment_desc = list("rice" = 2, "gauze" = 4, "fish" = 10)
 
-/obj/item/weapon/reagent_containers/food/snacks/kudzudonburi/Initialize()
+/obj/item/reagent_containers/food/snacks/kudzudonburi/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/pastatomato
+/obj/item/reagent_containers/food/snacks/pastatomato
 	name = "Spaghetti"
 	desc = "Spaghetti and crushed tomatoes. Just like your abusive father used to make!"
 	icon_state = "pastatomato"
@@ -2243,12 +2243,12 @@
 	nutriment_amt = 6
 	nutriment_desc = list("tomato" = 3, "noodles" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/pastatomato/Initialize()
+/obj/item/reagent_containers/food/snacks/pastatomato/Initialize()
 	. = ..()
 	reagents.add_reagent("tomatojuice", 10)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/meatballspagetti
+/obj/item/reagent_containers/food/snacks/meatballspagetti
 	name = "Spaghetti & Meatballs"
 	desc = "Now thats a nic'e meatball!"
 	icon_state = "meatballspagetti"
@@ -2258,12 +2258,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("noodles" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatballspagetti/Initialize()
+/obj/item/reagent_containers/food/snacks/meatballspagetti/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/spesslaw
+/obj/item/reagent_containers/food/snacks/spesslaw
 	name = "Spesslaw"
 	desc = "A lawyers favourite"
 	icon_state = "spesslaw"
@@ -2272,12 +2272,12 @@
 	nutriment_amt = 4
 	nutriment_desc = list("noodles" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/spesslaw/Initialize()
+/obj/item/reagent_containers/food/snacks/spesslaw/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/carrotfries
+/obj/item/reagent_containers/food/snacks/carrotfries
 	name = "Carrot Fries"
 	desc = "Tasty fries from fresh Carrots."
 	icon_state = "carrotfries"
@@ -2287,12 +2287,12 @@
 	nutriment_amt = 3
 	nutriment_desc = list("carrot" = 3, "salt" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/carrotfries/Initialize()
+/obj/item/reagent_containers/food/snacks/carrotfries/Initialize()
 	. = ..()
 	reagents.add_reagent("imidazoline", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/superbiteburger
+/obj/item/reagent_containers/food/snacks/superbiteburger
 	name = "Super Bite Burger"
 	desc = "This is a mountain of a burger. FOOD!"
 	icon_state = "superbiteburger"
@@ -2301,12 +2301,12 @@
 	nutriment_amt = 25
 	nutriment_desc = list("buns" = 25)
 
-/obj/item/weapon/reagent_containers/food/snacks/superbiteburger/Initialize()
+/obj/item/reagent_containers/food/snacks/superbiteburger/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 25)
 	bitesize = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/candiedapple
+/obj/item/reagent_containers/food/snacks/candiedapple
 	name = "Candied Apple"
 	desc = "An apple coated in sugary sweetness."
 	icon_state = "candiedapple"
@@ -2315,11 +2315,11 @@
 	nutriment_amt = 3
 	nutriment_desc = list("apple" = 3, "caramel" = 3, "sweetness" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/candiedapple/Initialize()
+/obj/item/reagent_containers/food/snacks/candiedapple/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/applepie
+/obj/item/reagent_containers/food/snacks/applepie
 	name = "Apple Pie"
 	desc = "A pie containing sweet sweet love... or apple."
 	icon_state = "applepie"
@@ -2328,11 +2328,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 2, "apple" = 2, "pie" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/applepie/Initialize()
+/obj/item/reagent_containers/food/snacks/applepie/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/cherrypie
+/obj/item/reagent_containers/food/snacks/cherrypie
 	name = "Cherry Pie"
 	desc = "Taste so good, make a grown man cry."
 	icon_state = "cherrypie"
@@ -2341,11 +2341,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 2, "cherry" = 2, "pie" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/cherrypie/Initialize()
+/obj/item/reagent_containers/food/snacks/cherrypie/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/twobread
+/obj/item/reagent_containers/food/snacks/twobread
 	name = "Two Bread"
 	desc = "It is very bitter and winy."
 	icon_state = "twobread"
@@ -2354,11 +2354,11 @@
 	nutriment_amt = 2
 	nutriment_desc = list("sourness" = 2, "bread" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/twobread/Initialize()
+/obj/item/reagent_containers/food/snacks/twobread/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich
+/obj/item/reagent_containers/food/snacks/jellysandwich
 	name = "Jelly Sandwich"
 	desc = "You wish you had some peanut butter to go with this..."
 	icon_state = "jellysandwich"
@@ -2368,49 +2368,49 @@
 	nutriment_amt = 2
 	nutriment_desc = list("bread" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/Initialize()
+/obj/item/reagent_containers/food/snacks/jellysandwich/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/slime/Initialize()
+/obj/item/reagent_containers/food/snacks/jellysandwich/slime/Initialize()
 	. = ..()
 	reagents.add_reagent("slimejelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/cherry/Initialize()
+/obj/item/reagent_containers/food/snacks/jellysandwich/cherry/Initialize()
 	. = ..()
 	reagents.add_reagent("cherryjelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/peanutbutter
+/obj/item/reagent_containers/food/snacks/jellysandwich/peanutbutter
 	desc = "You wish you had some peanut butter to go with this... Oh wait!"
 	icon_state = "pbandj"
 
-/obj/item/weapon/reagent_containers/food/snacks/jellysandwich/peanutbutter/Initialize()
+/obj/item/reagent_containers/food/snacks/jellysandwich/peanutbutter/Initialize()
 	. = ..()
 	reagents.add_reagent("peanutbutter", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledslimecore
+/obj/item/reagent_containers/food/snacks/boiledslimecore
 	name = "Boiled slime Core"
 	desc = "A boiled red thing."
 	icon_state = "boiledslimecore" //nonexistant?
 
-/obj/item/weapon/reagent_containers/food/snacks/boiledslimecore/Initialize()
+/obj/item/reagent_containers/food/snacks/boiledslimecore/Initialize()
 	. = ..()
 	reagents.add_reagent("slimejelly", 5)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/mint
+/obj/item/reagent_containers/food/snacks/mint
 	name = "mint"
 	desc = "it is only wafer thin."
 	icon_state = "mint"
 	filling_color = "#F2F2F2"
 	center_of_mass = list("x"=16, "y"=14)
 
-/obj/item/weapon/reagent_containers/food/snacks/mint/Initialize()
+/obj/item/reagent_containers/food/snacks/mint/Initialize()
 	. = ..()
 	reagents.add_reagent("mint", 1)
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
+/obj/item/reagent_containers/food/snacks/mushroomsoup
 	name = "chantrelle soup"
 	desc = "A delicious and hearty mushroom soup."
 	icon_state = "mushroomsoup"
@@ -2420,11 +2420,11 @@
 	nutriment_amt = 8
 	nutriment_desc = list("mushroom" = 8, "milk" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/mushroomsoup/Initialize()
+/obj/item/reagent_containers/food/snacks/mushroomsoup/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit
+/obj/item/reagent_containers/food/snacks/plumphelmetbiscuit
 	name = "plump helmet biscuit"
 	desc = "This is a finely-prepared plump helmet biscuit. The ingredients are exceptionally minced plump helmet, and well-minced dwarven wheat flour."
 	icon_state = "phelmbiscuit"
@@ -2433,7 +2433,7 @@
 	nutriment_amt = 5
 	nutriment_desc = list("mushroom" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit/Initialize()
+/obj/item/reagent_containers/food/snacks/plumphelmetbiscuit/Initialize()
 	. = ..()
 	if(prob(10))
 		name = "exceptional plump helmet biscuit"
@@ -2444,7 +2444,7 @@
 		reagents.add_reagent("nutriment", 5)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/chawanmushi
+/obj/item/reagent_containers/food/snacks/chawanmushi
 	name = "chawanmushi"
 	desc = "A legendary egg custard that makes friends out of enemies. Probably too hot for a cat to eat."
 	icon_state = "chawanmushi"
@@ -2452,12 +2452,12 @@
 	filling_color = "#F0F2E4"
 	center_of_mass = list("x"=17, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/chawanmushi/Initialize()
+/obj/item/reagent_containers/food/snacks/chawanmushi/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/beetsoup
+/obj/item/reagent_containers/food/snacks/beetsoup
 	name = "beet soup"
 	desc = "Wait, how do you spell it again..?"
 	icon_state = "beetsoup"
@@ -2467,12 +2467,12 @@
 	nutriment_amt = 8
 	nutriment_desc = list("tomato" = 4, "beet" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/beetsoup/Initialize()
+/obj/item/reagent_containers/food/snacks/beetsoup/Initialize()
 	. = ..()
 	name = pick(list("borsch","bortsch","borstch","borsh","borshch","borscht"))
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/tossedsalad
+/obj/item/reagent_containers/food/snacks/tossedsalad
 	name = "tossed salad"
 	desc = "A proper salad, basic and simple, with little bits of carrot, tomato and apple intermingled. Vegan!"
 	icon_state = "herbsalad"
@@ -2482,11 +2482,11 @@
 	nutriment_amt = 8
 	nutriment_desc = list("salad" = 2, "tomato" = 2, "carrot" = 2, "apple" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/tossedsalad/Initialize()
+/obj/item/reagent_containers/food/snacks/tossedsalad/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/validsalad
+/obj/item/reagent_containers/food/snacks/validsalad
 	name = "valid salad"
 	desc = "It's just a salad of questionable 'herbs' with meatballs and fried potato slices. Nothing suspicious about it."
 	icon_state = "validsalad"
@@ -2496,12 +2496,12 @@
 	nutriment_amt = 6
 	nutriment_desc = list("100% real salad")
 
-/obj/item/weapon/reagent_containers/food/snacks/validsalad/Initialize()
+/obj/item/reagent_containers/food/snacks/validsalad/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/appletart
+/obj/item/reagent_containers/food/snacks/appletart
 	name = "golden apple streusel tart"
 	desc = "A tasty dessert that won't make it through a metal detector."
 	icon_state = "gappletart"
@@ -2511,7 +2511,7 @@
 	nutriment_amt = 8
 	nutriment_desc = list("apple" = 8)
 
-/obj/item/weapon/reagent_containers/food/snacks/appletart/Initialize()
+/obj/item/reagent_containers/food/snacks/appletart/Initialize()
 	. = ..()
 	reagents.add_reagent("gold", 5)
 	bitesize = 3
@@ -2521,7 +2521,7 @@
 
 // sliceable is just an organization type path, it doesn't have any additional code or variables tied to it.
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable
+/obj/item/reagent_containers/food/snacks/sliceable
 	w_class = ITEMSIZE_NORMAL //Whole pizzas and cakes shouldn't fit in a pocket, you can slice them if you want to do that.
 
 /**
@@ -2530,7 +2530,7 @@
  *  This path contains some extra code for spawning slices pre-filled with
  *  reagents.
  */
-/obj/item/weapon/reagent_containers/food/snacks/slice
+/obj/item/reagent_containers/food/snacks/slice
 	name = "slice of... something"
 	var/whole_path  // path for the item from which this slice comes
 	var/filled = FALSE  // should the slice spawn with any reagents
@@ -2543,33 +2543,33 @@
  *  whole item, transferring the reagents and deleting the whole item, which may
  *  have performance implications.
  */
-/obj/item/weapon/reagent_containers/food/snacks/slice/Initialize()
+/obj/item/reagent_containers/food/snacks/slice/Initialize()
 	. = ..()
 	if(filled)
-		var/obj/item/weapon/reagent_containers/food/snacks/whole = new whole_path()
+		var/obj/item/reagent_containers/food/snacks/whole = new whole_path()
 		if(whole && whole.slices_num)
 			var/reagent_amount = whole.reagents.total_volume/whole.slices_num
 			whole.reagents.trans_to_obj(src, reagent_amount)
 
 		qdel(whole)
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
+/obj/item/reagent_containers/food/snacks/sliceable/meatbread
 	name = "meatbread loaf"
 	desc = "The culinary base of every self-respecting eloquent gentleman."
 	icon_state = "meatbread"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/meatbread
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/meatbread
 	slices_num = 5
 	filling_color = "#FF7575"
 	center_of_mass = list("x"=19, "y"=9)
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/meatbread/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 20)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/meatbread
+/obj/item/reagent_containers/food/snacks/slice/meatbread
 	name = "meatbread slice"
 	desc = "A slice of delicious meatbread."
 	icon_state = "meatbreadslice"
@@ -2577,28 +2577,28 @@
 	filling_color = "#FF7575"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=16)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/meatbread
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/meatbread
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/meatbread/filled
+/obj/item/reagent_containers/food/snacks/slice/meatbread/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread
+/obj/item/reagent_containers/food/snacks/sliceable/xenomeatbread
 	name = "xenomeatbread loaf"
 	desc = "The culinary base of every self-respecting eloquent gentleman. Extra Heretical."
 	icon_state = "xenomeatbread"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/xenomeatbread
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/xenomeatbread
 	slices_num = 5
 	filling_color = "#8AFF75"
 	center_of_mass = list("x"=16, "y"=9)
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/xenomeatbread/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 20)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/xenomeatbread
+/obj/item/reagent_containers/food/snacks/slice/xenomeatbread
 	name = "xenomeatbread slice"
 	desc = "A slice of delicious meatbread. Extra Heretical."
 	icon_state = "xenobreadslice"
@@ -2606,29 +2606,29 @@
 	filling_color = "#8AFF75"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/xenomeatbread
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/xenomeatbread
 
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/xenomeatbread/filled
+/obj/item/reagent_containers/food/snacks/slice/xenomeatbread/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread
+/obj/item/reagent_containers/food/snacks/sliceable/bananabread
 	name = "Banana-nut bread"
 	desc = "A heavenly and filling treat."
 	icon_state = "bananabread"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/bananabread
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/bananabread
 	slices_num = 5
 	filling_color = "#EDE5AD"
 	center_of_mass = list("x"=16, "y"=9)
 	nutriment_desc = list("bread" = 10)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/bananabread/Initialize()
 	. = ..()
 	reagents.add_reagent("banana", 20)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/bananabread
+/obj/item/reagent_containers/food/snacks/slice/bananabread
 	name = "Banana-nut bread slice"
 	desc = "A slice of delicious banana bread."
 	icon_state = "bananabreadslice"
@@ -2636,27 +2636,27 @@
 	filling_color = "#EDE5AD"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=8)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bananabread
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/bananabread
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/bananabread/filled
+/obj/item/reagent_containers/food/snacks/slice/bananabread/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread
+/obj/item/reagent_containers/food/snacks/sliceable/tofubread
 	name = "Tofubread"
 	icon_state = "Like meatbread but for vegetarians. Not guaranteed to give superpowers."
 	icon_state = "tofubread"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/tofubread
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/tofubread
 	slices_num = 5
 	filling_color = "#F7FFE0"
 	center_of_mass = list("x"=16, "y"=9)
 	nutriment_desc = list("tofu" = 10)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/tofubread/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/tofubread
+/obj/item/reagent_containers/food/snacks/slice/tofubread
 	name = "Tofubread slice"
 	desc = "A slice of delicious tofubread."
 	icon_state = "tofubreadslice"
@@ -2664,29 +2664,29 @@
 	filling_color = "#F7FFE0"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/tofubread
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/tofubread
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/tofubread/filled
+/obj/item/reagent_containers/food/snacks/slice/tofubread/filled
 	filled = TRUE
 
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake
+/obj/item/reagent_containers/food/snacks/sliceable/carrotcake
 	name = "Carrot Cake"
 	desc = "A favorite desert of a certain wascally wabbit. Not a lie."
 	icon_state = "carrotcake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/carrotcake
 	slices_num = 5
 	filling_color = "#FFD675"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "carrot" = 15)
 	nutriment_amt = 25
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/carrotcake/Initialize()
 	. = ..()
 	reagents.add_reagent("imidazoline", 10)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake
+/obj/item/reagent_containers/food/snacks/slice/carrotcake
 	name = "Carrot Cake slice"
 	desc = "Carrotty slice of Carrot Cake, carrots are good for your eyes! Also not a lie."
 	icon_state = "carrotcake_slice"
@@ -2694,29 +2694,29 @@
 	filling_color = "#FFD675"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/carrotcake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/carrotcake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/carrotcake/filled
+/obj/item/reagent_containers/food/snacks/slice/carrotcake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
+/obj/item/reagent_containers/food/snacks/sliceable/braincake
 	name = "Brain Cake"
 	desc = "A squishy cake-thing."
 	icon_state = "braincake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/braincake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/braincake
 	slices_num = 5
 	filling_color = "#E6AEDB"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "slime" = 15)
 	nutriment_amt = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/braincake/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 25)
 	reagents.add_reagent("alkysine", 10)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/braincake
+/obj/item/reagent_containers/food/snacks/slice/braincake
 	name = "Brain Cake slice"
 	desc = "Lemme tell you something about prions. THEY'RE DELICIOUS."
 	icon_state = "braincakeslice"
@@ -2724,28 +2724,28 @@
 	filling_color = "#E6AEDB"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/braincake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/braincake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/braincake/filled
+/obj/item/reagent_containers/food/snacks/slice/braincake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesecake
+/obj/item/reagent_containers/food/snacks/sliceable/cheesecake
 	name = "Cheese Cake"
 	desc = "DANGEROUSLY cheesy."
 	icon_state = "cheesecake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/cheesecake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/cheesecake
 	slices_num = 5
 	filling_color = "#FAF7AF"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "cream" = 10, "cheese" = 15)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesecake/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/cheesecake/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 15)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/cheesecake
+/obj/item/reagent_containers/food/snacks/slice/cheesecake
 	name = "Cheese Cake slice"
 	desc = "Slice of pure cheestisfaction."
 	icon_state = "cheesecake_slice"
@@ -2753,28 +2753,28 @@
 	filling_color = "#FAF7AF"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesecake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/cheesecake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/cheesecake/filled
+/obj/item/reagent_containers/food/snacks/slice/cheesecake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/peanutcake
+/obj/item/reagent_containers/food/snacks/sliceable/peanutcake
 	name = "Peanut Cake"
 	desc = "DANGEROUSLY nutty. Sometimes literally."
 	icon_state = "peanutcake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/peanutcake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/peanutcake
 	slices_num = 5
 	filling_color = "#4F3500"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "peanuts" = 15)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/peanutcake/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/peanutcake/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/peanutcake
+/obj/item/reagent_containers/food/snacks/slice/peanutcake
 	name = "Peanut Cake slice"
 	desc = "Slice of nutty goodness."
 	icon_state = "peanutcake_slice"
@@ -2782,23 +2782,23 @@
 	filling_color = "#4F3500"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/peanutcake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/peanutcake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/peanutcake/filled
+/obj/item/reagent_containers/food/snacks/slice/peanutcake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
+/obj/item/reagent_containers/food/snacks/sliceable/plaincake
 	name = "Vanilla Cake"
 	desc = "A plain cake, not a lie."
 	icon_state = "plaincake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/plaincake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/plaincake
 	slices_num = 5
 	filling_color = "#F7EDD5"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "vanilla" = 15)
 	nutriment_amt = 20
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/plaincake
+/obj/item/reagent_containers/food/snacks/slice/plaincake
 	name = "Vanilla Cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "plaincake_slice"
@@ -2806,23 +2806,23 @@
 	filling_color = "#F7EDD5"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/plaincake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/plaincake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/plaincake/filled
+/obj/item/reagent_containers/food/snacks/slice/plaincake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
+/obj/item/reagent_containers/food/snacks/sliceable/orangecake
 	name = "Orange Cake"
 	desc = "A cake with added orange."
 	icon_state = "orangecake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/orangecake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/orangecake
 	slices_num = 5
 	filling_color = "#FADA8E"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "orange" = 15)
 	nutriment_amt = 20
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/orangecake
+/obj/item/reagent_containers/food/snacks/slice/orangecake
 	name = "Orange Cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "orangecake_slice"
@@ -2830,17 +2830,17 @@
 	filling_color = "#FADA8E"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/orangecake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/orangecake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/orangecake/filled
+/obj/item/reagent_containers/food/snacks/slice/orangecake/filled
 	filled = TRUE
 
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
+/obj/item/reagent_containers/food/snacks/sliceable/limecake
 	name = "Lime Cake"
 	desc = "A cake with added lime."
 	icon_state = "limecake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/limecake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/limecake
 	slices_num = 5
 	filling_color = "#CBFA8E"
 	center_of_mass = list("x"=16, "y"=10)
@@ -2848,7 +2848,7 @@
 	nutriment_amt = 20
 
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/limecake
+/obj/item/reagent_containers/food/snacks/slice/limecake
 	name = "Lime Cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "limecake_slice"
@@ -2856,16 +2856,16 @@
 	filling_color = "#CBFA8E"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/limecake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/limecake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/limecake/filled
+/obj/item/reagent_containers/food/snacks/slice/limecake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
+/obj/item/reagent_containers/food/snacks/sliceable/lemoncake
 	name = "Lemon Cake"
 	desc = "A cake with added lemon."
 	icon_state = "lemoncake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/lemoncake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/lemoncake
 	slices_num = 5
 	filling_color = "#FAFA8E"
 	center_of_mass = list("x"=16, "y"=10)
@@ -2873,7 +2873,7 @@
 	nutriment_amt = 20
 
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/lemoncake
+/obj/item/reagent_containers/food/snacks/slice/lemoncake
 	name = "Lemon Cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "lemoncake_slice"
@@ -2881,23 +2881,23 @@
 	filling_color = "#FAFA8E"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/lemoncake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/lemoncake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/lemoncake/filled
+/obj/item/reagent_containers/food/snacks/slice/lemoncake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
+/obj/item/reagent_containers/food/snacks/sliceable/chocolatecake
 	name = "Chocolate Cake"
 	desc = "A cake with added chocolate."
 	icon_state = "chocolatecake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/chocolatecake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/chocolatecake
 	slices_num = 5
 	filling_color = "#805930"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "chocolate" = 15)
 	nutriment_amt = 20
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/chocolatecake
+/obj/item/reagent_containers/food/snacks/slice/chocolatecake
 	name = "Chocolate Cake slice"
 	desc = "Just a slice of cake, it is enough for everyone."
 	icon_state = "chocolatecake_slice"
@@ -2905,28 +2905,28 @@
 	filling_color = "#805930"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/chocolatecake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/chocolatecake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/chocolatecake/filled
+/obj/item/reagent_containers/food/snacks/slice/chocolatecake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel
+/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel
 	name = "Cheese wheel"
 	desc = "A big wheel of delcious Cheddar."
 	icon_state = "cheesewheel"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/cheesewedge
+	slice_path = /obj/item/reagent_containers/food/snacks/cheesewedge
 	slices_num = 5
 	filling_color = "#FFF700"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cheese" = 10)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/cheesewheel/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/cheesewheel/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 10)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesewedge
+/obj/item/reagent_containers/food/snacks/cheesewedge
 	name = "Cheese wedge"
 	desc = "A wedge of delicious Cheddar. The cheese wheel it was cut from can't have gone far."
 	icon_state = "cheesewedge"
@@ -2934,23 +2934,23 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
+/obj/item/reagent_containers/food/snacks/sliceable/birthdaycake
 	name = "Birthday Cake"
 	desc = "Happy Birthday..."
 	icon_state = "birthdaycake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/birthdaycake
 	slices_num = 5
 	filling_color = "#FFD6D6"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10)
 	nutriment_amt = 20
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/birthdaycake/Initialize()
 	. = ..()
 	reagents.add_reagent("sprinkles", 10)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake
+/obj/item/reagent_containers/food/snacks/slice/birthdaycake
 	name = "Birthday Cake slice"
 	desc = "A slice of your birthday."
 	icon_state = "birthdaycakeslice"
@@ -2958,27 +2958,27 @@
 	filling_color = "#FFD6D6"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/birthdaycake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/birthdaycake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/birthdaycake/filled
+/obj/item/reagent_containers/food/snacks/slice/birthdaycake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
+/obj/item/reagent_containers/food/snacks/sliceable/bread
 	name = "Bread"
 	icon_state = "Some plain old Earthen bread."
 	icon_state = "bread"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/bread
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/bread
 	slices_num = 5
 	filling_color = "#FFE396"
 	center_of_mass = list("x"=16, "y"=9)
 	nutriment_desc = list("bread" = 6)
 	nutriment_amt = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/bread/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/bread/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/bread
+/obj/item/reagent_containers/food/snacks/slice/bread
 	name = "Bread slice"
 	desc = "A slice of home."
 	icon_state = "breadslice"
@@ -2986,29 +2986,29 @@
 	filling_color = "#D27332"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=4)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/bread
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/bread
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/bread/filled
+/obj/item/reagent_containers/food/snacks/slice/bread/filled
 	filled = TRUE
 
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/creamcheesebread
+/obj/item/reagent_containers/food/snacks/sliceable/creamcheesebread
 	name = "Cream Cheese Bread"
 	desc = "Yum yum yum!"
 	icon_state = "creamcheesebread"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/creamcheesebread
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/creamcheesebread
 	slices_num = 5
 	filling_color = "#FFF896"
 	center_of_mass = list("x"=16, "y"=9)
 	nutriment_desc = list("bread" = 6, "cream" = 3, "cheese" = 3)
 	nutriment_amt = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/creamcheesebread/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/creamcheesebread/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 15)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/creamcheesebread
+/obj/item/reagent_containers/food/snacks/slice/creamcheesebread
 	name = "Cream Cheese Bread slice"
 	desc = "A slice of yum!"
 	icon_state = "creamcheesebreadslice"
@@ -3016,14 +3016,14 @@
 	filling_color = "#FFF896"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/creamcheesebread
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/creamcheesebread
 
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/creamcheesebread/filled
+/obj/item/reagent_containers/food/snacks/slice/creamcheesebread/filled
 	filled = TRUE
 
 
-/obj/item/weapon/reagent_containers/food/snacks/watermelonslice
+/obj/item/reagent_containers/food/snacks/watermelonslice
 	name = "Watermelon Slice"
 	desc = "A slice of watery goodness."
 	icon_state = "watermelonslice"
@@ -3031,18 +3031,18 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=10)
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/applecake
+/obj/item/reagent_containers/food/snacks/sliceable/applecake
 	name = "Apple Cake"
 	desc = "A cake centred with apples."
 	icon_state = "applecake"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/applecake
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/applecake
 	slices_num = 5
 	filling_color = "#EBF5B8"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("cake" = 10, "sweetness" = 10, "apple" = 15)
 	nutriment_amt = 15
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/applecake
+/obj/item/reagent_containers/food/snacks/slice/applecake
 	name = "Apple Cake slice"
 	desc = "A slice of heavenly cake."
 	icon_state = "applecakeslice"
@@ -3050,23 +3050,23 @@
 	filling_color = "#EBF5B8"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=14)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/applecake
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/applecake
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/applecake/filled
+/obj/item/reagent_containers/food/snacks/slice/applecake/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
+/obj/item/reagent_containers/food/snacks/sliceable/pumpkinpie
 	name = "Pumpkin Pie"
 	desc = "A delicious treat for the autumn months."
 	icon_state = "pumpkinpie"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/pumpkinpie
 	slices_num = 5
 	filling_color = "#F5B951"
 	center_of_mass = list("x"=16, "y"=10)
 	nutriment_desc = list("pie" = 5, "cream" = 5, "pumpkin" = 5)
 	nutriment_amt = 15
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie
+/obj/item/reagent_containers/food/snacks/slice/pumpkinpie
 	name = "Pumpkin Pie slice"
 	desc = "A slice of pumpkin pie, with whipped cream on top. Perfection."
 	icon_state = "pumpkinpieslice"
@@ -3074,12 +3074,12 @@
 	filling_color = "#F5B951"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pumpkinpie
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pumpkinpie
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/pumpkinpie/filled
+/obj/item/reagent_containers/food/snacks/slice/pumpkinpie/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/cracker
+/obj/item/reagent_containers/food/snacks/cracker
 	name = "Cracker"
 	desc = "It's a salted cracker."
 	icon_state = "cracker"
@@ -3093,175 +3093,175 @@
 
 /////////////////////////////////////////////////PIZZA////////////////////////////////////////
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza
+/obj/item/reagent_containers/food/snacks/sliceable/pizza
 	slices_num = 6
 	filling_color = "#BAA14C"
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/margherita
 	name = "Margherita"
 	desc = "The golden standard of pizzas."
 	icon_state = "pizzamargherita"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/margherita
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/margherita
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
 	nutriment_amt = 35
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/margherita/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	reagents.add_reagent("tomatojuice", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/margherita
+/obj/item/reagent_containers/food/snacks/slice/margherita
 	name = "Margherita slice"
 	desc = "A slice of the classic pizza."
 	icon_state = "pizzamargheritaslice"
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/margherita
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/margherita/filled
+/obj/item/reagent_containers/food/snacks/slice/margherita/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/pineapple
 	name = "Hawaiian"
 	desc = "The accursed wheel from ancient times."
 	icon_state = "pizzamargherita"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/pineapple
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/pineapple
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("pizza crust" = 5, "tomato" = 5, "cheese" = 5, "pineapple" = 20)
 	nutriment_amt = 35
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/pineapple/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	reagents.add_reagent("pineapplejuice", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/pineapple
+/obj/item/reagent_containers/food/snacks/slice/pineapple
 	name = "Hawaiian slice"
 	desc = "A slice of the accursed pizza."
 	icon_state = "pizzamargheritaslice"
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/pineapple
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/pineapple/filled
+/obj/item/reagent_containers/food/snacks/slice/pineapple/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza
 	name = "Meatpizza"
 	desc = "A pizza with meat topping."
 	icon_state = "meatpizza"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/meatpizza
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/meatpizza
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 15)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 34)
 	reagents.add_reagent("tomatojuice", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/meatpizza
+/obj/item/reagent_containers/food/snacks/slice/meatpizza
 	name = "Meatpizza slice"
 	desc = "A slice of a meaty pizza."
 	icon_state = "meatpizzaslice"
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/meatpizza/filled
+/obj/item/reagent_containers/food/snacks/slice/meatpizza/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
 	name = "Mushroompizza"
 	desc = "Very special pizza."
 	icon_state = "mushroompizza"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/mushroompizza
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/mushroompizza
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "mushroom" = 10)
 	nutriment_amt = 35
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/mushroompizza/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/mushroompizza
+/obj/item/reagent_containers/food/snacks/slice/mushroompizza
 	name = "Mushroompizza slice"
 	desc = "Maybe it is the last slice of pizza in your life."
 	icon_state = "mushroompizzaslice"
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/mushroompizza/filled
+/obj/item/reagent_containers/food/snacks/slice/mushroompizza/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 	name = "Vegetable pizza"
 	desc = "No one of Tomato Sapiens were harmed during making this pizza."
 	icon_state = "vegetablepizza"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/vegetablepizza
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/vegetablepizza
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "cheese" = 5, "eggplant" = 5, "carrot" = 5, "corn" = 5)
 	nutriment_amt = 25
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	reagents.add_reagent("tomatojuice", 6)
 	reagents.add_reagent("imidazoline", 12)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/vegetablepizza
+/obj/item/reagent_containers/food/snacks/slice/vegetablepizza
 	name = "Vegetable pizza slice"
 	desc = "A slice of the most green pizza of all pizzas not containing green ingredients."
 	icon_state = "vegetablepizzaslice"
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/vegetablepizza/filled
+/obj/item/reagent_containers/food/snacks/slice/vegetablepizza/filled
 	filled = TRUE
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/oldpizza
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/oldpizza
 	name = "moldy pizza"
 	desc = "This pizza might actually be alive.  There's mold all over."
 	icon_state = "oldpizza"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/oldpizza
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/oldpizza
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_desc = list("stale pizza crust" = 10, "moldy tomato" = 10, "moldy cheese" = 5)
 	nutriment_amt = 10
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/oldpizza/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/pizza/oldpizza/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 	reagents.add_reagent("tomatojuice", 6)
 	reagents.add_reagent("mold", 8)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/oldpizza
+/obj/item/reagent_containers/food/snacks/slice/oldpizza
 	name = "moldy pizza slice"
 	desc = "This used to be pizza..."
 	icon_state = "old_pizza"
 	filling_color = "#BAA14C"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/oldpizza
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/pizza/oldpizza
 
 /obj/item/pizzabox
 	name = "pizza box"
@@ -3272,7 +3272,7 @@
 
 	var/open = 0 // Is the box open?
 	var/ismessy = 0 // Fancy mess on the lid
-	var/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pizza // Content pizza
+	var/obj/item/reagent_containers/food/snacks/sliceable/pizza/pizza // Content pizza
 	var/list/boxes = list() // If the boxes are stacked, they come here
 	var/boxtag = ""
 
@@ -3393,7 +3393,7 @@
 
 		return
 
-	if( istype(I, /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/) ) // Long ass fucking object name
+	if( istype(I, /obj/item/reagent_containers/food/snacks/sliceable/pizza/) ) // Long ass fucking object name
 
 		if( src.open )
 			user.drop_item()
@@ -3407,7 +3407,7 @@
 			to_chat(user, "<span class='warning'>You try to push \the [I] through the lid but it doesn't work!</span>")
 		return
 
-	if( istype(I, /obj/item/weapon/pen/) )
+	if( istype(I, /obj/item/pen/) )
 
 		if( src.open )
 			return
@@ -3425,30 +3425,30 @@
 	..()
 
 /obj/item/pizzabox/margherita/Initialize()
-	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/margherita(src)
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/margherita(src)
 	boxtag = "Margherita Deluxe"
 
 /obj/item/pizzabox/vegetable/Initialize()
-	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza(src)
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza(src)
 	boxtag = "Gourmet Vegatable"
 
 /obj/item/pizzabox/mushroom/Initialize()
-	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/mushroompizza(src)
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/mushroompizza(src)
 	boxtag = "Mushroom Special"
 
 /obj/item/pizzabox/meat/Initialize()
-	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza(src)
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza(src)
 	boxtag = "Meatlover's Supreme"
 
 /obj/item/pizzabox/pineapple/Initialize()
-	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple(src)
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/pineapple(src)
 	boxtag = "Hawaiian Sunrise"
 
 /obj/item/pizzabox/old/Initialize()
-	pizza = new /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/oldpizza(src)
+	pizza = new /obj/item/reagent_containers/food/snacks/sliceable/pizza/oldpizza(src)
 	boxtag = "Deluxe Gourmet"
 
-/obj/item/weapon/reagent_containers/food/snacks/dionaroast
+/obj/item/reagent_containers/food/snacks/dionaroast
 	name = "roast diona"
 	desc = "It's like an enormous, leathery carrot. With an eye."
 	icon_state = "dionaroast"
@@ -3458,7 +3458,7 @@
 	nutriment_amt = 6
 	nutriment_desc = list("a chorus of flavor" = 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/dionaroast/Initialize()
+/obj/item/reagent_containers/food/snacks/dionaroast/Initialize()
 	. = ..()
 	reagents.add_reagent("radium", 2)
 	bitesize = 2
@@ -3466,7 +3466,7 @@
 ///////////////////////////////////////////
 // new old food stuff from bs12
 ///////////////////////////////////////////
-/obj/item/weapon/reagent_containers/food/snacks/dough
+/obj/item/reagent_containers/food/snacks/dough
 	name = "dough"
 	desc = "A piece of dough."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3476,48 +3476,48 @@
 	nutriment_amt = 3
 	nutriment_desc = list("uncooked dough" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/dough/Initialize()
+/obj/item/reagent_containers/food/snacks/dough/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 1)
 
 // Dough + rolling pin = flat dough
-/obj/item/weapon/reagent_containers/food/snacks/dough/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/material/kitchen/rollingpin))
-		new /obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough(src)
+/obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/material/kitchen/rollingpin))
+		new /obj/item/reagent_containers/food/snacks/sliceable/flatdough(src)
 		to_chat(user, "You flatten the dough.")
 		qdel(src)
 
 // slicable into 3xdoughslices
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
+/obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	name = "flat dough"
 	desc = "A flattened dough."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "flat dough"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/doughslice
+	slice_path = /obj/item/reagent_containers/food/snacks/doughslice
 	slices_num = 3
 	center_of_mass = list("x"=16, "y"=16)
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough/Initialize()
+/obj/item/reagent_containers/food/snacks/sliceable/flatdough/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 1)
 	reagents.add_reagent("nutriment", 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/doughslice
+/obj/item/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
 	desc = "A building block of an impressive dish."
 	icon = 'icons/obj/food_ingredients.dmi'
 	icon_state = "doughslice"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/spagetti
+	slice_path = /obj/item/reagent_containers/food/snacks/spagetti
 	slices_num = 1
 	bitesize = 2
 	center_of_mass = list("x"=17, "y"=19)
 	nutriment_amt = 1
 	nutriment_desc = list("uncooked dough" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/doughslice/Initialize()
+/obj/item/reagent_containers/food/snacks/doughslice/Initialize()
 	. = ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/bun
+/obj/item/reagent_containers/food/snacks/bun
 	name = "bun"
 	desc = "A base for any self-respecting burger."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3527,35 +3527,35 @@
 	nutriment_amt = 4
 	nutriment_desc = "bun"
 
-/obj/item/weapon/reagent_containers/food/snacks/bun/Initialize()
+/obj/item/reagent_containers/food/snacks/bun/Initialize()
 	. = ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/bun/attackby(obj/item/W as obj, mob/user as mob)
 	// Bun + meatball = burger
-	if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/meatball))
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
+	if(istype(W,/obj/item/reagent_containers/food/snacks/meatball))
+		new /obj/item/reagent_containers/food/snacks/monkeyburger(src)
 		to_chat(user, "You make a burger.")
 		qdel(W)
 		qdel(src)
 
 	// Bun + cutlet = hamburger
-	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/cutlet))
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeyburger(src)
+	else if(istype(W,/obj/item/reagent_containers/food/snacks/cutlet))
+		new /obj/item/reagent_containers/food/snacks/monkeyburger(src)
 		to_chat(user, "You make a burger.")
 		qdel(W)
 		qdel(src)
 
 	// Bun + sausage = hotdog
-	else if(istype(W,/obj/item/weapon/reagent_containers/food/snacks/sausage))
-		new /obj/item/weapon/reagent_containers/food/snacks/hotdog(src)
+	else if(istype(W,/obj/item/reagent_containers/food/snacks/sausage))
+		new /obj/item/reagent_containers/food/snacks/hotdog(src)
 		to_chat(user, "You make a hotdog.")
 		qdel(W)
 		qdel(src)
 
 // Burger + cheese wedge = cheeseburger
-/obj/item/weapon/reagent_containers/food/snacks/monkeyburger/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
-	if(istype(W))// && !istype(src,/obj/item/weapon/reagent_containers/food/snacks/cheesewedge))
-		new /obj/item/weapon/reagent_containers/food/snacks/cheeseburger(src)
+/obj/item/reagent_containers/food/snacks/monkeyburger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+	if(istype(W))// && !istype(src,/obj/item/reagent_containers/food/snacks/cheesewedge))
+		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
 		qdel(W)
 		qdel(src)
@@ -3564,9 +3564,9 @@
 		..()
 
 // Human Burger + cheese wedge = cheeseburger
-/obj/item/weapon/reagent_containers/food/snacks/human/burger/attackby(obj/item/weapon/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
+/obj/item/reagent_containers/food/snacks/human/burger/attackby(obj/item/reagent_containers/food/snacks/cheesewedge/W as obj, mob/user as mob)
 	if(istype(W))
-		new /obj/item/weapon/reagent_containers/food/snacks/cheeseburger(src)
+		new /obj/item/reagent_containers/food/snacks/cheeseburger(src)
 		to_chat(user, "You make a cheeseburger.")
 		qdel(W)
 		qdel(src)
@@ -3574,7 +3574,7 @@
 	else
 		..()
 
-/obj/item/weapon/reagent_containers/food/snacks/bunbun
+/obj/item/reagent_containers/food/snacks/bunbun
 	name = "\improper Bun Bun"
 	desc = "A small bread monkey fashioned from two burger buns."
 	icon_state = "bunbun"
@@ -3583,10 +3583,10 @@
 	nutriment_amt = 8
 	nutriment_desc = list("bun" = 8)
 
-/obj/item/weapon/reagent_containers/food/snacks/bunbun/Initialize()
+/obj/item/reagent_containers/food/snacks/bunbun/Initialize()
 	. = ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/taco
+/obj/item/reagent_containers/food/snacks/taco
 	name = "taco"
 	desc = "Take a bite!"
 	icon_state = "taco"
@@ -3595,11 +3595,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("cheese" = 2,"taco shell" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/taco/Initialize()
+/obj/item/reagent_containers/food/snacks/taco/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawcutlet
+/obj/item/reagent_containers/food/snacks/rawcutlet
 	name = "raw cutlet"
 	desc = "A thin piece of raw meat."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3607,11 +3607,11 @@
 	bitesize = 1
 	center_of_mass = list("x"=17, "y"=20)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawcutlet/Initialize()
+/obj/item/reagent_containers/food/snacks/rawcutlet/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/cutlet
+/obj/item/reagent_containers/food/snacks/cutlet
 	name = "cutlet"
 	desc = "A tasty meat slice."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3619,11 +3619,11 @@
 	bitesize = 2
 	center_of_mass = list("x"=17, "y"=20)
 
-/obj/item/weapon/reagent_containers/food/snacks/cutlet/Initialize()
+/obj/item/reagent_containers/food/snacks/cutlet/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawmeatball
+/obj/item/reagent_containers/food/snacks/rawmeatball
 	name = "raw meatball"
 	desc = "A raw meatball."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3631,30 +3631,30 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=15)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawmeatball/Initialize()
+/obj/item/reagent_containers/food/snacks/rawmeatball/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/hotdog
+/obj/item/reagent_containers/food/snacks/hotdog
 	name = "hotdog"
 	desc = "Unrelated to dogs, maybe."
 	icon_state = "hotdog"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=17)
 
-/obj/item/weapon/reagent_containers/food/snacks/hotdog/Initialize()
+/obj/item/reagent_containers/food/snacks/hotdog/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/hotdog/old
+/obj/item/reagent_containers/food/snacks/hotdog/old
 	name = "old hotdog"
 	desc = "Covered in mold.  You're not gonna eat that, are you?"
 
-/obj/item/weapon/reagent_containers/food/snacks/hotdog/old/Initialize()
+/obj/item/reagent_containers/food/snacks/hotdog/old/Initialize()
 	. = ..()
 	reagents.add_reagent("mold", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/flatbread
+/obj/item/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
 	desc = "Bland but filling."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3664,23 +3664,23 @@
 	nutriment_amt = 3
 	nutriment_desc = list("bread" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/flatbread/Initialize()
+/obj/item/reagent_containers/food/snacks/flatbread/Initialize()
 	. = ..()
 
 // potato + knife = raw sticks
-/obj/item/weapon/reagent_containers/food/snacks/grown/attackby(obj/item/weapon/W, mob/user)
-	if(seed && seed.kitchen_tag && seed.kitchen_tag == "potato" && istype(W,/obj/item/weapon/material/knife))
-		new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(get_turf(src))
+/obj/item/reagent_containers/food/snacks/grown/attackby(obj/item/W, mob/user)
+	if(seed && seed.kitchen_tag && seed.kitchen_tag == "potato" && istype(W,/obj/item/material/knife))
+		new /obj/item/reagent_containers/food/snacks/rawsticks(get_turf(src))
 		to_chat(user, "<span class='notice'>You cut the potato.</span>")
 		qdel(src)
-	else if(seed && seed.kitchen_tag && seed.kitchen_tag == "sunflower" && istype(W,/obj/item/weapon/material/knife))
-		new /obj/item/weapon/reagent_containers/food/snacks/rawsunflower(get_turf(src))
+	else if(seed && seed.kitchen_tag && seed.kitchen_tag == "sunflower" && istype(W,/obj/item/material/knife))
+		new /obj/item/reagent_containers/food/snacks/rawsunflower(get_turf(src))
 		to_chat(user, "<span class='notice'>You remove the seeds from the flower, slightly damaging them.</span>")
 		qdel(src)
 	else
 		..()
 
-/obj/item/weapon/reagent_containers/food/snacks/rawsticks
+/obj/item/reagent_containers/food/snacks/rawsticks
 	name = "raw potato sticks"
 	desc = "Raw fries, not very tasty."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3690,10 +3690,10 @@
 	nutriment_amt = 3
 	nutriment_desc = list("raw potato" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawsticks/Initialize()
+/obj/item/reagent_containers/food/snacks/rawsticks/Initialize()
 	. = ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/rawsunflower
+/obj/item/reagent_containers/food/snacks/rawsunflower
 	name = "sunflower seeds"
 	desc = "Raw sunflower seeds, alright. They look too damaged to plant."
 	icon = 'icons/obj/food_ingredients.dmi'
@@ -3703,10 +3703,10 @@
 	nutriment_amt = 1
 	nutriment_desc = list("starch" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/rawsunflower/Initialize()
+/obj/item/reagent_containers/food/snacks/rawsunflower/Initialize()
 	. = ..()
 
-/obj/item/weapon/reagent_containers/food/snacks/roastedsunflower
+/obj/item/reagent_containers/food/snacks/roastedsunflower
 	name = "sunflower seeds"
 	desc = "Sunflower seeds!"
 	icon = 'icons/obj/food.dmi'
@@ -3716,7 +3716,7 @@
 	nutriment_amt = 2
 	nutriment_desc = list("salt" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/roastedpeanuts
+/obj/item/reagent_containers/food/snacks/roastedpeanuts
 	name = "peanuts"
 	desc = "Stopped being the planetary airline food of Earth in 2120."
 	icon = 'icons/obj/food.dmi'
@@ -3726,7 +3726,7 @@
 	nutriment_amt = 2
 	nutriment_desc = list("salt" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood
+/obj/item/reagent_containers/food/snacks/liquidfood
 	name = "\improper LiquidFood Ration"
 	desc = "A prepackaged grey slurry of all the essential nutrients for a spacefarer on the go. Should this be crunchy?"
 	icon_state = "liquidfood"
@@ -3737,12 +3737,12 @@
 	nutriment_amt = 20
 	nutriment_desc = list("chalk" = 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidfood/Initialize()
+/obj/item/reagent_containers/food/snacks/liquidfood/Initialize()
 	. = ..()
 	reagents.add_reagent("iron", 3)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidprotein
+/obj/item/reagent_containers/food/snacks/liquidprotein
 	name = "\improper LiquidProtein Ration"
 	desc = "A variant of the liquidfood ration, designed for obligate carnivore species. Only barely more appealing than regular liquidfood. Should this be crunchy?"
 	icon_state = "liquidprotein"
@@ -3751,13 +3751,13 @@
 	survivalfood = TRUE
 	center_of_mass = list("x"=16, "y"=15)
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidprotein/Initialize()
+/obj/item/reagent_containers/food/snacks/liquidprotein/Initialize()
 	..()
 	reagents.add_reagent("protein", 30)
 	reagents.add_reagent("iron", 3)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidvitamin
+/obj/item/reagent_containers/food/snacks/liquidvitamin
 	name = "\improper VitaPaste Ration"
 	desc = "A variant of the liquidfood ration, designed for any carbon-based life. Somehow worse than regular liquidfood. Should this be crunchy?"
 	icon_state = "liquidvitamin"
@@ -3766,7 +3766,7 @@
 	survivalfood = TRUE
 	center_of_mass = list("x"=16, "y"=15)
 
-/obj/item/weapon/reagent_containers/food/snacks/liquidvitamin/Initialize()
+/obj/item/reagent_containers/food/snacks/liquidvitamin/Initialize()
 	..()
 	reagents.add_reagent("flour", 20)
 	reagents.add_reagent("tricordrazine", 5)
@@ -3775,19 +3775,19 @@
 	reagents.add_reagent("iron", 3)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/meatcube
+/obj/item/reagent_containers/food/snacks/meatcube
 	name = "cubed meat"
 	desc = "Fried, salted lean meat compressed into a cube. Not very appetizing."
 	icon_state = "meatcube"
 	filling_color = "#7a3d11"
 	center_of_mass = list("x"=16, "y"=16)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatcube/Initialize()
+/obj/item/reagent_containers/food/snacks/meatcube/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 15)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/tastybread
+/obj/item/reagent_containers/food/snacks/tastybread
 	name = "bread tube"
 	desc = "Bread in a tube. Chewy...and surprisingly tasty."
 	icon_state = "tastybread"
@@ -3797,11 +3797,11 @@
 	nutriment_amt = 6
 	nutriment_desc = list("bread" = 2, "sweetness" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/tastybread/Initialize()
+/obj/item/reagent_containers/food/snacks/tastybread/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
+/obj/item/reagent_containers/food/snacks/skrellsnacks
 	name = "\improper SkrellSnax"
 	desc = "Cured fungus shipped all the way from Qerr'balak, almost like jerky! Almost."
 	icon_state = "skrellsnacks"
@@ -3810,11 +3810,11 @@
 	nutriment_amt = 10
 	nutriment_desc = list("mushroom" = 5, "salt" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks/Initialize()
+/obj/item/reagent_containers/food/snacks/skrellsnacks/Initialize()
 	. = ..()
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/unajerky
+/obj/item/reagent_containers/food/snacks/unajerky
 	name = "Moghes Imported Sissalik Jerky"
 	icon_state = "unathitinred"
 	desc = "An incredibly well made jerky, shipped in all the way from Moghes."
@@ -3822,13 +3822,13 @@
 	filling_color = "#631212"
 	center_of_mass = list("x"=15, "y"=9)
 
-/obj/item/weapon/reagent_containers/food/snacks/unajerky/Initialize()
+/obj/item/reagent_containers/food/snacks/unajerky/Initialize()
 		..()
 		reagents.add_reagent("protein", 8)
 		reagents.add_reagent("capsaicin", 2)
 		bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/croissant
+/obj/item/reagent_containers/food/snacks/croissant
 	name = "croissant"
 	desc = "True French cuisine."
 	filling_color = "#E3D796"
@@ -3836,47 +3836,47 @@
 	nutriment_amt = 6
 	nutriment_desc = list("french bread" = 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/croissant/Initialize()
+/obj/item/reagent_containers/food/snacks/croissant/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/meatbun
+/obj/item/reagent_containers/food/snacks/meatbun
 	name = "meat bun"
 	desc = "Chinese street food, in neither China nor a street."
 	filling_color = "#DEDEAB"
 	icon_state = "meatbun"
 	nutriment_amt = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/meatbun/Initialize()
+/obj/item/reagent_containers/food/snacks/meatbun/Initialize()
 	. = ..()
 	bitesize = 2
 	reagents.add_reagent("protein", 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/sashimi
+/obj/item/reagent_containers/food/snacks/sashimi
 	name = "carp sashimi"
 	desc = "Expertly prepared. Hopefully toxin got removed though."
 	filling_color = "#FFDEFE"
 	icon_state = "sashimi"
 	nutriment_amt = 6
 
-/obj/item/weapon/reagent_containers/food/snacks/sashimi/Initialize()
+/obj/item/reagent_containers/food/snacks/sashimi/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/benedict
+/obj/item/reagent_containers/food/snacks/benedict
 	name = "eggs benedict"
 	desc = "Hey, there's only one egg in this!"
 	filling_color = "#FFDF78"
 	icon_state = "benedict"
 	nutriment_amt = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/benedict/Initialize()
+/obj/item/reagent_containers/food/snacks/benedict/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/beans
+/obj/item/reagent_containers/food/snacks/beans
 	name = "baked beans"
 	desc = "Musical fruit in a slightly less musical container."
 	filling_color = "#FC6F28"
@@ -3884,11 +3884,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("beans" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/beans/Initialize()
+/obj/item/reagent_containers/food/snacks/beans/Initialize()
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/sugarcookie
+/obj/item/reagent_containers/food/snacks/sugarcookie
 	name = "sugar cookie"
 	desc = "Just like your little sister used to make."
 	filling_color = "#DBC94F"
@@ -3896,11 +3896,11 @@
 	nutriment_amt = 5
 	nutriment_desc = list("sweetness" = 4, "cookie" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/sugarcookie/Initialize()
+/obj/item/reagent_containers/food/snacks/sugarcookie/Initialize()
 	. = ..()
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/berrymuffin
+/obj/item/reagent_containers/food/snacks/berrymuffin
 	name = "berry muffin"
 	desc = "A delicious and spongy little cake, with berries."
 	icon_state = "berrymuffin"
@@ -3909,20 +3909,20 @@
 	nutriment_amt = 6
 	nutriment_desc = list("sweetness" = 2, "muffin" = 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/berrymuffin/Initialize()
+/obj/item/reagent_containers/food/snacks/berrymuffin/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/berrymuffin/berry/Initialize()
+/obj/item/reagent_containers/food/snacks/berrymuffin/berry/Initialize()
 	. = ..()
 	reagents.add_reagent("berryjuice", 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/berrymuffin/poison/Initialize()
+/obj/item/reagent_containers/food/snacks/berrymuffin/poison/Initialize()
 	. = ..()
 	reagents.add_reagent("poisonberryjuice", 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/ghostmuffin
+/obj/item/reagent_containers/food/snacks/ghostmuffin
 	name = "booberry muffin"
 	desc = "My stomach is a graveyard! No living being can quench my bloodthirst!"
 	icon_state = "berrymuffin"
@@ -3931,22 +3931,22 @@
 	nutriment_amt = 6
 	nutriment_desc = list("spookiness" = 4, "muffin" = 1, "berries" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/ghostmuffin/Initialize()
+/obj/item/reagent_containers/food/snacks/ghostmuffin/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/ghostmuffin/berry/Initialize()
+/obj/item/reagent_containers/food/snacks/ghostmuffin/berry/Initialize()
 	. = ..()
 	reagents.add_reagent("berryjuice", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/ghostmuffin/poison/Initialize()
+/obj/item/reagent_containers/food/snacks/ghostmuffin/poison/Initialize()
 	. = ..()
 	reagents.add_reagent("poisonberryjuice", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/eggroll
+/obj/item/reagent_containers/food/snacks/eggroll
 	name = "egg roll"
 	desc = "Free with orders over 10 thalers."
 	icon_state = "eggroll"
@@ -3955,13 +3955,13 @@
 	nutriment_amt = 4
 	nutriment_desc = list("egg" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/eggroll/Initialize()
+/obj/item/reagent_containers/food/snacks/eggroll/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/devilledegg
+/obj/item/reagent_containers/food/snacks/devilledegg
 	name = "devilled eggs"
 	desc = "Spicy homestyle favorite."
 	icon_state = "devilledegg"
@@ -3970,13 +3970,13 @@
 	nutriment_amt = 8
 	nutriment_desc = list("egg" = 4, "chili" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/devilledegg/Initialize()
+/obj/item/reagent_containers/food/snacks/devilledegg/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("capsaicin", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/fruitsalad
+/obj/item/reagent_containers/food/snacks/fruitsalad
 	name = "fruit salad"
 	desc = "Your standard fruit salad."
 	icon_state = "fruitsalad"
@@ -3984,12 +3984,12 @@
 	nutriment_amt = 10
 	nutriment_desc = list("fruit" = 10)
 
-/obj/item/weapon/reagent_containers/food/snacks/fruitsalad/Initialize()
+/obj/item/reagent_containers/food/snacks/fruitsalad/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 10)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/flowerchildsalad
+/obj/item/reagent_containers/food/snacks/flowerchildsalad
 	name = "flowerchild salad"
 	desc = "A fragrant salad."
 	icon_state = "flowerchildsalad"
@@ -3997,12 +3997,12 @@
 	nutriment_amt = 10
 	nutriment_desc = list("bittersweet" = 10)
 
-/obj/item/weapon/reagent_containers/food/snacks/flowerchildsalad/Initialize()
+/obj/item/reagent_containers/food/snacks/flowerchildsalad/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 10)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/rosesalad
+/obj/item/reagent_containers/food/snacks/rosesalad
 	name = "flowerchild salad"
 	desc = "A fragrant salad."
 	icon_state = "rosesalad"
@@ -4010,13 +4010,13 @@
 	nutriment_amt = 5
 	nutriment_desc = list("bittersweet" = 10, "iron" = 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/rosesalad/Initialize()
+/obj/item/reagent_containers/food/snacks/rosesalad/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 10)
 	reagents.add_reagent("stoxin", 2)
 	bitesize = 4
 
-/obj/item/weapon/reagent_containers/food/snacks/eggbowl
+/obj/item/reagent_containers/food/snacks/eggbowl
 	name = "egg bowl"
 	desc = "A bowl of fried rice with egg mixed in."
 	icon_state = "eggbowl"
@@ -4025,13 +4025,13 @@
 	nutriment_amt = 6
 	nutriment_desc = list("rice" = 2, "egg" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/eggbowl/Initialize()
+/obj/item/reagent_containers/food/snacks/eggbowl/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/porkbowl
+/obj/item/reagent_containers/food/snacks/porkbowl
 	name = "pork bowl"
 	desc = "A bowl of fried rice with cuts of meat."
 	icon_state = "porkbowl"
@@ -4040,140 +4040,140 @@
 	nutriment_amt = 6
 	nutriment_desc = list("rice" = 2, "meat" = 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/porkbowl/Initialize()
+/obj/item/reagent_containers/food/snacks/porkbowl/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/tortilla
+/obj/item/reagent_containers/food/snacks/tortilla
 	name = "tortilla"
 	desc = "The base for all your burritos."
 	icon_state = "tortilla"
 	nutriment_amt = 1
 	nutriment_desc = list("bread" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/tortilla/Initialize()
+/obj/item/reagent_containers/food/snacks/tortilla/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/meatburrito
+/obj/item/reagent_containers/food/snacks/meatburrito
 	name = "carne asada burrito"
 	desc = "The best burrito for meat lovers."
 	icon_state = "carneburrito"
 	nutriment_amt = 6
 	nutriment_desc = list("tortilla" = 3, "meat" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatburrito/Initialize()
+/obj/item/reagent_containers/food/snacks/meatburrito/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/cheeseburrito
+/obj/item/reagent_containers/food/snacks/cheeseburrito
 	name = "Cheese burrito"
 	desc = "It's a burrito filled with cheese."
 	icon_state = "cheeseburrito"
 	nutriment_amt = 6
 	nutriment_desc = list("tortilla" = 3, "cheese" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/cheeseburrito/Initialize()
+/obj/item/reagent_containers/food/snacks/cheeseburrito/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/fuegoburrito
+/obj/item/reagent_containers/food/snacks/fuegoburrito
 	name = "fuego phoron burrito"
 	desc = "A super spicy burrito."
 	icon_state = "fuegoburrito"
 	nutriment_amt = 6
 	nutriment_desc = list("chili peppers" = 5, "tortilla" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/fuegoburrito/Initialize()
+/obj/item/reagent_containers/food/snacks/fuegoburrito/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("capsaicin", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/nachos
+/obj/item/reagent_containers/food/snacks/nachos
 	name = "nachos"
 	desc = "Chips from Old Mexico."
 	icon_state = "nachos"
 	nutriment_amt = 2
 	nutriment_desc = list("salt" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/nachos/Initialize()
+/obj/item/reagent_containers/food/snacks/nachos/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 1)
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesenachos
+/obj/item/reagent_containers/food/snacks/cheesenachos
 	name = "cheesy nachos"
 	desc = "The delicious combination of nachos and melting cheese."
 	icon_state = "cheesenachos"
 	nutriment_amt = 5
 	nutriment_desc = list("salt" = 2, "cheese" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/cheesenachos/Initialize()
+/obj/item/reagent_containers/food/snacks/cheesenachos/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 5)
 	reagents.add_reagent("protein", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/cubannachos
+/obj/item/reagent_containers/food/snacks/cubannachos
 	name = "cuban nachos"
 	desc = "That's some dangerously spicy nachos."
 	icon_state = "cubannachos"
 	nutriment_amt = 6
 	nutriment_desc = list("salt" = 1, "cheese" = 2, "chili peppers" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/cubannachos/Initialize()
+/obj/item/reagent_containers/food/snacks/cubannachos/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 5)
 	reagents.add_reagent("capsaicin", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/curryrice
+/obj/item/reagent_containers/food/snacks/curryrice
 	name = "curry rice"
 	desc = "That's some dangerously spicy rice."
 	icon_state = "curryrice"
 	nutriment_amt = 6
 	nutriment_desc = list("salt" = 1, "rice" = 2, "chili peppers" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/curryrice/Initialize()
+/obj/item/reagent_containers/food/snacks/curryrice/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 5)
 	reagents.add_reagent("capsaicin", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/piginblanket
+/obj/item/reagent_containers/food/snacks/piginblanket
 	name = "pig in a blanket"
 	desc = "A sausage embedded in soft, fluffy pastry. Free this pig from its blanket prison by eating it."
 	icon_state = "piginblanket"
 	nutriment_amt = 6
 	nutriment_desc = list("meat" = 3, "pastry" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/piginblanket/Initialize()
+/obj/item/reagent_containers/food/snacks/piginblanket/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 4)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/piginblanket
+/obj/item/reagent_containers/food/snacks/piginblanket
 	name = "pig in a blanket"
 	desc = "A sausage embedded in soft, fluffy pastry. Free this pig from its blanket prison by eating it."
 	icon_state = "piginblanket"
 	nutriment_amt = 6
 	nutriment_desc = list("meat" = 3, "pastry" = 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/piginblanket/Initialize()
+/obj/item/reagent_containers/food/snacks/piginblanket/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 	reagents.add_reagent("protein", 4)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/wormsickly
+/obj/item/reagent_containers/food/snacks/wormsickly
 	name = "sickly worm"
 	desc = "A worm, it doesn't look particularily healthy, but it will still serve as good fishing bait."
 	icon_state = "worm_sickly"
@@ -4181,12 +4181,12 @@
 	nutriment_desc = list("bugflesh" = 1)
 	w_class = ITEMSIZE_TINY
 
-/obj/item/weapon/reagent_containers/food/snacks/wormsickly/Initialize()
+/obj/item/reagent_containers/food/snacks/wormsickly/Initialize()
 	. = ..()
 	reagents.add_reagent("fishbait", 10)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/worm
+/obj/item/reagent_containers/food/snacks/worm
 	name = "strange worm"
 	desc = "A peculiar worm, freshly plucked from the earth."
 	icon_state = "worm"
@@ -4194,12 +4194,12 @@
 	nutriment_desc = list("bugflesh" = 1)
 	w_class = ITEMSIZE_TINY
 
-/obj/item/weapon/reagent_containers/food/snacks/worm/Initialize()
+/obj/item/reagent_containers/food/snacks/worm/Initialize()
 	. = ..()
 	reagents.add_reagent("fishbait", 20)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/wormdeluxe
+/obj/item/reagent_containers/food/snacks/wormdeluxe
 	name = "deluxe worm"
 	desc = "A fancy worm, genetically engineered to appeal to fish."
 	icon_state = "worm_deluxe"
@@ -4207,12 +4207,12 @@
 	nutriment_desc = list("bugflesh" = 1)
 	w_class = ITEMSIZE_TINY
 
-/obj/item/weapon/reagent_containers/food/snacks/wormdeluxe/Initialize()
+/obj/item/reagent_containers/food/snacks/wormdeluxe/Initialize()
 	. = ..()
 	reagents.add_reagent("fishbait", 40)
 	bitesize = 5
 
-/obj/item/weapon/reagent_containers/food/snacks/siffruit
+/obj/item/reagent_containers/food/snacks/siffruit
 	name = "pulsing fruit"
 	desc = "A blue-ish sac encased in a tough black shell."
 	icon = 'icons/obj/flora/foraging.dmi'
@@ -4221,11 +4221,11 @@
 	nutriment_desc = list("tart" = 1)
 	w_class = ITEMSIZE_TINY
 
-/obj/item/weapon/reagent_containers/food/snacks/siffruit/Initialize()
+/obj/item/reagent_containers/food/snacks/siffruit/Initialize()
 	. = ..()
 	reagents.add_reagent("sifsap", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/siffruit/afterattack(obj/O as obj, mob/user as mob, proximity)
+/obj/item/reagent_containers/food/snacks/siffruit/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(istype(O,/obj/machinery/microwave))
 		return ..()
 	if(!(proximity && O.is_open_container()))
@@ -4235,93 +4235,93 @@
 	user.drop_from_inventory(src)
 	qdel(src)
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelplain
+/obj/item/reagent_containers/food/snacks/bagelplain
 	name = "plain bagel"
 	desc = "This bread's got chutzpah!"
 	icon_state = "bagelplain"
 	nutriment_amt = 3
 	nutriment_desc = list("bread" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelplain/Initialize()
+/obj/item/reagent_containers/food/snacks/bagelplain/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelsunflower
+/obj/item/reagent_containers/food/snacks/bagelsunflower
 	name = "sunflower seed bagel"
 	desc = "This bread's got chutzpah - and sunflower seeds!"
 	icon_state = "bagelsunflower"
 	nutriment_amt = 4
 	nutriment_desc = list("bread" = 1, "sunflower seeds" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelsunflower/Initialize()
+/obj/item/reagent_containers/food/snacks/bagelsunflower/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelcheese
+/obj/item/reagent_containers/food/snacks/bagelcheese
 	name = "cheese bagel"
 	desc = "This bread's got cheese n' chutzpah!"
 	icon_state = "bagelcheese"
 	nutriment_amt = 4
 	nutriment_desc = list("bread" = 1, "cheese" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelcheese/Initialize()
+/obj/item/reagent_containers/food/snacks/bagelcheese/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("nutriment", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelraisin
+/obj/item/reagent_containers/food/snacks/bagelraisin
 	name = "cinnamon raisin bagel"
 	desc = "This bread's got... Raisins!"
 	icon_state = "bagelraisin"
 	nutriment_amt = 5
 	nutriment_desc = list("bread" = 1, "sweetness" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelraisin/Initialize()
+/obj/item/reagent_containers/food/snacks/bagelraisin/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelpoppy
+/obj/item/reagent_containers/food/snacks/bagelpoppy
 	name = "poppy seed bagel"
 	desc = "This bread's got Chutzpah, and poppy seeds!"
 	icon_state = "bagelpoppy"
 	nutriment_amt = 5
 	nutriment_desc = list("bread" = 1, "sweetness" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/bagelpoppy/Initialize()
+/obj/item/reagent_containers/food/snacks/bagelpoppy/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bageleverything
+/obj/item/reagent_containers/food/snacks/bageleverything
 	name = "everything bagel"
 	desc = "Mmm... Immeasurably unfathomable!"
 	icon_state = "bageleverything"
 	nutriment_amt = 40
 	nutriment_desc = list("life" = 1, "death" = 1, "entropy" = 1)
 
-/obj/item/weapon/reagent_containers/food/snacks/bageleverything/Initialize()
+/obj/item/reagent_containers/food/snacks/bageleverything/Initialize()
 	. = ..()
 	reagents.add_reagent("phoron", 5)
 	reagents.add_reagent("defective_nanites", 5)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/bageltwo
+/obj/item/reagent_containers/food/snacks/bageltwo
 	name = "two bagels"
 	desc = "Noo! ...Two bagels!"
 	icon_state = "bagelplain"
 
-/obj/item/weapon/reagent_containers/food/snacks/bageltwo/Initialize()
+/obj/item/reagent_containers/food/snacks/bageltwo/Initialize()
 	..() //Not returning . because asking to be qdel'd below.
 	spawn_bagels()
 	spawn_bagels()
 	return INITIALIZE_HINT_QDEL
 
-/obj/item/weapon/reagent_containers/food/snacks/bageltwo/proc/spawn_bagels()
-	var/build_path = /obj/item/weapon/reagent_containers/food/snacks/bagelplain
+/obj/item/reagent_containers/food/snacks/bageltwo/proc/spawn_bagels()
+	var/build_path = /obj/item/reagent_containers/food/snacks/bagelplain
 	var/atom/A = new build_path(get_turf(src))
 	if(pixel_x || pixel_y)
 		A.pixel_x = pixel_x

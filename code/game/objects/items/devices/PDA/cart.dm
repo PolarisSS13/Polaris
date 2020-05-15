@@ -1,50 +1,50 @@
 var/list/command_cartridges = list(
-	/obj/item/weapon/cartridge/captain,
-	/obj/item/weapon/cartridge/hop,
-	/obj/item/weapon/cartridge/hos,
-	/obj/item/weapon/cartridge/ce,
-	/obj/item/weapon/cartridge/rd,
-	/obj/item/weapon/cartridge/cmo,
-	/obj/item/weapon/cartridge/head,
-	/obj/item/weapon/cartridge/lawyer // Internal Affaris,
+	/obj/item/cartridge/captain,
+	/obj/item/cartridge/hop,
+	/obj/item/cartridge/hos,
+	/obj/item/cartridge/ce,
+	/obj/item/cartridge/rd,
+	/obj/item/cartridge/cmo,
+	/obj/item/cartridge/head,
+	/obj/item/cartridge/lawyer // Internal Affaris,
 	)
 
 var/list/security_cartridges = list(
-	/obj/item/weapon/cartridge/security,
-	/obj/item/weapon/cartridge/detective,
-	/obj/item/weapon/cartridge/hos
+	/obj/item/cartridge/security,
+	/obj/item/cartridge/detective,
+	/obj/item/cartridge/hos
 	)
 
 var/list/engineering_cartridges = list(
-	/obj/item/weapon/cartridge/engineering,
-	/obj/item/weapon/cartridge/atmos,
-	/obj/item/weapon/cartridge/ce
+	/obj/item/cartridge/engineering,
+	/obj/item/cartridge/atmos,
+	/obj/item/cartridge/ce
 	)
 
 var/list/medical_cartridges = list(
-	/obj/item/weapon/cartridge/medical,
-	/obj/item/weapon/cartridge/chemistry,
-	/obj/item/weapon/cartridge/cmo
+	/obj/item/cartridge/medical,
+	/obj/item/cartridge/chemistry,
+	/obj/item/cartridge/cmo
 	)
 
 var/list/research_cartridges = list(
-	/obj/item/weapon/cartridge/signal/science,
-	/obj/item/weapon/cartridge/rd
+	/obj/item/cartridge/signal/science,
+	/obj/item/cartridge/rd
 	)
 
 var/list/cargo_cartridges = list(
-	/obj/item/weapon/cartridge/quartermaster, // This also covers cargo-techs, apparently,
-	/obj/item/weapon/cartridge/miner,
-	/obj/item/weapon/cartridge/hop
+	/obj/item/cartridge/quartermaster, // This also covers cargo-techs, apparently,
+	/obj/item/cartridge/miner,
+	/obj/item/cartridge/hop
 	)
 
 var/list/civilian_cartridges = list(
-	/obj/item/weapon/cartridge/janitor,
-	/obj/item/weapon/cartridge/service,
-	/obj/item/weapon/cartridge/hop
+	/obj/item/cartridge/janitor,
+	/obj/item/cartridge/service,
+	/obj/item/cartridge/hop
 	)
 
-/obj/item/weapon/cartridge
+/obj/item/cartridge
 	name = "generic cartridge"
 	desc = "A data cartridge for portable microcomputers."
 	icon = 'icons/obj/pda.dmi'
@@ -79,113 +79,113 @@ var/list/civilian_cartridges = list(
 	var/message2
 	var/list/stored_data = list()
 
-/obj/item/weapon/cartridge/Destroy()
+/obj/item/cartridge/Destroy()
 	QDEL_NULL(radio)
 	return ..()
 
-/obj/item/weapon/cartridge/engineering
+/obj/item/cartridge/engineering
 	name = "\improper Power-ON cartridge"
 	icon_state = "cart-e"
 	access_engine = 1
 
-/obj/item/weapon/cartridge/atmos
+/obj/item/cartridge/atmos
 	name = "\improper BreatheDeep cartridge"
 	icon_state = "cart-a"
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/medical
+/obj/item/cartridge/medical
 	name = "\improper Med-U cartridge"
 	icon_state = "cart-m"
 	access_medical = 1
 
-/obj/item/weapon/cartridge/chemistry
+/obj/item/cartridge/chemistry
 	name = "\improper ChemWhiz cartridge"
 	icon_state = "cart-chem"
 	access_reagent_scanner = 1
 	access_medical = 1
 
-/obj/item/weapon/cartridge/security
+/obj/item/cartridge/security
 	name = "\improper R.O.B.U.S.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/security/Initialize()
+/obj/item/cartridge/security/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
 	. = ..()
 
-/obj/item/weapon/cartridge/detective
+/obj/item/cartridge/detective
 	name = "\improper D.E.T.E.C.T. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 	access_medical = 1
 
 
-/obj/item/weapon/cartridge/janitor
+/obj/item/cartridge/janitor
 	name = "\improper CustodiPRO cartridge"
 	desc = "The ultimate in clean-room design."
 	icon_state = "cart-j"
 	access_janitor = 1
 
-/obj/item/weapon/cartridge/lawyer
+/obj/item/cartridge/lawyer
 	name = "\improper P.R.O.V.E. cartridge"
 	icon_state = "cart-s"
 	access_security = 1
 
-/obj/item/weapon/cartridge/clown
+/obj/item/cartridge/clown
 	name = "\improper Honkworks 5.0 cartridge"
 	icon_state = "cart-clown"
 	access_clown = 1
 	charges = 5
 
-/obj/item/weapon/cartridge/mime
+/obj/item/cartridge/mime
 	name = "\improper Gestur-O 1000 cartridge"
 	icon_state = "cart-mi"
 	access_mime = 1
 	charges = 5
 /*
-/obj/item/weapon/cartridge/botanist
+/obj/item/cartridge/botanist
 	name = "Green Thumb v4.20"
 	icon_state = "cart-b"
 	access_flora = 1
 */
 
-/obj/item/weapon/cartridge/service
+/obj/item/cartridge/service
 	name = "\improper Serv-U Pro cartridge"
 	desc = "A data cartridge designed to serve YOU!"
 
-/obj/item/weapon/cartridge/signal
+/obj/item/cartridge/signal
 	name = "generic signaler cartridge"
 	desc = "A data cartridge with an integrated radio signaler module."
 	var/qdeled = 0
 
-/obj/item/weapon/cartridge/signal/science
+/obj/item/cartridge/signal/science
 	name = "\improper Signal Ace 2 cartridge"
 	desc = "Complete with integrated radio signaler!"
 	icon_state = "cart-tox"
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/signal/Initialize()
+/obj/item/cartridge/signal/Initialize()
     radio = new /obj/item/radio/integrated/signal(src)
     . = ..()
 
-/obj/item/weapon/cartridge/quartermaster
+/obj/item/cartridge/quartermaster
 	name = "\improper Space Parts & Space Vendors cartridge"
 	desc = "Perfect for the Quartermaster on the go!"
 	icon_state = "cart-q"
 	access_quartermaster = 1
 
-/obj/item/weapon/cartridge/miner
+/obj/item/cartridge/miner
 	name = "\improper Drill-Jockey 4.5 cartridge"
 	desc = "It's covered in some sort of sand."
 	icon_state = "cart-q"
 
-/obj/item/weapon/cartridge/head
+/obj/item/cartridge/head
 	name = "\improper Easy-Record DELUXE cartridge"
 	icon_state = "cart-h"
 	access_status_display = 1
 
-/obj/item/weapon/cartridge/hop
+/obj/item/cartridge/hop
 	name = "\improper HumanResources9001 cartridge"
 	icon_state = "cart-h"
 	access_status_display = 1
@@ -193,42 +193,42 @@ var/list/civilian_cartridges = list(
 	access_janitor = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos
+/obj/item/cartridge/hos
 	name = "\improper R.O.B.U.S.T. DELUXE cartridge"
 	icon_state = "cart-hos"
 	access_status_display = 1
 	access_security = 1
 
-/obj/item/weapon/cartridge/hos/Initialize()
+/obj/item/cartridge/hos/Initialize()
 	radio = new /obj/item/radio/integrated/beepsky(src)
 	. = ..()
 
-/obj/item/weapon/cartridge/ce
+/obj/item/cartridge/ce
 	name = "\improper Power-On DELUXE cartridge"
 	icon_state = "cart-ce"
 	access_status_display = 1
 	access_engine = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/cmo
+/obj/item/cartridge/cmo
 	name = "\improper Med-U DELUXE cartridge"
 	icon_state = "cart-cmo"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_medical = 1
 
-/obj/item/weapon/cartridge/rd
+/obj/item/cartridge/rd
 	name = "\improper Signal Ace DELUXE cartridge"
 	icon_state = "cart-rd"
 	access_status_display = 1
 	access_reagent_scanner = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/rd/Initialize()
+/obj/item/cartridge/rd/Initialize()
 	radio = new /obj/item/radio/integrated/signal(src)
 	. = ..()
 
-/obj/item/weapon/cartridge/captain
+/obj/item/cartridge/captain
 	name = "\improper Value-PAK cartridge"
 	desc = "Now with 200% more value!"
 	icon_state = "cart-c"
@@ -241,7 +241,7 @@ var/list/civilian_cartridges = list(
 	access_status_display = 1
 	access_atmos = 1
 
-/obj/item/weapon/cartridge/syndicate
+/obj/item/cartridge/syndicate
 	name = "\improper Detomatix cartridge"
 	icon_state = "cart"
 	access_remote_door = 1
@@ -249,7 +249,7 @@ var/list/civilian_cartridges = list(
 	remote_door_id = "smindicate" //Make sure this matches the syndicate shuttle's shield/door id!!	//don't ask about the name, testing.
 	charges = 4
 
-/obj/item/weapon/cartridge/proc/post_status(var/command, var/data1, var/data2)
+/obj/item/cartridge/proc/post_status(var/command, var/data1, var/data2)
 
 	var/datum/radio_frequency/frequency = radio_controller.return_frequency(1435)
 	if(!frequency) return
@@ -284,7 +284,7 @@ var/list/civilian_cartridges = list(
 */
 
 
-/obj/item/weapon/cartridge/proc/create_NanoUI_values(mob/user as mob)
+/obj/item/cartridge/proc/create_NanoUI_values(mob/user as mob)
 	var/values[0]
 
 	/*		Signaler (Mode: 40)				*/
@@ -472,7 +472,7 @@ var/list/civilian_cartridges = list(
 		else
 			JaniData["user_loc"] = list("x" = 0, "y" = 0)
 		var/MopData[0]
-		for(var/obj/item/weapon/mop/M in all_mops)
+		for(var/obj/item/mop/M in all_mops)
 			var/turf/ml = get_turf(M)
 			if(ml)
 				if(ml.z != cl.z)
@@ -534,7 +534,7 @@ var/list/civilian_cartridges = list(
 
 
 
-/obj/item/weapon/cartridge/Topic(href, href_list)
+/obj/item/cartridge/Topic(href, href_list)
 	..()
 
 	if (!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))

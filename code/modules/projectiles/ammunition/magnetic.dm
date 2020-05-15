@@ -1,4 +1,4 @@
-/obj/item/weapon/magnetic_ammo
+/obj/item/magnetic_ammo
 	name = "flechette magazine"
 	desc = "A magazine containing steel flechettes."
 	icon = 'icons/obj/ammo.dmi'
@@ -9,6 +9,6 @@
 	var/remaining = 9
 	preserve_item = 1
 
-/obj/item/weapon/magnetic_ammo/examine(mob/user)
+/obj/item/magnetic_ammo/examine(mob/user)
 	. = ..()
 	. += "There [(remaining == 1)? "is" : "are"] [remaining] flechette\s left!"

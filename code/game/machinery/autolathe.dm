@@ -10,7 +10,7 @@
 	clicksound = "keyboard"
 	clickvol = 30
 
-	circuit = /obj/item/weapon/circuitboard/autolathe
+	circuit = /obj/item/circuitboard/autolathe
 	var/datum/category_collection/autolathe/machine_recipes
 	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
 	var/list/storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
@@ -310,9 +310,9 @@
 	..()
 	var/mb_rating = 0
 	var/man_rating = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
+	for(var/obj/item/stock_parts/matter_bin/MB in component_parts)
 		mb_rating += MB.rating
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		man_rating += M.rating
 
 	storage_capacity[DEFAULT_WALL_MATERIAL] = mb_rating  * 25000

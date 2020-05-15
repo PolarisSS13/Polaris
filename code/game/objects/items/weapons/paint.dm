@@ -3,7 +3,7 @@
 
 var/global/list/cached_icons = list()
 
-/obj/item/weapon/reagent_containers/glass/paint
+/obj/item/reagent_containers/glass/paint
 	desc = "It's a paint bucket."
 	name = "paint bucket"
 	icon = 'icons/obj/items.dmi'

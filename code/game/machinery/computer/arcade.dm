@@ -5,14 +5,14 @@
 	icon_keyboard = null
 	icon_screen = "invaders"
 	clicksound = null	//Gets too spammy and makes no sense for arcade to have the console keyboard noise anyway
-	var/list/prizes = list(	/obj/item/weapon/storage/box/snappops					= 2,
+	var/list/prizes = list(	/obj/item/storage/box/snappops					= 2,
 							/obj/item/toy/blink										= 2,
 							/obj/item/clothing/under/syndicate/tacticool			= 2,
 							/obj/item/toy/sword										= 2,
-							/obj/item/weapon/gun/projectile/revolver/capgun			= 2,
+							/obj/item/gun/projectile/revolver/capgun			= 2,
 							/obj/item/toy/crossbow									= 2,
 							/obj/item/clothing/suit/syndicatefake					= 2,
-							/obj/item/weapon/storage/fancy/crayons					= 2,
+							/obj/item/storage/fancy/crayons					= 2,
 							/obj/item/toy/spinningtoy								= 2,
 							/obj/item/toy/prize/ripley								= 1,
 							/obj/item/toy/prize/fireripley							= 1,
@@ -25,7 +25,7 @@
 							/obj/item/toy/prize/mauler								= 1,
 							/obj/item/toy/prize/odysseus							= 1,
 							/obj/item/toy/prize/phazon								= 1,
-							/obj/item/weapon/reagent_containers/spray/waterflower	= 1,
+							/obj/item/reagent_containers/spray/waterflower	= 1,
 							/obj/random/action_figure								= 1,
 							/obj/random/plushie										= 1,
 							/obj/item/toy/cultsword									= 1,
@@ -40,8 +40,8 @@
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
 	if(!circuit)
-		var/choice = pick(typesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade)
-		var/obj/item/weapon/circuitboard/CB = new choice()
+		var/choice = pick(typesof(/obj/item/circuitboard/arcade) - /obj/item/circuitboard/arcade)
+		var/obj/item/circuitboard/CB = new choice()
 		new CB.build_path(loc, CB)
 		qdel(src)
 
@@ -90,7 +90,7 @@
 	name = "arcade machine"
 	desc = "Does not support Pinball."
 	icon_state = "arcade"
-	circuit = /obj/item/weapon/circuitboard/arcade/battle
+	circuit = /obj/item/circuitboard/arcade/battle
 	var/enemy_name = "Space Villian"
 	var/temp = "Winners don't use space drugs" //Temporary message, for attack messages, etc
 	var/enemy_action = ""
@@ -315,7 +315,7 @@
 	name = "The Orion Trail"
 	desc = "Learn how our ancestors got to Orion, and have fun in the process!"
 	icon_state = "arcade"
-	circuit = /obj/item/weapon/circuitboard/arcade/orion_trail
+	circuit = /obj/item/circuitboard/arcade/orion_trail
 	var/busy = 0 //prevent clickspam that allowed people to ~speedrun~ the game.
 	var/engine = 0
 	var/hull = 0
@@ -670,7 +670,7 @@
 						last_spaceport_action = "You failed to raid the spaceport! You lost [FU*-1] Fuel and [FO*-1] Food, AND [lost_crew] in your scramble to escape! ([FU]FI,[FO]FO,-Crew)"
 						if(emagged)
 							src.visible_message("The machine states, 'YOU ARE UNDER ARREST, RAIDER!' and shoots handcuffs onto [usr]!", "You hear something say 'YOU ARE UNDER ARREST, RAIDER!' and a clinking sound")
-							var/obj/item/weapon/handcuffs/C = new(src.loc)
+							var/obj/item/handcuffs/C = new(src.loc)
 							var/mob/living/carbon/human/H = usr
 							if(istype(usr))
 								C.forceMove(H)
@@ -993,7 +993,7 @@
 	gameStatus = ORION_STATUS_START
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
 	if(emagged)
-		new /obj/item/weapon/orion_ship(src.loc)
+		new /obj/item/orion_ship(src.loc)
 		message_admins("[key_name_admin(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
 		log_game("[key_name(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
 	else
@@ -1011,7 +1011,7 @@
 		emagged = 1
 		return 1
 
-/obj/item/weapon/orion_ship
+/obj/item/orion_ship
 	name = "model settler ship"
 	desc = "A model spaceship, it looks like those used back in the day when travelling to Orion! It even has a miniature FX-293 reactor, which was renowned for its instability and tendency to explode..."
 	icon = 'icons/obj/toy.dmi'
@@ -1019,7 +1019,7 @@
 	w_class = ITEMSIZE_SMALL
 	var/active = 0 //if the ship is on
 
-/obj/item/weapon/orion_ship/examine(mob/user)
+/obj/item/orion_ship/examine(mob/user)
 	. = ..()
 	if(in_range(user, src))
 		if(!active)
@@ -1027,7 +1027,7 @@
 		else
 			. += span("notice", "There's a little switch on the bottom. It's flipped up.")
 
-/obj/item/weapon/orion_ship/attack_self(mob/user)
+/obj/item/orion_ship/attack_self(mob/user)
 	if(active)
 		return
 

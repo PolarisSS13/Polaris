@@ -1,4 +1,4 @@
-/obj/item/device/assembly/prox_sensor
+/obj/item/assembly/prox_sensor
 	name = "proximity sensor"
 	desc = "Used for scanning and alerting when someone enters a certain proximity."
 	icon_state = "prox"
@@ -15,14 +15,14 @@
 
 	var/range = 2
 
-/obj/item/device/assembly/prox_sensor/activate()
+/obj/item/assembly/prox_sensor/activate()
 	if(!..())
 		return FALSE
 	timing = !timing
 	update_icon()
 	return FALSE
 
-/obj/item/device/assembly/prox_sensor/toggle_secure()
+/obj/item/assembly/prox_sensor/toggle_secure()
 	secured = !secured
 	if(secured)
 		START_PROCESSING(SSobj, src)
@@ -33,7 +33,7 @@
 	update_icon()
 	return secured
 
-/obj/item/device/assembly/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/assembly/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
 	if(!istype(AM))
 		log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
 		return
@@ -42,7 +42,7 @@
 	if (!isobserver(AM) && AM.move_speed < 12)
 		sense()
 
-/obj/item/device/assembly/prox_sensor/proc/sense()
+/obj/item/assembly/prox_sensor/proc/sense()
 	if((!holder && !secured) || !scanning || !process_cooldown())
 		return FALSE
 	var/turf/mainloc = get_turf(src)
@@ -50,7 +50,7 @@
 	if(!holder)
 		mainloc.visible_message("[bicon(src)] *beep* *beep*", "*beep* *beep*")
 
-/obj/item/device/assembly/prox_sensor/process()
+/obj/item/assembly/prox_sensor/process()
 	if(scanning)
 		var/turf/mainloc = get_turf(src)
 		for(var/mob/living/A in range(range,mainloc))
@@ -64,16 +64,16 @@
 		toggle_scan()
 		time = initial(time)
 
-/obj/item/device/assembly/prox_sensor/dropped()
+/obj/item/assembly/prox_sensor/dropped()
 	sense()
 
-/obj/item/device/assembly/prox_sensor/proc/toggle_scan()
+/obj/item/assembly/prox_sensor/proc/toggle_scan()
 	if(!secured)
 		return FALSE
 	scanning = !scanning
 	update_icon()
 
-/obj/item/device/assembly/prox_sensor/update_icon()
+/obj/item/assembly/prox_sensor/update_icon()
 	cut_overlays()
 	LAZYCLEARLIST(attached_overlays)
 	if(timing)
@@ -84,15 +84,15 @@
 		LAZYADD(attached_overlays, "prox_scanning")
 	if(holder)
 		holder.update_icon()
-	if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
-		var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
+	if(holder && istype(holder.loc,/obj/item/grenade/chem_grenade))
+		var/obj/item/grenade/chem_grenade/grenade = holder.loc
 		grenade.primed(scanning)
 
-/obj/item/device/assembly/prox_sensor/Move()
+/obj/item/assembly/prox_sensor/Move()
 	..()
 	sense()
 
-/obj/item/device/assembly/prox_sensor/interact(mob/user as mob)//TODO: Change this to the wires thingy
+/obj/item/assembly/prox_sensor/interact(mob/user as mob)//TODO: Change this to the wires thingy
 	if(!secured)
 		user.show_message("<font color='red'>The [name] is unsecured!</font>")
 		return 0
@@ -106,7 +106,7 @@
 	user << browse(dat, "window=prox")
 	onclose(user, "prox")
 
-/obj/item/device/assembly/prox_sensor/Topic(href, href_list, state = deep_inventory_state)
+/obj/item/assembly/prox_sensor/Topic(href, href_list, state = deep_inventory_state)
 	if(..())
 		return TRUE
 	

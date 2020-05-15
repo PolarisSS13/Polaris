@@ -1,4 +1,4 @@
-/obj/item/device/aicard
+/obj/item/aicard
 	name = "intelliCore"
 	desc = "Used to preserve and transport an AI."
 	icon = 'icons/obj/pda.dmi'
@@ -14,18 +14,18 @@
 
 	var/mob/living/silicon/ai/carded_ai
 
-/obj/item/device/aicard/attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
+/obj/item/aicard/attack(mob/living/silicon/decoy/M as mob, mob/user as mob)
 	if (!istype (M, /mob/living/silicon/decoy))
 		return ..()
 	else
 		M.death()
 		to_chat(user, "<b>ERROR ERROR ERROR</b>")
 
-/obj/item/device/aicard/attack_self(mob/user)
+/obj/item/aicard/attack_self(mob/user)
 
 	ui_interact(user)
 
-/obj/item/device/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = inventory_state)
+/obj/item/aicard/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = inventory_state)
 	var/data[0]
 	data["has_ai"] = carded_ai != null
 	if(carded_ai)
@@ -50,7 +50,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
-/obj/item/device/aicard/Topic(href, href_list, state)
+/obj/item/aicard/Topic(href, href_list, state)
 	if(..())
 		return 1
 
@@ -85,7 +85,7 @@
 		update_icon()
 	return 1
 
-/obj/item/device/aicard/update_icon()
+/obj/item/aicard/update_icon()
 	overlays.Cut()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
@@ -97,7 +97,7 @@
 	else
 		icon_state = "aicard"
 
-/obj/item/device/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
+/obj/item/aicard/proc/grab_ai(var/mob/living/silicon/ai/ai, var/mob/living/user)
 	if(!ai.client && !ai.deployed_shell)
 		to_chat(user, "<span class='danger'>ERROR:</span> AI [ai.name] is offline. Unable to transfer.")
 		return 0
@@ -142,7 +142,7 @@
 		update_icon()
 	return 1
 
-/obj/item/device/aicard/proc/clear()
+/obj/item/aicard/proc/clear()
 	if(carded_ai && istype(carded_ai.loc, /turf))
 		carded_ai.canmove = 0
 		carded_ai.carded = 0
@@ -150,21 +150,21 @@
 	carded_ai = null
 	update_icon()
 
-/obj/item/device/aicard/see_emote(mob/living/M, text)
+/obj/item/aicard/see_emote(mob/living/M, text)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[text]</span>"
 		carded_ai.show_message(rendered, 2)
 	..()
 
-/obj/item/device/aicard/show_message(msg, type, alt, alt_type)
+/obj/item/aicard/show_message(msg, type, alt, alt_type)
 	if(carded_ai && carded_ai.client)
 		var/rendered = "<span class='message'>[msg]</span>"
 		carded_ai.show_message(rendered, type)
 	..()
 
-/obj/item/device/aicard/relaymove(var/mob/user, var/direction)
+/obj/item/aicard/relaymove(var/mob/user, var/direction)
 	if(user.stat || user.stunned)
 		return
-	var/obj/item/weapon/rig/rig = src.get_rig()
+	var/obj/item/rig/rig = src.get_rig()
 	if(istype(rig))
 		rig.forced_move(direction, user)

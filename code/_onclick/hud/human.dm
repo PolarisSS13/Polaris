@@ -239,7 +239,7 @@
 		mymob.internals = new /obj/screen()
 		mymob.internals.icon = ui_style
 		mymob.internals.icon_state = "internal0"
-		if(istype(target.internal, /obj/item/weapon/tank)) //Internals on already? Iight, prove it
+		if(istype(target.internal, /obj/item/tank)) //Internals on already? Iight, prove it
 			mymob.internals.icon_state = "internal1"
 		mymob.internals.name = "internal"
 		mymob.internals.screen_loc = ui_internal

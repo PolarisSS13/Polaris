@@ -43,7 +43,7 @@
 /obj/structure/flora/proc/get_harvestable_desc()
 	return "<span class='notice'>\The [src] seems to have something hanging from it.</span>"
 
-/obj/structure/flora/attackby(var/obj/item/weapon/W, var/mob/living/user)
+/obj/structure/flora/attackby(var/obj/item/W, var/mob/living/user)
 	if(can_harvest(W))
 		var/harvest_spawn = pickweight(harvest_loot)
 		var/atom/movable/AM = spawn_harvest(harvest_spawn, user)
@@ -476,7 +476,7 @@
 	randomize_size = TRUE
 	catalogue_data = list(/datum/category_item/catalogue/flora/mosstendrils)
 
-	harvest_tool = /obj/item/weapon/material/knife
+	harvest_tool = /obj/item/material/knife
 	max_harvests = 1
 	min_harvests = -4
 	harvest_loot = list(

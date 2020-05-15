@@ -1,4 +1,4 @@
-/obj/item/weapon/mining_scanner
+/obj/item/mining_scanner
 	name = "ore detector"
 	desc = "A complex device used to locate ore deep underground."
 	icon = 'icons/obj/device.dmi'
@@ -8,7 +8,7 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 150)
 	var/scan_time = 5 SECONDS
 
-/obj/item/weapon/mining_scanner/attack_self(mob/user as mob)
+/obj/item/mining_scanner/attack_self(mob/user as mob)
 	to_chat(user, "<span class='notice'>You begin sweeping \the [src] about, scanning for metal deposits.</span>")
 	playsound(loc, 'sound/items/goggles_charge.ogg', 50, 1, -6)
 
@@ -17,7 +17,7 @@
 
 	ScanTurf(get_turf(user), user)
 
-/obj/item/weapon/mining_scanner/proc/ScanTurf(var/atom/target, var/mob/user, var/exact = FALSE)
+/obj/item/mining_scanner/proc/ScanTurf(var/atom/target, var/mob/user, var/exact = FALSE)
 	var/list/metals = list(
 		"surface minerals" = 0,
 		"precious metals" = 0,

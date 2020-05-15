@@ -290,14 +290,14 @@ var/datum/planet/sif/planet_sif = null
 				continue // They're indoors, so no need to rain on them.
 
 			// If they have an open umbrella, it'll guard from rain
-			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			if(istype(L.get_active_hand(), /obj/item/melee/umbrella))
+				var/obj/item/melee/umbrella/U = L.get_active_hand()
 				if(U.open)
 					if(show_message)
 						to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella.</span>")
 					continue
-			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+			else if(istype(L.get_inactive_hand(), /obj/item/melee/umbrella))
+				var/obj/item/melee/umbrella/U = L.get_inactive_hand()
 				if(U.open)
 					if(show_message)
 						to_chat(L, "<span class='notice'>Rain patters softly onto your umbrella.</span>")
@@ -346,14 +346,14 @@ var/datum/planet/sif/planet_sif = null
 			if(!T.outdoors)
 				continue // They're indoors, so no need to rain on them.
 			// If they have an open umbrella, it'll guard from rain
-			if(istype(L.get_active_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			if(istype(L.get_active_hand(), /obj/item/melee/umbrella))
+				var/obj/item/melee/umbrella/U = L.get_active_hand()
 				if(U.open)
 					if(show_message)
 						to_chat(L, "<span class='notice'>Rain showers loudly onto your umbrella!</span>")
 					continue
-			else if(istype(L.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
-				var/obj/item/weapon/melee/umbrella/U = L.get_inactive_hand()
+			else if(istype(L.get_inactive_hand(), /obj/item/melee/umbrella))
+				var/obj/item/melee/umbrella/U = L.get_inactive_hand()
 				if(U.open)
 					if(show_message)
 						to_chat(L, "<span class='notice'>Rain showers loudly onto your umbrella!</span>")
@@ -409,10 +409,10 @@ var/datum/planet/sif/planet_sif = null
 				continue // They're indoors, so no need to pelt them with ice.
 
 			// If they have an open umbrella, it'll guard from hail
-			var/obj/item/weapon/melee/umbrella/U
-			if(istype(H.get_active_hand(), /obj/item/weapon/melee/umbrella))
+			var/obj/item/melee/umbrella/U
+			if(istype(H.get_active_hand(), /obj/item/melee/umbrella))
 				U = H.get_active_hand()
-			else if(istype(H.get_inactive_hand(), /obj/item/weapon/melee/umbrella))
+			else if(istype(H.get_inactive_hand(), /obj/item/melee/umbrella))
 				U = H.get_inactive_hand()
 			if(U && U.open)
 				if(show_message)

@@ -32,7 +32,7 @@
 	if(env)
 		env.add_thermal_energy(10 * 1000)
 
-/datum/blob_type/blazing_oil/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+/datum/blob_type/blazing_oil/on_chunk_tick(obj/item/blobcore_chunk/B)
 	var/turf/T = get_turf(B)
 	if(!T)
 		return
@@ -40,6 +40,6 @@
 	if(env)
 		env.add_thermal_energy(10 * 1000)
 
-/datum/blob_type/blazing_oil/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+/datum/blob_type/blazing_oil/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)
 	user.add_modifier(/datum/modifier/exothermic, 5 MINUTES)
 	return

@@ -151,12 +151,12 @@
 						item.zoom()
 						break
 				/*
-				if(locate(/obj/item/weapon/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
-					var/obj/item/weapon/gun/energy/sniperrifle/s = locate() in mob
+				if(locate(/obj/item/gun/energy/sniperrifle, mob.contents))		// If mob moves while zoomed in with sniper rifle, unzoom them.
+					var/obj/item/gun/energy/sniperrifle/s = locate() in mob
 					if(s.zoom)
 						s.zoom()
-				if(locate(/obj/item/device/binoculars, mob.contents))		// If mob moves while zoomed in with binoculars, unzoom them.
-					var/obj/item/device/binoculars/b = locate() in mob
+				if(locate(/obj/item/binoculars, mob.contents))		// If mob moves while zoomed in with binoculars, unzoom them.
+					var/obj/item/binoculars/b = locate() in mob
 					if(b.zoom)
 						b.zoom()
 				*/
@@ -242,7 +242,7 @@
 		//We are now going to move
 		moving = 1
 		//Something with pulling things
-		if(locate(/obj/item/weapon/grab, mob))
+		if(locate(/obj/item/grab, mob))
 			mob.move_delay = max(mob.move_delay, world.time + 7)
 			var/list/L = mob.ret_grab()
 			if(istype(L, /list))
@@ -287,11 +287,11 @@
 							n = get_step(mob, direct)
 			. = mob.SelfMove(n, direct)
 
-		for (var/obj/item/weapon/grab/G in mob)
+		for (var/obj/item/grab/G in mob)
 			if (G.state == GRAB_NECK)
 				mob.set_dir(reverse_dir[direct])
 			G.adjust_position()
-		for (var/obj/item/weapon/grab/G in mob.grabbed_by)
+		for (var/obj/item/grab/G in mob.grabbed_by)
 			G.adjust_position()
 
 		moving = 0
@@ -478,7 +478,7 @@
 /obj/proc/on_loc_moved(atom/oldloc)
 	return
 
-/obj/item/weapon/storage/on_loc_moved(atom/oldloc)
+/obj/item/storage/on_loc_moved(atom/oldloc)
 	for(var/obj/O in contents)
 		O.on_loc_moved(oldloc)
 

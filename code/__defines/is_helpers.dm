@@ -13,7 +13,7 @@
 
 #define isitem(D)		istype(D, /obj/item)
 
-#define isradio(A) istype(A, /obj/item/device/radio)
+#define isradio(A) istype(A, /obj/item/radio)
 
 #define isairlock(A)	istype(A, /obj/machinery/door/airlock)
 

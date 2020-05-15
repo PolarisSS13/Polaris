@@ -5,7 +5,7 @@
 	density = 1
 	anchored = 1
 
-	circuit = /obj/item/weapon/circuitboard/fusion_fuel_compressor
+	circuit = /obj/item/circuitboard/fusion_fuel_compressor
 
 /obj/machinery/fusion_fuel_compressor/Initialize()
 	. = ..()
@@ -26,12 +26,12 @@
 			return 1
 		var/datum/reagent/R = thing.reagents.reagent_list[1]
 		visible_message("<span class='notice'>\The [src] compresses the contents of \the [thing] into a new fuel assembly.</span>")
-		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), R.id, R.color)
+		var/obj/item/fuel_assembly/F = new(get_turf(src), R.id, R.color)
 		thing.reagents.remove_reagent(R.id, R.volume)
 		user.put_in_hands(F)
 
 	else if(istype(thing, /obj/machinery/power/supermatter))
-		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), "supermatter")
+		var/obj/item/fuel_assembly/F = new(get_turf(src), "supermatter")
 		visible_message("<span class='notice'>\The [src] compresses \the [thing] into a new fuel assembly.</span>")
 		qdel(thing)
 		user.put_in_hands(F)
@@ -56,7 +56,7 @@
 		if(M.get_amount() < 25)
 			to_chat(user, "<span class='warning'>You need at least 25 [mat.sheet_plural_name] to make a fuel rod.</span>")
 			return
-		var/obj/item/weapon/fuel_assembly/F = new(get_turf(src), mat.name)
+		var/obj/item/fuel_assembly/F = new(get_turf(src), mat.name)
 		visible_message("<span class='notice'>\The [src] compresses the [mat.use_name] into a new fuel assembly.</span>")
 		M.use(25)
 		user.put_in_hands(F)

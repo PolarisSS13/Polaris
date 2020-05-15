@@ -8,7 +8,7 @@
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1
-	circuit = /obj/item/weapon/circuitboard/body_scanner
+	circuit = /obj/item/circuitboard/body_scanner
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
@@ -32,8 +32,8 @@
 		set_light(0)
 
 /obj/machinery/bodyscanner/attackby(var/obj/item/G, user as mob)
-	if(istype(G, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/H = G
+	if(istype(G, /obj/item/grab))
+		var/obj/item/grab/H = G
 		if(panel_open)
 			to_chat(user, "<span class='notice'>Close the maintenance panel first.</span>")
 			return
@@ -160,7 +160,7 @@
 //Body Scan Console
 /obj/machinery/body_scanconsole
 	var/obj/machinery/bodyscanner/scanner
-	var/known_implants = list(/obj/item/weapon/implant/health, /obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking, /obj/item/weapon/implant/language, /obj/item/weapon/implant/language/eal)
+	var/known_implants = list(/obj/item/implant/health, /obj/item/implant/chem, /obj/item/implant/death_alarm, /obj/item/implant/loyalty, /obj/item/implant/tracking, /obj/item/implant/language, /obj/item/implant/language/eal)
 	var/delete
 	var/temphtml
 	name = "Body Scanner Console"
@@ -169,7 +169,7 @@
 	dir = 8
 	density = 0
 	anchored = 1
-	circuit = /obj/item/weapon/circuitboard/scanner_console
+	circuit = /obj/item/circuitboard/scanner_console
 	var/printing = null
 	var/printing_text = null
 
@@ -185,8 +185,8 @@
 /obj/machinery/body_scanconsole/attackby(var/obj/item/I, var/mob/user)
 	if(computer_deconstruction_screwdriver(user, I))
 		return
-	else if(istype(I, /obj/item/device/multitool)) //Did you want to link it?
-		var/obj/item/device/multitool/P = I
+	else if(istype(I, /obj/item/multitool)) //Did you want to link it?
+		var/obj/item/multitool/P = I
 		if(P.connectable)
 			if(istype(P.connectable, /obj/machinery/bodyscanner))
 				var/obj/machinery/bodyscanner/C = P.connectable
@@ -409,7 +409,7 @@
 		if (!(printing) && printing_text)
 			printing = 1
 			visible_message("<span class='notice'>\The [src] rattles and prints out a sheet of paper.</span>")
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+			var/obj/item/paper/P = new /obj/item/paper(loc)
 			P.info = "<CENTER><B>Body Scan - [href_list["name"]]</B></CENTER><BR>"
 			P.info += "<b>Time of scan:</b> [worldtime2stationtime(world.time)]<br><br>"
 			P.info += "[printing_text]"

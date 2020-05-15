@@ -1,4 +1,4 @@
-/obj/item/weapon/material/butterflyconstruction
+/obj/item/material/butterflyconstruction
 	name = "unfinished concealed knife"
 	desc = "An unfinished concealed knife, it looks like the screws need to be tightened."
 	icon = 'icons/obj/buildingobject.dmi'
@@ -6,15 +6,15 @@
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 
-/obj/item/weapon/material/butterflyconstruction/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/material/butterflyconstruction/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_screwdriver())
 		to_chat(user, "You finish the concealed blade weapon.")
 		playsound(src, W.usesound, 50, 1)
-		new /obj/item/weapon/material/butterfly(user.loc, material.name)
+		new /obj/item/material/butterfly(user.loc, material.name)
 		qdel(src)
 		return
 
-/obj/item/weapon/material/butterflyblade
+/obj/item/material/butterflyblade
 	name = "knife blade"
 	desc = "A knife blade. Unusable as a weapon without a grip."
 	icon = 'icons/obj/buildingobject.dmi'
@@ -22,7 +22,7 @@
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 
-/obj/item/weapon/material/butterflyhandle
+/obj/item/material/butterflyhandle
 	name = "concealed knife grip"
 	desc = "A plasteel grip with screw fittings for a blade."
 	icon = 'icons/obj/buildingobject.dmi'
@@ -30,16 +30,16 @@
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 
-/obj/item/weapon/material/butterflyhandle/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/material/butterflyblade))
-		var/obj/item/weapon/material/butterflyblade/B = W
+/obj/item/material/butterflyhandle/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/material/butterflyblade))
+		var/obj/item/material/butterflyblade/B = W
 		to_chat(user, "You attach the two concealed blade parts.")
-		new /obj/item/weapon/material/butterflyconstruction(user.loc, B.material.name)
+		new /obj/item/material/butterflyconstruction(user.loc, B.material.name)
 		qdel(W)
 		qdel(src)
 		return
 
-/obj/item/weapon/material/wirerod
+/obj/item/material/wirerod
 	name = "wired rod"
 	desc = "A rod with some wire wrapped around the top. It'd be easy to attach something to the top bit."
 	icon_state = "wiredrod"
@@ -51,15 +51,15 @@
 	force_divisor = 0.1
 	thrown_force_divisor = 0.1
 
-/obj/item/weapon/material/wirerod/attackby(var/obj/item/I, mob/user as mob)
+/obj/item/material/wirerod/attackby(var/obj/item/I, mob/user as mob)
 	..()
 	var/obj/item/finished
-	if(istype(I, /obj/item/weapon/material/shard) || istype(I, /obj/item/weapon/material/butterflyblade))
-		var/obj/item/weapon/material/tmp_shard = I
-		finished = new /obj/item/weapon/material/twohanded/spear(get_turf(user), tmp_shard.material.name)
+	if(istype(I, /obj/item/material/shard) || istype(I, /obj/item/material/butterflyblade))
+		var/obj/item/material/tmp_shard = I
+		finished = new /obj/item/material/twohanded/spear(get_turf(user), tmp_shard.material.name)
 		to_chat(user, "<span class='notice'>You fasten \the [I] to the top of the rod with the cable.</span>")
 	else if(I.is_wirecutter())
-		finished = new /obj/item/weapon/melee/baton/cattleprod(get_turf(user))
+		finished = new /obj/item/melee/baton/cattleprod(get_turf(user))
 		to_chat(user, "<span class='notice'>You fasten the wirecutters to the top of the rod with the cable, prongs outward.</span>")
 	if(finished)
 		user.drop_from_inventory(src)

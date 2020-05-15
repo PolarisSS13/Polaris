@@ -1,7 +1,7 @@
 //
 //Robotic Component Analyser, basically a health analyser for robots
 //
-/obj/item/device/robotanalyzer
+/obj/item/robotanalyzer
 	name = "cyborg analyzer"
 	icon_state = "robotanalyzer"
 	item_state = "analyzer"
@@ -15,10 +15,10 @@
 	matter = list(DEFAULT_WALL_MATERIAL = 500, "glass" = 200)
 	var/mode = 1;
 
-/obj/item/device/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/robotanalyzer/attack(mob/living/M as mob, mob/living/user as mob)
 	do_scan(M, user)
 
-/obj/item/device/robotanalyzer/proc/do_scan(mob/living/M as mob, mob/living/user as mob)
+/obj/item/robotanalyzer/proc/do_scan(mob/living/M as mob, mob/living/user as mob)
 	if((CLUMSY in user.mutations) && prob(50))
 		to_chat(user, "<font color='red'>You try to analyze the floor's vitals!</font>")
 		for(var/mob/O in viewers(M, null))

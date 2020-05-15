@@ -1,14 +1,14 @@
 
 //########################## CONTRABAND ;3333333333333333333 -Agouri ###################################################
 
-/obj/item/weapon/contraband
+/obj/item/contraband
 	name = "contraband item"
 	desc = "You probably shouldn't be holding this."
 	icon = 'icons/obj/contraband.dmi'
 	force = 0
 
 
-/obj/item/weapon/contraband/poster
+/obj/item/contraband/poster
 	name = "rolled-up poster"
 	desc = "The poster comes with its own automatic adhesive mechanism, for easy pinning to any vertical surface."
 	icon_state = "rolled_poster"
@@ -16,7 +16,7 @@
 
 	var/poster_type = /obj/structure/sign/poster
 
-/obj/item/weapon/contraband/poster/New(turf/loc, var/given_serial = 0)
+/obj/item/contraband/poster/New(turf/loc, var/given_serial = 0)
 	if(!serial_number)
 		if(given_serial == 0)
 			serial_number = rand(1, poster_designs.len)
@@ -26,7 +26,7 @@
 	..(loc)
 
 //Places the poster on a wall
-/obj/item/weapon/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
+/obj/item/contraband/poster/afterattack(var/atom/A, var/mob/user, var/adjacent, var/clickparams)
 	if (!adjacent)
 		return
 
@@ -77,11 +77,11 @@
 	qdel(oldsrc)	//delete it now to cut down on sanity checks afterwards. Agouri's code supports rerolling it anyway
 
 //NT subtype
-/obj/item/weapon/contraband/poster/nanotrasen
+/obj/item/contraband/poster/nanotrasen
 	icon_state = "rolled_poster_nt"
 	poster_type = /obj/structure/sign/poster/nanotrasen
 
-/obj/item/weapon/contraband/poster/nanotrasen/New(turf/loc, var/given_serial = 0)
+/obj/item/contraband/poster/nanotrasen/New(turf/loc, var/given_serial = 0)
 	if(given_serial == 0)
 		serial_number = rand(1, NT_poster_designs.len)
 	else
@@ -102,7 +102,7 @@
 	var/roll_type
 	var/poster_set = FALSE
 
-/obj/structure/sign/poster/New(var/newloc, var/placement_dir=null, var/serial=null, var/itemtype = /obj/item/weapon/contraband/poster)
+/obj/structure/sign/poster/New(var/newloc, var/placement_dir=null, var/serial=null, var/itemtype = /obj/item/contraband/poster)
 	..(newloc)
 
 	if(!serial)
@@ -144,7 +144,7 @@
 
 	poster_set = TRUE
 
-/obj/structure/sign/poster/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/sign/poster/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_wirecutter())
 		playsound(src.loc, W.usesound, 100, 1)
 		if(ruined)
@@ -174,7 +174,7 @@
 		add_fingerprint(user)
 
 /obj/structure/sign/poster/proc/roll_and_drop(turf/newloc)
-	var/obj/item/weapon/contraband/poster/P = new roll_type(src, serial_number)
+	var/obj/item/contraband/poster/P = new roll_type(src, serial_number)
 	P.loc = newloc
 	src.loc = P
 	qdel(src)
@@ -188,9 +188,9 @@
 
 // NT poster subtype.
 /obj/structure/sign/poster/nanotrasen
-	roll_type = /obj/item/weapon/contraband/poster/nanotrasen
+	roll_type = /obj/item/contraband/poster/nanotrasen
 
-/obj/structure/sign/poster/nanotrasen/New(var/newloc, var/placement_dir=null, var/serial=null, var/itemtype = /obj/item/weapon/contraband/poster/nanotrasen)
+/obj/structure/sign/poster/nanotrasen/New(var/newloc, var/placement_dir=null, var/serial=null, var/itemtype = /obj/item/contraband/poster/nanotrasen)
 	if(!serial)
 		serial = rand(1, NT_poster_designs.len)
 

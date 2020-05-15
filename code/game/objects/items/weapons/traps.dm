@@ -1,4 +1,4 @@
-/obj/item/weapon/beartrap
+/obj/item/beartrap
 	name = "mechanical trap"
 	throw_speed = 2
 	throw_range = 1
@@ -16,15 +16,15 @@
 	var/camo_net = FALSE
 	var/stun_length = 0.25 SECONDS
 
-/obj/item/weapon/beartrap/suicide_act(mob/user)
+/obj/item/beartrap/suicide_act(mob/user)
 	var/datum/gender/T = gender_datums[user.get_visible_gender()]
 	to_chat(viewers(user),"<span class='danger'>[user] is putting the [src.name] on [T.his] head! It looks like [T.hes] trying to commit suicide.</span>")
 	return (BRUTELOSS)
 
-/obj/item/weapon/beartrap/proc/can_use(mob/user)
+/obj/item/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 
-/obj/item/weapon/beartrap/attack_self(mob/user as mob)
+/obj/item/beartrap/attack_self(mob/user as mob)
 	..()
 	if(!deployed && can_use(user))
 		user.visible_message(
@@ -46,7 +46,7 @@
 			update_icon()
 			anchored = 1
 
-/obj/item/weapon/beartrap/attack_hand(mob/user as mob)
+/obj/item/beartrap/attack_hand(mob/user as mob)
 	if(has_buckled_mobs() && can_use(user))
 		var/victim = english_list(buckled_mobs)
 		user.visible_message(
@@ -77,7 +77,7 @@
 	else
 		..()
 
-/obj/item/weapon/beartrap/proc/attack_mob(mob/living/L)
+/obj/item/beartrap/proc/attack_mob(mob/living/L)
 
 	var/target_zone
 	if(L.lying)
@@ -108,7 +108,7 @@
 	anchored = FALSE
 	can_buckle = initial(can_buckle)
 
-/obj/item/weapon/beartrap/Crossed(atom/movable/AM as mob|obj)
+/obj/item/beartrap/Crossed(atom/movable/AM as mob|obj)
 	if(AM.is_incorporeal())
 		return
 	if(deployed && isliving(AM))
@@ -126,7 +126,7 @@
 			update_icon()
 	..()
 
-/obj/item/weapon/beartrap/update_icon()
+/obj/item/beartrap/update_icon()
 	..()
 
 	if(!deployed)
@@ -140,7 +140,7 @@
 
 		icon_state = "beartrap1"
 
-/obj/item/weapon/beartrap/hunting
+/obj/item/beartrap/hunting
 	name = "hunting trap"
 	desc = "A mechanically activated leg trap. High-tech and reliable. Looks like it could really hurt if you set it off."
 	stun_length = 1 SECOND

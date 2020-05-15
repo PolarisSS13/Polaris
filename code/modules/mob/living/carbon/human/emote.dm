@@ -12,7 +12,7 @@
 	//var/m_type = 1
 
 	for(var/obj/item/organ/O in src.organs)
-		for (var/obj/item/weapon/implant/I in O)
+		for (var/obj/item/implant/I in O)
 			if(I.implanted)
 				I.trigger(act, src)
 

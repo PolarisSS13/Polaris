@@ -14,9 +14,9 @@
 /datum/supply_pack/randomised/misc/card_packs
 	num_contained = 5
 	contains = list(
-			/obj/item/weapon/pack/cardemon,
-			/obj/item/weapon/pack/spaceball,
-			/obj/item/weapon/deck/holder
+			/obj/item/pack/cardemon,
+			/obj/item/pack/spaceball,
+			/obj/item/deck/holder
 			)
 	name = "Trading Card Crate"
 	cost = 10
@@ -82,7 +82,7 @@
 	containername = "Plushies Crate"
 
 /datum/supply_pack/misc/eftpos
-	contains = list(/obj/item/device/eftpos)
+	contains = list(/obj/item/eftpos)
 	name = "EFTPOS scanner"
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -99,8 +99,8 @@
 			/obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whiteout,
 			/obj/item/clothing/suit/holidaypriest,
 			/obj/item/clothing/under/wedding/bride_white,
-			/obj/item/weapon/storage/backpack/cultpack,
-			/obj/item/weapon/storage/fancy/candle_box = 3
+			/obj/item/storage/backpack/cultpack,
+			/obj/item/storage/fancy/candle_box = 3
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate
@@ -139,7 +139,7 @@
 /datum/supply_pack/misc/glucose_hypos
 	name = "Glucose Hypoinjectors"
 	contains = list(
-			/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/glucose = 5
+			/obj/item/reagent_containers/hypospray/autoinjector/biginjector/glucose = 5
 			)
 	cost = 25
 	containertype = /obj/structure/closet/crate
@@ -148,16 +148,16 @@
 /datum/supply_pack/misc/mre_rations
 	num_contained = 6
 	name = "Emergency - MREs"
-	contains = list(/obj/item/weapon/storage/mre,
-					/obj/item/weapon/storage/mre/menu2,
-					/obj/item/weapon/storage/mre/menu3,
-					/obj/item/weapon/storage/mre/menu4,
-					/obj/item/weapon/storage/mre/menu5,
-					/obj/item/weapon/storage/mre/menu6,
-					/obj/item/weapon/storage/mre/menu7,
-					/obj/item/weapon/storage/mre/menu8,
-					/obj/item/weapon/storage/mre/menu9,
-					/obj/item/weapon/storage/mre/menu10)
+	contains = list(/obj/item/storage/mre,
+					/obj/item/storage/mre/menu2,
+					/obj/item/storage/mre/menu3,
+					/obj/item/storage/mre/menu4,
+					/obj/item/storage/mre/menu5,
+					/obj/item/storage/mre/menu6,
+					/obj/item/storage/mre/menu7,
+					/obj/item/storage/mre/menu8,
+					/obj/item/storage/mre/menu9,
+					/obj/item/storage/mre/menu10)
 	cost = 50
 	containertype = /obj/structure/closet/crate/freezer
 	containername = "ready to eat rations"
@@ -165,7 +165,7 @@
 /datum/supply_pack/misc/paste_rations
 	name = "Emergency - Paste"
 	contains = list(
-			/obj/item/weapon/storage/mre/menu11 = 2
+			/obj/item/storage/mre/menu11 = 2
 			)
 	cost = 25
 	containertype = /obj/structure/closet/crate/freezer
@@ -174,7 +174,7 @@
 /datum/supply_pack/misc/medical_rations
 	name = "Emergency - VitaPaste"
 	contains = list(
-			/obj/item/weapon/storage/mre/menu13 = 2
+			/obj/item/storage/mre/menu13 = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/freezer

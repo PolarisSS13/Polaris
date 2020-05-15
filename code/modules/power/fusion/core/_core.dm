@@ -18,7 +18,7 @@ var/list/fusion_cores = list()
 	active_power_usage = 500 //multiplied by field strength
 	anchored = 0
 
-	circuit = /obj/item/weapon/circuitboard/fusion_core
+	circuit = /obj/item/circuitboard/fusion_core
 
 	var/obj/effect/fusion_em_field/owned_field
 	var/field_strength = 1//0.01
@@ -120,7 +120,7 @@ var/list/fusion_cores = list()
 	if(default_part_replacement(user, W))
 		return
 
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Fusion Core", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

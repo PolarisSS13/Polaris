@@ -4,7 +4,7 @@
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "engine"
 	light_color = COLOR_BLUE
-	circuit = /obj/item/weapon/circuitboard/gyrotron_control
+	circuit = /obj/item/circuitboard/gyrotron_control
 
 	var/id_tag
 	var/scan_range = 25
@@ -97,7 +97,7 @@
 
 /obj/machinery/computer/gyrotron_control/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Gyrotron Control", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

@@ -60,7 +60,7 @@
 	var/meat_amount = 0				// How much meat to drop from this mob when butchered
 	var/obj/meat_type				// The meat object to drop
 	var/list/loot_list = list()		// The list of lootable objects to drop, with "/path = prob%" structure
-	var/obj/item/weapon/card/id/myid// An ID card if they have one to give them access to stuff.
+	var/obj/item/card/id/myid// An ID card if they have one to give them access to stuff.
 
 	//Mob environment settings
 	var/minbodytemp = 250			// Minimum "okay" temperature in kelvin

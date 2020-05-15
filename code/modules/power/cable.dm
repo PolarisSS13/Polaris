@@ -227,7 +227,7 @@ var/list/possible_cable_coil_colours = list(
 			return
 		coil.cable_join(src, user)
 
-	else if(istype(W, /obj/item/device/multitool))
+	else if(istype(W, /obj/item/multitool))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, "<span class='warning'>[DisplayPower(powernet.avail)] in power network.</span>")
@@ -527,7 +527,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 
 /obj/item/stack/cable_coil/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	if(locate(/obj/item/weapon/stool) in user.loc)
+	if(locate(/obj/item/stool) in user.loc)
 		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
 	else
 		user.visible_message("<span class='suicide'>[user] is strangling [TU.himself] with the [src.name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
@@ -613,7 +613,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		. += "There are [get_amount()] lengths of cable in the coil."
 
 /obj/item/stack/cable_coil/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_cable_coil_colours
 		set_cable_color(selected_type, usr)
 		return
@@ -629,7 +629,7 @@ obj/structure/cable/proc/cableColor(var/colorC)
 		if(src.amount <= 14)
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
-		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
+		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
 		src.use(15)

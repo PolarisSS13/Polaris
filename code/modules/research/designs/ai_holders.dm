@@ -9,7 +9,7 @@
 	req_tech = list(TECH_DATA = 2, TECH_BIO = 3)
 	build_type = PROTOLATHE | PROSFAB
 	materials = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500)
-	build_path = /obj/item/device/mmi
+	build_path = /obj/item/mmi
 	category = "Misc"
 	sort_string = "SAAAA"
 
@@ -19,7 +19,7 @@
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 6, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	build_type = PROTOLATHE | PROSFAB
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "silver" = 1000, "gold" = 500, "phoron" = 500, "diamond" = 100)
-	build_path = /obj/item/device/mmi/digital/posibrain
+	build_path = /obj/item/mmi/digital/posibrain
 	category = "Misc"
 	sort_string = "SAAAB"
 
@@ -29,7 +29,7 @@
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 5, TECH_DATA = 4)
 	build_type = PROTOLATHE | PROSFAB
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "silver" = 1000, "gold" = 500)
-	build_path = /obj/item/device/mmi/digital/robot
+	build_path = /obj/item/mmi/digital/robot
 	category = "Misc"
 	sort_string = "SAAAC"
 
@@ -38,7 +38,7 @@
 	id = "paicard"
 	req_tech = list(TECH_DATA = 2)
 	materials = list("glass" = 500, DEFAULT_WALL_MATERIAL = 500)
-	build_path = /obj/item/device/paicard
+	build_path = /obj/item/paicard
 	sort_string = "SBAAA"
 
 /datum/design/item/ai_holder/intellicard
@@ -47,5 +47,5 @@
 	id = "intellicore"
 	req_tech = list(TECH_DATA = 4, TECH_MATERIAL = 4)
 	materials = list("glass" = 1000, "gold" = 200)
-	build_path = /obj/item/device/aicard
+	build_path = /obj/item/aicard
 	sort_string = "SCAAA"

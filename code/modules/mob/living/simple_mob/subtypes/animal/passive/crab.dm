@@ -16,7 +16,7 @@
 	response_harm   = "stomps"
 	friendly = "pinches"
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/crab
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/crab
 
 	say_list_type = /datum/say_list/crab
 
@@ -51,7 +51,7 @@
 
 // Meat!
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/crab
+/obj/item/reagent_containers/food/snacks/meat/crab
 	name = "meat"
 	desc = "A chunk of meat."
 	icon_state = "crustacean-meat"

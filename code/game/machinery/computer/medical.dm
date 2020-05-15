@@ -7,8 +7,8 @@
 	icon_screen = "medcomp"
 	light_color = "#315ab4"
 	req_one_access = list(access_medical, access_forensics_lockers, access_robotics)
-	circuit = /obj/item/weapon/circuitboard/med_data
-	var/obj/item/weapon/card/id/scan = null
+	circuit = /obj/item/circuitboard/med_data
+	var/obj/item/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
 	var/screen = null
@@ -36,7 +36,7 @@
 	return
 
 /obj/machinery/computer/med_data/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/weapon/card/id) && !scan && user.unEquip(O))
+	if(istype(O, /obj/item/card/id) && !scan && user.unEquip(O))
 		O.loc = src
 		scan = O
 		to_chat(user, "You insert \the [O].")
@@ -178,7 +178,7 @@
 
 			else
 				var/obj/item/I = usr.get_active_hand()
-				if (istype(I, /obj/item/weapon/card/id))
+				if (istype(I, /obj/item/card/id))
 					usr.drop_item()
 					I.loc = src
 					src.scan = I
@@ -206,7 +206,7 @@
 				src.rank = "[R.modtype] [R.braintype]"
 				src.screen = 1
 
-			else if (istype(src.scan, /obj/item/weapon/card/id))
+			else if (istype(src.scan, /obj/item/card/id))
 				src.active1 = null
 				src.active2 = null
 
@@ -493,7 +493,7 @@
 					if ((istype(src.active2, /datum/data/record) && data_core.medical.Find(src.active2)))
 						record2 = active2
 					sleep(50)
-					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( src.loc )
+					var/obj/item/paper/P = new /obj/item/paper( src.loc )
 					P.info = "<CENTER><B>Medical Record</B></CENTER><BR>"
 					if (record1)
 						P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])
@@ -553,5 +553,5 @@
 	icon_state = "laptop"
 	icon_keyboard = "laptop_key"
 	icon_screen = "medlaptop"
-	circuit = /obj/item/weapon/circuitboard/med_data/laptop
+	circuit = /obj/item/circuitboard/med_data/laptop
 	density = 0

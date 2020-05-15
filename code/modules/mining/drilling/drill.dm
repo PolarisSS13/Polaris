@@ -9,25 +9,25 @@
 	name = "mining drill head"
 	desc = "An enormous drill."
 	icon_state = "mining_drill"
-	circuit = /obj/item/weapon/circuitboard/miningdrill
+	circuit = /obj/item/circuitboard/miningdrill
 	var/braces_needed = 2
 	var/list/supports = list()
 	var/supported = 0
 	var/active = 0
 	var/list/resource_field = list()
-	var/obj/item/device/radio/intercom/faultreporter = new /obj/item/device/radio/intercom{channels=list("Supply")}(null)
+	var/obj/item/radio/intercom/faultreporter = new /obj/item/radio/intercom{channels=list("Supply")}(null)
 
 	var/list/ore_types = list(
-		"hematite" = /obj/item/weapon/ore/iron,
-		"uranium" = /obj/item/weapon/ore/uranium,
-		"gold" = /obj/item/weapon/ore/gold,
-		"silver" = /obj/item/weapon/ore/silver,
-		"diamond" = /obj/item/weapon/ore/diamond,
-		"phoron" = /obj/item/weapon/ore/phoron,
-		"osmium" = /obj/item/weapon/ore/osmium,
-		"hydrogen" = /obj/item/weapon/ore/hydrogen,
-		"silicates" = /obj/item/weapon/ore/glass,
-		"carbon" = /obj/item/weapon/ore/coal
+		"hematite" = /obj/item/ore/iron,
+		"uranium" = /obj/item/ore/uranium,
+		"gold" = /obj/item/ore/gold,
+		"silver" = /obj/item/ore/silver,
+		"diamond" = /obj/item/ore/diamond,
+		"phoron" = /obj/item/ore/phoron,
+		"osmium" = /obj/item/ore/osmium,
+		"hydrogen" = /obj/item/ore/hydrogen,
+		"silicates" = /obj/item/ore/glass,
+		"carbon" = /obj/item/ore/coal
 		)
 
 	//Upgrades
@@ -35,17 +35,17 @@
 	var/capacity
 	var/charge_use
 	var/exotic_drilling
-	var/obj/item/weapon/cell/cell = null
+	var/obj/item/cell/cell = null
 
 	// Found with an advanced laser. exotic_drilling >= 1
 	var/list/ore_types_uncommon = list(
-		MAT_MARBLE = /obj/item/weapon/ore/marble,
-		MAT_LEAD = /obj/item/weapon/ore/lead
+		MAT_MARBLE = /obj/item/ore/marble,
+		MAT_LEAD = /obj/item/ore/lead
 		)
 
 	// Found with an ultra laser. exotic_drilling >= 2
 	var/list/ore_types_rare = list(
-		MAT_VERDANTIUM = /obj/item/weapon/ore/verdantium
+		MAT_VERDANTIUM = /obj/item/ore/verdantium
 		)
 
 	//Flags
@@ -147,7 +147,7 @@
 
 /obj/machinery/mining/drill/attackby(obj/item/O as obj, mob/user as mob)
 	if(!active)
-		if(istype(O, /obj/item/device/multitool))
+		if(istype(O, /obj/item/multitool))
 			var/newtag = text2num(sanitizeSafe(input(user, "Enter new ID number or leave empty to cancel.", "Assign ID number") as text, 4))
 			if(newtag)
 				name = "[initial(name)] #[newtag]"
@@ -161,7 +161,7 @@
 			return
 	if(!panel_open || active) return ..()
 
-	if(istype(O, /obj/item/weapon/cell))
+	if(istype(O, /obj/item/cell))
 		if(cell)
 			to_chat(user, "The drill already has a cell installed.")
 		else
@@ -221,8 +221,8 @@
 	capacity = 0
 	charge_use = 50
 
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/micro_laser))
+	for(var/obj/item/stock_parts/P in component_parts)
+		if(istype(P, /obj/item/stock_parts/micro_laser))
 			harvest_speed = P.rating
 			exotic_drilling = P.rating - 1
 			if(exotic_drilling >= 1)
@@ -232,11 +232,11 @@
 			else
 				ore_types -= ore_types_uncommon
 				ore_types -= ore_types_rare
-		if(istype(P, /obj/item/weapon/stock_parts/matter_bin))
+		if(istype(P, /obj/item/stock_parts/matter_bin))
 			capacity = 200 * P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
+		if(istype(P, /obj/item/stock_parts/capacitor))
 			charge_use -= 10 * P.rating
-	cell = locate(/obj/item/weapon/cell) in component_parts
+	cell = locate(/obj/item/cell) in component_parts
 
 /obj/machinery/mining/drill/proc/check_supports()
 
@@ -300,7 +300,7 @@
 
 	var/obj/structure/ore_box/B = locate() in orange(1)
 	if(B)
-		for(var/obj/item/weapon/ore/O in contents)
+		for(var/obj/item/ore/O in contents)
 			O.loc = B
 		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
 	else
@@ -311,7 +311,7 @@
 	name = "mining drill brace"
 	desc = "A machinery brace for an industrial drill. It looks easily two feet thick."
 	icon_state = "mining_brace"
-	circuit = /obj/item/weapon/circuitboard/miningdrillbrace
+	circuit = /obj/item/circuitboard/miningdrillbrace
 	var/obj/machinery/mining/drill/connected
 
 /obj/machinery/mining/brace/New()
@@ -319,7 +319,7 @@
 
 	component_parts = list()
 
-/obj/machinery/mining/brace/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/mining/brace/attackby(obj/item/W as obj, mob/user as mob)
 	if(connected && connected.active)
 		to_chat(user, "<span class='notice'>You can't work with the brace of a running drill!</span>")
 		return

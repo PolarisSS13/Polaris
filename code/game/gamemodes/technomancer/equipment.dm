@@ -11,7 +11,7 @@
 	Energy Cost Modifier: 100%<br>\
 	Spell Power: 100%"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core
+	obj_path = /obj/item/technomancer_core
 
 /datum/technomancer/equipment/rapid_core
 	name = "Rapid Core"
@@ -23,7 +23,7 @@
 	Energy Cost Modifier: 100%<br>\
 	Spell Power: 100%"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/rapid
+	obj_path = /obj/item/technomancer_core/rapid
 
 /datum/technomancer/equipment/bulky_core
 	name = "Bulky Core"
@@ -36,7 +36,7 @@
 	Energy Cost Modifier: 100%<br>\
 	<font color='green'>Spell Power: 140%</font>"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/bulky
+	obj_path = /obj/item/technomancer_core/bulky
 
 /datum/technomancer/equipment/unstable
 	name = "Unstable Core"
@@ -49,7 +49,7 @@
 	<font color='green'>Energy Cost Modifier: 70%</font><br>\
 	<font color='green'>Spell Power: 110%</font>"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/unstable
+	obj_path = /obj/item/technomancer_core/unstable
 
 /datum/technomancer/equipment/recycling
 	name = "Recycling Core"
@@ -61,7 +61,7 @@
 	<font color='green'>Energy Cost Modifier: 80%</font><br>\
 	Spell Power: 100%"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/recycling
+	obj_path = /obj/item/technomancer_core/recycling
 
 /datum/technomancer/equipment/summoning
 	name = "Summoning Core"
@@ -74,7 +74,7 @@
 	Energy Cost Modifier: 100%<br>\
 	<font color='green'>Spell Power: 120%</font>"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/summoner
+	obj_path = /obj/item/technomancer_core/summoner
 
 /datum/technomancer/equipment/safety
 	name = "Safety Core"
@@ -86,7 +86,7 @@
 	Energy Cost Modifier: 100%<br>\
 	<font color='red'><b>Spell Power: 70%</b></font>"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/safety
+	obj_path = /obj/item/technomancer_core/safety
 
 /datum/technomancer/equipment/overcharged
 	name = "Overcharged Core"
@@ -99,27 +99,27 @@
 	<font color='red'><b>Energy Cost Modifier: 200%</b></font><br>\
 	<font color='green'><b>Spell Power: 175%</b></font>"
 	cost = 100
-	obj_path = /obj/item/weapon/technomancer_core/overcharged
+	obj_path = /obj/item/technomancer_core/overcharged
 
 /datum/technomancer/equipment/hypo_belt
 	name = "Hypo Belt"
 	desc = "A medical belt designed to carry autoinjectors and other medical equipment.  Comes with one of each hypo."
 	cost = 50
-	obj_path = /obj/item/weapon/storage/belt/medical/technomancer
+	obj_path = /obj/item/storage/belt/medical/technomancer
 
-/obj/item/weapon/storage/belt/medical/technomancer
+/obj/item/storage/belt/medical/technomancer
 	name = "hypo belt"
 	desc = "A medical belt designed to carry autoinjectors and other medical equipment."
 
-/obj/item/weapon/storage/belt/medical/technomancer/New()
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/brute(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/burn(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/toxin(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/oxy(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/purity(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/pain(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/organ(src)
-	new /obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/combat(src)
+/obj/item/storage/belt/medical/technomancer/New()
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/brute(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/burn(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/toxin(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/oxy(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/purity(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/pain(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/organ(src)
+	new /obj/item/reagent_containers/hypospray/autoinjector/biginjector/combat(src)
 	..()
 
 /datum/technomancer/equipment/belt_of_holding
@@ -128,9 +128,9 @@
 	The nature of the pocket allows for storage of larger objects than what is typical for other belts, and in larger quanities.  \
 	It will also help keep your pants on."
 	cost = 50
-	obj_path = /obj/item/weapon/storage/belt/holding
+	obj_path = /obj/item/storage/belt/holding
 
-/obj/item/weapon/storage/belt/holding
+/obj/item/storage/belt/holding
 	name = "Belt of Holding"
 	desc = "Can hold more than you'd expect."
 	icon_state = "ems"
@@ -182,9 +182,9 @@
 	the Core and the user, causing many functions to be enhanced in various ways, so long as it is held in the off-hand.  \
 	Be careful not to lose this!"
 	cost = 200
-	obj_path = /obj/item/weapon/scepter
+	obj_path = /obj/item/scepter
 
-/obj/item/weapon/scepter
+/obj/item/scepter
 	name = "scepter of empowerment"
 	desc = "It's a purple gem, attached to a rod and a handle, along with small wires.  It looks like it would make a good club."
 	icon = 'icons/obj/technomancer.dmi'
@@ -193,27 +193,27 @@
 	slot_flags = SLOT_BELT
 	attack_verb = list("beaten", "smashed", "struck", "whacked")
 
-/obj/item/weapon/scepter/attack_self(mob/living/carbon/human/user)
+/obj/item/scepter/attack_self(mob/living/carbon/human/user)
 	var/obj/item/item_to_test = user.get_other_hand(src)
-	if(istype(item_to_test, /obj/item/weapon/spell))
-		var/obj/item/weapon/spell/S = item_to_test
+	if(istype(item_to_test, /obj/item/spell))
+		var/obj/item/spell/S = item_to_test
 		S.on_scepter_use_cast(user)
 
-/obj/item/weapon/scepter/afterattack(atom/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
+/obj/item/scepter/afterattack(atom/target, mob/living/carbon/human/user, proximity_flag, click_parameters)
 	if(proximity_flag)
 		return ..()
 	var/obj/item/item_to_test = user.get_other_hand(src)
-	if(istype(item_to_test, /obj/item/weapon/spell))
-		var/obj/item/weapon/spell/S = item_to_test
+	if(istype(item_to_test, /obj/item/spell))
+		var/obj/item/spell/S = item_to_test
 		S.on_scepter_ranged_cast(target, user)
 
 /datum/technomancer/equipment/spyglass
 	name = "Spyglass"
 	desc = "A mundane spyglass, it may prove useful to those who wish to scout ahead, or fight from an extreme range."
 	cost = 100
-	obj_path = /obj/item/device/binoculars/spyglass
+	obj_path = /obj/item/binoculars/spyglass
 
-/obj/item/device/binoculars/spyglass
+/obj/item/binoculars/spyglass
 	name = "spyglass"
 	desc = "It's a hand-held telescope, useful for star-gazing, peeping, and recon."
 	icon_state = "spyglass"

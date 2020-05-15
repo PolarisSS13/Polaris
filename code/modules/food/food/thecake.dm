@@ -4,10 +4,10 @@
 	reagents = list("flour" = 300,"milk" = 200, "sugar" = 100, "egg" = 30)
 	fruit = list("poisonberries" = 15, "cherries" =  15)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/meat/,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/,
-			/obj/item/weapon/reagent_containers/food/snacks/meat/
+			/obj/item/reagent_containers/food/snacks/meat/,
+			/obj/item/reagent_containers/food/snacks/meat/,
+			/obj/item/reagent_containers/food/snacks/meat/,
+			/obj/item/reagent_containers/food/snacks/meat/
 		)
 	result = /obj/structure/chaoscake
 
@@ -15,77 +15,77 @@
 	reagents = list("flour" = 300, "milk" = 200, "sugar" = 100, "egg" = 30, )
 	fruit = list("vanilla" =  15, "banana" = 15)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough
 		)
-	result = /obj/item/weapon/chaoscake_layer
+	result = /obj/item/chaoscake_layer
 
 /datum/recipe/microwave/chaoscake_layerthree
 	reagents = list("flour" = 240, "milk" = 150, "sugar" = 80, "egg" = 24, "deathbell" = 100)
 	fruit = list("grapes" = 30)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough
 		)
-	result = /obj/item/weapon/chaoscake_layer/three
+	result = /obj/item/chaoscake_layer/three
 
 /datum/recipe/microwave/chaoscake_layerfour
 	reagents = list("flour" = 240, "milk" = 150, "sugar" = 80, "egg" = 24, "milkshake" = 300)
 	fruit = list("rice" = 30)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough
 		)
-	result = /obj/item/weapon/chaoscake_layer/four
+	result = /obj/item/chaoscake_layer/four
 
 /datum/recipe/microwave/chaoscake_layerfive
 	reagents = list("flour" = 180, "milk" = 100, "sugar" = 60, "egg" = 18, "blood" = 300)
 	fruit = list("tomato" = 20)
 	items = list() //supposed to be made with lobster, still has to be ported.
-	result = /obj/item/weapon/chaoscake_layer/five
+	result = /obj/item/chaoscake_layer/five
 
 /datum/recipe/microwave/chaoscake_layersix
 	reagents = list("flour" = 180, "milk" = 100, "sugar" = 60, "egg" = 18, "sprinkles" = 10)
 	fruit = list("apple" = 30)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
-			/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
-			/obj/item/weapon/reagent_containers/food/snacks/chocolatebar
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/chocolatebar,
+			/obj/item/reagent_containers/food/snacks/chocolatebar,
+			/obj/item/reagent_containers/food/snacks/chocolatebar
 		)
-	result = /obj/item/weapon/chaoscake_layer/six
+	result = /obj/item/chaoscake_layer/six
 
 /datum/recipe/microwave/chaoscake_layerseven
 	reagents = list("flour" = 120, "milk" = 50, "sugar" = 40, "egg" = 12, "devilskiss" = 200)
 	fruit = list("potato" = 10)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough
 		)
-	result = /obj/item/weapon/chaoscake_layer/seven
+	result = /obj/item/chaoscake_layer/seven
 
 /datum/recipe/microwave/chaoscake_layereight
 	reagents = list("flour" = 120, "milk" = 50, "sugar" = 40, "egg" = 12, "cream" = 200)
 	fruit = list("lemon" = 10)
 	items = list(
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough,
-			/obj/item/weapon/reagent_containers/food/snacks/dough
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough,
+			/obj/item/reagent_containers/food/snacks/dough
 		)
-	result = /obj/item/weapon/chaoscake_layer/eight
+	result = /obj/item/chaoscake_layer/eight
 
 /datum/recipe/microwave/chaoscake_layernine
 	reagents = list("water" = 100, "blood" = 100)
 	fruit = list("goldapple" = 50)
 	items = list()
-	result = /obj/item/weapon/chaoscake_layer/nine
+	result = /obj/item/chaoscake_layer/nine
 
 /obj/structure/chaoscake
 	name = "An unfinished cake"
@@ -116,44 +116,44 @@
 			"A chaos cake. Both a creation of dark and light, the two cakes are kept in a careful balance by that mystical coin in the middle. It's said its effects would dissipate if the balance is ever tipped in favour of one side too much, so both sides much be cut equally."
 		)
 
-/obj/item/weapon/chaoscake_layer
+/obj/item/chaoscake_layer
 	name = "A layer of cake"
 	desc = "a layer of cake, it is made out of colourful cream."
 	icon = 'icons/obj/food.dmi'
 	icon_state = "chaoscake_layer-2"
 	var/layer_stage = 1
 
-/obj/item/weapon/chaoscake_layer/three
+/obj/item/chaoscake_layer/three
 	desc = "a layer of cake, glazed in purple."
 	icon_state = "chaoscake_layer-3"
 	layer_stage = 2
 
-/obj/item/weapon/chaoscake_layer/four
+/obj/item/chaoscake_layer/four
 	desc = "a layer of cake, reminding you of a colouring book."
 	icon_state = "chaoscake_layer-4"
 	layer_stage = 3
 
-/obj/item/weapon/chaoscake_layer/five
+/obj/item/chaoscake_layer/five
 	desc = "A layer of cake, smells like copper."
 	icon_state = "chaoscake_layer-5"
 	layer_stage = 4
 
-/obj/item/weapon/chaoscake_layer/six
+/obj/item/chaoscake_layer/six
 	desc = "A layer of cake, featuring colourful sprinkles."
 	icon_state = "chaoscake_layer-6"
 	layer_stage = 5
 
-/obj/item/weapon/chaoscake_layer/seven
+/obj/item/chaoscake_layer/seven
 	desc = "A triplet of evil cake parts."
 	icon_state = "chaoscake_layer-7"
 	layer_stage = 6
 
-/obj/item/weapon/chaoscake_layer/eight
+/obj/item/chaoscake_layer/eight
 	desc = "A triplet of good cake parts."
 	icon_state = "chaoscake_layer-8"
 	layer_stage = 7
 
-/obj/item/weapon/chaoscake_layer/nine
+/obj/item/chaoscake_layer/nine
 	name = "A coin of balance"
 	desc = "A very peculiar coin, it seems to stabilise the air around it."
 	icon_state = "chaoscake_layer-9"
@@ -172,7 +172,7 @@
 	else
 		return
 
-/obj/item/weapon/reagent_containers/food/snacks/chaoscakeslice
+/obj/item/reagent_containers/food/snacks/chaoscakeslice
 	name = "The Chaos Cake Slice"
 	desc = "A slice from The Chaos Cake, it pulses weirdly, as if angry to be seperated from the whole"
 	icon_state = "chaoscake_slice-1"
@@ -182,7 +182,7 @@
 	nutriment_amt = 4
 	volume = 80
 
-/obj/item/weapon/reagent_containers/food/snacks/chaoscakeslice/Initialize()
+/obj/item/reagent_containers/food/snacks/chaoscakeslice/Initialize()
 	..()
 	var/i = rand(1,6)
 	icon_state = "chaoscake_slice-[i]"
@@ -241,8 +241,8 @@
 			reagents.add_reagent("kelotane", 2)
 			bitesize = 4
 
-/obj/structure/chaoscake/attackby(var/obj/item/weapon/W, var/mob/living/user)
-	if(istype(W,/obj/item/weapon/material/knife))
+/obj/structure/chaoscake/attackby(var/obj/item/W, var/mob/living/user)
+	if(istype(W,/obj/item/material/knife))
 		if(edible == 1)
 			HasSliceMissing()
 			if(slices <= 0)
@@ -252,13 +252,13 @@
 				to_chat(user, "You cut a slice of the cake. The slice looks like the cake was just baked, and you can see before your eyes as the spot where you cut the slice slowly regenerates!")
 				slices = slices - 1
 				icon_state = "chaoscake-[slices]"
-				new /obj/item/weapon/reagent_containers/food/snacks/chaoscakeslice(src.loc)
+				new /obj/item/reagent_containers/food/snacks/chaoscakeslice(src.loc)
 
 		else
 			to_chat(user, "<span class='notice'>It looks so good... But it feels so wrong to eat it before it's finished...</span>")
 			return
-	if(istype(W,/obj/item/weapon/chaoscake_layer))
-		var/obj/item/weapon/chaoscake_layer/C = W
+	if(istype(W,/obj/item/chaoscake_layer))
+		var/obj/item/chaoscake_layer/C = W
 		if(C.layer_stage == 8)
 			to_chat(user, "Finally! The coin on the top, the almighty chaos cake is complete!")
 			qdel(W)

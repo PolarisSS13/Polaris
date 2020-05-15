@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/energy/gun
+/obj/item/gun/energy/gun
 	name = "energy gun"
 	desc = "Another bestseller of Lawson Arms and "+TSC_HEPH+", the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words: Stun or Kill."
 	icon_state = "energystun100"
@@ -14,13 +14,13 @@
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="energykill", charge_cost = 480),
 		)
 
-/obj/item/weapon/gun/energy/gun/mounted
+/obj/item/gun/energy/gun/mounted
 	name = "mounted energy gun"
 	self_recharge = 1
 	use_external_power = 1
 
 
-/obj/item/weapon/gun/energy/gun/burst
+/obj/item/gun/energy/gun/burst
 	name = "burst laser"
 	desc = "The FM-2t is a versatile energy based weapon, capable of switching between stun or kill with a three round burst option for both settings."
 	icon_state = "fm-2tstun100"	//May resprite this to be more rifley
@@ -44,7 +44,7 @@
 		list(mode_name="lethal burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,0,0), dispersion=list(0.0, 0.2, 0.5), projectile_type=/obj/item/projectile/beam/burstlaser, modifystate="fm-2tkill"),
 		)
 
-/obj/item/weapon/gun/energy/gun/nuclear
+/obj/item/gun/energy/gun/nuclear
 	name = "advanced energy gun"
 	desc = "An energy gun with an experimental miniaturized reactor."
 	icon_state = "nucgunstun"
@@ -54,7 +54,7 @@
 	force = 8 //looks heavier than a pistol
 	w_class = ITEMSIZE_LARGE	//Looks bigger than a pistol, too.
 	fire_delay = 6	//This one's not a handgun, it should have the same fire delay as everything else
-	cell_type = /obj/item/weapon/cell/device/weapon/recharge
+	cell_type = /obj/item/cell/device/weapon/recharge
 	battery_lock = 1
 	modifystate = null
 

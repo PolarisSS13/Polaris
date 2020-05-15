@@ -1,7 +1,7 @@
 // This folder contains code that was originally ported from Apollo Station and then refactored/optimized/changed.
 
 // Tracks precooked food to stop deep fried baked grilled grilled grilled diona nymph cereal.
-/obj/item/weapon/reagent_containers/food/snacks/var/list/cooked
+/obj/item/reagent_containers/food/snacks/var/list/cooked
 
 // Root type for cooking machines. See following files for specific implementations.
 /obj/machinery/cooker
@@ -58,7 +58,7 @@
 		return
 
 	// We are trying to cook a grabbed mob.
-	var/obj/item/weapon/grab/G = I
+	var/obj/item/grab/G = I
 	if(istype(G))
 
 		if(!can_cook_mobs)
@@ -73,20 +73,20 @@
 		return
 
 	// We're trying to cook something else. Check if it's valid.
-	var/obj/item/weapon/reagent_containers/food/snacks/check = I
+	var/obj/item/reagent_containers/food/snacks/check = I
 	if(istype(check) && islist(check.cooked) && (cook_type in check.cooked))
 		to_chat(user, "<span class='warning'>\The [check] has already been [cook_type].</span>")
 		return 0
-	else if(istype(check, /obj/item/weapon/reagent_containers/glass))
+	else if(istype(check, /obj/item/reagent_containers/glass))
 		to_chat(user, "<span class='warning'>That would probably break [src].</span>")
 		return 0
-	else if(istype(check, /obj/item/weapon/disk/nuclear))
+	else if(istype(check, /obj/item/disk/nuclear))
 		to_chat(user, "Central Command would kill you if you [cook_type] that.")
 		return 0
-	else if(!istype(check) && !istype(check, /obj/item/weapon/holder) && !istype(check, /obj/item/organ)) //Gripper check has to go here, else it still just cuts it off. ~Mechoid
+	else if(!istype(check) && !istype(check, /obj/item/holder) && !istype(check, /obj/item/organ)) //Gripper check has to go here, else it still just cuts it off. ~Mechoid
 		// Is it a borg using a gripper?
-		if(istype(check, /obj/item/weapon/gripper)) // Grippers. ~Mechoid.
-			var/obj/item/weapon/gripper/B = check	//B, for Borg.
+		if(istype(check, /obj/item/gripper)) // Grippers. ~Mechoid.
+			var/obj/item/gripper/B = check	//B, for Borg.
 			if(!B.wrapped)
 				to_chat(user, "\The [B] is not holding anything.")
 				return 0
@@ -105,7 +105,7 @@
 			return
 
 	// Gotta hurt.
-	if(istype(cooking_obj, /obj/item/weapon/holder))
+	if(istype(cooking_obj, /obj/item/holder))
 		for(var/mob/living/M in cooking_obj.contents)
 			M.apply_damage(rand(30,40), BURN, "chest")
 
@@ -131,7 +131,7 @@
 		return
 
 	// RIP slow-moving held mobs.
-	if(istype(cooking_obj, /obj/item/weapon/holder))
+	if(istype(cooking_obj, /obj/item/holder))
 		for(var/mob/living/M in cooking_obj.contents)
 			M.death()
 			qdel(M)
@@ -141,8 +141,8 @@
 	if(selected_option && output_options.len)
 		cook_path = output_options[selected_option]
 	if(!cook_path)
-		cook_path = /obj/item/weapon/reagent_containers/food/snacks/variable
-	var/obj/item/weapon/reagent_containers/food/snacks/result = new cook_path(src) //Holy typepaths, Batman.
+		cook_path = /obj/item/reagent_containers/food/snacks/variable
+	var/obj/item/reagent_containers/food/snacks/result = new cook_path(src) //Holy typepaths, Batman.
 
 	// Set icon and appearance.
 	change_product_appearance(result)
@@ -155,7 +155,7 @@
 		cooking_obj.reagents.trans_to_obj(result, cooking_obj.reagents.total_volume)
 
 	// Set cooked data.
-	var/obj/item/weapon/reagent_containers/food/snacks/food_item = cooking_obj
+	var/obj/item/reagent_containers/food/snacks/food_item = cooking_obj
 	if(istype(food_item) && islist(food_item.cooked))
 		result.cooked = food_item.cooked.Copy()
 	else
@@ -186,7 +186,7 @@
 			else if(prob(burn_chance) || count == cook_time)	//Fail before it has a chance to cook again.
 				// You dun goofed.
 				qdel(cooking_obj)
-				cooking_obj = new /obj/item/weapon/reagent_containers/food/snacks/badrecipe(src)
+				cooking_obj = new /obj/item/reagent_containers/food/snacks/badrecipe(src)
 				// Produce nasty smoke.
 				visible_message("<span class='danger'>\The [src] vomits a gout of rancid smoke!</span>")
 				var/datum/effect/effect/system/smoke_spread/bad/smoke = new /datum/effect/effect/system/smoke_spread/bad()
@@ -231,29 +231,29 @@
 /obj/machinery/cooker/proc/cook_mob(var/mob/living/victim, var/mob/user)
 	return
 
-/obj/machinery/cooker/proc/change_product_strings(var/obj/item/weapon/reagent_containers/food/snacks/product)
-	if(product.type == /obj/item/weapon/reagent_containers/food/snacks/variable) // Base type, generic.
+/obj/machinery/cooker/proc/change_product_strings(var/obj/item/reagent_containers/food/snacks/product)
+	if(product.type == /obj/item/reagent_containers/food/snacks/variable) // Base type, generic.
 		product.name = "[cook_type] [cooking_obj.name]"
 		product.desc = "[cooking_obj.desc] It has been [cook_type]."
 	else
 		product.name = "[cooking_obj.name] [product.name]"
 
-/obj/machinery/cooker/proc/change_product_appearance(var/obj/item/weapon/reagent_containers/food/snacks/product)
-	if(product.type == /obj/item/weapon/reagent_containers/food/snacks/variable) // Base type, generic.
+/obj/machinery/cooker/proc/change_product_appearance(var/obj/item/reagent_containers/food/snacks/product)
+	if(product.type == /obj/item/reagent_containers/food/snacks/variable) // Base type, generic.
 		product.appearance = cooking_obj
 		product.color = food_color
 		product.filling_color = food_color
 
 		// Make 'em into a corpse.
-		if(istype(cooking_obj, /obj/item/weapon/holder))
+		if(istype(cooking_obj, /obj/item/holder))
 			var/matrix/M = matrix()
 			M.Turn(90)
 			M.Translate(1,-6)
 			product.transform = M
 	else
 		var/image/I = image(product.icon, "[product.icon_state]_filling")
-		if(istype(cooking_obj, /obj/item/weapon/reagent_containers/food/snacks))
-			var/obj/item/weapon/reagent_containers/food/snacks/S = cooking_obj
+		if(istype(cooking_obj, /obj/item/reagent_containers/food/snacks))
+			var/obj/item/reagent_containers/food/snacks/S = cooking_obj
 			I.color = S.filling_color
 		if(!I.color)
 			I.color = food_color

@@ -1,4 +1,4 @@
-/obj/item/device/assembly
+/obj/item/assembly
 	name = "assembly"
 	desc = "A small electronic device that should never exist."
 	icon = 'icons/obj/assemblies/new_assemblies.dmi'
@@ -12,7 +12,7 @@
 
 	var/secured = 1
 	var/list/attached_overlays = null
-	var/obj/item/device/assembly_holder/holder = null
+	var/obj/item/assembly_holder/holder = null
 	var/cooldown = FALSE //To prevent spam
 	var/wires = WIRE_RECEIVE | WIRE_PULSE
 
@@ -22,49 +22,49 @@
 	var/const/WIRE_RADIO_RECEIVE = 8		//Allows Pulsed(1) to call Activate()
 	var/const/WIRE_RADIO_PULSE = 16		//Allows Pulse(1) to send a radio message
 
-/obj/item/device/assembly/proc/holder_movement()
+/obj/item/assembly/proc/holder_movement()
 	return
 
-/obj/item/device/assembly/proc/process_cooldown()
+/obj/item/assembly/proc/process_cooldown()
 	if(cooldown)
 		return FALSE
 	cooldown = TRUE
 	VARSET_IN(src, cooldown, FALSE, 2 SECONDS)
 	return TRUE
 
-/obj/item/device/assembly/proc/pulsed(var/radio = 0)
+/obj/item/assembly/proc/pulsed(var/radio = 0)
 	if(holder && (wires & WIRE_RECEIVE))
 		activate()
 	if(radio && (wires & WIRE_RADIO_RECEIVE))
 		activate()
 	return 1
 
-/obj/item/device/assembly/proc/pulse(var/radio = 0)
+/obj/item/assembly/proc/pulse(var/radio = 0)
 	if(holder && (wires & WIRE_PULSE))
 		holder.process_activation(src, 1, 0)
 	if(holder && (wires & WIRE_PULSE_SPECIAL))
 		holder.process_activation(src, 0, 1)
 	return 1
 
-/obj/item/device/assembly/proc/activate()
+/obj/item/assembly/proc/activate()
 	if(!secured || !process_cooldown())
 		return FALSE
 	return TRUE
 
-/obj/item/device/assembly/proc/toggle_secure()
+/obj/item/assembly/proc/toggle_secure()
 	secured = !secured
 	update_icon()
 	return secured
 
-/obj/item/device/assembly/proc/attach_assembly(var/obj/item/device/assembly/A, var/mob/user)
-	holder = new/obj/item/device/assembly_holder(get_turf(src))
+/obj/item/assembly/proc/attach_assembly(var/obj/item/assembly/A, var/mob/user)
+	holder = new/obj/item/assembly_holder(get_turf(src))
 	if(holder.attach(A,src,user))
 		to_chat(user, "<span class='notice'>You attach \the [A] to \the [src]!</span>")
 		return TRUE
 
-/obj/item/device/assembly/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/assembly/attackby(obj/item/W as obj, mob/user as mob)
 	if(isassembly(W))
-		var/obj/item/device/assembly/A = W
+		var/obj/item/assembly/A = W
 		if((!A.secured) && (!secured))
 			attach_assembly(A,user)
 			return
@@ -76,10 +76,10 @@
 		return
 	return ..()
 
-/obj/item/device/assembly/process()
+/obj/item/assembly/process()
 	return PROCESS_KILL
 
-/obj/item/device/assembly/examine(mob/user)
+/obj/item/assembly/examine(mob/user)
 	. = ..()
 	if((in_range(src, user) || loc == user))
 		if(secured)
@@ -87,16 +87,16 @@
 		else
 			. += "\The [src] can be attached!"
 
-/obj/item/device/assembly/attack_self(mob/user as mob)
+/obj/item/assembly/attack_self(mob/user as mob)
 	if(!user)	return 0
 	user.set_machine(src)
 	interact(user)
 	return 1
 
-/obj/item/device/assembly/interact(mob/user as mob)
+/obj/item/assembly/interact(mob/user as mob)
 	return //HTML MENU FOR WIRES GOES HERE
 
-/obj/item/device/assembly/nano_host()
-    if(istype(loc, /obj/item/device/assembly_holder))
+/obj/item/assembly/nano_host()
+    if(istype(loc, /obj/item/assembly_holder))
         return loc.nano_host()
     return ..()

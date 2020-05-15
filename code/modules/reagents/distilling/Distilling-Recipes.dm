@@ -39,11 +39,11 @@
 	if(holder.has_any_reagent(inhibitors))
 		return 0
 
-	if(!istype(holder.my_atom, /obj/item/weapon/reagent_containers/glass/distilling))
+	if(!istype(holder.my_atom, /obj/item/reagent_containers/glass/distilling))
 		return 0
 
 	else // Super special temperature check.
-		var/obj/item/weapon/reagent_containers/glass/distilling/D = holder.my_atom
+		var/obj/item/reagent_containers/glass/distilling/D = holder.my_atom
 		var/obj/machinery/portable_atmospherics/powered/reagent_distillery/RD = D.Master
 		if(RD.current_temp < temp_range[1] || RD.current_temp > temp_range[2])
 			return 0
@@ -52,8 +52,8 @@
 
 /*
 /datum/chemical_reaction/distilling/on_reaction(var/datum/reagents/holder, var/created_volume)
-	if(istype(holder.my_atom, /obj/item/weapon/reagent_containers/glass/distilling))
-		var/obj/item/weapon/reagent_containers/glass/distilling/D = holder.my_atom
+	if(istype(holder.my_atom, /obj/item/reagent_containers/glass/distilling))
+		var/obj/item/reagent_containers/glass/distilling/D = holder.my_atom
 		var/obj/machinery/portable_atmospherics/powered/reagent_distillery/RD = D.Master
 		RD.current_temp += temp_shift
 	return

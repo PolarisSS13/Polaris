@@ -18,7 +18,7 @@
 	say_list_type = /datum/say_list/cow
 
 	meat_amount = 6
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meat_type = /obj/item/reagent_containers/food/snacks/meat
 
 	var/datum/reagents/udder = null
 
@@ -28,7 +28,7 @@
 	..()
 
 /mob/living/simple_mob/animal/passive/cow/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	var/obj/item/weapon/reagent_containers/glass/G = O
+	var/obj/item/reagent_containers/glass/G = O
 	if(stat == CONSCIOUS && istype(G) && G.is_open_container())
 		user.visible_message("<span class='notice'>[user] milks [src] using \the [O].</span>")
 		var/transfered = udder.trans_id_to(G, "milk", rand(5,10))

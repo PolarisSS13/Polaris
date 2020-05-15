@@ -6,7 +6,7 @@
 	density = 0
 	anchored = 1
 	layer = TURF_LAYER + 0.1
-	circuit = /obj/item/weapon/circuitboard/mech_recharger
+	circuit = /obj/item/circuitboard/mech_recharger
 
 	var/obj/mecha/charging = null
 	var/charge = 45
@@ -30,13 +30,13 @@
 	..()
 	charge = 0
 	repair = -5
-	for(var/obj/item/weapon/stock_parts/P in component_parts)
-		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
+	for(var/obj/item/stock_parts/P in component_parts)
+		if(istype(P, /obj/item/stock_parts/capacitor))
 			charge += P.rating * 20
-		if(istype(P, /obj/item/weapon/stock_parts/scanning_module))
+		if(istype(P, /obj/item/stock_parts/scanning_module))
 			charge += P.rating * 5
 			repair += P.rating
-		if(istype(P, /obj/item/weapon/stock_parts/manipulator))
+		if(istype(P, /obj/item/stock_parts/manipulator))
 			repair += P.rating * 2
 
 /obj/machinery/mech_recharger/process()

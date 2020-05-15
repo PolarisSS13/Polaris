@@ -90,7 +90,7 @@
 
 /datum/chemical_reaction/slime/grey_monkey/on_reaction(var/datum/reagents/holder)
 	for(var/i = 1 to 4)
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
+		new /obj/item/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
 	..()
 
 /datum/chemical_reaction/slime/grey_slimejelly
@@ -136,7 +136,7 @@
 	result_amount = REAGENTS_PER_SHEET * 2
 
 
-/obj/item/weapon/reagent_containers/glass/bottle/metamorphic
+/obj/item/reagent_containers/glass/bottle/metamorphic
 	name = "Metamorphic Metal Bottle"
 	desc = "A small bottle. Contains some really weird liquid metal."
 	icon = 'icons/obj/chemical.dmi'
@@ -207,7 +207,7 @@
 	color = "#666666"
 	strength = 20
 
-/obj/item/weapon/reagent_containers/glass/bottle/binding
+/obj/item/reagent_containers/glass/bottle/binding
 	name = "Binding Metal Bottle"
 	desc = "A small bottle. Contains some really weird liquid metal."
 	icon = 'icons/obj/chemical.dmi'
@@ -376,7 +376,7 @@
 	required = /obj/item/slime_extract/yellow
 
 /datum/chemical_reaction/slime/yellow_battery/on_reaction(var/datum/reagents/holder)
-	new /obj/item/weapon/cell/slime(get_turf(holder.my_atom))
+	new /obj/item/cell/slime(get_turf(holder.my_atom))
 	..()
 
 
@@ -388,7 +388,7 @@
 	required = /obj/item/slime_extract/yellow
 
 /datum/chemical_reaction/slime/yellow_flashlight/on_reaction(var/datum/reagents/holder)
-	new /obj/item/device/flashlight/slime(get_turf(holder.my_atom))
+	new /obj/item/flashlight/slime(get_turf(holder.my_atom))
 	..()
 
 // ***************
@@ -738,7 +738,7 @@
 	required = /obj/item/slime_extract/bluespace
 
 /datum/chemical_reaction/slime/bluespace_greater/on_reaction(var/datum/reagents/holder)
-	new /obj/item/weapon/disposable_teleporter/slime(get_turf(holder.my_atom))
+	new /obj/item/disposable_teleporter/slime(get_turf(holder.my_atom))
 	..()
 
 // *******************
@@ -794,7 +794,7 @@
 	required = /obj/item/slime_extract/amber
 
 /datum/chemical_reaction/slime/amber_peoplefood/on_reaction(var/datum/reagents/holder)
-	new /obj/item/weapon/reagent_containers/food/snacks/slime(get_turf(holder.my_atom))
+	new /obj/item/reagent_containers/food/snacks/slime(get_turf(holder.my_atom))
 	..()
 
 

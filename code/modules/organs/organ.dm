@@ -121,7 +121,7 @@ var/list/organ_cache = list()
 	if(status & ORGAN_DEAD)
 		return
 	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
-	if(istype(loc,/obj/item/device/mmi))
+	if(istype(loc,/obj/item/mmi))
 		return
 	if(preserved)
 		return
@@ -392,7 +392,7 @@ var/list/organ_cache = list()
 	blood_splatter(src,B,1)
 
 	user.drop_from_inventory(src)
-	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
+	var/obj/item/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
 	O.icon = icon
 	O.icon_state = icon_state

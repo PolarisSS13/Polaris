@@ -2,7 +2,7 @@
  * Crowbar
  */
 
-/obj/item/weapon/tool/crowbar
+/obj/item/tool/crowbar
 	name = "crowbar"
 	desc = "Used to remove floors and to pry open doors."
 	icon = 'icons/obj/tools.dmi'
@@ -20,10 +20,10 @@
 	drop_sound = 'sound/items/drop/sword.ogg'
 	toolspeed = 1
 
-/obj/item/weapon/tool/crowbar/is_crowbar()
+/obj/item/tool/crowbar/is_crowbar()
 	return TRUE
 
-/obj/item/weapon/tool/crowbar/red
+/obj/item/tool/crowbar/red
 	icon = 'icons/obj/tools.dmi'
 	icon_state = "red_crowbar"
 	item_state = "crowbar_red"
@@ -42,7 +42,7 @@
 	the tool aligned while in use."
 	value = CATALOGUER_REWARD_EASY
 
-/obj/item/weapon/tool/crowbar/alien
+/obj/item/tool/crowbar/alien
 	name = "alien crowbar"
 	desc = "A hard-light crowbar. It appears to pry by itself, without any effort required."
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_crowbar)
@@ -52,7 +52,7 @@
 	toolspeed = 0.1
 	origin_tech = list(TECH_COMBAT = 4, TECH_ENGINEERING = 4)
 
-/obj/item/weapon/tool/crowbar/hybrid
+/obj/item/tool/crowbar/hybrid
 	name = "strange crowbar"
 	desc = "A crowbar whose head seems to phase in and out of view."
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_crowbar)
@@ -62,7 +62,7 @@
 	origin_tech = list(TECH_COMBAT = 4, TECH_ENGINEERING = 3)
 	reach = 2
 
-/obj/item/weapon/tool/crowbar/hybrid/is_crowbar()
+/obj/item/tool/crowbar/hybrid/is_crowbar()
 	if(prob(10))
 		var/turf/T = get_turf(src)
 		SSradiation.radiate(get_turf(src), 5)
@@ -70,14 +70,14 @@
 		return FALSE
 	return TRUE
 
-/obj/item/weapon/tool/crowbar/cyborg
+/obj/item/tool/crowbar/cyborg
 	name = "hydraulic crowbar"
 	desc = "A hydraulic prying tool, compact but powerful. Designed to replace crowbars in industrial synthetics."
 	usesound = 'sound/items/jaws_pry.ogg'
 	force = 10
 	toolspeed = 0.5
 
-/obj/item/weapon/tool/crowbar/power
+/obj/item/tool/crowbar/power
 	name = "jaws of life"
 	desc = "A set of jaws of life, compressed through the magic of science. It's fitted with a prying head."
 	icon_state = "jaws_pry"
@@ -87,21 +87,21 @@
 	usesound = 'sound/items/jaws_pry.ogg'
 	force = 15
 	toolspeed = 0.25
-	var/obj/item/weapon/tool/wirecutters/power/counterpart = null
+	var/obj/item/tool/wirecutters/power/counterpart = null
 
-/obj/item/weapon/tool/crowbar/power/New(newloc, no_counterpart = TRUE)
+/obj/item/tool/crowbar/power/New(newloc, no_counterpart = TRUE)
 	..(newloc)
 	if(!counterpart && no_counterpart)
 		counterpart = new(src, FALSE)
 		counterpart.counterpart = src
 
-/obj/item/weapon/tool/crowbar/power/Destroy()
+/obj/item/tool/crowbar/power/Destroy()
 	if(counterpart)
 		counterpart.counterpart = null // So it can qdel cleanly.
 		QDEL_NULL(counterpart)
 	return ..()
 
-/obj/item/weapon/tool/crowbar/power/attack_self(mob/user)
+/obj/item/tool/crowbar/power/attack_self(mob/user)
 	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, 1)
 	user.drop_item(src)
 	counterpart.forceMove(get_turf(src))

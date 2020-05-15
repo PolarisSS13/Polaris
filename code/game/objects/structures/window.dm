@@ -19,7 +19,7 @@
 	var/state = 2
 	var/reinf = 0
 	var/basestate
-	var/shardtype = /obj/item/weapon/material/shard
+	var/shardtype = /obj/item/material/shard
 	var/glasstype = null // Set this in subtypes. Null is assumed strange or otherwise impossible to dismantle, such as for shuttle glass.
 	var/silicate = 0 // number of units of silicate
 	var/fulltile = FALSE // Set to true on full-tile variants.
@@ -220,8 +220,8 @@
 	if(!istype(W)) return//I really wish I did not need this
 
 	// Fixing.
-	if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent == I_HELP)
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool) && user.a_intent == I_HELP)
+		var/obj/item/weldingtool/WT = W
 		if(health < maxhealth)
 			if(WT.remove_fuel(1 ,user))
 				to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
@@ -236,8 +236,8 @@
 		return
 
 	// Slamming.
-	if (istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
+	if (istype(W, /obj/item/grab) && get_dist(src,user)<2)
+		var/obj/item/grab/G = W
 		if(istype(G.affecting,/mob/living))
 			var/mob/living/M = G.affecting
 			var/state = G.state
@@ -501,7 +501,7 @@
 	desc = "A borosilicate alloy window. It seems to be quite strong."
 	basestate = "phoronwindow"
 	icon_state = "phoronwindow"
-	shardtype = /obj/item/weapon/material/shard/phoron
+	shardtype = /obj/item/material/shard/phoron
 	glasstype = /obj/item/stack/material/glass/phoronglass
 	maximal_heat = T0C + 2000
 	damage_per_fire_tick = 1.0
@@ -518,7 +518,7 @@
 	desc = "A borosilicate alloy window, with rods supporting it. It seems to be very strong."
 	basestate = "phoronrwindow"
 	icon_state = "phoronrwindow"
-	shardtype = /obj/item/weapon/material/shard/phoron
+	shardtype = /obj/item/material/shard/phoron
 	glasstype = /obj/item/stack/material/glass/phoronrglass
 	reinf = 1
 	maximal_heat = T0C + 4000
@@ -586,8 +586,8 @@
 	fulltile = TRUE
 
 /obj/structure/window/reinforced/polarized/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool) && !anchored) // Only allow programming if unanchored!
-		var/obj/item/device/multitool/MT = W
+	if(istype(W, /obj/item/multitool) && !anchored) // Only allow programming if unanchored!
+		var/obj/item/multitool/MT = W
 		// First check if they have a windowtint button buffered
 		if(istype(MT.connectable, /obj/machinery/button/windowtint))
 			var/obj/machinery/button/windowtint/buffered_button = MT.connectable
@@ -646,8 +646,8 @@
 	icon_state = "light[active]"
 
 /obj/machinery/button/windowtint/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/MT = W
+	if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/MT = W
 		if(!id)
 			// If no ID is set yet (newly built button?) let them select an ID for first-time use!
 			var/t = sanitizeSafe(input(user, "Enter an ID for \the [src].", src.name, null), MAX_NAME_LEN)
@@ -662,7 +662,7 @@
 		return TRUE
 	. = ..()
 
-/obj/structure/window/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/structure/window/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			return list(
@@ -671,7 +671,7 @@
 				RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 5
 			)
 
-/obj/structure/window/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/structure/window/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			to_chat(user, span("notice", "You deconstruct \the [src]."))

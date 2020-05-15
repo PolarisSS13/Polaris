@@ -1,4 +1,4 @@
-/obj/item/weapon/storage/bible
+/obj/item/storage/bible
 	name = "bible"
 	desc = "Apply to head repeatedly."
 	icon_state ="bible"
@@ -10,21 +10,21 @@
 	use_sound = 'sound/bureaucracy/bookopen.ogg'
 	drop_sound = 'sound/bureaucracy/bookclose.ogg'
 
-/obj/item/weapon/storage/bible/booze
+/obj/item/storage/bible/booze
 	name = "bible"
 	desc = "To be applied to the head repeatedly."
 	icon_state ="bible"
 
-/obj/item/weapon/storage/bible/booze/New()
+/obj/item/storage/bible/booze/New()
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer,
-		/obj/item/weapon/spacecash/c100,
-		/obj/item/weapon/spacecash/c100,
-		/obj/item/weapon/spacecash/c100
+		/obj/item/reagent_containers/food/drinks/bottle/small/beer,
+		/obj/item/reagent_containers/food/drinks/bottle/small/beer,
+		/obj/item/spacecash/c100,
+		/obj/item/spacecash/c100,
+		/obj/item/spacecash/c100
 	)
 
-/obj/item/weapon/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/storage/bible/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity) return
 	if(user.mind && (user.mind.assigned_role == "Chaplain"))
 		if(A.reagents && A.reagents.has_reagent("water")) //blesses all the water in the holder
@@ -33,7 +33,7 @@
 			A.reagents.del_reagent("water")
 			A.reagents.add_reagent("holywater",water2holy)
 
-/obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/storage/bible/attackby(obj/item/W as obj, mob/user as mob)
 	if (src.use_sound)
 		playsound(src.loc, src.use_sound, 50, 1, -5)
 	..()

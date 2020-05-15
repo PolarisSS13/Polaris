@@ -31,21 +31,21 @@
 	response_harm   = "swats"
 
 	say_list_type = /datum/say_list/bird
-	holder_type = /obj/item/weapon/holder/bird
+	holder_type = /obj/item/holder/bird
 
 /datum/say_list/bird
 	speak = list("Chirp!","Caw!","Screech!","Squawk!")
 	emote_hear = list("chirps","caws")
 	emote_see = list("shakes their head", "ruffles their feathers")
 
-/obj/item/weapon/holder/bird
+/obj/item/holder/bird
 	name = "bird"
 	desc = "It's a bird!"
 	icon_state = null
 	item_icons = null
 	w_class = ITEMSIZE_SMALL
 
-/obj/item/weapon/holder/bird/sync(var/mob/living/simple_mob/SM)
+/obj/item/holder/bird/sync(var/mob/living/simple_mob/SM)
 	..()
 	icon_state = SM.icon_rest // Looks better if the bird isn't flapping constantly in the UI.
 

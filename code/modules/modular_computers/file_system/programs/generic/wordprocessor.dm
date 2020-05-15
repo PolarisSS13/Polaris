@@ -15,7 +15,7 @@
 	var/is_edited
 
 /datum/computer_file/program/wordprocessor/proc/get_file(var/filename)
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+	var/obj/item/computer_hardware/hard_drive/HDD = computer.hard_drive
 	if(!HDD)
 		return
 	var/datum/computer_file/data/F = HDD.find_file_by_name(filename)
@@ -36,7 +36,7 @@
 		F = create_file(filename, loaded_data)
 		return !isnull(F)
 	var/datum/computer_file/data/backup = F.clone()
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+	var/obj/item/computer_hardware/hard_drive/HDD = computer.hard_drive
 	if(!HDD)
 		return
 	HDD.remove_file(F)
@@ -51,7 +51,7 @@
 /datum/computer_file/program/wordprocessor/proc/create_file(var/newname, var/data = "")
 	if(!newname)
 		return
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD = computer.hard_drive
+	var/obj/item/computer_hardware/hard_drive/HDD = computer.hard_drive
 	if(!HDD)
 		return
 	if(get_file(newname))
@@ -190,8 +190,8 @@
 	var/datum/computer_file/program/wordprocessor/PRG
 	PRG = program
 
-	var/obj/item/weapon/computer_hardware/hard_drive/HDD
-	var/obj/item/weapon/computer_hardware/hard_drive/portable/RHDD
+	var/obj/item/computer_hardware/hard_drive/HDD
+	var/obj/item/computer_hardware/hard_drive/portable/RHDD
 	if(PRG.error)
 		data["error"] = PRG.error
 	if(PRG.browsing)

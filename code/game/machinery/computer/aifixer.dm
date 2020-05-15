@@ -4,7 +4,7 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "ai-fixer"
 	light_color = "#a97faa"
-	circuit = /obj/item/weapon/circuitboard/aifixer
+	circuit = /obj/item/circuitboard/aifixer
 	req_one_access = list(access_robotics, access_heads)
 	var/mob/living/silicon/ai/occupant = null
 	var/active = 0
@@ -13,7 +13,7 @@
 	..()
 	update_icon()
 
-/obj/machinery/computer/aifixer/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/device/aicard/card, var/mob/user)
+/obj/machinery/computer/aifixer/proc/load_ai(var/mob/living/silicon/ai/transfer, var/obj/item/aicard/card, var/mob/user)
 
 	if(!transfer)
 		return
@@ -34,13 +34,13 @@
 
 /obj/machinery/computer/aifixer/attackby(I as obj, user as mob)
 
-	if(istype(I, /obj/item/device/aicard))
+	if(istype(I, /obj/item/aicard))
 
 		if(stat & (NOPOWER|BROKEN))
 			to_chat(user, "This terminal isn't functioning right now.")
 			return
 
-		var/obj/item/device/aicard/card = I
+		var/obj/item/aicard/card = I
 		var/mob/living/silicon/ai/comp_ai = locate() in src
 		var/mob/living/silicon/ai/card_ai = locate() in card
 

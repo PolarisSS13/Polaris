@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile/contender
+/obj/item/gun/projectile/contender
 	name = "Thompson Contender"
 	desc = "A perfect, pristine replica of an ancient one-shot hand-cannon. For when you really want to make a hole. This one has been modified to work almost like a bolt-action. Uses .357 rounds."
 	icon_state = "pockrifle"
@@ -12,7 +12,7 @@
 	var/retracted_bolt = 0
 	load_method = SINGLE_CASING
 
-/obj/item/weapon/gun/projectile/contender/attack_self(mob/user as mob)
+/obj/item/gun/projectile/contender/attack_self(mob/user as mob)
 	if(chambered)
 		chambered.loc = get_turf(src)
 		chambered = null
@@ -31,13 +31,13 @@
 	icon_state = initial(icon_state)
 	retracted_bolt = 0
 
-/obj/item/weapon/gun/projectile/contender/load_ammo(var/obj/item/A, mob/user)
+/obj/item/gun/projectile/contender/load_ammo(var/obj/item/A, mob/user)
 	if(!retracted_bolt)
 		to_chat(user, "<span class='notice'>You can't load [src] without cycling the bolt.</span>")
 		return
 	..()
 
-/obj/item/weapon/gun/projectile/contender/tacticool
+/obj/item/gun/projectile/contender/tacticool
 	desc = "A modified replica of an ancient one-shot hand-cannon, reinvented with a tactical look. For when you really want to make a hole. This one has been modified to work almost like a bolt-action. Uses .357 rounds."
 	icon_state = "pockrifle_b"
 	icon_retracted = "pockrifle_b-empty"

@@ -1,5 +1,5 @@
 
-/obj/item/device/integrated_circuit_printer
+/obj/item/integrated_circuit_printer
 	name = "integrated circuit printer"
 	desc = "A portable(ish) machine made to print tiny modular circuitry out of metal."
 	icon = 'icons/obj/integrated_electronics/electronic_tools.dmi'
@@ -14,26 +14,26 @@
 	var/can_clone = FALSE		// Same for above, but will allow the printer to duplicate a specific assembly. (Not implemented)
 //	var/static/list/recipe_list = list()
 	var/current_category = null
-	var/obj/item/device/electronic_assembly/assembly_to_clone = null
+	var/obj/item/electronic_assembly/assembly_to_clone = null
 
-/obj/item/device/integrated_circuit_printer/upgraded
+/obj/item/integrated_circuit_printer/upgraded
 	upgraded = TRUE
 	can_clone = TRUE
 
-/obj/item/device/integrated_circuit_printer/debug
+/obj/item/integrated_circuit_printer/debug
 	name = "fractal integrated circuit printer"
 	desc = "A portable(ish) machine that makes modular circuitry seemingly out of thin air."
 	upgraded = TRUE
 	can_clone = TRUE
 	debug = TRUE
 
-/obj/item/device/integrated_circuit_printer/attack_robot(mob/user as mob)
+/obj/item/integrated_circuit_printer/attack_robot(mob/user as mob)
 	if(Adjacent(user))
 		return interact(user)
 	else
 		return ..()
 
-/obj/item/device/integrated_circuit_printer/attackby(var/obj/item/O, var/mob/user)
+/obj/item/integrated_circuit_printer/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/stack/material))
 		var/obj/item/stack/material/stack = O
 		if(stack.material.name == DEFAULT_WALL_MATERIAL)
@@ -58,7 +58,7 @@
 		interact(user)
 		return TRUE
 
-	if(istype(O,/obj/item/weapon/disk/integrated_circuit/upgrade/advanced))
+	if(istype(O,/obj/item/disk/integrated_circuit/upgrade/advanced))
 		if(upgraded)
 			to_chat(user, span("warning", "\The [src] already has this upgrade."))
 			return TRUE
@@ -67,7 +67,7 @@
 		interact(user)
 		return TRUE
 
-	if(istype(O,/obj/item/weapon/disk/integrated_circuit/upgrade/clone))
+	if(istype(O,/obj/item/disk/integrated_circuit/upgrade/clone))
 		if(can_clone)
 			to_chat(user, span("warning", "\The [src] already has this upgrade."))
 			return TRUE
@@ -78,10 +78,10 @@
 
 	return ..()
 
-/obj/item/device/integrated_circuit_printer/attack_self(var/mob/user)
+/obj/item/integrated_circuit_printer/attack_self(var/mob/user)
 	interact(user)
 
-/obj/item/device/integrated_circuit_printer/interact(mob/user)
+/obj/item/integrated_circuit_printer/interact(mob/user)
 	var/window_height = 600
 	var/window_width = 500
 
@@ -124,7 +124,7 @@
 	user << browse(jointext(HTML, null), "window=integrated_printer;size=[window_width]x[window_height];border=1;can_resize=1;can_close=1;can_minimize=1")
 
 
-/obj/item/device/integrated_circuit_printer/Topic(href, href_list)
+/obj/item/integrated_circuit_printer/Topic(href, href_list)
 	if(..())
 		return 1
 
@@ -142,8 +142,8 @@
 
 		if(isnull(current_category))
 			current_category = SScircuit.circuit_fabricator_recipe_list[1]
-		if(ispath(build_type, /obj/item/device/electronic_assembly))
-			var/obj/item/device/electronic_assembly/E = build_type
+		if(ispath(build_type, /obj/item/electronic_assembly))
+			var/obj/item/electronic_assembly/E = build_type
 			cost = round( (initial(E.max_complexity) + initial(E.max_components) ) / 4)
 		else
 			var/obj/item/I = build_type
@@ -167,7 +167,7 @@
 
 
 // FUKKEN UPGRADE DISKS
-/obj/item/weapon/disk/integrated_circuit/upgrade
+/obj/item/disk/integrated_circuit/upgrade
 	name = "integrated circuit printer upgrade disk"
 	desc = "Install this into your integrated circuit printer to enhance it."
 	icon = 'icons/obj/integrated_electronics/electronic_tools.dmi'
@@ -176,12 +176,12 @@
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 4)
 
-/obj/item/weapon/disk/integrated_circuit/upgrade/advanced
+/obj/item/disk/integrated_circuit/upgrade/advanced
 	name = "integrated circuit printer upgrade disk - advanced designs"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one adds new, advanced designs to the printer."
 
 // To be implemented later.
-/obj/item/weapon/disk/integrated_circuit/upgrade/clone
+/obj/item/disk/integrated_circuit/upgrade/clone
 	name = "integrated circuit printer upgrade disk - circuit cloner"
 	desc = "Install this into your integrated circuit printer to enhance it.  This one allows the printer to duplicate assemblies."
 	icon_state = "upgrade_disk_clone"

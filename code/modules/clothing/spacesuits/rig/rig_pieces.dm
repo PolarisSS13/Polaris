@@ -41,7 +41,7 @@
 
 /obj/item/clothing/suit/space/rig
 	name = "chestpiece"
-	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit)
+	allowed = list(/obj/item/flashlight,/obj/item/tank,/obj/item/suit_cooling_unit)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	heat_protection =	 UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =	 UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
@@ -60,7 +60,7 @@
 		)
 	supporting_limbs = list()
 	species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_TAJ, SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_TESHARI) //vox, diona, and zaddat can't use hardsuits not designed for them
-	var/obj/item/weapon/material/knife/tacknife
+	var/obj/item/material/knife/tacknife
 	max_pressure_protection = null
 	min_pressure_protection = null
 
@@ -76,7 +76,7 @@
 	..()
 
 /obj/item/clothing/suit/space/rig/attackby(var/obj/item/I, var/mob/living/M)
-	if(istype(I, /obj/item/weapon/material/knife/tacknife))
+	if(istype(I, /obj/item/material/knife/tacknife))
 		if(tacknife)
 			return
 		M.drop_item()
@@ -100,7 +100,7 @@
 	if(!istype(H) || (!H.back && !H.belt))
 		return 0
 
-	var/obj/item/weapon/rig/suit = H.back
+	var/obj/item/rig/suit = H.back
 	if(!suit || !istype(suit) || !suit.installed_modules.len)
 		return 0
 
@@ -123,7 +123,7 @@
 
 /obj/item/clothing/suit/lightrig
 	name = "suit"
-	allowed = list(/obj/item/device/flashlight)
+	allowed = list(/obj/item/flashlight)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	heat_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
 	cold_protection =    UPPER_TORSO|LOWER_TORSO|LEGS|ARMS

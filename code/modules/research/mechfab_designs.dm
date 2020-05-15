@@ -757,7 +757,7 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
 	build_type = MECHFAB
 	materials = list(DEFAULT_WALL_MATERIAL = 562, "glass" = 562)
-	build_path = /obj/item/device/flash/synthetic
+	build_path = /obj/item/flash/synthetic
 	category = "Misc"
 
 /*
@@ -775,7 +775,7 @@
 	id = "vehicle_chassis_spacebike"
 	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 6, TECH_BLUESPACE = 3, TECH_PHORON = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 12000, "silver" = 3000, "phoron" = 3000, "osmium" = 1000)
-	build_path = /obj/item/weapon/vehicle_assembly/spacebike
+	build_path = /obj/item/vehicle_assembly/spacebike
 
 /datum/design/item/mechfab/vehicle/quadbike_chassis
 	name = "Quadbike Chassis"
@@ -783,7 +783,7 @@
 	id = "vehicle_chassis_quadbike"
 	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 6, TECH_MAGNET = 3, TECH_POWER = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 15000, "silver" = 3000, "plastic" = 3000, "osmium" = 1000)
-	build_path = /obj/item/weapon/vehicle_assembly/quadbike
+	build_path = /obj/item/vehicle_assembly/quadbike
 
 /*
  * Rigsuits
@@ -798,7 +798,7 @@
 	desc = "A belt holding a compressed space-suit."
 	id = "rigmodule_belt_basic"
 	materials = list(MAT_PLASTEEL = 12000, MAT_GOLD = 3000, MAT_GRAPHITE = 3000, MAT_OSMIUM = 1000, MAT_PLASTIC = 5000)
-	build_path = /obj/item/weapon/rig/robotics
+	build_path = /obj/item/rig/robotics
 
 /datum/design/item/mechfab/rigsuit/jetpack
 	name = "hardsuit maneuvering jets"
@@ -1034,7 +1034,7 @@
 /datum/design/item/mechfab/uav/basic
 	name = "UAV - Recon Skimmer"
 	id = "recon_skimmer"
-	build_path = /obj/item/device/uav
+	build_path = /obj/item/uav
 	time = 20
 	req_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 5, TECH_PHORON = 3, TECH_MAGNET = 4, TECH_POWER = 6)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 6000, "silver" = 4000)

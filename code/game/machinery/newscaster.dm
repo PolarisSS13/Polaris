@@ -73,7 +73,7 @@
 		newChannel.announcement = "Breaking news from [channel_name]!"
 	network_channels += newChannel
 
-/datum/feed_network/proc/SubmitArticle(var/msg, var/author, var/channel_name, var/obj/item/weapon/photo/photo, var/adminMessage = 0, var/message_type = "")
+/datum/feed_network/proc/SubmitArticle(var/msg, var/author, var/channel_name, var/obj/item/photo/photo, var/adminMessage = 0, var/message_type = "")
 	var/datum/feed_message/newMsg = new /datum/feed_message
 	newMsg.author = author
 	newMsg.body = msg
@@ -102,7 +102,7 @@
 		NEWSCASTER.update_icon()
 
 	var/list/receiving_pdas = new
-	for (var/obj/item/device/pda/P in PDAs)
+	for (var/obj/item/pda/P in PDAs)
 		if(!P.owner)
 			continue
 		if(P.toff)
@@ -112,7 +112,7 @@
 	spawn(0)	// get_receptions sleeps further down the line, spawn of elsewhere
 		var/datum/receptions/receptions = get_receptions(null, receiving_pdas) // datums are not atoms, thus we have to assume the newscast network always has reception
 
-		for(var/obj/item/device/pda/PDA in receiving_pdas)
+		for(var/obj/item/pda/PDA in receiving_pdas)
 			if(!(receptions.receiver_reception[PDA] & TELECOMMS_RECEPTION_RECEIVER))
 				continue
 
@@ -170,7 +170,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	light_range = 0
 	anchored = 1
 	var/obj/machinery/exonet_node/node = null
-	circuit = /obj/item/weapon/circuitboard/newscaster
+	circuit = /obj/item/circuitboard/newscaster
 
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "Security Newscaster"
@@ -764,9 +764,9 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 
 /datum/news_photo
 	var/is_synth = 0
-	var/obj/item/weapon/photo/photo = null
+	var/obj/item/photo/photo = null
 
-/datum/news_photo/New(var/obj/item/weapon/photo/p, var/synth)
+/datum/news_photo/New(var/obj/item/photo/p, var/synth)
 	is_synth = synth
 	photo = p
 
@@ -778,14 +778,14 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 				user.put_in_inactive_hand(photo_data.photo)
 		qdel(photo_data)
 
-	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
+	if(istype(user.get_active_hand(), /obj/item/photo))
 		var/obj/item/photo = user.get_active_hand()
 		user.drop_item()
 		photo.loc = src
 		photo_data = new(photo, 0)
 	else if(istype(user,/mob/living/silicon))
 		var/mob/living/silicon/tempAI = user
-		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
+		var/obj/item/photo/selection = tempAI.GetPicture()
 		if(!selection)
 			return
 
@@ -795,7 +795,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 //###################################### NEWSPAPER! ######################################################################
 //########################################################################################################################
 
-/obj/item/weapon/newspaper
+/obj/item/newspaper
 	name = "newspaper"
 	desc = "An issue of The Griffon, the newspaper circulating aboard most stations."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -811,7 +811,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	var/scribble_page = null
 	drop_sound = 'sound/items/drop/wrapper.ogg'
 
-obj/item/weapon/newspaper/attack_self(mob/user as mob)
+obj/item/newspaper/attack_self(mob/user as mob)
 	if(ishuman(user))
 		var/mob/living/carbon/human/human_user = user
 		var/dat
@@ -890,7 +890,7 @@ obj/item/weapon/newspaper/attack_self(mob/user as mob)
 	else
 		to_chat(user, "The paper is full of intelligible symbols!")
 
-obj/item/weapon/newspaper/Topic(href, href_list)
+obj/item/newspaper/Topic(href, href_list)
 	var/mob/living/U = usr
 	..()
 	if((src in U.contents) || (istype(loc, /turf) && in_range(src, U)))
@@ -921,8 +921,8 @@ obj/item/weapon/newspaper/Topic(href, href_list)
 		if(istype(src.loc, /mob))
 			attack_self(src.loc)
 
-obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/pen))
+obj/item/newspaper/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/pen))
 		if(scribble_page == curr_page)
 			to_chat(user, "<FONT COLOR='blue'>There's already a scribble in this page... You wouldn't want to make things too cluttered, would you?</FONT>")
 		else
@@ -942,7 +942,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
-		var/obj/item/weapon/card/id/I = human_user.GetIdCard()
+		var/obj/item/card/id/I = human_user.GetIdCard()
 		if(I)
 			scanned_user = GetNameAndAssignmentFromId(I)
 		else
@@ -953,7 +953,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 
 /obj/machinery/newscaster/proc/print_paper()
 	feedback_inc("newscaster_newspapers_printed",1)
-	var/obj/item/weapon/newspaper/NEWSPAPER = new /obj/item/weapon/newspaper
+	var/obj/item/newspaper/NEWSPAPER = new /obj/item/newspaper
 	for(var/datum/feed_channel/FC in news_network.network_channels)
 		NEWSPAPER.news_content += FC
 	if(news_network.wanted_issue)

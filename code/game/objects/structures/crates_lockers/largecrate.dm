@@ -21,7 +21,7 @@
 	to_chat(user, "<span class='notice'>You need a crowbar to pry this open!</span>")
 	return
 
-/obj/structure/largecrate/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/largecrate/attackby(obj/item/W as obj, mob/user as mob)
 	var/turf/T = get_turf(src)
 	if(!T)
 		to_chat(user, "<span class='notice'>You can't open this here!</span>")
@@ -47,7 +47,7 @@
 	desc = "It comes in a box for the fabricator's sake. Where does the wood come from? ... And why is it lighter?"
 	icon_state = "mulecrate"
 
-/obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/largecrate/hoverpod/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_crowbar())
 		var/obj/item/mecha_parts/mecha_equipment/ME
 		var/obj/mecha/working/hoverpod/H = new (loc)

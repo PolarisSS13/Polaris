@@ -124,7 +124,7 @@
 			. = 1
 			if(get_authentication_level(user) == 2 && !issilicon(usr) && ntn_comm)
 				if(user)
-					var/obj/item/weapon/card/id/id_card = user.GetIdCard()
+					var/obj/item/card/id/id_card = user.GetIdCard()
 					crew_announcement.announcer = GetNameAndAssignmentFromId(id_card)
 				else
 					crew_announcement.announcer = "Unknown"
@@ -310,7 +310,7 @@ proc/post_comm_message(var/message_title, var/message_text)
 	//Old console support
 	for (var/obj/machinery/computer/communications/comm in machines)
 		if (!(comm.stat & (BROKEN | NOPOWER)) && comm.prints_intercept)
-			var/obj/item/weapon/paper/intercept = new /obj/item/weapon/paper( comm.loc )
+			var/obj/item/paper/intercept = new /obj/item/paper( comm.loc )
 			intercept.name = message_title
 			intercept.info = message_text
 

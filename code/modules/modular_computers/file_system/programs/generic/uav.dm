@@ -15,7 +15,7 @@
 
 /datum/nano_module/uav
 	name = "UAV Control program"
-	var/obj/item/device/uav/current_uav = null //The UAV we're watching
+	var/obj/item/uav/current_uav = null //The UAV we're watching
 	var/signal_strength = 0 //Our last signal strength report (cached for a few seconds)
 	var/signal_test_counter = 0 //How long until next signal strength check
 	var/list/viewers //Who's viewing a UAV through us
@@ -53,7 +53,7 @@
 	if(istype(mc_host))
 		for(var/puav in mc_host.paired_uavs)
 			var/weakref/wr = puav
-			var/obj/item/device/uav/U = wr.resolve()
+			var/obj/item/uav/U = wr.resolve()
 			paired_map[++paired_map.len] = list("name" = "[U ? U.nickname : "!!Missing!!"]", "uavref" = "\ref[U]")
 	
 	data["paired_uavs"] = paired_map
@@ -77,7 +77,7 @@
 
 /datum/nano_module/uav/proc/OnTopic(var/mob/user, var/list/href_list)
 	if(href_list["switch_uav"])
-		var/obj/item/device/uav/U = locate(href_list["switch_uav"]) //This is a \ref to the UAV itself
+		var/obj/item/uav/U = locate(href_list["switch_uav"]) //This is a \ref to the UAV itself
 		if(!istype(U))
 			to_chat(usr,"<span class='warning'>Something is blocking the connection to that UAV. In-person investigation is required.</span>")
 			return TOPIC_NOACTION
@@ -133,7 +133,7 @@
 	if(viewing_uav(user))
 		look(user)
 
-/datum/nano_module/uav/proc/set_current(var/obj/item/device/uav/U)
+/datum/nano_module/uav/proc/set_current(var/obj/item/uav/U)
 	if(current_uav == U)
 		return
 

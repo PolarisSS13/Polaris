@@ -1,4 +1,4 @@
-/obj/item/weapon/nullrod
+/obj/item/nullrod
 	name = "null rod"
 	desc = "A rod of pure obsidian, its very presence disrupts and dampens the powers of paranormal phenomenae."
 	icon_state = "nullrod"
@@ -16,7 +16,7 @@
 		to_chat(viewers(user),"<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>")
 		return (BRUTELOSS|FIRELOSS)
 
-/obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
+/obj/item/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 
 	add_attack_logs(user,M,"Hit with [src] (nullrod)")
 
@@ -47,14 +47,14 @@
 			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 			return
 
-/obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob, proximity)
+/obj/item/nullrod/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity)
 		return
 	if (istype(A, /turf/simulated/floor))
 		to_chat(user, "<span class='notice'>You hit the floor with the [src].</span>")
 		call(/obj/effect/rune/proc/revealrunes)(src)
 
-/obj/item/weapon/energy_net
+/obj/item/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."
 	icon = 'icons/effects/effects.dmi'
@@ -63,11 +63,11 @@
 	force = 0
 	var/net_type = /obj/effect/energy_net
 
-/obj/item/weapon/energy_net/dropped()
+/obj/item/energy_net/dropped()
 	spawn(10)
 		if(src) qdel(src)
 
-/obj/item/weapon/energy_net/throw_impact(atom/hit_atom)
+/obj/item/energy_net/throw_impact(atom/hit_atom)
 	..()
 
 	var/mob/living/M = hit_atom

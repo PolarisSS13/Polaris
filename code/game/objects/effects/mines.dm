@@ -7,7 +7,7 @@
 	icon_state = "uglymine"
 	var/triggered = 0
 	var/smoke_strength = 3
-	var/mineitemtype = /obj/item/weapon/mine
+	var/mineitemtype = /obj/item/mine
 	var/panel_open = 0
 	var/datum/wires/mines/wires = null
 	register_as_dangerous_object = TRUE
@@ -63,7 +63,7 @@
 		"<span class='notice'>You very carefully screw the mine's panel [panel_open ? "open" : "closed"].</span>")
 		playsound(src.loc, W.usesound, 50, 1)
 
-	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
+	else if((W.is_wirecutter() || istype(W, /obj/item/multitool)) && panel_open)
 		interact(user)
 	else
 		..()
@@ -75,7 +75,7 @@
 	wires.Interact(user)
 
 /obj/effect/mine/dnascramble
-	mineitemtype = /obj/item/weapon/mine/dnascramble
+	mineitemtype = /obj/item/mine/dnascramble
 
 /obj/effect/mine/dnascramble/explode(var/mob/living/M)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
@@ -92,7 +92,7 @@
 		qdel(src)
 
 /obj/effect/mine/stun
-	mineitemtype = /obj/item/weapon/mine/stun
+	mineitemtype = /obj/item/mine/stun
 
 /obj/effect/mine/stun/explode(var/mob/living/M)
 	triggered = 1
@@ -107,7 +107,7 @@
 		qdel(src)
 
 /obj/effect/mine/n2o
-	mineitemtype = /obj/item/weapon/mine/n2o
+	mineitemtype = /obj/item/mine/n2o
 
 /obj/effect/mine/n2o/explode(var/mob/living/M)
 	triggered = 1
@@ -119,7 +119,7 @@
 		qdel(src)
 
 /obj/effect/mine/phoron
-	mineitemtype = /obj/item/weapon/mine/phoron
+	mineitemtype = /obj/item/mine/phoron
 
 /obj/effect/mine/phoron/explode(var/mob/living/M)
 	triggered = 1
@@ -132,7 +132,7 @@
 		qdel(src)
 
 /obj/effect/mine/kick
-	mineitemtype = /obj/item/weapon/mine/kick
+	mineitemtype = /obj/item/mine/kick
 
 /obj/effect/mine/kick/explode(var/mob/living/M)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
@@ -149,7 +149,7 @@
 		qdel(src)
 
 /obj/effect/mine/frag
-	mineitemtype = /obj/item/weapon/mine/frag
+	mineitemtype = /obj/item/mine/frag
 	var/fragment_types = list(/obj/item/projectile/bullet/pellet/fragment)
 	var/num_fragments = 20  //total number of fragments produced by the grenade
 	//The radius of the circle used to launch projectiles. Lower values mean less projectiles are used but if set too low gaps may appear in the spread pattern
@@ -172,7 +172,7 @@
 /obj/effect/mine/training	//Name and Desc commented out so it's possible to trick people with the training mines
 //	name = "training mine"
 //	desc = "A mine with its payload removed, for EOD training and demonstrations."
-	mineitemtype = /obj/item/weapon/mine/training
+	mineitemtype = /obj/item/mine/training
 
 /obj/effect/mine/training/explode(var/mob/living/M)
 	triggered = 1
@@ -182,7 +182,7 @@
 		qdel(src)
 
 /obj/effect/mine/emp
-	mineitemtype = /obj/item/weapon/mine/emp
+	mineitemtype = /obj/item/mine/emp
 
 /obj/effect/mine/emp/explode(var/mob/living/M)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
@@ -194,7 +194,7 @@
 		qdel(src)
 
 /obj/effect/mine/incendiary
-	mineitemtype = /obj/item/weapon/mine/incendiary
+	mineitemtype = /obj/item/mine/incendiary
 
 /obj/effect/mine/incendiary/explode(var/mob/living/M)
 	triggered = 1
@@ -211,7 +211,7 @@
 /////////////////////////////////////////////
 // The held item version of the above mines
 /////////////////////////////////////////////
-/obj/item/weapon/mine
+/obj/item/mine
 	name = "mine"
 	desc = "A small explosive mine with 'HE' and a grenade symbol on the side."
 	icon = 'icons/obj/weapons.dmi'
@@ -219,7 +219,7 @@
 	var/countdown = 10
 	var/minetype = /obj/effect/mine		//This MUST be an /obj/effect/mine type, or it'll runtime.
 
-/obj/item/weapon/mine/attack_self(mob/user as mob)	// You do not want to move or throw a land mine while priming it... Explosives + Sudden Movement = Bad Times
+/obj/item/mine/attack_self(mob/user as mob)	// You do not want to move or throw a land mine while priming it... Explosives + Sudden Movement = Bad Times
 	add_fingerprint(user)
 	msg_admin_attack("[key_name_admin(user)] primed \a [src]")
 	user.visible_message("[user] starts priming \the [src.name].", "You start priming \the [src.name]. Hold still!")
@@ -231,7 +231,7 @@
 		prime(user, TRUE)
 	return
 
-/obj/item/weapon/mine/proc/prime(mob/user as mob, var/explode_now = FALSE)
+/obj/item/mine/proc/prime(mob/user as mob, var/explode_now = FALSE)
 	visible_message("\The [src.name] beeps as the priming sequence completes.")
 	var/obj/effect/mine/R = new minetype(get_turf(src))
 	src.transfer_fingerprints_to(R)
@@ -241,53 +241,53 @@
 	spawn(0)
 		qdel(src)
 
-/obj/item/weapon/mine/dnascramble
+/obj/item/mine/dnascramble
 	name = "radiation mine"
 	desc = "A small explosive mine with a radiation symbol on the side."
 	minetype = /obj/effect/mine/dnascramble
 
-/obj/item/weapon/mine/phoron
+/obj/item/mine/phoron
 	name = "incendiary mine"
 	desc = "A small explosive mine with a fire symbol on the side."
 	minetype = /obj/effect/mine/phoron
 
-/obj/item/weapon/mine/kick
+/obj/item/mine/kick
 	name = "kick mine"
 	desc = "Concentrated war crimes. Handle with care."
 	minetype = /obj/effect/mine/kick
 
-/obj/item/weapon/mine/n2o
+/obj/item/mine/n2o
 	name = "nitrous oxide mine"
 	desc = "A small explosive mine with three Z's on the side."
 	minetype = /obj/effect/mine/n2o
 
-/obj/item/weapon/mine/stun
+/obj/item/mine/stun
 	name = "stun mine"
 	desc = "A small explosive mine with a lightning bolt symbol on the side."
 	minetype = /obj/effect/mine/stun
 
-/obj/item/weapon/mine/frag
+/obj/item/mine/frag
 	name = "fragmentation mine"
 	desc = "A small explosive mine with 'FRAG' and a grenade symbol on the side."
 	minetype = /obj/effect/mine/frag
 
-/obj/item/weapon/mine/training
+/obj/item/mine/training
 	name = "training mine"
 	desc = "A mine with its payload removed, for EOD training and demonstrations."
 	minetype = /obj/effect/mine/training
 
-/obj/item/weapon/mine/emp
+/obj/item/mine/emp
 	name = "emp mine"
 	desc = "A small explosive mine with a lightning bolt symbol on the side."
 	minetype = /obj/effect/mine/emp
 
-/obj/item/weapon/mine/incendiary
+/obj/item/mine/incendiary
 	name = "incendiary mine"
 	desc = "A small explosive mine with a fire symbol on the side."
 	minetype = /obj/effect/mine/incendiary
 
 // This tells AI mobs to not be dumb and step on mines willingly.
-/obj/item/weapon/mine/is_safe_to_step(mob/living/L)
+/obj/item/mine/is_safe_to_step(mob/living/L)
 	if(!L.hovering)
 		return FALSE
 	return ..()

@@ -23,8 +23,8 @@
 		qdel(src)
 
 	attackby(obj/item/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/device/destTagger))
-			var/obj/item/device/destTagger/O = W
+		if(istype(W, /obj/item/destTagger))
+			var/obj/item/destTagger/O = W
 			if(O.currTag)
 				if(src.sortTag != O.currTag)
 					to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
@@ -39,7 +39,7 @@
 			else
 				to_chat(user, "<span class='warning'>You need to set a destination first!</span>")
 
-		else if(istype(W, /obj/item/weapon/pen))
+		else if(istype(W, /obj/item/pen))
 			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 				if("Title")
 					var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
@@ -133,8 +133,8 @@
 		return
 
 	attackby(obj/item/W as obj, mob/user as mob)
-		if(istype(W, /obj/item/device/destTagger))
-			var/obj/item/device/destTagger/O = W
+		if(istype(W, /obj/item/destTagger))
+			var/obj/item/destTagger/O = W
 			if(O.currTag)
 				if(src.sortTag != O.currTag)
 					to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
@@ -149,7 +149,7 @@
 			else
 				to_chat(user, "<span class='warning'>You need to set a destination first!</span>")
 
-		else if(istype(W, /obj/item/weapon/pen))
+		else if(istype(W, /obj/item/pen))
 			switch(alert("What would you like to alter?",,"Title","Description", "Cancel"))
 				if("Title")
 					var/str = sanitizeSafe(input(usr,"Label text?","Set label",""), MAX_NAME_LEN)
@@ -215,7 +215,7 @@
 			if(examtext)
 				. += "<span class='notice'>It has a note attached which reads, \"[examtext]\"</span>"
 
-/obj/item/weapon/packageWrap
+/obj/item/packageWrap
 	name = "package wrapper"
 	desc = "Like wrapping paper, but less festive."
 	icon = 'icons/obj/items.dmi'
@@ -230,7 +230,7 @@
 		if(!istype(target))	//this really shouldn't be necessary (but it is).	-Pete
 			return
 		if(istype(target, /obj/item/smallDelivery) || istype(target,/obj/structure/bigDelivery) \
-		|| istype(target, /obj/item/weapon/gift) || istype(target, /obj/item/weapon/evidencebag))
+		|| istype(target, /obj/item/gift) || istype(target, /obj/item/evidencebag))
 			return
 		if(target.anchored)
 			return
@@ -242,7 +242,7 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='blue'>Has used [src.name] on \ref[target]</font>")
 
 
-		if (istype(target, /obj/item) && !(istype(target, /obj/item/weapon/storage) && !istype(target,/obj/item/weapon/storage/box)))
+		if (istype(target, /obj/item) && !(istype(target, /obj/item/storage) && !istype(target,/obj/item/storage/box)))
 			var/obj/item/O = target
 			if (src.amount > 1)
 				var/obj/item/smallDelivery/P = new /obj/item/smallDelivery(get_turf(O.loc))	//Aaannd wrap it up!
@@ -305,7 +305,7 @@
 		else
 			to_chat(user, "<font color='blue'>The object you are trying to wrap is unsuitable for the sorting machinery!</font>")
 		if (src.amount <= 0)
-			new /obj/item/weapon/c_tube( src.loc )
+			new /obj/item/c_tube( src.loc )
 			qdel(src)
 			return
 		return
@@ -327,7 +327,7 @@
 		AM.forceMove(T)
 	return ..()
 
-/obj/item/device/destTagger
+/obj/item/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
 	icon_state = "dest_tagger"
@@ -440,8 +440,8 @@
 				playsound(src.loc, I.usesound, 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
-		else if(istype(I, /obj/item/weapon/weldingtool) && c_mode==1)
-			var/obj/item/weapon/weldingtool/W = I
+		else if(istype(I, /obj/item/weldingtool) && c_mode==1)
+			var/obj/item/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src.loc, W.usesound, 50, 1)
 				to_chat(user, "You start slicing the floorweld off the delivery chute.")

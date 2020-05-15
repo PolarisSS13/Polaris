@@ -4,7 +4,7 @@
 	icon_keyboard = "med_key"
 	icon_screen = "dna"
 	light_color = "#315ab4"
-	circuit = /obj/item/weapon/circuitboard/cloning
+	circuit = /obj/item/circuitboard/cloning
 	req_access = list(access_heads) //Only used for record deletion right now.
 	var/obj/machinery/dna_scannernew/scanner = null //Linked scanner. For scanning.
 	var/list/pods = list() //Linked cloning pods.
@@ -13,7 +13,7 @@
 	var/menu = 1 //Which menu screen to display
 	var/list/records = list()
 	var/datum/dna2/record/active_record = null
-	var/obj/item/weapon/disk/data/diskette = null //Mostly so the geneticist can steal everything.
+	var/obj/item/disk/data/diskette = null //Mostly so the geneticist can steal everything.
 	var/loading = 0 // Nice loading text
 
 
@@ -63,7 +63,7 @@
 			P.name = "[initial(P.name)] #[num++]"
 
 /obj/machinery/computer/cloning/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/disk/data)) //INSERT SOME DISKETTES
+	if (istype(W, /obj/item/disk/data)) //INSERT SOME DISKETTES
 		if (!diskette)
 			user.drop_item()
 			W.loc = src
@@ -71,8 +71,8 @@
 			to_chat(user, "You insert [W].")
 			updateUsrDialog()
 			return
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
+	else if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/M = W
 		var/obj/machinery/clonepod/P = M.connecting
 		if(P && !(P in pods))
 			pods += P
@@ -80,7 +80,7 @@
 			P.name = "[initial(P.name)] #[pods.len]"
 			to_chat(user, "<span class='notice'>You connect [P] to [src].</span>")
 
-	else if (menu == 4 && (istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda)))
+	else if (menu == 4 && (istype(W, /obj/item/card/id) || istype(W, /obj/item/pda)))
 		if(check_access(W))
 			records.Remove(active_record)
 			qdel(active_record)
@@ -352,9 +352,9 @@
 			R.genetic_modifiers.Add(mod.type)
 
 	//Add an implant if needed
-	var/obj/item/weapon/implant/health/imp = locate(/obj/item/weapon/implant/health, subject)
+	var/obj/item/implant/health/imp = locate(/obj/item/implant/health, subject)
 	if (isnull(imp))
-		imp = new /obj/item/weapon/implant/health(subject)
+		imp = new /obj/item/implant/health(subject)
 		imp.implanted = subject
 		R.implant = "\ref[imp]"
 	//Update it if needed

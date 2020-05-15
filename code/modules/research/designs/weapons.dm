@@ -23,21 +23,21 @@
 	id = "stunrevolver"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
-	build_path = /obj/item/weapon/gun/energy/stunrevolver
+	build_path = /obj/item/gun/energy/stunrevolver
 	sort_string = "MAAAA"
 
 /datum/design/item/weapon/energy/nuclear_gun
 	id = "nuclear_gun"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "uranium" = 500)
-	build_path = /obj/item/weapon/gun/energy/gun/nuclear
+	build_path = /obj/item/gun/energy/gun/nuclear
 	sort_string = "MAAAB"
 
 /datum/design/item/weapon/energy/phoronpistol
 	id = "ppistol"
 	req_tech = list(TECH_COMBAT = 5, TECH_PHORON = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000, "phoron" = 3000)
-	build_path = /obj/item/weapon/gun/energy/toxgun
+	build_path = /obj/item/gun/energy/toxgun
 	sort_string = "MAAAC"
 
 /datum/design/item/weapon/energy/lasercannon
@@ -45,14 +45,14 @@
 	id = "lasercannon"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 1000, "diamond" = 2000)
-	build_path = /obj/item/weapon/gun/energy/lasercannon
+	build_path = /obj/item/gun/energy/lasercannon
 	sort_string = "MAAAD"
 
 /datum/design/item/weapon/energy/decloner
 	id = "decloner"
 	req_tech = list(TECH_COMBAT = 8, TECH_MATERIAL = 7, TECH_BIO = 5, TECH_POWER = 6)
 	materials = list("gold" = 5000,"uranium" = 10000)
-	build_path = /obj/item/weapon/gun/energy/decloner
+	build_path = /obj/item/gun/energy/decloner
 	sort_string = "MAAAE"
 
 /datum/design/item/weapon/energy/temp_gun
@@ -60,14 +60,14 @@
 	id = "temp_gun"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 4, TECH_POWER = 3, TECH_MAGNET = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 500, "silver" = 3000)
-	build_path = /obj/item/weapon/gun/energy/temperature
+	build_path = /obj/item/gun/energy/temperature
 	sort_string = "MAAAF"
 
 /datum/design/item/weapon/energy/flora_gun
 	id = "flora_gun"
 	req_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 500, "uranium" = 500)
-	build_path = /obj/item/weapon/gun/energy/floragun
+	build_path = /obj/item/gun/energy/floragun
 	sort_string = "MAAAG"
 
 // Ballistic weapons
@@ -81,7 +81,7 @@
 	desc = "An advanced 9mm SMG with a reflective laser optic."
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 8000, "silver" = 2000, "diamond" = 1000)
-	build_path = /obj/item/weapon/gun/projectile/automatic/advanced_smg
+	build_path = /obj/item/gun/projectile/automatic/advanced_smg
 	sort_string = "MABAA"
 
 // Ballistic ammo
@@ -118,28 +118,28 @@
 	id = "phasepistol"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2, TECH_POWER = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 4000)
-	build_path = /obj/item/weapon/gun/energy/phasegun/pistol
+	build_path = /obj/item/gun/energy/phasegun/pistol
 	sort_string = "MACAA"
 
 /datum/design/item/weapon/phase/phase_carbine
 	id = "phasecarbine"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 2, TECH_POWER = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 6000, "glass" = 1500)
-	build_path = /obj/item/weapon/gun/energy/phasegun
+	build_path = /obj/item/gun/energy/phasegun
 	sort_string = "MACAB"
 
 /datum/design/item/weapon/phase/phase_rifle
 	id = "phaserifle"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	materials = list(DEFAULT_WALL_MATERIAL = 7000, "glass" = 2000, "silver" = 500)
-	build_path = /obj/item/weapon/gun/energy/phasegun/rifle
+	build_path = /obj/item/gun/energy/phasegun/rifle
 	sort_string = "MACAC"
 
 /datum/design/item/weapon/phase/phase_cannon
 	id = "phasecannon"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_POWER = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 2000, "silver" = 1000, "diamond" = 750)
-	build_path = /obj/item/weapon/gun/energy/phasegun/cannon
+	build_path = /obj/item/gun/energy/phasegun/cannon
 	sort_string = "MACAD"
 
 // Other weapons
@@ -148,7 +148,7 @@
 	id = "rapidsyringe"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_BIO = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000)
-	build_path = /obj/item/weapon/gun/launcher/syringe/rapid
+	build_path = /obj/item/gun/launcher/syringe/rapid
 	sort_string = "MADAA"
 
 /datum/design/item/weapon/dartgun
@@ -156,7 +156,7 @@
 	id = "dartgun_r"
 	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_BIO = 4, TECH_MAGNET = 3, TECH_ILLEGAL = 1)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "gold" = 5000, "silver" = 2500, "glass" = 750)
-	build_path = /obj/item/weapon/gun/projectile/dartgun/research
+	build_path = /obj/item/gun/projectile/dartgun/research
 	sort_string = "MADAB"
 
 /datum/design/item/weapon/chemsprayer
@@ -164,14 +164,14 @@
 	id = "chemsprayer"
 	req_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_BIO = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 5000, "glass" = 1000)
-	build_path = /obj/item/weapon/reagent_containers/spray/chemsprayer
+	build_path = /obj/item/reagent_containers/spray/chemsprayer
 	sort_string = "MADAC"
 
 /datum/design/item/weapon/fuelrod
 	id = "fuelrod_gun"
 	req_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_PHORON = 4, TECH_ILLEGAL = 5, TECH_MAGNET = 5)
 	materials = list(DEFAULT_WALL_MATERIAL = 10000, "glass" = 2000, "gold" = 500, "silver" = 500, "uranium" = 1000, "phoron" = 3000, "diamond" = 1000)
-	build_path = /obj/item/weapon/gun/magnetic/fuelrod
+	build_path = /obj/item/gun/magnetic/fuelrod
 	sort_string = "MADAD"
 
 // Ammo for those
@@ -208,7 +208,7 @@
 	id = "magnetic_ammo"
 	req_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 4, TECH_MAGNET = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 500, "gold" = 300, "glass" = 150, MAT_PHORON = 100)
-	build_path = /obj/item/weapon/magnetic_ammo
+	build_path = /obj/item/magnetic_ammo
 	sort_string = "MADBE"
 
 // Melee weapons
@@ -222,7 +222,7 @@
 	id = "chargesword"
 	req_tech = list(TECH_COMBAT = 6, TECH_MAGNET = 4, TECH_ENGINEERING = 5, TECH_ILLEGAL = 4, TECH_ARCANE = 1)
 	materials = list(MAT_PLASTEEL = 3500, "glass" = 1000, MAT_LEAD = 2250, MAT_METALHYDROGEN = 500)
-	build_path = /obj/item/weapon/melee/energy/sword/charge
+	build_path = /obj/item/melee/energy/sword/charge
 	sort_string = "MBAAA"
 
 /datum/design/item/weapon/melee/eaxe
@@ -230,7 +230,7 @@
 	id = "chargeaxe"
 	req_tech = list(TECH_COMBAT = 6, TECH_MAGNET = 5, TECH_ENGINEERING = 4, TECH_ILLEGAL = 4)
 	materials = list(MAT_PLASTEEL = 3500, MAT_OSMIUM = 2000, MAT_LEAD = 2000, MAT_METALHYDROGEN = 500)
-	build_path = /obj/item/weapon/melee/energy/axe/charge
+	build_path = /obj/item/melee/energy/axe/charge
 	sort_string = "MBAAB"
 
 // Grenade stuff
@@ -242,5 +242,5 @@
 	id = "large_Grenade"
 	req_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 3000)
-	build_path = /obj/item/weapon/grenade/chem_grenade/large
+	build_path = /obj/item/grenade/chem_grenade/large
 	sort_string = "MCAAA"

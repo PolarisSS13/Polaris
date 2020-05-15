@@ -25,7 +25,7 @@
 	attacktext = list("bitten")
 	attack_sound = 'sound/weapons/bite.ogg'
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat
+	meat_type = /obj/item/reagent_containers/food/snacks/xenomeat
 
 	pixel_x = -16
 

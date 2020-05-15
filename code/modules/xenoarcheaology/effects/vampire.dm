@@ -60,7 +60,7 @@
 
 	if(charges >= 10)
 		charges -= 10
-		var/manifestation = pick(/obj/item/device/soulstone, /mob/living/simple_mob/faithless/cult/strong, /mob/living/simple_mob/creature/cult/strong, /mob/living/simple_mob/animal/space/bats/cult/strong)
+		var/manifestation = pick(/obj/item/soulstone, /mob/living/simple_mob/faithless/cult/strong, /mob/living/simple_mob/creature/cult/strong, /mob/living/simple_mob/animal/space/bats/cult/strong)
 		new manifestation(get_turf(pick(view(1,T))))
 
 	if(charges >= 3)

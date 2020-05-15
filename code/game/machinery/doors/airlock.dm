@@ -26,7 +26,7 @@
 	var/justzap = 0
 	var/safe = 1
 	normalspeed = 1
-	var/obj/item/weapon/airlock_electronics/electronics = null
+	var/obj/item/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
@@ -896,8 +896,8 @@ About the new airlock wires panel:
 	if(istype(C, /mob/living))
 		..()
 		return
-	if(!repairing && istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density)
-		var/obj/item/weapon/weldingtool/W = C
+	if(!repairing && istype(C, /obj/item/weldingtool) && !( src.operating > 0 ) && src.density)
+		var/obj/item/weldingtool/W = C
 		if(W.remove_fuel(0,user))
 			if(!src.welded)
 				src.welded = 1
@@ -921,12 +921,12 @@ About the new airlock wires panel:
 		src.update_icon()
 	else if(C.is_wirecutter())
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/multitool))
+	else if(istype(C, /obj/item/multitool))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/assembly/signaler))
+	else if(istype(C, /obj/item/assembly/signaler))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
-		var/obj/item/weapon/pai_cable/cable = C
+	else if(istype(C, /obj/item/pai_cable))	// -- TLE
+		var/obj/item/pai_cable/cable = C
 		cable.plugin(src, user)
 	else if(!repairing && C.is_crowbar())
 		if(can_remove_electronics())
@@ -950,7 +950,7 @@ About the new airlock wires panel:
 				da.update_state()
 
 				if(operating == -1 || (stat & BROKEN))
-					new /obj/item/weapon/circuitboard/broken(src.loc)
+					new /obj/item/circuitboard/broken(src.loc)
 					operating = 0
 				else
 					if (!electronics) create_electronics()
@@ -971,14 +971,14 @@ About the new airlock wires panel:
 				spawn(0)	close(1)
 
 	// Check if we're using a crowbar or armblade, and if the airlock's unpowered for whatever reason (off, broken, etc).
-	else if(istype(C, /obj/item/weapon))
-		var/obj/item/weapon/W = C
+	else if(istype(C, /obj/item))
+		var/obj/item/W = C
 		if((W.pry == 1) && !arePowerSystemsOn())
 			if(locked)
 				to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
 			else if( !welded && !operating )
-				if(istype(C, /obj/item/weapon/material/twohanded/fireaxe)) // If this is a fireaxe, make sure it's held in two hands.
-					var/obj/item/weapon/material/twohanded/fireaxe/F = C
+				if(istype(C, /obj/item/material/twohanded/fireaxe)) // If this is a fireaxe, make sure it's held in two hands.
+					var/obj/item/material/twohanded/fireaxe/F = C
 					if(!F.wielded)
 						to_chat(user, "<span class='warning'>You need to be wielding \the [F] to do that.</span>")
 						return
@@ -1218,9 +1218,9 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/create_electronics()
 	//create new electronics
 	if (secured_wires)
-		src.electronics = new/obj/item/weapon/airlock_electronics/secure( src.loc )
+		src.electronics = new/obj/item/airlock_electronics/secure( src.loc )
 	else
-		src.electronics = new/obj/item/weapon/airlock_electronics( src.loc )
+		src.electronics = new/obj/item/airlock_electronics( src.loc )
 
 	//update the electronics to match the door's access
 	if(!src.req_access)
@@ -1254,7 +1254,7 @@ About the new airlock wires panel:
 	return
 
 
-/obj/machinery/door/airlock/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/machinery/door/airlock/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			// Old RCD code made it cost 10 units to decon an airlock.
@@ -1266,7 +1266,7 @@ About the new airlock wires panel:
 			)
 	return FALSE
 
-/obj/machinery/door/airlock/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/machinery/door/airlock/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			to_chat(user, span("notice", "You deconstruct \the [src]."))

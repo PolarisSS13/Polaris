@@ -43,7 +43,7 @@ var/datum/uplink/uplink = new()
 
 
 
-/datum/uplink_item/proc/buy(var/obj/item/device/uplink/U, var/mob/user)
+/datum/uplink_item/proc/buy(var/obj/item/uplink/U, var/mob/user)
 	var/extra_args = extra_args(user)
 	if(!extra_args)
 		return
@@ -69,13 +69,13 @@ var/datum/uplink/uplink = new()
 /datum/uplink_item/proc/extra_args(var/mob/user)
 	return 1
 
-/datum/uplink_item/proc/can_buy(obj/item/device/uplink/U)
+/datum/uplink_item/proc/can_buy(obj/item/uplink/U)
 	if(cost(U.uses, U) > U.uses)
 		return 0
 
 	return can_view(U)
 
-/datum/uplink_item/proc/can_view(obj/item/device/uplink/U)
+/datum/uplink_item/proc/can_view(obj/item/uplink/U)
 	// Making the assumption that if no uplink was supplied, then we don't care about antag roles
 	if(!U || !antag_roles.len)
 		return 1
@@ -91,7 +91,7 @@ var/datum/uplink/uplink = new()
 				return 1
 	return 0
 
-/datum/uplink_item/proc/cost(var/telecrystals, obj/item/device/uplink/U)
+/datum/uplink_item/proc/cost(var/telecrystals, obj/item/uplink/U)
 	. = item_cost
 	if(U)
 		. = U.get_item_cost(src, .)
@@ -100,13 +100,13 @@ var/datum/uplink/uplink = new()
 	return desc
 
 // get_goods does not necessarily return physical objects, it is simply a way to acquire the uplink item without paying
-/datum/uplink_item/proc/get_goods(var/obj/item/device/uplink/U, var/loc)
+/datum/uplink_item/proc/get_goods(var/obj/item/uplink/U, var/loc)
 	return 0
 
 /datum/uplink_item/proc/log_icon()
 	return
 
-/datum/uplink_item/proc/purchase_log(obj/item/device/uplink/U)
+/datum/uplink_item/proc/purchase_log(obj/item/uplink/U)
 	feedback_add_details("traitor_uplink_items_bought", "[src]")
 	log_and_message_admins("used \the [U.loc] to buy \a [src]")
 	U.purchase_log[src] = U.purchase_log[src] + 1
@@ -119,7 +119,7 @@ datum/uplink_item/dd_SortValue()
 *	Physical Uplink Entries		*
 *                           	*
 ********************************/
-/datum/uplink_item/item/buy(var/obj/item/device/uplink/U, var/mob/user)
+/datum/uplink_item/item/buy(var/obj/item/uplink/U, var/mob/user)
 	var/obj/item/I = ..()
 	if(!I)
 		return
@@ -133,7 +133,7 @@ datum/uplink_item/dd_SortValue()
 		A.put_in_any_hand_if_possible(I)
 	return I
 
-/datum/uplink_item/item/get_goods(var/obj/item/device/uplink/U, var/loc)
+/datum/uplink_item/item/get_goods(var/obj/item/uplink/U, var/loc)
 	var/obj/item/I = new path(loc)
 	return I
 
@@ -170,7 +170,7 @@ datum/uplink_item/dd_SortValue()
 	var/crate_path = /obj/structure/largecrate
 	var/list/paths = list()	// List of paths to be spawned into the crate.
 
-/datum/uplink_item/crated/get_goods(var/obj/item/device/uplink/U, var/loc)
+/datum/uplink_item/crated/get_goods(var/obj/item/uplink/U, var/loc)
 	var/obj/L = new crate_path(get_turf(loc))
 
 	L.adjust_scale(rand(9, 12) / 10, rand(9, 12) / 10)	// Some variation in the crate / locker size.
@@ -195,7 +195,7 @@ datum/uplink_item/dd_SortValue()
 /****************
 * Support procs *
 ****************/
-/proc/get_random_uplink_items(var/obj/item/device/uplink/U, var/remaining_TC, var/loc)
+/proc/get_random_uplink_items(var/obj/item/uplink/U, var/remaining_TC, var/loc)
 	var/list/bought_items = list()
 	while(remaining_TC)
 		var/datum/uplink_item/I = default_uplink_selection.get_random_item(remaining_TC, U, bought_items)
@@ -206,7 +206,7 @@ datum/uplink_item/dd_SortValue()
 
 	return bought_items
 
-/proc/get_surplus_items(var/obj/item/device/uplink/U, var/remaining_TC, var/loc)
+/proc/get_surplus_items(var/obj/item/uplink/U, var/remaining_TC, var/loc)
 	var/list/bought_items = list()
 	var/override = 1
 	while(remaining_TC)

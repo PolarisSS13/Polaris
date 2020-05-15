@@ -37,7 +37,7 @@
 	data["centcom_access"] = is_centcom
 
 	if(program && program.computer && program.computer.card_slot)
-		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
+		var/obj/item/card/id/id_card = program.computer.card_slot.stored_card
 		data["has_id"] = !!id_card
 		data["id_account_number"] = id_card ? id_card.associated_account_number : null
 		data["id_rank"] = id_card && id_card.assignment ? id_card.assignment : "Unassigned"
@@ -59,7 +59,7 @@
 	data["regions"] = get_accesses()
 
 	if(program.computer.card_slot && program.computer.card_slot.stored_card)
-		var/obj/item/weapon/card/id/id_card = program.computer.card_slot.stored_card
+		var/obj/item/card/id/id_card = program.computer.card_slot.stored_card
 		if(is_centcom)
 			var/list/all_centcom_access = list()
 			for(var/access in get_all_centcom_access())
@@ -92,7 +92,7 @@
 		ui.open()
 
 /datum/nano_module/program/card_mod/proc/format_jobs(list/jobs)
-	var/obj/item/weapon/card/id/id_card = program.computer.card_slot ? program.computer.card_slot.stored_card : null
+	var/obj/item/card/id/id_card = program.computer.card_slot ? program.computer.card_slot.stored_card : null
 	var/list/formatted = list()
 	for(var/job in jobs)
 		formatted.Add(list(list(
@@ -111,8 +111,8 @@
 		return 1
 
 	var/mob/user = usr
-	var/obj/item/weapon/card/id/user_id_card = user.GetIdCard()
-	var/obj/item/weapon/card/id/id_card
+	var/obj/item/card/id/user_id_card = user.GetIdCard()
+	var/obj/item/card/id/id_card
 	if (computer.card_slot)
 		id_card = computer.card_slot.stored_card
 

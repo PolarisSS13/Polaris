@@ -12,17 +12,17 @@
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
-		/obj/item/device/radio/headset/headset_sci,
-		/obj/item/weapon/tank/air,
+		/obj/item/radio/headset/headset_sci,
+		/obj/item/tank/air,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
 		/obj/item/clothing/shoes/boots/winter/science)
 
 /obj/structure/closet/secure_closet/scientist/Initialize()
 	if(prob(50))
-		starts_with += /obj/item/weapon/storage/backpack/dufflebag/sci
+		starts_with += /obj/item/storage/backpack/dufflebag/sci
 	else
-		starts_with += /obj/item/weapon/storage/backpack/toxins
+		starts_with += /obj/item/storage/backpack/toxins
 	return ..()
 
 
@@ -43,14 +43,14 @@
 		/obj/item/clothing/under/rank/research_director/rdalt,
 		/obj/item/clothing/under/rank/research_director/dress_rd,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
-		/obj/item/weapon/cartridge/rd,
+		/obj/item/cartridge/rd,
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/shoes/leather,
 		/obj/item/clothing/gloves/sterile/latex,
-		/obj/item/device/radio/headset/heads/rd,
-		/obj/item/device/radio/headset/heads/rd/alt,
-		/obj/item/weapon/tank/air,
+		/obj/item/radio/headset/heads/rd,
+		/obj/item/radio/headset/heads/rd/alt,
+		/obj/item/tank/air,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
 		/obj/item/clothing/shoes/boots/winter/science)

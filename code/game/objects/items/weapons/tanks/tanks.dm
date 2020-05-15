@@ -4,7 +4,7 @@
 
 var/list/global/tank_gauge_cache = list()
 
-/obj/item/weapon/tank
+/obj/item/tank
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
 	sprite_sheets = list(
@@ -29,7 +29,7 @@ var/list/global/tank_gauge_cache = list()
 	var/integrity = 20
 	var/maxintegrity = 20
 	var/valve_welded = 0
-	var/obj/item/device/tankassemblyproxy/proxyassembly
+	var/obj/item/tankassemblyproxy/proxyassembly
 
 	var/volume = 70
 	var/manipulated_by = null		//Used by _onclick/hud/screen_objects.dm internals to determine if someone has messed with our tank or not.
@@ -42,23 +42,23 @@ var/list/global/tank_gauge_cache = list()
 	description_info = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\
-	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ºC. \
+	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ï¿½C. \
 	The valve itself will close after expending most or all of the contents into the air.<br>\
 	<br>\
 	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
 	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
 
-	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ºC). \
-	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
+	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ï¿½C). \
+	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ï¿½C. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
-/obj/item/weapon/tank/proc/init_proxy()
-	var/obj/item/device/tankassemblyproxy/proxy = new /obj/item/device/tankassemblyproxy(src)
+/obj/item/tank/proc/init_proxy()
+	var/obj/item/tankassemblyproxy/proxy = new /obj/item/tankassemblyproxy(src)
 	proxy.tank = src
 	src.proxyassembly = proxy
 
 
-/obj/item/weapon/tank/Initialize()
+/obj/item/tank/Initialize()
 	..()
 
 	src.init_proxy()
@@ -69,19 +69,19 @@ var/list/global/tank_gauge_cache = list()
 	update_gauge()
 	return
 
-/obj/item/weapon/tank/Destroy()
+/obj/item/tank/Destroy()
 	QDEL_NULL(air_contents)
 
 	STOP_PROCESSING(SSobj, src)
 	QDEL_NULL(src.proxyassembly)
 
-	if(istype(loc, /obj/item/device/transfer_valve))
-		var/obj/item/device/transfer_valve/TTV = loc
+	if(istype(loc, /obj/item/transfer_valve))
+		var/obj/item/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
 
 	. = ..()
 
-/obj/item/weapon/tank/examine(mob/user)
+/obj/item/tank/examine(mob/user)
 	. = ..()
 	if(loc == user)
 		var/celsius_temperature = air_contents.temperature - T0C
@@ -109,13 +109,13 @@ var/list/global/tank_gauge_cache = list()
 		. += "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>"
 
 
-/obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/tank/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
 
-	if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
-		var/obj/item/device/analyzer/A = W
+	if ((istype(W, /obj/item/analyzer)) && get_dist(user, src) <= 1)
+		var/obj/item/analyzer/A = W
 		A.analyze_gases(src, user)
 	else if (istype(W,/obj/item/latexballon))
 		var/obj/item/latexballon/LB = W
@@ -138,7 +138,7 @@ var/list/global/tank_gauge_cache = list()
 				src.overlays -= "bomb_assembly"
 				to_chat(user, "<span class='notice'>You cut the wire and remove the device.</span>")
 
-				var/obj/item/device/assembly_holder/assy = src.proxyassembly.assembly
+				var/obj/item/assembly_holder/assy = src.proxyassembly.assembly
 				if(assy.a_left && assy.a_right)
 					assy.dropInto(usr.loc)
 					assy.master = null
@@ -170,7 +170,7 @@ var/list/global/tank_gauge_cache = list()
 
 
 
-	if(istype(W, /obj/item/device/assembly_holder))
+	if(istype(W, /obj/item/assembly_holder))
 		if(wired)
 			to_chat(user, "<span class='notice'>You begin attaching the assembly to \the [src].</span>")
 			if(do_after(user, 50, src))
@@ -184,8 +184,8 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You need to wire the device up first.</span>")
 
 
-	if(istype(W, /obj/item/weapon/weldingtool/))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool/))
+		var/obj/item/weldingtool/WT = W
 		if(WT.remove_fuel(1,user))
 			if(!valve_welded)
 				to_chat(user, "<span class='notice'>You begin welding the \the [src] emergency pressure relief valve.</span>")
@@ -208,7 +208,7 @@ var/list/global/tank_gauge_cache = list()
 
 
 
-/obj/item/weapon/tank/attack_self(mob/user as mob)
+/obj/item/tank/attack_self(mob/user as mob)
 	add_fingerprint(user)
 	if (!(src.air_contents))
 		return
@@ -219,10 +219,10 @@ var/list/global/tank_gauge_cache = list()
 		src.proxyassembly.assembly.attack_self(user)
 
 
-/obj/item/weapon/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
+/obj/item/tank/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/mob/living/carbon/location = null
 
-	if(istype(loc, /obj/item/weapon/rig))		// check for tanks in rigs
+	if(istype(loc, /obj/item/rig))		// check for tanks in rigs
 		if(istype(loc.loc, /mob/living/carbon))
 			location = loc.loc
 	else if(istype(loc, /mob/living/carbon))
@@ -250,7 +250,7 @@ var/list/global/tank_gauge_cache = list()
 		else if(src in location)		// or if tank is in the mobs possession
 			if(!location.internal)		// and they do not have any active internals
 				mask_check = 1
-		else if(istype(src.loc, /obj/item/weapon/rig) && src.loc in location)	// or the rig is in the mobs possession
+		else if(istype(src.loc, /obj/item/rig) && src.loc in location)	// or the rig is in the mobs possession
 			if(!location.internal)		// and they do not have any active internals
 				mask_check = 1
 
@@ -275,7 +275,7 @@ var/list/global/tank_gauge_cache = list()
 		// auto update every Master Controller tick
 		ui.set_auto_update(1)
 
-/obj/item/weapon/tank/Topic(href, href_list)
+/obj/item/tank/Topic(href, href_list)
 	..()
 	if (usr.stat|| usr.restrained())
 		return 0
@@ -297,7 +297,7 @@ var/list/global/tank_gauge_cache = list()
 	src.add_fingerprint(usr)
 	return 1
 
-/obj/item/weapon/tank/proc/toggle_valve(var/mob/user)
+/obj/item/tank/proc/toggle_valve(var/mob/user)
 	if(istype(loc,/mob/living/carbon))
 		var/mob/living/carbon/location = loc
 		if(location.internal == src)
@@ -325,22 +325,22 @@ var/list/global/tank_gauge_cache = list()
 
 
 
-/obj/item/weapon/tank/remove_air(amount)
+/obj/item/tank/remove_air(amount)
 	return air_contents.remove(amount)
 
-/obj/item/weapon/tank/proc/remove_air_by_flag(flag, amount)
+/obj/item/tank/proc/remove_air_by_flag(flag, amount)
 	return air_contents.remove_by_flag(flag, amount)
 
-/obj/item/weapon/tank/return_air()
+/obj/item/tank/return_air()
 	return air_contents
 
-/obj/item/weapon/tank/assume_air(datum/gas_mixture/giver)
+/obj/item/tank/assume_air(datum/gas_mixture/giver)
 	air_contents.merge(giver)
 
 	check_status()
 	return 1
 
-/obj/item/weapon/tank/proc/remove_air_volume(volume_to_return)
+/obj/item/tank/proc/remove_air_volume(volume_to_return)
 	if(!air_contents)
 		return null
 
@@ -352,7 +352,7 @@ var/list/global/tank_gauge_cache = list()
 
 	return remove_air(moles_needed)
 
-/obj/item/weapon/tank/process()
+/obj/item/tank/process()
 	//Allow for reactions
 	air_contents.react() //cooking up air tanks - add phoron and oxygen, then heat above PHORON_MINIMUM_BURN_TEMPERATURE
 	if(gauge_icon)
@@ -360,7 +360,7 @@ var/list/global/tank_gauge_cache = list()
 	check_status()
 
 
-/obj/item/weapon/tank/proc/add_bomb_overlay()
+/obj/item/tank/proc/add_bomb_overlay()
 	if(src.wired)
 		src.overlays += "bomb_assembly"
 		if(src.proxyassembly.assembly)
@@ -370,7 +370,7 @@ var/list/global/tank_gauge_cache = list()
 			overlays += test
 
 
-/obj/item/weapon/tank/proc/update_gauge()
+/obj/item/tank/proc/update_gauge()
 	var/gauge_pressure = 0
 	if(air_contents)
 		gauge_pressure = air_contents.return_pressure()
@@ -395,7 +395,7 @@ var/list/global/tank_gauge_cache = list()
 
 
 
-/obj/item/weapon/tank/proc/check_status()
+/obj/item/tank/proc/check_status()
 	//Handle exploding, leaking, and rupturing of the tank
 
 	if(!air_contents)
@@ -406,7 +406,7 @@ var/list/global/tank_gauge_cache = list()
 
 	if(pressure > TANK_FRAGMENT_PRESSURE)
 		if(integrity <= 7)
-			if(!istype(src.loc,/obj/item/device/transfer_valve))
+			if(!istype(src.loc,/obj/item/transfer_valve))
 				message_admins("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 				log_game("Explosive tank rupture! last key to touch the tank was [src.fingerprintslast].")
 
@@ -441,8 +441,8 @@ var/list/global/tank_gauge_cache = list()
 			var/num_fragments = round(rand(8,10) * sqrt(strength * mult))
 			src.fragmentate(T, num_fragments, rand(5) + 7, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 7,/obj/item/projectile/bullet/pellet/fragment/tank = 2,/obj/item/projectile/bullet/pellet/fragment/strong = 1))
 
-			if(istype(loc, /obj/item/device/transfer_valve))
-				var/obj/item/device/transfer_valve/TTV = loc
+			if(istype(loc, /obj/item/transfer_valve))
+				var/obj/item/transfer_valve/TTV = loc
 				TTV.remove_tank(src)
 				qdel(TTV)
 
@@ -478,8 +478,8 @@ var/list/global/tank_gauge_cache = list()
 			var/num_fragments = round(rand(6,8) * sqrt(strength * mult)) //Less chunks, but bigger
 			src.fragmentate(T, num_fragments, 7, list(/obj/item/projectile/bullet/pellet/fragment/tank/small = 1,/obj/item/projectile/bullet/pellet/fragment/tank = 5,/obj/item/projectile/bullet/pellet/fragment/strong = 4))
 
-			if(istype(loc, /obj/item/device/transfer_valve))
-				var/obj/item/device/transfer_valve/TTV = loc
+			if(istype(loc, /obj/item/transfer_valve))
+				var/obj/item/transfer_valve/TTV = loc
 				TTV.remove_tank(src)
 
 
@@ -536,9 +536,9 @@ var/list/global/tank_gauge_cache = list()
 ///Prewelded tanks
 /////////////////////////////////
 
-/obj/item/weapon/tank/phoron/welded
+/obj/item/tank/phoron/welded
 	valve_welded = 1
-/obj/item/weapon/tank/oxygen/welded
+/obj/item/tank/oxygen/welded
 	valve_welded = 1
 
 
@@ -546,7 +546,7 @@ var/list/global/tank_gauge_cache = list()
 ///Onetankbombs (added as actual items)
 /////////////////////////////////
 
-/obj/item/weapon/tank/proc/onetankbomb(var/fill = 1)
+/obj/item/tank/proc/onetankbomb(var/fill = 1)
 	var/phoron_amt = 4 + rand(4)
 	var/oxygen_amt = 6 + rand(8)
 
@@ -566,7 +566,7 @@ var/list/global/tank_gauge_cache = list()
 
 	src.wired = 1
 
-	var/obj/item/device/assembly_holder/H = new(src)
+	var/obj/item/assembly_holder/H = new(src)
 	src.proxyassembly.assembly = H
 	H.master = src.proxyassembly
 
@@ -575,28 +575,28 @@ var/list/global/tank_gauge_cache = list()
 	src.overlays += "bomb_assembly"
 
 
-/obj/item/weapon/tank/phoron/onetankbomb/New()
+/obj/item/tank/phoron/onetankbomb/New()
 	..()
 	src.onetankbomb()
 
-/obj/item/weapon/tank/oxygen/onetankbomb/New()
+/obj/item/tank/oxygen/onetankbomb/New()
 	..()
 	src.onetankbomb()
 
 
-/obj/item/weapon/tank/phoron/onetankbomb/full/New()
+/obj/item/tank/phoron/onetankbomb/full/New()
 	..()
 	src.onetankbomb(2)
 
-/obj/item/weapon/tank/oxygen/onetankbomb/full/New()
+/obj/item/tank/oxygen/onetankbomb/full/New()
 	..()
 	src.onetankbomb(2)
 
-/obj/item/weapon/tank/phoron/onetankbomb/small/New()
+/obj/item/tank/phoron/onetankbomb/small/New()
 	..()
 	src.onetankbomb(0)
 
-/obj/item/weapon/tank/oxygen/onetankbomb/small/New()
+/obj/item/tank/oxygen/onetankbomb/small/New()
 	..()
 	src.onetankbomb(0)
 
@@ -604,23 +604,23 @@ var/list/global/tank_gauge_cache = list()
 ///Pulled from rewritten bomb.dm
 /////////////////////////////////
 
-/obj/item/device/tankassemblyproxy
+/obj/item/tankassemblyproxy
 	name = "Tank assembly proxy"
 	desc = "Used as a stand in to trigger single tank assemblies... but you shouldn't see this."
-	var/obj/item/weapon/tank/tank = null
-	var/obj/item/device/assembly_holder/assembly = null
+	var/obj/item/tank/tank = null
+	var/obj/item/assembly_holder/assembly = null
 
 
-/obj/item/device/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
+/obj/item/tankassemblyproxy/receive_signal()	//This is mainly called by the sensor through sense() to the holder, and from the holder to here.
 	tank.ignite()	//boom (or not boom if you made shijwtty mix)
 
-/obj/item/device/tankassemblyproxy/Destroy()
+/obj/item/tankassemblyproxy/Destroy()
 	. = ..()
 	tank = null
 	assembly = null
 
-/obj/item/weapon/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
-	var/obj/item/device/assembly_holder/S = W
+/obj/item/tank/proc/assemble_bomb(W,user)	//Bomb assembly proc. This turns assembly+tank into a bomb
+	var/obj/item/assembly_holder/S = W
 	var/mob/M = user
 	if(!S.secured)										//Check if the assembly is secured
 		return
@@ -644,9 +644,9 @@ var/list/global/tank_gauge_cache = list()
 	return
 
 
-/obj/item/weapon/tank/proc/ignite()	//This happens when a bomb is told to explode
+/obj/item/tank/proc/ignite()	//This happens when a bomb is told to explode
 
-	var/obj/item/device/assembly_holder/assy = src.proxyassembly.assembly
+	var/obj/item/assembly_holder/assy = src.proxyassembly.assembly
 	var/ign = assy.a_right
 	var/obj/item/other = assy.a_left
 
@@ -665,7 +665,7 @@ var/list/global/tank_gauge_cache = list()
 	air_contents.add_thermal_energy(15000)
 
 
-/obj/item/device/tankassemblyproxy/update_icon()
+/obj/item/tankassemblyproxy/update_icon()
 	if(assembly)
 		tank.update_icon()
 		tank.overlays += "bomb_assembly"
@@ -673,6 +673,6 @@ var/list/global/tank_gauge_cache = list()
 		tank.update_icon()
 		tank.overlays -= "bomb_assembly"
 
-/obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
 	if(src.assembly)
 		src.assembly.HasProximity(AM)

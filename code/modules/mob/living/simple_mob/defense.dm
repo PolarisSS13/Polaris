@@ -32,7 +32,7 @@
 				L.visible_message("<span class='warning'>\The [L] tries to grab \the [src] but fails!</span>")
 				return
 
-			var/obj/item/weapon/grab/G = new /obj/item/weapon/grab(L, src)
+			var/obj/item/grab/G = new /obj/item/grab(L, src)
 
 			L.put_in_active_hand(G)
 
@@ -69,7 +69,7 @@
 			var/datum/gender/T = gender_datums[src.get_visible_gender()]
 			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring [T.him] back to life.</span>") // the gender lookup is somewhat overkill, but it functions identically to the obsolete gender macros and future-proofs this code
 	if(meat_type && (stat == DEAD))	//if the animal has a meat, and if it is dead.
-		if(istype(O, /obj/item/weapon/material/knife))
+		if(istype(O, /obj/item/material/knife))
 			harvest(user)
 
 	if(user.a_intent == I_HELP && harvest_tool && istype(O, harvest_tool) && stat != DEAD)
@@ -99,7 +99,7 @@
 	//Animals can't be stunned(?)
 	if(O.damtype == HALLOSS)
 		effective_force = 0
-	if(supernatural && istype(O,/obj/item/weapon/nullrod))
+	if(supernatural && istype(O,/obj/item/nullrod))
 		effective_force *= 2
 		purge = 3
 	if(O.force <= resistance)

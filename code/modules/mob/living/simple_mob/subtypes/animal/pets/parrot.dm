@@ -9,7 +9,7 @@
 
 	// A headset, so that talking parrots can yell at the crew over comms.
 	// If set to a type, on initialize it will be instantiated into that type.
-	var/obj/item/device/radio/headset/my_headset = null
+	var/obj/item/radio/headset/my_headset = null
 
 // Say list
 /datum/say_list/bird/poly
@@ -44,13 +44,13 @@
 /mob/living/simple_mob/animal/passive/bird/parrot/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	..()
 	if(message_mode)
-		if(my_headset && istype(my_headset, /obj/item/device/radio))
+		if(my_headset && istype(my_headset, /obj/item/radio))
 			my_headset.talk_into(src, message, message_mode, verb, speaking)
 			used_radios += my_headset
 
 // Clicked on while holding an object.
 /mob/living/simple_mob/animal/passive/bird/parrot/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/device/radio/headset))
+	if(istype(I, /obj/item/radio/headset))
 		give_headset(I, user)
 		return
 	return ..()
@@ -63,7 +63,7 @@
 		..()
 
 
-/mob/living/simple_mob/animal/passive/bird/parrot/proc/give_headset(obj/item/device/radio/headset/new_headset, mob/living/user)
+/mob/living/simple_mob/animal/passive/bird/parrot/proc/give_headset(obj/item/radio/headset/new_headset, mob/living/user)
 	if(!istype(new_headset))
 		to_chat(user, span("warning", "\The [new_headset] isn't a headset."))
 		return
@@ -109,12 +109,12 @@
 	icon_rest = "poly-held"
 	icon_dead = "poly-dead"
 	tt_desc = "E Ara macao"
-	my_headset = /obj/item/device/radio/headset/headset_eng
+	my_headset = /obj/item/radio/headset/headset_eng
 	say_list_type = /datum/say_list/bird/poly
 
 // Best Bird with best headset.
 /mob/living/simple_mob/animal/passive/bird/parrot/poly/ultimate
-	my_headset = /obj/item/device/radio/headset/omni
+	my_headset = /obj/item/radio/headset/omni
 
 /mob/living/simple_mob/animal/passive/bird/parrot/kea
 	name = "kea"

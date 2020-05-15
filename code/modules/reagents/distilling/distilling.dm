@@ -54,22 +54,22 @@
 	var/image/overlay_connected
 
 // Our unique beaker, used in its unique recipes to ensure things can only react inside this machine and minimize oddities from trying to transfer to a machine and back.
-	var/obj/item/weapon/reagent_containers/glass/distilling/Reservoir
+	var/obj/item/reagent_containers/glass/distilling/Reservoir
 
-	var/obj/item/weapon/reagent_containers/glass/InputBeaker
-	var/obj/item/weapon/reagent_containers/glass/OutputBeaker
+	var/obj/item/reagent_containers/glass/InputBeaker
+	var/obj/item/reagent_containers/glass/OutputBeaker
 
 // A multiplier for the production amount. This should really only ever be lower than one, otherwise you end up with duping.
 	var/efficiency = 1
 
-/obj/item/weapon/reagent_containers/glass/distilling
+/obj/item/reagent_containers/glass/distilling
 	name = "distilling chamber"
 	desc = "You should not be seeing this."
 	volume = 600
 
 	var/obj/machinery/portable_atmospherics/powered/reagent_distillery/Master
 
-/obj/item/weapon/reagent_containers/glass/distilling/Destroy()
+/obj/item/reagent_containers/glass/distilling/Destroy()
 	Master = null
 	..()
 
@@ -216,9 +216,9 @@
 
 	update_icon()
 
-/obj/machinery/portable_atmospherics/powered/reagent_distillery/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/attackby(obj/item/W as obj, mob/user as mob)
 	var/list/options = list()
-	if(istype(W, /obj/item/weapon/reagent_containers/glass))
+	if(istype(W, /obj/item/reagent_containers/glass))
 		if(!InputBeaker)
 			options["install input"] = radial_install_input
 		if(!OutputBeaker)

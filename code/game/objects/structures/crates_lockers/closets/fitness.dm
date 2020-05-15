@@ -48,7 +48,7 @@
 	icon_closed = "red"
 
 	starts_with = list(
-		/obj/item/weapon/gun/energy/lasertag/red = 5,
+		/obj/item/gun/energy/lasertag/red = 5,
 		/obj/item/clothing/suit/redtag = 5)
 
 
@@ -59,5 +59,5 @@
 	icon_closed = "blue"
 
 	starts_with = list(
-		/obj/item/weapon/gun/energy/lasertag/blue = 5,
+		/obj/item/gun/energy/lasertag/blue = 5,
 		/obj/item/clothing/suit/bluetag = 5)

@@ -3,14 +3,14 @@
 	desc = "An electronic radio system."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "power_mod"
-	var/obj/item/device/pda/hostpda = null
+	var/obj/item/pda/hostpda = null
 
 	var/on = 0 //Are we currently active??
 	var/menu_message = ""
 
 	New()
 		..()
-		if (istype(loc.loc, /obj/item/device/pda))
+		if (istype(loc.loc, /obj/item/pda))
 			hostpda = loc.loc
 
 	proc/post_signal(var/freq, var/key, var/value, var/key2, var/value2, var/key3, var/value3, s_filter)
@@ -54,7 +54,7 @@
 	// create/populate list as they are recvd
 
 	receive_signal(datum/signal/signal)
-//		var/obj/item/device/pda/P = src.loc
+//		var/obj/item/pda/P = src.loc
 
 		/*
 		to_world("recvd:[P] : [signal.source]")
@@ -76,7 +76,7 @@
 
 	Topic(href, href_list)
 		..()
-		var/obj/item/device/pda/PDA = src.hostpda
+		var/obj/item/pda/PDA = src.hostpda
 
 		switch(href_list["op"])
 

@@ -12,7 +12,7 @@
 	var/list/network
 	var/mapping = 0//For the overview file, interesting bit of code.
 	var/cache_id = 0
-	circuit = /obj/item/weapon/circuitboard/security
+	circuit = /obj/item/circuitboard/security
 
 /obj/machinery/computer/security/New()
 	if(!network)
@@ -222,8 +222,8 @@
 	light_color = "#FFEEDB"
 	light_range_on = 2
 	network = list(NETWORK_THUNDER)
-	circuit = /obj/item/weapon/circuitboard/security/telescreen/entertainment
-	var/obj/item/device/radio/radio = null
+	circuit = /obj/item/circuitboard/security/telescreen/entertainment
+	var/obj/item/radio/radio = null
 
 /obj/machinery/computer/security/telescreen/entertainment/Initialize()
 	. = ..()
@@ -248,7 +248,7 @@
 	icon_state = "television"
 	icon_keyboard = null
 	icon_screen = "detective_tv"
-	circuit = /obj/item/weapon/circuitboard/security/tv
+	circuit = /obj/item/circuitboard/security/tv
 	light_color = "#3848B3"
 	light_power_on = 0.5
 
@@ -258,7 +258,7 @@
 	icon_keyboard = "mining_key"
 	icon_screen = "mining"
 	network = list("Mining Outpost")
-	circuit = /obj/item/weapon/circuitboard/security/mining
+	circuit = /obj/item/circuitboard/security/mining
 	light_color = "#F9BBFC"
 
 /obj/machinery/computer/security/engineering
@@ -266,7 +266,7 @@
 	desc = "Used to monitor fires and breaches."
 	icon_keyboard = "power_key"
 	icon_screen = "engie_cams"
-	circuit = /obj/item/weapon/circuitboard/security/engineering
+	circuit = /obj/item/circuitboard/security/engineering
 	light_color = "#FAC54B"
 
 /obj/machinery/computer/security/engineering/New()

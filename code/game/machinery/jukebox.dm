@@ -18,7 +18,7 @@ datum/track/New(var/title_name, var/audio)
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 100
-	circuit = /obj/item/weapon/circuitboard/jukebox
+	circuit = /obj/item/circuitboard/jukebox
 	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0
@@ -80,7 +80,7 @@ datum/track/New(var/title_name, var/audio)
 		return
 	if(W.is_wirecutter())
 		return wires.Interact(user)
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		return wires.Interact(user)
 	if(W.is_wrench())
 		if(playing)

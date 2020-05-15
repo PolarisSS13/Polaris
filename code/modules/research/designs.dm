@@ -66,7 +66,7 @@ other types of metals and chemistry for reagents).
 //Make sure items don't get free power
 /datum/design/item/Fabricate()
 	var/obj/item/I = ..()
-	var/obj/item/weapon/cell/C = I.get_cell()
+	var/obj/item/cell/C = I.get_cell()
 	if(C)
 		C.charge = 0
 		I.update_icon()

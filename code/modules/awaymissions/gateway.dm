@@ -131,8 +131,8 @@ obj/machinery/gateway/centerstation/process()
 		return
 
 
-/obj/machinery/gateway/centerstation/attackby(obj/item/device/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/device/multitool))
+/obj/machinery/gateway/centerstation/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/multitool))
 		to_chat(user, "<font color='black'>The gate is already calibrated, there is no work for you to do here.</font>")
 		return
 
@@ -218,7 +218,7 @@ obj/machinery/gateway/centerstation/process()
 	if(!ready)	return
 	if(!active)	return
 	if(istype(M, /mob/living/carbon))
-		for(var/obj/item/weapon/implant/exile/E in M)//Checking that there is an exile implant in the contents
+		for(var/obj/item/implant/exile/E in M)//Checking that there is an exile implant in the contents
 			if(E.imp_in == M)//Checking that it's actually implanted vs just in their pocket
 				to_chat(M, "<font color='black'>The station gate has detected your exile implant and is blocking your entry.</font>")
 				return
@@ -226,8 +226,8 @@ obj/machinery/gateway/centerstation/process()
 	M.set_dir(SOUTH)
 
 
-/obj/machinery/gateway/centeraway/attackby(obj/item/device/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/device/multitool))
+/obj/machinery/gateway/centeraway/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/multitool))
 		if(calibrated)
 			to_chat(user, "<font color='black'>The gate is already calibrated, there is no work for you to do here.</font>")
 			return

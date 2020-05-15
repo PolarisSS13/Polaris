@@ -18,9 +18,9 @@
 	plane = TURF_PLANE
 	layer = UNDERWATER_LAYER
 
-	holder_type = /obj/item/weapon/holder/fish
+	holder_type = /obj/item/holder/fish
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat/fish
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/fish
 
 	// By default they can be in any water turf.  Subtypes might restrict to deep/shallow etc
 	var/global/list/suitable_turf_types =  list(
@@ -113,7 +113,7 @@
 
 	catalogue_data = list(/datum/category_item/catalogue/fauna/javelin)
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/sif
 
 /datum/category_item/catalogue/fauna/icebass
 	name = "Sivian Fauna - Glitter Bass"
@@ -140,7 +140,7 @@
 
 	catalogue_data = list(/datum/category_item/catalogue/fauna/icebass)
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/sif
 
 	var/max_red = 150
 	var/min_red = 50
@@ -229,7 +229,7 @@
 
 	var/image/head_image
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/sif
 
 /mob/living/simple_mob/animal/passive/fish/rockfish/Initialize()
 	..()
@@ -275,7 +275,7 @@
 
 	has_eye_glow = TRUE
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/sif
 
 /datum/category_item/catalogue/fauna/murkin
 	name = "Sivian Fauna - Murkfish"
@@ -302,4 +302,4 @@
 
 	catalogue_data = list(/datum/category_item/catalogue/fauna/murkin)
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat/sif/murkfish
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/sif/murkfish

@@ -90,11 +90,11 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 
 	attackby(I as obj, user as mob)
-		if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
+		if(istype(I, /obj/item/book/tome) && iscultist(user))
 			to_chat(user, "You retrace your steps, carefully undoing the lines of the rune.")
 			qdel(src)
 			return
-		else if(istype(I, /obj/item/weapon/nullrod))
+		else if(istype(I, /obj/item/nullrod))
 			to_chat(user, "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>")
 			qdel(src)
 			return
@@ -177,7 +177,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		check_icon()
 			icon = get_uristrune_cult(word1, word2, word3)
 
-/obj/item/weapon/book/tome
+/obj/item/book/tome
 	name = "arcane tome"
 	icon = 'icons/obj/weapons.dmi'
 	icon_state ="tome"
@@ -428,10 +428,10 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		else
 			. += "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
-/obj/item/weapon/book/tome/cultify()
+/obj/item/book/tome/cultify()
 	return
 
-/obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
+/obj/item/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = ITEMSIZE_SMALL
 	var/cultistsonly = 1
 	attack_self(mob/user as mob)

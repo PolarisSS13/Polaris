@@ -24,7 +24,7 @@
 		/obj/item/clothing/suit/bio_suit/virology,
 		/obj/item/clothing/head/bio_hood/virology,
 		/obj/item/clothing/mask/gas,
-		/obj/item/weapon/tank/oxygen)
+		/obj/item/tank/oxygen)
 
 
 /obj/structure/closet/l3closet/security
@@ -35,7 +35,7 @@
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/security,
 		/obj/item/clothing/head/bio_hood/security,
-		/obj/item/weapon/gun/energy/taser/xeno/sec)
+		/obj/item/gun/energy/taser/xeno/sec)
 
 
 /obj/structure/closet/l3closet/janitor
@@ -47,7 +47,7 @@
 		/obj/item/clothing/suit/bio_suit/janitor = 2,
 		/obj/item/clothing/head/bio_hood/janitor = 2,
 		/obj/item/clothing/mask/gas = 2,
-		/obj/item/weapon/tank/emergency/oxygen/engi = 2)
+		/obj/item/tank/emergency/oxygen/engi = 2)
 
 
 /obj/structure/closet/l3closet/scientist

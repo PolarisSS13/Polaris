@@ -7,7 +7,7 @@
 "g" = (/obj/structure/flora/ausbushes/grassybush,/turf/template_noop,/area/submap/Rocky2)
 "h" = (/obj/structure/flora/ausbushes/fullgrass,/turf/template_noop,/area/submap/Rocky2)
 "i" = (/obj/structure/flora/ausbushes/sparsegrass,/turf/template_noop,/area/submap/Rocky2)
-"j" = (/obj/item/weapon/shovel,/turf/template_noop,/area/submap/Rocky2)
+"j" = (/obj/item/shovel,/turf/template_noop,/area/submap/Rocky2)
 "k" = (/obj/structure/flora/ausbushes/sunnybush,/turf/template_noop,/area/submap/Rocky2)
 "l" = (/obj/structure/flora/ausbushes/stalkybush,/turf/template_noop,/area/submap/Rocky2)
 "m" = (/obj/structure/flora/tree/dead,/turf/template_noop,/area/submap/Rocky2)

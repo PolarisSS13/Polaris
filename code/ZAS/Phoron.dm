@@ -45,7 +45,7 @@ obj/var/contaminated = 0
 	//Clothing and backpacks can be contaminated.
 	if(flags & PHORONGUARD)
 		return 0
-	else if(istype(src,/obj/item/weapon/storage/backpack))
+	else if(istype(src,/obj/item/storage/backpack))
 		return 0 //Cannot be washed :(
 	else if(istype(src,/obj/item/clothing))
 		return 1
@@ -76,7 +76,7 @@ obj/var/contaminated = 0
 			suit_contamination() //Phoron can sometimes get through such an open suit.
 
 //Cannot wash backpacks currently.
-//	if(istype(back,/obj/item/weapon/storage/backpack))
+//	if(istype(back,/obj/item/storage/backpack))
 //		back.contaminate()
 
 /mob/proc/pl_effects()

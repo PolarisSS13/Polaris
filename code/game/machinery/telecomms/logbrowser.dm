@@ -11,7 +11,7 @@
 	var/screen = 0				// the screen number:
 	var/list/servers = list()	// the servers located by the computer
 	var/obj/machinery/telecomms/server/SelectedServer
-	circuit = /obj/item/weapon/circuitboard/comm_server
+	circuit = /obj/item/circuitboard/comm_server
 
 	var/network = "NULL"		// the network to probe
 	var/temp = ""				// temporary feedback messages

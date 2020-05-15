@@ -4,7 +4,7 @@
 	icon_state = "coffin"
 	icon_closed = "coffin"
 	icon_opened = "coffin_open"
-	seal_tool = /obj/item/weapon/tool/screwdriver
+	seal_tool = /obj/item/tool/screwdriver
 	breakout_sound = 'sound/weapons/tablehit1.ogg'
 
 /obj/structure/closet/coffin/update_icon()
@@ -69,9 +69,9 @@
 		var/limb_damage = rand(5,25)
 		H.adjustBruteLoss(limb_damage)
 
-/obj/structure/closet/grave/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/grave/attackby(obj/item/W as obj, mob/user as mob)
 	if(src.opened)
-		if(istype(W, /obj/item/weapon/shovel))
+		if(istype(W, /obj/item/shovel))
 			user.visible_message("<span class='notice'>[user] piles dirt into \the [src.name].</span>", \
 								 "<span class='notice'>You start to pile dirt into \the [src.name].</span>", \
 								 "<span class='notice'>You hear dirt being moved.</span>")
@@ -84,14 +84,14 @@
 				user.visible_message("<span class='notice'>[user] stops filling in \the [src.name].</span>", \
 								 "<span class='notice'>You change your mind and stop filling in \the [src.name].</span>")
 				return
-		if(istype(W, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = W
+		if(istype(W, /obj/item/grab))
+			var/obj/item/grab/G = W
 			src.MouseDrop_T(G.affecting, user)      //act like they were dragged onto the closet
 			return 0
 		if(istype(W,/obj/item/tk_grab))
 			return 0
-		if(istype(W, /obj/item/weapon/storage/laundry_basket) && W.contents.len)
-			var/obj/item/weapon/storage/laundry_basket/LB = W
+		if(istype(W, /obj/item/storage/laundry_basket) && W.contents.len)
+			var/obj/item/storage/laundry_basket/LB = W
 			var/turf/T = get_turf(src)
 			for(var/obj/item/I in LB.contents)
 				LB.remove_from_storage(I, T)
@@ -107,7 +107,7 @@
 		if(W)
 			W.forceMove(src.loc)
 	else
-		if(istype(W, /obj/item/weapon/shovel))
+		if(istype(W, /obj/item/shovel))
 			if(user.a_intent == I_HURT)	// Hurt intent means you're trying to kill someone, or just get rid of the grave
 				user.visible_message("<span class='notice'>[user] begins to smoothe out the dirt of \the [src.name].</span>", \
 									 "<span class='notice'>You start to smoothe out the dirt of \the [src.name].</span>", \

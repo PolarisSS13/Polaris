@@ -5,7 +5,7 @@
 	category = /datum/uplink_category/telecrystals
 	blacklisted = 1
 
-/datum/uplink_item/item/telecrystal/get_goods(var/obj/item/device/uplink/U, var/loc)
+/datum/uplink_item/item/telecrystal/get_goods(var/obj/item/uplink/U, var/loc)
 	return new /obj/item/stack/telecrystal(loc, cost(U.uses))
 
 /datum/uplink_item/item/telecrystal/one

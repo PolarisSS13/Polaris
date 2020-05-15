@@ -31,10 +31,10 @@
 
 	next_spam_attempt_time = world.time + rand(30 SECONDS, 2 MINUTES)
 
-	var/obj/item/device/pda/P = null
+	var/obj/item/pda/P = null
 	var/list/viables = list()
 
-	for(var/obj/item/device/pda/check_pda in sortAtom(PDAs))
+	for(var/obj/item/pda/check_pda in sortAtom(PDAs))
 		if(!check_pda.owner || check_pda.toff || check_pda.hidden || check_pda.spam_proof)
 			continue
 		viables += check_pda
@@ -93,7 +93,7 @@
 			message = pick("Luxury watches for Blowout sale prices!",\
 			"Watches, Jewelry & Accessories, Bags & Wallets !",\
 			"Deposit 100$ and get 300$ totally free!",\
-			" 100K NT.|WOWGOLD õnly $89            <HOT>",\
+			" 100K NT.|WOWGOLD ï¿½nly $89            <HOT>",\
 			"We have been filed with a complaint from one of your customers in respect of their business relations with you.",\
 			"We kindly ask you to open the COMPLAINT REPORT (attached) to reply on this complaint..")
 		if(4)
@@ -125,7 +125,7 @@
 			"You have won tickets to the newest thriller THE CULT OF THE SLEEPING ONE!")
 	return list(sender, message)
 
-/datum/event2/event/pda_spam/proc/send_spam(obj/item/device/pda/P, sender, message)
+/datum/event2/event/pda_spam/proc/send_spam(obj/item/pda/P, sender, message)
 	last_spam_time = world.time
 	P.spam_message(sender, message)
 	if(spam_debug)

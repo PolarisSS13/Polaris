@@ -5,7 +5,7 @@
 	var/list/failed_prefabs = list()
 	for(var/prefab_type in subtypesof(/decl/prefab/ic_assembly))
 		var/decl/prefab/ic_assembly/prefab = decls_repository.get_decl(prefab_type)
-		var/obj/item/device/electronic_assembly/assembly = prefab.assembly_type
+		var/obj/item/electronic_assembly/assembly = prefab.assembly_type
 
 		var/available_size = initial(assembly.max_components)
 		var/available_complexity = initial(assembly.max_complexity)

@@ -9,7 +9,7 @@
 	icon_off = "cabinetdetective_broken"
 
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 10)
+		/obj/item/reagent_containers/food/drinks/bottle/small/beer = 10)
 
 /obj/structure/closet/secure_closet/bar/update_icon()
 	if(broken)

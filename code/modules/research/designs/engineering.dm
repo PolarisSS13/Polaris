@@ -10,7 +10,7 @@
 	id = "expwelder"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3, TECH_MATERIAL = 4)
 	materials = list(DEFAULT_WALL_MATERIAL = 70, "glass" = 120, "phoron" = 100)
-	build_path = /obj/item/weapon/weldingtool/experimental
+	build_path = /obj/item/weldingtool/experimental
 	sort_string = "NAAAA"
 
 /datum/design/item/tool/hand_drill
@@ -19,7 +19,7 @@
 	id = "handdrill"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 300, "silver" = 100)
-	build_path = /obj/item/weapon/tool/screwdriver/power
+	build_path = /obj/item/tool/screwdriver/power
 	sort_string = "NAAAB"
 
 /datum/design/item/tool/jaws_life
@@ -28,7 +28,7 @@
 	id = "jawslife"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 300, "silver" = 100)
-	build_path = /obj/item/weapon/tool/crowbar/power
+	build_path = /obj/item/tool/crowbar/power
 	sort_string = "NAAAC"
 
 // Other devices
@@ -43,7 +43,7 @@
 	id = "tscanner"
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 200)
-	build_path = /obj/item/device/t_scanner
+	build_path = /obj/item/t_scanner
 	sort_string = "NBAAA"
 
 /datum/design/item/engineering/t_scanner_upg
@@ -52,7 +52,7 @@
 	id = "upgradedtscanner"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 4, TECH_MATERIAL = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 500, "phoron" = 150)
-	build_path = /obj/item/device/t_scanner/upgraded
+	build_path = /obj/item/t_scanner/upgraded
 	sort_string = "NBAAB"
 
 /datum/design/item/engineering/t_scanner_adv
@@ -61,7 +61,7 @@
 	id = "advancedtscanner"
 	req_tech = list(TECH_MAGNET = 6, TECH_ENGINEERING = 6, TECH_MATERIAL = 6)
 	materials = list(DEFAULT_WALL_MATERIAL = 1250, "phoron" = 500, "silver" = 50)
-	build_path = /obj/item/device/t_scanner/advanced
+	build_path = /obj/item/t_scanner/advanced
 	sort_string = "NBAAC"
 
 /datum/design/item/engineering/atmosanalyzer
@@ -70,5 +70,5 @@
 	id = "atmosanalyzer"
 	req_tech = list(TECH_ENGINEERING = 2)
 	materials = list(DEFAULT_WALL_MATERIAL = 200, "glass" = 100)
-	build_path = /obj/item/device/analyzer
+	build_path = /obj/item/analyzer
 	sort_string = "NBABA"

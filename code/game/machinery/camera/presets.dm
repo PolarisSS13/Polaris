@@ -190,13 +190,13 @@ var/global/list/engineering_networks = list(
 	return O
 
 /obj/machinery/camera/proc/isXRay()
-	var/obj/item/weapon/stock_parts/scanning_module/O = locate(/obj/item/weapon/stock_parts/scanning_module) in assembly.upgrades
+	var/obj/item/stock_parts/scanning_module/O = locate(/obj/item/stock_parts/scanning_module) in assembly.upgrades
 	if (O && O.rating >= 2)
 		return O
 	return null
 
 /obj/machinery/camera/proc/isMotion()
-	var/O = locate(/obj/item/device/assembly/prox_sensor) in assembly.upgrades
+	var/O = locate(/obj/item/assembly/prox_sensor) in assembly.upgrades
 	return O
 
 // UPGRADE PROCS
@@ -207,12 +207,12 @@ var/global/list/engineering_networks = list(
 	update_coverage()
 
 /obj/machinery/camera/proc/upgradeXRay()
-	assembly.upgrades.Add(new /obj/item/weapon/stock_parts/scanning_module/adv(assembly))
+	assembly.upgrades.Add(new /obj/item/stock_parts/scanning_module/adv(assembly))
 	setPowerUsage()
 	update_coverage()
 
 /obj/machinery/camera/proc/upgradeMotion()
-	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
+	assembly.upgrades.Add(new /obj/item/assembly/prox_sensor(assembly))
 	setPowerUsage()
 	START_MACHINE_PROCESSING(src)
 	update_coverage()

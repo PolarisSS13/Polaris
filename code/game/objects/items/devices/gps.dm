@@ -1,6 +1,6 @@
 var/list/GPS_list = list()
 
-/obj/item/device/gps
+/obj/item/gps
 	name = "global positioning system"
 	desc = "Triangulates the approximate co-ordinates using a nearby satellite network. Alt+click to toggle power."
 	icon = 'icons/obj/gps.dmi'
@@ -17,20 +17,20 @@ var/list/GPS_list = list()
 	var/hide_signal = FALSE		// If true, signal is not visible to other GPS devices.
 	var/can_hide_signal = FALSE	// If it can toggle the above var.
 
-/obj/item/device/gps/Initialize()
+/obj/item/gps/Initialize()
 	. = ..()
 	GPS_list += src
 	name = "global positioning system ([gps_tag])"
 	update_icon()
 
-/obj/item/device/gps/Destroy()
+/obj/item/gps/Destroy()
 	GPS_list -= src
 	return ..()
 
-/obj/item/device/gps/AltClick(mob/user)
+/obj/item/gps/AltClick(mob/user)
 	toggletracking(user)
 
-/obj/item/device/gps/proc/toggletracking(mob/living/user)
+/obj/item/gps/proc/toggletracking(mob/living/user)
 	if(!istype(user))
 		return
 	if(emped)
@@ -45,7 +45,7 @@ var/list/GPS_list = list()
 		tracking = TRUE
 		update_icon()
 
-/obj/item/device/gps/emp_act(severity)
+/obj/item/gps/emp_act(severity)
 	if(emped) // Without a fancy callback system, this will have to do.
 		return
 	var/severity_modifier = severity ? severity : 4 // In case emp_act gets called without any arguments.
@@ -58,19 +58,19 @@ var/list/GPS_list = list()
 		update_icon()
 		visible_message("\The [src] appears to be functional again.")
 
-/obj/item/device/gps/update_icon()
+/obj/item/gps/update_icon()
 	overlays.Cut()
 	if(emped)
 		overlays += image(icon, src, "emp")
 	else if(tracking)
 		overlays += image(icon, src, "working")
 
-/obj/item/device/gps/attack_self(mob/user)
+/obj/item/gps/attack_self(mob/user)
 	display(user)
 
  // Compiles all the data not available directly from the GPS
  // Like the positions and directions to all other GPS units
-/obj/item/device/gps/proc/display_list()
+/obj/item/gps/proc/display_list()
 	var/list/dat = list()
 
 	var/turf/curr = get_turf(src)
@@ -84,7 +84,7 @@ var/list/GPS_list = list()
 	dat["gps_list"] = list()
 	dat["z_level_detection"] = using_map.get_map_levels(curr.z, long_range)
 	
-	for(var/obj/item/device/gps/G in GPS_list - src)
+	for(var/obj/item/gps/G in GPS_list - src)
 		if(!G.tracking || G.emped || G.hide_signal)
 			continue
 
@@ -115,7 +115,7 @@ var/list/GPS_list = list()
 
 	return dat
 
-/obj/item/device/gps/proc/display(mob/user)
+/obj/item/gps/proc/display(mob/user)
 	if(!tracking)
 		to_chat(user, "The device is off. Alt-click it to turn it on.")
 		return
@@ -134,7 +134,7 @@ var/list/GPS_list = list()
 	if(gps_data["gps_list"].len)
 		dat += "Detected signals;"
 		for(var/gps in gps_data["gps_list"])
-			if(istype(gps_data["ref"], /obj/item/device/gps/internal/poi))
+			if(istype(gps_data["ref"], /obj/item/gps/internal/poi))
 				dat += "    [gps["gps_tag"]]: [gps["area_name"]] - [gps["local"] ? "[gps["direction"]] Dist: [round(gps["distance"], 10)]m" : "in \the [gps["z_name"]]"]"
 			else
 				dat += "    [gps["gps_tag"]]: [gps["area_name"]], ([gps["x"]], [gps["y"]]) - [gps["local"] ? "[gps["direction"]] Dist: [gps["distX"] ? "[abs(round(gps["distX"], 1))]m [(gps["distX"] > 0) ? "E" : "W"], " : ""][gps["distY"] ? "[abs(round(gps["distY"], 1))]m [(gps["distY"] > 0) ? "N" : "S"]" : ""]" : "in \the [gps["z_name"]]"]"
@@ -144,7 +144,7 @@ var/list/GPS_list = list()
 	var/result = dat.Join("<br>")
 	to_chat(user, result)
 
-/obj/item/device/gps/Topic(var/href, var/list/href_list)
+/obj/item/gps/Topic(var/href, var/list/href_list)
 	if(..())
 		return 1
 
@@ -166,68 +166,68 @@ var/list/GPS_list = list()
 		hide_signal = !hide_signal
 		to_chat(usr, "You set the device to [hide_signal ? "not " : ""]broadcast a signal while scanning for other signals.")
 
-/obj/item/device/gps/on // Defaults to off to avoid polluting the signal list with a bunch of GPSes without owners. If you need to spawn active ones, use these.
+/obj/item/gps/on // Defaults to off to avoid polluting the signal list with a bunch of GPSes without owners. If you need to spawn active ones, use these.
 	tracking = TRUE
 
-/obj/item/device/gps/command
+/obj/item/gps/command
 	icon_state = "gps-com"
 	gps_tag = "COM0"
 
-/obj/item/device/gps/command/on
+/obj/item/gps/command/on
 	tracking = TRUE
 
-/obj/item/device/gps/security
+/obj/item/gps/security
 	icon_state = "gps-sec"
 	gps_tag = "SEC0"
 
-/obj/item/device/gps/security/on
+/obj/item/gps/security/on
 	tracking = TRUE
 
-/obj/item/device/gps/medical
+/obj/item/gps/medical
 	icon_state = "gps-med"
 	gps_tag = "MED0"
 
-/obj/item/device/gps/medical/on
+/obj/item/gps/medical/on
 	tracking = TRUE
 
-/obj/item/device/gps/science
+/obj/item/gps/science
 	icon_state = "gps-sci"
 	gps_tag = "SCI0"
 
-/obj/item/device/gps/science/on
+/obj/item/gps/science/on
 	tracking = TRUE
 
-/obj/item/device/gps/engineering
+/obj/item/gps/engineering
 	icon_state = "gps-eng"
 	gps_tag = "ENG0"
 
-/obj/item/device/gps/engineering/on
+/obj/item/gps/engineering/on
 	tracking = TRUE
 
-/obj/item/device/gps/mining
+/obj/item/gps/mining
 	icon_state = "gps-mine"
 	gps_tag = "MINE0"
 	desc = "A positioning system helpful for rescuing trapped or injured miners, keeping one on you at all times while mining might just save your life. Alt+click to toggle power."
 
-/obj/item/device/gps/mining/on
+/obj/item/gps/mining/on
 	tracking = TRUE
 
-/obj/item/device/gps/explorer
+/obj/item/gps/explorer
 	icon_state = "gps-exp"
 	gps_tag = "EXP0"
 	desc = "A positioning system helpful for rescuing trapped or injured explorers, keeping one on you at all times while exploring might just save your life. Alt+click to toggle power."
 
-/obj/item/device/gps/explorer/on
+/obj/item/gps/explorer/on
 	tracking = TRUE
 
-/obj/item/device/gps/robot
+/obj/item/gps/robot
 	icon_state = "gps-borg"
 	gps_tag = "SYNTH0"
 	desc = "A synthetic internal positioning system. Used as a recovery beacon for damaged synthetic assets, or a collaboration tool for mining or exploration teams. \
 	Alt+click to toggle power."
 	tracking = TRUE // On by default.
 
-/obj/item/device/gps/internal // Base type for immobile/internal GPS units.
+/obj/item/gps/internal // Base type for immobile/internal GPS units.
 	icon_state = "internal"
 	gps_tag = "Eerie Signal"
 	desc = "Report to a coder immediately."
@@ -235,15 +235,15 @@ var/list/GPS_list = list()
 	tracking = TRUE // Meant to point to a location, so it needs to be on.
 	anchored = TRUE
 
-/obj/item/device/gps/internal/base
+/obj/item/gps/internal/base
 	gps_tag = "NT_BASE"
 	desc = "A homing signal from NanoTrasen's outpost."
 
-/obj/item/device/gps/internal/poi
+/obj/item/gps/internal/poi
 	gps_tag = "Unidentified Signal"
 	desc = "A signal that seems forboding."
 
-/obj/item/device/gps/syndie
+/obj/item/gps/syndie
 	icon_state = "gps-syndie"
 	gps_tag = "NULL"
 	desc = "A positioning system that has extended range and can detect other GPS device signals without revealing its own. How that works is best left a mystery. Alt+click to toggle power."
@@ -252,7 +252,7 @@ var/list/GPS_list = list()
 	hide_signal = TRUE
 	can_hide_signal = TRUE
 
-/obj/item/device/gps/syndie/display(mob/user)
+/obj/item/gps/syndie/display(mob/user)
 	if(!tracking)
 		to_chat(user, "The device is off. Alt-click it to turn it on.")
 		return

@@ -23,7 +23,7 @@
 	universal_understand = TRUE
 	can_be_antagged = TRUE
 
-	holder_type = /obj/item/weapon/holder/borer
+	holder_type = /obj/item/holder/borer
 	ai_holder_type = null // This is player-controlled, always.
 
 	var/chemicals = 10							// A resource used for reproduction and powers.

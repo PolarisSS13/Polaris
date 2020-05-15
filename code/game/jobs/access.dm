@@ -18,7 +18,7 @@
 //	return list()
 
 /atom/movable/proc/GetAccess()
-	var/obj/item/weapon/card/id/id = GetIdCard()
+	var/obj/item/card/id/id = GetIdCard()
 	return id ? id.GetAccess() : list()
 
 /obj/proc/GetID()
@@ -227,7 +227,7 @@
 
 proc/FindNameFromID(var/mob/living/carbon/human/H)
 	ASSERT(istype(H))
-	var/obj/item/weapon/card/id/C = H.GetIdCard()
+	var/obj/item/card/id/C = H.GetIdCard()
 	if(C)
 		return C.registered_name
 
@@ -235,7 +235,7 @@ proc/get_all_job_icons() //For all existing HUD icons
 	return joblist + list("Prisoner")
 
 /obj/proc/GetJobName() //Used in secHUD icon generation
-	var/obj/item/weapon/card/id/I = GetID()
+	var/obj/item/card/id/I = GetID()
 
 	if(I)
 		var/job_icons = get_all_job_icons()

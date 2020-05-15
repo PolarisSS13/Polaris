@@ -1,6 +1,6 @@
 /******************************Lantern*******************************/
 
-/obj/item/device/flashlight/lantern
+/obj/item/flashlight/lantern
 	name = "lantern"
 	icon_state = "lantern"
 	desc = "A mining lantern."
@@ -9,7 +9,7 @@
 
 /*****************************Pickaxe********************************/
 
-/obj/item/weapon/pickaxe
+/obj/item/pickaxe
 	name = "mining drill"
 	desc = "The most basic of mining drills, for short excavations and small mineral extractions."
 	icon = 'icons/obj/items.dmi'
@@ -30,7 +30,7 @@
 	var/excavation_amount = 200
 	var/destroy_artefacts = FALSE // some mining tools will destroy artefacts completely while avoiding side-effects.
 
-/obj/item/weapon/pickaxe/silver
+/obj/item/pickaxe/silver
 	name = "silver pickaxe"
 	icon_state = "spickaxe"
 	item_state = "spickaxe"
@@ -38,7 +38,7 @@
 	origin_tech = list(TECH_MATERIAL = 3)
 	desc = "This makes no metallurgic sense."
 
-/obj/item/weapon/pickaxe/drill
+/obj/item/pickaxe/drill
 	name = "advanced mining drill" // Can dig sand as well!
 	icon_state = "handdrill"
 	item_state = "jackhammer"
@@ -47,7 +47,7 @@
 	desc = "Yours is the drill that will pierce through the rock walls."
 	drill_verb = "drilling"
 
-/obj/item/weapon/pickaxe/jackhammer
+/obj/item/pickaxe/jackhammer
 	name = "sonic jackhammer"
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
@@ -56,7 +56,7 @@
 	desc = "Cracks rocks with sonic blasts, perfect for killing cave lizards."
 	drill_verb = "hammering"
 
-/obj/item/weapon/pickaxe/gold
+/obj/item/pickaxe/gold
 	name = "golden pickaxe"
 	icon_state = "gpickaxe"
 	item_state = "gpickaxe"
@@ -65,7 +65,7 @@
 	desc = "This makes no metallurgic sense."
 	drill_verb = "picking"
 
-/obj/item/weapon/pickaxe/plasmacutter
+/obj/item/pickaxe/plasmacutter
 	name = "plasma cutter"
 	icon_state = "plasmacutter"
 	item_state = "gun"
@@ -79,7 +79,7 @@
 	sharp = 1
 	edge = 1
 
-/obj/item/weapon/pickaxe/diamond
+/obj/item/pickaxe/diamond
 	name = "diamond pickaxe"
 	icon_state = "dpickaxe"
 	item_state = "dpickaxe"
@@ -88,7 +88,7 @@
 	desc = "A pickaxe with a diamond pick head."
 	drill_verb = "picking"
 
-/obj/item/weapon/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
+/obj/item/pickaxe/diamonddrill //When people ask about the badass leader of the mining tools, they are talking about ME!
 	name = "diamond mining drill"
 	icon_state = "diamonddrill"
 	item_state = "jackhammer"
@@ -97,7 +97,7 @@
 	desc = "Yours is the drill that will pierce the heavens!"
 	drill_verb = "drilling"
 
-/obj/item/weapon/pickaxe/borgdrill
+/obj/item/pickaxe/borgdrill
 	name = "enhanced sonic jackhammer"
 	icon_state = "jackhammer"
 	item_state = "jackhammer"
@@ -107,7 +107,7 @@
 
 /*****************************Shovel********************************/
 
-/obj/item/weapon/shovel
+/obj/item/shovel
 	name = "shovel"
 	desc = "A large tool for digging and moving dirt."
 	icon = 'icons/obj/items.dmi'
@@ -123,7 +123,7 @@
 	sharp = 0
 	edge = 1
 
-/obj/item/weapon/shovel/spade
+/obj/item/shovel/spade
 	name = "spade"
 	desc = "A small tool for digging and moving dirt."
 	icon_state = "spade"

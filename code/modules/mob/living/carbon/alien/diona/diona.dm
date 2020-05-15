@@ -17,7 +17,7 @@
 	can_pull_size = ITEMSIZE_SMALL
 	can_pull_mobs = MOB_PULL_SMALLER
 
-	holder_type = /obj/item/weapon/holder/diona
+	holder_type = /obj/item/holder/diona
 	var/obj/item/hat
 
 /mob/living/carbon/alien/diona/Initialize()

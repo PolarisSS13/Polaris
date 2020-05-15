@@ -30,9 +30,9 @@
 		// radio
 		if (0)
 			var/obj/item/assembly/r_i_ptank/R = new /obj/item/assembly/r_i_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
-			var/obj/item/device/radio/signaler/p1 = new /obj/item/device/radio/signaler(R)
-			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
+			var/obj/item/tank/phoron/p3 = new /obj/item/tank/phoron(R)
+			var/obj/item/radio/signaler/p1 = new /obj/item/radio/signaler(R)
+			var/obj/item/igniter/p2 = new /obj/item/igniter(R)
 			R.part1 = p1
 			R.part2 = p2
 			R.part3 = p3
@@ -47,9 +47,9 @@
 		// proximity
 		if (1)
 			var/obj/item/assembly/m_i_ptank/R = new /obj/item/assembly/m_i_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
-			var/obj/item/device/prox_sensor/p1 = new /obj/item/device/prox_sensor(R)
-			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
+			var/obj/item/tank/phoron/p3 = new /obj/item/tank/phoron(R)
+			var/obj/item/prox_sensor/p1 = new /obj/item/prox_sensor(R)
+			var/obj/item/igniter/p2 = new /obj/item/igniter(R)
 			R.part1 = p1
 			R.part2 = p2
 			R.part3 = p3
@@ -69,9 +69,9 @@
 		// timer
 		if (2)
 			var/obj/item/assembly/t_i_ptank/R = new /obj/item/assembly/t_i_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p3 = new /obj/item/weapon/tank/phoron(R)
-			var/obj/item/device/timer/p1 = new /obj/item/device/timer(R)
-			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
+			var/obj/item/tank/phoron/p3 = new /obj/item/tank/phoron(R)
+			var/obj/item/timer/p1 = new /obj/item/timer(R)
+			var/obj/item/igniter/p2 = new /obj/item/igniter(R)
 			R.part1 = p1
 			R.part2 = p2
 			R.part3 = p3
@@ -85,9 +85,9 @@
 		//bombvest
 		if(3)
 			var/obj/item/clothing/suit/armor/a_i_a_ptank/R = new /obj/item/clothing/suit/armor/a_i_a_ptank(src.loc)
-			var/obj/item/weapon/tank/phoron/p4 = new /obj/item/weapon/tank/phoron(R)
-			var/obj/item/device/healthanalyzer/p1 = new /obj/item/device/healthanalyzer(R)
-			var/obj/item/device/igniter/p2 = new /obj/item/device/igniter(R)
+			var/obj/item/tank/phoron/p4 = new /obj/item/tank/phoron(R)
+			var/obj/item/healthanalyzer/p1 = new /obj/item/healthanalyzer(R)
+			var/obj/item/igniter/p2 = new /obj/item/igniter(R)
 			var/obj/item/clothing/suit/armor/vest/p3 = new /obj/item/clothing/suit/armor/vest(R)
 			R.part1 = p1
 			R.part2 = p2
@@ -130,7 +130,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-	var/assembly_type = /obj/item/device/assembly/signaler
+	var/assembly_type = /obj/item/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 	var/phoron_amt = 12
@@ -139,7 +139,7 @@
 
 /obj/effect/spawner/newbomb/timer
 	name = "TTV bomb - timer"
-	assembly_type = /obj/item/device/assembly/timer
+	assembly_type = /obj/item/assembly/timer
 
 /obj/effect/spawner/newbomb/timer/syndicate
 	name = "TTV bomb - merc"
@@ -149,7 +149,7 @@
 
 /obj/effect/spawner/newbomb/proximity
 	name = "TTV bomb - proximity"
-	assembly_type = /obj/item/device/assembly/prox_sensor
+	assembly_type = /obj/item/assembly/prox_sensor
 
 /obj/effect/spawner/newbomb/radio/custom/New(var/newloc, ph, ox, co)
 	if(ph != null) phoron_amt = ph
@@ -160,9 +160,9 @@
 /obj/effect/spawner/newbomb/Initialize(newloc)
 	..(newloc)
 
-	var/obj/item/device/transfer_valve/V = new(src.loc)
-	var/obj/item/weapon/tank/phoron/PT = new(V)
-	var/obj/item/weapon/tank/oxygen/OT = new(V)
+	var/obj/item/transfer_valve/V = new(src.loc)
+	var/obj/item/tank/phoron/PT = new(V)
+	var/obj/item/tank/oxygen/OT = new(V)
 
 	V.tank_one = PT
 	V.tank_two = OT
@@ -184,7 +184,7 @@
 	OT.air_contents.update_values()
 
 
-	var/obj/item/device/assembly/S = new assembly_type(V)
+	var/obj/item/assembly/S = new assembly_type(V)
 
 
 	V.attached_device = S
@@ -207,7 +207,7 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-//	var/assembly_type = /obj/item/device/assembly/signaler
+//	var/assembly_type = /obj/item/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 	var/phoron_amt = 0
@@ -216,7 +216,7 @@
 /obj/effect/spawner/onetankbomb/New(newloc) //just needs an assembly.
 	..(newloc)
 
-	var/type = pick(/obj/item/weapon/tank/phoron/onetankbomb, /obj/item/weapon/tank/oxygen/onetankbomb)
+	var/type = pick(/obj/item/tank/phoron/onetankbomb, /obj/item/tank/oxygen/onetankbomb)
 	new type(src.loc)
 
 	qdel(src)
@@ -226,13 +226,13 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-//	var/assembly_type = /obj/item/device/assembly/signaler
+//	var/assembly_type = /obj/item/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 /obj/effect/spawner/onetankbomb/full/New(newloc) //just needs an assembly.
 	..(newloc)
 
-	var/type = pick(/obj/item/weapon/tank/phoron/onetankbomb/full, /obj/item/weapon/tank/oxygen/onetankbomb/full)
+	var/type = pick(/obj/item/tank/phoron/onetankbomb/full, /obj/item/tank/oxygen/onetankbomb/full)
 	new type(src.loc)
 
 	qdel(src)
@@ -242,13 +242,13 @@
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x"
 
-//	var/assembly_type = /obj/item/device/assembly/signaler
+//	var/assembly_type = /obj/item/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
 /obj/effect/spawner/onetankbomb/full/New(newloc) //just needs an assembly.
 	..(newloc)
 
-	var/type = pick(/obj/item/weapon/tank/phoron/onetankbomb/full, /obj/item/weapon/tank/oxygen/onetankbomb/full)
+	var/type = pick(/obj/item/tank/phoron/onetankbomb/full, /obj/item/tank/oxygen/onetankbomb/full)
 	new type(src.loc)
 
 	qdel(src)

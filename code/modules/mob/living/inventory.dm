@@ -2,20 +2,20 @@
 	var/hand = null
 	var/obj/item/l_hand = null
 	var/obj/item/r_hand = null
-	var/obj/item/weapon/back = null//Human/Monkey
-	var/obj/item/weapon/tank/internal = null//Human/Monkey
+	var/obj/item/back = null//Human/Monkey
+	var/obj/item/tank/internal = null//Human/Monkey
 	var/obj/item/clothing/mask/wear_mask = null//Carbon
 
 /mob/living/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	if(istype(src.back,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/backpack = src.back
+	if(istype(src.back,/obj/item/storage))
+		var/obj/item/storage/backpack = src.back
 		if(backpack.can_be_inserted(newitem, 1))
 			newitem.forceMove(src.back)
 			return 1
 
 	// Try to place it in any item that can store stuff, on the mob.
-	for(var/obj/item/weapon/storage/S in src.contents)
+	for(var/obj/item/storage/S in src.contents)
 		if (S.can_be_inserted(newitem, 1))
 			newitem.forceMove(S)
 			return 1
@@ -117,7 +117,7 @@
 	<BR><B>Head(Mask):</B> <A href='?src=\ref[src];item=mask'>[(wear_mask ? wear_mask : "Nothing")]</A>
 	<BR><B>Left Hand:</B> <A href='?src=\ref[src];item=l_hand'>[(l_hand ? l_hand  : "Nothing")]</A>
 	<BR><B>Right Hand:</B> <A href='?src=\ref[src];item=r_hand'>[(r_hand ? r_hand : "Nothing")]</A>
-	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/weapon/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
+	<BR><B>Back:</B> <A href='?src=\ref[src];item=back'>[(back ? back : "Nothing")]</A> [((istype(wear_mask, /obj/item/clothing/mask) && istype(back, /obj/item/tank) && !( internal )) ? text(" <A href='?src=\ref[];item=internal'>Set Internal</A>", src) : "")]
 	<BR>[(internal ? text("<A href='?src=\ref[src];item=internal'>Remove Internal</A>") : "")]
 	<BR><A href='?src=\ref[src];item=pockets'>Empty Pockets</A>
 	<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>
@@ -128,7 +128,7 @@
 	return
 
 /mob/living/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
-	if ((!( istype(l_hand, /obj/item/weapon/grab) ) && !( istype(r_hand, /obj/item/weapon/grab) )))
+	if ((!( istype(l_hand, /obj/item/grab) ) && !( istype(r_hand, /obj/item/grab) )))
 		if (!( L ))
 			return null
 		else
@@ -138,14 +138,14 @@
 			L = new /obj/effect/list_container/mobl( null )
 			L.container += src
 			L.master = src
-		if (istype(l_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = l_hand
+		if (istype(l_hand, /obj/item/grab))
+			var/obj/item/grab/G = l_hand
 			if (!( L.container.Find(G.affecting) ))
 				L.container += G.affecting
 				if (G.affecting)
 					G.affecting.ret_grab(L, 1)
-		if (istype(r_hand, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = r_hand
+		if (istype(r_hand, /obj/item/grab))
+			var/obj/item/grab/G = r_hand
 			if (!( L.container.Find(G.affecting) ))
 				L.container += G.affecting
 				if (G.affecting)

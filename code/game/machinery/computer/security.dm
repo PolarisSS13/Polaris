@@ -7,8 +7,8 @@
 	icon_screen = "security"
 	light_color = "#a91515"
 	req_one_access = list(access_security, access_forensics_lockers, access_lawyer)
-	circuit = /obj/item/weapon/circuitboard/secure_data
-	var/obj/item/weapon/card/id/scan = null
+	circuit = /obj/item/circuitboard/secure_data
+	var/obj/item/card/id/scan = null
 	var/authenticated = null
 	var/rank = null
 	var/screen = null
@@ -42,7 +42,7 @@
 	return
 
 /obj/machinery/computer/secure_data/attackby(obj/item/O as obj, user as mob)
-	if(istype(O, /obj/item/weapon/card/id) && !scan)
+	if(istype(O, /obj/item/card/id) && !scan)
 		usr.drop_item()
 		O.loc = src
 		scan = O
@@ -249,7 +249,7 @@ What a mess.*/
 					scan = null
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+					if (istype(I, /obj/item/card/id) && usr.unEquip(I))
 						I.loc = src
 						scan = I
 
@@ -273,7 +273,7 @@ What a mess.*/
 					var/mob/living/silicon/robot/R = usr
 					src.rank = "[R.modtype] [R.braintype]"
 					src.screen = 1
-				else if (istype(scan, /obj/item/weapon/card/id))
+				else if (istype(scan, /obj/item/card/id))
 					active1 = null
 					active2 = null
 					if(check_access(scan))
@@ -351,7 +351,7 @@ What a mess.*/
 					if ((istype(active2, /datum/data/record) && data_core.security.Find(active2)))
 						record2 = active2
 					sleep(50)
-					var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( loc )
+					var/obj/item/paper/P = new /obj/item/paper( loc )
 					P.info = "<CENTER><B>Security Record</B></CENTER><BR>"
 					if (record1)
 						P.info += text("Name: [] ID: []<BR>\nSex: []<BR>\nAge: []<BR>\nFingerprint: []<BR>\nPhysical Status: []<BR>\nMental Status: []<BR>", record1.fields["name"], record1.fields["id"], record1.fields["sex"], record1.fields["age"], record1.fields["fingerprint"], record1.fields["p_stat"], record1.fields["m_stat"])
@@ -573,12 +573,12 @@ What a mess.*/
 	return !src.authenticated || user.stat || user.restrained() || (!in_range(src, user) && (!istype(user, /mob/living/silicon)))
 
 /obj/machinery/computer/secure_data/proc/get_photo(var/mob/user)
-	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
-		var/obj/item/weapon/photo/photo = user.get_active_hand()
+	if(istype(user.get_active_hand(), /obj/item/photo))
+		var/obj/item/photo/photo = user.get_active_hand()
 		return photo.img
 	if(istype(user, /mob/living/silicon))
 		var/mob/living/silicon/tempAI = usr
-		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
+		var/obj/item/photo/selection = tempAI.GetPicture()
 		if (selection)
 			return selection.img
 

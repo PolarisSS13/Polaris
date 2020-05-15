@@ -1,6 +1,6 @@
 
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass
+/obj/item/reagent_containers/food/drinks/drinkingglass
 	name = "glass"
 	desc = "Your standard drinking glass."
 	icon_state = "glass_empty"
@@ -52,7 +52,7 @@
 			center_of_mass = list("x"=16, "y"=10)
 			return
 
-/obj/item/weapon/reagent_containers/food/drinks/cup
+/obj/item/reagent_containers/food/drinks/cup
 	name = "coffee cup"
 	desc = "The container of oriental luxuries."
 	icon_state = "cup_empty"
@@ -97,19 +97,19 @@
 			return
 
 // for /obj/machinery/vending/sovietsoda
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/soda
+/obj/item/reagent_containers/food/drinks/drinkingglass/soda
 	New()
 		..()
 		reagents.add_reagent("sodawater", 50)
 		on_reagent_change()
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/cola
+/obj/item/reagent_containers/food/drinks/drinkingglass/cola
 	New()
 		..()
 		reagents.add_reagent("cola", 50)
 		on_reagent_change()
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass
+/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass
 	name = "shot glass"
 	desc = "No glasses were shot in the making of this glass."
 	icon_state = "shotglass"
@@ -117,7 +117,7 @@
 	volume = 10
 	matter = list("glass" = 175)
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/shotglass/on_reagent_change()
+/obj/item/reagent_containers/food/drinks/drinkingglass/shotglass/on_reagent_change()
 	overlays.Cut()
 
 	if(reagents.total_volume)
@@ -134,18 +134,18 @@
 	else
 		name = "shot glass"
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fitnessflask
+/obj/item/reagent_containers/food/drinks/drinkingglass/fitnessflask
 	name = "fitness shaker"
 	desc = "Big enough to contain enough protein to get perfectly swole. Don't mind the bits."
 	icon_state = "fitness-cup_black"
 	volume = 100
 	matter = list("plastic" = 2000)
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fitnessflask/Initialize()
+/obj/item/reagent_containers/food/drinks/drinkingglass/fitnessflask/Initialize()
 	. = ..()
 	icon_state = pick("fitness-cup_black", "fitness-cup_red", "fitness-cup_black")
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fitnessflask/on_reagent_change()
+/obj/item/reagent_containers/food/drinks/drinkingglass/fitnessflask/on_reagent_change()
 	overlays.Cut()
 
 	if(reagents.total_volume)
@@ -166,10 +166,10 @@
 		filling.color += reagents.get_color()
 		overlays += filling
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fitnessflask/proteinshake
+/obj/item/reagent_containers/food/drinks/drinkingglass/fitnessflask/proteinshake
 	name = "protein shake"
 
-/obj/item/weapon/reagent_containers/food/drinks/drinkingglass/fitnessflask/proteinshake/Initialize()
+/obj/item/reagent_containers/food/drinks/drinkingglass/fitnessflask/proteinshake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 30)
 	reagents.add_reagent("iron", 10)

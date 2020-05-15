@@ -14,7 +14,7 @@
 			/obj/item/clothing/head/helmet/space/void/atmos = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2,
+			/obj/item/tank/oxygen = 2,
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -28,7 +28,7 @@
 			/obj/item/clothing/head/helmet/space/void/atmos/alt = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2,
+			/obj/item/tank/oxygen = 2,
 			)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
@@ -42,7 +42,7 @@
 			/obj/item/clothing/head/helmet/space/void/engineering = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -56,7 +56,7 @@
 			/obj/item/clothing/head/helmet/space/void/engineering/construction = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -70,7 +70,7 @@
 			/obj/item/clothing/head/helmet/space/void/engineering/hazmat = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 45
 	containertype = /obj/structure/closet/crate/secure
@@ -84,7 +84,7 @@
 			/obj/item/clothing/head/helmet/space/void/engineering/alt = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure
@@ -98,7 +98,7 @@
 			/obj/item/clothing/head/helmet/space/void/medical = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -112,7 +112,7 @@
 			/obj/item/clothing/head/helmet/space/void/medical/emt = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -126,7 +126,7 @@
 			/obj/item/clothing/head/helmet/space/void/medical/bio = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 45
 	containertype = /obj/structure/closet/crate/secure
@@ -140,7 +140,7 @@
 			/obj/item/clothing/head/helmet/space/void/medical/alt = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
@@ -154,7 +154,7 @@
 			/obj/item/clothing/head/helmet/space/void/security = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -167,7 +167,7 @@
 			/obj/item/clothing/head/helmet/space/void/security/riot = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
@@ -181,7 +181,7 @@
 			/obj/item/clothing/head/helmet/space/void/security/alt = 2,
 			/obj/item/clothing/mask/breath = 2,
 			/obj/item/clothing/shoes/magboots = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure
@@ -194,7 +194,7 @@
 			/obj/item/clothing/suit/space/void/mining = 2,
 			/obj/item/clothing/head/helmet/space/void/mining = 2,
 			/obj/item/clothing/mask/breath = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure
@@ -207,7 +207,7 @@
 			/obj/item/clothing/suit/space/void/mining/alt = 2,
 			/obj/item/clothing/head/helmet/space/void/mining/alt = 2,
 			/obj/item/clothing/mask/breath = 2,
-			/obj/item/weapon/tank/oxygen = 2
+			/obj/item/tank/oxygen = 2
 			)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure

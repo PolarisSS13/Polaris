@@ -1,5 +1,5 @@
 //Mining suit
-/obj/item/weapon/rig/robotics
+/obj/item/rig/robotics
 	name = "advanced suit control belt"
 	suit_type = "advanced suit"
 	desc = "A lightweight suit combining the utility of a RIG with the wearability of a voidsuit."
@@ -21,8 +21,8 @@
 	cell_type =  null
 
 	allowed = list(
-		/obj/item/device/flashlight,
-		/obj/item/weapon/storage/box
+		/obj/item/flashlight,
+		/obj/item/storage/box
 		)
 
 	req_access = list()

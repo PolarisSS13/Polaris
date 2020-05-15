@@ -64,12 +64,12 @@
 	else
 		to_chat(user, "<span class='notice'>Access Denied</span>")
 
-/obj/structure/closet/secure_closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/secure_closet/attackby(obj/item/W as obj, mob/user as mob)
 	if(src.opened)
-		if(istype(W, /obj/item/weapon/storage/laundry_basket))
+		if(istype(W, /obj/item/storage/laundry_basket))
 			return ..(W,user)
-		if(istype(W, /obj/item/weapon/grab))
-			var/obj/item/weapon/grab/G = W
+		if(istype(W, /obj/item/grab))
+			var/obj/item/grab/G = W
 			if(src.large)
 				src.MouseDrop_T(G.affecting, user)	//act like they were dragged onto the closet
 			else
@@ -81,7 +81,7 @@
 		user.drop_item()
 		if(W)
 			W.forceMove(src.loc)
-	else if(istype(W, /obj/item/weapon/melee/energy/blade))
+	else if(istype(W, /obj/item/melee/energy/blade))
 		if(emag_act(INFINITY, user, "<span class='danger'>The locker has been sliced open by [user] with \an [W]</span>!", "<span class='danger'>You hear metal being sliced and sparks flying.</span>"))
 			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 			spark_system.set_up(5, 0, src.loc)
@@ -99,7 +99,7 @@
 				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 				anchored = !anchored
 				return
-	else if(istype(W,/obj/item/weapon/packageWrap) || istype(W,/obj/item/weapon/weldingtool))
+	else if(istype(W,/obj/item/packageWrap) || istype(W,/obj/item/weldingtool))
 		return ..(W,user)
 	else
 		togglelock(user)

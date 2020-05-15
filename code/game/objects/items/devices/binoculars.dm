@@ -1,4 +1,4 @@
-/obj/item/device/binoculars
+/obj/item/binoculars
 	name = "binoculars"
 	desc = "A pair of binoculars."
 	icon_state = "binoculars"
@@ -11,5 +11,5 @@
 	//matter = list("metal" = 50,"glass" = 50)
 
 
-/obj/item/device/binoculars/attack_self(mob/user)
+/obj/item/binoculars/attack_self(mob/user)
 	zoom()
