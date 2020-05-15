@@ -35,10 +35,10 @@
 
 /mob/living/carbon/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
-	if(src.nutrition && src.stat != DEAD)
+	if(src.nutrition && src.stat != 2)
 		adjust_nutrition(-DEFAULT_HUNGER_FACTOR / 10)
-	if(src.m_intent == "run")
-		adjust_nutrition(-DEFAULT_HUNGER_FACTOR / 10)
+		if(src.m_intent == "run")
+			adjust_nutrition(-DEFAULT_HUNGER_FACTOR / 10)
 
 	if((FAT in src.mutations) && src.m_intent == "run" && src.bodytemperature <= 360)
 		src.bodytemperature += 2
@@ -400,3 +400,4 @@
 	if(does_not_breathe)
 		return FALSE
 	return ..()
+  
