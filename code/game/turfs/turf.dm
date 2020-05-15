@@ -157,17 +157,12 @@ var/const/enterloopsanity = 100
 
 	if(ismob(A))
 		var/mob/M = A
-		if(!M.lastarea)
-			M.lastarea = get_area(M.loc)
-		if(M.lastarea.has_gravity == 0)
+		if(M.lastarea?.has_gravity == 0)
 			inertial_drift(M)
 		else if(!is_space())
 			M.inertia_dir = 0
 			M.make_floating(0)
-		if(isliving(M))
-			var/mob/living/L = M
-			L.handle_footstep(src)
-	..()
+
 	var/objects = 0
 	if(A && (A.flags & PROXMOVE))
 		for(var/atom/movable/thing in range(1))
