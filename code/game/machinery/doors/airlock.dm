@@ -637,13 +637,10 @@ About the new airlock wires panel:
 		return 0
 	if(hasShocked)
 		return 0	//Already shocked someone recently?
-	if(..())
-		hasShocked = 1
-		sleep(10)
+	. = ..()
+	hasShocked = 1
+	spawn(10)
 		hasShocked = 0
-		return 1
-	else
-		return 0
 
 
 /obj/machinery/door/airlock/update_icon()
