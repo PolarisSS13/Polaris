@@ -43,14 +43,15 @@
 	var/ooc_style = "everyone"
 	if(holder && !holder.fakekey)
 		ooc_style = "elevated"
-		if(holder.rights & R_EVENT)
-			ooc_style = "event_manager"
-		if(holder.rights & R_MOD)
-			ooc_style = "moderator"
-		if(holder.rights & R_DEBUG)
-			ooc_style = "developer"
 		if(holder.rights & R_ADMIN)
 			ooc_style = "admin"
+		else if(holder.rights & R_EVENT)
+			ooc_style = "event_manager"
+		else if(holder.rights & R_DEBUG)
+			ooc_style = "developer"
+		else if(holder.rights & R_MOD)
+			ooc_style = "moderator"
+
 
 	for(var/client/target in GLOB.clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))

@@ -126,7 +126,7 @@ Class Procs:
 	if(ispath(circuit))
 		circuit = new circuit(src)
 
-/obj/machinery/Initialize()
+/obj/machinery/Initialize(var/mapload)
 	. = ..()
 	global.machines += src
 	if(ispath(circuit))
@@ -135,6 +135,8 @@ Class Procs:
 		START_MACHINE_PROCESSING(src)
 	else
 		START_PROCESSING(SSfastprocess, src)
+	if(!mapload)
+		power_change()
 
 /obj/machinery/Destroy()
 	if(!speed_process)
@@ -483,6 +485,7 @@ Class Procs:
 	return 1
 
 /datum/proc/apply_visual(mob/M)
+	M.sight = 0 //Just reset their mesons and stuff so they can't use them, by default.
 	return
 
 /datum/proc/remove_visual(mob/M)
