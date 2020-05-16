@@ -11,10 +11,10 @@
 	w_class = ITEMSIZE_SMALL
 	drop_sound = 'sound/items/drop/sword.ogg'
 
-	suicide_act(mob/user)
-		var/datum/gender/T = gender_datums[user.get_visible_gender()]
-		to_chat(viewers(user),"<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>")
-		return (BRUTELOSS|FIRELOSS)
+/obj/item/weapon/nullrod/suicide_act(mob/user)
+	var/datum/gender/T = gender_datums[user.get_visible_gender()]
+	to_chat(viewers(user),"<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>")
+	return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/nullrod/attack(mob/M as mob, mob/living/user as mob) //Paste from old-code to decult with a null rod.
 
@@ -50,9 +50,21 @@
 /obj/item/weapon/nullrod/afterattack(atom/A, mob/user as mob, proximity)
 	if(!proximity)
 		return
-	if (istype(A, /turf/simulated/floor))
-		to_chat(user, "<span class='notice'>You hit the floor with the [src].</span>")
+
+	if(istype(A, /turf/simulated/floor/cult))
+		to_chat(user, "<span class='cult'>You hit the floor with \the [src].</span>")
+		A.visible_message("<span class='cult'>\The [A] burns away, leaving only plating.</span>")
+		var/turf/simulated/floor/C = A
+		C.hotspot_expose(600,CELL_VOLUME)
+		C.break_tile_to_plating()
+
+	if(istype(A, /turf/simulated/floor))
+		to_chat(user, "<span class='notice'>You hit the floor with \the [src].</span>")
 		call(/obj/effect/rune/proc/revealrunes)(src)
+
+	if(istype(A, /mob/living/simple_mob/construct))
+		var/mob/living/L = A
+		L.add_modifier(/datum/modifier/soul_burn, 1 SECOND * force)
 
 /obj/item/weapon/energy_net
 	name = "energy net"

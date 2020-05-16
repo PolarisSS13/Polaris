@@ -307,7 +307,7 @@
 	if(istype(L))
 		if(L.mob_class & MOB_CLASS_DEMONIC)
 			L.add_modifier(/datum/modifier/soul_burn, round(min(30 SECONDS, 2 SECONDS * amount)))
-			S.visible_message("<span class='warning'>[S]'s body sizzles where the holy water touches it!</span>", "<span class='danger'>Your flesh burns in the holy water!</span>")
+			L.visible_message("<span class='warning'>[L]'s body sizzles where the holy water touches it!</span>", "<span class='danger'>Your flesh burns in the holy water!</span>")
 
 /datum/reagent/water/holywater/touch_turf(var/turf/T)
 	if(volume >= 5)
