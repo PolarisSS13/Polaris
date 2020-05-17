@@ -50,8 +50,6 @@
 	set src = usr.contents
 	return 0
 
-/mob/observer/eye/examine(mob/user)
-
 // Use this when setting the eye's location.
 // It will also stream the chunk that the new loc is in.
 /mob/observer/eye/proc/setLoc(var/T)
