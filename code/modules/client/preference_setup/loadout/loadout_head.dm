@@ -129,14 +129,6 @@
 	display_name = "cap, sol"
 	path = /obj/item/clothing/head/soft/solgov
 
-/datum/gear/head/cap/sifguard
-	display_name = "cap, expedition"
-	path = /obj/item/clothing/head/soft/solgov/sifguard
-
-/datum/gear/head/cap/fleet
-	display_name = "cap, fleet"
-	path = /obj/item/clothing/head/soft/solgov/fleet
-
 /datum/gear/head/cowboy
 	display_name = "cowboy, rodeo"
 	path = /obj/item/clothing/head/cowboy_hat
