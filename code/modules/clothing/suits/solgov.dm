@@ -98,79 +98,79 @@
 	item_state = "blueservice_flag"
 
 /obj/item/clothing/suit/storage/solgov/service/army
-	name = "army coat"
-	desc = "An SCG Army service coat. Green and undecorated."
+	name = "marine coat"
+	desc = "An SCG Marine service coat. Green and undecorated."
 	icon_state = "greenservice"
 	item_state = "greenservice"
 
 /obj/item/clothing/suit/storage/solgov/service/army/medical
-	name = "army medical jacket"
-	desc = "An SCG Army service coat. This one has blue markings."
+	name = "marine medical jacket"
+	desc = "An SCG Marine service coat. This one has blue markings."
 	icon_state = "greenservice_med"
 	item_state = "greenservice_med"
 
 /obj/item/clothing/suit/storage/solgov/service/army/medical/command
-	name = "army medical command jacket"
-	desc = "An SCG Army service coat. This one has blue and gold markings."
+	name = "marine medical command jacket"
+	desc = "An SCG Marine service coat. This one has blue and gold markings."
 	icon_state = "greenservice_medcom"
 	item_state = "greenservice_medcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/engineering
-	name = "army engineering jacket"
-	desc = "An SCG Army service coat. This one has orange markings."
+	name = "marine engineering jacket"
+	desc = "An SCG Marine service coat. This one has orange markings."
 	icon_state = "greenservice_eng"
 	item_state = "greenservice_eng"
 
 /obj/item/clothing/suit/storage/solgov/service/army/engineering/command
-	name = "army engineering command jacket"
-	desc = "An SCG Army service coat. This one has orange and gold markings."
+	name = "marine engineering command jacket"
+	desc = "An SCG Marine service coat. This one has orange and gold markings."
 	icon_state = "greenservice_engcom"
 	item_state = "greenservice_engcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/supply
-	name = "army supply jacket"
-	desc = "An SCG Army service coat. This one has brown markings."
+	name = "marine supply jacket"
+	desc = "An SCG Marine service coat. This one has brown markings."
 	icon_state = "greenservice_sup"
 	item_state = "greenservice_sup"
 
 /obj/item/clothing/suit/storage/solgov/service/army/security
-	name = "army security jacket"
-	desc = "An SCG Army service coat. This one has red markings."
+	name = "marine security jacket"
+	desc = "An SCG Marine service coat. This one has red markings."
 	icon_state = "greenservice_sec"
 	item_state = "greenservice_sec"
 
 /obj/item/clothing/suit/storage/solgov/service/army/security/command
-	name = "army security command jacket"
-	desc = "An SCG Army service coat. This one has red and gold markings."
+	name = "marine security command jacket"
+	desc = "An SCG Marine service coat. This one has red and gold markings."
 	icon_state = "greenservice_seccom"
 	item_state = "greenservice_seccom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/service
-	name = "army service jacket"
-	desc = "An SCG Army service coat. This one has green markings."
+	name = "marine service jacket"
+	desc = "An SCG Marine service coat. This one has green markings."
 	icon_state = "greenservice_srv"
 	item_state = "greenservice_srv"
 
 /obj/item/clothing/suit/storage/solgov/service/army/service/command
-	name = "army service command jacket"
-	desc = "An SCG Army service coat. This one has green and gold markings."
+	name = "marine service command jacket"
+	desc = "An SCG Marine service coat. This one has green and gold markings."
 	icon_state = "greenservice_srvcom"
 	item_state = "greenservice_srvcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/exploration
-	name = "army exploration jacket"
-	desc = "An SCG Army service coat. This one has purple markings."
+	name = "marine exploration jacket"
+	desc = "An SCG Marine service coat. This one has purple markings."
 	icon_state = "greenservice_exp"
 	item_state = "greenservice_exp"
 
 /obj/item/clothing/suit/storage/solgov/service/army/exploration/command
-	name = "army exploration command jacket"
-	desc = "An SCG Army service coat. This one has purple and gold markings."
+	name = "marine exploration command jacket"
+	desc = "An SCG Marine service coat. This one has purple and gold markings."
 	icon_state = "greenservice_expcom"
 	item_state = "greenservice_expcom"
 
 /obj/item/clothing/suit/storage/solgov/service/army/command
-	name = "army command jacket"
+	name = "marine command jacket"
 	desc = "An SCG Marine Corps service coat. This one has gold markings."
 	icon_state = "greenservice_com"
 	item_state = "greenservice_com"
@@ -276,14 +276,14 @@
 	item_state = "whitedress"
 
 /obj/item/clothing/suit/dress/solgov/army
-	name = "army dress jacket"
-	desc = "A tailored black SCG Army dress jacket with red trim. So sexy it hurts."
+	name = "marine dress jacket"
+	desc = "A tailored black SCG Marines dress jacket with red trim. So sexy it hurts."
 	icon_state = "blackdress"
 	item_state = "blackdress"
 
 /obj/item/clothing/suit/dress/solgov/army/command
-	name = "army officer's dress jacket"
-	desc = "A tailored black SCG Army dress jacket with gold trim. Smells like ceremony."
+	name = "marine officer's dress jacket"
+	desc = "A tailored black SCG Marines dress jacket with gold trim. Smells like ceremony."
 	icon_state = "blackdress_com"
 	item_state = "blackdress_com"
 
@@ -298,7 +298,7 @@
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/solgov/army
-	name = "army winter coat"
+	name = "marine winter coat"
 	icon_state = "coatar"
 	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	valid_accessory_slots = list(ACCESSORY_SLOT_INSIGNIA,ACCESSORY_SLOT_RANK)

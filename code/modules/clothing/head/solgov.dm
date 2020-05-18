@@ -57,19 +57,19 @@
 	siemens_coefficient = 0.7
 
 /obj/item/clothing/head/utility/army
-	name = "army utility cover"
-	desc = "A green utility cover bearing the crest of the SCG Army."
+	name = "marine utility cover"
+	desc = "A green utility cover bearing the crest of the SCG Marines."
 	icon_state = "greenutility"
 	armor = list(melee = 10, bullet = 0, laser = 10,energy = 0, bomb = 0, bio = 0, rad = 0)
 
 /obj/item/clothing/head/utility/army/tan
 	name = "tan utility cover"
-	desc = "A tan utility cover bearing the crest of the SCG Army."
+	desc = "A tan utility cover bearing the crest of the SCG Marines."
 	icon_state = "tanutility"
 
 /obj/item/clothing/head/utility/army/urban
 	name = "urban utility cover"
-	desc = "A grey utility cover bearing the crest of the SCG Army."
+	desc = "A grey utility cover bearing the crest of the SCG Marines."
 	icon_state = "greyutility"
 
 //Service
@@ -106,28 +106,28 @@
 	icon_state = "greydresscap_senior"
 
 /obj/item/clothing/head/service/army
-	name = "army wheel cover"
-	desc = "A green service uniform cover with an SCG Army crest."
+	name = "marine wheel cover"
+	desc = "A green service uniform cover with an SCG Marine crest."
 	icon_state = "greenwheelcap"
 
 /obj/item/clothing/head/service/army/command
-	name = "army officer's wheel cover"
-	desc = "A green service uniform cover with an SCG Army crest and gold stripe."
+	name = "marine officer's wheel cover"
+	desc = "A green service uniform cover with an SCG Marine crest and gold stripe."
 	icon_state = "greenwheelcap_com"
 
 /obj/item/clothing/head/service/army/garrison
-	name = "army garrison cap"
-	desc = "A green garrison cap belonging to the SCG Army."
+	name = "marine garrison cap"
+	desc = "A green garrison cap belonging to the SCG Marine."
 	icon_state = "greengarrisoncap"
 
 /obj/item/clothing/head/service/army/garrison/command
-	name = "army officer's garrison cap"
-	desc = "A green garrison cap belonging to the SCG Army. This one has a gold pin."
+	name = "marine officer's garrison cap"
+	desc = "A green garrison cap belonging to the SCG Marine. This one has a gold pin."
 	icon_state = "greengarrisoncap_com"
 
 /obj/item/clothing/head/service/army/campaign
 	name = "campaign cover"
-	desc = "A green campaign cover with an SCG Army crest. Only found on the heads of Drill Sergeants."
+	desc = "A green campaign cover with an SCG Marine crest. Only found on the heads of Drill Sergeants."
 	icon_state = "greendrill"
 
 //Dress
@@ -159,13 +159,13 @@
 	icon_state = "whitepeakcap_com"
 
 /obj/item/clothing/head/dress/army
-	name = "army dress wheel cover"
-	desc = "A white dress uniform cover with an SCG Army crest."
+	name = "marine dress wheel cover"
+	desc = "A white dress uniform cover with an SCG Marine crest."
 	icon_state = "whitewheelcap"
 
 /obj/item/clothing/head/dress/army/command
-	name = "army officer's dress wheel cover"
-	desc = "A white dress uniform cover with an SCG Army crest and gold stripe."
+	name = "marine officer's dress wheel cover"
+	desc = "A white dress uniform cover with an SCG Marine crest and gold stripe."
 	icon_state = "whitewheelcap_com"
 
 //Berets
@@ -217,7 +217,7 @@
 
 /obj/item/clothing/head/beret/solgov/diplomatic
 	name = "diplomatic security beret"
-	desc = "A tan beret denoting service in the SCG Army Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
+	desc = "A tan beret denoting service in the SCG Marines Diplomatic Security Group. For security personnel who are more inclined towards style than safety."
 	icon_state = "beret_tan"
 
 /obj/item/clothing/head/beret/solgov/borderguard
@@ -360,14 +360,14 @@
 	//icon_state_up = "flushankaup"
 
 /obj/item/clothing/head/ushanka/solgov/army
-	name = "army fur hat"
-	desc = "An SCG Army synthfur-lined hat for operating in cold environments."
+	name = "marine fur hat"
+	desc = "An SCG Marine synthfur-lined hat for operating in cold environments."
 	icon_state = "barushankadown"
 	//icon_state_up = "barushankaup"
 
 /obj/item/clothing/head/ushanka/solgov/army/green
-	name = "green army fur hat"
-	desc = "An SCG Army synthfur-lined hat for operating in cold environments."
+	name = "green marine fur hat"
+	desc = "An SCG Marine synthfur-lined hat for operating in cold environments."
 	icon_state = "arushankadown"
 	//icon_state_up = "mcushankaup"
 
