@@ -26,7 +26,7 @@
 
 /obj/item/clothing/head/soft/solgov/sifguard/co
 	name = "\improper SifGuard captain's cap"
-	desc = "It's a black ballcap bearing the Expeditonary Corps crest. The brim has gold trim."
+	desc = "It's a black ballcap bearing the Sif Defense Force crest. The brim has gold trim."
 	icon_state = "expeditioncomsoft"
 
 /obj/item/clothing/head/soft/solgov/fleet
