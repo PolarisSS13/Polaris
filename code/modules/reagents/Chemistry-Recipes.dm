@@ -118,7 +118,7 @@
 		var/turf/T = get_turf(container)
 		var/list/seen = viewers(4, T)
 		for(var/mob/M in seen)
-			M.show_message("<span class='notice'>\icon[container] [mix_message]</span>", 1)
+			M.show_message("<span class='notice'>[bicon(container)] [mix_message]</span>", 1)
 		playsound(T, reaction_sound, 80, 1)
 
 //obtains any special data that will be provided to the reaction products
@@ -553,6 +553,20 @@
 	required_reagents = list ("ammonia" = 1, "ethanol" = 1)
 	result_amount = 2
 
+/datum/chemical_reaction/left4zed
+	name = "Left4Zed"
+	id = "left4zed"
+	result = "left4zed"
+	required_reagents = list ("diethylamine" = 2, "mutagen" = 1)
+	result_amount = 3
+
+/datum/chemical_reaction/robustharvest
+	name = "RobustHarvest"
+	id = "robustharvest"
+	result = "robustharvest"
+	required_reagents = list ("ammonia" = 1, "calcium" = 1, "neurotoxic_protein" = 1)
+	result_amount = 3
+
 /datum/chemical_reaction/space_cleaner
 	name = "Space cleaner"
 	id = "cleaner"
@@ -869,7 +883,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "<span class='warning'>The solution spews out foam!</span>"
+		to_chat(M, "<span class='warning'>The solution spews out foam!</span>")
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 0)
@@ -888,7 +902,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "<span class='warning'>The solution spews out a metalic foam!</span>"
+		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 1)
@@ -906,7 +920,7 @@
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
-		M << "<span class='warning'>The solution spews out a metalic foam!</span>"
+		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
 
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 2)
@@ -2178,6 +2192,13 @@
 	result = "chrysanthemum"
 	required_reagents = list("sake" = 1, "melonliquor" = 1)
 	result_amount = 2
+
+/datum/chemical_reaction/drinks/deathbell
+	name = "Deathbell"
+	id = "deathbell"
+	result = "deathbell"
+	required_reagents = list("antifreeze" = 1, "gargleblaster" = 1, "syndicatebomb" =1)
+	result_amount = 3
 
 /datum/chemical_reaction/bitters
 	name = "Bitters"

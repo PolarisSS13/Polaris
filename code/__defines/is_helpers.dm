@@ -6,11 +6,14 @@
 
 //---------------
 #define isatom(D)		istype(D, /atom)
+#define isclient(D)		istype(D, /client)
 
 //---------------
 //#define isobj(D)		istype(D, /obj)		//Built in
 
 #define isitem(D)		istype(D, /obj/item)
+
+#define isradio(A) istype(A, /obj/item/device/radio)
 
 #define isairlock(A)	istype(A, /obj/machinery/door/airlock)
 
@@ -51,3 +54,4 @@
 //---------------
 //#define isturf(D)		istype(D, /turf)	//Built in
 #define isopenspace(A)	istype(A, /turf/simulated/open)
+#define isspace(A)		istype(A, /turf/space)

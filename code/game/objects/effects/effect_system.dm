@@ -113,12 +113,11 @@ steam.start() -- spawns the effect
 		T.hotspot_expose(1000,100)
 	return ..()
 
-/obj/effect/effect/sparks/Move()
-	..()
-	var/turf/T = src.loc
-	if (istype(T, /turf))
+/obj/effect/effect/sparks/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
+	if(isturf(loc))
+		var/turf/T = loc
 		T.hotspot_expose(1000,100)
-	return
 
 /datum/effect/effect/system/spark_spread
 	var/total_sparks = 0 // To stop it being spammed and lagging!
@@ -185,6 +184,8 @@ steam.start() -- spawns the effect
 				qdel(src)
 
 /obj/effect/effect/smoke/Crossed(mob/living/carbon/M as mob )
+	if(M.is_incorporeal())
+		return
 	..()
 	if(istype(M))
 		affect(M)
@@ -223,8 +224,8 @@ steam.start() -- spawns the effect
 	time_to_live = 600
 	//var/list/projectiles
 
-/obj/effect/effect/smoke/bad/Move()
-	..()
+/obj/effect/effect/smoke/bad/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
 	for(var/mob/living/L in get_turf(src))
 		affect(L)
 
@@ -236,6 +237,15 @@ steam.start() -- spawns the effect
 		if(prob(25))
 			L.emote("cough")
 
+/obj/effect/effect/smoke/bad/noxious
+	opacity = 0
+
+/obj/effect/effect/smoke/bad/noxious/affect(var/mob/living/L)
+	if (!..())
+		return 0
+	if(L.needs_to_breathe())
+		L.adjustToxLoss(1)
+
 /* Not feasile until a later date
 /obj/effect/effect/smoke/bad/Crossed(atom/movable/M as mob|obj)
 	..()
@@ -245,7 +255,7 @@ steam.start() -- spawns the effect
 			B.damage = (B.damage/2)
 			projectiles += B
 			destroyed_event.register(B, src, /obj/effect/effect/smoke/bad/proc/on_projectile_delete)
-		world << "Damage is: [B.damage]"
+		to_world("Damage is: [B.damage]")
 	return 1
 
 /obj/effect/effect/smoke/bad/proc/on_projectile_delete(obj/item/projectile/beam/proj)
@@ -270,8 +280,8 @@ steam.start() -- spawns the effect
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/effect/smoke/elemental/Move()
-	..()
+/obj/effect/effect/smoke/elemental/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
 	for(var/mob/living/L in range(1, src))
 		affect(L)
 
@@ -366,6 +376,9 @@ steam.start() -- spawns the effect
 
 /datum/effect/effect/system/smoke_spread/bad
 	smoke_type = /obj/effect/effect/smoke/bad
+
+/datum/effect/effect/system/smoke_spread/noxious
+	smoke_type = /obj/effect/effect/smoke/bad/noxious
 
 /datum/effect/effect/system/smoke_spread/fire
 	smoke_type = /obj/effect/effect/smoke/elemental/fire
@@ -505,10 +518,10 @@ steam.start() -- spawns the effect
 			s.start()
 
 			for(var/mob/M in viewers(5, location))
-				M << "<span class='warning'>The solution violently explodes.</span>"
+				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
 			for(var/mob/M in viewers(1, location))
 				if (prob (50 * amount))
-					M << "<span class='warning'>The explosion knocks you down.</span>"
+					to_chat(M, "<span class='warning'>The explosion knocks you down.</span>")
 					M.Weaken(rand(1,5))
 			return
 		else
@@ -531,7 +544,7 @@ steam.start() -- spawns the effect
 				flash = (amount/4) * flashing_factor
 
 			for(var/mob/M in viewers(8, location))
-				M << "<span class='warning'>The solution violently explodes.</span>"
+				to_chat(M, "<span class='warning'>The solution violently explodes.</span>")
 
 			explosion(
 				location,

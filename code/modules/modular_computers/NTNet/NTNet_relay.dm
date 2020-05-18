@@ -2,12 +2,13 @@
 /obj/machinery/ntnet_relay
 	name = "NTNet Quantum Relay"
 	desc = "A very complex router and transmitter capable of connecting electronic devices together. Looks fragile."
-	use_power = 2
+	use_power = USE_POWER_ACTIVE
 	active_power_usage = 20000 //20kW, apropriate for machine that keeps massive cross-Zlevel wireless network operational.
 	idle_power_usage = 100
-	icon_state = "bus"
+	icon_state = "ntnet"
 	anchored = 1
 	density = 1
+	circuit = /obj/item/weapon/circuitboard/ntnet_relay
 	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 	var/enabled = 1				// Set to 0 if the relay was turned off
 	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
@@ -31,15 +32,15 @@
 
 /obj/machinery/ntnet_relay/update_icon()
 	if(operable())
-		icon_state = "bus"
+		icon_state = initial(icon_state)
 	else
-		icon_state = "bus_off"
+		icon_state = "[initial(icon_state)]_off"
 
 /obj/machinery/ntnet_relay/process()
 	if(operable())
-		use_power = 2
+		update_use_power(USE_POWER_ACTIVE)
 	else
-		use_power = 1
+		update_use_power(USE_POWER_IDLE)
 
 	if(dos_overload)
 		dos_overload = max(0, dos_overload - dos_dissipate)
@@ -93,17 +94,16 @@
 		return 1
 
 /obj/machinery/ntnet_relay/New()
-	uid = gl_uid
-	gl_uid++
-	component_parts = list()
-	component_parts += new /obj/item/stack/cable_coil(src,15)
-	component_parts += new /obj/item/weapon/circuitboard/ntnet_relay(src)
+	..()
+	assign_uid()
+	default_apply_parts()
 
+/obj/machinery/ntnet_relay/Initialize()
+	. = ..()
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global
 		ntnet_global.add_log("New quantum relay activated. Current amount of linked relays: [NTNet.relays.len]")
-	..()
 
 /obj/machinery/ntnet_relay/Destroy()
 	if(ntnet_global)
@@ -113,24 +113,11 @@
 	for(var/datum/computer_file/program/ntnet_dos/D in dos_sources)
 		D.target = null
 		D.error = "Connection to quantum relay severed"
-	..()
+	. = ..()
 
-/obj/machinery/ntnet_relay/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(W.is_screwdriver())
-		playsound(src.loc, 'sound/items/Screwdriver.ogg', 50, 1)
-		panel_open = !panel_open
-		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance hatch")
+/obj/machinery/ntnet_relay/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	if(default_deconstruction_screwdriver(user, W))
 		return
-	if(W.is_crowbar())
-		if(!panel_open)
-			to_chat(user, "Open the maintenance panel first.")
-			return
-		playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
-		to_chat(user, "You disassemble \the [src]!")
-
-		for(var/atom/movable/A in component_parts)
-			A.forceMove(src.loc)
-		new /obj/structure/frame(src.loc)
-		qdel(src)
+	if(default_deconstruction_crowbar(user, W))
 		return
 	..()

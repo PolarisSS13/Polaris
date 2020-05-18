@@ -5,9 +5,10 @@
 	role_text_plural = "Changelings"
 	bantype = "changeling"
 	feedback_tag = "changeling_objective"
-	restricted_jobs = list("AI", "Cyborg")
+	avoid_silicons = TRUE
 	protected_jobs = list("Security Officer", "Warden", "Detective", "Head of Security", "Colony Director")
 	welcome_text = "Use say \"#g message\" to communicate with your fellow changelings. Remember: you get all of their absorbed DNA if you absorb them."
+	antag_sound = 'sound/effects/antag_notice/ling_alert.ogg'
 	flags = ANTAG_SUSPICIOUS | ANTAG_RANDSPAWN | ANTAG_VOTABLE
 	antaghud_indicator = "hudchangeling"
 
@@ -68,7 +69,7 @@
 			return 1
 		else if(isnewplayer(player.current))
 			if(player.current.client && player.current.client.prefs)
-				var/datum/species/S = all_species[player.current.client.prefs.species]
+				var/datum/species/S = GLOB.all_species[player.current.client.prefs.species]
 				if(S && (S.flags & NO_SCAN))
 					return 0
 				if(player.current.client.prefs.organ_data["torso"] == "cyborg") // Full synthetic.

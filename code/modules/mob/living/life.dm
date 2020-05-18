@@ -98,11 +98,11 @@
 	updatehealth()
 	if(stat != DEAD)
 		if(paralysis)
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else if (status_flags & FAKEDEATH)
-			stat = UNCONSCIOUS
+			set_stat(UNCONSCIOUS)
 		else
-			stat = CONSCIOUS
+			set_stat(CONSCIOUS)
 		return 1
 
 /mob/living/proc/handle_statuses()
@@ -172,13 +172,11 @@
 		if(ear_damage < 100)
 			adjustEarDamage(-0.05,-1)
 
-//this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/handle_regular_hud_updates()
 	if(!client)
 		return 0
 	..()
 
-	handle_vision()
 	handle_darksight()
 	handle_hud_icons()
 
@@ -189,6 +187,13 @@
 		see_invisible = SEE_INVISIBLE_NOLIGHTING
 	else
 		see_invisible = initial(see_invisible)
+
+	sight = initial(sight)
+
+	for(var/datum/modifier/M in modifiers)
+		if(!isnull(M.vision_flags))
+			sight |= M.vision_flags
+
 	return
 
 /mob/living/proc/handle_hud_icons()
@@ -242,5 +247,5 @@
 	var/distance = abs(current-adjust_to)		//Used for how long to animate for
 	if(distance < 0.01) return					//We're already all set
 
-	//world << "[src] in B:[round(brightness,0.1)] C:[round(current,0.1)] A2:[round(adjust_to,0.1)] D:[round(distance,0.01)] T:[round(distance*10 SECONDS,0.1)]"
+	//to_world("[src] in B:[round(brightness,0.1)] C:[round(current,0.1)] A2:[round(adjust_to,0.1)] D:[round(distance,0.01)] T:[round(distance*10 SECONDS,0.1)]")
 	animate(dsoverlay, alpha = (adjust_to*255), time = (distance*10 SECONDS))

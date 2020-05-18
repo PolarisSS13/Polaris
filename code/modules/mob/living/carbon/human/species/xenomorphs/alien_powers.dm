@@ -72,7 +72,7 @@
 		amount = abs(round(amount))
 		if(check_alien_ability(amount,0,O_PLASMA))
 			M.gain_plasma(amount)
-			M << "<span class='alium'>[src] has transfered [amount] plasma to you.</span>"
+			to_chat(M, "<span class='alium'>[src] has transfered [amount] plasma to you.</span>")
 			to_chat(src, "<span class='alium'>You have transferred [amount] plasma to [M].</span>")
 	return
 
@@ -121,9 +121,7 @@
 
 	if(check_alien_ability(50,1,O_RESIN))
 		visible_message("<span class='alium'><B>[src] has planted some alien weeds!</B></span>")
-		var/obj/O = new /obj/effect/alien/weeds/node(loc)
-		if(O)
-			O.color = "#321D37"
+		new /obj/effect/alien/weeds/node(get_turf(src), "#321D37")
 	return
 
 /mob/living/carbon/human/proc/Spit(var/atom/A)

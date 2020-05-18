@@ -12,8 +12,8 @@
 	T = new/obj/item/stack/tile/floor(src)
 	..()
 
-/obj/machinery/floorlayer/Move(new_turf,M_Dir)
-	..()
+/obj/machinery/floorlayer/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
 
 	if(on)
 		if(mode["dismantle"])
@@ -26,7 +26,7 @@
 			CollectTiles(old_turf)
 
 
-	old_turf = new_turf
+	old_turf = loc
 
 /obj/machinery/floorlayer/attack_hand(mob/user as mob)
 	on=!on
@@ -53,7 +53,7 @@
 		else
 			var/obj/item/stack/tile/E = input("Choose remove tile type.", "Tiles") as null|anything in contents
 			if(E)
-				to_chat(user,  "<span class='notice'>You remove the [E] from /the [src].</span>")
+				to_chat(user, "<span class='notice'>You remove the [E] from \the [src].</span>")
 				E.loc = src.loc
 				T = null
 		return
@@ -64,11 +64,11 @@
 	..()
 
 /obj/machinery/floorlayer/examine(mob/user)
-	..()
+	. = ..()
 	var/dismantle = mode["dismantle"]
 	var/laying = mode["laying"]
 	var/collect = mode["collect"]
-	user << "<span class='notice'>\The [src] [!T?"don't ":""]has [!T?"":"[T.get_amount()] [T] "]tile\s, dismantle is [dismantle?"on":"off"], laying is [laying?"on":"off"], collect is [collect?"on":"off"].</span>"
+	. += "<span class='notice'>[src] [!T ? "don't " : ""]has [!T ? "" : "[T.get_amount()] [T] "]tile\s, dismantle is [dismantle ? "on" : "off"], laying is [laying ? "on" : "off"], collect is [collect ? "on" : "off"].</span>"
 
 /obj/machinery/floorlayer/proc/reset()
 	on=0

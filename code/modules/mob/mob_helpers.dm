@@ -83,7 +83,7 @@ proc/getsensorlevel(A)
 
 
 /proc/is_admin(var/mob/user)
-	return check_rights(R_ADMIN, 0, user) != 0
+	return check_rights(R_ADMIN|R_EVENT, 0, user) != 0
 
 
 /proc/hsl2rgb(h, s, l)
@@ -183,6 +183,12 @@ proc/getsensorlevel(A)
 			intag = !intag
 		p++
 	return t
+
+/proc/stars_all(list/message_pieces, pr)
+	// eugh, we have to clone the list to avoid collateral damage due to the nature of these messages
+	. = list()
+	for(var/datum/multilingual_say_piece/S in message_pieces)
+		. += new /datum/multilingual_say_piece(S.speaking, stars(S.message))
 
 proc/slur(phrase)
 	phrase = html_decode(phrase)
@@ -423,7 +429,7 @@ proc/is_blind(A)
 					else										// Everyone else (dead people who didn't ghost yet, etc.)
 						lname = name
 				lname = "<span class='name'>[lname]</span> "
-			M << "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>"
+			to_chat(M, "<span class='deadsay'>" + create_text_tag("dead", "DEAD:", M.client) + " [lname][follow][message]</span>")
 
 /proc/say_dead_object(var/message, var/obj/subject = null)
 	for(var/mob/M in player_list)
@@ -437,7 +443,7 @@ proc/is_blind(A)
 				lname = "[subject.name] ([subject.x],[subject.y],[subject.z])"
 
 			lname = "<span class='name'>[lname]</span> "
-			M << "<span class='deadsay'>" + create_text_tag("event_dead", "EVENT:", M.client) + " [lname][follow][message]</span>"
+			to_chat(M, "<span class='deadsay'>" + create_text_tag("event_dead", "EVENT:", M.client) + " [lname][follow][message]</span>")
 
 //Announces that a ghost has joined/left, mainly for use with wizards
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")

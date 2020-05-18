@@ -35,6 +35,7 @@
 	throwforce = 0
 	throw_speed = 4
 	throw_range = 20
+	drop_sound = 'sound/misc/slip.ogg'
 
 /obj/item/weapon/soap/nanotrasen
 	desc = "A NanoTrasen-brand bar of soap. Smells of phoron."
@@ -65,7 +66,6 @@
 	attack_verb = list("HONKED")
 	var/spam_flag = 0
 
-
 /obj/item/weapon/c_tube
 	name = "cardboard tube"
 	desc = "A tube... of cardboard."
@@ -75,72 +75,6 @@
 	w_class = ITEMSIZE_SMALL
 	throw_speed = 4
 	throw_range = 5
-
-/obj/item/weapon/cane
-	name = "cane"
-	desc = "A cane used by a true gentleman."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "cane"
-	item_icons = list(
-			slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',
-			slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
-			)
-	force = 5.0
-	throwforce = 7.0
-	w_class = ITEMSIZE_NORMAL
-	matter = list(DEFAULT_WALL_MATERIAL = 50)
-	attack_verb = list("bludgeoned", "whacked", "disciplined", "thrashed")
-
-/obj/item/weapon/cane/concealed
-	var/concealed_blade
-
-/obj/item/weapon/cane/concealed/New()
-	..()
-	var/obj/item/weapon/material/butterfly/switchblade/temp_blade = new(src)
-	concealed_blade = temp_blade
-	temp_blade.attack_self()
-
-/obj/item/weapon/cane/concealed/attack_self(var/mob/user)
-	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	if(concealed_blade)
-		user.visible_message("<span class='warning'>[user] has unsheathed \a [concealed_blade] from [T.his] [src]!</span>", "You unsheathe \the [concealed_blade] from \the [src].")
-		// Calling drop/put in hands to properly call item drop/pickup procs
-		playsound(user.loc, 'sound/weapons/flipblade.ogg', 50, 1)
-		user.drop_from_inventory(src)
-		user.put_in_hands(concealed_blade)
-		user.put_in_hands(src)
-		user.update_inv_l_hand(0)
-		user.update_inv_r_hand()
-		concealed_blade = null
-	else
-		..()
-
-/obj/item/weapon/cane/concealed/attackby(var/obj/item/weapon/material/butterfly/W, var/mob/user)
-	if(!src.concealed_blade && istype(W))
-		var/datum/gender/T = gender_datums[user.get_visible_gender()]
-		user.visible_message("<span class='warning'>[user] has sheathed \a [W] into [T.his] [src]!</span>", "You sheathe \the [W] into \the [src].")
-		user.drop_from_inventory(W)
-		W.loc = src
-		src.concealed_blade = W
-		update_icon()
-	else
-		..()
-
-/obj/item/weapon/cane/concealed/update_icon()
-	if(concealed_blade)
-		name = initial(name)
-		icon_state = initial(icon_state)
-		item_state = initial(icon_state)
-	else
-		name = "cane shaft"
-		icon_state = "nullrod"
-		item_state = "foldcane"
-
-/obj/item/weapon/cane/whitecane
-	name = "white cane"
-	desc = "A cane used by the blind."
-	icon = 'icons/obj/weapons.dmi'
-	icon_state = "whitecane"
 
 /obj/item/weapon/disk
 	name = "disk"
@@ -296,13 +230,6 @@
 	desc = "Heavy-duty switching circuits for power control."
 	matter = list(DEFAULT_WALL_MATERIAL = 50, "glass" = 50)
 
-/obj/item/weapon/module/power_control/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (istype(W, /obj/item/device/multitool))
-		var/obj/item/weapon/circuitboard/ghettosmes/newcircuit = new/obj/item/weapon/circuitboard/ghettosmes(user.loc)
-		qdel(src)
-		user.put_in_hands(newcircuit)
-
-
 /obj/item/weapon/module/id_auth
 	name = "\improper ID authentication module"
 	icon_state = "id_mod"
@@ -336,7 +263,7 @@
 		if (C.bugged && C.status)
 			cameras.Add(C)
 	if (length(cameras) == 0)
-		usr << "<span class='warning'>No bugged functioning cameras found.</span>"
+		to_chat(usr, "<span class='warning'>No bugged functioning cameras found.</span>")
 		return
 
 	var/list/friendly_cameras = new/list()
@@ -419,6 +346,7 @@
 	icon = 'icons/obj/stock_parts.dmi'
 	w_class = ITEMSIZE_SMALL
 	var/rating = 1
+	drop_sound = 'sound/items/drop/glass.ogg'
 
 /obj/item/weapon/stock_parts/New()
 	src.pixel_x = rand(-5.0, 5)

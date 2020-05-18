@@ -1,5 +1,6 @@
 /obj/machinery/portable_atmospherics/powered/scrubber
 	name = "Portable Air Scrubber"
+	desc = "Similar to room scrubbers, this device contains an internal tank to scrub gasses from the atmosphere."
 
 	icon = 'icons/obj/atmos.dmi'
 	icon_state = "pscrubber:0"
@@ -144,12 +145,13 @@
 //Huge scrubber
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
+	desc = "A larger variation of the portable scrubber, for industrial scrubbing of air. Must be turned on from a remote terminal."
 	icon_state = "scrubber:0"
 	anchored = 1
 	volume = 50000
 	volume_rate = 5000
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 500		//internal circuitry, friction losses and stuff
 	active_power_usage = 100000	//100 kW ~ 135 HP
 
@@ -231,6 +233,10 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary
 	name = "Stationary Air Scrubber"
+
+/obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/Initialize()
+	. = ..()
+	desc += "This one seems to be tightly secured with large bolts."
 
 /obj/machinery/portable_atmospherics/powered/scrubber/huge/stationary/attackby(var/obj/item/I as obj, var/mob/user as mob)
 	if(I.is_wrench())

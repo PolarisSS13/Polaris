@@ -119,6 +119,11 @@
 		icon_state = "hair_long_bedhead"
 		flags = HAIR_TIEABLE
 
+	bedheadlongest
+		name = "Bedhead Longest"
+		icon_state = "hair_longest_bedhead"
+		flags = HAIR_TIEABLE
+
 	beehive
 		name = "Beehive"
 		icon_state = "hair_beehive"
@@ -420,7 +425,7 @@
 		icon_state = "hair_gentle"
 		flags = HAIR_TIEABLE
 
-	gentle
+	gentle2
 		name = "Gentle 2, Long"
 		icon_state = "hair_gentle2long"
 		flags = HAIR_TIEABLE
@@ -742,6 +747,11 @@
 		name = "Row Braid"
 		icon_state = "hair_rowbraid"
 		flags = HAIR_TIEABLE
+
+	sabitsuki
+		name = "Sabitsuki"
+		icon_state = "hair_sabitsuki"
+		flags = HAIR_VERY_SHORT
 
 	scully
 		name = "Scully"
@@ -1294,6 +1304,11 @@
 		icon_state = "teshari_mushroom"
 		species_allowed = list(SPECIES_TESHARI)
 
+	teshari_bald
+		name = "Bald (use with FBP)"
+		icon_state = "bald"
+		species_allowed = list(SPECIES_TESHARI)
+
 // Vox things
 	vox_braid_long
 		name = "Long Vox braid"
@@ -1545,6 +1560,11 @@
 		icon_state = "backstripe"
 		body_parts = list(BP_TORSO)
 
+	heterochromia
+		name = "Heterochromia (right eye)"
+		icon_state = "heterochromia"
+		body_parts = list(BP_HEAD)
+
 	//Taj specific stuff
 	taj_belly
 		name = "Belly Fur (Taj)"
@@ -1625,6 +1645,12 @@
 		name = "Underfluff (Teshari)"
 		icon_state = "teshi_fluff"
 		body_parts = list(BP_HEAD, BP_TORSO, BP_GROIN, BP_R_LEG, BP_L_LEG)
+		species_allowed = list(SPECIES_TESHARI)
+
+	teshi_heterochromia
+		name = "Heterochromia (Teshari) (right eye)"
+		icon_state = "teshi_heterochromia"
+		body_parts = list(BP_HEAD)
 		species_allowed = list(SPECIES_TESHARI)
 
 //skin styles - WIP

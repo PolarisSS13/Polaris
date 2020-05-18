@@ -31,12 +31,12 @@
 
 // Not going to check type repeatedly, if you code or varedit
 // load_type and get runtime errors, don't come crying to me.
-/obj/item/weapon/gun/magnetic/railgun/show_ammo(var/mob/user)
+/obj/item/weapon/gun/magnetic/railgun/show_ammo()
 	var/obj/item/weapon/rcd_ammo/ammo = loaded
 	if (ammo)
-		to_chat(user, "<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>")
+		return list("<span class='notice'>There are [ammo.remaining] shot\s remaining in \the [loaded].</span>")
 	else
-		to_chat(user, "<span class='notice'>There is nothing loaded.</span>")
+		return list("<span class='notice'>There is nothing loaded.</span>")
 
 /obj/item/weapon/gun/magnetic/railgun/check_ammo()
 	var/obj/item/weapon/rcd_ammo/ammo = loaded
@@ -77,9 +77,9 @@
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/automatic/examine(var/mob/user)
-	. = ..(user,1)
-	if(.)
-		to_chat(user, "<span class='notice'>Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.</span>")
+	. = ..()
+	if(Adjacent(user))
+		. += "<span class='notice'>Someone has scratched <i>Ultima Ratio Regum</i> onto the side of the barrel.</span>"
 
 /obj/item/weapon/gun/magnetic/railgun/flechette
 	name = "flechette gun"
@@ -119,7 +119,7 @@
 
 	removable_components = TRUE
 
-	initial_cell_type = /obj/item/weapon/cell/high
+	initial_cell_type = /obj/item/weapon/cell/device/weapon
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor
 
 	fire_delay = 8
@@ -127,7 +127,7 @@
 	slot_flags = SLOT_BACK
 
 	slowdown = 0
-	slowdown_held = 0
+	slowdown_held = 0.3
 	slowdown_worn = 0
 
 	power_cost = 400
@@ -150,14 +150,16 @@
 
 	w_class = ITEMSIZE_NORMAL
 
-	initial_cell_type = /obj/item/weapon/cell/high
+	slowdown_held = 0.1
+
+	initial_cell_type = /obj/item/weapon/cell/device/weapon
 	initial_capacitor_type = /obj/item/weapon/stock_parts/capacitor
 
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 
 	firemodes = list(
-		list(mode_name="lethal", power_cost = 2000, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=0),
-		list(mode_name="stun", power_cost = 1500, projectile_type = /obj/item/projectile/energy/electrode/stunshot, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=0),
+		list(mode_name="lethal", power_cost = 500, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=10, move_delay=null, one_handed_penalty=0),
+		list(mode_name="stun", power_cost = 350, projectile_type = /obj/item/projectile/energy/electrode/strong, burst=1, fire_delay=7, move_delay=null, one_handed_penalty=0),
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/heater/pistol/hos
@@ -168,8 +170,8 @@
 	description_antag = "This weapon starts with a DNA locking chip attached. Using an EMAG on the weapon will disarm it, and allow you to use the chip as your own."
 
 	firemodes = list(
-		list(mode_name="lethal", power_cost = 1500, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=0),
-		list(mode_name="stun", power_cost = 1200, projectile_type = /obj/item/projectile/energy/electrode/stunshot, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=0),
+		list(mode_name="lethal", power_cost = 400, projectile_type = /obj/item/projectile/bullet/magnetic/heated, burst=1, fire_delay=8, move_delay=null, one_handed_penalty=0),
+		list(mode_name="stun", power_cost = 300, projectile_type = /obj/item/projectile/energy/electrode/strong, burst=1, fire_delay=5, move_delay=null, one_handed_penalty=0),
 		)
 
 /obj/item/weapon/gun/magnetic/railgun/flechette/sif
@@ -184,9 +186,9 @@
 
 	slot_flags = SLOT_BACK
 
-	slowdown = 0.3
+	slowdown_held = 0.3
 
-	power_cost = 200
+	power_cost = 300
 	projectile_type = /obj/item/projectile/bullet/magnetic/flechette/hunting
 	empty_sound = 'sound/weapons/smg_empty_alarm.ogg'
 

@@ -5,7 +5,7 @@
 	real_name = "host brain"
 	universal_understand = 1
 
-/mob/living/captive_brain/say(var/message)
+/mob/living/captive_brain/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 
 	if (src.client)
 		if(client.prefs.muted & MUTE_IC)
@@ -23,15 +23,20 @@
 
 		var/mob/living/simple_mob/animal/borer/B = src.loc
 		to_chat(src, "You whisper silently, \"[message]\"")
-		B.host << "The captive mind of [src] whispers, \"[message]\""
+		to_chat(B.host, "The captive mind of [src] whispers, \"[message]\"")
 
 		for (var/mob/M in player_list)
 			if (istype(M, /mob/new_player))
 				continue
 			else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-				M << "The captive mind of [src] whispers, \"[message]\""
+				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
+
+/mob/living/captive_brain/me_verb(message as text)
+	to_chat(src, "<span class='danger'>You cannot emote as a captive mind.</span>")
+	return
 
 /mob/living/captive_brain/emote(var/message)
+	to_chat(src, "<span class='danger'>You cannot emote as a captive mind.</span>")
 	return
 
 /mob/living/captive_brain/process_resist()
@@ -40,15 +45,15 @@
 		var/mob/living/simple_mob/animal/borer/B = src.loc
 		var/mob/living/captive_brain/H = src
 
-		H << "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>"
-		B.host << "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>"
+		to_chat(H, "<span class='danger'>You begin doggedly resisting the parasite's control (this will take approximately sixty seconds).</span>")
+		to_chat(B.host, "<span class='danger'>You feel the captive mind of [src] begin to resist your control.</span>")
 
 		spawn(rand(200,250)+B.host.brainloss)
 			if(!B || !B.controlling) return
 
 			B.host.adjustBrainLoss(rand(0.1,0.5))
-			H << "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>"
-			B.host << "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>"
+			to_chat(H, "<span class='danger'>With an immense exertion of will, you regain control of your body!</span>")
+			to_chat(B.host, "<span class='danger'>You feel control of the host brain ripped from your grasp, and retract your probosci before the wild neural impulses can damage you.</span>")
 			B.detatch()
 			verbs -= /mob/living/carbon/proc/release_control
 			verbs -= /mob/living/carbon/proc/punish_host

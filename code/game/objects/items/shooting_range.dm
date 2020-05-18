@@ -18,12 +18,12 @@
 				break
 		..() // delete target
 
-	Move()
-		..()
+	Moved(atom/old_loc, direction, forced = FALSE)
+		. = ..()
 		// After target moves, check for nearby stakes. If associated, move to target
 		for(var/obj/structure/target_stake/M in view(3,src))
 			if(M.density == 0 && M.pinned_target == src)
-				M.loc = loc
+				M.forceMove(loc)
 
 		// This may seem a little counter-intuitive but I assure you that's for a purpose.
 		// Stakes are the ones that carry targets, yes, but in the stake code we set
@@ -37,7 +37,7 @@
 			var/obj/item/weapon/weldingtool/WT = W
 			if(WT.remove_fuel(0, user))
 				overlays.Cut()
-				usr << "You slice off [src]'s uneven chunks of aluminum and scorch marks."
+				to_chat(usr, "You slice off [src]'s uneven chunks of aluminum and scorch marks.")
 				return
 
 
@@ -59,10 +59,10 @@
 				if(ishuman(user))
 					if(!user.get_active_hand())
 						user.put_in_hands(src)
-						user << "You take the target out of the stake."
+						to_chat(user, "You take the target out of the stake.")
 				else
 					src.loc = get_turf(user)
-					user << "You take the target out of the stake."
+					to_chat(user, "You take the target out of the stake.")
 
 				stake.pinned_target = null
 				return
@@ -96,7 +96,7 @@
 		if(hp <= 0)
 			for(var/mob/O in oviewers())
 				if ((O.client && !( O.blinded )))
-					O << "<span class='warning'>\The [src] breaks into tiny pieces and collapses!</span>"
+					to_chat(O, "<span class='warning'>\The [src] breaks into tiny pieces and collapses!</span>")
 			qdel(src)
 
 		// Create a temporary object to represent the damage

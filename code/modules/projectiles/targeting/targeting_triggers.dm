@@ -17,11 +17,11 @@
 		return
 	if(perm && (target_permissions & perm))
 		return
-	if(!owner.canClick())
+	if(!owner.checkClickCooldown())
 		return
 	owner.setClickCooldown(5) // Spam prevention, essentially.
 	if(owner.a_intent == I_HELP && owner.is_preference_enabled(/datum/client_preference/safefiring))
-		owner << "<span class='warning'>You refrain from firing \the [aiming_with] as your intent is set to help.</span>"
+		to_chat(owner, "<span class='warning'>You refrain from firing \the [aiming_with] as your intent is set to help.</span>")
 		return
 	owner.visible_message("<span class='danger'>\The [owner] pulls the trigger reflexively!</span>")
 	var/obj/item/weapon/gun/G = aiming_with

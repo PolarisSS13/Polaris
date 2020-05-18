@@ -4,7 +4,7 @@
 	icon_state = "teg"
 	anchored = 1
 	density = 1
-	use_power = 0
+	use_power = USE_POWER_OFF
 
 	var/obj/machinery/atmospherics/unary/generator_input/input1
 	var/obj/machinery/atmospherics/unary/generator_input/input2
@@ -13,15 +13,13 @@
 	var/lastgenlev = -1
 
 
-/obj/machinery/power/generator_type2/New()
-	..()
-	spawn(5)
-		input1 = locate(/obj/machinery/atmospherics/unary/generator_input) in get_step(src,turn(dir, 90))
-		input2 = locate(/obj/machinery/atmospherics/unary/generator_input) in get_step(src,turn(dir, -90))
-		if(!input1 || !input2)
-			stat |= BROKEN
-		updateicon()
-
+/obj/machinery/power/generator_type2/Initialize()
+	. = ..()
+	input1 = locate(/obj/machinery/atmospherics/unary/generator_input) in get_step(src,turn(dir, 90))
+	input2 = locate(/obj/machinery/atmospherics/unary/generator_input) in get_step(src,turn(dir, -90))
+	if(!input1 || !input2)
+		stat |= BROKEN
+	updateicon()
 
 /obj/machinery/power/generator_type2/proc/updateicon()
 
@@ -69,7 +67,7 @@
 			hot_air.temperature = hot_air.temperature - energy_transfer/hot_air_heat_capacity
 			cold_air.temperature = cold_air.temperature + heat/cold_air_heat_capacity
 
-			//world << "POWER: [lastgen] W generated at [efficiency*100]% efficiency and sinks sizes [cold_air_heat_capacity], [hot_air_heat_capacity]"
+			//to_world("POWER: [lastgen] W generated at [efficiency*100]% efficiency and sinks sizes [cold_air_heat_capacity], [hot_air_heat_capacity]")
 
 			if(input1.network)
 				input1.network.update = 1

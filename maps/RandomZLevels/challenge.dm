@@ -23,7 +23,7 @@
 	anchored = 1
 	density = 1
 
-	use_power = 0
+	use_power = USE_POWER_OFF
 	idle_power_usage = 0
 	active_power_usage = 0
 

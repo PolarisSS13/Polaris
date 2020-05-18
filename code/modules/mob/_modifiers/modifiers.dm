@@ -48,6 +48,10 @@
 	var/pain_immunity					// Makes the holder not care about pain while this is on. Only really useful to human mobs.
 	var/pulse_modifier					// Modifier for pulse, will be rounded on application, then added to the normal 'pulse' multiplier which ranges between 0 and 5 normally. Only applied if they're living.
 	var/pulse_set_level					// Positive number. If this is non-null, it will hard-set the pulse level to this. Pulse ranges from 0 to 5 normally.
+	var/emp_modifier					// Added to the EMP strength, which is an inverse scale from 1 to 4, with 1 being the strongest EMP. 5 is a nullification.
+	var/explosion_modifier				// Added to the bomb strength, which is an inverse scale from 1 to 3, with 1 being gibstrength. 4 is a nullification.
+
+	var/vision_flags					// Vision flags to add to the mob. SEE_MOB, SEE_OBJ, etc.
 
 /datum/modifier/New(var/new_holder, var/new_origin)
 	holder = new_holder
@@ -59,7 +63,7 @@
 
 // Checks if the modifier should be allowed to be applied to the mob before attaching it.
 // Override for special criteria, e.g. forbidding robots from receiving it.
-/datum/modifier/proc/can_apply(var/mob/living/L)
+/datum/modifier/proc/can_apply(var/mob/living/L, var/suppress_output = FALSE)
 	return TRUE
 
 // Checks to see if this datum should continue existing.
@@ -113,7 +117,8 @@
 // Call this to add a modifier to a mob. First argument is the modifier type you want, second is how long it should last, in ticks.
 // Third argument is the 'source' of the modifier, if it's from someone else.  If null, it will default to the mob being applied to.
 // The SECONDS/MINUTES macro is very helpful for this.  E.g. M.add_modifier(/datum/modifier/example, 5 MINUTES)
-/mob/living/proc/add_modifier(var/modifier_type, var/expire_at = null, var/mob/living/origin = null)
+// The fourth argument is a boolean to suppress failure messages, set it to true if the modifier is repeatedly applied (as chem-based modifiers are) to prevent chat-spam
+/mob/living/proc/add_modifier(var/modifier_type, var/expire_at = null, var/mob/living/origin = null, var/suppress_failure = FALSE)
 	// First, check if the mob already has this modifier.
 	for(var/datum/modifier/M in modifiers)
 		if(ispath(modifier_type, M))
@@ -130,7 +135,7 @@
 
 	// If we're at this point, the mob doesn't already have it, or it does but stacking is allowed.
 	var/datum/modifier/mod = new modifier_type(src, origin)
-	if(!mod.can_apply(src))
+	if(!mod.can_apply(src, suppress_failure))
 		qdel(mod)
 		return
 	if(expire_at)

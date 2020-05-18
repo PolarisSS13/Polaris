@@ -22,7 +22,7 @@
 	if(..()) return 1
 	var/turf/T = get_turf(nano_host())	// TODO: Allow setting any using_map.contact_levels from the interface.
 	if (!T || !(T.z in using_map.player_levels))
-		usr << "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!"
+		to_chat(usr, "<span class='warning'>Unable to establish a connection</span>: You're too far away from the station!")
 		return 0
 	if(href_list["track"])
 		if(isAI(usr))
@@ -34,16 +34,21 @@
 
 /datum/nano_module/crew_monitor/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1, var/datum/topic_state/state = default_state)
 	var/list/data = host.initial_data()
-	var/turf/T = get_turf(nano_host())
 
 	data["isAI"] = isAI(user)
-	data["map_levels"] = using_map.get_map_levels(T.z, FALSE)
+
+	var/z = get_z(nano_host())
+	var/list/map_levels = using_map.get_map_levels(z, TRUE)
+	data["map_levels"] = map_levels
+
 	data["crewmembers"] = list()
-	for(var/z in (data["map_levels"] | T.z))  // Always show crew from the current Z even if we can't show a map
-		data["crewmembers"] += crew_repository.health_data(z)
+	for(var/zlevel in map_levels)
+		data["crewmembers"] += crew_repository.health_data(zlevel)
 
 	if(!data["map_levels"].len)
 		to_chat(user, "<span class='warning'>The crew monitor doesn't seem like it'll work here.</span>")
+		if(ui)
+			ui.close()
 		return
 
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)

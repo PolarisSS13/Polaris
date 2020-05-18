@@ -16,6 +16,10 @@
 	icon_state = "uglyminearmed"
 	wires = new(src)
 
+/obj/effect/mine/Destroy()
+	qdel_null(wires)
+	return ..()
+
 /obj/effect/mine/proc/explode(var/mob/living/M)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	triggered = 1
@@ -35,13 +39,18 @@
 		explode()
 	..()
 
-/obj/effect/mine/Crossed(AM as mob|obj)
+/obj/effect/mine/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
 	Bumped(AM)
 
 /obj/effect/mine/Bumped(mob/M as mob|obj)
 
 	if(triggered)
 		return
+
+	if(istype(M, /obj/mecha))
+		explode(M)
 
 	if(istype(M, /mob/living/))
 		if(!M.hovering)
@@ -73,7 +82,7 @@
 	triggered = 1
 	s.set_up(3, 1, src)
 	s.start()
-	if(M)
+	if(istype(M))
 		M.radiation += 50
 		randmutb(M)
 		domutcheck(M,null)
@@ -90,7 +99,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
-	if(M)
+	if(istype(M))
 		M.Stun(30)
 	visible_message("\The [src.name] flashes violently before disintegrating!")
 	spawn(0)
@@ -130,7 +139,10 @@
 	triggered = 1
 	s.set_up(3, 1, src)
 	s.start()
-	if(M)
+	if(istype(M, /obj/mecha))
+		var/obj/mecha/E = M
+		M = E.occupant
+	if(istype(M))
 		qdel(M.client)
 	spawn(0)
 		qdel(s)
@@ -189,7 +201,7 @@
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread()
 	s.set_up(3, 1, src)
 	s.start()
-	if(M)
+	if(istype(M))
 		M.adjust_fire_stacks(5)
 		M.fire_act()
 	visible_message("\The [src.name] bursts into flames!")

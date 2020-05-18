@@ -23,8 +23,6 @@
 	var/primary_color = rgb(0,0,0) // Obtained by eyedroppering the stripe in the middle of the card
 	var/secondary_color = rgb(0,0,0) // Likewise for the oval in the top-left corner
 
-	var/datum/job/job_access_type = /datum/job/assistant    // Job type to acquire access rights from, if any
-
 	//alt titles are handled a bit weirdly in order to unobtrusively integrate into existing ID system
 	var/assignment = null	//can be alt title or the actual job
 	var/rank = null			//actual job
@@ -34,12 +32,11 @@
 	var/survey_points = 0	// For redeeming at explorer equipment vendors.
 
 /obj/item/weapon/card/id/examine(mob/user)
-	set src in oview(1)
-	if(in_range(usr, src))
-		show(usr)
-		usr << desc
+	. = ..()
+	if(in_range(user, src))
+		show(user) //Not chat related
 	else
-		usr << "<span class='warning'>It is too far away.</span>"
+		. += "<span class='warning'>It is too far away to read.</span>"
 
 /obj/item/weapon/card/id/proc/prevent_tracking()
 	return 0
@@ -93,8 +90,8 @@
 	return dat
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
-		"You flash your ID card: \icon[src] [src.name]. The assignment on the card: [src.assignment]")
+	user.visible_message("\The [user] shows you: [bicon(src)] [src.name]. The assignment on the card: [src.assignment]",\
+		"You flash your ID card: [bicon(src)] [src.name]. The assignment on the card: [src.assignment]")
 
 	src.add_fingerprint(user)
 	return
@@ -110,10 +107,10 @@
 	set category = "Object"
 	set src in usr
 
-	usr << text("\icon[] []: The current assignment on the card is [].", src, src.name, src.assignment)
-	usr << "The blood type on the card is [blood_type]."
-	usr << "The DNA hash on the card is [dna_hash]."
-	usr << "The fingerprint hash on the card is [fingerprint_hash]."
+	to_chat(usr, "[bicon(src)] [src.name]: The current assignment on the card is [src.assignment].")
+	to_chat(usr, "The blood type on the card is [blood_type].")
+	to_chat(usr, "The DNA hash on the card is [dna_hash].")
+	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
 	return
 
 /obj/item/weapon/card/id/get_worn_icon_state(var/slot_name)
@@ -134,16 +131,6 @@
 	icon_state = "silver"
 	item_state = "silver_id"
 
-/obj/item/weapon/card/id/silver/secretary
-	assignment = "Command Secretary"
-	rank = "Command Secretary"
-	job_access_type = /datum/job/secretary
-
-/obj/item/weapon/card/id/silver/hop
-	assignment = "Head of Personnel"
-	rank = "Head of Personnel"
-	job_access_type = /datum/job/hop
-
 /obj/item/weapon/card/id/gold
 	name = "identification card"
 	desc = "A golden card which shows power and might."
@@ -154,13 +141,11 @@
 /obj/item/weapon/card/id/gold/captain
 	assignment = "Colony Director"
 	rank = "Colony Director"
-	job_access_type = /datum/job/captain
 
 /obj/item/weapon/card/id/gold/captain/spare
 	name = "\improper Colony Director's spare ID"
 	desc = "The spare ID of the High Lord himself."
 	registered_name = "Colony Director"
-	job_access_type = /datum/job/captain
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"
@@ -205,31 +190,6 @@
 	primary_color = rgb(189,237,237)
 	secondary_color = rgb(223,255,255)
 
-/obj/item/weapon/card/id/medical/doctor
-	assignment = "Medical Doctor"
-	rank = "Medical Doctor"
-	job_access_type = /datum/job/doctor
-
-/obj/item/weapon/card/id/medical/chemist
-	assignment = "Chemist"
-	rank = "Chemist"
-	job_access_type = /datum/job/chemist
-
-/obj/item/weapon/card/id/medical/geneticist
-	assignment = "Geneticist"
-	rank = "Geneticist"
-	job_access_type = /datum/job/doctor	//geneticist
-
-/obj/item/weapon/card/id/medical/psychiatrist
-	assignment = "Psychiatrist"
-	rank = "Psychiatrist"
-	job_access_type = /datum/job/psychiatrist
-
-/obj/item/weapon/card/id/medical/paramedic
-	assignment = "Paramedic"
-	rank = "Paramedic"
-	job_access_type = /datum/job/paramedic
-
 /obj/item/weapon/card/id/medical/head
 	name = "identification card"
 	desc = "A card which represents care and compassion."
@@ -238,7 +198,6 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Chief Medical Officer"
 	rank = "Chief Medical Officer"
-	job_access_type = /datum/job/cmo
 
 /obj/item/weapon/card/id/security
 	name = "identification card"
@@ -246,21 +205,6 @@
 	icon_state = "sec"
 	primary_color = rgb(189,47,0)
 	secondary_color = rgb(223,127,95)
-
-/obj/item/weapon/card/id/security/officer
-	assignment = "Security Officer"
-	rank = "Security Officer"
-	job_access_type = /datum/job/officer
-
-/obj/item/weapon/card/id/security/detective
-	assignment = "Detective"
-	rank = "Detective"
-	job_access_type = /datum/job/detective
-
-/obj/item/weapon/card/id/security/warden
-	assignment = "Warden"
-	rank = "Warden"
-	job_access_type = /datum/job/warden
 
 /obj/item/weapon/card/id/security/head
 	name = "identification card"
@@ -270,7 +214,6 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Head of Security"
 	rank = "Head of Security"
-	job_access_type = /datum/job/hos
 
 /obj/item/weapon/card/id/engineering
 	name = "identification card"
@@ -278,16 +221,6 @@
 	icon_state = "eng"
 	primary_color = rgb(189,94,0)
 	secondary_color = rgb(223,159,95)
-
-/obj/item/weapon/card/id/engineering/engineer
-	assignment = "Station Engineer"
-	rank = "Station Engineer"
-	job_access_type = /datum/job/engineer
-
-/obj/item/weapon/card/id/engineering/atmos
-	assignment = "Atmospheric Technician"
-	rank = "Atmospheric Technician"
-	job_access_type = /datum/job/atmos
 
 /obj/item/weapon/card/id/engineering/head
 	name = "identification card"
@@ -297,7 +230,6 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Chief Engineer"
 	rank = "Chief Engineer"
-	job_access_type = /datum/job/chief_engineer
 
 /obj/item/weapon/card/id/science
 	name = "identification card"
@@ -305,21 +237,6 @@
 	icon_state = "sci"
 	primary_color = rgb(142,47,142)
 	secondary_color = rgb(191,127,191)
-
-/obj/item/weapon/card/id/science/scientist
-	assignment = "Scientist"
-	rank = "Scientist"
-	job_access_type = /datum/job/scientist
-
-/obj/item/weapon/card/id/science/xenobiologist
-	assignment = "Xenobiologist"
-	rank = "Xenobiologist"
-	job_access_type = /datum/job/xenobiologist
-
-/obj/item/weapon/card/id/science/roboticist
-	assignment = "Roboticist"
-	rank = "Roboticist"
-	job_access_type = /datum/job/roboticist
 
 /obj/item/weapon/card/id/science/head
 	name = "identification card"
@@ -329,7 +246,6 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Research Director"
 	rank = "Research Director"
-	job_access_type = /datum/job/rd
 
 /obj/item/weapon/card/id/cargo
 	name = "identification card"
@@ -337,16 +253,6 @@
 	icon_state = "cargo"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(191,159,95)
-
-/obj/item/weapon/card/id/cargo/cargo_tech
-	assignment = "Cargo Technician"
-	rank = "Cargo Technician"
-	job_access_type = /datum/job/cargo_tech
-
-/obj/item/weapon/card/id/cargo/mining
-	assignment = "Shaft Miner"
-	rank = "Shaft Miner"
-	job_access_type = /datum/job/mining
 
 /obj/item/weapon/card/id/cargo/head
 	name = "identification card"
@@ -356,12 +262,10 @@
 	secondary_color = rgb(255,223,127)
 	assignment = "Quartermaster"
 	rank = "Quartermaster"
-	job_access_type = /datum/job/qm
 
 /obj/item/weapon/card/id/assistant
 	assignment = "Assistant"
 	rank = "Assistant"
-	job_access_type = /datum/job/assistant
 
 /obj/item/weapon/card/id/civilian
 	name = "identification card"
@@ -371,42 +275,6 @@
 	secondary_color = rgb(95,159,191)
 	assignment = "Civilian"
 	rank = "Assistant"
-	job_access_type = /datum/job/assistant
-
-/obj/item/weapon/card/id/civilian/bartender
-	assignment = "Bartender"
-	rank = "Bartender"
-	job_access_type = /datum/job/bartender
-
-/obj/item/weapon/card/id/civilian/botanist
-	assignment = "Botanist"
-	rank = "Botanist"
-	job_access_type = /datum/job/hydro
-
-/obj/item/weapon/card/id/civilian/chaplain
-	assignment = "Chaplain"
-	rank = "Chaplain"
-	job_access_type = /datum/job/chaplain
-
-/obj/item/weapon/card/id/civilian/chef
-	assignment = "Chef"
-	rank = "Chef"
-	job_access_type = /datum/job/chef
-
-/obj/item/weapon/card/id/civilian/internal_affairs_agent
-	assignment = "Internal Affairs Agent"
-	rank = "Internal Affairs Agent"
-	job_access_type = /datum/job/lawyer
-
-/obj/item/weapon/card/id/civilian/janitor
-	assignment = "Janitor"
-	rank = "Janitor"
-	job_access_type = /datum/job/janitor
-
-/obj/item/weapon/card/id/civilian/librarian
-	assignment = "Librarian"
-	rank = "Librarian"
-	job_access_type = /datum/job/librarian
 
 /obj/item/weapon/card/id/civilian/head //This is not the HoP. There's no position that uses this right now.
 	name = "identification card"

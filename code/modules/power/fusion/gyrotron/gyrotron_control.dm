@@ -1,5 +1,6 @@
 /obj/machinery/computer/gyrotron_control
 	name = "gyrotron control console"
+	desc = "Used to control the R-UST stability beams."
 	icon = 'icons/obj/machines/power/fusion.dmi'
 	icon_state = "engine"
 	light_color = COLOR_BLUE
@@ -74,7 +75,7 @@
 			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
 			return 1
 		G.mega_energy = CLAMP(new_val, 1, 50)
-		G.active_power_usage = G.mega_energy * 1500
+		G.update_active_power_usage(G.mega_energy * 1500)
 		updateUsrDialog()
 		return 1
 

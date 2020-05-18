@@ -367,7 +367,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			if(isAI(src))
 				var/mob/living/silicon/ai/A = src
 				oldname = null//don't bother with the records update crap
-				//world << "<b>[newname] is the AI!</b>"
+				//to_world("<b>[newname] is the AI!</b>")
 				//world << sound('sound/AI/newAI.ogg')
 				// Set eyeobj name
 				A.SetName(newname)
@@ -676,7 +676,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 //Returns: all the areas in the world
 /proc/return_areas()
 	var/list/area/areas = list()
-	for(var/area/A in all_areas)
+	for(var/area/A in world)
 		areas += A
 	return areas
 
@@ -694,7 +694,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/areas = new/list()
-	for(var/area/N in all_areas)
+	for(var/area/N in world)
 		if(istype(N, areatype)) areas += N
 	return areas
 
@@ -708,7 +708,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/turfs = new/list()
-	for(var/area/N in all_areas)
+	for(var/area/N in world)
 		if(istype(N, areatype))
 			for(var/turf/T in N) turfs += T
 	return turfs
@@ -723,7 +723,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 		areatype = areatemp.type
 
 	var/list/atoms = new/list()
-	for(var/area/N in all_areas)
+	for(var/area/N in world)
 		if(istype(N, areatype))
 			for(var/atom/A in N)
 				atoms += A
@@ -1411,6 +1411,8 @@ var/mob/dview/dview_mob = new
 #define VARSET_LIST_CALLBACK(target, var_name, var_value) CALLBACK(GLOBAL_PROC, /proc/___callbackvarset, ##target, ##var_name, ##var_value)
 //dupe code because dm can't handle 3 level deep macros
 #define VARSET_CALLBACK(datum, var, var_value) CALLBACK(GLOBAL_PROC, /proc/___callbackvarset, ##datum, NAMEOF(##datum, ##var), ##var_value)
+//we'll see about those 3-level deep macros
+#define VARSET_IN(datum, var, var_value, time) addtimer(VARSET_CALLBACK(datum, var, var_value), time)
 
 /proc/___callbackvarset(list_or_datum, var_name, var_value)
 	if(length(list_or_datum))
@@ -1571,3 +1573,11 @@ var/mob/dview/dview_mob = new
 			else
 				return "\[[url_encode(thing.tag)]\]"
 	return "\ref[input]"
+
+// Painlessly creates an <a href=...> element.
+// First argument is where to send the Topic call to when clicked. Should be a reference to an object. This is generally src, but not always.
+// Second one is for all the params that will be sent. Uses an assoc list (e.g. "value" = "5").
+// Note that object refs will be converted to text, as if \ref[thing] was done. To get the ref back on Topic() side, you will need to use locate().
+// Third one is the text that will be clickable.
+/proc/href(href_src, list/href_params, href_text)
+	return "<a href='?src=\ref[href_src];[list2params(href_params)]'>[href_text]</a>"

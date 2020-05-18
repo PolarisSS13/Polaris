@@ -20,7 +20,9 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 		return
 	return
 
-/obj/effect/portal/Crossed(AM as mob|obj)
+/obj/effect/portal/Crossed(atom/movable/AM as mob|obj)
+	if(AM.is_incorporeal())
+		return
 	if(istype(AM,/mob) && !(istype(AM,/mob/living)))
 		return	//do not send ghosts, zshadows, ai eyes, etc
 	spawn(0)
@@ -36,12 +38,9 @@ GLOBAL_LIST_BOILERPLATE(all_portals, /obj/effect/portal)
 		return
 	return
 
-/obj/effect/portal/New()
-	..() // Necessary for the list boilerplate to work
-	spawn(300)
-		qdel(src)
-		return
-	return
+/obj/effect/portal/Initialize()
+	. = ..()
+	QDEL_IN(src, 30 SECONDS)
 
 /obj/effect/portal/proc/teleport(atom/movable/M as mob|obj)
 	if(istype(M, /obj/effect)) //sparks don't teleport

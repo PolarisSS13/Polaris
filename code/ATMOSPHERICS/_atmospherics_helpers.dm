@@ -19,7 +19,7 @@
 	set name = "Toggle Debug Messages"
 	set category = "Debug"
 	M.debug = !M.debug
-	usr << "[M]: Debug messages toggled [M.debug? "on" : "off"]."
+	to_chat(usr, "[M]: Debug messages toggled [M.debug? "on" : "off"].")
 
 //Generalized gas pumping proc.
 //Moves gas from one gas_mixture to another and returns the amount of power needed (assuming 1 second), or -1 if no gas was pumped.
@@ -468,6 +468,10 @@
 			return "REGULAR"
 		if(PIPING_LAYER_SCRUBBER)
 			return "SCRUBBER"
+		if(PIPING_LAYER_FUEL)
+			return "FUEL"
+		if(PIPING_LAYER_AUX)
+			return "AUX"
 
 /proc/atmos_pipe_flags_str(pipe_flags)
 	var/list/dat = list()
@@ -489,6 +493,10 @@
 		dat += "SUPPLY"
 	if(connect_types & CONNECT_TYPE_SCRUBBER)
 		dat += "SCRUBBER"
+	if(connect_types & CONNECT_TYPE_FUEL)
+		dat += "FUEL"
+	if(connect_types & CONNECT_TYPE_AUX)
+		dat += "AUX"
 	if(connect_types & CONNECT_TYPE_HE)
 		dat += "HE"
 	return dat.Join("|")

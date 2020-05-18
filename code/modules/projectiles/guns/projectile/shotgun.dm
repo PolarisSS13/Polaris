@@ -54,6 +54,9 @@
 	else
 		icon_state = "[icon_state]-empty"
 
+/obj/item/weapon/gun/projectile/shotgun/pump/empty
+	ammo_type = null
+
 /obj/item/weapon/gun/projectile/shotgun/pump/slug
 	ammo_type = /obj/item/ammo_casing/a12g
 
@@ -66,6 +69,9 @@
 	max_shells = 7 //match the ammo box capacity, also it can hold a round in the chamber anyways, for a total of 8.
 	ammo_type = /obj/item/ammo_casing/a12g
 	load_method = SINGLE_CASING|SPEEDLOADER
+
+/obj/item/weapon/gun/projectile/shotgun/pump/combat/empty
+	ammo_type = null
 
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
@@ -104,7 +110,7 @@
 //this is largely hacky and bad :(	-Pete
 /obj/item/weapon/gun/projectile/shotgun/doublebarrel/attackby(var/obj/item/A as obj, mob/user as mob)
 	if(istype(A, /obj/item/weapon/surgical/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/pickaxe/plasmacutter))
-		user << "<span class='notice'>You begin to shorten the barrel of \the [src].</span>"
+		to_chat(user, "<span class='notice'>You begin to shorten the barrel of \the [src].</span>")
 		if(loaded.len)
 			var/burstsetting = burst
 			burst = 2

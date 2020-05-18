@@ -4,9 +4,12 @@
 	icon_state = "autolathe"
 	density = 1
 	anchored = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 2000
+	clicksound = "keyboard"
+	clickvol = 30
+
 	circuit = /obj/item/weapon/circuitboard/autolathe
 	var/datum/category_collection/autolathe/machine_recipes
 	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
@@ -23,15 +26,12 @@
 
 	var/datum/wires/autolathe/wires = null
 
-/obj/machinery/autolathe/New()
-	..()
+	var/filtertext
+
+/obj/machinery/autolathe/Initialize()
+	. = ..()
 	wires = new(src)
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
+	default_apply_parts()
 	RefreshParts()
 
 /obj/machinery/autolathe/Destroy()
@@ -68,10 +68,13 @@
 			material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
 
 		dat += "[material_top.Join()]</tr>[material_bottom.Join()]</tr></table><hr>"
+		dat += "<b>Filter:</b> <a href='?src=\ref[src];setfilter=1'>[filtertext ? filtertext : "None Set"]</a><br>"
 		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[current_category]</a>.</h3></center><table width = '100%'>"
 
 		for(var/datum/category_item/autolathe/R in current_category.items)
 			if(R.hidden && !hacked)
+				continue
+			if(filtertext && findtext(R.name, filtertext) == 0)
 				continue
 			var/can_make = 1
 			var/list/material_string = list()
@@ -104,18 +107,14 @@
 							multiplier_string  += "<a href='?src=\ref[src];make=\ref[R];multiplier=[i]'>\[x[i]\]</a>"
 						multiplier_string += "<a href='?src=\ref[src];make=\ref[R];multiplier=[max_sheets]'>\[x[max_sheets]\]</a>"
 
-			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=\ref[R];multiplier=1'>" : ""][R.name][can_make ? "</a>" : ""]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string.Join()]</td><td align = right>[material_string.Join()]</tr>"
+			dat += "<tr><td width = 180>[R.hidden ? "<font color = 'red'>*</font>" : ""]<b>[can_make ? "<a href='?src=\ref[src];make=\ref[R];multiplier=1'>" : "<span class='linkOff'>"][R.name][can_make ? "</a>" : "</span>"]</b>[R.hidden ? "<font color = 'red'>*</font>" : ""][multiplier_string.Join()]</td><td align = right>[material_string.Join()]</tr>"
 
 		dat += "</table><hr>"
-	//Hacking.
-	if(panel_open)
-		dat += "<h2>Maintenance Panel</h2>"
-		dat += wires.GetInteractWindow()
 
-		dat += "<hr>"
-
-	user << browse(dat.Join(), "window=autolathe")
-	onclose(user, "autolathe")
+	dat = jointext(dat, null)
+	var/datum/browser/popup = new(user, "autolathe", "Autolathe Production Menu", 550, 700)
+	popup.set_content(dat)
+	popup.open()
 
 /obj/machinery/autolathe/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
@@ -135,8 +134,8 @@
 
 	if(panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
-		if(istype(O, /obj/item/device/multitool) || O.is_wirecutter())
-			attack_hand(user)
+		if(O.is_multitool() || O.is_wirecutter())
+			wires.Interact(user)
 			return
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
@@ -231,6 +230,16 @@
 		to_chat(usr, "<span class='notice'>The autolathe is busy. Please wait for completion of previous operation.</span>")
 		return
 
+	else if(href_list["setfilter"])
+		var/filterstring = input(usr, "Input a filter string, or blank to not filter:", "Design Filter", filtertext) as null|text
+		if(!Adjacent(usr))
+			return
+		if(isnull(filterstring)) //Clicked Cancel
+			return
+		if(filterstring == "") //Cleared value
+			filtertext = null
+		filtertext = sanitize(filterstring, 25)
+
 	if(href_list["change_category"])
 
 		var/choice = input("Which category do you wish to display?") as null|anything in machine_recipes.categories
@@ -249,7 +258,7 @@
 			return
 
 		busy = 1
-		update_use_power(2)
+		update_use_power(USE_POWER_ACTIVE)
 
 		//Check if we still have the materials.
 		var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
@@ -268,7 +277,7 @@
 		sleep(build_time)
 
 		busy = 0
-		update_use_power(1)
+		update_use_power(USE_POWER_IDLE)
 		update_icon() // So lid opens
 
 		//Sanity check.

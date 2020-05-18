@@ -2,6 +2,7 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 
 #define CELLRATE 0.002 // Multiplier for watts per tick <> cell storage (e.g., 0.02 means if there is a load of 1000 watts, 20 units will be taken from a cell per second)
                        // It's a conversion constant. power_used*CELLRATE = charge_provided, or charge_used/CELLRATE = power_provided
+#define SMESRATE 0.03333 // Same for SMESes. A different number for some reason.
 
 #define KILOWATTS *1000
 #define MEGAWATTS *1000000
@@ -10,6 +11,11 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 // Doors!
 #define DOOR_CRUSH_DAMAGE 20
 #define ALIEN_SELECT_AFK_BUFFER  1    // How many minutes that a person can be AFK before not being allowed to be an alien.
+
+// Constants for machine's use_power
+#define USE_POWER_OFF    0	// No continuous power use
+#define USE_POWER_IDLE   1	// Machine is using power at its idle power level
+#define USE_POWER_ACTIVE 2	// Machine is using power at its active power level
 
 // Channel numbers for power.
 #define EQUIP   1
@@ -23,6 +29,11 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define POWEROFF 0x4  // TBD.
 #define MAINT    0x8  // Under maintenance.
 #define EMPED    0x10 // Temporary broken by EMP pulse.
+
+// Remote control states
+#define RCON_NO		1
+#define RCON_AUTO	2
+#define RCON_YES	3
 
 // Used by firelocks
 #define FIREDOOR_OPEN 1
@@ -64,6 +75,21 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 // Those networks can only be accessed by pre-existing terminals. AIs and new terminals can't use them.
 var/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,"Secret", NETWORK_COMMUNICATORS)
 
+#define TRANSMISSION_WIRE		0 //Is this ever used? I don't think it is.
+#define TRANSMISSION_RADIO		1 //Radio transmissions (like airlock controller to pump)
+#define TRANSMISSION_SUBSPACE	2 //Like headsets
+#define TRANSMISSION_BLUESPACE	3 //Point-to-point links
+
+#define SIGNAL_NORMAL	0 //Normal subspace signals
+#define SIGNAL_SIMPLE	1 //Normal inter-machinery(?) signals
+#define SIGNAL_FAKE		2 //Untrackable signals
+#define SIGNAL_TEST		4 //Unlogged signals
+
+#define DATA_NORMAL		0 //Normal data
+#define DATA_INTERCOM	1 //Intercoms only
+#define DATA_LOCAL		2 //Intercoms and SBRs
+#define DATA_ANTAG		3 //Antag interception
+#define DATA_FAKE		4 //Not from a real mob
 
 //singularity defines
 #define STAGE_ONE 	1

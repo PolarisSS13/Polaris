@@ -1,38 +1,3 @@
-/atom/movable/proc/get_mob()
-	return
-
-/obj/mecha/get_mob()
-	return occupant
-
-/obj/vehicle/train/get_mob()
-	return buckled_mobs
-
-/mob/get_mob()
-	return src
-
-/mob/living/bot/mulebot/get_mob()
-	if(load && istype(load, /mob/living))
-		return list(src, load)
-	return src
-
-/proc/mobs_in_view(var/range, var/source)
-	var/list/mobs = list()
-	for(var/atom/movable/AM in view(range, source))
-		var/M = AM.get_mob()
-		if(M)
-			mobs += M
-
-	return mobs
-
-/proc/mobs_in_xray_view(var/range, var/source)
-	var/list/mobs = list()
-	for(var/atom/movable/AM in orange(range, source))
-		var/M = AM.get_mob()
-		if(M)
-			mobs += M
-
-	return mobs
-
 proc/random_hair_style(gender, species = SPECIES_HUMAN)
 	var/h_style = "Bald"
 
@@ -75,7 +40,7 @@ proc/random_facial_hair_style(gender, species = SPECIES_HUMAN)
 proc/sanitize_name(name, species = SPECIES_HUMAN, robot = 0)
 	var/datum/species/current_species
 	if(species)
-		current_species = all_species[species]
+		current_species = GLOB.all_species[species]
 
 	return current_species ? current_species.sanitize_name(name, robot) : sanitizeName(name, MAX_NAME_LEN, robot)
 
@@ -83,7 +48,7 @@ proc/random_name(gender, species = SPECIES_HUMAN)
 
 	var/datum/species/current_species
 	if(species)
-		current_species = all_species[species]
+		current_species = GLOB.all_species[species]
 
 	if(!current_species || current_species.name_language == null)
 		if(gender==FEMALE)

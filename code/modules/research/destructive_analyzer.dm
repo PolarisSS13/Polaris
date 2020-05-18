@@ -12,17 +12,13 @@ Note: Must be placed within 3 tiles of the R&D Console
 	var/obj/item/weapon/loaded_item = null
 	var/decon_mod = 0
 	circuit = /obj/item/weapon/circuitboard/destructive_analyzer
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 30
 	active_power_usage = 2500
 
-/obj/machinery/r_n_d/destructive_analyzer/New()
-	..()
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	RefreshParts()
+/obj/machinery/r_n_d/destructive_analyzer/Initialize()
+	. = ..()
+	default_apply_parts()
 
 /obj/machinery/r_n_d/destructive_analyzer/RefreshParts()
 	var/T = 0
@@ -40,10 +36,10 @@ Note: Must be placed within 3 tiles of the R&D Console
 
 /obj/machinery/r_n_d/destructive_analyzer/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(busy)
-		user << "<span class='notice'>\The [src] is busy right now.</span>"
+		to_chat(user, "<span class='notice'>\The [src] is busy right now.</span>")
 		return
 	if(loaded_item)
-		user << "<span class='notice'>There is something already loaded into \the [src].</span>"
+		to_chat(user, "<span class='notice'>There is something already loaded into \the [src].</span>")
 		return 1
 	if(default_deconstruction_screwdriver(user, O))
 		if(linked_console)
@@ -55,25 +51,25 @@ Note: Must be placed within 3 tiles of the R&D Console
 	if(default_part_replacement(user, O))
 		return
 	if(panel_open)
-		user << "<span class='notice'>You can't load \the [src] while it's opened.</span>"
+		to_chat(user, "<span class='notice'>You can't load \the [src] while it's opened.</span>")
 		return 1
 	if(!linked_console)
-		user << "<span class='notice'>\The [src] must be linked to an R&D console first.</span>"
+		to_chat(user, "<span class='notice'>\The [src] must be linked to an R&D console first.</span>")
 		return
 	if(!loaded_item)
 		if(isrobot(user)) //Don't put your module items in there!
 			return
 		if(!O.origin_tech)
-			user << "<span class='notice'>This doesn't seem to have a tech origin.</span>"
+			to_chat(user, "<span class='notice'>This doesn't seem to have a tech origin.</span>")
 			return
 		if(O.origin_tech.len == 0)
-			user << "<span class='notice'>You cannot deconstruct this item.</span>"
+			to_chat(user, "<span class='notice'>You cannot deconstruct this item.</span>")
 			return
 		busy = 1
 		loaded_item = O
 		user.drop_item()
 		O.loc = src
-		user << "<span class='notice'>You add \the [O] to \the [src].</span>"
+		to_chat(user, "<span class='notice'>You add \the [O] to \the [src].</span>")
 		flick("d_analyzer_la", src)
 		spawn(10)
 			update_icon()

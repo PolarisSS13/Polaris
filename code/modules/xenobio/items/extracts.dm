@@ -33,11 +33,11 @@
 	..()
 
 /obj/item/slime_extract/examine(mob/user)
-	..()
+	. = ..()
 	if(uses)
-		to_chat(user, "This extract has [uses] more use\s.")
+		. += "This extract has [uses] more use\s."
 	else
-		to_chat(user, "This extract is inert.")
+		. += "This extract is inert."
 
 /datum/chemical_reaction/slime
 	var/required = null
@@ -53,7 +53,7 @@
 	var/obj/item/slime_extract/T = holder.my_atom
 	T.uses--
 	if(T.uses <= 0)
-		T.visible_message("\icon[T]<span class='notice'>\The [T] goes inert.</span>")
+		T.visible_message("[bicon(T)]<span class='notice'>\The [T] goes inert.</span>")
 		T.name = "inert [initial(T.name)]"
 
 

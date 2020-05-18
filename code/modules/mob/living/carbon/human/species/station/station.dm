@@ -482,6 +482,7 @@
 	has_organ = list(
 		O_NUTRIENT = /obj/item/organ/internal/diona/nutrients,
 		O_STRATA =   /obj/item/organ/internal/diona/strata,
+		O_BRAIN = /obj/item/organ/internal/brain/cephalon,
 		O_RESPONSE = /obj/item/organ/internal/diona/node,
 		O_GBLADDER = /obj/item/organ/internal/diona/bladder,
 		O_POLYP =    /obj/item/organ/internal/diona/polyp,
@@ -531,10 +532,9 @@
 	genders = list(PLURAL)
 
 /datum/species/diona/can_understand(var/mob/other)
-	var/mob/living/carbon/alien/diona/D = other
-	if(istype(D))
-		return 1
-	return 0
+	if(istype(other, /mob/living/carbon/alien/diona))
+		return TRUE
+	return FALSE
 
 /datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
 	if(H.backbag == 1)
@@ -555,6 +555,16 @@
 
 	if(H.isSynthetic())
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
+
+		H.species = GLOB.all_species[SPECIES_HUMAN] // This is hard-set to default the body to a normal FBP, without changing anything.
+
+		for(var/obj/item/organ/internal/diona/Org in H.internal_organs) // Remove Nymph organs.
+			qdel(Org)
+
+		// Purge the diona verbs.
+		H.verbs -= /mob/living/carbon/human/proc/diona_split_nymph
+		H.verbs -= /mob/living/carbon/human/proc/regenerate
+
 		return
 
 	for(var/mob/living/carbon/alien/diona/D in H.contents)
@@ -576,11 +586,9 @@
 		if(isturf(H.loc)) //else, there's considered to be no light
 			var/turf/T = H.loc
 			light_amount = T.get_lumcount() * 10
-		H.nutrition += light_amount
+		H.adjust_nutrition(light_amount)
 		H.shock_stage -= light_amount
 
-		if(H.nutrition > 450)
-			H.nutrition = 450
 		if(light_amount >= 3) //if there's enough light, heal
 			H.adjustBruteLoss(-(round(light_amount/2)))
 			H.adjustFireLoss(-(round(light_amount/2)))

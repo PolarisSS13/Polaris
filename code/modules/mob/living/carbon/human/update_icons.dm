@@ -556,8 +556,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(wear_suit && (wear_suit.flags_inv & HIDEJUMPSUIT) && !istype(wear_suit, /obj/item/clothing/suit/space/rig))
 		return //Wearing a suit that prevents uniform rendering
 
+	var/obj/item/clothing/under/under = w_uniform
+
+	var/uniform_sprite
+
+	if(under.index)
+		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON]_[under.index].dmi"
+	else
+		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON].dmi"
+
 	//Build a uniform sprite
-	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = INV_W_UNIFORM_DEF_ICON, default_layer = UNIFORM_LAYER)
+	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER)
 	apply_layer(UNIFORM_LAYER)
 
 /mob/living/carbon/human/update_inv_wear_id()
@@ -719,14 +728,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(!wear_suit)
 		return //No point, no suit.
 
-	// Part of splitting the suit sprites up
-	var/iconFile = INV_SUIT_DEF_ICON
-	if(istype(wear_suit, /obj/item/clothing/suit))
-		var/obj/item/clothing/suit/S = wear_suit
-		if(S.update_icon_define)
-			iconFile = S.update_icon_define
+	var/obj/item/clothing/suit/suit = wear_suit
+	var/suit_sprite
 
-	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = iconFile, default_layer = SUIT_LAYER)
+	if(istype(suit) && suit.index)
+		suit_sprite = "[INV_SUIT_DEF_ICON]_[suit.index].dmi"
+	else if(istype(suit, /obj/item/clothing) && !isnull(suit.update_icon_define))
+		suit_sprite = suit.update_icon_define
+	else
+		suit_sprite = "[INV_SUIT_DEF_ICON].dmi"
+
+	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER)
 
 	apply_layer(SUIT_LAYER)
 

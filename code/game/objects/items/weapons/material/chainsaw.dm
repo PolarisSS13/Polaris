@@ -84,6 +84,11 @@ obj/item/weapon/chainsaw/afterattack(atom/A as mob|obj|turf|area, mob/user as mo
 		else if(istype(A,/obj/effect/plant))
 			var/obj/effect/plant/P = A
 			qdel(P) //Plant isn't surviving that. At all
+		else if(istype(A,/obj/machinery/portable_atmospherics/hydroponics))
+			var/obj/machinery/portable_atmospherics/hydroponics/Hyd = A
+			if(Hyd.seed && !Hyd.dead)
+				to_chat(user, "<span class='notice'>You shred the plant.</span>")
+				Hyd.die()
 	if (istype(A, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,A) <= 1)
 		to_chat(user, "<span class='notice'>You begin filling the tank on the chainsaw.</span>")
 		if(do_after(usr, 15))
@@ -108,9 +113,9 @@ obj/item/weapon/chainsaw/proc/get_fuel()
 	return reagents.get_reagent_amount("fuel")
 
 obj/item/weapon/chainsaw/examine(mob/user)
-	if(..(user,0))
-		if(max_fuel)
-			to_chat(usr, "<span class = 'notice'>The [src] feels like it contains roughtly [get_fuel()] units of fuel left.</span>")
+	. = ..()
+	if(max_fuel && get_dist(user, src) == 0)
+		. += "<span class = 'notice'>The [src] feels like it contains roughtly [get_fuel()] units of fuel left.</span>"
 
 obj/item/weapon/chainsaw/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]

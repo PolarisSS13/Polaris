@@ -4,6 +4,7 @@
 	tesla_link = new/obj/item/weapon/computer_hardware/tesla_link(src)
 	hard_drive = new/obj/item/weapon/computer_hardware/hard_drive/super(src)
 	network_card = new/obj/item/weapon/computer_hardware/network_card/wired(src)
+	nano_printer = new/obj/item/weapon/computer_hardware/nano_printer(src)
 
 // Engineering
 /obj/item/modular_computer/console/preset/engineering/install_default_programs()
@@ -14,6 +15,7 @@
 	hard_drive.store_file(new/datum/computer_file/program/atmos_control())
 	hard_drive.store_file(new/datum/computer_file/program/rcon_console())
 	hard_drive.store_file(new/datum/computer_file/program/camera_monitor())
+	hard_drive.store_file(new/datum/computer_file/program/shutoff_monitor())
 
 // Medical
 /obj/item/modular_computer/console/preset/medical/install_default_programs()

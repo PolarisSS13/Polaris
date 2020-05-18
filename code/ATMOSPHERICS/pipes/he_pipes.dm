@@ -88,6 +88,8 @@
 	if(!parent)
 		..()
 	else
+		if(leaking)
+			parent.mingle_with_turf(loc, volume)
 		var/datum/gas_mixture/pipe_air = return_air()
 		if(istype(loc, /turf/simulated/))
 			var/environment_temperature = 0
@@ -140,6 +142,7 @@
 // Heat Exchange Junction - Interfaces HE pipes to normal pipes
 //
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging/junction
+	desc = "An adaptor to transfer gasses between regular pipes and heat transferring ones. It doesn't conduct heat all that well."
 	icon = 'icons/atmos/junction.dmi'
 	icon_state = "intact"
 	pipe_icon = "hejunction"

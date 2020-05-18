@@ -3,6 +3,7 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni/atmos_filter
 	name = "omni gas filter"
+	desc = "An advanced version of the gas filter, able to be configured for filtering of multiple gasses."
 	icon_state = "map_filter"
 	pipe_state = "omni_filter"
 
@@ -10,7 +11,7 @@
 	var/datum/omni_port/input
 	var/datum/omni_port/output
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500			//7500 W ~ 10 HP
 
@@ -87,7 +88,7 @@
 	return 1
 
 /obj/machinery/atmospherics/omni/atmos_filter/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
-	usr.set_machine(src)
+	user.set_machine(src)
 
 	var/list/data = new()
 
@@ -160,13 +161,13 @@
 	switch(href_list["command"])
 		if("power")
 			if(!configuring)
-				use_power = !use_power
+				update_use_power(!use_power)
 			else
-				use_power = 0
+				update_use_power(USE_POWER_OFF)
 		if("configure")
 			configuring = !configuring
 			if(configuring)
-				use_power = 0
+				update_use_power(USE_POWER_OFF)
 
 	//only allows config changes when in configuring mode ~otherwise you'll get weird pressure stuff going on
 	if(configuring && !use_power)

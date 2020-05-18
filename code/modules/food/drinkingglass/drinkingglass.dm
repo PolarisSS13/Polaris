@@ -28,21 +28,21 @@
 	matter = list("glass" = 60)
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
-	..()
+	. = ..()
 
 	for(var/I in extras)
 		if(istype(I, /obj/item/weapon/glass_extra))
-			M << "There is \a [I] in \the [src]."
+			. += "There is \a [I] in \the [src]."
 		else if(istype(I, /obj/item/weapon/reagent_containers/food/snacks/fruit_slice))
-			M << "There is \a [I] on the rim."
+			. += "There is \a [I] on the rim."
 		else
-			M << "There is \a [I] somewhere on the glass. Somehow."
+			. += "There is \a [I] somewhere on the glass. Somehow."
 
 	if(has_ice())
-		M << "There is some ice floating in the drink."
+		. += "There is some ice floating in the drink."
 
 	if(has_fizz())
-		M << "It is fizzing slightly."
+		. += "It is fizzing slightly."
 
 /obj/item/weapon/reagent_containers/food/drinks/glass2/proc/has_ice()
 	if(reagents.reagent_list.len > 0)
@@ -154,7 +154,7 @@
 		if(standard_splash_mob(user, target))
 			return 1
 		if(reagents && reagents.total_volume) //They are on harm intent, aka wanting to spill it.
-			user << "<span class='notice'>You splash the solution onto [target].</span>"
+			to_chat(user, "<span class='notice'>You splash the solution onto [target].</span>")
 			reagents.splash(target, reagents.total_volume)
 			return 1
 	..()

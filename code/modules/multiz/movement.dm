@@ -15,6 +15,10 @@
 /mob/proc/zMove(direction)
 	if(eyeobj)
 		return eyeobj.zMove(direction)
+	if(istype(loc,/obj/mecha))
+		var/obj/mecha/mech = loc
+		return mech.relaymove(src,direction)
+
 	if(!can_ztravel())
 		to_chat(src, "<span class='warning'>You lack means of travel in that direction.</span>")
 		return
@@ -29,6 +33,10 @@
 		to_chat(src, "<span class='notice'>There is nothing of interest in this direction.</span>")
 		return 0
 
+	if(is_incorporeal())
+		forceMove(destination)
+		return 1
+
 	if(!start.CanZPass(src, direction))
 		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
 		return 0
@@ -40,10 +48,25 @@
 	var/area/area = get_area(src)
 	if(direction == UP && area.has_gravity() && !can_overcome_gravity())
 		var/obj/structure/lattice/lattice = locate() in destination.contents
+		var/obj/structure/catwalk/catwalk = locate() in destination.contents
 		if(lattice)
 			var/pull_up_time = max(5 SECONDS + (src.movement_delay() * 10), 1)
 			to_chat(src, "<span class='notice'>You grab \the [lattice] and start pulling yourself upward...</span>")
 			destination.audible_message("<span class='notice'>You hear something climbing up \the [lattice].</span>")
+			if(do_after(src, pull_up_time))
+				to_chat(src, "<span class='notice'>You pull yourself up.</span>")
+			else
+				to_chat(src, "<span class='warning'>You gave up on pulling yourself up.</span>")
+				return 0
+		else if(catwalk?.hatch_open)
+			var/pull_up_time = max(5 SECONDS + (src.movement_delay() * 10), 1)
+			to_chat(src, "<span class='notice'>You grab the edge of \the [catwalk] and start pulling yourself upward...</span>")
+			var/old_dest = destination
+			destination = get_step(destination, dir) // mob's dir
+			if(!destination?.Enter(src, old_dest))
+				to_chat(src, "<span class='notice'>There's something in the way up above in that direction, try another.</span>")
+				return 0
+			destination.audible_message("<span class='notice'>You hear something climbing up \the [catwalk].</span>")
 			if(do_after(src, pull_up_time))
 				to_chat(src, "<span class='notice'>You pull yourself up.</span>")
 			else
@@ -105,13 +128,13 @@
 /mob/living/can_ztravel()
 	if(incapacitated())
 		return FALSE
-	return hovering
+	return (hovering || is_incorporeal())
 
 /mob/living/carbon/human/can_ztravel()
 	if(incapacitated())
 		return FALSE
 
-	if(hovering)
+	if(hovering || is_incorporeal())
 		return TRUE
 
 	if(Process_Spacemove())
@@ -215,10 +238,12 @@
 		return FALSE
 
 	var/turf/below = GetBelow(src)
-	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up in below))
+	if((locate(/obj/structure/disposalpipe/up) in below) || locate(/obj/machinery/atmospherics/pipe/zpipe/up) in below)
 		return FALSE
 
 /mob/living/can_fall()
+	if(is_incorporeal())
+		return FALSE
 	if(hovering)
 		return FALSE
 	return ..()
@@ -233,7 +258,7 @@
 
 // Things that prevent objects standing on them from falling into turf below
 /obj/structure/catwalk/CanFallThru(atom/movable/mover as mob|obj, turf/target as turf)
-	if(target.z < z)
+	if((target.z < z) && !hatch_open)
 		return FALSE // TODO - Technically should be density = 1 and flags |= ON_BORDER
 	if(!isturf(mover.loc))
 		return FALSE // Only let loose floor items fall. No more snatching things off people's hands.

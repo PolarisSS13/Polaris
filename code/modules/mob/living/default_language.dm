@@ -5,12 +5,12 @@
 	set name = "Set Default Language"
 	set category = "IC"
 
-	if (only_species_language && language != all_languages[src.species_language])
+	if (only_species_language && language != GLOB.all_languages[src.species_language])
 		to_chat(src, "<span class='notice'>You can only speak your species language, [src.species_language].</span>")
 		return 0
 
-	if(language == all_languages[src.species_language])
-		to_chat(src, "<span class='notice'>You will now speak your standard default language, [language], if you do not specify a language when speaking.</span>")
+	if(language == GLOB.all_languages[src.species_language])
+		to_chat(src, "<span class='notice'>You will now speak your standard default language, [language ? language : "common"], if you do not specify a language when speaking.</span>")
 	else if (language)
 
 		if(language && !can_speak(language))

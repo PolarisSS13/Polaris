@@ -14,6 +14,8 @@
 	throw_speed = 3
 	throw_range = 5
 	w_class = ITEMSIZE_NORMAL
+	var/static/cell_uid = 1		// Unique ID of this power cell. Used to reduce bunch of uglier code in nanoUI.
+	var/c_uid
 	var/charge = 0	// note %age conveted to actual charge in New
 	var/maxcharge = 1000
 	var/rigged = 0		// true if rigged to explode
@@ -31,6 +33,7 @@
 
 /obj/item/weapon/cell/New()
 	..()
+	c_uid = cell_uid++
 	charge = maxcharge
 	update_icon()
 	if(self_recharge)
@@ -145,18 +148,11 @@
 
 
 /obj/item/weapon/cell/examine(mob/user)
-	var/msg = desc
+	. = ..()
+	if(Adjacent(user))
+		. += "It has a power rating of [maxcharge]."
+		. += "The charge meter reads [round(src.percent() )]%."
 
-	if(get_dist(src, user) <= 1)
-		msg += " It has a power rating of [maxcharge].\nThe charge meter reads [round(src.percent() )]%."
-
-	to_chat(user, msg)
-/*
-		if(maxcharge <= 2500)
-			to_chat(user, "[desc]\nThe manufacturer's label states this cell has a power rating of [maxcharge], and that you should not swallow it.\nThe charge meter reads [round(src.percent() )]%.")
-		else
-			to_chat(user, "This power cell has an exciting chrome finish, as it is an uber-capacity cell type! It has a power rating of [maxcharge]!\nThe charge meter reads [round(src.percent() )]%.")
-*/
 /obj/item/weapon/cell/attackby(obj/item/W, mob/user)
 	..()
 	if(istype(W, /obj/item/weapon/reagent_containers/syringe))
@@ -270,5 +266,5 @@
 
 /obj/item/weapon/cell/suicide_act(mob/user)
 	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	viewers(user) << "<span class='danger'>\The [user] is licking the electrodes of \the [src]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>"
+	to_chat(viewers(user),"<span class='danger'>\The [user] is licking the electrodes of \the [src]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
 	return (FIRELOSS)

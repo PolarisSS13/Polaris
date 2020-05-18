@@ -58,7 +58,7 @@
 /obj/CanUseTopic(var/mob/user, var/datum/topic_state/state = default_state)
 	if(user.CanUseObjTopic(src))
 		return ..()
-	to_chat(user, "<span class='danger'>\icon[src]Access Denied!</span>")
+	to_chat(user, "<span class='danger'>[bicon(src)]Access Denied!</span>")
 	return STATUS_CLOSE
 
 /mob/living/silicon/CanUseObjTopic(var/obj/O)
@@ -142,6 +142,7 @@
 	return
 
 /mob/proc/unset_machine()
+	machine?.remove_visual(src)
 	src.machine = null
 
 /mob/proc/set_machine(var/obj/O)
@@ -162,9 +163,9 @@
 /obj/proc/hides_under_flooring()
 	return 0
 
-/obj/proc/hear_talk(mob/M as mob, text, verb, datum/language/speaking)
+/obj/proc/hear_talk(mob/M, list/message_pieces, verb)
 	if(talking_atom)
-		talking_atom.catchMessage(text, M)
+		talking_atom.catchMessage(multilingual_to_message(message_pieces), M)
 /*
 	var/mob/mo = locate(/mob) in src
 	if(mo)

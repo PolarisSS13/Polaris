@@ -3,11 +3,11 @@
 	desc = "Permits us to syphon the DNA from a human. They become one with us, and we become stronger if they were of our kind."
 	ability_icon_state = "ling_absorb_dna"
 	genomecost = 0
-	verbpath = /mob/proc/changeling_absorb_dna
+	verbpath = /mob/living/proc/changeling_absorb_dna
 
 //Absorbs the victim's DNA. Requires a strong grip on the victim.
 //Doesn't cost anything as it's the most basic ability.
-/mob/proc/changeling_absorb_dna()
+/mob/living/proc/changeling_absorb_dna()
 	set category = "Changeling"
 	set name = "Absorb DNA"
 
@@ -52,7 +52,7 @@
 			if(3)
 				to_chat(src, "<span class='notice'>We stab [T] with the proboscis.</span>")
 				src.visible_message("<span class='danger'>[src] stabs [T] with the proboscis!</span>")
-				T << "<span class='danger'>You feel a sharp stabbing pain!</span>"
+				to_chat(T, "<span class='danger'>You feel a sharp stabbing pain!</span>")
 				add_attack_logs(src,T,"Absorbed (changeling)")
 				var/obj/item/organ/external/affecting = T.get_organ(src.zone_sel.selecting)
 				if(affecting.take_damage(39,0,1,0,"large organic needle"))
@@ -66,9 +66,8 @@
 
 	to_chat(src, "<span class='notice'>We have absorbed [T]!</span>")
 	src.visible_message("<span class='danger'>[src] sucks the fluids from [T]!</span>")
-	T << "<span class='danger'>You have been absorbed by the changeling!</span>"
-	if(src.nutrition < 400)
-		src.nutrition = min((src.nutrition + T.nutrition), 400)
+	to_chat(T, "<span class='danger'>You have been absorbed by the changeling!</span>")
+	adjust_nutrition(T.nutrition)
 	changeling.chem_charges += 10
 	if(changeling.readapts <= 0)
 		changeling.readapts = 0 //SANITYYYYYY

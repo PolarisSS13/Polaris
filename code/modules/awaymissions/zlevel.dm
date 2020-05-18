@@ -42,7 +42,7 @@ proc/createRandomZlevel()
 		if(isfile(file))
 			var/datum/map_template/template = new(file, "away mission")
 			template.load_new_z()
-			world.log << "away mission loaded: [map]"
+			to_world_log("away mission loaded: [map]")
 
 		for(var/obj/effect/landmark/L in landmarks_list)
 			if (L.name != "awaystart")

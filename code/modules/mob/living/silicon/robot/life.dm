@@ -40,7 +40,7 @@
 
 /mob/living/silicon/robot/proc/use_power()
 	// Debug only
-	// world << "DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]"
+	// to_world("DEBUG: life.dm line 35: cyborg use_power() called at tick [controller_iteration]")
 	used_power_this_tick = 0
 	for(var/V in components)
 		var/datum/robot_component/C = components[V]
@@ -88,7 +88,7 @@
 
 	if (src.stat != 2) //Alive.
 		if (src.paralysis || src.stunned || src.weakened || !src.has_power) //Stunned etc.
-			src.stat = 1
+			src.set_stat(UNCONSCIOUS)
 			if (src.stunned > 0)
 				AdjustStunned(-1)
 			if (src.weakened > 0)
@@ -100,7 +100,7 @@
 				src.blinded = 0
 
 		else	//Not stunned.
-			src.stat = 0
+			src.set_stat(CONSCIOUS)
 
 		AdjustConfused(-1)
 

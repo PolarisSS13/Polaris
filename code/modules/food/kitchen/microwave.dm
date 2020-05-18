@@ -1,19 +1,24 @@
 /obj/machinery/microwave
 	name = "microwave"
+	desc = "Studies are inconclusive on whether pressing your face against the glass is harmful."
 	icon = 'icons/obj/kitchen.dmi'
 	icon_state = "mw"
 	density = 1
 	anchored = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 5
 	active_power_usage = 100
+	clicksound = "button"
+	clickvol = "30"
 	flags = OPENCONTAINER | NOREACT
 	circuit = /obj/item/weapon/circuitboard/microwave
 	var/operating = 0 // Is it on?
 	var/dirty = 0 // = {0..100} Does it need cleaning?
 	var/broken = 0 // ={0,1,2} How broken is it???
-	var/global/list/datum/recipe/available_recipes // List of the recipes you can use
+	var/circuit_item_capacity = 1 //how many items does the circuit add to max number of items
+	var/item_level = 0 // items microwave can handle, 0 foodstuff, 1 materials
 	var/global/list/acceptable_items // List of the items you can put in
+	var/global/list/datum/recipe/microwave/available_recipes // List of the recipes you can use
 	var/global/list/acceptable_reagents // List of the reagents you can put in
 	var/global/max_n_of_items = 0
 	var/datum/looping_sound/microwave/soundloop
@@ -26,21 +31,19 @@
 ********************/
 
 /obj/machinery/microwave/Initialize()
+	. = ..()
 	reagents = new/datum/reagents(100)
 	reagents.my_atom = src
 
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	component_parts += new /obj/item/weapon/stock_parts/motor(src)
-	component_parts += new /obj/item/weapon/stock_parts/capacitor(src)
+	default_apply_parts()
 
 	if (!available_recipes)
 		available_recipes = new
-		for (var/type in (typesof(/datum/recipe)-/datum/recipe))
+		for (var/type in (typesof(/datum/recipe/microwave)-/datum/recipe/microwave))
 			available_recipes+= new type
 		acceptable_items = new
 		acceptable_reagents = new
-		for (var/datum/recipe/recipe in available_recipes)
+		for (var/datum/recipe/microwave/recipe in available_recipes)
 			for (var/item in recipe.items)
 				acceptable_items |= item
 			for (var/reagent in recipe.reagents)
@@ -52,10 +55,10 @@
 		// impure carbon. ~Z
 		acceptable_items |= /obj/item/weapon/holder
 		acceptable_items |= /obj/item/weapon/reagent_containers/food/snacks/grown
+		acceptable_items |= /obj/item/device/soulstone
+		acceptable_items |= /obj/item/weapon/fuel_assembly/supermatter
 
-	RefreshParts()
 	soundloop = new(list(src), FALSE)
-	return ..()
 
 /obj/machinery/microwave/Destroy()
 	QDEL_NULL(soundloop)
@@ -122,7 +125,7 @@
 			to_chat(user, "<span class='warning'>It's dirty!</span>")
 			return 1
 	else if(is_type_in_list(O,acceptable_items))
-		if (contents.len>=(max_n_of_items + component_parts.len + 1))	//Adds component_parts to the maximum number of items.	The 1 is from the circuit
+		if (contents.len>=(max_n_of_items + component_parts.len + circuit_item_capacity))	//Adds component_parts to the maximum number of items. changed 1 to actually just be the circuit item capacity var.
 			to_chat(user, "<span class='warning'>This [src] is full of ingredients, you cannot put more.</span>")
 			return 1
 		if(istype(O, /obj/item/stack) && O:get_amount() > 1) // This is bad, but I can't think of how to change it
@@ -231,7 +234,7 @@
 <A href='?src=\ref[src];action=dispose'>Eject ingredients!<BR>\
 "}
 
-	to_chat(user, browse("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave"))
+	user << browse("<HEAD><TITLE>Microwave Controls</TITLE></HEAD><TT>[dat]</TT>", "window=microwave")
 	onclose(user, "microwave")
 	return
 
@@ -252,7 +255,7 @@
 		abort()
 		return
 
-	var/datum/recipe/recipe = select_recipe(available_recipes,src)
+	var/datum/recipe/microwave/recipe = select_recipe(available_recipes,src)
 	var/obj/cooked
 	if (!recipe)
 		dirty += 1
@@ -306,14 +309,26 @@
 		sleep(10)
 	return 1
 
-/obj/machinery/microwave/proc/has_extra_item()
-	for (var/obj/O in ((contents - component_parts) - circuit))
-		if ( \
-				!istype(O,/obj/item/weapon/reagent_containers/food) && \
-				!istype(O, /obj/item/weapon/grown) \
-			)
-			return 1
-	return 0
+/obj/machinery/microwave/proc/has_extra_item() //- coded to have different microwaves be able to handle different items
+	if(item_level == 0)
+		for (var/obj/O in ((contents - component_parts) - circuit))
+			if ( \
+					!istype(O,/obj/item/weapon/reagent_containers/food) && \
+					!istype(O, /obj/item/weapon/grown) \
+				)
+				return 1
+		return 0
+	if(item_level == 1)
+		for (var/obj/O in ((contents - component_parts) - circuit))
+			if ( \
+					!istype(O, /obj/item/weapon/reagent_containers/food) && \
+					!istype(O, /obj/item/weapon/grown) && \
+					!istype(O, /obj/item/slime_extract) && \
+					!istype(O, /obj/item/organ) && \
+					!istype(O, /obj/item/stack/material) \
+				)
+				return 1
+		return 0
 
 /obj/machinery/microwave/proc/start()
 	src.visible_message("<span class='notice'>The microwave turns on.</span>", "<span class='notice'>You hear a microwave.</span>")
@@ -334,7 +349,7 @@
 	if (src.reagents.total_volume)
 		src.dirty++
 	src.reagents.clear_reagents()
-	usr << "<span class='notice'>You dispose of the microwave contents.</span>"
+	to_chat(usr, "<span class='notice'>You dispose of the microwave contents.</span>")
 	src.updateUsrDialog()
 
 /obj/machinery/microwave/proc/muck_start()
@@ -394,3 +409,15 @@
 		if ("dispose")
 			dispose()
 	return
+
+/obj/machinery/microwave/advanced // specifically for complex recipes
+	name = "deluxe microwave"
+	icon = 'icons/obj/deluxemicrowave.dmi'
+	icon_state = "mw"
+	circuit = /obj/item/weapon/circuitboard/microwave/advanced
+	circuit_item_capacity = 100
+	item_level = 1
+
+/obj/machinery/microwave/advanced/Initialize()
+	..()
+	reagents.maximum_volume = 1000

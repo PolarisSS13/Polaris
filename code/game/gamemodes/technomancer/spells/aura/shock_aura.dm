@@ -30,7 +30,7 @@
 			continue
 
 		if(L.isSynthetic())
-			L << "<span class='danger'>ERROR: Electrical fault detected!</span>"
+			to_chat(L, "<span class='danger'>ERROR: Electrical fault detected!</span>")
 			L.stuttering += 3
 
 		if(ishuman(L))
@@ -39,6 +39,5 @@
 			H.electrocute_act(power, src, H.get_siemens_coefficient_organ(affected), affected)
 		else
 			L.electrocute_act(power, src, 0.75, BP_TORSO)
-
 
 	adjust_instability(3)

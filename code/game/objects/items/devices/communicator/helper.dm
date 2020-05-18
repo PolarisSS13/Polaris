@@ -46,23 +46,24 @@
 				index++
 				if(FM.img)
 					usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feeds["channel"]]_[index].png")
-					// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
-					var/body = replacetext(FM.body, "\n", "<br>")
-					messages[++messages.len] = list(
-								"author" = FM.author,
-								"body" = body,
-								"message_type" = FM.message_type,
-								"time_stamp" = FM.time_stamp,
-								"has_image" = (FM.img != null),
-								"caption" = FM.caption,
-								"index" = index
-								)
+				// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
+				var/body = replacetext(FM.body, "\n", "<br>")
+				messages[++messages.len] = list(
+						"author" = FM.author,
+						"body" = body,
+						"message_type" = FM.message_type,
+						"time_stamp" = FM.time_stamp,
+						"has_image" = (FM.img != null),
+						"caption" = FM.caption,
+						"index" = index
+					)
 
 		feeds[++feeds.len] = list(
 					"name" = channel.channel_name,
 					"censored" = channel.censored,
 					"author" = channel.author,
-					"messages" = messages
+					"messages" = messages,
+					"index" = feeds.len + 1 // actually align them, since I guess the population of the list doesn't occur until after the evaluation of the new entry's contents
 					)
 	return feeds
 
@@ -85,14 +86,14 @@
 							"time_stamp" = FM.time_stamp,
 							"has_image" = (FM.img != null),
 							"caption" = FM.caption,
+							"time" = FM.post_time
 							)
 
 	// Cut out all but the youngest three
-	while(news.len > 3)
-		var/oldest = min(news[0]["time_stamp"], news[1]["time_stamp"], news[2]["time_stamp"], news[3]["time_stamp"])
-		for(var/i = 0, i < 4, i++)
-			if(news[i]["time_stamp"] == oldest)
-				news.Remove(news[i])
+	if(news.len > 3)
+		sortByKey(news, "time")
+		news.Cut(1, news.len - 2) // Last three have largest timestamps, youngest posts
+		news.Swap(1, 3) // List is sorted in ascending order of timestamp, we want descending
 
 	return news
 
@@ -393,7 +394,7 @@
 // code\game\machinery\computer\supply.dm, starting at line 55
 /obj/item/weapon/commcard/proc/get_supply_shuttle_status()
 	var/shuttle_status[0]
-	var/datum/shuttle/ferry/supply/shuttle = supply_controller.shuttle
+	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
 	if(shuttle)
 		if(shuttle.has_arrive_time())
 			shuttle_status["location"] = "In transit"
@@ -403,8 +404,8 @@
 		else
 			shuttle_status["time"] = 0
 			if(shuttle.at_station())
-				if(shuttle.docking_controller)
-					switch(shuttle.docking_controller.get_docking_status())
+				if(shuttle.shuttle_docking_controller)
+					switch(shuttle.shuttle_docking_controller.get_docking_status())
 						if("docked")
 							shuttle_status["location"] = "Docked"
 							shuttle_status["mode"] = SUP_SHUTTLE_DOCKED
@@ -453,7 +454,7 @@
 // code\game\machinery\computer\supply.dm, starting at line 130
 /obj/item/weapon/commcard/proc/get_supply_orders()
 	var/orders[0]
-	for(var/datum/supply_order/S in supply_controller.order_history)
+	for(var/datum/supply_order/S in SSsupply.order_history)
 		orders[++orders.len] = list(
 				"ref" = "\ref[S]",
 				"status" = S.status,
@@ -476,7 +477,7 @@
 // code\game\machinery\computer\supply.dm, starting at line 147
 /obj/item/weapon/commcard/proc/get_supply_receipts()
 	var/receipts[0]
-	for(var/datum/exported_crate/E in supply_controller.exported_crates)
+	for(var/datum/exported_crate/E in SSsupply.exported_crates)
 		receipts[++receipts.len] = list(
 				"ref" = "\ref[E]",
 				"contents" = E.contents,
@@ -494,8 +495,8 @@
 // code\game\machinery\computer\supply.dm, starting at line 147
 /obj/item/weapon/commcard/proc/get_supply_pack_list()
 	var/supply_packs[0]
-	for(var/pack_name in supply_controller.supply_pack)
-		var/datum/supply_pack/P = supply_controller.supply_pack[pack_name]
+	for(var/pack_name in SSsupply.supply_pack)
+		var/datum/supply_pack/P = SSsupply.supply_pack[pack_name]
 		if(P.group == internal_data["supply_category"])
 			var/list/pack = list(
 					"name" = P.name,
@@ -520,7 +521,7 @@
 	return list(
 			"shuttle_auth" = (internal_data["supply_controls"] & SUP_SEND_SHUTTLE),
 			"order_auth" = (internal_data["supply_controls"] & SUP_ACCEPT_ORDERS),
-			"supply_points" = supply_controller.points,
+			"supply_points" = SSsupply.points,
 			"supply_categories" = all_supply_groups
 		)
 

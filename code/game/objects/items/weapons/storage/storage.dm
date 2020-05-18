@@ -141,8 +141,8 @@
 	is_seeing -= user
 
 /obj/item/weapon/storage/proc/open(mob/user as mob)
-	if (src.use_sound && !isobserver(user))
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+	if (use_sound)
+		playsound(src.loc, src.use_sound, 50, 0, -5)
 
 	orient2hud(user)
 	if (user.s_active)
@@ -722,10 +722,10 @@
 	..()
 
 /obj/item/weapon/storage/trinketbox/examine(mob/user)
-	..()
+	. = ..()
 	if(open && contents.len)
 		var/display_item = contents[1]
-		to_chat(user, "<span class='notice'>\The [src] contains \the [display_item]!</span>")
+		. += "<span class='notice'>\The [src] contains \the [display_item]!</span>"
 
 /obj/item/weapon/storage/AllowDrop()
 	return TRUE

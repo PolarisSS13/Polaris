@@ -5,7 +5,7 @@
 	icon_state = "control"
 	anchored = 1
 	density = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 100
 	active_power_usage = 1000
 
@@ -156,12 +156,12 @@
 			src.anchored = 0
 			disconnect_from_network()
 		else
-			user << "<font color='red'>Once bolted and linked to a shielding unit it the [src.name] is unable to be moved!</font>"
+			to_chat(user, "<font color='red'>Once bolted and linked to a shielding unit it the [src.name] is unable to be moved!</font>")
 		return
 
 	if(istype(W, /obj/item/weapon/am_containment))
 		if(fueljar)
-			user << "<font color='red'>There is already a [fueljar] inside!</font>"
+			to_chat(user, "<font color='red'>There is already a [fueljar] inside!</font>")
 			return
 		fueljar = W
 		user.remove_from_mob(W)
@@ -211,10 +211,10 @@
 /obj/machinery/power/am_control_unit/proc/toggle_power()
 	active = !active
 	if(active)
-		use_power = 2
+		update_use_power(USE_POWER_ACTIVE)
 		visible_message("The [src.name] starts up.")
 	else
-		use_power = 1
+		update_use_power(USE_POWER_IDLE)
 		visible_message("The [src.name] shuts down.")
 	update_icon()
 	return

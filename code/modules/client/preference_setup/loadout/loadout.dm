@@ -66,7 +66,7 @@ var/list/gear_datums = list()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 
-		if(G.whitelisted && !is_alien_whitelisted(preference_mob, all_species[G.whitelisted]))
+		if(G.whitelisted && !is_alien_whitelisted(preference_mob, GLOB.all_species[G.whitelisted]))
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
@@ -85,16 +85,16 @@ var/list/gear_datums = list()
 	var/total_cost = 0
 	for(var/gear_name in pref.gear)
 		if(!gear_datums[gear_name])
-			preference_mob << "<span class='warning'>You cannot have more than one of the \the [gear_name]</span>"
+			to_chat(preference_mob, "<span class='warning'>You cannot have more than one of the \the [gear_name]</span>")
 			pref.gear -= gear_name
 		else if(!(gear_name in valid_gear_choices()))
-			preference_mob << "<span class='warning'>You cannot take \the [gear_name] as you are not whitelisted for the species.</span>"
+			to_chat(preference_mob, "<span class='warning'>You cannot take \the [gear_name] as you are not whitelisted for the species.</span>")
 			pref.gear -= gear_name
 		else
 			var/datum/gear/G = gear_datums[gear_name]
 			if(total_cost + G.cost > MAX_GEAR_COST)
 				pref.gear -= gear_name
-				preference_mob << "<span class='warning'>You cannot afford to take \the [gear_name]</span>"
+				to_chat(preference_mob, "<span class='warning'>You cannot afford to take \the [gear_name]</span>")
 			else
 				total_cost += G.cost
 
@@ -257,11 +257,13 @@ var/list/gear_datums = list()
 
 /datum/gear/proc/spawn_item(var/location, var/metadata)
 	var/datum/gear_data/gd = new(path, location)
-	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_gear_data(metadata["[gt]"], gd)
+	if(length(gear_tweaks) && metadata)
+		for(var/datum/gear_tweak/gt in gear_tweaks)
+			gt.tweak_gear_data(metadata["[gt]"], gd)
 	var/item = new gd.path(gd.location)
-	for(var/datum/gear_tweak/gt in gear_tweaks)
-		gt.tweak_item(item, metadata["[gt]"])
+	if(length(gear_tweaks) && metadata)
+		for(var/datum/gear_tweak/gt in gear_tweaks)
+			gt.tweak_item(item, metadata["[gt]"])
 	var/mob/M = location
 	if(istype(M) && exploitable) //Update exploitable info records for the mob without creating a duplicate object at their feet.
 		M.amend_exploitable(item)

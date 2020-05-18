@@ -8,16 +8,18 @@ datum/track/New(var/title_name, var/audio)
 
 /obj/machinery/media/jukebox/
 	name = "space jukebox"
+	desc = "Filled with songs both past and present!"
 	icon = 'icons/obj/jukebox.dmi'
 	icon_state = "jukebox2-nopower"
 	var/state_base = "jukebox2"
 	anchored = 1
 	density = 1
 	power_channel = EQUIP
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 100
 	circuit = /obj/item/weapon/circuitboard/jukebox
+	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0
 
@@ -48,8 +50,8 @@ datum/track/New(var/title_name, var/audio)
 		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg')
 	)
 
-/obj/machinery/media/jukebox/New()
-	..()
+/obj/machinery/media/jukebox/Initialize()
+	. = ..()
 	default_apply_parts()
 	wires = new/datum/wires/jukebox(src)
 	update_icon()
@@ -58,7 +60,7 @@ datum/track/New(var/title_name, var/audio)
 	StopPlaying()
 	qdel(wires)
 	wires = null
-	..()
+	return ..()
 
 /obj/machinery/media/jukebox/proc/set_hacked(var/newhacked)
 	if (hacked == newhacked) return
@@ -247,7 +249,7 @@ datum/track/New(var/title_name, var/audio)
 
 		main_area.forced_ambience = null
 	playing = 0
-	update_use_power(1)
+	update_use_power(USE_POWER_IDLE)
 	update_icon()
 
 
@@ -269,7 +271,7 @@ datum/track/New(var/title_name, var/audio)
 			main_area.play_ambience(M)
 
 	playing = 1
-	update_use_power(2)
+	update_use_power(USE_POWER_ACTIVE)
 	update_icon()
 
 // Advance to the next track - Don't start playing it unless we were already playing

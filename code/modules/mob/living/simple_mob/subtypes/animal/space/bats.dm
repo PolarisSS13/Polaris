@@ -13,7 +13,7 @@
 	maxHealth = 20
 	health = 20
 
-	attacktext = list("bites")
+	attacktext = list("bitten")
 	attack_sound = 'sound/weapons/bite.ogg'
 
 	response_help = "pets the"
@@ -50,3 +50,8 @@
 
 /mob/living/simple_mob/animal/space/bats/cult/cultify()
 	return
+
+/mob/living/simple_mob/animal/space/bats/cult/strong
+	maxHealth = 60
+	health = 60
+	melee_damage_upper = 10

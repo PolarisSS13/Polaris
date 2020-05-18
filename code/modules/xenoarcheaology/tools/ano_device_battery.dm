@@ -3,12 +3,18 @@
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	icon_state = "anobattery0"
 	var/datum/artifact_effect/battery_effect
-	var/capacity = 300
+	var/capacity = 500
 	var/stored_charge = 0
 	var/effect_id = ""
 
+/obj/item/weapon/anobattery/advanced
+	name = "advanced anomaly battery"
+	capacity = 3000
+
+/*
 /obj/item/weapon/anobattery/New()
 	battery_effect = new()
+*/
 
 /obj/item/weapon/anobattery/proc/UpdateSprite()
 	var/p = (stored_charge/capacity)*100
@@ -39,7 +45,7 @@
 /obj/item/weapon/anodevice/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I, /obj/item/weapon/anobattery))
 		if(!inserted_battery)
-			user << "<font color='blue'>You insert the battery.</font>"
+			to_chat(user, "<font color='blue'>You insert the battery.</font>")
 			user.drop_item()
 			I.loc = src
 			inserted_battery = I
@@ -102,10 +108,9 @@
 					if(interval > 0)
 						//apply the touch effect to the holder
 						if(holder)
-							holder << "the \icon[src] [src] held by [holder] shudders in your grasp."
+							to_chat(holder, "the [bicon(src)] [src] held by [holder] shudders in your grasp.")
 						else
-							src.loc.visible_message("the \icon[src] [src] shudders.")
-						inserted_battery.battery_effect.DoEffectTouch(holder)
+							src.loc.visible_message("the [bicon(src)] [src] shudders.")
 
 						//consume power
 						inserted_battery.use_power(energy_consumed_on_touch)
@@ -113,11 +118,13 @@
 						//consume power equal to time passed
 						inserted_battery.use_power(world.time - last_process)
 
+					inserted_battery.battery_effect.DoEffectTouch(holder)
+
 				else if(inserted_battery.battery_effect.effect == EFFECT_PULSE)
 					inserted_battery.battery_effect.chargelevel = inserted_battery.battery_effect.chargelevelmax
 
 					//consume power relative to the time the artifact takes to charge and the effect range
-					inserted_battery.use_power(inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax)
+					inserted_battery.use_power((inserted_battery.battery_effect.effectrange * inserted_battery.battery_effect.chargelevelmax) / 2)
 
 				else
 					//consume power equal to time passed
@@ -130,13 +137,13 @@
 
 			//work out if we need to shutdown
 			if(inserted_battery.stored_charge <= 0)
-				src.loc.visible_message("<font color='blue'>\icon[src] [src] buzzes.</font>", "<font color='blue'>\icon[src] You hear something buzz.</font>")
+				src.loc.visible_message("<font color='blue'>[bicon(src)] [src] buzzes.</font>", "<font color='blue'>[bicon(src)] You hear something buzz.</font>")
 				shutdown_emission()
 			else if(world.time > time_end)
-				src.loc.visible_message("<font color='blue'>\icon[src] [src] chimes.</font>", "<font color='blue'>\icon[src] You hear something chime.</font>")
+				src.loc.visible_message("<font color='blue'>[bicon(src)] [src] chimes.</font>", "<font color='blue'>[bicon(src)] You hear something chime.</font>")
 				shutdown_emission()
 		else
-			src.visible_message("<font color='blue'>\icon[src] [src] buzzes.</font>", "<font color='blue'>\icon[src] You hear something buzz.</font>")
+			src.visible_message("<font color='blue'>[bicon(src)] [src] buzzes.</font>", "<font color='blue'>[bicon(src)] You hear something buzz.</font>")
 			shutdown_emission()
 		last_process = world.time
 
@@ -163,10 +170,11 @@
 	if(href_list["startup"])
 		if(inserted_battery && inserted_battery.battery_effect && (inserted_battery.stored_charge > 0) )
 			activated = 1
-			src.visible_message("<font color='blue'>\icon[src] [src] whirrs.</font>", "\icon[src]<font color='blue'>You hear something whirr.</font>")
+			src.visible_message("<font color='blue'>[bicon(src)] [src] whirrs.</font>", "[bicon(src)]<font color='blue'>You hear something whirr.</font>")
 			if(!inserted_battery.battery_effect.activated)
 				inserted_battery.battery_effect.ToggleActivate(1)
 			time_end = world.time + duration
+			last_process = world.time
 	if(href_list["shutdown"])
 		activated = 0
 	if(href_list["ejectbattery"])

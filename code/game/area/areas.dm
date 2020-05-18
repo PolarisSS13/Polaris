@@ -30,6 +30,7 @@
 	var/used_environ = 0
 
 	var/has_gravity = 1
+	var/secret_name = FALSE // This tells certain things that display areas' names that they shouldn't display this area's name.
 	var/obj/machinery/power/apc/apc = null
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
@@ -39,28 +40,14 @@
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
-	var/global/global_uid = 0
-	var/uid
-
-/area/New()
-	icon_state = ""
-	uid = ++global_uid
-	all_areas += src
-
-	if(!requires_power)
-		power_light = 0
-		power_equip = 0
-		power_environ = 0
-
-	if(dynamic_lighting)
-		luminosity = 0
-	else
-		luminosity = 1
-
-	..()
+	var/forbid_events = FALSE // If true, random events will not start inside this area.
 
 /area/Initialize()
 	. = ..()
+
+	luminosity = !(dynamic_lighting)
+	icon_state = ""
+
 	return INITIALIZE_HINT_LATELOAD // Areas tradiationally are initialized AFTER other atoms.
 
 /area/LateInitialize()
@@ -70,6 +57,31 @@
 		power_environ = 0
 	power_change()		// all machines set to current power level, also updates lighting icon
 	return INITIALIZE_HINT_LATELOAD
+
+// Changes the area of T to A. Do not do this manually.
+// Area is expected to be a non-null instance.
+/proc/ChangeArea(var/turf/T, var/area/A)
+	if(!istype(A))
+		CRASH("Area change attempt failed: invalid area supplied.")
+	var/area/old_area = get_area(T)
+	if(old_area == A)
+		return
+	// NOTE: BayStation calles area.Exited/Entered for the TURF T.  So far we don't do that.s
+	// NOTE: There probably won't be any atoms in these turfs, but just in case we should call these procs.
+	A.contents.Add(T)
+	if(old_area)
+		// Handle dynamic lighting update if
+		if(T.dynamic_lighting && old_area.dynamic_lighting != A.dynamic_lighting)
+			if(A.dynamic_lighting)
+				T.lighting_build_overlay()
+			else
+				T.lighting_clear_overlay()
+		for(var/atom/movable/AM in T)
+			old_area.Exited(AM, A)
+	for(var/atom/movable/AM in T)
+		A.Entered(AM, old_area)
+	for(var/obj/machinery/M in T)
+		M.power_change()
 
 /area/proc/get_contents()
 	return contents
@@ -298,10 +310,10 @@ var/list/mob/living/forced_ambiance_list = new
 			L << sound(sound, repeat = 0, wait = 0, volume = 50, channel = CHANNEL_AMBIENCE)
 			L.client.time_last_ambience_played = world.time
 
-/area/proc/gravitychange(var/gravitystate = 0, var/area/A)
-	A.has_gravity = gravitystate
+/area/proc/gravitychange(var/gravitystate = 0)
+	src.has_gravity = gravitystate
 
-	for(var/mob/M in A)
+	for(var/mob/M in src)
 		if(has_gravity)
 			thunk(M)
 		M.update_floating( M.Check_Dense_Object() )
@@ -323,18 +335,23 @@ var/list/mob/living/forced_ambiance_list = new
 		else
 			H.AdjustStunned(3)
 			H.AdjustWeakened(3)
-		mob << "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>"
+		to_chat(mob, "<span class='notice'>The sudden appearance of gravity makes you fall to the floor!</span>")
 		playsound(get_turf(src), "bodyfall", 50, 1)
 
-/area/proc/prison_break()
+/area/proc/prison_break(break_lights = TRUE, open_doors = TRUE, open_blast_doors = TRUE)
 	var/obj/machinery/power/apc/theAPC = get_apc()
 	if(theAPC.operating)
-		for(var/obj/machinery/power/apc/temp_apc in src)
-			temp_apc.overload_lighting(70)
-		for(var/obj/machinery/door/airlock/temp_airlock in src)
-			temp_airlock.prison_open()
-		for(var/obj/machinery/door/window/temp_windoor in src)
-			temp_windoor.open()
+		if(break_lights)
+			for(var/obj/machinery/power/apc/temp_apc in src)
+				temp_apc.overload_lighting(70)
+		if(open_doors)
+			for(var/obj/machinery/door/airlock/temp_airlock in src)
+				temp_airlock.prison_open()
+			for(var/obj/machinery/door/window/temp_windoor in src)
+				temp_windoor.open()
+		if(open_blast_doors)
+			for(var/obj/machinery/door/blast/temp_blast in src)
+				temp_blast.open()
 
 /area/has_gravity()
 	return has_gravity
@@ -367,7 +384,7 @@ var/list/mob/living/forced_ambiance_list = new
 var/list/teleportlocs = list()
 
 /hook/startup/proc/setupTeleportLocs()
-	for(var/area/AR in all_areas)
+	for(var/area/AR in world)
 		if(istype(AR, /area/shuttle) || istype(AR, /area/syndicate_station) || istype(AR, /area/wizard_station)) continue
 		if(teleportlocs.Find(AR.name)) continue
 		var/turf/picked = pick(get_area_turfs(AR.type))
@@ -382,7 +399,7 @@ var/list/teleportlocs = list()
 var/list/ghostteleportlocs = list()
 
 /hook/startup/proc/setupGhostTeleportLocs()
-	for(var/area/AR in all_areas)
+	for(var/area/AR in world)
 		if(ghostteleportlocs.Find(AR.name)) continue
 		if(istype(AR, /area/aisat) || istype(AR, /area/derelict) || istype(AR, /area/tdome) || istype(AR, /area/shuttle/specops/centcom))
 			ghostteleportlocs += AR.name
@@ -395,3 +412,8 @@ var/list/ghostteleportlocs = list()
 	ghostteleportlocs = sortAssoc(ghostteleportlocs)
 
 	return 1
+
+/area/proc/get_name()
+	if(secret_name)
+		return "Unknown Area"
+	return name

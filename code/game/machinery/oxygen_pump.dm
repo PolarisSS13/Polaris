@@ -73,7 +73,7 @@
 		if(breather.internals)
 			breather.internals.icon_state = "internal0"
 		breather = null
-		use_power = 1
+		update_use_power(USE_POWER_IDLE)
 
 /obj/machinery/oxygen_pump/attack_ai(mob/user as mob)
 	ui_interact(user)
@@ -90,7 +90,7 @@
 			breather.internal = tank
 			if(breather.internals)
 				breather.internals.icon_state = "internal1"
-		use_power = 2
+		update_use_power(USE_POWER_ACTIVE)
 
 /obj/machinery/oxygen_pump/proc/can_apply_to_target(var/mob/living/carbon/human/target, mob/user as mob)
 	if(!user)
@@ -148,9 +148,9 @@
 /obj/machinery/oxygen_pump/examine(var/mob/user)
 	. = ..()
 	if(tank)
-		to_chat(user, "The meter shows [round(tank.air_contents.return_pressure())] kPa.")
+		. += "The meter shows [round(tank.air_contents.return_pressure())] kPa."
 	else
-		to_chat(user, "<span class='warning'>It is missing a tank!</span>")
+		. += "<span class='warning'>It is missing a tank!</span>"
 
 
 /obj/machinery/oxygen_pump/process()
@@ -162,7 +162,7 @@
 			contained.forceMove(src)
 			src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
 			breather = null
-			use_power = 1
+			update_use_power(USE_POWER_IDLE)
 		else if(!breather.internal && tank)
 			breather.internal = tank
 			if(breather.internals)
@@ -231,6 +231,7 @@
 
 /obj/machinery/oxygen_pump/anesthetic
 	name = "anesthetic pump"
+	desc = "A wall mounted anesthetic pump with a retractable mask that someone can pull over your face to knock you out."
 	spawn_type = /obj/item/weapon/tank/anesthetic
 	icon_state = "anesthetic_tank"
 	icon_state_closed = "anesthetic_tank"
@@ -266,6 +267,7 @@
 
 /obj/machinery/oxygen_pump/mobile/anesthetic
 	name = "portable anesthetic pump"
+	desc = "A portable anesthetic pump with a retractable mask that someone can pull over your face to knock you out."
 	spawn_type = /obj/item/weapon/tank/anesthetic
 	icon_state = "medpump_n2o"
 	icon_state_closed = "medpump_n2o"
@@ -285,15 +287,28 @@
 			contained.forceMove(src)
 			src.visible_message("<span class='notice'>\The [contained] rapidly retracts back into \the [src]!</span>")
 			breather = null
-			use_power = 1
+			update_use_power(USE_POWER_IDLE)
 		else if(!breather.internal && tank)
 			breather.internal = tank
 			if(breather.internals)
 				breather.internals.icon_state = "internal0"
 
 		if(breather)	// Safety.
-			if(ishuman(breather))
+			if(ishuman(breather) && !(breather.isSynthetic()))
 				var/mob/living/carbon/human/H = breather
+
+				if(H.internal_organs_by_name[O_LUNGS])
+					var/obj/item/organ/internal/L = H.internal_organs_by_name[O_LUNGS]
+					if(L)
+						if(!(L.status & ORGAN_DEAD))
+							H.adjustOxyLoss(-(rand(10,15)))
+
+							if(L.is_bruised() && prob(30))
+								L.take_damage(-1)
+							else
+								H.AdjustLosebreath(-(rand(1, 5)))
+						else
+							H.adjustOxyLoss(-(rand(1,8)))
 
 				if(H.stat == DEAD)
 					H.add_modifier(/datum/modifier/bloodpump_corpse, 6 SECONDS)

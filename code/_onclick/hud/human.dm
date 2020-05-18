@@ -28,6 +28,7 @@
 		inv_box.icon = ui_style
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
+		inv_box.hud = src
 
 		var/list/slot_data =  hud_data.gear[gear_slot]
 		inv_box.name =        gear_slot
@@ -192,6 +193,7 @@
 		using.screen_loc = ui_swaphand1
 		using.color = ui_color
 		using.alpha = ui_alpha
+		using.hud = src
 		src.adding += using
 
 		using = new /obj/screen/inventory()
@@ -201,6 +203,7 @@
 		using.screen_loc = ui_swaphand2
 		using.color = ui_color
 		using.alpha = ui_alpha
+		using.hud = src
 		src.adding += using
 
 	if(hud_data.has_resist)
@@ -236,6 +239,8 @@
 		mymob.internals = new /obj/screen()
 		mymob.internals.icon = ui_style
 		mymob.internals.icon_state = "internal0"
+		if(istype(target.internal, /obj/item/weapon/tank)) //Internals on already? Iight, prove it
+			mymob.internals.icon_state = "internal1"
 		mymob.internals.name = "internal"
 		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
@@ -341,11 +346,13 @@
 	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
 
-	mymob.client.screen = list()
+	if(mymob.client)
+		mymob.client.screen = list()
 
-	mymob.client.screen += hud_elements
-	mymob.client.screen += src.adding + src.hotkeybuttons
-	mymob.client.screen += mymob.client.void
+		mymob.client.screen += hud_elements
+		mymob.client.screen += src.adding + src.hotkeybuttons
+		mymob.client.screen += mymob.client.void
+
 	inventory_shown = 0
 
 	return

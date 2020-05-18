@@ -35,10 +35,13 @@
 
 	plane_masters[VIS_MESONS]		= new /obj/screen/plane_master{plane = PLANE_MESONS} 			//Meson-specific things like open ceilings.
 
+	plane_masters[VIS_BUILDMODE]	= new /obj/screen/plane_master{plane = PLANE_BUILDMODE}			//Things that only show up while in build mode
+
 	// Real tangible stuff planes
 	plane_masters[VIS_TURFS]	= new /obj/screen/plane_master/main{plane = TURF_PLANE}
 	plane_masters[VIS_OBJS]		= new /obj/screen/plane_master/main{plane = OBJ_PLANE}
 	plane_masters[VIS_MOBS]		= new /obj/screen/plane_master/main{plane = MOB_PLANE}
+	plane_masters[VIS_CLOAKED]	= new /obj/screen/plane_master/cloaked								//Cloaked atoms!
 
 	..()
 
@@ -175,6 +178,13 @@
 /obj/screen/plane_master/ghosts
 	plane = PLANE_GHOSTS
 	desired_alpha = 127 //When enabled, they're like half-transparent
+
+/////////////////
+//Cloaked atoms are visible to ghosts (or for other reasons?)
+/obj/screen/plane_master/cloaked
+	plane = CLOAKED_PLANE
+	desired_alpha = 80
+	color = "#0000FF"
 
 /////////////////
 //The main game planes start normal and visible

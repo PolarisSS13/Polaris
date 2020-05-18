@@ -125,6 +125,7 @@
 	for(var/obj/effect/directional_shield/S in active_shields)
 		active_shields -= S
 		qdel(S)
+	set_light(0)
 	active = FALSE
 
 /obj/item/shield_projector/proc/update_shield_positions()
@@ -179,12 +180,17 @@
 		if(always_on)
 			to_chat(user, "<span class='warning'>You can't seem to deactivate \the [src].</span>")
 			return
-
-		destroy_shields()
+		set_on(FALSE)
 	else
 		set_dir(user.dir) // Needed for linear shields.
-		create_shields()
+		set_on(TRUE)
 	visible_message("<span class='notice'>\The [user] [!active ? "de":""]activates \the [src].</span>")
+
+/obj/item/shield_projector/proc/set_on(var/on)
+	if(isnull(on))
+		return
+
+	on ? create_shields() : destroy_shields() // Harmless if called when in the wrong state.
 
 /obj/item/shield_projector/process()
 	if(shield_health < max_shield_health && ( (last_damaged_time + shield_regen_delay) < world.time) )
@@ -197,9 +203,9 @@
 			playsound(get_turf(src), 'sound/machines/defib_safetyOff.ogg', 75, 0)
 
 /obj/item/shield_projector/examine(var/mob/user)
-	..()
-	if(get_dist(src, user) <= 1)
-		to_chat(user, "\The [src]'s shield matrix is at [round( (shield_health / max_shield_health) * 100, 0.01)]% strength.")
+	. = ..()
+	if(Adjacent(user))
+		. += "Its shield matrix is at [round( (shield_health / max_shield_health) * 100, 0.01)]% strength."
 
 /obj/item/shield_projector/emp_act(var/severity)
 	adjust_health(-max_shield_health / severity) // A strong EMP will kill the shield instantly, but weaker ones won't on the first hit.

@@ -138,6 +138,8 @@
 	return
 
 /obj/effect/ebeam/deadly/Crossed(atom/A)
+	if(A.is_incorporeal())
+		return
 	..()
 	A.ex_act(1)
 
@@ -157,6 +159,8 @@
 		on_contact(A)
 
 /obj/effect/ebeam/reactive/Crossed(atom/A)
+	if(A.is_incorporeal())
+		return
 	..()
 	on_contact(A)
 

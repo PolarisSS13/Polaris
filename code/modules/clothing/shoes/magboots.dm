@@ -5,6 +5,7 @@
 	item_flags = PHORONGUARD
 	item_state_slots = list(slot_r_hand_str = "magboots", slot_l_hand_str = "magboots")
 	species_restricted = null
+	center_of_mass = list("x" = 17,"y" = 12)
 	force = 3
 	overshoes = 1
 	shoes_under_pants = -1	//These things are huge
@@ -15,6 +16,7 @@
 	var/obj/item/clothing/shoes/shoes = null	//Undershoes
 	var/mob/living/carbon/human/wearer = null	//For shoe procs
 	step_volume_mod = 1.3
+	drop_sound = 'sound/items/drop/metalboots.ogg'
 
 /obj/item/clothing/shoes/magboots/proc/set_slowdown()
 	slowdown = shoes? max(SHOES_SLOWDOWN, shoes.slowdown): SHOES_SLOWDOWN	//So you can't put on magboots to make you walk faster.
@@ -28,18 +30,19 @@
 		set_slowdown()
 		force = 3
 		if(icon_base) icon_state = "[icon_base]0"
-		user << "You disable the mag-pulse traction system."
+		to_chat(user, "You disable the mag-pulse traction system.")
 	else
 		item_flags |= NOSLIP
 		magpulse = 1
 		set_slowdown()
 		force = 5
 		if(icon_base) icon_state = "[icon_base]1"
-		user << "You enable the mag-pulse traction system."
+		playsound(get_turf(src), 'sound/effects/magnetclamp.ogg', 20)
+		to_chat(user, "You enable the mag-pulse traction system.")
 	user.update_inv_shoes()	//so our mob-overlays update
 	user.update_action_buttons()
 
-/obj/item/clothing/shoes/magboots/mob_can_equip(mob/user, slot)
+/obj/item/clothing/shoes/magboots/mob_can_equip(mob/user, slot, disable_warning = FALSE)
 	var/mob/living/carbon/human/H = user
 
 	if(H.shoes)
@@ -75,11 +78,8 @@
 	wearer = null
 
 /obj/item/clothing/shoes/magboots/examine(mob/user)
-	..(user)
-	var/state = "disabled"
-	if(item_flags & NOSLIP)
-		state = "enabled"
-	user << "Its mag-pulse traction system appears to be [state]."
+	. = ..()
+	. += "Its mag-pulse traction system appears to be [item_flags & NOSLIP ? "enabled" : "disabled"]."
 
 /obj/item/clothing/shoes/magboots/vox
 
@@ -123,6 +123,6 @@
 		canremove = 1
 
 /obj/item/clothing/shoes/magboots/vox/examine(mob/user)
-	..(user)
-	if (magpulse)
-		to_chat(user, "It would be hard to take these off without relaxing your grip first.")//theoretically this message should only be seen by the wearer when the claws are equipped.
+	. = ..()
+	if(magpulse)
+		. += "It would be hard to take these off without relaxing your grip first." // Theoretically this message should only be seen by the wearer when the claws are equipped.
