@@ -28,3 +28,6 @@
 #define RELIGION_OTHER         "Other Religion"
 #define RELIGION_AGNOSTICISM   "Agnosticism"
 #define RELIGION_ATHEISM       "Atheism"
+
+#define SUBSPECIES_GENERIC     "Baseline"
+#define SUBSPECIES_VATBORN     "Baseline Vatborn"

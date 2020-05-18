@@ -1,5 +1,5 @@
 #define GET_ALLOWED_VALUES(write_to, check_key) \
-	var/datum/species/S = all_species[pref.species]; \
+	var/datum/species/S = GLOB.all_species[pref.species]; \
 	if(!S) { \
 		write_to = list(); \
 	} else if(S.force_cultural_info[check_key]) { \
@@ -46,6 +46,7 @@
 	if(!pref.faction)     pref.faction =     "None"
 	if(!pref.religion)    pref.religion =    "None"
 	if(!pref.custculture) pref.custculture = "None"
+	if(!pref.subspecies)  pref.subspecies =  "None"
 
 /datum/category_item/player_setup_item/background/culture/load_character(var/savefile/S)
 	for(var/token in tokens)
@@ -57,7 +58,11 @@
 	S["citizenship"]			>> pref.citizenship
 	S["faction"]				>> pref.faction
 	S["religion"]				>> pref.religion
+	S["subspecies"]				>> pref.subspecies
 	S["custculture"]			>> pref.custculture
+
+	if(LAZYLEN(pref.background_modifiers))	// Sanity
+		pref.background_modifiers.Cut()
 
 	for(var/token in pref.cultural_info)
 		var/decl/cultural_info/culture = SSculture.get_culture(pref.cultural_info[token])
@@ -75,6 +80,7 @@
 	S["citizenship"]			<< pref.citizenship
 	S["faction"]				<< pref.faction
 	S["religion"]				<< pref.religion
+	S["subspecies"]				<< pref.subspecies
 	S["custculture"]			<< pref.custculture
 
 /datum/category_item/player_setup_item/background/culture/copy_to_mob(var/mob/living/carbon/human/character)
@@ -84,6 +90,7 @@
 	character.citizenship		= pref.citizenship
 	character.personal_faction	= pref.faction
 	character.religion			= pref.religion
+	character.subspecies		= pref.subspecies
 	character.custculture		= pref.custculture
 
 	for(var/path in pref.background_modifiers)
@@ -104,6 +111,8 @@
 						display = pref.custculture
 					if("home_system")
 						display = pref.home_system
+					if("subspecies")
+						display = pref.subspecies
 					if("religion")
 						display = pref.religion
 					if("faction")

@@ -68,6 +68,7 @@ datum/preferences
 	var/faction = "None"                //General associated faction.
 	var/religion = "None"               //Religious association.
 	var/custculture = "None"            //Cultural association.
+	var/subspecies = "None"             //Subspecies.
 	var/antag_faction = "None"			//Antag associated faction.
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
 

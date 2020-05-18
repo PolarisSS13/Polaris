@@ -53,6 +53,7 @@
 	var/personal_faction = ""
 	var/religion = ""
 	var/custculture = ""
+	var/subspecies = ""
 	var/antag_faction = ""
 	var/antag_vis = ""
 

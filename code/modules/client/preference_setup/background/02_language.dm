@@ -15,7 +15,7 @@
 /datum/category_item/player_setup_item/background/languages/sanitize_character()
 	if(!islist(pref.alternate_languages))	pref.alternate_languages = list()
 	if(pref.species)
-		var/datum/species/S = all_species[pref.species]
+		var/datum/species/S = GLOB.all_species[pref.species]
 		if(S && pref.alternate_languages.len > S.num_alternate_languages)
 			pref.alternate_languages.len = S.num_alternate_languages // Truncate to allowed length
 	if(isnull(pref.language_prefixes) || !pref.language_prefixes.len)
@@ -26,14 +26,14 @@
 
 	var/datum/language/L
 
-	var/datum/species/S = all_species[pref.species]
+	var/datum/species/S = GLOB.all_species[pref.species]
 	if(S.language)
-		L = all_languages[S.language]
+		L = GLOB.all_languages[S.language]
 		. += "- <b>[S.language]</b><br>"
 		. += "<small><b>Description:</b> [L.desc]</small><br>"
 		. += "<small><b>Scrambled:</b> [L.scramble("lorem ipsum sin dolor omet", list())]</small><br>"
 	if(S.default_language && S.default_language != S.language)
-		L = all_languages[S.default_language]
+		L = GLOB.all_languages[S.default_language]
 		. += "- <b>[S.default_language]</b><br>"
 		. += "<small><b>Description:</b> [L.desc]</small><br>"
 		. += "<small><b>Scrambled:</b> [L.scramble("lorem ipsum sin dolor omet", list())]</small><br>"
@@ -41,7 +41,7 @@
 		if(pref.alternate_languages.len)
 			for(var/i = 1 to pref.alternate_languages.len)
 				var/lang = pref.alternate_languages[i]
-				L = all_languages[lang]
+				L = GLOB.all_languages[lang]
 				. += "- <b>[lang]</b> - <a href='?src=\ref[src];remove_language=[i]'>remove</a><br>"
 				. += "<small><b>Description:</b> [L.desc]</small><br>"
 				. += "<small><b>Scrambled:</b> [L.scramble("lorem ipsum sin dolor omet", list())]</small><br>"
@@ -60,13 +60,13 @@
 		pref.alternate_languages.Cut(index, index+1)
 		return TOPIC_REFRESH
 	else if(href_list["add_language"])
-		var/datum/species/S = all_species[pref.species]
+		var/datum/species/S = GLOB.all_species[pref.species]
 		if(pref.alternate_languages.len >= S.num_alternate_languages)
 			alert(user, "You have already selected the maximum number of alternate languages for this species!")
 		else
 			var/list/available_languages = S.secondary_langs.Copy()
-			for(var/L in all_languages)
-				var/datum/language/lang = all_languages[L]
+			for(var/L in GLOB.all_languages)
+				var/datum/language/lang = GLOB.all_languages[L]
 				if(!(lang.flags & RESTRICTED) && (is_lang_whitelisted(user, lang)))
 					available_languages |= L
 
@@ -130,8 +130,8 @@
 				for(var/checklang in culture.secondary_langs)
 					allowed_languages[checklang] = TRUE
 
-	for(var/thing in all_languages)
-		var/datum/language/lang = all_languages[thing]
+	for(var/thing in GLOB.all_languages)
+		var/datum/language/lang = GLOB.all_languages[thing]
 		if(whitelist_overrides(user) || (!(lang.flags & RESTRICTED) && (lang.flags & WHITELISTED) && is_alien_whitelisted(user, lang)))
 			allowed_languages[thing] = TRUE
 
@@ -148,11 +148,11 @@
 	var/preference_mob = preference_mob()
 	rebuild_language_cache(preference_mob)
 	for(var/L in pref.alternate_languages)
-		var/datum/language/lang = all_languages[L]
+		var/datum/language/lang = GLOB.all_languages[L]
 		if(!lang || !is_allowed_language(preference_mob, lang))
 			pref.alternate_languages -= L
 
-	var/datum/species/S = all_species[pref.species]
+	var/datum/species/S = GLOB.all_species[pref.species]
 
 	var/list/free_languages = list()
 	free_languages |= S.language
@@ -172,7 +172,7 @@
 	. = ..()
 	sanitize_alt_languages()
 
-	var/datum/species/S = all_species[pref.species]
+	var/datum/species/S = GLOB.all_species[pref.species]
 
 	var/list/free_languages = list()
 	free_languages |= S.language

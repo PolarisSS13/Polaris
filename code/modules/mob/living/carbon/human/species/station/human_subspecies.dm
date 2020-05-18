@@ -55,6 +55,27 @@
 		O_INTESTINE =/obj/item/organ/internal/intestine
 		)
 
+	available_cultural_info = list(
+		TAG_CULTURE =   list(CULTURE_OTHER,
+							CULTURE_HUMAN,
+							CULTURE_HUMAN_EARTH,
+							CULTURE_HUMAN_OTHER
+							),
+		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS,
+							HOME_SYSTEM_OTHER,
+							HOME_SYSTEM_EARTH
+							),
+		TAG_FACTION =   list(FACTION_OTHER,
+							FACTION_NANOTRASEN
+							),
+		TAG_RELIGION =  list(RELIGION_OTHER,
+							RELIGION_ATHEISM,
+							RELIGION_AGNOSTICISM
+							),
+		TAG_SUBSPECIES = list(SUBSPECIES_GENERIC
+							)
+	)
+
 /*
 // These guys are going to need full resprites of all the suits/etc so I'm going to
 // define them and commit the sprites, but leave the clothing for another day.

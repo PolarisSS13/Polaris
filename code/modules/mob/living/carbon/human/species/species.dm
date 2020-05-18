@@ -250,6 +250,9 @@
 		TAG_RELIGION =  list(RELIGION_OTHER,
 							RELIGION_ATHEISM,
 							RELIGION_AGNOSTICISM
+							),
+		TAG_SUBSPECIES = list(SUBSPECIES_GENERIC,
+							SUBSPECIES_VATBORN
 							)
 	)
 	var/list/force_cultural_info =                list()
