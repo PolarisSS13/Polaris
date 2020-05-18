@@ -111,7 +111,8 @@ var/list/sacrificed = list()
 /obj/effect/rune/proc/convert()
 	var/mob/attacker = usr
 	var/mob/living/carbon/target = null
-	for(var/mob/living/carbon/M in src.loc)
+	var/turf/T = get_turf(src)
+	for(var/mob/living/carbon/M in T)
 		if(!iscultist(M) && M.stat < DEAD && !(M in converting))
 			target = M
 			break
@@ -536,7 +537,7 @@ var/list/sacrificed = list()
 
 	var/obj/effect/rune/imbued_from
 	var/obj/item/weapon/paper/talisman/T
-	for(var/obj/effect/rune/R in orange(1,src))
+	for(var/obj/effect/rune/R in orange(1,get_turf(src)))
 		if(R==src)
 			continue
 		if(R.word1==cultwords["travel"] && R.word2==cultwords["self"])  //teleport
@@ -585,7 +586,7 @@ var/list/sacrificed = list()
 			T.imbue = "communicate"
 			imbued_from = R
 			break
-		if(R.word1==cultwords["join"] && R.word2==cultwords["hide"] && R.word3==cultwords["technology"]) //communicat
+		if(R.word1==cultwords["join"] && R.word2==cultwords["hide"] && R.word3==cultwords["technology"]) //stun
 			T = new(src.loc)
 			T.imbue = "runestun"
 			imbued_from = R
@@ -1100,7 +1101,7 @@ var/list/sacrificed = list()
 	else
 		return fizzle()
 
-//////////             Rune 24 (counting burningblood, which kinda doesnt work yet.)
+//////////             Rune 24
 
 /obj/effect/rune/proc/runestun(var/mob/living/T as mob)
 	if(istype(src,/obj/effect/rune))   ///When invoked as rune, flash and stun everyone around.
@@ -1238,5 +1239,111 @@ var/list/sacrificed = list()
 	else
 		A.forceMove(T)
 		to_chat(A, "<span class='cult'>You decide your current form is fine, and return to the material plane.</span>")
+
+	return
+
+/////////////////////////////////////////TWENTY-SEVENTH RUNE
+
+/obj/effect/rune/proc/portalsummon()
+	var/culcount = 0
+	for(var/mob/living/carbon/C in orange(1,src))
+		if(iscultist(C) && !C.stat)
+			culcount++
+
+	if(culcount >= 2 && !(locate(/obj/structure/prop/nest) in get_turf(src)))
+		var/mob/living/carbon/human/user = usr
+		if(istype(src,/obj/effect/rune))
+			usr.say("Y-hai shugg zhro 'fhalma gof'nn, orr'e ch'!")
+		else
+			usr.whisper("Y-hai shugg zhro 'fhalma gof'nn, orr'e ch'...")
+
+		user.visible_message("<span class='cult'>\The [src] boils away, a scar in the plating widening to form a noxious vent.</span>")
+
+		var/turf/T = get_turf(src)
+
+		if(istype(T, /turf/simulated/floor))
+			var/turf/simulated/floor/FT = T
+			FT.burn_tile()
+
+		new /obj/structure/prop/nest/cult/portal(T)
+
+		qdel(src)
+		return
+
+	else
+		return fizzle()
+
+/////////////////////////////////////////TWENTY-EIGHTH RUNE
+
+/obj/effect/rune/proc/createforge()
+	var/resources_found = FALSE
+
+	var/list/required_resources = list(
+		/obj/item/stack/material/plasteel = 5,
+		/obj/structure/reagent_dispensers/fueltank = 1
+		)
+
+	var/list/found_resources = list()
+
+	usr.say("Gotha nak'yarnak uh'e ngluior n'ghanyth!")
+
+	for(var/obj/O in get_turf(src))
+		var/found_path = FALSE
+		for(var/path in required_resources)
+			if(istype(O, path))
+				found_path = TRUE
+				break
+
+		if(found_path)
+			found_resources |= O
+
+	for(var/path in required_resources) // Sort through everything, using objects as necessary.
+		var/consumed = FALSE
+		for(var/obj/O in found_resources)
+			if(istype(O, path))
+
+				if(prob(10))
+					usr.say("Gotha nak'yarnak uh'e ngluior [O], shtunggli hrii!")
+
+				if(istype(O, /obj/item/stack))
+					var/obj/item/stack/S = O
+
+					var/amt_needed = required_resources[path]
+
+					var/amt_diff = S.amount - amt_needed
+
+					if(amt_diff >= 0)
+						required_resources[path] = 0
+
+					else
+						required_resources[path] = abs(amt_diff)
+
+					S.use(amt_needed)
+
+				else
+					required_resources[path] -= 1
+
+					qdel(O)
+
+			if(required_resources[path] = 0)	// If we found everything, skip to the next.
+				break
+
+	for(var/path in required_resources) // Final check to confirm we are in fact good to spawn the forge.
+		if(required_resources[path] > 0)
+			resources_found = FALSE
+			break
+
+		resources_found = TRUE
+
+	if(!resources_found)
+		visible_message("<span class='cult'>\The reagents fade from this world, leaving only glittering dust.</span>")
+		new /obj/item/weapon/ectoplasm(get_turf(src))
+		return fizzle()
+
+	new /obj/structure/cult/forge/networked(get_turf(src))
+
+	visible_message("<span class='cult'>\The reagents begin to fade from this world, before coalescing into the shape of an alchemical forge.</span>")
+
+	qdel(src)
 
 	return

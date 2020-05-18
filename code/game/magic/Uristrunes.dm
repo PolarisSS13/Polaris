@@ -6,7 +6,7 @@ var/list/word_to_uristrune_table = null
 		word_to_uristrune_table = list()
 
 		var/bit = 1
-		var/list/words = list("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "mgar", "balaq", "karazet", "geeri")
+		var/list/words = list("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "mgar", "balaq", "karazet", "geeri", "rinyth")
 
 		while(length(words))
 			var/w = pick(words)
@@ -22,6 +22,10 @@ var/list/word_to_uristrune_table = null
 
 /proc/get_uristrune_cult(word1, word2, word3)
 	var/animated
+
+/*
+ * Cross reference this with /obj/effect/rune/attack_hand's rune proc check, to make sure everything is accounted for.
+ */
 
 	if((word1 == cultwords["travel"] && word2 == cultwords["self"])						\
 	|| (word1 == cultwords["join"] && word2 == cultwords["blood"] && word3 == cultwords["self"])	\
@@ -45,7 +49,12 @@ var/list/word_to_uristrune_table = null
 	|| (word1 == cultwords["destroy"] && word2 == cultwords["see"] && word3 == cultwords["blood"])	\
 	|| (word1 == cultwords["self"] && word2 == cultwords["other"] && word3 == cultwords["technology"])	\
 	|| (word1 == cultwords["travel"] && word2 == cultwords["other"])						\
-	|| (word1 == cultwords["join"] && word2 == cultwords["hide"] && word3 == cultwords["technology"])	)
+	|| (word1 == cultwords["join"] && word2 == cultwords["hide"] && word3 == cultwords["technology"])	\
+	|| (word1 == cultwords["technology"] && word2 == cultwords["join"] && word3 == cultwords["self"])	\
+	|| (word1 == cultwords["blood"] && word2 == cultwords["destroy"] && word3 == cultwords["other"])	\
+	|| (word1 == cultwords["hell"] && word2 == cultwords["destroy"] && word3 == cultwords["see"])	\
+	|| (word1 == cultwords["blood"] && word2 == cultwords["create"] && word3 == cultwords["technology"])	\
+	)
 		animated = 1
 	else
 		animated = 0

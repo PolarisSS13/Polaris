@@ -2,8 +2,8 @@
 
 var/cultwords = list()
 var/runedec = 0
-var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
-var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri")
+var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide", "create")
+var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri", "rinyth")
 
 /client/proc/check_words() // -- Urist
 	set category = "Special Verbs"
@@ -102,7 +102,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 
 /obj/effect/rune/attack_hand(mob/living/user as mob)
-	if(!iscultist(user))
+	if(!iscultist(user) || !istype(user, /mob/living/simple_mob/construct))
 		to_chat(user, "You can't mouth the arcane scratchings without fumbling over them.")
 		return
 	if(user.is_muzzled())
@@ -164,15 +164,19 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		return changeconstruct()
 	if(word1 == cultwords["blood"] && word2 == cultwords["destroy"] && word3 == cultwords["other"])
 		return burningblood()
+	if(word1 == cultwords["hell"] && word2 == cultwords["destroy"] && word3 == cultwords["see"])
+		return portalsummon()
+	if(word1 == cultwords["blood"] && word2 == cultwords["create"] && word3 == cultwords["technology"])
+		return createforge()
 	else
 		return fizzle()
 
 
 /obj/effect/rune/proc/fizzle()
 	if(istype(src,/obj/effect/rune))
-		usr.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
+		usr.say(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix.", "Tharanak uaaah 'ainyth."))
 	else
-		usr.whisper(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix."))
+		usr.whisper(pick("Hakkrutju gopoenjim.", "Nherasai pivroiashan.", "Firjji prhiv mazenhor.", "Tanah eh wakantahe.", "Obliyae na oraie.", "Miyf hon vnor'c.", "Wakabai hij fen juswix.", "Tharanak uaaah 'ainyth."))
 	for (var/mob/V in viewers(src))
 		V.show_message("<span class='warning'>The markings pulse with a small burst of light, then fall dark.</span>", 3, "<span class='warning'>You hear a faint fizzle.</span>", 2)
 	return
@@ -233,6 +237,8 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				<b>Stun: </b>Join Hide Technology<br>
 				<b>Summon Cultist Armor: </b>Hell Destroy Other<br>
 				<b>See Invisible: </b>See Hell Join<br>
+				<b>Hellish Defender: </b>Hell Destroy See<br>
+				<b>Create Forge: </b>Blood Create Technology<br>
 				</p>
 				<h2>Rune Descriptions</h2>
 				<h3>Teleport self</h3>
@@ -285,6 +291,10 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				When this rune is invoked, either from a rune or a talisman, it will equip the user with the armor of the followers of Nar-Sie. To use this rune to its fullest extent, make sure you are not wearing any form of headgear, armor, gloves or shoes, and make sure you are not holding anything in your hands.<br>
 				<h3>See Invisible</h3>
 				When invoked when standing on it, this rune allows the user to see the the world beyond as long as he does not move.<br>
+				<h3>Hellish Defender</h3>
+				When invoked by two believers, this rune will open a small exit from beyond the veil, allowing an unholy guardian to pull itself through. Only one can exit from a portal at a time, and only one portal can exist per cubic meter. The guardian takes two minutes to arrive.<br>
+				<h3>Create Forge</h3>
+				When invoked by a single believer, this rune will convert 5 sheets of plasteel and a welding fuel tank into an alchemical forge. Be warned, this process of fabrication is imperfect, and will consume reagents whether it can complete the forge or not.<br>
 				</body>
 				</html>
 				"}
@@ -363,7 +373,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			"burning blood" = list("blood", "destroy", "other"),
 			"blood drain" = list("travel","blood","self"),
 			"raise dead" = list("blood","join","hell"),
-			"summon narsie" = list("hell","join","self"),
+			"tear veil" = list("hell","join","self"),
 			"communicate" = list("self","other","technology"),
 			"emp" = list("destroy","see","technology"),
 			"manifest" = list("blood","see","travel"),
@@ -381,7 +391,9 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			"stun" = list("join","hide","technology"),
 			"armor" = list("hell","destroy","other"),
 			"teleport" = list("travel","self"),
-			"teleport other" = list("travel","other")
+			"teleport other" = list("travel","other"),
+			"hellish defender" = list("hell","destroy","see")
+			"create forge" = list("blood","create","technology")
 		)
 
 		var/list/english = list()
@@ -461,7 +473,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		var/r
 		if (!istype(user.loc,/turf))
 			to_chat(user, "<span class='notice'>You do not have enough space to write a proper rune.</span>")
-		var/list/runes = list("teleport", "itemport", "tome", "armor", "convert", "change construct", "tear in reality", "emp", "drain", "seer", "raise", "obscure", "reveal", "astral journey", "manifest", "imbue talisman", "sacrifice", "wall", "freedom", "cultsummon", "deafen", "blind", "bloodboil", "communicate", "stun")
+		var/list/runes = list("teleport", "itemport", "tome", "armor", "convert", "change construct", "tear in reality", "emp", "drain", "seer", "raise", "obscure", "reveal", "astral journey", "manifest", "imbue talisman", "sacrifice", "wall", "freedom", "cultsummon", "deafen", "blind", "bloodboil", "communicate", "stun", "hellish defender", "create forge")
 		r = input("Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 		var/obj/effect/rune/R = new /obj/effect/rune
 		if(istype(user, /mob/living/carbon/human))
@@ -625,6 +637,18 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			if("stun")
 				R.word1=cultwords["join"]
 				R.word2=cultwords["hide"]
+				R.word3=cultwords["technology"]
+				R.loc = user.loc
+				R.check_icon()
+			if("hellish defender")
+				R.word1=cultwords["hell"]
+				R.word2=cultwords["destroy"]
+				R.word3=cultwords["see"]
+				R.loc = user.loc
+				R.check_icon()
+			if("create forge")
+				R.word1=cultwords["blood"]
+				R.word2=cultwords["create"]
 				R.word3=cultwords["technology"]
 				R.loc = user.loc
 				R.check_icon()

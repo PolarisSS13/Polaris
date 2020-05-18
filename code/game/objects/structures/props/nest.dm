@@ -19,6 +19,8 @@
 	var/tally = 0				//The counter referenced against total_creature_max, or just to see how many mobs it has spawned.
 	var/total_creature_max	//If set, it can spawn this many creatures, total, ever.
 
+	var/destroy_message = "<span class='notice'>The den collapses in on itself!</span>"
+
 /obj/structure/prop/nest/Initialize()
 	..()
 	den_mobs = list()
@@ -30,6 +32,8 @@
 		spawn_delay += delayshift
 
 /obj/structure/prop/nest/Destroy()
+	visible_message(destroy_message)
+
 	den_mobs = null
 	STOP_PROCESSING(SSobj, src)
 	..()
@@ -43,6 +47,12 @@
 	update_creatures()
 	if(world.time > last_spawn + spawn_delay)
 		spawn_creature(get_turf(src))
+
+/obj/structure/prop/nest/ex_act()
+	. = ..()
+
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/structure/prop/nest/proc/spawn_creature(var/turf/spawnpoint)
 	update_creatures() //Paranoia.
@@ -65,3 +75,50 @@
 	for(var/mob/living/L in den_mobs)
 		if(L.stat == 2)
 			remove_creature(L)
+
+/*
+ * Subtypes.
+ */
+
+ /obj/structure/prop/nest/cult
+ 	name = "occult opening"
+	desc = "An ancient portal to another realm."
+	icon = 'icons/obj/cult.dmi'
+	icon_state = "hole"
+	density = FALSE
+	interaction_message = "<span class='warning'>You feel like you shouldn't be sticking your nose into another realm.</span>"
+
+	disturbance_spawn_chance = 5
+	spawn_delay = 2 MINUTES
+	creature_types = list(/mob/living/simple_mob/animal/space/bats/cult,
+		/mob/living/simple_mob/creature/cult)
+
+	den_faction = "cult"
+	max_creatures = 3
+
+	destroy_message = "<span class='notice'>The tunnel collapses in on itself!</span>"
+
+/obj/structure/prop/nest/cult/attack_hand(mob/living/user)
+	var/destroy_self = FALSE
+	if(iscultist(user) || istype(user, /mob/living/simple_mob/construct))
+		destroy_self = TRUE
+	else
+		if(user.is_holding_item_of_type(/obj/item/weapon/nullrod))
+			to_chat(user, "<span class='notice'>You channel the null rod's condensed ethereal energies into \the [src].</span>")
+			destroy_self = TRUE
+		. = ..()
+
+	if(destroy_self)
+		qdel(src)
+
+/obj/structure/prop/nest/cult/portal
+	name = "noxious portal"
+
+	icon_state = "portal"
+
+	max_creatures = 1
+
+	creature_types = list(/mob/living/simple_mob/animal/space/bats/cult/strong,
+		/mob/living/simple_mob/creature/cult/strong,
+		/mob/living/simple_mob/faithless/cult
+		)
