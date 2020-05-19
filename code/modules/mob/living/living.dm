@@ -797,11 +797,6 @@ default behaviour is:
 		return	
 	else if(lastarea?.has_gravity == 0)
 		inertial_drift()
-	//VOREStation Edit Start
-	else if(flying)
-		inertial_drift()
-		make_floating(1)
-	//VOREStation Edit End
 	else if(!isspace(loc))
 		inertia_dir = 0
 		make_floating(0)
