@@ -262,6 +262,7 @@
 	volume = 120
 	flags = OPENCONTAINER
 	unacidable = 0
+	slot_flags = SLOT_HEAD
 
 /obj/item/weapon/reagent_containers/glass/bucket/attackby(var/obj/item/D, mob/user as mob)
 	if(isprox(D))
