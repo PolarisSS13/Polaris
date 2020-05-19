@@ -164,6 +164,7 @@
 proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 	if(automute)
 		if(!config.automute_on)
+			to_world("automute off")
 			return
 	else
 		if(!usr || !usr.client)
@@ -176,8 +177,10 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 		if(M.client.holder)
 			to_chat(usr, "<font color='red'>Error: cmd_admin_mute: You cannot mute an admin/mod.</font>")
 	if(!M.client)
+		to_world("no client")
 		return
 	if(M.client.holder)
+		to_world("holder")
 		return
 
 	var/muteunmute
@@ -190,7 +193,9 @@ proc/cmd_admin_mute(mob/M as mob, mute_type, automute = 0)
 		if(MUTE_ADMINHELP)	mute_string = "adminhelp, admin PM and ASAY"
 		if(MUTE_DEADCHAT)	mute_string = "deadchat and DSAY"
 		if(MUTE_ALL)		mute_string = "everything"
-		else				return
+		else
+			to_world("inv mute type")
+			return
 
 	if(automute)
 		muteunmute = "auto-muted"
