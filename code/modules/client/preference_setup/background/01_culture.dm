@@ -1,15 +1,31 @@
-#define GET_ALLOWED_VALUES(write_to, check_key) \
-	var/datum/species/S = GLOB.all_species[pref.species]; \
-	if(!S) { \
-		write_to = list(); \
-	} else if(S.force_cultural_info[check_key]) { \
-		write_to = list(S.force_cultural_info[check_key] = TRUE); \
-	} else { \
-		write_to = list(); \
-		for(var/cul in S.available_cultural_info[check_key]) { \
-			write_to[cul] = TRUE; \
-		} \
-	}
+/datum/category_item/player_setup_item/proc/get_allowed_background_values(var/list/write_to, var/check_key)
+	var/datum/species/S = GLOB.all_species[pref.species]
+	var/status = pref.organ_data[O_BRAIN]
+	var/robot = FALSE
+	if(!S)
+		write_to = list()
+	else if(S.force_cultural_info[check_key])
+		write_to = list(S.force_cultural_info[check_key] = TRUE)
+	else
+		write_to = list()
+		if(status == "mechanical")
+			robot = TRUE
+			for(var/cul in GLOB.positronic_cultural_info[check_key])
+				write_to[cul] = TRUE
+		else if(status == "digital")
+			robot = TRUE
+			for(var/cul in GLOB.drone_cultural_info[check_key])
+				write_to[cul] = TRUE
+		for(var/cul in S.available_cultural_info[check_key])
+			write_to[cul] = TRUE
+
+	for(var/cul in write_to)
+		var/decl/cultural_info/culture = SSculture.get_culture(cul)
+
+		if((robot && culture.whitelist == CULTURE_ONLY_ORGANIC) || (!robot && culture.whitelist == CULTURE_ONLY_MACHINE))
+			write_to -= cul
+
+	return write_to
 
 /datum/preferences
 	var/list/cultural_info = list()
@@ -33,7 +49,7 @@
 		pref.cultural_info = list()
 	for(var/token in tokens)
 		var/list/_cultures
-		GET_ALLOWED_VALUES(_cultures, token)
+		_cultures = get_allowed_background_values(_cultures, token)
 		if(!LAZYLEN(_cultures))
 			pref.cultural_info[token] = using_map.default_cultural_info[token]
 		else
@@ -138,7 +154,7 @@
 			if(check_href == 1)
 				valid_values = SSculture.get_all_entries_tagged_with(token)
 			else
-				GET_ALLOWED_VALUES(valid_values, token)
+				valid_values = get_allowed_background_values(valid_values, token)
 
 			var/choice = input("Please select an entry.") as null|anything in valid_values
 			if(!choice)
@@ -148,7 +164,7 @@
 			if(check_href == 1)
 				valid_values = SSculture.get_all_entries_tagged_with(token)
 			else
-				GET_ALLOWED_VALUES(valid_values, token)
+				valid_values = get_allowed_background_values(valid_values, token)
 
 			if(valid_values[choice])
 				var/decl/cultural_info/culture = SSculture.get_culture(choice)
@@ -204,5 +220,3 @@
 		return TOPIC_REFRESH
 
 	. = ..()
-
-#undef GET_ALLOWED_VALUES

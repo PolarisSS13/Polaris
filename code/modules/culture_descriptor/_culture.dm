@@ -15,6 +15,9 @@
 	var/list/qualifications
 	var/list/modifiers
 
+	// Is this only usable by organics, or machines?
+	var/whitelist = null
+
 	var/other_tag
 
 /decl/cultural_info/New()

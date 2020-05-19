@@ -12,6 +12,11 @@
 	TAG_SUBSPECIES = "Subspecies"\
 	)
 
+// Restrictions on use.
+
+#define CULTURE_ONLY_MACHINE   "Machine"
+#define CULTURE_ONLY_ORGANIC   "Organic"
+
 // Cultural IDs.
 #define FACTION_OTHER          "Other Faction"
 #define FACTION_NANOTRASEN     "NanoTrasen"
@@ -25,9 +30,14 @@
 #define CULTURE_HUMAN_EARTH    "Earther"
 #define CULTURE_HUMAN_OTHER    "Other, Humanity"
 
+#define CULTURE_POSITRONIC     "Positronic"
+
 #define RELIGION_OTHER         "Other Religion"
 #define RELIGION_AGNOSTICISM   "Agnosticism"
 #define RELIGION_ATHEISM       "Atheism"
 
 #define SUBSPECIES_GENERIC     "Baseline"
 #define SUBSPECIES_VATBORN     "Baseline Vatborn"
+
+#define SUBSPECIES_DRONE_X     "X-Class Intelligence"
+#define SUBSPECIES_DRONE_EMERGENT "Emergent Intelligence"

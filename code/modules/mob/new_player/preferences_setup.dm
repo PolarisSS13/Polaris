@@ -225,7 +225,7 @@
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
 				var/permitted = 0
-				if(!G.allowed_roles)
+				if(!(G.allowed_roles || G.allowed_backgrounds))
 					permitted = 1
 				else if(!previewJob)
 					permitted = 0

@@ -365,13 +365,31 @@ var/global/datum/controller/occupations/job_master
 					var/datum/gear/G = gear_datums[thing]
 					if(!G) //Not a real gear datum (maybe removed, as this is loaded from their savefile)
 						continue
-					
+
 					var/permitted
 					// Check if it is restricted to certain roles
-					if(G.allowed_roles)
-						for(var/job_name in G.allowed_roles)
-							if(job.title == job_name)
-								permitted = 1
+					if(G.allowed_roles || G.allowed_backgrounds)
+						var/roles_pass = TRUE
+						if(G.allowed_roles)
+							for(var/job_name in G.allowed_roles)
+								roles_pass = FALSE
+								if(job.title == job_name)
+									roles_pass = TRUE
+									break
+
+						var/backgrounds_pass = TRUE
+						if(LAZYLEN(G.allowed_backgrounds))
+							backgrounds_pass = FALSE
+
+							if(LAZYLEN(G.allowed_backgrounds))
+								var/list/checklist = list(H.home_system,H.citizenship,H.personal_faction,H.religion,H.custculture,H.subspecies)
+								checklist &= G.allowed_backgrounds
+
+								if(LAZYLEN(checklist))
+									backgrounds_pass = TRUE
+
+						permitted = (backgrounds_pass && roles_pass)
+
 					else
 						permitted = 1
 
@@ -381,7 +399,7 @@ var/global/datum/controller/occupations/job_master
 
 					// If they aren't, tell them
 					if(!permitted)
-						to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+						to_chat(H, "<span class='warning'>Your current species, job, background, or whitelist status does not permit you to spawn with [thing]!</span>")
 						continue
 
 					// Implants get special treatment
@@ -406,13 +424,13 @@ var/global/datum/controller/occupations/job_master
 
 			// Set up their account
 			job.setup_account(H)
-			
+
 			// Equip job items.
 			job.equip(H, H.mind ? H.mind.role_alt_title : "")
-			
+
 			// Stick their fingerprints on literally everything
 			job.apply_fingerprints(H)
-			
+
 			// Only non-silicons get post-job-equip equipment
 			if(!(job.mob_type & JOB_SILICON))
 				H.equip_post_job()
@@ -457,7 +475,7 @@ var/global/datum/controller/occupations/job_master
 				return H.Robotize()
 			if(job.mob_type & JOB_SILICON_AI)
 				return H
-			
+
 			// TWEET PEEP
 			if(rank == "Colony Director")
 				var/sound/announce_sound = (ticker.current_state <= GAME_STATE_SETTING_UP) ? null : sound('sound/misc/boatswain.ogg', volume=20)

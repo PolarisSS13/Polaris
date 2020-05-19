@@ -1558,10 +1558,10 @@
 /mob/living/carbon/human/get_fire_icon_state()
 	return species.fire_icon_state
 
-// Called by job_controller.  Makes drones start with a permit, might be useful for other people later too.
+// Called by job_controller.  Makes legal drones start with a permit, might be useful for other people later too.
 /mob/living/carbon/human/equip_post_job()
 	var/braintype = get_FBP_type()
-	if(braintype == FBP_DRONE)
+	if(braintype == FBP_DRONE && subspecies != SUBSPECIES_DRONE_X)
 		var/turf/T = get_turf(src)
 		var/obj/item/clothing/accessory/permit/drone/permit = new(T)
 		permit.set_name(real_name)

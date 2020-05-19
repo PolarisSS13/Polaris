@@ -17,3 +17,5 @@
 	commonly by the use of a modified common template, or unique template made from donor genomes."
 
 	economic_power = 0.8
+
+	whitelist = CULTURE_ONLY_ORGANIC

@@ -328,6 +328,10 @@ var/global/list/PDA_Manifest = list()
 		G.fields["age"]			= H.age
 		if(H.get_FBP_type())
 			G.fields["brain_type"] = H.get_FBP_type()
+
+			if(H.subspecies == SUBSPECIES_DRONE_X)	// Illegal drone.
+				G.fields["brain_type"] = "Positronic"
+
 		else
 			G.fields["brain_type"] = "Organic"
 		G.fields["fingerprint"]	= md5(H.dna.uni_identity)
@@ -349,6 +353,10 @@ var/global/list/PDA_Manifest = list()
 		M.fields["id_gender"]	= gender2text(H.identifying_gender)
 		if(H.get_FBP_type())
 			M.fields["brain_type"] = H.get_FBP_type()
+
+			if(H.subspecies == SUBSPECIES_DRONE_X)	// Illegal drone.
+				G.fields["brain_type"] = "Positronic"
+
 		else
 			M.fields["brain_type"] = "Organic"
 		if(H.med_record && !jobban_isbanned(H, "Records"))
@@ -358,6 +366,10 @@ var/global/list/PDA_Manifest = list()
 		var/datum/data/record/S = CreateSecurityRecord(H.real_name, id, hidden)
 		if(H.get_FBP_type())
 			S.fields["brain_type"] = H.get_FBP_type()
+
+			if(H.subspecies == SUBSPECIES_DRONE_X)	// Illegal drone.
+				G.fields["brain_type"] = "Positronic"
+
 		else
 			S.fields["brain_type"] = "Organic"
 		if(H.sec_record && !jobban_isbanned(H, "Records"))
