@@ -94,6 +94,8 @@
 
 	var/drop_sound = 'sound/items/drop/device.ogg' // drop sound - this is the default
 
+	var/tip_timer // reference to timer id for a tooltip we might open soon
+
 /obj/item/New()
 	..()
 	if(embed_chance < 0)
@@ -339,7 +341,7 @@ var/list/global/slot_flags_enumeration = list(
 //If you are making custom procs but would like to retain partial or complete functionality of this one, include a 'return ..()' to where you want this to happen.
 //Set disable_warning to 1 if you wish it to not give you outputs.
 //Should probably move the bulk of this into mob code some time, as most of it is related to the definition of slots and not item-specific
-/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = 0)
+/obj/item/proc/mob_can_equip(M as mob, slot, disable_warning = FALSE)
 	if(!slot) return 0
 	if(!M) return 0
 
@@ -602,19 +604,24 @@ var/list/global/slot_flags_enumeration = list(
 		blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
 	return 1 //we applied blood to the item
 
-
+GLOBAL_LIST_EMPTY(blood_overlays_by_type)
 /obj/item/proc/generate_blood_overlay()
+	// Already got one
 	if(blood_overlay)
 		return
+	
+	// Already cached
+	if(GLOB.blood_overlays_by_type[type])
+		blood_overlay = GLOB.blood_overlays_by_type[type]
+		return
 
-	var/icon/I = new /icon(icon, icon_state)
-	I.Blend(new /icon('icons/effects/blood.dmi', rgb(255,255,255)),ICON_ADD) //fills the icon_state with white (except where it's transparent)
-	I.Blend(new /icon('icons/effects/blood.dmi', "itemblood"),ICON_MULTIPLY) //adds blood and the remaining white areas become transparant
-
-	//not sure if this is worth it. It attaches the blood_overlay to every item of the same type if they don't have one already made.
-	for(var/obj/item/A in world)
-		if(A.type == type && !A.blood_overlay)
-			A.blood_overlay = image(I)
+	// Firsties!
+	var/image/blood = image(icon = 'icons/effects/blood.dmi', icon_state = "itemblood") // Needs to be a new one each time since we're slicing it up with filters.
+	blood.filters += filter(type = "alpha", icon = icon(icon, icon_state)) // Same, this filter is unique for each blood overlay per type
+	GLOB.blood_overlays_by_type[type] = blood
+	
+	// And finally
+	blood_overlay = blood
 
 /obj/item/proc/showoff(mob/user)
 	for (var/mob/M in view(user))
@@ -635,6 +642,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 */
 //Looking through a scope or binoculars should /not/ improve your periphereal vision. Still, increase viewsize a tiny bit so that sniping isn't as restricted to NSEW
 /obj/item/var/ignore_visor_zoom_restriction = FALSE
+
+/obj/item/on_loc_moved(var/oldloc)
+	. = ..()
+	if(zoom)
+		zoom() // aka unzoom
 
 /obj/item/proc/zoom(var/tileoffset = 14,var/viewsize = 9) //tileoffset is client view offset in the direction the user is facing. viewsize is how far out this thing zooms. 7 is normal view
 
@@ -876,3 +888,17 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/is_welder()
 	return FALSE
+
+/obj/item/MouseEntered(location,control,params)
+	. = ..()
+	if(usr.is_preference_enabled(/datum/client_preference/inv_tooltips) && ((src in usr) || isstorage(loc))) // If in inventory or in storage we're looking at
+		var/user = usr
+		tip_timer = addtimer(CALLBACK(src, .proc/openTip, location, control, params, user), 5, TIMER_STOPPABLE)
+
+/obj/item/MouseExited()
+	. = ..()
+	deltimer(tip_timer)
+	closeToolTip(usr)
+
+/obj/item/proc/openTip(location, control, params, user)
+	openToolTip(user, src, params, title = name, content = desc)

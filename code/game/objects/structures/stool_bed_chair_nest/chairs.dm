@@ -139,22 +139,38 @@
 		return
 	..()
 
-/obj/structure/bed/chair/office/Move()
-	..()
+/obj/structure/bed/chair/office/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
+	
 	playsound(src, 'sound/effects/roll.ogg', 100, 1)
-	if(has_buckled_mobs())
-		for(var/A in buckled_mobs)
-			var/mob/living/occupant = A
-			occupant.buckled = null
-			occupant.Move(src.loc)
-			occupant.buckled = src
-			if (occupant && (src.loc != occupant.loc))
-				if (propelled)
-					for (var/mob/O in src.loc)
-						if (O != occupant)
-							Bump(O)
-				else
-					unbuckle_mob()
+
+/obj/structure/bed/chair/office/handle_buckled_mob_movement(atom/new_loc, direction)
+	for(var/A in buckled_mobs)
+		var/mob/living/occupant = A
+		occupant.buckled = null
+		occupant.Move(src.loc)
+		occupant.buckled = src
+		if (occupant && (src.loc != occupant.loc))
+			if (propelled)
+				for (var/mob/O in src.loc)
+					if (O != occupant)
+						Bump(O)
+			else
+				unbuckle_mob()
+
+/obj/structure/bed/chair/office/handle_buckled_mob_movement(atom/new_loc, direction, movetime)
+	for(var/A in buckled_mobs)
+		var/mob/living/occupant = A
+		occupant.buckled = null
+		occupant.Move(loc, direction, movetime)
+		occupant.buckled = src
+		if (occupant && (loc != occupant.loc))
+			if (propelled)
+				for (var/mob/O in src.loc)
+					if (O != occupant)
+						Bump(O)
+			else
+				unbuckle_mob()
 
 /obj/structure/bed/chair/office/Bump(atom/A)
 	..()
@@ -230,6 +246,14 @@
 			name = "red [initial(name)]"
 		else
 			name = "[sofa_material] [initial(name)]"
+
+/obj/structure/bed/chair/update_layer()
+	// Corner east/west should be on top of mobs, any other state's north should be.
+	if((icon_state == "sofacorner" && ((dir & EAST) || (dir & WEST))) || (icon_state != "sofacorner" && (dir & NORTH)))
+		plane = MOB_PLANE
+		layer = MOB_LAYER + 0.1
+	else
+		reset_plane_and_layer()
 
 /obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"

@@ -112,6 +112,11 @@
 		else
 			bumpopen(M)
 
+	if(istype(AM, /obj/item/device/uav))
+		if(check_access(null))
+			open()
+		else
+			do_animate("deny")
 
 	if(istype(AM, /mob/living/bot))
 		var/mob/living/bot/bot = AM
@@ -479,8 +484,7 @@
 		else
 			source.thermal_conductivity = initial(source.thermal_conductivity)
 
-/obj/machinery/door/Move(new_loc, new_dir)
-	//update_nearby_tiles()
+/obj/machinery/door/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
 	if(width > 1)
 		if(dir in list(EAST, WEST))

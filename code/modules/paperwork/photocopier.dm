@@ -15,6 +15,7 @@
 	var/copies = 1	//how many copies to print!
 	var/toner = 30 //how much toner is left! woooooo~
 	var/maxcopies = 10	//how many copies can be copied at once- idea shamelessly stolen from bs12's copier!
+	var/copying = FALSE // Is the printer busy with something? Sanity check variable.
 
 /obj/machinery/photocopier/Initialize()
 	. = ..()
@@ -58,33 +59,47 @@
 		ui.open()
 		ui.set_auto_update(10)
 
+/obj/machinery/photocopier/proc/copy_operation(var/mob/user)
+	if(copying)
+		return FALSE
+	copying = TRUE
+	for(var/i = 0, i < copies, i++)
+		if(toner <= 0)
+			break
+
+		if (istype(copyitem, /obj/item/weapon/paper))
+			playsound(loc, "sound/machines/copier.ogg", 100, 1)
+			sleep(11)
+			copy(copyitem)
+			audible_message("<span class='notice'>You can hear [src] whirring as it finishes printing.</span>")
+			playsound(loc, "sound/machines/buzzbeep.ogg", 30)
+		else if (istype(copyitem, /obj/item/weapon/photo))
+			playsound(loc, "sound/machines/copier.ogg", 100, 1)
+			sleep(11)
+			photocopy(copyitem)
+			audible_message("<span class='notice'>You can hear [src] whirring as it finishes printing.</span>")
+			playsound(loc, "sound/machines/buzzbeep.ogg", 30)
+		else if (istype(copyitem, /obj/item/weapon/paper_bundle))
+			sleep(11)
+			playsound(loc, "sound/machines/copier.ogg", 100, 1)
+			var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
+			sleep(11*B.pages.len)
+			audible_message("<span class='notice'>You can hear [src] whirring as it finishes printing.</span>")
+			playsound(loc, "sound/machines/buzzbeep.ogg", 30)
+		else
+			to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by [src].</span>")
+			playsound(loc, "sound/machines/buzz-two.ogg", 100)
+			break
+
+		use_power(active_power_usage)
+	copying = FALSE
+
 /obj/machinery/photocopier/Topic(href, href_list)
 	if(href_list["copy"])
 		if(stat & (BROKEN|NOPOWER))
 			return
+		addtimer(CALLBACK(src, .proc/copy_operation, usr), 0)
 
-		for(var/i = 0, i < copies, i++)
-			if(toner <= 0)
-				break
-
-			if (istype(copyitem, /obj/item/weapon/paper))
-				playsound(loc, "sound/machines/copier.ogg", 100, 1)
-				sleep(11)
-				copy(copyitem)
-			else if (istype(copyitem, /obj/item/weapon/photo))
-				playsound(loc, "sound/machines/copier.ogg", 100, 1)
-				sleep(11)
-				photocopy(copyitem)
-			else if (istype(copyitem, /obj/item/weapon/paper_bundle))
-				sleep(11)
-				playsound(loc, "sound/machines/copier.ogg", 100, 1)
-				var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
-				sleep(11*B.pages.len)
-			else
-				to_chat(usr, "<span class='warning'>\The [copyitem] can't be copied by \the [src].</span>")
-				break
-
-			use_power(active_power_usage)
 	else if(href_list["remove"])
 		if(copyitem)
 			copyitem.loc = usr.loc
@@ -145,7 +160,6 @@
 		playsound(loc, O.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
-
 	else if(default_deconstruction_screwdriver(user, O))
 		return
 	else if(default_deconstruction_crowbar(user, O))
@@ -205,6 +219,7 @@
 	if(need_toner)
 		toner--
 	if(toner == 0)
+		playsound(loc, "sound/machines/buzz-sigh.ogg", 100)
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 	return c
 
@@ -227,6 +242,7 @@
 		toner -= 5	//photos use a lot of ink!
 	if(toner < 0)
 		toner = 0
+		playsound(loc, "sound/machines/buzz-sigh.ogg", 100)
 		visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 
 	return p
@@ -237,6 +253,7 @@
 	for(var/obj/item/weapon/W in bundle.pages)
 		if(toner <= 0 && need_toner)
 			toner = 0
+			playsound(loc, "sound/machines/buzz-sigh.ogg", 100)
 			visible_message("<span class='notice'>A red light on \the [src] flashes, indicating that it is out of toner.</span>")
 			break
 
