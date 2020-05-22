@@ -176,7 +176,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 	create_characters() //Create player characters and transfer them.
 	collect_minds()
 	equip_characters()
-	data_core.manifest()
+//	data_core.manifest()
 
 	callHook("roundstart")
 
