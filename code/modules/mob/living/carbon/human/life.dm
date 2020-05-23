@@ -1205,14 +1205,6 @@
 				healths_ma.overlays += health_images
 				healths.appearance = healths_ma
 
-		if(nutrition_icon)
-			var/prefix = isSynthetic() ? "c" : null
-			switch(nutrition)
-				if(450 to INFINITY)				nutrition_icon.icon_state = "[prefix]nutrition0"
-				if(350 to 450)					nutrition_icon.icon_state = "[prefix]nutrition1"
-				if(250 to 350)					nutrition_icon.icon_state = "[prefix]nutrition2"
-				if(150 to 250)					nutrition_icon.icon_state = "[prefix]nutrition3"
-				else							nutrition_icon.icon_state = "[prefix]nutrition4"
 
 		var/fat_alert = /obj/screen/alert/fat
 		var/hungry_alert = /obj/screen/alert/hungry
@@ -1243,31 +1235,6 @@
 			clear_fullscreens()
 			clear_alert("blind")
 
-					if(bodytemperature >= species.heat_level_1)
-						bodytemp.icon_state = "temp4"
-					else if(bodytemperature >= base_temperature + temp_step*3)
-						bodytemp.icon_state = "temp3"
-					else if(bodytemperature >= base_temperature + temp_step*2)
-						bodytemp.icon_state = "temp2"
-					else if(bodytemperature >= base_temperature + temp_step*1)
-						bodytemp.icon_state = "temp1"
-					else
-						bodytemp.icon_state = "temp0"
-
-				else if(bodytemperature < base_temperature)
-					temp_step = (base_temperature - species.cold_level_1)/4
-
-					if(bodytemperature <= species.cold_level_1)
-						bodytemp.icon_state = "temp-4"
-					else if(bodytemperature <= base_temperature - temp_step*3)
-						bodytemp.icon_state = "temp-3"
-					else if(bodytemperature <= base_temperature - temp_step*2)
-						bodytemp.icon_state = "temp-2"
-					else if(bodytemperature <= base_temperature - temp_step*1)
-						bodytemp.icon_state = "temp-1"
-					else
-						bodytemp.icon_state = "temp0"
-
 		if(blinded)
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 		
@@ -1284,6 +1251,7 @@
 
 		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
+
 		if(druggy)
 			throw_alert("high", /obj/screen/alert/high)
 		else
