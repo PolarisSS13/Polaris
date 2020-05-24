@@ -421,7 +421,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				qdel(player)
 
 			// If they're a carbon, they can get manifested
-			if(J.mob_type & JOB_CARBON)
+			if(J?.mob_type & JOB_CARBON)
 				data_core.manifest_inject(new_char)
 
 /datum/controller/subsystem/ticker/proc/collect_minds()
