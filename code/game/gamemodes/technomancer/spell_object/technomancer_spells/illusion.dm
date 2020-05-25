@@ -48,7 +48,7 @@
 			illusion_meta.thing_to_copy = AM
 			update_icon()
 			to_chat(user, span("notice", "You've copied \the [AM]'s appearance."))
-			user << 'sound/weapons/flash.ogg' // Only the caster can hear this.
+			SEND_SOUND(user, 'sound/effects/pop.ogg') // Only the caster can hear this.
 			return TRUE
 
 	else if(istype(hit_atom, /turf))

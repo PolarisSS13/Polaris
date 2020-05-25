@@ -8,7 +8,8 @@
 	name = "Control"
 	desc = "This function allows you to exert control over simple-minded entities to an extent, such as spiders and carp.  \
 	Controlled entities will not be hostile towards you, and you may direct them to move to specific areas or to attack specific \
-	targets. This function will have no effect on entities of higher intelligence, such as humans and similar alien species, as it's \
+	targets. It will also permanently make controlled entities be friendly to you, even if uncontrolled afterwards. \
+	This function will have no effect on entities of higher intelligence, such as humans and similar alien species, as it's \
 	not true mind control, but merely pheromone synthesis for living animals, and electronic hacking for simple robots. The green web \
 	around the entity is merely a hologram used to allow the user to know if the creature is safe or not."
 	enhancement_desc = "Using the scepter inhand alongside Control will teleport all controlled entities to you, \
@@ -55,7 +56,7 @@
 	icon_state = "control"
 	desc = "Now you can command your own army!"
 	cast_methods = CAST_RANGED|CAST_USE
-	var/allowed_mob_classes = MOB_CLASS_ANIMAL|MOB_CLASS_SYNTHETIC|MOB_CLASS_ILLUSION
+	var/allowed_mob_classes = MOB_CLASS_ANIMAL|MOB_CLASS_SYNTHETIC|MOB_CLASS_ILLUSION|MOB_CLASS_CONSTRUCT
 	var/select_energy_cost = 200
 	var/scepter_teleport_delay = 1 SECOND
 	var/scepter_teleport_instability = 1
@@ -77,10 +78,6 @@
 			else
 				return follow_command(L)
 
-		// Clicking on allies.
-		if(is_ally(L))
-			return follow_command(L)
-
 		// Selection.
 		if(L.mob_class & allowed_mob_classes)
 			if(is_selected(L))
@@ -88,7 +85,11 @@
 			if(pay_energy(select_energy_cost))
 				return select(L)
 
-		else // Can't be selected, meaning they could be attacked.
+		// Clicking on allies.
+		if(is_ally(L))
+			return follow_command(L)
+
+		else // Can't be selected or followed, meaning they could be attacked.
 			return attack_command(L)
 
 	// Clicking on turfs.
@@ -196,7 +197,6 @@
 
 	if(istype(L, /mob/living/simple_mob))
 		var/mob/living/simple_mob/SM = L
-
 		// So selected mobs don't think the apprentice looks tasty.
 		for(var/datum/mind/technomancer_mind in technomancers.current_antagonists)
 			SM.friends |= technomancer_mind.current
@@ -225,11 +225,10 @@
 		AI.wander = initial(AI.wander)
 		AI.forget_everything()
 
-		if(istype(L, /mob/living/simple_mob))
-			var/mob/living/simple_mob/SM = L
-
-			for(var/datum/mind/technomancer_mind in technomancers.current_antagonists)
-				SM.friends -= technomancer_mind.current
+//		if(istype(L, /mob/living/simple_mob))
+//			var/mob/living/simple_mob/SM = L
+//			for(var/datum/mind/technomancer_mind in technomancers.current_antagonists)
+//				SM.friends -= technomancer_mind.current
 
 		to_chat(owner, span("notice", "You free \the [L] from your grasp."))
 

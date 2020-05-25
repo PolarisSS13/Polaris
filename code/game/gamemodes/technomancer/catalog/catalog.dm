@@ -363,6 +363,8 @@ GLOBAL_LIST_INIT(technomancer_catalog_assistance, init_subtypes_assoc(/datum/tec
 					budget -= spell_entry.cost
 					core.spell_catalog_entries_bought += spell_entry
 					for(var/path in spell_entry.spell_metadata_paths)
+						if(core.spell_metas[path]) // Don't add duplicate spells.
+							continue
 						var/datum/spell_metadata/meta = new path()
 						core.add_spell(meta)
 						core.spell_metas[path] = meta

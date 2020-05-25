@@ -36,11 +36,10 @@
 	// mind datums.  It may also allow creative players to try to pull off a 'soul jar' scenario.
 	var/list/summoned_mobs = list()	// Maintained horribly with maintain_summon_list().
 	var/list/wards_in_use = list()	// Wards don't count against the cap for other summons.
-	var/max_summons = 10			// Maximum allowed summoned entities.  Some cores will have different caps.
 
-/obj/item/weapon/technomancer_core/New()
-	..()
+/obj/item/weapon/technomancer_core/Initialize(mapload)
 	START_PROCESSING(SSobj, src)
+	return ..()
 
 /obj/item/weapon/technomancer_core/Destroy()
 	dismiss_all_summons()
@@ -312,7 +311,7 @@
 	energy = 8000
 	max_energy = 8000
 	regen_rate = 35 //228 seconds to full
-	max_summons = 40
+	max_summon_slots = 40
 	instability_modifier = 1.2
 	spell_power_modifier = 1.2
 

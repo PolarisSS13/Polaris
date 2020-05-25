@@ -52,10 +52,6 @@
 	var/ignition_radius = 2
 
 /obj/item/weapon/spell/technomancer/radiance/Initialize()
-	set_light(7, 4, l_color = "#D9D900")
-
-	playsound(owner, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
-
 	soundloop = new(list(src), FALSE)
 	soundloop.volume = 20
 	soundloop.start()
@@ -65,6 +61,9 @@
 	return ..()
 
 /obj/item/weapon/spell/technomancer/radiance/on_spell_given(mob/user)
+	set_light(7, 4, l_color = "#D9D900")
+	playsound(owner, 'sound/effects/magic/technomancer/generic_cast.ogg', 75, 1)
+
 	ray_filter_name = "[ray_filter_name]-[REF(src)]" // So someone with two radiances will have seperate filters hopefully.
 
 	if(!owner.get_filter(ray_filter_name))

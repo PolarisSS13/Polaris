@@ -1,13 +1,16 @@
+/*
 /datum/technomancer_catalog/spell/abjuration
 	name = "Abjuration"
 	cost = 0 // It's also bundled with all the Summon X spells.
 	category = UTILITY_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/abjuration)
-
+*/
 /datum/spell_metadata/abjuration
 	name = "Abjuration"
 	desc = "This ability attempts to send summoned or teleported entities or anomalies to the place from whence they came, \
-	or at least far away from the caster. Failing that, it may inhibit those entities in some form."
+	or at least far away from the caster. Failing that, it may inhibit those entities in some form. \
+	Can be used on Cores to remove all summoned entities associated with it, no matter how far they are from you, \
+	and only costing the same as a singular cast."
 	aspect = ASPECT_TELE
 	icon_state = "tech_abjuration"
 	spell_path = /obj/item/weapon/spell/technomancer/abjuration
@@ -23,7 +26,7 @@
 	name = "abjuration"
 	desc = "Useful for unruly minions, hostile summoners, or for fighting the horrors that may await you with your hubris."
 	icon_state = "generic"
-	cast_methods = CAST_RANGED
+	cast_methods = CAST_MELEE|CAST_RANGED
 	var/abjurate_energy_cost = 500
 	var/abjurate_instability_cost = 5
 
@@ -34,23 +37,7 @@
 
 		playsound(user, 'sound/effects/magic/technomancer/teleport.ogg', 75, 1)
 
-		if(istype(SM, /mob/living/simple_mob/construct))
-			var/mob/living/simple_mob/construct/evil = SM
-			to_chat(evil, span("danger", "\The [user]'s abjuration purges your form!"))
-			to_chat(user, span("notice", "You purge \the [evil]'s form, weakening them for a period of time."))
-			evil.purge = 3
-			playsound(SM, 'sound/effects/magic/technomancer/repulse.ogg', 75, 1)
-
-		else if(SM.summoned || SM.supernatural)
-			if(SM.client) // Player-controlled mobs are immune to being killed by this.
-				to_chat(user, span("warning", "\The [SM] resists your attempt to banish it!"))
-				to_chat(SM, span("danger", "\The [user] tried to teleport you far away, but failed."))
-				return FALSE
-			else
-				visible_message(span("notice", "\The [SM] vanishes!"))
-				playsound(SM, 'sound/effects/magic/technomancer/teleport_diss.ogg', 75, 1)
-				new /obj/effect/temp_visual/phase_out(get_turf(SM))
-				qdel(SM)
+		abjurate(SM, user)
 
 		adjust_instability(abjurate_instability_cost)
 
@@ -59,3 +46,48 @@
 		to_chat(user, span("danger", "One does not simply abjurate Nar'sie away."))
 		adjust_instability(200)
 	return TRUE
+
+// Casting this on a core abjurates all the summons attached to it.
+/obj/item/weapon/spell/technomancer/abjuration/on_melee_cast(atom/hit_atom, mob/user)
+	if(!istype(hit_atom, /obj/item/weapon/technomancer_core))
+		return on_ranged_cast(hit_atom, user)
+
+	var/obj/item/weapon/technomancer_core/hit_core = hit_atom
+
+	if(!pay_energy(abjurate_energy_cost))
+		to_chat(user, span("warning", "You can't afford the energy to abjurate through \the [hit_core]!"))
+		return FALSE
+
+	if(!LAZYLEN(hit_core.summon_slots))
+		to_chat(user, span("warning", "There are no summoned entities associated with \the [hit_core]."))
+		return FALSE
+
+	for(var/thing in hit_core.summon_slots)
+		var/datum/technomancer_summon_slot/slot = thing
+		abjurate(slot.summoned, user) // This will result in deleting the slot as well.
+
+	playsound(user, 'sound/effects/magic/technomancer/teleport.ogg', 75, 1)
+	to_chat(user, span("notice", "You abjurate away all the summoned entities associated with \the [hit_core]."))
+
+	adjust_instability(abjurate_instability_cost)
+
+	return TRUE
+
+/obj/item/weapon/spell/technomancer/abjuration/proc/abjurate(mob/living/simple_mob/SM, mob/living/user)
+	if(istype(SM, /mob/living/simple_mob/construct))
+		var/mob/living/simple_mob/construct/evil = SM
+		to_chat(evil, span("danger", "\The [user]'s abjuration purges your form!"))
+		to_chat(user, span("notice", "You purge \the [evil]'s form, weakening them for a period of time."))
+		evil.purge = 3
+		playsound(SM, 'sound/effects/magic/technomancer/repulse.ogg', 75, 1)
+
+	else if(SM.summoned || SM.supernatural)
+		if(SM.client) // Player-controlled mobs are immune to being killed by this.
+			to_chat(user, span("warning", "\The [SM] resists your attempt to banish it!"))
+			to_chat(SM, span("danger", "\The [user] tried to teleport you far away, but failed."))
+			return FALSE
+		else
+			visible_message(span("notice", "\The [SM] vanishes!"))
+			playsound(SM, 'sound/effects/magic/technomancer/teleport_diss.ogg', 75, 1)
+			new /obj/effect/temp_visual/phase_out(get_turf(SM))
+			qdel(SM)

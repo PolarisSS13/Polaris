@@ -52,9 +52,9 @@
 		)]"
 
 	dat += "Summon Slots: [color_by_comparison(
-		initial(core.max_summons),
-		initial(default_core.max_summons),
-		"[initial(core.max_summons)]"
+		initial(core.max_summon_slots),
+		initial(default_core.max_summon_slots),
+		"[initial(core.max_summon_slots)]"
 		)]"
 
 	desc += dat.Join("<br>")

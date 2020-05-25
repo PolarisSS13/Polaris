@@ -50,18 +50,30 @@
 		return TRUE
 	return FALSE
 
-// Returns a 'target' mob from a radius around T.
-/obj/item/weapon/spell/technomancer/proc/targeting_assist(var/turf/T, radius = 5)
-	var/chosen_target = null
-	var/potential_targets = view(T,radius)
-	for(var/mob/living/L in potential_targets)
-		if(is_technomancer_ally(L)) // Don't shoot our friends.
+/obj/item/weapon/spell/technomancer/proc/potential_targets(turf/T, radius = 5, allow_ally_target = FALSE)
+	. = list()
+	var/list/things = view(T, radius)
+	for(var/mob/living/L in things)
+		if(L == owner) // Don't target ourselves.
+			continue
+		if(!allow_ally_target && is_technomancer_ally(L)) // Don't shoot our friends.
 			continue
 		if(L.invisibility > owner.see_invisible) // Don't target ourselves or people we can't see.
 			continue
 		if(!L in viewers(owner)) // So we don't shoot at walls if someone is hiding behind one.
 			continue
 		if(!L.stat) // Don't want to target dead people or SSDs.
-			chosen_target = L
-			break
-	return chosen_target
+			. += L
+
+// Returns a 'target' mob from a radius around T.
+/obj/item/weapon/spell/technomancer/proc/targeting_assist(turf/T, radius = 5, allow_ally_target = FALSE)
+	var/list/valid_targets = potential_targets(T, radius, allow_ally_target)
+	var/closest_distance = INFINITY
+
+	// Prioritize the closest valid target to where the user presumably clicked.
+	for(var/thing in valid_targets)
+		var/mob/living/L = thing
+		var/dist = get_dist(T, L)
+		if(dist < closest_distance)
+			closest_distance = dist
+			. = L

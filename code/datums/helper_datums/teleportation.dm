@@ -2,6 +2,7 @@
 
 /datum/teleportation
 	var/atom/movable/teleported_AM = null // AM to teleport.
+	var/turf/origin = null // Where the teleport started from.
 	var/turf/destination = null // Place that the teleport is aimed at. Inaccuracy can make this not be where the AM ends up going.
 
 	// Teleport modifiers.
@@ -9,6 +10,7 @@
 	var/teleport_buckled = TRUE // If true, attempts to teleport things that someone is buckled to, if unanchored. Otherwise always unbuckles them.
 	var/teleport_grabbed = TRUE // If true, humans with a grab on someone will bring the grabbed person along with them if possible.
 	var/teleport_all_unanchored = FALSE // If true, everything on the same tile that's not anchored will be brought along.
+	var/exclude_origin = FALSE // If true, the starting tile cannot be the destination.
 
 	// Sounds and effects.
 	var/sound_exited = null // A sound to play at the teleporting AM just before the teleport.
@@ -110,6 +112,16 @@
 	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 	sound_entered = 'sound/effects/magic/technomancer/teleport_app.ogg'
 
+/datum/teleportation/warp_strike
+	inaccuracy = 1
+	exclude_origin = TRUE
+	ignore_admin_z = TRUE
+
+	sound_exited = 'sound/effects/magic/technomancer/blink.ogg'
+	sound_entered = 'sound/effects/magic/technomancer/blink.ogg'
+
+	teleport_effect_exited_path = /obj/effect/temp_visual/phase_out
+	teleport_effect_entered_path = /obj/effect/temp_visual/phase_in
 
 /atom/movable/proc/can_teleport()
 	return TRUE
@@ -138,6 +150,9 @@
 		return FALSE // Admin z-levels typically block teleporting if the teleport isn't very specific like the teleporter machine's beacons.
 
 	if(is_target) // Don't worry about these if this tile being checked is the one that the AM is gonna leave from.
+		if(exclude_origin && T == origin)
+			return FALSE // Don't teleport to the same tile.
+
 		if(!ignore_density && T.check_density(ignore_mobs = TRUE))
 			return FALSE // Don't teleport into walls.
 
@@ -201,7 +216,8 @@
 
 // Attempts to teleport the AM. Returns TRUE if it succeeded, FALSE otherwise.
 /datum/teleportation/proc/teleport()
-	if(!teleported_AM.can_teleport() || !can_tele_to_turf(get_turf(teleported_AM), FALSE))
+	origin = get_turf(teleported_AM)
+	if(!teleported_AM.can_teleport() || !can_tele_to_turf(origin, FALSE))
 		return FALSE
 
 	if(inaccuracy > 0)

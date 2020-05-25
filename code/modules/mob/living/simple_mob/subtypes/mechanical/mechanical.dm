@@ -17,6 +17,7 @@
 	taser_kill = FALSE
 	poison_resist = 1.0
 	shock_resist = -0.5
+	thick_armor = TRUE
 
 /mob/living/simple_mob/mechanical/isSynthetic()
 	return TRUE
