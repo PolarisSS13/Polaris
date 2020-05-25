@@ -322,7 +322,7 @@ proc/get_radio_key_from_channel(var/channel)
 						images_to_clients[I1] |= M.client
 						M << I1
 					M.hear_say(message_pieces, verb, italics, src, speech_sound, sound_vol)
-				if(whispering) //Don't even bother with these unless whispering
+				if(whispering && !isobserver(M)) //Don't even bother with these unless whispering
 					if(dst > message_range && dst <= w_scramble_range) //Inside whisper scramble range
 						if(M.client)
 							var/image/I2 = listening[M] || speech_bubble
