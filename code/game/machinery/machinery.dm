@@ -335,7 +335,7 @@ Class Procs:
 	RefreshParts()
 
 /obj/machinery/proc/default_use_hicell()
-	var/obj/item/weapon/cell/C = locate(C) in component_parts
+	var/obj/item/weapon/cell/C = locate(/obj/item/weapon/cell) in component_parts
 	if(C)
 		component_parts -= C
 		qdel(C)
