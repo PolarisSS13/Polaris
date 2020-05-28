@@ -81,6 +81,8 @@
 	..()
 
 /obj/machinery/camera/Destroy()
+	if(isMotion())
+		unsense_proximity(callback = .HasProximity)
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
