@@ -101,7 +101,7 @@
 //higher sensitivity values incur additional effects, starting with confusion/blinding/knockdown and ending with increasing amounts of damage
 //the degree of damage and duration of effects can be tweaked up or down based on the species emp_mod and emp_stun_mod vars (default 1) on top of tuning the random ranges
 /mob/living/carbon/emp_act(severity)
-	if(species.emp_sensitivity > 0) //receive basic effects regardless of sensitivity
+	if(species.emp_sensitivity > 0) //receive basic effects regardless of sensitivity, if we're even the tiniest bit sensitive
 		to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
 		switch(severity)
 			if(1) //highest intensity, absolutely sucks
