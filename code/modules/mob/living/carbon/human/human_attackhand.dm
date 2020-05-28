@@ -38,7 +38,7 @@
 			var/hit_zone = get_zone_with_miss_chance(H.zone_sel.selecting, src, H.get_accuracy_penalty())
 			if(!hit_zone)
 				H.do_attack_animation(src)
-				playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+				playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 				visible_message("<font color='red'><B>[H] reaches for [src], but misses!</B></font>")
 				return FALSE
 
@@ -111,7 +111,7 @@
 			LAssailant = M
 
 			H.do_attack_animation(src)
-			playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			visible_message("<span class='warning'>[M] has grabbed [src][(M.zone_sel.selecting == "l_hand" || M.zone_sel.selecting == "r_hand")? " by their hands!":" passively!"]</span>")
 			return TRUE
 
@@ -220,7 +220,7 @@
 			else
 				H.visible_message("<span class='danger'>[attack_message]</span>")
 
-			playsound(loc, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
+			playsound(src, ((miss_type) ? (miss_type == 1 ? attack.miss_sound : 'sound/weapons/thudswoosh.ogg') : attack.attack_sound), 25, 1, -1)
 
 			add_attack_logs(H,src,"Melee attacked with fists (miss/block)")
 
@@ -286,7 +286,7 @@
 			if((shoes || !(species.flags & NO_SLIP)) && randn <= 25)
 				var/armor_check = run_armor_check(affecting, "melee")
 				apply_effect(3, WEAKEN, armor_check)
-				playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				if(armor_check < 60)
 					visible_message("<span class='danger'>[M] has pushed [src]!</span>")
 				else
@@ -296,7 +296,7 @@
 			if(randn <= 60)
 				//See about breaking grips or pulls
 				if(break_all_grabs(M))
-					playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+					playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 					return
 
 				//Actually disarm them
@@ -304,10 +304,10 @@
 					if(I)
 						drop_from_inventory(I)
 						visible_message("<span class='danger'>[M] has disarmed [src]!</span>")
-						playsound(loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+						playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						return
 
-			playsound(loc, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+			playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 			visible_message("<font color='red'> <B>[M] attempted to disarm [src]!</B></font>")
 	return
 
