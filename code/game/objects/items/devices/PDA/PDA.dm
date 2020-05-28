@@ -1133,7 +1133,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			conversations.Add("\ref[P]")
 		if(!P.conversations.Find("\ref[src]"))
 			P.conversations.Add("\ref[src]")
-
+		to_chat(U, "[bicon(src)] <b>Sent message to [P.owner] ([P.ownjob]), </b>\"[t]\"")
 
 		if (prob(15)) //Give the AI a chance of intercepting the message
 			var/who = src.owner
