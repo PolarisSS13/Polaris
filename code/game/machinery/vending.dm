@@ -65,6 +65,7 @@
 	var/list/log = list()
 	var/req_log_access = access_cargo //default access for checking logs is cargo
 	var/has_logs = 0 //defaults to 0, set to anything else for vendor to have logs
+	var/can_rotate = 1 //Defaults to yes, can be set to 0 for vendors without or with unwanted directionals.
 
 
 /obj/machinery/vending/Initialize()
@@ -252,7 +253,7 @@
  */
 /obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
 	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
-	playsound(src.loc, 'sound/machines/id_swipe.ogg', 50, 1)
+	playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
 	if(currently_vending.price > wallet.worth)
 		status_message = "Insufficient funds on chargecard."
 		status_error = 1
@@ -273,7 +274,7 @@
 		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
 	else
 		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
-	playsound(src.loc, 'sound/machines/id_swipe.ogg', 50, 1)
+	playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
 	var/datum/money_account/customer_account = get_account(I.associated_account_number)
 	if(!customer_account)
 		status_message = "Error: Unable to access account. Please contact technical support if problem persists."
@@ -429,7 +430,7 @@
 			if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 				to_chat(usr, "<span class='warning'>Access denied.</span>")	//Unless emagged of course
 				flick("[icon_state]-deny",src)
-				playsound(src.loc, 'sound/machines/deniedbeep.ogg', 50, 0)
+				playsound(src, 'sound/machines/deniedbeep.ogg', 50, 0)
 				return
 
 			var/key = text2num(href_list["vend"])
@@ -466,7 +467,7 @@
 	if((!allowed(usr)) && !emagged && scan_id)	//For SECURE VENDING MACHINES YEAH
 		to_chat(usr, "<span class='warning'>Access denied.</span>")	//Unless emagged of course
 		flick("[icon_state]-deny",src)
-		playsound(src.loc, 'sound/machines/deniedbeep.ogg', 50, 0)
+		playsound(src, 'sound/machines/deniedbeep.ogg', 50, 0)
 		return
 	vend_ready = 0 //One thing at a time!!
 	status_message = "Vending..."
@@ -505,7 +506,7 @@
 			sleep(3)
 			if(R.get_product(get_turf(src)))
 				visible_message("<span class='notice'>\The [src] clunks as it vends an additional item.</span>")
-		playsound(src.loc, "sound/[vending_sound]", 100, 1, 1)
+		playsound(src, "sound/[vending_sound]", 100, 1, 1)
 
 		status_message = ""
 		status_error = 0
@@ -544,6 +545,22 @@
 			popup.open()
 	else
 		to_chat(user,"<span class='warning'>You do not have the required access to view the vending logs for this machine.</span>")
+
+
+/obj/machinery/vending/verb/rotate_clockwise()
+	set name = "Rotate Vending Machine Clockwise"
+	set category = "Object"
+	set src in oview(1)
+
+	if (src.can_rotate == 0)
+		to_chat(usr, "<span class='warning'>\The [src] cannot be rotated.</span>")
+		return 0
+
+	if (src.anchored || usr:stat)
+		to_chat(usr, "It is bolted down!")
+		return 0
+	src.set_dir(turn(src.dir, 270))
+	return 1
 
 /obj/machinery/vending/verb/check_logs()
 	set name = "Check Vending Logs"
@@ -918,6 +935,7 @@
 	contraband = list(/obj/item/weapon/reagent_containers/syringe/antitoxin = 4,/obj/item/weapon/reagent_containers/syringe/antiviral = 4,/obj/item/weapon/reagent_containers/pill/tox = 1)
 	req_log_access = access_cmo
 	has_logs = 1
+	can_rotate = 0
 
 /obj/machinery/vending/wallmed2
 	name = "NanoMed"
@@ -929,6 +947,7 @@
 	contraband = list(/obj/item/weapon/reagent_containers/pill/tox = 3)
 	req_log_access = access_cmo
 	has_logs = 1
+	can_rotate = 0
 
 /obj/machinery/vending/security
 	name = "SecTech"
@@ -952,6 +971,7 @@
 					/obj/item/weapon/reagent_containers/syringe = 5,/obj/item/weapon/reagent_containers/glass/beaker = 4,/obj/item/weapon/storage/bag/plants = 5)
 	premium = list(/obj/item/weapon/reagent_containers/glass/bottle/ammonia = 10,/obj/item/weapon/reagent_containers/glass/bottle/diethylamine = 5)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+
 
 /obj/machinery/vending/hydroseeds
 	name = "MegaSeed Servitor"
@@ -1173,6 +1193,7 @@
 					/obj/item/toy/plushie/deer = 50,
 					/obj/item/toy/plushie/tabby_cat = 50,
 					/obj/item/device/threadneedle = 2)
+
 
 /obj/machinery/vending/fishing
 	name = "Loot Trawler"

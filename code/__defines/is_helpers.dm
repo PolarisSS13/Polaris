@@ -19,6 +19,8 @@
 
 #define isorgan(A)		istype(A, /obj/item/organ/external)
 
+#define isstorage(A)	istype(A, /obj/item/weapon/storage)
+
 //---------------
 //#define isarea(D)		istype(D, /area)	//Built in
 
@@ -54,4 +56,4 @@
 //---------------
 //#define isturf(D)		istype(D, /turf)	//Built in
 #define isopenspace(A)	istype(A, /turf/simulated/open)
-#define isspace(A)	istype(A, /turf/space)
+#define isspace(A)		istype(A, /turf/space)

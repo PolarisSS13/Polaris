@@ -367,8 +367,8 @@
 				secondary_effect.ToggleActivate(0)
 	return
 
-/obj/machinery/artifact/Move()
-	..()
+/obj/machinery/artifact/Moved()
+	. = ..()
 	if(my_effect)
 		my_effect.UpdateMove()
 	if(secondary_effect)

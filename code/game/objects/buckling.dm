@@ -120,7 +120,7 @@
 	//		step_towards(M, src)
 
 	. = buckle_mob(M, forced)
-	playsound(src.loc, 'sound/effects/seatbelt.ogg', 50, 1)
+	playsound(src, 'sound/effects/seatbelt.ogg', 50, 1)
 	if(.)
 		if(!silent)
 			if(M == user)
@@ -136,7 +136,7 @@
 
 /atom/movable/proc/user_unbuckle_mob(mob/living/buckled_mob, mob/user)
 	var/mob/living/M = unbuckle_mob(buckled_mob)
-	playsound(src.loc, 'sound/effects/seatbelt.ogg', 50, 1)
+	playsound(src, 'sound/effects/seatbelt.ogg', 50, 1)
 	if(M)
 		if(M != user)
 			M.visible_message(\
@@ -151,19 +151,18 @@
 		add_fingerprint(user)
 	return M
 
-/atom/movable/proc/handle_buckled_mob_movement(newloc,direct)
-	if(has_buckled_mobs())
-		for(var/A in buckled_mobs)
-			var/mob/living/L = A
-//			if(!L.Move(newloc, direct))
-			if(!L.forceMove(newloc, direct))
-				loc = L.loc
-				last_move = L.last_move
-				L.inertia_dir = last_move
-				return FALSE
-			else
-				L.set_dir(dir)
-	return TRUE
+/atom/movable/proc/handle_buckled_mob_movement(atom/old_loc, direct, movetime)
+	for(var/A in buckled_mobs)
+		var/mob/living/L = A
+		if(!L.Move(loc, direct, movetime))
+			L.forceMove(loc, direct, movetime)
+			L.last_move = last_move
+			L.inertia_dir = last_move
+
+		if(!buckle_dir)
+			L.set_dir(dir)
+		else
+			L.set_dir(buckle_dir)
 
 /atom/movable/proc/can_buckle_check(mob/living/M, forced = FALSE)
 	if(!buckled_mobs)

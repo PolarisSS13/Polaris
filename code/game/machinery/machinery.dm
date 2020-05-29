@@ -306,7 +306,7 @@ Class Procs:
 		text = "\The [src] pings."
 
 	state(text, "blue")
-	playsound(src.loc, 'sound/machines/ping.ogg', 50, 0)
+	playsound(src, 'sound/machines/ping.ogg', 50, 0)
 
 /obj/machinery/proc/shock(mob/user, prb)
 	if(inoperable())
@@ -371,7 +371,7 @@ Class Procs:
 		return FALSE
 	if(panel_open)
 		return FALSE // Close panel first!
-	playsound(loc, W.usesound, 50, 1)
+	playsound(src, W.usesound, 50, 1)
 	var/actual_time = W.toolspeed * time
 	if(actual_time != 0)
 		user.visible_message( \
@@ -432,12 +432,12 @@ Class Procs:
 	if(!panel_open)
 		return 0
 	user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
-	playsound(src.loc, W.usesound, 50, 1)
+	playsound(src, W.usesound, 50, 1)
 	new/obj/item/stack/cable_coil(get_turf(src), 5)
 	. = dismantle()
 
 /obj/machinery/proc/dismantle()
-	playsound(src.loc, 'sound/items/Crowbar.ogg', 50, 1)
+	playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 	//TFF 3/6/19 - port Cit RP fix of infinite frames. If it doesn't have a circuit board, don't create a frame. Return a smack instead. BONK!
 	if(!circuit)
 		return 0
@@ -485,6 +485,7 @@ Class Procs:
 	return 1
 
 /datum/proc/apply_visual(mob/M)
+	M.sight = 0 //Just reset their mesons and stuff so they can't use them, by default.
 	return
 
 /datum/proc/remove_visual(mob/M)

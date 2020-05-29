@@ -58,7 +58,7 @@
 // Pre-installed and pre-charged SMES hidden from the station, for use in submaps.
 /obj/machinery/power/smes/buildable/point_of_interest/Initialize()
 	. = ..()
-	charge = 1e7 // Should be enough for an individual POI.
+	charge = capacity // Should be enough for an individual POI.
 	RCon = FALSE
 	input_level = input_level_max
 	output_level = output_level_max
@@ -333,7 +333,7 @@
 				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
 				return
 
-			playsound(get_turf(src), W.usesound, 50, 1)
+			playsound(src, W.usesound, 50, 1)
 			to_chat(user, "<span class='warning'>You begin to disassemble the [src]!</span>")
 			if (do_after(usr, (100 * cur_coils) * W.toolspeed)) // More coils = takes longer to disassemble. It's complex so largest one with 5 coils will take 50s with a normal crowbar
 
