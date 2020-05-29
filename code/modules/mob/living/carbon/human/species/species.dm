@@ -95,7 +95,7 @@
 	var/chemOD_threshold =		1						// Multiplier to overdose threshold; lower = easier overdosing
 	var/chemOD_mod =		1						// Damage modifier for overdose; higher = more damage from ODs
 	var/alcohol_mod =		1						// Multiplier to alcohol strength; 0.5 = half, 0 = no effect at all, 2 = double, etc.
-	var/emp_sensitivity =		0						// Enables vulnerability to EMPs; 0 = none, 1 = emote reaction, 2 = disorient/etc., 3 = toxic + NL effects, 4+ = toxic + burn + NL effects
+	var/emp_sensitivity =		0						// Enables vulnerability to EMPs; 0 = none, 1 = emotes, 2 = disorient/etc., 3 = +tox dmg, 4 = burn dmg, 5+ = +tox&burn
 	var/emp_mod =			1						// Multiplier to all EMP damage sustained by the mob, if it's EMP-sensitive
 	var/emp_stun_mod = 		1						// Multiplier to all EMP disorient/etc. sustained by the mob, if it's EMP-sensitive
 	var/vision_flags = SEE_SELF							// Same flags as glasses.
