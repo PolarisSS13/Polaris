@@ -65,7 +65,7 @@
 				else
 					src.take_organ_damage(d)
 				user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>")
-				playsound(user.loc, 'sound/effects/attackblob.ogg', 50, 1)
+				playsound(user, 'sound/effects/attackblob.ogg', 50, 1)
 
 				if(prob(src.getBruteLoss() - 50))
 					for(var/atom/movable/A in stomach_contents)
@@ -96,59 +96,6 @@
 
 	return
 
-//EMP vulnerability for non-synth carbons. could be useful for diona, vox, or others
-//the species' emp_sensitivity var needs to be greater than 0 for this to proc, and it defaults to 0 - shouldn't stack with prosthetics/fbps in most cases
-//higher sensitivity values incur additional effects, starting with confusion/blinding/knockdown and ending with increasing amounts of damage
-//the degree of damage and duration of effects can be tweaked up or down based on the species emp_mod and emp_stun_mod vars (default 1) on top of tuning the random ranges
-/mob/living/carbon/emp_act(severity)
-	if(species.emp_sensitivity > 0) //receive basic effects regardless of sensitivity, if we're even the tiniest bit sensitive
-		to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
-		switch(severity)
-			if(1) //highest intensity, absolutely sucks
-				to_chat(src, "<span class='danger'>DANGER: Extreme EM flux detected!</span>")
-				src.emote(pick("twitch", "pale", "blink_r", "shiver", "sneeze", "vomit", "gasp", "cough", "drool"))
-				if(species.emp_sensitivity >= 2)
-					Confuse(5 * species.emp_stun_mod)
-					Weaken(1 * species.emp_stun_mod)
-					Blind(1 * species.emp_stun_mod)
-				if(species.emp_sensitivity == 3 || species.emp_sensitivity >= 5)
-					src.adjustToxLoss(rand(20,30) * species.emp_mod)
-				if(species.emp_sensitivity >= 4)
-					src.adjustFireLoss(rand(20,30) * species.emp_mod)
-			if(2)
-				to_chat(src, "<span class='danger'>Danger: High EM flux detected!</span>")
-				if(prob(75))
-					src.emote(pick("twitch", "pale", "blink_r", "shiver", "sneeze", "vomit", "gasp", "cough", "drool"))
-				if(species.emp_sensitivity >= 2)
-					Confuse(4 * species.emp_stun_mod)
-					Blind(1 * species.emp_stun_mod)
-				if(species.emp_sensitivity == 3 || species.emp_sensitivity >= 5)
-					src.adjustToxLoss(rand(15,25) * species.emp_mod)
-				if(species.emp_sensitivity >= 4)
-					src.adjustFireLoss(rand(15,25) * species.emp_mod)
-			if(3)
-				to_chat(src, "<span class='danger'>Warning: Moderate EM flux detected!</span>")
-				if(prob(50))
-					src.emote(pick("twitch", "pale", "blink", "shiver", "sneeze", "gasp", "cough", "drool"))
-				if(species.emp_sensitivity >= 2)
-					Confuse(3 * species.emp_stun_mod)
-					Blind(1 * species.emp_stun_mod)
-				if(species.emp_sensitivity == 3 || species.emp_sensitivity >= 5)
-					src.adjustToxLoss(rand(10,20) * species.emp_mod)
-				if(species.emp_sensitivity >= 4)
-					src.adjustFireLoss(rand(10,20) * species.emp_mod)
-			if(4) //lowest intensity
-				to_chat(src, "<span class='danger'>Warning: Minor EM flux detected!</span>")
-				if(prob(25))
-					src.emote(pick("twitch", "pale", "blink", "shiver", "sneeze", "gasp", "cough"))
-				if(species.emp_sensitivity >= 2)
-					Confuse(2 * species.emp_stun_mod)
-				if(species.emp_sensitivity == 3 || species.emp_sensitivity >= 5)
-					src.adjustToxLoss(rand(5,15) * species.emp_mod)
-				if(species.emp_sensitivity >= 4)
-					src.adjustFireLoss(rand(5,15) * species.emp_mod)
-	..()
-
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null, var/stun = 1)
 	if(status_flags & GODMODE)	return 0	//godmode
 	if(def_zone == "l_hand" || def_zone == "r_hand") //Diona (And any other potential plant people) hands don't get shocked.
@@ -163,7 +110,7 @@
 	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
 	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
 
-	playsound(loc, "sparks", 50, 1, -1)
+	playsound(src, "sparks", 50, 1, -1)
 	if (shock_damage > 15)
 		src.visible_message(
 			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
@@ -251,7 +198,7 @@
 			if((SKELETON in H.mutations) && (!H.w_uniform) && (!H.wear_suit))
 				H.play_xylophone()
 		else if (on_fire)
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if (M.on_fire)
 				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
@@ -318,7 +265,7 @@
 			AdjustStunned(-3)
 			AdjustWeakened(-3)
 
-			playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 /mob/living/carbon/proc/eyecheck()
 	return 0
@@ -419,7 +366,7 @@
 		return 0
 	stop_pulling()
 	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
-	playsound(src.loc, 'sound/misc/slip.ogg', 50, 1, -3)
+	playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(FLOOR(stun_duration/2, 1))
 	return 1
 

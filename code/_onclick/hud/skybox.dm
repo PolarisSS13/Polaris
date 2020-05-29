@@ -50,11 +50,9 @@
 	if(. && client)
 		client.update_skybox(old_z != get_z(src))
 
-/mob/forceMove()
-	var/old_z = get_z(src)
+/mob/Moved()
 	. = ..()
-	if(. && client)
-		client.update_skybox(old_z != get_z(src))
+	client?.update_skybox()
 
 /mob/set_viewsize()
 	. = ..()
