@@ -21,8 +21,8 @@ GLOBAL_LIST_INIT(technomancer_aspects, build_technomancer_aspect_list())
 
 /datum/technomancer_aspect/frost
 	name = ASPECT_FROST
-	primary_color = "#DEE9FC"
-	secondary_color = "#6395F2"
+	primary_color = "#6395F2"
+	secondary_color = "#DEE9FC"
 
 /datum/technomancer_aspect/shock
 	name = ASPECT_SHOCK

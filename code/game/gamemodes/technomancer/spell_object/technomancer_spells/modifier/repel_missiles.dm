@@ -31,7 +31,7 @@
 	modifier_instability_cost = 5
 
 /datum/modifier/repel_missiles
-	name = "repel_missiles"
+	name = "Repel Missiles"
 	desc = "A repulsion field can always be useful to have."
 //	mob_overlay_state = "repel_missiles"
 

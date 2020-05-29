@@ -20,7 +20,7 @@
 	var/light_intensity = null			// Ditto. Not implemented yet.
 	var/mob_overlay_state = null		// Icon_state for an overlay to apply to a (human) mob while this exists.  This is actually implemented.
 	var/client_color = null				// If set, the client will have the world be shown in this color, from their perspective.
-	var/filter_parameters = null		// If set, will add a filter to the holder with the parameters in this var. Must be a list.
+	var/list/filter_parameters = null	// If set, will add a filter to the holder with the parameters in this var. Must be a list.
 	var/filter_priority = 1				// Used to make filters be applied in a specific order, if that is important.
 	var/filter_instance = null			// Instance of a filter created with the `filter_parameters` list. This exists to make `animate()` calls easier. Don't set manually.
 
@@ -53,6 +53,13 @@
 	var/pulse_set_level					// Positive number. If this is non-null, it will hard-set the pulse level to this. Pulse ranges from 0 to 5 normally.
 	var/block_tele = FALSE				// If true, some forms of teleportation will fail for the holder.
 	var/technomancer_dispellable = FALSE// If true, the Dispel spell can remove this modifier.
+	// Note that these are combined with the mob's real armor values additatively. You can also omit specific armor types.
+	var/list/armor_percent = null		// List of armor values to add to the holder when doing armor calculations. This is for percentage based armor. E.g. 50 = half damage.
+	var/list/armor_flat = null			// Same as above but only for flat armor calculations. E.g. 5 = 5 less damage (this comes after percentage).
+	// Unlike armor, this is multiplicative. Two 50% protection modifiers will be combined into 75% protection (assuming no base protection on the mob).
+	var/heat_protection = null			// Modifies how 'heat' protection is calculated, like wearing a firesuit. 1 = full protection.
+	var/cold_protection = null			// Ditto, but for cold, like wearing a winter coat.
+	var/siemens_coefficient = null		// Similar to above two vars but 0 = full protection, to be consistant with siemens numbers everywhere else.
 
 /datum/modifier/New(var/new_holder, var/new_origin)
 	holder = new_holder
