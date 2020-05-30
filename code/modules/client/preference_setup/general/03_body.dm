@@ -322,12 +322,12 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. += "<b>Hair</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
 		. += "<a href='?src=\ref[src];hair_color=1'>Change Color</a> [color_square(pref.r_hair, pref.g_hair, pref.b_hair)] "
-	. += " Style: <a href='?src=\ref[src];hair_style_left=[pref.h_style]'><</a> <a href='?src=\ref[src];hair_style_right=[pref.h_style]''>></a> <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>"
+	. += " Style: <a href='?src=\ref[src];hair_style_left=[pref.h_style]'><</a> <a href='?src=\ref[src];hair_style_right=[pref.h_style]''>></a> <a href='?src=\ref[src];hair_style=1'>[pref.h_style]</a><br>" //The <</a> & ></a> in this line is correct-- those extra characters are the arrows you click to switch between styles.
 
 	. += "<br><b>Facial</b><br>"
 	if(has_flag(mob_species, HAS_HAIR_COLOR))
 		. += "<a href='?src=\ref[src];facial_color=1'>Change Color</a> [color_square(pref.r_facial, pref.g_facial, pref.b_facial)] "
-	. += " Style: <a href='?src=\ref[src];facial_style_left=[pref.f_style]'><</a> <a href='?src=\ref[src];facial_style_right=[pref.f_style]''>></a> <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>"
+	. += " Style: <a href='?src=\ref[src];facial_style_left=[pref.f_style]'><</a> <a href='?src=\ref[src];facial_style_right=[pref.f_style]''>></a> <a href='?src=\ref[src];facial_style=1'>[pref.f_style]</a><br>" //Same as above with the extra > & < characters
 
 	if(has_flag(mob_species, HAS_EYE_COLOR))
 		. += "<br><b>Eyes</b><br>"
