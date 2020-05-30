@@ -315,7 +315,7 @@
 		legcuffed = null
 		update_inv_legcuffed()
 	else
-	 				..()
+		..()
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate
