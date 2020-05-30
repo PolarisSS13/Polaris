@@ -122,7 +122,7 @@
 
 	src.icon_state = src.icon_opened
 	src.opened = 1
-	playsound(src.loc, open_sound, 15, 1, -3)
+	playsound(src, open_sound, 15, 1, -3)
 	if(initial(density))
 		density = !density
 	return 1
@@ -147,7 +147,7 @@
 	src.icon_state = src.icon_closed
 	src.opened = 0
 
-	playsound(src.loc, close_sound, 15, 1, -3)
+	playsound(src, close_sound, 15, 1, -3)
 	if(initial(density))
 		density = !density
 	return 1
@@ -413,21 +413,20 @@
 
 	visible_message("<span class='danger'>\The [src] begins to shake violently!</span>")
 
-	spawn(0)
-		breakout = 1 //can't think of a better way to do this right now.
-		for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
-			if(!do_after(escapee, 50)) //5 seconds
-				breakout = 0
-				return
-			if(!escapee || escapee.incapacitated() || escapee.loc != src)
-				breakout = 0
-				return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
-			//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
-			if(!req_breakout())
-				breakout = 0
-				return
+	breakout = 1 //can't think of a better way to do this right now.
+	for(var/i in 1 to (6*breakout_time * 2)) //minutes * 6 * 5seconds * 2
+		if(!do_after(escapee, 50)) //5 seconds
+			breakout = 0
+			return
+		if(!escapee || escapee.incapacitated() || escapee.loc != src)
+			breakout = 0
+			return //closet/user destroyed OR user dead/unconcious OR user no longer in closet OR closet opened
+		//Perform the same set of checks as above for weld and lock status to determine if there is even still a point in 'resisting'...
+		if(!req_breakout())
+			breakout = 0
+			return
 
-			playsound(src.loc, breakout_sound, 100, 1)
+			playsound(src, breakout_sound, 100, 1)
 			animate_shake()
 			add_fingerprint(escapee)
 
@@ -435,7 +434,7 @@
 		breakout = 0
 		to_chat(escapee, "<span class='warning'>You successfully break out!</span>")
 		visible_message("<span class='danger'>\The [escapee] successfully broke out of \the [src]!</span>")
-		playsound(src.loc, breakout_sound, 100, 1)
+		playsound(src, breakout_sound, 100, 1)
 		break_open()
 		animate_shake()
 

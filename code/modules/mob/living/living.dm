@@ -81,7 +81,7 @@ default behaviour is:
 		return 0
 
 /mob/living/Bump(atom/movable/AM)
-	if(now_pushing || !loc)
+	if(now_pushing || !loc || buckled == AM)
 		return
 	now_pushing = 1
 	if (istype(AM, /mob/living))
@@ -165,7 +165,7 @@ default behaviour is:
 	if (!istype(AM, /atom/movable) || AM.anchored)
 		if(confused && prob(50) && m_intent=="run")
 			Weaken(2)
-			playsound(loc, "punch", 25, 1, -1)
+			playsound(src, "punch", 25, 1, -1)
 			visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
 			src.apply_damage(5, BRUTE)
 			to_chat(src, "<span class='warning'>You just [pick("ran", "slammed")] into \the [AM]!</span>")
@@ -774,19 +774,18 @@ default behaviour is:
 	handle_footstep(loc)
 
 	if(pulling) // we were pulling a thing and didn't lose it during our move.
+		var/pull_dir = get_dir(src, pulling)
+		
 		if(pulling.anchored || !isturf(pulling.loc))
 			stop_pulling()
-			return
-
-		var/pull_dir = get_dir(src, pulling)
-		if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir))) // puller and pullee more than one tile away or in diagonal position
+			
+		else if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir))) // puller and pullee more than one tile away or in diagonal position
 			// If it is too far away or across z-levels from old location, stop pulling.
 			if(get_dist(pulling.loc, oldloc) > 1 || pulling.loc.z != oldloc?.z)
 				stop_pulling()
-				return
 
 			// living might take damage from drags
-			if(isliving(pulling))
+			else if(isliving(pulling))
 				var/mob/living/M = pulling
 				M.dragged(src, oldloc)
 
@@ -794,6 +793,30 @@ default behaviour is:
 			if(pulling && get_dist(src, pulling) > 1) // the pullee couldn't keep up
 				stop_pulling()
 
+	if(!isturf(loc))
+		return	
+	else if(lastarea?.has_gravity == 0)
+		inertial_drift()
+	else if(!isspace(loc))
+		inertia_dir = 0
+		make_floating(0)
+
+/mob/living/proc/inertial_drift()
+	if(x > 1 && x < (world.maxx) && y > 1 && y < (world.maxy))
+		if(Process_Spacemove(1))
+			inertia_dir = 0
+			return
+		
+		var/locthen = loc
+		spawn(5)
+			if(!anchored && !pulledby && loc == locthen)
+				var/stepdir = inertia_dir ? inertia_dir : last_move
+				if(!stepdir)
+					return
+				var/turf/T = get_step(src, stepdir)
+				if(!T)
+					return
+				Move(T, stepdir, 5)
 
 /mob/living/proc/handle_footstep(turf/T)
 	return FALSE
@@ -955,7 +978,7 @@ default behaviour is:
 
 					Stun(5)
 					src.visible_message("<span class='warning'>[src] throws up!</span>","<span class='warning'>You throw up!</span>")
-					playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+					playsound(src, 'sound/effects/splat.ogg', 50, 1)
 
 					var/turf/simulated/T = get_turf(src)	//TODO: Make add_blood_floor remove blood from human mobs
 					if(istype(T))
