@@ -75,7 +75,7 @@
 				message = "[display_msg] at [param]."
 			else
 				message = "[display_msg]."
-			playsound(src.loc, use_sound, 50, 0)
+			playsound(src, use_sound, 50, 0)
 			m_type = 1
 
 		//Promethean-only emotes
@@ -84,7 +84,7 @@
 				to_chat(src, "<span class='warning'>You are not a slime thing!</span>")
 				return
 
-			playsound(src.loc, 'sound/effects/slime_squish.ogg', 50, 0) //Credit to DrMinky (freesound.org) for the sound.
+			playsound(src, 'sound/effects/slime_squish.ogg', 50, 0) //Credit to DrMinky (freesound.org) for the sound.
 			message = "squishes."
 			m_type = 1
 
@@ -94,7 +94,7 @@
 				to_chat(src, "<span class='warning'>You are not a Skrell!</span>")
 				return
 
-			playsound(src.loc, 'sound/effects/warble.ogg', 50, 0) // Copyright CC BY 3.0 alienistcog (freesound.org) for the sound.
+			playsound(src, 'sound/effects/warble.ogg', 50, 0) // Copyright CC BY 3.0 alienistcog (freesound.org) for the sound.
 			message = "warbles."
 			m_type = 2
 
@@ -186,7 +186,7 @@
 		if("clap")
 			if(!src.restrained())
 				message = "claps."
-				playsound(src.loc, 'sound/misc/clapping.ogg')
+				playsound(src, 'sound/misc/clapping.ogg')
 				m_type = 2
 				if(miming)
 					m_type = 1
@@ -267,7 +267,7 @@
 							use_sound = pick('sound/effects/mob_effects/f_machine_cougha.ogg','sound/effects/mob_effects/f_machine_coughb.ogg')
 						else
 							use_sound = pick('sound/effects/mob_effects/m_machine_cougha.ogg','sound/effects/mob_effects/m_machine_coughb.ogg', 'sound/effects/mob_effects/m_machine_coughc.ogg')
-						playsound(src.loc, use_sound, 50, 0)
+						playsound(src, use_sound, 50, 0)
 				else
 					message = "makes a strong noise."
 					m_type = 2
@@ -540,7 +540,7 @@
 							use_sound = 'sound/effects/mob_effects/machine_sneeze.ogg'
 						else
 							use_sound = 'sound/effects/mob_effects/f_machine_sneeze.ogg'
-						playsound(src.loc, use_sound, 50, 0)
+						playsound(src, use_sound, 50, 0)
 				else
 					message = "makes a strange noise."
 					m_type = 2
@@ -653,14 +653,14 @@
 							break
 				if(M)
 					message = "<span class='danger'>slaps [M] across the face. Ouch!</span>"
-					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
+					playsound(src, 'sound/effects/snap.ogg', 50, 1)
 					if(ishuman(M)) //Snowflakey!
 						var/mob/living/carbon/human/H = M
 						if(istype(H.wear_mask,/obj/item/clothing/mask/smokable))
 							H.drop_from_inventory(H.wear_mask)
 				else
 					message = "<span class='danger'>slaps [T.himself]!</span>"
-					playsound(loc, 'sound/effects/snap.ogg', 50, 1)
+					playsound(src, 'sound/effects/snap.ogg', 50, 1)
 
 		if("scream", "screams")
 			if(miming)
@@ -672,9 +672,9 @@
 					m_type = 2
 					/* Removed, pending the location of some actually good, properly licensed sounds.
 					if(get_gender() == FEMALE)
-						playsound(loc, "[species.female_scream_sound]", 80, 1)
+						playsound(src, "[species.female_scream_sound]", 80, 1)
 					else
-						playsound(loc, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
+						playsound(src, "[species.male_scream_sound]", 80, 1) //default to male screams if no gender is present.
 					*/
 				else
 					message = "makes a very loud noise."
@@ -697,7 +697,7 @@
 				return
 
 			message = "snaps [T.his] fingers."
-			playsound(loc, 'sound/effects/fingersnap.ogg', 50, 1, -3)
+			playsound(src, 'sound/effects/fingersnap.ogg', 50, 1, -3)
 
 		if("swish")
 			src.animate_tail_once()
@@ -721,14 +721,14 @@
 		if("whistle" || "whistles")
 			if(!muzzled)
 				message = "whistles a tune."
-				playsound(loc, 'sound/misc/longwhistle.ogg') //praying this doesn't get abused
+				playsound(src, 'sound/misc/longwhistle.ogg') //praying this doesn't get abused
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
 		if("qwhistle")
 			if(!muzzled)
 				message = "whistles quietly."
-				playsound(loc, 'sound/misc/shortwhistle.ogg')
+				playsound(src, 'sound/misc/shortwhistle.ogg')
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 

@@ -123,7 +123,7 @@
 			if(istype(module,/obj/item/weapon/robot_module/robot/security))
 				message = "<b>[src]</b> shows its legal authorization barcode."
 
-				playsound(src.loc, 'sound/voice/biamthelaw.ogg', 50, 0)
+				playsound(src, 'sound/voice/biamthelaw.ogg', 50, 0)
 				m_type = 2
 			else
 				to_chat(src, "You are not THE LAW, pal.")
@@ -132,7 +132,7 @@
 			if(istype(module,/obj/item/weapon/robot_module/robot/security))
 				message = "<b>[src]</b> <B>'s</B> speakers skreech, \"Halt! Security!\"."
 
-				playsound(src.loc, 'sound/voice/halt.ogg', 50, 0)
+				playsound(src, 'sound/voice/halt.ogg', 50, 0)
 				m_type = 2
 			else
 				to_chat(src, "You are not security.")
