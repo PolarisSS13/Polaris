@@ -660,7 +660,7 @@
 /obj/machinery/suit_cycler/vintage
 	name = "Vintage suit cycler"
 	model_text = "Vintage"
-	departments = list("Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer")
+	departments = list("Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer","Vintage Pilot","Vintage Pilot 2","Vintage Mercenary","Vintage Research")
 
 /obj/machinery/suit_cycler/vintage/Initialize()
 	species -= SPECIES_TESHARI
@@ -775,7 +775,7 @@
 
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
-	departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring","Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer")
+	departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring","Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer","Vintage Pilot","Vintage Pilot 2","Vintage Mercenary","Vintage Research")
 	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_TESHARI)
 
 	emagged = 1
@@ -1093,6 +1093,18 @@
 		if("Vintage Officer")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/officer
 			parent_suit = /obj/item/clothing/suit/space/void/refurb/officer
+		if("Vintage Pilot")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/pilot
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/pilot
+		if("Vintage Pilot 2")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/pilot/alt
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/pilot
+		if("Vintage Research")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/research
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/research
+		if("Vintage Mercenary")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/mercenary
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/mercenary
 		//BEGIN: Space for additional downstream variants
 		
 		//END: downstream variant space
