@@ -201,6 +201,10 @@
 /obj/proc/is_safe_to_step(mob/living/L)
 	return TRUE
 
+/obj/proc/container_resist(var/mob/living)
+	return
+
+
 //To be called from things that spill objects on the floor.
 //Makes an object move around randomly for a couple of tiles
 /obj/proc/tumble(var/dist = 2)
