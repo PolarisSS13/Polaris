@@ -34,10 +34,10 @@
 // controls power to devices in that area
 // may be opened to change power cell
 // three different channels (lighting/equipment/environ) - may each be set to on, off, or auto
-#define POWERCHAN_OFF      0
-#define POWERCHAN_OFF_AUTO 1
-#define POWERCHAN_ON       2
-#define POWERCHAN_ON_AUTO  3
+#define POWERCHAN_OFF      0	// Power channel is off and will stay that way dammit
+#define POWERCHAN_OFF_AUTO 1	// Power channel is off until power rises above a threshold
+#define POWERCHAN_ON       2	// Power channel is on until there is no power
+#define POWERCHAN_ON_AUTO  3	// Power channel is on until power drops below a threshold
 
 #define NIGHTSHIFT_AUTO 1
 #define NIGHTSHIFT_NEVER 2
@@ -527,12 +527,12 @@
 				if (has_electronics==1 && terminal)
 					has_electronics = 2
 					stat &= ~MAINT
-					playsound(src.loc, W.usesound, 50, 1)
+					playsound(src, W.usesound, 50, 1)
 					to_chat(user, "You screw the circuit electronics into place.")
 				else if (has_electronics==2)
 					has_electronics = 1
 					stat |= MAINT
-					playsound(src.loc, W.usesound, 50, 1)
+					playsound(src, W.usesound, 50, 1)
 					to_chat(user, "You unfasten the electronics.")
 				else /* has_electronics==0 */
 					to_chat(user, "<span class='warning'>There is nothing to secure.</span>")
@@ -558,7 +558,7 @@
 			return
 		user.visible_message("<span class='warning'>[user.name] adds cables to the APC frame.</span>", \
 							"You start adding cables to the APC frame...")
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 20))
 			if (C.amount >= 10 && !terminal && opened && has_electronics != 2)
 				var/obj/structure/cable/N = T.get_cable_node()
@@ -581,7 +581,7 @@
 			return
 		user.visible_message("<span class='warning'>[user.name] starts dismantling the [src]'s power terminal.</span>", \
 							"You begin to cut the cables...")
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 50 * W.toolspeed))
 			if(terminal && opened && has_electronics!=2)
 				if (prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
@@ -596,7 +596,7 @@
 	else if (istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics==0 && !((stat & BROKEN)))
 		user.visible_message("<span class='warning'>[user.name] inserts the power control board into [src].</span>", \
 							"You start to insert the power control board into the frame...")
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 		if(do_after(user, 10))
 			if(has_electronics==0)
 				has_electronics = 1
@@ -656,7 +656,7 @@
 			if(do_after(user, 50))
 				user.visible_message("<span class='notice'>[user.name] resets the APC with a beep from their [W.name].</span>",\
 									"You finish resetting the APC.")
-				playsound(src.loc, 'sound/machines/chime.ogg', 25, 1)
+				playsound(src, 'sound/machines/chime.ogg', 25, 1)
 				reboot()
 	else
 		if ((stat & BROKEN) \
@@ -742,7 +742,7 @@
 		if(H.species.can_shred(H))
 			user.setClickCooldown(user.get_attack_speed())
 			user.visible_message("<span call='warning'>[user.name] slashes at the [src.name]!</span>", "<span class='notice'>You slash at the [src.name]!</span>")
-			playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+			playsound(src, 'sound/weapons/slash.ogg', 100, 1)
 
 			var/allcut = wires.IsAllCut()
 
@@ -1057,10 +1057,9 @@
 		return 0
 
 /obj/machinery/power/apc/process()
-
-	if(stat & (BROKEN|MAINT))
-		return
 	if(!area.requires_power)
+		return PROCESS_KILL
+	if(stat & (BROKEN|MAINT))
 		return
 	if(failure_timer)
 		update()
@@ -1069,9 +1068,9 @@
 		force_update = 1
 		return
 
-	lastused_light = area.usage(LIGHT)
-	lastused_equip = area.usage(EQUIP)
-	lastused_environ = area.usage(ENVIRON)
+	lastused_light = area.usage(LIGHT, lighting >= POWERCHAN_ON)
+	lastused_equip = area.usage(EQUIP, equipment >= POWERCHAN_ON)
+	lastused_environ = area.usage(ENVIRON, environ >= POWERCHAN_ON)
 	area.clear_usage()
 
 	lastused_total = lastused_light + lastused_equip + lastused_environ

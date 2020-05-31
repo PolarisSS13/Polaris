@@ -747,7 +747,7 @@
 		var/datum/gender/T = gender_datums[get_visible_gender()]
 		visible_message("<font color='red'>\The [src] begins playing [T.his] ribcage like a xylophone. It's quite spooky.</font>","<font color='blue'>You begin to play a spooky refrain on your ribcage.</font>","<font color='red'>You hear a spooky xylophone melody.</font>")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
-		playsound(loc, song, 50, 1, -1)
+		playsound(src, song, 50, 1, -1)
 		xylophone = 1
 		spawn(1200)
 			xylophone=0
@@ -1612,6 +1612,11 @@
 
 	msg += get_display_species()
 	return msg
+
+/mob/living/carbon/human/reduce_cuff_time()
+	if(istype(gloves, /obj/item/clothing/gloves/gauntlets/rig))
+		return 2
+	return ..()
 
 /mob/living/carbon/human/pull_damage()
 	if(((health - halloss) <= config.health_threshold_softcrit))

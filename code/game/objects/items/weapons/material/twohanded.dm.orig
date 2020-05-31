@@ -159,18 +159,8 @@
 		if(istype(A,/obj/structure/window))
 			var/obj/structure/window/W = A
 			W.shatter()
-<<<<<<< HEAD:code/game/objects/items/weapons/material/twohanded.dm
 
 /*
-=======
-		else if(istype(A,/obj/structure/grille))
-			qdel(A)
-		else if(istype(A,/obj/effect/plant))
-			var/obj/effect/plant/P = A
-			P.die_off()
-
-		qdel(A)
->>>>>>> 284d1cc1f5c67503fe0da89ce01985d73bb02038:code/game/objects/items/weapons/twohanded.dm
 /*
  * Double-Bladed Energy Swords - Cheridan
  */

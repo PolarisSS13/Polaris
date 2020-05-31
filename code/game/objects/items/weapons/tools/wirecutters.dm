@@ -37,7 +37,7 @@
 		C.handcuffed = null
 		if(C.buckled && C.buckled.buckle_require_restraints)
 			C.buckled.unbuckle_mob()
-		C.update_inv_handcuffed()
+		C.update_handcuffed()
 		return
 	else
 		..()
@@ -113,7 +113,7 @@
 	return ..()
 
 /obj/item/weapon/tool/wirecutters/power/attack_self(mob/user)
-	playsound(get_turf(user), 'sound/items/change_jaws.ogg', 50, 1)
+	playsound(src, 'sound/items/change_jaws.ogg', 50, 1)
 	user.drop_item(src)
 	counterpart.forceMove(get_turf(src))
 	src.forceMove(counterpart)
