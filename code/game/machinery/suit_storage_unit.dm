@@ -661,6 +661,7 @@
 	name = "Vintage suit cycler"
 	model_text = "Vintage"
 	departments = list("Vintage Crew","Vintage Engineering","Vintage Marine","Vintage Medical","Vintage Officer","Vintage Pilot","Vintage Pilot 2","Vintage Mercenary","Vintage Research")
+	req_access = null
 
 /obj/machinery/suit_cycler/vintage/Initialize()
 	species -= SPECIES_TESHARI
