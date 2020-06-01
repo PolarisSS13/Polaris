@@ -1,6 +1,7 @@
 /obj/vehicle/train/engine
 	name = "cargo train tug"
 	desc = "A ridable electric car designed for pulling cargo trolleys."
+	description_info = "Use ctrl-click to quickly toggle the engine if you're adjacent (only when vehicle is stationary). Alt-click will grab the keys, if present."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "cargo_engine"
 	on = 0
@@ -196,6 +197,22 @@
 	if(ishuman(user) && Adjacent(user))
 		. += "The power light is [on ? "on" : "off"].\nThere are[key ? "" : " no"] keys in the ignition."
 		. += "The charge meter reads [cell? round(cell.percent(), 0.01) : 0]%"
+
+
+/obj/vehicle/train/engine/CtrlClick(var/mob/user)
+	if(Adjacent(user))
+		if(on)
+			stop_engine()
+		else
+			start_engine()
+	else
+		return ..()
+
+/obj/vehicle/train/engine/AltClick(var/mob/user)
+	if(Adjacent(user))
+		remove_key()
+	else
+		return ..()
 
 /obj/vehicle/train/engine/verb/start_engine()
 	set name = "Start engine"

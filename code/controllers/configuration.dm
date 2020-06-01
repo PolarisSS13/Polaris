@@ -232,6 +232,10 @@ var/list/gamemode_cache = list()
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
 
+	var/allow_byond_links = 0
+	var/allow_discord_links = 0
+	var/allow_url_links = 0					// honestly if I were you i'd leave this one off, only use in dire situations
+
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
 	var/list/ert_species = list(SPECIES_HUMAN)
@@ -269,6 +273,9 @@ var/list/gamemode_cache = list()
 
 	// disables the annoying "You have already logged in this round, disconnect or be banned" popup for multikeying, because it annoys the shit out of me when testing.
 	var/disable_cid_warn_popup = FALSE
+
+	// whether or not to use the nightshift subsystem to perform lighting changes
+	var/static/enable_night_shifts = FALSE
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -420,6 +427,15 @@ var/list/gamemode_cache = list()
 
 				if ("allow_admin_spawning")
 					config.allow_admin_spawning = 1
+					
+				if ("allow_byond_links")
+					allow_byond_links = 1
+
+				if ("allow_discord_links")
+					allow_discord_links = 1	
+
+				if ("allow_url_links")
+					allow_url_links = 1					
 
 				if ("no_dead_vote")
 					config.vote_no_dead = 1
@@ -887,6 +903,9 @@ var/list/gamemode_cache = list()
 
 				if("disable_cid_warn_popup")
 					config.disable_cid_warn_popup = TRUE
+
+				if("enable_night_shifts")
+					config.enable_night_shifts = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

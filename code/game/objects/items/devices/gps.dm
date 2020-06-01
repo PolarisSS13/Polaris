@@ -59,11 +59,11 @@ var/list/GPS_list = list()
 		visible_message("\The [src] appears to be functional again.")
 
 /obj/item/device/gps/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(emped)
-		overlays += image(icon, src, "emp")
+		add_overlay("emp")
 	else if(tracking)
-		overlays += image(icon, src, "working")
+		add_overlay("working")
 
 /obj/item/device/gps/attack_self(mob/user)
 	display(user)
@@ -89,6 +89,8 @@ var/list/GPS_list = list()
 			continue
 
 		var/turf/T = get_turf(G)
+		if(!T)
+			continue
 		if(local_mode && curr.z != T.z)
 			continue
 		if(!(T.z in dat["z_level_detection"]))
@@ -183,11 +185,25 @@ var/list/GPS_list = list()
 /obj/item/device/gps/security/on
 	tracking = TRUE
 
+/obj/item/device/gps/security/hos
+	icon_state = "gps-sec-hos"
+	gps_tag = "HOS0"
+
+/obj/item/device/gps/security/hos/on
+	tracking = TRUE
+
 /obj/item/device/gps/medical
 	icon_state = "gps-med"
 	gps_tag = "MED0"
 
 /obj/item/device/gps/medical/on
+	tracking = TRUE
+
+/obj/item/device/gps/medical/cmo
+	icon_state = "gps-med-cmo"
+	gps_tag = "CMO0"
+
+/obj/item/device/gps/medical/cmo/on
 	tracking = TRUE
 
 /obj/item/device/gps/science
@@ -197,11 +213,32 @@ var/list/GPS_list = list()
 /obj/item/device/gps/science/on
 	tracking = TRUE
 
+/obj/item/device/gps/science/rd
+	icon_state = "gps-sci-rd"
+	gps_tag = "RD0"
+
+/obj/item/device/gps/science/rd/on
+	tracking = TRUE
+
 /obj/item/device/gps/engineering
 	icon_state = "gps-eng"
 	gps_tag = "ENG0"
 
 /obj/item/device/gps/engineering/on
+	tracking = TRUE
+
+/obj/item/device/gps/engineering/atmos
+	icon_state = "gps-eng-atm"
+	gps_tag = "ATM0"
+
+/obj/item/device/gps/engineering/atmos/on
+	tracking = TRUE
+
+/obj/item/device/gps/engineering/ce
+	icon_state = "gps-eng-ce"
+	gps_tag = "CE0"
+
+/obj/item/device/gps/engineering/ce/on
 	tracking = TRUE
 
 /obj/item/device/gps/mining

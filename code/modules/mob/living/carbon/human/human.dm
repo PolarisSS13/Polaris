@@ -418,7 +418,7 @@
 											BITSET(hud_updateflag, WANTED_HUD)
 											if(istype(usr,/mob/living/carbon/human))
 												var/mob/living/carbon/human/U = usr
-												U.handle_regular_hud_updates()
+												U.handle_hud_list()
 											if(istype(usr,/mob/living/silicon/robot))
 												var/mob/living/silicon/robot/U = usr
 												U.handle_regular_hud_updates()
@@ -747,7 +747,7 @@
 		var/datum/gender/T = gender_datums[get_visible_gender()]
 		visible_message("<font color='red'>\The [src] begins playing [T.his] ribcage like a xylophone. It's quite spooky.</font>","<font color='blue'>You begin to play a spooky refrain on your ribcage.</font>","<font color='red'>You hear a spooky xylophone melody.</font>")
 		var/song = pick('sound/effects/xylophone1.ogg','sound/effects/xylophone2.ogg','sound/effects/xylophone3.ogg')
-		playsound(loc, song, 50, 1, -1)
+		playsound(src, song, 50, 1, -1)
 		xylophone = 1
 		spawn(1200)
 			xylophone=0
@@ -1374,7 +1374,7 @@
 	set desc = "Pop a joint back into place. Extremely painful."
 	set src in view(1)
 
-	if(!isliving(usr) || !usr.canClick())
+	if(!isliving(usr) || !usr.checkClickCooldown())
 		return
 
 	usr.setClickCooldown(20)
@@ -1612,3 +1612,37 @@
 
 	msg += get_display_species()
 	return msg
+
+/mob/living/carbon/human/reduce_cuff_time()
+	if(istype(gloves, /obj/item/clothing/gloves/gauntlets/rig))
+		return 2
+	return ..()
+
+/mob/living/carbon/human/pull_damage()
+	if(((health - halloss) <= config.health_threshold_softcrit))
+		for(var/name in organs_by_name)
+			var/obj/item/organ/external/e = organs_by_name[name]
+			if(!e)
+				continue
+			if((e.status & ORGAN_BROKEN && (!e.splinted || (e.splinted in e.contents && prob(30))) || e.status & ORGAN_BLEEDING) && (getBruteLoss() + getFireLoss() >= 100))
+				return 1
+	else
+		return ..()
+
+// Drag damage is handled in a parent
+/mob/living/carbon/human/dragged(var/mob/living/dragger, var/oldloc)
+	if(prob(getBruteLoss() * 200 / maxHealth))
+		var/bloodtrail = 1
+		if(species?.flags & NO_BLOOD)
+			bloodtrail = 0
+		else
+			var/blood_volume = round((vessel.get_reagent_amount("blood")/species.blood_volume)*100)
+			if(blood_volume < BLOOD_VOLUME_SURVIVE)
+				bloodtrail = 0	//Most of it's gone already, just leave it be
+			else
+				vessel.remove_reagent("blood", 1)
+		if(bloodtrail)
+			if(istype(loc, /turf/simulated))
+				var/turf/T = loc
+				T.add_blood(src)
+	. = ..()

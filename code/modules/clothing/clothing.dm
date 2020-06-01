@@ -59,7 +59,7 @@
 		user.recalculate_vis()
 
 //BS12: Species-restricted clothing check.
-/obj/item/clothing/mob_can_equip(M as mob, slot)
+/obj/item/clothing/mob_can_equip(M as mob, slot, disable_warning = FALSE)
 
 	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
 	if (!..())
@@ -311,7 +311,7 @@
 			update_icon()
 			return
 
-		playsound(src.loc, W.usesound, 50, 1)
+		playsound(src, W.usesound, 50, 1)
 		user.visible_message("<font color='red'>[user] cuts the fingertips off of the [src].</font>","<font color='red'>You cut the fingertips off of the [src].</font>")
 
 		clipped = 1
@@ -323,7 +323,7 @@
 		return
 */
 
-/obj/item/clothing/gloves/mob_can_equip(mob/user, slot)
+/obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE)
 	var/mob/living/carbon/human/H = user
 
 	if(slot && slot == slot_gloves)
@@ -588,7 +588,7 @@
 
 	if(usr.put_in_hands(holding))
 		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
-		playsound(get_turf(src), 'sound/weapons/holster/sheathout.ogg', 25)
+		playsound(src, 'sound/weapons/holster/sheathout.ogg', 25)
 		holding = null
 		overlays -= image(icon, "[icon_state]_knife")
 	else
@@ -752,12 +752,16 @@
 		|ACCESSORY_SLOT_MEDAL\
 		|ACCESSORY_SLOT_INSIGNIA\
 		|ACCESSORY_SLOT_TIE\
+		|ACCESSORY_SLOT_RANK\
+		|ACCESSORY_SLOT_DEPT\
 		|ACCESSORY_SLOT_OVER)
 	restricted_accessory_slots = (\
 		ACCESSORY_SLOT_UTILITY\
 		|ACCESSORY_SLOT_WEAPON\
 		|ACCESSORY_SLOT_ARMBAND\
 		|ACCESSORY_SLOT_TIE\
+		|ACCESSORY_SLOT_RANK\
+		|ACCESSORY_SLOT_DEPT\
 		|ACCESSORY_SLOT_OVER)
 
 	var/icon/rolled_down_icon = 'icons/mob/uniform_rolled_down.dmi'

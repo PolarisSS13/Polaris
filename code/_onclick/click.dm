@@ -38,10 +38,10 @@
 	* mob/RangedAttack(atom,params) - used only ranged, only used for tk and laser eyes but could be changed
 */
 /mob/proc/ClickOn(var/atom/A, var/params)
-	if(world.time <= next_click) // Hard check, before anything else, to avoid crashing
+	if(!checkClickCooldown()) // Hard check, before anything else, to avoid crashing
 		return
 
-	next_click = world.time + 1
+	setClickCooldown(1)
 
 	if(client && client.buildmode)
 		build_click(src, client.buildmode, params, A)
@@ -68,9 +68,6 @@
 		return
 
 	face_atom(A) // change direction to face what you clicked on
-
-	if(!canClick()) // in the year 2000...
-		return
 
 	if(istype(loc, /obj/mecha))
 		if(!locate(/turf) in list(A, A.loc)) // Prevents inventory from being drilled
@@ -143,12 +140,12 @@
 	return 1
 
 /mob/proc/setClickCooldown(var/timeout)
-	next_move = max(world.time + timeout, next_move)
+	next_click = max(world.time + timeout, next_click)
 
-/mob/proc/canClick()
-	if(config.no_click_cooldown || next_move <= world.time)
-		return 1
-	return 0
+/mob/proc/checkClickCooldown()
+	if(next_click > world.time && !config.no_click_cooldown)
+		return FALSE
+	return TRUE
 
 // Default behavior: ignore double clicks, the second click that makes the doubleclick call already calls for a normal click
 /mob/proc/DblClickOn(var/atom/A, var/params)
@@ -295,7 +292,7 @@
 	var/obj/item/projectile/beam/LE = new (T)
 	LE.icon = 'icons/effects/genetics.dmi'
 	LE.icon_state = "eyelasers"
-	playsound(usr.loc, 'sound/weapons/taser2.ogg', 75, 1)
+	playsound(src, 'sound/weapons/taser2.ogg', 75, 1)
 	LE.firer = src
 	LE.preparePixelProjectile(A, src, params)
 	LE.fire()

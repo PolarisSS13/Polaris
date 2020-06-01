@@ -112,7 +112,7 @@ var/global/list/light_type_cache = list()
 			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
 			user.visible_message("[user.name] deconstructs [src].", \
 				"You deconstruct [src].", "You hear a noise.")
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 75, 1)
+			playsound(src, 'sound/items/Deconstruct.ogg', 75, 1)
 			qdel(src)
 		if (src.stage == 2)
 			to_chat(usr, "You have to remove the wires first.")
@@ -129,7 +129,7 @@ var/global/list/light_type_cache = list()
 		new /obj/item/stack/cable_coil(get_turf(src.loc), 1, "red")
 		user.visible_message("[user.name] removes the wiring from [src].", \
 			"You remove the wiring from [src].", "You hear a noise.")
-		playsound(src.loc, W.usesound, 50, 1)
+		playsound(src, W.usesound, 50, 1)
 		return
 
 	if(istype(W, /obj/item/stack/cable_coil))
@@ -240,8 +240,17 @@ var/global/list/light_type_cache = list()
 	var/bulb_emergency_pow_mul = 0.75	// the multiplier for determining the light's power in emergency mode
 	var/bulb_emergency_pow_min = 0.5	// the minimum value for the light's power in emergency mode
 
+	var/nightshift_enabled = FALSE
+	var/nightshift_allowed = TRUE
+	var/brightness_range_ns
+	var/brightness_power_ns
+	var/brightness_color_ns
+
 /obj/machinery/light/flicker
 	auto_flicker = TRUE
+
+/obj/machinery/light/no_nightshift
+	nightshift_allowed = FALSE
 
 // the smaller bulb light fixture
 
@@ -370,7 +379,10 @@ var/global/list/light_type_cache = list()
 /obj/machinery/light/proc/update(var/trigger = 1)
 	update_icon()
 	if(on)
-		if(light_range != brightness_range || light_power != brightness_power || light_color != brightness_color)
+		var/correct_range = nightshift_enabled ? brightness_range_ns : brightness_range
+		var/correct_power = nightshift_enabled ? brightness_power_ns : brightness_power
+		var/correct_color = nightshift_enabled ? brightness_color_ns : brightness_color
+		if(light_range != correct_range || light_power != correct_power || light_color != correct_color)
 			if(!auto_flicker)
 				switchcount++
 			if(rigged)
@@ -388,7 +400,9 @@ var/global/list/light_type_cache = list()
 					set_light(0)
 			else
 				update_use_power(USE_POWER_ACTIVE)
-				set_light(brightness_range, brightness_power, brightness_color)
+				set_light(correct_range, correct_power, correct_color)
+		if(cell?.charge < cell?.maxcharge)
+			START_PROCESSING(SSobj, src)
 	else if(has_emergency_power(LIGHT_EMERGENCY_POWER_USE) && !turned_off())
 		update_use_power(USE_POWER_IDLE)
 		emergency_mode = TRUE
@@ -399,6 +413,13 @@ var/global/list/light_type_cache = list()
 
 	update_active_power_usage((light_range * light_power) * LIGHTING_POWER_FACTOR)
 
+/obj/machinery/light/proc/nightshift_mode(var/state)
+	if(!nightshift_allowed)
+		return
+
+	if(state != nightshift_enabled)
+		nightshift_enabled = state
+		update(FALSE)
 
 /obj/machinery/light/attack_generic(var/mob/user, var/damage)
 	if(!damage)
@@ -459,9 +480,14 @@ var/global/list/light_type_cache = list()
 	status = L.status
 	switchcount = L.switchcount
 	rigged = L.rigged
+
 	brightness_range = L.brightness_range
 	brightness_power = L.brightness_power
 	brightness_color = L.brightness_color
+
+	brightness_range_ns = L.nightshift_range
+	brightness_power_ns = L.nightshift_power
+	brightness_color_ns = L.nightshift_color
 
 // attack with item - insert light (if right type), otherwise try to break the light
 
@@ -727,7 +753,7 @@ var/global/list/light_type_cache = list()
 
 	if(!skip_sound_and_sparks)
 		if(status == LIGHT_OK || status == LIGHT_BURNED)
-			playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+			playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
 			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 			s.set_up(3, 1, src)
@@ -770,11 +796,11 @@ var/global/list/light_type_cache = list()
 	if(has_power())
 		emergency_mode = FALSE
 		update(FALSE)
-		if(cell.charge == cell.maxcharge)
+		if(!cell.give(LIGHT_EMERGENCY_POWER_USE*2)) // Recharge and stop if no more was able to be added
 			return PROCESS_KILL
-		cell.charge = min(cell.maxcharge, cell.charge + LIGHT_EMERGENCY_POWER_USE*2) //Recharge emergency power automatically while not using it
 	if(emergency_mode && !use_emergency_power(LIGHT_EMERGENCY_POWER_USE))
 		update(FALSE) //Disables emergency mode and sets the color to normal
+		return PROCESS_KILL // Drop out if we're out of cell power. These are often in POIs and there's no point in recharging.
 
 	if(auto_flicker && !flickering)
 		if(check_for_player_proximity(src, radius = 12, ignore_ghosts = FALSE, ignore_afk = TRUE))
@@ -825,6 +851,10 @@ var/global/list/light_type_cache = list()
 	var/brightness_power = 1
 	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 
+	var/nightshift_range = 8
+	var/nightshift_power = 0.7
+	var/nightshift_color = LIGHT_COLOR_NIGHTSHIFT
+
 /obj/item/weapon/light/tube
 	name = "light tube"
 	desc = "A replacement light tube."
@@ -841,6 +871,9 @@ var/global/list/light_type_cache = list()
 	brightness_range = 15
 	brightness_power = 9
 
+	nightshift_range = 10
+	nightshift_power = 0.9
+
 /obj/item/weapon/light/bulb
 	name = "light bulb"
 	desc = "A replacement light bulb."
@@ -851,6 +884,9 @@ var/global/list/light_type_cache = list()
 	brightness_range = 5
 	brightness_power = 4
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
+
+	nightshift_range = 3
+	nightshift_power = 0.35
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()
@@ -938,7 +974,7 @@ var/global/list/light_type_cache = list()
 		status = LIGHT_BROKEN
 		force = 5
 		sharp = 1
-		playsound(src.loc, 'sound/effects/Glasshit.ogg', 75, 1)
+		playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 		update_icon()
 
 //Lamp Shade

@@ -95,9 +95,9 @@
 	var/list/cargo = list()
 	var/cargo_capacity = 3
 
-	var/static/image/radial_image_eject = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_eject"),
-	var/static/image/radial_image_airtoggle = image(icon= 'icons/mob/radial.dmi', icon_state = "radial_airtank"),
-	var/static/image/radial_image_lighttoggle = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_light"),
+	var/static/image/radial_image_eject = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_eject")
+	var/static/image/radial_image_airtoggle = image(icon= 'icons/mob/radial.dmi', icon_state = "radial_airtank")
+	var/static/image/radial_image_lighttoggle = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_light")
 	var/static/image/radial_image_statpanel = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_examine2")
 
 
@@ -433,11 +433,9 @@
 ////////  Movement procs  ////////
 //////////////////////////////////
 
-/obj/mecha/Move()
+/obj/mecha/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
-	if(.)
-		MoveAction()
-	return
+	MoveAction()
 
 /obj/mecha/proc/MoveAction() //Allows mech equipment to do an action once the mech moves
 	if(!equipment.len)
@@ -631,6 +629,7 @@
 ////////////////////////////////////////
 
 /obj/mecha/take_damage(amount, type="brute")
+	update_damage_alerts()
 	if(amount)
 		var/damage = absorbDamage(amount,type)
 		health -= damage
@@ -671,12 +670,12 @@
 			if(!prob(src.deflect_chance))
 				src.take_damage(15)
 				src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+				playsound(src, 'sound/weapons/slash.ogg', 50, 1, -1)
 				to_chat(user, "<span class='danger'>You slash at the armored suit!</span>")
 				visible_message("<span class='danger'>\The [user] slashes at [src.name]'s armor!</span>")
 			else
 				src.log_append_to_last("Armor saved.")
-				playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+				playsound(src, 'sound/weapons/slash.ogg', 50, 1, -1)
 				to_chat(user, "<span class='danger'>Your claws had no effect!</span>")
 				src.occupant_message("<span class='notice'>\The [user]'s claws are stopped by the armor.</span>")
 				visible_message("<span class='warning'>\The [user] rebounds off [src.name]'s armor!</span>")
@@ -805,14 +804,14 @@
 	if(!prob(src.deflect_chance))
 		src.take_damage(6)
 		src.check_for_internal_damage(list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
-		playsound(src.loc, 'sound/effects/blobattack.ogg', 50, 1, -1)
+		playsound(src, 'sound/effects/blobattack.ogg', 50, 1, -1)
 		to_chat(user, "<span class='danger'>You smash at the armored suit!</span>")
 		for (var/mob/V in viewers(src))
 			if(V.client && !(V.blinded))
 				V.show_message("<span class='danger'>\The [user] smashes against [src.name]'s armor!</span>", 1)
 	else
 		src.log_append_to_last("Armor saved.")
-		playsound(src.loc, 'sound/effects/blobattack.ogg', 50, 1, -1)
+		playsound(src, 'sound/effects/blobattack.ogg', 50, 1, -1)
 		to_chat(user, "<span class='warning'>Your attack had no effect!</span>")
 		src.occupant_message("<span class='warning'>\The [user]'s attack is stopped by the armor.</span>")
 		for (var/mob/V in viewers(src))
@@ -971,6 +970,7 @@
 		if(src.health<initial(src.health))
 			to_chat(user, "<span class='notice'>You repair some damage to [src.name].</span>")
 			src.health += min(10, initial(src.health)-src.health)
+			update_damage_alerts()
 		else
 			to_chat(user, "The [src.name] is at full integrity")
 		return
@@ -1321,6 +1321,8 @@
 		src.verbs += /obj/mecha/verb/eject
 		src.log_append_to_last("[H] moved in as pilot.")
 		src.icon_state = src.reset_icon()
+		update_cell_alerts()
+		update_damage_alerts()
 		set_dir(dir_in)
 		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
 		if(occupant.client && cloaked_selfimage)
@@ -1403,6 +1405,8 @@
 				occupant.loc = mmi
 			mmi.mecha = null
 			occupant.canmove = 0
+		occupant.clear_alert("charge")
+		occupant.clear_alert("mech damage")
 		occupant = null
 		icon_state = src.reset_icon()+"-open"
 		set_dir(dir_in)
@@ -1971,12 +1975,14 @@
 	return call((proc_res["dynusepower"]||src), "dynusepower")(amount)
 
 /obj/mecha/proc/dynusepower(amount)
+	update_cell_alerts()
 	if(get_charge())
 		cell.use(amount)
 		return 1
 	return 0
 
 /obj/mecha/proc/give_power(amount)
+	update_cell_alerts()
 	if(!isnull(get_charge()))
 		cell.give(amount)
 		return 1
@@ -2005,7 +2011,7 @@
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
 	else
 		src.log_append_to_last("Armor saved.")
-		playsound(src.loc, 'sound/weapons/slash.ogg', 50, 1, -1)
+		playsound(src, 'sound/weapons/slash.ogg', 50, 1, -1)
 		src.occupant_message("<span class='notice'>\The [user]'s attack is stopped by the armor.</span>")
 		visible_message("<span class='notice'>\The [user] rebounds off [src.name]'s armor!</span>")
 		user.attack_log += text("\[[time_stamp()]\] <font color='red'>attacked [src.name]</font>")
@@ -2154,3 +2160,31 @@
 	//src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST))
 	return
 */
+
+/obj/mecha/proc/update_cell_alerts()
+	if(occupant && cell)
+		var/cellcharge = cell.charge/cell.maxcharge
+		switch(cellcharge)
+			if(0.75 to INFINITY)
+				occupant.clear_alert("charge")
+			if(0.5 to 0.75)
+				occupant.throw_alert("charge", /obj/screen/alert/lowcell, 1)
+			if(0.25 to 0.5)
+				occupant.throw_alert("charge", /obj/screen/alert/lowcell, 2)
+			if(0.01 to 0.25)
+				occupant.throw_alert("charge", /obj/screen/alert/lowcell, 3)
+			else
+				occupant.throw_alert("charge", /obj/screen/alert/emptycell)
+
+/obj/mecha/proc/update_damage_alerts()
+	if(occupant)
+		var/integrity = health/initial(health)*100
+		switch(integrity)
+			if(30 to 45)
+				occupant.throw_alert("mech damage", /obj/screen/alert/low_mech_integrity, 1)
+			if(15 to 35)
+				occupant.throw_alert("mech damage", /obj/screen/alert/low_mech_integrity, 2)
+			if(-INFINITY to 15)
+				occupant.throw_alert("mech damage", /obj/screen/alert/low_mech_integrity, 3)
+			else
+				occupant.clear_alert("mech damage")
