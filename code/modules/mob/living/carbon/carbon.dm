@@ -127,7 +127,7 @@
 			Blind(max(0,blind_dur))
 		if(species.emp_sensitivity & EMP_CONFUSE)
 			Confuse(max(0,confuse_dur))
-		if(species.emp_sensitivity & EMP_STUN)
+		if(species.emp_sensitivity & EMP_WEAKEN)
 			Weaken(max(0,weaken_dur))
 		//physical damage block, deals (minor-4) 5-15, 10-20, 15-25, 20-30 (extreme-1) of *each* type
 		if(species.emp_sensitivity & EMP_BRUTE_DMG)
