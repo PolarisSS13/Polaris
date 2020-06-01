@@ -99,54 +99,45 @@
 //EMP vulnerability for non-synth carbons. could be useful for diona, vox, or others
 //the species' emp_sensitivity var needs to be greater than 0 for this to proc, and it defaults to 0 - shouldn't stack with prosthetics/fbps in most cases
 //higher sensitivity values incur additional effects, starting with confusion/blinding/knockdown and ending with increasing amounts of damage
-//the degree of damage and duration of effects can be tweaked up or down based on the species emp_mod and emp_stun_mod vars (default 1) on top of tuning the random ranges
+//the degree of damage and duration of effects can be tweaked up or down based on the species emp_dmg_mod and emp_stun_mod vars (default 1) on top of tuning the random ranges
 /mob/living/carbon/emp_act(severity)
-	if(species.emp_sensitivity & EMP_VULN) //receive basic effects regardless of sensitivity, if we're even the tiniest bit sensitive
+	//pregen our stunning stuff, had to do this seperately or else byond complained
+	var/agony_str = ((rand(4,6)*15)-(15*severity))*species.emp_stun_mod //big ouchies at high severity, causes 0-75; shotgun beanbags do 60
+	var/confuse_dur = (rand(4,6)-severity)*species.emp_stun_mod //0-5 wobbliness
+	var/weaken_dur = (rand(2,3)-severity)*species.emp_stun_mod //0-2 knockdown
+	var/blind_dur = (rand(3,5)-severity)*species.emp_stun_mod //0-4 blind
+	if(species.emp_sensitivity) //receive warning message and basic effects
 		to_chat(src, "<span class='danger'><B>*BZZZT*</B></span>")
 		switch(severity)
-			if(1) //highest intensity, absolutely sucks
+			if(1)
 				to_chat(src, "<span class='danger'>DANGER: Extreme EM flux detected!</span>")
-				src.emote(pick("twitch", "pale", "blink_r", "shiver", "sneeze", "vomit", "gasp", "cough", "drool"))
-				if(species.emp_sensitivity & EMP_STUN)
-					Confuse(5 * species.emp_stun_mod)
-					Weaken(1 * species.emp_stun_mod)
-					Blind(1 * species.emp_stun_mod)
-				if(species.emp_sensitivity & EMP_TOX_DMG)
-					src.adjustToxLoss(rand(20,30) * species.emp_mod)
-				if(species.emp_sensitivity & EMP_BURN_DMG)
-					src.adjustFireLoss(rand(20,30) * species.emp_mod)
 			if(2)
 				to_chat(src, "<span class='danger'>Danger: High EM flux detected!</span>")
-				if(prob(75))
-					src.emote(pick("twitch", "pale", "blink_r", "shiver", "sneeze", "vomit", "gasp", "cough", "drool"))
-				if(species.emp_sensitivity & EMP_STUN)
-					Confuse(4 * species.emp_stun_mod)
-					Blind(1 * species.emp_stun_mod)
-				if(species.emp_sensitivity & EMP_TOX_DMG)
-					src.adjustToxLoss(rand(15,25) * species.emp_mod)
-				if(species.emp_sensitivity & EMP_BURN_DMG)
-					src.adjustFireLoss(rand(15,25) * species.emp_mod)
 			if(3)
 				to_chat(src, "<span class='danger'>Warning: Moderate EM flux detected!</span>")
-				if(prob(50))
-					src.emote(pick("twitch", "pale", "blink", "shiver", "sneeze", "gasp", "cough", "drool"))
-				if(species.emp_sensitivity & EMP_STUN)
-					Confuse(3 * species.emp_stun_mod)
-					Blind(1 * species.emp_stun_mod)
-				if(species.emp_sensitivity & EMP_TOX_DMG)
-					src.adjustToxLoss(rand(10,20) * species.emp_mod)
-				if(species.emp_sensitivity & EMP_BURN_DMG)
-					src.adjustFireLoss(rand(10,20) * species.emp_mod)
-			if(4) //lowest intensity
+			if(4)
 				to_chat(src, "<span class='danger'>Warning: Minor EM flux detected!</span>")
-				if(prob(25))
-					src.emote(pick("twitch", "pale", "blink", "shiver", "sneeze", "gasp", "cough"))
-				if(species.emp_sensitivity & EMP_STUN)
-					Confuse(2 * species.emp_stun_mod)
-				if(species.emp_sensitivity & EMP_TOX_DMG)
-					src.adjustToxLoss(rand(5,15) * species.emp_mod)
-				if(species.emp_sensitivity & EMP_BURN_DMG)
-					src.adjustFireLoss(rand(5,15) * species.emp_mod)
+		if(prob(90-(10*severity))) //50-80% chance to fire an emote. most are harmless, but vomit might reduce your nutrition level which could suck (so the whole thing is padded out with extras)
+			src.emote(pick("twitch", "twitch_v", "choke", "pale", "blink", "blink_r", "shiver", "sneeze", "vomit", "gasp", "cough", "drool"))
+		//stun effects block, effects vary wildly
+		if(species.emp_sensitivity & EMP_PAIN)
+			src.adjustHalLoss(agony_str)
+		if(species.emp_sensitivity & EMP_BLIND)
+			src.flash_eyes(3)	//allows it to bypass any tier of eye protection, necessary or else sec sunglasses/etc. protect you from this
+			Blind(max(0,blind_dur))
+		if(species.emp_sensitivity & EMP_CONFUSE)
+			Confuse(max(0,confuse_dur))
+		if(species.emp_sensitivity & EMP_STUN)
+			Weaken(max(0,weaken_dur))
+		//physical damage block, deals (minor-4) 5-15, 10-20, 15-25, 20-30 (extreme-1) of *each* type
+		if(species.emp_sensitivity & EMP_BRUTE_DMG)
+			src.adjustBruteLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+		if(species.emp_sensitivity & EMP_BURN_DMG)
+			src.adjustFireLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+		if(species.emp_sensitivity & EMP_TOX_DMG)
+			src.adjustToxLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
+		if(species.emp_sensitivity & EMP_OXY_DMG)
+			src.adjustOxyLoss(rand(25-(severity*5),35-(severity*5)) * species.emp_dmg_mod)
 	..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null, var/stun = 1)
