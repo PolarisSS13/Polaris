@@ -12,6 +12,12 @@
 #define NO_INFECT		  0x400  // Don't allow infections in limbs or organs, similar to IS_PLANT, without other strings.
 // unused: 0x8000 - higher than this will overflow
 
+// Species EMP vuln for carbons
+#define EMP_VULN	0x1	// Takes any effects from EMP at all, required for any of the following
+#define EMP_STUN	0x2	// EMPs inflict stunning effects such as blind, weaken, and confuse
+#define EMP_TOX_DMG	0x4	// EMPs inflict toxin damage
+#define EMP_BURN_DMG	0x8	// EMPs inflict burn damage
+
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
 #define SPECIES_IS_RESTRICTED     0x2    // Is not a core/normally playable species. (castes, mutantraces)
