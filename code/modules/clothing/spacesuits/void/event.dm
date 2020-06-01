@@ -188,7 +188,7 @@
 //fluff alt-variant helmet, no changes to protection or anything despite the desc (and it wouldn't matter unless you found a base-type since armor values aren't transferred during refits)
 /obj/item/clothing/head/helmet/space/void/refurb/pilot/alt
 	name = "vintage pilot's voidsuit helmet"
-	desc = "For pilots who don't like the increased fracture vulnerability of the huge visor, overrides exist in certain cyclers that allow pilots to use the conventional helmet design. It's a little more claustrophobic, but some find the all-round protection to be worth it."
+	desc = "For pilots who don't like the increased fracture vulnerability of the huge visor, overrides exist in certain cyclers that allow pilots to use the conventional helmet design. It's a little more claustrophobic, but some find the all-round protection to be worth the loss in visibility."
 	icon_state = "rig0-vintagepilotalt"
 
 /obj/item/clothing/suit/space/void/refurb/pilot
@@ -211,7 +211,7 @@
 //Baseline values are slightly worse than the gray crewsuit, but it has significantly better Energy protection and is the only other suit with 100% rad immunity besides the engi suit
 /obj/item/clothing/head/helmet/space/void/refurb/research
 	name = "vintage research voidsuit helmet"
-	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. The purple markings indicate this as a scientist's suit. Got your crowbar handy?"
+	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor has a bad habit of fogging up and collecting condensation, but it beats sucking hard vacuum. The purple markings indicate this as a scientist's helmet. Got your crowbar handy?"
 	icon_state = "rig0-vintagescientist"
 	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black", slot_l_hand_str = "syndicate-helm-black")
 	armor = list(melee = 25, bullet = 10, laser = 10, energy = 50, bomb = 10, bio = 100, rad = 100)
