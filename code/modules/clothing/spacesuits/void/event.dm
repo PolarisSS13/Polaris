@@ -83,6 +83,11 @@
 	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black", slot_l_hand_str = "syndicate-helm-black")
 	armor = list(melee = 30, bullet = 15, laser = 15, energy = 5, bomb = 25, bio = 100, rad = 75)
 
+/obj/item/clothing/head/helmet/space/void/refurb/medical/alt
+	name = "vintage medical voidsuit bubble helmet"
+	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. The visor on this model has been expanded to the full bubble design to improve visibility. Wouldn't want to lose a scalpel in someone's abdomen because your visor fogged over!"
+	icon_state = "rig0-vintagepilot"
+
 /obj/item/clothing/suit/space/void/refurb/medical
 	name = "vintage medical voidsuit"
 	desc = "A refurbished early contact era voidsuit of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. Many old-timer spacers swear by these old things, even if new powered hardsuits have more features and better armor. The green and white markings indicate this as a medic's suit."
@@ -216,6 +221,11 @@
 	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black", slot_l_hand_str = "syndicate-helm-black")
 	armor = list(melee = 25, bullet = 10, laser = 10, energy = 50, bomb = 10, bio = 100, rad = 100)
 	siemens_coefficient = 0.8
+
+/obj/item/clothing/head/helmet/space/void/refurb/research/alt
+	name = "vintage research voidsuit bubble helmet"
+	desc = "A refurbished early contact era voidsuit helmet of human design. These things aren't especially good against modern weapons but they're sturdy, incredibly easy to come by, and there are lots of spare parts for repairs. This version has been refitted with the distinctive bubble design to increase visibility, so that you can see what you're sciencing better!"
+	icon_state = "rig0-vintagepilot"
 
 /obj/item/clothing/suit/space/void/refurb/research
 	name = "vintage research voidsuit"
