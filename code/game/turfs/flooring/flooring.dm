@@ -356,7 +356,7 @@ var/list/flooring_types
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_base = "lightmarble"
 	build_type = /obj/item/stack/tile/wmarble
-	flags = TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
+	flags = TURF_REMOVE_CROWBAR
 
 /decl/flooring/bmarble
 	name = "marble floor"
@@ -364,7 +364,7 @@ var/list/flooring_types
 	icon = 'icons/turf/flooring/misc.dmi'
 	icon_base = "darkmarble"
 	build_type = /obj/item/stack/tile/bmarble
-	flags = TURF_IS_FRAGILE | TURF_REMOVE_SCREWDRIVER
+	flags = TURF_REMOVE_CROWBAR
 
 /decl/flooring/wood
 	name = "wooden floor"
