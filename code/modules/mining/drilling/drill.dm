@@ -56,6 +56,12 @@
 	. = ..()
 	default_apply_parts()
 
+/obj/machinery/mining/drill/get_cell()
+	return cell	
+
+/obj/machinery/mining/drill/loaded
+	cell = /obj/item/weapon/cell/high
+
 /obj/machinery/mining/drill/process()
 
 	if(need_player_check)
