@@ -152,7 +152,7 @@
 	using.icon_state = "view_images"
 	using.screen_loc = ui_ai_view_images
 	using.layer = SCREEN_LAYER
-	adding += using
+	HUD.adding += using
 
 //Multicamera mode 
 	using = new /obj/screen/ai/multicam() // special

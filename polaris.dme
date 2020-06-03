@@ -131,11 +131,7 @@
 #include "code\_onclick\hud\hud.dm"
 #include "code\_onclick\hud\human.dm"
 #include "code\_onclick\hud\movable_screen_objects.dm"
-<<<<<<< master
-#include "code\_onclick\hud\other_mobs.dm"
 #include "code\_onclick\hud\picture_in_picture.dm"
-=======
->>>>>>> Add observer HUD from /tg/, refactor HUDs
 #include "code\_onclick\hud\radial.dm"
 #include "code\_onclick\hud\radial_persistent.dm"
 #include "code\_onclick\hud\robot.dm"
