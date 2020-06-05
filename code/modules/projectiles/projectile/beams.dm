@@ -272,19 +272,39 @@
 /obj/item/projectile/beam/lightning
 	name = "lightning"
 	icon_state = "lightning"
-	damage = 60
+	damage = 20
 	damage_type = ELECTROCUTE
 
 	muzzle_type = /obj/effect/projectile/muzzle/lightning
 	tracer_type = /obj/effect/projectile/tracer/lightning
 	impact_type = /obj/effect/projectile/impact/lightning
-
 	hitsound = 'sound/weapons/zapbang.ogg'
 
+	modifier_type_to_apply = /datum/modifier/shocked
+	modifier_duration = 5 SECONDS
+
+/datum/modifier/shocked
+	name = "Shocked"
+	desc = "You're slowed due to being shocked, and further shocks will hurt more."
+	mob_overlay_state = "blue_electricity_constant"
+
+	on_created_text = "<span class='danger'>Your body's having a hard time moving as electricity courses through you!</span>"
+	on_expired_text = "<span class='notice'>The electricity has passed.</span>"
+
+	stacks = MODIFIER_STACK_EXTEND
+	siemens_coefficient = 2.0 // More vulnerable to future zaps while this is occuring.
+	slowdown = 4
+
 /obj/item/projectile/beam/lightning/chain_lightning
-	damage = 35
-	var/bounces = 3				//How many times it 'chains'.  Note that the first hit is not counted as it counts /bounces/.
-	var/list/hit_mobs = list() 	//Mobs which were already hit.
+	damage = 15
+	modifier_duration = 5 SECONDS
+	var/bounces = 3				// How many times it 'chains'.  Note that the first hit is not counted as it counts /bounces/.
+	var/list/hit_mobs = list() 	// Mobs which were already hit.
+
+/obj/item/projectile/beam/lightning/chain_lightning/lesser
+	damage = 10
+	bounces = 2
+	modifier_duration = 3 SECONDS
 
 /obj/item/projectile/beam/lightning/chain_lightning/attack_mob(var/mob/living/target_mob, var/distance, var/miss_modifier=0)
 	//First we shock the guy we just hit.
@@ -298,7 +318,7 @@
 //	hit_mobs |= target_mob
 
 	//Each bounce reduces the damage of the bolt.
-	damage *= 0.80
+	damage *= 0.95
 	if(bounces)
 		//All possible targets.
 		var/list/potential_targets = view(target_mob, 3)
@@ -328,7 +348,3 @@
 
 			return 0
 	return 1
-
-/obj/item/projectile/beam/lightning/chain_lightning/lesser
-	bounces = 2
-	damage = 20

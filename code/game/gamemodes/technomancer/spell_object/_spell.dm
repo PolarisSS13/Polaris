@@ -104,8 +104,8 @@
 
 // Tests to make sure it can cast, then casts a combined, ranged, or melee spell based on what it can do,
 // and the  range the click occured.  Melee casts have higher priority than ranged if both are possible.
-// Don't override this for spells, override the on_[melee|range]_cast() spells below.
-/obj/item/weapon/spell/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+// Don't override this for spells, override the on_[melee|range]_cast() procs below.
+/obj/item/weapon/spell/afterattack(atom/target, mob/user, proximity_flag, list/click_parameters)
 	if(!run_checks())
 		return
 
@@ -116,17 +116,17 @@
 
 	if(!proximity_flag)
 		if(cast_methods & CAST_RANGED)
-			. = on_ranged_cast(target, user)
+			. = on_ranged_cast(target, user, click_parameters)
 	else
 		if(istype(target, /obj/item/weapon/spell))
 			var/obj/item/weapon/spell/spell = target
 			if(spell.cast_methods & CAST_COMBINE)
-				. = spell.on_combine_cast(src, user)
+				. = spell.on_combine_cast(src, user, click_parameters)
 				return
 		if(cast_methods & CAST_MELEE)
-			. = on_melee_cast(target, user)
+			. = on_melee_cast(target, user, click_parameters)
 		else if(cast_methods & CAST_RANGED) // Try to use a ranged method if a melee one doesn't exist.
-			. = on_ranged_cast(target, user)
+			. = on_ranged_cast(target, user, click_parameters)
 	if(.)
 		after_cast(user)
 

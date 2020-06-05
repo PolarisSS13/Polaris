@@ -1,55 +1,36 @@
-/datum/technomancer/spell/ball_lightning
-	name = "Ball Lightning"
-	desc = "Fires a small ball of lightning at a targeted tile, which zaps anyone it touches, \
-	and bounces off of solid objects such as walls. When such a bounce happens, a zap is sent \
-	out to anyone nearby. After enough bounces or distance, the ball of lighting explodes in \
-	a final, bigger zap, and a flash of light. Electrical protection is recommended to avoid \
-	unintentional user fatalities."
-	enhancement_desc = "There is a chance for the ball to bounce towards a non-allied entity, \
-	instead of bouncing normally."
-	cost = 100
-	ability_icon_state = "tech_ball_lightning"
-	obj_path = /obj/item/weapon/spell/projectile/ball_lightning
-	category = OFFENSIVE_SPELLS
-
-
 /datum/technomancer_catalog/spell/ball_lightning
 	name = "Ball Lightning"
-	desc = "Fires a small ball of lightning at a targeted tile, which zaps anyone it touches, \
-	and bounces off of solid objects such as walls. When such a bounce happens, a zap is sent \
-	out to anyone nearby. After enough bounces or distance, the ball of lighting explodes in \
-	a final, bigger zap, and a flash of light. Electrical protection is recommended to avoid \
-	unintentional user fatalities."
-	enhancement_desc = "There is a chance for the ball to bounce towards a non-allied entity, \
-	instead of bouncing normally."
 	cost = 100
 	category = OFFENSIVE_SPELLS
 	spell_metadata_paths = list(/datum/spell_metadata/ball_lightning)
 
 /datum/spell_metadata/ball_lightning
 	name = "Ball Lightning"
+	desc = "Fires a small ball of lightning at a targeted tile, which zaps anyone it touches, \
+	and bounces off of solid objects such as walls. When such a bounce happens, a zap is sent \
+	out to anyone nearby. After enough bounces or distance, the ball of lighting explodes in \
+	a final, bigger zap, and a flash of light. Electrical protection is recommended to avoid \
+	unintentional user fatalities."
+	enhancement_desc = "There is a chance for the ball to bounce towards a non-allied entity, \
+	instead of bouncing normally."
+	aspect = ASPECT_SHOCK
 	icon_state = "tech_ball_lightning"
-	spell_path = /obj/item/weapon/spell/banish
 	cooldown = 1 SECOND
+	spell_path = /obj/item/weapon/spell/technomancer/projectile/ball_lightning
 
-
-
-
-
-
-/obj/item/weapon/spell/projectile/ball_lightning
+/obj/item/weapon/spell/technomancer/projectile/ball_lightning
 	name = "ball lightning"
 	icon_state = "ball_lightning"
 	desc = "Don't die!"
 	cast_methods = CAST_RANGED
-	aspect = ASPECT_SHOCK
 	spell_projectile = /obj/item/projectile/energy/ball_lightning
-	energy_cost_per_shot = 800
+	energy_cost_per_shot = 1000
 	instability_per_shot = 4
-	cooldown = 10
 	fire_sound = 'sound/effects/magic/technomancer/death.ogg'
+	can_hit_shooter = TRUE
 
-/obj/item/weapon/spell/projectile/ball_lightning/tweak_projectile(obj/item/projectile/energy/ball_lightning/P, mob/living/user)
+
+/obj/item/weapon/spell/technomancer/projectile/ball_lightning/tweak_projectile(obj/item/projectile/energy/ball_lightning/P, mob/living/user)
 	if(check_for_scepter())
 		P.scepter = TRUE
 
@@ -65,8 +46,10 @@
 	hitsound = 'sound/effects/magic/technomancer/zap_hit.ogg'
 	hitsound_wall = 'sound/effects/magic/technomancer/zap_hit.ogg'
 	range = 150 // Should give around 10-14 bounces.
+	modifier_type_to_apply = /datum/modifier/shocked
+	modifier_duration = 5 SECONDS
 	var/bounce_range_cost = 10 // Decreases range by this much when it bounces.
-	var/scepter = FALSE
+	var/scepter = FALSE // If TRUE, bouncing has a chance to redirect towards an enemy instead of the normal way.
 
 /obj/item/projectile/energy/ball_lightning/check_penetrate(atom/A)
 	if(isliving(A))
@@ -93,6 +76,7 @@
 		bounce_to_enemy()
 	return TRUE
 
+// Called when casted with the Scepter of Enchancement in the offhand and it bounces.
 /obj/item/projectile/energy/ball_lightning/proc/bounce_to_enemy()
 	var/list/potential_enemies = viewers(get_turf(src))
 	var/mob/living/enemy = null
@@ -111,7 +95,7 @@
 	setAngle(angle_to_enemy)
 	return TRUE
 
-
+// Called when the projectile hits something solid like a wall, or when it explodes at the end.
 /obj/item/projectile/energy/ball_lightning/proc/zap_splash(radius = 1, strength = 5)
 	playsound(src, 'sound/effects/magic/technomancer/zap_hit.ogg', 75, 1)
 	var/turf/T = get_turf(src)
@@ -125,7 +109,7 @@
 			var/mob/living/L = thing
 			L.inflict_shock_damage(strength)
 			playsound(L, 'sound/effects/magic/technomancer/zap_hit.ogg', 75, 1)
-
+			L.add_modifier(/datum/modifier/shocked, 2 SECONDS)
 
 		// I don't like mech code. It's coarse and rough and irritating and it gets everywhere.
 		if(istype(thing, /obj/mecha))
@@ -133,6 +117,7 @@
 			M.take_damage(strength, "energy")
 			playsound(M, 'sound/effects/magic/technomancer/zap_hit.ogg', 75, 1)
 
+// Called when the projectile explodes at the end of its life.
 /obj/item/projectile/energy/ball_lightning/on_range()
 	visible_message(span("danger", "\The [src] explodes in a flash of light, sending a shock nearby!"))
 	playsound(src.loc, 'sound/effects/lightningbolt.ogg', 100, 1, extrarange = 30)
