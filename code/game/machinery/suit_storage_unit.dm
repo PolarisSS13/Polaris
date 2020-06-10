@@ -206,7 +206,7 @@
 				protected = 1
 
 	if(!protected)
-		playsound(src.loc, "sparks", 75, 1, -1)
+		playsound(src, "sparks", 75, 1, -1)
 		to_chat(user, "<font color='red'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</font>")
 		return*/
 	else  //welp, the guy is protected, we can continue
@@ -232,7 +232,7 @@
 				protected = 1
 
 	if(!protected)
-		playsound(src.loc, "sparks", 75, 1, -1)
+		playsound(src, "sparks", 75, 1, -1)
 		to_chat(user, "<font color='red'>You try to touch the controls but you get zapped. There must be a short circuit somewhere.</font>")
 		return*/
 	else
@@ -657,6 +657,36 @@
 	model_text = "Pilot"
 	departments = list("Pilot Blue","Pilot")
 
+/obj/machinery/suit_cycler/vintage
+	name = "Vintage Crew suit cycler"
+	model_text = "Vintage"
+	departments = list("Vintage Crew")
+	req_access = null
+
+/obj/machinery/suit_cycler/vintage/pilot
+	name = "Vintage Pilot suit cycler"
+	model_text = "Vintage Pilot"
+	departments = list("Vintage Pilot (Bubble Helm)","Vintage Pilot (Closed Helm)")
+	
+/obj/machinery/suit_cycler/vintage/medsci
+	name = "Vintage MedSci suit cycler"
+	model_text = "Vintage MedSci"
+	departments = list("Vintage Medical (Bubble Helm)","Vintage Medical (Closed Helm)","Vintage Research (Bubble Helm)","Vintage Research (Closed Helm)")
+	
+/obj/machinery/suit_cycler/vintage/rugged
+	name = "Vintage Ruggedized suit cycler"
+	model_text = "Vintage Ruggedized"
+	departments = list("Vintage Engineering","Vintage Marine","Vintage Officer","Vintage Mercenary")
+
+/obj/machinery/suit_cycler/vintage/omni
+	name = "Vintage Master suit cycler"
+	model_text = "Vintage Master"
+	departments = list("Vintage Crew","Vintage Engineering","Vintage Pilot (Bubble Helm)","Vintage Pilot (Closed Helm)","Vintage Medical (Bubble Helm)","Vintage Medical (Closed Helm)","Vintage Research (Bubble Helm)","Vintage Research (Closed Helm)","Vintage Marine","Vintage Officer","Vintage Mercenary")
+
+/obj/machinery/suit_cycler/vintage/Initialize()
+	species -= SPECIES_TESHARI
+	return ..()
+
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
 	return attack_hand(user)
 
@@ -1068,6 +1098,40 @@
 		if("Gem-Encrusted" || "Wizard")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/wizard
 			parent_suit = /obj/item/clothing/suit/space/void/wizard
+		//Special or Event suits
+		if("Vintage Crew")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb
+			parent_suit = /obj/item/clothing/suit/space/void/refurb
+		if("Vintage Engineering")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/engineering
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/engineering
+		if("Vintage Medical (Bubble Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/medical/alt
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/medical
+		if("Vintage Medical (Closed Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/medical
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/medical
+		if("Vintage Marine")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/marine
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/marine
+		if("Vintage Officer")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/officer
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/officer
+		if("Vintage Pilot (Bubble Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/pilot
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/pilot
+		if("Vintage Pilot (Closed Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/pilot/alt
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/pilot
+		if("Vintage Research (Bubble Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/research/alt
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/research
+		if("Vintage Research (Closed Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/research
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/research
+		if("Vintage Mercenary")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/mercenary
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/mercenary
 		//BEGIN: Space for additional downstream variants
 		
 		//END: downstream variant space
