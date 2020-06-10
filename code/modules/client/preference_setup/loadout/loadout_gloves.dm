@@ -2,7 +2,7 @@
 /datum/gear/gloves
 	display_name = "gloves, black"
 	path = /obj/item/clothing/gloves/black
-	cost = 2
+	cost = 1
 	slot = slot_gloves
 	sort_category = "Gloves and Handwear"
 
@@ -33,6 +33,7 @@
 /datum/gear/gloves/nitrile
 	display_name = "gloves, nitrile"
 	path = /obj/item/clothing/gloves/sterile/nitrile
+	cost = 2
 
 /datum/gear/gloves/orange
 	display_name = "gloves, orange"
