@@ -66,7 +66,7 @@
 
 /obj/effect/alien/resin/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
-	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
+	playsound(src, 'sound/effects/attackblob.ogg', 100, 1)
 	user.do_attack_animation(src)
 	health -= damage
 	healthcheck()
@@ -100,7 +100,7 @@
 		tforce = 10
 	else
 		tforce = AM:throwforce
-	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
+	playsound(src, 'sound/effects/attackblob.ogg', 100, 1)
 	health = max(0, health - tforce)
 	healthcheck()
 	..()
@@ -137,7 +137,7 @@
 	user.setClickCooldown(user.get_attack_speed(W))
 	var/aforce = W.force
 	health = max(0, health - aforce)
-	playsound(loc, 'sound/effects/attackblob.ogg', 100, 1)
+	playsound(src, 'sound/effects/attackblob.ogg', 100, 1)
 	healthcheck()
 	..()
 	return
@@ -330,7 +330,7 @@
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
-			playsound(loc, 'sound/items/Welder.ogg', 100, 1)
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
 	health -= damage
 	healthcheck()
@@ -443,7 +443,6 @@
 
 	var/health = 100
 	var/status = BURST //can be GROWING, GROWN or BURST; all mutually exclusive
-	flags = PROXMOVE
 
 /obj/effect/alien/egg/New()
 /*
@@ -534,7 +533,7 @@
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
-			playsound(src.loc, 'sound/items/Welder.ogg', 100, 1)
+			playsound(src, 'sound/items/Welder.ogg', 100, 1)
 
 	src.health -= damage
 	src.healthcheck()
@@ -548,15 +547,3 @@
 	if(exposed_temperature > 500 + T0C)
 		health -= 5
 		healthcheck()
-/*
-/obj/effect/alien/egg/HasProximity(atom/movable/AM as mob|obj)
-	if(status == GROWN)
-		if(!CanHug(AM))
-			return
-
-		var/mob/living/carbon/C = AM
-		if(C.stat == CONSCIOUS && C.status_flags & XENO_HOST)
-			return
-
-		Burst(0)
-*/
