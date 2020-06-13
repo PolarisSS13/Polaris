@@ -55,7 +55,7 @@
 /obj/machinery/mining/drill/Initialize()
 	. = ..()
 	default_apply_parts()
-	default_use_hicell()
+	cell = default_use_hicell()
 
 /obj/machinery/mining/drill/process()
 
