@@ -183,9 +183,11 @@ var/datum/species/shapeshifter/promethean/prometheans
 					H.adjust_nutrition(rand(5, 15))
 			if (istype(T, /turf/simulated))
 				var/turf/simulated/S = T
-				T.clean_blood()
-				S.dirt = 0
-				H.adjust_nutrition(rand(10, 20))
+				if(T.clean_blood())
+					H.adjust_nutrition(rand(10, 20))
+				if(S.dirt > 0)
+					S.dirt = 0
+					H.adjust_nutrition(rand(10, 20))
 		if(H.clean_blood(1))
 			H.adjust_nutrition(rand(5, 15))
 		if(H.r_hand)
