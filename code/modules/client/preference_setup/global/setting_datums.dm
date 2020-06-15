@@ -128,6 +128,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/inv_tooltips
+	description ="Inventory tooltips"
+	key = "INV_TOOLTIPS"
+	enabled_description = "Show"
+	disabled_description = "Hide"
+
 /datum/client_preference/attack_icons
 	description ="Attack icons"
 	key = "ATTACK_ICONS"
@@ -216,6 +222,12 @@ var/list/_client_preferences_by_type
 /datum/client_preference/instrument_toggle
 	description ="Hear In-game Instruments"
 	key = "SOUND_INSTRUMENT"
+
+/datum/client_preference/vchat_enable
+	description = "Enable/Disable VChat"
+	key = "VCHAT_ENABLE"
+	enabled_description =  "Enabled"
+	disabled_description = "Disabled"
 
 /********************
 * Staff Preferences *

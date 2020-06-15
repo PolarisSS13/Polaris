@@ -20,7 +20,7 @@
 	stuff_to_display = null
 
 /obj/item/integrated_circuit/output/screen/any_examine(mob/user)
-	to_chat(user, "There is a little screen labeled '[name]', which displays [!isnull(stuff_to_display) ? "'[stuff_to_display]'" : "nothing"].")
+	return "There is a little screen labeled '[name]', which displays [!isnull(stuff_to_display) ? "'[stuff_to_display]'" : "nothing"]."
 
 /obj/item/integrated_circuit/output/screen/do_work()
 	var/datum/integrated_io/I = inputs[1]
@@ -197,7 +197,7 @@
 		if(!selected_sound)
 			return
 		vol = between(0, vol, 100)
-		playsound(get_turf(src), selected_sound, vol, freq, -1)
+		playsound(src, selected_sound, vol, freq, -1)
 
 /obj/item/integrated_circuit/output/sound/beeper
 	name = "beeper circuit"
@@ -333,7 +333,7 @@
 	else
 		text_output += "\an ["\improper[initial_name]"] labeled '[name]'"
 	text_output += " which is currently [get_pin_data(IC_INPUT, 1) ? "lit <font color=[led_color]>¤</font>" : "unlit."]"
-	to_chat(user,jointext(text_output,null))
+	return jointext(text_output,null)
 
 /obj/item/integrated_circuit/output/led/red
 	name = "red LED"
@@ -413,8 +413,13 @@
 //	var/datum/beam/holo_beam = null // A visual effect, to make it easy to know where a hologram is coming from.
 	// It is commented out due to picking up the assembly killing the beam.
 
+/obj/item/integrated_circuit/output/holographic_projector/Initialize()
+	. = ..()
+	GLOB.moved_event.register(src, src, .proc/on_moved)
+
 /obj/item/integrated_circuit/output/holographic_projector/Destroy()
 	destroy_hologram()
+	GLOB.moved_event.unregister(src, src, .proc/on_moved)
 	return ..()
 
 /obj/item/integrated_circuit/output/holographic_projector/do_work()
@@ -505,7 +510,7 @@
 	if(hologram)
 		update_hologram()
 
-/obj/item/integrated_circuit/output/holographic_projector/on_loc_moved(atom/oldloc)
+/obj/item/integrated_circuit/output/holographic_projector/proc/on_moved()
 	if(hologram)
 		update_hologram_position()
 

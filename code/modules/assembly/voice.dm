@@ -7,7 +7,8 @@
 	var/listening = 0
 	var/recorded	//the activation message
 
-/obj/item/device/assembly/voice/hear_talk(mob/living/M as mob, msg)
+/obj/item/device/assembly/voice/hear_talk(mob/M, list/message_pieces, verb)
+	var/msg = multilingual_to_message(message_pieces)
 	if(listening)
 		recorded = msg
 		listening = 0
@@ -26,10 +27,10 @@
 
 
 /obj/item/device/assembly/voice/attack_self(mob/user)
-	if(!user)	return 0
+	if(!user)
+		return FALSE
 	activate()
-	return 1
-
+	return TRUE
 
 /obj/item/device/assembly/voice/toggle_secure()
 	. = ..()

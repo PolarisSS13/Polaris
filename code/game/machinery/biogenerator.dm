@@ -15,17 +15,14 @@
 	var/build_eff = 1
 	var/eat_eff = 1
 
-/obj/machinery/biogenerator/New()
-	..()
+/obj/machinery/biogenerator/Initialize()
+	. = ..()
 	var/datum/reagents/R = new/datum/reagents(1000)
 	reagents = R
 	R.my_atom = src
 
 	beaker = new /obj/item/weapon/reagent_containers/glass/bottle(src)
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/matter_bin(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/biogenerator/on_reagent_change()			//When the reagents change, change the icon as well.
 	update_icon()
@@ -166,11 +163,11 @@
 		processing = 1
 		update_icon()
 		updateUsrDialog()
-		playsound(src.loc, 'sound/machines/blender.ogg', 40, 1)
+		playsound(src, 'sound/machines/blender.ogg', 40, 1)
 		use_power(S * 30)
 		sleep((S + 15) / eat_eff)
 		processing = 0
-		playsound(src.loc, 'sound/machines/biogenerator_end.ogg', 40, 1)
+		playsound(src, 'sound/machines/biogenerator_end.ogg', 40, 1)
 		update_icon()
 	else
 		menustat = "void"

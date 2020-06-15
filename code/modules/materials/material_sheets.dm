@@ -362,7 +362,7 @@
 		user.setClickCooldown(time)
 		if(do_after(user, time, src) && use(1))
 			to_chat(user, "<span class='notice'>You cut up a log into planks.</span>")
-			playsound(get_turf(src), 'sound/effects/woodcutting.ogg', 50, 1)
+			playsound(src, 'sound/effects/woodcutting.ogg', 50, 1)
 			var/obj/item/stack/material/wood/existing_wood = null
 			for(var/obj/item/stack/material/wood/M in user.loc)
 				if(M.material.name == src.material.name)
@@ -385,6 +385,9 @@
 	pass_color = TRUE
 	strict_color_stacking = TRUE
 	drop_sound = 'sound/items/drop/clothing.ogg'
+
+/obj/item/stack/material/cloth/diyaab
+	color = "#c6ccf0"
 
 /obj/item/stack/material/resin
 	name = "resin"

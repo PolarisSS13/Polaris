@@ -43,7 +43,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/attack_self(mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/food/snacks/attack(mob/M as mob, mob/user as mob, def_zone)
+/obj/item/weapon/reagent_containers/food/snacks/attack(mob/living/M as mob, mob/user as mob, def_zone)
 	if(reagents && !reagents.total_volume)
 		to_chat(user, "<span class='danger'>None of [src] left!</span>")
 		user.drop_from_inventory(src)
@@ -78,9 +78,6 @@
 				to_chat(M, "<span class='notice'>You take a bite of [src].</span>")
 			if (fullness > 350 && fullness <= 550)
 				to_chat(M, "<span class='notice'>You unwillingly chew a bit of [src].</span>")
-			if (fullness > (550 * (1 + M.overeatduration / 2000)))	// The more you eat - the more you can eat
-				to_chat(M, "<span class='danger'>You cannot force any more of [src] to go down your throat.</span>")
-				return 0
 
 		else if(user.a_intent == I_HURT)
 			return ..()
@@ -108,11 +105,7 @@
 					to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
 					return
 
-				if (fullness <= (550 * (1 + M.overeatduration / 1000)))
-					user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
-				else
-					user.visible_message("<span class='danger'>[user] cannot force anymore of [src] down [M]'s throat.</span>")
-					return 0
+				user.visible_message("<span class='danger'>[user] attempts to feed [M] [src].</span>")
 
 				user.setClickCooldown(user.get_attack_speed(src))
 				if(!do_mob(user, M)) return
@@ -127,7 +120,7 @@
 				return
 
 		if(reagents)								//Handle ingestion of the reagent.
-			playsound(M.loc,'sound/items/eatfood.ogg', rand(10,50), 1)
+			playsound(M,'sound/items/eatfood.ogg', rand(10,50), 1)
 			if(reagents.total_volume)
 				if(reagents.total_volume > bitesize)
 					reagents.trans_to_mob(M, bitesize, CHEM_INGEST)
@@ -140,16 +133,16 @@
 	return 0
 
 /obj/item/weapon/reagent_containers/food/snacks/examine(mob/user)
-	if(!..(user, 1))
-		return
-	if (bitecount==0)
-		return
-	else if (bitecount==1)
-		to_chat(user, "<font color='blue'>\The [src] was bitten by someone!</font>")
-	else if (bitecount<=3)
-		to_chat(user, "<font color='blue'>\The [src] was bitten [bitecount] times!</font>")
-	else
-		to_chat(user, "<font color='blue'>\The [src] was bitten multiple times!</font>")
+	. = ..()
+	if(Adjacent(user))
+		if(bitecount==0)
+			return .
+		else if (bitecount==1)
+			. += "<span class='notice'>It was bitten by someone!</span>"
+		else if (bitecount<=3)
+			. += "<span class='notice'>It was bitten [bitecount] times!</span>"
+		else
+			. += "<span class='notice'>It was bitten multiple times!</span>"
 
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/storage))
@@ -4322,11 +4315,10 @@
 	icon_state = "bagelplain"
 
 /obj/item/weapon/reagent_containers/food/snacks/bageltwo/Initialize()
-	. = ..()
+	..() //Not returning . because asking to be qdel'd below.
 	spawn_bagels()
 	spawn_bagels()
-	sleep(30)
-	qdel(src)
+	return INITIALIZE_HINT_QDEL
 
 /obj/item/weapon/reagent_containers/food/snacks/bageltwo/proc/spawn_bagels()
 	var/build_path = /obj/item/weapon/reagent_containers/food/snacks/bagelplain

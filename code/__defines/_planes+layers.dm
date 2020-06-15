@@ -22,7 +22,7 @@ What can I do with Planesmasters?
 	Planesmasters can be used as a neater way to deal with client images or potentially to do some neat things
 
 How do planes work?
-	A plane can be any integer from -100 to 100. (If you want more, bug lummox.)
+	A plane can be any integer from -10000 to 10000.
 	All planes above 0, the 'base plane', are visible even when your character cannot 'see' them, for example, the HUD.
 	All planes below 0, the 'base plane', are only visible when a character can see them.
 
@@ -40,10 +40,14 @@ What is the naming convention for planes or layers?
 
 */
 
+
 #define SPACE_PLANE     		-82	// Reserved for use in space/parallax
-#define PARALLAX_PLANE  		-80	// Reserved for use in space/parallax
-#define SKYBOX_PLANE			-79	// Skybox parallax
-#define DUST_PLANE				-78 // For dust overlay on space turfs. Should be above skybox for parallax effect.
+#define PARALLAX_PLANE  		-81	// Reserved for use in space/parallax
+#define SKYBOX_PLANE			-80	// Skybox parallax
+#define DUST_PLANE				-79 // For dust overlay on space turfs. Should be above skybox for parallax effect.
+
+#define PLANE_LOOKINGGLASS		-78 // For the Looking Glass holodecks
+#define PLANE_LOOKINGGLASS_IMG	-77 // For the Looking Glass holodecks
 
 // OPENSPACE_PLANE reserves all planes between OPENSPACE_PLANE_START and OPENSPACE_PLANE_END inclusive
 #define OPENSPACE_PLANE 		-75 // /turf/simulated/open will use OPENSPACE_PLANE + z (Valid z's being 2 thru 17)
@@ -52,7 +56,6 @@ What is the naming convention for planes or layers?
 #define OVER_OPENSPACE_PLANE	-57
 
 // Turf Planes
-#define SPACE_PLANE				-82 // Space turfs themselves
 #define PLATING_PLANE			-44 // Plating
 	#define DISPOSAL_LAYER		2.1 // Under objects, even when planeswapped
 	#define PIPES_LAYER			2.2	// Under objects, even when planeswapped
@@ -61,6 +64,8 @@ What is the naming convention for planes or layers?
 	#define ABOVE_UTILITY		2.5 // Above stuff like pipes and wires
 #define TURF_PLANE				-45 // Turfs themselves, most flooring
 	#define WATER_FLOOR_LAYER	2.0 // The 'bottom' of water tiles.
+	#define BUILTIN_DECAL_LAYER 2.01 // For floors that automatically add decal overlays
+	#define MAPPER_DECAL_LAYER	2.02 // For intentionally placed floor decal overlays
 	#define UNDERWATER_LAYER	2.5 // Anything on this layer will render under the water layer.
 	#define WATER_LAYER			3.0 // Layer for water overlays.
 	#define ABOVE_TURF_LAYER	3.1	// Snow and wallmounted/floormounted equipment

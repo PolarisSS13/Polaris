@@ -232,6 +232,10 @@ var/list/gamemode_cache = list()
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
 
+	var/allow_byond_links = 0
+	var/allow_discord_links = 0
+	var/allow_url_links = 0					// honestly if I were you i'd leave this one off, only use in dire situations
+
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
 	var/list/ert_species = list(SPECIES_HUMAN)
@@ -264,9 +268,14 @@ var/list/gamemode_cache = list()
 	var/sqlite_feedback_cooldown = 0 // How long one must wait, in days, to submit another feedback form. Used to help prevent spam, especially with privacy active. 0 = No limit.
 	var/sqlite_feedback_min_age = 0 // Used to block new people from giving feedback. This metric is very bad but it can help slow down spammers.
 
+	var/defib_timer = 10 // How long until someone can't be defibbed anymore, in minutes.
+	var/defib_braindamage_timer = 2 // How long until someone will get brain damage when defibbed, in minutes. The closer to the end of the above timer, the more brain damage they get.
+
 	// disables the annoying "You have already logged in this round, disconnect or be banned" popup for multikeying, because it annoys the shit out of me when testing.
 	var/disable_cid_warn_popup = FALSE
 
+	// whether or not to use the nightshift subsystem to perform lighting changes
+	var/static/enable_night_shifts = FALSE
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -418,6 +427,15 @@ var/list/gamemode_cache = list()
 
 				if ("allow_admin_spawning")
 					config.allow_admin_spawning = 1
+					
+				if ("allow_byond_links")
+					allow_byond_links = 1
+
+				if ("allow_discord_links")
+					allow_discord_links = 1	
+
+				if ("allow_url_links")
+					allow_url_links = 1					
 
 				if ("no_dead_vote")
 					config.vote_no_dead = 1
@@ -877,8 +895,17 @@ var/list/gamemode_cache = list()
 				if("sqlite_feedback_cooldown")
 					config.sqlite_feedback_cooldown = text2num(value)
 
+				if("defib_timer")
+					config.defib_timer = text2num(value)
+
+				if("defib_braindamage_timer")
+					config.defib_braindamage_timer = text2num(value)
+
 				if("disable_cid_warn_popup")
 					config.disable_cid_warn_popup = TRUE
+
+				if("enable_night_shifts")
+					config.enable_night_shifts = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

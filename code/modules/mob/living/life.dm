@@ -159,9 +159,14 @@
 	//Eyes
 	if(sdisabilities & BLIND || stat)	//blindness from disability or unconsciousness doesn't get better on its own
 		SetBlinded(1)
+		throw_alert("blind", /obj/screen/alert/blind)
 	else if(eye_blind)			//blindness, heals slowly over time
 		AdjustBlinded(-1)
-	else if(eye_blurry)			//blurry eyes heal slowly
+		throw_alert("blind", /obj/screen/alert/blind)
+	else
+		clear_alert("blind")
+	
+	if(eye_blurry)			//blurry eyes heal slowly
 		eye_blurry = max(eye_blurry-1, 0)
 
 	//Ears
@@ -172,13 +177,11 @@
 		if(ear_damage < 100)
 			adjustEarDamage(-0.05,-1)
 
-//this handles hud updates. Calls update_vision() and handle_hud_icons()
 /mob/living/handle_regular_hud_updates()
 	if(!client)
 		return 0
 	..()
 
-	handle_vision()
 	handle_darksight()
 	handle_hud_icons()
 
@@ -189,6 +192,13 @@
 		see_invisible = SEE_INVISIBLE_NOLIGHTING
 	else
 		see_invisible = initial(see_invisible)
+
+	sight = initial(sight)
+
+	for(var/datum/modifier/M in modifiers)
+		if(!isnull(M.vision_flags))
+			sight |= M.vision_flags
+
 	return
 
 /mob/living/proc/handle_hud_icons()

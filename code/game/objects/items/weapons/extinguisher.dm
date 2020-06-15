@@ -40,8 +40,9 @@
 	. = ..()
 
 /obj/item/weapon/extinguisher/examine(mob/user)
-	if(..(user, 0))
-		to_chat(user, "[bicon(src)] [src.name] contains [src.reagents.total_volume] units of water left!")
+	. = ..()
+	if(get_dist(user, src) == 0)
+		. += "[src] has [src.reagents.total_volume] units of water left!"
 
 /obj/item/weapon/extinguisher/attack_self(mob/user as mob)
 	safety = !safety
@@ -74,7 +75,7 @@
 		var/obj/o = target
 		var/amount = o.reagents.trans_to_obj(src, 50)
 		to_chat(user, "<span class='notice'>You fill [src] with [amount] units of the contents of [target].</span>")
-		playsound(src.loc, 'sound/effects/refill.ogg', 50, 1, -6)
+		playsound(src, 'sound/effects/refill.ogg', 50, 1, -6)
 		return
 
 	if (!safety)
@@ -87,7 +88,7 @@
 
 		src.last_use = world.time
 
-		playsound(src.loc, 'sound/effects/extinguish.ogg', 75, 1, -3)
+		playsound(src, 'sound/effects/extinguish.ogg', 75, 1, -3)
 
 		var/direction = get_dir(src,target)
 

@@ -12,6 +12,17 @@
 #define NO_INFECT		  0x400  // Don't allow infections in limbs or organs, similar to IS_PLANT, without other strings.
 // unused: 0x8000 - higher than this will overflow
 
+// Species EMP vuln for carbons
+#define EMP_PAIN	0x1	// EMPs cause pain
+#define EMP_BLIND	0x2	// EMPs cause screenflash and blindness
+#define EMP_DEAFEN	0x4	// EMPs cause deafness
+#define EMP_CONFUSE	0x8	// EMPs cause disorientation
+#define EMP_WEAKEN	0x10	// EMPs cause collapsing (at high severity only)
+#define EMP_BRUTE_DMG	0x20	// EMPs inflict brute damage
+#define EMP_BURN_DMG	0x40	// EMPs inflict burn damage
+#define EMP_TOX_DMG	0x80	// EMPs inflict toxin damage
+#define EMP_OXY_DMG	0x100	// EMPs inflict oxy damage
+
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
 #define SPECIES_IS_RESTRICTED     0x2    // Is not a core/normally playable species. (castes, mutantraces)
@@ -53,12 +64,14 @@
 #define LANGUAGE_AKHANI "Akhani"
 #define LANGUAGE_ALAI "Alai"
 #define LANGUAGE_ZADDAT "Vedahq"
+#define LANGUAGE_PROMETHEAN "Promethean Biolinguistics"
+#define LANGUAGE_BLOB "Blob"
 #define LANGUAGE_GIBBERISH "Babel"
 
 // Language flags.
 #define WHITELISTED  1   // Language is available if the speaker is whitelisted.
 #define RESTRICTED   2   // Language can only be acquired by spawning or an admin.
-#define NONVERBAL    4   // Language has a significant non-verbal component. Speech is garbled without line-of-sight.
+#define NONVERBAL    4   // Language uses both verbal and non-verbal components completely to communicate. Out-of-sight speech is garbled.
 #define SIGNLANG     8   // Language is completely non-verbal. Speech is displayed through emotes for those who can understand.
 #define HIVEMIND     16  // Broadcast to all mobs with this language.
 #define NONGLOBAL    32  // Do not add to general languages list.

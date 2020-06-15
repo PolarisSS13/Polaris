@@ -100,6 +100,7 @@ h1.alert, h2.alert		{color: #000000;}
 .changeling				{color: #800080;}
 .vox					{color: #AA00AA;}
 .zaddat					{color: #941C1C;}
+.promethean				{color: #5A5A5A;}
 .rough					{font-family: "Trebuchet MS", cursive, sans-serif;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 .terminus				{font-family: "Times New Roman", Times, serif, sans-serif}
@@ -113,5 +114,14 @@ BIG IMG.icon 			{width: 32px; height: 32px;}
 .debug_info						{}
 .debug_debug					{color:#0000FF;}
 .debug_trace					{color:#888888;}
+
+.black					{color: #000000;}
+.darkgray				{color: #808080;}
+.gray					{color: #A9A9A9;}
+.red					{color: #FF0000;}
+.orange					{color: #FF8C00;}
+.blue					{color: #0000FF;}
+.green					{color: #00DD00;}
+
 
 </style>"}

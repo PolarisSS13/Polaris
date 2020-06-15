@@ -25,14 +25,14 @@
 	. = ..()
 
 /obj/structure/reagent_dispensers/examine(mob/user)
-	if(!..(user, 2))
-		return
-	to_chat(user, "<span class='notice'>It contains:</span>")
-	if(reagents && reagents.reagent_list.len)
-		for(var/datum/reagent/R in reagents.reagent_list)
-			to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
-	else
-		to_chat(user, "<span class='notice'>Nothing.</span>")
+	. = ..()
+	if(get_dist(user, src) <= 2)
+		. += "<span class='notice'>It contains:</span>"
+		if(reagents && reagents.reagent_list.len)
+			for(var/datum/reagent/R in reagents.reagent_list)
+				. += "<span class='notice'>[R.volume] units of [R.name]</span>"
+		else
+			. += "<span class='notice'>Nothing.</span>"
 
 /obj/structure/reagent_dispensers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"
@@ -100,12 +100,12 @@
 	reagents.add_reagent("fuel",1000)
 
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
-	if(!..(user, 2))
-		return
-	if (modded)
-		to_chat(user, "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>")
-	if(rig)
-		to_chat(user, "<span class='notice'>There is some kind of device rigged to the tank.</span>")
+	. = ..()
+	if(get_dist(user, src) <= 2)
+		if(modded)
+			. += "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>"
+		if(rig)
+			. += "<span class='notice'>There is some kind of device rigged to the tank.</span>"
 
 /obj/structure/reagent_dispensers/fueltank/attack_hand()
 	if (rig)
@@ -234,15 +234,26 @@
 	update_icon()
 
 /obj/structure/reagent_dispensers/water_cooler/examine(mob/user)
-	..()
+	. = ..()
 	if(cupholder)
-		to_chat(user, "<span class='notice'>There are [cups] cups in the cup dispenser.</span>")
+		. += "<span class='notice'>There are [cups] cups in the cup dispenser.</span>"
+
+/obj/structure/reagent_dispensers/water_cooler/verb/rotate_clockwise()
+	set name = "Rotate Cooler Clockwise"
+	set category = "Object"
+	set src in oview(1)
+
+	if (src.anchored || usr:stat)
+		to_chat(usr, "It is fastened to the floor!")
+		return 0
+	src.set_dir(turn(src.dir, 270))
+	return 1
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/I as obj, mob/user as mob)
 	if(I.is_wrench())
 		src.add_fingerprint(user)
 		if(bottle)
-			playsound(loc, I.usesound, 50, 1)
+			playsound(src, I.usesound, 50, 1)
 			if(do_after(user, 20) && bottle)
 				to_chat(user, "<span class='notice'>You unfasten the jug.</span>")
 				var/obj/item/weapon/reagent_containers/glass/cooler_bottle/G = new /obj/item/weapon/reagent_containers/glass/cooler_bottle( src.loc )
@@ -261,12 +272,12 @@
 				if(!src) return
 				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 				anchored = !anchored
-				playsound(loc, I.usesound, 50, 1)
+				playsound(src, I.usesound, 50, 1)
 		return
 
 	if(I.is_screwdriver())
 		if(cupholder)
-			playsound(loc, I.usesound, 50, 1)
+			playsound(src, I.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You take the cup dispenser off.</span>")
 			new /obj/item/stack/material/plastic( src.loc )
 			if(cups)
@@ -277,7 +288,7 @@
 			update_icon()
 			return
 		if(!bottle && !cupholder)
-			playsound(loc, I.usesound, 50, 1)
+			playsound(src, I.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You start taking the water-cooler apart.</span>")
 			if(do_after(user, 20 * I.toolspeed) && !bottle && !cupholder)
 				to_chat(user, "<span class='notice'>You take the water-cooler apart.</span>")
@@ -311,7 +322,7 @@
 				var/obj/item/stack/material/plastic/P = I
 				src.add_fingerprint(user)
 				to_chat(user, "<span class='notice'>You start to attach a cup dispenser onto the water-cooler.</span>")
-				playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+				playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 				if(do_after(user, 20) && !cupholder && anchored)
 					if (P.use(1))
 						to_chat(user, "<span class='notice'>You attach a cup dispenser onto the water-cooler.</span>")
@@ -327,7 +338,7 @@
 	if(cups)
 		new /obj/item/weapon/reagent_containers/food/drinks/sillycup(src.loc)
 		cups--
-		update_icon()
+		flick("[icon_state]-vend", src)
 		return
 
 /obj/structure/reagent_dispensers/water_cooler/update_icon()
@@ -336,12 +347,6 @@
 	var/image/I
 	if(bottle)
 		I = image(icon, "water_cooler_bottle")
-		overlays += I
-	if(cupholder)
-		I = image(icon, "water_cooler_cupholder")
-		overlays += I
-	if(cups)
-		I = image(icon, "water_cooler_cups")
 		overlays += I
 	return
 

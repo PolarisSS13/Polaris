@@ -28,6 +28,7 @@
 		inv_box.icon = ui_style
 		inv_box.color = ui_color
 		inv_box.alpha = ui_alpha
+		inv_box.hud = src
 
 		var/list/slot_data =  hud_data.gear[gear_slot]
 		inv_box.name =        gear_slot
@@ -192,6 +193,7 @@
 		using.screen_loc = ui_swaphand1
 		using.color = ui_color
 		using.alpha = ui_alpha
+		using.hud = src
 		src.adding += using
 
 		using = new /obj/screen/inventory()
@@ -201,6 +203,7 @@
 		using.screen_loc = ui_swaphand2
 		using.color = ui_color
 		using.alpha = ui_alpha
+		using.hud = src
 		src.adding += using
 
 	if(hud_data.has_resist)
@@ -236,62 +239,19 @@
 		mymob.internals = new /obj/screen()
 		mymob.internals.icon = ui_style
 		mymob.internals.icon_state = "internal0"
+		if(istype(target.internal, /obj/item/weapon/tank)) //Internals on already? Iight, prove it
+			mymob.internals.icon_state = "internal1"
 		mymob.internals.name = "internal"
 		mymob.internals.screen_loc = ui_internal
 		hud_elements |= mymob.internals
 
 	if(hud_data.has_warnings)
-		mymob.oxygen = new /obj/screen()
-		mymob.oxygen.icon = ui_style
-		mymob.oxygen.icon_state = "oxy0"
-		mymob.oxygen.name = "oxygen"
-		mymob.oxygen.screen_loc = ui_oxygen
-		hud_elements |= mymob.oxygen
-
-		mymob.toxin = new /obj/screen()
-		mymob.toxin.icon = ui_style
-		mymob.toxin.icon_state = "tox0"
-		mymob.toxin.name = "toxin"
-		mymob.toxin.screen_loc = ui_toxin
-		hud_elements |= mymob.toxin
-
-		mymob.fire = new /obj/screen()
-		mymob.fire.icon = ui_style
-		mymob.fire.icon_state = "fire0"
-		mymob.fire.name = "fire"
-		mymob.fire.screen_loc = ui_fire
-		hud_elements |= mymob.fire
-
 		mymob.healths = new /obj/screen()
 		mymob.healths.icon = ui_style
 		mymob.healths.icon_state = "health0"
 		mymob.healths.name = "health"
 		mymob.healths.screen_loc = ui_health
 		hud_elements |= mymob.healths
-
-	if(hud_data.has_pressure)
-		mymob.pressure = new /obj/screen()
-		mymob.pressure.icon = ui_style
-		mymob.pressure.icon_state = "pressure0"
-		mymob.pressure.name = "pressure"
-		mymob.pressure.screen_loc = ui_pressure
-		hud_elements |= mymob.pressure
-
-	if(hud_data.has_bodytemp)
-		mymob.bodytemp = new /obj/screen()
-		mymob.bodytemp.icon = ui_style
-		mymob.bodytemp.icon_state = "temp1"
-		mymob.bodytemp.name = "body temperature"
-		mymob.bodytemp.screen_loc = ui_temp
-		hud_elements |= mymob.bodytemp
-
-	if(hud_data.has_nutrition)
-		mymob.nutrition_icon = new /obj/screen()
-		mymob.nutrition_icon.icon = ui_style
-		mymob.nutrition_icon.icon_state = "nutrition0"
-		mymob.nutrition_icon.name = "nutrition"
-		mymob.nutrition_icon.screen_loc = ui_nutrition
-		hud_elements |= mymob.nutrition_icon
 
 	mymob.ling_chem_display = new /obj/screen/ling/chems()
 	mymob.ling_chem_display.screen_loc = ui_ling_chemical_display
@@ -341,11 +301,13 @@
 	mymob.radio_use_icon.color = ui_color
 	mymob.radio_use_icon.alpha = ui_alpha
 
-	mymob.client.screen = list()
+	if(mymob.client)
+		mymob.client.screen = list()
 
-	mymob.client.screen += hud_elements
-	mymob.client.screen += src.adding + src.hotkeybuttons
-	mymob.client.screen += mymob.client.void
+		mymob.client.screen += hud_elements
+		mymob.client.screen += src.adding + src.hotkeybuttons
+		mymob.client.screen += mymob.client.void
+
 	inventory_shown = 0
 
 	return

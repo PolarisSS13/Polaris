@@ -14,9 +14,9 @@
 	clicksound = 'sound/machines/buttonbeep.ogg'
 	clickvol = 30
 
-/obj/machinery/sleep_console/New()
-	..()
+/obj/machinery/sleep_console/Initialize()
 	findsleeper()
+	return ..()
 
 /obj/machinery/sleep_console/Destroy()
 	if(sleeper)
@@ -24,14 +24,13 @@
 	return ..()
 
 /obj/machinery/sleep_console/proc/findsleeper()
-	spawn(5)
-		var/obj/machinery/sleeper/sleepernew = null
-		for(dir in list(NORTH, EAST, SOUTH, WEST)) // Loop through every direction
-			sleepernew = locate(/obj/machinery/sleeper, get_step(src, dir)) // Try to find a scanner in that direction
-			if(sleepernew)
-				sleeper = sleepernew
-				sleepernew.console = src
-				set_dir(get_dir(src, sleepernew))
+	var/obj/machinery/sleeper/sleepernew = null
+	for(var/direction in GLOB.cardinal) // Loop through every direction
+		sleepernew = locate(/obj/machinery/sleeper, get_step(src, direction)) // Try to find a scanner in that direction
+		if(sleepernew)
+			sleeper = sleepernew
+			sleepernew.console = src
+			set_dir(get_dir(src, sleepernew))
 
 
 /obj/machinery/sleep_console/attack_ai(var/mob/user)
@@ -181,21 +180,10 @@
 	idle_power_usage = 15
 	active_power_usage = 200 //builtin health analyzer, dialysis machine, injectors.
 
-/obj/machinery/sleeper/New()
-	..()
+/obj/machinery/sleeper/Initialize()
+	. = ..()
 	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	component_parts += new /obj/item/weapon/reagent_containers/glass/beaker(src)
-	component_parts += new /obj/item/weapon/reagent_containers/syringe(src)
-	component_parts += new /obj/item/weapon/reagent_containers/syringe(src)
-	component_parts += new /obj/item/weapon/reagent_containers/syringe(src)
-	component_parts += new /obj/item/stack/material/glass/reinforced(src, 2)
-
-	RefreshParts()
+	default_apply_parts()
 
 /obj/machinery/sleeper/Destroy()
 	if(console)
@@ -208,8 +196,6 @@
 
 	available_chemicals.Cut()
 	available_chemicals = base_chemicals.Copy()
-	idle_power_usage = initial(idle_power_usage)
-	active_power_usage = initial(active_power_usage)
 
 	for(var/obj/item/weapon/stock_parts/P in component_parts)
 		if(istype(P, /obj/item/weapon/stock_parts/capacitor))
@@ -217,8 +203,8 @@
 
 	cap_rating = max(1, round(cap_rating / 2))
 
-	idle_power_usage /= cap_rating
-	active_power_usage /= cap_rating
+	update_idle_power_usage(initial(idle_power_usage) / cap_rating)
+	update_active_power_usage(initial(active_power_usage) / cap_rating)
 
 	if(!limited)
 		for(var/obj/item/weapon/stock_parts/P in component_parts)
@@ -255,8 +241,6 @@
 		return
 	if(occupant)
 		occupant.Stasis(stasis_level)
-		if(stasis_level >= 100 && occupant.timeofdeath)
-			occupant.timeofdeath += 1 SECOND
 
 		if(filtering > 0)
 			if(beaker)

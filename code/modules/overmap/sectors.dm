@@ -6,6 +6,7 @@
 	scannable = TRUE
 
 	var/list/map_z = null
+	var/list/extra_z_levels //if you need to manually insist that these z-levels are part of this sector, for things like edge-of-map step trigger transitions rather than multi-z complexes
 
 	var/list/initial_generic_waypoints //store landmark_tag of landmarks that should be added to the actual lists below on init.
 	var/list/initial_restricted_waypoints //For use with non-automatic landmarks (automatic ones add themselves).
@@ -59,6 +60,8 @@
 
 /obj/effect/overmap/visitable/proc/find_z_levels()
 	map_z = GetConnectedZlevels(z)
+	if(LAZYLEN(extra_z_levels))
+		map_z |= extra_z_levels
 
 /obj/effect/overmap/visitable/proc/register_z_levels()
 	for(var/zlevel in map_z)
@@ -71,6 +74,12 @@
 		global.using_map.station_levels |= map_z
 		global.using_map.contact_levels |= map_z
 		global.using_map.map_levels |= map_z
+
+/obj/effect/overmap/visitable/proc/get_space_zlevels()
+	if(in_space)
+		return map_z
+	else
+		return list()
 
 //Helper for init.
 /obj/effect/overmap/visitable/proc/check_ownership(obj/object)
@@ -142,7 +151,7 @@
 	var/area/overmap/A = new
 	for (var/square in block(locate(1,1,global.using_map.overmap_z), locate(global.using_map.overmap_size,global.using_map.overmap_size,global.using_map.overmap_z)))
 		var/turf/T = square
-		if(T.x == global.using_map.overmap_size || T.y == global.using_map.overmap_size)
+		if(T.x == 1 || T.y == 1 || T.x == global.using_map.overmap_size || T.y == global.using_map.overmap_size)
 			T = T.ChangeTurf(/turf/unsimulated/map/edge)
 		else
 			T = T.ChangeTurf(/turf/unsimulated/map)

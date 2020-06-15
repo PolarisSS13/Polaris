@@ -29,10 +29,20 @@
 		if(prefs.muted & MUTE_OOC)
 			to_chat(src, "<span class='danger'>You cannot use OOC (muted).</span>")
 			return
-		if(findtext(msg, "byond://"))
+		if(findtext(msg, "byond://") && !config.allow_byond_links)
 			to_chat(src, "<B>Advertising other servers is not allowed.</B>")
 			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
+			return
+		if(findtext(msg, "discord.gg") && !config.allow_discord_links)
+			to_chat(src, "<B>Advertising discords is not allowed.</B>")
+			log_admin("[key_name(src)] has attempted to advertise a discord server in OOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to advertise a discord server in OOC: [msg]")
+			return
+		if((findtext(msg, "http://") || findtext(msg, "https://")) && !config.allow_url_links)
+			to_chat(src, "<B>Posting external links is not allowed.</B>")
+			log_admin("[key_name(src)] has attempted to post a link in OOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to post a link in OOC: [msg]")
 			return
 
 	log_ooc(msg, src)
@@ -43,14 +53,15 @@
 	var/ooc_style = "everyone"
 	if(holder && !holder.fakekey)
 		ooc_style = "elevated"
-		if(holder.rights & R_EVENT)
-			ooc_style = "event_manager"
-		if(holder.rights & R_MOD)
-			ooc_style = "moderator"
-		if(holder.rights & R_DEBUG)
-			ooc_style = "developer"
 		if(holder.rights & R_ADMIN)
 			ooc_style = "admin"
+		else if(holder.rights & R_EVENT)
+			ooc_style = "event_manager"
+		else if(holder.rights & R_DEBUG)
+			ooc_style = "developer"
+		else if(holder.rights & R_MOD)
+			ooc_style = "moderator"
+
 
 	for(var/client/target in GLOB.clients)
 		if(target.is_preference_enabled(/datum/client_preference/show_ooc))
@@ -102,10 +113,20 @@
 		if(prefs.muted & MUTE_OOC)
 			to_chat(src, "<span class='danger'>You cannot use OOC (muted).</span>")
 			return
-		if(findtext(msg, "byond://"))
+		if(findtext(msg, "byond://") && !config.allow_byond_links)
 			to_chat(src, "<B>Advertising other servers is not allowed.</B>")
 			log_admin("[key_name(src)] has attempted to advertise in OOC: [msg]")
 			message_admins("[key_name_admin(src)] has attempted to advertise in OOC: [msg]")
+			return
+		if(findtext(msg, "discord.gg") && !config.allow_discord_links)
+			to_chat(src, "<B>Advertising discords is not allowed.</B>")
+			log_admin("[key_name(src)] has attempted to advertise a discord server in OOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to advertise a discord server in OOC: [msg]")
+			return
+		if((findtext(msg, "http://") || findtext(msg, "https://")) && !config.allow_url_links)
+			to_chat(src, "<B>Posting external links is not allowed.</B>")
+			log_admin("[key_name(src)] has attempted to post a link in OOC: [msg]")
+			message_admins("[key_name_admin(src)] has attempted to post a link in OOC: [msg]")
 			return
 
 	log_looc(msg,src)

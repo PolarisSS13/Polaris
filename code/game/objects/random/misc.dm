@@ -504,7 +504,7 @@
 				/obj/item/toy/balloon,
 				/obj/item/toy/crossbow,
 				/obj/item/toy/blink,
-				/obj/item/toy/waterflower,
+				/obj/item/weapon/reagent_containers/spray/waterflower,
 				/obj/item/toy/eight_ball,
 				/obj/item/toy/eight_ball/conch,
 				/obj/item/toy/prize/ripley,
@@ -700,3 +700,16 @@
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/purple,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/grey,
 				/obj/item/weapon/reagent_containers/food/condiment/small/packet/crayon/brown)
+
+/obj/random/thermalponcho
+	name = "random thermal poncho"
+	desc = "This is a thermal poncho spawn."
+	icon = 'icons/obj/clothing/ties.dmi'
+	icon_state = "classicponcho"
+
+/obj/random/thermalponcho/item_to_spawn()
+	return pick(prob(5);/obj/item/clothing/accessory/poncho/thermal,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/red,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/green,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/purple,
+				prob(3);/obj/item/clothing/accessory/poncho/thermal/blue)
