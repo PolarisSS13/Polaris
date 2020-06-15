@@ -5,10 +5,13 @@
 
 	var/datum/gas_mixture/atmosphere
 
-	var/grass_color
-	var/surface_color = "#735555"
+	var/atmosphere_color = "FFFFFF"
+	var/mountain_color = "#735555"
+	var/surface_color = "#304A35"
 	var/water_color = "#436499"
 	var/has_rings = FALSE // set to true to get rings
+	var/icecaps = null // Iconstate in icons/skybox/planet.dmi for the planet's icecaps
+	var/ice_color = "E6F2F6"
 	var/ring_color
 	var/skybox_offset_x = 0
 	var/skybox_offset_y = 0
@@ -24,12 +27,24 @@
 //	for(var/datum/exoplanet_theme/theme in themes)
 //		skybox_image.overlays += theme.get_planet_image_extra()
 
-	if(water_color) //TODO: move water levels out of randommap into exoplanet
+	if(mountain_color)
+		var/image/mountains = image('icons/skybox/planet.dmi', "mountains")
+		mountains.color = mountain_color
+		mountains.appearance_flags = PIXEL_SCALE
+		skybox_image.overlays += mountains
+
+	if(water_color)
 		var/image/water = image('icons/skybox/planet.dmi', "water")
 		water.color = water_color
 		water.appearance_flags = PIXEL_SCALE
 //		water.transform = water.transform.Turn(rand(0,360))
 		skybox_image.overlays += water
+
+	if(icecaps)
+		var/image/ice = image('icons/skybox/planet.dmi', icecaps)
+		ice.color = ice_color
+		ice.appearance_flags = PIXEL_SCALE
+		skybox_image.overlays += ice
 
 	if(atmosphere && atmosphere.return_pressure() > SOUND_MINIMUM_PRESSURE)
 
@@ -80,4 +95,4 @@
 	return surface_color
 
 /obj/effect/overmap/visitable/planet/proc/get_atmosphere_color()
-	return "FFFFFF"
+	return atmosphere_color

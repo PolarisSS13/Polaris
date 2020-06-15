@@ -7,11 +7,15 @@
 	start_y  = 10
 	skybox_offset_x = 128
 	skybox_offset_y = 128
+	surface_color = "#2D545B"
+	mountain_color = "#735555"
+	ice_color = "FFFFFF"
+	icecaps = "icecaps"
 
 /obj/effect/overmap/visitable/planet/Sif/Initialize()
 	atmosphere = new(CELL_VOLUME)
-	atmosphere.adjust_gas("oxygen", MOLES_O2STANDARD, 0)
-	atmosphere.adjust_gas("nitrogen", MOLES_N2STANDARD)
+	atmosphere.adjust_gas_temp("oxygen", MOLES_O2STANDARD, 273)
+	atmosphere.adjust_gas_temp("nitrogen", MOLES_N2STANDARD, 273)
 
 	. = ..()
 
