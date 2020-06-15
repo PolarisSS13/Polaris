@@ -29,6 +29,7 @@
 /datum/gear/gloves/latex
 	display_name = "gloves, latex"
 	path = /obj/item/clothing/gloves/sterile/latex
+	cost = 2
 
 /datum/gear/gloves/nitrile
 	display_name = "gloves, nitrile"
