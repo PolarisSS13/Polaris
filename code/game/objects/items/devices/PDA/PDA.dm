@@ -456,10 +456,10 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			icon = 'icons/obj/pda_wrist.dmi'
 			item_state = icon_state
 			item_icons = list(
-    			slot_belt_str = 'icons/mob/pda_wrist.dmi',
-    			slot_wear_id_str = 'icons/mob/pda_wrist.dmi',
-    			slot_gloves_str = 'icons/mob/pda_wrist.dmi'
-  			)
+				slot_belt_str = 'icons/mob/pda_wrist.dmi',
+				slot_wear_id_str = 'icons/mob/pda_wrist.dmi',
+				slot_gloves_str = 'icons/mob/pda_wrist.dmi'
+			)
 			desc = "A portable microcomputer by Thinktronic Systems, LTD. This model is a wrist-bound version."
 			slot_flags = SLOT_ID | SLOT_BELT | SLOT_GLOVES
 			sprite_sheets = list(
