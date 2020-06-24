@@ -1227,7 +1227,7 @@
 
 
 /obj/mecha/verb/toggle_internal_tank()
-	set name = "Toggle internal airtank usage."
+	set name = "Toggle internal airtank usage"
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
