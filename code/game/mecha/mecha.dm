@@ -100,7 +100,7 @@
 	var/static/image/radial_image_lighttoggle = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_light")
 	var/static/image/radial_image_statpanel = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_examine2")
 
-	var/straffing = 0
+	var/strafing = 0
 
 /obj/mecha/drain_power(var/drain_check)
 
@@ -512,9 +512,9 @@
 
 	//Turning
 
-	else if(src.dir!=direction && straffing)
+	else if(src.dir!=direction && strafing)
 
-		if(straffing)
+		if(strafing)
 			move_result = mechstep(direction)
 		else
 			move_result = mechturn(direction)
@@ -549,13 +549,13 @@
 	return 1
 
 /obj/mecha/proc/mechstep(direction)
-	var/current_dir = dir	//For straffing
+	var/current_dir = dir	//For strafing
 	var/result = get_step(src,direction)
 	if(result && Move(result))
 		if(stomp_sound)
 			playsound(src,stomp_sound,40,1)
 		handle_equipment_movement()
-	if(straffing)	//Also for straffing
+	if(strafing)	//Also for strafing
 		set_dir(current_dir)
 	return result
 
@@ -1249,16 +1249,16 @@
 	src.log_message("Now taking air from [use_internal_tank?"internal airtank":"environment"].")
 	return
 
-/obj/mecha/verb/toggle_straffing()
-	set name = "Toggle straffing"
+/obj/mecha/verb/toggle_strafing()
+	set name = "Toggle strafing"
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
 	if(usr!=src.occupant)
 		return
-	straffing = !straffing
-	src.occupant_message("Toggled strafing mode [straffing?"on":"off"].")
-	src.log_message("Toggled strafing mode [straffing?"on":"off"].")
+	strafing = !strafing
+	src.occupant_message("Toggled strafing mode [strafing?"on":"off"].")
+	src.log_message("Toggled strafing mode [strafing?"on":"off"].")
 	return
 
 /obj/mecha/MouseDrop_T(mob/O, mob/user as mob)
@@ -1433,7 +1433,7 @@
 		icon_state = src.reset_icon()+"-open"
 		set_dir(dir_in)
 		verbs -= /obj/mecha/verb/eject
-		straffing = 0
+		strafing = 0
 	return
 
 /////////////////////////
