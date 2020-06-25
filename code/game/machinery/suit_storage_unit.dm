@@ -754,10 +754,6 @@
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
-		
-		if(istype(I,/obj/item/clothing/head/helmet/space/void/medical/alt))
-			to_chat(user, "The Vey-Med Streamlined Helmet is capable of self-configuring and does not need to be cycled.")
-			return
 
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		user.drop_item()
@@ -780,10 +776,6 @@
 
 		if(I.icon_override == CUSTOM_ITEM_MOB)
 			to_chat(user, "You cannot refit a customised voidsuit.")
-			return
-		
-		if(istype(I,/obj/item/clothing/suit/space/void/medical/alt))
-			to_chat(user, "The Vey-Med Streamlined Voidsuit is capable of self-configuring and does not need to be cycled.")
 			return
 
 		to_chat(user, "You fit \the [I] into the suit cycler.")

@@ -163,6 +163,7 @@
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 5, bomb = 15, bio = 100, rad = 30)
 	light_overlay = "helmet_light_dual_blue"
 	species_restricted = list("exclude",SPECIES_DIONA,SPECIES_VOX)	//this thing can autoadapt
+	no_cycle = TRUE
 
 /obj/item/clothing/head/helmet/space/void/medical/alt
 	sprite_sheets = list(
@@ -186,6 +187,7 @@
 	slowdown = 0
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 5, bomb = 15, bio = 100, rad = 30)
 	species_restricted = list("exclude",SPECIES_DIONA,SPECIES_VOX)	//this thing can autoadapt
+	no_cycle = TRUE
 
 /obj/item/clothing/suit/space/void/medical/alt
 	sprite_sheets = list(
