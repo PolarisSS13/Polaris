@@ -512,7 +512,7 @@
 
 	//Turning
 
-	else if(src.dir!=direction && strafing)
+	else if(src.dir != direction)
 
 		if(strafing)
 			move_result = mechstep(direction)
