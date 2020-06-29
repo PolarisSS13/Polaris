@@ -19,6 +19,10 @@
 
 	. = ..()
 
+/obj/effect/overmap/visitable/planet/Sif/Initialize()
+	. = ..()
+	docking_codes = null
+
 /obj/effect/overmap/visitable/planet/Sif/get_skybox_representation()
 	. = ..()
 	(.).pixel_x = skybox_offset_x
@@ -32,3 +36,7 @@
 	start_x =  10
 	start_y =  10
 	map_z = list(Z_LEVEL_STATION_ONE, Z_LEVEL_STATION_TWO, Z_LEVEL_STATION_THREE)
+
+/obj/effect/overmap/visitable/planet/Sif/Initialize()
+	. = ..()
+	docking_codes = null
