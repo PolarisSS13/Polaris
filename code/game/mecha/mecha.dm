@@ -342,11 +342,11 @@
 		if(65 to 85)
 			. += "It's slightly damaged."
 		if(45 to 65)
-			. += "It's badly damaged."
+			. += "<span class='notice'>It's badly damaged.</span>"
 		if(25 to 45)
-			. += "It's heavily damaged."
+			. += "<span class='warning'>It's heavily damaged.</span>"
 		else
-			. += "It's falling apart."
+			. += "<span class='warning'><b> It's falling apart.</b> </span>"
 	if(equipment?.len)
 		. += "It's equipped with:"
 		for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
