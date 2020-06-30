@@ -80,6 +80,7 @@
 	var/obj/item/mecha_parts/mecha_equipment/selected
 	var/max_equip = 2
 	var/datum/events/events
+
 //mechaequipt2 stuffs
 	var/list/hull_equipment = new
 	var/list/weapon_equipment = new
@@ -91,6 +92,7 @@
 	var/max_utility_equip = 2
 	var/max_universal_equip = 2
 	var/max_special_equip = 1
+
 //Working exosuit vars
 	var/list/cargo = list()
 	var/cargo_capacity = 3
@@ -172,6 +174,7 @@
 	if(!add_airtank()) //we check this here in case mecha does not have an internal tank available by default - WIP
 		removeVerb(/obj/mecha/verb/connect_to_port)
 		removeVerb(/obj/mecha/verb/toggle_internal_tank)
+
 	spark_system.set_up(2, 0, src)
 	spark_system.attach(src)
 
@@ -375,6 +378,7 @@
 		"Toggle Light" = radial_image_lighttoggle,
 		"View Stats" = radial_image_statpanel
 	)
+
 	var/choice = show_radial_menu(user, src, choices, custom_check = CALLBACK(src, .proc/check_occupant_radial, user), require_near = TRUE, tooltips = TRUE)
 	if(!check_occupant_radial(user))
 		return
@@ -1370,6 +1374,7 @@
 	playsound(src, 'sound/mecha/gasdisconnected.ogg', 30, 1)
 	return
 
+
 /obj/mecha/verb/toggle_strafing()
 	set name = "Toggle strafing"
 	set category = "Exosuit Interface"
@@ -1580,12 +1585,14 @@
 		icon_state = src.reset_icon()+"-open"
 		set_dir(dir_in)
 		verbs -= /obj/mecha/verb/eject
+
 		//src.zoom = 0
 
 		// Doesn't seem needed.
 		if(src.occupant && src.occupant.client)
 			src.occupant.client.view = world.view
 			src.zoom = 0
+
 		strafing = 0
 	return
 
