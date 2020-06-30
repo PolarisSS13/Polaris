@@ -673,7 +673,6 @@
 	if(istype(obstacle, /mob))//First we check if it is a mob. Mechs mostly shouln't go through them, even while phasing.
 		var/mob/M = obstacle
 		M.Move(get_step(obstacle,src.dir))
-		occupant_message("Pushed mob.")//Debug messages
 	else if(istype(obstacle, /obj))//Then we check for regular obstacles.
 		var/obj/O = obstacle
 
@@ -686,21 +685,18 @@
 					src.use_power(phasing_energy_drain)
 					sleep(step_in*3)
 					can_phase = TRUE
-					occupant_message("Phazed.")//Debug messages
+					occupant_message("Phazed.")
 			. = ..(obstacle)
 			return
 		if(istype(O, /obj/effect/portal))	//derpfix
 			src.anchored = 0				//I have no idea what this really fix.
 			O.Crossed(src)
-			occupant_message("Crossed.")//Debug messages
 			spawn(0)//countering portal teleport spawn(0), hurr
 				src.anchored = 1
 		else if(O.anchored)
 			obstacle.Bumped(src)
-			occupant_message("Bumped.")//Debug messages
 		else
 			step(obstacle,src.dir)
-			occupant_message("Step obstacle.")//Debug messages
 
 	else//No idea when this triggers, so i won't touch it.
 		. = ..(obstacle)
