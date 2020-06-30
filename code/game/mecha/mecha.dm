@@ -1343,6 +1343,7 @@
 		src.verbs += /obj/mecha/verb/eject
 		src.log_append_to_last("[H] moved in as pilot.")
 		src.icon_state = src.reset_icon()
+		occupant.in_enclosed_vehicle = 1	//Useful for when you need to know if someone is in a mecho.
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
@@ -1429,6 +1430,7 @@
 			occupant.canmove = 0
 		occupant.clear_alert("charge")
 		occupant.clear_alert("mech damage")
+		occupant.in_enclosed_vehicle = 0
 		occupant = null
 		icon_state = src.reset_icon()+"-open"
 		set_dir(dir_in)
