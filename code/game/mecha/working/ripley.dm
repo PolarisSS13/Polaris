@@ -10,6 +10,8 @@
 	wreckage = /obj/effect/decal/mecha_wreckage/ripley
 	cargo_capacity = 10
 
+	minimum_penetration = 10
+
 /obj/mecha/working/ripley/Destroy()
 	for(var/atom/movable/A in src.cargo)
 		A.loc = loc
