@@ -43,8 +43,9 @@
 									"rad"=1
 									)
 
-	var/damage_minimum = 10			//Incoming damage lower than this won't actually deal damage. Scrapes shouldn't be a real thing.
-	var/minimum_penetration = 20	//Incoming damage won't be fully applied if you don't have at least 20. Almost all AP clears this.
+	var/damage_minimum = 10				//Incoming damage lower than this won't actually deal damage. Scrapes shouldn't be a real thing.
+	var/minimum_penetration = 20		//Incoming damage won't be fully applied if you don't have at least 20. Almost all AP clears this.
+	var/fail_penetration_value = 0.66	//By how much failing to penetrate reduces your shit. 66% by default.
 
 	var/obj/item/weapon/cell/cell
 	var/state = 0
@@ -749,7 +750,7 @@
 			else if(O.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
 				src.occupant_message("<span class='notice'>\The [A] struggles to bypass \the [src] armor.</span>")
 				src.visible_message("\The [A] struggles to bypass \the [src] armor")
-				pass_damage_reduc_mod = 0.66	//This will apply to reduce damage to 2/3 or 66%
+				pass_damage_reduc_mod = fail_penetration_value	//This will apply to reduce damage to 2/3 or 66% by default
 			else
 				src.occupant_message("<span class='notice'>\The [A] manages to pierces \the [src] armor.</span>")
 				src.visible_message("\The [A] manages to pierces \the [src] armor")
@@ -805,7 +806,7 @@
 		else if(Proj.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
 			src.occupant_message("<span class='notice'>\The [Proj] struggles to pierce \the [src] armor.</span>")
 			src.visible_message("\The [Proj] struggles to pierce \the [src] armor")
-			pass_damage_reduc_mod = 0.66	//This will apply to reduce damage to 2/3 or 66%
+			pass_damage_reduc_mod = fail_penetration_value	//This will apply to reduce damage to 2/3 or 66% by default
 		else
 			src.occupant_message("<span class='notice'>\The [Proj] manages to pierce \the [src] armor.</span>")
 			src.visible_message("\The [Proj] manages to pierce \the [src] armor")
@@ -913,7 +914,7 @@
 	else if(W.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
 		src.occupant_message("<span class='notice'>\The [W] struggles to bypass \the [src] armor.</span>")
 		src.visible_message("\The [W] struggles to bypass \the [src] armor")
-		pass_damage_reduc_mod = 0.66	//This will apply to reduce damage to 2/3 or 66%
+		pass_damage_reduc_mod = fail_penetration_value	//This will apply to reduce damage to 2/3 or 66% by default
 
 	else
 		pass_damage_reduc_mod = 1		//Just making sure.
@@ -2088,7 +2089,7 @@
 	src.log_message("Attacked. Attacker - [user].",1)
 	user.do_attack_animation(src)
 
-	//var/pass_damage
+	//var/pass_damage	//See the comment in the larger greyed out block below.
 	//var/pass_damage_reduc_mod
 	if(prob(src.deflect_chance))//Deflected
 		src.log_append_to_last("Armor saved.")
@@ -2104,11 +2105,11 @@
 		playsound(src, 'sound/effects/Glasshit.ogg', 50, 1)
 		return
 
-/*
+/*//Commented out for not playing well with penetration questions.
 	else if(user.mob.attack_armor_pen < minimum_penetration)//Not enough armor penetration
 		src.occupant_message("<span class='notice'>\The [user] struggles to pierce \the [src] armor.</span>")
 		src.visible_message("\The [user] struggles to pierce \the [src] armor")
-		pass_damage_reduc_mod = 0.66	//This will apply to reduce damage to 2/3 or 66%
+		pass_damage_reduc_mod = fail_penetration_value	//This will apply to reduce damage to 2/3 or 66% by default.
 */
 
 	else
