@@ -16,21 +16,21 @@
 	name = "Mecha"
 	desc = "Exosuit"
 	icon = 'icons/mecha/mecha.dmi'
-	density = 1 //Dense. To raise the heat.
-	opacity = 1 ///opaque. Menacing.
-	anchored = 1 //no pulling around.
-	unacidable = 1 //and no deleting hoomans inside
-	layer = MOB_LAYER //icon draw layer
-	infra_luminosity = 15 //byond implementation is bugged.
-	var/initial_icon = null //Mech type for resetting icon. Only used for reskinning kits (see custom items)
+	density = 1							//Dense. To raise the heat.
+	opacity = 1							///opaque. Menacing.
+	anchored = 1						//no pulling around.
+	unacidable = 1						//and no deleting hoomans inside
+	layer = MOB_LAYER					//icon draw layer
+	infra_luminosity = 15				//byond implementation is bugged.
+	var/initial_icon = null				//Mech type for resetting icon. Only used for reskinning kits (see custom items)
 	var/can_move = 1
 	var/mob/living/carbon/occupant = null
-	var/step_in = 10 //make a step in step_in/10 sec.
-	var/dir_in = 2//What direction will the mech face when entered/powered on? Defaults to South.
+	var/step_in = 10					//make a step in step_in/10 sec.
+	var/dir_in = 2						//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 10
-	var/health = 300 //health is health
-	var/maxhealth = 300 //maxhealth is maxhealth.
-	var/deflect_chance = 10 //chance to deflect the incoming projectiles, hits, or lesser the effect of ex_act.
+	var/health = 300 					//health is health
+	var/maxhealth = 300 				//maxhealth is maxhealth.
+	var/deflect_chance = 10 			//chance to deflect the incoming projectiles, hits, or lesser the effect of ex_act.
 	//the values in this list show how much damage will pass through, not how much will be absorbed.
 	var/list/damage_absorption = list("brute"=0.8,"fire"=1.2,"bullet"=0.9,"laser"=1,"energy"=1,"bomb"=1)
 	var/obj/item/weapon/cell/cell
@@ -39,15 +39,15 @@
 	var/last_message = 0
 	var/add_req_access = 1
 	var/maint_access = 1
-	var/dna	//dna-locking the mech
-	var/list/proc_res = list() //stores proc owners, like proc_res["functionname"] = owner reference
+	var/dna								//dna-locking the mech
+	var/list/proc_res = list() 			//stores proc owners, like proc_res["functionname"] = owner reference
 	var/datum/effect/effect/system/spark_spread/spark_system = new
 	var/lights = 0
 	var/lights_power = 6
 	var/force = 0
 
 	var/mech_faction = null
-	var/firstactivation = 0 //It's simple. If it's 0, no one entered it yet. Otherwise someone entered it at least once.
+	var/firstactivation = 0 			//It's simple. If it's 0, no one entered it yet. Otherwise someone entered it at least once.
 
 	var/stomp_sound = 'sound/mecha/mechstep.ogg'
 	var/swivel_sound = 'sound/mecha/mechturn.ogg'
@@ -62,16 +62,16 @@
 	var/obj/item/device/radio/radio = null
 
 	var/max_temperature = 25000
-	var/internal_damage_threshold = 50 //health percentage below which internal damage is possible
-	var/internal_damage = 0 //contains bitflags
+	var/internal_damage_threshold = 50	//health percentage below which internal damage is possible
+	var/internal_damage = 0 			//contains bitflags
 
 	var/list/operation_req_access = list()//required access level for mecha operation
 	var/list/internals_req_access = list(access_engine,access_robotics)//required access level to open cell compartment
 
-	var/datum/global_iterator/pr_int_temp_processor //normalizes internal air mixture temperature
-	var/datum/global_iterator/pr_inertial_movement //controls intertial movement in spesss
-	var/datum/global_iterator/pr_give_air //moves air from tank to cabin
-	var/datum/global_iterator/pr_internal_damage //processes internal damage
+	var/datum/global_iterator/pr_int_temp_processor 	//normalizes internal air mixture temperature
+	var/datum/global_iterator/pr_inertial_movement 		//controls intertial movement in spesss
+	var/datum/global_iterator/pr_give_air 				//moves air from tank to cabin
+	var/datum/global_iterator/pr_internal_damage		//processes internal damage
 
 
 	var/wreckage
