@@ -1,5 +1,6 @@
 /mob/Logout()
 	SSnanoui.user_logout(src) // this is used to clean up (remove) this user's Nano UIs
+	SStgui.on_logout(src) // Cleanup any TGUIs the user has open
 	player_list -= src
 	update_client_z(null)
 	log_access_out(src)
