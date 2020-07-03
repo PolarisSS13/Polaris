@@ -24,6 +24,9 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
 var/list/mannequins_
 
+// Closets have magic appearances
+GLOBAL_LIST_EMPTY(closet_appearances)
+
 // Posters
 var/global/list/poster_designs = list()
 var/global/list/NT_poster_designs = list()
@@ -202,6 +205,12 @@ var/global/list/string_slot_flags = list(
 	for(var/T in paths)
 		var/datum/poster/P = new T
 		NT_poster_designs += P
+
+	//Closet appearances
+	paths = typesof(/decl/closet_appearance)
+	for(var/T in paths)
+		var/decl/closet_appearance/app = new T()
+		GLOB.closet_appearances[T] = app
 
 	return 1
 
