@@ -6,7 +6,7 @@
 	step_in = 6
 	max_temperature = 20000
 	health = 200
-	maxhealth = 200
+	maxhealth = 200		//Don't forget to update the /old variant if  you change this number.
 	wreckage = /obj/effect/decal/mecha_wreckage/ripley
 	cargo_capacity = 10
 
@@ -79,3 +79,12 @@
 		qdel (B)
 
 
+//Meant for random spawns.
+/obj/mecha/working/ripley/mining/old
+	desc = "An old, dusty mining ripley."
+
+/obj/mecha/working/ripley/mining/old/New()
+	..()
+	health = 25
+	maxhealth = 190	//Just slightly worse.
+	cell.charge = rand(0, cell.charge)
