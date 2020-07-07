@@ -69,7 +69,7 @@
 				M.playsound_local(get_turf(M), soundin = sound, vol = 70, vary = FALSE, is_global = TRUE)
 
 	if(cosmetic) // Everything beyond here involves potentially damaging things. If we don't want to do that, stop now.
-		return
+		return T
 
 	if(ground) // All is well.
 		ground.tesla_act(LIGHTNING_POWER, FALSE)
@@ -94,6 +94,7 @@
 				var/mob/living/carbon/C = L
 				C.ear_deaf += 10
 			to_chat(L, span("danger", "Lightning struck nearby, and the thunderclap is deafening!"))
+	return T
 
 #undef GROUNDING_ROD_RANGE
 #undef LIGHTNING_ZAP_RANGE

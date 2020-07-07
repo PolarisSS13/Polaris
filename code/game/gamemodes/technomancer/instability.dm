@@ -61,7 +61,8 @@
 
 	//This should cushon against really bad luck.
 	if(instability && last_instability_event < (world.time - 5 SECONDS) && prob(50))
-		instability_effects()
+	//	instability_effects()
+		GLOB.technomancer_instability.instability_effects(src, instability)
 
 	var/instability_decayed = abs( round(instability * TECHNOMANCER_INSTABILITY_DECAY, TECHNOMANCER_INSTABILITY_PRECISION) - instability )
 	instability_decayed = max(instability_decayed, TECHNOMANCER_INSTABILITY_MIN_DECAY)

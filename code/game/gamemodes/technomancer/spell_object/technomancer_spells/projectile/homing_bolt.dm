@@ -2,12 +2,12 @@
 	name = "Homing Bolt"
 	cost = 100
 	category = OFFENSIVE_SPELLS
-	spell_metadata_paths = list(/datum/spell_metadata/homing_bolt)
+	spell_metadata_paths = list(/datum/spell_metadata/projectile/homing_bolt)
 
-/datum/spell_metadata/homing_bolt
+/datum/spell_metadata/projectile/homing_bolt
 	name = "Homing Bolt"
-	desc = "Fires a special projectile which will track it's target, adjusting its own trajectory as it flies, making it \
-	more difficult to dodge."
+	desc = "Fires a special projectile which will track it's target, adjusting its own trajectory as it flies, \
+	and making it more difficult to dodge. It accelerates faster as it flies, however the turning rate also decreases."
 	aspect = ASPECT_FORCE
 	icon_state = "tech_homing_bolt"
 	cooldown = 1 SECOND
@@ -17,7 +17,6 @@
 	name = "homing bolt"
 	icon_state = "homing_bolt"
 	desc = "Time to make the crew suffer through a bullet hell."
-	cast_methods = CAST_RANGED
 	spell_projectile = /obj/item/projectile/energy/technomancer_homing
 	energy_cost_per_shot = 250
 	instability_per_shot = 2
@@ -35,7 +34,7 @@
 // Distinct from the advanced dark gygax's version, so that tweaking one won't make the other get really over/underpowered.
 /obj/item/projectile/energy/technomancer_homing
 	name = "homing bolt"
-	icon_state = "arcane_barrage"
+	icon_state = "homing_bolt"
 	damage = 20
 	damage_type = BURN
 	check_armour = "laser"
@@ -65,20 +64,3 @@
 		set_pixel_speed( LERP(base_pixel_speed, max_acceleration_pixel_speed, acceleration_ticks / max_acceleration_ticks) )
 		homing_turn_speed = LERP(base_turn_speed, max_acceleration_turn_speed, acceleration_ticks / max_acceleration_ticks)
 
-/*
-/obj/item/projectile/energy/homing_bolt
-	name = "homing bolt"
-	icon_state = "force_missile"
-	damage = 20
-	damage_type = BURN
-	check_armour = "laser"
-
-/obj/item/projectile/energy/homing_bolt/launch_projectile(atom/target, target_zone, mob/user, params, angle_override, forced_spread = 0)
-	..()
-	if(target)
-		set_homing_target(target)
-
-/obj/item/projectile/energy/homing_bolt/fire(angle, atom/direct_target)
-	..()
-	set_pixel_speed(0.5)
-*/

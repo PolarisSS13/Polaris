@@ -2,9 +2,9 @@
 	name = "Force Missile"
 	cost = 50
 	category = OFFENSIVE_SPELLS
-	spell_metadata_paths = list(/datum/spell_metadata/force_missile)
+	spell_metadata_paths = list(/datum/spell_metadata/projectile/force_missile)
 
-/datum/spell_metadata/force_missile
+/datum/spell_metadata/projectile/force_missile
 	name = "Force Missile"
 	desc = "This fires a missile at your target. It's cheap to use, however the projectile itself moves and impacts in such a way \
 	that armor designed to protect from blunt force will mitigate this function as well."
@@ -17,7 +17,6 @@
 	name = "force missile"
 	icon_state = "force_missile"
 	desc = "Make it rain!"
-	cast_methods = CAST_RANGED
 	spell_projectile = /obj/item/projectile/force_missile
 	energy_cost_per_shot = 50
 	instability_per_shot = 0.25

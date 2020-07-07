@@ -8,7 +8,7 @@
 	name = "Shield"
 	desc = "Emits a protective shield fron your hand in front of you, \
 	which will protect you from almost anything able to harm you, \
-	so long as you can power it.  Stronger attacks blocked cost more energy to sustain. \
+	so long as you can power it. Stronger attacks blocked cost more energy to sustain. \
 	Note that holding two shields will make blocking more energy efficent."
 	enhancement_desc = "Blocking costs no energy."
 	aspect = ASPECT_FORCE

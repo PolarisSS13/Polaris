@@ -64,7 +64,6 @@
 		if(i > scepter_per_mob_strike_limit)
 			var/list/possible_targets = potential_targets(current_target, auto_target_radius) - targets_struck
 			if(!possible_targets.len)
-				world << "Out of targets."
 				return struck_at_least_once
 
 			current_target = pick(possible_targets)
@@ -77,7 +76,6 @@
 			struck_at_least_once = TRUE
 
 		if(!success)
-			world << "Failed"
 			return struck_at_least_once
 
 		sleep(scepter_strike_delay)

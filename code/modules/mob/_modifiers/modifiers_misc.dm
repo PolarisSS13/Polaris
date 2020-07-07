@@ -334,3 +334,31 @@ the artifact triggers the rage.
 	on_expired_text = "<span class='warning'>You feel slow again.</span>"
 	haste = TRUE
 	stacks = MODIFIER_STACK_EXTEND
+
+// Acts as a psuedo-godmode, yet probably is more reliable than the actual var for it.
+// Can't protect from instantly killing things like singulos.
+/datum/modifier/invulnerable
+	name = "invulnerable"
+	desc = "You are almost immune to harm, for a little while at least."
+	stacks = MODIFIER_STACK_EXTEND
+
+	disable_duration_percent = 0
+	incoming_damage_percent = 0
+	bleeding_rate_percent = 0
+	pain_immunity = TRUE
+	armor_percent = list("melee" = 2000, "bullet" = 2000, "laser" = 2000, "bomb" = 2000, "energy" = 2000, "bio" = 2000, "rad" = 2000)
+	heat_protection = 1
+	cold_protection = 1
+	siemens_coefficient = 0
+
+// Reduces resistance to "elements".
+// Note that most things that do give resistance gives 100% protection,
+// and due to multiplicitive stacking, this modifier won't do anything to change that.
+/datum/modifier/elemental_vulnerability
+	name = "elemental vulnerability"
+	desc = "You're more vulnerable to extreme temperatures and electricity."
+	stacks = MODIFIER_STACK_EXTEND
+
+	heat_protection = -0.5
+	cold_protection = -0.5
+	siemens_coefficient = 1.5

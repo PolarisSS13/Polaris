@@ -50,6 +50,7 @@
 /obj/item/weapon/technomancer_core
 	var/list/summon_slots = list()
 	var/max_summon_slots = 10 // Each summon takes up one or more 'slots'. Some cores will have different caps.
+	var/energy_cost_per_slot = 3 // How much energy to take away every tick, per slot. Multiply max slots by this to determine the max potential cost per tick.
 
 /obj/item/weapon/technomancer_core/Destroy()
 	for(var/thing in summon_slots)

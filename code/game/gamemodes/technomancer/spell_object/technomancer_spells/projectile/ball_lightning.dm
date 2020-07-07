@@ -2,9 +2,9 @@
 	name = "Ball Lightning"
 	cost = 100
 	category = OFFENSIVE_SPELLS
-	spell_metadata_paths = list(/datum/spell_metadata/ball_lightning)
+	spell_metadata_paths = list(/datum/spell_metadata/projectile/ball_lightning)
 
-/datum/spell_metadata/ball_lightning
+/datum/spell_metadata/projectile/ball_lightning
 	name = "Ball Lightning"
 	desc = "Fires a small ball of lightning at a targeted tile, which zaps anyone it touches, \
 	and bounces off of solid objects such as walls. When such a bounce happens, a zap is sent \

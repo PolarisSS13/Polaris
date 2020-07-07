@@ -1,4 +1,13 @@
 // Generic projectile spell type.
+/datum/spell_metadata/projectile/get_spell_info()
+	var/obj/item/weapon/spell/technomancer/projectile/spell = spell_path
+	. = list()
+	if(initial(spell.energy_cost_per_shot) > 0)
+		.["Energy Cost per Shot"] = initial(spell.energy_cost_per_shot)
+	.["Instability Cost per Shot"] = initial(spell.instability_per_shot)
+	if(initial(spell.pre_shot_delay) > 0)
+		.["Windup Time"] = DisplayTimeText(initial(spell.instability_per_shot))
+
 
 /obj/item/weapon/spell/technomancer/projectile
 	name = "projectile template"

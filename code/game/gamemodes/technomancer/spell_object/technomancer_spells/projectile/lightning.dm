@@ -2,9 +2,9 @@
 	name = "Lightning Strike"
 	cost = 100
 	category = OFFENSIVE_SPELLS
-	spell_metadata_paths = list(/datum/spell_metadata/lightning)
+	spell_metadata_paths = list(/datum/spell_metadata/projectile/lightning)
 
-/datum/spell_metadata/lightning
+/datum/spell_metadata/projectile/lightning
 	name = "Lightning Strike"
 	desc = "This uses a hidden electrolaser, which creates a laser beam to ionize the enviroment, allowing for ideal conditions \
 	for a directed lightning strike to occur. The lightning is very strong, however it requires a few seconds to prepare a \
@@ -18,7 +18,6 @@
 	name = "lightning strike"
 	icon_state = "lightning"
 	desc = "Now you can feel like Zeus."
-	cast_methods = CAST_RANGED
 	spell_projectile = /obj/item/projectile/beam/lightning
 	energy_cost_per_shot = 1000
 	instability_per_shot = 10

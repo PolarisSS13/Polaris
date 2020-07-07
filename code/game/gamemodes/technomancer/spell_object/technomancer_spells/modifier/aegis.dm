@@ -78,7 +78,7 @@
 	name = "Frost Aegis"
 	desc = "Places an energy field around the target that attempts to shift heat from outside towards the inside, \
 	making the inside warm, and an icy layer to accumulate outside. This results in protecting the target from \
-	the cold, as well as making them more resilient to kinetic energy as a result of close quarters combat \
+	the cold, as well as making them more resilient to kinetic energy from close quarters combat \
 	and ballistic weaponry."
 	icon_state = "tech_frost_aegis"
 	aspect = ASPECT_FROST

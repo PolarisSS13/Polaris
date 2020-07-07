@@ -2,9 +2,9 @@
 	name = "Beam"
 	cost = 50
 	category = OFFENSIVE_SPELLS
-	spell_metadata_paths = list(/datum/spell_metadata/beam)
+	spell_metadata_paths = list(/datum/spell_metadata/projectile/beam)
 
-/datum/spell_metadata/beam
+/datum/spell_metadata/projectile/beam
 	name = "Beam"
 	desc = "Fires a laser at your target. Cheap, reliable, and a bit boring."
 	aspect = ASPECT_LIGHT
