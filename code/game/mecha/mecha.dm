@@ -743,8 +743,8 @@
 			var/pass_damage = O.throwforce
 			var/pass_damage_reduc_mod
 			if(pass_damage <= damage_minimum)//Too little to go through.
-				src.occupant_message("<span class='notice'>\The [A] doesn't dents \the [src] paint.</span>")
-				src.visible_message("\The [A] doesn't dents \the [src] armor")
+			src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
+			src.visible_message("\The [A] bounces off \the [src] armor")
 				return
 
 			else if(O.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
@@ -799,8 +799,8 @@
 			pass_damage = ME.handle_projectile_contact(Proj, pass_damage)
 
 		if(pass_damage < damage_minimum)//too pathetic to really damage you.
-			src.occupant_message("<span class='notice'>\The [Proj] doesn't dents \the [src] paint.</span>")
-			src.visible_message("\The [Proj] doesn't dents \the [src] armor")
+			src.occupant_message("<span class='notice'>The armor deflects incoming projectile.</span>")
+			src.visible_message("The [src.name] armor deflects\the [Proj]")
 			return
 
 		else if(Proj.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
@@ -907,8 +907,8 @@
 		src.log_append_to_last("Armor saved.")
 
 	else if(W.force < damage_minimum)	//Is your attack too PATHETIC to do anything. 3 damage to a person shouldn't do anything to a mech.
-		src.occupant_message("<span class='notice'>\The [W] doesn't dents \the [src] paint.</span>")
-		src.visible_message("\The [W] doesn't dents \the [src] armor")
+		src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
+		src.visible_message("\The [A] bounces off \the [src] armor")
 		return
 
 	else if(W.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
