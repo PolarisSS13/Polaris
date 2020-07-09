@@ -1376,6 +1376,7 @@
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
+	strafing()
 
 /obj/mecha/proc/strafing()
 	if(usr!=src.occupant)
