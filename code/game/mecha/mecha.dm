@@ -907,8 +907,8 @@
 		src.log_append_to_last("Armor saved.")
 
 	else if(W.force < damage_minimum)	//Is your attack too PATHETIC to do anything. 3 damage to a person shouldn't do anything to a mech.
-		src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
-		src.visible_message("\The [A] bounces off \the [src] armor")
+		src.occupant_message("<span class='notice'>\The [W] bounces off the armor.</span>")
+		src.visible_message("\The [W] bounces off \the [src] armor")
 		return
 
 	else if(W.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
