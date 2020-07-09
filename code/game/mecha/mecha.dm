@@ -93,6 +93,18 @@
 	var/max_universal_equip = 2
 	var/max_special_equip = 1
 
+// Mech Components, similar to Cyborg, but Bigger.
+	var/list/internal_components = list(
+		MECH_HULL = null,
+		MECH_ACTUATOR = null,
+		MECH_ARMOR = null,
+		MECH_GAS = null,
+		MECH_ELECTRIC = null
+		)
+	var/list/starting_components = list(
+
+		)
+
 //Working exosuit vars
 	var/list/cargo = list()
 	var/cargo_capacity = 3
@@ -125,7 +137,7 @@
 	var/phasing_possible = 0		//This is to allow phasing.
 	var/can_phase = TRUE			//This is an internal check during the relevant procs.
 	var/phasing_energy_drain = 200
-	
+
 	var/switch_dmg_type_possible = 0	//Can you switch damage type? It is mostly for the Phazon and its children.
 
 	var/smoke_possible = 0
@@ -546,6 +558,11 @@
 
 	return call((proc_res["dyndomove"]||src), "dyndomove")(direction)
 
+/obj/mecha/proc/get_step_delay()
+	var/tally = step_in
+
+	return step_in
+
 /obj/mecha/proc/dyndomove(direction)
 	if(!can_move)
 		return 0
@@ -631,7 +648,7 @@
 			if(!src.check_for_support())
 				src.pr_inertial_movement.start(list(src,direction))
 				src.log_message("<span class='warning'>Movement control lost. Inertial movement started.</span>")
-		if(do_after(step_in))
+		if(do_after(get_step_delay()))
 			can_move = 1
 		return 1
 	return 0
@@ -785,7 +802,7 @@
 	if(user == occupant)
 		show_radial_occupant(user)
 		return
-	
+
 	user.setClickCooldown(user.get_attack_speed())
 	src.log_message("Attack by hand/paw. Attacker - [user].",1)
 
@@ -1295,13 +1312,13 @@
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
-	
+
 	if(!occupant)
 		return
-	
+
 	if(usr != occupant)
 		return
-	
+
 	for(var/turf/T in locs)
 		var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector) in T
 		if(possible_port)
@@ -1322,13 +1339,13 @@
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
-	
+
 	if(!occupant)
 		return
-	
+
 	if(usr != occupant)
 		return
-	
+
 	if(disconnect())
 		occupant_message("<span class='notice'>[name] disconnects from the port.</span>")
 		verbs -= /obj/mecha/verb/disconnect_from_port
