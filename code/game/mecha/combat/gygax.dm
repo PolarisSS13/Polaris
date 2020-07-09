@@ -135,5 +135,5 @@
 /obj/mecha/combat/gygax/old/New()
 	..()
 	health = 25
-	maxhealth = 300	//Just slightly worse.
+	maxhealth = 250	//Just slightly worse.
 	cell.charge = rand(0, (cell.charge/2))

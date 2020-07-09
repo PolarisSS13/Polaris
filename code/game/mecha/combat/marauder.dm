@@ -155,7 +155,3 @@
 	health = 25
 	maxhealth = 400	//Just slightly worse.
 	cell.charge = rand(0, (cell.charge/2))
-
-/obj/mecha/combat/marauder/old/Initialize()	//Nothing for u
-	..()
-	return

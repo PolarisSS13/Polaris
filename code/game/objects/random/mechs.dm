@@ -13,7 +13,7 @@
 				/obj/mecha/combat/marauder,
 				/obj/mecha/combat/marauder/seraph,
 				/obj/mecha/combat/marauder/mauler,
-				/obj/mecha/medical/odysseus
+				/obj/mecha/medical/odysseus,
 				/obj/mecha/combat/phazon,
 				/obj/mecha/combat/phazon/janus,
 				/obj/mecha/combat/durand,
