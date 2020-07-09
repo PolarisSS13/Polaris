@@ -22,6 +22,22 @@
 				/obj/mecha/working/ripley/deathripley,
 				/obj/mecha/working/ripley/mining)
 
+/obj/random/mech/weaker
+	name = "random mech"
+	desc = "This is a random single mech. Those are less potent and more common."
+	icon = 'icons/mecha/mecha.dmi'
+	icon_state = "old_durand"
+	drop_get_turf = FALSE
+
+/obj/random/mech/weaker/item_to_spawn()
+	return pick(/obj/mecha/combat/gygax,
+				/obj/mecha/combat/gygax/serenity,
+				/obj/mecha/medical/odysseus,
+				/obj/mecha/combat/durand,
+				/obj/mecha/working/ripley,
+				/obj/mecha/working/ripley/firefighter,
+				/obj/mecha/working/ripley/deathripley,
+				/obj/mecha/working/ripley/mining)
 
 /obj/random/mech/old
 	name = "random mech"
