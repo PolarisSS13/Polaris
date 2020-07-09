@@ -155,3 +155,12 @@
 	health = 25
 	maxhealth = 400	//Just slightly worse.
 	cell.charge = rand(0, (cell.charge/2))
+
+/obj/mecha/combat/marauder/old/Initialize()
+	..()
+	var/obj/item/mecha_parts/mecha_equipment/ME
+	if(equipment.len)
+		for(ME in equipment)
+			ME.detach()
+			qdel(ME)
+			return
