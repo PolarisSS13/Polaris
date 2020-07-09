@@ -743,8 +743,8 @@
 			var/pass_damage = O.throwforce
 			var/pass_damage_reduc_mod
 			if(pass_damage <= damage_minimum)//Too little to go through.
-			src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
-			src.visible_message("\The [A] bounces off \the [src] armor")
+				src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
+				src.visible_message("\The [A] bounces off \the [src] armor")
 				return
 
 			else if(O.armor_penetration < minimum_penetration)	//If you don't have enough pen, you won't do full damage
