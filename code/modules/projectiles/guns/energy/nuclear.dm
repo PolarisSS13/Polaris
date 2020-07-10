@@ -1,6 +1,7 @@
 /obj/item/weapon/gun/energy/gun
 	name = "energy gun"
-	desc = "Another bestseller of Lawson Arms and "+TSC_HEPH+", the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words: Stun or Kill."
+	desc = "Another bestseller of Lawson Arms, the LAEP90 Perun is a versatile energy based sidearm, capable of switching between low and high capacity projectile settings. In other words: Stun or Kill."
+	description_fluff = "Lawson Arms is Hephaestus Industries’ main personal-energy-weapon branding, often sold alongside MarsTech projectile weapons to security and law enforcement agencies."
 	icon_state = "energystun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	fire_delay = 10 // Handguns should be inferior to two-handed weapons.
@@ -22,7 +23,8 @@
 
 /obj/item/weapon/gun/energy/gun/burst
 	name = "burst laser"
-	desc = "The FM-2t is a versatile energy based weapon, capable of switching between stun or kill with a three round burst option for both settings."
+	desc = "The Lawson Arms FM-2t is a versatile energy based weapon, capable of switching between stun or kill with a three round burst option for both settings."
+	description_fluff = "Lawson Arms is Hephaestus Industries’ main personal-energy-weapon branding, often sold alongside MarsTech projectile weapons to security and law enforcement agencies."
 	icon_state = "fm-2tstun100"	//May resprite this to be more rifley
 	item_state = null	//so the human update icon uses the icon_state instead.
 	charge_cost = 100
@@ -46,7 +48,7 @@
 
 /obj/item/weapon/gun/energy/gun/nuclear
 	name = "advanced energy gun"
-	desc = "An energy gun with an experimental miniaturized reactor."
+	desc = "An energy gun with an experimental miniaturized reactor, based on a Lawson Arms platform."
 	icon_state = "nucgunstun"
 	projectile_type = /obj/item/projectile/beam/stun
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 5, TECH_POWER = 3)

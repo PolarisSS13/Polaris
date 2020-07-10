@@ -3,6 +3,7 @@
 /obj/item/weapon/gun/energy/phasegun
 	name = "phase carbine"
 	desc = "The NT EW26 Artemis is a downsized energy weapon, specifically designed for use against wildlife."
+	description_fluff = "Lawson Arms is Hephaestus Industries’ main personal-energy-weapon branding. Cer"
 	icon_state = "phasecarbine"
 	item_state = "phasecarbine"
 	wielded_item_state = "phasecarbine-wielded"
@@ -13,7 +14,7 @@
 
 /obj/item/weapon/gun/energy/phasegun/pistol
 	name = "phase pistol"
-	desc = "The NT  EW15 Apollo is an energy handgun, specifically designed for self-defense against aggressive wildlife."
+	desc = "The NT EW15 Apollo is an energy handgun, specifically designed for self-defense against aggressive wildlife."
 	icon_state = "phase"
 	item_state = "taser"	//I don't have an in-hand sprite, taser will be fine
 	w_class = ITEMSIZE_NORMAL
