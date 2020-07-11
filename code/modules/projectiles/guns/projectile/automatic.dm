@@ -323,7 +323,7 @@
 	return
 
 /obj/item/weapon/gun/projectile/automatic/mini_uzi
-	name = "machine pistol"
+	name = "micro-smg"
 	desc = "The infamous ProTek Spitz is a lightweight, compact, fast firing machine pistol. Cheaply produced under the ProTek consumer brand, the Spitz seems to find its way into every corner of the galaxy. Uses .45 rounds."
 	description_fluff = "Budget-grade weapons for the budget-grade consumer! Hephaestus’ low-end brand of cheaply made, low-maintenance personal defense weapons for those who just need a handgun with absolutely no frills. \
 	Early ProTek weapons were notoriously unsafe and unreliable, though more recent designs have improved somewhat - they still aren’t very good. \
@@ -350,7 +350,8 @@
 
 /obj/item/weapon/gun/projectile/automatic/p90
 	name = "personal defense weapon"
-	desc = "The H90K is a compact, large capacity submachine gun produced by Hephaestus Industries. Despite its fierce reputation, it still manages to feel like a toy. Uses 9mm rounds."
+	desc = "The H90K is a compact, large capacity submachine gun produced by MarsTech. Despite its fierce reputation, it still manages to feel like a toy. Uses 9mm rounds."
+	description_fluff = "The leading civilian-sector high-quality small arms brand of Hephaestus Industries, MarsTech has been the provider of choice for law enforcement and security forces for over 300 years."
 	icon_state = "p90smg"
 	item_state = "p90"
 	w_class = ITEMSIZE_NORMAL

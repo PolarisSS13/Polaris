@@ -41,11 +41,6 @@
 	icon_state = "lpistol"
 	charge_cost = 480
 
-	firemodes = list(
-		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun, fire_delay=null, charge_cost = 240),
-		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, fire_delay=null, charge_cost = 240),
-		)
-
 /obj/item/weapon/gun/energy/pulse_rifle/compact/admin
 	name = "\improper LP2 Grasshopper Deluxe"
 	desc = "It's not the size of the gun, it's the size of the hole it puts through people."
