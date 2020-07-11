@@ -22,3 +22,27 @@
 		icon_state = initial(icon_state)
 	else
 		icon_state = "[initial(icon_state)]-e"
+
+//Bastard child of a revolver and a semi-auto rifle.
+/obj/item/weapon/gun/projectile/revolvingrifle
+	name = "revolving rifle"
+	desc = "The Gungnir is a novel, antique idea brought into the modern era by Hedberg-Hammarstrom. The semi-automatic revolving mechanism offers no real advantage, but some colonists swear by it. Uses .44 magnum revolver rounds."
+	description_fluff = "Sif’s largest home-grown firearms manufacturer, the Hedberg-Hammarstrom company offers a range of high-quality, high-cost hunting rifles and shotguns designed with the Sivian wilderness - and its wildlife - in mind. \
+	The company operates just one production plant in Kalmar, but their weapons have found popularity on garden worlds as far afield as the Tajaran homeworld due to their excellent build quality, \
+	precision, and stopping power."
+	icon_state = "revolvingrifle"
+	item_state = "boltaction"
+	w_class = ITEMSIZE_LARGE
+	caliber = ".44"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+	slot_flags = SLOT_BACK
+	handle_casings = CYCLE_CASINGS
+	load_method = SINGLE_CASING|SPEEDLOADER
+	max_shells = 6
+	ammo_type = /obj/item/ammo_casing/a44/rifle
+
+/obj/item/weapon/gun/projectile/revolvingrifle/update_icon()
+	if(ammo_magazine)
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-e"

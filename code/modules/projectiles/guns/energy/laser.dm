@@ -46,6 +46,17 @@
 		list(mode_name="suppressive", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 12),
 		)
 
+//Functionally identical, but slightly higher tech due to rarer.
+/obj/item/weapon/gun/energy/laser/sleek
+	name = "\improper LR1 Shishi"
+	desc = "A Bishamonten Company LR1 Shishi rifle, a rare early 23rd century futurist design with a nonetheless timeless ability to kill."
+	description_fluff = "Bisamonten was arms company that operated from roughly 2150-2280 - the height of the first extrasolar colonisation boom - before filing for bankruptcy and selling off its assets to various companies that would go on to become today’s TSCs. \
+	Focused on sleek ‘futurist’ designs which have largely fallen out of fashion but remain popular with collectors and people hoping to make some quick thalers from replica weapons. \
+	Their weapons tended to be form over function - despite their flashy looks, most were completely unremarkable one way or another as weapons and used very standard firing mechanisms."
+	icon_state = "lrifle"
+	item_state = "lrifle"
+	origin_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 3)
+
 /obj/item/weapon/gun/energy/retro
 	name = "retro laser"
 	icon_state = "retro"

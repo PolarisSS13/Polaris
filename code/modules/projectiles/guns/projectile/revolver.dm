@@ -182,7 +182,7 @@ obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 	Focused on sleek ‘futurist’ designs which have largely fallen out of fashion but remain popular with collectors and people hoping to make some quick thalers from replica weapons. \
 	Bishamonten weapons tended to be form over function - despite their flashy looks, most were completely unremarkable one way or another as weapons and used very standard firing mechanisms - \
 	the Mako was a notable exception, and original examples are much sought after."
-	icon_state = "lemat"
+	icon_state = "combatrevolver"
 	item_state = "revolver"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	handle_casings = CYCLE_CASINGS

@@ -132,7 +132,10 @@
 
 /obj/item/weapon/gun/projectile/automatic/z8
 	name = "battle rifle"
-	desc = "The Z8 Bulldog is an older model designated marksman rifle, made by the now defunct Zendai Foundries. Makes you feel like an old-school badass when you hold it, even though it can only hold 10 round magazines. Uses 7.62mm rounds and has an under barrel grenade launcher."
+	desc = "The Z8 Bulldog is an older model battle rifle, made by the now defunct Zendai Foundries. Makes you feel like an old-school badass when you hold it, even though it can only hold 10 round magazines. Uses 7.62mm rounds and has an under barrel grenade launcher."
+	description_fluff = "Zendai Foundries was a well-respected mid-sized arms company that operated until 2508, when it was acquired by Hephaestus Industries. \
+	Plans to integrate the brand into wider corporate operations were brought to an abrupt halt by the SolGov-Hegemony war, and the company was left by the wayside. \
+	Hephaestus still produces replacement parts for many of Zendai's most popular weapons, including the Z8 Bulldog, and a great detail remain in service."
 	icon_state = "carbine" // This isn't a carbine. :T
 	item_state = "z8carbine"
 	wielded_item_state = "z8carbine-wielded"
@@ -422,3 +425,30 @@
 		item_state = "bullpup-empty"
 	if(!ignore_inhands)
 		update_held_icon()
+
+//Functionally a mini-uzi with slightly less terrible burst spread.
+/obj/item/weapon/gun/projectile/automatic/combatsmg
+	name = "\improper PP3 Ten"
+	desc = "The Bishamonten PP3 Ten personal defense weapon is a rare design much sought after - though more for its looks than its functionality. Uses 9mm rounds."
+	description_fluff = "The Bishamonten Company operated from roughly 2150-2280 - the height of the first extrasolar colonisation boom - before filing for bankruptcy and selling off its assets to various companies that would go on to become today’s TSCs. \
+	Focused on sleek ‘futurist’ designs which have largely fallen out of fashion but remain popular with collectors and people hoping to make some quick thalers from replica weapons. \
+	Bishamonten weapons tended to be form over function - despite their flashy looks, most were completely unremarkable one way or another as weapons and used very standard firing mechanisms."
+	icon_state = "combatsmg"
+	w_class = ITEMSIZE_NORMAL
+	load_method = MAGAZINE
+	caliber = "9mm"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4)
+	magazine_type = /obj/item/ammo_magazine/m9mmt
+	allowed_magazines = list(/obj/item/ammo_magazine/m9mmt)
+
+	firemodes = list(
+		list(mode_name="semiauto", burst=1, fire_delay=0),
+		list(mode_name="3-round bursts", burst=3, burst_delay=1, fire_delay=4, move_delay=4, burst_accuracy=list(0,-15,-30), dispersion=list(0.0, 0.6, 0.6))
+		)
+
+/obj/item/weapon/gun/projectile/automatic/combatsmg/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "combatsmg"
+	else
+		icon_state = "combatsmg-empty"
