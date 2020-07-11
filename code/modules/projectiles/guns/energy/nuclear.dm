@@ -72,7 +72,7 @@
 //Functionally a Perun, but flavoured.
 /obj/item/weapon/gun/energy/gun/compact
 	name = "personal energy weapon"
-	desc = "The RayZar EW20 Cygnus personal energy weapon - or PEW - is Ward-Takahasi's entry into the variable capacity energy gun market. New users are advised to 'sey RayZars to stun'."
+	desc = "The RayZar EW20 Cygnus personal energy weapon - or PEW - is Ward-Takahasi's entry into the variable capacity energy gun market. New users are advised to 'set RayZars to stun'."
 	description_fluff = "RayZar is Ward-Takahashi’s main consumer weapons brand, known for producing and licensing a wide variety of specialist energy weapons of various types and quality primarily for the civilian market."
 	icon_state = "PDWstun100"
 	item_state = null
