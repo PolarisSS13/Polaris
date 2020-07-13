@@ -31,6 +31,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	power_environ = 0
 	base_turf = /turf/space
 	ambience = AMBIENCE_SPACE
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/space/atmosalert()
 	return
@@ -68,7 +69,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/shuttle
 	requires_power = 0
-	flags = RAD_SHIELDED
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
 	forbid_events = TRUE
@@ -201,6 +202,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Alien base"
 	icon_state = "yellow"
 	requires_power = 0
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 // CENTCOM
 
@@ -209,6 +211,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "centcom"
 	requires_power = 0
 	dynamic_lighting = 0
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/centcom/control
 	name = "\improper CentCom Control"
@@ -286,6 +289,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	dynamic_lighting = 0
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/syndicate_mothership/control
 	name = "\improper Mercenary Control Room"
@@ -302,6 +306,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "asteroid"
 	requires_power = 0
 	sound_env = ASTEROID
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/asteroid/cave				// -- TLE
 	name = "\improper Moon - Underground"
@@ -325,6 +330,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	dynamic_lighting = 0
 	sound_env = ARENA
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/tdome/tdome1
 	name = "\improper Thunderdome (Team 1)"
@@ -352,6 +358,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	flags = RAD_SHIELDED
 	base_turf = /turf/space
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -407,6 +414,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	dynamic_lighting = 0
 	ambience = AMBIENCE_OTHERWORLDLY
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/skipjack_station
 	name = "\improper Skipjack"
@@ -414,6 +422,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	base_turf = /turf/space
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/skipjack_station/start
 	name = "\improper Skipjack"
@@ -448,6 +457,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Prison Station"
 	icon_state = "brig"
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/prison/arrival_airlock
 	name = "\improper Prison Station Airlock"
@@ -1287,6 +1297,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	dynamic_lighting = 0
 	sound_env = LARGE_ENCLOSED
 	forbid_events = TRUE
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
@@ -2062,6 +2073,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Derelict Station"
 	icon_state = "storage"
 	ambience = AMBIENCE_RUINS
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/derelict/hallway/primary
 	name = "\improper Derelict Primary Hallway"
@@ -2162,6 +2174,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/constructionsite
 	name = "\improper Construction Site"
 	icon_state = "storage"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/constructionsite/storage
 	name = "\improper Construction Site Storage Area"
@@ -2347,6 +2360,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/wreck
 	ambience = AMBIENCE_RUINS
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/wreck/ai
 	name = "\improper AI Chamber"
@@ -2423,6 +2437,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Strange Location"
 	icon_state = "away"
 	ambience = AMBIENCE_FOREBODING
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/awaymission/example
 	name = "\improper Strange Station"
