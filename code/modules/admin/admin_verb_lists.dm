@@ -163,6 +163,7 @@ var/list/admin_verbs_server = list(
 	/datum/admins/proc/restart,
 	/datum/admins/proc/delay,
 	/datum/admins/proc/toggleaban,
+	/datum/admins/proc/togglepersistence,
 	/client/proc/cmd_mod_say,
 	/client/proc/toggle_log_hrefs,
 	/datum/admins/proc/immreboot,

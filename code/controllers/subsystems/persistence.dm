@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(persistence)
 
 /datum/controller/subsystem/persistence/proc/track_value(var/atom/value, var/track_type)
 
-	if(ticker.mode.persistence == 0) //if we're not canon in config or by gamemode, nothing will save.
+	if(config.persistence_enabled == 0) //if the config is not set to persistent nothing will save or load.
 		return
 
 	var/turf/T = get_turf(value)

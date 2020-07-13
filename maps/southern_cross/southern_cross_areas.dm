@@ -754,11 +754,13 @@
 	name = "\improper Command - HoP's Office"
 	icon_state = "head_quarters"
 	holomap_color = HOLOMAP_AREACOLOR_COMMAND
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/heads/sc/hor
 	name = "\improper Research - RD's Office"
 	icon_state = "head_quarters"
 	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/heads/sc/chief
 	name = "\improper Engineering - CE's Office"
@@ -774,6 +776,7 @@
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/engineering/engineer_eva
 	name = "\improper Engineering EVA"

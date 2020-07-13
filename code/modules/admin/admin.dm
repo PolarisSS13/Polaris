@@ -930,6 +930,20 @@ proc/admin_notice(var/message, var/rights)
 	world.update_status()
 	feedback_add_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/togglepersistence()
+	set category = "Server"
+	set desc="Whether persistent data will be saved from now on."
+	set name="Toggle Persistent Data"
+	config.persistence_enabled = !(config.persistence_enabled)
+	if(config.persistence_enabled)
+		to_world("<B>Persistence is now enabled..</B>")
+	else
+		to_world("<B>Persistence is no longer enabled.</B>")
+	message_admins("<font color='blue'>[key_name_admin(usr)] toggled persistence to [config.persistence_enabled ? "On" : "Off"].</font>", 1)
+	log_admin("[key_name(usr)] toggled persistence to [config.persistence_enabled ? "On" : "Off"].")
+	world.update_status()
+	feedback_add_details("admin_verb","TPD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/admins/proc/toggle_aliens()
 	set category = "Server"
 	set desc="Toggle alien mobs"
@@ -1190,12 +1204,6 @@ proc/admin_notice(var/message, var/rights)
 		out += "<b>Respawning:</b> <a href='?src=\ref[ticker.mode];toggle=respawn'>disallowed</a>"
 	else
 		out += "<b>Respawning:</b> <a href='?src=\ref[ticker.mode];toggle=respawn'>allowed</a>"
-	out += "<br/>"
-
-	if(ticker.mode.persistence)
-		out += "<b>Persistence Saving:</b> <a href='?src=\ref[ticker.mode];toggle=persistence'>enabled</a>"
-	else
-		out += "<b>Persistence Saving:</b> <a href='?src=\ref[ticker.mode];toggle=persistence'>disabled</a>"
 	out += "<br/>"
 
 	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[ticker.mode];set=shuttle_delay'>[ticker.mode.shuttle_delay]</a><br/>"

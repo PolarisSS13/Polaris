@@ -957,10 +957,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/heads/hop
 	name = "\improper Command - HoP's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/heads/hor
 	name = "\improper Research - RD's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/heads/chief
 	name = "\improper Engineering - CE's Office"
@@ -973,6 +975,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/heads/cmo
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/courtroom
 	name = "\improper Courtroom"
@@ -1956,6 +1959,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/rnd/rdoffice
 	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/rnd/supermatter
 	name = "\improper Supermatter Lab"

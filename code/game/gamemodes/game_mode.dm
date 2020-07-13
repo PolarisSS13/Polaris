@@ -16,7 +16,6 @@ var/global/list/additional_antag_types = list()
 	var/end_on_antag_death = 0               // Round will end when all antagonists are dead.
 	var/ert_disabled = 0                     // ERT cannot be called.
 	var/deny_respawn = 0	                 // Disable respawn during this round.
-	var/persistence = 0                       // Enable persistence subsystem saving for this mode.
 
 	var/list/disabled_jobs = list()           // Mostly used for Malf.  This check is performed in job_controller so it doesn't spawn a regular AI.
 
@@ -55,8 +54,6 @@ var/global/list/additional_antag_types = list()
 				auto_recall_shuttle = !auto_recall_shuttle
 			if("autotraitor")
 				round_autoantag = !round_autoantag
-			if("persistence")
-				persistence = !persistence
 		message_admins("Admin [key_name_admin(usr)] toggled game mode option '[href_list["toggle"]]'.")
 	else if(href_list["set"])
 		var/choice = ""
