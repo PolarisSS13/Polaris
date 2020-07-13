@@ -643,6 +643,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/maintenance/disposal
 	name = "Waste Disposal"
 	icon_state = "disposal"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //If trash items got this far, they can be safely deleted.
 
 /area/maintenance/engineering
 	name = "Engineering Maintenance"
@@ -1658,10 +1659,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/medical/surgery
 	name = "\improper Operating Theatre 1"
 	icon_state = "surgery"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //This WOULD become a filth pit
 
 /area/medical/surgery2
 	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/medical/surgeryobs
 	name = "\improper Operation Observation Room"
@@ -1698,6 +1701,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/medical/sleeper
 	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //Trust me.
 
 /area/medical/first_aid_station_starboard
 	name = "\improper Starboard First-Aid Station"
@@ -1912,6 +1916,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/quartermaster/delivery
 	name = "\improper Cargo - Delivery Office"
 	icon_state = "quart"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //So trash doesn't pile up too hard.
 
 /area/quartermaster/miningdock
 	name = "\improper Cargo Mining Dock"

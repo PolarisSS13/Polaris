@@ -1192,6 +1192,12 @@ proc/admin_notice(var/message, var/rights)
 		out += "<b>Respawning:</b> <a href='?src=\ref[ticker.mode];toggle=respawn'>allowed</a>"
 	out += "<br/>"
 
+	if(ticker.mode.persistence)
+		out += "<b>Persistence Saving:</b> <a href='?src=\ref[ticker.mode];toggle=persistence'>disabled</a>"
+	else
+		out += "<b>Persistence Saving:</b> <a href='?src=\ref[ticker.mode];toggle=persistence'>enabled</a>"
+	out += "<br/>"
+
 	out += "<b>Shuttle delay multiplier:</b> <a href='?src=\ref[ticker.mode];set=shuttle_delay'>[ticker.mode.shuttle_delay]</a><br/>"
 
 	if(ticker.mode.auto_recall_shuttle)

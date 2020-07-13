@@ -3,6 +3,7 @@
 	icon_state = "writing1"
 	icon = 'icons/effects/writing.dmi'
 	desc = "It looks like someone has scratched something here."
+	plane = DIRTY_PLANE
 	gender = PLURAL
 	blend_mode = BLEND_MULTIPLY
 	color = "#000000"
@@ -34,7 +35,7 @@
 	. = ..()
 
 /obj/effect/decal/writing/examine(mob/user)
-	..(user)
+	. = ..()
 	to_chat(user,  "It reads \"[message]\".")
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
