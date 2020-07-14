@@ -274,6 +274,8 @@ obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
 /obj/item/weapon/gun/projectile/revolver/webley
 	name = "patrol revolver"
 	desc = "A rugged top break revolver commonly issued to members of the SifGuard. Uses .44 magnum rounds."
+	description_fluff = "The Heberg-Hammarstrom Althing is a simple, head-wearing revolver made with an anti-corrosive alloy. \
+	The Althing is advertised as being 'able to survive six months on the bottom of a frozen river and emerge full ready to save a life'. Issued as standard sidearms to SifGuard frontier patrol."
 	icon_state = "webley2"
 	item_state = "webley2"
 	caliber = ".44"
