@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(mobs)
 			// Right now mob.Life() is unstable enough I think we need to use a try catch.
 			// Obviously we should try and get rid of this for performance reasons when we can.
 			try
-				if(M.low_priority && M.loc &&  !(M.z in busy_z_levels))
+				if(M.low_priority &&  !(M.loc && M.z in busy_z_levels))
 					slept_mobs++
 					continue
 				M.Life(times_fired)
