@@ -25,7 +25,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	bump_flag =        SLIME
 	swap_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
 	push_flags =       MONKEY|SLIME|SIMPLE_ANIMAL
-	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT | NO_HALLUCINATION | NO_INFECT
+	flags =            NO_SCAN | NO_SLIP | NO_MINOR_CUT | NO_HALLUCINATION | NO_INFECT | NO_DEFIB
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR | RADIATION_GLOWS | HAS_UNDERWEAR
 	spawn_flags		 = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	health_hud_intensity = 2
@@ -179,13 +179,15 @@ var/datum/species/shapeshifter/promethean/prometheans
 	if(istype(T))
 		if(!(H.shoes || (H.wear_suit && (H.wear_suit.body_parts_covered & FEET))))
 			for(var/obj/O in T)
-				O.clean_blood()
-				H.adjust_nutrition(rand(5, 15))
+				if(O.clean_blood())
+					H.adjust_nutrition(rand(5, 15))
 			if (istype(T, /turf/simulated))
 				var/turf/simulated/S = T
-				T.clean_blood()
-				S.dirt = 0
-				H.adjust_nutrition(rand(10, 20))
+				if(T.clean_blood())
+					H.adjust_nutrition(rand(10, 20))
+				if(S.dirt > 50)
+					S.dirt = 0
+					H.adjust_nutrition(rand(10, 20))
 		if(H.clean_blood(1))
 			H.adjust_nutrition(rand(5, 15))
 		if(H.r_hand)

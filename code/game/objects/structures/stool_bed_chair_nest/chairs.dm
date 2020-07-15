@@ -21,7 +21,7 @@
 			return
 		user.drop_item()
 		var/obj/structure/bed/chair/e_chair/E = new (src.loc, material.name)
-		playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 		E.set_dir(dir)
 		E.part = SK
 		SK.loc = E
@@ -188,7 +188,7 @@
 			occupant.apply_effect(6, WEAKEN, blocked)
 			occupant.apply_effect(6, STUTTER, blocked)
 			occupant.apply_damage(10, BRUTE, def_zone, blocked, soaked)
-			playsound(src.loc, 'sound/weapons/punch1.ogg', 50, 1, -1)
+			playsound(src, 'sound/weapons/punch1.ogg', 50, 1, -1)
 			if(istype(A, /mob/living))
 				var/mob/living/victim = A
 				def_zone = ran_zone()
@@ -246,6 +246,14 @@
 			name = "red [initial(name)]"
 		else
 			name = "[sofa_material] [initial(name)]"
+
+/obj/structure/bed/chair/update_layer()
+	// Corner east/west should be on top of mobs, any other state's north should be.
+	if((icon_state == "sofacorner" && ((dir & EAST) || (dir & WEST))) || (icon_state != "sofacorner" && (dir & NORTH)))
+		plane = MOB_PLANE
+		layer = MOB_LAYER + 0.1
+	else
+		reset_plane_and_layer()
 
 /obj/structure/bed/chair/sofa/left
 	icon_state = "sofaend_left"

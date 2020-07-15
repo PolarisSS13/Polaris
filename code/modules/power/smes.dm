@@ -321,7 +321,7 @@
 				to_chat(user, "<span class='filter_notice'><span class='warning'>You must remove the floor plating first.</span></span>")
 			else
 				to_chat(user, "<span class='filter_notice'><span class='notice'>You begin to cut the cables...</span></span>")
-				playsound(get_turf(src), 'sound/items/Deconstruct.ogg', 50, 1)
+				playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 				if(do_after(user, 50 * W.toolspeed))
 					if (prob(50) && electrocute_mob(usr, term.powernet, term))
 						var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

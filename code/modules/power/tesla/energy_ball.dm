@@ -60,7 +60,7 @@
 
 		move_the_basket_ball(max(wait - 5, 4 + orbiting_balls.len * 1.5))
 
-		playsound(src.loc, 'sound/effects/lightningbolt.ogg', 100, 1, extrarange = 30)
+		playsound(src, 'sound/effects/lightningbolt.ogg', 100, 1, extrarange = 30)
 
 		set_dir(tesla_zap(src.loc, 7, TESLA_DEFAULT_POWER, TRUE))
 
@@ -101,7 +101,7 @@
 		energy_to_lower = energy_to_raise - 20
 		energy_to_raise = energy_to_raise * 1.25
 
-		playsound(src.loc, 'sound/effects/lightning_chargeup.ogg', 100, 1, extrarange = 30)
+		playsound(src, 'sound/effects/lightning_chargeup.ogg', 100, 1, extrarange = 30)
 		//addtimer(CALLBACK(src, .proc/new_mini_ball), 100)
 		spawn(100) new_mini_ball()
 
@@ -119,6 +119,7 @@
 	if(!loc)
 		return
 	var/obj/singularity/energy_ball/EB = new(loc, 0, TRUE)
+	all_singularities -= EB //why are these miniballs even singularities in the first place, they don't do anything
 
 	EB.transform *= pick(0.3, 0.4, 0.5, 0.6, 0.7)
 	var/icon/I = icon(icon,icon_state,dir)

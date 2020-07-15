@@ -61,6 +61,10 @@ proc/overmap_spacetravel(var/turf/space/T, var/atom/movable/A)
 	if (!M)
 		return
 
+	// Don't let AI eyes yeet themselves off the map
+	if(istype(A, /mob/observer/eye))
+		return
+
 	if(A.lost_in_space())
 		if(!QDELETED(A))
 			qdel(A)

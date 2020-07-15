@@ -41,7 +41,7 @@
 
 	return src
 
-/mob/new_player/AIize()
+/mob/new_player/AIize(var/move = TRUE)
 	spawning = 1
 	return ..()
 
@@ -53,7 +53,7 @@
 
 	return ..(move)
 
-/mob/living/carbon/AIize()
+/mob/living/carbon/AIize(var/move = TRUE)
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
@@ -67,7 +67,7 @@
 /mob/proc/AIize(var/move = TRUE)
 	if(client)
 		src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // stop the jams for AIs
-	
+
 	var/newloc = loc
 	if(move)
 		var/obj/loc_landmark

@@ -181,7 +181,7 @@
 			bullets--
 			D.icon_state = "foamdart"
 			D.name = "foam dart"
-			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
+			playsound(src, 'sound/items/syringeproj.ogg', 50, 1)
 
 			for(var/i=0, i<6, i++)
 				if (D)
@@ -229,7 +229,7 @@
 					O.show_message(text("<span class='danger'>\The [] casually lines up a shot with []'s head and pulls the trigger!</span>", user, M), 1, "<span class='warning'>You hear the sound of foam against skull</span>", 2)
 					O.show_message(text("<span class='warning'>\The [] was hit in the head by the foam dart!</span>", M), 1)
 
-			playsound(user.loc, 'sound/items/syringeproj.ogg', 50, 1)
+			playsound(src, 'sound/items/syringeproj.ogg', 50, 1)
 			new /obj/item/toy/ammo/crossbow(M.loc)
 			src.bullets--
 		else if (M.lying && src.bullets == 0)
@@ -278,12 +278,12 @@
 		src.active = !( src.active )
 		if (src.active)
 			to_chat(user, "<span class='notice'>You extend the plastic blade with a quick flick of your wrist.</span>")
-			playsound(user, 'sound/weapons/saberon.ogg', 50, 1)
+			playsound(src, 'sound/weapons/saberon.ogg', 50, 1)
 			src.item_state = "[icon_state]_blade"
 			src.w_class = ITEMSIZE_LARGE
 		else
 			to_chat(user, "<span class='notice'>You push the plastic blade back down into the handle.</span>")
-			playsound(user, 'sound/weapons/saberoff.ogg', 50, 1)
+			playsound(src, 'sound/weapons/saberoff.ogg', 50, 1)
 			src.item_state = "[icon_state]"
 			src.w_class = ITEMSIZE_SMALL
 		update_icon()
@@ -397,7 +397,7 @@
 /obj/item/toy/bosunwhistle/attack_self(mob/user as mob)
 	if(cooldown < world.time - 35)
 		to_chat(user, "<span class='notice'>You blow on [src], creating an ear-splitting noise!</span>")
-		playsound(user, 'sound/misc/boatswain.ogg', 20, 1)
+		playsound(src, 'sound/misc/boatswain.ogg', 20, 1)
 		cooldown = world.time
 
 /*
@@ -413,14 +413,14 @@
 /obj/item/toy/prize/attack_self(mob/user as mob)
 	if(cooldown < world.time - 8)
 		to_chat(user, "<span class='notice'>You play with [src].</span>")
-		playsound(user, 'sound/mecha/mechstep.ogg', 20, 1)
+		playsound(src, 'sound/mecha/mechstep.ogg', 20, 1)
 		cooldown = world.time
 
 /obj/item/toy/prize/attack_hand(mob/user as mob)
 	if(loc == user)
 		if(cooldown < world.time - 8)
 			to_chat(user, "<span class='notice'>You play with [src].</span>")
-			playsound(user, 'sound/mecha/mechturn.ogg', 20, 1)
+			playsound(src, 'sound/mecha/mechturn.ogg', 20, 1)
 			cooldown = world.time
 			return
 	..()
@@ -499,7 +499,7 @@
 	if(cooldown < world.time)
 		cooldown = (world.time + 30) //3 second cooldown
 		user.visible_message("<span class='notice'>The [src] says \"[toysay]\".</span>")
-		playsound(user, 'sound/machines/click.ogg', 20, 1)
+		playsound(src, 'sound/machines/click.ogg', 20, 1)
 
 /obj/item/toy/figure/cmo
 	name = "Chief Medical Officer action figure"
@@ -753,12 +753,12 @@
 
 // Attack mob
 /obj/item/toy/plushie/carp/attack(mob/M as mob, mob/user as mob)
-	playsound(loc, bitesound, 20, 1)	// Play bite sound in local area
+	playsound(src, bitesound, 20, 1)	// Play bite sound in local area
 	return ..()
 
 // Attack self
 /obj/item/toy/plushie/carp/attack_self(mob/user as mob)
-	playsound(src.loc, bitesound, 20, 1)
+	playsound(src, bitesound, 20, 1)
 	return ..()
 
 
@@ -1371,7 +1371,7 @@
 	if(!cooldown) //for the sanity of everyone
 		var/message = generate_ion_law()
 		to_chat(user, "<span class='notice'>You press the button on [src].</span>")
-		playsound(user, 'sound/machines/click.ogg', 20, 1)
+		playsound(src, 'sound/machines/click.ogg', 20, 1)
 		visible_message("<span class='danger'>[message]</span>")
 		cooldown = 1
 		spawn(30) cooldown = 0
@@ -1390,7 +1390,7 @@
 	if(!cooldown) //for the sanity of everyone
 		var/message = pick("You won't get away this time, Griffin!", "Stop right there, criminal!", "Hoot! Hoot!", "I am the night!")
 		to_chat(user, "<span class='notice'>You pull the string on the [src].</span>")
-		//playsound(user, 'sound/misc/hoot.ogg', 25, 1)
+		//playsound(src, 'sound/misc/hoot.ogg', 25, 1)
 		visible_message("<span class='danger'>[message]</span>")
 		cooldown = 1
 		spawn(30) cooldown = 0
@@ -1409,7 +1409,7 @@
 	if(!cooldown) //for the sanity of everyone
 		var/message = pick("You can't stop me, Owl!", "My plan is flawless! The vault is mine!", "Caaaawwww!", "You will never catch me!")
 		to_chat(user, "<span class='notice'>You pull the string on the [src].</span>")
-		//playsound(user, 'sound/misc/caw.ogg', 25, 1)
+		//playsound(src, 'sound/misc/caw.ogg', 25, 1)
 		visible_message("<span class='danger'>[message]</span>")
 		cooldown = 1
 		spawn(30) cooldown = 0
@@ -1445,3 +1445,77 @@
 	force = 1
 	throwforce = 1
 	drop_sound = 'sound/items/drop/box.ogg'
+
+//////////////////////////////////////////////////////
+//					Chess Pieces					//
+//////////////////////////////////////////////////////
+
+/obj/item/toy/chess
+	name = "chess piece"
+	desc = "This should never display."
+	icon = 'icons/obj/chess.dmi'
+	w_class = ITEMSIZE_SMALL
+	force = 1
+	throwforce = 1
+	drop_sound = 'sound/items/drop/glass.ogg'
+
+/obj/item/toy/chess/pawn_white
+	name = "blue pawn"
+	desc = "A large pawn piece for playing chess. It's made of a blue-colored glass."
+	description_info = "Pawns can move forward one square, if that square is unoccupied. If the pawn has not yet moved, it has the option of moving two squares forward provided both squares in front of the pawn are unoccupied. A pawn cannot move backward. They can only capture an enemy piece on either of the two tiles diagonally in front of them, but not the tile directly in front of them."
+	icon_state = "w-pawn"
+/obj/item/toy/chess/pawn_black
+	name = "purple pawn"
+	desc = "A large pawn piece for playing chess. It's made of a purple-colored glass."
+	description_info = "Pawns can move forward one square, if that square is unoccupied. If the pawn has not yet moved, it has the option of moving two squares forward provided both squares in front of the pawn are unoccupied. A pawn cannot move backward. They can only capture an enemy piece on either of the two tiles diagonally in front of them, but not the tile directly in front of them."
+	icon_state = "b-pawn"
+/obj/item/toy/chess/rook_white
+	name = "blue rook"
+	desc = "A large rook piece for playing chess. It's made of a blue-colored glass."
+	description_info = "The Rook can move any number of vacant squares vertically or horizontally."
+	icon_state = "w-rook"
+/obj/item/toy/chess/rook_black
+	name = "purple rook"
+	desc = "A large rook piece for playing chess. It's made of a purple-colored glass."
+	description_info = "The Rook can move any number of vacant squares vertically or horizontally."
+	icon_state = "b-rook"
+/obj/item/toy/chess/knight_white
+	name = "blue knight"
+	desc = "A large knight piece for playing chess. It's made of a blue-colored glass. Sadly, you can't ride it."
+	description_info = "The Knight can either move two squares horizontally and one square vertically or two squares vertically and one square horizontally. The knight's movement can also be viewed as an 'L' laid out at any horizontal or vertical angle."
+	icon_state = "w-knight"
+/obj/item/toy/chess/knight_black
+	name = "purple knight"
+	desc = "A large knight piece for playing chess. It's made of a purple-colored glass. 'Just a flesh wound.'"
+	description_info = "The Knight can either move two squares horizontally and one square vertically or two squares vertically and one square horizontally. The knight's movement can also be viewed as an 'L' laid out at any horizontal or vertical angle."
+	icon_state = "b-knight"
+/obj/item/toy/chess/bishop_white
+	name = "blue bishop"
+	desc = "A large bishop piece for playing chess. It's made of a blue-colored glass."
+	description_info = "The Bishop can move any number of vacant squares in any diagonal direction."
+	icon_state = "w-bishop"
+/obj/item/toy/chess/bishop_black
+	name = "purple bishop"
+	desc = "A large bishop piece for playing chess. It's made of a purple-colored glass."
+	description_info = "The Bishop can move any number of vacant squares in any diagonal direction."
+	icon_state = "b-bishop"
+/obj/item/toy/chess/queen_white
+	name = "blue queen"
+	desc = "A large queen piece for playing chess. It's made of a blue-colored glass."
+	description_info = "The Queen can move any number of vacant squares diagonally, horizontally, or vertically."
+	icon_state = "w-queen"
+/obj/item/toy/chess/queen_black
+	name = "purple queen"
+	desc = "A large queen piece for playing chess. It's made of a purple-colored glass."
+	description_info = "The Queen can move any number of vacant squares diagonally, horizontally, or vertically."
+	icon_state = "b-queen"
+/obj/item/toy/chess/king_white
+	name = "blue king"
+	desc = "A large king piece for playing chess. It's made of a blue-colored glass."
+	description_info = "The King can move exactly one square horizontally, vertically, or diagonally. If your opponent captures this piece, you lose."
+	icon_state = "w-king"
+/obj/item/toy/chess/king_black
+	name = "purple king"
+	desc = "A large king piece for playing chess. It's made of a purple-colored glass."
+	description_info = "The King can move exactly one square horizontally, vertically, or diagonally. If your opponent captures this piece, you lose."
+	icon_state = "b-king"
