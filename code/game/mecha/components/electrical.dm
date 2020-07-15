@@ -2,7 +2,7 @@
 /obj/item/mecha_parts/component/electrical
 	name = "mecha electrical harness"
 	icon = 'icons/mecha/mech_component.dmi'
-	icon_state = "component"
+	icon_state = "board"
 	w_class = ITEMSIZE_HUGE
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 

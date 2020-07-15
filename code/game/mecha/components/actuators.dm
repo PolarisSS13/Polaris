@@ -2,7 +2,7 @@
 /obj/item/mecha_parts/component/actuator
 	name = "mecha actuator"
 	icon = 'icons/mecha/mech_component.dmi'
-	icon_state = "component"
+	icon_state = "motor"
 	w_class = ITEMSIZE_HUGE
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 

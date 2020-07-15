@@ -2,7 +2,7 @@
 /obj/item/mecha_parts/component/gas
 	name = "mecha life-support"
 	icon = 'icons/mecha/mech_component.dmi'
-	icon_state = "component"
+	icon_state = "lifesupport"
 	w_class = ITEMSIZE_HUGE
 	origin_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
 

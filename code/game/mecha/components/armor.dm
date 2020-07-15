@@ -2,7 +2,7 @@
 /obj/item/mecha_parts/component/armor
 	name = "mecha plating"
 	icon = 'icons/mecha/mech_component.dmi'
-	icon_state = "component"
+	icon_state = "armor"
 	w_class = ITEMSIZE_HUGE
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 2)
 
