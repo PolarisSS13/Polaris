@@ -6,6 +6,7 @@
 	icon = 'icons/obj/closets/bases/crate.dmi'
 	closet_appearance = /decl/closet_appearance/crate
 	climbable = 1
+	dir = 4 //Spawn facing 'forward' by default.
 	var/points_per_crate = 5
 	var/rigged = 0
 
@@ -64,6 +65,26 @@
 	src.opened = 0
 	update_icon()
 	return 1
+
+/obj/structure/closet/crate/verb/rotate_clockwise()
+	set name = "Rotate Crate Clockwise"
+	set category = "Object"
+	set src in oview(1)
+
+	if (usr.stat || usr.restrained()  || anchored)
+		return
+
+	src.set_dir(turn(src.dir, 270))
+
+/obj/structure/closet/crate/verb/rotate_counterclockwise()
+	set category = "Object"
+	set name = "Rotate Crate Counterclockwise"
+	set src in view(1)
+
+	if (usr.stat || usr.restrained()  || anchored)
+		return
+
+	src.set_dir(turn(src.dir, 90))
 
 /obj/structure/closet/crate/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(opened)
