@@ -6018,3 +6018,15 @@
 /obj/item/weapon/reagent_containers/food/snacks/cosmicbrowniesslice/filled/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 1)
+	
+/obj/item/weapon/reagent_containers/food/snacks/lasagna
+	name = "lasagna"
+	desc = "Meaty, tomato-y, and ready to eat-y. Favorite of cats."
+	icon = 'icons/obj/food.dmi'
+	icon_state = "lasagna"
+	nutriment_amt = 5
+	nutriment_desc = list("tomato" = 4, "meat" = 2)
+
+/obj/item/weapon/reagent_containers/food/snacks/lasagna/Initialize()
+	..()
+	reagents.add_reagent("protein", 2) //For meaty things.
