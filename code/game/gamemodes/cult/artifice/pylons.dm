@@ -17,6 +17,10 @@
 
 	var/blood_per_tick = 0
 
+	can_mutate = FALSE
+
+	available_pylon_types = null
+
 /obj/structure/cult/pylon/networked/Initialize()
 	..()
 
@@ -62,6 +66,8 @@
 	return FALSE
 
 /obj/structure/cult/pylon/networked/perform_attacked(mob/user, var/damage, var/obj/item/I)	// Return true if the damage continues on.
+	if(istype(I, /obj/item/weapon/material/kitchen/utensil/fork/tuning))
+		return FALSE
 	return TRUE
 
 /obj/structure/cult/pylon/networked/perform_damaged(var/damage)	// Return true if the damage continues on.
@@ -168,8 +174,8 @@
 
 	return resolved
 
-// Will Pylon
-// Indoctrinates nearby simple mobs to the cult faction.
+// Agonizing Pylon
+// Fires darklight beams at non-cultists nearby.
 
 /obj/structure/cult/pylon/networked/laser
 	name = "Agonizing Pylon"

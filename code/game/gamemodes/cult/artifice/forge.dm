@@ -1,9 +1,10 @@
 
-GLOBAL_LIST_INIT(cultforge_conversion_list, list(\
-	/obj/item/stack/material/steel = /obj/item/stack/material/bloodsteel,\
-	/obj/item/clothing/suit/space = /obj/item/clothing/suit/space/cult,\
-	/obj/item/clothing/head/helmet/space = /obj/item/clothing/head/helmet/space/cult\
-	))
+GLOBAL_LIST(cultforge_conversion_list)
+
+/hook/startup/proc/setup_cultforge_datums()
+	for(var/path in subtypesof(/datum/cultist/artifice))
+		GLOB.cultforge_conversion_list |= new path()
+
 
 /obj/structure/cult/forge
 	name = "Daemon forge"
@@ -30,20 +31,24 @@ GLOBAL_LIST_INIT(cultforge_conversion_list, list(\
 /obj/structure/cult/forge/attackby(obj/item/W as obj, mob/user as mob)
 	if(active)
 		var/I
-		for(var/path in GLOB.cultforge_conversion_list)
-			if(istype(W, path))
-				if(istype(W, /obj/item/stack))
-					var/obj/item/stack/S = W
-					if(S.can_use(1))
-						S.use(1)
+		for(var/datum/cultist/artifice/AD in GLOB.cultforge_conversion_list)
+			if(AD.material_cost.len == 1)
+				var/path = AD.material_cost[1]
+				if(istype(W, path))
+					if(istype(W, /obj/item/stack))
+						var/obj/item/stack/S = W
+						if(S.can_use(AD.material_cost[path]))
+							S.use(AD.material_cost[path])
 
-						I = GLOB.cultforge_conversion_list[path]
+							I = AD.obj_path
+							bloodcost = AD.cost
+							break
+					else if(AD.material_cost[1] == 1)
+						user.drop_from_inventory(W)
+						qdel(W)
+						bloodcost = AD.cost
+						I = AD.obj_path
 						break
-				else
-					user.drop_from_inventory(W)
-					qdel(W)
-					I = GLOB.cultforge_conversion_list[path]
-					break
 		if(I)
 
 			if(use_bloodnet)

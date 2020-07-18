@@ -464,7 +464,11 @@ proc/findNullRod(var/atom/target)
 	cast_sound = null			// Sound file played when this is used.
 	var/last_castcheck = null	// The last time this spell was cast.
 
-	var/bloodcost = 20
+	var/bloodcost = 10
+
+	var/dangerous = FALSE	// Will this spell drain someone dry?
+
+	var/obj/item/device/crystalball/spellfocus = null
 
 /obj/item/weapon/spell/construct/New()
 	//..() //This kills the spell, because super on this calls the default spell's New, which checks for a core. Can't have that.
@@ -479,25 +483,40 @@ proc/findNullRod(var/atom/target)
 
 /obj/item/weapon/spell/construct/run_checks()
 	if(owner)
-		if((iscultist(owner) || istype(owner, /mob/living/simple_mob/construct)) && (world.time >= (last_castcheck + cooldown))) //Are they a cultist or a construct, and has the cooldown time passed?
+		spellfocus = locate(/obj/item/device/crystalball) in owner
+
+		if(spellfocus)
+			if(!spellfocus.crude && !(iscultist(owner) || istype(owner, /mob/living/simple_mob/construct)))
+				return FALSE
+
+		if((world.time >= (last_castcheck + cooldown))) //Are they a cultist or a construct, and has the cooldown time passed?
 			last_castcheck = world.time
 			return 1
 	return 0
 
 /obj/item/weapon/spell/construct/pay_energy(var/amount)
 	if(owner)
+		if(spellfocus)
+			amount *= spellfocus.efficiency
+
 		var/datum/bloodnet/owner_net = owner.getBloodnet()
 
+		if(spellfocus.networked)
+			owner_net = spellfocus.getBloodnet()
+
 		if(!owner_net)
-			return pay_blood(amount * 2)	// Double cost for non-cultist non-constructs.
+			if(!spellfocus || spellfocus.crude)
+				return pay_blood(amount * 2)	// Double cost for non-cultist non-constructs.
+			else
+				return FALSE
 
 		if(handle_network_payment(owner_net,-1 * amount))
-			return 1
+			return TRUE
 
 		if(iscultist(owner) && pay_blood(round(amount * 0.25)))
-			return 1
+			return TRUE
 
-	return 0
+	return FALSE
 
 // Override this to provide unique effects based on the level of payment from a blood network.
 /obj/item/weapon/spell/construct/proc/handle_network_payment(var/datum/bloodnet/bank_net,var/amount)
@@ -510,14 +529,29 @@ proc/findNullRod(var/atom/target)
 	return bank_net.adjustBlood(amount, TRUE)
 
 /obj/item/weapon/spell/construct/proc/pay_blood(var/amount) //If, for some reason, this is put into the hands of a cultist, by a talisnam or whatever.
+	if(!dangerous)
+		if(owner.getOxyLoss() > 20 || owner.getToxLoss() > 20)
+			return FALSE
+
+		if(ishuman(owner))
+			var/mob/living/carbon/human/H = owner
+
+			if(!H.isSynthetic())
+				if(H.internal_organs_by_name[O_HEART])
+					if(H.vessel.total_volume < H.species.blood_volume * 0.9)
+						return FALSE
+				else
+					if(H.getFireLoss() > 20)
+						return FALSE
+
 	if(ishuman(owner))
 		var/mob/living/carbon/human/H = owner
 		if(!H.should_have_organ(O_HEART) || H.isSynthetic())
 			H.adjustToxLoss(amount * 2)
-			return 1
+			return TRUE
 		if(H.vessel.remove_reagent("blood", amount))
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /obj/item/weapon/spell/construct/afterattack(atom/target, mob/user, proximity_flag, click_parameters) //Not overriding it caused runtimes, because cooldown checked for core.
 	if(!run_checks())
@@ -548,7 +582,7 @@ proc/findNullRod(var/atom/target)
 	var/obj/item/projectile/spell_projectile = null
 	var/pre_shot_delay = 0
 	var/fire_sound = null
-	var/energy_cost_per_shot = 20
+	var/energy_cost_per_shot = 10
 
 /obj/item/weapon/spell/construct/projectile/on_ranged_cast(atom/hit_atom, mob/living/user)
 	if(set_up(hit_atom, user))
@@ -632,11 +666,11 @@ proc/findNullRod(var/atom/target)
 	spawner_type = /obj/effect/temporary_effect/pulse/agonizing_sphere
 
 /obj/item/weapon/spell/construct/spawner/agonizing_sphere/on_ranged_cast(atom/hit_atom, mob/user)
-	if(within_range(hit_atom) && pay_energy(10))
+	if(within_range(hit_atom) && pay_energy(bloodcost))
 		..()
 
 /obj/item/weapon/spell/construct/spawner/agonizing_sphere/on_throw_cast(atom/hit_atom, mob/user)
-	pay_energy(5)
+	pay_energy(bloodcost / 2)
 	if(isliving(hit_atom))
 		var/mob/living/L = hit_atom
 		L.add_modifier(/datum/modifier/agonize, 10 SECONDS)

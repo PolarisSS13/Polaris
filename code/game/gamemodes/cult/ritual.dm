@@ -397,7 +397,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			"armor" = list("hell","destroy","other"),
 			"teleport" = list("travel","self"),
 			"teleport other" = list("travel","other"),
-			"hellish defender" = list("hell","destroy","see")
+			"hellish defender" = list("hell","destroy","see"),
 			"create forge" = list("blood","create","technology")
 		)
 

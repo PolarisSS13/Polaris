@@ -42,6 +42,14 @@
 	// Are we currently animating a power surge?
 	var/surging = FALSE
 
+	var/can_mutate = TRUE
+
+	var/list/available_pylon_types = list(
+		PYLON_CULT_SACRIFICE = /obj/structure/cult/pylon/networked/sacrifice,
+		PYLON_CULT_LASER = /obj/structure/cult/pylon/networked/will,
+		PYLON_CULT_WILL = /obj/structure/cult/pylon/networked/laser
+		)
+
 /obj/structure/cult/pylon/update_icon()
 	cut_overlays()
 
@@ -90,7 +98,10 @@
 	update_icon()
 
 /obj/structure/cult/pylon/attack_hand(mob/M as mob)
-	attackpylon(M, 5)
+	if(can_mutate && istype(M, /mob/living/simple_mob/construct))
+		choose_pylon_type(M)
+	else
+		attackpylon(M, 5)
 
 /obj/structure/cult/pylon/attack_generic(var/mob/user, var/damage)
 	attackpylon(user, damage)
@@ -164,6 +175,29 @@
 	if(!isbroken && (last_activation < world.time + activation_cooldown) && pylon_unique())
 		last_activation = world.time
 		surge()
+
+/obj/structure/cult/pylon/proc/choose_pylon_type(var/mob/living/L)
+	if(!istype(L))
+		return
+
+	if(!LAZYLEN(available_pylon_types))
+		return
+
+	var/choice = input("Pylon type.", "Pylon Metamorphosis") as null|anything in available_pylon_types
+
+	if(!choice)
+		return
+
+	else if(Adjacent(L))
+		var/turf/T = get_turf(src)
+
+		var/path = available_pylon_types[choice]
+
+		forceMove(null)
+		var/obj/structure/cult/pylon/P = new path(T)
+
+		to_chat(L, "<span class='cult'>\The [src] shudders, before transfiguring itself into \the [P]!</span>")
+		qdel(src)
 
 /obj/structure/cult/tome
 	name = "Desk"

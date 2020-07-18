@@ -21,6 +21,10 @@
 
 	var/list/active_beams
 
+	can_mutate = FALSE
+
+	available_pylon_types = null
+
 /obj/structure/cult/pylon/swarm/CanPass(atom/movable/mover, turf/target)
 	if(istype(mover, /mob/living))
 		var/mob/living/L = mover

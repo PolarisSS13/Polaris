@@ -1298,7 +1298,6 @@ var/list/sacrificed = list()
 			found_resources |= O
 
 	for(var/path in required_resources) // Sort through everything, using objects as necessary.
-		var/consumed = FALSE
 		for(var/obj/O in found_resources)
 			if(istype(O, path))
 
@@ -1325,7 +1324,7 @@ var/list/sacrificed = list()
 
 					qdel(O)
 
-			if(required_resources[path] = 0)	// If we found everything, skip to the next.
+			if(required_resources[path] == 0)	// If we found everything, skip to the next.
 				break
 
 	for(var/path in required_resources) // Final check to confirm we are in fact good to spawn the forge.
