@@ -132,6 +132,20 @@
 	chassis = null
 	return TRUE
 
+
+/obj/item/mecha_parts/component/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/stack/nanopaste))
+		var/obj/item/stack/nanopaste/NP = W
+
+		if(integrity < max_integrity)
+			while(integrity < max_integrity && NP)
+				if(do_after(user, 1 SECOND, src) && NP.use(1))
+					adjust_integrity(10)
+
+			return
+
+	return ..()
+
 // Various procs to handle different calls by Exosuits. IE, movement actions, damage actions, etc.
 
 /obj/item/mecha_parts/component/proc/get_step_delay()

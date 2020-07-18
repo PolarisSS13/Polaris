@@ -1427,6 +1427,28 @@
 		user.visible_message("[user] attaches [W] to [src].", "You attach [W] to [src]")
 		return
 
+	else if(istype(W,/obj/item/stack/nanopaste))
+		if(state >= 2)
+			var/obj/item/stack/nanopaste/NP = W
+
+			for(var/slot in internal_components)
+				var/obj/item/mecha_parts/component/C = internal_components[slot]
+
+				if(C)
+
+					if(C.integrity < C.max_integrity)
+						while(C.integrity < C.max_integrity && NP && do_after(user, 1 SECOND, src))
+							if(NP.use(1))
+								C.adjust_integrity(10)
+
+						to_chat(user, "<span class='notice'>You repair damage to \the [C].</span>")
+
+			return
+
+		else
+			to_chat(user, "<span class='notice'>You can't reach \the [src]'s internal components.</span>")
+			return
+
 	else
 		call((proc_res["dynattackby"]||src), "dynattackby")(W,user)
 /*
