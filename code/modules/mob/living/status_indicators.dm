@@ -8,7 +8,7 @@
 // and it will try to always be above the mob sprite, even for larger sprites like xenos.
 
 /mob/living
-	var/list/status_indicators = null // Will become a list of strings or image objects when needed.
+	var/list/status_indicators = null // Will become a list as needed.
 
 // Adds an icon_state, or image overlay, to the list of indicators to be managed automatically.
 // Also initializes the list if one doesn't exist.
@@ -38,7 +38,7 @@
 	return LAZYACCESS(status_indicators, LAZYFIND(status_indicators, thing))
 
 // Refreshes the indicators over a mob's head. Should only be called when adding or removing a status indicator with the above procs,
-// or when the mob changes size for some reason.
+// or when the mob changes size visually for some reason.
 /mob/living/proc/handle_status_indicators()
 	// First, get rid of all the overlays.
 	for(var/thing in status_indicators)
@@ -58,7 +58,7 @@
 	var/y_offset = our_sprite_y + STATUS_INDICATOR_Y_OFFSET
 
 	// Calculates how 'long' the row of indicators and the margin between them should be.
-	// The goal is to have the center of that row be aligned with the sprite's center.
+	// The goal is to have the center of that row be horizontally aligned with the sprite's center.
 	var/expected_status_indicator_length = (STATUS_INDICATOR_ICON_X_SIZE * status_indicators.len) + (STATUS_INDICATOR_ICON_MARGIN * max(status_indicators.len - 1, 0))
 	var/current_x_position = (x_offset / 2) - (expected_status_indicator_length / 2)
 
@@ -71,7 +71,8 @@
 		var/image/I = thing
 
 		// This is a semi-HUD element, in a similar manner as medHUDs, in that they're 'above' everything else in the world,
-		// but don't pierce obfuscation layers such as blindness, unlike actual HUD elements like inventory slots.
+		// but don't pierce obfuscation layers such as blindness or darkness, unlike actual HUD elements like inventory slots.
+		I.plane = PLANE_STATUS
 		I.layer = HUD_LAYER
 		I.appearance_flags = PIXEL_SCALE|TILE_BOUND|NO_CLIENT_COLOR|RESET_COLOR|RESET_ALPHA|RESET_TRANSFORM|KEEP_APART
 		I.pixel_y = y_offset
@@ -80,3 +81,8 @@
 		// Adding the margin space every time saves a conditional check on the last iteration,
 		// and it won't cause any issues since no more icons will be added, and the var is not used for anything else.
 		current_x_position += STATUS_INDICATOR_ICON_X_SIZE + STATUS_INDICATOR_ICON_MARGIN
+
+
+#undef STATUS_INDICATOR_Y_OFFSET
+#undef STATUS_INDICATOR_ICON_X_SIZE
+#undef STATUS_INDICATOR_ICON_MARGIN
