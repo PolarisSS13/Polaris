@@ -30,12 +30,13 @@
  *
  * */
  
-// Recipe type defines. Used to determine what machine makes them. TODO: Add Grill to the list.
+// Recipe type defines. Used to determine what machine makes them.
 #define MICROWAVE			0x1
 #define FRYER				0x2
 #define OVEN				0x4
-#define CANDYMAKER			0x8
-#define CEREALMAKER			0x10
+#define GRILL				0x8
+#define CANDYMAKER			0x10
+#define CEREALMAKER			0x20
 
 /datum/recipe
 	var/list/reagents		// Example: = list("berryjuice" = 5) // do not list same reagent twice
@@ -319,3 +320,10 @@
 	else //okay, let's select the most complicated recipe
 		sortTim(possible_recipes, /proc/cmp_recipe_complexity_dsc)
 		return possible_recipes[1]
+
+// Both of these are just placeholders to allow special behavior for mob holders, but you can do other things in here later if you feel like it.
+/datum/recipe/proc/before_cook(obj/container) // Called Before the Microwave starts delays and cooking stuff
+
+
+/datum/recipe/proc/after_cook(obj/container) // Called When the Microwave is finished.
+

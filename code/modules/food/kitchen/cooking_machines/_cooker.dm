@@ -5,11 +5,12 @@
 	var/optimal_power = 0.1//cooking power at 100%
 
 	var/loss = 1	//Temp lost per proc when equalising
-	var/resistance = 320000	//Resistance to heating. combines with active power usage to determine how long heating takes
+	var/resistance = 32000	//Resistance to heating. combines with active power usage to determine how long heating takes. 32k by default.
 
 	var/light_x = 0
 	var/light_y = 0
 	cooking_power = 0
+	mobdamagetype = BURN
 
 /obj/machinery/appliance/cooker/examine(var/mob/user)
 	. = ..()
