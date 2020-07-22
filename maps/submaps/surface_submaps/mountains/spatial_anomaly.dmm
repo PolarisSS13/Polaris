@@ -1,0 +1,62 @@
+"a" = (/turf/simulated/wall/dungeon,/area/space)
+"b" = (/turf/space,/area/space)
+"c" = (/obj/effect/map_effect/portal/line/side_a{icon_state = "portal_line_side_a"; dir = 8},/turf/space,/area/space)
+"d" = (/obj/effect/map_effect/portal/line/side_a{icon_state = "portal_line_side_a"; dir = 4},/turf/simulated/floor/outdoors/rocks,/area/space)
+"e" = (/turf/simulated/floor/tiled/old_tile/green,/area/space)
+"f" = (/turf/simulated/floor/tiled/old_tile/gray,/area/template_noop)
+"g" = (/turf/simulated/floor/lava/outdoors,/area/space)
+"h" = (/turf/simulated/floor/tiled/old_tile/gray,/area/space)
+"i" = (/turf/unsimulated/wall,/area/space)
+"j" = (/turf/simulated/floor/outdoors/snow,/area/space)
+"k" = (/obj/effect/map_effect/portal/line/side_b{icon_state = "portal_line_side_b"; dir = 8},/turf/simulated/floor/outdoors/grass/sif,/area/space)
+"l" = (/turf/simulated/floor/outdoors/grass/sif,/area/space)
+"m" = (/turf/simulated/floor/outdoors/rocks,/area/space)
+"n" = (/turf/simulated/floor/outdoors/dirt,/area/space)
+"o" = (/obj/effect/map_effect/portal/line/side_b{icon_state = "portal_line_side_b"; dir = 4},/turf/simulated/floor/tiled/old_tile/gray,/area/space)
+"p" = (/turf/simulated/floor/outdoors/ice,/area/space)
+"q" = (/obj/effect/map_effect/portal/master/side_a{icon_state = "portal_side_a"; dir = 4},/turf/simulated/floor/outdoors/rocks,/area/space)
+"r" = (/turf/simulated/floor/tiled/old_tile/red,/area/space)
+"s" = (/obj/effect/map_effect/portal/master/side_b{icon_state = "portal_side_b"; dir = 8},/turf/simulated/floor/outdoors/grass/sif,/area/space)
+
+(1,1,1) = {"
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+aggggggggggggggggggajjjjjjjjjjjjjjjjjjja
+aggggggggggggggggggajjjnnnjnnjjjjjjjjjja
+aggggggggggggggggggajnnnnnnnnjjjjjjjjjja
+aggggggggggggggggggannppppnnjjjjjljjjjja
+aggggggggggggggggggannpppppnjjllllljjjja
+aggggmmggggggggggggannppnnnnllllllljjjja
+aggggggiiiiigggggggajnnnniiiiilnnnjjjjja
+aggggggidmmmgggggggajnnnnlllkillnnjjjjja
+agggggmidmmmgggggggajjjjjlllkillnjjjjjja
+aggggggiqmmmmggggggajjjjllllsiljjjjjjjja
+aggggggiiiiimggggggajjjjliiiiilljjjjjjja
+aggggggggmmgmmgggggajjjjjjjjjjlljjjjjjja
+aggggmmgggggmmmggggajjjjjjjjjjjjjjjljjja
+agggggmggggggmgggggajjjjjjjjjjjjjlllljja
+agggggggggmggggggggajjjjllljjjjjjllljjja
+aggggggggggggggggggajjlllljjjjjjjjljjjja
+aggggggggggggggggggajjjjjjjjjjjjjjjjjjja
+aggggggggggggggggggajjjjjjjjjjjjjjjjjjja
+aggggggggggggggggggajjjjjjjjjjjjjjjjjjja
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+abbbbbbbbbbbbbbbbbbahhhhhhhhhhhhhhhhhhha
+abbbbbbbbbbbbbbbbbbahhhhhhhhhhhhhhhhhhha
+abbbbbbbbbbbbbbbbbbafffhhhhhhhhhhhhhhhha
+abbbbbbbbbbbbbbbbbbafffhhhhhhhhhhhhhhhha
+abbbbbbbbbbbbbbbbbbafffhhhhhhhhhhhhhhhha
+abbbbbbiiiiiiiiiiiiaiiiiiiiiiiiihhhhhhha
+abbbbbbihhhhhhhhhhiaihhhhhhhhhhihhhhhhha
+abbbbbbihhhhhhhhhhiaihhhhhhhhhhihhhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbcihhhhhiiihhiaihhihhhhhhhiohhhhhha
+abbbbbbihhiiiiiihhiaihhiiiiiihhihhhhhhha
+abbbbbbiiiiiiiiieeiairriiiiiiiiihhhhhhha
+abbbbbbiiiiiiiiiiiiaiiiiiiiiiiiihhhhhhha
+aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+"}
