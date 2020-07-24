@@ -115,13 +115,18 @@
 
 /obj/item/glass_jar/fish
 	name = "glass tank"
-	desc = "A large glass tank. It looks empty."
+	desc = "A large glass tank."
 
 	var/filled = FALSE
 
-	w_class = 3
+	w_class = ITEMSIZE_NORMAL
 
 	accept_mobs = list(/mob/living/simple_mob/animal/passive/lizard, /mob/living/simple_mob/animal/passive/mouse, /mob/living/simple_mob/animal/sif/leech, /mob/living/simple_mob/animal/sif/frostfly, /mob/living/simple_mob/animal/sif/glitterfly, /mob/living/simple_mob/animal/passive/fish)
+
+/obj/item/glass_jar/fish/plastic
+	name = "plastic tank"
+	desc = "A large plastic tank."
+	matter = list("plastic" = 4000)
 
 /obj/item/glass_jar/fish/update_icon() // Also updates name and desc
 	underlays.Cut()
@@ -136,7 +141,7 @@
 			desc = initial(desc)
 		if(1)
 			name = "tip tank"
-			desc = "A large tank with money inside."
+			desc = "A large [name] with money inside."
 			for(var/obj/item/weapon/spacecash/S in src)
 				var/image/money = image(S.icon, S.icon_state)
 				money.pixel_x = rand(-2, 3)
@@ -153,13 +158,13 @@
 				M.adjust_scale(initial_x_scale, initial_y_scale)
 				victim.pixel_y = 4
 				underlays += victim
-				name = "glass tank with [M]"
-				desc = "A large tank with [M] inside."
+				name = "[name] with [M]"
+				desc = "A large [name] with [M] inside."
 		if(3)
 			for(var/obj/effect/spider/spiderling/S in src)
 				var/image/victim = image(S.icon, S.icon_state)
 				underlays += victim
-				name = "glass tank with [S]"
+				name = "[name] with [S]"
 				desc = "A large tank with [S] inside."
 
 	if(filled)
