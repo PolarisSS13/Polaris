@@ -165,6 +165,8 @@
 	var/datum/action/innate/mecha/mech_switch_damtype/switch_damtype_action = new
 	var/datum/action/innate/mecha/mech_toggle_phasing/phasing_action = new
 
+	var/weapons_only_cycle = FALSE	//So combat mechs don't switch to their equipment at times.
+
 
 
 
