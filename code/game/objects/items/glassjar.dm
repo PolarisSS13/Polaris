@@ -112,3 +112,92 @@
 				name = "glass jar with [S]"
 				desc = "A small jar with [S] inside."
 	return
+
+/obj/item/glass_jar/fish
+	name = "glass tank"
+	desc = "A large glass tank. It looks empty."
+
+	var/filled = FALSE
+
+	w_class = 3
+
+	accept_mobs = list(/mob/living/simple_mob/animal/passive/lizard, /mob/living/simple_mob/animal/passive/mouse, /mob/living/simple_mob/animal/sif/leech, /mob/living/simple_mob/animal/sif/frostfly, /mob/living/simple_mob/animal/sif/glitterfly, /mob/living/simple_mob/animal/passive/fish)
+
+/obj/item/glass_jar/fish/update_icon() // Also updates name and desc
+	underlays.Cut()
+	overlays.Cut()
+
+	if(filled)
+		underlays += image(icon, "[icon_state]_water")
+
+	switch(contains)
+		if(0)
+			name = initial(name)
+			desc = initial(desc)
+		if(1)
+			name = "tip tank"
+			desc = "A large tank with money inside."
+			for(var/obj/item/weapon/spacecash/S in src)
+				var/image/money = image(S.icon, S.icon_state)
+				money.pixel_x = rand(-2, 3)
+				money.pixel_y = rand(-6, 6)
+				money.transform *= 0.6
+				underlays += money
+		if(2)
+			for(var/mob/M in src)
+				var/image/victim = image(M.icon, M.icon_state)
+				var/initial_x_scale = M.icon_scale_x
+				var/initial_y_scale = M.icon_scale_y
+				M.adjust_scale(0.7)
+				victim.appearance = M.appearance
+				M.adjust_scale(initial_x_scale, initial_y_scale)
+				victim.pixel_y = 4
+				underlays += victim
+				name = "glass tank with [M]"
+				desc = "A large tank with [M] inside."
+		if(3)
+			for(var/obj/effect/spider/spiderling/S in src)
+				var/image/victim = image(S.icon, S.icon_state)
+				underlays += victim
+				name = "glass tank with [S]"
+				desc = "A large tank with [S] inside."
+
+	if(filled)
+		desc = "[desc] It contains water."
+
+	return
+
+/obj/item/glass_jar/fish/afterattack(var/atom/A, var/mob/user, var/proximity)
+	if(!filled)
+		if(istype(A, /obj/structure/sink) || istype(A, /turf/simulated/floor/water))
+			if(contains && user.a_intent == "help")
+				to_chat(user, "<span class='warning'>That probably isn't the best idea.</span>")
+				return
+
+			to_chat(user, "<span class='notice'>You fill \the [src] with water!</span>")
+			filled = TRUE
+			update_icon()
+			return
+
+	return ..()
+
+/obj/item/glass_jar/fish/attack_self(var/mob/user)
+	if(filled)
+		if(contains == 2)
+			if(user.a_intent == "help")
+				to_chat(user, "<span class='notice'>Maybe you shouldn't empty the water...</span>")
+				return
+
+			else
+				filled = FALSE
+				user.visible_message("<span class='warning'>[user] dumps out \the [src]'s water!</span>")
+				update_icon()
+				return
+
+		else
+			user.visible_message("<span class='notice'>[user] dumps \the [src]'s water.</span>")
+			filled = FALSE
+			update_icon()
+			return
+
+	return ..()
