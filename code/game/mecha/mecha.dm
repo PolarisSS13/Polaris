@@ -139,7 +139,7 @@
 	var/phasing_possible = 0		//This is to allow phasing.
 	var/can_phase = TRUE			//This is an internal check during the relevant procs.
 	var/phasing_energy_drain = 200
-	
+
 	var/switch_dmg_type_possible = 0	//Can you switch damage type? It is mostly for the Phazon and its children.
 
 	var/smoke_possible = 0
@@ -267,6 +267,8 @@
 
 	if(smoke_possible)	//Just making sure nothing is running.
 		qdel(smoke_system)
+
+	GLOB.mech_destroyed_roundstat++
 
 	QDEL_NULL(pr_int_temp_processor)
 	QDEL_NULL(pr_inertial_movement)
@@ -801,7 +803,7 @@
 	if(user == occupant)
 		show_radial_occupant(user)
 		return
-	
+
 	user.setClickCooldown(user.get_attack_speed())
 	src.log_message("Attack by hand/paw. Attacker - [user].",1)
 
@@ -1358,13 +1360,13 @@
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
-	
+
 	if(!occupant)
 		return
-	
+
 	if(usr != occupant)
 		return
-	
+
 	for(var/turf/T in locs)
 		var/obj/machinery/atmospherics/portables_connector/possible_port = locate(/obj/machinery/atmospherics/portables_connector) in T
 		if(possible_port)
@@ -1385,13 +1387,13 @@
 	set category = "Exosuit Interface"
 	set src = usr.loc
 	set popup_menu = 0
-	
+
 	if(!occupant)
 		return
-	
+
 	if(usr != occupant)
 		return
-	
+
 	if(disconnect())
 		occupant_message("<span class='notice'>[name] disconnects from the port.</span>")
 		verbs -= /obj/mecha/verb/disconnect_from_port
