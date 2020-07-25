@@ -131,7 +131,7 @@
 					to_chat(user, "<span class='warning'>You can't smother this creature.</span>")
 					return
 			else
-				to_chat(user, "span class='warning'>You can't smother this creature.</span>")
+				to_chat(user, "<span class='warning'>You can't smother this creature.</span>")
 				return
 		else
 			wipe_down(target, user)
