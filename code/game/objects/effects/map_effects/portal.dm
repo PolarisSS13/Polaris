@@ -23,7 +23,6 @@ Portals also have some limitations to be aware of when mapping. Some of these ar
 	  or the distance between the two portal sides happens to be less than the interaction max range. Examine will probably work,
 	  while picking up an item that appears to be next to you will fail.
 	- Sounds currently are not carried across portals.
-	- Mob speech and emotes currently are not seen across portals.
 	- Mismatched lighting between each portal end can make the portal look obvious.
 	- Portals look weird when observing as a ghost, or otherwise when able to see through walls. Meson vision will also spoil the illusion.
 	- Walls that change icons based on neightboring walls can give away that a portal is nearby if both sides don't have a similar transition.
