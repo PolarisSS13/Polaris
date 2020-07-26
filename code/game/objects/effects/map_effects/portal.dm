@@ -75,7 +75,25 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 	if(!counterpart)
 		return
 
-	AM.forceMove(counterpart.get_focused_turf())
+	go_through_portal(AM)
+
+
+/obj/effect/map_effect/portal/proc/go_through_portal(atom/movable/AM)
+	// TODO: Find a way to fake the glide or something.
+	if(isliving(AM))
+		var/mob/living/L = AM
+		if(L.pulling)
+			var/atom/movable/pulled = L.pulling
+			L.stop_pulling()
+			// For some reason, trying to put the pulled object behind the person makes the drag stop and it doesn't even move to the other side.
+		//	pulled.forceMove(get_turf(counterpart))
+			pulled.forceMove(counterpart.get_focused_turf())
+			L.forceMove(counterpart.get_focused_turf())
+			L.start_pulling(pulled)
+		else
+			L.forceMove(counterpart.get_focused_turf())
+	else
+		AM.forceMove(counterpart.get_focused_turf())
 
 // 'Focused turf' is the turf directly in front of a portal,
 // and it is used both as the destination when crossing, as well as the PoV for visuals.
@@ -130,11 +148,11 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 /obj/effect/map_effect/portal/master/Initialize()
 	GLOB.all_portal_masters += src
 	find_lines()
-	find_counterparts()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/map_effect/portal/master/LateInitialize()
+	find_counterparts()
 	make_visuals()
 	apply_offset()
 
@@ -176,15 +194,20 @@ when portals are shortly lived, or when portals are made to be obvious with spec
 					var/obj/effect/map_effect/portal/line/their_line = M.portal_lines[i]
 					our_line.counterpart = their_line
 					their_line.counterpart = our_line
-
 			break
+
+	if(!counterpart)
+		crash_with("Portal master [type] ([x],[y],[z]) could not find another portal master with a matching portal_id ([portal_id]).")
 
 /obj/effect/map_effect/portal/master/proc/make_visuals()
 	var/list/observed_turfs = list()
 	for(var/thing in portal_lines + src)
 		var/obj/effect/map_effect/portal/P = thing
-	//	P.name = null
+		P.name = null
 		P.icon_state = null
+
+		if(!P.counterpart)
+			return
 
 		var/turf/T = P.counterpart.get_focused_turf()
 		P.vis_contents += T
