@@ -347,7 +347,7 @@
 	mappath = 'maps/submaps/surface_submaps/mountains/excavation1.dmm'
 	cost = 20
 
-/datum/map_template/surface/mountains/deep/lava_trench
+/datum/map_template/surface/mountains/deep/spatial_anomaly
 	name = "spatial anomaly"
 	desc = "A strange section of the caves that seems twist and turn in ways that shouldn't be physically possible."
 	mappath = 'maps/submaps/surface_submaps/mountains/spatial_anomaly.dmm'
