@@ -6,6 +6,7 @@
 	var/icon/base_icon = null
 	var/icon
 	var/icon_state = "" //icon state of the main segments of the beam
+	var/beam_color = null // Color of the beam segments
 	var/max_distance = 0
 	var/endtime = 0
 	var/sleep_time = 3
@@ -15,7 +16,7 @@
 	var/static_beam = 0
 	var/beam_type = /obj/effect/ebeam //must be subtype
 
-/datum/beam/New(beam_origin,beam_target,beam_icon='icons/effects/beam.dmi',beam_icon_state="b_beam",time=50,maxdistance=10,btype = /obj/effect/ebeam,beam_sleep_time=3)
+/datum/beam/New(beam_origin,beam_target,beam_icon='icons/effects/beam.dmi',beam_icon_state="b_beam",time=50,maxdistance=10,btype = /obj/effect/ebeam,beam_sleep_time=3,new_beam_color = null)
 	endtime = world.time+time
 	origin = beam_origin
 	origin_oldloc =	get_turf(origin)
@@ -28,6 +29,8 @@
 	base_icon = new(beam_icon,beam_icon_state)
 	icon = beam_icon
 	icon_state = beam_icon_state
+	if(new_beam_color)
+		beam_color = new_beam_color
 	beam_type = btype
 
 /datum/beam/proc/Start()
@@ -78,6 +81,10 @@
 		if(QDELETED(src) || finished)
 			break
 		var/obj/effect/ebeam/X = new beam_type(origin_oldloc)
+
+		if(beam_color)
+			X.color = beam_color
+
 		X.owner = src
 		elements |= X
 
@@ -184,8 +191,8 @@
 
 
 
-/atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=50, maxdistance=10,beam_type=/obj/effect/ebeam,beam_sleep_time=3)
-	var/datum/beam/newbeam = new(src,BeamTarget,icon,icon_state,time,maxdistance,beam_type,beam_sleep_time)
+/atom/proc/Beam(atom/BeamTarget,icon_state="b_beam",icon='icons/effects/beam.dmi',time=50, maxdistance=10,beam_type=/obj/effect/ebeam,beam_sleep_time=3,beam_color = null)
+	var/datum/beam/newbeam = new(src,BeamTarget,icon,icon_state,time,maxdistance,beam_type,beam_sleep_time,beam_color)
 	spawn(0)
 		newbeam.Start()
 	return newbeam
