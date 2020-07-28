@@ -775,10 +775,10 @@ default behaviour is:
 
 	if(pulling) // we were pulling a thing and didn't lose it during our move.
 		var/pull_dir = get_dir(src, pulling)
-		
+
 		if(pulling.anchored || !isturf(pulling.loc))
 			stop_pulling()
-			
+
 		else if(get_dist(src, pulling) > 1 || (moving_diagonally != SECOND_DIAG_STEP && ((pull_dir - 1) & pull_dir))) // puller and pullee more than one tile away or in diagonal position
 			// If it is too far away or across z-levels from old location, stop pulling.
 			if(get_dist(pulling.loc, oldloc) > 1 || pulling.loc.z != oldloc?.z)
@@ -794,7 +794,7 @@ default behaviour is:
 				stop_pulling()
 
 	if(!isturf(loc))
-		return	
+		return
 	else if(lastarea?.has_gravity == 0)
 		inertial_drift()
 	else if(!isspace(loc))
@@ -806,7 +806,7 @@ default behaviour is:
 		if(Process_Spacemove(1))
 			inertia_dir = 0
 			return
-		
+
 		var/locthen = loc
 		spawn(5)
 			if(!anchored && !pulledby && loc == locthen)
@@ -1277,3 +1277,8 @@ default behaviour is:
 		clear_alert("weightless")
 	else
 		throw_alert("weightless", /obj/screen/alert/weightless)
+
+// Tries to turn off things that let you see through walls, like mesons.
+// Each mob does vision a bit differently so this is just for inheritence and also so overrided procs can make the vision apply instantly if they call `..()`.
+/mob/living/proc/disable_spoiler_vision()
+	handle_vision()
