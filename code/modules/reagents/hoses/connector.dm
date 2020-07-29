@@ -73,6 +73,9 @@
 	..()
 	START_PROCESSING(SSobj, src)
 
+	if(!isturf(loc))
+		carrier = loc
+
 /obj/item/hose_connector/input/active/process()
 	if(carrier)
 		reagents.trans_to_obj(carrier, reagents.maximum_volume)
@@ -91,6 +94,9 @@
 /obj/item/hose_connector/output/active/Initialize()
 	..()
 	START_PROCESSING(SSobj, src)
+
+	if(!isturf(loc))
+		carrier = loc
 
 /obj/item/hose_connector/output/active/process()
 	if(carrier)

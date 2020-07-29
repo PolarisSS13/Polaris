@@ -51,11 +51,12 @@ GLOBAL_LIST_EMPTY(hoses)
 
 /datum/hose/process()
 	if(node1 && node2)
-		hose = node1.loc.Beam(node2.loc, icon_state = "hose", beam_color = hose_color, maxdistance = world.view, beam_type = /obj/effect/ebeam/hose)
+		if(get_dist(get_turf(node1), get_turf(node2)) > 0)
+			hose = node1.loc.Beam(node2.loc, icon_state = "hose", beam_color = hose_color, maxdistance = world.view, beam_type = /obj/effect/ebeam/hose)
 
-		if(!hose || get_dist(get_turf(node1), get_turf(node2)) > initial_distance)	// The hose didn't form. Something's fucky.
-			disconnect()
-			return
+			if(!hose || get_dist(get_turf(node1), get_turf(node2)) > initial_distance)	// The hose didn't form. Something's fucky.
+				disconnect()
+				return
 
 		var/datum/reagents/reagent_node1 = node1.reagents
 		var/datum/reagents/reagent_node2 = node2.reagents
