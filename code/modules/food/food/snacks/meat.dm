@@ -35,3 +35,9 @@
 /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
 	name = "Corgi meat"
 	desc = "Tastes like... well, you know."
+
+//Meat from Crabs
+/obj/item/weapon/reagent_containers/food/snacks/meat/crab
+	name = "meat"
+	desc = "A chunk of meat."
+	icon_state = "crustacean-meat"
