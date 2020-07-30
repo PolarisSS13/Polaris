@@ -142,7 +142,7 @@
 	. = ..()
 	if(Adjacent(user))
 		if(coating)
-			to_chat(user, "<span class='notice'>It's coated in [coating.name]!</span>")
+			. += "<span class='notice'>It's coated in [coating.name]!</span>"
 		if(bitecount==0)
 			return .
 		else if (bitecount==1)
@@ -4513,12 +4513,14 @@
 	filling_color = "#DB0000"
 	center_of_mass = list("x"=16, "y"=16)
 	do_coating_prefix = 0
-	New()
-		. = ..()
-		reagents.add_reagent("protein", 6)
-		reagents.add_reagent("batter", 1.7)
-		reagents.add_reagent("oil", 1.5)
-		bitesize = 2
+	bitesize = 2
+	
+	
+/obj/item/weapon/reagent_containers/food/snacks/sausage/battered/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 6)
+	reagents.add_reagent("batter", 1.7)
+	reagents.add_reagent("oil", 1.5)
 
 /obj/item/weapon/reagent_containers/food/snacks/jalapeno_poppers
 	name = "jalapeno popper"
@@ -4543,10 +4545,11 @@
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "ratburger"
 	center_of_mass = list("x"=16, "y"=11)
-	New()
-		. = ..()
-		reagents.add_reagent("protein", 4)
-		bitesize = 2
+	bitesize = 2
+	
+/obj/item/weapon/reagent_containers/food/snacks/mouseburger/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/chickenkatsu
 	name = "chicken katsu"
@@ -4622,13 +4625,13 @@
 	nutriment_amt = 25
 	nutriment_desc = list("fried pizza" = 25)
 	center_of_mass = list("x"=16, "y"=11)
+	bitesize = 2
 
-	New()
-		. = ..()
-		reagents.add_reagent("batter", 6.5)
-		coating = reagents.get_reagent("batter")
-		reagents.add_reagent("oil", 4)
-		bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/crunch/Initialize()
+	. = ..()
+	reagents.add_reagent("batter", 6.5)
+	coating = reagents.get_reagent("batter")
+	reagents.add_reagent("oil", 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/pizzacrunchslice
 	name = "pizza crunch"
