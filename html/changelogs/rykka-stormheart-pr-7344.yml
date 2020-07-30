@@ -38,5 +38,6 @@ changes:
   - rscadd: "Please take note, Chefs, to pre-heat you appliances at the start of your shift."
   - rscadd: "Fryer Recipes require batter before they can be made!"
   - rscadd: "Fire alarms will go off if you burn food!"
+  - rscadd: "The largest change - Cooking takes TIME. Around 6 minutes for the largest recipes in the game."
   - rscadd: "Too many other changes to list - refer to PR #7344 https://github.com/PolarisSS13/Polaris/pull/7344"
   - rscdel: "Removed fun, and any sense of joy in the game."
