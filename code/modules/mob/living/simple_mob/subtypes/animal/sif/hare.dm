@@ -58,7 +58,6 @@
 	response_disarm = "nudges"
 	response_harm   = "kicks"
 
-	holder_type = /obj/item/weapon/holder/mouse
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 
 	say_list_type = /datum/say_list/hare
