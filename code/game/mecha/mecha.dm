@@ -117,6 +117,7 @@
 	var/static/image/radial_image_lighttoggle = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_light")
 	var/static/image/radial_image_statpanel = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_examine2")
 
+	var/datum/mini_hud/mech/minihud
 
 //Mech actions
 
@@ -274,6 +275,7 @@
 	QDEL_NULL(pr_give_air)
 	QDEL_NULL(pr_internal_damage)
 	QDEL_NULL(spark_system)
+	QDEL_NULL(minihud)
 
 	mechas_list -= src //global mech list
 	. = ..()
@@ -1569,6 +1571,8 @@
 			verbs -= /obj/mecha/verb/switch_damtype
 
 		occupant.in_enclosed_vehicle = 1	//Useful for when you need to know if someone is in a mecho.
+		if(occupant.hud_used)
+			minihud = new (occupant.hud_used, src)
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
@@ -1634,6 +1638,7 @@
 /obj/mecha/proc/go_out() //Eject/Exit the mech. Yes this is for easier searching.
 	if(!src.occupant) return
 	var/atom/movable/mob_container
+	QDEL_NULL(minihud)
 	if(ishuman(occupant))
 		mob_container = src.occupant
 		RemoveActions(occupant, human_occupant=1)//AEIOU
