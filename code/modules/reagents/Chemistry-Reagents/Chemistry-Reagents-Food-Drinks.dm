@@ -69,7 +69,7 @@
 	//We'll assume that the batter isnt going to be regurgitated and eaten by someone else. Only show this once
 	if(data["cooked"] != 1)
 		if (!messaged)
-			to_chat(M, "<span class='warning'>Ugh, this raw [name] tastes disgusting.<span>")
+			to_chat(M, "<span class='warning'>Ugh, this raw [name] tastes disgusting.</span>")
 			nutriment_factor *= 0.5
 			messaged = 1
 
