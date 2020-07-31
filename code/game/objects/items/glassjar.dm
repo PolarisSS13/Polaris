@@ -1,3 +1,9 @@
+
+#define JAR_NOTHING 0
+#define JAR_MONEY   1
+#define JAR_ANIMAL  2
+#define JAR_SPIDER  3
+
 /obj/item/glass_jar
 	name = "glass jar"
 	desc = "A small empty jar."
@@ -27,7 +33,7 @@
 		var/mob/L = A
 		user.visible_message("<span class='notice'>[user] scoops [L] into \the [src].</span>", "<span class='notice'>You scoop [L] into \the [src].</span>")
 		L.loc = src
-		contains = 2
+		contains = JAR_ANIMAL
 		update_icon()
 		return
 	else if(istype(A, /obj/effect/spider/spiderling))
@@ -35,27 +41,27 @@
 		user.visible_message("<span class='notice'>[user] scoops [S] into \the [src].</span>", "<span class='notice'>You scoop [S] into \the [src].</span>")
 		S.loc = src
 		STOP_PROCESSING(SSobj, S) // No growing inside jars
-		contains = 3
+		contains = JAR_SPIDER
 		update_icon()
 		return
 
 /obj/item/glass_jar/attack_self(var/mob/user)
 	switch(contains)
-		if(1)
+		if(JAR_MONEY)
 			for(var/obj/O in src)
 				O.loc = user.loc
 			to_chat(user, "<span class='notice'>You take money out of \the [src].</span>")
 			contains = 0
 			update_icon()
 			return
-		if(2)
+		if(JAR_ANIMAL)
 			for(var/mob/M in src)
 				M.loc = user.loc
 				user.visible_message("<span class='notice'>[user] releases [M] from \the [src].</span>", "<span class='notice'>You release [M] from \the [src].</span>")
 			contains = 0
 			update_icon()
 			return
-		if(3)
+		if(JAR_SPIDER)
 			for(var/obj/effect/spider/spiderling/S in src)
 				S.loc = user.loc
 				user.visible_message("<span class='notice'>[user] releases [S] from \the [src].</span>", "<span class='notice'>You release [S] from \the [src].</span>")
@@ -66,9 +72,9 @@
 
 /obj/item/glass_jar/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/weapon/spacecash))
-		if(contains == 0)
-			contains = 1
-		if(contains != 1)
+		if(contains == JAR_NOTHING)
+			contains = JAR_MONEY
+		if(contains != JAR_MONEY)
 			return
 		var/obj/item/weapon/spacecash/S = W
 		user.visible_message("<span class='notice'>[user] puts [S.worth] [S.worth > 1 ? "thalers" : "thaler"] into \the [src].</span>")
@@ -80,10 +86,10 @@
 	underlays.Cut()
 	overlays.Cut()
 	switch(contains)
-		if(0)
+		if(JAR_NOTHING)
 			name = initial(name)
 			desc = initial(desc)
-		if(1)
+		if(JAR_MONEY)
 			name = "tip jar"
 			desc = "A small jar with money inside."
 			for(var/obj/item/weapon/spacecash/S in src)
@@ -92,7 +98,7 @@
 				money.pixel_y = rand(-6, 6)
 				money.transform *= 0.6
 				underlays += money
-		if(2)
+		if(JAR_ANIMAL)
 			for(var/mob/M in src)
 				var/image/victim = image(M.icon, M.icon_state)
 				victim.pixel_y = 6
@@ -105,7 +111,7 @@
 				underlays += victim
 				name = "glass jar with [M]"
 				desc = "A small jar with [M] inside."
-		if(3)
+		if(JAR_SPIDER)
 			for(var/obj/effect/spider/spiderling/S in src)
 				var/image/victim = image(S.icon, S.icon_state)
 				underlays += victim
@@ -136,10 +142,10 @@
 		underlays += image(icon, "[icon_state]_water")
 
 	switch(contains)
-		if(0)
+		if(JAR_NOTHING)
 			name = initial(name)
 			desc = initial(desc)
-		if(1)
+		if(JAR_MONEY)
 			name = "tip tank"
 			desc = "A large [name] with money inside."
 			for(var/obj/item/weapon/spacecash/S in src)
@@ -148,7 +154,7 @@
 				money.pixel_y = rand(-6, 6)
 				money.transform *= 0.6
 				underlays += money
-		if(2)
+		if(JAR_ANIMAL)
 			for(var/mob/M in src)
 				var/image/victim = image(M.icon, M.icon_state)
 				var/initial_x_scale = M.icon_scale_x
@@ -160,7 +166,7 @@
 				underlays += victim
 				name = "[name] with [M]"
 				desc = "A large [name] with [M] inside."
-		if(3)
+		if(JAR_SPIDER)
 			for(var/obj/effect/spider/spiderling/S in src)
 				var/image/victim = image(S.icon, S.icon_state)
 				underlays += victim
@@ -188,7 +194,7 @@
 
 /obj/item/glass_jar/fish/attack_self(var/mob/user)
 	if(filled)
-		if(contains == 2)
+		if(contains == JAR_ANIMAL)
 			if(user.a_intent == "help")
 				to_chat(user, "<span class='notice'>Maybe you shouldn't empty the water...</span>")
 				return
@@ -206,3 +212,8 @@
 			return
 
 	return ..()
+
+#undef JAR_NOTHING
+#undef JAR_MONEY
+#undef JAR_ANIMAL
+#undef JAR_SPIDER
