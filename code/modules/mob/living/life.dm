@@ -122,7 +122,7 @@
 
 /mob/living/proc/handle_weakened()
 	if(weakened)
-		weakened = max(weakened-1,0)
+		AdjustWeakened(-1)
 	return weakened
 
 /mob/living/proc/handle_stuttering()
@@ -165,7 +165,7 @@
 		throw_alert("blind", /obj/screen/alert/blind)
 	else
 		clear_alert("blind")
-	
+
 	if(eye_blurry)			//blurry eyes heal slowly
 		eye_blurry = max(eye_blurry-1, 0)
 
