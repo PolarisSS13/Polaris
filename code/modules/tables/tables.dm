@@ -323,6 +323,15 @@
 	qdel(src)
 	return shards
 
+/obj/structure/table/can_visually_connect_to(var/obj/structure/S)
+	if(istype(S,/obj/structure/table/bench) && !istype(src,/obj/structure/table/bench))
+		return FALSE
+	if(istype(src,/obj/structure/table/bench) && !istype(S,/obj/structure/table/bench))
+		return FALSE
+	if(istype(S,/obj/structure/table))
+		return TRUE
+	..()
+
 /obj/structure/table/update_icon()
 	if(flipped != 1)
 		icon_state = "blank"

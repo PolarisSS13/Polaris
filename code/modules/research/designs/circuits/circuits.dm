@@ -619,13 +619,48 @@ CIRCUITS BELOW
 	req_tech = list(TECH_DATA = 4, TECH_BIO = 3)
 	build_path = /obj/item/weapon/circuitboard/aicore
 	sort_string = "XAAAA"
+// Cooking Appliances
+/datum/design/circuit/microwave
+	name = "microwave board"
+	id = "microwave_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/microwave
+	sort_string = "HACAM"
+
+/datum/design/circuit/oven
+	name = "oven board"
+	id = "oven_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/oven
+	sort_string = "HACAN"
+
+/datum/design/circuit/fryer
+	name = "deep fryer board"
+	id = "fryer_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/fryer
+	sort_string = "HACAO"
+
+/datum/design/circuit/cerealmaker
+	name = "cereal maker board"
+	id = "cerealmaker_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/cerealmaker
+	sort_string = "HACAP"
+
+/datum/design/circuit/candymaker
+	name = "candy machine board"
+	id = "candymachine_board"
+	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
+	build_path = /obj/item/weapon/circuitboard/candymachine
+	sort_string = "HACAQ"
 
 /datum/design/circuit/microwave/advanced
 	name = "deluxe microwave"
 	id = "deluxe microwave"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 5, TECH_BLUESPACE = 4)
 	build_path = /obj/item/weapon/circuitboard/microwave/advanced
-	sort_string = "MAAAC"
+	sort_string = "HACAA"
 
 
 /* I have no idea how this was even running before, but it doesn't seem to be necessary.
