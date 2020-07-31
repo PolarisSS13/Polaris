@@ -582,8 +582,6 @@
 			last_message = world.time
 		return 0
 
-	if(!thrusters && src.pr_inertial_movement.active())	//Trying to move when you are drifting already while lacking thrusters will result in nothing.
-		return 0
 
 /*
 //A first draft of a check to stop mechs from moving fully. TBD when all thrusters modules are unified.
