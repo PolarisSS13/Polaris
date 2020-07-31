@@ -5,15 +5,21 @@
 	desc = "Classification: B Carabidae glacios \
 	<br><br>\
 	A meter-long fuzzy insect from the planet Binma. \
-	Frostflies utilize their vestigial wings as a method of dispersing a chemical that produces a rapid \
-	endothermic reaction on contact with the air, resulting in the flash-freezing of nearby materials. \
+	A native of the Binman contintents of Telarus and Dalomee, the Tymisian Moth usually lives in communal \
+	groups of upwards of thirty individuals, known as 'spuzzes', and typically breeds up to three times in its \
+	fifteen year natural lifespan. \
 	<br>\
-	Carnivorous in nature, they use their cryogenic compounds to trap smaller prey, or frighten predators. \
-	Individuals are known to slalom when facing other creatures, dispersing clouds of gas, and spitting \
-	condensed globs of the compound. These masses of mucous and ice seem to be intended to impede movement. \
+	Though strictly herbivorous, the moth has an acute sense of smell which it uses to detect potential predators. \
+	Impressively, the moth secretes an oily substance which it uses to coat collected material stored in 'soft pockets' \
+	beneath each wing, which in turn attracts colonies of pungent bacteria. \
+	When threatened, the moth will release this dust, which has a disorienting effect on most Binman species, as well as all known sapients. \
 	<br>\
-	Travelers are advised to avoid frostfly swarms whenever possible, as they will become aggressive \
-	to anything other than Diyaabs, which they seem to have formed a tangential symbiosis with."
+	The Tymisian Moth is considered an invasive species on Sif, and is believed to have been established from an illegally \
+	released pet collection. Though less dangerous than in its native environment, the moth has nonetheless established a \
+	similar symbiotic relationship with Sivian bacteria for its defense mechanism, and is still to be considered quite dangerous. \
+	<br>\
+	As an invasive species, individuals encountering the Tymisian Moth on Sif are requested to report the sighting to local wildlife \
+	services, and remove or destroy the creature if it is safe to do so."
 	value = CATALOGUER_REWARD_MEDIUM
 
 /mob/living/simple_mob/animal/sif/tymisian
