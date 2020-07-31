@@ -51,14 +51,14 @@
 			for(var/obj/O in src)
 				O.loc = user.loc
 			to_chat(user, "<span class='notice'>You take money out of \the [src].</span>")
-			contains = 0
+			contains = JAR_NOTHING
 			update_icon()
 			return
 		if(JAR_ANIMAL)
 			for(var/mob/M in src)
 				M.loc = user.loc
 				user.visible_message("<span class='notice'>[user] releases [M] from \the [src].</span>", "<span class='notice'>You release [M] from \the [src].</span>")
-			contains = 0
+			contains = JAR_NOTHING
 			update_icon()
 			return
 		if(JAR_SPIDER)
@@ -66,7 +66,7 @@
 				S.loc = user.loc
 				user.visible_message("<span class='notice'>[user] releases [S] from \the [src].</span>", "<span class='notice'>You release [S] from \the [src].</span>")
 				START_PROCESSING(SSobj, S) // They can grow after being let out though
-			contains = 0
+			contains = JAR_NOTHING
 			update_icon()
 			return
 
