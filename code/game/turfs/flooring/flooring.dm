@@ -43,6 +43,7 @@ var/list/flooring_types
 	var/descriptor = "tiles"
 	var/flags
 	var/can_paint
+	var/can_engrave = FALSE
 	var/list/footstep_sounds = list() // key=species name, value = list of sounds,
 									  // For instance, footstep_sounds = list("key" = list(sound.ogg))
 	var/is_plating = FALSE
@@ -205,14 +206,18 @@ var/list/flooring_types
 	desc = "Gritty and unpleasant, just like dirt."
 	icon = 'icons/turf/outdoors.dmi'
 	icon_base = "dirt-dark"
-	flags = TURF_HAS_EDGES | TURF_REMOVE_SHOVEL
+	flags = TURF_REMOVE_SHOVEL
 	build_type = null
 	footstep_sounds = list("human" = list(
 		'sound/effects/footstep/asteroid1.ogg',
 		'sound/effects/footstep/asteroid2.ogg',
 		'sound/effects/footstep/asteroid3.ogg',
 		'sound/effects/footstep/asteroid4.ogg',
-		'sound/effects/footstep/asteroid5.ogg'))
+		'sound/effects/footstep/asteroid5.ogg',
+		'sound/effects/footstep/MedDirt1.ogg',
+		'sound/effects/footstep/MedDirt2.ogg',
+		'sound/effects/footstep/MedDirt3.ogg',
+		'sound/effects/footstep/MedDirt4.ogg',))
 
 /decl/flooring/snow
 	name = "snow"
@@ -316,6 +321,7 @@ var/list/flooring_types
 	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BREAK | TURF_CAN_BURN
 	build_type = /obj/item/stack/tile/floor
 	can_paint = 1
+	can_engrave = TRUE
 	footstep_sounds = list("human" = list(
 		'sound/effects/footstep/floor1.ogg',
 		'sound/effects/footstep/floor2.ogg',

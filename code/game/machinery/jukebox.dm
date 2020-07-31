@@ -146,7 +146,7 @@ datum/track/New(var/title_name, var/audio)
 			for(var/mob/living/carbon/M in ohearers(6, src))
 				if(M.get_ear_protection() >= 2)
 					continue
-				M.sleeping = 0
+				M.SetSleeping(0)
 				M.stuttering += 20
 				M.ear_deaf += 30
 				M.Weaken(3)

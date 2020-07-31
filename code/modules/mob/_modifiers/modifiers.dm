@@ -20,6 +20,9 @@
 	var/light_intensity = null			// Ditto. Not implemented yet.
 	var/mob_overlay_state = null		// Icon_state for an overlay to apply to a (human) mob while this exists.  This is actually implemented.
 	var/client_color = null				// If set, the client will have the world be shown in this color, from their perspective.
+	var/list/filter_parameters = null	// If set, will add a filter to the holder with the parameters in this var. Must be a list.
+	var/filter_priority = 1				// Used to make filters be applied in a specific order, if that is important.
+	var/filter_instance = null			// Instance of a filter created with the `filter_parameters` list. This exists to make `animate()` calls easier. Don't set manually.
 
 	// Now for all the different effects.
 	// Percentage modifiers are expressed as a multipler. (e.g. +25% damage should be written as 1.25)
@@ -82,6 +85,8 @@
 		holder.update_transform()
 	if(client_color)
 		holder.update_client_color()
+	if(LAZYLEN(filter_parameters))
+		holder.remove_filter(REF(src))
 	qdel(src)
 
 // Override this for special effects when it gets added to the mob.
@@ -150,6 +155,9 @@
 		update_transform()
 	if(mod.client_color)
 		update_client_color()
+	if(LAZYLEN(mod.filter_parameters))
+		add_filter(REF(mod), mod.filter_priority, mod.filter_parameters)
+		mod.filter_instance = get_filter(REF(mod))
 
 	return mod
 
