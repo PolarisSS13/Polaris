@@ -1,11 +1,17 @@
 /obj/item/weapon/gun/energy/taser
 	name = "taser gun"
-	desc = "The NT Mk30 NL is a small gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T RayZar design."
+	desc = "The NT Mk30 NL is a small gun used for non-lethal takedowns. Produced by NT, it's actually a licensed version of a W-T RayZar design. \
+	This variant comes with a fire select, for both taser and phase rounds."
 	description_fluff = "RayZar is Ward-Takahashi’s main consumer weapons brand, known for producing and licensing a wide variety of specialist energy weapons of various types and quality primarily for the civilian market."
 	icon_state = "taser"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	projectile_type = /obj/item/projectile/beam/stun
 	charge_cost = 480
+
+	firemodes = list(
+		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/stun, charge_cost = 480),
+		list(mode_name="phase", projectile_type=/obj/item/projectile/energy/phase/light, charge_cost = 320),
+		)
 
 /obj/item/weapon/gun/energy/taser/mounted
 	name = "mounted taser gun"
@@ -22,6 +28,11 @@
 	name = "taser gun"
 	charge_cost = 400
 	recharge_time = 7 //Time it takes for shots to recharge (in ticks)
+	
+	firemodes = list(
+		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/stun, charge_cost = 400),
+		list(mode_name="phase", projectile_type=/obj/item/projectile/energy/phase/light, charge_cost = 300),
+		)
 
 /obj/item/weapon/gun/energy/taser/mounted/cyborg/swarm
 	name = "disabler"
