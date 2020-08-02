@@ -542,7 +542,6 @@
 
 		if(isliving(thing))
 			var/mob/living/L = thing
-			// Real invisibility is already covered by the spider not being in the view list.
 			if(L.alpha <= FAKE_INVIS_ALPHA_THRESHOLD) // Can't fear something you can't (easily) see.
 				continue
 			if(istype(L, /mob/living/carbon/human))
