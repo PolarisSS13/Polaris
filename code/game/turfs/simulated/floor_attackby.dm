@@ -121,9 +121,9 @@
 		if(broken || burnt)
 			to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
 			make_plating()
-		else if(flooring.flags & TURF_IS_FRAGILE)
-			to_chat(user, "<span class='danger'>You forcefully pry off the [flooring.descriptor], destroying them in the process.</span>")
-			make_plating()
+		//else if(flooring.flags & TURF_IS_FRAGILE)//Not fucking fun
+		//	to_chat(user, "<span class='danger'>You forcefully pry off the [flooring.descriptor], destroying them in the process.</span>")
+		//	make_plating()
 		else if(flooring.flags & TURF_REMOVE_CROWBAR)
 			to_chat(user, "<span class='notice'>You lever off the [flooring.descriptor].</span>")
 			make_plating(1)
