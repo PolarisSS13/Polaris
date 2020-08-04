@@ -191,7 +191,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 			H = owner
 			color = rgb(min(H.r_skin + 40, 255), min(H.g_skin + 40, 255), min(H.b_skin + 40, 255))
 
-/obj/item/organ/internal/brain/slime/removed(var/mob/living/carbon/human/owner)
+/obj/item/organ/internal/brain/slime/removed(var/mob/living/user)
 	if(istype(owner))
 		owner_flavor_text = owner.flavor_texts.Copy()
 	..()
