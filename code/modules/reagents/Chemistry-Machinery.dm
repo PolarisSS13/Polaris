@@ -518,6 +518,7 @@
 		return
 	beaker.loc = src.loc
 	beaker = null
+	visible_message("<span class='notice'>\The [usr] remove the container from \the [src].</span>")
 	update_icon()
 
 /obj/machinery/reagentgrinder/proc/eject()
