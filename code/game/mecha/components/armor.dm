@@ -23,15 +23,15 @@
 
 	var/deflect_chance = 10
 	var/list/damage_absorption = list(
-									"brute"=0.8,
-									"fire"=1.2,
-									"bullet"=0.9,
-									"laser"=1,
-									"energy"=1,
-									"bomb"=1,
-									"bio"=1,
-									"rad"=1
-									)
+		"brute"=	0.8,
+		"fire"=		1.2,
+		"bullet"=	0.9,
+		"laser"=	1,
+		"energy"=	1,
+		"bomb"=		1,
+		"bio"=		1,
+		"rad"=		1
+		)
 
 	var/damage_minimum = 10
 	var/minimum_penetration = 0

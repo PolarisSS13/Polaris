@@ -13,7 +13,7 @@
 
 	var/emp_resistance = 0	// Amount of emp 'levels' removed.
 
-	var/required_type = null	// List, if it exists. Exosuits meant to use the component.
+	var/list/required_type = null	// List, if it exists. Exosuits meant to use the component (Unique var changes / effects)
 
 	var/integrity
 	var/integrity_danger_mod = 0.5	// Multiplier for comparison to max_integrity before problems start.

@@ -7,6 +7,11 @@
 #define MELEE 1
 #define RANGED 2
 
+#define MECHA_OPERATING     0
+#define MECHA_BOLTS_SECURED 1
+#define MECHA_PANEL_LOOSE   2
+#define MECHA_CELL_OPEN     3
+#define MECHA_CELL_OUT      4
 
 #define MECH_FACTION_NT "nano"
 #define MECH_FACTION_SYNDI "syndi"
@@ -48,7 +53,7 @@
 	var/fail_penetration_value = 0.66	//By how much failing to penetrate reduces your shit. 66% by default.
 
 	var/obj/item/weapon/cell/cell
-	var/state = 0
+	var/state = MECHA_OPERATING
 	var/list/log = new
 	var/last_message = 0
 	var/add_req_access = 1
@@ -1158,7 +1163,7 @@
 					Proj.attack_mob(src.occupant, distance)
 					hit_occupant = 0
 				else
-					if(pass_damage > internal_damage_minimum)	//Only decently painful attacks trigger a chance of mech damage.					
+					if(pass_damage > internal_damage_minimum)	//Only decently painful attacks trigger a chance of mech damage.
 						src.check_for_internal_damage(list(MECHA_INT_FIRE,MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH,MECHA_INT_CONTROL_LOST,MECHA_INT_SHORT_CIRCUIT), 1)
 
 				Proj.penetrating--
@@ -1322,7 +1327,7 @@
 				to_chat(user, "You were unable to attach [W] to [src]")
 		return
 
-	if(istype(W, /obj/item/mecha_parts/component) && state == 4)
+	if(istype(W, /obj/item/mecha_parts/component) && state == MECHA_CELL_OUT)
 		var/obj/item/mecha_parts/component/MC = W
 		spawn()
 			if(MC.attach(src))
@@ -1351,21 +1356,21 @@
 		else
 			to_chat(user, "<span class='warning'>Maintenance protocols disabled by operator.</span>")
 	else if(W.is_wrench())
-		if(state==1)
-			state = 2
+		if(state==MECHA_BOLTS_SECURED)
+			state = MECHA_PANEL_LOOSE
 			to_chat(user, "You undo the securing bolts.")
-		else if(state==2)
-			state = 1
+		else if(state==MECHA_PANEL_LOOSE)
+			state = MECHA_BOLTS_SECURED
 			to_chat(user, "You tighten the securing bolts.")
 		return
 	else if(W.is_crowbar())
-		if(state==2)
-			state = 3
+		if(state==MECHA_PANEL_LOOSE)
+			state = MECHA_CELL_OPEN
 			to_chat(user, "You open the hatch to the power unit")
-		else if(state==3)
-			state=2
+		else if(state==MECHA_CELL_OPEN)
+			state=MECHA_PANEL_LOOSE
 			to_chat(user, "You close the hatch to the power unit")
-		else if(state==4)
+		else if(state==MECHA_CELL_OUT)
 			var/list/removable_components = list()
 			for(var/slot in internal_components)
 				var/obj/item/mecha_parts/component/MC = internal_components[slot]
@@ -1383,7 +1388,7 @@
 
 		return
 	else if(istype(W, /obj/item/stack/cable_coil))
-		if(state == 3 && hasInternalDamage(MECHA_INT_SHORT_CIRCUIT))
+		if(state >= MECHA_CELL_OPEN && hasInternalDamage(MECHA_INT_SHORT_CIRCUIT))
 			var/obj/item/stack/cable_coil/CC = W
 			if(CC.use(2))
 				clearInternalDamage(MECHA_INT_SHORT_CIRCUIT)
@@ -1395,19 +1400,19 @@
 		if(hasInternalDamage(MECHA_INT_TEMP_CONTROL))
 			clearInternalDamage(MECHA_INT_TEMP_CONTROL)
 			to_chat(user, "You repair the damaged temperature controller.")
-		else if(state==3 && src.cell)
+		else if(state==MECHA_CELL_OPEN && src.cell)
 			src.cell.forceMove(src.loc)
 			src.cell = null
-			state = 4
+			state = MECHA_CELL_OUT
 			to_chat(user, "You unscrew and pry out the powercell.")
 			src.log_message("Powercell removed")
-		else if(state==4 && src.cell)
-			state=3
+		else if(state==MECHA_CELL_OUT && src.cell)
+			state=MECHA_CELL_OPEN
 			to_chat(user, "You screw the cell in place")
 		return
 
 	else if(istype(W, /obj/item/device/multitool))
-		if(state>=3 && src.occupant)
+		if(state>=MECHA_CELL_OPEN && src.occupant)
 			to_chat(user, "You attempt to eject the pilot using the maintenance controls.")
 			if(src.occupant.stat)
 				src.go_out()
@@ -1419,7 +1424,7 @@
 		return
 
 	else if(istype(W, /obj/item/weapon/cell))
-		if(state==4)
+		if(state==MECHA_CELL_OUT)
 			if(!src.cell)
 				to_chat(user, "You install the powercell")
 				user.drop_item()
@@ -1453,7 +1458,7 @@
 		return
 
 	else if(istype(W,/obj/item/stack/nanopaste))
-		if(state >= 2)
+		if(state >= MECHA_PANEL_LOOSE)
 			var/obj/item/stack/nanopaste/NP = W
 
 			for(var/slot in internal_components)
@@ -2411,15 +2416,15 @@
 		if(!in_range(src, usr))	return
 		var/mob/user = top_filter.getMob("user")
 		if(user)
-			if(state==0)
-				state = 1
+			if(state==MECHA_OPERATING)
+				state = MECHA_BOLTS_SECURED
 				to_chat(user, "The securing bolts are now exposed.")
-			else if(state==1)
-				state = 0
+			else if(state==MECHA_BOLTS_SECURED)
+				state = MECHA_OPERATING
 				to_chat(user, "The securing bolts are now hidden.")
 			output_maintenance_dialog(top_filter.getObj("id_card"),user)
 		return
-	if(href_list["set_internal_tank_valve"] && state >=1)
+	if(href_list["set_internal_tank_valve"] && state >=MECHA_BOLTS_SECURED)
 		if(!in_range(src, usr))	return
 		var/mob/user = top_filter.getMob("user")
 		if(user)
@@ -2427,7 +2432,7 @@
 			if(new_pressure)
 				internal_tank_valve = new_pressure
 				to_chat(user, "The internal pressure valve has been set to [internal_tank_valve]kPa.")
-	if(href_list["remove_passenger"] && state >= 1)
+	if(href_list["remove_passenger"] && state >= MECHA_BOLTS_SECURED)
 		var/mob/user = top_filter.getMob("user")
 		var/list/passengers = list()
 		for (var/obj/item/mecha_parts/mecha_equipment/tool/passenger/P in contents)
