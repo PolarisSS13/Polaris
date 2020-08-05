@@ -54,9 +54,9 @@
 		available_recipes = new
 
 	for(var/type in subtypesof(/datum/recipe))
-	var/datum/recipe/test = type
-	if((appliancetype & initial(test.appliance)))
-		available_recipes += new test
+		var/datum/recipe/test = type
+		if((appliancetype & initial(test.appliance)))
+			available_recipes += new test
 
 /obj/machinery/appliance/Destroy()
 	for (var/a in cooking_objs)
