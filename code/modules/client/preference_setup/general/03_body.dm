@@ -889,7 +889,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	dat += "<tr>"
 	dat += "<td width = 400>[current_species.blurb]</td>"
 	dat += "<td width = 200 align='center'>"
-	if("preview" in icon_states(current_species.icobase))
+	if("preview" in cached_icon_states(current_species.icobase))
 		usr << browse_rsc(icon(current_species.icobase,"preview"), "species_preview_[current_species.name].png")
 		dat += "<img src='species_preview_[current_species.name].png' width='64px' height='64px'><br/><br/>"
 	dat += "<b>Language:</b> [current_species.species_language]<br/>"
