@@ -34,7 +34,6 @@
 	company_name  = "NanoTrasen"
 	company_short = "NT"
 	starsys_name  = "Vir"
-	use_overmap = TRUE
 
 	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has docked with the station at docks one and two. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
@@ -81,6 +80,10 @@
 	usable_email_tlds = list("freemail.nt")
 	allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
 
+
+	use_overmap = 			TRUE
+	overmap_size = 			20
+	overmap_event_areas = 	6
 	default_skybox = /datum/skybox_settings/southern_cross
 
 	unit_test_exempt_areas = list(/area/ninja_dojo, /area/ninja_dojo/firstdeck, /area/ninja_dojo/arrivals_dock)
