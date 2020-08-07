@@ -46,6 +46,9 @@
 	dismantle_wall(null,null,1)
 	..()
 
+/turf/simulated/wall/examine_icon()
+	return icon(icon=initial(icon), icon_state=initial(icon_state))
+
 /turf/simulated/wall/process()
 	// Calling parent will kill processing
 	if(!radiate())
@@ -301,6 +304,9 @@
 				W.burn((temperature/4))
 			for(var/obj/machinery/door/airlock/phoron/D in range(3,src))
 				D.ignite(temperature/4)
+
+/turf/simulated/wall/can_engrave()
+	return (material && material.hardness >= 10 && material.hardness <= 100)
 
 /turf/simulated/wall/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
 	if(material.integrity > 1000) // Don't decon things like elevatorium.

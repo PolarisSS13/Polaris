@@ -59,7 +59,8 @@
 			. += A
 
 /obj/effect/overmap/visitable/proc/find_z_levels()
-	map_z = GetConnectedZlevels(z)
+	if(!LAZYLEN(map_z)) // If map_z is already populated use it as-is, otherwise start with connected z-levels.
+		map_z = GetConnectedZlevels(z)
 	if(LAZYLEN(extra_z_levels))
 		map_z |= extra_z_levels
 

@@ -38,7 +38,7 @@
 	data["isAI"] = isAI(user)
 
 	var/z = get_z(nano_host())
-	var/list/map_levels = using_map.get_map_levels(z, TRUE)
+	var/list/map_levels = using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE)
 	data["map_levels"] = map_levels
 
 	data["crewmembers"] = list()
@@ -67,12 +67,3 @@
 
 		// should make the UI auto-update; doesn't seem to?
 		ui.set_auto_update(1)
-
-/*/datum/nano_module/crew_monitor/proc/scan()
-	for(var/mob/living/carbon/human/H in mob_list)
-		if(istype(H.w_uniform, /obj/item/clothing/under))
-			var/obj/item/clothing/under/C = H.w_uniform
-			if (C.has_sensor)
-				tracked |= C
-	return 1
-*/
