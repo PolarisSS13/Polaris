@@ -1,8 +1,9 @@
 
 /obj/item/organ/internal/robotic/heatsink
 	name = "heatsink"
-
 	icon_state = "heatsink"
+
+	organ_tag = O_HEATSINK
 
 /obj/item/organ/internal/robotic/heatsink/handle_organ_proc_special()
 	if(owner && owner.stat != DEAD)
@@ -17,9 +18,9 @@
 		var/thermal_protection = owner.get_heat_protection(env_temp)
 
 		if(thermal_protection < 1)
-			temp_adj = min(owner.bodytemperature - max(thermostat, env_temp), 5)
+			temp_adj = min(owner.bodytemperature - max(thermostat, env_temp), 6)
 		else
-			temp_adj = min(owner.bodytemperature - thermostat, 5)
+			temp_adj = min(owner.bodytemperature - thermostat, 6)
 
 		if(temp_adj < 0.5)
 			return
