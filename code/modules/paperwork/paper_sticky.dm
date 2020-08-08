@@ -1,6 +1,7 @@
 /obj/item/sticky_pad
 	name = "sticky note pad"
 	desc = "A pad of densely packed sticky notes."
+	description_info = "Click to remove a sticky note from the pile. Click-drag to yourself to pick up the stack. Sticky notes stuck to surfaces/objects will persist for 50 rounds."
 	color = COLOR_YELLOW
 	icon = 'icons/obj/stickynotes.dmi'
 	icon_state = "pad_full"
@@ -66,7 +67,7 @@
 		update_icon()
 
 /obj/item/sticky_pad/MouseDrop(mob/user as mob)
-	if((user == usr && (!( usr.restrained() ) && (!( usr.stat ) && (usr.contents.Find(src) || in_range(src, usr))))))
+	if(user == usr && !(usr.restrained() || usr.stat) && (usr.contents.Find(src) || in_range(src, usr)))
 		if(!istype(usr, /mob/living/simple_mob))
 			if( !usr.get_active_hand() )		//if active hand is empty
 				var/mob/living/carbon/human/H = user
