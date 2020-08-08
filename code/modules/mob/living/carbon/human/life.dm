@@ -711,7 +711,7 @@
 					cold_dam = COLD_DAMAGE_LEVEL_1
 
 			take_overall_damage(burn=cold_dam, used_weapon = "Low Body Temperature")
-			
+
 	else clear_alert("temp")
 
 	// Account for massive pressure differences.  Done by Polymorph
@@ -777,9 +777,11 @@
 	if (species.body_temperature == null)
 		return //this species doesn't have metabolic thermoregulation
 
-	// FBPs will overheat, prosthetic limbs are fine.
-	if(robobody_count)
-		bodytemperature += round(robobody_count*1.75)
+	// FBPs will overheat when alive, prosthetic limbs are fine.
+	if(stat != DEAD && robobody_count)
+		var/obj/item/organ/internal/robotic/heatsink/HS = internal_organs_by_name[O_HEATSINK]
+		if(!HS || HS.is_broken())
+			bodytemperature += round(robobody_count*1.75)
 
 	var/body_temperature_difference = species.body_temperature - bodytemperature
 
@@ -873,14 +875,14 @@
 	if(reagents)
 		chem_effects.Cut()
 
-		if(!isSynthetic())
+		if(touching)
+			touching.metabolize()
+		if(ingested)
+			ingested.metabolize()
+		if(bloodstr)
+			bloodstr.metabolize()
 
-			if(touching)
-				touching.metabolize()
-			if(ingested)
-				ingested.metabolize()
-			if(bloodstr)
-				bloodstr.metabolize()
+		if(!isSynthetic())
 
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
@@ -1404,7 +1406,7 @@
 				if(prob(5))
 					to_chat(src, "<span class='danger'>You lose directional control!</span>")
 					Confuse(10)
-		if (getToxLoss() >= 45)
+		if (getToxLoss() >= 45 && !isSynthetic())
 			spawn vomit()
 
 

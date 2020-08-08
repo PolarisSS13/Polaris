@@ -83,6 +83,10 @@
 	if(alien == IS_SLIME)	//They don't have blood, so it seems weird that they would instantly 'process' the chemical like another species does.
 		affect_ingest(M, alien, removed)
 		return
+
+	if(M.isSynthetic())
+		return
+
 	M.inject_blood(src, volume * volume_mod)
 	remove_self(volume)
 
