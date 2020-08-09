@@ -239,6 +239,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/trash/sosjerky,
 		/obj/item/trash/syndi_cakes,
 		/obj/item/trash/tastybread,
+		/obj/item/trash/coffee,
 		/obj/item/trash/tray,
 		/obj/item/trash/unajerky,
 		/obj/item/trash/waffles,
