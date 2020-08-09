@@ -54,6 +54,10 @@
 	name = "jar"
 	path =/obj/item/glass_jar
 
+/datum/category_item/autolathe/general/fishtank
+	name = "fish tank"
+	path =/obj/item/glass_jar
+
 /datum/category_item/autolathe/general/radio_headset
 	name = "radio headset"
 	path =/obj/item/device/radio/headset
@@ -91,6 +95,18 @@
 /datum/category_item/autolathe/general/rods
 	name = "metal rods"
 	path =/obj/item/stack/rods
+	is_stack = TRUE
+	no_scale = TRUE //prevents material duplication exploits
+
+/datum/category_item/autolathe/general/plasteel
+	name = "plasteel sheets"
+	path =/obj/item/stack/material/plasteel
+	is_stack = TRUE
+	no_scale = TRUE //prevents material duplication exploits
+
+/datum/category_item/autolathe/general/plastic
+	name = "plastic sheets"
+	path =/obj/item/stack/material/plastic
 	is_stack = TRUE
 	no_scale = TRUE //prevents material duplication exploits
 
@@ -132,6 +148,12 @@
 /datum/category_item/autolathe/general/ecigcartridge
 	name = "ecigarette cartridge"
 	path = /obj/item/weapon/reagent_containers/ecig_cartridge/blank
+
+/datum/category_item/autolathe/general/idcard
+	name = "ID Card"
+	path = /obj/item/weapon/card/id
+	resources = list(DEFAULT_WALL_MATERIAL = 100, MAT_GLASS = 100, MAT_PLASTIC = 300)
+	man_rating = 2
 
 /datum/category_item/autolathe/general/handcuffs
 	name = "handcuffs"

@@ -162,6 +162,12 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 /datum/asset/simple/send(client)
 	send_asset_list(client,assets,verify)
 
+/datum/asset/simple/tgui
+	assets = list(
+		"tgui.bundle.js" = 'tgui/packages/tgui/public/tgui.bundle.js',
+		"tgui.bundle.css" = 'tgui/packages/tgui/public/tgui.bundle.css'
+	)
+
 //
 // iconsheet Assets - For making lots of icon states available at once without sending a thousand tiny files.
 //
@@ -204,12 +210,12 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 		directions = list(SOUTH)
 
 	var/sprites = list()
-	for (var/icon_state_name in icon_states(I))
+	for (var/icon_state_name in cached_icon_states(I))
 		for (var/direction in directions)
 			var/suffix = (directions.len > 1) ? "-[dir2text(direction)]" : ""
 			var/sprite_name = "[prefix][icon_state_name][suffix]"
 			var/icon/sprite = icon(I, icon_state=icon_state_name, dir=direction, frame=1, moving=FALSE)
-			if (!sprite || !length(icon_states(sprite)))  // that direction or state doesn't exist
+			if (!sprite || !length(cached_icon_states(sprite)))  // that direction or state doesn't exist
 				continue
 			sprites[sprite_name] = sprite
 	return sprites
@@ -292,3 +298,15 @@ You can set verify to TRUE if you want send() to sleep until the client has the 
 
 	send_asset_list(client, uncommon)
 	send_asset_list(client, common)
+
+// Fontawesome
+/datum/asset/simple/fontawesome
+	verify = FALSE
+	assets = list(
+		"fa-regular-400.eot"  = 'html/font-awesome/webfonts/fa-regular-400.eot',
+		"fa-regular-400.woff" = 'html/font-awesome/webfonts/fa-regular-400.woff',
+		"fa-solid-900.eot"    = 'html/font-awesome/webfonts/fa-solid-900.eot',
+		"fa-solid-900.woff"   = 'html/font-awesome/webfonts/fa-solid-900.woff',
+		"font-awesome.css"    = 'html/font-awesome/css/all.min.css',
+		"v4shim.css"          = 'html/font-awesome/css/v4-shims.min.css'
+	)
