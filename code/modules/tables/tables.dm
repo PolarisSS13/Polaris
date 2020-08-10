@@ -28,6 +28,9 @@
 
 	var/item_place = 1 //allows items to be placed on the table, but not on benches.
 
+/obj/structure/table/examine_icon()
+	return icon(icon=initial(icon), icon_state=initial(icon_state)) //Basically the map preview version
+
 /obj/structure/table/proc/update_material()
 	var/old_maxhealth = maxhealth
 	if(!material)
@@ -322,6 +325,15 @@
 		if(S) shards += S
 	qdel(src)
 	return shards
+
+/obj/structure/table/can_visually_connect_to(var/obj/structure/S)
+	if(istype(S,/obj/structure/table/bench) && !istype(src,/obj/structure/table/bench))
+		return FALSE
+	if(istype(src,/obj/structure/table/bench) && !istype(S,/obj/structure/table/bench))
+		return FALSE
+	if(istype(S,/obj/structure/table))
+		return TRUE
+	..()
 
 /obj/structure/table/update_icon()
 	if(flipped != 1)
