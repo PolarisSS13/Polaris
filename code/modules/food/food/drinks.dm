@@ -213,7 +213,6 @@
 	name = "cup of ice"
 	desc = "Careful, cold ice, do not chew."
 	icon_state = "coffee"
-	trash = /obj/item/trash/coffee
 	center_of_mass = list("x"=15, "y"=10)
 /obj/item/weapon/reagent_containers/food/drinks/ice/Initialize()
 	. = ..()
@@ -260,6 +259,20 @@
 /obj/item/weapon/reagent_containers/food/drinks/chaitea/Initialize()
 	. = ..()
 	reagents.add_reagent("chaitea", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/decaf
+	name = "cup of decaf coffee"
+	desc = "Coffee with all the wake-up sucked out."
+	description_fluff = "A trial run on two NanoTrasen stations in 2481 attempted to replace all vending machine coffee with decaf in order to combat an epidemic of caffeine addiction. After two days, three major industrial accidents and a death, the initiative was cancelled. Decaf is now thankfully optional."
+	icon_state = "coffee"
+	item_state = "coffee"
+	trash = /obj/item/trash/coffee
+	center_of_mass = list("x"=16, "y"=14)
+	drop_sound = 'sound/items/drop/papercup.ogg'
+
+/obj/item/weapon/reagent_containers/food/drinks/decaf/Initialize()
+	. = ..()
+	reagents.add_reagent("decaf", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen
 	name = "Cup Ramen"

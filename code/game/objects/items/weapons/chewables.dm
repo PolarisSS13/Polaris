@@ -140,7 +140,7 @@ obj/item/clothing/mask/chewable/Destroy()
 //Tobacco Tins
 
 /obj/item/weapon/storage/chewables/tobacco
-	name = "tin of Mendell Smooth chewing tobacco"
+	name = "tin of Al Mamun Smooth chewing tobacco"
 	desc = "Packaged and shipped straight from Kishar, popularised by the biosphere farmers of Kanondaga."
 	icon_state = "chew_generic"
 	item_state = "cigpacket"
@@ -149,14 +149,14 @@ obj/item/clothing/mask/chewable/Destroy()
 
 /obj/item/weapon/storage/chewables/tobacco/fine
 	name = "tin of Suamalie chewing tobacco"
-	desc = "Once reserved for the first-class tourists of Oasis, this blend has been released for the public to enjoy."
+	desc = "Once reserved for the first-class tourists of Oasis, this premium blend has been released for the public to enjoy."
 	icon_state = "chew_fine"
 	item_state = "Dpacket"
 	starts_with = list(/obj/item/clothing/mask/chewable/tobacco/fine = 6)
 
 /obj/item/weapon/storage/box/fancy/chewables/tobacco/nico
 	name = "box of Nico-Tine gum"
-	desc = "A SCG doctor-approved brand of nicotine gum. Cut out the middleman for your addiction fix."
+	desc = "A government doctor approved brand of nicotine gum. Cut out the middleman for your addiction fix."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "chew_nico"
 	item_state = "Epacket"

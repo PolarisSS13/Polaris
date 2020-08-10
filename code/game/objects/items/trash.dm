@@ -38,6 +38,10 @@
 	name = "protein bar wrapper"
 	icon_state = "proteinbar"
 
+/obj/item/trash/candy/fruitbar
+	name = "fruit bar wrapper"
+	icon_state = "fruitbar"
+
 /obj/item/trash/cheesie
 	name = "\improper Cheesie Honkers bag"
 	icon_state = "cheesie_honkers"

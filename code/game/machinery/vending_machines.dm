@@ -125,12 +125,14 @@
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vend_power_usage = 85000 //85 kJ to heat a 250 mL cup of coffee
 	products = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 25,
+					/obj/item/weapon/reagent_containers/food/drinks/decaf = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/tea = 25,
 					/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 25,
 					/obj/item/weapon/reagent_containers/food/drinks/greentea = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/chaitea = 15)
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/ice = 10)
 	prices = list(/obj/item/weapon/reagent_containers/food/drinks/coffee = 3,
+					/obj/item/weapon/reagent_containers/food/drinks/decaf = 3,
 					/obj/item/weapon/reagent_containers/food/drinks/tea = 3,
 					/obj/item/weapon/reagent_containers/food/drinks/h_chocolate = 3,
 					/obj/item/weapon/reagent_containers/food/drinks/greentea = 10,

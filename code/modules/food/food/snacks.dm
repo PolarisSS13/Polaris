@@ -429,7 +429,7 @@
 	description_fluff = "NanoMed's ChewMAX is the low-carb alternative to the SwoleMAX range! Want short-term energy but not really interested in sustaining it? Hate fat but don't entirely understand nutrition? Just really like fruit? ChewMAX is for you!"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "fruitbar"
-	trash = /obj/item/trash/candy/proteinbar
+	trash = /obj/item/trash/candy/fruitbar
 	nutriment_amt = 9
 	nutriment_desc = list("apricot" = 2, "sugar" = 2, "dates" = 2, "cranberry" = 2, "apple = 2")
 
@@ -2706,7 +2706,7 @@
 /obj/item/weapon/storage/box/admints
 	name = "Ad-mints"
 	desc = "A pack of air fresheners for your mouth."
-	description_fluff = "Ad-mints earned their name, and reputation when a Major Bill's attended a meeting at a large a marketing firm and was so astounded by the quality of their complimentary mints, that he immediately bought the company - the mints company, not the ad agency - and began providing 'Ad-mints' on every MBT flight."
+	description_fluff = "Ad-mints earned their name, and reputation when a Major Bill's senior executive attended a meeting at a large a marketing firm and was so astounded by the quality of their complimentary mints, that he immediately bought the company - the mints company, not the ad agency - and began providing 'Ad-mints' on every MBT flight."
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "admint_pack"
 	item_state = "candy"
@@ -4100,7 +4100,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/tastybread
 	name = "bread tube"
 	desc = "Bread in a tube. Chewy...and surprisingly tasty."
-	description_fluff = "Due to the high corn-syrup content of NanoTrasen's own-brand bread tubes, many jurisdictions classify them as a confectionary."
+	description_fluff = "Due to the high-fructose corn syrup content of NanoTrasen's own-brand bread tubes, many jurisdictions classify them as a confectionary."
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "tastybread"
 	trash = /obj/item/trash/tastybread
