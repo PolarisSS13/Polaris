@@ -368,6 +368,9 @@ proc/blood_splatter(var/target,var/datum/reagent/blood/source,var/large)
 		B.synthblood = synth
 		B.update_icon()
 
+	if(source.data["blood_name"])
+		B.name = source.data["blood_name"]
+
 	// Update blood information.
 	if(source.data["blood_DNA"])
 		B.blood_DNA = list()

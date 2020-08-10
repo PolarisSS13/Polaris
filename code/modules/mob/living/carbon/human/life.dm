@@ -779,7 +779,7 @@
 
 	// FBPs will overheat when alive, prosthetic limbs are fine.
 	if(stat != DEAD && robobody_count)
-		bodytemperature += round(robobody_count*1.75)
+		bodytemperature += round(robobody_count*1.15)
 		var/obj/item/organ/internal/robotic/heatsink/HS = internal_organs_by_name[O_HEATSINK]
 		if(!HS || HS.is_broken())
 			bodytemperature += round(robobody_count*0.5)
