@@ -6,3 +6,6 @@
 	plane_holder.set_vis(VIS_CLOAKED, TRUE)
 	plane_holder.set_vis(VIS_AI_EYE, TRUE)
 	plane = PLANE_GHOSTS
+	if(cleanup_timer)
+		deltimer(cleanup_timer)
+		cleanup_timer = null
