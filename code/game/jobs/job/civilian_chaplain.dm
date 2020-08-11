@@ -58,7 +58,7 @@
 			if("kishari national faith")
 				B.name = "The Scriptures of Kishar"
 			if("pleromanism")
-				B.name = "The Revised Talmudic Quran"
+				B.name = "The Revised Great Canon"
 			if("spectralism")
 				B.name = "The Book of the Spark"
 			if("hauler")
