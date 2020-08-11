@@ -40,7 +40,7 @@
 			new_religion = religion_name
 		switch(lowertext(new_religion))
 			if("unitarianism")
-				B.name = "The Talmudic Quran"
+				B.name = "The Great Canon"
 			if("christianity")
 				B.name = "The Holy Bible"
 			if("judaism")
@@ -69,6 +69,8 @@
 				B.name = "The Book of the Precursors"
 			if("starlit path of angessa martei")
 				B.name = "Quotations of Exalted Martei"
+			if("sikhism")
+				B.name = "Guru Granth Sahib"
 			else
 				B.name = "The Holy Book of [new_religion]"
 		feedback_set_details("religion_name","[new_religion]")
@@ -132,6 +134,9 @@
 					B.item_state = "bible"
 				if("Torah")
 					B.icon_state = "torah"
+					B.item_state = "clipboard"
+				if("Guru")
+					B.icon_state = "guru"
 					B.item_state = "clipboard"
 				else
 					B.icon_state = "bible"
