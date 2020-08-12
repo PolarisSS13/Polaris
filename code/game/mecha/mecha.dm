@@ -676,7 +676,7 @@
 					break
 			break
 
-	return max(1, round(tally))
+	return max(1, round(tally, 0.1))
 
 /obj/mecha/proc/dyndomove(direction)
 	if(!can_move)
