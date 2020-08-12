@@ -150,7 +150,7 @@
 /datum/reagent/nutriment/triglyceride/oil/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
-	
+
 	var/hotspot = (locate(/obj/fire) in T)
 	if(hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
@@ -222,7 +222,7 @@
 	taste_description = "oil"
 	taste_mult = 0.1
 	reagent_state = LIQUID
-	
+
 /datum/reagent/nutriment/triglyceride/oil/peanut
 	name = "Peanut Oil"
 	id = "peanutoil"
@@ -578,11 +578,11 @@
 	reagent_state = LIQUID
 	color = "#365E30"
 	overdose = REAGENTS_OVERDOSE
-	
+
 //SYNNONO MEME FOODS EXPANSION - Credit to Synnono
 
 /datum/reagent/spacespice
-	name = "Space Spice"
+	name = "Wurmwoad"
 	id = "spacespice"
 	description = "An exotic blend of spices for cooking. Definitely not worms."
 	reagent_state = SOLID
