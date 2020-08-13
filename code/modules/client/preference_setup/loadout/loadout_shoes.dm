@@ -193,7 +193,7 @@
 	path = /obj/item/clothing/shoes/boots/winter/science
 
 /datum/gear/shoes/boots/winter/command
-	display_name = "Site Manager's winter boots"
+	display_name = "site manager's winter boots"
 	path = /obj/item/clothing/shoes/boots/winter/command
 	allowed_roles = list("Site Manager")
 

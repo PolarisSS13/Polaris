@@ -291,7 +291,7 @@
 	path = /obj/item/clothing/under/dress/dress_fire
 
 /datum/gear/uniform/uniform_captain
-	display_name = "uniform, Site Manager's dress"
+	display_name = "uniform, site manager's dress"
 	path = /obj/item/clothing/under/dress/dress_cap
 	allowed_roles = list("Site Manager")
 
