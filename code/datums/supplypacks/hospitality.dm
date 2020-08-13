@@ -63,7 +63,8 @@
 			/obj/item/pizzabox/mushroom,
 			/obj/item/pizzabox/meat,
 			/obj/item/pizzabox/vegetable,
-			/obj/item/pizzabox/pineapple
+			/obj/item/pizzabox/pineapple,
+			/obj/item/weapon/material/knife/plastic
 			)
 	name = "Surprise pack of five pizzas"
 	cost = 15
