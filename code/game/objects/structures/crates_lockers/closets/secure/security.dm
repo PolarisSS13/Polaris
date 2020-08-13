@@ -1,5 +1,5 @@
 /obj/structure/closet/secure_closet/captains
-	name = "colony director's locker"
+	name = "Site Manager's locker"
 	req_access = list(access_captain)
 	closet_appearance = /decl/closet_appearance/secure_closet/command
 
