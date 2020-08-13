@@ -170,13 +170,13 @@
 
 
 /obj/item/device/radio/headset/heads/captain
-	name = "Site Manager's headset"
+	name = "site manager's headset"
 	desc = "The headset of the boss."
 	icon_state = "com_headset"
 	ks2type = /obj/item/device/encryptionkey/heads/captain
 
 /obj/item/device/radio/headset/heads/captain/alt
-	name = "Site Manager's bowman headset"
+	name = "site manager's bowman headset"
 	desc = "The headset of the boss."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/device/encryptionkey/heads/captain

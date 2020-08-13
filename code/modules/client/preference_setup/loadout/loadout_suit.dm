@@ -241,7 +241,7 @@ datum/gear/suit/duster
 	allowed_roles = list("Quartermaster")
 
 /datum/gear/suit/roles/poncho/cloak/captain
-	display_name = "cloak, Site Manager"
+	display_name = "cloak, site manager"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/captain
 	allowed_roles = list("Site Manager")
 
@@ -336,7 +336,7 @@ datum/gear/suit/duster
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 
 /datum/gear/suit/wintercoat/captain
-	display_name = "winter coat, Site Manager"
+	display_name = "winter coat, site manager"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/captain
 	allowed_roles = list("Site Manager")
 

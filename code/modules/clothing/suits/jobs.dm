@@ -21,14 +21,14 @@
 
 //Captain
 /obj/item/clothing/suit/captunic
-	name = "Site Manager's parade tunic"
+	name = "site manager's parade tunic"
 	desc = "Worn by a Site Manager to show their class."
 	icon_state = "captunic"
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
 
 /obj/item/clothing/suit/captunic/capjacket
-	name = "Site Manager's uniform jacket"
+	name = "site manager's uniform jacket"
 	desc = "A less formal jacket for everyday Site Manager use."
 	icon_state = "capjacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
