@@ -176,7 +176,7 @@
 	item_state = "hoscloak"
 
 /obj/item/clothing/accessory/poncho/roles/cloak/captain
-	name = "Site Manager's cloak"
+	name = "site manager's cloak"
 	desc = "An elaborate cloak meant to be worn by the Site Manager."
 	icon_state = "capcloak"
 	item_state = "capcloak"
