@@ -63,6 +63,12 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/prisoner
 	sort_string = "DACAA"
 
+/datum/design/circuit/metal_detector
+	name = "metal detector "
+	id = "metal_detector"
+	build_path = obj/item/weapon/circuitboard/metal_detector
+	sort_string = "DADAA"
+
 /datum/design/circuit/med_data
 	name = "medical records console"
 	id = "med_data"

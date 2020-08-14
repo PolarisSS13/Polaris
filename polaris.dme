@@ -1087,6 +1087,7 @@
 #include "code\game\objects\items\weapons\circuitboards\machinery\jukebox.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\kitchen_appliances.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\mech_recharger.dm"
+#include "code\game\objects\items\weapons\circuitboards\machinery\metaldetector.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\mining_drill.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\pacman.dm"
 #include "code\game\objects\items\weapons\circuitboards\machinery\papershredder.dm"

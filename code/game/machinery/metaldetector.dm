@@ -3,8 +3,8 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 	/obj/item/weapon/material,
 	/obj/item/weapon/melee,
 	/obj/item/device/transfer_valve,
-	/obj/item/weapon/grenade/,
-	/obj/item/ammo_casing/,
+	/obj/item/weapon/grenade,
+	/obj/item/ammo_casing,
 	/obj/item/ammo_magazine
 	)))
 
@@ -14,8 +14,10 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "metal_detector"
 	anchored = TRUE
-	req_one_access = list(access_security, access_heads)
+	req_one_access = list(access_security, access_heads, access_explorer)
 	idle_power_usage = 100
+
+	circuit = /obj/item/weapon/circuitboard/metal_detector
 
 	plane = MOB_PLANE
 	layer = ABOVE_MOB_LAYER
@@ -24,17 +26,11 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 
 	var/alarm_delay = 2000
 
-/obj/machinery/metal_detector/New()
-	..()
+/obj/machinery/metal_detector/Initialize()
+	. = ..()
 	next_announcement_time = get_game_time() - alarm_delay
-
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/metal_detector(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/scanning_module(src)
-	component_parts += new /obj/item/weapon/stock_parts/console_screen(src)
-	RefreshParts()
+	wires = new(src)
+	default_apply_parts()
 
 /obj/machinery/metal_detector/examine(mob/user)
 	if((stat & NOPOWER))
@@ -82,6 +78,6 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 		next_announcement_time = get_game_time() + alarm_delay
 
 /obj/machinery/metal_detector/medical
-	req_one_access = list(access_medical, access_security)
+	req_one_access = list(access_medical, access_security, access_heads, access_explorer)
 
 
