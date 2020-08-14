@@ -29,7 +29,6 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 /obj/machinery/metal_detector/Initialize()
 	. = ..()
 	next_announcement_time = get_game_time() - alarm_delay
-	wires = new(src)
 	default_apply_parts()
 
 /obj/machinery/metal_detector/examine(mob/user)

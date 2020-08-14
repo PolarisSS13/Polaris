@@ -66,7 +66,7 @@ CIRCUITS BELOW
 /datum/design/circuit/metal_detector
 	name = "metal detector "
 	id = "metal_detector"
-	build_path = obj/item/weapon/circuitboard/metal_detector
+	build_path = /obj/item/weapon/circuitboard/metal_detector
 	sort_string = "DADAA"
 
 /datum/design/circuit/med_data
