@@ -119,8 +119,8 @@
 	name = "POI - Pride Rock"
 	ambience = AMBIENCE_SIF
 
-/area/submap/abandonedhome
-	name = "POI - Abandoned Home"
+/area/submap/lonehome
+	name = "POI - Lone Home"
 	ambience = AMBIENCE_FOREBODING
 
 /area/submap/hotspring

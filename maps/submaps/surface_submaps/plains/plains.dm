@@ -34,7 +34,7 @@
 #include "BuriedTreasure3.dmm"
 #include "methlab.dmm"
 #include "hotspring.dmm"
-#include "abandonedhome.dmm"
+#include "lonehome.dmm"
 #include "priderock.dmm"
 #include "oldhotel.dmm"
 #endif
@@ -264,10 +264,10 @@
 	mappath = 'maps/submaps/surface_submaps/plains/priderock.dmm'
 	cost = 10
 
-/datum/map_template/surface/plains/abandonedhome
-	name = "Abandoned Home"
+/datum/map_template/surface/plains/lonehome
+	name = "Lone Home"
 	desc = "A quite inoffensive looking home, damaged but still holding up."
-	mappath = 'maps/submaps/surface_submaps/plains/abandonedhome.dmm'
+	mappath = 'maps/submaps/surface_submaps/plains/lonehome.dmm'
 	cost = 15
 
 /datum/map_template/surface/plains/hotspring

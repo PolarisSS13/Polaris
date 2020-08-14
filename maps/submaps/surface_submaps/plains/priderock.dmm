@@ -1,4 +1,4 @@
-"ae" = (/obj/random/humanoidremains,/obj/random/humanoidremains,/turf/simulated/floor/outdoors/rocks,/area/submap/priderock)
+"ae" = (/obj/structure/railing,/obj/item/weapon/bone,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "cR" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "dq" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bonfire/sifwood,/turf/simulated/floor/outdoors/grass/sif,/area/submap/priderock)
 "dD" = (/obj/random/junk,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
@@ -7,7 +7,7 @@
 "ik" = (/obj/random/trash,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "jM" = (/obj/random/maintenance/medical,/obj/random/maintenance/medical,/obj/random/maintenance/medical,/obj/item/weapon/towel/random,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "md" = (/obj/random/trash,/turf/template_noop,/area/submap/priderock)
-"nG" = (/obj/item/weapon/bone,/obj/random/junk,/obj/random/junk,/turf/simulated/floor/outdoors/rocks,/area/submap/priderock)
+"nG" = (/obj/structure/railing,/obj/random/junk,/obj/item/weapon/bone/ribs,/obj/item/weapon/bone/skull,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "nV" = (/obj/item/stack/material/log/sif,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "qh" = (/obj/structure/cliff/automatic{dir = 8},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "qP" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
@@ -19,7 +19,7 @@
 "xE" = (/obj/structure/closet/crate/bin,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/junk,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "yi" = (/obj/structure/cliff/automatic/ramp{dir = 9},/obj/structure/railing{dir = 8},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "yI" = (/obj/structure/cliff/automatic{dir = 4},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
-"An" = (/obj/item/weapon/bone,/turf/simulated/floor/outdoors/rocks,/area/submap/priderock)
+"An" = (/obj/structure/railing,/obj/random/humanoidremains,/obj/random/humanoidremains,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "As" = (/obj/structure/closet/crate,/obj/random/maintenance/clean,/obj/random/maintenance/clean,/obj/random/maintenance/clean,/obj/random/maintenance/cargo,/obj/random/maintenance/medical,/obj/random/maintenance/medical,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Bf" = (/obj/random/trash,/obj/random/trash,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Bv" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
@@ -27,7 +27,6 @@
 "Dg" = (/obj/effect/decal/cleanable/dirt,/obj/structure/ledge/ledge_stairs{dir = 8},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Dx" = (/obj/structure/cliff/automatic/corner{dir = 9},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "DU" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
-"EI" = (/obj/structure/cliff/automatic/corner{dir = 6},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Ff" = (/obj/structure/cliff/automatic{dir = 8},/obj/structure/railing{dir = 8},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Fg" = (/obj/effect/decal/cleanable/dirt,/obj/structure/ledge/ledge_stairs,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Fo" = (/obj/structure/cliff/automatic{dir = 4},/obj/structure/railing{dir = 4},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
@@ -37,7 +36,7 @@
 "If" = (/obj/structure/bed/chair,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Ix" = (/obj/structure/cliff/automatic{dir = 10},/obj/structure/railing{dir = 8},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Jk" = (/turf/simulated/floor/outdoors/grass/sif,/area/submap/priderock)
-"Lm" = (/obj/item/weapon/bone/ribs,/obj/item/weapon/bone/skull,/obj/random/junk,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
+"Lm" = (/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/item/weapon/bone/skull/tajaran,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Lo" = (/obj/structure/cliff/automatic{dir = 2},/obj/structure/railing,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "LK" = (/obj/structure/cliff/automatic,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "Mg" = (/obj/structure/cliff/automatic{dir = 2},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
@@ -73,12 +72,12 @@ WkBBWkFoFgFgIxLoLoMgLoMgLoLoOd
 WkZmZmFoZJqPZJOcOcZJqPZJPnPWFf
 ZmWkUGDUXdLKLKXdVFOcZAUddqWkqh
 ZmWkWkYPWkYPYPYPyIWkOcOcGkOcFf
-ZmEILoTbTbTbTbTbSinVZJZJOcJkFf
+ZmWkTbTbTbTbTbTbSinVZJZJOcJkFf
 ZmFoPbFOwUYPJkwUJkZJZJZAZJxEFf
 HwFoFOSEZcZJSEDgikZJOcIfIfJkFf
 ZmFoYPqYXdLKXdXdVFWkFOhIZOjMFf
-ZmFoWkfLAnLmaenGFoJkJkcRcRdDqh
-ZmyISETdTbTbTbWkFoAsWkWkJkWkFf
+ZmFoWkfLYPWkYPYPFoJkJkcRcRdDqh
+ZmyISETdaenGAnLmFoAsWkWkJkWkFf
 WkFoOcSEYdYPWkFfDUXdLKXdXdXdDx
 ZmDUXdXdXdVFYPqhZmZmWkZmWkZmWk
 ZmWkWkWkZmyIuGFfHwHwVMZmVMZmZm
