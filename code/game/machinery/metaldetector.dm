@@ -14,7 +14,7 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "metal_detector"
 	anchored = TRUE
-	req_one_access = list(access_security, access_heads, access_explorer)
+	req_one_access = list(access_security, access_heads)
 	idle_power_usage = 100
 
 	circuit = /obj/item/weapon/circuitboard/metal_detector
@@ -77,6 +77,6 @@ GLOBAL_LIST_INIT(metal_detector_items, typecacheof(list(
 		next_announcement_time = get_game_time() + alarm_delay
 
 /obj/machinery/metal_detector/medical
-	req_one_access = list(access_medical, access_security, access_heads, access_explorer)
+	req_one_access = list(access_medical, access_security, access_heads)
 
 
