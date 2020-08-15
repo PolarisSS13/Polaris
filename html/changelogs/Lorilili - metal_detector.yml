@@ -1,5 +1,4 @@
 author: Lorilili
-Useful for PR changelogs that won't get used again.
 delete-after: True
 changes: 
   - rscadd: "Metal detectors have been added, which can be constructed using materials from research."
