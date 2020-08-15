@@ -201,7 +201,7 @@
 			else
 				startPatrol()
 		else
-			if(locate(/obj/machinery/door) in loc && !pulledby) //Don't hang around blocking doors, but don't run off if someone tries to pull us through one.
+			if((locate(/obj/machinery/door) in loc) && !pulledby) //Don't hang around blocking doors, but don't run off if someone tries to pull us through one.
 				var/turf/my_turf = get_turf(src)
 				var/list/can_go = my_turf.CardinalTurfsWithAccess(botcard)
 				if(LAZYLEN(can_go))
