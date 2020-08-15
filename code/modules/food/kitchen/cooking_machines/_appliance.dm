@@ -242,35 +242,51 @@
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
 		return
 
+	var/obj/item/ToCook = I
+
 	if(istype(I, /obj/item/weapon/gripper))
 		var/obj/item/weapon/gripper/GR = I
-		if(GR.wrapped)
-			GR.wrapped.forceMove(get_turf(src))
-			attackby(I, user)
-			return
+		var/obj/item/Wrap = GR.wrapped
+		if(Wrap)
+			Wrap.loc = get_turf(src)
+			var/result = can_insert(Wrap, user)
+			if(!result)
+				Wrap.forceMove(GR)
+				if(!(default_deconstruction_screwdriver(user, I)))
+					default_part_replacement(user, I)
+				return
+
+			if(QDELETED(GR.wrapped))
+				GR.wrapped = null
+
+			if(GR?.wrapped.loc != src)
+				GR.drop_item_nm()
+
+			ToCook = Wrap
 		else
 			attack_hand(user)
 			return
 
-	var/result = can_insert(I, user)
-	if(!result)
-		if(!(default_deconstruction_screwdriver(user, I)))
-			default_part_replacement(user, I)
-		return
-
-	if(result == 2)
-		var/obj/item/weapon/grab/G = I
-		if (G && istype(G) && G.affecting)
-			cook_mob(G.affecting, user)
+	else
+		var/result = can_insert(I, user)
+		if(!result)
+			if(!(default_deconstruction_screwdriver(user, I)))
+				default_part_replacement(user, I)
 			return
 
+		if(result == 2)
+			var/obj/item/weapon/grab/G = I
+			if (G && istype(G) && G.affecting)
+				cook_mob(G.affecting, user)
+				return
+
 	//From here we can start cooking food
-	add_content(I, user)
+	add_content(ToCook, user)
 	update_icon()
 
 //Override for container mechanics
 /obj/machinery/appliance/proc/add_content(var/obj/item/I, var/mob/user)
-	if(!user.unEquip(I) && !isturf(I))
+	if(!user.unEquip(I) && !isturf(I.loc))
 		return
 
 	var/datum/cooking_item/CI = has_space(I)

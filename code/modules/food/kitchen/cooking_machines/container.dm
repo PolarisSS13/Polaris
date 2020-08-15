@@ -36,7 +36,13 @@
 		var/obj/item/weapon/gripper/GR = I
 		if(GR.wrapped)
 			GR.wrapped.forceMove(get_turf(src))
-			attackby(I, user)
+			attackby(GR.wrapped, user)
+			if(QDELETED(GR.wrapped))
+				GR.wrapped = null
+
+			if(GR?.wrapped.loc != src)
+				GR.wrapped = null
+
 			return
 
 	for (var/possible_type in insertable)
