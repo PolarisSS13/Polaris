@@ -1,6 +1,7 @@
 /obj/machinery/washing_machine
 	name = "Washing Machine"
 	desc = "Not a hiding place. Unfit for pets."
+	description_info = "Alt click to start."
 	icon = 'icons/obj/machines/washing_machine.dmi'
 	icon_state = "wm_10"
 	density = 1
