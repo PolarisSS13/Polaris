@@ -158,7 +158,11 @@
 /obj/machinery/computer/pod/Topic(href, href_list)
 	if(..())
 		return 1
+<<<<<<< refs/remotes/PolarisSS13/master
 	if((usr.contents.Find(src) || (in_range(src, usr) && isturf(loc))) || (isrobot(usr)))
+=======
+	if((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (isrobot(usr)))
+>>>>>>> Most /obj/ helpers done
 		usr.set_machine(src)
 		if(href_list["power"])
 			var/t = text2num(href_list["power"])

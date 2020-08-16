@@ -149,7 +149,11 @@
 /obj/machinery/suit_storage_unit/Topic(href, href_list) //I fucking HATE this proc
 	if(..())
 		return
+<<<<<<< refs/remotes/PolarisSS13/master
 	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isAI(usr)))
+=======
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isAI(usr)))
+>>>>>>> Most /obj/ helpers done
 		usr.set_machine(src)
 		if(href_list["toggleUV"])
 			toggleUV(usr)

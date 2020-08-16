@@ -278,7 +278,11 @@ var/specops_shuttle_timeleft = 0
 	if(..())
 		return 1
 
+<<<<<<< refs/remotes/PolarisSS13/master
 	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(loc))) || (isrobot(usr)))
+=======
+	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (isrobot(usr)))
+>>>>>>> Most /obj/ helpers done
 		usr.machine = src
 
 	if (href_list["sendtodock"])

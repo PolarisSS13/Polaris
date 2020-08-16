@@ -507,7 +507,11 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 /obj/machinery/newscaster/Topic(href, href_list)
 	if(..())
 		return
+<<<<<<< refs/remotes/PolarisSS13/master
 	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isrobot(usr)))
+=======
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isrobot(usr)))
+>>>>>>> Most /obj/ helpers done
 		usr.set_machine(src)
 		if(href_list["set_channel_name"])
 			channel_name = sanitizeSafe(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""), MAX_LNAME_LEN)

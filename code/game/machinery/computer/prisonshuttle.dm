@@ -55,7 +55,11 @@ var/prison_shuttle_timeleft = 0
 		if(..())
 			return
 
+<<<<<<< refs/remotes/PolarisSS13/master
 		if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (isrobot(usr)))
+=======
+		if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (isrobot(usr)))
+>>>>>>> Most /obj/ helpers done
 			usr.set_machine(src)
 
 		if (href_list["sendtodock"])
