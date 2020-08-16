@@ -4,7 +4,7 @@
 
 /datum/surgery_step/slime
 	is_valid_target(mob/living/simple_animal/slime/target)
-		return istype(target, /mob/living/simple_animal/slime/)
+		return isslime(target)
 
 /datum/surgery_step/slime/can_use(mob/living/user, mob/living/simple_animal/slime/target, target_zone, obj/item/tool)
 	return target.stat == 2

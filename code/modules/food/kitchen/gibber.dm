@@ -126,11 +126,11 @@
 		to_chat(user, "<span class='danger'>The gibber is locked and running, wait for it to finish.</span>")
 		return
 
-	if(!(istype(victim, /mob/living/carbon)) && !(istype(victim, /mob/living/simple_mob)) )
+	if(!(iscarbon(victim)) && !(isanimal(victim)) )
 		to_chat(user, "<span class='danger'>This is not suitable for the gibber!</span>")
 		return
 
-	if(istype(victim,/mob/living/carbon/human) && !emagged)
+	if(ishuman(victim) && !emagged)
 		to_chat(user, "<span class='danger'>The gibber safety guard is engaged!</span>")
 		return
 

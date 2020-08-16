@@ -272,7 +272,7 @@ var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) -
 
 	if(H.stat || H.restrained())
 		return
-	if(!istype(H, /mob/living/carbon/human))
+	if(!ishuman(H))
 		return 1 //why does this return 1?
 
 	if(H != owner)

@@ -264,7 +264,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	if(!user.IsAdvancedToolUser())
 		return 0
 
-	if(istype(user, /mob/living/carbon/human) || istype(user,/mob/living/silicon))
+	if(ishuman(user) || isrobot(user))
 		var/mob/living/human_or_robot_user = user
 		var/dat
 		dat = text("<HEAD><TITLE>Newscaster</TITLE></HEAD><H3>Newscaster Unit #[unit_no]</H3>")
@@ -507,7 +507,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 /obj/machinery/newscaster/Topic(href, href_list)
 	if(..())
 		return
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isrobot(usr)))
 		usr.set_machine(src)
 		if(href_list["set_channel_name"])
 			channel_name = sanitizeSafe(input(usr, "Provide a Feed Channel Name", "Network Channel Handler", ""), MAX_LNAME_LEN)
@@ -783,7 +783,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 		user.drop_item()
 		photo.loc = src
 		photo_data = new(photo, 0)
-	else if(istype(user,/mob/living/silicon))
+	else if(isrobot(user))
 		var/mob/living/silicon/tempAI = user
 		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
 		if(!selection)
@@ -940,7 +940,7 @@ obj/item/weapon/newspaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 ////////////////////////////////////helper procs
 
 /obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
-	if(istype(user,/mob/living/carbon/human))                       //User is a human
+	if(ishuman(user))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
 		var/obj/item/weapon/card/id/I = human_user.GetIdCard()
 		if(I)

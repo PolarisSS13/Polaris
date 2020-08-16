@@ -40,7 +40,7 @@
 	return
 
 /obj/item/weapon/implanter/attack(mob/M as mob, mob/user as mob)
-	if (!istype(M, /mob/living/carbon))
+	if (!iscarbon(M))
 		return
 	if(active)
 		if (imp)

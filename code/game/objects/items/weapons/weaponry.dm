@@ -23,7 +23,7 @@
 	user.setClickCooldown(user.get_attack_speed(src))
 	user.do_attack_animation(M)
 
-	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
+	if (!(ishuman(user) || ticker) && ticker.mode.name != "monkey")
 		to_chat(user, "<span class='danger'>You don't have the dexterity to do this!</span>")
 		return
 

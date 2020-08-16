@@ -214,7 +214,7 @@
 			log_pda("(COMM: [src]) sent \"[text]\" to [exonet.get_atom_from_address(their_address)]", usr)
 			for(var/mob/M in player_list)
 				if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-					if(istype(M, /mob/new_player) || M.forbid_seeing_deadchat)
+					if(isnewplayer(M) || M.forbid_seeing_deadchat)
 						continue
 					if(exonet.get_atom_from_address(their_address) == M)
 						continue

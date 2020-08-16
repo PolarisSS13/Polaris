@@ -167,7 +167,7 @@ var/global/list/narsie_list = list()
 		old_narsie(A)
 
 /obj/singularity/narsie/proc/new_narsie(const/atom/A)
-	if (istype(A, /mob/) && (get_dist(A, src) <= 7))
+	if (ismob(A) && (get_dist(A, src) <= 7))
 		var/mob/M = A
 
 		if(M.status_flags & GODMODE)
@@ -176,7 +176,7 @@ var/global/list/narsie_list = list()
 		M.cultify()
 
 //ITEM PROCESSING
-	else if (istype(A, /obj/))
+	else if (isobj(A))
 		var/obj/O = A
 		O.cultify()
 
@@ -199,7 +199,7 @@ var/global/list/narsie_list = list()
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (isliving(A))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)
@@ -231,7 +231,7 @@ var/global/list/narsie_list = list()
 	if(!(A.singuloCanEat()))
 		return 0
 
-	if (istype(A, /mob/living/))
+	if (isliving(A))
 		var/mob/living/C2 = A
 
 		if(C2.status_flags & GODMODE)

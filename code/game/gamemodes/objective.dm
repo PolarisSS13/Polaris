@@ -145,7 +145,7 @@ datum/objective/anti_revolution/demote
 		return target
 
 	check_completion()
-		if(target && target.current && istype(target,/mob/living/carbon/human))
+		if(target && target.current && ishuman(target))
 			var/obj/item/weapon/card/id/I = target.current:wear_id
 			if(istype(I, /obj/item/device/pda))
 				var/obj/item/device/pda/P = I
@@ -246,7 +246,7 @@ datum/objective/block
 
 
 	check_completion()
-		if(!istype(owner.current, /mob/living/silicon))
+		if(!isrobot(owner.current))
 			return 0
 		if(!emergency_shuttle.returned())
 			return 0
@@ -521,7 +521,7 @@ datum/objective/steal
 
 				for(var/obj/item/device/aicard/C in all_items) //Check for ai card
 					for(var/mob/living/silicon/ai/M in C)
-						if(istype(M, /mob/living/silicon/ai) && M.stat != 2) //See if any AI's are alive inside that card.
+						if(isAI(M) && M.stat != 2) //See if any AI's are alive inside that card.
 							return 1
 
 				for(var/mob/living/silicon/ai/ai in mob_list)

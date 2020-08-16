@@ -587,7 +587,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 
 /obj/item/weapon/flame/lighter/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M, /mob))
+	if(!ismob(M))
 		return
 
 	if(lit == 1)

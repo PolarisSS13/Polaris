@@ -8,12 +8,12 @@
 	item_state = "electronic"
 
 /obj/item/device/antibody_scanner/attack(mob/M as mob, mob/user as mob)
-	if(!istype(M,/mob/living/carbon/))
+	if(!iscarbon(M))
 		report("Scan aborted: Incompatible target.", user)
 		return
 
 	var/mob/living/carbon/C = M
-	if (istype(C,/mob/living/carbon/human/))
+	if (ishuman(C))
 		var/mob/living/carbon/human/H = C
 		if(!H.should_have_organ(O_HEART))
 			report("Scan aborted: The target does not have blood.", user)

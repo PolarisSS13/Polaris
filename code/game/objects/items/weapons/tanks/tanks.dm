@@ -42,14 +42,14 @@ var/list/global/tank_gauge_cache = list()
 	description_info = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\
-	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ºC. \
+	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ï¿½C. \
 	The valve itself will close after expending most or all of the contents into the air.<br>\
 	<br>\
 	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
 	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
 
-	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ºC). \
-	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
+	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ï¿½C). \
+	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ï¿½C. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
 /obj/item/weapon/tank/proc/init_proxy()
@@ -228,9 +228,9 @@ var/list/global/tank_gauge_cache = list()
 	var/mob/living/carbon/location = null
 
 	if(istype(loc, /obj/item/weapon/rig))		// check for tanks in rigs
-		if(istype(loc.loc, /mob/living/carbon))
+		if(iscarbon(loc.loc))
 			location = loc.loc
-	else if(istype(loc, /mob/living/carbon))
+	else if(iscarbon(loc))
 		location = loc
 
 	var/using_internal
@@ -262,7 +262,7 @@ var/list/global/tank_gauge_cache = list()
 		if(mask_check)
 			if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 				data["maskConnected"] = 1
-			else if(istype(location, /mob/living/carbon/human))
+			else if(ishuman(location))
 				var/mob/living/carbon/human/H = location
 				if(H.head && (H.head.item_flags & AIRTIGHT))
 					data["maskConnected"] = 1
@@ -303,7 +303,7 @@ var/list/global/tank_gauge_cache = list()
 	return 1
 
 /obj/item/weapon/tank/proc/toggle_valve(var/mob/user)
-	if(istype(loc,/mob/living/carbon))
+	if(iscarbon(loc))
 		var/mob/living/carbon/location = loc
 		if(location.internal == src)
 			location.internal = null
@@ -315,7 +315,7 @@ var/list/global/tank_gauge_cache = list()
 			var/can_open_valve
 			if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 				can_open_valve = 1
-			else if(istype(location,/mob/living/carbon/human))
+			else if(iscarbon(location))
 				var/mob/living/carbon/human/H = location
 				if(H.head && (H.head.item_flags & AIRTIGHT))
 					can_open_valve = 1

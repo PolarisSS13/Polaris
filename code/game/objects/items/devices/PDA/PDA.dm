@@ -1083,7 +1083,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/proc/remove_pen()
 	var/obj/item/weapon/pen/O = locate() in src
 	if(O)
-		if(istype(loc, /mob))
+		if(ismob(loc))
 			var/mob/M = loc
 			if(M.get_active_hand() == null)
 				M.put_in_hands(O)
@@ -1134,7 +1134,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		P.tnote.Add(list(list("sent" = 0, "owner" = "[owner]", "job" = "[ownjob]", "message" = "[t]", "target" = "\ref[src]")))
 		for(var/mob/M in player_list)
 			if(M.stat == DEAD && M.client && (M.is_preference_enabled(/datum/client_preference/ghost_ears))) // src.client is so that ghosts don't have to listen to mice
-				if(istype(M, /mob/new_player))
+				if(isnewplayer(M))
 					continue
 				if(M.forbid_seeing_deadchat)
 					continue
@@ -1194,7 +1194,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	new_message(sending_device, sending_device.owner, sending_device.ownjob, message)
 
 /obj/item/device/pda/proc/new_message(var/sending_unit, var/sender, var/sender_job, var/message, var/reply = 1)
-	var/reception_message = "[bicon(src)] <b>Message from [sender] ([sender_job]), </b>\"[message]\" ([reply ? "<a href='byond://?src=\ref[src];choice=Message;notap=[istype(loc, /mob/living/silicon)];skiprefresh=1;target=\ref[sending_unit]'>Reply</a>" : "Unable to Reply"])"
+	var/reception_message = "[bicon(src)] <b>Message from [sender] ([sender_job]), </b>\"[message]\" ([reply ? "<a href='byond://?src=\ref[src];choice=Message;notap=[isAI(loc)];skiprefresh=1;target=\ref[sending_unit]'>Reply</a>" : "Unable to Reply"])"
 	new_info(message_silent, ttone, reception_message)
 
 	log_pda("(PDA: [sending_unit]) sent \"[message]\" to [name]", usr)
@@ -1363,7 +1363,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return
 
 /obj/item/device/pda/attack(mob/living/C as mob, mob/living/user as mob)
-	if (istype(C, /mob/living/carbon))
+	if (iscarbon(C))
 		switch(scanmode)
 			if(1)
 
@@ -1382,7 +1382,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 				user.show_message("<span class='notice'>    Body Temperature: [C.bodytemperature-T0C]&deg;C ([C.bodytemperature*1.8-459.67]&deg;F)</span>", 1)
 				if(C.tod && (C.stat == DEAD || (C.status_flags & FAKEDEATH)))
 					user.show_message("<span class='notice'>    Time of Death: [C.tod]</span>")
-				if(istype(C, /mob/living/carbon/human))
+				if(ishuman(C))
 					var/mob/living/carbon/human/H = C
 					var/list/damaged = H.get_damaged_organs(1,1)
 					user.show_message("<span class='notice'>Localized Damage, Brute/Burn:</span>",1)
@@ -1508,7 +1508,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 /obj/item/device/pda/clown/Crossed(atom/movable/AM as mob|obj) //Clown PDA is slippery.
 	if(AM.is_incorporeal())
 		return
-	if (istype(AM, /mob/living))
+	if (isliving(AM))
 		var/mob/living/M = AM
 
 		if(M.slip("the PDA",8) && M.real_name != src.owner && istype(src.cartridge, /obj/item/weapon/cartridge/clown))

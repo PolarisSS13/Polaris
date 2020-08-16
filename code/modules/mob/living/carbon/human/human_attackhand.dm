@@ -46,7 +46,7 @@
 			H.do_attack_animation(src)
 			return FALSE
 
-	if(istype(M,/mob/living/carbon))
+	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		C.spread_disease_to(src, "Contact")
 

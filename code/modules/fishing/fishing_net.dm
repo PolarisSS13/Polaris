@@ -30,7 +30,7 @@
 	if(get_dist(get_turf(src), A) > reach)
 		return
 
-	if(istype(A, /turf))
+	if(isturf(A))
 		var/mob/living/Target
 		for(var/type in accepted_mobs)
 			Target = locate(type) in A.contents
@@ -38,7 +38,7 @@
 				afterattack(Target, user, proximity)
 				break
 
-	if(istype(A, /mob))
+	if(ismob(A))
 		var/accept = FALSE
 		for(var/D in accepted_mobs)
 			if(istype(A, D))

@@ -383,7 +383,7 @@
 	if(src.throwing)
 		for(var/atom/A in get_turf(src))
 			if(A == src) continue
-			if(istype(A,/mob/living))
+			if(isliving(A))
 				if(A:lying) continue
 				src.throw_impact(A,speed)
 			if(isobj(A))

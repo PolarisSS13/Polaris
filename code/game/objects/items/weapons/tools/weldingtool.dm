@@ -133,7 +133,7 @@
 			setWelding(0)
 		else			//Only start fires when its on and has enough fuel to actually keep working
 			var/turf/location = src.loc
-			if(istype(location, /mob/living))
+			if(isliving(location))
 				var/mob/living/M = location
 				if(M.item_is_in_hands(src))
 					location = get_turf(M)
@@ -310,7 +310,7 @@
 		return 1
 	var/safety = user.eyecheck()
 	safety = between(-1, safety + eye_safety_modifier, 2)
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[O_EYES]
 		if(!E)

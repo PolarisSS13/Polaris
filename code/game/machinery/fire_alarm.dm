@@ -131,7 +131,7 @@ FIRE ALARM
 	var/area/A = src.loc
 	var/d1
 	var/d2
-	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon))
+	if(ishuman(user) || isrobot(user))
 		A = A.loc
 
 		if(A.fire)
@@ -169,7 +169,7 @@ FIRE ALARM
 	if(usr.stat || stat & (BROKEN | NOPOWER))
 		return
 
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (istype(usr, /mob/living/silicon)))
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isrobot(usr)))
 		usr.set_machine(src)
 		if(href_list["reset"])
 			reset()
@@ -251,7 +251,7 @@ Just a object used in constructing fire alarms
 	ASSERT(isarea(A))
 	var/d1
 	var/d2
-	if(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon/ai))
+	if(ishuman(user) || isAI(user))
 
 		if(A.party)
 			d1 = text("<A href='?src=\ref[];reset=1'>No Party :(</A>", src)
@@ -302,7 +302,7 @@ Just a object used in constructing fire alarms
 	..()
 	if(usr.stat || stat & (BROKEN|NOPOWER))
 		return
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(loc, /turf))) || (istype(usr, /mob/living/silicon/ai)))
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(loc, /turf))) || (isAI(usr)))
 		usr.machine = src
 		if(href_list["reset"])
 			reset()

@@ -11,7 +11,7 @@
 	var/stage = 0
 
 /obj/item/alien_embryo/New()
-	if(istype(loc, /mob/living))
+	if(isliving(loc))
 		affected_mob = loc
 		START_PROCESSING(SSobj, src)
 		spawn(0)

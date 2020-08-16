@@ -64,7 +64,7 @@
 	..()
 
 /obj/machinery/door/airlock/attack_alien(var/mob/user) //Familiar, right? Doors. -Mechoid
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			if(src.locked || src.welded)
@@ -785,12 +785,12 @@ About the new airlock wires panel:
 	return ..()
 
 /obj/machinery/door/airlock/attack_hand(mob/user as mob)
-	if(!istype(usr, /mob/living/silicon))
+	if(!isrobot(usr))
 		if(src.isElectrified())
 			if(src.shock(user, 100))
 				return
 
-	if(istype(user, /mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/X = user
 		if(istype(X.species, /datum/species/xenos))
 			src.attack_alien(user)
@@ -882,7 +882,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/attackby(obj/item/C, mob/user as mob)
 	//to_world("airlock attackby src [src] obj [C] mob [user]")
-	if(!istype(usr, /mob/living/silicon))
+	if(!isrobot(usr))
 		if(src.isElectrified())
 			if(src.shock(user, 75))
 				return
@@ -890,7 +890,7 @@ About the new airlock wires panel:
 		return
 
 	src.add_fingerprint(user)
-	if(istype(C, /mob/living))
+	if(isliving(C))
 		..()
 		return
 	if(!repairing && istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density)

@@ -65,7 +65,7 @@
 	if(isturf(A) || isarea(A))	// Something has gone horribly wrong if the second is true.
 		return FALSE	// No mob is carrying us.
 
-	if(!istype(A, /mob/living))
+	if(!isliving(A))
 		A = get_carrier(A)
 
 	return A

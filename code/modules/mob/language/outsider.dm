@@ -29,7 +29,7 @@
 
 	var/mob/living/simple_mob/animal/borer/B
 
-	if(istype(speaker,/mob/living/carbon))
+	if(iscarbon(speaker))
 		var/mob/living/carbon/M = speaker
 		B = M.has_brain_worms()
 	else if(istype(speaker,/mob/living/simple_mob/animal/borer))

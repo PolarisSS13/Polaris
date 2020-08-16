@@ -399,7 +399,7 @@
 		if(istype(AM, /obj))
 			var/obj/O = AM
 			O.loc = src
-		else if(istype(AM, /mob))
+		else if(ismob(AM))
 			var/mob/M = AM
 			M.loc = src
 		src.flush()

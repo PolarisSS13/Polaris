@@ -453,7 +453,7 @@ var/list/global/slot_flags_enumeration = list(
 		return
 	if(!usr.canmove || usr.stat || usr.restrained() || !Adjacent(usr))
 		return
-	if((!istype(usr, /mob/living/carbon)) || (istype(usr, /mob/living/carbon/brain)))//Is humanoid, and is not a brain
+	if((!iscarbon(usr)) || (isbrain(usr)))//Is humanoid, and is not a brain
 		to_chat(usr, "<span class='warning'>You can't pick things up!</span>")
 		return
 	var/mob/living/carbon/C = usr
@@ -659,7 +659,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 	var/cannotzoom
 
-	if((usr.stat && !zoom) || !(istype(usr,/mob/living/carbon/human)))
+	if((usr.stat && !zoom) || !(ishuman(usr)))
 		to_chat(usr, "You are unable to focus through the [devicename]")
 		cannotzoom = 1
 	else if(!zoom && global_hud.darkMask[1] in usr.client.screen)

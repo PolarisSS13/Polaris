@@ -30,7 +30,7 @@ var/list/sacrificed = list()
 					allrunesloc[index] = R.loc
 			if(index >= 5)
 				to_chat(user, "<span class='danger'>You feel pain, as rune disappears in reality shift caused by too much wear of space-time fabric.</span>")
-				if (istype(user, /mob/living))
+				if (isliving(user))
 					user.take_overall_damage(5, 0)
 				qdel(src)
 			if(allrunesloc && index != 0)
@@ -67,7 +67,7 @@ var/list/sacrificed = list()
 					runecount++
 			if(runecount >= 2)
 				to_chat(user, "<span class='danger'>You feel pain, as rune disappears in reality shift caused by too much wear of space-time fabric.</span>")
-				if (istype(user, /mob/living))
+				if (isliving(user))
 					user.take_overall_damage(5, 0)
 				qdel(src)
 			for(var/mob/living/carbon/C in orange(1,src))
@@ -675,7 +675,7 @@ var/list/sacrificed = list()
 			for(var/mob/H in victims)
 
 				var/worth = 0
-				if(istype(H,/mob/living/carbon/human))
+				if(ishuman(H))
 					var/mob/living/carbon/human/lamb = H
 					if(lamb.species.rarity_value > 3)
 						worth = 1

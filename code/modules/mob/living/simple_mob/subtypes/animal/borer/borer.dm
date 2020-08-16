@@ -105,7 +105,7 @@
 	if(!host || !controlling)
 		return
 
-	if(istype(host, /mob/living/carbon/human))
+	if(ishuman(host))
 		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		if(head)
@@ -167,7 +167,7 @@
 	reset_view(null)
 	machine = null
 
-	if(istype(host, /mob/living/carbon/human))
+	if(ishuman(host))
 		var/mob/living/carbon/human/H = host
 		var/obj/item/organ/external/head = H.get_organ(BP_HEAD)
 		if(head)
@@ -256,7 +256,7 @@
 	to_chat(host, "Your own thoughts speak: \"[message]\"")
 
 	for(var/mob/M in player_list)
-		if(istype(M, /mob/new_player))
+		if(isnewplayer(M))
 			continue
 		else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 			to_chat(M, "[src.true_name] whispers to [host], \"[message]\"")

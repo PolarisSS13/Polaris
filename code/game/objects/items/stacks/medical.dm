@@ -19,8 +19,7 @@
 		to_chat(user, "<span class='warning'>\The [src] cannot be applied to [M]!</span>")
 		return 1
 
-	if ( ! (istype(user, /mob/living/carbon/human) || \
-			istype(user, /mob/living/silicon)) )
+	if ( ! (ishuman(user)) || isrobot(user))
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return 1
 
@@ -29,7 +28,7 @@
 		to_chat(user, "<span class='warning'>There's not enough [uses_charge ? "charge" : "items"] left to use that!</span>")
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
@@ -94,7 +93,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
@@ -162,7 +161,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
@@ -235,7 +234,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
@@ -274,7 +273,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
@@ -343,7 +342,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 
@@ -384,7 +383,7 @@
 	if(..())
 		return 1
 
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/affecting = H.get_organ(user.zone_sel.selecting)
 		var/limb = affecting.name

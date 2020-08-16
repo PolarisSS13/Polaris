@@ -319,7 +319,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Teleport"
 	set desc = "Teleport to a location"
 
-	if(!istype(usr, /mob/observer/dead))
+	if(!isobserver(usr))
 		to_chat(usr, "Not when you're not dead!")
 		return
 
@@ -462,7 +462,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set desc = "Teleport to a mob"
 	set popup_menu = FALSE
 
-	if(!istype(usr, /mob/observer/dead)) //Make sure they're an observer!
+	if(!isobserver(usr)) //Make sure they're an observer!
 		return
 
 	if(!input)
@@ -498,7 +498,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set name = "Analyze Air"
 	set category = "Ghost"
 
-	if(!istype(usr, /mob/observer/dead)) return
+	if(!isobserver(usr)) return
 
 	// Shamelessly copied from the Gas Analyzers
 	if (!( istype(usr.loc, /turf) ))

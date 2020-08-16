@@ -20,7 +20,7 @@
 			if(can_special_attack(A) && special_attack_target(A))
 				return
 
-			else if(melee_damage_upper == 0 && istype(A,/mob/living))
+			else if(melee_damage_upper == 0 && isliving(A))
 				custom_emote(1,"[pick(friendly)] \the [A]!")
 
 			else

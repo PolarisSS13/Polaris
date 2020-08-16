@@ -47,7 +47,7 @@ proc/admin_notice(var/message, var/rights)
 		body += " played by <b>[M.client]</b> "
 		body += "\[<A href='?src=\ref[src];editrights=show'>[M.client.holder ? M.client.holder.rank : "Player"]</A>\]"
 
-	if(istype(M, /mob/new_player))
+	if(isnewplayer(M))
 		body += " <B>Hasn't Entered Game</B> "
 	else
 		body += " \[<A href='?src=\ref[src];revive=\ref[M]'>Heal</A>\] "
@@ -97,7 +97,7 @@ proc/admin_notice(var/message, var/rights)
 	"}
 
 	if (M.client)
-		if(!istype(M, /mob/new_player))
+		if(!isnewplayer(M))
 			body += "<br><br>"
 			body += "<b>Transformation:</b>"
 			body += "<br>"
@@ -1351,10 +1351,10 @@ proc/admin_notice(var/message, var/rights)
 		return "<b>(*null*)</b>"
 	var/mob/M
 	var/client/C
-	if(istype(whom, /client))
+	if(isclient(whom))
 		C = whom
 		M = C.mob
-	else if(istype(whom, /mob))
+	else if(ismob(whom))
 		M = whom
 		C = M.client
 	else
@@ -1384,9 +1384,9 @@ proc/admin_notice(var/message, var/rights)
 		return 0
 	var/client/C
 	var/mob/M
-	if(istype(whom, /client))
+	if(isclient(whom))
 		C = whom
-	if(istype(whom, /mob))
+	if(ismob(whom))
 		M = whom
 		C = M.client
 	if(R_HOST & C.holder.rights)

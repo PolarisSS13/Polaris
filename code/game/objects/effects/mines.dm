@@ -52,7 +52,7 @@
 	if(istype(M, /obj/mecha))
 		explode(M)
 
-	if(istype(M, /mob/living/))
+	if(isliving(M))
 		if(!M.hovering)
 			explode(M)
 
@@ -69,7 +69,7 @@
 		..()
 
 /obj/effect/mine/interact(mob/living/user as mob)
-	if(!panel_open || istype(user, /mob/living/silicon/ai))
+	if(!panel_open || isAI(user))
 		return
 	user.set_machine(src)
 	wires.Interact(user)

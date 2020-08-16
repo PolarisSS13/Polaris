@@ -47,7 +47,7 @@
 
 	var/list/choices = list()
 	for(var/mob/living/M in view(1,src))
-		if(!istype(M,/mob/living/silicon) && Adjacent(M))
+		if(!issilicon(M) && Adjacent(M))
 			choices += M
 	choices -= src
 
@@ -102,14 +102,14 @@
 
 	var/mob/M = targets[target]
 
-	if(istype(M, /mob/observer/dead) || M.stat == DEAD)
+	if(isobserver(M) || M.stat == DEAD)
 		to_chat(src, "Not even a [src.species.name] can speak to the dead.")
 		return
 
 	log_say("(COMMUNE to [key_name(M)]) [text]",src)
 
 	to_chat(M, "<font color='blue'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]</font>")
-	if(istype(M,/mob/living/carbon/human))
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(H.species.name == src.species.name)
 			return

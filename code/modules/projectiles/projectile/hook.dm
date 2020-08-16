@@ -153,13 +153,13 @@
 					done_mob_unique = TRUE
 					success = TRUE
 				if(I_HURT)
-					if(prob(10) && istype(L, /mob/living/carbon/human))
+					if(prob(10) && ishuman(L))
 						to_chat(L, "<span class='warning'>\The [src] rips at your hands!</span>")
 						ranged_disarm(L)
 					success = TRUE
 					done_mob_unique = TRUE
 				if(I_DISARM)
-					if(prob(disarm_chance) && istype(L, /mob/living/carbon/human))
+					if(prob(disarm_chance) && ishuman(L))
 						ranged_disarm(L)
 					else
 						L.visible_message("<span class='danger'>\The [src] sends \the [L] stumbling backwards.</span>")

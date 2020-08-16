@@ -100,7 +100,7 @@
 	set name = "Holster"
 	set category = "Object"
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	//can't we just use src here?
@@ -117,7 +117,7 @@
 
 	if(!H.holstered)
 		var/obj/item/W = usr.get_active_hand()
-		if(!istype(W, /obj/item))
+		if(!isitem(W))
 			to_chat(usr, "<span class='warning'>You need your gun equipped to holster it.</span>")
 			return
 		H.holster(W, usr)

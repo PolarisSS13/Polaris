@@ -115,7 +115,7 @@
 		return
 
 	if(!istype(target))
-		if(istype(target, /mob/living/simple_mob/animal/passive/mouse))
+		if(ismouse(target))
 			new /obj/effect/decal/remains/mouse(get_turf(target))
 			qdel(target)
 		else if(istype(target, /mob/living/simple_mob/animal/passive/lizard))
@@ -266,9 +266,9 @@
 		qdel(thrown)
 		return
 
-	if(istype(target,/mob/living))
+	if(isliving(target))
 		splatted = apply_special_effect(target,thrown)
-	else if(istype(target,/turf))
+	else if(isturf(target))
 		splatted = 1
 		for(var/mob/living/M in target.contents)
 			apply_special_effect(M)
@@ -811,7 +811,7 @@
 			else
 				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
-				if(!istype(product, /mob))
+				if(!ismob(product))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
 					if(istype(product,/obj/item/weapon/reagent_containers/food))
 						var/obj/item/weapon/reagent_containers/food/food = product
@@ -831,7 +831,7 @@
 				product.force = 1
 
 			//Handle spawning in living, mobile products (like dionaea).
-			if(istype(product,/mob/living))
+			if(isliving(product))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
 

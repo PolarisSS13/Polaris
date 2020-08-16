@@ -22,7 +22,7 @@
 		pixel_x = 32
 
 /obj/structure/lift/proc/pressed(var/mob/user)
-	if(!istype(user, /mob/living/silicon))
+	if(!isrobot(user))
 		if(user.a_intent == I_HURT)
 			user.visible_message("<span class='danger'>\The [user] hammers on the lift button!</span>")
 		else

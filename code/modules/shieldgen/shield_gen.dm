@@ -99,7 +99,7 @@
 
 /obj/machinery/shield_gen/interact(mob/user)
 	if ( (get_dist(src, user) > 1 ) || (stat & (BROKEN)) )
-		if (!istype(user, /mob/living/silicon))
+		if (!isrobot(user))
 			user.unset_machine()
 			user << browse(null, "window=shield_generator")
 			return

@@ -55,7 +55,7 @@
 			var/obj/item/I = user.get_active_hand()
 			if(I && I.force)
 				var/d = rand(round(I.force / 4), I.force)
-				if(istype(src, /mob/living/carbon/human))
+				if(ishuman(src))
 					var/mob/living/carbon/human/H = src
 					var/obj/item/organ/external/organ = H.get_organ(BP_TORSO)
 					if (istype(organ))
@@ -84,7 +84,7 @@
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)
-	if(!istype(M, /mob/living/carbon)) return
+	if(!iscarbon(M)) return
 	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/obj/item/organ/external/temp = H.organs_by_name["r_hand"]
@@ -197,7 +197,7 @@
 
 /mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
 	if (src.health >= config.health_threshold_crit)
-		if(src == M && istype(src, /mob/living/carbon/human))
+		if(src == M && ishuman(src))
 			var/mob/living/carbon/human/H = src
 			var/datum/gender/T = gender_datums[H.get_visible_gender()]
 			src.visible_message( \
@@ -275,7 +275,7 @@
 							src.ExtinguishMob()
 							src.fire_stacks = 0
 		else
-			if (istype(src,/mob/living/carbon/human) && src:w_uniform)
+			if (ishuman(src) && src:w_uniform)
 				var/mob/living/carbon/human/H = src
 				H.w_uniform.add_fingerprint(M)
 
@@ -407,7 +407,7 @@
 	if(now_pushing)
 		return
 	..()
-	if(istype(A, /mob/living/carbon) && prob(10))
+	if(iscarbon(A) && prob(10))
 		spread_disease_to(A, "Contact")
 
 /mob/living/carbon/cannot_use_vents()

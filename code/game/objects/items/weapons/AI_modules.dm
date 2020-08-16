@@ -75,7 +75,7 @@ AI MODULES
 			comp.current.show_laws()
 			to_chat(usr, "Upload complete. The robot's laws have been modified.")
 
-	else if(istype(AM, /mob/living/silicon/robot))
+	else if(isrobot(AM))
 		var/mob/living/silicon/robot/R = AM
 		if(R.stat == DEAD)
 			to_chat(user, "<span class='warning'>Law Upload Error: Unit is nonfunctional.</span>")

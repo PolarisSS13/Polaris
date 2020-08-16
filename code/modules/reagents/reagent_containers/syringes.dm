@@ -82,7 +82,7 @@
 					to_chat(user, "<span class='notice'>There is already a blood sample in this syringe.</span>")
 					return
 
-				if(istype(target, /mob/living/carbon))
+				if(iscarbon(target))
 					var/amount = reagents.get_free_space()
 					var/mob/living/carbon/T = target
 					if(!T.dna)
@@ -102,7 +102,7 @@
 
 					var/datum/reagent/B
 					drawing = 1
-					if(istype(T, /mob/living/carbon/human))
+					if(ishuman(T))
 						var/mob/living/carbon/human/H = T
 						if(H.species && !H.should_have_organ(O_HEART))
 							H.reagents.trans_to_obj(src, amount)
@@ -255,7 +255,7 @@
 		overlays += filling
 
 /obj/item/weapon/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
-	if(istype(target, /mob/living/carbon/human))
+	if(ishuman(target))
 
 		var/mob/living/carbon/human/H = target
 

@@ -133,7 +133,7 @@
 // (unless Unified, of course).
 /mob/living/simple_mob/slime/IIsAlly(mob/living/L)
 	. = ..()
-	if(istype(L, /mob/living/simple_mob/slime)) // Slimes should care about their color subfaction compared to another's.
+	if(isslime(L)) // Slimes should care about their color subfaction compared to another's.
 		var/mob/living/simple_mob/slime/S = L
 		if(S.unity || src.unity)
 			return TRUE

@@ -63,7 +63,7 @@
 		to_chat(user, "<span class='danger'>The core extractor is locked and running, wait for it to finish.</span>")
 		return
 
-	if(!(istype(victim, /mob/living/simple_animal/xeno/slime)))
+	if(!(isslime(victim)))
 		to_chat(user, "<span class='danger'>This is not a suitable subject for the core extractor!</span>")
 		return
 

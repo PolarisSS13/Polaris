@@ -29,7 +29,7 @@
 	if(state != 1)
 		to_chat(user, "<font color='red'>The shield generator needs to be firmly secured to the floor first.</font>")
 		return 1
-	if(src.locked && !istype(user, /mob/living/silicon))
+	if(src.locked && !isrobot(user))
 		to_chat(user, "<font color='red'>The controls are locked!</font>")
 		return 1
 	if(power != 1)

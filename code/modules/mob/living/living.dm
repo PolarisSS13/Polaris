@@ -84,7 +84,7 @@ default behaviour is:
 	if(now_pushing || !loc || buckled == AM)
 		return
 	now_pushing = 1
-	if (istype(AM, /mob/living))
+	if (isliving(AM))
 		var/mob/living/tmob = AM
 
 		//Even if we don't push/swap places, we "touched" them, so spread fire
@@ -141,7 +141,7 @@ default behaviour is:
 		if(a_intent == I_HELP || src.restrained())
 			now_pushing = 0
 			return
-		if(istype(tmob, /mob/living/carbon/human) && (FAT in tmob.mutations))
+		if(ishuman(tmob) && (FAT in tmob.mutations))
 			if(prob(40) && !(FAT in src.mutations))
 				to_chat(src, "<span class='danger'>You fail to push [tmob]'s fat ass out of the way.</span>")
 				now_pushing = 0
@@ -232,7 +232,7 @@ default behaviour is:
 
 //sort of a legacy burn method for /electrocute, /shock, and the e_chair
 /mob/living/proc/burn_skin(burn_amount)
-	if(istype(src, /mob/living/carbon/human))
+	if(ishuman(src))
 		//to_world("DEBUG: burn_skin(), mutations=[mutations]")
 		if(mShock in src.mutations) //shockproof
 			return 0
@@ -247,7 +247,7 @@ default behaviour is:
 				H.UpdateDamageIcon()
 		H.updatehealth()
 		return 1
-	else if(istype(src, /mob/living/silicon/ai))
+	else if(isAI(src))
 		return 0
 
 /mob/living/proc/adjustBodyTemp(actual, desired, incrementboost)
@@ -266,7 +266,7 @@ default behaviour is:
 		temperature -= change
 		if(actual < desired)
 			temperature = desired
-//	if(istype(src, /mob/living/carbon/human))
+//	if(ishuman(src))
 //		to_world("[src] ~ [src.bodytemperature] ~ [temperature]")
 	return temperature
 

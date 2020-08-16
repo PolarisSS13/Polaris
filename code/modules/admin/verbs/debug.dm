@@ -100,7 +100,7 @@
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
-	if(istype(M, /mob/living/carbon/human))
+	if(ishuman(M))
 		log_admin("[key_name(src)] has robotized [M.key].")
 		spawn(10)
 			M:Robotize()
@@ -120,7 +120,7 @@
 		alert("That mob doesn't seem to exist, close the panel and try again.")
 		return
 
-	if(istype(M, /mob/new_player))
+	if(isnewplayer(M))
 		alert("The mob must not be a new_player.")
 		return
 
@@ -141,7 +141,7 @@
 	var/mob/choice = input("Choose a player to play the pAI", "Spawn pAI") in available
 	if(!choice)
 		return 0
-	if(!istype(choice, /mob/observer/dead))
+	if(!isobserver(choice))
 		var/confirm = input("[choice.key] isn't ghosting right now. Are you sure you want to yank them out of them out of their body and place them in this pAI?", "Spawn pAI Confirmation", "No") in list("Yes", "No")
 		if(confirm != "Yes")
 			return 0
@@ -274,7 +274,7 @@
 	if (!ticker)
 		alert("Wait until the game starts")
 		return
-	if (istype(M, /mob/living/carbon/human))
+	if (ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if (H.wear_id)
 			var/obj/item/weapon/card/id/id = H.wear_id
@@ -608,7 +608,7 @@
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
-	if(istype(M, /mob/living/carbon))
+	if(iscarbon(M))
 		M.dna.SetSEState(block,!M.dna.GetSEState(block))
 		domutcheck(M,null,MUTCHK_FORCED)
 		M.update_mutations()

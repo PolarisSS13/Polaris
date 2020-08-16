@@ -424,7 +424,7 @@
 			M.vomit()
 
 /datum/reagent/space_cleaner/touch_mob(var/mob/living/L, var/amount)
-	if(istype(L, /mob/living/carbon/human))
+	if(ishuman(L))
 		var/mob/living/carbon/human/H = L
 		if(H.wear_mask)
 			if(istype(H.wear_mask, /obj/item/clothing/mask/smokable))

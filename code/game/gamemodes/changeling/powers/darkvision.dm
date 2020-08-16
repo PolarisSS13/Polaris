@@ -15,7 +15,7 @@
 	if(!changeling)
 		return 0
 
-	if(istype(src,/mob/living/carbon))
+	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		C.seedarkness = !C.seedarkness
 		if(C.seedarkness)

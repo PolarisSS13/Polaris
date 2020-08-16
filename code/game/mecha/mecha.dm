@@ -603,7 +603,7 @@
 
 /obj/mecha/relaymove(mob/user,direction)
 	if(user != src.occupant) //While not "realistic", this piece is player friendly.
-		if(istype(user,/mob/living/carbon/brain))
+		if(isbrain(user))
 			to_chat(user, "<span class='warning'>You try to move, but you are not the pilot! The exosuit doesn't respond.</span>")
 			return 0
 		user.forceMove(get_turf(src))
@@ -811,10 +811,10 @@
 
 /obj/mecha/Bump(var/atom/obstacle)
 //	src.inertia_dir = null
-	if(istype(obstacle, /mob))//First we check if it is a mob. Mechs mostly shouln't go through them, even while phasing.
+	if(ismob(obstacle))//First we check if it is a mob. Mechs mostly shouln't go through them, even while phasing.
 		var/mob/M = obstacle
 		M.Move(get_step(obstacle,src.dir))
-	else if(istype(obstacle, /obj))//Then we check for regular obstacles.
+	else if(isobj(obstacle))//Then we check for regular obstacles.
 		var/obj/O = obstacle
 
 		if(phasing && get_charge()>=phasing_energy_drain)//Phazon check. This could use an improvement elsewhere.
@@ -985,7 +985,7 @@
 	else
 		temp_deflect_chance = round(ArmC.get_efficiency() * ArmC.deflect_chance + (defence_mode ? 25 : 0))
 
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(usr))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(user))
 			if(!prob(temp_deflect_chance))
@@ -1046,11 +1046,11 @@
 		A.forceMove(src)
 		src.visible_message("The [A] fastens firmly to [src].")
 		return
-	if(prob(temp_deflect_chance) || istype(A, /mob))
+	if(prob(temp_deflect_chance) || ismob(A))
 		src.occupant_message("<span class='notice'>\The [A] bounces off the armor.</span>")
 		src.visible_message("\The [A] bounces off \the [src] armor")
 		src.log_append_to_last("Armor saved.")
-		if(istype(A, /mob/living))
+		if(isliving(A))
 			var/mob/living/M = A
 			M.take_organ_damage(10)
 	else if(istype(A, /obj))
@@ -1506,7 +1506,7 @@
 
 /*
 /obj/mecha/attack_ai(var/mob/living/silicon/ai/user as mob)
-	if(!istype(user, /mob/living/silicon/ai))
+	if(!isAI(user))
 		return
 	var/output = {"<b>Assume direct control over [src]?</b>
 						<a href='?src=\ref[src];ai_take_control=\ref[user];duration=3000'>Yes</a><br>
@@ -1961,7 +1961,7 @@
 	if(ishuman(occupant))
 		mob_container = src.occupant
 		RemoveActions(occupant, human_occupant=1)//AEIOU
-	else if(istype(occupant, /mob/living/carbon/brain))
+	else if(isbrain(occupant))
 		var/mob/living/carbon/brain/brain = occupant
 		mob_container = brain.container
 	else
@@ -2012,7 +2012,7 @@
 		for(var/atom/ID in list(H.get_active_hand(), H.wear_id, H.belt))
 			if(src.check_access(ID,src.internals_req_access))
 				return 1
-	else if(istype(H, /mob/living/silicon/robot))
+	else if(isrobot(H))
 		var/mob/living/silicon/robot/R = H
 		if(src.check_access(R.idcard,src.internals_req_access))
 			return 1
@@ -2486,7 +2486,7 @@
 		return
 	if(href_list["dna_lock"])
 		if(usr != src.occupant)	return
-		if(istype(occupant, /mob/living/carbon/brain))
+		if(isbrain(occupant))
 			occupant_message("You are a brain. No.")
 			return
 		if(src.occupant)

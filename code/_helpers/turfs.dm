@@ -156,7 +156,7 @@
 		if(z_level_change) // Same goes for mobs.
 			M.onTransitZ(T.z, X.z)
 
-		if(istype(M, /mob/living))
+		if(isliving(M))
 			var/mob/living/LM = M
 			LM.check_shadow() // Need to check their Z-shadow, which is normally done in forceMove().
 

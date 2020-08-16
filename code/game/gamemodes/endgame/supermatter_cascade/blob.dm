@@ -48,9 +48,9 @@
 			// Nom.
 			for(var/atom/movable/A in T)
 				if(A)
-					if(istype(A,/mob/living))
+					if(isliving(A))
 						qdel(A)
-					else if(istype(A,/mob)) // Observers, AI cameras.
+					else if(ismob(A)) // Observers, AI cameras.
 						continue
 					else
 						qdel(A)
@@ -98,7 +98,7 @@
 
 
 /turf/unsimulated/wall/supermatter/Bumped(atom/AM as mob|obj)
-	if(istype(AM, /mob/living))
+	if(isliving(AM))
 		var/mob/living/M = AM
 		var/datum/gender/T = gender_datums[M.get_visible_gender()]
 		AM.visible_message("<span class=\"warning\">\The [AM] slams into \the [src] inducing a resonance... [T.his] body starts to glow and catch flame before flashing into ash.</span>",\

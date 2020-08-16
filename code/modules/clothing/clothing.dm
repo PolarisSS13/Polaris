@@ -65,7 +65,7 @@
 	if (!..())
 		return 0
 
-	if(LAZYLEN(species_restricted) && istype(M,/mob/living/carbon/human))
+	if(LAZYLEN(species_restricted) && ishuman(M))
 		var/exclusive = null
 		var/wearable = null
 		var/mob/living/carbon/human/H = M
@@ -186,7 +186,7 @@
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
 	if (!user) return
 
-	if (src.loc != user || !istype(user,/mob/living/carbon/human))
+	if (src.loc != user || !ishuman(user))
 		..()
 		return
 
@@ -452,7 +452,7 @@
 	if(!Adjacent(user))
 		return 0
 	var/success
-	if(istype(user, /mob/living/silicon/robot/drone))
+	if(isdrone(user))
 		var/mob/living/silicon/robot/drone/D = user
 		if(D.hat)
 			success = 2
@@ -880,7 +880,7 @@
 
 /obj/item/clothing/under/proc/set_sensors(mob/usr as mob)
 	var/mob/M = usr
-	if (istype(M, /mob/observer)) return
+	if (isobserver(M)) return
 	if (usr.stat || usr.restrained()) return
 	if(has_sensor >= 2)
 		to_chat(usr, "The controls are locked.")
@@ -921,7 +921,7 @@
 	set name = "Roll Down Jumpsuit"
 	set category = "Object"
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	update_rolldown_status()
@@ -954,7 +954,7 @@
 	set name = "Roll Up Sleeves"
 	set category = "Object"
 	set src in usr
-	if(!istype(usr, /mob/living)) return
+	if(!isliving(usr)) return
 	if(usr.stat) return
 
 	update_rollsleeves_status()

@@ -23,7 +23,7 @@
 		return 1
 
 /obj/item/weapon/airlock_electronics/attack_self(mob/user as mob)
-	if (!ishuman(user) && !istype(user,/mob/living/silicon/robot))
+	if (!ishuman(user) && !isrobot(user))
 		return ..(user)
 
 	var/t1 = text("<B>Access control</B><br>\n")
@@ -61,7 +61,7 @@
 
 /obj/item/weapon/airlock_electronics/Topic(href, href_list)
 	..()
-	if (usr.stat || usr.restrained() || (!ishuman(usr) && !istype(usr,/mob/living/silicon)))
+	if (usr.stat || usr.restrained() || (!ishuman(usr) && !isrobot(usr)))
 		return
 	if (href_list["close"])
 		usr << browse(null, "window=airlock_electronics")

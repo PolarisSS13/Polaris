@@ -143,7 +143,7 @@
 			log_pda("(DCOMM: [src]) sent \"[text_message]\" to [chosen_communicator]", src)
 			for(var/mob/M in player_list)
 				if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
-					if(istype(M, /mob/new_player) || M.forbid_seeing_deadchat)
+					if(isnewplayer(M) || M.forbid_seeing_deadchat)
 						continue
 					if(M == src)
 						continue

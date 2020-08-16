@@ -465,7 +465,7 @@
 
 /obj/machinery/power/apc/attackby(obj/item/W, mob/user)
 
-	if (istype(user, /mob/living/silicon) && get_dist(src,user)>1)
+	if (issilicon(user) && get_dist(src,user)>1)
 		return src.attack_hand(user)
 	src.add_fingerprint(user)
 	if (W.is_crowbar() && opened)
@@ -673,7 +673,7 @@
 					"You hear a bang!")
 				update_icon()
 		else
-			if (istype(user, /mob/living/silicon))
+			if (isrobot(user))
 				return src.attack_hand(user)
 			if (!opened && wiresexposed && (istype(W, /obj/item/device/multitool) || W.is_wirecutter() || istype(W, /obj/item/device/assembly/signaler)))
 				return src.attack_hand(user)
@@ -736,7 +736,7 @@
 	src.add_fingerprint(user)
 
 	//Human mob special interaction goes here.
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 
 		if(H.species.can_shred(H))
@@ -780,7 +780,7 @@
 	if(!user)
 		return
 
-	if(wiresexposed && !istype(user, /mob/living/silicon/ai))
+	if(wiresexposed && !isAI(user))
 		wires.Interact(user)
 		return	//The panel is visibly dark when the wires are exposed, so we shouldn't be able to interact with it.
 
@@ -897,7 +897,7 @@
 		to_chat(user, "<span class='warning'>You must stand to use [src]!</span>")
 		return 0
 	autoflag = 5
-	if (istype(user, /mob/living/silicon))
+	if (isrobot(user))
 		var/permit = 0 // Malfunction variable. If AI hacks APC it can control it even without AI control wire.
 		var/mob/living/silicon/ai/AI = user
 		var/mob/living/silicon/robot/robot = user
@@ -990,11 +990,11 @@
 		update()
 
 	else if (href_list["overload"])
-		if(istype(usr, /mob/living/silicon))
+		if(isrobot(usr))
 			src.overload_lighting()
 
 	else if (href_list["toggleaccess"])
-		if(istype(usr, /mob/living/silicon))
+		if(isrobot(usr))
 			if(emagged || (stat & (BROKEN|MAINT)))
 				to_chat(usr, "The APC does not respond to the command.")
 				return

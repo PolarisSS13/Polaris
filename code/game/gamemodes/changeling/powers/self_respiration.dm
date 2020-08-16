@@ -16,7 +16,7 @@
 	if(!changeling)
 		return 0
 
-	if(istype(src,/mob/living/carbon))
+	if(iscarbon(src))
 		var/mob/living/carbon/C = src
 		if(C.suiciding)
 			to_chat(src, "You're committing suicide, this isn't going to work.")

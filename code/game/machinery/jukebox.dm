@@ -121,7 +121,7 @@ datum/track/New(var/title_name, var/audio)
 		overlays += "panel_open"
 
 /obj/machinery/media/jukebox/Topic(href, href_list)
-	if(..() || !(Adjacent(usr) || istype(usr, /mob/living/silicon)))
+	if(..() || !(Adjacent(usr) || isrobot(usr)))
 		return
 
 	if(!anchored)

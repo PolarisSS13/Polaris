@@ -508,7 +508,7 @@
 			to_chat(user, "Need more welding fuel!")
 			return
 
-	else if(istype(W, /obj/item/stack/cable_coil) && (wiresexposed || istype(src,/mob/living/silicon/robot/drone)))
+	else if(istype(W, /obj/item/stack/cable_coil) && (wiresexposed || isdrone(src)))
 		if (!getFireLoss())
 			to_chat(user, "Nothing to fix here!")
 			return
@@ -673,13 +673,13 @@
 
 	add_fingerprint(user)
 
-	if(istype(user,/mob/living/carbon/human))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.species.can_shred(H))
 			attack_generic(H, rand(30,50), "slashed")
 			return
 
-	if(opened && !wiresexposed && (!istype(user, /mob/living/silicon)))
+	if(opened && !wiresexposed && (!isrobot(user)))
 		var/datum/robot_component/cell_component = components["power cell"]
 		if(cell)
 			cell.update_icon()
@@ -704,12 +704,12 @@
 	//check if it doesn't require any access at all
 	if(check_access(null))
 		return 1
-	if(istype(M, /mob/living/carbon/human))
+	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		//if they are holding or wearing a card that has access, that works
 		if(check_access(H.get_active_hand()) || check_access(H.wear_id))
 			return 1
-	else if(istype(M, /mob/living/silicon/robot))
+	else if(isrobot(M))
 		var/mob/living/silicon/robot/R = M
 		if(check_access(R.get_active_hand()) || istype(R.get_active_hand(), /obj/item/weapon/card/robot))
 			return 1

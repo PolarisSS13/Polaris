@@ -1,12 +1,12 @@
 // fun if you want to typecast humans/monkeys/etc without writing long path-filled lines.
 /proc/isxenomorph(A)
-	if(istype(A, /mob/living/carbon/human))
+	if(ishuman(A))
 		var/mob/living/carbon/human/H = A
 		return istype(H.species, /datum/species/xenos)
 	return 0
 
 /proc/issmall(A)
-	if(A && istype(A, /mob/living))
+	if(A && isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_SMALL
 	return 0
@@ -21,14 +21,14 @@
 	return TRUE
 
 /proc/istiny(A)
-	if(A && istype(A, /mob/living))
+	if(A && isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_TINY
 	return 0
 
 
 /proc/ismini(A)
-	if(A && istype(A, /mob/living))
+	if(A && isliving(A))
 		var/mob/living/L = A
 		return L.mob_size <= MOB_MINISCULE
 	return 0
@@ -43,7 +43,7 @@
 	return istype(species, /datum/species/monkey)
 
 proc/isdeaf(A)
-	if(istype(A, /mob))
+	if(ismob(A))
 		var/mob/M = A
 		return (M.sdisabilities & DEAF) || M.ear_deaf
 	return 0
@@ -61,7 +61,7 @@ proc/hasorgans(A) // Fucking really??
 	return ishuman(A)
 
 proc/iscuffed(A)
-	if(istype(A, /mob/living/carbon))
+	if(iscarbon(A))
 		var/mob/living/carbon/C = A
 		if(C.handcuffed)
 			return 1
@@ -294,7 +294,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 
 		var/atom/oldeye=M.client.eye
 		var/aiEyeFlag = 0
-		if(istype(oldeye, /mob/observer/eye/aiEye))
+		if(isEye(oldeye))
 			aiEyeFlag = 1
 
 		var/x
@@ -365,7 +365,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 				hud_used.action_intent.icon_state = I_HELP
 
 proc/is_blind(A)
-	if(istype(A, /mob/living/carbon))
+	if(iscarbon(A))
 		var/mob/living/carbon/C = A
 		if(C.sdisabilities & BLIND || C.blinded)
 			return 1
@@ -403,7 +403,7 @@ proc/is_blind(A)
 		return // Can't talk in deadchat if you can't see it.
 
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+		if(M.client && ((!isnewplayer(M) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname
 			if(M.forbid_seeing_deadchat && !M.client.holder)
@@ -417,7 +417,7 @@ proc/is_blind(A)
 				if(M.stat != DEAD && M.client.holder)
 					follow = "([admin_jump_link(subject, M.client.holder)]) "
 				var/mob/observer/dead/DM
-				if(istype(subject, /mob/observer/dead))
+				if(isobserver(subject))
 					DM = subject
 				if(M.client.holder) 							// What admins see
 					lname = "[keyname][(DM && DM.anonsay) ? "*" : (DM ? "" : "^")] ([name])"
@@ -433,7 +433,7 @@ proc/is_blind(A)
 
 /proc/say_dead_object(var/message, var/obj/subject = null)
 	for(var/mob/M in player_list)
-		if(M.client && ((!istype(M, /mob/new_player) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
+		if(M.client && ((!isnewplayer(M) && M.stat == DEAD) || (M.client.holder && M.client.holder.rights)) && M.is_preference_enabled(/datum/client_preference/show_dsay))
 			var/follow
 			var/lname = "Game Master"
 			if(M.forbid_seeing_deadchat && !M.client.holder)
@@ -449,7 +449,7 @@ proc/is_blind(A)
 /proc/announce_ghost_joinleave(O, var/joined_ghosts = 1, var/message = "")
 	var/client/C
 	//Accept any type, sort what we want here
-	if(istype(O, /mob))
+	if(ismob(O))
 		var/mob/M = O
 		if(M.client)
 			C = M.client

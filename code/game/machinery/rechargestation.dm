@@ -219,7 +219,7 @@
 	if(occupant)
 		return
 
-	if(istype(L, /mob/living/silicon/robot))
+	if(isrobot(L))
 		var/mob/living/silicon/robot/R = L
 
 		if(R.incapacitated())

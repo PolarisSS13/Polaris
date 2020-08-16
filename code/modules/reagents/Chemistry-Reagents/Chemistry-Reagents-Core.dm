@@ -184,7 +184,7 @@
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		// First, kill slimes.
-		if(istype(L, /mob/living/simple_mob/slime))
+		if(isslime(L))
 			var/mob/living/simple_mob/slime/S = L
 			S.adjustToxLoss(15 * amount)
 			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
@@ -197,7 +197,7 @@
 		remove_self(needed)
 
 		// Put out cigarettes if splashed.
-		if(istype(L, /mob/living/carbon/human))
+		if(ishuman(L))
 			var/mob/living/carbon/human/H = L
 			if(H.wear_mask)
 				if(istype(H.wear_mask, /obj/item/clothing/mask/smokable))

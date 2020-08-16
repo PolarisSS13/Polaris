@@ -121,7 +121,7 @@
 /datum/surgery_step/cavity/place_item/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if(..())
 		var/obj/item/organ/external/affected = target.get_organ(target_zone)
-		if(istype(user,/mob/living/silicon/robot))
+		if(isrobot(user))
 			return
 		if(affected && affected.cavity)
 			var/total_volume = tool.w_class

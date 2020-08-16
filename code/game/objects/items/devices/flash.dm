@@ -272,7 +272,7 @@
 	if(!check_capacitor())
 		return
 
-	if(istype(loc, /mob/living/carbon))
+	if(iscarbon(loc))
 		var/mob/living/carbon/C = loc
 		var/safety = C.eyecheck()
 		if(safety <= 0)

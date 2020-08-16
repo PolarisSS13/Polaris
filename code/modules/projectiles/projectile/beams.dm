@@ -239,11 +239,11 @@
 /obj/item/projectile/beam/stun/disabler/on_hit(atom/target, blocked = 0, def_zone)
 	. = ..(target, blocked, def_zone)
 
-	if(. && istype(target, /mob/living/silicon/robot) && prob(agony))
+	if(. && isrobot(target) && prob(agony))
 		var/mob/living/silicon/robot/R = target
 		var/drainamt = agony * (rand(5, 15) / 10)
 		R.drain_power(0, 0, drainamt)
-		if(istype(firer, /mob/living/silicon/robot)) // Mischevious sappers, the swarm drones are.
+		if(isrobot(firer)) // Mischevious sappers, the swarm drones are.
 			var/mob/living/silicon/robot/A = firer
 			if(A.cell)
 				A.cell.give(drainamt * 2)

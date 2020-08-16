@@ -445,7 +445,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				player.apply_traits()
 	if(captainless)
 		for(var/mob/M in player_list)
-			if(!istype(M,/mob/new_player))
+			if(!isnewplayer(M))
 				to_chat(M, "<span class='notice'>Colony Directorship not forced on anyone.</span>")
 
 
@@ -467,7 +467,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				else
 					to_chat(Player, "<span class='filter_system'><font color='blue'><b>You missed the crew transfer after the events on [station_name()] as [Player.real_name].</b></font></span>")
 			else
-				if(istype(Player,/mob/observer/dead))
+				if(isobserver(Player))
 					var/mob/observer/dead/O = Player
 					if(!O.started_as_observer)
 						to_chat(Player, "<span class='filter_system'><font color='red'><b>You did not survive the events on [station_name()]...</b></font></span>")
@@ -492,7 +492,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 
 	for (var/mob/living/silicon/robot/robo in mob_list)
 
-		if(istype(robo,/mob/living/silicon/robot/drone) && !istype(robo,/mob/living/silicon/robot/drone/swarm))
+		if(isdrone(robo) && !istype(robo,/mob/living/silicon/robot/drone/swarm))
 			dronecount++
 			continue
 

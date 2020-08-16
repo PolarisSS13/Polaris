@@ -85,7 +85,7 @@
 		return 1
 
 /obj/item/clothing/gloves/sterile/thieves/Touch(var/atom/A, var/proximity)
-	if(proximity && istype(usr, /mob/living/carbon/human) && do_after(usr, 1 SECOND, A))
+	if(proximity && ishuman(usr) && do_after(usr, 1 SECOND, A))
 		return pickpocket(usr, A, proximity)
 	return 0
 
@@ -109,7 +109,7 @@
 		battery = new battery_type(src)
 
 /obj/item/clothing/gloves/ring/buzzer/Touch(var/atom/A, var/proximity)
-	if(proximity && istype(usr, /mob/living/carbon/human))
+	if(proximity && ishuman(usr))
 		return zap(usr, A, proximity)
 	return 0
 

@@ -116,7 +116,7 @@
 	else
 
 		// Aliens can get straight through these.
-		if(istype(usr,/mob/living/carbon))
+		if(iscarbon(usr))
 			var/mob/living/carbon/M = usr
 			if(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
 				for(var/mob/O in oviewers(src))

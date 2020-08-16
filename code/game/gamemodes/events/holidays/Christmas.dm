@@ -27,7 +27,7 @@
 	..()
 
 /obj/item/weapon/toy/xmas_cracker/attack(mob/target, mob/user)
-	if( !cracked && (istype(target,/mob/living/silicon) || (istype(target,/mob/living/carbon/human) && !target.get_active_hand())) && target.stat == CONSCIOUS)
+	if( !cracked && (issilicon(target) || (ishuman(target) && !target.get_active_hand())) && target.stat == CONSCIOUS)
 		target.visible_message("<span class='notice'>[user] and [target] pop \an [src]! *pop*</span>", "<span class='notice'>You pull \an [src] with [target]! *pop*</span>", "<span class='notice'>You hear a *pop*.</span>")
 		var/obj/item/weapon/paper/Joke = new /obj/item/weapon/paper(user.loc)
 		Joke.name = "[pick("awful","terrible","unfunny")] joke"

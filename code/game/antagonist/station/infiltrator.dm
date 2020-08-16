@@ -50,7 +50,7 @@ var/datum/antagonist/traitor/infiltrator/infiltrators
 				<b>:t</b>")
 
 	// Borgs, because their radio is not a headset for some reason.
-	if(istype(traitor_mob, /mob/living/silicon/robot))
+	if(isrobot(traitor_mob))
 		var/mob/living/silicon/robot/borg = traitor_mob
 		var/obj/item/device/encryptionkey/syndicate/encrypt_key = new(null)
 		if(borg.radio)

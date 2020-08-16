@@ -118,7 +118,7 @@
 		return
 
 	var/turf/location = src.loc
-	if(istype(location, /mob/))
+	if(ismob(location))
 		var/mob/living/carbon/human/M = location
 		if(M.item_is_in_hands(src) || M.head == src)
 			location = M.loc

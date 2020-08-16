@@ -209,11 +209,11 @@
 	original_home_distance = max_home_distance
 
 /datum/ai_holder/simple_mob/intentional/sakimm/post_melee_attack(atom/A)
-	if(istype(A, /obj/item) && !holder.get_active_hand() && holder.Adjacent(A))
+	if(isitem(A) && !holder.get_active_hand() && holder.Adjacent(A))
 		var/obj/item/I = A
 		I.attack_hand(holder)
 		lose_target()
-	if(istype(A,/mob/living) && holder.Adjacent(A))	// Not the dumbest tool in the shed. If we're fighting, we're gonna dance around them.
+	if(isliving(A) && holder.Adjacent(A))	// Not the dumbest tool in the shed. If we're fighting, we're gonna dance around them.
 		holder.IMove(get_step(holder, pick(alldirs)))
 		holder.face_atom(A)
 		request_help()	// And we're going to call friends, too.
@@ -257,7 +257,7 @@
 
 	for(var/possible_target in possible_targets)
 		var/atom/A = possible_target
-		if(istype(A, /mob/living) && !can_pick_mobs)
+		if(isliving(A) && !can_pick_mobs)
 			continue
 		if(can_attack(A)) // Can we attack it?
 			. += A

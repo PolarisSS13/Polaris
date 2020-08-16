@@ -36,7 +36,7 @@
 		STOP_PROCESSING(SSobj, src)
 		return null
 	var/turf/location = loc
-	if(istype(location, /mob/))
+	if(ismob(location))
 		var/mob/living/M = location
 		if(M.item_is_in_hands(src))
 			location = M.loc

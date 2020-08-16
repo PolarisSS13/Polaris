@@ -43,7 +43,7 @@ client/verb/JoinTraders()
 		to_chat(usr, "<span class='warning'>You cannot join the traders.</span>")
 		return
 
-	if(istype(usr,/mob/observer/dead) || istype(usr,/mob/new_player))
+	if(isobserver(usr) || isnewplayer(usr))
 		if(!send_beruang)
 			to_chat(usr, "The Beruang is not currently heading to the station.")
 			return

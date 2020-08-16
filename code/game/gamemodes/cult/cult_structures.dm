@@ -165,7 +165,7 @@
 /obj/effect/gateway/active/Crossed(var/atom/A)
 	if(A.is_incorporeal())
 		return
-	if(!istype(A, /mob/living))
+	if(!isliving(A))
 		return
 
 	var/mob/living/M = A

@@ -8,7 +8,7 @@
 	if(stat == DEAD || paralysis || weakened || stunned || restrained())
 		return
 
-	if(istype(src.loc,/mob/living/carbon))
+	if(iscarbon(src.loc))
 		src.verbs -= /mob/living/carbon/alien/diona/proc/merge
 		return
 
@@ -17,7 +17,7 @@
 
 		if(!(src.Adjacent(C)) || !(C.client)) continue
 
-		if(istype(C,/mob/living/carbon/human))
+		if(ishuman(C))
 			var/mob/living/carbon/human/D = C
 			if(D.species && D.species.name == SPECIES_DIONA)
 				choices += C

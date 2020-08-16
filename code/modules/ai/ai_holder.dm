@@ -17,7 +17,7 @@
 /mob/living/Initialize()
 	if(ai_holder_type)
 		ai_holder = new ai_holder_type(src)
-		if(istype(src, /mob/living/carbon/human))
+		if(iscarbon(src))
 			var/mob/living/carbon/human/H = src
 			H.hud_used = new /datum/hud(H)
 			H.create_mob_hud(H.hud_used)

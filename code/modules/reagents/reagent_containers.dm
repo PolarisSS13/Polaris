@@ -88,7 +88,7 @@
 		return 1
 
 	if(target == user)
-		if(istype(user, /mob/living/carbon/human))
+		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
 			if(!H.check_has_mouth())
 				to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
@@ -104,7 +104,7 @@
 		feed_sound(user)
 		return 1
 	else
-		if(istype(target, /mob/living/carbon/human))
+		if(ishuman(target))
 			var/mob/living/carbon/human/H = target
 			if(!H.check_has_mouth())
 				to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")

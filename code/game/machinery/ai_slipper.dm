@@ -36,7 +36,7 @@
 /obj/machinery/ai_slipper/attackby(obj/item/weapon/W, mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		return
-	if(istype(user, /mob/living/silicon))
+	if(isrobot(user))
 		return attack_hand(user)
 	else // trying to unlock the interface
 		if(allowed(usr))
@@ -61,7 +61,7 @@
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if((get_dist(src, user) > 1))
-		if(!istype(user, /mob/living/silicon))
+		if(!isrobot(user))
 			to_chat(user, "Too far away.")
 			user.unset_machine()
 			user << browse(null, "window=ai_slipper")
@@ -77,7 +77,7 @@
 	var/area/area = loc
 	var/t = "<TT><B>AI Liquid Dispenser</B> ([area.name])<HR>"
 
-	if(locked && (!istype(user, /mob/living/silicon)))
+	if(locked && (!isrobot(user)))
 		t += "<I>(Swipe ID card to unlock control panel.)</I><BR>"
 	else
 		t += text("Dispenser [] - <A href='?src=\ref[];toggleOn=1'>[]?</a><br>\n", disabled?"deactivated":"activated", src, disabled?"Enable":"Disable")
@@ -90,7 +90,7 @@
 /obj/machinery/ai_slipper/Topic(href, href_list)
 	..()
 	if(locked)
-		if(!istype(usr, /mob/living/silicon))
+		if(!isrobot(usr))
 			to_chat(usr, "Control panel is locked!")
 			return
 	if(href_list["toggleOn"])

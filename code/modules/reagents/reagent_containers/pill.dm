@@ -23,7 +23,7 @@
 
 /obj/item/weapon/reagent_containers/pill/attack(mob/M as mob, mob/user as mob)
 	if(M == user)
-		if(istype(M, /mob/living/carbon/human))
+		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(!H.check_has_mouth())
 				to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
@@ -40,7 +40,7 @@
 			qdel(src)
 			return 1
 
-	else if(istype(M, /mob/living/carbon/human))
+	else if(ishuman(M))
 
 		var/mob/living/carbon/human/H = M
 		if(!H.check_has_mouth())

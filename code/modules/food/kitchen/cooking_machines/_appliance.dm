@@ -621,13 +621,13 @@
 				src.composition_reagent = "nutriment" // diona are plants, not meat
 			else
 				src.composition_reagent = "protein"
-				if(istype(src, /mob/living/carbon/human))
+				if(ishuman(src))
 					var/mob/living/carbon/human/H = src
 					if(istype(H.species, /datum/species/diona))
 						src.composition_reagent = "nutriment"
 
 	//if the mob is a simple animal - MOB NOT ANIMAL - with a defined meat quantity
-	if (istype(src, /mob/living/simple_mob))
+	if (isanimal(src))
 		var/mob/living/simple_mob/SA = src
 		if(SA.meat_amount)
 			src.composition_reagent_quantity = SA.meat_amount*2*9

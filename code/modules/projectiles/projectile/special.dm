@@ -119,7 +119,7 @@
 			playsound(src, 'sound/effects/meteorimpact.ogg', 40, 1)
 
 			for(var/mob/M in range(10, src))
-				if(!M.stat && !istype(M, /mob/living/silicon/ai))\
+				if(!M.stat && !isAI(M))\
 					shake_camera(M, 3, 1)
 			qdel(src)
 			return 1
@@ -166,7 +166,7 @@
 				M.show_message("<font color='red'>The radiation beam singes you!</font>")
 			//	for (var/mob/V in viewers(src))
 			//		V.show_message("<font color='red'>[M] is singed by the radiation beam.</font>", 3, "<font color='red'> You hear the crackle of burning leaves.</font>", 2)
-	else if(istype(target, /mob/living/carbon/))
+	else if(iscarbon(target))
 	//	for (var/mob/V in viewers(src))
 	//		V.show_message("The radiation beam dissipates harmlessly through [M]", 3)
 		M.show_message("<font color='blue'>The radiation beam dissipates harmlessly through your body.</font>")
@@ -202,7 +202,7 @@
 		var/mob/living/carbon/human/H = M
 		if((H.species.flags & IS_PLANT) && (M.nutrition < 500))
 			M.adjust_nutrition(30)
-	else if (istype(target, /mob/living/carbon/))
+	else if (iscarbon(target))
 		M.show_message("<font color='blue'>The radiation beam dissipates harmlessly through your body.</font>")
 	else
 		return 1

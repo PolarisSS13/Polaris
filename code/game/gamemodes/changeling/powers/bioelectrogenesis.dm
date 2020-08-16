@@ -139,7 +139,7 @@
 		siemens = gloves.siemens_coefficient
 
 	//Excuse the copypasta.
-	if(istype(target,/mob/living/carbon))
+	if(iscarbon(target))
 		var/mob/living/carbon/C = target
 
 		if(user.mind.changeling.chem_charges < shock_cost)
@@ -161,7 +161,7 @@
 		user.mind.changeling.chem_charges -= shock_cost
 		return 1
 
-	else if(istype(target,/mob/living/silicon))
+	else if(isrobot(target))
 		var/mob/living/silicon/S = target
 
 		if(user.mind.changeling.chem_charges < 10)

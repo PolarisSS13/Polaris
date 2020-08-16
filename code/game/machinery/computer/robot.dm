@@ -90,7 +90,7 @@
 			return
 
 		// Antag synthetic checks
-		if(!istype(user, /mob/living/silicon) || !(user.mind.special_role && user.mind.original == user))
+		if(!issilicon(user) || !(user.mind.special_role && user.mind.original == user))
 			to_chat(user, "Access Denied")
 			return
 
@@ -119,7 +119,7 @@
 
 	for(var/mob/living/silicon/robot/R in mob_list)
 		// Ignore drones
-		if(istype(R, /mob/living/silicon/robot/drone))
+		if(isdrone(R))
 			continue
 		// Ignore antagonistic cyborgs
 		if(R.scrambledcodes)

@@ -495,7 +495,7 @@
 		if(!(their_turf in Z.contents)) // Not in the same zone.
 			continue
 
-		if(istype(L, /mob/living/simple_mob/slime))
+		if(isslime(L))
 			var/mob/living/simple_mob/slime/S = L
 			if(S.cold_resist >= 1) // Immune to cold.
 				to_chat(S, "<span class='warning'>A chill is felt around you, however it cannot harm you.</span>")

@@ -290,7 +290,7 @@
 		var/timeleft = emergency_shuttle.estimate_arrival_time()
 		dat += "<B>Emergency shuttle</B>\n<BR>\nETA: [timeleft / 60 % 60]:[add_zero(num2text(timeleft % 60), 2)]<BR>"
 
-	if (istype(user, /mob/living/silicon))
+	if (isrobot(user))
 		var/dat2 = src.interact_ai(user) // give the AI a different interact proc to limit its access
 		if(dat2)
 			dat +=  dat2

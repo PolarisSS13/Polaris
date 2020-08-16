@@ -387,7 +387,7 @@ obj/item/weapon/gripper/proc/drop_item()
 
 				user.visible_message("<span class='danger'>[user] removes the power cell from [A]!</span>", "You remove the power cell.")
 
-	else if(istype(target,/mob/living/silicon/robot))
+	else if(isrobot(target))
 		var/mob/living/silicon/robot/A = target
 		if(A.opened)
 			if(A.cell)
@@ -432,7 +432,7 @@ obj/item/weapon/gripper/proc/drop_item()
 	var/grabbed_something = 0
 
 	for(var/mob/M in T)
-		if(istype(M,/mob/living/simple_mob/animal/passive/lizard) || istype(M,/mob/living/simple_mob/animal/passive/mouse))
+		if(istype(M,/mob/living/simple_mob/animal/passive/lizard) || ismouse(M))
 			src.loc.visible_message("<span class='danger'>[src.loc] sucks [M] into its decompiler. There's a horrible crunching noise.</span>","<span class='danger'>It's a bit of a struggle, but you manage to suck [M] into your decompiler. It makes a series of visceral crunching noises.</span>")
 			new/obj/effect/decal/cleanable/blood/splatter(get_turf(src))
 			qdel(M)
@@ -442,7 +442,7 @@ obj/item/weapon/gripper/proc/drop_item()
 				plastic.add_charge(2000)
 			return
 
-		else if(istype(M,/mob/living/silicon/robot/drone) && !M.client)
+		else if(isdrone(M) && !M.client)
 
 			var/mob/living/silicon/robot/D = src.loc
 

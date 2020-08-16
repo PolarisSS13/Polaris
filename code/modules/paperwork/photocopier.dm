@@ -47,7 +47,7 @@
 	data["toner"] = toner
 	data["copies"] = copies
 	data["maxCopies"] = maxcopies
-	if(istype(user,/mob/living/silicon))
+	if(isrobot(user))
 		data["isSilicon"] = 1
 	else
 		data["isSilicon"] = null
@@ -113,7 +113,7 @@
 		if(copies < maxcopies)
 			copies++
 	else if(href_list["aipic"])
-		if(!istype(usr,/mob/living/silicon)) return
+		if(!isrobot(usr)) return
 		if(stat & (BROKEN|NOPOWER)) return
 
 		if(toner >= 5)

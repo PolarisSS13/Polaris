@@ -236,7 +236,7 @@
 	..()
 
 /obj/item/weapon/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
-	if(!istype(M, /mob))
+	if(!ismob(M))
 		return
 
 	if(M == user && user.zone_sel.selecting == O_MOUTH)

@@ -82,7 +82,7 @@
 
 	var/list/things_to_smash_on = list()
 	for(var/atom/A in range (1, usr))
-		if(A.density && usr.Adjacent(A) && !istype(A, /mob))
+		if(A.density && usr.Adjacent(A) && !ismob(A))
 			things_to_smash_on += A
 
 	var/atom/choice = input("Select what you want to smash the bottle on.") as null|anything in things_to_smash_on
@@ -153,7 +153,7 @@
 	if(blocked < 100)
 		weaken_duration = smash_duration + min(0, force - target.getarmor(hit_zone, "melee") + 10)
 
-	if(hit_zone == "head" && istype(target, /mob/living/carbon/))
+	if(hit_zone == "head" && iscarbon(target))
 		user.visible_message("<span class='danger'>\The [user] smashes [src] over [target]'s head!</span>")
 		if(weaken_duration)
 			target.apply_effect(min(weaken_duration, 5), WEAKEN, blocked) // Never weaken more than a flash!

@@ -117,7 +117,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Description: Sets up the exonet datum, gives the device an address, and then gets a node reference.  Afterwards, populates the device
 //				list.
 /obj/item/device/communicator/proc/initialize_exonet(mob/user)
-	if(!user || !istype(user, /mob/living))
+	if(!user || !isliving(user))
 		return
 	if(!exonet)
 		exonet = new(src)

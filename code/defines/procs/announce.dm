@@ -52,7 +52,7 @@
 
 datum/announcement/proc/Message(message as text, message_title as text, var/list/zlevels)
 	for(var/mob/M in player_list)
-		if(!istype(M,/mob/new_player) && !isdeaf(M))
+		if(!isnewplayer(M) && !isdeaf(M))
 			to_chat(M, "<h2 class='alert'>[title]</h2>")
 			to_chat(M, "<span class='alert'>[message]</span>")
 			if (announcer)
@@ -80,7 +80,7 @@ datum/announcement/priority/command/Message(message as text, message_title as te
 	for(var/mob/M in player_list)
 		if(zlevels && !(get_z(M) in zlevels))
 			continue
-		if(!istype(M,/mob/new_player) && !isdeaf(M))
+		if(!isnewplayer(M) && !isdeaf(M))
 			to_chat(M, command)
 
 datum/announcement/priority/security/Message(message as text, message_title as text)
@@ -106,7 +106,7 @@ datum/announcement/proc/PlaySound(var/message_sound, var/list/zlevels)
 	for(var/mob/M in player_list)
 		if(zlevels && !(M.z in zlevels))
 			continue
-		if(!istype(M,/mob/new_player) && !isdeaf(M))
+		if(!isnewplayer(M) && !isdeaf(M))
 			M << message_sound
 
 datum/announcement/proc/Sound(var/message_sound, var/list/zlevels)

@@ -124,7 +124,7 @@ log transactions
 		..()
 
 /obj/machinery/atm/attack_hand(mob/user as mob)
-	if(istype(user, /mob/living/silicon))
+	if(isrobot(user))
 		to_chat (user, "<span class='warning'>A firewall prevents you from interfacing with this device!</span>")
 		return
 	if(get_dist(src,user) <= 1)

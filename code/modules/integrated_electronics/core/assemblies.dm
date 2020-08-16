@@ -244,7 +244,7 @@
 		return TRUE
 
 	else if(istype(I, /obj/item/integrated_circuit))
-		if(!user.unEquip(I) && !istype(user, /mob/living/silicon/robot)) //Robots cannot de-equip items in grippers.
+		if(!user.unEquip(I) && !isrobot(user)) //Robots cannot de-equip items in grippers.
 			return FALSE
 		if(add_circuit(I, user))
 			to_chat(user, "<span class='notice'>You slide \the [I] inside \the [src].</span>")

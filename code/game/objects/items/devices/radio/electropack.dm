@@ -47,7 +47,7 @@
 	//..()
 	if(usr.stat || usr.restrained())
 		return
-	if(((istype(usr, /mob/living/carbon/human) && ((!( ticker ) || (ticker && ticker.mode != "monkey")) && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && istype(loc, /turf)))))
+	if(((ishuman(usr)) && ((!( ticker ) || (ticker && ticker.mode != "monkey")) && usr.contents.Find(src))) || (usr.contents.Find(master) || (in_range(src, usr) && isturf(loc))))
 		usr.set_machine(src)
 		if(href_list["freq"])
 			var/new_frequency = sanitize_frequency(frequency + text2num(href_list["freq"]))
@@ -63,7 +63,7 @@
 					on = !( on )
 					icon_state = "electropack[on]"
 		if(!( master ))
-			if(istype(loc, /mob))
+			if(ismob(loc))
 				attack_self(loc)
 			else
 				for(var/mob/M in viewers(1, src))
@@ -108,7 +108,7 @@
 
 /obj/item/device/radio/electropack/attack_self(mob/user as mob, flag1)
 
-	if(!istype(user, /mob/living/carbon/human))
+	if(!ishuman(user))
 		return
 	user.set_machine(src)
 	var/dat = {"<TT>

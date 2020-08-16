@@ -9,7 +9,7 @@
 	var/list/bots = metric.get_people_in_department(DEPARTMENT_SYNTHETIC)
 	. = 5 // A small chance even if no synths are on, since it can still emag beepsky.
 	for(var/mob/living/silicon/S in bots)
-		if(istype(S, /mob/living/silicon/robot/drone)) // Drones don't get their laws screwed with, so don't count them.
+		if(isdrone(S)) // Drones don't get their laws screwed with, so don't count them.
 			continue
 		. += 40
 
@@ -25,11 +25,11 @@
 	for(var/mob/living/silicon/target in silicon_mob_list)
 		if(target.z in get_location_z_levels())
 			// Don't ion law drons.
-			if(istype(target, /mob/living/silicon/robot/drone))
+			if(isdrone(target))
 				continue
 
 			// Or borgs with an AI (they'll get their AI's ion law anyways).
-			if(istype(target, /mob/living/silicon/robot))
+			if(isrobot(target))
 				var/mob/living/silicon/robot/R = target
 				if(R.connected_ai)
 					continue

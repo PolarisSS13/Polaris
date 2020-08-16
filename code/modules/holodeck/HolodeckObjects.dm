@@ -341,7 +341,7 @@ datum/unarmed_attack/holopugilism/unarmed_override(var/mob/living/carbon/human/u
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
-	if(istype(usr,/mob/living/carbon/human))
+	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()

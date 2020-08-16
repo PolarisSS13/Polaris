@@ -19,7 +19,7 @@
 		var/mob/living/simple_mob/SM = null
 
 		//Bit of a roundabout typecheck, in order to test for two variables from two different mob types in one line.
-		if(istype(L, /mob/living/simple_mob))
+		if(isanimal(L))
 			SM = L
 		if(L.summoned || (SM && SM.supernatural) )
 			if(L.client) // Player-controlled mobs are immune to being killed by this.

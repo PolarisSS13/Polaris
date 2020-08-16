@@ -35,7 +35,7 @@
 	set category = "Admin"
 	set name = "Aghost"
 	if(!holder)	return
-	if(istype(mob,/mob/observer/dead))
+	if(isobserver(mob))
 		//re-enter
 		var/mob/observer/dead/ghost = mob
 		if(ghost.can_reenter_corpse)
@@ -46,7 +46,7 @@
 
 		feedback_add_details("admin_verb","P") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-	else if(istype(mob,/mob/new_player))
+	else if(isnewplayer(mob))
 		to_chat(src, "<span class='filter_system warning'>Error: Aghost: Can't admin-ghost whilst in the lobby. Join or Observe first.</span>")
 	else
 		//ghostize
@@ -186,7 +186,7 @@
 				new_key = copytext(new_key, 1, 26)
 			holder.fakekey = new_key
 			createStealthKey()
-			if(istype(mob, /mob/new_player))
+			if(isnewplayer(mob))
 				mob.name = new_key
 		log_and_message_admins("[key_name(usr)] has turned stealth mode [holder.fakekey ? "ON" : "OFF"]")
 	feedback_add_details("admin_verb","SM") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
@@ -278,7 +278,7 @@
 	D.makerandom(severity)
 	D.infectionchance = input("How virulent is this disease? (1-100)", "Give Disease", D.infectionchance) as num
 
-	if(istype(T,/mob/living/carbon/human))
+	if(ishuman(T))
 		var/mob/living/carbon/human/H = T
 		if (H.species)
 			D.affected_species = list(H.species.get_bodytype())

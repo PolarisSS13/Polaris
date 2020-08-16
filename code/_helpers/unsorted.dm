@@ -386,7 +386,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	var/select = null
 	var/list/borgs = list()
 	for (var/mob/living/silicon/robot/A in player_list)
-		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || istype(A,/mob/living/silicon/robot/drone))
+		if (A.stat == 2 || A.connected_ai || A.scrambledcodes || isdrone(A))
 			continue
 		var/name = "[A.real_name] ([A.modtype] [A.braintype])"
 		borgs[name] = A
@@ -507,7 +507,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			if(M.real_name && M.real_name != M.name)
 				name += " \[[M.real_name]\]"
 			if(M.stat == DEAD)
-				if(istype(M, /mob/observer/dead/))
+				if(isobserver(M))
 					name += " \[ghost\]"
 				else
 					name += " \[dead\]"
@@ -843,13 +843,13 @@ proc/GaussRandRound(var/sigma,var/roundto)
 
 					//Move the mobs unless it's an AI eye or other eye type.
 					for(var/mob/M in T)
-						if(istype(M, /mob/observer/eye)) continue // If we need to check for more mobs, I'll add a variable
+						if(isEye(M)) continue // If we need to check for more mobs, I'll add a variable
 						M.loc = X
 
 						if(z_level_change) // Same goes for mobs.
 							M.onTransitZ(T.z, X.z)
 
-						if(istype(M, /mob/living))
+						if(isliving(M))
 							var/mob/living/LM = M
 							LM.check_shadow() // Need to check their Z-shadow, which is normally done in forceMove().
 
@@ -978,7 +978,7 @@ proc/DuplicateObject(obj/original, var/perfectcopy = 0 , var/sameloc = 0)
 
 					for(var/mob/M in T)
 
-						if(!istype(M,/mob) || istype(M, /mob/observer/eye)) continue // If we need to check for more mobs, I'll add a variable
+						if(!ismob(M) || isEye(M)) continue // If we need to check for more mobs, I'll add a variable
 						mobs += M
 
 					for(var/mob/M in mobs)

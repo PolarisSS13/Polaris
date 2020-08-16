@@ -81,7 +81,7 @@
 		to_chat(usr, "<span class='danger'>Movement is admin-disabled.</span>") //This is to identify lag problems
 		return
 
-	if (istype(A,/mob/living))
+	if (isliving(A))
 		var/mob/living/M = A
 		if(M.lying)
 			return ..()
@@ -90,7 +90,7 @@
 			// Dirt overlays.
 			update_dirt()
 
-		if(istype(M, /mob/living/carbon/human))
+		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			// Tracking blood
 			var/list/bloodDNA = null
@@ -166,10 +166,10 @@
 
 // Only adds blood on the floor -- Skie
 /turf/simulated/proc/add_blood_floor(mob/living/carbon/M as mob)
-	if( istype(M, /mob/living/carbon/alien ))
+	if( isalien(M))
 		var/obj/effect/decal/cleanable/blood/xeno/this = new /obj/effect/decal/cleanable/blood/xeno(src)
 		this.blood_DNA["UNKNOWN BLOOD"] = "X*"
-	else if( istype(M, /mob/living/silicon/robot ))
+	else if( isrobot(M))
 		new /obj/effect/decal/cleanable/blood/oil(src)
 	else if(ishuman(M))
 		add_blood(M)

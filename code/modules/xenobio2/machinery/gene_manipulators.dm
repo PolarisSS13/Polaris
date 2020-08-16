@@ -367,7 +367,7 @@
 		to_chat(user, "<span class='danger'>The [src] is locked and running, wait for it to finish.</span>")
 		return
 
-	if(!(istype(victim, /mob/living/simple_animal/xeno/slime)) )
+	if(!(isslime(victim, /mob/living/simple_animal/xeno/slime)) )
 		to_chat(user, "<span class='danger'>This is not a suitable subject for the [src]!</span>")
 		return
 
