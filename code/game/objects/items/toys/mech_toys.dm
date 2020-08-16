@@ -16,6 +16,7 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ripleytoy"
 	drop_sound = 'sound/mecha/mechstep.ogg'
+	description_info = "To engage in mech battles, hold this mech while clicking on another toy mech, or a player who is also holding a toy mech. You must be within 2 tiles (This allows you to battle across a table). Battles are entirely randomized, and mechs with higher health and special abilities have a better chance of winning."
 	reach = 2 // So you can battle across the table!
 	
 	// Mech Battle Vars
@@ -242,7 +243,6 @@
 /obj/item/toy/mecha/examine()
 	. = ..()
 	. += "<span class='notice'>This toy's special attack is [special_attack_cry], [special_attack_type_message] </span>"
-	. += "<span class='notice'>To engage in mech battles, hold this mech while clicking on another toy mech, or a player who is also holding a toy mech.</span>"
 	if(in_combat)
 		. += "<span class='notice'>This toy has a maximum health of [max_combat_health]. Currently, it's [combat_health].</span>"
 		. += "<span class='notice'>Its special move light is [special_attack_cooldown? "flashing red." : "green and is ready!"]</span>"
