@@ -407,7 +407,7 @@ SUBSYSTEM_DEF(garbage)
 	if (!recursive_limit)
 		return
 
-	if(istype(X, /datum))
+	if(isdatum(X))
 		var/datum/D = X
 		if(D.last_find_references == last_find_references)
 			return

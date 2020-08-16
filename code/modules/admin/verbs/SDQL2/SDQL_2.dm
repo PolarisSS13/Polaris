@@ -1110,7 +1110,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 	return query_list
 
 /proc/is_proper_datum(thing)
-	return istype(thing, /datum) || istype(thing, /client)
+	return isdatum(thing) || istype(thing, /client)
 
 /obj/effect/statclick/SDQL2_delete/Click()
 	var/datum/SDQL2_query/Q = target

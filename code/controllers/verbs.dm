@@ -26,7 +26,7 @@
 			class = "subsystem"
 		else if(istype(target, /datum/controller))
 			class = "controller"
-		else if(istype(target, /datum))
+		else if(isdatum(target))
 			class = "datum"
 		else
 			class = "unknown"

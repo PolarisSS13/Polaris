@@ -26,7 +26,7 @@
 	else if (istype(var_value, /client))
 		. = VV_CLIENT
 
-	else if (istype(var_value, /datum))
+	else if (isdatum(var_value))
 		. = VV_DATUM_REFERENCE
 
 	else if (ispath(var_value))

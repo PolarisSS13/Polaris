@@ -374,7 +374,7 @@
 			return
 	else
 		exceptions[eid] = 1
-	if(istype(thrower, /datum))
+	if(isdatum(thrower))
 		var/datum/D = thrower
 		ptext = " processing [D.type]"
 		if(istype(thrower, /atom))
