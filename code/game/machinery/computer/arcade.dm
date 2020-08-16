@@ -22,7 +22,8 @@
 							/obj/item/toy/bouquet/fake								= 1,
 							/obj/item/clothing/accessory/badge/sheriff				= 2,
 							/obj/item/clothing/head/cowboy_hat/small				= 2,
-							/obj/item/toy/stickhorse								= 2
+							/obj/item/toy/stickhorse								= 2,
+							/obj/random/squidplush									= 2
 							)
 
 /obj/machinery/computer/arcade/New()
