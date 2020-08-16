@@ -568,7 +568,7 @@
 						to_chat(user, "<span class='notice'>You put in the glass panel.</span>")
 						state = FRAME_PANELED
 
-	else if(istype(P, /obj/item))
+	else if(isitem(P))
 		if(state == FRAME_WIRED)
 			if(frame_type.frame_class == FRAME_CLASS_MACHINE)
 				for(var/I in req_components)

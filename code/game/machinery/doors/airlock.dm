@@ -776,7 +776,7 @@ About the new airlock wires panel:
 
 /obj/machinery/door/airlock/CanPass(atom/movable/mover, turf/target)
 	if (src.isElectrified())
-		if (istype(mover, /obj/item))
+		if (isitem(mover))
 			var/obj/item/i = mover
 			if (i.matter && (DEFAULT_WALL_MATERIAL in i.matter) && i.matter[DEFAULT_WALL_MATERIAL] > 0)
 				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread

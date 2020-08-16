@@ -292,7 +292,7 @@
 		else
 			holder.a_intent = I_HURT	// We can't disarm you, so we're going to hurt you.
 
-	else if(istype(A, /obj/item))
+	else if(isitem(A))
 		var/obj/item/I = A
 		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks))	// If we can't pick it up, or it's edible, go to harm.
 			holder.a_intent = I_HURT

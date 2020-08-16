@@ -23,7 +23,7 @@ json_writer
 				return num2text(val)
 			else if(isnull(val))
 				return "null"
-			else if(istype(val, /list))
+			else if(islist(val))
 				if(is_associative(val))
 					return WriteObject(val)
 				else
@@ -56,7 +56,7 @@ json_writer
 		is_associative(list/L)
 			for(var/key in L)
 				// if the key is a list that means it's actually an array of lists (stupid Byond...)
-				if(!isnum(key) && !isnull(L[key]) && !istype(key, /list))
+				if(!isnum(key) && !isnull(L[key]) && !islist(key))
 					return TRUE
 
 #endif

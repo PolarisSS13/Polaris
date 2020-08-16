@@ -28,7 +28,7 @@
 		_z = T.z
 		_pixel_x = P.return_px()
 		_pixel_y = P.return_py()
-	else if(istype(_x, /atom))
+	else if(isatom(_x))
 		var/atom/A = _x
 		_x = A.x
 		_y = A.y
@@ -88,7 +88,7 @@
 		_z = P.z
 		_pixel_x = P.pixel_x
 		_pixel_y = P.pixel_y
-	else if(istype(_x, /atom))
+	else if(isatom(_x))
 		var/atom/A = _x
 		_x = A.x
 		_y = A.y

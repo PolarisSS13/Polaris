@@ -7,7 +7,7 @@
 
 //	setClickCooldown(get_attack_speed())
 
-	if(has_hands && istype(A,/obj) && a_intent != I_HURT)
+	if(has_hands && isobj(A) && a_intent != I_HURT)
 		var/obj/O = A
 		return O.attack_hand(src)
 

@@ -84,7 +84,7 @@
 		return
 	if(!isturf(target.loc)) // Don't load up stuff if it's inside a container or mob!
 		return
-	if(istype(target,/obj/item))
+	if(isitem(target))
 		if(loaded_item)
 			to_chat(user, "Your [src] already has something inside.  Analyze or eject it first.")
 			return
@@ -108,7 +108,7 @@
 		return
 	if(!proximity)
 		return
-	if(istype(target,/obj/item))
+	if(isitem(target))
 		var/obj/item/I = target
 		if(do_after(src, 5 SECONDS * I.w_class))
 			for(var/mob/M in viewers())
@@ -188,7 +188,7 @@
 		return
 	// pick up items, mostly copied from base tray pickup proc
 	// see code\game\objects\items\weapons\kitchen.dm line 241
-	if ( istype(target,/obj/item))
+	if ( isitem(target))
 		if ( !isturf(target.loc) ) // Don't load up stuff if it's inside a container or mob!
 			return
 		var turf/pickup = target.loc

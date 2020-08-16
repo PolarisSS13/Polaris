@@ -41,7 +41,7 @@
 			if(ispath(trash,/obj/item))
 				var/obj/item/TrashItem = new trash(usr)
 				usr.put_in_hands(TrashItem)
-			else if(istype(trash,/obj/item))
+			else if(isitem(trash))
 				usr.put_in_hands(trash)
 		qdel(src)
 	return
@@ -153,7 +153,7 @@
 			. += "<span class='notice'>It was bitten multiple times!</span>"
 
 /obj/item/weapon/reagent_containers/food/snacks/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/weapon/storage))
+	if(isstorage(W))
 		. = ..() // -> item/attackby()
 		return
 
@@ -4780,7 +4780,7 @@
 			if(ispath(trash,/obj/item))
 				var/obj/item/TrashItem = new trash(feeder)
 				feeder.put_in_hands(TrashItem)
-			else if(istype(trash,/obj/item))
+			else if(isitem(trash))
 				feeder.put_in_hands(trash)
 		qdel(src)
 	return

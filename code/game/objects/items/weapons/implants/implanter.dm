@@ -131,13 +131,13 @@
 	if(!active)
 		to_chat(user, "<span class='warning'>Activate \the [src.name] first.</span>")
 		return
-	if(istype(A,/obj/item) && imp)
+	if(isitem(A) && imp)
 		var/obj/item/weapon/implant/compressed/c = imp
 		if (c.scanned)
 			to_chat(user, "<span class='warning'>Something is already scanned inside the implant!</span>")
 			return
 		c.scanned = A
-		if(istype(A, /obj/item/weapon/storage))
+		if(isstorage(A))
 			to_chat(user, "<span class='warning'>You can't store \the [A.name] in this!</span>")
 			c.scanned = null
 			return

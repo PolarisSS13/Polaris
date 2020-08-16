@@ -39,7 +39,7 @@
 		chassis.visible_message("The [A] bounces off \the [chassis]'s armor")
 		chassis.log_append_to_last("Armor saved.")
 		inc_damage = 0
-	else if(istype(A, /obj))
+	else if(isobj(A))
 		inc_damage *= damage_coeff
 	set_ready_state(0)
 	chassis.use_power(energy_drain)
@@ -98,7 +98,7 @@
 		if(isliving(A))
 			var/mob/living/M = A
 			M.take_organ_damage(10)
-	else if(istype(A, /obj))
+	else if(isobj(A))
 		var/obj/O = A
 		if(O.throwforce)
 			chassis.take_damage(round(O.throwforce*damage_coeff))

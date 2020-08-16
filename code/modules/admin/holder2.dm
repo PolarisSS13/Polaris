@@ -72,7 +72,7 @@ NOTE: It checks usr by default. Supply the "user" argument if you wish to check 
 		C = M.client
 	if(!C)
 		return FALSE
-	if(!(istype(C, /client))) // If we still didn't find a client, something is wrong.
+	if(!(isclient(C))) // If we still didn't find a client, something is wrong.
 		return FALSE
 	if(!C.holder)
 		if(show_msg)

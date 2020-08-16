@@ -45,7 +45,7 @@
 	for(var/i = 1, i <= 10, i++)
 		c[i] = list(0, 0, 0, (i == 7 || i == 8)? 255 : 0)
 
-		if(istype(colors[i], /list))
+		if(islist(colors[i]))
 			for(var/j = 1, j <= 4, j++)
 				if(j <= length(colors[i]) && isnum(colors[i][j]))
 					c[i][j] = colors[i][j]

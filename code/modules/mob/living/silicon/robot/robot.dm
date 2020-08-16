@@ -716,7 +716,7 @@
 	return 0
 
 /mob/living/silicon/robot/proc/check_access(obj/item/I)
-	if(!istype(req_access, /list)) //something's very wrong
+	if(!islist(req_access)) //something's very wrong
 		return 1
 
 	var/list/L = req_access

@@ -495,7 +495,7 @@
 		else
 			holder.a_intent = I_HURT		// Otherwise, bite.
 
-	else if(istype(A, /obj/item))
+	else if(isitem(A))
 		var/obj/item/I = A
 		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks))
 			holder.a_intent = I_HURT

@@ -29,7 +29,7 @@
 			return
 
 		//Teleporting an item.
-		if(istype(hit_atom, /obj/item))
+		if(isitem(hit_atom))
 			var/obj/item/I = hit_atom
 
 			var/datum/effect/effect/system/spark_spread/s1 = new /datum/effect/effect/system/spark_spread

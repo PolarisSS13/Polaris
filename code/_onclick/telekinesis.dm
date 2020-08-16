@@ -122,7 +122,7 @@ var/const/tk_maxrange = 15
 		return // todo: something like attack_self not laden with assumptions inherent to attack_self
 
 
-	if(!istype(target, /turf) && istype(focus,/obj/item) && target.Adjacent(focus))
+	if(!istype(target, /turf) && isitem(focus) && target.Adjacent(focus))
 		var/obj/item/I = focus
 		var/resolved = target.attackby(I, user, user:get_organ_target())
 		if(!resolved && target && I)
@@ -138,7 +138,7 @@ var/const/tk_maxrange = 15
 
 
 /obj/item/tk_grab/proc/focus_object(var/obj/target, var/mob/living/user)
-	if(!istype(target,/obj))	return//Cant throw non objects atm might let it do mobs later
+	if(!isobj(target))	return//Cant throw non objects atm might let it do mobs later
 	if(target.anchored || !isturf(target.loc))
 		qdel(src)
 		return

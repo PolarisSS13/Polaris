@@ -2,7 +2,7 @@
 // All of these are null-safe, you can use them without knowing if the list var is initialized yet
 
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
-#define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
+#define DEFAULTPICK(L, default) ((islist(L) && L:len) ? pick(L) : default)
 
 // Ensures L is initailized after this point
 #define LAZYINITLIST(L) if (!L) L = list()
@@ -68,4 +68,3 @@
 		LIST.Insert(__BIN_MID, IN);\
 	}
 
-#define islist(L) istype(L, /list)

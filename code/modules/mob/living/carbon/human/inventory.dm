@@ -117,7 +117,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	else if (W == head)
 		worn_clothing -= head
 		head = null
-		if(istype(W, /obj/item))
+		if(isitem(W))
 			var/obj/item/I = W
 			if(I.flags_inv & (HIDEMASK|BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(0)	//rebuild hair
@@ -141,7 +141,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	else if (W == wear_mask)
 		worn_clothing -= wear_mask
 		wear_mask = null
-		if(istype(W, /obj/item))
+		if(isitem(W))
 			var/obj/item/I = W
 			if(I.flags_inv & (BLOCKHAIR|BLOCKHEADHAIR))
 				update_hair(0)	//rebuild hair

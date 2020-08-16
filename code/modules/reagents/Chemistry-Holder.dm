@@ -292,7 +292,7 @@
 
 	var/datum/reagent/transfering_reagent = get_reagent(rtype)
 
-	if (istype(target, /atom))
+	if (isatom(target))
 		var/atom/A = target
 		if (!A.reagents || !A.simulated)
 			return
@@ -309,7 +309,7 @@
 	remove_reagent(rtype, amount)
 
 
-	if (istype(target, /atom))
+	if (isatom(target))
 		return F.trans_to(target, amount) // Let this proc check the atom's type
 	else if (istype(target, /datum/reagents))
 		return F.trans_to_holder(target, amount)

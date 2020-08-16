@@ -144,7 +144,7 @@ var/datum/antagonist/traitor/traitors
 	if(!R)
 		return
 
-	if(istype(R,/obj/item/device/radio))
+	if(isradio(R))
 		// generate list of radio freqs
 		var/obj/item/device/radio/target_radio = R
 		var/freq = PUBLIC_LOW_FREQ

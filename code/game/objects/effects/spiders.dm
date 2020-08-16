@@ -106,7 +106,7 @@
 
 /obj/effect/spider/eggcluster/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	if(istype(loc, /obj/item/organ/external))
+	if(isorgan(loc))
 		var/obj/item/organ/external/O = loc
 		O.implants -= src
 
@@ -117,7 +117,7 @@
 	if(amount_grown >= 100)
 		var/num = rand(spiders_min, spiders_max)
 		var/obj/item/organ/external/O = null
-		if(istype(loc, /obj/item/organ/external))
+		if(isorgan(loc))
 			O = loc
 
 		for(var/i=0, i<num, i++)

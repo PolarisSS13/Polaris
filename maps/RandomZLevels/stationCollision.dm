@@ -186,7 +186,7 @@ var/sc_safecode5 = "[rand(0,9)]"
 	if (isliving(A))
 		var/mob/living/L = A
 		L.gib()
-	else if(istype(A,/obj/))
+	else if(isobj(A))
 		var/obj/O = A
 		O.ex_act(1.0)
 		if(O) qdel(O)

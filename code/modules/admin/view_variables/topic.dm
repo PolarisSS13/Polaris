@@ -32,7 +32,7 @@
 		if(!check_rights(R_VAREDIT))	return
 
 		var/D = locate(href_list["datumedit"])
-		if(!isdatum(D) && !istype(D,/client))
+		if(!isdatum(D) && !isclient(D))
 			to_chat(usr, "This can only be used on instances of types /client or /datum")
 			return
 
@@ -42,7 +42,7 @@
 		if(!check_rights(R_VAREDIT))	return
 
 		var/D = locate(href_list["datumchange"])
-		if(!isdatum(D) && !istype(D,/client))
+		if(!isdatum(D) && !isclient(D))
 			to_chat(usr, "This can only be used on instances of types /client or /datum")
 			return
 
@@ -521,6 +521,6 @@
 
 	if(href_list["datumrefresh"])
 		var/datum/DAT = locate(href_list["datumrefresh"])
-		if(isdatum(DAT) || istype(DAT, /client) || islist(DAT))
+		if(isdatum(DAT) || isclient(DAT) || islist(DAT))
 			debug_variables(DAT)
 

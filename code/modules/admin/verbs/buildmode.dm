@@ -334,7 +334,7 @@
 					var/turf/T = object
 					T.ChangeTurf(/turf/simulated/wall)
 					return
-				else if(istype(object,/obj))
+				else if(isobj(object))
 					qdel(object)
 					return
 			else if(istype(object,/turf) && pa.Find("alt") && pa.Find("left"))
@@ -441,7 +441,7 @@
 
 		if(BUILDMODE_CONTENTS)
 			if(pa.Find("left"))
-				if(istype(object, /atom))
+				if(isatom(object))
 					holder.throw_atom = object
 			if(pa.Find("right"))
 				if(holder.throw_atom && istype(object, /atom/movable))
@@ -522,7 +522,7 @@
 						to_chat(user, span("notice", "Pasted faction '[holder.copied_faction]'."))
 						return
 
-				if(istype(object, /atom)) // Force attack.
+				if(isatom(object)) // Force attack.
 					var/atom/A = object
 
 					if(pa.Find("alt"))

@@ -128,7 +128,7 @@
 							new_machine.RefreshParts()
 							qdel(src)
 					else
-						if(istype(P, /obj/item))
+						if(isitem(P))
 							for(var/I in req_components)
 								if(istype(P, text2path(I)) && (req_components[I] > 0))
 									playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)

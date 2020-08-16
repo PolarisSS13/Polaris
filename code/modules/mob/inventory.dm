@@ -206,7 +206,7 @@ var/list/slot_equipment_priority = list( \
 		src.client.screen -= O
 	O.reset_plane_and_layer()
 	O.screen_loc = null
-	if(istype(O, /obj/item))
+	if(isitem(O))
 		var/obj/item/I = O
 		if(target)
 			I.forceMove(target)

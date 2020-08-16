@@ -108,7 +108,7 @@ move an amendment</a> to the drawing.</p>
 /obj/item/blueprints/proc/create_area()
 	//world << "DEBUG: create_area"
 	var/res = detect_room(get_turf(usr))
-	if(!istype(res,/list))
+	if(!islist(res))
 		switch(res)
 			if(ROOM_ERR_SPACE)
 				to_chat(usr, "<span class='warning'>The new area must be completely airtight!</span>")

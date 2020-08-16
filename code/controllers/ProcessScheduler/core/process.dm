@@ -377,7 +377,7 @@
 	if(isdatum(thrower))
 		var/datum/D = thrower
 		ptext = " processing [D.type]"
-		if(istype(thrower, /atom))
+		if(isatom(thrower))
 			var/atom/A = thrower
 			ptext += " ([A]) ([A.x],[A.y],[A.z])"
 	log_to_dd("\[[time_stamp()]\] Process [name] caught exception[ptext]: [etext]")

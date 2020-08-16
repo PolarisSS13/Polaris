@@ -179,7 +179,7 @@
 		return 1
 
 	else
-		if(istype(target,/obj/))
+		if(isobj(target))
 			var/success = 0
 			var/obj/T = target
 			//We can also recharge things we touch, such as APCs or hardsuits.

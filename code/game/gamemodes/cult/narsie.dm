@@ -207,7 +207,7 @@ var/global/list/narsie_list = list()
 
 		C2.dust() // Changed from gib(), just for less lag.
 
-	else if (istype(A, /obj/))
+	else if (isobj(A))
 		qdel(A)
 
 		if (A)
@@ -239,7 +239,7 @@ var/global/list/narsie_list = list()
 
 		C2.dust() // Changed from gib(), just for less lag.
 
-	else if (istype(A, /obj/))
+	else if (isobj(A))
 		qdel(A)
 
 		if (A)

@@ -14,7 +14,7 @@
 		user.remove_from_mob(W)
 		src.contents += W
 
-	else if (istype(W, /obj/item/weapon/storage))
+	else if (isstorage(W))
 		var/obj/item/weapon/storage/S = W
 		if(!S.contents.len)
 			return

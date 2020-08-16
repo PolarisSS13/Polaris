@@ -196,7 +196,7 @@
 
 	if(!whom)
 		return "INVALID/INVALID"
-	if(istype(whom, /client))
+	if(isclient(whom))
 		C = whom
 		M = C.mob
 		key = C.key

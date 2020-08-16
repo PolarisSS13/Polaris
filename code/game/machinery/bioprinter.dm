@@ -236,7 +236,7 @@
 			new_species = SPECIES_HUMAN
 		O.species = GLOB.all_species[new_species]
 
-	if(istype(O, /obj/item/organ/external) && !malfunctioned)
+	if(isorgan(O) && !malfunctioned)
 		var/obj/item/organ/external/E = O
 		E.sync_colour_to_human(C)
 

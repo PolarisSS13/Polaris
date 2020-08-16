@@ -14,7 +14,7 @@
 	var/list/finalpick = list()
 	for(var/e in args)
 		if(isobject(e))
-			if(istype(e, /list))
+			if(islist(e))
 				var/list/sublist = e
 				for(var/sube in sublist)
 					finalpick.Add(sube)
@@ -25,7 +25,7 @@
 
 // Clone of list[]
 /proc/n_listpos(var/list/L, var/pos, var/value)
-	if(!istype(L, /list)) return
+	if(!islist(L)) return
 	if(isnum(pos))
 		if(!value)
 			if(L.len >= pos)
@@ -41,7 +41,7 @@
 
 // Clone of list.Copy()
 /proc/n_listcopy(var/list/L, var/start, var/end)
-	if(!istype(L, /list)) return
+	if(!islist(L)) return
 	return L.Copy(start, end)
 
 // Clone of list.Add()
@@ -51,7 +51,7 @@
 	for(var/e in args)
 		if(i == 1)
 			if(isobject(e))
-				if(istype(e, /list))
+				if(islist(e))
 					chosenlist = e
 			i = 2
 		else
@@ -65,7 +65,7 @@
 	for(var/e in args)
 		if(i == 1)
 			if(isobject(e))
-				if(istype(e, /list))
+				if(islist(e))
 					chosenlist = e
 			i = 2
 		else
@@ -74,18 +74,18 @@
 
 // Clone of list.Cut()
 /proc/n_listcut(var/list/L, var/start, var/end)
-	if(!istype(L, /list)) return
+	if(!islist(L)) return
 	return L.Cut(start, end)
 
 // Clone of list.Swap()
 /proc/n_listswap(var/list/L, var/firstindex, var/secondindex)
-	if(!istype(L, /list)) return
+	if(!islist(L)) return
 	if(L.len >= secondindex && L.len >= firstindex)
 		return L.Swap(firstindex, secondindex)
 
 // Clone of list.Insert()
 /proc/n_listinsert(var/list/L, var/index, var/element)
-	if(!istype(L, /list)) return
+	if(!islist(L)) return
 	return L.Insert(index, element)
 
 // --- Miscellaneous functions ---
@@ -102,7 +102,7 @@
 /proc/smartfind(var/haystack, var/needle, var/start = 1, var/end = 0)
 	if(haystack && needle)
 		if(isobject(haystack))
-			if(istype(haystack, /list))
+			if(islist(haystack))
 				if(length(haystack) >= end && start > 0)
 					var/list/listhaystack = haystack
 					return listhaystack.Find(needle, start, end)
@@ -121,7 +121,7 @@
 // Clone of length()
 /proc/smartlength(var/container)
 	if(container)
-		if(istype(container, /list) || istext(container))
+		if(islist(container) || istext(container))
 			return length(container)
 
 // BY DONKIE~

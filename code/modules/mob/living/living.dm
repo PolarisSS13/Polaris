@@ -1294,7 +1294,7 @@ default behaviour is:
 		src.inertia_dir = get_dir(target, src)
 		step(src, inertia_dir)
 
-	if(istype(item,/obj/item))
+	if(isitem(item))
 		var/obj/item/W = item
 		W.randpixel_xy()
 

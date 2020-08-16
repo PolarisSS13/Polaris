@@ -31,7 +31,7 @@
 	if(!req_access)		req_access = list()
 	if(!req_one_access)	req_one_access = list()
 	if(!L)	return 0
-	if(!istype(L, /list))	return 0
+	if(!islist(L))	return 0
 	return has_access(req_access, req_one_access, L)
 
 /proc/has_access(var/list/req_access, var/list/req_one_access, var/list/accesses)

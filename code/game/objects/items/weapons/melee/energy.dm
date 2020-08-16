@@ -366,7 +366,7 @@
 	projectile_parry_chance = 30	// It's not specifically designed for cutting and slashing, but it can still, maybe, save your life.
 
 /obj/item/weapon/melee/energy/sword/ionic_rapier/afterattack(var/atom/movable/AM, var/mob/living/user, var/proximity)
-	if(istype(AM, /obj) && proximity && active)
+	if(isobj(AM) && proximity && active)
 		// EMP stuff.
 		var/obj/O = AM
 		O.emp_act(3) // A weaker severity is used because this has infinite uses.

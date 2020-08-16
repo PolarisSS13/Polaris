@@ -149,7 +149,7 @@
 		user.visible_message("[user] inserts \a [C] into [src].", "<span class='notice'>You insert \a [C] into [src].</span>")
 		playsound(src, 'sound/weapons/empty.ogg', 50, 1)
 
-	else if(istype(A, /obj/item/weapon/storage))
+	else if(isstorage(A))
 		var/obj/item/weapon/storage/storage = A
 		if(!(load_method & SINGLE_CASING))
 			return //incompatible

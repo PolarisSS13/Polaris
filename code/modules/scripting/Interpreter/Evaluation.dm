@@ -1,5 +1,5 @@
 /proc/isobject(x)
-	return (isdatum(x) || istype(x, /list) || istype(x, /savefile) || istype(x, /client) || (x==world))
+	return (isdatum(x) || islist(x) || istype(x, /savefile) || isclient(x) || (x==world))
 
 /n_Interpreter
 	proc

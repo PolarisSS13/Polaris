@@ -1622,7 +1622,7 @@
 				to_chat(usr, "<span class='filter_adminlog'>You don't have any object marked. Abandoning spawn.</span>")
 				return
 			else
-				if ( !istype(marked_datum,/atom) )
+				if ( !isatom(marked_datum) )
 					to_chat(usr, "<span class='filter_adminlog'>The object you have marked cannot be used as a target. Target must be of type /atom. Abandoning spawn.</span>")
 					return
 

@@ -342,7 +342,7 @@ obj/item/weapon/gripper/proc/drop_item()
 			wrapped = null
 			return
 
-	else if(istype(target,/obj/item)) //Check that we're not pocketing a mob.
+	else if(isitem(target)) //Check that we're not pocketing a mob.
 
 		//...and that the item is not in a container.
 		if(!isturf(target.loc))

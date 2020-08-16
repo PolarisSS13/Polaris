@@ -100,7 +100,7 @@
 		to_chat(user, "You insert \the [L.name] into \the [src.name]. You have [uses] light\s remaining.")
 		return
 
-	if(istype(W, /obj/item/weapon/storage))
+	if(isstorage(W))
 		var/obj/item/weapon/storage/S = W
 		var/found_lightbulbs = FALSE
 		var/replaced_something = TRUE

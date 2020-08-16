@@ -19,7 +19,7 @@
 	if(!cargo_holder) return
 
 	//loading
-	if(istype(target,/obj))
+	if(isobj(target))
 		var/obj/O = target
 		if(O.has_buckled_mobs())
 			return
@@ -131,7 +131,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/hydraulic_clamp/safety/action(atom/target)
 	if(!action_checks(target)) return
 	if(!cargo_holder) return
-	if(istype(target,/obj))
+	if(isobj(target))
 		var/obj/O = target
 		if(!O.anchored)
 			if(cargo_holder.cargo.len < cargo_holder.cargo_capacity)

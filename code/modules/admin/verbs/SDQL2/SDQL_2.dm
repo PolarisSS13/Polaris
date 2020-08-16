@@ -337,8 +337,8 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 		//print the key
 		if(islist(key))
 			recursive_list_print(output, key, datum_handler, atom_handler)
-		else if(is_proper_datum(key) && (datum_handler || (istype(key, /atom) && atom_handler)))
-			if(istype(key, /atom) && atom_handler)
+		else if(is_proper_datum(key) && (datum_handler || (isatom(key) && atom_handler)))
+			if(isatom(key) && atom_handler)
 				output += atom_handler.Invoke(key)
 			else
 				output += datum_handler.Invoke(key)
@@ -351,8 +351,8 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 			var/value = input[key]
 			if(islist(value))
 				recursive_list_print(output, value, datum_handler, atom_handler)
-			else if(is_proper_datum(value) && (datum_handler || (istype(value, /atom) && atom_handler)))
-				if(istype(value, /atom) && atom_handler)
+			else if(is_proper_datum(value) && (datum_handler || (isatom(value) && atom_handler)))
+				if(isatom(value) && atom_handler)
 					output += atom_handler.Invoke(value)
 				else
 					output += datum_handler.Invoke(value)
@@ -673,7 +673,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 /datum/SDQL2_query/proc/SDQL_print(object, list/text_list, print_nulls = TRUE)
 	if(is_proper_datum(object))
 		text_list += "<A HREF='?_src_=vars;Vars=\ref[object]'>\ref[object]</A> : [object]"
-		if(istype(object, /atom))
+		if(isatom(object))
 			var/atom/A = object
 			var/turf/T = A.loc
 			var/area/a
@@ -818,7 +818,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 	if(i > expression.len)
 		return list("val" = null, "i" = i)
 
-	if(istype(expression[i], /list))
+	if(islist(expression[i]))
 		val = SDQL_expression(object, expression[i])
 
 	else if(expression[i] == "TRUE")
@@ -916,7 +916,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 		spaces += whitespace
 
 	for(var/item in query_tree)
-		if(istype(item, /list))
+		if(islist(item))
 			to_chat(usr, "[spaces](")
 			SDQL_testout(item, indent + 1)
 			to_chat(usr, "[spaces])")
@@ -926,7 +926,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 
 		if(!isnum(item) && query_tree[item])
 
-			if(istype(query_tree[item], /list))
+			if(islist(query_tree[item]))
 				to_chat(usr, "[spaces][whitespace](")
 				SDQL_testout(query_tree[item], indent + 2)
 				to_chat(usr, "[spaces][whitespace])")
@@ -1110,7 +1110,7 @@ GLOBAL_DATUM_INIT(sdql2_vv_statobj, /obj/effect/statclick/SDQL2_VV_all, new(null
 	return query_list
 
 /proc/is_proper_datum(thing)
-	return isdatum(thing) || istype(thing, /client)
+	return isdatum(thing) || isclient(thing)
 
 /obj/effect/statclick/SDQL2_delete/Click()
 	var/datum/SDQL2_query/Q = target

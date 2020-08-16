@@ -157,7 +157,7 @@ sd_alert
 				sleep(2)
 
 			if(response && validation)
-				if(istype(response, /list))
+				if(islist(response))
 					var/list/L = response - validation
 					if(L.len) response = null
 					else validated = 1

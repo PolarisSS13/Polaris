@@ -136,7 +136,7 @@ Data storage vars:
 		return (time2text(last_exec)||"Wasn't executed yet")
 
 	proc/set_process_args(list/arguments)
-		if(arguments && istype(arguments, /list) && arguments.len)
+		if(arguments && islist(arguments) && arguments.len)
 			arg_list = arguments
 			return 1
 		else

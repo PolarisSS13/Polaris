@@ -148,7 +148,7 @@
 				fear_amount += human_blood_fear_amount
 
 		// Bloody objects are also bad.
-		if(istype(thing, /obj))
+		if(isobj(thing))
 			var/obj/O = thing
 			if(O.blood_DNA && O.blood_color && O.blood_color != SYNTH_BLOOD_COLOUR)
 				fear_amount++

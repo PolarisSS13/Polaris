@@ -439,7 +439,7 @@
 	if(!isturf(location)) return
 
 	var/obj/item/I = O
-	if(!I || !istype(I,/obj/item)) return
+	if(!I || !isitem(I)) return
 
 	to_chat(usr, "<span class='notice'>You start washing \the [I].</span>")
 

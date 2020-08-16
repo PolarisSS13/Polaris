@@ -32,7 +32,7 @@
 
 /obj/machinery/papershredder/attackby(var/obj/item/W, var/mob/user)
 
-	if(istype(W, /obj/item/weapon/storage))
+	if(isstorage(W))
 		empty_bin(user, W)
 		return
 	else if(W.is_wrench())

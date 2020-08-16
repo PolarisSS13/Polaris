@@ -98,7 +98,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(ismob(loc))
 		register_device(loc.name)
 		initialize_exonet(loc)
-	else if(istype(loc, /obj/item/weapon/storage))
+	else if(isstorage(loc))
 		var/obj/item/weapon/storage/S = loc
 		if(ismob(S.loc))
 			register_device(S.loc.name)

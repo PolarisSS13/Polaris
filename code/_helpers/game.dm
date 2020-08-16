@@ -186,7 +186,7 @@
 					else
 						L |= I
 
-		else if(istype(I,/obj/))
+		else if(isobj(I))
 			var/obj/check_obj = I
 			if(ignore_show_messages || check_obj.show_messages)
 				if(!sight_check || isInSight(I, O))
@@ -215,7 +215,7 @@
 				var/mob/M = I
 				if(M.client)
 					hear += M
-		else if(istype(I,/obj/))
+		else if(isobj(I))
 			hear |= recursive_content_check(I, hear, 3, 1, 0, include_mobs, include_objects)
 			var/obj/O = I
 			if(O.show_messages && include_objects)
@@ -280,7 +280,7 @@
 	var/list/hearturfs = list()
 
 	for(var/thing in hear)
-		if(istype(thing, /obj)) //Can't use isobj() because /atom/movable returns true in that, and so lighting overlays would be included
+		if(isobj(thing)) //Can't use isobj() because /atom/movable returns true in that, and so lighting overlays would be included
 			objs += thing
 			hearturfs |= get_turf(thing)
 		if(ismob(thing))

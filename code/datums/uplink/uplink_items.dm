@@ -124,7 +124,7 @@ datum/uplink_item/dd_SortValue()
 	if(!I)
 		return
 
-	if(istype(I, /list))
+	if(islist(I))
 		var/list/L = I
 		if(L.len) I = L[1]
 

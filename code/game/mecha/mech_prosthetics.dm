@@ -276,7 +276,7 @@
 		flick("[initial(icon_state)]_finish", src)
 		visible_message("\The [src] pings, indicating that \the [D] is complete.", "You hear a ping.")
 		if(mat_efficiency != 1)
-			if(istype(new_item, /obj/) && new_item.matter && new_item.matter.len > 0)
+			if(isobj(new_item) && new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
 	remove_from_queue(1)

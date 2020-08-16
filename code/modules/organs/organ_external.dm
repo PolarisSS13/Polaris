@@ -346,7 +346,7 @@
 			//Check edge eligibility
 			var/edge_eligible = 0
 			if(edge)
-				if(istype(used_weapon,/obj/item))
+				if(isitem(used_weapon))
 					var/obj/item/W = used_weapon
 					if(W.w_class >= w_class)
 						edge_eligible = 1

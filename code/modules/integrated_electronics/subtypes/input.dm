@@ -630,7 +630,7 @@
 /obj/item/integrated_circuit/input/sensor/proc/scan(var/atom/A)
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
 	if(ignore_bags)
-		if(istype(A, /obj/item/weapon/storage))
+		if(isstorage(A))
 			return FALSE
 
 	set_pin_data(IC_OUTPUT, 1, weakref(A))

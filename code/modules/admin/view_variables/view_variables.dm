@@ -24,7 +24,7 @@
 	if (!islist)
 		type = D.type
 
-	if(istype(D, /atom))
+	if(isatom(D))
 		var/atom/AT = D
 		if(AT.icon && AT.icon_state)
 			sprite = new /icon(AT.icon, AT.icon_state)

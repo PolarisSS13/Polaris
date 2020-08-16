@@ -140,7 +140,7 @@ two tiles on initialization, and which way a cliff is facing may change during m
 		return ..()
 
 	// Projectiles and objects flying 'upward' have a chance to hit the cliff instead, wasting the shot.
-	else if(istype(mover, /obj))
+	else if(isobj(mover))
 		var/obj/O = mover
 		if(check_shield_arc(src, dir, O)) // This is actually for mobs but it will work for our purposes as well.
 			if(prob(uphill_penalty / (1 + is_double_cliff) )) // Firing upwards facing NORTH means it will likely have to pass through two cliffs, so the chance is halved.

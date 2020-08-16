@@ -153,7 +153,7 @@
 
 	if(value != FLOOR_CHAR)
 		for(var/thing in T)
-			if(istype(thing, /atom))
+			if(isatom(thing))
 				var/atom/A = thing
 				if(A.simulated)
 					continue

@@ -84,7 +84,7 @@
 		ling_datum.chem_charges -= 10
 		return 1
 
-	else if(istype(target,/obj/)) //This should catch everything else we might miss, without a million typechecks.
+	else if(isobj(target)) //This should catch everything else we might miss, without a million typechecks.
 		var/obj/O = target
 		to_chat(user, "<span class='notice'>We send an electrical pulse up our finger, and into \the [O].</span>")
 		O.add_fingerprint(user)
