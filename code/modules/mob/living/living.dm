@@ -654,12 +654,12 @@ default behaviour is:
 
 		for(var/obj/item/weapon/gift/G in Storage.return_inv()) //Check for gift-wrapped items
 			L += G.gift
-			if(istype(G.gift, /obj/item/weapon/storage))
+			if(isstorage(G.gift))
 				L += get_contents(G.gift)
 
 		for(var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
 			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
+			if(isstorage(D.wrapped)) //this should never happen
 				L += get_contents(D.wrapped)
 		return L
 
@@ -671,12 +671,12 @@ default behaviour is:
 
 		for(var/obj/item/weapon/gift/G in src.contents) //Check for gift-wrapped items
 			L += G.gift
-			if(istype(G.gift, /obj/item/weapon/storage))
+			if(is_special_character(G.gift))
 				L += get_contents(G.gift)
 
 		for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
 			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
+			if(isstorage(D.wrapped)) //this should never happen
 				L += get_contents(D.wrapped)
 		return L
 

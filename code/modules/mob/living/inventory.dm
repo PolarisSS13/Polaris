@@ -8,7 +8,7 @@
 
 /mob/living/equip_to_storage(obj/item/newitem)
 	// Try put it in their backpack
-	if(istype(src.back,/obj/item/weapon/storage))
+	if(isstorage(src.back))
 		var/obj/item/weapon/storage/backpack = src.back
 		if(backpack.can_be_inserted(newitem, 1))
 			newitem.forceMove(src.back)

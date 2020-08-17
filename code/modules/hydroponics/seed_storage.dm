@@ -536,7 +536,7 @@
 	if (istype(O.loc, /mob))
 		var/mob/user = O.loc
 		user.remove_from_mob(O)
-	else if(istype(O.loc,/obj/item/weapon/storage))
+	else if(isstorage(O.loc))
 		var/obj/item/weapon/storage/S = O.loc
 		S.remove_from_storage(O, src)
 

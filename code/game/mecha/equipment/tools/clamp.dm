@@ -47,7 +47,7 @@
 					else
 						FD.visible_message("<span class='danger'>\The [chassis] forces \the [FD] closed!</span>")
 						FD.close(1)
-				else if(istype(O, /obj/machinery/door/airlock))	// D o o r s.
+				else if(isairlock(O))	// D o o r s.
 					var/obj/machinery/door/airlock/AD = O
 					if(AD.locked)
 						occupant_message("<span class='notice'>The airlock's bolts prevent it from being forced.</span>")

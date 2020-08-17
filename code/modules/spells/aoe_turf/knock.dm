@@ -16,7 +16,7 @@
 	for(var/turf/T in targets)
 		for(var/obj/machinery/door/door in T.contents)
 			spawn(1)
-				if(istype(door,/obj/machinery/door/airlock))
+				if(isairlock(door))
 					var/obj/machinery/door/airlock/AL = door //casting is important
 					AL.locked = 0
 				door.open()

@@ -78,7 +78,7 @@ Frequency:
 
 				src.temp += "<B>Extraneous Signals:</B><BR>"
 				for (var/obj/item/weapon/implant/tracking/W in all_tracking_implants)
-					if (!W.implanted || !(istype(W.loc,/obj/item/organ/external) || ismob(W.loc) || W.malfunction))
+					if (!W.implanted || !(isorgan(W.loc) || ismob(W.loc) || W.malfunction))
 						continue
 
 					var/turf/tr = get_turf(W)

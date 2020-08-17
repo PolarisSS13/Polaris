@@ -346,7 +346,7 @@
 
 
 /obj/machinery/door/emp_act(severity)
-	if(prob(20/severity) && (istype(src,/obj/machinery/door/airlock) || istype(src,/obj/machinery/door/window)) )
+	if(prob(20/severity) && (isairlock(src) || istype(src,/obj/machinery/door/window)) )
 		spawn(0)
 			open()
 	..()

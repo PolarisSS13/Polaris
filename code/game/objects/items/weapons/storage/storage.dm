@@ -97,7 +97,7 @@
 		L += S.return_inv()
 	for(var/obj/item/weapon/gift/G in src)
 		L += G.gift
-		if (istype(G.gift, /obj/item/weapon/storage))
+		if (isstorage(G.gift))
 			L += G.gift:return_inv()
 	return L
 
@@ -616,7 +616,7 @@
 	while (cur_atom && !(cur_atom in container.contents))
 		if (isarea(cur_atom))
 			return -1
-		if (istype(cur_atom.loc, /obj/item/weapon/storage))
+		if (isstorage(cur_atom.loc))
 			depth++
 		cur_atom = cur_atom.loc
 
@@ -634,7 +634,7 @@
 	while (cur_atom && !isturf(cur_atom))
 		if (isarea(cur_atom))
 			return -1
-		if (istype(cur_atom.loc, /obj/item/weapon/storage))
+		if (isstorage(cur_atom.loc))
 			depth++
 		cur_atom = cur_atom.loc
 

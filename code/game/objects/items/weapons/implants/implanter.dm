@@ -144,7 +144,7 @@
 		if(istype(A.loc,/mob/living/carbon/human))
 			var/mob/living/carbon/human/H = A.loc
 			H.remove_from_mob(A)
-		else if(istype(A.loc,/obj/item/weapon/storage))
+		else if(isstorage(A.loc))
 			var/obj/item/weapon/storage/S = A.loc
 			S.remove_from_storage(A)
 		A.loc.contents.Remove(A)

@@ -65,7 +65,7 @@
 			door.do_animate("spark")
 			sleep(6)
 			//More typechecks, because windoors can't be locked.  Fun.
-			if(istype(target,/obj/machinery/door/airlock))
+			if(isairlock(target))
 				var/obj/machinery/door/airlock/airlock = target
 
 				if(airlock.locked) //Check if we're bolted.

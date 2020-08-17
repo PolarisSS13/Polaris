@@ -233,7 +233,7 @@
 
 	var/old_loc = src.loc
 	src.pickup(user)
-	if (istype(src.loc, /obj/item/weapon/storage))
+	if (isstorage(src.loc))
 		var/obj/item/weapon/storage/S = src.loc
 		S.remove_from_storage(src)
 

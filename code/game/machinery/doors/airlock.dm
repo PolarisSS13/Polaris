@@ -1024,7 +1024,7 @@ About the new airlock wires panel:
 	else
 		playsound(src, open_sound_unpowered, 75, 1)
 
-	if(src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
+	if(src.closeOther != null && isairlock(src.closeOther) && !src.closeOther.density)
 		src.closeOther.close()
 	return ..()
 
