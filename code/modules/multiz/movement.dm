@@ -184,7 +184,7 @@
 	if(!below)
 		return
 
-	if(istype(below, /turf/space))
+	if(isspace(below))
 		return
 
 	var/turf/T = loc

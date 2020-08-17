@@ -55,7 +55,7 @@
 	if(istype(module, /obj/item/weapon/robot_module/robot/janitor) && isturf(loc))
 		var/turf/tile = loc
 		tile.clean_blood()
-		if (istype(tile, /turf/simulated))
+		if (issimulated(tile))
 			var/turf/simulated/S = tile
 			S.dirt = 0
 		for(var/A in tile)

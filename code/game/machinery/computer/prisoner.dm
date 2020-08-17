@@ -46,7 +46,7 @@
 				if(!T.implanted) continue
 				var/loc_display = "Unknown"
 				var/mob/living/carbon/M = T.imp_in
-				if((M.z in using_map.station_levels) && !istype(M.loc, /turf/space))
+				if((M.z in using_map.station_levels) && !isspace(M.loc))
 					var/turf/mob_loc = get_turf(M)
 					loc_display = mob_loc.loc
 				if(T.malfunction)
@@ -70,7 +70,7 @@
 	Topic(href, href_list)
 		if(..())
 			return
-		if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (isrobot(usr)))
+		if((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (isrobot(usr)))
 			usr.set_machine(src)
 
 			if(href_list["inject1"])

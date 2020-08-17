@@ -105,7 +105,7 @@
 /obj/item/projectile/energy/hook/proc/perform_intent_unique(atom/target)
 	playsound(src, impact_sound, 40, 1)
 	var/success = FALSE
-	if(istype(target,/turf))
+	if(isturf(target))
 		if(launcher_intent)
 			if(launcher_intent != I_HELP && !done_mob_unique)
 				var/target_mob = pick(/mob/living in target.contents)

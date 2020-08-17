@@ -9,7 +9,7 @@
 #define IS_ROCK(tile) (istype(tile, /turf/simulated/mineral) && tile.density)
 
 // Turfs that will be colored as HOLOMAP_OBSTACLE
-#define IS_OBSTACLE(tile) ((!istype(tile, /turf/space) && istype(tile.loc, /area/mine/unexplored)) \
+#define IS_OBSTACLE(tile) ((!isspace(tile) && istype(tile.loc, /area/mine/unexplored)) \
 					|| istype(tile, /turf/simulated/wall) \
 					|| istype(tile, /turf/unsimulated/mineral) \
 					|| (istype(tile, /turf/unsimulated/wall) && !istype(tile, /turf/unsimulated/wall/planetary)) \

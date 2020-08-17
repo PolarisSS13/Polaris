@@ -85,7 +85,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
 	for(var/area/A in world)
-		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
+		if(!isarea(A) || istype(A, /area/space) || istype(A,/area/beach))
 			continue
 
 		A.updateicon()

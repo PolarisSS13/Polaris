@@ -768,7 +768,7 @@
 	if(move_result)
 		can_move = 0
 		use_power(step_energy_drain)
-		if(istype(src.loc, /turf/space))
+		if(isspace(src.loc))
 			if(!src.check_for_support())
 				src.pr_inertial_movement.start(list(src,direction))
 				src.log_message("<span class='warning'>Movement control lost. Inertial movement started.</span>")

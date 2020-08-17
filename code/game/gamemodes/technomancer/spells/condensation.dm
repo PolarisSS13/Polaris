@@ -18,7 +18,7 @@
 
 /obj/item/weapon/spell/condensation/on_ranged_cast(atom/hit_atom, mob/user)
 	if(pay_energy(200))
-		if(istype(hit_atom, /turf/simulated) && within_range(hit_atom))
+		if(issimulated(hit_atom) && within_range(hit_atom))
 			var/turf/simulated/T = hit_atom
 
 			for(var/direction in alldirs + null) // null is for the center tile.
@@ -32,7 +32,7 @@
 						W.set_up(desired_turf)
 						flick(initial(icon_state),W) // Otherwise pooling causes the animation to stay stuck at the end.
 						if(check_for_scepter())
-							if(istype(desired_turf, /turf/simulated))
+							if(issimulated(desired_turf))
 								var/turf/simulated/frozen = desired_turf
 								frozen.freeze_floor()
 			if(check_for_scepter())

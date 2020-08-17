@@ -349,7 +349,7 @@
 // 	if(usr.stat || usr.restrained() || src.flushing)
 // 		return
 
-// 	if(istype(src.loc, /turf))
+// 	if(isturf(src.loc))
 // 		usr.set_machine(src)
 
 // 		if(href_list["close"])
@@ -786,7 +786,7 @@
 	// update the icon_state to reflect hidden status
 	proc/update()
 		var/turf/T = src.loc
-		hide(!T.is_plating() && !istype(T,/turf/space))	// space never hides pipes
+		hide(!T.is_plating() && !isspace(T))	// space never hides pipes
 
 	// hide called by levelupdate if turf intact status changes
 	// change visibility status and force update of icon
@@ -830,7 +830,7 @@
 
 		var/turf/target
 		if(direction)		// direction is specified
-			if(istype(T, /turf/space)) // if ended in space, then range is unlimited
+			if(isspace(T)) // if ended in space, then range is unlimited
 				target = get_edge_target_turf(T, direction)
 			else						// otherwise limit to 10 tiles
 				target = get_ranged_target_turf(T, direction, 10)

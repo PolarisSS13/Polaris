@@ -912,7 +912,7 @@
 				to_chat(user, "<span class='danger'>\The AI control for [src] has been disabled!</span>")
 			return 0
 	else
-		if (!in_range(src, user) || !istype(src.loc, /turf))
+		if (!in_range(src, user) || !isturf(src.loc))
 			return 0
 	var/mob/living/carbon/human/H = user
 	if (istype(H) && prob(H.getBrainLoss()))

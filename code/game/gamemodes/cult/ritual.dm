@@ -326,7 +326,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			var/C = 0
 			for(var/obj/effect/rune/N in rune_list)
 				C++
-			if (!istype(user.loc,/turf))
+			if (!isturf(user.loc))
 				to_chat(user, "<span class='warning'>You do not have enough space to write a proper rune.</span>")
 				return
 
@@ -446,7 +446,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			runerandom()
 		if(user)
 			var/r
-			if (!istype(user.loc,/turf))
+			if (!isturf(user.loc))
 				to_chat(user, "<span class='notice'>You do not have enough space to write a proper rune.</span>")
 			var/list/runes = list("teleport", "itemport", "tome", "armor", "convert", "tear in reality", "emp", "drain", "seer", "raise", "obscure", "reveal", "astral journey", "manifest", "imbue talisman", "sacrifice", "wall", "freedom", "cultsummon", "deafen", "blind", "bloodboil", "communicate", "stun")
 			r = input("Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.

@@ -139,7 +139,7 @@
 	var/exhaust_dir = reverse_direction(dir)
 	var/turf/A = get_step(src, exhaust_dir)
 	var/turf/B = A
-	while(isturf(A) && !(istype(A, /turf/space) || isopenspace(A)))
+	while(isturf(A) && !(isspace(A) || isopenspace(A)))
 		if((B.c_airblock(A)) & AIR_BLOCKED)
 			blockage = TRUE
 			break

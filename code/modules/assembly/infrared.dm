@@ -57,7 +57,7 @@
 		QDEL_LIST_NULL(i_beams)
 		return
 
-	if(!i_beams && secured && (istype(loc, /turf) || (holder && istype(holder.loc, /turf))))
+	if(!i_beams && secured && (isturf(loc) || (holder && isturf(holder.loc))))
 		create_beams()
 
 /obj/item/device/assembly/infra/proc/create_beams(var/limit = 8)

@@ -77,7 +77,7 @@ var/list/overminds = list()
 			return FALSE
 	else
 		var/area/A = get_area(NewLoc)
-		if(istype(NewLoc, /turf/space) || istype(A, /area/shuttle)) //if unplaced, can't go on shuttles or space tiles
+		if(isspace(NewLoc) || istype(A, /area/shuttle)) //if unplaced, can't go on shuttles or space tiles
 			return FALSE
 		forceMove(NewLoc)
 		return TRUE

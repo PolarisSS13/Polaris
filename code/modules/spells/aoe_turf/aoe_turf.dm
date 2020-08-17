@@ -15,7 +15,7 @@ Aoe turf spells have two useful flags: IGNOREDENSE and IGNORESPACE. These are ex
 		if(!(target in view_or_range(inner_radius, holder, selection_type)))
 			if(target.density && (spell_flags & IGNOREDENSE))
 				continue
-			if(istype(target, /turf/space) && (spell_flags & IGNORESPACE))
+			if(isspace(target) && (spell_flags & IGNORESPACE))
 				continue
 			targets += target
 

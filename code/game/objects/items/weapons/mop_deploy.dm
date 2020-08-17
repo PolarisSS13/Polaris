@@ -22,7 +22,7 @@
 /turf/proc/clean_deploy(atom/source)
 	if(source.reagents.has_reagent("water", 1))
 		clean_blood()
-		if(istype(src, /turf/simulated))
+		if(issimulated(src))
 			var/turf/simulated/T = src
 			T.dirt = 0
 		for(var/obj/effect/O in src)
@@ -34,7 +34,7 @@
 */
 /obj/item/weapon/mop_deploy/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
-	if(istype(A, /turf) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay) || istype(A, /obj/effect/rune))
+	if(isturf(A) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay) || istype(A, /obj/effect/rune))
 		user.visible_message("<span class='warning'>[user] begins to clean \the [get_turf(A)].</span>")
 
 		if(do_after(user, 40))

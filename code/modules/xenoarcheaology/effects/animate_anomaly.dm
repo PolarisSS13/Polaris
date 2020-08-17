@@ -31,7 +31,7 @@
 	var/obj/O = holder
 	var/turf/T = get_step_away(O, user)
 
-	if(target && istype(T) && istype(O.loc, /turf))
+	if(target && istype(T) && isturf(O.loc))
 		O.Move(T)
 		O.visible_message("<span class='alien'>\The [holder] lurches away from [user]</span>")
 
@@ -42,7 +42,7 @@
 		find_target()
 	var/turf/T = get_step_to(O, target)
 
-	if(target && istype(T) && istype(O.loc, /turf))
+	if(target && istype(T) && isturf(O.loc))
 		if(get_dist(O, T) > 1)
 			O.Move(T)
 			O.visible_message("<span class='alien'>\The [holder] lurches toward [target]</span>")
@@ -54,7 +54,7 @@
 		find_target()
 	var/turf/T = get_step_to(O, target)
 
-	if(target && istype(T) && istype(O.loc, /turf))
+	if(target && istype(T) && isturf(O.loc))
 		if(get_dist(O, T) > 1)
 			O.Move(T)
 			O.visible_message("<span class='alien'>\The [holder] lurches toward [target]</span>")

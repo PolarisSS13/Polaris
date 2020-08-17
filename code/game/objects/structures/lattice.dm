@@ -11,7 +11,7 @@
 /obj/structure/lattice/Initialize()
 	. = ..()
 
-	if(!(istype(src.loc, /turf/space) || istype(src.loc, /turf/simulated/open) || istype(src.loc, /turf/simulated/mineral)))
+	if(!(isspace(src.loc) || isopenspace(src.loc) || istype(src.loc, /turf/simulated/mineral)))
 		return INITIALIZE_HINT_QDEL
 
 	for(var/obj/structure/lattice/LAT in src.loc)
@@ -33,7 +33,7 @@
 		if(locate(/obj/structure/lattice, get_step(src, dir)))
 			L = locate(/obj/structure/lattice, get_step(src, dir))
 			L.updateOverlays(src.loc)
-	if(istype(loc, /turf/simulated/open))
+	if(isopenspace(loc))
 		var/turf/simulated/open/O = loc
 		spawn(1)
 			if(istype(O)) // If we built a new floor with the lattice, the open turf won't exist anymore.
@@ -79,7 +79,7 @@
 	return
 
 /obj/structure/lattice/proc/updateOverlays()
-	//if(!(istype(src.loc, /turf/space)))
+	//if(!(isspace(src.loc)))
 	//	qdel(src)
 	spawn(1)
 		overlays = list()

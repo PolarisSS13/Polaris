@@ -308,8 +308,8 @@
 
 	switch(buildmode)
 		if(BUILDMODE_BASIC)
-			if(istype(object,/turf) && pa.Find("left") && !pa.Find("alt") && !pa.Find("ctrl") )
-				if(istype(object,/turf/space))
+			if(isturf(object) && pa.Find("left") && !pa.Find("alt") && !pa.Find("ctrl") )
+				if(isspace(object))
 					var/turf/T = object
 					T.ChangeTurf(/turf/simulated/floor)
 					return
@@ -337,9 +337,9 @@
 				else if(isobj(object))
 					qdel(object)
 					return
-			else if(istype(object,/turf) && pa.Find("alt") && pa.Find("left"))
+			else if(isturf(object) && pa.Find("alt") && pa.Find("left"))
 				new/obj/machinery/door/airlock(get_turf(object))
-			else if(istype(object,/turf) && pa.Find("ctrl") && pa.Find("left"))
+			else if(isturf(object) && pa.Find("ctrl") && pa.Find("left"))
 				switch(holder.builddir.dir)
 					if(NORTH)
 						var/obj/structure/window/reinforced/WIN = new/obj/structure/window/reinforced(get_turf(object))

@@ -165,7 +165,7 @@
 	if(istype(W, /obj/item/device/mmi))
 		var/obj/item/device/mmi/M = W
 		if(check_completion())
-			if(!istype(loc,/turf))
+			if(!isturf(loc))
 				to_chat(user, "<span class='warning'>You can't put \the [W] in, the frame has to be standing on the ground to be perfectly precise.</span>")
 				return
 			if(!istype(W, /obj/item/device/mmi/inert))

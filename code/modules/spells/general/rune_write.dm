@@ -22,7 +22,7 @@
 	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Communicate", "Stun")
 	var/r = input(user, "Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 	var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
-	if(istype(user.loc,/turf))
+	if(isturf(user.loc))
 		var/area/A = get_area(user)
 		log_and_message_admins("created \an [r] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].", user)
 		switch(r)

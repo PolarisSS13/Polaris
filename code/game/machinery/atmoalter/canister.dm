@@ -304,7 +304,7 @@ update_flag
 
 	//Do not use "if(..()) return" here, canisters will stop working in unpowered areas like space or on the derelict. // yeah but without SOME sort of Topic check any dick can mess with them via exploits as he pleases -walter0o
 	//First comment might be outdated.
-	if (!istype(src.loc, /turf))
+	if (!isturf(src.loc))
 		return 0
 
 	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr)) // exploit protection -walter0o

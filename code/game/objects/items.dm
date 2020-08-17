@@ -122,7 +122,7 @@
 
 // Check if target is reasonable for us to operate on.
 /obj/item/proc/check_allowed_items(atom/target, not_inside, target_self)
-	if(((src in target) && !target_self) || ((!istype(target.loc, /turf)) && (!istype(target, /turf)) && (not_inside)))
+	if(((src in target) && !target_self) || ((!isturf(target.loc)) && (!isturf(target)) && (not_inside)))
 		return FALSE
 	else
 		return TRUE
@@ -189,7 +189,7 @@
 	set category = "Object"
 	set src in oview(1)
 
-	if(!istype(src.loc, /turf) || usr.stat || usr.restrained() )
+	if(!isturf(src.loc) || usr.stat || usr.restrained() )
 		return
 
 	var/turf/T = src.loc
@@ -466,7 +466,7 @@ var/list/global/slot_flags_enumeration = list(
 	if(C.get_active_hand()) //Hand is not full
 		to_chat(usr, "<span class='warning'>Your hand is full.</span>")
 		return
-	if(!istype(src.loc, /turf)) //Object is on a turf
+	if(!isturf(src.loc)) //Object is on a turf
 		to_chat(usr, "<span class='warning'>You can't pick that up!</span>")
 		return
 	//All checks are done, time to pick it up!
@@ -490,7 +490,7 @@ var/list/global/slot_flags_enumeration = list(
 
 /obj/item/proc/get_loc_turf()
 	var/atom/L = loc
-	while(L && !istype(L, /turf/))
+	while(L && !isturf(L))
 		L = L.loc
 	return loc
 

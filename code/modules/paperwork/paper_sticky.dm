@@ -116,7 +116,7 @@
 // Copied from duct tape.
 /obj/item/weapon/paper/sticky/attack_hand()
 	. = ..()
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		reset_persistence_tracking()
 
 /obj/item/weapon/paper/sticky/afterattack(var/A, var/mob/user, var/flag, var/params)

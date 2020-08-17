@@ -183,7 +183,7 @@
 
 /obj/effect/spider/spiderling/process()
 	if(travelling_in_vent)
-		if(istype(src.loc, /turf))
+		if(isturf(src.loc))
 			travelling_in_vent = 0
 			entry_vent = null
 	else if(entry_vent)

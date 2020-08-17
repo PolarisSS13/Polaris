@@ -100,7 +100,7 @@ steam.start() -- spawns the effect
 	..()
 	playsound(src, "sparks", 100, 1)
 	var/turf/T = src.loc
-	if (istype(T, /turf))
+	if (isturf(T))
 		T.hotspot_expose(1000,100)
 
 /obj/effect/effect/sparks/Initialize()
@@ -109,7 +109,7 @@ steam.start() -- spawns the effect
 
 /obj/effect/effect/sparks/Destroy()
 	var/turf/T = src.loc
-	if (istype(T, /turf))
+	if (isturf(T))
 		T.hotspot_expose(1000,100)
 	return ..()
 
@@ -127,7 +127,7 @@ steam.start() -- spawns the effect
 			n = 10
 		number = n
 		cardinals = c
-		if(istype(loca, /turf/))
+		if(isturf(loca))
 			location = loca
 		else
 			location = get_turf(loca)
@@ -357,7 +357,7 @@ steam.start() -- spawns the effect
 		n = 10
 	number = n
 	cardinals = c
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)
@@ -519,7 +519,7 @@ steam.start() -- spawns the effect
 
 	set_up (amt, loc, flash = 0, flash_fact = 0)
 		amount = amt
-		if(istype(loc, /turf/))
+		if(isturf(loc))
 			location = loc
 		else
 			location = get_turf(loc)

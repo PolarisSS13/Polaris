@@ -147,7 +147,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 
 	var/make_blob = TRUE //can we make a blob?
 
-	if(istype(T, /turf/space) && !(locate(/obj/structure/lattice) in T) && prob(80))
+	if(isspace(T) && !(locate(/obj/structure/lattice) in T) && prob(80))
 		make_blob = FALSE
 		playsound(src, 'sound/effects/splat.ogg', 50, 1) //Let's give some feedback that we DID try to spawn in space, since players are used to it
 

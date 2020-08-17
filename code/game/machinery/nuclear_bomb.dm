@@ -234,7 +234,7 @@ obj/machinery/nuclearbomb/proc/nukehack_win(mob/user as mob)
 	..()
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return
-	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))))
+	if((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))))
 		usr.set_machine(src)
 		if(href_list["act"])
 			var/temp_wire = href_list["wire"]

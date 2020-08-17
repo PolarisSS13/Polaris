@@ -69,9 +69,9 @@
 
 	user.set_machine(src)
 	var/loc = src.loc
-	if(istype(loc, /turf))
+	if(isturf(loc))
 		loc = loc:loc
-	if(!istype(loc, /area))
+	if(!isarea(loc))
 		to_chat(user, "Turret badly positioned - loc.loc is [loc].")
 		return
 	var/area/area = loc

@@ -426,7 +426,7 @@
 	return 1
 
 /atom/proc/add_vomit_floor(mob/living/carbon/M as mob, var/toxvomit = 0)
-	if( istype(src, /turf/simulated) )
+	if( issimulated(src) )
 		var/obj/effect/decal/cleanable/vomit/this = new /obj/effect/decal/cleanable/vomit(src)
 		this.virus2 = virus_copylist(M.virus2)
 
@@ -531,7 +531,7 @@
 /atom/proc/has_gravity(turf/T)
 	if(!T || !isturf(T))
 		T = get_turf(src)
-	if(istype(T, /turf/space)) // Turf never has gravity
+	if(isspace(T)) // Turf never has gravity
 		return FALSE
 	var/area/A = get_area(T)
 	if(A && A.has_gravity())

@@ -137,7 +137,7 @@
 				var/mob/living/M = location
 				if(M.item_is_in_hands(src))
 					location = get_turf(M)
-			if (istype(location, /turf))
+			if (isturf(location))
 				location.hotspot_expose(700, 5)
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
@@ -164,7 +164,7 @@
 		if(isliving(O))
 			var/mob/living/L = O
 			L.IgniteMob()
-		if (istype(location, /turf))
+		if (isturf(location))
 			location.hotspot_expose(700, 50, 1)
 /obj/item/weapon/weldingtool/attack_self(mob/user)
 	setWelding(!welding, user)

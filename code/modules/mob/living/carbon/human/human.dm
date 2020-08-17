@@ -1644,7 +1644,7 @@
 			else
 				vessel.remove_reagent("blood", 1)
 		if(bloodtrail)
-			if(istype(loc, /turf/simulated))
+			if(issimulated(loc))
 				var/turf/T = loc
 				T.add_blood(src)
 	. = ..()

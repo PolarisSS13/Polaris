@@ -29,7 +29,7 @@
 /obj/structure/diona/vines/proc/spread()
 	var/turf/origin = get_turf(src)
 	for(var/turf/T in range(src,2))
-		if(T.density || T == origin || istype(T, /turf/space))
+		if(T.density || T == origin || isspace(T))
 			continue
 		var/new_growth = 1
 		switch(get_dist(origin,T))

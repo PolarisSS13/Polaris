@@ -558,7 +558,7 @@ datum/projectile_data
 			var/datum/gas_mixture/environment = T.return_air()
 			cp = environment.return_pressure()
 		else
-			if(istype(T,/turf/simulated))
+			if(issimulated(T))
 				continue
 		if(cp<minp)minp=cp
 		if(cp>maxp)maxp=cp
@@ -592,9 +592,9 @@ datum/projectile_data
 					rstats[i] = environment.return_pressure()
 				else
 					rstats[i] = environment.vars[stats[i]]
-		else if(istype(T, /turf/simulated))
+		else if(issimulated(T))
 			rstats = null // Exclude zone (wall, door, etc).
-		else if(istype(T, /turf))
+		else if(isturf(T))
 			// Should still work.  (/turf/return_air())
 			var/datum/gas_mixture/environment = T.return_air()
 			for(var/i=1;i<=stats.len;i++)

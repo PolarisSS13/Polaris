@@ -169,7 +169,7 @@ FIRE ALARM
 	if(usr.stat || stat & (BROKEN | NOPOWER))
 		return
 
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isrobot(usr)))
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isrobot(usr)))
 		usr.set_machine(src)
 		if(href_list["reset"])
 			reset()
@@ -302,7 +302,7 @@ Just a object used in constructing fire alarms
 	..()
 	if(usr.stat || stat & (BROKEN|NOPOWER))
 		return
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(loc, /turf))) || (isAI(usr)))
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(loc))) || (isAI(usr)))
 		usr.machine = src
 		if(href_list["reset"])
 			reset()

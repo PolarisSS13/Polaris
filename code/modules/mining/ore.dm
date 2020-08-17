@@ -47,7 +47,7 @@
 		H.Blind(5)
 		H.eye_blurry += 10
 		spawn(1)
-			if(istype(loc, /turf/)) qdel(src)
+			if(isturf(loc)) qdel(src)
 
 
 /obj/item/weapon/ore/phoron
@@ -99,7 +99,7 @@
 		H.Blind(10)
 		H.eye_blurry += 15
 		spawn(1)
-			if(istype(loc, /turf/)) qdel(src)
+			if(isturf(loc)) qdel(src)
 
 /obj/item/weapon/ore/lead
 	name = "lead glance"

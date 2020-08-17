@@ -51,7 +51,7 @@ proc/explosion(turf/epicenter, devastation_range, heavy_impact_range, light_impa
 				if(!(M in close))
 					// check if the mob can hear
 					if(M.ear_deaf <= 0 || !M.ear_deaf)
-						if(!istype(M.loc,/turf/space))
+						if(!isspace(M.loc))
 							M << 'sound/effects/explosionfar.ogg'
 
 		if(adminlog)

@@ -407,7 +407,7 @@
 /obj/machinery/smartfridge/secure/Topic(href, href_list)
 	if(stat & (NOPOWER|BROKEN))
 		return 0
-	if(usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf)))
+	if(usr.contents.Find(src) || (in_range(src, usr) && isturf(loc)))
 		if(!allowed(usr) && !emagged && locked != -1 && href_list["vend"])
 			to_chat(usr, "<span class='warning'>Access denied.</span>")
 			return 0

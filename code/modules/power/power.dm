@@ -274,7 +274,7 @@
 	if(istype(M.loc,/obj/mecha))	return 0	//feckin mechs are dumb
 	if(issilicon(M))	return 0	//No more robot shocks from machinery
 	var/area/source_area
-	if(istype(power_source,/area))
+	if(isarea(power_source))
 		source_area = power_source
 		power_source = source_area.get_apc()
 	if(istype(power_source,/obj/structure/cable))

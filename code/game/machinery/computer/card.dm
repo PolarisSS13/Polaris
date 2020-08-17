@@ -224,7 +224,7 @@
 		if ("reg")
 			if (is_authenticated())
 				var/t2 = modify
-				if ((modify == t2 && (in_range(src, usr) || (isrobot(usr))) && istype(loc, /turf)))
+				if ((modify == t2 && (in_range(src, usr) || (isrobot(usr))) && isturf(loc)))
 					var/temp_name = sanitizeName(href_list["reg"])
 					if(temp_name)
 						modify.registered_name = temp_name
@@ -235,7 +235,7 @@
 		if ("account")
 			if (is_authenticated())
 				var/t2 = modify
-				if ((modify == t2 && (in_range(src, usr) || (isrobot(usr))) && istype(loc, /turf)))
+				if ((modify == t2 && (in_range(src, usr) || (isrobot(usr))) && isturf(loc)))
 					var/account_num = text2num(href_list["account"])
 					modify.associated_account_number = account_num
 			SSnanoui.update_uis(src)

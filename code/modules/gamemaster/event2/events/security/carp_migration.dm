@@ -44,6 +44,6 @@
 	for(var/mob/living/simple_mob/SM in spawned_mobs)
 		if(SM.stat == DEAD)
 			var/turf/T = get_turf(SM)
-			if(istype(T, /turf/space))
+			if(isspace(T))
 				if(prob(75))
 					qdel(SM)

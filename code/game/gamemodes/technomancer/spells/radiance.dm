@@ -33,7 +33,7 @@
 	var/datum/gas_mixture/env = null
 	var/adjusted_power = calculate_spell_power(power)
 
-	if(!istype(T, /turf/space))
+	if(!isspace(T))
 		env = T.return_air()
 		removed = env.remove(0.25 * env.total_moles)	//Remove gas from surrounding area
 

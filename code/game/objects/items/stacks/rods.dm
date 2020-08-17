@@ -74,7 +74,7 @@ var/global/list/datum/stack_recipe/rods_recipes = list( \
 /obj/item/stack/rods/attack_self(mob/user as mob)
 	src.add_fingerprint(user)
 
-	if(!istype(user.loc,/turf)) return 0
+	if(!isturf(user.loc)) return 0
 
 	if (locate(/obj/structure/grille, usr.loc))
 		for(var/obj/structure/grille/G in usr.loc)

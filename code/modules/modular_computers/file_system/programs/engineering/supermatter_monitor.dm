@@ -47,7 +47,7 @@
 	var/valid_z_levels = using_map.get_map_levels(z)
 	for(var/obj/machinery/power/supermatter/S in machines)
 		// Delaminating, not within coverage, not on a tile.
-		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !istype(S.loc, /turf/))
+		if(S.grav_pulling || S.exploded || !(S.z in valid_z_levels) || !isturf(S.loc))
 			continue
 		supermatters.Add(S)
 

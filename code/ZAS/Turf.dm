@@ -38,7 +38,7 @@
 		if(r_block & AIR_BLOCKED)
 			continue
 
-		if(istype(unsim, /turf/simulated))
+		if(issimulated(unsim))
 
 			var/turf/simulated/sim = unsim
 			if(air_master.has_valid_zone(sim))
@@ -147,7 +147,7 @@
 
 			//Check that our zone hasn't been cut off recently.
 			//This happens when windows move or are constructed. We need to rebuild.
-			if((previously_open & d) && istype(unsim, /turf/simulated))
+			if((previously_open & d) && issimulated(unsim))
 				var/turf/simulated/sim = unsim
 				if(zone && sim.zone == zone)
 					zone.rebuild()
@@ -157,7 +157,7 @@
 
 		open_directions |= d
 
-		if(istype(unsim, /turf/simulated))
+		if(issimulated(unsim))
 
 			var/turf/simulated/sim = unsim
 			sim.open_directions |= reverse_dir[d]

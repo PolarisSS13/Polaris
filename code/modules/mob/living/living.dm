@@ -1299,7 +1299,7 @@ default behaviour is:
 		W.randpixel_xy()
 
 /*
-	if(istype(src.loc, /turf/space) || (src.flags & NOGRAV)) //they're in space, move em one space in the opposite direction
+	if(isspace(src.loc) || (src.flags & NOGRAV)) //they're in space, move em one space in the opposite direction
 		src.inertia_dir = get_dir(target, src)
 		step(src, inertia_dir)
 */

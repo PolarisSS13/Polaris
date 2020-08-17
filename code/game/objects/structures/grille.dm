@@ -99,7 +99,7 @@
 			playsound(src, W.usesound, 100, 1)
 			new /obj/item/stack/rods(get_turf(src), destroyed ? 1 : 2)
 			qdel(src)
-	else if((W.is_screwdriver()) && (istype(loc, /turf/simulated) || anchored))
+	else if((W.is_screwdriver()) && (issimulated(loc) || anchored))
 		if(!shock(user, 90))
 			playsound(src, W.usesound, 100, 1)
 			anchored = !anchored

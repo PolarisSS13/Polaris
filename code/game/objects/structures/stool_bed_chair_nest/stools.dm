@@ -134,7 +134,7 @@ var/global/list/stool_cache = list() //haha stool
 			to_chat(user, "You cannot pad \the [src] with that.")
 			return
 		C.use(1)
-		if(!istype(src.loc, /turf))
+		if(!isturf(src.loc))
 			user.drop_from_inventory(src)
 			src.loc = get_turf(src)
 		to_chat(user, "You add padding to \the [src].")

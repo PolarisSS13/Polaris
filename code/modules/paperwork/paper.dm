@@ -541,7 +541,7 @@
 			else if (h_user.head == src)
 				h_user.u_equip(src)
 				h_user.put_in_hands(B)
-			else if (!istype(src.loc, /turf))
+			else if (!isturf(src.loc))
 				src.loc = get_turf(h_user)
 				if(h_user.client)	h_user.client.screen -= src
 				h_user.put_in_hands(B)

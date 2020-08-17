@@ -76,7 +76,7 @@
 
 	var/atom/A = src.loc
 
-	if(istype(A,/turf))
+	if(isturf(A))
 		var/turf/T = A
 
 		var/datum/gas_mixture/Environment = T.return_air()

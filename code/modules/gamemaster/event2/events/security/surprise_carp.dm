@@ -43,7 +43,7 @@
 
 	var/list/donut = outer_square - inner_square
 	for(var/T in donut)
-		if(!istype(T, /turf/space))
+		if(!isspace(T))
 			donut -= T
 
 	for(var/i = 1 to number_of_carp)

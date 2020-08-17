@@ -77,7 +77,7 @@
 /datum/reagent/toxin/neurotoxic_protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien != IS_DIONA)
-		if(M.canmove && !M.restrained() && istype(M.loc, /turf/space))
+		if(M.canmove && !M.restrained() && isspace(M.loc))
 			step(M, pick(cardinal))
 		if(prob(5))
 			M.emote(pick("twitch", "drool", "moan"))
@@ -759,7 +759,7 @@
 		drug_strength = drug_strength * 1.2
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+	if(prob(10) && isturf(M.loc) && !isspace(M.loc) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
 	if(prob(7))
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
@@ -940,7 +940,7 @@ datum/reagent/talum_quem/affect_blood(var/mob/living/carbon/M, var/alien, var/re
 		M.adjustToxLoss(10 * removed) //Given incorporations of other toxins with similiar damage, this seems right.
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+	if(prob(10) && isturf(M.loc) && !isspace(M.loc) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
 	if(prob(7))
 		M.emote(pick("twitch", "drool", "moan", "giggle"))

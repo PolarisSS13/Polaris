@@ -171,7 +171,7 @@
 		return 0
 
 #ifdef FLOORBOT_PATCHES_HOLES
-	if(istype(A, /turf/space))
+	if(isspace(A))
 		return 1
 
 	if(istype(A, /turf/simulated/mineral/floor))
@@ -208,7 +208,7 @@
 		target = null
 		busy = 0
 		update_icons()
-	else if(istype(A, /turf/space) || istype(A, /turf/simulated/mineral/floor))
+	else if(isspace(A) || istype(A, /turf/simulated/mineral/floor))
 		var/building = 2
 		if(locate(/obj/structure/lattice, A))
 			building = 1

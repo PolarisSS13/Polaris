@@ -56,7 +56,7 @@
 	cardinals = c
 	carry.trans_to_obj(chemholder, carry.total_volume, copy = 1)
 
-	if(istype(loca, /turf/))
+	if(isturf(loca))
 		location = loca
 	else
 		location = get_turf(loca)

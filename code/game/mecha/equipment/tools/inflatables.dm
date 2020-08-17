@@ -36,7 +36,7 @@
 	if(!action_checks(target))
 		return
 
-	if(istype(target, /turf))
+	if(isturf(target))
 		my_deployer.try_deploy_inflatable(target, chassis.occupant)
 	if(istype(target, /obj/item/inflatable) || istype(target, /obj/structure/inflatable))
 		my_deployer.pick_up(target, chassis.occupant)

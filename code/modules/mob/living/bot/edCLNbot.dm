@@ -30,18 +30,18 @@
 		playsound(src, 'sound/machines/synth_yes.ogg', 50, 0)
 
 	if(red_switch && !blue_switch && !green_switch && prob(10) || src.emagged)
-		if(istype(loc, /turf/simulated))
+		if(issimulated(loc))
 			var/turf/simulated/T = loc
 			T.add_blood()
 
 	if(!red_switch && blue_switch && !green_switch && prob(50) || src.emagged)
-		if(istype(loc, /turf/simulated))
+		if(issimulated(loc))
 			var/turf/simulated/T = loc
 			visible_message("<span class='notice'>\The [src] squirts a puddle of water on the floor!</span>")
 			T.wet_floor()
 
 	if(!red_switch && !blue_switch && green_switch && prob(10) || src.emagged)
-		if(istype(loc, /turf/simulated))
+		if(issimulated(loc))
 			var/turf/simulated/T = loc
 			visible_message("<span class='warning'>\The [src] stomps on \the [T], breaking it!</span>")
 			qdel(T)

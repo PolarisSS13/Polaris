@@ -2,7 +2,7 @@
 // For example, using this on a disk, which is in a bag, on a mob, will return the mob because it's on the turf.
 /proc/get_atom_on_turf(var/atom/movable/M)
 	var/atom/mloc = M
-	while(mloc && mloc.loc && !istype(mloc.loc, /turf/))
+	while(mloc && mloc.loc && !isturf(mloc.loc))
 		mloc = mloc.loc
 	return mloc
 
@@ -95,7 +95,7 @@
 /proc/translate_turf(var/turf/T, var/turf/B, var/turftoleave = null)
 
 	//You can stay, though.
-	if(istype(T,/turf/space))
+	if(isspace(T))
 		error("Tried to translate a space turf: src=[log_info_line(T)] dst=[log_info_line(B)]")
 		return FALSE // TODO - Is this really okay to do nothing?
 

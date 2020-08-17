@@ -123,7 +123,7 @@
 /obj/machinery/computer/HolodeckControl/Topic(href, href_list)
 	if(..())
 		return 1
-	if((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (isrobot(usr)))
+	if((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (isrobot(usr)))
 		usr.set_machine(src)
 
 		if(href_list["program"])
@@ -256,7 +256,7 @@
 
 /obj/machinery/computer/HolodeckControl/proc/checkInteg(var/area/A)
 	for(var/turf/T in A)
-		if(istype(T, /turf/space))
+		if(isspace(T))
 			return 0
 
 	return 1

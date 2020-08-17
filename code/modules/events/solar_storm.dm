@@ -33,7 +33,7 @@
 		if(!T)
 			continue
 
-		if(!istype(T.loc,/area/space) && !istype(T,/turf/space))	//Make sure you're in a space area or on a space turf
+		if(!istype(T.loc,/area/space) && !isspace(T))	//Make sure you're in a space area or on a space turf
 			continue
 
 		//Todo: Apply some burn damage from the heat of the sun. Until then, enjoy some moderate radiation.

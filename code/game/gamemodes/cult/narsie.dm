@@ -141,7 +141,7 @@ var/global/list/narsie_list = list()
 	return 1
 
 /obj/singularity/narsie/proc/narsiefloor(var/turf/T)//leaving "footprints"
-	if(!(istype(T, /turf/simulated/wall/cult)||istype(T, /turf/space)))
+	if(!(istype(T, /turf/simulated/wall/cult)||isspace(T)))
 		if(T.icon_state != "cult-narsie")
 			T.desc = "something that goes beyond your understanding went this way."
 			T.icon = 'icons/turf/flooring/cult.dmi'
@@ -189,7 +189,7 @@ var/global/list/narsie_list = list()
 				consume(AM)
 				continue
 
-		if (dist <= consume_range && !istype(A, /turf/space))
+		if (dist <= consume_range && !isspace(A))
 			var/turf/T = A
 			if(T.holy)
 				T.holy = 0 //Nar-Sie doesn't give a shit about sacred grounds.

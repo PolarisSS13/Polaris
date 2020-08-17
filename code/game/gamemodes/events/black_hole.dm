@@ -85,7 +85,7 @@
 			step_towards(M,src)
 
 	//Destroying the turf
-	if( T && istype(T,/turf/simulated) && prob(turf_removal_chance) )
+	if( T && issimulated(T) && prob(turf_removal_chance) )
 		var/turf/simulated/ST = T
 		var/base_turf = get_base_turf_by_area(src)
 		if(ST.type != base_turf)

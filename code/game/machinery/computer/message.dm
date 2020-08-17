@@ -288,7 +288,7 @@
 		return
 	if(!isliving(usr))
 		return
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(src.loc, /turf))) || (isrobot(usr)))
+	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(src.loc))) || (isrobot(usr)))
 		//Authenticate
 		if (href_list["auth"])
 			if(auth)

@@ -147,7 +147,7 @@
 		return
 
 	//get the user's location
-	if(!istype(user.loc, /turf))
+	if(!isturf(user.loc))
 		return	//can't do this stuff whilst inside objects and such
 
 	if(W)
@@ -167,7 +167,7 @@
 
 		// Place plating over a wall
 		if(T)
-			if(istype(T, /turf/simulated/open) || istype(T, /turf/space))
+			if(isopenspace(T) || isspace(T))
 				if(R.use(1)) // Cost of roofing tiles is 1:1 with cost to place lattice and plating
 					T.ReplaceWithLattice()
 					T.ChangeTurf(/turf/simulated/floor, preserve_outdoors = TRUE)

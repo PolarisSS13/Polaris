@@ -145,7 +145,7 @@ Transponder Codes:<UL>"}
 	..()
 	if(usr.stat)
 		return
-	if((in_range(src, usr) && istype(src.loc, /turf)) || (isrobot(usr)))
+	if((in_range(src, usr) && isturf(src.loc)) || (isrobot(usr)))
 		if(open && !locked)
 			usr.set_machine(src)
 

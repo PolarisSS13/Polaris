@@ -19,7 +19,7 @@ client/proc/ZoneTick()
 client/proc/Zone_Info(turf/T as null|turf)
 	set category = "Debug"
 	if(T)
-		if(istype(T,/turf/simulated) && T:zone)
+		if(issimulated(T) && T:zone)
 			T:zone:dbg_data(src)
 		else
 			to_chat(mob, "No zone here.")

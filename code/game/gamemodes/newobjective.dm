@@ -1071,11 +1071,11 @@ datum
 								if(isAI(M) && M.stat != 2)
 									return 1
 						for(var/mob/living/silicon/ai/M in world)
-							if(istype(M.loc, /turf))
+							if(isturf(M.loc))
 								if(istype(get_area(M), /area/shuttle/escape))
 									return 1
 						for(var/obj/structure/AIcore/M in world)
-							if(istype(M.loc, /turf) && M.state == 4)
+							if(isturf(M.loc) && M.state == 4)
 								if(istype(get_area(M), /area/shuttle/escape))
 									return 1
 						return 0

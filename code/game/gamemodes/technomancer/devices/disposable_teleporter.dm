@@ -39,7 +39,7 @@
 		if (user.stat || user.restrained())
 			return
 
-		if(!((user == loc || (in_range(src, user) && istype(src.loc, /turf)))))
+		if(!((user == loc || (in_range(src, user) && isturf(src.loc)))))
 			return
 
 		var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()

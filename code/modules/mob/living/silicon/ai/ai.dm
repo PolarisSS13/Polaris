@@ -152,7 +152,7 @@ var/list/ai_verbs_default = list(
 
 	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
 
-	if (istype(loc, /turf))
+	if (isturf(loc))
 		add_ai_verbs(src)
 
 	//Languages
@@ -825,7 +825,7 @@ var/list/ai_verbs_default = list(
 	return 0
 
 /mob/living/silicon/ai/proc/is_in_chassis()
-	return istype(loc, /turf)
+	return isturf(loc)
 
 /mob/living/silicon/ai/proc/open_nearest_door(mob/living/target) // Rykka ports AI opening doors
 	if(!istype(target))

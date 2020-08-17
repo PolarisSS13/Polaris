@@ -114,7 +114,7 @@
 	color_weight = 20
 
 /datum/reagent/paint/touch_turf(var/turf/T)
-	if(istype(T) && !istype(T, /turf/space))
+	if(istype(T) && !isspace(T))
 		T.color = color
 
 /datum/reagent/paint/touch_obj(var/obj/O)
@@ -262,7 +262,7 @@
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
 	if(volume >= 3)
-		if(!istype(T, /turf/space))
+		if(!isspace(T))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
 			if(!glow)
 				new /obj/effect/decal/cleanable/greenglow(T)
@@ -378,7 +378,7 @@
 
 /datum/reagent/space_cleaner/touch_turf(var/turf/T)
 	if(volume >= 1)
-		if(istype(T, /turf/simulated))
+		if(issimulated(T))
 			var/turf/simulated/S = T
 			S.dirt = 0
 		T.clean_blood()

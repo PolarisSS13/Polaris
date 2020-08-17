@@ -54,7 +54,7 @@
 
 /obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel/New(newLoc, amt = 1, d = 0)
 	set_dir(d) //Setting this direction means you won't get torched by your own flamethrower.
-	if(istype(newLoc, /turf/simulated))
+	if(issimulated(newLoc))
 		var/turf/simulated/T = newLoc
 		T.hotspot_expose((T20C*2) + 380,500) //Ignite the fuel.
 	. = ..()

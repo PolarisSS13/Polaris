@@ -27,7 +27,7 @@
 			if (is_type_in_list(T,blockedturfs))
 				//check neighbors of T
 				for(var/i in orange(1, T))
-					if(istype(i, /turf/simulated) && !is_type_in_list(i,blockedturfs))
+					if(issimulated(i) && !is_type_in_list(i,blockedturfs))
 						out += T
 						break
 	return out

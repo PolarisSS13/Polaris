@@ -404,7 +404,7 @@ turf/simulated/mineral/floor/light_corner
 			return
 
 		if (istype(W, /obj/item/weapon/pickaxe))
-			if(!istype(user.loc, /turf))
+			if(!isturf(user.loc))
 				return
 
 			var/obj/item/weapon/pickaxe/P = W

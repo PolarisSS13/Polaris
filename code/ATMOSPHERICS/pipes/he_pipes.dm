@@ -91,7 +91,7 @@
 		if(leaking)
 			parent.mingle_with_turf(loc, volume)
 		var/datum/gas_mixture/pipe_air = return_air()
-		if(istype(loc, /turf/simulated/))
+		if(issimulated(loc))
 			var/environment_temperature = 0
 			if(loc:blocks_air)
 				environment_temperature = loc:temperature
@@ -100,7 +100,7 @@
 				environment_temperature = environment.temperature
 			if(abs(environment_temperature-pipe_air.temperature) > minimum_temperature_difference)
 				parent.temperature_interact(loc, volume, thermal_conductivity)
-		else if(istype(loc, /turf/space/))
+		else if(isspace(loc))
 			parent.radiate_heat_to_space(surface, 1)
 
 		if(has_buckled_mobs())

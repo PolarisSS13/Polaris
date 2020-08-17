@@ -77,7 +77,7 @@
 		..()
 		if (usr.stat)
 			return
-		if ((usr.contents.Find(src)) || ((in_range(src, usr) && istype(src.loc, /turf))))
+		if ((usr.contents.Find(src)) || ((in_range(src, usr) && isturf(src.loc))))
 			usr.set_machine(src)
 			if (href_list["tracking_id"])
 				var/obj/item/weapon/implant/tracking/T = src.case.imp

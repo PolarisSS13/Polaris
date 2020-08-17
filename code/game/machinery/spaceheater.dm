@@ -120,7 +120,7 @@
 /obj/machinery/space_heater/Topic(href, href_list)
 	if(usr.stat)
 		return
-	if((in_range(src, usr) && istype(src.loc, /turf)) || (isrobot(usr)))
+	if((in_range(src, usr) && isturf(src.loc)) || (isrobot(usr)))
 		usr.set_machine(src)
 
 		switch(href_list["op"])

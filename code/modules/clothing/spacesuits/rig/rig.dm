@@ -436,7 +436,7 @@
 			return cryo.air_contents.temperature
 
 	var/turf/T = get_turf(src)
-	if(istype(T, /turf/space))
+	if(isspace(T))
 		return 0	//space has no temperature, this just makes sure the cooling unit works in space
 
 	var/datum/gas_mixture/environment = T.return_air()
@@ -1023,7 +1023,7 @@
 	if(wearer.transforming || !wearer.canmove)
 		return
 
-	if((istype(wearer.loc, /turf/space)) || (wearer.lastarea.has_gravity == 0))
+	if((isspace(wearer.loc)) || (wearer.lastarea.has_gravity == 0))
 		if(!wearer.Process_Spacemove(0))
 			return 0
 
@@ -1063,7 +1063,7 @@
 			return
 
 	if(wearer.pulledby || wearer.buckled) // Wheelchair driving!
-		if(istype(wearer.loc, /turf/space))
+		if(isspace(wearer.loc))
 			return // No wheelchair driving in space
 		if(istype(wearer.pulledby, /obj/structure/bed/chair/wheelchair))
 			return wearer.pulledby.relaymove(wearer, direction)

@@ -183,7 +183,7 @@ turf/proc/hotspot_expose(exposed_temperature, exposed_volume, soh = 0)
 /obj/fire/New(newLoc,fl)
 	..()
 
-	if(!istype(loc, /turf))
+	if(!isturf(loc))
 		qdel(src)
 		return
 

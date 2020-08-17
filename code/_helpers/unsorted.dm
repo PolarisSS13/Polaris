@@ -788,7 +788,7 @@ proc/GaussRandRound(var/sigma,var/roundto)
 				if(C_src.x_pos == C_trg.x_pos && C_src.y_pos == C_trg.y_pos)
 
 					//You can stay, though.
-					if(istype(T,/turf/space))
+					if(isspace(T))
 						refined_src -= T
 						refined_trg -= B
 						continue moving

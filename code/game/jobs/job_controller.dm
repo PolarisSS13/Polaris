@@ -339,7 +339,7 @@ var/global/datum/controller/occupations/job_master
 				S = pick(possible_spawns)
 			if(!S)
 				S = locate("start*[rank]") // use old stype
-			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
+			if(istype(S, /obj/effect/landmark/start) && isturf(S.loc))
 				H.forceMove(S.loc)
 			else
 				var/list/spawn_props = LateSpawn(H.client, rank)

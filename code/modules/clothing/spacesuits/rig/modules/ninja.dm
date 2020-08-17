@@ -99,7 +99,7 @@
 
 	var/mob/living/carbon/human/H = holder.wearer
 
-	if(!istype(H.loc, /turf))
+	if(!isturf(H.loc))
 		to_chat(H, "<span class='warning'>You cannot teleport out of your current location.</span>")
 		return 0
 

@@ -119,7 +119,7 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /turf/MouseDrop_T(atom/movable/O as mob|obj, mob/user as mob)
 	var/turf/T = get_turf(user)
 	var/area/A = T.loc
-	if((istype(A) && !(A.has_gravity)) || (istype(T,/turf/space)))
+	if((istype(A) && !(A.has_gravity)) || (isspace(T)))
 		return
 	if(istype(O, /obj/screen))
 		return
@@ -260,7 +260,7 @@ turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 /turf/proc/clean(atom/source, mob/user)
 	if(source.reagents.has_reagent("water", 1) || source.reagents.has_reagent("cleaner", 1))
 		clean_blood()
-		if(istype(src, /turf/simulated))
+		if(issimulated(src))
 			var/turf/simulated/T = src
 			T.dirt = 0
 		for(var/obj/effect/O in src)

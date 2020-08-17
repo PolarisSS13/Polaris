@@ -118,7 +118,7 @@
 		if(carded_ai)
 			to_chat(user, "<span class='danger'>Transfer failed:</span> Existing AI found on remote device. Remove existing AI to install a new one.")
 			return 0
-		if(istype(ai.loc, /turf/))
+		if(isturf(ai.loc))
 			new /obj/structure/AIcore/deactivated(get_turf(ai))
 
 		ai.carded = 1
@@ -143,7 +143,7 @@
 	return 1
 
 /obj/item/device/aicard/proc/clear()
-	if(carded_ai && istype(carded_ai.loc, /turf))
+	if(carded_ai && isturf(carded_ai.loc))
 		carded_ai.canmove = 0
 		carded_ai.carded = 0
 	name = initial(name)

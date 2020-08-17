@@ -434,7 +434,7 @@
 /obj/machinery/computer/scan_consolenew/Topic(href, href_list)
 	if(..())
 		return 0 // don't update uis
-	if(!istype(usr.loc, /turf))
+	if(!isturf(usr.loc))
 		return 0 // don't update uis
 	if(!src || !src.connected)
 		return 0 // don't update uis

@@ -45,7 +45,7 @@
 	else if(istype(target,/obj/effect/decal/cleanable))
 		to_chat(user, "<span class='notice'>You scrub \the [target.name] out.</span>")
 		qdel(target)
-	else if(istype(target,/turf))
+	else if(isturf(target))
 		to_chat(user, "<span class='notice'>You scrub \the [target.name] clean.</span>")
 		var/turf/T = target
 		T.clean(src, user)

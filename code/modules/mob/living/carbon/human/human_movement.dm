@@ -4,7 +4,7 @@
 
 	. = 0
 
-	if (istype(loc, /turf/space))
+	if (isspace(loc))
 		return ..() - 1
 
 	if(species.slowdown)
