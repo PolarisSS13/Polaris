@@ -44,7 +44,11 @@
 		if (isturf(T))
 			loc = T.loc
 			if (isarea(loc))
+<<<<<<< refs/remotes/PolarisSS13/master
 				if (!loc.power_equip && !isitem(src.loc) && !APU_power)
+=======
+				if (!loc.power_equip && !istype(src.loc,/obj/item) && !APU_power)
+>>>>>>> I. Should Be. Done.
 					blind = 1
 
 		if (!blind)
@@ -165,7 +169,11 @@
 		return 0
 	var/turf/T = get_turf(src)
 	var/area/A = get_area(src)
+<<<<<<< refs/remotes/PolarisSS13/master
 	return ((!A.power_equip) && A.requires_power == 1 || isspace(T)) && !isitem(src.loc)
+=======
+	return ((!A.power_equip) && A.requires_power == 1 || isspace(T)) && !istype(src.loc,/obj/item)
+>>>>>>> I. Should Be. Done.
 
 /mob/living/silicon/ai/updatehealth()
 	if(status_flags & GODMODE)

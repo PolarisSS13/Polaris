@@ -121,10 +121,14 @@
 	if(usr.stat)
 		return
 <<<<<<< refs/remotes/PolarisSS13/master
+<<<<<<< refs/remotes/PolarisSS13/master
 	if((in_range(src, usr) && isturf(src.loc)) || (isrobot(usr)))
 =======
 	if((in_range(src, usr) && istype(src.loc, /turf)) || (isrobot(usr)))
 >>>>>>> Most /obj/ helpers done
+=======
+	if((in_range(src, usr) && isturf(src.loc)) || (isrobot(usr)))
+>>>>>>> I. Should Be. Done.
 		usr.set_machine(src)
 
 		switch(href_list["op"])

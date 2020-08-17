@@ -150,10 +150,14 @@
 	if(..())
 		return
 <<<<<<< refs/remotes/PolarisSS13/master
+<<<<<<< refs/remotes/PolarisSS13/master
 	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isAI(usr)))
 =======
 	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isAI(usr)))
 >>>>>>> Most /obj/ helpers done
+=======
+	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isAI(usr)))
+>>>>>>> I. Should Be. Done.
 		usr.set_machine(src)
 		if(href_list["toggleUV"])
 			toggleUV(usr)
