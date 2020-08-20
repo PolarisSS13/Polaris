@@ -356,10 +356,10 @@
 		to_chat(src,"<span class='warning'>You must be awake and standing to perform this action!</span>")
 		return
 	var/obj/item/organ/external/head/E = organs_by_name[BP_HEAD]
-	var/datum/robolimb/robohead = all_robolimbs[E.model]
 	if(!E)
 		to_chat(src,"<span class='warning'>You don't seem to have a head!</span>")
 		return
+	var/datum/robolimb/robohead = all_robolimbs[E.model]
 	if(!robohead.monitor_styles || !robohead.monitor_icon)
 		to_chat(src,"<span class='warning'>Your head doesn't have a monitor or it doens't support to be changed!</span>")
 		return
