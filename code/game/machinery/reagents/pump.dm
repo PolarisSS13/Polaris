@@ -2,6 +2,12 @@
 /obj/machinery/pump
 	name = "fluid pump"
 	desc = "A fluid pumping machine."
+
+	description_info = "A machine that can pump fluid from certain turfs.<br>\
+	Water can be pumped from any body of water. Certain locations or environmental\
+	conditions  can cause different byproducts to be produced.<br>\
+	Magma or Lava can be pumped to produce mineralized fluid."
+
 	anchored = 0
 	density = 1
 
@@ -127,7 +133,10 @@
 
 /obj/machinery/pump/power_change()
 	if(!cell || cell.charge < (use * CELLRATE) || !anchored)
-		turn_off(1)
+		return turn_off(1)
+
+	return FALSE
+
 
 // Returns 0 on failure and 1 on success
 /obj/machinery/pump/proc/turn_on(var/loud = 0)
@@ -148,6 +157,11 @@
 	update_icon()
 	if(loud)
 		visible_message("<span class='notice'>\The [src] shuts down.</span>")
+
+	if(!on)
+		return TRUE
+
+	return FALSE
 
 /obj/machinery/pump/attack_ai(mob/user as mob)
 	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))

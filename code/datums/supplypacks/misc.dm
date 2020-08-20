@@ -185,6 +185,6 @@
 	contains = list(
 			/obj/machinery/pump = 1
 			)
-	cost = 120
+	cost = 60
 	containertype = /obj/structure/closet/crate/large/xion
 	containername = "pump crate"

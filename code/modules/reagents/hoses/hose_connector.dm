@@ -2,7 +2,14 @@
 /obj/item/stack/hose
 	name = "plastic tubing"
 	singular_name = "plastic tube"
-	desc = "A tube of paste containing swarms of repair nanites. Very effective in repairing robotic machinery."
+	desc = "A non-reusable plastic tube for moving reagents to and fro. It looks flimsy."
+
+	description_info = "This tubing may be used to join two hose sockets, if able.<br>\
+	Clicking on an object with a connector, such as a water tank, will display a list of possible sockets.<br>\
+	Neutral can link to all socket types, and Input/Output sockets can link to all but their own type.<br><br>\
+	<span class='warning'>This hose does not stretch. The maximum distance you can move two objects from eachother\
+	without snapping the tube is determined by distance upon connection.</span>"
+
 	icon = 'icons/obj/machines/reagent.dmi'
 	icon_state = "hose"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 1)
@@ -45,6 +52,7 @@
 				if(distancetonode > world.view)
 					to_chat(user, "<span class='notice'>\The [src] would probably burst if it were this long.</span>")
 				else if(distancetonode <= amount)
+					to_chat(user, "<span class='notice'>You join \the [remembered] to \the [AC]")
 					remembered.setup_hoses(AC)
 					use(distancetonode)
 					remembered = null
@@ -66,6 +74,7 @@
 						if(distancetonode > world.view)
 							to_chat(user, "<span class='notice'>\The [src] would probably burst if it were this long.</span>")
 						else if(distancetonode <= amount)
+							to_chat(user, "<span class='notice'>You join \the [remembered] to \the [CC]")
 							remembered.setup_hoses(CC)
 							use(distancetonode)
 							remembered = null

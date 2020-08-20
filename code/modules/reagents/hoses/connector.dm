@@ -1,4 +1,39 @@
 
+/obj/attackby(var/obj/item/O, var/mob/user)
+	. = ..()
+
+	if(locate(/obj/item/hose_connector) in src)
+		if(O.is_wirecutter())
+			var/list/available_sockets = list()
+
+			for(var/obj/item/hose_connector/HC in src)
+				if(HC.my_hose)
+					available_sockets |= HC
+
+			if(LAZYLEN(available_sockets))
+				if(available_sockets.len == 1)
+					var/obj/item/hose_connector/AC = available_sockets[1]
+					var/choice = alert("Are you sure you want to disconnect [AC]?", "Confirm", "Yes", "No")
+
+					if(choice == "Yes" && Adjacent(user))
+						visible_message("[user] disconnects \the hose from \the [src].")
+						AC.my_hose.disconnect()
+					return
+
+			else
+
+				var/choice = input("Select a target hose connector.", "Socket Disconnect", null) as null|anything in available_sockets
+
+				if(choice)
+					var/obj/item/hose_connector/AC = choice
+					var/confirm = alert("Are you sure you want to disconnect [AC]?", "Confirm", "Yes", "No")
+
+					if(confirm == "Yes" && Adjacent(user))
+						visible_message("[user] disconnects \the hose from \the [src].")
+						AC.my_hose.disconnect()
+
+				return
+
 /obj/item/hose_connector
 	name = "hose connector"
 	desc = "A socket for a hose. It.. doesn't do anything on its own."

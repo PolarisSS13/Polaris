@@ -208,7 +208,7 @@
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/hosed
 	name = "hose nozzle"
-	desc = "A heavy spray nozzle that can be attached to a hose."
+	desc = "A heavy spray nozzle that must be attached to a hose."
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "cleaner-industrial"
 	item_state = "cleaner"
@@ -240,11 +240,7 @@
 		add_overlay(hose_overlay)
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/hosed/AltClick(mob/living/carbon/user)
-	if(spray_particles < 3)
-		spray_particles++
-
-	else
-		spray_particles = 1
+	if(++spray_particles > 3) spray_particles = 1
 
 	to_chat(user, "<span class='notice'>You turn the dial on \the [src] to [spray_particles].</span>")
 	return
@@ -257,13 +253,18 @@
 
 /obj/item/weapon/reagent_containers/spray/chemsprayer/hosed/Spray_at(atom/A as mob|obj)
 	update_icon()
-	if(!heavy_spray)
-		var/direction = get_dir(src, A)
-		var/turf/T = get_turf(A)
-		var/turf/T1 = get_step(T,turn(direction, 90))
-		var/turf/T2 = get_step(T,turn(direction, -90))
-		var/list/the_targets = list(T, T1, T2)
 
+	var/direction = get_dir(src, A)
+	var/turf/T = get_turf(A)
+	var/turf/T1 = get_step(T,turn(direction, 90))
+	var/turf/T2 = get_step(T,turn(direction, -90))
+	var/list/the_targets = list(T, T1, T2)
+
+	if(src.reagents.total_volume < 1)
+		to_chat(usr, "<span class='notice'>\The [src] is empty.</span>")
+		return
+
+	if(!heavy_spray)
 		for(var/a = 1 to 3)
 			spawn(0)
 				if(reagents.total_volume < 1) break
@@ -279,18 +280,7 @@
 		return
 
 	else
-		var/direction = get_dir(src, A)
-		if (src.reagents.total_volume < 1)
-			to_chat(usr, "<span class='notice'>\The [src] is empty.</span>")
-			return
-
 		playsound(src, 'sound/effects/extinguish.ogg', 75, 1, -3)
-
-		var/turf/T = get_turf(A)
-		var/turf/T1 = get_step(T,turn(direction, 90))
-		var/turf/T2 = get_step(T,turn(direction, -90))
-
-		var/list/the_targets = list(T,T1,T2)
 
 		for(var/a = 1 to spray_particles)
 			spawn(0)
