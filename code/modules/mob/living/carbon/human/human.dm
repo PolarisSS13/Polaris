@@ -253,20 +253,14 @@
 	return
 
 // called when something steps onto a human
-// this handles mulebots and vehicles
-// and now mobs on fire
+// this handles mobs on fire - mulebot and vehicle code has been relocated to /mob/living/Crossed()
 /mob/living/carbon/human/Crossed(var/atom/movable/AM)
 	if(AM.is_incorporeal())
 		return
-	if(istype(AM, /mob/living/bot/mulebot))
-		var/mob/living/bot/mulebot/MB = AM
-		MB.runOver(src)
-
-	if(istype(AM, /obj/vehicle))
-		var/obj/vehicle/V = AM
-		V.RunOver(src)
 
 	spread_fire(AM)
+	
+	..() // call parent because we moved behavior to parent
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
@@ -1565,6 +1559,13 @@
 			status_flags &= ~HIDING
 		else
 			layer = HIDING_LAYER
+
+/mob/living/carbon/human/examine_icon()
+	var/icon/I = get_cached_examine_icon(src)
+	if(!I)
+		I = getFlatIcon(src, defdir = SOUTH, no_anim = TRUE)
+		set_cached_examine_icon(src, I, 50 SECONDS)
+	return I
 
 /mob/living/carbon/human/proc/get_display_species()
 	//Shows species in tooltip

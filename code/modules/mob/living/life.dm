@@ -45,8 +45,8 @@
 	//Check if we're on fire
 	handle_fire()
 	
-	// Handle re-running ambience to mobs if they've remained in an area.
-	handle_ambience()
+	if(client)	// Handle re-running ambience to mobs if they've remained in an area, AND have an active client assigned to them.
+		handle_ambience()
 	
 	//stuff in the stomach
 	handle_stomach()
@@ -95,7 +95,7 @@
 	if(world.time >= (lastareachange + 30 SECONDS)) // Every 30 seconds, we're going to run a 35% chance to play ambience.
 		var/area/A = get_area(src)
 		if(A)
-			A.play_ambience(src)
+			A.play_ambience(src, initial = FALSE)
 
 /mob/living/proc/update_pulling()
 	if(pulling)
@@ -127,11 +127,17 @@
 /mob/living/proc/handle_stunned()
 	if(stunned)
 		AdjustStunned(-1)
+		throw_alert("stunned", /obj/screen/alert/stunned)
+	else
+		clear_alert("stunned")
 	return stunned
 
 /mob/living/proc/handle_weakened()
 	if(weakened)
 		AdjustWeakened(-1)
+		throw_alert("weakened", /obj/screen/alert/weakened)
+	else
+		clear_alert("weakened")
 	return weakened
 
 /mob/living/proc/handle_stuttering()
@@ -147,6 +153,9 @@
 /mob/living/proc/handle_drugged()
 	if(druggy)
 		druggy = max(druggy-1, 0)
+		throw_alert("high", /obj/screen/alert/high)
+	else
+		clear_alert("high")
 	return druggy
 
 /mob/living/proc/handle_slurring()
@@ -157,11 +166,17 @@
 /mob/living/proc/handle_paralysed()
 	if(paralysis)
 		AdjustParalysis(-1)
+		throw_alert("paralyzed", /obj/screen/alert/paralyzed)
+	else
+		clear_alert("paralyzed")
 	return paralysis
 
 /mob/living/proc/handle_confused()
 	if(confused)
 		AdjustConfused(-1)
+		throw_alert("confused", /obj/screen/alert/confused)
+	else
+		clear_alert("confused")
 	return confused
 
 /mob/living/proc/handle_disabilities()
