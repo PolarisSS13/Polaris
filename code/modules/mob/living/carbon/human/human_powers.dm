@@ -210,8 +210,7 @@
 
 	to_chat(src, "<span class='notice'>Performing self-diagnostic, please wait...</span>")
 
-	spawn()
-		sleep(50)
+	spawn(50)
 		var/output = "<span class='notice'>Self-Diagnostic Results:\n</span>"
 
 		output += "Internal Temperature: [convert_k2c(bodytemperature)] Degrees Celsius\n"

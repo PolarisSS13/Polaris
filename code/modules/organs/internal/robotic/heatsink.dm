@@ -7,7 +7,7 @@
 
 /obj/item/organ/internal/robotic/heatsink/handle_organ_proc_special()
 	if(owner && owner.stat != DEAD)
-		owner.bodytemperature += round(owner.robobody_count * 0.9)
+		owner.bodytemperature += round(owner.robobody_count * 0.75, 0.1)
 
 		var/thermostat = owner.species.body_temperature
 		var/turf/T = get_turf(src)
