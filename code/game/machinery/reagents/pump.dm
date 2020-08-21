@@ -113,7 +113,7 @@
 		return
 
 	if(!cell || (cell.charge < (use * CELLRATE / efficiency)))
-		turn_off(1)
+		turn_off(TRUE)
 		return
 
 	handle_pumping()
@@ -133,7 +133,7 @@
 
 /obj/machinery/pump/power_change()
 	if(!cell || cell.charge < (use * CELLRATE) || !anchored)
-		return turn_off(1)
+		return turn_off(TRUE)
 
 	return FALSE
 
@@ -168,7 +168,7 @@
 		return attack_hand(user)
 
 	if(on)
-		turn_off(1)
+		turn_off(TRUE)
 	else
 		if(!turn_on(1))
 			to_chat(user, "<span class='notice'>You try to turn on \the [src] but it does not work.</span>")
@@ -193,7 +193,7 @@
 		return
 
 	if(on)
-		turn_off(1)
+		turn_off(TRUE)
 	else if(anchored)
 		if(!turn_on(1))
 			to_chat(user, "<span class='notice'>You try to turn on \the [src] but it does not work.</span>")
