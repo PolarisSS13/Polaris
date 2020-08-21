@@ -616,11 +616,6 @@
 /datum/reagent/frostoil/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed) // Eating frostoil now acts like capsaicin. Wee!
 	if(alien == IS_DIONA)
 		return
-	if(alien == IS_ALRAUNE) // VOREStation Edit: It wouldn't affect plants that much.
-		if(prob(5))
-			to_chat(M, "<span class='rose'>You feel a chilly, tingling sensation in your mouth.</span>")
-		M.bodytemperature -= rand(10, 25)
-		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
