@@ -189,7 +189,7 @@
 					step_towards(D,trg)
 
 					for(var/mob/living/M in D.loc)
-						if(!istype(M,/mob/living)) continue
+						if(!isliving(M)) continue
 						if(M == user) continue
 						for(var/mob/O in viewers(world.view, D))
 							O.show_message(text("<span class='warning'>\The [] was hit by the foam dart!</span>", M), 1)
@@ -297,7 +297,7 @@
 	cut_overlays()		//So that it doesn't keep stacking overlays non-stop on top of each other
 	if(active)
 		add_overlay(blade_overlay)
-	if(istype(usr,/mob/living/carbon/human))
+	if(ishuman(usr))
 		var/mob/living/carbon/human/H = usr
 		H.update_inv_l_hand()
 		H.update_inv_r_hand()
