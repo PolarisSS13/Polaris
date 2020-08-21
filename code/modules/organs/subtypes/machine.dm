@@ -25,7 +25,7 @@
 /obj/item/organ/internal/cell/machine/handle_organ_proc_special()
 	..()
 	if(owner && owner.stat != DEAD)
-		owner.bodytemperature += round(owner.robobody_count * 0.5)
+		owner.bodytemperature += round(owner.robobody_count * 0.5, 0.1)
 
 	return
 
@@ -59,7 +59,7 @@
 	return
 
 /obj/item/organ/internal/mmi_holder/proc/get_control_efficiency()
-	. = max(0, 1 - (round(damage / max_damage * 10) / 10))
+	. = max(0, 1 - round(damage / max_damage, 0.1))
 
 	return .
 
