@@ -216,15 +216,7 @@ What a mess.*/
 		active1 = null
 	if (!( data_core.security.Find(active2) ))
 		active2 = null
-<<<<<<< refs/remotes/PolarisSS13/master
-<<<<<<< refs/remotes/PolarisSS13/master
 	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(loc))) || (isrobot(usr)))
-=======
-	if ((usr.contents.Find(src) || (in_range(src, usr) && istype(loc, /turf))) || (isrobot(usr)))
->>>>>>> Most /obj/ helpers done
-=======
-	if ((usr.contents.Find(src) || (in_range(src, usr) && isturf(loc))) || (isrobot(usr)))
->>>>>>> I. Should Be. Done.
 		usr.set_machine(src)
 		switch(href_list["choice"])
 // SORTING!

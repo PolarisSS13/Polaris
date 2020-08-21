@@ -168,16 +168,7 @@ FIRE ALARM
 	..()
 	if(usr.stat || stat & (BROKEN | NOPOWER))
 		return
-
-<<<<<<< refs/remotes/PolarisSS13/master
-<<<<<<< refs/remotes/PolarisSS13/master
 	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isrobot(usr)))
-=======
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(src.loc, /turf))) || (isrobot(usr)))
->>>>>>> Most /obj/ helpers done
-=======
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(src.loc))) || (isrobot(usr)))
->>>>>>> I. Should Be. Done.
 		usr.set_machine(src)
 		if(href_list["reset"])
 			reset()
@@ -310,15 +301,7 @@ Just a object used in constructing fire alarms
 	..()
 	if(usr.stat || stat & (BROKEN|NOPOWER))
 		return
-<<<<<<< refs/remotes/PolarisSS13/master
-<<<<<<< refs/remotes/PolarisSS13/master
 	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(loc))) || (isAI(usr)))
-=======
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && istype(loc, /turf))) || (isAI(usr)))
->>>>>>> Most /obj/ helpers done
-=======
-	if((usr.contents.Find(src) || ((get_dist(src, usr) <= 1) && isturf(loc))) || (isAI(usr)))
->>>>>>> I. Should Be. Done.
 		usr.machine = src
 		if(href_list["reset"])
 			reset()
