@@ -24,6 +24,9 @@ datum/preferences
 	var/tooltipstyle = "Midnight"		//Style for popup tooltips
 	var/client_fps = 0
 
+	var/tgui_fancy = TRUE
+	var/tgui_lock = FALSE
+
 	//character preferences
 	var/real_name						//our character's name
 	var/be_random_name = 0				//whether we are a random name every round
@@ -137,6 +140,8 @@ datum/preferences
 
 	var/examine_text_mode = 0 // Just examine text, include usage (description_info), switch to examine panel.
 	var/multilingual_mode = 0 // Default behaviour, delimiter-key-space, delimiter-key-delimiter, off
+
+	var/list/volume_channels = list()
 
 
 /datum/preferences/New(client/C)
