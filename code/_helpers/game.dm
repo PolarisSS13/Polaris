@@ -280,7 +280,7 @@
 	var/list/hearturfs = list()
 
 	for(var/thing in hear)
-		if(isobj(thing)) //Can't use isobj() because /atom/movable returns true in that, and so lighting overlays would be included
+		if(istype(thing, /obj)) //Can't use isobj() because /atom/movable returns true in that, and so lighting overlays would be included
 			objs += thing
 			hearturfs |= get_turf(thing)
 		if(ismob(thing))
