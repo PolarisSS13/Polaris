@@ -62,46 +62,46 @@
 
 // Neat little volume adjuster thing in case you don't wanna touch preferences by hand you lazy fuck
 // Currently unimplemented due to lack of TGUI v4
-// /datum/volume_panel
-// /datum/volume_panel/tgui_state(mob/user)
-// 	return GLOB.tgui_always_state
+/datum/volume_panel
+/datum/volume_panel/tgui_state(mob/user)
+	return GLOB.tgui_always_state
 
-// /datum/volume_panel/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
-// 	ui = SStgui.try_update_ui(user, src, ui)
-// 	if(!ui)
-// 		ui = new(user, src, "VolumePanel", "Volume Panel")
-// 		ui.open()
+/datum/volume_panel/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "VolumePanel", "Volume Panel")
+		ui.open()
 
-// /datum/volume_panel/tgui_data(mob/user)
-// 	if(!user.client || !user.client.prefs)
-// 		return list("error" = TRUE)
+/datum/volume_panel/tgui_data(mob/user)
+	if(!user.client || !user.client.prefs)
+		return list("error" = TRUE)
 	
-// 	var/list/data = ..()
-// 	data["volume_channels"] = user.client.prefs.volume_channels
-// 	return data
+	var/list/data = ..()
+	data["volume_channels"] = user.client.prefs.volume_channels
+	return data
 
-// /datum/volume_panel/tgui_act(action, params)
-// 	if(..())
-// 		return TRUE
+/datum/volume_panel/tgui_act(action, params)
+	if(..())
+		return TRUE
 
-// 	if(!usr?.client?.prefs)
-// 		return TRUE
+	if(!usr?.client?.prefs)
+		return TRUE
 
-// 	var/datum/preferences/P = usr.client.prefs
-// 	switch(action)
-// 		if("adjust_volume")
-// 			var/channel = params["channel"]
-// 			if(channel in P.volume_channels)
-// 				P.volume_channels["[channel]"] = clamp(params["vol"], 0, 2)
-// 				SScharacter_setup.queue_preferences_save(P)
-// 				return TRUE
+	var/datum/preferences/P = usr.client.prefs
+	switch(action)
+		if("adjust_volume")
+			var/channel = params["channel"]
+			if(channel in P.volume_channels)
+				P.volume_channels["[channel]"] = clamp(params["vol"], 0, 2)
+				SScharacter_setup.queue_preferences_save(P)
+				return TRUE
 
-// /client/verb/volume_panel()
-// 	set name = "Volume Panel"
-// 	set category = "Preferences"
-// 	set desc = "Allows you to adjust volume levels on the fly."
+/client/verb/volume_panel()
+	set name = "Volume Panel"
+	set category = "Preferences"
+	set desc = "Allows you to adjust volume levels on the fly."
 
-// 	if(!volume_panel)
-// 		volume_panel = new(src)
+	if(!volume_panel)
+		volume_panel = new(src)
 
-// 	volume_panel.tgui_interact(mob)
+	volume_panel.tgui_interact(mob)
