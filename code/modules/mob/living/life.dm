@@ -44,7 +44,10 @@
 
 	//Check if we're on fire
 	handle_fire()
-
+	
+	if(client)	// Handle re-running ambience to mobs if they've remained in an area, AND have an active client assigned to them.
+		handle_ambience()
+	
 	//stuff in the stomach
 	handle_stomach()
 
@@ -88,6 +91,12 @@
 /mob/living/proc/handle_stomach()
 	return
 
+/mob/living/proc/handle_ambience() // If you're in an ambient area and have not moved out of it for x time, we're going to play ambience again to you, to help break up the silence.
+	if(world.time >= (lastareachange + 30 SECONDS)) // Every 30 seconds, we're going to run a 35% chance to play ambience.
+		var/area/A = get_area(src)
+		if(A)
+			A.play_ambience(src, initial = FALSE)
+
 /mob/living/proc/update_pulling()
 	if(pulling)
 		if(incapacitated())
@@ -118,11 +127,17 @@
 /mob/living/proc/handle_stunned()
 	if(stunned)
 		AdjustStunned(-1)
+		throw_alert("stunned", /obj/screen/alert/stunned)
+	else
+		clear_alert("stunned")
 	return stunned
 
 /mob/living/proc/handle_weakened()
 	if(weakened)
-		weakened = max(weakened-1,0)
+		AdjustWeakened(-1)
+		throw_alert("weakened", /obj/screen/alert/weakened)
+	else
+		clear_alert("weakened")
 	return weakened
 
 /mob/living/proc/handle_stuttering()
@@ -138,6 +153,9 @@
 /mob/living/proc/handle_drugged()
 	if(druggy)
 		druggy = max(druggy-1, 0)
+		throw_alert("high", /obj/screen/alert/high)
+	else
+		clear_alert("high")
 	return druggy
 
 /mob/living/proc/handle_slurring()
@@ -148,11 +166,17 @@
 /mob/living/proc/handle_paralysed()
 	if(paralysis)
 		AdjustParalysis(-1)
+		throw_alert("paralyzed", /obj/screen/alert/paralyzed)
+	else
+		clear_alert("paralyzed")
 	return paralysis
 
 /mob/living/proc/handle_confused()
 	if(confused)
 		AdjustConfused(-1)
+		throw_alert("confused", /obj/screen/alert/confused)
+	else
+		clear_alert("confused")
 	return confused
 
 /mob/living/proc/handle_disabilities()
@@ -165,7 +189,7 @@
 		throw_alert("blind", /obj/screen/alert/blind)
 	else
 		clear_alert("blind")
-	
+
 	if(eye_blurry)			//blurry eyes heal slowly
 		eye_blurry = max(eye_blurry-1, 0)
 
