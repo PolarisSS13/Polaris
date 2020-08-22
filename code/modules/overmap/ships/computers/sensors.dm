@@ -29,7 +29,7 @@
 	var/data[0]
 
 	data["viewing"] = viewing_overmap(user)
-	if(sensors)
+	if(sensors || find_sensors())
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
 		data["health"] = sensors.health
@@ -69,11 +69,13 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
-	if(..())
-		return TOPIC_HANDLED
+	if((. = ..()))
+		return
 
 	if (!linked)
-		return TOPIC_NOACTION
+		var/obj/effect/overmap/visitable/sector = get_overmap_sector(src.z)
+		if(!istype(sector) || !attempt_hook_up_recursive(sector))
+			return TOPIC_NOACTION
 
 	if (href_list["viewing"])
 		if(user && !isAI(user))
