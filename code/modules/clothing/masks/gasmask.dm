@@ -42,6 +42,23 @@
 	w_class = ITEMSIZE_SMALL
 	armor = list(melee = 10, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 55, rad = 0)
 
+//Turn it into a hailer mask
+/obj/item/clothing/mask/gas/half/attackby(obj/item/I, mob/user)
+	if(istype(I, /obj/item/device/hailer))
+		playsound(src, 'sound/items/Screwdriver.ogg', 100, 1)
+		var/obj/item/clothing/mask/gas/sechailer/N = new /obj/item/clothing/mask/gas/sechailer(src.loc)
+		user.put_in_active_hand(N)
+		N.fingerprints = src.fingerprints
+		N.fingerprintshidden = src.fingerprintshidden
+		N.fingerprintslast = src.fingerprintslast
+		N.suit_fibers = src.suit_fibers
+		N.hailer = I
+		I.loc = N
+		qdel(src)
+		user.put_in_active_hand(N)
+		return
+	..()
+
 //Plague Dr suit can be found in clothing/suits/bio.dm
 /obj/item/clothing/mask/gas/plaguedoctor
 	name = "plague doctor mask"
