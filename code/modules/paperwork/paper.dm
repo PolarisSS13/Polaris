@@ -32,6 +32,10 @@
 	var/list/offset_y[0] //usage by the photocopier
 	var/rigged = 0
 	var/spam_flag = 0
+	var/age = 0
+	var/last_modified_ckey
+	
+	var/was_maploaded = FALSE // This tracks if the paper was created on mapload.
 
 	var/const/deffont = "Verdana"
 	var/const/signfont = "Times New Roman"
@@ -100,6 +104,12 @@
 	return
 
 //lipstick wiping is in code/game/objects/items/weapons/cosmetics.dm!
+
+/obj/item/weapon/paper/Initialize(mapload)
+	. = ..()
+	
+	if(mapload) // Jank, but we do this to prevent maploaded papers from somehow stacking across rounds if re-added to the board by a player.
+		was_maploaded = TRUE
 
 /obj/item/weapon/paper/New()
 	..()
@@ -224,6 +234,15 @@
 										 "<span class='notice'>You wipe off [H]'s lipstick.</span>")
 					H.lip_style = null
 					H.update_icons_body()
+
+/obj/item/weapon/paper/proc/set_content(text,title)
+	if(title)
+		name = title
+	info = html_encode(text)
+	info = parsepencode(text)
+	update_icon()
+	update_space(info)
+	updateinfolinks()
 
 /obj/item/weapon/paper/proc/addtofield(var/id, var/text, var/links = 0)
 	var/locid = 0
@@ -446,6 +465,7 @@
 		//t = html_encode(t)
 		t = replacetext(t, "\n", "<BR>")
 		t = parsepencode(t, i, usr, iscrayon) // Encode everything from pencode to html
+		was_maploaded = FALSE // Set this to FALSE because a user has written on us. This is for persistence purposes.
 
 
 		if(fields > 50)//large amount of fields creates a heavy load on the server, see updateinfolinks() and addtofield()
@@ -458,6 +478,8 @@
 		else
 			info += t // Oh, he wants to edit to the end of the file, let him.
 			updateinfolinks()
+
+		last_modified_ckey = usr.ckey
 
 		update_space(t)
 
