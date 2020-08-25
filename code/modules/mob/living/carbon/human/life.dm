@@ -785,7 +785,21 @@
 			bodytemperature += round(robobody_count*0.5)
 
 	var/body_temperature_difference = species.body_temperature - bodytemperature
-
+	
+	var/hypotemp = min(species.cold_level_1+17.5,T0C+10) //People going into hypothermia in 20C might be a bit overboard.
+	if(bodytemperature < hypotemp)
+		add_hypothermia((hypotemp - bodytemperature)/60)
+	else 
+		//If we're above the hypothermia temperature, start recovering.
+		var/intermediate = (bodytemperature-hypotemp)/(species.body_temperature - hypotemp)
+		var/subhypo = 0
+		if(intermediate >= 1)
+			subhypo = 2.1
+		else
+			subhypo = intermediate*intermediate*intermediate*(6*intermediate*intermediate - 15*intermediate + 10)*2 + 0.1
+			//Smoothstep function of the fifth degree for only the smoothest transitions.
+		add_hypothermia(-subhypo)
+	
 	if (abs(body_temperature_difference) < 0.5)
 		return //fuck this precision
 
@@ -812,6 +826,37 @@
 		bodytemperature += recovery_amt
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
+/mob/living/carbon/human/proc/add_hypothermia(var/amount)
+	if(hypothermia+amount<=0)
+		hypothermia=0
+	else
+		if(hypothermia+amount>100)
+			hypothermia=100
+		hypothermia+=amount
+		if(hypothermia>5 && hypothermia<75)
+			if(prob(10))
+				say("*shiver")
+		if(hypothermia>30)
+			if(prob(50))
+				stuttering = hypothermia-25
+			if(hypothermia>50)
+				if(prob(40))
+					apply_effect(hypothermia-45,EYE_BLUR)
+				if(hypothermia>70)
+					if(prob(30))
+						Confuse(hypothermia-65)
+					if(hypothermia>80)
+						if(prob(15))
+							apply_effect(hypothermia-79,WEAKEN)
+						if(hypothermia>90)
+							if(prob(40))
+								apply_effect(50,DROWSY)
+							if(hypothermia>95)
+								if(prob(25))
+									apply_damage(3,BURN)
+		
+
+
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
