@@ -1,6 +1,6 @@
 
 var/list/dreams = list(
-	"an ID card","a bottle","a familiar face","a crewmember","a toolbox","a Security Officer","the Colony Director",
+	"an ID card","a bottle","a familiar face","a crewmember","a toolbox","a Security Officer","the Site Manager",
 	"voices from all around","deep space","a doctor","the engine","a traitor","an ally","darkness",
 	"light","a scientist","a monkey","a catastrophe","a loved one","a gun","warmth","freezing","the sun",
 	"a hat","the Luna","a ruined station","a planet","phoron","air","the medical bay","the bridge","blinking lights",
@@ -14,7 +14,7 @@ var/list/dreams = list(
 	"an Unathi","a Tajaran","the Station Intelligence core","the mining station","the research station","a beaker of strange liquid",
 	"a Teshari", "a Diona nymph","the supermatter","Major Bill","a Morpheus ship with a ridiculous name","the Exodus","a star",
 	"a Dionaea gestalt","the chapel","a distant scream","endless chittering noises","glowing eyes in the shadows","an empty glass",
-	"a disoriented Promethean","towers of plastic","a Gygax","a synthetic","a Man-Machine Interface","maintenance drones", 
+	"a disoriented Promethean","towers of plastic","a Gygax","a synthetic","a Man-Machine Interface","maintenance drones",
 	"unintelligible writings","a Fleet ship",
 	)
 
