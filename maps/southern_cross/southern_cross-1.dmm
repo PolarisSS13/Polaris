@@ -4279,7 +4279,7 @@
 "bEv" = (/obj/machinery/portable_atmospherics/canister/oxygen,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled/dark,/area/rnd/storage)
 "bEw" = (/obj/machinery/portable_atmospherics/canister/phoron,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled/dark,/area/rnd/storage)
 "bEx" = (/obj/machinery/portable_atmospherics/canister/nitrogen,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled/dark,/area/rnd/storage)
-"bEy" = (/obj/machinery/portable_atmospherics/canister/sleeping_agent,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled/dark,/area/rnd/storage)
+"bEy" = (/obj/machinery/portable_atmospherics/canister/nitrous_oxide,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/machinery/atmospherics/unary/vent_scrubber/on,/turf/simulated/floor/tiled/dark,/area/rnd/storage)
 "bEz" = (/obj/machinery/portable_atmospherics/canister/carbon_dioxide,/obj/effect/floor_decal/industrial/hatch/yellow,/obj/item/device/radio/intercom{dir = 4; name = "Station Intercom (General)"; pixel_x = 21},/turf/simulated/floor/tiled/dark,/area/rnd/storage)
 "bEA" = (/turf/simulated/wall/r_wall,/area/rnd/toxins_launch)
 "bEB" = (/obj/structure/cable/green{d1 = 1; d2 = 2; icon_state = "1-2"},/obj/machinery/door/firedoor/border_only,/obj/machinery/door/airlock/engineering{name = "Security Substation"; req_access = list(1); req_one_access = null},/turf/simulated/floor/plating,/area/maintenance/substation/security)

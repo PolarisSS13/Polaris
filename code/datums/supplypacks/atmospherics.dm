@@ -56,7 +56,7 @@
 	containername = "N2O gas canister crate"
 	containertype = /obj/structure/closet/crate/secure/large/aether
 	access = access_atmospherics
-	contains = list(/obj/machinery/portable_atmospherics/canister/sleeping_agent)
+	contains = list(/obj/machinery/portable_atmospherics/canister/nitrous_oxide)
 
 /datum/supply_pack/atmos/canister_carbon_dioxide
 	name = "Carbon dioxide gas canister"
