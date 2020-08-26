@@ -7,7 +7,6 @@
  *		Toy crossbow
  *		Toy swords
  *		Toy bosun's whistle
- *      Toy mechs
  *		Snap pops
  *		Water flower
  *      Therapy dolls
@@ -401,94 +400,6 @@
 		cooldown = world.time
 
 /*
- * Mech prizes
- */
-/obj/item/toy/prize
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "ripleytoy"
-	var/cooldown = 0
-	drop_sound = 'sound/mecha/mechstep.ogg'
-
-//all credit to skasi for toy mech fun ideas
-/obj/item/toy/prize/attack_self(mob/user as mob)
-	if(cooldown < world.time - 8)
-		to_chat(user, "<span class='notice'>You play with [src].</span>")
-		playsound(src, 'sound/mecha/mechstep.ogg', 20, 1)
-		cooldown = world.time
-
-/obj/item/toy/prize/attack_hand(mob/user as mob)
-	if(loc == user)
-		if(cooldown < world.time - 8)
-			to_chat(user, "<span class='notice'>You play with [src].</span>")
-			playsound(src, 'sound/mecha/mechturn.ogg', 20, 1)
-			cooldown = world.time
-			return
-	..()
-
-/obj/random/mech_toy
-	name = "Random Mech Toy"
-	desc = "This is a random mech toy."
-	icon = 'icons/obj/toy.dmi'
-	icon_state = "ripleytoy"
-
-/obj/random/mech_toy/item_to_spawn()
-	return pick(typesof(/obj/item/toy/prize))
-
-/obj/item/toy/prize/ripley
-	name = "toy ripley"
-	desc = "Mini-Mecha action figure! Collect them all! 1/11."
-
-/obj/item/toy/prize/fireripley
-	name = "toy firefighting ripley"
-	desc = "Mini-Mecha action figure! Collect them all! 2/11."
-	icon_state = "fireripleytoy"
-
-/obj/item/toy/prize/deathripley
-	name = "toy deathsquad ripley"
-	desc = "Mini-Mecha action figure! Collect them all! 3/11."
-	icon_state = "deathripleytoy"
-
-/obj/item/toy/prize/gygax
-	name = "toy gygax"
-	desc = "Mini-Mecha action figure! Collect them all! 4/11."
-	icon_state = "gygaxtoy"
-
-/obj/item/toy/prize/durand
-	name = "toy durand"
-	desc = "Mini-Mecha action figure! Collect them all! 5/11."
-	icon_state = "durandprize"
-
-/obj/item/toy/prize/honk
-	name = "toy H.O.N.K."
-	desc = "Mini-Mecha action figure! Collect them all! 6/11."
-	icon_state = "honkprize"
-
-/obj/item/toy/prize/marauder
-	name = "toy marauder"
-	desc = "Mini-Mecha action figure! Collect them all! 7/11."
-	icon_state = "marauderprize"
-
-/obj/item/toy/prize/seraph
-	name = "toy seraph"
-	desc = "Mini-Mecha action figure! Collect them all! 8/11."
-	icon_state = "seraphprize"
-
-/obj/item/toy/prize/mauler
-	name = "toy mauler"
-	desc = "Mini-Mecha action figure! Collect them all! 9/11."
-	icon_state = "maulerprize"
-
-/obj/item/toy/prize/odysseus
-	name = "toy odysseus"
-	desc = "Mini-Mecha action figure! Collect them all! 10/11."
-	icon_state = "odysseusprize"
-
-/obj/item/toy/prize/phazon
-	name = "toy phazon"
-	desc = "Mini-Mecha action figure! Collect them all! 11/11."
-	icon_state = "phazonprize"
-
-/*
  * Action figures
  */
 /obj/item/toy/figure
@@ -547,8 +458,8 @@
 	toysay = "Dude, I see colors..."
 
 /obj/item/toy/figure/captain
-	name = "Site Manager action figure"
-	desc = "A \"Space Life\" brand Site Manager action figure."
+	name = "Colony Director action figure"
+	desc = "A \"Space Life\" brand Colony Director action figure."
 	icon_state = "captain"
 	toysay = "How do I open this display case?"
 

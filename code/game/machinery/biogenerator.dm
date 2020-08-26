@@ -124,7 +124,6 @@
 					dat += "<A href='?src=\ref[src];action=create;item=cashbag;cost=400'>Cash Bag</A> <FONT COLOR=brown>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=chembag;cost=400'>Chemistry Bag</A> <FONT COLOR=green>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=workboots;cost=400'>Workboots</A> <FONT COLOR=brown>([round(400/build_eff)])</FONT><BR>"
-					dat += "<A href='?src=\ref[src];action=create;item=leathershoes;cost=400'>Leather Shoes</A> <FONT COLOR=brown>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=leatherchaps;cost=400'>Leather Chaps</A> <FONT COLOR=brown>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=leathercoat;cost=500'>Leather Coat</A> <FONT COLOR=brown>([round(500/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=leatherjacket;cost=500'>Leather Jacket</A> <FONT COLOR=brown>([round(500/build_eff)])</FONT><BR>"
@@ -261,8 +260,6 @@
 			new/mob/living/carbon/human/monkey(loc)
 		if("workboots")
 			new/obj/item/clothing/shoes/boots/workboots(loc)
-		if("leathershoes")
-			new/obj/item/clothing/shoes/leather(loc)
 		if("leatherchaps")
 			new/obj/item/clothing/under/pants/chaps
 		if("leathercoat")
