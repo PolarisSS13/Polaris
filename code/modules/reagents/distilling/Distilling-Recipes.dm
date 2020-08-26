@@ -128,6 +128,17 @@
 
 	temp_range = list(T0C + 100, T0C + 120)
 
+/datum/chemical_reaction/distilling/synthblood
+	name = "Distilling Synthblood"
+	id = "distill_synthblood"
+	result = "synthblood"
+	required_reagents = list("protein" = 2, "antibodies" = 1, "bicaridine" = 1)
+	result_amount = 3
+
+	reaction_rate = HALF_LIFE(10)
+
+	temp_range = list(T0C + 110, T0C + 130)
+
 // Alcohol
 /datum/chemical_reaction/distilling/beer
 	name = "Distilling Beer"

@@ -119,6 +119,8 @@
 	..()
 	if(data && !data["blood_type"])
 		data["blood_type"] = "O-"
+	if(data && data["species"])
+		data["species"] = null
 	return
 
 // pure concentrated antibodies
