@@ -791,7 +791,7 @@
 	icon_state = "hair_stail"
 	flags = HAIR_TIEABLE
 
-sideponytail4 //Not happy about this... but it's for the save files.
+/datum/sprite_accessory/hair/sideponytail4 //Not happy about this... but it's for the save files.
 	name = "Side Ponytail 2"
 	icon_state = "hair_ponytailf"
 	flags = HAIR_TIEABLE
@@ -853,7 +853,7 @@ sideponytail4 //Not happy about this... but it's for the save files.
 /datum/sprite_accessory/hair/thinningback
 	name = "Thinning Back"
 	icon_state = "hair_thinningrear"
-		flags = HAIR_VERY_SHORT
+	flags = HAIR_VERY_SHORT
 
 /datum/sprite_accessory/hair/topknot
 	name = "Topknot"
