@@ -4125,6 +4125,7 @@
 	description_fluff = "Despite the packaging, most SkrellSnax sold in Vir are produced using locally-grown, Qerr'Balak-native Go'moa fungi in controversial Skrell-owned biodomes on the suface of Sif. SkrellSnax were originally a product of Natuna, designed to welcome Ue-Katish refugees to their colony. The brand was recreated by Centauri Provisions after Natuna and SolGov broke off diplomatic relations."
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "skrellsnacks"
+	trash = /obj/item/trash/skrellsnax
 	filling_color = "#A66829"
 	center_of_mass = list("x"=15, "y"=12)
 	nutriment_amt = 10

@@ -64,7 +64,7 @@
 	icon_state = "popcorn"
 
 /obj/item/trash/tuna
-	name = "tuna can"
+	name = "fish flake packet"
 	icon_state = "tuna"
 
 /obj/item/trash/sosjerky
@@ -107,6 +107,10 @@
 /obj/item/trash/kokobar
 	name = "candy wrapper"
 	icon_state = "kokobar"
+
+/obj/item/trash/skrellsnax
+	name = "skrellsnax packet"
+	icon_state = "skrellsnacks"
 
 /obj/item/trash/gumpack
 	name = "gum packet"
