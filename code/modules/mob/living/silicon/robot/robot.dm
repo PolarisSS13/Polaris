@@ -690,7 +690,7 @@
 			to_chat(user, "You remove \the [broken_device].")
 			user.put_in_active_hand(broken_device)
 
-	if(istype(user,/mob/living/carbon/human))
+	if(istype(user,/mob/living/carbon/human) && !opened)
 		var/mob/living/carbon/human/H = user
 		//Adding borg petting.  Help intent pets, Disarm intent taps and Harm is punching(no damage)
 		switch(H.a_intent)
