@@ -111,8 +111,6 @@
 		M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
-	M.add_chemical_effect(CE_PAINKILLER, (25 - (strength * M.species.alcohol_mod)) * M.species.chem_strength_pain)
-
 	var/effective_dose = dose * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
 
 	if(effective_dose >= strength) // Early warning
@@ -158,7 +156,6 @@
 		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
-	M.add_chemical_effect(CE_PAINKILLER, (25 - (strength * M.species.alcohol_mod)) * M.species.chem_strength_pain)
 
 	if(dose * strength_mod >= strength) // Early warning
 		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
