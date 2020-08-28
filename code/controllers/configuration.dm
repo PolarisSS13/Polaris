@@ -215,6 +215,8 @@ var/list/gamemode_cache = list()
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
+	
+	var/static/list/engine_map	// Comma separated list of engines to choose from.  Blank means fully random.
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -784,6 +786,9 @@ var/list/gamemode_cache = list()
 
 				if("use_overmap")
 					config.use_overmap = 1
+					
+				if("engine_map")
+					config.engine_map = splittext(value, ",")
 /*
 				if("station_levels")
 					using_map.station_levels = text2numlist(value, ";")
