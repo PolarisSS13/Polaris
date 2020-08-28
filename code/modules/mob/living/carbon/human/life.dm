@@ -852,7 +852,8 @@
 						if(hypothermia>90)
 							if(prob(40))
 								apply_effect(50,DROWSY)
-							if(hypothermia>95)
+							if(hypothermia>95 && bodytemperature>species.cold_level_1)
+								//Only take damage if the target isn't already taking damage ticks from cold temperature
 								if(prob(25))
 									apply_damage(3,BURN)
 		
