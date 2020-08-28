@@ -98,7 +98,8 @@
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
 		/obj/item/clothing/shoes/boots/winter/security,
 		/obj/item/device/flashlight/maglight,
-		/obj/item/clothing/mask/gas/half)
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas/sechailer/swat/hos)
 
 /obj/structure/closet/secure_closet/hos/Initialize()
 	if(prob(50))
@@ -142,7 +143,8 @@
 		/obj/item/clothing/shoes/boots/winter/security,
 		/obj/item/device/flashlight/maglight,
 		/obj/item/device/megaphone,
-		/obj/item/clothing/mask/gas/half)
+		/obj/item/clothing/mask/gas/half,
+		/obj/item/clothing/mask/gas/sechailer/swat/warden)
 
 /obj/structure/closet/secure_closet/warden/Initialize()
 	if(prob(50))
