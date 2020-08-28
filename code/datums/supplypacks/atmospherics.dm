@@ -50,7 +50,7 @@
 	access = access_atmospherics
 	contains = list(/obj/machinery/portable_atmospherics/canister/phoron)
 
-/datum/supply_pack/atmos/canister_sleeping_agent
+/datum/supply_pack/atmos/canister_nitrous_oxide
 	name = "N2O gas canister"
 	cost = 15
 	containername = "N2O gas canister crate"
