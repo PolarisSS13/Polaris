@@ -29,6 +29,8 @@
 	icon_state = "jackboots"
 	armor = list(melee = 30, bullet = 10, laser = 10, energy = 15, bomb = 20, bio = 0, rad = 0)
 	siemens_coefficient = 0.7
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/clothing/shoes/boots/jackboots/toeless
 	name = "toe-less jackboots"
@@ -69,6 +71,8 @@
 	icon_state = "workboots"
 	armor = list(melee = 40, bullet = 0, laser = 0, energy = 15, bomb = 20, bio = 0, rad = 20)
 	siemens_coefficient = 0.7
+	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/clothing/shoes/boots/workboots/toeless
 	name = "toe-less workboots"
@@ -100,7 +104,7 @@
 	icon_state = "winterboots_sci"
 
 /obj/item/clothing/shoes/boots/winter/command
-	name = "colony director's winter boots"
+	name = "site manager's winter boots"
 	desc = "A pair of winter boots. They're lined with dark fur, and trimmed in the colours of superiority."
 	icon_state = "winterboots_cap"
 
