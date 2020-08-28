@@ -46,6 +46,7 @@
 /obj/item/clothing/mask/gas/half/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/device/hailer))
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
+		user.drop_item(src)
 		var/obj/item/clothing/mask/gas/sechailer/N = new /obj/item/clothing/mask/gas/sechailer(src.loc)
 		N.fingerprints = src.fingerprints
 		N.fingerprintshidden = src.fingerprintshidden
@@ -53,10 +54,9 @@
 		N.suit_fibers = src.suit_fibers
 		N.hailer = I
 		I.loc = N
+		if(!isturf(N.loc))
+			user.put_in_hands(N)
 		qdel(src)
-		if(!user.put_in_inactive_hand(N))
-			N.loc = get_turf(user)
-		return
 	..()
 
 //Plague Dr suit can be found in clothing/suits/bio.dm

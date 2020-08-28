@@ -62,7 +62,7 @@
 /obj/structure/closet/secure_closet/hos
 	name = "head of security's locker"
 	req_access = list(access_hos)
-	storage_capacity = 2.5 * MOB_MEDIUM
+	storage_capacity = 2.6 * MOB_MEDIUM
 	closet_appearance = /decl/closet_appearance/secure_closet/security/hos
 
 	starts_with = list(
@@ -113,6 +113,7 @@
 
 /obj/structure/closet/secure_closet/warden
 	name = "warden's locker"
+	storage_capacity = 42
 	req_access = list(access_armory)
 	closet_appearance = /decl/closet_appearance/secure_closet/security/warden
 

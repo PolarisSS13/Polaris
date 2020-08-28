@@ -131,16 +131,18 @@
 			to_chat(user, "<span class='warning'>This mask has an integrated hailer, you can't remove it!</span>")
 		else
 			var/obj/N = new /obj/item/clothing/mask/gas/half(src.loc)
+			playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 			N.fingerprints = src.fingerprints
 			N.fingerprintshidden = src.fingerprintshidden
 			N.fingerprintslast = src.fingerprintslast
 			N.suit_fibers = src.suit_fibers
-			if(!user.put_in_any_hand_if_possible(hailer))
-				hailer.loc = get_turf(user)
-			if(!user.put_in_any_hand_if_possible(N))
-				N.loc = get_turf(user)
+			if(!isturf(N.loc))
+				user.put_in_hands(hailer)
+				user.put_in_hands(N)
+			else
+				hailer.loc = N.loc
 			qdel(src)
-			
+			return
 	..()
  
 /obj/item/clothing/mask/gas/sechailer/verb/halt()
