@@ -64,7 +64,7 @@
 		to_chat(user, "<span class='warning'>This syringe is broken!</span>")
 		return
 
-	if(user.a_intent == I_HURT && ismob(target) && !isrobot(user))
+	if(user.a_intent == I_HURT && ismob(target))
 		if((CLUMSY in user.mutations) && prob(50))
 			target = user
 		syringestab(target, user)
@@ -298,7 +298,8 @@
 	var/trans = reagents.trans_to_mob(target, syringestab_amount_transferred, CHEM_BLOOD)
 	if(isnull(trans)) trans = 0
 	add_attack_logs(user,target,"Stabbed with [src.name] containing [contained], trasferred [trans] units")
-	break_syringe(target, user)
+	if(!issilicon(user))
+		break_syringe(target, user)
 
 /obj/item/weapon/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 	desc += " It is broken."
