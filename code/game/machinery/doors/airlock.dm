@@ -107,8 +107,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/cmd3o.ogg'
 	department_close_powered = 'sound/machines/door/cmd3c.ogg'
 
@@ -116,8 +114,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorsec.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_sec
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/sec1o.ogg'
 	department_close_powered = 'sound/machines/door/sec1c.ogg'
 
@@ -125,8 +121,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Dooreng.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_eng
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/eng1o.ogg'
 	department_close_powered = 'sound/machines/door/eng1c.ogg'
 
@@ -134,8 +128,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorengatmos.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_eat
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/eng1o.ogg'
 	department_close_powered = 'sound/machines/door/eng1c.ogg'
 
@@ -143,8 +135,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doormed.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/med1o.ogg'
 	department_close_powered = 'sound/machines/door/med1c.ogg'
 
@@ -158,8 +148,6 @@
 /obj/machinery/door/airlock/maintenance/cargo
 	icon = 'icons/obj/doors/Doormaint_cargo.dmi'
 	req_one_access = list(access_cargo)
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/door2o.ogg'
 	department_close_powered = 'sound/machines/door/door2c.ogg'
 
@@ -291,8 +279,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/cmd1o.ogg'
 	department_close_powered = 'sound/machines/door/cmd1c.ogg'
 
@@ -317,8 +303,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_eat
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/eng1o.ogg'
 	department_close_powered = 'sound/machines/door/eng1c.ogg'
 
@@ -331,8 +315,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_sec
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/sec1o.ogg'
 	department_close_powered = 'sound/machines/door/sec1c.ogg'
 
@@ -345,8 +327,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/med1o.ogg'
 	department_close_powered = 'sound/machines/door/med1c.ogg'
 
@@ -354,8 +334,6 @@
 	name = "Mining Airlock"
 	icon = 'icons/obj/doors/Doormining.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_min
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/cgo1o.ogg'
 	department_close_powered = 'sound/machines/door/cgo1c.ogg'
 
@@ -363,8 +341,6 @@
 	name = "Atmospherics Airlock"
 	icon = 'icons/obj/doors/Dooratmo.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_atmo
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/eng1o.ogg'
 	department_close_powered = 'sound/machines/door/eng1c.ogg'
 
@@ -372,8 +348,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorresearch.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_research
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/sci1o.ogg'
 	department_close_powered = 'sound/machines/door/sci1c.ogg'
 
@@ -386,8 +360,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_research
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/sci1o.ogg'
 	department_close_powered = 'sound/machines/door/sci1c.ogg'
 
@@ -400,8 +372,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_min
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/cgo1o.ogg'
 	department_close_powered = 'sound/machines/door/cgo1c.ogg'
 
@@ -414,8 +384,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_atmo
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/eng1o.ogg'
 	department_close_powered = 'sound/machines/door/eng1c.ogg'
 
@@ -496,8 +464,6 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorsci.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_science
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/sci1o.ogg'
 	department_close_powered = 'sound/machines/door/sci1c.ogg'
 
@@ -507,8 +473,6 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_science
 	glass = 1
-	open_sound_powered = 'sound/machines/door/hall1o.ogg'
-	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	department_open_powered = 'sound/machines/door/sci1o.ogg'
 	department_close_powered = 'sound/machines/door/sci1c.ogg'
 
