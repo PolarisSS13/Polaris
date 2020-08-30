@@ -7,7 +7,6 @@
 	energy_drain = 20
 	range = 0
 
-	step_delay = 0.2
 
 	var/obj/item/shield_projector/line/exosuit/my_shield = null
 	var/my_shield_type = /obj/item/shield_projector/line/exosuit
@@ -68,11 +67,9 @@
 		my_shield.attack_self(chassis.occupant)
 		if(my_shield.active)
 			set_ready_state(0)
-			step_delay = 4
 			log_message("Activated.")
 		else
 			set_ready_state(1)
-			step_delay = 1
 			log_message("Deactivated.")
 
 /obj/item/mecha_parts/mecha_equipment/combat_shield/Topic(href, href_list)

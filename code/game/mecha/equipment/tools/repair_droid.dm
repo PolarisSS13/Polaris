@@ -11,8 +11,6 @@
 	var/icon/droid_overlay
 	var/list/repairable_damage = list(MECHA_INT_TEMP_CONTROL,MECHA_INT_TANK_BREACH)
 
-	step_delay = 1
-
 	equip_type = EQUIP_HULL
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid/New()
