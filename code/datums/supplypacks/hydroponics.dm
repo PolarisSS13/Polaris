@@ -88,6 +88,12 @@
 	containername = "Chicken crate"
 	access = access_hydroponics
 
+//What a boon!
+/datum/supply_pack/hydro/crabs
+	name = "THREE (3) free crabs"
+	containertype = /mob/living/simple_mob/animal/passive/crab
+	cost = 25
+
 /datum/supply_pack/hydro/seeds
 	name = "Seeds crate"
 	contains = list(
