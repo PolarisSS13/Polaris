@@ -16,7 +16,7 @@
 /datum/design/item/weapon/xenoarch/xenoarch_multi_tool
 	name = "xenoarcheology multitool"
 	id = "xenoarch_multitool"
-	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3, TECH_BLUESPACE = 3)
+	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3, TECH_BLUESPACE = 3, TECH_ARCANE = 1)
 	build_path = /obj/item/device/xenoarch_multi_tool
 	materials = list(DEFAULT_WALL_MATERIAL = 2000, "glass" = 1000, "uranium" = 500, "phoron" = 500)
 	sort_string = "GAAAB"

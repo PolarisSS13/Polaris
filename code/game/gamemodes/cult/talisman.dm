@@ -1,5 +1,6 @@
 /obj/item/weapon/paper/talisman
 	icon_state = "paper_talisman"
+	origin_tech = list(TECH_ARCANE = 4)
 	var/imbue = null
 	var/uses = 0
 	info = "<center><img src='talisman.png'></center><br/><br/>"

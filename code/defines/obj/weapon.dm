@@ -621,6 +621,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/wizard.dmi'
 	icon_state = "ectoplasm"
+	origin_tech = list(TECH_BLUESPACE = 3, TECH_ARCANE = 1)
 
 /obj/item/weapon/research
 	name = "research debugging device"
