@@ -86,11 +86,13 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 #define LEGCUFF_LAYER			25		//Same as handcuffs, for legcuffs
 #define L_HAND_LAYER			26		//Left-hand item
 #define R_HAND_LAYER			27		//Right-hand item
-#define MODIFIER_EFFECTS_LAYER	28		//Effects drawn by modifiers
-#define FIRE_LAYER				29		//'Mob on fire' overlay layer
-#define WATER_LAYER				30		//'Mob submerged' overlay layer
-#define TARGETED_LAYER			31		//'Aimed at' overlay layer
-#define TOTAL_LAYERS			31//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
+#define WING_LAYER				28		//VOREStation edit. Simply move this up a number if things are added.
+#define TAIL_LAYER_ALT			29		//VOREStation edit. Simply move this up a number if things are added.
+#define MODIFIER_EFFECTS_LAYER	30		//Effects drawn by modifiers
+#define FIRE_LAYER				31		//'Mob on fire' overlay layer
+#define WATER_LAYER				32		//'Mob submerged' overlay layer
+#define TARGETED_LAYER			33		//'Aimed at' overlay layer
+#define TOTAL_LAYERS			33//<---- KEEP THIS UPDATED, should always equal the highest number here, used to initialize a list.
 //////////////////////////////////
 
 /mob/living/carbon/human
@@ -180,7 +182,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	// blend the individual damage states with our icons
 	for(var/obj/item/organ/external/O in organs)
-		if(isnull(O) || O.is_stump())
+		if(isnull(O) || O.is_stump() || O.is_hidden_by_tail())
 			continue
 
 		O.update_icon()
@@ -252,21 +254,30 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
 				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
-				icon_key += "[part.s_col_blend]"
+				//VOREStation Edit - Different way of tracking add/mult species
+				if(species.color_mult)
+					icon_key += "[ICON_MULTIPLY]"
+				else
+					icon_key += "[ICON_ADD]"
+				//VOREStation Edit End
 			else
 				icon_key += "#000000"
+
 			for(var/M in part.markings)
 				icon_key += "[M][part.markings[M]["color"]]"
 
 			if(part.robotic >= ORGAN_ROBOT)
 				icon_key += "2[part.model ? "-[part.model]": ""]"
 				robolimb_count++
-				if(part.organ_tag == BP_HEAD || part.organ_tag == BP_TORSO || part.organ_tag == BP_GROIN)
+				if((part.robotic == ORGAN_ROBOT || part.robotic == ORGAN_LIFELIKE) && (part.organ_tag == BP_HEAD || part.organ_tag == BP_TORSO || part.organ_tag == BP_GROIN))//VOREStation Edit - Not for nanoform parts
 					robobody_count ++
 			else if(part.status & ORGAN_DEAD)
 				icon_key += "3"
 			else
 				icon_key += "1"
+
+			if(part.transparent) //VOREStation Edit. For better slime limbs. Avoids using solid var due to limb dropping.
+				icon_key += "_t" //VOREStation Edit.
 
 	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
 	var/icon/base_icon
@@ -284,7 +295,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
-				var/icon/temp2 = new('icons/mob/human.dmi',"blank")
+				var/icon/temp2 = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi', icon_state = "blank") //VOREStation Edit.
 				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
 				if(!(part.icon_position & LEFT))
@@ -325,6 +336,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	//tail
 	update_tail_showing()
+	update_wing_showing() // VOREStation Edit
 
 /mob/living/carbon/human/proc/update_skin()
 	if(QDESTROYING(src))
@@ -407,7 +419,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		if(facial_hair_style && facial_hair_style.species_allowed && (src.species.get_bodytype(src) in facial_hair_style.species_allowed))
 			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 			if(facial_hair_style.do_colouration)
-				facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_ADD)
+				facial_s.Blend(rgb(r_facial, g_facial, b_facial), ICON_MULTIPLY) //VOREStation edit
 
 			face_standing.Blend(facial_s, ICON_OVERLAY)
 
@@ -433,8 +445,19 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
-	if(head_organ.nonsolid)
+	if(head_organ.nonsolid || head_organ.transparent)
 		face_standing += rgb(,,,120)
+
+	// VOREStation Edit - START
+	var/icon/ears_s = get_ears_overlay()
+	if(ears_s)
+		face_standing.Blend(ears_s, ICON_OVERLAY)
+	if(istype(head_organ,/obj/item/organ/external/head/vr))
+		var/obj/item/organ/external/head/vr/head_organ_vr = head_organ
+		overlays_standing[HAIR_LAYER] = image(face_standing, layer = BODY_LAYER+HAIR_LAYER, "pixel_y" = head_organ_vr.head_offset)
+		apply_layer(HAIR_LAYER)
+		return
+	// VOREStation Edit - END
 
 	overlays_standing[HAIR_LAYER] = image(face_standing, layer = BODY_LAYER+HAIR_LAYER)
 	apply_layer(HAIR_LAYER)
@@ -575,7 +598,14 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON].dmi"
 
 	//Build a uniform sprite
-	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER)
+	//VOREStation Edit start.
+	var/icon/c_mask = tail_style?.clip_mask
+	if(c_mask)
+		var/obj/item/clothing/suit/S = wear_suit
+		if((wear_suit?.flags_inv & HIDETAIL) || (istype(S) && S.taurized)) // Reasons to not mask: 1. If you're wearing a suit that hides the tail or if you're wearing a taurized suit.
+			c_mask = null
+	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER, clip_mask = c_mask)
+	//VOREStation Edit end.
 	apply_layer(UNIFORM_LAYER)
 
 /mob/living/carbon/human/update_inv_wear_id()
@@ -657,6 +687,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(!shoes || (wear_suit && wear_suit.flags_inv & HIDESHOES) || (w_uniform && w_uniform.flags_inv & HIDESHOES))
 		return //Either nothing to draw, or it'd be hidden.
 
+	//VOREStation Edit
+	for(var/f in list(BP_L_FOOT, BP_R_FOOT))
+		var/obj/item/organ/external/foot/foot = get_organ(f)
+		if(istype(foot) && foot.is_hidden_by_tail()) //If either foot is hidden by the tail, don't render footwear.
+			return
+
 	//Allow for shoe layer toggle nonsense
 	var/shoe_layer = SHOES_LAYER
 	if(istype(shoes, /obj/item/clothing/shoes))
@@ -733,6 +769,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	update_inv_w_uniform()
 	update_inv_shoes()
 	update_tail_showing()
+	update_wing_showing()
 
 	if(!wear_suit)
 		return //No point, no suit.
@@ -747,8 +784,16 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	else
 		suit_sprite = "[INV_SUIT_DEF_ICON].dmi"
 
-	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER)
+	//VOREStation Edit start.
+	var/icon/c_mask = null
+	var/tail_is_rendered = (overlays_standing[TAIL_LAYER] || overlays_standing[TAIL_LAYER_ALT])
+	var/valid_clip_mask = tail_style?.clip_mask
 
+	if(tail_is_rendered && valid_clip_mask && !(istype(suit) && suit.taurized)) //Clip the lower half of the suit off using the tail's clip mask for taurs since taur bodies aren't hidden.
+		c_mask = valid_clip_mask
+	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER, clip_mask = c_mask)
+
+	//VOREStation Edit end.
 	apply_layer(SUIT_LAYER)
 
 /mob/living/carbon/human/update_inv_pockets()
@@ -860,12 +905,24 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		return
 
 	remove_layer(TAIL_LAYER)
+	remove_layer(TAIL_LAYER_ALT) // VOREStation Edit - START - Alt Tail Layer
+
+	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER
+
+	var/image/vr_tail_image = get_tail_image()
+	if(vr_tail_image)
+		vr_tail_image.layer = BODY_LAYER+used_tail_layer
+		overlays_standing[used_tail_layer] = vr_tail_image
+		apply_layer(used_tail_layer)
+		return
+	// VOREStation Edit - END
+
 	var/species_tail = species.get_tail(src) // Species tail icon_state prefix.
 
 	//This one is actually not that bad I guess.
 	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
 		var/icon/tail_s = get_tail_icon()
-		overlays_standing[TAIL_LAYER] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+TAIL_LAYER)
+		overlays_standing[used_tail_layer] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+used_tail_layer) // VOREStation Edit - Alt Tail Layer
 		animate_tail_reset()
 
 //TODO: Is this the appropriate place for this, and not on species...?
@@ -875,31 +932,34 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(!tail_icon)
 		//generate a new one
 		var/species_tail_anim = species.get_tail_animation(src)
+		if(!species_tail_anim && species.icobase_tail) species_tail_anim = species.icobase //VOREStation Code - Allow override of file for non-animated tails
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), ICON_ADD)
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD) // VOREStation edit
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
-			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), ICON_ADD)
+			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")	//VOREStation edit -- Suffix icon state string with '_s' to compensate for diff in .dmi b/w us & Polaris. - _s not on Polaris, nixed.
+			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), species.color_mult ? ICON_MULTIPLY : ICON_ADD)				//VOREStation edit -- Check for species color_mult
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 
 	return tail_icon
 
 /mob/living/carbon/human/proc/set_tail_state(var/t_state)
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER // VOREStation Edit - START - Alt Tail Layer
+	var/image/tail_overlay = overlays_standing[used_tail_layer]
 
 	remove_layer(TAIL_LAYER)
+	remove_layer(TAIL_LAYER_ALT)
 
 	if(tail_overlay)
-		overlays_standing[TAIL_LAYER] = tail_overlay
+		overlays_standing[used_tail_layer] = tail_overlay
 		if(species.get_tail_animation(src))
 			tail_overlay.icon_state = t_state
 			. = tail_overlay
 
-	apply_layer(TAIL_LAYER)
+	apply_layer(used_tail_layer) // VOREStation Edit - END
 
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
@@ -909,8 +969,9 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		return
 
 	var/t_state = "[species.get_tail(src)]_once"
+	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER // VOREStation Edit - Alt Tail Layer
 
-	var/image/tail_overlay = overlays_standing[TAIL_LAYER]
+	var/image/tail_overlay = overlays_standing[used_tail_layer] // VOREStation Edit - Alt Tail Layer
 	if(tail_overlay && tail_overlay.icon_state == t_state)
 		return //let the existing animation finish
 
@@ -918,7 +979,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(tail_overlay)
 		spawn(20)
 			//check that the animation hasn't changed in the meantime
-			if(overlays_standing[TAIL_LAYER] == tail_overlay && tail_overlay.icon_state == t_state)
+			if(overlays_standing[used_tail_layer] == tail_overlay && tail_overlay.icon_state == t_state) // VOREStation Edit - Alt Tail Layer
 				animate_tail_stop()
 
 /mob/living/carbon/human/proc/animate_tail_start()
@@ -941,12 +1002,28 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		set_tail_state("[species.get_tail(src)]_idle[rand(0,9)]")
 	else
 		set_tail_state("[species.get_tail(src)]_static")
+		toggle_tail_vr(FALSE) //VOREStation Add - So tails stop when someone dies. TODO - Fix this hack ~Leshana
 
 /mob/living/carbon/human/proc/animate_tail_stop()
 	if(QDESTROYING(src))
 		return
 
 	set_tail_state("[species.get_tail(src)]_static")
+
+// VOREStation Edit - Wings! See update_icons_vr.dm for more wing procs
+/mob/living/carbon/human/proc/update_wing_showing()
+	if(QDESTROYING(src))
+		return
+
+	remove_layer(WING_LAYER)
+
+	var/image/vr_wing_image = get_wing_image()
+	if(vr_wing_image)
+		vr_wing_image.layer = BODY_LAYER+WING_LAYER
+		overlays_standing[WING_LAYER] = vr_wing_image
+
+	apply_layer(WING_LAYER)
+// VOREStation Edit end
 
 /mob/living/carbon/human/update_modifier_visuals()
 	if(QDESTROYING(src))
@@ -1012,6 +1089,39 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(total.overlays.len)
 		overlays_standing[SURGERY_LAYER] = total
 		apply_layer(SURGERY_LAYER)
+
+/mob/living/carbon/human/proc/get_wing_image()
+	if(QDESTROYING(src))
+		return
+
+	//If you are FBP with wing style and didn't set a custom one
+	if(synthetic && synthetic.includes_wing && !wing_style)
+		var/icon/wing_s = new/icon("icon" = synthetic.icon, "icon_state" = "wing") //I dunno. If synths have some custom wing?
+		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
+		return image(wing_s)
+
+	//If you have custom wings selected
+	if(wing_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
+		var/icon/wing_s = new/icon("icon" = wing_style.icon, "icon_state" = flapping && wing_style.ani_state ? wing_style.ani_state : wing_style.icon_state)
+		if(wing_style.do_colouration)
+			wing_s.Blend(rgb(src.r_wing, src.g_wing, src.b_wing), wing_style.color_blend_mode)
+		if(wing_style.extra_overlay)
+			var/icon/overlay = new/icon("icon" = wing_style.icon, "icon_state" = wing_style.extra_overlay)
+			overlay.Blend(rgb(src.r_wing2, src.g_wing2, src.b_wing2), wing_style.color_blend_mode)
+			wing_s.Blend(overlay, ICON_OVERLAY)
+			qdel(overlay)
+		return image(wing_s)
+
+// TODO - Move this to where it should go ~Leshana
+/mob/living/proc/stop_flying()
+	if(QDESTROYING(src))
+		return
+	flying = FALSE
+	return 1
+
+/mob/living/carbon/human/stop_flying()
+	if((. = ..()))
+		update_wing_showing()
 
 //Human Overlays Indexes/////////
 #undef MUTATIONS_LAYER
