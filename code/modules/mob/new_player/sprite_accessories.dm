@@ -928,6 +928,50 @@
 	icon_state = "hair_ziegler"
 	flags = HAIR_TIEABLE
 
+/datum/sprite_accessory/hair/astolfo
+	name = "Astolfo"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "hair_astolfo"
+
+/datum/sprite_accessory/hair/awoohair
+	name = "Shoulder-length Messy"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "momijihair"
+
+/datum/sprite_accessory/hair/braid
+	name = "Floorlength Braid"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "hair_braid"
+
+/datum/sprite_accessory/hair/twindrills
+	name = "Twin Drills"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "hair_twincurl"
+
+/datum/sprite_accessory/hair/ponytail6_fixed
+	name = "Ponytail 6.2"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "hair_ponytail6"
+
+/datum/sprite_accessory/hair/una_hood
+	name = "Cobra Hood"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "soghun_hood"
+	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+
+/datum/sprite_accessory/hair/una_doublehorns
+	name = "Double Unathi Horns"
+	icon = 'icons/mob/human_face_vr.dmi'
+	icon_add = 'icons/mob/human_face_vr_add.dmi'
+	icon_state = "soghun_dubhorns"
+	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+
 /*
 ///////////////////////////////////
 /  =---------------------------=  /
@@ -1124,25 +1168,25 @@
 
 //Skrell 'hairstyles'
 /datum/sprite_accessory/hair/skr_tentacle_veryshort
-	name = "Skrell Short Tentacles"
-	icon_state = "skrell_hair_short"
-	species_allowed = list(SPECIES_SKRELL)
+	name = "Skrell Very Short Tentacles"
+	icon_state = "skrell_hair_veryshort"
+	species_allowed = list(SPECIES_SKRELL, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = MALE
 
 /datum/sprite_accessory/hair/skr_tentacle_short
-	name = "Skrell Average Tentacles"
-	icon_state = "skrell_hair_average"
-	species_allowed = list(SPECIES_SKRELL)
+	name = "Skrell Short Tentacles"
+	icon_state = "skrell_hair_short"
+	species_allowed = list(SPECIES_SKRELL, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/hair/skr_tentacle_average
-	name = "Skrell Long Tentacles"
-	icon_state = "skrell_hair_long"
-	species_allowed = list(SPECIES_SKRELL)
+	name = "Skrell Average Tentacles"
+	icon_state = "skrell_hair_average"
+	species_allowed = list(SPECIES_SKRELL, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/hair/skr_tentacle_verylong
-	name = "Skrell Very Long Tentacles"
+	name = "Skrell Long Tentacles"
 	icon_state = "skrell_hair_verylong"
-	species_allowed = list(SPECIES_SKRELL)
+	species_allowed = list(SPECIES_SKRELL, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 //Tajaran hairstyles
 /datum/sprite_accessory/hair/taj_ears

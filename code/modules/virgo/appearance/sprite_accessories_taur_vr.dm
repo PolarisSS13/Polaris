@@ -556,7 +556,7 @@
 	msg_prey_stepunder = "You jump over %prey's thick tail."
 	msg_owner_stepunder = "%owner bounds over your tail."
 */
-/*
+
 /datum/sprite_accessory/tail/taur/shadekin_tail
 	name = "Shadekin Tail"
 	icon_state = "shadekin_s"
@@ -574,7 +574,7 @@
 /datum/sprite_accessory/tail/taur/shadekin_tail/shadekin_tail_long
 	name = "Shadekin Long Tail"
 	icon_state = "shadekin_long_s"
-*/
+
 // Special snowflake tails/taurhalves
 
 //spoopylizz: Roiz Lizden

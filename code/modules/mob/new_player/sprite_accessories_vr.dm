@@ -593,12 +593,12 @@ shaved
 //Reminder: BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_TORSO,BP_GROIN,BP_HEAD
 
 /datum/sprite_accessory/marking //Override for base markings
-var/color_blend_mode = ICON_ADD
+	var/color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/marking/vr
-icon = 'icons/mob/human_races/markings_vr.dmi'
+	icon = 'icons/mob/human_races/markings_vr.dmi'
 
-species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/marking/vr/vulp_belly
 	name = "belly fur (Vulp)"
