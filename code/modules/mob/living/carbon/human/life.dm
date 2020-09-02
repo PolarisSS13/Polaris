@@ -4,6 +4,39 @@
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
 #define HUMAN_CRIT_MAX_OXYLOSS ( 2.0 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
 
+#define HYPOTHERMIA_RATE_DIVISOR 60 //Divisor of hypothermia increase per check. Higher values means hypothermia increases slower.
+#define HYPOTHERMIA_RECOVERY_MAX 2.1 //Max amount of hypothermia removed per check, applies when body temperature is above hypotemp.
+#define HYPOTHERMIA_RECOVERY_MIN 0.1 //Min amount of hypothermia removed per check, applies when body temperature is above hypotemp.
+
+#define HYPOTHERMIA_SHIVER_MIN 5
+#define HYPOTHERMIA_SHIVER_MAX 75
+#define HYPOTHERMIA_SHIVER_CHANCE 10
+
+#define HYPOTHERMIA_STUTTER_MIN 30
+#define HYPOTHERMIA_STUTTER_MOD 25
+#define HYPOTHERMIA_STUTTER_CHANCE 40
+
+#define HYPOTHERMIA_EYEBLUR_MIN 50
+#define HYPOTHERMIA_EYEBLUR_MOD 45
+#define HYPOTHERMIA_EYEBLUR_CHANCE 40
+
+#define HYPOTHERMIA_CONFUSE_MIN 70
+#define HYPOTHERMIA_CONFUSE_MOD 65
+#define HYPOTHERMIA_CONFUSE_CHANCE 30
+
+#define HYPOTHERMIA_HALLOSS_MIN 80
+#define HYPOTHERMIA_HALLOSS_MOD 75
+#define HYPOTHERMIA_HALLOSS_CHANCE 10
+#define HYPOTHERMIA_HALLOSS_MAXMULT 3
+
+#define HYPOTHERMIA_DROWSY_MIN 90
+#define HYPOTHERMIA_DROWSY_VAL 30
+#define HYPOTHERMIA_DROWSY_CHANCE 40
+
+#define HYPOTHERMIA_DAMAGE_MIN 95
+#define HYPOTHERMIA_DAMAGE_VAL 3
+#define HYPOTHERMIA_DAMAGE_CHANCE 25
+
 #define HEAT_DAMAGE_LEVEL_1 5 //Amount of damage applied when your body temperature just passes the 360.15k safety point
 #define HEAT_DAMAGE_LEVEL_2 10 //Amount of damage applied when your body temperature passes the 400K point
 #define HEAT_DAMAGE_LEVEL_3 20 //Amount of damage applied when your body temperature passes the 1000K point
@@ -789,15 +822,17 @@
 	var/hypotemp = species.cold_level_1+species.hypothermia_difference
 	if(bodytemperature < hypotemp)
 		throw_alert("temp", /obj/screen/alert/cold, 1)
-		add_hypothermia((hypotemp - bodytemperature)/60)
-	else 
+		if(prob(5))
+			to_chat(src, "<span class='danger'>[pick(species.cold_discomfort_strings)]</span>")
+		add_hypothermia((hypotemp - bodytemperature)/HYPOTHERMIA_RATE_DIVISOR)
+	else if(hypothermia>0) //No need to bother with this code if we don't have anything to recover from
 		//If we're above the hypothermia temperature, start recovering.
 		var/intermediate = (bodytemperature-hypotemp)/(species.body_temperature - hypotemp)
 		var/subhypo = 0
-		if(intermediate >= 1)
-			subhypo = 2.1
+		if(intermediate >= 1) //Essentially, if our bodytemperature is above species.body_temperature, we don't want to give any extra benefit, so we just clamp it using maths
+			subhypo = HYPOTHERMIA_RECOVERY_MAX
 		else
-			subhypo = intermediate*intermediate*intermediate*(6*intermediate*intermediate - 15*intermediate + 10)*2 + 0.1
+			subhypo = intermediate*intermediate*intermediate*(6*intermediate*intermediate - 15*intermediate + 10)*(HYPOTHERMIA_RECOVERY_MAX-HYPOTHERMIA_RECOVERY_MIN) + HYPOTHERMIA_RECOVERY_MIN
 			//Smoothstep function of the fifth degree for only the smoothest transitions.
 		add_hypothermia(-subhypo)
 	
@@ -828,36 +863,30 @@
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
 /mob/living/carbon/human/proc/add_hypothermia(var/amount)
-	if(hypothermia+amount<=0)
-		hypothermia=0
-	else
-		if(hypothermia+amount>100)
-			hypothermia=100
-		hypothermia+=amount
-		if(hypothermia>5 && hypothermia<75)
-			if(prob(10))
-				say("*shiver")
-		if(hypothermia>30)
-			if(prob(50))
-				stuttering = hypothermia-25
-			if(hypothermia>50)
-				if(prob(40))
-					apply_effect(hypothermia-45,EYE_BLUR)
-				if(hypothermia>70)
-					if(prob(30))
-						Confuse(hypothermia-65)
-					if(hypothermia>80)
-						if(prob(15))
-							apply_effect(hypothermia-79,WEAKEN)
-						if(hypothermia>90)
-							if(prob(40))
-								apply_effect(50,DROWSY)
-							if(hypothermia>95 && bodytemperature>species.cold_level_1)
-								//Only take damage if the target isn't already taking damage ticks from cold temperature
-								if(prob(25))
-									apply_damage(3,BURN)
-		
-
+	hypothermia=clamp(hypothermia+amount,0,100)
+	if(hypothermia>HYPOTHERMIA_SHIVER_MIN && hypothermia<HYPOTHERMIA_SHIVER_MAX)//Shivering stops after hypothermia gets severe enough, in accordance with how it works irl
+		if(prob(HYPOTHERMIA_SHIVER_CHANCE))
+			say("*shiver")
+	if(hypothermia>HYPOTHERMIA_STUTTER_MIN)
+		if(prob(HYPOTHERMIA_STUTTER_CHANCE))
+			stuttering = max(hypothermia - HYPOTHERMIA_STUTTER_MOD, stuttering)
+	if(hypothermia>HYPOTHERMIA_EYEBLUR_MIN)
+		if(prob(HYPOTHERMIA_EYEBLUR_CHANCE))
+			apply_effect(hypothermia-HYPOTHERMIA_EYEBLUR_MOD,EYE_BLUR)
+	if(hypothermia>HYPOTHERMIA_CONFUSE_MIN)
+		if(prob(HYPOTHERMIA_CONFUSE_CHANCE))
+			Confuse(hypothermia-HYPOTHERMIA_CONFUSE_MOD)
+	if(hypothermia>HYPOTHERMIA_HALLOSS_MIN)
+		if(prob(HYPOTHERMIA_HALLOSS_CHANCE))
+			var/HalDamage = hypothermia-HYPOTHERMIA_HALLOSS_MOD
+			HalDamage = HalDamage*(halloss < HalDamage*HYPOTHERMIA_HALLOSS_MAXMULT)
+			apply_damage(HalDamage,HALLOSS)
+	if(hypothermia>HYPOTHERMIA_DROWSY_MIN)
+		if(prob(HYPOTHERMIA_DROWSY_CHANCE))
+			apply_effect(HYPOTHERMIA_DROWSY_VAL,DROWSY)
+	if(hypothermia>HYPOTHERMIA_DAMAGE_MIN && bodytemperature>species.cold_level_1) //Check to prevent unnecessary damage stacking
+		if(prob(HYPOTHERMIA_DAMAGE_CHANCE))
+			apply_damage(HYPOTHERMIA_DAMAGE_VAL,BURN)
 
 /mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
@@ -1887,3 +1916,34 @@
 
 #undef HUMAN_MAX_OXYLOSS
 #undef HUMAN_CRIT_MAX_OXYLOSS
+#undef HYPOTHERMIA_RATE_DIVISOR
+#undef HYPOTHERMIA_RECOVERY_RANGE
+#undef HYPOTHERMIA_RECOVERY_MIN
+
+#undef HYPOTHERMIA_SHIVER_MIN
+#undef HYPOTHERMIA_SHIVER_MAX
+#undef HYPOTHERMIA_SHIVER_CHANCE
+
+#undef HYPOTHERMIA_STUTTER_MIN
+#undef HYPOTHERMIA_STUTTER_MOD
+#undef HYPOTHERMIA_STUTTER_CHANCE
+
+#undef HYPOTHERMIA_EYEBLUR_MIN
+#undef HYPOTHERMIA_EYEBLUR_MOD
+#undef HYPOTHERMIA_EYEBLUR_CHANCE
+
+#undef HYPOTHERMIA_CONFUSE_MIN
+#undef HYPOTHERMIA_CONFUSE_MOD
+#undef HYPOTHERMIA_CONFUSE_CHANCE
+
+#undef HYPOTHERMIA_HALLOSS_MIN
+#undef HYPOTHERMIA_HALLOSS_MOD
+#undef HYPOTHERMIA_HALLOSS_CHANCE
+
+#undef HYPOTHERMIA_DROWSY_MIN
+#undef HYPOTHERMIA_DROWSY_VAL
+#undef HYPOTHERMIA_DROWSY_CHANCE
+
+#undef HYPOTHERMIA_DAMAGE_MIN
+#undef HYPOTHERMIA_DAMAGE_VAL
+#undef HYPOTHERMIA_DAMAGE_CHANCE
