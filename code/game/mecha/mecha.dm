@@ -843,6 +843,40 @@
 		. = ..(obstacle)
 	return
 
+
+/obj/mecha/proc/trample(var/mob/living/H)
+	if(!isliving(H))
+		return
+
+	var/obj/item/mecha_parts/component/actuator/actuator = internal_components[MECH_ACTUATOR]
+
+	if(!actuator)
+		return
+
+	if(ishuman(H))
+		var/mob/living/carbon/human/D = H
+		if(D.lying)
+			D.attack_log += "\[[time_stamp()]\]<font color='orange'> Was trampled by [src]</font>"
+			msg_admin_attack("[src] trampled [key_name(D)] at (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[D.x];Y=[D.y];Z=[D.z]'>JMP</a>)" )
+			src.visible_message("<span class='danger'>\The [src] runs over \the [D]!</span>")
+			D.apply_damage(actuator.trample_damage, BRUTE)
+			playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
+			return TRUE
+
+		else
+			var/mob/living/L = H
+			src.visible_message("<span class='danger'>\The [src] runs over \the [L]!</span>")
+			if(istype(L, /mob/living/simple_mob))
+				if(issmall(L) && (L.stat == DEAD))
+					L.gib()
+					playsound(src, 'sound/effects/splat.ogg' 50, 1)
+					return TRUE
+			L.apply_damage(actuator.trample_damage, BRUTE)
+			playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
+			return TRUE
+
+
+
 ///////////////////////////////////
 ////////  Internal damage  ////////
 ///////////////////////////////////

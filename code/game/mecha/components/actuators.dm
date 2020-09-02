@@ -20,6 +20,7 @@
 	internal_damage_flag = MECHA_INT_CONTROL_LOST
 
 	var/strafing_multiplier = 1.5
+	var/trample_damage = 15	//If you walk over a resting mob, it hurts. It's a mech.
 
 /obj/item/mecha_parts/component/actuator/get_step_delay()
 	return step_delay

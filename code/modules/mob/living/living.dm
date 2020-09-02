@@ -209,6 +209,11 @@ default behaviour is:
 		var/obj/vehicle/V = AM
 		V.RunOver(src)
 
+	if(istype(AM, /obj/mecha))
+		var/obj/mecha/MB = AM
+		MB.trample(src)
+
+
 /mob/living/verb/succumb()
 	set hidden = 1
 	if ((src.health < 0 && src.health > (5-src.getMaxHealth()))) // Health below Zero but above 5-away-from-death, as before, but variable
