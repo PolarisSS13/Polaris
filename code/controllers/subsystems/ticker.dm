@@ -450,7 +450,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
-				to_chat(M, "<span class='notice'>Colony Directorship not forced on anyone.</span>")
+				to_chat(M, "<span class='notice'>Site Management is not forced on anyone.</span>")
 
 
 /datum/controller/subsystem/ticker/proc/declare_completion()

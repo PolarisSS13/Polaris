@@ -397,6 +397,7 @@
 
 /datum/gear/suit/teshcoat/New()
 	..()
+
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/teshcoatwhite
@@ -418,3 +419,16 @@
 /datum/gear/accessory/teshneckscarf/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/shoes/toelessjack
+	display_name = "toe-less jackboots"
+	path = /obj/item/clothing/shoes/boots/jackboots/toeless
+
+
+/datum/gear/shoes/toelessknee
+	display_name = "toe-less jackboots, knee-length"
+	path = /obj/item/clothing/shoes/boots/jackboots/toeless/knee
+
+/datum/gear/shoes/toelessthigh
+	display_name = "toe-less jackboots, thigh-length"
+	path = /obj/item/clothing/shoes/boots/jackboots/toeless/thigh
