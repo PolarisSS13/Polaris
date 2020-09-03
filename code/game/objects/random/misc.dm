@@ -326,8 +326,8 @@
 /obj/random/material //Random materials for building stuff
 	name = "random material"
 	desc = "This is a random material."
-	icon = 'icons/obj/items.dmi'
-	icon_state = "sheet-metal"
+	icon = 'icons/obj/stacks.dmi'
+	icon_state = "sheet-metal_2"
 
 /obj/random/material/item_to_spawn()
 	return pick(/obj/item/stack/material/steel{amount = 10},
@@ -338,6 +338,35 @@
 				/obj/item/stack/material/cardboard{amount = 10},
 				/obj/item/stack/rods{amount = 10},
 				/obj/item/stack/material/plasteel{amount = 10})
+
+/obj/random/material/refined //Random materials for building stuff
+	name = "random refined material (refined)"
+	desc = "This is a random refined metal."
+	icon = 'icons/obj/stacks.dmi'
+	icon_state = "sheet-adamantine_3"
+
+/obj/random/material/refined/item_to_spawn()
+	return pick(/obj/item/stack/material/steel{amount = 10},
+				/obj/item/stack/material/glass{amount = 10},
+				/obj/item/stack/material/glass/reinforced{amount = 5},
+				/obj/item/stack/material/glass/phoronglass{amount = 5},
+				/obj/item/stack/material/glass/phoronrglass{amount = 5},
+				/obj/item/stack/material/plasteel{amount = 5},
+				/obj/item/stack/material/durasteel{amount = 5},
+				/obj/item/stack/material/gold{amount = 5},
+				/obj/item/stack/material/iron{amount = 10},
+				/obj/item/stack/material/lead{amount = 10},
+				/obj/item/stack/material/diamond{amount = 3},
+				/obj/item/stack/material/deuterium{amount = 5},
+				/obj/item/stack/material/uranium{amount = 5},
+				/obj/item/stack/material/phoron{amount = 5},
+				/obj/item/stack/material/silver{amount = 5},
+				/obj/item/stack/material/platinum{amount = 5},
+				/obj/item/stack/material/mhydrogen{amount = 3},
+				/obj/item/stack/material/osmium{amount = 3},
+				/obj/item/stack/material/titanium{amount = 5},
+				/obj/item/stack/material/tritium{amount = 3},
+				/obj/item/stack/material/verdantium{amount = 2})
 
 /obj/random/tank
 	name = "random tank"

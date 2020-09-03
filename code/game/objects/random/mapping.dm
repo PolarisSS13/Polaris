@@ -453,6 +453,240 @@
 			)
 		)
 
+/obj/random/multiple/ore_pile
+	name = "random ore pile"
+	desc = "A pile of random ores. High chance of a larger pile of common ores, lower chances of small piles of rarer ores."
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "ore_clown"
+
+
+/obj/random/multiple/ore_pile/item_to_spawn()
+	return pick(
+			prob(10);list(
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal,
+				/obj/item/weapon/ore/coal
+			),
+			prob(3);list(
+				/obj/item/weapon/ore/diamond,
+				/obj/item/weapon/ore/diamond,
+				/obj/item/weapon/ore/diamond
+			),
+			prob(15);list(
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass,
+				/obj/item/weapon/ore/glass
+			),
+			prob(5);list(
+				/obj/item/weapon/ore/gold,
+				/obj/item/weapon/ore/gold,
+				/obj/item/weapon/ore/gold,
+				/obj/item/weapon/ore/gold,
+				/obj/item/weapon/ore/gold
+			),
+			prob(2);list(
+				/obj/item/weapon/ore/hydrogen,
+				/obj/item/weapon/ore/hydrogen
+			),
+			prob(10);list(
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron,
+				/obj/item/weapon/ore/iron
+			),
+			prob(10);list(
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead,
+				/obj/item/weapon/ore/lead
+			),
+			prob(5);list(
+				/obj/item/weapon/ore/marble,
+				/obj/item/weapon/ore/marble,
+				/obj/item/weapon/ore/marble,
+				/obj/item/weapon/ore/marble,
+				/obj/item/weapon/ore/marble
+			),
+			prob(3);list(
+				/obj/item/weapon/ore/osmium,
+				/obj/item/weapon/ore/osmium,
+				/obj/item/weapon/ore/osmium
+			),
+			prob(5);list(
+				/obj/item/weapon/ore/phoron,
+				/obj/item/weapon/ore/phoron,
+				/obj/item/weapon/ore/phoron,
+				/obj/item/weapon/ore/phoron,
+				/obj/item/weapon/ore/phoron
+			),
+			prob(5);list(
+				/obj/item/weapon/ore/silver,
+				/obj/item/weapon/ore/silver,
+				/obj/item/weapon/ore/silver,
+				/obj/item/weapon/ore/silver,
+				/obj/item/weapon/ore/silver
+			),
+			prob(3);list(
+				/obj/item/weapon/ore/uranium,
+				/obj/item/weapon/ore/uranium,
+				/obj/item/weapon/ore/uranium
+			),
+			prob(2);list(
+				/obj/item/weapon/ore/verdantium,
+				/obj/item/weapon/ore/verdantium
+			),
+		)
+
+/obj/random/multiple/corp_crate
+	name = "random corporate crate"
+	desc = "A random corporate crate with thematic contents."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "crate"
+
+/obj/random/multiple/corp_crate/item_to_spawn()
+	return pick(
+			prob(10);list(
+				/obj/random/tank,
+				/obj/random/tank,
+				/obj/random/tank,
+				/obj/item/clothing/mask/breath,
+				/obj/item/clothing/mask/breath,
+				/obj/item/clothing/mask/breath,
+				/obj/structure/closet/crate/aether //AETHER
+			),
+			prob(10);list(
+				/obj/random/mre,
+				/obj/random/mre,
+				/obj/random/mre,
+				/obj/random/mre,
+				/obj/random/mre,
+				/obj/structure/closet/crate/centauri //CENTAURI
+			),
+			prob(10);list(
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/structure/closet/crate/einstein //EINSTEIN
+			),
+			prob(10);list(
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/structure/closet/crate/focalpoint //FOCAL
+			),
+			prob(15);list(
+				/obj/random/drinkbottle,
+				/obj/random/drinkbottle,
+				/obj/random/cigarettes,
+				/obj/random/cigarettes,
+				/obj/structure/closet/crate/gilthari //GILTHARI
+			),
+			prob(15);list(
+				/obj/random/tech_supply,
+				/obj/random/tech_supply/component,
+				/obj/random/tech_supply/component,
+				/obj/random/tech_supply/component,
+				/obj/random/tech_supply/component,
+				/obj/structure/closet/crate/grayson //GRAYSON TECH
+			),
+			prob(15);list(
+				/obj/random/multiple/ore_pile,
+				/obj/random/multiple/ore_pile,
+				/obj/random/multiple/ore_pile,
+				/obj/random/multiple/ore_pile,
+				/obj/structure/closet/crate/grayson //GRAYSON ORES
+			),
+			prob(15);list(
+				/obj/random/material/refined,
+				/obj/random/material/refined,
+				/obj/random/material/refined,
+				/obj/random/material/refined,
+				/obj/structure/closet/crate/grayson //GRAYSON MATS
+			),
+			prob(2);list(
+				/obj/random/energy,
+				/obj/random/energy,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/structure/closet/crate/secure/heph //HEPHAESTUS ENERGY
+			),
+			prob(2);list(
+				/obj/random/projectile/random,
+				/obj/random/projectile/random,
+				/obj/random/projectile/random,
+				/obj/structure/closet/crate/secure/heph //HEPHAESTUS PROJECTILE
+			),
+			prob(5);list(
+				/obj/random/medical,
+				/obj/random/medical,
+				/obj/random/medical,
+				/obj/random/medical/lite,
+				/obj/random/medical/lite,
+				/obj/structure/closet/crate/veymed //VM
+			),
+			prob(10);list(
+				/obj/random/tech_supply,
+				/obj/random/tech_supply,
+				/obj/random/tech_supply,
+				/obj/random/tech_supply,
+				/obj/random/tech_supply,
+				/obj/structure/closet/crate/xion //XION
+			),
+			prob(10);list(
+				/obj/random/medical,
+				/obj/random/medical/pillbottle,
+				/obj/random/medical/pillbottle,
+				/obj/random/medical/lite,
+				/obj/random/medical/lite,
+				/obj/structure/closet/crate/zenghu //ZENGHU
+			),
+			prob(2);list(
+				/obj/random/contraband,
+				/obj/random/contraband,
+				/obj/random/contraband,
+				/obj/random/projectile/random,
+				/obj/random/projectile/random,
+				/obj/random/mre,
+				/obj/random/mre,
+				/obj/random/mre,
+				/obj/structure/closet/crate/secure/saare //SAARE
+			)
+		)
 /*
  * Turf swappers.
  */
