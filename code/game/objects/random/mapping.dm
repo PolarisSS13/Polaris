@@ -586,11 +586,36 @@
 				/obj/structure/closet/crate/aether //AETHER
 			),
 			prob(10);list(
+				/obj/random/multiple/voidsuit/vintage,
+				/obj/random/multiple/voidsuit/vintage,
+				/obj/random/tank,
+				/obj/random/tank,
+				/obj/item/clothing/mask/breath,
+				/obj/item/clothing/mask/breath,
+				/obj/structure/closet/crate/aether //AETHER
+			),
+			prob(10);list(
 				/obj/random/mre,
 				/obj/random/mre,
 				/obj/random/mre,
 				/obj/random/mre,
 				/obj/random/mre,
+				/obj/structure/closet/crate/centauri //CENTAURI
+			),
+			prob(10);list(
+				/obj/random/drinksoft,
+				/obj/random/drinksoft,
+				/obj/random/drinksoft,
+				/obj/random/drinksoft,
+				/obj/random/drinksoft,
+				/obj/structure/closet/crate/centauri //CENTAURI
+			),
+			prob(10);list(
+				/obj/random/snack,
+				/obj/random/snack,
+				/obj/random/snack,
+				/obj/random/snack,
+				/obj/random/snack,
 				/obj/structure/closet/crate/centauri //CENTAURI
 			),
 			prob(10);list(
@@ -615,11 +640,11 @@
 				/obj/structure/closet/crate/gilthari //GILTHARI
 			),
 			prob(15);list(
-				/obj/random/tech_supply,
-				/obj/random/tech_supply/component,
-				/obj/random/tech_supply/component,
-				/obj/random/tech_supply/component,
-				/obj/random/tech_supply/component,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/component/nofail,
+				/obj/random/tech_supply/component/nofail,
+				/obj/random/tech_supply/component/nofail,
+				/obj/random/tech_supply/component/nofail,
 				/obj/structure/closet/crate/grayson //GRAYSON TECH
 			),
 			prob(15);list(
@@ -652,6 +677,7 @@
 				/obj/structure/closet/crate/secure/heph //HEPHAESTUS PROJECTILE
 			),
 			prob(5);list(
+				/obj/random/firstaid,
 				/obj/random/medical,
 				/obj/random/medical,
 				/obj/random/medical,
@@ -659,15 +685,23 @@
 				/obj/random/medical/lite,
 				/obj/structure/closet/crate/veymed //VM
 			),
+			prob(5);list(
+				/obj/random/firstaid,
+				/obj/random/firstaid,
+				/obj/random/firstaid,
+				/obj/random/firstaid,
+				/obj/structure/closet/crate/veymed //VM
+			),
 			prob(10);list(
-				/obj/random/tech_supply,
-				/obj/random/tech_supply,
-				/obj/random/tech_supply,
-				/obj/random/tech_supply,
-				/obj/random/tech_supply,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
 				/obj/structure/closet/crate/xion //XION
 			),
 			prob(10);list(
+				/obj/random/firstaid,
 				/obj/random/medical,
 				/obj/random/medical/pillbottle,
 				/obj/random/medical/pillbottle,
@@ -675,16 +709,33 @@
 				/obj/random/medical/lite,
 				/obj/structure/closet/crate/zenghu //ZENGHU
 			),
+			prob(10);list(
+				/obj/random/medical/pillbottle,
+				/obj/random/medical/pillbottle,
+				/obj/random/medical/pillbottle,
+				/obj/random/medical/pillbottle,
+				/obj/random/medical/pillbottle,
+				/obj/structure/closet/crate/zenghu //ZENGHU
+			),
 			prob(2);list(
-				/obj/random/contraband,
-				/obj/random/contraband,
-				/obj/random/contraband,
+				/obj/random/contraband/nofail,
+				/obj/random/contraband/nofail,
+				/obj/random/contraband/nofail,
 				/obj/random/projectile/random,
 				/obj/random/projectile/random,
 				/obj/random/mre,
 				/obj/random/mre,
 				/obj/random/mre,
-				/obj/structure/closet/crate/secure/saare //SAARE
+				/obj/structure/closet/crate/secure/saare //SAARE GUNS
+			),
+			prob(1);list(
+				/obj/random/cash/big,
+				/obj/random/cash/big,
+				/obj/random/cash/big,
+				/obj/random/cash/huge,
+				/obj/random/cash/huge,
+				/obj/random/cash/huge,
+				/obj/structure/closet/crate/secure/saare //SAARE CASH CRATE
 			)
 		)
 /*
