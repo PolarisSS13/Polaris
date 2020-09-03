@@ -503,7 +503,7 @@
 				/obj/item/stack/material/plasteel{amount = 10})
 
 /obj/random/material/refined //Random materials for building stuff
-	name = "random refined material (refined)"
+	name = "random refined material"
 	desc = "This is a random refined metal."
 	icon = 'icons/obj/stacks.dmi'
 	icon_state = "sheet-adamantine_3"
