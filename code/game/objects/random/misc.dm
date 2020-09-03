@@ -108,6 +108,27 @@
 				prob(2);/obj/item/weapon/storage/toolbox/emergency,
 				prob(1);/obj/item/weapon/storage/toolbox/syndicate)
 
+/obj/random/smes_coil
+	name = "random smes coil"
+	desc = "This is a random smes coil."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "smes"
+
+/obj/random/smes_coil/item_to_spawn()
+	return pick(prob(4);/obj/item/weapon/smes_coil,
+				prob(1);/obj/item/weapon/smes_coil/super_capacity,
+				prob(1);/obj/item/weapon/smes_coil/super_io)
+
+/obj/random/pacman
+	name = "random portable generator"
+	desc = "This is a random portable generator."
+	icon = 'icons/obj/power.dmi'
+	icon_state = "portgen0"
+
+/obj/random/pacman/item_to_spawn()
+	return pick(prob(6);/obj/machinery/power/port_gen/pacman,
+				prob(3);/obj/machinery/power/port_gen/pacman/super,
+				prob(1);/obj/machinery/power/port_gen/pacman/mrs)
 
 /obj/random/tech_supply
 	name = "random tech supply"

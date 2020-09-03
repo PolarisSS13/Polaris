@@ -626,10 +626,9 @@
 				/obj/structure/closet/crate/einstein //EINSTEIN
 			),
 			prob(10);list(
-				/obj/random/powercell,
-				/obj/random/powercell,
-				/obj/random/powercell,
-				/obj/random/powercell,
+				/obj/item/weapon/circuitboard/smes,
+				/obj/random/smes_coil,
+				/obj/random/smes_coil,
 				/obj/structure/closet/crate/focalpoint //FOCAL
 			),
 			prob(15);list(
@@ -671,7 +670,6 @@
 				/obj/structure/closet/crate/secure/heph //HEPHAESTUS ENERGY
 			),
 			prob(2);list(
-				/obj/random/projectile/random,
 				/obj/random/projectile/random,
 				/obj/random/projectile/random,
 				/obj/structure/closet/crate/secure/heph //HEPHAESTUS PROJECTILE
@@ -736,6 +734,92 @@
 				/obj/random/cash/huge,
 				/obj/random/cash/huge,
 				/obj/structure/closet/crate/secure/saare //SAARE CASH CRATE
+			)
+		)
+
+/obj/random/multiple/large_corp_crate
+	name = "random large corporate crate"
+	desc = "A random large corporate crate with thematic contents."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "largermetal"
+
+/obj/random/multiple/large_corp_crate/item_to_spawn()
+	return pick(
+			prob(30);list(
+				/obj/random/multiple/voidsuit/vintage,
+				/obj/random/multiple/voidsuit/vintage,
+				/obj/random/tank,
+				/obj/random/tank,
+				/obj/item/clothing/mask/breath,
+				/obj/item/clothing/mask/breath,
+				/obj/random/multiple/voidsuit/vintage,
+				/obj/random/multiple/voidsuit/vintage,
+				/obj/random/tank,
+				/obj/random/tank,
+				/obj/item/clothing/mask/breath,
+				/obj/item/clothing/mask/breath,
+				/obj/structure/closet/crate/large/aether //AETHER SUITSBOX
+			),
+			prob(30);list(
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/random/powercell,
+				/obj/structure/closet/crate/large/einstein //EIN BATTERY MEGAPACK
+			),
+			prob(20);list(
+				/obj/item/weapon/circuitboard/smes,
+				/obj/item/weapon/circuitboard/smes,
+				/obj/random/smes_coil,
+				/obj/random/smes_coil,
+				/obj/random/smes_coil,
+				/obj/random/smes_coil,
+				/obj/random/smes_coil,
+				/obj/random/smes_coil,
+				/obj/structure/closet/crate/large/einstein //EIN SMESBOX
+			),
+			prob(2);list(
+				/obj/random/energy,
+				/obj/random/energy,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/random/energy,
+				/obj/random/energy,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/item/weapon/cell/device/weapon,
+				/obj/structure/closet/crate/large/secure/heph //HEPH ENERGY
+			),
+			prob(2);list(
+				/obj/random/projectile/random,
+				/obj/random/projectile/random,
+				/obj/random/projectile/random,
+				/obj/random/projectile/random,
+				/obj/structure/closet/crate/large/secure/heph //HEPH BALLISTICS
+			),
+			prob(20);list(
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/random/tech_supply/nofail,
+				/obj/structure/closet/crate/large/xion //XION TECH
 			)
 		)
 /*
