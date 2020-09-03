@@ -869,7 +869,7 @@
 			if(istype(L, /mob/living/simple_mob))
 				if(issmall(L) && (L.stat == DEAD))
 					L.gib()
-					playsound(src, 'sound/effects/splat.ogg' 50, 1)
+					playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
 					return TRUE
 			L.apply_damage(actuator.trample_damage, BRUTE)
 			playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
