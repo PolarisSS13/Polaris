@@ -432,7 +432,7 @@
 	name = "leather"
 	desc = "The by-product of mob grinding."
 	icon_state = "sheet-leather"
-	default_type = "leather"
+	default_type = MAT_LEATHER
 	no_variants = FALSE
 	pass_color = TRUE
 	strict_color_stacking = TRUE

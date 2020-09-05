@@ -83,8 +83,11 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	health = config.default_brain_health
 	defib_timer = (config.defib_timer MINUTES) / 2
 	spawn(5)
-		if(brainmob && brainmob.client)
-			brainmob.client.screen.len = null //clear the hud
+		if(brainmob)
+			butcherable = FALSE
+
+			if(brainmob.client)
+				brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/Destroy()
 	QDEL_NULL(brainmob)

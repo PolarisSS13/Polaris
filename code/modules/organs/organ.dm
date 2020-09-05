@@ -44,6 +44,9 @@ var/list/organ_cache = list()
 	var/list/target_parent_classes = list()	// Is the parent supposed to be organic, robotic, assisted?
 	var/forgiving_class = TRUE	// Will the organ give its verbs when it isn't a perfect match? I.E., assisted in organic, synthetic in organic.
 
+	var/butcherable = TRUE
+	var/meat_type	// What does butchering, if possible, make?
+
 /obj/item/organ/Destroy()
 
 	handle_organ_mod_special(TRUE)
@@ -92,6 +95,23 @@ var/list/organ_cache = list()
 		species = GLOB.all_species["Human"]
 
 	handle_organ_mod_special()
+
+/obj/item/organ/Initialize()
+	..()
+
+	if(owner)
+		if(!meat_type)
+			if(owner.isSynthetic())
+				meat_type = /obj/item/stack/material/steel
+			else if(ishuman(owner))
+				var/mob/living/carbon/human/H = owner
+				meat_type = H?.species?.meat_type
+
+			if(!meat_type)
+				if(owner.meat_type)
+					meat_type = owner.meat_type
+				else
+					meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
 	if(new_dna)
@@ -310,6 +330,7 @@ var/list/organ_cache = list()
 	robotic = ORGAN_ASSISTED
 	min_bruised_damage = 15
 	min_broken_damage = 35
+	butcherable = FALSE
 
 /obj/item/organ/proc/digitize() //Used to make the circuit-brain. On this level in the event more circuit-organs are added/tweaks are wanted.
 	robotize()
@@ -415,6 +436,46 @@ var/list/organ_cache = list()
 	if(!(robotic >= ORGAN_ROBOT) && user.a_intent == I_HELP && user.zone_sel.selecting == O_MOUTH)
 		bitten(user)
 		return
+
+/obj/item/organ/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if(can_butcher(W, user))
+		butcher(W, user)
+		return
+
+	return ..()
+
+/obj/item/organ/proc/can_butcher(var/obj/item/O, var/mob/living/user)
+	if(butcherable && meat_type)
+
+		if(istype(O, /obj/machinery/gibber))	// The great equalizer.
+			return TRUE
+
+		if(robotic >= ORGAN_ROBOT)
+			if(O.is_screwdriver())
+				return TRUE
+
+		else
+			if(is_sharp(O) && has_edge(O))
+				return TRUE
+
+	return FALSE
+
+/obj/item/organ/proc/butcher(var/obj/item/O, var/mob/living/user, var/atom/newtarget)
+	if(robotic >= ORGAN_ROBOT)
+		user?.visible_message("<span class='notice'>[user] disassembles \the [src].</span>")
+
+	else
+		user?.visible_message("<span class='notice'>[user] butchers \the [src].</span>")
+
+	if(!newtarget)
+		newtarget = get_turf(src)
+
+	var/obj/item/newmeat = new meat_type(newtarget)
+
+	if(istype(newmeat, /obj/item/weapon/reagent_containers/food/snacks/meat))
+		newmeat.name = "[src.name] [newmeat.name]"	// "liver meat" "heart meat", etc.
+
+	qdel(src)
 
 /obj/item/organ/proc/organ_can_feel_pain()
 	if(species.flags & NO_PAIN)

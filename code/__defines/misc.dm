@@ -148,6 +148,7 @@
 #define MAT_METALHYDROGEN	"mhydrogen"
 #define MAT_OSMIUM			"osmium"
 #define MAT_GRAPHITE		"graphite"
+#define MAT_LEATHER			"leather"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
