@@ -33,7 +33,7 @@
 	var/mob/living/carbon/occupant = null
 
 	var/step_in = 10					//Make a step in step_in/10 sec.
-	var/encumberence_gap = 1			//How many points of slowdown are negated from equipment? Added to the mech's base step_in.
+	var/encumbrance_gap = 1			//How many points of slowdown are negated from equipment? Added to the mech's base step_in.
 
 	var/dir_in = 2						//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 10
@@ -653,10 +653,10 @@
 			if(ME.get_step_delay())
 				tally += ME.get_step_delay()
 
-		if(tally <= encumberence_gap)	// If the total is less than our encumberence gap, ignore equipment weight.
+		if(tally <= encumbrance_gap)	// If the total is less than our encumbrance gap, ignore equipment weight.
 			tally = 0
 		else	// Otherwise, start the tally after cutting that gap out.
-			tally -= encumberence_gap
+			tally -= encumbrance_gap
 
 	for(var/slot in internal_components)
 		var/obj/item/mecha_parts/component/C = internal_components[slot]
