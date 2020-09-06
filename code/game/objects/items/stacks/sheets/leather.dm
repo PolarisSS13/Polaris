@@ -11,9 +11,9 @@
 	var/process_type = /obj/item/stack/hairlesshide
 
 /obj/item/stack/animalhide/human
-	name = "human skin"
-	desc = "The by-product of human farming."
-	singular_name = "human skin piece"
+	name = "skin"
+	desc = "The by-product of sapient farming."
+	singular_name = "skin piece"
 	icon_state = "sheet-hide"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/cloth.ogg'

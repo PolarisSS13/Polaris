@@ -154,6 +154,11 @@
 	// contained in a cage
 	var/in_stasis = 0
 
+	// Used for if the mob can drop limbs. Overrides species dmi.
+	var/limb_icon
+	// Used for if the mob can drop limbs. Overrides the icon cache key, so it doesn't keep remaking the icon needlessly.
+	var/limb_icon_key
+
 /mob/living/simple_mob/Initialize()
 	verbs -= /mob/verb/observe
 	health = maxHealth
@@ -165,8 +170,31 @@
 
 	if(has_eye_glow)
 		add_eyes()
-	return ..()
 
+	if(LAZYLEN(organs))
+		for(var/path in organs)
+			if(ispath(path))
+				var/obj/item/organ/external/neworg = new path(src)
+				neworg.name = "[name] [neworg.name]"
+				neworg.meat_type = meat_type
+
+				if(limb_icon)
+					neworg.force_icon = limb_icon
+					neworg.force_icon_key = limb_icon_key
+
+				organs |= neworg
+				organs -= path
+
+	if(LAZYLEN(internal_organs))
+		for(var/path in internal_organs)
+			if(ispath(path))
+				var/obj/item/organ/neworg = new path(src)
+				neworg.name = "[name] [neworg.name]"
+				neworg.meat_type = meat_type
+				internal_organs |= neworg
+				internal_organs -= path
+
+	return ..()
 
 /mob/living/simple_mob/Destroy()
 	default_language = null
@@ -184,7 +212,6 @@
 /mob/living/simple_mob/death()
 	update_icon()
 	..()
-
 
 //Client attached
 /mob/living/simple_mob/Login()

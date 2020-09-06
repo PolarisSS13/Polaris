@@ -922,6 +922,7 @@ var/list/name_to_material
 	sheet_singular_name = null
 	sheet_plural_name = "pile"
 	pass_stack_colors = TRUE
+	supply_conversion_value = 1
 
 /material/wood/log/sif
 	name = MAT_SIFLOG
@@ -1007,6 +1008,7 @@ var/list/name_to_material
 	flags = MATERIAL_PADDING
 	conductive = 0
 	pass_stack_colors = TRUE
+	supply_conversion_value = 2
 
 /material/cult
 	name = "cult"
@@ -1043,6 +1045,7 @@ var/list/name_to_material
 	melting_point = T0C+300
 	protectiveness = 3 // 13%
 	conductive = 0
+	supply_conversion_value = 3
 
 /material/carpet
 	name = "carpet"

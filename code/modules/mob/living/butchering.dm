@@ -27,25 +27,40 @@
 	return FALSE
 
 /mob/living/proc/handle_butcher(var/mob/user, var/obj/item/I)
-	if(LAZYLEN(butchery_loot) && (!user || do_after(user, 2 SECONDS * (butchery_loot.len), src)))
+	if(!user || do_after(user, 2 SECONDS * mob_size / 10, src))
 		if(LAZYLEN(butchery_loot))
-			for(var/path in butchery_loot)
-				while(butchery_loot[path])
-					butchery_loot[path] -= 1
-					var/obj/item/loot = new path(get_turf(src))
-					loot.pixel_x = rand(-12, 12)
-					loot.pixel_y = rand(-12, 12)
+			if(LAZYLEN(butchery_loot))
+				for(var/path in butchery_loot)
+					while(butchery_loot[path])
+						butchery_loot[path] -= 1
+						var/obj/item/loot = new path(get_turf(src))
+						loot.pixel_x = rand(-12, 12)
+						loot.pixel_y = rand(-12, 12)
 
-			butchery_loot.Cut()
-			butchery_loot = null
+				butchery_loot.Cut()
+				butchery_loot = null
 
-	if(!ckey)
-		if(issmall(src))
-			user?.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
-			new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
-			if(gib_on_butchery)
-				qdel(src)
-		else
-			user?.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
-			if(gib_on_butchery)
-				gib()
+		if(LAZYLEN(organs))
+			organs_by_name.Cut()
+
+			for(var/obj/item/organ/OR in organs)
+				OR.removed()
+				organs -= OR
+
+		if(LAZYLEN(internal_organs))
+			internal_organs_by_name.Cut()
+
+			for(var/obj/item/organ/OR in internal_organs)
+				OR.removed()
+				internal_organs -= OR
+
+		if(!ckey)
+			if(issmall(src))
+				user?.visible_message("<span class='danger'>[user] chops up \the [src]!</span>")
+				new /obj/effect/decal/cleanable/blood/splatter(get_turf(src))
+				if(gib_on_butchery)
+					qdel(src)
+			else
+				user?.visible_message("<span class='danger'>[user] butchers \the [src] messily!</span>")
+				if(gib_on_butchery)
+					gib()
