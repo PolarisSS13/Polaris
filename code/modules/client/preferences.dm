@@ -50,7 +50,7 @@ datum/preferences
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin tone
+	var/s_tone = -75						//Skin tone
 	var/r_skin = 0						//Skin color
 	var/g_skin = 0						//Skin color
 	var/b_skin = 0						//Skin color

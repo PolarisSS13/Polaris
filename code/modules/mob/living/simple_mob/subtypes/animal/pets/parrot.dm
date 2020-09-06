@@ -109,6 +109,7 @@
 	icon_rest = "poly-held"
 	icon_dead = "poly-dead"
 	tt_desc = "E Ara macao"
+	attack_armor_pen = 20	//HE HAS THE B E A K
 	my_headset = /obj/item/device/radio/headset/headset_eng
 	say_list_type = /datum/say_list/bird/poly
 
