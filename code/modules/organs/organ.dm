@@ -295,19 +295,20 @@ var/list/organ_cache = list()
 
 //Germs
 /obj/item/organ/proc/handle_antibiotics()
-	var/antibiotics = owner?.chem_effects[CE_ANTIBIOTIC] || 0
+	if(istype(owner))
+		var/antibiotics = owner.chem_effects[CE_ANTIBIOTIC] || 0
 
-	if (!germ_level || antibiotics < ANTIBIO_NORM)
-		return
+		if (!germ_level || antibiotics < ANTIBIO_NORM)
+			return
 
-	if (germ_level < INFECTION_LEVEL_ONE)
-		germ_level = 0	//cure instantly
-	else if (germ_level < INFECTION_LEVEL_TWO)
-		adjust_germ_level(-antibiotics*4)	//at germ_level < 500, this should cure the infection in a minute
-	else if (germ_level < INFECTION_LEVEL_THREE)
-		adjust_germ_level(-antibiotics*2) //at germ_level < 1000, this will cure the infection in 5 minutes
-	else
-		adjust_germ_level(-antibiotics)	// You waited this long to get treated, you don't really deserve this organ
+		if (germ_level < INFECTION_LEVEL_ONE)
+			germ_level = 0	//cure instantly
+		else if (germ_level < INFECTION_LEVEL_TWO)
+			adjust_germ_level(-antibiotics*4)	//at germ_level < 500, this should cure the infection in a minute
+		else if (germ_level < INFECTION_LEVEL_THREE)
+			adjust_germ_level(-antibiotics*2) //at germ_level < 1000, this will cure the infection in 5 minutes
+		else
+			adjust_germ_level(-antibiotics)	// You waited this long to get treated, you don't really deserve this organ
 
 //Adds autopsy data for used_weapon.
 /obj/item/organ/proc/add_autopsy_data(var/used_weapon, var/damage)
