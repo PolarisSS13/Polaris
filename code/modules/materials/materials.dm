@@ -1034,6 +1034,20 @@ var/list/name_to_material
 /material/cult/reinf/place_dismantled_product(var/turf/target)
 	new /obj/effect/decal/remains/human(target)
 
+/material/chitin
+	name = MAT_CHITIN
+	icon_colour = "#8d6653"
+	stack_type = /obj/item/stack/material/chitin
+	stack_origin_tech = list(TECH_MATERIAL = 3, TECH_BIO = 4)
+	icon_base = "solid"
+	icon_reinf = "reinf_mesh"
+	integrity = 60
+	ignition_point = T0C+400
+	melting_point = T0C+500
+	protectiveness = 25
+	conductive = 0
+	supply_conversion_value = 4
+
 //TODO PLACEHOLDERS:
 /material/leather
 	name = MAT_LEATHER

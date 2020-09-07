@@ -16,3 +16,7 @@
 		/obj/item/organ/internal/intestine,\
 		/obj/item/organ/internal/lungs\
 		)
+
+	butchery_loot = list(\
+		/obj/item/stack/animalhide = 3\
+		)

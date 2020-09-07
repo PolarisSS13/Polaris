@@ -439,6 +439,17 @@
 	drop_sound = 'sound/items/drop/leather.ogg'
 	pickup_sound = 'sound/items/pickup/leather.ogg'
 
+/obj/item/stack/material/chitin
+	name = "chitin"
+	desc = "The by-product of mob grinding."
+	icon_state = "chitin"
+	default_type = MAT_CHITIN
+	no_variants = FALSE
+	pass_color = TRUE
+	strict_color_stacking = TRUE
+	drop_sound = 'sound/items/drop/leather.ogg'
+	pickup_sound = 'sound/items/pickup/leather.ogg'
+
 /obj/item/stack/material/glass
 	name = "glass"
 	icon_state = "sheet-glass"

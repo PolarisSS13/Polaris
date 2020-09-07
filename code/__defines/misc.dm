@@ -149,6 +149,7 @@
 #define MAT_OSMIUM			"osmium"
 #define MAT_GRAPHITE		"graphite"
 #define MAT_LEATHER			"leather"
+#define MAT_CHITIN			"chitin"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
