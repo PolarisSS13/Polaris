@@ -66,7 +66,7 @@ var/list/organ_cache = list()
 	..(holder)
 	create_reagents(5)
 
-	if(holder)
+	if(isliving(holder))
 		src.owner = holder
 		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		if(internal)
@@ -207,7 +207,7 @@ var/list/organ_cache = list()
 		germ_level = 0
 		return 0
 
-	var/antibiotics = owner?.chem_effects[CE_ANTIBIOTIC] || 0
+	var/antibiotics = iscarbon(owner) ? owner.chem_effects[CE_ANTIBIOTIC] || 0 : 0
 
 	var/infection_damage = 0
 
