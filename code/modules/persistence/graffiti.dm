@@ -21,13 +21,14 @@
 	if(!isnull(author))
 		author = _author
 
-/obj/effect/decal/writing/Initialize()
+/obj/effect/decal/writing/Initialize(mapload)
 	var/list/random_icon_states = icon_states(icon)
 	for(var/obj/effect/decal/writing/W in loc)
 		random_icon_states.Remove(W.icon_state)
 	if(random_icon_states.len)
 		icon_state = pick(random_icon_states)
-	SSpersistence.track_value(src, /datum/persistent/graffiti)
+	if(!mapload || !config.persistence_ignore_mapload)
+		SSpersistence.track_value(src, /datum/persistent/graffiti)
 	. = ..()
 
 /obj/effect/decal/writing/Destroy()
@@ -39,10 +40,10 @@
 	to_chat(user,  "It reads \"[message]\".")
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
-	if(is_hot(thing))
+	if(istype(thing, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/welder = thing
 		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 5, src) && !QDELETED(src))
-			playsound(src.loc, 'sound/items/Welder2.ogg', 50, 1)
+			playsound(src.loc, welder.usesound, 50, 1)
 			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")
 			qdel(src)
 	else if(thing.sharp)

@@ -3,17 +3,22 @@ import { createVNode } from 'inferno';
 import { ChildFlags, VNodeFlags } from 'inferno-vnode-flags';
 import { CSS_COLORS } from '../constants';
 
-const UNIT_PX = 12;
-
 /**
  * Coverts our rem-like spacing unit into a CSS unit.
  */
 export const unit = value => {
   if (typeof value === 'string') {
+    // Transparently convert pixels into rem units
+    if (value.endsWith('px') && !Byond.IS_LTE_IE8) {
+      return parseFloat(value) / 12 + 'rem';
+    }
     return value;
   }
   if (typeof value === 'number') {
-    return (value * UNIT_PX) + 'px';
+    if (Byond.IS_LTE_IE8) {
+      return value * 12 + 'px';
+    }
+    return value + 'rem';
   }
 };
 
@@ -22,10 +27,10 @@ export const unit = value => {
  */
 export const halfUnit = value => {
   if (typeof value === 'string') {
-    return value;
+    return unit(value);
   }
   if (typeof value === 'number') {
-    return (value * UNIT_PX * 0.5) + 'px';
+    return unit(value * 0.5);
   }
 };
 
@@ -68,7 +73,10 @@ const mapColorPropTo = attrName => (style, value) => {
 
 const styleMapperByPropName = {
   // Direct mapping
+  display: mapRawPropTo('display'),
   position: mapRawPropTo('position'),
+  float: mapRawPropTo('float'),
+  clear: mapRawPropTo('clear'),
   overflow: mapRawPropTo('overflow'),
   overflowX: mapRawPropTo('overflow-x'),
   overflowY: mapRawPropTo('overflow-y'),
@@ -84,10 +92,18 @@ const styleMapperByPropName = {
   maxHeight: mapUnitPropTo('max-height', unit),
   fontSize: mapUnitPropTo('font-size', unit),
   fontFamily: mapRawPropTo('font-family'),
-  lineHeight: mapRawPropTo('line-height'),
+  lineHeight: (style, value) => {
+    if (!isFalsy(value)) {
+      style['line-height'] = typeof value === 'number'
+        ? value
+        : unit(value);
+    }
+  },
   opacity: mapRawPropTo('opacity'),
   textAlign: mapRawPropTo('text-align'),
   verticalAlign: mapRawPropTo('vertical-align'),
+  textTransform: mapRawPropTo('text-transform'),
+  wordWrap: mapRawPropTo('word-wrap'),
   // Boolean props
   inline: mapBooleanPropTo('display', 'inline-block'),
   bold: mapBooleanPropTo('font-weight', 'bold'),
@@ -125,6 +141,18 @@ const styleMapperByPropName = {
   color: mapColorPropTo('color'),
   textColor: mapColorPropTo('color'),
   backgroundColor: mapColorPropTo('background-color'),
+  // Flex props
+  order: mapRawPropTo('order'),
+  flexDirection: mapRawPropTo('flex-direction'),
+  flexGrow: mapRawPropTo('flex-grow'),
+  flexShrink: mapRawPropTo('flex-shrink'),
+  flexWrap: mapRawPropTo('flex-wrap'),
+  flexFlow: mapRawPropTo('flex-flow'),
+  flexBasis: mapRawPropTo('flex-basis'),
+  flex: mapRawPropTo('flex'),
+  alignItems: mapRawPropTo('align-items'),
+  justifyContent: mapRawPropTo('justify-content'),
+  alignSelf: mapRawPropTo('align-self'),
   // Utility props
   fillPositionedParent: (style, value) => {
     if (value) {
@@ -140,6 +168,9 @@ const styleMapperByPropName = {
 export const computeBoxProps = props => {
   const computedProps = {};
   const computedStyles = {};
+  if (props.double) {
+    computedStyles["transform"] = "scale(2);";
+  }
   // Compute props
   for (let propName of Object.keys(props)) {
     if (propName === 'style') {

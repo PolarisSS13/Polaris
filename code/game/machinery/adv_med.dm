@@ -55,6 +55,7 @@
 		M.forceMove(src)
 		occupant = M
 		icon_state = "body_scanner_1"
+		playsound(src, 'sound/machines/medbayscanner1.ogg', 50) // Beepboop you're being scanned. <3
 		add_fingerprint(user)
 		qdel(G)
 	if(!occupant)
@@ -98,6 +99,7 @@
 	O.forceMove(src)
 	occupant = O
 	icon_state = "body_scanner_1"
+	playsound(src, 'sound/machines/medbayscanner1.ogg', 50) // Beepboop you're being scanned. <3
 	add_fingerprint(user)
 
 /obj/machinery/bodyscanner/relaymove(mob/user as mob)

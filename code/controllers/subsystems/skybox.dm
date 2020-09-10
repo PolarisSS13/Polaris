@@ -108,8 +108,12 @@ SUBSYSTEM_DEF(skybox)
 	for(var/z in zlevels)
 		skybox_cache["[z]"] = generate_skybox(z)
 
-	for(var/client/C)
-		C.update_skybox(1)
+	for(var/client/C in GLOB.clients)
+		var/their_z = get_z(C.mob)
+		if(!their_z) //Nullspace
+			continue
+		if(their_z in zlevels)
+			C.update_skybox(1)
 
 // Settings datum that maps can override to play with their skyboxes
 /datum/skybox_settings
@@ -117,7 +121,7 @@ SUBSYSTEM_DEF(skybox)
 	var/icon_state = "dyable"
 	var/color
 	var/random_color = FALSE
-	
+
 	var/use_stars = TRUE
 	var/star_icon = 'icons/skybox/skybox.dmi'
 	var/star_state = "stars"
