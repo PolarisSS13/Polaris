@@ -68,11 +68,11 @@ var/list/gamemode_cache = list()
 	var/static/allow_ai_shells = FALSE			// allow AIs to enter and leave special borg shells at will, and for those shells to be buildable.
 	var/static/give_free_ai_shell = FALSE		// allows a specific spawner object to instantiate a premade AI Shell
 	var/static/hostedby = null
-	
+
 	var/static/respawn = 1
 	var/static/respawn_time = 3000			// time before a dead player is allowed to respawn (in ds, though the config file asks for minutes, and it's converted below)
 	var/static/respawn_message = "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
-	
+
 	var/static/guest_jobban = 1
 	var/static/usewhitelist = 0
 	var/static/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
@@ -215,6 +215,8 @@ var/list/gamemode_cache = list()
 	var/python_path = "" //Path to the python executable.  Defaults to "python" on windows and "/usr/bin/env python2" on unix
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
+
+	var/static/list/engine_map = list("Supermatter Engine", "Edison's Bane")	// Comma separated list of engines to choose from.  Blank means fully random.
 
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
@@ -489,7 +491,7 @@ var/list/gamemode_cache = list()
 				if ("respawn_time")
 					var/raw_minutes = text2num(value)
 					config.respawn_time = raw_minutes MINUTES
-				
+
 				if ("respawn_message")
 					config.respawn_message = value
 
@@ -579,7 +581,7 @@ var/list/gamemode_cache = list()
 
 				if("persistence_disabled")
 					config.persistence_disabled = TRUE // Previously this forcibly set persistence enabled in the saves.
-					
+
 				if("persistence_ignore_mapload")
 					config.persistence_ignore_mapload = TRUE
 
@@ -784,6 +786,9 @@ var/list/gamemode_cache = list()
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("engine_map")
+					config.engine_map = splittext(value, ",")
 /*
 				if("station_levels")
 					using_map.station_levels = text2numlist(value, ";")

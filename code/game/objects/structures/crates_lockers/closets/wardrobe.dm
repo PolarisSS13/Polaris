@@ -406,7 +406,8 @@
 		/obj/item/clothing/gloves/swat,
 		/obj/item/clothing/mask/balaclava/tactical,
 		/obj/item/clothing/mask/balaclava,
-		/obj/item/clothing/mask/bandana/skull = 2)
+		/obj/item/clothing/mask/bandana/skull = 2,
+		/obj/item/clothing/mask/gas/sechailer/swat)
 
 
 /obj/structure/closet/wardrobe/suit
@@ -438,7 +439,7 @@
 		/obj/item/weapon/storage/backpack/satchel = 2)
 
 /obj/structure/closet/wardrobe/captain
-	name = "colony director's wardrobe"
+	name = "site manager's wardrobe"
 	closet_appearance = /decl/closet_appearance/cabinet
 
 	starts_with = list(

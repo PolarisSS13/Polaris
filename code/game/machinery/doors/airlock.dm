@@ -31,9 +31,9 @@
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
 
-	var/open_sound_powered = 'sound/machines/airlock.ogg'
+	var/open_sound_powered = 'sound/machines/door/covert1o.ogg'
 	var/open_sound_unpowered = 'sound/machines/airlockforced.ogg'
-	var/close_sound_powered = 'sound/machines/airlockclose.ogg'
+	var/close_sound_powered = 'sound/machines/door/covert1c.ogg'
 	var/denied_sound = 'sound/machines/deniedbeep.ogg'
 	var/bolt_up_sound = 'sound/machines/boltsup.ogg'
 	var/bolt_down_sound = 'sound/machines/boltsdown.ogg'
@@ -73,7 +73,7 @@
 				if(do_after(user,5 SECONDS,src))
 					visible_message("<span class='danger'>\The [user] forces \the [src] open, sparks flying from its electronics!</span>")
 					src.do_animate("spark")
-					playsound(src, 'sound/machines/airlock_creaking.ogg', 100, 1)
+					playsound(src, 'sound/machines/airlock_creaking.ogg', 100, 1, volume_channel = VOLUME_CHANNEL_DOORS)
 					src.locked = 0
 					src.welded = 0
 					update_icon()
@@ -82,7 +82,7 @@
 			else if(src.density)
 				visible_message("<span class='alium'>\The [user] begins forcing \the [src] open!</span>")
 				if(do_after(user, 5 SECONDS,src))
-					playsound(src, 'sound/machines/airlock_creaking.ogg', 100, 1)
+					playsound(src, 'sound/machines/airlock_creaking.ogg', 100, 1, volume_channel = VOLUME_CHANNEL_DOORS)
 					visible_message("<span class='danger'>\The [user] forces \the [src] open!</span>")
 					open(1)
 			else
@@ -103,35 +103,49 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorcom.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
+	open_sound_powered = 'sound/machines/door/cmd3o.ogg'
+	close_sound_powered = 'sound/machines/door/cmd3c.ogg'
 
 /obj/machinery/door/airlock/security
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorsec.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_sec
+	open_sound_powered = 'sound/machines/door/sec1o.ogg'
+	close_sound_powered = 'sound/machines/door/sec1c.ogg'
 
 /obj/machinery/door/airlock/engineering
 	name = "Airlock"
 	icon = 'icons/obj/doors/Dooreng.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_eng
+	open_sound_powered = 'sound/machines/door/eng1o.ogg'
+	close_sound_powered = 'sound/machines/door/eng1c.ogg'
 
 /obj/machinery/door/airlock/engineeringatmos
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorengatmos.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_eat
+	open_sound_powered = 'sound/machines/door/eng1o.ogg'
+	close_sound_powered = 'sound/machines/door/eng1c.ogg'
 
 /obj/machinery/door/airlock/medical
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doormed.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
+	open_sound_powered = 'sound/machines/door/med1o.ogg'
+	close_sound_powered = 'sound/machines/door/med1c.ogg'
 
 /obj/machinery/door/airlock/maintenance
 	name = "Maintenance Access"
 	icon = 'icons/obj/doors/Doormaint.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_mai
+	open_sound_powered = 'sound/machines/door/door2o.ogg'
+	close_sound_powered = 'sound/machines/door/door2c.ogg'
 
 /obj/machinery/door/airlock/maintenance/cargo
 	icon = 'icons/obj/doors/Doormaint_cargo.dmi'
 	req_one_access = list(access_cargo)
+	open_sound_powered = 'sound/machines/door/door2o.ogg'
+	close_sound_powered = 'sound/machines/door/door2c.ogg'
 
 /obj/machinery/door/airlock/maintenance/command
 	icon = 'icons/obj/doors/Doormaint_command.dmi'
@@ -139,6 +153,8 @@
 
 /obj/machinery/door/airlock/maintenance/common
 	icon = 'icons/obj/doors/Doormaint_common.dmi'
+	open_sound_powered = 'sound/machines/door/hall3o.ogg'
+	close_sound_powered = 'sound/machines/door/hall3c.ogg'
 
 /obj/machinery/door/airlock/maintenance/engi
 	icon = 'icons/obj/doors/Doormaint_engi.dmi'
@@ -163,6 +179,8 @@
 	name = "External Airlock"
 	icon = 'icons/obj/doors/Doorext.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
+	open_sound_powered = 'sound/machines/door/space1o.ogg'
+	close_sound_powered = 'sound/machines/door/space1c.ogg'
 
 /obj/machinery/door/airlock/external/glass/bolted
 	icon_state = "door_locked" // So it looks visibly bolted in map editor
@@ -178,12 +196,15 @@
 	assembly_type = /obj/structure/door_assembly/door_assembly_ext
 	opacity = 0
 	glass = 1
+	open_sound_powered = 'sound/machines/door/space1o.ogg'
+	close_sound_powered = 'sound/machines/door/space1c.ogg'
 
 /obj/machinery/door/airlock/glass
 	name = "Glass Airlock"
 	icon = 'icons/obj/doors/Doorglass.dmi'
 	hitsound = 'sound/effects/Glasshit.ogg'
-	open_sound_powered = 'sound/machines/windowdoor.ogg'
+	open_sound_powered = 'sound/machines/door/hall1o.ogg'
+	close_sound_powered = 'sound/machines/door/hall1c.ogg'
 	maxhealth = 300
 	explosion_resistance = 5
 	opacity = 0
@@ -193,12 +214,16 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorele.dmi'
 	opacity = 1
+	open_sound_powered = 'sound/machines/door/cmd3o.ogg'
+	close_sound_powered = 'sound/machines/door/cmd3c.ogg'
 
 /obj/machinery/door/airlock/glass_centcom
 	name = "Airlock"
 	icon = 'icons/obj/doors/Dooreleglass.dmi'
 	opacity = 0
 	glass = 1
+	open_sound_powered = 'sound/machines/door/cmd3o.ogg'
+	close_sound_powered = 'sound/machines/door/cmd3c.ogg'
 
 /obj/machinery/door/airlock/vault
 	name = "Vault"
@@ -207,6 +232,8 @@
 	opacity = 1
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity //Until somebody makes better sprites.
+	open_sound_powered = 'sound/machines/door/vault1o.ogg'
+	close_sound_powered = 'sound/machines/door/vault1c.ogg'
 
 /obj/machinery/door/airlock/vault/bolted
 	icon_state = "door_locked"
@@ -224,6 +251,9 @@
 	explosion_resistance = 20
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_hatch
+	open_sound_powered = 'sound/machines/door/hatchopen.ogg'
+	close_sound_powered = 'sound/machines/door/hatchclose.ogg'
+	open_sound_unpowered = 'sound/machines/door/hatchforced.ogg'
 
 /obj/machinery/door/airlock/maintenance_hatch
 	name = "Maintenance Hatch"
@@ -231,6 +261,9 @@
 	explosion_resistance = 20
 	opacity = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_mhatch
+	open_sound_powered = 'sound/machines/door/hatchopen.ogg'
+	close_sound_powered = 'sound/machines/door/hatchclose.ogg'
+	open_sound_unpowered = 'sound/machines/door/hatchforced.ogg'
 
 /obj/machinery/door/airlock/glass_command
 	name = "Maintenance Hatch"
@@ -241,6 +274,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_com
 	glass = 1
+	open_sound_powered = 'sound/machines/door/cmd1o.ogg'
+	close_sound_powered = 'sound/machines/door/cmd1c.ogg'
 
 /obj/machinery/door/airlock/glass_engineering
 	name = "Maintenance Hatch"
@@ -251,6 +286,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_eng
 	glass = 1
+	open_sound_powered = 'sound/machines/door/eng1o.ogg'
+	close_sound_powered = 'sound/machines/door/eng1c.ogg'
 
 /obj/machinery/door/airlock/glass_engineeringatmos
 	name = "Maintenance Hatch"
@@ -261,6 +298,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_eat
 	glass = 1
+	open_sound_powered = 'sound/machines/door/eng1o.ogg'
+	close_sound_powered = 'sound/machines/door/eng1c.ogg'
 
 /obj/machinery/door/airlock/glass_security
 	name = "Maintenance Hatch"
@@ -271,6 +310,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_sec
 	glass = 1
+	open_sound_powered = 'sound/machines/door/sec1o.ogg'
+	close_sound_powered = 'sound/machines/door/sec1c.ogg'
 
 /obj/machinery/door/airlock/glass_medical
 	name = "Maintenance Hatch"
@@ -281,21 +322,29 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_med
 	glass = 1
+	open_sound_powered = 'sound/machines/door/med1o.ogg'
+	close_sound_powered = 'sound/machines/door/med1c.ogg'
 
 /obj/machinery/door/airlock/mining
 	name = "Mining Airlock"
 	icon = 'icons/obj/doors/Doormining.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_min
+	open_sound_powered = 'sound/machines/door/cgo1o.ogg'
+	close_sound_powered = 'sound/machines/door/cgo1c.ogg'
 
 /obj/machinery/door/airlock/atmos
 	name = "Atmospherics Airlock"
 	icon = 'icons/obj/doors/Dooratmo.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_atmo
+	open_sound_powered = 'sound/machines/door/eng1o.ogg'
+	close_sound_powered = 'sound/machines/door/eng1c.ogg'
 
 /obj/machinery/door/airlock/research
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorresearch.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_research
+	open_sound_powered = 'sound/machines/door/sci1o.ogg'
+	close_sound_powered = 'sound/machines/door/sci1c.ogg'
 
 /obj/machinery/door/airlock/glass_research
 	name = "Maintenance Hatch"
@@ -306,7 +355,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_research
 	glass = 1
-	heat_proof = 1
+	open_sound_powered = 'sound/machines/door/sci1o.ogg'
+	close_sound_powered = 'sound/machines/door/sci1c.ogg'
 
 /obj/machinery/door/airlock/glass_mining
 	name = "Maintenance Hatch"
@@ -317,6 +367,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_min
 	glass = 1
+	open_sound_powered = 'sound/machines/door/cgo1o.ogg'
+	close_sound_powered = 'sound/machines/door/cgo1c.ogg'
 
 /obj/machinery/door/airlock/glass_atmos
 	name = "Maintenance Hatch"
@@ -327,6 +379,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_atmo
 	glass = 1
+	open_sound_powered = 'sound/machines/door/eng1o.ogg'
+	close_sound_powered = 'sound/machines/door/eng1c.ogg'
 
 /obj/machinery/door/airlock/gold
 	name = "Gold Airlock"
@@ -405,6 +459,8 @@
 	name = "Airlock"
 	icon = 'icons/obj/doors/Doorsci.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_science
+	open_sound_powered = 'sound/machines/door/sci1o.ogg'
+	close_sound_powered = 'sound/machines/door/sci1c.ogg'
 
 /obj/machinery/door/airlock/glass_science
 	name = "Glass Airlocks"
@@ -412,6 +468,8 @@
 	opacity = 0
 	assembly_type = /obj/structure/door_assembly/door_assembly_science
 	glass = 1
+	open_sound_powered = 'sound/machines/door/sci1o.ogg'
+	close_sound_powered = 'sound/machines/door/sci1c.ogg'
 
 /obj/machinery/door/airlock/highsecurity
 	name = "Secure Airlock"
@@ -419,6 +477,8 @@
 	explosion_resistance = 20
 	secured_wires = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_highsecurity
+	open_sound_powered = 'sound/machines/door/secure1o.ogg'
+	close_sound_powered = 'sound/machines/door/secure1c.ogg'
 
 /obj/machinery/door/airlock/voidcraft
 	name = "voidcraft hatch"
@@ -428,11 +488,15 @@
 	opacity = 0
 	glass = 1
 	assembly_type = /obj/structure/door_assembly/door_assembly_voidcraft
+	open_sound_powered = 'sound/machines/door/shuttle1o.ogg'
+	close_sound_powered = 'sound/machines/door/shuttle1c.ogg'
 
 // Airlock opens from top-bottom instead of left-right.
 /obj/machinery/door/airlock/voidcraft/vertical
 	icon = 'icons/obj/doors/shuttledoors_vertical.dmi'
 	assembly_type = /obj/structure/door_assembly/door_assembly_voidcraft/vertical
+	open_sound_powered = 'sound/machines/door/shuttle1o.ogg'
+	close_sound_powered = 'sound/machines/door/shuttle1c.ogg'
 
 
 /datum/category_item/catalogue/anomalous/precursor_a/alien_airlock
@@ -1020,9 +1084,9 @@ About the new airlock wires panel:
 
 	//if the door is unpowered then it doesn't make sense to hear the woosh of a pneumatic actuator
 	if(arePowerSystemsOn())
-		playsound(src, open_sound_powered, 50, 1)
+		playsound(src, open_sound_powered, 50, 1, volume_channel = VOLUME_CHANNEL_DOORS)
 	else
-		playsound(src, open_sound_unpowered, 75, 1)
+		playsound(src, open_sound_unpowered, 75, 1, volume_channel = VOLUME_CHANNEL_DOORS)
 
 	if(src.closeOther != null && istype(src.closeOther, /obj/machinery/door/airlock/) && !src.closeOther.density)
 		src.closeOther.close()
@@ -1118,9 +1182,9 @@ About the new airlock wires panel:
 	use_power(360)	//360 W seems much more appropriate for an actuator moving an industrial door capable of crushing people
 	has_beeped = 0
 	if(arePowerSystemsOn())
-		playsound(src, close_sound_powered, 50, 1)
+		playsound(src, close_sound_powered, 50, 1, volume_channel = VOLUME_CHANNEL_DOORS)
 	else
-		playsound(src, open_sound_unpowered, 75, 1)
+		playsound(src, open_sound_unpowered, 75, 1, volume_channel = VOLUME_CHANNEL_DOORS)
 	for(var/turf/turf in locs)
 		var/obj/structure/window/killthis = (locate(/obj/structure/window) in turf)
 		if(killthis)
@@ -1135,7 +1199,7 @@ About the new airlock wires panel:
 	if (operating && !forced) return 0
 
 	src.locked = 1
-	playsound(src, bolt_down_sound, 30, 0, 3)
+	playsound(src, bolt_down_sound, 30, 0, 3, volume_channel = VOLUME_CHANNEL_DOORS)
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
@@ -1149,7 +1213,7 @@ About the new airlock wires panel:
 		if(operating || !src.arePowerSystemsOn() || isWireCut(AIRLOCK_WIRE_DOOR_BOLTS)) return
 
 	src.locked = 0
-	playsound(src, bolt_up_sound, 30, 0, 3)
+	playsound(src, bolt_up_sound, 30, 0, 3, volume_channel = VOLUME_CHANNEL_DOORS)
 	for(var/mob/M in range(1,src))
 		M.show_message("You hear a click from the bottom of the door.", 2)
 	update_icon()
