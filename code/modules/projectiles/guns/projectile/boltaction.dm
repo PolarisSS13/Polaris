@@ -67,3 +67,4 @@
 	item_state = "levercarabine" // That isn't how carbine is spelled ya knob! :U
 	icon_state = "levercarabine"
 	animated_pump = 1
+	pump_animation = "levercarabine-cycling"
