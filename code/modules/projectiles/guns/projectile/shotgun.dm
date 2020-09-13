@@ -17,7 +17,7 @@
 	var/recentpump = 0 			//To prevent spammage
 	var/action_sound = 'sound/weapons/shotgunpump.ogg'
 	var/empty_sprite = 0 		//This is just a dirty var so it doesn't fudge up.
-	var/pump_animation = null	//You put the reference to the animation in question here. Frees up namming. Ex: "shotgun_old_pump" or "sniper_cycle"
+	var/pump_animation = "shotgun-pump"	//You put the reference to the animation in question here. Frees up namming. Ex: "shotgun_old_pump" or "sniper_cycle"
 
 /obj/item/weapon/gun/projectile/shotgun/pump/consume_next_projectile()
 	if(chambered)
