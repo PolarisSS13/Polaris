@@ -1,5 +1,5 @@
 /datum/sprite_accessory/marking/vr
-	icon = 'icons/mob/human_races/markings_vr.dmi'
+	icon = 'icons/mob/human_races/markings_alt.dmi'
 
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
@@ -581,7 +581,7 @@ shadekin_snoot
 */
 /datum/sprite_accessory/ears
 	name = "You should not see this..."
-	icon = 'icons/mob/vore/ears_vr.dmi'
+	icon = 'icons/mob/human_races/sprite_accessories/ears.dmi'
 	do_colouration = 0 // Set to 1 to blend (ICON_ADD) hair color
 
 	color_blend_mode = ICON_ADD // Only appliciable if do_coloration = 1
@@ -601,12 +601,18 @@ shadekin_snoot
 /datum/sprite_accessory/ears/taj_ears
 	name = "Tajaran Ears"
 	icon_state = "ears_plain"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_TAJ, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	extra_overlay = "ears_plain-inner"
 
 /datum/sprite_accessory/ears/taj_ears_tall
 	name = "Tajaran Tall Ears"
 	icon_state = "msai_plain"
+	do_colouration = 1
+	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_TAJ, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	extra_overlay = "msai_plain-inner"
 
 /datum/sprite_accessory/ears/squirrel_orange
 	name = "squirel, orange"
@@ -1002,7 +1008,7 @@ shadekin_snoot
 /datum/sprite_accessory/ears/inkling
 	name = "colorable mature inkling hair"
 	desc = ""
-	icon = 'icons/mob/human_face_vr.dmi'
+	icon = 'icons/mob/human_face_alt.dmi'
 	icon_state = "inkling-colorable"
 	color_blend_mode = ICON_MULTIPLY
 	do_colouration = 1
@@ -1156,7 +1162,7 @@ shadekin_snoot
 */
 /datum/sprite_accessory/wing
 	name = "You should not see this..."
-	icon = 'icons/mob/vore/wings_vr.dmi'
+	icon = 'icons/mob/human_races/sprite_accessories/wings.dmi'
 	do_colouration = 0 //Set to 1 to enable coloration using the tail color.
 
 	color_blend_mode = ICON_ADD // Only appliciable if do_coloration = 1
@@ -1343,7 +1349,7 @@ shadekin_snoot
 */
 /datum/sprite_accessory/tail
 	name = "You should not see this..."
-	icon = 'icons/mob/vore/tails_vr.dmi'
+	icon = 'icons/mob/human_races/sprite_accessories/tails.dmi'
 	do_colouration = 0 //Set to 1 to enable coloration using the tail color.
 
 	color_blend_mode = ICON_ADD // Only appliciable if do_coloration = 1
@@ -1708,7 +1714,7 @@ shadekin_snoot
 	color_blend_mode = ICON_MULTIPLY
 	do_colouration = 1
 	hide_body_parts = list(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT) //Exclude pelvis just in case.
-	clip_mask_icon = 'icons/mob/vore/taurs_vr.dmi'
+	clip_mask_icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'
 	clip_mask_state = "taur_clip_mask_def" //Used to clip off the lower part of suits & uniforms.
 
 /datum/sprite_accessory/tail/tailmaw
@@ -1847,7 +1853,7 @@ shadekin_snoot
 //For all species tails. Includes haircolored tails.
 /datum/sprite_accessory/tail/special
 	name = "Blank tail. Do not select."
-	icon = 'icons/effects/species_tails_vr.dmi'
+	icon = 'icons/effects/species_tails.dmi'
 
 /datum/sprite_accessory/tail/special/unathi
 	name = "unathi tail"

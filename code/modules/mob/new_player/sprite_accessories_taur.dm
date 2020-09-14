@@ -121,7 +121,7 @@
 
 /datum/sprite_accessory/tail/taur
 	name = "You should not see this..."
-	icon = 'icons/mob/vore/taurs_vr.dmi'
+	icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'
 	do_colouration = 1 // Yes color, using tail color
 	color_blend_mode = ICON_MULTIPLY  // The sprites for taurs are designed for ICON_MULTIPLY
 
@@ -160,7 +160,7 @@
 	var/msg_prey_stepunder		= "You run between %prey's legs." //Same, inverse
 */
 	hide_body_parts	= list(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT) //Exclude pelvis just in case.
-	clip_mask_icon = 'icons/mob/vore/taurs_vr.dmi'
+	clip_mask_icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'
 	clip_mask_state = "taur_clip_mask_def" //Used to clip off the lower part of suits & uniforms.
 
 // Species-unique long tails/taurhalves
@@ -170,8 +170,8 @@
 /datum/sprite_accessory/tail/taur/wolf
 	name = "Wolf (Taur)"
 	icon_state = "wolf_s"
-	under_sprites = 'icons/mob/taursuits_wolf_vr.dmi'
-	suit_sprites = 'icons/mob/taursuits_wolf_vr.dmi'
+	under_sprites = 'icons/mob/taursuits_wolf.dmi'
+	suit_sprites = 'icons/mob/taursuits_wolf.dmi'
 	icon_sprite_tag = "wolf"
 
 //TFF 22/11/19 - CHOMPStation port of fat taur sprites
@@ -202,7 +202,7 @@
 /datum/sprite_accessory/tail/taur/naga
 	name = "Naga (Taur)"
 	icon_state = "naga_s"
-	suit_sprites = 'icons/mob/taursuits_naga_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_naga.dmi'
 	//icon_sprite_tag = "naga"
 /*
 	msg_owner_help_walk = "You carefully slither around %prey."
@@ -241,8 +241,8 @@
 /datum/sprite_accessory/tail/taur/horse
 	name = "Horse (Taur)"
 	icon_state = "horse_s"
-	under_sprites = 'icons/mob/taursuits_horse_vr.dmi'
-	suit_sprites = 'icons/mob/taursuits_horse_vr.dmi'
+	under_sprites = 'icons/mob/taursuits_horse.dmi'
+	suit_sprites = 'icons/mob/taursuits_horse.dmi'
 	icon_sprite_tag = "horse"
 /*
 	msg_owner_disarm_run = "You quickly push %prey to the ground with your hoof!"
@@ -269,7 +269,7 @@
 /datum/sprite_accessory/tail/taur/cow
 	name = "Cow (Taur)"
 	icon_state = "cow_s"
-	suit_sprites = 'icons/mob/taursuits_cow_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_cow.dmi'
 	icon_sprite_tag = "cow"
 /*
 	msg_owner_disarm_run = "You quickly push %prey to the ground with your hoof!"
@@ -291,7 +291,7 @@
 	name = "Deer dual-color (Taur)"
 	icon_state = "deer_s"
 	extra_overlay = "deer_markings"
-	suit_sprites = 'icons/mob/taursuits_deer_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_deer.dmi'
 	icon_sprite_tag = "deer"
 /*
 	msg_owner_disarm_run = "You quickly push %prey to the ground with your hoof!"
@@ -312,7 +312,7 @@
 /datum/sprite_accessory/tail/taur/lizard
 	name = "Lizard (Taur)"
 	icon_state = "lizard_s"
-	suit_sprites = 'icons/mob/taursuits_lizard_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_lizard.dmi'
 	icon_sprite_tag = "lizard"
 
 /datum/sprite_accessory/tail/taur/lizard/lizard_2c
@@ -330,7 +330,7 @@
 /datum/sprite_accessory/tail/taur/spider
 	name = "Spider (Taur)"
 	icon_state = "spider_s"
-	suit_sprites = 'icons/mob/taursuits_spider_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_spider.dmi'
 	icon_sprite_tag = "spider"
 /*
 	msg_owner_disarm_run = "You quickly push %prey to the ground with your leg!"
@@ -378,7 +378,7 @@
 /datum/sprite_accessory/tail/taur/feline
 	name = "Feline (Taur)"
 	icon_state = "feline_s"
-	suit_sprites = 'icons/mob/taursuits_feline_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_feline.dmi'
 	icon_sprite_tag = "feline"
 
 //TFF 22/11/19 - CHOMPStation port of fat taur sprites
@@ -414,7 +414,7 @@
 /datum/sprite_accessory/tail/taur/slug
 	name = "Slug (Taur)"
 	icon_state = "slug_s"
-	suit_sprites = 'icons/mob/taursuits_slug_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_slug.dmi'
 	icon_sprite_tag = "slug"
 /*
 	msg_owner_help_walk = "You carefully slither around %prey."
@@ -480,14 +480,14 @@
 	name = "Drake (Taur)"
 	icon_state = "drake_s"
 	extra_overlay = "drake_markings"
-	suit_sprites = 'icons/mob/taursuits_drake_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_drake.dmi'
 	icon_sprite_tag = "drake"
 
 /datum/sprite_accessory/tail/taur/otie
 	name = "Otie (Taur)"
 	icon_state = "otie_s"
 	extra_overlay = "otie_markings"
-	suit_sprites = 'icons/mob/taursuits_otie_vr.dmi'
+	suit_sprites = 'icons/mob/taursuits_otie.dmi'
 	icon_sprite_tag = "otie"
 
 /datum/sprite_accessory/tail/taur/alraune/alraune_2c

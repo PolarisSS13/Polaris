@@ -50,7 +50,7 @@
 	return mob_icon
 
 /obj/item/organ/external/head/vr
-	var/eye_icons_vr = 'icons/mob/human_face_vr.dmi'
+	var/eye_icons_vr = 'icons/mob/human_face_alt.dmi'
 	var/eye_icon_vr = "blank_eyes"
 	var/head_offset = 0
 	eye_icon = "blank_eyes"

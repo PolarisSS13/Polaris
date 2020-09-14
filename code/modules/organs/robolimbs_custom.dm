@@ -3,7 +3,7 @@
 	var/includes_wing			//Cyberlimbs dmi includes a wing sprite to wear.
 	var/list/whitelisted_to		//List of ckeys that are allowed to pick this in charsetup.
 
-//////////////// For-specific-character fluff ones /////////////////
+//////////////// For-specific-character fluff ones ///////////////// May be viable to place these into a custom_item subfolder, in order to allow CI Repo integration.
 // arokha : Aronai Sieyes
 /datum/robolimb/kitsuhana
 	company = "Kitsuhana"
@@ -106,6 +106,10 @@
 	skin_tone = 1
 	suggested_species = "Tajara"
 
+/datum/robolimb/dsi_tajaran/New()
+	species_cannot_use = GLOB.all_species.Copy()
+//	species_cannot_use -= SPECIES_TAJ
+
 /obj/item/weapon/disk/limb/dsi_tajaran
 	company = "DSI - Tajaran"
 
@@ -119,6 +123,10 @@
 	includes_tail = 1
 	skin_tone = 1
 	suggested_species = "Unathi"
+
+/datum/robolimb/dsi_lizard/New()
+	species_cannot_use = GLOB.all_species.Copy()
+//	species_cannot_use -= SPECIES_UNATHI
 
 /obj/item/weapon/disk/limb/dsi_lizard
 	company = "DSI - Lizard"
@@ -203,7 +211,7 @@
 
 /datum/robolimb/dsi_teshari/New()
 	species_cannot_use = GLOB.all_species.Copy()
-	species_cannot_use -= SPECIES_TESHARI
+//	species_cannot_use -= SPECIES_TESHARI
 //	species_cannot_use -= SPECIES_CUSTOM
 	..()
 
