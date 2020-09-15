@@ -325,8 +325,8 @@
 /obj/item/organ/external/head/skrell
 	eye_icon = "skrell_eyes_s"
 
-/obj/item/organ/external/head/seromi
-	eye_icon = "eyes_seromi"
+/obj/item/organ/external/head/teshari
+	eye_icon = "eyes_teshari"
 
 /obj/item/organ/external/head/no_eyes
 	eye_icon = "blank_eyes"
