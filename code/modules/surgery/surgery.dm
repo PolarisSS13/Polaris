@@ -121,8 +121,8 @@
 
 
 /obj/item/proc/can_do_surgery(mob/living/carbon/M, mob/living/user)
-	if(M == user)
-		return 0
+//	if(M == user)
+//		return 0
 	if(!ishuman(M))
 		return 1
 
@@ -155,7 +155,7 @@
 					success = FALSE
 
 				// Bad or no surface may mean failure as well.
-				var/obj/surface = M.get_surgery_surface()
+				var/obj/surface = M.get_surgery_surface(user)
 				if(!surface || !prob(surface.surgery_odds))
 					success = FALSE
 
