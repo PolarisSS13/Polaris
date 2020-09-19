@@ -165,7 +165,7 @@
 		return 0
 
 	if(!istype(tool))
-		return 0
+		return FALSE
 
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
@@ -231,7 +231,7 @@
 		return 0
 
 	if(!istype(tool))
-		return 0
+		return FALSE
 
 	target.op_stage.current_organ = null
 
@@ -368,7 +368,7 @@
 		return 0
 
 	if(!istype(tool))
-		return 0
+		return FALSE
 
 	target.op_stage.current_organ = null
 
@@ -427,7 +427,7 @@
 		return 0
 
 	if(!istype(tool))
-		return 0
+		return FALSE
 
 	target.op_stage.current_organ = null
 

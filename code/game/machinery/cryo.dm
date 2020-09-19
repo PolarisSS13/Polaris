@@ -143,7 +143,6 @@
 	if(..() || usr == occupant)
 		return TRUE
 
-	. = TRUE
 	switch(action)
 		if("switchOn")
 			on = 1
@@ -158,12 +157,13 @@
 				update_icon()
 		if("ejectOccupant")
 			if(!occupant || isslime(usr) || ispAI(usr))
-				return 0 // don't update UIs attached to this object
+				return FALSE // don't update UIs attached to this object
 			go_out()
 		else
 			return FALSE
 
 	add_fingerprint(usr)
+	return TRUE
 
 /obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
 	if(istype(G, /obj/item/weapon/reagent_containers/glass))
