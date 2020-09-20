@@ -232,10 +232,6 @@ var/global/list/string_slot_flags = list(
 //Hexidecimal numbers
 var/global/list/hexNums = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
 
-/**
- * VOREStation global lists
-*/
-
 var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears indexed by type
 var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
 var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type

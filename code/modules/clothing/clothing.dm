@@ -992,23 +992,23 @@
 	var/taurized = FALSE
 
 /obj/item/clothing/suit/equipped(var/mob/user, var/slot)
-	var/normalize = TRUE
-
-	//Pyramid of doom-y. Improve somehow?
-	if(!taurized && slot == slot_wear_suit && ishuman(user))
+	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
-		if(isTaurTail(H.tail_style))
-			var/datum/sprite_accessory/tail/taur/taurtail = H.tail_style
-			if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in cached_icon_states(taurtail.suit_sprites)))
-				icon_override = taurtail.suit_sprites
-				normalize = FALSE
-				taurized = TRUE
-
-	if(normalize && taurized)
-		icon_override = initial(icon_override)
-		taurized = FALSE
+		if((taurized && !isTaurTail(H.tail_style)) || (!taurized && isTaurTail(H.tail_style)))
+			taurize(user)
 
 	return ..()
+
+/obj/item/clothing/suit/proc/taurize(var/mob/living/carbon/human/Taur)
+	if(isTaurTail(Taur.tail_style))
+		var/datum/sprite_accessory/tail/taur/taurtail = Taur.tail_style
+		if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in cached_icon_states(taurtail.suit_sprites)))
+			icon_override = taurtail.suit_sprites
+			taurized = TRUE
+
+	if(!taurized)
+		icon_override = initial(icon_override)
+		taurized = FALSE
 
 // Taur suits need to be shifted so its centered on their taur half.
 /obj/item/clothing/suit/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask)
