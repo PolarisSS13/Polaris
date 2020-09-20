@@ -1034,7 +1034,7 @@ var/list/name_to_material
 /material/cult/reinf/place_dismantled_product(var/turf/target)
 	new /obj/effect/decal/remains/human(target)
 
-/material/chitin
+/datum/material/chitin
 	name = MAT_CHITIN
 	icon_colour = "#8d6653"
 	stack_type = /obj/item/stack/material/chitin
@@ -1049,7 +1049,7 @@ var/list/name_to_material
 	supply_conversion_value = 4
 
 //TODO PLACEHOLDERS:
-/material/leather
+/datum/material/leather
 	name = MAT_LEATHER
 	icon_colour = "#5C4831"
 	stack_type = /obj/item/stack/material/leather
