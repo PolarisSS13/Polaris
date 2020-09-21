@@ -2,7 +2,7 @@
 	name = "clothing"
 	siemens_coefficient = 0.9
 	drop_sound = 'sound/items/drop/clothing.ogg'
-	pickup_sound = 'sound/items/pickup/cloth.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 	var/list/species_restricted = null //Only these species can wear this kit.
 	var/gunshot_residue //Used by forensics.
 
@@ -394,6 +394,8 @@
 	fingerprint_chance = 100
 	punch_force = 2
 	body_parts_covered = 0
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 ///////////////////////////////////////////////////////////////////////
 //Head
@@ -531,6 +533,9 @@
 	var/voicechange = 0
 	var/list/say_messages
 	var/list/say_verbs
+
+	drop_sound = "generic_drop"
+	pickup_sound = "generic_pickup"
 
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
@@ -682,6 +687,7 @@
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
 	preserve_item = 1
+	equip_sound = 'sound/items/jumpsuit_equip.ogg'
 
 
 	sprite_sheets = list(
@@ -987,6 +993,45 @@
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 
+//Switch to taur sprites if a taur equips
+/obj/item/clothing/suit
+	var/taurized = FALSE
+
+/obj/item/clothing/suit/equipped(var/mob/user, var/slot)
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if((taurized && !isTaurTail(H.tail_style)) || (!taurized && isTaurTail(H.tail_style)))
+			taurize(user)
+
+	return ..()
+
+/obj/item/clothing/suit/proc/taurize(var/mob/living/carbon/human/Taur)
+	if(isTaurTail(Taur.tail_style))
+		var/datum/sprite_accessory/tail/taur/taurtail = Taur.tail_style
+		if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in cached_icon_states(taurtail.suit_sprites)))
+			icon_override = taurtail.suit_sprites
+			taurized = TRUE
+
+	if(!taurized)
+		icon_override = initial(icon_override)
+		taurized = FALSE
+
+// Taur suits need to be shifted so its centered on their taur half.
+/obj/item/clothing/suit/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask)
+	var/image/standing = ..()
+	if(taurized) //Special snowflake var on suits
+		standing.pixel_x = -16
+		standing.layer = BODY_LAYER + 15 // 15 is above tail layer, so will not be covered by taurbody.
+	return standing
+
+/obj/item/clothing/suit/apply_accessories(var/image/standing)
+	if(LAZYLEN(accessories) && taurized)
+		for(var/obj/item/clothing/accessory/A in accessories)
+			var/image/I = new(A.get_mob_overlay())
+			I.pixel_x = 16 //Opposite of the pixel_x on the suit (-16) from taurization to cancel it out and puts the accessory in the correct place on the body.
+			standing.add_overlay(I)
+	else
+		return ..()
 
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)
