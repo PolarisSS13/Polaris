@@ -5,6 +5,9 @@
 /datum/tgui_module/crew_monitor/tgui_act(action, params, datum/tgui/ui)
 	if(..())
 		return TRUE
+		
+	if(action && !issilicon(usr))
+		playsound(tgui_host(), "terminal_type", 50, 1)
 
 	var/turf/T = get_turf(usr)
 	if(!T || !(T.z in using_map.player_levels))
@@ -21,7 +24,7 @@
 			return TRUE
 		if("setZLevel")
 			ui.set_map_z_level(params["mapZLevel"])
-			SStgui.update_uis(src)
+			return TRUE
 
 /datum/tgui_module/crew_monitor/tgui_interact(mob/user, datum/tgui/ui = null)
 	var/z = get_z(user)
@@ -40,7 +43,7 @@
 		ui.open()
 
 
-/datum/tgui_module/crew_monitor/tgui_data(mob/user, ui_key = "main", datum/tgui_state/state = GLOB.tgui_default_state)
+/datum/tgui_module/crew_monitor/tgui_data(mob/user)
 	var/data[0]
 
 	data["isAI"] = isAI(user)
@@ -56,33 +59,7 @@
 	return data
 
 /datum/tgui_module/crew_monitor/ntos
-	tgui_id = "NtosCrewMonitor"
-
-/datum/tgui_module/crew_monitor/ntos/tgui_state(mob/user)
-	return GLOB.tgui_ntos_state
-
-/datum/tgui_module/crew_monitor/ntos/tgui_static_data()
-	. = ..()
-	
-	var/datum/computer_file/program/host = tgui_host()
-	if(istype(host) && host.computer)
-		. += host.computer.get_header_data()
-
-/datum/tgui_module/crew_monitor/ntos/tgui_act(action, params)
-	if(..())
-		return
-
-	var/datum/computer_file/program/host = tgui_host()
-	if(istype(host) && host.computer)
-		if(action == "PC_exit")
-			host.computer.kill_program()
-			return TRUE
-		if(action == "PC_shutdown")
-			host.computer.shutdown_computer()
-			return TRUE
-		if(action == "PC_minimize")
-			host.computer.minimize_program(usr)
-			return TRUE
+	ntos = TRUE
 
 // Subtype for self_state
 /datum/tgui_module/crew_monitor/robot
