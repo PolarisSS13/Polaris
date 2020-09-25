@@ -34,7 +34,7 @@
 		"Corgi" = "pai-borgi",
 		"Fox" = "pai-fox",
 		"Parrot" = "pai-parrot",
-		"Rabbit" = "pai-rabbit"
+		"Rabbit" = "pai-rabbit",
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -43,7 +43,7 @@
 		"Beep" = list("beeps","beeps loudly","boops"),
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows"),
-		"Canine" = list("yaps","barks","woofs")
+		"Canine" = list("yaps","barks","woofs"),
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -112,12 +112,11 @@
 		pda.ownjob = "Personal Assistant"
 		pda.owner = text("[]", src)
 		pda.name = pda.owner + " (" + pda.ownjob + ")"
-		pda.toff = 1
+		
+		var/datum/data/pda/app/messenger/M = pda.find_program(/datum/data/pda/app/messenger)
+		if(M)
+			M.toff = TRUE
 	..()
-
-/mob/living/silicon/pai/Login()
-	..()
-
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()
@@ -197,7 +196,7 @@
 	medicalActive1 = null
 	medicalActive2 = null
 	medical_cannotfind = 0
-	SSnanoui.update_uis(src)
+	SStgui.update_uis(src)
 	to_chat(usr, "<span class='notice'>You reset your record-viewing software.</span>")
 
 /mob/living/silicon/pai/cancel_camera()
@@ -348,7 +347,6 @@
 			rig.force_rest(src)
 	else
 		resting = !resting
-		icon_state = resting ? "[chassis]_rest" : "[chassis]"
 		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 	canmove = !resting

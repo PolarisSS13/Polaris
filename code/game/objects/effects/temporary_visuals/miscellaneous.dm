@@ -24,27 +24,6 @@
 	icon_state = "smoke"
 	duration = 50
 
-// VOREStation Add - Used by Kinetic Accelerator
-/obj/effect/temp_visual/kinetic_blast
-	name = "kinetic explosion"
-	icon = 'icons/obj/projectiles.dmi'
-	icon_state = "kinetic_blast"
-	layer = ABOVE_MOB_LAYER
-	duration = 4
-
-/obj/effect/temp_visual/explosion
-	name = "explosion"
-	icon = 'icons/effects/96x96.dmi'
-	icon_state = "explosion"
-	pixel_x = -32
-	pixel_y = -32
-	duration = 8
-
-/obj/effect/temp_visual/explosion/fast
-	icon_state = "explosionfast"
-	duration = 4
-// VOREStation Add End
-
 /obj/effect/temp_visual/impact_effect
 	icon_state = "impact_bullet"
 	plane = PLANE_LIGHTING_ABOVE // So they're visible even in a shootout in maint.
