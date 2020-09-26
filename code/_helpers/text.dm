@@ -454,3 +454,93 @@ proc/TextPreview(var/string,var/len=40)
 
 
 #define gender2text(gender) capitalize(gender)
+
+/// Used to get a properly sanitized input, of max_length
+/// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
+/proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as text|null
+
+	if(no_trim)
+		return copytext(html_encode(name), 1, max_length)
+	else
+		return trim(html_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
+
+// Used to get a properly sanitized multiline input, of max_length
+/proc/stripped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as message|null
+	if(no_trim)
+		return copytext(html_encode(name), 1, max_length)
+	else
+		return trim(html_encode(name), max_length)
+
+//Adds 'char' ahead of 'text' until there are 'count' characters total
+/proc/add_leading(text, count, char = " ")
+	text = "[text]"
+	var/charcount = count - length_char(text)
+	var/list/chars_to_add[max(charcount + 1, 0)]
+	return jointext(chars_to_add, char) + text
+
+//Adds 'char' behind 'text' until there are 'count' characters total
+/proc/add_trailing(text, count, char = " ")
+	text = "[text]"
+	var/charcount = count - length_char(text)
+	var/list/chars_to_add[max(charcount + 1, 0)]
+	return text + jointext(chars_to_add, char)
+
+/datum/html/split_holder
+	var/list/opening
+	var/inner_text
+	var/list/closing
+
+/datum/html/split_holder/New()
+	opening = list()
+	inner_text = ""
+	closing = list()
+
+/proc/split_html(raw_text="")
+	// gently borrowed and re-purposed from code/modules/pda/utilities.dm
+	// define a datum to hold our result
+	var/datum/html/split_holder/s = new()
+
+	// copy the raw_text to get started
+	var/text = copytext_char(raw_text, 1)
+
+	// search for tag brackets
+	var/tag_start = findtext_char(text, "<")
+	var/tag_stop = findtext_char(text, ">")
+
+	// until we run out of opening tags
+	while((tag_start != 0) && (tag_stop != 0))
+		// if the tag isn't at the beginning of the string
+		if(tag_start > 1)
+			// we've found our text, so copy it out
+			s.inner_text = copytext_char(text, 1, tag_start)
+			// and chop the text for the next round
+			text = copytext_char(text, tag_start)
+			break
+		// otherwise, we found an opening tag, so add it to the list
+		var/tag = copytext_char(text, tag_start, tag_stop+1)
+		s.opening.Add(tag)
+		// and chop the text for the next round
+		text = copytext_char(text, tag_stop+1)
+		// look for the next tag in what's left
+		tag_start = findtext(text, "<")
+		tag_stop = findtext(text, ">")
+
+	// search for tag brackets
+	tag_start = findtext(text, "<")
+	tag_stop = findtext(text, ">")
+
+	// until we run out of closing tags
+	while((tag_start != 0) && (tag_stop != 0))
+		// we found a closing tag, so add it to the list
+		var/tag = copytext_char(text, tag_start, tag_stop+1)
+		s.closing.Add(tag)
+		// and chop the text for the next round
+		text = copytext_char(text, tag_stop+1)
+		// look for the next tag in what's left
+		tag_start = findtext(text, "<")
+		tag_stop = findtext(text, ">")
+
+	// return the split html object to the caller
+	return s

@@ -145,6 +145,9 @@ datum/preferences
 
 	var/list/volume_channels = list()
 
+	// Do we see runechat
+	var/runechat = TRUE
+
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)

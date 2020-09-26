@@ -1668,3 +1668,11 @@
 			to_chat(src, span("warning", "\The [rig]'s visor has shuddenly deactivated!"))
 
 	..()
+
+/**
+  * Helper to get the mobs runechat colour span
+  *
+  * Basically just a quick redirect to the DNA handler that gets the species-specific colour handler
+  */
+/mob/living/carbon/human/get_runechat_color()
+   return species.get_species_runechat_color(src)
