@@ -31,7 +31,8 @@
 		return FALSE
 
 	// Case 1: In working order
-	if(B.top == T && M.bottom == B && T.bottom == B)
+	if(B.top == T && M.bottom == B && T.bottom == B && \
+			get_turf(M) == get_step(B, B.dir) && O == GetAbove(B) && get_turf(T) == GetAbove(M))
 		return TRUE
 
 	// Case 2: The top is linked to someone else
@@ -59,7 +60,7 @@
 // Bottom piece that you step ontor //////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 /obj/structure/stairs/bottom
-	icon_state = ""
+	icon_state = "0,0"
 	var/obj/structure/stairs/top/top = null
 	var/obj/structure/stairs/middle/middle = null
 
@@ -69,12 +70,18 @@
 											 var/obj/structure/stairs/top/T = null,
 											 var/turf/simulated/open/O = null)
 	
-	// In the  case where we're provided all the pieces, just try connecting them.
+	// In the case where we're provided all the pieces, just try connecting them.
 	// In order: all exist, they are appropriately adjacent, and they can connect
 	if(istype(B) && istype(M) && istype(T) && istype(O) && \
-			B.Adjacent(M) && (GetBelow(O) == B.loc) && T.Adjacent(O) && \
-			(. = ..()))
-		return
+			B.Adjacent(M) && (GetBelow(O) == get_turf(B)) && T.Adjacent(O) && \
+			..())
+		return TRUE
+	
+	// If we're already configured, just check those
+	else if(istype(top) && istype(middle))
+		O = locate(/turf/simulated/open) in GetAbove(src)
+		if(..(src, middle, top, O))
+			return TRUE
 
 	var/turf/B2 = get_step(src, src.dir)
 	O = GetAbove(src)
@@ -89,8 +96,8 @@
 
 	// If you set the dir, that's the dir it *wants* to connect in. It only chooses the others if that doesn't work
 	// Everything is simply linked in our original direction
-	if(istype(M) && istype(T) && (. = ..(src, M, T, O)))	
-		return
+	if(istype(M) && istype(T) && ..(src, M, T, O))	
+		return TRUE
 
 	// Else, we have to look in other directions
 	for(var/dir in cardinal - src.dir)
@@ -101,28 +108,31 @@
 		
 		T = locate(/obj/structure/stairs/top)    in T2
 		M = locate(/obj/structure/stairs/middle) in B2
-		if((. = ..(src, M, T, O)))
-			return
+		if(..(src, M, T, O))
+			return TRUE
 	
-	// Out of the dir check, we have no valid neighbors, and thus are not complete. `.` was set by ..()
-	return
+	// Out of the dir check, we have no valid neighbors, and thus are not complete.
+	return FALSE
 
 /obj/structure/stairs/bottom/Crossed(var/atom/movable/AM, var/atom/oldloc)
 	
 	// If we're coming from the top of the stairs, don't trap us in an infinite staircase
-	if(istype(oldloc, /obj/structure/stairs/top))
+	if(top in oldloc)
 		return
 	
 	// Animate moving onto M
 	// Move to Top
-	// Animate moving from O to T
+	if(check_integrity())
+		AM.forceMove(get_turf(top))
 
+	// Animate moving from O to T
+	return TRUE
 
 //////////////////////////////////////////////////////////////////////
 // Middle piece that you are animated onto/off of ////////////////////
 //////////////////////////////////////////////////////////////////////
 /obj/structure/stairs/middle
-	icon_state = ""
+	icon_state = "0,1"
 	opacity   = TRUE
 	density   = TRUE // Too high to simply step up on
 	climbable = TRUE // But they can be climbed if the bottom is out
@@ -140,8 +150,13 @@
 	// In order: all exist, they are appropriately adjacent, and they can connect
 	if(istype(B) && istype(M) && istype(T) && istype(O) && \
 			B.Adjacent(M) && (GetBelow(O) == B.loc) && T.Adjacent(O) && \
-			(. = ..()))
-		return
+			..())
+		return TRUE
+
+	else if(istype(top) && istype(bottom))
+		O = locate(/turf/simulated/open) in GetAbove(bottom)
+		if(..(bottom, src, top, O))
+			return TRUE
 
 	var/turf/B1 = get_step(src, turn(src.dir, 180))
 	O = GetAbove(B1)
@@ -156,8 +171,8 @@
 	
 	// If you set the dir, that's the dir it *wants* to connect in. It only chooses the others if that doesn't work
 	// Everything is simply linked in our original direction
-	if(istype(B1) && istype(T2) && istype(O) && (. = ..(B, src, T, O)))
-		return
+	if(istype(B1) && istype(T2) && istype(O) && ..(B, src, T, O))
+		return TRUE
 
 	// Else, we have to look in other directions
 	for(var/dir in cardinal - src.dir)
@@ -167,20 +182,27 @@
 			continue
 		
 		B = locate(/obj/structure/stairs/bottom) in B1
-		if((. = ..(B, src, T, O)))
-			return
+		if(..(B, src, T, O))
+			return TRUE
 	
 	// The middle stair has some further special logic, in that it can be climbed, and so is technically valid if only the top exists
+	// T is enforced by a prior if
 	T.middle = src
 	src.top = T
+	src.dir = T.dir
 	return TRUE
 
+/obj/structure/stairs/middle/MouseDrop_T(mob/target, mob/user)
+	. = ..()
+	if(check_integrity())
+		do_climb(user)
+		user.forceMove(get_turf(top))
 
 //////////////////////////////////////////////////////////////////////
 // Top piece that you step onto //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 /obj/structure/stairs/top
-	icon_state = ""
+	icon_state = "0,0"
 	var/obj/structure/stairs/middle/middle = null
 	var/obj/structure/stairs/bottom/bottom = null
 
@@ -196,6 +218,12 @@
 			B.Adjacent(M) && (GetBelow(O) == B.loc) && T.Adjacent(O) && \
 			(. = ..()))
 		return
+
+	else if(istype(middle) && istype(bottom))
+		O = locate(/turf/simulated/open) in GetAbove(bottom)
+		if(..(bottom, middle, src, O))
+			return TRUE
+
 
 	O = get_step(src, turn(src.dir, 180))
 	var/turf/B1 = GetBelow(O)
@@ -227,6 +255,19 @@
 	// Out of the dir check, we have no valid neighbors, and thus are not complete. `.` was set by ..()
 	return
 
+/obj/structure/stairs/top/Crossed(var/atom/movable/AM, var/atom/oldloc)
+	
+	// If we're coming from the top of the stairs, don't trap us in an infinite staircase
+	if(bottom in oldloc || middle in oldloc)
+		return
+	
+	// Animate moving onto M
+	// Move to Top
+	if(check_integrity())
+		AM.forceMove(get_turf(bottom))
+
+	// Animate moving from O to T
+	return TRUE
 
 
 
