@@ -1,6 +1,6 @@
 // Global stuff that will put us on the map
 /datum/category_group/player_setup_category/vore
-	name = "Genetics"
+	name = "Virgo"
 	sort_order = 8
 	category_item_type = /datum/category_item/player_setup_item/vore
 
@@ -138,7 +138,7 @@
 	character.g_wing2			= pref.g_wing2
 
 /datum/category_item/player_setup_item/vore/ears/content(var/mob/user)
-	. += "<h2>Cosmetic Genetic Settings</h2>"
+	. += "<h2>Virgo Station Settings</h2>"
 
 	var/ear_display = "Normal"
 	if(pref.ear_style && (pref.ear_style in ear_styles_list))
