@@ -1564,7 +1564,6 @@
 #include "code\modules\client\preference_setup\skills\skills.dm"
 #include "code\modules\client\preference_setup\traits\trait_defines.dm"
 #include "code\modules\client\preference_setup\traits\traits.dm"
-#include "code\modules\client\preference_setup\virgo\01_spriteaccessories.dm"
 #include "code\modules\client\preference_setup\volume_sliders\01_volume.dm"
 #include "code\modules\clothing\chameleon.dm"
 #include "code\modules\clothing\clothing.dm"
