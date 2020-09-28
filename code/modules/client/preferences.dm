@@ -147,6 +147,8 @@ datum/preferences
 
 	// Do we see runechat
 	var/runechat = TRUE
+	// Do we see runechat specifically for emotes?
+	var/runechat_emote = TRUE
 
 
 /datum/preferences/New(client/C)

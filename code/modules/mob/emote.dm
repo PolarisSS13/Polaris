@@ -14,6 +14,8 @@
 		input = sanitize(input(src,"Choose an emote to display.") as text|null)
 	else
 		input = message
+
+	var/clean_message = "[message]"
 	if(input)
 		log_emote(message,src) //Log before we add junk
 		message = "<span class='emote'><B>[src]</B> [input]</span>"
@@ -38,6 +40,8 @@
 			spawn(0) // It's possible that it could be deleted in the meantime, or that it runtimes.
 				if(M)
 					M.show_message(message, m_type)
+					if(M.should_show_runechat(audio = (m_type == 2), emote = TRUE))
+						M.create_chat_message(src, clean_message, TRUE)
 
 		for(var/obj in o_viewers)
 			var/obj/O = obj
