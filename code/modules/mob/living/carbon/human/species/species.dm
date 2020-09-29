@@ -397,7 +397,6 @@
 			if(FEMALE)
 				t_him = "her"
 
-	//VOREStation Edit Start - Headpats and Handshakes.
 	if(H.zone_sel.selecting == "head")
 		H.visible_message( \
 			"<span class='notice'>[H] pats [target] on the head.</span>", \
@@ -411,7 +410,6 @@
 		H.visible_message( \
 			"<span class='notice'>[H] boops [target]'s nose.</span>", \
 			"<span class='notice'>You boop [target] on the nose.</span>", )
-	//VOREStation Edit End
 
 	else
 		H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
