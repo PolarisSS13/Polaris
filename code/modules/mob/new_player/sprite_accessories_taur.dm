@@ -1,6 +1,5 @@
-/*
 /datum/riding/taur
-	keytype = /obj/item/weapon/material/twohanded/fluff/riding_crop // Crack!
+	keytype = /obj/item/weapon/material/twohanded/riding_crop // Crack!
 	nonhuman_key_exemption = FALSE	// If true, nonhumans who can't hold keys don't need them, like borgs and simplemobs.
 	key_name = "a riding crop"		// What the 'keys' for the thing being rided on would be called.
 	only_one_driver = TRUE			// If true, only the person in 'front' (first on list of riding mobs) can drive.
@@ -27,13 +26,14 @@
 //Hoooo boy.
 /datum/riding/taur/get_offsets(pass_index) // list(dir = x, y, layer)
 	var/mob/living/L = ridden
-	var/scale = L.size_multiplier
+	var/scale_x = L.icon_scale_x
+	var/scale_y = L.icon_scale_y
 
 	var/list/values = list(
-		"[NORTH]" = list(0, 8*scale, ABOVE_MOB_LAYER),
-		"[SOUTH]" = list(0, 8*scale, BELOW_MOB_LAYER),
-		"[EAST]" = list(-10*scale, 8*scale, ABOVE_MOB_LAYER),
-		"[WEST]" = list(10*scale, 8*scale, ABOVE_MOB_LAYER))
+		"[NORTH]" = list(0, 8*scale_y, ABOVE_MOB_LAYER),
+		"[SOUTH]" = list(0, 8*scale_y, BELOW_MOB_LAYER),
+		"[EAST]" = list(-10*scale_x, 8*scale_y, ABOVE_MOB_LAYER),
+		"[WEST]" = list(10*scale_x, 8*scale_y, ABOVE_MOB_LAYER))
 
 	return values
 
@@ -59,9 +59,9 @@
 		return FALSE
 	if(M in buckled_mobs)
 		return FALSE
-	if(M.size_multiplier > size_multiplier * 1.2)
-		to_chat(M,"<span class='warning'>This isn't a pony show! You need to be bigger for them to ride.</span>")
-		return FALSE
+//	if(M.size_multiplier > size_multiplier * 1.2)
+//		to_chat(M,"<span class='warning'>This isn't a pony show! You need to be bigger for them to ride.</span>")
+//		return FALSE
 	if(M.loc != src.loc)
 		if(M.Adjacent(src))
 			M.forceMove(get_turf(src))
@@ -107,7 +107,6 @@
 				riding_datum.force_dismount(rider)
 	else
 		. = ..()
-*/
 
 /*
 ////////////////////////////
@@ -130,7 +129,7 @@
 
 	var/icon_sprite_tag			// This is where we put stuff like _Horse, so we can assign icons easier.
 
-	var/can_ride = 1			//whether we're real rideable taur or just in that category. Not used on Polaris.
+	var/can_ride = FALSE			//whether we're real rideable taur or just in that category.
 
 	hide_body_parts	= list(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT) //Exclude pelvis just in case.
 	clip_mask_icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'

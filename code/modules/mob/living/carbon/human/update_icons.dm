@@ -450,14 +450,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	var/icon/ears_s = get_ears_overlay()
 	if(ears_s)
 		face_standing.Blend(ears_s, ICON_OVERLAY)
-	if(istype(head_organ,/obj/item/organ/external/head/vr))
-		var/obj/item/organ/external/head/vr/head_organ_vr = head_organ
-		overlays_standing[HAIR_LAYER] = image(face_standing, layer = BODY_LAYER+HAIR_LAYER, "pixel_y" = head_organ_vr.head_offset)
-		apply_layer(HAIR_LAYER)
-		return
 
-	overlays_standing[HAIR_LAYER] = image(face_standing, layer = BODY_LAYER+HAIR_LAYER)
+	overlays_standing[HAIR_LAYER] = image(face_standing, layer = BODY_LAYER+HAIR_LAYER, "pixel_y" = head_organ.head_offset)
 	apply_layer(HAIR_LAYER)
+	return
 
 /mob/living/carbon/human/update_eyes()
 	if(QDESTROYING(src))
@@ -901,10 +897,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	var/used_tail_layer = tail_alt ? TAIL_LAYER_ALT : TAIL_LAYER
 
-	var/image/vr_tail_image = get_tail_image()
-	if(vr_tail_image)
-		vr_tail_image.layer = BODY_LAYER+used_tail_layer
-		overlays_standing[used_tail_layer] = vr_tail_image
+	var/image/tail_image = get_tail_image()
+	if(tail_image)
+		tail_image.layer = BODY_LAYER+used_tail_layer
+		overlays_standing[used_tail_layer] = tail_image
 		apply_layer(used_tail_layer)
 		return
 
@@ -1007,10 +1003,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	remove_layer(WING_LAYER)
 
-	var/image/vr_wing_image = get_wing_image()
-	if(vr_wing_image)
-		vr_wing_image.layer = BODY_LAYER+WING_LAYER
-		overlays_standing[WING_LAYER] = vr_wing_image
+	var/image/wing_image = get_wing_image()
+	if(wing_image)
+		wing_image.layer = BODY_LAYER+WING_LAYER
+		overlays_standing[WING_LAYER] = wing_image
 
 	apply_layer(WING_LAYER)
 
@@ -1141,11 +1137,11 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				qdel(overlay)
 
 		if(isTaurTail(tail_style))
-/*			var/datum/sprite_accessory/tail/taur/taurtype = tail_style
+			var/datum/sprite_accessory/tail/taur/taurtype = tail_style
 			if(taurtype.can_ride && !riding_datum)
 				riding_datum = new /datum/riding/taur(src)
 				verbs |= /mob/living/carbon/human/proc/taur_mount
-				verbs |= /mob/living/proc/toggle_rider_reins	*/
+				verbs |= /mob/living/proc/toggle_rider_reins
 			return image(tail_s, "pixel_x" = -16)
 		else
 			return image(tail_s)
