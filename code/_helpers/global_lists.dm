@@ -45,6 +45,11 @@ var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
+var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears indexed by type
+var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
+var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
+
+GLOBAL_LIST(custom_species_bases)
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
@@ -216,32 +221,6 @@ var/global/list/string_slot_flags = list(
 		var/decl/closet_appearance/app = new T()
 		GLOB.closet_appearances[T] = app
 
-	return 1
-
-/* // Uncomment to debug chemical reaction list.
-/client/verb/debug_chemical_list()
-
-	for (var/reaction in chemical_reactions_list)
-		. += "chemical_reactions_list\[\"[reaction]\"\] = \"[chemical_reactions_list[reaction]]\"\n"
-		if(islist(chemical_reactions_list[reaction]))
-			var/list/L = chemical_reactions_list[reaction]
-			for(var/t in L)
-				. += "    has: [t]\n"
-	to_world(.)
-*/
-//Hexidecimal numbers
-var/global/list/hexNums = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
-
-var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears indexed by type
-var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
-var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
-
-GLOBAL_LIST(custom_species_bases)
-
-/hook/startup/proc/init_virgo_datum_ref_lists()
-	var/paths
-
-	// Custom Ears
 	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
 	for(var/path in paths)
 		var/obj/item/clothing/head/instance = new path()
@@ -292,3 +271,20 @@ GLOBAL_LIST(custom_species_bases)
 		GLOB.custom_species_bases += species_name
 
 	return 1 // Hooks must return 1
+
+
+	return 1
+
+/* // Uncomment to debug chemical reaction list.
+/client/verb/debug_chemical_list()
+
+	for (var/reaction in chemical_reactions_list)
+		. += "chemical_reactions_list\[\"[reaction]\"\] = \"[chemical_reactions_list[reaction]]\"\n"
+		if(islist(chemical_reactions_list[reaction]))
+			var/list/L = chemical_reactions_list[reaction]
+			for(var/t in L)
+				. += "    has: [t]\n"
+	to_world(.)
+*/
+//Hexidecimal numbers
+var/global/list/hexNums = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")

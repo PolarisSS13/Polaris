@@ -1221,15 +1221,3 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	dat += "</center></body>"
 
 	user << browse(dat, "window=species;size=700x400")
-
-
-/datum/category_group/player_setup_category/genetics
-	name = "Genetics"
-	sort_order = 8
-	category_item_type = /datum/category_item/player_setup_item/genetics
-
-/datum/category_item/player_setup_item/genetics
-	name = "Appearance"
-	sort_order = 1
-
-/datum/category_item/player_setup_item/genetics/content(var/mob/user)

@@ -679,6 +679,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
+	var/taurized = FALSE
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
 	preserve_item = 1
@@ -986,10 +987,6 @@
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
-
-//Switch to taur sprites if a taur equips
-/obj/item/clothing/suit
-	var/taurized = FALSE
 
 /obj/item/clothing/suit/equipped(var/mob/user, var/slot)
 	if(ishuman(user))

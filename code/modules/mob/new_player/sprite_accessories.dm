@@ -977,14 +977,6 @@
 	icon_state = "soghun_dubhorns"
 	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
-/datum/sprite_accessory/hair/taramaw
-	name = "Hairmaw (Liquidfirefly)"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_state = "maw_hair"
-	ckeys_allowed = list("liquidfirefly")
-	do_colouration = 0
-	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
-
 /datum/sprite_accessory/hair/citheronia_colorable
 	name = "Citheronia"
 	icon = 'icons/mob/human_face_alt.dmi'
@@ -1204,15 +1196,6 @@
 	icon = 'icons/mob/human_face_alt.dmi'
 	icon_add = 'icons/mob/human_face_alt_add.dmi'
 	icon_state = "shadekin_long"
-	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
-	gender = NEUTER
-
-/datum/sprite_accessory/hair/shadekin_hair_rivyr
-	name = "Rivyr Hair"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_add = 'icons/mob/human_face_alt_add.dmi'
-	icon_state = "shadekin_rivyr"
-	ckeys_allowed = list("verysoft")
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
 

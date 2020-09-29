@@ -800,7 +800,7 @@
 	HTML += "<tt>"
 	src << browse(HTML, "window=flavor_changes;size=430x300")
 
-/mob/living/carbon/human/proc/toggle_tail_vr(var/setting,var/message = 0)
+/mob/living/carbon/human/proc/toggle_tail(var/setting,var/message = 0)
 	if(!tail_style || !tail_style.ani_state)
 		if(message)
 			to_chat(src, "<span class='warning'>You don't have a tail that supports this.</span>")
@@ -812,7 +812,7 @@
 		update_tail_showing()
 	return 1
 
-/mob/living/carbon/human/proc/toggle_wing_vr(var/setting,var/message = 0)
+/mob/living/carbon/human/proc/toggle_wing(var/setting,var/message = 0)
 	if(!wing_style || !wing_style.ani_state)
 		if(message)
 			to_chat(src, "<span class='warning'>You don't have a wingtype that supports this.</span>")

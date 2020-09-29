@@ -255,8 +255,8 @@
 		mannequin.dna = new /datum/dna(null)
 	mannequin.delete_inventory(TRUE)
 	dress_preview_mob(mannequin)
-	mannequin.toggle_tail_vr(setting = TRUE)
-	mannequin.toggle_wing_vr(setting = TRUE)
+	mannequin.toggle_tail(setting = TRUE)
+	mannequin.toggle_wing(setting = TRUE)
 	COMPILE_OVERLAYS(mannequin)
 
 	preview_icon = icon('icons/effects/128x48.dmi', bgstate)

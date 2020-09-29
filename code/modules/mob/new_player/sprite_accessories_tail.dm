@@ -259,80 +259,6 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "eboop_mark"
 
-/datum/sprite_accessory/tail/molenar_kitsune
-	name = "quintail kitsune tails (Molenar)"
-	desc = ""
-	icon_state = "molenar-kitsune"
-	ckeys_allowed = list("molenar")
-
-/datum/sprite_accessory/tail/miria_fluffdragon
-	name = "fluffdragon tail (Miria Masters)"
-	desc = ""
-	icon_state = "miria-fluffdragontail"
-	ckeys_allowed = list("miriamasters")
-
-/datum/sprite_accessory/tail/miria_kitsune
-	name = "Black kitsune tails (Miria Masters)"
-	desc = ""
-	icon_state = "miria-kitsunetail"
-	ckeys_allowed = list("miriamasters")
-
-/datum/sprite_accessory/tail/molenar_deathclaw
-	name = "deathclaw bits (Molenar)"
-	desc = ""
-	icon_state = "molenar-deathclaw"
-	ckeys_allowed = list("molenar","silvertalismen","jertheace")
-
-/datum/sprite_accessory/tail/runac
-	name = "fennecsune tails (Runac)"
-	desc = ""
-	icon_state = "runac"
-	ckeys_allowed = list("rebcom1807")
-
-/datum/sprite_accessory/tail/reika //Leaving this since it was too hard to split the wings from the tail.
-	name = "fox tail (+ beewings) (Reika)"
-	desc = ""
-	icon_state = "reika"
-	ckeys_allowed = list("rikaru19xjenkins")
-
-/datum/sprite_accessory/tail/rosey
-	name = "tritail kitsune tails (Rosey)"
-	desc = ""
-	icon_state = "rosey_three"
-	ckeys_allowed = list("joey4298")
-
-/datum/sprite_accessory/tail/rosey2
-	name = "pentatail kitsune tails (Rosey)" //I predict seven tails next. ~CK
-	desc = ""
-	icon_state = "rosey_five"
-	do_colouration = 1
-	color_blend_mode = ICON_MULTIPLY
-	ckeys_allowed = list("joey4298")
-
-/datum/sprite_accessory/tail/scree
-	name = "green taj tail (Scree)"
-	desc = ""
-	icon_state = "scree"
-	ckeys_allowed = list("scree")
-
-/datum/sprite_accessory/tail/aronai
-	name = "aronai tail (Aronai)"
-	desc = ""
-	icon_state = "aronai"
-	ckeys_allowed = list("arokha")
-
-/datum/sprite_accessory/tail/cabletail
-    name = "cabletail"
-    desc = "cabletail"
-    icon_state = "cabletail"
-    ckeys_allowed = list("tucker0666")
-
-/datum/sprite_accessory/tail/featherfluff_tail
-    name = "featherfluff_tail"
-    desc = ""
-    icon_state = "featherfluff_tail"
-    ckeys_allowed = list("tucker0666")
-
 /datum/sprite_accessory/tail/ketrai_wag
 	name = "fennix tail (vwag)"
 	desc = ""
@@ -358,12 +284,6 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "ringtail_mark"
-
-/datum/sprite_accessory/tail/holly
-	name = "tigress tail (Holly)"
-	desc = ""
-	icon_state = "tigresstail"
-	ckeys_allowed = list("hoodoo")
 
 /datum/sprite_accessory/tail/satyr
 	name = "goat legs, colorable"
