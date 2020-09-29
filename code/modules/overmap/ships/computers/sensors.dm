@@ -29,7 +29,7 @@
 	var/data[0]
 
 	data["viewing"] = viewing_overmap(user)
-	if(sensors)
+	if(sensors || find_sensors())
 		data["on"] = sensors.use_power
 		data["range"] = sensors.range
 		data["health"] = sensors.health
@@ -69,11 +69,13 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/computer/ship/sensors/OnTopic(var/mob/user, var/list/href_list, state)
-	if(..())
-		return TOPIC_HANDLED
+	if((. = ..()))
+		return
 
 	if (!linked)
-		return TOPIC_NOACTION
+		var/obj/effect/overmap/visitable/sector = get_overmap_sector(src.z)
+		if(!istype(sector) || !attempt_hook_up_recursive(sector))
+			return TOPIC_NOACTION
 
 	if (href_list["viewing"])
 		if(user && !isAI(user))
@@ -99,7 +101,7 @@
 	if (href_list["scan"])
 		var/obj/effect/overmap/O = locate(href_list["scan"])
 		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
-			playsound(src, "sound/machines/dotprinter.ogg", 30, 1)
+			playsound(src, "sound/machines/printer.ogg", 30, 1)
 			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
 		return TOPIC_HANDLED
 

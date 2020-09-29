@@ -4,6 +4,7 @@
 	icon_state = "cleanbot0"
 	req_one_access = list(access_robotics, access_janitor)
 	botcard_access = list(access_janitor)
+	pass_flags = PASSTABLE
 
 	locked = 0 // Start unlocked so roboticist can set them to patrol.
 	wait_if_pulled = 1
@@ -210,6 +211,7 @@
 	target_types += /obj/effect/decal/cleanable/liquid_fuel
 	target_types += /obj/effect/decal/cleanable/mucus
 	target_types += /obj/effect/decal/cleanable/dirt
+	target_types += /obj/effect/decal/cleanable/filth
 
 	if(blood)
 		target_types += /obj/effect/decal/cleanable/blood

@@ -18,11 +18,14 @@
 		return
 
 	//add the new taste data
-	for(var/taste in newdata)
-		if(taste in data)
-			data[taste] += newdata[taste]
-		else
-			data[taste] = newdata[taste]
+	if(islist(data))
+		for(var/taste in newdata)
+			if(taste in data)
+				data[taste] += newdata[taste]
+			else
+				data[taste] = newdata[taste]
+	else
+		initialize_data(newdata)
 
 	//cull all tastes below 10% of total
 	var/totalFlavor = 0
@@ -134,6 +137,8 @@
 	description = "More commonly known as fat, the third macronutrient, with over double the energy content of carbs and protein"
 
 	reagent_state = SOLID
+	taste_description = "greasiness"
+	taste_mult = 0.1
 	nutriment_factor = 27//The caloric ratio of carb/protein/fat is 4:4:9
 	color = "#CCCCCC"
 
@@ -143,6 +148,7 @@
 	id = "oil"
 	description = "Oils are liquid fats."
 	reagent_state = LIQUID
+	taste_description = "oil"
 	color = "#c79705"
 	touch_met = 1.5
 	var/lastburnmessage = 0
@@ -219,8 +225,6 @@
 	name = "Corn Oil"
 	id = "cornoil"
 	description = "An oil derived from various types of corn."
-	taste_description = "oil"
-	taste_mult = 0.1
 	reagent_state = LIQUID
 
 /datum/reagent/nutriment/triglyceride/oil/peanut
@@ -582,7 +586,7 @@
 //SYNNONO MEME FOODS EXPANSION - Credit to Synnono
 
 /datum/reagent/spacespice
-	name = "Space Spice"
+	name = "Wurmwoad"
 	id = "spacespice"
 	description = "An exotic blend of spices for cooking. Definitely not worms."
 	reagent_state = SOLID
@@ -611,6 +615,23 @@
 	M.bodytemperature = max(M.bodytemperature - 10 * TEMPERATURE_DAMAGE_COEFFICIENT, 215)
 	if(prob(1))
 		M.emote("shiver")
+	holder.remove_reagent("capsaicin", 5)
+
+/datum/reagent/frostoil/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed) // Eating frostoil now acts like capsaicin. Wee!
+	if(alien == IS_DIONA)
+		return
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(!H.can_feel_pain())
+			return
+	var/effective_dose = (dose * M.species.spice_mod)
+	if((effective_dose < 5) && (dose == metabolism || prob(5)))
+		to_chat(M, "<span class='danger'>Your insides suddenly feel a spreading chill!</span>")
+	if(effective_dose >= 5)
+		M.apply_effect(2 * M.species.spice_mod, AGONY, 0)
+		M.bodytemperature -= rand(1, 5) * M.species.spice_mod // Really fucks you up, cause it makes you cold.
+		if(prob(5))
+			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", pick("<span class='danger'>You feel like your insides are freezing!</span>", "<span class='danger'>Your insides feel like they're turning to ice!</span>"))
 	holder.remove_reagent("capsaicin", 5)
 
 /datum/reagent/frostoil/cryotoxin //A longer lasting version of frost oil.
@@ -644,12 +665,14 @@
 		if(!H.can_feel_pain())
 			return
 
-	if(dose < 5 && (dose == metabolism || prob(5)))
+	var/effective_dose = (dose * M.species.spice_mod)
+	if((effective_dose < 5) && (dose == metabolism || prob(5)))
 		to_chat(M, "<span class='danger'>Your insides feel uncomfortably hot!</span>")
-	if(dose >= 5)
-		M.apply_effect(2, AGONY, 0)
+	if(effective_dose >= 5)
+		M.apply_effect(2 * M.species.spice_mod, AGONY, 0)
+		M.bodytemperature += rand(1, 5) * M.species.spice_mod // Really fucks you up, cause it makes you overheat, too.
 		if(prob(5))
-			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
+			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", pick("<span class='danger'>You feel like your insides are burning!</span>", "<span class='danger'>You feel like your insides are on fire!</span>", "<span class='danger'>You feel like your belly is full of lava!</span>"))
 	holder.remove_reagent("frostoil", 5)
 
 /datum/reagent/condensedcapsaicin

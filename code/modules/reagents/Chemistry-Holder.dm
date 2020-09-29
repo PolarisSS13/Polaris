@@ -115,7 +115,7 @@
 	for(var/datum/reagent/current in reagent_list)
 		if(current.id == id)
 			if(current.id == "blood")
-				if(!isnull(data["species"]) && !isnull(current.data["species"]) && data["species"] != current.data["species"])	// Species bloodtypes are already incompatible, this just stops it from mixing into the one already in a container.
+				if(LAZYLEN(data) && !isnull(data["species"]) && !isnull(current.data["species"]) && data["species"] != current.data["species"])	// Species bloodtypes are already incompatible, this just stops it from mixing into the one already in a container.
 					continue
 
 			current.volume += amount
@@ -143,6 +143,13 @@
 	else
 		crash_with("[my_atom] attempted to add a reagent called '[id]' which doesn't exist. ([usr])")
 	return 0
+
+/datum/reagents/proc/isolate_reagent(reagent)
+	for(var/A in reagent_list)
+		var/datum/reagent/R = A
+		if(R.id != reagent)
+			del_reagent(R.id)
+			update_total()
 
 /datum/reagents/proc/remove_reagent(var/id, var/amount, var/safety = 0)
 	if(!isnum(amount))
