@@ -172,7 +172,7 @@ var/list/organ_cache = list()
 	handle_organ_proc_special()
 
 	//Process infections
-	if(robotic >= ORGAN_ROBOT || (istype(owner) && (owner.species && (owner.species.flags & IS_PLANT || (owner.species.flags & NO_INFECT)))))
+	if(robotic >= ORGAN_ROBOT || (istype(owner) && (owner.species && (owner.species.flags & (IS_PLANT | NO_INFECT)))))
 		germ_level = 0
 		return
 
