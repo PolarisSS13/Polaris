@@ -176,8 +176,8 @@
 	item_state = "hoscloak"
 
 /obj/item/clothing/accessory/poncho/roles/cloak/captain
-	name = "colony director's cloak"
-	desc = "An elaborate cloak meant to be worn by the colony director."
+	name = "site manager's cloak"
+	desc = "An elaborate cloak meant to be worn by the site manager."
 	icon_state = "capcloak"
 	item_state = "capcloak"
 
@@ -400,3 +400,8 @@
 	name = "green asymmetrical jacket"
 	desc = "Insultingly avant-garde in aqua."
 	icon_state = "asym_green"
+
+/obj/item/clothing/accessory/asymovercoat
+	name = "orange asymmetrical overcoat"
+	desc = "An asymmetrical orange overcoat in a 2560's fashion."
+	icon_state = "asymovercoat"

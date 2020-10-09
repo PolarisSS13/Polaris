@@ -7,7 +7,7 @@
 	icon = 'icons/obj/machines/research.dmi'
 	density = 1
 	anchored = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	var/busy = 0
 	var/obj/machinery/computer/rdconsole/linked_console
 
@@ -18,7 +18,7 @@
 	return
 
 /obj/machinery/r_n_d/proc/getMaterialType(var/name)
-	var/material/M = get_material_by_name(name)
+	var/datum/material/M = get_material_by_name(name)
 	if(M && M.stack_type)
 		return M.stack_type
 	return null

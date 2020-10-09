@@ -24,7 +24,7 @@
 	icon_state = "seeds"
 	density = 1
 	anchored = 1
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 100
 
 	var/seeds_initialized = 0 // Map-placed ones break if seeds are loaded right at the start of the round, so we do it on the first interaction
@@ -138,7 +138,8 @@
 		/obj/item/seeds/wabback = 2,
 		/obj/item/seeds/watermelonseed = 3,
 		/obj/item/seeds/wheatseed = 3,
-		/obj/item/seeds/whitebeetseed = 3
+		/obj/item/seeds/whitebeetseed = 3,
+		/obj/item/seeds/wurmwoad = 3
 		)
 
 /obj/machinery/seed_storage/xenobotany
@@ -195,7 +196,8 @@
 		/obj/item/seeds/wabback = 2,
 		/obj/item/seeds/watermelonseed = 3,
 		/obj/item/seeds/wheatseed = 3,
-		/obj/item/seeds/whitebeetseed = 3
+		/obj/item/seeds/whitebeetseed = 3,
+		/obj/item/seeds/wurmwoad = 3
 		)
 
 /obj/machinery/seed_storage/attack_hand(mob/user as mob)
@@ -502,7 +504,7 @@
 			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
 	else if(O.is_wrench())
-		playsound(loc, O.usesound, 50, 1)
+		playsound(src, O.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 	else if(O.is_screwdriver())

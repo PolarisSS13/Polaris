@@ -32,12 +32,11 @@
 	var/survey_points = 0	// For redeeming at explorer equipment vendors.
 
 /obj/item/weapon/card/id/examine(mob/user)
-	set src in oview(1)
-	if(in_range(usr, src))
-		show(usr)
-		to_chat(usr,desc)
+	. = ..()
+	if(in_range(user, src))
+		show(user) //Not chat related
 	else
-		to_chat(usr, "<span class='warning'>It is too far away.</span>")
+		. += "<span class='warning'>It is too far away to read.</span>"
 
 /obj/item/weapon/card/id/proc/prevent_tracking()
 	return 0
@@ -91,8 +90,8 @@
 	return dat
 
 /obj/item/weapon/card/id/attack_self(mob/user as mob)
-	user.visible_message("\The [user] shows you: \icon[src] [src.name]. The assignment on the card: [src.assignment]",\
-		"You flash your ID card: \icon[src] [src.name]. The assignment on the card: [src.assignment]")
+	user.visible_message("\The [user] shows you: [bicon(src)] [src.name]. The assignment on the card: [src.assignment]",\
+		"You flash your ID card: [bicon(src)] [src.name]. The assignment on the card: [src.assignment]")
 
 	src.add_fingerprint(user)
 	return
@@ -108,7 +107,7 @@
 	set category = "Object"
 	set src in usr
 
-	to_chat(usr, "\icon[src] [src.name]: The current assignment on the card is [src.assignment].")
+	to_chat(usr, "[bicon(src)] [src.name]: The current assignment on the card is [src.assignment].")
 	to_chat(usr, "The blood type on the card is [blood_type].")
 	to_chat(usr, "The DNA hash on the card is [dna_hash].")
 	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
@@ -140,13 +139,13 @@
 	preserve_item = 1
 
 /obj/item/weapon/card/id/gold/captain
-	assignment = "Colony Director"
-	rank = "Colony Director"
+	assignment = "Site Manager"
+	rank = "Site Manager"
 
 /obj/item/weapon/card/id/gold/captain/spare
-	name = "\improper Colony Director's spare ID"
+	name = "\improper Site Manager's spare ID"
 	desc = "The spare ID of the High Lord himself."
-	registered_name = "Colony Director"
+	registered_name = "Site Manager"
 
 /obj/item/weapon/card/id/synthetic
 	name = "\improper Synthetic ID"

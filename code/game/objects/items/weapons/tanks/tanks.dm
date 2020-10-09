@@ -10,6 +10,8 @@ var/list/global/tank_gauge_cache = list()
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/seromi/back.dmi'
 		)
+	drop_sound = 'sound/items/drop/gascan.ogg'
+	pickup_sound = 'sound/items/pickup/gascan.ogg'
 
 	var/gauge_icon = "indicator_tank"
 	var/last_gauge_pressure
@@ -41,14 +43,14 @@ var/list/global/tank_gauge_cache = list()
 	description_info = "These tanks are utilised to store any of the various types of gaseous substances. \
 	They can be attached to various portable atmospheric devices to be filled or emptied. <br>\
 	<br>\
-	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ºC. \
+	Each tank is fitted with an emergency relief valve. This relief valve will open if the tank is pressurised to over ~3000kPa or heated to over 173ÂºC. \
 	The valve itself will close after expending most or all of the contents into the air.<br>\
 	<br>\
 	Filling a tank such that experiences ~4000kPa of pressure will cause the tank to rupture, spilling out its contents and destroying the tank. \
 	Tanks filled over ~5000kPa will rupture rather violently, exploding with significant force."
 
-	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ºC). \
-	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
+	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ÂºC). \
+	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ÂºC. \
 	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
 /obj/item/weapon/tank/proc/init_proxy()
@@ -58,15 +60,13 @@ var/list/global/tank_gauge_cache = list()
 
 
 /obj/item/weapon/tank/Initialize()
-	..()
+	. = ..()
 
 	src.init_proxy()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
-	START_PROCESSING(SSobj, src)
 	update_gauge()
-	return
 
 /obj/item/weapon/tank/Destroy()
 	QDEL_NULL(air_contents)
@@ -77,13 +77,19 @@ var/list/global/tank_gauge_cache = list()
 	if(istype(loc, /obj/item/device/transfer_valve))
 		var/obj/item/device/transfer_valve/TTV = loc
 		TTV.remove_tank(src)
-		qdel(TTV)
 
 	. = ..()
 
+/obj/item/weapon/tank/equipped() // Note that even grabbing into a hand calls this, so it should be fine as a 'has a player touched this'
+	. = ..()
+	// An attempt at optimization. There are MANY tanks during rounds that will never get touched.
+	// Don't see why any of those would explode spontaneously. So only tanks that players touch get processed.
+	// This could be optimized more, but it's a start!
+	START_PROCESSING(SSobj, src) // This has a built in safety to avoid multi-processing
+
 /obj/item/weapon/tank/examine(mob/user)
-	. = ..(user, 0)
-	if(.)
+	. = ..()
+	if(loc == user)
 		var/celsius_temperature = air_contents.temperature - T0C
 		var/descriptive
 		switch(celsius_temperature)
@@ -101,12 +107,12 @@ var/list/global/tank_gauge_cache = list()
 				descriptive = "cold"
 			else
 				descriptive = "bitterly cold"
-		to_chat(user, "<span class='notice'>\The [src] feels [descriptive].</span>")
+		. += "<span class='notice'>\The [src] feels [descriptive].</span>"
 
 	if(src.proxyassembly.assembly || wired)
-		to_chat(user, "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>")
+		. += "<span class='warning'>It seems to have [wired? "some wires ": ""][wired && src.proxyassembly.assembly? "and ":""][src.proxyassembly.assembly ? "some sort of assembly ":""]attached to it.</span>"
 	if(src.valve_welded)
-		to_chat(user, "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>")
+		. += "<span class='warning'>\The [src] emergency relief valve has been welded shut!</span>"
 
 
 /obj/item/weapon/tank/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -114,9 +120,6 @@ var/list/global/tank_gauge_cache = list()
 	if (istype(src.loc, /obj/item/assembly))
 		icon = src.loc
 
-	if ((istype(W, /obj/item/device/analyzer)) && get_dist(user, src) <= 1)
-		var/obj/item/device/analyzer/A = W
-		A.analyze_gases(src, user)
 	else if (istype(W,/obj/item/latexballon))
 		var/obj/item/latexballon/LB = W
 		LB.blow(src)
@@ -328,6 +331,9 @@ var/list/global/tank_gauge_cache = list()
 /obj/item/weapon/tank/remove_air(amount)
 	return air_contents.remove(amount)
 
+/obj/item/weapon/tank/proc/remove_air_by_flag(flag, amount)
+	return air_contents.remove_by_flag(flag, amount)
+
 /obj/item/weapon/tank/return_air()
 	return air_contents
 
@@ -415,7 +421,7 @@ var/list/global/tank_gauge_cache = list()
 			pressure = air_contents.return_pressure()
 			var/strength = ((pressure-TANK_FRAGMENT_PRESSURE)/TANK_FRAGMENT_SCALE)
 
-			var/mult = ((src.air_contents.volume/140)**(1/2)) * (air_contents.total_moles**2/3)/((29*0.64) **2/3) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
+			var/mult = ((src.air_contents.volume/140)**(1/2)) * (air_contents.total_moles**(2/3))/((29*0.64) **(2/3)) //tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 			//tanks appear to be experiencing a reduction on scale of about 0.64 total moles
 
 
@@ -463,8 +469,8 @@ var/list/global/tank_gauge_cache = list()
 			if(!T)
 				return
 			T.assume_air(air_contents)
-			playsound(get_turf(src), 'sound/weapons/Gunshot_shotgun.ogg', 20, 1)
-			visible_message("\icon[src] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
+			playsound(src, 'sound/weapons/Gunshot_shotgun.ogg', 20, 1)
+			visible_message("[bicon(src)] <span class='danger'>\The [src] flies apart!</span>", "<span class='warning'>You hear a bang!</span>")
 			T.hotspot_expose(air_contents.temperature, 70, 1)
 
 
@@ -509,8 +515,8 @@ var/list/global/tank_gauge_cache = list()
 
 			T.assume_air(leaked_gas)
 			if(!leaking)
-				visible_message("\icon[src] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
-				playsound(src.loc, 'sound/effects/spray.ogg', 10, 1, -3)
+				visible_message("[bicon(src)] <span class='warning'>\The [src] relief valve flips open with a hiss!</span>", "You hear hissing.")
+				playsound(src, 'sound/effects/spray.ogg', 10, 1, -3)
 				leaking = 1
 				#ifdef FIREDBG
 				log_debug("<span class='warning'>[x],[y] tank is leaking: [pressure] kPa, integrity [integrity]</span>")
@@ -670,6 +676,11 @@ var/list/global/tank_gauge_cache = list()
 		tank.update_icon()
 		tank.overlays -= "bomb_assembly"
 
-/obj/item/device/tankassemblyproxy/HasProximity(atom/movable/AM as mob|obj)
-	if(src.assembly)
-		src.assembly.HasProximity(AM)
+/obj/item/device/tankassemblyproxy/HasProximity(turf/T, atom/movable/AM, old_loc)
+	assembly?.HasProximity(T, AM, old_loc)
+
+/obj/item/device/tankassemblyproxy/Moved(old_loc, direction, forced)
+	if(isturf(old_loc))
+		unsense_proximity(callback = .HasProximity, center = old_loc)
+	if(isturf(loc))
+		sense_proximity(callback = .HasProximity)

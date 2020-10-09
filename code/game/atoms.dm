@@ -12,6 +12,8 @@
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 	var/simulated = 1 //filter for actions - used by lighting overlays
+	var/atom_say_verb = "says"
+	var/bubble_icon = "normal" ///what icon the atom uses for speechbubbles
 	var/fluorescent // Shows up under a UV light.
 
 	var/last_bumped = 0
@@ -41,8 +43,7 @@
 		_preloader.load(src)
 
 	// Pass our arguments to InitAtom so they can be passed to initialize(), but replace 1st with if-we're-during-mapload.
-	var/do_initialize = SSatoms && SSatoms.initialized // Workaround our non-ideal initialization order: SSatoms may not exist yet.
-	//var/do_initialize = SSatoms.initialized
+	var/do_initialize = SSatoms.initialized
 	if(do_initialize > INITIALIZATION_INSSATOMS)
 		args[1] = (do_initialize == INITIALIZATION_INNEW_MAPLOAD)
 		if(SSatoms.InitAtom(src, args))
@@ -119,14 +120,32 @@
 /atom/proc/CheckExit()
 	return 1
 
-// If you want to use this, the atom must have the PROXMOVE flag, and the moving
-// atom must also have the PROXMOVE flag currently to help with lag. ~ ComicIronic
-/atom/proc/HasProximity(atom/movable/AM as mob|obj)
+// Used to be for the PROXMOVE flag, but that was terrible, so instead it's just here as a stub for
+// all the atoms that still have the proc, but get events other ways.
+/atom/proc/HasProximity(turf/T, atom/movable/AM, old_loc)
 	return
+
+//Register listeners on turfs in a certain range
+/atom/proc/sense_proximity(var/range = 1, var/callback)
+	ASSERT(callback)
+	ASSERT(isturf(loc))
+	var/list/turfs = trange(range, src)
+	for(var/t in turfs)
+		var/turf/T = t
+		GLOB.turf_entered_event.register(T, src, callback)
+
+//Unregister from prox listening in a certain range. You should do this BEFORE you move, but if you
+// really can't, then you can set the center where you moved from.
+/atom/proc/unsense_proximity(var/range = 1, var/callback, var/center)
+	ASSERT(isturf(center) || isturf(loc))
+	var/list/turfs = trange(range, center ? center : src)
+	for(var/t in turfs)
+		var/turf/T = t
+		GLOB.turf_entered_event.unregister(T, src, callback)
+
 
 /atom/proc/emp_act(var/severity)
 	return
-
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
 	P.on_hit(src, 0, def_zone)
@@ -170,7 +189,7 @@
 	return found
 
 //All atoms
-/atom/proc/examine(mob/user, var/distance = -1, var/infix = "", var/suffix = "")
+/atom/proc/examine(mob/user, var/infix = "", var/suffix = "")
 	//This reformat names to get a/an properly working on item descriptions when they are bloody
 	var/f_name = "\a [src][infix]."
 	if(src.blood_DNA && !istype(src, /obj/effect/decal))
@@ -183,10 +202,19 @@
 		else
 			f_name += "oil-stained [name][infix]."
 
-	to_chat(user, "\icon[src] That's [f_name] [suffix]")
-	to_chat(user,desc)
+	var/list/output = list("[bicon(src)] That's [f_name] [suffix]", desc)
 
-	return distance == -1 || (get_dist(src, user) <= distance)
+	if(user.client?.prefs.examine_text_mode == EXAMINE_MODE_INCLUDE_USAGE)
+		output += description_info
+
+	if(user.client?.prefs.examine_text_mode == EXAMINE_MODE_SWITCH_TO_PANEL)
+		user.client.statpanel = "Examine" // Switch to stat panel
+
+	return output
+
+// Don't make these call bicon or anything, these are what bicon uses. They need to return an icon.
+/atom/proc/examine_icon()
+	return icon(icon=src.icon, icon_state=src.icon_state, dir=SOUTH, frame=1, moving=0)
 
 // called by mobs when e.g. having the atom as their machine, pulledby, loc (AKA mob being inside the atom) or buckled var set.
 // see code/modules/mob/mob_movement.dm for more.
@@ -446,12 +474,14 @@
 // Use for objects performing visible actions
 // message is output to anyone who can see, e.g. "The [src] does something!"
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
-/atom/proc/visible_message(var/message, var/blind_message)
+/atom/proc/visible_message(var/message, var/blind_message, var/list/exclude_mobs = null)
 
 	var/list/see = get_mobs_and_objs_in_view_fast(get_turf(src),world.view,remote_ghosts = FALSE)
 
 	var/list/seeing_mobs = see["mobs"]
 	var/list/seeing_objs = see["objs"]
+	if(LAZYLEN(exclude_mobs))
+		seeing_mobs -= exclude_mobs
 
 	for(var/obj in seeing_objs)
 		var/obj/O = obj
@@ -512,6 +542,9 @@
 		return TRUE
 	return FALSE
 
+/atom/proc/is_incorporeal()
+	return FALSE
+
 /atom/proc/drop_location()
 	var/atom/L = loc
 	if(!L)
@@ -558,3 +591,20 @@
 		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		</font>
 		"}
+
+/atom/proc/atom_say(message)
+	if(!message)
+		return
+	var/list/speech_bubble_hearers = list()
+	for(var/mob/M in get_mobs_in_view(7, src))
+		M.show_message("<span class='game say'><span class='name'>[src]</span> [atom_say_verb], \"[message]\"</span>", 2, null, 1)
+		if(M.client)
+			speech_bubble_hearers += M.client
+
+	if(length(speech_bubble_hearers))
+		var/image/I = image('icons/mob/talk.dmi', src, "[bubble_icon][say_test(message)]", FLY_LAYER)
+		I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+		INVOKE_ASYNC(GLOBAL_PROC, /.proc/flick_overlay, I, speech_bubble_hearers, 30)
+
+/atom/proc/speech_bubble(bubble_state = "", bubble_loc = src, list/bubble_recipients = list())
+	return

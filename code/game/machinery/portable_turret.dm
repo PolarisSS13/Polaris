@@ -549,12 +549,12 @@
 		if(do_after(user, 50 * I.toolspeed))
 			//This code handles moving the turret around. After all, it's a portable turret!
 			if(!anchored)
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				anchored = TRUE
 				update_icon()
 				to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
 			else if(anchored)
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				anchored = FALSE
 				to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
 				update_icon()
@@ -701,8 +701,21 @@
 	var/list/targets = list()			//list of primary targets
 	var/list/secondarytargets = list()	//targets that are least important
 
+	var/list/seenturfs = list()
+	for(var/turf/T in oview(world.view, src))
+		seenturfs += T
+
+	for(var/mob in living_mob_list)
+		var/mob/M = mob
+		if(M.z != z) //Skip
+			continue
+		if(get_turf(M) in seenturfs)
+			assess_and_assign(mob, targets, secondarytargets)
+
+	/* This was dumb. Why do this and then check line of sight later?
 	for(var/mob/M in mobs_in_xray_view(world.view, src))
 		assess_and_assign(M, targets, secondarytargets)
+	*/
 
 	if(!tryToShootAt(targets))
 		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
@@ -809,6 +822,7 @@
 	var/atom/flick_holder = new /atom/movable/porta_turret_cover(loc)
 	flick_holder.layer = layer + 0.1
 	flick("popup_[turret_type]", flick_holder)
+	playsound(src, 'sound/machines/turrets/turret_deploy.ogg', 100, 1)
 	sleep(10)
 	qdel(flick_holder)
 
@@ -830,6 +844,7 @@
 	var/atom/flick_holder = new /atom/movable/porta_turret_cover(loc)
 	flick_holder.layer = layer + 0.1
 	flick("popdown_[turret_type]", flick_holder)
+	playsound(src, 'sound/machines/turrets/turret_retract.ogg', 100, 1)
 	sleep(10)
 	qdel(flick_holder)
 
@@ -850,6 +865,7 @@
 		spawn()
 			popUp()				//pop the turret up if it's not already up.
 		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
+		playsound(src, 'sound/machines/turrets/turret_rotate.ogg', 100, 1) // Play rotating sound
 		spawn()
 			shootAt(target)
 		return 1
@@ -877,10 +893,10 @@
 	var/obj/item/projectile/A
 	if(emagged || lethal)
 		A = new lethal_projectile(loc)
-		playsound(loc, lethal_shot_sound, 75, 1)
+		playsound(src, lethal_shot_sound, 75, 1)
 	else
 		A = new projectile(loc)
-		playsound(loc, shot_sound, 75, 1)
+		playsound(src, shot_sound, 75, 1)
 
 	// Lethal/emagged turrets use twice the power due to higher energy beams
 	// Emagged turrets again use twice as much power due to higher firing rates
@@ -953,14 +969,14 @@
 	switch(build_step)
 		if(0)	//first step
 			if(I.is_wrench() && !anchored)
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				to_chat(user, "<span class='notice'>You secure the external bolts.</span>")
 				anchored = TRUE
 				build_step = 1
 				return
 
 			else if(I.is_crowbar() && !anchored)
-				playsound(loc, I.usesound, 75, 1)
+				playsound(src, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You dismantle the turret construction.</span>")
 				new /obj/item/stack/material/steel(loc, 5)
 				qdel(src)
@@ -978,7 +994,7 @@
 				return
 
 			else if(I.is_wrench())
-				playsound(loc, I.usesound, 75, 1)
+				playsound(src, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You unfasten the external bolts.</span>")
 				anchored = FALSE
 				build_step = 0
@@ -986,7 +1002,7 @@
 
 		if(2)
 			if(I.is_wrench())
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				to_chat(user, "<span class='notice'>You bolt the metal armor into place.</span>")
 				build_step = 3
 				return
@@ -999,7 +1015,7 @@
 					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
 					return
 
-				playsound(loc, I.usesound, 50, 1)
+				playsound(src, I.usesound, 50, 1)
 				if(do_after(user, 20 * I.toolspeed))
 					if(!src || !WT.remove_fuel(5, user)) return
 					build_step = 1
@@ -1026,7 +1042,7 @@
 				return
 
 			else if(I.is_wrench())
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				to_chat(user, "<span class='notice'>You remove the turret's metal armor bolts.</span>")
 				build_step = 2
 				return
@@ -1045,7 +1061,7 @@
 
 		if(5)
 			if(I.is_screwdriver())
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				build_step = 6
 				to_chat(user, "<span class='notice'>You close the internal access hatch.</span>")
 				return
@@ -1063,7 +1079,7 @@
 				return
 
 			else if(I.is_screwdriver())
-				playsound(loc, I.usesound, 100, 1)
+				playsound(src, I.usesound, 100, 1)
 				build_step = 5
 				to_chat(user, "<span class='notice'>You open the internal access hatch.</span>")
 				return
@@ -1075,7 +1091,7 @@
 				if(WT.get_fuel() < 5)
 					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
 
-				playsound(loc, WT.usesound, 50, 1)
+				playsound(src, WT.usesound, 50, 1)
 				if(do_after(user, 30 * WT.toolspeed))
 					if(!src || !WT.remove_fuel(5, user))
 						return
@@ -1093,7 +1109,7 @@
 					qdel(src) // qdel
 
 			else if(I.is_crowbar())
-				playsound(loc, I.usesound, 75, 1)
+				playsound(src, I.usesound, 75, 1)
 				to_chat(user, "<span class='notice'>You pry off the turret's exterior armor.</span>")
 				new /obj/item/stack/material/steel(loc, 2)
 				build_step = 6

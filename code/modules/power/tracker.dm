@@ -10,7 +10,7 @@
 	icon_state = "tracker"
 	anchored = 1
 	density = 1
-	use_power = 0
+	use_power = USE_POWER_OFF
 
 	var/id = 0
 	var/sun_angle = 0		// sun angle as set by sun datum
@@ -60,14 +60,14 @@
 /obj/machinery/power/tracker/attackby(var/obj/item/weapon/W, var/mob/user)
 
 	if(W.is_crowbar())
-		playsound(src.loc, 'sound/machines/click.ogg', 50, 1)
+		playsound(src, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar tracker.</span>")
 		if(do_after(user, 50))
 			var/obj/item/solar_assembly/S = locate() in src
 			if(S)
 				S.loc = src.loc
 				S.give_glass()
-			playsound(src.loc, 'sound/items/Deconstruct.ogg', 50, 1)
+			playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 			user.visible_message("<span class='notice'>[user] takes the glass off the tracker.</span>")
 			qdel(src)
 		return

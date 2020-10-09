@@ -25,11 +25,13 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 1
 	always_unpowered = 1
 	dynamic_lighting = 0
+	has_gravity = 0
 	power_light = 0
 	power_equip = 0
 	power_environ = 0
 	base_turf = /turf/space
 	ambience = AMBIENCE_SPACE
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/space/atmosalert()
 	return
@@ -62,173 +64,68 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 ////////////
 //SHUTTLES//
 ////////////
-//shuttle areas must contain at least two areas in a subgroup if you want to move a shuttle from one
-//place to another. Look at escape shuttle for example.
+//Shuttles only need starting area, movement is handled by landmarks
 //All shuttles should now be under shuttle since we have smooth-wall code.
 
 /area/shuttle
 	requires_power = 0
-	flags = RAD_SHIELDED
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	sound_env = SMALL_ENCLOSED
 	base_turf = /turf/space
+	forbid_events = TRUE
 
 /area/shuttle/arrival
 	name = "\improper Arrival Shuttle"
 	ambience = AMBIENCE_ARRIVALS
 
-/area/shuttle/arrival/pre_game
+/area/shuttle/supply
+	name = "\improper Supply Shuttle"
 	icon_state = "shuttle2"
-
-/area/shuttle/arrival/station
-	icon_state = "shuttle"
-	dynamic_lighting = 0
-	ambience = AMBIENCE_ARRIVALS
 
 /area/shuttle/escape
 	name = "\improper Emergency Shuttle"
 	music = "music/escape.ogg"
 
-/area/shuttle/escape/station
-	name = "\improper Emergency Shuttle Station"
-	icon_state = "shuttle2"
-	dynamic_lighting = 0
-
-/area/shuttle/escape/centcom
-	name = "\improper Emergency Shuttle CentCom"
-	icon_state = "shuttle"
-
-/area/shuttle/escape/transit // the area to pass through for 3 minute transit
-	name = "\improper Emergency Shuttle Transit"
-	icon_state = "shuttle"
-
 /area/shuttle/escape_pod1
 	name = "\improper Escape Pod One"
 	music = "music/escape.ogg"
-
-/area/shuttle/escape_pod1/station
-	icon_state = "shuttle2"
-
-/area/shuttle/escape_pod1/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod1/transit
-	icon_state = "shuttle"
 
 /area/shuttle/escape_pod2
 	name = "\improper Escape Pod Two"
 	music = "music/escape.ogg"
 
-/area/shuttle/escape_pod2/station
-	icon_state = "shuttle2"
-
-/area/shuttle/escape_pod2/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod2/transit
-	icon_state = "shuttle"
-
 /area/shuttle/escape_pod3
 	name = "\improper Escape Pod Three"
 	music = "music/escape.ogg"
-
-/area/shuttle/escape_pod3/station
-	icon_state = "shuttle2"
-
-/area/shuttle/escape_pod3/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod3/transit
-	icon_state = "shuttle"
 
 /area/shuttle/escape_pod4
 	name = "\improper Escape Pod Four"
 	music = "music/escape.ogg"
 
-/area/shuttle/escape_pod4/station
-	icon_state = "shuttle2"
-
-/area/shuttle/escape_pod4/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod4/transit
-	icon_state = "shuttle"
-
 /area/shuttle/escape_pod5
 	name = "\improper Escape Pod Five"
 	music = "music/escape.ogg"
-
-/area/shuttle/escape_pod5/station
-	icon_state = "shuttle2"
-
-/area/shuttle/escape_pod5/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod5/transit
-	icon_state = "shuttle"
 
 /area/shuttle/escape_pod6
 	name = "\improper Escape Pod Six"
 	music = "music/escape.ogg"
 
-/area/shuttle/escape_pod6/station
-	icon_state = "shuttle2"
-
-/area/shuttle/escape_pod6/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/escape_pod6/transit
-	icon_state = "shuttle"
-
 /area/shuttle/large_escape_pod1
 	name = "\improper Large Escape Pod One"
 	music = "music/escape.ogg"
-
-/area/shuttle/large_escape_pod1/station
-	icon_state = "shuttle2"
-
-/area/shuttle/large_escape_pod1/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/large_escape_pod1/transit
-	icon_state = "shuttle"
 
 /area/shuttle/large_escape_pod2
 	name = "\improper Large Escape Pod Two"
 	music = "music/escape.ogg"
 
-/area/shuttle/large_escape_pod2/station
-	icon_state = "shuttle2"
-
-/area/shuttle/large_escape_pod2/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/large_escape_pod2/transit
-	icon_state = "shuttle"
-
 /area/shuttle/cryo
 	name = "\improper Cryogenic Storage"
-
-/area/shuttle/cryo/station
-	icon_state = "shuttle2"
-	base_turf = /turf/simulated/mineral/floor/ignore_mapgen
-
-/area/shuttle/cryo/centcom
-	icon_state = "shuttle"
-
-/area/shuttle/cryo/transit
-	icon_state = "shuttle"
 
 /area/shuttle/mining
 	name = "\improper Mining Elevator"
 	music = "music/escape.ogg"
 	dynamic_lighting = 0
 	base_turf = /turf/simulated/mineral/floor/ignore_mapgen
-
-/area/shuttle/mining/station
-	icon_state = "shuttle2"
-
-/area/shuttle/mining/outpost
-	icon_state = "shuttle"
 
 /area/shuttle/transport1/centcom
 	icon_state = "shuttle"
@@ -286,53 +183,14 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "red"
 	dynamic_lighting = 0
 
-/area/shuttle/trade/centcom
-	name = "\improper Trade Shuttle CentCom"
-	icon_state = "shuttlered"
-
-/area/shuttle/trade/station
-	name = "\improper Trade Shuttle"
-	icon_state = "shuttlered"
-
 /area/shuttle/thunderdome
 	name = "honk"
-
-/area/shuttle/thunderdome/grnshuttle
-	name = "\improper Thunderdome GRN Shuttle"
-	icon_state = "green"
-
-/area/shuttle/thunderdome/grnshuttle/dome
-	name = "\improper GRN Shuttle"
-	icon_state = "shuttlegrn"
-
-/area/shuttle/thunderdome/grnshuttle/station
-	name = "\improper GRN Station"
-	icon_state = "shuttlegrn2"
-
-/area/shuttle/thunderdome/redshuttle
-	name = "\improper Thunderdome RED Shuttle"
-	icon_state = "red"
-
-/area/shuttle/thunderdome/redshuttle/dome
-	name = "\improper RED Shuttle"
-	icon_state = "shuttlered"
-
-/area/shuttle/thunderdome/redshuttle/station
-	name = "\improper RED Station"
-	icon_state = "shuttlered2"
-// === Trying to remove these areas:
 
 /area/shuttle/research
 	name = "\improper Research Elevator"
 	music = "music/escape.ogg"
 	dynamic_lighting = 0
 	base_turf = /turf/simulated/mineral/floor/ignore_mapgen
-
-/area/shuttle/research/station
-	icon_state = "shuttle2"
-
-/area/shuttle/research/outpost
-	icon_state = "shuttle"
 
 /area/airtunnel1/      // referenced in airtunnel.dm:759
 
@@ -344,6 +202,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Alien base"
 	icon_state = "yellow"
 	requires_power = 0
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 // CENTCOM
 
@@ -352,6 +211,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "centcom"
 	requires_power = 0
 	dynamic_lighting = 0
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/centcom/control
 	name = "\improper CentCom Control"
@@ -420,6 +280,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/centcom/bathroom
 	name = "\improper CentCom Bathroom"
 	icon_state = "centcom_crew"
+	sound_env = SMALL_ENCLOSED
 
 //SYNDICATES
 
@@ -429,6 +290,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	dynamic_lighting = 0
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/syndicate_mothership/control
 	name = "\improper Mercenary Control Room"
@@ -445,6 +307,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "asteroid"
 	requires_power = 0
 	sound_env = ASTEROID
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/asteroid/cave				// -- TLE
 	name = "\improper Moon - Underground"
@@ -468,6 +331,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	dynamic_lighting = 0
 	sound_env = ARENA
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/tdome/tdome1
 	name = "\improper Thunderdome (Team 1)"
@@ -495,6 +359,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	flags = RAD_SHIELDED
 	base_turf = /turf/space
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/syndicate_station/start
 	name = "\improper Mercenary Forward Operating Base"
@@ -550,6 +415,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	dynamic_lighting = 0
 	ambience = AMBIENCE_OTHERWORLDLY
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/skipjack_station
 	name = "\improper Skipjack"
@@ -557,6 +423,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	requires_power = 0
 	base_turf = /turf/space
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/skipjack_station/start
 	name = "\improper Skipjack"
@@ -591,6 +458,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Prison Station"
 	icon_state = "brig"
 	ambience = AMBIENCE_HIGHSEC
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/prison/arrival_airlock
 	name = "\improper Prison Station Airlock"
@@ -776,6 +644,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/maintenance/disposal
 	name = "Waste Disposal"
 	icon_state = "disposal"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //If trash items got this far, they can be safely deleted.
 
 /area/maintenance/engineering
 	name = "Engineering Maintenance"
@@ -868,6 +737,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "Substation"
 	icon_state = "substation"
 	sound_env = SMALL_ENCLOSED
+	ambience = AMBIENCE_SUBSTATION
 
 /area/maintenance/substation/engineering // Probably will be connected to engineering SMES room, as wires cannot be crossed properly without them sharing powernets.
 	name = "Engineering Substation"
@@ -951,6 +821,9 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/hallway/secondary/construction
 	name = "\improper Construction Area"
 	icon_state = "construction"
+
+/area/hallway/secondary/entry
+	forbid_events = TRUE
 
 /area/hallway/secondary/entry/fore
 	name = "\improper Shuttle Dock Hallway - Mid"
@@ -1079,17 +952,19 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/captain
-	name = "\improper Command - Colony Director's Office"
+	name = "\improper Command - Site Manager's Office"
 	icon_state = "captain"
 	sound_env = MEDIUM_SOFTFLOOR
 
 /area/crew_quarters/heads/hop
 	name = "\improper Command - HoP's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/heads/hor
 	name = "\improper Research - RD's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/heads/chief
 	name = "\improper Engineering - CE's Office"
@@ -1102,6 +977,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/heads/cmo
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/crew_quarters/courtroom
 	name = "\improper Courtroom"
@@ -1126,6 +1002,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Sleep"
 	flags = RAD_SHIELDED
 	ambience = AMBIENCE_GENERIC
+	forbid_events = TRUE
 
 /area/crew_quarters/toilet
 	name = "\improper Dormitory Toilets"
@@ -1332,6 +1209,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/recreation_area_restroom
 	name = "\improper Recreation Area Restroom"
 	icon_state = "recreation_area_restroom"
+	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/pool
 	name = "\improper Pool"
@@ -1357,6 +1235,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/barrestroom
 	name = "\improper Cafeteria Restroom"
 	icon_state = "bar"
+	sound_env = SMALL_ENCLOSED
 
 /area/crew_quarters/theatre
 	name = "\improper Theatre"
@@ -1425,6 +1304,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Holodeck"
 	dynamic_lighting = 0
 	sound_env = LARGE_ENCLOSED
+	forbid_events = TRUE
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/holodeck/alphadeck
 	name = "\improper Holodeck Alpha"
@@ -1488,6 +1369,10 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	has_gravity = 0
 	sound_env = SPACE
 
+/area/holodeck/source_chess
+	name = "\improper Holodeck - Chessboard"
+
+
 //Engineering
 
 /area/engineering/
@@ -1499,6 +1384,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
  	name = "\improper Atmospherics"
  	icon_state = "atmos"
  	sound_env = LARGE_ENCLOSED
+	 ambience = AMBIENCE_ATMOS
 
 /area/engineering/atmos/monitoring
 	name = "\improper Atmospherics Monitoring Room"
@@ -1524,6 +1410,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Engine Room"
 	icon_state = "engine"
 	sound_env = LARGE_ENCLOSED
+	forbid_events = TRUE
 
 /area/engineering/engine_airlock
 	name = "\improper Engine Room Airlock"
@@ -1720,6 +1607,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/crew_quarters/medical_restroom
 	name = "\improper Medbay Restroom"
 	icon_state = "medbay_restroom"
+	sound_env = SMALL_ENCLOSED
 
 /area/medical/patients_rooms
 	name = "\improper Patient's Rooms"
@@ -1780,10 +1668,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/medical/surgery
 	name = "\improper Operating Theatre 1"
 	icon_state = "surgery"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //This WOULD become a filth pit
 
 /area/medical/surgery2
 	name = "\improper Operating Theatre 2"
 	icon_state = "surgery"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/medical/surgeryobs
 	name = "\improper Operation Observation Room"
@@ -1820,6 +1710,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/medical/sleeper
 	name = "\improper Emergency Treatment Centre"
 	icon_state = "exam_room"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //Trust me.
 
 /area/medical/first_aid_station_starboard
 	name = "\improper Starboard First-Aid Station"
@@ -1848,7 +1739,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/brig/prison_break()
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
 		temp_closet.locked = 0
-		temp_closet.icon_state = temp_closet.icon_closed
+		temp_closet.icon_state = "closed_unlocked"
 	for(var/obj/machinery/door_timer/temp_timer in src)
 		temp_timer.releasetime = 1
 	..()
@@ -1860,7 +1751,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/prison/prison_break()
 	for(var/obj/structure/closet/secure_closet/brig/temp_closet in src)
 		temp_closet.locked = 0
-		temp_closet.icon_state = temp_closet.icon_closed
+		temp_closet.icon_state = "closed_unlocked"
 	for(var/obj/machinery/door_timer/temp_timer in src)
 		temp_timer.releasetime = 1
 	..()
@@ -1910,6 +1801,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/security/security_bathroom
 	name = "\improper Security - Restroom"
 	icon_state = "security_bathroom"
+	sound_env = SMALL_ENCLOSED
 
 /area/security/security_cell_hallway
 	name = "\improper Security - Cell Hallway"
@@ -2034,22 +1926,12 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/quartermaster/delivery
 	name = "\improper Cargo - Delivery Office"
 	icon_state = "quart"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT //So trash doesn't pile up too hard.
 
 /area/quartermaster/miningdock
 	name = "\improper Cargo Mining Dock"
 	icon_state = "mining"
 
-/area/supply/station
-	name = "Supply Shuttle"
-	icon_state = "shuttle3"
-	requires_power = 0
-	base_turf = /turf/space
-
-/area/supply/dock
-	name = "Supply Shuttle"
-	icon_state = "shuttle3"
-	requires_power = 0
-	base_turf = /turf/space
 
 // SCIENCE
 
@@ -2068,6 +1950,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/rnd/research_restroom
 	name = "\improper Research Restroom"
 	icon_state = "research_restroom"
+	sound_env = SMALL_ENCLOSED
 
 /area/rnd/research_storage
 	name = "\improper Research Storage"
@@ -2084,6 +1967,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/rnd/rdoffice
 	name = "\improper Research Director's Office"
 	icon_state = "head_quarters"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/rnd/supermatter
 	name = "\improper Supermatter Lab"
@@ -2206,6 +2090,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Derelict Station"
 	icon_state = "storage"
 	ambience = AMBIENCE_RUINS
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/derelict/hallway/primary
 	name = "\improper Derelict Primary Hallway"
@@ -2306,6 +2191,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/constructionsite
 	name = "\improper Construction Site"
 	icon_state = "storage"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/constructionsite/storage
 	name = "\improper Construction Site Storage Area"
@@ -2491,6 +2377,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 
 /area/wreck
 	ambience = AMBIENCE_RUINS
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/wreck/ai
 	name = "\improper AI Chamber"
@@ -2567,6 +2454,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	name = "\improper Strange Location"
 	icon_state = "away"
 	ambience = AMBIENCE_FOREBODING
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/awaymission/example
 	name = "\improper Strange Station"

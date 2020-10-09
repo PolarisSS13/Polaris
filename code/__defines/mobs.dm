@@ -213,6 +213,13 @@
 #define O_AUG_SPINE "spinal augment"
 #define O_AUG_PELVIC "pelvic augment"
 
+// FBP components.
+
+#define O_PUMP     "hydraulic hub"
+#define O_CYCLER   "reagent cycler"
+#define O_HEATSINK "thermal regulator"
+#define O_DIAGNOSTIC "diagnostic controller"
+
 // Non-Standard organs
 #define O_MOUTH    "mouth"
 #define O_CELL     "cell"
@@ -394,7 +401,13 @@
 #define VIS_OBJS			20
 #define VIS_MOBS			21
 
-#define VIS_COUNT			21 //Must be highest number from above.
+#define VIS_BUILDMODE		22
+
+#define VIS_CLOAKED			23
+
+#define VIS_STATUS			24
+
+#define VIS_COUNT			24 //Must be highest number from above.
 
 //Some mob icon layering defines
 #define BODY_LAYER		-100
@@ -423,3 +436,7 @@
 #define EXAMINE_SKIPHANDS			0x0040
 #define EXAMINE_SKIPLEGS			0x0080
 #define EXAMINE_SKIPFEET			0x0100
+
+#define MAX_NUTRITION	500
+
+#define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.

@@ -4,7 +4,7 @@
 
 	if(status_flags & GODMODE)
 		health = getMaxHealth()
-		stat = CONSCIOUS
+		set_stat(CONSCIOUS)
 		return
 
 	var/total_burn  = 0
@@ -282,6 +282,20 @@
 /mob/living/carbon/human/setOxyLoss(var/amount)
 	if(!should_have_organ(O_LUNGS))
 		oxyloss = 0
+	else
+		..()
+		
+/mob/living/carbon/human/adjustHalLoss(var/amount)
+	if(species.flags & NO_PAIN)
+		halloss = 0
+	else
+		if(amount > 0)	//only multiply it by the mod if it's positive, or else it takes longer to fade too!
+			amount = amount*species.pain_mod
+		..(amount)
+
+/mob/living/carbon/human/setHalLoss(var/amount)
+	if(species.flags & NO_PAIN)
+		halloss = 0
 	else
 		..()
 

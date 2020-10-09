@@ -2,11 +2,11 @@
 	name = "\improper PDA multicaster"
 	desc = "This machine mirrors messages sent to it to specific departments."
 	icon = 'icons/obj/stationobjs.dmi'
-	icon_state = "controller"
+	icon_state = "pdamulti"
 	density = 1
 	anchored = 1
 	circuit = /obj/item/weapon/circuitboard/telecomms/pda_multicaster
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 750
 	var/on = 1		// If we're currently active,
 	var/toggle = 1	// If we /should/ be active or not,
@@ -22,17 +22,9 @@
 		"cargo" = new /obj/item/device/pda/multicaster/cargo(src),
 		"civilian" = new /obj/item/device/pda/multicaster/civilian(src))
 
-/obj/machinery/pda_multicaster/prebuilt/New()
-	..()
-
-	component_parts = list()
-	component_parts += new /obj/item/weapon/circuitboard/telecomms/pda_multicaster(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
+/obj/machinery/pda_multicaster/prebuilt/Initialize()
+	. = ..()
+	default_apply_parts()
 
 /obj/machinery/pda_multicaster/Destroy()
 	for(var/atom/movable/AM in contents)
@@ -43,7 +35,7 @@
 	if(on)
 		icon_state = initial(icon_state)
 	else
-		icon_state = "[initial(icon_state)]-p"
+		icon_state = "[initial(icon_state)]_off"
 
 /obj/machinery/pda_multicaster/attackby(obj/item/I, mob/user)
 	if(I.is_screwdriver())
@@ -77,15 +69,15 @@
 		if(stat & (BROKEN|NOPOWER|EMPED))
 			on = 0
 			update_PDAs(1) // 1 being to turn off.
-			idle_power_usage = 0
+			update_idle_power_usage(0)
 		else
 			on = 1
 			update_PDAs(0)
-			idle_power_usage = 750
+			update_idle_power_usage(750)
 	else
 		on = 0
 		update_PDAs(1)
-		idle_power_usage = 0
+		update_idle_power_usage(0)
 	update_icon()
 
 /obj/machinery/pda_multicaster/process()

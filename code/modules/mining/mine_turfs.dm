@@ -153,6 +153,8 @@ turf/simulated/mineral/floor/light_corner
 	if(random_icon)
 		dir = pick(alldirs)
 		. = INITIALIZE_HINT_LATELOAD
+	var/decl/flooring/F = get_flooring_data(/decl/flooring/sand)
+	footstep_sounds = F?.footstep_sounds
 
 /turf/simulated/mineral/LateInitialize()
 	if(density && mineral)
@@ -211,6 +213,9 @@ turf/simulated/mineral/floor/light_corner
 			for(var/direction in alldirs)
 				if(istype(get_step(src, direction), /turf/simulated/mineral))
 					var/turf/simulated/mineral/M = get_step(src, direction)
+					M.update_icon()
+				if(istype(get_step(src, direction), /turf/simulated/wall/solidrock))
+					var/turf/simulated/wall/solidrock/M = get_step(src, direction)
 					M.update_icon()
 
 /turf/simulated/mineral/ex_act(severity)
@@ -322,7 +327,7 @@ turf/simulated/mineral/floor/light_corner
 				return
 
 			to_chat(user, "<span class='notice'>You start digging.</span>")
-			playsound(user.loc, 'sound/effects/rustle1.ogg', 50, 1)
+			playsound(user, 'sound/effects/rustle1.ogg', 50, 1)
 
 			if(!do_after(user,40)) return
 
@@ -416,7 +421,7 @@ turf/simulated/mineral/floor/light_corner
 				var/datum/find/F = finds[1]
 				if(newDepth > F.excavation_required) // Digging too deep can break the item. At least you won't summon a Balrog (probably)
 					fail_message = ". <b>[pick("There is a crunching noise","[W] collides with some different rock","Part of the rock face crumbles away","Something breaks under [W]")]</b>"
-				wreckfinds(P.destroy_artefacts)
+					wreckfinds(P.destroy_artefacts)
 			to_chat(user, "<span class='notice'>You start [P.drill_verb][fail_message].</span>")
 
 			if(do_after(user,P.digspeed))

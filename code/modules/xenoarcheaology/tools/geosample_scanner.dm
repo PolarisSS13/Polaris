@@ -6,7 +6,7 @@
 	icon = 'icons/obj/virology.dmi'
 	icon_state = "analyser"
 
-	use_power = 1			//1 = idle, 2 = active
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 20
 	active_power_usage = 300
 
@@ -234,17 +234,17 @@
 			//emergency stop if seal integrity reaches 0
 			if(scanner_seal_integrity <= 0 || (scanner_temperature >= 1273 && !rad_shield))
 				stop_scanning()
-				src.visible_message("<font color='blue'>\icon[src] buzzes unhappily. It has failed mid-scan!</font>", 2)
+				src.visible_message("<font color='blue'>[bicon(src)] buzzes unhappily. It has failed mid-scan!</font>", 2)
 
 			if(prob(5))
-				src.visible_message("<font color='blue'>\icon[src] [pick("whirrs","chuffs","clicks")][pick(" excitedly"," energetically"," busily")].</font>", 2)
+				src.visible_message("<font color='blue'>[bicon(src)] [pick("whirrs","chuffs","clicks")][pick(" excitedly"," energetically"," busily")].</font>", 2)
 	else
 		//gradually cool down over time
 		if(scanner_temperature > 0)
 			scanner_temperature = max(scanner_temperature - 5 - 10 * rand(), 0)
 		if(prob(0.75))
-			src.visible_message("<font color='blue'>\icon[src] [pick("plinks","hisses")][pick(" quietly"," softly"," sadly"," plaintively")].</font>", 2)
-			playsound(loc, 'sound/effects/ding.ogg', 25)
+			src.visible_message("<font color='blue'>[bicon(src)] [pick("plinks","hisses")][pick(" quietly"," softly"," sadly"," plaintively")].</font>", 2)
+			playsound(src, 'sound/effects/ding.ogg', 25)
 	last_process_worldtime = world.time
 
 /obj/machinery/radiocarbon_spectrometer/proc/stop_scanning()
@@ -262,7 +262,7 @@
 		used_coolant = 0
 
 /obj/machinery/radiocarbon_spectrometer/proc/complete_scan()
-	src.visible_message("<font color='blue'>\icon[src] makes an insistent chime.</font>", 2)
+	src.visible_message("<font color='blue'>[bicon(src)] makes an insistent chime.</font>", 2)
 
 	if(scanned_item)
 		//create report

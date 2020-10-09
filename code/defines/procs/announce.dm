@@ -30,7 +30,7 @@
 	title = "Security Announcement"
 	announcement_type = "Security Announcement"
 
-/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0)
+/datum/announcement/proc/Announce(var/message as text, var/new_title = "", var/new_sound = null, var/do_newscast = newscast, var/msg_sanitized = 0, var/zlevel)
 	if(!message)
 		return
 	var/message_title = new_title ? new_title : title
@@ -40,31 +40,36 @@
 		message = sanitize(message, extra = 0)
 	message_title = sanitizeSafe(message_title)
 
-	Message(message, message_title)
+	var/list/zlevels
+	if(zlevel)
+		zlevels = using_map.get_map_levels(zlevel, TRUE)
+
+	Message(message, message_title, zlevels)
 	if(do_newscast)
 		NewsCast(message, message_title)
-	Sound(message_sound)
+	Sound(message_sound, zlevels)
 	Log(message, message_title)
 
-datum/announcement/proc/Message(message as text, message_title as text)
+datum/announcement/proc/Message(message as text, message_title as text, var/list/zlevels)
 	for(var/mob/M in player_list)
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			M << "<h2 class='alert'>[title]</h2>"
-			M << "<span class='alert'>[message]</span>"
+			to_chat(M, "<h2 class='alert'>[title]</h2>")
+			to_chat(M, "<span class='alert'>[message]</span>")
 			if (announcer)
-				M << "<span class='alert'> -[html_encode(announcer)]</span>"
+				to_chat(M, "<span class='alert'> -[html_encode(announcer)]</span>")
 
+// You'll need to update these to_world usages if you want to make these z-level specific ~Aro
 datum/announcement/minor/Message(message as text, message_title as text)
-	world << "<b>[message]</b>"
+	to_world("<b>[message]</b>")
 
 datum/announcement/priority/Message(message as text, message_title as text)
-	world << "<h1 class='alert'>[message_title]</h1>"
-	world << "<span class='alert'>[message]</span>"
+	to_world("<h1 class='alert'>[message_title]</h1>")
+	to_world("<span class='alert'>[message]</span>")
 	if(announcer)
-		world << "<span class='alert'> -[html_encode(announcer)]</span>"
-	world << "<br>"
+		to_world("<span class='alert'> -[html_encode(announcer)]</span>")
+	to_world("<br>")
 
-datum/announcement/priority/command/Message(message as text, message_title as text)
+datum/announcement/priority/command/Message(message as text, message_title as text, var/list/zlevels)
 	var/command
 	command += "<h1 class='alert'>[command_name()] Update</h1>"
 	if (message_title)
@@ -73,12 +78,14 @@ datum/announcement/priority/command/Message(message as text, message_title as te
 	command += "<br><span class='alert'>[message]</span><br>"
 	command += "<br>"
 	for(var/mob/M in player_list)
+		if(zlevels && !(get_z(M) in zlevels))
+			continue
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
-			M << command
+			to_chat(M, command)
 
 datum/announcement/priority/security/Message(message as text, message_title as text)
-	world << "<font size=4 color='red'>[message_title]</font>"
-	world << "<font color='red'>[message]</font>"
+	to_world("<font size=4 color='red'>[message_title]</font>")
+	to_world("<font color='red'>[message]</font>")
 
 datum/announcement/proc/NewsCast(message as text, message_title as text)
 	if(!newscast)
@@ -92,15 +99,18 @@ datum/announcement/proc/NewsCast(message as text, message_title as text)
 	news.can_be_redacted = 0
 	announce_newscaster_news(news)
 
-datum/announcement/proc/PlaySound(var/message_sound)
+datum/announcement/proc/PlaySound(var/message_sound, var/list/zlevels)
 	if(!message_sound)
 		return
+
 	for(var/mob/M in player_list)
+		if(zlevels && !(M.z in zlevels))
+			continue
 		if(!istype(M,/mob/new_player) && !isdeaf(M))
 			M << message_sound
 
-datum/announcement/proc/Sound(var/message_sound)
-	PlaySound(message_sound)
+datum/announcement/proc/Sound(var/message_sound, var/list/zlevels)
+	PlaySound(message_sound, zlevels)
 
 datum/announcement/priority/Sound(var/message_sound)
 	if(message_sound)
@@ -124,11 +134,12 @@ datum/announcement/proc/Log(message as text, message_title as text)
 /proc/ion_storm_announcement()
 	command_announcement.Announce("It has come to our attention that \the [station_name()] passed through an ion storm.  Please monitor all electronic equipment for malfunctions.", "Anomaly Alert")
 
-/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message)
+/proc/AnnounceArrival(var/mob/living/carbon/human/character, var/rank, var/join_message, var/channel = "Common", var/zlevel)
 	if (ticker.current_state == GAME_STATE_PLAYING)
+		var/list/zlevels = zlevel ? using_map.get_map_levels(zlevel, TRUE, om_range = DEFAULT_OVERMAP_RANGE) : null
 		if(character.mind.role_alt_title)
 			rank = character.mind.role_alt_title
-		AnnounceArrivalSimple(character.real_name, rank, join_message)
+		AnnounceArrivalSimple(character.real_name, rank, join_message, channel, zlevels)
 
-/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "will arrive to the station shortly by shuttle")
-	global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer")
+/proc/AnnounceArrivalSimple(var/name, var/rank = "visitor", var/join_message = "will arrive at the station shortly", var/channel = "Common", var/list/zlevels)
+	global_announcer.autosay("[name], [rank], [join_message].", "Arrivals Announcement Computer", channel, zlevels)

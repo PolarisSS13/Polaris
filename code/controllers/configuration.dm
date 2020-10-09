@@ -6,82 +6,87 @@ var/list/gamemode_cache = list()
 
 	var/nudge_script_path = "nudge.py"  // where the nudge.py script is located
 
-	var/log_ooc = 0						// log OOC channel
-	var/log_access = 0					// log login/logout
-	var/log_say = 0						// log client say
-	var/log_admin = 0					// log admin actions
-	var/log_debug = 1					// log debug output
-	var/log_game = 0					// log game events
-	var/log_vote = 0					// log voting
-	var/log_whisper = 0					// log client whisper
-	var/log_emote = 0					// log emotes
-	var/log_attack = 0					// log attack messages
-	var/log_adminchat = 0				// log admin chat messages
-	var/log_adminwarn = 0				// log warnings admins get about bomb construction and such
-	var/log_pda = 0						// log pda messages
-	var/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
-	var/log_runtime = 0					// logs world.log to a file
-	var/log_world_output = 0			// log to_world_log(messages)
-	var/log_graffiti = 0					// logs graffiti
-	var/sql_enabled = 0					// for sql switching
-	var/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
-	var/allow_vote_restart = 0 			// allow votes to restart
-	var/ert_admin_call_only = 0
-	var/allow_vote_mode = 0				// allow votes to change mode
-	var/allow_admin_jump = 1			// allows admin jumping
-	var/allow_admin_spawning = 1		// allows admin item spawning
-	var/allow_admin_rev = 1				// allows admin revives
-	var/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
-	var/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
-	var/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
-	var/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
-	var/vote_autogamemode_timeleft = 100 //Length of time before round start when autogamemode vote is called (in seconds, default 100).
-	var/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
-	var/vote_no_dead = 0				// dead people can't vote (tbi)
-//	var/enable_authentication = 0		// goon authentication
-	var/del_new_on_log = 1				// del's new players if they log before they spawn in
-	var/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
-	var/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
-	var/objectives_disabled = 0 			//if objectives are disabled or not
-	var/protect_roles_from_antagonist = 0// If security and such can be traitor/cult/other
-	var/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
-	var/allow_Metadata = 0				// Metadata is supported.
-	var/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
-	var/fps = 20
-	var/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
-	var/Tickcomp = 0
-	var/socket_talk	= 0					// use socket_talk to communicate with other processes
-	var/list/resource_urls = null
-	var/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
-	var/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
-	var/list/mode_names = list()
-	var/list/modes = list()				// allowed modes
-	var/list/votable_modes = list()		// votable modes
-	var/list/probabilities = list()		// relative probability of each mode
-	var/list/player_requirements = list() // Overrides for how many players readied up a gamemode needs to start.
-	var/list/player_requirements_secret = list() // Same as above, but for the secret gamemode.
-	var/humans_need_surnames = 0
-	var/allow_random_events = 0			// enables random events mid-round when set to 1
-	var/enable_game_master = 0			// enables the 'smart' event system.
-	var/allow_ai = 1					// allow ai job
-	var/allow_ai_shells = FALSE			// allow AIs to enter and leave special borg shells at will, and for those shells to be buildable.
-	var/give_free_ai_shell = FALSE		// allows a specific spawner object to instantiate a premade AI Shell
-	var/hostedby = null
-	var/respawn = 1
-	var/guest_jobban = 1
-	var/usewhitelist = 0
-	var/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
-	var/show_mods = 0
-	var/show_devs = 0
-	var/show_event_managers = 0
-	var/mods_can_tempban = 0
-	var/mods_can_job_tempban = 0
-	var/mod_tempban_max = 1440
-	var/mod_job_tempban_max = 1440
-	var/load_jobs_from_txt = 0
-	var/ToRban = 0
-	var/automute_on = 0					//enables automuting/spam prevention
-	var/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
+	var/static/log_ooc = 0						// log OOC channel
+	var/static/log_access = 0					// log login/logout
+	var/static/log_say = 0						// log client say
+	var/static/log_admin = 0					// log admin actions
+	var/static/log_debug = 1					// log debug output
+	var/static/log_game = 0					// log game events
+	var/static/log_vote = 0					// log voting
+	var/static/log_whisper = 0					// log client whisper
+	var/static/log_emote = 0					// log emotes
+	var/static/log_attack = 0					// log attack messages
+	var/static/log_adminchat = 0				// log admin chat messages
+	var/static/log_adminwarn = 0				// log warnings admins get about bomb construction and such
+	var/static/log_pda = 0						// log pda messages
+	var/static/log_hrefs = 0					// logs all links clicked in-game. Could be used for debugging and tracking down exploits
+	var/static/log_runtime = 0					// logs world.log to a file
+	var/static/log_world_output = 0			// log to_world_log(messages)
+	var/static/log_graffiti = 0					// logs graffiti
+	var/static/sql_enabled = 0					// for sql switching
+	var/static/allow_admin_ooccolor = 0		// Allows admins with relevant permissions to have their own ooc colour
+	var/static/allow_vote_restart = 0 			// allow votes to restart
+	var/static/ert_admin_call_only = 0
+	var/static/allow_vote_mode = 0				// allow votes to change mode
+	var/static/allow_admin_jump = 1			// allows admin jumping
+	var/static/allow_admin_spawning = 1		// allows admin item spawning
+	var/static/allow_admin_rev = 1				// allows admin revives
+	var/static/pregame_time = 180				// pregame time in seconds
+	var/static/vote_delay = 6000				// minimum time between voting sessions (deciseconds, 10 minute default)
+	var/static/vote_period = 600				// length of voting period (deciseconds, default 1 minute)
+	var/static/vote_autotransfer_initial = 108000 // Length of time before the first autotransfer vote is called
+	var/static/vote_autotransfer_interval = 36000 // length of time before next sequential autotransfer vote
+	var/static/vote_autogamemode_timeleft = 100 //Length of time before round start when autogamemode vote is called (in seconds, default 100).
+	var/static/vote_no_default = 0				// vote does not default to nochange/norestart (tbi)
+	var/static/vote_no_dead = 0				// dead people can't vote (tbi)
+//	var/static/enable_authentication = 0		// goon authentication
+	var/static/del_new_on_log = 1				// del's new players if they log before they spawn in
+	var/static/feature_object_spell_system = 0 //spawns a spellbook which gives object-type spells instead of verb-type spells for the wizard
+	var/static/traitor_scaling = 0 			//if amount of traitors scales based on amount of players
+	var/static/objectives_disabled = 0 			//if objectives are disabled or not
+	var/static/protect_roles_from_antagonist = 0// If security and such can be traitor/cult/other
+	var/static/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
+	var/static/allow_Metadata = 0				// Metadata is supported.
+	var/static/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
+	var/static/fps = 20
+	var/static/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
+	var/static/Tickcomp = 0
+	var/static/socket_talk	= 0					// use socket_talk to communicate with other processes
+	var/static/list/resource_urls = null
+	var/static/antag_hud_allowed = 0			// Ghosts can turn on Antagovision to see a HUD of who is the bad guys this round.
+	var/static/antag_hud_restricted = 0                    // Ghosts that turn on Antagovision cannot rejoin the round.
+	var/static/list/mode_names = list()
+	var/static/list/modes = list()				// allowed modes
+	var/static/list/votable_modes = list()		// votable modes
+	var/static/list/probabilities = list()		// relative probability of each mode
+	var/static/list/player_requirements = list() // Overrides for how many players readied up a gamemode needs to start.
+	var/static/list/player_requirements_secret = list() // Same as above, but for the secret gamemode.
+	var/static/humans_need_surnames = 0
+	var/static/allow_random_events = 0			// enables random events mid-round when set to 1
+	var/static/enable_game_master = 0			// enables the 'smart' event system.
+	var/static/allow_ai = 1					// allow ai job
+	var/static/allow_ai_shells = FALSE			// allow AIs to enter and leave special borg shells at will, and for those shells to be buildable.
+	var/static/give_free_ai_shell = FALSE		// allows a specific spawner object to instantiate a premade AI Shell
+	var/static/hostedby = null
+
+	var/static/respawn = 1
+	var/static/respawn_time = 3000			// time before a dead player is allowed to respawn (in ds, though the config file asks for minutes, and it's converted below)
+	var/static/respawn_message = "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
+
+	var/static/guest_jobban = 1
+	var/static/usewhitelist = 0
+	var/static/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
+	var/static/show_mods = 0
+	var/static/show_devs = 0
+	var/static/show_event_managers = 0
+	var/static/mods_can_tempban = 0
+	var/static/mods_can_job_tempban = 0
+	var/static/mod_tempban_max = 1440
+	var/static/mod_job_tempban_max = 1440
+	var/static/load_jobs_from_txt = 0
+	var/static/ToRban = 0
+	var/static/automute_on = 0					//enables automuting/spam prevention
+	var/static/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
@@ -211,6 +216,8 @@ var/list/gamemode_cache = list()
 	var/use_lib_nudge = 0 //Use the C library nudge instead of the python nudge.
 	var/use_overmap = 0
 
+	var/static/list/engine_map = list("Supermatter Engine", "Edison's Bane")	// Comma separated list of engines to choose from.  Blank means fully random.
+
 	// Event settings
 	var/expected_round_length = 3 * 60 * 60 * 10 // 3 hours
 	// If the first delay has a custom start time
@@ -230,6 +237,13 @@ var/list/gamemode_cache = list()
 	var/looc_allowed = 1
 	var/dooc_allowed = 1
 	var/dsay_allowed = 1
+
+	var/persistence_disabled = FALSE
+	var/persistence_ignore_mapload = FALSE
+
+	var/allow_byond_links = 0
+	var/allow_discord_links = 0
+	var/allow_url_links = 0					// honestly if I were you i'd leave this one off, only use in dire situations
 
 	var/starlight = 0	// Whether space turfs have ambient light or not
 
@@ -251,6 +265,26 @@ var/list/gamemode_cache = list()
 
 	var/random_submap_orientation = FALSE // If true, submaps loaded automatically can be rotated.
 	var/autostart_solars = FALSE // If true, specifically mapped in solar control computers will set themselves up when the round starts.
+
+	// New shiny SQLite stuff.
+	// The basics.
+	var/sqlite_enabled = FALSE // If it should even be active. SQLite can be ran alongside other databases but you should not have them do the same functions.
+
+	// In-Game Feedback.
+	var/sqlite_feedback = FALSE // Feedback cannot be submitted if this is false.
+	var/list/sqlite_feedback_topics = list("General") // A list of 'topics' that feedback can be catagorized under by the submitter.
+	var/sqlite_feedback_privacy = FALSE // If true, feedback submitted can have its author name be obfuscated. This is not 100% foolproof (it's md5 ffs) but can stop casual snooping.
+	var/sqlite_feedback_cooldown = 0 // How long one must wait, in days, to submit another feedback form. Used to help prevent spam, especially with privacy active. 0 = No limit.
+	var/sqlite_feedback_min_age = 0 // Used to block new people from giving feedback. This metric is very bad but it can help slow down spammers.
+
+	var/defib_timer = 10 // How long until someone can't be defibbed anymore, in minutes.
+	var/defib_braindamage_timer = 2 // How long until someone will get brain damage when defibbed, in minutes. The closer to the end of the above timer, the more brain damage they get.
+
+	// disables the annoying "You have already logged in this round, disconnect or be banned" popup for multikeying, because it annoys the shit out of me when testing.
+	var/disable_cid_warn_popup = FALSE
+
+	// whether or not to use the nightshift subsystem to perform lighting changes
+	var/static/enable_night_shifts = FALSE
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -403,11 +437,23 @@ var/list/gamemode_cache = list()
 				if ("allow_admin_spawning")
 					config.allow_admin_spawning = 1
 
+				if ("allow_byond_links")
+					allow_byond_links = 1
+
+				if ("allow_discord_links")
+					allow_discord_links = 1
+
+				if ("allow_url_links")
+					allow_url_links = 1
+
 				if ("no_dead_vote")
 					config.vote_no_dead = 1
 
 				if ("default_no_vote")
 					config.vote_no_default = 1
+
+				if ("pregame_time")
+					config.pregame_time = text2num(value)
 
 				if ("vote_delay")
 					config.vote_delay = text2num(value)
@@ -441,6 +487,13 @@ var/list/gamemode_cache = list()
 
 				if ("norespawn")
 					config.respawn = 0
+
+				if ("respawn_time")
+					var/raw_minutes = text2num(value)
+					config.respawn_time = raw_minutes MINUTES
+
+				if ("respawn_message")
+					config.respawn_message = value
 
 				if ("servername")
 					config.server_name = value
@@ -525,6 +578,12 @@ var/list/gamemode_cache = list()
 
 				if("protect_roles_from_antagonist")
 					config.protect_roles_from_antagonist = 1
+
+				if("persistence_disabled")
+					config.persistence_disabled = TRUE // Previously this forcibly set persistence enabled in the saves.
+
+				if("persistence_ignore_mapload")
+					config.persistence_ignore_mapload = TRUE
 
 				if ("probability")
 					var/prob_pos = findtext(value, " ")
@@ -727,6 +786,9 @@ var/list/gamemode_cache = list()
 
 				if("use_overmap")
 					config.use_overmap = 1
+
+				if("engine_map")
+					config.engine_map = splittext(value, ",")
 /*
 				if("station_levels")
 					using_map.station_levels = text2numlist(value, ";")
@@ -841,7 +903,34 @@ var/list/gamemode_cache = list()
 				if("autostart_solars")
 					config.autostart_solars = TRUE
 
+				if("sqlite_enabled")
+					config.sqlite_enabled = TRUE
 
+				if("sqlite_feedback")
+					config.sqlite_feedback = TRUE
+
+				if("sqlite_feedback_topics")
+					config.sqlite_feedback_topics = splittext(value, ";")
+					if(!config.sqlite_feedback_topics.len)
+						config.sqlite_feedback_topics += "General"
+
+				if("sqlite_feedback_privacy")
+					config.sqlite_feedback_privacy = TRUE
+
+				if("sqlite_feedback_cooldown")
+					config.sqlite_feedback_cooldown = text2num(value)
+
+				if("defib_timer")
+					config.defib_timer = text2num(value)
+
+				if("defib_braindamage_timer")
+					config.defib_braindamage_timer = text2num(value)
+
+				if("disable_cid_warn_popup")
+					config.disable_cid_warn_popup = TRUE
+
+				if("enable_night_shifts")
+					config.enable_night_shifts = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

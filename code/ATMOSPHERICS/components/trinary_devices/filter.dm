@@ -9,7 +9,7 @@
 	name = "Gas filter"
 	desc = "Filters one type of gas from an input, and pushes it out the side."
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
 	power_rating = 7500	//This also doubles as a measure of how powerful the filter is, in Watts. 7500 W ~ 10 HP
 
@@ -24,7 +24,7 @@
 	 1: Oxygen: Oxygen ONLY
 	 2: Nitrogen: Nitrogen ONLY
 	 3: Carbon Dioxide: Carbon Dioxide ONLY
-	 4: Sleeping Agent (N2O)
+	 4: Nitrous Oxide (Formerly called Sleeping Agent) (N2O)
 	*/
 	var/filter_type = -1
 	var/list/filtered_out = list()
@@ -51,7 +51,7 @@
 		if(3) //removing CO2
 			filtered_out = list("carbon_dioxide")
 		if(4)//removing N2O
-			filtered_out = list("sleeping_agent")
+			filtered_out = list("nitrous_oxide")
 
 	air1.volume = ATMOS_DEFAULT_VOLUME_FILTER
 	air2.volume = ATMOS_DEFAULT_VOLUME_FILTER
@@ -73,7 +73,7 @@
 		icon_state += use_power ? "on" : "off"
 	else
 		icon_state += "off"
-		use_power = 0
+		update_use_power(USE_POWER_OFF)
 
 /obj/machinery/atmospherics/trinary/atmos_filter/process()
 	..()
@@ -177,7 +177,7 @@
 			if(3) //removing CO2
 				filtered_out += "carbon_dioxide"
 			if(4)//removing N2O
-				filtered_out += "sleeping_agent"
+				filtered_out += "nitrous_oxide"
 
 	if (href_list["temp"])
 		src.temp = null
@@ -185,7 +185,7 @@
 		var/new_flow_rate = input(usr,"Enter new flow rate (0-[air1.volume]L/s)","Flow Rate Control",src.set_flow_rate) as num
 		src.set_flow_rate = max(0, min(air1.volume, new_flow_rate))
 	if(href_list["power"])
-		use_power=!use_power
+		update_use_power(!use_power)
 	src.update_icon()
 	src.updateUsrDialog()
 /*

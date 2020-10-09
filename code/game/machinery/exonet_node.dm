@@ -21,21 +21,9 @@
 // Proc: New()
 // Parameters: None
 // Description: Adds components to the machine for deconstruction.
-/obj/machinery/exonet_node/map/New()
-	..()
-
-	component_parts = list()
-	component_parts += new /obj/item/weapon/stock_parts/subspace/ansible(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/sub_filter(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/manipulator(src)
-	component_parts += new /obj/item/weapon/stock_parts/micro_laser(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/crystal(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
-	component_parts += new /obj/item/weapon/stock_parts/subspace/treatment(src)
-	component_parts += new /obj/item/stack/cable_coil(src, 2)
-	RefreshParts()
-
+/obj/machinery/exonet_node/map/Initialize()
+	. = ..()
+	default_apply_parts()
 	desc = "This machine is one of many, many nodes inside [using_map.starsys_name]'s section of the Exonet, connecting the [using_map.station_short] to the rest of the system, at least \
 	electronically."
 
@@ -58,13 +46,13 @@
 	if(toggle)
 		if(stat & (BROKEN|NOPOWER|EMPED))
 			on = 0
-			idle_power_usage = 0
+			update_idle_power_usage(0)
 		else
 			on = 1
-			idle_power_usage = 2500
+			update_idle_power_usage(2500)
 	else
 		on = 0
-		idle_power_usage = 0
+		update_idle_power_usage(0)
 	update_icon()
 
 // Proc: emp_act()
@@ -185,7 +173,7 @@
 // Description: This writes to the logs list, so that people can see what people are doing on the Exonet ingame.  Note that this is not an admin logging function.
 // 		Communicators are already logged seperately.
 /obj/machinery/exonet_node/proc/write_log(var/origin_address, var/target_address, var/data_type, var/content)
-	//var/timestamp = time2text(station_time_in_ticks, "hh:mm:ss")
+	//var/timestamp = time2text(station_time_in_ds, "hh:mm:ss")
 	var/timestamp = "[stationdate2text()] [stationtime2text()]"
 	var/msg = "[timestamp] | FROM [origin_address] TO [target_address] | TYPE: [data_type] | CONTENT: [content]"
 	logs.Add(msg)

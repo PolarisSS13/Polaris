@@ -13,6 +13,8 @@
 	gender = PLURAL
 	origin_tech = list(TECH_MATERIAL = 1)
 	icon = 'icons/obj/stacks.dmi'
+	randpixel = 7
+	center_of_mass = null
 	var/list/datum/stack_recipe/recipes
 	var/singular_name
 	var/amount = 1
@@ -56,11 +58,13 @@
 		item_state = initial(icon_state)
 
 /obj/item/stack/examine(mob/user)
-	if(..(user, 1))
+	. = ..()
+	
+	if(Adjacent(user))
 		if(!uses_charge)
-			to_chat(user, "There are [src.amount] [src.singular_name]\s in the stack.")
+			. += "There are [src.amount] [src.singular_name]\s in the stack."
 		else
-			to_chat(user, "There is enough charge for [get_amount()].")
+			. += "There is enough charge for [get_amount()]."
 
 /obj/item/stack/attack_self(mob/user as mob)
 	list_recipes(user)
@@ -165,7 +169,7 @@
 		if ((pass_color || recipe.pass_color))
 			if(!color)
 				if(recipe.use_material)
-					var/material/MAT = get_material_by_name(recipe.use_material)
+					var/datum/material/MAT = get_material_by_name(recipe.use_material)
 					if(MAT.icon_colour)
 						O.color = MAT.icon_colour
 				else

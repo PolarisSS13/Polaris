@@ -4,7 +4,7 @@
 	icon_keyboard = "tech_key"
 	icon_screen = "holocontrol"
 
-	use_power = 1
+	use_power = USE_POWER_IDLE
 	active_power_usage = 8000 //8kW for the scenery + 500W per holoitem
 	var/item_power_usage = 500
 
@@ -62,6 +62,7 @@
 	"Theatre" 			= new/datum/holodeck_program(/area/holodeck/source_theatre),
 	"Meetinghall" 		= new/datum/holodeck_program(/area/holodeck/source_meetinghall),
 	"Courtroom" 		= new/datum/holodeck_program(/area/holodeck/source_courtroom, list('sound/music/traitor.ogg')),
+	"Chessboard"		= new/datum/holodeck_program(/area/holodeck/source_chess),
 	"Turn Off" 			= new/datum/holodeck_program(/area/holodeck/source_plating, list())
 	)
 
@@ -155,7 +156,7 @@
 	SSnanoui.update_uis(src)
 
 /obj/machinery/computer/HolodeckControl/emag_act(var/remaining_charges, var/mob/user as mob)
-	playsound(src.loc, 'sound/effects/sparks4.ogg', 75, 1)
+	playsound(src, 'sound/effects/sparks4.ogg', 75, 1)
 	last_to_emag = user //emag again to change the owner
 	if (!emagged)
 		emagged = 1
@@ -224,7 +225,7 @@
 			damaged = 1
 			loadProgram(powerdown_program, 0)
 			active = 0
-			use_power = 1
+			update_use_power(USE_POWER_IDLE)
 			for(var/mob/M in range(10,src))
 				M.show_message("The holodeck overloads!")
 
@@ -268,10 +269,10 @@
 		loadProgram(powerdown_program, 0)
 
 		if(!linkedholodeck.has_gravity)
-			linkedholodeck.gravitychange(1,linkedholodeck)
+			linkedholodeck.gravitychange(1)
 
 		active = 0
-		use_power = 1
+		update_use_power(USE_POWER_IDLE)
 
 
 /obj/machinery/computer/HolodeckControl/proc/loadProgram(var/prog, var/check_delay = 1)
@@ -301,7 +302,7 @@
 
 	last_change = world.time
 	active = 1
-	use_power = 2
+	update_use_power(USE_POWER_ACTIVE)
 
 	for(var/item in holographic_objs)
 		derez(item)
@@ -324,7 +325,7 @@
 
 	for(var/mob/living/M in mobs_in_area(linkedholodeck))
 		if(M.mind)
-			linkedholodeck.play_ambience(M)
+			linkedholodeck.play_ambience(M, initial = TRUE)
 
 	linkedholodeck.sound_env = A.sound_env
 
@@ -362,19 +363,19 @@
 
 	last_gravity_change = world.time
 	active = 1
-	use_power = 1
+	update_use_power(USE_POWER_IDLE)
 
 	if(A.has_gravity)
-		A.gravitychange(0,A)
+		A.gravitychange(0)
 	else
-		A.gravitychange(1,A)
+		A.gravitychange(1)
 
 /obj/machinery/computer/HolodeckControl/proc/emergencyShutdown()
 	//Turn it back to the regular non-holographic room
 	loadProgram(powerdown_program, 0)
 
 	if(!linkedholodeck.has_gravity)
-		linkedholodeck.gravitychange(1,linkedholodeck)
+		linkedholodeck.gravitychange(1)
 
 	active = 0
-	use_power = 1
+	update_use_power(USE_POWER_IDLE)

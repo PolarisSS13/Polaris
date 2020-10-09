@@ -7,6 +7,11 @@
 	id_pda_assignment = "Visitor"
 	uniform = /obj/item/clothing/under/assistantformal
 
+/decl/hierarchy/outfit/job/assistant/resident
+	name = OUTFIT_JOB_NAME("Resident")
+	id_pda_assignment = "Resident"
+	uniform = /obj/item/clothing/under/color/white
+
 /decl/hierarchy/outfit/job/service
 	l_ear = /obj/item/device/radio/headset/headset_service
 	hierarchy_type = /decl/hierarchy/outfit/job/service

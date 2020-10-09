@@ -82,6 +82,7 @@
 #define LIGHT_COLOR_INCANDESCENT_TUBE "#FFFEB8"
 #define LIGHT_COLOR_INCANDESCENT_BULB "#FFDDBB"
 #define LIGHT_COLOR_INCANDESCENT_FLASHLIGHT "#FFCC66"
+#define LIGHT_COLOR_NIGHTSHIFT "#EFCC86"
 
 //Fake ambient occlusion filter
 #define AMBIENT_OCCLUSION filter(type="drop_shadow", x=0, y=-2, size=4, offset=3, color="#04080F80")

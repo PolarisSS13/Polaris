@@ -2,11 +2,18 @@
 	name = "bible"
 	desc = "Apply to head repeatedly."
 	icon_state ="bible"
+	item_state = "bible"
+	item_icons = list(
+		slot_l_hand_str = 'icons/mob/items/lefthand_books.dmi',
+		slot_r_hand_str = 'icons/mob/items/righthand_books.dmi'
+		)
 	throw_speed = 1
 	throw_range = 5
 	w_class = ITEMSIZE_NORMAL
 	var/mob/affecting = null
 	var/deity_name = "Christ"
+	use_sound = 'sound/bureaucracy/bookopen.ogg'
+	drop_sound = 'sound/bureaucracy/bookclose.ogg'
 
 /obj/item/weapon/storage/bible/booze
 	name = "bible"
@@ -33,5 +40,5 @@
 
 /obj/item/weapon/storage/bible/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (src.use_sound)
-		playsound(src.loc, src.use_sound, 50, 1, -5)
+		playsound(src, src.use_sound, 50, 1, -5)
 	..()

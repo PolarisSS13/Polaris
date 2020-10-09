@@ -1,11 +1,15 @@
 #ignore misc BYOND files
 Thumbs.db
+vchat.db
+vchat.db*
 *.log
 *.int
 *.rsc
 *.dmb
 *.lk
 *.backup
+*.before
+*.pyc
 data/
 cfg/
 

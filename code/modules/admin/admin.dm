@@ -5,7 +5,7 @@ var/global/floorIsLava = 0
 
 ////////////////////////////////
 /proc/message_admins(var/msg)
-	msg = "<span class=\"log_message\"><span class=\"prefix\">ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
+	msg = "<span class='filter_adminlog log_message'><span class='prefix'>ADMIN LOG:</span> <span class=\"message\">[msg]</span></span>"
 	//log_adminwarn(msg) //log_and_message_admins is for this
 
 	for(var/client/C in admins)
@@ -13,7 +13,7 @@ var/global/floorIsLava = 0
 			to_chat(C,msg)
 
 /proc/msg_admin_attack(var/text) //Toggleable Attack Messages
-	var/rendered = "<span class=\"log_message\"><span class=\"prefix\">ATTACK:</span> <span class=\"message\">[text]</span></span>"
+	var/rendered = "<span class='filter_attacklog log_message'><span class='prefix'>ATTACK:</span> <span class=\"message\">[text]</span></span>"
 	for(var/client/C in admins)
 		if((R_ADMIN|R_MOD) & C.holder.rights)
 			if(C.is_preference_enabled(/datum/client_preference/mod/show_attack_logs))
@@ -75,6 +75,7 @@ proc/admin_notice(var/message, var/rights)
 
 	if(M.client)
 		body += "| <A HREF='?src=\ref[src];sendtoprison=\ref[M]'>Prison</A> | "
+		body += "\ <A HREF='?src=\ref[src];sendbacktolobby=\ref[M]'>Send back to Lobby</A> | "
 		var/muted = M.client.prefs.muted
 		body += {"<br><b>Mute: </b>
 			\[<A href='?src=\ref[src];mute=\ref[M];mute_type=[MUTE_IC]'><font color='[(muted & MUTE_IC)?"red":"blue"]'>IC</font></a> |
@@ -90,7 +91,7 @@ proc/admin_notice(var/message, var/rights)
 		<A href='?src=\ref[src];getmob=\ref[M]'>Get</A> |
 		<A href='?src=\ref[src];sendmob=\ref[M]'>Send To</A>
 		<br><br>
-		[check_rights(R_ADMIN|R_MOD,0) ? "<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> | " : "" ]
+		[check_rights(R_ADMIN|R_MOD|R_EVENT,0) ? "<A href='?src=\ref[src];traitor=\ref[M]'>Traitor panel</A> | " : "" ]
 		<A href='?src=\ref[src];narrateto=\ref[M]'>Narrate to</A> |
 		<A href='?src=\ref[src];subtlemessage=\ref[M]'>Subtle message</A>
 	"}
@@ -127,6 +128,8 @@ proc/admin_notice(var/message, var/rights)
 				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Re-Animalize</A> | "
 			else
 				body += "<A href='?src=\ref[src];makeanimal=\ref[M]'>Animalize</A> | "
+
+			body += "<A href='?src=\ref[src];respawn=\ref[M.client]'>Respawn</A> | "
 
 			// DNA2 - Admin Hax
 			if(M.dna && iscarbon(M))
@@ -865,21 +868,26 @@ proc/admin_notice(var/message, var/rights)
 
 /datum/admins/proc/startnow()
 	set category = "Server"
-	set desc="Start the round RIGHT NOW"
+	set desc="Start the round ASAP"
 	set name="Start Now"
-	if(!ticker)
-		alert("Unable to start the game as it is not set up.")
+
+	if(!check_rights(R_SERVER|R_EVENT))
 		return
-	if(ticker.current_state == GAME_STATE_PREGAME)
-		ticker.current_state = GAME_STATE_SETTING_UP
-		Master.SetRunLevel(RUNLEVEL_SETUP)
-		log_admin("[usr.key] has started the game.")
-		message_admins("<font color='blue'>[usr.key] has started the game.</font>")
+	if(SSticker.current_state > GAME_STATE_PREGAME)
+		to_chat(usr, "<span class='warning'>Error: Start Now: Game has already started.</span>")
+		return
+	if(!SSticker.start_immediately)
+		SSticker.start_immediately = TRUE
+		var/msg = ""
+		if(SSticker.current_state == GAME_STATE_INIT)
+			msg = " (The server is still setting up, but the round will be started as soon as possible.)"
+		log_admin("[key_name(usr)] has started the game.[msg]")
+		message_admins("<span class='notice'>[key_name_admin(usr)] has started the game.[msg]</span>")
 		feedback_add_details("admin_verb","SN") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		return 1
 	else
-		to_chat(usr, "<font color='red'>Error: Start Now: Game has already started.</font>")
-		return 0
+		SSticker.start_immediately = FALSE
+		to_world("<span class='notice'>Immediate game start canceled.  Normal startup resumed.</span>")
+		log_and_message_admins("cancelled immediate game start.")
 
 /datum/admins/proc/toggleenter()
 	set category = "Server"
@@ -922,6 +930,34 @@ proc/admin_notice(var/message, var/rights)
 	world.update_status()
 	feedback_add_details("admin_verb","TR") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
+/datum/admins/proc/togglepersistence()
+	set category = "Server"
+	set desc="Whether persistent data will be saved from now on."
+	set name="Toggle Persistent Data"
+	config.persistence_disabled = !(config.persistence_disabled)
+	if(!config.persistence_disabled)
+		to_world("<B>Persistence is now enabled..</B>")
+	else
+		to_world("<B>Persistence is no longer enabled.</B>")
+	message_admins("<font color='blue'>[key_name_admin(usr)] toggled persistence to [config.persistence_disabled ? "Off" : "On"].</font>", 1)
+	log_admin("[key_name(usr)] toggled persistence to [config.persistence_disabled ? "Off" : "On"].")
+	world.update_status()
+	feedback_add_details("admin_verb","TPD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+	
+/datum/admins/proc/togglemaploadpersistence()
+	set category = "Server"
+	set desc="Whether mapload persistent data will be saved from now on."
+	set name="Toggle Mapload Persistent Data"
+	config.persistence_ignore_mapload = !(config.persistence_ignore_mapload)
+	if(!config.persistence_ignore_mapload)
+		to_world("<B>Persistence is now enabled..</B>")
+	else
+		to_world("<B>Persistence is no longer enabled.</B>")
+	message_admins("<font color='blue'>[key_name_admin(usr)] toggled persistence to [config.persistence_ignore_mapload ? "Off" : "On"].</font>", 1)
+	log_admin("[key_name(usr)] toggled persistence to [config.persistence_ignore_mapload ? "Off" : "On"].")
+	world.update_status()
+	feedback_add_details("admin_verb","TMPD") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
+
 /datum/admins/proc/toggle_aliens()
 	set category = "Server"
 	set desc="Toggle alien mobs"
@@ -946,10 +982,10 @@ proc/admin_notice(var/message, var/rights)
 	set name="Delay"
 
 	if(!check_rights(R_SERVER|R_EVENT))	return
-	if (!ticker || ticker.current_state != GAME_STATE_PREGAME)
-		ticker.delay_end = !ticker.delay_end
-		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
-		message_admins("<font color='blue'>[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].</font>", 1)
+	if (SSticker.current_state >= GAME_STATE_PLAYING)
+		SSticker.delay_end = !SSticker.delay_end
+		log_admin("[key_name(usr)] [SSticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
+		message_admins("<font color='blue'>[key_name(usr)] [SSticker.delay_end ? "delayed the round end" : "has made the round end normally"].</font>", 1)
 		return //alert("Round end delayed", null, null, null, null, null)
 	round_progressing = !round_progressing
 	if (!round_progressing)
@@ -1370,7 +1406,7 @@ proc/admin_notice(var/message, var/rights)
 		return //Extra sanity check to make sure only observers are shoved into things
 
 	//Same as assume-direct-control perm requirements.
-	if (!check_rights(R_VAREDIT,0) || !check_rights(R_ADMIN|R_DEBUG,0))
+	if (!check_rights(R_VAREDIT,0) || !check_rights(R_ADMIN|R_DEBUG|R_EVENT,0))
 		return 0
 	if (!frommob.ckey)
 		return 0
@@ -1423,7 +1459,7 @@ proc/admin_notice(var/message, var/rights)
 
 	if (!istype(src,/datum/admins))
 		src = usr.client.holder
-	if (!istype(src,/datum/admins) || !check_rights(R_ADMIN))
+	if (!istype(src,/datum/admins) || !check_rights(R_ADMIN|R_EVENT|R_FUN))
 		to_chat(usr, "Error: you are not an admin!")
 		return
 
@@ -1441,14 +1477,14 @@ proc/admin_notice(var/message, var/rights)
 
 	var/msg
 
-	if(check_rights(R_ADMIN|R_MOD))
+	if(check_rights(R_ADMIN|R_MOD|R_EVENT))
 		if (H.paralysis == 0)
-			H.paralysis = 8000
+			H.SetParalysis(8000)
 			msg = "has paralyzed [key_name(H)]."
 			log_and_message_admins(msg)
 		else
 			if(alert(src, "[key_name(H)] is paralyzed, would you like to unparalyze them?",,"Yes","No") == "Yes")
-				H.paralysis = 0
+				H.SetParalysis(0)
 				msg = "has unparalyzed [key_name(H)]."
 				log_and_message_admins(msg)
 
@@ -1459,7 +1495,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/crystals
 
-	if(check_rights(R_ADMIN))
+	if(check_rights(R_ADMIN|R_EVENT))
 		crystals = input("Amount of telecrystals for [H.ckey], currently [H.mind.tcrystals].", crystals) as null|num
 		if (!isnull(crystals))
 			H.mind.tcrystals = crystals
@@ -1475,7 +1511,7 @@ proc/admin_notice(var/message, var/rights)
 
 	var/crystals
 
-	if(check_rights(R_ADMIN))
+	if(check_rights(R_ADMIN|R_EVENT))
 		crystals = input("Amount of telecrystals to give to [H.ckey], currently [H.mind.tcrystals].", crystals) as null|num
 		if (!isnull(crystals))
 			H.mind.tcrystals += crystals
@@ -1558,12 +1594,12 @@ datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies
 		if(P.sender) // sent as a reply
 			log_admin("[key_name(src.owner)] replied to a fax message from [key_name(P.sender)]")
 			for(var/client/C in admins)
-				if((R_ADMIN | R_MOD) & C.holder.rights)
+				if((R_ADMIN | R_MOD | R_EVENT) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] replied to a fax message from [key_name_admin(P.sender)] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 		else
 			log_admin("[key_name(src.owner)] has sent a fax message to [destination.department]")
 			for(var/client/C in admins)
-				if((R_ADMIN | R_MOD) & C.holder.rights)
+				if((R_ADMIN | R_MOD | R_EVENT) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
 
 	else

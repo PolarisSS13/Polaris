@@ -23,6 +23,11 @@ datum/preferences
 	var/UI_style_alpha = 255
 	var/tooltipstyle = "Midnight"		//Style for popup tooltips
 	var/client_fps = 0
+	var/ambience_freq = 5				// How often we're playing repeating ambience to a client.
+	var/ambience_chance = 35			// What's the % chance we'll play ambience (in conjunction with the above frequency)
+
+	var/tgui_fancy = TRUE
+	var/tgui_lock = FALSE
 
 	//character preferences
 	var/real_name						//our character's name
@@ -37,11 +42,15 @@ datum/preferences
 	var/r_hair = 0						//Hair color
 	var/g_hair = 0						//Hair color
 	var/b_hair = 0						//Hair color
+	var/grad_style = "none"				//Gradient style
+	var/r_grad = 0						//Gradient color
+	var/g_grad = 0						//Gradient color
+	var/b_grad = 0						//Gradient color
 	var/f_style = "Shaved"				//Face hair type
 	var/r_facial = 0					//Face hair color
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
-	var/s_tone = 0						//Skin tone
+	var/s_tone = -75						//Skin tone
 	var/r_skin = 0						//Skin color
 	var/g_skin = 0						//Skin color
 	var/b_skin = 0						//Skin color
@@ -130,6 +139,12 @@ datum/preferences
 	var/datum/browser/panel
 
 	var/lastnews // Hash of last seen lobby news content.
+
+	var/examine_text_mode = 0 // Just examine text, include usage (description_info), switch to examine panel.
+	var/multilingual_mode = 0 // Default behaviour, delimiter-key-space, delimiter-key-delimiter, off
+
+	var/list/volume_channels = list()
+
 
 /datum/preferences/New(client/C)
 	player_setup = new(src)
@@ -269,6 +284,8 @@ datum/preferences
 		close_load_dialog(usr)
 	else if(href_list["resetslot"])
 		if("No" == alert("This will reset the current slot. Continue?", "Reset current slot?", "No", "Yes"))
+			return 0
+		if("No" == alert("Are you completely sure that you want to reset this character slot?", "Reset current slot?", "No", "Yes"))
 			return 0
 		load_character(SAVE_RESET)
 		sanitize_preferences()

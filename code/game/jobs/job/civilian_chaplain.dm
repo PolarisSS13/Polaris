@@ -2,18 +2,24 @@
 /datum/job/chaplain
 	title = "Chaplain"
 	flag = CHAPLAIN
-	department = "Civilian"
+	departments = list(DEPARTMENT_CIVILIAN)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the head of personnel"
+	supervisors = "the Head of Personnel"
 	selection_color = "#515151"
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_chapel_office, access_crematorium)
-	alt_titles = list("Counselor")
 
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
+	job_description = "The Chaplain ministers to the spiritual needs of the crew."
+	alt_titles = list("Counselor" = /datum/alt_title/counselor)
+
+// Chaplain Alt Titles
+/datum/alt_title/counselor
+	title = "Counselor"
+	title_blurb = "The Counselor attends to the emotional needs of the crew, without a specific medicinal or spiritual focus."
 
 /datum/job/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
 	. = ..()
@@ -34,7 +40,7 @@
 			new_religion = religion_name
 		switch(lowertext(new_religion))
 			if("unitarianism")
-				B.name = "The Talmudic Quran"
+				B.name = "The Great Canon"
 			if("christianity")
 				B.name = "The Holy Bible"
 			if("judaism")
@@ -52,7 +58,7 @@
 			if("kishari national faith")
 				B.name = "The Scriptures of Kishar"
 			if("pleromanism")
-				B.name = "The Revised Talmudic Quran"
+				B.name = "The Revised Great Canon"
 			if("spectralism")
 				B.name = "The Book of the Spark"
 			if("hauler")
@@ -63,6 +69,8 @@
 				B.name = "The Book of the Precursors"
 			if("starlit path of angessa martei")
 				B.name = "Quotations of Exalted Martei"
+			if("sikhism")
+				B.name = "Guru Granth Sahib"
 			else
 				B.name = "The Holy Book of [new_religion]"
 		feedback_set_details("religion_name","[new_religion]")
@@ -126,6 +134,9 @@
 					B.item_state = "bible"
 				if("Torah")
 					B.icon_state = "torah"
+					B.item_state = "clipboard"
+				if("Guru")
+					B.icon_state = "guru"
 					B.item_state = "clipboard"
 				else
 					B.icon_state = "bible"

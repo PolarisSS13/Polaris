@@ -3,7 +3,7 @@
 	desc = "It's used to monitor rooms."
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "camera"
-	use_power = 2
+	use_power = USE_POWER_ACTIVE
 	idle_power_usage = 5
 	active_power_usage = 10
 	plane = MOB_PLANE
@@ -29,10 +29,12 @@
 	var/short_range = 2
 
 	var/light_disabled = 0
+	var/in_use_lights = 0 // TO BE IMPLEMENTED - LIES.
 	var/alarm_on = 0
 	var/busy = 0
 
 	var/on_open_network = 0
+	var/always_visible = FALSE //Visable from any map, good for entertainment network cameras
 
 	var/affected_by_emp_until = 0
 
@@ -80,6 +82,8 @@
 	..()
 
 /obj/machinery/camera/Destroy()
+	if(isMotion())
+		unsense_proximity(callback = .HasProximity)
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
@@ -149,7 +153,7 @@
 		user.do_attack_animation(src)
 		user.setClickCooldown(user.get_attack_speed())
 		visible_message("<span class='warning'>\The [user] slashes at [src]!</span>")
-		playsound(src.loc, 'sound/weapons/slash.ogg', 100, 1)
+		playsound(src, 'sound/weapons/slash.ogg', 100, 1)
 		add_hiddenprint(user)
 		destroy()
 
@@ -160,7 +164,7 @@
 		S.do_attack_animation(src)
 		S.setClickCooldown(user.get_attack_speed())
 		visible_message("<span class='warning'>\The [user] [pick(S.attacktext)] \the [src]!</span>")
-		playsound(src.loc, S.attack_sound, 100, 1)
+		playsound(src, S.attack_sound, 100, 1)
 		add_hiddenprint(user)
 		destroy()
 	..()
@@ -174,7 +178,7 @@
 		panel_open = !panel_open
 		user.visible_message("<span class='warning'>[user] screws the camera's panel [panel_open ? "open" : "closed"]!</span>",
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
-		playsound(src.loc, W.usesound, 50, 1)
+		playsound(src, W.usesound, 50, 1)
 
 	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
 		interact(user)
@@ -223,12 +227,6 @@
 			else
 				to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
-		for(var/mob/O in player_list)
-			if (istype(O.machine, /obj/machinery/computer/security))
-				var/obj/machinery/computer/security/S = O.machine
-				if (S.current_camera == src)
-					to_chat(O, "[U] holds \a [itemname] up to one of the cameras ...")
-					O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
 	else if (istype(W, /obj/item/weapon/camera_bug))
 		if (!src.can_use())
@@ -249,7 +247,7 @@
 			if (istype(W, /obj/item)) //is it even possible to get into attackby() with non-items?
 				var/obj/item/I = W
 				if (I.hitsound)
-					playsound(loc, I.hitsound, 50, 1, -1)
+					playsound(src, I.hitsound, 50, 1, -1)
 		take_damage(W.force)
 
 	else
@@ -269,7 +267,7 @@
 			visible_message("<span class='notice'> [user] has deactivated [src]!</span>")
 		else
 			visible_message("<span class='notice'> [src] clicks and shuts down. </span>")
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = "[initial(icon_state)]1"
 		add_hiddenprint(user)
 	else
@@ -277,7 +275,7 @@
 			visible_message("<span class='notice'> [user] has reactivated [src]!</span>")
 		else
 			visible_message("<span class='notice'> [src] clicks and reactivates itself. </span>")
-		playsound(src.loc, 'sound/items/Wirecutter.ogg', 100, 1)
+		playsound(src, 'sound/items/Wirecutter.ogg', 100, 1)
 		icon_state = initial(icon_state)
 		add_hiddenprint(user)
 
@@ -299,7 +297,7 @@
 	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, loc)
 	spark_system.start()
-	playsound(loc, "sparks", 50, 1)
+	playsound(src, "sparks", 50, 1)
 
 /obj/machinery/camera/proc/set_status(var/newstatus)
 	if (status != newstatus)
@@ -395,7 +393,7 @@
 
 	// Do after stuff here
 	to_chat(user, "<span class='notice'>You start to weld [src]..</span>")
-	playsound(src.loc, WT.usesound, 50, 1)
+	playsound(src, WT.usesound, 50, 1)
 	WT.eyecheck(user)
 	busy = 1
 	if(do_after(user, 100 * WT.toolspeed))
@@ -467,6 +465,7 @@
 	cam["name"] = sanitize(c_tag)
 	cam["deact"] = !can_use()
 	cam["camera"] = "\ref[src]"
+	cam["omni"] = always_visible
 	cam["x"] = x
 	cam["y"] = y
 	cam["z"] = z
@@ -483,8 +482,6 @@
 			cameranet.addCamera(src)
 	else
 		cameranet.updateVisibility(src, 0)
-
-	invalidateCameraCache()
 
 // Resets the camera's wires to fully operational state. Used by one of Malfunction abilities.
 /obj/machinery/camera/proc/reset_wires()

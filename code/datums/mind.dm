@@ -153,7 +153,7 @@
 	usr << browse(out, "window=edit_memory[src]")
 
 /datum/mind/Topic(href, href_list)
-	if(!check_rights(R_ADMIN))	return
+	if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
 
 	if(href_list["add_antagonist"])
 		var/datum/antagonist/antag = all_antag_types[href_list["add_antagonist"]]
@@ -479,6 +479,19 @@
 			return (mind.special_role == role) ? 1 : 0
 	else
 		return 0
+
+/datum/mind/proc/get_ghost(even_if_they_cant_reenter)
+	for(var/mob/observer/dead/G in player_list)
+		if(G.mind == src)
+			if(G.can_reenter_corpse || even_if_they_cant_reenter)
+				return G
+			break
+
+/datum/mind/proc/grab_ghost(force)
+	var/mob/observer/dead/G = get_ghost(even_if_they_cant_reenter = force)
+	. = G
+	if(G)
+		G.reenter_corpse()
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()

@@ -4,7 +4,7 @@
 	description_info = "This device disrupts shields on directly adjacent tiles (in a + shaped pattern). They are commonly installed around exterior airlocks to prevent shields from blocking EVA access."
 	icon = 'icons/obj/machines/shielding.dmi'
 	icon_state = "fdiffuser_on"
-	use_power = 2
+	use_power = USE_POWER_ACTIVE
 	idle_power_usage = 25		// Previously 100.
 	active_power_usage = 500	// Previously 2000
 	anchored = 1
@@ -57,7 +57,7 @@
 		update_icon()
 		return
 	enabled = !enabled
-	use_power = enabled + 1
+	update_use_power(enabled ? USE_POWER_ACTIVE : USE_POWER_IDLE)
 	update_icon()
 	to_chat(usr, "You turn \the [src] [enabled ? "on" : "off"].")
 
@@ -69,6 +69,6 @@
 
 /obj/machinery/shield_diffuser/examine(var/mob/user)
 	. = ..()
-	to_chat(user, "It is [enabled ? "enabled" : "disabled"].")
+	. += "It is [enabled ? "enabled" : "disabled"]."
 	if(alarm)
-		to_chat(user, "A red LED labeled \"Proximity Alarm\" is blinking on the control panel.")
+		. += "A red LED labeled \"Proximity Alarm\" is blinking on the control panel."

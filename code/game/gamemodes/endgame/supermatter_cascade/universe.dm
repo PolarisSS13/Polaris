@@ -84,7 +84,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 		return
 
 /datum/universal_state/supermatter_cascade/proc/AreaSet()
-	for(var/area/A in all_areas)
+	for(var/area/A in world)
 		if(!istype(A,/area) || istype(A, /area/space) || istype(A,/area/beach))
 			continue
 
@@ -98,7 +98,7 @@ The access requirements on the Asteroid Shuttles' consoles have now been revoked
 			else
 				L.update_lumcount(0.0, 0.4, 1)
 
-		for(var/turf/space/T in turfs)
+		for(var/turf/space/T in world)
 			OnTurfChange(T)
 
 /datum/universal_state/supermatter_cascade/proc/MiscSet()

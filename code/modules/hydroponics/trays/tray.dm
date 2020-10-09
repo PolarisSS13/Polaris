@@ -1,5 +1,6 @@
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
+	desc = "A tray usually full of fluid for growing plants."
 	icon = 'icons/obj/hydroponics_machines.dmi'
 	icon_state = "hydrotray3"
 	density = 1
@@ -125,9 +126,11 @@
 		"mutagen" = 15
 		)
 
-/obj/machinery/portable_atmospherics/hydroponics/AltClick()
-	if(mechanical && !usr.incapacitated() && Adjacent(usr))
-		close_lid(usr)
+/obj/machinery/portable_atmospherics/hydroponics/AltClick(var/mob/living/user)
+	if(!istype(user))
+		return
+	if(mechanical && !user.incapacitated() && Adjacent(user))
+		close_lid(user)
 		return 1
 	return ..()
 
@@ -555,7 +558,7 @@
 		pestlevel -= spray.pest_kill_str
 		weedlevel -= spray.weed_kill_str
 		to_chat(user, "You spray [src] with [O].")
-		playsound(loc, 'sound/effects/spray3.ogg', 50, 1, -6)
+		playsound(src, 'sound/effects/spray3.ogg', 50, 1, -6)
 		qdel(O)
 		check_health()
 
@@ -565,7 +568,7 @@
 		if(locate(/obj/machinery/atmospherics/portables_connector/) in loc)
 			return ..()
 
-		playsound(loc, O.usesound, 50, 1)
+		playsound(src, O.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 
@@ -607,32 +610,31 @@
 	else if(dead)
 		remove_dead(user)
 
-/obj/machinery/portable_atmospherics/hydroponics/examine()
-
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/examine(mob/user)
+	. = ..()
 
 	if(seed)
-		to_chat(usr, "<span class='notice'>[seed.display_name] are growing here.</span>")
+		. += "<span class='notice'>[seed.display_name] are growing here.</span>"
 	else
-		to_chat(usr, "[src] is empty.")
+		. += "It is empty."
 
-	if(!Adjacent(usr))
-		return
+	if(!Adjacent(user))
+		return .
 
-	to_chat(usr, "Water: [round(waterlevel,0.1)]/100")
-	to_chat(usr, "Nutrient: [round(nutrilevel,0.1)]/10")
+	. += "Water: [round(waterlevel,0.1)]/100"
+	. += "Nutrient: [round(nutrilevel,0.1)]/10"
 
 	if(seed)
 		if(weedlevel >= 5)
-			to_chat(usr, "\The [src] is <span class='danger'>infested with weeds</span>!")
+			. += "It is <span class='danger'>infested with weeds</span>!"
 		if(pestlevel >= 5)
-			to_chat(usr, "\The [src] is <span class='danger'>infested with tiny worms</span>!")
+			. += "It is <span class='danger'>infested with tiny worms</span>!"
 		if(dead)
-			to_chat(usr, "<span class='danger'>The plant is dead.</span>")
+			. += "It has <span class='danger'>a dead plant</span>!"
 		else if(health <= (seed.get_trait(TRAIT_ENDURANCE)/ 2))
-			to_chat(usr, "The plant looks <span class='danger'>unhealthy</span>.")
+			. += "It has <span class='danger'>an unhealthy plant</span>!"
 	if(frozen == 1)
-		to_chat(usr, "<span class='notice'>It is cryogenically frozen.</span>")
+		. += "<span class='notice'>It is cryogenically frozen.</span>"
 	if(mechanical)
 		var/turf/T = loc
 		var/datum/gas_mixture/environment
@@ -655,7 +657,7 @@
 			var/light_available = T.get_lumcount() * 5
 			light_string = "a light level of [light_available] lumens"
 
-		to_chat(usr, "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K at [environment.return_pressure()] kPa in the [environment_type] environment")
+		. += "The tray's sensor suite is reporting [light_string] and a temperature of [environment.temperature]K at [environment.return_pressure()] kPa in the [environment_type] environment."
 
 /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb()
 	set name = "Toggle Tray Lid"

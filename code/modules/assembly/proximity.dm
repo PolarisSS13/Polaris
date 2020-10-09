@@ -4,7 +4,6 @@
 	icon_state = "prox"
 	origin_tech = list(TECH_MAGNET = 1)
 	matter = list(DEFAULT_WALL_MATERIAL = 800, "glass" = 200, "waste" = 50)
-	flags = PROXMOVE
 	wires = WIRE_PULSE
 
 	secured = 0
@@ -16,11 +15,11 @@
 	var/range = 2
 
 /obj/item/device/assembly/prox_sensor/activate()
-	if(!..())	return 0//Cooldown check
+	if(!..())
+		return FALSE
 	timing = !timing
 	update_icon()
-	return 0
-
+	return FALSE
 
 /obj/item/device/assembly/prox_sensor/toggle_secure()
 	secured = !secured
@@ -33,29 +32,22 @@
 	update_icon()
 	return secured
 
-
-/obj/item/device/assembly/prox_sensor/HasProximity(atom/movable/AM as mob|obj)
+/obj/item/device/assembly/prox_sensor/HasProximity(turf/T, atom/movable/AM, old_loc)
 	if(!istype(AM))
 		log_debug("DEBUG: HasProximity called with [AM] on [src] ([usr]).")
 		return
-	if (istype(AM, /obj/effect/beam))	return
-	if (!isobserver(AM) && AM.move_speed < 12)	sense()
-	return
-
+	if (istype(AM, /obj/effect/beam))
+		return
+	if (!isobserver(AM) && AM.move_speed < 12)
+		sense()
 
 /obj/item/device/assembly/prox_sensor/proc/sense()
+	if((!holder && !secured) || !scanning || !process_cooldown())
+		return FALSE
 	var/turf/mainloc = get_turf(src)
-//		if(scanning && cooldown <= 0)
-//			mainloc.visible_message("\icon[src] *boop* *boop*", "*boop* *boop*")
-	if((!holder && !secured)||(!scanning)||(cooldown > 0))	return 0
 	pulse(0)
 	if(!holder)
-		mainloc.visible_message("\icon[src] *beep* *beep*", "*beep* *beep*")
-	cooldown = 2
-	spawn(10)
-		process_cooldown()
-	return
-
+		mainloc.visible_message("[bicon(src)] *beep* *beep*", "*beep* *beep*")
 
 /obj/item/device/assembly/prox_sensor/process()
 	if(scanning)
@@ -69,46 +61,39 @@
 	if(timing && time <= 0)
 		timing = 0
 		toggle_scan()
-		time = 10
-	return
-
+		time = initial(time)
 
 /obj/item/device/assembly/prox_sensor/dropped()
-	spawn(0)
-		sense()
-		return
-	return
-
+	sense()
 
 /obj/item/device/assembly/prox_sensor/proc/toggle_scan()
-	if(!secured)	return 0
+	if(!secured)
+		return FALSE
 	scanning = !scanning
 	update_icon()
-	return
-
 
 /obj/item/device/assembly/prox_sensor/update_icon()
-	overlays.Cut()
-	attached_overlays = list()
+	cut_overlays()
+	LAZYCLEARLIST(attached_overlays)
 	if(timing)
-		overlays += "prox_timing"
-		attached_overlays += "prox_timing"
+		add_overlay("prox_timing")
+		LAZYADD(attached_overlays, "prox_timing")
 	if(scanning)
-		overlays += "prox_scanning"
-		attached_overlays += "prox_scanning"
+		add_overlay("prox_scanning")
+		LAZYADD(attached_overlays, "prox_scanning")
 	if(holder)
 		holder.update_icon()
 	if(holder && istype(holder.loc,/obj/item/weapon/grenade/chem_grenade))
 		var/obj/item/weapon/grenade/chem_grenade/grenade = holder.loc
 		grenade.primed(scanning)
-	return
 
-
-/obj/item/device/assembly/prox_sensor/Move()
-	..()
+/obj/item/device/assembly/prox_sensor/Moved(atom/old_loc, direction, forced = FALSE)
+	. = ..()
+	if(isturf(old_loc))
+		unsense_proximity(range = range, callback = .HasProximity, center = old_loc)
+	if(isturf(loc))
+		sense_proximity(range = range, callback = .HasProximity)
 	sense()
-	return
-
 
 /obj/item/device/assembly/prox_sensor/interact(mob/user as mob)//TODO: Change this to the wires thingy
 	if(!secured)
@@ -123,11 +108,11 @@
 	dat += "<BR><BR><A href='?src=\ref[src];close=1'>Close</A>"
 	user << browse(dat, "window=prox")
 	onclose(user, "prox")
-	return
-
 
 /obj/item/device/assembly/prox_sensor/Topic(href, href_list, state = deep_inventory_state)
-	if(..()) return 1
+	if(..())
+		return TRUE
+	
 	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 		usr << browse(null, "window=prox")
 		onclose(usr, "prox")
@@ -156,6 +141,3 @@
 
 	if(usr)
 		attack_self(usr)
-
-
-	return

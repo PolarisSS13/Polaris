@@ -89,19 +89,15 @@
 
 	//Goon PS stuff, and other yet-to-be-subsystem things.
 	options["LEGACY: master_controller"] = master_controller
-	options["LEGACY: ticker"] = ticker
-	options["LEGACY: tickerProcess"] = tickerProcess
 	options["LEGACY: air_master"] = air_master
 	options["LEGACY: job_master"] = job_master
 	options["LEGACY: radio_controller"] = radio_controller
-	options["LEGACY: supply_controller"] = supply_controller
 	options["LEGACY: emergency_shuttle"] = emergency_shuttle
 	options["LEGACY: paiController"] = paiController
 	options["LEGACY: cameranet"] = cameranet
 	options["LEGACY: transfer_controller"] = transfer_controller
 	options["LEGACY: gas_data"] = gas_data
 	options["LEGACY: plant_controller"] = plant_controller
-	options["LEGACY: alarm_manager"] = alarm_manager
 
 	var/pick = input(mob, "Choose a controller to debug/view variables of.", "VV controller:") as null|anything in options
 	if(!pick)

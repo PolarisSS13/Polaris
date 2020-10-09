@@ -183,7 +183,7 @@
 	locked = !locked
 	to_chat(user, "<span class='notice'>You [locked ? "lock" : "unlock"] the mulebot's controls!</span>")
 	flick("mulebot-emagged", src)
-	playsound(loc, 'sound/effects/sparks1.ogg', 100, 0)
+	playsound(src, 'sound/effects/sparks1.ogg', 100, 0)
 	return 1
 
 /mob/living/bot/mulebot/update_icons()
@@ -202,13 +202,13 @@
 
 /mob/living/bot/mulebot/handleFrustrated()
 	custom_emote(2, "makes a sighing buzz.")
-	playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+	playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 0)
 	..()
 
 /mob/living/bot/mulebot/handleAdjacentTarget()
 	if(target == src.loc)
 		custom_emote(2, "makes a chiming sound.")
-		playsound(loc, 'sound/machines/chime.ogg', 50, 0)
+		playsound(src, 'sound/machines/chime.ogg', 50, 0)
 		UnarmedAttack(target)
 		resetTarget()
 		if(auto_return && home && (loc != home))
@@ -241,20 +241,20 @@
 		M.Weaken(5)
 	..()
 
-/mob/living/bot/mulebot/proc/runOver(var/mob/living/carbon/human/H)
-	if(istype(H)) // No safety checks - WILL run over lying humans. Stop ERPing in the maint!
-		visible_message("<span class='warning'>[src] drives over [H]!</span>")
-		playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+/mob/living/bot/mulebot/proc/runOver(var/mob/living/M)
+	if(istype(M)) // At this point, MULEBot has somehow crossed over onto your tile with you still on it. CRRRNCH.
+		visible_message("<span class='warning'>[src] drives over [M]!</span>")
+		playsound(src, 'sound/effects/splat.ogg', 50, 1)
 
 		var/damage = rand(5, 7)
-		H.apply_damage(2 * damage, BRUTE, BP_HEAD)
-		H.apply_damage(2 * damage, BRUTE, BP_TORSO)
-		H.apply_damage(0.5 * damage, BRUTE, BP_L_LEG)
-		H.apply_damage(0.5 * damage, BRUTE, BP_R_LEG)
-		H.apply_damage(0.5 * damage, BRUTE, BP_L_ARM)
-		H.apply_damage(0.5 * damage, BRUTE, BP_R_ARM)
+		M.apply_damage(2 * damage, BRUTE, BP_HEAD)
+		M.apply_damage(2 * damage, BRUTE, BP_TORSO)
+		M.apply_damage(0.5 * damage, BRUTE, BP_L_LEG)
+		M.apply_damage(0.5 * damage, BRUTE, BP_R_LEG)
+		M.apply_damage(0.5 * damage, BRUTE, BP_L_ARM)
+		M.apply_damage(0.5 * damage, BRUTE, BP_R_ARM)
 
-		blood_splatter(src, H, 1)
+		blood_splatter(src, M, 1)
 	..()
 
 /mob/living/bot/mulebot/relaymove(var/mob/user, var/direction)
@@ -298,7 +298,7 @@
 
 	if(crates_only && !istype(C,/obj/structure/closet/crate))
 		custom_emote(2, "makes a sighing buzz.")
-		playsound(loc, 'sound/machines/buzz-sigh.ogg', 50, 0)
+		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 0)
 		return
 
 	var/obj/structure/closet/crate/crate = C

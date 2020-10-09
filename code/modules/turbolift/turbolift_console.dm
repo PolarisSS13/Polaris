@@ -96,7 +96,6 @@
 	desc = "A control panel for moving the elevator. There's a slot for swiping IDs to enable additional controls."
 	icon_state = "panel"
 
-
 /obj/structure/lift/panel/attack_ghost(var/mob/user)
 	return interact(user)
 

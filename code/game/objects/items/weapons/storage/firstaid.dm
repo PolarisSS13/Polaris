@@ -15,6 +15,8 @@
 	throw_range = 8
 	max_storage_space = ITEMSIZE_COST_SMALL * 7 // 14
 	var/list/icon_variety
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/weapon/storage/firstaid/Initialize()
 	. = ..()
@@ -171,13 +173,15 @@
 	desc = "It's an airtight container for storing medication."
 	icon_state = "pill_canister"
 	icon = 'icons/obj/chemical.dmi'
+	drop_sound = 'sound/items/drop/pillbottle.ogg'
+	pickup_sound = 'sound/items/pickup/pillbottle.ogg'
 	item_state_slots = list(slot_r_hand_str = "contsolid", slot_l_hand_str = "contsolid")
 	w_class = ITEMSIZE_SMALL
 	can_hold = list(/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/dice,/obj/item/weapon/paper)
 	allow_quick_gather = 1
 	allow_quick_empty = 1
 	use_to_pickup = 1
-	use_sound = null
+	use_sound = 'sound/items/storage/pillbottle.ogg'
 	max_storage_space = ITEMSIZE_COST_TINY * 14
 	max_w_class = ITEMSIZE_TINY
 	var/wrapper_color
