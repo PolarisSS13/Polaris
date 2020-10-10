@@ -1,11 +1,15 @@
 /datum/tgui_module/crew_monitor
 	name = "Crew monitor"
+	tgui_id = "CrewMonitor"
 
-/datum/tgui_module/crew_monitor/tgui_act(action, params)
+/datum/tgui_module/crew_monitor/tgui_act(action, params, datum/tgui/ui)
 	if(..())
 		return TRUE
+		
+	if(action && !issilicon(usr))
+		playsound(tgui_host(), "terminal_type", 50, 1)
 
-	var/turf/T = get_turf(tgui_host())
+	var/turf/T = get_turf(usr)
 	if(!T || !(T.z in using_map.player_levels))
 		to_chat(usr, "<span class='warning'><b>Unable to establish a connection</b>: You're too far away from the station!</span>")
 		return FALSE
@@ -18,9 +22,12 @@
 				if(hassensorlevel(H, SUIT_SENSOR_TRACKING))
 					AI.ai_actual_track(H)
 			return TRUE
+		if("setZLevel")
+			ui.set_map_z_level(params["mapZLevel"])
+			return TRUE
 
-/datum/tgui_module/crew_monitor/tgui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/tgui_state/state = GLOB.tgui_default_state)
-	var/z = get_z(tgui_host())
+/datum/tgui_module/crew_monitor/tgui_interact(mob/user, datum/tgui/ui = null)
+	var/z = get_z(user)
 	var/list/map_levels = using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE)
 	
 	if(!map_levels.len)
@@ -29,19 +36,19 @@
 			ui.close()
 		return null
 
-	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, ui_key, "CrewMonitor", name, 800, 600, master_ui, state)
+		ui = new(user, src, tgui_id, name)
 		ui.autoupdate = TRUE
 		ui.open()
 
 
-/datum/tgui_module/crew_monitor/tgui_data(mob/user, ui_key = "main", datum/topic_state/state = GLOB.tgui_default_state)
+/datum/tgui_module/crew_monitor/tgui_data(mob/user)
 	var/data[0]
 
 	data["isAI"] = isAI(user)
 
-	var/z = get_z(tgui_host())
+	var/z = get_z(user)
 	var/list/map_levels = uniquelist(using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE))
 	data["map_levels"] = map_levels
 
@@ -50,3 +57,11 @@
 		data["crewmembers"] += crew_repository.health_data(zlevel)
 
 	return data
+
+/datum/tgui_module/crew_monitor/ntos
+	ntos = TRUE
+
+// Subtype for self_state
+/datum/tgui_module/crew_monitor/robot
+/datum/tgui_module/crew_monitor/robot/tgui_state(mob/user)
+	return GLOB.tgui_self_state

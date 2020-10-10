@@ -155,8 +155,21 @@
 /proc/log_unit_test(text)
 	to_world_log("## UNIT_TEST: [text]")
 
-/proc/log_tgui(text)
-	diary << "\[[time_stamp()]]TGUI: [text][log_end]"
+/proc/log_tgui(user_or_client, text)
+	var/entry = ""
+	if(!user_or_client)
+		entry += "no user"
+	else if(istype(user_or_client, /mob))
+		var/mob/user = user_or_client
+		entry += "[user.ckey] (as [user])"
+	else if(istype(user_or_client, /client))
+		var/client/client = user_or_client
+		entry += "[client.ckey]"
+	entry += ":\n[text]"
+	diary << "\[[time_stamp()]]TGUI: [entry][log_end]"
+
+/proc/log_asset(text)
+	diary << "\[time_stamp()]] ASSET: [text]"
 
 /proc/report_progress(var/progress_message)
 	admin_notice("<span class='boldannounce'>[progress_message]</span>", R_DEBUG)

@@ -46,7 +46,7 @@
 
 //mob verbs are faster than object verbs. See above.
 /mob/living/pointed(atom/A as mob|obj|turf in view())
-	if(src.stat || !src.canmove || src.restrained())
+	if(src.stat || src.restrained())
 		return 0
 	if(src.status_flags & FAKEDEATH)
 		return 0
@@ -200,7 +200,7 @@ default behaviour is:
 /mob/living/Crossed(var/atom/movable/AM) // Transplanting this from /mob/living/carbon/human/Crossed()
 	if(AM == src || AM.is_incorporeal()) // We're not going to run over ourselves or ghosts
 		return
-	
+
 	if(istype(AM, /mob/living/bot/mulebot))
 		var/mob/living/bot/mulebot/MB = AM
 		MB.runOver(src)

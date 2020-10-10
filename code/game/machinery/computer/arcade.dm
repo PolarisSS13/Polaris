@@ -1101,88 +1101,67 @@
 	if(..())
 		return
 
-	var/obj/item/weapon/card/id/W = I.GetID()
-
-	if(!emagged)
-		if(gamepaid == 0 && vendor_account && !vendor_account.suspended)
-			var/paid = 0
-			var/handled = 0
-
-			if(W) //for IDs and PDAs and wallets with IDs
-				paid = pay_with_card(W,I)
-				handled = 1
-			else if(istype(I, /obj/item/weapon/spacecash/ewallet))
-				var/obj/item/weapon/spacecash/ewallet/C = I
-				paid = pay_with_ewallet(C)
-				handled = 1
-			else if(istype(I, /obj/item/weapon/spacecash))
-				var/obj/item/weapon/spacecash/C = I
-				paid = pay_with_cash(C, user)
-				handled = 1
-
-			if(paid)
-				gamepaid = 1
-				return
-			else if(handled)
-				return // don't smack that machine with your 2 thalers
-	else if(emagged)
-		if(gamepaid == 0 && vendor_account && !vendor_account.suspended)
-			var/paid = 0
-			var/handled = 0
-
-			if(W) //for IDs and PDAs and wallets with IDs
-				paid = pay_with_card(W,I)
-				handled = 1
-			else if(istype(I, /obj/item/weapon/spacecash/ewallet))
-				playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
-				to_chat(user, "<span class='info'>It doesn't seem to accept that! Seem you'll need to swipe a valid ID.</span>")
-				handled = 1
-			else if(istype(I, /obj/item/weapon/spacecash))
-				playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
-				to_chat(user, "<span class='info'>It doesn't seem to accept that! Seem you'll need to swipe a valid ID.</span>")
-				handled = 1
-			if(paid)
-				gamepaid = 1
-				instructions = "Hit start to play!"
-				return
-			else if(handled)
-				return // don't smack that machine with your 2 thalers
+	if(gamepaid == 0 && vendor_account && !vendor_account.suspended)
+		var/paid = 0
+		var/obj/item/weapon/card/id/W = I.GetID()
+		if(W) //for IDs and PDAs and wallets with IDs
+			paid = pay_with_card(W,I)
+		else if(istype(I, /obj/item/weapon/spacecash/ewallet))
+			var/obj/item/weapon/spacecash/ewallet/C = I
+			paid = pay_with_ewallet(C)
+		else if(istype(I, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = I
+			paid = pay_with_cash(C, user)
+		if(paid)
+			gamepaid = 1
+			instructions = "Hit start to play!"
+			return
+		return
 
 ////// Cash
 /obj/machinery/computer/arcade/clawmachine/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
-	if(gameprice > cashmoney.worth)
+	if(!emagged)
+		if(gameprice > cashmoney.worth)
 
-		// This is not a status display message, since it's something the character
-		// themselves is meant to see BEFORE putting the money in
-		to_chat(usr, "[bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
-		return 0
+			// This is not a status display message, since it's something the character
+			// themselves is meant to see BEFORE putting the money in
+			to_chat(usr, "[bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
+			return 0
 
-	if(istype(cashmoney, /obj/item/weapon/spacecash))
+		if(istype(cashmoney, /obj/item/weapon/spacecash))
 
-		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
-		cashmoney.worth -= gameprice
+			visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+			cashmoney.worth -= gameprice
 
-		if(cashmoney.worth <= 0)
-			usr.drop_from_inventory(cashmoney)
-			qdel(cashmoney)
-		else
-			cashmoney.update_icon()
+			if(cashmoney.worth <= 0)
+				usr.drop_from_inventory(cashmoney)
+				qdel(cashmoney)
+			else
+				cashmoney.update_icon()
 
-	// Machine has no idea who paid with cash
-	credit_purchase("(cash)")
-	return 1
+		// Machine has no idea who paid with cash
+		credit_purchase("(cash)")
+		return 1
+	if(emagged)
+		playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		to_chat(user, "<span class='info'>It doesn't seem to accept that! Seem you'll need to swipe a valid ID.</span>")
+
 
 ///// Ewallet
 /obj/machinery/computer/arcade/clawmachine/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
-	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
-	playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
-	if(gameprice > wallet.worth)
-		visible_message("<span class='info'>Insufficient funds.</span>")
-		return 0
-	else
-		wallet.worth -= gameprice
-		credit_purchase("[wallet.owner_name] (chargecard)")
-		return 1
+	if(!emagged)
+		visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
+		playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
+		if(gameprice > wallet.worth)
+			visible_message("<span class='info'>Insufficient funds.</span>")
+			return 0
+		else
+			wallet.worth -= gameprice
+			credit_purchase("[wallet.owner_name] (chargecard)")
+			return 1
+	if(emagged)
+		playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		to_chat(usr, "<span class='info'>It doesn't seem to accept that! Seem you'll need to swipe a valid ID.</span>")
 
 ///// ID
 /obj/machinery/computer/arcade/clawmachine/proc/pay_with_card(var/obj/item/weapon/card/id/I, var/obj/item/ID_container)
@@ -1310,19 +1289,18 @@
 
 	if(prob(winprob)) /// YEAH.
 		if(!emagged)
-			playsound(src, 'sound/arcade/Ori_win.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			prizevend()
 			winscreen = "You won!"
-			winprob = 0 /// YEAH!!!!!!!!!!!!!!!!
 		else if(emagged)
-			playsound(src, 'sound/arcade/Ori_win.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			gameprice = 1
 			emagged = 0
 			winscreen = "You won...?"
-			winprob = 0
 			var/obj/item/weapon/grenade/G = new /obj/item/weapon/grenade/explosive(get_turf(src)) /// YEAAAAAAAAAAAAAAAAAAH!!!!!!!!!!
 			G.activate()
 			G.throw_at(get_turf(usr),10,10) /// Play stupid games, win stupid prizes.
+
+		playsound(src, 'sound/arcade/Ori_win.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		winprob = 0
 
 	else
 		playsound(src, 'sound/arcade/Ori_fail.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)

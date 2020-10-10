@@ -563,6 +563,9 @@ macro "hotkeymode"
 	elem 
 		name = "CTRL+Z"
 		command = "Activate-Held-Object"
+	elem
+		name = "U"
+		command = "Rest"
 	elem 
 		name = "NUMPAD1"
 		command = "body-r-leg"
@@ -1158,6 +1161,7 @@ window "mainwindow"
 		anchor1 = none
 		anchor2 = none
 		is-visible = false
+		auto-format = false
 		saved-params = ""
 	elem "hotkey_toggle"
 		type = BUTTON
