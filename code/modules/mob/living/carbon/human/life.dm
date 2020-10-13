@@ -4,13 +4,15 @@
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
 #define HUMAN_CRIT_MAX_OXYLOSS ( 2.0 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
 
+#define THERMAL_MULT 0.75 //Multiplies heat loss addition from weather/water effects
+
 #define HYPOTHERMIA_RATE_DIVISOR 60 //Divisor of hypothermia increase per check. Higher values means hypothermia increases slower.
-#define HYPOTHERMIA_RECOVERY_MAX 2.1 //Max amount of hypothermia removed per check, applies when body temperature is above hypotemp.
+#define HYPOTHERMIA_RECOVERY_MAX 3.1 //Max amount of hypothermia removed per check, applies when body temperature is above hypotemp.
 #define HYPOTHERMIA_RECOVERY_MIN 0.1 //Min amount of hypothermia removed per check, applies when body temperature is above hypotemp.
 
 #define HYPOTHERMIA_SHIVER_MIN 5
 #define HYPOTHERMIA_SHIVER_MAX 75
-#define HYPOTHERMIA_SHIVER_CHANCE 10
+#define HYPOTHERMIA_SHIVER_CHANCE 5
 
 #define HYPOTHERMIA_STUTTER_MIN 30
 #define HYPOTHERMIA_STUTTER_MOD 25
@@ -645,7 +647,6 @@
 
 	breath.update_values()
 	return 1
-
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
@@ -683,9 +684,36 @@
 		else
 			loc_temp = environment.temperature
 
-		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1)
+		if(adjusted_pressure < species.warning_high_pressure && adjusted_pressure > species.warning_low_pressure && abs(loc_temp - bodytemperature) < 20 && bodytemperature < species.heat_level_1 && bodytemperature > species.cold_level_1 + species.hypothermia_difference)
 			clear_alert("pressure")
 			return // Temperatures are within normal ranges, fuck all this processing. ~Ccomp
+
+		//Let's do some checks and get a rough number for the thermal conductivity of our environment.
+		var/thermal_conductivity = 1
+		var/turf/T = loc
+		if(istype(T))	//If we're not on a turf, we're probably inside of something which would protect us from these environmental factors
+			var/datum/planet/current_planet = SSplanets.z_to_planet[z]
+			if(current_planet && T.outdoors) //If we're outside and on a planet, let's check the weather.
+				var/datum/weather_holder/weather = current_planet.weather_holder
+				if(weather) //Gotta make sure there's actual weather to check.
+					switch(weather.current_weather)
+						if(WEATHER_LIGHT_SNOW) //Snow should transfer a little bit more temperature to us than just air
+							thermal_conductivity += 0.12 * THERMAL_MULT
+						if(WEATHER_SNOW)
+							thermal_conductivity += 0.2 * THERMAL_MULT
+						if(WEATHER_BLIZZARD) //Blizzard means lots of snow hitting us and lots of air movement which results in more temperature change to our body
+							thermal_conductivity += 0.8 * THERMAL_MULT
+						if(WEATHER_RAIN) //Rain is going to get us wet and increase our thermal conductivity by a good bit
+							thermal_conductivity += 0.8 * THERMAL_MULT
+						if(WEATHER_STORM) //This means rain plus a lot of wind, so same logic as before
+							thermal_conductivity += 1.4 * THERMAL_MULT
+						if(WEATHER_ASH_STORM) //Ash is similar to snow, just floating solids, but ash is a little bit less melty, so less conductive.
+							thermal_conductivity += 0.4 * THERMAL_MULT
+					thermal_conductivity += min(weather.wind_speed * THERMAL_MULT / 3,1.5 * THERMAL_MULT)	//Higher wind is higher heat transfer
+			if(istype(T, /turf/simulated/floor/water))	//Being in water is gonna increase our thermal conductivity by a lot. TODO: Potentially add wetness system so getting soaked increases this for a while even after you leave the water?
+				thermal_conductivity += 1.6 * THERMAL_MULT
+
+
 
 		//Body temperature adjusts depending on surrounding atmosphere based on your thermal protection (convection)
 		var/temp_adj = 0
@@ -697,6 +725,7 @@
 			var/thermal_protection = get_heat_protection(loc_temp) //This returns a 0 - 1 value, which corresponds to the percentage of protection based on what you're wearing and what you're exposed to.
 			if(thermal_protection < 0.99)	//For some reason, < 1 returns false if the value is 1.
 				temp_adj = (1-thermal_protection) * ((loc_temp - bodytemperature) / BODYTEMP_HEAT_DIVISOR)
+		temp_adj *= thermal_conductivity
 
 		//Use heat transfer as proportional to the gas density. However, we only care about the relative density vs standard 101 kPa/20 C air. Therefore we can use mole ratios
 		var/relative_density = environment.total_moles / MOLES_CELLSTANDARD
@@ -820,7 +849,7 @@
 	var/body_temperature_difference = species.body_temperature - bodytemperature
 	
 	var/hypotemp = species.cold_level_1+species.hypothermia_difference
-	if(bodytemperature < hypotemp)
+	if(bodytemperature < hypotemp && !istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
 		throw_alert("temp", /obj/screen/alert/cold, 1)
 		if(prob(5))
 			to_chat(src, "<span class='danger'>[pick(species.cold_discomfort_strings)]</span>")

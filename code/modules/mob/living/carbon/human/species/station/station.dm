@@ -84,6 +84,8 @@
 	their native tongue is a heavy hissing laungage called Sinta'Unathi."
 	catalogue_data = list(/datum/category_item/catalogue/fauna/unathi)
 
+	hypothermia_difference = 10 //Default 17.5 - Lower is better.
+
 	cold_level_1 = 280 //Default 260 - Lower is better
 	cold_level_2 = 220 //Default 200
 	cold_level_3 = 130 //Default 120
