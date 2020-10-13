@@ -35,4 +35,4 @@ delete-after: True
 changes: 
   - rscadd: "Added hypothermia which sets in slowly at temperatures above those you would normally take damage from."
   - rcsadd: "Hypothermia begins and slowly develops over time into worse and worse symptoms until you start passing out and taking burn damage."
-  
+  - rcsadd: "Weather and water now affects temperature survivability."
