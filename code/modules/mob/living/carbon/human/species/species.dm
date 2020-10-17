@@ -258,7 +258,7 @@
 							),
 		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS,
 							HOME_SYSTEM_OTHER,
-							HOME_SYSTEM_EARTH
+							HOME_SYSTEM_HUMAN_EARTH
 							),
 		TAG_FACTION =   list(FACTION_OTHER,
 							FACTION_NANOTRASEN
@@ -271,6 +271,13 @@
 							SUBSPECIES_VATBORN
 							)
 	)
+
+	/*
+	 * The LazyMan's way of setting up the above lists.
+	 * If this is TRUE, the available_cultural_info list only -needs- to contain any specifically unique backgrounds not handled by the system.
+	 */
+	var/automatically_acquire_backgrounds = TRUE
+
 	var/list/force_cultural_info =                list()
 	var/list/default_cultural_info =              list()
 	var/list/additional_available_cultural_info = list()
@@ -302,6 +309,19 @@
 		if(!inherent_verbs)
 			inherent_verbs = list()
 		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
+
+	if(automatically_acquire_backgrounds)
+		if(!LAZYLEN(available_cultural_info))
+			available_cultural_info = list(TAG_CULTURE = list(), TAG_HOMEWORLD = list(), TAG_FACTION = list(), TAG_RELIGION = list(), TAG_SUBSPECIES = list())
+
+		for(var/backgroundtag in available_cultural_info)
+
+			for(var/decl/cultural_info/CI in subtypesof(/decl/cultural_info))
+				CI = initial(CI)
+
+				if(LAZYLEN(CI.lazysetup_species))
+					if(name in CI.lazysetup_species || SPECIES_ALL in CI.lazysetup_species)
+						available_cultural_info[backgroundtag] |= CI.name
 
 /datum/species/proc/sanitize_name(var/name, var/robot = 0)
 	return sanitizeName(name, MAX_NAME_LEN, robot)

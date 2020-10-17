@@ -7,3 +7,5 @@
 		LANGUAGE_GUTTER,
 		LANGUAGE_SIGN
 	)
+
+	lazysetup_species = null

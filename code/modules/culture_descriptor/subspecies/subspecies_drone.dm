@@ -1,4 +1,8 @@
-/decl/cultural_info/subspecies/drone_x
+
+/decl/cultural_info/subspecies/drone
+	lazysetup_species = null
+
+/decl/cultural_info/subspecies/drone/drone_x
 	name = SUBSPECIES_DRONE_X
 	description = "X-class drones emerge from unrated software, are produced by rogue labs, or cross the border from foreign space.\
 	They are considered a threat to national security and deleted when encountered in SolGov space, with the producers prosecuted \
@@ -11,7 +15,7 @@
 		LANGUAGE_SIGN
 	)
 
-/decl/cultural_info/subspecies/drone_emergent
+/decl/cultural_info/subspecies/drone/drone_emergent
 	name = SUBSPECIES_DRONE_EMERGENT
 	description = "“Emergence” is a term associated with drone intelligences who become more intelligent than they were originally \
 	intended to be. While this can extend to financial systems learning language, for instance, it is usually applied to hypothetical \

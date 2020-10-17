@@ -15,6 +15,8 @@
 	var/list/qualifications
 	var/list/modifiers
 
+	var/list/lazysetup_species = list(SPECIES_ALL)
+
 	// Is this only usable by organics, or machines?
 	var/whitelist = null
 

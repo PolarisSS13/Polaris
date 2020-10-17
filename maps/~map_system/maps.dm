@@ -38,7 +38,7 @@ var/list/all_maps = list()
 
 	// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/map_levels
-	
+
 	// E-mail TLDs to use for NTnet modular computer e-mail addresses
 	var/list/usable_email_tlds = list("freemail.nt")
 
@@ -106,7 +106,7 @@ var/list/all_maps = list()
 	// Culture defaults.
 	var/list/available_cultural_info = list(
 		TAG_HOMEWORLD = list(
-			HOME_SYSTEM_EARTH,
+			HOME_SYSTEM_HUMAN_EARTH,
 			HOME_SYSTEM_OTHER
 		),
 		TAG_FACTION = list(
@@ -126,7 +126,7 @@ var/list/all_maps = list()
 	)
 
 	var/list/default_cultural_info = list(
-		TAG_HOMEWORLD = HOME_SYSTEM_EARTH,
+		TAG_HOMEWORLD = HOME_SYSTEM_HUMAN_EARTH,
 		TAG_FACTION =   FACTION_NANOTRASEN,
 		TAG_CULTURE =   CULTURE_HUMAN_EARTH,
 		TAG_RELIGION =  RELIGION_AGNOSTICISM

@@ -42,6 +42,28 @@
 	inherent_verbs = list(
 		/mob/living/carbon/human/proc/tie_hair)
 
+	available_cultural_info = list(
+		TAG_CULTURE =   list(CULTURE_OTHER,
+							CULTURE_HUMAN,
+							CULTURE_HUMAN_EARTH,
+							CULTURE_HUMAN_OTHER
+							),
+		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS,
+							HOME_SYSTEM_OTHER,
+							HOME_SYSTEM_HUMAN_EARTH
+							),
+		TAG_FACTION =   list(FACTION_OTHER,
+							FACTION_NANOTRASEN
+							),
+		TAG_RELIGION =  list(RELIGION_OTHER,
+							RELIGION_ATHEISM,
+							RELIGION_AGNOSTICISM
+							),
+		TAG_SUBSPECIES = list(SUBSPECIES_GENERIC,
+							SUBSPECIES_VATBORN
+							)
+		)
+
 /datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
 	return SPECIES_HUMAN
 
