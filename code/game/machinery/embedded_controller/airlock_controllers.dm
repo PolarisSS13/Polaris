@@ -14,6 +14,7 @@
 	var/tag_secure = 0
 	var/list/dummy_terminals = list()
 	var/cycle_to_external_air = 0
+	layer = ABOVE_WINDOW_LAYER
 
 /obj/machinery/embedded_controller/radio/airlock/Destroy()
 	// TODO - Leshana - Implement dummy terminals

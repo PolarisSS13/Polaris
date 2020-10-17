@@ -25,6 +25,7 @@
 #include "vault3.dmm"
 #include "vault4.dmm"
 #include "vault5.dmm"
+#include "vault6.dmm"
 #include "IceCave1A.dmm"
 #include "IceCave1B.dmm"
 #include "IceCave1C.dmm"
@@ -39,6 +40,7 @@
 #include "Geyser3.dmm"
 #include "Cliff1.dmm"
 #include "excavation1.dmm"
+#include "spatial_anomaly.dmm"
 #endif
 
 // The 'mountains' is the mining z-level, and has a lot of caves.
@@ -345,3 +347,10 @@
 	desc = "An abandoned mining site."
 	mappath = 'maps/submaps/surface_submaps/mountains/excavation1.dmm'
 	cost = 20
+
+/datum/map_template/surface/mountains/deep/spatial_anomaly
+	name = "spatial anomaly"
+	desc = "A strange section of the caves that seems twist and turn in ways that shouldn't be physically possible."
+	mappath = 'maps/submaps/surface_submaps/mountains/spatial_anomaly.dmm'
+	cost = 20
+	fixed_orientation = TRUE
