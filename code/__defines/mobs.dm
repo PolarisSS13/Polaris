@@ -213,6 +213,13 @@
 #define O_AUG_SPINE "spinal augment"
 #define O_AUG_PELVIC "pelvic augment"
 
+// FBP components.
+
+#define O_PUMP     "hydraulic hub"
+#define O_CYCLER   "reagent cycler"
+#define O_HEATSINK "thermal regulator"
+#define O_DIAGNOSTIC "diagnostic controller"
+
 // Non-Standard organs
 #define O_MOUTH    "mouth"
 #define O_CELL     "cell"
@@ -431,3 +438,5 @@
 #define EXAMINE_SKIPFEET			0x0100
 
 #define MAX_NUTRITION	500
+
+#define FAKE_INVIS_ALPHA_THRESHOLD 127 // If something's alpha var is at or below this number, certain things will pretend it is invisible.

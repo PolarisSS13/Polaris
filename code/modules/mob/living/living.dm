@@ -46,7 +46,7 @@
 
 //mob verbs are faster than object verbs. See above.
 /mob/living/pointed(atom/A as mob|obj|turf in view())
-	if(src.stat || !src.canmove || src.restrained())
+	if(src.stat || src.restrained())
 		return 0
 	if(src.status_flags & FAKEDEATH)
 		return 0
@@ -195,6 +195,19 @@ default behaviour is:
 	if(istype(mover, /obj/structure/blob) && faction == "blob") //Blobs should ignore things on their faction.
 		return TRUE
 	return ..()
+
+// Called when something steps onto us. This allows for mulebots and vehicles to run things over. <3
+/mob/living/Crossed(var/atom/movable/AM) // Transplanting this from /mob/living/carbon/human/Crossed()
+	if(AM == src || AM.is_incorporeal()) // We're not going to run over ourselves or ghosts
+		return
+
+	if(istype(AM, /mob/living/bot/mulebot))
+		var/mob/living/bot/mulebot/MB = AM
+		MB.runOver(src)
+
+	if(istype(AM, /obj/vehicle))
+		var/obj/vehicle/V = AM
+		V.RunOver(src)
 
 /mob/living/verb/succumb()
 	set hidden = 1
@@ -1363,3 +1376,8 @@ default behaviour is:
 		clear_alert("weightless")
 	else
 		throw_alert("weightless", /obj/screen/alert/weightless)
+
+// Tries to turn off things that let you see through walls, like mesons.
+// Each mob does vision a bit differently so this is just for inheritence and also so overrided procs can make the vision apply instantly if they call `..()`.
+/mob/living/proc/disable_spoiler_vision()
+	handle_vision()

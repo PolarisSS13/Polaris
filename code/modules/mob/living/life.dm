@@ -9,9 +9,6 @@
 	if(!loc)
 		return
 
-	if(machine && !CanMouseDrop(machine, src))
-		machine = null
-
 	var/datum/gas_mixture/environment = loc.return_air()
 
 	handle_modifiers() // Do this early since it might affect other things later.
@@ -44,7 +41,10 @@
 
 	//Check if we're on fire
 	handle_fire()
-
+	
+	if(client && !(client.prefs.ambience_freq == 0))	// Handle re-running ambience to mobs if they've remained in an area, AND have an active client assigned to them, and do not have repeating ambience disabled.
+		handle_ambience()
+	
 	//stuff in the stomach
 	handle_stomach()
 
@@ -88,6 +88,13 @@
 /mob/living/proc/handle_stomach()
 	return
 
+/mob/living/proc/handle_ambience() // If you're in an ambient area and have not moved out of it for x time as configured per-client, and do not have it disabled, we're going to play ambience again to you, to help break up the silence.
+	if(world.time >= (lastareachange + client.prefs.ambience_freq MINUTES)) // Every 5 minutes (by default, set per-client), we're going to run a 35% chance (by default, also set per-client) to play ambience.
+		var/area/A = get_area(src)
+		if(A)
+			lastareachange = world.time // This will refresh the last area change to prevent this call happening LITERALLY every life tick.
+			A.play_ambience(src, initial = FALSE)
+
 /mob/living/proc/update_pulling()
 	if(pulling)
 		if(incapacitated())
@@ -118,11 +125,17 @@
 /mob/living/proc/handle_stunned()
 	if(stunned)
 		AdjustStunned(-1)
+		throw_alert("stunned", /obj/screen/alert/stunned)
+	else
+		clear_alert("stunned")
 	return stunned
 
 /mob/living/proc/handle_weakened()
 	if(weakened)
 		AdjustWeakened(-1)
+		throw_alert("weakened", /obj/screen/alert/weakened)
+	else
+		clear_alert("weakened")
 	return weakened
 
 /mob/living/proc/handle_stuttering()
@@ -138,6 +151,9 @@
 /mob/living/proc/handle_drugged()
 	if(druggy)
 		druggy = max(druggy-1, 0)
+		throw_alert("high", /obj/screen/alert/high)
+	else
+		clear_alert("high")
 	return druggy
 
 /mob/living/proc/handle_slurring()
@@ -148,11 +164,17 @@
 /mob/living/proc/handle_paralysed()
 	if(paralysis)
 		AdjustParalysis(-1)
+		throw_alert("paralyzed", /obj/screen/alert/paralyzed)
+	else
+		clear_alert("paralyzed")
 	return paralysis
 
 /mob/living/proc/handle_confused()
 	if(confused)
 		AdjustConfused(-1)
+		throw_alert("confused", /obj/screen/alert/confused)
+	else
+		clear_alert("confused")
 	return confused
 
 /mob/living/proc/handle_disabilities()

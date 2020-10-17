@@ -262,20 +262,14 @@
 	return
 
 // called when something steps onto a human
-// this handles mulebots and vehicles
-// and now mobs on fire
+// this handles mobs on fire - mulebot and vehicle code has been relocated to /mob/living/Crossed()
 /mob/living/carbon/human/Crossed(var/atom/movable/AM)
 	if(AM.is_incorporeal())
 		return
-	if(istype(AM, /mob/living/bot/mulebot))
-		var/mob/living/bot/mulebot/MB = AM
-		MB.runOver(src)
-
-	if(istype(AM, /obj/vehicle))
-		var/obj/vehicle/V = AM
-		V.RunOver(src)
 
 	spread_fire(AM)
+
+	..() // call parent because we moved behavior to parent
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
@@ -284,7 +278,7 @@
 		if (pda.id)
 			return pda.id.rank ? pda.id.rank : if_no_job
 		else
-			return pda.ownrank
+			return pda.ownrank ? pda.ownrank : if_no_job
 	else
 		var/obj/item/weapon/card/id/id = get_idcard()
 		if(id)
@@ -300,7 +294,7 @@
 		if (pda.id)
 			return pda.id.assignment
 		else
-			return pda.ownjob
+			return pda.ownjob ? pda.ownjob : if_no_job
 	else
 		var/obj/item/weapon/card/id/id = get_idcard()
 		if(id)
@@ -316,7 +310,7 @@
 		if (pda.id)
 			return pda.id.registered_name
 		else
-			return pda.owner
+			return pda.owner ? pda.owner : if_no_id
 	else
 		var/obj/item/weapon/card/id/id = get_idcard()
 		if(id)
@@ -349,7 +343,7 @@
 	. = if_no_id
 	if(istype(wear_id,/obj/item/device/pda))
 		var/obj/item/device/pda/P = wear_id
-		return P.owner
+		return P.owner ? P.owner : if_no_id
 	if(wear_id)
 		var/obj/item/weapon/card/id/I = wear_id.GetID()
 		if(I)
@@ -1575,6 +1569,13 @@
 		else
 			layer = HIDING_LAYER
 
+/mob/living/carbon/human/examine_icon()
+	var/icon/I = get_cached_examine_icon(src)
+	if(!I)
+		I = getFlatIcon(src, defdir = SOUTH, no_anim = TRUE)
+		set_cached_examine_icon(src, I, 50 SECONDS)
+	return I
+
 /mob/living/carbon/human/proc/get_display_species()
 	//Shows species in tooltip
 	//Beepboops get special text if obviously beepboop
@@ -1656,3 +1657,23 @@
 				var/turf/T = loc
 				T.add_blood(src)
 	. = ..()
+
+// Tries to turn off item-based things that let you see through walls, like mesons.
+// Certain stuff like genetic xray vision is allowed to be kept on.
+/mob/living/carbon/human/disable_spoiler_vision()
+	// Glasses.
+	if(istype(glasses, /obj/item/clothing/glasses))
+		var/obj/item/clothing/glasses/goggles = glasses
+		if(goggles.active && (goggles.vision_flags & (SEE_TURFS|SEE_OBJS)))
+			goggles.toggle_active(src)
+			to_chat(src, span("warning", "Your [goggles.name] have suddenly turned off!"))
+
+	// RIGs.
+	var/obj/item/weapon/rig/rig = get_rig()
+	if(istype(rig) && rig.visor?.active && rig.visor.vision?.glasses)
+		var/obj/item/clothing/glasses/rig_goggles = rig.visor.vision.glasses
+		if(rig_goggles.vision_flags & (SEE_TURFS|SEE_OBJS))
+			rig.visor.deactivate()
+			to_chat(src, span("warning", "\The [rig]'s visor has shuddenly deactivated!"))
+
+	..()

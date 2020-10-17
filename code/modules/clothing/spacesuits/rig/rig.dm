@@ -11,6 +11,7 @@
 	name = "hardsuit control module"
 	icon = 'icons/obj/rig_modules.dmi'
 	desc = "A back-mounted hardsuit deployment and control mechanism."
+	flags = PHORONGUARD
 	slot_flags = SLOT_BACK
 	req_one_access = list()
 	req_access = list()
@@ -92,6 +93,7 @@
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires
 	var/datum/effect/effect/system/spark_spread/spark_system
+	var/datum/mini_hud/rig/minihud
 
 /obj/item/weapon/rig/examine()
 	. = ..()
@@ -187,6 +189,7 @@
 		START_PROCESSING(SSobj, src)
 	else
 		STOP_PROCESSING(SSobj, src)
+		QDEL_NULL(minihud) // Just in case we get removed some other way
 
 	// If we've lost any parts, grab them back.
 	var/mob/living/M
@@ -281,6 +284,7 @@
 
 	if(!seal_target && !suit_is_deployed())
 		M.visible_message("<span class='danger'>[M]'s suit flashes an error light.</span>","<span class='danger'>Your suit flashes an error light. It can't function properly without being fully deployed.</span>")
+		playsound(src, 'sound/machines/rig/rigerror.ogg', 20, FALSE)
 		failed_to_seal = 1
 
 	if(!failed_to_seal)
@@ -290,6 +294,7 @@
 			if(seal_delay && !do_after(M,seal_delay))
 				if(M)
 					to_chat(M, "<span class='warning'>You must remain still while the suit is adjusting the components.</span>")
+					playsound(src, 'sound/machines/rig/rigerror.ogg', 20, FALSE)
 				failed_to_seal = 1
 		if(!M)
 			failed_to_seal = 1
@@ -337,6 +342,7 @@
 						piece.armor["bio"] = 100
 					else
 						piece.armor["bio"] = src.armor["bio"]
+					playsound(src,'sound/machines/rig/rigservo.ogg', 10, FALSE)
 
 				else
 					failed_to_seal = 1
@@ -362,7 +368,13 @@
 
 	// Success!
 	canremove = seal_target
+	if(M.hud_used)
+		if(canremove)
+			QDEL_NULL(minihud)
+		else
+			minihud = new (M.hud_used, src)
 	to_chat(M, "<span class='notice'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></span>")
+	playsound(src, 'sound/machines/rig/rigstarted.ogg', 10, FALSE)
 	M.client.screen -= booting_L
 	qdel(booting_L)
 	booting_R.icon_state = "boot_done"
@@ -485,7 +497,7 @@
 			wearer.wearing_rig = null
 		wearer = null
 		return PROCESS_KILL
-	
+
 	// Run through cooling
 	coolingProcess()
 
@@ -500,6 +512,7 @@
 							to_chat(wearer, "<span class='danger'>Your suit beeps stridently, and suddenly goes dead.</span>")
 						else
 							to_chat(wearer, "<span class='danger'>Your suit beeps stridently, and suddenly you're wearing a leaden mass of metal and plastic composites instead of a powered suit.</span>")
+						playsound(src, 'sound/machines/rig/rigdown.ogg', 60, FALSE)
 					if(offline_vision_restriction == 1)
 						to_chat(wearer, "<span class='danger'>The suit optics flicker and die, leaving you with restricted vision.</span>")
 					else if(offline_vision_restriction == 2)
@@ -557,6 +570,7 @@
 
 	if(fail_msg)
 		to_chat(user, fail_msg)
+		playsound(src, 'sound/machines/rig/rigerror.ogg', 20, FALSE)
 		return 0
 
 	// This is largely for cancelling stealth and whatever.
@@ -806,6 +820,7 @@
 				if(istype(holder))
 					if(use_obj && check_slot == use_obj)
 						to_chat(H, "<span class='notice'><b>Your [use_obj.name] [use_obj.gender == PLURAL ? "retract" : "retracts"] swiftly.</b></span>")
+						playsound(src, 'sound/machines/rig/rigservo.ogg', 10, FALSE)
 						use_obj.canremove = 1
 						holder.drop_from_inventory(use_obj)
 						use_obj.forceMove(get_turf(src))
@@ -824,6 +839,7 @@
 					return
 			else
 				to_chat(H, "<span class='notice'>Your [use_obj.name] [use_obj.gender == PLURAL ? "deploy" : "deploys"] swiftly.</span>")
+				playsound(src, 'sound/machines/rig/rigservo.ogg', 10, FALSE)
 
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)

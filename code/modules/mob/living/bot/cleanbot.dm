@@ -4,6 +4,7 @@
 	icon_state = "cleanbot0"
 	req_one_access = list(access_robotics, access_janitor)
 	botcard_access = list(access_janitor)
+	pass_flags = PASSTABLE
 
 	locked = 0 // Start unlocked so roboticist can set them to patrol.
 	wait_if_pulled = 1
@@ -18,6 +19,11 @@
 /mob/living/bot/cleanbot/New()
 	..()
 	get_targets()
+
+/mob/living/bot/cleanbot/Destroy()
+	if(target)
+		cleanbot_reserved_turfs -= target
+	return ..()
 
 /mob/living/bot/cleanbot/handleIdle()
 	if(!screwloose && !oddbutton && prob(2))
@@ -65,18 +71,29 @@
 	return .
 
 /mob/living/bot/cleanbot/lookForTargets()
-	for(var/obj/effect/decal/cleanable/D in view(world.view, src)) // There was some odd code to make it start with nearest decals, it's unnecessary, this works
-		if(confirmTarget(D))
-			target = D
-			return
+	for(var/i = 0, i <= world.view, i++)
+		for(var/obj/effect/decal/cleanable/D in view(i, src))
+			if (i > 0 && get_dist(src, D) < i)
+				continue // already checked this one
+			else if(confirmTarget(D))
+				target = D
+				cleanbot_reserved_turfs += D
+				return
+
+/mob/living/bot/resetTarget()
+	cleanbot_reserved_turfs -= target
+	..()
 
 /mob/living/bot/cleanbot/confirmTarget(var/obj/effect/decal/cleanable/D)
 	if(!..())
-		return 0
+		return FALSE
+	if(D.loc in cleanbot_reserved_turfs)
+		return FALSE
 	for(var/T in target_types)
 		if(istype(D, T))
-			return 1
-	return 0
+			return TRUE
+	return FALSE
+
 
 /mob/living/bot/cleanbot/handleAdjacentTarget()
 	if(get_turf(target) == src.loc)
@@ -105,6 +122,7 @@
 			return
 		qdel(D)
 		if(D == target)
+			cleanbot_reserved_turfs -= target
 			target = null
 	busy = 0
 	update_icons()
@@ -193,6 +211,7 @@
 	target_types += /obj/effect/decal/cleanable/liquid_fuel
 	target_types += /obj/effect/decal/cleanable/mucus
 	target_types += /obj/effect/decal/cleanable/dirt
+	target_types += /obj/effect/decal/cleanable/filth
 
 	if(blood)
 		target_types += /obj/effect/decal/cleanable/blood
