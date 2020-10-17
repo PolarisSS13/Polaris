@@ -1,4 +1,7 @@
 
+/decl/cultural_info/faction/skrell
+	lazysetup_species = list(SPECIES_SKRELL)
+
 /decl/cultural_info/faction/skrell/SkrellianKingdoms
 	name = "Skrellian Kingdoms"
 	description = "Allegiance to the Skrellian Kingdoms."
@@ -13,3 +16,5 @@
 	name = "Ue-Katish Pirates"
 	description = "Ue-Katish ships have no caste system even for the truecaste Skrell and aliens who live there, although still regimented by rank and role in the ship's functioning. Ue-Katish ships are floating black markets where everything is available for the right price, including some of the galaxy's most well-connected information brokers and most skilled guns-for-hire. The Ue-Katish present the greatest Skrellian counterculture and feature heavily in romanticized human media, although at their hearts they are in fact bandits and criminals, and the black markets are filled with goods plundered from human and Skrellian trade ships."
 	subversive_potential = 1.3
+
+	lazysetup_species = list(SPECIES_SKRELL, SPECIES_TESHARI)

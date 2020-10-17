@@ -1,4 +1,7 @@
 
+/decl/cultural_info/culture/zaddat
+	lazysetup_species = list(SPECIES_ZADDAT)
+
 /decl/cultural_info/culture/zaddat/noble
 	name = "Noble Guild"
 	description = "Someone should finish this."

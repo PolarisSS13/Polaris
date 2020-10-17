@@ -1,4 +1,7 @@
 
+/decl/cultural_info/location/taj
+	lazysetup_species = list(SPECIES_TAJ)
+
 /decl/cultural_info/location/taj/Rarkajar
 	name = "Rarkajar"
 	description = "Situated in the Rakajar system, those hailing from the chilly tajaran homeworld of Meralar are a diverse lot indeed. Its one constant is sociopolitical inconstancy, as the grand international wars of old have made way in more modern times for scattered civil wars and long-lasting cold wars fought more along the boundaries of honour than all-out dominion. The traditionalist Hrarar, sea- and space-faring Njarjirii, tribal Zhan-Khazan, and all cultures in between and beyond all have their stakes in the great game being played, whether it's imposing their views by merit of strength or persuation, or defending one's land in turn. Warfare to some extent is a fact of life for many, and it along with the harsh landscapes have molded many tajaran into a hardy breed regardless of their individual walks of life."

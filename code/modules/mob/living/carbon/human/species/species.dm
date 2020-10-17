@@ -310,18 +310,21 @@
 			inherent_verbs = list()
 		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
 
+/datum/species/proc/setup_backgrounds()
 	if(automatically_acquire_backgrounds)
 		if(!LAZYLEN(available_cultural_info))
 			available_cultural_info = list(TAG_CULTURE = list(), TAG_HOMEWORLD = list(), TAG_FACTION = list(), TAG_RELIGION = list(), TAG_SUBSPECIES = list())
 
-		for(var/backgroundtag in available_cultural_info)
+		var/list/cultbyname = SSculture.cultural_info_by_name
 
-			for(var/decl/cultural_info/CI in subtypesof(/decl/cultural_info))
-				CI = initial(CI)
+		for(var/nametag in cultbyname)
+			var/decl/cultural_info/CI = cultbyname[nametag]
 
-				if(LAZYLEN(CI.lazysetup_species))
-					if(name in CI.lazysetup_species || SPECIES_ALL in CI.lazysetup_species)
-						available_cultural_info[backgroundtag] |= CI.name
+			if(!LAZYLEN(CI.lazysetup_species))
+				continue
+
+			if((name in CI.lazysetup_species) || (SPECIES_ALL in CI.lazysetup_species))
+				available_cultural_info[CI.category] |= nametag
 
 /datum/species/proc/sanitize_name(var/name, var/robot = 0)
 	return sanitizeName(name, MAX_NAME_LEN, robot)

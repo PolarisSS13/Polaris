@@ -26,6 +26,12 @@ SUBSYSTEM_DEF(culture)
 				tagged_info[culture.category] = list()
 			var/list/tag_list = tagged_info[culture.category]
 			tag_list[culture.name] = culture
+
+	for(var/speciesname in GLOB.all_species)
+		var/datum/species/S = GLOB.all_species[speciesname]
+
+		S.setup_backgrounds()
+
 	. = ..()
 
 /datum/controller/subsystem/culture/proc/get_culture(var/culture_ident)

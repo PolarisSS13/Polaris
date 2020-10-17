@@ -1,3 +1,7 @@
+
+/decl/cultural_info/location/human
+	lazysetup_species = list(SPECIES_ALL, SPECIES_HUMAN)
+
 /decl/cultural_info/location/human/earth
 	name = HOME_SYSTEM_HUMAN_EARTH
 	description = "Earth, home of humankind, has long been in a state of recovery following centuries of pollution and exploitation. Today, much of \

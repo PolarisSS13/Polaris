@@ -1,4 +1,7 @@
 
+/decl/cultural_info/location/skrell
+	lazysetup_species = list(SPECIES_SKRELL, SPECIES_TESHARI)
+
 /decl/cultural_info/location/skrell/QerrValis_QerrBalak
 
 

@@ -14,6 +14,9 @@
 		LANGUAGE_GUTTER,
 		LANGUAGE_SIGN
 	)
+
+	lazysetup_species = list(SPECIES_ALL, SPECIES_HUMAN)
+
 /*
 /decl/cultural_info/culture/human/earthling
 	name = CULTURE_HUMAN_EARTH

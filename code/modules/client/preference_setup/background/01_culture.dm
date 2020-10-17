@@ -20,6 +20,7 @@
 			write_to[cul] = TRUE
 
 	for(var/cul in write_to)
+		to_world("- [cul]")
 		var/decl/cultural_info/culture = SSculture.get_culture(cul)
 
 		if((robot && culture.whitelist == CULTURE_ONLY_ORGANIC) || (!robot && culture.whitelist == CULTURE_ONLY_MACHINE))

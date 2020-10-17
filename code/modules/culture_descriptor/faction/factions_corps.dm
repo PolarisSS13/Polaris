@@ -1,4 +1,7 @@
 
+/decl/cultural_info/faction/corp
+	lazysetup_species = list(SPECIES_ALL)
+
 /decl/cultural_info/faction/corp/nanotrasen
 	name = FACTION_NANOTRASEN
 	description = "NanoTrasen is one of the leading research and development companies in Solar space. Originally focused on consumer products, their early move into Phoron research and extraction has lead to them being the foremost experts on the substance and its uses. Nanotrasen also offers one of the most comprehensive medical plans in SolGov space, up to and including cloning, prosthetics and therapy, though some have accused the company of using its employees as 'guinea pigs' for new technologies."

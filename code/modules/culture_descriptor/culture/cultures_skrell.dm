@@ -1,4 +1,7 @@
 
+/decl/cultural_info/culture/skrell
+	lazysetup_species = list(SPECIES_SKRELL)
+
 /decl/cultural_info/culture/skrell/coreworlder
 	name = "Coreworlder"
 	description = "Someone should finish this."

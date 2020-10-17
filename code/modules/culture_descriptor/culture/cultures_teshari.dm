@@ -1,4 +1,7 @@
 
+/decl/cultural_info/culture/teshari
+	lazysetup_species = list(SPECIES_TESHARI)
+
 /decl/cultural_info/culture/teshari/otherpack
 	name = "Pack Teshari"
 	description = "Most Teshari follow the unique cultural traditions of their specific pack, which vary as widely as any other species' \
