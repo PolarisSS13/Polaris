@@ -432,9 +432,7 @@
 	set name = "Check Attacks"
 	set category = "IC"
 	set src = usr
-	return
 
-/mob/living/carbon/human/check_attacks()
 	var/dat = "<b><font size = 5>Known Attacks</font></b><br/><br/>"
 
 	if(default_attack)
