@@ -432,13 +432,6 @@
 	set name = "Check Attacks"
 	set category = "IC"
 	set src = usr
-
-	var/dat = "<b><font size = 5>Known Attacks</font></b><br/><br/>"
-
-	for(var/datum/unarmed_attack/u_attack in species.unarmed_attacks)
-		dat += "<b>Primarily [u_attack.attack_name] </b><br/><br/><br/>"
-
-	src << browse(dat, "window=checkattack")
 	return
 
 /mob/living/carbon/human/check_attacks()
