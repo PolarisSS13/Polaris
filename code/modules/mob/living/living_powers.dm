@@ -24,3 +24,4 @@
 	allow_self_surgery = !allow_self_surgery
 
 	to_chat(usr, "<span class='notice'>You will [allow_self_surgery ? "now" : "no longer"] attempt to operate upon yourself.</span>")
+	log_admin("DEBUG \[[world.timeofday]\]: [src.ckey ? "[src.name]:([src.ckey])" : "[src.name]"] has [allow_self_surgery ? "Enabled" : "Disabled"] self surgery.")
