@@ -52,6 +52,8 @@
 		dna.real_name = real_name
 		sync_organ_dna()
 
+	verbs |= /mob/living/proc/toggle_selfsurgery
+
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src
 	for(var/organ in organs)
@@ -259,7 +261,7 @@
 		return
 
 	spread_fire(AM)
-	
+
 	..() // call parent because we moved behavior to parent
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.

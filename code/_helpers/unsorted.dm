@@ -1176,7 +1176,7 @@ proc/is_hot(obj/item/W as obj)
 /proc/can_operate(mob/living/carbon/M, mob/living/user)
 	. = M.lying
 
-	if(user && M == user && ((world.time - user.l_move_time) >= 5 SECONDS) && user.a_intent == I_HELP)	// You can, technically, always operate on yourself after standing still. Inadvised, but you can.
+	if(user && M == user && user.allow_self_surgery && user.a_intent == I_HELP)	// You can, technically, always operate on yourself after standing still. Inadvised, but you can.
 
 		if(!M.isSynthetic())
 			. = TRUE
