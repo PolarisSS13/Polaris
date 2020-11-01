@@ -344,7 +344,7 @@
 				user.Blind(5)
 				user.eye_blurry = 5
 				// Don't cure being nearsighted
-				if(!(E.disabilities & NEARSIGHTED))
+				if(!(H.disabilities & NEARSIGHTED))
 					user.disabilities |= NEARSIGHTED
 					spawn(100)
 						user.disabilities &= ~NEARSIGHTED
