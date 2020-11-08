@@ -436,3 +436,37 @@
 
 /datum/asset/nanoui/send(client)
 	send_asset_list(client, common)
+
+
+//Pill sprites for UIs
+/datum/asset/chem_master
+	var/assets = list()
+	var/verify = FALSE
+
+/datum/asset/chem_master/register()
+	for(var/i = 1 to 24)
+		assets["pill[i].png"] = icon('icons/obj/chemical.dmi', "pill[i]")
+
+	for(var/i = 1 to 4)
+		assets["bottle-[i].png"] = icon('icons/obj/chemical.dmi', "bottle-[i]")
+
+	for(var/asset_name in assets)
+		register_asset(asset_name, assets[asset_name])
+
+/datum/asset/chem_master/send(client)
+	send_asset_list(client, assets, verify)
+
+//Cloning pod sprites for UIs
+/datum/asset/cloning
+	var/assets = list()
+	var/verify = FALSE
+
+/datum/asset/cloning/register()
+	assets["pod_idle.gif"] = icon('icons/obj/cloning.dmi', "pod_idle")
+	assets["pod_cloning.gif"] = icon('icons/obj/cloning.dmi', "pod_cloning")
+	assets["pod_mess.gif"] = icon('icons/obj/cloning.dmi', "pod_mess")
+	for(var/asset_name in assets)
+		register_asset(asset_name, assets[asset_name])
+
+/datum/asset/cloning/send(client)
+	send_asset_list(client, assets, verify)
