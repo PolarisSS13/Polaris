@@ -84,7 +84,6 @@
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
-	var/list/bad_external_organs = list()// organs we check until they are good.
 
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
@@ -115,6 +114,7 @@
 	var/mob/living/carbon/human/vr_link = null
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
+	butchery_loot = list(/obj/item/stack/animalhide/human = 1)
 
 	// Horray Furries!
 	var/datum/sprite_accessory/ears/ear_style = null
@@ -144,3 +144,4 @@
 
 	// Custom Species Name
 	var/custom_species
+

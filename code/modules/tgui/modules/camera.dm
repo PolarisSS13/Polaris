@@ -37,37 +37,7 @@
 	cam_screen.del_on_map_removal = FALSE
 	cam_screen.screen_loc = "[map_name]:1,1"
 	
-	cam_plane_masters = list()
-
-	// 'Utility' planes
-	cam_plane_masters += new /obj/screen/plane_master/fullbright						//Lighting system (lighting_overlay objects)
-	cam_plane_masters += new /obj/screen/plane_master/lighting							//Lighting system (but different!)
-	cam_plane_masters += new /obj/screen/plane_master/ghosts							//Ghosts!
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_AI_EYE}			//AI Eye!
-
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_STATUS}			//Status is the synth/human icon left side of medhuds
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_HEALTH}			//Health bar
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_LIFE}			//Alive-or-not icon
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_ID}				//Job ID icon
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_WANTED}			//Wanted status
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_IMPLOYAL}		//Loyalty implants
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_IMPTRACK}		//Tracking implants
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_IMPCHEM}		//Chemical implants
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_SPECIAL}		//"Special" role stuff
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_CH_STATUS_OOC}		//OOC status HUD
-
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_ADMIN1}			//For admin use
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_ADMIN2}			//For admin use
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_ADMIN3}			//For admin use
-
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_MESONS} 			//Meson-specific things like open ceilings.
-	cam_plane_masters += new /obj/screen/plane_master{plane = PLANE_BUILDMODE}			//Things that only show up while in build mode
-
-	// Real tangible stuff planes
-	cam_plane_masters += new /obj/screen/plane_master/main{plane = TURF_PLANE}
-	cam_plane_masters += new /obj/screen/plane_master/main{plane = OBJ_PLANE}
-	cam_plane_masters += new /obj/screen/plane_master/main{plane = MOB_PLANE}
-	cam_plane_masters += new /obj/screen/plane_master/cloaked								//Cloaked atoms!
+	cam_plane_masters = get_plane_masters()
 
 	for(var/plane in cam_plane_masters)
 		var/obj/screen/instance = plane
@@ -144,7 +114,7 @@
 	return data
 
 /datum/tgui_module/camera/tgui_static_data(mob/user)
-	var/list/data = list()
+	var/list/data = ..()
 	data["mapRef"] = map_name
 	var/list/cameras = get_available_cameras(user)
 	data["cameras"] = list()
@@ -160,7 +130,10 @@
 
 /datum/tgui_module/camera/tgui_act(action, params)
 	if(..())
-		return
+		return TRUE
+	
+	if(action && !issilicon(usr))
+		playsound(tgui_host(), "terminal_type", 50, 1)
 
 	if(action == "switch_camera")
 		var/c_tag = params["name"]
@@ -168,10 +141,32 @@
 		var/obj/machinery/camera/C = cameras["[ckey(c_tag)]"]
 		active_camera = C
 		playsound(tgui_host(), get_sfx("terminal_type"), 25, FALSE)
-
 		reload_cameraview()
-
 		return TRUE
+
+	if(action == "pan")
+		var/dir = params["dir"]
+		var/turf/T = get_turf(active_camera)
+		for(var/i in 1 to 10)
+			T = get_step(T, dir)
+		if(T)
+			var/obj/machinery/camera/target
+			var/best_dist = INFINITY
+
+			var/list/possible_cameras = get_available_cameras(usr)
+			for(var/obj/machinery/camera/C in get_area(T))
+				if(!possible_cameras["[ckey(C.c_tag)]"])
+					continue
+				var/dist = get_dist(C, T)
+				if(dist < best_dist)
+					best_dist = dist
+					target = C
+
+			if(target)
+				active_camera = target
+				playsound(tgui_host(), get_sfx("terminal_type"), 25, FALSE)
+				reload_cameraview()
+				. = TRUE
 
 /datum/tgui_module/camera/proc/differential_check()
 	var/turf/T = get_turf(active_camera)
@@ -284,33 +279,7 @@
 // If/when that is done, just move all the PC_ specific data and stuff to the modular computers themselves
 // instead of copying this approach here.
 /datum/tgui_module/camera/ntos
-	tgui_id = "NtosCameraConsole"
-
-/datum/tgui_module/camera/ntos/tgui_state()
-	return GLOB.tgui_ntos_state
-
-/datum/tgui_module/camera/ntos/tgui_static_data()
-	. = ..()
-	
-	var/datum/computer_file/program/host = tgui_host()
-	if(istype(host) && host.computer)
-		. += host.computer.get_header_data()
-
-/datum/tgui_module/camera/ntos/tgui_act(action, params)
-	if(..())
-		return
-
-	var/datum/computer_file/program/host = tgui_host()
-	if(istype(host) && host.computer)
-		if(action == "PC_exit")
-			host.computer.kill_program()
-			return TRUE
-		if(action == "PC_shutdown")
-			host.computer.shutdown_computer()
-			return TRUE
-		if(action == "PC_minimize")
-			host.computer.minimize_program(usr)
-			return TRUE
+	ntos = TRUE
 
 // ERT Version provides some additional networks.
 /datum/tgui_module/camera/ntos/ert

@@ -98,9 +98,9 @@
 	// Sound used when equipping the items into a valid slot.
 	var/equip_sound
 	// pickup sound - this is the default
-	var/pickup_sound = 'sound/items/pickup/device.ogg'
+	var/pickup_sound = "generic_pickup"
 	// drop sound - this is the default
-	var/drop_sound = 'sound/items/drop/device.ogg'
+	var/drop_sound = "generic_drop"
 
 	var/tip_timer // reference to timer id for a tooltip we might open soon
 
@@ -785,6 +785,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // My best guess as to why this is here would be that it does so little. Still, keep it under all the procs, for sanity's sake.
 /obj/item/device
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 
 //Worn icon generation for on-mob sprites
 /obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer,var/icon/clip_mask = null)
