@@ -306,6 +306,8 @@
 /obj/machinery/porta_turret/pointdefense
 	name = "point-defense turret"
 	turret_type = "core"
+	desc = "A basic ship-mounted rock-breaker."
+	description_info = "This turret is capable of blasting incoming meteors into gravel, but it is very limited in range."
 
 	installation = /obj/item/weapon/gun/energy/mininglaser
 
@@ -317,8 +319,14 @@
 	check_synth	 = FALSE
 	check_all = FALSE
 	fire_at_movement = TRUE
+	stay_up = TRUE
 	ailock = FALSE
 	check_down = FALSE
+
+/obj/machinery/porta_turret/pointdefense/orderable
+	enabled = FALSE
+	anchored = FALSE
+	locked = FALSE
 
 /obj/machinery/porta_turret/Initialize()
 	//Sets up a spark system
