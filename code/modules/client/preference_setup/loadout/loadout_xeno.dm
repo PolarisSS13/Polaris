@@ -204,7 +204,7 @@
 /datum/gear/uniform/dept/undercoat/cargo
 	display_name = "cargo undercoat (Teshari)"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/cargo
-	allowed_roles = list("Quartermaster","Cargo Technician")
+	allowed_roles = list("Cargo Technician","Quartermaster","Shaft Miner")
 
 /datum/gear/uniform/dept/undercoat/mining
 	display_name = "mining undercoat (Teshari)"
@@ -244,7 +244,7 @@
 /datum/gear/uniform/dept/undercoat/medical
 	display_name = "medical undercoat (Teshari)"
 	path = /obj/item/clothing/under/seromi/undercoat/jobs/medical
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Geneticist")
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist","Psychiatrist")
 
 /datum/gear/uniform/dept/undercoat/chemistry
 	display_name = "chemist undercoat (Teshari)"
@@ -345,7 +345,7 @@
 /datum/gear/suit/dept/cloak/cargo
 	display_name = "cargo cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/cargo
-	allowed_roles = list("Quartermaster","Shaft Miner" ,"Cargo Technician")
+	allowed_roles = list("Quartermaster","Shaft Miner","Cargo Technician")
 
 /datum/gear/suit/dept/cloak/cargo/New()
 	..()
@@ -358,7 +358,7 @@
 /datum/gear/suit/dept/cloak/mining
 	display_name = "mining cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/mining
-	allowed_roles = list("Quartermaster","Shaft Miner" ,"Cargo Technician")
+	allowed_roles = list("Quartermaster","Shaft Miner")
 
 /datum/gear/suit/dept/cloak/mining/New()
 	..()
@@ -408,7 +408,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cloaks))
 
 /datum/gear/suit/dept/cloak/atmos
-	display_name = "atmoshperics cloak (Teshari)"
+	display_name = "atmospherics cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/atmos
 	allowed_roles = list("Chief Engineer","Atmospheric Technician")
 
@@ -423,7 +423,7 @@
 /datum/gear/suit/dept/cloak/research
 	display_name = "scientist cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/sci
-	allowed_roles = list("Research Director","Scientist","Xenobiologist")
+	allowed_roles = list("Research Director","Scientist","Roboticist","Xenobiologist")
 
 /datum/gear/suit/dept/cloak/research/New()
 	..()
@@ -449,7 +449,7 @@
 /datum/gear/suit/dept/cloak/medical
 	display_name = "medical cloak (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/cloak/jobs/medical
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Geneticist")
+	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Paramedic","Geneticist", "Psychiatrist")
 
 /datum/gear/suit/dept/cloak/medical/New()
 	..()
