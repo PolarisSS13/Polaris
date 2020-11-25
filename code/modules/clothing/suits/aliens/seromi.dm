@@ -161,12 +161,6 @@
 	icon_state = "tesh_cloak_mine"
 	item_state = "tesh_cloak_mine"
 
-/obj/item/clothing/suit/storage/seromi/cloak/jobs/command
-	name = "command cloak"
-	desc = "A soft Teshari cloak made for the Command department"
-	icon_state = "tesh_cloak_comm"
-	item_state = "tesh_cloak_comm"
-
 //Engineering
 
 /obj/item/clothing/suit/storage/seromi/cloak/jobs/ce

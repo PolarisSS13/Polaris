@@ -522,6 +522,10 @@
 	whitelisted = SPECIES_TESHARI
 	sort_category = "Xenowear"
 
+/datum/gear/uniform/smockcolor/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/suit/beltcloak
 	display_name = "belted cloak selection (Teshari)"
 	path = /obj/item/clothing/suit/storage/seromi/beltcloak/standard
@@ -575,9 +579,19 @@
 		cloaks[initial(cloak_type.name)] = cloak_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cloaks))
 
-/datum/gear/uniform/smockcolor/New()
+/datum/gear/uniform/worksuit
+	display_name = "worksuit selection (Teshari)"
+	path = /obj/item/clothing/under/seromi/undercoat/standard/worksuit
+	whitelisted = SPECIES_TESHARI
+	sort_category = "Xenowear"
+
+/datum/gear/uniform/worksuit/New()
 	..()
-	gear_tweaks += gear_tweak_free_color_choice
+	var/list/worksuits = list()
+	for(var/worksuit in typesof(/obj/item/clothing/under/seromi/undercoat/standard/worksuit))
+		var/obj/item/clothing/under/seromi/undercoat/standard/worksuit/worksuit_type = worksuit
+		worksuits[initial(worksuit_type.name)] = worksuit_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(worksuits))
 
 /datum/gear/uniform/undercoatcolor
 	display_name = "undercoat, recolorable (Teshari)"

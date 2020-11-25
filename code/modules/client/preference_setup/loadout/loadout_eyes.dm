@@ -20,7 +20,7 @@
 	path = /obj/item/clothing/glasses/sunglasses/blindfold
 
 /datum/gear/eyes/whiteblindfold //I may have lost my sight, but at least these folks can see my RAINBOW BLINDFOLD
-	display_name = "white blindfold (recolorable)"
+	display_name = "blindfold, white (recolorable)"
 	path = /obj/item/clothing/glasses/sunglasses/blindfold/whiteblindfold
 
 /datum/gear/eyes/whiteblindfold/New()

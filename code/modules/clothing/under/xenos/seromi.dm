@@ -77,6 +77,58 @@
 	name = "small blue and grey dress"
 	icon_state = "teshari_bluegreydress"
 
+// Worksuits
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit
+	name = "small black and red worksuit"
+	icon_state = "teshari_black_red_worksuit"
+	item_state = "teshari_black_red_worksuit"
+	desc = "A small worksuit designed for a Teshari"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/blackpurple
+	name = "small black and purple worksuit"
+	icon_state = "teshari_black_purple_worksuit"
+	item_state = "teshari_black_purple_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/blackorange
+	name = "small black and orange worksuit"
+	icon_state = "teshari_black_orange_worksuit"
+	item_state = "teshari_black_orange_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/blackblue
+	name = "small black and blue worksuit"
+	icon_state = "teshari_black_blue_worksuit"
+	item_state = "teshari_black_blue_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/blackgreen
+	name = "small black and greeen worksuit"
+	icon_state = "teshari_black_green_worksuit"
+	item_state = "teshari_black_green_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/whitered
+	name = "small white and red worksuit"
+	icon_state = "teshari_white_red_worksuit"
+	item_state = "teshari_white_red_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/whitepurple
+	name = "small white and purple worksuit"
+	icon_state = "teshari_white_purple_worksuit"
+	item_state = "teshari_white_purple_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/whiteorange
+	name = "small white and orange worksuit"
+	icon_state = "teshari_white_orange_worksuit"
+	item_state = "teshari_white_orange_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/whiteblue
+	name = "small white and blue worksuit"
+	icon_state = "teshari_white_blue_worksuit"
+	item_state = "teshari_white_blue_worksuit"
+
+/obj/item/clothing/under/seromi/undercoat/standard/worksuit/whitegreen
+	name = "small white and green worksuit"
+	icon_state = "teshari_white_green_worksuit"
+	item_state = "teshari_white_green_worksuit"
+
 //Standard Undercoats
 
 /obj/item/clothing/under/seromi/undercoat
@@ -205,7 +257,7 @@
 
 //Job Undercoats
 
-/obj/item/clothing/under/seromi/undercoat/jobs/
+/obj/item/clothing/under/seromi/undercoat/jobs
 	icon = 'icons/mob/species/seromi/deptjacket.dmi'
 	icon_override = 'icons/mob/species/seromi/deptjacket.dmi'
 
