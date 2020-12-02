@@ -1301,3 +1301,49 @@ I said no!
 		/obj/item/weapon/reagent_containers/food/snacks/bacon
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/porkbowl
+
+/datum/recipe/gigapuddi
+	reagents = list("milk" = 15)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/egg
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/gigapuddi
+
+/datum/recipe/gigapuddi/happy
+	reagents = list("milk" = 15, "sugar" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/egg
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/gigapuddi/happy
+
+/datum/recipe/gigapuddi/anger
+	reagents = list("milk" = 15, "sodiumchloride" = 5)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/egg,
+		/obj/item/weapon/reagent_containers/food/snacks/egg
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/gigapuddi/anger
+
+/datum/recipe/buchedenoel
+	fruit = list("berries" = 2)
+	reagents = list("milk" = 5, "flour" = 15, "cream" = 10, "coco" = 5, "egg" = 6)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/buchedenoel
+
+/datum/recipe/turkey
+	fruit = list("carrot" = 2)
+	reagents = list("sodiumchloride" = 1, "blackpepper" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/meat/chicken,
+		/obj/item/weapon/reagent_containers/food/snacks/slice/bread,
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sliceable/turkey
+
+/datum/recipe/cinnamonbun
+	reagents = list("sugar" = 15, "cream" = 10)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/dough
+		)
+	result = /obj/item/weapon/reagent_containers/food/snacks/cinnamonbun
+	result_quantity = 4
