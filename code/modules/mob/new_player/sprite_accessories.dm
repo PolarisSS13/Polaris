@@ -1212,6 +1212,7 @@ shaved
 	icon_state = "facial_neckfluff"
 	gender = NEUTER
 	species_allowed = list(SPECIES_TAJ, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_none
 	name = "None"
@@ -1219,6 +1220,7 @@ shaved
 	icon_state = "none"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_blaze
 	name = "Blaze"
@@ -1226,6 +1228,7 @@ shaved
 	icon_state = "vulp_facial_blaze"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_vulpine
 	name = "Vulpine"
@@ -1233,6 +1236,7 @@ shaved
 	icon_state = "vulp_facial_vulpine"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_earfluff
 	name = "Earfluff"
@@ -1240,6 +1244,7 @@ shaved
 	icon_state = "vulp_facial_earfluff"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_mask
 	name = "Mask"
@@ -1247,6 +1252,7 @@ shaved
 	icon_state = "vulp_facial_mask"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_patch
 	name = "Patch"
@@ -1254,6 +1260,7 @@ shaved
 	icon_state = "vulp_facial_patch"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_ruff
 	name = "Ruff"
@@ -1261,6 +1268,7 @@ shaved
 	icon_state = "vulp_facial_ruff"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_kita
 	name = "Kita"
@@ -1268,6 +1276,7 @@ shaved
 	icon_state = "vulp_facial_kita"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /datum/sprite_accessory/facial_hair/vulp_swift
 	name = "Swift"
@@ -1275,6 +1284,7 @@ shaved
 	icon_state = "vulp_facial_swift"
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	gender = NEUTER
+	color_blend_mode = ICON_MULTIPLY
 
 /*
 ///////////////////////////////////
@@ -1286,7 +1296,7 @@ shaved
 
 /datum/sprite_accessory/facial_hair
 	icon = 'icons/mob/Human_face.dmi'
-	color_blend_mode = ICON_MULTIPLY
+	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"
