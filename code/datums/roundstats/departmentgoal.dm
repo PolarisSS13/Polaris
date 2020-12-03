@@ -10,27 +10,46 @@ GLOBAL_LIST(active_department_goals)
 		GLOB.department_goals[category] = list()
 
 		for(var/subtype in subtypesof(/datum/goal))
-			var/datum/goal/SG = initial(subtype)
+			var/datum/goal/SG = new subtype()
 
 			if(SG.name == "goal")
 				continue
 
 			if(SG.category == category)
-				GLOB.department_goals[category] |= new subtype()
+				GLOB.department_goals[category] |= SG
 
 	for(var/category in GLOB.active_department_goals)
 		GLOB.active_department_goals[category] = list()
-		var/list/cat_goals = GLOB.department_goals[category].Copy()
+		var/list/cat_goals = GLOB.department_goals[category]
 
 		var/goal_count = rand(2,4)
 
 		for(var/count = 1 to goal_count)
-			var/datum/goal/G = pick(cat_goals)
+			var/datum/goal/G
 
-			G.active_goal = TRUE
-			cat_goals -= G
+			if(LAZYLEN(cat_goals))
+				G = pick(cat_goals)
 
-			GLOB.active_department_goals[category] |= G
+			if(G)
+				G.active_goal = TRUE
+				cat_goals -= G
+
+				GLOB.active_department_goals[category] |= G
+
+/hook/roundend/proc/checkDepartmentGoals()
+	for(var/category in GLOB.active_department_goals)
+		var/list/cat_goals = GLOB.active_department_goals[category]
+
+		to_world("<span class='filter_system'><b>[category]</b></span>")
+
+		if(!LAZYLEN(cat_goals))
+			to_world("<span class='filter_system'>There were no assigned goals!</span>")
+
+		else
+			for(var/datum/goal/G in cat_goals)
+				var/success = G.check_completion()
+				to_world("<span class='filter_system'>[success ? "<span class='notice'>[G.name]</span>" : "<span class='warning'>[G.name]</span>"]</span>")
+				to_world("<span class='filter_system'>[G.goal_text]</span>")
 
 /datum/goal
 	var/name = "goal"
