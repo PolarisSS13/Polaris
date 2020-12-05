@@ -1,3 +1,5 @@
+#define STAIR_MOVE_DELAY 10 // Animation delay for non-living objects moving up/down stairs
+
 /obj/structure/stairs
 	name = "Stairs"
 	desc = "Stairs leading to another deck.  Not too useful if the gravity goes out."
@@ -44,6 +46,7 @@
 		return FALSE
 
 	// Case 4: They're unlinked
+	B.dir = get_dir(get_turf(B), get_turf(M))
 	B.top = T
 	B.middle = M
 	T.dir	 = B.dir
@@ -63,6 +66,19 @@
 	icon_state = "0,0"
 	var/obj/structure/stairs/top/top = null
 	var/obj/structure/stairs/middle/middle = null
+
+/obj/structure/stairs/bottom/Initialize()
+	if(!GetAbove(src))
+		warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
+		return INITIALIZE_HINT_QDEL
+	. = ..()
+
+/obj/structure/stairs/bottom/Destroy()
+	if(top)
+		top.bottom = null
+	if(middle)
+		middle.bottom = null
+	..()
 
 // These are necessarily fairly similar, but because the positional relations are different, we have to copy-pasta a fair bit
 /obj/structure/stairs/bottom/check_integrity(var/obj/structure/stairs/bottom/B = null,
@@ -101,6 +117,7 @@
 
 	// Else, we have to look in other directions
 	for(var/dir in cardinal - src.dir)
+		to_world("scanning [dir]")
 		B2 = get_step(src, dir)
 		T2 = GetAbove(B2)
 		if(!istype(B2) || !istype(T2))
@@ -108,6 +125,7 @@
 		
 		T = locate(/obj/structure/stairs/top)    in T2
 		M = locate(/obj/structure/stairs/middle) in B2
+		to_world("found [T] and [M]")
 		if(..(src, M, T, O))
 			return TRUE
 	
@@ -117,15 +135,84 @@
 /obj/structure/stairs/bottom/Crossed(var/atom/movable/AM, var/atom/oldloc)
 	
 	// If we're coming from the top of the stairs, don't trap us in an infinite staircase
-	if(top in oldloc)
+	// Or if we fell down the openspace
+	if((top in oldloc) || oldloc == GetAbove(src))
 		return
 	
-	// Animate moving onto M
-	// Move to Top
+	if(isobserver(AM)) // Ghosts have their own methods for going up and down
+		return
+	
+	if(AM.pulledby) // Animating the movement of pulled things is handled when the puller goes up the stairs
+		return
+	
+	var/animation_delay = STAIR_MOVE_DELAY
+	var/atom/movable/pulling = null
+	if(isliving(AM))
+		var/mob/living/L = AM
+		animation_delay = L.movement_delay()
+		if(L.pulling && !L.pulling.anchored)
+			pulling = L.pulling
+	
+	// If the stairs aren't broken, go up.
 	if(check_integrity())
-		AM.forceMove(get_turf(top))
+		AM.dir = src.dir
+		// Animate moving onto M
+		switch(src.dir)
+			if(NORTH)
+				animate(AM, AM.pixel_y += 32, time = animation_delay)
+			if(SOUTH)
+				animate(AM, AM.pixel_y += -32, time = animation_delay)
+			if(EAST)
+				animate(AM, AM.pixel_x += 32, time = animation_delay)
+			if(WEST)
+				animate(AM, AM.pixel_x += -32, time = animation_delay)
 
-	// Animate moving from O to T
+		// Bring the pulled object along behind us
+		if(pulling)
+			switch(src.dir)
+				if(NORTH)
+					animate(pulling, pulling.pixel_y += 32, time = animation_delay)
+				if(SOUTH)
+					animate(pulling, pulling.pixel_y += -32, time = animation_delay)
+				if(EAST)
+					animate(pulling, pulling.pixel_x += 32, time = animation_delay)
+				if(WEST)
+					animate(pulling, pulling.pixel_x += -32, time = animation_delay)
+
+		// Go up the stairs
+		spawn(animation_delay)
+			// Move to Top
+			AM.forceMove(get_turf(top))
+
+			// Animate moving from O to T
+			switch(src.dir)
+				if(NORTH)
+					AM.pixel_y -= 64
+					animate(AM, AM.pixel_y += 32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+				if(SOUTH)
+					AM.pixel_y -= -64
+					animate(AM, AM.pixel_y += -32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+				if(EAST)
+					AM.pixel_x -= 64
+					animate(AM, AM.pixel_x += 32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+				if(WEST)
+					AM.pixel_x -= -64
+					animate(AM, AM.pixel_x += -32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+		
+		
+			// If something is being pulled, bring it along directly to avoid the mob being torn away from it due to movement delays
+			if(pulling)
+				spawn(animation_delay)
+					switch(src.dir)
+						if(NORTH)
+							pulling.pixel_y -= 32
+						if(SOUTH)
+							pulling.pixel_y -= -32
+						if(EAST)
+							pulling.pixel_x -= 32
+						if(WEST)
+							pulling.pixel_x -= -32
+					pulling.forceMove(get_turf(top)) // Just bring it along directly, no fussing with animation timing
 	return TRUE
 
 //////////////////////////////////////////////////////////////////////
@@ -139,6 +226,19 @@
 
 	var/obj/structure/stairs/top/top = null
 	var/obj/structure/stairs/bottom/bottom = null
+
+/obj/structure/stairs/middle/Initialize()
+	if(!GetAbove(src))
+		warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
+		return INITIALIZE_HINT_QDEL
+	. = ..()
+
+/obj/structure/stairs/middle/Destroy()
+	if(top)
+		top.middle = null
+	if(bottom)
+		bottom.middle = null
+	..()
 
 // These are necessarily fairly similar, but because the positional relations are different, we have to copy-pasta a fair bit
 /obj/structure/stairs/middle/check_integrity(var/obj/structure/stairs/bottom/B = null,
@@ -206,6 +306,19 @@
 	var/obj/structure/stairs/middle/middle = null
 	var/obj/structure/stairs/bottom/bottom = null
 
+/obj/structure/stairs/bottom/Initialize()
+	if(GetBelow(src))
+		warning("Stair created without level below: ([loc.x], [loc.y], [loc.z])")
+		return INITIALIZE_HINT_QDEL
+	. = ..()
+
+/obj/structure/stairs/top/Destroy()
+	if(middle)
+		middle.top = null
+	if(bottom)
+		bottom.top = null
+	..()
+
 // These are necessarily fairly similar, but because the positional relations are different, we have to copy-pasta a fair bit
 /obj/structure/stairs/top/check_integrity(var/obj/structure/stairs/bottom/B = null,
 										  var/obj/structure/stairs/middle/M = null,
@@ -257,16 +370,85 @@
 
 /obj/structure/stairs/top/Crossed(var/atom/movable/AM, var/atom/oldloc)
 	
-	// If we're coming from the top of the stairs, don't trap us in an infinite staircase
-	if(bottom in oldloc || middle in oldloc)
+	// If we're coming from the bottom of the stairs, don't trap us in an infinite staircase
+	// Or if we climb up the middle
+	if((bottom in oldloc) || oldloc == GetBelow(src))
 		return
 	
-	// Animate moving onto M
-	// Move to Top
+	if(isobserver(AM)) // Ghosts have their own methods for going up and down
+		return
+	
+	if(AM.pulledby) // Animating the movement of pulled things is handled when the puller goes up the stairs
+		return
+	
+	var/animation_delay = STAIR_MOVE_DELAY
+	var/atom/movable/pulling = null
+	if(isliving(AM))
+		var/mob/living/L = AM
+		animation_delay = L.movement_delay()
+		if(L.pulling && !L.pulling.anchored)
+			pulling = L.pulling
+	
+	// If the stairs aren't broken, go up.
 	if(check_integrity())
-		AM.forceMove(get_turf(bottom))
+		AM.dir = turn(src.dir, 180)
+		// Animate moving onto M
+		switch(src.dir)
+			if(NORTH)
+				animate(AM, AM.pixel_y -= 32, time = animation_delay)
+			if(SOUTH)
+				animate(AM, AM.pixel_y -= -32, time = animation_delay)
+			if(EAST)
+				animate(AM, AM.pixel_x -= 32, time = animation_delay)
+			if(WEST)
+				animate(AM, AM.pixel_x -= -32, time = animation_delay)
 
-	// Animate moving from O to T
+		// Bring the pulled object along behind us
+		if(pulling)
+			switch(src.dir)
+				if(NORTH)
+					animate(pulling, pulling.pixel_y -= 32, time = animation_delay)
+				if(SOUTH)
+					animate(pulling, pulling.pixel_y -= -32, time = animation_delay)
+				if(EAST)
+					animate(pulling, pulling.pixel_x -= 32, time = animation_delay)
+				if(WEST)
+					animate(pulling, pulling.pixel_x -= -32, time = animation_delay)
+
+		// Go up the stairs
+		spawn(animation_delay)
+			// Move to Top
+			AM.forceMove(get_turf(bottom))
+
+			// Animate moving from O to T
+			switch(src.dir)
+				if(NORTH)
+					AM.pixel_y += 64
+					animate(AM, AM.pixel_y -= 32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+				if(SOUTH)
+					AM.pixel_y += -64
+					animate(AM, AM.pixel_y -= -32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+				if(EAST)
+					AM.pixel_x += 64
+					animate(AM, AM.pixel_x -= 32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+				if(WEST)
+					AM.pixel_x += -64
+					animate(AM, AM.pixel_x -= -32, time = animation_delay)//, easing = SINE_EASING | EASE_OUT)
+		
+		
+			// If something is being pulled, bring it along directly to avoid the mob being torn away from it due to movement delays
+			if(pulling)
+				spawn(animation_delay)
+					switch(src.dir)
+						if(NORTH)
+							pulling.pixel_y += 32
+						if(SOUTH)
+							pulling.pixel_y += -32
+						if(EAST)
+							pulling.pixel_x += 32
+						if(WEST)
+							pulling.pixel_x += -32
+					pulling.forceMove(get_turf(bottom)) // Just bring it along directly, no fussing with animation timing
 	return TRUE
 
 
