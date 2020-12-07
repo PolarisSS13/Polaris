@@ -229,6 +229,8 @@
 		unloader.toggle_speed()
 	for(var/obj/machinery/conveyor_switch/cswitch in refinery_area.contents)
 		cswitch.toggle_speed()
+	for(var/obj/machinery/mineral/stacking_machine/stacker in refinery_area.contents)
+		stacker.toggle_speed()
 
 /obj/machinery/mineral/processing_unit/process()
 

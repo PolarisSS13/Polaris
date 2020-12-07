@@ -44,7 +44,7 @@
 	if(forced)
 		speed_process = forced
 	else
-		peed_process = !speed_process // switching gears
+		speed_process = !speed_process // switching gears
 	if(speed_process) // high gear
 		STOP_MACHINE_PROCESSING(src)
 		START_PROCESSING(SSfastprocess, src)
