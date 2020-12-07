@@ -57,13 +57,15 @@
 	M.bottom = B
 	return TRUE
 
-
+// Used to actually move stuff up/down stairs. Removed from Crossed for special cases
+/obj/structure/stairs/proc/use_stairs(var/atom/movable/AM, var/atom/oldloc)
+	return
 
 //////////////////////////////////////////////////////////////////////
 // Bottom piece that you step ontor //////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 /obj/structure/stairs/bottom
-	icon_state = "0,0"
+	icon_state = "stair_l"
 	var/obj/structure/stairs/top/top = null
 	var/obj/structure/stairs/middle/middle = null
 
@@ -117,7 +119,6 @@
 
 	// Else, we have to look in other directions
 	for(var/dir in cardinal - src.dir)
-		to_world("scanning [dir]")
 		B2 = get_step(src, dir)
 		T2 = GetAbove(B2)
 		if(!istype(B2) || !istype(T2))
@@ -125,7 +126,6 @@
 		
 		T = locate(/obj/structure/stairs/top)    in T2
 		M = locate(/obj/structure/stairs/middle) in B2
-		to_world("found [T] and [M]")
 		if(..(src, M, T, O))
 			return TRUE
 	
@@ -133,7 +133,9 @@
 	return FALSE
 
 /obj/structure/stairs/bottom/Crossed(var/atom/movable/AM, var/atom/oldloc)
-	
+	use_stairs(AM, oldloc)
+
+/obj/structure/stairs/bottom/use_stairs(var/atom/movable/AM, var/atom/oldloc)	
 	// If we're coming from the top of the stairs, don't trap us in an infinite staircase
 	// Or if we fell down the openspace
 	if((top in oldloc) || oldloc == GetAbove(src))
@@ -219,7 +221,7 @@
 // Middle piece that you are animated onto/off of ////////////////////
 //////////////////////////////////////////////////////////////////////
 /obj/structure/stairs/middle
-	icon_state = "0,1"
+	icon_state = "stair_u"
 	opacity   = TRUE
 	density   = TRUE // Too high to simply step up on
 	climbable = TRUE // But they can be climbed if the bottom is out
@@ -296,18 +298,22 @@
 	. = ..()
 	if(check_integrity())
 		do_climb(user)
+		user.forceMove(get_turf(top)) // You can't really drag things when you have to climb up the gap in the stairs yourself
+
+/obj/structure/stairs/middle/Bumped(mob/user)
+	if(check_integrity() && bottom && (bottom in get_turf(user))) // Bottom must be enforced because the middle stairs don't actually need the bottom
 		user.forceMove(get_turf(top))
 
 //////////////////////////////////////////////////////////////////////
 // Top piece that you step onto //////////////////////////////////////
 //////////////////////////////////////////////////////////////////////
 /obj/structure/stairs/top
-	icon_state = "0,0"
+	icon_state = "stair_l" // Darker, marginally less contrast w/ openspace
 	var/obj/structure/stairs/middle/middle = null
 	var/obj/structure/stairs/bottom/bottom = null
 
-/obj/structure/stairs/bottom/Initialize()
-	if(GetBelow(src))
+/obj/structure/stairs/top/Initialize()
+	if(!GetBelow(src))
 		warning("Stair created without level below: ([loc.x], [loc.y], [loc.z])")
 		return INITIALIZE_HINT_QDEL
 	. = ..()
@@ -369,7 +375,10 @@
 	return
 
 /obj/structure/stairs/top/Crossed(var/atom/movable/AM, var/atom/oldloc)
-	
+	use_stairs(AM, oldloc)
+	. = ..()
+
+/obj/structure/stairs/top/use_stairs(var/atom/movable/AM, var/atom/oldloc)
 	// If we're coming from the bottom of the stairs, don't trap us in an infinite staircase
 	// Or if we climb up the middle
 	if((bottom in oldloc) || oldloc == GetBelow(src))
@@ -452,53 +461,16 @@
 	return TRUE
 
 
-
-/*
-/obj/structure/stairs/Initialize()
-	. = ..()
-	for(var/turf/turf in locs)
-		var/turf/simulated/open/above = GetAbove(turf)
-		if(!above)
-			warning("Stair created without level above: ([loc.x], [loc.y], [loc.z])")
-			return qdel(src)
-		if(!istype(above))
-			above.ChangeTurf(/turf/simulated/open)
-
-/obj/structure/stairs/CheckExit(atom/movable/mover as mob|obj, turf/target as turf)
-	if(get_dir(loc, target) == dir && upperStep(mover.loc))
-		return FALSE
-	. = ..()
-
-/obj/structure/stairs/Bumped(atom/movable/A)
-	// This is hackish but whatever.
-	var/turf/target = get_step(GetAbove(A), dir)
-	if(target.Enter(A, src)) // Pass src to be ignored to avoid infinate loop
-		A.forceMove(target)
-		if(isliving(A))
-			var/mob/living/L = A
-			if(L.pulling && !L.pulling.anchored)
-				L.pulling.forceMove(target)
-
-/obj/structure/stairs/proc/upperStep(var/turf/T)
-	return (T == loc)
-
-/obj/structure/stairs/CanPass(obj/mover, turf/source, height, airflow)
-	return airflow || !density
-*/
-
-
-
-
-
-
 // Mapping pieces, placed at the bottommost part of the stairs
 /obj/structure/stairs/spawner
 	name = "Stairs spawner"
+	icon = 'icons/obj/structures/stairs_64x64.dmi'
+	icon_state = ""
 
 /obj/structure/stairs/spawner/Initialize()
 	. = ..()
-	var/turf/B1 = get_turf(src)
-	var/turf/B2 = get_step(B1, dir)
+	var/turf/B1 = get_step(get_turf(src), turn(dir, 180))
+	var/turf/B2 = get_turf(src)
 	var/turf/T1 = GetAbove(B1)
 	var/turf/T2 = GetAbove(B2)
 	
@@ -525,15 +497,23 @@
 
 	return INITIALIZE_HINT_QDEL
 	
-
+// For ease of spawning. While you *can* spawn the base type and set its dir, this is useful for adminbus and a little bit quicker to map in
 /obj/structure/stairs/spawner/north
 	dir = NORTH
+	bound_height = 64
+	bound_y = -32
+	pixel_y = -32
 
 /obj/structure/stairs/spawner/south
 	dir = SOUTH
+	bound_height = 64
 
 /obj/structure/stairs/spawner/east
 	dir = EAST
+	bound_width = 64
+	bound_x = -32
+	pixel_x = -32
 
 /obj/structure/stairs/spawner/west
 	dir = WEST
+	bound_width = 64
