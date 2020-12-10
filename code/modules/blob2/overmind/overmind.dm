@@ -69,7 +69,7 @@ var/list/overminds = list()
 
 /mob/observer/blob/Move(NewLoc, Dir = 0)
 	if(placed)
-		var/obj/structure/blob/B = locate() in range("3x3", NewLoc)
+		var/obj/structure/blob/B = locate() in view(6, NewLoc)
 		if(B)
 			forceMove(NewLoc)
 			return TRUE
