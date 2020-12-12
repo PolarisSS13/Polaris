@@ -513,6 +513,8 @@
 				visible_message("<span class='notice'>\The [src] clunks as it vends an additional item.</span>")
 		playsound(src, "sound/[vending_sound]", 100, 1, 1)
 
+		GLOB.items_sold_shift_roundstat++
+
 		status_message = ""
 		status_error = 0
 		vend_ready = 1
