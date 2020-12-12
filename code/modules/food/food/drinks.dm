@@ -5,8 +5,8 @@
 	name = "drink"
 	desc = "yummy"
 	icon = 'icons/obj/drinks.dmi'
-	drop_sound = 'sound/items/drop/bottle.ogg'
-	pickup_sound = 'sound/items/pickup/bottle.ogg'
+	drop_sound = 'sound/items/drop/drinkglass.ogg'
+	pickup_sound =  'sound/items/pickup/drinkglass.ogg'
 	icon_state = null
 	flags = OPENCONTAINER
 	amount_per_transfer_from_this = 5
@@ -43,6 +43,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/proc/open(mob/user)
 	playsound(src,"canopen", rand(10,50), 1)
+	GLOB.cans_opened_roundstat++
 	to_chat(user, "<span class='notice'>You open [src] with an audible pop!</span>")
 	flags |= OPENCONTAINER
 
@@ -234,6 +235,7 @@
 	trash = /obj/item/trash/coffee
 	center_of_mass = list("x"=15, "y"=13)
 	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/h_chocolate/Initialize()
 	..()
@@ -248,6 +250,7 @@
 	trash = /obj/item/trash/coffee
 	center_of_mass = list("x"=16, "y"=14)
 	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/greentea/Initialize()
 	. = ..()
@@ -262,6 +265,7 @@
 	trash = /obj/item/trash/coffee
 	center_of_mass = list("x"=16, "y"=14)
 	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/chaitea/Initialize()
 	. = ..()
@@ -276,6 +280,7 @@
 	trash = /obj/item/trash/coffee
 	center_of_mass = list("x"=16, "y"=14)
 	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/decaf/Initialize()
 	. = ..()
@@ -289,6 +294,7 @@
 	trash = /obj/item/trash/ramen
 	center_of_mass = list("x"=16, "y"=11)
 	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/dry_ramen/Initialize()
 	..()
@@ -302,6 +308,7 @@
 	volume = 10
 	center_of_mass = list("x"=16, "y"=12)
 	drop_sound = 'sound/items/drop/papercup.ogg'
+	pickup_sound = 'sound/items/pickup/papercup.ogg'
 
 /obj/item/weapon/reagent_containers/food/drinks/sillycup/Initialize()
 	. = ..()

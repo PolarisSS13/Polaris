@@ -12,6 +12,8 @@
 	var/throwpass = 0
 	var/germ_level = GERM_LEVEL_AMBIENT // The higher the germ level, the more germ on the atom.
 	var/simulated = 1 //filter for actions - used by lighting overlays
+	var/atom_say_verb = "says"
+	var/bubble_icon = "normal" ///what icon the atom uses for speechbubbles
 	var/fluorescent // Shows up under a UV light.
 
 	var/last_bumped = 0
@@ -208,6 +210,7 @@
 	if(user.client?.prefs.examine_text_mode == EXAMINE_MODE_SWITCH_TO_PANEL)
 		user.client.statpanel = "Examine" // Switch to stat panel
 
+	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, output)
 	return output
 
 // Don't make these call bicon or anything, these are what bicon uses. They need to return an icon.
@@ -221,6 +224,7 @@
 
 //called to set the atom's dir and used to add behaviour to dir-changes
 /atom/proc/set_dir(new_dir)
+	SEND_SIGNAL(src, COMSIG_ATOM_DIR_CHANGE, dir, new_dir)
 	. = new_dir != dir
 	dir = new_dir
 
@@ -589,3 +593,34 @@
 		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		</font>
 		"}
+
+/atom/proc/atom_say(message)
+	if(!message)
+		return
+	var/list/speech_bubble_hearers = list()
+	for(var/mob/M in get_mobs_in_view(7, src))
+		M.show_message("<span class='game say'><span class='name'>[src]</span> [atom_say_verb], \"[message]\"</span>", 2, null, 1)
+		if(M.client)
+			speech_bubble_hearers += M.client
+
+	if(length(speech_bubble_hearers))
+		var/image/I = image('icons/mob/talk.dmi', src, "[bubble_icon][say_test(message)]", FLY_LAYER)
+		I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
+		INVOKE_ASYNC(GLOBAL_PROC, /.proc/flick_overlay, I, speech_bubble_hearers, 30)
+
+/atom/proc/speech_bubble(bubble_state = "", bubble_loc = src, list/bubble_recipients = list())
+	return
+
+/atom/Entered(atom/movable/AM, atom/old_loc)
+	. = ..()
+	GLOB.moved_event.raise_event(AM, old_loc, AM.loc)
+	SEND_SIGNAL(src, COMSIG_ATOM_ENTERED, AM, old_loc)
+
+/atom/Exit(atom/movable/AM, atom/new_loc)
+	. = ..()
+	if(SEND_SIGNAL(src, COMSIG_ATOM_EXIT, AM, new_loc) & COMPONENT_ATOM_BLOCK_EXIT)
+		return FALSE
+
+/atom/Exited(atom/movable/AM, atom/new_loc)
+	. = ..()
+	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, AM, new_loc)

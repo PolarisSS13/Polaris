@@ -31,7 +31,10 @@
 	var/initial_icon = null				//Mech type for resetting icon. Only used for reskinning kits (see custom items)
 	var/can_move = 1
 	var/mob/living/carbon/occupant = null
+
 	var/step_in = 10					//Make a step in step_in/10 sec.
+	var/encumbrance_gap = 1			//How many points of slowdown are negated from equipment? Added to the mech's base step_in.
+
 	var/dir_in = 2						//What direction will the mech face when entered/powered on? Defaults to South.
 	var/step_energy_drain = 10
 	var/health = 300 					//Health is health
@@ -195,6 +198,7 @@
 	var/datum/action/innate/mecha/mech_toggle_cloaking/cloak_action = new
 
 	var/weapons_only_cycle = FALSE	//So combat mechs don't switch to their equipment at times.
+
 /obj/mecha/Initialize()
 	..()
 
@@ -319,6 +323,8 @@
 
 	if(smoke_possible)	//Just making sure nothing is running.
 		qdel(smoke_system)
+
+	GLOB.mech_destroyed_roundstat++
 
 	QDEL_NULL(pr_int_temp_processor)
 	QDEL_NULL(pr_inertial_movement)
@@ -644,17 +650,20 @@
 /obj/mecha/proc/get_step_delay()
 	var/tally = 0
 
-	if(overload)
-		tally = min(1, round(step_in/2))
+	if(LAZYLEN(equipment))
+		for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
+			if(ME.get_step_delay())
+				tally += ME.get_step_delay()
+
+		if(tally <= encumbrance_gap)	// If the total is less than our encumbrance gap, ignore equipment weight.
+			tally = 0
+		else	// Otherwise, start the tally after cutting that gap out.
+			tally -= encumbrance_gap
 
 	for(var/slot in internal_components)
 		var/obj/item/mecha_parts/component/C = internal_components[slot]
 		if(C && C.get_step_delay())
 			tally += C.get_step_delay()
-
-	for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
-		if(ME.get_step_delay())
-			tally += ME.get_step_delay()
 
 	var/obj/item/mecha_parts/component/actuator/actuator = internal_components[MECH_ACTUATOR]
 
@@ -677,7 +686,10 @@
 					break
 			break
 
-	return max(1, round(tally, 0.1))
+	if(overload)	// At the end, because this would normally just make the mech *slower* since tally wasn't starting at 0.
+		tally = min(1, round(tally/2))
+
+	return max(1, round(tally, 0.1))	// Round the total to the nearest 10th. Can't go lower than 1 tick. Even humans have a delay longer than that.
 
 /obj/mecha/proc/dyndomove(direction)
 	if(!can_move)
@@ -1892,7 +1904,7 @@
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
-		playsound(src, 'sound/machines/windowdoor.ogg', 50, 1)
+		playsound(src, 'sound/machines/door/windowdoor.ogg', 50, 1)
 		if(occupant.client && cloaked_selfimage)
 			occupant.client.images += cloaked_selfimage
 		play_entered_noise(occupant)
