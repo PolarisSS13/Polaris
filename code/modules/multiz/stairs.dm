@@ -147,13 +147,24 @@
 	if(AM.pulledby) // Animating the movement of pulled things is handled when the puller goes up the stairs
 		return
 	
-	var/animation_delay = STAIR_MOVE_DELAY
-	var/atom/movable/pulling = null
+	var/animation_delay = STAIR_MOVE_DELAY // Default value
+	var/list/atom/movable/pulling = list() // Will also include grabbed mobs
 	if(isliving(AM))
 		var/mob/living/L = AM
+
+		if(L.grabbed_by.len) // Same as pulledby, whoever's holding you will keep you from going down stairs.
+			return
+
+		// If the object has a measurable movement delay, use that
 		animation_delay = L.movement_delay()
+
+		// If the object is pulling or grabbing anything, we'll want to move those too. A grab chain may be disrupted in doing so.
 		if(L.pulling && !L.pulling.anchored)
-			pulling = L.pulling
+			to_world("adding [L.pulling] to pulling")
+			pulling |= L.pulling
+		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
+			to_world("adding [G.affecting] to pulling")
+			pulling |= G.affecting
 	
 	// If the stairs aren't broken, go up.
 	if(check_integrity())
@@ -169,17 +180,20 @@
 			if(WEST)
 				animate(AM, AM.pixel_x += -32, time = animation_delay)
 
-		// Bring the pulled object along behind us
-		if(pulling)
+		// Bring the pulled/grabbed object(s) along behind us
+		for(var/atom/movable/P in pulling)
+			to_world("attempting to move [P]")
+			P.forceMove(get_turf(src)) // They will move onto the turf but won't get past the check earlier in crossed. Aligns animation more cleanly
 			switch(src.dir)
 				if(NORTH)
-					animate(pulling, pulling.pixel_y += 32, time = animation_delay)
+					animate(P, P.pixel_y += 32, time = animation_delay)
 				if(SOUTH)
-					animate(pulling, pulling.pixel_y += -32, time = animation_delay)
+					animate(P, P.pixel_y += -32, time = animation_delay)
 				if(EAST)
-					animate(pulling, pulling.pixel_x += 32, time = animation_delay)
+					animate(P, P.pixel_x += 32, time = animation_delay)
 				if(WEST)
-					animate(pulling, pulling.pixel_x += -32, time = animation_delay)
+					animate(P, P.pixel_x += -32, time = animation_delay)
+
 
 		// Go up the stairs
 		spawn(animation_delay)
@@ -203,18 +217,23 @@
 		
 		
 			// If something is being pulled, bring it along directly to avoid the mob being torn away from it due to movement delays
-			if(pulling)
+			for(var/atom/movable/P in pulling)
 				spawn(animation_delay)
 					switch(src.dir)
 						if(NORTH)
-							pulling.pixel_y -= 32
+							P.pixel_y -= 32
 						if(SOUTH)
-							pulling.pixel_y -= -32
+							P.pixel_y -= -32
 						if(EAST)
-							pulling.pixel_x -= 32
+							P.pixel_x -= 32
 						if(WEST)
-							pulling.pixel_x -= -32
-					pulling.forceMove(get_turf(top)) // Just bring it along directly, no fussing with animation timing
+							P.pixel_x -= -32
+					P.forceMove(get_turf(top)) // Just bring it along directly, no fussing with animation timing
+					if(isliving(P))
+						var/mob/living/L = P
+						if(L.client)
+							L.client.Process_Grab() // Update any miscellanous grabs, possibly break grab-chains
+
 	return TRUE
 
 //////////////////////////////////////////////////////////////////////
@@ -389,14 +408,25 @@
 	
 	if(AM.pulledby) // Animating the movement of pulled things is handled when the puller goes up the stairs
 		return
-	
-	var/animation_delay = STAIR_MOVE_DELAY
-	var/atom/movable/pulling = null
+
+	var/animation_delay = STAIR_MOVE_DELAY // Default value
+	var/list/atom/movable/pulling = list() // Will also include grabbed mobs
 	if(isliving(AM))
 		var/mob/living/L = AM
+
+		if(L.grabbed_by.len) // Same as pulledby, whoever's holding you will keep you from going down stairs.
+			return
+
+		// If the object has a measurable movement delay, use that
 		animation_delay = L.movement_delay()
+
+		// If the object is pulling or grabbing anything, we'll want to move those too. A grab chain may be disrupted in doing so.
 		if(L.pulling && !L.pulling.anchored)
-			pulling = L.pulling
+			to_world("adding [L.pulling] to pulling")
+			pulling |= L.pulling
+		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
+			to_world("adding [G.affecting] to pulling")
+			pulling |= G.affecting
 	
 	// If the stairs aren't broken, go up.
 	if(check_integrity())
@@ -404,7 +434,7 @@
 		// Animate moving onto M
 		switch(src.dir)
 			if(NORTH)
-				animate(AM, AM.pixel_y -= 32, time = animation_delay)
+				animate(AM, AM.pixel_y -= 32, time = animation_delay) // Incrementing/decrementing to preserve prior values
 			if(SOUTH)
 				animate(AM, AM.pixel_y -= -32, time = animation_delay)
 			if(EAST)
@@ -412,17 +442,19 @@
 			if(WEST)
 				animate(AM, AM.pixel_x -= -32, time = animation_delay)
 
-		// Bring the pulled object along behind us
-		if(pulling)
+		// Bring the pulled/grabbed object(s) along behind us
+		for(var/atom/movable/P in pulling)
+			to_world("attempting to move [P]")
+			P.forceMove(get_turf(src)) // They will move onto the turf but won't get past the check earlier in crossed. Aligns animation more cleanly
 			switch(src.dir)
 				if(NORTH)
-					animate(pulling, pulling.pixel_y -= 32, time = animation_delay)
+					animate(P, P.pixel_y -= 32, time = animation_delay)
 				if(SOUTH)
-					animate(pulling, pulling.pixel_y -= -32, time = animation_delay)
+					animate(P, P.pixel_y -= -32, time = animation_delay)
 				if(EAST)
-					animate(pulling, pulling.pixel_x -= 32, time = animation_delay)
+					animate(P, P.pixel_x -= 32, time = animation_delay)
 				if(WEST)
-					animate(pulling, pulling.pixel_x -= -32, time = animation_delay)
+					animate(P, P.pixel_x -= -32, time = animation_delay)
 
 		// Go up the stairs
 		spawn(animation_delay)
@@ -446,18 +478,23 @@
 		
 		
 			// If something is being pulled, bring it along directly to avoid the mob being torn away from it due to movement delays
-			if(pulling)
+			for(var/atom/movable/P in pulling)
 				spawn(animation_delay)
 					switch(src.dir)
 						if(NORTH)
-							pulling.pixel_y += 32
+							P.pixel_y += 32
 						if(SOUTH)
-							pulling.pixel_y += -32
+							P.pixel_y += -32
 						if(EAST)
-							pulling.pixel_x += 32
+							P.pixel_x += 32
 						if(WEST)
-							pulling.pixel_x += -32
-					pulling.forceMove(get_turf(bottom)) // Just bring it along directly, no fussing with animation timing
+							P.pixel_x += -32
+					P.forceMove(get_turf(bottom)) // Just bring it along directly, no fussing with animation timing
+					if(isliving(P))
+						var/mob/living/L = P
+						if(L.client)
+							L.client.Process_Grab() // Update any miscellanous grabs, possibly break grab-chains
+
 	return TRUE
 
 
