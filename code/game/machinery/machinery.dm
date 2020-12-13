@@ -319,8 +319,8 @@ Class Procs:
 		return 0
 	if(!component_parts)
 		return 0
-	to_chat(user, "<span class='notice'>Following parts detected in the machine:</span>")
-	for(var/obj/item/C in component_parts) //var/var/obj/item/C? // man that was awful to read why did you tell me that was there?
+	to_chat(user, "<span class='notice'>Following parts detected in [src]:</span>")
+	for(var/obj/item/C in component_parts)
 		to_chat(user, "<span class='notice'>    [C.name]</span>")
 	if(panel_open || !R.panel_req)
 		var/obj/item/weapon/circuitboard/CB = circuit
