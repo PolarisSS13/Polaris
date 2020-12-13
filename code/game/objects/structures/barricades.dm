@@ -173,7 +173,7 @@
 		return 1
 	return 0
 
-/obj/structure/barricade/CanPass(atom/movable/mover, turf/target)//So bullets will fly over and stuff.
+/obj/structure/barricade/sandbag/CanPass(atom/movable/mover, turf/target)
 	. = ..()
 
 	if(.)
@@ -181,5 +181,5 @@
 			var/obj/item/projectile/P = mover
 
 			if(P.firer && get_dist(P.firer, src) > 1)	// If you're firing from adjacent turfs, you are unobstructed.
-				if(P.armor_penetration < (material.protectiveness + material.hardness))
+				if(P.armor_penetration < (material.protectiveness + material.hardness) || prob(33))
 					return FALSE
