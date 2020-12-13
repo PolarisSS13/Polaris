@@ -1,5 +1,5 @@
 /datum/wires/mines
-	wire_count = 6
+	wire_count = 7
 	random = 1
 	holder_type = /obj/effect/mine
 
@@ -9,6 +9,7 @@
 #define WIRE_DUMMY_1	8
 #define WIRE_DUMMY_2	16
 #define WIRE_BADDISARM	32
+#define WIRE_TRAP		64
 
 /datum/wires/mines/GetInteractWindow()
 	. = ..()
@@ -32,7 +33,13 @@
 
 		if(WIRE_DISARM)
 			C.visible_message("[bicon(C)] *click!*", "[bicon(C)] *click!*")
-			new C.mineitemtype(get_turf(C))
+			var/obj/effect/mine/MI = new C.mineitemtype(get_turf(C))
+
+			if(C.trap)
+				MI.trap = C.trap
+				C.trap = null
+				MI.trap.forceMove(MI)
+
 			spawn(0)
 				qdel(C)
 				return
@@ -48,6 +55,15 @@
 			C.visible_message("[bicon(C)] *BEEPBEEPBEEP*", "[bicon(C)] *BEEPBEEPBEEP*")
 			spawn(20)
 				C.explode()
+
+		if(WIRE_TRAP)
+			C.visible_message("[bicon(C)] *click!*", "[bicon(C)] *click!*")
+
+			if(mended)
+				C.visible_message("[bicon(C)] - The mine recalibrates[C.camo_net ? ", revealing \the [C.trap] inside." : "."]")
+
+				C.alpha = 255
+
 	return
 
 /datum/wires/mines/UpdatePulsed(var/index)
@@ -74,6 +90,10 @@
 
 		if(WIRE_BADDISARM)
 			C.visible_message("[bicon(C)] *ping*", "[bicon(C)] *ping*")
+
+		if(WIRE_TRAP)
+			C.visible_message("[bicon(C)] *ping*", "[bicon(C)] *ping*")
+
 	return
 
 /datum/wires/mines/CanUse(var/mob/living/L)
