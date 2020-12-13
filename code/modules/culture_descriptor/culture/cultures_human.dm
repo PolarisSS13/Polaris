@@ -122,7 +122,8 @@
 
 /decl/cultural_info/culture/human/lunar
 	name = CULTURE_HUMAN_LUNAR
-	description = "Someone should finish this."
+	description = "The whole of Luna is given over to the vast grinding bureaucracy of SolGov. As the capital of the nation, it hosts a vast number of embassies, \
+	executive offices, and legislatures, as well as a large Fleet base and the acompanying admirality."
 
 /decl/cultural_info/culture/human/titanian
 	name = CULTURE_HUMAN_TITAN

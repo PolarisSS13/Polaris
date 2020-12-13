@@ -22,4 +22,6 @@
 
 /decl/cultural_info/culture/tajaran/spacer
 	name = "Tajaran Spacer"
-	description = "Someone should finish this."
+	description = "With the ongoing space race of the last six decades, particularly the post-First Contact boom of the last four, several thousand tajaran have been born off-world in habitats, colony ship and beyond, with no true homeworld and sometimes never so much has setting foot on terrestrial ground. Spacers can be found among many walks of life, often having a unique upbringing among the challenges of space travel that can sometimes put them at odds with the dynamics of more conventional terrestrial life."
+	economic_power = 0.9
+	subversive_potential = 1.1
