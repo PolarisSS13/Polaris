@@ -1,6 +1,6 @@
 
 /decl/cultural_info/location/taj
-	lazysetup_species = list(SPECIES_TAJ)
+	lazysetup_species = list(SPECIES_TAJ, SPECIES_TESHARI)
 
 /decl/cultural_info/location/taj/Rarkajar
 	name = "Rarkajar"
@@ -29,3 +29,4 @@
 	distance = "N/A"
 	capital = "N/A"
 	economic_power = 0.9
+	lazysetup_species = list(SPECIES_TAJ)
