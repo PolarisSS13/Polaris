@@ -140,15 +140,19 @@ var/list/gear_datums = list()
 	. += "</b></center></td></tr>"
 
 	var/datum/loadout_category/LC = loadout_categories[current_tab]
-	. += "<tr><td colspan=3><hr></td></tr>"
+	. += "<tr><td colspan=3><center><hr></center></td></tr>"
 	. += "<tr><td colspan=3><b><center>[LC.category]</center></b></td></tr>"
-	. += "<tr><td colspan=3><hr></td></tr>"
+	. += "<tr><td colspan=3><center><hr></center></td></tr>"
 	for(var/gear_name in LC.gear)
 		var/datum/gear/G = LC.gear[gear_name]
 		var/ticked = (G.display_name in pref.gear)
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"
 		. += "<td><font size=2><i>[G.description]</i></font></td></tr>"
+		if(G.allowed_roles)
+			. += "<tr><td colspan=3><font size=1><b>Required Role: </b><i>[english_list(G.allowed_roles, and_text = " or ")]</i></font></td></tr>"
+		if(G.allowed_backgrounds)
+			. += "<tr><td colspan=3><font size=1><b>Required Background: </b><i>[english_list(G.allowed_backgrounds, and_text = " or ")]</i></font></td></tr>"
 		if(ticked)
 			. += "<tr><td colspan=3>"
 			for(var/datum/gear_tweak/tweak in G.gear_tweaks)
@@ -235,6 +239,7 @@ var/list/gear_datums = list()
 	var/cost = 1           //Number of points used. Items in general cost 1 point, storage/armor/gloves/special use costs 2 points.
 	var/slot               //Slot to equip to.
 	var/list/allowed_roles //Roles that can spawn with this item.
+	var/list/allowed_backgrounds // Backgrounds that can spawn with this item
 	var/whitelisted        //Term to check the whitelist for..
 	var/sort_category = "General"
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.

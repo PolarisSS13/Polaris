@@ -251,6 +251,38 @@
 		/datum/mob_descriptor/build
 		)
 
+	var/list/available_cultural_info = list(
+		TAG_CULTURE =   list(CULTURE_OTHER,
+							CULTURE_HUMAN,
+							CULTURE_HUMAN_EARTH,
+							CULTURE_HUMAN_OTHER
+							),
+		TAG_HOMEWORLD = list(HOME_SYSTEM_STATELESS,
+							HOME_SYSTEM_OTHER,
+							HOME_SYSTEM_HUMAN_EARTH
+							),
+		TAG_FACTION =   list(FACTION_OTHER,
+							FACTION_NANOTRASEN
+							),
+		TAG_RELIGION =  list(RELIGION_OTHER,
+							RELIGION_ATHEISM,
+							RELIGION_AGNOSTICISM
+							),
+		TAG_SUBSPECIES = list(SUBSPECIES_GENERIC,
+							SUBSPECIES_VATBORN
+							)
+	)
+
+	/*
+	 * The LazyMan's way of setting up the above lists.
+	 * If this is TRUE, the available_cultural_info list only -needs- to contain any specifically unique backgrounds not handled by the system.
+	 */
+	var/automatically_acquire_backgrounds = TRUE
+
+	var/list/force_cultural_info =                list()
+	var/list/default_cultural_info =              list()
+	var/list/additional_available_cultural_info = list()
+
 	//This is used in character setup preview generation (prefences_setup.dm) and human mob
 	//rendering (update_icons.dm)
 	var/color_mult = 0
@@ -299,6 +331,22 @@
 		if(!inherent_verbs)
 			inherent_verbs = list()
 		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
+
+/datum/species/proc/setup_backgrounds()
+	if(automatically_acquire_backgrounds)
+		if(!LAZYLEN(available_cultural_info))
+			available_cultural_info = list(TAG_CULTURE = list(), TAG_HOMEWORLD = list(), TAG_FACTION = list(), TAG_RELIGION = list(), TAG_SUBSPECIES = list())
+
+		var/list/cultbyname = SSculture.cultural_info_by_name
+
+		for(var/nametag in cultbyname)
+			var/decl/cultural_info/CI = cultbyname[nametag]
+
+			if(!LAZYLEN(CI.lazysetup_species))
+				continue
+
+			if((name in CI.lazysetup_species) || (SPECIES_ALL in CI.lazysetup_species))
+				available_cultural_info[CI.category] |= nametag
 
 /datum/species/proc/sanitize_name(var/name, var/robot = 0)
 	return sanitizeName(name, MAX_NAME_LEN, robot)

@@ -368,10 +368,28 @@ var/global/datum/controller/occupations/job_master
 
 					var/permitted
 					// Check if it is restricted to certain roles
-					if(G.allowed_roles)
-						for(var/job_name in G.allowed_roles)
-							if(job.title == job_name)
-								permitted = 1
+					if(G.allowed_roles || G.allowed_backgrounds)
+						var/roles_pass = TRUE
+						if(G.allowed_roles)
+							for(var/job_name in G.allowed_roles)
+								roles_pass = FALSE
+								if(job.title == job_name)
+									roles_pass = TRUE
+									break
+
+						var/backgrounds_pass = TRUE
+						if(LAZYLEN(G.allowed_backgrounds))
+							backgrounds_pass = FALSE
+
+							if(LAZYLEN(G.allowed_backgrounds))
+								var/list/checklist = list(H.home_system,H.citizenship,H.personal_faction,H.religion,H.custculture,H.subspecies)
+								checklist &= G.allowed_backgrounds
+
+								if(LAZYLEN(checklist))
+									backgrounds_pass = TRUE
+
+						permitted = (backgrounds_pass && roles_pass)
+
 					else
 						permitted = 1
 
@@ -381,7 +399,7 @@ var/global/datum/controller/occupations/job_master
 
 					// If they aren't, tell them
 					if(!permitted)
-						to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+						to_chat(H, "<span class='warning'>Your current species, job, background, or whitelist status does not permit you to spawn with [thing]!</span>")
 						continue
 
 					// Implants get special treatment

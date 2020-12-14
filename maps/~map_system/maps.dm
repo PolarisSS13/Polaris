@@ -38,7 +38,7 @@ var/list/all_maps = list()
 
 	// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/map_levels
-	
+
 	// E-mail TLDs to use for NTnet modular computer e-mail addresses
 	var/list/usable_email_tlds = list("freemail.nt")
 
@@ -102,6 +102,36 @@ var/list/all_maps = list()
 	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
+
+	// Some maps include areas for that map only and don't exist when not compiled, so Travis needs this to learn of new areas that are specific to a map.
+	// Culture defaults.
+	var/list/available_cultural_info = list(
+		TAG_HOMEWORLD = list(
+			HOME_SYSTEM_HUMAN_EARTH,
+			HOME_SYSTEM_OTHER
+		),
+		TAG_FACTION = list(
+			FACTION_NANOTRASEN,
+			FACTION_OTHER
+		),
+		TAG_CULTURE = list(
+			CULTURE_HUMAN,
+			CULTURE_HUMAN_EARTH,
+			CULTURE_HUMAN_OTHER,
+			CULTURE_OTHER
+		),
+		TAG_RELIGION = list(
+			RELIGION_OTHER,
+			RELIGION_AGNOSTICISM
+		)
+	)
+
+	var/list/default_cultural_info = list(
+		TAG_HOMEWORLD = HOME_SYSTEM_HUMAN_EARTH,
+		TAG_FACTION =   FACTION_NANOTRASEN,
+		TAG_CULTURE =   CULTURE_HUMAN_EARTH,
+		TAG_RELIGION =  RELIGION_AGNOSTICISM
+	)
 
 	// Some maps include areas for that map only and don't exist when not compiled, so CI needs this to learn of new areas that are specific to a map.
 	var/list/unit_test_exempt_areas = list()

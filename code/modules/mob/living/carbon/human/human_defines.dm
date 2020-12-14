@@ -56,8 +56,12 @@
 	var/citizenship = ""
 	var/personal_faction = ""
 	var/religion = ""
+	var/custculture = ""
+	var/subspecies = ""
 	var/antag_faction = ""
 	var/antag_vis = ""
+
+	var/list/cultural_info = list()
 
 	//Equipment slots
 	var/obj/item/wear_suit = null
