@@ -493,7 +493,7 @@ var/list/gamemode_cache = list()
 					config.respawn_time = raw_minutes MINUTES
 
 				if ("respawn_message")
-					config.respawn_message = value
+					config.respawn_message = "<span class='notice'><B>[value]</B></span>"
 
 				if ("servername")
 					config.server_name = value
