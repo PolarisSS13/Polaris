@@ -324,6 +324,7 @@
 	name = "direction sign"
 	desc = "A direction sign, claiming to know the way."
 	icon_state = "direction"
+	icon = 'icons/obj/decals_directions.dmi'
 
 /obj/structure/sign/directions/New()
 	..()
@@ -344,10 +345,20 @@
 	desc = "A direction sign, pointing out which way the Security department is."
 	icon_state = "direction_sec"
 
+/obj/structure/sign/directions/armory
+	name = "\improper Armory"
+	desc = "A direction sign, pointing out which way the Armory is."
+	icon_state = "direction_armory"
+
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
 	desc = "A direction sign, pointing out which way the Medical Bay is."
 	icon_state = "direction_med"
+
+/obj/structure/sign/directions/virology
+	name = "\improper Virology"
+	desc = "A direction sign, pointing out which way the Virology Lab is."
+	icon_state = "direction_viro"
 
 /obj/structure/sign/directions/evac
 	name = "\improper Evacuation"
@@ -357,16 +368,404 @@
 /obj/structure/sign/directions/bridge
 	name = "\improper Bridge"
 	icon_state = "direction_bridge"
+	desc = "A direction sign, pointing out which way the Bridge is."
+
+/obj/structure/sign/directions/command
+	name = "\improper Command"
+	icon_state = "direction_command"
+	desc = "A direction sign, pointing out which way the Command center is."
+
+/obj/structure/sign/directions/elevator
+	name = "\improper Elevator"
+	desc = "A direction sign, pointing out the way to the nearest elevator."
+	icon_state = "direction_elv"
+
+/obj/structure/sign/directions/stairwell
+	name = "\improper Stairwell"
+	desc = "A direction sign, pointing out the way to the nearest stairwell."
+	icon_state = "stairwell"
+
+/obj/structure/sign/directions/stairs_up
+	name = "\improper Stairs Up"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go up."
+	icon_state = "stairs_up"
+
+/obj/structure/sign/directions/stairs_down
+	name = "\improper Stairs Down"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go down."
+	icon_state = "stairs_down"
+
+/obj/structure/sign/directions/ladderwell
+	name = "\improper Access Shaft"
+	desc = "A direction sign, pointing out the way to the nearest access shaft."
+	icon_state = "ladderwell"
+
+/obj/structure/sign/directions/ladder_up
+	name = "\improper Ladder Up"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes up."
+	icon_state = "ladder_up"
+
+/obj/structure/sign/directions/ladder_down
+	name = "\improper Ladder Down"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes down."
+	icon_state = "ladder_down"
 
 /obj/structure/sign/directions/cargo
 	name = "\improper Cargo department"
 	desc = "A direction sign, pointing out which way the Cargo department is."
 	icon_state = "direction_crg"
 
+/obj/structure/sign/directions/mining
+	name = "\improper Mining department"
+	desc = "A direction sign, pointing out which way the Mining department is."
+	icon_state = "direction_crg"
+
+/obj/structure/sign/directions/refinery
+	name = "\improper Refinery"
+	desc = "A direction sign, pointing out which way the Refinery is."
+	icon_state = "direction_crg"
+
 /obj/structure/sign/directions/cryo
 	name = "\improper Cryogenic Storage"
-	desc = "A direction sign, pointing out which way cryogenic storage is."
+	desc = "A direction sign, pointing out which way Cryogenic storage is."
 	icon_state = "direction_cry"
+
+/obj/structure/sign/directions/exit
+	name = "\improper Emergency Exit"
+	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route."
+	icon_state = "exit_sign"
+	
+/obj/structure/sign/directions/vines/
+	name = "\improper Overgrown Sign"
+	desc = "A direction sign that's overgrown with vines. <b>You shouldn't be able to find this: please inform a member of staff!</b>"
+	icon_state = "vines"
+
+/obj/structure/sign/directions/vines/science
+	name = "\improper Science department"
+	desc = "A direction sign, pointing out which way the Science department is. It appears to be a bit overgrown."
+	icon_state = "direction_sci_vines"
+
+/obj/structure/sign/directions/vines/engineering
+	name = "\improper Engineering department"
+	desc = "A direction sign, pointing out which way the Engineering department is. It appears to be a bit overgrown."
+	icon_state = "direction_eng_vines"
+
+/obj/structure/sign/directions/vines/security
+	name = "\improper Security department"
+	desc = "A direction sign, pointing out which way the Security department is. It appears to be a bit overgrown."
+	icon_state = "direction_sec_vines"
+
+/obj/structure/sign/directions/vines/armory
+	name = "\improper Armory"
+	desc = "A direction sign, pointing out which way the Armory is. It appears to be a bit overgrown."
+	icon_state = "direction_armory_vines"
+
+/obj/structure/sign/directions/vines/medical
+	name = "\improper Medical Bay"
+	desc = "A direction sign, pointing out which way the Medical Bay is. It appears to be a bit overgrown."
+	icon_state = "direction_med_vines"
+
+/obj/structure/sign/directions/vines/virology
+	name = "\improper Virology"
+	desc = "A direction sign, pointing out which way the Virology Lab is. It appears to be a bit overgrown."
+	icon_state = "direction_viro_vines"
+
+/obj/structure/sign/directions/vines/evac
+	name = "\improper Evacuation"
+	desc = "A direction sign, pointing out which way the Escape Shuttle dock is. It appears to be a bit overgrown."
+	icon_state = "direction_evac_vines"
+
+/obj/structure/sign/directions/vines/bridge
+	name = "\improper Bridge"
+	icon_state = "direction_bridge_vines"
+	desc = "A direction sign, pointing out which way the Bridge is. It appears to be a bit overgrown."
+
+/obj/structure/sign/directions/vines/command
+	name = "\improper Command"
+	icon_state = "direction_command_vines"
+	desc = "A direction sign, pointing out which way the Command center is. It appears to be a bit overgrown."
+
+/obj/structure/sign/directions/vines/elevator
+	name = "\improper Elevator"
+	desc = "A direction sign, pointing out the way to the nearest elevator. It appears to be a bit overgrown."
+	icon_state = "direction_elv_vines"
+
+/obj/structure/sign/directions/vines/stairwell
+	name = "\improper Stairwell"
+	desc = "A direction sign, pointing out the way to the nearest stairwell. It appears to be a bit overgrown."
+	icon_state = "stairwell_vines"
+
+/obj/structure/sign/directions/vines/stairs_up
+	name = "\improper Stairs Up"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go up. It appears to be a bit overgrown."
+	icon_state = "stairs_up_vines"
+
+/obj/structure/sign/directions/vines/stairs_down
+	name = "\improper Stairs Down"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go down. It appears to be a bit overgrown."
+	icon_state = "stairs_down_vines"
+
+/obj/structure/sign/directions/vines/ladderwell
+	name = "\improper Access Shaft"
+	desc = "A direction sign, pointing out the way to the nearest access shaft. It appears to be a bit overgrown."
+	icon_state = "ladderwell_vines"
+
+/obj/structure/sign/directions/vines/ladder_up
+	name = "\improper Ladder Up"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes up. It appears to be a bit overgrown."
+	icon_state = "ladder_up_vines"
+
+/obj/structure/sign/directions/vines/ladder_down
+	name = "\improper Ladder Down"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes down. It appears to be a bit overgrown."
+	icon_state = "ladder_down_vines"
+
+/obj/structure/sign/directions/vines/cargo
+	name = "\improper Cargo department"
+	desc = "A direction sign, pointing out which way the Cargo department is. It appears to be a bit overgrown."
+	icon_state = "direction_crg_vines"
+
+/obj/structure/sign/directions/vines/mining
+	name = "\improper Mining department"
+	desc = "A direction sign, pointing out which way the Mining department is. It appears to be a bit overgrown."
+	icon_state = "direction_mining_vines"
+
+/obj/structure/sign/directions/vines/refinery
+	name = "\improper Refinery"
+	desc = "A direction sign, pointing out which way the Refinery is. It appears to be a bit overgrown."
+	icon_state = "direction_refinery_vines"
+
+/obj/structure/sign/directions/vines/cryo
+	name = "\improper Cryogenic Storage"
+	desc = "A direction sign, pointing out which way Cryogenic storage is. It appears to be a bit overgrown."
+	icon_state = "direction_cry_vines"
+
+/obj/structure/sign/directions/vines/exit
+	name = "\improper Emergency Exit"
+	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route. It appears to be a bit overgrown."
+	icon_state = "exit_sign_vines"
+
+/obj/structure/sign/directions/snowy/
+	name = "\improper Snow-coated Sign"
+	desc = "A direction sign that's coated in a dusting of snow. <b>You shouldn't be able to find this: please inform a member of staff!</b>"
+	icon_state = "snowy"
+
+/obj/structure/sign/directions/snowy/science
+	name = "\improper Science department"
+	desc = "A direction sign, pointing out which way the Science department is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_sci_snowy"
+
+/obj/structure/sign/directions/snowy/engineering
+	name = "\improper Engineering department"
+	desc = "A direction sign, pointing out which way the Engineering department is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_eng_snowy"
+
+/obj/structure/sign/directions/snowy/security
+	name = "\improper Security department"
+	desc = "A direction sign, pointing out which way the Security department is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_sec_snowy"
+
+/obj/structure/sign/directions/snowy/armory
+	name = "\improper Armory"
+	desc = "A direction sign, pointing out which way the Armory is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_armory_snowy"
+
+/obj/structure/sign/directions/snowy/medical
+	name = "\improper Medical Bay"
+	desc = "A direction sign, pointing out which way the Medical Bay is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_med_snowy"
+
+/obj/structure/sign/directions/snowy/virology
+	name = "\improper Virology"
+	desc = "A direction sign, pointing out which way the Virology Lab is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_viro_snowy"
+
+/obj/structure/sign/directions/snowy/evac
+	name = "\improper Evacuation"
+	desc = "A direction sign, pointing out which way the Escape Shuttle dock is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_evac_snowy"
+
+/obj/structure/sign/directions/snowy/bridge
+	name = "\improper Bridge"
+	icon_state = "direction_bridge_snowy"
+	desc = "A direction sign, pointing out which way the Bridge is. It's covered in snow, but is still just about legible."
+
+/obj/structure/sign/directions/snowy/command
+	name = "\improper Command"
+	icon_state = "direction_command_snowy"
+	desc = "A direction sign, pointing out which way the Command center is. It's covered in snow, but is still just about legible."
+
+/obj/structure/sign/directions/snowy/elevator
+	name = "\improper Elevator"
+	desc = "A direction sign, pointing out the way to the nearest elevator. It's covered in snow, but is still just about legible."
+	icon_state = "direction_elv_snowy"
+
+/obj/structure/sign/directions/snowy/stairwell
+	name = "\improper Stairwell"
+	desc = "A direction sign, pointing out the way to the nearest stairwell. It's covered in snow, but is still just about legible."
+	icon_state = "stairwell_snowy"
+
+/obj/structure/sign/directions/snowy/stairs_up
+	name = "\improper Stairs Up"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go up. It's covered in snow, but is still just about legible."
+	icon_state = "stairs_up_snowy"
+
+/obj/structure/sign/directions/snowy/stairs_down
+	name = "\improper Stairs Down"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go down. It's covered in snow, but is still just about legible."
+	icon_state = "stairs_down_snowy"
+
+/obj/structure/sign/directions/snowy/ladderwell
+	name = "\improper Access Shaft"
+	desc = "A direction sign, pointing out the way to the nearest access shaft. It's covered in snow, but is still just about legible."
+	icon_state = "ladderwell_snowy"
+
+/obj/structure/sign/directions/snowy/ladder_up
+	name = "\improper Ladder Up"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes up. It's covered in snow, but is still just about legible."
+	icon_state = "ladder_up_snowy"
+
+/obj/structure/sign/directions/snowy/ladder_down
+	name = "\improper Ladder Down"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes down. It's covered in snow, but is still just about legible."
+	icon_state = "ladder_down_snowy"
+
+/obj/structure/sign/directions/snowy/cargo
+	name = "\improper Cargo department"
+	desc = "A direction sign, pointing out which way the Cargo department is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_crg_snowy"
+
+/obj/structure/sign/directions/snowy/mining
+	name = "\improper Mining department"
+	desc = "A direction sign, pointing out which way the Mining department is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_mining_snowy"
+
+/obj/structure/sign/directions/snowy/refinery
+	name = "\improper Refinery"
+	desc = "A direction sign, pointing out which way the Refinery is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_refinery_snowy"
+
+/obj/structure/sign/directions/snowy/cryo
+	name = "\improper Cryogenic Storage"
+	desc = "A direction sign, pointing out which way Cryogenic storage is. It's covered in snow, but is still just about legible."
+	icon_state = "direction_cry_snowy"
+
+/obj/structure/sign/directions/snowy/exit
+	name = "\improper Emergency Exit"
+	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route. It's covered in snow, but is still plenty legible."
+	icon_state = "exit_sign_snowy"
+	
+/obj/structure/sign/directions/rusted/
+	name = "\improper Rusted Sign"
+	desc = "A direction sign that's covered in a layer of rust. <b>You shouldn't be able to find this: please inform a member of staff!</b>"
+	icon_state = "rusted"
+
+/obj/structure/sign/directions/rusted/science
+	name = "\improper Science department"
+	desc = "A direction sign, pointing out which way the Science department is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_sci_rusted"
+
+/obj/structure/sign/directions/rusted/engineering
+	name = "\improper Engineering department"
+	desc = "A direction sign, pointing out which way the Engineering department is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_eng_rusted"
+
+/obj/structure/sign/directions/rusted/security
+	name = "\improper Security department"
+	desc = "A direction sign, pointing out which way the Security department is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_sec_rusted"
+
+/obj/structure/sign/directions/rusted/armory
+	name = "\improper Armory"
+	desc = "A direction sign, pointing out which way the Armory is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_armory_rusted"
+
+/obj/structure/sign/directions/rusted/medical
+	name = "\improper Medical Bay"
+	desc = "A direction sign, pointing out which way the Medical Bay is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_med_rusted"
+
+/obj/structure/sign/directions/rusted/virology
+	name = "\improper Virology"
+	desc = "A direction sign, pointing out which way the Virology Lab is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_viro_rusted"
+
+/obj/structure/sign/directions/rusted/evac
+	name = "\improper Evacuation"
+	desc = "A direction sign, pointing out which way the Escape Shuttle dock is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_evac_rusted"
+
+/obj/structure/sign/directions/rusted/bridge
+	name = "\improper Bridge"
+	icon_state = "direction_bridge_rusted"
+	desc = "A direction sign, pointing out which way the Bridge is. It's old and rusty, but you can just about make out the direction."
+
+/obj/structure/sign/directions/rusted/command
+	name = "\improper Command"
+	icon_state = "direction_command_rusted"
+	desc = "A direction sign, pointing out which way the Command center is. It's old and rusty, but you can just about make out the direction."
+
+/obj/structure/sign/directions/rusted/elevator
+	name = "\improper Elevator"
+	desc = "A direction sign, pointing out the way to the nearest elevator. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_elv_rusted"
+
+/obj/structure/sign/directions/rusted/stairwell
+	name = "\improper Stairwell"
+	desc = "A direction sign, pointing out the way to the nearest stairwell. It's old and rusty, but you can just about make out the direction."
+	icon_state = "stairwell_rusted"
+
+/obj/structure/sign/directions/rusted/stairs_up
+	name = "\improper Stairs Up"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go up. It's old and rusty, but you can just about make out the direction."
+	icon_state = "stairs_up_rusted"
+
+/obj/structure/sign/directions/rusted/stairs_down
+	name = "\improper Stairs Down"
+	desc = "A direction sign, pointing out the way to the nearest set of stairs that go down. It's old and rusty, but you can just about make out the direction."
+	icon_state = "stairs_down_rusted"
+
+/obj/structure/sign/directions/rusted/ladderwell
+	name = "\improper Access Shaft"
+	desc = "A direction sign, pointing out the way to the nearest access shaft. It's old and rusty, but you can just about make out the direction."
+	icon_state = "ladderwell_rusted"
+
+/obj/structure/sign/directions/rusted/ladder_up
+	name = "\improper Ladder Up"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes up. It's old and rusty, but you can just about make out the direction."
+	icon_state = "ladder_up_rusted"
+
+/obj/structure/sign/directions/rusted/ladder_down
+	name = "\improper Ladder Down"
+	desc = "A direction sign, pointing out the way to the nearest ladder that goes down. It's old and rusty, but you can just about make out the direction."
+	icon_state = "ladder_down_rusted"
+
+/obj/structure/sign/directions/rusted/cargo
+	name = "\improper Cargo department"
+	desc = "A direction sign, pointing out which way the Cargo department is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_crg_rusted"
+
+/obj/structure/sign/directions/rusted/mining
+	name = "\improper Mining department"
+	desc = "A direction sign, pointing out which way the Mining department is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_mining_rusted"
+
+/obj/structure/sign/directions/rusted/refinery
+	name = "\improper Refinery"
+	desc = "A direction sign, pointing out which way the Refinery is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_refinery_rusted"
+
+/obj/structure/sign/directions/rusted/cryo
+	name = "\improper Cryogenic Storage"
+	desc = "A direction sign, pointing out which way Cryogenic storage is. It's old and rusty, but you can just about make out the direction."
+	icon_state = "direction_cry_rusted"
+
+/obj/structure/sign/directions/rusted/exit
+	name = "\improper Emergency Exit"
+	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route. It's old and rusty, but still easy to read."
+	icon_state = "exit_sign_rusted"
+
+//OTHER STUFF
 
 /obj/structure/sign/directions/roomnum
 	name = "room number"
