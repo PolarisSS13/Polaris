@@ -409,7 +409,6 @@
 						qdel(W)
 
 		if(!preserve)
-			GLOB.moved_event.unregister(src, W) // Unregisters the /decl/observ/moved event so it doesn't produce a debug log on deletion
 			qdel(W)
 		else
 			if(control_computer && control_computer.allow_items)
