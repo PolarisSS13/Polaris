@@ -109,6 +109,11 @@
 	thrown_force_divisor = 0.25
 	reach = 2
 
+	item_icons = list(
+		slot_l_hand = 'icons/mob/items/lefthand_melee.dmi',
+		slot_r_hand = 'icons/mob/items/righthand_melee.dmi'
+		)
+
 /obj/item/weapon/material/whip/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	..()
 
