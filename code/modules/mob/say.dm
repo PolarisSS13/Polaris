@@ -14,7 +14,7 @@
 	set_typing_indicator(FALSE)
 	usr.say(message)
 
-/mob/verb/me_verb(message as text)
+/mob/verb/me_verb(message as message)
 	set name = "Me"
 	set category = "IC"
 
@@ -114,7 +114,7 @@
 
 	return get_turf(src)
 
-/mob/proc/say_test(var/text)
+/proc/say_test(var/text)
 	var/ending = copytext(text, length(text))
 	if(ending == "?")
 		return "1"

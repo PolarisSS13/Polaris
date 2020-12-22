@@ -8,9 +8,10 @@
 	icon = 'icons/obj/Cryogenic2.dmi'
 	icon_state = "sleeper_1"
 	icon_state_opened = "sleeper_0"
-	density = TRUE
+	density = FALSE
 	ghost_query_type = /datum/ghost_query/stowaway
-	anchored = FALSE
+	anchored = TRUE
+	invisibility = 60
 
 	var/occupant_type = "stowaway"
 
@@ -121,9 +122,11 @@
 		H.adjustBruteLoss(rand(1,20))
 
 	if(allow_appearance_change)
-		H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
+		H.change_appearance(APPEARANCE_ALL, H, check_species_whitelist = 1)
 
-	visible_message("<span class='aliem'>\The [src] [pick("gurgles", "seizes", "clangs")] before releasing \the [H]!</span>")
+//	visible_message("<span class='aliem'>\The [src] [pick("gurgles", "seizes", "clangs")] before releasing \the [H]!</span>")
+
+	qdel(src)
 
 // Manual Variant
 // This one lacks the emag option due to the fact someone has to activate it, and they will probably help the person.
@@ -241,6 +244,6 @@
 		H.adjustBruteLoss(rand(1,20))
 
 	if(allow_appearance_change)
-		H.change_appearance(APPEARANCE_ALL, H.loc, check_species_whitelist = 1)
+		H.change_appearance(APPEARANCE_ALL, H, check_species_whitelist = 1)
 
 	visible_message("<span class='aliem'>\The [src] [pick("gurgles", "seizes", "clangs")] before releasing \the [H]!</span>")
