@@ -110,9 +110,9 @@
 	reach = 2
 
 	item_icons = list(
-		slot_l_hand = 'icons/mob/items/lefthand_melee.dmi',
-		slot_r_hand = 'icons/mob/items/righthand_melee.dmi'
-		)
+			slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',
+			slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
+			)
 
 /obj/item/weapon/material/whip/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	..()
@@ -128,36 +128,35 @@
 
 		else
 			if(!istype(AM, /obj/item))
-
-				if(istype(AM, /mob/living))
-					var/mob/living/L = AM
-					if(L.a_intent)
-						switch(L.a_intent)
-							if(I_HURT)
-								if(prob(10) && istype(L, /mob/living/carbon/human))
-									to_chat(L, "<span class='warning'>\The [src] rips at your hands!</span>")
-									ranged_disarm(L)
-							if(I_DISARM)
-								if(prob(min(90, force * 3)) && istype(L, /mob/living/carbon/human))
-									ranged_disarm(L)
-								else
-									L.visible_message("<span class='danger'>\The [src] sends \the [L] stumbling backwards.</span>")
-									L.Move(get_turf(get_step(L,get_dir(user,L))))
-							if(I_GRAB)
-								var/turf/STurf = get_turf(L)
-								spawn(2)
-									playsound(STurf, 'sound/effects/snap.ogg', 60, 1)
-								L.visible_message("<span class='critical'>\The [src] yanks [L] towards \the [user]!</span>")
-								L.throw_at(get_turf(get_step(user,get_dir(user,L))), 2, 1, src)
-
-				else
-					user.visible_message("<span class='warning'>\The [AM] is pulled along by \the [src]!</span>")
-					AM.Move(get_step(AM, get_dir(AM, src)))
+				user.visible_message("<span class='warning'>\The [AM] is pulled along by \the [src]!</span>")
+				AM.Move(get_step(AM, get_dir(AM, src)))
 				return
 
 			else
 				user.visible_message("<span class='warning'>\The [AM] is snatched by \the [src]!</span>")
 				AM.throw_at(user, reach, 0.1, user)
+
+/obj/item/weapon/material/whip/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
+	if(user.a_intent)
+		switch(user.a_intent)
+			if(I_HURT)
+				if(prob(10) && istype(target, /mob/living/carbon/human))
+					to_chat(target, "<span class='warning'>\The [src] rips at your hands!</span>")
+					ranged_disarm(target)
+			if(I_DISARM)
+				if(prob(min(90, force * 3)) && istype(target, /mob/living/carbon/human))
+					ranged_disarm(target)
+				else
+					target.visible_message("<span class='danger'>\The [src] sends \the [target] stumbling away.</span>")
+					target.Move(get_turf(get_step(target,get_dir(user,target))))
+			if(I_GRAB)
+				var/turf/STurf = get_turf(target)
+				spawn(2)
+					playsound(STurf, 'sound/effects/snap.ogg', 60, 1)
+				target.visible_message("<span class='critical'>\The [src] yanks \the [target] towards \the [user]!</span>")
+				target.throw_at(get_turf(get_step(user,get_dir(user,target))), 2, 1, src)
+
+	..()
 
 /obj/item/weapon/material/whip/proc/ranged_disarm(var/mob/living/carbon/human/H, var/mob/living/user)
 	if(istype(H))
