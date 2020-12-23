@@ -542,6 +542,16 @@
 	desc = "A direction sign, pointing out the way to the Chapel."
 	icon_state = "direction_chapel"
 
+/obj/structure/sign/directions/dorms
+	name = "\improper Dormitories"
+	desc = "A direction sign, pointing out the way to the Dormitories."
+	icon_state = "direction_dorms"
+
+/obj/structure/sign/directions/library
+	name = "\improper Library"
+	desc = "A direction sign, pointing out the way to the Library."
+	icon_state = "direction_library"
+
 /obj/structure/sign/directions/bar
 	name = "\improper Bar"
 	desc = "A direction sign, pointing out the way to the nearest watering hole."
