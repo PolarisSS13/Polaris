@@ -74,7 +74,7 @@ for line in args.pr_body.splitlines():
 		author.strip()
 		
 		if not len(author):
-			author = pr_author
+			author = args.pr_author
 		
 		if author not in new_logs:
 			new_logs[author] = [] # Make array entry for the author
@@ -95,7 +95,7 @@ for line in args.pr_body.splitlines():
 		continue # If there's just one word, then it can't really be a changelog, now can it
 	
 	if body[0] in validPrefixes:
-		tag = body[0]
+		tag = validPrefixes[body[0]]
 		body = body[1].strip(" ,-:\t\n")
 	else: # If the tag is invalid, just default to rscadd
 		tag = "rscadd"
