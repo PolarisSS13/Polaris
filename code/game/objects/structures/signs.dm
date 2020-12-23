@@ -320,6 +320,7 @@
 	desc = "A warning sign which reads XENOBIOLOGY."
 	icon_state = "xenobio3"
 
+//direction signs presented by the order they appear in the dmi
 /obj/structure/sign/directions
 	name = "direction sign"
 	desc = "A direction sign, claiming to know the way to... somewhere?"
@@ -334,42 +335,6 @@
 	..()
 	desc = "A direction sign, pointing out the way to \the [src]."
 */
-
-//science signs
-/obj/structure/sign/directions/science
-	name = "\improper Science Department"
-	desc = "A direction sign, pointing out the way to the Science Department."
-	icon_state = "direction_sci"
-
-/obj/structure/sign/directions/toxins
-	name = "\improper Toxins Lab"
-	desc = "A direction sign, pointing out the way to the Toxins Lab."
-	icon_state = "direction_sci"
-
-/obj/structure/sign/directions/robotics
-	name = "\improper Robotics Workshop"
-	desc = "A direction sign, pointing out the way to the Robotics Workshop."
-	icon_state = "direction_robotics"
-
-/obj/structure/sign/directions/xenoarch
-	name = "\improper Xenoarchaeology Lab"
-	desc = "A direction sign, pointing out the way to the Xenoarchaeology Lab."
-	icon_state = "direction_xeno"
-
-/obj/structure/sign/directions/xenobiology
-	name = "\improper Xenobiology Lab"
-	desc = "A direction sign, pointing out the way to the Xenobiology Lab."
-	icon_state = "direction_xbio"
-
-/obj/structure/sign/directions/xenoflora
-	name = "\improper Xenoflora Lab"
-	desc = "A direction sign, pointing out the way to the Xenoflora Lab."
-	icon_state = "direction_xflora"
-
-/obj/structure/sign/directions/exploration
-	name = "\improper Exploration Department"
-	desc = "A direction sign, pointing out the way to the Exploration Department."
-	icon_state = "direction_explo"
 
 //engineering signs
 /obj/structure/sign/directions/engineering
@@ -438,6 +403,42 @@
 	desc = "A direction sign, pointing out the way to Interrogations."
 	icon_state = "direction_interrogation"
 
+//science signs
+/obj/structure/sign/directions/science
+	name = "\improper Science Department"
+	desc = "A direction sign, pointing out the way to the Science Department."
+	icon_state = "direction_sci"
+
+/obj/structure/sign/directions/toxins
+	name = "\improper Toxins Lab"
+	desc = "A direction sign, pointing out the way to the Toxins Lab."
+	icon_state = "direction_sci"
+
+/obj/structure/sign/directions/robotics
+	name = "\improper Robotics Workshop"
+	desc = "A direction sign, pointing out the way to the Robotics Workshop."
+	icon_state = "direction_robotics"
+
+/obj/structure/sign/directions/xenoarch
+	name = "\improper Xenoarchaeology Lab"
+	desc = "A direction sign, pointing out the way to the Xenoarchaeology Lab."
+	icon_state = "direction_xeno"
+
+/obj/structure/sign/directions/xenobiology
+	name = "\improper Xenobiology Lab"
+	desc = "A direction sign, pointing out the way to the Xenobiology Lab."
+	icon_state = "direction_xbio"
+
+/obj/structure/sign/directions/xenoflora
+	name = "\improper Xenoflora Lab"
+	desc = "A direction sign, pointing out the way to the Xenoflora Lab."
+	icon_state = "direction_xflora"
+
+/obj/structure/sign/directions/exploration
+	name = "\improper Exploration Department"
+	desc = "A direction sign, pointing out the way to the Exploration Department."
+	icon_state = "direction_explo"
+
 //medical signs
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
@@ -474,7 +475,38 @@
 	desc = "A direction sign, pointing out the way to Medical Equipment Storage."
 	icon_state = "direction_medeqp"
 
+/obj/structure/sign/directions/morgue
+	name = "\improper Morgue"
+	desc = "A direction sign, pointing out the way to the Morgue."
+	icon_state = "direction_morgue"
+
+/obj/structure/sign/directions/cloning
+	name = "\improper Cloning Lab"
+	desc = "A direction sign, pointing out the way to the Cloning Lab."
+	icon_state = "direction_cloning"
+
+/obj/structure/sign/directions/resleeving
+	name = "\improper Resleeving Lab"
+	desc = "A direction sign, pointing out the way to the Resleeving Lab."
+	icon_state = "direction_resleeve"
+	
+//special signs
+/obj/structure/sign/directions/evac
+	name = "\improper Evacuation"
+	desc = "A direction sign, pointing out the way to the Escape Shuttle Dock."
+	icon_state = "direction_evac"
+
+/obj/structure/sign/directions/eva
+	name = "\improper Extra-Vehicular Activity"
+	desc = "A direction sign, pointing out the way to the EVA Bay."
+	icon_state = "direction_eva"
+
 //command signs
+/obj/structure/sign/directions/ai_core
+	name = "\improper AI Core"
+	desc = "A direction sign, pointing out the way to the AI Core."
+	icon_state = "direction_ai_core"
+
 /obj/structure/sign/directions/bridge
 	name = "\improper Bridge"
 	desc = "A direction sign, pointing out the way to the Bridge."
@@ -512,30 +544,40 @@
 	icon_state = "direction_refinery"
 
 //civilian/misc signs
-/obj/structure/sign/directions/evac
-	name = "\improper Evacuation"
-	desc = "A direction sign, pointing out the way to the Escape Shuttle Dock."
-	icon_state = "direction_evac"
+/obj/structure/sign/directions/roomnum
+	name = "room number"
+	desc = "A sign detailing the number of the room beside it."
+	icon_state = "roomnum"
 
-/obj/structure/sign/directions/eva
-	name = "\improper Extra-Vehicular Activity"
-	desc = "A direction sign, pointing out the way to the EVA Bay."
-	icon_state = "direction_eva"
+/obj/structure/sign/directions/cryo
+	name = "\improper Cryogenic Storage"
+	desc = "A direction sign, pointing out the way to Cryogenic Storage."
+	icon_state = "direction_cry"
 
 /obj/structure/sign/directions/elevator
 	name = "\improper Elevator"
 	desc = "A direction sign, pointing out the way to the nearest elevator."
 	icon_state = "direction_elv"
 
+/obj/structure/sign/directions/bar
+	name = "\improper Bar"
+	desc = "A direction sign, pointing out the way to the nearest watering hole."
+	icon_state = "direction_bar"
+
+/obj/structure/sign/directions/kitchen
+	name = "\improper Kitchen"
+	desc = "A pictographic direction sign with a knife, plate, and fork, pointing out the way to the nearest dining establishment."
+	icon_state = "direction_kitchen"
+
 /obj/structure/sign/directions/tram
 	name = "\improper Public Transit Station"
 	desc = "A direction sign, pointing out the way to the nearest public transit station."
 	icon_state = "direction_tram"
 
-/obj/structure/sign/directions/dock
-	name = "\improper Dock"
-	desc = "A direction sign, pointing out the way to the nearest docking area."
-	icon_state = "direction_dock"
+/obj/structure/sign/directions/janitor
+	name = "\improper Custodial Closet"
+	desc = "A direction sign, pointing out the way to the Custodial Closet."
+	icon_state = "direction_janitor"
 
 /obj/structure/sign/directions/chapel
 	name = "\improper Chapel"
@@ -552,15 +594,10 @@
 	desc = "A direction sign, pointing out the way to the Library."
 	icon_state = "direction_library"
 
-/obj/structure/sign/directions/bar
-	name = "\improper Bar"
-	desc = "A direction sign, pointing out the way to the nearest watering hole."
-	icon_state = "direction_bar"
-
-/obj/structure/sign/directions/kitchen
-	name = "\improper Kitchen"
-	desc = "A pictographic direction sign with a knife, plate, and fork, pointing out the way to the nearest dining establishment."
-	icon_state = "direction_kitchen"
+/obj/structure/sign/directions/dock
+	name = "\improper Dock"
+	desc = "A direction sign, pointing out the way to the nearest docking area."
+	icon_state = "direction_dock"
 
 /obj/structure/sign/directions/stairwell
 	name = "\improper Stairwell"
@@ -592,23 +629,12 @@
 	desc = "A direction sign with a ladder and a downward arrow, pointing out the way to the nearest ladder that goes down."
 	icon_state = "ladder_down"
 
-/obj/structure/sign/directions/cryo
-	name = "\improper Cryogenic Storage"
-	desc = "A direction sign, pointing out the way to Cryogenic Storage."
-	icon_state = "direction_cry"
-
 /obj/structure/sign/directions/exit
 	name = "\improper Emergency Exit"
 	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route."
 	icon_state = "exit_sign"
 
 //OTHER STUFF
-
-/obj/structure/sign/directions/roomnum
-	name = "room number"
-	desc = "A sign detailing the number of the room beside it."
-	icon_state = "roomnum"
-
 /obj/structure/sign/christmas/lights
 	name = "Christmas lights"
 	desc = "Flashy and pretty."
