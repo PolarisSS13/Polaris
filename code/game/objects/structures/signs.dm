@@ -599,6 +599,21 @@
 	desc = "A direction sign, pointing out the way to the nearest docking area."
 	icon_state = "direction_dock"
 
+/obj/structure/sign/directions/gym
+	name = "\improper Gym"
+	desc = "A direction sign, pointing out the way to the Gym."
+	icon_state = "direction_gym"
+
+/obj/structure/sign/directions/pool
+	name = "\improper Pool"
+	desc = "A direction sign, pointing out the way to the Pool."
+	icon_state = "direction_pool"
+
+/obj/structure/sign/directions/recreation
+	name = "\improper Recreation Area"
+	desc = "A direction sign, pointing out the way to the nearest Recreation Area."
+	icon_state = "direction_recreation"
+
 /obj/structure/sign/directions/stairwell
 	name = "\improper Stairwell"
 	desc = "A direction sign with stairs and a door, pointing out the way to the nearest stairwell."
