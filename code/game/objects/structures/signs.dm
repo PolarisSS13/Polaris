@@ -322,14 +322,18 @@
 
 /obj/structure/sign/directions
 	name = "direction sign"
-	desc = "A direction sign, claiming to know the way."
+	desc = "A direction sign, claiming to know the way to... somewhere?"
 	icon_state = "direction"
 	icon = 'icons/obj/decals_directions.dmi'
 	//TODO: set up overlay systems, inc. interactions (e.g. vines clear w/ plantbgone or fire, snow can be brushed off or melted, and so on)
 
+//disabled this proc, it serves no purpose except to overwrite the description that already exists. may have been intended for making your own signs?
+//seems to defeat the point of having a generic directional sign that mappers could edit and use in POIs? left it here in case something breaks.
+/*
 /obj/structure/sign/directions/New()
 	..()
-	desc = "A direction sign, pointing out which way \the [src]."
+	desc = "A direction sign, pointing out the way to \the [src]."
+*/
 
 /obj/structure/sign/directions/science
 	name = "\improper Science Department"
@@ -421,75 +425,85 @@
 	icon_state = "direction_command"
 	desc = "A direction sign, pointing out the way to the Command Center."
 
+/obj/structure/sign/directions/teleporter
+	name = "\improper Teleporter"
+	icon_state = "direction_teleport"
+	desc = "A direction sign, pointing out the way to the Teleporter."
+
+/obj/structure/sign/directions/telecomms
+	name = "\improper Telecommunications Hub"
+	icon_state = "direction_tcomms"
+	desc = "A direction sign, pointing out the way to the Telecommunications Hub."
+
 /obj/structure/sign/directions/elevator
 	name = "\improper Elevator"
-	desc = "A direction sign, pointing out the way to the nearest elevator."
 	icon_state = "direction_elv"
+	desc = "A direction sign, pointing out the way to the nearest elevator."
 
 /obj/structure/sign/directions/bar
 	name = "\improper Bar"
-	desc = "A direction sign, pointing out the way to the nearest watering hole."
 	icon_state = "direction_bar"
+	desc = "A direction sign, pointing out the way to the nearest watering hole."
 
 /obj/structure/sign/directions/kitchen
 	name = "\improper Kitchen"
-	desc = "A direction sign with a knife, plate, and fork, pointing out the way to the nearest dining establishment."
+	desc = "A pictographic direction sign with a knife, plate, and fork, pointing out the way to the nearest dining establishment."
 	icon_state = "direction_bar"
 
 /obj/structure/sign/directions/stairwell
 	name = "\improper Stairwell"
-	desc = "A direction sign with stairs and a door, pointing out the way to the nearest stairwell."
 	icon_state = "stairwell"
+	desc = "A direction sign with stairs and a door, pointing out the way to the nearest stairwell."
 
 /obj/structure/sign/directions/stairs_up
 	name = "\improper Stairs Up"
-	desc = "A direction sign with stairs and an upward-slanted arrow, pointing out the way to the nearest set of stairs that go up."
 	icon_state = "stairs_up"
+	desc = "A direction sign with stairs and an upward-slanted arrow, pointing out the way to the nearest set of stairs that go up."
 
 /obj/structure/sign/directions/stairs_down
 	name = "\improper Stairs Down"
-	desc = "A direction sign with stairs and a downward-slanted arrow, pointing out the way to the nearest set of stairs that go down."
 	icon_state = "stairs_down"
+	desc = "A direction sign with stairs and a downward-slanted arrow, pointing out the way to the nearest set of stairs that go down."
 
 /obj/structure/sign/directions/ladderwell
 	name = "\improper Access Shaft"
-	desc = "A direction sign with a ladder and a door, pointing out the way to the nearest access shaft."
 	icon_state = "ladderwell"
+	desc = "A direction sign with a ladder and a door, pointing out the way to the nearest access shaft."
 
 /obj/structure/sign/directions/ladder_up
 	name = "\improper Ladder Up"
-	desc = "A direction sign with a ladder and an upward arrow, pointing out the way to the nearest ladder that goes up."
 	icon_state = "ladder_up"
+	desc = "A direction sign with a ladder and an upward arrow, pointing out the way to the nearest ladder that goes up."
 
 /obj/structure/sign/directions/ladder_down
 	name = "\improper Ladder Down"
-	desc = "A direction sign with a ladder and a downward arrow, pointing out the way to the nearest ladder that goes down."
 	icon_state = "ladder_down"
+	desc = "A direction sign with a ladder and a downward arrow, pointing out the way to the nearest ladder that goes down."
 
 /obj/structure/sign/directions/cargo
-	name = "\improper Cargo department"
-	desc = "A direction sign, pointing out the way to the Cargo department."
+	name = "\improper Cargo Department"
 	icon_state = "direction_crg"
+	desc = "A direction sign, pointing out the way to the Cargo Department."
 
 /obj/structure/sign/directions/mining
-	name = "\improper Mining department"
-	desc = "A direction sign, pointing out the way to the Mining department."
+	name = "\improper Mining Department"
 	icon_state = "direction_mining"
+	desc = "A direction sign, pointing out the way to the Mining Department."
 
 /obj/structure/sign/directions/refinery
 	name = "\improper Refinery"
-	desc = "A direction sign, pointing out the way to the Refinery."
 	icon_state = "direction_refinery"
+	desc = "A direction sign, pointing out the way to the Refinery."
 
 /obj/structure/sign/directions/cryo
 	name = "\improper Cryogenic Storage"
-	desc = "A direction sign, pointing out the way to Cryogenic Storage."
 	icon_state = "direction_cry"
+	desc = "A direction sign, pointing out the way to Cryogenic Storage."
 
 /obj/structure/sign/directions/exit
 	name = "\improper Emergency Exit"
-	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route."
 	icon_state = "exit_sign"
+	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route."
 
 //OTHER STUFF
 
