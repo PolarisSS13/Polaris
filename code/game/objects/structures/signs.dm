@@ -335,6 +335,7 @@
 	desc = "A direction sign, pointing out the way to \the [src]."
 */
 
+//science signs
 /obj/structure/sign/directions/science
 	name = "\improper Science Department"
 	desc = "A direction sign, pointing out the way to the Science Department."
@@ -345,6 +346,32 @@
 	desc = "A direction sign, pointing out the way to the Toxins Lab."
 	icon_state = "direction_sci"
 
+/obj/structure/sign/directions/robotics
+	name = "\improper Robotics Workshop"
+	desc = "A direction sign, pointing out the way to the Robotics Workshop."
+	icon_state = "direction_robotics"
+
+/obj/structure/sign/directions/xenoarch
+	name = "\improper Xenoarchaeology Lab"
+	desc = "A direction sign, pointing out the way to the Xenoarchaeology Lab."
+	icon_state = "direction_xeno"
+
+/obj/structure/sign/directions/xenobiology
+	name = "\improper Xenobiology Lab"
+	desc = "A direction sign, pointing out the way to the Xenobiology Lab."
+	icon_state = "direction_xbio"
+
+/obj/structure/sign/directions/xenoflora
+	name = "\improper Xenoflora Lab"
+	desc = "A direction sign, pointing out the way to the Xenoflora Lab."
+	icon_state = "direction_xflora"
+
+/obj/structure/sign/directions/exploration
+	name = "\improper Exploration Department"
+	desc = "A direction sign, pointing out the way to the Exploration Department."
+	icon_state = "direction_explo"
+
+//engineering signs
 /obj/structure/sign/directions/engineering
 	name = "\improper Engineering Department"
 	desc = "A direction sign, pointing out the way to the Engineering Department."
@@ -370,6 +397,12 @@
 	desc = "A direction sign, pointing out the way to the Artificial Gravity Generator."
 	icon_state = "direction_grav"
 
+/obj/structure/sign/directions/engeqp
+	name = "\improper Engineering Equipment Storage"
+	desc = "A direction sign, pointing out the way to Engineering Equipment Storage."
+	icon_state = "direction_engeqp"
+
+//security signs
 /obj/structure/sign/directions/security
 	name = "\improper Security Department"
 	desc = "A direction sign, pointing out the way to the Security Department."
@@ -385,6 +418,27 @@
 	desc = "A direction sign, pointing out the way to the Brig."
 	icon_state = "direction_brig"
 
+/obj/structure/sign/directions/seceqp
+	name = "\improper Security Equipment Storage"
+	desc = "A direction sign, pointing out the way to Security Equipment Storage."
+	icon_state = "direction_seceqp"
+
+/obj/structure/sign/directions/internal_affairs
+	name = "\improper Internal Affairs Office"
+	desc = "A direction sign, pointing out the way to the Internal Affairs Office."
+	icon_state = "direction_intaff"
+
+/obj/structure/sign/directions/forensics
+	name = "\improper Forensics Lab"
+	desc = "A direction sign, pointing out the way to the Forensics Lab."
+	icon_state = "direction_forensics"
+
+/obj/structure/sign/directions/interrogation
+	name = "\improper Interrogations"
+	desc = "A direction sign, pointing out the way to Interrogations."
+	icon_state = "direction_interrogation"
+
+//medical signs
 /obj/structure/sign/directions/medical
 	name = "\improper Medical Bay"
 	desc = "A direction sign, pointing out the way to the Medical Bay."
@@ -400,11 +454,64 @@
 	desc = "A direction sign, pointing out the way to Surgery."
 	icon_state = "direction_surgery"
 
+/obj/structure/sign/directions/operating_1
+	name = "\improper Operating Theatre 1"
+	desc = "A direction sign, pointing out the way to Operating Theatre 1."
+	icon_state = "direction_op1"
+
+/obj/structure/sign/directions/operating_2
+	name = "\improper Operating Theatre 2"
+	desc = "A direction sign, pointing out the way to Operating Theatre 2."
+	icon_state = "direction_op2"
+
 /obj/structure/sign/directions/virology
 	name = "\improper Virology"
 	desc = "A direction sign, pointing out the way to the Virology Lab."
 	icon_state = "direction_viro"
 
+/obj/structure/sign/directions/medeqp
+	name = "\improper Medical Equipment Storage"
+	desc = "A direction sign, pointing out the way to Medical Equipment Storage."
+	icon_state = "direction_medeqp"
+
+//command signs
+/obj/structure/sign/directions/bridge
+	name = "\improper Bridge"
+	desc = "A direction sign, pointing out the way to the Bridge."
+	icon_state = "direction_bridge"
+
+/obj/structure/sign/directions/command
+	name = "\improper Command"
+	desc = "A direction sign, pointing out the way to the Command Center."
+	icon_state = "direction_command"
+
+/obj/structure/sign/directions/teleporter
+	name = "\improper Teleporter"
+	desc = "A direction sign, pointing out the way to the Teleporter."
+	icon_state = "direction_teleport"
+
+/obj/structure/sign/directions/telecomms
+	name = "\improper Telecommunications Hub"
+	desc = "A direction sign, pointing out the way to the Telecommunications Hub."
+	icon_state = "direction_tcomms"
+	
+//cargonia signs
+/obj/structure/sign/directions/cargo
+	name = "\improper Cargo Department"
+	desc = "A direction sign, pointing out the way to the Cargo Department."
+	icon_state = "direction_crg"
+
+/obj/structure/sign/directions/mining
+	name = "\improper Mining Department"
+	desc = "A direction sign, pointing out the way to the Mining Department."
+	icon_state = "direction_mining"
+
+/obj/structure/sign/directions/refinery
+	name = "\improper Refinery"
+	desc = "A direction sign, pointing out the way to the Refinery."
+	icon_state = "direction_refinery"
+
+//civilian/misc signs
 /obj/structure/sign/directions/evac
 	name = "\improper Evacuation"
 	desc = "A direction sign, pointing out the way to the Escape Shuttle Dock."
@@ -415,95 +522,75 @@
 	desc = "A direction sign, pointing out the way to the EVA Bay."
 	icon_state = "direction_eva"
 
-/obj/structure/sign/directions/bridge
-	name = "\improper Bridge"
-	icon_state = "direction_bridge"
-	desc = "A direction sign, pointing out the way to the Bridge."
-
-/obj/structure/sign/directions/command
-	name = "\improper Command"
-	icon_state = "direction_command"
-	desc = "A direction sign, pointing out the way to the Command Center."
-
-/obj/structure/sign/directions/teleporter
-	name = "\improper Teleporter"
-	icon_state = "direction_teleport"
-	desc = "A direction sign, pointing out the way to the Teleporter."
-
-/obj/structure/sign/directions/telecomms
-	name = "\improper Telecommunications Hub"
-	icon_state = "direction_tcomms"
-	desc = "A direction sign, pointing out the way to the Telecommunications Hub."
-
 /obj/structure/sign/directions/elevator
 	name = "\improper Elevator"
-	icon_state = "direction_elv"
 	desc = "A direction sign, pointing out the way to the nearest elevator."
+	icon_state = "direction_elv"
+
+/obj/structure/sign/directions/tram
+	name = "\improper Public Transit Station"
+	desc = "A direction sign, pointing out the way to the nearest public transit station."
+	icon_state = "direction_tram"
+
+/obj/structure/sign/directions/dock
+	name = "\improper Dock"
+	desc = "A direction sign, pointing out the way to the nearest docking area."
+	icon_state = "direction_dock"
+
+/obj/structure/sign/directions/chapel
+	name = "\improper Chapel"
+	desc = "A direction sign, pointing out the way to the Chapel."
+	icon_state = "direction_chapel"
 
 /obj/structure/sign/directions/bar
 	name = "\improper Bar"
-	icon_state = "direction_bar"
 	desc = "A direction sign, pointing out the way to the nearest watering hole."
+	icon_state = "direction_bar"
 
 /obj/structure/sign/directions/kitchen
 	name = "\improper Kitchen"
 	desc = "A pictographic direction sign with a knife, plate, and fork, pointing out the way to the nearest dining establishment."
-	icon_state = "direction_bar"
+	icon_state = "direction_kitchen"
 
 /obj/structure/sign/directions/stairwell
 	name = "\improper Stairwell"
-	icon_state = "stairwell"
 	desc = "A direction sign with stairs and a door, pointing out the way to the nearest stairwell."
+	icon_state = "stairwell"
 
 /obj/structure/sign/directions/stairs_up
 	name = "\improper Stairs Up"
-	icon_state = "stairs_up"
 	desc = "A direction sign with stairs and an upward-slanted arrow, pointing out the way to the nearest set of stairs that go up."
+	icon_state = "stairs_up"
 
 /obj/structure/sign/directions/stairs_down
 	name = "\improper Stairs Down"
-	icon_state = "stairs_down"
 	desc = "A direction sign with stairs and a downward-slanted arrow, pointing out the way to the nearest set of stairs that go down."
+	icon_state = "stairs_down"
 
 /obj/structure/sign/directions/ladderwell
 	name = "\improper Access Shaft"
-	icon_state = "ladderwell"
 	desc = "A direction sign with a ladder and a door, pointing out the way to the nearest access shaft."
+	icon_state = "ladderwell"
 
 /obj/structure/sign/directions/ladder_up
 	name = "\improper Ladder Up"
-	icon_state = "ladder_up"
 	desc = "A direction sign with a ladder and an upward arrow, pointing out the way to the nearest ladder that goes up."
+	icon_state = "ladder_up"
 
 /obj/structure/sign/directions/ladder_down
 	name = "\improper Ladder Down"
-	icon_state = "ladder_down"
 	desc = "A direction sign with a ladder and a downward arrow, pointing out the way to the nearest ladder that goes down."
-
-/obj/structure/sign/directions/cargo
-	name = "\improper Cargo Department"
-	icon_state = "direction_crg"
-	desc = "A direction sign, pointing out the way to the Cargo Department."
-
-/obj/structure/sign/directions/mining
-	name = "\improper Mining Department"
-	icon_state = "direction_mining"
-	desc = "A direction sign, pointing out the way to the Mining Department."
-
-/obj/structure/sign/directions/refinery
-	name = "\improper Refinery"
-	icon_state = "direction_refinery"
-	desc = "A direction sign, pointing out the way to the Refinery."
+	icon_state = "ladder_down"
 
 /obj/structure/sign/directions/cryo
 	name = "\improper Cryogenic Storage"
-	icon_state = "direction_cry"
 	desc = "A direction sign, pointing out the way to Cryogenic Storage."
+	icon_state = "direction_cry"
 
 /obj/structure/sign/directions/exit
 	name = "\improper Emergency Exit"
-	icon_state = "exit_sign"
 	desc = "A lurid green sign that unmistakably identifies that the door it's next to as an emergency exit route."
+	icon_state = "exit_sign"
 
 //OTHER STUFF
 
