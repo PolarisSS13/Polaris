@@ -19,7 +19,7 @@ export const pAIInterface = (props, context) => {
     <Window width={450} height={600} resizable>
       <Window.Content scrollable>
         <Section title="Emotion">
-          {emotions.map(emote => (
+          {!!Array.isArray(emotions) && emotions.map(emote => (
             <Button
               key={emote.id}
               content={emote.name}
@@ -30,7 +30,7 @@ export const pAIInterface = (props, context) => {
         <Section title={"Software (Available RAM: " + available_ram + ")"}>
           <LabeledList>
             <LabeledList.Item label="Installed">
-              {bought.map(app => (
+              {!!Array.isArray(bought) && bought.map(app => (
                 <Button
                   key={app.id}
                   content={app.name}
@@ -40,7 +40,7 @@ export const pAIInterface = (props, context) => {
             </LabeledList.Item>
             <LabeledList.Divider />
             <LabeledList.Item label="Downloadable">
-              {not_bought.map(app => (
+              {!!Array.isArray(not_bought) && not_bought.map(app => (
                 <Button
                   key={app.id}
                   content={app.name + " (" + app.ram + ")"}

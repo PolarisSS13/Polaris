@@ -100,7 +100,8 @@
 			else
 				set_temperature = max(amount, 0)
 		if("setPower") //setting power to 0 is redundant anyways
-			var/new_setting = between(0, text2num(params["value"]), 100)
+			var/new_setting = CLAMP(text2num(params["value"]), 0, 100)
+			to_chat(world, "param value was [params["value"]], new_setting was [new_setting]") // DEBUG
 			set_power_level(new_setting)
 
 	add_fingerprint(usr)
