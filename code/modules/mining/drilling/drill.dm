@@ -27,7 +27,14 @@
 		"osmium" = /obj/item/weapon/ore/osmium,
 		"hydrogen" = /obj/item/weapon/ore/hydrogen,
 		"silicates" = /obj/item/weapon/ore/glass,
-		"carbon" = /obj/item/weapon/ore/coal
+		"carbon" = /obj/item/weapon/ore/coal,
+		"raw copper" = /obj/item/weapon/ore/copper,
+		"raw tin" = /obj/item/weapon/ore/tin,
+		"raw bauxite" = /obj/item/weapon/ore/bauxite,
+		"raw rutile" = /obj/item/weapon/ore/rutile,
+		"raw void opal" = /obj/item/weapon/ore/void_opal,
+		"raw painite" = /obj/item/weapon/ore/painite,
+		"raw quartz" = /obj/item/weapon/ore/quartz
 		)
 
 	//Upgrades
@@ -58,7 +65,7 @@
 	cell = default_use_hicell()
 
 /obj/machinery/mining/drill/get_cell()
-	return cell	
+	return cell
 
 /obj/machinery/mining/drill/loaded
 	cell = /obj/item/weapon/cell/high

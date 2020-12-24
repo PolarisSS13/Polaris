@@ -51484,6 +51484,9 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
 	},
+/obj/item/stack/material/copper{
+	amount = 10
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/lab)
 "bRd" = (
@@ -51917,6 +51920,9 @@
 /obj/structure/table/standard,
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/item/stack/material/copper{
+	amount = 20
 	},
 /turf/simulated/floor/reinforced,
 /area/rnd/misc_lab)
@@ -56420,8 +56426,8 @@
 /obj/item/weapon/airlock_electronics,
 /obj/item/weapon/airlock_electronics,
 /obj/item/weapon/cell/high,
-/obj/item/stack/material/glass/phoronrglass{
-	amount = 20
+/obj/item/stack/material/plastic{
+	amount = 50
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/workshop)
@@ -96002,18 +96008,12 @@
 /area/hallway/secondary/entry/D2)
 "dxl" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/stack/material/plasteel{
-	amount = 15
-	},
-/obj/item/stack/material/plasteel{
-	amount = 15
-	},
-/obj/item/stack/material/plastic{
-	amount = 50
-	},
 /obj/item/device/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = -21
+	},
+/obj/item/stack/material/copper{
+	amount = 20
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/workshop)
@@ -96245,6 +96245,9 @@
 	},
 /obj/machinery/ai_status_display{
 	pixel_x = -32
+	},
+/obj/item/stack/material/glass/phoronrglass{
+	amount = 20
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/workshop)
@@ -97075,6 +97078,12 @@
 	},
 /obj/item/stack/material/steel{
 	amount = 50
+	},
+/obj/item/stack/material/plasteel{
+	amount = 15
+	},
+/obj/item/stack/material/plasteel{
+	amount = 15
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/workshop)

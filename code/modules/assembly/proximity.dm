@@ -3,7 +3,7 @@
 	desc = "Used for scanning and alerting when someone enters a certain proximity."
 	icon_state = "prox"
 	origin_tech = list(TECH_MAGNET = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 800, "glass" = 200, "waste" = 50)
+	matter = list(DEFAULT_WALL_MATERIAL = 800, "glass" = 200, MAT_COPPER = 10, "waste" = 50)
 	wires = WIRE_PULSE
 
 	secured = 0
@@ -112,7 +112,7 @@
 /obj/item/device/assembly/prox_sensor/Topic(href, href_list, state = deep_inventory_state)
 	if(..())
 		return TRUE
-	
+
 	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 		usr << browse(null, "window=prox")
 		onclose(usr, "prox")

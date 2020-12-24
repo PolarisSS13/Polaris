@@ -56,7 +56,7 @@ var/global/list/default_medbay_channels = list(
 	var/bs_tx_preload_id
 	var/bs_rx_preload_id
 
-	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
+	matter = list("glass" = 25, DEFAULT_WALL_MATERIAL = 75, MAT_COPPER = 15)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
@@ -489,7 +489,7 @@ var/global/list/default_medbay_channels = list(
 		else if(adhoc_fallback) //Less huzzah, we have to fallback
 			to_chat(loc, "<span class='warning'>\The [src] pings as it falls back to local radio transmission.</span>")
 			subspace_transmission = FALSE
-		
+
 		else //Oh well
 			return FALSE
 
@@ -577,7 +577,7 @@ var/global/list/default_medbay_channels = list(
 
 /obj/item/device/radio/examine(mob/user)
 	. = ..()
-	
+
 	if((in_range(src, user) || loc == user))
 		if(b_stat)
 			. += "<span class='notice'>\The [src] can be attached and modified!</span>"

@@ -5,7 +5,7 @@
 	desc = "Emits a visible or invisible beam and is triggered when the beam is interrupted."
 	icon_state = "infrared"
 	origin_tech = list(TECH_MAGNET = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500, "waste" = 100)
+	matter = list(DEFAULT_WALL_MATERIAL = 1000, "glass" = 500, MAT_COPPER = 10, "waste" = 100)
 
 	wires = WIRE_PULSE
 
@@ -113,7 +113,7 @@
 /obj/item/device/assembly/infra/Topic(href, href_list, state = deep_inventory_state)
 	if(..())
 		return 1
-	
+
 	if(!usr.canmove || usr.stat || usr.restrained() || !in_range(loc, usr))
 		usr << browse(null, "window=infra")
 		onclose(usr, "infra")
