@@ -67,6 +67,7 @@
 		L.updateicon()
 
 	area.power_change()
+	GLOB.lights_switched_on_roundstat++
 
 /obj/machinery/light_switch/power_change()
 

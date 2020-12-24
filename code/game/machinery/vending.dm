@@ -570,6 +570,8 @@ GLOBAL_LIST_EMPTY(vending_products)
 			visible_message("<span class='notice'>\The [src] clunks as it vends an additional item.</span>")
 	playsound(src, "sound/[vending_sound]", 100, 1, 1)
 
+	GLOB.items_sold_shift_roundstat++
+
 	vend_ready = 1
 	currently_vending = null
 	SStgui.update_uis(src)

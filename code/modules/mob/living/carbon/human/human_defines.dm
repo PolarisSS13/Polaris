@@ -43,7 +43,7 @@
 
 	var/age = 30		//Player's age (pure fluff)
 	var/b_type = "A+"	//Player's bloodtype
-	var/synthetic		//If they are a synthetic (aka synthetic torso)
+	var/datum/robolimb/synthetic		//If they are a synthetic (aka synthetic torso). Also holds the datum for the type of robolimb.
 
 	var/list/all_underwear = list()
 	var/list/all_underwear_metadata = list()
@@ -84,7 +84,6 @@
 	var/special_voice = "" // For changing our voice. Used by a symptom.
 
 	var/last_dam = -1	//Used for determining if we need to process all organs or just some or even none.
-	var/list/bad_external_organs = list()// organs we check until they are good.
 
 	var/xylophone = 0 //For the spoooooooky xylophone cooldown
 
@@ -115,3 +114,34 @@
 	var/mob/living/carbon/human/vr_link = null
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
+	butchery_loot = list(/obj/item/stack/animalhide/human = 1)
+
+	// Horray Furries!
+	var/datum/sprite_accessory/ears/ear_style = null
+	var/r_ears = 30
+	var/g_ears = 30
+	var/b_ears = 30
+	var/r_ears2 = 30
+	var/g_ears2 = 30
+	var/b_ears2 = 30
+	var/datum/sprite_accessory/tail/tail_style = null
+	var/r_tail = 30
+	var/g_tail = 30
+	var/b_tail = 30
+	var/r_tail2 = 30
+	var/g_tail2 = 30
+	var/b_tail2 = 30
+	var/datum/sprite_accessory/wing/wing_style = null
+	var/r_wing = 30
+	var/g_wing = 30
+	var/b_wing = 30
+	var/r_wing2 = 30
+	var/g_wing2 = 30
+	var/b_wing2 = 30
+
+	var/wagging = 0 //UGH.
+	var/flapping = 0
+
+	// Custom Species Name
+	var/custom_species
+

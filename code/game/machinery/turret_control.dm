@@ -25,6 +25,9 @@
 	var/check_anomalies = 1	//checks if it can shoot at unidentified lifeforms (ie xenos)
 	var/check_synth = 0 	//if active, will shoot at anything not an AI or cyborg
 	var/check_all = 0		//If active, will shoot at anything.
+	var/check_down = 0		//If active, will shoot at prone individuals.
+	var/stay_up = 0			//If active, the turret will not pop-down unless it loses power or is disabled.
+	var/fire_at_movement = 0	//If active, the turret will prioritize objects or creatures that move in its range.
 	var/ailock = 0 	//Silicons cannot use this
 
 	req_access = list(access_ai_upload)
@@ -134,6 +137,9 @@
 		settings[++settings.len] = list("category" = "Check Access Authorization", "setting" = "check_access", "value" = check_access)
 		settings[++settings.len] = list("category" = "Check misc. Lifeforms", "setting" = "check_anomalies", "value" = check_anomalies)
 		settings[++settings.len] = list("category" = "Neutralize All Entities", "setting" = "check_all", "value" = check_all)
+		settings[++settings.len] = list("category" = "Neutralize Downed Entities", "setting" = "check_down", "value" = check_down)
+		settings[++settings.len] = list("category" = "Remain Deployed", "setting" = "stay_up", "value" = stay_up)
+		settings[++settings.len] = list("category" = "Fire At Movement", "setting" = "fire_at_movement", "value" = fire_at_movement)
 
 		data["settings"] = settings
 
@@ -168,6 +174,12 @@
 			check_anomalies = value
 		else if(href_list["command"] == "check_all")
 			check_all = value
+		else if(href_list["command"] == "check_down")
+			check_down = value
+		else if(href_list["command"] == "stay_up")
+			stay_up = value
+		else if(href_list["command"] == "fire_at_movement")
+			fire_at_movement = value
 
 		updateTurrets()
 		return 1
@@ -183,6 +195,9 @@
 	TC.check_weapons = check_weapons
 	TC.check_anomalies = check_anomalies
 	TC.check_all = check_all
+	TC.check_down = check_down
+	TC.stay_up = stay_up
+	TC.fire_at_movement = fire_at_movement
 	TC.ailock = ailock
 
 	if(istype(control_area))

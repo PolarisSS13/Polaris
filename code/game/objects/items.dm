@@ -789,7 +789,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	drop_sound = 'sound/items/drop/device.ogg'
 
 //Worn icon generation for on-mob sprites
-/obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer)
+/obj/item/proc/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer,var/icon/clip_mask = null)
 	//Get the required information about the base icon
 	var/icon/icon2use = get_worn_icon_file(body_type = body_type, slot_name = slot_name, default_icon = default_icon, inhands = inhands)
 	var/state2use = get_worn_icon_state(slot_name = slot_name)
@@ -816,6 +816,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	standing.alpha = alpha
 	standing.color = color
 	standing.layer = layer2use
+
+	if(istype(clip_mask)) //For taur bodies/tails clipping off parts of uniforms and suits.
+		standing.filters += filter(type = "alpha", icon = clip_mask)
 
 	//Apply any special features
 	if(!inhands)
@@ -940,3 +943,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 /obj/item/proc/openTip(location, control, params, user)
 	openToolTip(user, src, params, title = name, content = desc)
+
+// These procs are for RPEDs and part ratings. The concept for this was borrowed from /vg/station.
+// Gets the rating of the item, used in stuff like machine construction.
+/obj/item/proc/get_rating()
+	return FALSE
+
+// Like the above, but used for RPED sorting of parts.
+/obj/item/proc/rped_rating()
+	return get_rating()
