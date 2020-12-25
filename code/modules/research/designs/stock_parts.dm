@@ -195,7 +195,7 @@
 /datum/design/item/stock_part/omni_micro_laser
 	id = "omni_micro_laser"
 	req_tech = list(TECH_MAGNET = 7, TECH_MATERIAL = 7, TECH_PRECURSOR = 2)
-	materials = list(MAT_TITANIUM = 2000, MAT_PAINITE = 500, MAT_URANIUM = 2000, MAT_MORPHIUM = 50, MAT_DURASTEEL = 100)
+	materials = list(MAT_TITANIUM = 2000, MAT_GLASS = 500, MAT_URANIUM = 2000, MAT_MORPHIUM = 50, MAT_DURASTEEL = 100)
 	build_path = /obj/item/weapon/stock_parts/micro_laser/omni
 	sort_string = "AAAEE"
 

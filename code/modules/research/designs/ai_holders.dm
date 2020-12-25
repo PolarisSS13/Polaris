@@ -18,7 +18,7 @@
 	id = "posibrain"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 6, TECH_BLUESPACE = 2, TECH_DATA = 4)
 	build_type = PROTOLATHE | PROSFAB
-	materials = list(MAT_TITANIUM = 2000, "glass" = 1000, "silver" = 500, "gold" = 500, "phoron" = 500, MAT_PAINITE = 100)
+	materials = list(MAT_TITANIUM = 2000, "glass" = 1000, "silver" = 500, "gold" = 500, "phoron" = 500, MAT_DIAMOND = 100)
 	build_path = /obj/item/device/mmi/digital/posibrain
 	category = "Misc"
 	sort_string = "SAAAB"
