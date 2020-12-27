@@ -97,6 +97,10 @@
 /obj/item/weapon/material/whip
 	name = "whip"
 	desc = "A tool used to discipline animals, or look cool. Mostly the latter."
+	description_info = "Help - Standard attack, no modifiers.<br>\
+	Disarm - Disarming strike. Attempts to disarm the target at range, similar to an unarmed disarm. Additionally, will force the target (if possible) to move away from you.<br>\
+	Grab - Grappling strike. Attempts to pull the target toward you. This can also move objects.<br>\
+	Harm - A standard strike with a small chance to disarm."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "whip"
 	item_state = "chain"
@@ -162,22 +166,26 @@
 	if(istype(H))
 		var/list/holding = list(H.get_active_hand() = 40, H.get_inactive_hand() = 20)
 
-		for(var/obj/item/weapon/gun/W in holding)
-			if(W && prob(holding[W]))
-				var/list/turfs = list()
-				for(var/turf/T in view())
-					turfs += T
-				if(turfs.len)
-					var/turf/target = pick(turfs)
-					visible_message("<span class='danger'>[H]'s [W] goes off due to \the [src]!</span>")
-					return W.afterattack(target,H)
+		if(user.zone_sel in list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND))
+			for(var/obj/item/weapon/gun/W in holding)
+				if(W && prob(holding[W]))
+					var/list/turfs = list()
+					for(var/turf/T in view())
+						turfs += T
+					if(turfs.len)
+						var/turf/target = pick(turfs)
+						visible_message("<span class='danger'>[H]'s [W] goes off due to \the [src]!</span>")
+						return W.afterattack(target,H)
 
 		if(!(H.species.flags & NO_SLIP) && prob(10))
 			var/armor_check = H.run_armor_check(user.zone_sel, "melee")
 			H.apply_effect(3, WEAKEN, armor_check)
 			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 			if(armor_check < 60)
-				visible_message("<span class='danger'>\The [src] has tripped [H]!</span>")
+				if(user.zone_sel in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+					visible_message("<span class='danger'>\The [src] has tripped [H]!</span>")
+				else
+					visible_message("<span class='danger'>\The [src] has sent [H] to the ground!")
 			else
 				visible_message("<span class='warning'>\The [src] attempted to trip [H]!</span>")
 			return
@@ -187,12 +195,13 @@
 				playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 				return
 
-			for(var/obj/item/I in holding)
-				if(I && prob(holding[I]))
-					H.drop_from_inventory(I)
-					visible_message("<span class='danger'>\The [src] has disarmed [H]!</span>")
-					playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-					return
+			if(user.zone_sel in list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND))
+				for(var/obj/item/I in holding)
+					if(I && prob(holding[I]))
+						H.drop_from_inventory(I)
+						visible_message("<span class='danger'>\The [src] has disarmed [H]!</span>")
+						playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+						return
 
 /obj/item/weapon/material/whip/suicide_act(mob/user)
 	var/datum/gender/T = gender_datums[user.get_visible_gender()]
