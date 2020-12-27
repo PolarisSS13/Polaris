@@ -152,7 +152,7 @@
 					ranged_disarm(target)
 				else
 					target.visible_message("<span class='danger'>\The [src] sends \the [target] stumbling away.</span>")
-					target.Move(get_turf(get_step(target,get_dir(user,target))))
+					target.Move(get_step(target,get_dir(user,target)))
 			if(I_GRAB)
 				var/turf/STurf = get_turf(target)
 				spawn(2)
@@ -187,7 +187,8 @@
 				else
 					visible_message("<span class='danger'>\The [src] has sent [H] to the ground!</span>")
 			else
-				visible_message("<span class='warning'>\The [src] attempted to trip [H]!</span>")
+				if(user.zone_sel in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
+					visible_message("<span class='warning'>\The [src] attempted to trip [H]!</span>")
 			return
 
 		else
