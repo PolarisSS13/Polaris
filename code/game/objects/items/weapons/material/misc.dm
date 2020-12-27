@@ -185,7 +185,7 @@
 				if(user.zone_sel in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT))
 					visible_message("<span class='danger'>\The [src] has tripped [H]!</span>")
 				else
-					visible_message("<span class='danger'>\The [src] has sent [H] to the ground!")
+					visible_message("<span class='danger'>\The [src] has sent [H] to the ground!</span>")
 			else
 				visible_message("<span class='warning'>\The [src] attempted to trip [H]!</span>")
 			return
