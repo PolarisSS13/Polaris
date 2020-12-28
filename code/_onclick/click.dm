@@ -344,7 +344,7 @@
 	plane = CLICKCATCHER_PLANE
 	layer = LAYER_HUD_UNDER
 	mouse_opacity = 2
-	screen_loc = "1,1 to 15,15"
+	screen_loc = "SOUTHWEST to NORTHEAST"
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)
