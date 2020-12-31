@@ -16,6 +16,7 @@
 var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 /obj/machinery/telecomms
+	icon = 'icons/obj/stationobjs.dmi'
 	var/list/links = list() // list of machines this machine is linked to
 	var/traffic = 0 // value increases as traffic increases
 	var/netspeed = 5 // how much traffic to lose per tick (50 gigabytes/second * netspeed)
@@ -592,6 +593,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				log.parameters["message"] = multilingual_to_message(signal.data["message"])
 				log.parameters["name"] = signal.data["name"]
 				log.parameters["realname"] = signal.data["realname"]
+				log.parameters["timecode"] = worldtime2stationtime(world.time)
 
 				var/race = "unknown"
 				if(ishuman(M))
@@ -671,6 +673,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	log.name = "[input] ([md5(identifier)])"
 	log.input_type = input
 	log.parameters["message"] = content
+	log.parameters["timecode"] = stationtime2text()
 	log_entries.Add(log)
 	update_logs()
 
