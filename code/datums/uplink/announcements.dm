@@ -32,8 +32,6 @@
 			P.info = replacetext(args["message"], "\n", "<br/>")
 			P.update_space(P.info)
 			P.update_icon()
-			C.messagetitle.Add(args["title"])
-			C.messagetext.Add(P.info)
 
 	command_announcement.Announce(args["message"], args["title"])
 	return 1

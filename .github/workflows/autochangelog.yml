@@ -16,7 +16,9 @@ jobs:
         steps:
           - uses: /actions/checkout@v2
             with:
-                ref: ${{ github.head_ref }}
+                ref: master
+          - name: Update repository to master
+            run: git pull "origin" master
           - name: Ensure +x on CI directory
             run: |
                 chmod -R +x ./tools/ci
