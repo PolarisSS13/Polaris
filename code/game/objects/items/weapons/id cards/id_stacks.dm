@@ -10,56 +10,73 @@
 
 	// New sprite stacks can be defined here. You could theoretically change icon-states as well but right now this file compiles before station_ids.dm so those wouldn't be affected.
 	id
+		centcom
+			initial_sprite_stack = list("base-stamp", "top-blue", "dept-nanotrasen", "letter-n-command", "pips-gold")
+			vip
+				initial_sprite_stack = list("base-stamp-gold", "top-blue", "dept-vip-gold", "letter-n-command", "pips-gold")
+			ERT
+				initial_sprite_stack = list("base-stamp", "top-dark", "dept-nanotrasen", "letter-n-command")
 		silver
+			initial_sprite_stack = list("base-stamp-silver", "top-mime", "letter-n-generic")
 			secretary
-				initial_sprite_stack = list("base-stamp", "top-command", "letter-n-command")
+				initial_sprite_stack = list("base-stamp", "top-blue", "dept-secretary", "letter-n-command")
 			hop
-				initial_sprite_stack = list("base-stamp-silver", "top-command", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-blue", "dept-hop", "letter-n-command", "pips-gold")
 		medical
+			initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical")
 			chemist
-				initial_sprite_stack = list("", "pips-engineering")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-engineering")
 			geneticist
-				initial_sprite_stack = list("base-stamp", "top-medical", "letter-n-science", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-science")
+			psych
+				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-science")
+			emt
+				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-blue")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-command-medical", "letter-n-command", "pips-medical")
+				initial_sprite_stack = list("base-stamp-silver", "top-medblu", "dept-medical", "letter-n-command", "pips-gold")
+			sar
+				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-exploration", "letter-n-command", "pips-command")
 		security
+			initial_sprite_stack = list("base-stamp", "top-red", "dept-security", "letter-n-security")
+			detective
+				initial_sprite_stack = list("base-stamp", "top-red", "dept-security", "letter-n-security", "pips-cargo")
 			warden
-				initial_sprite_stack = list("", "pips-gold")
+				initial_sprite_stack = list("base-stamp", "top-red", "dept-security", "letter-n-security", "pips-command")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-command-security", "letter-n-command", "pips-security")
+				initial_sprite_stack = list("base-stamp-silver", "top-red", "dept-security", "letter-n-command", "pips-gold")
 		engineering
+			initial_sprite_stack = list("base-stamp", "top-orange", "dept-engineering", "letter-n-engineering")
 			atmos
-				initial_sprite_stack = list("", "pips-medical")
+				initial_sprite_stack = list("base-stamp", "top-orange", "dept-engineering", "pips-medical", "letter-n-engineering")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-command-engineering", "letter-n-command", "pips-engineering")
+				initial_sprite_stack = list("base-stamp-silver", "top-orange", "dept-engineering", "letter-n-command", "pips-gold")
 		science
+			initial_sprite_stack = list("base-stamp", "top-purple", "dept-science", "letter-n-science")
+			roboticist
+				initial_sprite_stack = list("base-stamp", "top-purple", "dept-science", "letter-n-science", "pips-engineering")
+			explorer
+				initial_sprite_stack = list("base-stamp", "top-blue", "dept-exploration", "letter-n-command")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-command-science", "letter-n-command", "pips-science")
+				initial_sprite_stack = list("base-stamp-silver", "top-purple", "dept-science", "letter-n-command", "pips-gold")
+				pathfinder
+					initial_sprite_stack = list("base-stamp-silver", "top-blue", "dept-exploration", "letter-n-command", "pips-gold")
 		cargo
+			initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-cargo")
 			miner
-				initial_sprite_stack = list("", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-science", "pips-science")
 			head
-				initial_sprite_stack = list("", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-brown", "dept-cargo", "letter-n-command", "pips-gold")
 		civilian
+			initial_sprite_stack = list("base-stamp", "top-green", "dept-civilian", "letter-n-civilian")
 			chaplain
-				initial_sprite_stack = list("base-stamp-silver", "top-dark", "letter-cross", "pips-mime")
-			internal_affairs_agent
-				initial_sprite_stack = list("base-stamp", "top-internal-affairs", "letter-n-command")
+				initial_sprite_stack = list("base-stamp-silver", "top-dark", "letter-cross", "pips-white")
+			internal_affairs
+				initial_sprite_stack = list("base-stamp", "top-green", "dept-internal-affairs", "letter-n-command")
 			clown
-				initial_sprite_stack = list("base-stamp", "top-clown", "letter-n-clown")
+				initial_sprite_stack = list("base-stamp", "top-pink", "dept-clown", "letter-n-clown")
 			mime
-				initial_sprite_stack = list("base-stamp", "top-mime", "letter-n-mime")
-			head //Not used but I'm defining it anyway.
+				initial_sprite_stack = list("base-stamp", "top-white", "letter-n-mime")
+			pilot
+				initial_sprite_stack = list("base-stamp", "top-generic", "dept-exploration", "letter-n-command", "pips-command")
+			head
 				initial_sprite_stack = list("base-stamp-silver", "top-command", "letter-n-command", "pips-civilian")
-
-// The following are defined in southern_cross_jobs.dm for some reason. Despite being part of the main game now. Nonetheless, they stay here until folded in right.
-/obj/item/weapon/card/id/medical/sar
-	initial_sprite_stack = list("", "pips-science")
-/obj/item/weapon/card/id/civilian/pilot
-	initial_sprite_stack = list("", "pips-science")
-/obj/item/weapon/card/id/science/explorer
-	initial_sprite_stack = list("", "top-command-explorer")
-
-//Ditto in southern_cross_jobs_vr.dm
-/obj/item/weapon/card/id/science/head/pathfinder
-	initial_sprite_stack = list("", "top-command-explorer", "pips-gold")

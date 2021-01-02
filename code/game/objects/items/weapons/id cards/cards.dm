@@ -13,7 +13,7 @@
  */
 /obj/item/weapon/card
 	name = "card"
-	desc = "Does card things."
+	desc = "A tiny plaque of plastic. Does card things."
 	icon = 'icons/obj/card_new.dmi'
 	w_class = ITEMSIZE_TINY
 	slot_flags = SLOT_EARS
@@ -53,8 +53,8 @@
 		icon = I
 
 /obj/item/weapon/card/data
-	name = "data disk"
-	desc = "A disk of data."
+	name = "data card"
+	desc = "A solid-state storage card, used to back up or transfer information. What knowledge could it contain?"
 	icon_state = "data"
 	var/function = "storage"
 	var/data = "null"
@@ -64,14 +64,14 @@
 	pickup_sound = 'sound/items/pickup/disk.ogg'
 
 /obj/item/weapon/card/data/verb/label(t as text)
-	set name = "Label Disk"
+	set name = "Label Card"
 	set category = "Object"
 	set src in usr
 
 	if (t)
-		src.name = text("data disk- '[]'", t)
+		src.name = text("data card- '[]'", t)
 	else
-		src.name = "data disk"
+		src.name = "data card"
 	src.add_fingerprint(usr)
 	return
 

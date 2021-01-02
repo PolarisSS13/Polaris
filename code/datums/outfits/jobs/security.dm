@@ -31,7 +31,7 @@
 	l_pocket = /obj/item/weapon/flame/lighter/zippo
 	shoes = /obj/item/clothing/shoes/laceup
 	r_hand = /obj/item/weapon/storage/briefcase/crimekit
-	id_type = /obj/item/weapon/card/id/security
+	id_type = /obj/item/weapon/card/id/security/detective
 	pda_type = /obj/item/device/pda/detective
 	backpack = /obj/item/weapon/storage/backpack
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/norm

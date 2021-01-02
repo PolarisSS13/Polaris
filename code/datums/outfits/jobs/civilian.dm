@@ -78,14 +78,14 @@
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/internal_affairs
 	pda_type = /obj/item/device/pda/lawyer
 
 /decl/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
 	l_hand = /obj/item/weapon/storage/bible
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
 
 /decl/hierarchy/outfit/job/explorer
@@ -97,7 +97,7 @@
 	gloves = /obj/item/clothing/gloves/black
 	l_ear = /obj/item/device/radio/headset
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/science/explorer
 	pda_slot = slot_belt
 	pda_type = /obj/item/device/pda/cargo // Brown looks more rugged
 	r_pocket = /obj/item/device/gps/explorer
