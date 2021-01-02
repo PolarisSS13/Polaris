@@ -63,7 +63,7 @@
 		cargo
 			initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-cargo")
 			miner
-				initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-science", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-cargo", "pips-science")
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-brown", "dept-cargo", "letter-n-command", "pips-gold")
 		civilian
