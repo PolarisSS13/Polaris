@@ -20,7 +20,7 @@
 	name = OUTFIT_JOB_NAME("Warden")
 	uniform = /obj/item/clothing/under/rank/warden
 	l_pocket = /obj/item/device/flash
-	id_type = /obj/item/weapon/card/id/security
+	id_type = /obj/item/weapon/card/id/security/warden
 	pda_type = /obj/item/device/pda/warden
 
 /decl/hierarchy/outfit/job/security/detective
