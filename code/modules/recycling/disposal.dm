@@ -548,20 +548,26 @@
 
 	density = FALSE
 
+/obj/machinery/disposal/wall/Initialize()
+	..()
+
+	spawn(1 SECOND)	// Fixfix for weird interaction with buildmode or other late-spawning.
+		update()
+
 /obj/machinery/disposal/wall/update()
 	..()
 
 	switch(dir)
-		if(NORTH)
+		if(1)
 			pixel_x = 0
 			pixel_y = -32
-		if(SOUTH)
+		if(2)
 			pixel_x = 0
 			pixel_y = 32
-		if(EAST)
+		if(4)
 			pixel_x = -32
 			pixel_y = 0
-		if(WEST)
+		if(8)
 			pixel_x = 32
 			pixel_y = 0
 
