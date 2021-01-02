@@ -21,6 +21,27 @@
 /*
  * Text sanitization
  */
+// Can be used almost the same way as normal input for text
+/proc/clean_input(Message, Title, Default, mob/user=usr)
+	var/txt = input(user, Message, Title, Default) as text | null
+	if(txt)
+		return html_encode(txt)
+
+//Simply removes < and > and limits the length of the message
+/proc/strip_html_simple(var/t,var/limit=MAX_MESSAGE_LEN)
+	var/list/strip_chars = list("<",">")
+	t = copytext(t,1,limit)
+	for(var/char in strip_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + copytext(t, index+1)
+			index = findtext(t, char)
+	return t
+
+//Runs byond's sanitization proc along-side strip_html_simple
+//I believe strip_html_simple() is required to run first to prevent '<' from displaying as '&lt;' that html_encode() would cause
+/proc/adminscrub(var/t,var/limit=MAX_MESSAGE_LEN)
+	return copytext((html_encode(strip_html_simple(t))),1,limit)
 
 //Used for preprocessing entered text
 /proc/sanitize(var/input, var/max_length = MAX_MESSAGE_LEN, var/encode = 1, var/trim = 1, var/extra = 1)
@@ -454,3 +475,45 @@ proc/TextPreview(var/string,var/len=40)
 
 
 #define gender2text(gender) capitalize(gender)
+
+/// Used to get a properly sanitized input, of max_length
+/// no_trim is self explanatory but it prevents the input from being trimed if you intend to parse newlines or whitespace.
+/proc/stripped_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as text|null
+
+	if(no_trim)
+		return copytext(html_encode(name), 1, max_length)
+	else
+		return trim(html_encode(name), max_length) //trim is "outside" because html_encode can expand single symbols into multiple symbols (such as turning < into &lt;)
+
+// Used to get a properly sanitized multiline input, of max_length
+/proc/stripped_multiline_input(mob/user, message = "", title = "", default = "", max_length=MAX_MESSAGE_LEN, no_trim=FALSE)
+	var/name = input(user, message, title, default) as message|null
+	if(no_trim)
+		return copytext(html_encode(name), 1, max_length)
+	else
+		return trim(html_encode(name), max_length)
+
+//Adds 'char' ahead of 'text' until there are 'count' characters total
+/proc/add_leading(text, count, char = " ")
+	text = "[text]"
+	var/charcount = count - length_char(text)
+	var/list/chars_to_add[max(charcount + 1, 0)]
+	return jointext(chars_to_add, char) + text
+
+//Adds 'char' behind 'text' until there are 'count' characters total
+/proc/add_trailing(text, count, char = " ")
+	text = "[text]"
+	var/charcount = count - length_char(text)
+	var/list/chars_to_add[max(charcount + 1, 0)]
+	return text + jointext(chars_to_add, char)
+
+//Readds quotes and apostrophes to HTML-encoded strings
+/proc/readd_quotes(var/t)
+	var/list/repl_chars = list("&#34;" = "\"","&#39;" = "'")
+	for(var/char in repl_chars)
+		var/index = findtext(t, char)
+		while(index)
+			t = copytext(t, 1, index) + repl_chars[char] + copytext(t, index+5)
+			index = findtext(t, char)
+	return t
