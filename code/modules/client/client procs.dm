@@ -190,7 +190,6 @@
 
 	if(!void)
 		void = new()
-		void.MakeGreed()
 	screen += void
 
 	if((prefs.lastchangelog != changelog_hash) && isnewplayer(src.mob)) //bolds the changelog button on the interface so we know there are updates.
