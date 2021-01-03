@@ -19,7 +19,7 @@
 /decl/hierarchy/outfit/job/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender")
 	uniform = /obj/item/clothing/under/rank/bartender
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/bartender
 	pda_type = /obj/item/device/pda/bar
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/bar = 1)
 
@@ -38,7 +38,7 @@
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/chef
 	pda_type = /obj/item/device/pda/chef
 
 /decl/hierarchy/outfit/job/service/chef/cook
@@ -54,13 +54,13 @@
 	backpack = /obj/item/weapon/storage/backpack/hydroponics
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/hyd
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/hyd
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/botanist
 	pda_type = /obj/item/device/pda/botanist
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
 	uniform = /obj/item/clothing/under/rank/janitor
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
 /decl/hierarchy/outfit/job/librarian
@@ -69,6 +69,9 @@
 	l_hand = /obj/item/weapon/barcodescanner
 	id_type = /obj/item/weapon/card/id/civilian
 	pda_type = /obj/item/device/pda/librarian
+
+/decl/hierarchy/outfit/job/librarian/journalist
+	id_type = /obj/item/weapon/card/id/civilian/journalist
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
