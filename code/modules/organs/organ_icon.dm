@@ -58,7 +58,7 @@ var/global/list/limb_icon_cache = list()
 	cut_overlays()
 
 	//Every 'addon' below requires information from species
-	if(!owner || !owner.species)
+	if(!iscarbon(owner) || !owner.species)
 		return
 
 	//Eye color/icon
@@ -109,7 +109,7 @@ var/global/list/limb_icon_cache = list()
 		if(facial_hair_style && facial_hair_style.species_allowed && (species.get_bodytype(owner) in facial_hair_style.species_allowed))
 			var/icon/facial_s = new/icon("icon" = facial_hair_style.icon, "icon_state" = "[facial_hair_style.icon_state]_s")
 			if(facial_hair_style.do_colouration)
-				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), ICON_ADD)
+				facial_s.Blend(rgb(owner.r_facial, owner.g_facial, owner.b_facial), facial_hair_style.color_blend_mode)
 			res.add_overlay(facial_s)
 
 	//Head hair
@@ -135,7 +135,10 @@ var/global/list/limb_icon_cache = list()
 	if(owner && owner.gender == FEMALE)
 		gender = "f"
 
-	icon_cache_key = "[icon_name]_[species ? species.name : SPECIES_HUMAN]"
+	if(!force_icon_key)
+		icon_cache_key = "[icon_name]_[species ? species.name : SPECIES_HUMAN]"
+	else
+		icon_cache_key = "[icon_name]_[force_icon_key]"
 
 	if(force_icon)
 		mob_icon = new /icon(force_icon, "[icon_name][gendered_icon ? "_[gender]" : ""]")

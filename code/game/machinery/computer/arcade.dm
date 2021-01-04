@@ -14,17 +14,7 @@
 							/obj/item/clothing/suit/syndicatefake					= 2,
 							/obj/item/weapon/storage/fancy/crayons					= 2,
 							/obj/item/toy/spinningtoy								= 2,
-							/obj/item/toy/prize/ripley								= 1,
-							/obj/item/toy/prize/fireripley							= 1,
-							/obj/item/toy/prize/deathripley							= 1,
-							/obj/item/toy/prize/gygax								= 1,
-							/obj/item/toy/prize/durand								= 1,
-							/obj/item/toy/prize/honk								= 1,
-							/obj/item/toy/prize/marauder							= 1,
-							/obj/item/toy/prize/seraph								= 1,
-							/obj/item/toy/prize/mauler								= 1,
-							/obj/item/toy/prize/odysseus							= 1,
-							/obj/item/toy/prize/phazon								= 1,
+							/obj/random/mech_toy									= 1,
 							/obj/item/weapon/reagent_containers/spray/waterflower	= 1,
 							/obj/random/action_figure								= 1,
 							/obj/random/plushie										= 1,
@@ -40,7 +30,7 @@
 	// If it's a generic arcade machine, pick a random arcade
 	// circuit board for it and make the new machine
 	if(!circuit)
-		var/choice = pick(typesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade)
+		var/choice = pick(subtypesof(/obj/item/weapon/circuitboard/arcade) - /obj/item/weapon/circuitboard/arcade/clawmachine)
 		var/obj/item/weapon/circuitboard/CB = new choice()
 		new CB.build_path(loc, CB)
 		qdel(src)
@@ -156,6 +146,7 @@
 			blocked = 1
 			var/attackamt = rand(2,6)
 			temp = "You attack for [attackamt] damage!"
+			playsound(src, 'sound/arcade/hit.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			if(turtle > 0)
 				turtle--
 
@@ -168,6 +159,7 @@
 			var/pointamt = rand(1,3)
 			var/healamt = rand(6,8)
 			temp = "You use [pointamt] magic to heal for [healamt] damage!"
+			playsound(src, 'sound/arcade/heal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			turtle++
 
 			sleep(10)
@@ -180,6 +172,7 @@
 			blocked = 1
 			var/chargeamt = rand(4,7)
 			temp = "You regain [chargeamt] points"
+			playsound(src, 'sound/arcade/mana.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			player_mp += chargeamt
 			if(turtle > 0)
 				turtle--
@@ -210,6 +203,7 @@
 		if(!gameover)
 			gameover = 1
 			temp = "[enemy_name] has fallen! Rejoice!"
+			playsound(src, 'sound/arcade/win.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 
 			if(emagged)
 				feedback_inc("arcade_win_emagged")
@@ -230,11 +224,13 @@
 	else if (emagged && (turtle >= 4))
 		var/boomamt = rand(5,10)
 		enemy_action = "[enemy_name] throws a bomb, exploding you for [boomamt] damage!"
+		playsound(src, 'sound/arcade/boom.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 		player_hp -= boomamt
 
 	else if ((enemy_mp <= 5) && (prob(70)))
 		var/stealamt = rand(2,3)
 		enemy_action = "[enemy_name] steals [stealamt] of your power!"
+		playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 		player_mp -= stealamt
 
 		if (player_mp <= 0)
@@ -249,17 +245,20 @@
 
 	else if ((enemy_hp <= 10) && (enemy_mp > 4))
 		enemy_action = "[enemy_name] heals for 4 health!"
+		playsound(src, 'sound/arcade/heal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 		enemy_hp += 4
 		enemy_mp -= 4
 
 	else
 		var/attackamt = rand(3,6)
 		enemy_action = "[enemy_name] attacks for [attackamt] damage!"
+		playsound(src, 'sound/arcade/hit.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 		player_hp -= attackamt
 
 	if ((player_mp <= 0) || (player_hp <= 0))
 		gameover = 1
 		temp = "You have been crushed! GAME OVER"
+		playsound(src, 'sound/arcade/lose.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 		if(emagged)
 			feedback_inc("arcade_loss_hp_emagged")
 			usr.gib()
@@ -393,6 +392,7 @@
 	user.set_machine(src)
 	var/dat = ""
 	if(gameStatus == ORION_STATUS_GAMEOVER)
+		playsound(src, 'sound/arcade/Ori_fail.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 		dat = "<center><h1>Game Over</h1></center>"
 		dat += "Like many before you, your crew never made it to Orion, lost to space... <br><b>forever</b>."
 		if(settlers.len == 0)
@@ -527,6 +527,7 @@
 
 	else if(href_list["newgame"]) //Reset everything
 		if(gameStatus == ORION_STATUS_START)
+			playsound(src, 'sound/arcade/Ori_begin.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			newgame()
 	else if(href_list["menu"]) //back to the main menu
 		if(gameStatus == ORION_STATUS_GAMEOVER)
@@ -598,6 +599,7 @@
 
 	else if(href_list["killcrew"]) //shoot a crewmember
 		if(gameStatus == ORION_STATUS_NORMAL || event == ORION_TRAIL_MUTINY)
+			playsound(src, 'sound/arcade/kill_crew.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			var/sheriff = remove_crewmember() //I shot the sheriff
 			var/mob/living/L = usr
 			if(!istype(L))
@@ -623,6 +625,7 @@
 	else if(href_list["buycrew"]) //buy a crewmember
 		if(gameStatus == ORION_STATUS_MARKET)
 			if(!spaceport_raided && food >= 10 && fuel >= 10)
+				playsound(src, 'sound/arcade/get_fuel.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 				var/bought = add_crewmember()
 				last_spaceport_action = "You hired [bought] as a new crewmember."
 				fuel -= 10
@@ -632,6 +635,7 @@
 	else if(href_list["sellcrew"]) //sell a crewmember
 		if(gameStatus == ORION_STATUS_MARKET)
 			if(!spaceport_raided && settlers.len > 1)
+				playsound(src, 'sound/arcade/lose_fuel.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 				var/sold = remove_crewmember()
 				last_spaceport_action = "You sold your crewmember, [sold]!"
 				fuel += 7
@@ -649,6 +653,7 @@
 	else if(href_list["raid_spaceport"])
 		if(gameStatus == ORION_STATUS_MARKET)
 			if(!spaceport_raided)
+				playsound(src, 'sound/arcade/raid.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 				var/success = min(15 * alive,100) //default crew (4) have a 60% chance
 				spaceport_raided = 1
 
@@ -687,6 +692,7 @@
 	else if(href_list["buyparts"])
 		if(gameStatus == ORION_STATUS_MARKET)
 			if(!spaceport_raided && fuel > 5)
+				playsound(src, 'sound/arcade/get_fuel.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 				switch(text2num(href_list["buyparts"]))
 					if(1) //Engine Parts
 						engine++
@@ -703,6 +709,7 @@
 	else if(href_list["trade"])
 		if(gameStatus == ORION_STATUS_MARKET)
 			if(!spaceport_raided)
+				playsound(src, 'sound/arcade/get_fuel.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 				switch(text2num(href_list["trade"]))
 					if(1) //Fuel
 						if(fuel > 5)
@@ -745,6 +752,7 @@
 			canContinueEvent = 1
 
 		if(ORION_TRAIL_FLUX)
+			playsound(src, 'sound/arcade/explo.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			eventdat += "This region of space is highly turbulent. <br>If we go slowly we may avoid more damage, but if we keep our speed we won't waste supplies."
 			eventdat += "<br>What will you do?"
 			eventdat += "<P ALIGN=Right><a href='byond://?src=\ref[src];slow=1'>Slow Down</a> <a href='byond://?src=\ref[src];keepspeed=1'>Continue</a></P>"
@@ -759,6 +767,7 @@
 			canContinueEvent = 1
 
 		if(ORION_TRAIL_BREAKDOWN)
+			playsound(src, 'sound/arcade/explo.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			eventdat += "Oh no! The engine has broken down!"
 			eventdat += "<br>You can repair it with an engine part, or you can make repairs for 3 days."
 			if(engine >= 1)
@@ -777,6 +786,7 @@
 			eventdat += "<P ALIGN=Right><a href='byond://?src=\ref[src];close=1'>Close</a></P>"
 
 		if(ORION_TRAIL_COLLISION)
+			playsound(src, 'sound/arcade/explo.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 			eventdat += "Something hit us! Looks like there's some hull damage."
 			if(prob(25))
 				var/sfood = rand(5,15)
@@ -992,6 +1002,7 @@
 /obj/machinery/computer/arcade/orion_trail/proc/win()
 	gameStatus = ORION_STATUS_START
 	src.visible_message("\The [src] plays a triumpant tune, stating 'CONGRATULATIONS, YOU HAVE MADE IT TO ORION.'")
+	playsound(src, 'sound/arcade/Ori_win.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
 	if(emagged)
 		new /obj/item/weapon/orion_ship(src.loc)
 		message_admins("[key_name_admin(usr)] made it to Orion on an emagged machine and got an explosive toy ship.")
@@ -1064,3 +1075,250 @@
 #undef ORION_STATUS_NORMAL
 #undef ORION_STATUS_GAMEOVER
 #undef ORION_STATUS_MARKET
+
+//////////////////
+// Claw Machine //
+//////////////////
+
+/obj/machinery/computer/arcade/clawmachine
+	name = "AlliCo Grab-a-Gift"
+	desc = "Show off your arcade skills for that special someone!"
+	icon_state = "clawmachine"
+	icon_keyboard = null
+	icon_screen = null
+	circuit = /obj/item/weapon/circuitboard/arcade/clawmachine
+	prizes = list(/obj/random/plushie)
+	var/wintick = 0
+	var/winprob = 0
+	var/instructions = "Insert 1 thaler or swipe a card to play!"
+	var/gameStatus = "CLAWMACHINE_NEW"
+	var/gamepaid = 0
+	var/gameprice = 1
+	var/winscreen = ""
+
+/// Payment
+/obj/machinery/computer/arcade/clawmachine/attackby(obj/item/I as obj, mob/user as mob)
+	if(..())
+		return
+
+	if(gamepaid == 0 && vendor_account && !vendor_account.suspended)
+		var/paid = 0
+		var/obj/item/weapon/card/id/W = I.GetID()
+		if(W) //for IDs and PDAs and wallets with IDs
+			paid = pay_with_card(W,I)
+		else if(istype(I, /obj/item/weapon/spacecash/ewallet))
+			var/obj/item/weapon/spacecash/ewallet/C = I
+			paid = pay_with_ewallet(C)
+		else if(istype(I, /obj/item/weapon/spacecash))
+			var/obj/item/weapon/spacecash/C = I
+			paid = pay_with_cash(C, user)
+		if(paid)
+			gamepaid = 1
+			instructions = "Hit start to play!"
+			return
+		return
+
+////// Cash
+/obj/machinery/computer/arcade/clawmachine/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
+	if(!emagged)
+		if(gameprice > cashmoney.worth)
+
+			// This is not a status display message, since it's something the character
+			// themselves is meant to see BEFORE putting the money in
+			to_chat(usr, "[bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
+			return 0
+
+		if(istype(cashmoney, /obj/item/weapon/spacecash))
+
+			visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
+			cashmoney.worth -= gameprice
+
+			if(cashmoney.worth <= 0)
+				usr.drop_from_inventory(cashmoney)
+				qdel(cashmoney)
+			else
+				cashmoney.update_icon()
+
+		// Machine has no idea who paid with cash
+		credit_purchase("(cash)")
+		return 1
+	if(emagged)
+		playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		to_chat(user, "<span class='info'>It doesn't seem to accept that! Seem you'll need to swipe a valid ID.</span>")
+
+
+///// Ewallet
+/obj/machinery/computer/arcade/clawmachine/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
+	if(!emagged)
+		visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
+		playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
+		if(gameprice > wallet.worth)
+			visible_message("<span class='info'>Insufficient funds.</span>")
+			return 0
+		else
+			wallet.worth -= gameprice
+			credit_purchase("[wallet.owner_name] (chargecard)")
+			return 1
+	if(emagged)
+		playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		to_chat(usr, "<span class='info'>It doesn't seem to accept that! Seem you'll need to swipe a valid ID.</span>")
+
+///// ID
+/obj/machinery/computer/arcade/clawmachine/proc/pay_with_card(var/obj/item/weapon/card/id/I, var/obj/item/ID_container)
+	if(I==ID_container || ID_container == null)
+		visible_message("<span class='info'>\The [usr] swipes \the [I] through \the [src].</span>")
+	else
+		visible_message("<span class='info'>\The [usr] swipes \the [ID_container] through \the [src].</span>")
+	playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
+	var/datum/money_account/customer_account = get_account(I.associated_account_number)
+	if(!customer_account)
+		visible_message("<span class='info'>Error: Unable to access account. Please contact technical support if problem persists.</span>")
+		return 0
+
+	if(customer_account.suspended)
+		visible_message("<span class='info'>Unable to access account: account suspended.</span>")
+		return 0
+
+	// Have the customer punch in the PIN before checking if there's enough money. Prevents people from figuring out acct is
+	// empty at high security levels
+	if(customer_account.security_level != 0) //If card requires pin authentication (ie seclevel 1 or 2)
+		var/attempt_pin = input("Enter pin code", "Vendor transaction") as num
+		customer_account = attempt_account_access(I.associated_account_number, attempt_pin, 2)
+
+		if(!customer_account)
+			visible_message("<span class='info'>Unable to access account: incorrect credentials.</span>")
+			return 0
+
+	if(gameprice > customer_account.money)
+		visible_message("<span class='info'>Insufficient funds in account.</span>")
+		return 0
+	else
+		// Okay to move the money at this point
+		if(emagged)
+			gameprice = customer_account.money
+		// debit money from the purchaser's account
+		customer_account.money -= gameprice
+
+		// create entry in the purchaser's account log
+		var/datum/transaction/T = new()
+		T.target_name = "[vendor_account.owner_name] (via [name])"
+		T.purpose = "Purchase of arcade game([name])"
+		if(gameprice > 0)
+			T.amount = "([gameprice])"
+		else
+			T.amount = "[gameprice]"
+		T.source_terminal = name
+		T.date = current_date_string
+		T.time = stationtime2text()
+		customer_account.transaction_log.Add(T)
+
+		// Give the vendor the money. We use the account owner name, which means
+		// that purchases made with stolen/borrowed card will look like the card
+		// owner made them
+		credit_purchase(customer_account.owner_name)
+		return 1
+
+/// Add to vendor account
+
+/obj/machinery/computer/arcade/clawmachine/proc/credit_purchase(var/target as text)
+	vendor_account.money += gameprice
+
+	var/datum/transaction/T = new()
+	T.target_name = target
+	T.purpose = "Purchase of arcade game([name])"
+	T.amount = "[gameprice]"
+	T.source_terminal = name
+	T.date = current_date_string
+	T.time = stationtime2text()
+	vendor_account.transaction_log.Add(T)
+
+/// End Payment
+
+/obj/machinery/computer/arcade/clawmachine/New()
+	..()
+
+/obj/machinery/computer/arcade/clawmachine/attack_hand(mob/living/user)
+	if(..())
+		return
+	tgui_interact(user)
+
+/// TGUI Stuff
+
+/obj/machinery/computer/arcade/clawmachine/tgui_interact(mob/user, ui_key = "main", datum/tgui/ui = null, force_open = 0, datum/tgui/master_ui = null, datum/tgui_state/state = GLOB.tgui_default_state)
+	ui = SStgui.try_update_ui(user, src, ui_key, ui, force_open)
+	if(!ui)
+		ui = new(user, src, ui_key, "ClawMachine", name, 300, 400, master_ui, state)
+		ui.autoupdate = TRUE
+		ui.open()
+
+/obj/machinery/computer/arcade/clawmachine/tgui_data(mob/user)
+	var/list/data = list()
+
+	data["wintick"] = wintick
+	data["instructions"] = instructions
+	data["gameStatus"] = gameStatus
+	data["winscreen"] = winscreen
+
+	return data
+
+/obj/machinery/computer/arcade/clawmachine/tgui_act(action, params)
+	if(..())
+		return
+
+	if(action == "newgame" && gamepaid == 0)
+		playsound(src, 'sound/arcade/steal.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+
+	if(action == "newgame" && gamepaid == 1)
+		gameStatus = "CLAWMACHINE_ON"
+		icon_state = "clawmachine_move"
+		instructions = "Guide the claw to the prize you want!"
+		wintick = 0
+
+	if(action == "return" && gameStatus == "CLAWMACHINE_END")
+		gameStatus = "CLAWMACHINE_NEW"
+
+	if(action == "pointless" && wintick < 10)
+		wintick += 1
+
+	if(action == "pointless" && wintick >= 10)
+		instructions = "Insert 1 thaler or swipe a card to play!"
+		clawvend()
+
+/obj/machinery/computer/arcade/clawmachine/proc/clawvend() /// True to a real claw machine, it's NEARLY impossible to win.
+	winprob += 1 /// Yeah.
+
+	if(prob(winprob)) /// YEAH.
+		if(!emagged)
+			prizevend()
+			winscreen = "You won!"
+		else if(emagged)
+			gameprice = 1
+			emagged = 0
+			winscreen = "You won...?"
+			var/obj/item/weapon/grenade/G = new /obj/item/weapon/grenade/explosive(get_turf(src)) /// YEAAAAAAAAAAAAAAAAAAH!!!!!!!!!!
+			G.activate()
+			G.throw_at(get_turf(usr),10,10) /// Play stupid games, win stupid prizes.
+
+		playsound(src, 'sound/arcade/Ori_win.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		winprob = 0
+
+	else
+		playsound(src, 'sound/arcade/Ori_fail.ogg', 50, 1, extrarange = -3, falloff = 0.1, ignore_walls = FALSE)
+		winscreen = "Aw, shucks. Try again!"
+	wintick = 0
+	gamepaid = 0
+	icon_state = "clawmachine"
+	gameStatus = "CLAWMACHINE_END"
+
+/obj/machinery/computer/arcade/clawmachine/emag_act(mob/user)
+	if(!emagged)
+		to_chat(user, "<span class='info'>You modify the claw of the machine. The next one is sure to win! You just have to pay...</span>")
+		name = "AlliCo Snag-A-Prize"
+		desc = "Get some goodies, all for you!"
+		instructions = "Swipe a card to play!"
+		winprob = 100
+		gamepaid = 0
+		wintick = 0
+		gameStatus = "CLAWMACHINE_NEW"
+		emagged = 1
+		return 1

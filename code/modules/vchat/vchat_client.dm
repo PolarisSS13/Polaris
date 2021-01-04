@@ -82,7 +82,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 		become_broken()
 		return FALSE
 
-	if(!owner.is_preference_enabled(/datum/client_preference/vchat_enable))
+	if(!owner?.is_preference_enabled(/datum/client_preference/vchat_enable))
 		become_broken()
 		return FALSE
 
@@ -278,31 +278,45 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 	var/list/partial = splittext(iconData, "{")
 	return replacetext(copytext(partial[2], 3, -5), "\n", "")
 
+/proc/expire_bicon_cache(key)
+	if(GLOB.bicon_cache[key])
+		GLOB.bicon_cache -= key
+		return TRUE
+	return FALSE
+
+GLOBAL_LIST_EMPTY(bicon_cache) // Cache of the <img> tag results, not the icons
 /proc/bicon(var/obj, var/use_class = 1, var/custom_classes = "")
 	var/class = use_class ? "class='icon misc [custom_classes]'" : null
-	if (!obj)
+	if(!obj)
 		return
 
-	var/static/list/bicon_cache = list()
-	if (isicon(obj))
-		//Icon refs get reused all the time especially on temporarily made ones like chat tags, too difficult to cache.
-		//if (!bicon_cache["\ref[obj]"]) // Doesn't exist yet, make it.
-			//bicon_cache["\ref[obj]"] = icon2base64(obj)
-
+	// Try to avoid passing bicon an /icon directly. It is better to pass it an atom so it can cache.
+	if(isicon(obj)) // Passed an icon directly, nothing to cache-key on, as icon refs get reused *often*
 		return "<img [class] src='data:image/png;base64,[icon2base64(obj)]'>"
 
 	// Either an atom or somebody fucked up and is gonna get a runtime, which I'm fine with.
 	var/atom/A = obj
-	var/key = "[istype(A.icon, /icon) ? "\ref[A.icon]" : A.icon]:[A.icon_state]"
-	if (!bicon_cache[key]) // Doesn't exist, make it.
-		var/icon/I = icon(A.icon, A.icon_state, SOUTH, 1)
-		if (ishuman(obj))
-			I = getFlatIcon(obj) //Ugly
-		bicon_cache[key] = icon2base64(I, key)
+	var/key
+	var/changes_often = ishuman(A) || isobserver(A) // If this ends up with more, move it into a proc or var on atom.
+
+	if(changes_often)
+		key = "\ref[A]"
+	else
+		key = "[istype(A.icon, /icon) ? "\ref[A.icon]" : A.icon]:[A.icon_state]"
+
+	var/base64 = GLOB.bicon_cache[key]
+	// Non-human atom, no cache
+	if(!base64) // Doesn't exist, make it.
+		base64 = icon2base64(A.examine_icon(), key)
+		GLOB.bicon_cache[key] = base64
+		if(changes_often)
+			addtimer(CALLBACK(GLOBAL_PROC, .proc/expire_bicon_cache, key), 50 SECONDS, TIMER_UNIQUE)
+
+	// May add a class to the img tag created by bicon
 	if(use_class)
 		class = "class='icon [A.icon_state] [custom_classes]'"
 
-	return "<img [class] src='data:image/png;base64,[bicon_cache[key]]'>"
+	return "<img [class] src='data:image/png;base64,[base64]'>"
 
 //Checks if the message content is a valid to_chat message
 /proc/is_valid_tochat_message(message)
@@ -383,22 +397,22 @@ var/to_chat_src
 		to_chat(src, "<span class='warning'>Error: Your chat log is already being prepared. Please wait until it's been downloaded before trying to export it again.</span>")
 		return
 
-	o_file = file(o_file)
-
 	// Write the CSS file to the log
-	o_file << "<html><head><style>"
-	o_file << file2text(file("code/modules/vchat/css/ss13styles.css"))
-	o_file << "</style></head><body>"
+	var/text_blob = "<html><head><style>"
+	text_blob += file2text(file("code/modules/vchat/css/ss13styles.css"))
+	text_blob += "</style></head><body>"
 
 	// Write the messages to the log
 	for(var/list/result in results)
-		o_file << "[result["message"]]<br>"
+		text_blob += "[result["message"]]<br>"
 		CHECK_TICK
 
-	o_file << "</body></html>"
+	text_blob += "</body></html>"
+
+	rustg_file_write(text_blob, o_file)
 
 	// Send the log to the client
-	src << ftp(o_file, "log_[time2text(world.timeofday, "YYYY_MM_DD_(hh_mm)")].html")
+	src << ftp(file(o_file), "log_[time2text(world.timeofday, "YYYY_MM_DD_(hh_mm)")].html")
 
 	// clean up the file on our end
 	spawn(10 SECONDS)

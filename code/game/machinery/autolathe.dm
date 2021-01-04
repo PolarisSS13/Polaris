@@ -12,8 +12,8 @@
 
 	circuit = /obj/item/weapon/circuitboard/autolathe
 	var/datum/category_collection/autolathe/machine_recipes
-	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
-	var/list/storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0)
+	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
+	var/list/storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
 	var/datum/category_group/autolathe/current_category
 
 	var/hacked = 0
@@ -25,6 +25,9 @@
 	var/build_time = 50
 
 	var/datum/wires/autolathe/wires = null
+
+	var/mb_rating = 0
+	var/man_rating = 0
 
 	var/filtertext
 
@@ -64,6 +67,9 @@
 		var/list/material_bottom = list("<tr>")
 
 		for(var/material in stored_material)
+			if(material != DEFAULT_WALL_MATERIAL && material != MAT_GLASS) // Don't show the Extras unless people care enough to put them in.
+				if(stored_material[material] <= 0)
+					continue
 			material_top += "<td width = '25%' align = center><b>[material]</b></td>"
 			material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
 
@@ -72,7 +78,9 @@
 		dat += "<h2>Printable Designs</h2><h3>Showing: <a href='?src=\ref[src];change_category=1'>[current_category]</a>.</h3></center><table width = '100%'>"
 
 		for(var/datum/category_item/autolathe/R in current_category.items)
-			if(R.hidden && !hacked)
+			if(R.hidden && !hacked)	// Illegal or nonstandard.
+				continue
+			if(R.man_rating > man_rating)	// Advanced parts.
 				continue
 			if(filtertext && findtext(R.name, filtertext) == 0)
 				continue
@@ -285,6 +293,15 @@
 
 		//Create the desired item.
 		var/obj/item/I = new making.path(src.loc)
+
+		if(LAZYLEN(I.matter))	// Sadly we must obey the laws of equivalent exchange.
+			I.matter.Cut()
+		else
+			I.matter = list()
+
+		for(var/material in making.resources)	// Handle the datum's autoscaling for waste, so we're properly wasting material, but not so much if we have efficiency.
+			I.matter[material] = round(making.resources[material] / (making.no_scale ? 1 : 1.25)) * (making.no_scale ? 1 : mat_efficiency)
+
 		flick("[initial(icon_state)]_finish", src)
 		if(multiplier > 1)
 			if(istype(I, /obj/item/stack))
@@ -292,7 +309,17 @@
 				S.amount = multiplier
 			else
 				for(multiplier; multiplier > 1; --multiplier) // Create multiple items if it's not a stack.
-					new making.path(src.loc)
+					I = new making.path(src.loc)
+
+// We've already deducted the cost of multiple items. Process the matter the same.
+					if(LAZYLEN(I.matter))
+						I.matter.Cut()
+
+					else
+						I.matter = list()
+
+					for(var/material in making.resources)
+						I.matter[material] = round(making.resources[material] / (making.no_scale ? 1 : 1.25)) * (making.no_scale ? 1 : mat_efficiency)
 
 	updateUsrDialog()
 
@@ -311,21 +338,23 @@
 //Updates overall lathe storage size.
 /obj/machinery/autolathe/RefreshParts()
 	..()
-	var/mb_rating = 0
-	var/man_rating = 0
+	mb_rating = 0
+	man_rating = 0
 	for(var/obj/item/weapon/stock_parts/matter_bin/MB in component_parts)
 		mb_rating += MB.rating
 	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
 		man_rating += M.rating
 
 	storage_capacity[DEFAULT_WALL_MATERIAL] = mb_rating  * 25000
+	storage_capacity[MAT_PLASTIC] = mb_rating * 20000
+	storage_capacity[MAT_PLASTEEL] = mb_rating * 16250
 	storage_capacity["glass"] = mb_rating  * 12500
 	build_time = 50 / man_rating
 	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.6. Maximum rating of parts is 5
 
 /obj/machinery/autolathe/dismantle()
 	for(var/mat in stored_material)
-		var/material/M = get_material_by_name(mat)
+		var/datum/material/M = get_material_by_name(mat)
 		if(!istype(M))
 			continue
 		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))

@@ -14,10 +14,11 @@
 		)
 
 	var/default_type = DEFAULT_WALL_MATERIAL
-	var/material/material
+	var/datum/material/material
 	var/perunit = SHEET_MATERIAL_AMOUNT
 	var/apply_colour //temp pending icon rewrite
 	drop_sound = 'sound/items/drop/axe.ogg'
+	pickup_sound = 'sound/items/pickup/axe.ogg'
 
 /obj/item/stack/material/New()
 	..()
@@ -108,6 +109,7 @@
 	default_type = "sandstone"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/stack/material/marble
 	name = "marble brick"
@@ -115,12 +117,14 @@
 	default_type = "marble"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/boots.ogg'
+	pickup_sound = 'sound/items/pickup/boots.ogg'
 
 /obj/item/stack/material/diamond
 	name = "diamond"
 	icon_state = "sheet-diamond"
 	default_type = "diamond"
 	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/uranium
 	name = "uranium"
@@ -134,6 +138,7 @@
 	default_type = "phoron"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/plastic
 	name = "plastic"
@@ -337,6 +342,7 @@
 	default_type = MAT_WOOD
 	strict_color_stacking = TRUE
 	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/stack/material/wood/sif
 	name = "alien wooden plank"
@@ -354,6 +360,7 @@
 	description_info = "Use inhand to craft things, or use a sharp and edged object on this to convert it into two wooden planks."
 	var/plank_type = /obj/item/stack/material/wood
 	drop_sound = 'sound/items/drop/wooden.ogg'
+	pickup_sound = 'sound/items/pickup/wooden.ogg'
 
 /obj/item/stack/material/log/sif
 	name = "alien log"
@@ -392,6 +399,7 @@
 	pass_color = TRUE
 	strict_color_stacking = TRUE
 	drop_sound = 'sound/items/drop/clothing.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 
 /obj/item/stack/material/cloth/diyaab
 	color = "#c6ccf0"
@@ -412,7 +420,8 @@
 	no_variants = FALSE
 	pass_color = TRUE
 	strict_color_stacking = TRUE
-	drop_sound = 'sound/items/drop/box.ogg'
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/stack/material/snow
 	name = "snow"
@@ -430,11 +439,23 @@
 	name = "leather"
 	desc = "The by-product of mob grinding."
 	icon_state = "sheet-leather"
-	default_type = "leather"
+	default_type = MAT_LEATHER
 	no_variants = FALSE
 	pass_color = TRUE
 	strict_color_stacking = TRUE
-	drop_sound = 'sound/items/drop/clothing.ogg'
+	drop_sound = 'sound/items/drop/leather.ogg'
+	pickup_sound = 'sound/items/pickup/leather.ogg'
+
+/obj/item/stack/material/chitin
+	name = "chitin"
+	desc = "The by-product of mob grinding."
+	icon_state = "chitin"
+	default_type = MAT_CHITIN
+	no_variants = FALSE
+	pass_color = TRUE
+	strict_color_stacking = TRUE
+	drop_sound = 'sound/items/drop/leather.ogg'
+	pickup_sound = 'sound/items/pickup/leather.ogg'
 
 /obj/item/stack/material/glass
 	name = "glass"
@@ -442,6 +463,7 @@
 	default_type = "glass"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/glass.ogg'
+	pickup_sound = 'sound/items/pickup/glass.ogg'
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"

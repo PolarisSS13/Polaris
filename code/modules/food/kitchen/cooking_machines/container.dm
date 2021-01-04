@@ -32,13 +32,26 @@
 
 
 /obj/item/weapon/reagent_containers/cooking_container/attackby(var/obj/item/I as obj, var/mob/user as mob)
+	if(istype(I, /obj/item/weapon/gripper))
+		var/obj/item/weapon/gripper/GR = I
+		if(GR.wrapped)
+			GR.wrapped.forceMove(get_turf(src))
+			attackby(GR.wrapped, user)
+			if(QDELETED(GR.wrapped))
+				GR.wrapped = null
+
+			if(GR?.wrapped.loc != src)
+				GR.wrapped = null
+
+			return
+
 	for (var/possible_type in insertable)
 		if (istype(I, possible_type))
 			if (!can_fit(I))
 				to_chat(user, "<span class='warning'>There's no more space in the [src] for that!</span>")
 				return 0
 
-			if(!user.unEquip(I))
+			if(!user.unEquip(I) && !isturf(I.loc))
 				return
 			I.forceMove(src)
 			to_chat(user, "<span class='notice'>You put the [I] into the [src].</span>")
@@ -145,14 +158,14 @@
 /obj/item/weapon/reagent_containers/cooking_container/oven
 	name = "oven dish"
 	shortname = "shelf"
-	desc = "Put ingredients in this; designed for use with an oven. Warranty void if used incorrectly."
+	desc = "Put ingredients in this; designed for use with an oven. Warranty void if used incorrectly. Alt click to remove contents."
 	icon_state = "ovendish"
 	max_space = 30
 	max_reagents = 120
 
 /obj/item/weapon/reagent_containers/cooking_container/oven/Initialize()
 	. = ..()
-	
+
 	// We add to the insertable list specifically for the oven trays, to allow specialty cakes.
 	insertable += list(
 		/obj/item/clothing/head/cakehat, // This is because we want to allow birthday cakes to be makeable.
@@ -162,11 +175,11 @@
 /obj/item/weapon/reagent_containers/cooking_container/fryer
 	name = "fryer basket"
 	shortname = "basket"
-	desc = "Put ingredients in this; designed for use with a deep fryer. Warranty void if used incorrectly."
+	desc = "Put ingredients in this; designed for use with a deep fryer. Warranty void if used incorrectly. Alt click to remove contents."
 	icon_state = "basket"
-	
+
 /obj/item/weapon/reagent_containers/cooking_container/grill
 	name = "grill rack"
 	shortname = "rack"
-	desc = "Put ingredients 'in'/on this; designed for use with a grill. Warranty void if used incorrectly."
+	desc = "Put ingredients 'in'/on this; designed for use with a grill. Warranty void if used incorrectly. Alt click to remove contents."
 	icon_state = "grillrack"

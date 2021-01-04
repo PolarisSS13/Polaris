@@ -6,7 +6,6 @@
 /datum/event2/meta/pda_spam/get_weight()
 	return metric.count_people_in_department(DEPARTMENT_EVERYONE) * 2
 
-
 /datum/event2/event/pda_spam
 	length_lower_bound = 30 MINUTES
 	length_upper_bound = 1 HOUR
@@ -35,7 +34,11 @@
 	var/list/viables = list()
 
 	for(var/obj/item/device/pda/check_pda in sortAtom(PDAs))
-		if(!check_pda.owner || check_pda.toff || check_pda.hidden || check_pda.spam_proof)
+		if (!check_pda.owner || check_pda == src || check_pda.hidden)
+			continue
+		
+		var/datum/data/pda/app/messenger/M = check_pda.find_program(/datum/data/pda/app/messenger)
+		if(!M || M.toff)
 			continue
 		viables += check_pda
 
@@ -127,7 +130,8 @@
 
 /datum/event2/event/pda_spam/proc/send_spam(obj/item/device/pda/P, sender, message)
 	last_spam_time = world.time
-	P.spam_message(sender, message)
+	var/datum/data/pda/app/messenger/PM = P.find_program(/datum/data/pda/app/messenger)
+	PM.notify("<b>Message from [sender] (Unknown / spam?), </b>\"[message]\" (Unable to Reply)", 0)
 	if(spam_debug)
 		log_debug("PDA Spam event sent spam to \the [P].")
 

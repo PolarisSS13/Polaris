@@ -11,6 +11,7 @@ var/global/list/ai_list = list()					//List of all AIs, including clientless
 var/global/list/living_mob_list = list()			//List of all alive mobs, including clientless. Excludes /mob/new_player
 var/global/list/dead_mob_list = list()				//List of all dead mobs, including clientless. Excludes /mob/new_player
 var/global/list/listening_objects = list()			//List of all objects which care about receiving messages (communicators, radios, etc)
+var/global/list/cleanbot_reserved_turfs = list()	//List of all turfs currently targeted by some cleanbot
 
 var/global/list/cable_list = list()					//Index for all cables, so that powernets don't have to look through the entire world all the time
 var/global/list/landmarks_list = list()				//list of all landmarks created
@@ -27,6 +28,9 @@ var/list/mannequins_
 // Closets have magic appearances
 GLOBAL_LIST_EMPTY(closet_appearances)
 
+// Times that players are allowed to respawn ("ckey" = world.time)
+GLOBAL_LIST_EMPTY(respawn_timers)
+
 // Posters
 var/global/list/poster_designs = list()
 var/global/list/NT_poster_designs = list()
@@ -41,6 +45,11 @@ var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
+var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears indexed by type
+var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
+var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
+
+GLOBAL_LIST(custom_species_bases)
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
@@ -211,6 +220,58 @@ var/global/list/string_slot_flags = list(
 	for(var/T in paths)
 		var/decl/closet_appearance/app = new T()
 		GLOB.closet_appearances[T] = app
+
+	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	for(var/path in paths)
+		var/obj/item/clothing/head/instance = new path()
+		ear_styles_list[path] = instance
+
+	// Custom Tails
+	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail - /datum/sprite_accessory/tail/taur
+	for(var/path in paths)
+		var/datum/sprite_accessory/tail/instance = new path()
+		tail_styles_list[path] = instance
+
+	// Custom Wings
+	paths = typesof(/datum/sprite_accessory/wing) - /datum/sprite_accessory/wing
+	for(var/path in paths)
+		var/datum/sprite_accessory/wing/instance = new path()
+		wing_styles_list[path] = instance
+
+/*
+	// Custom species traits
+	paths = typesof(/datum/trait) - /datum/trait
+	for(var/path in paths)
+		var/datum/trait/instance = new path()
+		if(!instance.name)
+			continue //A prototype or something
+		var/cost = instance.cost
+		traits_costs[path] = cost
+		all_traits[path] = instance
+		switch(cost)
+			if(-INFINITY to -0.1)
+				negative_traits[path] = instance
+			if(0)
+				neutral_traits[path] = instance
+			if(0.1 to INFINITY)
+				positive_traits[path] = instance
+*/
+
+	// Custom species icon bases
+	var/list/blacklisted_icons = list(/*SPECIES_CUSTOM,*/SPECIES_PROMETHEAN) //Just ones that won't work well.
+	var/list/whitelisted_icons = list(/*SPECIES_FENNEC,SPECIES_XENOHYBRID*/) //Include these anyway
+	for(var/species_name in GLOB.playable_species)
+		if(species_name in blacklisted_icons)
+			continue
+		var/datum/species/S = GLOB.all_species[species_name]
+		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
+			continue
+		GLOB.custom_species_bases += species_name
+	for(var/species_name in whitelisted_icons)
+		GLOB.custom_species_bases += species_name
+
+	return 1 // Hooks must return 1
+
 
 	return 1
 

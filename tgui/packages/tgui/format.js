@@ -1,3 +1,9 @@
+/**
+ * @file
+ * @copyright 2020 Aleksej Komarov
+ * @license MIT
+ */
+
 import { clamp, round, toFixed } from 'common/math';
 
 const SI_SYMBOLS = [
@@ -33,6 +39,9 @@ export const formatSiUnit = (
   minBase1000 = -SI_BASE_INDEX,
   unit = ''
 ) => {
+  if (typeof value !== 'number' || !Number.isFinite(value)) {
+    return value;
+  }
   const realBase10 = Math.floor(Math.log10(value));
   const base10 = Math.floor(Math.max(minBase1000 * 3, realBase10));
   const realBase1000 = Math.floor(realBase10 / 3);
@@ -84,4 +93,24 @@ export const formatMoney = (value, precision = 0) => {
     result += fixed.charAt(i);
   }
   return result;
+};
+
+export const formatCommaNumber = value => {
+  if (!Number.isFinite(value)) {
+    return value;
+  }
+  // From http://stackoverflow.com/questions/2901102/how-to-print-a-number-with-commas-as-thousands-separators-in-javascript
+  let parts = value.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+};
+
+// Function from https://stackoverflow.com/a/34841026. CC BY-SA 4.0.
+export const formatTime = seconds => {
+  let hours = Math.floor(seconds / 3600);
+  let minutes = Math.floor(seconds / 60) % 60;
+  return [hours, minutes, seconds % 60]
+    .map(v => v < 10 ? "0" + v : v)
+    .filter((v, i) => v !== "00" || i > 0)
+    .join(":");
 };

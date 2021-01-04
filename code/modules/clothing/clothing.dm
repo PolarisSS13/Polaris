@@ -2,6 +2,7 @@
 	name = "clothing"
 	siemens_coefficient = 0.9
 	drop_sound = 'sound/items/drop/clothing.ogg'
+	pickup_sound = 'sound/items/pickup/clothing.ogg'
 	var/list/species_restricted = null //Only these species can wear this kit.
 	var/gunshot_residue //Used by forensics.
 
@@ -36,7 +37,7 @@
 
 // Aurora forensics port.
 /obj/item/clothing/clean_blood()
-	..()
+	. = ..()
 	gunshot_residue = null
 
 
@@ -47,6 +48,12 @@
 			var/obj/item/clothing/accessory/tie = new T(src)
 			src.attach_accessory(null, tie)
 	set_clothing_index()
+
+/obj/item/clothing/update_icon()
+	overlays.Cut() //This removes all the overlays on the sprite and then goes down a checklist adding them as required.
+	if(blood_DNA)
+		add_blood()
+	. = ..()
 
 /obj/item/clothing/equipped(var/mob/user,var/slot)
 	..()
@@ -111,7 +118,7 @@
 	. = FALSE
 	if(LAZYLEN(accessories))
 		for(var/obj/item/clothing/C in accessories)
-			if(C.handle_low_temperature(tempcheck))
+			if(C.handle_high_temperature(tempcheck))
 				. = TRUE
 
 	if(max_heat_protection_temperature && max_heat_protection_temperature >= tempcheck)
@@ -284,6 +291,7 @@
 		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi'
 		)
 	drop_sound = 'sound/items/drop/gloves.ogg'
+	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
 /obj/item/clothing/proc/set_clothing_index()
 	return
@@ -322,6 +330,11 @@
 			species_restricted -= SPECIES_TAJ
 		return
 */
+
+/obj/item/clothing/gloves/clean_blood()
+	. = ..()
+	transfer_blood = 0
+	update_icon()
 
 /obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE)
 	var/mob/living/carbon/human/H = user
@@ -392,6 +405,8 @@
 	fingerprint_chance = 100
 	punch_force = 2
 	body_parts_covered = 0
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 ///////////////////////////////////////////////////////////////////////
 //Head
@@ -418,6 +433,7 @@
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi'
 		)
 	drop_sound = 'sound/items/drop/hat.ogg'
+	pickup_sound = 'sound/items/pickup/hat.ogg'
 
 /obj/item/clothing/head/attack_self(mob/user)
 	if(brightness_on)
@@ -529,6 +545,9 @@
 	var/list/say_messages
 	var/list/say_verbs
 
+	drop_sound = "generic_drop"
+	pickup_sound = "generic_pickup"
+
 /obj/item/clothing/mask/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
@@ -574,6 +593,7 @@
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi'
 		)
 	drop_sound = 'sound/items/drop/shoes.ogg'
+	pickup_sound = 'sound/items/pickup/shoes.ogg'
 
 /obj/item/clothing/shoes/proc/draw_knife()
 	set name = "Draw Boot Knife"
@@ -635,17 +655,12 @@
 	update_icon()
 
 /obj/item/clothing/shoes/update_icon()
-	overlays.Cut() //This removes all the overlays on the sprite and then goes down a checklist adding them as required.
-	if(blood_DNA)
-		add_blood()
+	. = ..()
 	if(holding)
 		overlays += image(icon, "[icon_state]_knife")
-	if(contaminated)
-		overlays += contamination_overlay
 	if(ismob(usr))
 		var/mob/M = usr
 		M.update_inv_shoes()
-	return ..()
 
 /obj/item/clothing/shoes/clean_blood()
 	update_icon()
@@ -675,9 +690,13 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
+	blood_sprite_state = "suitblood" //Defaults to the suit's blood overlay, so that some blood renders instead of no blood.
+
+	var/taurized = FALSE
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
 	preserve_item = 1
+	equip_sound = 'sound/items/jumpsuit_equip.ogg'
 
 
 	sprite_sheets = list(
@@ -709,6 +728,43 @@
 
 	set_clothing_index()
 
+/obj/item/clothing/suit/equipped(var/mob/user, var/slot)
+	if(ishuman(user))
+		var/mob/living/carbon/human/H = user
+		if((taurized && !isTaurTail(H.tail_style)) || (!taurized && isTaurTail(H.tail_style)))
+			taurize(user)
+
+	return ..()
+
+/obj/item/clothing/suit/proc/taurize(var/mob/living/carbon/human/Taur)
+	if(isTaurTail(Taur.tail_style))
+		var/datum/sprite_accessory/tail/taur/taurtail = Taur.tail_style
+		if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in cached_icon_states(taurtail.suit_sprites)))
+			icon_override = taurtail.suit_sprites
+			taurized = TRUE
+
+	if(!taurized)
+		icon_override = initial(icon_override)
+		taurized = FALSE
+
+// Taur suits need to be shifted so its centered on their taur half.
+/obj/item/clothing/suit/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask)
+	var/image/standing = ..()
+	if(taurized) //Special snowflake var on suits
+		standing.pixel_x = -16
+		standing.layer = BODY_LAYER + 15 // 15 is above tail layer, so will not be covered by taurbody.
+	return standing
+
+/obj/item/clothing/suit/apply_accessories(var/image/standing)
+	if(LAZYLEN(accessories) && taurized)
+		for(var/obj/item/clothing/accessory/A in accessories)
+			var/image/I = new(A.get_mob_overlay())
+			I.pixel_x = 16 //Opposite of the pixel_x on the suit (-16) from taurization to cancel it out and puts the accessory in the correct place on the body.
+			standing.add_overlay(I)
+	else
+		return ..()
+
+
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
 /obj/item/clothing/under
@@ -722,6 +778,7 @@
 	permeability_coefficient = 0.90
 	slot_flags = SLOT_ICLOTHING
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
+	equip_sound = 'sound/items/jumpsuit_equip.ogg'
 	w_class = ITEMSIZE_NORMAL
 	show_messages = 1
 	blood_sprite_state = "uniformblood"
@@ -785,7 +842,7 @@
 
 	//autodetect rollability
 	if(rolled_down < 0)
-		if(("[worn_state]_d_s" in icon_states(icon)) || ("[worn_state]_s" in icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in icon_states(icon_override)))
+		if(("[worn_state]_d_s" in cached_icon_states(icon)) || ("[worn_state]_s" in cached_icon_states(rolled_down_icon)) || ("[worn_state]_d_s" in cached_icon_states(icon_override)))
 			rolled_down = 0
 
 	if(rolled_down == -1)
@@ -822,11 +879,11 @@
 		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
-	else if ("[worn_state]_s" in icon_states(rolled_down_icon))
+	else if ("[worn_state]_s" in cached_icon_states(rolled_down_icon))
 		under_icon = rolled_down_icon
 
 	// The _s is because the icon update procs append it.
-	if((under_icon == rolled_down_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_d_s" in icon_states(under_icon)))
+	if((under_icon == rolled_down_icon && "[worn_state]_s" in cached_icon_states(under_icon)) || ("[worn_state]_d_s" in cached_icon_states(under_icon)))
 		if(rolled_down != 1)
 			rolled_down = 0
 	else
@@ -845,13 +902,13 @@
 		under_icon = sprite_sheets[H.species.get_bodytype(H)]
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
-	else if ("[worn_state]_s" in icon_states(rolled_down_sleeves_icon))
+	else if ("[worn_state]_s" in cached_icon_states(rolled_down_sleeves_icon))
 		under_icon = rolled_down_sleeves_icon
 	else if(index)
 		under_icon = new /icon("[INV_W_UNIFORM_DEF_ICON]_[index].dmi")
 
 	// The _s is because the icon update procs append it.
-	if((under_icon == rolled_down_sleeves_icon && "[worn_state]_s" in icon_states(under_icon)) || ("[worn_state]_r_s" in icon_states(under_icon)))
+	if((under_icon == rolled_down_sleeves_icon && "[worn_state]_s" in cached_icon_states(under_icon)) || ("[worn_state]_r_s" in cached_icon_states(under_icon)))
 		if(rolled_sleeves != 1)
 			rolled_sleeves = 0
 	else
@@ -935,7 +992,7 @@
 	if(rolled_down)
 		body_parts_covered = initial(body_parts_covered)
 		body_parts_covered &= ~(UPPER_TORSO|ARMS)
-		if("[worn_state]_s" in icon_states(rolled_down_icon))
+		if("[worn_state]_s" in cached_icon_states(rolled_down_icon))
 			icon_override = rolled_down_icon
 			item_state_slots[slot_w_uniform_str] = "[worn_state]"
 		else
@@ -968,7 +1025,7 @@
 	rolled_sleeves = !rolled_sleeves
 	if(rolled_sleeves)
 		body_parts_covered &= ~(ARMS)
-		if("[worn_state]_s" in icon_states(rolled_down_sleeves_icon))
+		if("[worn_state]_s" in cached_icon_states(rolled_down_sleeves_icon))
 			icon_override = rolled_down_sleeves_icon
 			item_state_slots[slot_w_uniform_str] = "[worn_state]"
 		else
@@ -981,7 +1038,6 @@
 		item_state_slots[slot_w_uniform_str] = "[worn_state]"
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
-
 
 /obj/item/clothing/under/rank/New()
 	sensor_mode = pick(0,1,2,3)

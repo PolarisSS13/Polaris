@@ -83,8 +83,11 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	health = config.default_brain_health
 	defib_timer = (config.defib_timer MINUTES) / 2
 	spawn(5)
-		if(brainmob && brainmob.client)
-			brainmob.client.screen.len = null //clear the hud
+		if(brainmob)
+			butcherable = FALSE
+
+			if(brainmob.client)
+				brainmob.client.screen.len = null //clear the hud
 
 /obj/item/organ/internal/brain/Destroy()
 	QDEL_NULL(brainmob)
@@ -96,8 +99,9 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 		brainmob = new(src)
 		brainmob.name = H.real_name
 		brainmob.real_name = H.real_name
-		brainmob.dna = H.dna.Clone()
-		brainmob.timeofhostdeath = H.timeofdeath
+		if(istype(H))
+			brainmob.dna = H.dna.Clone()
+			brainmob.timeofhostdeath = H.timeofdeath
 
 		// Copy modifiers.
 		for(var/datum/modifier/M in H.modifiers)
@@ -124,13 +128,13 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	if(name == initial(name))
 		name = "\the [owner.real_name]'s [initial(name)]"
 
-	var/mob/living/simple_mob/animal/borer/borer = owner.has_brain_worms()
+	var/mob/living/simple_mob/animal/borer/borer = owner?.has_brain_worms()
 
 	if(borer)
 		borer.detatch() //Should remove borer if the brain is removed - RR
 
 	var/obj/item/organ/internal/brain/B = src
-	if(istype(B) && istype(owner))
+	if(istype(B) && owner)
 		B.transfer_identity(owner)
 
 	..()
@@ -177,6 +181,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	parent_organ = BP_TORSO
 	clone_source = TRUE
 	flags = OPENCONTAINER
+	var/list/owner_flavor_text = list()
 
 /obj/item/organ/internal/brain/slime/is_open_container()
 	return 1
@@ -190,6 +195,11 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 			H = owner
 			color = rgb(min(H.r_skin + 40, 255), min(H.g_skin + 40, 255), min(H.b_skin + 40, 255))
 
+/obj/item/organ/internal/brain/slime/removed(var/mob/living/user)
+	if(istype(owner))
+		owner_flavor_text = owner.flavor_texts.Copy()
+	..()
+
 /obj/item/organ/internal/brain/slime/proc/reviveBody()
 	var/datum/dna2/record/R = new /datum/dna2/record()
 	R.dna = brainmob.dna
@@ -199,6 +209,8 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	R.types = DNA2_BUF_UI|DNA2_BUF_UE|DNA2_BUF_SE
 	R.languages = brainmob.languages
 	R.flavor = list()
+	if(islist(owner_flavor_text))
+		R.flavor = owner_flavor_text.Copy()
 	for(var/datum/modifier/mod in brainmob.modifiers)
 		if(mod.flags & MODIFIER_GENETIC)
 			R.genetic_modifiers.Add(mod.type)

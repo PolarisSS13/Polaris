@@ -37,6 +37,11 @@
 		forceMove(destination)
 		return 1
 
+	var/obj/structure/ladder/ladder = locate() in start.contents
+	if((direction == UP ? ladder?.target_up : ladder?.target_down) && (ladder?.allowed_directions & direction))
+		if(src.may_climb_ladders(ladder))
+			return ladder.climbLadder(src, (direction == UP ? ladder.target_up : ladder.target_down))
+
 	if(!start.CanZPass(src, direction))
 		to_chat(src, "<span class='warning'>\The [start] is in the way.</span>")
 		return 0
@@ -46,35 +51,39 @@
 		return 0
 
 	var/area/area = get_area(src)
-	if(direction == UP && area.has_gravity() && !can_overcome_gravity())
-		var/obj/structure/lattice/lattice = locate() in destination.contents
-		var/obj/structure/catwalk/catwalk = locate() in destination.contents
-		if(lattice)
-			var/pull_up_time = max(5 SECONDS + (src.movement_delay() * 10), 1)
-			to_chat(src, "<span class='notice'>You grab \the [lattice] and start pulling yourself upward...</span>")
-			destination.audible_message("<span class='notice'>You hear something climbing up \the [lattice].</span>")
-			if(do_after(src, pull_up_time))
-				to_chat(src, "<span class='notice'>You pull yourself up.</span>")
+	if(area.has_gravity() && !can_overcome_gravity())
+		if(direction == UP)
+			var/obj/structure/lattice/lattice = locate() in destination.contents
+			var/obj/structure/catwalk/catwalk = locate() in destination.contents
+
+			if(lattice)
+				var/pull_up_time = max(5 SECONDS + (src.movement_delay() * 10), 1)
+				to_chat(src, "<span class='notice'>You grab \the [lattice] and start pulling yourself upward...</span>")
+				destination.audible_message("<span class='notice'>You hear something climbing up \the [lattice].</span>")
+				if(do_after(src, pull_up_time))
+					to_chat(src, "<span class='notice'>You pull yourself up.</span>")
+				else
+					to_chat(src, "<span class='warning'>You gave up on pulling yourself up.</span>")
+					return 0
+
+			else if(catwalk?.hatch_open)
+				var/pull_up_time = max(5 SECONDS + (src.movement_delay() * 10), 1)
+				to_chat(src, "<span class='notice'>You grab the edge of \the [catwalk] and start pulling yourself upward...</span>")
+				var/old_dest = destination
+				destination = get_step(destination, dir) // mob's dir
+				if(!destination?.Enter(src, old_dest))
+					to_chat(src, "<span class='notice'>There's something in the way up above in that direction, try another.</span>")
+					return 0
+				destination.audible_message("<span class='notice'>You hear something climbing up \the [catwalk].</span>")
+				if(do_after(src, pull_up_time))
+					to_chat(src, "<span class='notice'>You pull yourself up.</span>")
+				else
+					to_chat(src, "<span class='warning'>You gave up on pulling yourself up.</span>")
+					return 0
+
 			else
-				to_chat(src, "<span class='warning'>You gave up on pulling yourself up.</span>")
+				to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
 				return 0
-		else if(catwalk?.hatch_open)
-			var/pull_up_time = max(5 SECONDS + (src.movement_delay() * 10), 1)
-			to_chat(src, "<span class='notice'>You grab the edge of \the [catwalk] and start pulling yourself upward...</span>")
-			var/old_dest = destination
-			destination = get_step(destination, dir) // mob's dir
-			if(!destination?.Enter(src, old_dest))
-				to_chat(src, "<span class='notice'>There's something in the way up above in that direction, try another.</span>")
-				return 0
-			destination.audible_message("<span class='notice'>You hear something climbing up \the [catwalk].</span>")
-			if(do_after(src, pull_up_time))
-				to_chat(src, "<span class='notice'>You pull yourself up.</span>")
-			else
-				to_chat(src, "<span class='warning'>You gave up on pulling yourself up.</span>")
-				return 0
-		else
-			to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
-			return 0
 
 	for(var/atom/A in destination)
 		if(!A.CanPass(src, start, 1.5, 0))
@@ -297,24 +306,16 @@
 	for(var/atom/A in landing)
 		if(!A.CanPass(src, src.loc, 1, 0))
 			return FALSE
-	// TODO - Stairs should operate thru a different mechanism, not falling, to allow side-bumping.
 
 	// Now lets move there!
 	if(!Move(landing))
 		return 1
 
 	// Detect if we made a silent landing.
-	if(locate(/obj/structure/stairs) in landing)
-		if(isliving(src))
-			var/mob/living/L = src
-			if(L.pulling)
-				L.pulling.forceMove(landing)
-		return 1
-	else
-		var/atom/A = find_fall_target(oldloc, landing)
-		if(special_fall_handle(A) || !A || !A.check_impact(src))
-			return
-		fall_impact(A)
+	var/atom/A = find_fall_target(oldloc, landing)
+	if(special_fall_handle(A) || !A || !A.check_impact(src))
+		return
+	fall_impact(A)
 
 /atom/movable/proc/special_fall_handle(var/atom/A)
 	return FALSE
@@ -383,14 +384,6 @@
 	return FALSE
 
 /turf/space/check_impact(var/atom/movable/falling_atom)
-	return FALSE
-
-// We return 1 without calling fall_impact in order to provide a soft landing. So nice.
-// Note this really should never even get this far
-/obj/structure/stairs/CheckFall(var/atom/movable/falling_atom)
-	return TRUE
-
-/obj/structure/stairs/check_impact(var/atom/movable/falling_atom)
 	return FALSE
 
 // Can't fall onto ghosts

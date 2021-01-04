@@ -17,7 +17,8 @@
 	desc = "A nice hair pin."
 	slot_flags = SLOT_HEAD | SLOT_EARS
 	body_parts_covered = 0
-	drop_sound = 'sound/items/drop/ring.ogg'
+	drop_sound = 'sound/items/drop/accessory.ogg'
+	pickup_sound = 'sound/items/pickup/accessory.ogg'
 
 /obj/item/clothing/head/pin/pink
 	icon_state = "pinkpin"
@@ -169,7 +170,8 @@
 	icon_state = "cardborg_h"
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
 	body_parts_covered = HEAD|FACE|EYES
-	drop_sound = 'sound/items/drop/box.ogg'
+	drop_sound = 'sound/items/drop/cardboardbox.ogg'
+	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
 /obj/item/clothing/head/justice
 	name = "justice hat"
@@ -422,7 +424,8 @@
 	desc = "A jeweled headpiece originating in India."
 	icon_state = "maangtikka"
 	body_parts_covered = 0
-	drop_sound = 'sound/items/drop/accessory.ogg'
+	drop_sound = 'sound/items/drop/ring.ogg'
+	pickup_sound = 'sound/items/pickup/ring.ogg'
 
 /obj/item/clothing/head/jingasa
 	name = "jingasa"
@@ -442,3 +445,38 @@
 	desc = "A gold-lined white cowl. It gives off uncomfortable cult vibes, but fancy."
 	icon_state = "whitecowl"
 	body_parts_covered = 0
+
+/obj/item/clothing/head/blackngoldheaddress
+	name = "black and gold headdress"
+	desc = "An odd looking headdress that covers the eyes."
+	icon_state = "blackngoldheaddress"
+	flags_inv = HIDEEYES
+	body_parts_covered = HEAD|EYES
+
+//Corporate Berets
+
+/obj/item/clothing/head/beret/corp/saare
+	name = "\improper SAARE beret"
+	desc = "A red beret denoting service with Stealth Assault Enterprises. For mercenaries that are more inclined towards style than safety."
+	icon_state = "beret_red"
+
+/obj/item/clothing/head/beret/corp/saare/officer
+	name = "\improper SAARE officer beret"
+	desc = "A red beret with a gold insignia, denoting senior service with Stealth Assault Enterprises. For mercenaries who are more inclined towards style than safety."
+	icon_state = "beret_redgold"
+
+/obj/item/clothing/head/beret/corp/pcrc
+	name = "\improper PCRC beret"
+	desc = "A black beret with a PCRC logo insignia, denoting service with Proxima Centauri Risk Control. For private security personnel that are more inclined towards style than safety."
+	icon_state = "beret_black_observatory"
+
+
+/obj/item/clothing/head/beret/corp/hedberg
+	name = "\improper Hedberg-Hammarstrom beret"
+	desc = "A tan beret denoting service with Hedberg-Hammarstrom private security. For mercenaries who are more inclined towards style than safety."
+	icon_state = "beret_tan"
+
+/obj/item/clothing/head/beret/corp/xion
+	name = "\improper Xion beret"
+	desc = "An orange beret denoting employment with Xion Manufacturing. For personnel that are more inclined towards style than safety."
+	icon_state = "beret_orange"

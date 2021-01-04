@@ -278,6 +278,7 @@
 	name = "armor vest"
 	desc = "A simple kevlar plate carrier."
 	icon_state = "kvest"
+	blood_overlay_type = "armor"
 	item_state_slots = list(slot_r_hand_str = "armor", slot_l_hand_str = "armor")
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0)
 	allowed = list(/obj/item/weapon/gun,/obj/item/weapon/reagent_containers/spray/pepper,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/handcuffs,/obj/item/device/flashlight/maglight,/obj/item/clothing/head/helmet)
@@ -311,6 +312,7 @@
 	name = "Warden's jacket"
 	desc = "An armoured jacket with silver rank pips and livery."
 	icon_state = "warden_jacket"
+	blood_overlay_type = "suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	flags_inv = HIDETIE|HIDEHOLSTER
 
@@ -332,6 +334,7 @@
 	name = "armored coat"
 	desc = "A greatcoat enhanced with a special alloy for some protection and style."
 	icon_state = "hos"
+	blood_overlay_type = "suit"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
 	flags_inv = HIDETIE|HIDEHOLSTER
 
@@ -350,6 +353,11 @@
 	icon_badge = "pcrcvest_badge"
 	icon_nobadge = "pcrcvest_nobadge"
 
+/obj/item/clothing/suit/storage/vest/solgov/hedberg
+	name = "Hedberg-Hammarstrom armor vest"
+	desc = "A simple kevlar plate carrier belonging to Hedberg-Hammarstrom. The company logo is clearly visible."
+	icon_state = "secwebvest"
+
 /obj/item/clothing/suit/storage/vest/solgov
 	name = "\improper Solar Confederate Government armored vest"
 	desc = "A synthetic armor vest. This one is marked with the crest of the Solar Confederate Government."
@@ -358,13 +366,8 @@
 
 /obj/item/clothing/suit/storage/vest/solgov/heavy
 	name = "\improper Solar Confederate Government heavy armored vest"
-	desc = "A synthetic armor vest with PEACEKEEPER printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
+	desc = "A synthetic armor vest with Solar Confederate Government printed in distinctive blue lettering on the chest. This one has added webbing and ballistic plates."
 	icon_state = "solwebvest"
-
-/obj/item/clothing/suit/storage/vest/solgov/security
-	name = "master at arms heavy armored vest"
-	desc = "A synthetic armor vest with MASTER AT ARMS printed in silver lettering on the chest. This one has added webbing and ballistic plates."
-	icon_state = "secwebvest"
 
 /obj/item/clothing/suit/storage/vest/solgov/command
 	name = "command heavy armored vest"
