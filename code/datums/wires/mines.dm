@@ -48,7 +48,7 @@
 		if(WIRE_TRAP)
 			C.visible_message("[bicon(C)] *click!*", "[bicon(C)] *click!*")
 
-			if(mended)
+			if(mend)
 				C.visible_message("[bicon(C)] - The mine recalibrates[C.camo_net ? ", revealing \the [C.trap] inside." : "."]")
 
 				C.alpha = 255
