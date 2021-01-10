@@ -82,6 +82,12 @@
 	name = "Antenna"
 	icon_state = "hair_antenna"
 
+/datum/sprite_accessory/hair/astolfo
+	name = "Astolfo"
+	icon = 'icons/mob/human_face_alt.dmi'
+	icon_add = 'icons/mob/human_face_alt_add.dmi'
+	icon_state = "hair_astolfo"
+
 /datum/sprite_accessory/hair/bald
 	name = "Bald"
 	icon_state = "bald"
@@ -400,6 +406,12 @@
 	icon_state = "hair_sargeant"
 	flags = HAIR_VERY_SHORT
 
+/datum/sprite_accessory/hair/braid
+	name = "Floorlength Braid"
+	icon = 'icons/mob/human_face_alt.dmi'
+	icon_add = 'icons/mob/human_face_alt_add.dmi'
+	icon_state = "hair_braid"
+
 /datum/sprite_accessory/hair/flowhair
 	name = "Flow Hair"
 	icon_state = "hair_f"
@@ -679,6 +691,12 @@
 	icon_state = "hair_ponytail6"
 	flags = HAIR_TIEABLE|HAIR_VERY_SHORT
 
+/datum/sprite_accessory/hair/ponytail6_fixed
+	name = "Ponytail 6.2"
+	icon = 'icons/mob/human_face_alt.dmi'
+	icon_add = 'icons/mob/human_face_alt_add.dmi'
+	icon_state = "hair_ponytail6"
+
 /datum/sprite_accessory/hair/sharpponytail
 	name = "Ponytail Sharp"
 	icon_state = "hair_sharpponytail"
@@ -786,6 +804,12 @@
 	icon_state = "hair_shorthair4"
 	flags = HAIR_VERY_SHORT
 
+/datum/sprite_accessory/hair/awoohair
+	name = "Shoulder-length Messy"
+	icon = 'icons/mob/human_face_alt.dmi'
+	icon_add = 'icons/mob/human_face_alt_add.dmi'
+	icon_state = "momijihair"
+
 /datum/sprite_accessory/hair/shy
 	name = "Shy"
 	icon_state = "hair_shy"
@@ -877,6 +901,12 @@
 	gender = MALE
 	flags = HAIR_VERY_SHORT
 
+/datum/sprite_accessory/hair/twindrills
+	name = "Twin Drills"
+	icon = 'icons/mob/human_face_alt.dmi'
+	icon_add = 'icons/mob/human_face_alt_add.dmi'
+	icon_state = "hair_twincurl"
+
 /datum/sprite_accessory/hair/twintail
 	name = "Twintail"
 	icon_state = "hair_twintail"
@@ -932,36 +962,6 @@
 	name = "Zieglertail"
 	icon_state = "hair_ziegler"
 	flags = HAIR_TIEABLE
-
-/datum/sprite_accessory/hair/astolfo
-	name = "Astolfo"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_add = 'icons/mob/human_face_alt_add.dmi'
-	icon_state = "hair_astolfo"
-
-/datum/sprite_accessory/hair/awoohair
-	name = "Shoulder-length Messy"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_add = 'icons/mob/human_face_alt_add.dmi'
-	icon_state = "momijihair"
-
-/datum/sprite_accessory/hair/braid
-	name = "Floorlength Braid"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_add = 'icons/mob/human_face_alt_add.dmi'
-	icon_state = "hair_braid"
-
-/datum/sprite_accessory/hair/twindrills
-	name = "Twin Drills"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_add = 'icons/mob/human_face_alt_add.dmi'
-	icon_state = "hair_twincurl"
-
-/datum/sprite_accessory/hair/ponytail6_fixed
-	name = "Ponytail 6.2"
-	icon = 'icons/mob/human_face_alt.dmi'
-	icon_add = 'icons/mob/human_face_alt_add.dmi'
-	icon_state = "hair_ponytail6"
 
 /datum/sprite_accessory/hair/una_hood
 	name = "Cobra Hood"
