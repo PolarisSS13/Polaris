@@ -37,6 +37,8 @@
 			var/mob/M = mob
 			spawn(0) // It's possible that it could be deleted in the meantime, or that it runtimes.
 				if(M)
+					if(isobserver(M))
+						message = "<span class='emote'><B>[src]</B> ([ghost_follow_link(src, M)]) [input]</span>"
 					M.show_message(message, m_type)
 
 		for(var/obj in o_viewers)

@@ -230,9 +230,9 @@
 				"<span class='danger'>You have deployed \the [src]!</span>",
 				"You hear the rustling of [material.name]."
 				)
-			playsound(src, 'sound/machines/click.ogg',70, 1)
+			playsound(src, 'sound/items/Wirecutter.ogg',70, 1)
 			spawn(2)
-				playsound(src, 'sound/machines/click.ogg',40, 1)
+				playsound(src, 'sound/items/Wirecutter.ogg',40, 1)
 			user.drop_from_inventory(src)
 			forceMove(get_turf(src))
 			anchored = 1
