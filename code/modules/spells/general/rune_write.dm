@@ -19,7 +19,7 @@
 /spell/rune_write/cast(null, mob/user = usr)
 	if(!cultwords["travel"])
 		runerandom()
-	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "Summon Armor", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Burning Blood", "Communicate", "Stun")
+	var/list/runes = list("Teleport", "Teleport Other", "Spawn a Tome", "Change Construct Type", "Convert", "Summon Armor", "EMP", "Drain Blood", "See Invisible", "Resurrect", "Hide Runes", "Reveal Runes", "Astral Journey", "Manifest a Ghost", "Imbue Talisman", "Sacrifice", "Wall", "Free Cultist", "Summon Cultist", "Deafen", "Blind", "BloodBoil", "Burning Blood", "Communicate", "Stun", "Hellish Defender", "Create Forge", "Create Soulstone", "Imbue Sphere")
 	var/r = input(user, "Choose a rune to scribe", "Rune Scribing") in runes //not cancellable.
 	var/obj/effect/rune/R = new /obj/effect/rune(user.loc)
 	if(istype(user.loc,/turf))
@@ -140,7 +140,7 @@
 					R.word2=cultwords["technology"]
 					R.word3=cultwords["other"]
 					R.check_icon()
-			if("Cultsummon")
+			if("Summon Cultist")
 				if(cast_check(1))
 					R.word1=cultwords["join"]
 					R.word2=cultwords["other"]
@@ -181,6 +181,30 @@
 					R.word1=cultwords["join"]
 					R.word2=cultwords["hide"]
 					R.word3=cultwords["technology"]
+					R.check_icon()
+			if("Create Forge")
+				if(cast_check(1))
+					R.word1=cultwords["blood"]
+					R.word2=cultwords["create"]
+					R.word3=cultwords["technology"]
+					R.check_icon()
+			if("Create Soulstone")
+				if(cast_check(1))
+					R.word1=cultwords["blood"]
+					R.word2=cultwords["create"]
+					R.word3=cultwords["other"]
+					R.check_icon()
+			if("Hellish Defender")
+				if(cast_check(1))
+					R.word1=cultwords["hell"]
+					R.word2=cultwords["destroy"]
+					R.word3=cultwords["see"]
+					R.check_icon()
+			if("Imbue Sphere")
+				if(cast_check(1))
+					R.word1=cultwords["join"]
+					R.word2=cultwords["technology"]
+					R.word3=cultwords["create"]
 					R.check_icon()
 	else
 		to_chat(user, "<span class='warning'> You do not have enough space to write a proper rune.</span>")

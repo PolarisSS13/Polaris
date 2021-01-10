@@ -1,11 +1,4 @@
 
-GLOBAL_LIST(cultforge_conversion_list)
-
-/hook/startup/proc/setup_cultforge_datums()
-	for(var/path in subtypesof(/datum/cultist/artifice))
-		GLOB.cultforge_conversion_list |= new path()
-
-
 /obj/structure/cult/forge
 	name = "Daemon forge"
 	desc = "A forge used in crafting the unholy weapons used by the armies of Nar-Sie."
@@ -31,24 +24,27 @@ GLOBAL_LIST(cultforge_conversion_list)
 /obj/structure/cult/forge/attackby(obj/item/W as obj, mob/user as mob)
 	if(active)
 		var/I
-		for(var/datum/cultist/artifice/AD in GLOB.cultforge_conversion_list)
-			if(AD.material_cost.len == 1)
-				var/path = AD.material_cost[1]
-				if(istype(W, path))
-					if(istype(W, /obj/item/stack))
-						var/obj/item/stack/S = W
-						if(S.can_use(AD.material_cost[path]))
-							S.use(AD.material_cost[path])
 
-							I = AD.obj_path
+		for(var/datum/cultist/artifice/AD in GLOB.cultforge_recipe_list)
+			if(LAZYLEN(AD.material_cost))
+				if(AD.material_cost.len == 1)
+					var/path = AD.material_cost[1]
+					if(istype(W, path))
+						if(istype(W, /obj/item/stack))
+							var/obj/item/stack/S = W
+							if(S.can_use(AD.material_cost[path]))
+								S.use(AD.material_cost[path])
+
+								I = AD.obj_path
+								bloodcost = AD.cost
+								break
+						else if(AD.material_cost[1] == 1)
+							user.drop_from_inventory(W)
+							qdel(W)
 							bloodcost = AD.cost
+							I = AD.obj_path
 							break
-					else if(AD.material_cost[1] == 1)
-						user.drop_from_inventory(W)
-						qdel(W)
-						bloodcost = AD.cost
-						I = AD.obj_path
-						break
+
 		if(I)
 
 			if(use_bloodnet)

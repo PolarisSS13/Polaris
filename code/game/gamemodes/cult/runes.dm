@@ -1346,3 +1346,102 @@ var/list/sacrificed = list()
 	qdel(src)
 
 	return
+
+/////////////////////////////////////////TWENTY-NINETH RUNE
+
+/obj/effect/rune/proc/createstone()
+	var/resources_found = FALSE
+
+	var/list/required_resources = list(
+		/obj/item/stack/material/glass = 5,
+		/obj/item/organ/internal/heart = 1
+		)
+
+	var/list/found_resources = list()
+
+	usr.say("Gotha nak'yarnak uh'e kha'li ma'ghanyth!")
+
+	for(var/obj/O in get_turf(src))
+		var/found_path = FALSE
+		for(var/path in required_resources)
+			if(istype(O, path))
+				found_path = TRUE
+				break
+
+		if(found_path)
+			found_resources |= O
+
+	for(var/path in required_resources) // Sort through everything, using objects as necessary.
+		for(var/obj/O in found_resources)
+			if(istype(O, path))
+
+				if(prob(10))
+					usr.say("Gotha nak'yarnak uh'e ngluior [O], shtunggli hrii!")
+
+				if(istype(O, /obj/item/stack))
+					var/obj/item/stack/S = O
+
+					var/amt_needed = required_resources[path]
+
+					var/amt_diff = S.amount - amt_needed
+
+					if(amt_diff >= 0)
+						required_resources[path] = 0
+
+					else
+						required_resources[path] = abs(amt_diff)
+
+					S.use(amt_needed)
+
+				else
+					required_resources[path] -= 1
+
+					qdel(O)
+
+			if(required_resources[path] == 0)	// If we found everything, skip to the next.
+				break
+
+	for(var/path in required_resources) // Final check to confirm we are in fact good to spawn the stone.
+		if(required_resources[path] > 0)
+			resources_found = FALSE
+			break
+
+		resources_found = TRUE
+
+	if(!resources_found)
+		visible_message("<span class='cult'>\The reagents fade from this world, leaving only glittering dust.</span>")
+		new /obj/item/weapon/ectoplasm(get_turf(src))
+		return fizzle()
+
+	new /obj/item/device/soulstone/cult(get_turf(src))
+
+	visible_message("<span class='cult'>\The reagents begin to fade from this world, before coalescing into the shape of a glimmering, but cracked, stone.</span>")
+
+	qdel(src)
+
+	return
+
+/////////////////////////////////////////THIRTIETH RUNE
+
+/obj/effect/rune/proc/imbuesphere()
+	var/obj/item/device/crystalball/CB = locate() in get_turf(src)
+
+	if(!CB)
+		usr.say("Gotha nak'yarnak uh'a [CB] ma'karth'a!")
+		return fizzle()
+
+	else
+		if(istype(CB, /obj/item/device/crystalball/advanced))
+			visible_message("<span class='cult'>The rune bubbles, before \the [CB] consumes it.</span>")
+			qdel(src)
+			return
+
+		qdel(CB)
+
+		CB = new /obj/item/device/crystalball/advanced(get_turf(src))
+
+		usr.say("Gotha nak'yarnak y'ia [usr], mr'a y'ia [CB]!")
+
+		qdel(src)
+
+	return

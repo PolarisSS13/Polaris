@@ -66,7 +66,25 @@
 	return FALSE
 
 /obj/structure/cult/pylon/networked/perform_attacked(mob/user, var/damage, var/obj/item/I)	// Return true if the damage continues on.
+	if(istype(I, /obj/item/weapon/nullrod))
+		if(iscultist(user))
+			visible_message("<span class='cult'>\The [src] pulses, before dematerializing.</span>")
+
+			new /obj/item/weapon/ectoplasm(get_turf(src))
+
+			return FALSE
+
 	if(istype(I, /obj/item/weapon/material/kitchen/utensil/fork/tuning))
+		return FALSE
+
+	if(istype(I, /obj/item/weapon/book/tome))
+
+		var/mob/living/L = user
+
+		anchored = !anchored
+
+		L.whisper("Tethu [anchored ? "i'na" : "y'ia"] motuus [src].")
+
 		return FALSE
 	return TRUE
 
@@ -110,11 +128,23 @@
 
 	for(var/obj/item/weapon/reagent_containers/blood/pack in view(2, src))
 		if(prob(10))
-			resolved = TRUE
-			Beam(pack,icon_state="drain",icon='icons/effects/beam.dmi',time=0.5 SECONDS, maxdistance=2,beam_type=/obj/effect/ebeam,beam_sleep_time=3)
-			BN.adjustBlood(2 * drain_mult)
-			pack.reagents.remove_reagent("blood", 2 * drain_mult)
-			pack.update_icon()
+			if(pack.reagents.has_reagent("blood"))
+				resolved = TRUE
+				Beam(pack,icon_state="drain",icon='icons/effects/beam.dmi',time=0.5 SECONDS, maxdistance=2,beam_type=/obj/effect/ebeam,beam_sleep_time=3)
+				BN.adjustBlood(2 * drain_mult)
+				pack.reagents.remove_reagent("blood", 2 * drain_mult)
+				pack.update_icon()
+
+	if(!resolved)	// If the pylon is doing nothing else, feed into a personal network.
+		var/obj/item/device/crystalball/CB = locate() in view(5, src)
+
+		if(CB)	// If there's a crystal ball in the area, and it's networked, and not OUR network.
+			var/datum/bloodnet/CBBN = CB.getBloodnet()
+
+			if(CBBN && CBBN != BN && CBBN.current_volume < CBBN.max_volume)
+				if(BN.adjustBlood(-1 * drain_mult * 5) && CBBN.adjustBlood(drain_mult * 5))
+					resolved = TRUE
+					Beam(CB,icon_state="send",icon='icons/effects/beam.dmi',time=0.5 SECONDS, maxdistance=2,beam_type=/obj/effect/ebeam,beam_sleep_time=3)
 
 	return resolved
 

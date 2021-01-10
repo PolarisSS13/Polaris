@@ -84,7 +84,7 @@
  	name = "occult opening"
 	desc = "An ancient portal to another realm."
 	icon = 'icons/obj/cult.dmi'
-	icon_state = "hole"
+	icon_state = "portal"
 	density = FALSE
 	interaction_message = "<span class='warning'>You feel like you shouldn't be sticking your nose into another realm.</span>"
 

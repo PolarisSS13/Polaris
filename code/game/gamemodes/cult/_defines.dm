@@ -21,4 +21,4 @@
 #define CULT_SUPPORT_SPELLS "Support"
 
 // Cult artifice lists.
-#define CULT_ALL_ARTIFICE "All Artifice"
+#define CULT_ALL_ARTIFICE "Artifice"

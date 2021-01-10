@@ -108,3 +108,13 @@
 		if(spell.spellpath == spell_to_check.obj_path)
 			return 1
 	return 0
+
+/obj/item/device/crystalball/advanced
+	name = "pristine sphere"
+	desc = "A heavy, perfectly smooth crystalline ball."
+
+	icon_state = "crystalball_adv"
+
+	networked = TRUE
+
+	crude = FALSE

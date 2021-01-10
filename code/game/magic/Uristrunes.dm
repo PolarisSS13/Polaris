@@ -54,6 +54,8 @@ var/list/word_to_uristrune_table = null
 	|| (word1 == cultwords["blood"] && word2 == cultwords["destroy"] && word3 == cultwords["other"])	\
 	|| (word1 == cultwords["hell"] && word2 == cultwords["destroy"] && word3 == cultwords["see"])	\
 	|| (word1 == cultwords["blood"] && word2 == cultwords["create"] && word3 == cultwords["technology"])	\
+	|| (word1 == cultwords["blood"] && word2 == cultwords["create"] && word3 == cultwords["other"])	\
+	|| (word1 == cultwords["join"] && word2 == cultwords["technology"] && word3 == cultwords["create"])	\
 	)
 		animated = 1
 	else

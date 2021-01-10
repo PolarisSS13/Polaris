@@ -26,6 +26,7 @@
 	return
 
 /obj/item/device/soulstone/cult
+	name = "Imperfect Soul Stone Shard"
 	charge_only = TRUE
 
 //////////////////////////////Capturing////////////////////////////////////////////////////////

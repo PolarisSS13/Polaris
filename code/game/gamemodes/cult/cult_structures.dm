@@ -117,7 +117,8 @@
 
 /obj/structure/cult/pylon/proc/pylonhit(var/damage)
 	if(!isbroken)
-		if(perform_damaged(damage) && prob(1+ damage * 5))
+		if(prob(1+ damage * 5))
+			perform_damaged(damage)
 			visible_message("<span class='danger'>[shatter_message]</span>")
 			STOP_PROCESSING(SSobj, src)
 			playsound(src,shatter_sound, 75, 1)
@@ -128,19 +129,8 @@
 
 /obj/structure/cult/pylon/proc/attackpylon(mob/user as mob, var/damage, var/obj/item/I)
 	if(!isbroken)
-		if(perform_attacked(user, damage, I) && prob(1+ damage * 5))
-			user.visible_message(
-				"<span class='danger'>[user] smashed \the [src]!</span>",
-				"<span class='warning'>You hit \the [src], and its crystal breaks apart!</span>",
-				"You hear a tinkle of crystal shards."
-				)
-			STOP_PROCESSING(SSobj, src)
-			user.do_attack_animation(src)
-			playsound(src,shatter_sound, 75, 1)
-			isbroken = 1
-			density = 0
-			update_icon()
-			set_light(0)
+		if(perform_attacked(user, damage, I))
+			pylonhit(damage)
 		else
 			to_chat(user, "You hit \the [src]!")
 			playsound(src,impact_sound, 75, 1)
@@ -155,16 +145,27 @@
 /obj/structure/cult/pylon/proc/repair(mob/user as mob)
 	if(isbroken)
 		START_PROCESSING(SSobj, src)
-		to_chat(user, "You repair \the [src].")
+		if(user)
+			to_chat(user, "You repair \the [src].")
 		isbroken = 0
 		density = 1
 		update_icon()
 		set_light(5)
 
-/obj/structure/cult/pylon/proc/perform_attacked(mob/user, var/damage)	// Return true if the damage continues on.
+/obj/structure/cult/pylon/proc/perform_attacked(mob/user, var/damage, var/obj/item/I)	// Return true if the damage continues on.
+	if(istype(I, /obj/item/weapon/book/tome))
+
+		var/mob/living/L = user
+
+		L.whisper("Meta [LAZYLEN(available_pylon_types) ? "i'na shako" : "y'ia okahs"] uo'ueria [src].")
+
+		spawn()
+			choose_pylon_type(L)
+
+		return FALSE
 	return TRUE
 
-/obj/structure/cult/pylon/proc/perform_damaged(var/damage)	// Return true if the damage continues on.
+/obj/structure/cult/pylon/proc/perform_damaged(var/damage)	// Called on pylon shattering.
 	return TRUE
 
 // Returns 1 if the pylon does something special.

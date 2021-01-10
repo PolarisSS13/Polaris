@@ -35,7 +35,7 @@
 		return
 
 	if (M.stat !=2)
-		if(cult && (M.mind in cult.current_antagonists) && prob(33))
+		if(cult && !iscultist(user) && (M.mind in cult.current_antagonists) && prob(33))
 			to_chat(M, "<span class='danger'>The power of [src] clears your mind of the cult's influence!</span>")
 			to_chat(user, "<span class='danger'>You wave [src] over [M]'s head and see their eyes become clear, their mind returning to normal.</span>")
 			cult.remove_antagonist(M.mind)

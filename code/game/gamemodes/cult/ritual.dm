@@ -168,6 +168,10 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		return portalsummon()
 	if(word1 == cultwords["blood"] && word2 == cultwords["create"] && word3 == cultwords["technology"])
 		return createforge()
+	if(word1 == cultwords["blood"] && word2 == cultwords["create"] && word3 == cultwords["other"])
+		return createstone()
+	if(word1 == cultwords["join"] && word2 == cultwords["technology"] && word3 == cultwords["create"])
+		return imbuesphere()
 	else
 		return fizzle()
 
@@ -238,12 +242,14 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				<b>Deafen: </b>Hide Other See<br>
 				<b>Blind: </b>Destroy See Other<br>
 				<b>Blood Boil: </b>Destroy See Blood<br>
+				<b>Burning Blood: </b>Blood Destroy Other<br>
 				<b>Communicate: </b>Self Other Technology<br>
 				<b>Stun: </b>Join Hide Technology<br>
 				<b>Summon Cultist Armor: </b>Hell Destroy Other<br>
 				<b>See Invisible: </b>See Hell Join<br>
 				<b>Hellish Defender: </b>Hell Destroy See<br>
 				<b>Create Forge: </b>Blood Create Technology<br>
+				<b>Create Soulstone: </b>Blood Create Other<br>
 				</p>
 				<h2>Rune Descriptions</h2>
 				<h3>Teleport self</h3>
@@ -300,6 +306,10 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				When invoked by two believers, this rune will open a small exit from beyond the veil, allowing an unholy guardian to pull itself through. Only one can exit from a portal at a time, and only one portal can exist per cubic meter. The guardian takes two minutes to arrive.<br>
 				<h3>Create Forge</h3>
 				When invoked by a single believer, this rune will convert 5 sheets of plasteel and a welding fuel tank into an alchemical forge. Be warned, this process of fabrication is imperfect, and will consume reagents whether it can complete the forge or not.<br>
+				<h3>Create Soulstone</h3>
+				When invoked by a single believer, this rune will convert 5 sheets of glass, and a heart, into an impure soul stone shard. As with the creation of the forge, this process will waste resources if invoked without proper amounts.<br>
+				<h3>Imbue Sphere</h3>
+				Place a glass sphere upon this rune, and invoke it, to empower it, and allow it to channel the universal alchemical flow.<br>
 				</body>
 				</html>
 				"}
@@ -398,7 +408,9 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			"teleport" = list("travel","self"),
 			"teleport other" = list("travel","other"),
 			"hellish defender" = list("hell","destroy","see"),
-			"create forge" = list("blood","create","technology")
+			"create forge" = list("blood","create","technology"),
+			"create soulstone" = list("blood","create","other"),
+			"imbue sphere" = list("join","technology","create"),
 		)
 
 		var/list/english = list()
@@ -655,5 +667,11 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				R.word1=cultwords["blood"]
 				R.word2=cultwords["create"]
 				R.word3=cultwords["technology"]
+				R.loc = user.loc
+				R.check_icon()
+			if("create soulstone")
+				R.word1=cultwords["blood"]
+				R.word2=cultwords["create"]
+				R.word3=cultwords["other"]
 				R.loc = user.loc
 				R.check_icon()
