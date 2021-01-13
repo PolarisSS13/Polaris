@@ -4316,7 +4316,9 @@
 /turf/simulated/floor/tiled/monofloor,
 /area/hangar/one)
 "ajk" = (
-/obj/machinery/door/airlock/centcom,
+/obj/machinery/door/airlock/centcom{
+	req_one_access = list()
+	},
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/shuttle1/start)
 "ajl" = (
@@ -18557,7 +18559,9 @@
 	},
 /area/hangar/two)
 "aKD" = (
-/obj/machinery/door/airlock/centcom,
+/obj/machinery/door/airlock/centcom{
+	req_one_access = list()
+	},
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/shuttle2/start)
 "aKE" = (
