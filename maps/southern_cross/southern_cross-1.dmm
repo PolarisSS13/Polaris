@@ -30283,13 +30283,15 @@
 /turf/simulated/floor/tiled,
 /area/security/main)
 "bfr" = (
-/obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk,
 /obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
+	},
+/obj/machinery/disposal/wall{
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/security/main)
@@ -51608,7 +51610,6 @@
 /turf/simulated/floor/tiled/white,
 /area/rnd/lab)
 "bRf" = (
-/obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 4
 	},
@@ -51618,6 +51619,9 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
 	},
+/obj/machinery/disposal/wall,
+/obj/structure/table/standard,
+/obj/item/weapon/deskbell,
 /turf/simulated/floor/tiled/white,
 /area/rnd/lab)
 "bRg" = (
@@ -57221,12 +57225,18 @@
 /turf/simulated/floor/plating,
 /area/assembly/robotics)
 "ccc" = (
-/obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
 	dir = 8
 	},
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
+/obj/machinery/disposal/wall{
+	dir = 1
+	},
+/obj/structure/table/standard,
+/obj/random/mech_toy{
+	pixel_y = 12
+	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
 "ccd" = (
