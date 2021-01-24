@@ -275,6 +275,9 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			if(part.transparent)
 				icon_key += "_t"
 
+			if(istype(tail_style, /datum/sprite_accessory/tail/taur))
+				icon_key += tail_style.clip_mask_state
+
 	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
@@ -284,10 +287,26 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		var/obj/item/organ/external/chest = get_organ(BP_TORSO)
 		base_icon = chest.get_icon()
 
+		var/icon/Cutter = null
+
+		if(istype(tail_style, /datum/sprite_accessory/tail/taur))	// Tail icon 'cookie cutters' are filled in where icons are preserved. We need to invert that.
+			Cutter = new(icon = tail_style.icon, icon_state = tail_style.clip_mask)
+
+			Cutter.Blend("#000000", ICON_MULTIPLY)	// Make it all black.
+
+			Cutter.SwapColor("#00000000", "#FFFFFFFF")	// Everywhere empty, make white.
+			Cutter.SwapColor("#000000FF", "#00000000")	// Everywhere black, make empty.
+
+			Cutter.Blend("#000000", ICON_MULTIPLY)	// Black again.
+
 		for(var/obj/item/organ/external/part in organs)
 			if(isnull(part) || part.is_stump())
 				continue
 			var/icon/temp = part.get_icon(skeleton)
+
+			if((part.organ_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)) && Cutter)
+				temp.Blend(Cutter, ICON_AND, x = -16)
+
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
