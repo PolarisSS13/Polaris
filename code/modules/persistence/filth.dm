@@ -7,7 +7,6 @@
 	color = "#464f33"
 	anchored = 1
 	persistent = TRUE
-	anchored = 1
 
 /obj/effect/decal/cleanable/filth/Initialize()
 	. = ..()
