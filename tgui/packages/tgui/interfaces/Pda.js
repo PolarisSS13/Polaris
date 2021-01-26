@@ -127,7 +127,7 @@ const PDASettings = (props, context) => {
     idInserted,
     idLink,
     cartridge_name,
-	touch_silent,
+    touch_silent,
   } = data;
 
   return (
@@ -139,7 +139,7 @@ const PDASettings = (props, context) => {
             content={"Retro Theme"}
             onClick={() => act("Retro")} />
         </LabeledList.Item>
-		<LabeledList.Item label="Touch Sounds">
+        <LabeledList.Item label="Touch Sounds">
           <Button
             icon="cog"
             selected={!touch_silent}

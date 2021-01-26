@@ -280,7 +280,7 @@ const RIGSuitModules = (props, context) => {
               </Flex.Item>
             </Flex>
           )}
-		  {module.charges ? (
+          {module.charges ? (
             <Flex.Item>
               <Section title="Module Charges">
                 <LabeledList>
