@@ -66,7 +66,7 @@
 				anchored = !anchored
 				return
 		else
-			to_chat(user, "<span class='notice'>You can't reach the anchoring bolts when \the [src] is closed!")
+			to_chat(user, "<span class='notice'>You can't reach the anchoring bolts when the door is closed!</span>")
 	else if(opened)
 		if(istype(W, /obj/item/weapon/storage/laundry_basket))
 			return ..(W,user)
