@@ -37646,6 +37646,9 @@
 /obj/item/device/radio/off,
 /obj/item/device/radio/off,
 /obj/effect/floor_decal/industrial/warning,
+/obj/item/stack/material/copper{
+	amount = 10
+	},
 /turf/simulated/floor/tiled/dark,
 /area/ai_monitored/storage/eva)
 "bsi" = (
@@ -51548,6 +51551,9 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
 	},
+/obj/item/stack/material/copper{
+	amount = 10
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/lab)
 "bRd" = (
@@ -51723,6 +51729,9 @@
 	},
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
+	},
+/obj/item/stack/material/copper{
+	amount = 10
 	},
 /turf/simulated/floor/tiled/white,
 /area/assembly/robotics)
@@ -96086,18 +96095,15 @@
 /area/hallway/secondary/entry/D2)
 "dxl" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/stack/material/plasteel{
-	amount = 15
-	},
-/obj/item/stack/material/plasteel{
-	amount = 15
-	},
 /obj/item/stack/material/plastic{
 	amount = 50
 	},
 /obj/item/device/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = -21
+	},
+/obj/item/stack/material/copper{
+	amount = 20
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/workshop)
@@ -97164,6 +97170,12 @@
 	},
 /obj/item/stack/material/steel{
 	amount = 50
+	},
+/obj/item/stack/material/plasteel{
+	amount = 15
+	},
+/obj/item/stack/material/plasteel{
+	amount = 15
 	},
 /turf/simulated/floor/tiled/dark,
 /area/engineering/workshop)
