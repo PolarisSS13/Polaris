@@ -302,7 +302,8 @@ var/global/list/default_medbay_channels = list(
 		playsound(src, "button", 10)
 
 GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
-/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/list/zlevels) //BS12 EDIT
+
+/obj/item/device/radio/proc/autosay(var/message, var/from, var/channel, var/list/zlevels)
 	if(!GLOB.autospeaker)
 		return
 	var/datum/radio_frequency/connection = null
@@ -313,7 +314,7 @@ GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
 	else
 		connection = radio_connection
 		channel = null
-	if (!istype(connection))
+	if(!istype(connection))
 		return
 
 	if(!LAZYLEN(zlevels))

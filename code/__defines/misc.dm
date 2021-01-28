@@ -150,6 +150,8 @@
 #define MAT_GRAPHITE		"graphite"
 #define MAT_LEATHER			"leather"
 #define MAT_CHITIN			"chitin"
+#define MAT_CLOTH			"cloth"
+#define MAT_SYNCLOTH		"syncloth"
 #define MAT_COPPER			"copper"
 #define MAT_QUARTZ			"quartz"
 #define MAT_TIN				"tin"
