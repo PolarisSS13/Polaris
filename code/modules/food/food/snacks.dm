@@ -1739,20 +1739,6 @@
 	. = ..()
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/mashedpotato
-	name = "Mashed Potato"
-	desc = "Pillowy mounds of mashed potato."
-	icon_state = "mashedpotato"
-	trash = /obj/item/trash/plate
-	filling_color = "#EDDD00"
-	center_of_mass = list("x"=16, "y"=11)
-	nutriment_amt = 4
-	nutriment_desc = list("fluffy mashed potatoes" = 4)
-
-/obj/item/weapon/reagent_containers/food/snacks/mashedpotato/Initialize()
-	. = ..()
-	bitesize = 2
-
 /obj/item/weapon/reagent_containers/food/snacks/bangersandmash
 	name = "Bangers and Mash"
 	desc = "An English treat."
@@ -2339,34 +2325,6 @@
 	reagents.add_reagent("tomatojuice", 10)
 	bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/onionsoup
-	name = "Onion Soup"
-	desc = "A soup with layers."
-	icon_state = "onionsoup"
-	trash = /obj/item/trash/snack_bowl
-	filling_color = "#E0C367"
-	center_of_mass = list("x"=16, "y"=7)
-	nutriment_amt = 5
-	nutriment_desc = list("onion" = 2, "soup" = 2)
-
-/obj/item/weapon/reagent_containers/food/snacks/onionsoup/Initialize()
-	. = ..()
-	bitesize = 3
-
-/obj/item/weapon/reagent_containers/food/snacks/onionrings
-	name = "Onion Rings"
-	desc = "Crispy rings."
-	icon_state = "onionrings"
-	trash = /obj/item/trash/plate
-	filling_color = "#E0C367"
-	center_of_mass = list("x"=16, "y"=7)
-	nutriment_amt = 5
-	nutriment_desc = list("onion" = 2)
-
-/obj/item/weapon/reagent_containers/food/snacks/onionrings/Initialize()
-	. = ..()
-	bitesize = 2
-
 /obj/item/weapon/reagent_containers/food/snacks/rofflewaffles
 	name = "Roffle Waffles"
 	desc = "Waffles from Roffle. Co."
@@ -2445,7 +2403,7 @@
 	reagents.add_reagent("cherryjelly", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/milosoup
-	name = "Milosoup"
+	name = "Miso soup"
 	desc = "The universes best soup! Yum!!!"
 	icon_state = "milosoup"
 	trash = /obj/item/trash/snack_bowl
@@ -3444,32 +3402,35 @@
 	filled = TRUE
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple
-	name = "Hawaiian"
-	desc = "The accursed wheel from ancient times."
-	icon_state = "pizzamargherita"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/slice/pineapple
+	name = "ham & pineapple pizza"
+	desc = "One of the most debated pizzas in existence."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "pineapple_pizza"
+	slice_path = /obj/item/weapon/reagent_containers/food/snacks/pineappleslice
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
-	nutriment_desc = list("pizza crust" = 5, "tomato" = 5, "cheese" = 5, "pineapple" = 20)
-	nutriment_amt = 35
+	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "ham" = 10)
+	nutriment_amt = 30
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 5)
-	reagents.add_reagent("pineapplejuice", 6)
-	bitesize = 2
+	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("cheese", 5)
+	reagents.add_reagent("tomatojuice", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/pineapple
-	name = "Hawaiian slice"
-	desc = "A slice of the accursed pizza."
-	icon_state = "pizzamargheritaslice"
+/obj/item/weapon/reagent_containers/food/snacks/pineappleslice
+	name = "ham & pineapple pizza slice"
+	desc = "A slice of contraband."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "pineapple_pizza_slice"
 	filling_color = "#BAA14C"
 	bitesize = 2
-	center_of_mass = list("x"=16, "y"=13)
-	whole_path = /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple
+	center_of_mass = list("x"=18, "y"=13)
 
-/obj/item/weapon/reagent_containers/food/snacks/slice/pineapple/filled
-	filled = TRUE
+/obj/item/weapon/reagent_containers/food/snacks/pineappleslice/filled
+	nutriment_desc = list("pizza crust" = 5, "tomato" = 5)
+	nutriment_amt = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/meatpizza
 	name = "Meatpizza"
@@ -4190,32 +4151,8 @@
 	reagents.add_reagent("capsaicin", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/croissant
-	name = "croissant"
-	desc = "True French cuisine."
-	filling_color = "#E3D796"
-	icon_state = "croissant"
-	nutriment_amt = 6
-	nutriment_desc = list("french bread" = 6)
-
-/obj/item/weapon/reagent_containers/food/snacks/croissant/Initialize()
-	. = ..()
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/meatbun
-	name = "meat bun"
-	desc = "Chinese street food, in neither China nor a street."
-	filling_color = "#DEDEAB"
-	icon_state = "meatbun"
-	nutriment_amt = 4
-
-/obj/item/weapon/reagent_containers/food/snacks/meatbun/Initialize()
-	. = ..()
-	bitesize = 2
-	reagents.add_reagent("protein", 4)
-
 /obj/item/weapon/reagent_containers/food/snacks/sashimi
-	name = "carp sashimi"
+	name = "sashimi"
 	desc = "Expertly prepared. Hopefully the toxins got removed."
 	filling_color = "#FFDEFE"
 	icon_state = "sashimi"
@@ -4352,7 +4289,7 @@
 	bitesize = 4
 
 /obj/item/weapon/reagent_containers/food/snacks/flowerchildsalad
-	name = "flowerchild salad"
+	name = "flowerchild poppy salad"
 	desc = "A fragrant salad."
 	icon_state = "flowerchildsalad"
 	filling_color = "#FF3867"
@@ -4365,7 +4302,7 @@
 	bitesize = 4
 
 /obj/item/weapon/reagent_containers/food/snacks/rosesalad
-	name = "flowerchild salad"
+	name = "flowerchild rose salad"
 	desc = "A fragrant salad."
 	icon_state = "rosesalad"
 	filling_color = "#FF3867"
@@ -4393,21 +4330,6 @@
 	reagents.add_reagent("protein", 4)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/porkbowl
-	name = "pork bowl"
-	desc = "A bowl of fried rice with cuts of meat."
-	icon_state = "porkbowl"
-	trash = /obj/item/trash/snack_bowl
-	filling_color = "#FFFBDB"
-	nutriment_amt = 6
-	nutriment_desc = list("rice" = 2, "meat" = 4)
-
-/obj/item/weapon/reagent_containers/food/snacks/porkbowl/Initialize()
-	. = ..()
-	reagents.add_reagent("nutriment", 6)
-	reagents.add_reagent("protein", 4)
-	bitesize = 2
-
 /obj/item/weapon/reagent_containers/food/snacks/tortilla
 	name = "tortilla"
 	desc = "The base for all your burritos."
@@ -4418,69 +4340,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/tortilla/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 2)
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/meatburrito
-	name = "carne asada burrito"
-	desc = "The best burrito for meat lovers."
-	icon_state = "carneburrito"
-	nutriment_amt = 6
-	nutriment_desc = list("tortilla" = 3, "meat" = 3)
-
-/obj/item/weapon/reagent_containers/food/snacks/meatburrito/Initialize()
-	. = ..()
-	reagents.add_reagent("protein", 6)
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/cheeseburrito
-	name = "Cheese burrito"
-	desc = "It's a burrito filled with cheese."
-	icon_state = "cheeseburrito"
-	nutriment_amt = 6
-	nutriment_desc = list("tortilla" = 3, "cheese" = 3)
-
-/obj/item/weapon/reagent_containers/food/snacks/cheeseburrito/Initialize()
-	. = ..()
-	reagents.add_reagent("nutriment", 6)
-	reagents.add_reagent("protein", 2)
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/fuegoburrito
-	name = "fuego phoron burrito"
-	desc = "A super spicy burrito."
-	icon_state = "fuegoburrito"
-	nutriment_amt = 6
-	nutriment_desc = list("chili peppers" = 5, "tortilla" = 1)
-
-/obj/item/weapon/reagent_containers/food/snacks/fuegoburrito/Initialize()
-	. = ..()
-	reagents.add_reagent("nutriment", 6)
-	reagents.add_reagent("capsaicin", 4)
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/nachos
-	name = "nachos"
-	desc = "Chips from Old Mexico."
-	icon_state = "nachos"
-	nutriment_amt = 2
-	nutriment_desc = list("salt" = 1)
-
-/obj/item/weapon/reagent_containers/food/snacks/nachos/Initialize()
-	. = ..()
-	reagents.add_reagent("nutriment", 1)
-	bitesize = 1
-
-/obj/item/weapon/reagent_containers/food/snacks/cheesenachos
-	name = "cheesy nachos"
-	desc = "The delicious combination of nachos and melting cheese."
-	icon_state = "cheesenachos"
-	nutriment_amt = 5
-	nutriment_desc = list("salt" = 2, "cheese" = 3)
-
-/obj/item/weapon/reagent_containers/food/snacks/cheesenachos/Initialize()
-	. = ..()
-	reagents.add_reagent("nutriment", 5)
-	reagents.add_reagent("protein", 2)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cubannachos
@@ -4907,7 +4766,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/chickenkatsu
 	name = "chicken katsu"
-	desc = "A Terran delicacy consisting of chicken fried in a light beer batter."
+	desc = "An Earth delicacy consisting of chicken fried in a light beer batter."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "katsu"
 	trash = /obj/item/trash/plate
@@ -5098,8 +4957,8 @@
 	reagents.add_reagent("egg", 1)
 
 /obj/item/weapon/reagent_containers/food/snacks/chilied_eggs
-	name = "chilied eggs"
-	desc = "Three deviled eggs floating in a bowl of meat chili. A popular lunchtime meal for Unathi in Ouerea."
+	name = "Redeemed eggs"
+	desc = "Three deviled eggs floating in a bowl of meat chili. A popular lunchtime meal for Unathi, with mild religious undertones."
 	icon_state = "chilied_eggs"
 	trash = /obj/item/trash/snack_bowl
 
@@ -5107,7 +4966,6 @@
 	. = ..()
 	reagents.add_reagent("egg", 6)
 	reagents.add_reagent("protein", 2)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/cheese_cracker
 	name = "supreme cheese toast"
@@ -5200,7 +5058,7 @@
 	reagents.add_reagent("protein", 3)
 
 /obj/item/weapon/reagent_containers/food/snacks/fish_taco
-	name = "carp taco"
+	name = "fish taco"
 	desc = "A questionably cooked fish taco decorated with herbs, spices, and special sauce."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "fish_taco"
@@ -5212,8 +5070,8 @@
 	reagents.add_reagent("seafood",3)
 
 /obj/item/weapon/reagent_containers/food/snacks/nt_muffin
-	name = "\improper NtMuffin"
-	desc = "A NanoTrasen sponsered biscuit with egg, cheese, and sausage."
+	name = "breakfast muffin"
+	desc = "An english muffin with egg, cheese, and sausage, as sold in fast food joints galaxy-wide."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "nt_muffin"
 	nutriment_desc = list("biscuit" = 3)
@@ -5225,7 +5083,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/pineapple_ring
 	name = "pineapple ring"
-	desc = "What the hell is this?"
+	desc = "So retro."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "pineapple_ring"
 	nutriment_desc = list("sweetness" = 2)
@@ -5235,36 +5093,6 @@
 	. = ..()
 	reagents.add_reagent("pineapplejuice",3)
 
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple
-	name = "ham & pineapple pizza"
-	desc = "One of the most debated pizzas in existence."
-	icon = 'icons/obj/food_syn.dmi'
-	icon_state = "pineapple_pizza"
-	slice_path = /obj/item/weapon/reagent_containers/food/snacks/pineappleslice
-	slices_num = 6
-	center_of_mass = list("x"=16, "y"=11)
-	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "ham" = 10)
-	nutriment_amt = 30
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/sliceable/pizza/pineapple/Initialize()
-	. = ..()
-	reagents.add_reagent("protein", 4)
-	reagents.add_reagent("cheese", 5)
-	reagents.add_reagent("tomatojuice", 6)
-
-/obj/item/weapon/reagent_containers/food/snacks/pineappleslice
-	name = "ham & pineapple pizza slice"
-	desc = "A slice of contraband."
-	icon = 'icons/obj/food_syn.dmi'
-	icon_state = "pineapple_pizza_slice"
-	filling_color = "#BAA14C"
-	bitesize = 2
-	center_of_mass = list("x"=18, "y"=13)
-
-/obj/item/weapon/reagent_containers/food/snacks/pineappleslice/filled
-	nutriment_desc = list("pizza crust" = 5, "tomato" = 5)
-	nutriment_amt = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/burger/bacon
 	name = "bacon burger"
@@ -5306,17 +5134,6 @@
 	center_of_mass = list("x"=16,"y"=11)
 	nutriment_desc = list("fried onions" = 5)
 	nutriment_amt = 5
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/berrymuffin
-	name = "berry muffin"
-	desc = "A delicious and spongy little cake, with berries."
-	icon = 'icons/obj/food_syn.dmi'
-	icon_state = "berrymuffin"
-	filling_color = "#E0CF9B"
-	center_of_mass = list("x"=17, "y"=4)
-	nutriment_amt = 5
-	nutriment_desc = list("sweetness" = 1, "muffin" = 2, "berries" = 2)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/soup/onion
@@ -5670,8 +5487,8 @@
 
 //burritos
 /obj/item/weapon/reagent_containers/food/snacks/burrito
-	name = "meat burrito"
-	desc = "Meat wrapped in a flour tortilla. It's a burrito by definition."
+	name = "chilli burrito"
+	desc = "Minced meat wrapped in a flour tortilla. It's a burrito by definition."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "burrito"
 	bitesize = 4
@@ -5698,22 +5515,12 @@
 	. = ..()
 	reagents.add_reagent("tofu", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/burrito_spicy
-	name = "spicy meat burrito"
-	desc = "Meat and chilis wrapped in a flour tortilla."
-	icon = 'icons/obj/food_syn.dmi'
-	icon_state = "burrito_spicy"
-	bitesize = 4
-	center_of_mass = list("x"=16, "y"=16)
-	nutriment_desc = list("tortilla" = 6)
-	nutriment_amt = 6
-
 /obj/item/weapon/reagent_containers/food/snacks/burrito_spicy/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/burrito_cheese
-	name = "meat cheese burrito"
+	name = "carne queso burrito"
 	desc = "Meat and melted cheese wrapped in a flour tortilla."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "burrito_cheese"
@@ -5726,9 +5533,45 @@
 	. = ..()
 	reagents.add_reagent("protein", 6)
 
+/obj/item/weapon/reagent_containers/food/snacks/burrito_hell
+	name = "el diablo"
+	desc = "Meat and an insane amount of chillis packed in a flour tortilla. The Chaplain will see you now."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "burrito_hell"
+	bitesize = 4
+	center_of_mass = list("x"=16, "y"=16)
+	nutriment_desc = list("hellfire" = 6)
+	nutriment_amt = 24// 10 Chilis is a lot.
+
+/obj/item/weapon/reagent_containers/food/snacks/meatburrito
+	name = "carne asada burrito"
+	desc = "Sliced meat and beans, it's another basic burrito!"
+	icon_state = "carneburrito"
+	nutriment_amt = 6
+	nutriment_desc = list("tortilla" = 3, "meat" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/meatburrito/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 6)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/cheeseburrito
+	name = "Cheese burrito"
+	desc = "It's a burrito filled with beans and cheese."
+	icon_state = "cheeseburrito"
+	nutriment_amt = 6
+	nutriment_desc = list("tortilla" = 3, "cheese" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/cheeseburrito/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 6)
+	reagents.add_reagent("protein", 2)
+	bitesize = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/burrito_cheese_spicy
-	name = "spicy cheese meat burrito"
-	desc = "Meat, melted cheese, and chilis wrapped in a flour tortilla."
+	name = "spicy cheese burrito"
+	desc = "Melted cheese, beans and chillis wrapped in a flour tortilla."
+	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "burrito_cheese_spicy"
 	bitesize = 4
 	center_of_mass = list("x"=16, "y"=16)
@@ -5739,18 +5582,21 @@
 	. = ..()
 	reagents.add_reagent("protein", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/burrito_hell
-	name = "el diablo"
-	desc = "Meat and an insane amount of chilis packed in a flour tortilla. The Chaplain will see you now."
-	icon = 'icons/obj/food_syn.dmi'
-	icon_state = "burrito_hell"
-	bitesize = 4
-	center_of_mass = list("x"=16, "y"=16)
-	nutriment_desc = list("hellfire" = 6)
-	nutriment_amt = 24// 10 Chilis is a lot.
+/obj/item/weapon/reagent_containers/food/snacks/fuegoburrito
+	name = "fuego phoron burrito"
+	desc = "A super spicy vegetarian burrito."
+	icon_state = "fuegoburrito"
+	nutriment_amt = 6
+	nutriment_desc = list("chilli peppers" = 5, "tortilla" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/fuegoburrito/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 6)
+	reagents.add_reagent("capsaicin", 4)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/breakfast_wrap
-	name = "breakfast wrap"
+	name = "breakfast burrito"
 	desc = "Bacon, eggs, cheese, and tortilla grilled to perfection."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "breakfast_wrap"
@@ -5788,7 +5634,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/red_sun_special
 	name = "red sun special"
-	desc = "One lousy piece of sausage sitting on melted cheese curds. A cheap meal for the Unathi peasants of Moghes."
+	desc = "One lousy piece of sausage sitting on melted cheese curds. A popular utilitarian meal for the Unathi of Moghes."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "red_sun_special"
 	trash = /obj/item/trash/plate
@@ -5843,8 +5689,8 @@
 	reagents.add_reagent("egg", 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/grilled_carp
-	name = "korlaaskak"
-	desc = "A well-dressed carp, seared to perfection and adorned with herbs and spices. Can be sliced into proper serving sizes."
+	name = "Njarir Merana Grill"
+	desc = "A well-dressed fish, seared to perfection and adorned with herbs and spices in a traditional Nerahni Tajaran style. Can be sliced into proper serving sizes."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "grilled_carp"
 	slice_path = /obj/item/weapon/reagent_containers/food/snacks/grilled_carp_slice
@@ -6033,12 +5879,12 @@
 	. = ..()
 	reagents.add_reagent("protein", 8)
 	bitesize = 3
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/chickennoodlesoup
 	name = "chicken noodle soup"
 	gender = PLURAL
 	desc = "A bright bowl of yellow broth with cuts of meat, noodles and carrots."
-	icon = 'icons/obj/food_custom.dmi'
+	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "chickennoodlesoup"
 	filling_color = "#ead90c"
 	nutriment_amt = 6
@@ -6102,16 +5948,31 @@
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/meatbun
-	name = "meat bun"
-	desc = "A soft, fluffy flour bun also known as baozi. This one is filled with a spiced meat filling."
+	name = "meat and leaf bun"
+	desc = "A soft, fluffy flour bun also known as baozi. This one is filled with a meat and cabbage filling."
+	filling_color = "#DEDEAB"
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "meatbun"
+	nutriment_amt = 5
+	nutriment_desc = list("fried meat" = 5)
+	center_of_mass = list("x"=16, "y"=11)
+
+/obj/item/weapon/reagent_containers/food/snacks/meatbun/Initialize()
+	. = ..()
+	bitesize = 2
+	reagents.add_reagent("protein", 4)
+
+/obj/item/weapon/reagent_containers/food/snacks/spicedmeatbun
+	name = "char sui meat bun"
+	desc = "A soft, fluffy flour bun also known as baozi. This one is filled with a traditionally spiced meat filling."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "meatbun"
 	filling_color = "#edd7d7"
 	nutriment_amt = 5
-	nutriment_desc = list("spice" = 5)
+	nutriment_desc = list("char sui" = 5)
 	center_of_mass = list("x"=16, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/snacks/meatbun/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/spicedmeatbun/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
 	bitesize = 5
@@ -6249,7 +6110,7 @@
 	reagents.add_reagent("honey", 5)
 	bitesize = 4
 
-// SLICEABLE FOODS - SYNNONO MEME FOOD EXPANSION - Credit to Synnono from Aurorastation (again)
+//Sliceables
 
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/keylimepie
 	name = "key lime pie"
@@ -6425,7 +6286,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/gigapuddi/anger
 	desc = "A large crème caramel made with extra hate"
 	icon_state = "angerpuddi"
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/buchedenoel
 	name = "\improper Buche de Noel"
 	desc = "Merry Christmas"
@@ -6476,7 +6337,7 @@
 	icon_state = "turkey_drumstick"
 	trash = /obj/item/trash/plate
 	bitesize = 2
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/suppermatter
 	name = "suppermatter"
 	desc = "Extremely dense and powerful food."
@@ -6550,7 +6411,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/omurice/face
 	icon = 'icons/obj/food.dmi'
 	icon_state = "omuriceface"
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/cinnamonbun
 	name = "cinnamon bun"
 	desc = "Life needs frosting!"
