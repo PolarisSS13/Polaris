@@ -4947,7 +4947,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/bacon_stick
 	name = "eggpop"
-	desc = "A bacon wrapped boiled egg, conviently skewered on a wooden stick."
+	desc = "A bacon wrapped boiled egg, conveniently skewered on a wooden stick."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "bacon_stick"
 
