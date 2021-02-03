@@ -21,7 +21,7 @@
 
 	if(isobserver(user))
 		// Admins can always interact.
-		if(check_rights(R_ADMIN, 0, src))
+		if(check_rights(R_ADMIN|R_EVENT, 0, src))
 			. = max(., STATUS_INTERACTIVE)
 
 		// Regular ghosts can always at least view if in range.
