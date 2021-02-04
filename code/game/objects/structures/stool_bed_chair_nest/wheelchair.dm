@@ -1,13 +1,23 @@
 /obj/structure/bed/chair/wheelchair
 	name = "wheelchair"
 	desc = "You sit in this. Either by will or force."
+	icon = 'icons/obj/wheelchair.dmi'
 	icon_state = "wheelchair"
 	anchored = 0
 	buckle_movable = 1
+	var/wheelchairtype = /obj/structure/bed/chair/wheelchair
+	var/wheelchairitemtype = /obj/item/wheelchair
 
 	var/driving = 0
 	var/mob/living/pulling = null
 	var/bloodiness
+
+/obj/structure/bed/chair/wheelchair/smallmotor
+	name = "small electric wheelchair"
+	desc = "A small motorized wheelchair, it looks around the right size for a Teshari"
+	icon_state = "teshchair"
+	wheelchairtype = /obj/structure/bed/chair/wheelchair/smallmotor
+	wheelchairitemtype = /obj/item/smallmotorwheelchair
 
 /obj/structure/bed/chair/wheelchair/update_icon()
 	return
@@ -15,7 +25,16 @@
 /obj/structure/bed/chair/wheelchair/set_dir()
 	..()
 	cut_overlays()
-	var/image/O = image(icon = 'icons/obj/furniture.dmi', icon_state = "w_overlay", layer = FLY_LAYER, dir = src.dir)
+	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "wheelchair_overlay", layer = FLY_LAYER, dir = src.dir)
+	add_overlay(O)
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			L.set_dir(dir)
+/obj/structure/bed/chair/wheelchair/smallmotor/set_dir()
+	..()
+	cut_overlays()
+	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "teshchair_overlay", layer = FLY_LAYER, dir = src.dir)
 	add_overlay(O)
 	if(has_buckled_mobs())
 		for(var/A in buckled_mobs)
@@ -93,7 +112,7 @@
 
 /obj/structure/bed/chair/wheelchair/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
-	
+
 	cut_overlays()
 	playsound(src, 'sound/effects/roll.ogg', 75, 1)
 	if(has_buckled_mobs())
@@ -206,13 +225,25 @@
 /obj/item/wheelchair
 	name = "wheelchair"
 	desc = "A folded wheelchair that can be carried around."
-	icon = 'icons/obj/furniture.dmi'
+	icon = 'icons/obj/wheelchair.dmi'
 	icon_state = "wheelchair_folded"
 	item_state = "wheelchair"
 	w_class = ITEMSIZE_HUGE // Can't be put in backpacks. Oh well.
+	var/wheelchairtype = /obj/structure/bed/chair/wheelchair
+	var/wheelchairitemtype = /obj/item/wheelchair
 
-/obj/item/wheelchair/attack_self(mob/user)
-		var/obj/structure/bed/chair/wheelchair/R = new /obj/structure/bed/chair/wheelchair(user.loc)
+/obj/item/smallmotorwheelchair // need it like this cause the spawning code for wheelchairs in the loadout is funky
+	name = "small electric wheelchair"
+	desc = "A small motorized wheelchair, it looks around the right size for a Teshari."
+	icon = 'icons/obj/wheelchair.dmi'
+	icon_state = "teshchair_folded"
+	item_state = "teshchair"
+	w_class = ITEMSIZE_HUGE // Can't be put in backpacks. Oh well.
+	var/wheelchairtype = /obj/structure/bed/chair/wheelchair/smallmotor
+	var/wheelchairitemtype = /obj/item/smallmotorwheelchair
+
+/obj/item/smallmotorwheelchair/attack_self(mob/user)
+		var/obj/structure/bed/chair/wheelchair/R = new wheelchairtype(user.loc)
 		R.add_fingerprint(user)
 		R.name = src.name
 		R.color = src.color
@@ -224,7 +255,7 @@
 		if(!ishuman(usr))	return
 		if(has_buckled_mobs())	return 0
 		visible_message("[usr] collapses \the [src.name].")
-		var/obj/item/wheelchair/R = new/obj/item/wheelchair(get_turf(src))
+		var/obj/item/wheelchair/R = new wheelchairitemtype(get_turf(src))
 		R.name = src.name
 		R.color = src.color
 		spawn(0)
