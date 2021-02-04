@@ -670,3 +670,10 @@
 	path = /obj/item/clothing/glasses/aerogelgoggles
 	whitelisted = SPECIES_TESHARI
 	sort_category = "Xenowear"
+
+/datum/gear/utility/teshchair
+	display_name = "small electric wheelchair (Teshari)"
+	path = /obj/item/smallmotorwheelchair //can't use the normal wheelchair item cause of funky spawning code, it would just give you a normal wheelchair even if you selected a subtype
+	whitelisted = SPECIES_TESHARI
+	sort_category = "Xenowear"
+	cost = 4
