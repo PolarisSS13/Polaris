@@ -82,6 +82,7 @@
 
 	var/nutriment_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
+	var/allergen_type = GENERIC	// What potential allergens does this contain?
 	var/toxicity = 1
 
 	var/druggy = 0
@@ -139,6 +140,9 @@
 
 	if(halluci)
 		M.hallucination = max(M.hallucination, halluci*3)
+	
+	if(M.species.allergens & allergen_type)
+		M.adjustToxLoss((M.species.allergen_severity*4) * removed)
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
@@ -183,6 +187,9 @@
 
 	if(halluci)
 		M.hallucination = max(M.hallucination, halluci)
+	
+	if(M.species.allergens & allergen_type)
+		M.adjustToxLoss(M.species.allergen_severity * removed)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))
