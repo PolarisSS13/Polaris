@@ -53,7 +53,7 @@
 
 	var/taste_sensitivity = TASTE_NORMAL					// How sensitive the species is to minute tastes.
 	var/allergens = null							// What kinds of food the species can safely eat without getting sick
-	var/allergy_severity = 0.5						// How bad are reactions to the allergen? This is raw toxin damage per metabolism tick, multiplied by the amount metabolized
+	var/allergen_severity = 0.5						// How bad are reactions to the allergen? This is raw toxin damage per metabolism tick, multiplied by the amount metabolized
 
 	var/min_age = 17
 	var/max_age = 70
