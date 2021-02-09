@@ -860,6 +860,7 @@
 	var/adj_temp = 0
 	var/water_based = TRUE
 	var/allergen_type = GENERIC	// What potential allergens does this contain?
+	var/allergen_factor = 1	// If the potential allergens are mixed and low-volume, they're a bit less dangerous. Needed for drinks because they're a single reagent compared to food which contains multiple seperate reagents.
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/strength_mod = 1
@@ -867,12 +868,12 @@
 		strength_mod = 3
 	M.adjustToxLoss(removed * strength_mod) // Probably not a good idea; not very deadly though
 	if(M.species.allergens & allergen_type)	// Unless you're allergic, in which case...
-		M.adjustToxLoss((M.species.allergen_severity*2) * removed)
+		M.adjustToxLoss(((M.species.allergen_severity*allergen_factor)*2) * removed)
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(M.species.allergens & allergen_type)
-		M.adjustToxLoss(M.species.allergen_severity * removed)
+		M.adjustToxLoss((M.species.allergen_severity*allergen_factor) * removed)
 	else	//delicious
 		M.adjust_nutrition(nutrition * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
@@ -1379,7 +1380,7 @@
 	cup_icon_state = "cup_latte"
 	cup_name = "cup of soy latte"
 	cup_desc = "A nice and refreshing beverage while you are reading."
-	allergen_type = BEANS
+	allergen_type = COFFEE|BEANS
 
 /datum/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1399,6 +1400,7 @@
 	cup_icon_state = "cup_latte"
 	cup_name = "cup of cafe latte"
 	cup_desc = "A nice and refreshing beverage while you are reading."
+	allergen_type = COFFEE|DAIRY
 
 /datum/reagent/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1622,7 +1624,6 @@
 	adj_dizzy = -5
 	adj_drowsy = -3
 	adj_sleepy = -2
-
 
 	glass_name = "Coffee Milkshake"
 	glass_desc = "An energizing coffee milkshake, perfect for hot days at work.."
