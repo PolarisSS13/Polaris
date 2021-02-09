@@ -4,6 +4,7 @@
 	region. Each is labeled by date of publication and title. This list is self-updating, and from time to time the publisher will push new \
 	articles. You are encouraged to check back frequently."
 	children = list(
+		/datum/lore/codex/page/article101,
 		/datum/lore/codex/page/article100,
 		/datum/lore/codex/page/article99,
 		/datum/lore/codex/page/article98,
@@ -1118,3 +1119,11 @@
 	According to those interviewed at a few sites, campaigning may be mixed. One potential committee member for the Gullstrand Medical Center described the competition as 'cut-throat' with staff looking to be split between the selection of already respected chief medical experts, and 'more represenative' service staff. Conversely, one worker at the Ekmanshalvo Fabrication Plant complex stated that he 'would probably just vote for whoever I've heard of.'\
 	<br><br>\
 	Final voting will take place on Saturday the 13th of February, with results announced by the following Monday."
+
+/datum/lore/codex/page/article101
+	name = "02/11/65 - Top Astronomers Announce 'Alarming' Tachyon Downtick"
+	data = "The Galactic Survey Administration has today released a 'high priority' report on what is being described as a 'significant decline in core tachyon density' throughout the known galaxy. According to recent findings tachyon deterioration, which had previously been 'negligible' has undergone a 'rapid acceleration' which could begin to seriously affect interstellar transit in as soon as 30 to 50 years.\
+	<br><br>\
+	Tachyons are a naturally occurring particle present in varying density which form the primary mechanism for bluespace drive operation. In simple terms, the higher the density of tachyons, the more efficiently starship engines are capable of operating. Low-density regions such as the Rarkajar Rift have long posed a challenge to interstellar trade, and the expansion of such regions could prove devastating to galactic unity.\
+	<br><br>\
+	FTL industry leaders Focal Point Energistics have already announced 'immediate investigation' into the GSA's findings after taking a blow on the stock exchange, and have guaranteed a 'commitment to future-proofing' in all forthcoming products."
