@@ -126,6 +126,8 @@ GLOBAL_LIST_BOILERPLATE(world_uplinks, /obj/item/device/uplink)
 
 	var/list/data = ..()
 
+	if(owner)
+		uses = owner.tcrystals
 	data["telecrystals"] = uses
 	data["lockable"] = TRUE
 	data["compactMode"] = compact_mode
