@@ -39,7 +39,7 @@
 	set name = "Toggle Sender/Receiver"
 	set src in usr
 
-	if(!can_use())
+	if(!can_use(usr))
 		return
 	var/datum/data/pda/app/messenger/M = find_program(/datum/data/pda/app/messenger)
 	M.toff = !M.toff
