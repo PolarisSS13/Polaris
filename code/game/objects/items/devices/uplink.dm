@@ -81,8 +81,8 @@
 /obj/item/device/uplink/hidden/proc/check_trigger(mob/user as mob, var/value, var/target)
 	if(value == target)
 		trigger(user)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 // Legacy
 /obj/item/device/uplink/hidden/interact(mob/user)
@@ -95,7 +95,7 @@
 	return loc
 
 /obj/item/device/uplink/hidden/tgui_state(mob/user)
-	return GLOB.tgui_inventory_state
+	return GLOB.tgui_deep_inventory_state
 
 /obj/item/device/uplink/hidden/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	if(!active)

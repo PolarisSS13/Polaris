@@ -51,7 +51,7 @@ var/datum/uplink/uplink = new()
 	if(!can_buy(U, user.mind))
 		return
 
-	if(U.tgui_status(user, GLOB.tgui_inventory_state) != STATUS_INTERACTIVE)
+	if(U.tgui_status(user, GLOB.tgui_deep_inventory_state) != STATUS_INTERACTIVE)
 		return
 
 	var/cost = cost(U, user)
