@@ -48,13 +48,13 @@ var/datum/uplink/uplink = new()
 	if(!extra_args)
 		return
 
-	if(!can_buy(U, user.mind))
+	if(!can_buy(U, user.mind.tcrystals))
 		return
 
 	if(U.tgui_status(user, GLOB.tgui_deep_inventory_state) != STATUS_INTERACTIVE)
 		return
 
-	var/cost = cost(U, user)
+	var/cost = cost(U, user.mind.tcrystals)
 
 	var/goods = get_goods(U, get_turf(user), user, extra_args)
 	if(!goods)
@@ -69,8 +69,8 @@ var/datum/uplink/uplink = new()
 /datum/uplink_item/proc/extra_args(var/mob/user)
 	return TRUE
 
-/datum/uplink_item/proc/can_buy(var/obj/item/device/uplink/U, var/datum/mind/M)
-	if(cost(U, M.tcrystals) > M.tcrystals)
+/datum/uplink_item/proc/can_buy(var/obj/item/device/uplink/U, var/telecrystals)
+	if(cost(U, telecrystals) > telecrystals)
 		return FALSE
 
 	return TRUE
@@ -96,7 +96,7 @@ var/datum/uplink/uplink = new()
 	M.mind.purchase_log[src] += 1
 
 datum/uplink_item/dd_SortValue()
-	return cost()
+	return item_cost
 
 /********************************
 *                           	*
