@@ -11025,7 +11025,8 @@
 	},
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Telecoms Storage";
-	req_access = list(61)
+	req_access = list(61);
+	req_one_access = list(61)
 	},
 /turf/simulated/floor,
 /area/tcomm/tcomstorage)
