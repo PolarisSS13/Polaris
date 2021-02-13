@@ -233,5 +233,5 @@
 	traitor_frequency = 1445
 
 /obj/item/device/radio/headset/uplink/New()
-	..(loc)
+	..()
 	hidden_uplink = new(src)
