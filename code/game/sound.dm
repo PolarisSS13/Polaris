@@ -4,6 +4,8 @@
 		return
 
 	var/turf/turf_source = get_turf(source)
+	if(!turf_source)
+		return
 	var/area/area_source = turf_source.loc
 
 	//allocate a channel if necessary now so its the same for everyone
