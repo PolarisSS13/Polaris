@@ -135,7 +135,8 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 
 	var/obj/item/organ/internal/brain/B = src
 	if(istype(B) && owner)
-		B.transfer_identity(owner)
+		if(istype(owner, /mob/living/carbon))
+			B.transfer_identity(owner)
 
 	..()
 
