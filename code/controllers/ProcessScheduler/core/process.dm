@@ -202,13 +202,9 @@
 		var/msg = "[name] process was killed at tick #[ticks]."
 		log_debug(msg)
 		message_admins(msg)
-		//finished()
-
 		// Allow inheritors to clean up if needed
 		onKill()
-
-		// This should del
-		del(src)
+		qdel(src)
 
 // Do not call this directly - use SHECK
 /datum/controller/process/proc/defer()
