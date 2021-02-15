@@ -71,7 +71,7 @@
 	// This is a bitfield, more than one type can be used
 	// Grill is presently unused and not listed
 
-/datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents, var/exact = 0)
+/datum/recipe/proc/check_reagents(var/datum/reagents/avail_reagents, var/exact = FALSE)
 	if(!reagents || !reagents.len)
 		return TRUE
 	
@@ -91,7 +91,7 @@
 		return FALSE
 	return .
 
-/datum/recipe/proc/check_fruit(var/obj/container, var/exact = 0)
+/datum/recipe/proc/check_fruit(var/obj/container, var/exact = FALSE)
 	if (!fruit || !fruit.len)
 		return TRUE
 
@@ -114,7 +114,7 @@
 					break
 	return .
 
-/datum/recipe/proc/check_items(var/obj/container as obj, var/exact = 0)
+/datum/recipe/proc/check_items(var/obj/container as obj, var/exact = FALSE)
 	if(!items || !items.len)
 		return TRUE
 	

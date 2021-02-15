@@ -1,11 +1,22 @@
-
 #define RECOMMENDED_VERSION 501
 /world/New()
 	to_world_log("Map Loading Complete")
+	//logs
+	//VOREStation Edit Start
+	log_path += time2text(world.realtime, "YYYY/MM-Month/DD-Day/round-hh-mm-ss")
+	diary = start_log("[log_path].log")
+	href_logfile = start_log("[log_path]-hrefs.htm")
+	error_log = start_log("[log_path]-error.log")
+	debug_log = start_log("[log_path]-debug.log")
+	//VOREStation Edit End
+
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
 	if(byond_version < RECOMMENDED_VERSION)
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
+
+	TgsNew()
+	VgsNew() // VOREStation Edit - VGS
 
 	config.post_load()
 
@@ -13,8 +24,9 @@
 		// dumb and hardcoded but I don't care~
 		config.server_name += " #[(world.port % 1000) / 100]"
 
-	if(config && config.log_runtime)
-		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
+	// TODO - Figure out what this is. Can you assign to world.log?
+	// if(config && config.log_runtime)
+	// 	log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
 
 	GLOB.timezoneOffset = get_timezone_offset()
 
@@ -33,9 +45,6 @@
 	log_unit_test("If you did not intend to enable this please check code/__defines/unit_testing.dm")
 #endif
 
-	// Set up roundstart seed list.
-	plant_controller = new()
-
 	// This is kinda important. Set up details of what the hell things are made of.
 	populate_material_list()
 
@@ -48,12 +57,12 @@
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 
-	processScheduler = new
+	//Must be done now, otherwise ZAS zones and lighting overlays need to be recreated.
+	//createRandomZlevel()	//VOREStation Removal: Deprecated
+
 	master_controller = new /datum/controller/game_controller()
 
-	// processScheduler.deferSetupFor(/datum/controller/process/ticker) // Ticker is now a real subsystem!
-	processScheduler.setup()
-	Master.Initialize(10, FALSE)
+	Master.Initialize(10, FALSE, TRUE)
 
 	spawn(1)
 		master_controller.setup()
@@ -73,7 +82,9 @@ var/world_topic_spam_protect_ip = "0.0.0.0"
 var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
-	debug_log << "TOPIC: \"[T]\", from:[addr], master:[master], key:[key][log_end]"
+	TGS_TOPIC
+	VGS_TOPIC // VOREStation Edit - VGS
+	log_topic("\"[T]\", from:[addr], master:[master], key:[key]")
 
 	if (T == "ping")
 		var/x = 1
@@ -149,6 +160,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				"med" = SSjob.get_job_titles_in_department(DEPARTMENT_MEDICAL),
 				"sci" = SSjob.get_job_titles_in_department(DEPARTMENT_RESEARCH),
 				"car" = SSjob.get_job_titles_in_department(DEPARTMENT_CARGO),
+				"pla" = SSjob.get_job_titles_in_department(DEPARTMENT_PLANET), //VOREStation Add,
 				"civ" = SSjob.get_job_titles_in_department(DEPARTMENT_CIVILIAN),
 				"bot" = SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC)
 			)
@@ -202,8 +214,8 @@ var/world_topic_spam_protect_time = world.timeofday
 		return list2params(positions)
 
 	else if(T == "revision")
-		if(revdata.revision)
-			return list2params(list(branch = revdata.branch, date = revdata.date, revision = revdata.revision))
+		if(GLOB.revdata.revision)
+			return list2params(list(branch = GLOB.revdata.branch, date = GLOB.revdata.date, revision = GLOB.revdata.revision))
 		else
 			return "unknown"
 
@@ -264,7 +276,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 			info["stat"] = M.stat
 			info["type"] = M.type
-			if(isliving(M))
+			if(istype(M, /mob/living))
 				var/mob/living/L = M
 				info["damage"] = list2params(list(
 							oxy = L.getOxyLoss(),
@@ -332,7 +344,7 @@ var/world_topic_spam_protect_time = world.timeofday
 		to_chat(C,message)
 
 
-		for(var/client/A in admins)
+		for(var/client/A in GLOB.admins)
 			if(A != C)
 				to_chat(A,amessage)
 
@@ -385,6 +397,7 @@ var/world_topic_spam_protect_time = world.timeofday
 	/*spawn(0)
 		world << sound(pick('sound/AI/newroundsexy.ogg','sound/misc/apcdestroyed.ogg','sound/misc/bangindonk.ogg')) // random end sounds!! - LastyBatsy
 		*/
+
 	if (reason || fast_track) //special reboot, do none of the normal stuff
 		if (usr)
 			log_admin("[key_name(usr)] Has requested an immediate world restart via client side debugging tools")
@@ -395,11 +408,12 @@ var/world_topic_spam_protect_time = world.timeofday
 			to_world("<span class='boldannounce'>Rebooting world immediately due to host request</span>")
 	else
 		Master.Shutdown()	//run SS shutdowns
-		processScheduler.stop()
+		//processScheduler.stop() //VOREStation Removal
 		for(var/client/C in GLOB.clients)
 			if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 				C << link("byond://[config.server]")
 
+	TgsReboot()
 	log_world("World rebooted at [time_stamp()]")
 	..()
 
@@ -637,11 +651,16 @@ proc/establish_old_db_connection()
 
 // Things to do when a new z-level was just made.
 /world/proc/max_z_changed()
-	if(!islist(GLOB.players_by_zlevel))
+	if(!istype(GLOB.players_by_zlevel, /list))
 		GLOB.players_by_zlevel = new /list(world.maxz, 0)
+		GLOB.living_players_by_zlevel = new /list(world.maxz, 0)
+	
 	while(GLOB.players_by_zlevel.len < world.maxz)
 		GLOB.players_by_zlevel.len++
 		GLOB.players_by_zlevel[GLOB.players_by_zlevel.len] = list()
+		
+		GLOB.living_players_by_zlevel.len++
+		GLOB.living_players_by_zlevel[GLOB.living_players_by_zlevel.len] = list()
 
 // Call this to make a new blank z-level, don't modify maxz directly.
 /world/proc/increment_max_z()

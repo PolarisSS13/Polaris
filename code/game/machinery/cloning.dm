@@ -23,7 +23,7 @@
 			break
 	return selected
 
-#define CLONE_BIOMASS 60
+#define CLONE_BIOMASS 30 //VOREstation Edit
 #define MINIMUM_HEAL_LEVEL 40
 
 /obj/machinery/clonepod
@@ -483,8 +483,8 @@
 //TO-DO: Make the genetics machine accept them.
 /obj/item/weapon/disk/data
 	name = "Cloning Data Disk"
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk0" //Gosh I hope syndies don't mistake them for the nuke disk.
+	icon = 'icons/obj/discs_vr.dmi' //VOREStation Edit
+	icon_state = "data-red" //VOREStation Edit
 	item_state = "card-id"
 	w_class = ITEMSIZE_SMALL
 	var/datum/dna2/record/buf = null

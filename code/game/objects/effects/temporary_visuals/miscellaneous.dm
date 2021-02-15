@@ -70,3 +70,33 @@
 /obj/effect/temp_visual/impact_effect/ion
 	icon_state = "shieldsparkles"
 	duration = 6
+
+// VOREStation Add - Kinetic Accelerator/Medigun
+/obj/effect/temp_visual/kinetic_blast
+	name = "kinetic explosion"
+	icon = 'icons/obj/projectiles.dmi'
+	icon_state = "kinetic_blast"
+	layer = ABOVE_MOB_LAYER
+	duration = 4
+
+/obj/effect/temp_visual/explosion
+	name = "explosion"
+	icon = 'icons/effects/96x96.dmi'
+	icon_state = "explosion"
+	pixel_x = -32
+	pixel_y = -32
+	duration = 8
+
+/obj/effect/temp_visual/explosion/fast
+	icon_state = "explosionfast"
+	duration = 4
+
+/obj/effect/temp_visual/heal
+	name = "healing glow"
+	icon_state = "heal"
+	duration = 15
+
+/obj/effect/temp_visual/heal/Initialize(mapload)
+	pixel_x = rand(-12, 12)
+	pixel_y = rand(-9, 0)
+// VOREStation Add End

@@ -14,7 +14,7 @@
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
 	light_color = "#00FF00"
 	var/obj/machinery/body_scanconsole/console
-	var/known_implants = list(/obj/item/weapon/implant/health, /obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking, /obj/item/weapon/implant/language, /obj/item/weapon/implant/language/eal)
+	var/known_implants = list(/obj/item/weapon/implant/health, /obj/item/weapon/implant/chem, /obj/item/weapon/implant/death_alarm, /obj/item/weapon/implant/loyalty, /obj/item/weapon/implant/tracking, /obj/item/weapon/implant/language, /obj/item/weapon/implant/language/eal, /obj/item/weapon/implant/backup, /obj/item/device/nif) //VOREStation Add - Backup Implant, NIF
 	var/printing_text = null
 
 /obj/machinery/bodyscanner/Initialize()
@@ -56,7 +56,7 @@
 			return
 		M.forceMove(src)
 		occupant = M
-		icon_state = "body_scanner_1"
+		update_icon() //icon_state = "body_scanner_1" //VOREStation Edit - Health display for consoles with light and such.
 		playsound(src, 'sound/machines/medbayscanner1.ogg', 50) // Beepboop you're being scanned. <3
 		add_fingerprint(user)
 		qdel(G)
@@ -101,7 +101,7 @@
 
 	O.forceMove(src)
 	occupant = O
-	icon_state = "body_scanner_1"
+	update_icon() //icon_state = "body_scanner_1" //VOREStation Edit - Health display for consoles with light and such.
 	playsound(src, 'sound/machines/medbayscanner1.ogg', 50) // Beepboop you're being scanned. <3
 	add_fingerprint(user)
 	SStgui.update_uis(src)
@@ -129,7 +129,7 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = src.loc
 	occupant = null
-	icon_state = "body_scanner_1"
+	update_icon() //icon_state = "body_scanner_1" //VOREStation Edit - Health display for consoles with light and such.
 	SStgui.update_uis(src)
 	return
 
@@ -182,7 +182,7 @@
 
 	var/occupantData[0]
 	if(occupant && ishuman(occupant))
-		icon_state = "body_scanner_1"
+		update_icon() //VOREStation Edit - Health display for consoles with light and such.
 		var/mob/living/carbon/human/H = occupant
 		occupantData["name"] = H.name
 		occupantData["stat"] = H.stat
@@ -318,6 +318,7 @@
 
 		occupantData["blind"] = (H.sdisabilities & BLIND)
 		occupantData["nearsighted"] = (H.disabilities & NEARSIGHTED)
+		occupantData = attempt_vr(src, "get_occupant_data_vr", list(occupantData, H)) //VOREStation Insert
 	data["occupant"] = occupantData
 
 	return data
@@ -558,8 +559,8 @@
 	else
 		return attack_hand(user)
 
-
 /obj/machinery/body_scanconsole/power_change()
+	/* VOREStation Removal
 	if(stat & BROKEN)
 		icon_state = "body_scannerconsole-p"
 	else if(powered() && !panel_open)
@@ -569,6 +570,8 @@
 		spawn(rand(0, 15))
 			icon_state = "body_scannerconsole-p"
 			stat |= NOPOWER
+	*/
+	update_icon() //icon_state = "body_scanner_1" //VOREStation Edit - Health display for consoles with light and such.
 
 /obj/machinery/body_scanconsole/ex_act(severity)
 	switch(severity)

@@ -11,17 +11,19 @@
 	var/muzzled = is_muzzled()
 	//var/m_type = 1
 
-	for(var/obj/item/organ/O in src.organs)
-		for (var/obj/item/weapon/implant/I in O)
+	for(var/obj/item/organ/O in organs)
+		for(var/obj/item/weapon/implant/I in O)
 			if(I.implanted)
 				I.trigger(act, src)
 
 	if(stat == DEAD && (act != "deathgasp"))
 		return
-	switch(act)
 
+	if(attempt_vr(src, "handle_emote_vr", list(act, m_type, message))) return //VOREStation Add - Custom Emote Handler
+
+	switch(act)
 		if("airguitar")
-			if(!src.restrained())
+			if(!restrained())
 				message = "is strumming the air and headbanging like a safari chimp."
 				m_type = 1
 
@@ -34,7 +36,7 @@
 
 			var/M = null
 			if(param)
-				for (var/mob/A in view(null, null))
+				for(var/mob/A in view(null, null))
 					if(param == A.name)
 						M = A
 						break
@@ -75,16 +77,17 @@
 				message = "[display_msg] at [param]."
 			else
 				message = "[display_msg]."
-			playsound(src, use_sound, 50, 0)
+			playsound(src, use_sound, 50, 0, preference = /datum/client_preference/emote_noises) //VOREStation Add
 			m_type = 1
 
 		//Promethean-only emotes
 		if("squish")
+			/* VOREStation Removal Start - Eh. People can squish maybe.
 			if(species.bump_flag != SLIME) //This should definitely do it.
 				to_chat(src, "<span class='warning'>You are not a slime thing!</span>")
 				return
-
-			playsound(src, 'sound/effects/slime_squish.ogg', 50, 0) //Credit to DrMinky (freesound.org) for the sound.
+			*/ //VOREStation Removal End
+			playsound(src, 'sound/effects/slime_squish.ogg', 50, 0, preference = /datum/client_preference/emote_noises) //VOREStation Add //Credit to DrMinky (freesound.org) for the sound.
 			message = "squishes."
 			m_type = 1
 
@@ -94,7 +97,7 @@
 				to_chat(src, "<span class='warning'>You are not a Skrell!</span>")
 				return
 
-			playsound(src, 'sound/effects/warble.ogg', 50, 0) // Copyright CC BY 3.0 alienistcog (freesound.org) for the sound.
+			playsound(src, 'sound/effects/warble.ogg', 50, 0, preference = /datum/client_preference/emote_noises) //VOREStation Add // Copyright CC BY 3.0 alienistcog (freesound.org) for the sound.
 			message = "warbles."
 			m_type = 2
 
@@ -107,10 +110,10 @@
 			m_type = 1
 
 		if("bow")
-			if(!src.buckled)
+			if(!buckled)
 				var/M = null
 				if(param)
-					for (var/mob/A in view(null, null))
+					for(var/mob/A in view(null, null))
 						if(param == A.name)
 							M = A
 							break
@@ -131,7 +134,7 @@
 			if(input2 == "Visible")
 				m_type = 1
 			else if(input2 == "Hearable")
-				if(src.miming)
+				if(miming)
 					return
 				m_type = 2
 			else
@@ -144,7 +147,7 @@
 			//if(silent && silent > 0 && findtext(message,"\"",1, null) > 0)
 			//	return //This check does not work and I have no idea why, I'm leaving it in for reference.
 
-			if(src.client)
+			if(client)
 				if(client.prefs.muted & MUTE_IC)
 					to_chat(src, "<font color='red'>You cannot send IC messages (muted).</font>")
 					return
@@ -155,10 +158,10 @@
 			return custom_emote(m_type, message)
 
 		if("salute")
-			if(!src.buckled)
+			if(!buckled)
 				var/M = null
 				if(param)
-					for (var/mob/A in view(null, null))
+					for(var/mob/A in view(null, null))
 						if(param == A.name)
 							M = A
 							break
@@ -184,7 +187,7 @@
 					m_type = 2
 
 		if("clap")
-			if(!src.restrained())
+			if(!restrained())
 				message = "claps."
 				playsound(src, 'sound/misc/clapping.ogg')
 				m_type = 2
@@ -192,14 +195,14 @@
 					m_type = 1
 
 		if("flap")
-			if(!src.restrained())
+			if(!restrained())
 				message = "flaps [T.his] wings."
 				m_type = 2
 				if(miming)
 					m_type = 1
 
 		if("aflap")
-			if(!src.restrained())
+			if(!restrained())
 				message = "flaps [T.his] wings ANGRILY!"
 				m_type = 2
 				if(miming)
@@ -235,7 +238,7 @@
 
 		if("faint")
 			message = "faints."
-			if(src.sleeping)
+			if(sleeping)
 				return //Can't faint while asleep
 			Sleeping(10)
 			m_type = 1
@@ -256,10 +259,10 @@
 						message = "coughs!"
 						if(get_gender() == FEMALE)
 							if(species.female_cough_sounds)
-								playsound(src, pick(species.female_cough_sounds), 120)
+								playsound(src, pick(species.female_cough_sounds), 120, preference = /datum/client_preference/emote_noises) //VOREStation Add
 						else
 							if(species.male_cough_sounds)
-								playsound(src, pick(species.male_cough_sounds), 120)
+								playsound(src, pick(species.male_cough_sounds), 120, preference = /datum/client_preference/emote_noises) //VOREStation Add
 					else
 						message = "emits a robotic cough"
 						var/use_sound
@@ -267,7 +270,7 @@
 							use_sound = pick('sound/effects/mob_effects/f_machine_cougha.ogg','sound/effects/mob_effects/f_machine_coughb.ogg')
 						else
 							use_sound = pick('sound/effects/mob_effects/m_machine_cougha.ogg','sound/effects/mob_effects/m_machine_coughb.ogg', 'sound/effects/mob_effects/m_machine_coughc.ogg')
-						playsound(src, use_sound, 50, 0)
+						playsound(src, use_sound, 50, 0, preference = /datum/client_preference/emote_noises) //VOREStation Add
 				else
 					message = "makes a strong noise."
 					m_type = 2
@@ -319,7 +322,7 @@
 		if("glare")
 			var/M = null
 			if(param)
-				for (var/mob/A in view(null, null))
+				for(var/mob/A in view(null, null))
 					if(param == A.name)
 						M = A
 						break
@@ -334,7 +337,7 @@
 		if("stare")
 			var/M = null
 			if(param)
-				for (var/mob/A in view(null, null))
+				for(var/mob/A in view(null, null))
 					if(param == A.name)
 						M = A
 						break
@@ -349,7 +352,7 @@
 		if("look")
 			var/M = null
 			if(param)
-				for (var/mob/A in view(null, null))
+				for(var/mob/A in view(null, null))
 					if(param == A.name)
 						M = A
 						break
@@ -451,14 +454,14 @@
 					message = "takes a drag from a cigarette and blows \"[M]\" out in smoke."
 					m_type = 1
 				else
-					message = "says, \"[M], please. He had a family.\" [src.name] takes a drag from a cigarette and blows his name out in smoke."
+					message = "says, \"[M], please. He had a family.\" [name] takes a drag from a cigarette and blows his name out in smoke."
 					m_type = 2
 
 		if("point")
-			if(!src.restrained())
+			if(!restrained())
 				var/mob/M = null
 				if(param)
-					for (var/atom/A as mob|obj|turf|area in view(null, null))
+					for(var/atom/A as mob|obj|turf|area in view(null, null))
 						if(param == A.name)
 							M = A
 							break
@@ -472,15 +475,15 @@
 					message = "points to [M]."
 				else
 			m_type = 1
-
+			
 		if("crack")
 			if(!restrained())
 				message = "cracks [T.his] knuckles."
-				playsound(src, 'sound/voice/knuckles.ogg', 50, 1)
+				playsound(src, 'sound/voice/knuckles.ogg', 50, 1, preference = /datum/client_preference/emote_noises)
 				m_type = 1
 
 		if("raise")
-			if(!src.restrained())
+			if(!restrained())
 				message = "raises a hand."
 			m_type = 1
 
@@ -493,12 +496,12 @@
 			m_type = 1
 
 		if("signal")
-			if(!src.restrained())
+			if(!restrained())
 				var/t1 = round(text2num(param))
 				if(isnum(t1))
-					if(t1 <= 5 && (!src.r_hand || !src.l_hand))
+					if(t1 <= 5 && (!r_hand || !l_hand))
 						message = "raises [t1] finger\s."
-					else if(t1 <= 10 && (!src.r_hand && !src.l_hand))
+					else if(t1 <= 10 && (!r_hand && !l_hand))
 						message = "raises [t1] finger\s."
 			m_type = 1
 
@@ -535,9 +538,9 @@
 					if(!robotic)
 						message = "sneezes."
 						if(get_gender() == FEMALE)
-							playsound(src, species.female_sneeze_sound, 70)
+							playsound(src, species.female_sneeze_sound, 70, preference = /datum/client_preference/emote_noises) //VOREStation Add
 						else
-							playsound(src, species.male_sneeze_sound, 70)
+							playsound(src, species.male_sneeze_sound, 70, preference = /datum/client_preference/emote_noises) //VOREStation Add
 						m_type = 2
 					else
 						message = "emits a robotic sneeze"
@@ -546,7 +549,7 @@
 							use_sound = 'sound/effects/mob_effects/machine_sneeze.ogg'
 						else
 							use_sound = 'sound/effects/mob_effects/f_machine_sneeze.ogg'
-						playsound(src, use_sound, 50, 0)
+						playsound(src, use_sound, 50, 0, preference = /datum/client_preference/emote_noises) //VOREStation Add
 				else
 					message = "makes a strange noise."
 					m_type = 2
@@ -601,10 +604,10 @@
 
 		if("hug")
 			m_type = 1
-			if(!src.restrained())
+			if(!restrained())
 				var/M = null
 				if(param)
-					for (var/mob/A in view(1, null))
+					for(var/mob/A in view(1, null))
 						if(param == A.name)
 							M = A
 							break
@@ -618,10 +621,10 @@
 
 		if("handshake")
 			m_type = 1
-			if(!src.restrained() && !src.r_hand)
+			if(!restrained() && !r_hand)
 				var/mob/living/M = null
 				if(param)
-					for (var/mob/living/A in view(1, null))
+					for(var/mob/living/A in view(1, null))
 						if(param == A.name)
 							M = A
 							break
@@ -636,10 +639,10 @@
 
 		if("dap")
 			m_type = 1
-			if(!src.restrained())
+			if(!restrained())
 				var/M = null
 				if(param)
-					for (var/mob/A in view(1, null))
+					for(var/mob/A in view(1, null))
 						if(param == A.name)
 							M = A
 							break
@@ -659,14 +662,14 @@
 							break
 				if(M)
 					message = "<span class='danger'>slaps [M] across the face. Ouch!</span>"
-					playsound(src, 'sound/effects/snap.ogg', 50, 1)
+					playsound(src, 'sound/effects/snap.ogg', 50, 1, preference = /datum/client_preference/emote_noises) //VOREStation Add
 					if(ishuman(M)) //Snowflakey!
 						var/mob/living/carbon/human/H = M
 						if(istype(H.wear_mask,/obj/item/clothing/mask/smokable))
 							H.drop_from_inventory(H.wear_mask)
 				else
 					message = "<span class='danger'>slaps [T.himself]!</span>"
-					playsound(src, 'sound/effects/snap.ogg', 50, 1)
+					playsound(src, 'sound/effects/snap.ogg', 50, 1, preference = /datum/client_preference/emote_noises) //VOREStation Add
 
 		if("scream", "screams")
 			if(miming)
@@ -703,19 +706,19 @@
 				return
 
 			message = "snaps [T.his] fingers."
-			playsound(src, 'sound/effects/fingersnap.ogg', 50, 1, -3)
+			playsound(src, 'sound/effects/fingersnap.ogg', 50, 1, -3, preference = /datum/client_preference/emote_noises) //VOREStation Add
 
 		if("swish")
-			src.animate_tail_once()
+			animate_tail_once()
 
 		if("wag", "sway")
-			src.animate_tail_start()
+			animate_tail_start()
 
 		if("qwag", "fastsway")
-			src.animate_tail_fast()
+			animate_tail_fast()
 
 		if("swag", "stopsway")
-			src.animate_tail_stop()
+			animate_tail_stop()
 
 		if("vomit")
 			if(isSynthetic())
@@ -727,14 +730,14 @@
 		if("whistle" || "whistles")
 			if(!muzzled)
 				message = "whistles a tune."
-				playsound(src, 'sound/misc/longwhistle.ogg') //praying this doesn't get abused
+				playsound(src, 'sound/misc/longwhistle.ogg', preference = /datum/client_preference/emote_noises) //VOREStation Add
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
 		if("qwhistle")
 			if(!muzzled)
 				message = "whistles quietly."
-				playsound(src, 'sound/misc/shortwhistle.ogg')
+				playsound(src, 'sound/misc/shortwhistle.ogg', preference = /datum/client_preference/emote_noises) //VOREStation Add
 			else
 				message = "makes a light spitting noise, a poor attempt at a whistle."
 
@@ -745,7 +748,7 @@
 					twitch_v, vomit, whimper, wink, yawn. Prometheans: squish Synthetics: beep, buzz, dwoop, yes, no, rcough, rsneeze, ping. Skrell: warble</span>")
 
 		else
-			to_chat(src, "<span class='filter_say'><font color='blue'>Unusable emote '[act]'. Say *help for a list.</font></span>")
+			to_chat(src, "<span class='filter_say'><font color='blue'>Unusable emote '[act]'. Say *help or *vhelp for a list.</font></span>") //VOREStation Edit, mention *vhelp for Virgo-specific emotes located in emote_vr.dm.
 
 	if(message)
 		custom_emote(m_type,message)
@@ -757,7 +760,7 @@
 
 	var/datum/gender/T = gender_datums[get_visible_gender()]
 
-	pose =  sanitize(input(usr, "This is [src]. [T.he]...", "Pose", null)  as text)
+	pose = sanitize(input(usr, "This is [src]. [T.he]...", "Pose", null)  as text)
 
 /mob/living/carbon/human/verb/set_flavor()
 	set name = "Set Flavour Text"
@@ -799,27 +802,3 @@
 	HTML +="<a href='?src=\ref[src];flavor_change=done'>\[Done\]</a>"
 	HTML += "<tt>"
 	src << browse(HTML, "window=flavor_changes;size=430x300")
-
-/mob/living/carbon/human/proc/toggle_tail(var/setting,var/message = 0)
-	if(!tail_style || !tail_style.ani_state)
-		if(message)
-			to_chat(src, "<span class='warning'>You don't have a tail that supports this.</span>")
-		return 0
-
-	var/new_wagging = isnull(setting) ? !wagging : setting
-	if(new_wagging != wagging)
-		wagging = new_wagging
-		update_tail_showing()
-	return 1
-
-/mob/living/carbon/human/proc/toggle_wing(var/setting,var/message = 0)
-	if(!wing_style || !wing_style.ani_state)
-		if(message)
-			to_chat(src, "<span class='warning'>You don't have a wingtype that supports this.</span>")
-		return 0
-
-	var/new_flapping = isnull(setting) ? !flapping : setting
-	if(new_flapping != flapping)
-		flapping = setting
-		update_wing_showing()
-	return 1

@@ -39,8 +39,8 @@
 
 	// During dynamic mapload (reader.dm) this assigns the var overrides from the .dmm file
 	// Native BYOND maploading sets those vars before invoking New(), by doing this FIRST we come as close to that behavior as we can.
-	if(use_preloader && (src.type == _preloader.target_path))//in case the instanciated atom is creating other atoms in New()
-		_preloader.load(src)
+	if(GLOB.use_preloader && (src.type == GLOB._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+		GLOB._preloader.load(src)
 
 	// Pass our arguments to InitAtom so they can be passed to initialize(), but replace 1st with if-we're-during-mapload.
 	var/do_initialize = SSatoms.initialized
@@ -228,6 +228,20 @@
 	. = new_dir != dir
 	dir = new_dir
 
+// Called to set the atom's density and used to add behavior to density changes.
+/atom/proc/set_density(var/new_density)
+	if(density == new_density)
+		return FALSE
+	density = !!new_density // Sanitize to be strictly 0 or 1
+	return TRUE
+
+// Called to set the atom's invisibility and usd to add behavior to invisibility changes.
+/atom/proc/set_invisibility(var/new_invisibility)
+	if(invisibility == new_invisibility)
+		return FALSE
+	invisibility = new_invisibility
+	return TRUE
+
 /atom/proc/ex_act()
 	return
 
@@ -298,7 +312,7 @@
 		//He has no prints!
 		if (mFingerprints in M.mutations)
 			if(fingerprintslast != M.key)
-				fingerprintshidden += "(Has no fingerprints) Real name: [M.real_name], Key: [M.key]"
+				fingerprintshidden += "[time_stamp()]: [key_name(M)] (No fingerprints mutation)"
 				fingerprintslast = M.key
 			return 0		//Now, lets get to the dirty work.
 		//First, make sure their DNA makes sense.
@@ -312,7 +326,7 @@
 		//Now, deal with gloves.
 		if (H.gloves && H.gloves != src)
 			if(fingerprintslast != H.key)
-				fingerprintshidden += text("\[[]\](Wearing gloves). Real name: [], Key: []",time_stamp(), H.real_name, H.key)
+				fingerprintshidden += "[time_stamp()]: [key_name(H)] (Wearing [H.gloves])"
 				fingerprintslast = H.key
 			H.gloves.add_fingerprint(M)
 
@@ -326,7 +340,7 @@
 
 		//More adminstuffz
 		if(fingerprintslast != H.key)
-			fingerprintshidden += text("\[[]\]Real name: [], Key: []",time_stamp(), H.real_name, H.key)
+			fingerprintshidden += "[time_stamp()]: [key_name(H)]"
 			fingerprintslast = H.key
 
 		//Make the list if it does not exist.
@@ -379,7 +393,7 @@
 	else
 		//Smudge up dem prints some
 		if(fingerprintslast != M.key)
-			fingerprintshidden += text("\[[]\]Real name: [], Key: []",time_stamp(), M.real_name, M.key)
+			fingerprintshidden += "[time_stamp()]: [key_name(M)]"
 			fingerprintslast = M.key
 
 	//Cleaning up shit.
@@ -478,7 +492,14 @@
 // blind_message (optional) is what blind people will hear e.g. "You hear something!"
 /atom/proc/visible_message(var/message, var/blind_message, var/list/exclude_mobs = null)
 
-	var/list/see = get_mobs_and_objs_in_view_fast(get_turf(src),world.view,remote_ghosts = FALSE)
+	//VOREStation Edit
+	var/list/see
+	if(isbelly(loc))
+		var/obj/belly/B = loc
+		see = B.get_mobs_and_objs_in_belly()
+	else
+		see = get_mobs_and_objs_in_view_fast(get_turf(src),world.view,remote_ghosts = FALSE)
+	//VOREStation Edit End
 
 	var/list/seeing_mobs = see["mobs"]
 	var/list/seeing_objs = see["objs"]
@@ -593,6 +614,8 @@
 		<a href='?_src_=vars;rotatedatum=\ref[src];rotatedir=right'>>></a>
 		</font>
 		"}
+	var/turf/T = get_turf(src)
+	. += "<br><font size='1'>[ADMIN_COORDJMP(T)]</font>"
 
 /atom/proc/atom_say(message)
 	if(!message)

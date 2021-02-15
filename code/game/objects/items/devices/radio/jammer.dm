@@ -24,7 +24,7 @@ var/global/list/active_radio_jammers = list()
 	var/on = 0
 	var/jam_range = 7
 	var/obj/item/weapon/cell/device/weapon/power_source
-	var/tick_cost = 8 // Will last for roughly ten minutes, as process() ticks every 2 seconds.
+	var/tick_cost = 5 //VOREStation Edit - For the ERPs.
 
 	origin_tech = list(TECH_ILLEGAL = 7, TECH_BLUESPACE = 5) //Such technology! Subspace jamming!
 

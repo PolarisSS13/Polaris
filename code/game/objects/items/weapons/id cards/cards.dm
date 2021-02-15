@@ -81,6 +81,12 @@
 
 	uses -= used_uses
 	A.add_fingerprint(user)
+	//Vorestation Edit: Because some things (read lift doors) don't get emagged
+	if(used_uses)
+		log_and_message_admins("emagged \an [A].")
+	else
+		log_and_message_admins("attempted to emag \an [A].")
+	// Vorestation Edit: End of Edit
 	log_and_message_admins("emagged \an [A].")
 
 	if(uses<1)

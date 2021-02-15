@@ -776,8 +776,12 @@
 		var/mob/living/L = holder.my_atom
 		if(L.stat != DEAD)
 			e.amount *= 0.5
+	//VOREStation Add Start
+	else
+		holder.clear_reagents() //No more powergaming by creating a tiny amount of this
+	//VORESTation Add End
 	e.start()
-	holder.clear_reagents()
+	//holder.clear_reagents() //VOREStation Removal
 	return
 
 /datum/chemical_reaction/flash_powder
@@ -822,7 +826,10 @@
 	// 100 created volume = 4 heavy range & 7 light range. A few tiles smaller than traitor EMP grandes.
 	// 200 created volume = 8 heavy range & 14 light range. 4 tiles larger than traitor EMP grenades.
 	empulse(location, round(created_volume / 24), round(created_volume / 20), round(created_volume / 18), round(created_volume / 14), 1)
-	holder.clear_reagents()
+	//VOREStation Edit Start
+	if(!isliving(holder.my_atom)) //No more powergaming by creating a tiny amount of this
+		holder.clear_reagents()
+	//VOREStation Edit End
 	return
 
 /datum/chemical_reaction/nitroglycerin
@@ -841,9 +848,13 @@
 		var/mob/living/L = holder.my_atom
 		if(L.stat!=DEAD)
 			e.amount *= 0.5
+	//VOREStation Add Start
+	else
+		holder.clear_reagents() //No more powergaming by creating a tiny amount of this
+	//VOREStation Add End
 	e.start()
 
-	holder.clear_reagents()
+	//holder.clear_reagents() //VOREStation Removal
 	return
 
 /datum/chemical_reaction/napalm
@@ -876,7 +887,10 @@
 	playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
 	spawn(0)
 		S.start()
-	holder.clear_reagents()
+	//VOREStation Edit Start
+	if(!isliving(holder.my_atom)) //No more powergaming by creating a tiny amount of this
+		holder.clear_reagents()
+	//VOREStation Edit End
 	return
 
 /datum/chemical_reaction/foam
@@ -896,7 +910,10 @@
 	var/datum/effect/effect/system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 0)
 	s.start()
-	holder.clear_reagents()
+	//VOREStation Edit Start
+	if(!isliving(holder.my_atom)) //No more powergaming by creating a tiny amount of this
+		holder.clear_reagents()
+	//VOREStation Edit End
 	return
 
 /datum/chemical_reaction/metalfoam
@@ -1860,7 +1877,7 @@
 	name = "Snow White"
 	id = "snowwhite"
 	result = "snowwhite"
-	required_reagents = list("beer" = 1, "lemon_lime" = 1)
+	required_reagents = list("pineapplejuice" = 1, "rum" = 1, "lemon_lime" = 1, "egg" = 1, "kahlua" = 1, "sugar" = 1) //VoreStation Edit
 	result_amount = 2
 
 /datum/chemical_reaction/drinks/irishcarbomb

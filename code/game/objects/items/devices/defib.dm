@@ -145,6 +145,12 @@
 		return 1
 	if((slot_flags & SLOT_BELT) && M.get_equipped_item(slot_belt) == src)
 		return 1
+	//VOREStation Add Start - RIGSuit compatability
+	if((slot_flags & SLOT_BACK) && M.get_equipped_item(slot_s_store) == src)
+		return 1
+	if((slot_flags & SLOT_BELT) && M.get_equipped_item(slot_s_store) == src)
+		return 1
+	//VOREStation Add End
 
 	return 0
 
@@ -492,7 +498,7 @@
 	M.Weaken(rand(10,25))
 	M.updatehealth()
 	apply_brain_damage(M)
-	SSgame_master.adjust_danger(-20)
+	// SSgame_master.adjust_danger(-20) // VOREStation Edit - We don't use SSgame_master yet.
 
 /obj/item/weapon/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H)
 	if(!H.should_have_organ(O_BRAIN))

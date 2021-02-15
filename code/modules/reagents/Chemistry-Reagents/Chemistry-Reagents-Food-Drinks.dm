@@ -37,7 +37,7 @@
 				data -= taste
 
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(!injectable && alien != IS_SLIME)
+	if(!injectable && alien != IS_SLIME && alien != IS_CHIMERA) //VOREStation Edit
 		M.adjustToxLoss(0.1 * removed)
 		return
 	affect_ingest(M, alien, removed)
@@ -46,9 +46,11 @@
 	switch(alien)
 		if(IS_DIONA) return
 		if(IS_UNATHI) removed *= 0.5
+		if(IS_CHIMERA) removed *= 0.25 //VOREStation Edit
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
 	M.heal_organ_damage(0.5 * removed, 0)
-	M.adjust_nutrition(nutriment_factor * removed)
+	if(M.species.gets_food_nutrition) //VOREStation edit. If this is set to 0, they don't get nutrition from food.
+		M.adjust_nutrition(nutriment_factor * removed) // For hunger and fatness
 	M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
 
 // Aurora Cooking Port Insertion Begin
@@ -260,6 +262,10 @@
 			..(M, alien, removed*1.2) // Teshari get a bit more nutrition from meat.
 		if(IS_UNATHI)
 			..(M, alien, removed*2.25) //Unathi get most of their nutrition from meat.
+		//VOREStation Edit Start
+		if(IS_CHIMERA)
+			..(M, alien, removed*4) //Xenochimera are obligate carnivores.
+		//VOREStation Edit End
 		else
 			..()
 
@@ -629,6 +635,11 @@
 /datum/reagent/frostoil/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed) // Eating frostoil now acts like capsaicin. Wee!
 	if(alien == IS_DIONA)
 		return
+	if(alien == IS_ALRAUNE) // VOREStation Edit: It wouldn't affect plants that much.
+		if(prob(5))
+			to_chat(M, "<span class='rose'>You feel a chilly, tingling sensation in your mouth.</span>")
+		M.bodytemperature -= rand(10, 25)
+		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -641,7 +652,7 @@
 		M.bodytemperature -= rand(1, 5) * M.species.spice_mod // Really fucks you up, cause it makes you cold.
 		if(prob(5))
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", pick("<span class='danger'>You feel like your insides are freezing!</span>", "<span class='danger'>Your insides feel like they're turning to ice!</span>"))
-	holder.remove_reagent("capsaicin", 5)
+	// holder.remove_reagent("capsaicin", 5) // VOREStation Edit: Nop, we don't instadelete spices for free. 
 
 /datum/reagent/frostoil/cryotoxin //A longer lasting version of frost oil.
 	name = "Cryotoxin"
@@ -669,6 +680,11 @@
 /datum/reagent/capsaicin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
+	if(alien == IS_ALRAUNE) // VOREStation Edit: It wouldn't affect plants that much.
+		if(prob(5))
+			to_chat(M, "<span class='rose'>You feel a pleasant sensation in your mouth.</span>")
+		M.bodytemperature += rand(10, 25)
+		return
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		if(!H.can_feel_pain())
@@ -682,7 +698,7 @@
 		M.bodytemperature += rand(1, 5) * M.species.spice_mod // Really fucks you up, cause it makes you overheat, too.
 		if(prob(5))
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", pick("<span class='danger'>You feel like your insides are burning!</span>", "<span class='danger'>You feel like your insides are on fire!</span>", "<span class='danger'>You feel like your belly is full of lava!</span>"))
-	holder.remove_reagent("frostoil", 5)
+	// holder.remove_reagent("frostoil", 5)  // VOREStation Edit: Nop, we don't instadelete spices for free. 
 
 /datum/reagent/condensedcapsaicin
 	name = "Condensed Capsaicin"
@@ -826,7 +842,7 @@
 		M.apply_effect(4, AGONY, 0)
 		if(prob(5))
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
-	holder.remove_reagent("frostoil", 5)
+	// holder.remove_reagent("frostoil", 5) // VOREStation Edit: Nop, we don't instadelete spices for free. 
 
 /* Drinks */
 
@@ -860,8 +876,10 @@
 		M.bodytemperature = min(310, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
 	if(adj_temp < 0 && M.bodytemperature > 310)
 		M.bodytemperature = min(310, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+	/* VOREStation Removal
 	if(alien == IS_SLIME && water_based)
 		M.adjustToxLoss(removed * 2)
+	*/ //VOREStation Removal End
 
 /datum/reagent/drink/overdose(var/mob/living/carbon/M, var/alien) //Add special interactions here in the future if desired.
 	..()
@@ -929,6 +947,7 @@
 	if(issmall(M))
 		effective_dose *= 2
 
+/* //VOREStation Removal - Assuming all juice has sugar is silly
 	if(alien == IS_UNATHI)
 		if(effective_dose < 2)
 			if(effective_dose == metabolism * 2 || prob(5))
@@ -942,6 +961,7 @@
 		else
 			M.Sleeping(20)
 			M.drowsyness = max(M.drowsyness, 60)
+*/
 
 /datum/reagent/drink/juice/lemon
 	name = "Lemon Juice"
@@ -1159,7 +1179,7 @@
 			M.bodytemperature -= 0.5
 		if(M.bodytemperature < T0C)
 			M.bodytemperature += 0.5
-		M.adjustToxLoss(5 * removed)
+		//M.adjustToxLoss(5 * removed) //VOREStation Removal
 
 /datum/reagent/drink/tea/icetea/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1168,7 +1188,7 @@
 			M.bodytemperature -= 0.5
 		if(M.bodytemperature < T0C)
 			M.bodytemperature += 0.5
-		M.adjustToxLoss(5 * removed)
+		//M.adjustToxLoss(5 * removed) //VOREStation Removal
 
 /datum/reagent/drink/tea/minttea
 	name = "Mint Tea"
@@ -1286,25 +1306,25 @@
 	if(alien == IS_DIONA)
 		return
 	..()
-	if(alien == IS_TAJARA)
-		M.adjustToxLoss(0.5 * removed)
-		M.make_jittery(4) //extra sensitive to caffine
+	//if(alien == IS_TAJARA) //VOREStation Edit Begin
+		//M.adjustToxLoss(0.5 * removed)
+		//M.make_jittery(4) //extra sensitive to caffine
 	if(adj_temp > 0)
 		holder.remove_reagent("frostoil", 10 * removed)
 
 /datum/reagent/drink/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	if(alien == IS_TAJARA)
-		M.adjustToxLoss(2 * removed)
-		M.make_jittery(4)
-		return
+	//if(alien == IS_TAJARA)
+		//M.adjustToxLoss(2 * removed)
+		//M.make_jittery(4)
+		//return
 
 /datum/reagent/drink/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)
 		return
-	if(alien == IS_TAJARA)
-		M.adjustToxLoss(4 * REM)
-		M.apply_effect(3, STUTTER)
+	//if(alien == IS_TAJARA)
+		//M.adjustToxLoss(4 * REM)
+		//M.apply_effect(3, STUTTER) //VOREStation Edit end
 	M.make_jittery(5)
 
 /datum/reagent/drink/coffee/icecoffee
@@ -1325,7 +1345,7 @@
 			M.bodytemperature -= 0.5
 		if(M.bodytemperature < T0C)
 			M.bodytemperature += 0.5
-		M.adjustToxLoss(5 * removed)
+		//M.adjustToxLoss(5 * removed) //VOREStation Removal
 
 /datum/reagent/drink/coffee/icecoffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1334,7 +1354,7 @@
 			M.bodytemperature -= 0.5
 		if(M.bodytemperature < T0C)
 			M.bodytemperature += 0.5
-		M.adjustToxLoss(5 * removed)
+		//M.adjustToxLoss(5 * removed) //VOREStation Removal
 
 /datum/reagent/drink/coffee/soy_latte
 	name = "Soy Latte"
@@ -1883,7 +1903,7 @@
 			M.bodytemperature -= rand(1,3)
 		if(M.bodytemperature < T0C)
 			M.bodytemperature += rand(1,3)
-		M.adjustToxLoss(5 * removed)
+		//M.adjustToxLoss(5 * removed) //VOREStation Removal
 
 /datum/reagent/drink/ice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1892,7 +1912,7 @@
 			M.bodytemperature -= rand(1,3)
 		if(M.bodytemperature < T0C)
 			M.bodytemperature += rand(1,3)
-		M.adjustToxLoss(5 * removed)
+		//M.adjustToxLoss(5 * removed) //VOREStation Removal
 
 /datum/reagent/drink/nothing
 	name = "Nothing"
@@ -2247,23 +2267,23 @@
 	M.AdjustSleeping(-2)
 	if(M.bodytemperature > 310)
 		M.bodytemperature = max(310, M.bodytemperature - (5 * TEMPERATURE_DAMAGE_COEFFICIENT))
-	if(alien == IS_TAJARA)
-		M.adjustToxLoss(0.5 * removed)
-		M.make_jittery(4) //extra sensitive to caffine
+	//if(alien == IS_TAJARA)
+		//M.adjustToxLoss(0.5 * removed)
+		//M.make_jittery(4) //extra sensitive to caffine
 
 /datum/reagent/ethanol/coffee/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_TAJARA)
-		M.adjustToxLoss(2 * removed)
-		M.make_jittery(4)
-		return
+	//if(alien == IS_TAJARA)
+		//M.adjustToxLoss(2 * removed)
+		//M.make_jittery(4)
+		//return
 	..()
 
 /datum/reagent/ethanol/coffee/overdose(var/mob/living/carbon/M, var/alien)
 	if(alien == IS_DIONA)
 		return
-	if(alien == IS_TAJARA)
-		M.adjustToxLoss(4 * REM)
-		M.apply_effect(3, STUTTER)
+	//if(alien == IS_TAJARA)
+		//M.adjustToxLoss(4 * REM)
+		//M.apply_effect(3, STUTTER) //VOREStation Edit end
 	M.make_jittery(5)
 
 /datum/reagent/ethanol/coffee/kahlua

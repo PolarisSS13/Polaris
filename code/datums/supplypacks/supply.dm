@@ -122,14 +122,14 @@
 	containertype = /obj/structure/closet/crate/secure/xion
 	containername = "Shaft miner equipment"
 	access = access_mining
-
+/* //VOREStation Edit - Pointless on Tether.
 /datum/supply_pack/supply/mule
 	name = "Mulebot Crate"
 	contains = list()
 	cost = 20
 	containertype = /obj/structure/largecrate/animal/mulebot
 	containername = "Mulebot Crate"
-
+*/ //VOREStation Edit
 /datum/supply_pack/supply/cargotrain
 	name = "Cargo Train Tug"
 	contains = list(/obj/vehicle/train/engine)

@@ -18,7 +18,9 @@
 		return 0
 	if (affected.status & ORGAN_DESTROYED)
 		return 0
-	if (!(affected.robotic >= ORGAN_ROBOT))
+	if (!(affected.robotic == ORGAN_ROBOT || affected.robotic == ORGAN_LIFELIKE)) //VOREStation Edit - No good on ORGAN_NANOFORM
+		return 0
+	if(coverage_check(user, target, affected, tool))
 		return 0
 	if(coverage_check(user, target, affected, tool))
 		return 0
@@ -423,9 +425,11 @@
 	if(!istype(M))
 		return 0
 
+	/* VOREStation Edit - Don't worry about it. We can put these in regardless, because resleeving might make it useful after.
 	if(!M.brainmob || !M.brainmob.client || !M.brainmob.ckey || M.brainmob.stat >= DEAD)
 		to_chat(user, "<span class='danger'>That brain is not usable.</span>")
 		return SURGERY_FAILURE
+	*/
 
 	if(!(affected.robotic >= ORGAN_ROBOT))
 		to_chat(user, "<span class='danger'>You cannot install a computer brain into a meat skull.</span>")

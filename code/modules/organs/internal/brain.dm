@@ -99,9 +99,11 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 		brainmob = new(src)
 		brainmob.name = H.real_name
 		brainmob.real_name = H.real_name
+
 		if(istype(H))
 			brainmob.dna = H.dna.Clone()
 			brainmob.timeofhostdeath = H.timeofdeath
+			brainmob.ooc_notes = H.ooc_notes //VOREStation Edit
 
 		// Copy modifiers.
 		for(var/datum/modifier/M in H.modifiers)
@@ -174,6 +176,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	can_assist = FALSE
 
 /obj/item/organ/internal/brain/slime
+	icon = 'icons/obj/surgery_vr.dmi' // Vorestation edit
 	name = "slime core"
 	desc = "A complex, organic knot of jelly and crystalline particles."
 	icon_state = "core"
@@ -249,6 +252,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	if(!R.dna.real_name)	//to prevent null names
 		R.dna.real_name = "promethean ([rand(0,999)])"
 	H.real_name = R.dna.real_name
+	H.ooc_notes = brainmob.ooc_notes // VOREStation Edit
 
 	H.nutrition = 260 //Enough to try to regenerate ONCE.
 	H.adjustBruteLoss(40)

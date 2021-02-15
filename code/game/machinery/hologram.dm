@@ -114,9 +114,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	return
 
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, turf/T = loc)
-	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
+	var/obj/effect/overlay/aiholo/hologram = new(T)//Spawn a blank effect at the location. //VOREStation Edit to specific type for adding vars
+	hologram.master = A //VOREStation Edit: So you can reference the master AI from in the hologram procs
 	hologram.icon = A.holo_icon
-	hologram.mouse_opacity = 0//So you can't click on it.
+	//hologram.mouse_opacity = 0//So you can't click on it. //VOREStation Removal
 	hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
 	hologram.name = "[A.name] (Hologram)"//If someone decides to right click.
@@ -125,7 +126,10 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	masters[A] = hologram
 	set_light(2)			//pad lighting
 	icon_state = "holopad1"
+	flick("holopadload", src) //VOREStation Add
 	A.holo = src
+	if(LAZYLEN(masters))
+		START_MACHINE_PROCESSING(src)
 	return 1
 
 /obj/machinery/hologram/holopad/proc/clear_holo(mob/living/silicon/ai/user)
@@ -146,14 +150,27 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 			continue
 
 		use_power(power_per_hologram)
-	return 1
+	if(..() == PROCESS_KILL && !LAZYLEN(masters))
+		return PROCESS_KILL
 
 /obj/machinery/hologram/holopad/proc/move_hologram(mob/living/silicon/ai/user)
 	if(masters[user])
+		/*VOREStation Removal, using our own code
 		step_to(masters[user], user.eyeobj) // So it turns.
 		var/obj/effect/overlay/H = masters[user]
 		H.loc = get_turf(user.eyeobj)
 		masters[user] = H
+		*/
+		//VOREStation Add - Solid mass holovore tracking stuff
+		var/obj/effect/overlay/aiholo/H = masters[user]
+		if(H.bellied)
+			walk_to(H, user.eyeobj) //Walk-to respects obstacles
+		else
+			walk_towards(H, user.eyeobj) //Walk-towards does not
+		//Hologram left the screen (got stuck on a wall or something)
+		if(get_dist(H, user.eyeobj) > world.view)
+			clear_holo(user)
+		//VOREStation Add End
 		if((HOLOPAD_MODE == RANGE_BASED && (get_dist(H, src) > holo_range)))
 			clear_holo(user)
 
@@ -171,6 +188,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
  */
 
 /obj/machinery/hologram
+	icon = 'icons/obj/stationobjs_vr.dmi' //VOREStation Edit
 	anchored = 1
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 5
@@ -221,7 +239,7 @@ Holographic project of everything else.
 /obj/machinery/hologram/projector
 	name = "hologram projector"
 	desc = "It makes a hologram appear...with magnets or something..."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/stationobjs_vr.dmi' //VOREStation Edit
 	icon_state = "hologram0"
 
 

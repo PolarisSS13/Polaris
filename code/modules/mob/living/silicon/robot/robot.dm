@@ -1,4 +1,4 @@
-#define CYBORG_POWER_USAGE_MULTIPLIER 2.5 // Multiplier for amount of power cyborgs use.
+#define CYBORG_POWER_USAGE_MULTIPLIER 2 // Multiplier for amount of power cyborgs use.
 
 /mob/living/silicon/robot
 	name = "Cyborg"
@@ -258,10 +258,16 @@
 	if(module)
 		return
 	var/list/modules = list()
-	modules.Add(robot_module_types)
-	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
-		to_chat(src, "<font color='red'>Crisis mode active. Combat module available.</font>")
-		modules+="Combat"
+	//VOREStatation Edit Start: shell restrictions
+	if(shell)
+		modules.Add(shell_module_types)
+	else
+		modules.Add(robot_module_types)
+		if(crisis || security_level == SEC_LEVEL_RED || crisis_override)
+			to_chat(src, "<font color='red'>Crisis mode active. Combat module available.</font>")
+			modules+="Combat"
+			modules+="ERT"
+	//VOREStatation Edit End: shell restrictions
 	modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules
 
 	if(module)
@@ -270,6 +276,7 @@
 		return
 
 	var/module_type = robot_modules[modtype]
+	transform_with_anim()	//VOREStation edit: sprite animation
 	new module_type(src)
 
 	hands.icon_state = lowertext(modtype)
@@ -321,6 +328,10 @@
 			flavor_text = module_flavour
 		else
 			flavor_text = client.prefs.flavour_texts_robot["Default"]
+		// Vorestation Edit: and meta info
+		var/meta_info = client.prefs.metadata
+		if (meta_info)
+			ooc_notes = meta_info
 
 /mob/living/silicon/robot/verb/Namepick()
 	set category = "Robot Commands"
@@ -337,12 +348,6 @@
 
 		updatename()
 		updateicon()
-
-// this verb lets cyborgs see the stations manifest
-/mob/living/silicon/robot/verb/cmd_station_manifest()
-	set category = "Robot Commands"
-	set name = "Show Crew Manifest"
-	show_station_manifest()
 
 /mob/living/silicon/robot/proc/self_diagnosis()
 	if(!is_component_functioning("diagnosis unit"))
@@ -362,6 +367,7 @@
 	lights_on = !lights_on
 	to_chat(usr, "You [lights_on ? "enable" : "disable"] your integrated light.")
 	handle_light()
+	updateicon() //VOREStation Add - Since dogborgs have sprites for this
 
 /mob/living/silicon/robot/verb/self_diagnosis_verb()
 	set category = "Robot Commands"
@@ -659,6 +665,7 @@
 		return ..()
 
 /mob/living/silicon/robot/proc/module_reset()
+	transform_with_anim() //VOREStation edit: sprite animation
 	uneq_all()
 	modtype = initial(modtype)
 	hands.icon_state = initial(hands.icon_state)
@@ -711,7 +718,6 @@
 				playsound(src.loc, 'sound/effects/clang2.ogg', 10, 1)
 				visible_message("<span class='warning'>[H] taps [src].</span>")
 				return
-		//Addition of borg petting end
 
 //Robots take half damage from basic attacks.
 /mob/living/silicon/robot/attack_generic(var/mob/user, var/damage, var/attack_message)
@@ -816,6 +822,8 @@
 /mob/living/silicon/robot/Topic(href, href_list)
 	if(..())
 		return 1
+
+	//All Topic Calls that are only for the Cyborg go here
 	if(usr != src)
 		return 1
 
@@ -950,11 +958,17 @@
 			icontype = module_sprites[1]
 	else
 		icontype = input("Select an icon! [triesleft ? "You have [triesleft] more chance\s." : "This is your last try."]", "Robot Icon", icontype, null) in module_sprites
+		if(notransform)				//VOREStation edit start: sprite animation
+			to_chat(src, "Your current transformation has not finished yet!")
+			choose_icon(icon_selection_tries, module_sprites)
+			return
+		else
+			transform_with_anim()	//VOREStation edit end: sprite animation
 
 	if(icontype == "Custom")
 		icon = CUSTOM_ITEM_SYNTH
 	else // This is to fix an issue where someone with a custom borg sprite chooses a non-custom sprite and turns invisible.
-		icon = 'icons/mob/robots.dmi'
+		vr_sprite_check() //VOREStation Edit
 	icon_state = module_sprites[icontype]
 	updateicon()
 

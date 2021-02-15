@@ -89,16 +89,28 @@
 		return
 	return ..()
 
+//VOREStation Add
+/obj/item/stack/material/attack(mob/living/M as mob, mob/living/user as mob)
+	if(M.handle_eat_minerals(src, user))
+		return
+	..()
+
+/obj/item/stack/material/attack_generic(var/mob/living/user) //Allow adminbussed mobs to eat ore if they click it while NOT on help intent.
+	if(user.handle_eat_minerals(src))
+		return
+	..()
+//VOREStation Add End
+
 /obj/item/stack/material/iron
 	name = "iron"
-	icon_state = "sheet-ingot"
+	icon_state = "sheet-silver"
 	default_type = "iron"
 	apply_colour = 1
 	no_variants = FALSE
 
 /obj/item/stack/material/lead
 	name = "lead"
-	icon_state = "sheet-ingot"
+	icon_state = "sheet-adamantine"
 	default_type = "lead"
 	apply_colour = 1
 	no_variants = FALSE
@@ -148,24 +160,22 @@
 
 /obj/item/stack/material/graphite
 	name = "graphite"
-	icon_state = "sheet-puck"
+	icon_state = "sheet-silver"
 	default_type = MAT_GRAPHITE
 	apply_colour = 1
 	no_variants = FALSE
 
 /obj/item/stack/material/gold
 	name = "gold"
-	icon_state = "sheet-ingot"
+	icon_state = "sheet-gold"
 	default_type = "gold"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 /obj/item/stack/material/silver
 	name = "silver"
-	icon_state = "sheet-ingot"
+	icon_state = "sheet-silver"
 	default_type = "silver"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 //Valuable resource, cargo can sell it.
 /obj/item/stack/material/platinum
@@ -173,7 +183,6 @@
 	icon_state = "sheet-adamantine"
 	default_type = "platinum"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 //Extremely valuable to Research.
 /obj/item/stack/material/mhydrogen
@@ -185,14 +194,14 @@
 //Fuel for MRSPACMAN generator.
 /obj/item/stack/material/tritium
 	name = "tritium"
-	icon_state = "sheet-puck"
+	icon_state = "sheet-silver"
 	default_type = "tritium"
-	apply_colour = TRUE
+	apply_colour = 1
 	no_variants = FALSE
 
 /obj/item/stack/material/osmium
 	name = "osmium"
-	icon_state = "sheet-ingot"
+	icon_state = "sheet-silver"
 	default_type = "osmium"
 	apply_colour = 1
 	no_variants = FALSE
@@ -201,17 +210,16 @@
 // Fusion fuel.
 /obj/item/stack/material/deuterium
 	name = "deuterium"
-	icon_state = "sheet-puck"
+	icon_state = "sheet-silver"
 	default_type = "deuterium"
 	apply_colour = 1
 	no_variants = FALSE
 
 /obj/item/stack/material/steel
 	name = DEFAULT_WALL_MATERIAL
-	icon_state = "sheet-refined"
+	icon_state = "sheet-metal"
 	default_type = DEFAULT_WALL_MATERIAL
 	no_variants = FALSE
-	apply_colour = TRUE
 
 /obj/item/stack/material/steel/hull
 	name = MAT_STEELHULL
@@ -219,10 +227,9 @@
 
 /obj/item/stack/material/plasteel
 	name = "plasteel"
-	icon_state = "sheet-reinforced"
+	icon_state = "sheet-plasteel"
 	default_type = "plasteel"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 /obj/item/stack/material/plasteel/hull
 	name = MAT_PLASTEELHULL
@@ -230,19 +237,17 @@
 
 /obj/item/stack/material/durasteel
 	name = "durasteel"
-	icon_state = "sheet-reinforced"
+	icon_state = "sheet-durasteel"
 	item_state = "sheet-metal"
 	default_type = "durasteel"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 /obj/item/stack/material/durasteel/hull
 	name = MAT_DURASTEELHULL
 
 /obj/item/stack/material/titanium
 	name = MAT_TITANIUM
-	icon_state = "sheet-refined"
-	apply_colour = TRUE
+	icon_state = "sheet-silver"
 	item_state = "sheet-silver"
 	default_type = MAT_TITANIUM
 	no_variants = FALSE
@@ -341,10 +346,8 @@
 	icon_state = "sheet-wood"
 	default_type = MAT_WOOD
 	strict_color_stacking = TRUE
-	apply_colour = 1
 	drop_sound = 'sound/items/drop/wooden.ogg'
 	pickup_sound = 'sound/items/pickup/wooden.ogg'
-	no_variants = FALSE
 
 /obj/item/stack/material/wood/sif
 	name = "alien wooden plank"
@@ -461,90 +464,30 @@
 
 /obj/item/stack/material/glass
 	name = "glass"
-	icon_state = "sheet-transparent"
+	icon_state = "sheet-glass"
 	default_type = "glass"
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
-	apply_colour = TRUE
 
 /obj/item/stack/material/glass/reinforced
 	name = "reinforced glass"
-	icon_state = "sheet-rtransparent"
+	icon_state = "sheet-rglass"
 	default_type = "rglass"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 /obj/item/stack/material/glass/phoronglass
 	name = "borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures"
 	singular_name = "borosilicate glass sheet"
-	icon_state = "sheet-transparent"
+	icon_state = "sheet-phoronglass"
 	default_type = "borosilicate glass"
 	no_variants = FALSE
-	apply_colour = TRUE
 
 /obj/item/stack/material/glass/phoronrglass
 	name = "reinforced borosilicate glass"
 	desc = "This sheet is special platinum-glass alloy designed to withstand large temperatures. It is reinforced with few rods."
 	singular_name = "reinforced borosilicate glass sheet"
-	icon_state = "sheet-rtransparent"
+	icon_state = "sheet-phoronrglass"
 	default_type = "reinforced borosilicate glass"
-	no_variants = FALSE
-	apply_colour = TRUE
-
-/obj/item/stack/material/bronze
-	name = "bronze"
-	icon_state = "sheet-ingot"
-	singular_name = "bronze ingot"
-	default_type = "bronze"
-	apply_colour = 1
-	no_variants = FALSE
-
-/obj/item/stack/material/tin
-	name = "tin"
-	icon_state = "sheet-ingot"
-	singular_name = "tin ingot"
-	default_type = "tin"
-	apply_colour = 1
-	no_variants = FALSE
-
-/obj/item/stack/material/copper
-	name = "copper"
-	icon_state = "sheet-ingot"
-	singular_name = "copper ingot"
-	default_type = "copper"
-	apply_colour = 1
-	no_variants = FALSE
-
-/obj/item/stack/material/painite
-	name = "painite"
-	icon_state = "sheet-gem"
-	singular_name = "painite gem"
-	default_type = "painite"
-	apply_colour = 1
-	no_variants = FALSE
-
-/obj/item/stack/material/void_opal
-	name = "void opal"
-	icon_state = "sheet-void_opal"
-	singular_name = "void opal"
-	default_type = "void opal"
-	apply_colour = 1
-	no_variants = FALSE
-
-/obj/item/stack/material/quartz
-	name = "quartz"
-	icon_state = "sheet-gem"
-	singular_name = "quartz gem"
-	default_type = "quartz"
-	apply_colour = 1
-	no_variants = FALSE
-
-/obj/item/stack/material/aluminium
-	name = "aluminium"
-	icon_state = "sheet-ingot"
-	singular_name = "aluminium ingot"
-	default_type = "aluminium"
-	apply_colour = 1
 	no_variants = FALSE

@@ -3,20 +3,20 @@ Slime specific life events go here.
 */
 #define HAPPYLEVEL 200
 #define ANGRYLEVEL 10
-/mob/living/simple_animal/xeno/slime/Life()
+/mob/living/simple_mob/xeno/slime/Life()
 	. = ..()
 	if(..())
 		if(health)
 			if(is_child)
 				if(nutrition >= 275)
 					growthcounter++
-					nutrition -= hunger_factor
+					adjust_nutrition(-hunger_factor)
 				if(nutrition <= 75)
 					growthcounter--
 				if(growthcounter >= growthpoint)
 					src.GrowUp()
-		
-			else 
+
+			else
 				if(nutrition < 0)
 					nutrition = 0
 				if((prob(10) && !emote_on))	//Slimes might display their food-based emotions over time.
@@ -28,7 +28,7 @@ Slime specific life events go here.
 							I.icon_state = "aslime-:33"
 						else
 							I.icon_state = "aslime-:3"
-						
+
 					else if((nutrition > ANGRYLEVEL))
 						if((nutrition >= 10 * ANGRYLEVEL))
 							I.icon_state = "aslime-pout"
@@ -41,7 +41,7 @@ Slime specific life events go here.
 					spawn(30)
 						GenerateAdultIcon()
 						emote_on = null
-						
+
 		else
 			if(is_child)
 				icon_state = "slime baby dead"
@@ -49,7 +49,7 @@ Slime specific life events go here.
 				overlays.Cut()
 				icon_state = "slime adult dead"
 				color = traitdat.traits[TRAIT_XENO_COLOR]
-				
+
 		return 0 //Everything worked okay
-	
+
 	return 	//xeno/Life() returned 0.

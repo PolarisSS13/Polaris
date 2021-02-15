@@ -8,7 +8,7 @@ Procs for copying speech, if applicable
 Procs for targeting
 Divergence proc, used in mutation to make unique datums.
 */
-/mob/living/simple_animal/xeno/proc/ProcessTraits()
+/mob/living/simple_mob/xeno/proc/ProcessTraits()
 	if(maleable >= MAX_MALEABLE)
 		maxHealth = traitdat.get_trait(TRAIT_XENO_HEALTH)
 		health = maxHealth
@@ -46,7 +46,7 @@ Divergence proc, used in mutation to make unique datums.
 
 
 //Metabolism proc, simplified for xenos. Heavily based on botanical metabolism.
-/mob/living/simple_animal/xeno/proc/handle_reagents()
+/mob/living/simple_mob/xeno/proc/handle_reagents()
 	if(!stasis)
 		if(!reagents)
 			return
@@ -75,7 +75,7 @@ Divergence proc, used in mutation to make unique datums.
 				heal_overall_damage(reagent_response["heal"] * reagent_total)
 
 			if(reagent_response["nutr"])
-				nutrition += reagent_response["nutr"] * reagent_total
+				adjust_nutrition(reagent_response["nutr"] * reagent_total)
 
 			if(reagent_response["mut"])
 				mut_level += reagent_response["mut"] * reagent_total
@@ -85,13 +85,13 @@ Divergence proc, used in mutation to make unique datums.
 		return 1 //Everything worked out okay.
 
 	return 0
-	
-/mob/living/simple_animal/xeno/proc/diverge()
+
+/mob/living/simple_mob/xeno/proc/diverge()
 	var/datum/xeno/traits/newtraits = new()
 	newtraits.copy_traits(traitdat)
 	return newtraits
 
-/mob/living/simple_animal/xeno/proc/Mutate()
+/mob/living/simple_mob/xeno/proc/Mutate()
 	traitdat = diverge()
 	nameVar = "mutated"
 	if((COLORMUT & mutable))
@@ -109,28 +109,16 @@ Divergence proc, used in mutation to make unique datums.
 	ProcessTraits()
 	return 1
 
-/mob/living/simple_animal/xeno/proc/RandomizeTraits()
+/mob/living/simple_mob/xeno/proc/RandomizeTraits()
 	return
 
-/mob/living/simple_animal/xeno/hear_say(var/message, var/verb = "says", var/datum/language/language, var/italics = 0, var/mob/speaker = null)
+/mob/living/simple_mob/xeno/hear_say(var/list/message_pieces, var/verb = "says", var/italics = 0, var/mob/speaker = null)
 	if(traitdat.traits[TRAIT_XENO_CANLEARN])
-		/*
-		Until this gets sorted out to a functioning point, or waiting on Psi's saycode update.
-		var/learned_message = say_understands(speaker, language)
-		if(!message || isxeno(speaker))
-			return
-		if(learned_message)	//Is it understood?
-			var/complete_message = ",[language.key] [message]"
-			if(!(complete_message in speak))
-				speech_buffer.Add(complete_message)
-				log_debug("Added '[complete_message]'.")
-		else
-		*/
 		if(!(message in speak))
-			speech_buffer.Add(message)
-	..(message,verb,language,italics,speaker)
+			speech_buffer.Add(multilingual_to_message(message_pieces))
+	. = ..()
 
-/mob/living/simple_animal/xeno/proc/ProcessSpeechBuffer()
+/mob/living/simple_mob/xeno/proc/ProcessSpeechBuffer()
 	if(speech_buffer.len)
 		if(prob(traitdat.get_trait(TRAIT_XENO_LEARNCHANCE)) && traitdat.get_trait(TRAIT_XENO_CANLEARN))
 			var/chosen = pick(speech_buffer)
@@ -140,10 +128,10 @@ Divergence proc, used in mutation to make unique datums.
 		log_debug("Speechlist cut.") */
 		speech_buffer.Cut()
 //
-/mob/living/simple_animal/xeno/proc/BuildReagentLists()
+/mob/living/simple_mob/xeno/proc/BuildReagentLists()
 	return
 
-/mob/living/simple_animal/xeno/bullet_act(var/obj/item/projectile/P)
+/mob/living/simple_mob/xeno/bullet_act(var/obj/item/projectile/P)
 	//Shamelessly stolen from ablative armor.
 	if((traitdat.traits[TRAIT_XENO_CHROMATIC]) && istype(P, /obj/item/projectile/beam))
 		visible_message("<span class='danger'>)\The beam reflects off of the [src]!</span>")
@@ -161,7 +149,7 @@ Divergence proc, used in mutation to make unique datums.
 	else
 		..()
 
-/mob/living/simple_animal/xeno/proc/RandomChemicals()
+/mob/living/simple_mob/xeno/proc/RandomChemicals()
 	traitdat.chems.Cut()	//Clear the amount first.
 
 	var/num_chems = round(rand(1,4))

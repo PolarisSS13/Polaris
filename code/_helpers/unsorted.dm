@@ -295,6 +295,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	return frequency * 10
 
 
+
 //This will update a mob's name, real_name, mind.name, data_core records, pda and id
 //Calling this proc without an oldname will only update the mob and skip updating the pda, id and records ~Carn
 /mob/proc/fully_replace_character_name(var/oldname,var/newname)
@@ -1289,9 +1290,12 @@ var/mob/dview/dview_mob = new
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
+	if(!dview_mob) //VOREStation Add: Debugging
+		dview_mob = new
+		log_error("Had to recreate the dview mob!")
 
 	dview_mob.loc = center
-
+	
 	dview_mob.see_invisible = invis_flags
 
 	. = view(range, dview_mob)
@@ -1319,6 +1323,11 @@ var/mob/dview/dview_mob = new
 		dead_mob_list -= src
 	else
 		living_mob_list -= src
+
+/mob/dview/Life()
+	mob_list -= src
+	dead_mob_list -= src
+	living_mob_list -= src
 
 /mob/dview/Destroy(var/force)
 	crash_with("Attempt to delete the dview_mob: [log_info_line(src)]")
@@ -1607,6 +1616,46 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 /proc/href(href_src, list/href_params, href_text)
 	return "<a href='?src=\ref[href_src];[list2params(href_params)]'>[href_text]</a>"
 
+// This is a helper for anything that wants to render the map in TGUI
+/proc/get_tgui_plane_masters()
+	. = list()
+	// 'Utility' planes
+	. += new /obj/screen/plane_master/fullbright						//Lighting system (lighting_overlay objects)
+	. += new /obj/screen/plane_master/lighting							//Lighting system (but different!)
+	. += new /obj/screen/plane_master/ghosts							//Ghosts!
+	. += new /obj/screen/plane_master{plane = PLANE_AI_EYE}			//AI Eye!
+
+	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS}			//Status is the synth/human icon left side of medhuds
+	. += new /obj/screen/plane_master{plane = PLANE_CH_HEALTH}			//Health bar
+	. += new /obj/screen/plane_master{plane = PLANE_CH_LIFE}			//Alive-or-not icon
+	. += new /obj/screen/plane_master{plane = PLANE_CH_ID}				//Job ID icon
+	. += new /obj/screen/plane_master{plane = PLANE_CH_WANTED}			//Wanted status
+	. += new /obj/screen/plane_master{plane = PLANE_CH_IMPLOYAL}		//Loyalty implants
+	. += new /obj/screen/plane_master{plane = PLANE_CH_IMPTRACK}		//Tracking implants
+	. += new /obj/screen/plane_master{plane = PLANE_CH_IMPCHEM}		//Chemical implants
+	. += new /obj/screen/plane_master{plane = PLANE_CH_SPECIAL}		//"Special" role stuff
+	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS_OOC}		//OOC status HUD
+
+	. += new /obj/screen/plane_master{plane = PLANE_ADMIN1}			//For admin use
+	. += new /obj/screen/plane_master{plane = PLANE_ADMIN2}			//For admin use
+	. += new /obj/screen/plane_master{plane = PLANE_ADMIN3}			//For admin use
+
+	. += new /obj/screen/plane_master{plane = PLANE_MESONS} 			//Meson-specific things like open ceilings.
+	. += new /obj/screen/plane_master{plane = PLANE_BUILDMODE}			//Things that only show up while in build mode
+
+	// Real tangible stuff planes
+	. += new /obj/screen/plane_master/main{plane = TURF_PLANE}
+	. += new /obj/screen/plane_master/main{plane = OBJ_PLANE}
+	. += new /obj/screen/plane_master/main{plane = MOB_PLANE}
+	. += new /obj/screen/plane_master/cloaked								//Cloaked atoms!
+
+	//VOREStation Add - Random other plane masters
+	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS_R}			//Right-side status icon
+	. += new /obj/screen/plane_master{plane = PLANE_CH_HEALTH_VR}			//Health bar but transparent at 100
+	. += new /obj/screen/plane_master{plane = PLANE_CH_BACKUP}				//Backup implant status
+	. += new /obj/screen/plane_master{plane = PLANE_CH_VANTAG}				//Vore Antags
+	. += new /obj/screen/plane_master{plane = PLANE_AUGMENTED}				//Augmented reality
+	//VOREStation Add End
 /proc/CallAsync(datum/source, proctype, list/arguments)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))

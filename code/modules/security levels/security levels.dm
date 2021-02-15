@@ -75,6 +75,11 @@
 		for(var/obj/machinery/status_display/FA in machines)
 			if(FA.z in using_map.contact_levels)
 				FA.on_alert_changed(newlevel)
+		//VOREStation Add
+		for(var/hp in GLOB.holoposters)
+			var/obj/machinery/holoposter/HP = hp
+			HP.update_icon()
+		//VOREStation Add End
 
 		if(level >= SEC_LEVEL_RED)
 			atc.reroute_traffic(yes = 1) // Tell them fuck off we're busy.
@@ -84,6 +89,7 @@
 		spawn()
 			SSnightshift.check_nightshift()
 
+		admin_chat_message(message = "Security level is now: [uppertext(get_security_level())]", color = "#CC2222") //VOREStation Add
 
 /proc/get_security_level()
 	switch(security_level)

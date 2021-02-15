@@ -112,14 +112,20 @@
 	if(mapload) // Jank, but we do this to prevent maploaded papers from somehow stacking across rounds if re-added to the board by a player.
 		was_maploaded = TRUE
 
-/obj/item/weapon/paper/New()
+/obj/item/weapon/paper/New(var/newloc, var/text, var/title)
 	..()
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
 	stamps = ""
 
+	if(!isnull(title))
+		name = title
+
 	if(name != "paper")
 		desc = "This is a paper titled '" + name + "'."
+
+	if(!isnull(text))
+		info = text
 
 	if(info != initial(info))
 		info = html_encode(info)
@@ -447,8 +453,12 @@
 
 
 		// if paper is not in usr, then it must be near them, or in a clipboard or folder, which must be in or near usr
-		if(src.loc != usr && !src.Adjacent(usr) && !((istype(src.loc, /obj/item/weapon/clipboard) || istype(src.loc, /obj/item/weapon/folder)) && (src.loc.loc == usr || src.loc.Adjacent(usr)) ) )
+		if(istype(loc, /obj/item/weapon/clipboard) || istype(loc, /obj/structure/noticeboard) || istype(loc, /obj/item/weapon/folder))
+			if(loc.loc != usr && !in_range(loc, usr))
+				return
+		else if(loc != usr && !Adjacent(usr))
 			return
+
 /*
 		t = checkhtml(t)
 

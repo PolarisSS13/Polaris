@@ -53,7 +53,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	var/skin_color										 // If set, applies skin color rather than part color.
 	var/blood_color = "#030303"
 	var/blood_name = "oil"
-	var/list/species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA)
+	var/list/species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_XENOCHIMERA)  //VOREStation Edit
 	var/list/species_alternates = list(SPECIES_TAJ = "Unbranded - Tajaran", SPECIES_UNATHI = "Unbranded - Unathi")				 //"Species Name" = "Robolimb Company" , List, when initialized, will become "Species Name" = RobolimbDatum, used for alternate species sprites.
 	var/list/monitor_styles			 		 			 //If empty, the model of limbs offers a head compatible with monitors.
 	var/parts = BP_ALL						 			 //Defines what parts said brand can replace on a body.
@@ -304,7 +304,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /datum/robolimb/veymed
 	company = "Vey-Med"
 	desc = "This high quality limb is nearly indistinguishable from an organic one."
-	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/veymed/veymed_main_vr.dmi' //Vorestation edit, fixing the color application
 	unavailable_to_build = 1
 	lifelike = 1
 	skin_tone = 1
@@ -312,8 +312,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	blood_color = "#CCCCCC"
 	blood_name = "coolant"
 	speech_bubble_appearance = "normal"
-	robo_brute_mod = 1.1
-	robo_burn_mod = 1.1
+	//robo_brute_mod = 1.1 //VOREStation Edit
+	//robo_burn_mod = 1.1 //VOREStation Edit
 
 /datum/robolimb/veymed_skrell
 	company = "Vey-Med - Skrell"
@@ -412,8 +412,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /obj/item/weapon/disk/limb
 	name = "Limb Blueprints"
 	desc = "A disk containing the blueprints for prosthetics."
-	icon = 'icons/obj/cloning.dmi'
-	icon_state = "datadisk2"
+	icon = 'icons/obj/discs_vr.dmi' //VOREStation Edit
+	icon_state = "data-white" //VOREStation Edit
 	var/company = ""
 
 /obj/item/weapon/disk/limb/New(var/newloc)

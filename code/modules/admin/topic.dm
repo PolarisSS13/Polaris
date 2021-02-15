@@ -251,7 +251,7 @@
 		href_list["secretsadmin"] = "check_antagonist"
 
 	else if(href_list["delay_round_end"])
-		if(!check_rights(R_SERVER|R_EVENT))	return
+		if(!check_rights(R_SERVER))	return //VOREStation Edit
 
 		ticker.delay_end = !ticker.delay_end
 		log_admin("[key_name(usr)] [ticker.delay_end ? "delayed the round end" : "has made the round end normally"].")
@@ -516,7 +516,28 @@
 				jobs += "</tr><tr align='center'>"
 				counter = 0
 		jobs += "</tr></table>"
+	//VOREStation Edit Start
+	//Exploration (Purple)
+		counter = 0
+		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
+		jobs += "<tr bgcolor='e79fff'><th colspan='[length(SSjob.get_job_titles_in_department(DEPARTMENT_PLANET))]'><a href='?src=\ref[src];jobban3=sciencedept;jobban4=\ref[M]'>Science Positions</a></th></tr><tr align='center'>"
+		for(var/jobPos in SSjob.get_job_titles_in_department(DEPARTMENT_PLANET))
+			if(!jobPos)	continue
+			var/datum/job/job = job_master.GetJob(jobPos)
+			if(!job) continue
 
+			if(jobban_isbanned(M, job.title))
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'><font color=red>[replacetext(job.title, " ", "&nbsp")]</font></a></td>"
+				counter++
+			else
+				jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=[job.title];jobban4=\ref[M]'>[replacetext(job.title, " ", "&nbsp")]</a></td>"
+				counter++
+
+			if(counter >= 5) //So things dont get squiiiiished!
+				jobs += "</tr><tr align='center'>"
+				counter = 0
+		jobs += "</tr></table>"
+	//VOREstation Edit End
 	//Civilian (Grey)
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
@@ -670,6 +691,14 @@
 					var/datum/job/temp = job_master.GetJob(jobPos)
 					if(!temp) continue
 					joblist += temp.title
+			//VOREStation Edit Start
+			if("explorationdept")
+				for(var/jobPos in SSjob.get_job_titles_in_department(DEPARTMENT_PLANET))
+					if(!jobPos)	continue
+					var/datum/job/temp = job_master.GetJob(jobPos)
+					if(!temp) continue
+					joblist += temp.title
+			//VOREStation Edit End
 			if("civiliandept")
 				for(var/jobPos in SSjob.get_job_titles_in_department(DEPARTMENT_CIVILIAN))
 					if(!jobPos)	continue
@@ -798,6 +827,7 @@
 			log_admin("[key_name(usr)] booted [key_name(M)] for reason: '[reason]'.")
 			message_admins("<font color='blue'>[key_name_admin(usr)] booted [key_name_admin(M)] for reason '[reason]'.</font>", 1)
 			//M.client = null
+			admin_action_message(usr.key, M.key, "kicked", reason, 0) //VOREStation Add
 			qdel(M.client)
 
 	else if(href_list["removejobban"])
@@ -1241,7 +1271,7 @@
 		show_player_panel(M)
 
 	else if(href_list["adminplayerobservejump"])
-		if(!check_rights(R_EVENT|R_MOD|R_ADMIN|R_SERVER|R_EVENT))	return
+		if(!check_rights(R_MOD|R_ADMIN|R_SERVER))	return //VOREStation Edit
 
 		var/mob/M = locate(href_list["adminplayerobservejump"])
 
@@ -1251,7 +1281,7 @@
 		C.jumptomob(M)
 
 	else if(href_list["adminplayerobservefollow"])
-		if(!check_rights(R_EVENT|R_MOD|R_ADMIN|R_SERVER|R_EVENT))
+		if(!check_rights(R_MOD|R_ADMIN|R_SERVER)) //VOREStation Edit
 			return
 
 		var/mob/M = locate(href_list["adminplayerobservefollow"])
@@ -1270,15 +1300,24 @@
 		var/mob/M = locate(href_list["take_question"])
 		if(ismob(M))
 			var/take_msg = "<span class='notice'><b>ADMINHELP</b>: <b>[key_name(usr.client)]</b> is attending to <b>[key_name(M)]'s</b> adminhelp, please don't dogpile them.</span>"
-			for(var/client/X in admins)
-				if((R_ADMIN|R_MOD|R_EVENT|R_SERVER) & X.holder.rights)
+			for(var/client/X in GLOB.admins)
+				if((R_ADMIN|R_MOD|R_SERVER) & X.holder.rights) //VOREStation Edit
 					to_chat(X, take_msg)
 			to_chat(M, "<span class='filter_pm notice'><b>Your adminhelp is being attended to by [usr.client]. Thanks for your patience!</b></span>")
+			// VoreStation Edit Start
+			if (config.chat_webhook_url)
+				spawn(0)
+					var/query_string = "type=admintake"
+					query_string += "&key=[url_encode(config.chat_webhook_key)]"
+					query_string += "&admin=[url_encode(key_name(usr.client))]"
+					query_string += "&user=[url_encode(key_name(M))]"
+					world.Export("[config.chat_webhook_url]?[query_string]")
+			// VoreStation Edit End
 		else
 			to_chat(usr, "<span class='warning'>Unable to locate mob.</span>")
 
 	else if(href_list["adminplayerobservecoodjump"])
-		if(!check_rights(R_ADMIN|R_SERVER|R_MOD|R_EVENT))	return
+		if(!check_rights(R_ADMIN|R_SERVER|R_MOD))	return //VOREStation Edit
 
 		var/x = text2num(href_list["X"])
 		var/y = text2num(href_list["Y"])
@@ -1872,7 +1911,7 @@
 				vsc.SetDefault(usr)
 
 	else if(href_list["toglang"])
-		if(check_rights(R_SPAWN|R_EVENT))
+		if(check_rights(R_SPAWN)) //VOREStation Edit
 			var/mob/M = locate(href_list["toglang"])
 			if(!istype(M))
 				to_chat(usr, "<span class='filter_adminlog'>[M] is illegal type, must be /mob!</span>")
@@ -1892,7 +1931,7 @@
 	else if(href_list["cryoplayer"])
 		if(!check_rights(R_ADMIN|R_EVENT))	return
 
-		var/mob/M = locate(href_list["cryoplayer"])
+		var/mob/living/carbon/M = locate(href_list["cryoplayer"]) //VOREStation edit from just an all mob check to mob/living/carbon
 		if(!istype(M))
 			to_chat(usr, "<span class='warning'>Mob doesn't exist!</span>")
 			return

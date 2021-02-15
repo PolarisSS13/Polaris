@@ -24,7 +24,7 @@
 	base_miss_chance = 10
 
 /obj/item/organ/external/chest/robotize()
-	if(..())
+	if(..() && robotic != ORGAN_NANOFORM) //VOREStation Edit
 		// Give them fancy new organs.
 		owner.internal_organs_by_name[O_CELL] = new /obj/item/organ/internal/cell(owner,1)
 		owner.internal_organs_by_name[O_VOICE] = new /obj/item/organ/internal/voicebox/robot(owner, 1)
@@ -271,6 +271,7 @@
 	var/eye_icon = "eyes_s"
 	force = 3
 	throwforce = 7
+	var/eyes_over_markings = FALSE //VOREStation edit
 
 	var/eye_icon_location = 'icons/mob/human_face.dmi'
 

@@ -35,7 +35,7 @@
 	if(force_process)
 		bad_external_organs.Cut()
 		for(var/obj/item/organ/external/Ex in organs)
-			bad_external_organs |= Ex
+			bad_external_organs += Ex //VOREStation Edit - Silly and slow to |= this
 
 	//processing internal organs is pretty cheap, do that first.
 	for(var/obj/item/organ/I in internal_organs)
@@ -47,6 +47,7 @@
 	if(!force_process && !bad_external_organs.len)
 		return
 
+	number_wounds = 0 //VOREStation Add - You have to reduce this at some point...
 	for(var/obj/item/organ/external/E in bad_external_organs)
 		if(!E)
 			continue
@@ -90,7 +91,7 @@
 		else if (E.is_malfunctioning() && !(lying || resting))
 			//malfunctioning only happens intermittently so treat it as a missing limb when it procs
 			stance_damage += 2
-			if(prob(10))
+			if(isturf(loc) && prob(10))
 				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
 				var/datum/effect/effect/system/spark_spread/spark_system = new ()
 				spark_system.set_up(5, 0, src)
@@ -115,7 +116,7 @@
 
 	// standing is poor
 	if(stance_damage >= 4 || (stance_damage >= 2 && prob(5)))
-		if(!(lying || resting))
+		if(!(lying || resting) && !isbelly(loc)) //VOREStation Edit
 			if(limb_pain)
 				emote("scream")
 			custom_emote(1, "collapses!")

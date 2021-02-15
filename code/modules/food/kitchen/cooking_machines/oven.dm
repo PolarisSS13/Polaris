@@ -133,9 +133,10 @@
 		if(temperature > T.temperature)
 			equalize_temperature()
 
-/obj/machinery/appliance/cooker/oven/can_remove_items(var/mob/user)
+/obj/machinery/appliance/cooker/oven/can_remove_items(var/mob/user, show_warning = TRUE)
 	if(!open)
-		to_chat(user, "<span class='warning'>You can't take anything out while the door is closed!</span>")
+		if(show_warning)
+			to_chat(user, "<span class='warning'>You can't take anything out while the door is closed!</span>")
 		return 0
 
 	else

@@ -3,7 +3,7 @@
 //--------------------------------------------
 /obj/machinery/atmospherics/omni
 	name = "omni device"
-	icon = 'icons/atmos/omni_devices.dmi'
+	icon = 'icons/atmos/omni_devices_vr.dmi' //VOREStation Edit - New Icon
 	icon_state = "base"
 	use_power = USE_POWER_IDLE
 	initialize_directions = 0

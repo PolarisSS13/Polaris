@@ -31,6 +31,11 @@
 /datum/rig_vision/meson/New()
 	glasses = new /obj/item/clothing/glasses/meson
 
+/datum/rig_vision/material
+	mode = "material scanner"
+/datum/rig_vision/material/New()
+	glasses = new /obj/item/clothing/glasses/material
+
 /datum/rig_vision/sechud
 	mode = "security HUD"
 
@@ -110,7 +115,7 @@
 
 	name = "hardsuit material scanner"
 	desc = "A layered, translucent visor system for a hardsuit."
-	icon_state = "meson"
+	icon_state = "material" //VOREStation Edit
 
 	usable = 0
 

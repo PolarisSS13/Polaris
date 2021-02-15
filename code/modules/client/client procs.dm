@@ -71,9 +71,46 @@
 		send2adminirc(href_list["irc_msg"])
 		return
 
+	//VOREStation Add
+	if(href_list["discord_reg"])
+		var/their_id = html_decode(href_list["discord_reg"])
+		var/sane = FALSE
+		for(var/item in GLOB.pending_discord_registrations)
+			var/list/L = item
+			if(!islist(L))
+				GLOB.pending_discord_registrations -= item
+				continue
+			if(L["ckey"] == ckey && L["id"] == their_id)
+				GLOB.pending_discord_registrations -= list(item)
+				var/time = L["time"]
+				if((world.realtime - time) > 10 MINUTES)
+					to_chat(src, "<span class='warning'>Sorry, that link has expired. Please request another on Discord.</span>")
+					return
+				sane = TRUE
+				break
+		
+		if(!sane)
+			to_chat(src, "<span class='warning'>Sorry, that link doesn't appear to be valid. Please try again.</span>")
+			return
+
+		var/sql_discord = sql_sanitize_text(their_id)
+		var/sql_ckey = sql_sanitize_text(ckey)
+		var/DBQuery/query = dbcon.NewQuery("UPDATE erro_player SET discord_id = '[sql_discord]' WHERE ckey = '[sql_ckey]'")
+		if(query.Execute())
+			to_chat(src, "<span class='notice'>Registration complete! Thank you for taking the time to register your Discord ID.</span>")
+			log_and_message_admins("[ckey] has registered their Discord ID to obtain the Crew Member role. Their Discord snowflake ID is: [their_id]")
+			admin_chat_message(message = "[ckey] has registered their Discord ID to obtain the Crew Member role. Their Discord is: <@[their_id]>", color = "#4eff22")
+			notes_add(ckey, "Discord ID: [their_id]")
+			world.VgsAddMemberRole(their_id)
+		else
+			to_chat(src, "<span class='warning'>There was an error registering your Discord ID in the database. Contact an administrator.</span>")
+			log_and_message_admins("[ckey] failed to register their Discord ID. Their Discord snowflake ID is: [their_id]. Is the database connected?")
+		return
+	//VOREStation Add End
+
 	//Logs all hrefs
 	if(config && config.log_hrefs && href_logfile)
-		href_logfile << "<small>[time2text(world.timeofday,"hh:mm")] [src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]<br>"
+		WRITE_LOG(href_logfile, "[src] (usr:[usr])</small> || [hsrc ? "[hsrc] " : ""][href]")
 
 	//byond bug ID:2256651
 	if (asset_cache_job && (asset_cache_job in completed_asset_jobs))
@@ -145,7 +182,7 @@
 	//Admin Authorisation
 	holder = admin_datums[ckey]
 	if(holder)
-		admins += src
+		GLOB.admins += src
 		holder.owner = src
 
 	//preferences datum - also holds some persistant data for the client (because we may as well keep these datums to a minimum)
@@ -198,11 +235,22 @@
 		if(config.aggressive_changelog)
 			src.changes()
 
+	hook_vr("client_new",list(src)) //VOREStation Code
+
 	if(config.paranoia_logging)
+		var/alert = FALSE //VOREStation Edit start.
 		if(isnum(player_age) && player_age == 0)
 			log_and_message_admins("PARANOIA: [key_name(src)] has connected here for the first time.")
+			alert = TRUE
 		if(isnum(account_age) && account_age <= 2)
 			log_and_message_admins("PARANOIA: [key_name(src)] has a very new BYOND account ([account_age] days).")
+			alert = TRUE
+		if(alert)
+			for(var/client/X in GLOB.admins)
+				if(X.is_preference_enabled(/datum/client_preference/holder/play_adminhelp_ping))
+					X << 'sound/voice/bcriminal.ogg'
+				window_flash(X)
+		//VOREStation Edit end.
 
 	//////////////
 	//DISCONNECT//
@@ -210,7 +258,7 @@
 /client/Del()
 	if(holder)
 		holder.owner = null
-		admins -= src
+		GLOB.admins -= src
 	GLOB.ahelp_tickets.ClientLogout(src)
 	GLOB.directory -= ckey
 	GLOB.clients -= src
@@ -302,8 +350,7 @@
 		if (config.panic_bunker && !holder && !deadmin_holder)
 			log_adminwarn("Failed Login: [key] - New account attempting to connect during panic bunker")
 			message_admins("<span class='adminnotice'>Failed Login: [key] - New account attempting to connect during panic bunker</span>")
-			to_chat_immediate(src, "<span class='danger'>Sorry but the server is currently not accepting connections from never before seen players.</span>")
-			qdel(src)
+			disconnect_with_message("Sorry but the server is currently not accepting connections from never before seen players.")
 			return 0
 
 	// IP Reputation Check
@@ -321,15 +368,26 @@
 
 				//Take action if required
 				if(config.ipr_block_bad_ips && config.ipr_allow_existing) //We allow players of an age, but you don't meet it
-					to_chat_immediate(src, "<span class='danger'>Sorry, we only allow VPN/Proxy/Tor usage for players who have spent at least [config.ipr_minimum_age] days on the server. If you are unable to use the internet without your VPN/Proxy/Tor, please contact an admin out-of-game to let them know so we can accommodate this.</span>")
-					qdel(src)
+					disconnect_with_message("Sorry, we only allow VPN/Proxy/Tor usage for players who have spent at least [config.ipr_minimum_age] days on the server. If you are unable to use the internet without your VPN/Proxy/Tor, please contact an admin out-of-game to let them know so we can accommodate this.")
 					return 0
 				else if(config.ipr_block_bad_ips) //We don't allow players of any particular age
-					to_chat_immediate(src, "<span class='danger'>Sorry, we do not accept connections from users via VPN/Proxy/Tor connections. If you believe this is in error, contact an admin out-of-game.</span>")
-					qdel(src)
+					disconnect_with_message("Sorry, we do not accept connections from users via VPN/Proxy/Tor connections. If you believe this is in error, contact an admin out-of-game.")
 					return 0
 		else
 			log_admin("Couldn't perform IP check on [key] with [address]")
+
+	// VOREStation Edit Start - Department Hours
+	var/DBQuery/query_hours = dbcon.NewQuery("SELECT department, hours, total_hours FROM vr_player_hours WHERE ckey = '[sql_ckey]'")
+	if(query_hours.Execute())
+		while(query_hours.NextRow())
+			department_hours[query_hours.item[1]] = text2num(query_hours.item[2])
+			play_hours[query_hours.item[1]] = text2num(query_hours.item[3])
+	else
+		var/error_message = query_hours.ErrorMsg() // Need this out here since the spawn below will split the stack and who knows what'll happen by the time it runs
+		log_debug("Error loading play hours for [ckey]: [error_message]")
+		spawn(0)
+			alert(src, "The query to load your existing playtime failed. Screenshot this, give the screenshot to a developer, and reconnect, otherwise you may lose any recorded play hours (which may limit access to jobs). ERROR: [error_message]", "PROBLEMS!!")
+	// VOREStation Edit End - Department Hours
 
 	if(sql_id)
 		//Player already identified previously, we need to just update the 'lastseen', 'ip' and 'computer_id' variables
@@ -491,3 +549,9 @@ client/verb/character_setup()
 	else
 		ip_reputation = score
 		return TRUE
+
+/client/proc/disconnect_with_message(var/message = "You have been intentionally disconnected by the server.<br>This may be for security or administrative reasons.")
+	message = "<head><title>You Have Been Disconnected</title></head><body><hr><center><b>[message]</b></center><hr><br>If you feel this is in error, you can contact an administrator out-of-game (for example, on Discord).</body>"
+	window_flash(src)
+	src << browse(message,"window=dropmessage;size=480x360;can_close=1")
+	qdel(src)

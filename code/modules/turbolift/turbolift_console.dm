@@ -67,8 +67,26 @@
 	light_up = FALSE
 	update_icon()
 
+// Hit it with a PDA or ID to enable priority call mode
+/obj/structure/lift/button/attackby(obj/item/W as obj, mob/user as mob)
+	var/obj/item/weapon/card/id/id = W.GetID()
+	if(istype(id))
+		if(!check_access(id))
+			playsound(src, 'sound/machines/buzz-two.ogg', 50, 0)
+			return
+		lift.priority_mode()
+		if(floor == lift.current_floor)
+			lift.open_doors()
+		else
+			lift.queue_move_to(floor)
+		return
+	. = ..()
+
 /obj/structure/lift/button/interact(var/mob/user)
 	if(!..())
+		return
+	if(lift.fire_mode || lift.priority_mode)
+		playsound(src, 'sound/machines/buzz-two.ogg', 50, 0)
 		return
 	light_up()
 	pressed(user)
@@ -84,7 +102,11 @@
 	update_icon()
 
 /obj/structure/lift/button/update_icon()
-	if(light_up)
+	if(lift.fire_mode)
+		icon_state = "button_fire"
+	else if(lift.priority_mode)
+		icon_state = "button_pri"
+	else if(light_up)
 		icon_state = "button_lit"
 	else
 		icon_state = initial(icon_state)
@@ -96,6 +118,24 @@
 	name = "elevator control panel"
 	desc = "A control panel for moving the elevator. There's a slot for swiping IDs to enable additional controls."
 	icon_state = "panel"
+	req_access = list(access_eva)
+	req_one_access = list(access_heads, access_atmospherics, access_medical)
+
+// Hit it with a PDA or ID to enable priority call mode
+/obj/structure/lift/panel/attackby(obj/item/W as obj, mob/user as mob)
+	var/obj/item/weapon/card/id/id = W.GetID()
+	if(istype(id))
+		if(!check_access(id))
+			playsound(src, 'sound/machines/buzz-two.ogg', 50, 0)
+			return
+		lift.update_fire_mode(!lift.fire_mode)
+		if(lift.fire_mode)
+			audible_message("<span class='danger'>Firefighter Mode Activated.  Door safeties disabled.  Manual control engaged.</span>")
+			playsound(src, 'sound/machines/airalarm.ogg', 25, 0, 4, volume_channel = VOLUME_CHANNEL_ALARMS)
+		else
+			audible_message("<span class='warning'>Firefighter Mode Deactivated. Door safeties enabled.  Automatic control engaged.</span>")
+		return
+	. = ..()
 
 /obj/structure/lift/panel/attack_ghost(var/mob/user)
 	return interact(user)
@@ -116,6 +156,7 @@
 	var/list/data = list()
 
 	data["doors_open"] = lift.doors_are_open()
+	data["fire_mode"] = lift.fire_mode
 
 	data["floors"] = list()
 	for(var/i in lift.floors.len to 1 step -1)
@@ -152,5 +193,11 @@
 
 	if(.)
 		pressed(usr)
+
+/obj/structure/lift/panel/update_icon()
+	if(lift.fire_mode)
+		icon_state = "panel_fire"
+	else
+		icon_state = initial(icon_state)
 
 // End panel.

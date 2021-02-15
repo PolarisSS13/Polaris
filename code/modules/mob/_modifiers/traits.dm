@@ -162,4 +162,4 @@
 	desc = "You are fully colorblind. Your condition is rare, but you can see no colors at all."
 
 	client_color = MATRIX_Monochromia
-	wire_colors_replace = GREYSCALE_COLOR_REPLACE 
+	wire_colors_replace = GREYSCALE_COLOR_REPLACE

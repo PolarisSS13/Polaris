@@ -27,7 +27,7 @@
 		return
 
 	src.gender = gender
-	reset_hair()
+	//reset_hair() //VOREStation Remove - Don't just randomize hair on gender swaps for prometheans.
 	update_dna()
 	update_icons_body()
 	return 1
@@ -212,6 +212,10 @@
 
 		if(!(use_species in S.species_allowed))
 			continue
+
+		if(S.ckeys_allowed && !(ckey in S.ckeys_allowed)) //VOREStation add - ckey whitelist check
+			continue //VOREStation add - ckey whitelist check
+
 		valid_hairstyles += hairstyle
 
 	return valid_hairstyles
@@ -234,6 +238,9 @@
 
 		if(!(use_species in S.species_allowed))
 			continue
+
+		if(S.ckeys_allowed && !(ckey in S.ckeys_allowed)) //VOREStation add - ckey whitelist check
+			continue //VOREStation add - ckey whitelist check
 
 		valid_facial_hairstyles += facialhairstyle
 

@@ -134,6 +134,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 							/obj/item/weapon/storage/toolbox/lunchbox/syndicate))	//Only pick the empty types
 	var/obj/item/weapon/storage/toolbox/lunchbox/L = new boxtype(get_turf(H))
 	new /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar(L)
+	new /obj/item/weapon/tool/prybar/red(L) //VOREStation Add,
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(L, slot_r_hand)
 	else
@@ -141,6 +142,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 
 /datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H, var/mob/living/target)
 
+	if(H.zone_sel.selecting == "head" || H.zone_sel.selecting == "r_hand" || H.zone_sel.selecting == "l_hand") return ..() //VOREStation Edit
 	var/t_him = "them"
 	if(ishuman(target))
 		var/mob/living/carbon/human/T = target
@@ -171,9 +173,13 @@ var/datum/species/shapeshifter/promethean/prometheans
 	var/regen_burn = TRUE
 	var/regen_tox = TRUE
 	var/regen_oxy = TRUE
+	// VOREStation Removal Start
+	/*
 	if(H.fire_stacks < 0 && H.get_water_protection() <= 0.5)	// If over half your body is soaked, you're melting.
 		H.adjustToxLoss(max(0,(3 - (3 * H.get_water_protection())) * heal_rate))	// Tripled because 0.5 is miniscule, and fire_stacks are capped in both directions.
 		healing = FALSE
+	*/
+	//VOREStation Removal End
 
 	//Prometheans automatically clean every surface they're in contact with every life tick - this includes the floor without shoes.
 	//They gain nutrition from doing this.
@@ -317,6 +323,8 @@ var/datum/species/shapeshifter/promethean/prometheans
 		t_she = "They are"
 	else if(H.identifying_gender == NEUTER)
 		t_she = "It is"
+	else if(H.identifying_gender == HERM) //VOREStation Edit
+		t_she = "Shi is"
 
 	switch(stored_shock_by_ref["\ref[H]"])
 		if(1 to 10)

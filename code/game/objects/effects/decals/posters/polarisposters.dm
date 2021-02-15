@@ -291,11 +291,15 @@
 	The image seems important."
 	listing_name = "Safety - Mech Operation"
 
+//VOREStation Removal Start TFF 17/12/19 - lore not used in our station's own lore.
+/*
 /datum/poster/nanotrasen/nt_4
 	icon_state = "ntposter04"
 	name = "Beware Aetotheans"
 	desc = "This poster displays a distinctly hostile-looking red Promethean in a black coat. The fine-print around the edges warns the reader about the dangers posed by Almachi Prometheans."
 	listing_name = "Safety - Aetothean Danger"
+*/
+//VOREstation Removal End
 
 /datum/poster/nanotrasen/nt_5
 	icon_state = "ntposter05"

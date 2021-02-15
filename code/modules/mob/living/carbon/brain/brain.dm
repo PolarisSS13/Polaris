@@ -8,6 +8,7 @@
 	use_me = 0 //Can't use the me verb, it's a freaking immobile brain
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain1"
+	no_vore = TRUE //VOREStation Edit - PLEASE. lol.
 
 /mob/living/carbon/brain/Initialize()
 	. = ..()
@@ -54,7 +55,7 @@
 
 	if(!typing_indicator)
 		typing_indicator = new
-		typing_indicator.icon = 'icons/mob/talk.dmi'
+		typing_indicator.icon = 'icons/mob/talk_vr.dmi' //VOREStation Edit - talk_vr.dmi instead of talk.dmi for right-side icons
 		typing_indicator.icon_state = "[speech_bubble_appearance()]_typing"
 
 	if(state && !typing)

@@ -29,7 +29,6 @@
 
 	// Appearance vars.
 	var/nonsolid                       // Snowflake warning, reee. Used for slime limbs.
-	var/transparent                    // As above, so below. Used for transparent limbs.
 	var/icon_name = null               // Icon state base.
 	var/body_part = null               // Part flag
 	var/icon_position = 0              // Used in mob overlay layering calculations.
@@ -104,6 +103,8 @@
 		owner.organs_by_name -= organ_tag
 		while(null in owner.organs)
 			owner.organs -= null
+
+	implants.Cut() //VOREStation Add - Remove these too!
 
 	return ..()
 
@@ -217,8 +218,6 @@
 
 /obj/item/organ/external/update_health()
 	damage = min(max_damage, (brute_dam + burn_dam))
-	return
-
 
 /obj/item/organ/external/New(var/mob/living/carbon/holder)
 	..(holder, 0)
@@ -270,12 +269,12 @@
 		// Damage an internal organ
 		if(internal_organs && internal_organs.len)
 			var/obj/item/organ/I = pick(internal_organs)
-			I.take_damage(brute / 2)
-			brute -= brute / 2
+			brute *= 0.5
+			I.take_damage(brute)
 
 	if(status & ORGAN_BROKEN && brute)
 		jostle_bone(brute)
-		if(organ_can_feel_pain() && prob(40))
+		if(organ_can_feel_pain() && prob(40) && !isbelly(owner.loc) && !istype(owner.loc, /obj/item/device/dogborg/sleeper)) //VOREStation Edit
 			owner.emote("scream")	//getting hit on broken hand hurts
 	if(used_weapon)
 		add_autopsy_data("[used_weapon]", brute + burn)
@@ -355,21 +354,33 @@
 				else
 					edge_eligible = 1
 
-			if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE && prob(brute))
+			//VOREStation Add
+			if(nonsolid && damage >= max_damage)
+				droplimb(TRUE, DROPLIMB_EDGE)
+			else if (robotic >= ORGAN_NANOFORM && damage >= max_damage)
+				droplimb(TRUE, DROPLIMB_BURN)
+			//VOREStation Add End
+			//VOREStation Edit - We have special droplimb handling for prom/proteans
+			else if(edge_eligible && brute >= max_damage / DROPLIMB_THRESHOLD_EDGE && prob(brute))
 				droplimb(0, DROPLIMB_EDGE)
-			else if((burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY) || (nonsolid && burn >= 5 && (burn_dam + burn >= max_damage)) && prob(burn/3))
+			else if((burn >= max_damage / DROPLIMB_THRESHOLD_DESTROY) && prob(burn*0.33))
 				droplimb(0, DROPLIMB_BURN)
-			else if((brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(brute)) || (nonsolid && brute >= 5 && (brute_dam + brute >= max_damage) && prob(brute/2)))
+			else if((brute >= max_damage / DROPLIMB_THRESHOLD_DESTROY && prob(brute)))
 				droplimb(0, DROPLIMB_BLUNT)
-			else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute/3))
+			//VOREStation Edit End
+			else if(brute >= max_damage / DROPLIMB_THRESHOLD_TEAROFF && prob(brute*0.33))
 				droplimb(0, DROPLIMB_EDGE)
 			else if(spread_dam && owner && parent && (brute_overflow || burn_overflow) && (brute_overflow >= 5 || burn_overflow >= 5) && !permutation) //No infinite damage loops.
+				var/brute_third = brute_overflow * 0.33
+				var/burn_third = burn_overflow * 0.33	
 				if(children && children.len)
+					var/brute_on_children = brute_third / children.len
+					var/burn_on_children = burn_third / children.len
 					spawn()
 						for(var/obj/item/organ/external/C in children)
 							if(!C.is_stump())
-								C.take_damage(brute_overflow / children.len / 3, burn_overflow / children.len / 3, 0, 0, null, forbidden_limbs, 1) //Splits the damage to each individual 'child', incase multiple exist.
-				parent.take_damage(brute_overflow / 3, burn_overflow / 3, 0, 0, null, forbidden_limbs, 1)
+								C.take_damage(brute_on_children, burn_on_children, 0, 0, null, forbidden_limbs, 1) //Splits the damage to each individual 'child', incase multiple exist.
+				parent.take_damage(brute_third, burn_third, 0, 0, null, forbidden_limbs, 1)
 
 	return update_icon()
 
@@ -415,7 +426,7 @@
 		to_chat(user, "<span class='notice'>Nothing to fix!</span>")
 		return 0
 
-	if(brute_dam + burn_dam >= ROBOLIMB_REPAIR_CAP)
+	if(brute_dam + burn_dam >= min_broken_damage) //VOREStation Edit - Makes robotic limb damage scalable
 		to_chat(user, "<span class='danger'>The damage is far too severe to patch over externally.</span>")
 		return 0
 
@@ -468,7 +479,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
-		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
+		if(!istype(implanted_object,/obj/item/weapon/implant) && !istype(implanted_object,/obj/item/device/nif))	// We don't want to remove REAL implants. Just shrapnel etc. //VOREStation Edit - NIFs pls
 			implanted_object.loc = get_turf(src)
 			implants -= implanted_object
 	if(!owner.has_embedded_objects())
@@ -513,6 +524,7 @@ This function completely restores a damaged organ to perfect condition.
 		owner.custom_pain("You feel something rip in your [name]!", 50)
 
 //Burn damage can cause fluid loss due to blistering and cook-off
+
 	if((damage > 5 || damage + burn_dam >= 15) && type == BURN && (robotic < ORGAN_ROBOT) && !(species.flags & NO_BLOOD))
 		var/fluid_loss = 0.4 * (damage/(owner.getMaxHealth() - config.health_threshold_dead)) * owner.species.blood_volume*(1 - owner.species.blood_level_fatal)
 		owner.remove_blood(fluid_loss)
@@ -568,7 +580,7 @@ This function completely restores a damaged organ to perfect condition.
 /obj/item/organ/external/proc/need_process()
 	if(status & (ORGAN_CUT_AWAY|ORGAN_BLEEDING|ORGAN_BROKEN|ORGAN_DESTROYED|ORGAN_DEAD|ORGAN_MUTATED))
 		return 1
-	if((brute_dam || burn_dam) && (robotic < ORGAN_ROBOT)) //Robot limbs don't autoheal and thus don't need to process when damaged
+	if(brute_dam || burn_dam)//VOREStation Edit - But they do for medichines! ---&& (robotic < ORGAN_ROBOT)) //Robot limbs don't autoheal and thus don't need to process when damaged
 		return 1
 	if(last_dam != brute_dam + burn_dam) // Process when we are fully healed up.
 		last_dam = brute_dam + burn_dam
@@ -792,6 +804,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 	if(config.bones_can_break && brute_dam > min_broken_damage * config.organ_health_multiplier && !(robotic >= ORGAN_ROBOT))
 		src.fracture()
 
+	update_health()
+
 // new damage icon system
 // adjusted to set damage_state to brute/burn code only (without r_name0 as before)
 /obj/item/organ/external/update_icon()
@@ -836,11 +850,11 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	if(cannot_amputate || !owner)
 		return
-
-	if(disintegrate == DROPLIMB_EDGE && nonsolid)
+	//VOREStation Add
+	if(robotic >= ORGAN_NANOFORM)
+		disintegrate = DROPLIMB_BURN //Ashes will be fine
+	else if(disintegrate == DROPLIMB_EDGE && nonsolid) //VOREStation Add End
 		disintegrate = DROPLIMB_BLUNT //splut
-
-	GLOB.lost_limbs_shift_roundstat++
 
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
@@ -899,6 +913,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			victim.update_icons()
 		dir = 2
 
+	var/atom/droploc = victim.drop_location()
 	switch(disintegrate)
 		if(DROPLIMB_EDGE)
 			appearance_flags &= ~PIXEL_SCALE
@@ -913,17 +928,17 @@ Note that amputating the affected organ does in fact remove the infection from t
 					throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 				dir = 2
 		if(DROPLIMB_BURN)
-			new /obj/effect/decal/cleanable/ash(get_turf(victim))
+			new /obj/effect/decal/cleanable/ash(droploc)
 			for(var/obj/item/I in src)
 				if(I.w_class > ITEMSIZE_SMALL && !istype(I,/obj/item/organ))
-					I.loc = get_turf(src)
+					I.forceMove(droploc)
 			qdel(src)
 		if(DROPLIMB_BLUNT)
 			var/obj/effect/decal/cleanable/blood/gibs/gore
 			if(robotic >= ORGAN_ROBOT)
-				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(get_turf(victim))
+				gore = new /obj/effect/decal/cleanable/blood/gibs/robot(droploc)
 			else
-				gore = new /obj/effect/decal/cleanable/blood/gibs(get_turf(victim))
+				gore = new /obj/effect/decal/cleanable/blood/gibs(droploc)
 				if(species)
 					gore.fleshcolor = use_flesh_colour
 					gore.basecolor =  use_blood_colour
@@ -940,7 +955,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 				if(I.w_class <= ITEMSIZE_SMALL)
 					qdel(I)
 					continue
-				I.loc = get_turf(src)
+				I.forceMove(droploc)
 				I.throw_at(get_edge_target_turf(src,pick(alldirs)),rand(1,3),5)
 
 			qdel(src)
@@ -1045,7 +1060,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='danger'>Something feels like it shattered in your [name]!</span>",\
 			"<span class='danger'>You hear a sickening crack.</span>")
 		jostle_bone()
-		if(organ_can_feel_pain())
+		if(organ_can_feel_pain() && !isbelly(owner.loc))
 			owner.emote("scream")
 
 	playsound(src, "fracture", 10, 1, -2)
@@ -1118,6 +1133,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 
 	dislocated = -1
 	cannot_break = 1
+	min_broken_damage = ROBOLIMB_REPAIR_CAP //VOREStation Addition - Makes robotic limb damage scalable
 	remove_splint()
 	get_icon()
 	unmutate()
@@ -1125,7 +1141,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	pickup_sound = 'sound/items/pickup/weldingtool.ogg'
 
 	for(var/obj/item/organ/external/T in children)
-		T.robotize(company, 1)
+		T.robotize(company, keep_organs = keep_organs)
 
 	if(owner)
 
@@ -1168,7 +1184,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	return !(status & (ORGAN_MUTATED|ORGAN_DEAD))
 
 /obj/item/organ/external/proc/is_malfunctioning()
-	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= ROBOLIMB_REPAIR_CAP && prob(brute_dam + burn_dam))
+	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= min_broken_damage*0.83 && prob(brute_dam + burn_dam)) //VOREStation Edit - Makes robotic limb damage scalable
 
 /obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
 	if(!owner || loc != owner)
@@ -1373,9 +1389,5 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = 0
 	for(var/obj/item/organ/external/L in organs)
 		for(var/obj/item/I in L.implants)
-			if(!istype(I,/obj/item/weapon/implant))
+			if(!istype(I,/obj/item/weapon/implant) && !istype(I,/obj/item/device/nif)) //VOREStation Add - NIFs
 				return 1
-
-/obj/item/organ/external/proc/is_hidden_by_tail()
-	if(owner && owner.tail_style && owner.tail_style.hide_body_parts && (organ_tag in owner.tail_style.hide_body_parts))
-		return 1

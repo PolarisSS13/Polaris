@@ -1,7 +1,7 @@
 /obj/structure/window
 	name = "window"
 	desc = "A window."
-	icon = 'icons/obj/structures.dmi'
+	icon = 'icons/obj/structures_vr.dmi' // VOREStation Edit - New icons
 	density = 1
 	can_atmos_pass = ATMOS_PASS_PROC
 	w_class = ITEMSIZE_NORMAL
@@ -143,6 +143,11 @@
 		return !density
 	else
 		return TRUE
+
+/obj/structure/window/CanZASPass(turf/T, is_zone)
+	if(is_fulltile() || get_dir(T, loc) == turn(dir, 180)) // Make sure we're handling the border correctly.
+		return !anchored // If it's anchored, it'll block air.
+	return TRUE // Don't stop airflow from the other sides.
 
 /obj/structure/window/CanZASPass(turf/T, is_zone)
 	if(is_fulltile() || get_dir(T, loc) == turn(dir, 180)) // Make sure we're handling the border correctly.

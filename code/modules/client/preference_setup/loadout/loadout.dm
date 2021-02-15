@@ -70,6 +70,13 @@ var/list/gear_datums = list()
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
+		//VOREStation Edit Start
+		if(preference_mob && preference_mob.client)
+			if(G.ckeywhitelist && !(preference_mob.ckey in G.ckeywhitelist))
+				continue
+			if(G.character_name && !(preference_mob.client.prefs.real_name in G.character_name))
+				continue
+		//VOREStation Edit End
 		. += gear_name
 
 /datum/category_item/player_setup_item/loadout/sanitize_character()
@@ -88,7 +95,7 @@ var/list/gear_datums = list()
 			to_chat(preference_mob, "<span class='warning'>You cannot have more than one of the \the [gear_name]</span>")
 			pref.gear -= gear_name
 		else if(!(gear_name in valid_gear_choices()))
-			to_chat(preference_mob, "<span class='warning'>You cannot take \the [gear_name] as you are not whitelisted for the species.</span>")
+			to_chat(preference_mob, "<span class='warning'>You cannot take \the [gear_name] as you are not whitelisted for the species or item.</span>")		//Vorestation Edit
 			pref.gear -= gear_name
 		else
 			var/datum/gear/G = gear_datums[gear_name]
@@ -100,6 +107,7 @@ var/list/gear_datums = list()
 
 /datum/category_item/player_setup_item/loadout/content()
 	. = list()
+	var/mob/preference_mob = preference_mob()	//Vorestation Edit
 	var/total_cost = 0
 	if(pref.gear && pref.gear.len)
 		for(var/i = 1; i <= pref.gear.len; i++)
@@ -145,6 +153,13 @@ var/list/gear_datums = list()
 	. += "<tr><td colspan=3><hr></td></tr>"
 	for(var/gear_name in LC.gear)
 		var/datum/gear/G = LC.gear[gear_name]
+		//VOREStation Edit Start
+		if(preference_mob && preference_mob.client)
+			if(G.ckeywhitelist && !(preference_mob.ckey in G.ckeywhitelist))
+				continue
+			if(G.character_name && !(preference_mob.client.prefs.real_name in G.character_name))
+				continue
+		//VOREStation Edit End
 		var/ticked = (G.display_name in pref.gear)
 		. += "<tr style='vertical-align:top;'><td width=25%><a style='white-space:normal;' [ticked ? "class='linkOn' " : ""]href='?src=\ref[src];toggle_gear=[html_encode(G.display_name)]'>[G.display_name]</a></td>"
 		. += "<td width = 10% style='vertical-align:top'>[G.cost]</td>"

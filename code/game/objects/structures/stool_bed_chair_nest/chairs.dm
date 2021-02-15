@@ -1,6 +1,7 @@
 /obj/structure/bed/chair	//YES, chairs are a type of bed, which are a type of stool. This works, believe me.	-Pete
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
+	icon = 'icons/obj/furniture_vr.dmi' //VOREStation Edit - Using Eris furniture
 	icon_state = "chair_preview"
 	color = "#666666"
 	base_icon = "chair"
@@ -143,20 +144,6 @@
 	. = ..()
 	
 	playsound(src, 'sound/effects/roll.ogg', 100, 1)
-
-/obj/structure/bed/chair/office/handle_buckled_mob_movement(atom/new_loc, direction)
-	for(var/A in buckled_mobs)
-		var/mob/living/occupant = A
-		occupant.buckled = null
-		occupant.Move(src.loc)
-		occupant.buckled = src
-		if (occupant && (src.loc != occupant.loc))
-			if (propelled)
-				for (var/mob/O in src.loc)
-					if (O != occupant)
-						Bump(O)
-			else
-				unbuckle_mob()
 
 /obj/structure/bed/chair/office/handle_buckled_mob_movement(atom/new_loc, direction, movetime)
 	for(var/A in buckled_mobs)

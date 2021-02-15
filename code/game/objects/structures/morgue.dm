@@ -231,9 +231,9 @@ GLOBAL_LIST_BOILERPLATE(all_crematoriums, /obj/structure/morgue/crematorium)
 	else if (src.locked == 0)
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 		src.connected = new /obj/structure/m_tray/c_tray( src.loc )
-		step(src.connected, EAST)
+		step(src.connected, dir) //Vorestation Edit
 		src.connected.layer = OBJ_LAYER
-		var/turf/T = get_step(src, EAST)
+		var/turf/T = get_step(src, dir) //Vorestation Edit
 		if (T.contents.Find(src.connected))
 			src.connected.connected = src
 			src.icon_state = "crema0"

@@ -11,7 +11,7 @@
 /obj/machinery/computer/cryopod
 	name = "cryogenic oversight console"
 	desc = "An interface between crew and the cryogenic storage oversight systems."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/Cryogenic2_vr.dmi' //VOREStation Edit - New Icon
 	icon_state = "cellconsole"
 	circuit = /obj/item/weapon/circuitboard/cryopodcontrol
 	density = 0
@@ -26,6 +26,8 @@
 	var/storage_type = "crewmembers"
 	var/storage_name = "Cryogenic Oversight Control"
 	var/allow_items = 1
+
+	req_one_access = list(access_heads) //VOREStation Add
 
 /obj/machinery/computer/cryopod/update_icon()
 	..()
@@ -72,95 +74,81 @@
 	storage_name = "Travel Oversight Control"
 	allow_items = 1
 
-/obj/machinery/computer/cryopod/attack_ai()
-	attack_hand()
+/obj/machinery/computer/cryopod/attack_ai(mob/user)
+	attack_hand(user)
 
-/obj/machinery/computer/cryopod/attack_hand(mob/user = usr)
+/obj/machinery/computer/cryopod/attack_hand(mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		return
 
-	user.set_machine(src)
-	add_fingerprint(usr)
+	tgui_interact(user)
 
-	var/dat
+/obj/machinery/computer/cryopod/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "CryoStorageVr", storage_name) // VOREStation Edit - Use our own template for our custom data
+		ui.open()
 
-	if(!(ticker))
-		return
+/obj/machinery/computer/cryopod/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
+	var/list/data = ..()
 
-	dat += "<hr/><br/><b>[storage_name]</b><br/>"
-	dat += "<i>Welcome, [user.real_name].</i><br/><br/><hr/>"
-	dat += "<a href='?src=\ref[src];log=1'>View storage log</a>.<br>"
+	data["real_name"] = user.real_name
+	data["allow_items"] = allow_items
+	data["crew"] = frozen_crew
+	
+	data["items"] = list()
 	if(allow_items)
-		dat += "<a href='?src=\ref[src];view=1'>View objects</a>.<br>"
-		dat += "<a href='?src=\ref[src];item=1'>Recover object</a>.<br>"
-		dat += "<a href='?src=\ref[src];allitems=1'>Recover all objects</a>.<br>"
+		for(var/F in frozen_items)
+			data["items"].Add(F) // VOREStation Edit
+			/* VOREStation Removal
+			data["items"].Add(list(list(
+				"name" = "[F]",
+				"ref" = REF(F),
+			)))
+			VOREStation Removal End */
 
-	user << browse(dat, "window=cryopod_console")
-	onclose(user, "cryopod_console")
+	return data
 
-/obj/machinery/computer/cryopod/Topic(href, href_list)
-
+/obj/machinery/computer/cryopod/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return
 
-	var/mob/user = usr
+	add_fingerprint(usr)
 
-	add_fingerprint(user)
+	return FALSE // VOREStation Edit - prevent topic exploits
 
-	if(href_list["log"])
+	switch(action)
+		if("item")
+			if(!allow_items)
+				return
 
-		var/dat = "<b>Recently stored [storage_type]</b><br/><hr/><br/>"
-		for(var/person in frozen_crew)
-			dat += "[person]<br/>"
-		dat += "<hr/>"
+			if(!LAZYLEN(frozen_items))
+				to_chat(usr, "<span class='notice'>There is nothing to recover from storage.</span>")
+				return
 
-		user << browse(dat, "window=cryolog")
+			var/obj/item/I = locate(params["ref"]) in frozen_items
+			if(!I)
+				to_chat(usr, "<span class='notice'>\The [I] is no longer in storage.</span>")
+				return
 
-	if(href_list["view"])
-		if(!allow_items) return
+			visible_message("<span class='notice'>The console beeps happily as it disgorges [I].</span>")
 
-		var/dat = "<b>Recently stored objects</b><br/><hr/><br/>"
-		for(var/obj/item/I in frozen_items)
-			dat += "[I.name]<br/>"
-		dat += "<hr/>"
-
-		user << browse(dat, "window=cryoitems")
-
-	else if(href_list["item"])
-		if(!allow_items) return
-
-		if(frozen_items.len == 0)
-			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
-			return
-
-		var/obj/item/I = input(usr, "Please choose which object to retrieve.","Object recovery",null) as null|anything in frozen_items
-		if(!I)
-			return
-
-		if(!(I in frozen_items))
-			to_chat(user, "<span class='notice'>\The [I] is no longer in storage.</span>")
-			return
-
-		visible_message("<span class='notice'>The console beeps happily as it disgorges \the [I].</span>", 3)
-
-		I.forceMove(get_turf(src))
-		frozen_items -= I
-
-	else if(href_list["allitems"])
-		if(!allow_items) return
-
-		if(frozen_items.len == 0)
-			to_chat(user, "<span class='notice'>There is nothing to recover from storage.</span>")
-			return
-
-		visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>", 3)
-
-		for(var/obj/item/I in frozen_items)
 			I.forceMove(get_turf(src))
 			frozen_items -= I
+		if("allitems")
+			if(!allow_items)
+				return
 
-	updateUsrDialog()
-	return
+			if(!LAZYLEN(frozen_items))
+				to_chat(usr, "<span class='notice'>There is nothing to recover from storage.</span>")
+				return
+
+			visible_message("<span class='notice'>The console beeps happily as it disgorges the desired objects.</span>")
+
+			for(var/obj/item/I in frozen_items)
+				I.forceMove(get_turf(src))
+				frozen_items -= I
+
 
 /obj/item/weapon/circuitboard/cryopodcontrol
 	name = "Circuit board (Cryogenic Oversight Console)"
@@ -192,7 +180,7 @@
 
 	name = "cryogenic feed"
 	desc = "A bewildering tangle of machinery and pipes."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/Cryogenic2_vr.dmi' //VOREStation Edit - New Icon
 	icon_state = "cryo_rear"
 	anchored = 1
 	dir = WEST
@@ -201,14 +189,14 @@
 /obj/machinery/cryopod
 	name = "cryogenic freezer"
 	desc = "A man-sized pod for entering suspended animation."
-	icon = 'icons/obj/Cryogenic2.dmi'
-	icon_state = "body_scanner_0"
+	icon = 'icons/obj/Cryogenic2_vr.dmi' //VOREStation Edit - New Icon
+	icon_state = "cryopod_0" //VOREStation Edit - New Icon
 	density = 1
 	anchored = 1
 	dir = WEST
 
-	var/base_icon_state = "body_scanner_0"
-	var/occupied_icon_state = "body_scanner_1"
+	var/base_icon_state = "cryopod_0" //VOREStation Edit - New Icon
+	var/occupied_icon_state = "cryopod_1" //VOREStation Edit - New Icon
 	var/on_store_message = "has entered long-term storage."
 	var/on_store_name = "Cryogenic Oversight"
 	var/on_enter_visible_message = "starts climbing into the"
@@ -220,13 +208,13 @@
 	var/disallow_occupant_types = list()
 
 	var/mob/occupant = null       // Person waiting to be despawned.
-	var/time_till_despawn = 9000  // Down to 15 minutes //30 minutes-ish is too long
+	var/time_till_despawn = 599  // Down to 1 minute to reflect Vorestation respawn times.
 	var/time_entered = 0          // Used to keep track of the safe period.
 	var/obj/item/device/radio/intercom/announce //
 
 	var/obj/machinery/computer/cryopod/control_computer
 	var/last_no_computer_message = 0
-	var/applies_stasis = 1
+	var/applies_stasis = 0	//VOREStation Edit: allow people to change their mind
 
 /obj/machinery/cryopod/robot
 	name = "robotic storage unit"
@@ -239,7 +227,7 @@
 	on_store_name = "Robotic Storage Oversight"
 	on_enter_occupant_message = "The storage unit broadcasts a sleep signal to you. Your systems start to shut down, and you enter low-power mode."
 	allow_occupant_types = list(/mob/living/silicon/robot)
-	disallow_occupant_types = list(/mob/living/silicon/robot/drone)
+	//disallow_occupant_types = list(/mob/living/silicon/robot/drone) //VOREStation Removal - Why? How else do they leave?
 	applies_stasis = 0
 
 /obj/machinery/cryopod/robot/door
@@ -359,6 +347,8 @@
 
 	qdel(R.mmi)
 	for(var/obj/item/I in R.module) // the tools the borg has; metal, glass, guns etc
+		for(var/mob/M in I) //VOREStation edit
+			despawn_occupant(M)
 		for(var/obj/item/O in I) // the things inside the tools, if anything; mainly for janiborg trash bags
 			O.forceMove(R)
 		qdel(I)
@@ -378,6 +368,30 @@
 	for(var/mob/M in to_despawn)
 		despawn_occupant(M)
 
+	// VOREStation
+	hook_vr("despawn", list(to_despawn, src))
+	if(isliving(to_despawn))
+		var/mob/living/L = to_despawn
+		for(var/belly in L.vore_organs)
+			var/obj/belly/B = belly
+			for(var/mob/living/sub_L in B)
+				despawn_occupant(sub_L)
+			for(var/obj/item/W in B)
+				W.forceMove(src)
+				if(W.contents.len)
+					for(var/obj/item/O in W.contents)
+						if(istype(O,/obj/item/weapon/storage/internal))
+							continue
+						O.forceMove(src)
+		if(ishuman(to_despawn))
+			var/mob/living/carbon/human/H = to_despawn
+			if(H.nif)
+				var/datum/nifsoft/soulcatcher/SC = H.nif.imp_check(NIF_SOULCATCHER)
+				if(SC)
+					for(var/bm in SC.brainmobs)
+						despawn_occupant(bm)
+	// VOREStation
+
 	//Drop all items into the pod.
 	for(var/obj/item/W in to_despawn)
 		to_despawn.drop_from_inventory(W)
@@ -395,6 +409,16 @@
 	items -= announce // or the autosay radio.
 
 	for(var/obj/item/W in items)
+		//VOREStation Addition Start
+		if(istype(W, /obj/item/device/pda))
+			var/obj/item/device/pda/found_pda = W
+			found_pda.delete_id = TRUE
+		else
+			var/list/pdas_found = W.search_contents_for(/obj/item/device/pda)
+			if(pdas_found.len)
+				for(var/obj/item/device/pda/found_pda in pdas_found)
+					found_pda.delete_id = TRUE
+		//VOREStation Addition End
 
 		var/preserve = 0
 
@@ -411,12 +435,14 @@
 		if(!preserve)
 			qdel(W)
 		else
+			log_special_item(W,to_despawn) //VOREStation Add
+			/* VOREStation Removal - We do our own thing.
 			if(control_computer && control_computer.allow_items)
 				control_computer.frozen_items += W
-				W.loc = null
+				W.loc = control_computer //VOREStation Edit
 			else
 				W.forceMove(src.loc)
-
+			VOREStation Removal End */
 	for(var/obj/structure/B in items)
 		if(istype(B,/obj/structure/bed))
 			qdel(B)
@@ -429,6 +455,16 @@
 			if(O.owner && O.owner.current)
 				to_chat(O.owner.current, "<span class='warning'>You get the feeling your target is no longer within your reach...</span>")
 			qdel(O)
+
+	//VOREStation Edit - Resleeving.
+	if(to_despawn.mind)
+		if(to_despawn.mind.name in SStranscore.backed_up)
+			var/datum/transhuman/mind_record/MR = SStranscore.backed_up[to_despawn.mind.name]
+			SStranscore.stop_backup(MR)
+		if(to_despawn.mind.name in SStranscore.body_scans) //This uses mind names to avoid people cryo'ing a printed body to delete body scans.
+			var/datum/transhuman/body_record/BR = SStranscore.body_scans[to_despawn.mind.name]
+			SStranscore.remove_body(BR)
+	//VOREStation Edit End - Resleeving.
 
 	//Handle job slot/tater cleanup.
 	var/job = to_despawn.mind.assigned_role
@@ -471,6 +507,12 @@
 	announce.autosay("[to_despawn.real_name], [to_despawn.mind.role_alt_title], [on_store_message]", "[on_store_name]", announce_channel, using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE))
 	//visible_message("<span class='notice'>\The [initial(name)] hums and hisses as it moves [to_despawn.real_name] into storage.</span>", 3)
 	visible_message("<span class='notice'>\The [initial(name)] [on_store_visible_message_1] [to_despawn.real_name] [on_store_visible_message_2]</span>", 3)
+
+	//VOREStation Edit begin: Dont delete mobs-in-mobs
+	if(to_despawn.client && to_despawn.stat<2)
+		var/mob/observer/dead/newghost = to_despawn.ghostize()
+		newghost.timeofdeath = world.time
+	//VOREStation Edit end: Dont delete mobs-in-mobs
 
 	//This should guarantee that ghosts don't spawn.
 	to_despawn.ckey = null

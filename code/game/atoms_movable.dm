@@ -48,6 +48,18 @@
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
+	QDEL_NULL(riding_datum) //VOREStation Add
+
+
+/atom/movable/vv_get_dropdown()
+	. = ..()
+	VV_DROPDOWN_OPTION("move_atom", "Move To Coordinate")
+
+/atom/vv_do_topic(list/href_list)
+	. = ..()
+	IF_VV_OPTION("move_atom")
+		usr.client.cmd_admin_move_atom(src)
+		href_list["datumrefresh"] = "\ref[src]"
 
 /atom/movable/vv_edit_var(var_name, var_value)
 	if(var_name in GLOB.VVpixelmovement)			//Pixel movement is not yet implemented, changing this will break everything irreversibly.
@@ -122,7 +134,7 @@
 				for(var/i in loc)
 					var/atom/movable/thing = i
 					// We don't call parent so we are calling this for byond
-					thing.Crossed(src, oldloc)
+					thing.Crossed(src)
 
 			// We're a multi-tile object (multiple locs)
 			else if(. && newloc)

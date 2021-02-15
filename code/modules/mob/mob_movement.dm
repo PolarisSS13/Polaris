@@ -51,6 +51,9 @@
 			if(isliving(usr))
 				var/mob/living/carbon/C = usr
 				if(!C.get_active_hand())
+					if(C.pulling)
+						C.stop_pulling()
+						return
 					to_chat(usr, "<font color='red'>You have nothing to drop in your hand.</font>")
 					return
 				drop_item()
@@ -98,7 +101,7 @@
 
 /client/verb/drop_item()
 	set hidden = 1
-	if(!isrobot(mob) && mob.stat == CONSCIOUS && isturf(mob.loc))
+	if(!isrobot(mob) && mob.stat == CONSCIOUS && (isturf(mob.loc) || isbelly(mob.loc)))	// VOREStation Edit: dropping in bellies
 		return mob.drop_item()
 	return
 
@@ -457,6 +460,8 @@
 	return dense_object
 
 /mob/proc/Check_Shoegrip()
+	if(flying) //VOREStation Edit. Checks to see if they  and are flying.
+		return 1 //VOREStation Edit. Checks to see if they are flying. Mostly for this to be ported to Polaris.
 	return 0
 
 /mob/proc/Process_Spaceslipping(var/prob_slip = 5)

@@ -102,6 +102,7 @@
 	var/obj/item/organ/external/T = organs_by_name[BP_TORSO]
 	if(T && T.robotic >= ORGAN_ROBOT)
 		src.verbs += /mob/living/carbon/human/proc/self_diagnostics
+		src.verbs += /mob/living/carbon/human/proc/reagent_purge //VOREStation Add
 		src.verbs += /mob/living/carbon/human/proc/setmonitor_state
 		var/datum/robolimb/R = all_robolimbs[T.model]
 		synthetic = R
@@ -184,6 +185,11 @@
 			if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
 				var/obj/item/clothing/glasses/V = rig.visor.vision.glasses
 				compiled_vis |= V.enables_planes
+
+	//VOREStation Add - NIF Support
+	if(nif)
+		compiled_vis |= nif.planes_visible()
+	//VOREStation Add End
 
 	if(!compiled_vis.len && !vis_enabled.len)
 		return //Nothin' doin'.

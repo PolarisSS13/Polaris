@@ -154,6 +154,8 @@
 	// contained in a cage
 	var/in_stasis = 0
 
+	// don't process me if there's nobody around to see it
+	low_priority = TRUE
 	// Used for if the mob can drop limbs. Overrides species dmi.
 	var/limb_icon
 	// Used for if the mob can drop limbs. Overrides the icon cache key, so it doesn't keep remaking the icon needlessly.

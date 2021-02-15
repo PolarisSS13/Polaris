@@ -48,7 +48,11 @@ var/global/list/robot_modules = list(
 	handle_shell(R)
 
 	if(R.radio)
+		if(R.shell)
+			channels = R.mainframe.aiRadio.channels
 		R.radio.recalculateChannels()
+
+	vr_add_sprites() //Vorestation Edit: For vorestation only sprites
 
 	R.set_module_sprites(sprites)
 	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
@@ -169,6 +173,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/tool/crowbar/cyborg(src)
 	src.modules += new /obj/item/weapon/extinguisher(src)
 	src.modules += new /obj/item/device/gps/robot(src)
+	vr_new() // Vorestation Edit: For modules in robot_modules_vr.dm
 
 /obj/item/weapon/robot_module/robot/standard
 	name = "standard robot module"
@@ -499,7 +504,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/handcuffs/cyborg(src)
 	src.modules += new /obj/item/weapon/melee/baton/robot(src)
 	src.modules += new /obj/item/weapon/gun/energy/taser/mounted/cyborg(src)
-	src.modules += new /obj/item/weapon/gun/energy/taser/xeno/sec/robot(src)
+	// src.modules += new /obj/item/weapon/gun/energy/taser/xeno/sec/robot(src) // VOREStation Edit - We don't need these
 	src.modules += new /obj/item/taperoll/police(src)
 	src.modules += new /obj/item/weapon/reagent_containers/spray/pepper(src)
 	src.modules += new /obj/item/weapon/gripper/security(src)
@@ -753,7 +758,7 @@ var/global/list/robot_modules = list(
 	src.modules += new /obj/item/weapon/gun/energy/taser/xeno/robot(src)
 	src.modules += new /obj/item/device/xenoarch_multi_tool(src)
 	src.modules += new /obj/item/weapon/pickaxe/excavationdrill(src)
-	src.modules += new /obj/item/device/cataloguer(src)
+	//src.modules += new /obj/item/device/cataloguer(src) //VOREStation Removal
 
 	src.emag = new /obj/item/weapon/hand_tele(src)
 
@@ -797,7 +802,7 @@ var/global/list/robot_modules = list(
 /obj/item/weapon/robot_module/robot/security/combat/New()
 	..()
 	src.modules += new /obj/item/device/flash(src)
-	src.modules += new /obj/item/borg/sight/thermal(src)
+	//src.modules += new /obj/item/borg/sight/thermal(src) // VOREStation Edit
 	src.modules += new /obj/item/weapon/gun/energy/laser/mounted(src)
 	src.modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/borg/combat/shield(src)

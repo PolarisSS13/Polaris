@@ -41,6 +41,7 @@
 		client.fps = 0 // Results in using the server FPS
 
 	next_move = 1
+	disconnect_time = null				//VOREStation Addition: clear the disconnect time
 	sight |= SEE_SELF
 	..()
 

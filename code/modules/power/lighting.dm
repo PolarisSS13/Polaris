@@ -9,7 +9,7 @@
 #define LIGHT_BROKEN 2
 #define LIGHT_BURNED 3
 #define LIGHT_BULB_TEMPERATURE 400 //K - used value for a 60W bulb
-#define LIGHTING_POWER_FACTOR 5		//5W per luminosity * range
+#define LIGHTING_POWER_FACTOR 2		//5W per luminosity * range		//VOREStation Edit: why the fuck are lights eating so much power, 2W per thing
 #define LIGHT_EMERGENCY_POWER_USE 0.2 //How much power emergency lights will consume per tick
 
 var/global/list/light_type_cache = list()
@@ -204,7 +204,7 @@ var/global/list/light_type_cache = list()
 // the standard tube light fixture
 /obj/machinery/light
 	name = "light fixture"
-	icon = 'icons/obj/lighting.dmi'
+	icon = 'icons/obj/lighting_vr.dmi' //VOREStation Edit
 	var/base_state = "tube"		// base description and icon_state
 	icon_state = "tube1"
 	desc = "A lighting fixture."
@@ -213,7 +213,7 @@ var/global/list/light_type_cache = list()
 	layer = ABOVE_MOB_LAYER
 	use_power = USE_POWER_ACTIVE
 	idle_power_usage = 2
-	active_power_usage = 10		// Previously 20.
+	active_power_usage = 10
 	power_channel = LIGHT //Lights are calc'd via area so they dont need to be in the machine list
 	var/on = 0					// 1 if on, 0 if off
 	var/brightness_range
@@ -227,6 +227,11 @@ var/global/list/light_type_cache = list()
 								// this is used to calc the probability the light burns out
 
 	var/rigged = 0				// true if rigged to explode
+	//VOREStation Edit Start
+	var/needsound = FALSE		// Flag to prevent playing turn-on sound multiple times, and from playing at roundstart
+	var/shows_alerts = TRUE		// Flag for if this fixture should show alerts.  Make sure icon states exist!
+	var/current_alert = null	// Which alert are we showing right now?
+	//VOREStation Edit End
 
 	var/auto_flicker = FALSE // If true, will constantly flicker, so long as someone is around to see it (otherwise its a waste of CPU).
 
@@ -260,6 +265,7 @@ var/global/list/light_type_cache = list()
 	desc = "A small lighting fixture."
 	light_type = /obj/item/weapon/light/bulb
 	construct_type = /obj/machinery/light_construct/small
+	shows_alerts = FALSE	//VOREStation Edit
 
 /obj/machinery/light/small/flicker
 	auto_flicker = TRUE
@@ -271,6 +277,7 @@ var/global/list/light_type_cache = list()
 	start_with_cell = FALSE
 
 /obj/machinery/light/flamp
+	icon = 'icons/obj/lighting.dmi' //VOREStation Edit
 	icon_state = "flamp1"
 	base_state = "flamp"
 	plane = OBJ_PLANE
@@ -278,6 +285,7 @@ var/global/list/light_type_cache = list()
 	desc = "A floor lamp."
 	light_type = /obj/item/weapon/light/bulb
 	construct_type = /obj/machinery/light_construct/flamp
+	shows_alerts = FALSE	//VOREStation Edit
 	var/lamp_shade = 1
 
 /obj/machinery/light/flamp/New(atom/newloc, obj/machinery/light_construct/construct = null)
@@ -294,20 +302,26 @@ var/global/list/light_type_cache = list()
 /obj/machinery/light/flamp/flicker
 	auto_flicker = TRUE
 
-
 /obj/machinery/light/small/emergency
 	light_type = /obj/item/weapon/light/bulb/red
 
 /obj/machinery/light/small/emergency/flicker
 	auto_flicker = TRUE
 
-
 /obj/machinery/light/spot
 	name = "spotlight"
 	light_type = /obj/item/weapon/light/tube/large
+	shows_alerts = FALSE	//VOREStation Edit
 
 /obj/machinery/light/spot/flicker
 	auto_flicker = TRUE
+
+//VOREStation Add - Shadeless!
+/obj/machinery/light/flamp/noshade/New()
+	lamp_shade = 0
+	update(0)
+	..()
+//VOREStation Add End
 
 // create a new lighting fixture
 /obj/machinery/light/New(atom/newloc, obj/machinery/light_construct/construct = null)
@@ -342,7 +356,12 @@ var/global/list/light_type_cache = list()
 
 	switch(status)		// set icon_states
 		if(LIGHT_OK)
-			icon_state = "[base_state][on]"
+			//VOREStation Edit Start
+			if(shows_alerts && current_alert && on)
+				icon_state = "[base_state]-alert-[current_alert]"
+			else
+				icon_state = "[base_state][on]"
+			//VOREStation Edit End
 		if(LIGHT_EMPTY)
 			icon_state = "[base_state]-empty"
 			on = 0
@@ -373,11 +392,39 @@ var/global/list/light_type_cache = list()
 	else
 		base_state = "flamp"
 		..()
+//VOREStation Edit Start
+/obj/machinery/light/proc/set_alert_atmos()
+	if(shows_alerts)
+		current_alert = "atmos"
+		brightness_color = "#6D6DFC"
+		if(on)
+			update()
 
+/obj/machinery/light/proc/set_alert_fire()
+	if(shows_alerts)
+		current_alert = "fire"
+		brightness_color = "#FF3030"
+		if(on)
+			update()
 
+/obj/machinery/light/proc/reset_alert()
+	if(shows_alerts)
+		current_alert = null
+		brightness_color = initial(brightness_color) || "" // Workaround for BYOND stupidity. Can't set it to null or it won't clear.
+		if(on)
+			update()
+//VOREstation Edit End
 // update lighting
 /obj/machinery/light/proc/update(var/trigger = 1)
 	update_icon()
+	//VOREStation Edit Start
+	if(!on)
+		needsound = TRUE // Play sound next time we turn on
+	else if(needsound)
+		playsound(src, 'sound/effects/lighton.ogg', 65, 1)
+		needsound = FALSE // Don't play sound again until we've been turned off
+	//VOREStation Edit End
+
 	if(on)
 		var/correct_range = nightshift_enabled ? brightness_range_ns : brightness_range
 		var/correct_power = nightshift_enabled ? brightness_power_ns : brightness_power
@@ -852,7 +899,7 @@ var/global/list/light_type_cache = list()
 	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 
 	var/nightshift_range = 8
-	var/nightshift_power = 0.7
+	var/nightshift_power = 1
 	var/nightshift_color = LIGHT_COLOR_NIGHTSHIFT
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
@@ -864,7 +911,7 @@ var/global/list/light_type_cache = list()
 	base_state = "ltube"
 	item_state = "c_tube"
 	matter = list("glass" = 100)
-	brightness_range = 7	// luminosity when on, also used in power calculation
+	brightness_range = 10	// luminosity when on, also used in power calculation //VOREStation Edit
 	brightness_power = 6
 
 /obj/item/weapon/light/tube/large
@@ -874,7 +921,7 @@ var/global/list/light_type_cache = list()
 	brightness_power = 9
 
 	nightshift_range = 10
-	nightshift_power = 0.9
+	nightshift_power = 1.5
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -888,7 +935,7 @@ var/global/list/light_type_cache = list()
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 
 	nightshift_range = 3
-	nightshift_power = 0.35
+	nightshift_power = 0.5
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()

@@ -144,10 +144,8 @@
 	var/static/image/radial_image_lighttoggle = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_light")
 	var/static/image/radial_image_statpanel = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_examine2")
 
-	var/datum/mini_hud/mech/minihud
-
 //Mech actions
-
+	var/datum/mini_hud/mech/minihud //VOREStation Edit
 	var/strafing = 0 				//Are we strafing or not?
 
 	var/defence_mode_possible = 0 	//Can we even use defence mode? This is used to assign it to mechs and check for verbs.
@@ -210,7 +208,6 @@
 		for(var/path in starting_equipment)
 			var/obj/item/mecha_parts/mecha_equipment/ME = new path(src)
 			ME.attach(src)
-
 	update_transform()
 
 /obj/mecha/drain_power(var/drain_check)
@@ -324,8 +321,6 @@
 
 	if(smoke_possible)	//Just making sure nothing is running.
 		qdel(smoke_system)
-
-	GLOB.mech_destroyed_roundstat++
 
 	QDEL_NULL(pr_int_temp_processor)
 	QDEL_NULL(pr_inertial_movement)
@@ -569,12 +564,12 @@
 		target.attack_hand(src.occupant)
 		return 1
 	if(istype(target, /obj/machinery/embedded_controller))
-		target.ui_interact(src.occupant)
+		target.tgui_interact(src.occupant)
 		return 1
 	return 0
 
-/obj/mecha/contents_nano_distance(var/src_object, var/mob/living/user)
-	. = user.shared_living_nano_distance(src_object) //allow them to interact with anything they can interact with normally.
+/obj/mecha/contents_tgui_distance(var/src_object, var/mob/living/user)
+	. = user.shared_living_tgui_distance(src_object) //allow them to interact with anything they can interact with normally.
 	if(. != STATUS_INTERACTIVE)
 		//Allow interaction with the mecha or anything that is part of the mecha
 		if(src_object == src || (src_object in src))
@@ -1891,6 +1886,10 @@
 		src.verbs += /obj/mecha/verb/eject
 		src.log_append_to_last("[H] moved in as pilot.")
 		update_icon()
+		//VOREStation Edit Add
+		if(occupant.hud_used)
+			minihud = new (occupant.hud_used, src)
+		//VOREStation Edit Add End
 
 //This part removes all the verbs if you don't have them the _possible on your mech. This is a little clunky, but it lets you just add that to any mech.
 //And it's not like this 10yo code wasn't clunky before.
@@ -1913,8 +1912,6 @@
 			verbs -= /obj/mecha/verb/toggle_cloak
 
 		occupant.in_enclosed_vehicle = 1	//Useful for when you need to know if someone is in a mecho.
-		if(occupant.hud_used)
-			minihud = new (occupant.hud_used, src)
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
@@ -2236,9 +2233,15 @@
 			output += "Universal Module: [W.name] <a href='?src=\ref[W];detach=1'>Detach</a><br>"
 		for(var/obj/item/mecha_parts/mecha_equipment/W in special_equipment)
 			output += "Special Module: [W.name] <a href='?src=\ref[W];detach=1'>Detach</a><br>"
+		for(var/obj/item/mecha_parts/mecha_equipment/W in micro_utility_equipment) // VOREstation Edit -  Adds micro equipent to the menu
+			output += "Micro Utility Module: [W.name] <a href='?src=\ref[W];detach=1'>Detach</a><br>"
+		for(var/obj/item/mecha_parts/mecha_equipment/W in micro_weapon_equipment)
+			output += "Micro Weapon Module: [W.name] <a href='?src=\ref[W];detach=1'>Detach</a><br>"
 	output += {"<b>Available hull slots:</b> [max_hull_equip-hull_equipment.len]<br>
 	 <b>Available weapon slots:</b> [max_weapon_equip-weapon_equipment.len]<br>
+	 <b>Available micro weapon slots:</b> [max_micro_weapon_equip-micro_weapon_equipment.len]<br>
 	 <b>Available utility slots:</b> [max_utility_equip-utility_equipment.len]<br>
+	 <b>Available micro utility slots:</b> [max_micro_utility_equip-micro_utility_equipment.len]<br>
 	 <b>Available universal slots:</b> [max_universal_equip-universal_equipment.len]<br>
 	 <b>Available special slots:</b> [max_special_equip-special_equipment.len]<br>
 	 </div></div>
@@ -2263,6 +2266,16 @@
 						"}
 	output += "</body></html>"
 	return output
+
+/obj/mecha/proc/get_log_tgui()
+	var/list/data = list()
+	for(var/list/entry in log)
+		data.Add(list(list(
+			"time" = time2text(entry["time"], "DDD MMM DD hh:mm:ss"),
+			"year" = game_year,
+			"message" = entry["message"],
+		)))
+	return data
 
 
 /obj/mecha/proc/output_access_dialog(obj/item/weapon/card/id/id_card, mob/user)

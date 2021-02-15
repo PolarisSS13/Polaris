@@ -56,7 +56,7 @@
 	if(alien == IS_SLIME)
 		chem_effective = 0.75
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(6 * removed * chem_effective, 0)
+		M.heal_organ_damage(4 * removed * chem_effective, 0) //VOREStation Edit
 
 /datum/reagent/bicaridine/overdose(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -138,7 +138,7 @@
 		chem_effective = 0.5
 		M.adjustBruteLoss(2 * removed) //Mends burns, but has negative effects with a Promethean's skeletal structure.
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 6 * removed * chem_effective)
+		M.heal_organ_damage(0, 4 * removed * chem_effective) //VOREStation edit
 
 /datum/reagent/dermaline
 	name = "Dermaline"
@@ -156,7 +156,7 @@
 	if(alien == IS_SLIME)
 		chem_effective = 0.75
 	if(alien != IS_DIONA)
-		M.heal_organ_damage(0, 12 * removed * chem_effective)
+		M.heal_organ_damage(0, 8 * removed * chem_effective) //VOREStation edit
 
 /datum/reagent/dermaline/topical
 	name = "Dermalaze"
@@ -251,20 +251,21 @@
 	color = "#0080FF"
 	overdose = REAGENTS_OVERDOSE
 	scannable = 1
+	metabolism = REM * 0.25 //VOREStation Edit
 
 /datum/reagent/dexalin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_VOX)
-		M.adjustToxLoss(removed * 6)
+		M.adjustToxLoss(removed * 24) //VOREStation Edit
 	else if(alien == IS_SLIME && dose >= 15)
 		M.add_chemical_effect(CE_PAINKILLER, 15 * M.species.chem_strength_pain)
 		if(prob(15))
 			to_chat(M, "<span class='notice'>You have a moment of clarity as you collapse.</span>")
-			M.adjustBrainLoss(-5 * removed)
+			M.adjustBrainLoss(-20 * removed) //VOREStation Edit
 			M.Weaken(6)
 	else if(alien != IS_DIONA)
 		M.adjustOxyLoss(-15 * removed * M.species.chem_strength_heal)
 
-	holder.remove_reagent("lexorin", 2 * removed)
+	holder.remove_reagent("lexorin", 8 * removed) //VOREStation Edit
 
 /datum/reagent/dexalinp
 	name = "Dexalin Plus"
@@ -635,7 +636,7 @@
 			M.Weaken(5)
 		if(dose >= 10 && M.paralysis < 40)
 			M.AdjustParalysis(1) //Messing with the core with a simple chemical probably isn't the best idea.
-	M.adjustBrainLoss(-30 * removed * chem_effective)
+	M.adjustBrainLoss(-8 * removed * chem_effective) //VOREStation Edit
 	M.add_chemical_effect(CE_PAINKILLER, 10 * chem_effective * M.species.chem_strength_pain)
 
 /datum/reagent/imidazoline
@@ -733,7 +734,7 @@
 /datum/reagent/myelamine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	M.eye_blurry += min(M.eye_blurry + (repair_strength * removed), 250)
+	M.eye_blurry = min(M.eye_blurry + (repair_strength * removed), 250)
 	if(ishuman(M))
 		var/mob/living/carbon/human/H = M
 		var/wound_heal = removed * repair_strength
@@ -1204,7 +1205,7 @@
 		M.hallucination = max(M.hallucination, 10)
 
 	//One of the levofloxacin side effects is 'spontaneous tendon rupture', which I'll immitate here. 1:1000 chance, so, pretty darn rare.
-	if(ishuman(M) && rand(1,1000) == 1)
+	if(ishuman(M) && rand(1,10000) == 1) //VOREStation Edit (more rare)
 		var/obj/item/organ/external/eo = pick(H.organs) //Misleading variable name, 'organs' is only external organs
 		eo.fracture()
 
@@ -1290,6 +1291,12 @@
 		I.was_bloodied = null
 	for(var/obj/effect/decal/cleanable/blood/B in T)
 		qdel(B)
+
+	//VOREstation edit. Floor polishing.
+	if(istype(T, /turf/simulated))
+		var/turf/simulated/S = T
+		S.dirt = -50 
+	//VOREstation edit end	
 
 /datum/reagent/sterilizine/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))

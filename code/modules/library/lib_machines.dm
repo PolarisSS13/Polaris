@@ -173,14 +173,14 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 	var/dat = "<HEAD><TITLE>Book Inventory Management</TITLE></HEAD><BODY>\n" // <META HTTP-EQUIV='Refresh' CONTENT='10'>
 	switch(screenstate)
 		if(0)
-			// Main Menu
+			// Main Menu //VOREStation Edit start
 			dat += {"<A href='?src=\ref[src];switchscreen=1'>1. View General Inventory</A><BR>
 			<A href='?src=\ref[src];switchscreen=2'>2. View Checked Out Inventory</A><BR>
 			<A href='?src=\ref[src];switchscreen=3'>3. Check out a Book</A><BR>
-			<A href='?src=\ref[src];switchscreen=4'>4. Connect to NanoTrasen Archive</A><BR>
+			<A href='?src=\ref[src];switchscreen=4'>4. Connect to Internal Archive</A><BR>
 			<A href='?src=\ref[src];switchscreen=5'>5. Upload New Title to Archive</A><BR>
 			<A href='?src=\ref[src];switchscreen=6'>6. Print a Bible</A><BR>
-			<A href='?src=\ref[src];switchscreen=8'>8. Access Deprecated Archive</A><BR>"}
+			<A href='?src=\ref[src];switchscreen=8'>8. Access External Archive</A><BR>"} //VOREStation Edit end
 			if(src.emagged)
 				dat += "<A href='?src=\ref[src];switchscreen=7'>7. Access the Forbidden Lore Vault</A><BR>"
 			if(src.arcanecheckout)
@@ -226,7 +226,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			<A href='?src=\ref[src];checkout=1'>(Commit Entry)</A><BR>
 			<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"}
 		if(4)
-			dat += "<h3>NT Internal Archive</h3>"
+			dat += "<h3>Internal Archive</h3>"
 			if(!all_books || !all_books.len)
 				dat +=	"<font color=red><b>ERROR</b> Something has gone seriously wrong. Contact System Administrator for more information.</font>"
 			else
@@ -243,10 +243,10 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				dat += "</table>"
 			dat += "<BR><A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(5)
-			dat += "<H3>ERROR</H3>"
-			dat+= "<FONT color=red>Library Database is in Secure Management Mode.</FONT><BR>\
-			Contact a System Administrator for more information.<BR>"
-			/*
+			//dat += "<H3>ERROR</H3>" //VOREStation Removal
+			//dat+= "<FONT color=red>Library Database is in Secure Management Mode.</FONT><BR>\ //VOREStation Removal
+			//Contact a System Administrator for more information.<BR>" //VOREStation Removal
+			//VOREstation Edit Start
 			dat += "<H3>Upload a New Title</H3>"
 			if(!scanner)
 				for(var/obj/machinery/libraryscanner/S in range(9))
@@ -264,7 +264,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				dat += {"<TT>Author: </TT><A href='?src=\ref[src];setauthor=1'>[scanner.cache.author]</A><BR>
 				<TT>Category: </TT><A href='?src=\ref[src];setcategory=1'>[upload_category]</A><BR>
 				<A href='?src=\ref[src];upload=1'>\[Upload\]</A><BR>"}
-			*/
+			//VOREStation Edit End
 			dat += "<A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
 		if(7)
 			dat += {"<h3>Accessing Forbidden Lore Vault v 1.3</h3>
@@ -272,10 +272,10 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 			<A href='?src=\ref[src];arccheckout=1'>Yes.</A><BR>
 			<A href='?src=\ref[src];switchscreen=0'>No.</A><BR>"}
 		if(8)
-			dat += "<h3>Deprecated Archive</h3>"
+			dat += "<h3>External Archive</h3>" //VOREStation Edit
 			establish_old_db_connection()
 
-			dat += "<h3><font color=red>Warning: System Administrator has slated this archive for removal. Personal uploads should be taken to the NT board of internal literature.</font></h3>"
+			//dat += "<h3><font color=red>Warning: System Administrator has slated this archive for removal. Personal uploads should be taken to the NT board of internal literature.</font></h3>" //VOREStation Removal
 
 			if(!dbcon_old.IsConnected())
 				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact your system administrator for assistance.</font>"
@@ -338,11 +338,11 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 				if(!bibledelay)
 
 					var/obj/item/weapon/storage/bible/B = new /obj/item/weapon/storage/bible(src.loc)
-					if(ticker && ( ticker.Bible_icon_state && ticker.Bible_item_state) )
-						B.icon_state = ticker.Bible_icon_state
-						B.item_state = ticker.Bible_item_state
-						B.name = ticker.Bible_name
-						B.deity_name = ticker.Bible_deity_name
+					if(GLOB.religion)
+						B.icon_state = GLOB.bible_icon_state
+						B.item_state = GLOB.bible_item_state
+						B.name = GLOB.bible_name
+						B.deity_name = GLOB.deity
 
 					bibledelay = 1
 					spawn(60)
@@ -392,7 +392,8 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 		if(newcategory)
 			upload_category = newcategory
 
-/*	if(href_list["upload"])
+	//VOREStation Edit Start
+	if(href_list["upload"])
 		if(scanner)
 			if(scanner.cache)
 				var/choice = input("Are you certain you wish to upload this title to the Archive?") in list("Confirm", "Abort")
@@ -420,7 +421,7 @@ datum/borrowbook // Datum used to keep track of who has borrowed what when and f
 							else
 								log_game("[usr.name]/[usr.key] has uploaded the book titled [scanner.cache.name], [length(scanner.cache.dat)] signs")
 								alert("Upload Complete.")
-*/
+	//VOREStation Edit End
 
 	if(href_list["targetid"])
 		var/sqlid = sanitizeSQL(href_list["targetid"])

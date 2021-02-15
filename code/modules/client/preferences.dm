@@ -51,9 +51,9 @@ datum/preferences
 	var/g_facial = 0					//Face hair color
 	var/b_facial = 0					//Face hair color
 	var/s_tone = -75						//Skin tone
-	var/r_skin = 0						//Skin color
-	var/g_skin = 0						//Skin color
-	var/b_skin = 0						//Skin color
+	var/r_skin = 238					//Skin color // Vorestation edit, so color multi sprites can aren't BLACK AS THE VOID by default.
+	var/g_skin = 206					//Skin color // Vorestation edit, so color multi sprites can aren't BLACK AS THE VOID by default.
+	var/b_skin = 179					//Skin color // Vorestation edit, so color multi sprites can aren't BLACK AS THE VOID by default.
 	var/r_eyes = 0						//Eye color
 	var/g_eyes = 0						//Eye color
 	var/b_eyes = 0						//Eye color
@@ -69,7 +69,7 @@ datum/preferences
 	var/r_synth							//Used with synth_color to color synth parts that normaly can't be colored.
 	var/g_synth							//Same as above
 	var/b_synth							//Same as above
-	var/synth_markings = 0				//Enable/disable markings on synth parts.
+	var/synth_markings = 1				//Enable/disable markings on synth parts. //VOREStation Edit - 1 by default
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
@@ -80,7 +80,14 @@ datum/preferences
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
 
 		//Mob preview
-	var/icon/preview_icon = null
+	var/list/char_render_holders		//Should only be a key-value list of north/south/east/west = obj/screen.
+	var/static/list/preview_screen_locs = list(
+		"1" = "character_preview_map:2,7",
+		"2" = "character_preview_map:2,5",
+		"4"  = "character_preview_map:2,3",
+		"8"  = "character_preview_map:2,1",
+		"BG" = "character_preview_map:1,1 to 3,8"
+	)
 
 		//Jobs, uses bitflags
 	var/job_civilian_high = 0
@@ -165,6 +172,10 @@ datum/preferences
 				if(load_character())
 					return
 
+/datum/preferences/Destroy()
+	. = ..()
+	QDEL_LIST_ASSOC_VAL(char_render_holders)
+
 /datum/preferences/proc/ZeroSkills(var/forced = 0)
 	for(var/V in SKILLS) for(var/datum/skill/S in SKILLS[V])
 		if(!skills.Find(S.ID) || forced)
@@ -225,6 +236,10 @@ datum/preferences
 		close_load_dialog(user)
 		return
 
+	if(!char_render_holders)
+		update_preview_icon()
+	show_character_previews()
+
 	var/dat = "<html><body><center>"
 
 	if(path)
@@ -245,9 +260,50 @@ datum/preferences
 
 	dat += "</html></body>"
 	//user << browse(dat, "window=preferences;size=635x736")
-	var/datum/browser/popup = new(user, "Character Setup","Character Setup", 800, 800, src)
+	winshow(user, "preferences_window", TRUE)
+	var/datum/browser/popup = new(user, "preferences_browser", "Character Setup", 800, 800)
 	popup.set_content(dat)
-	popup.open()
+	popup.open(FALSE) // Skip registring onclose on the browser pane
+	onclose(user, "preferences_window", src) // We want to register on the window itself
+
+/datum/preferences/proc/update_character_previews(mutable_appearance/MA)
+	if(!client)
+		return
+
+	var/obj/screen/setup_preview/bg/BG = LAZYACCESS(char_render_holders, "BG")
+	if(!BG)
+		BG = new
+		BG.plane = TURF_PLANE
+		BG.icon = 'icons/effects/setup_backgrounds_vr.dmi'
+		BG.pref = src
+		LAZYSET(char_render_holders, "BG", BG)
+		client.screen |= BG
+	BG.icon_state = bgstate
+	BG.screen_loc = preview_screen_locs["BG"]
+
+	for(var/D in global.cardinal)
+		var/obj/screen/setup_preview/O = LAZYACCESS(char_render_holders, "[D]")
+		if(!O)
+			O = new
+			O.pref = src
+			LAZYSET(char_render_holders, "[D]", O)
+			client.screen |= O
+		O.appearance = MA
+		O.dir = D
+		O.screen_loc = preview_screen_locs["[D]"]
+
+/datum/preferences/proc/show_character_previews()
+	if(!client || !char_render_holders)
+		return
+	for(var/render_holder in char_render_holders)
+		client.screen |= char_render_holders[render_holder]
+
+/datum/preferences/proc/clear_character_previews()
+	for(var/index in char_render_holders)
+		var/obj/screen/S = char_render_holders[index]
+		client?.screen -= S
+		qdel(S)
+	char_render_holders = null
 
 /datum/preferences/proc/process_link(mob/user, list/href_list)
 	if(!user)	return
@@ -273,6 +329,7 @@ datum/preferences
 	else if(href_list["reload"])
 		load_preferences()
 		load_character()
+		attempt_vr(client.prefs_vr,"load_vore","") //VOREStation Edit
 		sanitize_preferences()
 	else if(href_list["load"])
 		if(!IsGuestKey(usr.key))
@@ -280,6 +337,7 @@ datum/preferences
 			return 1
 	else if(href_list["changeslot"])
 		load_character(text2num(href_list["changeslot"]))
+		attempt_vr(client.prefs_vr,"load_vore","") //VOREStation Edit
 		sanitize_preferences()
 		close_load_dialog(usr)
 	else if(href_list["resetslot"])
@@ -297,6 +355,10 @@ datum/preferences
 		overwrite_character(text2num(href_list["overwrite"]))
 		sanitize_preferences()
 		close_load_dialog(usr)
+	else if(href_list["close"])
+		// User closed preferences window, cleanup anything we need to.
+		clear_character_previews()
+		return 1
 	else
 		return 0
 
@@ -315,6 +377,9 @@ datum/preferences
 
 	// Ask the preferences datums to apply their own settings to the new mob
 	player_setup.copy_to_mob(character)
+
+	// VOREStation Edit - Sync up all their organs and species one final time
+	character.force_update_organs()
 
 	if(icon_updates)
 		character.force_update_limbs()
@@ -335,13 +400,15 @@ datum/preferences
 	if(S)
 		dat += "<b>Select a character slot to load</b><hr>"
 		var/name
+		var/nickname //vorestation edit - This set appends nicknames to the save slot
 		for(var/i=1, i<= config.character_slots, i++)
 			S.cd = "/character[i]"
 			S["real_name"] >> name
+			S["nickname"] >> nickname //vorestation edit
 			if(!name)	name = "Character[i]"
 			if(i==default_slot)
 				name = "<b>[name]</b>"
-			dat += "<a href='?src=\ref[src];changeslot=[i]'>[name]</a><br>"
+			dat += "<a href='?src=\ref[src];changeslot=[i]'>[name][nickname ? " ([nickname])" : ""]</a><br>" //vorestation edit
 
 	dat += "<hr>"
 	dat += "</center></tt>"

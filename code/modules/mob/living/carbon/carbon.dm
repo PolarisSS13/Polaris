@@ -32,7 +32,7 @@
 	ingested.clear_reagents()
 	touching.clear_reagents()
 	..()
-
+/* VOREStation Edit - Duplicated in our code
 /mob/living/carbon/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
 	if(src.nutrition && src.stat != 2)
@@ -72,7 +72,7 @@
 						A.loc = loc
 						stomach_contents.Remove(A)
 					src.gib()
-
+*/
 /mob/living/carbon/gib()
 	for(var/mob/M in src)
 		if(M in src.stomach_contents)
@@ -290,6 +290,7 @@
 				AdjustSleeping(-5)
 				if(src.sleeping == 0)
 					src.resting = 0
+				if(H) H.in_stasis = 0 //VOREStation Add - Just In Case
 				M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [T.him] up!</span>", \
 									"<span class='notice'>You shake [src] trying to wake [T.him] up!</span>")
 			else
@@ -370,6 +371,7 @@
 		update_inv_legcuffed()
 	else
 		..()
+
 
 //generates realistic-ish pulse output based on preset levels
 /mob/living/carbon/proc/get_pulse(var/method)	//method 0 is for hands, 1 is for machines, more accurate

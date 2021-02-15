@@ -23,6 +23,10 @@
 	var/toolmode = MULTITOOL_MODE_STANDARD
 	var/list/modes = list(MULTITOOL_MODE_STANDARD, MULTITOOL_MODE_INTCIRCUITS)
 
+	var/mode_index = 1
+	var/toolmode = MULTITOOL_MODE_STANDARD
+	var/list/modes = list(MULTITOOL_MODE_STANDARD, MULTITOOL_MODE_INTCIRCUITS)
+
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 	var/obj/machinery/telecomms/buffer // simple machine buffer for device linkage
 	var/obj/machinery/clonepod/connecting //same for cryopod linkage

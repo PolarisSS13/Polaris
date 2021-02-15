@@ -77,7 +77,7 @@
 #define DO_AUTOPILOT 5
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
-#define MAX_MESSAGE_LEN       1024
+#define MAX_MESSAGE_LEN       2048 //VOREStation Edit - I'm not sure about "easily". It can be a little longer.
 #define MAX_PAPER_MESSAGE_LEN 6144
 #define MAX_BOOK_MESSAGE_LEN  24576
 #define MAX_RECORD_LENGTH	  24576
@@ -99,6 +99,13 @@
 //Area flags, possibly more to come
 #define RAD_SHIELDED 1 //shielded from radiation, clearly
 
+// OnTopic return values
+#define TOPIC_NOACTION 0
+#define TOPIC_HANDLED 1
+#define TOPIC_REFRESH 2
+#define TOPIC_UPDATE_PREVIEW 4
+#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
+
 // Convoluted setup so defines can be supplied by Bay12 main server compile script.
 // Should still work fine for people jamming the icons into their repo.
 #ifndef CUSTOM_ITEM_OBJ
@@ -108,7 +115,7 @@
 #define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
 #ifndef CUSTOM_ITEM_SYNTH
-#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
+#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic_vr.dmi' //Vorestation edit
 #endif
 
 #define WALL_CAN_OPEN 1
@@ -152,14 +159,6 @@
 #define MAT_CHITIN			"chitin"
 #define MAT_CLOTH			"cloth"
 #define MAT_SYNCLOTH		"syncloth"
-#define MAT_COPPER			"copper"
-#define MAT_QUARTZ			"quartz"
-#define MAT_TIN				"tin"
-#define MAT_VOPAL			"void opal"
-#define MAT_ALUMINIUM		"aluminium"
-#define MAT_BRONZE			"bronze"
-#define MAT_PAINITE			"painite"
-#define MAT_BOROSILICATE	"borosilicate glass"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
@@ -228,7 +227,7 @@
 #define DEPARTMENT_RESEARCH			"Research"
 #define DEPARTMENT_CARGO			"Cargo"
 #define DEPARTMENT_CIVILIAN			"Civilian"
-#define DEPARTMENT_PLANET			"Planetside" // I hate having this be here and not in a SC file. Hopefully someday the manifest can be rewritten to be map-agnostic.
+#define DEPARTMENT_PLANET			"Exploration" //VOREStation Edit // I hate having this be here and not in a SC file. Hopefully someday the manifest can be rewritten to be map-agnostic.
 #define DEPARTMENT_SYNTHETIC		"Synthetic"
 
 // These are mostly for the department guessing code and event system.
@@ -296,6 +295,7 @@ var/global/list/##LIST_NAME = list();\
 	return ..();\
 	}\
 
+
 //'Normal'ness						 v								 v								 v
 //Various types of colorblindness	R2R		R2G		R2B		G2R		G2G		G2B		B2R		B2G		B2B
 #define MATRIX_Monochromia 		list(0.33,	0.33,	0.33,	0.59,	0.59,	0.59,	0.11,	0.11,	0.11)
@@ -359,46 +359,6 @@ var/global/list/##LIST_NAME = list();\
 #define JOB_SILICON			0x6 // 2|4, probably don't set jobs to this, but good for checking
 
 #define DEFAULT_OVERMAP_RANGE 0 // Makes general computers and devices be able to connect to other overmap z-levels on the same tile.
-
-
-//Various stuff used in Persistence
-
-#define send_output(target, msg, control) target << output(msg, control)
-
-#define send_link(target, url) target << link(url)
-
-#define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
-
-#define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
-
-#define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
-
-#define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
-
-#define FONT_SMALL(X) "<font size='1'>[X]</font>"
-
-#define FONT_NORMAL(X) "<font size='2'>[X]</font>"
-
-#define FONT_LARGE(X) "<font size='3'>[X]</font>"
-
-#define FONT_HUGE(X) "<font size='4'>[X]</font>"
-
-#define FONT_GIANT(X) "<font size='5'>[X]</font>"
-
-// Volume Channel Defines
-
-#define VOLUME_CHANNEL_MASTER "Master"
-#define VOLUME_CHANNEL_AMBIENCE "Ambience"
-#define VOLUME_CHANNEL_ALARMS "Alarms"
-#define VOLUME_CHANNEL_DOORS "Doors"
-
-// Make sure you update this or clients won't be able to adjust the channel
-GLOBAL_LIST_INIT(all_volume_channels, list(
-	VOLUME_CHANNEL_MASTER,
-	VOLUME_CHANNEL_AMBIENCE,
-	VOLUME_CHANNEL_ALARMS,
-	VOLUME_CHANNEL_DOORS,
-))
 
 /*
 	Used for wire name appearances. Replaces the color name on the left with the one on the right.
@@ -483,6 +443,54 @@ GLOBAL_LIST_INIT(all_volume_channels, list(
 		"pink"		= "lightgrey"		\
 	)
 
-#define NTOS_EMAIL_NONEWMESSAGES	0
-#define NTOS_EMAIL_NOTIFALREADY		1
-#define NTOS_EMAIL_NEWMESSAGE		2
+//Various stuff used in Persistence
+
+#define send_output(target, msg, control) target << output(msg, control)
+
+#define send_link(target, url) target << link(url)
+
+#define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
+
+#define SPAN_WARNING(X) "<span class='warning'>[X]</span>"
+
+#define SPAN_DANGER(X) "<span class='danger'>[X]</span>"
+
+#define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
+
+#define FONT_SMALL(X) "<font size='1'>[X]</font>"
+
+#define FONT_NORMAL(X) "<font size='2'>[X]</font>"
+
+#define FONT_LARGE(X) "<font size='3'>[X]</font>"
+
+#define FONT_HUGE(X) "<font size='4'>[X]</font>"
+
+#define FONT_GIANT(X) "<font size='5'>[X]</font>"
+
+// Volume Channel Defines
+
+#define VOLUME_CHANNEL_MASTER "Master"
+#define VOLUME_CHANNEL_AMBIENCE "Ambience"
+#define VOLUME_CHANNEL_ALARMS "Alarms"
+#define VOLUME_CHANNEL_VORE "Vore"
+#define VOLUME_CHANNEL_DOORS "Doors"
+
+// Make sure you update this or clients won't be able to adjust the channel
+GLOBAL_LIST_INIT(all_volume_channels, list(
+	VOLUME_CHANNEL_MASTER,
+	VOLUME_CHANNEL_AMBIENCE,
+	VOLUME_CHANNEL_ALARMS,
+	VOLUME_CHANNEL_VORE,
+	VOLUME_CHANNEL_DOORS,
+))
+
+#define APPEARANCECHANGER_CHANGED_RACE "Race"
+#define APPEARANCECHANGER_CHANGED_GENDER "Gender"
+#define APPEARANCECHANGER_CHANGED_GENDER_ID "Gender Identity"
+#define APPEARANCECHANGER_CHANGED_SKINTONE "Skin Tone"
+#define APPEARANCECHANGER_CHANGED_SKINCOLOR "Skin Color"
+#define APPEARANCECHANGER_CHANGED_HAIRSTYLE "Hair Style"
+#define APPEARANCECHANGER_CHANGED_HAIRCOLOR "Hair Color"
+#define APPEARANCECHANGER_CHANGED_F_HAIRSTYLE "Facial Hair Style"
+#define APPEARANCECHANGER_CHANGED_F_HAIRCOLOR "Facial Hair Color"
+#define APPEARANCECHANGER_CHANGED_EYES "Eye Color"

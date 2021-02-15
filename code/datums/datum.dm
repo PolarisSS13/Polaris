@@ -67,5 +67,5 @@
 	//END: ECS SHIT
 
 	tag = null
-	SSnanoui.close_uis(src)
+	SStgui.close_uis(src)
 	return QDEL_HINT_QUEUE

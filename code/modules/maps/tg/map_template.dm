@@ -99,6 +99,7 @@
 	//initialize things that are normally initialized after map load
 	initTemplateBounds(bounds)
 	log_game("Z-level [name] loaded at at [x],[y],[world.maxz]")
+	on_map_loaded(world.maxz) //VOREStation Edit
 	return TRUE
 
 /datum/map_template/proc/load(turf/T, centered = FALSE, orientation = 0)
@@ -233,8 +234,8 @@
 				orientation = pick(list(0, 90, 180, 270))
 
 			chosen_template.preload_size(chosen_template.mappath, orientation)
-			var/width_border = TRANSITIONEDGE + SUBMAP_MAP_EDGE_PAD + round(((orientation%180) ? chosen_template.height : chosen_template.width) / 2) // %180 catches East/West (90,270) rotations on true, North/South (0,180) rotations on false
-			var/height_border = TRANSITIONEDGE + SUBMAP_MAP_EDGE_PAD + round(((orientation%180) ? chosen_template.width : chosen_template.height) / 2)
+			var/width_border = SUBMAP_MAP_EDGE_PAD + round(((orientation%180) ? chosen_template.height : chosen_template.width) / 2) // %180 catches East/West (90,270) rotations on true, North/South (0,180) rotations on false		//VOREStation Edit
+			var/height_border = SUBMAP_MAP_EDGE_PAD + round(((orientation%180) ? chosen_template.width : chosen_template.height) / 2)																									//VOREStation Edit
 			var/z_level = pick(z_levels)
 			var/turf/T = locate(rand(width_border, world.maxx - width_border), rand(height_border, world.maxy - height_border), z_level)
 			var/valid = TRUE

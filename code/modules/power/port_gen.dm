@@ -2,8 +2,8 @@
 /obj/machinery/power/port_gen
 	name = "Placeholder Generator"	//seriously, don't use this. It can't be anchored without VV magic.
 	desc = "A portable generator for emergency backup power"
-	icon = 'icons/obj/power.dmi'
-	icon_state = "portgen0"
+	icon = 'icons/obj/power_vr.dmi' //VOREStation Edit
+	icon_state = "portgen0" //VOREStation Edit
 	density = 1
 	anchored = 0
 	use_power = USE_POWER_OFF

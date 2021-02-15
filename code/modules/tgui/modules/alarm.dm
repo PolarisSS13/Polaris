@@ -13,6 +13,11 @@
 	..()
 	alarm_handlers = SSalarm.all_handlers
 
+// Subtype for glasses_state
+/datum/tgui_module/alarm_monitor/all/glasses
+/datum/tgui_module/alarm_monitor/all/glasses/tgui_state(mob/user)
+	return GLOB.tgui_glasses_state
+
 /datum/tgui_module/alarm_monitor/all/robot
 /datum/tgui_module/alarm_monitor/all/robot/tgui_state(mob/user)
 	return GLOB.tgui_self_state
@@ -21,6 +26,16 @@
 /datum/tgui_module/alarm_monitor/engineering/New()
 	..()
 	alarm_handlers = list(atmosphere_alarm, fire_alarm, power_alarm)
+
+// Subtype for glasses_state
+/datum/tgui_module/alarm_monitor/engineering/glasses
+/datum/tgui_module/alarm_monitor/engineering/glasses/tgui_state(mob/user)
+	return GLOB.tgui_glasses_state
+
+// Subtype for nif_state
+/datum/tgui_module/alarm_monitor/engineering/nif
+/datum/tgui_module/alarm_monitor/engineering/nif/tgui_state(mob/user)
+	return GLOB.tgui_nif_state
 
 // Subtype for NTOS
 /datum/tgui_module/alarm_monitor/engineering/ntos
@@ -31,6 +46,10 @@
 	..()
 	alarm_handlers = list(camera_alarm, motion_alarm)
 
+// Subtype for glasses_state
+/datum/tgui_module/alarm_monitor/security/glasses
+/datum/tgui_module/alarm_monitor/security/glasses/tgui_state(mob/user)
+	return GLOB.tgui_glasses_state
 
 // Subtype for NTOS
 /datum/tgui_module/alarm_monitor/security/ntos

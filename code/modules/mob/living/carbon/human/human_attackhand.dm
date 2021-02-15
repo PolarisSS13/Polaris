@@ -2,6 +2,15 @@
 	var/datum/unarmed_attack/default_attack
 
 /mob/living/carbon/human/proc/get_unarmed_attack(var/mob/living/carbon/human/target, var/hit_zone)
+	// VOREStation Edit - Begin
+	if(nif && nif.flag_check(NIF_C_HARDCLAWS,NIF_FLAGS_COMBAT)){return unarmed_hardclaws}
+	if(src.default_attack && src.default_attack.is_usable(src, target, hit_zone))
+		if(pulling_punches)
+			var/datum/unarmed_attack/soft_type = src.default_attack.get_sparring_variant()
+			if(soft_type)
+				return soft_type
+		return src.default_attack
+	// VOREStation Edit - End
 	if(src.gloves)
 		var/obj/item/clothing/gloves/G = src.gloves
 		if(istype(G) && G.special_attack && G.special_attack.is_usable(src, target, hit_zone))
@@ -61,6 +70,11 @@
 
 	switch(M.a_intent)
 		if(I_HELP)
+
+			// VOREStation Edit - Begin
+			if (istype(H) && attempt_to_scoop(H))
+				return 0;
+			// VOREStation Edit - End
 			if(istype(H) && health < config.health_threshold_crit)
 				if(!H.check_has_mouth())
 					to_chat(H, "<span class='danger'>You don't have a mouth, you cannot perform CPR!</span>")
@@ -121,7 +135,9 @@
 
 			H.do_attack_animation(src)
 			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			visible_message("<span class='warning'>[M] has grabbed [src][(M.zone_sel.selecting == "l_hand" || M.zone_sel.selecting == "r_hand")? " by their hands!":" passively!"]</span>")
+			//VORESTATION EDIT
+			visible_message("<span class='warning'>[M] has grabbed [src] [(M.zone_sel.selecting == BP_L_HAND || M.zone_sel.selecting == BP_R_HAND)? "by [(gender==FEMALE)? "her" : ((gender==MALE)? "his": "their")] hands": "passively"]!</span>")
+			//VORESTATION END END
 			return TRUE
 
 		if(I_HURT)

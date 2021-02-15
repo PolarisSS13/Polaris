@@ -7,6 +7,7 @@
 /obj/item/weapon/storage/quickdraw
 	name = "quickdraw"
 	desc = "This object should not appear"
+	icon = 'icons/obj/storage_vr.dmi' // VOREStation Edit
 
 	//Quickmode
 	//When set to 0, this storage will operate as a regular storage, and clicking on it while equipped will open it as a storage

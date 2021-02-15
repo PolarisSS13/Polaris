@@ -1,7 +1,7 @@
 /obj/machinery/meter
 	name = "meter"
 	desc = "It measures something."
-	icon = 'icons/obj/meter.dmi'
+	icon = 'icons/obj/meter_vr.dmi'
 	icon_state = "meterX"
 	var/obj/machinery/atmospherics/pipe/target = null
 	var/list/pipes_on_turf = list()
@@ -96,9 +96,11 @@
 
 /obj/machinery/meter/Click()
 
-	if(istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
-		usr.examinate(src)
-		return 1
+	if(istype(usr, /mob/living/carbon/human) || istype(usr, /mob/living/silicon/ai)) // ghosts can call ..() for examine
+		var/mob/living/L = usr
+		if(!L.get_active_hand() || !L.Adjacent(src))
+			usr.examinate(src)
+			return 1
 
 	return ..()
 

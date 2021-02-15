@@ -22,7 +22,11 @@
 		to_chat(usr, "<font color='red'>Speech is currently admin-disabled.</font>")
 		return
 
-	message = sanitize(message)
+	//VOREStation Edit Start
+	if(muffled)
+		return me_verb_subtle(message)
+	message = sanitize_or_reflect(message,src) //VOREStation Edit - Reflect too-long messages (within reason)
+	//VOREStation Edit End
 
 	set_typing_indicator(FALSE)
 	if(use_me)
@@ -149,7 +153,7 @@
 	var/list/prefixes = list() // [["Common", start, end], ["Gutter", start, end]]
 	for(var/i in 1 to length(message))
 		// This grabs 3 character substrings, to allow for up to 1 prefix, 1 letter language key, and one post-key character to more strictly control where the language breaks happen
-		var/selection = lowertext(copytext(message, i, i + 3))
+		var/selection = trim_right(copytext(message, i, i + 3)) // VOREStation Edit: We use uppercase keys to avoid Polaris key duplication, but this had lowertext() in it
 		// The first character in the selection will always be the prefix (if this is a valid language invocation)
 		var/prefix = copytext(selection, 1, 2)
 		var/language_key = copytext(selection, 2, 3)

@@ -1,5 +1,5 @@
 proc/createRandomZlevel()
-	if(awaydestinations.len)	//crude, but it saves another var!
+	if(awaydestinations.len || UNIT_TEST)	//crude, but it saves another var! //VOREStation Edit - No loading away missions during CI testing
 		return
 
 	var/list/potentialRandomZlevels = list()
@@ -38,19 +38,54 @@ proc/createRandomZlevel()
 		admin_notice("<font color='red'><B>Loading away mission...</B></font>", R_DEBUG)
 
 		var/map = pick(potentialRandomZlevels)
+		to_world_log("Away mission picked: [map]") //VOREStation Add for debugging
 		var/file = file(map)
 		if(isfile(file))
 			var/datum/map_template/template = new(file, "away mission")
 			template.load_new_z()
 			to_world_log("away mission loaded: [map]")
-
+		/* VOREStation Removal - We do this in the special landmark init instead.
 		for(var/obj/effect/landmark/L in landmarks_list)
 			if (L.name != "awaystart")
 				continue
 			awaydestinations.Add(L)
-
+		*/ //VOREStation Removal End
 		admin_notice("<font color='red'><B>Away mission loaded.</B></font>", R_DEBUG)
 
 	else
 		admin_notice("<font color='red'><B>No away missions found.</B></font>", R_DEBUG)
 		return
+
+//VOREStation Add - This landmark type so it's not so ghetto.
+/obj/effect/landmark/gateway_scatter
+	name = "uncalibrated gateway destination"
+/obj/effect/landmark/gateway_scatter/Initialize()
+	. = ..()
+	awaydestinations += src
+
+/obj/effect/landmark/gateway_scatter/abduct
+	name = "uncalibrated gateway abductor"
+	abductor = 1
+
+/obj/effect/landmark/event_scatter
+	name = "uncalibrated event destination"
+/obj/effect/landmark/event_scatter/Initialize()
+	. = ..()
+	eventdestinations += src
+
+/obj/effect/landmark/event_scatter/abduct
+	name = "uncalibrated event abductor"
+	abductor = 1
+
+/obj/effect/landmark/gateway_abduct_dest
+	name = "abductor gateway destination"
+/obj/effect/landmark/gateway_abduct_dest/Initialize()
+	. = ..()
+	awayabductors += src
+
+/obj/effect/landmark/event_abduct_dest
+	name = "abductor event destination"
+/obj/effect/landmark/event_abduct_dest/Initialize()
+	. = ..()
+	eventabductors += src
+//VOREStation Add End

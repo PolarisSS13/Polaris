@@ -418,8 +418,8 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		var/samejob = alert(src,"Found [picked_client.prefs.real_name] in data core. They were [record_found.fields["real_rank"]] this round. Assign same job? They will not be re-added to the manifest/records, either way.","Previously spawned","Yes","Assistant","No")
 		if(samejob == "Yes")
 			charjob = record_found.fields["real_rank"]
-		else if(samejob == "Assistant")
-			charjob = "Assistant"
+		else if(samejob == USELESS_JOB) //VOREStation Edit - Visitor not Assistant
+			charjob = USELESS_JOB //VOREStation Edit - Visitor not Assistant
 	else
 		records = alert(src,"No data core entry detected. Would you like add them to the manifest, and sec/med/HR records?","Records","Yes","No","Cancel")
 		if(records == "Cancel")
@@ -451,18 +451,24 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	//For logging later
 	var/admin = key_name_admin(src)
 	var/player_key = picked_client.key
+	//VOREStation Add - Needed for persistence
+	var/picked_ckey = picked_client.ckey
+	var/picked_slot = picked_client.prefs.default_slot
+	//VOREStation Add End
 
 	var/mob/living/carbon/human/new_character
 	var/spawnloc
+	var/sparks
 
 	//Where did you want to spawn them?
 	switch(location)
 		if("Right Here") //Spawn them on your turf
-			if(!src.mob)
-				to_chat(src, "You can't use 'Right Here' when you are not 'Right Anywhere'!")
-				return
-
 			spawnloc = get_turf(src.mob)
+			sparks = alert(src,"Sparks like they teleported in?", "Showy", "Yes", "No", "Cancel")
+			if(sparks == "Cancel")
+				return
+			if(sparks == "No")
+				sparks = FALSE
 
 		if("Arrivals") //Spawn them at a latejoin spawnpoint
 			spawnloc = pick(latejoin)
@@ -477,6 +483,14 @@ Traitors and the like can also be revived with the previous role mostly intact.
 		return
 
 	new_character = new(spawnloc)
+	
+	if(sparks)
+		anim(spawnloc,new_character,'icons/mob/mob.dmi',,"phasein",,new_character.dir)
+		playsound(spawnloc, "sparks", 50, 1)
+		var/datum/effect/effect/system/spark_spread/spk = new(new_character)
+		spk.set_up(5, 0, new_character)
+		spk.attach(new_character)
+		spk.start()
 
 	//We were able to spawn them, right?
 	if(!new_character)
@@ -497,11 +511,23 @@ Traitors and the like can also be revived with the previous role mostly intact.
 				antag_data.add_antagonist(new_character.mind)
 				antag_data.place_mob(new_character)
 
+	//VOREStation Add - Required for persistence
+	if(new_character.mind)
+		new_character.mind.loaded_from_ckey = picked_ckey
+		new_character.mind.loaded_from_slot = picked_slot
+
+	for(var/lang in picked_client.prefs.alternate_languages)
+		var/datum/language/chosen_language = GLOB.all_languages[lang]
+		if(chosen_language)
+			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
+				new_character.add_language(lang)
+	//VOREStation Add End
+
 	//If desired, apply equipment.
 	if(equipment)
 		if(charjob)
 			job_master.EquipRank(new_character, charjob, 1)
-		equip_custom_items(new_character)
+		//equip_custom_items(new_character)	//VOREStation Removal
 
 	//If desired, add records.
 	if(records)
@@ -628,7 +654,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "Explosion"
 
-	if(!check_rights(R_DEBUG|R_FUN|R_EVENT))	return
+	if(!check_rights(R_DEBUG|R_FUN))	return //VOREStation Edit
 
 	var/devastation = input("Range of total devastation. -1 to none", text("Input"))  as num|null
 	if(devastation == null) return
@@ -656,7 +682,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "EM Pulse"
 
-	if(!check_rights(R_DEBUG|R_FUN|R_EVENT))	return
+	if(!check_rights(R_DEBUG|R_FUN))	return //VOREStation Edit
 
 	var/heavy = input("Range of heavy pulse.", text("Input"))  as num|null
 	if(heavy == null) return
@@ -682,7 +708,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Special Verbs"
 	set name = "Gib"
 
-	if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
+	if(!check_rights(R_ADMIN|R_FUN))	return //VOREStation Edit
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm != "Yes") return
@@ -781,6 +807,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 /client/proc/cmd_admin_check_contents(mob/living/M as mob in mob_list)
 	set category = "Special Verbs"
 	set name = "Check Contents"
+	set popup_menu = FALSE //VOREStation Edit - Declutter.
 
 	if(!holder)
 		return
@@ -848,7 +875,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if ((!( ticker ) || !emergency_shuttle.location()))
 		return
 
-	if(!check_rights(R_ADMIN|R_EVENT))	return
+	if(!check_rights(R_ADMIN))	return //VOREStation Edit
 
 	var/confirm = alert(src, "You sure?", "Confirm", "Yes", "No")
 	if(confirm != "Yes") return
@@ -877,7 +904,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set category = "Admin"
 	set name = "Cancel Shuttle"
 
-	if(!check_rights(R_ADMIN|R_EVENT))	return
+	if(!check_rights(R_ADMIN))	return //VOREStation Edit
 
 	if(alert(src, "You sure?", "Confirm", "Yes", "No") != "Yes") return
 
@@ -898,7 +925,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	if (!ticker)
 		return
 
-	if(!check_rights(R_ADMIN|R_EVENT))	return
+	if(!check_rights(R_ADMIN))	return //VOREStation Edit
 
 	emergency_shuttle.deny_shuttle = !emergency_shuttle.deny_shuttle
 
@@ -954,7 +981,7 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	set name = "Toggle random events on/off"
 	set desc = "Toggles random events such as meteors, black holes, blob (but not space dust) on/off"
 
-	if(!check_rights(R_SERVER|R_EVENT))	return
+	if(!check_rights(R_SERVER))	return //VOREStation Edit
 
 	if(!config.allow_random_events)
 		config.allow_random_events = 1

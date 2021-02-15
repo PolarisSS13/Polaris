@@ -16,7 +16,7 @@
 	active_power_usage = 500
 	circuit = /obj/item/weapon/circuitboard/xenobio2computer
 	var/obj/machinery/xenobio2/manualinjector/injector
-	var/transfer_amount
+	var/transfer_amount = 5 //VOREStation Edit - This is never set anywhere, and 1 is too slow (1 is the default in the transfer proc).
 	var/active
 
 /obj/machinery/computer/xenobio2/Destroy()
@@ -59,7 +59,7 @@
 	if(injector.occupant)
 		data["occupied"] = 1
 	if(isxeno(injector.occupant))
-		var/mob/living/simple_animal/xeno/X = injector.occupant
+		var/mob/living/simple_mob/xeno/X = injector.occupant
 		data["compatible"] = 1
 		data["instability"] = 100 * (X.mut_level / X.mut_max)
 	else

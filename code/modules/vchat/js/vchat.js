@@ -137,7 +137,7 @@ function start_vue() {
 			//The table to map game css classes to our vchat categories
 			type_table: [
 				{
-					matches: ".filter_say, .say, .emote",
+					matches: ".filter_say, .say, .emote, .emote_subtle", //VOREStation Edit
 					becomes: "vc_localchat",
 					pretty: "Local Chat",
 					tooltip: "In-character local messages (say, emote, etc)",
@@ -184,6 +184,16 @@ function start_vue() {
 					required: false,
 					admin: false
 				},
+				//VOREStation Add Start
+				{
+					matches: ".nif",
+					becomes: "vc_nif",
+					pretty: "NIF Messages",
+					tooltip: "Messages from the NIF itself and people inside",
+					required: false,
+					admin: false
+				},
+				//VOREStation Add End
 				{
 					matches: ".filter_pm, .pm",
 					becomes: "vc_adminpm",
@@ -702,7 +712,7 @@ function start_vue() {
 					hiddenElement.target = '_blank';
 					hiddenElement.download = filename;
 					hiddenElement.click();
-        		//Probably what will end up getting used
+				//Probably what will end up getting used
 				} else {
 					var blob = new Blob([textToSave], {type: 'text/html;charset=utf8;'});
 					saved = window.navigator.msSaveOrOpenBlob(blob, filename);

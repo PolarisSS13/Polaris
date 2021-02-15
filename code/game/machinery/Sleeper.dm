@@ -1,11 +1,11 @@
 /obj/machinery/sleep_console
 	name = "sleeper console"
 	desc = "A control panel to operate a linked sleeper with."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/Cryogenic2_vr.dmi' //VOREStation Edit - Better icon.
 	icon_state = "sleeperconsole"
 	var/obj/machinery/sleeper/sleeper
 	anchored = 1 //About time someone fixed this.
-	density = 0
+	density = 1 //VOREStation Edit - Big console
 	dir = 8
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 40
@@ -30,7 +30,7 @@
 		if(sleepernew)
 			sleeper = sleepernew
 			sleepernew.console = src
-			set_dir(get_dir(src, sleepernew))
+			break //VOREStation Edit
 
 
 /obj/machinery/sleep_console/attack_ai(var/mob/user)
@@ -85,7 +85,7 @@
 /obj/machinery/sleeper
 	name = "sleeper"
 	desc = "A stasis pod with built-in injectors, a dialysis machine, and a limited health scanner."
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/Cryogenic2_vr.dmi' //VOREStation Edit - Better icons
 	icon_state = "sleeper_0"
 	density = 1
 	anchored = 1

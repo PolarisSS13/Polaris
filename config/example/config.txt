@@ -408,11 +408,9 @@ STARLIGHT 0
 ## Defines how Law Zero is phrased. Primarily used in the Malfunction gamemode.
 # LAW_ZERO ERROR ER0RR $R0RRO$!R41.%%!!(%$^^__+ @#F0E4'STATION OVERRUN, ASSUME CONTROL TO CONTAIN OUTBREAK, ALL LAWS OVERRIDDEN#*?&110010
 
-
 ## Enables specific procedural map generation, generally for mining, however it is specific to the loaded map.  Uncomment to enable it, however it can
 ## worth it to keep it disabled if you are not hosting an actual server, to speed up start-up time for testing code.
 # GENERATE_MAP
-
 
 ## Uncomment to enable organ decay outside of a body or storage item.
 #ORGANS_CAN_DECAY
@@ -425,6 +423,22 @@ STARLIGHT 0
 
 ## Default language prefix keys, separated with spaces. Only single character keys are supported. If unset, defaults to , and # 
 # DEFAULT_LANGUAGE_PREFIXES , #
+
+# Control which submaps are loaded for the Dynamic Engine system
+ENGINE_MAP Supermatter Engine,Edison's Bane
+
+# Controls if the 'time off' system is used for determining if players can play 'Off-Duty' jobs (requires SQL)
+# TIME_OFF
+
+# If 'time off' system is on, controls whether or not players can switch on/off duty midround using timeclocks
+# PTO_JOB_CHANGE
+
+# Forbids players from joining if they have no set General flavor text
+# REQUIRE_FLAVOR
+
+# Applies a limit to the number of assistants and visitors respectively
+# LIMIT_INTERNS 6
+# LIMIT_VISITORS 6
 
 ## Uncomment to enable the Panic Bunker by default. This will prevent all unseen-before players from connecting. Requires SQL.
 # PANIC_BUNKER
@@ -462,7 +476,6 @@ RADIATION_RESISTANCE_MULTIPLIER 2.1
 
 ## Divisor for material weights when computing radiation resistance of a material object (walls)
 RADIATION_MATERIAL_RESISTANCE_DIVISOR 16
-
 
 ## Mode of computing radiation resistance into effective radiation on a turf
 ## One and only one of the following options must be uncommented
@@ -530,8 +543,11 @@ SQLITE_FEEDBACK_MIN_AGE 7
 
 ## Comment this out if you don't want to use the 'nightshift lighting' subsystem to adjust lights based on ingame time
 ENABLE_NIGHT_SHIFTS
-## OOC/LOOC control ##
 
+## Comment this out to enable playtime restrictions for jobs in their respective departments (mostly for heads)
+# USE_PLAYTIME_RESTRICTION_FOR_JOBS
+
+## OOC/LOOC control ##
 # Uncomment to allow links of the following kinds. #
 # ALLOW_BYOND_LINKS
 # ALLOW_DISCORD_LINKS

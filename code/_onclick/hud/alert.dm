@@ -425,6 +425,7 @@ so as to remain in compliance with the most up-to-date laws."
 		
 		if(alert.icon_state in cached_icon_states(ui_style))
 			alert.icon = ui_style
+		
 		else if(!alert.no_underlay)
 			var/image/I = image(icon = ui_style, icon_state = "template")
 			I.color = ui_color

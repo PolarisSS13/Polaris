@@ -30,7 +30,7 @@
 	. = speed
 
 	if(module_active && istype(module_active,/obj/item/borg/combat/mobility))
-		. -= 3
+		. -= 2 // VOREStation Edit
 
 	. += config.robot_delay
 

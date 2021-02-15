@@ -41,21 +41,20 @@
 	error = "Invalid Login"
 	return 0
 
-// Returns NTOS_EMAIL_NONEWMESSAGES if no new messages were received
-// NTOS_EMAIL_NOTIFALREADY if there is an unread message but notification has already been sent.
-// NTOS_EMAIL_NEWMESSAGE if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
+// Returns 0 if no new messages were received, 1 if there is an unread message but notification has already been sent.
+// and 2 if there is a new message that appeared in this tick (and therefore notification should be sent by the program).
 /datum/tgui_module/email_client/proc/check_for_new_messages(var/messages_read = FALSE)
 	if(!current_account)
-		return NTOS_EMAIL_NONEWMESSAGES
+		return 0
 
 	var/list/allmails = current_account.all_emails()
 
 	if(allmails.len > last_message_count)
-		. = NTOS_EMAIL_NEWMESSAGE
+		. = 2
 	else if(allmails.len > read_message_count)
-		. = NTOS_EMAIL_NOTIFALREADY
+		. = 1
 	else
-		. = NTOS_EMAIL_NONEWMESSAGES
+		. = 0
 
 	last_message_count = allmails.len
 	if(messages_read)
@@ -234,46 +233,46 @@
 		return TRUE
 	
 	var/mob/living/user = usr
-	check_for_new_messages(TRUE)		// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
+	check_for_new_messages(1)		// Any actual interaction (button pressing) is considered as acknowledging received message, for the purpose of notification icons.
 	
 	switch(action)
 		if("login")
 			log_in()
-			return TRUE
+			return 1
 
 		if("logout")
 			log_out()
-			return TRUE
+			return 1
 
 		if("reset")
 			error = ""
-			return TRUE
+			return 1
 
 		if("new_message")
 			new_message = TRUE
-			return TRUE
+			return 1
 
 		if("cancel")
 			if(addressbook)
 				addressbook = FALSE
 			else
 				clear_message()
-			return TRUE
+			return 1
 
 		if("addressbook")
 			addressbook = TRUE
-			return TRUE
+			return 1
 
 		if("set_recipient")
 			msg_recipient = sanitize(params["set_recipient"])
 			addressbook = FALSE
-			return TRUE
+			return 1
 
 		if("edit_title")
 			var/newtitle = sanitize(params["val"], 100)
 			if(newtitle)
 				msg_title = newtitle
-			return TRUE
+			return 1
 
 		// This uses similar editing mechanism as the FileManager program, therefore it supports various paper tags and remembers formatting.
 		if("edit_body")
@@ -283,32 +282,32 @@
 			var/newtext = sanitize(replacetext(input(usr, "Enter your message. You may use most tags from paper formatting", "Message Editor", oldtext) as message|null, "\n", "\[editorbr\]"), 20000)
 			if(newtext)
 				msg_body = newtext
-			return TRUE
+			return 1
 
 		if("edit_recipient")
 			var/newrecipient = sanitize(params["val"], 100)
 			if(newrecipient)
 				msg_recipient = newrecipient
-			return TRUE
+			return 1
 
 		if("edit_login")
 			var/newlogin = sanitize(params["val"], 100)
 			if(newlogin)
 				stored_login = newlogin
-			return TRUE
+			return 1
 
 		if("edit_password")
 			var/newpass = sanitize(params["val"], 100)
 			if(newpass)
 				stored_password = newpass
-			return TRUE
+			return 1
 
 		if("delete")
 			if(!istype(current_account))
-				return TRUE
+				return 1
 			var/datum/computer_file/data/email_message/M = find_message_by_fuid(params["delete"])
 			if(!istype(M))
-				return TRUE
+				return 1
 			if(folder == "Deleted")
 				current_account.deleted.Remove(M)
 				qdel(M)
@@ -318,14 +317,14 @@
 				current_account.spam.Remove(M)
 			if(current_message == M)
 				current_message = null
-			return TRUE
+			return 1
 
 		if("send")
 			if(!current_account)
-				return TRUE
+				return 1
 			if((msg_title == "") || (msg_body == "") || (msg_recipient == ""))
 				error = "Error sending mail: Title or message body is empty!"
-				return TRUE
+				return 1
 
 			var/datum/computer_file/data/email_message/message = new()
 			message.title = msg_title
@@ -334,61 +333,61 @@
 			message.attachment = msg_attachment
 			if(!current_account.send_mail(msg_recipient, message))
 				error = "Error sending email: this address doesn't exist."
-				return TRUE
+				return 1
 			else
 				error = "Email successfully sent."
 				clear_message()
-				return TRUE
+				return 1
 
 		if("set_folder")
 			folder = params["set_folder"]
-			return TRUE
+			return 1
 
 		if("reply")
 			var/datum/computer_file/data/email_message/M = find_message_by_fuid(params["reply"])
 			if(!istype(M))
-				return TRUE
+				return 1
 
 			new_message = TRUE
 			msg_recipient = M.source
 			msg_title = "Re: [M.title]"
 			msg_body = "\[editorbr\]\[editorbr\]\[editorbr\]\[br\]==============================\[br\]\[editorbr\]"
 			msg_body += "Received by [current_account.login] at [M.timestamp]\[br\]\[editorbr\][M.stored_data]"
-			return TRUE
+			return 1
 
 		if("view")
 			var/datum/computer_file/data/email_message/M = find_message_by_fuid(params["view"])
 			if(istype(M))
 				current_message = M
-			return TRUE
+			return 1
 
 		if("changepassword")
 			var/oldpassword = sanitize(input(user,"Please enter your old password:", "Password Change"), 100)
 			if(!oldpassword)
-				return TRUE
+				return 1
 			var/newpassword1 = sanitize(input(user,"Please enter your new password:", "Password Change"), 100)
 			if(!newpassword1)
-				return TRUE
+				return 1
 			var/newpassword2 = sanitize(input(user,"Please re-enter your new password:", "Password Change"), 100)
 			if(!newpassword2)
-				return TRUE
+				return 1
 
 			if(!istype(current_account))
 				error = "Please log in before proceeding."
-				return TRUE
+				return 1
 
 			if(current_account.password != oldpassword)
 				error = "Incorrect original password"
-				return TRUE
+				return 1
 
 			if(newpassword1 != newpassword2)
 				error = "The entered passwords do not match."
-				return TRUE
+				return 1
 
 			current_account.password = newpassword1
 			stored_password = newpassword1
 			error = "Your password has been successfully changed!"
-			return TRUE
+			return 1
 
 		// The following entries are Modular Computer framework only, and therefore won't do anything in other cases (like AI View)
 
@@ -398,22 +397,22 @@
 
 			if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
 				error = "Error exporting file. Are you using a functional and NTOS-compliant device?"
-				return TRUE
+				return 1
 
 			var/filename = sanitize(input(user,"Please specify file name:", "Message export"), 100)
 			if(!filename)
-				return TRUE
+				return 1
 
 			var/datum/computer_file/data/email_message/M = find_message_by_fuid(params["save"])
 			var/datum/computer_file/data/mail = istype(M) ? M.export() : null
 			if(!istype(mail))
-				return TRUE
+				return 1
 			mail.filename = filename
 			if(!MC.hard_drive || !MC.hard_drive.store_file(mail))
 				error = "Internal I/O error when writing file, the hard drive may be full."
 			else
 				error = "Email exported successfully"
-			return TRUE
+			return 1
 
 		if("addattachment")
 			var/obj/item/modular_computer/MC = tgui_host()
@@ -421,7 +420,7 @@
 
 			if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
 				error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
-				return TRUE
+				return 1
 
 			var/list/filenames = list()
 			for(var/datum/computer_file/CF in MC.hard_drive.stored_files)
@@ -431,11 +430,11 @@
 			var/picked_file = input(user, "Please pick a file to send as attachment (max 32GQ)") as null|anything in filenames
 
 			if(!picked_file)
-				return TRUE
+				return 1
 
 			if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
 				error = "Error uploading file. Are you using a functional and NTOSv2-compliant device?"
-				return TRUE
+				return 1
 
 			for(var/datum/computer_file/CF in MC.hard_drive.stored_files)
 				if(CF.unsendable)
@@ -446,32 +445,32 @@
 			if(!istype(msg_attachment))
 				msg_attachment = null
 				error = "Unknown error when uploading attachment."
-				return TRUE
+				return 1
 
 			if(msg_attachment.size > 32)
 				error = "Error uploading attachment: File exceeds maximal permitted file size of 32GQ."
 				msg_attachment = null
 			else
 				error = "File [msg_attachment.filename].[msg_attachment.filetype] has been successfully uploaded."
-			return TRUE
+			return 1
 
 		if("downloadattachment")
 			if(!current_account || !current_message || !current_message.attachment)
-				return TRUE
+				return 1
 			var/obj/item/modular_computer/MC = tgui_host()
 			if(!istype(MC) || !MC.hard_drive || !MC.hard_drive.check_functionality())
 				error = "Error downloading file. Are you using a functional and NTOSv2-compliant device?"
-				return TRUE
+				return 1
 
 			downloading = current_message.attachment.clone()
 			download_progress = 0
-			return TRUE
+			return 1
 
 		if("canceldownload")
 			downloading = null
 			download_progress = 0
-			return TRUE
+			return 1
 
 		if("remove_attachment")
 			msg_attachment = null
-			return TRUE
+			return 1

@@ -24,6 +24,7 @@
 	var/list/med = new()
 	var/list/sci = new()
 	var/list/car = new()
+	var/list/pla = new() //VOREStation Edit
 	var/list/civ = new()
 	var/list/bot = new()
 	var/list/off = new()
@@ -78,6 +79,11 @@
 		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CARGO))
 			car[name] = rank
 			department = 1
+		//VOREStation Add Begin
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_PLANET))
+			pla[name] = rank
+			department = 1
+		//VOREStation Add End
 		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CIVILIAN))
 			civ[name] = rank
 			department = 1
@@ -142,6 +148,13 @@
 		for(name in car)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[car[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
+	//VOREStation Edit Begin
+	if(pla.len > 0)
+		dat += "<tr><th colspan=3>Exploration</th></tr>"
+		for(name in pla)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[pla[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	//VOREStation Edit End
 	if(civ.len > 0)
 		dat += "<tr><th colspan=3>Civilian</th></tr>"
 		for(name in civ)
@@ -275,7 +288,7 @@ var/global/list/PDA_Manifest = list()
 		list("cat" = "Medical", "elems" = med),
 		list("cat" = "Science", "elems" = sci),
 		list("cat" = "Cargo", "elems" = car),
-		list("cat" = "Planetside", "elems" = pla),
+		list("cat" = "Exploration", "elems" = pla), // VOREStation Edit
 		list("cat" = "Civilian", "elems" = civ),
 		list("cat" = "Silicon", "elems" = bot),
 		list("cat" = "Miscellaneous", "elems" = misc)
@@ -319,7 +332,7 @@ var/global/list/PDA_Manifest = list()
 		var/datum/job/J = SSjob.get_job(assignment)
 		hidden = J?.offmap_spawn
 
-		/* Note: Due to cached_character_icon, a number of emergent properties occur due to the initialization
+		/* Note: Due to cached_character_icon, a number of emergent properties occur due to the initialization 
 		* order of readied-up vs latejoiners. Namely, latejoiners will get a uniform in their datacore picture, but readied-up will
 		* not. This is due to the fact that SSticker calls data_core.manifest_inject() inside of ticker/proc/create_characters(),
 		* but does not equip them until ticker/proc/equip_characters(), which is called later. So, this proc is literally called before

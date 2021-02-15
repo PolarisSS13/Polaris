@@ -1,6 +1,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun
 	name = "syringe gun"
 	desc = "Exosuit-mounted chem synthesizer with syringe gun. Reagents inside are held in stasis, so no reactions will occur. (Can be attached to: Medical Exosuits)"
+	mech_flags = EXOSUIT_MODULE_MEDICAL
 	icon = 'icons/obj/gun.dmi'
 	icon_state = "syringegun"
 	var/list/syringes
@@ -228,10 +229,16 @@
 		occupant_message("<span class=\"alert\">No reagent info gained from [A].</span>")
 		return 0
 	occupant_message("Analyzing reagents...")
+	//VOREStation Block Edit - Start
 	for(var/datum/reagent/R in A.reagents.reagent_list)
-		if(R.reagent_state == 2 && add_known_reagent(R.id,R.name))
+		if(R.id in known_reagents)
+			occupant_message("Reagent \"[R.name]\" already present in database, skipping.")
+		else if(R.reagent_state == 2 && add_known_reagent(R.id,R.name))
 			occupant_message("Reagent analyzed, identified as [R.name] and added to database.")
 			send_byjax(chassis.occupant,"msyringegun.browser","reagents_form",get_reagents_form())
+		else
+			occupant_message("Reagent \"[R.name]\" unable to be scanned, skipping.")
+	//VOREstation Block Edit - End
 	occupant_message("Analysis complete.")
 	return 1
 

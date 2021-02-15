@@ -746,6 +746,18 @@
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
 
+		//VOREStation Edit BEGINS
+		//Make it so autolok suits can't be refitted in a cycler
+		if(istype(I,/obj/item/clothing/head/helmet/space/void/autolok))
+			to_chat(user, "You cannot refit an autolok helmet. In fact you shouldn't even be able to remove it in the first place. Inform an admin!")
+			return
+
+		//Ditto the Mk7
+		if(istype(I,/obj/item/clothing/head/helmet/space/void/responseteam))
+			to_chat(user, "The cycler indicates that the Mark VII Emergency Response Helmet is not compatible with the refitting system. How did you manage to detach it anyway? Inform an admin!")
+			return
+		//VOREStation Edit ENDS
+
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		user.drop_item()
 		I.loc = src
@@ -774,6 +786,18 @@
 			to_chat(user, "You cannot refit a customised voidsuit.")
 			return
 
+		//VOREStation Edit BEGINS
+		//Make it so autolok suits can't be refitted in a cycler
+		if(istype(I,/obj/item/clothing/suit/space/void/autolok))
+			to_chat(user, "You cannot refit an autolok suit.")
+			return
+
+		//Ditto the Mk7
+		if(istype(I,/obj/item/clothing/suit/space/void/responseteam))
+			to_chat(user, "The cycler indicates that the Mark VII Emergency Response Suit is not compatible with the refitting system.")
+			return
+		//VOREStation Edit ENDS
+
 		to_chat(user, "You fit \the [I] into the suit cycler.")
 		user.drop_item()
 		I.loc = src
@@ -793,7 +817,7 @@
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
 	departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring","No Change")
-	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_TESHARI)
+	species = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_AKULA, SPECIES_SERGAL, SPECIES_VULPKANIN) //VORESTATION EDIT
 
 	emagged = 1
 	safeties = 0
@@ -1143,7 +1167,47 @@
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/mercenary
 			parent_suit = /obj/item/clothing/suit/space/void/refurb/mercenary
 		//BEGIN: Space for additional downstream variants
-
+		//VOREStation Addition Start
+		if("Manager")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/captain
+			parent_suit = /obj/item/clothing/suit/space/void/captain
+		if("Prototype")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/security/prototype
+			parent_suit = /obj/item/clothing/suit/space/void/security/prototype
+		if("Talon Crew")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/talon
+		if("Talon Engineering")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/engineering/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/engineering/talon
+		if("Talon Medical (Bubble Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/medical/alt/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/medical/talon
+		if("Talon Medical (Closed Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/medical/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/medical/talon
+		if("Talon Marine")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/marine/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/marine/talon
+		if("Talon Officer")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/officer/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/officer/talon
+		if("Talon Pilot (Bubble Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/pilot/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/pilot/talon
+		if("Talon Pilot (Closed Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/pilot/alt/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/pilot/talon
+		if("Talon Research (Bubble Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/research/alt/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/research/talon
+		if("Talon Research (Closed Helm)")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/research/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/research/talon
+		if("Talon Mercenary")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/refurb/mercenary/talon
+			parent_suit = /obj/item/clothing/suit/space/void/refurb/mercenary/talon
+		//VOREStation Addition End
 		//END: downstream variant space
 	if(target_species)
 		//Only run these checks if they have a sprite sheet defined, otherwise they use human's anyways, and there is almost definitely a sprite.

@@ -94,7 +94,7 @@ var/list/organ_cache = list()
 		species = GLOB.all_species[SPECIES_HUMAN]
 		if(holder.dna)
 			dna = C.dna.Clone()
-			species = GLOB.all_species[dna.species]
+			species = C.species //VOREStation Edit - For custom species
 		else
 			log_debug("[src] at [loc] spawned without a proper DNA.")
 		var/mob/living/carbon/human/H = C
@@ -201,6 +201,7 @@ var/list/organ_cache = list()
 	if(status & ORGAN_DEAD)
 		. += "<span class='notice'>Decay appears to have set in.</span>"
 
+//A little wonky: internal organs stop calling this (they return early in process) when dead, but external ones cause further damage when dead
 /obj/item/organ/proc/handle_germ_effects()
 	//** Handle the effects of infections
 	if(robotic >= ORGAN_ROBOT) //Just in case!
@@ -211,11 +212,14 @@ var/list/organ_cache = list()
 
 	var/infection_damage = 0
 
-	if((status & ORGAN_DEAD) && antibiotics < ANTIBIO_OD) //Sepsis from 'dead' organs
-		infection_damage = min(1, 1 + round((germ_level - INFECTION_LEVEL_THREE)/200,0.25)) //1 Tox plus a little based on germ level
+	/// Infection damage
+
+	//If the organ is dead, for the sake of organs that may have died due to non-infection, we'll only do damage if they have at least L1 infection (built up below)
+	if((status & ORGAN_DEAD) && antibiotics < ANTIBIO_OD && germ_level >= INFECTION_LEVEL_ONE)
+		infection_damage = max(1, 1 + round((germ_level - INFECTION_LEVEL_THREE)/200,0.25)) //1 Tox plus a little based on germ level
 
 	else if(germ_level > INFECTION_LEVEL_TWO && antibiotics < ANTIBIO_OD)
-		infection_damage = min(0.25, 0.25 + round((germ_level - INFECTION_LEVEL_TWO)/200,0.25))
+		infection_damage = max(0.25, 0.25 + round((germ_level - INFECTION_LEVEL_TWO)/200,0.25))
 
 	if(infection_damage)
 		owner.adjustToxLoss(infection_damage)
@@ -223,11 +227,19 @@ var/list/organ_cache = list()
 	if (germ_level > 0 && germ_level < INFECTION_LEVEL_ONE/2 && prob(30))
 		adjust_germ_level(-antibiotics)
 
+	/// Germ Accumulation
+
+	//Dead organs accumulate germs indefinitely
+	if(status & ORGAN_DEAD)
+		adjust_germ_level(1)
+
+	//Half of level 1 is growing but harmless
 	if (germ_level >= INFECTION_LEVEL_ONE/2)
 		//aiming for germ level to go from ambient to INFECTION_LEVEL_TWO in an average of 15 minutes
 		if(!antibiotics && prob(round(germ_level/6)))
 			adjust_germ_level(1)
 
+	//Level 1 qualifies for specific organ processing effects
 	if(germ_level >= INFECTION_LEVEL_ONE)
 		. = 1 //Organ qualifies for effect-specific processing
 		//var/fever_temperature = (owner.species.heat_level_1 - owner.species.body_temperature - 5)* min(germ_level/INFECTION_LEVEL_TWO, 1) + owner.species.body_temperature
@@ -236,10 +248,12 @@ var/list/organ_cache = list()
 		if(owner?.bodytemperature < fever_temperature)
 			owner?.bodytemperature += min(0.2,(fever_temperature - owner?.bodytemperature) / 10) //Will usually climb by 0.2, else 10% of the difference if less
 
+	//Level two qualifies for further processing effects
 	if (germ_level >= INFECTION_LEVEL_TWO)
 		. = 2 //Organ qualifies for effect-specific processing
 		//No particular effect on the general 'organ' at 3
 
+	//Level three qualifies for significant growth and further effects
 	if (germ_level >= INFECTION_LEVEL_THREE && antibiotics < ANTIBIO_OD)
 		. = 3 //Organ qualifies for effect-specific processing
 		adjust_germ_level(rand(5,10)) //Germ_level increases without overdose of antibiotics
@@ -249,7 +263,7 @@ var/list/organ_cache = list()
 	// immunosuppressant that changes transplant data to make it match.
 	if(dna && can_reject)
 		if(!rejecting)
-			if(blood_incompatible(dna.b_type, owner?.dna.b_type, species, owner?.species))
+			if(blood_incompatible(dna.b_type, owner.dna.b_type, species.name, owner.species.name)) //VOREStation Edit - Process species by name.
 				rejecting = 1
 		else
 			rejecting++ //Rejection severity increases over time.

@@ -23,7 +23,7 @@
 
 // Physical traits are what they sound like, and involve the character's physical body, as opposed to their mental state.
 /datum/trait/modifier/physical
-	category = "Physical"
+	category = "Physical Quirks" //VOREStation Edit
 
 
 /datum/trait/modifier/physical/flimsy

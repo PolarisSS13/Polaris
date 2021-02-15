@@ -81,6 +81,26 @@
 					to_chat(src, "<span class='warning'>You gave up on pulling yourself up.</span>")
 					return 0
 
+			else if(ismob(src)) //VOREStation Edit Start. Are they a mob, and are they currently flying??
+				var/mob/H = src
+				if(H.flying)
+					if(H.incapacitated(INCAPACITATION_ALL))
+						to_chat(src, "<span class='notice'>You can't fly in your current state.</span>")
+						H.stop_flying() //Should already be done, but just in case.
+						return 0
+					var/fly_time = max(7 SECONDS + (H.movement_delay() * 10), 1) //So it's not too useful for combat. Could make this variable somehow, but that's down the road.
+					to_chat(src, "<span class='notice'>You begin to fly upwards...</span>")
+					destination.audible_message("<span class='notice'>You hear the flapping of wings.</span>")
+					H.audible_message("<span class='notice'>[H] begins to flap \his wings, preparing to move upwards!</span>")
+					if(do_after(H, fly_time) && H.flying)
+						to_chat(src, "<span class='notice'>You fly upwards.</span>")
+					else
+						to_chat(src, "<span class='warning'>You stopped flying upwards.</span>")
+						return 0
+				else
+					to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
+					return 0 //VOREStation Edit End.
+
 			else
 				to_chat(src, "<span class='warning'>Gravity stops you from moving upward.</span>")
 				return 0
@@ -146,6 +166,9 @@
 	if(hovering || is_incorporeal())
 		return TRUE
 
+	if(flying) //VOREStation Edit. Allows movement up/down with wings.
+		return 1 //VOREStation Edit
+
 	if(Process_Spacemove())
 		return TRUE
 
@@ -207,6 +230,33 @@
 
 	if(throwing)
 		return
+	//VOREStation Edit Start. Flight on mobs.
+	if(isliving(src))
+		var/mob/living/L = src //VOREStation Edit Start. Flight on mobs.
+		if(L.flying) //Some other checks are done in the wings_toggle proc
+			if(L.nutrition > 0.5)
+				L.adjust_nutrition(-0.5) //You use up -0.5 nutrition per TILE and tick of flying above open spaces. If people wanna flap their wings in the hallways, shouldn't penalize them for it.
+			if(L.incapacitated(INCAPACITATION_ALL))
+				L.stop_flying()
+				//Just here to see if the person is KO'd, stunned, etc. If so, it'll move onto can_fall.
+			else if (L.nutrition > 1000) //Eat too much while flying? Get fat and fall.
+				to_chat(L, "<span class='danger'>You're too heavy! Your wings give out and you plummit to the ground!</span>")
+				L.stop_flying() //womp womp.
+			else if(L.nutrition < 300 && L.nutrition > 299.4) //290 would be risky, as metabolism could mess it up. Let's do 289.
+				to_chat(L, "<span class='danger'>You are starting to get fatigued... You probably have a good minute left in the air, if that. Even less if you continue to fly around! You should get to the ground soon!</span>") //Ticks are, on average, 3 seconds. So this would most likely be 90 seconds, but lets just say 60.
+				L.adjust_nutrition(-0.5)
+				return
+			else if(L.nutrition < 100 && L.nutrition > 99.4)
+				to_chat(L, "<span class='danger'>You're seriously fatigued! You need to get to the ground immediately and eat before you fall!</span>")
+				return
+			else if(L.nutrition < 10) //Should have listened to the warnings!
+				to_chat(L, "<span class='danger'>You lack the strength to keep yourself up in the air...</span>")
+				L.stop_flying()
+			else
+				return
+		if(LAZYLEN(L.grabbed_by)) //If you're grabbed (presumably by someone flying) let's not have you fall. This also allows people to grab onto you while you jump over a railing to prevent you from falling!
+			return
+	//VOREStation Edit End
 
 	if(can_fall())
 		// We spawn here to let the current move operation complete before we start falling. fall() is normally called from
@@ -263,6 +313,8 @@
 
 // Check if this atom prevents things standing on it from falling. Return TRUE to allow the fall.
 /obj/proc/CanFallThru(atom/movable/mover as mob|obj, turf/target as turf)
+	if(!isturf(mover.loc)) // VORESTATION EDIT. We clearly didn't have enough backup checks.
+		return FALSE //If this ain't working Ima be pissed.
 	return TRUE
 
 // Things that prevent objects standing on them from falling into turf below
@@ -306,16 +358,24 @@
 	for(var/atom/A in landing)
 		if(!A.CanPass(src, src.loc, 1, 0))
 			return FALSE
+	// TODO - Stairs should operate thru a different mechanism, not falling, to allow side-bumping.
 
 	// Now lets move there!
 	if(!Move(landing))
 		return 1
 
 	// Detect if we made a silent landing.
-	var/atom/A = find_fall_target(oldloc, landing)
-	if(special_fall_handle(A) || !A || !A.check_impact(src))
-		return
-	fall_impact(A)
+	if(locate(/obj/structure/stairs) in landing)
+		if(isliving(src))
+			var/mob/living/L = src
+			if(L.pulling)
+				L.pulling.forceMove(landing)
+		return 1
+	else
+		var/atom/A = find_fall_target(oldloc, landing)
+		if(special_fall_handle(A) || !A || !A.check_impact(src))
+			return
+		fall_impact(A)
 
 /atom/movable/proc/special_fall_handle(var/atom/A)
 	return FALSE
@@ -384,6 +444,14 @@
 	return FALSE
 
 /turf/space/check_impact(var/atom/movable/falling_atom)
+	return FALSE
+
+// We return 1 without calling fall_impact in order to provide a soft landing. So nice.
+// Note this really should never even get this far
+/obj/structure/stairs/CheckFall(var/atom/movable/falling_atom)
+	return TRUE
+
+/obj/structure/stairs/check_impact(var/atom/movable/falling_atom)
 	return FALSE
 
 // Can't fall onto ghosts

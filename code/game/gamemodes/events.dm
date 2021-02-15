@@ -196,7 +196,7 @@ var/hadevent    = 0
 				spawn(0) temp_glassairlock.prison_open()
 
 			for (var/obj/machinery/door_timer/temp_timer in A)
-				temp_timer.releasetime = 1
+				temp_timer.timer_duration = 1
 
 		sleep(150)
 		command_announcement.Announce("Gr3y.T1d3 virus detected in [station_name()] imprisonment subroutines. Recommend station AI involvement.", "Security Alert")
@@ -236,7 +236,7 @@ var/hadevent    = 0
 				apc.overload_lighting()
 
 	else
-		for(var/obj/machinery/power/apc/apc in machines)
+		for(var/obj/machinery/power/apc/apc in GLOB.apcs)
 			apc.overload_lighting()
 
 	return
@@ -345,12 +345,12 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 					to_chat(M, "<span class='danger'>THE STATION IS [who2pref] [who2]...LAWS UPDATED</span>")
 					to_chat(M, "<br>")
 					M.add_ion_law("THE STATION IS [who2pref] [who2]")
-
+/* //VOREStation Edit
 	if(botEmagChance)
 		for(var/mob/living/bot/bot in machines)
 			if(prob(botEmagChance))
 				bot.emag_act(1)
-
+*/ //VOREStation Edit
 	/*
 
 	var/apcnum = 0
@@ -362,14 +362,14 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 
 	spawn(0)
 		to_world("Started processing APCs")
-		for (var/obj/machinery/power/apc/APC in machines)
+		for (var/obj/machinery/power/apc/APC in GLOB.APCs)
 			if(APC.z in station_levels)
 				APC.ion_act()
 				apcnum++
 		to_world("Finished processing APCs. Processed: [apcnum]")
 	spawn(0)
 		to_world("Started processing SMES")
-		for (var/obj/machinery/power/smes/SMES in machines)
+		for (var/obj/machinery/power/smes/SMES in GLOB.smeses)
 			if(SMES.z in station_levels)
 				SMES.ion_act()
 				smesnum++

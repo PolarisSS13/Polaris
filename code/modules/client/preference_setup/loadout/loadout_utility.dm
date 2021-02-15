@@ -21,7 +21,7 @@
 /datum/gear/utility/communicator/New()
 	..()
 	var/list/communicators = list()
-	for(var/communicator in typesof(/obj/item/device/communicator) - list(/obj/item/device/communicator/integrated))
+	for(var/communicator in typesof(/obj/item/device/communicator) - list(/obj/item/device/communicator/integrated,/obj/item/device/communicator/commlink)) //VOREStation Edit - Remove Commlink
 		var/obj/item/device/communicator_type = communicator
 		communicators[initial(communicator_type.name)] = communicator_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
@@ -32,7 +32,7 @@
 
 /datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
-	path = /obj/item/weapon/book/codex/lore/vir
+	path = /obj/item/weapon/book/codex //VOREStation Edit
 	cost = 0
 
 /datum/gear/utility/news
@@ -40,10 +40,12 @@
 	path = /obj/item/weapon/book/codex/lore/news
 	cost = 0
 
+/* //VORESTATION REMOVAL
 /datum/gear/utility/corp_regs
 	display_name = "corporate regulations and legal code"
 	path = /obj/item/weapon/book/codex/corp_regs
 	cost = 0
+*/
 
 /datum/gear/utility/robutt
 	display_name = "a buyer's guide to artificial bodies"
@@ -120,7 +122,7 @@
 /datum/gear/utility/implant/tracking
 	display_name = "implant, tracking"
 	path = /obj/item/weapon/implant/tracking/weak
-	cost = 10
+	cost = 0 //VOREStation Edit. Changed cost to 0
 
 /datum/gear/utility/implant/neural
 	display_name = "implant, neural assistance web"
@@ -215,7 +217,7 @@ modular computers
 /datum/gear/utility/customlaptop
 	display_name = "laptop computer, custom"
 	path = /obj/item/modular_computer/laptop/preset/
-	cost = 7
+	cost = 6 //VOREStation Edit
 
 /datum/gear/utility/customlaptop/New()
 	..()

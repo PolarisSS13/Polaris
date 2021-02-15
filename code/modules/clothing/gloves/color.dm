@@ -20,8 +20,8 @@
 
 /obj/item/clothing/gloves/fyellow/Initialize()
 	. = ..()
-	//Picks a value between 0 and 1, in 5% increments
-	var/shock_pick = rand(0,20)
+	//Picks a value between 0 and 1.25, in 5% increments // VOREStation edit
+	var/shock_pick = rand(0,15) // VOREStation Edit
 	siemens_coefficient = shock_pick * 0.05
 
 /obj/item/clothing/gloves/black

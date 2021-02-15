@@ -16,7 +16,7 @@
 	desc = "Has a valve and pump attached to it"
 	use_power = USE_POWER_OFF
 	idle_power_usage = 150		//internal circuitry, friction losses and stuff
-	power_rating = 7500			//7500 W ~ 10 HP
+	power_rating = 30000			//7500 W ~ 10 HP //VOREStation Edit - 30000 W
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY //connects to regular and supply pipes
 
@@ -101,7 +101,12 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume
 	name = "Large Air Vent"
 	power_channel = EQUIP
-	power_rating = 15000	//15 kW ~ 20 HP
+	power_rating = 45000	//15 kW ~ 20 HP //VOREStation Edit - 45000
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/aux
+	icon_state = "map_vent_aux"
+	icon_connect_type = "-aux"
+	connect_types = CONNECT_TYPE_AUX //connects to aux pipes
 
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/aux
 	icon_state = "map_vent_aux"
@@ -111,6 +116,22 @@
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
+
+// VOREStation Edit Start - Wall mounted vents
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/wall_mounted
+	name = "Wall Mounted Air Vent"
+
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/wall_mounted/can_unwrench()
+	return FALSE // No way to construct these, so don't let them be removed.
+
+// Return the air from the turf in "front" of us (opposite the way the pipe is facing)
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/wall_mounted/return_air()
+	var/turf/T = get_step(src, reverse_dir[dir])
+	if(isnull(T))
+		return ..()
+	return T.return_air()
+
+// VOREStation Edit End
 
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
@@ -187,7 +208,7 @@
 	if(!can_pump())
 		return 0
 
-	var/datum/gas_mixture/environment = loc.return_air()
+	var/datum/gas_mixture/environment = return_air() // VOREStation Edit - Use our own proc
 
 	var/power_draw = -1
 

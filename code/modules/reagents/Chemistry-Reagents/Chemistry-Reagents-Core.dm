@@ -43,6 +43,12 @@
 	var/effective_dose = dose
 	if(issmall(M)) effective_dose *= 2
 
+	var/is_vampire = 0 //VOREStation Edit START
+	if(ishuman(M))
+		var/mob/living/carbon/human/H = M
+		if(H.species.gets_food_nutrition == 0)
+			H.adjust_nutrition(removed)
+			is_vampire = 1 //VOREStation Edit END
 	if(alien == IS_SLIME)	// Treat it like nutriment for the jello, but not equivalent.
 		if(data["species"] == M.species.name)	// Unless it's Promethean goo, then refill this one's goo.
 			M.inject_blood(src, volume * volume_mod)
@@ -56,9 +62,11 @@
 		return
 
 	if(effective_dose > 5)
-		M.adjustToxLoss(removed)
+		if(is_vampire == 0) //VOREStation Edit.
+			M.adjustToxLoss(removed) //VOREStation Edit.
 	if(effective_dose > 15)
-		M.adjustToxLoss(removed)
+		if(is_vampire == 0) //VOREStation Edit.
+			M.adjustToxLoss(removed) //VOREStation Edit.
 	if(data && data["virus2"])
 		var/list/vlist = data["virus2"]
 		if(vlist.len)
@@ -203,7 +211,6 @@
 			L.ExtinguishMob()
 		L.water_act(amount / 25) // Div by 25, as water_act multiplies it by 5 in order to calculate firestack modification.
 		remove_self(needed)
-
 		// Put out cigarettes if splashed.
 		if(istype(L, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = L
@@ -214,6 +221,7 @@
 						S.quench()
 						H.visible_message("<span class='notice'>[H]\'s [S.name] is put out.</span>")
 
+/*  //VOREStation Edit Start. Stops slimes from dying from water. Fixes fuel affect_ingest, too.
 /datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_SLIME)
 		M.adjustToxLoss(6 * removed)
@@ -230,6 +238,7 @@
 	if(alien == IS_SLIME && prob(10))
 		M.visible_message("<span class='warning'>[M]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 	..()
+*/  //VOREStation Edit End.
 
 /datum/reagent/fuel
 	name = "Welding fuel"
@@ -254,4 +263,3 @@
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
-

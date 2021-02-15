@@ -61,7 +61,6 @@
 
 
 // Neat little volume adjuster thing in case you don't wanna touch preferences by hand you lazy fuck
-// Currently unimplemented due to lack of TGUI v4
 /datum/volume_panel
 /datum/volume_panel/tgui_state(mob/user)
 	return GLOB.tgui_always_state

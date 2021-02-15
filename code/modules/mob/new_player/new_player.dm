@@ -133,8 +133,8 @@
 			qdel(mannequin)
 
 			spawning = 1
-			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
-
+			if(client.media)
+				client.media.stop_music() // MAD JAMS cant last forever yo
 
 			observer.started_as_observer = 1
 			close_spawn_windows()
@@ -164,12 +164,20 @@
 		if(!ticker || ticker.current_state != GAME_STATE_PLAYING)
 			to_chat(usr, "<font color='red'>The round is either not ready, or has already finished...</font>")
 			return
+		
 		var/time_till_respawn = time_till_respawn()
 		if(time_till_respawn == -1) // Special case, never allowed to respawn
 			to_chat(usr, "<span class='warning'>Respawning is not allowed!</span>")
 		else if(time_till_respawn) // Nonzero time to respawn
 			to_chat(usr, "<span class='warning'>You can't respawn yet! You need to wait another [round(time_till_respawn/10/60, 0.1)] minutes.</span>")
 			return
+/*
+		if(client.prefs.species != "Human" && !check_rights(R_ADMIN, 0)) //VORESTATION EDITS: THE COMMENTED OUT AREAS FROM LINE 154 TO 178
+			if (config.usealienwhitelist)
+				if(!is_alien_whitelisted(src, client.prefs.species))
+					alert(src, "You are currently not whitelisted to Play [client.prefs.species].")
+					return 0
+*/
 		LateChoices()
 
 	if(href_list["manifest"])
@@ -177,12 +185,14 @@
 
 	if(href_list["SelectedJob"])
 
+		/* Vorestation Removal Start
 		//Prevents people rejoining as same character.
 		for (var/mob/living/carbon/human/C in mob_list)
 			var/char_name = client.prefs.real_name
 			if(char_name == C.real_name)
-				to_chat(usr, "<span class='notice'>There is a character that already exists with the same name - <b>[C.real_name]</b>, please join with a different one.</span>")
+				to_chat(usr, "<span class='notice'>There is a character that already exists with the same name - <b>[C.real_name]</b>, please join with a different one, or use Quit the Round with the previous character.</span>") //VOREStation Edit
 				return
+		*/ //Vorestation Removal End
 
 		if(!config.enter_allowed)
 			to_chat(usr, "<span class='notice'>There is an administrative lock on entering the game!</span>")
@@ -196,6 +206,7 @@
 			return 0
 
 		var/datum/species/S = GLOB.all_species[client.prefs.species]
+		
 		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
 			alert(src,"Your current species, [client.prefs.species], is not available for play on the station.")
 			return 0
@@ -362,6 +373,11 @@
 	if(!job.is_position_available()) return 0
 	if(jobban_isbanned(src,rank))	return 0
 	if(!job.player_old_enough(src.client))	return 0
+	//VOREStation Add
+	if(!job.player_has_enough_playtime(src.client))	return 0
+	if(!is_job_whitelisted(src,rank))	return 0
+	if(!job.player_has_enough_pto(src.client)) return 0
+	//VOREStation Add End
 	return 1
 
 
@@ -377,6 +393,7 @@
 	if(!IsJobAvailable(rank))
 		alert(src,"[rank] is not available. Please try another.")
 		return 0
+	if(!spawn_checks_vr(rank)) return 0 // VOREStation Insert
 	if(!client)
 		return 0
 
@@ -427,9 +444,9 @@
 		return
 
 	// Equip our custom items only AFTER deploying to spawn points eh?
-	equip_custom_items(character)
+	//equip_custom_items(character)	//VOREStation Removal
 
-	character.apply_traits()
+	//character.apply_traits() //VOREStation Removal
 
 	// Moving wheelchair if they have one
 	if(character.buckled && istype(character.buckled, /obj/structure/bed/chair/wheelchair))
@@ -531,15 +548,21 @@
 	else
 		client.prefs.copy_to(new_character, icon_updates = TRUE)
 
-	src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
+	if(client && client.media)
+		client.media.stop_music() // MAD JAMS cant last forever yo
 
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually
-		if(mind.assigned_role == "Clown")				//give them a clownname if they are a clown
-			new_character.real_name = pick(clown_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
-			new_character.rename_self("clown")
+		// VOREStation edit to disable the destructive forced renaming for our responsible whitelist clowns.
+		//if(mind.assigned_role == "Clown")				//give them a clownname if they are a clown
+		//	new_character.real_name = pick(clown_names)	//I hate this being here of all places but unfortunately dna is based on real_name!
+		//	new_character.rename_self("clown")
 		mind.original = new_character
-		mind.traits = client.prefs.traits.Copy()
+		// VOREStation
+		mind.loaded_from_ckey = client.ckey
+		mind.loaded_from_slot = client.prefs.default_slot
+		// VOREStation
+		//mind.traits = client.prefs.traits.Copy() // VOREStation conflict
 		mind.transfer_to(new_character)					//won't transfer key since the mind is not active
 
 	new_character.name = real_name
@@ -562,7 +585,7 @@
 	// Do the initial caching of the player's body icons.
 	new_character.force_update_limbs()
 	new_character.update_icons_body()
-	new_character.update_eyes()
+	new_character.update_transform() //VOREStation Edit
 
 	new_character.key = key		//Manually transfer the key to log them in
 
@@ -583,7 +606,7 @@
 /mob/new_player/proc/close_spawn_windows()
 
 	src << browse(null, "window=latechoices") //closes late choices window
-	//src << browse(null, "window=playersetup") //closes the player setup window
+	src << browse(null, "window=preferences_window") //closes the player setup window
 	panel.close()
 
 /mob/new_player/proc/has_admin_rights()
@@ -610,7 +633,10 @@
 	return ready && ..()
 
 // Prevents lobby players from seeing say, even with ghostears
-/mob/new_player/hear_say(var/message, var/verb = "says", var/datum/language/language = null, var/italics = 0, var/mob/speaker = null)
+/mob/new_player/hear_say(var/list/message_pieces, var/verb = "says", var/italics = 0, var/mob/speaker = null)
+	return
+
+/mob/new_player/hear_holopad_talk(list/message_pieces, var/verb = "says", var/mob/speaker = null)
 	return
 
 /mob/new_player/hear_holopad_talk(list/message_pieces, var/verb = "says", var/mob/speaker = null)

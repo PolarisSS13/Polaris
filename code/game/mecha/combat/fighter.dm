@@ -8,10 +8,12 @@
 	var/stabilization_enabled = TRUE //If our anti-space-drift is on
 	var/ground_capable = FALSE //If we can fly over normal turfs and not just space
 
-	icon = 'icons/mecha/fighters64x64.dmi'
+	icon = 'icons/mecha/fighters64x64.dmi' //See ATTRIBUTIONS.md for details on license
 
 	icon_state = ""
 	initial_icon = ""
+
+	dir_in = null //Don't reset direction when empty
 
 	step_in = 2 //Fast
 
@@ -208,16 +210,6 @@
 	else
 		who << sound('sound/mecha/fighter_entered.ogg',volume=50)
 
-////////////// Equipment //////////////
-
-// For 64x64 fighters
-/obj/item/mecha_parts/mecha_equipment/omni_shield/fighter64
-	shield_type = /obj/item/shield_projector/rectangle/mecha/fighter64
-/obj/item/shield_projector/rectangle/mecha/fighter64
-	shift_x = 16
-	shift_y = 16
-
-
 ////////////// Gunpod //////////////
 
 /obj/mecha/combat/fighter/gunpod
@@ -316,7 +308,7 @@
 	. = ..()
 	var/obj/item/mecha_parts/mecha_equipment/ME = new /obj/item/mecha_parts/mecha_equipment/weapon/energy/laser
 	ME.attach(src)
-	ME = new /obj/item/mecha_parts/mecha_equipment/omni_shield/fighter64
+	ME = new /obj/item/mecha_parts/mecha_equipment/omni_shield
 	ME.attach(src)
 
 /obj/effect/decal/mecha_wreckage/baron

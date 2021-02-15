@@ -16,6 +16,10 @@ var/list/dreams = list(
 	"a Dionaea gestalt","the chapel","a distant scream","endless chittering noises","glowing eyes in the shadows","an empty glass",
 	"a disoriented Promethean","towers of plastic","a Gygax","a synthetic","a Man-Machine Interface","maintenance drones",
 	"unintelligible writings","a Fleet ship",
+	//VOREStation Additions after this
+	"slimey surroundings","a sexy squirrel","licking their lips","a gaping maw","an unlikely predator","sinking inside",
+	"vulpine assets","more dakka","churning guts","pools of fluid","an exceptional grip","mawing in faces","gaping throat",
+	"swallowed whole","a fox","a wolf","a cat","a tiger","a dog","a taur","a xenochimera"
 	)
 
 mob/living/carbon/proc/dream()

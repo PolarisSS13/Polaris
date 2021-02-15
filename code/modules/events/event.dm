@@ -147,7 +147,6 @@
 	if(!external_use)
 		SSevents.event_complete(src)
 
-
 //Called during building of skybox to get overlays
 /datum/event/proc/get_skybox_image()
 	return

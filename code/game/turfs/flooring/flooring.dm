@@ -324,7 +324,7 @@ var/list/flooring_types
 /decl/flooring/tiling
 	name = "floor"
 	desc = "Scuffed from the passage of countless greyshirts."
-	icon = 'icons/turf/flooring/tiles.dmi'
+	icon = 'icons/turf/flooring/tiles_vr.dmi' // VOREStation Edit - Eris floors. Polaris still hasn't added all of them properly. See: steel_ridged
 	icon_base = "tiled"
 	has_damage_range = 2
 	damage_temperature = T0C+1400
@@ -462,8 +462,8 @@ var/list/flooring_types
 
 /decl/flooring/wood
 	name = "wooden floor"
-	desc = "Polished wooden planks."
-	icon = 'icons/turf/flooring/wood.dmi'
+	desc = "Polished redwood planks."
+	icon = 'icons/turf/flooring/wood_vr.dmi'
 	icon_base = "wood"
 	has_damage_range = 6
 	damage_temperature = T0C+200

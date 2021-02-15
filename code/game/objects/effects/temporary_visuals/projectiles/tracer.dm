@@ -120,3 +120,12 @@
 	light_range = 1
 	light_power = 0.5
 	light_color = "#f6f2b6"
+
+//VOREStation edit: medigun
+/obj/effect/projectile/tracer/medigun
+	icon = 'icons/obj/projectiles_vr.dmi'
+	icon_state = "medbeam"
+	light_range = 2
+	light_power = 0.5
+	light_color = "#80F5FF"
+//VOREStation edit ends

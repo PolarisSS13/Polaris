@@ -38,7 +38,7 @@ var/list/all_maps = list()
 
 	// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/map_levels
-	
+
 	// E-mail TLDs to use for NTnet modular computer e-mail addresses
 	var/list/usable_email_tlds = list("freemail.nt")
 
@@ -63,10 +63,22 @@ var/list/all_maps = list()
 	var/list/holomap_offset_y = list()
 	var/list/holomap_legend_x = list()
 	var/list/holomap_legend_y = list()
+	var/list/meteor_strike_areas	// VOREStation Edit - Areas meteor strikes may choose to hit.
+	var/ai_shell_restricted = FALSE			//VOREStation Addition - are there z-levels restricted?
+	var/ai_shell_allowed_levels = list()	//VOREStation Addition - which z-levels ARE we allowed to visit?
+
+	//VOREStation Addition Start - belter stuff	TFF 16/4/20 - Mining Outpost Shuttle
+	var/list/belter_docked_z = list()
+	var/list/belter_transit_z = list()
+	var/list/belter_belt_z = list()
+	var/list/mining_station_z = list()
+	var/list/mining_outpost_z = list()
+	//VOREStation Addition End
 
 	var/station_name  = "BAD Station"
 	var/station_short = "Baddy"
 	var/dock_name     = "THE PirateBay"
+	var/dock_type     = "station"	//VOREStation Edit - for a list of valid types see the switch block in air_traffic.dm at line 148
 	var/boss_name     = "Captain Roger"
 	var/boss_short    = "Cap'"
 	var/company_name  = "BadMan"
@@ -77,6 +89,7 @@ var/list/all_maps = list()
 	var/shuttle_leaving_dock
 	var/shuttle_called_message
 	var/shuttle_recall_message
+	var/shuttle_name  = "NAS |Hawking|"	//VS ADD
 	var/emergency_shuttle_docked_message
 	var/emergency_shuttle_leaving_dock
 	var/emergency_shuttle_called_message
@@ -88,6 +101,12 @@ var/list/all_maps = list()
 	var/bot_patrolling = TRUE				// Determines if this map supports automated bot patrols
 
 	var/allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+
+	// VOREStation Edit - Persistence!
+	var/datum/spawnpoint/spawnpoint_died = /datum/spawnpoint/arrivals 	// Used if you end the round dead.
+	var/datum/spawnpoint/spawnpoint_left = /datum/spawnpoint/arrivals 	// Used of you end the round at centcom.
+	var/datum/spawnpoint/spawnpoint_stayed = /datum/spawnpoint/cryo 	// Used if you end the round on the station.
+	// VOREStation Edit End
 
 	var/use_overmap = 0          // If overmap should be used (including overmap space travel override)
 	var/overmap_size = 20		 // Dimensions of overmap zlevel if overmap is used.
@@ -189,8 +208,8 @@ var/list/all_maps = list()
 		//Get what sector we're in
 		var/obj/effect/overmap/visitable/O = get_overmap_sector(srcz)
 		if(!istype(O))
-			//Not in a sector, just the passed zlevel
-			return list(srcz)
+			//Anything in multiz then (or just themselves)
+			return GetConnectedZlevels(srcz)
 
 		//Just the sector we're in
 		if(om_range == -1)
@@ -212,9 +231,9 @@ var/list/all_maps = list()
 		//If in station levels, return station levels
 		else if (srcz in station_levels)
 			return station_levels.Copy()
-		//Just give them back their zlevel
+		//Anything in multiz then (or just themselves)
 		else
-			return list(srcz)
+			return GetConnectedZlevels(srcz)
 
 /datum/map/proc/get_zlevel_name(var/index)
 	var/datum/map_z_level/Z = zlevels["[index]"]

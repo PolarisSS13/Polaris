@@ -17,6 +17,7 @@ var/list/department_radio_keys = list(
 	  ":v" = "Service",		".v" = "Service",
 	  ":p" = "AI Private",	".p" = "AI Private",
 	  ":y" = "Explorer",	".y" = "Explorer",
+	  ":a" = "Talon",		".a" = "Talon", //VOREStation Add,
 
 	  ":R" = "right ear",	".R" = "right ear",
 	  ":L" = "left ear",	".L" = "left ear",
@@ -35,21 +36,22 @@ var/list/department_radio_keys = list(
 	  ":V" = "Service",		".V" = "Service",
 	  ":P" = "AI Private",	".P" = "AI Private",
 	  ":Y" = "Explorer",	".Y" = "Explorer",
+	  ":A" = "Talon",		".A" = "Talon", //VOREStation Add,
 
 	  //kinda localization -- rastaf0
 	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":ï¿½" = "right ear",	".ï¿½" = "right ear",
-	  ":ï¿½" = "left ear",	".ï¿½" = "left ear",
-	  ":ï¿½" = "intercom",	".ï¿½" = "intercom",
-	  ":ï¿½" = "department",	".ï¿½" = "department",
-	  ":ï¿½" = "Command",		".ï¿½" = "Command",
-	  ":ï¿½" = "Science",		".ï¿½" = "Science",
-	  ":ï¿½" = "Medical",		".ï¿½" = "Medical",
-	  ":ï¿½" = "Engineering",	".ï¿½" = "Engineering",
-	  ":ï¿½" = "Security",	".ï¿½" = "Security",
-	  ":ï¿½" = "whisper",		".ï¿½" = "whisper",
-	  ":ï¿½" = "Mercenary",	".ï¿½" = "Mercenary",
-	  ":ï¿½" = "Supply",		".ï¿½" = "Supply",
+	  ":ê" = "right ear",	".ê" = "right ear",
+	  ":ä" = "left ear",	".ä" = "left ear",
+	  ":ø" = "intercom",	".ø" = "intercom",
+	  ":ð" = "department",	".ð" = "department",
+	  ":ñ" = "Command",		".ñ" = "Command",
+	  ":ò" = "Science",		".ò" = "Science",
+	  ":ü" = "Medical",		".ü" = "Medical",
+	  ":ó" = "Engineering",	".ó" = "Engineering",
+	  ":û" = "Security",	".û" = "Security",
+	  ":ö" = "whisper",		".ö" = "whisper",
+	  ":å" = "Mercenary",	".å" = "Mercenary",
+	  ":é" = "Supply",		".é" = "Supply",
 )
 
 
@@ -102,6 +104,12 @@ proc/get_radio_key_from_channel(var/channel)
 			S.message = stutter(S.message)
 			verb = pick("stammers","stutters")
 			. = 1
+		//VOREStation Edit Start
+		if(muffled)
+			verb = pick("muffles")
+			whispering = 1
+			. = 1
+		//VOREStation Edit End
 
 	message_data[1] = message_pieces
 	message_data[2] = verb
@@ -163,6 +171,11 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//Clean up any remaining space on the left
 	message = trim_left(message)
+
+	// VOREStation Edit - Reflect messages as needed, no sanitizing because parse_languages will handle it for us
+	if(reflect_if_needed(message, src))
+		return
+	// VOREStation Edit End
 
 	//Parse the language code and consume it
 	var/list/message_pieces = parse_languages(message)
@@ -256,6 +269,20 @@ proc/get_radio_key_from_channel(var/channel)
 		message_range = 1
 		sound_vol *= 0.5
 
+	//VOREStation edit - allows for custom say verbs, overriding all other say-verb types- e.g. "says loudly" instead of "shouts"
+	//You'll still stammer if injured or slur if drunk, but it won't have those specific words
+	var/ending = copytext(message, length(message))
+
+	if(custom_whisper && whispering)
+		verb = "[custom_whisper]"
+	else if(custom_exclaim && ending=="!")
+		verb = "[custom_exclaim]"
+	else if(custom_ask && ending=="?")
+		verb = "[custom_ask]"
+	else if(custom_say)
+		verb = "[custom_say]"
+	//VOREStation edit ends
+
 	//Handle nonverbal languages here
 	for(var/datum/multilingual_say_piece/S in message_pieces)
 		if(S.speaking.flags & NONVERBAL)
@@ -291,10 +318,15 @@ proc/get_radio_key_from_channel(var/channel)
 
 	//The 'post-say' static speech bubble
 	var/speech_bubble_test = say_test(message)
+	//var/image/speech_bubble = image('icons/mob/talk_vr.dmi',src,"h[speech_bubble_test]") //VOREStation Edit. Commented this out in case we need to reenable.
 	var/speech_type = speech_bubble_appearance()
-	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"[speech_type][speech_bubble_test]")
+	var/image/speech_bubble = image('icons/mob/talk_vr.dmi',src,"[speech_type][speech_bubble_test]") //VOREStation Edit - talk_vr.dmi instead of talk.dmi for right-side icons
 	var/sb_alpha = 255
 	var/atom/loc_before_turf = src
+	//VOREStation Add
+	if(isbelly(loc))
+		speech_bubble.pixel_y = -13 //teehee
+	//VOREStation Add End
 	while(loc_before_turf && !isturf(loc_before_turf.loc))
 		loc_before_turf = loc_before_turf.loc
 		sb_alpha -= 50
@@ -310,7 +342,7 @@ proc/get_radio_key_from_channel(var/channel)
 		var/turf/ST = get_turf(above)
 		if(ST)
 			var/list/results = get_mobs_and_objs_in_view_fast(ST, world.view)
-			var/image/z_speech_bubble = image('icons/mob/talk.dmi', above, "h[speech_bubble_test]")
+			var/image/z_speech_bubble = image('icons/mob/talk_vr.dmi', above, "h[speech_bubble_test]") //VOREStation Edit - talk_vr.dmi instead of talk.dmi for right-side icons
 			images_to_clients[z_speech_bubble] = list()
 			for(var/item in results["mobs"])
 				if(item != above && !(item in listening))
@@ -323,6 +355,12 @@ proc/get_radio_key_from_channel(var/channel)
 		spawn(0) //Using spawns to queue all the messages for AFTER this proc is done, and stop runtimes
 
 			if(M && src) //If we still exist, when the spawn processes
+				//VOREStation Add - Ghosts don't hear whispers
+				if(whispering && !is_preference_enabled(/datum/client_preference/whisubtle_vis) && isobserver(M) && !M.client?.holder)
+					M.show_message("<span class='game say'><span class='name'>[src.name]</span> [w_not_heard].</span>", 2)
+					return
+				//VOREStation Add End
+
 				var/dst = get_dist(get_turf(M),get_turf(src))
 
 				if(dst <= message_range || (M.stat == DEAD && !forbid_seeing_deadchat)) //Inside normal message range, or dead with ears (handled in the view proc)
@@ -361,6 +399,8 @@ proc/get_radio_key_from_channel(var/channel)
 			qdel(I)
 
 	//Log the message to file
+	if(message_mode)
+		message = "([message_mode == "headset" ? "Common" : capitalize(message_mode)]) [message]" //Adds radio keys used if available
 	if(whispering)
 		log_whisper(message, src)
 	else

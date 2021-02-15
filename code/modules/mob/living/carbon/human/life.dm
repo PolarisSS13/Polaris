@@ -4,9 +4,9 @@
 #define HUMAN_MAX_OXYLOSS 1 //Defines how much oxyloss humans can get per tick. A tile with no air at all (such as space) applies this value, otherwise it's a percentage of it.
 #define HUMAN_CRIT_MAX_OXYLOSS ( 2.0 / 6) //The amount of damage you'll get when in critical condition. We want this to be a 5 minute deal = 300s. There are 50HP to get through, so (1/6)*last_tick_duration per second. Breaths however only happen every 4 ticks. last_tick_duration = ~2.0 on average
 
-#define HEAT_DAMAGE_LEVEL_1 5 //Amount of damage applied when your body temperature just passes the 360.15k safety point
-#define HEAT_DAMAGE_LEVEL_2 10 //Amount of damage applied when your body temperature passes the 400K point
-#define HEAT_DAMAGE_LEVEL_3 20 //Amount of damage applied when your body temperature passes the 1000K point
+#define HEAT_DAMAGE_LEVEL_1 2 //VOREStation Edit //Amount of damage applied when your body temperature just passes the 360.15k safety point
+#define HEAT_DAMAGE_LEVEL_2 4 //VOREStation Edit //Amount of damage applied when your body temperature passes the 400K point
+#define HEAT_DAMAGE_LEVEL_3 8 //VOREStation Edit //Amount of damage applied when your body temperature passes the 1000K point
 
 #define COLD_DAMAGE_LEVEL_1 0.5 //Amount of damage applied when your body temperature just passes the 260.15k safety point
 #define COLD_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when your body temperature passes the 200K point
@@ -61,6 +61,7 @@
 		Sleeping(20)
 
 	//No need to update all of these procs if the guy is dead.
+	fall() //VORESTATION EDIT. Prevents people from floating
 	if(stat != DEAD && !stasis)
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
@@ -68,7 +69,7 @@
 		//Organs and blood
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
-
+		weightgain() //VORESTATION EDIT
 		handle_shock()
 
 		handle_pain()
@@ -76,7 +77,7 @@
 		handle_medical_side_effects()
 
 		handle_heartbeat()
-
+		handle_nif() //VOREStation Add
 		if(!client)
 			species.handle_npc(src)
 
@@ -278,6 +279,12 @@
 		var/obj/item/organ/internal/brain/slime/core = locate() in internal_organs
 		if(core)
 			return
+
+		//VOREStation Addition start: shadekin
+		var/obj/item/organ/internal/brain/shadekin/s_brain = locate() in internal_organs
+		if(s_brain)
+			return
+		//VOREStation Addition end: shadekin
 
 		var/damage = 0
 		radiation -= 1 * RADIATION_SPEED_COEFFICIENT
@@ -616,7 +623,6 @@
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
-
 	//Stuff like the xenomorph's plasma regen happens here.
 	species.handle_environment_special(src)
 
@@ -633,7 +639,7 @@
 			pl_effects()
 			break
 
-	if(istype(get_turf(src), /turf/space))
+	if(istype(loc, /turf/space)) //VOREStation Edit - No FBPs overheating on space turfs inside mechs or people.
 		//Don't bother if the temperature drop is less than 0.1 anyways. Hopefully BYOND is smart enough to turn this constant expression into a constant
 		if(bodytemperature > (0.1 * HUMAN_HEAT_CAPACITY/(HUMAN_EXPOSED_SURFACE_AREA*STEFAN_BOLTZMANN_CONSTANT))**(1/4) + COSMIC_RADIATION_TEMPERATURE)
 			//Thermal radiation into space
@@ -731,7 +737,8 @@
 		throw_alert("pressure", /obj/screen/alert/lowpressure, 1)
 	else
 		if( !(COLD_RESISTANCE in mutations))
-			take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
+			if(!isSynthetic() || !nif || !nif.flag_check(NIF_O_PRESSURESEAL,NIF_FLAGS_OTHER)) //VOREStation Edit - NIF pressure seals
+				take_overall_damage(brute=LOW_PRESSURE_DAMAGE, used_weapon = "Low Pressure")
 			if(getOxyLoss() < 55) 		// 12 OxyLoss per 4 ticks when wearing internals;    unconsciousness in 16 ticks, roughly half a minute
 				var/pressure_dam = 3	// 16 OxyLoss per 4 ticks when no internals present; unconsciousness in 13 ticks, roughly twenty seconds
 										// (Extra 1 oxyloss from failed breath)
@@ -779,9 +786,10 @@
 
 	// FBPs will overheat when alive, prosthetic limbs are fine.
 	if(stat != DEAD && robobody_count)
-		bodytemperature += round(robobody_count*1.15)
+		if(!nif || !nif.flag_check(NIF_O_HEATSINKS,NIF_FLAGS_OTHER)) //VOREStation Edit - NIF heatsinks prevent the base heat increase per tick if installed.
+			bodytemperature += round(robobody_count*1.15)
 		var/obj/item/organ/internal/robotic/heatsink/HS = internal_organs_by_name[O_HEATSINK]
-		if(!HS || HS.is_broken())
+		if(!HS || HS.is_broken()) // However, NIF Heatsinks will not compensate for a core FBP component (your heatsink) being lost.
 			bodytemperature += round(robobody_count*0.5)
 
 	var/body_temperature_difference = species.body_temperature - bodytemperature
@@ -913,7 +921,8 @@
 			var/total_phoronloss = 0
 			for(var/obj/item/I in src)
 				if(I.contaminated)
-					if(src.species && src.species.get_bodytype() != "Vox")
+					if(check_belly(I)) continue //VOREStation Edit
+					if(src.species && src.species.get_bodytype() != "Vox" && src.species.get_bodytype() != "Shadekin")	//VOREStation Edit: shadekin
 						// This is hacky, I'm so sorry.
 						if(I != l_hand && I != r_hand)	//If the item isn't in your hands, you're probably wearing it. Full damage for you.
 							total_phoronloss += vsc.plc.CONTAMINATION_LOSS
@@ -950,6 +959,12 @@
 			if(!isnull(mod.metabolism_percent))
 				nutrition_reduction *= mod.metabolism_percent
 		adjust_nutrition(-nutrition_reduction)
+
+	if(noisy == TRUE && nutrition < 250 && prob(10)) //VOREStation edit for hunger noises.
+		var/sound/growlsound = sound(get_sfx("hunger_sounds"))
+		var/growlmultiplier = 100 - (nutrition / 250 * 100)
+		playsound(src, growlsound, vol = growlmultiplier, vary = 1, falloff = 0.1, ignore_walls = TRUE, preference = /datum/client_preference/digestion_noises)
+	// VOREStation Edit End
 
 	// TODO: stomach and bloodstream organ.
 	if(!isSynthetic())
@@ -1247,6 +1262,14 @@
 			fat_alert = /obj/screen/alert/fat/synth
 			hungry_alert = /obj/screen/alert/hungry/synth
 			starving_alert = /obj/screen/alert/starving/synth
+		//VOREStation Add - Vampire hunger alert
+		else if(get_species() == SPECIES_CUSTOM)
+			var/datum/species/custom/C = species
+			if(/datum/trait/bloodsucker in C.traits)
+				fat_alert = /obj/screen/alert/fat/vampire
+				hungry_alert = /obj/screen/alert/hungry/vampire
+				starving_alert = /obj/screen/alert/starving/vampire
+		//VOREStation Add End
 
 		switch(nutrition)
 			if(450 to INFINITY)
@@ -1263,32 +1286,32 @@
 		if(blinded)
 			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
 			throw_alert("blind", /obj/screen/alert/blind)
-
 		else
-			clear_fullscreens()
+			clear_fullscreen("blind")
 			clear_alert("blind")
 
-		if(blinded)
-			overlay_fullscreen("blind", /obj/screen/fullscreen/blind)
+		var/apply_nearsighted_overlay = FALSE
+		if(disabilities & NEARSIGHTED)	
+			apply_nearsighted_overlay = TRUE
 
-		else if(!machine)
-			clear_fullscreens()
-
-		if(disabilities & NEARSIGHTED)	//this looks meh but saves a lot of memory by not requiring to add var/prescription
-			if(glasses)					//to every /obj/item
+			if(glasses)
 				var/obj/item/clothing/glasses/G = glasses
-				if(!G.prescription)
-					set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
-			else
-				set_fullscreen(disabilities & NEARSIGHTED, "impaired", /obj/screen/fullscreen/impaired, 1)
+				if(G.prescription)
+					apply_nearsighted_overlay = FALSE
+
+			if(nif && nif.flag_check(NIF_V_CORRECTIVE, NIF_FLAGS_VISION)) // VOREStation Edit - NIF
+				apply_nearsighted_overlay = FALSE
+
+		set_fullscreen(apply_nearsighted_overlay, "nearsighted", /obj/screen/fullscreen/impaired, 1)
 
 		set_fullscreen(eye_blurry, "blurry", /obj/screen/fullscreen/blurry)
 		set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
-
 		if(druggy)
 			throw_alert("high", /obj/screen/alert/high)
 		else
 			clear_alert("high")
+
+		if(!isbelly(loc)) clear_fullscreen("belly") //VOREStation Add - Belly fullscreens safety
 
 		if(config.welder_vision)
 			var/found_welder
@@ -1299,6 +1322,7 @@
 					var/obj/item/clothing/glasses/welding/O = glasses
 					if(!O.up)
 						found_welder = 1
+				if(!found_welder && nif && nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))	found_welder = 1 //VOREStation Add - NIF
 				if(istype(glasses, /obj/item/clothing/glasses/sunglasses/thinblindfold))
 					found_welder = 1
 				if(!found_welder && istype(head, /obj/item/clothing/head/welding))
@@ -1310,6 +1334,7 @@
 					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
 							found_welder = 1
+				if(absorbed) found_welder = 1 //VOREStation Code
 			if(found_welder)
 				client.screen |= global_hud.darkMask
 
@@ -1802,6 +1827,8 @@
 			else
 				holder.icon_state = "hudsyndicate"
 		apply_hud(SPECIALROLE_HUD, holder)
+
+	attempt_vr(src,"handle_hud_list_vr",list()) //VOREStation Add - Custom HUDs.
 
 	hud_updateflag = 0
 

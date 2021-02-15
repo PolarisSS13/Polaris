@@ -36,6 +36,10 @@
 // Override this to create whatever mob you need. Be sure to call ..() if you don't want it to make infinite mobs.
 /obj/structure/ghost_pod/proc/create_occupant(var/mob/M)
 	used = TRUE
+	//VOREStation Addition Start
+	if(src in active_ghost_pods)
+		active_ghost_pods -= src
+	//VOREStation Addition End
 	return TRUE
 
 
@@ -49,6 +53,11 @@
 			if(alert(user, "Are you sure you want to touch \the [src]?", "Confirm", "No", "Yes") == "No")
 				return
 		trigger()
+		// VOREStation Addition Start
+		if(!used)
+			activated = TRUE
+			ghostpod_startup(FALSE)
+		// VOREStation Addition End
 
 /obj/structure/ghost_pod/manual/attack_ai(var/mob/living/silicon/user)
 	if(Adjacent(user))

@@ -142,7 +142,8 @@
 		/obj/item/taperoll/medical,
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
-		/obj/item/clothing/shoes/white)
+		/obj/item/clothing/shoes/white,
+		/obj/item/weapon/reagent_containers/glass/beaker/vial) //VOREStation Add
 
 /obj/structure/closet/secure_closet/CMO/Initialize()
 	if(prob(50))
@@ -192,7 +193,8 @@
 		/obj/item/weapon/storage/box/syringes,
 		/obj/item/weapon/reagent_containers/dropper = 2,
 		/obj/item/weapon/reagent_containers/glass/bottle/inaprovaline = 2,
-		/obj/item/weapon/reagent_containers/glass/bottle/antitoxin = 2)
+		/obj/item/weapon/reagent_containers/glass/bottle/antitoxin = 2,
+		/obj/item/weapon/storage/fancy/vials) //VOREStation Add
 
 
 /obj/structure/closet/secure_closet/psych
@@ -225,6 +227,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	store_mobs = 0
 	req_access = list(access_medical_equip)
 	closet_appearance = /decl/closet_appearance/wall/medical
 

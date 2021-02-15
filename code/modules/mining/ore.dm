@@ -107,41 +107,6 @@
 	material = MAT_LEAD
 	origin_tech = list(TECH_MATERIAL = 3)
 
-/obj/item/weapon/ore/copper
-	name = "raw copper"
-	icon_state = "ore_copper"
-	material = "copper"
-
-/obj/item/weapon/ore/tin
-	name = "raw tin"
-	icon_state = "ore_tin"
-	material = "tin"
-
-/obj/item/weapon/ore/bauxite
-	name = "raw bauxite"
-	icon_state = "ore_bauxite"
-	material = "bauxite"
-
-/obj/item/weapon/ore/rutile
-	name = "raw rutile"
-	icon_state = "ore_rutile"
-	material = "rutile"
-
-/obj/item/weapon/ore/void_opal
-	name = "raw void opal"
-	icon_state = "ore_void_opal"
-	material = "void opal"
-
-/obj/item/weapon/ore/painite
-	name = "raw painite"
-	icon_state = "ore_painite"
-	material = "painite"
-
-/obj/item/weapon/ore/quartz
-	name = "raw quartz"
-	icon_state = "ore_quartz"
-	material = "quartz"
-
 /obj/item/weapon/ore/slag
 	name = "Slag"
 	desc = "Someone screwed up..."
@@ -157,3 +122,15 @@
 		C.sample_item(src, user)
 	else
 		return ..()
+
+//VOREStation Add
+/obj/item/weapon/ore/attack(mob/living/M as mob, mob/living/user as mob)
+	if(M.handle_eat_minerals(src, user))
+		return
+	..()
+
+/obj/item/weapon/ore/attack_generic(var/mob/living/user) //Allow adminbussed mobs to eat ore if they click it while NOT on help intent.
+	if(user.handle_eat_minerals(src))
+		return
+	..()
+//VOREStation Add End

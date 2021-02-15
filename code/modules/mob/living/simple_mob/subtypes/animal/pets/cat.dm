@@ -19,6 +19,7 @@
 
 	var/mob/living/friend = null // Our best pal, who we'll follow. Meow.
 	var/named = FALSE //have I been named yet?
+	var/friend_name = null //VOREStation Edit - Lock befriending to this character
 
 /mob/living/simple_mob/animal/passive/cat/Initialize()
 	icon_living = "[initial(icon_state)]"
@@ -77,14 +78,19 @@
 			to_chat(L, span("warning", "\The [src] ignores you."))
 			return
 
-	friend = L
-	face_atom(L)
-	to_chat(L, span("notice", "\The [src] is now your friend! Meow."))
-	visible_emote(pick("nuzzles [friend].", "brushes against [friend].", "rubs against [friend].", "purrs."))
+	//VOREStation Edit Start - Adds friend_name var checks
+	if(!friend_name || L.real_name == friend_name)
+		friend = L
+		face_atom(L)
+		to_chat(L, span("notice", "\The [src] is now your friend! Meow."))
+		visible_emote(pick("nuzzles [friend].", "brushes against [friend].", "rubs against [friend].", "purrs."))
 
-	if(has_AI())
-		var/datum/ai_holder/AI = ai_holder
-		AI.set_follow(friend)
+		if(has_AI())
+			var/datum/ai_holder/AI = ai_holder
+			AI.set_follow(friend)
+	else
+		to_chat(L, span("notice", "[src] ignores you."))
+	//VOREStation Edit End
 
 
 //RUNTIME IS ALIVE! SQUEEEEEEEE~
@@ -96,6 +102,7 @@
 	icon_state = "cat"
 	item_state = "cat"
 	named = TRUE
+	makes_dirt = 0 //Vorestation Edit
 
 /mob/living/simple_mob/animal/passive/cat/kitten
 	name = "kitten"
@@ -103,6 +110,7 @@
 	icon_state = "kitten"
 	item_state = "kitten"
 	gender = NEUTER
+	holder_type = /obj/item/weapon/holder/cat/kitten //VOREStation Edit
 
 /mob/living/simple_mob/animal/passive/cat/kitten/Initialize()
 	if(gender == NEUTER)
@@ -128,6 +136,11 @@
 	item_state = "cat3"
 	named = TRUE
 	holder_type = /obj/item/weapon/holder/cat/fluff/bones
+
+// VOREStation Edit - Adds generic tactical kittens
+/obj/item/weapon/holder/cat/kitten
+	icon_state = "kitten"
+	w_class = ITEMSIZE_SMALL
 
 /datum/say_list/cat
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")

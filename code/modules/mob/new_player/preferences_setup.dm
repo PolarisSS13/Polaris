@@ -204,7 +204,7 @@
 	var/datum/job/previewJob
 	// Determine what job is marked as 'High' priority, and dress them up as such.
 	if(job_civilian_low & ASSISTANT)
-		previewJob = job_master.GetJob("Assistant")
+		previewJob = job_master.GetJob(USELESS_JOB)
 	else
 		for(var/datum/job/job in job_master.occupations)
 			var/job_flag
@@ -252,27 +252,11 @@
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
-	if(!mannequin.dna) // Special handling for preview icons before SSAtoms has initailized.
-		mannequin.dna = new /datum/dna(null)
 	mannequin.delete_inventory(TRUE)
 	dress_preview_mob(mannequin)
-	mannequin.toggle_tail(setting = TRUE)
-	mannequin.toggle_wing(setting = TRUE)
 	COMPILE_OVERLAYS(mannequin)
 
-	preview_icon = icon('icons/effects/128x48.dmi', bgstate)
-	preview_icon.Scale(48+32, 16+32)
-
-	var/icon/stamp = getFlatIcon(mannequin, defdir=NORTH)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 25, 17)
-
-	stamp = getFlatIcon(mannequin, defdir=WEST)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 1, 9)
-
-	stamp = getFlatIcon(mannequin, defdir=SOUTH)
-	preview_icon.Blend(stamp, ICON_OVERLAY, 49, 1)
-
-	preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
+	update_character_previews(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_highest_job()
 	var/datum/job/highJob
@@ -299,10 +283,12 @@
 	var/list/valid_hairstyles = list()
 	for(var/hairstyle in hair_styles_list)
 		var/datum/sprite_accessory/S = hair_styles_list[hairstyle]
-		if(!(species in S.species_allowed))
+		if(!(species in S.species_allowed) && (!custom_base || !(custom_base in S.species_allowed))) //VOREStation Edit - Custom species base species allowance
 			continue
+		if((!S.ckeys_allowed) || (usr.ckey in S.ckeys_allowed)) //VOREStation Edit, allows ckey locked hairstyles.
+			valid_hairstyles[S.name] = hairstyle //VOREStation Edit, allows ckey locked hairstyles.
 
-		valid_hairstyles[hairstyle] = hair_styles_list[hairstyle]
+		//valid_hairstyles[hairstyle] = hair_styles_list[hairstyle] //VOREStation Edit. Replaced by above.
 
 	return valid_hairstyles
 
@@ -314,7 +300,7 @@
 			continue
 		if(biological_gender == FEMALE && S.gender == MALE)
 			continue
-		if(!(species in S.species_allowed))
+		if(!(species in S.species_allowed) && (!custom_base || !(custom_base in S.species_allowed))) //VOREStation Edit - Custom species base species allowance
 			continue
 
 		valid_facialhairstyles[facialhairstyle] = facial_hair_styles_list[facialhairstyle]

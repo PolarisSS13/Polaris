@@ -33,7 +33,7 @@
 		TME.stored_password = stored_password
 		TME.log_in()
 		TME.error = ""
-		TME.check_for_new_messages(TRUE)
+		TME.check_for_new_messages(1)
 
 /datum/computer_file/program/email_client/proc/new_mail_notify()
 	var/turf/T = get_turf(computer) // Because visible_message is being a butt
@@ -50,7 +50,7 @@
 
 	var/check_count = TME.check_for_new_messages()
 	if(check_count)
-		if(check_count == NTOS_EMAIL_NEWMESSAGE)
+		if(check_count == 2)
 			new_mail_notify()
 		ui_header = "ntnrc_new.gif"
 	else

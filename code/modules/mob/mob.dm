@@ -40,6 +40,7 @@
 	else
 		living_mob_list += src
 	lastarea = get_area(src)
+	hook_vr("mob_new",list(src)) //VOREStation Code
 	update_transform() // Some mobs may start bigger or smaller than normal.
 	return ..()
 
@@ -193,10 +194,6 @@
 				client.eye = loc
 		return TRUE
 
-
-/mob/proc/show_inv(mob/user as mob)
-	return
-
 //mob verbs are faster than object verbs. See http://www.byond.com/forum/?post=1326139&page=2#comment8198716 for why this isn't atom/verb/examine()
 /mob/verb/examinate(atom/A as mob|obj|turf in view())
 	set name = "Examine"
@@ -305,7 +302,7 @@
 	set src in usr
 	if(usr != src)
 		to_chat(usr, "No.")
-	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb. Can also be used for OOC notes about your character.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)
+	var/msg = sanitize(input(usr,"Set the flavor text in your 'examine' verb.","Flavor Text",html_decode(flavor_text)) as message|null, extra = 0)	//VOREStation Edit: separating out OOC notes
 
 	if(msg != null)
 		flavor_text = msg
@@ -478,16 +475,6 @@
 /mob/proc/pull_damage()
 	return 0
 
-/mob/MouseDrop(mob/M as mob)
-	..()
-	if(M != usr) return
-	if(usr == src) return
-	if(!Adjacent(usr)) return
-	if(usr.incapacitated(INCAPACITATION_STUNNED | INCAPACITATION_FORCELYING | INCAPACITATION_KNOCKOUT | INCAPACITATION_RESTRAINED)) return //Incapacitated.
-	if(istype(M,/mob/living/silicon/ai)) return
-	show_inv(usr)
-
-
 /mob/verb/stop_pulling()
 
 	set name = "Stop Pulling"
@@ -627,8 +614,6 @@
 
 	if(.)
 		if(statpanel("Status"))
-			if(client)
-				stat(null, "Ping: [round(client.lastping, 1)]ms (Average: [round(client.avgping, 1)]ms)")
 			stat(null, "Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
 			if(ticker && ticker.current_state != GAME_STATE_PREGAME)
 				stat("Station Time", stationtime2text())
@@ -641,10 +626,6 @@
 				stat("CPU:","[world.cpu]")
 				stat("Instances:","[world.contents.len]")
 				stat(null, "Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
-
-			if(statpanel("Processes"))
-				if(processScheduler)
-					processScheduler.statProcesses()
 
 			if(statpanel("MC"))
 				stat("Location:", "([x], [y], [z]) [loc]")
@@ -673,6 +654,7 @@
 			if(statpanel("Tickets"))
 				GLOB.ahelp_tickets.stat_entry()
 
+
 			if(length(GLOB.sdql2_queries))
 				if(statpanel("SDQL2"))
 					stat("Access Global SDQL2 List", GLOB.sdql2_vv_statobj)
@@ -693,12 +675,14 @@
 							continue
 						if(is_type_in_list(A, shouldnt_see))
 							continue
+						if(A.plane > plane)
+							continue
 						stat(A)
 
 
 // facing verbs
 /mob/proc/canface()
-	if(!canmove)						return 0
+//	if(!canmove)						return 0 //VOREStation Edit. Redundant check that only affects conscious proning, actual inability to turn and shift around handled by actual inabilities.
 	if(stat)							return 0
 	if(anchored)						return 0
 	if(transforming)						return 0
@@ -1036,6 +1020,40 @@ mob/proc/yank_out_object()
 	set hidden = 1
 	set_face_dir(client.client_dir(WEST))
 
+// Begin VOREstation edit
+/mob/verb/shiftnorth()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_y <= (default_pixel_y + 16))
+		pixel_y++
+		is_shifted = TRUE
+
+/mob/verb/shiftsouth()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_y >= (default_pixel_y - 16))
+		pixel_y--
+		is_shifted = TRUE
+
+/mob/verb/shiftwest()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_x >= (default_pixel_x - 16))
+		pixel_x--
+		is_shifted = TRUE
+
+mob/verb/shifteast()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_x <= (default_pixel_x + 16))
+		pixel_x++
+		is_shifted = TRUE
+// End VOREstation edit
+
 /mob/proc/adjustEarDamage()
 	return
 
@@ -1172,6 +1190,16 @@ mob/proc/yank_out_object()
 			registered_z = new_z
 		else
 			registered_z = null
+
+GLOBAL_LIST_EMPTY(living_players_by_zlevel)
+/mob/living/update_client_z(new_z)
+	var/precall_reg_z = registered_z
+	. = ..() // will update registered_z if necessary
+	if(precall_reg_z != registered_z) // parent did work, let's do work too
+		if(precall_reg_z)
+			GLOB.living_players_by_zlevel[precall_reg_z] -= src
+		if(registered_z)
+			GLOB.living_players_by_zlevel[registered_z] += src
 
 /mob/onTransitZ(old_z, new_z)
 	..()

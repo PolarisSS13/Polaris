@@ -28,10 +28,6 @@
 	name = "stack of plastic"
 	type_to_spawn = /obj/item/stack/material/plastic
 
-/obj/fiftyspawner/copper
-	name = "stack of copper"
-	type_to_spawn = /obj/item/stack/material/copper
-
 /obj/fiftyspawner/graphite
 	name = "stack of graphite"
 	type_to_spawn = /obj/item/stack/material/graphite
@@ -96,7 +92,7 @@
 	name = "stack of logs"
 	type_to_spawn = /obj/item/stack/material/log
 
-/obj/fiftyspawner/log/sif
+/obj/fiftyspawner/log
 	name = "stack of alien logs"
 	type_to_spawn = /obj/item/stack/material/log/sif
 

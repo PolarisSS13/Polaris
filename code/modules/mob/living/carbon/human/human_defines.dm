@@ -36,6 +36,7 @@
 	var/b_synth							//Same as above
 	var/synth_markings = 0				//Enables/disables markings on synth parts.
 
+	//var/size_multiplier = 1 //multiplier for the mob's icon size //VOREStation Edit (Moved to /mob/living)
 	var/damage_multiplier = 1 //multiplies melee combat damage
 	var/icon_update = 1 //whether icon updating shall take place
 
@@ -114,34 +115,6 @@
 	var/mob/living/carbon/human/vr_link = null
 
 	var/obj/machinery/machine_visual //machine that is currently applying visual effects to this mob. Only used for camera monitors currently.
+
+	inventory_panel_type = /datum/inventory_panel/human
 	butchery_loot = list(/obj/item/stack/animalhide/human = 1)
-
-	// Horray Furries!
-	var/datum/sprite_accessory/ears/ear_style = null
-	var/r_ears = 30
-	var/g_ears = 30
-	var/b_ears = 30
-	var/r_ears2 = 30
-	var/g_ears2 = 30
-	var/b_ears2 = 30
-	var/datum/sprite_accessory/tail/tail_style = null
-	var/r_tail = 30
-	var/g_tail = 30
-	var/b_tail = 30
-	var/r_tail2 = 30
-	var/g_tail2 = 30
-	var/b_tail2 = 30
-	var/datum/sprite_accessory/wing/wing_style = null
-	var/r_wing = 30
-	var/g_wing = 30
-	var/b_wing = 30
-	var/r_wing2 = 30
-	var/g_wing2 = 30
-	var/b_wing2 = 30
-
-	var/wagging = 0 //UGH.
-	var/flapping = 0
-
-	// Custom Species Name
-	var/custom_species
-

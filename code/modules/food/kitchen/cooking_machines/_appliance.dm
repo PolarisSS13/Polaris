@@ -81,6 +81,30 @@
 	else
 		to_chat(user, "<span class='notice>'It is empty.</span>")
 
+/obj/machinery/appliance/proc/report_progress_tgui(datum/cooking_item/CI)
+	if(!CI || !CI.max_cookwork)
+		return list("average", "Not Cooking.")
+
+	if(!CI.cookwork)
+		return list("blue", "Cold.")
+
+	var/progress = CI.cookwork / CI.max_cookwork
+
+	if (progress < 0.25)
+		return list("blue", "It's barely started cooking.")
+	if (progress < 0.75)
+		return list("average", "It's cooking away nicely.")
+	if (progress < 1)
+		return list("good", "It's almost ready!")
+
+	var/half_overcook = (CI.overcook_mult - 1)*0.5
+	if (progress < 1+half_overcook)
+		return list("good", "It's done!")
+	if (progress < CI.overcook_mult)
+		return list("bad", "It looks overcooked, get it out!")
+	else
+		return list("bad", "It is burning!")
+
 /obj/machinery/appliance/proc/report_progress(var/datum/cooking_item/CI)
 	if (!CI || !CI.max_cookwork)
 		return null
@@ -240,7 +264,7 @@
 /obj/machinery/appliance/attackby(var/obj/item/I, var/mob/user)
 	if(!cook_type || (stat & (BROKEN)))
 		to_chat(user, "<span class='warning'>\The [src] is not working.</span>")
-		return
+		return FALSE
 
 	var/obj/item/ToCook = I
 
@@ -297,13 +321,13 @@
 		cooking_objs.Add(CI)
 		user.visible_message("<span class='notice'>\The [user] puts \the [I] into \the [src].</span>")
 		if (CC.check_contents() == 0)//If we're just putting an empty container in, then dont start any processing.
-			return
+			return TRUE
 	else
 		if (CI && istype(CI))
 			I.forceMove(CI.container)
 
 		else //Something went wrong
-			return
+			return FALSE
 
 	if (selected_option)
 		CI.combine_target = selected_option
@@ -365,7 +389,7 @@
 	else if(istype(I, /obj/item/weapon/holder))
 		var/obj/item/weapon/holder/H = I
 		if (H.held_mob)
-			work += (H.held_mob.mob_size * H.held_mob.mob_size * 2)+2
+			work += ((H.held_mob.mob_size * H.held_mob.size_multiplier) * (H.held_mob.mob_size * H.held_mob.size_multiplier) * 2)+2
 
 	CI.max_cookwork += work
 
@@ -391,7 +415,7 @@
 	for(var/obj/item/weapon/holder/H in CI.container.contents)
 		var/mob/living/M = H.held_mob
 		if(M)
-			M.apply_damage(rand(1,3) * (1/M.mob_size), mobdamagetype, pick(BP_ALL)) // Allows special handling for mice/smaller mobs.
+			M.apply_damage(rand(1,3) * (1/M.size_multiplier), mobdamagetype, pick(BP_ALL))
 
 	return TRUE
 
@@ -575,11 +599,11 @@
 		FA.alarm()
 
 /obj/machinery/appliance/attack_hand(var/mob/user)
-	if (cooking_objs.len)
-		if (removal_menu(user))
-			return
-		else
-			..()
+	if(..())
+		return
+	
+	if(cooking_objs.len)
+		removal_menu(user)
 
 /obj/machinery/appliance/proc/removal_menu(var/mob/user)
 	if (can_remove_items(user))
@@ -597,7 +621,7 @@
 		return TRUE
 	return FALSE
 
-/obj/machinery/appliance/proc/can_remove_items(var/mob/user)
+/obj/machinery/appliance/proc/can_remove_items(var/mob/user, show_warning = TRUE)
 	if (!Adjacent(user))
 		return FALSE
 

@@ -124,7 +124,7 @@ GLOBAL_LIST_INIT(disposal_pipe_recipes, list(
 //
 /datum/pipe_recipe/pipe
 	var/obj/item/pipe/construction_type 		// The type PATH to the type of pipe fitting object the recipe makes.
-	var/paintable = FALSE						// If TRUE, allow the RPD to paint this pipe.
+	var/paintable = FALSE						// If TRUE, allow the RPD to paint this pipe.	// VOREStation Add
 
 /datum/pipe_recipe/pipe/New(var/label, var/obj/machinery/atmospherics/path)
 	name = label
@@ -134,7 +134,7 @@ GLOBAL_LIST_INIT(disposal_pipe_recipes, list(
 	dirtype = initial(construction_type.dispenser_class)
 	if (dirtype == PIPE_TRIN_M)
 		icon_state_m = "[icon_state]m"
-	paintable = ispath(path, /obj/machinery/atmospherics/pipe) && !(ispath(path, /obj/machinery/atmospherics/pipe/vent))
+	paintable = ispath(path, /obj/machinery/atmospherics/pipe) && !(ispath(path, /obj/machinery/atmospherics/pipe/vent))	// VOREStation Add
 
 
 //

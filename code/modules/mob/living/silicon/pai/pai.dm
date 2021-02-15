@@ -35,6 +35,15 @@
 		"Fox" = "pai-fox",
 		"Parrot" = "pai-parrot",
 		"Rabbit" = "pai-rabbit",
+		//VOREStation Addition Start
+		"Bear" = "pai-bear",
+		"Fennec" = "pai-fen",
+		"Type Zero" = "pai-typezero",
+		"Raccoon" = "pai-raccoon",
+		"Raptor" = "pai-raptor",
+		"Rat" = "rat",
+		"Panther" = "panther"
+		//VOREStation Addition End
 		)
 
 	var/global/list/possible_say_verbs = list(
@@ -44,6 +53,7 @@
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows"),
 		"Canine" = list("yaps","barks","woofs"),
+		"Rodent" = list("squeaks", "SQUEAKS", "sqiks")	//VOREStation Edit - TFF 22/11/19 - CHOMPStation port of pAI additions,
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -117,6 +127,13 @@
 		if(M)
 			M.toff = TRUE
 	..()
+
+/mob/living/silicon/pai/Login()
+	..()
+	// Vorestation Edit: Meta Info for pAI
+	if (client.prefs)
+		ooc_notes = client.prefs.metadata
+
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()
@@ -268,6 +285,10 @@
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
+		var/datum/belly/inside_belly = check_belly(card) //VOREStation edit.
+		if(inside_belly) //VOREStation edit.
+			to_chat(src, "<span class='notice'>There is no room to unfold in here. You're good and stuck.</span>") //VOREStation edit.
+			return 0 //VOREStation edit.
 		if(ishuman(holder))
 			var/mob/living/carbon/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.organs)
@@ -290,6 +311,9 @@
 
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
+	verbs += /mob/living/silicon/pai/proc/pai_nom //VOREStation edit
+	verbs += /mob/living/proc/set_size //VOREStation edit
+	verbs += /mob/living/proc/shred_limb //VORREStation edit
 
 /mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
@@ -306,6 +330,8 @@
 
 	close_up()
 
+//VOREStation Removal Start - TFF 22/11/19 - Refactored in pai_vr.dm
+/*
 /mob/living/silicon/pai/proc/choose_chassis()
 	set category = "pAI Commands"
 	set name = "Choose Chassis"
@@ -322,6 +348,8 @@
 
 	chassis = possible_chassis[choice]
 	verbs |= /mob/living/proc/hide
+//VOREStation Removal End
+*/
 
 /mob/living/silicon/pai/proc/choose_verbs()
 	set category = "pAI Commands"
@@ -347,6 +375,8 @@
 			rig.force_rest(src)
 	else
 		resting = !resting
+		icon_state = resting ? "[chassis]_rest" : "[chassis]"
+		update_icon() //VOREStation edit
 		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
 
 	canmove = !resting
@@ -378,6 +408,8 @@
 	if(src.loc == card)
 		return
 
+	release_vore_contents() //VOREStation Add
+
 	var/turf/T = get_turf(src)
 	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
 
@@ -406,6 +438,7 @@
 	canmove = 1
 	resting = 0
 	icon_state = "[chassis]"
+	verbs -= /mob/living/silicon/pai/proc/pai_nom //VOREStation edit. Let's remove their nom verb
 
 // No binary for pAIs.
 /mob/living/silicon/pai/binarycheck()

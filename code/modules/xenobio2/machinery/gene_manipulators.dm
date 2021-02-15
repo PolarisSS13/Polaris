@@ -115,7 +115,7 @@
 
 /obj/machinery/xenobio/extractor
 	name = "biological product destructive analyzer"
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/hydroponics_machines_vr.dmi' //VOREStation Edit
 	icon_state = "traitcopier"
 	circuit = /obj/item/weapon/circuitboard/bioproddestanalyzer
 
@@ -256,7 +256,7 @@
 	disk_needs_genes = 1
 	circuit = /obj/item/weapon/circuitboard/biobombarder
 
-	var/mob/living/simple_animal/xeno/slime/occupant
+	var/mob/living/simple_mob/xeno/slime/occupant
 
 /obj/machinery/xenobio/editor/Initialize()
 	. = ..()
@@ -270,7 +270,7 @@
 			return
 		else
 			if(isxeno(G.affecting))
-				var/mob/living/simple_animal/xeno/X = G.affecting
+				var/mob/living/simple_mob/xeno/X = G.affecting
 				if(do_after(user, 30) && X.Adjacent(src) && user.Adjacent(src) && X.Adjacent(user) && !occupant)
 					user.drop_from_inventory(G)
 					X.forceMove(src)
@@ -367,7 +367,7 @@
 		to_chat(user, "<span class='danger'>The [src] is locked and running, wait for it to finish.</span>")
 		return
 
-	if(!(istype(victim, /mob/living/simple_animal/xeno/slime)) )
+	if(!(istype(victim, /mob/living/simple_mob/xeno/slime)) )
 		to_chat(user, "<span class='danger'>This is not a suitable subject for the [src]!</span>")
 		return
 

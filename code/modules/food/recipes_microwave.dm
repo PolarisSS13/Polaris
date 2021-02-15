@@ -697,7 +697,6 @@ I said no!
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/bageltwo
 
-
 //Recipes that use RECIPE_REAGENT_REPLACE will
 //simplify the end product and balance the amount of reagents
 //in some foods. Many require the space spice reagent/condiment
@@ -765,6 +764,13 @@ I said no!
 	)
 	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/weapon/reagent_containers/food/snacks/lomein
+
+/datum/recipe/chickennoodlesoup
+	fruit = list("carrot" = 1)
+	reagents = list("water" = 10)
+	items = list( /obj/item/weapon/reagent_containers/food/snacks/spagetti, /obj/item/weapon/reagent_containers/food/snacks/rawcutlet)
+	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
+	result = /obj/item/weapon/reagent_containers/food/snacks/chickennoodlesoup
 
 /datum/recipe/chickennoodlesoup
 	fruit = list("carrot" = 1)

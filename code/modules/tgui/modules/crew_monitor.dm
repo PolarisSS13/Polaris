@@ -2,6 +2,11 @@
 	name = "Crew monitor"
 	tgui_id = "CrewMonitor"
 
+/datum/tgui_module/crew_monitor/ui_assets(mob/user)
+	return list(
+		get_asset_datum(/datum/asset/simple/nanomaps),
+	)
+
 /datum/tgui_module/crew_monitor/tgui_act(action, params, datum/tgui/ui)
 	if(..())
 		return TRUE
@@ -67,7 +72,17 @@
 /datum/tgui_module/crew_monitor/ntos
 	ntos = TRUE
 
+// Subtype for glasses_state
+/datum/tgui_module/crew_monitor/glasses
+/datum/tgui_module/crew_monitor/glasses/tgui_state(mob/user)
+	return GLOB.tgui_glasses_state
+
 // Subtype for self_state
 /datum/tgui_module/crew_monitor/robot
 /datum/tgui_module/crew_monitor/robot/tgui_state(mob/user)
 	return GLOB.tgui_self_state
+
+// Subtype for nif_state
+/datum/tgui_module/crew_monitor/nif
+/datum/tgui_module/crew_monitor/nif/tgui_state(mob/user)
+	return GLOB.tgui_nif_state

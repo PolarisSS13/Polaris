@@ -62,6 +62,7 @@
 						if(ishuman(M))
 							var/mob/living/carbon/human/H = M
 							BITSET(H.hud_updateflag, IMPLOYAL_HUD)
+							BITSET(H.hud_updateflag, BACKUP_HUD) //VOREStation Add - Backup HUD updates
 
 					src.imp = null
 					update()

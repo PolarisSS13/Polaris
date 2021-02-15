@@ -1,7 +1,7 @@
 /obj/machinery/portable_atmospherics/hydroponics
 	name = "hydroponics tray"
 	desc = "A tray usually full of fluid for growing plants."
-	icon = 'icons/obj/hydroponics_machines.dmi'
+	icon = 'icons/obj/hydroponics_machines_vr.dmi' //VOREStation Edit
 	icon_state = "hydrotray3"
 	density = 1
 	anchored = 1
@@ -44,6 +44,12 @@
 	// Seed details/line data.
 	var/datum/seed/seed = null // The currently planted seed
 
+	var/image/ov_lowhealth
+	var/image/ov_lowwater
+	var/image/ov_lownutri
+	var/image/ov_harvest
+	var/image/ov_frozen
+	var/image/ov_alert3
 
 	// Reagent information for process(), consider moving this to a controller along
 	// with cycle information under 'mechanical concerns' at some point.
@@ -170,6 +176,8 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/Initialize()
 	. = ..()
+	if(!ov_lowhealth)
+		setup_overlays()
 	temp_chem_holder = new()
 	temp_chem_holder.create_reagents(10)
 	create_reagents(200)
@@ -195,8 +203,6 @@
 	lastcycle = world.time
 
 	qdel(S)
-
-	GLOB.seed_planted_shift_roundstat++
 
 	check_health()
 	update_icon()
@@ -360,7 +366,7 @@
 
 	//Remove the seed if something is already planted.
 	if(seed) seed = null
-	seed = plant_controller.seeds[pick(list("reishi","nettle","amanita","mushrooms","plumphelmet","towercap","harebells","weeds"))]
+	seed = SSplants.seeds[pick(list("reishi","nettle","amanita","mushrooms","plumphelmet","towercap","harebells","weeds"))]
 	if(!seed) return //Weed does not exist, someone fucked up.
 
 	dead = 0
@@ -390,7 +396,7 @@
 	// We need to make sure we're not modifying one of the global seed datums.
 	// If it's not in the global list, then no products of the line have been
 	// harvested yet and it's safe to assume it's restricted to this tray.
-	if(!isnull(plant_controller.seeds[seed.name]))
+	if(!isnull(SSplants.seeds[seed.name]))
 		seed = seed.diverge()
 	seed.mutate(severity,get_turf(src))
 
@@ -446,8 +452,8 @@
 
 	var/previous_plant = seed.display_name
 	var/newseed = seed.get_mutant_variant()
-	if(newseed in plant_controller.seeds)
-		seed = plant_controller.seeds[newseed]
+	if(newseed in SSplants.seeds)
+		seed = SSplants.seeds[newseed]
 	else
 		return
 

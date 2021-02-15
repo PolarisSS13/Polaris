@@ -1,4 +1,5 @@
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
+//VOREStation Edit Start - Updating this for Virgo
 var/global/list/default_internal_channels = list(
 	num2text(PUB_FREQ) = list(),
 	num2text(AI_FREQ)  = list(access_synth),
@@ -10,20 +11,22 @@ var/global/list/default_internal_channels = list(
 	num2text(MED_I_FREQ)=list(access_medical_equip),
 	num2text(SEC_FREQ) = list(access_security),
 	num2text(SEC_I_FREQ)=list(access_security),
-	num2text(SCI_FREQ) = list(access_tox,access_robotics,access_xenobiology),
-	num2text(SUP_FREQ) = list(access_cargo),
-	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics)
+	num2text(SCI_FREQ) = list(access_tox, access_robotics, access_xenobiology),
+	num2text(SUP_FREQ) = list(access_cargo, access_mining_station),
+	num2text(SRV_FREQ) = list(access_janitor, access_library, access_hydroponics, access_bar, access_kitchen),
+	num2text(EXP_FREQ) = list(access_explorer, access_pilot)
 )
 
 var/global/list/default_medbay_channels = list(
 	num2text(PUB_FREQ) = list(),
-	num2text(MED_FREQ) = list(access_medical_equip),
-	num2text(MED_I_FREQ) = list(access_medical_equip)
+	num2text(MED_FREQ) = list(),
+	num2text(MED_I_FREQ) = list()
 )
+//VOREStation Edit End
 
 /obj/item/device/radio
-	icon = 'icons/obj/radio.dmi'
-	name = "station bounced radio"
+	icon = 'icons/obj/radio_vr.dmi' //VOREStation Edit
+	name = "shortwave radio" //VOREStation Edit
 	desc = "Used to talk to people when headsets don't function. Range is limited."
 	suffix = "\[3\]"
 	icon_state = "walkietalkie"
@@ -58,7 +61,7 @@ var/global/list/default_medbay_channels = list(
 	var/bs_tx_preload_id
 	var/bs_rx_preload_id
 
-	matter = list("glass" = 25, DEFAULT_WALL_MATERIAL = 75, MAT_COPPER = 15)
+	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
@@ -148,18 +151,10 @@ var/global/list/default_medbay_channels = list(
 
 	return tgui_interact(user)
 
-/obj/item/device/radio/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nano_ui/master_ui, datum/topic_state/state)
-	log_runtime(EXCEPTION("Warning: [user] attempted to call ui_interact on radio [src] [type]. This is deprecated. Please update the caller to tgui_interact."))
-
-/obj/item/device/radio/Topic(href, href_list)
-	if(href_list["track"])
-		log_runtime(EXCEPTION("Warning: Topic() was improperly called on radio [src] [type], with the track href and \[[href] [json_encode(href_list)]]. Please update the caller to use tgui_act."))
-	. = ..()
-
 /obj/item/device/radio/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
-		ui = new(user, src, "Radio", name, parent_ui = parent_ui)
+		ui = new(user, src, "Radio", name, parent_ui)
 		ui.open()
 
 /obj/item/device/radio/tgui_data(mob/user)

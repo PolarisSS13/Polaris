@@ -19,32 +19,35 @@
 
 /obj/structure/closet/emcloset/Initialize()
 	switch (pickweight(list("small" = 55, "aid" = 25, "tank" = 10, "both" = 10)))
+	//VOREStation Block Edit Start - Modified List
 		if ("small")
 			starts_with = list(
 				/obj/item/weapon/tank/emergency/oxygen = 2,
 				/obj/item/clothing/mask/breath = 2,
-				/obj/item/clothing/suit/space/emergency,
-				/obj/item/clothing/head/helmet/space/emergency)
+				/obj/item/clothing/suit/space/emergency = 2,
+				/obj/item/clothing/head/helmet/space/emergency = 2)
 		if ("aid")
 			starts_with = list(
 				/obj/item/weapon/tank/emergency/oxygen,
 				/obj/item/weapon/storage/toolbox/emergency,
 				/obj/item/clothing/mask/breath,
-				/obj/item/weapon/storage/firstaid/o2,
 				/obj/item/clothing/suit/space/emergency,
 				/obj/item/clothing/head/helmet/space/emergency)
 		if ("tank")
 			starts_with = list(
 				/obj/item/weapon/tank/emergency/oxygen/engi = 2,
-				/obj/item/clothing/mask/breath = 2)
+				/obj/item/clothing/mask/breath = 2,
+				/obj/item/clothing/suit/space/emergency = 2,
+				/obj/item/clothing/head/helmet/space/emergency = 2)
 		if ("both")
 			starts_with = list(
 				/obj/item/weapon/storage/toolbox/emergency,
-				/obj/item/weapon/tank/emergency/oxygen/engi,
-				/obj/item/clothing/mask/breath,
 				/obj/item/weapon/storage/firstaid/o2,
+				/obj/item/weapon/tank/emergency/oxygen/engi = 2,
+				/obj/item/clothing/mask/breath = 2,
 				/obj/item/clothing/suit/space/emergency = 2,
 				/obj/item/clothing/head/helmet/space/emergency = 2)
+	//VOREStation Block Edit End
 
 	return ..()
 
@@ -126,7 +129,8 @@
 		starts_with += /obj/item/clothing/gloves/yellow
 	if(prob(40))
 		starts_with += /obj/item/clothing/head/hardhat
-
+	if(prob(30))
+		starts_with += /obj/item/weapon/reagent_containers/spray/windowsealant //VOREStation Add
 	return ..()
 
 /*
@@ -186,6 +190,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	store_mobs = 0
 
 	starts_with = list(
 		/obj/item/clothing/suit/fire/firefighter,
@@ -205,3 +210,4 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	store_mobs = 0

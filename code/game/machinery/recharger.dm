@@ -2,7 +2,7 @@
 /obj/machinery/recharger
 	name = "recharger"
 	desc = "A standard recharger for all devices that use power."
-	icon = 'icons/obj/stationobjs.dmi'
+	icon = 'icons/obj/stationobjs_vr.dmi' //VOREStation Edit
 	icon_state = "recharger0"
 	anchored = 1
 	use_power = USE_POWER_IDLE
@@ -10,7 +10,7 @@
 	active_power_usage = 40000	//40 kW
 	var/efficiency = 40000 //will provide the modified power rate when upgraded
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/modular_computer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/cell, /obj/item/device/flashlight, /obj/item/device/electronic_assembly, /obj/item/weapon/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/device/flash, /obj/item/device/defib_kit)
+	var/list/allowed_devices = list(/obj/item/weapon/gun/energy, /obj/item/weapon/melee/baton, /obj/item/modular_computer, /obj/item/weapon/computer_hardware/battery_module, /obj/item/weapon/cell, /obj/item/device/suit_cooling_unit/emergency, /obj/item/device/flashlight, /obj/item/device/electronic_assembly, /obj/item/weapon/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/device/flash, /obj/item/device/defib_kit, /obj/item/ammo_casing/microbattery)  //VOREStation Add - NSFW Batteries
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -68,7 +68,7 @@
 			if(EW.use_external_power)
 				to_chat(user, "<span class='notice'>\The [EW] has no recharge port.</span>")
 				return
-		if(!G.get_cell())
+		if(!G.get_cell() && !istype(G, /obj/item/ammo_casing/microbattery))	//VOREStation Edit: NSFW charging
 			to_chat(user, "\The [G] does not have a battery installed.")
 			return
 
@@ -132,6 +132,19 @@
 			else
 				icon_state = icon_state_charged
 				update_use_power(USE_POWER_IDLE)
+
+		//VOREStation Add - NSFW Batteries
+		else if(istype(charging, /obj/item/ammo_casing/microbattery))
+			var/obj/item/ammo_casing/microbattery/batt = charging
+			if(batt.shots_left >= initial(batt.shots_left))
+				icon_state = icon_state_charged
+				update_use_power(USE_POWER_IDLE)
+			else
+				icon_state = icon_state_charging
+				batt.shots_left++
+				update_use_power(USE_POWER_ACTIVE)
+			return
+		//VOREStation Add End
 
 /obj/machinery/recharger/emp_act(severity)
 	if(stat & (NOPOWER|BROKEN) || !anchored)

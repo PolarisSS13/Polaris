@@ -16,7 +16,6 @@
 	icon = 'icons/obj/toy.dmi'
 	icon_state = "ripleytoy"
 	drop_sound = 'sound/mecha/mechstep.ogg'
-	description_info = "To engage in mech battles, hold this mech while clicking on another toy mech, or a player who is also holding a toy mech. You must be within 2 tiles (This allows you to battle across a table). Battles are entirely randomized, and mechs with higher health and special abilities have a better chance of winning."
 	reach = 2 // So you can battle across the table!
 	
 	// Mech Battle Vars

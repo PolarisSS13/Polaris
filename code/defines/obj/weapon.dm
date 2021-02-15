@@ -81,7 +81,7 @@
 
 /obj/item/weapon/disk
 	name = "disk"
-	icon = 'icons/obj/items.dmi'
+	icon = 'icons/obj/discs_vr.dmi' //VOREStation Edit
 	drop_sound = 'sound/items/drop/disk.ogg'
 	pickup_sound =  'sound/items/pickup/disk.ogg'
 

@@ -27,7 +27,7 @@
 /obj/machinery/alarm
 	name = "alarm"
 	desc = "Used to control various station atmospheric systems. The light indicates the current air status of the area."
-	icon = 'icons/obj/monitors.dmi'
+	icon = 'icons/obj/monitors_vr.dmi' //VOREStation Edit - Other icons
 	icon_state = "alarm0"
 	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
@@ -130,6 +130,11 @@
 	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
+
+	//VOREStation Add
+	pixel_x = (src.dir & 3)? 0 : (src.dir == 4 ? -28 : 28)
+	pixel_y = (src.dir & 3)? (src.dir ==1 ? -28 : 28) : 0
+	//VOREStation Add End
 
 /obj/machinery/alarm/Initialize()
 	. = ..()
@@ -775,3 +780,14 @@
 	..()
 	spawn(rand(0,15))
 		update_icon()
+
+// VOREStation Edit Start
+/obj/machinery/alarm/freezer
+	target_temperature = T0C - 13.15 // Chilly freezer room
+
+/obj/machinery/alarm/freezer/first_run()
+	. = ..()
+
+	TLV["temperature"] =	list(T0C - 40, T0C - 20, T0C + 40, T0C + 66) // K, Lower Temperature for Freezer Air Alarms (This is because TLV is hardcoded to be generated on first_run, and therefore the only way to modify this without changing TLV generation)
+
+// VOREStation Edit End

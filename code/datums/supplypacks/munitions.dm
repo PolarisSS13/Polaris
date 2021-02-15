@@ -8,7 +8,7 @@
 
 /datum/supply_pack/randomised/munitions
 	group = "Munitions"
-
+/* VOREStation Removal - What? This crate costs 40... the crate with just two eguns costs 50... what??? This crate is also like "the armory" and has OFFICER access?
 /datum/supply_pack/munitions/weapons
 	name = "Weapons - Security basic equipment"
 	contains = list(
@@ -22,7 +22,7 @@
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/lawson
 	containername = "Security equipment crate"
-	access = access_security
+	access = access_security*/
 
 /datum/supply_pack/munitions/egunpistol
 	name = "Weapons - Energy sidearms"
@@ -30,7 +30,7 @@
 	cost = 40
 	containertype = /obj/structure/closet/crate/secure/lawson
 	containername = "Energy sidearms crate"
-	access = access_security
+	access = access_armory //VOREStation Edit - Guns are for the armory.
 
 /datum/supply_pack/munitions/flareguns
 	name = "Weapons - Flare guns"
@@ -43,7 +43,7 @@
 	cost = 25
 	containertype = /obj/structure/closet/crate/secure/gear
 	containername = "Flare gun crate"
-	access = access_security
+	access = access_armory //VOREStation Edit - Guns are for the armory.
 
 /datum/supply_pack/munitions/eweapons
 	name = "Weapons - Experimental weapons crate"
@@ -57,7 +57,7 @@
 
 /datum/supply_pack/munitions/energyweapons
 	name = "Weapons - Laser rifle crate"
-	contains = list(/obj/item/weapon/gun/energy/laser = 3)
+	contains = list(/obj/item/weapon/gun/energy/laser = 2) //VOREStation Edit - Made to be consistent with the energy guns crate.
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/heph
 	containername = "Energy weapons crate"
@@ -74,7 +74,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Shotgun crate"
 	access = access_armory
-
+/* VOREStation edit -- This is a bad idea. -- So is this.
 /datum/supply_pack/munitions/erifle
 	name = "Weapons - Energy marksman"
 	contains = list(/obj/item/weapon/gun/energy/sniperrifle = 2)
@@ -90,7 +90,7 @@
 	containertype = /obj/structure/closet/crate/secure/lawson
 	containername = "Burst laser crate"
 	access = access_armory
-
+*/
 /datum/supply_pack/munitions/ionweapons
 	name = "Weapons - Electromagnetic Rifles"
 	contains = list(
@@ -141,8 +141,51 @@
  			)
  	cost = 40
  	containertype = /obj/structure/closet/crate/secure/weapon
- 	containername = "Ballistic weapons crate"
- 	access = access_security
+ 	containername = "Ballistic Weapons crate"
+ 	access = access_armory //VOREStation Edit - Guns are for the armory.
+
+/datum/supply_pack/munitions/caseless
+	name = "Weapons - Prototype Caseless Rifle"
+	contains = list(
+			/obj/item/weapon/gun/projectile/caseless/prototype,
+			/obj/item/ammo_magazine/m5mmcaseless = 3
+			)
+	cost = 60
+	containertype = /obj/structure/closet/crate/secure/gilthari
+	containername = "Caseless rifle crate"
+	access = access_security
+
+/datum/supply_pack/munitions/mrifle
+	name = "Weapons - Magnetic Rifles"
+	contains = list(/obj/item/weapon/gun/magnetic/railgun/heater = 2)
+	cost = 120
+	containertype = /obj/structure/closet/crate/secure/heph
+	containername = "Magnetic weapon crate"
+	access = access_armory
+
+/datum/supply_pack/munitions/mpistol
+	name = "Weapons - Magnetic Pistols"
+	contains = list(/obj/item/weapon/gun/magnetic/railgun/heater/pistol = 2)
+	cost = 200
+	containertype = /obj/structure/closet/crate/secure/heph
+	containername = "Magnetic weapon crate"
+	access = access_armory
+
+/datum/supply_pack/munitions/mcarbine
+	name = "Weapons - Magnetic Carbines"
+	contains = list(/obj/item/weapon/gun/magnetic/railgun/flechette/sif = 2)
+	cost = 130
+	containertype = /obj/structure/closet/crate/secure/lawson
+	containername = "Magnetic weapon crate"
+	access = access_security
+
+/datum/supply_pack/munitions/mshells
+	name = "Weapons - Magnetic Shells"
+	contains = list(/obj/item/weapon/magnetic_ammo = 3)
+	cost = 100
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "Magnetic ammunition crate"
+	access = access_security
 
 /datum/supply_pack/munitions/caseless
 	name = "Weapons - Prototype Caseless Rifle"
@@ -204,7 +247,7 @@
 	cost = 25
 	containertype = /obj/structure/closet/crate
 	containername = "Ballistic ammunition crate"
-	access = null
+	access = access_armory //VOREStation Edit - Guns are for the armory.
 
 /datum/supply_pack/munitions/bsmgammo
 	name = "Ammunition - 9mm top mounted lethal"

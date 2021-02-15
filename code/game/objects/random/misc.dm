@@ -258,7 +258,7 @@
 	icon_state = "purplecomb"
 	spawn_nothing_percentage = 50
 /obj/random/contraband/item_to_spawn()
-	return pick(prob(6);/obj/item/weapon/storage/pill_bottle/tramadol,
+	return pick(prob(6);/obj/item/weapon/storage/pill_bottle/paracetamol, //VOREStation Edit,
 				prob(8);/obj/item/weapon/haircomb,
 				prob(4);/obj/item/weapon/storage/pill_bottle/happy,
 				prob(4);/obj/item/weapon/storage/pill_bottle/zoom,
@@ -661,7 +661,23 @@
 				/obj/item/toy/plushie/spider,
 				/obj/item/toy/plushie/tabby_cat,
 				/obj/item/toy/plushie/tuxedo_cat,
-				/obj/item/toy/plushie/white_cat)
+				/obj/item/toy/plushie/white_cat,
+				//VOREStation Add Start
+				/obj/item/toy/plushie/lizardplushie,
+				/obj/item/toy/plushie/lizardplushie/kobold,
+				/obj/item/toy/plushie/lizardplushie/resh,
+				/obj/item/toy/plushie/slimeplushie,
+				/obj/item/toy/plushie/box,
+				/obj/item/toy/plushie/borgplushie,
+				/obj/item/toy/plushie/borgplushie/medihound,
+				/obj/item/toy/plushie/borgplushie/scrubpuppy,
+				/obj/item/toy/plushie/foxbear,
+				/obj/item/toy/plushie/nukeplushie,
+				/obj/item/toy/plushie/otter,
+				/obj/item/toy/plushie/vox,
+				/obj/item/toy/plushie/borgplushie/drakiesec,
+				/obj/item/toy/plushie/borgplushie/drakiemed)
+				//VOREStation Add End
 
 /obj/random/plushielarge
 	name = "random large plushie"

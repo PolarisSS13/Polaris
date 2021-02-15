@@ -292,6 +292,7 @@
 		if(!ismob(mob))
 			player_list -= mob
 			continue
+		//VOREStation Edit End - Trying to fix some vorestation bug.
 		if(get_turf(mob) in hearturfs)
 			mobs |= mob
 			continue

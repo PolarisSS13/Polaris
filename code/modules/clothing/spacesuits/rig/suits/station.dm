@@ -98,8 +98,8 @@
 		/obj/item/rig_module/device/plasmacutter,
 		/obj/item/rig_module/device/drill,
 		/obj/item/rig_module/device/orescanner,
-		/obj/item/rig_module/vision/meson
-		)
+		/obj/item/rig_module/vision/material,
+		/obj/item/rig_module/maneuvering_jets) //VOREStation Edit - Added maneuvering jets
 
 //Engineering suit
 /obj/item/weapon/rig/eva
@@ -161,6 +161,7 @@
 
 	helm_type = /obj/item/clothing/head/helmet/space/rig/ce
 	glove_type = /obj/item/clothing/gloves/gauntlets/rig/ce
+	boot_type = /obj/item/clothing/shoes/magboots/rig/ce //VOREStation Add
 
 	allowed = list(
 		/obj/item/device/flashlight,

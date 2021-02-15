@@ -1,9 +1,3 @@
-#define TOPIC_NOACTION 0
-#define TOPIC_HANDLED 1
-#define TOPIC_REFRESH 2
-#define TOPIC_UPDATE_PREVIEW 4
-#define TOPIC_REFRESH_UPDATE_PREVIEW (TOPIC_REFRESH|TOPIC_UPDATE_PREVIEW)
-
 #define PREF_FBP_CYBORG "cyborg"
 #define PREF_FBP_POSI "posi"
 #define PREF_FBP_SOFTWARE "software"
@@ -32,15 +26,15 @@
 	name = "Loadout"
 	sort_order = 5
 	category_item_type = /datum/category_item/player_setup_item/loadout
-
+/* //VOREStation Removal
 /datum/category_group/player_setup_category/trait_preferences
 	name = "Traits"
 	sort_order = 6
 	category_item_type = /datum/category_item/player_setup_item/traits
-
+*/ //VOREStation Removal End
 /datum/category_group/player_setup_category/global_preferences
 	name = "Global"
-	sort_order = 7
+	sort_order = 6 //VOREStation Edit due to above commented out
 	category_item_type = /datum/category_item/player_setup_item/player_global
 
 /****************************
@@ -238,7 +232,7 @@
 
 	. = OnTopic(href, href_list, usr)
 	if(. & TOPIC_UPDATE_PREVIEW)
-		pref_mob.client.prefs.preview_icon = null
+		pref_mob.client.prefs.update_preview_icon()
 	if(. & TOPIC_REFRESH)
 		pref_mob.client.prefs.ShowChoices(usr)
 

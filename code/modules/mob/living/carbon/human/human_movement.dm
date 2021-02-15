@@ -25,8 +25,26 @@
 	if(can_feel_pain())
 		if(halloss >= 10) . += (halloss / 10) //halloss shouldn't slow you down if you can't even feel it
 
-	var/hungry = (MAX_NUTRITION - nutrition) / 5
+	var/hungry = (500 - nutrition) / 5 //VOREStation Edit - Fixed 500 here instead of our huge MAX_NUTRITION
 	if (hungry >= 70) . += hungry/50
+
+	//VOREstation start
+	if (feral >= 10) //crazy feral animals give less and less of a shit about pain and hunger as they get crazier
+		. = max(species.slowdown, species.slowdown+((.-species.slowdown)/(feral/10))) // As feral scales to damage, this amounts to an effective +1 slowdown cap
+		if(shock_stage >= 10) . -= 1.5 //this gets a +3 later, feral critters take reduced penalty
+	if(reagents.has_reagent("numbenzyme"))
+		. += 1.5 //A tad bit of slowdown.
+	if(riding_datum) //Bit of slowdown for taur rides if rider is bigger or fatter than mount.
+		var/datum/riding/R = riding_datum
+		var/mob/living/L = R.ridden
+		for(var/mob/living/M in L.buckled_mobs)
+			if(ishuman(M))
+				var/mob/living/carbon/human/H = M
+				if(H.size_multiplier > L.size_multiplier)
+					. += 1
+				if(H.weight > L.weight)
+					. += 1
+	//VOREstation end
 
 	if(istype(buckled, /obj/structure/bed/chair/wheelchair))
 		for(var/organ_name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM))
@@ -146,6 +164,9 @@
 			. += turf_move_cost
 
 	// Wind makes it easier or harder to move, depending on if you're with or against the wind.
+	// I don't like that so I'm commenting it out :)
+	// VOREstation Edit Start 
+/*
 	if(T.outdoors && (T.z <= SSplanets.z_to_planet.len))
 		var/datum/planet/P = SSplanets.z_to_planet[z]
 		if(P)
@@ -158,6 +179,8 @@
 				else if(direct & reverse_dir[WH.wind_dir])
 					. += WH.wind_speed
 
+*/
+// VOREstation Edit End.
 #undef HUMAN_LOWEST_SLOWDOWN
 
 /mob/living/carbon/human/get_jetpack()
@@ -183,6 +206,8 @@
 		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.do_thrust(0.01, src)))
 			inertia_dir = 0
 			return 1
+	if(flying) //VOREStation Edit. If you're flying, you glide around!
+		return 0  //VOREStation Edit.
 
 	return 0
 
@@ -227,7 +252,6 @@
 		return
 
 	var/S = pick(footstep_sounds)
-	GLOB.step_taken_shift_roundstat++
 	if(!S) return
 
 	// Play every 20 steps while walking, for the sneak

@@ -179,6 +179,9 @@
 		if(attempt_move(interim, TRUE))
 			interim.shuttle_arrived()
 
+			if(process_longjump(current_location, destination)) //VOREStation Edit - To hook custom shuttle code in
+				return //VOREStation Edit - It handled it for us (shuttle crash or such)
+
 			var/last_progress_sound = 0
 			var/made_warning = FALSE
 			while (world.time < arrive_time)
@@ -252,6 +255,11 @@
 			log_shuttle("Shuttle [src] aborting attempt_move() because current_location=[current_location] refuses.")
 		return FALSE
 
+	// Observer pattern pre-move
+	var/old_location = current_location
+	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
+	current_location.shuttle_departed(src)
+
 	if(debug_logging)
 		log_shuttle("[src] moving to [destination]. Areas are [english_list(shuttle_area)]")
 	var/list/translation = list()
@@ -259,11 +267,6 @@
 		if(debug_logging)
 			log_shuttle("Translating [A]")
 		translation += get_turf_translation(get_turf(current_location), get_turf(destination), A.contents)
-	var/old_location = current_location
-
- 	// Observer pattern pre-move
-	GLOB.shuttle_pre_move_event.raise_event(src, old_location, destination)
-	current_location.shuttle_departed(src)
 
 	// Actually do it! (This never fails)
 	perform_shuttle_move(destination, translation)
@@ -337,6 +340,10 @@
 						//M.throw_at_random(FALSE, 4, 1)
 						if(istype(M, /mob/living/carbon))
 							M.Weaken(3)
+							//VOREStation Add
+							if(move_direction)
+								throw_a_mob(M,move_direction)
+							//VOREStation Add End
 		// We only need to rebuild powernets for our cables.  No need to check machines because they are on top of cables.
 		for(var/obj/structure/cable/C in A)
 			powernets |= C.powernet

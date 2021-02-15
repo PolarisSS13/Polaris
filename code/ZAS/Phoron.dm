@@ -47,6 +47,12 @@ obj/var/contaminated = 0
 		return 0
 	else if(istype(src,/obj/item/weapon/storage/backpack))
 		return 0 //Cannot be washed :(
+	//VOREStation Addition start
+	else if(isbelly(loc))
+		return 0
+	else if(ismob(loc) && isbelly(loc.loc))
+		return 0
+	//VOREStation Addition end
 	else if(istype(src,/obj/item/clothing))
 		return 1
 
@@ -101,7 +107,7 @@ obj/var/contaminated = 0
 			updatehealth()
 
 	//Burn eyes if exposed.
-	if(vsc.plc.EYE_BURNS && (species.breath_type != "phoron"))
+	if(vsc.plc.EYE_BURNS && species.breath_type && (species.breath_type != "phoron"))		//VOREStation Edit: those who don't breathe
 		var/burn_eyes = 1
 
 		//Check for protective glasses
@@ -114,6 +120,10 @@ obj/var/contaminated = 0
 
 		//Check for protective helmets
 		if(burn_eyes && head && (head.body_parts_covered & EYES) && (head.item_flags & AIRTIGHT))
+			burn_eyes = 0
+
+		//VOREStation Edit - NIF Support
+		if(nif && nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))
 			burn_eyes = 0
 
 		//If we still need to, burn their eyes

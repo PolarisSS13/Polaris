@@ -79,7 +79,8 @@
 /obj/item/weapon/storage/box/survival/synth
 	name = "synthetic supply box"
 	desc = "A survival box issued to synthetic crew members for use in emergency situations."
-	starts_with = list()
+	starts_with = list(
+	)
 
 /obj/item/weapon/storage/box/survival/comp
 	name = "emergency supply box"

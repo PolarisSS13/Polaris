@@ -180,7 +180,7 @@
 
 /proc/get_access_by_id(id)
 	var/list/AS = get_all_access_datums_by_id()
-	return AS[id]
+	return AS["[id]"]
 
 /proc/get_all_jobs()
 	var/list/all_jobs = list()
@@ -238,6 +238,9 @@ proc/get_all_job_icons() //For all existing HUD icons
 	var/obj/item/weapon/card/id/I = GetID()
 
 	if(I)
+		if(istype(I,/obj/item/weapon/card/id/centcom))
+			return "Centcom"
+
 		var/job_icons = get_all_job_icons()
 		if(I.assignment	in job_icons) //Check if the job has a hud icon
 			return I.assignment

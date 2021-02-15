@@ -53,6 +53,18 @@ macro "borghotkeymode"
 	elem 
 		name = "SOUTH+REP"
 		command = ".movedown"
+	elem
+		name = "CTRL+SHIFT+NORTH"
+		command = "shiftnorth"
+	elem
+		name = "CTRL+SHIFT+SOUTH"
+		command = "shiftsouth"
+	elem
+		name = "CTRL+SHIFT+WEST"
+		command = "shiftwest"
+	elem
+		name = "CTRL+SHIFT+EAST"
+		command = "shifteast"
 	elem 
 		name = "INSERT"
 		command = "a-intent right"
@@ -274,6 +286,18 @@ macro "macro"
 	elem 
 		name = "SOUTH+REP"
 		command = ".movedown"
+	elem
+		name = "CTRL+SHIFT+NORTH"
+		command = "shiftnorth"
+	elem
+		name = "CTRL+SHIFT+SOUTH"
+		command = "shiftsouth"
+	elem
+		name = "CTRL+SHIFT+WEST"
+		command = "shiftwest"
+	elem
+		name = "CTRL+SHIFT+EAST"
+		command = "shifteast"
 	elem 
 		name = "INSERT"
 		command = "a-intent right"
@@ -441,6 +465,18 @@ macro "hotkeymode"
 	elem 
 		name = "SOUTH+REP"
 		command = ".movedown"
+	elem
+		name = "CTRL+SHIFT+NORTH"
+		command = "shiftnorth"
+	elem
+		name = "CTRL+SHIFT+SOUTH"
+		command = "shiftsouth"
+	elem
+		name = "CTRL+SHIFT+WEST"
+		command = "shiftwest"
+	elem
+		name = "CTRL+SHIFT+EAST"
+		command = "shifteast"
 	elem 
 		name = "INSERT"
 		command = "a-intent right"
@@ -474,6 +510,9 @@ macro "hotkeymode"
 	elem 
 		name = "5"
 		command = ".me"
+	elem 
+		name = "6"
+		command = "subtle"
 	elem 
 		name = "A+REP"
 		command = ".moveleft"
@@ -551,12 +590,10 @@ macro "hotkeymode"
 		command = ".northeast"
 	elem 
 		name = "Y"
-		command = "Activate-Held-Object"
-		is-disabled = false
+		command = "whisper"
 	elem 
 		name = "CTRL+Y"
-		command = "Activate-Held-Object"
-		is-disabled = false
+		command = "whisper"
 	elem 
 		name = "Z"
 		command = "Activate-Held-Object"
@@ -679,6 +716,18 @@ macro "borgmacro"
 	elem 
 		name = "SOUTH+REP"
 		command = ".movedown"
+	elem
+		name = "CTRL+SHIFT+NORTH"
+		command = "shiftnorth"
+	elem
+		name = "CTRL+SHIFT+SOUTH"
+		command = "shiftsouth"
+	elem
+		name = "CTRL+SHIFT+WEST"
+		command = "shiftwest"
+	elem
+		name = "CTRL+SHIFT+EAST"
+		command = "shifteast"
 	elem 
 		name = "INSERT"
 		command = "a-intent right"
@@ -1135,23 +1184,9 @@ window "mainwindow"
 		anchor2 = none
 		is-default = true
 		saved-params = "pos;size;is-minimized;is-maximized"
-		on-size = ""
-		title = "Polaris Station 13"
-		titlebar = true
-		statusbar = true
-		can-close = true
-		can-minimize = true
-		can-resize = true
-		is-pane = false
-		is-minimized = false
+		title = "VOREStation"
 		is-maximized = true
-		can-scroll = none
-		icon = 'icons\\ss13_64.png'
-		image = ""
-		image-mode = stretch
-		keep-aspect = false
-		transparent-color = none
-		alpha = 255
+		icon = 'icons\\virgoicon.png'
 		macro = "macro"
 		menu = "menu"
 	elem "asset_cache_browser"
@@ -1236,7 +1271,6 @@ window "mapwindow"
 		text-color = none
 		is-default = true
 		saved-params = "icon-size"
-		zoom-mode = "distort"
 		on-show = ".winset\"mainwindow.mainvsplit.left=mapwindow\""
 		on-hide = ".winset\"mainwindow.mainvsplit.left=\""
 		style=".center { text-align: center; } .maptext { font-family: 'Small Fonts'; font-size: 7px; -dm-text-outline: 1px black; color: white; line-height: 1.1; } .small { font-size: 6px; } .big { font-size: 8px; } .reallybig { font-size: 8px; } .extremelybig { font-size: 8px; } .clown { color: #FF69Bf;} .tajaran {color: #803B56;} .skrell {color: #00CED1;} .solcom {color: #22228B;} .com_srus {color: #7c4848;} .zombie	{color: #ff0000;} .soghun {color: #228B22;} .vox {color: #AA00AA;} .diona {color: #804000; font-weight: bold;} .trinary {color: #727272;} .kidan {color: #664205;} .slime {color: #0077AA;} .drask {color: #a3d4eb;} .vulpkanin {color: #B97A57;} .abductor {color: #800080; font-style: italic;} .his_grace { color: #15D512; } .hypnophrase { color: #0d0d0d; font-weight: bold; } .yell { font-weight: bold; }"
@@ -1412,6 +1446,14 @@ window "rpane"
 		command = ".winset \"rpanewindow.left=infowindow\""
 		group = "rpanemode"
 		button-type = pushbox
+	elem "mediapanel"
+		type = BROWSER
+		pos = 392,25
+		size = 1x1
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = ""
 
 window "browserwindow"
 	elem "browserwindow"
@@ -1434,6 +1476,31 @@ window "browserwindow"
 		saved-params = ""
 		on-show = ".winset\"rpane.infob.is-visible=true?rpane.infob.pos=130,0;rpane.textb.is-visible=true;rpane.browseb.is-visible=true;rpane.browseb.is-checked=true;rpane.rpanewindow.pos=0,30;rpane.rpanewindow.size=0x0;rpane.rpanewindow.left=browserwindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=true?rpane.infob.is-checked=true rpane.infob.pos=65,0 rpane.rpanewindow.left=infowindow:rpane.rpanewindow.left=textwindow rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0\""
+
+window "preferences_window"
+	elem "preferences_window"
+		type = MAIN
+		pos = 281,0
+		size = 1000x800
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
+	elem "preferences_browser"
+		type = BROWSER
+		pos = 0,0
+		size = 800x800
+		anchor1 = 0,0
+		anchor2 = 80,100
+		saved-params = ""
+	elem "character_preview_map"
+		type = MAP
+		pos = 800,0
+		size = 200x800
+		anchor1 = 80,0
+		anchor2 = 100,100
+		right-click = true
 
 window "infowindow"
 	elem "infowindow"

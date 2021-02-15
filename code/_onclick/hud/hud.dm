@@ -81,6 +81,12 @@ var/list/global_huds = list(
 	centermarker.icon_state = "centermarker"
 	centermarker.screen_loc = "CENTER,CENTER"
 
+	//Marks the center of the screen, for things like ventcrawl
+	centermarker = new /obj/screen()
+	centermarker.icon = 'icons/mob/screen1.dmi'
+	centermarker.icon_state = "centermarker"
+	centermarker.screen_loc = "CENTER,CENTER"
+
 	nvg = setup_overlay("nvg_hud")
 	thermal = setup_overlay("thermal_hud")
 	meson = setup_overlay("meson_hud")

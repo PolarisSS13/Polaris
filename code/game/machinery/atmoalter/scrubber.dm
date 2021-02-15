@@ -150,14 +150,16 @@
 /obj/machinery/portable_atmospherics/powered/scrubber/huge
 	name = "Huge Air Scrubber"
 	desc = "A larger variation of the portable scrubber, for industrial scrubbing of air. Must be turned on from a remote terminal."
+	icon = 'icons/obj/atmos_vr.dmi' //VOREStation Edit - New Sprite
 	icon_state = "scrubber:0"
 	anchored = 1
 	volume = 500000
 	volume_rate = 7000
 
 	use_power = USE_POWER_IDLE
-	idle_power_usage = 500		//internal circuitry, friction losses and stuff
-	active_power_usage = 100000	//100 kW ~ 135 HP
+	idle_power_usage = 50		//VOREStation Edit //internal circuitry, friction losses and stuff
+	active_power_usage = 1000	//VOREStation Edit // Blowers running
+	power_rating = 100000	//VOREStation Add //100 kW ~ 135 HP
 
 	var/global/gid = 1
 	var/id = 0

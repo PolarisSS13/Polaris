@@ -41,9 +41,6 @@
 /datum/computer_file/program/tgui_host()
 	return computer.tgui_host()
 
-/datum/computer_file/program/tgui_host()
-	return computer.tgui_host()
-
 /datum/computer_file/program/clone()
 	var/datum/computer_file/program/temp = ..()
 	temp.required_access = required_access
@@ -222,12 +219,6 @@
 		return TM.check_eye(user)
 	else
 		return -1
-
-/obj/item/modular_computer/initial_data()
-	return get_header_data()
-
-/obj/item/modular_computer/update_layout()
-	return TRUE
 
 /datum/computer_file/program/apply_visual(mob/M)
 	if(TM)

@@ -8,11 +8,12 @@
 #define CHANNEL_AMBIENCE 1018
 #define CHANNEL_BUZZ 1017
 #define CHANNEL_BICYCLE 1016
+#define CHANNEL_PREYLOOP 1015	//VORESTATION ADD - Fancy Sound Loop channel
 
 //THIS SHOULD ALWAYS BE THE LOWEST ONE!
 //KEEP IT UPDATED
 
-#define CHANNEL_HIGHEST_AVAILABLE 1015
+#define CHANNEL_HIGHEST_AVAILABLE 1014	//VORESTATION EDIT - Fancy Sound Loop channel from 1015
 
 #define SOUND_MINIMUM_PRESSURE 10
 #define FALLOFF_SOUNDS 0.5
@@ -170,7 +171,7 @@
 	'sound/ambience/foreboding/foreboding3.ogg',\
 	'sound/ambience/foreboding/foreboding4.ogg',\
 	'sound/ambience/foreboding/foreboding5.ogg',\
-	'sound/ambience/maintenance/maintenance6.ogg'\
+	'sound/ambience/foreboding/foreboding6.ogg'\
 	)
 
 // Ambience heard when aboveground on Sif and not in a Point of Interest.

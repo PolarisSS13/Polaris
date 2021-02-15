@@ -88,7 +88,7 @@ var/warrant_uid = 0
 					W.fields["auth"] = "Unauthorized"
 					W.fields["arrestsearch"] = "arrest"
 				if(temp == "search")
-					W.fields["namewarrant"] = "No suspect/location given"
+					W.fields["namewarrant"] = "No suspect/location given" // VOREStation edit
 					W.fields["charges"] = "No reason given"
 					W.fields["auth"] = "Unauthorized"
 					W.fields["arrestsearch"] = "search"
@@ -133,5 +133,7 @@ var/warrant_uid = 0
 
 		if("editwarrantauth")
 			. = TRUE
-
+			if(!(access_hos in I.access)) // VOREStation edit begin
+				to_chat(usr, "<span class='warning'>You don't have the access to do this!</span>")
+				return // VOREStation edit end
 			activewarrant.fields["auth"] = "[I.registered_name] - [I.assignment ? I.assignment : "(Unknown)"]"

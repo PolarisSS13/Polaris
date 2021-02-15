@@ -3,12 +3,14 @@
 	name = "APLU \"Ripley\""
 	icon_state = "ripley"
 	initial_icon = "ripley"
-	step_in = 6
+	step_in = 5 // vorestation edit, was 6 but that's PAINFULLY slow
+	step_energy_drain = 5 // vorestation edit because 10 drained a significant chunk of its cell before you even got out the airlock
 	max_temperature = 20000
 	health = 200
 	maxhealth = 200		//Don't forget to update the /old variant if  you change this number.
 	wreckage = /obj/effect/decal/mecha_wreckage/ripley
 	cargo_capacity = 10
+	var/obj/item/weapon/mining_scanner/orescanner // vorestation addition
 
 	minimum_penetration = 10
 
@@ -107,6 +109,22 @@
 
 	icon_scale_x = 1
 	icon_scale_y = 1
+
+//Vorestation Edit Start
+
+/obj/mecha/working/ripley/New()
+	..()
+	orescanner = new /obj/item/weapon/mining_scanner
+
+/obj/mecha/working/ripley/verb/detect_ore()
+	set category = "Exosuit Interface"
+	set name = "Detect Ores"
+	set src = usr.loc
+	set popup_menu = 0
+
+	orescanner.attack_self(usr)
+
+//Vorestation Edit End
 
 //Meant for random spawns.
 /obj/mecha/working/ripley/mining/old

@@ -3,7 +3,7 @@
 /datum/event/ionstorm
 	has_skybox_image = TRUE
 	announceWhen = -1 // Never (setup may override)
-	var/botEmagChance = 0.05
+	var/botEmagChance = 0 //VOREStation Edit
 	var/cloud_hueshift
 	var/list/players = list()
 
@@ -53,7 +53,7 @@
 		to_chat(target, law)
 		target.add_ion_law(law)
 		target.show_laws()
-
+/* //VOREstation edit. Was fucking up all PDA messagess.
 	if(message_servers)
 		for (var/obj/machinery/message_server/MS in message_servers)
 			MS.spamfilter.Cut()
@@ -62,7 +62,7 @@
 				MS.spamfilter += pick("kitty","HONK","rev","malf","liberty","freedom","drugs", "[using_map.station_short]", \
 					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
 					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
-
+*/
 /datum/event/ionstorm/tick()
 	if(botEmagChance)
 		for(var/mob/living/bot/bot in mob_list)
@@ -199,14 +199,14 @@ Would like to add a law like "Law x is _______" where x = a number, and _____ is
 
 	spawn(0)
 		to_world("Started processing APCs")
-		for (var/obj/machinery/power/apc/APC in machines)
+		for (var/obj/machinery/power/apc/APC in GLOB.apcs)
 			if(APC.z in station_levels)
 				APC.ion_act()
 				apcnum++
 		to_world("Finished processing APCs. Processed: [apcnum]")
 	spawn(0)
 		to_world("Started processing SMES")
-		for (var/obj/machinery/power/smes/SMES in machines)
+		for (var/obj/machinery/power/smes/SMES in GLOB.smeses)
 			if(SMES.z in station_levels)
 				SMES.ion_act()
 				smesnum++

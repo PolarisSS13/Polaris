@@ -94,6 +94,7 @@
 /obj/item/organ/internal/mmi_holder/removed(var/mob/living/user)
 
 	if(stored_mmi)
+		. = stored_mmi //VOREStation Code
 		stored_mmi.loc = get_turf(src)
 		if(owner.mind)
 			owner.mind.transfer_to(stored_mmi.brainmob)
@@ -105,7 +106,7 @@
 	qdel(src)
 
 /obj/item/organ/internal/mmi_holder/emp_act(severity)
-	..()
+	// ..() // VOREStation Edit - Don't take damage
 	owner?.adjustToxLoss(rand(6/severity, 12/severity))
 
 /obj/item/organ/internal/mmi_holder/posibrain

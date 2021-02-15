@@ -32,7 +32,7 @@
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(SC)
 			h_user.put_in_hands(SC)
-		to_chat(user, "<span class='notice'>You combine the Thalers to a bundle of [SC.worth] [initial_name]s.</span>")
+		to_chat(user, "<span class='notice'>You combine the [initial_name]s to a bundle of [SC.worth] [initial_name]s.</span>")
 		qdel(src)
 
 /obj/item/weapon/spacecash/update_icon()

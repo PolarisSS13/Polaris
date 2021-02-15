@@ -80,8 +80,8 @@
 		Paralyse(3)
 		AdjustSleeping(-1)
 
-	if(src.resting)
-		Weaken(5)
+	//if(src.resting) // VOREStation edit. Our borgos would rather not.
+	//	Weaken(5)
 
 	if(health < config.health_threshold_dead && src.stat != 2) //die only once
 		death()

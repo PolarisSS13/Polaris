@@ -28,7 +28,15 @@ SUBSYSTEM_DEF(nightshift)
 	var/announce_z
 	if(using_map.station_levels.len)
 		announce_z = pick(using_map.station_levels)
-	priority_announcement.Announce(message, new_title = "Automated Lighting System Announcement", new_sound = 'sound/misc/notice2.ogg', zlevel = announce_z)
+	//VOREStation Edit - TTS
+	var/pickedsound
+	if(!high_security_mode)
+		if(nightshift_active)
+			pickedsound = 'sound/AI/dim_lights.ogg'
+		else
+			pickedsound = 'sound/AI/bright_lights.ogg'
+	priority_announcement.Announce(message, new_title = "Automated Lighting System Announcement", new_sound = pickedsound, zlevel = announce_z)
+	//VOREStation Edit End
 
 /datum/controller/subsystem/nightshift/proc/check_nightshift(check_canfire=FALSE) //This is called from elsewhere, like setting the alert levels
 	if(check_canfire && !can_fire)
@@ -56,7 +64,7 @@ SUBSYSTEM_DEF(nightshift)
 			announce("Good evening, crew. To reduce power consumption and stimulate the circadian rhythms of some species, all of the lights aboard the station have been dimmed for the night.")
 		else
 			announce("Good morning, crew. As it is now day time, all of the lights aboard the station have been restored to their former brightness.")
-	for(var/obj/machinery/power/apc/apc in machines)
+	for(var/obj/machinery/power/apc/apc in GLOB.apcs)
 		if(apc.z in using_map.station_levels)
 			apc.set_nightshift(active, TRUE)
 			CHECK_TICK

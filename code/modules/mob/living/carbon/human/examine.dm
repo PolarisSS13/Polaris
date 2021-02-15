@@ -95,7 +95,11 @@
 
 	var/name_ender = ""
 	if(!((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)))
-		if(looks_synth)
+		//VOREStation Add Start
+		if(custom_species)
+			name_ender = ", a <b>[src.custom_species]</b>"
+		else if(looks_synth)
+		//VOREStation Add End
 			var/use_gender = "a synthetic"
 			if(gender == MALE)
 				use_gender = "an android"
@@ -276,6 +280,21 @@
 	if(suiciding)
 		msg += "<span class='warning'>[T.He] appears to have commited suicide... there is no hope of recovery.</span>"
 
+	//VOREStation Add
+	var/list/vorestrings = list()
+	vorestrings += examine_weight()
+	vorestrings += examine_nutrition()
+	vorestrings += examine_bellies()
+	vorestrings += examine_pickup_size()
+	vorestrings += examine_step_size()
+	vorestrings += examine_nif()
+	vorestrings += examine_chimera()
+	for(var/entry in vorestrings)
+		if(entry == "" || entry == null)
+			vorestrings -= entry
+	msg += vorestrings
+	//VOREStation Add End
+
 	if(mSmallsize in mutations)
 		msg += "[T.He] [T.is] very short!"
 
@@ -303,6 +322,12 @@
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg]. It doesn't look like [T.he] [T.is] waking up anytime soon.</span>"
 		else if(!client)
 			msg += "<span class='deadsay'>[T.He] [T.is] [ssd_msg].</span>"
+		//VOREStation Add Start
+		if(client && ((client.inactivity / 10) / 60 > 10)) //10 Minutes
+			msg += "\[Inactive for [round((client.inactivity/10)/60)] minutes\]"
+		else if(disconnect_time)
+			msg += "\[Disconnected/ghosted [round(((world.realtime - disconnect_time)/10)/60)] minutes ago\]"
+		//VOREStation Add End
 
 	var/list/wound_flavor_text = list()
 	var/list/is_bleeding = list()
@@ -415,6 +440,11 @@
 	if(flavor_text)
 		msg += "[flavor_text]"
 
+	// VOREStation Start
+	if(ooc_notes)
+		msg += "<span class = 'deptradio'>OOC Notes:</span> <a href='?src=\ref[src];ooc_notes=1'>\[View\]</a>"
+	msg += "<span class='deptradio'><a href='?src=\ref[src];vore_prefs=1'>\[Mechanical Vore Preferences\]</a></span>"
+	// VOREStation End
 	msg += "*---------*</span>"
 	if(applying_pressure)
 		msg += applying_pressure
@@ -434,6 +464,7 @@
 /proc/hasHUD(mob/M as mob, hudtype)
 	if(istype(M, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = M
+		if(hasHUD_vr(H,hudtype)) return 1 //VOREStation Add - Added records access for certain modes of omni-hud glasses
 		switch(hudtype)
 			if("security")
 				return istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud)

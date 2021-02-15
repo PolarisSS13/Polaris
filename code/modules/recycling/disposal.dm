@@ -31,7 +31,7 @@
 // find the attached trunk (if present) and init gas resvr.
 /obj/machinery/disposal/Initialize()
 	. = ..()
-
+	
 	trunk = locate() in loc
 	if(!trunk)
 		mode = 0
@@ -264,7 +264,7 @@
 
 	if(usr.loc == src)
 		to_chat(usr, "<span class='warning'>You cannot reach the controls from inside.</span>")
-		return
+		return TRUE
 
 	if(mode==-1 && action != "eject") // If the mode is -1, only allow ejection
 		to_chat(usr, "<span class='warning'>The disposal units power is disabled.</span>")
@@ -286,16 +286,15 @@
 			mode = 0
 			update()
 
-		if(!issilicon(usr))
-			if(action == "engageHandle")
-				flush = 1
-				update()
-			if(action == "disengageHandle")
-				flush = 0
-				update()
+		if(action == "engageHandle")
+			flush = 1
+			update()
+		if(action == "disengageHandle")
+			flush = 0
+			update()
 
-			if(action == "eject")
-				eject()
+		if(action == "eject")
+			eject()
 
 	return TRUE
 
@@ -481,7 +480,6 @@
 		playsound(src, 'sound/machines/disposalflush.ogg', 50, 0, 0)
 		last_sound = world.time
 	sleep(5) // wait for animation to finish
-	GLOB.disposals_flush_shift_roundstat++
 
 
 	H.init(src, air_contents)	// copy the contents of disposer to holder

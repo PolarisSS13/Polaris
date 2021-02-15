@@ -50,6 +50,7 @@
 	var/turf/base_turf //The base turf type of the area, which can be used to override the z-level's base turf
 	var/forbid_events = FALSE // If true, random events will not start inside this area.
 	var/no_spoilers = FALSE // If true, makes it much more difficult to see what is inside an area with things like mesons.
+	var/soundproofed = FALSE // If true, blocks sounds from other areas and prevents hearers on other areas from hearing the sounds within.
 
 /area/Initialize()
 	. = ..()
@@ -134,8 +135,20 @@
 /area/proc/firedoors_update()
 	if(fire || party || atmosalm)
 		firedoors_close()
+		// VOREStation Edit - Make the lights colored!
+		if(fire)
+			for(var/obj/machinery/light/L in src)
+				L.set_alert_fire()
+		else if(atmosalm)
+			for(var/obj/machinery/light/L in src)
+				L.set_alert_atmos()
+		// VOREStation Edit End
 	else
 		firedoors_open()
+		// VOREStation Edit - Put the lights back!
+		for(var/obj/machinery/light/L in src)
+			L.reset_alert()
+		// VOREStation Edit End
 
 // Close all firedoors in the area
 /area/proc/firedoors_close()
@@ -207,7 +220,7 @@
 /area/proc/updateicon()
 	if ((fire || eject || party) && (!requires_power||power_environ) && !istype(src, /area/space))//If it doesn't require power, can still activate this proc.
 		if(fire && !eject && !party)
-			icon_state = "blue"
+			icon_state = null // Let lights take care of it
 		/*else if(atmosalm && !fire && !eject && !party)
 			icon_state = "bluenew"*/
 		else if(!fire && eject && !party)
@@ -367,9 +380,9 @@ var/list/mob/living/forced_ambiance_list = new
 	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
 	if(!(L && L.is_preference_enabled(/datum/client_preference/play_ambiance)))
 		return
-	
+
 	var/volume_mod = L.get_preference_volume_channel(VOLUME_CHANNEL_AMBIENCE)
-	
+
 	// If we previously were in an area with force-played ambiance, stop it.
 	if((L in forced_ambiance_list) && initial)
 		L << sound(null, channel = CHANNEL_AMBIENCE_FORCED)

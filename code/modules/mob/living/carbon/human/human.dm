@@ -52,13 +52,13 @@
 		dna.real_name = real_name
 		sync_organ_dna()
 
-	verbs |= /mob/living/proc/toggle_selfsurgery
+	//verbs |= /mob/living/proc/toggle_selfsurgery //VOREStation Removal
 
 /mob/living/carbon/human/Destroy()
 	human_mob_list -= src
 	for(var/organ in organs)
 		qdel(organ)
-
+	QDEL_NULL(nif)	//VOREStation Add
 	return ..()
 
 /mob/living/carbon/human/Stat()
@@ -205,55 +205,6 @@
 /mob/living/carbon/human/var/co2overloadtime = null
 /mob/living/carbon/human/var/temperature_resistance = T0C+75
 
-
-/mob/living/carbon/human/show_inv(mob/user as mob)
-	if(user.incapacitated()  || !user.Adjacent(src))
-		return
-
-	var/obj/item/clothing/under/suit = null
-	if (istype(w_uniform, /obj/item/clothing/under))
-		suit = w_uniform
-
-	user.set_machine(src)
-	var/dat = "<B><HR><FONT size=3>[name]</FONT></B><BR><HR>"
-
-	for(var/entry in species.hud.gear)
-		var/list/slot_ref = species.hud.gear[entry]
-		if((slot_ref["slot"] in list(slot_l_store, slot_r_store)))
-			continue
-		var/obj/item/thing_in_slot = get_equipped_item(slot_ref["slot"])
-		dat += "<BR><B>[slot_ref["name"]]:</b> <a href='?src=\ref[src];item=[slot_ref["slot"]]'>[istype(thing_in_slot) ? thing_in_slot : "nothing"]</a>"
-
-	dat += "<BR><HR>"
-
-	if(species.hud.has_hands)
-		dat += "<BR><b>Left hand:</b> <A href='?src=\ref[src];item=[slot_l_hand]'>[istype(l_hand) ? l_hand : "nothing"]</A>"
-		dat += "<BR><b>Right hand:</b> <A href='?src=\ref[src];item=[slot_r_hand]'>[istype(r_hand) ? r_hand : "nothing"]</A>"
-
-	// Do they get an option to set internals?
-	if(istype(wear_mask, /obj/item/clothing/mask) || istype(head, /obj/item/clothing/head/helmet/space))
-		if(istype(back, /obj/item/weapon/tank) || istype(belt, /obj/item/weapon/tank) || istype(s_store, /obj/item/weapon/tank))
-			dat += "<BR><A href='?src=\ref[src];item=internals'>Toggle internals.</A>"
-
-	// Other incidentals.
-	if(istype(suit) && suit.has_sensor == 1)
-		dat += "<BR><A href='?src=\ref[src];item=sensors'>Set sensors</A>"
-	if(handcuffed)
-		dat += "<BR><A href='?src=\ref[src];item=[slot_handcuffed]'>Handcuffed</A>"
-	if(legcuffed)
-		dat += "<BR><A href='?src=\ref[src];item=[slot_legcuffed]'>Legcuffed</A>"
-
-	if(suit && LAZYLEN(suit.accessories))
-		dat += "<BR><A href='?src=\ref[src];item=tie'>Remove accessory</A>"
-	dat += "<BR><A href='?src=\ref[src];item=splints'>Remove splints</A>"
-	dat += "<BR><A href='?src=\ref[src];item=pockets'>Empty pockets</A>"
-	dat += "<BR><A href='?src=\ref[user];refresh=1'>Refresh</A>"
-	dat += "<BR><A href='?src=\ref[user];mach_close=mob[name]'>Close</A>"
-
-	user << browse(dat, text("window=mob[name];size=340x540"))
-	onclose(user, "mob[name]")
-	return
-
 // called when something steps onto a human
 // this handles mobs on fire - mulebot and vehicle code has been relocated to /mob/living/Crossed()
 /mob/living/carbon/human/Crossed(var/atom/movable/AM)
@@ -373,18 +324,19 @@
 
 
 /mob/living/carbon/human/Topic(href, href_list)
-
-	if (href_list["refresh"])
-		if((machine)&&(in_range(src, usr)))
-			show_inv(machine)
-
-	if (href_list["mach_close"])
+	if (href_list["mach_close"]) // This is horrible.
 		var/t1 = text("window=[]", href_list["mach_close"])
 		unset_machine()
 		src << browse(null, t1)
 
 	if(href_list["item"])
-		handle_strip(href_list["item"],usr)
+		log_runtime(EXCEPTION("Warning: human/Topic was called with item [href_list["item"]], but the item Topic is deprecated!"))
+		// handle_strip(href_list["item"],usr)
+
+	// VOREStation Start
+	if(href_list["ooc_notes"])
+		src.Examine_OOC()
+	// VOREStation End
 
 	if (href_list["criminal"])
 		if(hasHUD(usr,"security"))
@@ -638,7 +590,7 @@
 				src << browse(null, "window=flavor_changes")
 				return
 			if("general")
-				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing, and may include OOC notes and preferences.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)
+				var/msg = sanitize(input(usr,"Update the general description of your character. This will be shown regardless of clothing.","Flavor Text",html_decode(flavor_texts[href_list["flavor_change"]])) as message, extra = 0)	//VOREStation Edit: separating out OOC notes
 				flavor_texts[href_list["flavor_change"]] = msg
 				return
 			else
@@ -713,6 +665,11 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
+	// VOREstation start
+	if(feral)
+		to_chat(src, "<span class='warning'>Your primitive mind can't grasp the concept of that thing.</span>")
+		return 0
+	// VOREstation end
 	if(species.has_fine_manipulation)
 		return 1
 	if(!silent)
@@ -931,6 +888,14 @@
 						H.brainmob.mind.transfer_to(src)
 						qdel(H)
 
+	// Vorestation Addition - reapply markings/appearance from prefs for player mobs
+	if(client) //just to be sure
+		client.prefs.copy_to(src)
+		if(dna)
+			dna.ResetUIFrom(src)
+			sync_organ_dna()
+	// end vorestation addition
+
 	for (var/ID in virus2)
 		var/datum/disease2/disease/V = virus2[ID]
 		V.cure(src)
@@ -1096,7 +1061,7 @@
 	else
 		to_chat(usr, "<span class='warning'>You failed to check the pulse. Try again.</span>")
 
-/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour, var/regen_icons = TRUE)
+/mob/living/carbon/human/proc/set_species(var/new_species, var/default_colour, var/regen_icons = TRUE, var/mob/living/carbon/human/example = null)	//VOREStation Edit - send an example
 
 	if(!dna)
 		if(!new_species)
@@ -1124,6 +1089,7 @@
 		// Clear out their species abilities.
 		species.remove_inherent_verbs(src)
 		holder_type = null
+		hunger_rate = initial(hunger_rate) //VOREStation Add
 
 	species = GLOB.all_species[new_species]
 
@@ -1136,7 +1102,12 @@
 	if(species.icon_scale_x != 1 || species.icon_scale_y != 1)
 		update_transform()
 
-	if(species.base_color && default_colour)
+	if(example)						//VOREStation Edit begin
+		if(!(example == src))
+			r_skin = example.r_skin
+			g_skin = example.g_skin
+			b_skin = example.b_skin
+	else if(species.base_color)	//VOREStation Edit end
 		//Apply colour.
 		r_skin = hex2num(copytext(species.base_color,2,4))
 		g_skin = hex2num(copytext(species.base_color,4,6))
@@ -1154,11 +1125,15 @@
 
 	//icon_state = lowertext(species.name) //Necessary?
 
-	species.create_organs(src)
-
+	//VOREStation Edit start: swap places of those two procs
 	species.handle_post_spawn(src)
 
+	species.create_organs(src)
+	//VOREStation Edit end: swap places of those two procs
+
+
 	maxHealth = species.total_health
+	hunger_rate = species.hunger_factor //VOREStation Add
 
 	if(LAZYLEN(descriptors))
 		descriptors = null
@@ -1179,6 +1154,7 @@
 			vessel.remove_reagent("blood", vessel.total_volume - species.blood_volume)
 			vessel.maximum_volume = species.blood_volume
 		fixblood()
+		species.update_attack_types() //VOREStation Edit - Required for any trait that updates unarmed_types in setup.
 
 	// Rebuild the HUD. If they aren't logged in then login() should reinstantiate it for them.
 	update_hud()
@@ -1187,8 +1163,8 @@
 	regenerate_icons()
 
 	if(species)
-		if(mind)
-			apply_traits()
+		//if(mind) //VOREStation Removal
+			//apply_traits() //VOREStation Removal
 		return 1
 	else
 		return 0
@@ -1429,6 +1405,8 @@
 /mob/living/carbon/human/Check_Shoegrip()
 	if(shoes && (shoes.item_flags & NOSLIP) && istype(shoes, /obj/item/clothing/shoes/magboots))  //magboots + dense_object = no floating
 		return 1
+	if(flying) //VOREStation Edit. Checks to see if they have wings and are flying.
+		return 1 //VOREStation Edit.
 	return 0
 
 //Puts the item into our active hand if possible. returns 1 on success.
@@ -1556,9 +1534,8 @@
 
 /mob/living/carbon/human/proc/update_icon_special() //For things such as teshari hiding and whatnot.
 	if(status_flags & HIDING) // Hiding? Carry on.
-		if(stat == DEAD || paralysis || weakened || stunned || restrained()) //stunned/knocked down by something that isn't the rest verb? Note: This was tried with INCAPACITATION_STUNNED, but that refused to work.
-			reset_plane_and_layer()
-			status_flags &= ~HIDING
+		if(stat == DEAD || paralysis || weakened || stunned || restrained() || buckled || LAZYLEN(grabbed_by) || has_buckled_mobs()) //stunned/knocked down by something that isn't the rest verb? Note: This was tried with INCAPACITATION_STUNNED, but that refused to work. //VORE EDIT: Check for has_buckled_mobs() (taur riding)
+			reveal(null)
 		else
 			layer = HIDING_LAYER
 
@@ -1571,6 +1548,8 @@
 
 /mob/living/carbon/human/proc/get_display_species()
 	//Shows species in tooltip
+	if(src.custom_species) //VOREStation Add
+		return custom_species //VOREStation Add
 	//Beepboops get special text if obviously beepboop
 	if(looksSynthetic())
 		if(gender == MALE)
@@ -1670,3 +1649,8 @@
 			to_chat(src, span("warning", "\The [rig]'s visor has shuddenly deactivated!"))
 
 	..()
+
+/mob/living/carbon/human/reduce_cuff_time()
+	if(istype(gloves, /obj/item/clothing/gloves/gauntlets/rig))
+		return 2
+	return ..()

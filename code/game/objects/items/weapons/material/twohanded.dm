@@ -164,13 +164,17 @@
 	reach = 2 // Spears are long.
 	attackspeed = 14
 
-/obj/item/weapon/material/twohanded/riding_crop
-	name = "riding crop"
-	desc = "A rod, a little over a foot long with a widened grip and a thick, leather patch at the end. Used since the dawn of the West to control animals."
-	force_divisor = 0.05 //Required in order for the X attacks Y message to pop up.
-	unwielded_force_divisor = 1 // One here, too.
-	applies_material_colour = 1
-	unbreakable = 1
-	base_icon = "riding_crop"
-	icon_state = "riding_crop0"
-	attack_verb = list("cropped","spanked","swatted","smacked","peppered")
+//This is mostly for centaurs.
+/obj/item/weapon/material/twohanded/spear/lance
+	name = "lance"
+	desc = "End him rightly"
+	icon = 'icons/obj/weapons_vr.dmi'
+	icon_state = "lance"
+	item_state = "lance"
+	force_divisor = 0.3
+	force = 10
+	thrown_force_divisor = 1
+	default_material = "DEFAULT_WALL_MATERIAL"
+	fragile = 0
+	sharp = 1
+	edge = 0

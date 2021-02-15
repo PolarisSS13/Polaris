@@ -296,6 +296,7 @@
 	set category = "Debug"
 	set name = "Give Modifier"
 	set desc = "Makes a mob weaker or stronger by adding a specific modifier to them."
+	set popup_menu = FALSE //VOREStation Edit - Declutter.
 
 	if(!L)
 		to_chat(usr, "<span class='warning'>Looks like you didn't select a mob.</span>")
@@ -436,6 +437,17 @@
 		set_security_level(sec_level)
 		log_admin("[key_name(usr)] changed the security level to code [sec_level].")
 
+/client/proc/shuttle_panel()
+	set name = "Shuttle Control Panel"
+	set category = "Admin"
+
+	if(!check_rights(R_ADMIN | R_EVENT))
+		return
+
+	var/datum/tgui_module/admin_shuttle_controller/A = new(src)
+	A.tgui_interact(usr)
+	log_and_message_admins("has opened the shuttle panel.")
+	feedback_add_details("admin_verb","SHCP")
 
 //---- bs12 verbs ----
 
@@ -491,6 +503,7 @@
 	set category = "Fun"
 	set name = "Man Up"
 	set desc = "Tells mob to man up and deal with it."
+	set popup_menu = FALSE //VOREStation Edit - Declutter.
 
 	if(alert("Are you sure you want to tell them to man up?","Confirmation","Deal with it","No")=="No") return
 

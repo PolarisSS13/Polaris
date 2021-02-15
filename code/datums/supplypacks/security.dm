@@ -330,6 +330,7 @@
 	containertype = /obj/structure/closet/crate/secure/heph
 	containername = "Ballistic armor crate"
 	access = access_armory
+/* VOREStation Removal - Howabout no ERT armor being orderable?
 
 /datum/supply_pack/security/bullet_resistant_plates
 	name = "Armor - Ballistic plates"
@@ -382,6 +383,7 @@
 			/obj/item/clothing/shoes/boots/jackboots,
 			/obj/item/clothing/gloves/black
 			)
+*/
 
 /datum/supply_pack/security/flexitac
 	name = "Armor - Tactical Light"
@@ -547,6 +549,7 @@
 			/obj/item/clothing/under/rank/warden/corp,
 			/obj/item/clothing/suit/storage/vest/wardencoat,
 			/obj/item/clothing/suit/storage/vest/wardencoat/alt,
+			/obj/item/clothing/suit/storage/vest/wardencoat/alt2, //VOREStation Add,
 			/obj/item/clothing/head/helmet/warden,
 			/obj/item/weapon/cartridge/security,
 			/obj/item/device/radio/headset/headset_sec,
@@ -574,6 +577,7 @@
 			/obj/item/clothing/suit/storage/vest/hos,
 			/obj/item/clothing/under/rank/head_of_security/corp,
 			/obj/item/clothing/suit/storage/vest/hoscoat,
+			/obj/item/clothing/suit/storage/vest/hoscoat/jensen/alt, //VOREStation Add,
 			/obj/item/clothing/head/helmet/dermal,
 			/obj/item/weapon/cartridge/hos,
 			/obj/item/device/radio/headset/heads/hos,

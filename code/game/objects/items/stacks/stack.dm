@@ -170,37 +170,8 @@
 		var/atom/O
 		if(recipe.use_material)
 			O = new recipe.result_type(user.loc, recipe.use_material)
-
-			if(istype(O, /obj))
-				var/obj/Ob = O
-
-				if(LAZYLEN(Ob.matter))	// Law of equivalent exchange.
-					Ob.matter.Cut()
-
-				else
-					Ob.matter = list()
-
-				var/mattermult = istype(Ob, /obj/item) ? min(2000, 400 * Ob.w_class) : 2000
-
-				Ob.matter[recipe.use_material] = mattermult / produced * required
-
 		else
 			O = new recipe.result_type(user.loc)
-
-			if(recipe.matter_material)
-				if(istype(O, /obj))
-					var/obj/Ob = O
-
-					if(LAZYLEN(Ob.matter))	// Law of equivalent exchange.
-						Ob.matter.Cut()
-
-					else
-						Ob.matter = list()
-
-					var/mattermult = istype(Ob, /obj/item) ? min(2000, 400 * Ob.w_class) : 2000
-
-					Ob.matter[recipe.use_material] = mattermult / produced * required
-
 		O.set_dir(user.dir)
 		O.add_fingerprint(user)
 
@@ -408,9 +379,8 @@
 	var/on_floor = 0
 	var/use_material
 	var/pass_color
-	var/matter_material 	// Material type used for recycling. Default, uses use_material. For non-material-based objects however, matter_material is needed.
 
-/datum/stack_recipe/New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null, pass_stack_color, recycle_material = null)
+/datum/stack_recipe/New(title, result_type, req_amount = 1, res_amount = 1, max_res_amount = 1, time = 0, one_per_turf = 0, on_floor = 0, supplied_material = null, pass_stack_color)
 	src.title = title
 	src.result_type = result_type
 	src.req_amount = req_amount
@@ -422,19 +392,12 @@
 	src.use_material = supplied_material
 	src.pass_color = pass_stack_color
 
-	if(!recycle_material && src.use_material)
-		src.matter_material = src.use_material
-
-	else if(recycle_material)
-		src.matter_material = recycle_material
-
 /*
  * Recipe list datum
  */
 /datum/stack_recipe_list
 	var/title = "ERROR"
 	var/list/recipes = null
-
-/datum/stack_recipe_list/New(title, recipes)
-	src.title = title
-	src.recipes = recipes
+	New(title, recipes)
+		src.title = title
+		src.recipes = recipes

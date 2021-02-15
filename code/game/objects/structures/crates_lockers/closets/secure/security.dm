@@ -30,7 +30,10 @@
 		/obj/item/device/radio/headset/heads/hop/alt,
 		/obj/item/weapon/storage/box/ids = 2,
 		/obj/item/weapon/gun/energy/gun,
-		/obj/item/weapon/gun/projectile/sec/flash,
+		/obj/item/weapon/gun/energy/gun/martin, //VOREStation Add,
+		/obj/item/weapon/storage/box/commandkeys, //VOREStation Add,
+		/obj/item/weapon/storage/box/servicekeys, //VOREStation Add,
+		///obj/item/weapon/gun/projectile/sec/flash, //VOREStation Removal,
 		/obj/item/device/flash)
 
 /obj/structure/closet/secure_closet/hop2
@@ -124,6 +127,7 @@
 		/obj/item/clothing/under/rank/warden/corp,
 		/obj/item/clothing/suit/storage/vest/wardencoat,
 		/obj/item/clothing/suit/storage/vest/wardencoat/alt,
+		/obj/item/clothing/suit/storage/vest/wardencoat/alt2, //VOREStation Add,
 		/obj/item/clothing/head/helmet/dermal,
 		/obj/item/clothing/head/helmet/warden,
 		/obj/item/clothing/head/helmet/warden/hat,
@@ -180,7 +184,7 @@
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/head/soft/sec/corp,
 		/obj/item/clothing/under/rank/security/corp,
-		/obj/item/ammo_magazine/m45/rubber,
+		///obj/item/ammo_magazine/m45/rubber, //VOREStation Removal,
 		/obj/item/weapon/gun/energy/taser,
 		/obj/item/weapon/cell/device/weapon,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
@@ -227,7 +231,7 @@
 	starts_with = list(
 		/obj/item/clothing/accessory/badge/holo/detective,
 		/obj/item/clothing/gloves/black,
-		/obj/item/gunbox,
+		///obj/item/gunbox, //VOREStation Removal,
 		/obj/item/weapon/storage/belt/detective,
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,

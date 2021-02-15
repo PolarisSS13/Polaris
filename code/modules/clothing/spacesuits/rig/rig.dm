@@ -89,6 +89,7 @@
 	var/rigsuit_min_pressure = 0							  // Min pressure the rig protects against when sealed
 
 	var/emp_protection = 0
+	item_flags = PHORONGUARD //VOREStation add
 
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires

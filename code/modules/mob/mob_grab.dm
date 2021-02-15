@@ -47,6 +47,8 @@
 		return
 
 	affecting.grabbed_by += src
+	affecting.reveal("<span class='warning'>You are revealed as [assailant] grabs you.</span>")
+	assailant.reveal("<span class='warning'>You reveal yourself as you grab [affecting].</span>")
 
 	hud = new /obj/screen/grab(src)
 	hud.icon_state = "reinforce"
@@ -172,6 +174,12 @@
 				assailant.visible_message("<span class='warning'>[assailant] covers [affecting]'s eyes!</span>")
 			if(affecting.eye_blind < 3)
 				affecting.Blind(3)
+		//VOREStation Edit
+		if(BP_HEAD)
+			if(force_down)
+				if(announce)
+					assailant.visible_message("<span class='warning'>[assailant] sits on [target]'s face!</span>")
+		//VOREStation Edit End
 
 /obj/item/weapon/grab/attack_self()
 	return s_click(hud)

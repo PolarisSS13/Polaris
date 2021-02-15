@@ -14,7 +14,6 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 #define WTHRTAB 7
 #define MANITAB 8
 #define SETTTAB 9
-#define EXTRTAB 10
 
 /obj/item/device/communicator
 	name = "communicator"
@@ -27,9 +26,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	show_messages = 1
 
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BLUESPACE = 2, TECH_DATA = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10, MAT_COPPER = 10)
+	matter = list(DEFAULT_WALL_MATERIAL = 30,"glass" = 10)
 
-	var/video_range = 4
+	var/video_range = 3
 	var/obj/machinery/camera/communicator/video_source	// Their camera
 	var/obj/machinery/camera/communicator/camera		// Our camera
 
@@ -47,14 +46,14 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/flum = 2 // Brightness
 
 	var/list/modules = list(
-							list("module" = "Phone", "icon" = "phone64", "number" = PHONTAB),
-							list("module" = "Contacts", "icon" = "person64", "number" = CONTTAB),
-							list("module" = "Messaging", "icon" = "comment64", "number" = MESSTAB),
-							list("module" = "News", "icon" = "note64", "number" = NEWSTAB), // Need a different icon,
-							list("module" = "Note", "icon" = "note64", "number" = NOTETAB),
-							list("module" = "Weather", "icon" = "sun64", "number" = WTHRTAB),
-							list("module" = "Crew Manifest", "icon" = "note64", "number" = MANITAB), // Need a different icon,
-							list("module" = "Settings", "icon" = "gear64", "number" = SETTTAB),
+							list("module" = "Phone", "icon" = "phone", "number" = PHONTAB),
+							list("module" = "Contacts", "icon" = "user", "number" = CONTTAB),
+							list("module" = "Messaging", "icon" = "comment-alt", "number" = MESSTAB),
+							list("module" = "News", "icon" = "newspaper", "number" = NEWSTAB), // Need a different icon,
+							list("module" = "Note", "icon" = "sticky-note", "number" = NOTETAB),
+							list("module" = "Weather", "icon" = "sun", "number" = WTHRTAB),
+							list("module" = "Crew Manifest", "icon" = "crown", "number" = MANITAB), // Need a different icon,
+							list("module" = "Settings", "icon" = "cog", "number" = SETTTAB),
 							)	//list("module" = "Name of Module", "icon" = "icon name64", "number" = "what tab is the module")
 
 	var/selected_tab = HOMETAB
@@ -73,6 +72,9 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	var/update_ticks = 0
 	var/newsfeed_channel = 0
 
+	// If you turn this on, it changes the way communicator video works. User configurable option.
+	var/selfie_mode = FALSE
+
 // Proc: New()
 // Parameters: None
 // Description: Adds the new communicator to the global list of all communicators, sorts the list, obtains a reference to the Exonet node, then tries to
@@ -86,6 +88,8 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	camera = new(src)
 	camera.name = "[src] #[rand(100,999)]"
 	camera.c_tag = camera.name
+
+	setup_tgui_camera()
 
 	//This is a pretty terrible way of doing this.
 	addtimer(CALLBACK(src, .proc/register_to_holder), 5 SECONDS)
@@ -103,13 +107,6 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 			register_device(S.loc.name)
 			initialize_exonet(S.loc)
 
-// Proc: examine()
-// Parameters: user - the user doing the examining
-// Description: Allows the user to click a link when examining to look at video if one is going.
-/obj/item/device/communicator/examine(mob/user)
-	. = ..()
-	if(Adjacent(user) && video_source)
-		. += "<span class='notice'>It looks like it's on a video call: <a href='?src=\ref[src];watchvideo=1'>\[view\]</a></span>"
 
 // Proc: initialize_exonet()
 // Parameters: 1 (user - the person the communicator belongs to)
@@ -134,7 +131,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 
 	for(var/mob/living/voice/voice in contents)
 		. += "<span class='notice'>On the screen, you can see a image feed of [voice].</span>"
-
+		
 		if(voice && voice.key)
 			switch(voice.stat)
 				if(CONSCIOUS)
@@ -227,9 +224,7 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	initialize_exonet(user)
 	alert_called = 0
 	update_icon()
-	ui_interact(user)
-	if(video_source)
-		watch_video(user)
+	tgui_interact(user)
 
 // Proc: MouseDrop()
 //Same thing PDAs do
@@ -309,6 +304,11 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	listening_objects.Remove(src)
 	QDEL_NULL(camera)
 	QDEL_NULL(exonet)
+
+	last_camera_turf = null
+	qdel(cam_screen)
+	QDEL_LIST(cam_plane_masters)
+	qdel(cam_background)
 
 	return ..()
 

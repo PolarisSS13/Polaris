@@ -195,7 +195,7 @@
 /datum/map_template/surface/mountains/normal/crashedcontainmentshuttle
 	name = "Crashed Cargo Shuttle"
 	desc = "A severely damaged military shuttle, its cargo seems to remain intact."
-	mappath = 'maps/submaps/surface_submaps/mountains/crashedcontainmentshuttle.dmm'
+	mappath = 'maps/submaps/surface_submaps/mountains/crashedcontainmentshuttle_vr.dmm'	//VOREStation Edit
 	cost = 30
 
 /datum/map_template/surface/mountains/normal/deadspy
@@ -235,19 +235,27 @@
 	cost = 5
 	allow_duplicates = TRUE
 	template_group = "Underground Cliffs"
+	
+/datum/map_template/surface/mountains/normal/deadly_rabbit // VOREStation Edit
+	name = "The Killer Rabbit"
+	desc = "A cave where the Knights of the Round have fallen to a murderous Rabbit."
+	mappath = 'maps/submaps/surface_submaps/mountains/deadly_rabbit_vr.dmm'
+	cost = 5
+	allow_duplicates = FALSE
 
 /**************
  * Deep Caves *
  **************/
 
+/* Vorestation Removal
 /datum/map_template/surface/mountains/deep/lost_explorer
 	name = "Lost Explorer, Deep"
 	desc = "The remains of an explorer who rotted away ages ago, and their equipment. Again."
 	mappath = 'maps/submaps/surface_submaps/mountains/lost_explorer.dmm'
 	cost = 5
-	allow_duplicates = TRUE
+	allow_duplicates = TRUE */
 
-/datum/map_template/surface/mountains/deep/crashed_ufo
+/datum/map_template/surface/mountains/normal/crashed_ufo //VOREStation Edit
 	name = "Crashed UFO"
 	desc = "A (formerly) flying saucer that is now embedded into the mountain, yet it still seems to be running..."
 	mappath = 'maps/submaps/surface_submaps/mountains/crashed_ufo.dmm'
@@ -267,19 +275,19 @@
 	mappath = 'maps/submaps/surface_submaps/mountains/Scave1.dmm'
 	cost = 20
 
-/datum/map_template/surface/mountains/deep/CaveTrench
+/datum/map_template/surface/mountains/normal/CaveTrench //VOREStation Edit
 	name = "Cave River"
 	desc = "A strange underground river."
 	mappath = 'maps/submaps/surface_submaps/mountains/CaveTrench.dmm'
 	cost = 20
 
-/datum/map_template/surface/mountains/deep/Cavelake
+/datum/map_template/surface/mountains/normal/Cavelake //VOREStation Edit
 	name = "Cave Lake"
 	desc = "A large underground lake."
 	mappath = 'maps/submaps/surface_submaps/mountains/Cavelake.dmm'
 	cost = 20
 
-/datum/map_template/surface/mountains/deep/vault1
+/datum/map_template/surface/mountains/normal/vault1 //VOREStation Edit
 	name = "Mine Vault 1"
 	desc = "A small vault with potential loot."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault1.dmm'
@@ -287,7 +295,7 @@
 	allow_duplicates = TRUE
 	template_group = "Buried Vaults"
 
-/datum/map_template/surface/mountains/deep/vault2
+/datum/map_template/surface/mountains/normal/vault2 //VOREStation Edit
 	name = "Mine Vault 2"
 	desc = "A small vault with potential loot."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault2.dmm'
@@ -295,21 +303,21 @@
 	allow_duplicates = TRUE
 	template_group = "Buried Vaults"
 
-/datum/map_template/surface/mountains/deep/vault3
+/datum/map_template/surface/mountains/normal/vault3 //VOREStation Edit
 	name = "Mine Vault 3"
 	desc = "A small vault with potential loot. Also a horrible suprise."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault3.dmm'
 	cost = 15
 	template_group = "Buried Vaults"
 
-/datum/map_template/surface/mountains/deep/vault4
+/datum/map_template/surface/mountains/normal/vault4 //VOREStation Edit
 	name = "Mine Vault 4"
 	desc = "A small xeno vault with potential loot. Also horrible suprises."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault4.dmm'
 	cost = 20
 	template_group = "Buried Vaults"
 
-/datum/map_template/surface/mountains/deep/vault5
+/datum/map_template/surface/mountains/normal/vault5 //VOREStation Edit
 	name = "Mine Vault 5"
 	desc = "A small xeno vault with potential loot. Also major horrible suprises."
 	mappath = 'maps/submaps/surface_submaps/mountains/vault5.dmm'

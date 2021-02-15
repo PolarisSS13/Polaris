@@ -48,7 +48,7 @@
 	client.update_skybox(TRUE)
 
 /mob/onTransitZ(old_z, new_z)
-	. = ..()
+	..()
 	if(old_z != new_z)
 		client?.update_skybox(TRUE)
 

@@ -56,7 +56,7 @@ var/next_station_date_change = 1 DAY
 	if(!station_date || update_time)
 		var/extra_days = round(station_time_in_ds / (1 DAY)) DAYS
 		var/timeofday = world.timeofday + extra_days
-		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+544)) + "-" + time2text(timeofday, "MM-DD")
+		station_date = num2text((text2num(time2text(timeofday, "YYYY"))+300)) + "-" + time2text(timeofday, "MM-DD") //VOREStation Edit
 	return station_date
 
 //ISO 8601
@@ -114,11 +114,6 @@ GLOBAL_VAR_INIT(round_start_time, 0)
 	last_round_duration = "[hours]:[mins]"
 	next_duration_update = world.time + 1 MINUTES
 	return last_round_duration
-
-//Can be useful for things dependent on process timing
-/proc/process_schedule_interval(var/process_name)
-	var/datum/controller/process/process = processScheduler.getProcess(process_name)
-	return process.schedule_interval
 
 /var/midnight_rollovers = 0
 /var/rollovercheck_last_timeofday = 0

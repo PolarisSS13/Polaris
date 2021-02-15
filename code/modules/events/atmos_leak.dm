@@ -22,8 +22,8 @@
 	var/gas_choices = list("carbon_dioxide", "nitrous_oxide") // Annoying
 	if(severity >= EVENT_LEVEL_MODERATE)
 		gas_choices += "phoron" // Dangerous
-	if(severity >= EVENT_LEVEL_MAJOR)
-		gas_choices += "volatile_fuel" // Dangerous and no default atmos setup!
+	// if(severity >= EVENT_LEVEL_MAJOR)
+	// 	gas_choices += "volatile_fuel" // Dangerous and no default atmos setup!
 	gas_type = pick(gas_choices)
 
 	var/list/area/grand_list_of_areas = get_station_areas(excluded)

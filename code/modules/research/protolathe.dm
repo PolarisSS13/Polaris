@@ -15,22 +15,31 @@
 	var/mat_efficiency = 1
 	var/speed = 1
 
-	materials = list(DEFAULT_WALL_MATERIAL = 0, "glass" = 0, MAT_PLASTEEL = 0, "plastic" = 0, MAT_GRAPHITE = 0, "gold" = 0, "silver" = 0, "osmium" = 0, MAT_LEAD = 0, "phoron" = 0, "uranium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
+	//VOREStation Edit - Broke this into lines
+	materials = list(
+		DEFAULT_WALL_MATERIAL = 0,
+		"glass" = 0,
+		MAT_PLASTEEL = 0,
+		"plastic" = 0,
+		MAT_GRAPHITE = 0,
+		"gold" = 0,
+		"silver" = 0,
+		"osmium" = 0,
+		MAT_LEAD = 0,
+		"phoron" = 0,
+		"uranium" = 0,
+		"diamond" = 0,
+		MAT_DURASTEEL = 0,
+		MAT_VERDANTIUM = 0,
+		MAT_MORPHIUM = 0,
+		MAT_METALHYDROGEN = 0,
+		MAT_SUPERMATTER = 0,
+		MAT_TITANIUM = 0)
 
 	hidden_materials = list(MAT_PLASTEEL, MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM, MAT_METALHYDROGEN, MAT_SUPERMATTER)
 
 /obj/machinery/r_n_d/protolathe/Initialize()
 	. = ..()
-
-// Go through all materials, and add them to the possible storage, but hide them unless we contain them.
-	for(var/Name in name_to_material)
-		if(Name in materials)
-			continue
-
-		hidden_materials |= Name
-
-		materials[Name] = 0
-
 	default_apply_parts()
 
 /obj/machinery/r_n_d/protolathe/process()

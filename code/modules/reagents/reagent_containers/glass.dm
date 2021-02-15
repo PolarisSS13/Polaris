@@ -37,6 +37,7 @@
 		/mob/living/bot/medbot,
 		/obj/item/weapon/storage/secure/safe,
 		/obj/machinery/iv_drip,
+		/obj/structure/medical_stand, //VOREStation Add,
 		/obj/machinery/disease2/incubator,
 		/obj/machinery/disposal,
 		/mob/living/simple_mob/animal/passive/cow,
@@ -295,7 +296,7 @@
 			qdel(src)
 		else
 			to_chat(user, "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>")
-	else if(istype(D, /obj/item/weapon/mop))
+	else if(istype(D, /obj/item/weapon/mop) || istype(D, /obj/item/weapon/soap) || istype(D, /obj/item/weapon/reagent_containers/glass/rag))  //VOREStation Edit - "Allows soap and rags to be used on buckets"
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")
 		else

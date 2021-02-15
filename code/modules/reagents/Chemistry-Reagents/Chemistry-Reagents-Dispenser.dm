@@ -108,8 +108,8 @@
 	if(alien == IS_DIONA)
 		strength_mod = 0
 	if(alien == IS_SLIME)
-		M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
-
+		strength_mod *= 2 // VOREStation Edit - M.adjustToxLoss(removed)
+	
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 	var/effective_dose = dose * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
 
@@ -153,7 +153,7 @@
 	if(alien == IS_DIONA)
 		strength_mod = 0
 	if(alien == IS_SLIME)
-		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
+		strength_mod *= 2 // VOREStation Edit - M.adjustToxLoss(removed * 2)
 
 	M.add_chemical_effect(CE_ALCOHOL, 1)
 

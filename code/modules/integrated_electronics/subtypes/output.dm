@@ -152,6 +152,7 @@
 /obj/item/integrated_circuit/output/text_to_speech/advanced/Initialize()
 	..()
 	my_voice = new (src)
+	mob_list -= my_voice // no life() ticks
 	my_voice.name = "TTS Circuit"
 
 /obj/item/integrated_circuit/output/text_to_speech/advanced/do_work()
@@ -502,7 +503,7 @@
 	QDEL_NULL(hologram)
 
 //	holo_beam.End()
-//	qdel_null(holo_beam)
+//	QDEL_NULL(holo_beam)
 
 	power_draw_idle = 0
 

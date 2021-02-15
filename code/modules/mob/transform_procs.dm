@@ -45,11 +45,19 @@
 	spawning = 1
 	return ..()
 
-/mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
+/mob/living/carbon/human/AIize(var/move = TRUE) // 'move' argument needs defining here too because BYOND is dumb
 	if (transforming)
 		return
 	for(var/t in organs)
 		qdel(t)
+	
+	//VOREStation Edit Start - Hologram examine flavor
+	var/mob/living/silicon/ai/O = ..(move)
+	if(O)
+		O.flavor_text = O.client?.prefs?.flavor_texts["general"]
+	
+	return O
+	//VOREStation Edit End
 
 	return ..(move)
 
@@ -184,6 +192,8 @@
 		var/datum/preferences/B = O.client.prefs
 		for(var/language in B.alternate_languages)
 			O.add_language(language)
+		O.resize(B.size_multiplier, animate = TRUE)		//VOREStation Addition: add size prefs to borgs
+		O.fuzzy = B.fuzzy								//VOREStation Addition: add size prefs to borgs
 
 	callHook("borgify", list(O))
 	O.Namepick()
@@ -301,7 +311,7 @@
 		return 0	//Sanity, this should never happen.
 
 /*
-	if(ispath(MP, /mob/living/simple_animal/space_worm))
+	if(ispath(MP, /mob/living/simple_mob/space_worm))
 		return 0 //Unfinished. Very buggy, they seem to just spawn additional space worms everywhere and eating your own tail results in new worms spawning.
 */
 

@@ -69,6 +69,11 @@
 		if(!S || S.robotic < ORGAN_ROBOT || S.open == 3)
 			return ..()
 
+		//VOREStation Add - No welding nanoform limbs
+		if(S.robotic > ORGAN_LIFELIKE)
+			return ..()
+		//VOREStation Add End
+
 		if(S.organ_tag == BP_HEAD)
 			if(H.head && istype(H.head,/obj/item/clothing/head/helmet/space))
 				to_chat(user, "<span class='warning'>You can't apply [src] through [H.head]!</span>")
@@ -316,6 +321,7 @@
 		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[O_EYES]
 		if(!E)
 			return
+		if(H.nif && H.nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION)) return //VOREStation Add - NIF
 		switch(safety)
 			if(1)
 				to_chat(usr, "<span class='warning'>Your eyes sting a little.</span>")

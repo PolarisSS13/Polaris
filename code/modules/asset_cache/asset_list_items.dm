@@ -34,6 +34,7 @@
 		"smmon_4.gif" 				= 'icons/program_icons/smmon_4.gif',
 		"smmon_5.gif" 				= 'icons/program_icons/smmon_5.gif',
 		"smmon_6.gif" 				= 'icons/program_icons/smmon_6.gif',
+		// "borg_mon.gif"				= 'icons/program_icons/borg_mon.gif'
 	)
 
 // /datum/asset/simple/radar_assets
@@ -284,6 +285,17 @@
 		InsertAll("", each, global.alldirs)
 	..()
 
+//VOREStation Add
+/datum/asset/spritesheet/vore
+	name = "vore"
+
+/datum/asset/spritesheet/vore/register()
+	var/icon/downscaled = icon('icons/mob/screen_full_vore.dmi')
+	downscaled.Scale(240, 240)
+	InsertAll("", downscaled)
+	..()
+//VOREStation Add End
+
 // // Representative icons for each research design
 // /datum/asset/spritesheet/research_designs
 // 	name = "design"
@@ -342,7 +354,6 @@
 
 // 		Insert(initial(D.id), I)
 // 	return ..()
-
 
 /datum/asset/spritesheet/vending
 	name = "vending"
@@ -422,39 +433,6 @@
 // 	Insert("polycrystal", 'icons/obj/telescience.dmi', "polycrystal")
 // 	..()
 
-/datum/asset/nanoui
-	var/list/common = list()
-
-	var/list/common_dirs = list(
-		"nano/css/",
-		"nano/images/",
-		"nano/images/modular_computers/",
-		"nano/js/"
-	)
-	var/list/uncommon_dirs = list(
-		"nano/templates/"
-	)
-
-/datum/asset/nanoui/register()
-	// Crawl the directories to find files.
-	for(var/path in common_dirs)
-		var/list/filenames = flist(path)
-		for(var/filename in filenames)
-			if(copytext(filename, length(filename)) != "/") // Ignore directories.
-				if(fexists(path + filename))
-					common[filename] = fcopy_rsc(path + filename)
-					register_asset(filename, common[filename])
-	for(var/path in uncommon_dirs)
-		var/list/filenames = flist(path)
-		for(var/filename in filenames)
-			if(copytext(filename, length(filename)) != "/") // Ignore directories.
-				if(fexists(path + filename))
-					register_asset(filename, fcopy_rsc(path + filename))
-
-/datum/asset/nanoui/send(client)
-	send_asset_list(client, common)
-
-
 //Pill sprites for UIs
 /datum/asset/chem_master
 	var/assets = list()
@@ -487,3 +465,49 @@
 
 /datum/asset/cloning/send(client)
 	send_asset_list(client, assets, verify)
+
+// VOREStation Add
+/datum/asset/cloning/resleeving
+/datum/asset/cloning/resleeving/register()
+	// This intentionally does not call the parent. Duplicate assets are not allowed.
+	assets["sleeve_empty.gif"] = icon('icons/obj/machines/implantchair.dmi', "implantchair")
+	assets["sleeve_occupied.gif"] = icon('icons/obj/machines/implantchair.dmi', "implantchair_on")
+	assets["synthprinter.gif"] = icon('icons/obj/machines/synthpod.dmi', "pod_0")
+	assets["synthprinter_working.gif"] = icon('icons/obj/machines/synthpod.dmi', "pod_1")
+	for(var/asset_name in assets)
+		register_asset(asset_name, assets[asset_name])
+// VOREStation Add End
+
+/datum/asset/spritesheet/sheetmaterials
+	name = "sheetmaterials"
+
+/datum/asset/spritesheet/sheetmaterials/register()
+	InsertAll("", 'icons/obj/stacks.dmi')
+	..()
+
+// Nanomaps
+/datum/asset/simple/nanomaps
+	// It REALLY doesnt matter too much if these arent up to date
+	// They are relatively big
+	assets = list(
+		// VOREStation Edit: We don't need Southern Cross
+		// "southern_cross_nanomap_z1.png"		= 'icons/_nanomaps/southern_cross_nanomap_z1.png',
+		// "southern_cross_nanomap_z10.png"	= 'icons/_nanomaps/southern_cross_nanomap_z10.png',
+		// "southern_cross_nanomap_z2.png"		= 'icons/_nanomaps/southern_cross_nanomap_z2.png',
+		// "southern_cross_nanomap_z3.png"		= 'icons/_nanomaps/southern_cross_nanomap_z3.png',
+		// "southern_cross_nanomap_z5.png"		= 'icons/_nanomaps/southern_cross_nanomap_z5.png',
+		// "southern_cross_nanomap_z6.png"		= 'icons/_nanomaps/southern_cross_nanomap_z6.png',
+		"tether_nanomap_z1.png"				= 'icons/_nanomaps/tether_nanomap_z1.png',
+		"tether_nanomap_z2.png"				= 'icons/_nanomaps/tether_nanomap_z2.png',
+		"tether_nanomap_z3.png"				= 'icons/_nanomaps/tether_nanomap_z3.png',
+		"tether_nanomap_z4.png"				= 'icons/_nanomaps/tether_nanomap_z4.png',
+		"tether_nanomap_z5.png"				= 'icons/_nanomaps/tether_nanomap_z5.png',
+		"tether_nanomap_z6.png"				= 'icons/_nanomaps/tether_nanomap_z6.png',
+		"tether_nanomap_z7.png"				= 'icons/_nanomaps/tether_nanomap_z7.png',
+		"tether_nanomap_z8.png"				= 'icons/_nanomaps/tether_nanomap_z8.png',
+		"tether_nanomap_z9.png"				= 'icons/_nanomaps/tether_nanomap_z9.png',
+		"tether_nanomap_z10.png"			= 'icons/_nanomaps/tether_nanomap_z10.png',
+		"tether_nanomap_z13.png"			= 'icons/_nanomaps/tether_nanomap_z13.png',
+		"tether_nanomap_z14.png"			= 'icons/_nanomaps/tether_nanomap_z14.png',
+		// VOREStation Edit End
+	)

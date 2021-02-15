@@ -515,7 +515,7 @@
 		if("Show Crew Manifest")
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
-				AI.ai_roster()
+				AI.subsystem_crew_manifest()
 
 		if("Show Alerts")
 			if(isAI(usr))
@@ -540,12 +540,14 @@
 		if("PDA - Send Message")
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
-				AI.aiPDA.cmd_send_pdamesg(usr)
+				AI.aiPDA.start_program(AI.aiPDA.find_program(/datum/data/pda/app/messenger))
+				AI.aiPDA.cmd_pda_open_ui(usr)
 
 		if("PDA - Show Message Log")
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
-				AI.aiPDA.cmd_show_message_log(usr)
+				AI.aiPDA.start_program(AI.aiPDA.find_program(/datum/data/pda/app/messenger))
+				AI.aiPDA.cmd_pda_open_ui(usr)
 
 		if("Take Image")
 			if(isAI(usr))
@@ -556,6 +558,8 @@
 			if(isAI(usr))
 				var/mob/living/silicon/ai/AI = usr
 				AI.view_images()
+		else
+			return attempt_vr(src,"Click_vr",list(location,control,params)) //VOREStation Add - Additional things.
 	return 1
 
 /obj/screen/inventory/Click()
@@ -614,6 +618,23 @@
 /obj/screen/component_button/Click(params)
 	if(parent)
 		parent.component_click(src, params)
+
+// Character setup stuff
+/obj/screen/setup_preview
+	
+	var/datum/preferences/pref
+
+/obj/screen/setup_preview/Destroy()
+	pref = null
+	return ..()
+
+// Background 'floor'
+/obj/screen/setup_preview/bg
+	mouse_over_pointer = MOUSE_HAND_POINTER
+
+/obj/screen/setup_preview/bg/Click(params)
+	pref?.bgstate = next_in_list(pref.bgstate, pref.bgstate_options)
+	pref?.update_preview_icon()
 
 /obj/screen/splash
 	screen_loc = "1,1"

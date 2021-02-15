@@ -118,7 +118,7 @@
 					continue
 				if(used == amount)
 					break
-				if(!do_mob(user, M, W.damage/3))
+				if(!do_mob(user, M, W.damage/3, exclusive = TRUE))
 					to_chat(user, "<span class='notice'>You must stand still to bandage wounds.</span>")
 					break
 
@@ -187,7 +187,7 @@
 					continue
 				if(used == amount)
 					break
-				if(!do_mob(user, M, W.damage/5))
+				if(!do_mob(user, M, W.damage/5, exclusive = TRUE))
 					to_chat(user, "<span class='notice'>You must stand still to bandage wounds.</span>")
 					break
 
@@ -210,7 +210,7 @@
 					user.visible_message("<span class='notice'>\The [user] places a bandaid over \a [W.desc] on [M]'s [affecting.name].</span>", \
 					                              "<span class='notice'>You place a bandaid over \a [W.desc] on [M]'s [affecting.name].</span>" )
 				W.bandage()
-				W.disinfect()
+				// W.disinfect() // VOREStation - Tech1 should not disinfect
 				playsound(src, pick(apply_sounds), 25)
 				used++
 			affecting.update_damages()
@@ -252,7 +252,7 @@
 		else
 			user.visible_message("<span class='notice'>\The [user] starts salving wounds on [M]'s [affecting.name].</span>", \
 					             "<span class='notice'>You start salving the wounds on [M]'s [affecting.name].</span>" )
-			if(!do_mob(user, M, 10))
+			if(!do_mob(user, M, 10, exclusive = TRUE))
 				to_chat(user, "<span class='notice'>You must stand still to salve wounds.</span>")
 				return 1
 			if(affecting.is_salved()) // We do a second check after the delay, in case it was bandaged after the first check.
@@ -269,7 +269,7 @@
 	singular_name = "advanced trauma kit"
 	desc = "An advanced trauma kit for severe injuries."
 	icon_state = "traumakit"
-	heal_brute = 3
+	heal_brute = 7 //VOREStation Edit
 	origin_tech = list(TECH_BIO = 1)
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg','sound/effects/tape.ogg')
 
@@ -298,9 +298,9 @@
 					continue
 				if (W.bandaged && W.disinfected)
 					continue
-				if(used == amount)
-					break
-				if(!do_mob(user, M, W.damage/5))
+				//if(used == amount) //VOREStation Edit
+				//	break //VOREStation Edit
+				if(!do_mob(user, M, W.damage/5, exclusive = TRUE))
 					to_chat(user, "<span class='notice'>You must stand still to bandage wounds.</span>")
 					break
 				if(affecting.is_bandaged() && affecting.is_disinfected()) // We do a second check after the delay, in case it was bandaged after the first check.
@@ -324,7 +324,8 @@
 				W.disinfect()
 				W.heal_damage(heal_brute)
 				playsound(src, pick(apply_sounds), 25)
-				used++
+				used = 1 //VOREStation Edit
+				update_icon() // VOREStation Edit - Support for stack icons
 			affecting.update_damages()
 			if(used == amount)
 				if(affecting.is_bandaged())
@@ -338,7 +339,7 @@
 	singular_name = "advanced burn kit"
 	desc = "An advanced treatment kit for severe burns."
 	icon_state = "burnkit"
-	heal_burn = 3
+	heal_burn = 7 //VOREStation Edit
 	origin_tech = list(TECH_BIO = 1)
 	apply_sounds = list('sound/effects/ointment.ogg')
 
@@ -359,7 +360,7 @@
 		else
 			user.visible_message("<span class='notice'>\The [user] starts salving wounds on [M]'s [affecting.name].</span>", \
 					             "<span class='notice'>You start salving the wounds on [M]'s [affecting.name].</span>" )
-			if(!do_mob(user, M, 10))
+			if(!do_mob(user, M, 10, exclusive = TRUE))
 				to_chat(user, "<span class='notice'>You must stand still to salve wounds.</span>")
 				return 1
 			if(affecting.is_salved()) // We do a second check after the delay, in case it was bandaged after the first check.
@@ -371,6 +372,7 @@
 			use(1)
 			affecting.salve()
 			playsound(src, pick(apply_sounds), 25)
+			update_icon() // VOREStation Edit - Support for stack icons
 
 /obj/item/stack/medical/splint
 	name = "medical splints"
@@ -406,7 +408,7 @@
 				to_chat(user, "<span class='danger'>You can't apply a splint to the arm you're using!</span>")
 				return
 			user.visible_message("<span class='danger'>[user] starts to apply \the [src] to their [limb].</span>", "<span class='danger'>You start to apply \the [src] to your [limb].</span>", "<span class='danger'>You hear something being wrapped.</span>")
-		if(do_after(user, 50, M))
+		if(do_after(user, 50, M, exclusive = TRUE))
 			if(affecting.splinted)
 				to_chat(user, "<span class='danger'>[M]'s [limb] is already splinted!</span>")
 				return

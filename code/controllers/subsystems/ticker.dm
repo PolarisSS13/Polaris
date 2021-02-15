@@ -28,15 +28,9 @@ SUBSYSTEM_DEF(ticker)
 	var/last_restart_notify				// world.time of last restart warning.
 	var/delay_end = FALSE               // If set, the round will not restart on its own.
 
-	var/login_music						// music played in pregame lobby
+	// var/login_music					// music played in pregame lobby // VOREStation Edit - We do music differently
 
 	var/list/datum/mind/minds = list()	// The people in the game. Used for objective tracking.
-
-	// TODO - I am sure there is a better place these can go.
-	var/Bible_icon_state	// icon_state the chaplain has chosen for his bible
-	var/Bible_item_state	// item_state the chaplain has chosen for his bible
-	var/Bible_name			// name of the bible
-	var/Bible_deity_name
 
 	var/random_players = FALSE	// If set to nonzero, ALL players who latejoin or declare-ready join will have random appearances/genders
 
@@ -51,15 +45,6 @@ SUBSYSTEM_DEF(ticker)
 var/global/datum/controller/subsystem/ticker/ticker
 /datum/controller/subsystem/ticker/PreInit()
 	global.ticker = src // TODO - Remove this! Change everything to point at SSticker intead
-	login_music = pick(\
-	/*'sound/music/halloween/skeletons.ogg',\
-	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
-	'sound/music/space.ogg',\
-	'sound/music/traitor.ogg',\
-	'sound/music/title2.ogg',\
-	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 
 /datum/controller/subsystem/ticker/Initialize()
 	pregame_timeleft = config.pregame_time
@@ -203,7 +188,6 @@ var/global/datum/controller/subsystem/ticker/ticker
 	lighting_controller.process()	//Start processing DynamicAreaLighting updates
 	*/
 
-	processScheduler.start()
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
@@ -418,6 +402,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				continue
 
 			// Ask their new_player mob to spawn them
+			if(!player.spawn_checks_vr(player.mind.assigned_role)) continue //VOREStation Add
 			var/mob/living/carbon/human/new_char = player.create_character()
 
 			// Created their playable character, delete their /mob/new_player
@@ -446,8 +431,8 @@ var/global/datum/controller/subsystem/ticker/ticker
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
 				job_master.EquipRank(player, player.mind.assigned_role, 0)
 				UpdateFactionList(player)
-				equip_custom_items(player)
-				player.apply_traits()
+				//equip_custom_items(player)	//VOREStation Removal
+				//player.apply_traits() //VOREStation Removal
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
@@ -573,8 +558,4 @@ var/global/datum/controller/subsystem/ticker/ticker
 
 	minds = SSticker.minds
 
-	Bible_icon_state = SSticker.Bible_icon_state
-	Bible_item_state = SSticker.Bible_item_state
-	Bible_name = SSticker.Bible_name
-	Bible_deity_name = SSticker.Bible_deity_name
 	random_players = SSticker.random_players

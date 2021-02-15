@@ -11,7 +11,7 @@
 
 	var/input
 	if(!message)
-		input = sanitize(input(src,"Choose an emote to display.") as text|null)
+		input = sanitize_or_reflect(input(src,"Choose an emote to display.") as text|null, src) //VOREStation Edit - Reflect too long messages, within reason
 	else
 		input = message
 	if(input)
@@ -37,9 +37,14 @@
 			var/mob/M = mob
 			spawn(0) // It's possible that it could be deleted in the meantime, or that it runtimes.
 				if(M)
-					if(isobserver(M))
-						message = "<span class='emote'><B>[src]</B> ([ghost_follow_link(src, M)]) [input]</span>"
-					M.show_message(message, m_type)
+					//VOREStation edit
+					if(istype(M, /mob/observer/dead/))
+						var/mob/observer/dead/D = M
+						if(ckey || (src in view(D)))
+							M.show_message(message, m_type)
+					else
+						M.show_message(message, m_type)
+					//End VOREStation edit
 
 		for(var/obj in o_viewers)
 			var/obj/O = obj
@@ -72,7 +77,7 @@
 
 	var/input
 	if(!message)
-		input = sanitize(input(src, "Choose an emote to display.") as text|null)
+		input = sanitize_or_reflect(input(src, "Choose an emote to display.") as text|null, src) //VOREStation Edit - Reflect too long messages, within reason
 	else
 		input = message
 

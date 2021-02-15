@@ -4,7 +4,7 @@
 /obj/machinery/atmospherics/unary/freezer
 	name = "gas cooling system"
 	desc = "Cools gas when connected to pipe network"
-	icon = 'icons/obj/Cryogenic2.dmi'
+	icon = 'icons/obj/Cryogenic2_vr.dmi'
 	icon_state = "freezer_0"
 	density = 1
 	anchored = 1
@@ -100,7 +100,7 @@
 			else
 				set_temperature = max(amount, 0)
 		if("setPower") //setting power to 0 is redundant anyways
-			var/new_setting = CLAMP(text2num(params["value"]), 0, 100)
+			var/new_setting = between(0, text2num(params["value"]), 100)
 			set_power_level(new_setting)
 
 	add_fingerprint(usr)

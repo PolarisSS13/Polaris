@@ -164,8 +164,9 @@
 				return
 
 			var/mob/living/carbon/human/H = target
+			var/obj/item/organ/external/affected //VOREStation Edit - Moved this outside this if
 			if(istype(H))
-				var/obj/item/organ/external/affected = H.get_organ(user.zone_sel.selecting)
+				affected = H.get_organ(user.zone_sel.selecting) //VOREStation Edit - See above comment.
 				if(!affected)
 					to_chat(user, "<span class='danger'>\The [H] is missing that limb!</span>")
 					return
@@ -181,7 +182,7 @@
 				warmup_time = cycle_time //If the target is another mob, this gets overwritten
 
 			if(ismob(target) && target != user)
-				warmup_time = injtime*0.66 // Otherwise 66% of the time is warmup
+				warmup_time = injtime*0.66 //66% of the time is warmup
 
 				if(istype(H))
 					if(H.wear_suit)
@@ -189,6 +190,7 @@
 							injtime = injtime * 2
 
 				else if(isliving(target))
+
 					var/mob/living/M = target
 					if(!M.can_inject(user, 1))
 						return
@@ -224,12 +226,11 @@
 					add_attack_logs(user,target,"Injected with [src.name] containing [contained], trasferred [trans] units")
 			else
 				to_chat(user, "<span class='notice'>The syringe is empty.</span>")
-			if (reagents.total_volume <= 0 && mode == SYRINGE_INJECT)
-				mode = SYRINGE_DRAW
-				update_icon()
+
+//		dirty(target,affected) //VOREStation Add -- Removed by Request
 
 	return
-
+/* VOREStation Edit - See syringes_vr.dm
 /obj/item/weapon/reagent_containers/syringe/update_icon()
 	overlays.Cut()
 
@@ -256,7 +257,7 @@
 
 		filling.color = reagents.get_color()
 		overlays += filling
-
+*/
 /obj/item/weapon/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
 	if(istype(target, /mob/living/carbon/human))
 
@@ -339,8 +340,8 @@
 /obj/item/weapon/reagent_containers/syringe/inaprovaline/Initialize()
 	. = ..()
 	reagents.add_reagent("inaprovaline", 15)
-	mode = SYRINGE_INJECT
-	update_icon()
+	//mode = SYRINGE_INJECT //VOREStation Edit - Starts capped
+	//update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/antitoxin
 	name = "Syringe (anti-toxin)"
@@ -349,8 +350,8 @@
 /obj/item/weapon/reagent_containers/syringe/antitoxin/Initialize()
 	. = ..()
 	reagents.add_reagent("anti_toxin", 15)
-	mode = SYRINGE_INJECT
-	update_icon()
+	//mode = SYRINGE_INJECT //VOREStation Edit - Starts capped
+	//update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/antiviral
 	name = "Syringe (spaceacillin)"
@@ -359,8 +360,8 @@
 /obj/item/weapon/reagent_containers/syringe/antiviral/Initialize()
 	. = ..()
 	reagents.add_reagent("spaceacillin", 15)
-	mode = SYRINGE_INJECT
-	update_icon()
+	//mode = SYRINGE_INJECT //VOREStation Edit - Starts capped
+	//update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/drugs
 	name = "Syringe (drugs)"
@@ -371,8 +372,8 @@
 	reagents.add_reagent("space_drugs",  5)
 	reagents.add_reagent("mindbreaker",  5)
 	reagents.add_reagent("cryptobiolin", 5)
-	mode = SYRINGE_INJECT
-	update_icon()
+	//mode = SYRINGE_INJECT //VOREStation Edit - Starts capped
+	//update_icon()
 
 /obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral/Initialize()
 	. = ..()
@@ -385,6 +386,6 @@
 	desc = "Contains drugs for muscle growth."
 
 /obj/item/weapon/reagent_containers/syringe/steroid/Initialize()
-	. = ..()
-	reagents.add_reagent("adrenaline",5)
+	..()
+	//reagents.add_reagent("adrenaline",5) //VOREStation Edit - No thanks.
 	reagents.add_reagent("hyperzine",10)

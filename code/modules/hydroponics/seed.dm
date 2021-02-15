@@ -25,6 +25,7 @@
 	var/apply_color_to_mob = TRUE  // Do we color the mob to match the plant?
 	var/has_item_product           // Item products. (Eggy)
 	var/force_layer
+	var/harvest_sound = null		//Vorestation edit - sound the plant makes when harvested
 
 // Making the assumption anything in HYDRO-ponics is capable of processing water, and nutrients commonly associated with it, leaving us with the below to be tweaked.
 	var/list/beneficial_reagents   // Reagents considered uniquely 'beneficial' by a plant.
@@ -409,8 +410,8 @@
 	seed_noun = pick("spores","nodes","cuttings","seeds")
 
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
-	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.accessible_product_sprites))
-	set_trait(TRAIT_PLANT_ICON,pick(plant_controller.accessible_plant_sprites))
+	set_trait(TRAIT_PRODUCT_ICON,pick(SSplants.accessible_product_sprites))
+	set_trait(TRAIT_PLANT_ICON,pick(SSplants.accessible_plant_sprites))
 	set_trait(TRAIT_PLANT_COLOUR,"#[get_random_colour(0,75,190)]")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#[get_random_colour(0,75,190)]")
 	update_growth_stages()
@@ -452,12 +453,16 @@
 	var/additional_chems = rand(0,5)
 
 	if(additional_chems)
-
+		// VOREStation Edit Start: Modified exclusion list
 		var/list/banned_chems = list(
 			"adminordrazine",
-			"magicdust",
-			"nutriment"
+			"nutriment",
+			"macrocillin",
+			"microcillin",
+			"normalcillin",
+			"magicdust"
 			)
+		// VOREStation Edit End: Modified exclusion list
 
 		for(var/x=1;x<=additional_chems;x++)
 
@@ -771,6 +776,10 @@
 		var/turf/T = get_turf(user)
 		create_spores(T)
 
+	if(harvest_sound)//Vorestation edit
+		var/turf/M = get_turf(user)
+		playsound(M, harvest_sound, 50, 1, -1)
+
 	if(!force_amount && get_trait(TRAIT_YIELD) == 0 && !harvest_sample)
 		if(istype(user))
 			to_chat(user, "<span class='danger'>You fail to harvest anything useful.</span>")
@@ -779,10 +788,10 @@
 			to_chat(user, "You [harvest_sample ? "take a sample" : "harvest"] from the [display_name].")
 
 		//This may be a new line. Update the global if it is.
-		if(name == "new line" || !(name in plant_controller.seeds))
-			uid = plant_controller.seeds.len + 1
+		if(name == "new line" || !(name in SSplants.seeds))
+			uid = SSplants.seeds.len + 1
 			name = "[uid]"
-			plant_controller.seeds[name] = src
+			SSplants.seeds[name] = src
 
 		if(harvest_sample)
 			var/obj/item/seeds/seeds = new(get_turf(user))
@@ -868,6 +877,6 @@
 
 /datum/seed/proc/update_growth_stages()
 	if(get_trait(TRAIT_PLANT_ICON))
-		growth_stages = plant_controller.plant_sprites[get_trait(TRAIT_PLANT_ICON)]
+		growth_stages = SSplants.plant_sprites[get_trait(TRAIT_PLANT_ICON)]
 	else
 		growth_stages = 0

@@ -171,11 +171,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "shuttlered2"
 
 /area/shuttle/administration/centcom
-	name = "\improper Administration Shuttle CentCom"
+	name = "Centcom Large Bay (AS)" //VOREStation Edit
 	icon_state = "shuttlered"
 
 /area/shuttle/administration/station
-	name = "\improper Administration Shuttle"
+	name = "NSB Adephagia (AS)" //VOREStation Edit
 	icon_state = "shuttlered2"
 
 /area/shuttle/trade
@@ -1202,7 +1202,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "fitness"
 
 /area/crew_quarters/longue_area
-	name = "\improper Longue"
+	name = "\improper Lounge" //VOREStation Edit - Muh speeling.
 	icon_state = "recreation_area"
 
 /area/crew_quarters/recreation_area
@@ -1265,6 +1265,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
  	name = "\improper Library"
  	icon_state = "library"
  	sound_env = LARGE_SOFTFLOOR
+ 	lightswitch = 0 // VOREStation Edit - We like dark libraries
 
 /area/library_conference_room
  	name = "\improper Library Conference Room"
@@ -1748,7 +1749,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 		temp_closet.locked = 0
 		temp_closet.icon_state = "closed_unlocked"
 	for(var/obj/machinery/door_timer/temp_timer in src)
-		temp_timer.releasetime = 1
+		temp_timer.timer_duration = 1
 	..()
 
 /area/security/prison
@@ -1760,7 +1761,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 		temp_closet.locked = 0
 		temp_closet.icon_state = "closed_unlocked"
 	for(var/obj/machinery/door_timer/temp_timer in src)
-		temp_timer.releasetime = 1
+		temp_timer.timer_duration = 1
 	..()
 
 /area/security/warden
@@ -2462,6 +2463,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "away"
 	ambience = AMBIENCE_FOREBODING
 	flags = AREA_FLAG_IS_NOT_PERSISTENT
+
+/area/awaymission/gateway
+	name = "\improper Gateway"
+	icon_state = "teleporter"
+	music = "signal"
 
 /area/awaymission/example
 	name = "\improper Strange Station"
