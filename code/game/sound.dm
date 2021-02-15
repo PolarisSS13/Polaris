@@ -22,6 +22,8 @@
 		if(!M || !M.client)
 			continue
 		var/turf/T = get_turf(M)
+		if(!T)
+			continue
 		var/area/A = T.loc
 		if((A.soundproofed || area_source.soundproofed) && (A != area_source))
 			continue
