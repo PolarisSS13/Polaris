@@ -18,9 +18,6 @@
 - (and so on)
 
 <!--Optional, you may remove this section.-->
-#### Code Revision
-- (Found using the "Show Server Revision" verb under the OOC tab.)
- 
-<!--Optional, you may remove this section.-->
-#### Anything else you may wish to add:
-- (Location if it's a mapping issue, screenshots, sprites, etc.)
+#### Additional Information
+ - **Server Revision**: Found using the "Show Server Revision" verb under the OOC tab.
+ - **Anything else you may wish to add** (Location if it's a mapping issue, etc)
