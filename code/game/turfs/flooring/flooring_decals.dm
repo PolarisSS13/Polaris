@@ -16,8 +16,11 @@ var/list/floor_decals = list()
 		color = newcolour
 	..(newloc)
 
+// TODO: identify what is causing these atoms to be qdeleted in New()/Initialize() 
+// somewhere in this chain. Alternatively repath to /obj/floor_decal or some other 
+// abstract handler that explicitly doesn't invoke any obj behavior.
 /obj/effect/floor_decal/Initialize()
-	..()
+	initialized = TRUE
 	add_to_turf_decals()
 	return INITIALIZE_HINT_QDEL
 

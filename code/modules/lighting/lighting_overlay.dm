@@ -18,6 +18,11 @@
 
 	var/needs_update = FALSE
 
+/atom/movable/lighting_overlay/Initialize()
+	// doesn't need special init
+	initialized = TRUE
+	return INITIALIZE_HINT_NORMAL
+
 /atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
 	. = ..()
 	verbs.Cut()
