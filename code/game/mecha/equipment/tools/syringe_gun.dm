@@ -311,7 +311,7 @@
 	equip_type = EQUIP_HULL
 
 /obj/item/mecha_parts/mecha_equipment/crisis_drone/Initialize()
-	..()
+	. = ..()
 	drone_overlay = new(src.icon, icon_state = droid_state)
 
 /obj/item/mecha_parts/mecha_equipment/crisis_drone/Destroy()

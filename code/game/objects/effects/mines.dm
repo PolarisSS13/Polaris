@@ -25,7 +25,7 @@
 		trap = new trap(src)
 
 /obj/effect/mine/Initialize()
-	..()
+	. = ..()
 
 	if(camo_net)
 		alpha = 50

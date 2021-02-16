@@ -12,7 +12,8 @@ var/list/floor_decals = list()
 
 /obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour)
 	supplied_dir = newdir
-	if(newcolour) color = newcolour
+	if(newcolour)
+		color = newcolour
 	..(newloc)
 
 /obj/effect/floor_decal/Initialize()

@@ -516,7 +516,7 @@
 	item_level = 1
 
 /obj/machinery/microwave/advanced/Initialize()
-	..()
+	. = ..()
 	reagents.maximum_volume = 1000
 
 /datum/recipe/splat // We use this to handle cooking mice or other smaller/similar-size mobs in a microwave. Janky but it works better than snowflake code to handle the same thing.

@@ -150,7 +150,7 @@
 	var/mob/living/voice/my_voice
 
 /obj/item/integrated_circuit/output/text_to_speech/advanced/Initialize()
-	..()
+	. = ..()
 	my_voice = new (src)
 	my_voice.name = "TTS Circuit"
 
