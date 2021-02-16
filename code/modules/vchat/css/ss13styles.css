@@ -121,7 +121,9 @@ body.inverted {
 /* Miscellaneous */
 .name					{font-weight: bold;}
 .say					{color: #000000;}
+.inverted .say				{color: #FFFFFF;}
 .emote					{color: #000000;}
+.inverted .emote			{color: #FFFFFF;}
 .alert					{color: #ff0000;}
 h1.alert, h2.alert		{color: #000000;}
 
@@ -210,6 +212,7 @@ img.icon.bigicon		{max-height: 32px;}
 .debug_error					{color:#FF0000; font-weight:bold}
 .debug_warning					{color:#FF0000;}
 .debug_info						{color:#000000;}
+.inverted .debug_info				{color: #FFFFFF;}
 .debug_debug					{color:#0000FF;}
 .debug_trace					{color:#888888;}
 
