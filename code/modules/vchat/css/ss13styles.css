@@ -209,7 +209,7 @@ img.icon.bigicon		{max-height: 32px;}
 /* Debug Logs */
 .debug_error					{color:#FF0000; font-weight:bold}
 .debug_warning					{color:#FF0000;}
-.debug_info						{}
+.debug_info						{color:#000000;}
 .debug_debug					{color:#0000FF;}
 .debug_trace					{color:#888888;}
 
