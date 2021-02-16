@@ -16,6 +16,7 @@
 	carbon_dioxide = 0
 	phoron = 0
 	temperature = T20C
+	skip_init = FALSE
 
 /turf/unsimulated/wall/planetary/Initialize()
 	. = ..()

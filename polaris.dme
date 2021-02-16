@@ -3129,7 +3129,6 @@
 #include "code\unit_tests\mob_tests.dm"
 #include "code\unit_tests\research_tests.dm"
 #include "code\unit_tests\sqlite_tests.dm"
-#include "code\unit_tests\subsystem_tests.dm"
 #include "code\unit_tests\unit_test.dm"
 #include "code\unit_tests\zas_tests.dm"
 #include "code\unit_tests\integrated_circuits\arithmetic.dm"

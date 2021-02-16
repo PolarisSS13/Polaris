@@ -20,8 +20,8 @@ var/list/floor_decals = list()
 // somewhere in this chain. Alternatively repath to /obj/floor_decal or some other 
 // abstract handler that explicitly doesn't invoke any obj behavior.
 /obj/effect/floor_decal/Initialize()
-	initialized = TRUE
 	add_to_turf_decals()
+	initialized = TRUE
 	return INITIALIZE_HINT_QDEL
 
 // This is a separate proc from initialize() to facilitiate its caching and other stuff.  Look into it someday.
