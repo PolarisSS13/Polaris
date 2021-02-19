@@ -15,17 +15,17 @@
 		if("toggle_active")
 			var/obj/machinery/power/fusion_core/C = locate(params["core"])
 			if(!istype(C))
-				return 0
+				return FALSE
 			if(!C.Startup()) //Startup() whilst the device is active will return null.
 				C.Shutdown()
-			return 1
+			return TRUE
 
 		if("toggle_reactantdump")
 			var/obj/machinery/power/fusion_core/C = locate(params["core"])
 			if(!istype(C))
-				return 0
+				return FALSE
 			C.reactant_dump = !C.reactant_dump
-			return 1
+			return TRUE
 
 		if("set_tag")
 			var/new_ident = sanitize_text(input("Enter a new ident tag.", "Core Control", core_tag) as null|text)
@@ -35,13 +35,13 @@
 		if("set_fieldstr")
 			var/obj/machinery/power/fusion_core/C = locate(params["core"])
 			if(!istype(C))
-				return 0
+				return FALSE
 
 			var/new_strength = params["fieldstr"]
 
 			C.target_field_strength = new_strength
 
-			return 1
+			return TRUE
 
 /datum/tgui_module/rustcore_monitor/tgui_data(mob/user)
 	var/list/data = list()

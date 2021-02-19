@@ -15,14 +15,14 @@
 		if("toggle_active")
 			var/obj/machinery/fusion_fuel_injector/FI = locate(params["fuel"])
 			if(!istype(FI))
-				return 0
-			
+				return FALSE
+
 			if(FI.injecting)
 				FI.StopInjecting()
 			else
 				FI.BeginInjecting()
 
-			return 1
+			return TRUE
 
 		if("set_tag")
 			var/new_ident = sanitize_text(input("Enter a new ident tag.", "Gyrotron Control", fuel_tag) as null|text)
