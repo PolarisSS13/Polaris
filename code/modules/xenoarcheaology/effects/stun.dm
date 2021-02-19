@@ -16,6 +16,7 @@
 			C.Stun(rand(1,10) * susceptibility)
 
 /datum/artifact_effect/stun/DoEffectAura()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(src.effectrange,T))
@@ -30,6 +31,7 @@
 				to_chat(C, "<font color='red'>You feel numb.</font>")
 
 /datum/artifact_effect/stun/DoEffectPulse()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/C in range(src.effectrange,T))

@@ -28,6 +28,7 @@
 		return TRUE
 
 /datum/artifact_effect/feysight/DoEffectAura()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for(var/mob/living/L in range(src.effectrange,T))
@@ -36,6 +37,7 @@
 		return TRUE
 
 /datum/artifact_effect/feysight/DoEffectPulse()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for(var/mob/living/L in range(src.effectrange,T))

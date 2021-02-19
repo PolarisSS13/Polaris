@@ -5,25 +5,32 @@
 	icon_state = "ano00"
 	var/icon_num = 0
 	density = 1
+
+	var/predefined_icon_num
+
+	artifact_master = /datum/artifact_master
+
+	var/being_used = 0
+
+/*
 	var/datum/artifact_effect/my_effect
 	var/datum/artifact_effect/secondary_effect
-	var/being_used = 0
 
 	var/predefined_effects = FALSE
 
 	var/predefined_primary
 	var/predefined_secondary
 
-	var/predefined_icon_num
-
 	var/predefined_triggers = FALSE
 
 	var/predefined_trig_primary
 	var/predefined_trig_secondary
+*/
 
 /obj/machinery/artifact/New()
 	..()
 
+/*
 	if(predefined_effects && predefined_primary)
 		my_effect = new predefined_primary(src)
 
@@ -41,6 +48,8 @@
 			secondary_effect = new effecttype(src)
 			if(prob(75))
 				secondary_effect.ToggleActivate(0)
+*/
+	var/datum/artifact_effect/my_effect = artifact_master.get_primary()
 
 	if(!isnull(predefined_icon_num))
 		icon_num = predefined_icon_num
@@ -77,24 +86,7 @@
 		if(prob(60))
 			my_effect.trigger = pick(TRIGGER_TOUCH, TRIGGER_HEAT, TRIGGER_COLD, TRIGGER_PHORON, TRIGGER_OXY, TRIGGER_CO2, TRIGGER_NITRO)
 
-	if(predefined_triggers)
-		if(predefined_trig_primary && my_effect)
-			my_effect.trigger = predefined_trig_primary
-
-		if(predefined_trig_secondary && secondary_effect)
-			secondary_effect.trigger = predefined_trig_secondary
-
-/obj/machinery/artifact/proc/choose_effect()
-	var/effect_type = input(usr, "What type do you want?", "Effect Type") as null|anything in typesof(/datum/artifact_effect) - /datum/artifact_effect
-	if(effect_type)
-		my_effect = new effect_type(src)
-		if(alert(usr, "Do you want a secondary effect?", "Second Effect", "No", "Yes") == "Yes")
-			var/second_effect_type = input(usr, "What type do you want as well?", "Second Effect Type") as null|anything in typesof(/datum/artifact_effect) - list(/datum/artifact_effect, effect_type)
-			secondary_effect = new second_effect_type(src)
-		else
-			secondary_effect = null
-
-
+/*
 /obj/machinery/artifact/process()
 	var/turf/L = loc
 	if(!istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
@@ -373,3 +365,4 @@
 		my_effect.UpdateMove()
 	if(secondary_effect)
 		secondary_effect.UpdateMove()
+*/

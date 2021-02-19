@@ -41,6 +41,7 @@
 					H.nutrition = H.nutrition / 1.5
 
 /datum/artifact_effect/cannibalfeeling/DoEffectAura()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))
@@ -57,6 +58,7 @@
 		return 1
 
 /datum/artifact_effect/cannibalfeeling/DoEffectPulse()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/carbon/human/H in range(src.effectrange,T))

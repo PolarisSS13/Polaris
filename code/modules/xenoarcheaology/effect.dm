@@ -3,16 +3,24 @@
 	var/effect = EFFECT_TOUCH
 	var/effectrange = 4
 	var/trigger = TRIGGER_TOUCH
-	var/atom/holder
+	var/datum/artifact_master/master
 	var/activated = 0
 	var/chargelevel = 0
 	var/chargelevelmax = 10
 	var/artifact_id = ""
 	var/effect_type = 0
 
-/datum/artifact_effect/New(var/atom/location)
+	var/req_type = /atom/movable
+
+/datum/artifact_effect/Destroy()
+	if(master)
+		master = null
+
 	..()
-	holder = location
+
+/datum/artifact_effect/New(var/datum/artifact_master/newmaster)
+	..()
+	master = newmaster
 	effect = rand(0, MAX_EFFECT)
 	trigger = rand(0, MAX_TRIGGER)
 
@@ -41,16 +49,16 @@
 			activated = 0
 		else
 			activated = 1
-		if(reveal_toggle && holder)
-			if(istype(holder, /obj/machinery/artifact))
-				var/obj/machinery/artifact/A = holder
+		if(reveal_toggle && master.holder)
+			if(istype(master.holder, /obj/machinery/artifact))
+				var/obj/machinery/artifact/A = master.holder
 				A.icon_state = "ano[A.icon_num][activated]"
 			var/display_msg
 			if(activated)
 				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 			else
 				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
-			var/atom/toplevelholder = holder
+			var/atom/toplevelholder = master.holder
 			while(!istype(toplevelholder.loc, /turf))
 				toplevelholder = toplevelholder.loc
 			toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")

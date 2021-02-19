@@ -10,6 +10,7 @@
 	var/list/nearby_mobs = list()
 
 /datum/artifact_effect/vampire/proc/bloodcall(var/mob/living/carbon/human/M)
+	var/atom/holder = master.holder
 	last_bloodcall = world.time
 	if(istype(M))
 		playsound(holder, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
@@ -30,6 +31,7 @@
 	DoEffectAura()
 
 /datum/artifact_effect/vampire/DoEffectAura()
+	var/atom/holder = master.holder
 	nearby_mobs.Cut()
 
 	var/turf/T = get_turf(holder)
