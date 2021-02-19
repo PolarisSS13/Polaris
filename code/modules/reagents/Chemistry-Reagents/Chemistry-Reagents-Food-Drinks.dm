@@ -942,6 +942,7 @@
 	description = "It's grrrrrape!"
 	taste_description = "grapes"
 	color = "#863333"
+	var/sugary = TRUE ///So non-sugary juices don't make Unathi snooze.
 
 	glass_name = "grape juice"
 	glass_desc = "It's grrrrrape!"
@@ -955,18 +956,19 @@
 		effective_dose *= 2
 
 	if(alien == IS_UNATHI)
-		if(effective_dose < 2)
-			if(effective_dose == metabolism * 2 || prob(5))
-				M.emote("yawn")
-		else if(effective_dose < 5)
-			M.eye_blurry = max(M.eye_blurry, 10)
-		else if(effective_dose < 20)
-			if(prob(50))
-				M.Weaken(2)
-			M.drowsyness = max(M.drowsyness, 20)
-		else
-			M.Sleeping(20)
-			M.drowsyness = max(M.drowsyness, 60)
+		if(sugary == TRUE)
+			if(effective_dose < 2)
+				if(effective_dose == metabolism * 2 || prob(5))
+					M.emote("yawn")
+			else if(effective_dose < 5)
+				M.eye_blurry = max(M.eye_blurry, 10)
+			else if(effective_dose < 20)
+				if(prob(50))
+					M.Weaken(2)
+				M.drowsyness = max(M.drowsyness, 20)
+			else
+				M.Sleeping(20)
+				M.drowsyness = max(M.drowsyness, 60)
 
 /datum/reagent/drink/juice/lemon
 	name = "Lemon Juice"
@@ -1041,6 +1043,7 @@
 	taste_description = "potatoes"
 	nutrition = 2
 	color = "#302000"
+	sugary = FALSE
 
 	glass_name = "potato juice"
 	glass_desc = "Juice from a potato. Bleh."
@@ -1052,6 +1055,7 @@
 	description = "Tomatoes made into juice. What a waste of big, juicy tomatoes, huh?"
 	taste_description = "tomatoes"
 	color = "#731008"
+	sugary = FALSE
 
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
