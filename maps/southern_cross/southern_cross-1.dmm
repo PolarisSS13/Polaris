@@ -78825,7 +78825,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass_medical{
-	name = "Patient Ward"
+	name = "Patient Ward";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_wing)
@@ -82010,7 +82011,8 @@
 "cWF" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass_medical{
-	name = "Patient Ward"
+	name = "Patient Ward";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_wing)
@@ -83405,7 +83407,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/medical{
-	name = "Patient Room A"
+	name = "Patient Room A";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_a)
@@ -83429,7 +83432,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/medical{
-	name = "Patient Room B"
+	name = "Patient Room B";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_b)
