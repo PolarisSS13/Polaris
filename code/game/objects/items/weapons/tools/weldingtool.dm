@@ -665,7 +665,7 @@
 	always_process = TRUE
 
 /obj/item/weapon/weldingtool/electric/mounted/exosuit/Initialize()
-	..()
+	. = ..()
 
 	if(istype(loc, /obj/item/mecha_parts/mecha_equipment))
 		equip_mount = loc
