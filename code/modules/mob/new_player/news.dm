@@ -70,6 +70,7 @@
 /proc/get_news_page(var/datum/feed_channel/CHANNEL, var/datum/feed_message/MESSAGE, current_page)
 	var/dat
 
+	dat += get_newspaper_header(CHANNEL.channel_name, "Aggregated News", "#d4cec1")
 
 	if(isemptylist(CHANNEL.messages))
 		dat += "<I>No current articles for this newspaper.</I><BR>"

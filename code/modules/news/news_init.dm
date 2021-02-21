@@ -17,15 +17,14 @@ GLOBAL_DATUM_INIT(news_data, /datum/lore/news, new)
 				break
 	spawn(300) // Yes, again.
 		fill_codex_news()
-		to_world("I'm walkin here")
 
 /datum/lore/news/proc/fill_codex_news()
 	if(!news_network)
-		to_world("Load: Could not find newscaster network!")
+		log_debug("Load: Could not find newscaster network.")
 		return
 
 	if(!station_newspaper)
-		to_world("Load: Could not find news channel Vir News Network.")
+		log_debug("Load: Could not find news channel Vir News Network to populate news articles.")
 		return
 
 	//Feed the Lore Codex into the News Machine
