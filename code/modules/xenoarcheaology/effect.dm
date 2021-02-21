@@ -50,9 +50,8 @@
 		else
 			activated = 1
 		if(reveal_toggle && master.holder)
-			if(istype(master.holder, /obj/machinery/artifact))
-				var/obj/machinery/artifact/A = master.holder
-				A.icon_state = "ano[A.icon_num][activated]"
+			if(!isliving(master.holder))
+				master.holder.update_icon()
 			var/display_msg
 			if(activated)
 				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")

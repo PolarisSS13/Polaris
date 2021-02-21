@@ -86,6 +86,14 @@
 		if(prob(60))
 			my_effect.trigger = pick(TRIGGER_TOUCH, TRIGGER_HEAT, TRIGGER_COLD, TRIGGER_PHORON, TRIGGER_OXY, TRIGGER_CO2, TRIGGER_NITRO)
 
+/obj/machinery/artifact/update_icon()
+	..()
+
+	if(LAZYLEN(artifact_master.get_active_effects()))
+		icon_state = "ano[icon_num]1"
+	else
+		icon_state = "ano[icon_num]0"
+
 /*
 /obj/machinery/artifact/process()
 	var/turf/L = loc

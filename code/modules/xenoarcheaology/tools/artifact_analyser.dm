@@ -170,7 +170,7 @@
 
 				if(AMast.my_effects.len > 1)
 					out += "<br><br>Resonant scans indicate asynchronous reality modulation:<br><br>"
-					for(var/datum/artifact_effect/my_effect in A.artifact_master.my_effects - AEff)
+					for(var/datum/artifact_effect/my_effect in AMast.my_effects - AEff)
 
 						if(my_effect)
 							out += my_effect.getDescription()

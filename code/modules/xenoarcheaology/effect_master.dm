@@ -1,4 +1,8 @@
 
+/*
+ * Here there be dragons.
+ */
+
 /atom/var/datum/artifact_master/artifact_master
 
 /atom/Initialize()
@@ -117,7 +121,9 @@
 /datum/artifact_master/proc/do_setup()
 	if(LAZYLEN(make_effects))
 		for(var/path in make_effects)
-			new path(src)
+			var/datum/artifact_effect/new_effect = new path(src)
+			if(istype(holder, new_effect.req_type))
+				my_effects += new_effect
 
 	else
 		generate_effects()
@@ -150,7 +156,7 @@
 
 /*
  * Trigger code.
- */ 
+ */
 
 /datum/artifact_master/proc/on_exact(severity)
 	for(var/datum/artifact_effect/my_effect in my_effects)
@@ -229,21 +235,29 @@
 		to_chat(user, "<b>You touch [holder]</b> with your gloved hands, [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
 		return
 
+	var/triggered = FALSE
+
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
 		if(my_effect.trigger == TRIGGER_TOUCH)
-			to_chat(user, "<b>You touch [holder].</b>")
+			triggered = TRUE
 			my_effect.ToggleActivate()
-		else
-			to_chat(user, "<b>You touch [holder],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
 
 		if (my_effect.effect == EFFECT_TOUCH)
+			triggered = TRUE
 			my_effect.DoEffectTouch(user)
+
+	if(triggered)
+		to_chat(user, "<b>You touch [holder].</b>")
+
+	else
+		to_chat(user, "<b>You touch [holder],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
+
 
 /datum/artifact_master/proc/on_attackby(obj/item/weapon/W as obj, mob/living/user as mob)
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
-		if (istype(W, /obj/item/weapon/reagent_containers/))
+		if (istype(W, /obj/item/weapon/reagent_containers))
 			if(W.reagents.has_reagent("hydrogen", 1) || W.reagents.has_reagent("water", 1))
 				if(my_effect.trigger == TRIGGER_WATER)
 					my_effect.ToggleActivate()
@@ -280,7 +294,7 @@
 
 /datum/artifact_master/process()
 	var/turf/L = holder.loc
-	if(!istype(L)) 	// We're inside a container or on null turf, either way stop processing effects
+	if(!istype(L) || !isliving(L)) 	// We're inside a non-mob container or on null turf, either way stop processing effects
 		return
 
 	if(istype(holder, /atom/movable))
@@ -288,7 +302,7 @@
 		if(HA.pulledby)
 			on_bumped(HA.pulledby)
 
-	//if either of our effects rely on environmental factors, work that out
+	//if any of our effects rely on environmental factors, work that out
 	var/trigger_cold = 0
 	var/trigger_hot = 0
 	var/trigger_phoron = 0
