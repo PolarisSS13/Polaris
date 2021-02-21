@@ -38,7 +38,7 @@ var/list/all_maps = list()
 
 	// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
 	var/list/map_levels
-	
+
 	// E-mail TLDs to use for NTnet modular computer e-mail addresses
 	var/list/usable_email_tlds = list("freemail.nt")
 
@@ -307,3 +307,6 @@ var/list/all_maps = list()
 	if (using_map.zlevels["[z]"] == src)
 		using_map.zlevels -= "[z]"
 	return ..()
+
+/datum/map/proc/get_map_info()
+	return "No map information available"
