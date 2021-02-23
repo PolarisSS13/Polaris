@@ -67,8 +67,6 @@
 				entry += "[seconds % 60] seconds)"
 
 			entry += "</td><td>"
-			entry += " ([round(C.avgping, 1)]ms)"
-			entry += "</td><td>"
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
 			entry += "</td></tr>"
 
@@ -88,7 +86,6 @@
 			else
 				entry += " - <span class='green'>Playing</span><br>"
 
-			entry += " ([round(C.avgping, 1)]ms)"
 			Lines += entry
 
 	msg += "<table>"

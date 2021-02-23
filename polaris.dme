@@ -235,7 +235,6 @@
 #include "code\controllers\subsystems\orbits.dm"
 #include "code\controllers\subsystems\overlays.dm"
 #include "code\controllers\subsystems\persistence.dm"
-#include "code\controllers\subsystems\ping.dm"
 #include "code\controllers\subsystems\planets.dm"
 #include "code\controllers\subsystems\radiation.dm"
 #include "code\controllers\subsystems\shuttles.dm"
