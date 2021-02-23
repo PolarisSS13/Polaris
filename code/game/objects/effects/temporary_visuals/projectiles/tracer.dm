@@ -120,3 +120,6 @@
 	light_range = 1
 	light_power = 0.5
 	light_color = "#f6f2b6"
+
+/obj/effect/projectile/tracer/pointdefense
+	icon_state = "beam_pointdef"
