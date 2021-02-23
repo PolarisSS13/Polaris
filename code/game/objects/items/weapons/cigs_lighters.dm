@@ -490,34 +490,65 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 
 /obj/item/clothing/mask/smokable/cigarette/joint
 	name = "joint"
-	desc = "This probably shouldn't ever show up."
+	desc = "A joint lovingly rolled and crafted with care. Blaze it."
 	icon_state = "joint"
-	max_smoketime = 500
-	smoketime = 500
+	max_smoketime = 400
+	smoketime = 400
 	nicotine_amt = 0
 
-/obj/item/weapon/rollingpaper
+/obj/item/weapon/reagent_containers/rollingpaper
 	name = "rolling paper"
 	desc = "A small, thin piece of easily flammable paper, commonly used for rolling and smoking various dried plants."
 	description_fluff = "The legalization of certain substances propelled the sale of rolling papers through the roof. Now almost every Trans-stellar produces a variety, often of questionable quality."
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig paper"
 
-/obj/item/weapon/rollingpaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/reagent_containers/rollingpaper/full
+	icon_state = "paper_full"
+	var/capacity_max = 25
+
+/obj/item/weapon/reagent_containers/rollingpaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/reagent_containers/food/snacks))
 		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = W
 		if (!G.dry)
-			to_chat(user, "<span class='notice'>[G] must be dried before you roll it into [src].</span>")
+			to_chat(usr, "<span class='notice'>[G.name] must be dried before you add it to [src].</span>")
 			return
-		var/obj/item/clothing/mask/smokable/cigarette/joint/J = new /obj/item/clothing/mask/smokable/cigarette/joint(user.loc)
-		to_chat(usr, "<span class='notice'>You roll the [G.name] into a joint!</span>")
-		J.add_fingerprint(user)
+		var/obj/item/weapon/reagent_containers/rollingpaper/full/P = new /obj/item/weapon/reagent_containers/rollingpaper/full
+		to_chat(usr, "<span class='notice'>You add the [G.name] to the paper.</span>")
+		P.add_fingerprint(user)
 		if(G.reagents)
-			G.reagents.trans_to_obj(J, G.reagents.total_volume)
-		J.name = "[G.name] joint"
-		J.desc = "A joint lovingly rolled and filled with [G.name]. Blaze it."
+			G.reagents.trans_to_obj(P, G.reagents.total_volume)
 		qdel(G)
+		user.put_in_hands(P)
+		user.drop_from_inventory(src)
 		qdel(src)
+
+/obj/item/weapon/reagent_containers/rollingpaper/full/attackby(obj/item/weapon/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/weapon/reagent_containers/food/snacks))
+		var/obj/item/weapon/reagent_containers/food/snacks/grown/G = W
+		if (!G.dry)
+			to_chat(usr, "<span class='notice'>[G.name] must be dried before you add it to [src].</span>")
+			return
+		if (G.reagents.total_volume + src.reagents.total_volume > src.capacity_max)
+			to_chat(usr, "<span class='warning'>The [src] is too full to add [G.name].</span>")
+			return
+		to_chat(usr, "<span class='notice'>You add the [G.name] to the paper.</span>")
+		if(G.reagents)
+			G.reagents.trans_to_obj(src, G.reagents.total_volume)
+		qdel(G)
+
+/obj/item/weapon/reagent_containers/rollingpaper/full/attack_self(mob/living/user)
+	if(!src.reagents)
+		to_chat(usr, "<span class='warning'>There is nothing in the [src]. Add something to it first.</span>")
+		return
+	var/obj/item/clothing/mask/smokable/cigarette/joint/J = new /obj/item/clothing/mask/smokable/cigarette/joint
+	to_chat(usr,"<span class='notice'>You roll the [src] into a joint!</span>")
+	J.add_fingerprint(user)
+	if(src.reagents)
+		src.reagents.trans_to_obj(J, src.reagents.total_volume)
+	user.drop_from_inventory(src)
+	user.put_in_hands(J)
+	qdel(src)
 
 /////////
 //ZIPPO//

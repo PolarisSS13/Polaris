@@ -355,8 +355,8 @@
 	throwforce = 2
 	slot_flags = SLOT_BELT
 	storage_slots = 14
-	can_hold = list(/obj/item/weapon/rollingpaper)
-	starts_with = list(/obj/item/weapon/rollingpaper = 14)
+	can_hold = list(/obj/item/weapon/reagent_containers/rollingpaper)
+	starts_with = list(/obj/item/weapon/reagent_containers/rollingpaper = 14)
 
 /*
  * Vial Box
