@@ -539,6 +539,14 @@
 						return 0
 		return 1
 
+/obj/item/clothing/suit/armor/pcarrier/explorer
+	name = "explorer suit"
+	desc = "A lightweight explorer plate carrier. It can be equipped with armor plates, but only protects from the cold on it's own."
+	icon_state = "explorer"
+	flags = THICKMATERIAL
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	cold_protection = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+
 /obj/item/clothing/suit/armor/pcarrier/light
 	starting_accessories = list(/obj/item/clothing/accessory/armor/armorplate)
 
@@ -592,6 +600,9 @@
 	name = "tan plate carrier"
 	desc = "A lightweight tan plate carrier vest. It can be equipped with armor plates, but provides no protection of its own."
 	icon_state = "pcarrier_tan"
+
+/obj/item/clothing/suit/armor/pcarrier/explorer/light
+	starting_accessories = list(/obj/item/clothing/accessory/armor/armorplate/explorer, /obj/item/clothing/accessory/armor/armguards/explorer, /obj/item/clothing/accessory/armor/legguards/explorer, /obj/item/clothing/accessory/storage/pouches/green)
 
 /obj/item/clothing/suit/armor/pcarrier/tan/tactical
 	name = "tactical plate carrier"

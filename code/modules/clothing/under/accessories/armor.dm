@@ -92,6 +92,12 @@
 	armor = list(melee = 30, bullet = 15, laser = 40, energy = 10, bomb = 25, bio = 0, rad = 0)
 	slot = ACCESSORY_SLOT_ARMOR_C
 
+/obj/item/clothing/accessory/armor/armorplate/explorer
+	name = "explorer armor plate"
+	desc = "A flexible plate made of synthetic fibers, designed to protect from the Sivian fauna. Attaches to a plate carrier."
+	icon_state = "armor_light"
+	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
+
 /obj/item/clothing/accessory/armor/armorplate/stab
 	name = "mesh armor plate"
 	desc = "A mesh armor plate made of steel-reinforced synthetic fibers, great for dealing with small blades. Attaches to a plate carrier."
@@ -203,6 +209,12 @@
 	desc = "A pair of tan arm pads reinforced with armor plating. Attaches to a plate carrier."
 	icon_state = "armguards_tan"
 
+/obj/item/clothing/accessory/armor/armguards/explorer
+	name = "explorer arm guards"
+	desc = "A pair of green arm pads reinforced with armor plating. Attaches to a plate carrier."
+	icon_state = "armguards_green"
+	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
+
 /obj/item/clothing/accessory/armor/armguards/merc
 	name = "heavy arm guards"
 	desc = "A pair of red-trimmed black arm pads reinforced with heavy armor plating. Attaches to a plate carrier."
@@ -261,6 +273,12 @@
 /obj/item/clothing/accessory/armor/legguards/tan
 	desc = "A pair of armored leg pads in tan. Attaches to a plate carrier."
 	icon_state = "legguards_tan"
+
+/obj/item/clothing/accessory/armor/legguards/explorer
+	name = "explorer leg guards"
+	desc = "A pair of armored leg pads in green. Attaches to a plate carrier."
+	icon_state = "legguards_green"
+	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
 
 /obj/item/clothing/accessory/armor/legguards/merc
 	name = "heavy leg guards"
