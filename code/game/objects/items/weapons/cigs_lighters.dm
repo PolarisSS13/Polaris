@@ -496,6 +496,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	smoketime = 400
 	nicotine_amt = 0
 
+/obj/item/clothing/mask/smokable/cigarette/joint/blunt
+	name = "blunt"
+	desc = "A blunt lovingly rolled and crafted with care. Blaze it."
+	icon_state = "cigar"
+	max_smoketime = 500
+	smoketime = 500
+	nicotine_amt = 4
+
 /obj/item/weapon/reagent_containers/rollingpaper
 	name = "rolling paper"
 	desc = "A small, thin piece of easily flammable paper, commonly used for rolling and smoking various dried plants."
@@ -503,9 +511,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig paper"
 
+/obj/item/weapon/reagent_containers/rollingpaper/blunt
+	name = "blunt wrap"
+	desc = "A small piece of easily flammable paper similar to that which encases cigars. It's made out of tobacco, bigger than a standard rolling paper, and will last longer."
+	icon_state = "blunt paper"
+
 /obj/item/weapon/reagent_containers/rollingpaper/full
 	icon_state = "paper_full"
-	var/capacity_max = 25
 
 /obj/item/weapon/reagent_containers/rollingpaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/reagent_containers/food/snacks))
@@ -514,7 +526,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			to_chat(usr, "<span class='notice'>[G.name] must be dried before you add it to [src].</span>")
 			return
 		var/obj/item/weapon/reagent_containers/rollingpaper/full/P = new /obj/item/weapon/reagent_containers/rollingpaper/full
-		to_chat(usr, "<span class='notice'>You add the [G.name] to the paper.</span>")
+		P.reagents.maximum_volume = 25
+		if (istype(src, /obj/item/weapon/reagent_containers/rollingpaper/blunt))
+			P.name = "blunt wrap"
+			P.desc = "A small piece of easily flammable paper similar to that which encases cigars. It's made out of tobacco, bigger than a standard rolling paper, and will last longer."
+			P.icon_state = "blunt_full"
+			P.reagents.maximum_volume = 45
+		to_chat(usr, "<span class='notice'>You add the [G.name] to the [P.name].</span>")
 		P.add_fingerprint(user)
 		if(G.reagents)
 			G.reagents.trans_to_obj(P, G.reagents.total_volume)
@@ -529,26 +547,36 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		if (!G.dry)
 			to_chat(usr, "<span class='notice'>[G.name] must be dried before you add it to [src].</span>")
 			return
-		if (G.reagents.total_volume + src.reagents.total_volume > src.capacity_max)
+		if (G.reagents.total_volume + src.reagents.total_volume > src.reagents.maximum_volume)
 			to_chat(usr, "<span class='warning'>The [src] is too full to add [G.name].</span>")
 			return
-		to_chat(usr, "<span class='notice'>You add the [G.name] to the paper.</span>")
+		to_chat(usr, "<span class='notice'>You add the [G.name] to the [src].</span>")
 		if(G.reagents)
 			G.reagents.trans_to_obj(src, G.reagents.total_volume)
 		qdel(G)
 
 /obj/item/weapon/reagent_containers/rollingpaper/full/attack_self(mob/living/user)
 	if(!src.reagents)
-		to_chat(usr, "<span class='warning'>There is nothing in the [src]. Add something to it first.</span>")
+		to_chat(usr, "<span class='warning'>There is nothing in [src]. Add something to it first.</span>")
 		return
-	var/obj/item/clothing/mask/smokable/cigarette/joint/J = new /obj/item/clothing/mask/smokable/cigarette/joint
-	to_chat(usr,"<span class='notice'>You roll the [src] into a joint!</span>")
-	J.add_fingerprint(user)
-	if(src.reagents)
-		src.reagents.trans_to_obj(J, src.reagents.total_volume)
-	user.drop_from_inventory(src)
-	user.put_in_hands(J)
-	qdel(src)
+	if (icon_state == "blunt_full")
+		var/obj/item/clothing/mask/smokable/cigarette/joint/blunt/J = new /obj/item/clothing/mask/smokable/cigarette/joint/blunt
+		to_chat(usr,"<span class='notice'>You roll the [src] into a blunt!</span>")
+		J.add_fingerprint(user)
+		if(src.reagents)
+			src.reagents.trans_to_obj(J, src.reagents.total_volume)
+		user.drop_from_inventory(src)
+		user.put_in_hands(J)
+		qdel(src)
+	else
+		var/obj/item/clothing/mask/smokable/cigarette/joint/J = new /obj/item/clothing/mask/smokable/cigarette/joint
+		to_chat(usr,"<span class='notice'>You roll the [src] into a joint!</span>")
+		J.add_fingerprint(user)
+		if(src.reagents)
+			src.reagents.trans_to_obj(J, src.reagents.total_volume)
+		user.drop_from_inventory(src)
+		user.put_in_hands(J)
+		qdel(src)
 
 /////////
 //ZIPPO//
