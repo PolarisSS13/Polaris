@@ -53,9 +53,7 @@
 		return
 
 	if(!typing_indicator)
-		typing_indicator = new
-		typing_indicator.icon = 'icons/mob/talk.dmi'
-		typing_indicator.icon_state = "[speech_bubble_appearance()]_typing"
+		init_typing_indicator("[speech_bubble_appearance()]_typing")
 
 	if(state && !typing)
 		loc.add_overlay(typing_indicator, TRUE)

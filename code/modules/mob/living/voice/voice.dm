@@ -109,7 +109,7 @@
 	if(comm)
 		var/speech_bubble_test = say_test(message)
 		var/speech_type = speech_bubble_appearance()
-		var/image/speech_bubble = image('icons/mob/talk.dmi',comm,"[speech_type][speech_bubble_test]")
+		var/image/speech_bubble = generate_speech_bubble(comm, "[speech_type][speech_bubble_test]")
 		spawn(30)
 			qdel(speech_bubble)
 

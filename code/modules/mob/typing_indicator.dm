@@ -1,3 +1,19 @@
+/proc/generate_speech_bubble(var/bubble_loc, var/speech_state, var/set_layer = FLOAT_LAYER)
+	var/image/I = image('icons/mob/talk.dmi', bubble_loc, speech_state, set_layer)
+	I.appearance_flags |= (KEEP_APART|RESET_COLOR|PIXEL_SCALE)
+	if(istype(bubble_loc, /atom/movable))
+		var/atom/movable/AM = bubble_loc
+		var/x_scale = AM.get_icon_scale_x()
+		if(abs(x_scale) < 2) // reset transform on bubbles, except for the Very Large
+			I.pixel_z = (AM.icon_expected_height * (x_scale-1))
+			I.appearance_flags |= RESET_TRANSFORM
+	return I
+
+/mob/proc/init_typing_indicator(var/set_state = "typing")
+	typing_indicator = new
+	typing_indicator.appearance = generate_speech_bubble(null, set_state)
+	typing_indicator.appearance_flags |= (KEEP_APART|RESET_COLOR|RESET_TRANSFORM|PIXEL_SCALE)
+
 /mob/proc/set_typing_indicator(var/state) //Leaving this here for mobs.
 
 	if(!is_preference_enabled(/datum/client_preference/show_typing_indicator))
@@ -6,15 +22,9 @@
 		return
 
 	if(!typing_indicator)
-		typing_indicator = new
-		typing_indicator.icon = 'icons/mob/talk.dmi'
-		typing_indicator.icon_state = "[speech_bubble_appearance()]_typing"
-		typing_indicator.appearance_flags |= (RESET_COLOR|RESET_TRANSFORM)
+		init_typing_indicator("[speech_bubble_appearance()]_typing")
 
 	if(state && !typing)
-		typing_indicator.pixel_z = world.icon_size * (get_icon_scale_x()-1)
-		typing_indicator.pixel_w = world.icon_size * (get_icon_scale_y()-1)
-		to_world(json_encode(typing_indicator.transform?.vars))
 		add_overlay(typing_indicator, TRUE)
 		typing = TRUE
 	else if(typing)
