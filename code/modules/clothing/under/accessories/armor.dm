@@ -151,7 +151,7 @@
 /obj/item/clothing/accessory/armor/armorplate/laserproof
 	name = "ablative armor plate"
 	desc = "A durasteel-scaled synthetic armor plate, providing good protection against lasers. Attaches to a plate carrier."
-	icon_state = "armor_medium"
+	icon_state = "armor_ablative"
 	slowdown = 0.6
 	armor = list(melee = 10, bullet = 10, laser = 70, energy = 50, bomb = 0, bio = 0, rad = 0)
 	armorsoak = list(melee = 0, bullet = 0, laser = 10, energy = 15, bomb = 0, bio = 0, rad = 0)

@@ -46,6 +46,9 @@ Protectiveness | Armor %
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
+/obj/item/weapon/material/armor_plating/insert/Destroy()
+    return ..()
+
 /obj/item/clothing/get_material()
 	return material
 
@@ -286,6 +289,9 @@ Protectiveness | Armor %
 	thrown_force_divisor = 0.2
 	var/wired = FALSE
 
+/obj/item/weapon/material/armor_plating/insert
+	unbreakable = FALSE
+
 /obj/item/weapon/material/armor_plating/attackby(var/obj/O, mob/user)
 	if(istype(O, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/S = O
@@ -324,6 +330,7 @@ Protectiveness | Armor %
 		if(S.remove_fuel(0,user))
 			if(!src || !S.isOn()) return
 			to_chat(user, "<span class='notice'>You trim down the edges to size.</span>")
+			user.drop_from_inventory(src)
 			var/obj/item/clothing/accessory/material/makeshift/light/new_armor = new(null, src.material.name)
 			user.put_in_hands(new_armor)
 			qdel(src)
@@ -343,6 +350,7 @@ Protectiveness | Armor %
 
 	if(istype(O, /obj/item/weapon/tool/wirecutters))
 		to_chat(user, "<span class='notice'>You split the plate down the middle, and joint it at the elbow.</span>")
+		user.drop_from_inventory(src)
 		var/obj/item/clothing/accessory/material/makeshift/armguards/new_armor = new(null, src.material.name)
 		user.put_in_hands(new_armor)
 		qdel(src)
@@ -352,6 +360,7 @@ Protectiveness | Armor %
 		if(S.material == get_material_by_name("leather"))
 			if(S.use(2))
 				to_chat(user, "<span class='notice'>You curve the plate inwards, and add a strap for adjustment.</span>")
+				user.drop_from_inventory(src)
 				var/obj/item/clothing/accessory/material/makeshift/legguards/new_armor = new(null, src.material.name)
 				user.put_in_hands(new_armor)
 				qdel(src)
