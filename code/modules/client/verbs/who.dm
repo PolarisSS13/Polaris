@@ -49,7 +49,6 @@
 				entry += "[seconds % 60] seconds)"
 
 			entry += " (<A HREF='?_src_=holder;adminmoreinfo=\ref[C.mob]'>?</A>)"
-			entry += " ([round(C.avgping, 1)]ms)"
 			Lines += entry
 	else
 		for(var/client/C in GLOB.clients)
@@ -58,7 +57,6 @@
 				entry = C.holder.fakekey
 			else
 				entry = C.key
-			entry += " ([round(C.avgping, 1)]ms)"
 			Lines += entry
 
 	for(var/line in sortList(Lines))

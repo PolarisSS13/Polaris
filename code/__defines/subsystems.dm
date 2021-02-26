@@ -57,7 +57,6 @@ var/global/list/runlevel_flags = list(RUNLEVEL_LOBBY, RUNLEVEL_SETUP, RUNLEVEL_G
 #define INIT_ORDER_SKYBOX		30
 #define INIT_ORDER_MAPPING		25
 #define INIT_ORDER_DECALS		20
-#define INIT_ORDER_PING			18
 #define INIT_ORDER_JOB			17
 #define INIT_ORDER_ALARM		16 // Must initialize before atoms.
 #define INIT_ORDER_ATOMS		15
@@ -90,7 +89,6 @@ var/global/list/runlevel_flags = list(RUNLEVEL_LOBBY, RUNLEVEL_SETUP, RUNLEVEL_G
 #define FIRE_PRIORITY_NIGHTSHIFT	5
 #define FIRE_PRIORITY_ORBIT			8
 #define FIRE_PRIORITY_VOTE			9
-#define FIRE_PRIORITY_PING			9
 #define FIRE_PRIORITY_AI			10
 #define FIRE_PRIORITY_GARBAGE		15
 #define FIRE_PRIORITY_ALARM			20
