@@ -11,82 +11,82 @@
 	// New sprite stacks can be defined here. You could theoretically change icon-states as well but right now this file compiles before station_ids.dm so those wouldn't be affected.
 	id
 		centcom
-			initial_sprite_stack = list("base-stamp", "top-blue", "dept-nanotrasen", "letter-n-command", "pips-gold")
+			initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "pips-gold")
 			vip
-				initial_sprite_stack = list("base-stamp-gold", "top-blue", "dept-vip-gold", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-gold", "top-blue", "stamp-n", "pips-gold")
 			ERT
-				initial_sprite_stack = list("base-stamp", "top-dark", "dept-nanotrasen", "letter-n-command")
+				initial_sprite_stack = list("base-stamp", "top-dark", "stamp-n")
 		silver
-			initial_sprite_stack = list("base-stamp-silver", "top-mime", "letter-n-generic")
+			initial_sprite_stack = list("base-stamp-silver", "top-mime", "stamp-n-generic")
 			secretary
-				initial_sprite_stack = list("base-stamp", "top-blue", "dept-secretary", "letter-n-command")
+				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n")
 			hop
-				initial_sprite_stack = list("base-stamp-silver", "top-blue", "dept-hop", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "stripe-silver")
 		medical
-			initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical")
+			initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n")
 			chemist
-				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-engineering")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-engineering")
 			geneticist
-				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-science")
 			psych
-				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-science")
 			emt
-				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-medical", "letter-n-medical", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-command")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-medblu", "dept-medical", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-medblu", "stamp-n", "stripe-gold")
 			sar
-				initial_sprite_stack = list("base-stamp", "top-medblu", "dept-exploration", "letter-n-command", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-command")
 		security
-			initial_sprite_stack = list("base-stamp", "top-red", "dept-security", "letter-n-security")
+			initial_sprite_stack = list("base-stamp", "top-red", "stamp-n")
 			detective
-				initial_sprite_stack = list("base-stamp", "top-red", "dept-security", "letter-n-security", "pips-cargo")
+				initial_sprite_stack = list("base-stamp", "top-red", "stamp-n", "pips-cargo")
 			warden
-				initial_sprite_stack = list("base-stamp", "top-red", "dept-security", "letter-n-security", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-red", "stamp-n", "pips-white")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-red", "dept-security", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-red", "stamp-n", "stripe-gold")
 		engineering
-			initial_sprite_stack = list("base-stamp", "top-orange", "dept-engineering", "letter-n-engineering")
+			initial_sprite_stack = list("base-stamp", "top-orange", "stamp-n")
 			atmos
-				initial_sprite_stack = list("base-stamp", "top-orange", "dept-engineering", "pips-medical", "letter-n-engineering")
+				initial_sprite_stack = list("base-stamp", "top-orange", "pips-medical", "stamp-n")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-orange", "dept-engineering", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-orange", "stamp-n", "stripe-gold")
 		science
-			initial_sprite_stack = list("base-stamp", "top-purple", "dept-science", "letter-n-science")
+			initial_sprite_stack = list("base-stamp", "top-purple", "stamp-n")
 			roboticist
-				initial_sprite_stack = list("base-stamp", "top-purple", "dept-science", "letter-n-science", "pips-engineering")
+				initial_sprite_stack = list("base-stamp", "top-purple", "stamp-n", "pips-engineering")
 			explorer
-				initial_sprite_stack = list("base-stamp", "top-blue", "dept-exploration", "letter-n-command")
+				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-purple", "dept-science", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-purple", "stamp-n", "striple-gold")
 				pathfinder
-					initial_sprite_stack = list("base-stamp-silver", "top-blue", "dept-exploration", "letter-n-command", "pips-gold")
+					initial_sprite_stack = list("base-stamp-silver", "top-blue", "stamp-n", "stripe-gold")
 		cargo
-			initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-cargo")
+			initial_sprite_stack = list("base-stamp", "top-brown", "stamp-n")
 			miner
-				initial_sprite_stack = list("base-stamp", "top-brown", "dept-cargo", "letter-n-cargo", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-brown", "stamp-n", "pips-science")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-brown", "dept-cargo", "letter-n-command", "pips-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-brown", "stamp-n", "pips-gold")
 		civilian
-			initial_sprite_stack = list("base-stamp", "top-green", "dept-civilian", "letter-n-civilian")
+			initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			chaplain
 				initial_sprite_stack = list("base-stamp-silver", "top-dark", "letter-cross", "pips-white")
 			internal_affairs
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-internal-affairs", "letter-n-command")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			botanist
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-civilian", "letter-n-civilian", "pips-cargo")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-cargo")
 			bartender
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-civilian", "letter-n-civilian", "pips-dark")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-dark")
 			chef
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-civilian", "letter-n-civilian", "pips-white")		
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-white")		
 			janitor
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-civilian", "letter-n-civilian", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-science")
 			journalist
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-press", "letter-n-civilian")
+				initial_sprite_stack = list("base-stamp", "top-green", "dept-press", "stamp-n")
 			clown
-				initial_sprite_stack = list("base-stamp", "top-pink", "dept-clown", "letter-n-clown")
+				initial_sprite_stack = list("base-stamp", "top-pink", "stamp-n")
 			mime
-				initial_sprite_stack = list("base-stamp", "top-white", "letter-n-mime")
+				initial_sprite_stack = list("base-stamp", "top-white", "stamp-n-mime")
 			pilot
-				initial_sprite_stack = list("base-stamp", "top-generic", "dept-pilot", "letter-n-command", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-generic", "stamp-n", "pips-command")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-command", "letter-n-command", "pips-civilian")
+				initial_sprite_stack = list("base-stamp-silver", "top-command", "stamp-n", "stripe-silver")
