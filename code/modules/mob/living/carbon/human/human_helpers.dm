@@ -207,7 +207,7 @@
 
 	for(var/obj/item/organ/external/EX in organs)
 		RB = locate() in EX
-		if(istype(RB))
+		if(istype(RB) && !(RB.malfunction))
 			break
 
 	if(RB)
