@@ -12,12 +12,30 @@
 	var/mob/living/pulling = null
 	var/bloodiness
 
+	var/min_mob_buckle_size = MOB_SMALL
+	var/max_mob_buckle_size = MOB_LARGE
+
 /obj/structure/bed/chair/wheelchair/smallmotor
 	name = "small electric wheelchair"
 	desc = "A small motorized wheelchair, it looks around the right size for a Teshari"
 	icon_state = "teshchair"
 	wheelchairtype = /obj/structure/bed/chair/wheelchair/smallmotor
 	wheelchairitemtype = /obj/item/smallmotorwheelchair
+	min_mob_buckle_size = MOB_SMALL
+	max_mob_buckle_size = MOB_MEDIUM
+
+/obj/structure/bed/chair/wheelchair/motor
+	name = "electric wheelchair"
+	desc = "A motorized wheelchair controlled with a joystick on one armrest"
+	icon_state = "motorchair"
+	wheelchairtype = /obj/structure/bed/chair/wheelchair/motor
+	wheelchairitemtype = /obj/item/motorwheelchair
+
+/obj/structure/bed/chair/wheelchair/can_buckle_check(mob/living/M, forced = FALSE)
+  . = ..()
+  if(. && (M.mob_size < min_mob_buckle_size || M.mob_size >= max_mob_buckle_size))
+    to_chat(M, SPAN_WARNING("You are the wrong size to use \the [src]."))
+    . = FALSE
 
 /obj/structure/bed/chair/wheelchair/update_icon()
 	return
@@ -25,16 +43,30 @@
 /obj/structure/bed/chair/wheelchair/set_dir()
 	..()
 	cut_overlays()
-	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "wheelchair_overlay", layer = FLY_LAYER, dir = src.dir)
+	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "wheelchair_overlay", layer = ABOVE_MOB_LAYER, dir = src.dir)
+	O.plane = MOB_PLANE
 	add_overlay(O)
 	if(has_buckled_mobs())
 		for(var/A in buckled_mobs)
 			var/mob/living/L = A
 			L.set_dir(dir)
+
 /obj/structure/bed/chair/wheelchair/smallmotor/set_dir()
 	..()
 	cut_overlays()
-	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "teshchair_overlay", layer = FLY_LAYER, dir = src.dir)
+	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "teshchair_overlay", layer = ABOVE_MOB_LAYER, dir = src.dir)
+	O.plane = MOB_PLANE
+	add_overlay(O)
+	if(has_buckled_mobs())
+		for(var/A in buckled_mobs)
+			var/mob/living/L = A
+			L.set_dir(dir)
+
+/obj/structure/bed/chair/wheelchair/motor/set_dir()
+	..()
+	cut_overlays()
+	var/image/O = image(icon = 'icons/obj/wheelchair.dmi', icon_state = "motorchair_overlay", layer = ABOVE_MOB_LAYER, dir = src.dir)
+	O.plane = MOB_PLANE
 	add_overlay(O)
 	if(has_buckled_mobs())
 		for(var/A in buckled_mobs)
@@ -232,6 +264,13 @@
 	var/wheelchairtype = /obj/structure/bed/chair/wheelchair
 	var/wheelchairitemtype = /obj/item/wheelchair
 
+/obj/item/wheelchair/attack_self(mob/user)
+		var/obj/structure/bed/chair/wheelchair/R = new wheelchairtype(user.loc)
+		R.add_fingerprint(user)
+		R.name = src.name
+		R.color = src.color
+		qdel(src)
+
 /obj/item/smallmotorwheelchair // need it like this cause the spawning code for wheelchairs in the loadout is funky
 	name = "small electric wheelchair"
 	desc = "A small motorized wheelchair, it looks around the right size for a Teshari."
@@ -242,7 +281,24 @@
 	var/wheelchairtype = /obj/structure/bed/chair/wheelchair/smallmotor
 	var/wheelchairitemtype = /obj/item/smallmotorwheelchair
 
+/obj/item/motorwheelchair
+	name = "electric wheelchair"
+	desc = "A motorized wheelchair controlled with a joystick on one armrest"
+	icon = 'icons/obj/wheelchair.dmi'
+	icon_state = "motorchair_folded"
+	item_state = "motorchair"
+	w_class = ITEMSIZE_HUGE // Can't be put in backpacks. Oh well.
+	var/wheelchairtype = /obj/structure/bed/chair/wheelchair/motor
+	var/wheelchairitemtype = /obj/item/motorwheelchair
+
 /obj/item/smallmotorwheelchair/attack_self(mob/user)
+		var/obj/structure/bed/chair/wheelchair/R = new wheelchairtype(user.loc)
+		R.add_fingerprint(user)
+		R.name = src.name
+		R.color = src.color
+		qdel(src)
+
+/obj/item/motorwheelchair/attack_self(mob/user)
 		var/obj/structure/bed/chair/wheelchair/R = new wheelchairtype(user.loc)
 		R.add_fingerprint(user)
 		R.name = src.name

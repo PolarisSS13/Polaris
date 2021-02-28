@@ -135,6 +135,11 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/utility/motorchair
+	display_name = "electric wheelchair"
+	path = /obj/item/motorwheelchair
+	cost = 4
+
 /****************
 modular computers
 ****************/
