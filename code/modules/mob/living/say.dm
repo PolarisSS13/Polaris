@@ -292,7 +292,7 @@ proc/get_radio_key_from_channel(var/channel)
 	//The 'post-say' static speech bubble
 	var/speech_bubble_test = say_test(message)
 	var/speech_type = speech_bubble_appearance()
-	var/image/speech_bubble = image('icons/mob/talk.dmi',src,"[speech_type][speech_bubble_test]")
+	var/image/speech_bubble = generate_speech_bubble(src, "[speech_type][speech_bubble_test]")
 	var/sb_alpha = 255
 	var/atom/loc_before_turf = src
 	while(loc_before_turf && !isturf(loc_before_turf.loc))
@@ -310,7 +310,7 @@ proc/get_radio_key_from_channel(var/channel)
 		var/turf/ST = get_turf(above)
 		if(ST)
 			var/list/results = get_mobs_and_objs_in_view_fast(ST, world.view)
-			var/image/z_speech_bubble = image('icons/mob/talk.dmi', above, "h[speech_bubble_test]")
+			var/image/z_speech_bubble = generate_speech_bubble(above, "h[speech_bubble_test]")
 			images_to_clients[z_speech_bubble] = list()
 			for(var/item in results["mobs"])
 				if(item != above && !(item in listening))
