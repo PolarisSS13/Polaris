@@ -4093,3 +4093,31 @@
 	reagent_state = LIQUID
 	nutriment_factor = 40 //very filling
 	color = "#d169b2"
+
+//ADDITIONS BELOW THIS LINE MADE ON 02/28/2021
+
+/datum/reagent/drink/soda/kompot
+	name = "Kompot"
+	id = "kompot"
+	description = "A traditional eastern european beverage once used to preserve fruit in the 1980s"
+	taste_description = "refreshuingly sweet and fruity"
+	color = "#ed9415" // rgb: 237, 148, 21
+	adj_drowsy = -1
+	adj_temp = -6
+
+	glass_name = "kompot"
+	glass_desc = "A glass of refreshing kompot."
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/ethanol/kvass
+	name = "Kvass"
+	id = "kvass"
+	description = "A traditional fermented Slavic and Baltic beverage commonly made from rye bread."
+	taste_description = "a warm summer day at babushka's cabin"
+	color = "#b78315" // rgb: 183, 131, 21
+	strength = 95 //It's just soda to Russians
+	nutriment_factor = 2
+
+
+	glass_name = "kvass"
+	glass_desc = "A hearty glass of Slavic brew."
