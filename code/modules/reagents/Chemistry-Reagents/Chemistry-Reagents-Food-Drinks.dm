@@ -53,6 +53,10 @@
 			M.adjustHalLoss(M.species.allergen_disable_severity*8)
 		if(M.species.allergen_reaction & AG_WEAKEN)
 			M.Weaken(M.species.allergen_disable_severity*8)
+		if(M.species.allergen_reaction & AG_BLURRY)
+			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity*4)
+		if(M.species.allergen_reaction & AG_SLEEPY)			
+			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity*4)
 		return
 	affect_ingest(M, alien, removed)
 	..()
@@ -74,6 +78,10 @@
 			M.adjustHalLoss(M.species.allergen_disable_severity*4)
 		if(M.species.allergen_reaction & AG_WEAKEN)
 			M.Weaken(M.species.allergen_disable_severity*4)
+		if(M.species.allergen_reaction & AG_BLURRY)
+			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity)
+		if(M.species.allergen_reaction & AG_SLEEPY)			
+			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity)
 	else	//delicious
 		M.heal_organ_damage(0.5 * removed, 0)
 		M.adjust_nutrition(nutriment_factor * removed)

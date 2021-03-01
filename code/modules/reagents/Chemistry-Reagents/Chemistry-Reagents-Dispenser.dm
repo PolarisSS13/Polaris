@@ -154,6 +154,10 @@
 			M.adjustHalLoss(M.species.allergen_disable_severity*8)
 		if(M.species.allergen_reaction & AG_WEAKEN)
 			M.Weaken(M.species.allergen_disable_severity*8)
+		if(M.species.allergen_reaction & AG_BLURRY)
+			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity*4)
+		if(M.species.allergen_reaction & AG_SLEEPY)			
+			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity*4)
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
@@ -211,6 +215,10 @@
 			M.adjustHalLoss(M.species.allergen_disable_severity*4)
 		if(M.species.allergen_reaction & AG_WEAKEN)
 			M.Weaken(M.species.allergen_disable_severity*4)
+		if(M.species.allergen_reaction & AG_BLURRY)
+			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity)
+		if(M.species.allergen_reaction & AG_SLEEPY)			
+			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))
