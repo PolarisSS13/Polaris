@@ -1,5 +1,5 @@
 /obj/item/weapon/mining_scanner
-	name = "Deep Scan Device"
+	name = "deep scan device"
 	desc = "A complex device used to locate ore deep underground."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "deep_scan_device"
