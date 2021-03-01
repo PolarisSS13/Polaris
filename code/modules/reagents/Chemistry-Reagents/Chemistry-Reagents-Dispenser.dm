@@ -143,7 +143,17 @@
 		M.hallucination = max(M.hallucination, halluci*3)
 	
 	if(M.species.allergens & allergen_type)
-		M.adjustToxLoss(((M.species.allergen_severity*allergen_factor)*4) * removed)
+		if(M.species.allergen_reaction & AG_TOX_DMG)
+			M.adjustToxLoss(M.species.allergen_damage_severity*4)
+		if(M.species.allergen_reaction & AG_OXY_DMG)
+			M.adjustOxyLoss(M.species.allergen_damage_severity*4)			
+		if(M.species.allergen_reaction & AG_EMOTE)
+			if(prob(2*M.species.allergen_disable_severity))
+				M.emote("shiver","twitch")
+		if(M.species.allergen_reaction & AG_PAIN)
+			M.adjustHalLoss(M.species.allergen_disable_severity*8)
+		if(M.species.allergen_reaction & AG_WEAKEN)
+			M.Weaken(M.species.allergen_disable_severity*8)
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
@@ -190,7 +200,17 @@
 		M.hallucination = max(M.hallucination, halluci)
 	
 	if(M.species.allergens & allergen_type)
-		M.adjustToxLoss((M.species.allergen_severity*allergen_factor) * removed)
+		if(M.species.allergen_reaction & AG_TOX_DMG)
+			M.adjustToxLoss(M.species.allergen_damage_severity)
+		if(M.species.allergen_reaction & AG_OXY_DMG)
+			M.adjustOxyLoss(M.species.allergen_damage_severity)		
+		if(M.species.allergen_reaction & AG_EMOTE)
+			if(prob(4*M.species.allergen_disable_severity))	//keep in mind this a % chance to fire per tick of processing
+				M.emote("cough","vomit","gasp","choke","drool","pale")
+		if(M.species.allergen_reaction & AG_PAIN)
+			M.adjustHalLoss(M.species.allergen_disable_severity*4)
+		if(M.species.allergen_reaction & AG_WEAKEN)
+			M.Weaken(M.species.allergen_disable_severity*4)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))
