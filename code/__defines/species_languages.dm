@@ -36,7 +36,7 @@
 #define FUNGI		0x100	// Delicious shrooms.
 #define COFFEE		0x200	// Mostly here for tajara.
 #define GENERIC		0x400	// Catchall for stuff that doesn't fall into the groups above. You shouldn't be allergic to this type, ever.
-#define SUGARS		0x800	// Refined sugars, for unathi-like reactions
+#define SUGARS		0x800	// For unathi-like reactions
 
 // Allergen reactions
 #define AG_TOX_DMG	0x1	// the classic 

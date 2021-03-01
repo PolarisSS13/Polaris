@@ -9,7 +9,6 @@
 	metabolism = REM * 4
 	ingest_met = REM * 4
 	var/nutriment_factor = 30 // Per unit
-	var/allergen_type = GENERIC	// What potential allergens does this contain?
 	var/injectable = 0
 	color = "#664330"
 
@@ -41,23 +40,6 @@
 	if(!injectable && alien != IS_SLIME)
 		M.adjustToxLoss(0.1 * removed)
 		return
-	if(M.species.allergens & allergen_type)
-		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss(M.species.allergen_damage_severity*4)
-		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss(M.species.allergen_damage_severity*4)			
-		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(2*M.species.allergen_disable_severity))
-				M.emote("shiver","twitch")
-		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss(M.species.allergen_disable_severity*8)
-		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken(M.species.allergen_disable_severity*8)
-		if(M.species.allergen_reaction & AG_BLURRY)
-			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity*4)
-		if(M.species.allergen_reaction & AG_SLEEPY)			
-			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity*4)
-		return
 	affect_ingest(M, alien, removed)
 	..()
 
@@ -66,23 +48,7 @@
 		if(IS_DIONA) return
 		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
-	if(M.species.allergens & allergen_type)	//uhoh, we can't digest this!
-		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss(M.species.allergen_damage_severity)
-		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss(M.species.allergen_damage_severity)		
-		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(4*M.species.allergen_disable_severity))	//keep in mind this a % chance to fire per tick of processing
-				M.emote("cough","vomit","gasp","choke","drool","pale")
-		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss(M.species.allergen_disable_severity*4)
-		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken(M.species.allergen_disable_severity*4)
-		if(M.species.allergen_reaction & AG_BLURRY)
-			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity)
-		if(M.species.allergen_reaction & AG_SLEEPY)			
-			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity)
-	else	//delicious
+	if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we'll be ok!
 		M.heal_organ_damage(0.5 * removed, 0)
 		M.adjust_nutrition(nutriment_factor * removed)
 		M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
@@ -887,42 +853,16 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 	var/water_based = TRUE
-	var/allergen_type = GENERIC	// What potential allergens does this contain?
-	var/allergen_factor = 1	// If the potential allergens are mixed and low-volume, they're a bit less dangerous. Needed for drinks because they're a single reagent compared to food which contains multiple seperate reagents.
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/strength_mod = 1
 	if(alien == IS_SLIME && water_based)
 		strength_mod = 3
 	M.adjustToxLoss(removed * strength_mod) // Probably not a good idea; not very deadly though
-	if(M.species.allergens & allergen_type)	// Unless you're allergic, in which case...
-		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss((M.species.allergen_damage_severity*4)*allergen_factor)
-		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss((M.species.allergen_damage_severity*4)*allergen_factor)			
-		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(3*M.species.allergen_disable_severity))
-				M.emote("shiver","twitch")
-		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss((M.species.allergen_disable_severity*8)*allergen_factor)
-		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken((M.species.allergen_disable_severity*8)*allergen_factor)
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.species.allergens & allergen_type)
-		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss((M.species.allergen_damage_severity)*allergen_factor)
-		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss((M.species.allergen_damage_severity)*allergen_factor)			
-		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(2*M.species.allergen_disable_severity))	//keep in mind this a % chance to fire per tick of processing
-				M.emote("cough","vomit","gasp","choke","drool","pale")
-		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss((M.species.allergen_disable_severity*4)*allergen_factor)
-		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken((M.species.allergen_disable_severity*4)*allergen_factor)
-	else	//delicious
+	if(!(M.species.allergens & allergen_type))
 		M.adjust_nutrition(nutrition * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)

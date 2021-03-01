@@ -82,8 +82,6 @@
 
 	var/nutriment_factor = 0
 	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
-	var/allergen_type = GENERIC	// What potential allergens does this contain?
-	var/allergen_factor = 0.5	// If the potential allergens are mixed and low-volume, they're a bit less dangerous. Needed for drinks because they're a single reagent compared to food which contains multiple seperate reagents.
 	var/toxicity = 1
 
 	var/druggy = 0
@@ -93,6 +91,7 @@
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
+	allergen_factor = 0.5	//simulates mixed drinks containing less of the allergen, as they have only a single actual reagent unlike food
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
@@ -141,27 +140,11 @@
 
 	if(halluci)
 		M.hallucination = max(M.hallucination, halluci*3)
-	
-	if(M.species.allergens & allergen_type)
-		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss(M.species.allergen_damage_severity*4)
-		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss(M.species.allergen_damage_severity*4)			
-		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(2*M.species.allergen_disable_severity))
-				M.emote("shiver","twitch")
-		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss(M.species.allergen_disable_severity*8)
-		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken(M.species.allergen_disable_severity*8)
-		if(M.species.allergen_reaction & AG_BLURRY)
-			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity*4)
-		if(M.species.allergen_reaction & AG_SLEEPY)			
-			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity*4)
 
 /datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
-	M.adjust_nutrition(nutriment_factor * removed)
+	if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we get the nutrition effects
+		M.adjust_nutrition(nutriment_factor * removed)
 	var/strength_mod = 1 * M.species.alcohol_mod
 	if(alien == IS_SKRELL)
 		strength_mod *= 5
@@ -202,23 +185,6 @@
 
 	if(halluci)
 		M.hallucination = max(M.hallucination, halluci)
-	
-	if(M.species.allergens & allergen_type)
-		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss(M.species.allergen_damage_severity)
-		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss(M.species.allergen_damage_severity)		
-		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(4*M.species.allergen_disable_severity))	//keep in mind this a % chance to fire per tick of processing
-				M.emote("cough","vomit","gasp","choke","drool","pale")
-		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss(M.species.allergen_disable_severity*4)
-		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken(M.species.allergen_disable_severity*4)
-		if(M.species.allergen_reaction & AG_BLURRY)
-			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity)
-		if(M.species.allergen_reaction & AG_SLEEPY)			
-			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))
