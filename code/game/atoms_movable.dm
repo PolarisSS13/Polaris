@@ -450,8 +450,10 @@
 		minor_dir = dx
 		minor_dist = dist_x
 
+	range = min(dist_x + dist_y, range)
+
 	while(src && target && src.throwing && istype(src.loc, /turf) \
-		  && ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < (dist_x + dist_y)) \
+		  && ((abs(target.x - src.x)+abs(target.y - src.y) > 0 && dist_travelled < range) \
 		  	   || (a && a.has_gravity == 0) \
 			   || istype(src.loc, /turf/space)))
 		// only stop when we've gone the whole distance (or max throw range) and are on a non-space tile, or hit something, or hit the end of the map, or someone picks it up
