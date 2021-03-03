@@ -117,15 +117,6 @@
 	display_name = "Fountain Pen"
 	path = /obj/item/weapon/pen/fountain
 
-/datum/gear/utility/wheelchair/color
-	display_name = "wheelchair"
-	path = /obj/item/wheelchair
-	cost = 4
-
-/datum/gear/utility/wheelchair/color/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
 /datum/gear/utility/umbrella
 	display_name = "Umbrella"
 	path = /obj/item/weapon/melee/umbrella
@@ -135,10 +126,19 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
-/datum/gear/utility/motorchair
-	display_name = "electric wheelchair"
-	path = /obj/item/motorwheelchair
+/datum/gear/utility/wheelchair
+	display_name = "wheelchair selection"
+	path = /obj/item/wheelchair
 	cost = 4
+	
+/datum/gear/utility/wheelchair/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+	var/list/wheelchairs = list(
+		"wheelchair" = /obj/item/wheelchair,
+		"motorized wheelchair" = /obj/item/wheelchair/motor
+	)
+	gear_tweaks += new/datum/gear_tweak/path(wheelchairs)
 
 /****************
 modular computers

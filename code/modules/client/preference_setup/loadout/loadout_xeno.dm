@@ -673,7 +673,7 @@
 
 /datum/gear/utility/teshchair
 	display_name = "small electric wheelchair (Teshari)"
-	path = /obj/item/smallmotorwheelchair //can't use the normal wheelchair item cause of funky spawning code, it would just give you a normal wheelchair even if you selected a subtype
+	path = /obj/item/wheelchair/motor/small
 	whitelisted = SPECIES_TESHARI
 	sort_category = "Xenowear"
 	cost = 4
