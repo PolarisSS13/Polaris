@@ -81,7 +81,7 @@
 			janitor
 				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-science")
 			journalist
-				initial_sprite_stack = list("base-stamp", "top-green", "dept-press", "stamp-n")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			clown
 				initial_sprite_stack = list("base-stamp", "top-rainbow", "stamp-n")
 			mime
