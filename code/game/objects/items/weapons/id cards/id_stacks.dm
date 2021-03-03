@@ -2,26 +2,26 @@
 // Generally, if the icon file is card_xxx.dmi, this filename should be sprite_stacks_xxx.dm
 // Please make sure that only the relevant sprite_stacks_xxx.file is included, if more are made.
 
-
-
 /obj/item/weapon/card
 	icon = 'icons/obj/card_new.dmi' // These are redefined here so that changing sprites is as easy as clicking the checkbox.
 	base_icon = "icons/obj/card_new.dmi"
 
 	// New sprite stacks can be defined here. You could theoretically change icon-states as well but right now this file compiles before station_ids.dm so those wouldn't be affected.
 	id
+		generic
+			initial_sprite_stack = list("base-stamp", "top-generic", "stamp-silhouette", "clip")
 		centcom
 			initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "pips-gold")
 			vip
 				initial_sprite_stack = list("base-stamp-gold", "top-blue", "stamp-n", "pips-gold")
 			ERT
-				initial_sprite_stack = list("base-stamp", "top-dark", "stamp-n")
+				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "pips-security", "stripe-red")
 		silver
 			initial_sprite_stack = list("base-stamp-silver", "top-mime", "stamp-n-generic")
 			secretary
 				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n")
 			hop
-				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "stripe-silver")
+				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "stripe-white")
 		medical
 			initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n")
 			chemist
@@ -35,7 +35,7 @@
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-medblu", "stamp-n", "stripe-gold")
 			sar
-				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-darkgreen", "stamp-n", "pips-medical")
 		security
 			initial_sprite_stack = list("base-stamp", "top-red", "stamp-n")
 			detective
@@ -55,11 +55,11 @@
 			roboticist
 				initial_sprite_stack = list("base-stamp", "top-purple", "stamp-n", "pips-engineering")
 			explorer
-				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n")
+				initial_sprite_stack = list("base-stamp", "top-darkgreen", "stamp-n", "pips-science")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-purple", "stamp-n", "striple-gold")
+				initial_sprite_stack = list("base-stamp-silver", "top-purple", "stamp-n", "stripe-gold")
 				pathfinder
-					initial_sprite_stack = list("base-stamp-silver", "top-blue", "stamp-n", "stripe-gold")
+					initial_sprite_stack = list("base-stamp-silver", "top-darkgreen", "stamp-n", "pips-science") //not a true head, no gold stripe for you
 		cargo
 			initial_sprite_stack = list("base-stamp", "top-brown", "stamp-n")
 			miner
@@ -69,7 +69,7 @@
 		civilian
 			initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			chaplain
-				initial_sprite_stack = list("base-stamp-silver", "top-dark", "letter-cross", "pips-white")
+				initial_sprite_stack = list("base-stamp-silver", "top-dark", "stamp-cross", "pips-white")
 			internal_affairs
 				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			botanist
@@ -83,10 +83,14 @@
 			journalist
 				initial_sprite_stack = list("base-stamp", "top-green", "dept-press", "stamp-n")
 			clown
-				initial_sprite_stack = list("base-stamp", "top-pink", "stamp-n")
+				initial_sprite_stack = list("base-stamp", "top-rainbow", "stamp-n")
 			mime
-				initial_sprite_stack = list("base-stamp", "top-white", "stamp-n-mime")
+				initial_sprite_stack = list("base-stamp", "top-white", "stamp-n", "stripe-black")
 			pilot
 				initial_sprite_stack = list("base-stamp", "top-generic", "stamp-n", "pips-command")
 			head
-				initial_sprite_stack = list("base-stamp-silver", "top-command", "stamp-n", "stripe-silver")
+				initial_sprite_stack = list("base-stamp-silver", "top-blue", "stamp-n", "stripe-white")
+		syndicate
+			initial_sprite_stack = list("base-stamp-dark", "top-syndicate", "stamp-s")
+			officer
+				initial_sprite_stack = list("base-stamp-dark", "top-syndicate", "stamp-s", "pips-gold", "stripe-gold")
