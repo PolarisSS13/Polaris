@@ -196,6 +196,9 @@
 	return TRUE
 
 /obj/structure/stairs/bottom/instant_stairs(var/atom/movable/AM)
+	if(isobserver(AM)) // Ghosts have their own methods for going up and down
+		return
+
 	if(isliving(AM))
 		var/mob/living/L = AM
 	
@@ -436,6 +439,9 @@
 	return TRUE
 
 /obj/structure/stairs/top/instant_stairs(var/atom/movable/AM)
+	if(isobserver(AM)) // Ghosts have their own methods for going up and down
+		return
+
 	if(isliving(AM))
 		var/mob/living/L = AM
 
