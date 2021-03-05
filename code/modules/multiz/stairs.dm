@@ -61,7 +61,7 @@
 /obj/structure/stairs/proc/use_stairs(var/atom/movable/AM, var/atom/oldloc)
 	return
 
-/obj/structure/stairs/proc/instant_stairs(var/atom/movable/AM)
+/obj/structure/stairs/proc/use_stairs_instant(var/atom/movable/AM)
 	return
 
 //////////////////////////////////////////////////////////////////////
@@ -195,7 +195,7 @@
 
 	return TRUE
 
-/obj/structure/stairs/bottom/instant_stairs(var/atom/movable/AM)
+/obj/structure/stairs/bottom/use_stairs_instant(var/atom/movable/AM)
 	if(isobserver(AM)) // Ghosts have their own methods for going up and down
 		return
 
@@ -213,15 +213,20 @@
 		
 		// If the object is pulling or grabbing anything, we'll want to move those too. A grab chain may be disrupted in doing so.
 		if(L.pulling && !L.pulling.anchored)
-			L.pulling.forceMove(get_turf(top))
+			var/atom/movable/P = L.pulling
+			P.forceMove(get_turf(top))
+			L.start_pulling(P)
 
 		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
 			G.affecting.forceMove(get_turf(top))
+
+		L.forceMove(get_turf(top))
 		
 		if(L.client)
 			L.client.Process_Grab()
+	else
+		AM.forceMove(get_turf(top))
 
-	AM.forceMove(get_turf(top))
 
 //////////////////////////////////////////////////////////////////////
 // Middle piece that you are animated onto/off of ////////////////////
@@ -308,7 +313,7 @@
 
 /obj/structure/stairs/middle/Bumped(mob/user)
 	if(check_integrity() && bottom && (bottom in get_turf(user))) // Bottom must be enforced because the middle stairs don't actually need the bottom
-		bottom.instant_stairs(user)
+		bottom.use_stairs_instant(user)
 
 //////////////////////////////////////////////////////////////////////
 // Top piece that you step onto //////////////////////////////////////
@@ -387,6 +392,12 @@
 			use_stairs(AM, oldloc)
 	..()
 
+/obj/structure/stairs/top/Uncrossed(var/atom/movable/AM)
+	// Going down stairs from the topstair piece
+	if(AM.dir == turn(dir, 180) && check_integrity())
+		use_stairs_instant(AM)
+		return
+
 /obj/structure/stairs/top/use_stairs(var/atom/movable/AM, var/atom/oldloc)
 	// If we're coming from the bottom of the stairs, don't trap us in an infinite staircase
 	// Or if we climb up the middle
@@ -438,33 +449,38 @@
 
 	return TRUE
 
-/obj/structure/stairs/top/instant_stairs(var/atom/movable/AM)
+/obj/structure/stairs/top/use_stairs_instant(var/atom/movable/AM)
 	if(isobserver(AM)) // Ghosts have their own methods for going up and down
 		return
 
 	if(isliving(AM))
 		var/mob/living/L = AM
-
+	
 		if(L.grabbed_by.len) // Same as pulledby, whoever's holding you will keep you from going down stairs.
 			return
 		
 		if(L.has_buckled_mobs())
 			return
-		
+
 		if(L.buckled)
 			L.buckled.forceMove(get_turf(bottom))
 		
 		// If the object is pulling or grabbing anything, we'll want to move those too. A grab chain may be disrupted in doing so.
 		if(L.pulling && !L.pulling.anchored)
-			L.pulling.forceMove(get_turf(bottom))
+			var/atom/movable/P = L.pulling
+			P.forceMove(get_turf(bottom))
+			L.start_pulling(P)
 
 		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
 			G.affecting.forceMove(get_turf(bottom))
 		
+		L.forceMove(get_turf(bottom))
+
 		if(L.client)
 			L.client.Process_Grab()
+	else
+		AM.forceMove(get_turf(bottom))
 
-	AM.forceMove(get_turf(bottom))
 
 // Mapping pieces, placed at the bottommost part of the stairs
 /obj/structure/stairs/spawner

@@ -291,6 +291,8 @@
 				if(AM == src)
 					continue
 				AM.Uncrossed(src)
+				if(loc != destination) // Uncrossed() triggered a separate movement
+					return
 
 			// Information about turf and z-levels for source and dest collected
 			var/turf/oldturf = get_turf(oldloc)
@@ -315,6 +317,8 @@
 				if(AM == src)
 					continue
 				AM.Crossed(src, oldloc)
+				if(loc != destination) // Crossed triggered a separate movement
+					return
 
 			// Call our thingy to inform everyone we moved
 			Moved(oldloc, NONE, TRUE)
