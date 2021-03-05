@@ -162,24 +162,26 @@
 				affect_touch(M, alien, removed)
 	if(overdose && (volume > overdose * M?.species.chemOD_threshold) && (active_metab.metabolism_class != CHEM_TOUCH && !can_overdose_touch))
 		overdose(M, alien, removed)
-	if(M.species.allergens & allergen_type)	//uhoh, we can't handle this!		
+	if(M.species.allergens & allergen_type)	//uhoh, we can't handle this!	
+		var/damage_severity = M.species.allergen_damage_severity*allergen_factor
+		var/disable_severity = M.species.allergen_disable_severity*allergen_factor	
 		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss(M.species.allergen_damage_severity*allergen_factor)
+			M.adjustToxLoss(damage_severity)
 		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss(M.species.allergen_damage_severity*allergen_factor)
-			if(prob(2.5*(M.species.allergen_disable_severity*allergen_factor)))
+			M.adjustOxyLoss(damage_severity)
+			if(prob(2.5*disable_severity))
 				M.emote(pick("cough","gasp","choke"))
 		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(2.5*(M.species.allergen_disable_severity*allergen_factor)))	//this has a higher base chance, but not *too* high
+			if(prob(2.5*disable_severity))	//this has a higher base chance, but not *too* high
 				M.emote(pick("pale","shiver","twitch"))
 		if(M.species.allergen_reaction & AG_PAIN)
-			M.adjustHalLoss(M.species.allergen_disable_severity*allergen_factor)
+			M.adjustHalLoss(disable_severity)
 		if(M.species.allergen_reaction & AG_WEAKEN)
-			M.Weaken(M.species.allergen_disable_severity*allergen_factor)
+			M.Weaken(disable_severity)
 		if(M.species.allergen_reaction & AG_BLURRY)
-			M.eye_blurry = max(M.eye_blurry, M.species.allergen_disable_severity*allergen_factor)
+			M.eye_blurry = max(M.eye_blurry, disable_severity)
 		if(M.species.allergen_reaction & AG_SLEEPY)
-			M.drowsyness = max(M.drowsyness, M.species.allergen_disable_severity*allergen_factor)
+			M.drowsyness = max(M.drowsyness, disable_severity)
 	remove_self(removed)
 	return
 
