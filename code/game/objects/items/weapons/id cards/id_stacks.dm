@@ -15,7 +15,7 @@
 			vip
 				initial_sprite_stack = list("base-stamp-gold", "top-blue", "stamp-n", "pips-gold")
 			ERT
-				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "pips-security", "stripe-red")
+				initial_sprite_stack = list("base-stamp", "top-blue", "stamp-n", "pips-red", "stripe-red")
 		silver
 			initial_sprite_stack = list("base-stamp-silver", "top-mime", "stamp-n-generic")
 			secretary
@@ -25,21 +25,21 @@
 		medical
 			initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n")
 			chemist
-				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-engineering")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-orange")
 			geneticist
-				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-purple")
 			psych
-				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-purple")
 			emt
-				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-medblu", "stamp-n", "pips-blue")
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-medblu", "stamp-n", "stripe-gold")
 			sar
-				initial_sprite_stack = list("base-stamp", "top-darkgreen", "stamp-n", "pips-medical")
+				initial_sprite_stack = list("base-stamp", "top-darkgreen", "stamp-n", "pips-medblu")
 		security
 			initial_sprite_stack = list("base-stamp", "top-red", "stamp-n")
 			detective
-				initial_sprite_stack = list("base-stamp", "top-red", "stamp-n", "pips-cargo")
+				initial_sprite_stack = list("base-stamp", "top-red", "stamp-n", "pips-brown")
 			warden
 				initial_sprite_stack = list("base-stamp", "top-red", "stamp-n", "pips-white")
 			head
@@ -47,23 +47,23 @@
 		engineering
 			initial_sprite_stack = list("base-stamp", "top-orange", "stamp-n")
 			atmos
-				initial_sprite_stack = list("base-stamp", "top-orange", "pips-medical", "stamp-n")
+				initial_sprite_stack = list("base-stamp", "top-orange", "pips-medblu", "stamp-n")
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-orange", "stamp-n", "stripe-gold")
 		science
 			initial_sprite_stack = list("base-stamp", "top-purple", "stamp-n")
 			roboticist
-				initial_sprite_stack = list("base-stamp", "top-purple", "stamp-n", "pips-engineering")
+				initial_sprite_stack = list("base-stamp", "top-purple", "stamp-n", "pips-orange")
 			explorer
-				initial_sprite_stack = list("base-stamp", "top-darkgreen", "stamp-n", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-darkgreen", "stamp-n")
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-purple", "stamp-n", "stripe-gold")
 				pathfinder
-					initial_sprite_stack = list("base-stamp-silver", "top-darkgreen", "stamp-n", "pips-science") //not a true head, no gold stripe for you
+					initial_sprite_stack = list("base-stamp-silver", "top-darkgreen", "stamp-n", "pips-purple") //not a true head, no gold stripe for you
 		cargo
 			initial_sprite_stack = list("base-stamp", "top-brown", "stamp-n")
 			miner
-				initial_sprite_stack = list("base-stamp", "top-brown", "stamp-n", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-brown", "stamp-n", "pips-purple")
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-brown", "stamp-n", "pips-gold")
 		civilian
@@ -73,13 +73,13 @@
 			internal_affairs
 				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			botanist
-				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-cargo")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-brown")
 			bartender
 				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-dark")
 			chef
 				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-white")		
 			janitor
-				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-science")
+				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-purple")
 			journalist
 				initial_sprite_stack = list("base-stamp", "top-green", "stamp-n")
 			clown
@@ -87,7 +87,7 @@
 			mime
 				initial_sprite_stack = list("base-stamp", "top-white", "stamp-n", "stripe-black")
 			pilot
-				initial_sprite_stack = list("base-stamp", "top-generic", "stamp-n", "pips-command")
+				initial_sprite_stack = list("base-stamp", "top-generic", "stamp-n", "pips-blue")
 			head
 				initial_sprite_stack = list("base-stamp-silver", "top-blue", "stamp-n", "stripe-white")
 		syndicate
