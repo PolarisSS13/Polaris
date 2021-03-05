@@ -122,6 +122,7 @@
 	icon_raw = "batter_raw"
 	icon_cooked = "batter_cooked"
 	coated_adj = "battered"
+	allergen_type = GRAINS | EGGS //Made with flour(grain), and eggs(eggs)
 
 /datum/reagent/nutriment/coating/beerbatter
 	name = "beer batter mix"
@@ -132,6 +133,7 @@
 	icon_raw = "batter_raw"
 	icon_cooked = "batter_cooked"
 	coated_adj = "beer-battered"
+	allergen_type = GRAINS | EGGS //Made with flour(grain), eggs(eggs), and beer(grain)
 
 /datum/reagent/nutriment/coating/beerbatter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -299,7 +301,7 @@
 	id = "egg"
 	taste_description = "egg"
 	color = "#FFFFAA"
-	//allergen_type = DAIRY //No, eggs are not dairy.
+	allergen_type = EGGS //Eggs contain egg
 
 /datum/reagent/nutriment/protein/murk
 	name = "murkfin protein"
@@ -344,7 +346,7 @@
 	taste_description = "unmistakably mayonnaise"
 	nutriment_factor = 10
 	color = "#FFFFFF"
-	//allergen_type = DAIRY	//because egg Eggs are not dairy.
+	allergen_type = EGGS	//Mayo is made from eggs
 
 /datum/reagent/nutriment/yeast
 	name = "Yeast"
@@ -2051,7 +2053,7 @@
 
 	glass_name = "Eggnog"
 	glass_desc = "You can't egg-nore the holiday cheer all around you"
-	allergen_type = DAIRY
+	allergen_type = DAIRY|EGGS //Eggnog is made with dairy and eggs.
 
 /datum/reagent/drink/nuclearwaste
 	name = "Nuclear Waste"
@@ -3447,6 +3449,7 @@
 
 	glass_name = "Tamagozake"
 	glass_desc = "An egg cracked into sake and sugar."
+	allergen_type = EGGS //Made with eggs
 
 /datum/reagent/ethanol/ginzamary
 	name = "Ginza Mary"
