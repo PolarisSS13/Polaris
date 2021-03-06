@@ -35,8 +35,9 @@
 #define DAIRY		0x80	// Lactose intolerance, ho! Also bad for skrell.
 #define FUNGI		0x100	// Delicious shrooms.
 #define COFFEE		0x200	// Mostly here for tajara.
-#define EGGS		0x400	// For skrell. Just eggs.
-#define GENERIC		0x800	// Catchall for stuff that doesn't fall into the groups above. You shouldn't be allergic to this type, ever.
+#define GENERIC		0x400	// Catchall for stuff that doesn't fall into the groups above. You shouldn't be allergic to this type, ever.
+#define SUGARS		0x800	// For unathi-like reactions
+#define EGGS      0x1000 // For Skrell eggs allergy
 
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
