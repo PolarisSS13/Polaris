@@ -46,9 +46,6 @@ Protectiveness | Armor %
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/weapon/material/armor_plating/insert/Destroy()
-    return ..()
-
 /obj/item/clothing/get_material()
 	return material
 
@@ -230,8 +227,8 @@ Protectiveness | Armor %
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	slot = ACCESSORY_SLOT_ARMOR_C
 	material_armor_modifier = 1.2
-	material_slowdown_modifier = 0  //Subtracted from total slowdown
-	material_slowdown_multiplier = 1 //Multiplied by total slowdown
+	material_slowdown_modifier = 0
+	material_slowdown_multiplier = 1
 
 /obj/item/clothing/accessory/material/custom //Not yet craftable, advanced version made with science!
 	name = "custom armor plate"
@@ -241,8 +238,8 @@ Protectiveness | Armor %
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
 	slot = ACCESSORY_SLOT_ARMOR_C
 	material_armor_modifier = 1.2
-	material_slowdown_modifier = 0.5 //Subtracted from total slowdown
-	material_slowdown_multiplier = 0.8 //Multiplied by total slowdown
+	material_slowdown_modifier = 0.5
+	material_slowdown_multiplier = 0.8
 
 /obj/item/clothing/accessory/material/makeshift/armguards
 	name = "arm guards"
@@ -255,8 +252,8 @@ Protectiveness | Armor %
 	body_parts_covered = ARMS
 	slot = ACCESSORY_SLOT_ARMOR_A
 	material_armor_modifier = 0.8
-	material_slowdown_modifier = 0.8 //Subtracted from total slowdown
-	material_slowdown_multiplier = 0.8 //Multiplied by total slowdown
+	material_slowdown_modifier = 0.8
+	material_slowdown_multiplier = 0.8
 
 /obj/item/clothing/accessory/material/makeshift/legguards
 	name = "leg guards"
@@ -268,9 +265,9 @@ Protectiveness | Armor %
 	gender = PLURAL
 	body_parts_covered = LEGS
 	slot = ACCESSORY_SLOT_ARMOR_L
-	material_armor_modifier = 0.8 //Not final value
-	material_slowdown_modifier = 0.8 //Subtracted from total slowdown
-	material_slowdown_multiplier = 0.8 //Multiplied by total slowdown
+	material_armor_modifier = 0.8
+	material_slowdown_modifier = 0.8
+	material_slowdown_multiplier = 0.8
 
 /obj/item/clothing/suit/armor/material/makeshift/durasteel
 	default_material = "durasteel"
@@ -325,6 +322,9 @@ Protectiveness | Armor %
 
 //Make plating inserts for modular armour.
 /obj/item/weapon/material/armor_plating/insert/attackby(var/obj/O, mob/user)
+
+	. = ..()
+
 	if(istype(O, /obj/item/weapon/weldingtool))
 		var /obj/item/weapon/weldingtool/S = O
 		if(S.remove_fuel(0,user))
@@ -334,6 +334,7 @@ Protectiveness | Armor %
 			var/obj/item/clothing/accessory/material/makeshift/light/new_armor = new(null, src.material.name)
 			user.put_in_hands(new_armor)
 			qdel(src)
+			return
 
 	if(istype(O, /obj/item/weapon/material/armor_plating/insert))
 		var/obj/item/weapon/material/armor_plating/insert/second_plate = O
@@ -347,6 +348,7 @@ Protectiveness | Armor %
 		user.put_in_hands(new_armor)
 		qdel(second_plate)
 		qdel(src)
+		return
 
 	if(istype(O, /obj/item/weapon/tool/wirecutters))
 		to_chat(user, "<span class='notice'>You split the plate down the middle, and joint it at the elbow.</span>")
@@ -354,6 +356,7 @@ Protectiveness | Armor %
 		var/obj/item/clothing/accessory/material/makeshift/armguards/new_armor = new(null, src.material.name)
 		user.put_in_hands(new_armor)
 		qdel(src)
+		return
 
 	if(istype(O, /obj/item/stack/material))
 		var/obj/item/stack/material/S = O
@@ -364,6 +367,7 @@ Protectiveness | Armor %
 				var/obj/item/clothing/accessory/material/makeshift/legguards/new_armor = new(null, src.material.name)
 				user.put_in_hands(new_armor)
 				qdel(src)
+				return
 
 // Used to craft the makeshift helmet
 /obj/item/clothing/head/helmet/bucket
