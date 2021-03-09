@@ -4099,7 +4099,7 @@
 /datum/reagent/drink/soda/kompot
 	name = "Kompot"
 	id = "kompot"
-	description = "A traditional eastern european beverage once used to preserve fruit in the 1980s"
+	description = "A traditional Eastern European beverage once used to preserve fruit in the 1980s"
 	taste_description = "refreshuingly sweet and fruity"
 	color = "#ed9415" // rgb: 237, 148, 21
 	adj_drowsy = -1
