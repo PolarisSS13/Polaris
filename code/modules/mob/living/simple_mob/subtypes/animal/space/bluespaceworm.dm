@@ -1,17 +1,26 @@
-/mob/living/simple_mob/animal/space/space_worm
-	name = "space worm segment"
-	desc = "A part of a space worm."
+/*
+Bluespace worm. Not a child of normal space worm because fuck that, it was a mess.
+*/
+
+/mob/living/simple_mob/animal/space/bluespace_worm
+	name = "bluespace worm segment"
+	desc = "A part of a bluespace worm."
 	icon = 'icons/mob/worm.dmi'
-	icon_state = "spaceworm"
-	icon_living = "spaceworm"
+	icon_state = "bluespaceworm"
+	icon_living = "bluespaceworm"
 	icon_dead = "spacewormdead"
 
 	tt_desc = "U Tyranochaetus imperator"
 
+	internal_organs = list() /// Add some alien organs later.
+
+	butchery_loot = list() /// Hides as well.
+
+
 	anchored = TRUE	// Theoretically, you shouldn't be able to move this without moving the head.
 
-	maxHealth = 200
-	health = 200
+	maxHealth = 350 /// More health, still less than the head.
+	health = 350
 	movement_cooldown = 0
 
 	faction = "worm"
@@ -34,19 +43,19 @@
 	mob_class = MOB_CLASS_ABERRATION	// It's a monster.
 
 	meat_amount = 2
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/worm
+	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/bluespaceworm
 
-	var/mob/living/simple_mob/animal/space/space_worm/previous //next/previous segments, correspondingly
-	var/mob/living/simple_mob/animal/space/space_worm/next     //head is the nextest segment
+	var/mob/living/simple_mob/animal/space/bluespace_worm/previous //next/previous segments, correspondingly
+	var/mob/living/simple_mob/animal/space/bluespace_worm/next     //head is the nextest segment
 
 	var/severed = FALSE	// Is this a severed segment?
 
-	var/severed_head_type = /mob/living/simple_mob/animal/space/space_worm/head/severed	// What type of head do we spawn when detaching?
-	var/segment_type = /mob/living/simple_mob/animal/space/space_worm	// What type of segment do our heads make?
+	var/severed_head_type = /mob/living/simple_mob/animal/space/bluespace_worm/head/severed	// What type of head do we spawn when detaching?
+	var/segment_type = /mob/living/simple_mob/animal/space/bluespace_worm	// What type of segment do our heads make?
 
 	var/stomachProcessProbability = 50
 	var/digestionProbability = 20
-	var/flatPlasmaValue = 5 //flat Phoron amount given for non-items
+	var/flatPlasmaValue = 5 //flat Phoron amount given for non-items // This one uses void_opal
 
 	var/atom/currentlyEating // Worm's current Maw target.
 
@@ -58,15 +67,15 @@
 	var/open_maw = FALSE	// Are we trying to eat things?
 
 
-/mob/living/simple_mob/animal/space/space_worm/head
-	name = "space worm"
-	icon_state = "spacewormhead"
-	icon_living = "spacewormhead"
+/mob/living/simple_mob/animal/space/bluespace_worm/head
+	name = "bluespace worm"
+	icon_state = "bluespacewormhead"
+	icon_living = "bluespacewormhead"
 
 	anchored = FALSE	// You can pull the head to pull the body.
 
-	maxHealth = 300
-	health = 300
+	maxHealth = 400 /// Scarier!
+	health = 400
 
 	hovering = TRUE
 
@@ -81,21 +90,21 @@
 
 	var/segment_count = 6
 
-/mob/living/simple_mob/animal/space/space_worm/head/severed
+/mob/living/simple_mob/animal/space/bluespace_worm/head/severed
 	segment_count = 0
 	severed = TRUE
 
-/mob/living/simple_mob/animal/space/space_worm/head/short
+/mob/living/simple_mob/animal/space/bluespace_worm/head/short
 	segment_count = 3
 
-/mob/living/simple_mob/animal/space/space_worm/head/long
+/mob/living/simple_mob/animal/space/bluespace_worm/head/long
 	segment_count = 10
 
-/mob/living/simple_mob/animal/space/space_worm/head/handle_special()
+/mob/living/simple_mob/animal/space/bluespace_worm/head/handle_special()
 	..()
 	update_body_faction()
 
-/mob/living/simple_mob/animal/space/space_worm/head/update_icon()
+/mob/living/simple_mob/animal/space/bluespace_worm/head/update_icon()
 	..()
 	if(!open_maw && !stat)
 		icon_state = "[icon_living][previous ? 1 : 0]_hunt"
@@ -108,19 +117,19 @@
 	if(stat)
 		icon_state = "[icon_state]_dead"
 
-/mob/living/simple_mob/animal/space/space_worm/head/Initialize()
+/mob/living/simple_mob/animal/space/bluespace_worm/head/Initialize()
 	. = ..()
 
-	var/mob/living/simple_mob/animal/space/space_worm/current = src
+	var/mob/living/simple_mob/animal/space/bluespace_worm/current = src
 
 	if(segment_count && !severed)
 		for(var/i = 1 to segment_count)
-			var/mob/living/simple_mob/animal/space/space_worm/newSegment = new segment_type(loc)
+			var/mob/living/simple_mob/animal/space/bluespace_worm/newSegment = new segment_type(loc)
 			current.Attach(newSegment)
 			current = newSegment
 			current.faction = faction
 
-/mob/living/simple_mob/animal/space/space_worm/head/verb/toggle_devour()
+/mob/living/simple_mob/animal/space/bluespace_worm/head/verb/toggle_devour()
 	set name = "Toggle Feeding"
 	set desc = "Extends your teeth for 30 seconds so that you can chew through mobs and structures alike."
 	set category = "Abilities"
@@ -135,7 +144,7 @@
 	else
 		set_maw(!open_maw)
 
-/mob/living/simple_mob/animal/space/space_worm/proc/set_maw(var/state = FALSE)
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/set_maw(var/state = FALSE)
 	open_maw = state
 	if(open_maw)
 		time_maw_opened = world.time
@@ -144,7 +153,7 @@
 		movement_cooldown = initial(movement_cooldown)
 	update_icon()
 
-/mob/living/simple_mob/animal/space/space_worm/death()
+/mob/living/simple_mob/animal/space/bluespace_worm/death()
 	..()
 
 	DumpStomach()
@@ -152,7 +161,7 @@
 	if(previous)
 		previous.death()
 
-/mob/living/simple_mob/animal/space/space_worm/handle_special()	// Processed in life. Nicer to have it modular incase something in Life change(d)(s)
+/mob/living/simple_mob/animal/space/bluespace_worm/handle_special()	// Processed in life. Nicer to have it modular incase something in Life change(d)(s)
 	..()
 
 	if(world.time > time_maw_opened + maw_cooldown)	// Auto-stop eating.
@@ -176,21 +185,21 @@
 
 	return
 
-/mob/living/simple_mob/animal/space/space_worm/CanPass(atom/movable/mover, turf/target)
-	if(istype(mover, /mob/living/simple_mob/animal/space/space_worm/head))
-		var/mob/living/simple_mob/animal/space/space_worm/head/H = mover
+/mob/living/simple_mob/animal/space/bluespace_worm/CanPass(atom/movable/mover, turf/target)
+	if(istype(mover, /mob/living/simple_mob/animal/space/bluespace_worm/head))
+		var/mob/living/simple_mob/animal/space/bluespace_worm/head/H = mover
 		if(H.previous == src)
 			return FALSE
 
-	if(istype(mover, /mob/living/simple_mob/animal/space/space_worm))	// Worms don't run over worms. That's weird. And also really annoying.
+	if(istype(mover, /mob/living/simple_mob/animal/space/bluespace_worm))	// Worms don't run over worms. That's weird. And also really annoying.
 		return TRUE
-	else if(istype(mover, /mob/living/simple_mob/animal/space/bluespace_worm))	///Including other worm types.
+	else if(istype(mover, /mob/living/simple_mob/animal/space/space_worm))	// Including other worm type.
 		return TRUE
 	else if(src.stat == DEAD && !istype(mover, /obj/item/projectile))	// Projectiles need to do their normal checks.
 		return TRUE
 	return ..()
 
-/mob/living/simple_mob/animal/space/space_worm/Destroy() // If a chunk is destroyed, kill the back half.
+/mob/living/simple_mob/animal/space/bluespace_worm/Destroy() // If a chunk is destroyed, kill the back half.
 	DumpStomach()
 	if(previous)
 		previous.Detach(1)
@@ -199,7 +208,7 @@
 		next = null
 	..()
 
-/mob/living/simple_mob/animal/space/space_worm/Moved(atom/old_loc, direction, forced = FALSE)
+/mob/living/simple_mob/animal/space/bluespace_worm/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
 	if(previous)
 		if(previous.z != z)
@@ -209,7 +218,7 @@
 		previous.forceMove(old_loc)	// None of this 'ripped in half by an airlock' business.
 	update_icon()
 
-/mob/living/simple_mob/animal/space/space_worm/head/Bump(atom/obstacle)
+/mob/living/simple_mob/animal/space/bluespace_worm/head/Bump(atom/obstacle)
 	if(open_maw && !stat && obstacle != previous)
 		spawn(1)
 			if(currentlyEating != obstacle)
@@ -223,14 +232,14 @@
 		currentlyEating = null
 		. = ..(obstacle)
 
-/mob/living/simple_mob/animal/space/space_worm/update_icon()
+/mob/living/simple_mob/animal/space/bluespace_worm/update_icon()
 	if(previous) //midsection
-		icon_state = "spaceworm[get_dir(src,previous) | get_dir(src,next)]"
+		icon_state = "bluespaceworm[get_dir(src,previous) | get_dir(src,next)]"
 		if(stat)
 			icon_state = "[icon_state]_dead"
 
 	else //tail
-		icon_state = "spacewormtail"
+		icon_state = "bluespacewormtail"
 		if(stat)
 			icon_state = "[icon_state]_dead"
 		set_dir(get_dir(src,next))
@@ -240,7 +249,7 @@
 
 	return
 
-/mob/living/simple_mob/animal/space/space_worm/proc/AttemptToEat(var/atom/target)
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/AttemptToEat(var/atom/target)
 	if(istype(target,/turf/simulated/wall))
 		var/turf/simulated/wall/W = target
 		if((!W.reinf_material && do_after(src, 5 SECONDS)) || do_after(src, 10 SECONDS)) // 10 seconds for an R-wall, 5 seconds for a normal one.
@@ -291,7 +300,7 @@
 
 	return 0
 
-/mob/living/simple_mob/animal/space/space_worm/proc/Attach(var/mob/living/simple_mob/animal/space/space_worm/attachement)
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/Attach(var/mob/living/simple_mob/animal/space/bluespace_worm/attachement)
 	if(!attachement)
 		return
 
@@ -300,9 +309,9 @@
 
 	return
 
-/mob/living/simple_mob/animal/space/space_worm/proc/Detach(die = 0)
-	var/mob/living/simple_mob/animal/space/space_worm/head/newHead = new severed_head_type(loc,0)
-	var/mob/living/simple_mob/animal/space/space_worm/newHeadPrevious = previous
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/Detach(die = 0)
+	var/mob/living/simple_mob/animal/space/bluespace_worm/head/newHead = new severed_head_type(loc,0)
+	var/mob/living/simple_mob/animal/space/bluespace_worm/newHeadPrevious = previous
 
 	previous = null //so that no extra heads are spawned
 
@@ -313,26 +322,26 @@
 
 	qdel(src)
 
-/mob/living/simple_mob/animal/space/space_worm/proc/ProcessStomach()
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/ProcessStomach()
 	for(var/atom/movable/stomachContent in contents)
 		if(stomach_special(stomachContent))
 			continue
 		if(prob(digestionProbability))
 			if(stomach_special_digest(stomachContent))
 				continue
-			if(istype(stomachContent,/obj/item/stack)) //converts to plasma, keeping the stack value
-				if(!istype(stomachContent,/obj/item/stack/material/phoron))
+			if(istype(stomachContent,/obj/item/stack)) //converts to void_opal, keeping the stack value
+				if(!istype(stomachContent,/obj/item/stack/material/void_opal))
 					var/obj/item/stack/oldStack = stomachContent
-					new /obj/item/stack/material/phoron(src, oldStack.get_amount())
+					new /obj/item/stack/material/void_opal(src, oldStack.get_amount())
 					qdel(oldStack)
 					continue
 			else if(istype(stomachContent,/obj/item)) //converts to plasma, keeping the w_class
 				var/obj/item/oldItem = stomachContent
-				new /obj/item/stack/material/phoron(src, oldItem.w_class)
+				new /obj/item/stack/material/void_opal(src, oldItem.w_class)
 				qdel(oldItem)
 				continue
 			else
-				new /obj/item/stack/material/phoron(src, flatPlasmaValue) //just flat amount
+				new /obj/item/stack/material/void_opal(src, flatPlasmaValue) //just flat amount
 				if(!isliving(stomachContent))
 					qdel(stomachContent)
 				else
@@ -350,7 +359,7 @@
 
 	return
 
-/mob/living/simple_mob/animal/space/space_worm/proc/DumpStomach()
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/DumpStomach()
 	if(previous && previous.stat != DEAD)
 		for(var/atom/movable/stomachContent in contents) //transfer it along the digestive tract
 			stomachContent.forceMove(previous)
@@ -359,13 +368,13 @@
 			stomachContent.forceMove(get_turf(src))
 	return
 
-/mob/living/simple_mob/animal/space/space_worm/proc/stomach_special(var/atom/A)	// Futureproof. Anything that interacts with contents without relying on digestion probability. Return TRUE if it should skip digest.
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/stomach_special(var/atom/A)	// Futureproof. Anything that interacts with contents without relying on digestion probability. Return TRUE if it should skip digest.
 	return FALSE
 
-/mob/living/simple_mob/animal/space/space_worm/proc/stomach_special_digest(var/atom/A)	// Futureproof. Any special checks that interact with digested atoms. I.E., ore processing. Return TRUE if it should skip future digest checks.
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/stomach_special_digest(var/atom/A)	// Futureproof. Any special checks that interact with digested atoms. I.E., ore processing. Return TRUE if it should skip future digest checks.
 	return FALSE
 
-/mob/living/simple_mob/animal/space/space_worm/proc/update_body_faction()
+/mob/living/simple_mob/animal/space/bluespace_worm/proc/update_body_faction()
 	if(next)	// Keep us on the same page, here.
 		faction = next.faction
 	if(previous)
@@ -373,24 +382,28 @@
 		return 1
 	return 0
 
-// Worm meat.
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/worm
-	name = "meat"
-	desc = "A chunk of pulsating meat."
-	icon_state = "wormmeat"
+/*
+Worm meat!
+*/
+/obj/item/weapon/reagent_containers/food/snacks/meat/bluespaceworm
+	name = "disgusting meat"
+	desc = "A chunk of green, pulsating meat. It smells disgusting."
+	icon_state = "bluespacewormmeat"
 	health = 180
-	filling_color = "#551A8B"
+	filling_color = "#278B1A"
 	center_of_mass = list("x"=16, "y"=14)
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/worm/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/meat/bluespaceworm/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
-	reagents.add_reagent("phoron", 3)
-	reagents.add_reagent("myelamine", 3)
+	reagents.add_reagent("impedrezene", 4)
+	reagents.add_reagent("zombiepowder", 4)
+	reagents.add_reagent("necroxadone", 3)
+	reagents.add_reagent("pacid", 7)
 	src.bitesize = 3
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/worm/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/weapon/reagent_containers/food/snacks/meat/bluespaceworm/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/weapon/material/knife))
 		var/junklist = list(/obj/random/junk = 30,
 		/obj/random/trash = 30,
