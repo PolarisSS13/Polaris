@@ -39,6 +39,15 @@
 #define SUGARS		0x800	// For unathi-like reactions
 #define EGGS      0x1000 // For Skrell eggs allergy
 
+// Allergen reactions
+#define AG_TOX_DMG	0x1	// the classic 
+#define AG_OXY_DMG	0x2	// intense airway reactions
+#define AG_EMOTE	0x4	// general emote reactions based on affect type
+#define AG_PAIN		0x8	// short-lived hurt
+#define AG_WEAKEN	0x10	// too weak to move, oof
+#define AG_BLURRY	0x20	// blurred vision!
+#define AG_SLEEPY	0x40	// fatigue/exhaustion
+
 // Species spawn flags
 #define SPECIES_IS_WHITELISTED    0x1    // Must be whitelisted to play.
 #define SPECIES_IS_RESTRICTED     0x2    // Is not a core/normally playable species. (castes, mutantraces)

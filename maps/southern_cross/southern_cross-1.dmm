@@ -72438,7 +72438,7 @@
 /area/quartermaster/lockerroom)
 "cFQ" = (
 /obj/structure/railing,
-/turf/simulated/open,
+/turf/simulated/floor/tiled,
 /area/quartermaster/lockerroom)
 "cFR" = (
 /obj/structure/railing,
@@ -114178,6 +114178,24 @@
 /obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/seconddeck/ascenter)
+"eAB" = (
+/obj/structure/railing,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/seconddeck/aft)
+"ioU" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/central)
+"oJY" = (
+/obj/structure/railing,
+/turf/simulated/floor/tiled,
+/area/hallway/secondary/eva_hallway)
+"pel" = (
+/obj/structure/railing,
+/turf/simulated/floor/tiled,
+/area/rnd/research)
 "twa" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/airlock/glass_external{
@@ -114195,6 +114213,12 @@
 /obj/effect/landmark/engine_loader,
 /turf/space,
 /area/space)
+"vTW" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/seconddeck/stairwell)
 
 (1,1,1) = {"
 aaa
@@ -211221,7 +211245,7 @@ cqx
 cso
 cuc
 cvE
-cxE
+vTW
 cxE
 cqx
 dVz
@@ -211506,7 +211530,7 @@ ddu
 cYq
 deu
 ddA
-dfg
+eAB
 dfJ
 dgh
 dia
@@ -213754,7 +213778,7 @@ ebo
 bkq
 bkq
 bqr
-bri
+oJY
 btP
 buT
 bvY
@@ -223277,7 +223301,7 @@ bEn
 eby
 ebD
 bBr
-ebK
+pel
 bMb
 bOc
 bPA
@@ -277272,7 +277296,7 @@ dML
 dVB
 dNE
 dOd
-dOd
+ioU
 dPi
 dPA
 dQc

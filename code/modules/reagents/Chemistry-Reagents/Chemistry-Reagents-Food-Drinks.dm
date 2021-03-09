@@ -9,7 +9,6 @@
 	metabolism = REM * 4
 	ingest_met = REM * 4
 	var/nutriment_factor = 30 // Per unit
-	var/allergen_type = GENERIC	// What potential allergens does this contain?
 	var/injectable = 0
 	color = "#664330"
 
@@ -41,9 +40,6 @@
 	if(!injectable && alien != IS_SLIME)
 		M.adjustToxLoss(0.1 * removed)
 		return
-	if(M.species.allergens & allergen_type)
-		M.adjustToxLoss((M.species.allergen_severity*4) * removed)
-		return
 	affect_ingest(M, alien, removed)
 	..()
 
@@ -52,9 +48,7 @@
 		if(IS_DIONA) return
 		if(IS_UNATHI) removed *= 0.5
 	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
-	if(M.species.allergens & allergen_type)	//uhoh, we can't digest this!
-		M.adjustToxLoss(M.species.allergen_severity * removed)
-	else	//delicious
+	if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we'll be ok!
 		M.heal_organ_damage(0.5 * removed, 0)
 		M.adjust_nutrition(nutriment_factor * removed)
 		M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
@@ -864,22 +858,16 @@
 	var/adj_sleepy = 0
 	var/adj_temp = 0
 	var/water_based = TRUE
-	var/allergen_type = GENERIC	// What potential allergens does this contain?
-	var/allergen_factor = 1	// If the potential allergens are mixed and low-volume, they're a bit less dangerous. Needed for drinks because they're a single reagent compared to food which contains multiple seperate reagents.
 
 /datum/reagent/drink/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/strength_mod = 1
 	if(alien == IS_SLIME && water_based)
 		strength_mod = 3
 	M.adjustToxLoss(removed * strength_mod) // Probably not a good idea; not very deadly though
-	if(M.species.allergens & allergen_type)	// Unless you're allergic, in which case...
-		M.adjustToxLoss(((M.species.allergen_severity*allergen_factor)*2) * removed)
 	return
 
 /datum/reagent/drink/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.species.allergens & allergen_type)
-		M.adjustToxLoss((M.species.allergen_severity*allergen_factor) * removed)
-	else	//delicious
+	if(!(M.species.allergens & allergen_type))
 		M.adjust_nutrition(nutrition * removed)
 	M.dizziness = max(0, M.dizziness + adj_dizzy)
 	M.drowsyness = max(0, M.drowsyness + adj_drowsy)
