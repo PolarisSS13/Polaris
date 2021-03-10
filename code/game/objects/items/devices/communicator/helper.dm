@@ -41,22 +41,23 @@
 	for(var/datum/feed_channel/channel in news_network.network_channels)
 		var/list/messages = list()
 		if(!channel.censored)
-			var/index = 0
-			for(var/datum/feed_message/FM in channel.messages)
-				index++
-				if(FM.img)
-					usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feeds["channel"]]_[index].png")
-				// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
-				var/body = replacetext(FM.body, "\n", "<br>")
-				messages[++messages.len] = list(
-						"author" = FM.author,
-						"body" = body,
-						"message_type" = FM.message_type,
-						"time_stamp" = FM.time_stamp,
-						"has_image" = (FM.img != null),
-						"caption" = FM.caption,
-						"index" = index
-					)
+			if(channel.channel_name != "Vir News Network") //Do not load the 'IC news' channel as it is simply too long.
+				var/index = 0
+				for(var/datum/feed_message/FM in channel.messages)
+					index++
+					if(FM.img)
+						usr << browse_rsc(FM.img, "pda_news_tmp_photo_[feeds["channel"]]_[index].png")
+					// News stories are HTML-stripped but require newline replacement to be properly displayed in NanoUI
+					var/body = replacetext(FM.body, "\n", "<br>")
+					messages[++messages.len] = list(
+							"author" = FM.author,
+							"body" = body,
+							"message_type" = FM.message_type,
+							"time_stamp" = FM.time_stamp,
+							"has_image" = (FM.img != null),
+							"caption" = FM.caption,
+							"index" = index
+						)
 
 		feeds[++feeds.len] = list(
 					"name" = channel.channel_name,
