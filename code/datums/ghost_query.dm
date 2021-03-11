@@ -125,7 +125,7 @@
 /datum/ghost_query/lost_drone
 	role_name = "Lost Drone"
 	question = "A lost drone onboard has been discovered by a crewmember and they are attempting to reactivate it.  Would you like to play as the drone?"
-	be_special_flag = BE_LOSTDRONE	//VOREStation Edit
+	be_special_flag = BE_LOSTDRONE
 	check_bans = list("AI", "Cyborg")
 	cutoff_number = 1
 

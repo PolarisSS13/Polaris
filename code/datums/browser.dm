@@ -31,13 +31,11 @@
 		return
 	add_stylesheet("common", 'html/browser/common.css') // this CSS sheet is common to all UIs
 
-//VOREStation Edit - Allow browser datums to be garbage collected
 /datum/browser/Destroy()
 	close()
 	ref = null
 	user = null
 	. = ..()
-//VOREStation Edit End - Allow browser datums to be garbage collected
 
 /datum/browser/proc/set_title(ntitle)
 	title = format_text(ntitle)

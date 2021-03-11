@@ -135,20 +135,16 @@
 /area/proc/firedoors_update()
 	if(fire || party || atmosalm)
 		firedoors_close()
-		// VOREStation Edit - Make the lights colored!
 		if(fire)
 			for(var/obj/machinery/light/L in src)
 				L.set_alert_fire()
 		else if(atmosalm)
 			for(var/obj/machinery/light/L in src)
 				L.set_alert_atmos()
-		// VOREStation Edit End
 	else
 		firedoors_open()
-		// VOREStation Edit - Put the lights back!
 		for(var/obj/machinery/light/L in src)
 			L.reset_alert()
-		// VOREStation Edit End
 
 // Close all firedoors in the area
 /area/proc/firedoors_close()

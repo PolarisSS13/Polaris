@@ -2,13 +2,11 @@
 /world/New()
 	to_world_log("Map Loading Complete")
 	//logs
-	//VOREStation Edit Start
 	log_path += time2text(world.realtime, "YYYY/MM-Month/DD-Day/round-hh-mm-ss")
 	diary = start_log("[log_path].log")
 	href_logfile = start_log("[log_path]-hrefs.htm")
 	error_log = start_log("[log_path]-error.log")
 	debug_log = start_log("[log_path]-debug.log")
-	//VOREStation Edit End
 
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 
@@ -16,7 +14,7 @@
 		to_world_log("Your server's byond version does not meet the recommended requirements for this server. Please update BYOND")
 
 	TgsNew()
-	VgsNew() // VOREStation Edit - VGS
+	VgsNew()
 
 	config.post_load()
 
@@ -57,9 +55,6 @@
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 
-	//Must be done now, otherwise ZAS zones and lighting overlays need to be recreated.
-	//createRandomZlevel()	//VOREStation Removal: Deprecated
-
 	master_controller = new /datum/controller/game_controller()
 
 	Master.Initialize(10, FALSE, TRUE)
@@ -83,7 +78,7 @@ var/world_topic_spam_protect_time = world.timeofday
 
 /world/Topic(T, addr, master, key)
 	TGS_TOPIC
-	VGS_TOPIC // VOREStation Edit - VGS
+	VGS_TOPIC
 	log_topic("\"[T]\", from:[addr], master:[master], key:[key]")
 
 	if (T == "ping")
@@ -276,7 +271,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 			info["stat"] = M.stat
 			info["type"] = M.type
-			if(isliving(M))
+			if(isliving(M, /mob/living))
 				var/mob/living/L = M
 				info["damage"] = list2params(list(
 							oxy = L.getOxyLoss(),
@@ -408,7 +403,6 @@ var/world_topic_spam_protect_time = world.timeofday
 			to_world("<span class='boldannounce'>Rebooting world immediately due to host request</span>")
 	else
 		Master.Shutdown()	//run SS shutdowns
-		//processScheduler.stop() //VOREStation Removal
 		for(var/client/C in GLOB.clients)
 			if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 				C << link("byond://[config.server]")

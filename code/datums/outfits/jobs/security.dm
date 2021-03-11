@@ -37,13 +37,11 @@
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/norm
 	backpack_contents = list(/obj/item/weapon/storage/box/evidence = 1)
 
-//VOREStation Edit - More cyberpunky
 /decl/hierarchy/outfit/job/security/detective/forensic
 	name = OUTFIT_JOB_NAME("Forensic technician")
 	head = /obj/item/clothing/head/helmet/detective_alt
 	suit = /datum/gear/uniform/detective_alt2
 	uniform = /obj/item/clothing/under/det
-//VOREStation Edit End
 
 /decl/hierarchy/outfit/job/security/officer
 	name = OUTFIT_JOB_NAME("Security Officer")

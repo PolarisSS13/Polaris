@@ -33,7 +33,7 @@
 #define DNA_UI_GENDER      14
 #define DNA_UI_BEARD_STYLE 15
 #define DNA_UI_HAIR_STYLE  16
-#define DNA_UI_EAR_STYLE   17 // VOREStation snippet.
+#define DNA_UI_EAR_STYLE   17
 #define DNA_UI_TAIL_STYLE  18
 #define DNA_UI_PLAYERSCALE 19
 #define DNA_UI_TAIL_R      20
@@ -63,10 +63,10 @@
 #define DNA_UI_WING2_B     44
 #define DNA_UI_WING3_R     45
 #define DNA_UI_WING3_G     46
-#define DNA_UI_WING3_B     47 // VOREStation snippet end.
-#define DNA_UI_LENGTH      47 // VOREStation Edit - Needs to match the highest number above.
+#define DNA_UI_WING3_B     47
+#define DNA_UI_LENGTH      47 // Needs to match the highest number above.
 
-#define DNA_SE_LENGTH 49 // VOREStation Edit (original was UI+11)
+#define DNA_SE_LENGTH 49
 // For later:
 //#define DNA_SE_LENGTH 50 // Was STRUCDNASIZE, size 27. 15 new blocks added = 42, plus room to grow.
 
@@ -113,12 +113,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	var/b_type = "A+"  // Should probably change to an integer => string map but I'm lazy.
 	var/real_name          // Stores the real name of the person who originally got this dna datum. Used primarily for changelings,
 
-	// VOREStation
 	var/custom_species
 	var/base_species = "Human"
 	var/list/species_traits = list()
 	var/blood_color = "#A10808"
-	// VOREStation
 
 	// New stuff
 	var/species = SPECIES_HUMAN
@@ -135,10 +133,10 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.real_name=real_name
 	new_dna.species=species
 	new_dna.body_markings=body_markings.Copy()
-	new_dna.base_species=base_species //VOREStation Edit
-	new_dna.custom_species=custom_species //VOREStaton Edit
-	new_dna.species_traits=species_traits.Copy() //VOREStation Edit
-	new_dna.blood_color=blood_color //VOREStation Edit
+	new_dna.base_species=base_species
+	new_dna.custom_species=custom_species
+	new_dna.species_traits=species_traits.Copy()
+	new_dna.blood_color=blood_color
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
 		if(b<=DNA_UI_LENGTH)
@@ -174,9 +172,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	if(!character.f_style)
 		character.f_style = "Shaved"
 	var/beard	= facial_hair_styles_list.Find(character.f_style)
-
-
-	// VOREStation Edit Start
 
 	// Demi Ears
 	var/ear_style = 0
@@ -248,8 +243,6 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetUIValueRange(DNA_UI_EARS3_G,   character.g_ears3,   255,    1)
 	SetUIValueRange(DNA_UI_EARS3_B,   character.b_ears3,   255,    1)
 
-	// VORE Station Edit End
-
 	SetUIValueRange(DNA_UI_HAIR_R,    character.r_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_G,    character.g_hair,    255,    1)
 	SetUIValueRange(DNA_UI_HAIR_B,    character.b_hair,    255,    1)
@@ -301,7 +294,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	if (block<=0) return
 	ASSERT(maxvalue<=4095)
 	var/range = (4095 / maxvalue)
-	if(value == 0) //VOREStation Edit
+	if(value == 0)
 		SetUIValue(block,0,defer)
 		return
 	if(value)

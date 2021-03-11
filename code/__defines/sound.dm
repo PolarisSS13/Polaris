@@ -8,12 +8,12 @@
 #define CHANNEL_AMBIENCE 1018
 #define CHANNEL_BUZZ 1017
 #define CHANNEL_BICYCLE 1016
-#define CHANNEL_PREYLOOP 1015	//VORESTATION ADD - Fancy Sound Loop channel
+#define CHANNEL_PREYLOOP 1015
 
 //THIS SHOULD ALWAYS BE THE LOWEST ONE!
 //KEEP IT UPDATED
 
-#define CHANNEL_HIGHEST_AVAILABLE 1014	//VORESTATION EDIT - Fancy Sound Loop channel from 1015
+#define CHANNEL_HIGHEST_AVAILABLE 1014
 
 #define SOUND_MINIMUM_PRESSURE 10
 #define FALLOFF_SOUNDS 0.5
@@ -112,7 +112,6 @@
 	'sound/ambience/generic/generic2.ogg',\
 	'sound/ambience/generic/generic3.ogg'\
 	)
-// 'sound/ambience/generic/generic4.ogg'\ // VOREStation Edit: Comment out entry 4 as this doesn't fit on Virgo, and we have our own weather system.
 
 // Sounds of PA announcements, presumably involving shuttles?
 #define AMBIENCE_ARRIVALS list(\

@@ -117,7 +117,6 @@
 	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
-// VOREStation Edit Start - Wall mounted vents
 /obj/machinery/atmospherics/unary/vent_pump/high_volume/wall_mounted
 	name = "Wall Mounted Air Vent"
 
@@ -130,8 +129,6 @@
 	if(isnull(T))
 		return ..()
 	return T.return_air()
-
-// VOREStation Edit End
 
 /obj/machinery/atmospherics/unary/vent_pump/engine
 	name = "Engine Core Vent"
@@ -208,7 +205,7 @@
 	if(!can_pump())
 		return 0
 
-	var/datum/gas_mixture/environment = return_air() // VOREStation Edit - Use our own proc
+	var/datum/gas_mixture/environment = return_air()
 
 	var/power_draw = -1
 

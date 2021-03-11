@@ -77,7 +77,7 @@
 #define DO_AUTOPILOT 5
 
 // Setting this much higher than 1024 could allow spammers to DOS the server easily.
-#define MAX_MESSAGE_LEN       2048 //VOREStation Edit - I'm not sure about "easily". It can be a little longer.
+#define MAX_MESSAGE_LEN       2048
 #define MAX_PAPER_MESSAGE_LEN 6144
 #define MAX_BOOK_MESSAGE_LEN  24576
 #define MAX_RECORD_LENGTH	  24576
@@ -115,7 +115,7 @@
 #define CUSTOM_ITEM_MOB 'icons/mob/custom_items_mob.dmi'
 #endif
 #ifndef CUSTOM_ITEM_SYNTH
-#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic_vr.dmi' //Vorestation edit
+#define CUSTOM_ITEM_SYNTH 'icons/mob/custom_synthetic.dmi'
 #endif
 
 #define WALL_CAN_OPEN 1
@@ -159,6 +159,14 @@
 #define MAT_CHITIN			"chitin"
 #define MAT_CLOTH			"cloth"
 #define MAT_SYNCLOTH		"syncloth"
+#define MAT_COPPER			"copper"
+#define MAT_QUARTZ			"quartz"
+#define MAT_TIN				"tin"
+#define MAT_VOPAL			"void opal"
+#define MAT_ALUMINIUM		"aluminium"
+#define MAT_BRONZE			"bronze"
+#define MAT_PAINITE			"painite"
+#define MAT_BOROSILICATE	"borosilicate glass"
 
 #define SHARD_SHARD "shard"
 #define SHARD_SHRAPNEL "shrapnel"
@@ -227,7 +235,7 @@
 #define DEPARTMENT_RESEARCH			"Research"
 #define DEPARTMENT_CARGO			"Cargo"
 #define DEPARTMENT_CIVILIAN			"Civilian"
-#define DEPARTMENT_PLANET			"Exploration" //VOREStation Edit // I hate having this be here and not in a SC file. Hopefully someday the manifest can be rewritten to be map-agnostic.
+#define DEPARTMENT_PLANET			"Exploration"
 #define DEPARTMENT_SYNTHETIC		"Synthetic"
 
 // These are mostly for the department guessing code and event system.

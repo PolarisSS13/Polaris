@@ -153,7 +153,7 @@ datum/objective/anti_revolution/demote
 
 			if(!istype(I)) return 1
 
-			if(I.assignment == USELESS_JOB) //VOREStation Edit - Visitor not Assistant
+			if(I.assignment == USELESS_JOB)
 				return 1
 			else
 				return 0

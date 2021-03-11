@@ -1,27 +1,27 @@
 //wrapper
-/proc/do_teleport(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null, local=TRUE) //VOREStation Edit
+/proc/do_teleport(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null, local=TRUE)
 	new /datum/teleport/instant/science(arglist(args))
 	return
 
 /datum/teleport
-	var/atom/movable/teleatom //atom to teleport
-	var/atom/destination //destination to teleport to
-	var/precision = 0 //teleport precision
-	var/datum/effect/effect/system/effectin //effect to show right before teleportation
-	var/datum/effect/effect/system/effectout //effect to show right after teleportation
-	var/soundin //soundfile to play before teleportation
-	var/soundout //soundfile to play after teleportation
-	var/force_teleport = 1 //if false, teleport will use Move() proc (dense objects will prevent teleportation)
-	var/local = TRUE //VOREStation Add - If false, can teleport from/to any z-level
+	var/atom/movable/teleatom // atom to teleport
+	var/atom/destination // destination to teleport to
+	var/precision = 0 // teleport precision
+	var/datum/effect/effect/system/effectin // effect to show right before teleportation
+	var/datum/effect/effect/system/effectout // effect to show right after teleportation
+	var/soundin // soundfile to play before teleportation
+	var/soundout // soundfile to play after teleportation
+	var/force_teleport = 1 // if false, teleport will use Move() proc (dense objects will prevent teleportation)
+	var/local = TRUE // If false, can teleport from/to any z-level
 
 
-/datum/teleport/New(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null, local=TRUE) //VOREStation Edit
+/datum/teleport/New(ateleatom, adestination, aprecision=0, afteleport=1, aeffectin=null, aeffectout=null, asoundin=null, asoundout=null, local=TRUE)
 	..()
 	if(!initTeleport(arglist(args)))
 		return 0
 	return 1
 
-/datum/teleport/proc/initTeleport(ateleatom,adestination,aprecision,afteleport,aeffectin,aeffectout,asoundin,asoundout,local) //VOREStation Edit
+/datum/teleport/proc/initTeleport(ateleatom,adestination,aprecision,afteleport,aeffectin,aeffectout,asoundin,asoundout,local)
 	if(!setTeleatom(ateleatom))
 		return 0
 	if(!setDestination(adestination))
@@ -181,17 +181,7 @@
 		else
 			teleatom.visible_message("<span class='danger'>\The [teleatom] bounces off of the portal!</span>")
 		return 0
-	/* VOREStation Removal
-	if(destination.z in using_map.admin_levels) //CentCom z-level
-		if(istype(teleatom, /obj/mecha))
-			var/obj/mecha/MM = teleatom
-			to_chat(MM.occupant, "<span class='danger'>\The [MM] would not survive the jump to a location so far away!</span>")
-			return 0
-		if(!isemptylist(teleatom.search_contents_for(/obj/item/weapon/storage/backpack/holding)))
-			teleatom.visible_message("<span class='danger'>\The [teleatom] bounces off of the portal!</span>")
-			return 0
-	*/ //VOREStation Removal End
-	//VOREStation Edit Start
+
 	var/obstructed = 0
 	var/turf/dest_turf = get_turf(destination)
 	if(local && !(dest_turf.z in using_map.player_levels))
@@ -218,4 +208,3 @@
 		return 0
 	else
 		return 1
-	//VOREStation Edit End

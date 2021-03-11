@@ -171,11 +171,11 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "shuttlered2"
 
 /area/shuttle/administration/centcom
-	name = "Centcom Large Bay (AS)" //VOREStation Edit
+	name = "\improper Administration Shuttle CentCom" // Polaris Edit
 	icon_state = "shuttlered"
 
 /area/shuttle/administration/station
-	name = "NSB Adephagia (AS)" //VOREStation Edit
+	name = "\improper Administration Shuttle" // Polaris Edit
 	icon_state = "shuttlered2"
 
 /area/shuttle/trade
@@ -1202,7 +1202,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "fitness"
 
 /area/crew_quarters/longue_area
-	name = "\improper Lounge" //VOREStation Edit - Muh speeling.
+	name = "\improper Lounge"
 	icon_state = "recreation_area"
 
 /area/crew_quarters/recreation_area
@@ -1265,7 +1265,7 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
  	name = "\improper Library"
  	icon_state = "library"
  	sound_env = LARGE_SOFTFLOOR
- 	lightswitch = 0 // VOREStation Edit - We like dark libraries
+ 	lightswitch = 0
 
 /area/library_conference_room
  	name = "\improper Library Conference Room"

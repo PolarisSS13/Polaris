@@ -173,8 +173,6 @@
 		if((0 < beard) && (beard <= facial_hair_styles_list.len))
 			H.f_style = facial_hair_styles_list[beard]
 
-		// VORE StationEdit Start
-
 		// Ears
 		var/ears = dna.GetUIValueRange(DNA_UI_EAR_STYLE, ear_styles_list.len + 1) - 1
 		if(ears < 1)
@@ -192,7 +190,6 @@
 		H.r_ears3 = dna.GetUIValueRange(DNA_UI_EARS3_R,   255)
 		H.g_ears3 = dna.GetUIValueRange(DNA_UI_EARS3_G,   255)
 		H.b_ears3 = dna.GetUIValueRange(DNA_UI_EARS3_B,	  255)
-
 
 		//Tail
 		var/tail = dna.GetUIValueRange(DNA_UI_TAIL_STYLE, tail_styles_list.len + 1) - 1
@@ -240,11 +237,9 @@
 		H.species.blood_color = dna.blood_color
 		var/datum/species/S = H.species
 		S.produceCopy(dna.base_species,dna.species_traits,src)
-		// VOREStation Edit End
 
-		H.force_update_organs() //VOREStation Add - Gotta do this too
+		H.force_update_organs() // Gotta do this too
 		H.force_update_limbs()
-		//H.update_body(0) //VOREStation Edit - Done in force_update_limbs already
 		H.update_eyes()
 		H.update_hair()
 

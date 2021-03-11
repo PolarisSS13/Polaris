@@ -68,10 +68,8 @@ h1.alert, h2.alert		{color: #000000;}
 .ghostalert				{color: #5c00e6;	font-style: italic; font-weight: bold;}
 
 
-// VOREStation Edit Start
 .emote					{}
 .emote_subtle			{font-style: italic;}
-// VOREStation Edit End
 
 /* Game Messages */
 
@@ -115,7 +113,7 @@ h1.alert, h2.alert		{color: #000000;}
 .say_quote				{font-family: Georgia, Verdana, sans-serif;}
 .terminus				{font-family: "Times New Roman", Times, serif, sans-serif}
 .interface				{color: #330033;}
-.spacer					{color: #9c660b;} /* VOREStation Add */
+.spacer					{color: #9c660b;}
 .blob					{color: #ff950d; font-weight: bold; font-style: italic;}
 
 BIG IMG.icon 			{width: 32px; height: 32px;}

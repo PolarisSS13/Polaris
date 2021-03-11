@@ -259,7 +259,7 @@ var/list/gamemode_cache = list()
 
 	var/static/radiation_resistance_calc_mode = RAD_RESIST_CALC_SUB // 0:1 subtraction:division for computing effective radiation on a turf
 	var/static/radiation_decay_rate = 1 //How much radiation is reduced by each tick
-	var/static/radiation_resistance_multiplier = 8.5 //VOREstation edit
+	var/static/radiation_resistance_multiplier = 8.5
 	var/static/radiation_material_resistance_divisor = 1
 	var/static/radiation_lower_limit = 0.35 //If the radiation level for a turf would be below this, ignore it.
 
@@ -286,8 +286,8 @@ var/list/gamemode_cache = list()
 	// whether or not to use the nightshift subsystem to perform lighting changes
 	var/static/enable_night_shifts = FALSE
 	
-	var/static/vgs_access_identifier = null	// VOREStation Edit - VGS
-	var/static/vgs_server_port = null	// VOREStation Edit - VGS
+	var/static/vgs_access_identifier = null
+	var/static/vgs_server_port = null
 
 /datum/configuration/New()
 	var/list/L = typesof(/datum/game_mode) - /datum/game_mode
@@ -935,12 +935,10 @@ var/list/gamemode_cache = list()
 				if("enable_night_shifts")
 					config.enable_night_shifts = TRUE
 				
-				// VOREStation Edit Start - Can't be in _vr file because it is loaded too late.
 				if("vgs_access_identifier")
 					config.vgs_access_identifier = value
 				if("vgs_server_port")
 					config.vgs_server_port = text2num(value)
-				// VOREStation Edit End
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

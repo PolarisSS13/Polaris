@@ -28,7 +28,6 @@ SUBSYSTEM_DEF(nightshift)
 	var/announce_z
 	if(using_map.station_levels.len)
 		announce_z = pick(using_map.station_levels)
-	//VOREStation Edit - TTS
 	var/pickedsound
 	if(!high_security_mode)
 		if(nightshift_active)
@@ -36,7 +35,6 @@ SUBSYSTEM_DEF(nightshift)
 		else
 			pickedsound = 'sound/AI/bright_lights.ogg'
 	priority_announcement.Announce(message, new_title = "Automated Lighting System Announcement", new_sound = pickedsound, zlevel = announce_z)
-	//VOREStation Edit End
 
 /datum/controller/subsystem/nightshift/proc/check_nightshift(check_canfire=FALSE) //This is called from elsewhere, like setting the alert levels
 	if(check_canfire && !can_fire)

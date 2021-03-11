@@ -1,5 +1,5 @@
 /decl/hierarchy/outfit/job/assistant
-	name = OUTFIT_JOB_NAME(USELESS_JOB) //VOREStation Edit - Visitor not Assistant
+	name = OUTFIT_JOB_NAME(USELESS_JOB)
 	id_type = /obj/item/weapon/card/id/assistant
 
 /decl/hierarchy/outfit/job/assistant/visitor
@@ -7,11 +7,9 @@
 	id_pda_assignment = "Visitor"
 	uniform = /obj/item/clothing/under/assistantformal
 
-//VOREStation Add - Interns
 /decl/hierarchy/outfit/job/assistant/intern
 	name = OUTFIT_JOB_NAME("Intern")
 	id_type = /obj/item/weapon/card/id/civilian
-//VOREStation Add End - Interns
 
 /decl/hierarchy/outfit/job/assistant/resident
 	name = OUTFIT_JOB_NAME("Resident")
@@ -51,13 +49,9 @@
 	name = OUTFIT_JOB_NAME("Cook")
 	id_pda_assignment = "Cook"
 
-// Rykka adds Server Outfit
-
 /decl/hierarchy/outfit/job/service/server
 	name = OUTFIT_JOB_NAME("Server")
 	uniform = /obj/item/clothing/under/waiter
-
-// End Outfit addition
 
 /decl/hierarchy/outfit/job/service/gardener
 	name = OUTFIT_JOB_NAME("Gardener")

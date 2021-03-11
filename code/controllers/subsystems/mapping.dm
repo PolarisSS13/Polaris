@@ -25,11 +25,11 @@ SUBSYSTEM_DEF(mapping)
 		using_map.perform_map_generation()
 	
 	loadEngine()
-	preloadShelterTemplates() // VOREStation EDIT: Re-enable Shelter Capsules
+	preloadShelterTemplates()
 	// Mining generation probably should be here too
 	// TODO - Other stuff related to maps and areas could be moved here too.  Look at /tg
 	// Lateload Code related to Expedition areas.
-	if(using_map) // VOREStation Edit: Re-enable this.
+	if(using_map)
 		loadLateMaps()
 	..()
 
@@ -74,7 +74,6 @@ SUBSYSTEM_DEF(mapping)
 	// Actually load it
 	chosen_type.load(T)
 
-// VOREStation Edit Start: Enable This
 /datum/controller/subsystem/mapping/proc/loadLateMaps()
 	var/list/deffo_load = using_map.lateload_z_levels
 	var/list/maybe_load = using_map.lateload_single_pick
@@ -116,7 +115,6 @@ SUBSYSTEM_DEF(mapping)
 		var/datum/map_template/shelter/S = new shelter_type()
 
 		shelter_templates[S.shelter_id] = S
-// VOREStation Edit End: Re-enable this
 
 /datum/controller/subsystem/mapping/stat_entry(msg)
 	if (!Debug2)
