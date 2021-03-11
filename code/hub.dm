@@ -3,8 +3,8 @@
 	hub = "Exadv1.spacestation13"
 	//hub_password = "SORRYNOPASSWORD"
 	hub_password = "kMZy3U5jJHSiBQjr"
-	name = "VOREStation" //VOREStation Edit
-	visibility = 0 //VOREStation Edit
+	name = "Space Station 13" //Polaris Edit
+	visibility = TRUE //Polaris Edit
 
 /* This is for any host that would like their server to appear on the main SS13 hub.
 To use it, simply replace the password above, with the password found below, and it should work.

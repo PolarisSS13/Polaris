@@ -24,7 +24,7 @@
 	var/list/med = new()
 	var/list/sci = new()
 	var/list/car = new()
-	var/list/pla = new() //VOREStation Edit
+//	var/list/pla = new() //Polaris Edit
 	var/list/civ = new()
 	var/list/bot = new()
 	var/list/off = new()
@@ -148,13 +148,13 @@
 		for(name in car)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[car[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
-	//VOREStation Edit Begin
+/*	//Polaris Edit Begin
 	if(pla.len > 0)
 		dat += "<tr><th colspan=3>Exploration</th></tr>"
 		for(name in pla)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[pla[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
-	//VOREStation Edit End
+*/	//Polaris Edit End
 	if(civ.len > 0)
 		dat += "<tr><th colspan=3>Civilian</th></tr>"
 		for(name in civ)
@@ -288,7 +288,7 @@ var/global/list/PDA_Manifest = list()
 		list("cat" = "Medical", "elems" = med),
 		list("cat" = "Science", "elems" = sci),
 		list("cat" = "Cargo", "elems" = car),
-		list("cat" = "Exploration", "elems" = pla), // VOREStation Edit
+//		list("cat" = "Exploration", "elems" = pla), // Polaris Edit
 		list("cat" = "Civilian", "elems" = civ),
 		list("cat" = "Silicon", "elems" = bot),
 		list("cat" = "Miscellaneous", "elems" = misc)

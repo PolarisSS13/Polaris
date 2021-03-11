@@ -160,7 +160,7 @@ var/world_topic_spam_protect_time = world.timeofday
 				"med" = SSjob.get_job_titles_in_department(DEPARTMENT_MEDICAL),
 				"sci" = SSjob.get_job_titles_in_department(DEPARTMENT_RESEARCH),
 				"car" = SSjob.get_job_titles_in_department(DEPARTMENT_CARGO),
-				"pla" = SSjob.get_job_titles_in_department(DEPARTMENT_PLANET), //VOREStation Add,
+			//	"pla" = SSjob.get_job_titles_in_department(DEPARTMENT_PLANET), // Polaris Edit,
 				"civ" = SSjob.get_job_titles_in_department(DEPARTMENT_CIVILIAN),
 				"bot" = SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC)
 			)
@@ -276,7 +276,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 			info["stat"] = M.stat
 			info["type"] = M.type
-			if(istype(M, /mob/living))
+			if(isliving(M))
 				var/mob/living/L = M
 				info["damage"] = list2params(list(
 							oxy = L.getOxyLoss(),

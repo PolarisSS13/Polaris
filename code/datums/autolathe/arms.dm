@@ -183,19 +183,19 @@
 	name = "rifle magazine (5.45mm practice)"
 	path =/obj/item/ammo_magazine/m545/practice
 
-/*/datum/category_item/autolathe/arms/rifle_545_hunter //VOREStation Edit Start. By request of Ace
+/datum/category_item/autolathe/arms/rifle_545_hunter //Polaris Edit Start
 	name = "rifle magazine (5.45mm hunting)"
-	path =/obj/item/ammo_magazine/m545/hunter*/ //VOREStation Edit End.
+	path =/obj/item/ammo_magazine/m545/hunter //Polaris Edit End.
 
 /datum/category_item/autolathe/arms/machinegun_545
 	name = "machinegun box magazine (5.45)"
 	path =/obj/item/ammo_magazine/m545saw
 	hidden = 1
 
-/*/datum/category_item/autolathe/arms/machinegun_545_hunter //VOREStation Edit Start. By request of Ace
+/datum/category_item/autolathe/arms/machinegun_545_hunter //Polaris Edit Start
 	name = "machinegun box magazine (5.45 hunting)"
 	path =/obj/item/ammo_magazine/m545saw/hunter
-	hidden = 1*/ //VOREStation Edit End.
+	hidden = 1 //Polaris Edit End.
 
 /////// 7.62
 
@@ -439,9 +439,9 @@
 	path =/obj/item/ammo_magazine/clip/c762
 	hidden = 1
 
-/*/datum/category_item/autolathe/arms/rifle_clip_762_hunter //VOREStation Edit Start. By request of Ace
+/datum/category_item/autolathe/arms/rifle_clip_762_hunter //Polaris Edit Start
 	name = "ammo clip (7.62mm hunting)"
-	path =/obj/item/ammo_magazine/clip/c762/hunter*/ //VOREStation Edit End.
+	path =/obj/item/ammo_magazine/clip/c762/hunter //Polaris Edit End.
 
 /datum/category_item/autolathe/arms/rifle_clip_762_practice
 	name = "ammo clip (7.62mm practice)"

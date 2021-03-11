@@ -2,8 +2,7 @@
 // Mobs Subsystem - Process mob.Life()
 //
 
-//VOREStation Edits - Contains temporary debugging code to diagnose extreme tick consumption.
-//Revert file to Polaris version when done.
+//Polaris Edits - Missing  temporary debugging code to diagnose extreme tick consumption.
 
 SUBSYSTEM_DEF(mobs)
 	name = "Mobs"
@@ -23,15 +22,16 @@ SUBSYSTEM_DEF(mobs)
 	..("P: [global.mob_list.len] | S: [slept_mobs]")
 
 /datum/controller/subsystem/mobs/fire(resumed = 0)
+	var/list/process_z = src.process_z
 	if (!resumed)
 		src.currentrun = mob_list.Copy()
 		process_z.Cut()
-		slept_mobs = 0
-		var/level = 1
-		while(process_z.len < GLOB.living_players_by_zlevel.len)
-			process_z.len++
-			process_z[level] = GLOB.living_players_by_zlevel[level].len
-			level++
+		
+		for(var/played_mob in player_list)
+			if(!played_mob || isobserver(played_mob))
+				continue
+			var/mob/pm = played_mob
+			process_z |= pm.z
 
 	//cache for sanic speed (lists are references anyways)
 	var/list/currentrun = src.currentrun
@@ -40,7 +40,7 @@ SUBSYSTEM_DEF(mobs)
 		var/mob/M = currentrun[currentrun.len]
 		currentrun.len--
 
-		if(!M || QDELETED(M))
+		if(QDELETED(M))
 			mob_list -= M
 			continue
 		else if(M.low_priority && !(M.loc && process_z[get_z(M)]))
