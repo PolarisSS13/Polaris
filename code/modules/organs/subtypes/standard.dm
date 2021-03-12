@@ -355,12 +355,9 @@
 		else
 			eyes_icon.Blend(rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes), ICON_ADD)
 
-		if(eyes_over_markings)
-			eyecon = eyes_icon
-		else
-			add_overlay(eyes_icon)
-			mob_icon.Blend(eyes_icon, ICON_OVERLAY)
-			icon_cache_key += "[eye_icon]"
+		add_overlay(eyes_icon)
+		mob_icon.Blend(eyes_icon, ICON_OVERLAY)
+		icon_cache_key += "[eye_icon]"
 
 	//Lip color/icon
 	if(owner.lip_style && (species && (species.appearance_flags & HAS_LIPS)))
@@ -376,11 +373,6 @@
 		add_overlay(mark_s) //So when it's not on your body, it has icons
 		mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 		icon_cache_key += "[M][markings[M]["color"]]"
-
-	if(eyes_over_markings && eyecon)
-		add_overlay(eyecon)
-		mob_icon.Blend(eyecon, ICON_OVERLAY)
-		icon_cache_key += "[eye_icon]"
 
 	add_overlay(get_hair_icon())
 
