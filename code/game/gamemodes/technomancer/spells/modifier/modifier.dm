@@ -32,7 +32,6 @@
 	if(istype(M, /datum/modifier/technomancer))
 		var/datum/modifier/technomancer/MT = M
 		MT.spell_power = calculate_spell_power(1)
-	log_and_message_admins("has casted [src] on [L].")
 	add_attack_logs(user,L,"Casted [src]")
 	qdel(src)
 	return TRUE
