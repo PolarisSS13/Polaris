@@ -49,7 +49,7 @@ var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears 
 var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
 var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
 
-GLOBAL_LIST(custom_species_bases)
+var/global/list/custom_species_bases = list() // Species that can be used for a Custom Species icon base
 	//Underwear
 var/datum/category_collection/underwear/global_underwear = new()
 
@@ -266,9 +266,9 @@ var/global/list/string_slot_flags = list(
 		var/datum/species/S = GLOB.all_species[species_name]
 		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
 			continue
-		GLOB.custom_species_bases += species_name
+		custom_species_bases += species_name
 	for(var/species_name in whitelisted_icons)
-		GLOB.custom_species_bases += species_name
+		custom_species_bases += species_name
 
 	return 1 // Hooks must return 1
 
