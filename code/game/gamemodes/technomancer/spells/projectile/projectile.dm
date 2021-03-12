@@ -14,7 +14,7 @@
 		var/obj/item/projectile/new_projectile = make_projectile(spell_projectile, user)
 		new_projectile.old_style_target(hit_atom)
 		new_projectile.fire()
-		add_attack_logs(user,hit_atom,"Casted with [src]")
+		add_attack_logs(user,hit_atom,"Casted [src]")
 		if(fire_sound)
 			playsound(src, fire_sound, 75, 1)
 		adjust_instability(instability_per_shot)
