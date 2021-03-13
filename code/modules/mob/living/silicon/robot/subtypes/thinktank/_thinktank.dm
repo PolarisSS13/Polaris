@@ -1,9 +1,25 @@
+// Spawner landmarks are used because platforms that are mapped during
+// SSatoms init try to Initialize() twice. I have no idea why and I am 
+// not paid enough to spend more time trying to debug it.
+/obj/effect/landmark/robot_platform
+	name = "recon platform spawner"
+	icon = 'icons/mob/screen1.dmi'
+	icon_state = "x3"
+	delete_me = TRUE
+	var/platform_type
+
+/obj/effect/landmark/robot_platform/Initialize()
+	if(platform_type)
+		new platform_type(get_turf(src))
+	return ..()
+
 /mob/living/silicon/robot/platform
 	name = "support platform"
 	desc = "A large quadrupedal AI platform, colloquially known as a 'think-tank' due to the flexible onboard intelligence."
 	icon = 'icons/mob/robots_thinktank.dmi'
 	icon_state = "tachi"
 	color = "#68a2f2"
+	speed = -1 // They're meant to be viable for transport, so can't be slower than a human.
 
 	cell =        /obj/item/weapon/cell/mech
 	idcard_type = /obj/item/weapon/card/id/platform
@@ -44,7 +60,7 @@
 	if(mind)
 		mind.name = real_name
 
-/mob/living/silicon/robot/platform/Initialize()
+/mob/living/silicon/robot/platform/Initialize(var/mapload)
 	. = ..()
 	if(!mmi)
 		mmi = new /obj/item/device/mmi/digital/robot(src)

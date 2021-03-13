@@ -72954,7 +72954,7 @@
 	},
 /obj/machinery/mech_recharger,
 /obj/effect/floor_decal/industrial/hatch/yellow,
-/mob/living/silicon/robot/platform/cargo,
+/obj/effect/landmark/robot_platform/cargo,
 /turf/simulated/floor/tiled/steel,
 /area/quartermaster/warehouse)
 "cHa" = (

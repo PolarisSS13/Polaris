@@ -22,9 +22,7 @@
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [recharging.resolve()] inserted into its recharging port."))
 		else if(user.unEquip(W))
 			W.forceMove(src)
-			world << "loc 1 [W.loc]"
 			recharging = weakref(W)
-			world << "loc 2 [W.loc]"
 			recharge_complete = FALSE
 			user.visible_message(SPAN_NOTICE("\The [user] slots \the [W] into \the [src]'s recharging port."))
 		return TRUE
