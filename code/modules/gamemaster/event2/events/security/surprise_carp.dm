@@ -10,6 +10,7 @@
 /datum/event2/meta/surprise_carp/get_weight()
 	return metric.count_all_space_mobs() * 50
 
+
 /datum/event2/event/surprise_carp
 	var/mob/living/victim = null
 
