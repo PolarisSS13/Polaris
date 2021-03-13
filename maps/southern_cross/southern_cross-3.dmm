@@ -14242,7 +14242,7 @@
 	dir = 4
 	},
 /obj/machinery/mech_recharger,
-/mob/living/silicon/robot/platform/explorer,
+/obj/effect/landmark/robot_platform/explorer,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/garage)
 "Iw" = (
@@ -14253,7 +14253,7 @@
 "Lz" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/mech_recharger,
-/mob/living/silicon/robot/platform/explorer,
+/obj/effect/landmark/robot_platform/explorer,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/garage)
 
