@@ -7,8 +7,11 @@
 	event_type = /datum/event2/event/wildlife_encounter
 
 /datum/event2/meta/wildlife_encounter/get_weight()
-	var/list/explorers = metric.get_people_with_job(/datum/job/explorer)
-	return explorers.len * 50
+	var/explorers = metric.count_people_with_job(/datum/job/explorer) + metric.count_people_with_job(/datum/job/sar)
+
+	if(!explorers)
+		return 0
+	return 20 + explorers * 50
 
 /datum/event2/event/wildlife_encounter
 	var/mob/living/victim = null
