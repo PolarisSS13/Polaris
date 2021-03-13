@@ -1871,6 +1871,7 @@
 #include "code\modules\gamemaster\event2\events\everyone\random_antag.dm"
 #include "code\modules\gamemaster\event2\events\everyone\solar_storm.dm"
 #include "code\modules\gamemaster\event2\events\everyone\sudden_weather_shift.dm"
+#include "code\modules\gamemaster\event2\events\explorer\wildlife_encounter.dm"
 #include "code\modules\gamemaster\event2\events\legacy\legacy.dm"
 #include "code\modules\gamemaster\event2\events\medical\appendicitis.dm"
 #include "code\modules\gamemaster\event2\events\medical\virus.dm"
