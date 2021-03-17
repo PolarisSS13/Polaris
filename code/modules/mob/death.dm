@@ -73,7 +73,7 @@
 
 	facing_dir = null
 
-	if(!gibbed && deathmessage != "no message") // This is gross, but reliable. Only brains use it.
+	if(!gibbed && deathmessage != DEATHGASP_NO_MESSAGE)
 		src.visible_message("<b>\The [src.name]</b> [deathmessage]")
 
 	set_stat(DEAD)
