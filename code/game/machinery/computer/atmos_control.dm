@@ -19,7 +19,7 @@
 	..()
 
 /obj/machinery/computer/atmoscontrol/laptop //[TO DO] Change name to PCU and update mapdata to include replacement computers
-	name = "/improper Atmospherics PCU"
+	name = "\improper Atmospherics PCU"
 	desc = "A personal computer unit. It seems to have only the Atmosphereics Control program installed."
 	icon_screen = "pcu_atmo"
 	icon_state = "pcu"

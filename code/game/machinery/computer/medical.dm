@@ -494,7 +494,7 @@
 
 
 /obj/machinery/computer/med_data/laptop //[TO DO] Change name to PCU and update mapdata to include replacement computers
-	name = "/improper Medical PCU"
+	name = "\improper Medical PCU"
 	desc = "A personal computer unit. It seems to have only the medical records program installed."
 	icon_state = "pcu"
 	icon_keyboard = "pcu_key"

@@ -7,7 +7,7 @@
 #define FIELD(N, V, E) list(field = N, value = V, edit = E)
 
 /obj/machinery/computer/skills//TODO:SANITY //[TO DO] Change name to PCU and update mapdata to include replacement computers
-	name = "/improper employment records PCU"
+	name = "\improper employment records PCU"
 	desc = "A personal computer unit that's used to view, edit and maintain employment records."
 	icon_state = "pcu"
 	icon_keyboard = "pcu_key"
