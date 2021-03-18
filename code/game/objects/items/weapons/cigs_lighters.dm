@@ -512,12 +512,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	icon = 'icons/obj/cigarettes.dmi'
 	icon_state = "cig paper"
 	volume = 25
+	var/obj/item/clothing/mask/smokable/cigarette/crafted_type = /obj/item/clothing/mask/smokable/cigarette/joint
 
 /obj/item/weapon/reagent_containers/rollingpaper/blunt
 	name = "blunt wrap"
 	desc = "A small piece of easily flammable paper similar to that which encases cigars. It's made out of tobacco, bigger than a standard rolling paper, and will last longer."
 	icon_state = "blunt paper"
 	volume = 45
+	crafted_type = /obj/item/clothing/mask/smokable/cigarette/joint/blunt
 
 /obj/item/weapon/reagent_containers/rollingpaper/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weapon/reagent_containers/food/snacks))
@@ -544,24 +546,14 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	if(!src.reagents)                                                                                        //don't roll an empty joint
 		to_chat(user, "<span class='warning'>There is nothing in [src]. Add something to it first.</span>")
 		return
-	if (istype(src, /obj/item/weapon/reagent_containers/rollingpaper/blunt))
-		var/obj/item/clothing/mask/smokable/cigarette/joint/blunt/J = new()
-		to_chat(user,"<span class='notice'>You roll the [src] into a blunt!</span>")
-		J.add_fingerprint(user)
-		if(src.reagents)
-			src.reagents.trans_to_obj(J, src.reagents.total_volume)
-		user.drop_from_inventory(src)
-		user.put_in_hands(J)
-		qdel(src)
-	else
-		var/obj/item/clothing/mask/smokable/cigarette/joint/J = new()
-		to_chat(user,"<span class='notice'>You roll the [src] into a joint!</span>")
-		J.add_fingerprint(user)
-		if(src.reagents)
-			src.reagents.trans_to_obj(J, src.reagents.total_volume)
-		user.drop_from_inventory(src)
-		user.put_in_hands(J)
-		qdel(src)
+	var/obj/item/clothing/mask/smokable/cigarette/J = new crafted_type()
+	to_chat(user,"<span class='notice'>You roll the [src] into a blunt!</span>")
+	J.add_fingerprint(user)
+	if(src.reagents)
+		src.reagents.trans_to_obj(J, src.reagents.total_volume)
+	user.drop_from_inventory(src)
+	user.put_in_hands(J)
+	qdel(src)
 
 /////////
 //ZIPPO//
