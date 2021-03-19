@@ -18,6 +18,7 @@
 
 /datum/event2/event/wildlife_encounter/set_up()
 	var/list/potential_victims = list()
+
 	for(var/mob/living/L in player_list)
 		//if(!(L.z in get_location_z_levels()))
 		//	log_debug("Not on the right z-level")
@@ -27,10 +28,10 @@
 			continue // Don't want dead people.
 		if(istype(get_turf(L), /turf/simulated/floor/outdoors) && istype(get_area(L),/area/surface/outside/wilderness))
 			potential_victims += L
-			log_debug("Found victim")
 
 	if(potential_victims.len)
 		victim = pick(potential_victims)
+		potential_victims = null
 
 /datum/event2/event/wildlife_encounter/start()
 	if(!victim)
