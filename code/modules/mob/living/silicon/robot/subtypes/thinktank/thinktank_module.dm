@@ -54,7 +54,7 @@
 	modules += new /obj/item/weapon/tool/wirecutters/cyborg(src)
 	modules += new /obj/item/weapon/tool/screwdriver/cyborg(src)
 	modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
-	modules += new /obj/item/weapon/chainsaw(src)
+	modules += new /obj/item/weapon/material/knife/machete/cyborg(src)
 
 	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(7500)
 	var/obj/item/stack/medical/bruise_pack/bandaid = new(src)
@@ -67,10 +67,7 @@
 	var/obj/item/weapon/gun/energy/phasegun/mounted/cyborg/phasegun = new(src) 
 	modules += phasegun
 
-	var/obj/item/weapon/gun/energy/laser/mounted/pew = new(src)
-	pew.name = "overvolted phase carbine"
-	pew.appearance = phasegun
-	emag = pew
+	emag = new /obj/item/weapon/chainsaw(src)
 
 /obj/item/weapon/robot_module/robot/platform/explorer/respawn_consumable(var/mob/living/silicon/robot/R, rate)
 	. = ..()
