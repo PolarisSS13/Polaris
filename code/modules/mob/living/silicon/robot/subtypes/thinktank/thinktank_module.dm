@@ -50,6 +50,8 @@
 /obj/item/weapon/robot_module/robot/platform/explorer/New()
 	..()
 	modules += new /obj/item/weapon/tool/wrench/cyborg(src)
+	modules += new /obj/item/weapon/weldingtool/electric/mounted/cyborg(src)
+	modules += new /obj/item/weapon/tool/wirecutters/cyborg(src)
 	modules += new /obj/item/weapon/tool/screwdriver/cyborg(src)
 	modules += new /obj/item/weapon/pickaxe/plasmacutter(src)
 	modules += new /obj/item/weapon/chainsaw(src)
