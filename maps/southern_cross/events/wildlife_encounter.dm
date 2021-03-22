@@ -54,7 +54,6 @@
 	var/attempts = 0
 
 	while (!spawning_turf && attempts != 10)
-		log_debug("Started Looking!")
 		spawning_turf = pick(donut)
 		for(var/i = 1 to potential_victims.len)
 			if (get_dist(spawning_turf, potential_victims[i]) < world.view)
