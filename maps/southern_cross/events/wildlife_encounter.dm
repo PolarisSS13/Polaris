@@ -15,15 +15,13 @@
 
 /datum/event2/event/wildlife_encounter
 	var/mob/living/victim = null
-
-/datum/event2/event/wildlife_encounter/set_up()
 	var/list/potential_victims = list()
 
+/datum/event2/event/wildlife_encounter/set_up()
 	for(var/mob/living/L in player_list)
 		//if(!(L.z in get_location_z_levels()))
 		//	log_debug("Not on the right z-level")
 		//	continue // Not on the right z-level.
-
 		if(L.stat)
 			continue // Don't want dead people.
 		if(istype(get_turf(L), /turf/simulated/floor/outdoors) && istype(get_area(L),/area/surface/outside/wilderness))
@@ -31,7 +29,6 @@
 
 	if(potential_victims.len)
 		victim = pick(potential_victims)
-		potential_victims = null
 
 /datum/event2/event/wildlife_encounter/start()
 	if(!victim)
@@ -53,7 +50,20 @@
 			donut -= T
 
 	var/build_path = item_to_spawn()
-	var/turf/spawning_turf = pick(donut)
+	var/turf/spawning_turf = null
+	var/attempts = 0
+
+	while (!spawning_turf && attempts != 10)
+		log_debug("Started Looking!")
+		spawning_turf = pick(donut)
+		for(var/i = 1 to potential_victims.len)
+			if (get_dist(spawning_turf, potential_victims[i]) < world.view)
+				spawning_turf = null
+				log_debug("Failed to locate position out of sight of [potential_victims[i]].")
+		attempts++
+
+	potential_victims = null
+
 	log_debug("Sending [number_of_packs] [build_path]\s after \the [victim].")
 	for(var/i = 1 to number_of_packs)
 
@@ -78,7 +88,6 @@
 				prob(4);/mob/living/simple_mob/animal/giant_spider/tunneler,
 				prob(5);/mob/living/simple_mob/animal/giant_spider/pepper,
 				prob(5);/mob/living/simple_mob/animal/giant_spider/thermic,
-				prob(3);/mob/living/simple_mob/animal/giant_spider/electric,
 				prob(1);/mob/living/simple_mob/animal/giant_spider/phorogenic,
 				prob(30);/mob/living/simple_mob/animal/giant_spider/frost)
 
