@@ -77,6 +77,14 @@
     else
         . = ..()
 
+/obj/item/weapon/cane/white/afterattack(atom/A, mob/user as mob, proximity)
+	if(!proximity)
+		return
+	if(istype(A, /turf/simulated/floor))
+		user.visible_message("<span class='notice'>\The [user] gently taps the ground with their [src.name]</span>")
+		return TRUE
+	else
+		. = ..()
 
 //Code for Telescopic White Cane writen by Gozulio
 
