@@ -30,10 +30,10 @@ SUBSYSTEM_DEF(chemistry)
 // Note that entries in the list are NOT duplicated. So if a reaction pertains to
 // more than one chemical it will still only appear in only one of the sublists.
 /datum/controller/subsystem/chemistry/proc/initialize_chemical_reactions()
-	var/list/paths = decls_repository.decls_of_subtype(/decl/chemical_reaction)
+	var/list/paths = decls_repository.get_decls_of_subtype(/decl/chemical_reaction)
 
 	for(var/path in paths)
-		var/decl/chemical_reaction/D = new path
+		var/decl/chemical_reaction/D = paths[path]
 		chemical_reactions += D
 		if(D.required_reagents && D.required_reagents.len)
 			var/reagent_id = D.required_reagents[1]
