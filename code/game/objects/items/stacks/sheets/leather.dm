@@ -226,6 +226,10 @@
 	. = ..()
 	START_PROCESSING(SSobj, src) // SSObj fires ~every 2s , starting from wetness 30 takes ~1m
 
+/obj/structure/tanning_rack/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	return ..()
+
 /obj/structure/tanning_rack/process()
 	if(drying && drying.wetness)
 		drying.wetness = max(drying.wetness - 1, 0)
