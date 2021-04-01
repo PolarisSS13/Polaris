@@ -88346,7 +88346,6 @@
 /area/chapel/office)
 "dhE" = (
 /obj/structure/table/wooden_reinforced,
-/obj/item/weapon/nullrod,
 /obj/item/weapon/reagent_containers/food/drinks/bottle/holywater,
 /obj/machinery/power/apc{
 	dir = 1;
@@ -88366,6 +88365,7 @@
 	d2 = 2;
 	icon_state = "0-2"
 	},
+/obj/item/weapon/nullrod,
 /turf/simulated/floor/lino,
 /area/chapel/office)
 "dhF" = (

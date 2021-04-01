@@ -13,10 +13,10 @@
 	pickup_sound = 'sound/items/pickup/sword.ogg'
 	var/cooldown = 0 // floor tap cooldown
 
-	suicide_act(mob/user)
-		var/datum/gender/T = gender_datums[user.get_visible_gender()]
-		to_chat(viewers(user),"<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>")
-		return (BRUTELOSS|FIRELOSS)
+/obj/item/weapon/nullrod/suicide_act(mob/user)
+	var/datum/gender/T = gender_datums[user.get_visible_gender()]
+	visible_message(,"<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>")
+	return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/nullrod/staff
 	name = "null staff"
@@ -43,13 +43,14 @@
 	set category = "Object"
 	set src in usr
 
-	var/list/options = list()
-	options["Null rod"] = list(/obj/item/weapon/nullrod)
-	options["Null staff"] = list(/obj/item/weapon/nullrod/staff)
-	options["Null sphere"] = list(/obj/item/weapon/nullrod/orb)
-	options["Null athame"] = list(/obj/item/weapon/nullrod/athame)
+	var/list/options = list(
+		"Null rod" = /obj/item/weapon/nullrod,
+		"Null staff" = /obj/item/weapon/nullrod/staff,
+		"Null sphere" = /obj/item/weapon/nullrod/orb,
+		"Null athame" = /obj/item/weapon/nullrod/athame
+	)
 	var/choice = input(user,"What form would you like your obsidian relic to take?") as null|anything in options
-	if(src && choice)
+	if(src && choice && user.l_hand == src || user.r_hand == src)
 		to_chat(user, SPAN_NOTICE("You start reconfiguring your obsidian relic."))
 		if(!do_after(user, 2 SECONDS))
 			return
@@ -68,12 +69,12 @@
 	user.setClickCooldown(user.get_attack_speed(src))
 	user.do_attack_animation(M)
 
-	if (!(istype(user, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
+	if (ishuman || ticker)
 		to_chat(user, "<span class='danger'>You don't have the dexterity to do this!</span>")
 		return
 
 	if ((CLUMSY in user.mutations) && prob(50))
-		to_chat(user, "<span class='danger'>The rod slips out of your hand and hits your head.</span>")
+		to_chat(user, "<span class='danger'>The [src.name] slips out of your hand and hits your head.</span>")
 		user.take_organ_damage(10)
 		user.Paralyse(20)
 		return
@@ -83,10 +84,10 @@
 			to_chat(M, "<span class='danger'>The power of [src] clears your mind of the cult's influence!</span>")
 			to_chat(user, "<span class='danger'>You wave [src] over [M]'s head and see their eyes become clear, their mind returning to normal.</span>")
 			cult.remove_antagonist(M.mind)
-			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
+			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>", exclude_mobs = list(M))
 		else if(prob(10))
 			to_chat(user, "<span class='danger'>The rod slips in your hand.</span>")
-			..()
+			return..()
 		else
 			to_chat(user, "<span class='danger'>The rod appears to do nothing.</span>")
 			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
@@ -100,7 +101,7 @@
 		user.visible_message(SPAN_NOTICE("[user] loudly taps their [src.name] against the floor."))
 		playsound(user.loc, 'sound/effects/shieldbash.ogg', 50, 1)
 		var/rune_found = FALSE
-		for(var/obj/effect/rune/R in orange(2, get_turf(src)))
+		for(var/obj/effect/rune/R in range(2, get_turf(src)))
 			if(R == src)
 				continue
 			rune_found = TRUE

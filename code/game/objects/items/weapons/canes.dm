@@ -83,8 +83,7 @@
 	if(istype(A, /turf/simulated/floor))
 		user.visible_message("<span class='notice'>\The [user] gently taps the ground with their [src.name]</span>")
 		return TRUE
-	else
-		. = ..()
+	return ..()
 
 //Code for Telescopic White Cane writen by Gozulio
 
