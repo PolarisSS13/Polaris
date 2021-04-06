@@ -114220,6 +114220,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/hallway/primary/seconddeck/stairwell)
+"xjf" = (
+/obj/machinery/smartfridge/sheets/persistent,
+/turf/simulated/floor/tiled,
+/area/engineering/workshop)
 
 (1,1,1) = {"
 aaa
@@ -198638,7 +198642,7 @@ bQi
 bRW
 bTN
 bVQ
-bTO
+xjf
 bZh
 dxl
 caW
