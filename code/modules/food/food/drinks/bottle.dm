@@ -344,7 +344,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor //MODIFIED ON 04/09/2021
 	name = "Emeraldine Melon Liqueur"
 	desc = "A bottle of 46 proof Emeraldine Melon Liquor. Sweet and light."
-	icon_state = "melon_liqueur" //Placeholder.
+	icon_state = "melon_liqueur"
 	center_of_mass = list("x"=16, "y"=6)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/melonliquor/Initialize()
