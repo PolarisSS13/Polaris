@@ -7,7 +7,7 @@ var/datum/category_collection/autolathe/autolathe_recipes
 		I = new path()
 
 	if(!I)	// Something has gone horribly wrong, or right.
-		log_debug("[name] created an Autolathe design without an assigned path. This is expected for only the Material Sheet generation.")
+		log_debug("[name] created an Autolathe design without an assigned path.")
 		return
 
 	if(I.matter && !resources)
@@ -82,22 +82,12 @@ var/datum/category_collection/autolathe/autolathe_recipes
 		if(istype(M, /datum/material/alienalloy))
 			continue
 
-		var/obj/item/stack/material/Mat = new M.stack_type()
-
-		if(Mat.name in items_by_name)
-			qdel(Mat)
+		var/obj/item/stack/material/S = M.stack_type
+		if(initial(S.name) in items_by_name)
 			continue
 
-		var/datum/category_item/autolathe/materials/WorkDat = new(src)
+		var/datum/category_item/autolathe/materials/WorkDat = new(src, M)
 
-		WorkDat.name = "[Mat.name]"
-		WorkDat.resources = Mat.matter.Copy()
-		WorkDat.is_stack = TRUE
-		WorkDat.no_scale = TRUE
-		WorkDat.max_stack = Mat.max_amount
-		WorkDat.path = M.stack_type
-
-		qdel(Mat)
 
 		items |= WorkDat
 		items_by_name[WorkDat.name] = WorkDat
