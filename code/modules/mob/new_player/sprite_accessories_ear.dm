@@ -30,7 +30,7 @@
 	icon_state = "ears_plain"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
-	species_allowed = list(SPECIES_TAJ, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	extra_overlay = "ears_plain-inner"
 
 /datum/sprite_accessory/ears/taj_ears_tall
@@ -250,6 +250,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "kittyinner"
+	species_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/ears/bunnyhc
 	name = "bunny, colorable"
