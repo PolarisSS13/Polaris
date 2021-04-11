@@ -6409,3 +6409,105 @@
 	..()
 	reagents.add_reagent("nutriment", 8)
 	bitesize = 1
+
+//////////////////////Canned Foods - crack open and eat (ADDED 04/11/2021)//////////////////////
+
+/obj/item/weapon/reagent_containers/food/snacks/canned
+	name = "void can"
+	icon = 'icons/obj/food_canned.dmi'
+	flags = 0
+	var/sealed = TRUE
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/Initialize()
+	. = ..()
+	if(!sealed)
+		unseal()
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/examine(mob/user)
+	. = ..()
+	to_chat(user, "It is [sealed ? "" : "un"]sealed.")
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/proc/unseal()
+	flags |= OPENCONTAINER
+	sealed = FALSE
+	update_icon()
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/attack_self(var/mob/user)
+	if(sealed)
+		playsound(loc,'sound/effects/tincanopen.ogg', rand(10,50), 1)
+		to_chat(user, "<span class='notice'>You unseal \the [src] with a crack of metal.</span>")
+		unseal()
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/update_icon()
+	if(!sealed)
+		icon_state = "[initial(icon_state)]-open"
+
+//////////Just a short line of Canned Consumables, great for treasure in faraway abandoned outposts//////////
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/beef
+	name = "quadrangled beefium"
+	icon_state = "beef"
+	desc = "Proteins carefully cloned from extinct stock of holstein in the meat foundries of Mars."
+	trash = /obj/item/trash/beef
+	filling_color = "#663300"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("beef" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
+	.=..()
+	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("sodiumchloride", 1)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/beans
+	name = "baked beans"
+	icon_state = "beans"
+	desc = "Luna Colony beans. Carefully synthethized from soy."
+	trash = /obj/item/trash/beans
+	filling_color = "#ff6633"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("beans" = 1)
+	nutriment_amt = 12
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
+	.=..()
+	reagents.add_reagent("nutriment", 5)
+	bitesize = 2
+
+///obj/item/weapon/reagent_containers/food/snacks/canned/tomato
+//	name = "tomato soup"
+//	icon_state = "tomato"
+//	desc = "Plain old unseasoned tomato soup. This can predates the formation of the SCG."
+//	trash = "/obj/item/trash/tomato"
+//	filling_color = "#ae0000"
+//	center_of_mass = "x=15;y=9"
+//	nutriment_desc = list("tomato" = 1)
+//	bitesize = 3
+//	eat_sound = 'sound/items/drink.ogg'
+//
+///obj/item/weapon/reagent_containers/food/snacks/canned/tomato/Initialize()
+//	.=..()
+//	reagents.add_reagent(/datum/reagent/drink/juice/tomato, 12)
+//
+//
+///obj/item/weapon/reagent_containers/food/snacks/canned/tomato/feed_sound(var/mob/user)
+//	playsound(user.loc, 'sound/items/drink.ogg', rand(10, 50), 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/spinach
+	name = "spinach"
+	icon_state = "spinach"
+	desc = "Wup-Az! Brand canned spinach. Notably has less iron in it than a watermelon."
+	trash = /obj/item/trash/spinach
+	filling_color = "#003300"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/spinach/Initialize()
+	.=..()
+	reagents.add_reagent("nutriment", 5)
+	reagents.add_reagent("adrenaline", 5)
+	reagents.add_reagent("hyperzine", 5)
+	reagents.add_reagent("iron", 5)
+	bitesize = 5
+
+////////////////////end canned food////////////////////
