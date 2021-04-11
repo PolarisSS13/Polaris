@@ -455,8 +455,10 @@
 
 /* Atom reagent creation - use it all the time */
 
-/atom/proc/create_reagents(var/max_vol)
-	reagents = new/datum/reagents(max_vol, src)
+/atom/proc/create_reagents(var/max_vol, var/reagents_type = /datum/reagents)
+	if(!ispath(reagents_type))
+		reagents_type = /datum/reagents
+	reagents = new reagents_type(max_vol, src)
 
 // Aurora Cooking Port
 /datum/reagents/proc/get_reagent(var/id) // Returns reference to reagent matching passed ID

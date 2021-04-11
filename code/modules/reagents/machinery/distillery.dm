@@ -62,8 +62,7 @@
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/Initialize()
 	. = ..()
 
-	reagents = new /datum/reagents/distilling(600, src)
-
+	create_reagents(600, /datum/reagents/distilling)
 
 	if(!base_state)
 		base_state = icon_state

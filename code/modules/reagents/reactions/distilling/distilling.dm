@@ -27,7 +27,7 @@
 	var/temp_shift = 0 // How much the temperature changes when the reaction occurs.
 
 /decl/chemical_reaction/distilling/can_happen(var/datum/reagents/holder)
-	if(!(istype(holder, /datum/reagents/distilling) && istype(holder.my_atom, /obj/machinery/portable_atmospherics/powered/reagent_distillery)))
+	if(!istype(holder, /datum/reagents/distilling) || !istype(holder.my_atom, /obj/machinery/portable_atmospherics/powered/reagent_distillery))
 		return FALSE
 
 	// Super special temperature check.
