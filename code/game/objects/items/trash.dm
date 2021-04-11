@@ -214,3 +214,21 @@
 
 /obj/item/trash/attack(mob/M as mob, mob/living/user as mob)
 	return
+
+/obj/item/trash/beef //ADDITION 04/11/2021
+	name = "empty beef can"
+	icon_state = "beef"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/beans //ADDITION 04/11/2021
+	name = "empty bean can"
+	icon_state = "beans"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/spinach //ADDITION 04/11/2021
+	name = "empty spinach can"
+	icon_state = "spinach"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
