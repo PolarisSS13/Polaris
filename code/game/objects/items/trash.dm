@@ -232,3 +232,27 @@
 	icon_state = "spinach"
 	drop_sound = 'sound/items/drop/soda.ogg'
 	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/fishegg //ADDITION 04/11/2021
+	name = "empty fisheggs can"
+	icon_state = "fisheggs"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/carpegg //ADDITION 04/11/2021
+	name = "empty carpeggs can"
+	icon_state = "carpeggs"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/lunacakewrap //ADDITION 04/11/2021
+	name = "cake wrapper"
+	icon_state = "cakewrap"
+
+/obj/item/trash/mochicakewrap //ADDITION 04/11/2021
+	name = "cake wrapper"
+	icon_state = "mochicakewrap"
+
+/obj/item/trash/mooncakewrap //ADDITION 04/11/2021
+	name = "cake wrapper"
+	icon_state = "mooncakewrap"

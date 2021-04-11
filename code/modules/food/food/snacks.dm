@@ -6467,14 +6467,13 @@
 	filling_color = "#ff6633"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("beans" = 1)
-	nutriment_amt = 12
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
 	reagents.add_reagent("nutriment", 5)
 	bitesize = 2
 
-///obj/item/weapon/reagent_containers/food/snacks/canned/tomato
+///obj/item/weapon/reagent_containers/food/snacks/canned/tomato (NEED TO SEE HOW TO CHANGE EATING SOUND)
 //	name = "tomato soup"
 //	icon_state = "tomato"
 //	desc = "Plain old unseasoned tomato soup. This can predates the formation of the SCG."
@@ -6510,4 +6509,115 @@
 	reagents.add_reagent("iron", 5)
 	bitesize = 5
 
-////////////////////end canned food////////////////////
+//////////////////////////////Advanced Canned Food//////////////////////////////
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar
+	name = "\improper Terran Caviar"
+	icon_state = "fisheggs"
+	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt. Skrell approved!"
+	trash = /obj/item/trash/fishegg
+	filling_color = "#000000"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fish" = 1, "salt" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/caviar/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 5)
+	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true
+	name = "\improper Classic Terran Caviar"
+	icon_state = "carpeggs"
+	desc = "Terran caviar, or space carp eggs. Banned by the Sol Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
+	trash = /obj/item/trash/carpegg
+	filling_color = "#330066"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/caviar/true/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 4)
+	reagents.add_reagent("carpotoxin", 1)
+	bitesize = 1
+
+////////////////////end canned food////////////////////////////////////////////////////////////////////
+
+////////////////////Sol-Vend (Mars-Mart)///////////////////////////////////////////////////////////////
+
+////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged
+	name = "void package"
+	icon = 'icons/obj/food_canned.dmi'
+	flags = 0
+	var/sealed = TRUE
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/Initialize()
+	. = ..()
+	if(!sealed)
+		unseal()
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/examine(mob/user)
+	. = ..()
+	to_chat(user, "It is [sealed ? "" : "un"]wrapped.")
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/proc/unseal()
+	flags |= OPENCONTAINER
+	sealed = FALSE
+	update_icon()
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/attack_self(var/mob/user)
+	if(sealed)
+		playsound(loc,'sound/effects/packagedfoodopen.ogg', rand(10,50), 1)
+		to_chat(user, "<span class='notice'>You unseal \the [src] with a tear of plastic.</span>")
+		unseal()
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/update_icon()
+	if(!sealed)
+		icon_state = "[initial(icon_state)]-open"
+
+//////////////Lunar Cakes - proof of concept//////////////
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/lunacake
+	name = "\improper Lunar Cake"
+	icon_state = "lunacake"
+	desc = "Now with 20% less lawsuit enabling rhegolith!"
+	trash = /obj/item/trash/lunacakewrap //need to add code that drops trash but keeps -open state
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "vanilla" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/lunacake/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 6)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/darklunacake
+	name = "\improper Dark Lunar Cake"
+	icon_state = "mooncake"
+	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
+	trash = /obj/item/trash/mooncakewrap //need to add code that drops trash but keeps -open state
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "chocolate" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/darklunacake/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 6)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/mochicake
+	name = "\improper Dark Lunar Cake"
+	icon_state = "mochicake"
+	desc = "Konnichiwa! Many go lucky rice cakes in future!"
+	trash = /obj/item/trash/mochicakewrap //need to add code that drops trash but keeps -open state
+	filling_color = "#ffffff"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("sweet" = 4, "rice" = 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/mochicake/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 6)
+	bitesize = 2
+
+//////////////End of Lunar Cakes//////////////
