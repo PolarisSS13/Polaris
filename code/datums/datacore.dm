@@ -288,7 +288,7 @@ var/global/list/PDA_Manifest = list()
 			manifest_inject(H)
 		return
 
-/datum/datacore/proc/manifest_modify(var/name, var/assignment)
+/datum/datacore/proc/manifest_modify(var/name, var/assignment, var/rank)
 	ResetPDAManifest()
 	var/datum/data/record/foundrecord
 	var/real_title = assignment
@@ -302,11 +302,17 @@ var/global/list/PDA_Manifest = list()
 	var/list/all_jobs = get_job_datums()
 
 	for(var/datum/job/J in all_jobs)
-		var/list/alttitles = get_alternate_titles(J.title)
-		if(!J)	continue
-		if(assignment in alttitles)
-			real_title = J.title
+		if(J.title == rank)					//If we have a rank, just default to using that.
+			real_title = rank
 			break
+		else if(J.title == assignment)
+			real_title = rank
+			break
+		else
+			var/list/alttitles = get_alternate_titles(J.title)
+			if(assignment in alttitles)
+				real_title = J.title
+				break
 
 	if(foundrecord)
 		foundrecord.fields["rank"] = assignment
@@ -316,7 +322,7 @@ var/global/list/PDA_Manifest = list()
 	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment = GetAssignment(H)
 		var/hidden
-		var/datum/job/J = SSjob.get_job(assignment)
+		var/datum/job/J = SSjob.get_job(H.mind.assigned_role)
 		hidden = J?.offmap_spawn
 
 		/* Note: Due to cached_character_icon, a number of emergent properties occur due to the initialization

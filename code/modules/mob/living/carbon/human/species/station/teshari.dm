@@ -33,12 +33,12 @@
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
-	icobase = 'icons/mob/human_races/r_seromi.dmi'
-	deform = 'icons/mob/human_races/r_seromi.dmi'
-	damage_overlays = 'icons/mob/human_races/masks/dam_seromi.dmi'
-	damage_mask = 'icons/mob/human_races/masks/dam_mask_seromi.dmi'
-	blood_mask = 'icons/mob/human_races/masks/blood_seromi.dmi'
-	suit_storage_icon = 'icons/mob/species/seromi/belt_mirror.dmi'
+	icobase = 'icons/mob/human_races/r_teshari.dmi'
+	deform = 'icons/mob/human_races/r_teshari.dmi'
+	damage_overlays = 'icons/mob/human_races/masks/dam_teshari.dmi'
+	damage_mask = 'icons/mob/human_races/masks/dam_mask_teshari.dmi'
+	blood_mask = 'icons/mob/human_races/masks/blood_teshari.dmi'
+	suit_storage_icon = 'icons/mob/species/teshari/belt_mirror.dmi'
 
 	fire_icon_state = "generic" // Humanoid is too big for them and spriting a new one is really annoying.
 
@@ -58,7 +58,7 @@
 
 	ambiguous_genders = TRUE
 
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED	| SPECIES_NO_POSIBRAIN
 	appearance_flags = HAS_HAIR_COLOR | HAS_SKIN_COLOR | HAS_EYE_COLOR
 	bump_flag = MONKEY
 	swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
@@ -102,15 +102,15 @@
 	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
 		BP_GROIN =  list("path" = /obj/item/organ/external/groin),
-		BP_HEAD =   list("path" = /obj/item/organ/external/head/seromi),
+		BP_HEAD =   list("path" = /obj/item/organ/external/head/teshari),
 		BP_L_ARM =  list("path" = /obj/item/organ/external/arm),
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right),
 		BP_L_LEG =  list("path" = /obj/item/organ/external/leg),
 		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right),
-		BP_L_HAND = list("path" = /obj/item/organ/external/hand/seromi),
-		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/seromi),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/seromi),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/seromi)
+		BP_L_HAND = list("path" = /obj/item/organ/external/hand/teshari),
+		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/teshari),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/teshari),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/teshari)
 		)
 
 	has_organ = list(
@@ -139,7 +139,7 @@
 	descriptors = list(
 		/datum/mob_descriptor/height = -3,
 		/datum/mob_descriptor/build = -3
-		)
+	)
 
 	var/static/list/flight_bodyparts = list(
 		BP_L_ARM,
@@ -152,6 +152,12 @@
 		/obj/item/clothing/suit/straight_jacket
 	)
 
+	default_emotes = list(
+		/decl/emote/audible/teshsqueak,
+		/decl/emote/audible/teshchirp,
+		/decl/emote/audible/teshtrill
+	)
+
 /datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
@@ -159,10 +165,10 @@
 /datum/species/teshari/handle_falling(mob/living/carbon/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
 
 	// Tesh can glide to save themselves from some falls. Basejumping bird
-	// without parachute, or falling bird without free wings goes splat.
+	// without parachute, or falling bird without free wings, goes splat.
 
 	// Are we landing from orbit, or handcuffed/unconscious/tied to something? 
-	if(planetary || !istype(H) || H.incapacitated())
+	if(planetary || !istype(H) || H.incapacitated(INCAPACITATION_DEFAULT|INCAPACITATION_DISABLED))
 		return ..()
 
 	// Are we landing on a turf? Not sure how this could not be the case, but let's be safe.
@@ -201,7 +207,7 @@
 	// Handled!
 	if(!silent)
 		to_chat(H, SPAN_NOTICE("You catch the air in your wings and greatly slow your fall."))
-		H.visible_message(SPAN_NOTICE("\The [H] glides down from above, landing safely."))
-		H.Stun(2)
+		landing.visible_message(SPAN_NOTICE("\The [H] glides down from above, landing safely."))
+		H.Stun(1)
 		playsound(H, "rustle", 25, 1)
 	return TRUE
