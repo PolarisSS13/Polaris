@@ -840,3 +840,90 @@
 					/obj/item/clothing/under/color/red = 5,
 					/obj/item/weapon/reagent_containers/pill/adminordrazine = 10,
 					/obj/item/weapon/tool/crowbar = 1)
+
+////////////////////ancient_vend (Hot Food - Old) (ADDED 04/11/2021)////////////////////////////////////////////////////
+
+/obj/machinery/vending/hotfood
+	name = "\improper Hot Foods"
+	desc = "An old vending machine promising 'hot foods'. You doubt any of its contents are still edible."
+	vend_delay = 40
+
+	icon_state = "hotfood"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/old/pizza = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/burger = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/hamburger = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/fries = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/hotdog = 1,
+					/obj/item/weapon/reagent_containers/food/snacks/old/taco = 1
+					)
+
+////////////////////weeb_vend (Nippon-tan!) (ADDED 04/11/2021)////////////////////////////////////////////////////
+
+/obj/machinery/vending/weeb
+	name = "\improper Nippon-tan!"
+	desc = "A distressingly ethnic vending machine loaded with high sucrose low calorie for lack of better words snacks."
+	vend_delay = 30
+	product_slogans = "Konnichiwa gaijin senpai! ;Notice me senpai!; Kawaii-desu!"
+	icon_state = "weeb"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/dango = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 8
+					)
+
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/dango = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 80
+					)
+
+////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
+
+/obj/machinery/vending/sol
+	name = "\improper Mars-Mart"
+	desc = "A SolCentric vending machine dispensing treats from home."
+	vend_delay = 30
+	product_slogans = "A taste of home!"
+	icon_state = "solsnack"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/pluto = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 8
+					)
+
+	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 12
+					)
+
+////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////
+
+//////a food variant of the boda machine - It carries slavic themed foods.. Mostly beer snacks//////
+
+/obj/machinery/vending/snix
+	name = "\improper Snix"
+	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"
+	vend_delay = 30
+	product_slogans = "Snix!"
+
+	icon_state = "snix"
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 7,
+					)
+
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
+
