@@ -29,6 +29,8 @@
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 
+	return A
+
 var/list/random_junk_
 var/list/random_useful_
 /proc/get_random_useful_type()

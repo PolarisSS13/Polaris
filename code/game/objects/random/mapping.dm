@@ -64,6 +64,29 @@
 				/obj/structure/closet/crate/engineering,
 				/obj/structure/closet/crate)
 
+/obj/random/snack_vendor //Random snack vending machines (ADDED 4/12/2021)
+	name = "random snack vendor"
+	desc = "This is a random snack vendor"
+	icon = 'icons/obj/vending.dmi'
+	icon_state = "random_vendor"
+	var/list/snackvendors = list(/obj/machinery/vending/sol,
+			/obj/machinery/vending/weeb,
+			/obj/machinery/vending/snack
+			)
+
+/obj/random/snack_vendor/Initialize()
+	if(!length(snackvendors))
+		return INITIALIZE_HINT_QDEL
+	return ..()
+
+/obj/random/snack_vendor/spawn_item()
+	var/atom/A = ..()
+	if(istype(A))
+		A.set_dir(dir)
+
+/obj/random/snack_vendor/item_to_spawn()
+	return pick(snackvendors)
+
 /obj/random/obstruction //Large objects to block things off in maintenance
 	name = "random obstruction"
 	desc = "This is a random obstruction."
