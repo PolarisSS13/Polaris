@@ -863,7 +863,7 @@
 	name = "\improper Nippon-tan!"
 	desc = "A distressingly ethnic vending machine loaded with high sucrose low calorie for lack of better words snacks."
 	vend_delay = 30
-	product_slogans = "Konnichiwa gaijin senpai! ;Notice me senpai!; Kawaii-desu!"
+	product_slogans = "Tanoshī! ;Itadakimasu!"
 	icon_state = "weeb"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 8,
@@ -882,10 +882,10 @@
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
 /obj/machinery/vending/sol
-	name = "\improper Mars-Mart"
-	desc = "A SolCentric vending machine dispensing treats from home."
+	name = "\improper Sol-Snacks"
+	desc = "A SolCentric vending machine dispensing a number of Sol-themed snacks, along with other foods."
 	vend_delay = 30
-	product_slogans = "A taste of home!"
+	product_slogans = "A taste of Sol!"
 	icon_state = "solsnack"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/pluto = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/triton = 8,
@@ -911,7 +911,7 @@
 
 /obj/machinery/vending/snix
 	name = "\improper Snix"
-	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"
+	desc = "A snack vending machine, offering a selection of slavic beer snacks"
 	vend_delay = 30
 	product_slogans = "Snix!"
 
