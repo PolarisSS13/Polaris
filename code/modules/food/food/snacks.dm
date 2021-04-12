@@ -6549,7 +6549,7 @@ obj/item/weapon/reagent_containers/food/snacks/oort
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
 	center_of_mass = "x=15;y=9"
-	nutriment_desc = list("fizz" = 4, "sweet?" = 1)
+	nutriment_desc = list("fizz" = 4, "sweetness" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 /obj/item/weapon/reagent_containers/food/snacks/oort/Initialize()
