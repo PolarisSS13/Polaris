@@ -245,6 +245,22 @@
 	drop_sound = 'sound/items/drop/soda.ogg'
 	pickup_sound = 'sound/items/pickup/soda.ogg'
 
+/obj/item/trash/salo //ADDITION 04/11/2021
+	name = "salo pack"
+	icon_state = "salo"
+
+/obj/item/trash/croutons //ADDITION 04/11/2021
+	name = "suhariki pack"
+	icon_state = "croutons"
+
+/obj/item/trash/squid //ADDITION 04/11/2021
+	name = "calamari pack"
+	icon_state = "squid"
+
+/obj/item/trash/driedfish //ADDITION 04/11/2021
+	name = "vobla pack"
+	icon_state = "driedfish"
+
 /obj/item/trash/lunacakewrap //ADDITION 04/11/2021
 	name = "cake wrapper"
 	icon_state = "cakewrap"
@@ -256,3 +272,40 @@
 /obj/item/trash/mooncakewrap //ADDITION 04/11/2021
 	name = "cake wrapper"
 	icon_state = "mooncakewrap"
+
+/obj/item/trash/tidegobs//ADDITION 04/11/2021
+	name = "tide gob bag"
+	icon_state = "tidegobs"
+
+/obj/item/trash/saturno//ADDITION 04/11/2021
+	name = "\improper saturn-Os bag"
+	icon_state = "saturno"
+
+/obj/item/trash/jupiter//ADDITION 04/11/2021
+	name = "gello cup"
+	icon_state = "jupiter"
+
+/obj/item/trash/pluto//ADDITION 04/11/2021
+	name = "rod bag"
+	icon_state = "pluto"
+
+/obj/item/trash/venus//ADDITION 04/11/2021
+	name = "hot cakes bag"
+	icon_state = "venus"
+
+/obj/item/trash/mars//ADDITION 04/11/2021
+	name = "frouka box"
+	icon_state = "mars"
+
+/obj/item/trash/oort//ADDITION 04/11/2021
+	name = "oort rock bag"
+	icon_state = "oort"
+
+/obj/item/trash/weebonuts//ADDITION 04/11/2021
+	name = "red alert nuts bag"
+	icon_state = "weebonuts"
+
+/obj/item/trash/stick//ADDITION 04/11/2021
+	name = "stick"
+	desc = "a stick from some snack or other food item, not even useful as crafting material."
+	icon_state = "stick"
