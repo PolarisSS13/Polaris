@@ -157,7 +157,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/semki = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 6,
@@ -187,7 +187,7 @@
 				/obj/item/weapon/reagent_containers/food/snacks/semki = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,
-				/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 1,
+				/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/tastybread = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 4,
 				/obj/item/weapon/storage/box/gum = 15,
@@ -503,10 +503,10 @@
 					/obj/item/seeds/glowshroom = 2,
 					/obj/item/seeds/libertymycelium = 2,
 					/obj/item/seeds/mtearseed = 2,
-					/obj/item/seeds/nettleseed = 2,
-					/obj/item/seeds/reishimycelium = 2,
-					/obj/item/seeds/reishimycelium = 2,
-					/obj/item/seeds/shandseed = 2,)
+					  /obj/item/seeds/nettleseed = 2,
+					  /obj/item/seeds/reishimycelium = 2,
+					  /obj/item/seeds/reishimycelium = 2,
+					  /obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/weapon/reagent_containers/spray/waterflower = 1)
 
 /**
@@ -577,8 +577,6 @@
 	/obj/item/weapon/reagent_containers/cooking_container/fryer = 4)
 	contraband = list(/obj/item/weapon/material/knife/butch = 2)
 
-///////////////////////Soviet Stuff///////////////////////////////////////
-
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
 	desc = "An old sweet water vending machine,how did this end up here?"
@@ -589,18 +587,6 @@
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/kvass = 20) 	//ADDITION 04/03/2021
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
-
-/obj/machinery/vending/sovietvend //ADDITION 04/20/2021
-	name = "Ration Station"
-	desc = "An old ration vendor unit. How it even still functional?"
-	icon_state = "sovietvend"
-	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/genration = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration = 8)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2)
-
-//////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/vending/tool
 	name = "YouTool"
@@ -861,6 +847,7 @@
 	name = "\improper Hot Foods"
 	desc = "An old vending machine promising 'hot foods'. You doubt any of its contents are still edible."
 	vend_delay = 40
+
 	icon_state = "hotfood"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/old/pizza = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/old/burger = 1,
@@ -876,40 +863,29 @@
 	name = "\improper Nippon-tan!"
 	desc = "A distressingly ethnic vending machine loaded with high sucrose low calorie for lack of better words snacks."
 	vend_delay = 30
-	vend_reply = "Dōmo arigatō!"
-	product_slogans = "Tanoshī! ;Itadakimasu!"
+	product_slogans = "Konnichiwa gaijin senpai! ;Notice me senpai!; Kawaii-desu!"
 	icon_state = "weeb"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/wasabi_peas = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/namagashi = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 6,
-					/obj/item/weapon/storage/box/pocky = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 6
+					/obj/item/weapon/reagent_containers/food/snacks/dango = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 8
 					)
 
-	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/wasabi_peas = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/namagashi = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 10,
-					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 10,
-					/obj/item/weapon/storage/box/pocky = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 10,
-					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 5
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/dango = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 80,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 80
 					)
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
 /obj/machinery/vending/sol
-	name = "\improper Sol-Snacks"
-	desc = "A SolCentric vending machine dispensing a number of Sol-themed snacks, along with other foods."
+	name = "\improper Mars-Mart"
+	desc = "A SolCentric vending machine dispensing treats from home."
 	vend_delay = 30
-	product_slogans = "A taste of Sol!"
+	product_slogans = "A taste of home!"
 	icon_state = "solsnack"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/pluto = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/triton = 8,
@@ -917,24 +893,16 @@
 					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/mars = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/venus = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/oort = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 6,
-					/obj/item/weapon/storage/box/gum = 8,
-					/obj/item/weapon/storage/box/admints = 8
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 8
 					)
 
-	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/triton = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/saturn = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/mars = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/venus = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/oort = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 8,
-					/obj/item/weapon/storage/box/gum = 2,
-					/obj/item/weapon/storage/box/admints = 2
+	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 12
 					)
 
 ////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////
@@ -943,83 +911,19 @@
 
 /obj/machinery/vending/snix
 	name = "\improper Snix"
-	desc = "A snack vending machine, offering a selection of slavic beer snacks."
+	desc = "An old snack vending machine, how did it get here? And are the snacks still good?"
 	vend_delay = 30
 	product_slogans = "Snix!"
+
 	icon_state = "snix"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/squid = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/croutons = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/maps = 4,
-					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
-					/obj/item/weapon/storage/box/gum = 8,
-					/obj/item/weapon/storage/box/admints = 8,
-//					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
-//					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 7,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 7,
 					)
 
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
-
-	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/squid = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/croutons = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/maps = 10,
-					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
-					/obj/item/weapon/storage/box/gum = 2,
-					/obj/item/weapon/storage/box/admints = 2,
-//					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
-//					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
-					)
-
-////////////////////snl_vend (Shop-n-Large Snacks!) (ADDED 04/16/2021)//////////////////////////////
-
-/obj/machinery/vending/snlvend
-	name = "\improper Shop-n-Large Snacks!"
-	desc = "A Shop-n-Large brand vending machine! Enjoy all your favorites!"
-	vend_delay = 30
-	product_slogans = "Shop Shop-n-Large!, Buy! Buy! Buy!, Try our new Bread Tube! Now with 10% less sawdust!"
-	icon_state = "snix"
-
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/tuna = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/syndicake = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/chips = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 8
-					)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/unajerky = 1)
-
-	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/tuna = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/semki = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/salo = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/syndicake = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/chips = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 5
-					)
 
