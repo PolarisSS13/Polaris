@@ -3546,13 +3546,13 @@
 	. = ..()
 	reagents.add_reagent("protein", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/hotdog/old
-	name = "old hotdog"
-	desc = "Covered in mold.  You're not gonna eat that, are you?"
-
-/obj/item/weapon/reagent_containers/food/snacks/hotdog/old/Initialize()
-	. = ..()
-	reagents.add_reagent("mold", 6)
+///obj/item/weapon/reagent_containers/food/snacks/hotdog/old (Commented out 04/12/2021 to make room for new old_hotdog)
+//	name = "old hotdog"
+//	desc = "Covered in mold.  You're not gonna eat that, are you?"
+//
+///obj/item/weapon/reagent_containers/food/snacks/hotdog/old/Initialize()
+//	. = ..()
+//	reagents.add_reagent("mold", 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/flatbread
 	name = "flatbread"
@@ -6339,6 +6339,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/squid //ADDITION 04/11/2021
 	name = "\improper Calamari Crisps"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "squid"
 	desc = "Space squid tentacles, Carefully removed (from the squid) then dried into strips of delicious rubbery goodness!"
 	trash = /obj/item/trash/squid
@@ -6354,6 +6355,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/croutons //ADDITION 04/11/2021
 	name = "\improper Suhariki"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "croutons"
 	desc = "Fried bread cubes. Popular in Terran territories."
 	trash = /obj/item/trash/croutons
@@ -6365,6 +6367,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/salo //ADDITION 04/11/2021
 	name = "\improper Salo"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "salo"
 	desc = "Pig fat. Salted. Just as good as it sounds."
 	trash = /obj/item/trash/salo
@@ -6380,6 +6383,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/driedfish //ADDITION 04/11/2021
 	name = "\improper Vobla"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "driedfish"
 	desc = "Dried salted beer snack fish."
 	trash = /obj/item/trash/driedfish
@@ -6475,6 +6479,7 @@
 
 obj/item/weapon/reagent_containers/food/snacks/triton
 	name = "\improper Tidal Gobs"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "tidegobs"
 	desc = "Contains over 9000% of your daily recommended intake of salt."
 	trash = /obj/item/trash/tidegobs
@@ -6486,6 +6491,7 @@ obj/item/weapon/reagent_containers/food/snacks/triton
 
 obj/item/weapon/reagent_containers/food/snacks/saturn
 	name = "\improper Saturn-Os"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "saturno"
 	desc = "A day ration of salt, styrofoam and possibly sawdust."
 	trash = /obj/item/trash/saturno
@@ -6497,6 +6503,7 @@ obj/item/weapon/reagent_containers/food/snacks/saturn
 
 obj/item/weapon/reagent_containers/food/snacks/jupiter
 	name = "\improper Jove Gello"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "jupiter"
 	desc = "By Joove! It's some kind of gel."
 	trash = /obj/item/trash/jupiter
@@ -6508,6 +6515,7 @@ obj/item/weapon/reagent_containers/food/snacks/jupiter
 
 obj/item/weapon/reagent_containers/food/snacks/pluto
 	name = "\improper Plutonian Rods"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "pluto"
 	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
 	trash = /obj/item/trash/pluto
@@ -6519,6 +6527,7 @@ obj/item/weapon/reagent_containers/food/snacks/pluto
 
 obj/item/weapon/reagent_containers/food/snacks/mars
 	name = "\improper Frouka"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "mars"
 	desc = "Celebrate founding day with a steaming self-heated bowl of sweet eggs and taters!"
 	trash = /obj/item/trash/mars
@@ -6530,6 +6539,7 @@ obj/item/weapon/reagent_containers/food/snacks/mars
 
 obj/item/weapon/reagent_containers/food/snacks/venus
 	name = "\improper Venusian Hot Cakes"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "venus"
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
 	trash = /obj/item/trash/venus
@@ -6544,6 +6554,7 @@ obj/item/weapon/reagent_containers/food/snacks/venus
 
 obj/item/weapon/reagent_containers/food/snacks/oort
 	name = "\improper Oort Cloud Rocks"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "oort"
 	desc = "Pop rocks themed on the most important industrial sector in Sol, new formula guarantees fewer shrapnel induced oral injury."
 	trash = /obj/item/trash/oort
@@ -6560,6 +6571,7 @@ obj/item/weapon/reagent_containers/food/snacks/oort
 
 obj/item/weapon/reagent_containers/food/snacks/ricecake
 	name = "rice cake"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "ricecake"
 	desc = "Ancient earth snack food made from balled up rice."
 	nutriment_desc = list("rice" = 4, "sweet?" = 1)
@@ -6568,6 +6580,7 @@ obj/item/weapon/reagent_containers/food/snacks/ricecake
 
 obj/item/weapon/reagent_containers/food/snacks/pokey
 	name = "pokeys"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "pokeys"
 	desc = "A bundle of chocolate coated bisquit sticks."
 	nutriment_desc = list("chocolate" = 4, "bisquit" = 1)
@@ -6576,6 +6589,7 @@ obj/item/weapon/reagent_containers/food/snacks/pokey
 
 obj/item/weapon/reagent_containers/food/snacks/weebonuts
 	name = "\improper Red Alert Nuts!"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
 	desc = "A bag of Red Alert! brand spicy nuts. Goes well with your beer!"
@@ -6589,6 +6603,7 @@ obj/item/weapon/reagent_containers/food/snacks/weebonuts
 
 obj/item/weapon/reagent_containers/food/snacks/chocobanana
 	name = "\improper Choco Banang"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "chocobanana"
 	trash = /obj/item/trash/stick
 	desc = "A chocolate and sprinkles coated banana. On a stick."
@@ -6602,6 +6617,7 @@ obj/item/weapon/reagent_containers/food/snacks/chocobanana
 
 obj/item/weapon/reagent_containers/food/snacks/dango
 	name = "dango"
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "dango"
 	trash = /obj/item/trash/stick
 	desc = "Food dyed rice dumplings on a stick."
@@ -6622,12 +6638,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 /obj/item/weapon/reagent_containers/food/snacks/old/Initialize()
 	.=..()
 	reagents.add_reagent(pick(list(
-				/datum/reagent/fuel,
-				/datum/reagent/toxin/amatoxin,
-				/datum/reagent/toxin/carpotoxin,
-				/datum/reagent/toxin/zombiepowder,
-				/datum/reagent/cryptobiolin,
-				/datum/reagent/psilocybin)), 5)
+				"fuel",
+				"amatoxin",
+				"carpotoxin",
+				"zombiepowder",
+				"cryptobiolin",
+				"psilocybin")), 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/old/pizza
 	name = "\improper Pizza!"
