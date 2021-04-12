@@ -6108,12 +6108,12 @@
 	trash = /obj/item/trash/candy/fruitbar
 	nutriment_amt = 9
 	nutriment_desc = list("apricot" = 2, "sugar" = 2, "dates" = 2, "cranberry" = 2, "apple" = 2)
+	bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 4)
 	reagents.add_reagent("sugar", 4)
-	bitesize = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/chocolatebar
 	name = "Chocolate Bar"
@@ -6123,12 +6123,12 @@
 	center_of_mass = list("x"=15, "y"=15)
 	nutriment_amt = 2
 	nutriment_desc = list("chocolate" = 5)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/chocolatebar/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 2)
 	reagents.add_reagent("coco", 2)
-	bitesize = 2
 
 ////////////////////Candy Bars (1-10)///////////////////////////////////////////////////////////////
 
@@ -6142,11 +6142,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("stale chocolate" = 2, "nougat" = 1, "caramel" = 1)
 	w_class = 1
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb01/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb02
 	name = "\improper Hundred-Thousand Thaler Bar"
@@ -6158,11 +6158,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("chocolate" = 2, "caramel" = 1, "puffed rice" = 1)
 	w_class = 1
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb02/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb03
 	name = "\improper Aerostat Bar"
@@ -6174,11 +6174,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("chocolate" = 4)
 	w_class = 1
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb03/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb04
 	name = "\improper Lars' Saltlakris"
@@ -6190,11 +6190,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("chocolate" = 2, "salt = 1", "licorice" = 1)
 	w_class = 1
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb04/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cb05
 	name = "\improper Andromeda Bar"
@@ -6206,11 +6206,11 @@
 	nutriment_amt = 3
 	nutriment_desc = list("milk chocolate" = 2)
 	w_class = 1
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb05/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 3)
-	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb06
 	name = "\improper Mocha Crunch"
@@ -6222,11 +6222,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("chocolate" = 2, "coffee" = 1, "vanilla wafer" = 1)
 	w_class = 1
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb06/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
-	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb07
 	name = "\improper TaroMilk Bar"
@@ -6238,11 +6238,11 @@
 	nutriment_amt = 4
 	nutriment_desc = list("chocolate" = 2, "taro" = 2)
 	w_class = 1
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb07/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
-	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb08
 	name = "\improper Cronk Bar"
@@ -6254,11 +6254,11 @@
 	nutriment_amt = 3
 	nutriment_desc = list("chocolate" = 2, "malt puffs" = 1)
 	w_class = 1
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb08/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 2)
-	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb09
 	name = "\improper Kaju Mamma! Bar"
@@ -6270,12 +6270,12 @@
 	nutriment_amt = 6
 	nutriment_desc = list("peanuts" = 3, "condensed milk" = 1, "cashews" = 2)
 	w_class = 1
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb09/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 1)
 	reagents.add_reagent("milk", 1)
-	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb10
 	name = "\improper Shantak Bar"
@@ -6287,10 +6287,10 @@
 	nutriment_amt = 5
 	nutriment_desc = list("chocolate" = 2, "caramel" = 1, "peanuts" = 1, "nougat" = 1)
 	w_class = 1
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/cb10/Initialize()
 	. = ..()
-	bitesize = 3
 	reagents.add_reagent("sugar", 1)
 	reagents.add_reagent("protein", 1)
 
@@ -6300,42 +6300,43 @@
 	name = "\improper Tuna Snax"
 	desc = "A packaged dried fish snack, guaranteed to do not contain space carp. Actual fish content may vary."
 	description_fluff = "Launched by Centuari Provisions to target the Tajaran immigrant market, Tuna Snax also found a surprising niche among Vir's sizable Scandinavian population. Elsewhere, the dried fish flakes are widely considered disgusting."
+	trash = /obj/item/trash/tuna
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "tuna"
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=17, "y"=13)
 	nutriment_amt = 3
 	nutriment_desc = list("smoked fish" = 5)
-	trash = /obj/item/trash/tuna
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/tuna/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
-	bitesize = 2
+
 
 /obj/item/weapon/reagent_containers/food/snacks/pistachios
 	name = "pistachios"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "pistachios"
 	desc = "Pistachios. There is absolutely nothing remarkable about these."
+	trash = /obj/item/trash/pistachios
 	filling_color = "#825D26"
 	center_of_mass = list("x"=17, "y"=13)
 	nutriment_desc = list("nuts" = 1)
 	nutriment_amt = 3
 	bitesize = 1
-	trash = /obj/item/trash/pistachios
 
 /obj/item/weapon/reagent_containers/food/snacks/semki
 	name = "\improper Semki"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "semki"
 	desc = "Sunflower seeds. A favorite among both birds and gopniks."
+	trash = /obj/item/trash/semki
 	filling_color = "#68645D"
 	center_of_mass = list("x"=17, "y"=13)
 	nutriment_desc = list("sunflower seeds" = 1)
 	nutriment_amt = 6
 	bitesize = 1
-	trash = /obj/item/trash/semki
 
 /obj/item/weapon/reagent_containers/food/snacks/squid //ADDITION 04/11/2021
 	name = "\improper Calamari Crisps"
@@ -6347,11 +6348,12 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/squid/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
-	bitesize = 1
+
 
 /obj/item/weapon/reagent_containers/food/snacks/croutons //ADDITION 04/11/2021
 	name = "\improper Suhariki"
@@ -6375,11 +6377,12 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fat" = 1, "salt" = 1)
 	nutriment_amt = 2
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/salo/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
-	bitesize = 2
+
 
 /obj/item/weapon/reagent_containers/food/snacks/driedfish //ADDITION 04/11/2021
 	name = "\improper Vobla"
@@ -6391,11 +6394,12 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/driedfish/Initialize()
 	.=..()
 	reagents.add_reagent("protein", 4)
-	bitesize = 1
+
 
 /obj/item/weapon/reagent_containers/food/snacks/sosjerky
 	name = "Scaredy's Private Reserve Beef Jerky"
@@ -6406,11 +6410,12 @@
 	trash = /obj/item/trash/sosjerky
 	filling_color = "#631212"
 	center_of_mass = list("x"=15, "y"=9)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/sosjerky/Initialize()
 		. = ..()
 		reagents.add_reagent("protein", 4)
-		bitesize = 2
+
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin
 	name = "4no Raisins"
@@ -6436,11 +6441,11 @@
 	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been statistically proven to lower survival rates on all missions where it is present."
 	filling_color = "#FFE591"
 	center_of_mass = list("x"=15, "y"=11)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 4)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
 	name = "Cheesie Honkers"
@@ -6453,10 +6458,10 @@
 	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 4
 	nutriment_desc = list("cheese" = 5, "chips" = 2)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers/Initialize()
 	. = ..()
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/syndicake
 	name = "Syndi-Cakes"
@@ -6469,11 +6474,11 @@
 	trash = /obj/item/trash/syndi_cakes
 	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 3, "cake" = 1)
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/syndicake/Initialize()
 	. = ..()
 	reagents.add_reagent("doctorsdelight", 5)
-	bitesize = 3
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
@@ -6548,6 +6553,7 @@ obj/item/weapon/reagent_containers/food/snacks/venus
 	nutriment_desc = list("heat" = 4, "burning!" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/venus/Initialize()
 	.=..()
 	reagents.add_reagent("capsaicin", 5)
@@ -6563,6 +6569,7 @@ obj/item/weapon/reagent_containers/food/snacks/oort
 	nutriment_desc = list("fizz" = 4, "sweet?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
+
 /obj/item/weapon/reagent_containers/food/snacks/oort/Initialize()
 	.=..()
 	reagents.add_reagent("frostoil",5)
@@ -6635,6 +6642,7 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	nutriment_amt = 10
 	bitesize = 3
 	filling_color = "#336b42"
+
 /obj/item/weapon/reagent_containers/food/snacks/old/Initialize()
 	.=..()
 	reagents.add_reagent(pick(list(
@@ -6717,12 +6725,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#663300"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("beef" = 1)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("sodiumchloride", 1)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beans
 	name = "baked beans"
@@ -6733,11 +6741,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("beans" = 1)
 	nutriment_amt = 12
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
 	reagents.add_reagent("nutriment", 5)
-	bitesize = 2
+
 
 ///obj/item/weapon/reagent_containers/food/snacks/canned/tomato (NEED TO SEE HOW TO CHANGE EATING SOUND)
 //	name = "tomato soup"
@@ -6766,6 +6775,7 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#003300"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
+	bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/spinach/Initialize()
 	.=..()
@@ -6773,12 +6783,13 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	reagents.add_reagent("adrenaline", 5)
 	reagents.add_reagent("hyperzine", 5)
 	reagents.add_reagent("iron", 5)
-	bitesize = 5
+
 
 //////////////////////////////Advanced Canned Food//////////////////////////////
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/caviar
 	name = "\improper Terran Caviar"
+	icon = 'icons/obj/food_canned.dmi'
 	icon_state = "fisheggs"
 	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt. Skrell approved!"
 	trash = /obj/item/trash/fishegg
@@ -6786,14 +6797,16 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 6
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/caviar/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
-	bitesize = 1
+
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true
 	name = "\improper Classic Terran Caviar"
+	icon = 'icons/obj/food_canned.dmi'
 	icon_state = "carpeggs"
 	desc = "Terran caviar, or space carp eggs. Banned by the Sol Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
 	trash = /obj/item/trash/carpegg
@@ -6801,12 +6814,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
 	nutriment_amt = 6
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/caviar/true/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4)
-	reagents.add_reagent("carpotoxin", 1)
-	bitesize = 1
+	reagents.add_reagent("protein" = 4, "carpotoxin" = 1)
+
 
 ////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
 
