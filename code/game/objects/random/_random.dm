@@ -40,8 +40,6 @@
 	var/build_path = item_to_spawn()
 	return new build_path(drop_location())
 
-	return A
-
 var/list/random_junk_
 var/list/random_useful_
 /proc/get_random_useful_type()
