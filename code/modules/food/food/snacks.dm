@@ -6717,12 +6717,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#663300"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("beef" = 1)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("sodiumchloride", 1)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beans
 	name = "baked beans"
@@ -6732,12 +6732,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#ff6633"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("beans" = 1)
-	nutriment_amt = 12
+	nutriment_amt = 10
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
 	reagents.add_reagent("nutriment", 5)
-	bitesize = 2
 
 ///obj/item/weapon/reagent_containers/food/snacks/canned/tomato (NEED TO SEE HOW TO CHANGE EATING SOUND)
 //	name = "tomato soup"
@@ -6766,6 +6766,7 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#003300"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
+	bitesize = 5
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/spinach/Initialize()
 	.=..()
@@ -6773,7 +6774,6 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	reagents.add_reagent("adrenaline", 5)
 	reagents.add_reagent("hyperzine", 5)
 	reagents.add_reagent("iron", 5)
-	bitesize = 5
 
 //////////////////////////////Advanced Canned Food//////////////////////////////
 
@@ -6786,11 +6786,11 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 6
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/caviar/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
-	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true
 	name = "\improper Classic Terran Caviar"
@@ -6801,12 +6801,12 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1, "numbing sensation" = 1)
 	nutriment_amt = 6
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/caviar/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("carpotoxin", 1)
-	bitesize = 1
 
 ////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
 
@@ -6851,11 +6851,11 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#ffffff"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("sweet" = 4, "vanilla" = 1)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/lunacake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged/darklunacake
 	name = "\improper Dark Lunar Cake"
@@ -6865,11 +6865,11 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#ffffff"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("sweet" = 4, "chocolate" = 1)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/darklunacake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged/mochicake
 	name = "\improper Dark Lunar Cake"
@@ -6879,8 +6879,9 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	filling_color = "#ffffff"
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("sweet" = 4, "rice" = 1)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/mochicake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
-	bitesize = 2
+
