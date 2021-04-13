@@ -6810,6 +6810,22 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	reagents.add_reagent("protein", 4)
 	reagents.add_reagent("carpotoxin", 1)
 
+/obj/item/weapon/reagent_containers/food/snacks/canned/maps
+	name = "\improper MAPS"
+	icon_state = "maps"
+	desc = "A re-branding of a classic Terran snack! Contains mostly edible ingredients."
+	trash = /obj/item/trash/maps
+	filling_color = "#330066"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("meat" = 1, "salt" = 1)
+	nutriment_amt = 8
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/maps/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 6)
+	reagents.add_reagent("sodiumchloride", 2)
+
 ////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged
