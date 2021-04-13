@@ -318,32 +318,6 @@
 	reagents.add_reagent("sugar", 2)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/chips
-	name = "\improper What-The-Crisps"
-	desc = "Commander Riker's What-The-Crisps, lightly salted."
-	description_fluff = "What-The-Crisps' retro-styled starship commander has been a marketing staple for almost 200 years. Actual potatos haven't been used in potato chips for centuries. They're mostly a denatured nutrient slurry pressed into a chip-shaped mold and salted. Still tastes the same."
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "chips"
-	trash = /obj/item/trash/chips
-	filling_color = "#E8C31E"
-	center_of_mass = list("x"=15, "y"=15)
-	nutriment_amt = 3
-	nutriment_desc = list("salt" = 1, "chips" = 2)
-
-/obj/item/weapon/reagent_containers/food/snacks/chips/Initialize()
-	. = ..()
-	bitesize = 1
-
-/obj/item/weapon/reagent_containers/food/snacks/chips/bbq
-	name = "\improper Legendary BBQ Chips"
-	desc = "You know I can't grab your ghost chips!"
-	description_fluff = "A local brand, Legendary Chips have proudly sponsored Vir's anti-drink-piloting campaign since 2558."
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "chips_bbq"
-	trash = /obj/item/trash/chips/bbq
-	nutriment_amt = 3
-	nutriment_desc = list("salt" = 1, "barbeque sauce" = 2)
-
 /obj/item/weapon/reagent_containers/food/snacks/chips/Initialize()
 	. = ..()
 	bitesize = 1
@@ -2271,40 +2245,6 @@
 	. = ..()
 	reagents.add_reagent("slimejelly", 5)
 
-/obj/item/weapon/reagent_containers/food/snacks/mint
-	name = "mint"
-	desc = "it is only wafer thin."
-	icon_state = "mint"
-	filling_color = "#F2F2F2"
-	center_of_mass = list("x"=16, "y"=14)
-	bitesize = 1
-
-/obj/item/weapon/reagent_containers/food/snacks/mint/Initialize()
-	. = ..()
-	reagents.add_reagent("mint", 1)
-
-/obj/item/weapon/reagent_containers/food/snacks/mint/admints
-	desc = "Spearmint, peppermint's non-festive cousin."
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "admint"
-
-/obj/item/weapon/storage/box/admints
-	name = "Ad-mints"
-	desc = "A pack of air fresheners for your mouth."
-	description_fluff = "Ad-mints earned their name, and reputation when a Major Bill's senior executive attended a meeting at a large a marketing firm and was so astounded by the quality of their complimentary mints, that he immediately bought the company - the mints company, not the ad agency - and began providing 'Ad-mints' on every MBT flight."
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "admint_pack"
-	item_state = "candy"
-	slot_flags = SLOT_EARS
-	w_class = 1
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/mint/admints = 6)
-	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/mint/admints)
-	use_sound = 'sound/items/drop/paper.ogg'
-	drop_sound = 'sound/items/drop/wrapper.ogg'
-	max_storage_space = 6
-	foldable = null
-	trash = /obj/item/trash/admints
-
 /obj/item/weapon/reagent_containers/food/snacks/mushroomsoup
 	name = "chantrelle soup"
 	desc = "A delicious and hearty mushroom soup."
@@ -3721,56 +3661,6 @@
 /obj/item/weapon/reagent_containers/food/snacks/meatcube/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 15)
-
-/obj/item/weapon/reagent_containers/food/snacks/tastybread
-	name = "bread tube"
-	desc = "Bread in a tube. Chewy...and surprisingly tasty."
-	description_fluff = "This is the product that brought Centauri Provisions into the limelight. A product of the earliest extrasolar colony of Heaven, the Bread Tube, while bland, contains all the nutrients a spacer needs to get through the day and is decidedly edible when compared to some of its competitors. Due to the high-fructose corn syrup content of NanoTrasen's own-brand bread tubes, many jurisdictions classify them as a confectionary."
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "tastybread"
-	trash = /obj/item/trash/tastybread
-	filling_color = "#A66829"
-	center_of_mass = list("x"=17, "y"=16)
-	nutriment_amt = 6
-	nutriment_desc = list("bread" = 2, "sweetness" = 3)
-
-/obj/item/weapon/reagent_containers/food/snacks/tastybread/Initialize()
-	. = ..()
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
-	name = "\improper SkrellSnax"
-	desc = "Cured fungus shipped all the way from Qerr'balak, almost like jerky! Almost."
-	description_fluff = "Despite the packaging, most SkrellSnax sold in Vir are produced using locally-grown, Qerr'Balak-native Go'moa fungi in controversial Skrell-owned biodomes on the suface of Sif. SkrellSnax were originally a product of Natuna, designed to welcome Ue-Katish refugees to their colony. The brand was recreated by Centauri Provisions after Natuna and SolGov broke off diplomatic relations."
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "skrellsnacks"
-	trash = /obj/item/trash/skrellsnax
-	filling_color = "#A66829"
-	center_of_mass = list("x"=15, "y"=12)
-	nutriment_amt = 10
-	nutriment_desc = list("mushroom" = 5, "salt" = 5)
-
-/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks/Initialize()
-	. = ..()
-	bitesize = 3
-
-/obj/item/weapon/reagent_containers/food/snacks/unajerky
-	name = "Moghes Imported Sissalik Jerky"
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "unathitinred"
-	desc = "An incredibly well made jerky, shipped in all the way from Moghes."
-	description_fluff = "The exact meat and spices used in the curing of Sissalik Jerky are a well-kept secret, and thought to not exist at all outside of Hegemony space. Many have tried to replicate the flavour, but none have come close, so the brand remains a highly prized import. "
-	trash = /obj/item/trash/unajerky
-	filling_color = "#631212"
-	center_of_mass = list("x"=15, "y"=9)
-	drop_sound = 'sound/items/drop/soda.ogg'
-	pickup_sound = 'sound/items/pickup/soda.ogg'
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/unajerky/Initialize()
-	. =..()
-	reagents.add_reagent("protein", 8)
-	reagents.add_reagent("capsaicin", 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/sashimi
 	name = "sashimi"
@@ -6029,7 +5919,58 @@
 	reagents.add_reagent("nutriment", 8)
 	bitesize = 1
 
+
+/obj/item/weapon/reagent_containers/food/snacks/chocolatebar //non-vending machine item
+	name = "Chocolate Bar"
+	desc = "Such sweet, fattening food."
+	icon_state = "chocolatebar"
+	filling_color = "#7D5F46"
+	center_of_mass = list("x"=15, "y"=15)
+	nutriment_amt = 2
+	nutriment_desc = list("chocolate" = 5)
+
+/obj/item/weapon/reagent_containers/food/snacks/chocolatebar/Initialize()
+	. = ..()
+	reagents.add_reagent("sugar", 2)
+	reagents.add_reagent("coco", 2)
+	bitesize = 2
+
+
 ////////////////////Candy Vend Items///////////////////////////////////////////////////////////////
+
+/obj/item/weapon/reagent_containers/food/snacks/mint
+	name = "mint"
+	desc = "it is only wafer thin."
+	icon_state = "mint"
+	filling_color = "#F2F2F2"
+	center_of_mass = list("x"=16, "y"=14)
+	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/mint/Initialize()
+	. = ..()
+	reagents.add_reagent("mint", 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/mint/admints
+	desc = "Spearmint, peppermint's non-festive cousin."
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "admint"
+
+/obj/item/weapon/storage/box/admints
+	name = "Ad-mints"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "admint_pack"
+	item_state = "candy"
+	desc = "A pack of air fresheners for your mouth."
+	description_fluff = "Ad-mints earned their name, and reputation when a Major Bill's senior executive attended a meeting at a large a marketing firm and was so astounded by the quality of their complimentary mints, that he immediately bought the company - the mints company, not the ad agency - and began providing 'Ad-mints' on every MBT flight."
+	trash = /obj/item/trash/admints
+	slot_flags = SLOT_EARS
+	w_class = 1
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/mint/admints = 6)
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/mint/admints)
+	use_sound = 'sound/items/drop/paper.ogg'
+	drop_sound = 'sound/items/drop/wrapper.ogg'
+	max_storage_space = 6
+	foldable = null
 
 /obj/item/weapon/reagent_containers/food/snacks/candy
 	name = "\improper Grandma Ellen's Hard Candy"
@@ -6114,21 +6055,6 @@
 	reagents.add_reagent("nutriment", 4)
 	reagents.add_reagent("sugar", 4)
 	bitesize = 6
-
-/obj/item/weapon/reagent_containers/food/snacks/chocolatebar
-	name = "Chocolate Bar"
-	desc = "Such sweet, fattening food."
-	icon_state = "chocolatebar"
-	filling_color = "#7D5F46"
-	center_of_mass = list("x"=15, "y"=15)
-	nutriment_amt = 2
-	nutriment_desc = list("chocolate" = 5)
-
-/obj/item/weapon/reagent_containers/food/snacks/chocolatebar/Initialize()
-	. = ..()
-	reagents.add_reagent("sugar", 2)
-	reagents.add_reagent("coco", 2)
-	bitesize = 2
 
 ////////////////////Candy Bars (1-10)///////////////////////////////////////////////////////////////
 
@@ -6296,46 +6222,139 @@
 
 ////////////////////Misc Vend Items////////////////////////////////////////////////////////////////
 
+/obj/item/weapon/reagent_containers/food/snacks/chips
+	name = "\improper What-The-Crisps"
+	desc = "Commander Riker's What-The-Crisps, lightly salted."
+	description_fluff = "What-The-Crisps' retro-styled starship commander has been a marketing staple for almost 200 years. Actual potatos haven't been used in potato chips for centuries. They're mostly a denatured nutrient slurry pressed into a chip-shaped mold and salted. Still tastes the same."
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "chips"
+	trash = /obj/item/trash/chips
+	filling_color = "#E8C31E"
+	center_of_mass = list("x"=15, "y"=15)
+	nutriment_amt = 3
+	nutriment_desc = list("salt" = 1, "chips" = 2)
+
+/obj/item/weapon/reagent_containers/food/snacks/chips/Initialize()
+	. = ..()
+	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/chips/bbq
+	name = "\improper Legendary BBQ Chips"
+	desc = "You know I can't grab your ghost chips!"
+	description_fluff = "A local brand, Legendary Chips have proudly sponsored Vir's anti-drink-piloting campaign since 2558."
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "chips_bbq"
+	trash = /obj/item/trash/chips/bbq
+	nutriment_amt = 3
+	nutriment_desc = list("salt" = 1, "barbeque sauce" = 2)
+
+/obj/item/weapon/reagent_containers/food/snacks/tastybread
+	name = "bread tube"
+	desc = "Bread in a tube. Chewy...and surprisingly tasty."
+	description_fluff = "This is the product that brought Centauri Provisions into the limelight. A product of the earliest extrasolar colony of Heaven, the Bread Tube, while bland, contains all the nutrients a spacer needs to get through the day and is decidedly edible when compared to some of its competitors. Due to the high-fructose corn syrup content of NanoTrasen's own-brand bread tubes, many jurisdictions classify them as a confectionary."
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "tastybread"
+	trash = /obj/item/trash/tastybread
+	filling_color = "#A66829"
+	center_of_mass = list("x"=17, "y"=16)
+	nutriment_amt = 6
+	nutriment_desc = list("bread" = 2, "sweetness" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/tastybread/Initialize()
+	. = ..()
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks
+	name = "\improper SkrellSnax"
+	desc = "Cured fungus shipped all the way from Qerr'balak, almost like jerky! Almost."
+	description_fluff = "Despite the packaging, most SkrellSnax sold in Vir are produced using locally-grown, Qerr'Balak-native Go'moa fungi in controversial Skrell-owned biodomes on the suface of Sif. SkrellSnax were originally a product of Natuna, designed to welcome Ue-Katish refugees to their colony. The brand was recreated by Centauri Provisions after Natuna and SolGov broke off diplomatic relations."
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "skrellsnacks"
+	trash = /obj/item/trash/skrellsnax
+	filling_color = "#A66829"
+	center_of_mass = list("x"=15, "y"=12)
+	nutriment_amt = 10
+	nutriment_desc = list("mushroom" = 5, "salt" = 5)
+
+/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks/Initialize()
+	. = ..()
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/unajerky
+	name = "Moghes Imported Sissalik Jerky"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "unathitinred"
+	desc = "An incredibly well made jerky, shipped in all the way from Moghes."
+	description_fluff = "The exact meat and spices used in the curing of Sissalik Jerky are a well-kept secret, and thought to not exist at all outside of Hegemony space. Many have tried to replicate the flavour, but none have come close, so the brand remains a highly prized import. "
+	trash = /obj/item/trash/unajerky
+	filling_color = "#631212"
+	center_of_mass = list("x"=15, "y"=9)
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/unajerky/Initialize()
+	. =..()
+	reagents.add_reagent("protein", 8)
+	reagents.add_reagent("capsaicin", 2)
+
+
+/obj/item/weapon/reagent_containers/food/snacks/sosjerky
+	name = "Scaredy's Private Reserve Beef Jerky"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "sosjerky"
+	desc = "Beef jerky made from the finest space-reared cows."
+	description_fluff = "Raising cows in low-gravity environments has the natural result of particularly tender meat. The jerking process largely undoes this apparent benefit, but it's just too damn efficient to ship not to."
+	trash = /obj/item/trash/sosjerky
+	filling_color = "#631212"
+	center_of_mass = list("x"=15, "y"=9)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/sosjerky/Initialize()
+		. = ..()
+	reagents.add_reagent("protein", 4)
+
+
 /obj/item/weapon/reagent_containers/food/snacks/tuna
 	name = "\improper Tuna Snax"
-	desc = "A packaged dried fish snack, guaranteed to do not contain space carp. Actual fish content may vary."
-	description_fluff = "Launched by Centuari Provisions to target the Tajaran immigrant market, Tuna Snax also found a surprising niche among Vir's sizable Scandinavian population. Elsewhere, the dried fish flakes are widely considered disgusting."
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "tuna"
+	desc = "A packaged dried fish snack, guaranteed to do not contain space carp. Actual fish content may vary."
+	description_fluff = "Launched by Centuari Provisions to target the Tajaran immigrant market, Tuna Snax also found a surprising niche among Vir's sizable Scandinavian population. Elsewhere, the dried fish flakes are widely considered disgusting."
+	trash = /obj/item/trash/tuna
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=17, "y"=13)
 	nutriment_amt = 3
 	nutriment_desc = list("smoked fish" = 5)
-	trash = /obj/item/trash/tuna
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/tuna/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/pistachios
 	name = "pistachios"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "pistachios"
 	desc = "Pistachios. There is absolutely nothing remarkable about these."
+	trash = /obj/item/trash/pistachios
 	filling_color = "#825D26"
 	center_of_mass = list("x"=17, "y"=13)
 	nutriment_desc = list("nuts" = 1)
 	nutriment_amt = 3
 	bitesize = 1
-	trash = /obj/item/trash/pistachios
 
 /obj/item/weapon/reagent_containers/food/snacks/semki
 	name = "\improper Semki"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "semki"
 	desc = "Sunflower seeds. A favorite among both birds and gopniks."
+	trash = /obj/item/trash/semki
 	filling_color = "#68645D"
 	center_of_mass = list("x"=17, "y"=13)
 	nutriment_desc = list("sunflower seeds" = 1)
 	nutriment_amt = 6
 	bitesize = 1
-	trash = /obj/item/trash/semki
 
 /obj/item/weapon/reagent_containers/food/snacks/squid //ADDITION 04/11/2021
 	name = "\improper Calamari Crisps"
@@ -6347,11 +6366,11 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/squid/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 4)
-	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/croutons //ADDITION 04/11/2021
 	name = "\improper Suhariki"
@@ -6375,11 +6394,11 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fat" = 1, "salt" = 1)
 	nutriment_amt = 2
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/salo/true/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 8)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/driedfish //ADDITION 04/11/2021
 	name = "\improper Vobla"
@@ -6391,26 +6410,11 @@
 	center_of_mass = "x=15;y=9"
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 2
+	bitesize = 1
 
 /obj/item/weapon/reagent_containers/food/snacks/driedfish/Initialize()
 	.=..()
 	reagents.add_reagent("protein", 4)
-	bitesize = 1
-
-/obj/item/weapon/reagent_containers/food/snacks/sosjerky
-	name = "Scaredy's Private Reserve Beef Jerky"
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "sosjerky"
-	desc = "Beef jerky made from the finest space-reared cows."
-	description_fluff = "Raising cows in low-gravity environments has the natural result of particularly tender meat. The jerking process largely undoes this apparent benefit, but it's just too damn efficient to ship not to."
-	trash = /obj/item/trash/sosjerky
-	filling_color = "#631212"
-	center_of_mass = list("x"=15, "y"=9)
-
-/obj/item/weapon/reagent_containers/food/snacks/sosjerky/Initialize()
-		. = ..()
-		reagents.add_reagent("protein", 4)
-		bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin
 	name = "4no Raisins"
@@ -6421,8 +6425,8 @@
 	trash = /obj/item/trash/raisins
 	filling_color = "#343834"
 	center_of_mass = list("x"=15, "y"=4)
-	nutriment_amt = 6
 	nutriment_desc = list("dried raisins" = 6)
+	nutriment_amt = 6
 
 /obj/item/weapon/reagent_containers/food/snacks/no_raisin/Initialize()
 	. = ..()
@@ -6436,11 +6440,11 @@
 	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been statistically proven to lower survival rates on all missions where it is present."
 	filling_color = "#FFE591"
 	center_of_mass = list("x"=15, "y"=11)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 4)
-	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
 	name = "Cheesie Honkers"
@@ -6464,16 +6468,16 @@
 	icon_state = "syndi_cakes"
 	desc = "An extremely moist snack cake that tastes just as good after being nuked."
 	description_fluff = "Spacer Snack Cakes' meaner, tastier cousin. The Syndi-Cakes brand was at risk of dissolution in 2429 when it was revealed that the entire production chain was a Nos Amis joint. The brand was quickly aquired by Centauri Provisions and some mild hallucinogenic 'add-ins' were axed from the recipe."
+	trash = /obj/item/trash/syndi_cakes
 	filling_color = "#FF5D05"
 	center_of_mass = list("x"=16, "y"=10)
-	trash = /obj/item/trash/syndi_cakes
-	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 3, "cake" = 1)
+	nutriment_amt = 4
+	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/syndicake/Initialize()
 	. = ..()
 	reagents.add_reagent("doctorsdelight", 5)
-	bitesize = 3
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
