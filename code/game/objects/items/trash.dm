@@ -309,3 +309,9 @@
 	name = "stick"
 	desc = "a stick from some snack or other food item, not even useful as crafting material."
 	icon_state = "stick"
+
+/obj/item/trash/maps//ADDITION 04/13/2021
+	name = "empty MAPS can"
+	icon_state = "maps"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
