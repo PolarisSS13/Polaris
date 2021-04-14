@@ -867,16 +867,22 @@
 	icon_state = "weeb"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/dango = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/wasabi_peas = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/namagashi = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/pokey = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 8
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 6
 					)
 
-	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 80,
-					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 80,
-					/obj/item/weapon/reagent_containers/food/snacks/dango = 80,
-					/obj/item/weapon/reagent_containers/food/snacks/pokey = 80,
-					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 80
+	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/ricecake = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/wasabi_peas = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/namagashi = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/pokey = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 10
 					)
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
@@ -893,16 +899,20 @@
 					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/mars = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/venus = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/oort = 8
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 6
 					)
 
-	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/triton = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/saturn = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/mars = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/venus = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/oort = 12
+	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/triton = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/saturn = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/jupiter = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/mars = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/venus = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/oort = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 8
 					)
 
 ////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////

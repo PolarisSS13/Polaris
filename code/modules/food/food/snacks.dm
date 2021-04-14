@@ -5983,12 +5983,27 @@
 	center_of_mass = list("x"=15, "y"=15)
 	nutriment_amt = 1
 	nutriment_desc = list("candy" = 1)
-
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/namagashi //ADDITION 04/14/2021
+	name = "\improper Ryo-kucha Namagashi"
+	desc = "Sweet Japanese gummy like candy that are just bursting with flavor!"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "namagashi"
+	trash = /obj/item/trash/namagashi
+	filling_color = "#7D5F46"
+	center_of_mass = list("x"=15, "y"=15)
+	nutriment_amt = 1
+	nutriment_desc = list("candy" = 2, "sweetness" = 2)
 	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/namagashi/Initialize()
+	. = ..()
+	reagents.add_reagent("sugar", 2)
 
 /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar
 	name = "\improper SwoleMAX protein bar"
@@ -6280,6 +6295,21 @@
 	. = ..()
 	bitesize = 3
 
+/obj/item/weapon/reagent_containers/food/snacks/sosjerky
+	name = "Scaredy's Private Reserve Beef Jerky"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "sosjerky"
+	desc = "Beef jerky made from the finest space-reared cows."
+	description_fluff = "Raising cows in low-gravity environments has the natural result of particularly tender meat. The jerking process largely undoes this apparent benefit, but it's just too damn efficient to ship not to."
+	trash = /obj/item/trash/sosjerky
+	filling_color = "#631212"
+	center_of_mass = list("x"=15, "y"=9)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/sosjerky/Initialize()
+	. =..()
+	reagents.add_reagent("protein", 8)
+
 /obj/item/weapon/reagent_containers/food/snacks/unajerky
 	name = "Moghes Imported Sissalik Jerky"
 	icon = 'icons/obj/food_snacks.dmi'
@@ -6297,23 +6327,6 @@
 	. =..()
 	reagents.add_reagent("protein", 8)
 	reagents.add_reagent("capsaicin", 2)
-
-
-/obj/item/weapon/reagent_containers/food/snacks/sosjerky
-	name = "Scaredy's Private Reserve Beef Jerky"
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "sosjerky"
-	desc = "Beef jerky made from the finest space-reared cows."
-	description_fluff = "Raising cows in low-gravity environments has the natural result of particularly tender meat. The jerking process largely undoes this apparent benefit, but it's just too damn efficient to ship not to."
-	trash = /obj/item/trash/sosjerky
-	filling_color = "#631212"
-	center_of_mass = list("x"=15, "y"=9)
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/sosjerky/Initialize()
-		. = ..()
-	reagents.add_reagent("protein", 4)
-
 
 /obj/item/weapon/reagent_containers/food/snacks/tuna
 	name = "\improper Tuna Snax"
@@ -6432,19 +6445,19 @@
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 
-/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie
-	name = "Spacer Snack Cake"
-	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "space_twinkie"
-	desc = "Guaranteed to survive longer than you will."
-	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been statistically proven to lower survival rates on all missions where it is present."
-	filling_color = "#FFE591"
-	center_of_mass = list("x"=15, "y"=11)
-	bitesize = 2
-
-/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/Initialize()
-	. = ..()
-	reagents.add_reagent("sugar", 4)
+///obj/item/weapon/reagent_containers/food/snacks/spacetwinkie (Commented out to replace with packaged version 04/14/2021)
+//	name = "Spacer Snack Cake"
+//	icon = 'icons/obj/food_snacks.dmi'
+//	icon_state = "space_twinkie"
+//	desc = "Guaranteed to survive longer than you will."
+//	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been statistically proven to lower survival rates on all missions where it is present."
+//	filling_color = "#FFE591"
+//	center_of_mass = list("x"=15, "y"=11)
+//	bitesize = 2
+//
+///obj/item/weapon/reagent_containers/food/snacks/spacetwinkie/Initialize()
+//	. = ..()
+//	reagents.add_reagent("sugar", 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers
 	name = "Cheesie Honkers"
@@ -6481,7 +6494,7 @@
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
-obj/item/weapon/reagent_containers/food/snacks/triton
+/obj/item/weapon/reagent_containers/food/snacks/triton
 	name = "\improper Tidal Gobs"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "tidegobs"
@@ -6493,7 +6506,7 @@ obj/item/weapon/reagent_containers/food/snacks/triton
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/saturn
+/obj/item/weapon/reagent_containers/food/snacks/saturn
 	name = "\improper Saturn-Os"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "saturno"
@@ -6505,7 +6518,7 @@ obj/item/weapon/reagent_containers/food/snacks/saturn
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/jupiter
+/obj/item/weapon/reagent_containers/food/snacks/jupiter
 	name = "\improper Jove Gello"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "jupiter"
@@ -6517,7 +6530,7 @@ obj/item/weapon/reagent_containers/food/snacks/jupiter
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/pluto
+/obj/item/weapon/reagent_containers/food/snacks/pluto
 	name = "\improper Plutonian Rods"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "pluto"
@@ -6529,7 +6542,7 @@ obj/item/weapon/reagent_containers/food/snacks/pluto
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/mars
+/obj/item/weapon/reagent_containers/food/snacks/mars
 	name = "\improper Frouka"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "mars"
@@ -6541,7 +6554,7 @@ obj/item/weapon/reagent_containers/food/snacks/mars
 	nutriment_amt = 8
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/venus
+/obj/item/weapon/reagent_containers/food/snacks/venus
 	name = "\improper Venusian Hot Cakes"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "venus"
@@ -6557,7 +6570,23 @@ obj/item/weapon/reagent_containers/food/snacks/venus
 	.=..()
 	reagents.add_reagent("capsaicin", 5)
 
-obj/item/weapon/reagent_containers/food/snacks/oort
+/obj/item/weapon/reagent_containers/food/snacks/sun_snax //ADDITION 04/14/2021
+	name = "\improper Sun Snax!"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "sun_snax"
+	desc = "A Sol favorite, Sun Snax! Sun dried corn chips coated in a super spicy seasoning!"
+	trash = /obj/item/trash/sun_snax
+	filling_color = "#d2c63f"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("heat" = 3, "burning!" = 2)
+	nutriment_amt = 3
+	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/sun_snax/Initialize()
+	.=..()
+	reagents.add_reagent("capsaicin", 6)
+
+/obj/item/weapon/reagent_containers/food/snacks/oort
 	name = "\improper Oort Cloud Rocks"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "oort"
@@ -6575,7 +6604,7 @@ obj/item/weapon/reagent_containers/food/snacks/oort
 
 ////////////////////weeb_vend (Nippon-tan!) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
-obj/item/weapon/reagent_containers/food/snacks/ricecake
+/obj/item/weapon/reagent_containers/food/snacks/ricecake
 	name = "rice cake"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "ricecake"
@@ -6584,16 +6613,17 @@ obj/item/weapon/reagent_containers/food/snacks/ricecake
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/pokey
+/obj/item/weapon/reagent_containers/food/snacks/pokey
 	name = "pokeys"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "pokeys"
 	desc = "A bundle of chocolate coated bisquit sticks."
+	trash = /obj/item/trash/pokey
 	nutriment_desc = list("chocolate" = 4, "biscuit" = 1)
 	nutriment_amt = 5
 	bitesize = 2
 
-obj/item/weapon/reagent_containers/food/snacks/weebonuts
+/obj/item/weapon/reagent_containers/food/snacks/weebonuts
 	name = "\improper Red Alert Nuts!"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "weebonuts"
@@ -6607,8 +6637,22 @@ obj/item/weapon/reagent_containers/food/snacks/weebonuts
 	.=..()
 	reagents.add_reagent("capsaicin",1)
 
-obj/item/weapon/reagent_containers/food/snacks/chocobanana
-	name = "\improper Choco Banang"
+/obj/item/weapon/reagent_containers/food/snacks/wasabi_peas //ADDITION 04/14/2021
+	name = "\improper Hadokikku Peas"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "wasabi_peas"
+	trash = /obj/item/trash/wasabi_peas
+	desc = "A bag of Hadokikku brand wasabi peas, a delicious snack imported directly form Sol."
+	nutriment_desc = list("peas" = 4, "spicyness" = 1)
+	nutriment_amt = 6
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/wasabi_peas/Initialize()
+	.=..()
+	reagents.add_reagent("capsaicin",1)
+
+/obj/item/weapon/reagent_containers/food/snacks/chocobanana
+	name = "\improper Choco Banana"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "chocobanana"
 	trash = /obj/item/trash/stick
@@ -6621,12 +6665,23 @@ obj/item/weapon/reagent_containers/food/snacks/chocobanana
 	.=..()
 	reagents.add_reagent("sprinkles", 10)
 
-obj/item/weapon/reagent_containers/food/snacks/dango
+/obj/item/weapon/reagent_containers/food/snacks/goma_dango //ADDITION 04/14/2021
+	name = "\improper Goma dango"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "dango"
+	trash = /obj/item/trash/stick
+	desc = "Sticky rice balls served on a skewer with a crispy rice flour outer layer and a thick red bean paste inner layer."
+	nutriment_desc = list("rice" = 4, "earthy flavor" = 1)
+	nutriment_amt = 5
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/hanami_dango //ADDITION 04/14/2021
 	name = "\improper Hanami dango"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "dango"
 	trash = /obj/item/trash/stick
-	desc = "Food dyed rice dumplings on a stick."
+	desc = "Three rice balls, each with a unique flavoring, served on a skewer. A traditional Japanese treat."
+	description_fluff = "Hanami dango is a traditional Japanese treat that is normally served during Hanami, a tradition dated back as early as the 8th century. Hanami, or cherry blossom viewing, is a spring time celebration that celebrates the cherry blossoms turning of color. It is a time of renewal, of life, and of beauty."
 	nutriment_desc = list("rice" = 4, "earthy flavor" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6830,6 +6885,21 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	reagents.add_reagent("protein", 6)
 	reagents.add_reagent("sodiumchloride", 2)
 
+/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry
+	name = "\improper Appleberry Bits"
+	icon_state = "appleberry"
+	desc = "A classic snack favored by Sol astronauts. Made from dried apple-hybidized berries grown on the lunar colonies."
+	trash = /obj/item/trash/appleberry
+	filling_color = "#FFFFFF"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("apple" = 1, "sweetness" = 1)
+	nutriment_amt = 8
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/appleberry/Initialize()
+	. = ..()
+	reagents.add_reagent("milk", 8)
+
 ////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged
@@ -6875,7 +6945,7 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	nutriment_desc = list("sweetness" = 4, "vanilla" = 1)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/lunacake/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/packaged/lunacake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 
@@ -6889,7 +6959,7 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	nutriment_desc = list("sweetness" = 4, "chocolate" = 1)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/darklunacake/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/packaged/darklunacake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 
@@ -6903,7 +6973,24 @@ obj/item/weapon/reagent_containers/food/snacks/dango
 	nutriment_desc = list("sweetness" = 4, "rice" = 1)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/mochicake/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/packaged/mochicake/Initialize()
 	. = ..()
 	reagents.add_reagent("nutriment", 6)
 
+//////////////Advanced Package Foods//////////////
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie //ADDED 04/14/2021
+	name = "\improper Spacer Snack Cake"
+	icon = 'icons/obj/food_canned.dmi'
+	icon_state = "spacer_cake"
+	desc = "Guaranteed to survive longer than you will."
+	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been statistically proven to lower survival rates on all missions where it is present."
+	trash = /obj/item/trash/spacer_cake_wrap
+	filling_color = "#FFE591"
+	center_of_mass = list("x"=15, "y"=11)
+	nutriment_desc = list("sweetness" = 4, "cake" = 2)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie/Initialize()
+	. = ..()
+	reagents.add_reagent("sugar", 4)
