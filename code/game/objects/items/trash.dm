@@ -315,3 +315,27 @@
 	icon_state = "maps"
 	drop_sound = 'sound/items/drop/soda.ogg'
 	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/spacer_cake_wrap//ADDITION 04/14/2021
+	name = "snack cake wrapper"
+	icon_state = "spacer_cake"
+
+/obj/item/trash/sun_snax//ADDITION 04/14/2021
+	name = "sun snax bag"
+	icon_state = "sun_snax"
+
+/obj/item/trash/wasabi_peas//ADDITION 04/14/2021
+	name = "wasabi peas bag"
+	icon_state = "wasabi_peas"
+
+/obj/item/trash/namagashi//ADDITION 04/14/2021
+	name = "namagashi bag"
+	icon_state = "namagashi"
+
+/obj/item/trash/pokey//ADDITION 04/14/2021
+	name = "pokey bag"
+	icon_state = "pokey"
+
+/obj/item/trash/appleberry//ADDITION 04/14/2021
+	name = "appleberry can"
+	icon_state = "appleberry"
