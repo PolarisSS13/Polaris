@@ -19,7 +19,7 @@
 /decl/hierarchy/outfit/job/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender")
 	uniform = /obj/item/clothing/under/rank/bartender
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/bartender
 	pda_type = /obj/item/device/pda/bar
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/bar = 1)
 
@@ -38,7 +38,7 @@
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/chef
 	pda_type = /obj/item/device/pda/chef
 
 /decl/hierarchy/outfit/job/service/chef/cook
@@ -54,13 +54,13 @@
 	backpack = /obj/item/weapon/storage/backpack/hydroponics
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/hyd
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/hyd
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/botanist
 	pda_type = /obj/item/device/pda/botanist
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
 	uniform = /obj/item/clothing/under/rank/janitor
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
 /decl/hierarchy/outfit/job/librarian
@@ -70,6 +70,9 @@
 	id_type = /obj/item/weapon/card/id/civilian
 	pda_type = /obj/item/device/pda/librarian
 
+/decl/hierarchy/outfit/job/librarian/journalist
+	id_type = /obj/item/weapon/card/id/civilian/journalist
+
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
 	l_ear = /obj/item/device/radio/headset/ia
@@ -78,14 +81,14 @@
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
 	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/internal_affairs
 	pda_type = /obj/item/device/pda/lawyer
 
 /decl/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
 	l_hand = /obj/item/weapon/storage/bible
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
 
 /decl/hierarchy/outfit/job/explorer
@@ -97,7 +100,7 @@
 	gloves = /obj/item/clothing/gloves/black
 	l_ear = /obj/item/device/radio/headset
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/civilian
+	id_type = /obj/item/weapon/card/id/science/explorer
 	pda_slot = slot_belt
 	pda_type = /obj/item/device/pda/cargo // Brown looks more rugged
 	r_pocket = /obj/item/device/gps/explorer

@@ -137,6 +137,11 @@
 	can_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
 	slot_flags = SLOT_BELT
 
+/obj/item/weapon/material/knife/machete/cyborg
+	name = "integrated machete"
+	desc = "A sharp machete often found attached to robots."
+	unbreakable = TRUE
+
 /obj/item/weapon/material/knife/tacknife/survival
 	name = "survival knife"
 	desc = "A hunting grade survival knife."

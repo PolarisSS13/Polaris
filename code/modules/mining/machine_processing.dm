@@ -8,6 +8,7 @@
 	name = "production machine console"
 	icon = 'icons/obj/machines/mining_machines.dmi'
 	icon_state = "console"
+	layer = ABOVE_WINDOW_LAYER
 	density = TRUE
 	anchored = TRUE
 
@@ -64,7 +65,7 @@
 		dat += "<A href='?src=\ref[src];choice=claim'>Claim points.</A><br>"
 	else
 		dat += "No ID inserted.  <A href='?src=\ref[src];choice=insert'>Insert ID.</A><br>"
-
+	dat += "High-speed processing is <A href='?src=\ref[src];toggle_speed=1'>[(machine.speed_process ? "<font color='green'>active</font>" : "<font color='red'>inactive</font>")]."
 	dat += "<hr><table>"
 
 	for(var/ore in machine.ores_processing)
@@ -121,6 +122,10 @@
 
 		show_all_ores = !show_all_ores
 
+	if(href_list["toggle_speed"])
+
+		machine.toggle_speed()
+
 	if(href_list["choice"])
 		if(istype(inserted_id))
 			if(href_list["choice"] == "eject")
@@ -162,16 +167,24 @@
 	var/list/ores_stored[0]
 	var/static/list/alloy_data
 	var/active = FALSE
+	var/tick = 0
 
 	var/points = 0
 	var/static/list/ore_values = list(
 		"sand" = 1,
 		"hematite" = 1,
 		"carbon" = 1,
+		"raw copper" = 1,
+		"raw tin" = 1,
+		"void opal" = 3,
+		"painite" = 3,
+		"quartz" = 3,
+		"raw bauxite" = 5,
 		"phoron" = 15,
 		"silver" = 16,
 		"gold" = 18,
 		"marble" = 20,
+		"rutile" = 20,
 		"uranium" = 30,
 		"diamond" = 50,
 		"platinum" = 40,
@@ -207,6 +220,25 @@
 		if(src.output) break
 	return
 
+/obj/machinery/mineral/processing_unit/proc/toggle_speed(var/forced)
+	var/area/refinery_area = get_area(src)
+	if(forced)
+		speed_process = forced
+	else
+		speed_process = !speed_process // switching gears
+	if(speed_process) // high gear
+		STOP_MACHINE_PROCESSING(src)
+		START_PROCESSING(SSfastprocess, src)
+	else // low gear
+		STOP_PROCESSING(SSfastprocess, src)
+		START_MACHINE_PROCESSING(src)
+	for(var/obj/machinery/mineral/unloading_machine/unloader in refinery_area.contents)
+		unloader.toggle_speed()
+	for(var/obj/machinery/conveyor_switch/cswitch in refinery_area.contents)
+		cswitch.toggle_speed()
+	for(var/obj/machinery/mineral/stacking_machine/stacker in refinery_area.contents)
+		stacker.toggle_speed()
+
 /obj/machinery/mineral/processing_unit/process()
 
 	if (!src.output || !src.input)
@@ -216,11 +248,11 @@
 		return
 
 	var/list/tick_alloys = list()
+	if(speed_process)
+		tick++
 
 	//Grab some more ore to process this tick.
-	for(var/i = 0,i<sheets_per_tick,i++)
-		var/obj/item/weapon/ore/O = locate() in input.loc
-		if(!O) break
+	for(var/obj/item/weapon/ore/O in input.loc)
 		if(!isnull(ores_stored[O.material]))
 			ores_stored[O.material]++
 			points += ore_values[O.material] // Give Points!
@@ -308,7 +340,11 @@
 		else
 			continue
 
-	console.updateUsrDialog()
+	if(!(tick % 10) && speed_process)
+		console.updateUsrDialog()
+		tick = 0
+	else
+		console.updateUsrDialog()
 
 #undef PROCESS_NONE
 #undef PROCESS_SMELT

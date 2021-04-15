@@ -2,8 +2,7 @@
 	name = "station intercom (General)"
 	desc = "Talk through this."
 	icon_state = "intercom"
-	plane = TURF_PLANE
-	layer = ABOVE_TURF_LAYER
+	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
 	w_class = ITEMSIZE_LARGE
 	canhear_range = 2

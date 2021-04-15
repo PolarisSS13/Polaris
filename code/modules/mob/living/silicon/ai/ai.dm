@@ -393,9 +393,7 @@ var/list/ai_verbs_default = list(
 
 	// hack to display shuttle timer
 	if(emergency_shuttle.online())
-		var/obj/machinery/computer/communications/C = locate() in machines
-		if(C)
-			C.post_status("shuttle")
+		post_status(src, "shuttle", user = src)
 
 /mob/living/silicon/ai/proc/ai_recall_shuttle()
 	set category = "AI Commands"
@@ -974,7 +972,7 @@ var/list/ai_verbs_default = list(
 	drop_new_multicam()
 
 //Special subtype kept around for global announcements
-/mob/living/silicon/ai/announcer/
+/mob/living/silicon/ai/announcer
 	is_dummy = 1
 
 /mob/living/silicon/ai/announcer/Initialize()

@@ -8,7 +8,7 @@
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 	slot_flags = SLOT_EARS
-	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/seromi/ears.dmi')
+	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi')
 
 	var/translate_binary = 0
 	var/translate_hive = 0
@@ -79,6 +79,9 @@
 				append = "_r"
 
 	return "[..()][append]"
+
+/obj/item/device/radio/headset/tgui_state(mob/user)
+	return GLOB.tgui_inventory_state
 
 /obj/item/device/radio/headset/syndicate
 	origin_tech = list(TECH_ILLEGAL = 3)
@@ -385,7 +388,7 @@
 	return
 
 
-/obj/item/device/radio/headset/proc/recalculateChannels(var/setDescription = 0)
+/obj/item/device/radio/headset/recalculateChannels(var/setDescription = 0)
 	src.channels = list()
 	src.translate_binary = 0
 	src.translate_hive = 0

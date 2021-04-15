@@ -69,6 +69,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/vodka = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/wine = 5,
+					/obj/item/weapon/reagent_containers/food/drinks/bottle/jager = 5,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/hushedwhisper = 15,
 					/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 15,
@@ -296,6 +297,7 @@
 					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 10,
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 10,
 					/obj/item/weapon/storage/rollingpapers = 10,
+					/obj/item/weapon/storage/rollingpapers/blunt = 10,
 					/obj/item/weapon/storage/chewables/tobacco = 5,
 					/obj/item/weapon/storage/chewables/tobacco/fine = 5,
 					/obj/item/weapon/storage/box/matches = 10,
@@ -324,6 +326,7 @@
 					/obj/item/weapon/storage/fancy/cigarettes/jerichos = 22,
 					/obj/item/weapon/storage/fancy/cigarettes/menthols = 18,
 					/obj/item/weapon/storage/rollingpapers = 10,
+					/obj/item/weapon/storage/rollingpapers/blunt = 20,
 					/obj/item/weapon/storage/chewables/tobacco = 10,
 					/obj/item/weapon/storage/chewables/tobacco/fine = 20,
 					/obj/item/weapon/storage/box/matches = 1,
@@ -390,6 +393,7 @@
 	description_fluff = "NanoMed is NanoTrasen's medical science division, and provides almost all of the modern medbay essentials in-house at no extra charge. By using this vending machine, employees accept liability for products that may or may not be temporarily replaced by placebos or experimental treatments."
 	product_ads = "Go save some lives!;The best stuff for your medbay.;Only the finest tools.;Natural chemicals!;This stuff saves lives.;Don't you want some?"
 	icon_state = "wallmed"
+	layer = ABOVE_WINDOW_LAYER
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(/obj/item/stack/medical/bruise_pack = 2,
 				/obj/item/stack/medical/ointment = 2,
@@ -407,6 +411,7 @@
 	desc = "A wall-mounted version of the NanoMed, containing only vital first aid equipment."
 	description_fluff = "NanoMed is NanoTrasen's medical science division, and provides almost all of the modern medbay essentials in-house at no extra charge. By using this vending machine, employees accept liability for products that may or may not be temporarily replaced by placebos or experimental treatments."
 	icon_state = "wallmed"
+	layer = ABOVE_WINDOW_LAYER
 	density = 0 //It is wall-mounted, and thus, not dense. --Superxpdude
 	products = list(/obj/item/weapon/reagent_containers/hypospray/autoinjector = 5,
 				/obj/item/weapon/reagent_containers/syringe/antitoxin = 3,
@@ -577,8 +582,9 @@
 	desc = "An old sweet water vending machine,how did this end up here?"
 	icon_state = "sovietsoda"
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
-	products = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/space_up = 30) // TODO Russian soda can
-	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/bottle/cola = 20) // TODO Russian cola can
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/boda = 30,		//ADDITION 04/03/2021
+					/obj/item/weapon/reagent_containers/food/drinks/cans/kompot = 20)	//ADDITION 04/03/2021
+	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/kvass = 20) 	//ADDITION 04/03/2021
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
 
@@ -784,3 +790,53 @@
 					/obj/item/stack/cable_coil/random = 4)
 	premium = list(/obj/item/weapon/storage/box/wormcan/deluxe = 1)
 	contraband = list(/obj/item/weapon/storage/box/wormcan/deluxe = 1)
+
+
+/obj/machinery/vending/virtual_autodrobe
+	name = "Virtual AutoDrobe"
+	desc = "A virtual vending machine for virtual avatar customization."
+	icon_state = "Theater"
+	product_slogans = "Dress for success!;Suited and booted!;It's show time!;Why leave style up to fate? Use AutoDrobe!"
+	products = list(/obj/item/weapon/storage/box/syndie_kit/chameleon = 20)
+
+
+/obj/machinery/vending/deathmatch
+	name = "Annihilation Shop (Green)"
+	desc = "A virtual vending machine for virtual murder equipment. This one's for green team."
+	products = list(/obj/item/weapon/melee/energy/sword = 5,
+					/obj/item/weapon/melee/energy/axe = 5,
+					/obj/item/weapon/melee/baton/loaded = 5,
+					/obj/item/weapon/gun/energy/laser = 5,
+					/obj/item/weapon/gun/projectile/shotgun/pump/combat = 5,
+					/obj/item/ammo_magazine/clip/c12g/pellet = 40,
+					/obj/item/ammo_magazine/clip/c12g = 50,
+					/obj/item/weapon/storage/box/flashbangs = 2,
+					/obj/item/clothing/head/helmet/swat = 5,
+					/obj/item/clothing/suit/armor/vest = 5,
+					/obj/item/clothing/head/helmet/thunderdome = 5,
+					/obj/item/clothing/shoes/brown = 5,
+					/obj/item/clothing/suit/armor/tdome/green = 5,
+					/obj/item/clothing/under/color/green = 5,
+					/obj/item/weapon/reagent_containers/pill/adminordrazine = 10,
+					/obj/item/weapon/tool/crowbar = 1)
+
+
+/obj/machinery/vending/deathmatch/red
+	name = "Annihilation Shop (Red)"
+	desc = "A virtual vending machine for virtual murder equipment. This one's for red team."
+	products = list(/obj/item/weapon/melee/energy/sword = 5,
+					/obj/item/weapon/melee/energy/axe = 5,
+					/obj/item/weapon/melee/baton/loaded = 5,
+					/obj/item/weapon/gun/energy/laser = 5,
+					/obj/item/weapon/gun/projectile/shotgun/pump/combat = 5,
+					/obj/item/ammo_magazine/clip/c12g/pellet = 40,
+					/obj/item/ammo_magazine/clip/c12g = 50,
+					/obj/item/weapon/storage/box/flashbangs = 2,
+					/obj/item/clothing/head/helmet/swat = 5,
+					/obj/item/clothing/suit/armor/vest = 5,
+					/obj/item/clothing/head/helmet/thunderdome = 5,
+					/obj/item/clothing/shoes/brown = 5,
+					/obj/item/clothing/suit/armor/tdome/red = 5,
+					/obj/item/clothing/under/color/red = 5,
+					/obj/item/weapon/reagent_containers/pill/adminordrazine = 10,
+					/obj/item/weapon/tool/crowbar = 1)
