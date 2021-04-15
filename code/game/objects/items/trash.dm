@@ -247,7 +247,7 @@
 
 /obj/item/trash/salo //ADDITION 04/11/2021
 	name = "salo pack"
-	icon_state = "salo"
+	icon_state = "pigfat"
 
 /obj/item/trash/croutons //ADDITION 04/11/2021
 	name = "suhariki pack"
@@ -279,7 +279,7 @@
 
 /obj/item/trash/saturno//ADDITION 04/11/2021
 	name = "\improper saturn-Os bag"
-	icon_state = "saturno"
+	icon_state = "saturn0s"
 
 /obj/item/trash/jupiter//ADDITION 04/11/2021
 	name = "gello cup"
