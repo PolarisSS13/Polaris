@@ -6400,7 +6400,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/salo //ADDITION 04/11/2021
 	name = "\improper Salo"
 	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "salo"
+	icon_state = "pigfat"
 	desc = "Pig fat. Salted. Just as good as it sounds."
 	trash = /obj/item/trash/salo
 	filling_color = "#e0bcbc"
@@ -6509,7 +6509,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/saturn
 	name = "\improper Saturn-Os"
 	icon = 'icons/obj/food_snacks.dmi'
-	icon_state = "saturno"
+	icon_state = "saturn0s"
 	desc = "A peanut flavored snack that looks like the rings of Saturn!"
 	trash = /obj/item/trash/saturno
 	filling_color = "#dca319"
@@ -6611,6 +6611,24 @@
 	desc = "Ancient earth snack food made from balled up rice."
 	nutriment_desc = list("rice" = 4, "sweetness" = 1)
 	nutriment_amt = 5
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/dorayaki //ADDITION 04/14/2021
+	name = "dorayaki"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "dorayaki"
+	desc = "Two small pancake-like patties made from castella wrapped around a filling of sweet azuki bean paste."
+	nutriment_desc = list("cake" = 3, "sweetness" = 2)
+	nutriment_amt = 6
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/daifuku //ADDITION 04/14/2021
+	name = "daifuku"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "daifuku"
+	desc = "Small round mochi stuffed with sweetened red bean paste."
+	nutriment_desc = list("cake" = 2, "sweetness" = 3)
+	nutriment_amt = 6
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/pokey
