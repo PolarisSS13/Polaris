@@ -318,7 +318,7 @@
 
 /obj/item/trash/spacer_cake_wrap//ADDITION 04/14/2021
 	name = "snack cake wrapper"
-	icon_state = "spacer_cake"
+	icon_state = "spacer_cake_wrap"
 
 /obj/item/trash/sun_snax//ADDITION 04/14/2021
 	name = "sun snax bag"
