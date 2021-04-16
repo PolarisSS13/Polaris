@@ -157,7 +157,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/semki = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 12,
-					/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 6,
@@ -187,7 +187,7 @@
 				/obj/item/weapon/reagent_containers/food/snacks/semki = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 1,
-				/obj/item/weapon/reagent_containers/food/snacks/spacetwinkie = 1,
+				/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/tastybread = 2,
 				/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 4,
 				/obj/item/weapon/storage/box/gum = 15,
@@ -872,7 +872,9 @@
 					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/pokey = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 6
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 6
 					)
 
 	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 5,
@@ -882,7 +884,9 @@
 					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/pokey = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 10
+					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 5
 					)
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
@@ -924,7 +928,6 @@
 	desc = "A snack vending machine, offering a selection of slavic beer snacks."
 	vend_delay = 30
 	product_slogans = "Snix!"
-
 	icon_state = "snix"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 7,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 7,
@@ -936,4 +939,48 @@
 					)
 
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
+
+////////////////////snl_vend (Shop-n-Large Snacks!) (ADDED 04/16/2021)//////////////////////////////
+
+/obj/machinery/vending/snlvend
+	name = "\improper Shop-n-Large Snacks!"
+	desc = "A Shop-n-Large brand vending machine! Enjoy all your favorites!"
+	vend_delay = 30
+	product_slogans = "Shop Shop-n-Large!, Buy! Buy! Buy!, Try our new Bread Tube! Now with 10% less sawdust!"
+	icon_state = "snix"
+
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/tuna = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/syndicake = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chips = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 8
+					)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/unajerky = 1)
+
+	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/tuna = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/semki = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/syndicake = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/no_raisin = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/sosjerky = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/chips = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 5
+					)
 
