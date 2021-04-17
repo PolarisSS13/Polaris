@@ -332,9 +332,9 @@
 	name = "namagashi bag"
 	icon_state = "namagashi"
 
-/obj/item/trash/pokey//ADDITION 04/14/2021
-	name = "pokey bag"
-	icon_state = "pokey"
+/obj/item/trash/pocky//ADDITION 04/14/2021
+	name = "pocky bag"
+	icon_state = "pocky"
 
 /obj/item/trash/appleberry//ADDITION 04/14/2021
 	name = "appleberry can"
