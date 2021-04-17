@@ -929,16 +929,37 @@
 	vend_delay = 30
 	product_slogans = "Snix!"
 	icon_state = "snix"
-	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 7,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 7,
-					/obj/item/weapon/reagent_containers/food/snacks/squid = 7,
-					/obj/item/weapon/reagent_containers/food/snacks/croutons = 7,
-					/obj/item/weapon/reagent_containers/food/snacks/salo = 7,
-					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 7,
-					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 7,
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/maps = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
+					/obj/item/clothing/mask/chewable/candy/gum = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/mint = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
 
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
+
+		prices = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/squid = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/croutons = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/salo = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/maps = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
+					/obj/item/clothing/mask/chewable/candy/gum = 2,
+					/obj/item/weapon/reagent_containers/food/snacks/mint = 2,
+					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
+					)
 
 ////////////////////snl_vend (Shop-n-Large Snacks!) (ADDED 04/16/2021)//////////////////////////////
 
