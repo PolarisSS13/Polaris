@@ -6602,6 +6602,31 @@
 	.=..()
 	reagents.add_reagent("frostoil",5)
 
+/obj/item/weapon/reagent_containers/food/snacks/pretzels
+	name = "\improper Value Pretzel Snack"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "pretzel"
+	trash = /obj/item/trash/pretzel
+	desc = "A tasty bread like snack that is seasoned with what tastes like salt... but you're not so sure it's actually salt."
+	filling_color = "#916E36"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("salt" = 2, "pretzel" = 3)
+	nutriment_amt = 3
+	bitesize = 1
+
+/obj/item/weapon/reagent_containers/food/snacks/hakarl
+	name = "\improper Indigo Co. Hákarl"
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "hakarl"
+	trash = /obj/item/trash/hakarl
+	desc = "Fermented space shark, like chewing a urine soaked mattress."
+	description_fluff = "A form of fermented shark that originated on Earth as far back as the 17th century. Modern Hakarl is made from vat-made fermented shark and is distributed across the galaxy as a delicacy. However, few are able to stand the smell or taste of the meat."
+	filling_color = "#916E36"
+	center_of_mass = "x=15;y=9"
+	nutriment_desc = list("fish" = 2, "salt" = 2, "ammonia" = 1)
+	nutriment_amt = 4
+	bitesize = 1
+
 ////////////////////weeb_vend (Nippon-tan!) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
 /obj/item/weapon/reagent_containers/food/snacks/ricecake
