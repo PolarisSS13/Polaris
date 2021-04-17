@@ -871,7 +871,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/namagashi = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/pokey = 8,
+					/obj/item/weapon/storage/box/pocky = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 6
@@ -883,7 +883,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/namagashi = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/hanami_dango = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/goma_dango = 10,
-					/obj/item/weapon/reagent_containers/food/snacks/pokey = 5,
+					/obj/item/weapon/storage/box/pocky = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 5
@@ -944,13 +944,13 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/storage/box/gum = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/mint = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
+//					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
+//					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
 
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
 
-		prices = list(/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
+	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/semki = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/caviar = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/squid = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/croutons = 8,
@@ -961,8 +961,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/storage/box/gum = 2,
 					/obj/item/weapon/reagent_containers/food/snacks/mint = 2,
-					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
+//					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
+//					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
 
 ////////////////////snl_vend (Shop-n-Large Snacks!) (ADDED 04/16/2021)//////////////////////////////
