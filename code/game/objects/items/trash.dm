@@ -339,3 +339,21 @@
 /obj/item/trash/appleberry//ADDITION 04/14/2021
 	name = "appleberry can"
 	icon_state = "appleberry"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
+/obj/item/trash/sweetration//ADDITION 04/20/2021
+	name = "desert ration bag"
+	icon_state = "baseration"
+
+/obj/item/trash/genration//ADDITION 04/20/2021
+	name = "generic ration bag"
+	icon_state = "genration"
+
+/obj/item/trash/meatration//ADDITION 04/20/2021
+	name = "meat ration bag"
+	icon_state = "meatration"
+
+/obj/item/trash/vegration//ADDITION 04/20/2021
+	name = "veggie ration bag"
+	icon_state = "vegration"
