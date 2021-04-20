@@ -921,7 +921,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 6,
 					/obj/item/weapon/storage/box/gum = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/mint = 8
+					/obj/item/weapon/storage/box/admints = 8
 					)
 
 	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 5,
@@ -934,7 +934,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 8,
 					/obj/item/weapon/storage/box/gum = 2,
-					/obj/item/weapon/reagent_containers/food/snacks/mint = 2
+					/obj/item/weapon/storage/box/admints = 2
 					)
 
 ////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////
@@ -957,7 +957,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/canned/maps = 4,
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/storage/box/gum = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/mint = 8,
+					/obj/item/weapon/storage/box/admints = 8,
 //					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
 //					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
@@ -974,7 +974,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/canned/maps = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/storage/box/gum = 2,
-					/obj/item/weapon/reagent_containers/food/snacks/mint = 2,
+					/obj/item/weapon/storage/box/admints = 2,
 //					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
 //					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
