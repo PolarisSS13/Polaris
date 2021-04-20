@@ -7037,3 +7037,63 @@
 /obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 4)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/genration //ADDED 04/20/2021
+	name = "generic ration"
+	icon = 'icons/obj/food_canned.dmi'
+	icon_state = "genration"
+	desc = "The most basic form of ration - meant to barely sustain life."
+	trash = /obj/item/trash/genration
+	filling_color = "#FFFFFF"
+	center_of_mass = list("x"=15, "y"=11)
+	nutriment_desc = list("chalk" = 6)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/genration/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration //ADDED 04/20/2021
+	name = "meat ration"
+	icon = 'icons/obj/food_canned.dmi'
+	icon_state = "meatration"
+	desc = "A meat flavored ration. Emphasis on 'meat flavored' as there is likely no real meat in this."
+	trash = /obj/item/trash/meatration
+	filling_color = "#FFFFFF"
+	center_of_mass = list("x"=15, "y"=11)
+	nutriment_desc = list("chalk" = 3, "meat" = 3)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration //ADDED 04/20/2021
+	name = "veggie ration"
+	icon = 'icons/obj/food_canned.dmi'
+	icon_state = "vegration"
+	desc = "Dried veggies in a bag. Depressing and near flavorless."
+	trash = /obj/item/trash/vegration
+	filling_color = "#FFFFFF"
+	center_of_mass = list("x"=15, "y"=11)
+	nutriment_desc = list("saddness" = 3, "veggie" = 3)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration //ADDED 04/20/2021 (Contraband Item)
+	name = "desert ration"
+	icon = 'icons/obj/food_canned.dmi'
+	icon_state = "baseration"
+	desc = "A rare ration from an era gone by filled with a sweet tasty treat that no modern company has been able to recreate."
+	trash = /obj/item/trash/sweetration
+	filling_color = "#FFFFFF"
+	center_of_mass = list("x"=15, "y"=11)
+	nutriment_desc = list("sweetness" = 5, "cake" = 1)
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration/Initialize()
+	. = ..()
+	reagents.add_reagent("sugar", 6)
