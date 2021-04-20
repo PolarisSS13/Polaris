@@ -577,6 +577,8 @@
 	/obj/item/weapon/reagent_containers/cooking_container/fryer = 4)
 	contraband = list(/obj/item/weapon/material/knife/butch = 2)
 
+///////////////////////Soviet Stuff///////////////////////////////////////
+
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
 	desc = "An old sweet water vending machine,how did this end up here?"
@@ -587,6 +589,18 @@
 	contraband = list(/obj/item/weapon/reagent_containers/food/drinks/cans/kvass = 20) 	//ADDITION 04/03/2021
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
+
+/obj/machinery/vending/sovietvend //ADDITION 04/20/2021
+	name = "Ration Station"
+	desc = "An old ration vendor unit. How it even still functional?"
+	icon_state = "sovietvend"
+	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
+	products = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/genration = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration = 8)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2)
+
+//////////////////////////////////////////////////////////////////////////
 
 /obj/machinery/vending/tool
 	name = "YouTool"
