@@ -503,10 +503,10 @@
 					/obj/item/seeds/glowshroom = 2,
 					/obj/item/seeds/libertymycelium = 2,
 					/obj/item/seeds/mtearseed = 2,
-					  /obj/item/seeds/nettleseed = 2,
-					  /obj/item/seeds/reishimycelium = 2,
-					  /obj/item/seeds/reishimycelium = 2,
-					  /obj/item/seeds/shandseed = 2,)
+					/obj/item/seeds/nettleseed = 2,
+					/obj/item/seeds/reishimycelium = 2,
+					/obj/item/seeds/reishimycelium = 2,
+					/obj/item/seeds/shandseed = 2,)
 	premium = list(/obj/item/weapon/reagent_containers/spray/waterflower = 1)
 
 /**
@@ -861,7 +861,6 @@
 	name = "\improper Hot Foods"
 	desc = "An old vending machine promising 'hot foods'. You doubt any of its contents are still edible."
 	vend_delay = 40
-
 	icon_state = "hotfood"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/old/pizza = 1,
 					/obj/item/weapon/reagent_containers/food/snacks/old/burger = 1,
@@ -877,6 +876,7 @@
 	name = "\improper Nippon-tan!"
 	desc = "A distressingly ethnic vending machine loaded with high sucrose low calorie for lack of better words snacks."
 	vend_delay = 30
+	vend_reply = "Dōmo arigatō!"
 	product_slogans = "Tanoshī! ;Itadakimasu!"
 	icon_state = "weeb"
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 8,
