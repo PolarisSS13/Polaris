@@ -958,8 +958,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/storage/box/gum = 8,
 					/obj/item/weapon/storage/box/admints = 8,
-//					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
-//					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
+					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
 
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/true = 1)
@@ -975,8 +975,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/storage/box/gum = 2,
 					/obj/item/weapon/storage/box/admints = 2,
-//					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
-//					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
+					/obj/item/weapon/reagent_containers/food/snacks/pretzels = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/hakarl = 8
 					)
 
 ////////////////////snl_vend (Shop-n-Large Snacks!) (ADDED 04/16/2021)//////////////////////////////
