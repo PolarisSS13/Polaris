@@ -16,20 +16,25 @@
 	. = ..()
 	.["items"] = list()
 	for(var/T in tokens)
-		var/list/subtok = splittext(T, " ")
-		if(subtok.len != 2)
-			continue
-		
-		var/path = text2path(subtok[1])
-		var/num  = text2num( subtok[2])
+		var/list/L = assemble_token(T)
+		if(LAZYLEN(L))
+			.["items"][L[1]] = text2num(L[2])
 
-		// Ensure we've found a token describing the quantity of a path
-		if(subtok.len != 2 || \
-				!ispath(path) || \
-				!isnum(num))
-			continue
-		
-		.["items"][path] = text2num(num)
+/datum/persistent/storage/proc/assemble_token(var/T)
+	var/list/subtok = splittext(T, " ")
+	if(subtok.len != 2)
+		return null
+	
+	subtok[1] = text2path(subtok[1])
+	subtok[2] = text2num( subtok[2])
+
+	// Ensure we've found a token describing the quantity of a path
+	if(subtok.len != 2 || \
+			!ispath(subtok[1]) || \
+			!isnum(subtok[2]))
+		return null
+	
+	return subtok
 
 /datum/persistent/storage/IsValidEntry(var/atom/entry)
 	return ..() && istype(entry, target_type)
@@ -68,58 +73,9 @@
 	. = list()
 	for(var/path in L)
 		for(var/i in 1 to L[path])
-			. += create_item(path)
+			var/atom/A = create_item(path)
+			if(!QDELETED(A))
+				. += A
 
 /datum/persistent/storage/proc/create_item(var/path)
 	return new path()
-
-
-
-/datum/persistent/storage/smartfridge/get_storage_list(var/obj/machinery/smartfridge/entry)
-	if(!istype(entry))
-		return ..()
-
-	. = list()
-	for(var/datum/stored_item/I in entry.item_records)
-		.[I.item_path] = I.get_amount()
-
-/datum/persistent/storage/smartfridge/CreateEntryInstance(var/turf/creating, var/list/tokens)
-	var/obj/machinery/smartfridge/S = find_specific_instance(creating)
-	var/list/L = generate_items(tokens["items"])
-	for(var/atom/A in L)
-		if(S.accept_check(A))
-			S.stock(A)
-		else
-			qdel(A) // Should clean this up here, it couldn't be stocked
-
-
-
-
-
-/datum/persistent/storage/smartfridge/sheet_storage
-	name = "sheet_storage"
-	max_storage = 50
-	store_per_type = TRUE
-	target_type = /obj/machinery/smartfridge/sheets
-
-/datum/persistent/storage/smartfridge/sheet_storage/generate_items(var/list/L)
-	. = list()
-	for(var/obj/item/stack/material/S as anything in L)
-		if(!ispath(S, /obj/item/stack/material))
-			log_debug("Warning: Sheet_storage persistent datum tried to create [S]")
-			continue
-
-		var/count = L[S]
-		while(count > 0)
-			S = new S
-			S.amount = min(count, S.get_max_amount())
-			count -= S.get_amount()
-			. += S
-
-/datum/persistent/storage/smartfridge/produce
-	name = "fruit_storage"
-	max_storage = 20
-	store_per_type = FALSE
-	target_type = /obj/machinery/smartfridge/produce
-
-/datum/persistent/storage/smartfridge/produce/create_item(var/path)

@@ -2719,6 +2719,7 @@
 #include "code\modules\persistence\effects\paper.dm"
 #include "code\modules\persistence\effects\paper_sticky.dm"
 #include "code\modules\persistence\effects\trash.dm"
+#include "code\modules\persistence\storage\smartfridge.dm"
 #include "code\modules\persistence\storage\storage.dm"
 #include "code\modules\planet\planet.dm"
 #include "code\modules\planet\sif.dm"
