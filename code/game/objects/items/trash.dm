@@ -342,6 +342,14 @@
 	drop_sound = 'sound/items/drop/soda.ogg'
 	pickup_sound = 'sound/items/pickup/soda.ogg'
 
+/obj/item/trash/hakarl//ADDITION 04/22/2021
+	name = "\improper Indigo Co. Hákarl bag"
+	icon_state = "hakarl"
+
+/obj/item/trash/pretzel//ADDITION 04/22/2021
+	name = "\improper Value Pretzel Snack"
+	icon_state = "pretzel"
+
 /obj/item/trash/sweetration//ADDITION 04/20/2021
 	name = "desert ration bag"
 	icon_state = "baseration"
