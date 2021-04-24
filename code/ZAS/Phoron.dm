@@ -47,12 +47,12 @@ obj/var/contaminated = 0
 		return 0
 	else if(istype(src,/obj/item/weapon/storage/backpack))
 		return 0 //Cannot be washed :(
-	//VOREStation Addition start
-	else if(isbelly(loc))
-		return 0
-	else if(ismob(loc) && isbelly(loc.loc))
-		return 0
-	//VOREStation Addition end
+	// Polaris Edit start
+	// else if(isbelly(loc))
+	// 	return 0
+	// else if(ismob(loc) && isbelly(loc.loc))
+	// 	return 0
+	// Polaris Edit end
 	else if(istype(src,/obj/item/clothing))
 		return 1
 
@@ -122,7 +122,6 @@ obj/var/contaminated = 0
 		if(burn_eyes && head && (head.body_parts_covered & EYES) && (head.item_flags & AIRTIGHT))
 			burn_eyes = 0
 
-		//VOREStation Edit - NIF Support
 		if(nif && nif.flag_check(NIF_V_UVFILTER,NIF_FLAGS_VISION))
 			burn_eyes = 0
 

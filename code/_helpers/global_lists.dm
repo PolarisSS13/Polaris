@@ -35,16 +35,16 @@ var/global/list/NT_poster_designs = list()
 
 //Preferences stuff
 	//Hairstyles
-var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
+var/global/list/hair_styles_list = list()				//stores /datum/sprite_accessory/hair indexed by name
 var/global/list/hair_styles_male_list = list()
 var/global/list/hair_styles_female_list = list()
-var/global/list/facial_hair_styles_list = list()	//stores /datum/sprite_accessory/facial_hair indexed by name
+var/global/list/facial_hair_styles_list = list()		//stores /datum/sprite_accessory/facial_hair indexed by name
 var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
-	//Underwear
-var/datum/category_collection/underwear/global_underwear = new()
+var/global/list/wing_styles_list = list()				// Stores /datum/sprite_accessory/wing indexed by type
+var/datum/category_collection/underwear/global_underwear = new() //Underwear
 
 	//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag")
@@ -214,12 +214,12 @@ var/global/list/string_slot_flags = list(
 		var/decl/closet_appearance/app = new T()
 		GLOB.closet_appearances[T] = app
 
-	// VOREStation Add - Vore Modes!
-	paths = typesof(/datum/digest_mode)
-	for(var/T in paths)
-		var/datum/digest_mode/DM = new T
-		GLOB.digest_modes[DM.id] = DM
-	// VOREStation Add End
+	// Polaris Removal - Vore Modes!
+	// paths = typesof(/datum/digest_mode)
+	// for(var/T in paths)
+	// 	var/datum/digest_mode/DM = new T
+	// 	GLOB.digest_modes[DM.id] = DM
+	// Polaris Removal End
 
 	return 1
 
