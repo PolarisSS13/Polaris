@@ -1290,7 +1290,7 @@ var/mob/dview/dview_mob = new
 /proc/dview(var/range = world.view, var/center, var/invis_flags = 0)
 	if(!center)
 		return
-	if(!dview_mob) //VOREStation Add: Debugging
+	if(!dview_mob)
 		dview_mob = new
 		log_error("Had to recreate the dview mob!")
 
@@ -1649,13 +1649,13 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 	. += new /obj/screen/plane_master/main{plane = MOB_PLANE}
 	. += new /obj/screen/plane_master/cloaked								//Cloaked atoms!
 
-	//VOREStation Add - Random other plane masters
+	//Random other plane masters
 	. += new /obj/screen/plane_master{plane = PLANE_CH_STATUS_R}			//Right-side status icon
 	. += new /obj/screen/plane_master{plane = PLANE_CH_HEALTH_VR}			//Health bar but transparent at 100
 	. += new /obj/screen/plane_master{plane = PLANE_CH_BACKUP}				//Backup implant status
 	. += new /obj/screen/plane_master{plane = PLANE_CH_VANTAG}				//Vore Antags
 	. += new /obj/screen/plane_master{plane = PLANE_AUGMENTED}				//Augmented reality
-	//VOREStation Add End
+
 /proc/CallAsync(datum/source, proctype, list/arguments)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))

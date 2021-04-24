@@ -54,7 +54,7 @@
 /proc/log_access_in(client/new_client)
 	if (config.log_access)
 		var/message = "[key_name(new_client)] - IP:[new_client.address] - CID:[new_client.computer_id] - BYOND v[new_client.byond_version]"
-		WRITE_LOG(diary, "ACCESS IN: [message]") //VOREStation Edit
+		WRITE_LOG(diary, "ACCESS IN: [message]")
 
 /proc/log_access_out(mob/last_mob)
 	if (config.log_access)

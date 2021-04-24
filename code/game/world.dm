@@ -1,4 +1,4 @@
-#define RECOMMENDED_VERSION 501
+#define RECOMMENDED_VERSION 512
 /world/New()
 	to_world_log("Map Loading Complete")
 	//logs
@@ -119,7 +119,6 @@ var/world_topic_spam_protect_time = world.timeofday
 				if(C.holder)
 					if(C.holder.fakekey)
 						continue
-					admins[C.key] = C.holder.rank
 				players += C.key
 
 			s["players"] = players.len
@@ -271,7 +270,7 @@ var/world_topic_spam_protect_time = world.timeofday
 			info["hasbeenrev"] = M.mind ? M.mind.has_been_rev : "No mind"
 			info["stat"] = M.stat
 			info["type"] = M.type
-			if(isliving(M, /mob/living))
+			if(isliving(M))
 				var/mob/living/L = M
 				info["damage"] = list2params(list(
 							oxy = L.getOxyLoss(),
