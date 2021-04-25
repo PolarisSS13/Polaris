@@ -1133,6 +1133,9 @@
 	//A slew of bits that may be affected by our species change
 	regenerate_icons()
 
+	// Update our available emote list.
+	update_emotes()
+
 	if(species)
 		if(mind)
 			apply_traits()
@@ -1617,3 +1620,6 @@
 			to_chat(src, span("warning", "\The [rig]'s visor has shuddenly deactivated!"))
 
 	..()
+
+/mob/living/carbon/human/get_mob_riding_slots()
+	return list(back, head, wear_suit)
