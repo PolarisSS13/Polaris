@@ -66,7 +66,7 @@ var/list/gear_datums = list()
 	for(var/gear_name in gear_datums)
 		var/datum/gear/G = gear_datums[gear_name]
 
-		if(G.whitelisted != pref.species)
+		if(G.whitelisted && G.whitelisted != pref.species)
 			continue
 		if(max_cost && G.cost > max_cost)
 			continue
