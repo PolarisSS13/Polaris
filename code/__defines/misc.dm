@@ -436,3 +436,7 @@ GLOBAL_LIST_INIT(all_volume_channels, list(
 #define NTOS_EMAIL_NEWMESSAGE		2
 
 #define GET_DECL(D) (ispath(D, /decl) ? (decls_repository.fetched_decls[D] || decls_repository.get_decl(D)) : null)
+
+#define LOADOUT_WHITELIST_OFF    0
+#define LOADOUT_WHITELIST_LAX    1
+#define LOADOUT_WHITELIST_STRICT 2
