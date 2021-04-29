@@ -91,3 +91,6 @@
 	light_range = 4
 	light_power = 3
 	light_color = "#3300ff"
+
+/obj/effect/projectile/muzzle/pointdefense
+	icon_state = "muzzle_pointdef"

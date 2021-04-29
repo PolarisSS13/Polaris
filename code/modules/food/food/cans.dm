@@ -38,7 +38,7 @@
 	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent("spacemountainwind", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
@@ -92,7 +92,7 @@
 	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent("space_up", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime
@@ -103,7 +103,7 @@
 	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/lemon_lime/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent("lemon_lime", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea
@@ -114,7 +114,7 @@
 	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent("icetea", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice
@@ -125,7 +125,7 @@
 	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/grape_juice/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent("grapejuice", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/tonic
@@ -171,3 +171,36 @@
 	. = ..()
 	reagents.add_reagent("rootbeer", 30)
 
+//ADDITIONS BELOW THIS LINE MADE ON 04/03/2021
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/kvass
+	name = "\improper Kvass"
+	desc = "A true Slavic soda."
+	description_fluff = "A classic slavic beverage which many Space Russians still enjoy to this day. Fun fact, it is actually considered a weak beer by non-russians."
+	icon_state = "kvass"
+	center_of_mass = list("x"=16, "y"=10)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/kvass/Initialize()
+	. = ..()
+	reagents.add_reagent("kvass", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/kompot
+	name = "\improper Kompot"
+	desc = "A taste of russia in the summertime - canned for you consumption."
+	description_fluff = "A sweet and fruity beverage that was traditionally used to preserve frutis in harsh Russian winters that is now available for widespread comsumption."
+	icon_state = "kompot"
+	center_of_mass = list("x"=16, "y"=10)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/kompot/Initialize()
+	. = ..()
+	reagents.add_reagent("kompot", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/boda
+	name = "\improper Boda"
+	desc = "State regulated soda beverage. Enjoy comrades."
+	icon_state = "boda"
+	center_of_mass = list("x"=16, "y"=8)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/boda/Initialize()
+	. = ..()
+	reagents.add_reagent("sodawater", 30)

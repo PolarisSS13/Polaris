@@ -4043,6 +4043,8 @@
 /area/surface/outpost/main/garage)
 "iI" = (
 /obj/structure/table/steel,
+/obj/item/weapon/weldingtool,
+/obj/item/device/floor_painter,
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/main/garage)
 "iJ" = (
@@ -6324,13 +6326,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/outpost/main)
 "nC" = (
-/obj/item/device/radio/intercom{
-	dir = 8;
-	name = "Station Intercom (General)";
-	pixel_x = -21
-	},
-/turf/simulated/floor/tiled/freezer,
-/area/surface/outpost/main/restroom)
+/obj/machinery/smartfridge/drying_rack,
+/turf/simulated/floor/plating,
+/area/surface/outpost/main/garage)
 "nD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -8780,15 +8778,14 @@
 /turf/simulated/floor/tiled/freezer,
 /area/surface/outpost/main/pool)
 "sa" = (
-/obj/machinery/firealarm{
-	dir = 2;
-	pixel_y = 24
+/obj/item/device/radio/intercom{
+	dir = 8;
+	name = "Station Intercom (General)";
+	pixel_x = -21
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
+/obj/machinery/washing_machine,
 /turf/simulated/floor/tiled/freezer,
-/area/surface/outpost/main/pool)
+/area/surface/outpost/main/restroom)
 "sb" = (
 /obj/machinery/light/spot{
 	dir = 1
@@ -14229,6 +14226,36 @@
 	},
 /turf/simulated/floor/tiled/steel/sif/planetuse,
 /area/surface/outside/path/plains)
+"Eq" = (
+/obj/machinery/firealarm{
+	dir = 2;
+	pixel_y = 24
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/freezer,
+/area/surface/outpost/main/pool)
+"GP" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/light{
+	dir = 4
+	},
+/obj/machinery/mech_recharger,
+/obj/effect/landmark/robot_platform/explorer,
+/turf/simulated/floor/plating,
+/area/surface/outpost/main/garage)
+"Iw" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/mech_recharger,
+/turf/simulated/floor/plating,
+/area/surface/outpost/main/garage)
+"Lz" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/mech_recharger,
+/obj/effect/landmark/robot_platform/explorer,
+/turf/simulated/floor/plating,
+/area/surface/outpost/main/garage)
 
 (1,1,1) = {"
 aa
@@ -51038,7 +51065,7 @@ pQ
 qB
 qZ
 rD
-sa
+Eq
 sw
 sS
 ti
@@ -53075,7 +53102,7 @@ hk
 hF
 ic
 iF
-iH
+nC
 jt
 qU
 kg
@@ -53343,7 +53370,7 @@ ll
 lW
 mD
 nd
-nC
+sa
 nE
 nE
 nE
@@ -54617,11 +54644,11 @@ hq
 hG
 ii
 iG
-iH
-iH
-iH
-iH
-iH
+iG
+iG
+iG
+iG
+iG
 kJ
 hF
 lq
@@ -54875,10 +54902,10 @@ hF
 ij
 iI
 Ej
-iH
-iH
-iH
-iH
+Lz
+GP
+Iw
+iG
 kK
 hF
 lr

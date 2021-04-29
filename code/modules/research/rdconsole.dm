@@ -72,14 +72,9 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 
 /obj/machinery/computer/rdconsole/proc/CallReagentName(var/ID)
 	var/return_name = ID
-	var/datum/reagent/temp_reagent
-	for(var/R in (typesof(/datum/reagent) - /datum/reagent))
-		temp_reagent = null
-		temp_reagent = new R()
-		if(temp_reagent.id == ID)
-			return_name = temp_reagent.name
-			qdel(temp_reagent)
-			temp_reagent = null
+	for(var/datum/reagent/R in SSchemistry.chemical_reagents)
+		if(R.id == ID)
+			return_name = R.name
 			break
 	return return_name
 

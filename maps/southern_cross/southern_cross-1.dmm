@@ -11025,7 +11025,8 @@
 	},
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Telecoms Storage";
-	req_access = list(61)
+	req_access = list(61);
+	req_one_access = list(61)
 	},
 /turf/simulated/floor,
 /area/tcomm/tcomstorage)
@@ -45962,6 +45963,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
 	},
+/mob/living/simple_mob/animal/passive/opossum/poppy,
 /turf/simulated/floor/tiled,
 /area/engineering/foyer)
 "bGL" = (
@@ -72437,7 +72439,7 @@
 /area/quartermaster/lockerroom)
 "cFQ" = (
 /obj/structure/railing,
-/turf/simulated/open,
+/turf/simulated/floor/tiled,
 /area/quartermaster/lockerroom)
 "cFR" = (
 /obj/structure/railing,
@@ -72951,12 +72953,9 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloor{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/brown/border{
-	dir = 1
-	},
+/obj/machinery/mech_recharger,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/landmark/robot_platform/cargo,
 /turf/simulated/floor/tiled/steel,
 /area/quartermaster/warehouse)
 "cHa" = (
@@ -72972,6 +72971,9 @@
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 1
 	},
+/obj/structure/table/steel,
+/obj/item/device/floor_painter,
+/obj/item/weapon/weldingtool,
 /turf/simulated/floor/tiled,
 /area/quartermaster/warehouse)
 "cHb" = (
@@ -78824,7 +78826,8 @@
 	icon_state = "4-8"
 	},
 /obj/machinery/door/airlock/glass_medical{
-	name = "Patient Ward"
+	name = "Patient Ward";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_wing)
@@ -82009,7 +82012,8 @@
 "cWF" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass_medical{
-	name = "Patient Ward"
+	name = "Patient Ward";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_wing)
@@ -83404,7 +83408,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/medical{
-	name = "Patient Room A"
+	name = "Patient Room A";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_a)
@@ -83428,7 +83433,8 @@
 	icon_state = "1-2"
 	},
 /obj/machinery/door/airlock/medical{
-	name = "Patient Room B"
+	name = "Patient Room B";
+	req_one_access = list()
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/medical/patient_b)
@@ -114173,6 +114179,24 @@
 /obj/machinery/computer/ship/sensors,
 /turf/simulated/floor/tiled/dark,
 /area/hallway/primary/seconddeck/ascenter)
+"eAB" = (
+/obj/structure/railing,
+/turf/simulated/floor/tiled,
+/area/hallway/primary/seconddeck/aft)
+"ioU" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/thirddeck/central)
+"oJY" = (
+/obj/structure/railing,
+/turf/simulated/floor/tiled,
+/area/hallway/secondary/eva_hallway)
+"pel" = (
+/obj/structure/railing,
+/turf/simulated/floor/tiled,
+/area/rnd/research)
 "twa" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/airlock/glass_external{
@@ -114190,6 +114214,12 @@
 /obj/effect/landmark/engine_loader,
 /turf/space,
 /area/space)
+"vTW" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/simulated/floor/tiled,
+/area/hallway/primary/seconddeck/stairwell)
 
 (1,1,1) = {"
 aaa
@@ -211216,7 +211246,7 @@ cqx
 cso
 cuc
 cvE
-cxE
+vTW
 cxE
 cqx
 dVz
@@ -211501,7 +211531,7 @@ ddu
 cYq
 deu
 ddA
-dfg
+eAB
 dfJ
 dgh
 dia
@@ -213749,7 +213779,7 @@ ebo
 bkq
 bkq
 bqr
-bri
+oJY
 btP
 buT
 bvY
@@ -223272,7 +223302,7 @@ bEn
 eby
 ebD
 bBr
-ebK
+pel
 bMb
 bOc
 bPA
@@ -277267,7 +277297,7 @@ dML
 dVB
 dNE
 dOd
-dOd
+ioU
 dPi
 dPA
 dQc

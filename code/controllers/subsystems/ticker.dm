@@ -198,12 +198,6 @@ var/global/datum/controller/subsystem/ticker/ticker
 	if(adm["total"] == 0)
 		send2adminirc("A round has started with no admins online.")
 
-/*	supply_controller.process() 		//Start the supply shuttle regenerating points -- TLE // handled in scheduler
-	master_controller.process()		//Start master_controller.process()
-	lighting_controller.process()	//Start processing DynamicAreaLighting updates
-	*/
-
-	processScheduler.start()
 	current_state = GAME_STATE_PLAYING
 	Master.SetRunLevel(RUNLEVEL_GAME)
 
@@ -496,6 +490,11 @@ var/global/datum/controller/subsystem/ticker/ticker
 	var/dronecount = 0
 
 	for (var/mob/living/silicon/robot/robo in mob_list)
+
+		if(istype(robo, /mob/living/silicon/robot/platform))
+			var/mob/living/silicon/robot/platform/tank = robo
+			if(!tank.has_had_player)
+				continue
 
 		if(istype(robo,/mob/living/silicon/robot/drone) && !istype(robo,/mob/living/silicon/robot/drone/swarm))
 			dronecount++

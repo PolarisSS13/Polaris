@@ -78,3 +78,5 @@
 	var/tail_alt = 0
 	var/flying = 0				// Allows flight
 
+	var/inventory_panel_type = /datum/inventory_panel
+	var/datum/inventory_panel/inventory_panel

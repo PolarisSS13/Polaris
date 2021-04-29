@@ -12,11 +12,13 @@
 
 	color_blend_mode = ICON_ADD // Only appliciable if do_coloration = 1
 	var/extra_overlay // Icon state of an additional overlay to blend in.
+	var/extra_overlay2 //Tertiary.
 	var/show_species_tail = 0 // If false, do not render species' tail.
 	var/clothing_can_hide = 1 // If true, clothing with HIDETAIL hides it
 	var/desc = "You should not see this..."
 	var/ani_state // State when wagging/animated
 	var/extra_overlay_w // Wagging state for extra overlay
+	var/extra_overlay2_w // Tertiary wagging.
 	var/list/hide_body_parts = list() //Uses organ tag defines. Bodyparts in this list do not have their icons rendered, allowing for more spriter freedom when doing taur/digitigrade stuff.
 	var/icon/clip_mask_icon = null //Icon file used for clip mask.
 	var/clip_mask_state = null //Icon state to generate clip mask. Clip mask is used to 'clip' off the lower part of clothing such as jumpsuits & full suits.
@@ -501,16 +503,16 @@
 	desc = ""
 	icon_state = "chimptail_s"
 
-/datum/sprite_accessory/tail/special/seromitail
-	name = "seromi tail"
+/datum/sprite_accessory/tail/special/tesharitail
+	name = "teshari tail"
 	desc = ""
 	icon_state = "seromitail_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
-/datum/sprite_accessory/tail/special/seromitailfeathered
-	name = "seromi tail w/ feathers"
+/datum/sprite_accessory/tail/special/tesharitailfeathered
+	name = "teshari tail w/ feathers"
 	desc = ""
 	icon_state = "seromitail_s"
 	extra_overlay = "seromitail_feathers_s"
@@ -605,15 +607,15 @@
 	icon_state = "chimptail_hc_s"
 	do_colouration = 1
 
-/datum/sprite_accessory/tail/special/seromitailhc
-	name = "seromi tail, colorable"
+/datum/sprite_accessory/tail/special/tesharitailhc
+	name = "teshari tail, colorable"
 	desc = ""
 	icon_state = "seromitail_hc_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 
-/datum/sprite_accessory/tail/special/seromitailfeatheredhc
-	name = "seromi tail w/ feathers, colorable"
+/datum/sprite_accessory/tail/special/tesharitailfeatheredhc
+	name = "teshari tail w/ feathers, colorable"
 	desc = ""
 	icon_state = "seromitail_feathers_hc_s"
 	do_colouration = 1

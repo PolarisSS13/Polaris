@@ -354,6 +354,10 @@
 		playsound(src, pickup_sound, 20, preference = /datum/client_preference/pickup_sounds)
 	return
 
+// As above but for items being equipped to an active module on a robot.
+/obj/item/proc/equipped_robot(var/mob/user)
+	return
+
 //Defines which slots correspond to which slot flags
 var/list/global/slot_flags_enumeration = list(
 	"[slot_wear_mask]" = SLOT_MASK,
@@ -548,9 +552,7 @@ var/list/global/slot_flags_enumeration = list(
 	if(!hit_zone)
 		U.do_attack_animation(M)
 		playsound(src, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
-		//visible_message("<span class='danger'>[U] attempts to stab [M] in the eyes, but misses!</span>")
-		for(var/mob/V in viewers(M))
-			V.show_message("<span class='danger'>[U] attempts to stab [M] in the eyes, but misses!</span>")
+		visible_message(SPAN_DANGER("\The [U] attempts to stab \the [M] in the eyes, but misses!"))
 		return
 
 	add_attack_logs(user,M,"Attack eyes with [name]")
