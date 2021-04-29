@@ -26,6 +26,7 @@
 	A.attack_hand(src)
 
 /atom/proc/attack_hand(mob/user as mob)
+	SEND_SIGNAL(src, COMSIG_ATOM_ATTACK_HAND, user)
 	return
 
 /mob/living/carbon/human/RestrainedClickOn(var/atom/A)

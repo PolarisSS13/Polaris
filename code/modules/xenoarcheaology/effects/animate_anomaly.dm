@@ -13,17 +13,16 @@
 	effectrange = max(3, effectrange)
 
 /datum/artifact_effect/animate_anomaly/proc/find_target()
-	var/atom/holder = master.holder
-	if(!target || target.z != holder.z || get_dist(target, holder) > effectrange)
+	if(!target || target.z != master.holder.z || get_dist(target, master.holder) > effectrange)
 		var/mob/living/ClosestMob = null
-		for(var/mob/living/L in range(effectrange, holder))
+		for(var/mob/living/L in range(effectrange, get_turf(master.holder)))
 			if(!L.mind)
 				continue
 			if(!ClosestMob)
 				ClosestMob = L
 				continue
 			if(!L.stat)
-				if(get_dist(holder, L) < get_dist(holder, ClosestMob))
+				if(get_dist(master.holder, L) < get_dist(master.holder, ClosestMob))
 					ClosestMob = L
 
 		target = ClosestMob
@@ -38,27 +37,18 @@
 		O.visible_message("<span class='alien'>\The [holder] lurches away from [user]</span>")
 
 /datum/artifact_effect/animate_anomaly/DoEffectAura()
-	var/atom/holder = master.holder
-	var/obj/O = holder
-	if(!target || target.z != O.z || get_dist(target, O) > effectrange)
-		target = null
-		find_target()
-	var/turf/T = get_step_to(O, target)
+	var/obj/O = master.holder
+	find_target()
 
-	if(target && istype(T) && istype(O.loc, /turf))
-		if(get_dist(O, T) > 1)
-			O.Move(T)
-			O.visible_message("<span class='alien'>\The [holder] lurches toward [target]</span>")
+	if(!target || !istype(O))
+		return
+
+	O.dir = get_dir(O, target)
+
+	if(istype(O.loc, /turf))
+		if(get_dist(O.loc, target.loc) > 1)
+			O.Move(get_step_to(O, target))
+			O.visible_message("<span class='alien'>\The [O] lurches toward [target]</span>")
 
 /datum/artifact_effect/animate_anomaly/DoEffectPulse()
-	var/atom/holder = master.holder
-	var/obj/O = holder
-	if(!target || target.z != O.z || get_dist(target, O) > effectrange)
-		target = null
-		find_target()
-	var/turf/T = get_step_to(O, target)
-
-	if(target && istype(T) && istype(O.loc, /turf))
-		if(get_dist(O, T) > 1)
-			O.Move(T)
-			O.visible_message("<span class='alien'>\The [holder] lurches toward [target]</span>")
+	DoEffectAura()

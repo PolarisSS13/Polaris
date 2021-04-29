@@ -8,7 +8,7 @@
 
 	var/predefined_icon_num
 
-	artifact_master = /datum/artifact_master
+	var/datum/component/artifact_master/artifact_master = /datum/component/artifact_master
 
 	var/being_used = 0
 
@@ -29,6 +29,13 @@
 
 /obj/machinery/artifact/New()
 	..()
+
+	if(ispath(artifact_master))
+		AddComponent(artifact_master)
+
+		artifact_master = GetComponent(artifact_master)
+	else
+		return
 
 /*
 	if(predefined_effects && predefined_primary)

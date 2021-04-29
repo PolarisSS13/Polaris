@@ -1,66 +1,13 @@
 
 /*
- * Here there be dragons.
+ * Here there be the base component for artifacts.
  */
 
-/atom/var/datum/artifact_master/artifact_master
-
-/atom/Initialize()
-	. = ..()
-
-	if(ispath(artifact_master))
-		artifact_master = new artifact_master(src)
-
-/atom/Destroy()
-	if(artifact_master)
-		QDEL_NULL(artifact_master)
-
-	. = ..()
-
-/atom/attack_hand(var/mob/user as mob)
-	. = ..()
-
-	if(artifact_master)
-		artifact_master.on_attack_hand(user)
-
-/atom/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
-	. = ..()
-
-	if(artifact_master)
-		artifact_master.on_attackby(W, user)
-
-/atom/Bumped(M as mob|obj)
-	. = ..()
-
-	if(artifact_master)
-		artifact_master.on_bumped(M)
-
-/atom/movable/Bump(var/atom/bumped)
-	. = ..()
-
-	if(artifact_master)
-		artifact_master.on_bump(bumped)
-
-/atom/bullet_act(var/obj/item/projectile/P)
-	. = ..()
-
-	if(artifact_master)
-		artifact_master.on_bullet(P)
-
-/atom/ex_act(severity)
-	if(artifact_master)
-		artifact_master.on_exact(severity)
-
-	. = ..()
-
-/atom/movable/Moved()
-	. = ..()
-	if(artifact_master)
-		artifact_master.on_moved()
-
-/datum/artifact_master
+/datum/component/artifact_master
 	var/atom/holder
 	var/list/my_effects
+
+	dupe_type = /datum/component/artifact_master
 
 	var/effect_generation_chance = 100
 
@@ -68,35 +15,9 @@
 
 	var/artifact_id
 
-/datum/artifact_master/proc/get_active_effects()
-	var/list/active_effects = list()
-	for(var/datum/artifact_effect/my_effect in my_effects)
-		if(my_effect.activated)
-			active_effects |= my_effect
-
-	return active_effects
-
-/datum/artifact_master/proc/add_effect()
-	var/effect_type = input(usr, "What type do you want?", "Effect Type") as null|anything in typesof(/datum/artifact_effect) - /datum/artifact_effect
-	if(effect_type)
-		var/datum/artifact_effect/my_effect = new effect_type(src)
-		if(istype(holder, my_effect.req_type))
-			my_effects += my_effect
-
-		else
-			to_chat(usr, "This effect can not be applied to this atom type.")
-			qdel(my_effect)
-
-/datum/artifact_master/proc/remove_effect()
-	var/to_remove_effect = input(usr, "What effect do you want to remove?", "Remove Effect") as null|anything in my_effects
-
-	if(to_remove_effect)
-		var/datum/artifact_effect/AE = to_remove_effect
-		my_effects.Remove(to_remove_effect)
-		qdel(AE)
-
-/datum/artifact_master/New(var/atom/newholder)
-	holder = newholder
+/datum/component/artifact_master/New()
+	. = ..()
+	holder = parent
 
 	if(!holder)
 		qdel(src)
@@ -107,8 +28,63 @@
 	START_PROCESSING(SSobj, src)
 
 	do_setup()
+	return
 
-/datum/artifact_master/Destroy()
+/*
+ * Component System Registry.
+ * Here be dragons.
+ */
+
+/datum/component/artifact_master/proc/DoRegistry()
+//Melee Hit
+	RegisterSignal(holder, COMSIG_PARENT_ATTACKBY, .proc/on_attackby, override = FALSE)
+//Explosions
+	RegisterSignal(holder, COMSIG_ATOM_EX_ACT, .proc/on_exact, override = FALSE)
+//Bullets
+	RegisterSignal(holder, COMSIG_ATOM_BULLET_ACT, .proc/on_bullet, override = FALSE)
+
+//Attackhand
+	RegisterSignal(holder, COMSIG_ATOM_ATTACK_HAND, .proc/on_attack_hand, override = FALSE)
+
+//Bumped / Bumping
+	RegisterSignal(holder, COMSIG_MOVABLE_BUMP, .proc/on_bump, override = FALSE)
+	RegisterSignal(holder, COMSIG_ATOM_BUMPED, .proc/on_bumped, override = FALSE)
+
+//Moved
+	RegisterSignal(holder, COMSIG_MOVABLE_MOVED, .proc/on_moved, override = FALSE)
+
+/*
+ *
+ */
+
+/datum/component/artifact_master/proc/get_active_effects()
+	var/list/active_effects = list()
+	for(var/datum/artifact_effect/my_effect in my_effects)
+		if(my_effect.activated)
+			active_effects |= my_effect
+
+	return active_effects
+
+/datum/component/artifact_master/proc/add_effect()
+	var/effect_type = input(usr, "What type do you want?", "Effect Type") as null|anything in typesof(/datum/artifact_effect) - /datum/artifact_effect
+	if(effect_type)
+		var/datum/artifact_effect/my_effect = new effect_type(src)
+		if(istype(holder, my_effect.req_type))
+			my_effects += my_effect
+
+		else
+			to_chat(usr, "This effect can not be applied to this atom type.")
+			qdel(my_effect)
+
+/datum/component/artifact_master/proc/remove_effect()
+	var/to_remove_effect = input(usr, "What effect do you want to remove?", "Remove Effect") as null|anything in my_effects
+
+	if(to_remove_effect)
+		var/datum/artifact_effect/AE = to_remove_effect
+		my_effects.Remove(to_remove_effect)
+		qdel(AE)
+
+/datum/component/artifact_master/Destroy()
 	holder = null
 	for(var/datum/artifact_effect/AE in my_effects)
 		AE.master = null
@@ -118,7 +94,7 @@
 
 	. = ..()
 
-/datum/artifact_master/proc/do_setup()
+/datum/component/artifact_master/proc/do_setup()
 	if(LAZYLEN(make_effects))
 		for(var/path in make_effects)
 			var/datum/artifact_effect/new_effect = new path(src)
@@ -128,7 +104,9 @@
 	else
 		generate_effects()
 
-/datum/artifact_master/proc/generate_effects()
+	DoRegistry()
+
+/datum/component/artifact_master/proc/generate_effects()
 	while(effect_generation_chance > 0)
 		var/chosen_path = pick(subtypesof(/datum/artifact_effect))
 		if(effect_generation_chance >= 100)	// If we're above 100 percent, just cut a flat amount and add an effect.
@@ -146,10 +124,10 @@
 		if(prob(effect_generation_chance))	// Otherwise, add effects as normal, with decreasing probability.
 			my_effects += new chosen_path(src)
 
-/datum/artifact_master/proc/get_holder()	// Returns the holder.
+/datum/component/artifact_master/proc/get_holder()	// Returns the holder.
 	return holder
 
-/datum/artifact_master/proc/get_primary()
+/datum/component/artifact_master/proc/get_primary()
 	if(LAZYLEN(my_effects))
 		return my_effects[1]
 	return FALSE
@@ -158,33 +136,52 @@
  * Trigger code.
  */
 
-/datum/artifact_master/proc/on_exact(severity)
+/datum/component/artifact_master/proc/on_exact()
+	var/severity = args[2]
+	var/triggered = FALSE
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		switch(severity)
 			if(1.0)
 				if(my_effect.trigger == TRIGGER_FORCE || my_effect.trigger == TRIGGER_HEAT ||  my_effect.trigger == TRIGGER_ENERGY)
 					my_effect.ToggleActivate()
+					triggered = TRUE
 			if(2.0)
 				if(my_effect.trigger == TRIGGER_FORCE || my_effect.trigger == TRIGGER_HEAT)
 					my_effect.ToggleActivate()
+					triggered = TRUE
 			if(3.0)
 				if (my_effect.trigger == TRIGGER_FORCE)
 					my_effect.ToggleActivate()
+					triggered = TRUE
+
+	if(triggered)
+		return COMPONENT_IGNORE_EXPLOSION
+
 	return
 
-/datum/artifact_master/proc/on_bullet(var/obj/item/projectile/P)
+/datum/component/artifact_master/proc/on_bullet()
+	var/obj/item/projectile/P = args[2]
+	var/triggered = TRUE
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(istype(P,/obj/item/projectile/bullet))
 			if(my_effect.trigger == TRIGGER_FORCE)
 				my_effect.ToggleActivate()
+				triggered = TRUE
 
 		else if(istype(P,/obj/item/projectile/beam) ||\
 			istype(P,/obj/item/projectile/ion) ||\
 			istype(P,/obj/item/projectile/energy))
 			if(my_effect.trigger == TRIGGER_ENERGY)
 				my_effect.ToggleActivate()
+				triggered = TRUE
 
-/datum/artifact_master/proc/on_bump(var/atom/bumped)
+	if(triggered)
+		return COMPONENT_CANCEL_ATTACK_CHAIN
+
+	return
+
+/datum/component/artifact_master/proc/on_bump()
+	var/atom/bumped = args[2]
 	var/warn = FALSE
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(istype(bumped,/obj))
@@ -204,7 +201,8 @@
 	if(warn && isliving(bumped))
 		to_chat(bumped, "<b>You accidentally touch \the [holder] as it hits you.</b>")
 
-/datum/artifact_master/proc/on_bumped(M as mob|obj)
+/datum/component/artifact_master/proc/on_bumped()
+	var/atom/movable/M = args[2]
 	var/warn = FALSE
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(istype(M,/obj))
@@ -224,7 +222,9 @@
 	if(warn && isliving(M))
 		to_chat(M, "<b>You accidentally touch \the [holder].</b>")
 
-/datum/artifact_master/proc/on_attack_hand(var/mob/living/user)
+/datum/component/artifact_master/proc/on_attack_hand()
+	var/mob/living/user = args[2]
+
 	if(!istype(user))
 		return
 
@@ -254,7 +254,9 @@
 		to_chat(user, "<b>You touch [holder],</b> [pick("but nothing of note happens","but nothing happens","but nothing interesting happens","but you notice nothing different","but nothing seems to have happened")].")
 
 
-/datum/artifact_master/proc/on_attackby(obj/item/weapon/W as obj, mob/living/user as mob)
+/datum/component/artifact_master/proc/on_attackby()
+	var/obj/item/weapon/W = args[2]
+
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
 		if (istype(W, /obj/item/weapon/reagent_containers))
@@ -287,14 +289,14 @@
 			if (my_effect.trigger == TRIGGER_FORCE && W.force >= 10)
 				my_effect.ToggleActivate()
 
-/datum/artifact_master/proc/on_moved()
+/datum/component/artifact_master/proc/on_moved()
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(my_effect)
 			my_effect.UpdateMove()
 
-/datum/artifact_master/process()
+/datum/component/artifact_master/process()
 	var/turf/L = holder.loc
-	if(!istype(L) || !isliving(L)) 	// We're inside a non-mob container or on null turf, either way stop processing effects
+	if(!istype(L) && !isliving(L)) 	// We're inside a non-mob container or on null turf, either way stop processing effects
 		return
 
 	if(istype(holder, /atom/movable))
@@ -329,6 +331,8 @@
 
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		my_effect.artifact_id = artifact_id
+
+		my_effect.process()
 
 		//COLD ACTIVATION
 		if(trigger_cold)

@@ -3,9 +3,9 @@
 	var/effect = EFFECT_TOUCH
 	var/effectrange = 4
 	var/trigger = TRIGGER_TOUCH
-	var/datum/artifact_master/master
+	var/datum/component/artifact_master/master
 	var/activated = 0
-	var/chargelevel = 0
+	var/chargelevel = 1
 	var/chargelevelmax = 10
 	var/artifact_id = ""
 	var/effect_type = 0
@@ -18,7 +18,7 @@
 
 	..()
 
-/datum/artifact_effect/New(var/datum/artifact_master/newmaster)
+/datum/artifact_effect/New(var/datum/component/artifact_master/newmaster)
 	..()
 	master = newmaster
 	effect = rand(0, MAX_EFFECT)

@@ -24,7 +24,7 @@
 		B.target_turf = pick(range(1, get_turf(holder)))
 		B.blood_DNA = list()
 		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-		M.vessel.remove_reagent("blood",rand(25,50))
+		M.vessel.remove_reagent("blood",rand(10,30))
 
 /datum/artifact_effect/vampire/DoEffectTouch(var/mob/user)
 	bloodcall(user)
@@ -34,21 +34,20 @@
 	var/atom/holder = master.holder
 	nearby_mobs.Cut()
 
-	var/turf/T = get_turf(holder)
+	var/turf/T = get_turf(master.holder)
 
 	for(var/mob/living/L in oview(effectrange, T))
 		if(!L.stat && L.mind)
 			nearby_mobs |= L
 
-	if(world.time - last_bloodcall > bloodcall_interval && nearby_mobs.len)
+	if(world.time - bloodcall_interval >= last_bloodcall && LAZYLEN(nearby_mobs))
 		var/mob/living/carbon/human/M = pick(nearby_mobs)
-		if(M in view(effectrange,holder) && M.health > 20)
-			if(prob(50))
-				bloodcall(M)
-				holder.Beam(M, icon_state = "drainbeam", time = 1 SECOND)
+		if(get_dist(M, T) <= effectrange && M.health > 20)
+			bloodcall(M)
+			holder.Beam(M, icon_state = "drainbeam", time = 1 SECOND)
 
-	if(world.time - last_eat > eat_interval)
-		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,holder)
+	if(world.time - last_eat >= eat_interval)
+		var/obj/effect/decal/cleanable/blood/B = locate() in range(2,master.holder)
 		if(B)
 			last_eat = world.time
 			B.loc = null
