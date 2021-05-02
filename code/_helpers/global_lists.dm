@@ -238,6 +238,8 @@ var/global/list/string_slot_flags = list(
 		var/datum/sprite_accessory/wing/instance = new path()
 		wing_styles_list[path] = instance
 
+	init_crafting_recipes(GLOB.crafting_recipes)
+
 /*
 	// Custom species traits
 	paths = typesof(/datum/trait) - /datum/trait
@@ -273,8 +275,13 @@ var/global/list/string_slot_flags = list(
 	return 1 // Hooks must return 1
 
 
-	return 1
-
+/// Inits the crafting recipe list, sorting crafting recipe requirements in the process.
+/proc/init_crafting_recipes(list/crafting_recipes)
+	for(var/path in subtypesof(/datum/crafting_recipe))
+		var/datum/crafting_recipe/recipe = new path()
+		recipe.reqs = sortList(recipe.reqs, /proc/cmp_crafting_req_priority)
+		crafting_recipes += recipe
+	return crafting_recipes
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()
 
