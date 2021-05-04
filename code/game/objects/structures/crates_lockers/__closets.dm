@@ -33,7 +33,7 @@
 
 	var/list/starts_with // List of type = count (or just type for 1)
 
-	var/closet_appearance = /decl/closet_appearance // The /decl that defines what decals we end up with, that makes our look unique
+	var/closet_appearance = /datum/closet_appearance // The /decl that defines what decals we end up with, that makes our look unique
 
 /obj/structure/closet/Initialize()
 	..()
@@ -59,7 +59,7 @@
 			storage_capacity = content_size + 5
 
 	if(ispath(closet_appearance))
-		var/decl/closet_appearance/app = GLOB.closet_appearances[closet_appearance]
+		var/datum/closet_appearance/app = GLOB.closet_appearances[closet_appearance]
 		if(app)
 			icon = app.icon
 			color = null
@@ -484,4 +484,4 @@
 /obj/structure/closet/cabinet
 	name = "cabinet"
 	icon = 'icons/obj/closets/bases/cabinet.dmi'
-	closet_appearance = /decl/closet_appearance/cabinet
+	closet_appearance = /datum/closet_appearance/cabinet

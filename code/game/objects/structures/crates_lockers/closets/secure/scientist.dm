@@ -1,7 +1,7 @@
 /obj/structure/closet/secure_closet/scientist
 	name = "scientist's locker"
 	req_access = list(access_tox_storage)
-	closet_appearance = /decl/closet_appearance/secure_closet/science
+	closet_appearance = /datum/closet_appearance/secure_closet/science
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/scientist,
@@ -24,7 +24,7 @@
 /obj/structure/closet/secure_closet/RD
 	name = "research director's locker"
 	req_access = list(access_rd)
-	closet_appearance = /decl/closet_appearance/secure_closet/science/rd
+	closet_appearance = /datum/closet_appearance/secure_closet/science/rd
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/scientist,
@@ -48,7 +48,7 @@
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
 	req_access = list(access_tox_storage)
-	closet_appearance = /decl/closet_appearance/secure_closet/science/xenoarch
+	closet_appearance = /datum/closet_appearance/secure_closet/science/xenoarch
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/scientist,
@@ -62,7 +62,7 @@
 
 /obj/structure/closet/excavation
 	name = "Excavation tools"
-	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools/xenoarch
+	closet_appearance = /datum/closet_appearance/secure_closet/engineering/tools/xenoarch
 
 	starts_with = list(
 		/obj/item/weapon/storage/belt/archaeology,

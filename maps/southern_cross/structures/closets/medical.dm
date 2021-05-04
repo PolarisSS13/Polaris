@@ -6,7 +6,7 @@
 /obj/structure/closet/secure_closet/CMO_wardrobe
 	name = "chief medical officer's locker"
 	req_access = list(access_cmo)
-	closet_appearance = /decl/closet_appearance/secure_closet/cmo
+	closet_appearance = /datum/closet_appearance/secure_closet/cmo
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/chief_medical_officer,

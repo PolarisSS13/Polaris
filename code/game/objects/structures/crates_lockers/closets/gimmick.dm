@@ -1,23 +1,23 @@
 /obj/structure/closet/cabinet
 	name = "cabinet"
 	desc = "Old will forever be in fashion."
-	closet_appearance = /decl/closet_appearance/cabinet
+	closet_appearance = /datum/closet_appearance/cabinet
 
 /obj/structure/closet/acloset
 	name = "strange closet"
 	desc = "It looks alien!"
-	closet_appearance = /decl/closet_appearance/alien
+	closet_appearance = /datum/closet_appearance/alien
 
 /obj/structure/closet/gimmick
 	name = "administrative supply closet"
 	desc = "It's a storage unit for things that have no right being here."
-	closet_appearance = /decl/closet_appearance/tactical
+	closet_appearance = /datum/closet_appearance/tactical
 	anchored = 0
 
 /obj/structure/closet/gimmick/russian
 	name = "russian surplus closet"
 	desc = "It's a storage unit for Russian standard-issue surplus."
-	closet_appearance = /decl/closet_appearance/tactical
+	closet_appearance = /datum/closet_appearance/tactical
 
 	starts_with = list(
 		/obj/item/clothing/head/ushanka = 5,
@@ -27,7 +27,7 @@
 /obj/structure/closet/gimmick/tacticool
 	name = "tacticool gear closet"
 	desc = "It's a storage unit for Tacticool gear."
-	closet_appearance = /decl/closet_appearance/tactical
+	closet_appearance = /datum/closet_appearance/tactical
 
 	starts_with = list(
 		/obj/item/clothing/glasses/eyepatch,
@@ -43,7 +43,7 @@
 /obj/structure/closet/thunderdome
 	name = "\improper Thunderdome closet"
 	desc = "Everything you need!"
-	closet_appearance = /decl/closet_appearance/thunderdomered
+	closet_appearance = /datum/closet_appearance/thunderdomered
 	anchored = 1
 
 /obj/structure/closet/thunderdome/tdred
@@ -59,7 +59,7 @@
 
 /obj/structure/closet/thunderdome/tdgreen
 	name = "green-team Thunderdome closet"
-	closet_appearance = /decl/closet_appearance/thunderdomegreen
+	closet_appearance = /datum/closet_appearance/thunderdomegreen
 
 	starts_with = list(
 		/obj/item/clothing/suit/armor/tdome/green = 3,

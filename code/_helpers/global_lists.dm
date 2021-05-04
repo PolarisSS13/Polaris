@@ -216,9 +216,9 @@ var/global/list/string_slot_flags = list(
 		NT_poster_designs += P
 
 	//Closet appearances
-	paths = typesof(/decl/closet_appearance)
+	paths = typesof(/datum/closet_appearance)
 	for(var/T in paths)
-		var/decl/closet_appearance/app = new T()
+		var/datum/closet_appearance/app = new T()
 		GLOB.closet_appearances[T] = app
 
 	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears

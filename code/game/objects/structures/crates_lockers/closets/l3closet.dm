@@ -1,10 +1,10 @@
 /obj/structure/closet/l3closet
 	name = "level-3 biohazard suit closet"
 	desc = "It's a storage unit for level-3 biohazard gear."
-	closet_appearance = /decl/closet_appearance/bio
+	closet_appearance = /datum/closet_appearance/bio
 
 /obj/structure/closet/l3closet/general
-	closet_appearance = /decl/closet_appearance/bio
+	closet_appearance = /datum/closet_appearance/bio
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/general,
@@ -12,7 +12,7 @@
 
 
 /obj/structure/closet/l3closet/virology
-	closet_appearance = /decl/closet_appearance/bio/virology
+	closet_appearance = /datum/closet_appearance/bio/virology
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/virology,
@@ -22,7 +22,7 @@
 
 
 /obj/structure/closet/l3closet/security
-	closet_appearance = /decl/closet_appearance/bio/security
+	closet_appearance = /datum/closet_appearance/bio/security
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/security,
@@ -31,7 +31,7 @@
 
 
 /obj/structure/closet/l3closet/janitor
-	closet_appearance = /decl/closet_appearance/bio/janitor
+	closet_appearance = /datum/closet_appearance/bio/janitor
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/janitor = 2,
@@ -41,7 +41,7 @@
 
 
 /obj/structure/closet/l3closet/scientist
-	closet_appearance = /decl/closet_appearance/bio/science
+	closet_appearance = /datum/closet_appearance/bio/science
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/scientist,
@@ -54,7 +54,7 @@
 
 
 /obj/structure/closet/l3closet/medical
-	closet_appearance = /decl/closet_appearance/bio/medical
+	closet_appearance = /datum/closet_appearance/bio/medical
 
 	starts_with = list(
 		/obj/item/clothing/suit/bio_suit/general = 3,

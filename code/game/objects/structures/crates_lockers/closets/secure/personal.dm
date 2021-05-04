@@ -16,7 +16,7 @@
 
 /obj/structure/closet/secure_closet/personal/patient
 	name = "patient's closet"
-	closet_appearance = /decl/closet_appearance/secure_closet/patient
+	closet_appearance = /datum/closet_appearance/secure_closet/patient
 
 	starts_with = list(
 		/obj/item/clothing/under/medigown,
@@ -25,7 +25,7 @@
 
 
 /obj/structure/closet/secure_closet/personal/cabinet
-	closet_appearance = /decl/closet_appearance/cabinet/secure
+	closet_appearance = /datum/closet_appearance/cabinet/secure
 
 	starts_with = list(
 		/obj/item/weapon/storage/backpack/satchel/withwallet,

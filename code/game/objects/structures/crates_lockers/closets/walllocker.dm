@@ -5,7 +5,7 @@
 	desc = "A wall mounted storage locker."
 	name = "Wall Locker"
 	icon = 'icons/obj/closets/bases/wall.dmi'
-	closet_appearance = /decl/closet_appearance/wall
+	closet_appearance = /datum/closet_appearance/wall
 	density = 0
 	anchored = 1
 
@@ -16,7 +16,7 @@
 	desc = "A wall mounted locker with emergency supplies."
 	var/list/spawnitems = list(/obj/item/weapon/tank/emergency/oxygen,/obj/item/clothing/mask/breath,/obj/item/weapon/tool/crowbar/red)
 	var/amount = 2 // spawns each items X times.
-	closet_appearance = /decl/closet_appearance/wall/emergency
+	closet_appearance = /datum/closet_appearance/wall/emergency
 
 /obj/structure/closet/walllocker/emerglocker/toggle(mob/user as mob)
 	src.attack_hand(user)
@@ -59,7 +59,7 @@
 	desc = "A wall mounted storage cabinet."
 	name = "Wall Cabinet"
 	icon = 'icons/obj/closets/bases/wall_double.dmi'
-	closet_appearance = /decl/closet_appearance/wall_double
+	closet_appearance = /datum/closet_appearance/wall_double
 	density = 0
 	anchored = 1
 	plane = TURF_PLANE
@@ -85,7 +85,7 @@
 	desc = "A wall mounted storage cabinet, for the kitchen. Now where's the flour gone..?"
 	name = "Kitchen Cabinet"
 	icon = 'icons/obj/closets/bases/wall_double.dmi'
-	closet_appearance = /decl/closet_appearance/wall_double/kitchen
+	closet_appearance = /datum/closet_appearance/wall_double/kitchen
 	density = 0
 	anchored = 1
 
@@ -108,7 +108,7 @@
 /obj/structure/closet/walllocker_double/medical
 	name = "Medical Cabinet"
 	desc = "A wall mounted medical supply cabinet. Probably full of drugs!"	//not actually full of drugs, sorry!
-	closet_appearance = /decl/closet_appearance/wall_double/medical
+	closet_appearance = /datum/closet_appearance/wall_double/medical
 
 /obj/structure/closet/walllocker_double/medical/north
 	pixel_y = 32
@@ -129,7 +129,7 @@
 /obj/structure/closet/walllocker_double/hydrant
 	name = "fire-safety closet"
 	desc = "It's a storage cabinet packed with fire-fighting supplies."
-	closet_appearance = /decl/closet_appearance/wall_double/fire_safety
+	closet_appearance = /datum/closet_appearance/wall_double/fire_safety
 	anchored = 1
 	density = 0
 	wall_mounted = 1
