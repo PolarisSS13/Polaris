@@ -161,13 +161,13 @@
 		)
 
 	default_emotes = list(
-		/decl/emote/human/swish,
-		/decl/emote/human/wag,
-		/decl/emote/human/sway,
-		/decl/emote/human/qwag,
-		/decl/emote/human/fastsway,
-		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
+		/datum/emote/human/swish,
+		/datum/emote/human/wag,
+		/datum/emote/human/sway,
+		/datum/emote/human/qwag,
+		/datum/emote/human/fastsway,
+		/datum/emote/human/swag,
+		/datum/emote/human/stopsway
 	)
 
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
@@ -261,13 +261,13 @@
 		)
 
 	default_emotes = list(
-		/decl/emote/human/swish,
-		/decl/emote/human/wag,
-		/decl/emote/human/sway,
-		/decl/emote/human/qwag,
-		/decl/emote/human/fastsway,
-		/decl/emote/human/swag,
-		/decl/emote/human/stopsway
+		/datum/emote/human/swish,
+		/datum/emote/human/wag,
+		/datum/emote/human/sway,
+		/datum/emote/human/qwag,
+		/datum/emote/human/fastsway,
+		/datum/emote/human/swag,
+		/datum/emote/human/stopsway
 	)
 
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
@@ -554,8 +554,8 @@
 	genders = list(PLURAL)
 
 	default_emotes = list(
-		/decl/emote/audible/chirp,
-		/decl/emote/audible/multichirp
+		/datum/emote/audible/chirp,
+		/datum/emote/audible/multichirp
 	)
 
 /datum/species/diona/can_understand(var/mob/other)

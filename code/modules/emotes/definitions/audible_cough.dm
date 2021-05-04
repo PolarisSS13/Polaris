@@ -1,4 +1,4 @@
-/decl/emote/audible/cough
+/datum/emote/audible/cough
 	key = "cough"
 	emote_message_1p = "You cough!"
 	emote_message_1p_target = "You cough on TARGET!"
@@ -34,7 +34,7 @@
 		)
 	)
 
-/decl/emote/audible/cough/get_emote_sound(var/atom/user)
+/datum/emote/audible/cough/get_emote_sound(var/atom/user)
 	if(ishuman(user) && !check_synthetic(user))
 		var/mob/living/carbon/human/H = user
 		if(H.get_gender() == FEMALE)

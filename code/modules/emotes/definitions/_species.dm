@@ -5,7 +5,8 @@
 	. = ..(skip_sort = TRUE)
 	if(species)
 		for(var/emote in species.default_emotes)
-			var/decl/emote/emote_datum = decls_repository.get_decl(emote)
+			var/datum/emote/emote_datum = GLOB.emotes_by_type[emote]
 			if(emote_datum.check_user(src))
 				usable_emotes[emote_datum.key] = emote_datum
-	usable_emotes = sortAssoc(usable_emotes)
+	if(!skip_sort)
+		usable_emotes = sortAssoc(usable_emotes)

@@ -109,6 +109,10 @@ var/global/list/string_slot_flags = list(
 		. = new/mob/living/carbon/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
+GLOBAL_LIST_EMPTY(emotes)
+GLOBAL_LIST_EMPTY(emotes_by_key)
+GLOBAL_LIST_EMPTY(emotes_by_type)
+
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
@@ -269,6 +273,11 @@ var/global/list/string_slot_flags = list(
 		GLOB.custom_species_bases += species_name
 	for(var/species_name in whitelisted_icons)
 		GLOB.custom_species_bases += species_name
+
+	init_subtypes(/datum/emote, GLOB.emotes)
+	for(var/datum/emote/E in GLOB.emotes)
+		GLOB.emotes_by_key[E.key] = E
+		GLOB.emotes_by_type[E.type] = E
 
 	return 1 // Hooks must return 1
 

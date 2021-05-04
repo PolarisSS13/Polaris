@@ -90,7 +90,7 @@
 	)
 
 	default_emotes = list(
-		/decl/emote/audible/vox_shriek
+		/datum/emote/audible/vox_shriek
 	)
 
 /datum/species/vox/get_random_name(var/gender)

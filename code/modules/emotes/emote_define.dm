@@ -4,7 +4,7 @@
 //   gender-appropriate version of the same.
 // - Impaired messages do not do any substitutions.
 
-/decl/emote
+/datum/emote
 	var/key                                             // Command to use emote ie. '*[key]'
 	var/emote_message_1p                                // First person message ('You do a flip!')
 	var/emote_message_3p                                // Third person message ('Urist McBackflip does a flip!')
@@ -35,7 +35,7 @@
 	var/conscious = TRUE                                // Do we need to be awake to emote this?
 	var/emote_range = 0                                 // If >0, restricts emote visibility to viewers within range.
 
-/decl/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
+/datum/emote/proc/get_emote_message_1p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)
 		if(emote_message_synthetic_1p_target && check_synthetic(user))
 			return emote_message_synthetic_1p_target
@@ -44,7 +44,7 @@
 		return emote_message_synthetic_1p
 	return emote_message_1p
 
-/decl/emote/proc/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
+/datum/emote/proc/get_emote_message_3p(var/atom/user, var/atom/target, var/extra_params)
 	if(target)
 		if(emote_message_synthetic_3p_target && check_synthetic(user))
 			return emote_message_synthetic_3p_target
@@ -53,7 +53,7 @@
 		return emote_message_synthetic_3p
 	return emote_message_3p
 
-/decl/emote/proc/get_emote_sound(var/atom/user)
+/datum/emote/proc/get_emote_sound(var/atom/user)
 	if(check_synthetic(user) && emote_sound_synthetic)
 		return list(
 			"sound" = emote_sound_synthetic,
@@ -65,7 +65,7 @@
 			"vol" =   emote_volume
 		)
 
-/decl/emote/proc/do_emote(var/atom/user, var/extra_params)
+/datum/emote/proc/do_emote(var/atom/user, var/extra_params)
 	if(ismob(user) && check_restraints)
 		var/mob/M = user
 		if(M.restrained())
@@ -121,7 +121,7 @@
 	do_extra(user, target)
 	do_sound(user)
 
-/decl/emote/proc/replace_target_tokens(var/msg, var/atom/target)
+/datum/emote/proc/replace_target_tokens(var/msg, var/atom/target)
 	. = msg
 	if(istype(target))
 		var/datum/gender/target_gender = gender_datums[target.get_visible_gender()]
@@ -130,7 +130,7 @@
 		. = replacetext(., "TARGET_SELF",  target_gender.himself)
 		. = replacetext(., "TARGET",       "<b>\the [target]</b>")
 
-/decl/emote/proc/replace_user_tokens(var/msg, var/atom/user)
+/datum/emote/proc/replace_user_tokens(var/msg, var/atom/user)
 	. = msg
 	if(istype(user))
 		var/datum/gender/user_gender = gender_datums[user.get_visible_gender()]
@@ -139,15 +139,15 @@
 		. = replacetext(., "USER_SELF",  user_gender.himself)
 		. = replacetext(., "USER",       "<b>\the [user]</b>")
 
-/decl/emote/proc/get_radio_message(var/atom/user)
+/datum/emote/proc/get_radio_message(var/atom/user)
 	if(emote_message_radio_synthetic && check_synthetic(user))
 		return emote_message_radio_synthetic
 	return emote_message_radio
 
-/decl/emote/proc/do_extra(var/atom/user, var/atom/target)
+/datum/emote/proc/do_extra(var/atom/user, var/atom/target)
 	return
 
-/decl/emote/proc/do_sound(var/atom/user)
+/datum/emote/proc/do_sound(var/atom/user)
 	var/list/use_sound = get_emote_sound(user)
 	if(!islist(use_sound) || length(use_sound) < 2)
 		return
@@ -162,16 +162,16 @@
 	if(sound_to_play)
 		playsound(user.loc, sound_to_play, use_sound["vol"], 0)
 
-/decl/emote/proc/check_user(var/atom/user)
+/datum/emote/proc/check_user(var/atom/user)
 	return TRUE
 
-/decl/emote/proc/can_target()
+/datum/emote/proc/can_target()
 	return (emote_message_1p_target || emote_message_3p_target)
 
-/decl/emote/dd_SortValue()
+/datum/emote/dd_SortValue()
 	return key
 
-/decl/emote/proc/check_synthetic(var/mob/living/user)
+/datum/emote/proc/check_synthetic(var/mob/living/user)
 	. = istype(user) && user.isSynthetic()
 	if(!. && ishuman(user) && message_type == AUDIBLE_MESSAGE)
 		var/mob/living/carbon/human/H = user

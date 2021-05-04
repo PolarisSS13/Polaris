@@ -1,18 +1,18 @@
 var/list/_slime_default_emotes = list(
-	/decl/emote/audible/moan,
-	/decl/emote/visible/twitch,
-	/decl/emote/visible/sway,
-	/decl/emote/visible/shiver,
-	/decl/emote/visible/bounce,
-	/decl/emote/visible/jiggle,
-	/decl/emote/visible/lightup,
-	/decl/emote/visible/vibrate,
-	/decl/emote/slime,
-	/decl/emote/slime/pout,
-	/decl/emote/slime/sad,
-	/decl/emote/slime/angry,
-	/decl/emote/slime/frown,
-	/decl/emote/slime/smile
+	/datum/emote/audible/moan,
+	/datum/emote/visible/twitch,
+	/datum/emote/visible/sway,
+	/datum/emote/visible/shiver,
+	/datum/emote/visible/bounce,
+	/datum/emote/visible/jiggle,
+	/datum/emote/visible/lightup,
+	/datum/emote/visible/vibrate,
+	/datum/emote/slime,
+	/datum/emote/slime/pout,
+	/datum/emote/slime/sad,
+	/datum/emote/slime/angry,
+	/datum/emote/slime/frown,
+	/datum/emote/slime/smile
 )
 
 // The top-level slime defines. Xenobio slimes and feral slimes will inherit from this.

@@ -1,4 +1,4 @@
-/decl/emote/audible/sneeze
+/datum/emote/audible/sneeze
 	key = "sneeze"
 	emote_message_1p = "You sneeze."
 	emote_message_3p = "sneezes."
@@ -13,7 +13,7 @@
 	emote_message_synthetic_3p = "emits a robotic sneeze."
 	emote_message_synthetic_3p_target = "emits a robotic sneeze towards TARGET."
 
-/decl/emote/audible/sneeze/get_emote_sound(var/atom/user)
+/datum/emote/audible/sneeze/get_emote_sound(var/atom/user)
 	if(ishuman(user) && !check_synthetic(user))
 		var/mob/living/carbon/human/H = user
 		if(H.get_gender() == FEMALE)

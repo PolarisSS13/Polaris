@@ -1,28 +1,28 @@
 var/list/_default_mob_emotes = list(
-	/decl/emote/visible,
-	/decl/emote/visible/scratch,
-	/decl/emote/visible/drool,
-	/decl/emote/visible/nod,
-	/decl/emote/visible/sway,
-	/decl/emote/visible/sulk,
-	/decl/emote/visible/twitch,
-	/decl/emote/visible/twitch_v,
-	/decl/emote/visible/dance,
-	/decl/emote/visible/roll,
-	/decl/emote/visible/shake,
-	/decl/emote/visible/jump,
-	/decl/emote/visible/shiver,
-	/decl/emote/visible/collapse,
-	/decl/emote/visible/spin,
-	/decl/emote/visible/sidestep,
-	/decl/emote/audible,
-	/decl/emote/audible/hiss,
-	/decl/emote/audible/whimper,
-	/decl/emote/audible/gasp,
-	/decl/emote/audible/scretch,
-	/decl/emote/audible/choke,
-	/decl/emote/audible/moan,
-	/decl/emote/audible/gnarl,
+	/datum/emote/visible,
+	/datum/emote/visible/scratch,
+	/datum/emote/visible/drool,
+	/datum/emote/visible/nod,
+	/datum/emote/visible/sway,
+	/datum/emote/visible/sulk,
+	/datum/emote/visible/twitch,
+	/datum/emote/visible/twitch_v,
+	/datum/emote/visible/dance,
+	/datum/emote/visible/roll,
+	/datum/emote/visible/shake,
+	/datum/emote/visible/jump,
+	/datum/emote/visible/shiver,
+	/datum/emote/visible/collapse,
+	/datum/emote/visible/spin,
+	/datum/emote/visible/sidestep,
+	/datum/emote/audible,
+	/datum/emote/audible/hiss,
+	/datum/emote/audible/whimper,
+	/datum/emote/audible/gasp,
+	/datum/emote/audible/scretch,
+	/datum/emote/audible/choke,
+	/datum/emote/audible/moan,
+	/datum/emote/audible/gnarl,
 )
 
 /mob
@@ -31,7 +31,7 @@ var/list/_default_mob_emotes = list(
 /mob/proc/update_emotes(var/skip_sort)
 	usable_emotes = list()
 	for(var/emote in get_default_emotes())
-		var/decl/emote/emote_datum = decls_repository.get_decl(emote)
+		var/datum/emote/emote_datum = GLOB.emotes_by_type[emote]
 		if(emote_datum.check_user(src))
 			usable_emotes[emote_datum.key] = emote_datum
 	if(!skip_sort)

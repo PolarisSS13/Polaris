@@ -1,13 +1,13 @@
 var/list/_brain_default_emotes = list(
-	/decl/emote/audible/alarm,
-	/decl/emote/audible/alert,
-	/decl/emote/audible/notice,
-	/decl/emote/audible/whistle,
-	/decl/emote/audible/synth,
-	/decl/emote/audible/beep,
-	/decl/emote/audible/boop,
-	/decl/emote/visible/blink,
-	/decl/emote/visible/flash
+	/datum/emote/audible/alarm,
+	/datum/emote/audible/alert,
+	/datum/emote/audible/notice,
+	/datum/emote/audible/whistle,
+	/datum/emote/audible/synth,
+	/datum/emote/audible/beep,
+	/datum/emote/audible/boop,
+	/datum/emote/visible/blink,
+	/datum/emote/visible/flash
 )
 
 /mob/living/carbon/brain/can_emote()

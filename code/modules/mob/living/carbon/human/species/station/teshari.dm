@@ -153,9 +153,9 @@
 	)
 
 	default_emotes = list(
-		/decl/emote/audible/teshsqueak,
-		/decl/emote/audible/teshchirp,
-		/decl/emote/audible/teshtrill
+		/datum/emote/audible/teshsqueak,
+		/datum/emote/audible/teshchirp,
+		/datum/emote/audible/teshtrill
 	)
 
 /datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)
