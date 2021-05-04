@@ -13,7 +13,7 @@
 	movement_cost = 2
 	can_build_into_floor = TRUE
 	can_dirty = FALSE
-	initial_flooring = /decl/flooring/lava // Defining this in case someone DOES step on lava and survive. Somehow.
+	initial_flooring = /datum/flooring/lava // Defining this in case someone DOES step on lava and survive. Somehow.
 
 /turf/simulated/floor/lava/outdoors
 	outdoors = TRUE
@@ -36,7 +36,7 @@
 /turf/simulated/floor/lava/make_plating(place_product, defer_icon_update)
 	return
 
-/turf/simulated/floor/lava/set_flooring(decl/flooring/newflooring, initializing)
+/turf/simulated/floor/lava/set_flooring(datum/flooring/newflooring, initializing)
 	if(newflooring?.type == initial_flooring)
 		return ..()
 	return

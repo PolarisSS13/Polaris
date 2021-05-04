@@ -20,7 +20,7 @@
 
 /turf/simulated/floor/water/Initialize()
 	. = ..()
-	var/decl/flooring/F = get_flooring_data(/decl/flooring/water)
+	var/datum/flooring/F = get_flooring_data(/datum/flooring/water)
 	footstep_sounds = F?.footstep_sounds
 	update_icon()
 	handle_fish()

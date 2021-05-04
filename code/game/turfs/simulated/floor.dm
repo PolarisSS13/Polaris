@@ -25,7 +25,7 @@
 	// Flooring data.
 	var/flooring_override
 	var/initial_flooring
-	var/decl/flooring/flooring
+	var/datum/flooring/flooring
 	var/mineral = DEFAULT_WALL_MATERIAL
 
 	thermal_conductivity = 0.040
@@ -58,7 +58,7 @@
 	decals = old_decals
 	old_decals = current_decals
 
-/turf/simulated/floor/proc/set_flooring(var/decl/flooring/newflooring, var/initializing)
+/turf/simulated/floor/proc/set_flooring(var/datum/flooring/newflooring, var/initializing)
 	//make_plating(defer_icon_update = 1)
 	if(is_plating() && !initializing) // Plating -> Flooring
 		swap_decals()
