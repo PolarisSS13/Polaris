@@ -3,21 +3,21 @@
 
 /* Common reactions */
 
-/decl/chemical_reaction/instant/inaprovaline
+/datum/chemical_reaction/instant/inaprovaline
 	name = "Inaprovaline"
 	id = "inaprovaline"
 	result = "inaprovaline"
 	required_reagents = list("oxygen" = 1, "carbon" = 1, "sugar" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/dylovene
+/datum/chemical_reaction/instant/dylovene
 	name = "Dylovene"
 	id = "anti_toxin"
 	result = "anti_toxin"
 	required_reagents = list("silicon" = 1, "potassium" = 1, "nitrogen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/carthatoline
+/datum/chemical_reaction/instant/carthatoline
 	name = "Carthatoline"
 	id = "carthatoline"
 	result = "carthatoline"
@@ -25,21 +25,21 @@
 	catalysts = list("phoron" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/paracetamol
+/datum/chemical_reaction/instant/paracetamol
 	name = "Paracetamol"
 	id = "paracetamol"
 	result = "paracetamol"
 	required_reagents = list("inaprovaline" = 1, "nitrogen" = 1, "water" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/tramadol
+/datum/chemical_reaction/instant/tramadol
 	name = "Tramadol"
 	id = "tramadol"
 	result = "tramadol"
 	required_reagents = list("paracetamol" = 1, "ethanol" = 1, "oxygen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/oxycodone
+/datum/chemical_reaction/instant/oxycodone
 	name = "Oxycodone"
 	id = "oxycodone"
 	result = "oxycodone"
@@ -47,91 +47,91 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/sterilizine
+/datum/chemical_reaction/instant/sterilizine
 	name = "Sterilizine"
 	id = "sterilizine"
 	result = "sterilizine"
 	required_reagents = list("ethanol" = 1, "anti_toxin" = 1, "chlorine" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/silicate
+/datum/chemical_reaction/instant/silicate
 	name = "Silicate"
 	id = "silicate"
 	result = "silicate"
 	required_reagents = list("aluminum" = 1, "silicon" = 1, "oxygen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/mutagen
+/datum/chemical_reaction/instant/mutagen
 	name = "Unstable mutagen"
 	id = "mutagen"
 	result = "mutagen"
 	required_reagents = list("radium" = 1, "phosphorus" = 1, "chlorine" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/water
+/datum/chemical_reaction/instant/water
 	name = "Water"
 	id = "water"
 	result = "water"
 	required_reagents = list("oxygen" = 1, "hydrogen" = 2)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/thermite
+/datum/chemical_reaction/instant/thermite
 	name = "Thermite"
 	id = "thermite"
 	result = "thermite"
 	required_reagents = list("aluminum" = 1, "iron" = 1, "oxygen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/space_drugs
+/datum/chemical_reaction/instant/space_drugs
 	name = "Space Drugs"
 	id = "space_drugs"
 	result = "space_drugs"
 	required_reagents = list("mercury" = 1, "sugar" = 1, "lithium" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/lube
+/datum/chemical_reaction/instant/lube
 	name = "Space Lube"
 	id = "lube"
 	result = "lube"
 	required_reagents = list("water" = 1, "silicon" = 1, "oxygen" = 1)
 	result_amount = 4
 
-/decl/chemical_reaction/instant/pacid
+/datum/chemical_reaction/instant/pacid
 	name = "Polytrinic acid"
 	id = "pacid"
 	result = "pacid"
 	required_reagents = list("sacid" = 1, "chlorine" = 1, "potassium" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/synaptizine
+/datum/chemical_reaction/instant/synaptizine
 	name = "Synaptizine"
 	id = "synaptizine"
 	result = "synaptizine"
 	required_reagents = list("sugar" = 1, "lithium" = 1, "water" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/hyronalin
+/datum/chemical_reaction/instant/hyronalin
 	name = "Hyronalin"
 	id = "hyronalin"
 	result = "hyronalin"
 	required_reagents = list("radium" = 1, "anti_toxin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/arithrazine
+/datum/chemical_reaction/instant/arithrazine
 	name = "Arithrazine"
 	id = "arithrazine"
 	result = "arithrazine"
 	required_reagents = list("hyronalin" = 1, "hydrogen" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/impedrezene
+/datum/chemical_reaction/instant/impedrezene
 	name = "Impedrezene"
 	id = "impedrezene"
 	result = "impedrezene"
 	required_reagents = list("mercury" = 1, "oxygen" = 1, "sugar" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/kelotane
+/datum/chemical_reaction/instant/kelotane
 	name = "Kelotane"
 	id = "kelotane"
 	result = "kelotane"
@@ -139,7 +139,7 @@
 	result_amount = 2
 	log_is_important = 1
 
-/decl/chemical_reaction/instant/peridaxon
+/datum/chemical_reaction/instant/peridaxon
 	name = "Peridaxon"
 	id = "peridaxon"
 	result = "peridaxon"
@@ -147,7 +147,7 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/osteodaxon
+/datum/chemical_reaction/instant/osteodaxon
 	name = "Osteodaxon"
 	id = "osteodaxon"
 	result = "osteodaxon"
@@ -156,7 +156,7 @@
 	inhibitors = list("clonexadone" = 1) // Messes with cryox
 	result_amount = 2
 
-/decl/chemical_reaction/instant/respirodaxon
+/datum/chemical_reaction/instant/respirodaxon
 	name = "Respirodaxon"
 	id = "respirodaxon"
 	result = "respirodaxon"
@@ -165,7 +165,7 @@
 	inhibitors = list("dexalin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/gastirodaxon
+/datum/chemical_reaction/instant/gastirodaxon
 	name = "Gastirodaxon"
 	id = "gastirodaxon"
 	result = "gastirodaxon"
@@ -174,7 +174,7 @@
 	inhibitors = list("lithium" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/hepanephrodaxon
+/datum/chemical_reaction/instant/hepanephrodaxon
 	name = "Hepanephrodaxon"
 	id = "hepanephrodaxon"
 	result = "hepanephrodaxon"
@@ -183,7 +183,7 @@
 	inhibitors = list("tungsten" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/cordradaxon
+/datum/chemical_reaction/instant/cordradaxon
 	name = "Cordradaxon"
 	id = "cordradaxon"
 	result = "cordradaxon"
@@ -192,14 +192,14 @@
 	inhibitors = list("clonexadone" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/virus_food
+/datum/chemical_reaction/instant/virus_food
 	name = "Virus Food"
 	id = "virusfood"
 	result = "virusfood"
 	required_reagents = list("water" = 1, "milk" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/leporazine
+/datum/chemical_reaction/instant/leporazine
 	name = "Leporazine"
 	id = "leporazine"
 	result = "leporazine"
@@ -207,28 +207,28 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/cryptobiolin
+/datum/chemical_reaction/instant/cryptobiolin
 	name = "Cryptobiolin"
 	id = "cryptobiolin"
 	result = "cryptobiolin"
 	required_reagents = list("potassium" = 1, "oxygen" = 1, "sugar" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/tricordrazine
+/datum/chemical_reaction/instant/tricordrazine
 	name = "Tricordrazine"
 	id = "tricordrazine"
 	result = "tricordrazine"
 	required_reagents = list("inaprovaline" = 1, "anti_toxin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/alkysine
+/datum/chemical_reaction/instant/alkysine
 	name = "Alkysine"
 	id = "alkysine"
 	result = "alkysine"
 	required_reagents = list("chlorine" = 1, "nitrogen" = 1, "anti_toxin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/dexalin
+/datum/chemical_reaction/instant/dexalin
 	name = "Dexalin"
 	id = "dexalin"
 	result = "dexalin"
@@ -237,21 +237,21 @@
 	inhibitors = list("water" = 1) // Messes with cryox
 	result_amount = 1
 
-/decl/chemical_reaction/instant/dermaline
+/datum/chemical_reaction/instant/dermaline
 	name = "Dermaline"
 	id = "dermaline"
 	result = "dermaline"
 	required_reagents = list("oxygen" = 1, "phosphorus" = 1, "kelotane" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/dexalinp
+/datum/chemical_reaction/instant/dexalinp
 	name = "Dexalin Plus"
 	id = "dexalinp"
 	result = "dexalinp"
 	required_reagents = list("dexalin" = 1, "carbon" = 1, "iron" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/bicaridine
+/datum/chemical_reaction/instant/bicaridine
 	name = "Bicaridine"
 	id = "bicaridine"
 	result = "bicaridine"
@@ -259,21 +259,21 @@
 	inhibitors = list("sugar" = 1) // Messes up with inaprovaline
 	result_amount = 2
 
-/decl/chemical_reaction/instant/myelamine
+/datum/chemical_reaction/instant/myelamine
 	name = "Myelamine"
 	id = "myelamine"
 	result = "myelamine"
 	required_reagents = list("bicaridine" = 1, "iron" = 2, "spidertoxin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/hyperzine
+/datum/chemical_reaction/instant/hyperzine
 	name = "Hyperzine"
 	id = "hyperzine"
 	result = "hyperzine"
 	required_reagents = list("sugar" = 1, "phosphorus" = 1, "sulfur" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/stimm
+/datum/chemical_reaction/instant/stimm
 	name = "Stimm"
 	id = "stimm"
 	result = "stimm"
@@ -281,21 +281,21 @@
 	catalysts = list("fuel" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/ryetalyn
+/datum/chemical_reaction/instant/ryetalyn
 	name = "Ryetalyn"
 	id = "ryetalyn"
 	result = "ryetalyn"
 	required_reagents = list("arithrazine" = 1, "carbon" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/cryoxadone
+/datum/chemical_reaction/instant/cryoxadone
 	name = "Cryoxadone"
 	id = "cryoxadone"
 	result = "cryoxadone"
 	required_reagents = list("dexalin" = 1, "water" = 1, "oxygen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/clonexadone
+/datum/chemical_reaction/instant/clonexadone
 	name = "Clonexadone"
 	id = "clonexadone"
 	result = "clonexadone"
@@ -303,7 +303,7 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/mortiferin
+/datum/chemical_reaction/instant/mortiferin
 	name = "Mortiferin"
 	id = "mortiferin"
 	result = "mortiferin"
@@ -311,14 +311,14 @@
 	result_amount = 2
 	catalysts = list("phoron" = 5)
 
-/decl/chemical_reaction/instant/spaceacillin
+/datum/chemical_reaction/instant/spaceacillin
 	name = "Spaceacillin"
 	id = "spaceacillin"
 	result = "spaceacillin"
 	required_reagents = list("cryptobiolin" = 1, "inaprovaline" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/corophizine
+/datum/chemical_reaction/instant/corophizine
 	name = "Corophizine"
 	id = "corophizine"
 	result = "corophizine"
@@ -326,7 +326,7 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/immunosuprizine
+/datum/chemical_reaction/instant/immunosuprizine
 	name = "Immunosuprizine"
 	id = "immunosuprizine"
 	result = "immunosuprizine"
@@ -334,28 +334,28 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/imidazoline
+/datum/chemical_reaction/instant/imidazoline
 	name = "imidazoline"
 	id = "imidazoline"
 	result = "imidazoline"
 	required_reagents = list("carbon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/ethylredoxrazine
+/datum/chemical_reaction/instant/ethylredoxrazine
 	name = "Ethylredoxrazine"
 	id = "ethylredoxrazine"
 	result = "ethylredoxrazine"
 	required_reagents = list("oxygen" = 1, "anti_toxin" = 1, "carbon" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/calciumcarbonate
+/datum/chemical_reaction/instant/calciumcarbonate
 	name = "Calcium Carbonate"
 	id = "calciumcarbonate"
 	result = "calciumcarbonate"
 	required_reagents = list("oxygen" = 3, "calcium" = 1, "carbon" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/soporific
+/datum/chemical_reaction/instant/soporific
 	name = "Soporific"
 	id = "stoxin"
 	result = "stoxin"
@@ -363,35 +363,35 @@
 	inhibitors = list("phosphorus") // Messes with the smoke
 	result_amount = 5
 
-/decl/chemical_reaction/instant/chloralhydrate
+/datum/chemical_reaction/instant/chloralhydrate
 	name = "Chloral Hydrate"
 	id = "chloralhydrate"
 	result = "chloralhydrate"
 	required_reagents = list("ethanol" = 1, "chlorine" = 3, "water" = 1)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/potassium_chloride
+/datum/chemical_reaction/instant/potassium_chloride
 	name = "Potassium Chloride"
 	id = "potassium_chloride"
 	result = "potassium_chloride"
 	required_reagents = list("sodiumchloride" = 1, "potassium" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/potassium_chlorophoride
+/datum/chemical_reaction/instant/potassium_chlorophoride
 	name = "Potassium Chlorophoride"
 	id = "potassium_chlorophoride"
 	result = "potassium_chlorophoride"
 	required_reagents = list("potassium_chloride" = 1, "phoron" = 1, "chloralhydrate" = 1)
 	result_amount = 4
 
-/decl/chemical_reaction/instant/zombiepowder
+/datum/chemical_reaction/instant/zombiepowder
 	name = "Zombie Powder"
 	id = "zombiepowder"
 	result = "zombiepowder"
 	required_reagents = list("carpotoxin" = 5, "stoxin" = 5, "copper" = 5)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/carpotoxin
+/datum/chemical_reaction/instant/carpotoxin
 	name = "Carpotoxin"
 	id = "carpotoxin"
 	result = "carpotoxin"
@@ -400,28 +400,28 @@
 	inhibitors = list("radium" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/mindbreaker
+/datum/chemical_reaction/instant/mindbreaker
 	name = "Mindbreaker Toxin"
 	id = "mindbreaker"
 	result = "mindbreaker"
 	required_reagents = list("silicon" = 1, "hydrogen" = 1, "anti_toxin" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/lipozine
+/datum/chemical_reaction/instant/lipozine
 	name = "Lipozine"
 	id = "Lipozine"
 	result = "lipozine"
 	required_reagents = list("sodiumchloride" = 1, "ethanol" = 1, "radium" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/surfactant
+/datum/chemical_reaction/instant/surfactant
 	name = "Foam surfactant"
 	id = "foam surfactant"
 	result = "fluorosurfactant"
 	required_reagents = list("fluorine" = 2, "carbon" = 2, "sacid" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/ammonia
+/datum/chemical_reaction/instant/ammonia
 	name = "Ammonia"
 	id = "ammonia"
 	result = "ammonia"
@@ -429,63 +429,63 @@
 	inhibitors = list("phoron" = 1) // Messes with lexorin
 	result_amount = 3
 
-/decl/chemical_reaction/instant/diethylamine
+/datum/chemical_reaction/instant/diethylamine
 	name = "Diethylamine"
 	id = "diethylamine"
 	result = "diethylamine"
 	required_reagents = list ("ammonia" = 1, "ethanol" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/left4zed
+/datum/chemical_reaction/instant/left4zed
 	name = "Left4Zed"
 	id = "left4zed"
 	result = "left4zed"
 	required_reagents = list ("diethylamine" = 2, "mutagen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/robustharvest
+/datum/chemical_reaction/instant/robustharvest
 	name = "RobustHarvest"
 	id = "robustharvest"
 	result = "robustharvest"
 	required_reagents = list ("ammonia" = 1, "calcium" = 1, "neurotoxic_protein" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/space_cleaner
+/datum/chemical_reaction/instant/space_cleaner
 	name = "Space cleaner"
 	id = "cleaner"
 	result = "cleaner"
 	required_reagents = list("ammonia" = 1, "water" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/plantbgone
+/datum/chemical_reaction/instant/plantbgone
 	name = "Plant-B-Gone"
 	id = "plantbgone"
 	result = "plantbgone"
 	required_reagents = list("toxin" = 1, "water" = 4)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/foaming_agent
+/datum/chemical_reaction/instant/foaming_agent
 	name = "Foaming Agent"
 	id = "foaming_agent"
 	result = "foaming_agent"
 	required_reagents = list("lithium" = 1, "hydrogen" = 1)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/glycerol
+/datum/chemical_reaction/instant/glycerol
 	name = "Glycerol"
 	id = "glycerol"
 	result = "glycerol"
 	required_reagents = list("cornoil" = 3, "sacid" = 1)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/sodiumchloride
+/datum/chemical_reaction/instant/sodiumchloride
 	name = "Sodium Chloride"
 	id = "sodiumchloride"
 	result = "sodiumchloride"
 	required_reagents = list("sodium" = 1, "chlorine" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/condensedcapsaicin
+/datum/chemical_reaction/instant/condensedcapsaicin
 	name = "Condensed Capsaicin"
 	id = "condensedcapsaicin"
 	result = "condensedcapsaicin"
@@ -493,7 +493,7 @@
 	catalysts = list("phoron" = 5)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/coolant
+/datum/chemical_reaction/instant/coolant
 	name = "Coolant"
 	id = "coolant"
 	result = "coolant"
@@ -501,49 +501,49 @@
 	result_amount = 3
 	log_is_important = 1
 
-/decl/chemical_reaction/instant/rezadone
+/datum/chemical_reaction/instant/rezadone
 	name = "Rezadone"
 	id = "rezadone"
 	result = "rezadone"
 	required_reagents = list("carpotoxin" = 1, "cryptobiolin" = 1, "copper" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/lexorin
+/datum/chemical_reaction/instant/lexorin
 	name = "Lexorin"
 	id = "lexorin"
 	result = "lexorin"
 	required_reagents = list("phoron" = 1, "hydrogen" = 1, "nitrogen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/methylphenidate
+/datum/chemical_reaction/instant/methylphenidate
 	name = "Methylphenidate"
 	id = "methylphenidate"
 	result = "methylphenidate"
 	required_reagents = list("mindbreaker" = 1, "hydrogen" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/citalopram
+/datum/chemical_reaction/instant/citalopram
 	name = "Citalopram"
 	id = "citalopram"
 	result = "citalopram"
 	required_reagents = list("mindbreaker" = 1, "carbon" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/paroxetine
+/datum/chemical_reaction/instant/paroxetine
 	name = "Paroxetine"
 	id = "paroxetine"
 	result = "paroxetine"
 	required_reagents = list("mindbreaker" = 1, "oxygen" = 1, "inaprovaline" = 1)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/neurotoxin
+/datum/chemical_reaction/instant/neurotoxin
 	name = "Neurotoxin"
 	id = "neurotoxin"
 	result = "neurotoxin"
 	required_reagents = list("gargleblaster" = 1, "stoxin" = 1)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/luminol
+/datum/chemical_reaction/instant/luminol
 	name = "Luminol"
 	id = "luminol"
 	result = "luminol"
@@ -552,7 +552,7 @@
 
 /* Solidification */
 
-/decl/chemical_reaction/instant/solidification
+/datum/chemical_reaction/instant/solidification
 	name = "Solid Iron"
 	id = "solidiron"
 	result = null
@@ -560,47 +560,47 @@
 	result_amount = 1
 	var/sheet_to_give = /obj/item/stack/material/iron
 
-/decl/chemical_reaction/instant/solidification/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/solidification/on_reaction(var/datum/reagents/holder, var/created_volume)
 	new sheet_to_give(get_turf(holder.my_atom), created_volume)
 	return
 
 
-/decl/chemical_reaction/instant/solidification/phoron
+/datum/chemical_reaction/instant/solidification/phoron
 	name = "Solid Phoron"
 	id = "solidphoron"
 	required_reagents = list("frostoil" = 5, "phoron" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/phoron
 
 
-/decl/chemical_reaction/instant/solidification/silver
+/datum/chemical_reaction/instant/solidification/silver
 	name = "Solid Silver"
 	id = "solidsilver"
 	required_reagents = list("frostoil" = 5, "silver" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/silver
 
 
-/decl/chemical_reaction/instant/solidification/gold
+/datum/chemical_reaction/instant/solidification/gold
 	name = "Solid Gold"
 	id = "solidgold"
 	required_reagents = list("frostoil" = 5, "gold" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/gold
 
 
-/decl/chemical_reaction/instant/solidification/platinum
+/datum/chemical_reaction/instant/solidification/platinum
 	name = "Solid Platinum"
 	id = "solidplatinum"
 	required_reagents = list("frostoil" = 5, "platinum" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/platinum
 
 
-/decl/chemical_reaction/instant/solidification/uranium
+/datum/chemical_reaction/instant/solidification/uranium
 	name = "Solid Uranium"
 	id = "soliduranium"
 	required_reagents = list("frostoil" = 5, "uranium" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/uranium
 
 
-/decl/chemical_reaction/instant/solidification/hydrogen
+/datum/chemical_reaction/instant/solidification/hydrogen
 	name = "Solid Hydrogen"
 	id = "solidhydrogen"
 	required_reagents = list("frostoil" = 100, "hydrogen" = REAGENTS_PER_SHEET)
@@ -608,34 +608,34 @@
 
 
 // These are from Xenobio.
-/decl/chemical_reaction/instant/solidification/steel
+/datum/chemical_reaction/instant/solidification/steel
 	name = "Solid Steel"
 	id = "solidsteel"
 	required_reagents = list("frostoil" = 5, "steel" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/steel
 
 
-/decl/chemical_reaction/instant/solidification/plasteel
+/datum/chemical_reaction/instant/solidification/plasteel
 	name = "Solid Plasteel"
 	id = "solidplasteel"
 	required_reagents = list("frostoil" = 10, "plasteel" = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/plasteel
 
 
-/decl/chemical_reaction/instant/plastication
+/datum/chemical_reaction/instant/plastication
 	name = "Plastic"
 	id = "solidplastic"
 	result = null
 	required_reagents = list("pacid" = 1, "plasticide" = 2)
 	result_amount = 1
 
-/decl/chemical_reaction/instant/plastication/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/plastication/on_reaction(var/datum/reagents/holder, var/created_volume)
 	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
 	return
 
 /* Grenade reactions */
 
-/decl/chemical_reaction/instant/explosion_potassium
+/datum/chemical_reaction/instant/explosion_potassium
 	name = "Explosion"
 	id = "explosion_potassium"
 	result = null
@@ -643,7 +643,7 @@
 	result_amount = 2
 	mix_message = null
 
-/decl/chemical_reaction/instant/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
 	e.set_up(round (created_volume/10, 1), holder.my_atom, 0, 0)
 	if(isliving(holder.my_atom))
@@ -655,14 +655,14 @@
 	holder.clear_reagents()
 	return
 
-/decl/chemical_reaction/instant/flash_powder
+/datum/chemical_reaction/instant/flash_powder
 	name = "Flash powder"
 	id = "flash_powder"
 	result = null
 	required_reagents = list("aluminum" = 1, "potassium" = 1, "sulfur" = 1 )
 	result_amount = null
 
-/decl/chemical_reaction/instant/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
 	s.set_up(2, 1, location)
@@ -685,14 +685,14 @@
 				M.flash_eyes()
 				M.Stun(5)
 
-/decl/chemical_reaction/instant/emp_pulse
+/datum/chemical_reaction/instant/emp_pulse
 	name = "EMP Pulse"
 	id = "emp_pulse"
 	result = null
 	required_reagents = list("uranium" = 1, "iron" = 1) // Yes, laugh, it's the best recipe I could think of that makes a little bit of sense
 	result_amount = 2
 
-/decl/chemical_reaction/instant/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 	// 100 created volume = 4 heavy range & 7 light range. A few tiles smaller than traitor EMP grandes.
 	// 200 created volume = 8 heavy range & 14 light range. 4 tiles larger than traitor EMP grenades.
@@ -700,7 +700,7 @@
 	holder.clear_reagents()
 	return
 
-/decl/chemical_reaction/instant/nitroglycerin
+/datum/chemical_reaction/instant/nitroglycerin
 	name = "Nitroglycerin"
 	id = "nitroglycerin"
 	result = "nitroglycerin"
@@ -708,7 +708,7 @@
 	result_amount = 2
 	log_is_important = 1
 
-/decl/chemical_reaction/instant/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/datum/effect/effect/system/reagents_explosion/e = new()
 	e.set_up(round (created_volume/2, 1), holder.my_atom, 0, 0)
 	if(isliving(holder.my_atom))
@@ -721,14 +721,14 @@
 	holder.clear_reagents()
 	return
 
-/decl/chemical_reaction/instant/napalm
+/datum/chemical_reaction/instant/napalm
 	name = "Napalm"
 	id = "napalm"
 	result = null
 	required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
 	result_amount = 1
 
-/decl/chemical_reaction/instant/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/turf/location = get_turf(holder.my_atom.loc)
 	for(var/turf/simulated/floor/target_tile in range(0,location))
 		target_tile.assume_gas("volatile_fuel", created_volume, 400+T0C)
@@ -736,14 +736,14 @@
 	holder.del_reagent("napalm")
 	return
 
-/decl/chemical_reaction/instant/chemsmoke
+/datum/chemical_reaction/instant/chemsmoke
 	name = "Chemsmoke"
 	id = "chemsmoke"
 	result = null
 	required_reagents = list("potassium" = 1, "sugar" = 1, "phosphorus" = 1)
 	result_amount = 0.4
 
-/decl/chemical_reaction/instant/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 	var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem
 	S.attach(location)
@@ -754,7 +754,7 @@
 	holder.clear_reagents()
 	return
 
-/decl/chemical_reaction/instant/foam
+/datum/chemical_reaction/instant/foam
 	name = "Foam"
 	id = "foam"
 	result = null
@@ -762,7 +762,7 @@
 	result_amount = 2
 	mix_message = "The solution violently bubbles!"
 
-/decl/chemical_reaction/instant/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/foam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
@@ -774,14 +774,14 @@
 	holder.clear_reagents()
 	return
 
-/decl/chemical_reaction/instant/metalfoam
+/datum/chemical_reaction/instant/metalfoam
 	name = "Metal Foam"
 	id = "metalfoam"
 	result = null
 	required_reagents = list("aluminum" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/metalfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
@@ -792,14 +792,14 @@
 	s.start()
 	return
 
-/decl/chemical_reaction/instant/ironfoam
+/datum/chemical_reaction/instant/ironfoam
 	name = "Iron Foam"
 	id = "ironlfoam"
 	result = null
 	required_reagents = list("iron" = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
+/datum/chemical_reaction/instant/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 
 	for(var/mob/M in viewers(5, location))
@@ -812,241 +812,241 @@
 
 /* Paint */
 
-/decl/chemical_reaction/instant/red_paint
+/datum/chemical_reaction/instant/red_paint
 	name = "Red paint"
 	id = "red_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_red" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/red_paint/send_data()
+/datum/chemical_reaction/instant/red_paint/send_data()
 	return "#FE191A"
 
-/decl/chemical_reaction/instant/orange_paint
+/datum/chemical_reaction/instant/orange_paint
 	name = "Orange paint"
 	id = "orange_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_orange" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/orange_paint/send_data()
+/datum/chemical_reaction/instant/orange_paint/send_data()
 	return "#FFBE4F"
 
-/decl/chemical_reaction/instant/yellow_paint
+/datum/chemical_reaction/instant/yellow_paint
 	name = "Yellow paint"
 	id = "yellow_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_yellow" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/yellow_paint/send_data()
+/datum/chemical_reaction/instant/yellow_paint/send_data()
 	return "#FDFE7D"
 
-/decl/chemical_reaction/instant/green_paint
+/datum/chemical_reaction/instant/green_paint
 	name = "Green paint"
 	id = "green_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_green" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/green_paint/send_data()
+/datum/chemical_reaction/instant/green_paint/send_data()
 	return "#18A31A"
 
-/decl/chemical_reaction/instant/blue_paint
+/datum/chemical_reaction/instant/blue_paint
 	name = "Blue paint"
 	id = "blue_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_blue" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/blue_paint/send_data()
+/datum/chemical_reaction/instant/blue_paint/send_data()
 	return "#247CFF"
 
-/decl/chemical_reaction/instant/purple_paint
+/datum/chemical_reaction/instant/purple_paint
 	name = "Purple paint"
 	id = "purple_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_purple" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/purple_paint/send_data()
+/datum/chemical_reaction/instant/purple_paint/send_data()
 	return "#CC0099"
 
-/decl/chemical_reaction/instant/grey_paint //mime
+/datum/chemical_reaction/instant/grey_paint //mime
 	name = "Grey paint"
 	id = "grey_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_grey" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/grey_paint/send_data()
+/datum/chemical_reaction/instant/grey_paint/send_data()
 	return "#808080"
 
-/decl/chemical_reaction/instant/brown_paint
+/datum/chemical_reaction/instant/brown_paint
 	name = "Brown paint"
 	id = "brown_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "marker_ink_brown" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/brown_paint/send_data()
+/datum/chemical_reaction/instant/brown_paint/send_data()
 	return "#846F35"
 
-/decl/chemical_reaction/instant/blood_paint
+/datum/chemical_reaction/instant/blood_paint
 	name = "Blood paint"
 	id = "blood_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "blood" = 2)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/blood_paint/send_data(var/datum/reagents/T)
+/datum/chemical_reaction/instant/blood_paint/send_data(var/datum/reagents/T)
 	var/t = T.get_data("blood")
 	if(t && t["blood_colour"])
 		return t["blood_colour"]
 	return "#FE191A" // Probably red
 
-/decl/chemical_reaction/instant/milk_paint
+/datum/chemical_reaction/instant/milk_paint
 	name = "Milk paint"
 	id = "milk_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "milk" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/milk_paint/send_data()
+/datum/chemical_reaction/instant/milk_paint/send_data()
 	return "#F0F8FF"
 
-/decl/chemical_reaction/instant/orange_juice_paint
+/datum/chemical_reaction/instant/orange_juice_paint
 	name = "Orange juice paint"
 	id = "orange_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "orangejuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/orange_juice_paint/send_data()
+/datum/chemical_reaction/instant/orange_juice_paint/send_data()
 	return "#E78108"
 
-/decl/chemical_reaction/instant/tomato_juice_paint
+/datum/chemical_reaction/instant/tomato_juice_paint
 	name = "Tomato juice paint"
 	id = "tomato_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "tomatojuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/tomato_juice_paint/send_data()
+/datum/chemical_reaction/instant/tomato_juice_paint/send_data()
 	return "#731008"
 
-/decl/chemical_reaction/instant/lime_juice_paint
+/datum/chemical_reaction/instant/lime_juice_paint
 	name = "Lime juice paint"
 	id = "lime_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "limejuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/lime_juice_paint/send_data()
+/datum/chemical_reaction/instant/lime_juice_paint/send_data()
 	return "#365E30"
 
-/decl/chemical_reaction/instant/carrot_juice_paint
+/datum/chemical_reaction/instant/carrot_juice_paint
 	name = "Carrot juice paint"
 	id = "carrot_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "carrotjuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/carrot_juice_paint/send_data()
+/datum/chemical_reaction/instant/carrot_juice_paint/send_data()
 	return "#973800"
 
-/decl/chemical_reaction/instant/berry_juice_paint
+/datum/chemical_reaction/instant/berry_juice_paint
 	name = "Berry juice paint"
 	id = "berry_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "berryjuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/berry_juice_paint/send_data()
+/datum/chemical_reaction/instant/berry_juice_paint/send_data()
 	return "#990066"
 
-/decl/chemical_reaction/instant/grape_juice_paint
+/datum/chemical_reaction/instant/grape_juice_paint
 	name = "Grape juice paint"
 	id = "grape_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "grapejuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/grape_juice_paint/send_data()
+/datum/chemical_reaction/instant/grape_juice_paint/send_data()
 	return "#863333"
 
-/decl/chemical_reaction/instant/poisonberry_juice_paint
+/datum/chemical_reaction/instant/poisonberry_juice_paint
 	name = "Poison berry juice paint"
 	id = "poisonberry_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "poisonberryjuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/poisonberry_juice_paint/send_data()
+/datum/chemical_reaction/instant/poisonberry_juice_paint/send_data()
 	return "#863353"
 
-/decl/chemical_reaction/instant/watermelon_juice_paint
+/datum/chemical_reaction/instant/watermelon_juice_paint
 	name = "Watermelon juice paint"
 	id = "watermelon_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "watermelonjuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/watermelon_juice_paint/send_data()
+/datum/chemical_reaction/instant/watermelon_juice_paint/send_data()
 	return "#B83333"
 
-/decl/chemical_reaction/instant/lemon_juice_paint
+/datum/chemical_reaction/instant/lemon_juice_paint
 	name = "Lemon juice paint"
 	id = "lemon_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "lemonjuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/lemon_juice_paint/send_data()
+/datum/chemical_reaction/instant/lemon_juice_paint/send_data()
 	return "#AFAF00"
 
-/decl/chemical_reaction/instant/banana_juice_paint
+/datum/chemical_reaction/instant/banana_juice_paint
 	name = "Banana juice paint"
 	id = "banana_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "banana" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/banana_juice_paint/send_data()
+/datum/chemical_reaction/instant/banana_juice_paint/send_data()
 	return "#C3AF00"
 
-/decl/chemical_reaction/instant/potato_juice_paint
+/datum/chemical_reaction/instant/potato_juice_paint
 	name = "Potato juice paint"
 	id = "potato_juice_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "potatojuice" = 5)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/potato_juice_paint/send_data()
+/datum/chemical_reaction/instant/potato_juice_paint/send_data()
 	return "#302000"
 
-/decl/chemical_reaction/instant/carbon_paint
+/datum/chemical_reaction/instant/carbon_paint
 	name = "Carbon paint"
 	id = "carbon_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "carbon" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/carbon_paint/send_data()
+/datum/chemical_reaction/instant/carbon_paint/send_data()
 	return "#333333"
 
-/decl/chemical_reaction/instant/aluminum_paint
+/datum/chemical_reaction/instant/aluminum_paint
 	name = "Aluminum paint"
 	id = "aluminum_paint"
 	result = "paint"
 	required_reagents = list("plasticide" = 1, "water" = 3, "aluminum" = 1)
 	result_amount = 5
 
-/decl/chemical_reaction/instant/aluminum_paint/send_data()
+/datum/chemical_reaction/instant/aluminum_paint/send_data()
 	return "#F0F8FF"
 
 //R-UST Port
-/decl/chemical_reaction/instant/hydrophoron
+/datum/chemical_reaction/instant/hydrophoron
 	name = "Hydrophoron"
 	id = "hydrophoron"
 	result = "hydrophoron"
@@ -1054,7 +1054,7 @@
 	inhibitors = list("nitrogen" = 1) //So it doesn't mess with lexorin
 	result_amount = 2
 
-/decl/chemical_reaction/instant/deuterium
+/datum/chemical_reaction/instant/deuterium
 	name = "Deuterium"
 	id = "deuterium"
 	result = "deuterium"
@@ -1062,21 +1062,21 @@
 	result_amount = 3
 
 //Skrellian crap.
-/decl/chemical_reaction/instant/talum_quem
+/datum/chemical_reaction/instant/talum_quem
 	name = "Talum-quem"
 	id = "talum_quem"
 	result = "talum_quem"
 	required_reagents = list("space_drugs" = 2, "sugar" = 1, "amatoxin" = 1)
 	result_amount = 4
 
-/decl/chemical_reaction/instant/qerr_quem
+/datum/chemical_reaction/instant/qerr_quem
 	name = "Qerr-quem"
 	id = "qerr_quem"
 	result = "qerr_quem"
 	required_reagents = list("nicotine" = 1, "carbon" = 1, "sugar" = 2)
 	result_amount = 4
 
-/decl/chemical_reaction/instant/malish_qualem
+/datum/chemical_reaction/instant/malish_qualem
 	name = "Malish-Qualem"
 	id = "malish-qualem"
 	result = "malish-qualem"
@@ -1085,7 +1085,7 @@
 	result_amount = 2
 
 // Biomass, for cloning and bioprinters
-/decl/chemical_reaction/instant/biomass
+/datum/chemical_reaction/instant/biomass
 	name = "Biomass"
 	id = "biomass"
 	result = "biomass"
@@ -1094,14 +1094,14 @@
 
 // Neutralization.
 
-/decl/chemical_reaction/instant/neutralize_neurotoxic_protein
+/datum/chemical_reaction/instant/neutralize_neurotoxic_protein
 	name = "Neutralize Toxic Proteins"
 	id = "neurotoxic_protein_neutral"
 	result = "protein"
 	required_reagents = list("anti_toxin" = 1, "neurotoxic_protein" = 2)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/neutralize_carpotoxin
+/datum/chemical_reaction/instant/neutralize_carpotoxin
 	name = "Neutralize Carpotoxin"
 	id = "carpotoxin_neutral"
 	result = "protein"
@@ -1109,7 +1109,7 @@
 	catalysts = list("sifsap" = 10)
 	result_amount = 2
 
-/decl/chemical_reaction/instant/neutralize_spidertoxin
+/datum/chemical_reaction/instant/neutralize_spidertoxin
 	name = "Neutralize Spidertoxin"
 	id = "spidertoxin_neutral"
 	result = "protein"
