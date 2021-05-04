@@ -4,6 +4,6 @@
 		"Technical Assistant",
 		"Medical Intern",
 		"Research Assistant",
-		"Visitor" = /decl/hierarchy/outfit/job/assistant/visitor,
-		"Resident" = /decl/hierarchy/outfit/job/assistant/resident
+		"Visitor" = /datum/hierarchy/outfit/job/assistant/visitor,
+		"Resident" = /datum/hierarchy/outfit/job/assistant/resident
 	)

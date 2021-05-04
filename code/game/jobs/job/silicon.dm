@@ -19,7 +19,7 @@
 	has_headset = FALSE
 	assignable = FALSE
 	mob_type = JOB_SILICON_AI
-	outfit_type = /decl/hierarchy/outfit/job/silicon/ai
+	outfit_type = /datum/hierarchy/outfit/job/silicon/ai
 	job_description = "The AI oversees the operation of the station and its crew, but has no real authority over them. \
 						The AI is required to follow its Laws, and Lawbound Synthetics that are linked to it are expected to follow \
 						the AI's commands, and their own Laws."
@@ -56,7 +56,7 @@
 	has_headset = FALSE
 	assignable = FALSE
 	mob_type = JOB_SILICON_ROBOT
-	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
+	outfit_type = /datum/hierarchy/outfit/job/silicon/cyborg
 	job_description = "A Cyborg is a mobile station synthetic, piloted by a cybernetically preserved brain. It is considered a person, but is still required \
 						to follow its Laws."
 	alt_titles = list("Robot" = /datum/alt_title/robot, "Drone" = /datum/alt_title/drone)

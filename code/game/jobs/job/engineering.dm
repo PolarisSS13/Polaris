@@ -30,7 +30,7 @@
 			            access_ce, access_RC_announce, access_keycard_auth, access_tcomsat, access_ai_upload)
 	minimal_player_age = 7
 
-	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
+	outfit_type = /datum/hierarchy/outfit/job/engineering/chief_engineer
 	job_description = "The Chief Engineer manages the Engineering Department, ensuring that the Engineers work on what needs to be done, handling distribution \
 						of manpower as much as they handle hands-on operations and repairs. They are also expected to keep the rest of the station informed of \
 						any structural threats to the station that may be hazardous to health or disruptive to work."
@@ -56,7 +56,7 @@
 
 	minimal_player_age = 3
 
-	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
+	outfit_type = /datum/hierarchy/outfit/job/engineering/engineer
 	job_description = "An Engineer keeps the station running. They repair damages, keep the atmosphere stable, and ensure that power is being \
 						generated and distributed. On quiet shifts, they may be called upon to make cosmetic alterations to the station."
 
@@ -95,6 +95,6 @@
 
 	minimal_player_age = 3
 
-	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos
+	outfit_type = /datum/hierarchy/outfit/job/engineering/atmos
 	job_description = "An Atmospheric Technician is primarily concerned with keeping the station's atmosphere breathable. They are expected to have a good \
 						understanding of the pipes, vents, and scrubbers that move gasses around the station, and to be familiar with proper firefighting procedure."

@@ -43,7 +43,7 @@ var/const/access_explorer = 43
 	minimum_character_age = 25
 	ideal_character_age = 50 // Because 70 is a tad on the old side
 
-	outfit_type = /decl/hierarchy/outfit/job/captain
+	outfit_type = /datum/hierarchy/outfit/job/captain
 	alt_titles = list("Site Manager", "Overseer")
 
 /datum/job/captain/get_access()
@@ -69,7 +69,7 @@ var/const/access_explorer = 43
 	access = list(access_pilot, access_cargo, access_mining, access_mining_station)
 	minimal_access = list(access_pilot, access_cargo, access_mining, access_mining_station)
 
-	outfit_type = /decl/hierarchy/outfit/job/pilot
+	outfit_type = /datum/hierarchy/outfit/job/pilot
 	job_description = "A Pilot flies one of the shuttles between the Southern Cross and the outpost on Sif."
 
 /datum/job/explorer
@@ -86,13 +86,13 @@ var/const/access_explorer = 43
 	access = list(access_explorer, access_research)
 	minimal_access = list(access_explorer, access_research)
 
-	outfit_type = /decl/hierarchy/outfit/job/explorer2
+	outfit_type = /datum/hierarchy/outfit/job/explorer2
 	job_description = "An Explorer searches for interesting things on the surface of Sif, and returns them to the station."
 
 /*
 	alt_titles = list(
-		"Explorer Technician" = /decl/hierarchy/outfit/job/explorer2/technician,
-		"Explorer Medic" = /decl/hierarchy/outfit/job/explorer2/medic)
+		"Explorer Technician" = /datum/hierarchy/outfit/job/explorer2/technician,
+		"Explorer Medic" = /datum/hierarchy/outfit/job/explorer2/medic)
 */
 
 /datum/job/sar
@@ -109,5 +109,5 @@ var/const/access_explorer = 43
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist, access_explorer)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_explorer)
 
-	outfit_type = /decl/hierarchy/outfit/job/medical/sar
+	outfit_type = /datum/hierarchy/outfit/job/medical/sar
 	job_description = "A Search and Rescue operative recovers individuals who are injured or dead on the surface of Sif."

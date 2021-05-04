@@ -1,5 +1,5 @@
-/decl/hierarchy/outfit/pirate
-	hierarchy_type = /decl/hierarchy/outfit/pirate
+/datum/hierarchy/outfit/pirate
+	hierarchy_type = /datum/hierarchy/outfit/pirate
 	name = "Pirate"
 	uniform = /obj/item/clothing/under/pirate
 	shoes = /obj/item/clothing/shoes/brown
@@ -7,9 +7,9 @@
 	glasses = /obj/item/clothing/glasses/eyepatch
 	l_hand = /obj/item/weapon/melee/energy/sword/pirate
 
-/decl/hierarchy/outfit/pirate/norm
+/datum/hierarchy/outfit/pirate/norm
 
-/decl/hierarchy/outfit/pirate/space
+/datum/hierarchy/outfit/pirate/space
 	name = "Pirate - Space"
 	head = /obj/item/clothing/head/helmet/space
 	suit = /obj/item/clothing/suit/pirate

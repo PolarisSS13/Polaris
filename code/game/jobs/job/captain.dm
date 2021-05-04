@@ -25,7 +25,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimum_character_age = 25
 	ideal_character_age = 70 // Old geezer captains ftw
 
-	outfit_type = /decl/hierarchy/outfit/job/captain
+	outfit_type = /datum/hierarchy/outfit/job/captain
 	job_description = "The Site Manager manages the other Command Staff, and through them the rest of the station. Though they have access to everything, \
 						they do not understand everything, and are expected to delegate tasks to the appropriate crew member. The Site Manager is expected to \
 						have an understanding of Standard Operating Procedure, and is subject to it, and legal action, in the same way as every other crew member."
@@ -68,7 +68,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimum_character_age = 25
 	ideal_character_age = 50
 
-	outfit_type = /decl/hierarchy/outfit/job/hop
+	outfit_type = /datum/hierarchy/outfit/job/hop
 	job_description = "The Head of Personnel manages the Service department, the Exploration team, and most other civilians. They also \
 						manage the Supply department, through the Quartermaster. In addition, the Head of Personnel oversees the personal accounts \
 						of the crew, including their money and access. If necessary, the Head of Personnel is first in line to assume Acting Command."
@@ -112,7 +112,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	access = list(access_heads, access_keycard_auth)
 	minimal_access = list(access_heads, access_keycard_auth)
 
-	outfit_type = /decl/hierarchy/outfit/job/secretary
+	outfit_type = /datum/hierarchy/outfit/job/secretary
 	job_description = "A Command Secretary handles paperwork duty for the Heads of Staff, so they can better focus on managing their departments. \
 						They are not Heads of Staff, and have no real authority."
 

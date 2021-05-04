@@ -17,9 +17,9 @@ var/list/outfits_decls_by_type_
 		return
 	outfits_decls_ = list()
 	outfits_decls_by_type_ = list()
-	outfits_decls_root_ = new/decl/hierarchy/outfit()
+	outfits_decls_root_ = new/datum/hierarchy/outfit()
 
-/decl/hierarchy/outfit
+/datum/hierarchy/outfit
 	name = "Naked"
 
 	var/uniform = null
@@ -61,7 +61,7 @@ var/list/outfits_decls_by_type_
 
 	var/undress = 1	//Does the outfit undress the mob upon equp?
 
-/decl/hierarchy/outfit/New()
+/datum/hierarchy/outfit/New()
 	..()
 
 	if(is_hidden_category())
@@ -69,7 +69,7 @@ var/list/outfits_decls_by_type_
 	outfits_decls_by_type_[type] = src
 	dd_insertObjectList(outfits_decls_, src)
 
-/decl/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
+/datum/hierarchy/outfit/proc/pre_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_BACKPACK)
 		switch(H.backbag)
 			if(2) back = backpack
@@ -78,7 +78,7 @@ var/list/outfits_decls_by_type_
 			if(5) back = messenger_bag
 			else back = null
 
-/decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
+/datum/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
 		var/obj/item/weapon/tank/jetpack/J = locate(/obj/item/weapon/tank/jetpack) in H
 		if(!J)
@@ -86,7 +86,7 @@ var/list/outfits_decls_by_type_
 		J.toggle()
 		J.toggle_valve()
 
-/decl/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
+/datum/hierarchy/outfit/proc/equip(mob/living/carbon/human/H, var/rank, var/assignment)
 	equip_base(H)
 
 	rank = rank || id_pda_assignment
@@ -107,7 +107,7 @@ var/list/outfits_decls_by_type_
 		H.set_id_info(W)
 	return 1
 
-/decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
+/datum/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
 	pre_equip(H)
 
 	//Start with uniform,suit,backpack for additional slots
@@ -155,7 +155,7 @@ var/list/outfits_decls_by_type_
 	if(H.species)
 		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL, flags&OUTFIT_COMPREHENSIVE_SURVIVAL)
 
-/decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
+/datum/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot || !id_type)
 		return
 	var/obj/item/weapon/card/id/W = new id_type(H)
@@ -168,7 +168,7 @@ var/list/outfits_decls_by_type_
 	if(H.equip_to_slot_or_del(W, id_slot))
 		return W
 
-/decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
+/datum/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
 	if(!pda_slot || !pda_type)
 		return
 	var/obj/item/device/pda/pda = new pda_type(H)
@@ -179,5 +179,5 @@ var/list/outfits_decls_by_type_
 		pda.name = "PDA-[H.real_name] ([assignment])"
 		return pda
 
-/decl/hierarchy/outfit/dd_SortValue()
+/datum/hierarchy/outfit/dd_SortValue()
 	return name

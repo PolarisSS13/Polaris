@@ -1,6 +1,6 @@
-/decl/hierarchy/outfit/job
+/datum/hierarchy/outfit/job
 	name = "Standard Gear"
-	hierarchy_type = /decl/hierarchy/outfit/job
+	hierarchy_type = /datum/hierarchy/outfit/job
 
 	uniform = /obj/item/clothing/under/color/grey
 	l_ear = /obj/item/device/radio/headset
@@ -13,7 +13,7 @@
 
 	flags = OUTFIT_HAS_BACKPACK
 
-/decl/hierarchy/outfit/job/equip_id(mob/living/carbon/human/H, rank, assignment)
+/datum/hierarchy/outfit/job/equip_id(mob/living/carbon/human/H, rank, assignment)
 	var/obj/item/weapon/card/id/C = ..()
 	var/datum/job/J = job_master.GetJob(rank)
 	if(J)

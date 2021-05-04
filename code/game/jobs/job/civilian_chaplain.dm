@@ -12,7 +12,7 @@
 	access = list(access_morgue, access_chapel_office, access_crematorium, access_maint_tunnels)
 	minimal_access = list(access_chapel_office, access_crematorium)
 
-	outfit_type = /decl/hierarchy/outfit/job/chaplain
+	outfit_type = /datum/hierarchy/outfit/job/chaplain
 	job_description = "The Chaplain ministers to the spiritual needs of the crew."
 	alt_titles = list("Counselor" = /datum/alt_title/counselor)
 

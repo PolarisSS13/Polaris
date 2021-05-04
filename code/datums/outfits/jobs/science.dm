@@ -1,5 +1,5 @@
-/decl/hierarchy/outfit/job/science
-	hierarchy_type = /decl/hierarchy/outfit/job/science
+/datum/hierarchy/outfit/job/science
+	hierarchy_type = /datum/hierarchy/outfit/job/science
 	l_ear = /obj/item/device/radio/headset/headset_sci
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	shoes = /obj/item/clothing/shoes/white
@@ -8,7 +8,7 @@
 	satchel_one = /obj/item/weapon/storage/backpack/satchel/tox
 	messenger_bag = /obj/item/weapon/storage/backpack/messenger/tox
 
-/decl/hierarchy/outfit/job/science/rd
+/datum/hierarchy/outfit/job/science/rd
 	name = OUTFIT_JOB_NAME("Research Director")
 	l_ear = /obj/item/device/radio/headset/heads/rd
 	uniform = /obj/item/clothing/under/rank/research_director
@@ -17,19 +17,19 @@
 	id_type = /obj/item/weapon/card/id/science/head
 	pda_type = /obj/item/device/pda/heads/rd
 
-/decl/hierarchy/outfit/job/science/scientist
+/datum/hierarchy/outfit/job/science/scientist
 	name = OUTFIT_JOB_NAME("Scientist")
 	uniform = /obj/item/clothing/under/rank/scientist
 	id_type = /obj/item/weapon/card/id/science
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 
-/decl/hierarchy/outfit/job/science/xenobiologist
+/datum/hierarchy/outfit/job/science/xenobiologist
 	name = OUTFIT_JOB_NAME("Xenobiologist")
 	uniform = /obj/item/clothing/under/rank/scientist
 	id_type = /obj/item/weapon/card/id/science
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
 
-/decl/hierarchy/outfit/job/science/roboticist
+/datum/hierarchy/outfit/job/science/roboticist
 	name = OUTFIT_JOB_NAME("Roboticist")
 	uniform = /obj/item/clothing/under/rank/roboticist
 	shoes = /obj/item/clothing/shoes/black

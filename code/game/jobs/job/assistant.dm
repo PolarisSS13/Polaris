@@ -16,7 +16,7 @@
 	access = list()			//See /datum/job/assistant/get_access()
 	minimal_access = list()	//See /datum/job/assistant/get_access()
 
-	outfit_type = /decl/hierarchy/outfit/job/assistant
+	outfit_type = /datum/hierarchy/outfit/job/assistant
 	job_description = "An Assistant does whatever is requested of them. Though they are part of the crew, they have no real authority."
 	alt_titles = list("Technical Assistant" = /datum/alt_title/tech_assist,
 						"Medical Intern"= /datum/alt_title/med_intern, "Research Assistant" = /datum/alt_title/research_assist,
@@ -49,10 +49,10 @@
 	title_blurb = "A Visitor is anyone who has arrived on the station but does not have a specific job to do. Many off-duty crewmembers \
 					who care to make use of the station's facilities arrive as Visitors. Properly registered Vistors are considered \
 					to be part of the crew for most if not all purposes, but they have no real authority."
-	title_outfit = /decl/hierarchy/outfit/job/assistant/visitor
+	title_outfit = /datum/hierarchy/outfit/job/assistant/visitor
 
 /datum/alt_title/resident		// Just in case it makes a comeback
 	title = "Resident"
 	title_blurb = "A Resident is an individual who resides on the station, frequently in a different part of the station than what is seen. \
 					They are considered to be part of the crew for most purposes, but have no real authority."
-	title_outfit = /decl/hierarchy/outfit/job/assistant/resident
+	title_outfit = /datum/hierarchy/outfit/job/assistant/resident

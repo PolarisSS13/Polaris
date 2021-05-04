@@ -1,4 +1,4 @@
-/decl/hierarchy/outfit/job/captain
+/datum/hierarchy/outfit/job/captain
 	name = OUTFIT_JOB_NAME("Captain")
 	glasses = /obj/item/clothing/glasses/sunglasses
 	uniform = /obj/item/clothing/under/rank/captain
@@ -10,7 +10,7 @@
 	id_type = /obj/item/weapon/card/id/gold
 	pda_type = /obj/item/device/pda/captain
 
-/decl/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
+/datum/hierarchy/outfit/job/captain/post_equip(var/mob/living/carbon/human/H)
 	..()
 	if(H.age>49)
 		// Since we can have something other than the default uniform at this
@@ -23,7 +23,7 @@
 			else
 				qdel(medal)
 
-/decl/hierarchy/outfit/job/hop
+/datum/hierarchy/outfit/job/hop
 	name = OUTFIT_JOB_NAME("Head of Personnel")
 	uniform = /obj/item/clothing/under/rank/head_of_personnel
 	l_ear = /obj/item/device/radio/headset/heads/hop
@@ -31,7 +31,7 @@
 	id_type = /obj/item/weapon/card/id/silver
 	pda_type = /obj/item/device/pda/heads/hop
 
-/decl/hierarchy/outfit/job/secretary
+/datum/hierarchy/outfit/job/secretary
 	name = OUTFIT_JOB_NAME("Command Secretary")
 	l_ear = /obj/item/device/radio/headset/headset_com
 	shoes = /obj/item/clothing/shoes/brown
@@ -39,7 +39,7 @@
 	pda_type = /obj/item/device/pda/heads
 	r_hand = /obj/item/weapon/clipboard
 
-/decl/hierarchy/outfit/job/secretary/pre_equip(mob/living/carbon/human/H)
+/datum/hierarchy/outfit/job/secretary/pre_equip(mob/living/carbon/human/H)
 	..()
 	if(H.gender == FEMALE)
 		uniform = /obj/item/clothing/under/suit_jacket/female/skirt

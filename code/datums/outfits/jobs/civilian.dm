@@ -1,39 +1,39 @@
-/decl/hierarchy/outfit/job/assistant
+/datum/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")
 	id_type = /obj/item/weapon/card/id/assistant
 
-/decl/hierarchy/outfit/job/assistant/visitor
+/datum/hierarchy/outfit/job/assistant/visitor
 	name = OUTFIT_JOB_NAME("Visitor")
 	id_pda_assignment = "Visitor"
 	uniform = /obj/item/clothing/under/assistantformal
 
-/decl/hierarchy/outfit/job/assistant/resident
+/datum/hierarchy/outfit/job/assistant/resident
 	name = OUTFIT_JOB_NAME("Resident")
 	id_pda_assignment = "Resident"
 	uniform = /obj/item/clothing/under/color/white
 
-/decl/hierarchy/outfit/job/service
+/datum/hierarchy/outfit/job/service
 	l_ear = /obj/item/device/radio/headset/headset_service
-	hierarchy_type = /decl/hierarchy/outfit/job/service
+	hierarchy_type = /datum/hierarchy/outfit/job/service
 
-/decl/hierarchy/outfit/job/service/bartender
+/datum/hierarchy/outfit/job/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender")
 	uniform = /obj/item/clothing/under/rank/bartender
 	id_type = /obj/item/weapon/card/id/civilian/bartender
 	pda_type = /obj/item/device/pda/bar
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/bar = 1)
 
-/decl/hierarchy/outfit/job/service/bartender/post_equip(mob/living/carbon/human/H)
+/datum/hierarchy/outfit/job/service/bartender/post_equip(mob/living/carbon/human/H)
 	..()
 	for(var/obj/item/clothing/accessory/permit/gun/bar/permit in H.back.contents)
 		permit.set_name(H.real_name)
 
-/decl/hierarchy/outfit/job/service/bartender/barista
+/datum/hierarchy/outfit/job/service/bartender/barista
 	name = OUTFIT_JOB_NAME("Barista")
 	id_pda_assignment = "Barista"
 	backpack_contents = null
 
-/decl/hierarchy/outfit/job/service/chef
+/datum/hierarchy/outfit/job/service/chef
 	name = OUTFIT_JOB_NAME("Chef")
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
@@ -41,11 +41,11 @@
 	id_type = /obj/item/weapon/card/id/civilian/chef
 	pda_type = /obj/item/device/pda/chef
 
-/decl/hierarchy/outfit/job/service/chef/cook
+/datum/hierarchy/outfit/job/service/chef/cook
 	name = OUTFIT_JOB_NAME("Cook")
 	id_pda_assignment = "Cook"
 
-/decl/hierarchy/outfit/job/service/gardener
+/datum/hierarchy/outfit/job/service/gardener
 	name = OUTFIT_JOB_NAME("Gardener")
 	uniform = /obj/item/clothing/under/rank/hydroponics
 	suit = /obj/item/clothing/suit/storage/apron
@@ -57,23 +57,23 @@
 	id_type = /obj/item/weapon/card/id/civilian/botanist
 	pda_type = /obj/item/device/pda/botanist
 
-/decl/hierarchy/outfit/job/service/janitor
+/datum/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
 	uniform = /obj/item/clothing/under/rank/janitor
 	id_type = /obj/item/weapon/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
-/decl/hierarchy/outfit/job/librarian
+/datum/hierarchy/outfit/job/librarian
 	name = OUTFIT_JOB_NAME("Librarian")
 	uniform = /obj/item/clothing/under/suit_jacket/red
 	l_hand = /obj/item/weapon/barcodescanner
 	id_type = /obj/item/weapon/card/id/civilian
 	pda_type = /obj/item/device/pda/librarian
 
-/decl/hierarchy/outfit/job/librarian/journalist
+/datum/hierarchy/outfit/job/librarian/journalist
 	id_type = /obj/item/weapon/card/id/civilian/journalist
 
-/decl/hierarchy/outfit/job/internal_affairs_agent
+/datum/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
 	l_ear = /obj/item/device/radio/headset/ia
 	uniform = /obj/item/clothing/under/rank/internalaffairs
@@ -84,14 +84,14 @@
 	id_type = /obj/item/weapon/card/id/civilian/internal_affairs
 	pda_type = /obj/item/device/pda/lawyer
 
-/decl/hierarchy/outfit/job/chaplain
+/datum/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
 	l_hand = /obj/item/weapon/storage/bible
 	id_type = /obj/item/weapon/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
 
-/decl/hierarchy/outfit/job/explorer
+/datum/hierarchy/outfit/job/explorer
 	name = OUTFIT_JOB_NAME("Explorer")
 	shoes = /obj/item/clothing/shoes/boots/winter/explorer
 	uniform = /obj/item/clothing/under/explorer

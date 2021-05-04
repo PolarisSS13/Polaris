@@ -6,7 +6,7 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 */
 
 
-/decl/hierarchy/outfit/job/explorer2
+/datum/hierarchy/outfit/job/explorer2
 	name = OUTFIT_JOB_NAME("Explorer")
 	shoes = /obj/item/clothing/shoes/boots/winter/explorer
 	uniform = /obj/item/clothing/under/explorer
@@ -19,24 +19,24 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_COMPREHENSIVE_SURVIVAL
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/planetside = 1)
 
-/decl/hierarchy/outfit/job/explorer2/post_equip(mob/living/carbon/human/H)
+/datum/hierarchy/outfit/job/explorer2/post_equip(mob/living/carbon/human/H)
 	..()
 	for(var/obj/item/clothing/accessory/permit/gun/planetside/permit in H.back.contents)
 		permit.set_name(H.real_name)
 
-/decl/hierarchy/outfit/job/explorer2/technician
+/datum/hierarchy/outfit/job/explorer2/technician
 	name = OUTFIT_JOB_NAME("Explorer Technician")
 	belt = /obj/item/weapon/storage/belt/utility/full
 	pda_slot = slot_l_store
 	id_pda_assignment = "Explorer Technician"
 
-/decl/hierarchy/outfit/job/explorer2/medic
+/datum/hierarchy/outfit/job/explorer2/medic
 	name = OUTFIT_JOB_NAME("Explorer Medic")
 	l_hand = /obj/item/weapon/storage/firstaid/regular
 	pda_slot = slot_l_store
 	id_pda_assignment = "Explorer Medic"
 
-/decl/hierarchy/outfit/job/pilot
+/datum/hierarchy/outfit/job/pilot
 	name = OUTFIT_JOB_NAME("Pilot")
 	shoes = /obj/item/clothing/shoes/black
 	uniform = /obj/item/clothing/under/rank/pilot1/no_webbing
@@ -52,7 +52,7 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	id_pda_assignment = "Pilot"
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_COMPREHENSIVE_SURVIVAL
 
-/decl/hierarchy/outfit/job/medical/sar
+/datum/hierarchy/outfit/job/medical/sar
 	name = OUTFIT_JOB_NAME("Search and Rescue")
 	uniform = /obj/item/clothing/under/utility/blue
 	suit = /obj/item/clothing/suit/storage/hooded/wintercoat/medical/sar
