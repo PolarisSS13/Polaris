@@ -100,6 +100,11 @@ var/global/list/string_slot_flags = list(
 	"uniform" = SLOT_TIE,
 	"holster" = SLOT_HOLSTER
 )
+GLOBAL_LIST_EMPTY(emotes)
+GLOBAL_LIST_EMPTY(emotes_by_key)
+GLOBAL_LIST_EMPTY(emotes_by_type)
+
+GLOBAL_LIST_EMPTY(plantgenes)
 
 /proc/get_mannequin(var/ckey)
 	if(!mannequins_)
@@ -109,16 +114,14 @@ var/global/list/string_slot_flags = list(
 		. = new/mob/living/carbon/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
-GLOBAL_LIST_EMPTY(emotes)
-GLOBAL_LIST_EMPTY(emotes_by_key)
-GLOBAL_LIST_EMPTY(emotes_by_type)
-
 //////////////////////////
 /////Initial Building/////
 //////////////////////////
 
 /proc/makeDatumRefLists()
 	var/list/paths
+
+	init_subtypes(/datum/plantgene, GLOB.plantgenes)
 
 	//Hair - Initialise all /datum/sprite_accessory/hair into an list indexed by hair-style name
 	paths = typesof(/datum/sprite_accessory/hair) - /datum/sprite_accessory/hair

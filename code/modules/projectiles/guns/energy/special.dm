@@ -47,7 +47,7 @@
 	modifystate = "floramut"
 	cell_type = /obj/item/weapon/cell/device/weapon/recharge
 	battery_lock = 1
-	var/decl/plantgene/gene = null
+	var/datum/plantgene/gene = null
 
 	firemodes = list(
 		list(mode_name="induce mutations", projectile_type=/obj/item/projectile/energy/floramut, modifystate="floramut"),

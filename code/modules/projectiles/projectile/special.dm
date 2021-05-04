@@ -181,7 +181,7 @@
 	damage_type = TOX
 	nodamage = 1
 	check_armour = "energy"
-	var/decl/plantgene/gene = null
+	var/datum/plantgene/gene = null
 
 /obj/item/projectile/energy/florayield
 	name = "beta somatoray"
