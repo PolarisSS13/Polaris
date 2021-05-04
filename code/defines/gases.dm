@@ -1,4 +1,4 @@
-/decl/xgm_gas/oxygen
+/datum/xgm_gas/oxygen
 	id = "oxygen"
 	name = "Oxygen"
 	specific_heat = 20	// J/(mol*K)
@@ -6,19 +6,19 @@
 
 	flags = XGM_GAS_OXIDIZER
 
-/decl/xgm_gas/nitrogen
+/datum/xgm_gas/nitrogen
 	id = "nitrogen"
 	name = "Nitrogen"
 	specific_heat = 20	// J/(mol*K)
 	molar_mass = 0.028	// kg/mol
 
-/decl/xgm_gas/carbon_dioxide
+/datum/xgm_gas/carbon_dioxide
 	id = "carbon_dioxide"
 	name = "Carbon Dioxide"
 	specific_heat = 30	// J/(mol*K)
 	molar_mass = 0.044	// kg/mol
 
-/decl/xgm_gas/phoron
+/datum/xgm_gas/phoron
 	id = "phoron"
 	name = "Phoron"
 
@@ -35,7 +35,7 @@
 	overlay_limit = 0.7
 	flags = XGM_GAS_FUEL | XGM_GAS_CONTAMINANT | XGM_GAS_FUSION_FUEL //R-UST port, adding XGM_GAS_FUSION_FUEL flag.
 
-/decl/xgm_gas/volatile_fuel
+/datum/xgm_gas/volatile_fuel
 	id = "volatile_fuel"
 	name = "Volatile Fuel"
 	specific_heat = 253	// J/(mol*K)	C8H18 gasoline. Isobaric, but good enough.
@@ -43,7 +43,7 @@
 
 	flags = XGM_GAS_FUEL
 
-/decl/xgm_gas/nitrous_oxide
+/datum/xgm_gas/nitrous_oxide
 	id = "nitrous_oxide"
 	name = "Nitrous Oxide"
 	specific_heat = 40	// J/(mol*K)
