@@ -10,9 +10,9 @@
 //			/old_opacity: Opacity before the change
 //			/new_opacity: Opacity after the change
 
-var/decl/observ/turf_changed/turf_changed_event = new()
+var/datum/observ/turf_changed/turf_changed_event = new()
 
-/decl/observ/turf_changed
+/datum/observ/turf_changed
 	name = "Turf Changed"
 	expected_type = /turf
 

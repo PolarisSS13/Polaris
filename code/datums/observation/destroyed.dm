@@ -6,7 +6,7 @@
 //		Arguments that the called proc should expect:
 //			/datum/destroyed_instance: The instance that was destroyed.
 
-/decl/observ/destroyed
+/datum/observ/destroyed
 	name = "Destroyed"
 
 /datum/Destroy()

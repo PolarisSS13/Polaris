@@ -2,7 +2,7 @@ GLOBAL_LIST_EMPTY(global_listen_count)
 GLOBAL_LIST_EMPTY(event_sources_count)
 GLOBAL_LIST_EMPTY(event_listen_count)
 
-/decl/observ/destroyed/raise_event()
+/datum/observ/destroyed/raise_event()
 	. = ..()
 	if(!.)
 		return
@@ -16,41 +16,41 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 		cleanup_event_listener(source, GLOB.event_listen_count[source])
 
 
-/decl/observ/register(var/datum/event_source, var/datum/listener, var/proc_call)
+/datum/observ/register(var/datum/event_source, var/datum/listener, var/proc_call)
 	. = ..()
 	if(.)
 		GLOB.event_sources_count[event_source] += 1
 		GLOB.event_listen_count[listener] += 1
 
-/decl/observ/unregister(var/datum/event_source, var/datum/listener, var/proc_call)
+/datum/observ/unregister(var/datum/event_source, var/datum/listener, var/proc_call)
 	. = ..()
 	if(.)
 		GLOB.event_sources_count[event_source] -= 1
 		GLOB.event_listen_count[listener] -= 1
 
-/decl/observ/register_global(var/datum/listener, var/proc_call)
+/datum/observ/register_global(var/datum/listener, var/proc_call)
 	. = ..()
 	if(.)
 		GLOB.global_listen_count[listener] += 1
 
-/decl/observ/unregister_global(var/datum/listener, var/proc_call)
+/datum/observ/unregister_global(var/datum/listener, var/proc_call)
 	. = ..()
 	if(.)
 		GLOB.global_listen_count[listener] -= 1
 
-/decl/observ/destroyed/proc/cleanup_global_listener(listener, listen_count)
+/datum/observ/destroyed/proc/cleanup_global_listener(listener, listen_count)
 	GLOB.global_listen_count -= listener
 	for(var/entry in GLOB.all_observable_events.events)
-		var/decl/observ/event = entry
+		var/datum/observ/event = entry
 		if(event.unregister_global(listener))
 		//	log_debug("[event] - [listener] was deleted while still registered to global events.") // TODO: Apply axe, reimplement with datum component listeners
 			if(!(--listen_count))
 				return
 
-/decl/observ/destroyed/proc/cleanup_source_listeners(event_source, source_listener_count)
+/datum/observ/destroyed/proc/cleanup_source_listeners(event_source, source_listener_count)
 	GLOB.event_sources_count -= event_source
 	for(var/entry in GLOB.all_observable_events.events)
-		var/decl/observ/event = entry
+		var/datum/observ/event = entry
 		var/proc_owners = event.event_sources[event_source]
 		if(proc_owners)
 			for(var/proc_owner in proc_owners)
@@ -59,10 +59,10 @@ GLOBAL_LIST_EMPTY(event_listen_count)
 					if(!(--source_listener_count))
 						return
 
-/decl/observ/destroyed/proc/cleanup_event_listener(listener, listener_count)
+/datum/observ/destroyed/proc/cleanup_event_listener(listener, listener_count)
 	GLOB.event_listen_count -= listener
 	for(var/entry in GLOB.all_observable_events.events)
-		var/decl/observ/event = entry
+		var/datum/observ/event = entry
 		for(var/event_source in event.event_sources)
 			if(event.unregister(event_source, listener))
 			//	log_debug("[event] - [listener] was deleted while still listening to [event_source].") // TODO: Apply axe, reimplement with datum component listeners

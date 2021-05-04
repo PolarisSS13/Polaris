@@ -8,13 +8,13 @@
 //			/old_dir: The dir before the change.
 //			/new_dir: The dir after the change.
 
-GLOBAL_DATUM_INIT(dir_set_event, /decl/observ/dir_set, new)
+GLOBAL_DATUM_INIT(dir_set_event, /datum/observ/dir_set, new)
 
-/decl/observ/dir_set
+/datum/observ/dir_set
 	name = "Direction Set"
 	expected_type = /atom
 
-/decl/observ/dir_set/register(var/atom/dir_changer, var/datum/listener, var/proc_call)
+/datum/observ/dir_set/register(var/atom/dir_changer, var/datum/listener, var/proc_call)
 	. = ..()
 
 	// Listen to the parent if possible.
