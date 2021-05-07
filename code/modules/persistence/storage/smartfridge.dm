@@ -43,7 +43,7 @@
 
 /datum/persistent/storage/smartfridge/produce
 	name = "fruit_storage"
-	max_storage = 20
+	max_storage = 50
 	store_per_type = FALSE
 	target_type = /obj/machinery/smartfridge/produce
 
