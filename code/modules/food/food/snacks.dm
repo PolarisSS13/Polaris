@@ -7160,7 +7160,7 @@
 	trash = /obj/item/trash/vegration
 	filling_color = "#FFFFFF"
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_desc = list("saddness" = 3, "veggie" = 3)
+	nutriment_desc = list("sadness" = 3, "veggie" = 3)
 	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged/vegration/Initialize()
