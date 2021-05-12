@@ -545,7 +545,6 @@
 /obj/random/material/precious/item_to_spawn()
 	return pick(/obj/item/stack/material/gold{amount = 5},
 				/obj/item/stack/material/copper{amount = 5},
-				/obj/item/stack/material/diamond{amount = 5},
 				/obj/item/stack/material/silver{amount = 5},
 				/obj/item/stack/material/platinum{amount = 5},
 				/obj/item/stack/material/osmium{amount = 5})
