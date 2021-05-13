@@ -27,10 +27,16 @@
 
 	if(!default_type)
 		default_type = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name("[default_type]")
-	if(!material)
-		return INITIALIZE_HINT_QDEL
+	set_material(default_type)
 
+// This would be great to shove on /obj or somewhere else higher up if/when we make materials universal.
+/obj/item/stack/material/proc/set_material(new_material_string)
+	material = get_material_by_name("[new_material_string]")
+	if(!material)
+		stack_trace("Material stack had no material and deleted itself.")
+		qdel(src)
+		return
+	
 	recipes = material.get_recipes()
 	stacktype = material.stack_type
 	if(islist(material.stack_origin_tech))
