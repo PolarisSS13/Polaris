@@ -43,8 +43,6 @@ GLOBAL_LIST_BOILERPLATE(all_debugging_effects, /obj/effect/debugging)
 	set category = "Mapping"
 	set name = "-None of these are for ingame use!!"
 
-	..()
-
 /client/proc/camera_view()
 	set category = "Mapping"
 	set name = "Camera Range Display"
