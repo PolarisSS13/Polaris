@@ -330,10 +330,6 @@
 	if(!host)
 		return
 
-		if(ai_holder)
-			ai_holder.hostile = initial(ai_holder.hostile)
-			ai_holder.lose_target()
-
 	host_bodypart.implants -= src
 	host_bodypart = null
 

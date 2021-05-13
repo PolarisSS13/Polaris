@@ -176,8 +176,6 @@
 		remove_target()
 		return find_target() //Returns if we found anything else to do
 
-	return FALSE //Nothing new to do
-
 // 'Hard' loss of target. Clean things up and return to idle.
 /datum/ai_holder/proc/remove_target()
 	ai_log("remove_target() : Entering.", AI_LOG_TRACE)

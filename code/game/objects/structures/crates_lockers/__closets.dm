@@ -434,10 +434,6 @@
 			breakout = 0
 			return
 
-			playsound(src, breakout_sound, 100, 1)
-			animate_shake()
-			add_fingerprint(escapee)
-
 		//Well then break it!
 		breakout = 0
 		to_chat(escapee, "<span class='warning'>You successfully break out!</span>")

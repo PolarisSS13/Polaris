@@ -2605,7 +2605,6 @@
 				AI.icon_state = "ai-crash"
 			src.occupant = cur_occupant
 */
-	return
 
 ///////////////////////
 ///// Power stuff /////
