@@ -192,7 +192,7 @@
 				chemicals -= 30
 
 			if(host.getToxLoss() >= 30 && chemicals > 50)
-				var/randomchem = pickweight("tramadol" = 7, "anti_toxin" = 15, "frostoil" = 3)
+				var/randomchem = pickweight(list("tramadol" = 7, "anti_toxin" = 15, "frostoil" = 3))
 				host.reagents.add_reagent(randomchem, 5)
 				chemicals -= 50
 
