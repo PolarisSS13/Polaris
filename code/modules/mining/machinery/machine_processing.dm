@@ -163,8 +163,8 @@
 	var/obj/machinery/mineral/output = null
 	var/obj/machinery/mineral/console = null
 	var/sheets_per_tick = 10
-	var/list/ores_processing[0]
-	var/list/ores_stored[0]
+	var/list/ores_processing = list()
+	var/list/ores_stored = list()
 	var/static/list/alloy_data
 	var/active = FALSE
 	var/tick = 0
