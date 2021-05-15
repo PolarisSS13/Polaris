@@ -224,3 +224,44 @@
 	name = "emergency response team medical helmet"
 	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
+
+//Pilot helmets
+/obj/item/clothing/head/helmet/pilot1
+	name = "standard pilot helmet"
+	desc = "Standard pilot gear. Protects the head from impacts. This one has a retractable visor"
+	icon_state = "pilot1"
+	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0)
+	item_icons = list(slot_head_str = 'icons/mob/pilot_helmet.dmi')
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/pilot_helmet.dmi'
+		)
+	action_button_name = "Toggle Visor"
+
+/obj/item/clothing/head/helmet/pilot1/attack_self(mob/user as mob)
+	if(src.icon_state == initial(icon_state))
+		src.icon_state = "[icon_state]up"
+		to_chat(user, "You raise the visor on the pilot helmet.")
+	else
+		src.icon_state = initial(icon_state)
+		to_chat(user, "You lower the visor on the pilot helmet.")
+	update_clothing_icon() //so our mob-overlays update
+
+/obj/item/clothing/head/helmet/pilot2
+	name = "colored pilot helmet"
+	desc = "A colored version of the standard pilot helmet. Protects the head from impacts. This one has a retractable visor"
+	icon_state = "pilot2"
+	armor = list(melee = 20, bullet = 10, laser = 10, energy = 0, bomb = 0, bio = 0, rad = 0)
+	item_icons = list(slot_head_str = 'icons/mob/pilot_helmet.dmi')
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/pilot_helmet.dmi'
+		)
+	action_button_name = "Toggle Visor"
+
+/obj/item/clothing/head/helmet/pilot2/attack_self(mob/user as mob)
+	if(src.icon_state == initial(icon_state))
+		src.icon_state = "[icon_state]up"
+		to_chat(user, "You raise the visor on the pilot helmet.")
+	else
+		src.icon_state = initial(icon_state)
+		to_chat(user, "You lower the visor on the pilot helmet.")
+	update_clothing_icon() //so our mob-overlays update
