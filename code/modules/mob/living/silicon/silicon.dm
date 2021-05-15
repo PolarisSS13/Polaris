@@ -185,7 +185,7 @@
 	return FALSE
 
 /mob/living/silicon/add_language(var/language, var/can_speak=1)
-	var/var/datum/language/added_language = GLOB.all_languages[language]
+	var/datum/language/added_language = GLOB.all_languages[language]
 	if(!added_language)
 		return
 
@@ -195,7 +195,7 @@
 		return 1
 
 /mob/living/silicon/remove_language(var/rem_language)
-	var/var/datum/language/removed_language = GLOB.all_languages[rem_language]
+	var/datum/language/removed_language = GLOB.all_languages[rem_language]
 	if(!removed_language)
 		return
 
