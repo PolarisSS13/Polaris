@@ -35,6 +35,11 @@ GLOBAL_LIST_EMPTY(respawn_timers)
 var/global/list/poster_designs = list()
 var/global/list/NT_poster_designs = list()
 
+// Holomaps
+var/global/list/holomap_markers = list()
+var/global/list/mapping_units = list()
+var/global/list/mapping_beacons = list()
+
 //Preferences stuff
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
