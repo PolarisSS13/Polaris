@@ -37,7 +37,6 @@
 		if(!R)
 			log_error("A torso was robotize() but has no model that can be found: [model]. May affect FBPs.")
 		owner.synthetic = R
-		owner.update_emotes()
 	return FALSE
 
 /obj/item/organ/external/chest/handle_germ_effects()
