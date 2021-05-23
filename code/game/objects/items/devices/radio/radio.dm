@@ -58,7 +58,7 @@ var/global/list/default_medbay_channels = list(
 	var/bs_tx_preload_id
 	var/bs_rx_preload_id
 
-	matter = list("glass" = 25, DEFAULT_WALL_MATERIAL = 75, MAT_COPPER = 15)
+	matter = list("glass" = 25,DEFAULT_WALL_MATERIAL = 75)
 	var/const/FREQ_LISTENING = 1
 	var/list/internal_channels
 
@@ -148,7 +148,7 @@ var/global/list/default_medbay_channels = list(
 
 	return tgui_interact(user)
 
-/obj/item/device/radio/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, master_ui, datum/topic_state/state)
+/obj/item/device/radio/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, datum/nano_ui/master_ui, datum/topic_state/state)
 	log_runtime(EXCEPTION("Warning: [user] attempted to call ui_interact on radio [src] [type]. This is deprecated. Please update the caller to tgui_interact."))
 
 /obj/item/device/radio/Topic(href, href_list)

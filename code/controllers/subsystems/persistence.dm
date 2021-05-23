@@ -36,6 +36,9 @@ SUBSYSTEM_DEF(persistence)
 	if(!(T.z in using_map.station_levels))
 		return
 
+	if(!(T.z in using_map.persist_levels))
+		return
+
 	if(!tracking_values[track_type])
 		tracking_values[track_type] = list()
 	tracking_values[track_type] += value

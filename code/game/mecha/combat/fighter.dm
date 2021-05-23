@@ -14,6 +14,7 @@
 	initial_icon = ""
 
 	step_in = 2 //Fast
+	step_energy_drain = 0 //These should use fuel instead of energy
 
 	health = 400
 	maxhealth = 400
@@ -35,6 +36,14 @@
 	max_utility_equip = 1
 	max_universal_equip = 1
 	max_special_equip = 1
+
+	starting_components = list(
+		/obj/item/mecha_parts/component/hull/lightweight,
+		/obj/item/mecha_parts/component/actuator,
+		/obj/item/mecha_parts/component/armor,
+		/obj/item/mecha_parts/component/gas,
+		/obj/item/mecha_parts/component/electrical
+		)
 
 /obj/mecha/combat/fighter/Initialize()
 	. = ..()

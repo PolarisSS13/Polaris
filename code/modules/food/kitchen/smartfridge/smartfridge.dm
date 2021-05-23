@@ -13,7 +13,7 @@
 	idle_power_usage = 5
 	active_power_usage = 100
 	flags = NOREACT
-	var/global/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
+	var/max_n_of_items = 999 // Sorry but the BYOND infinite loop detector doesn't look things over 1000.
 	var/list/item_records = list()
 	var/datum/stored_item/currently_vending = null	//What we're putting out of the machine.
 	var/stored_datum_type = /datum/stored_item
@@ -32,8 +32,8 @@
 	icon_base = "fridge_sci"
 	icon_contents = "chem"
 
-/obj/machinery/smartfridge/New()
-	..()
+/obj/machinery/smartfridge/Initialize()
+	. = ..()
 	if(persistent)
 		SSpersistence.track_value(src, persistent)
 	if(is_secure)
