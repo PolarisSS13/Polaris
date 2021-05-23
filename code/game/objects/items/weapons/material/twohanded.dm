@@ -149,9 +149,9 @@
 	force = 10
 	w_class = ITEMSIZE_LARGE
 	slot_flags = SLOT_BACK
-	force_divisor = 0.5 			// 15 when wielded with hardness 30 (glass)
-	unwielded_force_divisor = 0.375
-	thrown_force_divisor = 1.5 		// 22.5 when thrown with weight 15 (glass)
+	force_divisor = 0.3 			// 30 force with a durasteel spear, 24 with plasteel.
+	unwielded_force_divisor = 0.375 // One-handing it does 11.25 damage with durasteel, 9 for plasteel.
+	thrown_force_divisor = 1.5 		// 33.75 throwing force when throwing a durasteel spear, 27 with plasteel. Throwforce uses one-handed damage.
 	throw_speed = 3
 	edge = 0
 	sharp = 1
@@ -163,6 +163,7 @@
 	fragile = 1	//It's a haphazard thing of glass, wire, and steel
 	reach = 2 // Spears are long.
 	attackspeed = 14
+	slowdown = 1 // Spears are also long, bulky, and heavy, so this might help reduce them from being godly to kite with.
 
 /obj/item/weapon/material/twohanded/riding_crop
 	name = "riding crop"
