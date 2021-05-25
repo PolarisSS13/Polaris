@@ -33,7 +33,10 @@
 		qdel(src)
 
 proc/get_deepspace(x,y)
-	var/obj/effect/overmap/visitable/sector/temporary/res = locate(x,y,global.using_map.overmap_z)
+	var/turf/unsimulated/map/overmap_turf = locate(x,y,global.using_map.overmap_z)
+	if(!istype(overmap_turf))
+		CRASH("Attempt to get deepspace at ([x],[y]) which is not on overmap: [overmap_turf]")
+	var/obj/effect/overmap/visitable/sector/temporary/res = locate() in overmap_turf
 	if(istype(res))
 		return res
 	return new /obj/effect/overmap/visitable/sector/temporary(x, y)
