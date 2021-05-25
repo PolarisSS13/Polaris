@@ -116,8 +116,6 @@
 	icon_state = "rig0-vintagemarine"
 	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black", slot_l_hand_str = "syndicate-helm-black")
 	armor = list(melee = 40, bullet = 35, laser = 35, energy = 5, bomb = 40, bio = 100, rad = 50)
-	breach_threshold = 16 //These are kinda thicc
-	resilience = 0.15 //Armored
 	siemens_coefficient = 0.8
 
 /obj/item/clothing/suit/space/void/refurb/marine
