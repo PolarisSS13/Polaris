@@ -35,6 +35,7 @@ var/list/all_maps = list()
 	var/static/list/xenoarch_exempt_levels = list()	//Z-levels exempt from xenoarch finds and digsites spawning.
 	var/static/list/persist_levels = list() // Z-levels where SSpersistence should persist between rounds. Defaults to station_levels if unset.
 	var/static/list/empty_levels = null     // Empty Z-levels that may be used for various things (currently used by bluespace jump)
+	var/static/list/secret_levels = list() // Z-levels that (non-admin) ghosts can't get to
 	// End Static Lists
 
 	// Z-levels available to various consoles, such as the crew monitor. Defaults to station_levels if unset.
