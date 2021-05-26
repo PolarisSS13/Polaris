@@ -18,7 +18,7 @@
 	armor = list(melee = 60, bullet = 50, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 60)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs)
 	siemens_coefficient = 0.6
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	resilience = 0.05 //Military Armor
 
 /obj/item/clothing/head/helmet/space/void/merc/fire
@@ -42,6 +42,5 @@
 	max_pressure_protection = 20* ONE_ATMOSPHERE
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/gun,/obj/item/ammo_magazine,/obj/item/ammo_casing,/obj/item/weapon/melee/baton,/obj/item/weapon/melee/energy/sword,/obj/item/weapon/handcuffs,/obj/item/weapon/material/twohanded/fireaxe,/obj/item/weapon/flamethrower)
 	siemens_coefficient = 0.7
-	breach_threshold = 24 //Super Extra Thicc
-	resilience = 0.05 //Military Armor
+	breach_threshold = 18 //Super Extra Thicc
 	slowdown = 1

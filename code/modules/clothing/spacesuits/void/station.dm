@@ -20,7 +20,7 @@
 	min_pressure_protection = 0  * ONE_ATMOSPHERE
 	max_pressure_protection = 15 * ONE_ATMOSPHERE
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE+5000
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	slowdown = 1
 
 //Engineering HAZMAT Voidsuit
@@ -118,7 +118,7 @@
 	item_state_slots = list(slot_r_hand_str = "mining_voidsuit", slot_l_hand_str = "mining_voidsuit")
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/pickaxe)
 	armor = list(melee = 50, bullet = 15, laser = 25, energy = 15, bomb = 55, bio = 100, rad = 50)
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	resilience = 0.15 //Armored
 	slowdown = 1
 
@@ -166,7 +166,7 @@
 	icon_state = "rig-medical_emt"
 	item_state_slots = list(slot_r_hand_str = "medical_voidsuit_emt", slot_l_hand_str = "medical_voidsuit_emt")
 	armor = list(melee = 40, bullet = 15, laser = 30, energy = 15, bomb = 35, bio = 100, rad = 50)
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 
 //Medical Biohazard Voidsuit
 
@@ -189,7 +189,7 @@
 	max_heat_protection_temperature = FIRE_HELMET_MAX_HEAT_PROTECTION_TEMPERATURE
 	min_pressure_protection = 0  * ONE_ATMOSPHERE
 	max_pressure_protection = 15 * ONE_ATMOSPHERE
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	slowdown = 1.5
 
 //Medical Streamlined Voidsuit
@@ -283,7 +283,7 @@
 	armor = list(melee = 50, bullet = 25, laser = 25, energy = 15, bomb = 45, bio = 100, rad = 10)
 	allowed = list(/obj/item/weapon/gun,/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/weapon/melee/baton)
 	siemens_coefficient = 0.7
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	resilience = 0.15 //Armored
 	slowdown = 1
 
@@ -301,7 +301,7 @@
 	desc = "A heavy-set and ominous looking crowd control suit. Fitted with state of the art shock absorbing materials, to disperse blunt force trauma."
 	icon_state = "rig-sec_riot"
 	armor = list(melee = 70, bullet = 15, laser = 15, energy = 15, bomb = 60, bio = 100, rad = 10)
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	resilience = 0.1 //Heavily Armored
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuit_riot", slot_l_hand_str = "sec_voidsuit_riot")
 
@@ -317,7 +317,7 @@
 	name = "security EVA voidsuit"
 	desc = "A grey-black voidsuit with red highlights. A little tacky, but it offers better protection against modern firearms and radiation than standard-issue security voidsuits."
 	armor = list(melee = 40, bullet = 40, laser = 40, energy = 25, bomb = 40, bio = 100, rad = 50)
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	resilience = 0.1 //Heavily Armored
 	icon_state = "rig-secalt"
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
@@ -343,7 +343,7 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	min_pressure_protection = 0 * ONE_ATMOSPHERE
 	max_pressure_protection = 20* ONE_ATMOSPHERE
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	slowdown = 1.5
 
 //Atmospherics Surplus Voidsuit
@@ -380,7 +380,7 @@
 	armor = list(melee = 50, bullet = 15, laser = 35, energy = 25, bomb = 30, bio = 100, rad = 70)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/healthanalyzer,/obj/item/device/gps,/obj/item/device/radio/beacon, \
 	/obj/item/weapon/shovel,/obj/item/ammo_magazine,/obj/item/weapon/gun)
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	resilience = 0.15 //Armored
 
 //SAR
@@ -402,7 +402,7 @@
 	armor = list(melee = 50, bullet = 15, laser = 25, energy = 15, bomb = 30, bio = 100, rad = 90)
 	allowed = list(/obj/item/device/flashlight,/obj/item/weapon/tank,/obj/item/device/suit_cooling_unit,/obj/item/stack/flag,/obj/item/device/healthanalyzer,/obj/item/device/gps,/obj/item/device/radio/beacon, \
 	/obj/item/weapon/shovel,/obj/item/ammo_magazine,/obj/item/weapon/gun,/obj/item/weapon/storage/firstaid,/obj/item/stack/medical)
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	resilience = 0.15 //Armored
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE+5000
 

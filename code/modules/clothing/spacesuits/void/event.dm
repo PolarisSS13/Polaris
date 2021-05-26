@@ -51,7 +51,7 @@
 	min_pressure_protection = 0  * ONE_ATMOSPHERE
 	max_pressure_protection = 15 * ONE_ATMOSPHERE
 	max_heat_protection_temperature = SPACE_SUIT_MAX_HEAT_PROTECTION_TEMPERATURE+10000
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	allowed = list(/obj/item/device/flashlight,
 			/obj/item/weapon/tank,
 			/obj/item/device/suit_cooling_unit,
@@ -125,7 +125,7 @@
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 1
 	armor = list(melee = 40, bullet = 35, laser = 35, energy = 5, bomb = 40, bio = 100, rad = 50)
-	breach_threshold = 16 //These are kinda thicc
+	breach_threshold = 14 //These are kinda thicc
 	resilience = 0.15 //Armored
 	siemens_coefficient = 0.8
 	allowed = list(/obj/item/weapon/gun,
@@ -163,7 +163,7 @@
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 1
 	armor = list(melee = 50, bullet = 45, laser = 45, energy = 10, bomb = 30, bio = 100, rad = 60)
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	resilience = 0.1 //Heavily Armored
 	siemens_coefficient = 0.7
 	allowed = list(/obj/item/weapon/gun,
@@ -277,7 +277,7 @@
 	item_state_slots = list(slot_r_hand_str = "sec_voidsuitTG", slot_l_hand_str = "sec_voidsuitTG")
 	slowdown = 1.5 //the tradeoff for being hot shit almost on par with a crimson suit is that it slows you down even more
 	armor = list(melee = 55, bullet = 45, laser = 45, energy = 25, bomb = 50, bio = 100, rad = 50)
-	breach_threshold = 20 //Extra Thicc
+	breach_threshold = 16 //Extra Thicc
 	resilience = 0.05 //Military Armor
 	siemens_coefficient = 0.6
 	allowed = list(/obj/item/weapon/gun,
