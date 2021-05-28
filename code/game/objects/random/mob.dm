@@ -61,7 +61,7 @@
 		M.pixel_y = pixel_y
 
 	if(mob_faction)
-	M.faction = mob_faction
+		M.faction = mob_faction
 
 
 
