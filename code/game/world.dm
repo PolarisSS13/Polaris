@@ -1,6 +1,7 @@
 
 #define RECOMMENDED_VERSION 501
 /world/New()
+	world_startup_time = world.timeofday
 	to_world_log("Map Loading Complete")
 	changelog_hash = md5('html/changelog.html')					//used for telling if the changelog has changed recently
 

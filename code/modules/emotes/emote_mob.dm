@@ -53,7 +53,8 @@
 		return
 
 	if(use_emote.message_type == AUDIBLE_MESSAGE && is_muzzled())
-		audible_message("<b>\The [src]</b> [use_emote.emote_message_muffled || "makes a muffled sound."]")
+		var/muffle_message = use_emote.emote_message_muffled || "makes a muffled sound."
+		audible_message("<b>\The [src]</b> [muffle_message]", runemessage = "* [muffle_message] *")
 		return
 	else
 		use_emote.do_emote(src, message)
@@ -129,9 +130,13 @@
 		input = message
 
 	var/list/formatted
+	var/runemessage
 	if(input)
 		formatted = format_emote(src, message)
 		message = formatted["pretext"] + formatted["nametext"] + formatted["subtext"]
+		runemessage = formatted["subtext"]
+		// This is just personal preference (but I'm objectively right) that custom emotes shouldn't have periods at the end in runechat
+		runemessage = replacetext(runemessage,".","",length(runemessage),length(runemessage)+1)
 	else
 		return
 
@@ -159,6 +164,7 @@
 					if(isobserver(M))
 						message = "<span class='emote'><B>[src]</B> ([ghost_follow_link(src, M)]) [input]</span>"
 					M.show_message(message, m_type)
+					M.create_chat_message(src, "* [runemessage] *", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
 
 		for(var/obj in o_viewers)
 			var/obj/O = obj
