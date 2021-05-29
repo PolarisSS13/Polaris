@@ -71,6 +71,10 @@ var/global/list/endgame_safespawns = list()
 
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 
+// Ores (for mining)
+GLOBAL_LIST_EMPTY(ore_data)
+GLOBAL_LIST_EMPTY(alloy_data)
+
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
 var/global/list/string_part_flags = list(
 	"head" = HEAD,
@@ -215,6 +219,16 @@ var/global/list/string_slot_flags = list(
 		var/datum/poster/P = new T
 		NT_poster_designs += P
 
+	//Ores
+	paths = typesof(/ore)-/ore
+	for(var/oretype in paths)
+		var/ore/OD = new oretype()
+		GLOB.ore_data[OD.name] = OD
+
+	paths = typesof(/datum/alloy)-/datum/alloy
+	for(var/alloytype in paths)
+		GLOB.alloy_data += new alloytype()
+
 	//Closet appearances
 	paths = typesof(/decl/closet_appearance)
 	for(var/T in paths)
@@ -237,6 +251,8 @@ var/global/list/string_slot_flags = list(
 	for(var/path in paths)
 		var/datum/sprite_accessory/wing/instance = new path()
 		wing_styles_list[path] = instance
+
+	init_crafting_recipes(GLOB.crafting_recipes)
 
 /*
 	// Custom species traits
@@ -273,8 +289,13 @@ var/global/list/string_slot_flags = list(
 	return 1 // Hooks must return 1
 
 
-	return 1
-
+/// Inits the crafting recipe list, sorting crafting recipe requirements in the process.
+/proc/init_crafting_recipes(list/crafting_recipes)
+	for(var/path in subtypesof(/datum/crafting_recipe))
+		var/datum/crafting_recipe/recipe = new path()
+		recipe.reqs = sortList(recipe.reqs, /proc/cmp_crafting_req_priority)
+		crafting_recipes += recipe
+	return crafting_recipes
 /* // Uncomment to debug chemical reaction list.
 /client/verb/debug_chemical_list()
 

@@ -84,7 +84,7 @@ export const pda_medical = (props, context) => {
               <LabeledList.Item label="Details">
                 {medical.cdi_d}
               </LabeledList.Item>
-              <LabeledList.Item label="Important Notes">
+              <LabeledList.Item label="Important Notes" preserveWhiteSpace>
                 {medical.notes}
               </LabeledList.Item>
             </LabeledList>

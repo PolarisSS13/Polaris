@@ -233,7 +233,7 @@
 	return 1
 
 
-/mob/proc/ret_grab(obj/effect/list_container/mobl/L as obj, flag)
+/mob/proc/ret_grab(list/L, flag)
 	return
 
 /mob/verb/mode()
