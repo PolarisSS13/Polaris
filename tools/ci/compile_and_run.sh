@@ -14,7 +14,7 @@ echo "#define ${TEST_DEFINE} 1" > ${TEST_FILE}
 # Compile a copy of the codebase, and print errors as Github Actions annotations
 DreamMaker $BASENAME.dme > compile.log
 exitVal=$?
-sed 's/^(.+?.dm):(\d+):(error|warning):(.+)$/::\3 file=\1,line=\2::\4/g' < compile.log
+sed -E 's/^(.+?.dm):(\d+):(error|warning):(.+)$/::\3 file=\1,line=\2::\4/g' < compile.log
 
 # Compile failed on map_test
 if [ $exitVal -gt 0 ] && [ $TEST_DEFINE = "MAP_TEST" ]; then
