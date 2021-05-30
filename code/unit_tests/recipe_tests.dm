@@ -9,7 +9,7 @@
 		if(!our_result)
 			log_unit_test("[R]: Recipes - Missing result.")
 			failed = TRUE
-		else if(!ispath(our_result, /atom/movable)
+		else if(!ispath(our_result, /atom/movable))
 			log_unit_test("[R]: Recipes - Improper result; [our_result] is not an obj or mob.")
 			failed = TRUE
 		if(isnull(our_amount))
@@ -18,7 +18,7 @@
 		if(our_amount <= 0)
 			log_unit_test("[R]: Recipes - result_quantity must be greater than zero.")
 			failed = TRUE
-		else if(!ISINTEGER(our_amount)
+		else if(!ISINTEGER(our_amount))
 			log_unit_test("[R]: Recipes - result_quantity must be an integer.")
 			failed = TRUE
 
