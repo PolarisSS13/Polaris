@@ -163,35 +163,30 @@
 	name = "medical winter coat, alt"
 	desc = "A heavy jacket made from 'synthetic' animal furs. There's a thick weave of sterile material, good for virus outbreaks!"
 	icon_state = "coatmedicalalt"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	hoodtype = /obj/item/clothing/head/hood/winter/medical/alt
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical/viro
 	name = "virologist winter coat"
 	desc = "A white winter coat with green markings. Warm, but wont fight off the common cold or any other disease. Might make people stand far away from you in the hallway. The zipper tab looks like an oversized bacteriophage."
 	icon_state = "coatviro"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	hoodtype = /obj/item/clothing/head/hood/winter/medical/viro
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical/para
 	name = "paramedic winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs.It has an aura of underappreciation."
 	icon_state = "coatpara"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	hoodtype = /obj/item/clothing/head/hood/winter/medical/para
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical/chemist
 	name = "chemist winter coat"
 	desc = "A lab-grade winter coat made with acid resistant polymers. For the enterprising chemist who was exiled to a frozen wasteland on the go."
 	icon_state = "coatchemist"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	hoodtype = /obj/item/clothing/head/hood/winter/medical/chemist
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical/cmo
 	name = "chief medical officer's winter coat"
 	desc = "A lab-grade winter coat made with acid resistant polymers. For the enterprising chemist who was exiled to a frozen wasteland on the go."
 	icon_state = "coatcmo"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	hoodtype = /obj/item/clothing/head/hood/winter/medical/cmo
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/medical/sar
@@ -223,7 +218,6 @@
 	name = "robotics winter coat"
 	desc = "A black winter coat with a badass flaming robotic skull for the zipper tab. This one has bright red designs and a few useless buttons."
 	icon_state = "coatrobotics"
-	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 10, bio = 0, rad = 0)
 	hoodtype = /obj/item/clothing/head/hood/winter/science/robotics
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/science/rd
@@ -250,14 +244,12 @@
 	desc = "A heavy jacket made from 'synthetic' animal furs. It seems to have burn marks on the inside from a phoron fire."
 	icon_state = "coatatmos"
 	item_state_slots = list(slot_r_hand_str = "coatatmos", slot_l_hand_str = "coatatmos")
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 20)
 	hoodtype = /obj/item/clothing/head/hood/winter/engineering/atmos
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering/ce
 	name = "atmospherics winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs. It seems to have burn marks on the inside from a phoron fire."
 	icon_state = "coatce"
-	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 0, rad = 20)
 	hoodtype = /obj/item/clothing/head/hood/winter/engineering/ce
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/hydro
