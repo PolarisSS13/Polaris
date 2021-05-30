@@ -15,7 +15,9 @@ echo "#define ${TEST_DEFINE} 1" > ${TEST_FILE}
 DreamMaker $BASENAME.dme > compile.log
 exitVal=$?
 cat compile.log
-sed -E -n 's/^(.+?\.dm):([0-9]+):(error|warning): (.+)$/::\3 file=\1,line=\2::\4/gp' < compile.log
+if [ $exitVal -gt 0 ]; then
+	sed -E -n 's/^(.+?\.dm):([0-9]+):(error|warning): (.+)$/::\3 file=\1,line=\2::\4/gp' < compile.log
+fi
 
 # Compile failed on map_test
 if [ $exitVal -gt 0 ] && [ $TEST_DEFINE = "MAP_TEST" ]; then
