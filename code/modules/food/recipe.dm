@@ -198,7 +198,8 @@
 
 		else if(istype(container, /obj/item/weapon/reagent_containers/cooking_container))
 			var/obj/item/weapon/reagent_containers/cooking_container/CC = container
-			container.clear()
+			CC.clear()
+
 		container.visible_message(SPAN_WARNING("[container] inexplicably spills, and its contents are lost!"))
 
 		return
