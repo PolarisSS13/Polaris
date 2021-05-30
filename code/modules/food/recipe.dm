@@ -192,6 +192,13 @@
 /datum/recipe/proc/make_food(var/obj/container as obj)
 	if(!result)
 		log_runtime(EXCEPTION("<span class='danger'>Recipe [type] is defined without a result, please bug report this.</span>"))
+		if(istype(container, /obj/machinery/microwave))
+			var/obj/machinery/microwave/M = container
+			M.fail()
+		else if(istype(container, /obj/item/weapon/reagent_containers/cooking_container))
+			var/obj/item/weapon/reagent_containers/cooking_container/CC = container
+			container.clear()
+			container.visible_message(SPAN_WARNING("[container] inexplicably spills, and its contents are lost!"))
 		return
 
 
