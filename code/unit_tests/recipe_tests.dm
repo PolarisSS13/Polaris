@@ -5,7 +5,7 @@
 	var/failed = FALSE
 	for(var/datum/recipe/R in subtypesof(/datum/recipe))
 		var/our_result = initial(R.result)
-		var/our_amount = initial(R.result_amount)
+		var/our_amount = initial(R.result_quantity)
 		if(!our_result)
 			log_unit_test("[R]: Recipes - Missing result.")
 			failed = TRUE
