@@ -37,21 +37,21 @@
 
 /datum/component/artifact_master/proc/DoRegistry()
 //Melee Hit
-	RegisterSignal(holder, COMSIG_PARENT_ATTACKBY, .proc/on_attackby, override = FALSE)
+	RegisterSignal(holder, COMSIG_PARENT_ATTACKBY, /datum/component/artifact_master/proc/on_attackby, override = FALSE)
 //Explosions
-	RegisterSignal(holder, COMSIG_ATOM_EX_ACT, .proc/on_exact, override = FALSE)
+	RegisterSignal(holder, COMSIG_ATOM_EX_ACT, /datum/component/artifact_master/proc/on_exact, override = FALSE)
 //Bullets
-	RegisterSignal(holder, COMSIG_ATOM_BULLET_ACT, .proc/on_bullet, override = FALSE)
+	RegisterSignal(holder, COMSIG_ATOM_BULLET_ACT, /datum/component/artifact_master/proc/on_bullet, override = FALSE)
 
 //Attackhand
-	RegisterSignal(holder, COMSIG_ATOM_ATTACK_HAND, .proc/on_attack_hand, override = FALSE)
+	RegisterSignal(holder, COMSIG_ATOM_ATTACK_HAND, /datum/component/artifact_master/proc/on_attack_hand, override = FALSE)
 
 //Bumped / Bumping
-	RegisterSignal(holder, COMSIG_MOVABLE_BUMP, .proc/on_bump, override = FALSE)
-	RegisterSignal(holder, COMSIG_ATOM_BUMPED, .proc/on_bumped, override = FALSE)
+	RegisterSignal(holder, COMSIG_MOVABLE_BUMP, /datum/component/artifact_master/proc/on_bump, override = FALSE)
+	RegisterSignal(holder, COMSIG_ATOM_BUMPED, /datum/component/artifact_master/proc/on_bumped, override = FALSE)
 
 //Moved
-	RegisterSignal(holder, COMSIG_MOVABLE_MOVED, .proc/on_moved, override = FALSE)
+	RegisterSignal(holder, COMSIG_MOVABLE_MOVED, /datum/component/artifact_master/proc/on_moved, override = FALSE)
 
 /*
  *
@@ -66,7 +66,7 @@
 	return active_effects
 
 /datum/component/artifact_master/proc/add_effect()
-	var/effect_type = input(usr, "What type do you want?", "Effect Type") as null|anything in typesof(/datum/artifact_effect) - /datum/artifact_effect
+	var/effect_type = input(usr, "What type do you want?", "Effect Type") as null|anything in subtypesof(/datum/artifact_effect)
 	if(effect_type)
 		var/datum/artifact_effect/my_effect = new effect_type(src)
 		if(istype(holder, my_effect.req_type))
@@ -335,49 +335,26 @@
 		my_effect.process()
 
 		//COLD ACTIVATION
-		if(trigger_cold)
-			if(my_effect.trigger == TRIGGER_COLD && !my_effect.activated)
-				my_effect.ToggleActivate()
-		else
-			if(my_effect.trigger == TRIGGER_COLD && my_effect.activated)
-				my_effect.ToggleActivate()
+		if(my_effect.trigger == TRIGGER_COLD && (trigger_cold ^ my_effect.activated))
+			my_effect.ToggleActivate()
 
 		//HEAT ACTIVATION
-		if(trigger_hot)
-			if(my_effect.trigger == TRIGGER_HEAT && !my_effect.activated)
-				my_effect.ToggleActivate()
-		else
-			if(my_effect.trigger == TRIGGER_HEAT && my_effect.activated)
-				my_effect.ToggleActivate()
+		if(my_effect.trigger == TRIGGER_HEAT && (trigger_hot ^ my_effect.activated))
+			my_effect.ToggleActivate()
 
 		//PHORON GAS ACTIVATION
-		if(trigger_phoron)
-			if(my_effect.trigger == TRIGGER_PHORON && !my_effect.activated)
-				my_effect.ToggleActivate()
-		else
-			if(my_effect.trigger == TRIGGER_PHORON && my_effect.activated)
-				my_effect.ToggleActivate()
+		if(my_effect.trigger == TRIGGER_PHORON && (trigger_phoron ^ my_effect.activated))
+			my_effect.ToggleActivate()
 
 		//OXYGEN GAS ACTIVATION
-		if(trigger_oxy)
-			if(my_effect.trigger == TRIGGER_OXY && !my_effect.activated)
-				my_effect.ToggleActivate()
-		else
-			if(my_effect.trigger == TRIGGER_OXY && my_effect.activated)
-				my_effect.ToggleActivate()
+		if(my_effect.trigger == TRIGGER_OXY && (trigger_oxy ^ my_effect.activated))
+			my_effect.ToggleActivate()
 
 		//CO2 GAS ACTIVATION
-		if(trigger_co2)
-			if(my_effect.trigger == TRIGGER_CO2 && !my_effect.activated)
-				my_effect.ToggleActivate()
-		else
-			if(my_effect.trigger == TRIGGER_CO2 && my_effect.activated)
-				my_effect.ToggleActivate()
+		if(my_effect.trigger == TRIGGER_CO2 && (trigger_co2 ^ my_effect.activated))
+			my_effect.ToggleActivate()
 
 		//NITROGEN GAS ACTIVATION
-		if(trigger_nitro)
-			if(my_effect.trigger == TRIGGER_NITRO && !my_effect.activated)
-				my_effect.ToggleActivate()
-		else
-			if(my_effect.trigger == TRIGGER_NITRO && my_effect.activated)
-				my_effect.ToggleActivate()
+		if(my_effect.trigger == TRIGGER_NITRO && (trigger_nitro ^ my_effect.activated))
+			my_effect.ToggleActivate()
+

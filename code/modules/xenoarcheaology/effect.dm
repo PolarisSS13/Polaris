@@ -20,6 +20,10 @@
 
 /datum/artifact_effect/New(var/datum/component/artifact_master/newmaster)
 	..()
+	if(!newmaster)
+		qdel(src)
+		return
+
 	master = newmaster
 	effect = rand(0, MAX_EFFECT)
 	trigger = rand(0, MAX_TRIGGER)

@@ -234,10 +234,7 @@
 	dir = new_dir
 
 /atom/proc/ex_act(var/strength = 3)
-	if(SEND_SIGNAL(src, COMSIG_ATOM_EX_ACT, strength, src) & COMPONENT_IGNORE_EXPLOSION)
-		return TRUE
-
-	return FALSE
+	return (SEND_SIGNAL(src, COMSIG_ATOM_EX_ACT, strength, src) & COMPONENT_IGNORE_EXPLOSION)
 
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	return -1
