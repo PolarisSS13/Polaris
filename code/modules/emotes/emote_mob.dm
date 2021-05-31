@@ -54,7 +54,7 @@
 
 	if(use_emote.message_type == AUDIBLE_MESSAGE && is_muzzled())
 		var/muffle_message = use_emote.emote_message_muffled || "makes a muffled sound."
-		audible_message("<b>\The [src]</b> [muffle_message]", runemessage = "* [muffle_message] *")
+		audible_message("<b>\The [src]</b> [muffle_message]", runemessage = "[muffle_message]")
 		return
 	else
 		use_emote.do_emote(src, message)

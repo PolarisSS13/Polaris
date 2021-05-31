@@ -97,7 +97,7 @@
 		else // We failed to close the doors - probably, someone is blocking them; stop trying to move
 			doors_closing = 0
 			open_doors()
-			control_panel_interior.audible_message("\The [current_floor.ext_panel] buzzes loudly.", runemessage = "* BUZZ *")
+			control_panel_interior.audible_message("\The [current_floor.ext_panel] buzzes loudly.", runemessage = "BUZZ")
 			playsound(control_panel_interior, "sound/machines/buzz-two.ogg", 50, 1)
 			return 0
 
