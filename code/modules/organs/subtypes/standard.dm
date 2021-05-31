@@ -33,6 +33,13 @@
 		owner.internal_organs_by_name[O_HEATSINK] = new /obj/item/organ/internal/robotic/heatsink(owner,1)
 		owner.internal_organs_by_name[O_DIAGNOSTIC] = new /obj/item/organ/internal/robotic/diagnostic(owner,1)
 
+		var/datum/robolimb/R = all_robolimbs[model] // company should be set in parent by now
+		if(!R)
+			log_error("A torso was robotize() but has no model that can be found: [model]. May affect FBPs.")
+		owner.synthetic = R
+		owner.update_emotes()
+	return FALSE
+
 /obj/item/organ/external/chest/handle_germ_effects()
 	. = ..() //Should return an infection level
 	if(!. || (status & ORGAN_DEAD)) return //If it's already above 2, it's become necrotic and we can just not worry about it.
@@ -278,7 +285,14 @@
 	return ..()
 
 /obj/item/organ/external/head/robotize(var/company, var/skip_prosthetics, var/keep_organs)
-	return ..(company, skip_prosthetics, 1)
+	. = ..(company, skip_prosthetics, 1)
+	if(model)
+		var/datum/robolimb/robohead = all_robolimbs[model]
+		if(robohead?.monitor_styles && robohead?.monitor_icon)
+			LAZYDISTINCTADD(organ_verbs, /mob/living/carbon/human/proc/setmonitor_state)
+		else
+			LAZYREMOVE(organ_verbs, /mob/living/carbon/human/proc/setmonitor_state)
+		handle_organ_mod_special()
 
 /obj/item/organ/external/head/removed()
 	if(owner)
