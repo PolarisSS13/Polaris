@@ -4,9 +4,12 @@
 #define CHAT_MESSAGE_EXP_DECAY		0.8 // Messages decay at pow(factor, idx in stack)
 #define CHAT_MESSAGE_HEIGHT_DECAY	0.7 // Increase message decay based on the height of the message
 #define CHAT_MESSAGE_APPROX_LHEIGHT	11 // Approximate height in pixels of an 'average' line, used for height decay
+
 #define CHAT_MESSAGE_WIDTH			96 // pixels
-#define CHAT_MESSAGE_NORM_LENGTH	68 // characters
-#define CHAT_MESSAGE_EXT_LENGTH		150 // characters
+#define CHAT_MESSAGE_EXT_WIDTH		128
+#define CHAT_MESSAGE_LENGTH			68 // characters
+#define CHAT_MESSAGE_EXT_LENGTH		150
+
 #define CHAT_MESSAGE_MOB			1
 #define CHAT_MESSAGE_OBJ			2
 #define WXH_TO_HEIGHT(x)			text2num(copytext((x), findtextEx((x), "x") + 1)) // thanks lummox
@@ -187,7 +190,7 @@ var/list/runechat_image_cache = list()
 	message.plane = PLANE_RUNECHAT
 	message.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA | KEEP_APART
 	message.alpha = 0
-	message.pixel_y = (owner.bound_height * 0.95)*owner.size_multiplier
+	message.pixel_y = owner.bound_height * 0.95
 	message.maptext_width = msgwidth
 	message.maptext_height = mheight
 	message.maptext_x = (CHAT_MESSAGE_WIDTH - owner.bound_width) * -0.5
