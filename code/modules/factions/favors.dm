@@ -2,12 +2,14 @@
 /decl/faction_favor
 	var/name = null
 	var/desc = null			// Shown in the UI, explains what the favor actually does.
+	var/fluff = null
 	var/influence_cost = 0
 	var/opinion_cost = 0
 	var/minimum_opinion_threshold = /decl/faction_opinion_threshold/neutral
 	var/success_chance = 100
 	var/available = TRUE
 	var/repeatable = FALSE // If true, the same favor can be used multiple times in the same round.
+	var/refusal_message = null
 
 /decl/faction_favor/proc/can_use_favor(datum/faction_relationship/R)
 	if(!available)
@@ -50,10 +52,38 @@
 /decl/faction_favor/proc/do_favor()
 // Custom logic goes here.
 
+/decl/faction_favor/proc/get_success_chance()
+	return success_chance
 
-/decl/faction_favor/nanotrasen/discount
+// Used to obfuscate pure numbers into less precise words.
+/decl/faction_favor/proc/get_eligibility_string(datum/faction_relationship/R)
+	if(!available)
+		return "Unavailable"
+	if(R.influence < influence_cost)
+		return "Impossible"
+	switch(get_success_chance())
+		if(-INFINITY to 0)
+			return "Impossible"
+		if(0 to 20)
+			return "Very Unlikely"
+		if(20 to 40)
+			return "Unlikely"
+		if(40 to 60)
+			return "Coinflip"
+		if(60 to 80)
+			return "Likely"
+		if(80 to 99)
+			return "Very Likely"
+		if(100 to INFINITY)
+			return "Guaranteed"
+
+/decl/faction_favor/generic/discount
 	name = "Negotiate Discount"
-	desc = "The Cargo department will receive a discount for supply packs sourced from NanoTrasen, lasting for the current shift."
+	desc = "The Cargo department will receive a discount for supply packs sourced from this organization, lasting for the current shift."
+	success_chance = 50
+	influence_cost = 20
+
+/decl/faction_favor/generic/discount/nanotrasen
 	success_chance = 75
 	influence_cost = 10
 

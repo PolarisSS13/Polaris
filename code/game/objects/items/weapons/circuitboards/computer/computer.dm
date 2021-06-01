@@ -17,6 +17,11 @@
 	build_path = /obj/machinery/computer/borgupload
 	origin_tech = list(TECH_DATA = 4)
 
+/obj/item/weapon/circuitboard/reputation
+	name = T_BOARD("Diplomatic terminal")
+	build_path = /obj/machinery/computer/reputation
+	origin_tech = list(TECH_DATA = 3)
+
 /obj/item/weapon/circuitboard/med_data
 	name = T_BOARD("medical records console")
 	build_path = /obj/machinery/computer/med_data
