@@ -186,6 +186,13 @@ CIRCUITS BELOW
 	build_path = /obj/item/weapon/circuitboard/borgupload
 	sort_string = "HAABB"
 
+/datum/design/circuit/aiupload
+	name = "diplomatic terminal"
+	id = "reputation"
+	req_tech = list(TECH_DATA = 3)
+	build_path = /obj/item/weapon/circuitboard/reputation
+	sort_string = "HAABC"
+
 /datum/design/circuit/destructive_analyzer
 	name = "destructive analyzer"
 	id = "destructive_analyzer"

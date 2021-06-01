@@ -244,6 +244,11 @@ div.notice
 	clear: both;
 }
 
+.floatRight
+{
+	float: right;
+}
+
 .statusDisplay
 {
 	background: #000000;
