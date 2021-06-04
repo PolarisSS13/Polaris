@@ -141,7 +141,6 @@
 	set name = "Attach Limb"
 	set category = "Object"
 	set desc = "Attach a replacement limb."
-	set usr = src
 
 	var/obj/item/organ/external/E = get_active_hand()
 	if(!check_can_attach_modular_limb(E))
@@ -171,7 +170,6 @@
 	set name = "Remove Limb"
 	set category = "Object"
 	set desc = "Detach one of your limbs."
-	set usr = src
 
 	var/list/detachable_limbs = get_modular_limbs(return_first_found = FALSE, validate_proc = /obj/item/organ/external/proc/can_remove_modular_limb)
 	if(!length(detachable_limbs))
