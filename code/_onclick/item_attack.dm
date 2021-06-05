@@ -43,13 +43,11 @@ avoid code duplication. This includes items that may sometimes act as a standard
 
 //I would prefer to rename this to attack(), but that would involve touching hundreds of files.
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/attack_modifier = 1, var/click_parameters)
-	. = pre_attack(A, user, click_parameters)
 	add_fingerprint(user)
-
-	if(!.)
-		. = A.attackby(src, user, attack_modifier, click_parameters)
-
-	return .
+	. = pre_attack(A, user, click_parameters)
+	if(.)	// We're returning the value of pre_attack, in the event it has a special return rather than a boolean.
+		return
+	return A.attackby(src, user, attack_modifier, click_parameters)
 
 // No comment
 /atom/proc/attackby(obj/item/W, mob/user, var/attack_modifier, var/click_parameters)
