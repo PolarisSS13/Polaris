@@ -11,7 +11,8 @@
 	var/water_color = "#436499"
 	var/has_rings = FALSE // set to true to get rings
 	var/icecaps = null // Iconstate in icons/skybox/planet.dmi for the planet's icecaps
-	var/ice_color = "E6F2F6"
+	var/ice_color = "#E6F2F6"
+	var/crater_color
 	var/ring_color
 	var/skybox_offset_x = 0
 	var/skybox_offset_y = 0
