@@ -1134,9 +1134,6 @@
 	//A slew of bits that may be affected by our species change
 	regenerate_icons()
 
-	// Update our available emote list.
-	update_emotes()
-
 	if(species)
 		if(mind)
 			apply_traits()
