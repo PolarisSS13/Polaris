@@ -108,11 +108,6 @@
 /obj/machinery/telecomms/relay/preset/cynosure/gnd,
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/cynosure/chamber)
-"by" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/turf/space,
-/area/space)
 "bI" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -4594,11 +4589,6 @@
 	pixel_y = 22
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/tcommsat/cynosure)
-"Vh" = (
-/obj/structure/lattice,
-/obj/structure/lattice,
-/turf/space,
 /area/tcommsat/cynosure)
 "Vk" = (
 /obj/structure/lattice,
@@ -34486,16 +34476,6 @@ fj
 oe
 oe
 uj
-Vh
-uj
-uj
-uj
-uj
-YO
-uj
-uj
-uj
-uj
 uj
 uj
 uj
@@ -34506,7 +34486,17 @@ uj
 uj
 uj
 uj
-Vh
+uj
+uj
+uj
+uj
+uj
+YO
+uj
+uj
+uj
+uj
+uj
 uj
 oe
 rI
@@ -44776,7 +44766,7 @@ UD
 ZS
 rR
 Fw
-by
+Fw
 Fw
 UD
 ZS
