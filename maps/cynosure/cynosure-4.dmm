@@ -554,14 +554,6 @@
 	},
 /turf/simulated/floor/airless,
 /area/tcommsat/cynosure)
-"gr" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 2;
-	icon_state = "1-2"
-	},
-/turf/simulated/floor/plating,
-/area/tcommsat/cynosure)
 "gH" = (
 /obj/effect/floor_decal/rust/part_rusted2,
 /obj/machinery/camera/network/telecom{
@@ -975,14 +967,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/teleporter)
-"lj" = (
-/obj/structure/cable/yellow{
-	d1 = 4;
-	d2 = 8;
-	icon_state = "4-8"
-	},
-/turf/simulated/floor/plating,
-/area/tcommsat/cynosure)
 "ll" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 8
@@ -1647,7 +1631,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/tcommsat/cynosure)
 "rj" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -1995,14 +1979,6 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/tcommsat/cynosure/teleporter)
-"vx" = (
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/plating,
-/area/tcommsat/cynosure)
 "vz" = (
 /obj/machinery/atmospherics/portables_connector{
 	dir = 8
@@ -2486,7 +2462,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/tcommsat/cynosure)
 "Bt" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -2692,14 +2668,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/enterance)
-"Df" = (
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/turf/simulated/floor/plating,
-/area/tcommsat/cynosure)
 "Do" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -2716,19 +2684,6 @@
 /obj/effect/map_helper/airlock/door/int_door,
 /turf/simulated/floor/tiled/techfloor,
 /area/tcommsat/cynosure/enterance)
-"DB" = (
-/obj/structure/cable/yellow{
-	d1 = 2;
-	d2 = 4;
-	icon_state = "2-4"
-	},
-/obj/structure/cable/yellow{
-	d1 = 1;
-	d2 = 4;
-	icon_state = "1-4"
-	},
-/turf/simulated/floor/plating,
-/area/tcommsat/cynosure)
 "DF" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -5056,7 +5011,7 @@
 	d2 = 8;
 	icon_state = "4-8"
 	},
-/turf/simulated/floor/plating,
+/turf/simulated/floor/airless,
 /area/tcommsat/cynosure)
 
 (1,1,1) = {"
@@ -30371,13 +30326,13 @@ SE
 aQ
 SE
 UD
-DB
+Cq
 rR
 SE
 SE
 SE
 UD
-DB
+Cq
 rR
 SE
 aQ
@@ -42196,7 +42151,7 @@ SE
 Fw
 SE
 SE
-lj
+fj
 SE
 SE
 Fw
@@ -42450,13 +42405,13 @@ SE
 SE
 SE
 SE
-Df
-gr
-gr
+hy
+hx
+hx
 Bs
-gr
-gr
-vx
+hx
+hx
+eT
 SE
 SE
 SE
