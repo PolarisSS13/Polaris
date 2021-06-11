@@ -1473,7 +1473,7 @@
 	use_power = 1;
 	volume_rate = 700
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "aNe" = (
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -6636,7 +6636,7 @@
 	id_tag = "engine_sensor";
 	output = 63
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "deU" = (
 /obj/machinery/atmospherics/pipe/simple/visible/green{
@@ -13617,7 +13617,7 @@
 /obj/effect/floor_decal/industrial/warning/cee{
 	dir = 4
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "gpd" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -28267,7 +28267,7 @@
 /obj/machinery/camera/network/engine{
 	c_tag = "ENG - Reactor Core"
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "nbV" = (
 /turf/simulated/floor/plating/sif/planetuse,
@@ -30997,7 +30997,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "opR" = (
 /obj/machinery/door/firedoor/glass,
@@ -36169,7 +36169,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning,
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "qwf" = (
 /obj/machinery/door/firedoor/border_only,
@@ -47872,7 +47872,7 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/reinforced/nitrogen,
+/turf/simulated/floor/reinforced/supermatter_core,
 /area/surface/station/engineering/reactor_room)
 "vVo" = (
 /obj/machinery/atmospherics/pipe/simple/visible/black{
