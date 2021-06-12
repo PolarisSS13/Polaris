@@ -787,8 +787,12 @@
 /area/surface/station/construction/bmt/construction5
 	name = "\improper Engineering Construction Area 5"
 
-/area/surface/station/construction/basement
+/area/surface/station/construction/bmt/construction6
 	name = "\improper Engineering Construction Area 6"
+
+// This is explicitly not under the /bmt subtype as this is not a PoI-based construction area.
+/area/surface/station/construction/basement
+	name = "\improper Engineering Construction Area 7"
 
 /area/surface/station/construction/elevator
 	name = "\improper Central Elevator Shaft"
