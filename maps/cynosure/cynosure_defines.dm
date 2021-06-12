@@ -82,8 +82,18 @@
 	overmap_event_areas = 	6
 	default_skybox = /datum/skybox_settings/southern_cross
 
-	unit_test_exempt_areas = list(/area/ninja_dojo, /area/ninja_dojo/firstdeck, /area/ninja_dojo/arrivals_dock)
-	unit_test_exempt_from_atmos = list(/area/tcommsat/chamber)
+	unit_test_exempt_areas = list(
+		/area/ninja_dojo,
+		/area/ninja_dojo/firstdeck,
+		/area/ninja_dojo/arrivals_dock,
+		/area/surface/cave,
+		/area/surface/station/construction,
+		/area/surface/station/rnd/test_area
+	)
+	unit_test_exempt_from_atmos = list(
+		/area/tcommsat/chamber,
+		/area/surface/station/maintenance
+	)
 
 	planet_datums_to_make = list(/datum/planet/sif)
 
