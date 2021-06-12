@@ -44,6 +44,7 @@
 	ambience = AMBIENCE_SIF
 	always_unpowered = TRUE
 	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	outdoors = OUTDOORS_YES
 
 // The area near the station, so POIs don't show up right next to the outpost.
 /area/surface/outside/plains/station
@@ -126,6 +127,7 @@
 
 /area/surface/station
 	ambience = AMBIENCE_GENERIC
+	outdoors = OUTDOORS_NO
 
 //AI
 
