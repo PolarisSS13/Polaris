@@ -870,7 +870,7 @@
 /obj/structure/plasticflaps/mining,
 /obj/machinery/mineral/input,
 /turf/simulated/floor/plating/sif/planetuse,
-/area/surface/station/mining_main/refinery)
+/area/space)
 "bW" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -1335,7 +1335,7 @@
 	dir = 1
 	},
 /obj/random/obstruction,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "da" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -3411,7 +3411,7 @@
 "hY" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ladder/up,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "hZ" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -6208,7 +6208,7 @@
 	pixel_x = 32
 	},
 /obj/item/clothing/glasses/meson,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "oc" = (
 /obj/machinery/atmospherics/pipe/manifold/visible/cyan{
@@ -6638,12 +6638,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/medbay/bmt)
-"oV" = (
-/obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/tiled/steel/sif/planetuse{
-	icon_state = "asteroidfloor"
-	},
-/area/surface/station/rnd/test_area)
 "oW" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -7585,7 +7579,7 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/incinerator)
 "rd" = (
 /obj/effect/floor_decal/industrial/warning/corner{
@@ -7975,7 +7969,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "rQ" = (
 /turf/simulated/floor/tiled/white,
@@ -8621,7 +8615,7 @@
 "th" = (
 /obj/structure/disposalpipe/segment,
 /obj/random/obstruction,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "ti" = (
 /obj/machinery/door/airlock/engineering{
@@ -12582,7 +12576,7 @@
 	req_one_access = list(12)
 	},
 /obj/structure/disposalpipe/segment,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "BW" = (
 /obj/structure/disposalpipe/segment{
@@ -14214,7 +14208,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "FK" = (
 /obj/structure/closet/crate/nanotrasen,
@@ -15005,7 +14999,11 @@
 /area/surface/cave/unexplored/normal)
 "HG" = (
 /obj/effect/wingrille_spawn/reinforced,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/tiled/steel/sif/planetuse{
+	icon_state = "asteroidfloor";
+	initial_flooring = /decl/flooring/tiling/asteroidfloor;
+	outdoors = 0
+	},
 /area/surface/station/rnd/test_area)
 "HH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -17015,7 +17013,8 @@
 "Mq" = (
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/plating/sif/planetuse{
-	icon_state = "asteroidplating2"
+	icon_state = "asteroidplating2";
+	outdoors = 0
 	},
 /area/surface/station/rnd/test_area)
 "Mr" = (
@@ -18395,7 +18394,8 @@
 	external_pressure_bound_default = 140
 	},
 /turf/simulated/floor/plating/sif/planetuse{
-	icon_state = "asteroidplating2"
+	icon_state = "asteroidplating2";
+	outdoors = 0
 	},
 /area/surface/station/maintenance/incinerator)
 "Pe" = (
@@ -19366,7 +19366,8 @@
 	},
 /obj/structure/catwalk,
 /turf/simulated/floor/plating/sif/planetuse{
-	icon_state = "asteroidplating2"
+	icon_state = "asteroidplating2";
+	outdoors = 0
 	},
 /area/surface/station/mining_main/exterior)
 "Rf" = (
@@ -21258,7 +21259,7 @@
 	},
 /obj/structure/table/steel,
 /obj/machinery/recharger,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "Vs" = (
 /obj/structure/cable/cyan{
@@ -22635,7 +22636,8 @@
 /area/surface/outpost/research/xenoarcheology/anomaly)
 "Yw" = (
 /turf/simulated/floor/plating/sif/planetuse{
-	icon_state = "asteroidplating2"
+	icon_state = "asteroidplating2";
+	outdoors = 0
 	},
 /area/surface/cave/explored/normal)
 "Yx" = (
@@ -23087,7 +23089,7 @@
 	icon_state = "pipe-c"
 	},
 /obj/effect/catwalk_plated/dark,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/bmt)
 "Zy" = (
 /obj/structure/disposalpipe/segment{
@@ -39172,7 +39174,7 @@ Os
 Os
 Os
 AM
-oV
+HG
 ED
 Os
 Os
