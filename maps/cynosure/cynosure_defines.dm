@@ -280,3 +280,7 @@
 	model_text = "Pilot"
 	req_access = null
 	req_one_access = list(access_explorer)
+
+// Putting this here in order to not disrupt existing maps/downstreams.
+/turf/simulated/open
+	dynamic_lighting = TRUE
