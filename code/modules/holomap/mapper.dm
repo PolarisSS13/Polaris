@@ -414,7 +414,7 @@
 	else
 		in_list = FALSE
 		mapping_beacons -= src
-	icon_state = initial(icon_state) + in_list ? "_on" : ""
+	icon_state = "[initial(icon_state)][in_list ? "_on" : ""]"
 	to_chat(user,SPAN_NOTICE("The [src] is now [in_list ? "broadcasting" : "disabled"]."))
 
 /obj/item/device/holomap_beacon/Destroy()
