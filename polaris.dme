@@ -253,6 +253,7 @@
 #include "code\controllers\subsystems\ticker.dm"
 #include "code\controllers\subsystems\time_track.dm"
 #include "code\controllers\subsystems\timer.dm"
+#include "code\controllers\subsystems\vis_overlays.dm"
 #include "code\controllers\subsystems\vote.dm"
 #include "code\controllers\subsystems\webhooks.dm"
 #include "code\controllers\subsystems\xenoarch.dm"
