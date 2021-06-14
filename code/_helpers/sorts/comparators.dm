@@ -84,3 +84,6 @@
 
 /proc/cmp_text_asc(a,b)
 	return sorttext(b,a)
+
+/proc/cmp_filter_data_priority(list/A, list/B)
+	return A["priority"] - B["priority"]
