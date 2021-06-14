@@ -72,7 +72,8 @@
 			O.hear_talk(src, message_pieces, verb)
 		/*Radios "filter out" this conversation channel so we don't need to account for them.
 		This is another way of saying that we won't bother dealing with them.*/
-		to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [combine_message(message_pieces, verb, src)]</span></i>")
+		var/list/combined = combine_message(message_pieces, verb, src)
+		to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [combined["formatted"]]</span></i>")
 	else
 		to_chat(src, "No holopad connected.")
 		return 0
@@ -88,7 +89,6 @@
 	if(T && T.masters[src])
 		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
 		to_chat(src, "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>")
-
 		var/obj/effect/overlay/hologram = T.masters[src]
 		var/list/in_range = get_mobs_and_objs_in_view_fast(get_turf(hologram), world.view, 2) //Emotes are displayed from the hologram, not the pad
 		var/list/m_viewers = in_range["mobs"]
