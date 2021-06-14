@@ -30,6 +30,27 @@
 	var/cloaked = FALSE //If we're cloaked or not
 	var/image/cloaked_selfimage //The image we use for our client to let them see where we are
 
+/atom/movable/Initialize(mapload)
+	. = ..()
+	switch(blocks_emissive)
+		if(EMISSIVE_BLOCK_GENERIC)
+			var/mutable_appearance/gen_emissive_blocker = mutable_appearance(icon, icon_state, plane = PLANE_EMISSIVE, alpha = src.alpha)
+			gen_emissive_blocker.color = GLOB.em_block_color
+			gen_emissive_blocker.dir = dir
+			gen_emissive_blocker.appearance_flags |= appearance_flags
+			add_overlay(list(gen_emissive_blocker))
+		if(EMISSIVE_BLOCK_UNIQUE)
+			render_target = ref(src)
+			em_block = new(src, render_target)
+			add_overlay(list(em_block))
+	if(opacity)
+		AddElement(/datum/element/light_blocking)
+	switch(light_system)
+		if(MOVABLE_LIGHT)
+			AddComponent(/datum/component/overlay_lighting)
+		if(MOVABLE_LIGHT_DIRECTIONAL)
+			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE)
+
 /atom/movable/Destroy()
 	. = ..()
 	if(reagents)
@@ -37,17 +58,17 @@
 		reagents = null
 	for(var/atom/movable/AM in contents)
 		qdel(AM)
-	var/turf/un_opaque
-	if(opacity && isturf(loc))
-		un_opaque = loc
+
+	if(opacity)
+		RemoveElement(/datum/element/light_blocking)
 
 	moveToNullspace()
-	if(un_opaque)
-		un_opaque.recalc_atom_opacity()
-	if (pulledby)
-		if (pulledby.pulling == src)
-			pulledby.pulling = null
-		pulledby = null
+
+	if(pulledby)
+		pulledby.stop_pulling()
+
+	if(orbiting)
+		stop_orbit()
 
 /atom/movable/vv_edit_var(var_name, var_value)
 	if(var_name in GLOB.VVpixelmovement)			//Pixel movement is not yet implemented, changing this will break everything irreversibly.
@@ -199,12 +220,15 @@
 
 //Called after a successful Move(). By this point, we've already moved
 /atom/movable/proc/Moved(atom/old_loc, direction, forced = FALSE, movetime)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, direction, forced, movetime)
 	// Handle any buckled mobs on this movable
 	if(has_buckled_mobs())
 		handle_buckled_mob_movement(old_loc, direction, movetime)
 	if(riding_datum)
 		riding_datum.handle_vehicle_layer()
 		riding_datum.handle_vehicle_offsets()
+	for (var/datum/light_source/light as anything in light_sources) // Cycle through the light sources on this atom and tell them to update.
+		light.source_atom.update_light()
 	return TRUE
 
 /atom/movable/set_dir(newdir)

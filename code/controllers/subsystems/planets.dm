@@ -121,6 +121,7 @@ SUBSYSTEM_DEF(planets)
 	var/lum_g = new_brightness * GetGreenPart(new_color) / 255
 	var/lum_b = new_brightness * GetBluePart (new_color) / 255
 	var/static/update_gen = -1 // Used to prevent double-processing corners. Otherwise would happen when looping over adjacent turfs.
+	/* TODO
 	for(var/turf/simulated/T as anything in P.planet_floors)
 		if(!T.lighting_corners_initialised)
 			T.generate_missing_corners()
@@ -131,6 +132,7 @@ SUBSYSTEM_DEF(planets)
 				LC.update_gen = update_gen
 				LC.update_lumcount(lum_r, lum_g, lum_b)
 		CHECK_TICK
+	*/
 	update_gen--
 	P.sun["lum_r"] = lum_r
 	P.sun["lum_g"] = lum_g
