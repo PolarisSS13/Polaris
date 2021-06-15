@@ -44,7 +44,6 @@
 	if(power_usage)
 		if(cell.use(power_usage) != power_usage) // we weren't able to use our full power_usage amount!
 			visible_message("<span class='warning'>\The [src] flickers before going dull.</span>")
-			set_light(0)
 			playsound(src.loc, 'sound/effects/sparks3.ogg', 10, 1, -3) //Small cue that your light went dull in your pocket.
 			on = 0
 			update_brightness()

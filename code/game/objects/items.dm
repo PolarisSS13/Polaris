@@ -823,6 +823,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(!inhands)
 		apply_blood(standing)			//Some items show blood when bloodied
 		apply_accessories(standing)		//Some items sport accessories like webbing
+	
+	//Apply overlays to our...overlay
+	apply_overlays(standing)
 
 	//Return our icon
 	return standing
@@ -902,6 +905,15 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 //STUB
 /obj/item/proc/apply_accessories(var/image/standing)
+	return standing
+
+/obj/item/proc/apply_overlays(var/image/standing)
+	if(!blocks_emissive)
+		return standing
+
+	var/mutable_appearance/blocker_overlay = mutable_appearance(standing.icon, standing.icon_state, plane = PLANE_EMISSIVE, appearance_flags = KEEP_APART)
+	blocker_overlay.color = GLOB.em_block_color
+	standing.overlays += blocker_overlay
 	return standing
 
 /obj/item/MouseEntered(location,control,params)
