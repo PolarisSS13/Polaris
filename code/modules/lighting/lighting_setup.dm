@@ -1,24 +1,14 @@
 // Create lighting overlays on all turfs with dynamic lighting in areas with dynamic lighting.
-/proc/create_all_lighting_overlays()
+/proc/create_all_lighting_objects()
 	for(var/area/A in world)
-		if(!A.dynamic_lighting)
+		if(!IS_DYNAMIC_LIGHTING(A))
 			continue
+
 		for(var/turf/T in A)
-			if(!T.dynamic_lighting)
+
+			if(!IS_DYNAMIC_LIGHTING(T))
 				continue
-			new /atom/movable/lighting_overlay(T, TRUE)
+
+			new/datum/lighting_object(T)
 			CHECK_TICK
 		CHECK_TICK
-
-/proc/create_lighting_overlays_zlevel(var/zlevel)
-	ASSERT(zlevel)
-
-	for(var/turf/T in block(locate(1, 1, zlevel), locate(world.maxx, world.maxy, zlevel)))
-		if(!T.dynamic_lighting)
-			continue
-
-		var/area/A = T.loc
-		if(!A.dynamic_lighting)
-			continue
-
-		new /atom/movable/lighting_overlay(T, TRUE)

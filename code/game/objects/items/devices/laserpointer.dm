@@ -187,6 +187,7 @@
 	for(var/mob/M in viewers(world.view,targloc))
 		if(M.client)
 			showto.Add(M.client)
+	
 	var/image/I = image('icons/obj/projectiles.dmi',targloc,pointer_icon_state,cooldown)
 	I.plane = PLANE_LIGHTING_ABOVE
 	I.pixel_x = target.pixel_x + rand(-5,5)

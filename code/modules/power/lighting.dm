@@ -840,20 +840,34 @@ var/global/list/light_type_cache = list()
 	force = 2
 	throwforce = 5
 	w_class = ITEMSIZE_TINY
-	var/status = 0		// LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
-	var/base_state
-	var/switchcount = 0	// number of times switched
 	matter = list(DEFAULT_WALL_MATERIAL = 60)
-	var/rigged = 0		// true if rigged to explode
+	
+	///LIGHT_OK, LIGHT_BURNED or LIGHT_BROKEN
+	var/status = 0
+	///Base icon_state name to append suffixes for status
+	var/base_state
+	///Number of times switched on/off
+	var/switchcount = 0
+	///Is this light set to explode
+	var/rigged = 0
+	///The chance (prob()) that this light will be broken at roundstart
 	var/broken_chance = 2
 
-	var/brightness_range = 2 //how much light it gives off
+	///The raidus in turfs this light will reach. It will be at it's most dim this many turfs away.
+	/// This is also used in power draw calculation for machinery/lights.
+	var/brightness_range = 2
+	///The light will fall off over more/less range based on this. The formula is complicated.
 	var/brightness_power = 1
+	///The color of the light emitted.
 	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 
-	var/nightshift_range = 8
-	var/nightshift_power = 0.7
+	///Replaces brightness_range during nightshifts.
+	var/nightshift_range = 7
+	///Replaces brightness_power during nightshifts.
+	var/nightshift_power = 0.5
+	///Replaces brightness_color during nightshifts.
 	var/nightshift_color = LIGHT_COLOR_NIGHTSHIFT
+	
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
 
@@ -864,14 +878,14 @@ var/global/list/light_type_cache = list()
 	base_state = "ltube"
 	item_state = "c_tube"
 	matter = list("glass" = 100)
-	brightness_range = 7	// luminosity when on, also used in power calculation
-	brightness_power = 6
+	brightness_range = 7
+	brightness_power = 2
 
 /obj/item/weapon/light/tube/large
 	w_class = ITEMSIZE_SMALL
 	name = "large light tube"
 	brightness_range = 15
-	brightness_power = 9
+	brightness_power = 4
 
 	nightshift_range = 10
 	nightshift_power = 0.9
@@ -884,7 +898,7 @@ var/global/list/light_type_cache = list()
 	item_state = "contvapour"
 	matter = list("glass" = 100)
 	brightness_range = 5
-	brightness_power = 4
+	brightness_power = 1
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 
 	nightshift_range = 3

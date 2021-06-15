@@ -109,6 +109,11 @@
 
 /atom/Destroy(force = FALSE)
 	. = ..()
+	if(reagents)
+		QDEL_NULL(reagents)
+	if(light)
+		QDEL_NULL(light)
+		
 	if (orbiters)
 		for (var/thing in orbiters)
 			var/datum/orbit/O = thing
