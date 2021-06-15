@@ -94,7 +94,7 @@ var/global/datum/controller/occupations/job_master
 			if(job.minimum_character_age && (player.client.prefs.age < job.minimum_character_age))
 				Debug("FOC character not old enough, Player: [player]")
 				continue
-			if(flag && (!player.client.prefs.be_special & flag))
+			if(flag && !(player.client.prefs.be_special & flag))
 				Debug("FOC flag failed, Player: [player], Flag: [flag], ")
 				continue
 			if(player.client.prefs.GetJobDepartment(job, level) & job.flag)
