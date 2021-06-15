@@ -19,8 +19,8 @@ SUBSYSTEM_DEF(lighting)
 				if (A.dynamic_lighting == DYNAMIC_LIGHTING_IFSTARLIGHT)
 					A.luminosity = 0
 
-		create_all_lighting_objects()
 		subsystem_initialized = TRUE
+		create_all_lighting_objects()
 
 	fire(FALSE, TRUE)
 

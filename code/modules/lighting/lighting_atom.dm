@@ -15,14 +15,20 @@
 	var/tmp/datum/light_source/light
 	///Any light sources that are "inside" of us, for example, if src here was a mob that's carrying a flashlight, that flashlight's light source would be part of this list.
 	var/tmp/list/light_sources
-	/// Either FALSE, [EMISSIVE_BLOCK_GENERIC], or [EMISSIVE_BLOCK_UNIQUE]
+
+/atom/movable
+	///Hint for directional light cone positioning. X is relevant when facing north/south (this setting is for south and inverted for north)
+	var/light_cone_x_offset // When facing south, inverted when facing north
+	///Hint for directional light cone positioning. Y is relevant when facing east/west (same value used for both east and west)
+	var/light_cone_y_offset // When facing east/west, ignored for north/south (uses 16 in those cases)
+	///Highest-intensity light affecting us, which determines our visibility.
+	var/affecting_dynamic_lumi = 0
+	///Lazylist to keep track on the sources of illumination.
+	var/list/affected_dynamic_lights
+	///Either FALSE, [EMISSIVE_BLOCK_GENERIC], or [EMISSIVE_BLOCK_UNIQUE]
 	var/blocks_emissive = FALSE
 	///Internal holder for emissive blocker object, do not use directly use blocks_emissive
 	var/atom/movable/emissive_blocker/em_block
-	///Lazylist to keep track on the sources of illumination.
-	var/list/affected_dynamic_lights
-	///Highest-intensity light affecting us, which determines our visibility.
-	var/affecting_dynamic_lumi = 0
 
 // The proc you should always use to set the light of this atom.
 // Nonesensical value for l_color default, so we can detect if it gets set to null.
@@ -93,7 +99,7 @@
  * It notifies (potentially) affected light sources so they can update (if needed).
  */
 /atom/proc/set_opacity(new_opacity)
-	if (new_opacity == opacity)
+	if(new_opacity == opacity)
 		return
 	SEND_SIGNAL(src, COMSIG_ATOM_SET_OPACITY, new_opacity)
 	. = opacity

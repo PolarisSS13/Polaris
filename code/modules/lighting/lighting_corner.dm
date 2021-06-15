@@ -101,9 +101,9 @@
 
 /datum/lighting_corner/proc/update_objects()
 	// Cache these values ahead of time so 4 individual lighting objects don't all calculate them individually.
-	var/lum_r = src.lum_r > 0 ? 0.5 * sqrt(src.lum_r) : src.lum_r
-	var/lum_g = src.lum_g > 0 ? 0.5 * sqrt(src.lum_g) : src.lum_g
-	var/lum_b = src.lum_b > 0 ? 0.5 * sqrt(src.lum_b) : src.lum_b
+	var/lum_r = src.lum_r
+	var/lum_g = src.lum_g
+	var/lum_b = src.lum_b
 	var/largest_color_luminosity = max(lum_r, lum_g, lum_b) // Scale it so one of them is the strongest lum, if it is above 1.
 	. = 1 // factor
 	if (largest_color_luminosity > 1)
@@ -154,7 +154,6 @@
 	if (!force)
 		return QDEL_HINT_LETMELIVE
 
-
 	for (var/datum/light_source/light_source as anything in affecting)
 		LAZYREMOVE(light_source.effect_str, src)
 	affecting = null
@@ -171,7 +170,7 @@
 	if (master_NW)
 		master_NW.lighting_corner_SE = null
 		master_NW.lighting_corners_initialised = FALSE
-	if (needs_update)
+	if(needs_update)
 		SSlighting.corners_queue -= src
 
 	return ..()

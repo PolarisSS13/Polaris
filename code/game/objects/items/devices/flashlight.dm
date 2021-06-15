@@ -12,6 +12,7 @@
 	light_range = 4 //luminosity when on
 	light_power = 0.8	//lighting power when on
 	light_color = "#FFFFFF" //LIGHT_COLOR_INCANDESCENT_FLASHLIGHT	//lighting colour when on
+	light_cone_y_offset = -7
 	
 	var/on = 0
 	

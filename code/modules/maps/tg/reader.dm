@@ -154,7 +154,6 @@ var/global/use_preloader = FALSE
 						var/model_key = copytext(line, tpos, tpos + key_len)
 						line_keys[++line_keys.len] = model_key
 						#ifdef TESTING
-						else
 							++turfsSkipped
 						#endif
 						CHECK_TICK

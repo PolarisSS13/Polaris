@@ -49,7 +49,7 @@
 		if(MOVABLE_LIGHT)
 			AddComponent(/datum/component/overlay_lighting)
 		if(MOVABLE_LIGHT_DIRECTIONAL)
-			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE)
+			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE, starts_on = light_on)
 
 /atom/movable/Destroy()
 	. = ..()

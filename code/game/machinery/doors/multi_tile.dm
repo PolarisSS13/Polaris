@@ -7,13 +7,24 @@
 	open_sound_powered = 'sound/machines/door/WideOpen.ogg'
 	close_sound_powered = 'sound/machines/door/WideClose.ogg'
 
-/obj/machinery/door/airlock/multi_tile/New()
-	..()
-	SetBounds()
-
-/obj/machinery/door/airlock/multi_tile/Moved(atom/old_loc, direction, forced = FALSE)
+/obj/machinery/door/airlock/multi_tile/Initialize(mapload)
 	. = ..()
 	SetBounds()
+	RegisterSignal(src, COMSIG_MOVABLE_MOVED, .proc/SetBounds)
+	apply_opacity_to_my_turfs(opacity)
+
+/obj/machinery/door/airlock/multi_tile/set_opacity()
+	. = ..()
+	apply_opacity_to_my_turfs(opacity)
+
+/obj/machinery/door/airlock/multi_tile/proc/apply_opacity_to_my_turfs(new_opacity)
+	for(var/turf/T in locs)
+		T.set_opacity(new_opacity)
+	update_nearby_tiles()
+
+/obj/machinery/door/airlock/multi_tile/Destroy()
+	UnregisterSignal(src, COMSIG_MOVABLE_MOVED)
+	return ..()
 
 /obj/machinery/door/airlock/multi_tile/proc/SetBounds()
 	if(dir in list(EAST, WEST))

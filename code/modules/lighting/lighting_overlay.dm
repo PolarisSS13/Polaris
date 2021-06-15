@@ -9,6 +9,9 @@
 	var/turf/affected_turf
 
 /datum/lighting_object/New(turf/source)
+	if(!SSlighting.subsystem_initialized)
+		stack_trace("lighting_object created before SSlighting up!")
+		return
 	if(!isturf(source))
 		qdel(src, force=TRUE)
 		stack_trace("a lighting object was assigned to [source], a non turf! ")

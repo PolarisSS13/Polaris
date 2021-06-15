@@ -70,6 +70,11 @@
 	var/current_direction
 	///Cast range for the directional cast (how far away the atom is moved)
 	var/cast_range = 2
+	///Cone offset X hint from atom, used when facing south, inverted when facing north
+	var/cone_hint_x
+	///Cone offset Y hint from atom, when facing east/west, ignored for north/south (uses 16 in those cases)
+	var/cone_hint_y
+
 
 /datum/component/overlay_lighting/Initialize(_range, _power, _color, starts_on, is_directional)
 	if(!ismovable(parent))
@@ -87,6 +92,8 @@
 		directional = TRUE
 		directional_atom = new()
 		cone = new()
+		cone_hint_x = movable_parent.light_cone_x_offset
+		cone_hint_y = movable_parent.light_cone_y_offset
 		cone.transform = cone.transform.Translate(-32, -32)
 		set_direction(movable_parent.dir)
 	if(!isnull(_range))
@@ -460,14 +467,23 @@
 	else if(newdir & SOUTH)
 		cone.pixel_y = -16
 	else
-		cone.pixel_y = 0
+		if(!isnull(cone_hint_y))
+			cone.pixel_y = cone_hint_y
+		else
+			cone.pixel_y = 0
 	
 	if(newdir & EAST)
 		cone.pixel_x = 16
 	else if(newdir & WEST)
 		cone.pixel_x = -16
 	else
-		cone.pixel_x = 0
+		if(!isnull(cone_hint_x))
+			if(newdir & NORTH)
+				cone.pixel_x = -1*cone_hint_x
+			else
+				cone.pixel_x = cone_hint_x
+		else
+			cone.pixel_x = 0
 	
 	if(overlay_lighting_flags & LIGHTING_ON)
 		make_luminosity_update()

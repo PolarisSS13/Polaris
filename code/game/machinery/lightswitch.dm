@@ -36,19 +36,18 @@
 	return ..()
 
 /obj/machinery/light_switch/proc/updateicon()
-	if(!overlay)
-		overlay = image(icon, "light1-overlay")
-		overlay.plane = PLANE_LIGHTING_ABOVE
-
-	overlays.Cut()
+	cut_overlays()
 	if(stat & NOPOWER)
 		icon_state = "light-p"
 		set_light(0)
 	else
 		icon_state = "light[on]"
-		overlay.icon_state = "light[on]-overlay"
-		overlays += overlay
 		set_light(2, 0.1, on ? "#82FF4C" : "#F86060")
+		. = list()
+		. += emissive_appearance(icon, "light[on]-overlay")
+	
+	return add_overlay(.)
+		
 
 /obj/machinery/light_switch/examine(mob/user)
 	. = ..()
