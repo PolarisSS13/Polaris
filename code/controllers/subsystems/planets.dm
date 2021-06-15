@@ -39,8 +39,10 @@ SUBSYSTEM_DEF(planets)
 		addTurf(queued_turfs[queued_turfs.len])
 		queued_turfs.len--
 		CHECK_TICK
+	/* Seems to cause active edges, SOMEHOW. IT'S LIGHT AAAA.
 	for(var/datum/planet/P as anything in planets)
 		updateSunlight(P)
+	*/
 
 // DO NOT CALL THIS DIRECTLY UNLESS IT'S IN INITIALIZE,
 // USE turf/simulated/proc/make_indoors() and
