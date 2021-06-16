@@ -1,7 +1,12 @@
 // Overmap object for Sif, hanging in the void of space
 /obj/effect/overmap/visitable/planet/Sif
 	name = "Sif"
-	map_z = list(Z_LEVEL_STATION_TWO, Z_LEVEL_SURFACE_WILD)
+	map_z = list(
+		Z_LEVEL_STATION_ONE,
+		Z_LEVEL_STATION_TWO,
+		Z_LEVEL_STATION_THREE,
+		Z_LEVEL_SURFACE_WILD
+	)
 	in_space = 0
 	start_x  = 10
 	start_y  = 10
