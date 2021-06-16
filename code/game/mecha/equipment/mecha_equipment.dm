@@ -39,10 +39,6 @@
 	. = ..()
 	. += "<span class='notice'>[src] will fill [equip_type?"a [equip_type]":"any"] slot.</span>"
 
-/obj/item/mecha_parts/mecha_equipment/New()
-	..()
-	return
-
 /obj/item/mecha_parts/mecha_equipment/proc/add_equip_overlay(obj/mecha/M as obj)
 	return
 
@@ -199,27 +195,31 @@
 	src.update_chassis_page()
 	return
 
+/obj/item/mecha_parts/mecha_equipment/Destroy()
+	detach()
+	return ..()
+
 /obj/item/mecha_parts/mecha_equipment/proc/detach(atom/moveto=null)
 	moveto = moveto || get_turf(chassis)
-	if(src.Move(moveto))
-		chassis.equipment -= src
-		chassis.universal_equipment -= src
-		if(equip_type)
-			switch(equip_type)
-				if(EQUIP_HULL)
-					chassis.hull_equipment -= src
-				if(EQUIP_WEAPON)
-					chassis.weapon_equipment -= src
-				if(EQUIP_UTILITY)
-					chassis.utility_equipment -= src
-				if(EQUIP_SPECIAL)
-					chassis.special_equipment -= src
-		if(chassis.selected == src)
-			chassis.selected = null
-		update_chassis_page()
-		chassis.log_message("[src] removed from equipment.")
-		chassis = null
-		set_ready_state(1)
+	forceMove(moveto)
+	chassis.equipment -= src
+	chassis.universal_equipment -= src
+	if(equip_type)
+		switch(equip_type)
+			if(EQUIP_HULL)
+				chassis.hull_equipment -= src
+			if(EQUIP_WEAPON)
+				chassis.weapon_equipment -= src
+			if(EQUIP_UTILITY)
+				chassis.utility_equipment -= src
+			if(EQUIP_SPECIAL)
+				chassis.special_equipment -= src
+	if(chassis.selected == src)
+		chassis.selected = null
+	update_chassis_page()
+	chassis.log_message("[src] removed from equipment.")
+	chassis = null
+	set_ready_state(1)
 	enable_special = FALSE
 	return
 

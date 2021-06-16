@@ -3,25 +3,18 @@
 	desc = "Integrated cloaking system. High power usage, but does render you invisible to the naked eye. Doesn't prevent noise, however."
 	icon_state = "tesla"
 	origin_tech = list(TECH_MAGNET = 5, TECH_DATA = 5)
-	equip_cooldown = 2 SECONDS
 	energy_drain = 300
 	range = 0
-
 	equip_type = EQUIP_SPECIAL
 
-	var/datum/global_iterator/mecha_cloak/cloak_iterator
-
-/obj/item/mecha_parts/mecha_equipment/cloak/Initialize()
-	. = ..()
-	cloak_iterator = new /datum/global_iterator/mecha_cloak(list(src),0)
-	cloak_iterator.set_delay(equip_cooldown)
-
-/obj/item/mecha_parts/mecha_equipment/cloak/Destroy()
-	qdel_null(cloak_iterator)
-	return ..()
+/obj/item/mecha_parts/mecha_equipment/cloak/process()
+	..()
+	//Removed from chassis or ran out of power
+	if(!chassis || !chassis.use_power(energy_drain))
+		stop_cloak()
+		return
 
 /obj/item/mecha_parts/mecha_equipment/cloak/detach()
-	qdel_null(cloak_iterator)
 	if(!equip_ready) //We were running
 		stop_cloak()
 	return ..()
@@ -44,7 +37,7 @@
 	if(chassis)
 		chassis.cloak()
 	log_message("Activated.")
-	cloak_iterator.start()
+	START_PROCESSING(SSobj, src)
 	set_ready_state(0)
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, 1)
 
@@ -52,19 +45,6 @@
 	if(chassis)
 		chassis.uncloak()
 	log_message("Deactivated.")
-	cloak_iterator.stop()
+	STOP_PROCESSING(SSobj, src)
 	set_ready_state(1)
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, 1)
-
-// These things are so silly
-/datum/global_iterator/mecha_cloak/process(var/obj/item/mecha_parts/mecha_equipment/cloak/cloak)
-	//Removed from chassis
-	if(!cloak.chassis)
-		stop()
-		cloak.stop_cloak()
-		return
-	//Ran out of power
-	if(!cloak.chassis.use_power(cloak.energy_drain))
-		stop()
-		cloak.stop_cloak()
-		return
