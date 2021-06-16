@@ -66,41 +66,48 @@
 	var/num_admins_online = 0
 	var/num_devs_online = 0
 	var/num_event_managers_online = 0
-	if(holder)
-		for(var/client/C in admins)
-			var/msg_to_use = msg
-			if(check_rights(R_ADMIN, FALSE, C)) // admins
-				if(C.holder.fakekey && check_rights(R_ADMIN|R_MOD, FALSE, src))	// Only admins and mods can see stealthmins
-					continue
-				num_admins_online++
-			else if(check_rights(R_MOD, FALSE, C)) // mods
-				msg_to_use = modmsg
-				num_mods_online++
-			else if(check_rights(R_SERVER, FALSE, C)) // developers
-				msg_to_use = devmsg
-				num_devs_online++
-			else if(check_rights(R_EVENT, FALSE, C)) // event managers
-				msg_to_use = eventMmsg
-				num_event_managers_online++
-			
-			msg_to_use += "\t[C] is a [C.holder.rank]"
-			if(holder)
-				if(C.holder.fakekey)
-					msg_to_use += " <i>(as [C.holder.fakekey])</i>"
+	for(var/client/C in admins)
+		var/temp = ""
+		var/category = R_ADMIN
+		if(check_rights(R_ADMIN, FALSE, C)) // admins
+			if(C.holder.fakekey && check_rights(R_ADMIN|R_MOD, FALSE, src))	// Only admins and mods can see stealthmins
+				continue
+			num_admins_online++
+		else if(check_rights(R_MOD, FALSE, C)) // mods
+			category = R_MOD
+			num_mods_online++
+		else if(check_rights(R_SERVER, FALSE, C)) // developers
+			category = R_SERVER
+			num_devs_online++
+		else if(check_rights(R_EVENT, FALSE, C)) // event managers
+			category = R_EVENT
+			num_event_managers_online++
+		
+		temp += "\t[C] is a [C.holder.rank]"
+		if(holder)
+			if(C.holder.fakekey)
+				temp += " <i>(as [C.holder.fakekey])</i>"
 
-				if(isobserver(C.mob))
-					msg_to_use += " - Observing"
-				else if(istype(C.mob,/mob/new_player))
-					msg_to_use += " - Lobby"
-				else
-					msg_to_use += " - Playing"
+			if(isobserver(C.mob))
+				temp += " - Observing"
+			else if(istype(C.mob,/mob/new_player))
+				temp += " - Lobby"
+			else
+				temp += " - Playing"
 
-				if(C.is_afk())
-					var/seconds = C.last_activity_seconds()
-					msg_to_use += " (AFK - "
-					msg_to_use += "[round(seconds / 60)] minutes, "
-					msg_to_use += "[seconds % 60] seconds)"
-			msg_to_use += "\n"
+			if(C.is_afk())
+				var/seconds = C.last_activity_seconds()
+				temp += " (AFK - [round(seconds / 60)] minutes, [seconds % 60] seconds)"
+		temp += "\n"
+		switch(category)
+			if(R_ADMIN)
+				msg += temp
+			if(R_MOD)
+				modmsg += temp
+			if(R_SERVER)
+				devmsg += temp
+			if(R_EVENT)
+				eventMmsg += temp
 
 	if(config.admin_irc)
 		to_chat(src, "<span class='info'>Adminhelps are also sent to IRC. If no admins are available in game try anyway and an admin on IRC may see it and respond.</span>")
