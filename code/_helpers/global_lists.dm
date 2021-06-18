@@ -72,6 +72,8 @@ var/global/list/endgame_safespawns = list()
 
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
 
+var/repository/decls/decls_repository = new()
+
 // Ores (for mining)
 GLOBAL_LIST_EMPTY(ore_data)
 GLOBAL_LIST_EMPTY(alloy_data)
