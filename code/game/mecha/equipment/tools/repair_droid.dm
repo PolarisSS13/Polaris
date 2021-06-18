@@ -45,7 +45,7 @@
 			droid_overlay = new(src.icon, icon_state = "repair_droid")
 			STOP_PROCESSING(SSobj, src)
 			log_message("Deactivated.")
-			set_ready_state(1)
+			set_ready_state(TRUE)
 		else
 			droid_overlay = new(src.icon, icon_state = "repair_droid_a")
 			log_message("Activated.")
@@ -56,7 +56,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/repair_droid/process()
 	if(!chassis)
-		set_ready_state(1)
+		set_ready_state(TRUE)
 		return PROCESS_KILL
 	var/repaired = 0
 	var/effective_boost = health_boost
@@ -88,10 +88,10 @@
 		repaired = 1
 	if(repaired)
 		if(chassis.use_power(energy_drain))
-			set_ready_state(0)
+			set_ready_state(FALSE)
 		else
-			set_ready_state(1)
+			set_ready_state(TRUE)
 			return PROCESS_KILL
 	else
-		set_ready_state(1)
+		set_ready_state(TRUE)
 	return

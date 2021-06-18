@@ -54,7 +54,7 @@
 			target.client.perspective = EYE_PERSPECTIVE
 			target.client.eye = chassis
 		*/
-		set_ready_state(0)
+		set_ready_state(FALSE)
 		START_PROCESSING(SSprocessing, src)
 		occupant_message("<font color='blue'>[target] successfully loaded into [src]. Life support functions engaged.</font>")
 		chassis.visible_message("[chassis] loads [target] into [src].")
@@ -76,7 +76,7 @@
 	occupant.Stasis(0)
 	occupant = null
 	STOP_PROCESSING(SSprocessing, src)
-	set_ready_state(1)
+	set_ready_state(TRUE)
 	return
 
 /obj/item/mecha_parts/mecha_equipment/tool/sleeper/detach()
@@ -212,10 +212,10 @@
 /obj/item/mecha_parts/mecha_equipment/tool/sleeper/process()
 	..()
 	if(!chassis)
-		set_ready_state(1)
+		set_ready_state(TRUE)
 		return PROCESS_KILL
 	if(!chassis.has_charge(energy_drain))
-		set_ready_state(1)
+		set_ready_state(TRUE)
 		log_message("Deactivated.")
 		occupant_message("[src] deactivated - no power.")
 		return PROCESS_KILL

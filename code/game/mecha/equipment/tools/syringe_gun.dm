@@ -57,7 +57,7 @@
 	if(reagents.total_volume<=0)
 		occupant_message("<span class=\"alert\">No available reagents to load syringe with.</span>")
 		return
-	set_ready_state(0)
+	set_ready_state(FALSE)
 	chassis.use_power(energy_drain)
 	var/turf/trg = get_turf(target)
 	var/obj/item/weapon/reagent_containers/syringe/S = syringes[1]
@@ -235,7 +235,7 @@
 	return 1
 
 /obj/item/mecha_parts/mecha_equipment/tool/syringe_gun/proc/add_known_reagent(r_id,r_name)
-	set_ready_state(0)
+	set_ready_state(FALSE)
 	do_after_cooldown()
 	if(!(r_id in known_reagents))
 		known_reagents += r_id
@@ -447,10 +447,10 @@
 	if(chassis)
 		enabled = !enabled
 		if(enabled)
-			set_ready_state(0)
+			set_ready_state(FALSE)
 			log_message("Activated.")
 		else
-			set_ready_state(1)
+			set_ready_state(TRUE)
 			log_message("Deactivated.")
 
 /obj/item/mecha_parts/mecha_equipment/crisis_drone/add_equip_overlay(obj/mecha/M as obj)

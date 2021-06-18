@@ -6,7 +6,6 @@
 	equip_cooldown = 10
 	energy_drain = 0
 	range = 0
-	var/is_processing
 	var/coeff = 100
 	var/list/use_channels = list(EQUIP,ENVIRON,LIGHT)
 	equip_type = EQUIP_UTILITY
@@ -17,11 +16,11 @@
 
 /obj/item/mecha_parts/mecha_equipment/tesla_energy_relay/process()
 	if(!chassis || chassis.hasInternalDamage(MECHA_INT_SHORT_CIRCUIT))
-		set_ready_state(1)
+		set_ready_state(TRUE)
 		return PROCESS_KILL
 	var/cur_charge = chassis.get_charge()
 	if(isnull(cur_charge) || !chassis.cell)
-		set_ready_state(1)
+		set_ready_state(TRUE)
 		occupant_message("No powercell detected.")
 		return PROCESS_KILL
 	if(cur_charge<chassis.cell.maxcharge)
@@ -83,11 +82,11 @@
 	if(href_list["toggle_relay"])
 		if(datum_flags & DF_ISPROCESSING)
 			STOP_PROCESSING(SSfastprocess, src)
-			set_ready_state(1)
+			set_ready_state(TRUE)
 			log_message("Deactivated.")
 		else
 			START_PROCESSING(SSfastprocess, src)
-			set_ready_state(0)
+			set_ready_state(FALSE)
 			log_message("Activated.")
 	return
 

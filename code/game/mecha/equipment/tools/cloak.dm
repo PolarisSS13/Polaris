@@ -38,7 +38,7 @@
 		chassis.cloak()
 	log_message("Activated.")
 	START_PROCESSING(SSobj, src)
-	set_ready_state(0)
+	set_ready_state(FALSE)
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, 1)
 
 /obj/item/mecha_parts/mecha_equipment/cloak/proc/stop_cloak()
@@ -46,5 +46,5 @@
 		chassis.uncloak()
 	log_message("Deactivated.")
 	STOP_PROCESSING(SSobj, src)
-	set_ready_state(1)
+	set_ready_state(TRUE)
 	playsound(src, 'sound/effects/EMPulse.ogg', 100, 1)

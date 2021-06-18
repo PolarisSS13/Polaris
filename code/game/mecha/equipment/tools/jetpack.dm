@@ -31,14 +31,14 @@
 	return equip_ready
 
 /obj/item/mecha_parts/mecha_equipment/tool/jetpack/proc/turn_on()
-	set_ready_state(0)
+	set_ready_state(FALSE)
 	chassis.proc_res["dyndomove"] = src
 	ion_trail.start()
 	occupant_message("Activated")
 	log_message("Activated")
 
 /obj/item/mecha_parts/mecha_equipment/tool/jetpack/proc/turn_off()
-	set_ready_state(1)
+	set_ready_state(TRUE)
 	chassis.proc_res["dyndomove"] = null
 	ion_trail.stop()
 	occupant_message("Deactivated")

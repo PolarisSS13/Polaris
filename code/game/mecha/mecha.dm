@@ -286,7 +286,7 @@
 			if(E.salvageable && prob(30))
 				WR.crowbar_salvage += E
 				E.forceMove(WR)
-				E.equip_ready = 1
+				E.equip_ready = TRUE
 			else
 				E.forceMove(loc)
 				E.destroy()

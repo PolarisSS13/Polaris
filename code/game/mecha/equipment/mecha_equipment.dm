@@ -13,11 +13,11 @@
 	origin_tech = list(TECH_MATERIAL = 2)
 	description_info = "Some equipment may gain new abilities or advantages if equipped to certain types of Exosuits."
 	var/equip_cooldown = 0
-	var/equip_ready = 1
+	var/equip_ready = TRUE
 	var/energy_drain = 0
 	var/obj/mecha/chassis = null
 	var/range = MELEE //bitflags
-	var/salvageable = 1
+	var/salvageable = TRUE
 	var/required_type = /obj/mecha //may be either a type or a list of allowed types
 	var/equip_type = null //mechaequip2
 	var/allow_duplicate = FALSE
@@ -28,7 +28,7 @@
 
 /obj/item/mecha_parts/mecha_equipment/proc/do_after_cooldown(target=1)
 	sleep(equip_cooldown)
-	set_ready_state(1)
+	set_ready_state(TRUE)
 	if(ready_sound) //Kind of like the kinetic accelerator.
 		playsound(src, ready_sound, 50, 1, -1)
 	if(target && chassis)
@@ -219,7 +219,7 @@
 	update_chassis_page()
 	chassis.log_message("[src] removed from equipment.")
 	chassis = null
-	set_ready_state(1)
+	set_ready_state(TRUE)
 	enable_special = FALSE
 	return
 
