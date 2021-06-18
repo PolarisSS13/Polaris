@@ -93,7 +93,7 @@
 		step(user.pulling, get_dir(user.pulling.loc, src))
 	return 1
 
-turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/weapon/storage))
 		var/obj/item/weapon/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)

@@ -2717,11 +2717,11 @@
 /datum/global_iterator/mecha_preserve_temp  //normalizing cabin air temperature to 20 degrees celsium
 	delay = 20
 
-	process(var/obj/mecha/mecha)
-		if(mecha.cabin_air && mecha.cabin_air.volume > 0)
-			var/delta = mecha.cabin_air.temperature - T20C
-			mecha.cabin_air.temperature -= max(-10, min(10, round(delta/4,0.1)))
-		return
+/datum/global_iterator/mecha_preserve_temp/process(var/obj/mecha/mecha)
+	if(mecha.cabin_air && mecha.cabin_air.volume > 0)
+		var/delta = mecha.cabin_air.temperature - T20C
+		mecha.cabin_air.temperature -= max(-10, min(10, round(delta/4,0.1)))
+	return
 
 /datum/global_iterator/mecha_tank_give_air
 	delay = 15

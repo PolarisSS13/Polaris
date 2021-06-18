@@ -235,7 +235,7 @@
 	base_color = "#333333"
 
 	reagent_tag = IS_TAJARA
-	allergens = COFFEE
+	allergens = ALLERGEN_COFFEE
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
@@ -333,7 +333,7 @@
 	breath_heat_level_3 = 1350	//Default 1250
 
 	reagent_tag = IS_SKRELL
-	allergens = MEAT|FISH|DAIRY|EGGS
+	allergens = ALLERGEN_MEAT|ALLERGEN_FISH|ALLERGEN_DAIRY|ALLERGEN_EGGS
 
 	has_limbs = list(
 		BP_TORSO =  list("path" = /obj/item/organ/external/chest),
