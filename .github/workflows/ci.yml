@@ -29,9 +29,9 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - uses: actions/checkout@v2
-        
+
       - name: Cache SpacemanDMM
-        uses: actions/cache@v1
+        uses: actions/cache@v2
         with:
           path: ~/SpacemanDMM
           key: ${{ runner.os }}-dreamchecker-${{ hashFiles('dependencies.sh')}}
