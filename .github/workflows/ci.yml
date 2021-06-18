@@ -39,7 +39,7 @@ jobs:
       
       - name: Install Dependencies
         run: |
-          tools/travis/install_spaceman_dmm.sh dreamchecker
+          tools/ci/install_spaceman_dmm.sh dreamchecker
           
       - name: Run Linter
         id: linter
