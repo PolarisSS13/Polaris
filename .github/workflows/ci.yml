@@ -6,7 +6,6 @@ on:
 
 env:
   BASENAME: "polaris"
-  SPACEMAN_DMM_VERSION: suite-1.7
 
 jobs:
   file_tests:
@@ -25,25 +24,32 @@ jobs:
           tools/ci/validate_files.sh
           tools/ci/build_tgui.sh
 
-  DreamChecker:
+  dreamchecker:
+    name: DreamChecker
     runs-on: ubuntu-18.04
     steps:
-      - uses: actions/checkout@5a4ac9002d0be2fb38bd78e4b4dbde5606d7042f
-      - name: Setup Cache
-        uses: actions/cache@26968a09c0ea4f3e233fdddbafd1166051a095f6
+      - uses: actions/checkout@v2
+        
+      - name: Cache SpacemanDMM
+        uses: actions/cache@v1
         with:
-          path: $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
-          key: ${{ runner.os }}-spacemandmm-${{ env.SPACEMAN_DMM_VERSION }}
-      - name: Install Dreamchecker
-        run:  tools/ci/install-spaceman-dmm.sh dreamchecker
-      - name: Run Dreamchecker
+          path: ~/SpacemanDMM
+          key: ${{ runner.os }}-dreamchecker-${{ hashFiles('dependencies.sh')}}
+          restore-keys: ${{ runner.os }}-dreamchecker
+      
+      - name: Install Dependencies
+        run: |
+          tools/travis/install_spaceman_dmm.sh dreamchecker
+          
+      - name: Run Linter
+        id: linter
         run: |
           ~/dreamchecker > ${GITHUB_WORKSPACE}/output-annotations.txt 2>&1
-          cat ${GITHUB_WORKSPACE}/output-annotations.txt
-      - name: Annotate Lints
-        uses: yogstation13/DreamAnnotate@34029606cd7c22a08a589e084f860c1cc287363c
-        if: hashFiles('${GITHUB_WORKSPACE}/output-annotations.txt') != ''
-        with:
+          
+      - name: Annotate Linter
+        uses: yogstation13/DreamAnnotate@v1
+        if: always()
+        with: 
           outputFile: output-annotations.txt
 
   unit_tests:

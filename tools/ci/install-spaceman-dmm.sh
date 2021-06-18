@@ -1,15 +1,19 @@
 #!/bin/bash
 set -euo pipefail
 
-if [ -f "$HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION/$1" ];
-then
-  echo "Using cached $1."
-  cp "$HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION/$1" ~/$1
-else
-  wget -O ~/$1 "https://github.com/SpaceManiac/SpacemanDMM/releases/download/$SPACEMAN_DMM_VERSION/$1"
-  mkdir -p $HOME/spaceman_dmm
-  cp ~/$1 $HOME/spaceman_dmm/$SPACEMAN_DMM_VERSION
+source _build_dependencies.sh
+
+if [ ! -f ~/$1 ]; then
+	mkdir -p "$HOME/SpacemanDMM"
+	CACHEFILE="$HOME/SpacemanDMM/$1"
+
+	if ! [ -f "$CACHEFILE.version" ] || ! grep -Fxq "$SPACEMAN_DMM_VERSION" "$CACHEFILE.version"; then
+		wget -O "$CACHEFILE" "https://github.com/SpaceManiac/SpacemanDMM/releases/download/$SPACEMAN_DMM_VERSION/$1"
+		chmod +x "$CACHEFILE"
+		echo "$SPACEMAN_DMM_VERSION" >"$CACHEFILE.version"
+	fi
+
+	ln -s "$CACHEFILE" ~/$1
 fi
 
-chmod +x ~/$1
 ~/$1 --version
