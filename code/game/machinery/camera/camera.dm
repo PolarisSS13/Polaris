@@ -65,7 +65,7 @@
 
 /obj/machinery/camera/Destroy()
 	if(isMotion())
-		unsense_proximity(callback = .HasProximity)
+		unsense_proximity(callback = /atom/proc/HasProximity)
 	deactivate(null, 0) //kick anyone viewing out
 	if(assembly)
 		qdel(assembly)
@@ -356,7 +356,6 @@
 	for(var/obj/machinery/camera/C in oview(4, M))
 		if(C.can_use())	// check if camera disabled
 			return C
-			break
 	return null
 
 /proc/near_range_camera(var/mob/M)
@@ -364,7 +363,6 @@
 	for(var/obj/machinery/camera/C in range(4, M))
 		if(C.can_use())	// check if camera disabled
 			return C
-			break
 
 	return null
 

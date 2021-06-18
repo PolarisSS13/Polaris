@@ -71,7 +71,7 @@
 	for(var/ore in machine.ores_processing)
 
 		if(!machine.ores_stored[ore] && !show_all_ores) continue
-		var/ore/O = ore_data[ore]
+		var/ore/O = GLOB.ore_data[ore]
 		if(!O) continue
 		dat += "<tr><td width = 40><b>[capitalize(O.display_name)]</b></td><td width = 30>[machine.ores_stored[ore]]</td><td width = 100>"
 		if(machine.ores_processing[ore])
@@ -163,9 +163,8 @@
 	var/obj/machinery/mineral/output = null
 	var/obj/machinery/mineral/console = null
 	var/sheets_per_tick = 10
-	var/list/ores_processing[0]
-	var/list/ores_stored[0]
-	var/static/list/alloy_data
+	var/list/ores_processing = list()
+	var/list/ores_stored = list()
 	var/active = FALSE
 	var/tick = 0
 
@@ -192,24 +191,13 @@
 		"mhydrogen" = 40,
 		"verdantium" = 60)
 
-/obj/machinery/mineral/processing_unit/New()
-	..()
-	// initialize static alloy_data list
-	if(!alloy_data)
-		alloy_data = list()
-		for(var/alloytype in typesof(/datum/alloy)-/datum/alloy)
-			alloy_data += new alloytype()
-
-	// TODO - Initializing this here is insane. Put it in global lists init or something. ~Leshana
-	if(!ore_data || !ore_data.len)
-		for(var/oretype in typesof(/ore)-/ore)
-			var/ore/OD = new oretype()
-			ore_data[OD.name] = OD
-			ores_processing[OD.name] = 0
-			ores_stored[OD.name] = 0
-
 /obj/machinery/mineral/processing_unit/Initialize()
 	. = ..()
+	for(var/ore in GLOB.ore_data)
+		var/ore/OD = GLOB.ore_data[ore]
+		ores_processing[OD.name] = 0
+		ores_stored[OD.name] = 0
+
 	// TODO - Eschew input/output machinery and just use dirs ~Leshana
 	//Locate our output and input machinery.
 	for (var/dir in cardinal)
@@ -269,13 +257,13 @@
 
 		if(ores_stored[metal] > 0 && ores_processing[metal] != 0)
 
-			var/ore/O = ore_data[metal]
+			var/ore/O = GLOB.ore_data[metal]
 
 			if(!O) continue
 
 			if(ores_processing[metal] == PROCESS_ALLOY && O.alloy) //Alloying.
 
-				for(var/datum/alloy/A in alloy_data)
+				for(var/datum/alloy/A in GLOB.alloy_data)
 
 					if(A.metaltag in tick_alloys)
 						continue
@@ -350,3 +338,4 @@
 #undef PROCESS_SMELT
 #undef PROCESS_COMPRESS
 #undef PROCESS_ALLOY
+

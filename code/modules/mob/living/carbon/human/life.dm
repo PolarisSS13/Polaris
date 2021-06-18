@@ -646,7 +646,8 @@
 			var/obj/mecha/M = loc
 			loc_temp =  M.return_temperature()
 		else if(istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
-			loc_temp = loc:air_contents.temperature
+			var/obj/machinery/atmospherics/unary/cryo_cell/cc = loc
+			loc_temp = cc.air_contents.temperature
 		else
 			loc_temp = environment.temperature
 
@@ -1028,7 +1029,7 @@
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
 						throw_alert("asleep", /obj/screen/alert/asleep)
-				if( prob(2) && health && !hal_crit )
+				if( prob(2) && health && !hal_crit && client )
 					spawn(0)
 						emote("snore")
 		//CONSCIOUS

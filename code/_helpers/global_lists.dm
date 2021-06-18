@@ -31,6 +31,11 @@ GLOBAL_LIST_EMPTY(closet_appearances)
 // Times that players are allowed to respawn ("ckey" = world.time)
 GLOBAL_LIST_EMPTY(respawn_timers)
 
+// Holomaps
+var/global/list/holomap_markers = list()
+var/global/list/mapping_units = list()
+var/global/list/mapping_beacons = list()
+
 //Preferences stuff
 	//Hairstyles
 var/global/list/hair_styles_list = list()			//stores /datum/sprite_accessory/hair indexed by name
@@ -66,6 +71,10 @@ var/global/list/endgame_exits = list()
 var/global/list/endgame_safespawns = list()
 
 var/global/list/syndicate_access = list(access_maint_tunnels, access_syndicate, access_external_airlocks)
+
+// Ores (for mining)
+GLOBAL_LIST_EMPTY(ore_data)
+GLOBAL_LIST_EMPTY(alloy_data)
 
 // Strings which corraspond to bodypart covering flags, useful for outputting what something covers.
 var/global/list/string_part_flags = list(
@@ -198,6 +207,16 @@ var/global/list/string_slot_flags = list(
 			GLOB.playable_species += S.name
 		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
 			GLOB.whitelisted_species += S.name
+
+	//Ores
+	paths = typesof(/ore)-/ore
+	for(var/oretype in paths)
+		var/ore/OD = new oretype()
+		GLOB.ore_data[OD.name] = OD
+
+	paths = typesof(/datum/alloy)-/datum/alloy
+	for(var/alloytype in paths)
+		GLOB.alloy_data += new alloytype()
 
 	//Closet appearances
 	GLOB.closet_appearances = decls_repository.get_decls_of_type(/decl/closet_appearance)
