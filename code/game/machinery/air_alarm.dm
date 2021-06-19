@@ -557,20 +557,21 @@
 			var/list/info = alarm_area.air_scrub_info[id_tag]
 			if(!info)
 				continue
-			data["scrubbers"] += list(list(
+			scrubbers += list(list(
 				"id_tag"	= id_tag,
 				"long_name" = sanitize(long_name),
 				"power"		= info["power"],
 				"scrubbing"	= info["scrubbing"],
 				"panic"		= info["panic"],
-				"filters"	= list()
+				"filters"   = list(
+					list("name" = "Oxygen",			"command" = "o2_scrub",	"val" = info["filter_o2"]),
+					list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]),
+					list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]),
+					list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]),
+					list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]),
+					list("name" = "Fuel",			"command" = "fuel_scrub","val" = info["filter_fuel"])
+				)
 			))
-			scrubbers[scrubbers.len]["filters"] += list(list("name" = "Oxygen",			"command" = "o2_scrub",	"val" = info["filter_o2"]))
-			scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrogen",		"command" = "n2_scrub",	"val" = info["filter_n2"]))
-			scrubbers[scrubbers.len]["filters"] += list(list("name" = "Carbon Dioxide", "command" = "co2_scrub","val" = info["filter_co2"]))
-			scrubbers[scrubbers.len]["filters"] += list(list("name" = "Toxin"	, 		"command" = "tox_scrub","val" = info["filter_phoron"]))
-			scrubbers[scrubbers.len]["filters"] += list(list("name" = "Nitrous Oxide",	"command" = "n2o_scrub","val" = info["filter_n2o"]))
-			scrubbers[scrubbers.len]["filters"] += list(list("name" = "Fuel",			"command" = "fuel_scrub","val" = info["filter_fuel"]))
 		data["scrubbers"] = scrubbers
 
 		var/list/modes = list()
