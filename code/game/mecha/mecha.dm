@@ -2809,16 +2809,8 @@
 /obj/mecha/proc/start_process(process)
 	current_processes |= process
 
-/////////////////////////////////////////////////
-////////  Mecha process() subcomponents  ////////
-/////////////////////////////////////////////////
-
-// Handles the internal alarms for a mech.
-// Called every 16 iterations (80 deciseconds).
-
 
 /////////////
-
 /obj/mecha/cloak()
 	. = ..()
 	if(occupant && occupant.client && cloaked_selfimage)

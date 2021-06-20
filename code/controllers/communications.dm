@@ -154,9 +154,6 @@ var/list/ANTAG_FREQS = list(SYND_FREQ, RAID_FREQ)
 //Department channels, arranged lexically
 var/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FREQ, SEC_FREQ, SCI_FREQ, SRV_FREQ, SUP_FREQ)
 
-#define TRANSMISSION_WIRE	0
-#define TRANSMISSION_RADIO	1
-
 /proc/frequency_span_class(var/frequency)
 	// Antags!
 	if (frequency in ANTAG_FREQS)

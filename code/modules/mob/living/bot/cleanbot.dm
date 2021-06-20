@@ -172,7 +172,7 @@
 	data["version"] = "v2.0"
 	return data
 
-mob/living/bot/cleanbot/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
+/mob/living/bot/cleanbot/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
 	usr.set_machine(src)

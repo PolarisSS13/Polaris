@@ -116,7 +116,7 @@
 	icon_raw = "batter_raw"
 	icon_cooked = "batter_cooked"
 	coated_adj = "battered"
-	allergen_type = GRAINS | EGGS //Made with flour(grain), and eggs(eggs)
+	allergen_type = ALLERGEN_GRAINS | ALLERGEN_EGGS //Made with flour(grain), and eggs(eggs)
 
 /datum/reagent/nutriment/coating/beerbatter
 	name = "beer batter mix"
@@ -127,7 +127,7 @@
 	icon_raw = "batter_raw"
 	icon_cooked = "batter_cooked"
 	coated_adj = "beer-battered"
-	allergen_type = GRAINS | EGGS //Made with flour(grain), eggs(eggs), and beer(grain)
+	allergen_type = ALLERGEN_GRAINS | ALLERGEN_EGGS //Made with flour(grain), eggs(eggs), and beer(grain)
 
 /datum/reagent/nutriment/coating/beerbatter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -231,7 +231,7 @@
 	id = "cornoil"
 	description = "An oil derived from various types of corn."
 	reagent_state = LIQUID
-	allergen_type = VEGETABLE //Corn is a vegetable
+	allergen_type = ALLERGEN_VEGETABLE //Corn is a vegetable
 
 /datum/reagent/nutriment/triglyceride/oil/peanut
 	name = "Peanut Oil"
@@ -241,7 +241,7 @@
 	taste_mult = 0.3
 	nutriment_factor = 15
 	color = "#4F3500"
-	allergen_type = SEEDS //Peanut oil would come from peanuts, hence seeds.
+	allergen_type = ALLERGEN_SEEDS //Peanut oil would come from peanuts, hence seeds.
 
 // Aurora Cooking Port Insertion End
 
@@ -258,7 +258,7 @@
 	id = "protein"
 	taste_description = "some sort of meat"
 	color = "#440000"
-	allergen_type = MEAT //"Animal protein" implies it comes from animals, therefore meat.
+	allergen_type = ALLERGEN_MEAT //"Animal protein" implies it comes from animals, therefore meat.
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
@@ -274,35 +274,35 @@
 	id = "tofu"
 	color = "#fdffa8"
 	taste_description = "tofu"
-	allergen_type = BEANS //Made from soy beans
+	allergen_type = ALLERGEN_BEANS //Made from soy beans
 
 /datum/reagent/nutriment/protein/seafood
 	name = "seafood protein"
 	id = "seafood"
 	color = "#f5f4e9"
 	taste_description = "fish"
-	allergen_type = FISH //I suppose the fish allergy likely refers to seafood in general.
+	allergen_type = ALLERGEN_FISH //I suppose the fish allergy likely refers to seafood in general.
 
 /datum/reagent/nutriment/protein/cheese
 	name = "cheese"
 	id = "cheese"
 	color = "#EDB91F"
 	taste_description = "cheese"
-	allergen_type = DAIRY //Cheese is made from dairy
+	allergen_type = ALLERGEN_DAIRY //Cheese is made from dairy
 
 /datum/reagent/nutriment/protein/egg
 	name = "egg yolk"
 	id = "egg"
 	taste_description = "egg"
 	color = "#FFFFAA"
-	allergen_type = EGGS //Eggs contain egg
+	allergen_type = ALLERGEN_EGGS //Eggs contain egg
 
 /datum/reagent/nutriment/protein/murk
 	name = "murkfin protein"
 	id = "murk_protein"
 	taste_description = "mud"
 	color = "#664330"
-	allergen_type = FISH //Murkfin is fish
+	allergen_type = ALLERGEN_FISH //Murkfin is fish
 
 /datum/reagent/nutriment/honey
 	name = "Honey"
@@ -340,7 +340,7 @@
 	taste_description = "unmistakably mayonnaise"
 	nutriment_factor = 10
 	color = "#FFFFFF"
-	allergen_type = EGGS	//Mayo is made from eggs
+	allergen_type = ALLERGEN_EGGS	//Mayo is made from eggs
 
 /datum/reagent/nutriment/yeast
 	name = "Yeast"
@@ -358,7 +358,7 @@
 	reagent_state = SOLID
 	nutriment_factor = 1
 	color = "#FFFFFF"
-	allergen_type = GRAINS //Flour is made from grain
+	allergen_type = ALLERGEN_GRAINS //Flour is made from grain
 
 /datum/reagent/nutriment/flour/touch_turf(var/turf/simulated/T)
 	if(!istype(T, /turf/space))
@@ -372,7 +372,7 @@
 	taste_mult = 1.3
 	nutriment_factor = 1
 	color = "#482000"
-	allergen_type = COFFEE //Again, coffee contains coffee
+	allergen_type = ALLERGEN_COFFEE //Again, coffee contains coffee
 
 /datum/reagent/nutriment/tea
 	name = "Tea Powder"
@@ -399,7 +399,7 @@
 	description = "Dehydrated, powdered juice of some kind."
 	taste_mult = 1.3
 	nutriment_factor = 1
-	allergen_type = FRUIT //I suppose it's implied here that the juice is from dehydrated fruit.
+	allergen_type = ALLERGEN_FRUIT //I suppose it's implied here that the juice is from dehydrated fruit.
 
 /datum/reagent/nutriment/instantjuice/grape
 	name = "Grape Juice Powder"
@@ -438,7 +438,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 2
 	color = "#792300"
-	allergen_type = BEANS //Soy (beans)
+	allergen_type = ALLERGEN_BEANS //Soy (beans)
 
 
 /datum/reagent/nutriment/ketchup
@@ -449,7 +449,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 5
 	color = "#731008"
-	allergen_type = FRUIT 	//Tomatoes are a fruit.
+	allergen_type = ALLERGEN_FRUIT 	//Tomatoes are a fruit.
 
 /datum/reagent/nutriment/barbecue
 	name = "Barbeque Sauce"
@@ -479,7 +479,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 1
 	color = "#801E28"
-	allergen_type = FRUIT //Cherries are fruits
+	allergen_type = ALLERGEN_FRUIT //Cherries are fruits
 
 /datum/reagent/nutriment/peanutbutter
 	name = "Peanut Butter"
@@ -490,7 +490,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 30
 	color = "#4F3500"
-	allergen_type = SEEDS //Peanuts(seeds)
+	allergen_type = ALLERGEN_SEEDS //Peanuts(seeds)
 
 /datum/reagent/nutriment/vanilla
 	name = "Vanilla Extract"
@@ -536,7 +536,7 @@
 	reagent_state = LIQUID
 	nutriment_factor = 2
 	color = "#899613"
-	allergen_type = DAIRY	//incase anyone is dumb enough to drink it - it does contain milk!
+	allergen_type = ALLERGEN_DAIRY	//incase anyone is dumb enough to drink it - it does contain milk!
 
 /datum/reagent/nutriment/sprinkles
 	name = "Sprinkles"
@@ -893,7 +893,7 @@
 
 	glass_name = "banana juice"
 	glass_desc = "The raw essence of a banana. HONK!"
-	allergen_type = FRUIT //Bananas are fruit
+	allergen_type = ALLERGEN_FRUIT //Bananas are fruit
 
 /datum/reagent/drink/juice/berry
 	name = "Berry Juice"
@@ -904,7 +904,7 @@
 
 	glass_name = "berry juice"
 	glass_desc = "Berry juice. Or maybe it's jam. Who cares?"
-	allergen_type = FRUIT //Berries are fruit
+	allergen_type = ALLERGEN_FRUIT //Berries are fruit
 
 /datum/reagent/drink/juice/pineapple
 	name = "Pineapple Juice"
@@ -915,7 +915,7 @@
 
 	glass_name = "pineapple juice"
 	glass_desc = "Pineapple juice. Or maybe it's spineapple. Who cares?"
-	allergen_type = FRUIT //Pineapples are fruit
+	allergen_type = ALLERGEN_FRUIT //Pineapples are fruit
 
 /datum/reagent/drink/juice/carrot
 	name = "Carrot juice"
@@ -926,7 +926,7 @@
 
 	glass_name = "carrot juice"
 	glass_desc = "It is just like a carrot but without crunching."
-	allergen_type = VEGETABLE //Carrots are vegetables
+	allergen_type = ALLERGEN_VEGETABLE //Carrots are vegetables
 
 /datum/reagent/drink/juice/carrot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -942,7 +942,7 @@
 
 	glass_name = "grape juice"
 	glass_desc = "It's grrrrrape!"
-	allergen_type = FRUIT //Grapes are fruit
+	allergen_type = ALLERGEN_FRUIT //Grapes are fruit
 
 /datum/reagent/drink/juice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -976,7 +976,7 @@
 
 	glass_name = "lemon juice"
 	glass_desc = "Sour..."
-	allergen_type = FRUIT //Lemons are fruit
+	allergen_type = ALLERGEN_FRUIT //Lemons are fruit
 
 
 /datum/reagent/drink/juice/apple
@@ -989,7 +989,7 @@
 
 	glass_name = "apple juice"
 	glass_desc = "An earth favorite."
-	allergen_type = FRUIT //Apples are fruit
+	allergen_type = ALLERGEN_FRUIT //Apples are fruit
 
 /datum/reagent/drink/juice/lime
 	name = "Lime Juice"
@@ -1001,7 +1001,7 @@
 
 	glass_name = "lime juice"
 	glass_desc = "A glass of sweet-sour lime juice"
-	allergen_type = FRUIT //Limes are fruit
+	allergen_type = ALLERGEN_FRUIT //Limes are fruit
 
 /datum/reagent/drink/juice/lime/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1018,7 +1018,7 @@
 
 	glass_name = "orange juice"
 	glass_desc = "Vitamins! Yay!"
-	allergen_type = FRUIT //Oranges are fruit
+	allergen_type = ALLERGEN_FRUIT //Oranges are fruit
 
 /datum/reagent/drink/orangejuice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1048,7 +1048,7 @@
 
 	glass_name = "potato juice"
 	glass_desc = "Juice from a potato. Bleh."
-	allergen_type = VEGETABLE //Potatoes are vegetables
+	allergen_type = ALLERGEN_VEGETABLE //Potatoes are vegetables
 
 /datum/reagent/drink/juice/tomato
 	name = "Tomato Juice"
@@ -1060,7 +1060,7 @@
 
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
-	allergen_type = FRUIT //Yes tomatoes are a fruit
+	allergen_type = ALLERGEN_FRUIT //Yes tomatoes are a fruit
 
 /datum/reagent/drink/juice/tomato/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1077,7 +1077,7 @@
 
 	glass_name = "watermelon juice"
 	glass_desc = "Delicious juice made from watermelon."
-	allergen_type = FRUIT //Watermelon is a fruit
+	allergen_type = ALLERGEN_FRUIT //Watermelon is a fruit
 
 // Everything else
 
@@ -1094,7 +1094,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of milk"
 	cup_desc = "White and nutritious goodness!"
-	allergen_type = DAIRY //Milk is dairy
+	allergen_type = ALLERGEN_DAIRY //Milk is dairy
 
 /datum/reagent/drink/milk/chocolate
 	name =  "Chocolate Milk"
@@ -1130,7 +1130,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of cream"
 	cup_desc = "Ewwww..."
-	allergen_type = DAIRY //Cream is dairy
+	allergen_type = ALLERGEN_DAIRY //Cream is dairy
 
 /datum/reagent/drink/milk/soymilk
 	name = "Soy Milk"
@@ -1145,7 +1145,7 @@
 	cup_icon_state = "cup_cream"
 	cup_name = "cup of milk"
 	cup_desc = "White and nutritious goodness!"
-	allergen_type = BEANS //Would be made from soy beans
+	allergen_type = ALLERGEN_BEANS //Would be made from soy beans
 
 /datum/reagent/drink/tea
 	name = "Tea"
@@ -1230,7 +1230,7 @@
 
 	cup_name = "cup of lemon tea"
 	cup_desc = "A tasty mixture of lemon and tea. It's apparently good for you!"
-	allergen_type = FRUIT //Made with lemon juice
+	allergen_type = ALLERGEN_FRUIT //Made with lemon juice
 
 /datum/reagent/drink/tea/limetea
 	name = "Lime Tea"
@@ -1244,7 +1244,7 @@
 
 	cup_name = "cup of lime tea"
 	cup_desc = "A tasty mixture of lime and tea. It's apparently good for you!"
-	allergen_type = FRUIT //Made with lime juice
+	allergen_type = ALLERGEN_FRUIT //Made with lime juice
 
 /datum/reagent/drink/tea/orangetea
 	name = "Orange Tea"
@@ -1258,7 +1258,7 @@
 
 	cup_name = "cup of orange tea"
 	cup_desc = "A tasty mixture of orange and tea. It's apparently good for you!"
-	allergen_type = FRUIT //Made with orange juice
+	allergen_type = ALLERGEN_FRUIT //Made with orange juice
 
 /datum/reagent/drink/tea/berrytea
 	name = "Berry Tea"
@@ -1272,7 +1272,7 @@
 
 	cup_name = "cup of berry tea"
 	cup_desc = "A tasty mixture of berries and tea. It's apparently good for you!"
-	allergen_type = FRUIT //Made with berry juice
+	allergen_type = ALLERGEN_FRUIT //Made with berry juice
 
 /datum/reagent/drink/greentea
 	name = "Green Tea"
@@ -1319,7 +1319,7 @@
 
 	glass_name = "coffee"
 	glass_desc = "Don't drop it, or you'll send scalding liquid and glass shards everywhere."
-	allergen_type = COFFEE //Apparently coffee contains coffee
+	allergen_type = ALLERGEN_COFFEE //Apparently coffee contains coffee
 
 /datum/reagent/drink/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -1387,7 +1387,7 @@
 	cup_icon_state = "cup_latte"
 	cup_name = "cup of soy latte"
 	cup_desc = "A nice and refreshing beverage while you are reading."
-	allergen_type = COFFEE|BEANS 	//Soy(beans) and coffee
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_BEANS 	//Soy(beans) and coffee
 
 /datum/reagent/drink/coffee/soy_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1407,7 +1407,7 @@
 	cup_icon_state = "cup_latte"
 	cup_name = "cup of cafe latte"
 	cup_desc = "A nice and refreshing beverage while you are reading."
-	allergen_type = COFFEE|DAIRY //Cream and coffee
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY //Cream and coffee
 
 /datum/reagent/drink/coffee/cafe_latte/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1428,7 +1428,7 @@
 
 	glass_name = "decaf coffee"
 	glass_desc = "Basically just brown, bitter water."
-	allergen_type = COFFEE //Decaf coffee would still likely trigger allergy symptoms.
+	allergen_type = ALLERGEN_COFFEE //Decaf coffee would still likely trigger allergy symptoms.
 
 /datum/reagent/drink/hot_coco
 	name = "Hot Chocolate"
@@ -1472,7 +1472,7 @@
 	glass_name = "grape soda"
 	glass_desc = "Looks like a delicious drink!"
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with grape juice
+	allergen_type = ALLERGEN_FRUIT //Made with grape juice
 
 /datum/reagent/drink/soda/tonic
 	name = "Tonic Water"
@@ -1500,7 +1500,7 @@
 	glass_name = "lemonade"
 	glass_desc = "Oh the nostalgia..."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with lemon juice
+	allergen_type = ALLERGEN_FRUIT //Made with lemon juice
 
 /datum/reagent/drink/soda/melonade
 	name = "Melonade"
@@ -1513,7 +1513,7 @@
 	glass_name = "melonade"
 	glass_desc = "Oh the.. nostalgia?"
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with watermelon juice
+	allergen_type = ALLERGEN_FRUIT //Made with watermelon juice
 
 /datum/reagent/drink/soda/appleade
 	name = "Appleade"
@@ -1526,7 +1526,7 @@
 	glass_name = "appleade"
 	glass_desc = "Applejuice, improved."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with apple juice
+	allergen_type = ALLERGEN_FRUIT //Made with apple juice
 
 /datum/reagent/drink/soda/pineappleade
 	name = "Pineappleade"
@@ -1539,7 +1539,7 @@
 	glass_name = "pineappleade"
 	glass_desc = "Pineapple, juiced up."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with pineapple juice
+	allergen_type = ALLERGEN_FRUIT //Made with pineapple juice
 
 /datum/reagent/drink/soda/kiraspecial
 	name = "Kira Special"
@@ -1552,7 +1552,7 @@
 	glass_name = "Kira Special"
 	glass_desc = "Long live the guy who everyone had mistaken for a girl. Baka!"
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made from orange and lime juice
+	allergen_type = ALLERGEN_FRUIT //Made from orange and lime juice
 
 /datum/reagent/drink/soda/brownstar
 	name = "Brown Star"
@@ -1564,7 +1564,7 @@
 
 	glass_name = "Brown Star"
 	glass_desc = "It's not what it sounds like..."
-	allergen_type = FRUIT //Made with orangejuice and cola
+	allergen_type = ALLERGEN_FRUIT //Made with orangejuice and cola
 
 /datum/reagent/drink/milkshake
 	name = "Milkshake"
@@ -1576,7 +1576,7 @@
 
 	glass_name = "milkshake"
 	glass_desc = "Glorious brainfreezing mixture."
-	allergen_type = DAIRY //Made with dairy products
+	allergen_type = ALLERGEN_DAIRY //Made with dairy products
 
 /datum/reagent/milkshake/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1609,7 +1609,7 @@
 
 	glass_name = "Chocolate Milkshake"
 	glass_desc = "A refreshing chocolate milkshake, just like mom used to make."
-	allergen_type = DAIRY //Made with dairy products
+	allergen_type = ALLERGEN_DAIRY //Made with dairy products
 
 /datum/reagent/drink/milkshake/berryshake
 	name = "Berry Milkshake"
@@ -1621,7 +1621,7 @@
 
 	glass_name = "Berry Milkshake"
 	glass_desc = "A refreshing berry milkshake, just like mom used to make."
-	allergen_type = FRUIT|DAIRY //Made with berry juice and dairy products
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_DAIRY //Made with berry juice and dairy products
 
 /datum/reagent/drink/milkshake/coffeeshake
 	name = "Coffee Milkshake"
@@ -1636,7 +1636,7 @@
 
 	glass_name = "Coffee Milkshake"
 	glass_desc = "An energizing coffee milkshake, perfect for hot days at work.."
-	allergen_type = DAIRY|COFFEE //Made with coffee and dairy products
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_COFFEE //Made with coffee and dairy products
 
 /datum/reagent/drink/milkshake/coffeeshake/overdose(var/mob/living/carbon/M, var/alien)
 	M.make_jittery(5)
@@ -1650,7 +1650,7 @@
 
 	glass_name = "Peanut Milkshake"
 	glass_desc = "Savory cream in an ice-cold stature."
-	allergen_type = SEEDS|DAIRY //Made with peanutbutter(seeds) and dairy products
+	allergen_type = ALLERGEN_SEEDS|ALLERGEN_DAIRY //Made with peanutbutter(seeds) and dairy products
 
 /datum/reagent/drink/rewriter
 	name = "Rewriter"
@@ -1662,7 +1662,7 @@
 
 	glass_name = "Rewriter"
 	glass_desc = "The secret of the sanctuary of the Libarian..."
-	allergen_type = FRUIT|COFFEE //Made with space mountain wind (Fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_COFFEE //Made with space mountain wind (Fruit)
 
 /datum/reagent/drink/rewriter/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1727,7 +1727,7 @@
 	glass_name = "Space Mountain Wind"
 	glass_desc = "Space Mountain Wind. As you know, there are no mountains in space, only wind."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Fruit allergens because citrus is implied to come from limes/lemons
+	allergen_type = ALLERGEN_FRUIT //Fruit allergens because citrus is implied to come from limes/lemons
 
 /datum/reagent/drink/soda/dr_gibb
 	name = "Dr. Gibb"
@@ -1752,7 +1752,7 @@
 	glass_name = "Space-up"
 	glass_desc = "Space-up. It helps keep your cool."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT
+	allergen_type = ALLERGEN_FRUIT
 
 /datum/reagent/drink/soda/lemon_lime
 	name = "Lemon-Lime"
@@ -1765,7 +1765,7 @@
 	glass_name = "lemon lime soda"
 	glass_desc = "A tangy substance made of 0.5% natural citrus!"
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with lemon and lime juice
+	allergen_type = ALLERGEN_FRUIT //Made with lemon and lime juice
 
 /datum/reagent/drink/soda/gingerale
 	name = "Ginger Ale"
@@ -1822,7 +1822,7 @@
 	glass_name = "roy rogers"
 	glass_desc = "I'm a cowboy, on a steel horse I ride"
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with lemon lime
+	allergen_type = ALLERGEN_FRUIT //Made with lemon lime
 
 /datum/reagent/drink/collins_mix
 	name = "Collins Mix"
@@ -1835,7 +1835,7 @@
 	glass_name = "collins mix"
 	glass_desc = "Best hope it isn't a hoax."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with lemon lime
+	allergen_type = ALLERGEN_FRUIT //Made with lemon lime
 
 /datum/reagent/drink/arnold_palmer
 	name = "Arnold Palmer"
@@ -1848,7 +1848,7 @@
 	glass_name = "arnold palmer"
 	glass_desc = "Tastes just like the old man."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with lemonade
+	allergen_type = ALLERGEN_FRUIT //Made with lemonade
 
 /datum/reagent/drink/doctor_delight
 	name = "The Doctor's Delight"
@@ -1861,7 +1861,7 @@
 
 	glass_name = "The Doctor's Delight"
 	glass_desc = "A healthy mixture of juices, guaranteed to keep you healthy until the next toolboxing takes place."
-	allergen_type = FRUIT|DAIRY //Made from several fruit juices, and cream.
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_DAIRY //Made from several fruit juices, and cream.
 
 /datum/reagent/drink/doctor_delight/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -1970,7 +1970,7 @@
 
 	glass_name = "Dream Cream"
 	glass_desc = "A smoothy, silky mix of honey and dairy."
-	allergen_type = DAIRY //Made using dairy
+	allergen_type = ALLERGEN_DAIRY //Made using dairy
 
 /datum/reagent/drink/soda/vilelemon
 	name = "Vile Lemon"
@@ -1982,7 +1982,7 @@
 	glass_name = "Vile Lemon"
 	glass_desc = "A sour, fizzy drink with lemonade and lemonlime."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made from lemonade
+	allergen_type = ALLERGEN_FRUIT //Made from lemonade
 
 /datum/reagent/drink/entdraught
 	name = "Ent's Draught"
@@ -1993,7 +1993,7 @@
 
 	glass_name = "Ent's Draught"
 	glass_desc = "You can almost smell the tranquility emanating from this."
-	//allergen_type = FRUIT Sorry to break the news, chief. Honey is not a fruit.
+	//allergen_type = ALLERGEN_FRUIT Sorry to break the news, chief. Honey is not a fruit.
 
 /datum/reagent/drink/lovepotion
 	name = "Love Potion"
@@ -2004,7 +2004,7 @@
 
 	glass_name = "Love Potion"
 	glass_desc = "Love me tender, love me sweet."
-	allergen_type = FRUIT|DAIRY //Made from cream(dairy) and berryjuice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_DAIRY //Made from cream(dairy) and berryjuice(fruit)
 
 /datum/reagent/drink/oilslick
 	name = "Oil Slick"
@@ -2017,7 +2017,7 @@
 	glass_name = "Oil Slick"
 	glass_desc = "A concoction that should probably be in an engine, rather than your stomach."
 	glass_icon = DRINK_ICON_NOISY
-	allergen_type = VEGETABLE //Made from corn oil
+	allergen_type = ALLERGEN_VEGETABLE //Made from corn oil
 
 /datum/reagent/drink/slimeslammer
 	name = "Slick Slimes Slammer"
@@ -2030,7 +2030,7 @@
 	glass_name = "Slick Slime Slammer"
 	glass_desc = "A concoction that should probably be in an engine, rather than your stomach. Still."
 	glass_icon = DRINK_ICON_NOISY
-	allergen_type = VEGETABLE|SEEDS //Made from corn oil and peanutbutter
+	allergen_type = ALLERGEN_VEGETABLE|ALLERGEN_SEEDS //Made from corn oil and peanutbutter
 
 /datum/reagent/drink/eggnog
 	name = "Eggnog"
@@ -2041,7 +2041,7 @@
 
 	glass_name = "Eggnog"
 	glass_desc = "You can't egg-nore the holiday cheer all around you"
-	allergen_type = DAIRY|EGGS //Eggnog is made with dairy and eggs.
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_EGGS //Eggnog is made with dairy and eggs.
 
 /datum/reagent/drink/nuclearwaste
 	name = "Nuclear Waste"
@@ -2055,7 +2055,7 @@
 	glass_desc = "Sadly, no super powers."
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = VEGETABLE //Made from oilslick, so has the same allergens.
+	allergen_type = ALLERGEN_VEGETABLE //Made from oilslick, so has the same allergens.
 
 /datum/reagent/drink/nuclearwaste/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -2081,7 +2081,7 @@
 	glass_desc = "A pitiful sludge that looks vaguely like a soda.. if you look at it a certain way."
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = VEGETABLE //Made from corn oil
+	allergen_type = ALLERGEN_VEGETABLE //Made from corn oil
 
 /datum/reagent/drink/sodaoil/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -2111,7 +2111,7 @@
 	glass_name = "mojito"
 	glass_desc = "Mint, bubbly water, and citrus, made for sailing."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with lime juice
+	allergen_type = ALLERGEN_FRUIT //Made with lime juice
 
 /datum/reagent/drink/sexonthebeach
 	name = "Virgin Sex On The Beach"
@@ -2122,7 +2122,7 @@
 
 	glass_name = "sex on the beach"
 	glass_desc = "A secret combination of orange juice and pomegranate."
-	allergen_type = FRUIT //Made with orange juice
+	allergen_type = ALLERGEN_FRUIT //Made with orange juice
 
 /datum/reagent/drink/driverspunch
 	name = "Driver's Punch"
@@ -2134,7 +2134,7 @@
 	glass_name = "driver`s punch"
 	glass_desc = "A fruity punch!"
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with appleade and orange juice
+	allergen_type = ALLERGEN_FRUIT //Made with appleade and orange juice
 
 /datum/reagent/drink/mintapplesparkle
 	name = "Mint Apple Sparkle"
@@ -2146,7 +2146,7 @@
 	glass_name = "mint apple sparkle"
 	glass_desc = "Delicious appleade with a touch of mint."
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with appleade
+	allergen_type = ALLERGEN_FRUIT //Made with appleade
 
 /datum/reagent/drink/berrycordial
 	name = "Berry Cordial"
@@ -2158,7 +2158,7 @@
 	glass_name = "berry cordial"
 	glass_desc = "How <font face='comic sans ms'>berry cordial</font> of you."
 	glass_icon = DRINK_ICON_NOISY
-	allergen_type = FRUIT //Made with berry and lemonjuice
+	allergen_type = ALLERGEN_FRUIT //Made with berry and lemonjuice
 
 /datum/reagent/drink/tropicalfizz
 	name = "Tropical Fizz"
@@ -2171,7 +2171,7 @@
 	glass_desc = "One sip and you're in the bahamas."
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //Made with several fruit juices
+	allergen_type = ALLERGEN_FRUIT //Made with several fruit juices
 
 /datum/reagent/drink/fauxfizz
 	name = "Faux Fizz"
@@ -2184,7 +2184,7 @@
 	glass_desc = "One sip and you're in the bahamas... maybe."
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
-	allergen_type = FRUIT //made with several fruit juices
+	allergen_type = ALLERGEN_FRUIT //made with several fruit juices
 
 
 /* Alcohol */
@@ -2214,7 +2214,7 @@
 	glass_name = "ale"
 	glass_desc = "A freezing pint of delicious ale"
 
-	allergen_type = GRAINS //Barley is grain
+	allergen_type = ALLERGEN_GRAINS //Barley is grain
 
 /datum/reagent/ethanol/beer
 	name = "Beer"
@@ -2228,7 +2228,7 @@
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
 
-	allergen_type = GRAINS //Made from grains
+	allergen_type = ALLERGEN_GRAINS //Made from grains
 
 /datum/reagent/ethanol/beer/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -2248,7 +2248,7 @@
 	glass_name = "lite beer"
 	glass_desc = "A freezing pint of lite beer"
 
-	allergen_type = GRAINS //Made from grains
+	allergen_type = ALLERGEN_GRAINS //Made from grains
 
 /datum/reagent/ethanol/bluecuracao
 	name = "Blue Curacao"
@@ -2262,7 +2262,7 @@
 	glass_name = "blue curacao"
 	glass_desc = "Exotically blue, fruity drink, distilled from oranges."
 
-	allergen_type = FRUIT //Made from oranges(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from oranges(fruit)
 
 /datum/reagent/ethanol/cognac
 	name = "Cognac"
@@ -2276,7 +2276,7 @@
 	glass_name = "cognac"
 	glass_desc = "Damn, you feel like some kind of French aristocrat just by holding this."
 
-	allergen_type = FRUIT //Cognac is made from wine which is made from grapes.
+	allergen_type = ALLERGEN_FRUIT //Cognac is made from wine which is made from grapes.
 
 /datum/reagent/ethanol/deadrum
 	name = "Deadrum"
@@ -2318,12 +2318,12 @@
 	glass_name = "gin"
 	glass_desc = "A crystal clear glass of Griffeater gin."
 
-	allergen_type = FRUIT //Made from juniper berries
+	allergen_type = ALLERGEN_FRUIT //Made from juniper berries
 
 //Base type for alchoholic drinks containing coffee
 /datum/reagent/ethanol/coffee
 	overdose = 45
-	allergen_type = COFFEE //Contains coffee or is made from coffee
+	allergen_type = ALLERGEN_COFFEE //Contains coffee or is made from coffee
 
 /datum/reagent/ethanol/coffee/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
@@ -2375,7 +2375,7 @@
 	glass_name = "melon liquor"
 	glass_desc = "A relatively sweet and fruity 46 proof liquor."
 
-	allergen_type = FRUIT //Made from watermelons
+	allergen_type = ALLERGEN_FRUIT //Made from watermelons
 
 /datum/reagent/ethanol/melonspritzer
 	name = "Melon Spritzer"
@@ -2389,7 +2389,7 @@
 	glass_desc = "Melons: Citrus style."
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = FRUIT //Made from watermelon juice, apple juice, and lime juice
+	allergen_type = ALLERGEN_FRUIT //Made from watermelon juice, apple juice, and lime juice
 
 /datum/reagent/ethanol/rum
 	name = "Rum"
@@ -2425,7 +2425,7 @@
 	glass_name = "sex on the beach"
 	glass_desc = "A concoction of vodka and a secret combination of orange juice and pomegranate."
 
-	allergen_type = FRUIT //Made from orange juice
+	allergen_type = ALLERGEN_FRUIT //Made from orange juice
 
 /datum/reagent/ethanol/tequila
 	name = "Tequila"
@@ -2470,7 +2470,7 @@
 
 	glass_name = "vermouth"
 	glass_desc = "You wonder why you're even drinking this straight."
-	allergen_type = FRUIT //Vermouth is made from wine which is made from grapes(fruit)
+	allergen_type = ALLERGEN_FRUIT //Vermouth is made from wine which is made from grapes(fruit)
 
 /datum/reagent/ethanol/vodka
 	name = "Vodka"
@@ -2483,7 +2483,7 @@
 	glass_name = "vodka"
 	glass_desc = "The glass contain wodka. Xynta."
 
-	allergen_type = GRAINS //Vodka is made from grains
+	allergen_type = ALLERGEN_GRAINS //Vodka is made from grains
 
 /datum/reagent/ethanol/vodka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -2500,7 +2500,7 @@
 	glass_name = "whiskey"
 	glass_desc = "The silky, smokey whiskey goodness inside the glass makes the drink look very classy."
 
-	allergen_type = GRAINS //Whiskey is also made from grain.
+	allergen_type = ALLERGEN_GRAINS //Whiskey is also made from grain.
 
 /datum/reagent/ethanol/wine
 	name = "Wine"
@@ -2513,7 +2513,7 @@
 	glass_name = "wine"
 	glass_desc = "A very classy looking drink."
 
-	allergen_type = FRUIT //Wine is made from grapes (fruit)
+	allergen_type = ALLERGEN_FRUIT //Wine is made from grapes (fruit)
 
 /datum/reagent/ethanol/wine/champagne
 	name = "Champagne"
@@ -2525,7 +2525,7 @@
 	glass_name = "champagne"
 	glass_desc = "An even classier looking drink."
 
-	allergen_type = FRUIT //Still wine, and still made from grapes (fruit)
+	allergen_type = ALLERGEN_FRUIT //Still wine, and still made from grapes (fruit)
 
 /datum/reagent/ethanol/cider
 	name = "Cider"
@@ -2539,7 +2539,7 @@
 	glass_desc = "The second most Irish drink."
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = FRUIT //Made from fruit
+	allergen_type = ALLERGEN_FRUIT //Made from fruit
 
 // Cocktails
 
@@ -2556,7 +2556,7 @@
 	glass_name = "Acid Spit"
 	glass_desc = "A drink from the company archives. Made from live aliens."
 
-	allergen_type = FRUIT //Made from wine (fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from wine (fruit)
 
 /datum/reagent/ethanol/alliescocktail
 	name = "Allies Cocktail"
@@ -2569,7 +2569,7 @@
 	glass_name = "Allies cocktail"
 	glass_desc = "A drink made from your allies."
 
-	allergen_type = GRAINS|FRUIT //Made from vodka(grain) as well as martini(vermouth(fruit) and gin(fruit))
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from vodka(grain) as well as martini(vermouth(fruit) and gin(fruit))
 
 /datum/reagent/ethanol/aloe
 	name = "Aloe"
@@ -2582,7 +2582,7 @@
 	glass_name = "Aloe"
 	glass_desc = "Very, very, very good."
 
-	allergen_type = FRUIT|DAIRY|GRAINS //Made from cream(dairy), whiskey(grains), and watermelon juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_DAIRY|ALLERGEN_GRAINS //Made from cream(dairy), whiskey(grains), and watermelon juice(fruit)
 
 /datum/reagent/ethanol/amasec
 	name = "Amasec"
@@ -2596,7 +2596,7 @@
 	glass_name = "Amasec"
 	glass_desc = "Always handy before combat!"
 
-	allergen_type = FRUIT|GRAINS //Made from wine(fruit) and vodka(grains)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from wine(fruit) and vodka(grains)
 
 /datum/reagent/ethanol/andalusia
 	name = "Andalusia"
@@ -2609,7 +2609,7 @@
 	glass_name = "Andalusia"
 	glass_desc = "A nice, strange named drink."
 
-	allergen_type = GRAINS|FRUIT //Made from whiskey(grains) and lemonjuice (fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from whiskey(grains) and lemonjuice (fruit)
 
 /datum/reagent/ethanol/antifreeze
 	name = "Anti-freeze"
@@ -2624,7 +2624,7 @@
 	glass_name = "Anti-freeze"
 	glass_desc = "The ultimate refreshment."
 
-	allergen_type = GRAINS|DAIRY //Made from vodka(grains) and cream(dairy)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_DAIRY //Made from vodka(grains) and cream(dairy)
 
 /datum/reagent/ethanol/atomicbomb
 	name = "Atomic Bomb"
@@ -2639,7 +2639,7 @@
 	glass_name = "Atomic Bomb"
 	glass_desc = "We cannot take legal responsibility for your actions after imbibing."
 
-	allergen_type = COFFEE|DAIRY|FRUIT|GRAINS //Made from b52 which contains kahlua(coffee), cognac(fruit), and irish cream(Whiskey(grains),cream(dairy))
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from b52 which contains kahlua(coffee), cognac(fruit), and irish cream(Whiskey(grains),cream(dairy))
 
 /datum/reagent/ethanol/coffee/b52
 	name = "B-52"
@@ -2653,7 +2653,7 @@
 	glass_name = "B-52"
 	glass_desc = "Kahlua, Irish cream, and cognac. You will get bombed."
 
-	allergen_type = COFFEE|DAIRY|FRUIT|GRAINS //Made from kahlua(coffee), cognac(fruit), and irish cream(Whiskey(grains),cream(dairy))
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from kahlua(coffee), cognac(fruit), and irish cream(Whiskey(grains),cream(dairy))
 
 /datum/reagent/ethanol/bahama_mama
 	name = "Bahama mama"
@@ -2666,7 +2666,7 @@
 	glass_name = "Bahama Mama"
 	glass_desc = "Tropical cocktail."
 
-	allergen_type = FRUIT //Made from orange juice and lime juice
+	allergen_type = ALLERGEN_FRUIT //Made from orange juice and lime juice
 
 /datum/reagent/ethanol/bananahonk
 	name = "Banana Mama"
@@ -2680,7 +2680,7 @@
 	glass_name = "Banana Honk"
 	glass_desc = "A drink from Banana Heaven."
 
-	allergen_type = FRUIT|DAIRY //Made from banana juice(fruit) and cream(dairy)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_DAIRY //Made from banana juice(fruit) and cream(dairy)
 
 /datum/reagent/ethanol/barefoot
 	name = "Barefoot"
@@ -2693,7 +2693,7 @@
 	glass_name = "Barefoot"
 	glass_desc = "Barefoot and pregnant."
 
-	allergen_type = DAIRY|FRUIT //Made from berry juice (fruit), cream(dairy), and vermouth(fruit)
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_FRUIT //Made from berry juice (fruit), cream(dairy), and vermouth(fruit)
 
 /datum/reagent/ethanol/beepsky_smash
 	name = "Beepsky Smash"
@@ -2708,7 +2708,7 @@
 	glass_name = "Beepsky Smash"
 	glass_desc = "Heavy, hot and strong. Just like the Iron fist of the LAW."
 
-	allergen_type = FRUIT|GRAINS //Made from whiskey(grains), and limejuice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from whiskey(grains), and limejuice(fruit)
 
 /datum/reagent/ethanol/beepsky_smash/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -2726,7 +2726,7 @@
 	glass_name = "bilk"
 	glass_desc = "A brew of milk and beer. For those alcoholics who fear osteoporosis."
 
-	allergen_type = GRAINS|DAIRY //Made from milk(dairy) and beer(grains)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_DAIRY //Made from milk(dairy) and beer(grains)
 
 /datum/reagent/ethanol/black_russian
 	name = "Black Russian"
@@ -2739,7 +2739,7 @@
 	glass_name = "Black Russian"
 	glass_desc = "For the lactose-intolerant. Still as classy as a White Russian."
 
-	allergen_type = COFFEE|GRAINS //Made from vodka(grains) and kahlua(coffee)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_GRAINS //Made from vodka(grains) and kahlua(coffee)
 
 /datum/reagent/ethanol/bloody_mary
 	name = "Bloody Mary"
@@ -2752,7 +2752,7 @@
 	glass_name = "Bloody Mary"
 	glass_desc = "Tomato juice, mixed with Vodka and a lil' bit of lime. Tastes like liquid murder."
 
-	allergen_type = GRAINS|FRUIT //Made from vodka (grains), tomato juice(fruit), and lime juice(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from vodka (grains), tomato juice(fruit), and lime juice(fruit)
 
 /datum/reagent/ethanol/booger
 	name = "Booger"
@@ -2765,7 +2765,7 @@
 	glass_name = "Booger"
 	glass_desc = "Ewww..."
 
-	allergen_type = DAIRY|FRUIT //Made from cream(dairy), banana juice(fruit), and watermelon juice(fruit)
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_FRUIT //Made from cream(dairy), banana juice(fruit), and watermelon juice(fruit)
 
 /datum/reagent/ethanol/coffee/brave_bull //Since it's under the /coffee subtype, it already has coffee allergens.
 	name = "Brave Bull"
@@ -2790,7 +2790,7 @@
 	glass_name = "Changeling Sting"
 	glass_desc = "A stingy drink."
 
-	allergen_type = FRUIT|GRAINS //Made from screwdriver(vodka(grains), orange juice(fruit)), lime juice(fruit), and lemon juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from screwdriver(vodka(grains), orange juice(fruit)), lime juice(fruit), and lemon juice(fruit)
 
 /datum/reagent/ethanol/martini
 	name = "Classic Martini"
@@ -2803,7 +2803,7 @@
 	glass_name = "classic martini"
 	glass_desc = "Damn, the bartender even stirred it, not shook it."
 
-	allergen_type = FRUIT //Made from gin(fruit) and vermouth(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from gin(fruit) and vermouth(fruit)
 
 /datum/reagent/ethanol/cuba_libre
 	name = "Cuba Libre"
@@ -2827,7 +2827,7 @@
 
 	glass_name = "Demons' Blood"
 	glass_desc = "Just looking at this thing makes the hair on the back of your neck stand up."
-	allergen_type = FRUIT //Made from space mountain wind(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from space mountain wind(fruit)
 
 /datum/reagent/ethanol/devilskiss
 	name = "Devils Kiss"
@@ -2839,7 +2839,7 @@
 
 	glass_name = "Devil's Kiss"
 	glass_desc = "Creepy time!"
-	allergen_type = COFFEE //Made from kahlua (Coffee)
+	allergen_type = ALLERGEN_COFFEE //Made from kahlua (Coffee)
 
 /datum/reagent/ethanol/driestmartini
 	name = "Driest Martini"
@@ -2852,7 +2852,7 @@
 
 	glass_name = "Driest Martini"
 	glass_desc = "Only for the experienced. You think you see sand floating in the glass."
-	allergen_type = FRUIT //Made from gin(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from gin(fruit)
 
 /datum/reagent/ethanol/ginfizz
 	name = "Gin Fizz"
@@ -2865,7 +2865,7 @@
 	glass_name = "gin fizz"
 	glass_desc = "Refreshingly lemony, deliciously dry."
 
-	allergen_type = FRUIT //Made from gin(fruit) and lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from gin(fruit) and lime juice(fruit)
 
 /datum/reagent/ethanol/grog
 	name = "Grog"
@@ -2890,7 +2890,7 @@
 	glass_name = "Erika Surprise"
 	glass_desc = "The surprise is, it's green!"
 
-	allergen_type = GRAINS|FRUIT //Made from ale (grains), lime juice (fruit), whiskey(grains), banana juice(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from ale (grains), lime juice (fruit), whiskey(grains), banana juice(fruit)
 
 /datum/reagent/ethanol/gargle_blaster
 	name = "Pan-Galactic Gargle Blaster"
@@ -2906,7 +2906,7 @@
 	glass_name = "Pan-Galactic Gargle Blaster"
 	glass_desc = "Does... does this mean that Arthur and Ford are on the station? Oh joy."
 
-	allergen_type = FRUIT|GRAINS //Made from vodka(grains), gin(fruit), whiskey(grains), cognac(fruit), and lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from vodka(grains), gin(fruit), whiskey(grains), cognac(fruit), and lime juice(fruit)
 
 /datum/reagent/ethanol/gintonic
 	name = "Gin and Tonic"
@@ -2919,7 +2919,7 @@
 	glass_name = "gin and tonic"
 	glass_desc = "A mild but still great cocktail. Drink up, like a true Englishman."
 
-	allergen_type = FRUIT //Made from gin(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from gin(fruit)
 
 /datum/reagent/ethanol/goldschlager
 	name = "Goldschlager"
@@ -2933,7 +2933,7 @@
 	glass_name = "Goldschlager"
 	glass_desc = "100 proof that teen girls will drink anything with gold in it."
 
-	allergen_type = GRAINS //Made from vodka(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from vodka(grains)
 
 /datum/reagent/ethanol/hippies_delight
 	name = "Hippies' Delight"
@@ -2948,7 +2948,7 @@
 	glass_name = "Hippie's Delight"
 	glass_desc = "A drink enjoyed by people during the 1960's."
 
-	allergen_type = FRUIT|GRAINS //Made from gargle blaster which contains vodka(grains), gin(fruit), whiskey(grains), cognac(fruit), and lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from gargle blaster which contains vodka(grains), gin(fruit), whiskey(grains), cognac(fruit), and lime juice(fruit)
 	//Also, yes. Mushrooms produce psilocybin; however, it's also still just a chemical compound, and not necessarily going to trigger a fungi allergy.
 
 /datum/reagent/ethanol/hooch
@@ -2976,7 +2976,7 @@
 	glass_name = "iced beer"
 	glass_desc = "A beer so frosty, the air around it freezes."
 	glass_special = list(DRINK_ICE)
-	allergen_type = GRAINS //Made from beer(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from beer(grains)
 
 /datum/reagent/ethanol/irishcarbomb
 	name = "Irish Car Bomb"
@@ -2989,7 +2989,7 @@
 	glass_name = "Irish Car Bomb"
 	glass_desc = "An irish car bomb."
 
-	allergen_type = DAIRY|GRAINS //Made from ale(grains) and irish cream(whiskey(grains), cream(dairy))
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_GRAINS //Made from ale(grains) and irish cream(whiskey(grains), cream(dairy))
 
 /datum/reagent/ethanol/coffee/irishcoffee
 	name = "Irish Coffee"
@@ -3002,7 +3002,7 @@
 	glass_name = "Irish coffee"
 	glass_desc = "Coffee and alcohol. More fun than a Mimosa to drink in the morning."
 
-	allergen_type = COFFEE|DAIRY|GRAINS //Made from Coffee(coffee) and irish cream(whiskey(grains), cream(dairy))
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_GRAINS //Made from Coffee(coffee) and irish cream(whiskey(grains), cream(dairy))
 
 /datum/reagent/ethanol/irish_cream
 	name = "Irish Cream"
@@ -3015,7 +3015,7 @@
 	glass_name = "Irish cream"
 	glass_desc = "It's cream, mixed with whiskey. What else would you expect from the Irish?"
 
-	allergen_type = DAIRY|GRAINS //Made from cream(dairy) and whiskey(grains)
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_GRAINS //Made from cream(dairy) and whiskey(grains)
 
 /datum/reagent/ethanol/longislandicedtea
 	name = "Long Island Iced Tea"
@@ -3028,7 +3028,7 @@
 	glass_name = "Long Island iced tea"
 	glass_desc = "The liquor cabinet, brought together in a delicious mix. Intended for middle-aged alcoholic women only."
 
-	allergen_type = GRAINS|FRUIT //Made from vodka(grains) and gin(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from vodka(grains) and gin(fruit)
 
 /datum/reagent/ethanol/manhattan
 	name = "Manhattan"
@@ -3041,7 +3041,7 @@
 	glass_name = "Manhattan"
 	glass_desc = "The Detective's undercover drink of choice. He never could stomach gin..."
 
-	allergen_type = GRAINS|FRUIT //Made from whiskey(grains), and vermouth(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from whiskey(grains), and vermouth(fruit)
 
 /datum/reagent/ethanol/manhattan_proj
 	name = "Manhattan Project"
@@ -3054,7 +3054,7 @@
 
 	glass_name = "Manhattan Project"
 	glass_desc = "A scientist's drink of choice, for thinking how to blow up the station."
-	allergen_type = GRAINS|FRUIT //Made from manhattan which is made from whiskey(grains), and vermouth(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from manhattan which is made from whiskey(grains), and vermouth(fruit)
 
 /datum/reagent/ethanol/manly_dorf
 	name = "The Manly Dorf"
@@ -3067,7 +3067,7 @@
 	glass_name = "The Manly Dorf"
 	glass_desc = "A manly concotion made from Ale and Beer. Intended for true men only."
 
-	allergen_type = GRAINS //Made from beer(grains) and ale(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from beer(grains) and ale(grains)
 
 /datum/reagent/ethanol/margarita
 	name = "Margarita"
@@ -3080,7 +3080,7 @@
 	glass_name = "margarita"
 	glass_desc = "On the rocks with salt on the rim. Arriba~!"
 
-	allergen_type = FRUIT //Made from lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from lime juice(fruit)
 
 /datum/reagent/ethanol/mead
 	name = "Mead"
@@ -3121,7 +3121,7 @@
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list("neuroright")
 
-	allergen_type = FRUIT|GRAINS //Made from gargle blaster which is made from vodka(grains), gin(fruit), whiskey(grains), cognac(fruit), and lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from gargle blaster which is made from vodka(grains), gin(fruit), whiskey(grains), cognac(fruit), and lime juice(fruit)
 
 /datum/reagent/ethanol/neurotoxin/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -3149,7 +3149,7 @@
 
 	glass_name = "???"
 	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
-	allergen_type = FRUIT //Made from berries which are fruit
+	allergen_type = ALLERGEN_FRUIT //Made from berries which are fruit
 
 /datum/reagent/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -3188,7 +3188,7 @@
 	glass_name = "Sbiten"
 	glass_desc = "A spicy mix of Vodka and Spice. Very hot."
 
-	allergen_type = GRAINS //Made from vodka(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from vodka(grains)
 
 /datum/reagent/ethanol/screwdrivercocktail
 	name = "Screwdriver"
@@ -3201,7 +3201,7 @@
 	glass_name = "Screwdriver"
 	glass_desc = "A simple, yet superb mixture of Vodka and orange juice. Just the thing for the tired engineer."
 
-	allergen_type = FRUIT|GRAINS //Made from vodka(grains) and orange juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from vodka(grains) and orange juice(fruit)
 
 /datum/reagent/ethanol/silencer
 	name = "Silencer"
@@ -3215,7 +3215,7 @@
 
 	glass_name = "Silencer"
 	glass_desc = "A drink from mime Heaven."
-	allergen_type = DAIRY //Made from cream (dairy)
+	allergen_type = ALLERGEN_DAIRY //Made from cream (dairy)
 
 /datum/reagent/ethanol/singulo
 	name = "Singulo"
@@ -3228,7 +3228,7 @@
 	glass_name = "Singulo"
 	glass_desc = "A blue-space beverage."
 
-	allergen_type = GRAINS|FRUIT //Made from vodka(grains) and wine(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from vodka(grains) and wine(fruit)
 
 /datum/reagent/ethanol/snowwhite
 	name = "Snow White"
@@ -3241,7 +3241,7 @@
 	glass_name = "Snow White"
 	glass_desc = "A cold refreshment."
 
-	allergen_type = COFFEE|FRUIT //made from Pineapple juice(fruit), lemon_lime(fruit), and kahlua(coffee)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_FRUIT //made from Pineapple juice(fruit), lemon_lime(fruit), and kahlua(coffee)
 
 /datum/reagent/ethanol/suidream
 	name = "Sui Dream"
@@ -3254,7 +3254,7 @@
 	glass_name = "Sui Dream"
 	glass_desc = "A froofy, fruity, and sweet mixed drink. Understanding the name only brings shame."
 
-	allergen_type = FRUIT //Made from blue curacao(fruit) and melon liquor(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from blue curacao(fruit) and melon liquor(fruit)
 
 /datum/reagent/ethanol/syndicatebomb
 	name = "Syndicate Bomb"
@@ -3267,7 +3267,7 @@
 	glass_name = "Syndicate Bomb"
 	glass_desc = "Tastes like terrorism!"
 
-	allergen_type = GRAINS //Made from beer(grain) and whiskeycola(whiskey(grain))
+	allergen_type = ALLERGEN_GRAINS //Made from beer(grain) and whiskeycola(whiskey(grain))
 
 /datum/reagent/ethanol/tequilla_sunrise
 	name = "Tequila Sunrise"
@@ -3292,7 +3292,7 @@
 	glass_name = "Three Mile Island iced tea"
 	glass_desc = "A glass of this is sure to prevent a meltdown."
 
-	allergen_type = GRAINS|FRUIT //Made from long island iced tea(vodka(grains) and gin(fruit))
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from long island iced tea(vodka(grains) and gin(fruit))
 
 /datum/reagent/ethanol/toxins_special
 	name = "Toxins Special"
@@ -3308,7 +3308,7 @@
 	glass_name = "Toxins Special"
 	glass_desc = "Whoah, this thing is on fire!"
 
-	allergen_type = FRUIT //Made from vermouth(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from vermouth(fruit)
 
 /datum/reagent/ethanol/vodkamartini
 	name = "Vodka Martini"
@@ -3321,7 +3321,7 @@
 	glass_name = "vodka martini"
 	glass_desc ="A bastardization of the classic martini. Still great."
 
-	allergen_type = GRAINS|FRUIT //made from vodka(grains) and vermouth(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //made from vodka(grains) and vermouth(fruit)
 
 /datum/reagent/ethanol/vodkatonic
 	name = "Vodka and Tonic"
@@ -3334,7 +3334,7 @@
 	glass_name = "vodka and tonic"
 	glass_desc = "For when a gin and tonic isn't Russian enough."
 
-	allergen_type = GRAINS //Made from vodka(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from vodka(grains)
 
 /datum/reagent/ethanol/white_russian
 	name = "White Russian"
@@ -3347,7 +3347,7 @@
 	glass_name = "White Russian"
 	glass_desc = "A very nice looking drink. But that's just, like, your opinion, man."
 
-	allergen_type = COFFEE|GRAINS|DAIRY //Made from black russian(vodka(grains), kahlua(coffee)) and cream(dairy)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_GRAINS|ALLERGEN_DAIRY //Made from black russian(vodka(grains), kahlua(coffee)) and cream(dairy)
 
 /datum/reagent/ethanol/whiskey_cola
 	name = "Whiskey Cola"
@@ -3360,7 +3360,7 @@
 	glass_name = "whiskey cola"
 	glass_desc = "An innocent-looking mixture of cola and Whiskey. Delicious."
 
-	allergen_type = GRAINS //Made from whiskey(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from whiskey(grains)
 
 /datum/reagent/ethanol/whiskeysoda
 	name = "Whiskey Soda"
@@ -3373,7 +3373,7 @@
 	glass_name = "whiskey soda"
 	glass_desc = "Ultimate refreshment."
 
-	allergen_type = GRAINS //Made from whiskey(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from whiskey(grains)
 
 /datum/reagent/ethanol/specialwhiskey // I have no idea what this is and where it comes from
 	name = "Special Blend Whiskey"
@@ -3386,7 +3386,7 @@
 	glass_name = "special blend whiskey"
 	glass_desc = "Just when you thought regular station whiskey was good... This silky, amber goodness has to come along and ruin everything."
 
-	allergen_type = GRAINS //Whiskey(grains)
+	allergen_type = ALLERGEN_GRAINS //Whiskey(grains)
 
 /datum/reagent/ethanol/unathiliquor
 	name = "Redeemer's Brew"
@@ -3424,7 +3424,7 @@
 	glass_name = "Sake Bomb"
 	glass_desc = "Some sake mixed into a pint of beer."
 
-	allergen_type = GRAINS //Made from beer(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from beer(grains)
 
 /datum/reagent/ethanol/tamagozake
 	name = "Tamagozake"
@@ -3437,7 +3437,7 @@
 
 	glass_name = "Tamagozake"
 	glass_desc = "An egg cracked into sake and sugar."
-	allergen_type = EGGS //Made with eggs
+	allergen_type = ALLERGEN_EGGS //Made with eggs
 
 /datum/reagent/ethanol/ginzamary
 	name = "Ginza Mary"
@@ -3450,7 +3450,7 @@
 	glass_name = "Ginza Mary"
 	glass_desc = "Tomato juice, vodka, and sake make something not quite completely unlike a Bloody Mary."
 
-	allergen_type = FRUIT|GRAINS //Made from vodka(grains) and tomatojuice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from vodka(grains) and tomatojuice(fruit)
 
 /datum/reagent/ethanol/tokyorose
 	name = "Tokyo Rose"
@@ -3463,7 +3463,7 @@
 	glass_name = "Tokyo Rose"
 	glass_desc = "It's kinda pretty!"
 
-	allergen_type = FRUIT //Made from berryjuice
+	allergen_type = ALLERGEN_FRUIT //Made from berryjuice
 
 /datum/reagent/ethanol/saketini
 	name = "Saketini"
@@ -3476,7 +3476,7 @@
 	glass_name = "Saketini"
 	glass_desc = "What are you doing drinking this outside of New Kyoto?"
 
-	allergen_type = FRUIT //Made from gin(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from gin(fruit)
 
 /datum/reagent/ethanol/coffee/elysiumfacepunch
 	name = "Elysium Facepunch"
@@ -3489,7 +3489,7 @@
 	glass_name = "Elysium Facepunch"
 	glass_desc = "A loathesome cocktail favored by Heaven's skeleton shift workers."
 
-	allergen_type = COFFEE|FRUIT //Made from kahlua(Coffee) and lemonjuice(fruit)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_FRUIT //Made from kahlua(Coffee) and lemonjuice(fruit)
 
 /datum/reagent/ethanol/erebusmoonrise
 	name = "Erebus Moonrise"
@@ -3502,7 +3502,7 @@
 	glass_name = "Erebus Moonrise"
 	glass_desc = "A deeply alcoholic mix, popular in Nyx."
 
-	allergen_type = GRAINS //Made from whiskey(grains) and Vodka(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from whiskey(grains) and Vodka(grains)
 
 /datum/reagent/ethanol/balloon
 	name = "Balloon"
@@ -3515,7 +3515,7 @@
 	glass_name = "Balloon"
 	glass_desc = "A strange drink invented in the aerostats of Venus."
 
-	allergen_type = DAIRY|FRUIT //Made from blue curacao(fruit) and cream(dairy)
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_FRUIT //Made from blue curacao(fruit) and cream(dairy)
 
 /datum/reagent/ethanol/natunabrandy
 	name = "Natuna Brandy"
@@ -3529,7 +3529,7 @@
 	glass_desc = "On Natuna, they do the best with what they have."
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = GRAINS //Made from beer(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from beer(grains)
 
 /datum/reagent/ethanol/euphoria
 	name = "Euphoria"
@@ -3542,7 +3542,7 @@
 	glass_name = "Euphoria"
 	glass_desc = "Invented by a Eutopian marketing team, this is one of the most expensive cocktails in existence."
 
-	allergen_type = GRAINS|FRUIT //Made from specialwhiskey(grain) and cognac(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from specialwhiskey(grain) and cognac(fruit)
 
 /datum/reagent/ethanol/xanaducannon
 	name = "Xanadu Cannon"
@@ -3555,7 +3555,7 @@
 	glass_name = "Xanadu Cannon"
 	glass_desc = "Common in the entertainment districts of Titan."
 
-	allergen_type = GRAINS //Made from ale(grain)
+	allergen_type = ALLERGEN_GRAINS //Made from ale(grain)
 
 /datum/reagent/ethanol/debugger
 	name = "Debugger"
@@ -3567,7 +3567,7 @@
 
 	glass_name = "Debugger"
 	glass_desc = "From Shelf. Not for human consumption."
-	allergen_type = VEGETABLE //Made from corn oil(vegetable)
+	allergen_type = ALLERGEN_VEGETABLE //Made from corn oil(vegetable)
 
 /datum/reagent/ethanol/spacersbrew
 	name = "Spacer's Brew"
@@ -3580,7 +3580,7 @@
 	glass_name = "Spacer's Brew"
 	glass_desc = "Ethanol and orange soda. A common emergency drink on frontier colonies."
 
-	allergen_type = FRUIT //Made from brownstar(orange juice(fruit))
+	allergen_type = ALLERGEN_FRUIT //Made from brownstar(orange juice(fruit))
 
 /datum/reagent/ethanol/binmanbliss
 	name = "Binman Bliss"
@@ -3604,7 +3604,7 @@
 	glass_name = "Chrysanthemum"
 	glass_desc = "An exotic cocktail from New Kyoto."
 
-	allergen_type = FRUIT //Made from melon liquor(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from melon liquor(fruit)
 
 /datum/reagent/ethanol/bitters
 	name = "Bitters"
@@ -3628,7 +3628,7 @@
 	glass_name = "Soemmer Fire"
 	glass_desc = "A painfully hot mixed drink, for when you absolutely need to hurt right now."
 
-	allergen_type = GRAINS|FRUIT //Made from manhattan(whiskey(grains), vermouth(fruit))
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from manhattan(whiskey(grains), vermouth(fruit))
 
 /datum/reagent/drink/soemmerfire/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -3647,7 +3647,7 @@
 	glass_name = "Wine Brandy"
 	glass_desc = "A very classy looking after-dinner drink."
 
-	allergen_type = FRUIT //Made from wine, which is made from fruit
+	allergen_type = ALLERGEN_FRUIT //Made from wine, which is made from fruit
 
 /datum/reagent/ethanol/morningafter
 	name = "Morning After"
@@ -3660,7 +3660,7 @@
 	glass_name = "Morning After"
 	glass_desc = "The finest hair of the dog, coming up!"
 
-	allergen_type = GRAINS|COFFEE //Made from sbiten(vodka(grain)) and coffee(coffee)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_COFFEE //Made from sbiten(vodka(grain)) and coffee(coffee)
 
 /datum/reagent/ethanol/vesper
 	name = "Vesper"
@@ -3673,7 +3673,7 @@
 	glass_name = "Vesper"
 	glass_desc = "A dry martini, ice cold and well shaken."
 
-	allergen_type = FRUIT|GRAINS //Made from wine(fruit), vodka(grain), and gin(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from wine(fruit), vodka(grain), and gin(fruit)
 
 /datum/reagent/ethanol/rotgut
 	name = "Rotgut Fever Dream"
@@ -3686,7 +3686,7 @@
 	glass_name = "Rotgut Fever Dream"
 	glass_desc = "Why are you doing this to yourself?"
 
-	allergen_type = GRAINS //Made from whiskey(grains) and vodka(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from whiskey(grains) and vodka(grains)
 
 /datum/reagent/ethanol/voxdelight
 	name = "Vox's Delight"
@@ -3719,7 +3719,7 @@
 	glass_name = "Screaming Viking"
 	glass_desc = "A boozy, citrus-packed brew."
 
-	allergen_type = FRUIT|GRAINS //Made from martini(gin(fruit), vermouth(fruit)), vodka tonic(vodka(grain)), and lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from martini(gin(fruit), vermouth(fruit)), vodka tonic(vodka(grain)), and lime juice(fruit)
 
 /datum/reagent/ethanol/robustin
 	name = "Robustin"
@@ -3732,7 +3732,7 @@
 	glass_name = "Robustin"
 	glass_desc = "A bootleg brew of all the worst things on station."
 
-	allergen_type = GRAINS|DAIRY //Made from antifreeze(vodka(grains),cream(dairy)) and vodka(grains)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_DAIRY //Made from antifreeze(vodka(grains),cream(dairy)) and vodka(grains)
 
 /datum/reagent/ethanol/virginsip
 	name = "Virgin Sip"
@@ -3745,7 +3745,7 @@
 	glass_name = "Virgin Sip"
 	glass_desc = "A perfect martini, watered down and ruined."
 
-	allergen_type = FRUIT //Made from driest martini(gin(fruit))
+	allergen_type = ALLERGEN_FRUIT //Made from driest martini(gin(fruit))
 
 /datum/reagent/ethanol/jellyshot
 	name = "Jelly Shot"
@@ -3758,7 +3758,7 @@
 	glass_name = "Jelly Shot"
 	glass_desc = "A thick and vibrant alcoholic gel, perfect for the night life."
 
-	allergen_type = FRUIT|GRAINS //Made from cherry jelly(fruit), and vodka(grains)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from cherry jelly(fruit), and vodka(grains)
 
 /datum/reagent/ethanol/slimeshot
 	name = "Named Bullet"
@@ -3771,7 +3771,7 @@
 	glass_name = "Named Bullet"
 	glass_desc = "A thick slime jelly shot. You can feel your death approaching."
 
-	allergen_type = GRAINS //Made from vodka(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from vodka(grains)
 
 /datum/reagent/drink/slimeshot/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -3790,7 +3790,7 @@
 	glass_name = "Clover Club"
 	glass_desc = "A light and refreshing raspberry cocktail."
 
-	allergen_type = FRUIT //Made from berry juice(fruit), lemon juice(fruit), and gin(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from berry juice(fruit), lemon juice(fruit), and gin(fruit)
 
 /datum/reagent/ethanol/negroni
 	name = "Negroni"
@@ -3803,7 +3803,7 @@
 	glass_name = "Negroni"
 	glass_desc = "A dark, complicated blend, perfect for relaxing nights by the fire."
 
-	allergen_type = FRUIT //Made from gin(fruit) and vermouth(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from gin(fruit) and vermouth(fruit)
 
 /datum/reagent/ethanol/whiskeysour
 	name = "Whiskey Sour"
@@ -3816,7 +3816,7 @@
 	glass_name = "Whiskey Sour"
 	glass_desc = "A smokey, refreshing lemoned whiskey."
 
-	allergen_type = GRAINS|FRUIT //Made from whiskey(grains) and lemon juice(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from whiskey(grains) and lemon juice(fruit)
 
 /datum/reagent/ethanol/oldfashioned
 	name = "Old Fashioned"
@@ -3829,7 +3829,7 @@
 	glass_name = "Old Fashioned"
 	glass_desc = "A classic mix of whiskey and sugar... simple and direct."
 
-	allergen_type = GRAINS //Made from whiskey(grains)
+	allergen_type = ALLERGEN_GRAINS //Made from whiskey(grains)
 
 /datum/reagent/ethanol/daiquiri
 	name = "Daiquiri"
@@ -3842,7 +3842,7 @@
 	glass_name = "Daiquiri"
 	glass_desc = "Refeshing rum and citrus. Time for a tropical get away."
 
-	allergen_type = FRUIT //Made from lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from lime juice(fruit)
 
 /datum/reagent/ethanol/mojito
 	name = "Mojito"
@@ -3856,7 +3856,7 @@
 	glass_desc = "Minty rum and citrus, made for sailing."
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = FRUIT //Made from lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from lime juice(fruit)
 
 /datum/reagent/ethanol/paloma
 	name = "Paloma"
@@ -3870,7 +3870,7 @@
 	glass_desc = "Tequila and citrus, iced just right..."
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = FRUIT //Made from orange juice(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from orange juice(fruit)
 
 /datum/reagent/ethanol/piscosour
 	name = "Pisco Sour"
@@ -3883,7 +3883,7 @@
 	glass_name = "Pisco Sour"
 	glass_desc = "South American bliss, served ice cold."
 
-	allergen_type = FRUIT //Made from wine brandy(fruit), and lemon juice(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from wine brandy(fruit), and lemon juice(fruit)
 
 /datum/reagent/ethanol/coldfront
 	name = "Cold Front"
@@ -3898,7 +3898,7 @@
 	glass_name = "Cold Front"
 	glass_desc = "Minty, rich, and painfully cold. It's a blizzard in a cup."
 
-	allergen_type = COFFEE //Made from iced coffee(coffee)
+	allergen_type = ALLERGEN_COFFEE //Made from iced coffee(coffee)
 
 /datum/reagent/ethanol/mintjulep
 	name = "Mint Julep"
@@ -3935,7 +3935,7 @@
 	glass_desc = "The glass is barely able to contain the wodka. Xynta."
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = GRAINS //Made from vodka(grain)
+	allergen_type = ALLERGEN_GRAINS //Made from vodka(grain)
 
 /datum/reagent/ethanol/godka/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -3965,7 +3965,7 @@
 	glass_desc = "A very pious looking drink."
 	glass_icon = DRINK_ICON_NOISY
 
-	allergen_type = FRUIT //Made from grapes(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from grapes(fruit)
 
 /datum/reagent/ethanol/holy_mary
 	name = "Holy Mary"
@@ -3978,7 +3978,7 @@
 	glass_name = "Holy Mary"
 	glass_desc = "Angel's Ichor, mixed with Vodka and a lil' bit of lime. Tastes like liquid ascension."
 
-	allergen_type = FRUIT|GRAINS //Made from vodka(grain), holy wine(fruit), and lime juice(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from vodka(grain), holy wine(fruit), and lime juice(fruit)
 
 /datum/reagent/ethanol/angelswrath
 	name = "Angels Wrath"
@@ -3994,7 +3994,7 @@
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
 
-	allergen_type = FRUIT //Made from space mountain wind(fruit), and holy wine(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from space mountain wind(fruit), and holy wine(fruit)
 
 /datum/reagent/ethanol/angelskiss
 	name = "Angels Kiss"
@@ -4007,7 +4007,7 @@
 	glass_name = "Angel's Kiss"
 	glass_desc = "Miracle time!"
 
-	allergen_type = FRUIT|COFFEE //Made from holy wine(fruit), and kahlua(coffee)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_COFFEE //Made from holy wine(fruit), and kahlua(coffee)
 
 /datum/reagent/ethanol/ichor_mead
 	name = "Ichor Mead"
@@ -4020,7 +4020,7 @@
 	glass_name = "Ichor Mead"
 	glass_desc = "A trip to Valhalla."
 
-	allergen_type = FRUIT //Made from holy wine(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from holy wine(fruit)
 
 /datum/reagent/ethanol/schnapps_pep
 	name = "Peppermint Schnapps"
@@ -4044,7 +4044,7 @@
 	glass_name = "peach schnapps"
 	glass_desc = "A glass of peach schnapps. It seems like it'd be better, mixed."
 
-	allergen_type = FRUIT //Made from peach(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from peach(fruit)
 
 /datum/reagent/ethanol/schnapps_lem
 	name = "Lemonade Schnapps"
@@ -4057,7 +4057,7 @@
 	glass_name = "lemonade schnapps"
 	glass_desc = "A glass of lemonade schnapps. It seems like it'd be better, mixed."
 
-	allergen_type = FRUIT //Made from lemons(fruit)
+	allergen_type = ALLERGEN_FRUIT //Made from lemons(fruit)
 
 /datum/reagent/ethanol/jager
 	name = "Schuss Konig"
@@ -4081,7 +4081,7 @@
 	glass_name = "fusionnaire"
 	glass_desc = "A relatively new cocktail, mostly served in the bars of NanoTrasen owned stations."
 
-	allergen_type = FRUIT|GRAINS //Made from lemon juice(fruit), vodka(grains), and lemon schnapps(fruit)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_GRAINS //Made from lemon juice(fruit), vodka(grains), and lemon schnapps(fruit)
 
 /datum/reagent/ethanol/deathbell
 	name = "Deathbell"
@@ -4097,7 +4097,7 @@
 	glass_name = "Deathbell"
 	glass_desc = "The perfect blend of the most alcoholic things a bartender can get their hands on."
 
-	allergen_type = GRAINS|DAIRY|FRUIT //Made from antifreeze(vodka(grains),cream(dairy)), gargleblaster(vodka(grains),gin(fruit),whiskey(grains),cognac(fruit),lime juice(fruit)), and syndicate bomb(beer(grain),whiskeycola(whiskey(grain)))
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_DAIRY|ALLERGEN_FRUIT //Made from antifreeze(vodka(grains),cream(dairy)), gargleblaster(vodka(grains),gin(fruit),whiskey(grains),cognac(fruit),lime juice(fruit)), and syndicate bomb(beer(grain),whiskeycola(whiskey(grain)))
 
 /datum/reagent/ethanol/deathbell/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
