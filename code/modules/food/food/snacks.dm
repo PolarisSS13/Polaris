@@ -4963,7 +4963,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/chipplate/attack_hand(mob/user as mob)
 	var/obj/item/weapon/reagent_containers/food/snacks/returningitem = new vendingobject(loc)
 	returningitem.reagents.clear_reagents()
-	reagents.trans_to(returningitem, bitesize)
+	reagents.trans_to_holder(returningitem, bitesize)
 	returningitem.bitesize = bitesize/2
 	user.put_in_hands(returningitem)
 	if (reagents && reagents.total_volume)
@@ -4988,7 +4988,7 @@
 	icon_state = "nachos"
 	trash = /obj/item/trash/plate
 	vendingobject = /obj/item/weapon/reagent_containers/food/snacks/chip/nacho
-	nutriment_desc = list("tortilla chips" = 10)
+	nutriment_desc = list("tortilla chips" = 6, "melted cheese" = 4)
 	bitesize = 1
 	nutriment_amt = 10
 
@@ -5015,20 +5015,20 @@
 		returningitem = new chiptrans(src)
 	if(returningitem)
 		returningitem.reagents.clear_reagents() //Clear the new chip
-		var/memed = 0
-		item.reagents.trans_to(returningitem, item.reagents.total_volume) //Old chip to new chip
+		var/memed = FALSE
+		item.reagents.trans_to_holder(returningitem.reagents, item.reagents.total_volume) //Old chip to new chip
 		if(item.icon_state == "chip_half")
 			returningitem.icon_state = "[returningitem.icon_state]_half"
 			returningitem.bitesize = clamp(returningitem.reagents.total_volume,1,10)
 		else if(prob(1))
-			memed = 1
-			to_chat(user, "You scoop up some dip with the chip, but mid-scop, the chip breaks off into the dreadful abyss of dip, never to be seen again...")
+			memed = TRUE
+			to_chat(user, "You scoop up some dip with the chip, but mid-scoop, the chip breaks off into the dreadful abyss of dip, never to be seen again...")
 			returningitem.icon_state = "[returningitem.icon_state]_half"
 			returningitem.bitesize = clamp(returningitem.reagents.total_volume,1,10)
 		else
 			returningitem.bitesize = clamp(returningitem.reagents.total_volume*0.5,1,10)
 		qdel(item)
-		reagents.trans_to(returningitem, bitesize) //Dip to new chip
+		reagents.trans_to_holder(returningitem.reagents, bitesize) //Dip to new chip
 		user.put_in_hands(returningitem)
 
 		if (reagents && reagents.total_volume)
