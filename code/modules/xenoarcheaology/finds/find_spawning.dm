@@ -22,7 +22,7 @@
 
 	if(prob(40))
 		material_descriptor = pick("rusted ", "dusty ", "archaic ", "fragile ", "damaged", "pristine")
-	source_material = pick("cordite", "quadrinium", MAT_STEEL, MAT_TITANIUM, MAT_ALIMUMIN, "ferritic-alloy", MAT_PLASTEEL, "duranium")
+	source_material = pick("cordite", "quadrinium", MAT_STEEL, MAT_TITANIUM, MAT_ALUMINIUM, "ferritic-alloy", MAT_PLASTEEL, "duranium")
 
 	var/talkative = 0
 	if(prob(5))

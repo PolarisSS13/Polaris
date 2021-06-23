@@ -280,12 +280,12 @@
 		update_icons()
 	else if(istype(A, /obj/item/stack/material))
 		var/obj/item/stack/material/M = A
-		if(M.get_material_name() == MAT_STEEL)
+		if(M.get_material_name() == DEFAULT_WALL_MATERIAL)
 			visible_message("<span class='notice'>\The [src] begins to make tiles.</span>")
-			while(amount + 4 <= maxAmount))
+			while(amount + 4 <= maxAmount)
 				busy = TRUE
 				update_icons()
-				if(do_after(50))
+				if(do_after(5 SECONDS))
 					if(M)
 						M.use(1)
 						addTiles(4)
