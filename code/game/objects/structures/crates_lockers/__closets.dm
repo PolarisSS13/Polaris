@@ -59,7 +59,7 @@
 			storage_capacity = content_size + 5
 
 	if(ispath(closet_appearance))
-		var/decl/closet_appearance/app = decls_repository.get_decl(closet_appearance)
+		var/decl/closet_appearance/app = GET_DECL(closet_appearance)
 		if(app)
 			icon = app.icon
 			color = null
