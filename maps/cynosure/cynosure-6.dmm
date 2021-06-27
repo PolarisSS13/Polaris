@@ -19094,11 +19094,6 @@
 	dir = 1
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/weapon/contraband/poster,
-/obj/item/weapon/contraband/poster,
-/obj/item/weapon/contraband/poster,
-/obj/item/weapon/contraband/poster,
-/obj/item/weapon/contraband/poster,
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
 "TD" = (

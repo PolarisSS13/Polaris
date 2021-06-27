@@ -1,60 +1,65 @@
 var/list/department_radio_keys = list(
-	  ":r" = "right ear",	".r" = "right ear",
-	  ":l" = "left ear",	".l" = "left ear",
-	  ":i" = "intercom",	".i" = "intercom",
-	  ":h" = "department",	".h" = "department",
-	  ":+" = "special",		".+" = "special", //activate radio-specific special functions
-	  ":c" = "Command",		".c" = "Command",
-	  ":n" = "Science",		".n" = "Science",
-	  ":m" = "Medical",		".m" = "Medical",
-	  ":e" = "Engineering", ".e" = "Engineering",
-	  ":k" = "Response Team",	".k" = "Response Team",
-	  ":s" = "Security",	".s" = "Security",
-	  ":w" = "whisper",		".w" = "whisper",
-	  ":t" = "Mercenary",	".t" = "Mercenary",
-	  ":x" = "Raider",		".x" = "Raider",
-	  ":u" = "Supply",		".u" = "Supply",
-	  ":v" = "Service",		".v" = "Service",
-	  ":p" = "AI Private",	".p" = "AI Private",
-	  ":y" = "Explorer",	".y" = "Explorer",
+	":r" = "right ear",	".r" = "right ear",
+	":l" = "left ear",	".l" = "left ear",
+	":i" = "intercom",	".i" = "intercom",
+	":h" = "department",	".h" = "department",
+	":+" = "special",		".+" = "special", //activate radio-specific special functions
+	":c" = "Command",		".c" = "Command",
+	":n" = "Science",		".n" = "Science",
+	":m" = "Medical",		".m" = "Medical",
+	":e" = "Engineering", ".e" = "Engineering",
+	":k" = "Response Team",	".k" = "Response Team",
+	":s" = "Security",	".s" = "Security",
+	":w" = "whisper",		".w" = "whisper",
+	":t" = "Mercenary",	".t" = "Mercenary",
+	":x" = "Raider",		".x" = "Raider",
+	":u" = "Supply",		".u" = "Supply",
+	":v" = "Service",		".v" = "Service",
+	":p" = "AI Private",	".p" = "AI Private",
+	":y" = "Explorer",	".y" = "Explorer",
 
-	  ":R" = "right ear",	".R" = "right ear",
-	  ":L" = "left ear",	".L" = "left ear",
-	  ":I" = "intercom",	".I" = "intercom",
-	  ":H" = "department",	".H" = "department",
-	  ":C" = "Command",		".C" = "Command",
-	  ":N" = "Science",		".N" = "Science",
-	  ":M" = "Medical",		".M" = "Medical",
-	  ":E" = "Engineering",	".E" = "Engineering",
-	  ":k" = "Response Team",	".k" = "Response Team",
-	  ":S" = "Security",	".S" = "Security",
-	  ":W" = "whisper",		".W" = "whisper",
-	  ":T" = "Mercenary",	".T" = "Mercenary",
-	  ":X" = "Raider",		".X" = "Raider",
-	  ":U" = "Supply",		".U" = "Supply",
-	  ":V" = "Service",		".V" = "Service",
-	  ":P" = "AI Private",	".P" = "AI Private",
-	  ":Y" = "Explorer",	".Y" = "Explorer",
+	":R" = "right ear",	".R" = "right ear",
+	":L" = "left ear",	".L" = "left ear",
+	":I" = "intercom",	".I" = "intercom",
+	":H" = "department",	".H" = "department",
+	":C" = "Command",		".C" = "Command",
+	":N" = "Science",		".N" = "Science",
+	":M" = "Medical",		".M" = "Medical",
+	":E" = "Engineering",	".E" = "Engineering",
+	":k" = "Response Team",	".k" = "Response Team",
+	":S" = "Security",	".S" = "Security",
+	":W" = "whisper",		".W" = "whisper",
+	":T" = "Mercenary",	".T" = "Mercenary",
+	":X" = "Raider",		".X" = "Raider",
+	":U" = "Supply",		".U" = "Supply",
+	":V" = "Service",		".V" = "Service",
+	":P" = "AI Private",	".P" = "AI Private",
+	":Y" = "Explorer",	".Y" = "Explorer",
 
-	  //kinda localization -- rastaf0
-	  //same keys as above, but on russian keyboard layout. This file uses cp1251 as encoding.
-	  ":�" = "right ear",	".�" = "right ear",
-	  ":�" = "left ear",	".�" = "left ear",
-	  ":�" = "intercom",	".�" = "intercom",
-	  ":�" = "department",	".�" = "department",
-	  ":�" = "Command",		".�" = "Command",
-	  ":�" = "Science",		".�" = "Science",
-	  ":�" = "Medical",		".�" = "Medical",
-	  ":�" = "Engineering",	".�" = "Engineering",
-	  ":�" = "Security",	".�" = "Security",
-	  ":�" = "whisper",		".�" = "whisper",
-	  ":�" = "Mercenary",	".�" = "Mercenary",
-	  ":�" = "Supply",		".�" = "Supply",
+	// Cyrillic characters on the same keys on the Russian QWERTY (phonetic) layout
+	":к" = "right ear",    ".к" = "right ear",
+	":д" = "left ear",    ".д" = "left ear",
+	":ш" = "intercom",    ".ш" = "intercom",
+	":р" = "department",    ".р" = "department",
+	":+" = "special",        ".+" = "special", //activate radio-specific special functions
+	":с" = "Command",        ".с" = "Command",
+	":т" = "Science",        ".т" = "Science",
+	":ь" = "Medical",        ".ь" = "Medical",
+	":у" = "Engineering", ".у" = "Engineering",
+	":л" = "Response Team",    ".л" = "Response Team",
+	":ы" = "Security",    ".ы" = "Security",
+	":ц" = "whisper",        ".ц" = "whisper",
+	":е" = "Mercenary",    ".е" = "Mercenary",
+	":ч" = "Raider",        ".ч" = "Raider",
+	":г" = "Supply",        ".г" = "Supply",
+	":м" = "Service",        ".м" = "Service",
+	":з" = "AI Private",    ".з" = "AI Private",
+	":н" = "Explorer",    ".н" = "Explorer"
 )
 
 
 var/list/channel_to_radio_key = new
-proc/get_radio_key_from_channel(var/channel)
+/proc/get_radio_key_from_channel(var/channel)
 	var/key = channel_to_radio_key[channel]
 	if(!key)
 		for(var/radio_key in department_radio_keys)
@@ -324,16 +329,17 @@ proc/get_radio_key_from_channel(var/channel)
 
 			if(M && src) //If we still exist, when the spawn processes
 				var/dst = get_dist(get_turf(M),get_turf(src))
+				var/runechat_enabled = M.client?.is_preference_enabled(/datum/client_preference/runechat_mob)
 
 				if(dst <= message_range || (M.stat == DEAD && !forbid_seeing_deadchat)) //Inside normal message range, or dead with ears (handled in the view proc)
-					if(M.client)
+					if(M.client && !runechat_enabled)
 						var/image/I1 = listening[M] || speech_bubble
 						images_to_clients[I1] |= M.client
 						M << I1
 					M.hear_say(message_pieces, verb, italics, src, speech_sound, sound_vol)
 				if(whispering && !isobserver(M)) //Don't even bother with these unless whispering
 					if(dst > message_range && dst <= w_scramble_range) //Inside whisper scramble range
-						if(M.client)
+						if(M.client && !runechat_enabled)
 							var/image/I2 = listening[M] || speech_bubble
 							images_to_clients[I2] |= M.client
 							M << I2

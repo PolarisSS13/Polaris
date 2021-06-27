@@ -311,7 +311,7 @@
 		var/image/lid = image(icon, src, "lid_[initial(icon_state)]")
 		overlays += lid
 
-obj/item/weapon/reagent_containers/glass/bucket/wood
+/obj/item/weapon/reagent_containers/glass/bucket/wood
 	desc = "An old wooden bucket."
 	name = "wooden bucket"
 	icon = 'icons/obj/janitor.dmi'
