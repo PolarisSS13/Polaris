@@ -130,8 +130,6 @@
 		starts_with += /obj/item/weapon/storage/backpack/satchel/sec
 	if(prob(50))
 		starts_with += /obj/item/weapon/storage/backpack/dufflebag/sec
-	if(prob(30))
-		starts_with += /obj/item/weapon/contraband/poster/nanotrasen
 	return ..()
 
 /obj/structure/closet/secure_closet/security/cargo/Initialize()
