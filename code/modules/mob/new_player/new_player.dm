@@ -76,7 +76,7 @@
 
 	output += "</div>"
 
-	if(GLOB.news_data.station_newspaper && !client.seen_news)
+	if(GLOB.news_data.station_newspaper && !client.seen_news && client.is_preference_enabled(/datum/client_preference/aggressive_news))
 		show_latest_news(GLOB.news_data.station_newspaper)
 
 	panel = new(src, "Welcome","Welcome", 500, 480, src)

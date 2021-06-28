@@ -83,7 +83,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 		return FALSE
 
 	if(!owner?.is_preference_enabled(/datum/client_preference/vchat_enable))
-		become_broken()
+		become_broken(silent = TRUE)
 		return FALSE
 
 	//Could be loaded from a previous round, are you still there?
@@ -150,7 +150,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 			CHECK_TICK
 
 //It din work
-/datum/chatOutput/proc/become_broken()
+/datum/chatOutput/proc/become_broken(silent = FALSE)
 	broken = TRUE
 	loaded = FALSE
 
@@ -160,8 +160,9 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 
 	update_vis()
 
-	spawn()
-		alert(owner,"VChat didn't load after some time. Switching to use oldchat as a fallback. Try using 'Reload VChat' verb in OOC verbs, or reconnecting to try again.")
+	if(!silent)
+		spawn()
+			alert(owner,"VChat didn't load after some time. Switching to use oldchat as a fallback. Try using 'Reload VChat' verb in OOC verbs, or reconnecting to try again.")
 
 //Provide the JS with who we are
 /datum/chatOutput/proc/send_playerinfo()
