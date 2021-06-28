@@ -285,6 +285,13 @@ var/list/_client_preferences_by_type
 		var/datum/plane_holder/PH = preference_mob.plane_holder
 		PH.set_vis(VIS_STATUS, enabled)
 
+/datum/client_preference/aggressive_news
+	description ="Aggressive News"
+	key = "NEWS_POPUP"
+	enabled_by_default = FALSE
+	enabled_description = "Popup On Login"
+	disabled_description = "Do Nothing"
+
 /********************
 * Staff Preferences *
 ********************/
