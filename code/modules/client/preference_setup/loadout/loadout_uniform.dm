@@ -33,9 +33,9 @@
 		croptops[initial(croptop_type.name)] = croptop_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(croptops))
 
-/datum/gear/uniform/kilt
+/datum/gear/uniform/kiltfull
 	display_name = "kilt"
-	path = /obj/item/clothing/under/kilt
+	path = /obj/item/clothing/under/kiltfull
 
 /datum/gear/uniform/cuttop
 	display_name = "cut top, grey"
@@ -92,6 +92,22 @@
 		var/obj/item/clothing/under/pants/short_type = short
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
+
+/datum/gear/uniform/kilt
+    display_name = "kilt, green"
+    path = /obj/item/clothing/under/kilt
+
+/datum/gear/uniform/kilt_blue
+    display_name = "kilt, blue"
+    path = /obj/item/clothing/under/kilt/blue
+
+/datum/gear/uniform/kilt_red
+    display_name = "kilt, red"
+    path = /obj/item/clothing/under/kilt/red
+
+/datum/gear/uniform/kilt_beige
+    display_name = "kilt, beige"
+    path = /obj/item/clothing/under/kilt/beige
 
 /datum/gear/uniform/job_skirt/ce
 	display_name = "skirt, ce"
