@@ -12,8 +12,8 @@
 
 	circuit = /obj/item/weapon/circuitboard/autolathe
 	var/datum/category_collection/autolathe/machine_recipes
-	var/list/stored_material =  list(DEFAULT_WALL_MATERIAL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
-	var/list/storage_capacity = list(DEFAULT_WALL_MATERIAL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
+	var/list/stored_material =  list(MAT_STEEL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
+	var/list/storage_capacity = list(MAT_STEEL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
 	var/datum/category_group/autolathe/current_category
 
 	var/hacked = 0
@@ -75,7 +75,7 @@
 		var/list/material_bottom = list("<tr>")
 
 		for(var/material in stored_material)
-			if(material != DEFAULT_WALL_MATERIAL && material != MAT_GLASS) // Don't show the Extras unless people care enough to put them in.
+			if(material != MAT_STEEL && material != MAT_GLASS) // Don't show the Extras unless people care enough to put them in.
 				if(stored_material[material] <= 0)
 					continue
 			material_top += "<td width = '25%' align = center><b>[material]</b></td>"
@@ -175,7 +175,7 @@
 			to_chat(user, "\The [speedloader] is too hazardous to put back into the autolathe while there's ammunition inside of it!")
 			return
 		else
-			speedloader.matter = list(DEFAULT_WALL_MATERIAL = 75) // It's just a hunk of scrap metal now.
+			speedloader.matter = list(MAT_STEEL = 75) // It's just a hunk of scrap metal now.
 	if(istype(O,/obj/item/ammo_magazine)) // This was just for immersion consistency with above.
 		var/obj/item/ammo_magazine/mag = O
 		if(mag.stored_ammo)
