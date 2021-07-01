@@ -1,6 +1,3 @@
-#define ZONE_BLOCKED 2
-#define AIR_BLOCKED 1
-
 //Interactions
 /turf/simulated/wall/proc/toggle_open(var/mob/user)
 
@@ -36,9 +33,6 @@
 
 	can_open = WALL_CAN_OPEN
 	update_icon()
-
-#undef ZONE_BLOCKED
-#undef AIR_BLOCKED
 
 /turf/simulated/wall/proc/update_air()
 	if(!air_master)
@@ -177,7 +171,7 @@
 				return
 
 		// Create a ceiling to shield from the weather
-		if(outdoors)
+		if(outdoors == OUTDOORS_YES)
 			if(expended_tile || R.use(1)) // Don't need to check adjacent turfs for a wall, we're building on one
 				make_indoors()
 				if(!expended_tile) // Would've already played a sound

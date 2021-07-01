@@ -25,15 +25,13 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
 var/list/mannequins_
 
-// Closets have magic appearances
-GLOBAL_LIST_EMPTY(closet_appearances)
-
 // Times that players are allowed to respawn ("ckey" = world.time)
 GLOBAL_LIST_EMPTY(respawn_timers)
 
-// Posters
-var/global/list/poster_designs = list()
-var/global/list/NT_poster_designs = list()
+// Holomaps
+var/global/list/holomap_markers = list()
+var/global/list/mapping_units = list()
+var/global/list/mapping_beacons = list()
 
 //Preferences stuff
 	//Hairstyles
@@ -207,18 +205,6 @@ var/global/list/string_slot_flags = list(
 		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
 			GLOB.whitelisted_species += S.name
 
-	//Posters
-	paths = typesof(/datum/poster) - /datum/poster
-	paths -= typesof(/datum/poster/nanotrasen)
-	for(var/T in paths)
-		var/datum/poster/P = new T
-		poster_designs += P
-
-	paths = typesof(/datum/poster/nanotrasen)
-	for(var/T in paths)
-		var/datum/poster/P = new T
-		NT_poster_designs += P
-
 	//Ores
 	paths = typesof(/ore)-/ore
 	for(var/oretype in paths)
@@ -228,12 +214,6 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/alloy)-/datum/alloy
 	for(var/alloytype in paths)
 		GLOB.alloy_data += new alloytype()
-
-	//Closet appearances
-	paths = typesof(/decl/closet_appearance)
-	for(var/T in paths)
-		var/decl/closet_appearance/app = new T()
-		GLOB.closet_appearances[T] = app
 
 	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
 	for(var/path in paths)

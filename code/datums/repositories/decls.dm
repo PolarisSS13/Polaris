@@ -15,7 +15,6 @@
 //     IV.  Thou shalt not call Initialize() on a /decl.
 
 var/repository/decls/decls_repository = new()
-
 /repository/decls
 	var/list/fetched_decls
 	var/list/fetched_decl_types

@@ -1,8 +1,8 @@
-datum/preferences
+/datum/preferences
 	var/biological_gender = MALE
 	var/identifying_gender = MALE
 
-datum/preferences/proc/set_biological_gender(var/gender)
+/datum/preferences/proc/set_biological_gender(var/gender)
 	biological_gender = gender
 	identifying_gender = gender
 
@@ -140,7 +140,7 @@ datum/preferences/proc/set_biological_gender(var/gender)
 		return TOPIC_REFRESH
 
 	else if(href_list["metadata"])
-		var/new_metadata = sanitize(input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , pref.metadata)) as message|null
+		var/new_metadata = sanitize(input(user, "Enter any information you'd like others to see, such as Roleplay-preferences:", "Game Preference" , pref.metadata) as message|null)
 		if(new_metadata && CanUseTopic(user))
 			pref.metadata = new_metadata
 			return TOPIC_REFRESH

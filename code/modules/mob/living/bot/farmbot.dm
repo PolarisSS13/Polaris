@@ -64,7 +64,7 @@
 	return data
 
 
-mob/living/bot/farmbot/attack_hand(mob/user)
+/mob/living/bot/farmbot/attack_hand(mob/user)
 	. = ..()
 	if(.)
 		return

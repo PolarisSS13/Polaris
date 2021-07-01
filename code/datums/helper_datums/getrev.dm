@@ -29,7 +29,7 @@ var/global/datum/getrev/revdata = new()
 	to_world_log(date)
 	to_world_log(revision)
 
-client/verb/showrevinfo()
+/client/verb/showrevinfo()
 	set category = "OOC"
 	set name = "Show Server Revision"
 	set desc = "Check the current server code revision"
