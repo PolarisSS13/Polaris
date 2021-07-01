@@ -12,6 +12,9 @@
 
 	var/req_type = /atom/movable
 
+// The last time the effect was toggled.
+	var/last_activation = 0
+
 /datum/artifact_effect/Destroy()
 	if(master)
 		master = null
@@ -49,22 +52,24 @@
 /datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
 	//so that other stuff happens first
 	spawn(0)
-		if(activated)
-			activated = 0
-		else
-			activated = 1
-		if(reveal_toggle && master.holder)
-			if(!isliving(master.holder))
-				master.holder.update_icon()
-			var/display_msg
+		if(world.time - last_activation > 1 SECOND)
+			last_activation = world.time
 			if(activated)
-				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
+				activated = 0
 			else
-				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
-			var/atom/toplevelholder = master.holder
-			while(!istype(toplevelholder.loc, /turf))
-				toplevelholder = toplevelholder.loc
-			toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
+				activated = 1
+			if(reveal_toggle && master.holder)
+				if(!isliving(master.holder))
+					master.holder.update_icon()
+				var/display_msg
+				if(activated)
+					display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
+				else
+					display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
+				var/atom/toplevelholder = master.holder
+				while(!istype(toplevelholder.loc, /turf))
+					toplevelholder = toplevelholder.loc
+				toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
 
 /datum/artifact_effect/proc/DoEffectTouch(var/mob/user)
 /datum/artifact_effect/proc/DoEffectAura(var/atom/holder)

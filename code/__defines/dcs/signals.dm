@@ -737,3 +737,6 @@
 #define COMSIG_CANCELLED_ALARM "ssalarm_cancelled"
 
 #define COMSIG_REAGENTS_CRAFTING_PING "reagents_crafting_ping"
+
+//From reagents touch_x.
+#define COMSIG_REAGENTS_TOUCH "reagent_touch"

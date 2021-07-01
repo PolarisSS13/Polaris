@@ -53,6 +53,9 @@
 //Moved
 	RegisterSignal(holder, COMSIG_MOVABLE_MOVED, /datum/component/artifact_master/proc/on_moved, override = FALSE)
 
+//Splashed with a reagent.
+	RegisterSignal(holder, COMSIG_REAGENTS_TOUCH, /datum/component/artifact_master/proc/on_reagent, override = FALSE)
+
 /*
  *
  */
@@ -123,6 +126,8 @@
 
 		if(prob(effect_generation_chance))	// Otherwise, add effects as normal, with decreasing probability.
 			my_effects += new chosen_path(src)
+
+		effect_generation_chance = round(effect_generation_chance)
 
 /datum/component/artifact_master/proc/get_holder()	// Returns the holder.
 	return holder
@@ -224,7 +229,6 @@
 
 /datum/component/artifact_master/proc/on_attack_hand()
 	var/mob/living/user = args[2]
-
 	if(!istype(user))
 		return
 
@@ -256,10 +260,9 @@
 
 /datum/component/artifact_master/proc/on_attackby()
 	var/obj/item/weapon/W = args[2]
-
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
-		if (istype(W, /obj/item/weapon/reagent_containers))
+/*		if (istype(W, /obj/item/weapon/reagent_containers))
 			if(W.reagents.has_reagent("hydrogen", 1) || W.reagents.has_reagent("water", 1))
 				if(my_effect.trigger == TRIGGER_WATER)
 					my_effect.ToggleActivate()
@@ -271,8 +274,8 @@
 					my_effect.ToggleActivate()
 			else if(W.reagents.has_reagent("toxin", 1) || W.reagents.has_reagent("cyanide", 1) || W.reagents.has_reagent("amatoxin", 1) || W.reagents.has_reagent("neurotoxin", 1))
 				if(my_effect.trigger == TRIGGER_TOXIN)
-					my_effect.ToggleActivate()
-		else if(istype(W,/obj/item/weapon/melee/baton) && W:status ||\
+					my_effect.ToggleActivate()*/
+		if(istype(W,/obj/item/weapon/melee/baton) && W:status ||\
 				istype(W,/obj/item/weapon/melee/energy) ||\
 				istype(W,/obj/item/weapon/melee/cultblade) ||\
 				istype(W,/obj/item/weapon/card/emag) ||\
@@ -289,6 +292,28 @@
 			if (my_effect.trigger == TRIGGER_FORCE && W.force >= 10)
 				my_effect.ToggleActivate()
 
+/datum/component/artifact_master/proc/on_reagent()
+	var/datum/reagent/Touching = args[2]
+
+	var/list/water = list("hydrogen", "water")
+	var/list/acid = list("sacid", "pacid", "diethylamine")
+	var/list/volatile = list("phoron","thermite")
+	var/list/toxic = list("toxin","cyanide","amatoxin","neurotoxin")
+
+	for(var/datum/artifact_effect/my_effect in my_effects)
+		if(Touching.id in water)
+			if(my_effect.trigger == TRIGGER_WATER)
+				my_effect.ToggleActivate()
+		else if(Touching.id in acid)
+			if(my_effect.trigger == TRIGGER_ACID)
+				my_effect.ToggleActivate()
+		else if(Touching.id in volatile)
+			if(my_effect.trigger == TRIGGER_VOLATILE)
+				my_effect.ToggleActivate()
+		else if(Touching.id in toxic)
+			if(my_effect.trigger == TRIGGER_TOXIN)
+				my_effect.ToggleActivate()
+
 /datum/component/artifact_master/proc/on_moved()
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(my_effect)
@@ -303,6 +328,10 @@
 		var/atom/movable/HA = holder
 		if(HA.pulledby)
 			on_bumped(HA.pulledby)
+
+	for(var/datum/artifact_effect/my_effect in my_effects)
+		if(my_effect)
+			my_effect.UpdateMove()
 
 	//if any of our effects rely on environmental factors, work that out
 	var/trigger_cold = 0
