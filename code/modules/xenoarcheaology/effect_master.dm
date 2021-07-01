@@ -288,7 +288,6 @@
 			if(my_effect.trigger == TRIGGER_HEAT)
 				my_effect.ToggleActivate()
 		else
-			..()
 			if (my_effect.trigger == TRIGGER_FORCE && W.force >= 10)
 				my_effect.ToggleActivate()
 
