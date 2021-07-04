@@ -38,7 +38,8 @@
 		to_chat(user, SPAN_DANGER("There is already something on \the [src]."))
 		return
 	if (!loading?.reagents?.total_volume)
-		to_chat(user, SPAN_NOTIE("Nothing to scoop up in \the [loading]!"))
+		to_chat(user, SPAN_NOTICE("Nothing to scoop up in \the [loading]!"))
+
 
 	loaded = "\the [loading]"
 	user.visible_message( \
