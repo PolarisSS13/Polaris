@@ -73,6 +73,12 @@ var/list/mining_overlay_cache = list()
 	rock_icon_state = "rock-light"
 	random_icon = 1
 
+/turf/simulated/mineral/alt
+	icon_state = "rock-alt"
+	rock_side_icon_state = "rock_side-alt"
+	sand_icon_state = "asteroid"
+	rock_icon_state = "rock-alt"
+
 /turf/simulated/mineral/icey
 	icon_state = "rock-icey"
 	rock_side_icon_state = "rock_side-icey"
