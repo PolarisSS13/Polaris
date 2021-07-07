@@ -42,11 +42,10 @@ SUBSYSTEM_DEF(planets)
 			return
 		if(istype(T, /turf/unsimulated/wall/planetary))	
 			P.planet_walls += T
-		else if(istype(T, /turf/simulated) && T.outdoors != OUTDOORS_NO)
+		else if(istype(T, /turf/simulated) && T.outdoors == OUTDOORS_YES)
 			P.planet_floors += T
 			T.vis_contents |= P.weather_holder.visuals
-			T.vis_contents |= P.weather_holder.special_visuals
-		T.outdoors = OUTDOORS_YES
+			T.vis_contents |= P.weather_holder.special_visuals		
 
 
 /datum/controller/subsystem/planets/proc/removeTurf(var/turf/T,var/is_edge)

@@ -13,7 +13,7 @@
 	throw_range = 9
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 80)
+	matter = list(MAT_STEEL = 80)
 	attack_verb = list("pinched", "nipped")
 	hitsound = 'sound/items/wirecutter.ogg'
 	usesound = 'sound/items/wirecutter.ogg'
@@ -78,7 +78,6 @@
 	desc = "This cuts wires.  With <span class='alien'>Science!</span>"
 	icon_state = "hybcutters"
 	w_class = ITEMSIZE_NORMAL
-	slowdown = 0.1
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_PHORON = 2)
 	attack_verb = list("pinched", "nipped", "warped", "blasted")
 	usesound = 'sound/effects/stealthoff.ogg'

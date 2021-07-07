@@ -5,11 +5,11 @@ var/list/turf_edge_cache = list()
 	// and if those adjacent turfs have a lower edge_blending_priority.
 	var/edge_blending_priority = 0
 	// Outdoors var determines if the game should consider the turf to be 'outdoors', which controls certain things such as weather effects.
-	var/outdoors = OUTDOORS_INHERIT
+	var/outdoors = OUTDOORS_AREA
 
 /area
-	// If a turf's `outdoors` variable is set to `OUTDOORS_DEFER`, 
-	// it will decide if it's outdoors or not based on this var.
+	// If a turf's `outdoors` variable is set to `OUTDOORS_AREA`, 
+	// it will decide if it's outdoors or not when being initialized based on this var.
 	var/outdoors = OUTDOORS_NO
 
 /turf/simulated/floor/outdoors
@@ -18,19 +18,19 @@ var/list/turf_edge_cache = list()
 	icon = 'icons/turf/outdoors.dmi'
 	icon_state = null
 	edge_blending_priority = 1
-	outdoors = OUTDOORS_YES	// This variable is used for weather effects.
+	outdoors = OUTDOORS_YES			// This variable is used for weather effects.
 	can_dirty = FALSE				// Looks hideous with dirt on it.
 	can_build_into_floor = TRUE
 
 	// When a turf gets demoted or promoted, this list gets adjusted.  The top-most layer is the layer on the bottom of the list, due to how pop() works.
 	var/list/turf_layers = list(/turf/simulated/floor/outdoors/rocks)
 
-/turf/simulated/Initialize(mapload)
+/turf/simulated/floor/Initialize(mapload)
 	if(should_be_outdoors())
 		SSplanets.addTurf(src)
 	. = ..()
 
-/turf/simulated/Destroy()
+/turf/simulated/floor/Destroy()
 	if(should_be_outdoors())
 		SSplanets.removeTurf(src)
 	return ..()
@@ -44,7 +44,7 @@ var/list/turf_edge_cache = list()
 			return TRUE
 		if(OUTDOORS_NO)
 			return FALSE
-		if(OUTDOORS_INHERIT)
+		if(OUTDOORS_AREA)
 			var/area/A = loc
 			if(A.outdoors == OUTDOORS_YES)
 				return TRUE

@@ -11,7 +11,7 @@
 	throwforce = 7
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
-	matter = list(DEFAULT_WALL_MATERIAL = 150)
+	matter = list(MAT_STEEL = 150)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	usesound = 'sound/items/ratchet.ogg'
 	toolspeed = 1
@@ -34,7 +34,6 @@
 	force = 8
 	throwforce = 10
 	w_class = ITEMSIZE_NORMAL
-	slowdown = 0.1
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_PHORON = 2)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked", "warped", "blasted")
 	usesound = 'sound/effects/stealthoff.ogg'
@@ -73,7 +72,7 @@
 	icon_state = "drill_bolt"
 	item_state = "drill"
 	usesound = 'sound/items/drill_use.ogg'
-	matter = list(DEFAULT_WALL_MATERIAL = 150, MAT_SILVER = 50)
+	matter = list(MAT_STEEL = 150, MAT_SILVER = 50)
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 	force = 8
 	w_class = ITEMSIZE_SMALL

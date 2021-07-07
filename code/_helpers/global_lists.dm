@@ -25,9 +25,6 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 
 var/list/mannequins_
 
-// Closets have magic appearances
-GLOBAL_LIST_EMPTY(closet_appearances)
-
 // Times that players are allowed to respawn ("ckey" = world.time)
 GLOBAL_LIST_EMPTY(respawn_timers)
 
@@ -217,9 +214,6 @@ var/global/list/string_slot_flags = list(
 	paths = typesof(/datum/alloy)-/datum/alloy
 	for(var/alloytype in paths)
 		GLOB.alloy_data += new alloytype()
-
-	//Closet appearances
-	GLOB.closet_appearances = decls_repository.get_decls_of_type(/decl/closet_appearance)
 
 	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
 	for(var/path in paths)

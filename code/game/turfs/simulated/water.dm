@@ -106,12 +106,12 @@
 	name = "pool"
 	desc = "Don't worry, it's not closed."
 	under_state = "pool"
-	outdoors = OUTDOORS_INHERIT
+	outdoors = OUTDOORS_NO
 
 /turf/simulated/floor/water/deep/pool
 	name = "deep pool"
 	desc = "Don't worry, it's not closed."
-	outdoors = OUTDOORS_INHERIT
+	outdoors = OUTDOORS_NO
 
 /mob/living/proc/can_breathe_water()
 	return FALSE
