@@ -1050,6 +1050,19 @@
 	glass_desc = "Juice from a potato. Bleh."
 	allergen_type = ALLERGEN_VEGETABLE //Potatoes are vegetables
 
+/datum/reagent/drink/juice/turnip
+	name = "Turnip Juice"
+	id = "turnipjuice"
+	description = "Juice of the turnip. A step below the potato."
+	taste_description = "turnips"
+	nutrition = 2
+	color = "#251e2e"
+	sugary = FALSE
+
+	glass_name = "turnip juice"
+	glass_desc = "Juice of the turnip. A step below the potato."
+	allergen_type = ALLERGEN_VEGETABLE //Turnips are vegetables
+
 /datum/reagent/drink/juice/tomato
 	name = "Tomato Juice"
 	id = "tomatojuice"
@@ -1712,6 +1725,110 @@
 
 	glass_name = "Space Cola"
 	glass_desc = "A glass of refreshing Space Cola"
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/soda/lemon_soda
+	name = "Lemon Soda"
+	id = "lemonsoda"
+	description = "Soda made using lemon concentrate. Sour."
+	taste_description = "strong sourness"
+	reagent_state = LIQUID
+	color = "#ffe658"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "lemon Soda"
+	glass_desc = "A glass of refreshing Lemon Soda. So sour!"
+	glass_special = list(DRINK_FIZZ)
+	allergen_type = ALLERGEN_FRUIT
+
+/datum/reagent/drink/soda/apple_soda
+	name = "Apple Soda"
+	id = "applesoda"
+	description = "Soda made using fresh apples."
+	taste_description = "crisp juiciness"
+	reagent_state = LIQUID
+	color = "#c73737"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "Apple Soda"
+	glass_desc = "A glass of refreshing Apple Soda. Crisp!"
+	glass_special = list(DRINK_FIZZ)
+	allergen_type = ALLERGEN_FRUIT
+
+
+/datum/reagent/drink/soda/straw_soda
+	name = "Strawberry Soda"
+	id = "strawsoda"
+	description = "Soda made using sweet berries."
+	taste_description = "oddly bland"
+	reagent_state = LIQUID
+	color = "#ffa3a3"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "Orange Soda"
+	glass_desc = "A glass of refreshing Orange Soda. Refreshing!"
+	glass_special = list(DRINK_FIZZ)
+	allergen_type = ALLERGEN_FRUIT
+
+/datum/reagent/drink/soda/orangesoda
+	name = "Orange Soda"
+	id = "orangesoda"
+	description = "Soda made using fresh picked oranges."
+	taste_description = "sweet and citrusy"
+	reagent_state = LIQUID
+	color = "#ff992c"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "Orange Soda"
+	glass_desc = "A glass of refreshing Orange Soda. Refreshing!"
+	glass_special = list(DRINK_FIZZ)
+	allergen_type = ALLERGEN_FRUIT
+
+/datum/reagent/drink/soda/grapesoda
+	name = "Grape Soda"
+	id = "grapesoda"
+	description = "Soda made of carbonated grapejuice."
+	taste_description = "tangy goodness"
+	reagent_state = LIQUID
+	color = "#9862d2"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "Grape Soda"
+	glass_desc = "A glass of refreshing Grape Soda. Tangy!"
+	glass_special = list(DRINK_FIZZ)
+	allergen_type = ALLERGEN_FRUIT
+
+/datum/reagent/drink/soda/sarsaparilla
+	name = "Sarsaparilla"
+	id = "sarsaparilla"
+	description = "Soda made from genetically modified Mexican sarsaparilla plants."
+	taste_description = "licorice and caramel"
+	reagent_state = LIQUID
+	color = "#e1bb59"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "Sarsaparilla"
+	glass_desc = "A glass of refreshing Sarsaparilla. Delicious!"
+	glass_special = list(DRINK_FIZZ)
+
+/datum/reagent/drink/soda/pork_soda
+	name = "Bacon Soda"
+	id = "porksoda"
+	description = "Soda made using pork like flavoring."
+	taste_description = "sugar coated bacon"
+	reagent_state = LIQUID
+	color = "ff8080"
+	adj_drowsy = -3
+	adj_temp = -5
+
+	glass_name = "Bacon Soda"
+	glass_desc = "A glass of Bacon Soda, very odd..."
 	glass_special = list(DRINK_FIZZ)
 
 /datum/reagent/drink/soda/spacemountainwind
