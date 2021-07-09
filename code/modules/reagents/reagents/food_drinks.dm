@@ -1768,8 +1768,8 @@
 	adj_drowsy = -3
 	adj_temp = -5
 
-	glass_name = "Orange Soda"
-	glass_desc = "A glass of refreshing Orange Soda. Refreshing!"
+	glass_name = "Strawberry Soda"
+	glass_desc = "A glass of refreshing Strawberry Soda"
 	glass_special = list(DRINK_FIZZ)
 	allergen_type = ALLERGEN_FRUIT
 
@@ -1784,7 +1784,7 @@
 	adj_temp = -5
 
 	glass_name = "Orange Soda"
-	glass_desc = "A glass of refreshing Orange Soda. Refreshing!"
+	glass_desc = "A glass of refreshing Orange Soda. Delicious!"
 	glass_special = list(DRINK_FIZZ)
 	allergen_type = ALLERGEN_FRUIT
 
