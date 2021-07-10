@@ -59,6 +59,7 @@ SUBSYSTEM_DEF(planets)
 			P.planet_floors -= T
 			T.vis_contents -= P.weather_holder.visuals
 			T.vis_contents -= P.weather_holder.special_visuals
+		T.outdoors = OUTDOORS_NO
 
 
 /datum/controller/subsystem/planets/fire(resumed = 0)

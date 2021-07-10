@@ -6,6 +6,7 @@
 	density = 0
 	anchored = 1.0
 	w_class = ITEMSIZE_NORMAL
+	layer = BELOW_UTILITY
 	plane = PLATING_PLANE
 
 /obj/structure/lattice/Initialize()
