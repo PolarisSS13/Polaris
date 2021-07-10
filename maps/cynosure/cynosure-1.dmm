@@ -1650,6 +1650,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/bmt)
+"dH" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_nine_by_eight_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction2)
 "dI" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/disposalpipe/segment,
@@ -2098,6 +2102,10 @@
 /obj/effect/floor_decal/steeldecal/steel_decals7,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/bmt/east)
+"eN" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_sixteen_by_eleven_maint,
+/turf/simulated/mineral/sif,
+/area/surface/cave/unexplored/normal)
 "eO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/cable/green{
@@ -4329,6 +4337,9 @@
 "jK" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/maintenance/substation/cargo/bmt)
+"jL" = (
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction4)
 "jN" = (
 /obj/structure/table/rack{
 	layer = 2.6
@@ -5275,7 +5286,7 @@
 "lN" = (
 /obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall,
-/area/surface/station/hallway/primary/bmt/west)
+/area/surface/station/construction/warehouse)
 "lO" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -5872,6 +5883,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/bmt)
+"mS" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_ten_by_nine_maint,
+/turf/simulated/wall/r_wall,
+/area/surface/station/construction/warehouse)
 "mT" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -6915,7 +6930,7 @@
 "ps" = (
 /obj/machinery/status_display,
 /turf/simulated/wall,
-/area/surface/station/hallway/primary/bmt/west)
+/area/surface/station/construction/bmt/construction1)
 "pt" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/floor_decal/rust,
@@ -7022,6 +7037,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoarcheology/anomaly)
+"pF" = (
+/turf/simulated/wall/r_wall,
+/area/surface/station/construction/bmt/construction6)
 "pG" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -12194,6 +12212,10 @@
 	outdoors = 0
 	},
 /area/surface/station/rnd/test_area)
+"AN" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_eight_by_nine_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction1)
 "AP" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
@@ -13270,6 +13292,10 @@
 /obj/structure/sign/warning/engineering_access,
 /turf/simulated/wall/r_wall,
 /area/surface/station/engineering/hallway/bmt)
+"Db" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_nine_by_ten_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction3)
 "Dc" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -15740,6 +15766,10 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/primary/bmt/west/elevator)
+"IU" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_eight_by_five_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction6)
 "IV" = (
 /turf/simulated/wall/r_wall,
 /area/surface/cave/explored/normal)
@@ -23179,6 +23209,10 @@
 	},
 /turf/simulated/floor/tiled/steel_dirty,
 /area/surface/station/construction/warehouse)
+"YR" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_seven_by_seven_maint,
+/turf/simulated/floor/tiled/dark,
+/area/surface/station/hallway/primary/bmt/east)
 "YT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /obj/machinery/door/firedoor/border_only,
@@ -23588,6 +23622,10 @@
 "ZF" = (
 /turf/simulated/wall,
 /area/surface/station/construction/basement)
+"ZG" = (
+/obj/effect/landmark/poi_loader/random_subtype/cynosure_medical_basement,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction4)
 "ZH" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -51197,7 +51235,7 @@ Mv
 Mv
 Mv
 Mv
-Mv
+mS
 HE
 HE
 vd
@@ -51691,15 +51729,15 @@ zg
 HE
 HE
 yN
-yN
-yN
-yN
-yN
-yN
-yN
-yN
-yN
-yN
+cB
+cB
+cB
+cB
+cB
+cB
+cB
+cB
+AN
 Uk
 Fr
 hZ
@@ -53490,27 +53528,27 @@ zg
 zg
 eY
 fr
-fr
-fr
-fr
-fr
-fr
-fr
+cB
+cB
+cB
+cB
+cB
+cB
 ps
-bc
+cB
 wk
 vZ
 sZ
 vZ
-kx
+Mv
 lN
-kx
-oN
-oN
-oN
-oN
-oN
-oN
+Mv
+Mv
+Mv
+Mv
+Mv
+Mv
+Mv
 qa
 qa
 qa
@@ -54514,10 +54552,10 @@ Zi
 Zi
 Zi
 JA
-eY
-eY
-eY
-fr
+XR
+XR
+XR
+dH
 Ze
 Dt
 fr
@@ -55579,7 +55617,7 @@ KO
 KO
 KO
 KO
-HE
+eN
 HE
 HE
 HE
@@ -56573,7 +56611,7 @@ VS
 VS
 VS
 VS
-VS
+Db
 yV
 En
 fr
@@ -58339,13 +58377,13 @@ RQ
 RQ
 RQ
 uC
-uC
-HX
-HX
-HX
-HX
-HX
-HX
+ND
+jL
+jL
+jL
+jL
+jL
+ZG
 fg
 xg
 xU
@@ -58602,7 +58640,7 @@ ah
 ah
 ah
 ah
-Rl
+jL
 ty
 Ih
 Fw
@@ -58620,10 +58658,10 @@ cE
 cE
 cE
 cE
-cE
-cE
-cE
-cE
+VS
+VS
+VS
+VS
 kS
 qI
 Uo
@@ -58859,7 +58897,7 @@ ah
 ah
 ah
 ah
-Rl
+jL
 UP
 Wx
 uQ
@@ -59116,7 +59154,7 @@ ah
 ah
 ah
 ah
-Rl
+jL
 Ri
 hx
 Dn
@@ -59373,7 +59411,7 @@ ND
 ND
 ND
 ND
-Us
+ND
 rX
 GG
 uQ
@@ -59923,20 +59961,20 @@ ai
 dT
 pi
 ai
-dX
+TQ
 TQ
 TQ
 IO
 TQ
 TQ
-ai
+YR
 eM
 Gq
 pd
 pd
 pd
 cp
-pd
+IU
 BA
 BA
 BA
@@ -61731,11 +61769,11 @@ LF
 ai
 am
 MN
-ww
-ww
-ww
-ww
-ww
+pF
+pF
+pF
+pF
+pF
 HE
 HE
 HE

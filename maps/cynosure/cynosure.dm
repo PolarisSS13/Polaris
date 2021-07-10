@@ -1,5 +1,3 @@
-	// You probably don't want to tick this file yet.
-
 #if !defined(USING_MAP_DATUM)
 
 	#include "cynosure_areas.dm"
@@ -40,9 +38,9 @@
 	#include "cynosure-6.dmm"
 	#include "cynosure-7.dmm"
 
-	#define USING_MAP_DATUM /datum/map/cynosure
+	#include "submaps/_cynosure_submaps.dm"
 
-	// todo: map.dmm-s here
+	#define USING_MAP_DATUM /datum/map/cynosure
 
 #elif !defined(MAP_OVERRIDE)
 

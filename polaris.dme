@@ -3255,6 +3255,7 @@
 #include "interface\skin.dmf"
 #include "maps\cynosure\cynosure.dm"
 #include "maps\submaps\_helpers.dm"
+#include "maps\submaps\poi_loader.dm"
 #include "maps\submaps\engine_submaps\engine.dm"
 #include "maps\submaps\engine_submaps\engine_areas.dm"
 #include "maps\submaps\engine_submaps\southern_cross\_engine_submaps.dm"
