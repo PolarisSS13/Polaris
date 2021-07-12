@@ -302,7 +302,7 @@
 /turf/simulated/floor/tiled/red,
 /area/aisat)
 "Q" = (
-/obj/turbolift_map_holder/example{
+/area/awaymission/example{
 	dir = 1;
 	icon = 'icons/obj/turbolift_preview_5x5.dmi'
 	},
