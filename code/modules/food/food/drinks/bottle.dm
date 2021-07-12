@@ -205,7 +205,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey
 	name = "Uncle Git's Special Reserve"
 	desc = "A premium single-malt whiskey, gently matured in a highly classified location."
-	icon_state = "whiskeybottle"
+	icon_state = "whiskeybottle1"
 	center_of_mass = list("x"=16, "y"=3)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey/Initialize()
