@@ -93,7 +93,7 @@
 	name = "khaki short shorts"
 	icon_state = "khaki_shorts_f"
 
-//Argh, skirts be below this line -> ------------------------------
+//Argh, skirts and kilts be below this line -> ------------------------------
 
 /obj/item/clothing/under/skirt
 	name = "short black skirt"
@@ -102,6 +102,29 @@
 	body_parts_covered = LOWER_TORSO
 	rolled_sleeves = -1
 	index = 1
+
+/obj/item/clothing/under/kilt
+	name = "green kilt"
+	desc = "Traditional scottish wear, it's not a skirt, kinda. This one is green."
+	icon_state = "kilt_green"
+	body_parts_covered = LOWER_TORSO
+	rolled_sleeves = -1
+	index = 1
+
+/obj/item/clothing/under/kilt/blue
+	name = "blue kilt"
+	desc = "Traditional scottish wear, it's not a skirt, kinda. This one is blue."
+	icon_state = "kilt_blue"
+
+/obj/item/clothing/under/kilt/red
+	name = "red kilt"
+	desc = "Traditional scottish wear, it's not a skirt, kinda. This one is red."
+	icon_state = "kilt_red"
+
+/obj/item/clothing/under/kilt/beige
+	name = "beige kilt"
+	desc = "Traditional scottish wear, it's not a skirt, kinda. This one is beige."
+	icon_state = "kilt_beige"
 
 /obj/item/clothing/under/skirt/khaki
 	name = "khaki skirt"

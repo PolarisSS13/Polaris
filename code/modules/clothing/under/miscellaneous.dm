@@ -266,7 +266,7 @@
 	icon_state = "redcoat"
 	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
 
-/obj/item/clothing/under/kilt
+/obj/item/clothing/under/kiltfull
 	name = "kilt"
 	desc = "Includes shoes and plaid"
 	icon_state = "kilt"
