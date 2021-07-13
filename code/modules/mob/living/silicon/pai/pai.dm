@@ -32,6 +32,10 @@
 		"Mouse" = "pai-mouse",
 		"Monkey" = "pai-monkey",
 		"Corgi" = "pai-borgi",
+		"Bat" = "pai-bat",
+		"Butterfly" = "pai-butterfly",
+		"Hawk" = "pai-hawk",
+		"Duffel" = "pai-duffel",
 		"Fox" = "pai-fox",
 		"Parrot" = "pai-parrot",
 		"Rabbit" = "pai-rabbit",
@@ -44,6 +48,7 @@
 		"Chirp" = list("chirps","chirrups","cheeps"),
 		"Feline" = list("purrs","yowls","meows"),
 		"Canine" = list("yaps","barks","woofs"),
+		"Rodent" = list("squeaks", "SQUEAKS", "sqiks")
 		)
 
 	var/obj/item/weapon/pai_cable/cable		// The cable we produce and use when door or camera jacking
@@ -112,7 +117,7 @@
 		pda.ownjob = "Personal Assistant"
 		pda.owner = text("[]", src)
 		pda.name = pda.owner + " (" + pda.ownjob + ")"
-		
+
 		var/datum/data/pda/app/messenger/M = pda.find_program(/datum/data/pda/app/messenger)
 		if(M)
 			M.toff = TRUE

@@ -82,10 +82,16 @@
 
 /obj/structure/bed/chair/shuttle
 	name = "chair"
-	desc = "You sit in this. Either by will or force."
+	desc = "Please remain seated while the overhead sign is illuminated."
 	icon_state = "shuttlechair"
 	color = null
 	base_icon = "shuttlechair"
+	applies_material_colour = 0
+
+/obj/structure/bed/chair/shuttle_padded
+	icon_state = "shuttlechair2"
+	base_icon = "shuttlechair2"
+	color = null
 	applies_material_colour = 0
 
 // Leaving this in for the sake of compilation.
@@ -141,7 +147,7 @@
 
 /obj/structure/bed/chair/office/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
-	
+
 	playsound(src, 'sound/effects/roll.ogg', 100, 1)
 
 /obj/structure/bed/chair/office/handle_buckled_mob_movement(atom/new_loc, direction)
@@ -226,6 +232,47 @@
 /obj/structure/bed/chair/wood/wings
 	icon_state = "wooden_chair_wings"
 
+//Eris Chairs
+
+/obj/structure/bed/chair/modern_chair
+	name = "modern chair"
+	desc = "It's like sitting in an egg."
+	icon_state = "modern_chair"
+	color = null
+	base_icon = "modern_chair"
+	applies_material_colour = 0
+
+/obj/structure/bed/chair/modern_chair/Initialize()
+	. = ..()
+	var/image/I = image(icon, "[base_icon]_over")
+	I.layer = ABOVE_MOB_LAYER
+	I.plane = MOB_PLANE
+	overlays |= I
+
+/obj/structure/bed/chair/bar_stool
+	name = "bar stool"
+	desc = "How vibrant!"
+	icon_state = "modern_stool"
+	color = null
+	base_icon = "modern_stool"
+	applies_material_colour = 0
+
+/obj/structure/bed/chair/backed_grey
+	name = "grey chair"
+	desc = "Also available in red."
+	icon_state = "onestar_chair_grey"
+	color = null
+	base_icon = "onestar_chair_grey"
+	applies_material_colour = 0
+
+/obj/structure/bed/chair/backed_red
+	name = "red chair"
+	desc = "Also available in grey."
+	icon_state = "onestar_chair_red"
+	color = null
+	base_icon = "onestar_chair_red"
+	applies_material_colour = 0
+
 //sofa
 
 /obj/structure/bed/chair/sofa
@@ -236,6 +283,7 @@
 	icon_state = "sofamiddle"
 	applies_material_colour = 1
 	var/sofa_material = "carpet"
+	var/corner_piece = FALSE
 
 /obj/structure/bed/chair/sofa/update_icon()
 	if(applies_material_colour && sofa_material)
@@ -247,9 +295,9 @@
 		else
 			name = "[sofa_material] [initial(name)]"
 
-/obj/structure/bed/chair/update_layer()
+/obj/structure/bed/chair/sofa/update_layer()
 	// Corner east/west should be on top of mobs, any other state's north should be.
-	if((icon_state == "sofacorner" && ((dir & EAST) || (dir & WEST))) || (icon_state != "sofacorner" && (dir & NORTH)))
+	if((corner_piece && ((dir & EAST) || (dir & WEST))) || (!corner_piece && (dir & NORTH)))
 		plane = MOB_PLANE
 		layer = MOB_LAYER + 0.1
 	else
@@ -266,6 +314,44 @@
 /obj/structure/bed/chair/sofa/corner
 	icon_state = "sofacorner"
 	base_icon = "sofacorner"
+	corner_piece = TRUE
+
+// Wooden nonsofa - no corners
+/obj/structure/bed/chair/sofa/pew
+	name = "pew bench"
+	desc = "If they want you to go to church, why do they make these so uncomfortable?"
+	base_icon = "pewmiddle"
+	icon_state = "pewmiddle"
+	applies_material_colour = FALSE
+
+/obj/structure/bed/chair/sofa/pew/left
+	icon_state = "pewend_left"
+	base_icon = "pewend_left"
+
+/obj/structure/bed/chair/sofa/pew/right
+	icon_state = "pewend_right"
+	base_icon = "pewend_right"
+
+// Corporate sofa - one color fits all
+/obj/structure/bed/chair/sofa/corp
+	name = "black leather sofa"
+	desc = "How corporate!"
+	base_icon = "corp_sofamiddle"
+	icon_state = "corp_sofamiddle"
+	applies_material_colour = FALSE
+
+/obj/structure/bed/chair/sofa/corp/left
+	icon_state = "corp_sofaend_left"
+	base_icon = "corp_sofaend_left"
+
+/obj/structure/bed/chair/sofa/corp/right
+	icon_state = "corp_sofaend_right"
+	base_icon = "corp_sofaend_right"
+
+/obj/structure/bed/chair/sofa/corp/corner
+	icon_state = "corp_sofacorner"
+	base_icon = "corp_sofacorner"
+	corner_piece = TRUE
 
 //color variations
 
