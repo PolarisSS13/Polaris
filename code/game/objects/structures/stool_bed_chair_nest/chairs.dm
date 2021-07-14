@@ -2,7 +2,6 @@
 	name = "chair"
 	desc = "You sit in this. Either by will or force."
 	icon_state = "chair_preview"
-	color = "#666666"
 	base_icon = "chair"
 	buckle_dir = 0
 	buckle_lying = 0 //force people to sit up in chairs when buckled
@@ -216,20 +215,51 @@
 /obj/structure/bed/chair/wood
 	name = "wooden chair"
 	desc = "Old is never too old to not be in fashion."
-	icon_state = "wooden_chair"
+	base_icon = "wooden_chair"
+	icon_state = "wooden_chair_preview"
+	color = WOOD_COLOR_FURNITURE
+	applies_material_colour = 0
 
 /obj/structure/bed/chair/wood/update_icon()
 	return
+
+/obj/structure/bed/chair/wood/walnut
+	name = "walnut chair"
+	color = WOOD_COLOR_RICH
+
+/obj/structure/bed/chair/wood/pine
+	name = "pinewood chair"
+	color = WOOD_COLOR_PALE
+
+/obj/structure/bed/chair/wood/ebony
+	name = "ebony chair"
+	color = WOOD_COLOR_BLACK
+
+/obj/structure/bed/chair/wood/mahogany
+	name = "mahogany chair"
+	color = WOOD_COLOR_CHOCOLATE
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 
-/obj/structure/bed/chair/wood/New(var/newloc)
+/obj/structure/bed/chair/wood/New(var/newloc, var/newmaterial)
 	..(newloc, "wood")
 
 /obj/structure/bed/chair/wood/wings
+	icon_state = "wooden_chair_wings"
+
+/obj/structure/bed/chair/wood/walnut/wings
+	icon_state = "wooden_chair_wings"
+
+/obj/structure/bed/chair/wood/pine/wings
+	icon_state = "wooden_chair_wings"
+
+/obj/structure/bed/chair/wood/ebony/wings
+	icon_state = "wooden_chair_wings"
+
+/obj/structure/bed/chair/wood/mahogany/wings
 	icon_state = "wooden_chair_wings"
 
 //Eris Chairs
@@ -249,7 +279,7 @@
 	I.plane = MOB_PLANE
 	overlays |= I
 
-/obj/structure/bed/chair/bar_stool
+/obj/structure/bed/chair/modern_bar_stool
 	name = "bar stool"
 	desc = "How vibrant!"
 	icon_state = "modern_stool"
