@@ -8,6 +8,7 @@
 	trigger = TRIGGER_TOUCH
 
 /datum/artifact_effect/forcefield/ToggleActivate()
+	var/atom/holder = master.holder
 	..()
 	if(created_field.len)
 		for(var/obj/effect/energy_field/F in created_field)
@@ -35,6 +36,7 @@
 			E.adjust_strength(0.25, 0)
 
 /datum/artifact_effect/forcefield/UpdateMove()
+	var/atom/holder = master.holder
 	if(created_field.len && holder)
 		var/turf/T = get_turf(holder)
 		while(created_field.len < 16)

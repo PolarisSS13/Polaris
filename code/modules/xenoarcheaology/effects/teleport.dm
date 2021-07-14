@@ -3,6 +3,7 @@
 	effect_type = EFFECT_BLUESPACE
 
 /datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
+	var/atom/holder = master.holder
 	var/weakness = GetAnomalySusceptibility(user)
 	if(prob(100 * weakness))
 		to_chat(user, "<font color='red'>You are suddenly zapped away elsewhere!</font>")
@@ -20,6 +21,7 @@
 		sparks.start()
 
 /datum/artifact_effect/teleport/DoEffectAura()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(src.effectrange,T))
@@ -39,6 +41,7 @@
 				sparks.start()
 
 /datum/artifact_effect/teleport/DoEffectPulse()
+	var/atom/holder = master.holder
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/mob/living/M in range(src.effectrange, T))

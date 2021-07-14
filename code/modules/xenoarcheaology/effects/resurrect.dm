@@ -5,6 +5,7 @@
 	var/stored_life = 0
 
 /datum/artifact_effect/resurrect/proc/steal_life(var/mob/living/target = null)
+	var/atom/holder = master.holder
 	if(!istype(target))
 		return 0
 
@@ -16,6 +17,7 @@
 	return 0
 
 /datum/artifact_effect/resurrect/proc/give_life(var/mob/living/target = null)
+	var/atom/holder = master.holder
 	if(!istype(target))
 		return
 
@@ -34,6 +36,7 @@
 			stored_life = 0
 
 /datum/artifact_effect/resurrect/proc/attempt_revive(var/mob/living/L = null)
+	var/atom/holder = master.holder
 	spawn()
 		if(istype(L, /mob/living/simple_mob))
 			var/mob/living/simple_mob/SM = L
@@ -70,6 +73,7 @@
 				holder.visible_message("<span class='alien'>\The [H]'s eyes open in a flash of light!</span>")
 
 /datum/artifact_effect/resurrect/DoEffectTouch(var/mob/user)
+	var/atom/holder = master.holder
 	for(var/mob/living/L in oview(effectrange, get_turf(holder)))
 		stored_life += 4 * steal_life(L)
 
@@ -80,6 +84,7 @@
 			break
 
 /datum/artifact_effect/resurrect/DoEffectAura()
+	var/atom/holder = master.holder
 	for(var/mob/living/L in oview(effectrange, get_turf(holder)))
 		stored_life += steal_life(L)
 
@@ -90,6 +95,7 @@
 			break
 
 /datum/artifact_effect/resurrect/DoEffectPulse()
+	var/atom/holder = master.holder
 	for(var/mob/living/L in oview(effectrange, get_turf(holder)))
 		stored_life += 2 * steal_life(L)
 
