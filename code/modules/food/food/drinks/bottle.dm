@@ -205,7 +205,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey
 	name = "Uncle Git's Special Reserve"
 	desc = "A premium single-malt whiskey, gently matured in a highly classified location."
-	icon_state = "whiskeybottle"
+	icon_state = "whiskeybottle1"
 	center_of_mass = list("x"=16, "y"=3)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/whiskey/Initialize()
@@ -322,16 +322,6 @@
 	. = ..()
 	reagents.add_reagent("cognac", 100)
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/wine
-	name = "Doublebeard Bearded Special Wine"
-	desc = "Cheap cooking wine pretending to be drinkable."
-	icon_state = "winebottle"
-	center_of_mass = list("x"=16, "y"=4)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/wine/Initialize()
-	. = ..()
-	reagents.add_reagent("wine", 100)
-
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
 	desc = "One sip of this and you just know you're gonna have a good time."
@@ -361,26 +351,6 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao/Initialize()
 	. = ..()
 	reagents.add_reagent("bluecuracao", 100)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
-	name = "Briar Rose Grenadine Syrup"
-	desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
-	icon_state = "grenadinebottle"
-	center_of_mass = list("x"=16, "y"=6)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine/Initialize()
-	. = ..()
-	reagents.add_reagent("grenadine", 100)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
-	name = "Warlock's Velvet"
-	desc = "What a delightful packaging for a surely high quality wine! The vintage must be amazing!"
-	icon_state = "pwinebottle"
-	center_of_mass = list("x"=16, "y"=4)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine/Initialize()
-	. = ..()
-	reagents.add_reagent("pwine", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/redeemersbrew
 	name = "Redeemer's Brew"
@@ -452,7 +422,49 @@
 	. = ..()
 	reagents.add_reagent("jager", 100)
 
-//////////////////////////JUICES AND STUFF///////////////////////
+//////////////////////////WINES//////////////////////////
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/wine
+	name = "Doublebeard Bearded Special Red"
+	desc = "Cheap cooking wine pretending to be drinkable."
+	icon_state = "winebottle"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/wine/Initialize()
+	. = ..()
+	reagents.add_reagent("redwine", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/whitewine
+	name = "Doublebeard Bearded Special White"
+	desc = "Cooking wine pretending to be drinkable."
+	icon_state = "whitewinebottle"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/whitewine/Initialize()
+	. = ..()
+	reagents.add_reagent("whitewine", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/carnoth //anagram of 'ntcahors' where the bottle sprite originated from
+	name = "NanoTrasen Carnoth Red"
+	desc = "A NanoTrasen branded wine given to high ranking staff as gifts. Made special on the agricultural planet Carnoth."
+	icon_state = "carnoth"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/carnoth/Initialize()
+	. = ..()
+	reagents.add_reagent("carnoth", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
+	name = "Warlock's Velvet"
+	desc = "What a delightful packaging for a surely high quality wine! The vintage must be amazing!"
+	icon_state = "pwinebottle"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine/Initialize()
+	. = ..()
+	reagents.add_reagent("pwine", 100)
+
+//////////////////////////JUICES AND STUFF//////////////////////////
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola //MODIFIED ON 04/21/2021
 	name = "\improper two-liter Space Cola"
@@ -578,7 +590,27 @@
 	. = ..()
 	reagents.add_reagent("lemonjuice", 100)
 
-//////////////////////////SMALL BOTTLES///////////////////////
+/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine
+	name = "Briar Rose Grenadine Syrup"
+	desc = "Sweet and tangy, a bar syrup used to add color or flavor to drinks."
+	icon_state = "grenadinebottle"
+	center_of_mass = list("x"=16, "y"=6)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/grenadine/Initialize()
+	. = ..()
+	reagents.add_reagent("grenadine", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/grapejuice
+	name = "Special Blend Grapejuice"
+	desc = "A delicious blend of various grape species in one succulent blend."
+	icon_state = "grapejuicebottle"
+	center_of_mass = list("x"=16, "y"=3)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/grapejuice/Initialize()
+	. = ..()
+	reagents.add_reagent("grapejuice", 100)
+
+//////////////////////////SMALL BOTTLES//////////////////////////
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small
 	volume = 50
@@ -629,7 +661,6 @@
 	. = ..()
 	reagents.add_reagent("cider", 50)
 
-
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale
 	name = "\improper Magm-Ale"
 	desc = "A true dorf's drink of choice."
@@ -650,3 +681,45 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/small/ale/hushedwhisper/Initialize()
 	. = ..()
 	reagents.add_reagent("ale", 50)
+
+//////Small Bottled Sodas//////
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/cola
+	name = "Space Cola"
+	desc = "Cola. In space."
+	icon_state = "colabottle2"
+	center_of_mass = list("x"=16, "y"=6)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/cola/Initialize()
+	. = ..()
+	reagents.add_reagent("cola", 50)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/space_up
+	name = "Space-Up"
+	desc = "Tastes like a hull breach in your mouth."
+	icon_state = "space-up_bottle2"
+	center_of_mass = list("x"=16, "y"=6)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/space_up/Initialize()
+	. = ..()
+	reagents.add_reagent("space_up", 50)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/space_mountain_wind
+	name = "Space Mountain Wind"
+	desc = "Blows right through you like a space wind."
+	icon_state = "space_mountain_wind_bottle2"
+	center_of_mass = list("x"=16, "y"=6)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/space_mountain_wind/Initialize()
+	. = ..()
+	reagents.add_reagent("spacemountainwind", 50)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/dr_gibb
+	name = "Dr. Gibb"
+	desc = "A delicious mixture of 42 different flavors."
+	icon_state = "dr_gibb_bottle2"
+	center_of_mass = list("x"=16, "y"=6)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/small/dr_gibb/Initialize()
+	. = ..()
+	reagents.add_reagent("dr_gibb", 50)

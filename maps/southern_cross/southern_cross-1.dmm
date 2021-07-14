@@ -105189,6 +105189,10 @@
 	name = "Station Intercom (General)";
 	pixel_x = -21
 	},
+/obj/item/weapon/reagent_containers/food/drinks/bottle/carnoth{
+	pixel_x = -7;
+	pixel_y = 5
+	},
 /turf/simulated/floor/carpet,
 /area/crew_quarters/heads/sc/sd)
 "dOk" = (
