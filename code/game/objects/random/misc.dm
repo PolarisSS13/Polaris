@@ -411,10 +411,28 @@
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatepiece/white,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatepiece/truffle,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolateegg,
-				/obj/item/weapon/reagent_containers/food/snacks/donut,
-				/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
-				/obj/item/weapon/reagent_containers/food/snacks/donut/jelly,
-				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/plain,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/plain/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/pink,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/pink/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/purple,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/purple/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/green,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/green/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/beige,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/beige/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/choc,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/choc/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/blue,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/blue/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/yellow,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/yellow/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/olive,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/olive/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/homer,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/homer/jelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/choc_sprinkles,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/choc_sprinkles/jelly,
 				/obj/item/weapon/reagent_containers/food/snacks/tuna,
 				/obj/item/weapon/reagent_containers/food/snacks/pistachios,
 				/obj/item/weapon/reagent_containers/food/snacks/semki,
@@ -641,7 +659,19 @@
 				/obj/item/toy/figure/warden,
 				/obj/item/toy/figure/psychologist,
 				/obj/item/toy/figure/paramedic,
-				/obj/item/toy/figure/ert)
+				/obj/item/toy/figure/ert,
+				/obj/item/toy/figure/un,
+				/obj/item/toy/figure/selene,
+				/obj/item/toy/figure/nock,
+				/obj/item/toy/figure/carrion,
+				/obj/item/toy/figure/zaddat,
+				/obj/item/toy/figure/discovery,
+				/obj/item/toy/figure/rooster,
+				/obj/item/toy/figure/barking_dog,
+				/obj/item/toy/figure/tajaran,
+				/obj/item/toy/figure/red_soldier,
+				/obj/item/toy/figure/shitcurity,
+				/obj/item/toy/figure/vir_patrolman)
 
 /obj/random/plushie
 	name = "random plushie"
@@ -821,8 +851,8 @@
 /obj/random/mre/dessert/item_to_spawn()
 	return pick(/obj/item/weapon/reagent_containers/food/snacks/candy,
 				/obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar,
-				/obj/item/weapon/reagent_containers/food/snacks/donut/normal,
-				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/plain,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/plain/jelly,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
 				/obj/item/weapon/reagent_containers/food/snacks/cookiesnack)
 
@@ -833,7 +863,7 @@
 /obj/random/mre/dessert/vegan/item_to_spawn()
 	return pick(/obj/item/weapon/reagent_containers/food/snacks/candy,
 				/obj/item/weapon/reagent_containers/food/snacks/chocolatebar,
-				/obj/item/weapon/reagent_containers/food/snacks/donut/cherryjelly,
+				/obj/item/weapon/reagent_containers/food/snacks/donut/plain/jelly,
 				/obj/item/weapon/reagent_containers/food/snacks/plumphelmetbiscuit)
 
 /obj/random/mre/drink

@@ -39,7 +39,7 @@ var/global/list/stool_cache = list() //haha stool
 	icon_state = ""
 	cut_overlays()
 	// Base icon.
-	var/cache_key = "stool-[material.name]"
+	var/cache_key = "[base_icon]-[material.name]"
 	if(isnull(stool_cache[cache_key]))
 		var/image/I = image(icon, base_icon)
 		I.color = material.icon_colour
@@ -47,9 +47,9 @@ var/global/list/stool_cache = list() //haha stool
 	add_overlay(stool_cache[cache_key])
 	// Padding overlay.
 	if(padding_material)
-		var/padding_cache_key = "stool-padding-[padding_material.name]"
+		var/padding_cache_key = "[base_icon]-padding-[padding_material.name]"
 		if(isnull(stool_cache[padding_cache_key]))
-			var/image/I =  image(icon, "stool_padding")
+			var/image/I =  image(icon, "[base_icon]_padding")
 			I.color = padding_material.icon_colour
 			stool_cache[padding_cache_key] = I
 		add_overlay(stool_cache[padding_cache_key])
@@ -149,3 +149,22 @@ var/global/list/stool_cache = list() //haha stool
 		remove_padding()
 	else
 		..()
+
+/obj/item/weapon/stool/barstool
+	name = "bar stool"
+	desc = "Apply butt."
+	icon = 'icons/obj/furniture.dmi'
+	icon_state = "bar_stool_preview" //set for the map
+	randpixel = 0
+	center_of_mass = null
+	force = 10
+	throwforce = 10
+	w_class = ITEMSIZE_HUGE
+	base_icon = "bar_stool_base"
+	anchored = 1
+
+/obj/item/weapon/stool/barstool/padded
+	icon_state = "bar_stool_padded_preview" //set for the map
+
+/obj/item/weapon/stool/barstool/padded/New(var/newloc, var/new_material)
+	..(newloc, "steel", "carpet")
