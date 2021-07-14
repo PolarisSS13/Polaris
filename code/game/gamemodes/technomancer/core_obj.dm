@@ -252,7 +252,7 @@
 	energy = 7000
 	max_energy = 7000
 	regen_rate = 70 //100 seconds to full
-	slowdown = -1
+	slowdown = -0.5
 	instability_modifier = 0.9
 	cooldown_modifier = 0.9
 
@@ -266,7 +266,7 @@
 	energy = 20000
 	max_energy = 20000
 	regen_rate = 25 //800 seconds to full
-	slowdown = 1
+	slowdown = 0.5
 	instability_modifier = 1.0
 	spell_power_modifier = 1.4
 
