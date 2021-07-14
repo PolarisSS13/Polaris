@@ -322,16 +322,6 @@
 	. = ..()
 	reagents.add_reagent("cognac", 100)
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/wine
-	name = "Doublebeard Bearded Special Wine"
-	desc = "Cheap cooking wine pretending to be drinkable."
-	icon_state = "winebottle"
-	center_of_mass = list("x"=16, "y"=4)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/wine/Initialize()
-	. = ..()
-	reagents.add_reagent("wine", 100)
-
 /obj/item/weapon/reagent_containers/food/drinks/bottle/absinthe
 	name = "Jailbreaker Verte"
 	desc = "One sip of this and you just know you're gonna have a good time."
@@ -361,16 +351,6 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/bluecuracao/Initialize()
 	. = ..()
 	reagents.add_reagent("bluecuracao", 100)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
-	name = "Warlock's Velvet"
-	desc = "What a delightful packaging for a surely high quality wine! The vintage must be amazing!"
-	icon_state = "pwinebottle"
-	center_of_mass = list("x"=16, "y"=4)
-
-/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine/Initialize()
-	. = ..()
-	reagents.add_reagent("pwine", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/redeemersbrew
 	name = "Redeemer's Brew"
@@ -442,7 +422,49 @@
 	. = ..()
 	reagents.add_reagent("jager", 100)
 
-//////////////////////////JUICES AND STUFF///////////////////////
+//////////////////////////WINES//////////////////////////
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/wine
+	name = "Doublebeard Bearded Special Red"
+	desc = "Cheap cooking wine pretending to be drinkable."
+	icon_state = "winebottle"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/wine/Initialize()
+	. = ..()
+	reagents.add_reagent("redwine", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/whitewine
+	name = "Doublebeard Bearded Special White"
+	desc = "Cooking wine pretending to be drinkable."
+	icon_state = "whitewinebottle"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/whitewine/Initialize()
+	. = ..()
+	reagents.add_reagent("whitewine", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/carnoth //anagram of 'ntcahors' where the bottle sprite originated from
+	name = "NanoTrasen Carnoth Red"
+	desc = "A NanoTrasen branded wine given to high ranking staff as gifts. Made special on the agricultural planet Carnoth."
+	icon_state = "carnoth"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/carnoth/Initialize()
+	. = ..()
+	reagents.add_reagent("carnoth", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine
+	name = "Warlock's Velvet"
+	desc = "What a delightful packaging for a surely high quality wine! The vintage must be amazing!"
+	icon_state = "pwinebottle"
+	center_of_mass = list("x"=16, "y"=4)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/pwine/Initialize()
+	. = ..()
+	reagents.add_reagent("pwine", 100)
+
+//////////////////////////JUICES AND STUFF//////////////////////////
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola //MODIFIED ON 04/21/2021
 	name = "\improper two-liter Space Cola"

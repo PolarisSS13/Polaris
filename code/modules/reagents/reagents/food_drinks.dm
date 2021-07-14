@@ -2619,31 +2619,6 @@
 
 	allergen_type = ALLERGEN_GRAINS //Whiskey is also made from grain.
 
-/datum/reagent/ethanol/wine
-	name = "Wine"
-	id = "wine"
-	description = "An premium alchoholic beverage made from distilled grape juice."
-	taste_description = "bitter sweetness"
-	color = "#7E4043" // rgb: 126, 64, 67
-	strength = 15
-
-	glass_name = "wine"
-	glass_desc = "A very classy looking drink."
-
-	allergen_type = ALLERGEN_FRUIT //Wine is made from grapes (fruit)
-
-/datum/reagent/ethanol/wine/champagne
-	name = "Champagne"
-	id = "champagne"
-	description = "A sparkling wine made with Pinot Noir, Pinot Meunier, and Chardonnay."
-	taste_description = "fizzy bitter sweetness"
-	color = "#D1B166"
-
-	glass_name = "champagne"
-	glass_desc = "An even classier looking drink."
-
-	allergen_type = ALLERGEN_FRUIT //Still wine, and still made from grapes (fruit)
-
 /datum/reagent/ethanol/cider
 	name = "Cider"
 	id = "cider"
@@ -2658,8 +2633,84 @@
 
 	allergen_type = ALLERGEN_FRUIT //Made from fruit
 
-// Cocktails
+/datum/reagent/ethanol/redwine
+	name = "Red Wine"
+	id = "redwine"
+	description = "An premium alchoholic beverage made from distilled grape juice."
+	taste_description = "bitter sweetness"
+	color = "#7E4043" // rgb: 126, 64, 67
+	strength = 15
 
+	glass_name = "red wine"
+	glass_desc = "A very classy looking drink."
+
+	allergen_type = ALLERGEN_FRUIT //Wine is made from grapes (fruit)
+
+/datum/reagent/ethanol/whitewine
+	name = "White Wine"
+	id = "whitewine"
+	description = "An premium alchoholic beverage made from fermenting of the non-coloured pulp of grapes."
+	taste_description = "light fruity flavor"
+	color = "#F4EFB0" // rgb: 244, 239, 176
+	strength = 15
+
+	glass_name = "white wine"
+	glass_desc = "A very classy looking drink."
+
+	allergen_type = ALLERGEN_FRUIT //Wine is made from grapes (fruit)
+
+/datum/reagent/ethanol/carnoth
+	name = "Carnoth"
+	id = "carnoth"
+	description = "An premium alchoholic beverage made with multiple hybridized species of grapes that give it a dark maroon coloration."
+	taste_description = "alcoholic sweet flavor"
+	color = "#5B0000" // rgb: 0, 100, 35
+	strength = 20
+
+	glass_name = "carnoth"
+	glass_desc = "A very classy looking drink."
+
+	allergen_type = ALLERGEN_FRUIT //Wine is made from grapes (fruit)
+
+/datum/reagent/ethanol/pwine
+	name = "Poison Wine"
+	id = "pwine"
+	description = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
+	color = "#000000"
+	strength = 10
+	druggy = 50
+	halluci = 10
+
+	glass_name = "???"
+	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
+	allergen_type = ALLERGEN_FRUIT //Made from berries which are fruit
+
+/datum/reagent/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	if(dose > 30)
+		M.adjustToxLoss(2 * removed)
+	if(dose > 60 && ishuman(M) && prob(5))
+		var/mob/living/carbon/human/H = M
+		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[O_HEART]
+		if (L && istype(L))
+			if(dose < 120)
+				L.take_damage(10 * removed, 0)
+			else
+				L.take_damage(100, 0)
+
+/datum/reagent/ethanol/wine/champagne
+	name = "Champagne"
+	id = "champagne"
+	description = "A sparkling wine made with Pinot Noir, Pinot Meunier, and Chardonnay."
+	taste_description = "fizzy bitter sweetness"
+	color = "#D1B166"
+
+	glass_name = "champagne"
+	glass_desc = "An even classier looking drink."
+
+	allergen_type = ALLERGEN_FRUIT //Still wine, and still made from grapes (fruit)
+
+// Cocktails
 
 /datum/reagent/ethanol/acid_spit
 	name = "Acid Spit"
@@ -3254,32 +3305,6 @@
 
 	glass_name = "Patron"
 	glass_desc = "Drinking patron in the bar, with all the subpar ladies."
-
-/datum/reagent/ethanol/pwine
-	name = "Poison Wine"
-	id = "pwine"
-	description = "Is this even wine? Toxic! Hallucinogenic! Probably consumed in boatloads by your superiors!"
-	color = "#000000"
-	strength = 10
-	druggy = 50
-	halluci = 10
-
-	glass_name = "???"
-	glass_desc = "A black ichor with an oily purple sheer on top. Are you sure you should drink this?"
-	allergen_type = ALLERGEN_FRUIT //Made from berries which are fruit
-
-/datum/reagent/ethanol/pwine/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	..()
-	if(dose > 30)
-		M.adjustToxLoss(2 * removed)
-	if(dose > 60 && ishuman(M) && prob(5))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/internal/heart/L = H.internal_organs_by_name[O_HEART]
-		if (L && istype(L))
-			if(dose < 120)
-				L.take_damage(10 * removed, 0)
-			else
-				L.take_damage(100, 0)
 
 /datum/reagent/ethanol/red_mead
 	name = "Red Mead"
