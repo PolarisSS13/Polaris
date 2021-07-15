@@ -152,6 +152,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/semki = 12,
@@ -182,6 +183,7 @@
 				/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,
 				/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 1,
+				/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/pistachios = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/semki = 1,
@@ -898,7 +900,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 6,
 					/obj/item/weapon/storage/box/gum = 8,
-					/obj/item/weapon/storage/box/admints = 8
+					/obj/item/weapon/storage/box/admints = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 6
 					)
 
 	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 5,
@@ -911,7 +914,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 8,
 					/obj/item/weapon/storage/box/gum = 2,
-					/obj/item/weapon/storage/box/admints = 2
+					/obj/item/weapon/storage/box/admints = 2,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 8
 					)
 
 ////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////
@@ -978,6 +982,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 8
@@ -996,6 +1001,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 5

@@ -1144,7 +1144,7 @@
 	name = "Wing Fang Chu"
 	desc = "A savory dish of alien wing wang in soy."
 	icon_state = "wingfangchu"
-	trash = /obj/item/trash/snack_bowl
+	trash = /obj/item/trash/small_bowl
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=17, "y"=9)
 	bitesize = 2
@@ -1154,7 +1154,7 @@
 	reagents.add_reagent("protein", 6)
 
 /obj/item/weapon/reagent_containers/food/snacks/human/kabob
-	name = "-kabob"
+	name = "???-kabob"
 	icon_state = "kabob"
 	desc = "A human meat, on a stick."
 	trash = /obj/item/stack/rods
@@ -1209,6 +1209,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/popcorn
 	name = "Popcorn"
 	desc = "Now let's find some cinema."
+	icon = 'food_snacks.dmi'
 	icon_state = "popcorn"
 	trash = /obj/item/trash/popcorn
 	var/unpopped = 0
@@ -2041,14 +2042,24 @@
 	. = ..()
 	reagents.add_reagent("protein", 25)
 
-/obj/item/weapon/reagent_containers/food/snacks/candiedapple
-	name = "Candied Apple"
-	desc = "An apple coated in sugary sweetness."
-	icon_state = "candiedapple"
+/obj/item/weapon/reagent_containers/food/snacks/caramelapple
+	name = "Caramel Apple"
+	desc = "An apple coated in rich caramel."
+	icon_state = "candiedapple1"
 	filling_color = "#F21873"
 	center_of_mass = list("x"=15, "y"=13)
 	nutriment_amt = 3
 	nutriment_desc = list("apple" = 3, "caramel" = 3, "sweetness" = 2)
+	bitesize = 3
+
+/obj/item/weapon/reagent_containers/food/snacks/candiedapple
+	name = "Candied Apple"
+	desc = "An apple coated in sugary sweetness."
+	icon_state = "candiedapple2"
+	filling_color = "#F21873"
+	center_of_mass = list("x"=15, "y"=13)
+	nutriment_amt = 3
+	nutriment_desc = list("apple" = 3, "sweetness" = 2)
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/applepie
@@ -3608,14 +3619,14 @@
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-/obj/item/weapon/reagent_containers/food/snacks/beans
-	name = "baked beans"
-	desc = "Musical fruit in a slightly less musical container."
-	filling_color = "#FC6F28"
-	icon_state = "beans"
-	nutriment_amt = 4
-	nutriment_desc = list("beans" = 4)
-	bitesize = 2
+///obj/item/weapon/reagent_containers/food/snacks/beans
+//	name = "baked beans"
+//	desc = "Musical fruit in a slightly less musical container."
+//	filling_color = "#FC6F28"
+//	icon_state = "beans"
+//	nutriment_amt = 4
+//	nutriment_desc = list("beans" = 4)
+//	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/sugarcookie
 	name = "sugar cookie"
@@ -6084,6 +6095,16 @@
 	nutriment_amt = 3
 	nutriment_desc = list("salt" = 1, "barbeque sauce" = 2)
 
+/obj/item/weapon/reagent_containers/food/snacks/chips/snv
+	name = "\improper Mike's Salt & Vinegar Chips"
+	desc = "Painful to eat yet you just can't stop!"
+	description_fluff = "Mike's Salt & Vinegar chips have been a staple of parties and events for decades, the chosen secondary dish to ordinary chips."
+	icon = 'icons/obj/food_snacks.dmi'
+	icon_state = "chips_snv"
+	trash = /obj/item/trash/chips/snv
+	nutriment_amt = 3
+	nutriment_desc = list("salt" = 1, "vinegar" = 2)
+
 /obj/item/weapon/reagent_containers/food/snacks/tastybread
 	name = "bread tube"
 	desc = "Bread in a tube. Chewy...and surprisingly tasty."
@@ -6309,7 +6330,7 @@
 	desc = "Contains over 9000% of your daily recommended intake of salt."
 	trash = /obj/item/trash/tidegobs
 	filling_color = "#2556b0"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("salt" = 4, "seagull?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6321,7 +6342,7 @@
 	desc = "A peanut flavored snack that looks like the rings of Saturn!"
 	trash = /obj/item/trash/saturno
 	filling_color = "#dca319"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("salt" = 4, "peanut" = 2,  "wood?" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6333,7 +6354,7 @@
 	desc = "By Joove! It's some kind of gel."
 	trash = /obj/item/trash/jupiter
 	filling_color = "#dc1919"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("sweetness" = 4, "vanilla" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6345,7 +6366,7 @@
 	desc = "Baseless tasteless nutrithick rods to get you through the day. Now even less rash inducing!"
 	trash = /obj/item/trash/pluto
 	filling_color = "#ffffff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("chalk" = 4, "sadness" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6357,7 +6378,7 @@
 	desc = "A steaming self-heated bowl of sweet eggs and taters!"
 	trash = /obj/item/trash/mars
 	filling_color = "#d2c63f"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("eggs" = 4, "potato" = 4, "mustard" = 2)
 	nutriment_amt = 8
 	bitesize = 2
@@ -6369,7 +6390,7 @@
 	desc = "Hot takes on hot cakes, a timeless classic now finally fit for human consumption!"
 	trash = /obj/item/trash/venus
 	filling_color = "#d2c63f"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("heat" = 4, "burning!" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6385,7 +6406,7 @@
 	desc = "A Sol favorite, Sun Snax! Sun dried corn chips coated in a super spicy seasoning!"
 	trash = /obj/item/trash/sun_snax
 	filling_color = "#d2c63f"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("heat" = 3, "burning!" = 2)
 	nutriment_amt = 3
 	bitesize = 1
@@ -6401,7 +6422,7 @@
 	desc = "Pop rocks themed on the outermost reaches of the Sol system, new formula guarantees fewer shrapnel induced oral injuries."
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("fizz" = 4, "sweetness" = 1)
 	nutriment_amt = 5
 	bitesize = 2
@@ -6417,7 +6438,7 @@
 	trash = /obj/item/trash/pretzel
 	desc = "A tasty bread like snack that is seasoned with what tastes like salt... but you're not so sure it's actually salt."
 	filling_color = "#916E36"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("salt" = 2, "pretzel" = 3)
 	nutriment_amt = 3
 	bitesize = 1
@@ -6430,7 +6451,7 @@
 	desc = "Fermented space shark, like chewing a urine soaked mattress."
 	description_fluff = "A form of fermented shark that originated on Earth as far back as the 17th century. Modern Hakarl is made from vat-made fermented shark and is distributed across the galaxy as a delicacy. However, few are able to stand the smell or taste of the meat."
 	filling_color = "#916E36"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("fish" = 2, "salt" = 2, "ammonia" = 1)
 	nutriment_amt = 4
 	bitesize = 1
@@ -6627,7 +6648,7 @@
 	desc = "A can of premium preserved vat-grown holstein beef. Now 99.9% bone free!"
 	trash = /obj/item/trash/beef
 	filling_color = "#663300"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("beef" = 1)
 	bitesize = 2
 
@@ -6642,7 +6663,7 @@
 	desc = "Luna Colony beans. Carefully synthethized from soy."
 	trash = /obj/item/trash/beans
 	filling_color = "#ff6633"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("beans" = 1, "tomato sauce" = 1)
 	nutriment_amt = 15
 	bitesize = 2
@@ -6671,8 +6692,7 @@
 	icon_state = "spinach"
 	desc = "Wup-Az! Brand canned spinach. Notably has less iron in it than a watermelon."
 	trash = /obj/item/trash/spinach
-	filling_color = "#003300"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 5
 	nutriment_desc = list("soggy" = 1, "vegetable" = 1)
 	bitesize = 5
@@ -6691,12 +6711,12 @@
 	desc = "Terran caviar, or space carp eggs. Carefully faked using alginate, artificial flavoring and salt. Skrell approved!"
 	trash = /obj/item/trash/fishegg
 	filling_color = "#000000"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("fish" = 1, "salt" = 1)
 	nutriment_amt = 6
 	bitesize = 1
 
-/obj/item/weapon/reagent_containers/food/snacks/caviar/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/canned/caviar/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
 
@@ -6706,7 +6726,7 @@
 	desc = "Terran caviar, or space carp eggs. Banned by the Vir Food Health Administration for exceeding the legally set amount of carpotoxins in food stuffs."
 	trash = /obj/item/trash/carpegg
 	filling_color = "#330066"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("fish" = 1, "salt" = 1, "a numbing sensation" = 1)
 	nutriment_amt = 6
 	bitesize = 1
@@ -6722,12 +6742,12 @@
 	desc = "A re-branding of a classic Terran snack! Contains mostly edible ingredients."
 	trash = /obj/item/trash/maps
 	filling_color = "#330066"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("meat" = 1, "salt" = 1)
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/maps/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/canned/maps/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6)
 	reagents.add_reagent("sodiumchloride", 2)
@@ -6738,14 +6758,29 @@
 	desc = "A classic snack favored by Sol astronauts. Made from dried apple-hybidized berries grown on the lunar colonies."
 	trash = /obj/item/trash/appleberry
 	filling_color = "#FFFFFF"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_desc = list("apple" = 1, "sweetness" = 1)
 	nutriment_amt = 8
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/appleberry/Initialize()
+/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry/Initialize()
 	. = ..()
 	reagents.add_reagent("milk", 8)
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans
+	name = "baked beans"
+	icon_state = "ntbeans"
+	desc = "Musical fruit in a slightly less musical container. Now with bacon!"
+	trash = /obj/item/trash/ntbeans
+	filling_color = "#FC6F28"
+	center_of_mass = list("x"=15, "y"=9)
+	nutriment_desc = list("beans" = 4)
+	nutriment_amt = 6
+	bitesize = 2
+
+/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 2)
 
 ////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
 
@@ -6788,7 +6823,7 @@
 	desc = "Now with 20% less lawsuit enabling rhegolith!"
 	//trash = /obj/item/trash/lunacakewrap //need to add code that drops trash but keeps -open state
 	filling_color = "#ffffff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
 	nutriment_desc = list("sweetness" = 4, "vanilla" = 1)
 	bitesize = 2
@@ -6799,7 +6834,7 @@
 	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
 	//trash = /obj/item/trash/mooncakewrap //need to add code that drops trash but keeps -open state
 	filling_color = "#ffffff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
 	nutriment_desc = list("sweetness" = 4, "chocolate" = 1)
 	bitesize = 2
@@ -6810,7 +6845,7 @@
 	desc = "Konnichiwa! Many go lucky rice cakes in future!"
 	//trash = /obj/item/trash/mochicakewrap //need to add code that drops trash but keeps -open state
 	filling_color = "#ffffff"
-	center_of_mass = "x=15;y=9"
+	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
 	nutriment_desc = list("sweetness" = 4, "rice" = 1)
 	bitesize = 2
