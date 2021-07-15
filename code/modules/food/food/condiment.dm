@@ -223,7 +223,7 @@
 
 /obj/item/weapon/reagent_containers/food/condiment/small/peppergrinder
 	name = "pepper mill"
-	desc = "Fancy way to season a dish or make people sneeze"
+	desc = "Fancy way to season a dish or make people sneeze."
 	icon_state = "peppermill"
 	center_of_mass = list("x"=17, "y"=11)
 
