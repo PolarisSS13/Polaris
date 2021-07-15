@@ -93,14 +93,20 @@
 /obj/item/trash/plate
 	name = "plate"
 	icon_state = "plate"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/trash/snack_bowl
 	name = "snack bowl"
 	icon_state	= "snack_bowl"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/trash/small_bowl
 	name = "small bowl"
 	icon_state	= "small_bowl"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/trash/pistachios
 	name = "pistachios packet"

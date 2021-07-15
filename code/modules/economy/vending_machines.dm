@@ -900,8 +900,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 6,
 					/obj/item/weapon/storage/box/gum = 8,
-					/obj/item/weapon/storage/box/admints = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 6
+					/obj/item/weapon/storage/box/admints = 8
 					)
 
 	prices = list(	/obj/item/weapon/reagent_containers/food/snacks/pluto = 5,
@@ -914,8 +913,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 8,
 					/obj/item/weapon/storage/box/gum = 2,
-					/obj/item/weapon/storage/box/admints = 2,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 8
+					/obj/item/weapon/storage/box/admints = 2
 					)
 
 ////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////
@@ -1029,4 +1027,5 @@
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/genration = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration = 8)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 2)
