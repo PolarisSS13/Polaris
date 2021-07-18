@@ -440,6 +440,14 @@
 	color = "#792300"
 	allergen_type = ALLERGEN_BEANS //Soy (beans)
 
+/datum/reagent/nutriment/vinegar
+	name = "Vinegar"
+	id = "vinegar"
+	description = "vinegar, great for fish and pickles."
+	taste_description = "vinegar"
+	reagent_state = LIQUID
+	nutriment_factor = 5
+	color = "#54410C"
 
 /datum/reagent/nutriment/ketchup
 	name = "Ketchup"

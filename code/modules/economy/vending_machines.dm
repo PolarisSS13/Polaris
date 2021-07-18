@@ -152,6 +152,7 @@
 					/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 12,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/pistachios = 12,
 					/obj/item/weapon/reagent_containers/food/snacks/semki = 12,
@@ -182,6 +183,7 @@
 				/obj/item/weapon/reagent_containers/food/drinks/dry_ramen = 5,
 				/obj/item/weapon/reagent_containers/food/snacks/chips = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 1,
+				/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/cheesiehonkers = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/pistachios = 1,
 				/obj/item/weapon/reagent_containers/food/snacks/semki = 1,
@@ -978,6 +980,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 8
@@ -996,6 +999,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/skrellsnacks = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/tastybread = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/chips/bbq = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 5
@@ -1023,4 +1027,5 @@
 	products = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/genration = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration = 8)
-	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2)
+	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2,
+					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 2)
