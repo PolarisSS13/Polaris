@@ -61,6 +61,11 @@
 				desc = "You feel more American already."
 				icon_state = "ketchup"
 				center_of_mass = list("x"=16, "y"=6)
+			if("mustard")
+				name = "Mustard"
+				desc = "A somewhat bitter topping."
+				icon_state = "mustard"
+				center_of_mass = list("x"=16, "y"=6)
 			if("capsaicin")
 				name = "Hotsauce"
 				desc = "You can almost TASTE the stomach ulcers now!"
@@ -161,6 +166,10 @@
 /obj/item/weapon/reagent_containers/food/condiment/ketchup/Initialize()
 	. = ..()
 	reagents.add_reagent("ketchup", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/mustard/Initialize()
+	. = ..()
+	reagents.add_reagent("mustard", 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/hotsauce/Initialize()
 	. = ..()
