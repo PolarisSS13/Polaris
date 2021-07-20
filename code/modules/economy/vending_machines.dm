@@ -867,7 +867,8 @@
 					/obj/item/weapon/storage/box/pocky = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 6,
 					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 6,
-					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 6
+					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/mochicake = 6
 					)
 
 	prices = list(/obj/item/weapon/reagent_containers/food/snacks/weebonuts = 5,
@@ -879,7 +880,8 @@
 					/obj/item/weapon/storage/box/pocky = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chocobanana = 10,
 					/obj/item/weapon/reagent_containers/food/snacks/dorayaki = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 5
+					/obj/item/weapon/reagent_containers/food/snacks/daifuku = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/mochicake = 10
 					)
 
 ////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
@@ -899,6 +901,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/oort = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/lunacake = 6,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/darklunacake = 6,
 					/obj/item/weapon/storage/box/gum = 8,
 					/obj/item/weapon/storage/box/admints = 8
 					)
@@ -912,6 +916,8 @@
 					/obj/item/weapon/reagent_containers/food/snacks/oort = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/sun_snax = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/canned/appleberry = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/lunacake = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/darklunacake = 10,
 					/obj/item/weapon/storage/box/gum = 2,
 					/obj/item/weapon/storage/box/admints = 2
 					)

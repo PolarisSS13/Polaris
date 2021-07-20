@@ -337,9 +337,9 @@
 	drop_sound = 'sound/items/drop/soda.ogg'
 	pickup_sound = 'sound/items/pickup/soda.ogg'
 
-/obj/item/trash/spacer_cake_wrap//ADDITION 04/14/2021
+/obj/item/trash/spacercake_wrap//ADDITION 04/14/2021
 	name = "snack cake wrapper"
-	icon_state = "spacer_cake_wrap"
+	icon_state = "spacercake_wrap"
 
 /obj/item/trash/sun_snax//ADDITION 04/14/2021
 	name = "sun snax bag"

@@ -18,6 +18,9 @@
 	var/icon/flat_icon = null //Used to cache a flat icon generated from dipping in batter. This is used again to make the cooked-batter-overlay
 	var/do_coating_prefix = 1 //If 0, we wont do "battered thing" or similar prefixes. Mainly for recipes that include batter but have a special name
 	var/cooked_icon = null //Used for foods that are "cooked" without being made into a specific recipe or combination.
+	var/package = FALSE // If this has a wrapper on it. If true, it will print a message and ask you to remove it
+	var/package_trash // Packaged meals drop this trash type item when opened, if set
+	var/package_open_state// Packaged meals switch to this state when opened, if set
 	//Generally applied during modification cooking with oven/fryer
 	//Used to stop deepfried meat from looking like slightly tanned raw meat, and make it actually look cooked
 	center_of_mass = list("x"=16, "y"=16)
@@ -47,7 +50,8 @@
 	return
 
 /obj/item/weapon/reagent_containers/food/snacks/attack_self(mob/user as mob)
-	return
+	if(package && !user.incapacitated())
+		unpackage(user)
 
 /obj/item/weapon/reagent_containers/food/snacks/attack(mob/living/M as mob, mob/user as mob, def_zone)
 	if(reagents && !reagents.total_volume)
@@ -55,6 +59,10 @@
 		user.drop_from_inventory(src)
 		qdel(src)
 		return 0
+
+	if(package)
+		to_chat(M, "<span class='warning'>How do you expect to eat this with the package still on?</span>")
+		return FALSE
 
 	if(istype(M, /mob/living/carbon))
 		//TODO: replace with standard_feed_mob() call.
@@ -205,6 +213,16 @@
 		for(var/atom/movable/something in contents)
 			something.dropInto(loc)
 	. = ..()
+
+/obj/item/weapon/reagent_containers/food/snacks/proc/unpackage(mob/user)
+	package = FALSE
+	to_chat(user, "<span class='notice'>You unseal \the [src] with a tear of plastic.")
+	playsound(user,'sound/effects/packagedfoodopen.ogg', 15, 1)
+	if(package_trash)
+		var/obj/item/T = new package_trash
+		user.put_in_hands(T)
+	if(package_open_state)
+		icon_state = package_open_state
 
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
@@ -1209,7 +1227,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/popcorn
 	name = "Popcorn"
 	desc = "Now let's find some cinema."
-	icon = 'food_snacks.dmi'
+	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "popcorn"
 	trash = /obj/item/trash/popcorn
 	var/unpopped = 0
@@ -3619,14 +3637,15 @@
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-///obj/item/weapon/reagent_containers/food/snacks/beans
-//	name = "baked beans"
-//	desc = "Musical fruit in a slightly less musical container."
-//	filling_color = "#FC6F28"
-//	icon_state = "beans"
-//	nutriment_amt = 4
-//	nutriment_desc = list("beans" = 4)
-//	bitesize = 2
+/obj/item/weapon/reagent_containers/food/snacks/beans
+	name = "baked beans"
+	desc = "Sweet, savory beans that have a slight tomato taste to them."
+	filling_color = "#FC6F28"
+	icon_state = "bakedbeans"
+	trash = /obj/item/trash/snack_bowl
+	nutriment_amt = 4
+	nutriment_desc = list("beans" = 4)
+	bitesize = 2
 
 /obj/item/weapon/reagent_containers/food/snacks/sugarcookie
 	name = "sugar cookie"
@@ -6782,38 +6801,11 @@
 	. = ..()
 	reagents.add_reagent("protein", 2)
 
-////////Packaged Food - break open and eat (ADDED 04/11/2021 - possible snack upgrade for later)///////
+//////////////Packaged Food - break open and eat//////////////
 
 /obj/item/weapon/reagent_containers/food/snacks/packaged
-	name = "void package"
-	icon = 'icons/obj/food_canned.dmi'
-	flags = 0
-	var/sealed = TRUE
-	var/waste_type = null
-
-/obj/item/weapon/reagent_containers/food/snacks/packaged/Initialize()
-	. = ..()
-	if(!sealed)
-		unseal()
-
-/obj/item/weapon/reagent_containers/food/snacks/packaged/examine(mob/user)
-	. = ..()
-	to_chat(user, "It is [sealed ? "" : "un"]wrapped.")
-
-/obj/item/weapon/reagent_containers/food/snacks/packaged/proc/unseal()
-	flags |= OPENCONTAINER
-	sealed = FALSE
-	update_icon()
-
-/obj/item/weapon/reagent_containers/food/snacks/packaged/attack_self(var/mob/user)
-	if(sealed)
-		playsound(loc,'sound/effects/packagedfoodopen.ogg', rand(10,50), 1)
-		to_chat(user, "<span class='notice'>You unseal \the [src] with a tear of plastic.</span>")
-		unseal()
-
-/obj/item/weapon/reagent_containers/food/snacks/packaged/update_icon()
-	if(!sealed)
-		icon_state = "[initial(icon_state)]-open"
+	icon = 'icons/obj/food_package.dmi'
+	package = TRUE
 
 //////////////Lunar Cakes - proof of concept//////////////
 
@@ -6821,7 +6813,8 @@
 	name = "\improper Lunar Cake"
 	icon_state = "lunacake"
 	desc = "Now with 20% less lawsuit enabling rhegolith!"
-	//trash = /obj/item/trash/lunacakewrap //need to add code that drops trash but keeps -open state
+	package_trash = /obj/item/trash/lunacakewrap
+	package_open_state = "lunacake_open"
 	filling_color = "#ffffff"
 	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
@@ -6832,7 +6825,8 @@
 	name = "\improper Dark Lunar Cake"
 	icon_state = "mooncake"
 	desc = "Explore the dark side! May contain trace amounts of reconstituted cocoa."
-	//trash = /obj/item/trash/mooncakewrap //need to add code that drops trash but keeps -open state
+	package_trash = /obj/item/trash/mooncakewrap
+	package_open_state = "lunacake_open"
 	filling_color = "#ffffff"
 	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
@@ -6843,7 +6837,8 @@
 	name = "\improper Mochi Cake"
 	icon_state = "mochicake"
 	desc = "Konnichiwa! Many go lucky rice cakes in future!"
-	//trash = /obj/item/trash/mochicakewrap //need to add code that drops trash but keeps -open state
+	package_trash = /obj/item/trash/mochicakewrap
+	package_open_state = "lunacake_open"
 	filling_color = "#ffffff"
 	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
@@ -6852,16 +6847,18 @@
 
 //////////////Advanced Package Foods//////////////
 
-/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie //ADDED 04/14/2021
+/obj/item/weapon/reagent_containers/food/snacks/packaged/spacetwinkie
 	name = "\improper Spacer Snack Cake"
-	icon = 'icons/obj/food_canned.dmi'
-	icon_state = "spacer_cake"
+	icon_state = "spacercake"
 	desc = "Guaranteed to survive longer than you will."
-	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been statistically proven to lower survival rates on all missions where it is present."
-	trash = /obj/item/trash/spacer_cake_wrap
+	description_fluff = "Despite Spacer advertisements consistently portraying their snack cakes as life-saving, \
+	tear-jerking survival food for spacers in all kinds of dramatic scenarios, the Spacer Snack Cake has been \
+	statistically proven to lower survival rates on all missions where it is present."
+	package_trash = /obj/item/trash/spacercake_wrap
+	package_open_state = "spacercake_open"
 	filling_color = "#FFE591"
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_amt = 6
+	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 4, "cake" = 2)
 	bitesize = 2
 
@@ -6869,27 +6866,27 @@
 	. = ..()
 	reagents.add_reagent("sugar", 4)
 
-/obj/item/weapon/reagent_containers/food/snacks/packaged/genration //ADDED 04/20/2021
+/obj/item/weapon/reagent_containers/food/snacks/packaged/genration
 	name = "generic ration"
-	icon = 'icons/obj/food_canned.dmi'
 	icon_state = "genration"
 	desc = "The most basic form of ration - meant to barely sustain life."
 	trash = /obj/item/trash/genration
+	package_open_state = "genration_open"
 	filling_color = "#FFFFFF"
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_amt = 3
+	nutriment_amt = 4
 	nutriment_desc = list("chalk" = 6)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration //ADDED 04/20/2021
+/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration
 	name = "meat ration"
-	icon = 'icons/obj/food_canned.dmi'
 	icon_state = "meatration"
 	desc = "A meat flavored ration. Emphasis on 'meat flavored' as there is likely no real meat in this."
 	trash = /obj/item/trash/meatration
+	package_open_state = "meatration_open"
 	filling_color = "#FFFFFF"
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_amt = 6
+	nutriment_amt = 4
 	nutriment_desc = list("chalk" = 3, "meat" = 3)
 	bitesize = 2
 
@@ -6897,26 +6894,27 @@
 	. = ..()
 	reagents.add_reagent("protein", 3)
 
-/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration //ADDED 04/20/2021
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration
 	name = "veggie ration"
-	icon = 'icons/obj/food_canned.dmi'
 	icon_state = "vegration"
 	desc = "Dried veggies in a bag. Depressing and near flavorless."
 	trash = /obj/item/trash/vegration
+	package_open_state = "vegration_open"
 	filling_color = "#FFFFFF"
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_amt = 3
+	nutriment_amt = 4
 	nutriment_desc = list("sadness" = 3, "veggie" = 3)
 	bitesize = 2
 
-/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration //ADDED 04/20/2021 (Contraband Item)
+/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration
 	name = "desert ration"
-	icon = 'icons/obj/food_canned.dmi'
 	icon_state = "baseration"
 	desc = "A rare ration from an era gone by filled with a sweet tasty treat that no modern company has been able to recreate."
 	trash = /obj/item/trash/sweetration
+	package_open_state = "baseration_open"
 	filling_color = "#FFFFFF"
 	center_of_mass = list("x"=15, "y"=11)
+	nutriment_amt = 4
 	nutriment_desc = list("sweetness" = 5, "cake" = 1)
 	bitesize = 2
 
