@@ -387,3 +387,14 @@
 	name = "veggie ration bag"
 	icon_state = "vegration"
 
+/obj/item/trash/smolburger
+	name = "burger packaging"
+	icon_state = "smolburger"
+
+/obj/item/trash/smolhotdog
+	name = "hotdog packaging"
+	icon_state = "smolhotdog"
+
+/obj/item/trash/smolburrito
+	name = "burrito packaging"
+	icon_state = "smolburrito"

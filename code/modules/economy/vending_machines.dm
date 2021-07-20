@@ -989,7 +989,10 @@
 					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 8,
-					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 8
+					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 8,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburger = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vendhotdog = 4,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburrito = 4
 					)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/unajerky = 1)
 
@@ -1008,7 +1011,10 @@
 					/obj/item/weapon/reagent_containers/food/snacks/chips/snv = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/chips = 5,
 					/obj/item/weapon/reagent_containers/food/snacks/driedfish = 5,
-					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 5
+					/obj/item/weapon/reagent_containers/food/snacks/cookiesnack = 5,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburger = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vendhotdog = 10,
+					/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburrito = 10
 					)
 
 ///////////////////////Soviet Stuff///////////////////////////////////////

@@ -6921,3 +6921,42 @@
 /obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 6)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburger
+	name = "packaged burger"
+	icon_state = "smolburger"
+	desc = "A burger stored in a plastic wrapping for vending machine distribution. Surely it tastes fine!"
+	package_trash = /obj/item/trash/smolburger
+	package_open_state = "smolburger_open"
+	nutriment_amt = 3
+	nutriment_desc = list("stale burger" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburger/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vendhotdog
+	name = "packaged hotdog"
+	icon_state = "smolhotdog"
+	desc = "A hotdog stored in a plastic wrapping for vending machine distribution. Surely it tastes fine!"
+	package_trash = /obj/item/trash/smolhotdog
+	package_open_state = "smolhotdog_open"
+	nutriment_amt = 3
+	nutriment_desc = list("stale hotdog" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vendhotdog/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburrito
+	name = "packaged burrito"
+	icon_state = "smolburrito"
+	desc = "A burrito stored in a plastic wrapping for vending machine distribution. Surely it tastes fine!"
+	package_trash = /obj/item/trash/smolburrito
+	package_open_state = "smolburrito_open"
+	nutriment_amt = 3
+	nutriment_desc = list("stale burrito" = 3)
+
+/obj/item/weapon/reagent_containers/food/snacks/packaged/vendburrito/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 1)
