@@ -459,7 +459,7 @@
 	color = "#731008"
 	allergen_type = ALLERGEN_FRUIT 	//Tomatoes are a fruit.
 
-/datum/reagent/nutriment/ketchup
+/datum/reagent/nutriment/mustard
 	name = "Mustard"
 	id = "mustard"
 	description = "Delicious mustard. Good on Hot Dogs."
