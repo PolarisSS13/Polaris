@@ -99,7 +99,7 @@
 
 	var/mob/M = usr
 	var/list/options = list()
-	var/list/posters = decls_repository.get_decls_of_type(/decl/poster)
+	var/list/decl/poster/posters = decls_repository.get_decls_of_type(/decl/poster)
 	for(var/option in posters)
 		options[posters[option].listing_name] = posters[option]
 
