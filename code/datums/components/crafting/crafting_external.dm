@@ -27,8 +27,12 @@
 				M.forceMove(src)
 			SEND_SIGNAL(M, COMSIG_ATOM_USED_IN_CRAFT, src)
 
-		parts_list["reagents"].Cut()
-		parts_list["items"].Cut()
+		var/list/L = parts_list["reagents"]
+		if(LAZYLEN(L))
+			L.Cut()
+		L = parts_list["items"]
+		if(LAZYLEN(L))
+			L.Cut()
 		parts_list.Cut()
 
 /obj/machinery/CheckParts(list/parts_list)
