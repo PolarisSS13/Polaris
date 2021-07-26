@@ -48,9 +48,40 @@
 /datum/crafting_recipe/stunprod
 	name = "Stunprod"
 	result = /obj/item/weapon/melee/baton/cattleprod
-	reqs = list(/obj/item/weapon/handcuffs/cable = 1,
-				/obj/item/stack/rods = 1,
-				/obj/item/weapon/tool/wirecutters = 1)
+	reqs = list(list(/obj/item/weapon/handcuffs/cable = 1),
+				list(/obj/item/stack/rods = 1),
+				list(/obj/item/weapon/tool/wirecutters = 1))
 	time = 40
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
+
+/datum/crafting_recipe/spear
+	name = "Spear"
+	result = /obj/item/weapon/material/twohanded/spear
+	reqs = list(list(/obj/item/weapon/handcuffs/cable = 1),
+				list(/obj/item/stack/rods = 1),
+				list(/obj/item/weapon/material/shard = 1,
+					 /obj/item/weapon/material/butterflyblade = 1)
+				)
+	parts = list(/obj/item/weapon/material/shard = 1,
+				 /obj/item/weapon/material/butterflyblade = 1)
+	time = 40
+	category = CAT_WEAPONRY
+	subcategory = CAT_WEAPON
+
+// Locate one of the things that set the material type, and update it from the default (glass)
+/datum/crafting_recipe/spear/on_craft_completion(mob/user, atom/result)
+	var/obj/item/weapon/material/M
+	for(var/path in parts)
+		var/obj/item/weapon/material/N = locate(path) in result
+		if(istype(N, path))
+			if(!istype(M))
+				M = N
+			else
+				N.forceMove(get_turf(result))
+	if(!istype(M))
+		return
+
+	var/obj/item/weapon/material/twohanded/spear/S = result
+	S.set_material(M.material.name)
+	qdel(M)

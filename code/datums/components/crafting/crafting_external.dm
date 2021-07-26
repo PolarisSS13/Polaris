@@ -12,21 +12,23 @@
  */
 /atom/proc/CheckParts(list/parts_list, datum/crafting_recipe/R)
 	SEND_SIGNAL(src, COMSIG_ATOM_CHECKPARTS, parts_list, R)
-	if(parts_list)
-		for(var/A in parts_list)
-			if(istype(A, /datum/reagent))
-				if(!reagents)
-					reagents = new()
-				reagents.reagent_list.Add(A)
-				reagents.conditional_update()
-			else if(ismovable(A))
-				var/atom/movable/M = A
-				if(isliving(M.loc))
-					var/mob/living/L = M.loc
-					L.unEquip(M, target = src)
-				else
-					M.forceMove(src)
-				SEND_SIGNAL(M, COMSIG_ATOM_USED_IN_CRAFT, src)
+	if(LAZYLEN(parts_list))
+		for(var/datum/reagent/A as anything in parts_list["reagents"])
+			if(!reagents)
+				reagents = new()
+			reagents.reagent_list.Add(A)
+			reagents.conditional_update()
+
+		for(var/atom/movable/M as anything in parts_list["items"])
+			if(isliving(M.loc))
+				var/mob/living/L = M.loc
+				L.unEquip(M, target = src)
+			else
+				M.forceMove(src)
+			SEND_SIGNAL(M, COMSIG_ATOM_USED_IN_CRAFT, src)
+
+		parts_list["reagents"].Cut()
+		parts_list["items"].Cut()
 		parts_list.Cut()
 
 /obj/machinery/CheckParts(list/parts_list)
