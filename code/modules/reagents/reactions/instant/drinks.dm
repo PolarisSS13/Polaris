@@ -107,8 +107,8 @@
 
 /decl/chemical_reaction/instant/drinks/wine
 	name = "Wine"
-	id = "wine"
-	result = "wine"
+	id = "redwine"
+	result = "redwine"
 	required_reagents = list("grapejuice" = 10)
 	catalysts = list("enzyme" = 5)
 	result_amount = 10
@@ -540,7 +540,7 @@
 	name = "Snow White"
 	id = "snowwhite"
 	result = "snowwhite"
-	required_reagents = list("beer" = 1, "lemon_lime" = 1)
+	required_reagents = list("pineapplejuice" = 1, "rum" = 1, "lemon_lime" = 1, "egg" = 1, "kahlua" = 1, "sugar" = 1) //VoreStation Edit
 	result_amount = 2
 
 /decl/chemical_reaction/instant/drinks/irishcarbomb

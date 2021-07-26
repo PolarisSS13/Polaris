@@ -1025,3 +1025,33 @@
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration = 8)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2)
+
+///////////////////////Radical Renard///////////////////////////////////////
+
+/obj/machinery/vending/radren
+	name = "Radical Renard Sodas"
+	desc = "A softdrink vendor owned by a frontier based soda company that's been contracted by NanoTrasen"
+	icon_state = "radren"
+	product_slogans = "Enjoy the rad refreshing taste of Radical Renard brand soda!"
+	product_ads = "Radically Refreshing!;Get Cool!;Have you tried our new Andromeda Apple?;Enjoy a cold one with Renard!"
+	products = list(/obj/item/weapon/reagent_containers/food/drinks/cans/straw_cola = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/apple_cola = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_cola = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/baconsoda = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/sarsaparilla = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/grape_cola = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/orange_cola = 10,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 10)
+	contraband = list()
+	prices = list(/obj/item/weapon/reagent_containers/food/drinks/cans/straw_cola = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/apple_cola = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/lemon_cola  = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/baconsoda = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle = 2,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/sarsaparilla = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/grape_cola = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/orange_cola = 1,
+					/obj/item/weapon/reagent_containers/food/drinks/cans/gingerale = 1)
+	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
+	vending_sound = "machines/vending/vending_cans.ogg"
