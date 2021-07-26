@@ -18,7 +18,7 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/Initialize()
 	. = ..()
 	if(isGlass)
-		unacidable = TRUE
+		unacidable = 1
 		drop_sound = 'sound/items/drop/bottle.ogg'
 		pickup_sound = 'sound/items/pickup/bottle.ogg'
 
@@ -87,7 +87,7 @@
 		if(A.density && usr.Adjacent(A) && !istype(A, /mob))
 			things_to_smash_on += A
 
-	var/atom/choice = tgui_input_list(usr, "Select what you want to smash the bottle on.", "SMASH!", things_to_smash_on)
+	var/atom/choice = input(usr, "Select what you want to smash the bottle on.", "SMASH!", things_to_smash_on)
 	if(!choice)
 		return
 	if(!(choice.density && usr.Adjacent(choice)))
@@ -184,8 +184,8 @@
 	item_state = "beer"
 	flags = NOCONDUCT
 	attack_verb = list("stabbed", "slashed", "attacked")
-	sharp = TRUE
-	edge = FALSE
+	sharp = 1
+	edge = 0
 	var/icon/broken_outline = icon('icons/obj/drinks.dmi', "broken")
 
 /obj/item/weapon/broken_bottle/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)

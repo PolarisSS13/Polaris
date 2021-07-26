@@ -15,7 +15,7 @@
 		for(var/id in dispense_reagents)
 			var/datum/reagent/R = SSchemistry.chemical_reagents[id]
 			if(!R)
-				stack_trace("[src] at [x],[y],[z] failed to find reagent '[id]'!")
+				crash_with("[src] at [x],[y],[z] failed to find reagent '[id]'!")
 				dispense_reagents -= id
 				continue
 			var/obj/item/weapon/reagent_containers/chem_disp_cartridge/C = cartridges[R.name]
@@ -25,7 +25,7 @@
 				C.reagents.add_reagent(id, to_restore)
 				. = 1
 		if(.)
-			SStgui.update_uis(src)
+			SSnanoui.update_uis(src)
 
 /obj/machinery/chemical_dispenser
 	dispense_reagents = list(
