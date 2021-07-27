@@ -6,8 +6,6 @@
 	desc = "A pair of binoculars."
 	zoomdevicename = "eyepieces"
 	icon_state = "binoculars"
-
-	w_class = ITEM_SIZE_SMALL
 	force = 5.0
 	throwforce = 5.0
 	throw_range = 15
