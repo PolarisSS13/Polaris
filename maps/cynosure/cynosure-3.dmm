@@ -4842,9 +4842,8 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
-/obj/machinery/firealarm{
-	dir = 4;
-	pixel_x = 24
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -6045,6 +6044,10 @@
 	},
 /obj/effect/floor_decal/corner/green/bordercorner2{
 	dir = 5
+	},
+/obj/machinery/firealarm{
+	dir = 4;
+	pixel_x = 24
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -8847,12 +8850,10 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
 /obj/structure/disposalpipe/segment{
 	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/snd)
 "fVU" = (
@@ -11459,10 +11460,13 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/effect/floor_decal/spline/plain{
-	dir = 1
+/obj/effect/floor_decal/steeldecal/steel_decals7{
+	dir = 6
 	},
-/turf/simulated/floor/tiled/old_tile/gray,
+/obj/effect/floor_decal/steeldecal/steel_decals7{
+	dir = 9
+	},
+/turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "huz" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -17843,6 +17847,9 @@
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 4
 	},
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "lyr" = (
@@ -19043,9 +19050,6 @@
 	c_tag = "Second Floor - West Skybridge 3";
 	dir = 8
 	},
-/obj/machinery/light{
-	dir = 4
-	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "muw" = (
@@ -20003,9 +20007,6 @@
 /obj/machinery/camera/network/second_floor{
 	c_tag = "Second Floor - West Skybridge 2";
 	dir = 4
-	},
-/obj/machinery/light{
-	dir = 8
 	},
 /obj/item/device/radio/intercom{
 	dir = 8;
@@ -30457,7 +30458,6 @@
 /turf/simulated/open,
 /area/surface/station/security/lobby)
 "ubq" = (
-/obj/machinery/computer/teleporter,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
@@ -30474,6 +30474,9 @@
 	dir = 8
 	},
 /obj/effect/zone_divider,
+/obj/machinery/computer/HolodeckControl{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/holodeck_control)
 "ubE" = (
@@ -30533,7 +30536,6 @@
 	pixel_x = -24;
 	pixel_y = 12
 	},
-/obj/effect/floor_decal/spline/plain,
 /obj/structure/cable{
 	d2 = 2;
 	icon_state = "0-2"
@@ -30541,7 +30543,13 @@
 /obj/effect/floor_decal/steeldecal/steel_decals_central7{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/old_tile/gray,
+/obj/effect/floor_decal/steeldecal/steel_decals7{
+	dir = 5
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals7{
+	dir = 10
+	},
+/turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "udx" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
@@ -31757,6 +31765,9 @@
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 4
 	},
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "uUo" = (
@@ -32223,6 +32234,7 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/snd)
 "vhB" = (
@@ -37136,9 +37148,6 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
-	},
-/obj/machinery/light{
-	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -59070,15 +59079,15 @@ djP
 dWx
 imr
 dtn
-eVX
+djP
 mim
 bBi
 udx
-eVX
+djP
 eVX
 imr
 eVX
-eVX
+djP
 eVX
 muv
 isw
@@ -67542,7 +67551,7 @@ uwO
 uwO
 uwO
 uwO
-xzd
+uwO
 udq
 fVK
 oUA
@@ -72174,7 +72183,7 @@ czT
 maE
 czT
 hua
-usA
+uwO
 uwO
 uwO
 uwO
