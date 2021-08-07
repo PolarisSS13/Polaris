@@ -70,7 +70,7 @@
 		var/temp = ""
 		var/category = R_ADMIN
 		if(check_rights(R_ADMIN, FALSE, C)) // admins
-			if(C.holder.fakekey && check_rights(R_ADMIN|R_MOD, FALSE, src))	// Only admins and mods can see stealthmins
+			if(C.holder.fakekey && !check_rights_for(src, R_ADMIN|R_MOD))	// Only admins and mods can see stealthmins
 				continue
 			num_admins_online++
 		else if(check_rights(R_MOD, FALSE, C)) // mods
