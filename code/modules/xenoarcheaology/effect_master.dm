@@ -3,6 +3,9 @@
  * Here there be the base component for artifacts.
  */
 
+/atom/proc/is_anomalous()
+	return (GetComponent(/datum/component/artifact_master))
+
 /datum/component/artifact_master
 	var/atom/holder
 	var/list/my_effects
