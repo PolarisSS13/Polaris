@@ -4,6 +4,7 @@
  *			hex2num & num2hex
  *			text2list & list2text
  *			file2list
+ *			dirs2text
  *			angle2dir
  *			angle2text
  *			worldtime2text
@@ -95,6 +96,19 @@
 		if ("NORTHWEST") return 9
 		if ("SOUTHEAST") return 6
 		if ("SOUTHWEST") return 10
+
+// Turns a direction into text showing all bits set
+/proc/dirs2text(direction)
+	if(!direction)
+		return ""
+	var/list/dirs = list()
+	if(direction & NORTH) dirs += "NORTH"
+	if(direction & SOUTH) dirs += "SOUTH"
+	if(direction & EAST) dirs += "EAST"
+	if(direction & WEST) dirs += "WEST"
+	if(direction & UP) dirs += "UP"
+	if(direction & DOWN) dirs += "DOWN"
+	return dirs.Join(" ")
 
 // Converts an angle (degrees) into an ss13 direction
 /proc/angle2dir(var/degree)
