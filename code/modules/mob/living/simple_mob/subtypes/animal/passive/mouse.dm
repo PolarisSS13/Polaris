@@ -106,6 +106,7 @@
 
 /mob/living/simple_mob/animal/passive/mouse/rat
 	name = "rat"
+	desc = "A large rodent, often seen hiding in maintenance areas and making a nuisance of itself."
 	body_color = "rat"
 	icon_state = "mouse_rat"
 	maxHealth = 20
