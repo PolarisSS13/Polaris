@@ -216,7 +216,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/proc/unpackage(mob/user)
 	package = FALSE
-	to_chat(user, "<span class='notice'>You tear open the plastic on \the [src].")
+	to_chat(user, "<span class='notice'>You tear open the plastic on \the [src]</span>")
 	playsound(user,'sound/effects/packagedfoodopen.ogg', 15, 1)
 	if(package_trash)
 		var/obj/item/T = new package_trash
