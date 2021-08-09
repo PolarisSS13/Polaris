@@ -7584,7 +7584,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/cube/nutriment)
 
 /obj/item/weapon/reagent_containers/food/snacks/locust
-	name = "yellow jacket locust"
+	name = "locust"
 	desc = "A vibrant bug that looks like a wasp, but is in fact a locust. Crunchy."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "locust"
