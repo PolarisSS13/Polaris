@@ -51,7 +51,7 @@
 	name = "chicken"
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "chickenbreast"
-	cooked_icon = "chickensteak"
+	cooked_icon = "chickenbreast_cooked"
 	filling_color = "#BBBBAA"
 
 /obj/item/weapon/reagent_containers/food/snacks/meat/chicken/Initialize()

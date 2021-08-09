@@ -1042,7 +1042,7 @@
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/vegration = 8,
 					/obj/item/weapon/reagent_containers/food/snacks/packaged/meatration = 8)
 	contraband = list(/obj/item/weapon/reagent_containers/food/snacks/packaged/sweetration = 2,
-					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 2))
+					/obj/item/weapon/reagent_containers/food/snacks/canned/ntbeans = 2)
 
 ///////////////////////Radical Renard///////////////////////////////////////
 
