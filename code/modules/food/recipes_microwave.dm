@@ -333,6 +333,11 @@ I said no!
 	reagents = list("water" = 5, "sugar" = 5)
 	result = /obj/item/weapon/reagent_containers/food/snacks/candiedapple
 
+/datum/recipe/caramelapple
+	fruit = list("apple" = 1)
+	reagents = list("milk" = 5, "sugar" = 5)
+	result = /obj/item/weapon/reagent_containers/food/snacks/caramelapple
+
 /datum/recipe/twobread
 	reagents = list("wine" = 5)
 	items = list(
