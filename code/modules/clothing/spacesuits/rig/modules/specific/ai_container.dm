@@ -15,7 +15,9 @@
 		to_chat(usr, "Your module is not installed in a hardsuit.")
 		return
 
-	module.holder.tgui_interact(usr, custom_state = GLOB.tgui_contained_state)
+	var/obj/item/weapon/rig/RIG = module.holder
+	var/mob/living/L = usr
+	RIG.tgui_interact(L, custom_state = GLOB.tgui_contained_state)
 
 /obj/item/rig_module/ai_container
 

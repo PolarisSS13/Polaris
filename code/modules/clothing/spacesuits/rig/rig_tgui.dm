@@ -12,9 +12,11 @@
 	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, (loc != usr ? ai_interface_path : interface_path), interface_title)
-		ui.open()
 	if(custom_state)
 		ui.set_state(custom_state)
+
+	if(ui)
+		ui.open()
 
 /*
  * tgui_state() gives the UI the state to use by default.
