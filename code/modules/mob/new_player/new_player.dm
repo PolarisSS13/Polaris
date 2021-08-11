@@ -73,9 +73,9 @@
 
 	if(GLOB.news_data.station_newspaper)
 		if(client.prefs.lastlorenews == GLOB.news_data.newsindex)
-			output += "<a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News</A>"
+			output += "<p><a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News</A></p>"
 		else
-			output += "<a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News (NEW!)</A>"
+			output += "<p><b><a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News (NEW!)</A></b></p>"
 
 	output += "</div>"
 
