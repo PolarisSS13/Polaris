@@ -311,7 +311,9 @@
 /area/surface/station/mining_main/locker)
 "aJ" = (
 /obj/machinery/r_n_d/server/robotics,
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/bluegrid{
+	temperature = 73.15
+	},
 /area/surface/station/rnd/server)
 "aK" = (
 /obj/effect/floor_decal/borderfloor,
@@ -1054,10 +1056,9 @@
 "cj" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
-/obj/structure/extinguisher_cabinet{
-	pixel_y = -30
-	},
 /obj/structure/table/standard,
+/obj/machinery/light,
+/obj/item/weapon/storage/firstaid,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/outpost/research/xenoarcheology/enterance)
 "ck" = (
@@ -2272,8 +2273,8 @@
 /turf/simulated/floor/tiled/eris/steel/danger,
 /area/surface/station/rnd/mixing)
 "fd" = (
-/obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/ladder/up,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/security)
 "fe" = (
@@ -4057,7 +4058,9 @@
 	pump_direction = 0;
 	use_power = 1
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/bluegrid{
+	temperature = 73.15
+	},
 /area/surface/station/rnd/server)
 "jc" = (
 /obj/structure/filingcabinet/medical,
@@ -8089,7 +8092,9 @@
 	icon_state = "map_vent_out";
 	use_power = 1
 	},
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/bluegrid{
+	temperature = 73.15
+	},
 /area/surface/station/rnd/server)
 "rM" = (
 /obj/structure/cable/green{
@@ -8294,7 +8299,9 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark{
+	temperature = 73.15
+	},
 /area/surface/station/rnd/server)
 "sg" = (
 /obj/structure/cable/heavyduty{
@@ -10267,7 +10274,9 @@
 /turf/simulated/wall/r_wall,
 /area/surface/station/rnd/toxins_launch)
 "wu" = (
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/dark{
+	temperature = 73.15
+	},
 /area/surface/station/rnd/server)
 "wv" = (
 /obj/effect/floor_decal/borderfloor/corner{
@@ -11687,9 +11696,11 @@
 "zw" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/purple/border,
-/obj/machinery/light,
 /obj/structure/bed/chair/sofa/beige/left{
 	dir = 1
+	},
+/obj/structure/extinguisher_cabinet{
+	pixel_y = -30
 	},
 /turf/simulated/floor/tiled/neutral,
 /area/surface/outpost/research/xenoarcheology/enterance)
@@ -13473,7 +13484,7 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/door/airlock/medical{
-	name = "Patient Room A"
+	name = "Secondary Storage"
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/medical/storage/second_storage)
@@ -15123,7 +15134,9 @@
 /area/surface/station/engineering/reactor_room)
 "Ha" = (
 /obj/machinery/r_n_d/server/core,
-/turf/simulated/floor/bluegrid,
+/turf/simulated/floor/bluegrid{
+	temperature = 73.15
+	},
 /area/surface/station/rnd/server)
 "Hb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/purple{
@@ -15401,9 +15414,6 @@
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/mining_main)
 "HM" = (
-/obj/machinery/atmospherics/unary/freezer{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/alarm{
 	dir = 1;
@@ -15412,6 +15422,11 @@
 /obj/machinery/camera/network/research{
 	c_tag = "SCI - Server Room";
 	dir = 1
+	},
+/obj/machinery/atmospherics/unary/freezer{
+	dir = 1;
+	set_temperature = 73;
+	use_power = 1
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/rnd/server)
@@ -82535,15 +82550,15 @@ Sx
 "}
 (229,1,1) = {"
 AQ
-xW
-xW
-xW
 RQ
 RQ
 RQ
 RQ
-xW
-xW
+RQ
+RQ
+RQ
+RQ
+RQ
 xW
 xW
 xW
@@ -82792,15 +82807,15 @@ Sx
 "}
 (230,1,1) = {"
 AQ
-xW
-xW
-xW
-xW
-xW
-xW
-xW
-xW
-xW
+RQ
+RQ
+RQ
+RQ
+RQ
+RQ
+RQ
+RQ
+RQ
 xW
 xW
 xW
@@ -83051,11 +83066,11 @@ Sx
 AQ
 RQ
 RQ
-xW
-xW
-xW
-xW
-xW
+RQ
+RQ
+RQ
+RQ
+RQ
 RQ
 RQ
 RQ

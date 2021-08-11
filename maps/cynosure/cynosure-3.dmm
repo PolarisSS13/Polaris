@@ -343,7 +343,8 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/airlock/multi_tile/glass{
-	name = "Cargo"
+	name = "Cargo";
+	req_one_access = list(50)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/quartermaster/office)
@@ -2825,7 +2826,6 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/lab)
 "bTU" = (
-/obj/item/weapon/stool/padded,
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -2833,6 +2833,9 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/green/border{
+	dir = 8
+	},
+/obj/item/weapon/stool/padded{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -4103,7 +4106,9 @@
 	dir = 9
 	},
 /obj/structure/table/glass,
-/obj/machinery/computer/med_data/laptop,
+/obj/machinery/computer/med_data/laptop{
+	dir = 4
+	},
 /obj/machinery/newscaster{
 	pixel_y = 28
 	},
@@ -8622,7 +8627,7 @@
 	},
 /obj/machinery/door/airlock/glass_security{
 	id_tag = "BrigFoyerUpper";
-	name = "Security Enterance";
+	name = "Security Entrance";
 	req_access = list(63);
 	req_one_access = list()
 	},
@@ -9894,6 +9899,9 @@
 	id_tag = "roof_airlock_pump"
 	},
 /obj/effect/map_helper/airlock/atmos/chamber_pump,
+/obj/structure/sign/warning/cold{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/hallway/primary/secondfloor/east)
 "gAD" = (
@@ -10651,6 +10659,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/reactor)
+"gUe" = (
+/obj/machinery/smartfridge/sheets/persistent_lossy,
+/turf/simulated/wall/r_wall,
+/area/surface/station/quartermaster/foyer)
 "gUA" = (
 /obj/machinery/shower{
 	dir = 8;
@@ -12171,11 +12183,13 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/security/hallway/cell_hallway)
 "hTP" = (
-/obj/item/weapon/stool/padded,
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/green/border{
+	dir = 8
+	},
+/obj/item/weapon/stool/padded{
 	dir = 8
 	},
 /turf/simulated/floor/tiled,
@@ -12261,7 +12275,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/security/hallway/cell_hallway)
 "hWW" = (
-/obj/machinery/computer/arcade,
+/obj/machinery/computer/arcade{
+	dir = 1
+	},
 /obj/machinery/atmospherics/pipe/simple/hidden/black,
 /obj/effect/floor_decal/corner/lime/diagonal,
 /obj/machinery/firealarm{
@@ -13308,7 +13324,9 @@
 /obj/effect/floor_decal/corner/white{
 	dir = 5
 	},
-/obj/machinery/computer/med_data/laptop,
+/obj/machinery/computer/med_data/laptop{
+	dir = 1
+	},
 /obj/structure/table/glass,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/virology)
@@ -13910,7 +13928,9 @@
 	dir = 9
 	},
 /obj/structure/table/glass,
-/obj/machinery/computer/med_data/laptop,
+/obj/machinery/computer/med_data/laptop{
+	dir = 4
+	},
 /obj/item/device/radio/intercom{
 	dir = 1;
 	pixel_y = 21
@@ -18812,7 +18832,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/security/prison)
 "mms" = (
-/obj/item/weapon/stool/padded,
+/obj/item/weapon/stool/padded{
+	dir = 1
+	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
@@ -24380,9 +24402,10 @@
 "pZB" = (
 /obj/effect/floor_decal/techfloor,
 /obj/structure/table/standard,
-/obj/machinery/clamp,
-/obj/machinery/clamp,
-/obj/machinery/clamp,
+/obj/item/clamp,
+/obj/item/clamp,
+/obj/item/clamp,
+/obj/item/clothing/ears/earmuffs,
 /obj/item/clothing/ears/earmuffs,
 /obj/item/clothing/ears/earmuffs,
 /turf/simulated/floor/tiled/techfloor/grid,
@@ -28921,7 +28944,9 @@
 	layer = 2.4;
 	name = "Floor mounted flash"
 	},
-/obj/item/weapon/stool,
+/obj/item/weapon/stool{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/eris,
 /area/surface/station/security/prison)
 "tek" = (
@@ -31623,6 +31648,9 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/structure/sign/warning/cold{
+	pixel_x = -32
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/hallway/secondary/secondfloor/eva_hallway)
 "uPw" = (
@@ -32405,7 +32433,9 @@
 	dir = 10
 	},
 /obj/structure/disposalpipe/segment,
-/obj/item/weapon/stool,
+/obj/item/weapon/stool{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/prison)
 "voo" = (
@@ -66014,7 +66044,7 @@ jpG
 tGw
 uMZ
 bja
-doE
+gUe
 wPv
 tRr
 rZV
@@ -67589,7 +67619,7 @@ lwx
 tnX
 sBb
 sBb
-ddU
+sBb
 ddU
 ddU
 ddU
@@ -67846,7 +67876,7 @@ jKV
 tnX
 sBb
 sBb
-ddU
+sBb
 ddU
 ddU
 ddU
@@ -68103,7 +68133,7 @@ kny
 tnX
 sBb
 sBb
-ddU
+sBb
 ddU
 ddU
 ddU
@@ -68360,7 +68390,7 @@ kny
 tnX
 sBb
 sBb
-ddU
+sBb
 ddU
 ddU
 ddU
@@ -68539,10 +68569,10 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
 eMs
 eMs
 eMs
