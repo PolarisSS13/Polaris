@@ -115,7 +115,7 @@ var/list/_client_preferences_by_type
 	key = "SOUND_AIRPUMP"
 	enabled_description = "Audible"
 	disabled_description = "Silent"
-	
+
 /datum/client_preference/old_door_sounds
 	description ="Old Door Sounds"
 	key = "SOUND_OLDDOORS"
@@ -284,6 +284,13 @@ var/list/_client_preferences_by_type
 	if(preference_mob && preference_mob.plane_holder)
 		var/datum/plane_holder/PH = preference_mob.plane_holder
 		PH.set_vis(VIS_STATUS, enabled)
+
+/datum/client_preference/show_lore_news
+	description = "Lore News Popup"
+	key = "NEWS_POPUP"
+	enabled_by_default = TRUE
+	enabled_description = "Popup New On Login"
+	disabled_description = "Do Nothing"
 
 /********************
 * Staff Preferences *
