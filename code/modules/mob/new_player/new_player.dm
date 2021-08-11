@@ -76,8 +76,13 @@
 
 	output += "</div>"
 
+	if (client.prefs.lastlorenews == GLOB.news_data.newsindex)
+		client.seen_news = 1
+
 	if(GLOB.news_data.station_newspaper && !client.seen_news)
 		show_latest_news(GLOB.news_data.station_newspaper)
+		client.prefs.lastnews = GLOB.news_data.newsindex
+		SScharacter_setup.queue_preferences_save(client.prefs)
 
 	panel = new(src, "Welcome","Welcome", 500, 480, src)
 	panel.set_window_options("can_close=0")
