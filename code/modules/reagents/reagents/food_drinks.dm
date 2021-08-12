@@ -8,7 +8,7 @@
 	reagent_state = SOLID
 	metabolism = REM * 4
 	ingest_met = REM * 4
-	var/nutriment_factor = 30 // Per unit
+	nutriment_factor = 30 // Per unit
 	var/injectable = 0
 	color = "#664330"
 

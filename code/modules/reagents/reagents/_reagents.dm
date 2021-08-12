@@ -7,6 +7,7 @@
 	var/description = "A non-descript chemical."
 	var/taste_description = "bitterness"
 	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
+	var/nutriment_factor = 2
 	var/datum/reagents/holder = null
 	var/reagent_state = SOLID
 	var/list/data = null

@@ -80,7 +80,8 @@
 
 	ingest_met = REM * 2
 
-	var/nutriment_factor = 2	///It is food, but you are probably going to die before it actually makes you full in any way.
+	nutriment_factor = 2	///It is food, but you are probably going to die before it actually makes you full in any way.
+
 	var/strength = 10			// This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
 
