@@ -1100,6 +1100,7 @@
 	description = "An opaque white liquid produced by the mammary glands of mammals."
 	taste_description = "milk"
 	color = "#DFDFDF"
+	nutriment_factor = 3
 
 	glass_name = "milk"
 	glass_desc = "White and nutritious goodness!"
@@ -1136,6 +1137,7 @@
 	description = "The fatty, still liquid part of milk. Why don't you mix this with sum scotch, eh?"
 	taste_description = "thick milk"
 	color = "#DFD7AF"
+	nutriment_factor = 7	///Literally fatty milk
 
 	glass_name = "cream"
 	glass_desc = "Ewwww..."

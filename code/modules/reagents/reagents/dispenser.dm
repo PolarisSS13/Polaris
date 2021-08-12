@@ -80,8 +80,8 @@
 
 	ingest_met = REM * 2
 
-	var/nutriment_factor = 0
-	var/strength = 10 // This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
+	var/nutriment_factor = 2	///It is food, but you are probably going to die before it actually makes you full in any way.
+	var/strength = 10			// This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
 	var/toxicity = 1
 
 	var/druggy = 0
@@ -91,7 +91,7 @@
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
-	allergen_factor = 0.5	//simulates mixed drinks containing less of the allergen, as they have only a single actual reagent unlike food
+	allergen_factor = 0.5		//simulates mixed drinks containing less of the allergen, as they have only a single actual reagent unlike food
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
