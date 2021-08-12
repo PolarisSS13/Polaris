@@ -142,7 +142,7 @@
 	exclaim_verb = "shouts"
 	written_style = "solcommon"
 	colour = "deadsay"
-	key = "m"
+	key = "i"
 	machine_understands = 0
 	flags = RESTRICTED
 	syllables = list("rus","zem","ave","groz","ski","ska","ven","konst","pol","lin","svy",
