@@ -125,13 +125,8 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 			. += "It is assembled."
 
 /obj/structure/particle_accelerator/attackby(obj/item/W, mob/user)
-	if(istool(W))
-		if(src.process_tool_hit(W,user))
-			return
-	..()
-	return
-
-
+	return src.process_tool_hit(W,user) || ..()
+	
 /obj/structure/particle_accelerator/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
 	if(master?.active)
@@ -197,9 +192,9 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/structure/particle_accelerator/proc/process_tool_hit(var/obj/item/O, var/mob/user)
 	if(!(O) || !(user))
-		return 0
+		return FALSE
 	if(!ismob(user) || !isobj(O))
-		return 0
+		return FALSE
 	var/temp_state = src.construction_state
 
 	switch(src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
@@ -237,13 +232,13 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 					"You open the access panel.")
 				temp_state--
 	if(temp_state == src.construction_state)//Nothing changed
-		return 0
-	else
-		src.construction_state = temp_state
-		if(src.construction_state < 3)//Was taken apart, update state
-			update_state()
-		update_icon()
-		return 1
+		return FALSE
+
+	src.construction_state = temp_state
+	if(src.construction_state < 3)//Was taken apart, update state
+		update_state()
+	update_icon()
+	return TRUE
 
 
 
@@ -305,11 +300,7 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 
 /obj/machinery/particle_accelerator/attackby(obj/item/W, mob/user)
-	if(istool(W))
-		if(src.process_tool_hit(W,user))
-			return
-	..()
-	return
+	return src.process_tool_hit(W,user) || ..()
 
 /obj/machinery/particle_accelerator/ex_act(severity)
 	switch(severity)
@@ -332,9 +323,9 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 /obj/machinery/particle_accelerator/proc/process_tool_hit(var/obj/item/O, var/mob/user)
 	if(!(O) || !(user))
-		return 0
+		return FALSE
 	if(!ismob(user) || !isobj(O))
-		return 0
+		return FALSE
 	var/temp_state = src.construction_state
 	switch(src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
 		if(0)
@@ -372,14 +363,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 				temp_state--
 				active = 0
 	if(temp_state == src.construction_state)//Nothing changed
-		return 0
-	else
-		if(src.construction_state < 3)//Was taken apart, update state
-			update_state()
-			if(use_power)
-				update_use_power(USE_POWER_OFF)
-		src.construction_state = temp_state
-		if(src.construction_state >= 3)
-			update_use_power(USE_POWER_IDLE)
-		update_icon()
-		return 1
+		return FALSE
+
+	if(src.construction_state < 3)//Was taken apart, update state
+		update_state()
+		if(use_power)
+			update_use_power(USE_POWER_OFF)
+	src.construction_state = temp_state
+	if(src.construction_state >= 3)
+		update_use_power(USE_POWER_IDLE)
+	update_icon()
+	return TRUE

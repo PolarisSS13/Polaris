@@ -142,19 +142,24 @@ Proc for attack log creation, because really why not
 	else
 		return pick("chest", "groin")
 
-/proc/do_mob(mob/user , mob/target, time = 30, target_zone = 0, uninterruptible = FALSE, progress = TRUE, ignore_movement = FALSE)
+/proc/do_mob(mob/user , mob/target, delay = 30, target_zone = 0, uninterruptible = FALSE, progress = TRUE, ignore_movement = FALSE)
+	if(delay < 0)
+		return FALSE
 	if(!user || !target)
-		return 0
+		return FALSE
+	if(delay == 0)
+		return TRUE
+	
 	var/user_loc = user.loc
 	var/target_loc = target.loc
 
 	var/holding = user.get_active_hand()
 	var/datum/progressbar/progbar
 	if (progress)
-		progbar = new(user, time, target)
+		progbar = new(user, delay, target)
 
-	var/endtime = world.time+time
 	var/starttime = world.time
+	var/endtime = starttime + delay
 	. = TRUE
 	while (world.time < endtime)
 		stoplag(1)
@@ -190,10 +195,12 @@ Proc for attack log creation, because really why not
 		qdel(progbar)
 
 /proc/do_after(mob/user, delay, atom/target = null, needhand = TRUE, progress = TRUE, incapacitation_flags = INCAPACITATION_DEFAULT, ignore_movement = FALSE, max_distance = null)
+	if(delay < 0)
+		return FALSE
 	if(!user)
-		return 0
+		return FALSE
 	if(!delay)
-		return 1 //Okay. Done.
+		return TRUE //Okay. Done.
 	var/atom/target_loc = null
 	if(target)
 		target_loc = target.loc
@@ -212,9 +219,9 @@ Proc for attack log creation, because really why not
 	if (progress)
 		progbar = new(user, delay, target)
 
-	var/endtime = world.time + delay
 	var/starttime = world.time
-	. = 1
+	var/endtime = starttime + delay
+	. = TRUE
 	while (world.time < endtime)
 		stoplag(1)
 		if(progress)

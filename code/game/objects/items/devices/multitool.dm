@@ -28,8 +28,7 @@
 	var/obj/machinery/clonepod/connecting //same for cryopod linkage
 	var/obj/machinery/connectable	//Used to connect machinery.
 	var/weakref_wiring //Used to store weak references for integrated circuitry. This is now the Omnitool.
-	toolspeed = 1
-	tool_qualities = list(TOOL_MULTITOOL)
+	tool_qualities = list(TOOL_MULTITOOL = TOOL_QUALITY_STANDARD)
 
 /obj/item/device/multitool/attack_self(mob/living/user)
 	var/choice = alert("What do you want to do with \the [src]?","Multitool Menu", "Switch Mode", "Clear Buffers", "Cancel")
@@ -68,7 +67,7 @@ n
 /obj/item/device/multitool/cyborg
 	name = "multitool"
 	desc = "Optimised and stripped-down version of a regular multitool."
-	toolspeed = 0.5
+	tool_qualities = list(TOOL_MULTITOOL = TOOL_QUALITY_DECENT)
 
 
 
@@ -90,5 +89,5 @@ n
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_multitool)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "multitool"
-	toolspeed = 0.1
+	tool_qualities = list(TOOL_MULTITOOL = TOOL_QUALITY_BEST)
 	origin_tech = list(TECH_MAGNET = 5, TECH_ENGINEERING = 5)

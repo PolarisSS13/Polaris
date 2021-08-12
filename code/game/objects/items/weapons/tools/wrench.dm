@@ -23,7 +23,7 @@
 	name = "automatic wrench"
 	desc = "An advanced robotic wrench. Can be found in industrial synthetic shells."
 	usesound = 'sound/items/drill_use.ogg'
-	toolspeed = 0.5
+	tool_qualities = list(TOOL_WRENCH =  TOOL_QUALITY_DECENT)
 
 /obj/item/weapon/tool/wrench/hybrid	// Slower and bulkier than normal power tools, but it has the power of reach. If reach even worked half the time.
 	name = "strange wrench"
@@ -37,7 +37,7 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_PHORON = 2)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked", "warped", "blasted")
 	usesound = 'sound/effects/stealthoff.ogg'
-	toolspeed = 0.5
+	tool_qualities = list(TOOL_WRENCH =  TOOL_QUALITY_DECENT)
 	reach = 2
 
 
@@ -63,40 +63,6 @@
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "wrench"
 	usesound = 'sound/effects/empulse.ogg'
-	toolspeed = 0.1
+	tool_qualities = list(TOOL_WRENCH =  TOOL_QUALITY_BEST)
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
-
-/obj/item/weapon/tool/wrench/power
-	name = "hand drill"
-	desc = "A simple powered hand drill. It's fitted with a bolt bit."
-	icon_state = "drill_bolt"
-	item_state = "drill"
-	usesound = 'sound/items/drill_use.ogg'
-	matter = list(MAT_STEEL = 150, MAT_SILVER = 50)
-	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	force = 8
-	w_class = ITEMSIZE_SMALL
-	throwforce = 8
-	attack_verb = list("drilled", "screwed", "jabbed")
-	toolspeed = 0.25
-	var/obj/item/weapon/tool/screwdriver/power/counterpart = null
-
-/obj/item/weapon/tool/wrench/power/Initialize(var/ml, no_counterpart = TRUE)
-	. = ..()
-	if(!counterpart && no_counterpart)
-		counterpart = new(src, FALSE)
-		counterpart.counterpart = src
-
-/obj/item/weapon/tool/wrench/power/Destroy()
-	if(counterpart)
-		counterpart.counterpart = null // So it can qdel cleanly.
-		QDEL_NULL(counterpart)
-	return ..()
-
-/obj/item/weapon/tool/wrench/power/attack_self(mob/user)
-	playsound(src,'sound/items/change_drill.ogg',50,1)
-	user.drop_item(src)
-	counterpart.forceMove(get_turf(src))
-	src.forceMove(counterpart)
-	user.put_in_active_hand(counterpart)
-	to_chat(user, "<span class='notice'>You attach the screw driver bit to [src].</span>")
+	

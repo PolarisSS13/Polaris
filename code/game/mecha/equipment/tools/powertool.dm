@@ -37,7 +37,7 @@
 	name = "pneumatic prybar"
 	desc = "An exosuit-mounted pneumatic prybar."
 	icon_state = "mecha_crowbar"
-	tooltype = /obj/item/weapon/tool/crowbar/power
+	tooltype = /obj/item/weapon/tool/hydraulic_cutter
 	ready_sound = 'sound/mecha/gasdisconnected.ogg'
 
 /obj/item/mecha_parts/mecha_equipment/tool/powertool/cutter
@@ -51,5 +51,5 @@
 	name = "pneumatic screwdriver"
 	desc = "An exosuit-mounted pneumatic screwdriver."
 	icon_state = "mecha_screwdriver"
-	tooltype = /obj/item/weapon/tool/screwdriver/power
+	tooltype = /obj/item/weapon/tool/powerdrill
 	ready_sound = 'sound/mecha/gasdisconnected.ogg'

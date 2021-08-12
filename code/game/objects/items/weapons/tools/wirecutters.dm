@@ -63,7 +63,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wirecutters)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cutters"
-	toolspeed = 0.1
+	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_BEST)
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 4)
 	random_color = FALSE
 
@@ -71,7 +71,7 @@
 	name = "wirecutters"
 	desc = "This cuts wires.  With science."
 	usesound = 'sound/items/jaws_cut.ogg'
-	toolspeed = 0.5
+	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_GOOD)
 
 /obj/item/weapon/tool/wirecutters/hybrid
 	name = "strange wirecutters"
@@ -81,7 +81,7 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_PHORON = 2)
 	attack_verb = list("pinched", "nipped", "warped", "blasted")
 	usesound = 'sound/effects/stealthoff.ogg'
-	toolspeed = 0.4
+	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_GOOD)
 	reach = 2
 
 /obj/item/weapon/tool/wirecutters/power

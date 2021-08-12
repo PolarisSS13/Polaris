@@ -3,7 +3,7 @@
 /obj/
 	var/surgery_odds = 0 // Used for tables/etc which can have surgery done of them.
 
-/datum/surgery_step
+/decl/surgery_step
 	var/priority = 0	//steps with higher priority would be attempted first
 
 	var/req_open = 1	//1 means the part must be cut open, 0 means it doesn't
@@ -28,30 +28,20 @@
 	var/blood_level = 0
 
 //returns how well tool is suited for this step
-/datum/surgery_step/proc/tool_quality(obj/item/tool)
-	for (var/T in allowed_tools)
-		if (istype(tool,T))
-			return allowed_tools[T]
+/decl/surgery_step/proc/tool_quality(obj/item/tool)
+	if(!tool)
+		return 0
+	if(tool.type in allowed_tools)
+		return allowed_tools[tool.type]
 
 	for(var/P in allowed_procs)
-		switch(P)
-			if(TOOL_SCREWDRIVER)
-				if(tool.get_tool_quality(TOOL_SCREWDRIVER))
-					return allowed_procs[P]
-			if(TOOL_CROWBAR)
-				if(tool.get_tool_quality(TOOL_CROWBAR))
-					return allowed_procs[P]
-			if(TOOL_WIRECUTTER)
-				if(tool.get_tool_quality(TOOL_WIRECUTTER))
-					return allowed_procs[P]
-			if(TOOL_WRENCH)
-				if(tool.get_tool_quality(TOOL_WRENCH))
-					return allowed_procs[P]
+		if(tool.get_tool_quality(P))
+			return allowed_procs[P]
 	return 0
 
 
 // Checks if this step applies to the user mob at all
-/datum/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
+/decl/surgery_step/proc/is_valid_target(mob/living/carbon/human/target)
 	if(!hasorgans(target))
 		return 0
 
@@ -70,7 +60,7 @@
 // Let's check if stuff blocks us from doing surgery on them
 // TODO: make it based on area coverage rather than just forbid spacesuits?
 // Returns true if target organ is covered
-/datum/surgery_step/proc/coverage_check(mob/living/user, mob/living/carbon/human/target, obj/item/organ/external/affected, obj/item/tool)
+/decl/surgery_step/proc/coverage_check(mob/living/user, mob/living/carbon/human/target, obj/item/organ/external/affected, obj/item/tool)
 	if(!affected)
 		return FALSE
 
@@ -84,11 +74,11 @@
 	return FALSE
 
 // checks whether this step can be applied with the given user and target
-/datum/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return 0
 
 // does stuff to begin the step, usually just printing messages. Moved germs transfering and bloodying here too
-/datum/surgery_step/proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/begin_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (can_infect && affected)
 		spread_germs_to_organ(affected, user)
@@ -101,11 +91,11 @@
 	return
 
 // does stuff to end the step, which is normally print a message + do whatever this step changes
-/datum/surgery_step/proc/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return
 
 // stuff that happens when the step fails
-/datum/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
+/decl/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return null
 
 
@@ -119,28 +109,17 @@
 
 	E.germ_level = max(germ_level,E.germ_level) //as funny as scrubbing microbes out with clean gloves is - no.
 
-
-/obj/item/proc/can_do_surgery(mob/living/carbon/M, mob/living/user)
-//	if(M == user)
-//		return 0
-	if(!ishuman(M))
-		return 1
-
-	return 1
-
 /obj/item/proc/do_surgery(mob/living/carbon/M, mob/living/user)
-	if(!can_do_surgery(M, user))
-		return 0
 	if(!istype(M))
-		return 0
+		return FALSE
 	if (user.a_intent == I_HURT)	//check for Hippocratic Oath
-		return 0
+		return FALSE
 	var/zone = user.zone_sel.selecting
 	if(zone in M.op_stage.in_progress) //Can't operate on someone repeatedly.
 		to_chat(user, "<span class='warning'>You can't operate on this area while surgery is already in progress.</span>")
-		return 1
+		return TRUE
 
-	for(var/datum/surgery_step/S in surgery_steps)
+	for(var/decl/surgery_step/S in surgery_steps)
 		//check if tool is right or close enough and if this step is possible
 		if(S.tool_quality(src))
 			var/step_is_valid = S.can_use(user, M, zone, src)
@@ -150,10 +129,10 @@
 					to_chat(user, "<span class='critical'>You focus on attempting to perform surgery upon yourself.</span>")
 
 					if(!do_after(user, 3 SECONDS, M))
-						return 0
+						return FALSE
 
 				if(step_is_valid == SURGERY_FAILURE) // This is a failure that already has a message for failing.
-					return 1
+					return TRUE
 				M.op_stage.in_progress += zone
 				S.begin_step(user, M, zone, src)		//start on it
 				var/success = TRUE
@@ -183,8 +162,8 @@
 				if (ishuman(M))
 					var/mob/living/carbon/human/H = M
 					H.update_surgery()
-				return	1	  												//don't want to do weapony things after surgery
-	return 0
+				return	TRUE  												//don't want to do weapony things after surgery
+	return FALSE
 
 /proc/sort_surgeries()
 	var/gap = surgery_steps.len
@@ -196,8 +175,8 @@
 		if(gap < 1)
 			gap = 1
 		for(var/i = 1; gap + i <= surgery_steps.len; i++)
-			var/datum/surgery_step/l = surgery_steps[i]		//Fucking hate
-			var/datum/surgery_step/r = surgery_steps[gap+i]	//how lists work here
+			var/decl/surgery_step/l = surgery_steps[i]		//Fucking hate
+			var/decl/surgery_step/r = surgery_steps[gap+i]	//how lists work here
 			if(l.priority < r.priority)
 				surgery_steps.Swap(i, gap + i)
 				swapped = 1

@@ -25,7 +25,7 @@
 
 /obj/random/tool/powermaint/item_to_spawn()
 	return pick(prob(320);/obj/random/tool,
-				prob(1);/obj/item/weapon/tool/screwdriver/power,
+				prob(1);/obj/item/weapon/tool/powerdrill,
 				prob(1);/obj/item/weapon/tool/wirecutters/power,
 				prob(15);/obj/item/weapon/weldingtool/electric,
 				prob(5);/obj/item/weapon/weldingtool/experimental)
@@ -36,7 +36,7 @@
 	icon_state = "tool_2"
 
 /obj/random/tool/power/item_to_spawn()
-	return pick(/obj/item/weapon/tool/screwdriver/power,
+	return pick(/obj/item/weapon/tool/powerdrill,
 				/obj/item/weapon/tool/wirecutters/power,
 				/obj/item/weapon/weldingtool/electric,
 				/obj/item/weapon/weldingtool/experimental)

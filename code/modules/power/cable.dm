@@ -947,7 +947,7 @@ var/list/possible_cable_coil_colours = list(
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = null
-	toolspeed = 0.25
+	tool_qualities = list(TOOL_CABLE_COIL =  TOOL_QUALITY_GOOD)
 
 /obj/item/stack/cable_coil/alien/Initialize(var/ml, length = MAXCOIL, var/param_color = null)		//There has to be a better way to do this.
 	. = ..()
