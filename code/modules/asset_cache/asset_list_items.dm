@@ -77,25 +77,28 @@
 // 		"emoji"			= 'icons/pda_icons/pda_emoji.png'
 // 	)
 
-// /datum/asset/spritesheet/simple/paper
-// 	name = "paper"
-// 	assets = list(
-// 		"stamp-clown" = 'icons/stamp_icons/large_stamp-clown.png',
-// 		"stamp-deny" = 'icons/stamp_icons/large_stamp-deny.png',
-// 		"stamp-ok" = 'icons/stamp_icons/large_stamp-ok.png',
-// 		"stamp-hop" = 'icons/stamp_icons/large_stamp-hop.png',
-// 		"stamp-cmo" = 'icons/stamp_icons/large_stamp-cmo.png',
-// 		"stamp-ce" = 'icons/stamp_icons/large_stamp-ce.png',
-// 		"stamp-hos" = 'icons/stamp_icons/large_stamp-hos.png',
-// 		"stamp-rd" = 'icons/stamp_icons/large_stamp-rd.png',
-// 		"stamp-cap" = 'icons/stamp_icons/large_stamp-cap.png',
-// 		"stamp-qm" = 'icons/stamp_icons/large_stamp-qm.png',
-// 		"stamp-law" = 'icons/stamp_icons/large_stamp-law.png',
-// 		"stamp-chap" = 'icons/stamp_icons/large_stamp-chap.png',
-// 		"stamp-mime" = 'icons/stamp_icons/large_stamp-mime.png',
-// 		"stamp-centcom" = 'icons/stamp_icons/large_stamp-centcom.png',
-// 		"stamp-syndicate" = 'icons/stamp_icons/large_stamp-syndicate.png'
-// 	)
+
+/datum/asset/simple/paper
+	assets = list(
+		"grandhotel.woff" = 'html/fonts/OFL/GrandHotel.woff',
+		"lashema.woff" = 'html/fonts/OFL/Lashema.woff',
+		"sourcecodepro.woff" = 'html/fonts/OFL/SourceCodePro.woff',
+		"sovjetbox.woff" = 'html/fonts/OFL/SovjetBox.woff',
+		"torsha.woff" = 'html/fonts/OFL/Torsha.woff',
+		"web3of9ascii.woff" = 'html/fonts/OFL/Web3Of9ASCII.woff',
+		"zeshit.woff" = 'html/fonts/OFL/zeshit.woff',
+		"bilboinc.woff" = 'html/fonts/OFL/BilboINC.woff',
+		"runasans.woff" = 'html/fonts/OFL/RunaSans.woff',
+		"classica.woff" = 'html/fonts/OFL/Classica.woff',
+		"copt-b.woff" = 'html/fonts/OFL/Copt-B.woff',
+		"kawkabmono.woff" = 'html/fonts/OFL/KawkabMono.woff',
+		"kaushanscript.woff" = 'html/fonts/OFL/KaushanScript.woff',
+		"charakter-c.woff" = 'html/fonts/OFL/Charakter-C.woff',
+		"kitisakkullian.woff" = 'html/fonts/OFL/Kitisakkullian.woff',
+		"lack.woff" = 'html/fonts/OFL/Lack.woff',
+		"s3ij4bold.woff" = 'html/fonts/OFL/s3ij4sbold.woff',
+		"slowscript-one.woff" = 'html/fonts/OFL/SlowScript-One.woff'
+		)
 
 
 // /datum/asset/simple/irv

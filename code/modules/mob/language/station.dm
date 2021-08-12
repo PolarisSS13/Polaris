@@ -24,10 +24,12 @@
 
 /datum/language/unathi
 	name = LANGUAGE_UNATHI
+	short = "UNA"
 	desc = "The common language of the Moghes Hegemony, composed of sibilant hisses and rattles. Spoken natively by Unathi."
 	speech_verb = "hisses"
 	ask_verb = "hisses"
 	exclaim_verb = "roars"
+	written_style = "sintaunathi"
 	colour = "soghun"
 	key = "o"
 	flags = WHITELISTED
@@ -51,10 +53,12 @@
 
 /datum/language/tajaran
 	name = LANGUAGE_SIIK
+	short = "SIIK"
 	desc = "The most prevalant language of Meralar, composed of expressive yowls and chirps. Native to the Tajaran."
 	speech_verb = "mrowls"
 	ask_verb = "mrowls"
 	exclaim_verb = "yowls"
+	written_style = "siik"
 	colour = "tajaran"
 	key = "j"
 	flags = WHITELISTED
@@ -73,10 +77,12 @@
 
 /datum/language/tajaranakhani
 	name = LANGUAGE_AKHANI
+	short = "AKH"
 	desc = "The language of the sea-faring Njarir'Akhan Tajaran. Borrowing some elements from Siik, the language is distinctly more structured."
 	speech_verb = "chatters"
 	ask_verb = "mrowls"
 	exclaim_verb = "wails"
+	written_style = "akhani"
 	colour = "akhani"
 	key = "h"
 	flags = WHITELISTED
@@ -113,11 +119,13 @@
 
 /datum/language/skrell
 	name = LANGUAGE_SKRELLIAN
+	short = "SKR"
 	desc = "A set of warbles and hums, the language itself a complex mesh of both melodic and rhythmic components, exceptionally capable of conveying intent and emotion of the speaker."
 	speech_verb = "warbles"
 	ask_verb = "warbles"
 	exclaim_verb = "sings"
 	whisper_verb = "hums"
+	written_style = "skrellian"
 	colour = "skrell"
 	key = "k"
 	space_chance = 30
@@ -126,11 +134,13 @@
 
 /datum/language/skrellfar
 	name = LANGUAGE_SKRELLIANFAR
+	short = "FARK"
 	desc = "The most common language among the Skrellian Far Kingdoms. Has an even higher than usual concentration of inaudible phonemes."
 	speech_verb = "warbles"
 	ask_verb = "warbles"
 	exclaim_verb = "sings"
 	whisper_verb = "hums"
+	written_style = "skrellian"
 	colour = "skrellfar"
 	key = "p"
 	space_chance = 30
@@ -144,9 +154,11 @@
 
 /datum/language/human
 	name = LANGUAGE_SOL_COMMON
+	short = "SOL"
 	desc = "A bastardized hybrid of many languages, including Chinese, English, French, and more; it is the common language of the Sol system."
 	speech_verb = "says"
 	whisper_verb = "whispers"
+	written_style = "solcommon"
 	colour = "solcom"
 	key = "1"
 	flags = WHITELISTED
@@ -171,10 +183,12 @@
 
 /datum/language/machine
 	name = LANGUAGE_EAL
+	short = "EAL"
 	desc = "An efficient language of encoded tones developed by positronics."
 	speech_verb = "whistles"
 	ask_verb = "chirps"
 	exclaim_verb = "whistles loudly"
+	written_style = "encodedaudiolanguage"
 	colour = "changeling"
 	key = "6"
 	flags = NO_STUTTER
@@ -189,10 +203,12 @@
 
 /datum/language/teshari
 	name = LANGUAGE_SCHECHI
+	short = "SCHI"
 	desc = "A trilling language spoken by the diminutive Teshari."
 	speech_verb = "chirps"
 	ask_verb = "chirrups"
 	exclaim_verb = "trills"
+	written_style = "schechi"
 	colour = "alien"
 	key = "v"
 	flags = WHITELISTED
@@ -209,10 +225,12 @@
 
 /datum/language/zaddat
 	name = LANGUAGE_ZADDAT
+	short = "ZAD"
 	desc = "A harsh buzzing language created by the Zaddat following their exodus from their homeworld."
 	speech_verb = "buzzes"
 	ask_verb = "buzzes"
 	exclaim_verb = "croaks"
+	written_style = "sintaunathi"
 	colour = "zaddat"
 	key = "z"
 	flags = WHITELISTED

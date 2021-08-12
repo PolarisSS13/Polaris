@@ -153,13 +153,22 @@
 	else
 		. += "<span class='notice'>You have to go closer if you want to read it.</span>"
 
-/obj/item/weapon/paper/proc/show_content(var/mob/user, var/forceshow=0)
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/observer/dead) || istype(user, /mob/living/silicon)) && !forceshow)
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[stars(info)][stamps]</BODY></HTML>", "window=[name]")
-		onclose(user, "[name]")
-	else
-		user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info][stamps]</BODY></HTML>", "window=[name]")
-		onclose(user, "[name]")
+/obj/item/weapon/paper/proc/show_content(mob/user, forceshow)
+	var/datum/browser/paper_win = new(user, name, null, 450, 500, null, TRUE)
+	paper_win.set_content(get_content(user, can_read(user, forceshow)))
+	paper_win.add_stylesheet("paper_languages", 'html/browser/paper_languages.css')
+	paper_win.open()
+
+/obj/item/weapon/paper/proc/can_read(var/mob/user, var/forceshow = FALSE)
+	var/can_read = ((istype(user, /mob/living/carbon/human) || istype(user, /mob/observer/dead) || istype(user, /mob/living/silicon)) || forceshow)
+	if(!forceshow && istype(user,/mob/living/silicon/ai))
+		var/mob/living/silicon/ai/AI
+		can_read = get_dist(src, AI.camera) < 2
+	return can_read
+
+/obj/item/weapon/paper/proc/get_content(var/mob/user, var/can_read = TRUE)
+	return "<head><title>[capitalize(name)]</title><style>body {background-color: [color];}</style></head><body>[can_read ? parse_languages(user, info) : stars(info)][stamps]</body>"
+
 
 /obj/item/weapon/paper/verb/rename()
 	set name = "Rename paper"
@@ -307,6 +316,8 @@
 /obj/item/weapon/paper/proc/parsepencode(var/t, var/obj/item/weapon/pen/P, mob/user as mob, var/iscrayon = 0)
 //	t = copytext(sanitize(t),1,MAX_MESSAGE_LEN)
 
+	t = parse_languages(user, t, TRUE)
+
 	t = replacetext(t, "\[center\]", "<center>")
 	t = replacetext(t, "\[/center\]", "</center>")
 	t = replacetext(t, "\[br\]", "<BR>")
@@ -391,19 +402,65 @@
 		"<span class='[class]'>You hold \the [P] up to \the [src], burning it slowly.</span>")
 		playsound(src, 'sound/bureaucracy/paperburn.ogg', 50, 1)
 
-		spawn(20)
-			if(get_dist(src, user) < 2 && user.get_active_hand() == P && P.lit)
-				user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
-				"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+		addtimer(CALLBACK(src, .proc/burnpaper_callback, P, user, class), 20, TIMER_UNIQUE)
 
-				if(user.get_inactive_hand() == src)
-					user.drop_from_inventory(src)
 
-				new /obj/effect/decal/cleanable/ash(src.loc)
-				qdel(src)
+/obj/item/weapon/paper/proc/burnpaper_callback(obj/item/P, mob/user, class = "warning")
+	if (QDELETED(user) || QDELETED(src))
+		return
 
+	if(get_dist(src, user) < 2 && user.get_active_hand() == P)
+		user.visible_message("<span class='[class]'>[user] burns right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>", \
+		"<span class='[class]'>You burn right through \the [src], turning it to ash. It flutters through the air before settling on the floor in a heap.</span>")
+
+		if(user.get_inactive_hand() == src)
+			user.drop_from_inventory(src)
+
+		new /obj/effect/decal/cleanable/ash(src.loc)
+		qdel(src)
+
+	else
+		to_chat(user, "<span class='warning'>You must hold \the [P] steady to burn \the [src].</span>")
+
+/**
+ * Takes the paper's info variable, a user, and parses language markers that exist
+ * in it. It returns an HTML string which represents the languages properly.
+ *
+ * @param	user The mob we're parsing the text for.
+ *
+ * @return	An HTML string where all of the [lang][/lang] marker contents are replaced
+ * with scrambled and properly fonted content depending on what languages the user knows.
+ */
+/obj/item/weapon/paper/proc/parse_languages(mob/user, input, language_check = FALSE)
+	// Just a safety fallback.
+	if (!user)
+		return input
+
+	var/static/regex/written_lang_regex
+	if (!written_lang_regex)
+		written_lang_regex = new(@"(\[lang=([#_a-zA-Z0-9\^]{1})])(.*?)(\[\/lang])", "g")
+
+	. = input
+
+	while (written_lang_regex.Find(.))
+		var/datum/language/L = GLOB.language_keys[written_lang_regex.group[2]]
+		// Unknown language.
+		if (!L || !L.written_style)
+			continue
+
+		var/content = written_lang_regex.group[3]
+		var/reader_understands = user.say_understands(null, L)
+
+		// Replace the content with <p>content here</p>
+		if(!reader_understands)
+			if(language_check)
+				. = replacetext(., written_lang_regex.match, "")
 			else
-				to_chat(user, "<font color='red'>You must hold \the [P] steady to burn \the [src].</font>")
+				content = L.scramble(content)
+
+		if(!language_check)
+			// Refer to paper/proc/show_content to edit the spans here.
+			. = replacetext(., written_lang_regex.match, "<span class='[L.written_style] [reader_understands ? "understood" : "scramble"]'>[L.short && reader_understands ? "([L.short]) [content]" : content]</span>")
 
 
 /obj/item/weapon/paper/Topic(href, href_list)
@@ -484,7 +541,10 @@
 
 		update_space(t)
 
-		usr << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]") // Update the window
+		var/datum/browser/paper_win = new(usr, name, null, 450, 500, null, TRUE)
+		paper_win.set_content("<head><title>[capitalize(name)]</title><style>body {background-color: [color];}</style></head><body>[parse_languages(usr, info_links)][stamps]</body>")
+		paper_win.add_stylesheet("paper_languages", 'html/browser/paper_languages.css')
+		paper_win.open()
 
 		playsound(src, pick('sound/bureaucracy/pen1.ogg','sound/bureaucracy/pen2.ogg'), 10)
 
@@ -563,7 +623,10 @@
 		if ( istype(RP) && RP.mode == 2 )
 			RP.RenamePaper(user,src)
 		else
-			user << browse("<HTML><HEAD><TITLE>[name]</TITLE></HEAD><BODY>[info_links][stamps]</BODY></HTML>", "window=[name]")
+			var/datum/browser/paper_win = new(user, name, null, 450, 500, null, TRUE)
+			paper_win.set_content("<head><title>[capitalize(name)]</title><style>body {background-color: [color];}</style></head><body>[info_links][stamps]</body>")
+			paper_win.add_stylesheet("paper_languages", 'html/browser/paper_languages.css')
+			paper_win.open()
 		return
 
 	else if(istype(P, /obj/item/weapon/stamp) || istype(P, /obj/item/clothing/gloves/ring/seal))

@@ -1,0 +1,50 @@
+@font-face { font-family: kawkabmono; src: url(kawkabmono.woff); }
+@font-face { font-family: lashema; src: url(lashema.woff); }
+@font-face { font-family: bilboinc; src: url(bilboinc.woff); }
+@font-face { font-family: classica; src: url(classica.woff); }
+@font-face { font-family: copt-b; src: url(copt-b.woff); }
+@font-face { font-family: kaushanscript; src: url(kaushanscript.woff); }
+@font-face { font-family: lack; src: url(lack.woff); }
+@font-face { font-family: zeshit; src: url(zeshit.woff); }
+@font-face { font-family: slowscript-one; src: url(slowscript-one.woff); }
+@font-face { font-family: torsha; src: url(torsha.woff); }
+@font-face { font-family: sourcecodepro; src: url(sourcecodepro.woff); }
+@font-face { font-family: web3of9ascii; src: url(web3of9ascii.woff); }
+@font-face { font-family: charakter-c; src: url(charakter-c.woff); }
+@font-face { font-family: kitisakkullian; src: url(kitisakkullian.woff); }
+@font-face { font-family: grandhotel; src: url(grandhotel.woff); }
+@font-face { font-family: runasans; src: url(runasans.woff); }
+@font-face { font-family: sovjetbox; src: url(sovjetbox.woff); }
+@font-face { font-family: s3ij4sbold; src: url(s3ij4sbold.woff); }
+
+.gutter.understood { font-family: bilboinc; }
+.gutter.scramble { font-family: bilboinc; }
+
+.tradeband.understood { font-family: classica; }
+.tradeband.scramble { font-family: copt-b; }
+
+.solcommon.understood { font-family: kaushanscript; }
+.solcommon.scramble { font-family: kaushanscript; }
+
+.sintaunathi.understood { font-family: lack; }
+.sintaunathi.scramble { font-family: zeshit; }
+
+.siik.understood { font-family: slowscript-one; }
+.siik.scramble { font-family: torsha; }
+
+.akhani.understood { font-family: charakter-c; }
+.akhani.scramble { font-family: kitisakkullian; }
+
+.skrellian.understood { font-family: grandhotel; }
+.skrellian.scramble { font-family: lashema; }
+
+.encodedaudiolanguage.understood { font-family: sourcecodepro; }
+.encodedaudiolanguage.scramble { font-family: web3of9ascii; }
+
+.schechi.understood { font-family: sovjetbox; }
+.schechi.scramble { font-family: runasans; }
+
+.nralmalic.understood { font-family: s3ij4sbold; }
+.nralmalic.scramble { font-family: s3ij4sbold; font-size: 150%; }
+
+vox

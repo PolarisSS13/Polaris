@@ -41,10 +41,12 @@
 
 /datum/language/vox
 	name = LANGUAGE_VOX
+	short = "VOX"
 	desc = "The common tongue of the various Vox ships making up the Shoal. It sounds like chaotic shrieking to everyone else."
 	speech_verb = "shrieks"
 	ask_verb = "creels"
 	exclaim_verb = "SHRIEKS"
+	written_style = "vox"
 	colour = "vox"
 	key = "5"
 	flags = WHITELISTED
@@ -57,10 +59,12 @@
 
 /datum/language/cultcommon
 	name = LANGUAGE_CULT
+	short = "CULT"
 	desc = "The chants of the occult, the incomprehensible."
 	speech_verb = "intones"
 	ask_verb = "intones"
 	exclaim_verb = "chants"
+	written_style = "cult"
 	colour = "cult"
 	key = "f"
 	flags = RESTRICTED
@@ -131,10 +135,12 @@
 //for your antag purposes.
 /datum/language/minbus
 	name = LANGUAGE_MINBUS
+	short = "MIN"
 	desc = "The Powers That Be have seen it fit to grace you with a special language that sounds like Russian for some reason."
 	speech_verb = "says"
 	ask_verb = "asks"
 	exclaim_verb = "shouts"
+	written_style = "solcommon"
 	colour = "deadsay"
 	key = "r"
 	machine_understands = 0

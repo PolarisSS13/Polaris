@@ -18,9 +18,11 @@
 // 'basic' language; spoken by default.
 /datum/language/common
 	name = LANGUAGE_GALCOM
+	short = "GALCOM"
 	desc = "The common galactic tongue, engineered for cross-species communication."
 	speech_verb = "says"
 	whisper_verb = "whispers"
+	written_style = "galcom"
 	key = "0"
 	flags = RESTRICTED
 	syllables = list(
@@ -40,8 +42,10 @@
 // Galactic common languages (systemwide accepted standards).
 /datum/language/trader
 	name = LANGUAGE_TRADEBAND
+	short = "TRADE"
 	desc = "Spoken by the humans of the upper-class Sagittarius Heights, Tradeband was designed to be pleasing to both humans and their Skrellian trading partners."
 	speech_verb = "enunciates"
+	written_style = "tradeband"
 	colour = "say_quote"
 	key = "2"
 	syllables = list(
@@ -53,9 +57,11 @@
 
 /datum/language/terminus
 	name = LANGUAGE_TERMINUS
+	short = "TERM"
 	desc = "A soft language spoken by the people of the sparsely populated, socially-conscious Precursors' Crypt region."
 	speech_verb = "mentions"
 	exclaim_verb = "insinuates"
+	written_style = "tradeband"
 	colour = "terminus"
 	key = "4"
 	flags = WHITELISTED
@@ -67,8 +73,10 @@
 // Criminal language.
 /datum/language/gutter
 	name = LANGUAGE_GUTTER
+	short = "GUT"
 	desc = "Gutter originated as a Thieves' Cant of sorts during the early colonization era. The language eventually spread from the cartels and triads to the disenfranchised people of the Bowl."
 	speech_verb = "growls"
+	written_style = "gutter"
 	colour = "rough"
 	key = "3"
 	space_chance = 45
@@ -146,7 +154,7 @@
 /datum/language/sign/broadcast(var/mob/living/speaker, var/message, var/speaker_mask)
 	log_say("(SIGN) [message]", speaker)
 	speaker.say_signlang(message, pick(signlang_verb), src)
-	
+
 
 // Silly language for those times when you try to talk a languague you normally can't
 /datum/language/gibberish

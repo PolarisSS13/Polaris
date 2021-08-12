@@ -6,11 +6,13 @@
 
 /datum/language
 	var/name = "an unknown language"  // Fluff name of language if any.
+	var/short                         // a shortened name, for use when languages need to be identified
 	var/desc = "A language."          // Short description for 'Check Languages'.
 	var/speech_verb = "says"          // 'says', 'hisses', 'farts'.
 	var/ask_verb = "asks"             // Used when sentence ends in a ?
 	var/exclaim_verb = "exclaims"     // Used when sentence ends in a !
 	var/whisper_verb                  // Optional. When not specified speech_verb + quietly/softly is used instead.
+	var/written_style                 // CSS style used when writing language down, can't be written if null
 	var/signlang_verb = list("signs", "gestures") // list of emotes that might be displayed if this language has NONVERBAL or SIGNLANG flags
 	var/colour = "body"               // CSS style to use for strings in this language.
 	var/key = "x"                     // Character used to speak in language eg. :o for Unathi.
@@ -20,6 +22,7 @@
 	var/list/space_chance = 55        // Likelihood of getting a space in the random scramble string
 	var/machine_understands = 1		  // Whether machines can parse and understand this language
 	var/list/partial_understanding	  // List of languages that can /somehwat/ understand it, format is: name = chance of understanding a word
+	var/list/scramble_cache = list()  // A map of unscrambled words -> scrambled words, for scrambling.
 
 /datum/language/proc/get_random_name(var/gender, name_count=2, syllable_count=4, syllable_divisor=2)
 	if(!syllables || !syllables.len)
@@ -38,9 +41,6 @@
 		full_name += " [capitalize(lowertext(new_name))]"
 
 	return "[trim(full_name)]"
-
-/datum/language
-	var/list/scramble_cache = list()
 
 /datum/language/proc/scramble(var/input, var/list/known_languages)
 	var/understand_chance = 0
@@ -235,10 +235,12 @@
 //TBD
 /mob/proc/check_lang_data()
 	. = ""
-	
+
 	for(var/datum/language/L in languages)
 		if(!(L.flags & NONGLOBAL))
 			. += "<b>[L.name] ([get_language_prefix()][L.key])</b><br/>[L.desc]<br/><br/>"
+			if(L.written_style)
+				. += "You can write in this language on papers by writing \[lang=[L.key]\]YourTextHere\[/lang\].<br/><br/>"
 
 /mob/living/check_lang_data()
 	. = ""
@@ -252,6 +254,8 @@
 				. += "<b>[L.name] ([get_language_prefix()][L.key])</b> - default - <a href='byond://?src=\ref[src];default_lang=reset'>reset</a><br/>[L.desc]<br/><br/>"
 			else if (can_speak(L))
 				. += "<b>[L.name] ([get_language_prefix()][L.key])</b> - <a href='byond://?src=\ref[src];default_lang=\ref[L]'>set default</a><br/>[L.desc]<br/><br/>"
+				if(L.written_style)
+					. += "You can write in this language on papers by writing \[lang=[L.key]\]YourTextHere\[/lang\].<br/><br/>"
 			else
 				. += "<b>[L.name] ([get_language_prefix()][L.key])</b> - cannot speak!<br/>[L.desc]<br/><br/>"
 
