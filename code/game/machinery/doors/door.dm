@@ -262,7 +262,7 @@
 					repairing = 0
 			return
 
-		if(repairing && I.is_crowbar())
+		if(repairing && I.get_tool_quality(TOOL_CROWBAR))
 			var/datum/material/mat = get_material()
 			var/obj/item/stack/material/repairing_sheet = mat.place_sheet(loc)
 			repairing_sheet.amount += repairing-1

@@ -56,7 +56,7 @@
 
 	src.add_fingerprint(user)
 	if(mode<=0) // It's off
-		if(I.is_screwdriver())
+		if(I.get_tool_quality(TOOL_SCREWDRIVER))
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
 				return
@@ -1554,7 +1554,7 @@
 	if(!I || !user)
 		return
 	src.add_fingerprint(user)
-	if(I.is_screwdriver())
+	if(I.get_tool_quality(TOOL_SCREWDRIVER))
 		if(mode==0)
 			mode=1
 			to_chat(user, "You remove the screws around the power connection.")

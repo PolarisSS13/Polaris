@@ -17,7 +17,7 @@
 	toolspeed = 1
 	drop_sound = 'sound/items/drop/wrench.ogg'
 	pickup_sound = 'sound/items/pickup/wrench.ogg'
-	tool_qualities = list(TOOL_WRENCH)
+	tool_qualities = list(TOOL_WRENCH =  TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/tool/wrench/cyborg
 	name = "automatic wrench"

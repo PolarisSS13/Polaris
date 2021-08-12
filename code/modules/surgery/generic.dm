@@ -209,7 +209,7 @@
 		/obj/item/weapon/material/kitchen/utensil/fork = 50
 	)
 
-	allowed_procs = list(IS_CROWBAR = 75)
+	allowed_procs = list(TOOL_CROWBAR = 75)
 
 	min_duration = 30
 	max_duration = 40

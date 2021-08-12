@@ -103,7 +103,7 @@ field_generator power level display
 	if(active)
 		to_chat(user, "The [src] needs to be off.")
 		return
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		switch(state)
 			if(0)
 				state = 1

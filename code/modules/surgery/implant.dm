@@ -165,7 +165,7 @@
 		/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
-	allowed_procs = list(IS_WIRECUTTER = 75)
+	allowed_procs = list(TOOL_WIRECUTTER = 75)
 
 	min_duration = 80
 	max_duration = 100

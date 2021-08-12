@@ -115,7 +115,7 @@
 		user.drop_item()
 		qdel(W)
 		return
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		if (unwrenched==0)
 			playsound(src, W.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You begin to unfasten \the [src] from the floor...</span>")

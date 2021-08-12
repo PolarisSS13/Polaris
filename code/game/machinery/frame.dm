@@ -304,7 +304,7 @@
 	update_icon()
 
 /obj/structure/frame/attackby(obj/item/P as obj, mob/user as mob)
-	if(P.is_wrench())
+	if(P.get_tool_quality(TOOL_WRENCH))
 		if(state == FRAME_PLACED && !anchored)
 			to_chat(user, "<span class='notice'>You start to wrench the frame into place.</span>")
 			playsound(src, P.usesound, 50, 1)
@@ -357,7 +357,7 @@
 				to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 				return
 
-	else if(P.is_screwdriver())
+	else if(P.get_tool_quality(TOOL_SCREWDRIVER))
 		if(state == FRAME_UNFASTENED)
 			if(need_circuit && circuit)
 				playsound(src, P.usesound, 50, 1)
@@ -452,7 +452,7 @@
 				qdel(src)
 				return
 
-	else if(P.is_crowbar())
+	else if(P.get_tool_quality(TOOL_CROWBAR))
 		if(state == FRAME_UNFASTENED)
 			if(need_circuit && circuit)
 				playsound(src, P.usesound, 50, 1)
@@ -530,7 +530,7 @@
 						break
 				to_chat(user, desc)
 
-	else if(P.is_wirecutter())
+	else if(P.get_tool_quality(TOOL_WIRECUTTER))
 		if(state == FRAME_WIRED)
 			if( \
 				frame_type.frame_class == FRAME_CLASS_COMPUTER || \

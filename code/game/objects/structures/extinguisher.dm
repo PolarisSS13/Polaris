@@ -29,7 +29,7 @@
 			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
 		else
 			opened = !opened
-	if(O.is_wrench())
+	if(O.get_tool_quality(TOOL_WRENCH))
 		if(!has_extinguisher)
 			to_chat(user, "<span class='notice'>You start to unwrench the extinguisher cabinet.</span>")
 			playsound(src, O.usesound, 50, 1)

@@ -265,7 +265,7 @@
 
 	if(W.flags & NOBLUDGEON) return
 
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if(reinf && state >= 1)
 			state = 3 - state
 			update_nearby_icons()
@@ -283,11 +283,11 @@
 			update_verbs()
 			playsound(src, W.usesound, 75, 1)
 			to_chat(user, "<span class='notice'>You have [anchored ? "" : "un"]fastened the window [anchored ? "to" : "from"] the floor.</span>")
-	else if(W.is_crowbar() && reinf && state <= 1)
+	else if(W.get_tool_quality(TOOL_CROWBAR) && reinf && state <= 1)
 		state = 1 - state
 		playsound(src, W.usesound, 75, 1)
 		to_chat(user, "<span class='notice'>You have pried the window [state ? "into" : "out of"] the frame.</span>")
-	else if(W.is_wrench() && !anchored && (!state || !reinf))
+	else if(W.get_tool_quality(TOOL_WRENCH) && !anchored && (!state || !reinf))
 		if(!glasstype)
 			to_chat(user, "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>")
 		else

@@ -99,7 +99,7 @@
 
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && W.is_screwdriver())
+	if(reinforced && W.get_tool_quality(TOOL_SCREWDRIVER))
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -107,7 +107,7 @@
 			update_material()
 		return 1
 
-	if(carpeted && W.is_crowbar())
+	if(carpeted && W.get_tool_quality(TOOL_CROWBAR))
 		user.visible_message("<span class='notice'>\The [user] removes the carpet from \the [src].</span>",
 		                              "<span class='notice'>You remove the carpet from \the [src].</span>")
 		new carpeted_type(loc)
@@ -127,7 +127,7 @@
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
 
-	if(!reinforced && !carpeted && material && W.is_wrench())
+	if(!reinforced && !carpeted && material && W.get_tool_quality(TOOL_WRENCH))
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -138,7 +138,7 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && W.is_wrench())
+	if(!carpeted && !reinforced && !material && W.get_tool_quality(TOOL_WRENCH))
 		dismantle(W, user)
 		return 1
 

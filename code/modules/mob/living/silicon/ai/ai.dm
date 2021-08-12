@@ -760,7 +760,7 @@ var/list/ai_verbs_default = list(
 		var/obj/item/device/aicard/card = W
 		card.grab_ai(src, user)
 
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		if(user == deployed_shell)
 			to_chat(user, "<span class='notice'>The shell's subsystems resist your efforts to tamper with your bolts.</span>")
 			return

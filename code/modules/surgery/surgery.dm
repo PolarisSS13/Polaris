@@ -35,17 +35,17 @@
 
 	for(var/P in allowed_procs)
 		switch(P)
-			if(IS_SCREWDRIVER)
-				if(tool.is_screwdriver())
+			if(TOOL_SCREWDRIVER)
+				if(tool.get_tool_quality(TOOL_SCREWDRIVER))
 					return allowed_procs[P]
-			if(IS_CROWBAR)
-				if(tool.is_crowbar())
+			if(TOOL_CROWBAR)
+				if(tool.get_tool_quality(TOOL_CROWBAR))
 					return allowed_procs[P]
-			if(IS_WIRECUTTER)
-				if(tool.is_wirecutter())
+			if(TOOL_WIRECUTTER)
+				if(tool.get_tool_quality(TOOL_WIRECUTTER))
 					return allowed_procs[P]
-			if(IS_WRENCH)
-				if(tool.is_wrench())
+			if(TOOL_WRENCH)
+				if(tool.get_tool_quality(TOOL_WRENCH))
 					return allowed_procs[P]
 	return 0
 

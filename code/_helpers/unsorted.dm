@@ -1090,7 +1090,7 @@ var/global/list/common_tools = list(
 
 
 /proc/is_wire_tool(obj/item/I)
-	if(istype(I, /obj/item/device/multitool) || I.is_wirecutter())
+	if(istype(I, /obj/item/device/multitool) || I.get_tool_quality(TOOL_WIRECUTTER))
 		return TRUE
 	if(istype(I, /obj/item/device/assembly/signaler))
 		return TRUE
@@ -1151,7 +1151,7 @@ var/global/list/common_tools = list(
 	if(W.sharp)
 		return TRUE
 	return ( \
-		W.is_screwdriver()		     				              || \
+		W.get_tool_quality(TOOL_SCREWDRIVER)		     				              || \
 		istype(W, /obj/item/weapon/pen)                           || \
 		istype(W, /obj/item/weapon/weldingtool)					  || \
 		istype(W, /obj/item/weapon/flame/lighter/zippo)			  || \

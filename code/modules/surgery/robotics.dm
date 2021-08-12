@@ -34,7 +34,7 @@
 		/obj/item/weapon/material/knife = 50
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 100)
+	allowed_procs = list(TOOL_SCREWDRIVER = 100)
 
 	req_open = 0
 
@@ -73,7 +73,7 @@
 		/obj/item/weapon/material/kitchen/utensil = 50
 	)
 
-	allowed_procs = list(IS_CROWBAR = 100)
+	allowed_procs = list(TOOL_CROWBAR = 100)
 
 	min_duration = 30
 	max_duration = 40
@@ -110,7 +110,7 @@
 		/obj/item/weapon/material/kitchen/utensil = 50
 	)
 
-	allowed_procs = list(IS_CROWBAR = 100)
+	allowed_procs = list(TOOL_CROWBAR = 100)
 
 	min_duration = 70
 	max_duration = 100
@@ -237,7 +237,7 @@
 	/obj/item/weapon/surgical/bonegel = 30, 		\
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 100)
+	allowed_procs = list(TOOL_SCREWDRIVER = 100)
 
 	min_duration = 70
 	max_duration = 90
@@ -355,7 +355,7 @@
 ///////////////////////////////////////////////////////////////
 
 /datum/surgery_step/robotics/attach_organ_robotic
-	allowed_procs = list(IS_SCREWDRIVER = 100)
+	allowed_procs = list(TOOL_SCREWDRIVER = 100)
 
 	min_duration = 100
 	max_duration = 120

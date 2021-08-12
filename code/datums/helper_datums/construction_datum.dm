@@ -40,17 +40,17 @@
 /datum/construction/proc/is_right_key(var/obj/item/I) // returns current step num if I is of the right type.
 	var/list/L = steps[steps.len]
 	switch(L["key"])
-		if(IS_SCREWDRIVER)
-			if(I.is_screwdriver())
+		if(TOOL_SCREWDRIVER)
+			if(I.get_tool_quality(TOOL_SCREWDRIVER))
 				return steps.len
-		if(IS_CROWBAR)
-			if(I.is_crowbar())
+		if(TOOL_CROWBAR)
+			if(I.get_tool_quality(TOOL_CROWBAR))
 				return steps.len
-		if(IS_WIRECUTTER)
-			if(I.is_wirecutter())
+		if(TOOL_WIRECUTTER)
+			if(I.get_tool_quality(TOOL_WIRECUTTER))
 				return steps.len
-		if(IS_WRENCH)
-			if(I.is_wrench())
+		if(TOOL_WRENCH)
+			if(I.get_tool_quality(TOOL_WRENCH))
 				return steps.len
 
 	if(istype(I, L["key"]))
@@ -105,34 +105,11 @@
 
 /datum/construction/reversible/is_right_key(var/obj/item/I) // returns index step
 	var/list/L = steps[index]
+	if(I.get_tool_quality(L["key"]))
+		return FORWARD
 
-	switch(L["key"])
-		if(IS_SCREWDRIVER)
-			if(I.is_screwdriver())
-				return FORWARD
-		if(IS_CROWBAR)
-			if(I.is_crowbar())
-				return FORWARD
-		if(IS_WIRECUTTER)
-			if(I.is_wirecutter())
-				return FORWARD
-		if(IS_WRENCH)
-			if(I.is_wrench())
-				return FORWARD
-
-	switch(L["backkey"])
-		if(IS_SCREWDRIVER)
-			if(I.is_screwdriver())
-				return BACKWARD
-		if(IS_CROWBAR)
-			if(I.is_crowbar())
-				return BACKWARD
-		if(IS_WIRECUTTER)
-			if(I.is_wirecutter())
-				return BACKWARD
-		if(IS_WRENCH)
-			if(I.is_wrench())
-				return BACKWARD
+	if(I.get_tool_quality(L["backkey"]))
+		return BACKWARD
 
 	if(istype(I, L["key"]))
 		return FORWARD //to the first step -> forward

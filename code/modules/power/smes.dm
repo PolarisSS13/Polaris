@@ -308,7 +308,7 @@ GLOBAL_LIST_EMPTY(smeses)
 		stat = 0
 		return FALSE
 
-	else if(W.is_wirecutter() && !building_terminal)
+	else if(W.get_tool_quality(TOOL_WIRECUTTER) && !building_terminal)
 		building_terminal = TRUE
 		var/obj/machinery/power/terminal/term
 		for(var/obj/machinery/power/terminal/T in get_turf(user))

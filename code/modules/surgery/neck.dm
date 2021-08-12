@@ -64,7 +64,7 @@
 		/obj/item/weapon/pickaxe = 5
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 75)
+	allowed_procs = list(TOOL_SCREWDRIVER = 75)
 
 	min_duration = 200 //Very. Very. Carefully.
 	max_duration = 300
@@ -105,7 +105,7 @@
 		/obj/item/weapon/surgical/hemostat = 100,
 		/obj/item/weapon/melee/changeling/claw = 40) //Surprisingly, claws are kind of okay at picking things out.
 
-	allowed_procs = list(IS_WIRECUTTER = 60)
+	allowed_procs = list(TOOL_WIRECUTTER = 60)
 
 	min_duration = 90
 	max_duration = 120
@@ -222,7 +222,7 @@
 		/obj/item/weapon/surgical/hemostat = 100,
 		/obj/item/weapon/melee/changeling/claw = 20) //Claws. Good for digging, not so much for moving.
 
-	allowed_procs = list(IS_WIRECUTTER = 60)
+	allowed_procs = list(TOOL_WIRECUTTER = 60)
 
 	min_duration = 90
 	max_duration = 120

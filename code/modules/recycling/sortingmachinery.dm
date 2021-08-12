@@ -430,7 +430,7 @@
 	if(!I || !user)
 		return
 
-	if(I.is_screwdriver())
+	if(I.get_tool_quality(TOOL_SCREWDRIVER))
 		c_mode = !c_mode
 		playsound(src, I.usesound, 50, 1)
 		to_chat(user, "You [c_mode ? "remove" : "attach"] the screws around the power connection.")

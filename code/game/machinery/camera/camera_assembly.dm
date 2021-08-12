@@ -29,7 +29,7 @@
 
 		if(0)
 			// State 0
-			if(W.is_wrench() && isturf(src.loc))
+			if(W.get_tool_quality(TOOL_WRENCH) && isturf(src.loc))
 				playsound(src, W.usesound, 50, 1)
 				to_chat(user, "You wrench the assembly into place.")
 				anchored = 1
@@ -47,7 +47,7 @@
 					state = 2
 				return
 
-			else if(W.is_wrench())
+			else if(W.get_tool_quality(TOOL_WRENCH))
 				playsound(src, W.usesound, 50, 1)
 				to_chat(user, "You unattach the assembly from its place.")
 				anchored = 0
@@ -77,7 +77,7 @@
 
 		if(3)
 			// State 3
-			if(W.is_screwdriver())
+			if(W.get_tool_quality(TOOL_SCREWDRIVER))
 				playsound(src, W.usesound, 50, 1)
 
 				var/input = sanitize(input(usr, "Which networks would you like to connect this camera to? Separate networks with a comma. No Spaces!\nFor example: "+using_map.station_short+",Security,Secret ", "Set Network", camera_network ? camera_network : NETWORK_DEFAULT))
@@ -115,7 +115,7 @@
 							break
 				return
 
-			else if(W.is_wirecutter())
+			else if(W.get_tool_quality(TOOL_WIRECUTTER))
 
 				new/obj/item/stack/cable_coil(get_turf(src), 2)
 				playsound(src, W.usesound, 50, 1)
@@ -132,7 +132,7 @@
 		return
 
 	// Taking out upgrades
-	else if(W.is_crowbar() && upgrades.len)
+	else if(W.get_tool_quality(TOOL_CROWBAR) && upgrades.len)
 		var/obj/U = locate(/obj) in upgrades
 		if(U)
 			to_chat(user, "You unattach an upgrade from the assembly.")

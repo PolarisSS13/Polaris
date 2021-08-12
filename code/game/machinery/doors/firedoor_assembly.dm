@@ -31,7 +31,7 @@
 				wired = 1
 				to_chat(user, "<span class='notice'>You wire \the [src].</span>")
 
-	else if(C.is_wirecutter() && wired )
+	else if(C.get_tool_quality(TOOL_WIRECUTTER) && wired )
 		playsound(src, C.usesound, 100, 1)
 		user.visible_message("[user] cuts the wires from \the [src].", "You start to cut the wires from \the [src].")
 
@@ -54,7 +54,7 @@
 			qdel(src)
 		else
 			to_chat(user, "<span class='warning'>You must secure \the [src] first!</span>")
-	else if(C.is_wrench())
+	else if(C.get_tool_quality(TOOL_WRENCH))
 		anchored = !anchored
 		playsound(src, C.usesound, 50, 1)
 		user.visible_message("<span class='warning'>[user] has [anchored ? "" : "un" ]secured \the [src]!</span>",

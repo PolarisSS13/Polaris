@@ -204,14 +204,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 
 	switch(src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
 		if(0)
-			if(O.is_wrench())
+			if(O.get_tool_quality(TOOL_WRENCH))
 				playsound(src, O.usesound, 75, 1)
 				src.anchored = 1
 				user.visible_message("[user.name] secures the [src.name] to the floor.", \
 					"You secure the external bolts.")
 				temp_state++
 		if(1)
-			if(O.is_wrench())
+			if(O.get_tool_quality(TOOL_WRENCH))
 				playsound(src, O.usesound, 75, 1)
 				src.anchored = 0
 				user.visible_message("[user.name] detaches the [src.name] from the floor.", \
@@ -223,16 +223,16 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 						"You add some wires.")
 					temp_state++
 		if(2)
-			if(O.is_wirecutter())//TODO:Shock user if its on?
+			if(O.get_tool_quality(TOOL_WIRECUTTER))//TODO:Shock user if its on?
 				user.visible_message("[user.name] removes some wires from the [src.name].", \
 					"You remove some wires.")
 				temp_state--
-			else if(O.is_screwdriver())
+			else if(O.get_tool_quality(TOOL_SCREWDRIVER))
 				user.visible_message("[user.name] closes the [src.name]'s access panel.", \
 					"You close the access panel.")
 				temp_state++
 		if(3)
-			if(O.is_screwdriver())
+			if(O.get_tool_quality(TOOL_SCREWDRIVER))
 				user.visible_message("[user.name] opens the [src.name]'s access panel.", \
 					"You open the access panel.")
 				temp_state--
@@ -338,14 +338,14 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 	var/temp_state = src.construction_state
 	switch(src.construction_state)//TODO:Might be more interesting to have it need several parts rather than a single list of steps
 		if(0)
-			if(O.is_wrench())
+			if(O.get_tool_quality(TOOL_WRENCH))
 				playsound(src, O.usesound, 75, 1)
 				src.anchored = 1
 				user.visible_message("[user.name] secures the [src.name] to the floor.", \
 					"You secure the external bolts.")
 				temp_state++
 		if(1)
-			if(O.is_wrench())
+			if(O.get_tool_quality(TOOL_WRENCH))
 				playsound(src, O.usesound, 75, 1)
 				src.anchored = 0
 				user.visible_message("[user.name] detaches the [src.name] from the floor.", \
@@ -357,16 +357,16 @@ So, hopefully this is helpful if any more icons are to be added/changed/wonderin
 						"You add some wires.")
 					temp_state++
 		if(2)
-			if(O.is_wirecutter())//TODO:Shock user if its on?
+			if(O.get_tool_quality(TOOL_WIRECUTTER))//TODO:Shock user if its on?
 				user.visible_message("[user.name] removes some wires from the [src.name].", \
 					"You remove some wires.")
 				temp_state--
-			else if(O.is_screwdriver())
+			else if(O.get_tool_quality(TOOL_SCREWDRIVER))
 				user.visible_message("[user.name] closes the [src.name]'s access panel.", \
 					"You close the access panel.")
 				temp_state++
 		if(3)
-			if(O.is_screwdriver())
+			if(O.get_tool_quality(TOOL_SCREWDRIVER))
 				user.visible_message("[user.name] opens the [src.name]'s access panel.", \
 					"You open the access panel.")
 				temp_state--

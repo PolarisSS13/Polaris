@@ -343,7 +343,7 @@
 	song.interact(user)
 
 /obj/structure/device/piano/attackby(obj/item/O as obj, mob/user as mob)
-	if(O.is_wrench())
+	if(O.get_tool_quality(TOOL_WRENCH))
 		if(anchored)
 			playsound(src, O.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You begin to loosen \the [src]'s casters...</span>")

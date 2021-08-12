@@ -17,7 +17,7 @@
 		if(src) qdel(src)
 
 /obj/machinery/the_singularitygen/attackby(obj/item/W, mob/user)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		anchored = !anchored
 		playsound(src, W.usesound, 75, 1)
 		if(anchored)
@@ -29,7 +29,7 @@
 				"You unsecure the [src.name] from the floor.", \
 				"You hear a ratchet.")
 		return
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		panel_open = !panel_open
 		playsound(src, W.usesound, 50, 1)
 		visible_message("<span class='notice'>\The [user] adjusts \the [src]'s mechanisms.</span>")

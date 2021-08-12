@@ -63,11 +63,7 @@
 	to_chat(user,"<span class='notice'>\The [src] is now set to [toolmode].</span>")
 
 	accepting_refs = (toolmode == MULTITOOL_MODE_INTCIRCUITS)
-
-	return
-
-/obj/item/device/multitool/is_multitool()
-	return TRUE
+n
 
 /obj/item/device/multitool/cyborg
 	name = "multitool"

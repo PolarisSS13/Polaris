@@ -75,7 +75,7 @@
 
 /obj/machinery/microwave/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(src.broken > 0)
-		if(src.broken == 2 && O.is_screwdriver()) // If it's broken and they're using a screwdriver
+		if(src.broken == 2 && O.get_tool_quality(TOOL_SCREWDRIVER)) // If it's broken and they're using a screwdriver
 			user.visible_message( \
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
@@ -87,7 +87,7 @@
 					"<span class='notice'>You have fixed part of the microwave.</span>" \
 				)
 				src.broken = 1 // Fix it a bit
-		else if(src.broken == 1 && O.is_wrench()) // If it's broken and they're doing the wrench
+		else if(src.broken == 1 && O.get_tool_quality(TOOL_WRENCH)) // If it's broken and they're doing the wrench
 			user.visible_message( \
 				"<span class='notice'>\The [user] starts to fix part of the microwave.</span>", \
 				"<span class='notice'>You start to fix part of the microwave.</span>" \
@@ -157,10 +157,10 @@
 		var/obj/item/weapon/grab/G = O
 		to_chat(user, "<span class='warning'>This is ridiculous. You can not fit \the [G.affecting] in this [src].</span>")
 		return 1
-	else if(O.is_screwdriver())
+	else if(O.get_tool_quality(TOOL_SCREWDRIVER))
 		default_deconstruction_screwdriver(user, O)
 		return
-	else if(O.is_crowbar())
+	else if(O.get_tool_quality(TOOL_CROWBAR))
 		if(default_deconstruction_crowbar(user, O))
 			return
 		else

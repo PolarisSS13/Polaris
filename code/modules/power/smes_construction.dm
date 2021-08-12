@@ -328,7 +328,7 @@
 			failure_probability = 0
 
 		// Crowbar - Disassemble the SMES.
-		if(W.is_crowbar())
+		if(W.get_tool_quality(TOOL_CROWBAR))
 			if (terminals.len)
 				to_chat(user, "<span class='warning'>You have to disassemble the terminal first!</span>")
 				return

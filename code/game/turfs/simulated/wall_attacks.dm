@@ -286,7 +286,7 @@
 	else
 		switch(construction_stage)
 			if(6)
-				if (W.is_wirecutter())
+				if (W.get_tool_quality(TOOL_WIRECUTTER))
 					playsound(src, W.usesound, 100, 1)
 					construction_stage = 5
 					user.update_examine_panel(src)
@@ -294,7 +294,7 @@
 					update_icon()
 					return
 			if(5)
-				if (W.is_screwdriver())
+				if (W.get_tool_quality(TOOL_SCREWDRIVER))
 					to_chat(user, "<span class='notice'>You begin removing the support lines.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,40 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 5)
@@ -304,7 +304,7 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You unscrew the support lines.</span>")
 					return
-				else if (W.is_wirecutter())
+				else if (W.get_tool_quality(TOOL_WIRECUTTER))
 					construction_stage = 6
 					user.update_examine_panel(src)
 					to_chat(user, "<span class='notice'>You mend the outer grille.</span>")
@@ -334,7 +334,7 @@
 					update_icon()
 					to_chat(user, "<span class='notice'>You press firmly on the cover, dislodging it.</span>")
 					return
-				else if (W.is_screwdriver())
+				else if (W.get_tool_quality(TOOL_SCREWDRIVER))
 					to_chat(user, "<span class='notice'>You begin screwing down the support lines.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,40 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 4)
@@ -345,7 +345,7 @@
 					to_chat(user, "<span class='notice'>You screw down the support lines.</span>")
 					return
 			if(3)
-				if (W.is_crowbar())
+				if (W.get_tool_quality(TOOL_CROWBAR))
 					to_chat(user, "<span class='notice'>You struggle to pry off the cover.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,100 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 3)
@@ -356,7 +356,7 @@
 					to_chat(user, "<span class='notice'>You pry off the cover.</span>")
 					return
 			if(2)
-				if (W.is_wrench())
+				if (W.get_tool_quality(TOOL_WRENCH))
 					to_chat(user, "<span class='notice'>You start loosening the anchoring bolts which secure the support rods to their frame.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,40 * W.toolspeed) || !istype(src, /turf/simulated/wall) || construction_stage != 2)
@@ -388,7 +388,7 @@
 					to_chat(user, "<span class='notice'>The slice through the support rods.</span>")
 					return
 			if(0)
-				if(W.is_crowbar())
+				if(W.get_tool_quality(TOOL_CROWBAR))
 					to_chat(user, "<span class='notice'>You struggle to pry off the outer sheath.</span>")
 					playsound(src, W.usesound, 100, 1)
 					if(!do_after(user,100 * W.toolspeed) || !istype(src, /turf/simulated/wall) || !user || !W || !T )

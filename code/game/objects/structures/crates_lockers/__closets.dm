@@ -277,7 +277,7 @@
 	return
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		if(opened)
 			if(anchored)
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")

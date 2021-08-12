@@ -74,7 +74,7 @@
 		/obj/item/weapon/surgical/retractor = 100
 	)
 
-	allowed_procs = list(IS_CROWBAR = 75)
+	allowed_procs = list(TOOL_CROWBAR = 75)
 
 	min_duration = 30
 	max_duration = 40
@@ -127,7 +127,7 @@
 		/obj/item/weapon/surgical/retractor = 100,
 	)
 
-	allowed_procs = list(IS_CROWBAR = 75)
+	allowed_procs = list(TOOL_CROWBAR = 75)
 
 	min_duration = 20
 	max_duration = 40
@@ -185,7 +185,7 @@
 		/obj/item/weapon/surgical/bonegel = 100
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 75)
+	allowed_procs = list(TOOL_SCREWDRIVER = 75)
 
 	min_duration = 20
 	max_duration = 40

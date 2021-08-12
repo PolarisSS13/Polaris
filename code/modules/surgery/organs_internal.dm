@@ -25,7 +25,7 @@
 	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
-	allowed_procs = list(IS_WIRECUTTER = 75)
+	allowed_procs = list(TOOL_WIRECUTTER = 75)
 	blood_level = 2
 
 	min_duration = 80
@@ -221,7 +221,7 @@
 	/obj/item/weapon/material/kitchen/utensil/fork = 20
 	)
 
-	allowed_procs = list(IS_WIRECUTTER = 75)
+	allowed_procs = list(TOOL_WIRECUTTER = 75)
 
 	min_duration = 60
 	max_duration = 80

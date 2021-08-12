@@ -216,7 +216,7 @@
 			return 1
 
 		//If it's opened/emagged, crowbar can pry it out of its frame.
-		if (!density && I.is_crowbar())
+		if (!density && I.get_tool_quality(TOOL_CROWBAR))
 			playsound(src, I.usesound, 50, 1)
 			user.visible_message("[user] begins prying the windoor out of the frame.", "You start to pry the windoor out of the frame.")
 			if (do_after(user,40 * I.toolspeed))

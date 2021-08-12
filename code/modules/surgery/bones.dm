@@ -12,7 +12,7 @@
 		/obj/item/weapon/surgical/bonegel = 100
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 75)
+	allowed_procs = list(TOOL_SCREWDRIVER = 75)
 
 	can_infect = 1
 	blood_level = 1
@@ -56,7 +56,7 @@
 		/obj/item/weapon/surgical/bonesetter = 100
 	)
 
-	allowed_procs = list(IS_WRENCH = 75)
+	allowed_procs = list(TOOL_WRENCH = 75)
 
 	min_duration = 60
 	max_duration = 70
@@ -102,7 +102,7 @@
 		/obj/item/weapon/surgical/bonesetter = 100
 	)
 
-	allowed_procs = list(IS_WRENCH = 75)
+	allowed_procs = list(TOOL_WRENCH = 75)
 
 	min_duration = 60
 	max_duration = 70
@@ -143,7 +143,7 @@
 		/obj/item/weapon/surgical/bonegel = 100
 	)
 
-	allowed_procs = list(IS_SCREWDRIVER = 75)
+	allowed_procs = list(TOOL_SCREWDRIVER = 75)
 
 	can_infect = 1
 	blood_level = 1

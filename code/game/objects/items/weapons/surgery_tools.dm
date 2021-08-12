@@ -33,6 +33,7 @@
 	matter = list(MAT_STEEL = 10000, "glass" = 5000)
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	drop_sound = 'sound/items/drop/scrap.ogg'
+	tool_qualities = list(TOOL_RETRACTOR = TOOL_QUALITY_STANDARD)
 
 /*
  * Hemostat
@@ -45,6 +46,7 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("attacked", "pinched")
 	drop_sound = 'sound/items/drop/scrap.ogg'
+	tool_qualities = list(TOOL_HEMOSTAT = TOOL_QUALITY_STANDARD)
 
 /*
  * Cautery
@@ -57,6 +59,7 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("burnt")
 	drop_sound = 'sound/items/drop/scrap.ogg'
+	tool_qualities = list(TOOL_CAUTERY = TOOL_QUALITY_STANDARD)
 
 /*
  * Surgical Drill
@@ -72,6 +75,7 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 1)
 	attack_verb = list("drilled")
 	drop_sound = 'sound/items/drop/accessory.ogg'
+	tool_qualities = list(TOOL_SDRILL = TOOL_QUALITY_STANDARD)
 
 /*
  * Scalpel
@@ -92,6 +96,7 @@
 	matter = list(MAT_STEEL = 10000, "glass" = 5000)
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	drop_sound = 'sound/items/drop/knife.ogg'
+	tool_qualities = list(TOOL_SCALPEL = TOOL_QUALITY_STANDARD)
 
 /*
  * Researchable Scalpels
@@ -150,6 +155,7 @@
 	attack_verb = list("attacked", "slashed", "sawed", "cut")
 	sharp = 1
 	edge = 1
+	tool_qualities = list(TOOL_CSAW = TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/surgical/circular_saw/manager
 	name = "energetic bone diverter"
@@ -172,6 +178,7 @@
 	force = 0
 	throwforce = 1.0
 	drop_sound = 'sound/items/drop/bottle.ogg'
+	tool_qualities = list(TOOL_BONEGEL = TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/surgical/FixOVein
 	name = "FixOVein"
@@ -182,6 +189,7 @@
 	origin_tech = list(TECH_MATERIAL = 1, TECH_BIO = 3)
 	var/usage_amount = 10
 	drop_sound = 'sound/items/drop/accessory.ogg'
+	tool_qualities = list(TOOL_FIXVEIN = TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/surgical/bonesetter
 	name = "bone setter"
@@ -193,6 +201,7 @@
 	throw_range = 5
 	attack_verb = list("attacked", "hit", "bludgeoned")
 	drop_sound = 'sound/items/drop/scrap.ogg'
+	tool_qualities = list(TOOL_BONESET = TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/surgical/bone_clamp
 	name = "bone clamp"
@@ -203,6 +212,7 @@
 	throw_speed = 3
 	throw_range = 5
 	attack_verb = list("attacked", "hit", "bludgeoned")
+	tool_qualities = list(TOOL_BONECLAMP = TOOL_QUALITY_STANDARD)
 
 // Cyborg Tools
 

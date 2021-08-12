@@ -161,7 +161,7 @@
 	update_icon()
 
 /obj/machinery/atmospherics/unary/outlet_injector/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!W.is_wrench())
+	if (!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
 
 	playsound(src, W.usesound, 50, 1)

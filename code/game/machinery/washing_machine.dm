@@ -103,7 +103,7 @@
 			return
 		if(default_unfasten_wrench(user, W, 40))
 			return
-	/*if(W.is_screwdriver())
+	/*if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		panel = !panel
 		to_chat(user, "<span class='notice'>You [panel ? "open" : "close"] the [src]'s maintenance panel</span>")*/
 	if(istype(W,/obj/item/weapon/pen/crayon) || istype(W,/obj/item/weapon/stamp))
