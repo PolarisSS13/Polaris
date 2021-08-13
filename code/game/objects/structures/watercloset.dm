@@ -41,7 +41,7 @@
 	update_icon()
 
 /obj/structure/toilet/update_icon()
-	icon_state = "toilet[initial(icon_state)][open][cistern]"
+	icon_state = "[initial(icon_state)][open][cistern]"
 
 /obj/structure/toilet/attackby(obj/item/I as obj, mob/living/user as mob)
 	if(I.is_crowbar())
