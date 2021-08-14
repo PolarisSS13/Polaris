@@ -60,7 +60,7 @@
 		data["replaces_nutriment"] = replaces_nutriment
 		data["collects_produce"] = collects_produce
 		data["removes_dead"] = removes_dead
-	
+
 	return data
 
 
@@ -83,22 +83,22 @@
 /mob/living/bot/farmbot/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
-	
+
 	add_fingerprint(usr)
 
 	switch(action)
 		if("power")
-			if(!access_scanner.allowed(src))
+			if(!access_scanner.allowed(usr))
 				return FALSE
 			if(on)
 				turn_off()
 			else
 				turn_on()
 			. = TRUE
-	
+
 	if(locked)
 		return TRUE
-	
+
 	switch(action)
 		if("water")
 			waters_trays = !waters_trays

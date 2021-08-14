@@ -49,7 +49,7 @@ var/list/random_weighted_donuts = list(
 	update_icon()
 
 /obj/item/weapon/storage/box/donut/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	var/x_offset = 0
 	for(var/obj/item/weapon/reagent_containers/food/snacks/donut/D in contents)
 		var/mutable_appearance/ma = mutable_appearance(icon = icon, icon_state = D.overlay_state)
