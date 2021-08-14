@@ -3,7 +3,7 @@
 	name = "Point of Interest Loader"
 	/// If TRUE, most things within the loading area will be deleted. This includes players!
 	var/submap_path = null
-	var/loaded = FALSE
+	var/loaded = TRUE // TODO, optimize loading at init.
 
 /obj/effect/landmark/poi_loader/Initialize(mapload)
 	. = ..()
