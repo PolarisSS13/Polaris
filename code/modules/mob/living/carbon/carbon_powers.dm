@@ -16,8 +16,14 @@
 		verbs -= /mob/living/carbon/proc/punish_host
 		verbs -= /mob/living/carbon/proc/spawn_larvae
 
-	else
-		to_chat(src, "<span class='danger'>ERROR NO BORER OR BRAINMOB DETECTED IN THIS MOB, THIS IS A BUG !</span>")
+	else if(get_rig())
+		var/obj/item/weapon/rig/rig = get_rig()
+		var/obj/item/rig_module/ai_container/advanced/module = locate() in rig
+		if(module && module.pilot_brain)
+			module.revert()
+
+
+//		to_chat(src, "<span class='danger'>ERROR NO BORER OR BRAINMOB DETECTED IN THIS MOB, THIS IS A BUG !</span>")
 
 //Brain slug proc for tormenting the host.
 /mob/living/carbon/proc/punish_host()

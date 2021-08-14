@@ -94,18 +94,57 @@ var/list/channel_to_radio_key = new
 		if(S.speaking && (S.speaking.flags & NO_STUTTER || S.speaking.flags & SIGNLANG))
 			continue
 
-		if((HULK in mutations) && health >= 25 && length(S.message))
+		var/force_slurring = 0
+		var/force_shouting = 0
+		var/force_stuttering = 0
+		var/force_mute = 0
+
+		for(var/datum/modifier/M in modifiers)
+			if(M.speech_slurring)
+				force_slurring += M.speech_slurring
+			if(M.speech_stuttering)
+				force_stuttering += M.speech_stuttering
+			if(M.speech_shouting)
+				force_shouting += M.speech_shouting
+			if(M.speech_mute)
+				force_mute += M.speech_mute
+
+		if(force_slurring && force_slurring > 0)
+			force_slurring = TRUE
+		else
+			force_slurring = FALSE
+
+		if(force_shouting && force_shouting > 0)
+			force_shouting = TRUE
+		else
+			force_shouting = FALSE
+
+		if(force_stuttering && force_stuttering > 0)
+			force_stuttering = TRUE
+		else
+			force_stuttering = FALSE
+
+		if(force_mute && force_mute > 0)
+			force_mute = TRUE
+		else
+			force_mute = FALSE
+
+		if(((HULK in mutations) || force_shouting) && health >= 25 && length(S.message))
 			S.message = "[uppertext(S.message)]!!!"
 			verb = pick("yells","roars","hollers")
 			whispering = 0
 			. = 1
-		if(slurring)
+		if(slurring || force_slurring)
 			S.message = slur(S.message)
 			verb = pick("slobbers","slurs")
 			. = 1
-		if(stuttering)
+		if(stuttering || force_stuttering)
 			S.message = stutter(S.message)
 			verb = pick("stammers","stutters")
+			. = 1
+		if(force_mute)
+			S.message = "..."
+			verb = pick("wheezes", "breathes")
 			. = 1
 
 	message_data[1] = message_pieces

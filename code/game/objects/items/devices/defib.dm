@@ -574,6 +574,31 @@
 	safety = 0
 	chargetime = (1 SECONDS)
 
+/obj/item/weapon/shockpaddles/rig
+	name = "integrated resucitation pads"
+	desc = "A pair of advanced resucitation plates powered by a rig's internal power cell, able to penetrate thick clothing."
+	chargecost = 50
+	combat = 1
+	icon_state = "defibpaddles0"
+	item_state = "defibpaddles0"
+	cooldowntime = (3 SECONDS)
+
+/obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
+	if(istype(loc, /obj/item/rig_module))
+		var/obj/item/rig_module/RM = src.loc
+		var/obj/item/weapon/rig/Rig = RM.holder
+		if(!Rig)
+			return FALSE
+		return (Rig.cell && Rig.cell.check_charge(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/checked_use(var/charge_amt)
+	if(istype(loc, /obj/item/rig_module))
+		var/obj/item/rig_module/RM = src.loc
+		var/obj/item/weapon/rig/Rig = RM.holder
+		if(!Rig)
+			return FALSE
+		return (Rig.cell && Rig.cell.checked_use(charge_amt))
+
 /*
 	Shockpaddles that are linked to a base unit
 */

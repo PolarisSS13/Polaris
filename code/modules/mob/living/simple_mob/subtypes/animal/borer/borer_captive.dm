@@ -31,6 +31,21 @@
 			else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 				to_chat(M, "The captive mind of [src] whispers, \"[message]\"")
 
+	else if(istype(src.loc,/obj/item/rig_module/ai_container/advanced))
+		message = sanitize(message)
+
+		if (!message)
+			return
+		log_say(message,src)
+		if (stat == 2)
+			return say_dead(message)
+
+		var/obj/item/rig_module/ai_container/advanced/module = loc
+		var/mob/living/carbon/human/H = module.holder.loc
+
+		to_chat(src, "You think, \"<span class='notice'>[message]</span>\"")
+		to_chat(H, "The displaced mind of [src] whispers, \"<span class='notice'>[message]</span>\"")
+
 /mob/living/captive_brain/me_verb(message as text)
 	to_chat(src, "<span class='danger'>You cannot emote as a captive mind.</span>")
 	return
@@ -58,6 +73,24 @@
 			verbs -= /mob/living/carbon/proc/release_control
 			verbs -= /mob/living/carbon/proc/punish_host
 			verbs -= /mob/living/carbon/proc/spawn_larvae
+
+		return
+
+	//Or control by an all-too-familiar machine.
+	else if(istype(src.loc, /obj/item/rig_module/ai_container/advanced))
+		var/obj/item/rig_module/ai_container/advanced/module = src.loc
+		var/mob/living/captive_brain/H = src
+		var/obj/item/weapon/rig/rig = module.holder
+		var/mob/living/carbon/human/Pilot = rig.loc
+
+		to_chat(H, "<span class='danger'>You begin doggedly resisting the neural jack's input (this will take approximately sixty seconds).</span>")
+		to_chat(Pilot, "<span class='danger'>You feel the repressed mind of [src] begin to resist your control.</span>")
+
+		if(do_after(H, rand(50 SECONDS,70 SECONDS), Pilot, ignore_movement = TRUE))
+			Pilot.adjustBrainLoss(rand(0.1,0.5))
+			to_chat(H, "<span class='danger'>With an immense exertion of will, you regain control of your body as the neural jack snakes back into \the [rig]!</span>")
+			to_chat(Pilot, "<span class='danger'>You feel as though you are falling, before the neural jack retracts fully, and your processes return to \the [rig]'s limited scope.</span>")
+			module.revert()
 
 		return
 

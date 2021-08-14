@@ -40,6 +40,10 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 
 /obj/item/organ/internal/brain/proc/implant_assist(var/targ_icon_state = null)
 	name = "[owner.real_name]'s assisted [initial(name)]"
+
+	if(robotic < ORGAN_ASSISTED)
+		robotic = ORGAN_ASSISTED
+
 	if(targ_icon_state)
 		icon_state = targ_icon_state
 		if(dead_icon)

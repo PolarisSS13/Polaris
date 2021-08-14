@@ -676,6 +676,9 @@
 	var/equip_to
 	var/obj/item/use_obj
 
+	if(H != wearer)	// Safety, for the AI.
+		H = wearer
+
 	if(!H)
 		return
 

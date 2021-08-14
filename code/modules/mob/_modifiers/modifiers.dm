@@ -65,6 +65,11 @@
 
 	var/vision_flags					// Vision flags to add to the mob. SEE_MOB, SEE_OBJ, etc.
 
+	var/speech_slurring					// Slur spoken words? -1, 0, or 1.
+	var/speech_stuttering				// Stutter spoken words? -1, 0, or 1.
+	var/speech_shouting					// Forcefully shout spoken words? -1, 0, or 1.
+	var/speech_mute						// Or lose the ability to talk at all? -1, 0, or 1.
+
 /datum/modifier/New(var/new_holder, var/new_origin)
 	holder = new_holder
 	if(new_origin)
