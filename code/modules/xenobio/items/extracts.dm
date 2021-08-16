@@ -121,7 +121,7 @@
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#666666"
-	strength = 20
+	tox_strength = 20
 
 /decl/chemical_reaction/instant/slime/metal_metamorphic
 	name = "Slime Metal"
@@ -205,7 +205,7 @@
 	taste_mult = 1.1
 	reagent_state = LIQUID
 	color = "#666666"
-	strength = 20
+	tox_strength = 20
 
 /obj/item/weapon/reagent_containers/glass/bottle/binding
 	name = "Binding Metal Bottle"

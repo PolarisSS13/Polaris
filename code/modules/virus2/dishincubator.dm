@@ -141,7 +141,7 @@
 
 		if(locate(/datum/reagent/toxin) in beaker.reagents.reagent_list && toxins < 100)
 			for(var/datum/reagent/toxin/T in beaker.reagents.reagent_list)
-				toxins += max(T.strength,1)
+				toxins += max(T.tox_strength,1)
 				beaker.reagents.remove_reagent(T.id,1)
 				if(toxins > 100)
 					toxins = 100

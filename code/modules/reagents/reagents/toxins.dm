@@ -10,23 +10,8 @@
 	color = "#CF3600"
 	metabolism = REM * 0.25 // 0.05 by default. Hopefully enough to get some help, or die horribly, whatever floats your boat
 	filtered_organs = list(O_LIVER, O_KIDNEYS)
-	var/strength = 4 // How much damage it deals per unit
-	var/skin_danger = 0.2 // The multiplier for how effective the toxin is when making skin contact.
-
-/datum/reagent/toxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	strength *= M.species.chem_strength_tox
-	if(strength && alien != IS_DIONA)
-		if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
-		if(alien == IS_SLIME)
-			removed *= 0.25 // Results in half the standard tox as normal. Prometheans are 'Small' for flaps.
-			if(dose >= 10)
-				M.adjust_nutrition(strength * removed) // Body has to deal with the massive influx of toxins, rather than try using them to repair.
-			else
-				M.heal_organ_damage((10/strength) * removed, (10/strength) * removed) //Doses of toxins below 10 units, and 10 strength, are capable of providing useful compounds for repair.
-		M.adjustToxLoss(strength * removed)
-
-/datum/reagent/toxin/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
-	affect_blood(M, alien, removed * 0.2)
+	tox_strength = 4 // How much damage it deals per unit
+	skin_danger = 0.2 // The multiplier for how effective the toxin is when making skin contact.
 
 /datum/reagent/toxin/plasticide
 	name = "Plasticide"
@@ -35,7 +20,19 @@
 	taste_description = "plastic"
 	reagent_state = LIQUID
 	color = "#CF3600"
-	strength = 5
+	tox_strength = 5
+
+/datum/reagent/toxin/poisonberryjuice // It has more in common with drinks than toxins... but it's a juice
+	name = "Poison Berry Juice"
+	id = "poisonberryjuice"
+	description = "A tasty juice blended from various kinds of very deadly and toxic berries."
+	taste_description = "berries"
+	color = "#863353"
+	tox_strength = 5
+
+	glass_name = "poison berry juice"
+	glass_desc = "A glass of deadly juice."
+
 
 /datum/reagent/toxin/amatoxin
 	name = "Amatoxin"
@@ -44,12 +41,12 @@
 	taste_description = "mushroom"
 	reagent_state = LIQUID
 	color = "#792300"
-	strength = 10
+	tox_strength = 10
 
 /datum/reagent/toxin/amatoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	// Trojan horse. Waits until most of the toxin has gone through the body before dealing the bulk of it in one big strike.
 	if(volume < max_dose * 0.2)
-		M.adjustToxLoss(max_dose * strength * removed / (max_dose * 0.2))
+		M.adjustToxLoss(max_dose * tox_strength * removed / (max_dose * 0.2))
 
 /datum/reagent/toxin/carpotoxin
 	name = "Carpotoxin"
@@ -58,11 +55,11 @@
 	taste_description = "fish"
 	reagent_state = LIQUID
 	color = "#003333"
-	strength = 10
+	tox_strength = 10
 
 /datum/reagent/toxin/carpotoxin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.adjustBrainLoss(strength / 4 * removed)
+	M.adjustBrainLoss(tox_strength / 4 * removed)
 
 /datum/reagent/toxin/neurotoxic_protein
 	name = "toxic protein"
@@ -71,7 +68,7 @@
 	taste_description = "fish"
 	reagent_state = LIQUID
 	color = "#005555"
-	strength = 8
+	tox_strength = 8
 	skin_danger = 0.4
 
 /datum/reagent/toxin/neurotoxic_protein/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -90,7 +87,7 @@
 	name = "Hydrophoron"
 	id = "hydrophoron"
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
-	strength = 80
+	tox_strength = 80
 	var/fire_mult = 30
 
 /datum/reagent/toxin/hydrophoron/touch_mob(var/mob/living/L, var/amount)
@@ -125,14 +122,14 @@
 	id = "lead"
 	description = "Elemental Lead."
 	color = "#273956"
-	strength = 4
+	tox_strength = 4
 
 /datum/reagent/toxin/spidertoxin
 	name = "Spidertoxin"
 	id = "spidertoxin"
 	description = "A liquifying toxin produced by giant spiders."
 	color = "#2CE893"
-	strength = 5
+	tox_strength = 5
 
 /datum/reagent/toxin/phoron
 	name = "Phoron"
@@ -141,7 +138,7 @@
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	color = "#9D14DB"
-	strength = 30
+	tox_strength = 30
 	touch_met = 5
 	skin_danger = 1
 
@@ -180,7 +177,7 @@
 	taste_mult = 0.6
 	reagent_state = LIQUID
 	color = "#CF3600"
-	strength = 20
+	tox_strength = 20
 	metabolism = REM * 2
 
 /datum/reagent/toxin/cyanide/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -194,7 +191,7 @@
 	description = "A mold is a fungus that causes biodegradation of natural materials. This variant contains mycotoxins, and is dangerous to humans."
 	taste_description = "mold"
 	reagent_state = SOLID
-	strength = 5
+	tox_strength = 5
 
 /datum/reagent/toxin/mold/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -207,7 +204,7 @@
 	description = "Some form of liquid medicine that is well beyond its shelf date. Administering it now would cause illness."
 	taste_description = "bitterness"
 	reagent_state = LIQUID
-	strength = 5
+	tox_strength = 5
 	filtered_organs = list(O_SPLEEN)
 
 /datum/reagent/toxin/expired_medicine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -229,7 +226,7 @@
 	metabolism = REM * 3
 	overdose = 10
 	overdose_mod = 0.5
-	strength = 3
+	tox_strength = 3
 
 /datum/reagent/toxin/stimm/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_TAJARA)
@@ -257,7 +254,7 @@
 	taste_description = "salt"
 	reagent_state = SOLID
 	color = "#FFFFFF"
-	strength = 0
+	tox_strength = 0
 	overdose = REAGENTS_OVERDOSE
 	filtered_organs = list(O_SPLEEN, O_KIDNEYS)
 
@@ -283,7 +280,7 @@
 	taste_description = "salt"
 	reagent_state = SOLID
 	color = "#FFFFFF"
-	strength = 10
+	tox_strength = 10
 	overdose = 20
 	filtered_organs = list(O_SPLEEN, O_KIDNEYS)
 
@@ -307,7 +304,7 @@
 	reagent_state = SOLID
 	color = "#669900"
 	metabolism = REM
-	strength = 3
+	tox_strength = 3
 	mrate_static = TRUE
 
 /datum/reagent/toxin/zombiepowder/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
@@ -333,7 +330,7 @@
 	reagent_state = SOLID
 	color = "#666666"
 	metabolism = REM * 0.75
-	strength = 2
+	tox_strength = 2
 	mrate_static = TRUE
 
 /datum/reagent/toxin/lichpowder/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
@@ -362,7 +359,7 @@
 	taste_description = "plant food"
 	taste_mult = 0.5
 	reagent_state = LIQUID
-	strength = 0.5 // It's not THAT poisonous.
+	tox_strength = 0.5 // It's not THAT poisonous.
 	color = "#664330"
 
 /datum/reagent/toxin/fertilizer/eznutrient
@@ -384,7 +381,7 @@
 	taste_description = "puckering"
 	taste_mult = 1.2
 	reagent_state = LIQUID
-	strength = 1.5
+	tox_strength = 1.5
 	color = "#e67819"
 
 /datum/reagent/toxin/fertilizer/tannin/touch_obj(var/obj/O, var/volume)
@@ -400,7 +397,7 @@
 	taste_mult = 1
 	reagent_state = LIQUID
 	color = "#49002E"
-	strength = 4
+	tox_strength = 4
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
 	if(istype(T, /turf/simulated/wall))
@@ -433,12 +430,12 @@
 	taste_description = "sour"
 	reagent_state = LIQUID
 	color = "#C6E2FF"
-	strength = 2
+	tox_strength = 2
 	overdose = 20
 
 /datum/reagent/toxin/sifslurry/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA) // Symbiotic bacteria.
-		M.adjust_nutrition(strength * removed)
+		M.adjust_nutrition(tox_strength * removed)
 		return
 	else
 		M.add_modifier(/datum/modifier/slow_pulse, 30 SECONDS)

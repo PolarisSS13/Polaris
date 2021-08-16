@@ -6,23 +6,23 @@
 	var/id = "reagent"
 	var/description = "A non-descript chemical."
 	var/taste_description = "bitterness"
-	var/taste_mult = 1 //how this taste compares to others. Higher values means it is more noticable
-	var/nutriment_factor = 2
+	var/taste_mult = 1 		//how this taste compares to others. Higher values means it is more noticable
 	var/datum/reagents/holder = null
 	var/reagent_state = SOLID
 	var/list/data = null
 	var/volume = 0
-	var/metabolism = REM // This would be 0.2 normally
+	var/metabolism = REM 	// This would be 0.2 normally
 	var/list/filtered_organs = list()	// Organs that will slow the processing of this chemical.
 	var/mrate_static = FALSE	//If the reagent should always process at the same speed, regardless of species, make this TRUE
 	var/ingest_met = 0
 	var/touch_met = 0
 	var/dose = 0
 	var/max_dose = 0
-	var/overdose = 0		//Amount at which overdose starts
-	var/overdose_mod = 1	//Modifier to overdose damage
+	var/overdose = 0		// Amount at which overdose starts
+	var/overdose_mod = 1	// Modifier to overdose damage
 	var/can_overdose_touch = FALSE	// Can the chemical OD when processing on touch?
-	var/scannable = 0 // Shows up on health analyzers.
+	var/injectable = 0		// Is this allowed as an injection
+	var/scannable = 0 		// Shows up on health analyzers.
 
 	var/affects_dead = 0	// Does this chem process inside a corpse?
 	var/affects_robots = 0	// Does this chem process inside a Synth?
@@ -42,6 +42,22 @@
 	var/glass_name = "something"
 	var/glass_desc = "It's a glass of... what, exactly?"
 	var/list/glass_special = null // null equivalent to list()
+
+///Booze related variables
+	var/booze_strength = 0		// This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
+	var/toxicity = 0
+	var/druggy = 0
+	var/adj_temp = 0
+	var/targ_temp = 0
+	var/halluci = 0
+
+///Food related variables
+	var/nutriment_factor = 2
+
+///Toxin related variables
+	var/tox_strength = 0 	// How much damage it deals per unit
+	var/skin_danger = 0 	// The multiplier for how effective the toxin is when making skin contact.
+
 
 /datum/reagent/proc/remove_self(var/amount) // Shortcut
 	if(holder)
@@ -187,13 +203,136 @@
 	return
 
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(nutriment_factor)
+		if(!injectable && alien != IS_SLIME)
+			M.adjustToxLoss(0.1 * removed)
+			return
+		affect_ingest(M, alien, removed)
+
+	if(tox_strength)
+		tox_strength *= M.species.chem_strength_tox
+		if(tox_strength && alien != IS_DIONA)
+			if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
+			if(alien == IS_SLIME)
+				removed *= 0.25 // Results in half the standard tox as normal. Prometheans are 'Small' for flaps.
+				if(dose >= 10)
+					M.adjust_nutrition(tox_strength * removed) // Body has to deal with the massive influx of toxins, rather than try using them to repair.
+				else
+					M.heal_organ_damage((10/tox_strength) * removed, (10/tox_strength) * removed) //Doses of toxins below 10 units, and 10 tox_strength, are capable of providing useful compounds for repair.
+			M.adjustToxLoss(tox_strength * removed)
+		
+
+	if(booze_strength)
+		if(issmall(M)) removed *= 2
+		var/strength_mod = 3 * M.species.alcohol_mod //Alcohol is 3x stronger when injected into the veins.
+		if(alien == IS_SKRELL)
+			strength_mod *= 5
+		if(alien == IS_TAJARA)
+			strength_mod *= 1.25
+		if(alien == IS_UNATHI)
+			strength_mod *= 0.75
+		if(alien == IS_DIONA)
+			strength_mod = 0
+		if(alien == IS_SLIME)
+			M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
+
+		M.add_chemical_effect(CE_ALCOHOL, 1)
+		var/effective_dose = dose * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
+
+		if(effective_dose >= booze_strength) // Early warning
+			M.make_dizzy(18) // It is decreased at the speed of 3 per tick
+		if(effective_dose >= booze_strength * 2) // Slurring
+			M.slurring = max(M.slurring, 90)
+		if(effective_dose >= booze_strength * 3) // Confusion - walking in random directions
+			M.Confuse(60)
+		if(effective_dose >= booze_strength * 4) // Blurry vision
+			M.eye_blurry = max(M.eye_blurry, 30)
+		if(effective_dose >= booze_strength * 5) // Drowsyness - periodically falling asleep
+			M.drowsyness = max(M.drowsyness, 60)
+		if(effective_dose >= booze_strength * 6) // Toxic dose
+			M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity*3)
+		if(effective_dose >= booze_strength * 7) // Pass out
+			M.Paralyse(60)
+			M.Sleeping(90)
+
+		if(druggy != 0)
+			M.druggy = max(M.druggy, druggy*3)
+
+		if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+			M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+		if(adj_temp < 0 && M.bodytemperature > targ_temp)
+			M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+
+		if(halluci)
+			M.hallucination = max(M.hallucination, halluci*3)
+
+
+
 	return
 
 /datum/reagent/proc/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+	if(nutriment_factor)
+		switch(alien)
+			if(IS_DIONA)
+				return
+			if(IS_UNATHI)
+				removed *= 0.5
+		if(issmall(M))
+			removed *= 2 // Small bodymass, more effect from lower volume.
+		if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we'll be ok!
+			M.heal_organ_damage(0.5 * removed, 0)
+			M.adjust_nutrition(nutriment_factor * removed)
+			M.add_chemical_effect(CE_BLOODRESTORE, 4 * removed)
+
+	if(booze_strength)
+		if(issmall(M))
+			removed *= 2
+		if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we get the nutrition effects
+			M.adjust_nutrition(nutriment_factor * removed)
+		var/strength_mod = 1 * M.species.alcohol_mod
+		if(alien == IS_SKRELL)
+			strength_mod *= 5
+		if(alien == IS_TAJARA)
+			strength_mod *= 1.25
+		if(alien == IS_UNATHI)
+			strength_mod *= 0.75
+		if(alien == IS_DIONA)
+			strength_mod = 0
+		if(alien == IS_SLIME)
+			M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
+		M.add_chemical_effect(CE_ALCOHOL, 1)
+		if(dose * strength_mod >= booze_strength) // Early warning
+			M.make_dizzy(6) // It is decreased at the speed of 3 per tick
+		if(dose * strength_mod >= booze_strength * 2) // Slurring
+			M.slurring = max(M.slurring, 30)
+		if(dose * strength_mod >= booze_strength * 3) // Confusion - walking in random directions
+			M.Confuse(20)
+		if(dose * strength_mod >= booze_strength * 4) // Blurry vision
+			M.eye_blurry = max(M.eye_blurry, 10)
+		if(dose * strength_mod >= booze_strength * 5) // Drowsyness - periodically falling asleep
+			M.drowsyness = max(M.drowsyness, 20)
+		if(dose * strength_mod >= booze_strength * 6) // Toxic dose
+			M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
+		if(dose * strength_mod >= booze_strength * 7) // Pass out
+			M.Paralyse(20)
+			M.Sleeping(30)
+		if(druggy != 0)
+			M.druggy = max(M.druggy, druggy)
+		if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
+			M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+		if(adj_temp < 0 && M.bodytemperature > targ_temp)
+			M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
+		if(halluci)
+			M.hallucination = max(M.hallucination, halluci)
+
 	M.bloodstr.add_reagent(id, removed)
 	return
 
+
+
 /datum/reagent/proc/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	if(tox_strength)
+		affect_blood(M, alien, removed * 0.2)
 	return
 
 /datum/reagent/proc/overdose(var/mob/living/carbon/M, var/alien, var/removed) // Overdose effect.
@@ -212,7 +351,28 @@
 		data = newdata
 	return
 
-/datum/reagent/proc/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
+/datum/reagent/proc/mix_data(var/list/newdat, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
+	if(!islist(newdat) || !newdat.len)
+		return
+
+	//add the new taste data
+	if(islist(data))
+		for(var/taste in newdat)
+			if(taste in data)
+				data[taste] += newdat[taste]
+			else
+				data[taste] = newdat[taste]
+	else
+		initialize_data(newdat)
+
+	//cull all tastes below 10% of total
+	var/totalFlavor = 0
+	for(var/taste in data)
+		totalFlavor += data[taste]
+	if(totalFlavor) //Let's not divide by zero for things w/o taste
+		for(var/taste in data)
+			if(data[taste]/totalFlavor < 0.1)
+				data -= taste
 	return
 
 /datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.

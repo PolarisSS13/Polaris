@@ -82,13 +82,13 @@
 
 	nutriment_factor = 2	///It is food, but you are probably going to die before it actually makes you full in any way.
 
-	var/strength = 10			// This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
-	var/toxicity = 1
+	booze_strength = 10			// This is, essentially, units between stages - the lower, the stronger. Less fine tuning, more clarity.
+	toxicity = 1
 
-	var/druggy = 0
-	var/adj_temp = 0
-	var/targ_temp = 310
-	var/halluci = 0
+	druggy = 0
+	adj_temp = 0
+	targ_temp = 310
+	halluci = 0
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
@@ -97,95 +97,6 @@
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 15)
-
-/datum/reagent/ethanol/affect_blood(var/mob/living/carbon/M, var/alien, var/removed) //This used to do just toxin. That's boring. Let's make this FUN.
-	if(issmall(M)) removed *= 2
-	var/strength_mod = 3 * M.species.alcohol_mod //Alcohol is 3x stronger when injected into the veins.
-	if(alien == IS_SKRELL)
-		strength_mod *= 5
-	if(alien == IS_TAJARA)
-		strength_mod *= 1.25
-	if(alien == IS_UNATHI)
-		strength_mod *= 0.75
-	if(alien == IS_DIONA)
-		strength_mod = 0
-	if(alien == IS_SLIME)
-		M.adjustToxLoss(removed) //Sterilizing, if only by a little bit. Also already doubled above.
-
-	M.add_chemical_effect(CE_ALCOHOL, 1)
-	var/effective_dose = dose * strength_mod * (1 + volume/60) //drinking a LOT will make you go down faster
-
-	if(effective_dose >= strength) // Early warning
-		M.make_dizzy(18) // It is decreased at the speed of 3 per tick
-	if(effective_dose >= strength * 2) // Slurring
-		M.slurring = max(M.slurring, 90)
-	if(effective_dose >= strength * 3) // Confusion - walking in random directions
-		M.Confuse(60)
-	if(effective_dose >= strength * 4) // Blurry vision
-		M.eye_blurry = max(M.eye_blurry, 30)
-	if(effective_dose >= strength * 5) // Drowsyness - periodically falling asleep
-		M.drowsyness = max(M.drowsyness, 60)
-	if(effective_dose >= strength * 6) // Toxic dose
-		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity*3)
-	if(effective_dose >= strength * 7) // Pass out
-		M.Paralyse(60)
-		M.Sleeping(90)
-
-	if(druggy != 0)
-		M.druggy = max(M.druggy, druggy*3)
-
-	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
-		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-	if(adj_temp < 0 && M.bodytemperature > targ_temp)
-		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-
-	if(halluci)
-		M.hallucination = max(M.hallucination, halluci*3)
-
-/datum/reagent/ethanol/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
-	if(issmall(M)) removed *= 2
-	if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we get the nutrition effects
-		M.adjust_nutrition(nutriment_factor * removed)
-	var/strength_mod = 1 * M.species.alcohol_mod
-	if(alien == IS_SKRELL)
-		strength_mod *= 5
-	if(alien == IS_TAJARA)
-		strength_mod *= 1.25
-	if(alien == IS_UNATHI)
-		strength_mod *= 0.75
-	if(alien == IS_DIONA)
-		strength_mod = 0
-	if(alien == IS_SLIME)
-		M.adjustToxLoss(removed * 2) //Sterilizing, if only by a little bit.
-
-	M.add_chemical_effect(CE_ALCOHOL, 1)
-
-	if(dose * strength_mod >= strength) // Early warning
-		M.make_dizzy(6) // It is decreased at the speed of 3 per tick
-	if(dose * strength_mod >= strength * 2) // Slurring
-		M.slurring = max(M.slurring, 30)
-	if(dose * strength_mod >= strength * 3) // Confusion - walking in random directions
-		M.Confuse(20)
-	if(dose * strength_mod >= strength * 4) // Blurry vision
-		M.eye_blurry = max(M.eye_blurry, 10)
-	if(dose * strength_mod >= strength * 5) // Drowsyness - periodically falling asleep
-		M.drowsyness = max(M.drowsyness, 20)
-	if(dose * strength_mod >= strength * 6) // Toxic dose
-		M.add_chemical_effect(CE_ALCOHOL_TOXIC, toxicity)
-	if(dose * strength_mod >= strength * 7) // Pass out
-		M.Paralyse(20)
-		M.Sleeping(30)
-
-	if(druggy != 0)
-		M.druggy = max(M.druggy, druggy)
-
-	if(adj_temp > 0 && M.bodytemperature < targ_temp) // 310 is the normal bodytemp. 310.055
-		M.bodytemperature = min(targ_temp, M.bodytemperature + (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-	if(adj_temp < 0 && M.bodytemperature > targ_temp)
-		M.bodytemperature = min(targ_temp, M.bodytemperature - (adj_temp * TEMPERATURE_DAMAGE_COEFFICIENT))
-
-	if(halluci)
-		M.hallucination = max(M.hallucination, halluci)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
 	if(istype(O, /obj/item/weapon/paper))
