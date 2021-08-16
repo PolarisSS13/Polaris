@@ -1,7 +1,7 @@
 /obj/item/clothing/ears/headphones
 	name = "headphones"
 	desc = "It's probably not in accordance with company policy to listen to music on the job... but fuck it."
-	icon = "icon/mob/ears.dmi"
+	icon = 'icons/mob/ears.dmi'
 	icon_state = "headphones"
 	volume_multiplier = 0.5
 	slot_flags = SLOT_EARS | SLOT_TWOEARS

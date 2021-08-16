@@ -28,8 +28,6 @@ SUBSYSTEM_DEF(ticker)
 	var/last_restart_notify				// world.time of last restart warning.
 	var/delay_end = FALSE               // If set, the round will not restart on its own.
 
-	var/lobby_music/lobby_music      						// music played in pregame lobby
-
 	var/list/datum/mind/minds = list()	// The people in the game. Used for objective tracking.
 
 	// TODO - I am sure there is a better place these can go.

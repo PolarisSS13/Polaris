@@ -7,7 +7,8 @@
 	var/url // Remember to include http:// or https:// or BYOND will be sad
 	var/volume = 70
 
-/decl/music_track/New()
+/decl/music_track/Initialize()
+	. = ..()
 	license = GET_DECL(license)
 
 /decl/music_track/proc/play_to(var/listener)

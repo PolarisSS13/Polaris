@@ -168,7 +168,7 @@ var/list/all_maps = list()
 	return get_night(1) //Defaults to z1, customize however you want on your own maps
 
 /datum/map/proc/setup_map()
-	lobby_track = get_lobby_track()
+	return
 
 /datum/map/proc/perform_map_generation()
 	return
