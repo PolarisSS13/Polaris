@@ -28,7 +28,7 @@ SUBSYSTEM_DEF(ticker)
 	var/last_restart_notify				// world.time of last restart warning.
 	var/delay_end = FALSE               // If set, the round will not restart on its own.
 
-	var/login_music						// music played in pregame lobby
+	var/lobby_music/lobby_music      						// music played in pregame lobby
 
 	var/list/datum/mind/minds = list()	// The people in the game. Used for objective tracking.
 
@@ -51,23 +51,14 @@ SUBSYSTEM_DEF(ticker)
 var/global/datum/controller/subsystem/ticker/ticker
 /datum/controller/subsystem/ticker/PreInit()
 	global.ticker = src // TODO - Remove this! Change everything to point at SSticker intead
-	login_music = pick(\
-	/*'sound/music/halloween/skeletons.ogg',\
-	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
-	'sound/music/space.ogg',\
-	'sound/music/traitor.ogg',\
-	'sound/music/title2.ogg',\
-	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 
 /datum/controller/subsystem/ticker/Initialize()
 	pregame_timeleft = config.pregame_time
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
 	SSwebhooks.send(
-		WEBHOOK_ROUNDPREP, 
+		WEBHOOK_ROUNDPREP,
 		list(
-			"map" = station_name(), 
+			"map" = station_name(),
 			"url" = get_world_url()
 		)
 	)

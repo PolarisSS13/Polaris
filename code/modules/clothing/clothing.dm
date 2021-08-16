@@ -24,6 +24,7 @@
 	*/
 	var/list/sprite_sheets_refit = null
 	var/ear_protection = 0
+	var/volume_multiplier = 1
 	var/blood_sprite_state
 
 	var/index			//null by default, if set, will change which dmi it uses

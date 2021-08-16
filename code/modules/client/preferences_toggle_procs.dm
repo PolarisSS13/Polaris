@@ -238,7 +238,7 @@
 	SScharacter_setup.queue_preferences_save(prefs)
 
 	feedback_add_details("admin_verb","TAirPumpNoise")
-	
+
 /client/verb/toggle_old_door_sounds()
 	set name = "Toggle Old Door Sounds"
 	set category = "Preferences"
@@ -253,7 +253,7 @@
 	SScharacter_setup.queue_preferences_save(prefs)
 
 	feedback_add_details("admin_verb","TOldDoorSounds")
-	
+
 /client/verb/toggle_department_door_sounds()
 	set name = "Toggle Department Door Sounds"
 	set category = "Preferences"

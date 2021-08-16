@@ -61,7 +61,7 @@ var/list/_client_preferences_by_type
 
 /datum/client_preference/play_lobby_music/toggled(var/mob/preference_mob, var/enabled)
 	if(enabled)
-		preference_mob << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1)
+		using_map.lobby_track.play_to(preference_mob)
 	else
 		preference_mob << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1)
 
