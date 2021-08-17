@@ -123,10 +123,12 @@
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.
 
 /client/proc/playtitlemusic()
-    if(is_preference_enabled(/datum/client_preference/play_lobby_music))
-        if(!using_map.lobby_track)
-            using_map.lobby_track = using_map.get_lobby_track()
-        using_map.lobby_track.play_to(src)
+	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
+		if(!using_map.lobby_track)
+			to_chat(src, "Map has no music, getting random lobby track.") //DEBUG REMOVE ME
+			using_map.lobby_track = using_map.get_lobby_track()
+		to_chat(src,"Playing lobby track!") //DEBUG REMOVE ME
+		using_map.lobby_track.play_to(src)
 
 /proc/get_sfx(soundin)
 	if(istext(soundin))

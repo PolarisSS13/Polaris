@@ -225,6 +225,7 @@
 	var/area/main_area = get_area(src)
 	// Always kill the current sound
 	for(var/mob/living/M in mobs_in_area(main_area))
+		to_world("Stopping Jukebox Song") //DEBUG REMOVE ME
 		M << sound(null, channel = 1)
 
 		main_area.forced_ambience = null
@@ -242,12 +243,15 @@
 	if(freq)
 		var/sound/new_song = sound(current_track.GetTrack(), channel = 1, repeat = 1, volume = 25)
 		new_song.frequency = freq
+		to_world("Setting up Jukebox Song with Custom Frequency") //DEBUG
 		main_area.forced_ambience = list(new_song)
 	else
+		to_world("Setting up Jukebox Song") //DEBUG
 		main_area.forced_ambience = list(current_track.GetTrack())
 
 	for(var/mob/living/M in mobs_in_area(main_area))
 		if(M.mind)
+			to_world("Attempting to play Jukebox song for a mob") //DEBUG
 			main_area.play_ambience(M)
 
 	playing = 1

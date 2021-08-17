@@ -302,6 +302,7 @@
 	title = "Stellar Transit"
 	song = 'sound/ambience/space/space_serithi.ogg'
 	license = /decl/license/cc_by_sa_3_0
+	url = "https://www.byond.com/members/Serithi"
 
 /decl/music_track/clown
 	artist = "Unknown"

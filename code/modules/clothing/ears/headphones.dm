@@ -71,16 +71,16 @@
 		return
 	user << sound(null, channel = sound_channel)
 
-/obj/item/clothing/ears/headphones/interact(var/mob/user)
+/obj/item/clothing/ears/headphones/interact(var/mob/user as mob)
 	var/list/dat = list()
-	dat += "<A href='?src=[src];toggle=1;'>Switch [headphones_on ? "off" : "on"]</a>"
-	dat += "Volume: [music_volume] <A href='?src=[src];vol=-10;'>-</a><A href='?src=[src];vol=10;'>+</a>"
+	dat += "<A href='?src=\ref[src];choice=toggle'>Switch [headphones_on ? "off" : "on"]</a>"
+	dat += "Volume: [music_volume] <A href='?src=\ref[src];choice=vol;vol=-10;'>-</a><A href='?src=[src];choice=vol;vol=10;'>+</a>"
 	dat += "Tracks:"
 	for(var/track in GLOB.music_tracks)
 		if(track == current_track)
 			dat += "<span class='linkOn'>[track]</span>"
 		else
-			dat += "<A href='?src=[src];track=[track];'>[track]</a>"
+			dat += "<A href='?src=\ref[src];track=[track];choice=track;'>[track]</a>"
 
 	var/datum/browser/popup = new(user, "headphones", name, 290, 410)
 	popup.set_content(jointext(dat,"<br>"))

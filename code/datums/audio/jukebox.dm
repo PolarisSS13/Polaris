@@ -44,13 +44,17 @@ GLOBAL_LIST_INIT(jukebox_secret_tracks, list(
 /proc/setup_music_tracks(var/list/tracks)
 	. = list()
 	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.music_tracks
+	to_world("Building music track list...") //DEBUG REMOVE ME
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)
+		to_world("Added song: [track_name]") //DEBUG REMOVE ME
 
-proc/setup_secret_music_tracks(var/list/tracks)
+/proc/setup_secret_music_tracks(var/list/tracks)
 	. = list()
 	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.jukebox_secret_tracks
+	to_world("Building Secret Jukebox track list...") //DEBUG
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)
+		to_world("Added secret song: [track_name]")
