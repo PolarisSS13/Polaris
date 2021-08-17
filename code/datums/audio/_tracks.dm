@@ -69,6 +69,7 @@
 	artist = "Kelly Bailey"
 	title = "Half-Life 2 - Tracking Device"
 	song = 'sound/music/1.ogg'
+	license = /decl/license/grandfathered
 
 /decl/music_track/dilbert
 	title = "Robocop.mp3"
@@ -106,7 +107,7 @@
 	url = "https://filmmusic.io/song/558-epic-intro-2017/"
 
 /decl/music_track/floating
-	artist = "Unknown"
+	artist = "Floating"
 	title = "Unknown"
 	song = 'sound/music/main.ogg'
 	license = /decl/license/grandfathered

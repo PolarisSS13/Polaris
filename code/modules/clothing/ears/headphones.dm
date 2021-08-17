@@ -73,34 +73,40 @@
 
 /obj/item/clothing/ears/headphones/interact(var/mob/user)
 	var/list/dat = list()
-	dat += "<A href='?src=\ref[src];toggle=1;'>Switch [headphones_on ? "off" : "on"]</a>"
-	dat += "Volume: [music_volume] <A href='?src=\ref[src];vol=-10;'>-</a><A href='?src=\ref[src];vol=10;'>+</a>"
+	dat += "<A href='?src=[src];toggle=1;'>Switch [headphones_on ? "off" : "on"]</a>"
+	dat += "Volume: [music_volume] <A href='?src=[src];vol=-10;'>-</a><A href='?src=[src];vol=10;'>+</a>"
 	dat += "Tracks:"
 	for(var/track in GLOB.music_tracks)
 		if(track == current_track)
 			dat += "<span class='linkOn'>[track]</span>"
 		else
-			dat += "<A href='?src=\ref[src];track=[track];'>[track]</a>"
+			dat += "<A href='?src=[src];track=[track];'>[track]</a>"
 
 	var/datum/browser/popup = new(user, "headphones", name, 290, 410)
 	popup.set_content(jointext(dat,"<br>"))
 	popup.open()
 
 /obj/item/clothing/ears/headphones/Topic(var/user, var/list/href_list)
-	if(href_list["toggle"])
-		toggle(user)
-		interact(user)
-		return TOPIC_REFRESH
-	if(href_list["vol"])
-		var/adj = text2num(href_list["vol"])
-		music_volume = clamp(music_volume + adj, 0, 100)
-		if(headphones_on)
-			play_music(user)
-		interact(user)
-		return TOPIC_REFRESH
-	if(href_list["track"])
-		current_track = href_list["track"]
-		if(headphones_on)
-			play_music(user)
-		interact(user)
-		return TOPIC_HANDLED
+	if(..())
+		return 1
+
+	if(href_list["choice"])
+		switch(href_list["choice"])
+			if("toggle")
+				toggle(user)
+				interact(user)
+				return TOPIC_REFRESH
+			if("vol")
+				var/adj = text2num(href_list["vol"])
+				music_volume = clamp(music_volume + adj, 0, 100)
+				if(headphones_on)
+					play_music(user)
+				interact(user)
+				return TOPIC_REFRESH
+			if("track")
+				current_track = href_list["track"]
+				if(headphones_on)
+					play_music(user)
+				interact(user)
+				return TOPIC_HANDLED
+	return 1
