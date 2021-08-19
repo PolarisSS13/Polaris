@@ -112,7 +112,11 @@
 		/datum/lore/codex/page/about_news,
 		)
 
-	var/newsindex = "103" //Update with number of latest article
+	var/newsindex
+
+/datum/lore/codex/category/main_news/New()
+	..()
+	newsindex = LAZYLEN(children)
 
 /datum/lore/codex/page/about_news
 	name = "About the Publisher"

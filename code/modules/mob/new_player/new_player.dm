@@ -84,7 +84,7 @@
 
 	if(GLOB.news_data.station_newspaper && !client.seen_news && client.is_preference_enabled(/datum/client_preference/show_lore_news))
 		show_latest_news(GLOB.news_data.station_newspaper)
-		client.prefs.lastnews = GLOB.news_data.newsindex
+		client.prefs.lastlorenews = GLOB.news_data.newsindex
 		SScharacter_setup.queue_preferences_save(client.prefs)
 
 	panel = new(src, "Welcome","Welcome", 500, 480, src)
