@@ -2166,9 +2166,9 @@ shaved
 	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/tat_tamoko
-		name = "Tattoo (Ta Moko, Face)"
-		icon_state = "tat_tamoko"
-		body_parts = list(BP_HEAD)
+	name = "Tattoo (Ta Moko, Face)"
+	icon_state = "tat_tamoko"
+	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/tat_toshi_left
 	name = "Tattoo (Toshi, Left Eye)"
@@ -2266,9 +2266,9 @@ shaved
 	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/cheshire_left
-		name = "Cheshire (Left Cheek)"
-		icon_state = "cheshire_l"
-		body_parts = list(BP_HEAD)
+	name = "Cheshire (Left Cheek)"
+	icon_state = "cheshire_l"
+	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/cheshire_right
 	name = "Cheshire (Right Cheek)"
@@ -2312,14 +2312,14 @@ shaved
 	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/neck
-		name = "Neck Cover"
-		icon_state = "neck"
-		body_parts = list(BP_HEAD)
+	name = "Neck Cover"
+	icon_state = "neck"
+	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/neckthick
-		name = "Neck Cover (Thick)"
-		icon_state = "neckthick"
-		body_parts = list(BP_HEAD)
+	name = "Neck Cover (Thick)"
+	icon_state = "neckthick"
+	body_parts = list(BP_HEAD)
 
 /datum/sprite_accessory/marking/nosestripe
 	name = "Nose Stripe"
@@ -2347,29 +2347,29 @@ shaved
 	body_parts = list(BP_TORSO)
 
 /datum/sprite_accessory/marking/scratch_abdomen_small_right
-		name = "Scar, Abdomen Small Right"
-		icon_state = "scratch_abdomensmall_r"
-		body_parts = list(BP_TORSO)
+	name = "Scar, Abdomen Small Right"
+	icon_state = "scratch_abdomensmall_r"
+	body_parts = list(BP_TORSO)
 
 /datum/sprite_accessory/marking/scratch_back
-		name = "Scar, Back"
-		icon_state = "scratch_back"
-		body_parts = list(BP_TORSO)
+	name = "Scar, Back"
+	icon_state = "scratch_back"
+	body_parts = list(BP_TORSO)
 
 /datum/sprite_accessory/marking/scratch_chest_left
-		name = "Scar, Chest (Left)"
-		icon_state = "scratch_chest_l"
-		body_parts = list(BP_TORSO)
+	name = "Scar, Chest (Left)"
+	icon_state = "scratch_chest_l"
+	body_parts = list(BP_TORSO)
 
 /datum/sprite_accessory/marking/scratch_chest_right
-		name = "Scar, Chest (Right)"
-		icon_state = "scratch_chest_r"
-		body_parts = list(BP_TORSO)
+	name = "Scar, Chest (Right)"
+	icon_state = "scratch_chest_r"
+	body_parts = list(BP_TORSO)
 
 /datum/sprite_accessory/marking/skull_paint
-		name = "Skull Paint"
-		icon_state = "skull"
-		body_parts = list(BP_HEAD)
+	name = "Skull Paint"
+	icon_state = "skull"
+	body_parts = list(BP_HEAD)
 
 //Heterochromia
 
