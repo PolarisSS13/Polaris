@@ -13,10 +13,13 @@
 /atom/proc/CheckParts(list/parts_list, datum/crafting_recipe/R)
 	SEND_SIGNAL(src, COMSIG_ATOM_CHECKPARTS, parts_list, R)
 	if(LAZYLEN(parts_list))
-		for(var/datum/reagent/A as anything in parts_list["reagents"])
-			if(!reagents)
-				reagents = new()
-			reagents.reagent_list.Add(A)
+		if(istype(parts_list["reagents"], /datum/reagents))
+			var/datum/reagents/RG = parts_list["reagents"]
+			if(istype(reagents))
+				RG.trans_to_holder(reagents, RG.total_volume)
+			else
+				reagents = RG
+				RG.my_atom = src
 			reagents.conditional_update()
 
 		for(var/atom/movable/M as anything in parts_list["items"])

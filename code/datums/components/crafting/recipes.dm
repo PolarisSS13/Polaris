@@ -45,6 +45,14 @@
 /datum/crafting_recipe/proc/on_craft_completion(mob/user, atom/result)
 	return
 
+// Computes the total reagents volume 
+/datum/crafting_recipe/proc/get_parts_reagents_volume()
+	. = 0
+	for(var/list/L in parts)
+		for(var/path in L)
+			if(ispath(path, /datum/reagent))
+				. += L[path]
+
 /datum/crafting_recipe/stunprod
 	name = "Stunprod"
 	result = /obj/item/weapon/melee/baton/cattleprod
