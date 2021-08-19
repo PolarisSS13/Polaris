@@ -242,6 +242,8 @@ var/global/list/gear_datums = list()
 	var/list/gear_tweaks = list() //List of datums which will alter the item after it has been spawned.
 	var/exploitable = 0		//Does it go on the exploitable information list?
 	var/type_category = null
+	var/list/blacklisted_from_backgrounds // If set to a list, background paths in this list will ban the item.
+	var/list/available_to_backgrounds     // If set to a list, only background paths in this list will allow the item.
 
 /datum/gear/New()
 	..()

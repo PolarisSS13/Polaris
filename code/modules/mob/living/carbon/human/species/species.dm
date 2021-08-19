@@ -281,6 +281,9 @@
 	/// One of MOB_DEXTERITY_* - the dexterity level of this species for using objects.
 	var/dexterity = MOB_DEXTERITY_FULL
 
+	var/list/available_cultural_info
+	var/list/force_cultural_info
+	var/list/default_cultural_info
 /datum/species/proc/update_attack_types()
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)
@@ -291,6 +294,33 @@
 		hud = new hud_type()
 	else
 		hud = new()
+
+	// Autogenerate our culture list, assuming it hasn't been supplied at compile time.
+	if(!islist(available_cultural_info) || !length(available_cultural_info))
+		available_cultural_info = list()
+		default_cultural_info =   list()
+		force_cultural_info =     list()
+		var/list/all_culture_info = decls_repository.get_decls_of_type(/decl/cultural_info)
+		for(var/culture_type in all_culture_info)
+			var/decl/cultural_info/culture_decl = all_culture_info[culture_type]
+			if(culture_decl.category && culture_decl.is_available_to_species(src))
+				LAZYDISTINCTADD(available_cultural_info[culture_decl.category], culture_decl.type)
+
+	// Overwrite, populate and update available/default cultural information based on
+	// other supplied context, such as forced fields (for species like Vox).
+	for(var/token in ALL_CULTURAL_TAGS)
+		var/force_val = force_cultural_info[token]
+		if(force_val)
+			default_cultural_info[token] = force_val
+			available_cultural_info[token] = list(force_val)
+		else if(!LAZYLEN(available_cultural_info[token]))
+			var/list/map_systems = using_map.available_cultural_info[token]
+			available_cultural_info[token] = map_systems.Copy()
+		if(LAZYLEN(available_cultural_info[token]) && !default_cultural_info[token])
+			var/list/avail_systems = available_cultural_info[token]
+			default_cultural_info[token] = avail_systems[1]
+		if(!default_cultural_info[token])
+			default_cultural_info[token] = using_map.default_cultural_info[token]
 
 	// Prep the descriptors for the species
 	if(LAZYLEN(descriptors))

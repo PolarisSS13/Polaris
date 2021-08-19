@@ -71,11 +71,7 @@ var/global/list/preferences_datums = list()
 	var/b_synth							//Same as above
 	var/synth_markings = 0				//Enable/disable markings on synth parts.
 
-		//Some faction information.
-	var/home_system = "Unset"           //System of birth.
-	var/citizenship = "Solar Confederate Government"            //Nation of citizenship
-	var/faction = "NanoTrasen"                //General associated faction.
-	var/religion = "None"               //Religious association.
+	//Some faction information.
 	var/antag_faction = "None"			//Antag associated faction.
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
 

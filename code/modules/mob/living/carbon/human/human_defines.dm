@@ -52,10 +52,6 @@
 	var/pdachoice = 1	//Which PDA type the player has chosen.
 
 	// General information
-	var/home_system = ""
-	var/citizenship = ""
-	var/personal_faction = ""
-	var/religion = ""
 	var/antag_faction = ""
 	var/antag_vis = ""
 
@@ -156,3 +152,6 @@
 	var/custom_species
 
 	dexterity = MOB_DEXTERITY_FULL
+
+	/// Current cultural information tracked by this mob.
+	var/list/cultural_info

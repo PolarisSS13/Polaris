@@ -178,6 +178,8 @@ var/global/list/all_maps = list()
 	//Maintenance Areas
 	var/maintenance_areas = /area/maintenance
 
+	var/list/available_cultural_info
+	var/list/default_cultural_info
 
 /datum/map/New()
 	..()
@@ -347,7 +349,6 @@ var/global/list/all_maps = list()
 
 	// List of regions for GameMaster events
 	var/list/event_regions = list()
-
 
 // Default constructor applies itself to the parent map datum
 /datum/map_z_level/New(var/datum/map/map)

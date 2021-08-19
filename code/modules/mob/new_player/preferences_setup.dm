@@ -1,4 +1,5 @@
 /datum/preferences
+	var/list/cultural_info = list()
 	//The mob should have a gender you want before running this proc. Will run fine without H
 /datum/preferences/proc/randomize_appearance_and_body_for(var/mob/living/carbon/human/H)
 	var/datum/species/current_species = GLOB.all_species[species ? species : "Human"]
@@ -228,18 +229,31 @@
 		for(var/thing in gear)
 			var/datum/gear/G = gear_datums[thing]
 			if(G)
-				var/permitted = 0
+				var/permitted = FALSE
 				if(!G.allowed_roles)
-					permitted = 1
+					permitted = TRUE
 				else if(!previewJob)
-					permitted = 0
+					permitted = FALSE
 				else
 					for(var/job_name in G.allowed_roles)
 						if(previewJob.title == job_name)
-							permitted = 1
+							permitted = TRUE
 
-				if(G.whitelisted && (G.whitelisted != mannequin.species.name))
-					permitted = 0
+				if(permitted && length(G.available_to_backgrounds))
+					permitted = FALSE
+					for(var/tag in ALL_CULTURAL_TAGS)
+						if(cultural_info[tag] in G.available_to_backgrounds)
+							permitted = TRUE
+							break
+
+				if(permitted && length(G.blacklisted_from_backgrounds))
+					for(var/tag in ALL_CULTURAL_TAGS)
+						if(cultural_info[tag] in G.blacklisted_from_backgrounds)
+							permitted = FALSE
+							break
+
+				if(permitted && G.whitelisted && (G.whitelisted != mannequin.species.name))
+					permitted = FALSE
 
 				if(!permitted)
 					continue

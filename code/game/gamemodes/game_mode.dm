@@ -523,11 +523,10 @@ var/global/list/additional_antag_types = list()
 
 /proc/get_nt_opposed()
 	var/list/dudes = list()
-	for(var/mob/living/carbon/human/man in player_list)
+	for(var/mob/living/carbon/human/man in global.player_list)
 		if(man.client)
-			if(man.client.prefs.economic_status == CLASS_LOWER)
-				dudes += man
-			else if(man.client.prefs.economic_status == CLASS_LOWMID && prob(50))
+			var/decl/cultural_info/culture = man.get_cultural_value(TAG_FACTION)
+			if(culture && prob(25 * culture.subversive_potential))
 				dudes += man
 	if(dudes.len == 0) return null
 	return pick(dudes)

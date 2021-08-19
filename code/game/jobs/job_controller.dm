@@ -356,22 +356,37 @@ var/global/datum/controller/occupations/job_master
 				if(!G) //Not a real gear datum (maybe removed, as this is loaded from their savefile)
 					continue
 
-				var/permitted
+				var/permitted = FALSE
 				// Check if it is restricted to certain roles
 				if(G.allowed_roles)
 					for(var/job_name in G.allowed_roles)
 						if(job.title == job_name)
-							permitted = 1
+							permitted = TRUE
 				else
-					permitted = 1
+					permitted = TRUE
 
 				// Check if they're whitelisted for this gear (in alien whitelist? seriously?)
-				if(G.whitelisted && !is_alien_whitelisted(H, GLOB.all_species[G.whitelisted]))
-					permitted = 0
+				if(permitted && G.whitelisted && !is_alien_whitelisted(H, GLOB.all_species[G.whitelisted]))
+					permitted = FALSE
+
+				if(permitted && length(G.available_to_backgrounds))
+					permitted = FALSE
+					for(var/tag in ALL_CULTURAL_TAGS)
+						var/decl/cultural_info/culture_decl = H.get_cultural_value(tag)
+						if(culture_decl && (culture_decl.type in G.available_to_backgrounds))
+							permitted = TRUE
+							break
+
+				if(permitted && length(G.blacklisted_from_backgrounds))
+					for(var/tag in ALL_CULTURAL_TAGS)
+						var/decl/cultural_info/culture_decl = H.get_cultural_value(tag)
+						if(culture_decl && (culture_decl.type in G.blacklisted_from_backgrounds))
+							permitted = FALSE
+							break
 
 				// If they aren't, tell them
 				if(!permitted)
-					to_chat(H, "<span class='warning'>Your current species, job or whitelist status does not permit you to spawn with [thing]!</span>")
+					to_chat(H, "<span class='warning'>Your current species, job, background or whitelist status does not permit you to spawn with [thing]!</span>")
 					continue
 
 				// Implants get special treatment

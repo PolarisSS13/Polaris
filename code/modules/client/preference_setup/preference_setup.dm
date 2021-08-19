@@ -261,17 +261,23 @@
 
 // Returns what kind of FBP the player's prefs are.  Returns 0 if they're not an FBP.
 /datum/category_item/player_setup_item/proc/get_FBP_type()
+	// todo retrieve braintype from culture
 	if(!is_FBP())
 		return 0 // Not a robot.
 	if(O_BRAIN in pref.organ_data)
 		switch(pref.organ_data[O_BRAIN])
 			if("assisted")
-				return PREF_FBP_CYBORG
+				. = PREF_FBP_CYBORG
 			if("mechanical")
-				return PREF_FBP_POSI
+				. = PREF_FBP_POSI
 			if("digital")
-				return PREF_FBP_SOFTWARE
-	return 0 //Something went wrong!
+				. = PREF_FBP_SOFTWARE
+	if(.)
+		for(var/tag in pref.cultural_info)
+			var/decl/cultural_info/culture_decl = GET_DECL(pref.cultural_info[tag])
+			var/new_brain = culture_decl.override_fbp_brain_type(.)
+			if(new_brain && new_brain != .)
+				. = new_brain
 
 /datum/category_item/player_setup_item/proc/get_min_age()
 	var/datum/species/S = GLOB.all_species[pref.species ? pref.species : "Human"]
