@@ -18,7 +18,7 @@
 		to_chat(listener, url)
 
 	to_chat(listener, "<span class='good'>License: <a href='[license.url]'>[license.name]</a></span>")
-	listener << sound(song, repeat = 1, wait = 0, volume = volume, channel = 1)
+	listener << sound(song, repeat = 1, wait = 0, volume = volume, channel = CHANNEL_LOBBYMUSIC)
 
 // No VV editing anything about music tracks
 /decl/music_track/VV_static()
