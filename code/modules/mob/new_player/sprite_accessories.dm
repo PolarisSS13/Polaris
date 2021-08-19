@@ -34,9 +34,6 @@
 	// Whether or not the accessory can be affected by colouration
 	var/do_colouration = 1
 
-	//To allow markings to show over hair layer, often used for Synthetic and Skrell markings.
-	var/over_hair = 0
-
 	var/color_blend_mode = ICON_MULTIPLY	// If checked.
 
 	// Ckey of person allowed to use this, if defined.
