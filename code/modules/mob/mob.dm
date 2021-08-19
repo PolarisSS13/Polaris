@@ -619,9 +619,6 @@
 				stat("CPU:","[world.cpu]")
 				stat("Instances:","[world.contents.len]")
 				stat(null, "Time Dilation: [round(SStime_track.time_dilation_current,1)]% AVG:([round(SStime_track.time_dilation_avg_fast,1)]%, [round(SStime_track.time_dilation_avg,1)]%, [round(SStime_track.time_dilation_avg_slow,1)]%)")
-				stat("Keys Held", keys2text(client.move_keys_held | client.mod_keys_held))
-				stat("Next Move ADD", dirs2text(client.next_move_dir_add))
-				stat("Next Move SUB", dirs2text(client.next_move_dir_sub))
 
 			if(statpanel("MC"))
 				stat("Location:", "([x], [y], [z]) [loc]")

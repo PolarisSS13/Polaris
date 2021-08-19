@@ -54,8 +54,8 @@ var/global/list/runlevel_flags = list(RUNLEVEL_LOBBY, RUNLEVEL_SETUP, RUNLEVEL_G
 // The numbers just define the ordering, they are meaningless otherwise.
 #define INIT_ORDER_WEBHOOKS		50
 #define INIT_ORDER_SQLITE		40
-#define INIT_ORDER_CHEMISTRY	35
 #define INIT_ORDER_INPUT		37
+#define INIT_ORDER_CHEMISTRY	35
 #define INIT_ORDER_SKYBOX		30
 #define INIT_ORDER_MAPPING		25
 #define INIT_ORDER_DECALS		20
