@@ -279,14 +279,21 @@
 		revert()
 
 	if(controlling)
-		var/mob/living/carbon/human/H = holder.loc
+		var/mob/living/carbon/human/H = holder.wearer
+
+		var/mob/living/simple_mob/animal/borer/Borer = H.has_brain_worms()
+		if(Borer)	// As funny as it would be to see a borer, AI, and human swap minds like musical chairs, let's not.
+			revert()
+			to_chat(integrated_ai, "<span class='danger'>The neural jack signals a warning abruptly, before rapidly retracting.</span>")
+			to_chat(H, "<span class='warning'>You are shoved into consciousness as though you have been dropped into freezing water.</span>")
+			return
 
 		var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
 		if(Brain)
 			if(Brain.robotic < ORGAN_ASSISTED)
 				H.add_modifier(/datum/modifier/mute, 30 SECONDS, suppress_failure = TRUE)
 
-		if(H.stat == DEAD && world.time > last_defib + 1 MINUTE && (H.getBruteLoss() + H.getFireLoss()) < (H.getMaxHealth() * 2 - H.getCloneLoss()))
+		if(H.stat == DEAD && world.time > last_defib + 1 MINUTE && (H.getBruteLoss() + H.getFireLoss()) < (H.getMaxHealth() * 2 - H.getCloneLoss() * 2))
 			H.setToxLoss(0)
 
 			if(paddles && !paddles.busy)
@@ -322,7 +329,7 @@
 
 	var/mob/living/jacker = integrated_ai
 	var/obj/item/weapon/rig/rig = holder
-	var/mob/living/carbon/human/H = rig.loc
+	var/mob/living/carbon/human/H = rig.wearer
 	if(!(istype(H) && H.get_rig() == rig))
 		to_chat(jacker, "Your rig does not have a pilot, or is attached to an incompatible bioform.")
 		return
@@ -339,22 +346,28 @@
 	to_chat(H, "<span class='warning'>\The [rig]'s [src] begins clacking, accompanied by a pressure along your spine.</span>")
 
 	if(do_after(jacker, 1 MINUTE, H, ignore_movement = TRUE))
-		if(!H || H.has_brain_worms() || !integrated_ai || controlling || !rig.ai_override_enabled)
+		if(!H || !integrated_ai || controlling || !rig.ai_override_enabled)
 			return
 		else
 
-			to_chat(jacker, "<font color='red'><B>You fully engage \the [src]'s neural jack, interfacing directly with the pilot's nervous system.</B></font>")
+			to_chat(jacker, "<span class='warning'>You fully engage \the [src]'s neural jack, interfacing directly with the pilot's nervous system.</span>")
 			var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
 			if(!Brain)
 				to_chat(jacker,"\The [src] responds with an error code, as the neural jack swiftly retracts. The pilot has no neural cortex.")
+				return
+
+			if(H.has_brain_worms())
+				to_chat(jacker, "<span class='warning'>\The [src] connects, but only for a moment. You see the world through.. alien eyes, for a brief instant, as the jack retracts.</span>")
+				to_chat(H, "<span class='warning'>Something moves under the surface of your neck.</span>")
+				return
 
 			if(Brain.robotic < ORGAN_ASSISTED)
-				to_chat(H, "<font color='red'><B>You feel a strange shifting sensation behind your eyes as a consciousness displaces yours. Your final sensation is that of something wet tearing.</B></font>")
+				to_chat(H, "<span class='warning'>You feel a strange shifting sensation behind your eyes as a consciousness displaces yours. Your final sensation is that of something wet tearing.</span>")
 				H.adjustBrainLoss(rand(0,5))
 				imperfect_connection = TRUE
 
 			else
-				to_chat(H, "<font color='red'><B>You feel a strange shifting sensation behind your eyes as a consciousness displaces yours.</B></font>")
+				to_chat(H, "<span class='warning'>You feel a strange shifting sensation behind your eyes as a consciousness displaces yours.</span>")
 
 			if(H.stat == DEAD)
 				corpse_pilot = TRUE
@@ -408,7 +421,7 @@
 			return
 
 /obj/item/rig_module/ai_container/advanced/proc/revert()
-	if(integrated_ai && pilot_brain)
+	if(controlling && integrated_ai && pilot_brain)
 		var/mob/living/carbon/human/H = holder.loc	// The mob wearing the rig
 
 		if(istype(H))

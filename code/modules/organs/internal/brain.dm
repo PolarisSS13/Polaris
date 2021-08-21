@@ -142,6 +142,12 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 		if(istype(owner, /mob/living/carbon))
 			B.transfer_identity(owner)
 
+	var/obj/item/weapon/rig/RIG = owner.get_rig()
+	if(RIG)
+		var/obj/item/rig_module/ai_container/advanced/AD = locate() in RIG
+		if(AD && AD.controlling)
+			AD.revert()
+
 	..()
 
 /obj/item/organ/internal/brain/replaced(var/mob/living/target)
