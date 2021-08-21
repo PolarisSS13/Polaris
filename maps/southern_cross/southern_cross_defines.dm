@@ -79,7 +79,13 @@
 							NETWORK_SUPPLY
 							)
 	usable_email_tlds = list("freemail.nt")
-	allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+	allowed_spawns = list(
+		"Arrivals Shuttle",
+		"Gateway",
+		"Checkpoint",
+		"Cryogenic Storage",
+		"Cyborg Storage"
+	)
 
 
 	use_overmap = 			TRUE
