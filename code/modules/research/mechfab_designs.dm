@@ -1017,6 +1017,14 @@
 	materials = list(MAT_PLASTEEL = 2000, MAT_GRAPHITE = 1500, MAT_DIAMOND = 1000, MAT_GOLD = 500, MAT_SILVER = 750, MAT_VERDANTIUM = 1000)
 	build_path = /obj/item/rig_module/ai_container
 
+/datum/design/item/mechfab/rigsuit/aicontainer_advanced
+	name = "hardsuit intelligence integration system"
+	desc = "A compact AI network and neural jack system for a Rigsuit."
+	id = "rig_component_aicontainer_advanced"
+	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 6, TECH_BIO = 6, TECH_POWER = 4)
+	materials = list(MAT_PLASTEEL = 2000, MAT_GRAPHITE = 1500, MAT_DIAMOND = 1000, MAT_METALHYDROGEN = 1500, MAT_VERDANTIUM = 1000)
+	build_path = /obj/item/rig_module/ai_container/advanced
+
 /datum/design/item/mechfab/rigsuit/datajack
 	name = "hardsuit datajack"
 	desc = "A compact datajack for a hardsuit."
