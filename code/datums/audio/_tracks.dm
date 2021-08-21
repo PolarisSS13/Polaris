@@ -28,14 +28,6 @@
 	song = 'sound/ambience/ambispace.ogg'
 	license = /decl/license/grandfathered
 
-/decl/music_track/businessend
-	artist = "Cletus Got Shot"
-	title = "Business End"
-	song = 'sound/music/businessend.ogg'
-	album = "Unamerican"
-	license = /decl/license/cc_by_nc_sa_3_0
-	url = "https://freemusicarchive.org/music/Cletus_Got_Shot/Unamerican/Cletus_Got_Shot_-_UNAMERICAN_-_09_Business_End"
-
 /decl/music_track/chasing_time
 	artist = "Dexter Britain"
 	title = "Chasing Time"
@@ -98,13 +90,6 @@
 	song = 'sound/music/epic2015.ogg'
 	license = /decl/license/cc_by_4_0
 	url = "https://filmmusic.io/song/323-epic-intro-2015/"
-
-/decl/music_track/epicintro2017
-	artist = "Sascha Ende"
-	title = "Epic Intro 2017"
-	song = 'sound/music/epic2017.ogg'
-	license = /decl/license/cc_by_4_0
-	url = "https://filmmusic.io/song/558-epic-intro-2017/"
 
 /decl/music_track/floating
 	artist = "Floating"
@@ -170,13 +155,6 @@
 	song = 'sound/misc/TestLoop1.ogg'
 	license = /decl/license/grandfathered
 
-/decl/music_track/on_the_rocks
-	artist = "Mikazu"
-	title = "On the Rocks"
-	song = 'sound/music/on_the_rocks.ogg'
-	license = /decl/license/cc_by_sa_3_0
-	url = "https://soundcloud.com/mikazu-1/baystation-12-on-the-rocks"
-
 /decl/music_track/pwmur
 	artist = "Earthcrusher"
 	title = "Phoron will make us rich"
@@ -211,13 +189,6 @@
 	song = 'sound/music/THUNDERDOME.ogg'
 	license = /decl/license/cc_by_nc_sa_3_0
 	url = "https://www.newgrounds.com/audio/listen/312622"
-
-/decl/music_track/torch
-	artist = "L. Luke Leimer/LorenLuke"
-	title = "Torch: A Light in the Darkness"
-	song = 'sound/music/Torch.ogg'
-	license = /decl/license/cc_by_nc_sa_3_0
-	url = "https://soundcloud.com/luke-leimer/torch-a-light-in-the-darkness"
 
 /decl/music_track/treacherous_voyage
 	artist = "Jon Luc Hefferman"

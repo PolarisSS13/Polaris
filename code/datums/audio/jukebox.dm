@@ -17,11 +17,10 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"Memories of Lysendraa" = /decl/music_track/lysendraa,
 	"Marhaba" = /decl/music_track/marhaba,
 	"Space Oddity" = /decl/music_track/space_oddity,
-	"Torch: A Light in the Darkness" = /decl/music_track/torch,
 	"Treacherous Voyage" = /decl/music_track/treacherous_voyage,
 	"Wake" = /decl/music_track/wake,
 	"Phoron Will Make Us Rich" = /decl/music_track/pwmur,
-	"Every light is blinking at once" = /decl/music_track/elibao,
+	"Every Light is Blinking at Once" = /decl/music_track/elibao,
 	"In Orbit" = /decl/music_track/inorbit,
 	"Martian Cowboy" = /decl/music_track/martiancowboy,
 	"Monument" = /decl/music_track/monument,
@@ -38,7 +37,6 @@ GLOBAL_LIST_INIT(jukebox_secret_tracks, list(
 	"THUNDERDOME" = /decl/music_track/thunderdome,
 	"Space Asshole" = /decl/music_track/spaceasshole,
 	"Russkiy rep Diskoteka" = /decl/music_track/russianrapdisco,
-	"Cletus Got Shot" = /decl/music_track/businessend
 ))
 
 /proc/setup_music_tracks(var/list/tracks)
