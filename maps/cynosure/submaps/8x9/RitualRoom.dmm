@@ -3,7 +3,7 @@
 "f" = (/obj/structure/table/sifwoodentable,/obj/item/godfig{desc = "A holy figure of some kind of energy formation."; icon_state = "singularity"},/obj/random/maintenance/clean,/obj/random/maintenance/clean,/obj/random/maintenance/clean,/turf/simulated/floor/tiled/dark,/area/template_noop)
 "g" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/dark,/area/template_noop)
 "m" = (/turf/template_noop,/area/template_noop)
-"n" = (/obj/item/weapon/storage/backpack/cultpack,/obj/item/clothing/suit/storage/hooded/chaplain_hoodie,/obj/effect/decal/cleanable/dirt,/obj/random/maintenance/clean,/turf/simulated/floor/tiled/dark,/area/template_noop)
+"n" = (/obj/item/weapon/storage/backpack/cultpack,/obj/item/clothing/suit/storage/hooded/chaplain_hoodie,/obj/effect/decal/cleanable/dirt,/obj/random/maintenance/clean,/obj/structure/sign/poster/custom{dir = 1; pixel_y = 32; poster_decl = /decl/poster/vore_100},/turf/simulated/floor/tiled/dark,/area/template_noop)
 "q" = (/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled/dark,/area/template_noop)
 "r" = (/obj/effect/graffitispawner{color = "#DA0000"; color_secondary = "#810C0C"; graffiti_type = "rune4"},/turf/simulated/floor/tiled/dark,/area/template_noop)
 "t" = (/obj/structure/flora/pottedplant/dead,/turf/simulated/floor/tiled/dark,/area/template_noop)

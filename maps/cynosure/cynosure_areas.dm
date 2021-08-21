@@ -767,6 +767,7 @@
 /area/surface/station/construction
 	name = "\improper Engineering Construction Area"
 	icon_state = "yellow"
+	flags = AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/surface/station/construction/bar
 	name = "\improper Bar Basement"
@@ -1072,11 +1073,11 @@
 /area/surface/outpost/research/xenoarcheology/isolation_c
 	name = "Xenoarcheology Isolation C"
 
-/area/surface/outpost/research/xenoarcheology/enterance
-	name = "Xenoarcheology Research Enterance"
+/area/surface/outpost/research/xenoarcheology/entrance
+	name = "Xenoarcheology Research Entrance"
 
 /area/surface/outpost/research/xenoarcheology/surface
-	name = "Xenoarcheology Research Surface Enterance"
+	name = "Xenoarcheology Research Surface Entrance"
 
 /area/surface/outpost/research/xenoarcheology/longtermstorage
 	name = "Xenoarcheology Long-Term Anomalous Storage"
@@ -1438,8 +1439,8 @@
 	icon_state = "tcomsatcham"
 	ambience = AMBIENCE_ENGINEERING
 
-/area/tcommsat/cynosure/enterance
-	name = "\improper Telecomms Enterance"
+/area/tcommsat/cynosure/entrance
+	name = "\improper Telecomms Entrance"
 	icon_state = "tcomsatentrance"
 
 /area/tcommsat/cynosure/teleporter

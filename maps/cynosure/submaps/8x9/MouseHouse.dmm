@@ -18,12 +18,13 @@
 "B" = (/obj/structure/dogbed,/obj/random/plushie,/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
 "F" = (/obj/structure/sink{dir = 8; pixel_x = -12; pixel_y = 2},/obj/item/weapon/reagent_containers/food/snacks/wishsoup{pixel_y = -6},/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
 "G" = (/obj/item/trash/semki,/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
-"H" = (/obj/structure/sign/poster{pixel_x = -32; poster_decl = /decl/poster/bay_49},/turf/simulated/floor/wood,/area/template_noop)
+"H" = (/obj/structure/sign/poster{dir = 8; pixel_x = -32; poster_decl = /decl/poster/bay_49},/turf/simulated/floor/wood,/area/template_noop)
 "J" = (/obj/item/weapon/beach_ball,/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
 "K" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/wood,/area/template_noop)
 "L" = (/obj/item/trash/candy,/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
 "M" = (/obj/structure/window/basic{dir = 1},/obj/machinery/disposal,/obj/structure/disposalpipe/trunk{dir = 1},/turf/simulated/floor/wood,/area/template_noop)
 "O" = (/obj/machinery/light/small,/turf/simulated/floor/wood,/area/template_noop)
+"R" = (/obj/structure/dogbed,/mob/living/simple_mob/animal/passive/mouse,/obj/structure/sign/poster{pixel_y = 32; poster_decl = /decl/poster/vore_91},/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
 "S" = (/obj/item/weapon/shreddedp,/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
 "T" = (/obj/structure/window/basic{dir = 1},/obj/structure/table/standard,/obj/item/device/flashlight/lamp/green,/obj/item/weapon/paper_bin{pixel_x = 1; pixel_y = 9},/turf/simulated/floor/wood,/area/template_noop)
 "V" = (/obj/structure/dogbed,/mob/living/simple_mob/animal/passive/mouse,/turf/simulated/floor/carpet/bcarpet,/area/template_noop)
@@ -33,7 +34,7 @@
 
 (1,1,1) = {"
 aaaaaaaa
-aVBnVfVa
+aVBnRfVa
 aGXXXXXa
 aFSXXlXa
 avbLJSta

@@ -3314,7 +3314,7 @@
 /obj/structure/shuttle/engine/propulsion/burst{
 	dir = 4
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/shuttle/large_escape_pod2/station)
 "cht" = (
 /obj/structure/cable/green{
@@ -4839,6 +4839,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/rnd/lab)
+"djH" = (
+/obj/structure/railing{
+	dir = 1
+	},
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/simulated/open,
+/area/surface/station/ai/upload_foyer)
 "djP" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/borderfloor{
@@ -7368,6 +7377,7 @@
 /obj/structure/railing{
 	dir = 1
 	},
+/obj/structure/railing,
 /turf/simulated/open,
 /area/surface/station/hallway/secondary/secondfloor/weststairwell)
 "eUC" = (
@@ -9899,9 +9909,6 @@
 	id_tag = "roof_airlock_pump"
 	},
 /obj/effect/map_helper/airlock/atmos/chamber_pump,
-/obj/structure/sign/warning/cold{
-	pixel_y = -32
-	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/hallway/primary/secondfloor/east)
 "gAD" = (
@@ -13373,7 +13380,7 @@
 /obj/structure/shuttle/engine/propulsion/burst/right{
 	dir = 4
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/shuttle/large_escape_pod2/station)
 "iFF" = (
 /obj/machinery/alarm{
@@ -15659,7 +15666,7 @@
 	pixel_y = 7
 	},
 /obj/effect/landmark/start{
-	name = "Colony Director"
+	name = "Site Manager"
 	},
 /obj/machinery/button/remote/blast_door{
 	dir = 8;
@@ -17521,6 +17528,12 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/secondfloor/west)
+"lki" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/turf/simulated/open,
+/area/surface/station/park/skybridge)
 "lkp" = (
 /obj/structure/sign/warning/nosmoking_2,
 /turf/simulated/wall,
@@ -19611,27 +19624,9 @@
 /area/surface/station/command/teleporter)
 "mKt" = (
 /obj/structure/table/reinforced,
-/obj/machinery/button/remote/blast_door{
-	dir = 1;
-	id = "biohazard";
-	layer = 2.9;
-	name = "Biohazard Shutter Control";
-	pixel_x = 6;
-	pixel_y = 4;
-	req_one_access = list(47)
+/obj/machinery/computer/skills{
+	dir = 1
 	},
-/obj/machinery/button/remote/airlock{
-	dir = 1;
-	id = "researchdoor";
-	layer = 2.9;
-	name = "Office Door";
-	pixel_x = -4;
-	pixel_y = 4
-	},
-/obj/item/weapon/folder/white_rd,
-/obj/item/weapon/paper/monitorkey,
-/obj/item/weapon/stamp/rd,
-/obj/item/weapon/pen/multi,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/crew_quarters/heads/rdoffice)
 "mKY" = (
@@ -21418,6 +21413,15 @@
 	},
 /turf/simulated/floor/tiled/old_tile/gray,
 /area/surface/station/security/tactical)
+"nZe" = (
+/obj/structure/railing{
+	dir = 4
+	},
+/obj/structure/railing{
+	dir = 1
+	},
+/turf/simulated/open,
+/area/surface/station/engineering/hallway/reactor)
 "oao" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/multi_tile/glass{
@@ -22886,6 +22890,27 @@
 /area/surface/station/medical/lockerroom)
 "pcD" = (
 /obj/structure/table/reinforced,
+/obj/machinery/button/remote/blast_door{
+	dir = 1;
+	id = "biohazard";
+	layer = 2.9;
+	name = "Biohazard Shutter Control";
+	pixel_x = 6;
+	pixel_y = 4;
+	req_one_access = list(47)
+	},
+/obj/machinery/button/remote/airlock{
+	dir = 1;
+	id = "researchdoor";
+	layer = 2.9;
+	name = "Office Door";
+	pixel_x = -4;
+	pixel_y = 4
+	},
+/obj/item/weapon/folder/white_rd,
+/obj/item/weapon/paper/monitorkey,
+/obj/item/weapon/stamp/rd,
+/obj/item/weapon/pen/multi,
 /obj/item/clothing/glasses/welding/superior,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/crew_quarters/heads/rdoffice)
@@ -24305,6 +24330,9 @@
 /obj/structure/railing{
 	dir = 1
 	},
+/obj/structure/railing{
+	dir = 8
+	},
 /turf/simulated/open,
 /area/surface/station/ai/upload_foyer)
 "pYb" = (
@@ -24836,7 +24864,7 @@
 /obj/structure/shuttle/engine/propulsion/burst/left{
 	dir = 4
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/shuttle/large_escape_pod2/station)
 "qop" = (
 /obj/structure/sign/directions/teleporter,
@@ -25667,6 +25695,9 @@
 	id_tag = "roof_airlock_pump"
 	},
 /obj/effect/map_helper/airlock/atmos/chamber_pump,
+/obj/structure/sign/warning/cold{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/hallway/primary/secondfloor/east)
 "qQt" = (
@@ -30095,6 +30126,13 @@
 	},
 /turf/simulated/floor/carpet/sblucarpet,
 /area/surface/station/medical/psych)
+"tNl" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/obj/structure/railing,
+/turf/simulated/open,
+/area/surface/station/rnd/research)
 "tNt" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -30111,6 +30149,12 @@
 	},
 /turf/simulated/floor/tiled/freezer,
 /area/surface/station/engineering/engi_restroom)
+"tNH" = (
+/obj/structure/railing{
+	dir = 8
+	},
+/turf/simulated/open,
+/area/surface/station/park/skybridge)
 "tNX" = (
 /obj/machinery/computer/rdconsole,
 /obj/effect/floor_decal/borderfloorblack{
@@ -31321,7 +31365,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/shuttle/wall/dark/no_join,
 /area/shuttle/large_escape_pod2/station)
 "uDG" = (
 /obj/machinery/door/firedoor/border_only,
@@ -63457,7 +63501,7 @@ sBb
 sBb
 cqp
 xpQ
-xpQ
+tNl
 riA
 tXh
 tmR
@@ -67838,7 +67882,7 @@ uwO
 uwO
 uwO
 uwO
-uwO
+tNH
 fWH
 pkT
 maE
@@ -71956,7 +72000,7 @@ xJA
 gJr
 qcX
 hYU
-uwO
+lki
 uwO
 uwO
 uwO
@@ -73286,7 +73330,7 @@ pJa
 pJa
 iEj
 rry
-pXG
+djH
 eJm
 eJm
 iEj
@@ -86349,7 +86393,7 @@ ddU
 ddU
 joP
 njg
-jjB
+nZe
 jjB
 jjB
 jjB

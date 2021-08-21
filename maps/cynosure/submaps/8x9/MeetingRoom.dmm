@@ -12,9 +12,10 @@
 "q" = (/obj/structure/table/woodentable,/obj/item/device/paicard,/turf/simulated/floor/carpet,/area/template_noop)
 "r" = (/obj/structure/bed/chair/sofa/brown/left{dir = 8},/obj/random/maintenance,/turf/simulated/floor/carpet,/area/template_noop)
 "u" = (/obj/structure/reagent_dispensers/water_cooler/full{dir = 1},/turf/simulated/floor/wood,/area/template_noop)
-"w" = (/obj/structure/sign/poster{pixel_y = 32; poster_decl = /decl/poster/nanotrasen/pol_10},/turf/simulated/floor/carpet,/area/template_noop)
+"w" = (/obj/structure/sign/poster{dir = 1; pixel_y = 32; poster_decl = /decl/poster/nanotrasen/pol_10},/turf/simulated/floor/carpet,/area/template_noop)
 "x" = (/obj/structure/bed/chair/sofa/brown/left{dir = 4},/turf/simulated/floor/carpet,/area/template_noop)
-"z" = (/obj/structure/table/woodentable,/obj/random/mre,/obj/random/snack,/obj/random/snack,/turf/simulated/floor/wood,/area/template_noop)
+"z" = (/obj/structure/table/woodentable,/obj/random/mre,/obj/random/snack,/obj/machinery/reagentgrinder,/turf/simulated/floor/wood,/area/template_noop)
+"A" = (/obj/structure/sign/poster/custom{dir = 8; pixel_x = -32; poster_decl = /decl/poster/vore_43},/turf/simulated/floor/wood/broken,/area/template_noop)
 "B" = (/turf/simulated/floor/carpet,/area/template_noop)
 "C" = (/obj/effect/graffitispawner{color = "#FF9300"; color_secondary = "#A55403"; graffiti_type = "end"},/turf/simulated/floor/wood,/area/template_noop)
 "D" = (/obj/effect/graffitispawner{color = "#FFF200"; color_secondary = "#886422"; graffiti_type = "guy"},/obj/machinery/light/flamp,/turf/simulated/floor/wood,/area/template_noop)
@@ -40,7 +41,7 @@ aDwngRVa
 aGxXHQGa
 aGSqdlGa
 aGbLJrEa
-aMTkoBGa
+aATkoBGa
 aZCGGMia
 azWMOuaa
 aaacaaam

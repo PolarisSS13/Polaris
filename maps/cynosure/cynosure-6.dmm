@@ -2894,6 +2894,13 @@
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_boxingcourt)
+"dzs" = (
+/obj/machinery/r_n_d/server/centcom,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/centcom/main_hall)
 "dzx" = (
 /obj/structure/shuttle/engine/heater{
 	dir = 4;
@@ -12928,6 +12935,7 @@
 /area/syndicate_station)
 "oAb" = (
 /obj/machinery/account_database{
+	dir = 8;
 	name = "CentComm Accounts database"
 	},
 /turf/unsimulated/floor{
@@ -15210,6 +15218,13 @@
 	icon_state = "dark"
 	},
 /area/centcom/security)
+"qXU" = (
+/obj/machinery/telecomms/receiver/preset_cent,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
+/area/centcom/main_hall)
 "qYH" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/glasses/meson,
@@ -15628,11 +15643,7 @@
 /turf/simulated/floor/holofloor/bmarble,
 /area/holodeck/source_chess)
 "rsf" = (
-/obj/machinery/computer/rdservercontrol{
-	badmin = 1;
-	dir = 8;
-	name = "Master R&amp;D Server Controller"
-	},
+/obj/machinery/telecomms/broadcaster/preset_cent,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -16727,7 +16738,7 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_theatre)
 "svl" = (
-/obj/machinery/telecomms/receiver/preset_cent,
+/obj/machinery/telecomms/hub/preset/cynosure/centcomm,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -17629,7 +17640,7 @@
 	},
 /area/centcom/command)
 "tsP" = (
-/obj/machinery/r_n_d/server/centcom,
+/obj/machinery/telecomms/relay/preset/cynosure/centcomm,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -20184,7 +20195,11 @@
 /turf/simulated/floor/holofloor/wmarble,
 /area/holodeck/source_chess)
 "wiM" = (
-/obj/machinery/telecomms/broadcaster/preset_cent,
+/obj/machinery/computer/rdservercontrol{
+	badmin = 1;
+	dir = 8;
+	name = "Master R&amp;D Server Controller"
+	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -30577,7 +30592,7 @@ pAD
 oCJ
 ikS
 uLV
-mTz
+qXU
 svl
 pAD
 puk
@@ -31604,7 +31619,7 @@ gBA
 gSq
 oAb
 wiM
-mTz
+dzs
 rsf
 tsP
 pAD
@@ -36542,10 +36557,10 @@ nzU
 gRE
 kpG
 kpG
-kpG
-kpG
-kpG
-kpG
+qXg
+qXg
+qXg
+qXg
 kpG
 kpG
 kpG
@@ -38084,10 +38099,10 @@ jVR
 pyX
 kpG
 kpG
-kpG
-kpG
-kpG
-kpG
+qXg
+qXg
+qXg
+qXg
 kpG
 kpG
 kpG

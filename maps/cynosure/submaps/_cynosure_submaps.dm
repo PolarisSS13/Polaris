@@ -13,7 +13,7 @@
 #include "9x8/HotTub.dmm"
 #endif
 
-// The PoIs below, unlike other randomly placed Points of Interest, are placed in fixed positions inside the station, 
+// The PoIs below, unlike other randomly placed Points of Interest, are placed in fixed positions inside the station,
 // in pre-determined locations. One PoI in each 'group' will always be spawned.
 
 /datum/map_template/cynosure_fixed
@@ -66,9 +66,9 @@
 
 /datum/map_template/cynosure_fixed/eight_by_five_maint
 
-/datum/map_template/cynosure_fixed/eight_by_five_maint/drug_den
-	name = "Drug Den"
-	mappath = 'maps/cynosure/submaps/8x5/DrugDen.dmm'
+/datum/map_template/cynosure_fixed/eight_by_five_maint/growers_den
+	name = "Grower's Den"
+	mappath = 'maps/cynosure/submaps/8x5/GrowersDen.dmm'
 
 /datum/map_template/cynosure_fixed/eight_by_five_maint/hidden_bar
 	name = "Hidden Bar"
@@ -79,7 +79,7 @@
 	mappath = 'maps/cynosure/submaps/8x5/Restroom.dmm'
 
 /datum/map_template/cynosure_fixed/eight_by_five_maint/squatters_den
-	name = "Squatters' Den"
+	name = "Squatter's Den"
 	mappath = 'maps/cynosure/submaps/8x5/SquattersDen.dmm'
 
 

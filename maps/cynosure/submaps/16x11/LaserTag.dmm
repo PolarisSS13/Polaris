@@ -17,7 +17,7 @@
 "t" = (/obj/machinery/deployable/barrier{anchored = 1; req_access = list()},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "v" = (/obj/effect/floor_decal/corner/blue{dir = 1},/obj/effect/floor_decal/corner/red{dir = 4},/obj/item/stack/tile/floor/steel_dirty{amount = 15},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "y" = (/obj/structure/closet/lasertag/blue,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
-"z" = (/obj/effect/floor_decal/corner/blue{dir = 5},/obj/item/stack/tile/floor/steel_dirty,/obj/structure/sign/poster/nanotrasen{pixel_y = 32; poster_decl = /decl/poster/nanotrasen/bay_21},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
+"z" = (/obj/effect/floor_decal/corner/blue{dir = 5},/obj/item/stack/tile/floor/steel_dirty,/obj/structure/sign/poster/nanotrasen{dir = 1; pixel_y = 32; poster_decl = /decl/poster/nanotrasen/bay_21},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "B" = (/obj/effect/floor_decal/corner/blue{dir = 9},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "C" = (/obj/random/toolbox,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "D" = (/obj/machinery/deployable/barrier{anchored = 1; req_access = list()},/obj/effect/floor_decal/corner/blue{dir = 10},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
@@ -38,6 +38,7 @@
 "V" = (/obj/effect/floor_decal/corner/red{dir = 6},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "W" = (/obj/item/stack/tile/floor/steel_dirty,/turf/simulated/floor/plating,/area/template_noop)
 "X" = (/obj/item/stack/flag/blue,/obj/effect/floor_decal/industrial/outline{color = "#0000BB"},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
+"Y" = (/obj/effect/floor_decal/corner/red{dir = 10},/obj/structure/sign/poster/custom{pixel_y = -32; poster_decl = /decl/poster/vore_29},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "Z" = (/obj/item/stack/tile/floor/steel_dirty,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 
 (1,1,1) = {"
@@ -50,6 +51,6 @@ gBXtSWSIZSWfiHkg
 gBytZtWIStfSSOkg
 gBttStfIftZSZVkg
 glUSStSWWttttVkg
-gglDGDGjKKKKKhgg
+gglDGDGjYKKKKhgg
 agggggggggggggga
 "}

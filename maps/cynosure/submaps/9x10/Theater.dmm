@@ -11,7 +11,7 @@
 "v" = (/obj/item/frame/light{dir = 4},/turf/simulated/floor/plating,/area/template_noop)
 "x" = (/obj/random/obstruction,/turf/simulated/floor/plating,/area/template_noop)
 "y" = (/obj/item/device/instrument/violin,/turf/simulated/floor/wood,/area/template_noop)
-"z" = (/obj/item/stack/tile/carpet,/obj/structure/sign/poster{pixel_y = -32; poster_decl = /decl/poster/bay_16},/turf/simulated/floor/wood,/area/template_noop)
+"z" = (/obj/item/stack/tile/carpet,/obj/structure/sign/poster{pixel_y = -32; poster_decl = /decl/poster/vore_96},/turf/simulated/floor/wood,/area/template_noop)
 "A" = (/turf/simulated/floor/plating,/area/template_noop)
 "B" = (/obj/machinery/light,/turf/simulated/floor/wood,/area/template_noop)
 "F" = (/obj/structure/table/bench,/turf/simulated/floor/plating,/area/template_noop)

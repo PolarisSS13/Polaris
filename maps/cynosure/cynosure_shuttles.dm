@@ -208,6 +208,7 @@ ESCAPE_POD(1)
 /obj/effect/shuttle_landmark/cynosure/tcomms
 	name = "Telecommunications Satellite"
 	landmark_tag = "nav_telecomm_dockarm"
+	docking_controller = "tcomdock_airlock"
 	base_area = /area/space
 	base_turf = /turf/space
 

@@ -11,7 +11,7 @@
 "n" = (/obj/structure/table/rack,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/turf/simulated/floor/tiled/techfloor,/area/template_noop)
 "o" = (/obj/machinery/door/airlock{name = "Construction Area"},/obj/machinery/atmospherics/pipe/cap/hidden/scrubbers{dir = 1},/turf/simulated/floor/tiled/steel_grid,/area/template_noop)
 "q" = (/obj/machinery/pump,/turf/simulated/floor/tiled/techfloor,/area/template_noop)
-"t" = (/obj/effect/floor_decal/techfloor/corner{dir = 6},/obj/effect/floor_decal/techfloor/orange/corner,/obj/structure/sign/poster/custom{pixel_y = 32; poster_decl = /decl/poster/bay_11},/turf/simulated/floor/tiled/techfloor,/area/template_noop)
+"t" = (/obj/effect/floor_decal/techfloor/corner{dir = 6},/obj/effect/floor_decal/techfloor/orange/corner,/obj/structure/sign/poster/custom{dir = 1; pixel_y = 32; poster_decl = /decl/poster/bay_11},/turf/simulated/floor/tiled/techfloor,/area/template_noop)
 "u" = (/obj/effect/floor_decal/techfloor/orange{dir = 1},/obj/item/stack/tile/floor/techgrey,/obj/machinery/atmospherics/pipe/simple/hidden/supply{dir = 6},/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{dir = 10},/turf/simulated/floor/tiled/techfloor,/area/template_noop)
 "w" = (/obj/effect/floor_decal/techfloor/corner{dir = 10},/obj/effect/floor_decal/techfloor/orange/corner{dir = 8},/obj/item/clothing/suit/caution,/turf/simulated/floor/tiled/techfloor,/area/template_noop)
 "x" = (/obj/effect/floor_decal/spline/plain{dir = 8},/turf/simulated/floor/water/pool{name = "hot tub"},/area/template_noop)
