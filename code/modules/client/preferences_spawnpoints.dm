@@ -61,6 +61,14 @@ var/list/spawntypes = list()
 	..()
 	turfs = latejoin_elevator
 
+/datum/spawnpoint/checkpoint
+	display_name = "Checkpoint"
+	msg = "has arrived at the exterior checkpoint"
+
+/datum/spawnpoint/checkpoint/New()
+	..()
+	turfs = latejoin_checkpoint
+
 /datum/spawnpoint/cryo
 	display_name = "Cryogenic Storage"
 	msg = "has completed cryogenic revival"
