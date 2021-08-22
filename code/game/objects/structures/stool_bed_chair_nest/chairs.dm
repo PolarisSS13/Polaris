@@ -401,10 +401,10 @@
 	if((dir & NORTH) && !corner_piece)
 		plane = MOB_PLANE
 		layer = ABOVE_MOB_LAYER
-		MA = mutable_appearance(icon, icon_state = "o[icon_state]", layer = BELOW_MOB_LAYER, plane = MOB_PLANE, appearance_flags = KEEP_APART|RESET_COLOR)
+		MA = mutable_appearance(icon, icon_state = "o[icon_state]")
 	// Else just normal plane and layer for everything, which will be below mobs.
 	else
-		MA = mutable_appearance(icon, icon_state = "o[icon_state]", appearance_flags = KEEP_APART|RESET_COLOR)
+		MA = mutable_appearance(icon, icon_state = "o[icon_state]")
 	MA.color = padding_color
 	add_overlay(MA)
 
