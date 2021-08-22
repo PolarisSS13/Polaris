@@ -62,7 +62,6 @@
 
 /obj/structure/table/MouseDrop_T(obj/O, mob/user, src_location, over_location, src_control, over_control, params)
 	if(ismob(O.loc)) //If placing an item
-		to_world("It's a drop!")
 		if(!isitem(O) || user.get_active_hand() != O)
 			return ..()
 		if(isrobot(user))
@@ -70,25 +69,19 @@
 		user.drop_item()
 		if(O.loc != src.loc)
 			step(O, get_dir(O, src))
-		to_world("Dropping Item On Table")
 
 	else if(isturf(O.loc) && isitem(O)) //If pushing an item on the tabletop
-		to_world("It's a slide!")
 		var/obj/item/I = O
 		if(I.anchored)
-			to_world("Item is anchored and cannot be pushed")
 			return
 
 		if((isliving(user)) && (Adjacent(user)) && !(user.incapacitated()))
-			to_world("Should be pushing...")
 			if(O.w_class <= user.can_pull_size)
 				O.forceMove(loc)
 				auto_align(I, params, TRUE)
-				to_world("Woosh!")
 			else
 				to_chat(user, SPAN_WARNING("\The [I] is too big for you to move!"))
 			return
-		to_world("Exiting the drop loop")
 
 	return ..()
 
