@@ -1752,20 +1752,64 @@ shaved
 	icon_state = "ears_plain"
 	species_allowed = list(SPECIES_TAJ)
 
-/datum/sprite_accessory/hair/taj_ears_clean
-	name = "Tajaran Clean"
-	icon_state = "hair_clean"
-	species_allowed = list(SPECIES_TAJ)
-
 /datum/sprite_accessory/hair/taj_ears_bangs
 	name = "Tajaran Bangs"
 	icon_state = "hair_bangs"
 	species_allowed = list(SPECIES_TAJ)
 
+/datum/sprite_accessory/hair/taj_ears_bangs_alt
+	name = "Tajaran Bangs (Alt)"
+	icon_state = "hair_bangs_alt"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_short_fringe
+	name = "Tajaran Short Fringe"
+	icon_state = "hair_shortfringe"
+	species_allowed = list(SPECIES_TAJ)
 
 /datum/sprite_accessory/hair/taj_ears_braid
 	name = "Tajaran Braid"
 	icon_state = "hair_tbraid"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_clean
+	name = "Tajaran Clean"
+	icon_state = "hair_clean"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_gman
+	name = "Tajaran G-Man"
+	icon_state = "hair_gman"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_greaser
+	name = "Tajaran Greaser"
+	icon_state = "hair_greaser"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_bun
+	name = "Tajaran Bun"
+	icon_state = "hair_tajbun"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_bunsmall
+	name = "Tajaran Bun (Small)"
+	icon_state = "hair_tajsmallbun"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_bunlow
+	name = "Tajaran Bun (Low)"
+	icon_state = "hair_tajbunlow"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_bunlowsmall
+	name = "Tajaran Bun (Low, Small)"
+	icon_state = "hair_tajbunlowsmall"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_wedge
+	name = "Tajaran Wedge"
+	icon_state = "hair_wedge"
 	species_allowed = list(SPECIES_TAJ)
 
 /datum/sprite_accessory/hair/taj_ears_shaggy
@@ -1783,6 +1827,11 @@ shaved
 	icon_state = "hair_plait"
 	species_allowed = list(SPECIES_TAJ)
 
+/datum/sprite_accessory/hair/taj_ears_sidepony
+	name = "Tajaran Side Ponytail"
+	icon_state = "hair_sidepony"
+	species_allowed = list(SPECIES_TAJ)
+
 /datum/sprite_accessory/hair/taj_ears_straight
 	name = "Tajaran Straight"
 	icon_state = "hair_straight"
@@ -1791,6 +1840,56 @@ shaved
 /datum/sprite_accessory/hair/taj_ears_long
 	name = "Tajaran Long"
 	icon_state = "hair_long"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_tresses
+	name = "Tajaran Tresses"
+	icon_state = "hair_tresses"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_shoulderparted
+	name = "Tajaran Shoulder Parted"
+	icon_state = "hair_shoulderparted"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_shoulderpartedsmall
+	name = "Tajaran Shoulder Parted (Small)"
+	icon_state = "hair_shoulderpartedsmall"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_shoulderpartedlong
+	name = "Tajaran Shoulder Parted (Long)"
+	icon_state = "hair_shoulderpartedlong"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_sidepartedleft
+	name = "Tajaran Side Parted (Left)"
+	icon_state = "hair_sidepartedleft"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_sidepartedright
+	name = "Tajaran Side Parted (Right)"
+	icon_state = "hair_sidepartedright"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_shoulderlength
+	name = "Tajaran Shoulder Length"
+	icon_state = "hair_shoulderlength"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_shoulderlengthalt
+	name = "Tajaran Shoulder Length (Alt)"
+	icon_state = "hair_shoulderlengthalt"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_cascading
+	name = "Tajaran Cascading"
+	icon_state = "hair_cascading"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_cascadingalt
+	name = "Tajaran Cascading (Alt)"
+	icon_state = "hair_cascadingalt"
 	species_allowed = list(SPECIES_TAJ)
 
 /datum/sprite_accessory/hair/taj_ears_rattail
@@ -1803,6 +1902,11 @@ shaved
 	icon_state = "hair_tajspiky"
 	species_allowed = list(SPECIES_TAJ)
 
+/datum/sprite_accessory/hair/taj_ears_fringeup
+	name = "Tajaran Fringe Spike"
+	icon_state = "hair_fringeup"
+	species_allowed = list(SPECIES_TAJ)
+
 /datum/sprite_accessory/hair/taj_ears_messy
 	name = "Tajaran Messy"
 	icon_state = "hair_messy"
@@ -1811,6 +1915,16 @@ shaved
 /datum/sprite_accessory/hair/taj_ears_curls
 	name = "Tajaran Curly"
 	icon_state = "hair_curly"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_curls
+	name = "Tajaran Curly, alt"
+	icon_state = "hair_curlyalt"
+	species_allowed = list(SPECIES_TAJ)
+
+/datum/sprite_accessory/hair/taj_ears_mane
+	name = "Tajaran Mane"
+	icon_state = "hair_mane"
 	species_allowed = list(SPECIES_TAJ)
 
 /datum/sprite_accessory/hair/taj_ears_wife
@@ -1832,6 +1946,8 @@ shaved
 	name = "Tajaran Finger Curls"
 	icon_state = "hair_fingerwave"
 	species_allowed = list(SPECIES_TAJ)
+
+
 
 //Teshari things
 /datum/sprite_accessory/hair/teshari
