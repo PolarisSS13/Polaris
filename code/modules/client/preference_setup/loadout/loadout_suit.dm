@@ -166,6 +166,11 @@
 	display_name = "labcoat, yellow"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
 
+/datum/gear/suit/labcoat/rd
+	display_name = "labcoat, research director (RD)"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
+	allowed_roles = list("Research Director")
+
 /datum/gear/suit/labcoat/emt
 	display_name = "labcoat, EMT (Medical)"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/emt
