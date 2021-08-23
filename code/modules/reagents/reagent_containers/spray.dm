@@ -301,3 +301,16 @@
 				W.set_up(my_target)
 
 		return
+
+/obj/item/weapon/reagent_containers/spray/chemsprayer/xenobiology
+	name = "xenoblaster"
+	desc = "A plastic watergun repurposed for the use in pacifying slimes. Has an adjustable nozzle that controls precision as well as strength."
+	icon = 'icons/obj/gun2.dmi'
+	icon_state = "xenoblaster"
+	item_state = "xenoblaster"
+	origin_tech = list(TECH_MATERIAL = 1, TECH_ENGINEERING = 1)
+	volume = 200
+	spray_size = 3
+	spray_sizes = list(1,3)
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = list(5,15)
