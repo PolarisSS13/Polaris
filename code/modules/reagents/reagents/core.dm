@@ -167,7 +167,7 @@
 	var/hotspot = (locate(/obj/fire) in T)
 	if(hotspot && !istype(T, /turf/space))
 		var/datum/gas_mixture/lowertemp = T.remove_air(T:air:total_moles)
-		lowertemp.temperature = max(min(lowertemp.temperature-2000, lowertemp.temperature / 2), 0)
+		lowertemp.temperature = max(lowertemp.temperature-2000, lowertemp.temperature / 2, 0)
 		lowertemp.react()
 		T.assume_air(lowertemp)
 		qdel(hotspot)
@@ -198,11 +198,8 @@
 			S.visible_message("<span class='warning'>[S]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 
 		// Then extinguish people on fire.
-		var/needed = max(0,L.fire_stacks) * 5
-		if(amount > needed)
-			L.ExtinguishMob()
-		L.water_act(amount / 25) // Div by 25, as water_act multiplies it by 5 in order to calculate firestack modification.
-		remove_self(needed)
+		L.ExtinguishMob(L.on_fire ? amount : amount*0.5)
+		remove_self(amount)
 
 		// Put out cigarettes if splashed.
 		if(istype(L, /mob/living/carbon/human))

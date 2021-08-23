@@ -98,6 +98,19 @@ var/global/list/robot_modules = list(
 	if(!synths || !synths.len)
 		return
 
+	var/obj/item/weapon/extinguisher/E = locate() in src.modules
+	var/obj/item/device/flash/F = locate() in src.modules
+	if(F)
+		if(F.broken)
+			F.broken = 0
+			F.times_used = 0
+			F.icon_state = "flash"
+		else if(F.times_used)
+			F.times_used--
+
+	if(E && E.reagents.total_volume < E.reagents.maximum_volume)
+		E.reagents.add_reagent("monoammoniumphosphate", E.max_water * 0.2)
+
 	for(var/datum/matter_synth/T in synths)
 		T.add_charge(T.recharge_rate * rate)
 

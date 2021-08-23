@@ -44153,7 +44153,7 @@
 /obj/structure/table/rack{
 	dir = 1
 	},
-/obj/item/clothing/suit/fire/firefighter,
+/obj/item/clothing/suit/fire,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/mask/gas,
 /obj/item/weapon/extinguisher,
@@ -58456,7 +58456,7 @@
 /obj/structure/table/rack{
 	dir = 1
 	},
-/obj/item/clothing/suit/fire/firefighter,
+/obj/item/clothing/suit/fire,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/mask/gas,
 /obj/item/weapon/extinguisher,
@@ -65663,7 +65663,7 @@
 /obj/structure/table/rack{
 	dir = 1
 	},
-/obj/item/clothing/suit/fire/firefighter,
+/obj/item/clothing/suit/fire,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/mask/gas,
 /obj/item/weapon/extinguisher,
@@ -70196,7 +70196,7 @@
 /obj/structure/table/rack{
 	dir = 1
 	},
-/obj/item/clothing/suit/fire/firefighter,
+/obj/item/clothing/suit/fire,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/mask/gas,
 /obj/item/weapon/extinguisher,
@@ -78141,7 +78141,7 @@
 /obj/structure/table/rack{
 	dir = 1
 	},
-/obj/item/clothing/suit/fire/firefighter,
+/obj/item/clothing/suit/fire,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/mask/gas,
 /obj/item/weapon/extinguisher,
@@ -93820,7 +93820,7 @@
 /obj/structure/table/rack{
 	dir = 1
 	},
-/obj/item/clothing/suit/fire/firefighter,
+/obj/item/clothing/suit/fire,
 /obj/item/weapon/tank/oxygen,
 /obj/item/clothing/mask/gas,
 /obj/item/weapon/extinguisher,

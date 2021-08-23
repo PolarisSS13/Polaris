@@ -377,6 +377,39 @@
 	name = "Robust Harvest"
 	id = "robustharvest"
 
+/datum/reagent/toxin/fertilizer/monoammoniumphosphate
+	name = "Monoammonium Phosphate"
+	id = "monoammoniumphosphate"
+	strength = 0.25
+	description = "Commonly found in fire extinguishers, also works as a fertilizer."
+	reagent_state = SOLID
+	color = "#CCCCCC"
+	taste_description = "salty dirt"
+	touch_met = REM * 10
+
+/datum/reagent/toxin/fertilizer/monoammoniumphosphate/touch_turf(var/turf/simulated/T)
+	if(!istype(T))
+		return
+
+	var/hotspot = (locate(/obj/fire) in T)
+	if(hotspot && !istype(T, /turf/space))
+		var/datum/gas_mixture/lowertemp = T.return_air()
+		lowertemp.temperature = max(lowertemp.temperature-2000, lowertemp.temperature / 2, T0C)
+		lowertemp.react()
+		qdel(hotspot)
+
+	var/amount_to_remove = max(1,round(volume * 0.5))
+
+	new /obj/effect/decal/cleanable/foam(T, amount_to_remove)
+	remove_self(amount_to_remove)
+	return
+
+/datum/reagent/toxin/fertilizer/monoammoniumphosphate/touch_mob(var/mob/living/L, var/amount)
+	. = ..()
+	if(istype(L))
+		L.ExtinguishMob(L.on_fire ? amount*3 : amount*1.5)
+		remove_self(amount)
+
 /datum/reagent/toxin/fertilizer/tannin
 	name = "tannin"
 	id = "tannin"

@@ -82,7 +82,7 @@
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
-	name = "watertank"
+	name = "water tank"
 	desc = "A watertank."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
@@ -100,6 +100,17 @@
 /obj/structure/reagent_dispensers/watertank/high/Initialize()
 	. = ..()
 	reagents.add_reagent("water", 4000)
+
+/obj/structure/reagent_dispensers/extinguisher
+	name = "extinguisher tank"
+	desc = "A tank filled with extinguisher fluid."
+	icon = 'icons/obj/objects.dmi'
+	icon_state = "extinguisher_tank"
+	amount_per_transfer_from_this = 10
+
+/obj/structure/reagent_dispensers/extinguisher/Initialize()
+	. = ..()
+	reagents.add_reagent("monoammoniumphosphate",4000)
 
 /obj/structure/reagent_dispensers/fueltank
 	name = "fueltank"
@@ -405,7 +416,7 @@
 /obj/structure/reagent_dispensers/acid/Initialize()
 	. = ..()
 	reagents.add_reagent("sacid", 1000)
-	
+
 //Cooking oil refill tank
 /obj/structure/reagent_dispensers/cookingoil
 	name = "cooking oil tank"

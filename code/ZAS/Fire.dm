@@ -103,6 +103,11 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 	zone.fire_tiles |= src
 	if(fuel) zone.fuel_objs += fuel
 
+	var/obj/effect/decal/cleanable/foam/extinguisher_foam = locate() in src
+	if(extinguisher_foam && extinguisher_foam.reagents)
+		fire.firelevel *= max(0,1 - (extinguisher_foam.reagents.total_volume*0.04))
+		//25 units will eliminate the fire completely
+
 	return 0
 
 /obj/fire

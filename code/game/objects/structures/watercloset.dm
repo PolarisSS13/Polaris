@@ -314,6 +314,16 @@
 	desc = "A sink used for washing one's hands and face."
 	anchored = 1
 	var/busy = 0 	//Something's being washed at the moment
+	var/amount_per_transfer_from_this = 10
+	var/possible_transfer_amounts = list(5,10,15,25,30,50,60,100,120,250,300)
+
+/obj/structure/sink/verb/set_APTFT() //set amount_per_transfer_from_this
+	set name = "Set transfer amount"
+	set category = "Object"
+	set src in view(1)
+	var/N = input("Amount per transfer from this:","[src]") as null|anything in possible_transfer_amounts
+	if (N)
+		amount_per_transfer_from_this = N
 
 /obj/structure/sink/MouseDrop_T(var/obj/item/thing, var/mob/user)
 	..()
@@ -372,7 +382,7 @@
 
 	var/obj/item/weapon/reagent_containers/RG = O
 	if (istype(RG) && RG.is_open_container())
-		RG.reagents.add_reagent("water", min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
+		RG.reagents.add_reagent("water", min(RG.volume - RG.reagents.total_volume, amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
 		playsound(src, 'sound/effects/sink.ogg', 75, 1)
 		return 1

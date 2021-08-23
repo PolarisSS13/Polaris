@@ -78,9 +78,9 @@
 	name = OUTFIT_COSTUME("Firefighter")
 	uniform = /obj/item/clothing/under/pants
 	shoes = /obj/item/clothing/shoes/boots/workboots
-	head = /obj/item/clothing/head/hardhat/red
+	head = /obj/item/clothing/head/hardhat/red/firefighter
 	gloves = /obj/item/clothing/gloves/black
-	suit = /obj/item/clothing/suit/fire/firefighter
+	suit = /obj/item/clothing/suit/fire
 	mask = /obj/item/clothing/mask/gas
 
 /decl/hierarchy/outfit/costume/highlander

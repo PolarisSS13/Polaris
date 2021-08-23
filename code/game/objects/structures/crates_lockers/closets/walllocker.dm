@@ -140,12 +140,12 @@
 	density = 0
 
 	starts_with = list(
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/tank/oxygen/red,
 		/obj/item/weapon/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /obj/structure/closet/walllocker_double/hydrant/north
 	pixel_y = 32

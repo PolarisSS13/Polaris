@@ -693,3 +693,8 @@
 	starts_with = list(
 		/obj/item/weapon/reagent_containers/spray/plantbgone = 2,
 		/obj/item/weapon/material/minihoe)
+
+/obj/structure/closet/crate/extinguisher_catridges
+	name = "crate of extinguisher cartridges"
+	desc = "Contains a dozen empty extinguisher cartridges."
+	starts_with = list(/obj/item/weapon/reagent_containers/extinguisher_refill = 6)

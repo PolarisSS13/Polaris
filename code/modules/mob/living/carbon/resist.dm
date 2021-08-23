@@ -1,19 +1,23 @@
 /mob/living/carbon/resist_fire()
-	adjust_fire_stacks(-1.2)
+
+	var/obj/effect/decal/cleanable/foam/extinguisher_foam = locate() in src.loc
+	var/extra = 0
+	if(extinguisher_foam)
+		extra = extinguisher_foam.amount * 1.5
+	ExtinguishMob(1.2 + extra)
 	Weaken(3)
 	spin(32,2)
 	visible_message(
 		"<span class='danger'>[src] rolls on the floor, trying to put themselves out!</span>",
 		"<span class='notice'>You stop, drop, and roll!</span>"
 		)
-	sleep(30)
+	sleep(3 SECONDS)
 	if(fire_stacks <= 0)
 		visible_message(
 			"<span class='danger'>[src] has successfully extinguished themselves!</span>",
 			"<span class='notice'>You extinguish yourself.</span>"
 			)
-		ExtinguishMob()
-	return TRUE
+	return
 
 /mob/living/carbon/resist_restraints()
 	var/obj/item/I = null
@@ -21,7 +25,7 @@
 		I = handcuffed
 	else if(legcuffed)
 		I = legcuffed
-	
+
 	if(I)
 		setClickCooldown(100)
 		cuff_resist(I, cuff_break = can_break_cuffs())
@@ -30,7 +34,7 @@
 	return FALSE
 
 /mob/living/carbon/proc/cuff_resist(obj/item/weapon/handcuffs/I, breakouttime = 1200, cuff_break = 0)
-	
+
 	if(istype(I))
 		breakouttime = I.breakouttime
 
@@ -58,7 +62,7 @@
 			else if(I == legcuffed)
 				legcuffed = null
 				update_inv_legcuffed()
-	
+
 			if(buckled && buckled.buckle_require_restraints)
 				buckled.unbuckle_mob()
 
@@ -66,7 +70,7 @@
 		else
 			to_chat(src, "<span class='warning'>You fail to break [I].</span>")
 		return
-	
+
 	visible_message("<span class='danger'>[src] attempts to remove [I]!</span>",
 		"<span class='warning'>You attempt to remove [I]. (This will take around [displaytime] seconds and you need to stand still)</span>")
 	if(do_after(src, breakouttime, target = src, incapacitation_flags = INCAPACITATION_DISABLED & INCAPACITATION_KNOCKDOWN))
