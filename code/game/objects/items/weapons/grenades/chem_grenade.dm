@@ -313,7 +313,7 @@
 	stage = 2
 	path = 1
 
-	Initialize()
+/obj/item/weapon/grenade/chem_grenade/monoammoniumphosphate/Initialize()
 		. = ..()
 		var/obj/item/weapon/reagent_containers/glass/beaker/B1 = new(src)
 		var/obj/item/weapon/reagent_containers/glass/beaker/B2 = new(src)
