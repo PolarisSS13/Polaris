@@ -5,6 +5,7 @@
 	edge_blending_priority = 2
 	turf_layers = list(/turf/simulated/floor/outdoors/rocks)
 	initial_flooring = /decl/flooring/dirt
+  can_dig = TRUE
 
 /turf/simulated/floor/outdoors/newdirt
 	name = "dirt"
@@ -13,6 +14,7 @@
 	icon_state = "dirt0"
 	edge_blending_priority = 2
 	initial_flooring = /decl/flooring/outdoors/newdirt
+  can_dig = TRUE
 
 /decl/flooring/outdoors/newdirt
 	name = "dirt"
@@ -108,3 +110,4 @@
 
 /turf/simulated/floor/outdoors/sidewalk/slab
 	icon_state = "slab"
+
