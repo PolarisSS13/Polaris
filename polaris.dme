@@ -2663,6 +2663,7 @@
 #include "code\modules\organs\subtypes\replicant.dm"
 #include "code\modules\organs\subtypes\slime.dm"
 #include "code\modules\organs\subtypes\standard.dm"
+#include "code\modules\organs\subtypes\tajaran.dm"
 #include "code\modules\organs\subtypes\teshari.dm"
 #include "code\modules\organs\subtypes\unathi.dm"
 #include "code\modules\organs\subtypes\unbreakable.dm"
