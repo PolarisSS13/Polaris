@@ -210,6 +210,10 @@ default behaviour is:
 /mob/living/Moved(var/atom/oldloc, direct, forced, movetime)
 	. = ..()
 	handle_footstep(loc)
+	if(is_shifted)
+		is_shifted = FALSE
+		pixel_x = default_pixel_x
+		pixel_y = default_pixel_y
 
 	if(pulling) // we were pulling a thing and didn't lose it during our move.
 		var/pull_dir = get_dir(src, pulling)

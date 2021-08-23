@@ -671,10 +671,9 @@
 
 // facing verbs
 /mob/proc/canface()
-	if(!canmove)						return 0
 	if(stat)							return 0
 	if(anchored)						return 0
-	if(transforming)						return 0
+	if(transforming)					return 0
 	return 1
 
 // Not sure what to call this. Used to check if humans are wearing an AI-controlled exosuit and hence don't need to fall over yet.
@@ -1008,6 +1007,38 @@
 /mob/verb/westfaceperm()
 	set hidden = 1
 	set_face_dir(client.client_dir(WEST))
+
+/mob/verb/shiftnorth()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_y <= (default_pixel_y + 16))
+		pixel_y++
+		is_shifted = TRUE
+
+/mob/verb/shiftsouth()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_y >= (default_pixel_y - 16))
+		pixel_y--
+		is_shifted = TRUE
+
+/mob/verb/shiftwest()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_x >= (default_pixel_x - 16))
+		pixel_x--
+		is_shifted = TRUE
+
+mob/verb/shifteast()
+	set hidden = TRUE
+	if(!canface())
+		return FALSE
+	if(pixel_x <= (default_pixel_x + 16))
+		pixel_x++
+		is_shifted = TRUE
 
 /mob/proc/adjustEarDamage()
 	return
