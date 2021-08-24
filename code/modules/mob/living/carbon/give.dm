@@ -1,9 +1,13 @@
-/mob/living/carbon/human/verb/give(var/mob/living/carbon/target in living_mobs(1))
+/mob/living/verb/give(var/mob/living/target in living_mobs(1))
 	set category = "IC"
 	set name = "Give"
 
+	do_give(target)
+
+/mob/living/proc/do_give(var/mob/living/carbon/human/target)
+
 	// TODO :  Change to incapacitated() on merge.
-	if(src.stat || src.lying || src.resting || src.handcuffed)
+	if(src.incapacitated())
 		return
 	if(!istype(target) || target.stat || target.lying || target.resting || target.handcuffed || target.client == null)
 		return
