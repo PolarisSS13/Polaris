@@ -692,22 +692,7 @@
 			new_item.origin_tech[TECH_PRECURSOR] += 1
 
 		if(become_anomalous)
-			new_item.AddComponent(/datum/component/artifact_master)
-			LAZYINITLIST(new_item.origin_tech)
-			new_item.origin_tech[TECH_PRECURSOR] += 1
-			var/rand_tech = pick(\
-				TECH_MATERIAL,\
-				TECH_ENGINEERING,\
-				TECH_PHORON,\
-				TECH_POWER,\
-				TECH_BLUESPACE,\
-				TECH_BIO,\
-				TECH_COMBAT,\
-				TECH_MAGNET,\
-				TECH_DATA,\
-				TECH_ILLEGAL\
-				)
-			LAZYSET(new_item.origin_tech, rand_tech, rand(1,7))
+			new_item.become_anomalous()
 
 		var/turf/simulated/mineral/T = get_turf(new_item)
 		if(istype(T))
@@ -722,19 +707,4 @@
 		origin_tech[TECH_PRECURSOR] += 1
 
 	if(become_anomalous)
-		AddComponent(/datum/component/artifact_master)
-		LAZYINITLIST(origin_tech)
-		origin_tech[TECH_PRECURSOR] += 1
-		var/rand_tech = pick(\
-			TECH_MATERIAL,\
-			TECH_ENGINEERING,\
-			TECH_PHORON,\
-			TECH_POWER,\
-			TECH_BLUESPACE,\
-			TECH_BIO,\
-			TECH_COMBAT,\
-			TECH_MAGNET,\
-			TECH_DATA,\
-			TECH_ILLEGAL\
-			)
-		LAZYSET(origin_tech, rand_tech, rand(1,7))
+		become_anomalous()

@@ -38,7 +38,7 @@
 
 	if(effect_icon && effect_state)
 		if(effect_state == "sparkles")
-			effect_state == "sparkles_[rand(1,4)]"
+			effect_state = "sparkles_[rand(1,4)]"
 		active_effect = image(effect_icon, null, effect_state)
 		active_effect.color = effect_color
 
