@@ -2,6 +2,9 @@
 	name = "berserk"
 	effect_type = EFFECT_PSIONIC
 
+	effect_state = "summoning"
+	effect_color = "#5f0000"
+
 /datum/artifact_effect/berserk/proc/apply_berserk(var/mob/living/L)
 	if(!istype(L))
 		return FALSE

@@ -5,6 +5,9 @@
 
 	var/last_wave_pull = 0
 
+	effect_state = "gravisphere"
+	effect_color = "#d8c3ff"
+
 /datum/artifact_effect/gravity_wave/DoEffectTouch(var/mob/user)
 	gravwave(user, effectrange, STAGE_TWO)
 

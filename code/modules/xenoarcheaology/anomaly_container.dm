@@ -46,7 +46,16 @@
 	underlays.Cut()
 	desc = initial(desc)
 
-/obj/machinery/artifact/MouseDrop(var/obj/structure/anomaly_container/over_object)
-	if(over_object.is_anomalous() && Adjacent(over_object) && CanMouseDrop(over_object, usr))
+/atom/MouseDrop(var/obj/structure/anomaly_container/over_object)
+	. = ..()
+
+	if(src && istype(loc, /turf) && is_anomalous() && Adjacent(over_object) && CanMouseDrop(over_object, usr))
 		Bumped(usr)
 		over_object.contain(src)
+
+/*
+/obj/machinery/artifact/MouseDrop(var/obj/structure/anomaly_container/over_object)
+	if(Adjacent(over_object) && CanMouseDrop(over_object, usr))
+		Bumped(usr)
+		over_object.contain(src)
+*/

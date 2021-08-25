@@ -23,6 +23,9 @@
 		"You're so happy suddenly, you almost want to dance and sing.",
 		"You feel like the world is out to help you.")
 
+	effect_state = "summoning"
+	effect_color = "#009118"
+
 /datum/artifact_effect/goodfeeling/DoEffectTouch(var/mob/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))

@@ -1,6 +1,8 @@
 /datum/artifact_effect/gasnitro
 	name = "N2 creation"
 
+	effect_color = "#c2d3d8"
+
 /datum/artifact_effect/gasnitro/New()
 	..()
 	effect = pick(EFFECT_TOUCH, EFFECT_AURA)

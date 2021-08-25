@@ -9,6 +9,9 @@
 	var/charges = 0
 	var/list/nearby_mobs = list()
 
+	effect_state = "gravisphere"
+	effect_color = "#ff0000"
+
 /datum/artifact_effect/vampire/proc/bloodcall(var/mob/living/carbon/human/M)
 	var/atom/holder = master.holder
 	last_bloodcall = world.time

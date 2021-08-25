@@ -1,6 +1,7 @@
 //todo
 /datum/artifact_effect/sleepy
 	name = "sleepy"
+	effect_color = "#a36fa1"
 
 /datum/artifact_effect/sleepy/New()
 	..()

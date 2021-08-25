@@ -5,6 +5,8 @@
 
 	var/list/my_glitterflies = list()
 
+	effect_color = "#8cd448"
+
 /datum/artifact_effect/gaia/proc/age_plantlife(var/obj/machinery/portable_atmospherics/hydroponics/Tray = null)
 	if(istype(Tray) && Tray.seed)
 		Tray.health += rand(1,3) * HYDRO_SPEED_MULTIPLIER

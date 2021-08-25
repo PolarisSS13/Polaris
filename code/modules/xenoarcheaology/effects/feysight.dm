@@ -2,6 +2,9 @@
 	name = "feysight"
 	effect_type = EFFECT_PSIONIC
 
+	effect_state = "pulsing"
+	effect_color = "#00c763"
+
 /datum/artifact_effect/feysight/proc/apply_modifier(var/mob/living/L)
 	if(!istype(L))
 		return FALSE

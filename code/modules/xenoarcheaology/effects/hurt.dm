@@ -2,6 +2,8 @@
 	name = "hurt"
 	effect_type = EFFECT_ORGANIC
 
+	effect_color = "#6d1212"
+
 /datum/artifact_effect/hurt/DoEffectTouch(var/mob/toucher)
 	if(toucher)
 		var/weakness = GetAnomalySusceptibility(toucher)

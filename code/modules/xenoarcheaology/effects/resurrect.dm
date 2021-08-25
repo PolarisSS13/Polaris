@@ -4,6 +4,9 @@
 
 	var/stored_life = 0
 
+	effect_state = "pulsing"
+	effect_color = "#ff0000"
+
 /datum/artifact_effect/resurrect/proc/steal_life(var/mob/living/target = null)
 	var/atom/holder = master.holder
 	if(!istype(target))

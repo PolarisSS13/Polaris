@@ -2,6 +2,8 @@
 	name = "emp"
 	effect_type = EFFECT_ELECTRO
 
+	effect_state = "empdisable"
+
 /datum/artifact_effect/emp/New()
 	..()
 	effect = EFFECT_PULSE

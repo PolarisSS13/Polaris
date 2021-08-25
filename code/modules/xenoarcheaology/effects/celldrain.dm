@@ -4,6 +4,9 @@
 	effect_type = EFFECT_ELECTRO
 	var/last_message
 
+	effect_state = "pulsing"
+	effect_color = "#fbff02"
+
 /datum/artifact_effect/celldrain/DoEffectTouch(var/mob/user)
 	if(user)
 		if(istype(user, /mob/living/silicon/robot))

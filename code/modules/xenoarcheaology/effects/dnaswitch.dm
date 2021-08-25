@@ -4,6 +4,9 @@
 	effect_type = EFFECT_ORGANIC
 	var/severity
 
+	effect_state = "smoke"
+	effect_color = "#77ff83"
+
 /datum/artifact_effect/dnaswitch/New()
 	..()
 	if(effect == EFFECT_AURA)

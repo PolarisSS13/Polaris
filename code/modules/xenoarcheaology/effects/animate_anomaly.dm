@@ -4,6 +4,9 @@
 	effect_type = EFFECT_PSIONIC
 	var/mob/living/target = null
 
+	effect_state = "pulsing"
+	effect_color = "#00c3ff"
+
 /datum/artifact_effect/animate_anomaly/ToggleActivate(var/reveal_toggle = 1)
 	..()
 	find_target()

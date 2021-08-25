@@ -1,6 +1,8 @@
 /datum/artifact_effect/gasco2
 	name = "CO2 creation"
 
+	effect_color = "#a5a5a5"
+
 /datum/artifact_effect/gasco2/New()
 	..()
 	effect = pick(EFFECT_TOUCH, EFFECT_AURA)

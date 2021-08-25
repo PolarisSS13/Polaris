@@ -25,6 +25,9 @@
 		"Butcher them!",
 		"Feast!")
 
+	effect_state = "summoning"
+	effect_color = "#c50303"
+
 /datum/artifact_effect/cannibalfeeling/DoEffectTouch(var/mob/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))

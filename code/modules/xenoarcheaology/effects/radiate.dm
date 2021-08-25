@@ -2,6 +2,8 @@
 	name = "radiation"
 	var/radiation_amount
 
+	effect_color = "#007006"
+
 /datum/artifact_effect/radiate/New()
 	..()
 	radiation_amount = rand(1, 10)

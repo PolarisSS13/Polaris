@@ -1,6 +1,7 @@
 /datum/artifact_effect/heal
 	name = "heal"
 	effect_type = EFFECT_ORGANIC
+	effect_color = "#4649ff"
 
 /datum/artifact_effect/heal/DoEffectTouch(var/mob/toucher)
 	//todo: check over this properly

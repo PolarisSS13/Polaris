@@ -3,6 +3,9 @@
 	name = "poltergeist"
 	effect_type = EFFECT_ENERGY
 
+	effect_state = "shield2"
+	effect_color = "#a824c9"
+
 /datum/artifact_effect/poltergeist/proc/throw_at_mob(var/mob/living/target, var/damage = 20)
 	var/list/valid_targets = list()
 

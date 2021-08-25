@@ -3,6 +3,8 @@
 	name = "electric field"
 	effect_type = EFFECT_ENERGY
 
+	effect_color = "#ffff00"
+
 /datum/artifact_effect/electric_field/DoEffectTouch(var/mob/user)
 	var/atom/holder = master.holder
 	var/list/nearby_mobs = list()

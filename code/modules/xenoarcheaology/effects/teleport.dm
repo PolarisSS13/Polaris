@@ -1,6 +1,8 @@
 /datum/artifact_effect/teleport
 	name = "teleport"
 	effect_type = EFFECT_BLUESPACE
+	effect_state = "pulsing"
+	effect_color = "#88ffdb"
 
 /datum/artifact_effect/teleport/DoEffectTouch(var/mob/user)
 	var/atom/holder = master.holder

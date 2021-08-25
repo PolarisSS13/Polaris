@@ -2,6 +2,8 @@
 	name = "robotic harm"
 	var/last_message
 
+	effect_color = "#5432cf"
+
 /datum/artifact_effect/robohurt/New()
 	..()
 	effect_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)

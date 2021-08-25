@@ -3,6 +3,8 @@
 	name = "cold"
 	var/target_temp
 
+	effect_color = "#b3f6ff"
+
 /datum/artifact_effect/cold/New()
 	..()
 	target_temp = rand(0, 250)

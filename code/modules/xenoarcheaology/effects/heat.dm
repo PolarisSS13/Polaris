@@ -2,6 +2,7 @@
 /datum/artifact_effect/heat
 	name = "heat"
 	var/target_temp
+	effect_color = "#ff6600"
 
 /datum/artifact_effect/heat/New()
 	..()

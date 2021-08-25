@@ -25,6 +25,9 @@
 		"OH GOD!",
 		"HELP ME!")
 
+	effect_state = "summoning"
+	effect_color = "#643232"
+
 /datum/artifact_effect/badfeeling/DoEffectTouch(var/mob/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))

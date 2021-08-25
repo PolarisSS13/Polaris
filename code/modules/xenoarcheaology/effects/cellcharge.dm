@@ -4,6 +4,8 @@
 	effect_type = EFFECT_ELECTRO
 	var/last_message
 
+	effect_color = "#ffee06"
+
 /datum/artifact_effect/cellcharge/DoEffectTouch(var/mob/user)
 	if(user)
 		if(istype(user, /mob/living/silicon/robot))

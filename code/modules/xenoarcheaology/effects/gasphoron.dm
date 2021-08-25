@@ -1,6 +1,8 @@
 /datum/artifact_effect/gasphoron
 	name = "phoron creation"
 
+	effect_color = "#c408ba"
+
 /datum/artifact_effect/gasphoron/New()
 	..()
 	effect = pick(EFFECT_TOUCH, EFFECT_AURA)

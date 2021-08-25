@@ -2,6 +2,8 @@
 	name = "robotic healing"
 	var/last_message
 
+	effect_color = "#3879ad"
+
 /datum/artifact_effect/roboheal/New()
 	..()
 	effect_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)

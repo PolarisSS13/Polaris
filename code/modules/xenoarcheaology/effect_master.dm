@@ -265,7 +265,7 @@
 	var/obj/item/weapon/W = args[2]
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
-/*		if (istype(W, /obj/item/weapon/reagent_containers))
+		if (istype(W, /obj/item/weapon/reagent_containers))
 			if(W.reagents.has_reagent("hydrogen", 1) || W.reagents.has_reagent("water", 1))
 				if(my_effect.trigger == TRIGGER_WATER)
 					my_effect.ToggleActivate()
@@ -277,8 +277,8 @@
 					my_effect.ToggleActivate()
 			else if(W.reagents.has_reagent("toxin", 1) || W.reagents.has_reagent("cyanide", 1) || W.reagents.has_reagent("amatoxin", 1) || W.reagents.has_reagent("neurotoxin", 1))
 				if(my_effect.trigger == TRIGGER_TOXIN)
-					my_effect.ToggleActivate()*/
-		if(istype(W,/obj/item/weapon/melee/baton) && W:status ||\
+					my_effect.ToggleActivate()
+		else if(istype(W,/obj/item/weapon/melee/baton) && W:status ||\
 				istype(W,/obj/item/weapon/melee/energy) ||\
 				istype(W,/obj/item/weapon/melee/cultblade) ||\
 				istype(W,/obj/item/weapon/card/emag) ||\
@@ -329,7 +329,7 @@
 	if(istype(holder, /atom/movable))
 		var/atom/movable/HA = holder
 		if(HA.pulledby)
-			on_bumped(HA.pulledby)
+			on_bumped(holder, HA.pulledby)
 
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(my_effect)

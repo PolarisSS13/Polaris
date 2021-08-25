@@ -1,5 +1,6 @@
 /datum/artifact_effect/stun
 	name = "stun"
+	effect_color = "#00eeff"
 
 /datum/artifact_effect/stun/New()
 	..()
