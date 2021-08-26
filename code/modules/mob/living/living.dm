@@ -984,7 +984,7 @@
 		swap_hand()
 
 /mob/living/throw_item(atom/target)
-	if(stat || !target || istype(target, /obj/screen))
+	if(incapacitated() || !target || istype(target, /obj/screen))
 		return FALSE
 
 	var/atom/movable/item = src.get_active_hand()
@@ -1028,7 +1028,6 @@
 				to_chat(src, SPAN_NOTICE("You offer \the [I] to \the [target]."))
 				do_give(H)
 			return TRUE
-		remove_from_mob(I)
 		make_item_drop_sound(I)
 		I.forceMove(get_turf(target))
 		return TRUE

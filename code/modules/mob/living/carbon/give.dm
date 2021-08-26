@@ -6,10 +6,9 @@
 
 /mob/living/proc/do_give(var/mob/living/carbon/human/target)
 
-	// TODO :  Change to incapacitated() on merge.
 	if(src.incapacitated())
 		return
-	if(!istype(target) || target.stat || target.lying || target.resting || target.handcuffed || target.client == null)
+	if(!istype(target) || target.incapacitated() || target.client == null)
 		return
 
 	var/obj/item/I = src.get_active_hand()
