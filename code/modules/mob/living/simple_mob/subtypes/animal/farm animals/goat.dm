@@ -15,6 +15,8 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg")
+
 	melee_damage_lower = 1
 	melee_damage_upper = 5
 	attacktext = list("kicked")

@@ -41,6 +41,8 @@
 	melee_attack_delay = 1 SECOND
 	attacktext = list("mauled")
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "right bone plate", "left bone plate", "tail", "left claw", "right claw")
+
 	player_msg = "You have the ability to <b>berserk at will</b>, which will grant strong physical bonuses for \
 	a short period of time, however it will tire you and you will be much weaker for awhile after it expires."
 

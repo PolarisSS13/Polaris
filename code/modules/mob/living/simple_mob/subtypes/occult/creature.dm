@@ -24,6 +24,8 @@
 	attacktext = list("chomped")
 	attack_sound = 'sound/weapons/bite.ogg'
 
+	organ_names = list("fleshy mass", "maw", "eye(?)", "orifice(?)")
+
 	speak_emote = list("gibbers")
 
 	ai_holder_type = /datum/ai_holder/simple_mob/melee

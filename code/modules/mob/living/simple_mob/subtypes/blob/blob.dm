@@ -7,6 +7,8 @@
 	pass_flags = PASSBLOB | PASSTABLE
 	faction = "blob"
 
+	organ_names = list("mass")
+
 	heat_damage_per_tick = 0
 	cold_damage_per_tick = 0
 	min_oxy = 0

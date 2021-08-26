@@ -41,6 +41,8 @@
 	base_attack_cooldown = 1 SECOND
 	attacktext = list("nipped", "bit", "cut", "clawed")
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
+
 	armor = list(
 		"melee" = 15,
 		"bullet" = 5,

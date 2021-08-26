@@ -14,6 +14,8 @@
 	response_disarm = "pushes aside"
 	response_harm   = "hits"
 
+	organ_names = list("chest", "left leg", "right leg", "left flipper", "right flipper", "head")
+
 	harm_intent_damage = 5
 	melee_damage_lower = 10
 	melee_damage_upper = 15

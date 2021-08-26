@@ -45,6 +45,8 @@
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	attacktext = list("cut", "sliced")
 
+	organ_names = list("chassis", "rotor blades", "sensor array")
+
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
 
 /mob/living/simple_mob/mechanical/viscerator/death()

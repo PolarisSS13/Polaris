@@ -16,6 +16,8 @@
 	harm_intent_damage = 3
 	friendly = "hugs"
 
+	organ_names = list("helmet", "cuirass", "left tasset", "right tasset", "left gauntlet", "right gauntlet", "weapon")
+
 	melee_damage_lower = 30 // It has a built in esword.
 	melee_damage_upper = 30
 	attack_armor_pen = 20

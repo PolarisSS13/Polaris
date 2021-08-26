@@ -16,6 +16,8 @@
 	response_harm   = "stomps"
 	friendly = "pinches"
 
+	organ_names = list("cephalothorax", "abdomen", "left walking legs", "right walking legs", "left swimming legs", "right swimming legs", "left pincer", "right pincer")
+
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/crab
 
 	say_list_type = /datum/say_list/crab

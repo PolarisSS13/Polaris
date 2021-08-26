@@ -16,6 +16,8 @@
 	attacktext = list("nipped")
 	friendly = list("prods")
 
+	organ_names = list("head", "central segment", "tail segment")
+
 	status_flags = CANPUSH
 	pass_flags = PASSTABLE
 	movement_cooldown = 5

@@ -8,6 +8,7 @@
 	melee_damage_lower = 2
 	melee_damage_upper = 2
 
+	organ_names = list("central chassis", "positioning servo", "head", "sensor suite", "manipulator arm", "battle analytics mount", "weapons array", "front right leg", "front left leg", "rear left leg", "rear right leg")
 
 // This hivebot supplies a general buff to nearby hivebots that improve their performance.
 // Note that the commander itself does not receive the buff.

@@ -19,6 +19,7 @@
 	attack_edge = 1
 	attacktext = list("slashed")
 	friendly = list("pinches")
+	organ_names = list("body", "eye", "crystaline spike", "left claw", "right claw")
 	movement_cooldown = 0
 	attack_sound = 'sound/weapons/rapidslice.ogg'
 	construct_spells = list(/spell/targeted/ethereal_jaunt/shift,

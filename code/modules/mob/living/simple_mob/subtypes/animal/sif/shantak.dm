@@ -54,6 +54,8 @@
 	attack_edge = TRUE
 	attacktext = list("gouged")
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail", "mane", "snout")
+
 	say_list_type = /datum/say_list/shantak
 
 /datum/say_list/shantak

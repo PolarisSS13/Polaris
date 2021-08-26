@@ -20,6 +20,8 @@
 	attack_armor_pen = 100	//It's a ghost/horror from beyond, I ain't gotta explain 100 AP
 	attacktext = list("drained the life from")
 
+	organ_names = list("spectral robe", "featureless visage", "haunting glow")
+
 	minbodytemp = 0
 	maxbodytemp = 4000
 	min_oxy = 0

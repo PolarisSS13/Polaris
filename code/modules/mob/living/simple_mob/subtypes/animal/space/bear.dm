@@ -22,6 +22,8 @@
 	melee_attack_delay = 1 SECOND
 	attacktext = list("mauled")
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg")
+
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/bearmeat
 
 	say_list_type = /datum/say_list/bear

@@ -21,6 +21,8 @@
 	attacktext = list("pecked")
 	attack_sound = 'sound/weapons/bite.ogg'
 
+	organ_names = list("head", "chest", "left leg", "right leg", "left wing", "right wing", "neck")
+
 	has_langs = list("Bird")
 
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat

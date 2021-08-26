@@ -14,6 +14,8 @@
 	maxHealth = 300
 	mob_size = MOB_LARGE
 
+	organ_names = list("central chassis", "control module", "hydraulics", "left arm", "right arm", "left leg", "right leg", "sensor suite", "radiator", "power supply", "left equipment mount", "right equipment mount")
+
 	// Very close to the base 'damage_absorption' var on the base mecha class.
 	armor = list(
 				"melee"		= 20,

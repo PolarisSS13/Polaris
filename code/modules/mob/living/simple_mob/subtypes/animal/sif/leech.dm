@@ -69,6 +69,8 @@
 	attack_sharp = TRUE
 	attacktext = list("nipped", "bit", "pinched")
 
+	organ_names = list("mouthparts", "central segment", "tail segment")
+
 	armor = list(
 		"melee" = 10,
 		"bullet" = 15,

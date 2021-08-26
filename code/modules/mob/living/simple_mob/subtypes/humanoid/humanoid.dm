@@ -15,6 +15,8 @@
 	health = 150			// Point of human crit, as of commenting
 	maxHealth = 150
 
+	organ_names = list("head", "torso", "left leg", "right leg", "left arm", "right arm", "left hand", "right hand", "left foot", "right foot") //Same as real people!
+
 	// Most humans leave a corpse
 	var/corpse = null
 

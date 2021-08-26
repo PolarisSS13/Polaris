@@ -40,6 +40,8 @@ var/list/_slime_default_emotes = list(
 
 	response_help = "pets"
 
+	organ_names = list("cytoplasmic membrane")
+
 	// Atmos stuff.
 	minbodytemp = T0C-30
 	heat_damage_per_tick = 0

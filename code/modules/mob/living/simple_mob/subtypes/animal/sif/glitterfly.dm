@@ -52,6 +52,8 @@
 
 	attacktext = list("bit", "buffeted", "slashed")
 
+	organ_names = list("body", "left wing", "right wing") //Too tiny to be granular
+
 	tame_items = list(
 	/obj/item/weapon/reagent_containers/food/snacks/grown = 90,
 	/obj/item/weapon/reagent_containers/food/snacks/meat/crab = 10,

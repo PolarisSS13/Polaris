@@ -15,6 +15,8 @@
 	response_harm   = "kicks"
 	attacktext = list("kicked")
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "udder")
+
 	say_list_type = /datum/say_list/cow
 
 	meat_amount = 6

@@ -17,6 +17,7 @@
 	attack_sharp = 1
 	attacktext = list("violently stabbed")
 	friendly = list("caresses")
+	organ_names = list("cephalothorax", "eye", "carapace", "energy crystal", "mandible")
 	movement_cooldown = 0
 
 	//	environment_smash = 1	// Whatever this gets renamed to, Harvesters need to break things

@@ -20,6 +20,8 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 	response_harm   = "kicks"
 	attacktext = list("pecked")
 
+	organ_names = list("head", "body", "left wing", "right wing", "left leg", "right leg", "tendies")
+
 	has_langs = list("Bird")
 
 	say_list_type = /datum/say_list/chicken

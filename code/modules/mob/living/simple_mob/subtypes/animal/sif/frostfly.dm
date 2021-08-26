@@ -45,6 +45,8 @@
 	base_attack_cooldown = 1.5 SECONDS
 	attacktext = list("nipped", "bit", "pinched")
 
+	organ_names = list("head", "thorax", "abdomen", "left vestigal wing", "right vestigal wing", "left legs", "right legs")
+
 	projectiletype = /obj/item/projectile/energy/blob/freezing
 
 	special_attack_cooldown = 5 SECONDS

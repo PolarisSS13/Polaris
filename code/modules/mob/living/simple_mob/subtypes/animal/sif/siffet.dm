@@ -38,6 +38,8 @@
 	attack_sharp = 1
 	attacktext = list("sliced", "snapped", "gnawed")
 
+	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
+
 	say_list_type = /datum/say_list/siffet
 	ai_holder_type = /datum/ai_holder/simple_mob/siffet
 

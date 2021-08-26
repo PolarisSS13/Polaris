@@ -14,6 +14,8 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 
+	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
+
 	mob_size = MOB_SMALL
 
 	has_langs = list("Dog")
@@ -115,6 +117,7 @@
 	desc = "It's a corgi."
 	var/turns_since_scan = 0
 	var/obj/movement_target
+	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail", "heart") //You monster.
 
 /mob/living/simple_mob/animal/passive/dog/corgi/Ian/Life()
 	..()

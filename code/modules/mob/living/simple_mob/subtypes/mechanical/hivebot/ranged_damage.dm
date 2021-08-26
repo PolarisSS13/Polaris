@@ -118,6 +118,8 @@
 	icon_state = "red"
 	icon_living = "red"
 
+	organ_names = list("central chassis", "armor plating", "reinforced positioning servo", "head", "sensor suite", "manipulator arm", "heavy weapons mount", "advanced weapons array", "front right leg", "front left leg", "rear left leg", "rear right leg")
+
 	player_msg = "You are capable of firing <b>very long range bombardment attacks</b>.<br>\
 	To use, click on a tile or enemy at a long range. Note that the projectile arcs in the air, \
 	so it will fly over everything inbetween you and the target.<br>\

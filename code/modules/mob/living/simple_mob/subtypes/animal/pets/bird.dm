@@ -29,6 +29,7 @@
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
+	organ_names = list("head", "chest", "left leg", "right leg", "left wing", "right wing")
 
 	say_list_type = /datum/say_list/bird
 	holder_type = /obj/item/weapon/holder/bird

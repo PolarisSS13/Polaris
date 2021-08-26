@@ -25,6 +25,8 @@
 	attacktext = list("gripped")
 	attack_sound = 'sound/hallucinations/growl1.ogg'
 
+	organ_names = list("body", "left appendage", "right appendage", "shadowy tendrils", "head", "right stump", "left stump", "infernal eye")
+
 	ai_holder_type = /datum/ai_holder/simple_mob/melee
 
 

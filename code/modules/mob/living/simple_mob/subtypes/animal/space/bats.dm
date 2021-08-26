@@ -20,6 +20,8 @@
 	response_disarm = "gently pushes aside the"
 	response_harm = "hits the"
 
+	organ_names = list("body", "left wing", "right wing") //Too small to be granular
+
 	harm_intent_damage = 10
 
 	melee_damage_lower = 5

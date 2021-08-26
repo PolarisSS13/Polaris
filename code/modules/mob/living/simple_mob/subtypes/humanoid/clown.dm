@@ -22,6 +22,8 @@
 	attacktext = list("attacked")
 	attack_sound = 'sound/items/bikehorn.ogg'
 
+	organ_names = list("head", "torso", "pie-hole", "honker", "left funny bone", "right funny bone", "left foot", "right foot", "family jewels")
+
 	say_list_type = /datum/say_list/clown
 
 /datum/say_list/clown

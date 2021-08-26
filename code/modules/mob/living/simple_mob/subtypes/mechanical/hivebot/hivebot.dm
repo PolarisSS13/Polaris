@@ -19,6 +19,8 @@
 	attacktext = list("clawed")
 	projectilesound = 'sound/weapons/Gunshot_old.ogg'
 
+	organ_names = list("central chassis", "positioning servo", "head", "sensor suite", "manipulator arm", "shoulder weapon mount", "weapons array", "front right leg", "front left leg", "rear left leg", "rear right leg")
+
 	ai_holder_type = /datum/ai_holder/simple_mob/hivebot
 	say_list_type = /datum/say_list/hivebot
 

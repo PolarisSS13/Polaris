@@ -48,6 +48,8 @@
 	base_attack_cooldown = 1.5 SECONDS
 	attacktext = list("nipped", "bit", "pinched")
 
+	organ_names = list("head", "thorax", "abdomen", "left forewing", "left hindwing", "right forewing", "right hindwing", "left foreleg", "right foreleg", "left hindleg", "right hindleg")
+
 	projectiletype = /obj/item/projectile/energy/blob
 
 	special_attack_cooldown = 10 SECONDS
@@ -77,7 +79,6 @@
 
 	threaten_sound = 'sound/effects/spray3.ogg'
 	stand_down_sound = 'sound/effects/squelch1.ogg'
-
 
 /obj/effect/effect/smoke/elemental/mothspore
 	name = "spore cloud"

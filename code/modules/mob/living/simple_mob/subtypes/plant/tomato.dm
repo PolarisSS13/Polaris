@@ -17,6 +17,8 @@
 	response_disarm = "pushes aside"
 	response_harm   = "smacks"
 
+	organ_names = list("flesh", "leaf", "mouth")
+
 	harm_intent_damage = 5
 	melee_damage_upper = 15
 	melee_damage_lower = 10

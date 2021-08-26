@@ -8,6 +8,8 @@
 	icon_dead = "yithian_dead"
 	icon = 'icons/jungle.dmi'
 
+	organ_names = list("head", "abdomen", "left foreleg", "right foreleg", "left hind leg", "right hind leg")
+
 	// Same stats as lizards.
 	health = 5
 	maxHealth = 5
@@ -22,6 +24,8 @@
 	icon_living = "tindalos"
 	icon_dead = "tindalos_dead"
 	icon = 'icons/jungle.dmi'
+
+	organ_names = list("head", "thorax", "abdomen", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "left middle leg", "right middle leg")
 
 	// Same stats as lizards.
 	health = 5
