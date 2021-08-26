@@ -1257,11 +1257,11 @@
 	icon_state = "therapygreen"
 	item_state = "egg3" // It's the green egg in items_left/righthand
 
-/obj/structure/plushie/fumo
+/obj/item/toy/plushie/fumo
 	name = "Fumo"
 	desc = "A plushie of a....?."
 	icon_state = "fumoplushie"
-	phrase = "I just don't think about losing."
+	pokephrase = "I just don't think about losing."
 
 //Toy cult sword
 /obj/item/toy/cultsword
