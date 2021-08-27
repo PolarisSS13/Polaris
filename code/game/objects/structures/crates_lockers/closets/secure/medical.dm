@@ -227,6 +227,7 @@
 	wall_mounted = 1
 	req_access = list(access_medical_equip)
 	closet_appearance = /decl/closet_appearance/wall/medical
+	door_anim_time = 0 // Unsupported
 
 /obj/structure/closet/secure_closet/medical_wall/pills
 	name = "pill cabinet"

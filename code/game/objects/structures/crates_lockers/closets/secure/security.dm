@@ -223,11 +223,13 @@
 	name = "detective's cabinet"
 	req_access = list(access_forensics_lockers)
 	closet_appearance = /decl/closet_appearance/cabinet/secure
+	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
 		/obj/item/clothing/accessory/badge/holo/detective,
 		/obj/item/clothing/gloves/black,
 		/obj/item/gunbox,
+		/obj/item/weapon/gun/energy/stunrevolver/vintage,
 		/obj/item/weapon/storage/belt/detective,
 		/obj/item/weapon/storage/box/evidence,
 		/obj/item/device/radio/headset/headset_sec,
@@ -294,6 +296,5 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 	req_access = list(access_security)
 	closet_appearance = /decl/closet_appearance/wall
 	density = 1
-
-	//too small to put a man in
-	large = 0
+	door_anim_time = 0 // Unsupported
+	large = 0 //too small to put a man in

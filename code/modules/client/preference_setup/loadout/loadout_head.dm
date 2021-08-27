@@ -203,6 +203,10 @@
 	display_name = "hat, tophat"
 	path = /obj/item/clothing/head/that
 
+/datum/gear/head/panama
+	display_name = "hat, panama"
+	path = /obj/item/clothing/head/panama
+
 /datum/gear/head/wig/philosopher
 	display_name = "natural philosopher's wig"
 	path = /obj/item/clothing/head/philosopher_wig
