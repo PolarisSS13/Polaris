@@ -1408,7 +1408,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/popcorn
 	name = "Popcorn"
-	desc = "Now let's find a cinema."
+	desc = "Now let's find some cinema."
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "popcorn"
 	trash = /obj/item/trash/popcorn
@@ -2253,7 +2253,7 @@
 	bitesize = 3
 
 /obj/item/weapon/reagent_containers/food/snacks/caramelapple
-	name = "Caramel Apple"
+	name = "caramel apple"
 	desc = "An apple coated in rich caramel."
 	icon_state = "candiedapple1"
 	filling_color = "#F21873"
@@ -4781,7 +4781,7 @@
 
 /obj/item/weapon/reagent_containers/food/snacks/pancakes/berry
 	name = "berry pancakes"
-	desc = "Pancakes with berries, delicious."
+	desc = "These pancakes are berry nice!"
 	icon_state = "pancake_berry"
 	trash = /obj/item/trash/plate
 	center_of_mass = list("x"=15, "y"=11)

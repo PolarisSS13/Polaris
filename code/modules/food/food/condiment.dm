@@ -97,7 +97,7 @@
 				icon_state = "saltshaker"
 				center_of_mass = list("x"=17, "y"=11)
 			if("blackpepper")
-				name = "Pepper Mill"
+				name = "Pepper Shaker"
 				desc = "Often used to flavor food or make people sneeze."
 				icon_state = "peppermillsmall"
 				center_of_mass = list("x"=17, "y"=11)
@@ -220,13 +220,13 @@
 	. = ..()
 	reagents.add_reagent("sodiumchloride", 20)
 
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker
 	name = "pepper shaker"
 	desc = "Often used to flavor food or make people sneeze."
 	icon_state = "peppershakersmall"
 	center_of_mass = list("x"=17, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker/Initialize()
 	. = ..()
 	reagents.add_reagent("blackpepper", 20)
 
@@ -236,7 +236,7 @@
 	icon_state = "peppermill"
 	center_of_mass = list("x"=17, "y"=11)
 
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/small/peppergrinder/Initialize()
 	. = ..()
 	reagents.add_reagent("blackpepper", 30)
 

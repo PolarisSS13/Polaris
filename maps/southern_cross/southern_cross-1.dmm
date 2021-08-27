@@ -83530,7 +83530,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = -3
 	},
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker{
 	pixel_x = 3
 	},
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
@@ -85848,7 +85848,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = -3
 	},
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker{
 	pixel_x = 3
 	},
 /turf/simulated/floor/tiled/white,
