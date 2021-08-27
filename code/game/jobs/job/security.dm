@@ -24,6 +24,7 @@
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
 	minimum_character_age = 25
+	min_age_by_species = list(SPECIES_UNATHI = 70, SPECIES_TESHARI = 20, "mechanical" = 10)
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
@@ -31,6 +32,7 @@
 						keep the other Department Heads, and the rest of the crew, aware of developing situations that may be a threat. If necessary, the HoS may \
 						perform the duties of absent Security roles, such as distributing gear from the Armory."
 	alt_titles = list("Security Commander" = /datum/alt_title/sec_commander, "Chief of Security" = /datum/alt_title/sec_chief)
+
 
 // Head of Security Alt Titles
 /datum/alt_title/sec_commander
@@ -116,6 +118,9 @@
 						apprehending criminals. A Security Officer is responsible for the health, safety, and processing of any prisoner they arrest. \
 						No one is above the Law, not Security or Command."
 	alt_titles = list("Junior Officer" = /datum/alt_title/junior_officer)
+
+	minimum_character_age = 1
+	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 // Security Officer Alt Titles
 /datum/alt_title/junior_officer
