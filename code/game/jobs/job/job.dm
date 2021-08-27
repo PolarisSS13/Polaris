@@ -22,6 +22,7 @@
 	var/department_accounts = null        // Which department accounts should people with this position be given the pin for?
 	var/assignable = TRUE                 // Should it show up on things like the ID computer?
 	var/minimum_character_age = 0
+	var/list/min_age_by_species = null
 	var/ideal_character_age = 30
 	var/has_headset = TRUE                //Do people with this job need to be given headsets and told how to use them?  E.g. Cyborgs don't.
 
@@ -159,3 +160,8 @@
 		var/obj/O = mannequin.back
 		mannequin.drop_from_inventory(O)
 		qdel(O)
+
+///Assigns minimum age by race & brain type. Code says Positronic = mechanical and Drone = digital because nothing can be simple.
+///Will first check based on brain type, then based on species.
+/datum/job/proc/get_min_age(species_name, brain_type)
+    return (brain_type && LAZYACCESS(min_age_by_species, brain_type)) || LAZYACCESS(min_age_by_species, species_name) || minimum_character_age

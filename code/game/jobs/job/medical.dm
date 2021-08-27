@@ -23,8 +23,9 @@
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
 
 	minimum_character_age = 25
+	min_age_by_species = list(SPECIES_UNATHI = 70, SPECIES_TESHARI = 20, "mechanical" = 10)
 	minimal_player_age = 10
-	ideal_character_age = 50
+//	ideal_character_age = 50
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \
@@ -57,6 +58,9 @@
 					"Emergency Physician" = /datum/alt_title/emergency_physician,
 					"Nurse" = /datum/alt_title/nurse,
 					"Virologist" = /datum/alt_title/virologist)
+
+	minimum_character_age = 1
+	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 //Medical Doctor Alt Titles
 /datum/alt_title/surgeon
@@ -103,6 +107,8 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	minimal_player_age = 3
+	minimum_character_age = 0
+	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
 	job_description = "A Chemist produces and maintains a stock of basic to advanced chemicals for medical and occasionally research use. \
@@ -185,6 +191,9 @@
 	job_description = "A Paramedic is primarily concerned with the recovery of patients who are unable to make it to the Medical Department on their own. \
 						They may also be called upon to keep patients stable when Medical is busy or understaffed."
 	alt_titles = list("Emergency Medical Technician" = /datum/alt_title/emt)
+
+	minimum_character_age = 1
+	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 // Paramedic Alt Titles
 /datum/alt_title/emt
