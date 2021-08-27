@@ -3,6 +3,8 @@
 	icon = 'icons/obj/items.dmi'
 	w_class = ITEMSIZE_NORMAL
 
+	matter = list(DEFAULT_WALL_MATERIAL = 1)
+
 	var/image/blood_overlay = null //this saves our blood splatter overlay, which will be processed not to go over the edges of the sprite
 	var/randpixel = 6
 	var/abstract = 0

@@ -6,6 +6,7 @@
 	icon = 'icons/obj/apc_repair.dmi'
 	icon_state = "apc_frame"
 	refund_amt = 2
+	matter = list(DEFAULT_WALL_MATERIAL = 100,"glass" = 30)
 
 /obj/item/frame/apc/try_build(turf/on_wall, mob/user as mob)
 	if (get_dist(on_wall, user)>1)
