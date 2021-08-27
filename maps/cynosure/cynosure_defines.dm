@@ -33,11 +33,11 @@
 	starsys_name  = "Vir"
 	use_overmap = TRUE
 
-	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has docked with the station at docks one and two. It will depart in approximately %ETD%."
+	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has landed at Cynosure Departures Pad. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	shuttle_called_message = "A crew transfer to %dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to docks one and two in approximately %ETA%."
+	shuttle_called_message = "A crew transfer to %dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to Cynosure Departures Pad in approximately %ETA%."
 	shuttle_recall_message = "The scheduled crew transfer has been cancelled."
-	emergency_shuttle_docked_message = "The Emergency Shuttle has docked with the station at docks one and two. You have approximately %ETD% to board the Emergency Shuttle."
+	emergency_shuttle_docked_message = "The Emergency Shuttle has landed at Cynosure Departures Pad. You have approximately %ETD% to board the Emergency Shuttle."
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
 	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
@@ -128,7 +128,7 @@
 		/area/surface/outside/plains/normal,
 		/datum/map_template/surface/plains
 	) // Center area is WIP until map editing settles down.
-	
+
 	// Wilderness is next.
 	seed_submaps(
 		list(Z_LEVEL_SURFACE_WILD),
@@ -136,7 +136,7 @@
 		/area/surface/outside/wilderness/normal,
 		/datum/map_template/surface/wilderness/normal
 	)
-	
+
 	seed_submaps(
 		list(Z_LEVEL_SURFACE_WILD),
 		75,
@@ -171,7 +171,7 @@
 	z = Z_LEVEL_STATION_ONE
 	name = "Underground"
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES|MAP_LEVEL_SEALED
-	base_turf = /turf/simulated/floor/outdoors/rocks/sif/planetuse
+	base_turf = /turf/simulated/floor/outdoors/rocks/caves
 	holomap_offset_x = SOUTHERN_CROSS_HOLOMAP_MARGIN_X - 40
 	holomap_offset_y = SOUTHERN_CROSS_HOLOMAP_MARGIN_Y + SOUTHERN_CROSS_MAP_SIZE*0
 
@@ -191,24 +191,24 @@
 	holomap_offset_x = HOLOMAP_ICON_SIZE - SOUTHERN_CROSS_HOLOMAP_MARGIN_X - SOUTHERN_CROSS_MAP_SIZE - 40
 	holomap_offset_y = SOUTHERN_CROSS_HOLOMAP_MARGIN_Y + SOUTHERN_CROSS_MAP_SIZE*1
 
-/datum/map_z_level/southern_cross/empty_space
+/datum/map_z_level/cynosure/empty_space
 	z = Z_LEVEL_EMPTY_SPACE
 	name = "Empty"
 	flags = MAP_LEVEL_PLAYER
 	transit_chance = 76
 
-/datum/map_z_level/southern_cross/tcomm
+/datum/map_z_level/cynosure/tcomm
 	z = Z_LEVEL_TCOMM
 	name = "Telecommunications Satellite"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_CONTACT
 	transit_chance = 24
 
-/datum/map_z_level/southern_cross/centcom
+/datum/map_z_level/cynosure/centcom
 	z = Z_LEVEL_CENTCOM
 	name = "Centcom"
 	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT
 
-/datum/map_z_level/southern_cross/surface_wild
+/datum/map_z_level/cynosure/surface_wild
 	z = Z_LEVEL_SURFACE_WILD
 	name = "Wilderness"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONTACT|MAP_LEVEL_CONSOLES

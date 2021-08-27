@@ -82,6 +82,9 @@
 /obj/structure/prop/rock/small/alt,
 /turf/simulated/floor/outdoors/mud/sif/planetuse,
 /area/surface/outside/wilderness/normal)
+"lt" = (
+/turf/simulated/floor/water/deep,
+/area/surface/outside/wilderness/mountains)
 "mA" = (
 /obj/structure/cliff/automatic{
 	dir = 6;
@@ -235,6 +238,9 @@
 "Ax" = (
 /turf/simulated/floor/outdoors/grass/sif/forest,
 /area/surface/outside/wilderness/normal)
+"Ay" = (
+/turf/simulated/floor/water,
+/area/surface/outside/wilderness/mountains)
 "Be" = (
 /obj/structure/cliff/automatic{
 	dir = 8;
@@ -263,6 +269,9 @@
 	tree_chance = 0
 	},
 /area/surface/outside/wilderness/normal)
+"CR" = (
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outside/wilderness/mountains)
 "Dn" = (
 /obj/effect/zone_divider,
 /turf/simulated/mineral/sif,
@@ -283,6 +292,19 @@
 /obj/effect/zone_divider,
 /turf/simulated/floor/outdoors/grass/sif/forest,
 /area/surface/outside/wilderness/deep)
+"Gf" = (
+/obj/structure/cliff/automatic/corner{
+	dir = 6;
+	icon_state = "cliffbuilder-corner"
+	},
+/obj/structure/cliff/automatic{
+	dir = 4;
+	icon_state = "cliffbuilder"
+	},
+/turf/simulated/floor/outdoors/grass/sif{
+	tree_chance = 0
+	},
+/area/surface/outside/wilderness/mountains)
 "GK" = (
 /turf/simulated/floor/outdoors/snow/sif/planetuse,
 /area/surface/outside/wilderness/mountains)
@@ -320,6 +342,11 @@
 "MS" = (
 /turf/simulated/floor/water/deep,
 /area/surface/outside/river/gautelfr)
+"NP" = (
+/turf/simulated/floor/outdoors/grass/sif{
+	tree_chance = 0
+	},
+/area/surface/outside/wilderness/mountains)
 "Pe" = (
 /obj/structure/cliff/automatic{
 	dir = 4;
@@ -30755,7 +30782,7 @@ pw
 pw
 pw
 Qx
-bE
+NP
 "}
 (119,1,1) = {"
 jq
@@ -31012,7 +31039,7 @@ wN
 wN
 wN
 ub
-bE
+CR
 "}
 (120,1,1) = {"
 jq
@@ -31269,7 +31296,7 @@ wN
 wN
 wN
 ub
-bE
+CR
 "}
 (121,1,1) = {"
 jq
@@ -31526,7 +31553,7 @@ ne
 pw
 pw
 Zo
-bE
+NP
 "}
 (122,1,1) = {"
 jq
@@ -31783,7 +31810,7 @@ ne
 pw
 pw
 Zo
-bE
+NP
 "}
 (123,1,1) = {"
 jq
@@ -55170,7 +55197,7 @@ jG
 jG
 jG
 qT
-bE
+Ay
 "}
 (214,1,1) = {"
 jq
@@ -55427,7 +55454,7 @@ tM
 tM
 tM
 HF
-bE
+Ay
 "}
 (215,1,1) = {"
 jq
@@ -55684,7 +55711,7 @@ tM
 Qw
 tM
 HF
-bE
+Ay
 "}
 (216,1,1) = {"
 jq
@@ -55941,7 +55968,7 @@ tM
 tM
 MS
 MK
-bE
+lt
 "}
 (217,1,1) = {"
 jq
@@ -56198,7 +56225,7 @@ MS
 MS
 MS
 MK
-bE
+lt
 "}
 (218,1,1) = {"
 jq
@@ -56455,7 +56482,7 @@ MS
 MS
 MS
 MK
-bE
+lt
 "}
 (219,1,1) = {"
 jq
@@ -56712,7 +56739,7 @@ tM
 tM
 tM
 HF
-bE
+Ay
 "}
 (220,1,1) = {"
 jq
@@ -56969,7 +56996,7 @@ tM
 Ih
 tM
 HF
-bE
+Ay
 "}
 (221,1,1) = {"
 jq
@@ -57226,7 +57253,7 @@ jG
 jG
 jG
 zk
-bE
+NP
 "}
 (222,1,1) = {"
 jq
@@ -58249,7 +58276,7 @@ Pe
 Pe
 Pe
 Pe
-Mf
+Gf
 Eo
 qh
 GK

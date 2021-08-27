@@ -15,7 +15,7 @@
 "J" = (/obj/effect/floor_decal/borderfloorwhite{dir = 4},/obj/machinery/washing_machine,/obj/random/maintenance/medical,/obj/effect/floor_decal/corner/lime/border{dir = 4},/obj/item/device/radio/intercom{dir = 4; pixel_x = 21},/turf/simulated/floor/tiled/old_tile/white,/area/template_noop)
 "K" = (/obj/effect/floor_decal/borderfloorwhite{dir = 9},/obj/structure/table/standard,/obj/item/bodybag,/obj/item/usedcryobag,/obj/random/maintenance/medical,/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/corner/lime/border{dir = 9},/turf/simulated/floor/tiled/old_tile/white,/area/template_noop)
 "O" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/disposalpipe/segment,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/old_tile/white,/area/template_noop)
-"U" = (/obj/effect/floor_decal/borderfloorwhite{dir = 4},/obj/structure/sink{dir = 4; pixel_x = 12},/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/unary/vent_scrubber{dir = 8},/obj/random/medical/lite,/obj/effect/floor_decal/corner/lime/border{dir = 4},/turf/simulated/floor/tiled/old_tile/white,/area/template_noop)
+"U" = (/obj/effect/floor_decal/borderfloorwhite{dir = 4},/obj/effect/decal/cleanable/dirt,/obj/machinery/atmospherics/unary/vent_scrubber{dir = 8},/obj/random/medical/lite,/obj/effect/floor_decal/corner/lime/border{dir = 4},/obj/structure/sink/generic{dir = 8; pixel_x = 12; pixel_y = -4},/turf/simulated/floor/tiled/old_tile/white,/area/template_noop)
 
 (1,1,1) = {"
 yyyyy

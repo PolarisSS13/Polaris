@@ -976,16 +976,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/computer)
-"lu" = (
-/obj/machinery/power/smes/buildable{
-	RCon_tag = "Reactor - Core";
-	charge = 2e+006;
-	input_attempt = 1;
-	input_level = 100000;
-	output_level = 200000
-	},
-/turf/simulated/wall/r_wall,
-/area/tcommsat/cynosure/powercontrol)
 "lx" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -3400,6 +3390,9 @@
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/blue/border,
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/teleporter)
 "Lc" = (
@@ -3758,8 +3751,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/industrial/warning{
-	dir = 5;
-	icon_state = "warning"
+	dir = 5
 	},
 /obj/machinery/camera/network/telecom{
 	c_tag = "Tcoms - solar Airlock"
@@ -4419,10 +4411,8 @@
 "Ul" = (
 /obj/structure/bed/chair/shuttle,
 /obj/machinery/status_display{
-	density = 0;
 	layer = 4;
-	pixel_x = -32;
-	pixel_y = 0
+	pixel_x = -32
 	},
 /obj/machinery/light,
 /turf/simulated/shuttle/floor,
@@ -4939,6 +4929,9 @@
 	},
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 1
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/steel_dirty,
 /area/tcommsat/cynosure/teleporter)
@@ -35233,7 +35226,7 @@ rI
 rI
 rI
 rI
-lu
+rI
 fj
 Fw
 aQ

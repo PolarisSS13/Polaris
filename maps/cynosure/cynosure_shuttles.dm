@@ -219,7 +219,7 @@ ESCAPE_POD(1)
 	name = "Exploration Shuttle"
 	warmup_time = 0
 	current_location = "nav_pad4_cynosure"
-//	docking_controller_tag = "expshuttle_docker"
+	docking_controller_tag = "expshuttle_docker"
 	shuttle_area = list(/area/shuttle/exploration/general, /area/shuttle/exploration/cockpit, /area/shuttle/exploration/cargo)
 	fuel_consumption = 3
 
