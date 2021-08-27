@@ -79,6 +79,7 @@
 		/obj/item/weapon/weldingtool,
 		/obj/item/weapon/tool/crowbar,
 		/obj/item/weapon/tool/wirecutters,
+		/obj/item/device/multitool,
 		/obj/item/stack/cable_coil/random_belt
 	)
 
