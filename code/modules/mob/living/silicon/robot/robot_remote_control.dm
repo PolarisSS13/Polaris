@@ -125,7 +125,7 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 // Note that mapping in more than one of these will result in multiple shells.
 /obj/effect/landmark/free_ai_shell
 	name = "free ai shell spawner"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/screen1.dmi'
 	icon_state = "x3"
 	delete_me = TRUE
 

@@ -1230,11 +1230,11 @@
 				if(trauma_val)
 					if(!(species.flags & NO_PAIN))
 						if(trauma_val > 0.7)
-							health_images += image('icons/mob/screen1_health.dmi',"softcrit")
+							health_images += image('icons/mob/screen/screen1_health.dmi',"softcrit")
 						if(trauma_val >= 1)
-							health_images += image('icons/mob/screen1_health.dmi',"hardcrit")
+							health_images += image('icons/mob/screen/screen1_health.dmi',"hardcrit")
 				else if(no_damage)
-					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
+					health_images += image('icons/mob/screen/screen1_health.dmi',"fullhealth")
 
 				healths_ma.overlays += health_images
 				healths.appearance = healths_ma

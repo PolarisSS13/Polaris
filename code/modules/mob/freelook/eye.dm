@@ -5,7 +5,7 @@
 
 /mob/observer/eye
 	name = "Eye"
-	icon = 'icons/mob/eye.dmi'
+	icon = 'icons/mob/AI.dmi'
 	icon_state = "default-eye"
 	alpha = 127
 

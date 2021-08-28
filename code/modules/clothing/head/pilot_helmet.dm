@@ -4,7 +4,7 @@
 	name = "pilot helmet"
 	desc = "Standard pilot gear. Protects the head from impacts."
 	icon_state = "pilot_helmet1"
-	item_icons = list(slot_head_str = 'icons/mob/pilot_helmet.dmi')
+	item_icons = list(slot_head_str = 'icons/mob/head.dmi')
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/pilot_helmet.dmi'
 		)

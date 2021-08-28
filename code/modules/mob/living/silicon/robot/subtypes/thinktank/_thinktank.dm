@@ -3,7 +3,7 @@
 // not paid enough to spend more time trying to debug it.
 /obj/effect/landmark/robot_platform
 	name = "recon platform spawner"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/screen1.dmi'
 	icon_state = "x3"
 	delete_me = TRUE
 	var/platform_type

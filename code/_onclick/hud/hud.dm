@@ -77,7 +77,7 @@ var/list/global_huds = list(
 
 	//Marks the center of the screen, for things like ventcrawl
 	centermarker = new /obj/screen()
-	centermarker.icon = 'icons/mob/screen1.dmi'
+	centermarker.icon = 'icons/mob/screen/screen1.dmi'
 	centermarker.icon_state = "centermarker"
 	centermarker.screen_loc = "CENTER,CENTER"
 

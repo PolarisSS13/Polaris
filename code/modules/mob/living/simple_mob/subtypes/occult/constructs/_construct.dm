@@ -13,7 +13,7 @@
 
 	mob_class = MOB_CLASS_DEMONIC
 
-	ui_icons = 'icons/mob/screen1_construct.dmi'
+	ui_icons = 'icons/mob/screen/screen1_construct.dmi'
 	has_hands = 1
 	hand_form = "stone manipulators"
 

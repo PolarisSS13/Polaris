@@ -1,6 +1,6 @@
 /obj/screen/movable/spell_master
 	name = "Spells"
-	icon = 'icons/mob/screen_spells.dmi'
+	icon = 'icons/mob/screen/screen_spells.dmi'
 	icon_state = "wiz_spell_ready"
 	var/list/obj/screen/spell/spell_objects = list()
 	var/showing = 0
@@ -150,7 +150,7 @@
 //This is what you click to cast things//
 /////////////////////////////////////////
 /obj/screen/spell
-	icon = 'icons/mob/screen_spells.dmi'
+	icon = 'icons/mob/screen/screen_spells.dmi'
 	icon_state = "wiz_spell_base"
 	var/spell_base = "wiz"
 	var/last_charge = 0 //not a time, but the last remembered charge value

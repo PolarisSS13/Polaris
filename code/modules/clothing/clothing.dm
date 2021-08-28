@@ -250,7 +250,7 @@
 /obj/item/clothing/ears/offear
 	name = "Other ear"
 	w_class = ITEMSIZE_HUGE
-	icon = 'icons/mob/screen1_Midnight.dmi'
+	icon = 'icons/mob/screen/screen1_Midnight.dmi'
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 

@@ -2,7 +2,7 @@
 	name = "space bat swarm"
 	desc = "A swarm of cute little blood sucking bats that looks pretty upset."
 	tt_desc = "N Bestia gregaria" //Nispean swarm bats, because of course Nisp has swarm bats
-	icon = 'icons/mob/bats.dmi'
+	icon = 'icons/mob/mob.dmi'
 	icon_state = "bat"
 	icon_living = "bat"
 	icon_dead = "bat_dead"

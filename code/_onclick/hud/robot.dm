@@ -5,9 +5,9 @@ var/obj/screen/robot_inventory
 
 	// Don't care about your prefs! Our icon is more important
 	if(HUD.ui_style == 'icons/mob/screen/minimalist.dmi')
-		HUD.ui_style = 'icons/mob/screen1_robot_minimalist.dmi'
+		HUD.ui_style = 'icons/mob/screen/screen1_robot_minimalist.dmi'
 	else
-		HUD.ui_style = 'icons/mob/screen1_robot.dmi'
+		HUD.ui_style = 'icons/mob/screen/screen1_robot.dmi'
 
 	var/list/adding = list()
 	var/list/other = list()

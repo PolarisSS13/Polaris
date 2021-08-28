@@ -340,7 +340,7 @@
 
 /obj/screen/click_catcher
 	name = "Darkness"
-	icon = 'icons/mob/screen_gen.dmi'
+	icon = 'icons/mob/screen/screen_gen.dmi'
 	icon_state = "click_catcher"
 	plane = CLICKCATCHER_PLANE
 	layer = LAYER_HUD_UNDER

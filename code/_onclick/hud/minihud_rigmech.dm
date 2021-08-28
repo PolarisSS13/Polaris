@@ -102,7 +102,7 @@
 	
 // Screen objects
 /obj/screen/rig
-	icon = 'icons/mob/screen_rigmech.dmi'
+	icon = 'icons/mob/screen/screen_rigmech.dmi'
 
 /obj/screen/rig/deco1
 	name = "RIG Status"
@@ -154,7 +154,7 @@
 	user.toggle_internals()
 
 /obj/screen/mech
-	icon = 'icons/mob/screen_rigmech.dmi'
+	icon = 'icons/mob/screen/screen_rigmech.dmi'
 
 /obj/screen/mech/deco1
 	name = "Mech Status"

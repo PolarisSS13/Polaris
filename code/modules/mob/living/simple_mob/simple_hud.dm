@@ -1,7 +1,7 @@
 /mob/living/simple_mob/create_mob_hud(datum/hud/HUD)
 	..()
 
-	var/ui_style = 'icons/mob/screen1_animal.dmi'
+	var/ui_style = 'icons/mob/screen/screen1_animal.dmi'
 	if(ui_icons)
 		ui_style = ui_icons
 

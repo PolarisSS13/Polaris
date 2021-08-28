@@ -1,7 +1,7 @@
 // This artificially splits a ZAS zone, useful if you wish to prevent massive super-zones which can cause lag.
 /obj/effect/zone_divider
 	name = "zone divider"
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/screen1.dmi'
 	icon_state = "x3"
 	invisibility = 101 		//nope, can't see this
 	anchored = 1

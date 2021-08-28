@@ -21,7 +21,7 @@
 /mob/living/silicon/ai/create_mob_hud(datum/hud/HUD, apply_to_client = TRUE)
 	..()
 
-	HUD.ui_style = 'icons/mob/screen_ai.dmi'
+	HUD.ui_style = 'icons/mob/screen/screen_ai.dmi'
 
 	HUD.adding = list()
 	HUD.other = list()

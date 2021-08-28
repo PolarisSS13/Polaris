@@ -1,7 +1,7 @@
 /mob/living/carbon/alien/create_mob_hud(datum/hud/HUD, apply_to_client = TRUE)
 	..()
 
-	HUD.ui_style = 'icons/mob/screen1_alien.dmi'
+	HUD.ui_style = 'icons/mob/screen/screen1_alien.dmi'
 
 	HUD.adding = list()
 	HUD.other = list()

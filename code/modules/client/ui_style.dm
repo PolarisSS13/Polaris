@@ -11,13 +11,13 @@
 	)
 
 /var/all_ui_styles_robot = list(
-	"Midnight"     = 'icons/mob/screen1_robot.dmi',
-	"Orange"       = 'icons/mob/screen1_robot.dmi',
-	"old"          = 'icons/mob/screen1_robot.dmi',
-	"White"        = 'icons/mob/screen1_robot.dmi',
-	"old-noborder" = 'icons/mob/screen1_robot.dmi',
-	"minimalist"   = 'icons/mob/screen1_robot_minimalist.dmi',
-	"Hologram"     = 'icons/mob/screen1_robot_minimalist.dmi'
+	"Midnight"     = 'icons/mob/screen/screen1_robot.dmi',
+	"Orange"       = 'icons/mob/screen/screen1_robot.dmi',
+	"old"          = 'icons/mob/screen/screen1_robot.dmi',
+	"White"        = 'icons/mob/screen/screen1_robot.dmi',
+	"old-noborder" = 'icons/mob/screen/screen1_robot.dmi',
+	"minimalist"   = 'icons/mob/screen/screen1_robot_minimalist.dmi',
+	"Hologram"     = 'icons/mob/screen/screen1_robot_minimalist.dmi'
 	)
 
 var/global/list/all_tooltip_styles = list(

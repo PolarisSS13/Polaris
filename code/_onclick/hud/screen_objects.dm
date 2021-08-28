@@ -8,7 +8,7 @@
 */
 /obj/screen
 	name = ""
-	icon = 'icons/mob/screen1.dmi'
+	icon = 'icons/mob/screen/screen1.dmi'
 	appearance_flags = TILE_BOUND|PIXEL_SCALE|NO_CLIENT_COLOR
 	layer = LAYER_HUD_BASE
 	plane = PLANE_PLAYER_HUD
@@ -597,7 +597,7 @@
 		return
 	if(!handcuff_overlay)
 		var/state = (hud.l_hand_hud_object == src) ? "l_hand_hud_handcuffs" : "r_hand_hud_handcuffs"
-		handcuff_overlay = image("icon"='icons/mob/screen_gen.dmi', "icon_state"=state)
+		handcuff_overlay = image("icon"='icons/mob/screen/screen_gen.dmi', "icon_state"=state)
 	overlays.Cut()
 	if(hud.mymob && iscarbon(hud.mymob))
 		var/mob/living/carbon/C = hud.mymob
