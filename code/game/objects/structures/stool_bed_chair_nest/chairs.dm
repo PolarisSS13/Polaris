@@ -397,14 +397,11 @@
 /obj/structure/bed/chair/sofa/bench/Initialize()
 	. = ..()
 	var/mutable_appearance/MA
+	MA = mutable_appearance(icon, icon_state = "o[icon_state]")
 	// If we're north-facing, metal goes above mob, padding overlay goes below mob.
 	if((dir & NORTH) && !corner_piece)
 		plane = MOB_PLANE
 		layer = ABOVE_MOB_LAYER
-		MA = mutable_appearance(icon, icon_state = "o[icon_state]")
-	// Else just normal plane and layer for everything, which will be below mobs.
-	else
-		MA = mutable_appearance(icon, icon_state = "o[icon_state]")
 	MA.color = padding_color
 	add_overlay(MA)
 
