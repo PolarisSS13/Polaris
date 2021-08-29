@@ -15,6 +15,18 @@
 	edge_blending_priority = 2
 	initial_flooring = /decl/flooring/outdoors/newdirt
 	can_dig = TRUE
+	var/possibledirts = list(
+		"dirt0" = 150,
+		"dirt1" = 25,
+		"dirt2" = 25,
+		"dirt3" = 10,
+		"dirt4" = 3,
+		"dirt5" = 3,
+		"dirt6" = 1,
+		"dirt7" = 25,
+		"dirt8" = 10,
+		"dirt9" = 25
+	)
 
 /decl/flooring/outdoors/newdirt
 	name = "dirt"
@@ -33,18 +45,6 @@
 		'sound/effects/footstep/MedDirt4.ogg'))
 
 /turf/simulated/floor/outdoors/newdirt/Initialize(mapload)
-	var/possibledirts = list(
-		"dirt0" = 150,
-		"dirt1" = 25,
-		"dirt2" = 25,
-		"dirt3" = 10,
-		"dirt4" = 3,
-		"dirt5" = 3,
-		"dirt6" = 1,
-		"dirt7" = 25,
-		"dirt8" = 10,
-		"dirt9" = 25
-	)
 	flooring_override = pickweight(possibledirts)
 	return ..()
 
@@ -56,8 +56,6 @@
 	icon_state = "dirt0"
 	edge_blending_priority = 2
 	initial_flooring = /decl/flooring/outdoors/newdirt
-
-/turf/simulated/floor/outdoors/newdirt_nograss/Initialize(mapload)
 	var/possibledirts = list(
 		"dirt0" = 200,
 		"dirt3" = 20,
@@ -65,6 +63,8 @@
 		"dirt5" = 3,
 		"dirt6" = 1
 	)
+
+/turf/simulated/floor/outdoors/newdirt_nograss/Initialize(mapload)
 	flooring_override = pickweight(possibledirts)
 	return ..()
 
@@ -76,6 +76,19 @@
 	edge_blending_priority = 1
 	movement_cost = -0.5
 	initial_flooring = /decl/flooring/outdoors/sidewalk
+	var/possibledirts = list(
+		"" = 150,
+		"1" = 3,
+		"2" = 3,
+		"3" = 3,
+		"4" = 3,
+		"5" = 3,
+		"6" = 2,
+		"7" = 2,
+		"8" = 2,
+		"9" = 2,
+		"10" = 2
+	)
 
 /decl/flooring/outdoors/sidewalk
 	name = "sidewalk"
@@ -89,20 +102,7 @@
 		'sound/effects/footstep/LightStone4.ogg',))
 
 /turf/simulated/floor/outdoors/sidewalk/Initialize(mapload)
-	var/possibledirts = list(
-		"[initial(icon_state)]" = 150,
-		"[initial(icon_state)]1" = 3,
-		"[initial(icon_state)]2" = 3,
-		"[initial(icon_state)]3" = 3,
-		"[initial(icon_state)]4" = 3,
-		"[initial(icon_state)]5" = 3,
-		"[initial(icon_state)]6" = 2,
-		"[initial(icon_state)]7" = 2,
-		"[initial(icon_state)]8" = 2,
-		"[initial(icon_state)]9" = 2,
-		"[initial(icon_state)]10" = 2
-	)
-	flooring_override = pickweight(possibledirts)
+	flooring_override = "[initial(icon_state)][pickweight(possibledirts)]"
 	return ..()
 
 /turf/simulated/floor/outdoors/sidewalk/side
