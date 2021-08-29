@@ -15,7 +15,7 @@
 	edge_blending_priority = 2
 	initial_flooring = /decl/flooring/outdoors/newdirt
 	can_dig = TRUE
-	var/possibledirts = list(
+	var/static/possibledirts = list(
 		"dirt0" = 150,
 		"dirt1" = 25,
 		"dirt2" = 25,
@@ -56,7 +56,7 @@
 	icon_state = "dirt0"
 	edge_blending_priority = 2
 	initial_flooring = /decl/flooring/outdoors/newdirt
-	var/possibledirts = list(
+	var/static/possibledirts = list(
 		"dirt0" = 200,
 		"dirt3" = 20,
 		"dirt4" = 3,
@@ -76,7 +76,7 @@
 	edge_blending_priority = 1
 	movement_cost = -0.5
 	initial_flooring = /decl/flooring/outdoors/sidewalk
-	var/possibledirts = list(
+	var/static/possibledirts = list(
 		"" = 150,
 		"1" = 3,
 		"2" = 3,
