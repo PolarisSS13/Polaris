@@ -35,7 +35,7 @@
 
 /datum/gear/uniform/cropsweater
 	display_name = "cropped sweater"
-	/obj/item/clothing/under/wednesday
+	path = /obj/item/clothing/under/wednesday
 
 /datum/gear/uniform/kilt
 	display_name = "kilt"
