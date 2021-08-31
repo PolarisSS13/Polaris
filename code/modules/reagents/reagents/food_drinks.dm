@@ -436,7 +436,7 @@
 /datum/reagent/nutriment/vinegar
 	name = "Vinegar"
 	id = "vinegar"
-	description = "vinegar, great for fish and pickles."
+	description = "Vinegar, great for fish and pickles."
 	taste_description = "vinegar"
 	reagent_state = LIQUID
 	nutriment_factor = 5
@@ -1045,6 +1045,24 @@
 
 	glass_name = "poison berry juice"
 	glass_desc = "A glass of deadly juice."
+
+/datum/reagent/toxin/meatcolony
+	name = "A colony of meat cells"
+	id = "meatcolony"
+	description = "Specialised cells designed to produce a large amount of meat once activated, whilst manufacturers have managed to stop these cells from taking over the body when ingested, it's still poisonous."
+	taste_description = "a fibrous mess"
+	reagent_state = LIQUID
+	color = "#ff2424"
+	strength = 10
+
+/datum/reagent/toxin/plantcolony
+	name = "A colony of plant cells"
+	id = "plantcolony"
+	description = "Specialised cells designed to produce a large amount of nutriment once activated, whilst manufacturers have managed to stop these cells from taking over the body when ingested, it's still poisonous."
+	taste_description = "a fibrous mess"
+	reagent_state = LIQUID
+	color = "#7ce01f"
+	strength = 10
 
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"

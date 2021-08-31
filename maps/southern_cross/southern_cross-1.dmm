@@ -111650,7 +111650,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped,
+/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube/wrapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},
