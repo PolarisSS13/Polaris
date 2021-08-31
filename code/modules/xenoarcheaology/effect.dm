@@ -28,9 +28,6 @@
 
 /datum/artifact_effect/New(var/datum/component/artifact_master/newmaster)
 	..()
-	if(!newmaster)
-		qdel(src)
-		return
 
 	master = newmaster
 	effect = rand(0, MAX_EFFECT)
@@ -62,32 +59,33 @@
 
 /datum/artifact_effect/proc/ToggleActivate(var/reveal_toggle = 1)
 	//so that other stuff happens first
-	spawn(0)
-		if(world.time - last_activation > 1 SECOND)
-			last_activation = world.time
+	set waitfor = FALSE
+
+	if(world.time - last_activation > 1 SECOND)
+		last_activation = world.time
+		if(activated)
+			activated = 0
+		else
+			activated = 1
+		if(reveal_toggle && master.holder)
+			if(!isliving(master.holder))
+				master.holder.update_icon()
+			var/display_msg
 			if(activated)
-				activated = 0
+				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 			else
-				activated = 1
-			if(reveal_toggle && master.holder)
-				if(!isliving(master.holder))
-					master.holder.update_icon()
-				var/display_msg
+				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
+
+			if(active_effect)
 				if(activated)
-					display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
+					master.holder.underlays.Add(active_effect)
 				else
-					display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
+					master.holder.underlays.Remove(active_effect)
 
-				if(active_effect)
-					if(activated)
-						master.holder.underlays.Add(active_effect)
-					else
-						master.holder.underlays.Remove(active_effect)
-
-				var/atom/toplevelholder = master.holder
-				while(!istype(toplevelholder.loc, /turf))
-					toplevelholder = toplevelholder.loc
-				toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
+			var/atom/toplevelholder = master.holder
+			while(!istype(toplevelholder.loc, /turf))
+				toplevelholder = toplevelholder.loc
+			toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
 
 /datum/artifact_effect/proc/DoEffectTouch(var/mob/user)
 /datum/artifact_effect/proc/DoEffectAura(var/atom/holder)

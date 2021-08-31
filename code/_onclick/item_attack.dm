@@ -45,7 +45,7 @@ avoid code duplication. This includes items that may sometimes act as a standard
 /obj/item/proc/resolve_attackby(atom/A, mob/user, var/attack_modifier = 1, var/click_parameters)
 	add_fingerprint(user)
 	. = pre_attack(A, user, click_parameters)
-	if(.)	// We're returning the value of pre_attack, in the event it has a special return rather than a boolean.
+	if(.)	// We're returning the value of pre_attack, important if it has a special return.
 		return
 	return A.attackby(src, user, attack_modifier, click_parameters)
 
