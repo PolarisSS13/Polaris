@@ -108,6 +108,11 @@
 		return
 	..()
 
+/obj/item/rig_module/get_cell()
+	if(holder)
+		return holder.get_cell()
+	return FALSE
+
 /obj/item/rig_module/New()
 	..()
 	if(suit_overlay_inactive)

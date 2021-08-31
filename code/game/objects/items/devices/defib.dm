@@ -47,8 +47,11 @@
 
 	if(paddles && paddles.loc == src) //in case paddles got destroyed somehow.
 		new_overlays += "[initial(icon_state)]-paddles"
-	if(bcell && paddles)
-		if(bcell.check_charge(paddles.chargecost))
+
+	var/obj/item/weapon/cell/Cell = get_cell()
+
+	if(Cell && paddles)
+		if(Cell.check_charge(paddles.chargecost))
 			if(paddles.combat)
 				new_overlays += "[initial(icon_state)]-combat"
 			else if(!paddles.safety)
@@ -56,7 +59,7 @@
 			else
 				new_overlays += "[initial(icon_state)]-powered"
 
-		var/ratio = CEILING(bcell.percent()/25, 1) * 25
+		var/ratio = CEILING(Cell.percent()/25, 1) * 25
 		new_overlays += "[initial(icon_state)]-charge[ratio]"
 	else
 		new_overlays += "[initial(icon_state)]-nocell"
@@ -583,21 +586,23 @@
 	item_state = "defibpaddles0"
 	cooldowntime = (3 SECONDS)
 
-/obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
+/obj/item/weapon/shockpaddles/rig/get_cell()
 	if(istype(loc, /obj/item/rig_module))
 		var/obj/item/rig_module/RM = src.loc
-		var/obj/item/weapon/rig/Rig = RM.holder
-		if(!Rig)
-			return FALSE
-		return (Rig.cell && Rig.cell.check_charge(charge_amt))
+		if(istype(RM))
+			return RM.get_cell()
+
+	return FALSE
+
+/obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
+	var/obj/item/weapon/cell/C = get_cell()
+
+	return (C && C.check_charge(charge_amt))
 
 /obj/item/weapon/shockpaddles/rig/checked_use(var/charge_amt)
-	if(istype(loc, /obj/item/rig_module))
-		var/obj/item/rig_module/RM = src.loc
-		var/obj/item/weapon/rig/Rig = RM.holder
-		if(!Rig)
-			return FALSE
-		return (Rig.cell && Rig.cell.checked_use(charge_amt))
+	var/obj/item/weapon/cell/C = get_cell()
+
+	return (C && C.checked_use(charge_amt))
 
 /*
 	Shockpaddles that are linked to a base unit
@@ -608,6 +613,9 @@
 /obj/item/weapon/shockpaddles/linked/New(newloc, obj/item/device/defib_kit/defib)
 	base_unit = defib
 	..(newloc)
+
+/obj/item/weapon/shockpaddles/linked/get_cell()
+	return base_unit.get_cell()
 
 /obj/item/weapon/shockpaddles/linked/Destroy()
 	if(base_unit)
@@ -624,10 +632,12 @@
 		base_unit.reattach_paddles(user) //paddles attached to a base unit should never exist outside of their base unit or the mob equipping the base unit
 
 /obj/item/weapon/shockpaddles/linked/check_charge(var/charge_amt)
-	return (base_unit.bcell && base_unit.bcell.check_charge(charge_amt))
+	var/obj/item/weapon/cell/Cell = get_cell()
+	return (Cell && Cell.check_charge(charge_amt))
 
 /obj/item/weapon/shockpaddles/linked/checked_use(var/charge_amt)
-	return (base_unit.bcell && base_unit.bcell.checked_use(charge_amt))
+	var/obj/item/weapon/cell/Cell = get_cell()
+	return (Cell && Cell.checked_use(charge_amt))
 
 /obj/item/weapon/shockpaddles/linked/make_announcement(var/message, var/msg_class)
 	base_unit.audible_message("<b>\The [base_unit]</b> [message]", "\The [base_unit] vibrates slightly.")
