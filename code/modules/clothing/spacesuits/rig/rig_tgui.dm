@@ -140,7 +140,7 @@
 			locked = !locked
 			. = TRUE
 		if("toggle_piece")
-			if(/*ishuman(usr) && */(usr.stat || usr.stunned || usr.lying))
+			if(usr.stat || usr.stunned || usr.lying)
 				return FALSE
 			toggle_piece(params["piece"], usr)
 			. = TRUE

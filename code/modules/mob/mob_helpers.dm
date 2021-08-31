@@ -685,3 +685,25 @@ var/global/image/backplane
 		return
 
 	item.screen_loc = screen_place
+
+/*
+ * Generalized proc for moving a player to another mob.
+ * 
+ * Returns FALSE if it is unable to transfer the player.
+ * allow_overwrite determines if it will fail when targeting a mob with a ckey.
+ */
+/mob/proc/transfer_player(var/mob/target = null, var/allow_overwrite = FALSE)
+	if(!target)
+		return FALSE
+
+	if(target.ckey && !allow_overwrite)
+		return FALSE
+
+	if(mind)
+		mind.transfer_to(target)
+	else
+		target.ckey = ckey
+		ckey = null
+	target.computer_id = computer_id
+	target.lastKnownIP = lastKnownIP
+	return TRUE

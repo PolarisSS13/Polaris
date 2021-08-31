@@ -15,9 +15,7 @@
 		to_chat(usr, "Your module is not installed in a hardsuit.")
 		return
 
-	var/obj/item/weapon/rig/RIG = module.holder
-	var/mob/living/L = usr
-	RIG.tgui_interact(L, custom_state = GLOB.tgui_contained_state)
+	module.holder.tgui_interact(usr, custom_state = GLOB.tgui_contained_state)
 
 /obj/item/rig_module/ai_container
 
@@ -57,7 +55,7 @@
 			SetupStat(rig)
 
 /obj/item/rig_module/ai_container/proc/update_verb_holder()
-	if(!istype(verb_holder))
+	if(ispath(verb_holder))
 		verb_holder = new verb_holder(src)
 	if(integrated_ai)
 		verb_holder.forceMove(integrated_ai)
@@ -135,7 +133,7 @@
 		return 0
 
 	if(ai_locked)
-		to_chat(usr, "\The [src] gives an error code response.")
+		to_chat(usr, SPAN_WARNING("\The [src] gives an error code response."))
 		return 0
 
 	var/mob/living/carbon/human/H = holder.wearer
@@ -159,15 +157,15 @@
 
 /obj/item/rig_module/ai_container/proc/eject_ai(var/mob/user)
 	if(ai_locked)
-		to_chat(usr, "\The [src] gives an error code response.")
+		to_chat(usr, SPAN_WARNING("\The [src] gives an error code response."))
 		return
 	if(ai_card)
 		if(istype(ai_card, /obj/item/device/aicard))
 			if(integrated_ai && !integrated_ai.stat)
 				if(user)
-					to_chat(user, "<span class='danger'>You cannot eject your currently stored AI. Purge it manually.</span>")
+					to_chat(user, SPAN_DANGER("You cannot eject your currently stored AI. Purge it manually."))
 				return 0
-			to_chat(user, "<span class='danger'>You purge the previous AI from your Integrated Intelligence System, freeing it for use.</span>")
+			to_chat(user, SPAN_DANGER("You purge the previous AI from your Integrated Intelligence System, freeing it for use."))
 			if(integrated_ai)
 				integrated_ai.ghostize()
 				qdel(integrated_ai)
@@ -187,7 +185,7 @@
 	if(!ai) return
 
 	if(ai_locked)
-		to_chat(usr, "\The [src] gives an error code response.")
+		to_chat(usr, SPAN_WARNING("\The [src] gives an error code response."))
 		return
 
 	// The ONLY THING all the different AI systems have in common is that they all store the mob inside an item.
@@ -214,8 +212,8 @@
 				user.drop_from_inventory(ai)
 				ai.forceMove(src)
 				ai_card = ai
-				to_chat(ai_mob, "<font color='blue'>You have been transferred to \the [holder]'s [src].</font>")
-				to_chat(user, "<font color='blue'>You load [ai_mob] into \the [holder]'s [src].</font>")
+				to_chat(ai_mob, SPAN_NOTICE("You have been transferred to \the [holder]'s [src]."))
+				to_chat(user, SPAN_NOTICE("You load [ai_mob] into \the [holder]'s [src]."))
 
 			integrated_ai = ai_mob
 
@@ -223,9 +221,9 @@
 				integrated_ai = null
 				eject_ai()
 		else
-			to_chat(user, "<span class='warning'>There is no active AI within \the [ai].</span>")
+			to_chat(user, SPAN_WARNING("There is no active AI within \the [ai]."))
 	else
-		to_chat(user, "<span class='warning'>There is no active AI within \the [ai].</span>")
+		to_chat(user, SPAN_WARNING("There is no active AI within \the [ai]."))
 	update_verb_holder()
 	return
 
@@ -239,18 +237,18 @@
 	set src in usr
 
 	if(!usr.loc || !usr.loc.loc || !istype(usr.loc.loc, /obj/item/rig_module))
-		to_chat(usr, "You are not loaded into a hardsuit.")
+		to_chat(usr, SPAN_WARNING("You are not loaded into a hardsuit."))
 		return
 
 	var/obj/item/rig_module/ai_container/advanced/module = usr.loc.loc
 	if(!module.holder)
-		to_chat(usr, "Your module is not installed in a hardsuit.")
+		to_chat(usr, SPAN_WARNING("Your module is not installed in a hardsuit."))
 		return
 
 	module.jack_brain()
 
 /obj/item/rig_module/ai_container/advanced
-	name = "AINI module"
+	name = "\improper AINI module"
 	desc = "An artificial intelligence neural integration module, suitable for most hardsuits."
 	description_fluff = "The unassuming device has no exterior markings, save for a network usage monitor and tiny warning label. On closer inspection, it reads, \"Warning: Device may cause damage if used without proper neural interface firmware.\" Something in your core urges you to heed that warning."
 	description_info = "Unless used by a robotic RIG pilot, or an organic one with a neural implant, the module will cause brain-damage on activation of its override mode."
@@ -284,8 +282,8 @@
 		var/mob/living/simple_mob/animal/borer/Borer = H.has_brain_worms()
 		if(Borer)	// As funny as it would be to see a borer, AI, and human swap minds like musical chairs, let's not.
 			revert()
-			to_chat(integrated_ai, "<span class='danger'>The neural jack signals a warning abruptly, before rapidly retracting.</span>")
-			to_chat(H, "<span class='warning'>You are shoved into consciousness as though you have been dropped into freezing water.</span>")
+			to_chat(integrated_ai, SPAN_DANGER("<span class='danger'>The neural jack signals a warning abruptly, before rapidly retracting.</span>"))
+			to_chat(H, SPAN_WARNING("You are shoved into consciousness as though you have been dropped into freezing water."))
 			return
 
 		var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
@@ -331,88 +329,55 @@
 	var/obj/item/weapon/rig/rig = holder
 	var/mob/living/carbon/human/H = rig.wearer
 	if(!(istype(H) && H.get_rig() == rig))
-		to_chat(jacker, "Your rig does not have a pilot, or is attached to an incompatible bioform.")
+		to_chat(jacker, SPAN_WARNING("Your rig does not have a pilot, or is attached to an incompatible bioform."))
 		return
 
 	if(jacker.stat)
-		to_chat(src, "You cannot do that in your current state.")
+		to_chat(src, SPAN_WARNING("You cannot do that in your current state."))
 		return
 
 	if(!holder.ai_override_enabled)
-		to_chat(src, "You are locked out of \the [src]'s neural jack controls.")
+		to_chat(src, SPAN_WARNING("You are locked out of \the [src]'s neural jack controls."))
 		return
 
-	to_chat(jacker, "You begin the process of enabling \the [src]'s neural jack.")
-	to_chat(H, "<span class='warning'>\The [rig]'s [src] begins clacking, accompanied by a pressure along your spine.</span>")
+	to_chat(jacker, SPAN_NOTICE("You begin the process of enabling \the [src]'s neural jack."))
+	to_chat(H, SPAN_WARNING("\The [rig]'s [src] begins clacking, accompanied by a pressure along your spine."))
 
 	if(do_after(jacker, 1 MINUTE, H, ignore_movement = TRUE))
 		if(!H || !integrated_ai || controlling || !rig.ai_override_enabled)
 			return
 		else
 
-			to_chat(jacker, "<span class='warning'>You fully engage \the [src]'s neural jack, interfacing directly with the pilot's nervous system.</span>")
+			to_chat(jacker, SPAN_WARNING("You fully engage \the [src]'s neural jack, interfacing directly with the pilot's nervous system."))
 			var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
 			if(!Brain)
-				to_chat(jacker,"\The [src] responds with an error code, as the neural jack swiftly retracts. The pilot has no neural cortex.")
+				to_chat(jacker, SPAN_WARNING("\The [src] responds with an error code, as the neural jack swiftly retracts. The pilot has no neural cortex."))
 				return
 
 			if(H.has_brain_worms())
-				to_chat(jacker, "<span class='warning'>\The [src] connects, but only for a moment. You see the world through.. alien eyes, for a brief instant, as the jack retracts.</span>")
-				to_chat(H, "<span class='warning'>Something moves under the surface of your neck.</span>")
+				to_chat(jacker, SPAN_WARNING("\The [src] connects, but only for a moment. You see the world through.. alien eyes, for a brief instant, as the jack retracts."))
+				to_chat(H, SPAN_WARNING("Something moves under the surface of your neck."))
 				return
 
 			if(Brain.robotic < ORGAN_ASSISTED)
-				to_chat(H, "<span class='warning'>You feel a strange shifting sensation behind your eyes as a consciousness displaces yours. Your final sensation is that of something wet tearing.</span>")
+				to_chat(H, SPAN_WARNING("You feel a strange shifting sensation behind your eyes as a consciousness displaces yours. Your final sensation is that of something wet tearing."))
 				H.adjustBrainLoss(rand(0,5))
 				imperfect_connection = TRUE
 
 			else
-				to_chat(H, "<span class='warning'>You feel a strange shifting sensation behind your eyes as a consciousness displaces yours.</span>")
+				to_chat(H, SPAN_WARNING("You feel a strange shifting sensation behind your eyes as a consciousness displaces yours."))
 
 			if(H.stat == DEAD)
 				corpse_pilot = TRUE
 
 			// pilot -> brain
-			var/h2b_id = H.computer_id
-			var/h2b_ip= H.lastKnownIP
-			H.computer_id = null
-			H.lastKnownIP = null
-
 			qdel(pilot_brain)
 			pilot_brain = new(src)
 
-			if(H.mind)
-				H.mind.transfer_to(pilot_brain)
-			else
-				var/key_holder = H.ckey
-				H.ckey = null
-				pilot_brain.ckey = key_holder
-
-			pilot_brain.name = H.real_name
-
-			if(!pilot_brain.computer_id)
-				pilot_brain.computer_id = h2b_id
-
-			if(!pilot_brain.lastKnownIP)
-				pilot_brain.lastKnownIP = h2b_ip
+			H.transfer_player(pilot_brain)
 
 			// AI -> pilot
-			var/s2h_id = jacker.computer_id
-			var/s2h_ip= jacker.lastKnownIP
-
-			if(jacker.mind)
-				jacker.mind.transfer_to(H)
-			else
-				var/key_holder = jacker.ckey
-				jacker.ckey = null
-				H.ckey = key_holder
-
-			if(!H.computer_id)
-				H.computer_id = s2h_id
-
-			if(!H.lastKnownIP)
-				H.lastKnownIP = s2h_ip
-
+			jacker.transfer_player(H)
 			controlling = TRUE
 			ai_locked = TRUE
 
@@ -428,30 +393,12 @@
 			controlling = FALSE
 			H.verbs -= /mob/living/carbon/proc/release_control
 
-			var/s2i_id = H.computer_id
-			var/s2i_ip= H.lastKnownIP
-			if(H.mind)
-				H.mind.transfer_to(integrated_ai)
-			else
-				var/key_holder = H.ckey
-				H.ckey = null
-				integrated_ai = key_holder
-			integrated_ai.computer_id = s2i_id
-			integrated_ai.lastKnownIP = s2i_ip
+			H.transfer_player(integrated_ai)
 
-			var/b2h_id = pilot_brain.computer_id
-			var/b2h_ip= pilot_brain.lastKnownIP
-			
 			to_chat(pilot_brain, "<span class='notice'>Your mind returns from a strange limbo, the sensations of the body returning.[imperfect_connection ? " Your voice returns shakily." : ""][corpse_pilot ? " <span class='warning'>And then everything comes crashing down.</span>" : ""]</span>")
 
-			if(pilot_brain.mind)
-				pilot_brain.mind.transfer_to(H)
-			else
-				var/key_holder = pilot_brain.ckey
-				pilot_brain.ckey = null
-				H.ckey = key_holder
-			H.computer_id = b2h_id
-			H.lastKnownIP = b2h_ip
+			pilot_brain.transfer_player(H)
+
 			QDEL_NULL(pilot_brain)
 			ai_locked = FALSE
 			imperfect_connection = FALSE
