@@ -287,3 +287,11 @@
 /datum/gear/accessory/asymovercoat
 	display_name = "orange asymmetrical overcoat"
 	path = /obj/item/clothing/accessory/asymovercoat
+
+/datum/gear/accessory/virginkiller
+	display_name = "virgin killer sweater (colorable)"
+	path = /obj/item/clothing/accessory/sweater/virgin
+
+/datum/gear/accessory/virginkiller/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice

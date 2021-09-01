@@ -169,13 +169,13 @@
 		var/damage_severity = M.species.allergen_damage_severity*allergen_factor
 		var/disable_severity = M.species.allergen_disable_severity*allergen_factor
 		if(M.species.allergen_reaction & AG_TOX_DMG)
-			M.adjustToxLoss(damage_severity)
+			M.adjustToxLoss(damage_severity * removed)
 		if(M.species.allergen_reaction & AG_OXY_DMG)
-			M.adjustOxyLoss(damage_severity)
-			if(prob(2.5*disable_severity))
+			M.adjustOxyLoss(damage_severity * removed)
+			if(prob(2*disable_severity))
 				M.emote(pick("cough","gasp","choke"))
 		if(M.species.allergen_reaction & AG_EMOTE)
-			if(prob(2.5*disable_severity))	//this has a higher base chance, but not *too* high
+			if(prob(2*disable_severity))
 				M.emote(pick("pale","shiver","twitch"))
 		if(M.species.allergen_reaction & AG_PAIN)
 			M.adjustHalLoss(disable_severity)

@@ -202,8 +202,8 @@ research holder datum.
 	id = TECH_DATA
 
 /datum/tech/syndicate
-	name = "Illegal Technologies Research"
-	desc = "The study of technologies that violate standard government regulations."
+	name = "Transgressive Technologies Research"
+	desc = "The study of technologies that sit on the very boundaries of legality and ethics."
 	id = TECH_ILLEGAL
 	level = 0
 
