@@ -163,6 +163,13 @@
 		rupture()
 	return ..()
 
+/obj/structure/reagent_dispensers/empty
+	name = "chemical tank"
+	desc = "A chemical tank."
+	icon = 'icons/obj/machines/reagent.dmi'
+	icon_state = "chemtank"
+	amount_per_transfer_from_this = 10
+
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
 	name = "watertank"
