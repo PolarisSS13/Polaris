@@ -408,8 +408,8 @@
 		if(!has_liquids() || current.no_puddle)
 			current.touch_turf(target, amount)
 
-	else
 
+	if(has_liquids())
 		var/obj/effect/decal/cleanable/chempuddle/CP = locate() in target
 		if(!CP)
 			CP = new(target)
