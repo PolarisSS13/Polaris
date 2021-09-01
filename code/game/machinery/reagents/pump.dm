@@ -27,6 +27,7 @@
 	var/obj/item/hose_connector/output/Output
 
 // Overlay cache vars.
+	var/icon/panel
 	var/icon/liquid
 	var/icon/tank
 	var/icon/powerlow
@@ -75,6 +76,9 @@
 	if(!cell_overlay)
 		cell_overlay = new/icon(icon, "[icon_state]-cell")
 
+	if(!panel)
+		panel = new/icon(icon, "[icon_state]-panel")
+
 	cut_overlays()
 	add_overlay(tank)
 
@@ -94,6 +98,9 @@
 	if(open)
 		add_overlay(open_overlay)
 
+		if(panel_open)
+			add_overlay(panel)
+
 		if(cell)
 			add_overlay(cell_overlay)
 
@@ -107,7 +114,7 @@
 	if(Output.get_pairing())
 		reagents.trans_to_holder(Output.reagents, Output.reagents.maximum_volume)
 		if(prob(5))
-			visible_message("<span class='notice'>\The [src] gurgles as it exports fluid.</span>")
+			visible_message(SPAN_NOTICE("\The [src] gurgles as it exports fluid."))
 
 	if(!on)
 		return
@@ -138,25 +145,25 @@
 	return FALSE
 
 
-// Returns 0 on failure and 1 on success
+// Returns FALSE on failure and TRUE on success
 /obj/machinery/pump/proc/turn_on(var/loud = 0)
 	if(!cell)
-		return 0
-	if(cell.charge < (use * CELLRATE))
-		return 0
+		return FALSE
+	if(!cell.checked_use(200))
+		return FALSE
 
-	on = 1
+	on = TRUE
 	update_icon()
 	if(loud)
-		visible_message("<span class='notice'>\The [src] turns on.</span>")
-	return 1
+		visible_message(SPAN_NOTICE("\The [src] turns on."))
+	return TRUE
 
 /obj/machinery/pump/proc/turn_off(var/loud = 0)
-	on = 0
+	on = FALSE
 	set_light(0, 0)
 	update_icon()
 	if(loud)
-		visible_message("<span class='notice'>\The [src] shuts down.</span>")
+		visible_message(SPAN_NOTICE("\The [src] shuts down."))
 
 	if(!on)
 		return TRUE
@@ -170,8 +177,8 @@
 	if(on)
 		turn_off(TRUE)
 	else
-		if(!turn_on(1))
-			to_chat(user, "<span class='notice'>You try to turn on \the [src] but it does not work.</span>")
+		if(!turn_on(TRUE))
+			to_chat(user, SPAN_NOTICE("You try to turn on \the [src], but nothing happens."))
 
 /obj/machinery/pump/attack_hand(mob/user as mob)
 	if(open && cell)
@@ -186,17 +193,17 @@
 		cell.update_icon()
 
 		cell = null
-		on = 0
+		turn_off(TRUE)
 		set_light(0)
-		to_chat(user, "<span class='notice'>You remove the power cell.</span>")
+		to_chat(user, SPAN_NOTICE("You remove the power cell."))
 		update_icon()
 		return
 
 	if(on)
 		turn_off(TRUE)
 	else if(anchored)
-		if(!turn_on(1))
-			to_chat(user, "<span class='notice'>You try to turn on \the [src] but it does not work.</span>")
+		if(!turn_on(TRUE))
+			to_chat(user, SPAN_NOTICE("You try to turn on \the [src] but nothing happens."))
 
 	update_icon()
 
@@ -204,48 +211,60 @@
 	if(W.is_screwdriver())
 		if(!open)
 			if(unlocked)
-				unlocked = 0
-				to_chat(user, "<span class='notice'>You screw the battery panel in place.</span>")
+				unlocked = FALSE
+				to_chat(user, SPAN_NOTICE("You screw the battery panel in place."))
 			else
-				unlocked = 1
-				to_chat(user, "<span class='notice'>You unscrew the battery panel.</span>")
+				unlocked = TRUE
+				to_chat(user, SPAN_NOTICE("You unscrew the battery panel."))
+		else if(!cell)
+			default_deconstruction_screwdriver(user, W)
+			update_icon()
+			return
 
 	else if(W.is_crowbar())
 		if(unlocked)
 			if(open)
-				open = 0
-				overlays = null
-				to_chat(user, "<span class='notice'>You crowbar the battery panel in place.</span>")
+				if(default_deconstruction_crowbar(user, W))
+					return
+
+				open = FALSE
+				to_chat(user, SPAN_NOTICE("You pry the battery panel into place."))
 			else
 				if(unlocked)
-					open = 1
-					to_chat(user, "<span class='notice'>You remove the battery panel.</span>")
+					open = TRUE
+					to_chat(user, SPAN_NOTICE("You remove the battery panel."))
 
 	else if(W.is_wrench())
 		if(on)
-			to_chat(user, "<span class='notice'>\The [src] is active. Turn it off before trying to move it!</span>")
+			to_chat(user, SPAN_NOTICE("\The [src] is active. Turn it off before trying to move it!"))
 			return
 		default_unfasten_wrench(user, W, 2 SECONDS)
 
 	else if(istype(W, /obj/item/weapon/cell))
 		if(open)
+			if(panel_open)
+				to_chat(user, SPAN_NOTICE("The cell can't be connected directly to the machine's wires. Replace the maintenance panel."))
 			if(cell)
-				to_chat(user, "<span class='notice'>There is a power cell already installed.</span>")
+				to_chat(user, SPAN_NOTICE("There is a power cell already installed."))
 			else
-				user.drop_item()
+				user.drop_from_inventory(W)
 				W.loc = src
 				cell = W
-				to_chat(user, "<span class='notice'>You insert the power cell.</span>")
+				to_chat(user, SPAN_NOTICE("You insert the power cell."))
 	else
-		..()
+		. = ..()
 	RefreshParts()
 	update_icon()
 
 /obj/machinery/pump/proc/handle_pumping()
 	var/turf/T = get_turf(src)
 
-	if(istype(T, /turf/simulated/floor/water))
-		cell.use(use * CELLRATE / efficiency)
+	var/obj/structure/geyser/Geyser = locate() in T
+	if(Geyser)
+		if(Geyser.reagents.total_volume && cell.checked_use(use / efficiency / 2))
+			Geyser.reagents.trans_to_holder(reagents, efficiency)
+
+	else if(istype(T, /turf/simulated/floor/water) && cell.checked_use(use / efficiency))
 		reagents.add_reagent("water", reagents_per_cycle)
 
 		if(T.temperature <= T0C)
@@ -265,6 +284,5 @@
 				var/obj/effect/mineral/OR = MT.mineral
 				reagents.add_reagent(OR.ore_reagent, round(reagents_per_cycle / 20 * efficiency, 0.1))
 
-	else if(istype(T, /turf/simulated/floor/lava))
-		cell.use(use * CELLRATE / efficiency * 4)
+	else if(istype(T, /turf/simulated/floor/lava) && cell.checked_use(use / efficiency * 4))
 		reagents.add_reagent("mineralizedfluid", round(reagents_per_cycle * efficiency / 2, 0.1))

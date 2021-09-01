@@ -89,6 +89,7 @@
 /datum/reagent/toxin/hydrophoron
 	name = "Hydrophoron"
 	id = "hydrophoron"
+	reagent_state = SOLID
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 80
 	var/fire_mult = 30
@@ -120,6 +121,26 @@
 			spawn(rand(30, 60))
 				M.IgniteMob()
 
+/datum/reagent/toxin/energized_phoron
+	name = "phoron plasma"
+	id = "energetic_phoron"
+	description = "A strange, liquid-like form of Phoron."
+	strength = 20
+
+	var/fire_mult = 40
+
+/datum/reagent/toxin/energized_phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.apply_damage(removed * 5, ELECTROCUTE)
+	M.apply_damage(removed * 5, BIOACID)
+	if(prob(10 * fire_mult))
+		M.pl_effects()
+
+/datum/reagent/toxin/energized_phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.apply_damage(removed * 10, ELECTROCUTE)
+	M.adjust_fire_stacks(removed * 5)
+
 /datum/reagent/toxin/lead
 	name = "lead"
 	id = "lead"
@@ -137,9 +158,9 @@
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	id = "phoron"
-	description = "Phoron in its liquid form."
+	description = "Phoron in a powdered form."
 	taste_mult = 1.5
-	reagent_state = LIQUID
+	reagent_state = SOLID
 	color = "#9D14DB"
 	strength = 30
 	touch_met = 5
