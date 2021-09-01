@@ -100,6 +100,13 @@
 		"mineralizedfluid" = list(1,20)
 	)
 
+/obj/structure/geyser/planetary/phorogenic
+	desc = "An ominous outcropping."
+
+	allowed_reagents = list(
+		"energetic_phoron" = list(5,10)
+	)
+
 /obj/structure/geyser/truerandom
 	name = "strange vent"
 
