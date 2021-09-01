@@ -92,7 +92,7 @@
 //////////////////// Prosthetics ////////////////////
 /datum/design/item/prosfab/pros/torso
 	time = 35
-	materials = list(MAT_STEEL = 30000, "glass" = 7500)
+	materials = list(MAT_STEEL = 30000, MAT_GLASS = 7500)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 3, TECH_DATA = 3)	//Saving the values just in case
 	var/gender = MALE
 
@@ -115,7 +115,7 @@
 	id = "pros_head"
 	build_path = /obj/item/organ/external/head
 	time = 30
-	materials = list(MAT_STEEL = 18750, "glass" = 3750)
+	materials = list(MAT_STEEL = 18750, MAT_GLASS = 3750)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 3, TECH_DATA = 3)	//Saving the values just in case
 
 /datum/design/item/prosfab/pros/l_arm
@@ -182,7 +182,7 @@
 	id = "pros_cell"
 	build_path = /obj/item/organ/internal/cell
 	time = 15
-	materials = list(MAT_STEEL = 7500, "glass" = 3000)
+	materials = list(MAT_STEEL = 7500, MAT_GLASS = 3000)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 
 /datum/design/item/prosfab/pros/internal/eyes
@@ -190,7 +190,7 @@
 	id = "pros_eyes"
 	build_path = /obj/item/organ/internal/eyes/robot
 	time = 15
-	materials = list(MAT_STEEL = 5625, "glass" = 5625)
+	materials = list(MAT_STEEL = 5625, MAT_GLASS = 5625)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 
 /datum/design/item/prosfab/pros/internal/hydraulic
@@ -226,7 +226,7 @@
 	id = "pros_heart"
 	build_path = /obj/item/organ/internal/heart
 	time = 15
-	materials = list(MAT_STEEL = 5625, "glass" = 1000)
+	materials = list(MAT_STEEL = 5625, MAT_GLASS = 1000)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 
 /datum/design/item/prosfab/pros/internal/lungs
@@ -234,7 +234,7 @@
 	id = "pros_lung"
 	build_path = /obj/item/organ/internal/lungs
 	time = 15
-	materials = list(MAT_STEEL = 5625, "glass" = 1000)
+	materials = list(MAT_STEEL = 5625, MAT_GLASS = 1000)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 
 /datum/design/item/prosfab/pros/internal/liver
@@ -242,7 +242,7 @@
 	id = "pros_liver"
 	build_path = /obj/item/organ/internal/liver
 	time = 15
-	materials = list(MAT_STEEL = 5625, "glass" = 1000)
+	materials = list(MAT_STEEL = 5625, MAT_GLASS = 1000)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 
 /datum/design/item/prosfab/pros/internal/kidneys
@@ -250,7 +250,7 @@
 	id = "pros_kidney"
 	build_path = /obj/item/organ/internal/kidneys
 	time = 15
-	materials = list(MAT_STEEL = 5625, "glass" = 1000)
+	materials = list(MAT_STEEL = 5625, MAT_GLASS = 1000)
 //	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
 
 /datum/design/item/prosfab/pros/internal/spleen
@@ -394,21 +394,21 @@
 	name = "Emergency Restart Module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
 	id = "borg_restart_module"
-	materials = list(MAT_STEEL = 45000, "glass" = 3750)
+	materials = list(MAT_STEEL = 45000, MAT_GLASS = 3750)
 	build_path = /obj/item/borg/upgrade/restart
 
 /datum/design/item/prosfab/robot_upgrade/vtec
 	name = "VTEC Module"
 	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
 	id = "borg_vtec_module"
-	materials = list(MAT_STEEL = 60000, "glass" = 4500, "gold" = 3750)
+	materials = list(MAT_STEEL = 60000, MAT_GLASS = 4500, MAT_GOLD = 3750)
 	build_path = /obj/item/borg/upgrade/vtec
 
 /datum/design/item/prosfab/robot_upgrade/tasercooler
 	name = "Rapid Taser Cooling Module"
 	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
 	id = "borg_taser_module"
-	materials = list(MAT_STEEL = 60000, "glass" = 4500, "gold" = 1500, "diamond" = 375)
+	materials = list(MAT_STEEL = 60000, MAT_GLASS = 4500, MAT_GOLD = 1500, MAT_DIAMOND = 375)
 	build_path = /obj/item/borg/upgrade/tasercooler
 
 /datum/design/item/prosfab/robot_upgrade/jetpack
@@ -422,7 +422,7 @@
 	name = "Advanced Health Analyzer Module"
 	desc = "An advanced health analyzer suitable for diagnosing more serious injuries."
 	id = "borg_advhealth_module"
-	materials = list(MAT_STEEL = 10000, "glass" = 6500, "diamond" = 350)
+	materials = list(MAT_STEEL = 10000, MAT_GLASS = 6500, MAT_DIAMOND = 350)
 	build_path = /obj/item/borg/upgrade/advhealth
 
 /datum/design/item/prosfab/robot_upgrade/syndicate
@@ -430,7 +430,7 @@
 	desc = "Allows for the construction of lethal upgrades for cyborgs."
 	id = "borg_syndicate_module"
 	req_tech = list(TECH_COMBAT = 4, TECH_ILLEGAL = 3)
-	materials = list(MAT_STEEL = 7500, "glass" = 11250, "diamond" = 7500)
+	materials = list(MAT_STEEL = 7500, MAT_GLASS = 11250, MAT_DIAMOND = 7500)
 	build_path = /obj/item/borg/upgrade/syndicate
 
 /datum/design/item/prosfab/robot_upgrade/language
@@ -438,7 +438,7 @@
 	desc = "Used to let cyborgs other than clerical or service speak a variety of languages."
 	id = "borg_language_module"
 	req_tech = list(TECH_DATA = 6, TECH_MATERIAL = 6)
-	materials = list(MAT_STEEL = 25000, "glass" = 3000, "gold" = 350)
+	materials = list(MAT_STEEL = 25000, MAT_GLASS = 3000, MAT_GOLD = 350)
 	build_path = /obj/item/borg/upgrade/language
 
 // Synthmorph Bags.
@@ -447,42 +447,42 @@
 	name = "Synthmorph Storage Bag"
 	desc = "Used to store or slowly defragment an FBP."
 	id = "misc_synth_bag"
-	materials = list(MAT_STEEL = 250, "glass" = 250, "plastic" = 2000)
+	materials = list(MAT_STEEL = 250, MAT_GLASS = 250, MAT_PLASTIC = 2000)
 	build_path = /obj/item/bodybag/cryobag/robobag
 
 /datum/design/item/prosfab/badge_nt
 	name = "NanoTrasen Tag"
 	desc = "Used to identify an empty NanoTrasen FBP."
 	id = "misc_synth_bag_tag_nt"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag
 
 /datum/design/item/prosfab/badge_morph
 	name = "Morpheus Tag"
 	desc = "Used to identify an empty Morpheus FBP."
 	id = "misc_synth_bag_tag_morph"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/morpheus
 
 /datum/design/item/prosfab/badge_wardtaka
 	name = "Ward-Takahashi Tag"
 	desc = "Used to identify an empty Ward-Takahashi FBP."
 	id = "misc_synth_bag_tag_wardtaka"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/wardtaka
 
 /datum/design/item/prosfab/badge_zenghu
 	name = "Zeng-Hu Tag"
 	desc = "Used to identify an empty Zeng-Hu FBP."
 	id = "misc_synth_bag_tag_zenghu"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/zenghu
 
 /datum/design/item/prosfab/badge_gilthari
 	name = "Gilthari Tag"
 	desc = "Used to identify an empty Gilthari FBP."
 	id = "misc_synth_bag_tag_gilthari"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "gold" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_GOLD = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/gilthari
 	req_tech = list(TECH_MATERIAL = 4, TECH_ILLEGAL = 2, TECH_PHORON = 2)
 
@@ -490,7 +490,7 @@
 	name = "Vey-Medical Tag"
 	desc = "Used to identify an empty Vey-Medical FBP."
 	id = "misc_synth_bag_tag_veymed"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/veymed
 	req_tech = list(TECH_MATERIAL = 3, TECH_ILLEGAL = 1, TECH_BIO = 4)
 
@@ -498,26 +498,26 @@
 	name = "Hephaestus Tag"
 	desc = "Used to identify an empty Hephaestus FBP."
 	id = "misc_synth_bag_tag_heph"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/hephaestus
 
 /datum/design/item/prosfab/badge_grayson
 	name = "Grayson Tag"
 	desc = "Used to identify an empty Grayson FBP."
 	id = "misc_synth_bag_tag_grayson"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/grayson
 
 /datum/design/item/prosfab/badge_xion
 	name = "Xion Tag"
 	desc = "Used to identify an empty Xion FBP."
 	id = "misc_synth_bag_tag_xion"
-	materials = list(MAT_STEEL = 1000, "glass" = 500, "plastic" = 1000)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 500, MAT_PLASTIC = 1000)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/xion
 
 /datum/design/item/prosfab/badge_bishop
 	name = "Bishop Tag"
 	desc = "Used to identify an empty Bishop FBP."
 	id = "misc_synth_bag_tag_bishop"
-	materials = list(MAT_STEEL = 500, "glass" = 2000, "plastic" = 500)
+	materials = list(MAT_STEEL = 500, MAT_GLASS = 2000, MAT_PLASTIC = 500)
 	build_path = /obj/item/clothing/accessory/badge/corporate_tag/bishop
