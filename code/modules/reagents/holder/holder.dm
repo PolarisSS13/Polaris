@@ -404,8 +404,8 @@
 	if(!target || !istype(target))
 		return
 
-	if(!has_liquids())
-		for(var/datum/reagent/current in reagent_list)
+	for(var/datum/reagent/current in reagent_list)
+		if(!has_liquids() || current.no_puddle)
 			current.touch_turf(target, amount)
 
 	else
