@@ -1034,6 +1034,9 @@
 
 	drop_from_inventory(item)
 
+	if(!item || QDELETED(item))
+		return TRUE //It may not have thrown, but it sure as hell left your hand successfully.
+
 	//actually throw it!
 	src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
 
