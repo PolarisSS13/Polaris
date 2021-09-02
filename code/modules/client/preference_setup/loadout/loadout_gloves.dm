@@ -96,7 +96,9 @@
 	ringtype["ring, wood"] = /obj/item/clothing/gloves/ring/material/wood
 	ringtype["ring, plastic"] = /obj/item/clothing/gloves/ring/material/plastic
 	ringtype["ring, iron"] = /obj/item/clothing/gloves/ring/material/iron
+	ringtype["ring, bronze"] = /obj/item/clothing/gloves/ring/material/bronze
 	ringtype["ring, steel"] = /obj/item/clothing/gloves/ring/material/steel
+	ringtype["ring, copper"] = /obj/item/clothing/gloves/ring/material/copper
 	ringtype["ring, silver"] = /obj/item/clothing/gloves/ring/material/silver
 	ringtype["ring, gold"] = /obj/item/clothing/gloves/ring/material/gold
 	ringtype["ring, phoron"] = /obj/item/clothing/gloves/ring/material/phoron
