@@ -215,6 +215,8 @@
 			var/obj/item/mecha_parts/mecha_equipment/ME = new path(src)
 			ME.attach(src)
 
+	START_PROCESSING(SSobj, src)
+
 	update_transform()
 
 /obj/mecha/drain_power(var/drain_check)
@@ -330,6 +332,8 @@
 
 	QDEL_NULL(spark_system)
 	QDEL_NULL(minihud)
+
+	STOP_PROCESSING(SSobj, src)
 
 	mechas_list -= src //global mech list
 	. = ..()
@@ -1706,8 +1710,7 @@
 	return
 
 /obj/mecha/remove_air(amount)
-	var/obj/item/mecha_parts/component/gas/GC = internal_components[MECH_GAS]
-	if(use_internal_tank && (GC && prob(GC.get_efficiency() * 100)))
+	if(use_internal_tank)
 		return cabin_air.remove(amount)
 	else
 		var/turf/T = get_turf(src)
@@ -1716,7 +1719,8 @@
 	return
 
 /obj/mecha/return_air()
-	if(use_internal_tank)
+	var/obj/item/mecha_parts/component/gas/GC = internal_components[MECH_GAS]
+	if(use_internal_tank && (GC && prob(GC.get_efficiency() * 100)))
 		return cabin_air
 	return get_turf_air()
 
