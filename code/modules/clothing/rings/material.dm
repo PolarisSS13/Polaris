@@ -20,28 +20,49 @@
 	return material
 
 /obj/item/clothing/gloves/ring/material/wood/New(var/newloc)
-	..(newloc, "wood")
+	..(newloc, MAT_WOOD)
 
 /obj/item/clothing/gloves/ring/material/plastic/New(var/newloc)
-	..(newloc, "plastic")
+	..(newloc, MAT_PLASTIC)
 
 /obj/item/clothing/gloves/ring/material/iron/New(var/newloc)
-	..(newloc, "iron")
+	..(newloc, MAT_IRON)
 
 /obj/item/clothing/gloves/ring/material/steel/New(var/newloc)
-	..(newloc, "steel")
+	..(newloc, MAT_STEEL)
 
 /obj/item/clothing/gloves/ring/material/silver/New(var/newloc)
-	..(newloc, "silver")
+	..(newloc, MAT_SILVER)
 
 /obj/item/clothing/gloves/ring/material/gold/New(var/newloc)
-	..(newloc, "gold")
+	..(newloc, MAT_GOLD)
 
 /obj/item/clothing/gloves/ring/material/platinum/New(var/newloc)
-	..(newloc, "platinum")
+	..(newloc, MAT_PLATINUM)
 
 /obj/item/clothing/gloves/ring/material/phoron/New(var/newloc)
-	..(newloc, "phoron")
+	..(newloc, MAT_PHORON)
 
-/obj/item/clothing/gloves/ring/material/glass/New(var/newloc)
-	..(newloc, "glass")
+/obj/item/clothing/gloves/ring/material/titanium/New(var/newloc)
+	..(newloc, MAT_TITANIUM)
+
+/obj/item/clothing/gloves/ring/material/copper/New(var/newloc)
+	..(newloc, MAT_COPPER)
+
+/obj/item/clothing/gloves/ring/material/bronze/New(var/newloc)
+	..(newloc, MAT_BRONZE)
+
+/obj/item/clothing/gloves/ring/material/uranium/New(var/newloc)
+	..(newloc, MAT_URANIUM)
+
+/obj/item/clothing/gloves/ring/material/osmium/New(var/newloc)
+	..(newloc, MAT_OSMIUM)
+
+/obj/item/clothing/gloves/ring/material/lead/New(var/newloc)
+	..(newloc, MAT_LEAD)
+
+/obj/item/clothing/gloves/ring/material/diamond/New(var/newloc)
+	..(newloc, MAT_DIAMOND)
+
+/obj/item/clothing/gloves/ring/material/tin/New(var/newloc)
+	..(newloc, MAT_TIN)
