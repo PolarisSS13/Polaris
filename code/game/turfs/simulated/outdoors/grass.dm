@@ -7,6 +7,7 @@ var/list/grass_types = list(
 	icon_state = "grass0"
 	edge_blending_priority = 4
 	initial_flooring = /decl/flooring/grass
+	can_dig = TRUE
 	turf_layers = list(
 		/turf/simulated/floor/outdoors/rocks,
 		/turf/simulated/floor/outdoors/dirt
@@ -42,7 +43,6 @@ var/list/grass_types = list(
 	var/tree_chance = 2
 /*
 	animal_chance = 0.5
-
 	animal_types = list(
 		/mob/living/simple_mob/animal/sif/diyaab = 10,
 		/mob/living/simple_mob/animal/sif/glitterfly = 2,

@@ -1324,9 +1324,19 @@ window "rpane"
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
+	elem "discord"
+		type = BUTTON
+		pos = 428,0
+		size = 60x16
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Discord"
+		command = "discord"
+		group = "rpanemode"
 	elem "github"
 		type = BUTTON
-		pos = 392,0
+		pos = 368,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1336,7 +1346,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "mapb"
 		type = BUTTON
-		pos = 332,0
+		pos = 308,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1346,7 +1356,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "rulesb"
 		type = BUTTON
-		pos = 272,0
+		pos = 248,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1366,7 +1376,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "forumb"
 		type = BUTTON
-		pos = 212,0
+		pos = 188,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1376,7 +1386,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "wikib"
 		type = BUTTON
-		pos = 152,0
+		pos = 128,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
