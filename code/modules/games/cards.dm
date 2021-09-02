@@ -1,5 +1,7 @@
 /datum/playingcard
 	var/name = "playing card"
+	var/desc
+	var/description_info
 	var/card_icon = "card_back"
 	var/back_icon = "card_back"
 
@@ -8,6 +10,7 @@
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
 	var/cooldown = 0 // to prevent spam shuffle
+	var/decktype = "playingcards"
 
 /obj/item/weapon/deck/holder
 	name = "card box"
@@ -55,7 +58,7 @@
 /obj/item/weapon/deck/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
-		if(H.parentdeck == src)
+		if(H.parentdeck == src.decktype)
 			for(var/datum/playingcard/P in H.cards)
 				cards += P
 			qdel(H)
@@ -95,8 +98,8 @@
 		to_chat(user,"<span class='notice'>There are no cards in the deck.</span>")
 		return
 
-	var/obj/item/weapon/hand/H = user.get_type_in_hands(/obj/item/weapon/hand)
-	if(H && !(H.parentdeck == src))
+	var/obj/item/weapon/hand/H = user.get_active_hand(/obj/item/weapon/hand)
+	if(H && !(H.parentdeck == src.decktype))
 		to_chat(user,"<span class='warning'>You can't mix cards from different decks!</span>")
 		return
 
@@ -109,7 +112,7 @@
 	var/datum/playingcard/P = cards[1]
 	H.cards += P
 	cards -= P
-	H.parentdeck = src
+	H.parentdeck = src.decktype
 	H.update_icon()
 	user.visible_message("<span class='notice'>\The [user] draws a card.</span>")
 	to_chat(user,"<span class='notice'>It's the [P].</span>")
@@ -171,7 +174,7 @@
 	for(i = 0, i < dcard, i++)
 		H.cards += cards[1]
 		cards -= cards[1]
-		H.parentdeck = src
+		H.parentdeck = src.decktype
 		H.concealed = 1
 		H.update_icon()
 	if(user==target)
@@ -347,7 +350,7 @@
 		H.Move(get_step(usr,usr.dir))
 
 	if(!cards.len)
-		qdel(src)
+		qdel(src) /// This is causing runtimes.
 
 /obj/item/weapon/hand/attack_self(var/mob/user as mob)
 	concealed = !concealed
@@ -359,7 +362,10 @@
 	if((!concealed) && cards.len)
 		. += "It contains: "
 		for(var/datum/playingcard/P in cards)
-			. += "\The [P.name]."
+			if(!P.desc)
+				. += "\The [P.name]."
+			else
+				. += "[P.name]: [P.desc]"
 
 /obj/item/weapon/hand/verb/Removecard()
 
@@ -376,14 +382,18 @@
 		to_chat(usr,"<span class='danger'>Your hands are full!</span>")
 		return
 
-	var/pickablecards = list()
+	var/list/pickablecards = list() /// Make it so duplicates don't cause runtimes
 	for(var/datum/playingcard/P in cards)
+		if(!islist(pickablecards[P.name]))
+			pickablecards[P.name] += list()
+		
 		pickablecards[P.name] += P
+
 	var/pickedcard = input("Which card do you want to remove from the hand?")	as null|anything in pickablecards
 
-	if(!pickedcard || !pickablecards[pickedcard] || !usr || !src) return
+	if(!pickedcard || !LAZYLEN(pickablecards[pickedcard]) || !usr || !src) return
 
-	var/datum/playingcard/card = pickablecards[pickedcard]
+	var/datum/playingcard/card = pick(pickablecards[pickedcard])
 
 	var/obj/item/weapon/hand/H = new(get_turf(src))
 	user.put_in_hands(H)
