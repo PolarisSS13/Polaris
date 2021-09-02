@@ -43,7 +43,7 @@
 	icobase = 'icons/mob/human_races/subspecies/r_vatgrown.dmi'
 
 	min_age = 6  /// Accounting for rapid growth.
-	max_age = 110
+	max_age = 90
 
 	toxins_mod =   1.1
 	metabolic_rate = 1.15
