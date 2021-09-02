@@ -28,6 +28,9 @@
 /obj/item/clothing/gloves/ring/material/iron/New(var/newloc)
 	..(newloc, MAT_IRON)
 
+/obj/item/clothing/gloves/ring/material/glass/New(var/newloc)
+	..(newloc, MAT_GLASS)
+
 /obj/item/clothing/gloves/ring/material/steel/New(var/newloc)
 	..(newloc, MAT_STEEL)
 
