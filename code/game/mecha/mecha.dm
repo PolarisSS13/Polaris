@@ -949,6 +949,20 @@
 		else
 			step(obstacle,src.dir)
 
+	else if(istype(obstacle, /turf))
+		if(phasing && get_charge()>=phasing_energy_drain)
+			spawn()
+				if(can_phase)
+					can_phase = FALSE
+					flick("[initial_icon]-phase", src)
+					src.loc = get_step(src,src.dir)
+					src.use_power(phasing_energy_drain)
+					sleep(get_step_delay() * 3)
+					can_phase = TRUE
+					occupant_message("Phazed.")
+			. = ..(obstacle)
+			return
+
 	else//No idea when this triggers, so i won't touch it.
 		. = ..(obstacle)
 	return
