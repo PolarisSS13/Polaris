@@ -46,7 +46,6 @@
 #define MAT_PLATINUM		"platinum"
 #define MAT_TRITIUM			"tritium"
 #define MAT_DEUTERIUM		"deuterium"
-#define MAT_TIN				"tin"
 
 
 #define DEFAULT_TABLE_MATERIAL MAT_PLASTIC
