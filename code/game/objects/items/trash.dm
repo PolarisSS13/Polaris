@@ -56,6 +56,10 @@
 	name = "bbq chips bag"
 	icon_state = "chips_bbq"
 
+/obj/item/trash/chips/snv
+	name = "salt & vinegar chips bag"
+	icon_state = "chips_snv"
+
 /obj/item/trash/cookiesnack
 	name = "\improper Carps Ahoy! miniature cookies packet"
 	icon_state = "cookiesnack"
@@ -89,10 +93,26 @@
 /obj/item/trash/plate
 	name = "plate"
 	icon_state = "plate"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/trash/snack_bowl
 	name = "snack bowl"
 	icon_state	= "snack_bowl"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
+
+/obj/item/trash/small_bowl
+	name = "small bowl"
+	icon_state	= "small_bowl"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
+
+/obj/item/trash/asian_bowl
+	name = "decorated bowl"
+	icon_state	= "asian_bowl"
+	drop_sound = 'sound/items/drop/food.ogg'
+	pickup_sound = 'sound/items/pickup/food.ogg'
 
 /obj/item/trash/pistachios
 	name = "pistachios packet"
@@ -246,6 +266,12 @@
 	drop_sound = 'sound/items/drop/soda.ogg'
 	pickup_sound = 'sound/items/pickup/soda.ogg'
 
+/obj/item/trash/ntbeans
+	name = "empty baked bean can"
+	icon_state = "ntbeans"
+	drop_sound = 'sound/items/drop/soda.ogg'
+	pickup_sound = 'sound/items/pickup/soda.ogg'
+
 /obj/item/trash/salo //ADDITION 04/11/2021
 	name = "salo pack"
 	icon_state = "pigfat"
@@ -367,3 +393,14 @@
 	name = "veggie ration bag"
 	icon_state = "vegration"
 
+/obj/item/trash/smolburger
+	name = "burger packaging"
+	icon_state = "smolburger"
+
+/obj/item/trash/smolhotdog
+	name = "hotdog packaging"
+	icon_state = "smolhotdog"
+
+/obj/item/trash/smolburrito
+	name = "burrito packaging"
+	icon_state = "smolburrito"

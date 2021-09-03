@@ -433,6 +433,14 @@
 	color = "#792300"
 	allergen_type = ALLERGEN_BEANS //Soy (beans)
 
+/datum/reagent/nutriment/vinegar
+	name = "Vinegar"
+	id = "vinegar"
+	description = "Vinegar, great for fish and pickles."
+	taste_description = "vinegar"
+	reagent_state = LIQUID
+	nutriment_factor = 5
+	color = "#54410C"
 
 /datum/reagent/nutriment/ketchup
 	name = "Ketchup"
@@ -443,6 +451,15 @@
 	nutriment_factor = 5
 	color = "#731008"
 	allergen_type = ALLERGEN_FRUIT 	//Tomatoes are a fruit.
+
+/datum/reagent/nutriment/mustard
+	name = "Mustard"
+	id = "mustard"
+	description = "Delicious mustard. Good on Hot Dogs."
+	taste_description = "mustard"
+	reagent_state = LIQUID
+	nutriment_factor = 5
+	color = "#E3BD00"
 
 /datum/reagent/nutriment/barbecue
 	name = "Barbeque Sauce"
@@ -834,7 +851,6 @@
 		M.apply_effect(4, AGONY, 0)
 		if(prob(5))
 			M.visible_message("<span class='warning'>[M] [pick("dry heaves!","coughs!","splutters!")]</span>", "<span class='danger'>You feel like your insides are burning!</span>")
-	holder.remove_reagent("frostoil", 5)
 
 /* Drinks */
 
@@ -1029,6 +1045,24 @@
 
 	glass_name = "poison berry juice"
 	glass_desc = "A glass of deadly juice."
+
+/datum/reagent/toxin/meatcolony
+	name = "A colony of meat cells"
+	id = "meatcolony"
+	description = "Specialised cells designed to produce a large amount of meat once activated, whilst manufacturers have managed to stop these cells from taking over the body when ingested, it's still poisonous."
+	taste_description = "a fibrous mess"
+	reagent_state = LIQUID
+	color = "#ff2424"
+	strength = 10
+
+/datum/reagent/toxin/plantcolony
+	name = "A colony of plant cells"
+	id = "plantcolony"
+	description = "Specialised cells designed to produce a large amount of nutriment once activated, whilst manufacturers have managed to stop these cells from taking over the body when ingested, it's still poisonous."
+	taste_description = "a fibrous mess"
+	reagent_state = LIQUID
+	color = "#7ce01f"
+	strength = 10
 
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"

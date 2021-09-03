@@ -85,7 +85,7 @@
 "as" = (
 /obj/effect/floor_decal/corner/red/diagonal,
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker,
 /obj/machinery/light{
 	icon_state = "tube1";
 	dir = 4
@@ -158,7 +158,7 @@
 /area/submap/Diner)
 "aD" = (
 /obj/structure/table/standard,
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker,
 /obj/effect/floor_decal/corner/red/diagonal,
 /turf/simulated/floor/tiled/white,
 /area/submap/Diner)
@@ -239,7 +239,7 @@
 "aO" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/red/diagonal,
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill,
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker,
 /turf/simulated/floor/tiled/white,
 /area/submap/Diner)
 "aP" = (
