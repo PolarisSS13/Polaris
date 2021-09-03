@@ -11,7 +11,7 @@
 
 	create_reagents(100)
 
-	addtimer(CALLBACK(src, .proc/evaporation_pulse()), 10 SECONDS)
+	addtimer(CALLBACK(src, .proc/evaporation_pulse), 10 SECONDS)
 		evaporation_pulse()
 
 /obj/effect/decal/cleanable/chempuddle/Destroy()
@@ -105,4 +105,4 @@
 		return
 
 	Spread()
-	addtimer(CALLBACK(src, .proc/evaporation_pulse()), 10 SECONDS)
+	addtimer(CALLBACK(src, .proc/evaporation_pulse), 10 SECONDS)
