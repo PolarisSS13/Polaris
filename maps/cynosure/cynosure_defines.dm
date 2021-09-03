@@ -33,13 +33,13 @@
 	starsys_name  = "Vir"
 	use_overmap = TRUE
 
-	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has landed at Cynosure Departures Pad. It will depart in approximately %ETD%."
+	shuttle_docked_message = "The scheduled shuttle to the %dock_name% has landed at Cynosure departures pad. It will depart in approximately %ETD%."
 	shuttle_leaving_dock = "The Crew Transfer Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
 	shuttle_called_message = "A crew transfer to %dock_name% has been scheduled. The shuttle has been called. Those leaving should proceed to Cynosure Departures Pad in approximately %ETA%."
 	shuttle_recall_message = "The scheduled crew transfer has been cancelled."
-	emergency_shuttle_docked_message = "The Emergency Shuttle has landed at Cynosure Departures Pad. You have approximately %ETD% to board the Emergency Shuttle."
+	emergency_shuttle_docked_message = "The Emergency Shuttle has landed at Cynosure departures pad. You have approximately %ETD% to board the Emergency Shuttle."
 	emergency_shuttle_leaving_dock = "The Emergency Shuttle has left the station. Estimate %ETA% until the shuttle docks at %dock_name%."
-	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at docks one and two in approximately %ETA%."
+	emergency_shuttle_called_message = "An emergency evacuation shuttle has been called. It will arrive at Cynosure departures pad in approximately %ETA%."
 	emergency_shuttle_recall_message = "The emergency shuttle has been recalled."
 
 	// Networks that will show up as options in the camera monitor program
@@ -206,7 +206,7 @@
 /datum/map_z_level/cynosure/centcom
 	z = Z_LEVEL_CENTCOM
 	name = "Centcom"
-	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT
+	flags = MAP_LEVEL_ADMIN|MAP_LEVEL_CONTACT | MAP_LEVEL_SEALED
 
 /datum/map_z_level/cynosure/surface_wild
 	z = Z_LEVEL_SURFACE_WILD

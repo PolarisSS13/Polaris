@@ -2521,6 +2521,7 @@
 /obj/structure/closet/crate/engineering{
 	dir = 2
 	},
+/obj/item/weapon/storage/toolbox/mechanical,
 /obj/item/stack/material/phoron{
 	amount = 25
 	},
@@ -2786,6 +2787,10 @@
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
+	},
+/obj/item/tabloid{
+	pixel_x = -2;
+	pixel_y = 8
 	},
 /obj/item/roller{
 	pixel_x = -3;
@@ -3126,7 +3131,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
-/obj/structure/closet/athletic_mixed,
+/obj/structure/closet/athletic_swimwear,
 /turf/simulated/floor/tiled/freezer,
 /area/surface/station/crew_quarters/pool)
 "bwp" = (
@@ -5532,6 +5537,18 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/medical/emt_bay)
+"cJq" = (
+/obj/machinery/embedded_controller/radio/simple_docking_controller{
+	dir = 4;
+	frequency = 1380;
+	id_tag = "pad4";
+	pixel_x = -22
+	},
+/turf/simulated/floor/tiled/steel/sif/planetuse{
+	icon_state = "steel_dirty";
+	initial_flooring = /decl/flooring/tiling/steel_dirty
+	},
+/area/surface/outpost/research/xenoarcheology/surface)
 "cJA" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -6221,6 +6238,7 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
+/obj/item/device/spaceflare,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/rnd/exploration)
 "cVy" = (
@@ -9071,7 +9089,7 @@
 "eni" = (
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/structure/window/reinforced,
-/obj/structure/closet/athletic_mixed,
+/obj/structure/closet/athletic_swimwear,
 /turf/simulated/floor/tiled/freezer,
 /area/surface/station/crew_quarters/pool)
 "enM" = (
@@ -11233,7 +11251,7 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 1
 	},
-/obj/machinery/vending/snack,
+/obj/random/vendorfood,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/hallway/primary/groundfloor/south)
 "fgS" = (
@@ -17276,7 +17294,6 @@
 /area/surface/station/medical/surgery_storage)
 "icz" = (
 /obj/structure/table/reinforced,
-/obj/item/weapon/book/codex/corp_regs,
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -17287,6 +17304,10 @@
 	dir = 8;
 	pixel_x = 21
 	},
+/obj/item/tabloid{
+	pixel_x = -2
+	},
+/obj/item/weapon/book/codex/corp_regs,
 /obj/item/weapon/deskbell,
 /turf/simulated/floor/tiled,
 /area/surface/station/security/lobby)
@@ -19528,6 +19549,18 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/storage/emergency/sec)
+"jlu" = (
+/obj/machinery/embedded_controller/radio/simple_docking_controller{
+	dir = 8;
+	frequency = 1380;
+	id_tag = "pad3";
+	pixel_x = 22
+	},
+/turf/simulated/floor/tiled/steel/sif/planetuse{
+	icon_state = "steel_dirty";
+	initial_flooring = /decl/flooring/tiling/steel_dirty
+	},
+/area/surface/outpost/research/xenoarcheology/surface)
 "jlB" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
@@ -23920,7 +23953,7 @@
 "lhT" = (
 /obj/structure/railing,
 /obj/machinery/conveyor{
-	dir = 4;
+	dir = 8;
 	id = "packageSort1"
 	},
 /turf/simulated/floor/plating,
@@ -26310,6 +26343,7 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
+/obj/item/tabloid,
 /obj/item/weapon/deskbell,
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/foyer)
@@ -26521,7 +26555,7 @@
 /area/surface/station/security/hallway/gnd)
 "mos" = (
 /obj/machinery/conveyor{
-	dir = 4;
+	dir = 8;
 	id = "packageSort1"
 	},
 /obj/random/junk,
@@ -40015,6 +40049,12 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/surface/station/garage)
+"seH" = (
+/obj/effect/floor_decal/corner/white/diagonal,
+/obj/structure/table/glass,
+/obj/item/tabloid,
+/turf/simulated/floor/tiled/freezer,
+/area/surface/station/crew_quarters/pool)
 "seI" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/door/airlock/glass_external,
@@ -42274,6 +42314,7 @@
 	locked = 1;
 	name = "External Access"
 	},
+/obj/effect/map_helper/airlock/door/ext_door,
 /obj/machinery/airlock_sensor/airlock_exterior/shuttle{
 	dir = 8;
 	frequency = 1380;
@@ -42283,7 +42324,6 @@
 	pixel_y = 24
 	},
 /obj/effect/map_helper/airlock/sensor/ext_sensor,
-/obj/effect/map_helper/airlock/door/ext_door,
 /turf/simulated/floor/tiled/techfloor,
 /area/shuttle/exploration/cargo)
 "tlH" = (
@@ -44143,7 +44183,7 @@
 /obj/structure/disposalpipe/segment,
 /obj/structure/railing,
 /obj/machinery/conveyor{
-	dir = 4;
+	dir = 8;
 	id = "packageSort1"
 	},
 /turf/simulated/floor/plating,
@@ -46082,7 +46122,7 @@
 	dir = 1;
 	pixel_y = 21
 	},
-/obj/machinery/vending/cola,
+/obj/random/vendordrink,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/hallway/primary/groundfloor/south)
 "vaT" = (
@@ -75672,7 +75712,7 @@ klk
 qdF
 iNb
 aKd
-ldo
+seH
 ulS
 nCe
 nCe
@@ -82774,7 +82814,7 @@ vDJ
 vDJ
 vDJ
 mTs
-cxc
+jlu
 nCe
 yel
 nCe
@@ -85087,7 +85127,7 @@ bsh
 bsh
 bsh
 ojP
-cxc
+cJq
 nCe
 yel
 nCe

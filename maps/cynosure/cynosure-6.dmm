@@ -1960,6 +1960,10 @@
 	icon_state = "dark"
 	},
 /area/tdome/tdome1)
+"cnb" = (
+/obj/effect/shuttle_landmark/cynosure/transport1_offsite,
+/turf/simulated/shuttle/floor,
+/area/shuttle/transport1/centcom)
 "cnx" = (
 /obj/structure/table/standard,
 /obj/machinery/chemical_dispenser/bar_soft/full,
@@ -10189,6 +10193,18 @@
 	name = "Shuttle Bay Blast Door"
 	},
 /area/centcom/suppy)
+"lFo" = (
+/obj/machinery/embedded_controller/radio/simple_docking_controller{
+	frequency = 1380;
+	id_tag = "centcom_shuttle_bay";
+	pixel_y = -32;
+	tag_door = "centcom_shuttle_bay_door"
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "steel"
+	},
+/area/centcom/terminal)
 "lFQ" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -45683,7 +45699,7 @@ puk
 nxV
 quS
 quS
-quS
+lFo
 nxV
 puk
 puk
@@ -46453,7 +46469,7 @@ puk
 vlH
 uoL
 mXF
-efr
+cnb
 obj
 uoL
 nXg

@@ -321,7 +321,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Telecomms Solar Control";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/tcommsat/cynosure/powercontrol)
@@ -1696,7 +1697,8 @@
 /obj/effect/floor_decal/rust/mono_rusted1,
 /obj/machinery/door/airlock/hatch{
 	name = "Telecomms Starboard Bridge";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/tcommsat/cynosure/foyer)
@@ -1932,6 +1934,7 @@
 	},
 /obj/effect/map_helper/airlock/sensor/chamber_sensor,
 /obj/machinery/embedded_controller/radio/airlock/docking_port{
+	frequency = 1380;
 	id_tag = "tcomdock_airlock";
 	pixel_y = 25;
 	req_one_access = list(13)
@@ -3089,7 +3092,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/hatch{
 	name = "Telecomms Satellite";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/tcommsat/cynosure/entrance)
@@ -3229,7 +3233,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/hatch{
 	name = "Telecomms Satellite";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/tcommsat/cynosure/teleporter)
@@ -3610,7 +3615,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/hatch{
 	name = "Telecomms Satellite";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/tcommsat/cynosure/foyer)
@@ -3665,7 +3671,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance_hatch{
 	name = "Telecomms Storage";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/tcommsat/cynosure/storage)
@@ -4230,7 +4237,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/hatch{
 	name = "Telecoms Port Bridge";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/tcommsat/cynosure/foyer)
@@ -4577,7 +4585,8 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/hatch{
 	name = "Telecomms Control Room";
-	req_access = list(61)
+	req_access = null;
+	req_one_access = list(61)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/tcommsat/cynosure/computer)

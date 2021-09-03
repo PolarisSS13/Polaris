@@ -3627,10 +3627,10 @@
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/research/bmt)
 "if" = (
-/obj/machinery/atmospherics/binary/pump{
-	dir = 4
-	},
 /obj/effect/floor_decal/industrial/warning/full,
+/obj/machinery/atmospherics/binary/pump{
+	dir = 8
+	},
 /turf/simulated/floor/plating,
 /area/surface/outpost/research/xenoarcheology/anomaly)
 "ig" = (
@@ -4236,6 +4236,9 @@
 /area/surface/station/hallway/primary/bmt/west)
 "jo" = (
 /obj/machinery/artifact_harvester,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_a)
 "jp" = (
@@ -6013,6 +6016,12 @@
 	},
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
+	},
+/obj/machinery/button/remote/blast_door{
+	id = "ventisob";
+	name = "Isolation Room Vent";
+	pixel_y = 36;
+	req_one_access = list(47)
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoarcheology/anomaly)
@@ -8899,6 +8908,9 @@
 /area/surface/station/rnd/server)
 "tg" = (
 /obj/machinery/artifact_analyser,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_b)
 "th" = (
@@ -10602,6 +10614,9 @@
 /area/surface/station/rnd/hallway/bmt)
 "wS" = (
 /obj/machinery/artifact_scanpad,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_b)
 "wU" = (
@@ -11316,6 +11331,9 @@
 /area/surface/station/maintenance/incinerator)
 "yz" = (
 /obj/machinery/artifact_harvester,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_c)
 "yA" = (
@@ -11461,6 +11479,12 @@
 	},
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
+	},
+/obj/machinery/button/remote/blast_door{
+	id = "ventisoa";
+	name = "Isolation Room Vent";
+	pixel_y = 36;
+	req_one_access = list(47)
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoarcheology/anomaly)
@@ -12829,6 +12853,9 @@
 /area/surface/station/hallway/primary/bmt/north)
 "BC" = (
 /obj/machinery/artifact_scanpad,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_a)
 "BF" = (
@@ -12920,6 +12947,14 @@
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
 /area/surface/outpost/research/xenoarcheology/isolation_c)
+"BN" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id = "ventisob";
+	name = "Isolation Room Vent"
+	},
+/turf/simulated/floor/reinforced,
+/area/surface/outpost/research/xenoarcheology/isolation_b)
 "BO" = (
 /obj/effect/floor_decal/industrial/warning/dust{
 	dir = 1
@@ -13350,6 +13385,12 @@
 	pixel_y = 24;
 	req_one_access = list(47)
 	},
+/obj/machinery/button/remote/blast_door{
+	id = "ventisoc";
+	name = "Isolation Room Vent";
+	pixel_y = 36;
+	req_one_access = list(47)
+	},
 /turf/simulated/floor/tiled/old_cargo/gray,
 /area/surface/outpost/research/xenoarcheology/anomaly)
 "CL" = (
@@ -13444,7 +13485,7 @@
 /obj/effect/decal/cleanable/cobweb2{
 	icon_state = "cobweb1"
 	},
-/obj/structure/reagent_dispensers,
+/obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/primary/bmt/west)
 "CX" = (
@@ -13506,6 +13547,14 @@
 	},
 /turf/simulated/floor/tiled/steel_dirty,
 /area/surface/station/hallway/primary/bmt/east)
+"Dg" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id = "ventisoa";
+	name = "Isolation Room Vent"
+	},
+/turf/simulated/floor/reinforced,
+/area/surface/outpost/research/xenoarcheology/isolation_a)
 "Dh" = (
 /turf/simulated/floor/tiled/freezer,
 /area/surface/outpost/research/xenoarcheology/restroom)
@@ -14473,6 +14522,9 @@
 /area/surface/station/engineering/auxiliary_engineering)
 "Fm" = (
 /obj/machinery/artifact_harvester,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_b)
 "Fn" = (
@@ -15649,6 +15701,9 @@
 /area/surface/station/hallway/primary/bmt/west)
 "If" = (
 /obj/machinery/artifact_analyser,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_c)
 "Ig" = (
@@ -17651,6 +17706,9 @@
 /area/surface/station/maintenance/storage/emergency/bmtseast)
 "MD" = (
 /obj/machinery/artifact_analyser,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_a)
 "ME" = (
@@ -18260,9 +18318,7 @@
 	dir = 4
 	},
 /obj/structure/table/steel,
-/obj/item/weapon/tool/wrench,
-/obj/item/weapon/tool/screwdriver,
-/obj/item/weapon/tool/crowbar,
+/obj/item/weapon/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/old_tile/white,
 /area/surface/station/rnd/mixing)
 "NR" = (
@@ -21260,6 +21316,9 @@
 /area/surface/station/maintenance/eaststairwell)
 "Ua" = (
 /obj/machinery/artifact_scanpad,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_c)
 "Ub" = (
@@ -21703,6 +21762,14 @@
 "UW" = (
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/vault)
+"UX" = (
+/obj/machinery/door/blast/regular{
+	dir = 4;
+	id = "ventisoc";
+	name = "Isolation Room Vent"
+	},
+/turf/simulated/floor/reinforced,
+/area/surface/outpost/research/xenoarcheology/isolation_c)
 "UZ" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
@@ -22944,7 +23011,7 @@
 "XG" = (
 /obj/effect/floor_decal/borderfloor/corner,
 /obj/effect/floor_decal/corner/green/bordercorner,
-/obj/structure/reagent_dispensers,
+/obj/structure/reagent_dispensers/watertank,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/hallway/primary/bmt/north)
 "XH" = (
@@ -51092,8 +51159,8 @@ RQ
 RQ
 RQ
 RQ
-RQ
-js
+xW
+Dg
 jo
 lc
 dA
@@ -51348,9 +51415,9 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-js
+xW
+xW
+Dg
 BC
 jQ
 pq
@@ -51605,9 +51672,9 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-js
+xW
+xW
+Dg
 MD
 td
 xP
@@ -51862,8 +51929,8 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
+xW
+xW
 Je
 Je
 Je
@@ -52118,10 +52185,10 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-Je
+xW
+xW
+xW
+BN
 Fm
 Om
 gp
@@ -52375,10 +52442,10 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-Je
+xW
+xW
+xW
+BN
 wS
 ng
 rv
@@ -52632,10 +52699,10 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-Je
+xW
+xW
+xW
+BN
 tg
 ZB
 gl
@@ -52739,7 +52806,7 @@ Cg
 Cg
 Cg
 Cg
-Cg
+cB
 dS
 lV
 bo
@@ -52890,8 +52957,8 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
+xW
+xW
 fn
 fn
 fn
@@ -53147,9 +53214,9 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-fn
+xW
+xW
+UX
 yz
 we
 vq
@@ -53404,9 +53471,9 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-fn
+xW
+xW
+UX
 Ua
 ye
 SU
@@ -53661,9 +53728,9 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-fn
+xW
+xW
+UX
 If
 vn
 ZI
@@ -53918,8 +53985,8 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
+xW
+xW
 fn
 fn
 fn
@@ -54175,8 +54242,8 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
+xW
+xW
 RQ
 RQ
 RQ
@@ -54432,8 +54499,8 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
+xW
+xW
 RQ
 RQ
 RQ
@@ -54689,9 +54756,9 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
+xW
+xW
+xW
 RQ
 RQ
 RQ
@@ -54946,11 +55013,11 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-RQ
-RQ
+xW
+xW
+xW
+xW
+xW
 RQ
 RQ
 RQ
@@ -55204,11 +55271,11 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-RQ
-RQ
+xW
+xW
+xW
+xW
+xW
 RQ
 RQ
 WS
@@ -55463,12 +55530,12 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-RQ
-RQ
-Xz
+xW
+xW
+xW
+xW
+xW
+IY
 HE
 HE
 HE
@@ -55721,17 +55788,17 @@ RQ
 RQ
 RQ
 RQ
-RQ
-RQ
-RQ
-RQ
-Xz
-RQ
-RQ
-RQ
-RQ
-RQ
-RQ
+xW
+xW
+xW
+xW
+IY
+xW
+xW
+xW
+xW
+xW
+xW
 Kj
 Kj
 Kj
@@ -55982,13 +56049,13 @@ RQ
 RQ
 RQ
 RQ
-Xz
-RQ
-RQ
-RQ
-RQ
-RQ
-RQ
+IY
+xW
+xW
+xW
+xW
+xW
+xW
 Kj
 Kj
 Kj

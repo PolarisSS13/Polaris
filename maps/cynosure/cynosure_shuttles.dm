@@ -8,6 +8,7 @@
 	landmark_offsite = "arrivals_offsite"
 	landmark_station = "arrivals_station"
 	docking_controller_tag = "arrivals_shuttle"
+	ceiling_type = /turf/simulated/floor/reinforced
 
 /obj/effect/shuttle_landmark/cynosure/arrivals_offsite
 	name = "Transit to Station"
@@ -30,6 +31,7 @@
 	landmark_offsite = "supply_offsite"
 	landmark_station = "supply_station"
 	docking_controller_tag = "supply_shuttle"
+	ceiling_type = /turf/simulated/floor/reinforced
 	flags = SHUTTLE_FLAGS_PROCESS|SHUTTLE_FLAGS_SUPPLY
 
 /obj/effect/shuttle_landmark/cynosure/supply_offsite
@@ -82,6 +84,7 @@
 	landmark_station = "escape_station"
 	landmark_transition = "escape_transit";
 	docking_controller_tag = "escape_shuttle"
+	ceiling_type = /turf/simulated/floor/reinforced/
 	move_time = SHUTTLE_TRANSIT_DURATION_RETURN
 
 /obj/effect/shuttle_landmark/cynosure/escape/offsite
@@ -194,12 +197,14 @@ ESCAPE_POD(1)
 /obj/effect/shuttle_landmark/cynosure/pads/pad3
 	name = "Shuttle Pad Three"
 	landmark_tag = "nav_pad3_cynosure"
+	docking_controller = "pad3"
 	base_area = /area/surface/outside/station/shuttle/pad3
 	base_turf = /turf/simulated/floor/plating/sif/planetuse
 
 /obj/effect/shuttle_landmark/cynosure/pads/pad4
 	name = "Shuttle Pad Four"
 	landmark_tag = "nav_pad4_cynosure"
+	docking_controller = "pad4"
 	base_area = /area/surface/outside/station/shuttle/pad4
 	base_turf = /turf/simulated/floor/plating/sif/planetuse
 
@@ -222,6 +227,7 @@ ESCAPE_POD(1)
 	docking_controller_tag = "expshuttle_docker"
 	shuttle_area = list(/area/shuttle/exploration/general, /area/shuttle/exploration/cockpit, /area/shuttle/exploration/cargo)
 	fuel_consumption = 3
+	ceiling_type = /turf/simulated/floor/reinforced/airless
 
 /obj/effect/overmap/visitable/ship/landable/explorer_shuttle
 	name = "Exploration Shuttle"

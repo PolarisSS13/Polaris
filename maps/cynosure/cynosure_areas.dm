@@ -43,7 +43,7 @@
 /area/surface/outside
 	ambience = AMBIENCE_SIF
 	always_unpowered = TRUE
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	outdoors = OUTDOORS_YES
 
 // The area near the station, so POIs don't show up right next to the outpost.
@@ -483,12 +483,12 @@
 /area/surface/station/crew_quarters/heads/cmo
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/surface/station/crew_quarters/heads/hop
 	name = "\improper Head of Personnel's Office"
 	icon_state = "head_quarters"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/surface/station/crew_quarters/heads/hos
 	name = "\improper Security - HoS' Office"
@@ -767,7 +767,7 @@
 /area/surface/station/construction
 	name = "\improper Engineering Construction Area"
 	icon_state = "yellow"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/surface/station/construction/bar
 	name = "\improper Bar Basement"
@@ -828,7 +828,7 @@
 /area/surface/station/medical/etc
 	name = "\improper Medical - Emergency Treatment Centre"
 	icon_state = "exam_room"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT //Trust me.
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT //Trust me.
 
 /area/surface/station/medical/hallway
 	name = "\improper Medbay - Hallway"
@@ -900,12 +900,12 @@
 /area/surface/station/medical/surgery
 	name = "\improper Medbay - Operating Theatre 1"
 	icon_state = "surgery"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT //This WOULD become a filth pit
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT //This WOULD become a filth pit
 
 /area/surface/station/medical/surgery2
 	name = "\improper Medbay - Operating Theatre 2"
 	icon_state = "surgery"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/surface/station/medical/surgeryobs
 	name = "\improper Medbay - Operation Observation"
@@ -952,7 +952,7 @@
 /area/surface/outside/station
 	name = "\improper Station"
 	ambience = AMBIENCE_SIF
-	flags = AREA_FLAG_IS_NOT_PERSISTENT
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 
 /area/surface/outside/station/roof
 	name = "\improper Roof"
@@ -1028,7 +1028,7 @@
 
 /area/surface/station/quartermaster/delivery
 	name = "\improper Cargo - Delivery Office"
-	flags = AREA_FLAG_IS_NOT_PERSISTENT //So trash doesn't pile up too hard.
+	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT //So trash doesn't pile up too hard.
 
 /area/surface/station/quartermaster/lockerroom
 	name = "\improper Cargo Locker Room"
