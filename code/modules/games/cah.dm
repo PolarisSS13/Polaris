@@ -6,6 +6,7 @@
 	name = "\improper CAG deck (white)"
 	desc = "The ever-popular Cards Against The Galaxy word game. Warning: may include traces of broken fourth wall. This is the white deck."
 	icon_state = "cag_white"
+	decktype = "cag_white"
 	var/blanks = 5
 
 /obj/item/weapon/deck/cah/black
@@ -13,6 +14,7 @@
 	desc = "The ever-popular Cards Against The Galaxy word game. Warning: may include traces of broken fourth wall. This is the black deck."
 	icon_state = "cag_black"
 	blanks = 0
+	decktype = "cag_black"
 
 /obj/item/weapon/deck/cah/New()
 	..()

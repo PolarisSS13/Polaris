@@ -10,7 +10,8 @@
 	icon = 'icons/obj/playing_cards.dmi'
 	var/list/cards = list()
 	var/cooldown = 0 // to prevent spam shuffle
-	var/decktype = "playingcards"
+	var/decktype = "playingcards" /// Should match parentdeck for any related card packs.
+	var/decklimit = null /// If we want a maximum to how many cards the deck can hold. 
 
 /obj/item/weapon/deck/holder
 	name = "card box"
@@ -58,8 +59,16 @@
 /obj/item/weapon/deck/attackby(obj/O as obj, mob/user as mob)
 	if(istype(O,/obj/item/weapon/hand))
 		var/obj/item/weapon/hand/H = O
+		if(decklimit && (decklimit <= cards.len))
+			to_chat(user,"<span class='warning'>This deck is full!</span>")
+			return
 		if(H.parentdeck == src.decktype)
 			for(var/datum/playingcard/P in H.cards)
+				if(decklimit && (decklimit <= cards.len)) /// Stop placing the cards
+					to_chat(user,"<span class='notice'>You place some cards on the bottom of \the [src]</span>.")
+					H.update_icon()
+					return
+				H.cards -= P	
 				cards += P
 			qdel(H)
 			to_chat(user,"<span class='notice'>You place your cards on the bottom of \the [src]</span>.")
@@ -117,6 +126,54 @@
 	user.visible_message("<span class='notice'>\The [user] draws a card.</span>")
 	to_chat(user,"<span class='notice'>It's the [P].</span>")
 
+/obj/item/weapon/deck/verb/find_card() /// A bit of copypasta code but I'm not sure how to avoid that.
+	set category = "Object"
+	set name = "Find Card"
+	set desc = "Find a specific card from a deck."
+	set src in view(1)
+
+	var/mob/living/carbon/user = usr
+
+	if(usr.stat || !Adjacent(usr)) return
+
+	if(user.hands_are_full())
+		to_chat(user,"<span class='notice'>Your hands are full!</span>")
+		return
+
+	if(!istype(usr,/mob/living/carbon))
+		return
+
+	if(!cards.len)
+		to_chat(user,"<span class='notice'>There are no cards in the deck.</span>")
+		return
+
+	var/obj/item/weapon/hand/H = user.get_active_hand(/obj/item/weapon/hand)
+	if(H && !(H.parentdeck == src.decktype))
+		to_chat(user,"<span class='warning'>You can't mix cards from different decks!</span>")
+		return
+
+	var/list/pickablecards = list()
+	for(var/datum/playingcard/P in cards)
+		if(!islist(pickablecards[P.name]))
+			pickablecards[P.name] += list()
+		
+		pickablecards[P.name] += P
+
+	var/pickedcard = input("Which card do you want to remove from the deck?")	as null|anything in pickablecards
+
+	if(!pickedcard || !LAZYLEN(pickablecards[pickedcard]) || !usr || !src) return
+
+	var/datum/playingcard/card = pick(pickablecards[pickedcard])
+
+	user.visible_message("<span class = 'notice'>\The [user] searches the [src] for a card.</span>") /// To help catch any cheaters. 
+	H = new(get_turf(src))
+	user.put_in_hands(H)
+	H.cards += card
+	cards -= card
+	H.parentdeck = src.decktype
+	H.update_icon()
+
+
 /obj/item/weapon/deck/verb/deal_card()
 
 	set category = "Object"
@@ -139,6 +196,29 @@
 	var/mob/living/M = input("Who do you wish to deal a card?") as null|anything in players
 	if(!usr || !src || !M) return
 
+	deal_at(usr, M, 1)
+
+/obj/item/weapon/deck/verb/cheater_deal() /// By request. 
+	set category = "Object"
+	set name = "Deal From Bottom"
+	set desc = "Deal a card from the bottom of a deck, like a cheater."
+	set src in view(1)
+
+	if(!cards.len)
+		to_chat(usr,"<span class='notice'>There are no cards in the deck.</span>")
+		return
+	
+	var/list/players = list()
+	for(var/mob/living/player in viewers(3))
+		if(!player.stat)
+			players += player
+	var/mob/living/M = input("Who do you wish to deal a card?") as null|anything in players
+	if(!usr || !src || !M) return
+
+	if(prob(30))
+		usr.visible_message("<span class = 'warning'>\The [usr] dealt from the bottom of the deck!</span>")
+
+	moveElement(cards, cards.len, 1) /// Moves the last card to the front before dealing it.
 	deal_at(usr, M, 1)
 
 /obj/item/weapon/deck/verb/deal_card_multi()
@@ -344,13 +424,10 @@
 		H.concealed = 0
 		H.parentdeck = src.parentdeck
 		H.update_icon()
-		src.update_icon()
+		src.update_icon() /// Calls for qdel if no cards
 		usr.visible_message("<span class = 'notice'>\The [usr] plays \the [discarding].</span>")
 		H.loc = get_turf(usr)
 		H.Move(get_step(usr,usr.dir))
-
-	if(!cards.len)
-		qdel(src) /// This is causing runtimes.
 
 /obj/item/weapon/hand/attack_self(var/mob/user as mob)
 	concealed = !concealed
@@ -417,7 +494,7 @@
 		name = "hand of cards"
 		desc = "Some playing cards."
 	else
-		name = "a playing card"
+		name = "playing card"
 		desc = "A playing card."
 
 	overlays.Cut()
@@ -431,7 +508,7 @@
 		overlays += I
 		return
 
-	var/offset = FLOOR(20/cards.len, 1)
+	var/offset = max(FLOOR(20/cards.len, 1), 1) /// Keeps +20 cards from shifting back into one.
 
 	var/matrix/M = matrix()
 	if(direction)
@@ -466,8 +543,6 @@
 /obj/item/weapon/hand/dropped(mob/user as mob)
 	if(locate(/obj/structure/table, loc))
 		src.update_icon(user.dir)
-	else
-		update_icon()
 
 /obj/item/weapon/hand/pickup(mob/user as mob)
 	..()

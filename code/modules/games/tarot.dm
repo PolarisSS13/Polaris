@@ -5,6 +5,7 @@
 	name = "deck of tarot cards"
 	desc = "For all your occult needs!"
 	icon_state = "deck_tarot"
+	decktype = "tarot"
 
 /obj/item/weapon/deck/tarot/New()
 	..()
