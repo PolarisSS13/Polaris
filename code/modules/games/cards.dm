@@ -1,7 +1,6 @@
 /datum/playingcard
 	var/name = "playing card"
 	var/desc
-	var/description_info
 	var/card_icon = "card_back"
 	var/back_icon = "card_back"
 
