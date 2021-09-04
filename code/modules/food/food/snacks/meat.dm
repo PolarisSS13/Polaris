@@ -46,7 +46,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
 	name = "Corgi meat"
 	desc = "Tastes like... well, you know."
-	
+
 /obj/item/weapon/reagent_containers/food/snacks/meat/chicken
 	name = "chicken"
 	icon = 'icons/obj/food_syn.dmi'

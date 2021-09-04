@@ -124,6 +124,7 @@ var/list/gamemode_cache = list()
 	var/wikisearchurl
 	var/forumurl
 	var/githuburl
+	var/discordurl
 	var/rulesurl
 	var/mapurl
 
@@ -540,6 +541,9 @@ var/list/gamemode_cache = list()
 					config.githuburl = value
 				if ("guest_jobban")
 					config.guest_jobban = 1
+
+				if ("discordurl")
+					config.discordurl = value
 
 				if ("guest_ban")
 					config.guests_allowed = 0
@@ -1002,10 +1006,10 @@ var/list/gamemode_cache = list()
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
-				
+
 				if("loadout_whitelist")
 					config.loadout_whitelist = text2num(value)
-				
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

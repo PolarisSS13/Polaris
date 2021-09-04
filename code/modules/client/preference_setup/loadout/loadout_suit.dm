@@ -38,6 +38,10 @@
 	display_name = "bomber jacket 2"
 	path = /obj/item/clothing/suit/storage/bomber/alt
 
+/datum/gear/suit/bomber_retro
+	display_name = "bomber jacket, retro"
+	path = /obj/item/clothing/suit/storage/toggle/bomber/retro
+
 /datum/gear/suit/leather_jacket
 	display_name = "leather jacket, black"
 	path = /obj/item/clothing/suit/storage/toggle/leather_jacket
@@ -165,6 +169,11 @@
 /datum/gear/suit/labcoat/yellow
 	display_name = "labcoat, yellow"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
+
+/datum/gear/suit/labcoat/rd
+	display_name = "labcoat, research director (RD)"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
+	allowed_roles = list("Research Director")
 
 /datum/gear/suit/labcoat/emt
 	display_name = "labcoat, EMT (Medical)"
