@@ -24,6 +24,7 @@
 	icon_screen = "pcu_atmo"
 	icon_state = "pcu_engi"
 	icon_keyboard = "pcu_key"
+	light_color = "#00cc00"
 	density = 0
 
 /obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)
