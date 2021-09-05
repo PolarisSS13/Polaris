@@ -49,6 +49,8 @@
 	if(T)
 		GLOB.turf_entered_event.register(T, src, .proc/BelowOpenUpdated)
 		GLOB.turf_exited_event.register(T, src, .proc/BelowOpenUpdated)
+	if(is_outdoors())
+		SSplanets.addTurf(src)
 
 /turf/simulated/open/Entered(var/atom/movable/mover, var/atom/oldloc)
 	..()

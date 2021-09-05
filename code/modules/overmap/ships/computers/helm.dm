@@ -22,6 +22,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	circuit = /obj/item/weapon/circuitboard/helm
 	core_skill = /datum/skill/pilot
 	var/autopilot = 0
+	var/autopilot_disabled = TRUE
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
@@ -35,7 +36,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/visitable/sector/S in map)
-		if (S.known)
+		if(S.known)
 			var/datum/computer_file/data/waypoint/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
@@ -44,7 +45,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 
 /obj/machinery/computer/ship/helm/process()
 	..()
-	if (autopilot && dx && dy)
+	if(autopilot && dx && dy && !autopilot_disabled)
 		var/turf/T = locate(dx,dy,global.using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
@@ -59,13 +60,13 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 			var/heading = linked.get_heading()
 
 			// Destination is current grid or speedlimit is exceeded
-			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
+			if((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
 				linked.decelerate()
 			// Heading does not match direction
-			else if (heading & ~direction)
+			else if(heading & ~direction)
 				linked.accelerate(turn(heading & ~direction, 180), accellimit)
 			// All other cases, move toward direction
-			else if (speed + acceleration <= speedlimit)
+			else if(speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
 		linked.operator_skill = null//if this is on you can't dodge meteors
 		return
