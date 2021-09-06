@@ -58,6 +58,19 @@
 	containertype = /obj/structure/closet/crate/allico
 	containername = "Arts and Crafts crate"
 
+/datum/supply_pack/recreation/card_packs
+	contains = list(
+			/obj/item/weapon/deck/saintsandsins, /// Empty deck boxes
+			/obj/item/weapon/deck/spaceball,
+			/obj/item/weapon/deck/cardemon, 
+			/obj/item/weapon/pack/saintsandsins, /// Big builder pack
+			/obj/random/tradingcards = 5 /// Smaller packs from any of the card games.
+			)
+	name = "Trading Card Crate"
+	cost = 15
+	containertype = /obj/structure/closet/crate/oculum
+	containername = "cards crate"
+
 /datum/supply_pack/recreation/painters
 	name = "Station Painting Supplies"
 	cost = 10

@@ -10,19 +10,6 @@
 /datum/supply_pack/randomised/misc
 	group = "Miscellaneous"
 
-
-/datum/supply_pack/randomised/misc/card_packs
-	num_contained = 5
-	contains = list(
-			/obj/item/weapon/pack/cardemon,
-			/obj/item/weapon/pack/spaceball,
-			/obj/item/weapon/deck/holder
-			)
-	name = "Trading Card Crate"
-	cost = 10
-	containertype = /obj/structure/closet/crate/oculum
-	containername = "cards crate"
-
 /datum/supply_pack/randomised/misc/dnd
 	num_contained = 4
 	contains = list(

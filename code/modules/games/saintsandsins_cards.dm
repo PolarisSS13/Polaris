@@ -105,7 +105,7 @@
 
 /**
  * Booster packs
- * Can have special cards not found in builder pack.
+ * Can have special cards not found in builder pack. TO DO: Add more pack types.
  */
 
 /obj/item/weapon/pack/saintsandsins/booster
@@ -119,7 +119,7 @@
 		"Health: 20. PASSIVE: Reduces Decay damage received by 2 while increasing Holy by 3.")
 	)
 
-	card_spells = list( /// TO DO: Add more unique ones
+	card_spells = list(
 		new /datum/saintsandsins_cards("Summon Psychopomp", \
 		"Deals 3 Decay damage to target for 3 rounds. KEY."),
 		new /datum/saintsandsins_cards("Chastise", \
@@ -141,7 +141,6 @@
 		new /datum/saintsandsins_cards("Wind Tunnel", \
 		"Redirects spell to its caster. REACTION.")
 	)
-
 
 /datum/saintsandsins_cards
 	var/name

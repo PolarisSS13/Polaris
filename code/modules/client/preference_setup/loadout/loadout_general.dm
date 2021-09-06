@@ -34,17 +34,33 @@
 	display_name = "deck of tarot cards"
 	path = /obj/item/weapon/deck/tarot
 
-/datum/gear/holder
-	display_name = "card holder"
-	path = /obj/item/weapon/deck/holder
+/datum/gear/deckbox
+	display_name = "trading card deck box"
+	path = /obj/item/weapon/deck
 
-/datum/gear/cardemon_pack
-	display_name = "Cardemon booster pack"
-	path = /obj/item/weapon/pack/cardemon
+/datum/gear/deckbox/New()
+	..()
+	var/boxtype = list()
+	boxtype["Cardemon"] = /obj/item/weapon/deck/cardemon
+	boxtype["Saints and Sins"] = /obj/item/weapon/deck/saintsandsins
+	boxtype["Spaceball"] = /obj/item/weapon/deck/spaceball
+	gear_tweaks += new/datum/gear_tweak/path(boxtype)
 
-/datum/gear/spaceball_pack
-	display_name = "Spaceball booster pack"
-	path = /obj/item/weapon/pack/spaceball
+/datum/gear/boosterpack
+	display_name = "trading card booster pack"
+	path = /obj/item/weapon/pack
+
+/datum/gear/boosterpack/New()
+	..()
+	var/packtype = list()
+	packtype["Cardemon"] = /obj/item/weapon/pack/cardemon
+	packtype["Saints and Sins"] = /obj/item/weapon/pack/saintsandsins/booster
+	packtype["Spaceball"] = /obj/item/weapon/pack/spaceball
+	gear_tweaks += new/datum/gear_tweak/path(packtype)
+
+/datum/gear/builderdeck
+	display_name = "Saints and Sins builder pack"
+	path = /obj/item/weapon/pack/saintsandsins
 
 /datum/gear/plushie
 	display_name = "plushie selection"

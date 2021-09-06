@@ -932,3 +932,14 @@
 				prob(3);/obj/item/clothing/accessory/poncho/thermal/purple,
 				prob(3);/obj/item/clothing/accessory/poncho/thermal/blue)
 
+/// Trading cards, only includes the packs.
+/obj/random/tradingcards
+	name = "random trading card pack"
+	desc = "This is a trading card pack spawn."
+	icon = 'icons/obj/playing_cards.dmi'
+	icon_state = "card_pack"
+
+/obj/random/tradingcards/item_to_spawn()
+	return pick(/obj/item/weapon/pack/spaceball,
+				/obj/item/weapon/pack/cardemon,
+				/obj/item/weapon/pack/saintsandsins/booster)

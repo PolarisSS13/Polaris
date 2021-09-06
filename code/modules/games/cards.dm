@@ -12,11 +12,12 @@
 	var/decktype = "playingcards" /// Should match parentdeck for any related card packs.
 	var/decklimit = null /// If we want a maximum to how many cards the deck can hold. 
 
+/* Not sure if this was ever functional?
 /obj/item/weapon/deck/holder
 	name = "card box"
 	desc = "A small leather case to show how classy you are compared to everyone else."
 	icon_state = "card_holder"
-
+*/
 /obj/item/weapon/deck/cards
 	name = "deck of cards"
 	desc = "A simple deck of playing cards."
@@ -356,7 +357,7 @@
 				user.put_in_hands(src)
 	return
 
-/obj/item/weapon/pack/
+/obj/item/weapon/pack/  /// Put new packs in random spawner in code/game/objects/random/misc.dm
 	name = "Card Pack"
 	desc = "For those with disposible income."
 
@@ -526,6 +527,8 @@
 	for(var/datum/playingcard/P in cards)
 		var/image/I = new(src.icon, (concealed ? "[P.back_icon]" : "[P.card_icon]") )
 		//I.pixel_x = origin+(offset*i)
+		if(i>20)
+			return
 		switch(direction)
 			if(SOUTH)
 				I.pixel_x = 8-(offset*i)
