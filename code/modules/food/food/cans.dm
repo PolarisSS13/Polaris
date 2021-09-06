@@ -9,7 +9,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/cola
 	name = "\improper Space Cola"
-	desc = "Reassuringly artificial."
+	desc = "Reassuringly artificial. Contains caffeine."
 	description_fluff = "The 'Space' branding was originally added to the 'Alpha Cola' product line in order to justify selling cans for 50% higher prices to 'off-world' retailers. Despite being chemically identical, Space Cola proved so popular that Centauri Provisions eventually applied the name to the entire product line - price hike and all."
 	icon_state = "cola"
 	center_of_mass = list("x"=16, "y"=10)
@@ -20,7 +20,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/decaf_cola
 	name = "\improper Space Cola Free"
-	desc = "Reassuringly artificial."
+	desc = "More reassuringly artificial than ever before."
 	description_fluff = "The 'Space' branding was originally added to the 'Alpha Cola' product line in order to justify selling cans for 50% higher prices to 'off-world' retailers. Despite being chemically identical, Space Cola proved so popular that Centauri Provisions eventually applied the name to the entire product line - price hike and all."
 	icon_state = "decafcola"
 	center_of_mass = list("x"=16, "y"=10)
@@ -43,7 +43,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_mountain_wind
 	name = "\improper Space Mountain Wind"
-	desc = "Blows right through you like a space wind."
+	desc = "Blows right through you like a space wind. Contains caffeine."
 	description_fluff = "The 'Space' branding was originally added to the 'Alpha Cola' product line in order to justify selling cans for 50% higher prices to 'off-world' retailers. Despite being chemically identical, Space Cola proved so popular that Centauri Provisions eventually applied the name to the entire product line - price hike and all."
 	icon_state = "space_mountain_wind"
 	center_of_mass = list("x"=16, "y"=8)
@@ -54,7 +54,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
-	desc = "The Vir Health Board has advised consumers that consumption of Thirteen Loko may result in seizures, blindness, drunkenness, or even death. Please Drink Responsibly. Warning: High Caffeine content."
+	desc = "The Vir Health Board has advised consumers that consumption of Thirteen Loko may result in seizures, blindness, drunkenness, or even death. Please Drink Responsibly."
 	icon_state = "thirteen_loko"
 	center_of_mass = list("x"=16, "y"=10)
 
@@ -86,7 +86,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/starkist
 	name = "\improper Star-kist"
-	desc = "The taste of a star in liquid form. And, a bit of tuna...?"
+	desc = "The taste of a star in liquid form. And, a bit of tuna...? Contains caffeine."
 	description_fluff = "Brought back by popular demand in 2515 after a limited-run release in 2510, the cult success of this bizarre tasting soda has never truly been accounted for by economists."
 	icon_state = "starkist"
 	center_of_mass = list("x"=16, "y"=8)
