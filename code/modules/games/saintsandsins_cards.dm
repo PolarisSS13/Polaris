@@ -115,8 +115,14 @@
 	card_heretics = list(
 		new /datum/saintsandsins_cards("Lady of Holy Death", \
 		"Health: 18. PASSIVE: Restore 1 health every time you deal Decay damage, up to max health."),
+		new /datum/saintsandsins_cards("Galeria the Haruspex", \
+		"Health: 15. ACTIVE: Block up to 2 damage of any kind for one round."),
 		new /datum/saintsandsins_cards("Dutiful Mephistopheles", \
-		"Health: 20. PASSIVE: Reduces Decay damage received by 2 while increasing Holy by 3.")
+		"Health: 20. PASSIVE: Reduces Decay damage received by 2 while increasing Holy by 3."),
+		new /datum/saintsandsins_cards("Woebringer Colette", \
+		"Health: 21. ACTIVE: Deal 2 damage of any damage type while taking 2 damage of the same type."),
+		new /datum/saintsandsins_cards("Orpheus the Blind", \
+		"Health: 18. PASSIVE: When below half health, take half damage per spell, rounded up.")
 	)
 
 	card_spells = list(
@@ -139,7 +145,35 @@
 		new /datum/saintsandsins_cards("Shifting Soil", \
 		"Redirect spell to another Heretic. REACTION."),
 		new /datum/saintsandsins_cards("Wind Tunnel", \
-		"Redirects spell to its caster. REACTION.")
+		"Redirects spell to its caster. REACTION."),
+		new /datum/saintsandsins_cards("Penance", \
+		"Deals 3 Holy damage to target. REACTION."),
+		new /datum/saintsandsins_cards("Soothing Breeze", \
+		"Blocks up to 4 damage of any kind for one round. KEY."),
+		new /datum/saintsandsins_cards("Protection Ward", \
+		"Nullifies the next damage from a spell used on its caster. KEY."),
+		new /datum/saintsandsins_cards("Blood Drain", \
+		"Deals 1 Water damage to target for 6 rounds. KEY."),
+		new /datum/saintsandsins_cards("Dance of Death", \
+		"Discard 2 cards and draw 2 more. KEY."),
+		new /datum/saintsandsins_cards("Hex", \
+		"Target must discard their whole hand and draw a new one. KEY."),
+		new /datum/saintsandsins_cards("Crippling Despair", \
+		"Target may only cast one Key spell on their next turn. KEY."),
+		new /datum/saintsandsins_cards("Spark of Pain", \
+		"Deals 1 Fire damage to target. KEY."),
+		new /datum/saintsandsins_cards("Devil's Tears", \
+		"Deals 1 Water damage to target. KEY."),
+		new /datum/saintsandsins_cards("Fist of Stone", \
+		"Deals 1 Earth damage to target. KEY."),
+		new /datum/saintsandsins_cards("Cutting Blow", \
+		"Deals 1 Wind damage to target. KEY."),
+		new /datum/saintsandsins_cards("Touch of Death", \
+		"Deals 1 Decay damage to target. KEY."),
+		new /datum/saintsandsins_cards("Righteous Accusation", \
+		"Deals 1 Holy damage to target. KEY."),
+		new /datum/saintsandsins_cards("Cold Stare", \
+		"Nullifies any Fire damage from a spell. REACTION.")
 	)
 
 /datum/saintsandsins_cards
