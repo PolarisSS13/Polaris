@@ -466,7 +466,7 @@
 
 //////////////////////////JUICES AND STUFF///////////////////////
 
-/obj/item/weapon/reagent_containers/food/drinks/bottle/cola //MODIFIED ON 04/21/2021
+/obj/item/weapon/reagent_containers/food/drinks/bottle/cola
 	name = "\improper two-liter Space Cola"
 	desc = "Cola. In space."
 	icon_state = "colabottle"
@@ -475,6 +475,16 @@
 /obj/item/weapon/reagent_containers/food/drinks/bottle/cola/Initialize()
 	. = ..()
 	reagents.add_reagent("cola", 100)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/decaf_cola
+	name = "\improper two-liter Space Cola Free"
+	desc = "Cola. In space. Caffeine free."
+	icon_state = "decafcolabottle"
+	center_of_mass = list("x"=16, "y"=6)
+
+/obj/item/weapon/reagent_containers/food/drinks/bottle/decaf_cola/Initialize()
+	. = ..()
+	reagents.add_reagent("decafcola", 100)
 
 /obj/item/weapon/reagent_containers/food/drinks/bottle/space_up //MODIFIED ON 04/21/2021
 	name = "\improper two-liter Space-Up"
