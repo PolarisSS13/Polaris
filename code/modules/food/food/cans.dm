@@ -18,6 +18,17 @@
 	. = ..()
 	reagents.add_reagent("cola", 30)
 
+/obj/item/weapon/reagent_containers/food/drinks/cans/decaf_cola
+	name = "\improper Space Cola Free"
+	desc = "Reassuringly artificial."
+	description_fluff = "The 'Space' branding was originally added to the 'Alpha Cola' product line in order to justify selling cans for 50% higher prices to 'off-world' retailers. Despite being chemically identical, Space Cola proved so popular that Centauri Provisions eventually applied the name to the entire product line - price hike and all."
+	icon_state = "decafcola"
+	center_of_mass = list("x"=16, "y"=10)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/decaf_cola/Initialize()
+	. = ..()
+	reagents.add_reagent("decafcola", 30)
+
 /obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle
 	name = "bottled water"
 	desc = "Ice cold and utterly tasteless, this 'all-natural' mineral water comes 'fresh' from one of NanoTrasen's heavy-duty bottling plants in the Sivian poles."
@@ -43,7 +54,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/thirteenloko
 	name = "\improper Thirteen Loko"
-	desc = "The Vir Health Board has advised consumers that consumption of Thirteen Loko may result in seizures, blindness, drunkenness, or even death. Please Drink Responsibly."
+	desc = "The Vir Health Board has advised consumers that consumption of Thirteen Loko may result in seizures, blindness, drunkenness, or even death. Please Drink Responsibly. Warning: High Caffeine content."
 	icon_state = "thirteen_loko"
 	center_of_mass = list("x"=16, "y"=10)
 
@@ -53,7 +64,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb
 	name = "\improper Dr. Gibb"
-	desc = "A delicious mixture of 42 different flavors."
+	desc = "A delicious mixture of 42 different flavors. Contains caffine."
 	description_fluff = "Following a 2490 lawsuit and a spate of deaths, Gilthari Exports reminds customers that the 'Dr.' legally stands for 'Drink'."
 	icon_state = "dr_gibb"
 	center_of_mass = list("x"=16, "y"=8)
@@ -64,7 +75,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/dr_gibb_diet
 	name = "\improper Diet Dr. Gibb"
-	desc = "A delicious mixture of 42 different flavors, one of which is water."
+	desc = "A delicious mixture of 42 different flavors, one of which is water. Contains caffeine."
 	description_fluff = "Following a 2490 lawsuit and a spate of deaths, Gilthari Exports reminds customers that the 'Dr.' legally stands for 'Drink'."
 	icon_state = "dr_gibb_diet"
 	center_of_mass = list("x"=16, "y"=8)
@@ -83,6 +94,17 @@
 /obj/item/weapon/reagent_containers/food/drinks/cans/starkist/Initialize()
 	. = ..()
 	reagents.add_reagent("brownstar", 30)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/starkistdecaf
+	name = "\improper Star-kist Classic"
+	desc = "The taste of a star in liquid form, in a special decaffineated blend. Still tastes faintly of tuna?"
+	description_fluff = "A special variant of the Starkist brand soda introduced after popular outcry following a reformulation of the basic drink decades ago. This decaffineated variant outsells 'New' Starkist in many markets."
+	icon_state = "decafstarkist"
+	center_of_mass = list("x"=16, "y"=8)
+
+/obj/item/weapon/reagent_containers/food/drinks/cans/starkistdecaf/Initialize()
+	. = ..()
+	reagents.add_reagent("brownstar_decaf", 30)
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/space_up
 	name = "\improper Space-Up"
@@ -108,7 +130,7 @@
 
 /obj/item/weapon/reagent_containers/food/drinks/cans/iced_tea
 	name = "\improper Vrisk Serket Iced Tea"
-	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth?"
+	desc = "That sweet, refreshing southern earthy flavor. That's where it's from, right? South Earth? Contains caffeine."
 	description_fluff = "Produced exclusively on the planet Oasis, Vrisk Serket Iced Tea is not sold outside of the Golden Crescent, let alone Earth."
 	icon_state = "ice_tea_can"
 	center_of_mass = list("x"=16, "y"=8)
