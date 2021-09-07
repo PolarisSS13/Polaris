@@ -24,8 +24,11 @@
 			            access_research, access_engine, access_mining, access_medical, access_construction, access_mailsorting,
 			            access_heads, access_hos, access_RC_announce, access_keycard_auth, access_gateway, access_external_airlocks)
 	minimum_character_age = 25
-	min_age_by_species = list(SPECIES_UNATHI = 70, SPECIES_TESHARI = 20, "mechanical" = 10)
+	min_age_by_species = list(SPECIES_HUMAN_VATBORN = 12)
 	minimal_player_age = 14
+	ideal_character_age = 50
+	ideal_age_by_species = list(SPECIES_HUMAN_VATBORN = 20)
+	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital", SPECIES_UNATHI, "mechanical")
 
 	outfit_type = /decl/hierarchy/outfit/job/security/hos
 	job_description = "	The Head of Security manages the Security Department, keeping the station safe and making sure the rules are followed. They are expected to \
@@ -59,6 +62,7 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_armory, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 5
+	banned_job_species = list(SPECIES_ZADDAT, SPECIES_PROMETHEAN, SPECIES_TESHARI, SPECIES_DIONA)
 
 	outfit_type = /decl/hierarchy/outfit/job/security/warden
 	job_description = "The Warden watches over the physical Security Department, making sure the Brig and Armoury are secure and in order at all times. They oversee \
@@ -83,6 +87,7 @@
 	minimal_access = list(access_security, access_sec_doors, access_forensics_lockers, access_morgue, access_maint_tunnels, access_eva, access_external_airlocks)
 	economic_modifier = 5
 	minimal_player_age = 3
+	banned_job_species = list(SPECIES_ZADDAT, SPECIES_PROMETHEAN, SPECIES_DIONA)
 
 	outfit_type = /decl/hierarchy/outfit/job/security/detective
 	job_description = "A Detective works to help Security find criminals who have not properly been identified, through interviews and forensic work. \
@@ -112,6 +117,7 @@
 	access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_morgue, access_external_airlocks)
 	minimal_access = list(access_security, access_eva, access_sec_doors, access_brig, access_maint_tunnels, access_external_airlocks)
 	minimal_player_age = 3
+	banned_job_species = list(SPECIES_ZADDAT, SPECIES_TESHARI, SPECIES_DIONA)
 
 	outfit_type = /decl/hierarchy/outfit/job/security/officer
 	job_description = "A Security Officer is concerned with maintaining the safety and security of the station as a whole, dealing with external threats and \

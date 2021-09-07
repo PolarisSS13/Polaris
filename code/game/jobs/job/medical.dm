@@ -23,9 +23,11 @@
 			access_keycard_auth, access_sec_doors, access_psychiatrist, access_eva, access_external_airlocks, access_maint_tunnels)
 
 	minimum_character_age = 25
-	min_age_by_species = list(SPECIES_UNATHI = 70, SPECIES_TESHARI = 20, "mechanical" = 10)
+	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10, SPECIES_HUMAN_VATBORN = 12)
 	minimal_player_age = 10
-//	ideal_character_age = 50
+	ideal_character_age = 50
+	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
+	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
 	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \
@@ -163,6 +165,7 @@
 	job_description = "A Psychiatrist provides mental health services to crew members in need. They may also be called upon to determine whatever \
 					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs."
 	alt_titles = list("Psychologist" = /datum/alt_title/psychologist)
+	banned_job_species = list(SPECIES_PROMETHEAN, SPECIES_DIONA)
 
 //Psychiatrist Alt Titles
 /datum/alt_title/psychologist
@@ -191,6 +194,7 @@
 	job_description = "A Paramedic is primarily concerned with the recovery of patients who are unable to make it to the Medical Department on their own. \
 						They may also be called upon to keep patients stable when Medical is busy or understaffed."
 	alt_titles = list("Emergency Medical Technician" = /datum/alt_title/emt)
+	banned_job_species = list(SPECIES_DIONA)
 
 	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
