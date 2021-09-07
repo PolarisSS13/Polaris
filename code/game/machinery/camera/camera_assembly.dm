@@ -154,20 +154,17 @@
 		..()
 
 /obj/item/weapon/camera_assembly/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+	if(busy || !WT.isOn())
+		return FALSE
 
-	if(busy)
-		return 0
-	if(!WT.isOn())
-		return 0
-
-	to_chat(user, "<span class='notice'>You start to weld the [src]..</span>")
+	// Do after stuff here
+	to_chat(user, "<span class='notice'>You start to weld [src]...</span>")
 	playsound(src, WT.usesound, 50, 1)
 	WT.eyecheck(user)
-	busy = 1
-	if(do_after(user, 20 * WT.toolspeed))
-		busy = 0
-		if(!WT.isOn())
-			return 0
-		return 1
-	busy = 0
-	return 0
+	busy = TRUE
+	if(do_after(user, 100 * WT.get_tool_speed(TOOL_WELDER)))
+		busy = FALSE
+		if(WT.isOn())
+			return TRUE
+	busy = FALSE
+	return FALSE

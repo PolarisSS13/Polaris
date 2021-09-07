@@ -44,7 +44,7 @@
 			return
 
 		if (W.get_tool_quality(TOOL_SCREWDRIVER))
-			if (do_after(user, 20 * W.toolspeed))
+			if (do_after(user, 20 * W.get_tool_speed(TOOL_SCREWDRIVER)))
 				src.open =! src.open
 				playsound(src, W.usesound, 50, 1)
 				user.show_message(text("<span class='notice'>You [] the service panel.</span>", (src.open ? "open" : "close")))

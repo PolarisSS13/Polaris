@@ -347,7 +347,7 @@
 		if(anchored)
 			playsound(src, O.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You begin to loosen \the [src]'s casters...</span>")
-			if (do_after(user, 40 * O.toolspeed))
+			if (do_after(user, 40 * O.get_tool_speed(TOOL_WRENCH)))
 				user.visible_message( \
 					"[user] loosens \the [src]'s casters.", \
 					"<span class='notice'>You have loosened \the [src]. Now it can be pulled somewhere else.</span>", \
@@ -356,7 +356,7 @@
 		else
 			playsound(src, O.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You begin to tighten \the [src] to the floor...</span>")
-			if (do_after(user, 20 * O.toolspeed))
+			if (do_after(user, 20 * O.get_tool_speed(TOOL_WRENCH)))
 				user.visible_message( \
 					"[user] tightens \the [src]'s casters.", \
 					"<span class='notice'>You have tightened \the [src]'s casters. Now it can be played again</span>.", \

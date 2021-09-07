@@ -107,7 +107,7 @@ var/global/list/light_type_cache = list()
 		if (src.stage == 1)
 			playsound(src, W.usesound, 75, 1)
 			to_chat(usr, "You begin deconstructing [src].")
-			if (!do_after(usr, 30 * W.toolspeed))
+			if (!do_after(usr, 30 * W.get_tool_speed(TOOL_WRENCH)))
 				return
 			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
 			user.visible_message("[user.name] deconstructs [src].", \

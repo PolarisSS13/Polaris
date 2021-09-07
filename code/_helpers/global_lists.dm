@@ -149,10 +149,10 @@ var/global/list/string_slot_flags = list(
 		body_marking_styles_list[M.name] = M
 
 	//Surgery Steps - Initialize all /decl/surgery_step into a list
-	paths = typesof(/decl/surgery_step)-/decl/surgery_step
+	paths = subtypesof(/decl/surgery_step)
 	for(var/T in paths)
 		var/decl/surgery_step/S = new T
-		surgery_steps += S
+		surgery_steps += S // TODO: Actually treat this like a decl
 	sort_surgeries()
 
 	//List of job. I can't believe this was calculated multiple times per tick!

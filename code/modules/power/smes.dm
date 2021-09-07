@@ -326,7 +326,7 @@ GLOBAL_LIST_EMPTY(smeses)
 			else
 				to_chat(user, "<span class='filter_notice'><span class='notice'>You begin to cut the cables...</span></span>")
 				playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
-				if(do_after(user, 50 * W.toolspeed))
+				if(do_after(user, 50 * W.get_tool_speed(TOOL_WIRECUTTER)))
 					if (prob(50) && electrocute_mob(usr, term.powernet, term))
 						var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 						s.set_up(5, 1, src)

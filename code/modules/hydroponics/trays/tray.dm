@@ -469,7 +469,7 @@
 	if(O.is_open_container())
 		return 0
 
-	if(O.get_tool_quality(TOOL_WIRECUTTER) || istype(O, /obj/item/weapon/surgical/scalpel))
+	if(O.get_tool_quality(TOOL_WIRECUTTER) || O.get_tool_quality(TOOL_SCALPEL))
 
 		if(!seed)
 			to_chat(user, "There is nothing to take a sample from in \the [src].")

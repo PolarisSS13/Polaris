@@ -109,16 +109,15 @@
 		// Panel open, stay uncloaked, or uncloak if already cloaked. If you don't cloak on place, ignore it and just be normal alpha.
 		alpha = camo_net ? (panel_open ? 255 : 50) : 255
 
-	else if((W.get_tool_quality(TOOL_WIRECUTTER) || istype(W, /obj/item/device/multitool)) && panel_open)
+	else if(panel_open && (W.get_tool_quality(TOOL_WIRECUTTER) || W.get_tool_quality(TOOL_MULTITOOL)))
 		interact(user)
 	else
 		..()
 
 /obj/effect/mine/interact(mob/living/user as mob)
-	if(!panel_open || istype(user, /mob/living/silicon/ai))
-		return
-	user.set_machine(src)
-	wires.Interact(user)
+	if(panel_open && !istype(user, /mob/living/silicon/ai))
+		user.set_machine(src)
+		wires.Interact(user)
 
 /obj/effect/mine/camo
 	camo_net = TRUE

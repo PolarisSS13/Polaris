@@ -10,7 +10,6 @@
 	slot_flags = SLOT_BELT
 	force = 6
 	throwforce = 7
-	pry = 1
 	item_state = "crowbar"
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_ENGINEERING = 1)
@@ -19,7 +18,6 @@
 	usesound = 'sound/items/crowbar.ogg'
 	drop_sound = 'sound/items/drop/crowbar.ogg'
 	pickup_sound = 'sound/items/pickup/crowbar.ogg'
-	toolspeed = 1
 	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/tool/crowbar/red

@@ -166,8 +166,6 @@
 
 	integrated_object_type = null
 
-	toolspeed = 0.8
-
 	var/list/integrated_tools = list(
 		/obj/item/weapon/tool/screwdriver = null,
 		/obj/item/weapon/tool/wrench = null,
@@ -211,7 +209,8 @@
 				integrated_tools[path] = new path(src)
 			var/obj/item/I = integrated_tools[path]
 			I.canremove = FALSE
-			I.toolspeed = toolspeed
+			for(var/quality in I.tool_qualities)
+				I.set_tool_quality(quality, TOOL_QUALITY_MEDIOCRE)
 			I.my_augment = src
 			I.name = "integrated [I.name]"
 

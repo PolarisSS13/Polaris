@@ -11,7 +11,7 @@
 	required_type = list(/obj/mecha/working/ripley)
 
 	var/obj/item/my_tool = null
-	var/tooltype = /obj/item/weapon/tool/wrench/power
+	var/tooltype = /obj/item/weapon/tool/powerdrill
 
 /obj/item/mecha_parts/mecha_equipment/tool/powertool/Initialize()
 	my_tool = new tooltype(src)
@@ -44,7 +44,7 @@
 	name = "pneumatic cablecutter"
 	desc = "An exosuit-mounted pneumatic cablecutter."
 	icon_state = "mecha_cablecutter"
-	tooltype = /obj/item/weapon/tool/wirecutters/power
+	tooltype = /obj/item/weapon/tool/hydraulic_cutter
 	ready_sound = 'sound/mecha/gasdisconnected.ogg'
 
 /obj/item/mecha_parts/mecha_equipment/tool/powertool/screwdriver

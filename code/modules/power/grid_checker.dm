@@ -43,7 +43,7 @@
 		opened = !opened
 	else if(W.get_tool_quality(TOOL_CROWBAR))
 		default_deconstruction_crowbar(user, W)
-	else if(istype(W, /obj/item/device/multitool) || W.get_tool_quality(TOOL_WIRECUTTER))
+	else if(W.get_tool_quality(TOOL_MULTITOOL) || W.get_tool_quality(TOOL_WIRECUTTER))
 		attack_hand(user)
 
 /obj/machinery/power/grid_checker/attack_hand(mob/user)

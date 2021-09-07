@@ -34,31 +34,17 @@
 	if(valid_step)
 		if(custom_action(valid_step, I, user))
 			next_step()
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /datum/construction/proc/is_right_key(var/obj/item/I) // returns current step num if I is of the right type.
 	var/list/L = steps[steps.len]
-	switch(L["key"])
-		if(TOOL_SCREWDRIVER)
-			if(I.get_tool_quality(TOOL_SCREWDRIVER))
-				return steps.len
-		if(TOOL_CROWBAR)
-			if(I.get_tool_quality(TOOL_CROWBAR))
-				return steps.len
-		if(TOOL_WIRECUTTER)
-			if(I.get_tool_quality(TOOL_WIRECUTTER))
-				return steps.len
-		if(TOOL_WRENCH)
-			if(I.get_tool_quality(TOOL_WRENCH))
-				return steps.len
-
-	if(istype(I, L["key"]))
+	if(istype(I, L["key"]) || I.get_tool_quality(L["key"]))
 		return steps.len
 	return 0
 
 /datum/construction/proc/custom_action(step, I, user)
-	return 1
+	return TRUE
 
 /datum/construction/proc/check_all_steps(var/obj/item/I,mob/user as mob) //check all steps, remove matching one.
 	for(var/i=1;i<=steps.len;i++)
@@ -69,8 +55,8 @@
 				listclearnulls(steps);
 				if(!steps.len)
 					spawn_result()
-				return 1
-	return 0
+				return TRUE
+	return FALSE
 
 
 /datum/construction/proc/spawn_result()
@@ -122,8 +108,8 @@
 	if(diff)
 		if(custom_action(index, diff, I, user))
 			update_index(diff)
-			return 1
-	return 0
+			return TRUE
+	return FALSE
 
 /datum/construction/reversible/custom_action(index, diff, I, user)
-	return 1
+	return TRUE

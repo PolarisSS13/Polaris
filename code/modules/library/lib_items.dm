@@ -45,7 +45,7 @@
 	else if(O.get_tool_quality(TOOL_SCREWDRIVER))
 		playsound(src, O.usesound, 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
-		if(do_after(user,25 * O.toolspeed))
+		if(do_after(user,25 * O.get_tool_speed(TOOL_SCREWDRIVER)))
 			to_chat(user, "<span class='notice'>You dismantle \the [src].</span>")
 			new /obj/item/stack/material/wood(get_turf(src), 3)
 			for(var/obj/item/weapon/book/b in contents)

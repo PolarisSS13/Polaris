@@ -1,6 +1,27 @@
 /obj/item
 	var/list/tool_qualities
 
+/obj/item/examine(mob/user)
+	. = ..()
+	for(var/qual in tool_qualities)
+		var/msg
+		switch(tool_qualities[qual])
+			if(TOOL_QUALITY_WORST)
+				msg += "very poor "
+			if(TOOL_QUALITY_POOR)
+				msg += "poor "
+			if(TOOL_QUALITY_MEDIOCRE)
+				msg += "mediocre "
+			if(TOOL_QUALITY_STANDARD)
+				msg += ""
+			if(TOOL_QUALITY_DECENT)
+				msg += "decent "
+			if(TOOL_QUALITY_GOOD)
+				msg += "pretty good "
+			if(TOOL_QUALITY_BEST)
+				msg += "very good "
+		. += "It looks like it can be used as a [msg][qual]."
+
 /atom/proc/get_tool_quality(tool_quality)
 	return TOOL_QUALITY_NONE
 

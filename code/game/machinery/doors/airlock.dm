@@ -1083,7 +1083,7 @@ About the new airlock wires panel:
 		if(can_remove_electronics())
 			playsound(src, C.usesound, 75, 1)
 			user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to remove electronics from the airlock assembly.")
-			if(do_after(user,40 * C.toolspeed))
+			if(do_after(user,40 * C.get_tool_speed(TOOL_CROWBAR)))
 				to_chat(user, "<span class='notice'>You removed the airlock electronics!</span>")
 
 				var/obj/structure/door_assembly/da = new assembly_type(src.loc)
@@ -1124,7 +1124,7 @@ About the new airlock wires panel:
 	// Check if we're using a crowbar or armblade, and if the airlock's unpowered for whatever reason (off, broken, etc).
 	else if(istype(C, /obj/item/weapon))
 		var/obj/item/weapon/W = C
-		if((W.pry == 1) && !arePowerSystemsOn())
+		if(W.get_tool_quality(TOOL_CROWBAR) && !arePowerSystemsOn())
 			if(locked)
 				to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
 			else if( !welded && !operating )

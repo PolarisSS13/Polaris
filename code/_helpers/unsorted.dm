@@ -1104,14 +1104,6 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else
 			return 0
 
-//Whether or not the given item counts as sharp in terms of dealing damage
-/proc/is_sharp(obj/O as obj)
-	return istype(O) && (O.sharp || O.edge)
-
-//Whether or not the given item counts as cutting with an edge in terms of removing limbs
-/proc/has_edge(obj/O as obj)
-	return istype(O) && O.edge
-
 //Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
 /proc/can_puncture(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
 	if(!W)

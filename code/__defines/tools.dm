@@ -22,6 +22,9 @@
 #define TOOL_BONEGEL "bonegel"
 #define TOOL_FIXVEIN "fixovein"
 #define TOOL_BONECLAMP "boneclamp"
+#define TOOL_NANOPASTE "nanopaste"
+#define TOOL_FISHING "fishing rod"
+#define TOOL_WOODCUT "axe"
 
 // Divisor for use time. Higher value = better
 #define TOOL_QUALITY_NONE 0

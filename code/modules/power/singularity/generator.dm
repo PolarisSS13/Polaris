@@ -35,7 +35,7 @@
 		visible_message("<span class='notice'>\The [user] adjusts \the [src]'s mechanisms.</span>")
 		if(panel_open && do_after(user, 30))
 			to_chat(user, "<span class='notice'>\The [src] looks like it could be modified.</span>")
-			if(panel_open && do_after(user, 80 * W.toolspeed))	// We don't have skills, so a delayed hint for engineers will have to do for now. (Panel open check for sanity)
+			if(panel_open && do_after(user, 80 * W.get_tool_speed(TOOL_SCREWDRIVER)))	// We don't have skills, so a delayed hint for engineers will have to do for now. (Panel open check for sanity)
 				playsound(src, W.usesound, 50, 1)
 				to_chat(user, "<span class='cult'>\The [src] looks like it could be adapted to forge advanced materials via particle acceleration, somehow..</span>")
 		else

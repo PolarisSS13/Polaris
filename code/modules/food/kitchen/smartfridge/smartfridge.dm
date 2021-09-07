@@ -119,7 +119,7 @@
 	if(wrenchable && default_unfasten_wrench(user, O, 20))
 		return
 
-	if(istype(O, /obj/item/device/multitool) || O.get_tool_quality(TOOL_WIRECUTTER))
+	if(O.get_tool_quality(TOOL_MULTITOOL) || O.get_tool_quality(TOOL_WIRECUTTER))
 		if(panel_open)
 			attack_hand(user)
 		return

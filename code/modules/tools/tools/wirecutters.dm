@@ -21,7 +21,6 @@
 	pickup_sound = 'sound/items/pickup/wirecutter.ogg'
 	sharp = 1
 	edge = 1
-	toolspeed = 1
 	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_STANDARD)
 	var/random_color = TRUE
 

@@ -43,7 +43,7 @@
 			return
 		user.visible_message("<span class='notice'>\The [user] starts trying to repair \the [src]'s bulb.</span>")
 		repairing = TRUE
-		if(do_after(user, (40 SECONDS + rand(0, 20 SECONDS)) * W.toolspeed) && can_repair)
+		if(do_after(user, (40 SECONDS + rand(0, 20 SECONDS)) * W.get_tool_speed(TOOL_SCREWDRIVER)) && can_repair)
 			if(prob(30))
 				user.visible_message("<span class='notice'>\The [user] successfully repairs \the [src]!</span>")
 				broken = FALSE

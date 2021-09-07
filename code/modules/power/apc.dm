@@ -487,7 +487,7 @@ GLOBAL_LIST_EMPTY(apcs)
 				return
 			playsound(src, W.usesound, 50, 1)
 			to_chat(user, "You begin to remove the power control board...") //lpeters - fixed grammar issues //Ner - grrrrrr
-			if(do_after(user, 50 * W.toolspeed))
+			if(do_after(user, 50 * W.get_tool_speed(TOOL_CROWBAR)))
 				if(has_electronics == APC_HAS_ELECTRONICS_WIRED)
 					has_electronics = APC_HAS_ELECTRONICS_NONE
 					if((stat & BROKEN))
@@ -594,7 +594,7 @@ GLOBAL_LIST_EMPTY(apcs)
 		user.visible_message("<span class='warning'>[user.name] starts dismantling the [src]'s power terminal.</span>", \
 							"You begin to cut the cables...")
 		playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
-		if(do_after(user, 50 * W.toolspeed))
+		if(do_after(user, 50 * W.get_tool_speed(TOOL_WIRECUTTER)))
 			if(terminal && opened && has_electronics != APC_HAS_ELECTRONICS_SECURED)
 				if(prob(50) && electrocute_mob(usr, terminal.powernet, terminal))
 					var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
@@ -618,7 +618,7 @@ GLOBAL_LIST_EMPTY(apcs)
 	else if(istype(W, /obj/item/weapon/module/power_control) && opened && has_electronics == APC_HAS_ELECTRONICS_NONE && ((stat & BROKEN)))
 		to_chat(user, "<span class='warning'>The [src] is too broken for that. Repair it first.</span>")
 		return
-	else if(istype(W, /obj/item/weapon/weldingtool) && opened && has_electronics == APC_HAS_ELECTRONICS_NONE && !terminal)
+	else if(W.get_tool_quality(TOOL_WELDER) && opened && has_electronics == APC_HAS_ELECTRONICS_NONE && !terminal)
 		var/obj/item/weapon/weldingtool/WT = W
 		if(WT.get_fuel() < 3)
 			to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
@@ -627,7 +627,7 @@ GLOBAL_LIST_EMPTY(apcs)
 							"You start welding the APC frame...", \
 							"You hear welding.")
 		playsound(src, WT.usesound, 25, 1)
-		if(do_after(user, 50 * WT.toolspeed))
+		if(do_after(user, 50 * WT.get_tool_speed(TOOL_WELDER)))
 			if(!src || !WT.remove_fuel(3, user)) return
 			if(emagged || (stat & BROKEN) || opened==2)
 				new /obj/item/stack/material/steel(loc)
@@ -685,9 +685,10 @@ GLOBAL_LIST_EMPTY(apcs)
 					"You hear a bang!")
 				update_icon()
 		else
-			if(istype(user, /mob/living/silicon))
-				return attack_hand(user)
-			if(!opened && wiresexposed && (istype(W, /obj/item/device/multitool) || W.get_tool_quality(TOOL_WIRECUTTER) || istype(W, /obj/item/device/assembly/signaler)))
+			if(istype(user, /mob/living/silicon) || ( \
+				!opened && wiresexposed && ( \
+				W.get_tool_quality(TOOL_MULTITOOL) || W.get_tool_quality(TOOL_WIRECUTTER) || istype(W, /obj/item/device/assembly/signaler)
+			) ) )
 				return attack_hand(user)
 			//Placeholder until someone can do take_damage() for APCs or something.
 			to_chat(user, "<span class='notice'>The [name] looks too sturdy to bash open with \the [W.name].</span>")

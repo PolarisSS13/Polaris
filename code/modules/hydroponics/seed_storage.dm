@@ -519,7 +519,7 @@
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, "[initial(icon_state)]-panel")
-	else if((O.get_tool_quality(TOOL_WIRECUTTER) || istype(O, /obj/item/device/multitool)) && panel_open)
+	else if((O.get_tool_quality(TOOL_WIRECUTTER) || O.get_tool_quality(TOOL_MULTITOOL)) && panel_open)
 		wires.Interact(user)
 
 /obj/machinery/seed_storage/emag_act(var/remaining_charges, var/mob/user)

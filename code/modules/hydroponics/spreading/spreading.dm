@@ -239,7 +239,7 @@
 	user.setClickCooldown(user.get_attack_speed(W))
 	plant_controller.add_plant(src)
 
-	if(W.get_tool_quality(TOOL_WIRECUTTER) || istype(W, /obj/item/weapon/surgical/scalpel))
+	if(W.get_tool_quality(TOOL_WIRECUTTER) || W.get_tool_quality(TOOL_SCALPEL))
 		if(sampled)
 			to_chat(user, "<span class='warning'>\The [src] has already been sampled recently.</span>")
 			return

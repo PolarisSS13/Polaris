@@ -121,7 +121,8 @@
 
 	for(var/decl/surgery_step/S in surgery_steps)
 		//check if tool is right or close enough and if this step is possible
-		if(S.tool_quality(src))
+		var/qual = S.tool_quality(src)
+		if(qual)
 			var/step_is_valid = S.can_use(user, M, zone, src)
 			if(step_is_valid && S.is_valid_target(M))
 
@@ -138,7 +139,9 @@
 				var/success = TRUE
 
 				// Bad tools make it less likely to succeed.
-				if(!prob(S.tool_quality(src)))
+				//if(!prob(S.tool_chance(src)))
+				if((ispath(qual) && !prob(S.allowed_tools[qual])) || \
+						(istext(qual) && !prob(S.allowed_procs[qual])))
 					success = FALSE
 
 				// Bad or no surface may mean failure as well.
@@ -149,7 +152,7 @@
 				// Not staying still fails you too.
 				if(success)
 					var/calc_duration = rand(S.min_duration, S.max_duration)
-					if(!do_mob(user, M, calc_duration * toolspeed, zone))
+					if(!do_mob(user, M, calc_duration * get_tool_speed(qual), zone))
 						success = FALSE
 						to_chat(user, "<span class='warning'>You must remain close to and keep focused on your patient to conduct surgery.</span>")
 

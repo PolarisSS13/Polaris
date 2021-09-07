@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 		SStgui.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool) || W.get_tool_quality(TOOL_WIRECUTTER))
+	else if(W.get_tool_quality(TOOL_MULTITOOL) || W.get_tool_quality(TOOL_WIRECUTTER))
 		if(panel_open)
 			attack_hand(user)
 		return
@@ -187,7 +187,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		else
 			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
 
-		if(do_after(user, 20 * W.toolspeed))
+		if(do_after(user, 20 * W.get_tool_speed(TOOL_WRENCH)))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 			anchored = !anchored

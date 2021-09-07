@@ -120,7 +120,7 @@
 
 /decl/surgery_step/generic/incision_manager
 	allowed_tools = list(
-		/obj/item/weapon/surgical/scalpel/manager = 100
+		/obj/item/weapon/surgical/manager = 100
 	)
 
 	priority = 2

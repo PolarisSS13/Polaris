@@ -14,7 +14,6 @@
 	matter = list(MAT_STEEL = 150)
 	attack_verb = list("bashed", "battered", "bludgeoned", "whacked")
 	usesound = 'sound/items/ratchet.ogg'
-	toolspeed = 1
 	drop_sound = 'sound/items/drop/wrench.ogg'
 	pickup_sound = 'sound/items/pickup/wrench.ogg'
 	tool_qualities = list(TOOL_WRENCH =  TOOL_QUALITY_STANDARD)

@@ -308,7 +308,7 @@
 		if(state == FRAME_PLACED && !anchored)
 			to_chat(user, "<span class='notice'>You start to wrench the frame into place.</span>")
 			playsound(src, P.usesound, 50, 1)
-			if(do_after(user, 20 * P.toolspeed))
+			if(do_after(user, 20 * P.get_tool_speed(TOOL_WRENCH)))
 				anchored = TRUE
 				if(!need_circuit && circuit)
 					state = FRAME_FASTENED
@@ -320,16 +320,16 @@
 
 		else if(state == FRAME_PLACED && anchored)
 			playsound(src, P.usesound, 50, 1)
-			if(do_after(user, 20 * P.toolspeed))
+			if(do_after(user, 20 * P.get_tool_speed(TOOL_WRENCH)))
 				to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 				anchored = FALSE
 
-	else if(istype(P, /obj/item/weapon/weldingtool))
+	else if(P.get_tool_quality(TOOL_WELDER))
 		if(state == FRAME_PLACED)
 			var/obj/item/weapon/weldingtool/WT = P
 			if(WT.remove_fuel(0, user))
 				playsound(src, P.usesound, 50, 1)
-				if(do_after(user, 20 * P.toolspeed))
+				if(do_after(user, 20 * P.get_tool_speed(TOOL_WELDER)))
 					if(src && WT.isOn())
 						to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 						new /obj/item/stack/material/steel(src.loc, frame_type.frame_size)

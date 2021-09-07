@@ -7,7 +7,7 @@
 			return
 
 	// Pass repair items on to the chestpiece.
-	if(chest && (istype(W,/obj/item/stack/material) || istype(W, /obj/item/weapon/weldingtool)))
+	if(chest && (istype(W,/obj/item/stack/material) || W.get_tool_quality(TOOL_WELDER)))
 		return chest.attackby(W,user)
 
 	// Lock or unlock the access panel.
@@ -41,7 +41,7 @@
 
 	if(open)
 		// Hacking.
-		if(W.get_tool_quality(TOOL_WIRECUTTER) || istype(W, /obj/item/device/multitool))
+		if(W.get_tool_quality(TOOL_WIRECUTTER) || W.get_tool_quality(TOOL_MULTITOOL))
 			if(open)
 				wires.Interact(user)
 			else

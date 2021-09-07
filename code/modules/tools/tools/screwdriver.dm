@@ -20,7 +20,6 @@
 	matter = list(MAT_STEEL = 75)
 	attack_verb = list("stabbed")
 	sharp  = 1
-	toolspeed = 1
 	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_STANDARD)
 	var/random_color = TRUE
 
@@ -122,7 +121,6 @@
 	usesound = 'sound/items/drill_use.ogg'
 	var/state = 0 // Technically boolean, but really a state machine
 	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_GOOD)
-	random_color = FALSE
 
 /obj/item/weapon/tool/powerdrill/attack_self(mob/user)
 	playsound(src,'sound/items/change_drill.ogg',50,1)

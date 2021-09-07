@@ -546,18 +546,12 @@
 			)
 
 		wrenching = TRUE
-		if(do_after(user, 50 * I.toolspeed))
+		if(do_after(user, 50 * I.get_tool_speed(TOOL_WRENCH)))
 			//This code handles moving the turret around. After all, it's a portable turret!
-			if(!anchored)
-				playsound(src, I.usesound, 100, 1)
-				anchored = TRUE
-				update_icon()
-				to_chat(user, "<span class='notice'>You secure the exterior bolts on the turret.</span>")
-			else if(anchored)
-				playsound(src, I.usesound, 100, 1)
-				anchored = FALSE
-				to_chat(user, "<span class='notice'>You unsecure the exterior bolts on the turret.</span>")
-				update_icon()
+			playsound(src, I.usesound, 100, 1)
+			update_icon()
+			anchored = !anchored
+			to_chat(user, "<span class='notice'>You [anchored ? "" : "un"]secure the exterior bolts on the turret.</span>")
 		wrenching = FALSE
 
 	else if(istype(I, /obj/item/weapon/card/id)||istype(I, /obj/item/device/pda))
@@ -1007,7 +1001,7 @@
 				build_step = 3
 				return
 
-			else if(istype(I, /obj/item/weapon/weldingtool))
+			else if(I.get_tool_quality(TOOL_WELDER))
 				var/obj/item/weapon/weldingtool/WT = I
 				if(!WT.isOn())
 					return
@@ -1016,7 +1010,7 @@
 					return
 
 				playsound(src, I.usesound, 50, 1)
-				if(do_after(user, 20 * I.toolspeed))
+				if(do_after(user, 20 * I.get_tool_speed(TOOL_WELDER)))
 					if(!src || !WT.remove_fuel(5, user)) return
 					build_step = 1
 					to_chat(user, "You remove the turret's interior metal armor.")
@@ -1085,14 +1079,14 @@
 				return
 
 		if(7)
-			if(istype(I, /obj/item/weapon/weldingtool))
+			if(I.get_tool_quality(TOOL_WELDER))
 				var/obj/item/weapon/weldingtool/WT = I
 				if(!WT.isOn()) return
 				if(WT.get_fuel() < 5)
 					to_chat(user, "<span class='notice'>You need more fuel to complete this task.</span>")
 
 				playsound(src, WT.usesound, 50, 1)
-				if(do_after(user, 30 * WT.toolspeed))
+				if(do_after(user, 30 * WT.get_tool_speed(TOOL_WELDER)))
 					if(!src || !WT.remove_fuel(5, user))
 						return
 					build_step = 8

@@ -249,7 +249,7 @@
 		return //Don't open the door if we're putting tape on it to tell people 'don't open the door'.
 	if(operating)
 		return//Already doing something.
-	if(istype(C, /obj/item/weapon/weldingtool) && !repairing)
+	if(!repairing && C.get_tool_quality(TOOL_WELDER))
 		if(prying)
 			to_chat(user, "<span class='notice'>Someone's busy prying that [density ? "open" : "closed"]!</span>")
 		var/obj/item/weapon/weldingtool/W = C
@@ -300,20 +300,15 @@
 		to_chat(user, "<span class='danger'>\The [src] is welded shut!</span>")
 		return
 
-	if(C.pry == 1)
+	if(C.get_tool_quality(TOOL_CROWBAR))
 		if(operating)
 			return
 
-		if(blocked && C.get_tool_quality(TOOL_CROWBAR))
+		if(blocked)
 			user.visible_message("<span class='danger'>\The [user] pries at \the [src] with \a [C], but \the [src] is welded in place!</span>",\
 			"You try to pry \the [src] [density ? "open" : "closed"], but it is welded in place!",\
 			"You hear someone struggle and metal straining.")
 			return
-
-		if(istype(C,/obj/item/weapon/material/twohanded/fireaxe))
-			var/obj/item/weapon/material/twohanded/fireaxe/F = C
-			if(!F.wielded)
-				return
 
 		if(prying)
 			to_chat(user, "<span class='notice'>Someone's already prying that [density ? "open" : "closed"].</span>")
@@ -325,7 +320,7 @@
 		prying = 1
 		update_icon()
 		playsound(src, C.usesound, 100, 1)
-		if(do_after(user,30 * C.toolspeed))
+		if(do_after(user,30 * C.get_tool_speed(TOOL_CROWBAR)))
 			if(C.get_tool_quality(TOOL_CROWBAR))
 				if(stat & (BROKEN|NOPOWER) || !density)
 					user.visible_message("<span class='danger'>\The [user] forces \the [src] [density ? "open" : "closed"] with \a [C]!</span>",\

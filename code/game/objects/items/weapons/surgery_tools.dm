@@ -183,7 +183,7 @@
 	origin_tech = list(TECH_BIO = 4, TECH_MATERIAL = 6, TECH_MAGNET = 6)
 	matter = list(MAT_STEEL = 12500)
 	attack_verb = list("attacked", "slashed", "seared", "cut")
-	tool_qualities = list(TOOL_CSAW = TOOL_QUALITY_DECENT)
+	tool_qualities = list(TOOL_CSAW = TOOL_QUALITY_GOOD)
 
 //misc, formerly from code/defines/weapons.dm
 /obj/item/weapon/surgical/bonegel
