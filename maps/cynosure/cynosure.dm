@@ -8,11 +8,6 @@
 	#include "cynosure_presets.dm"
 	#include "cynosure_shuttles.dm"
 
-	#include "shuttles/heist.dm"
-	#include "shuttles/merc.dm"
-	#include "shuttles/ninja.dm"
-	#include "shuttles/ert.dm"
-
 	#include "loadout/loadout_accessories.dm"
 	#include "loadout/loadout_head.dm"
 	#include "loadout/loadout_suit.dm"
