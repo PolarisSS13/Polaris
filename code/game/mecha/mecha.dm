@@ -924,7 +924,7 @@
 	if(istype(obstacle, /mob))//First we check if it is a mob. Mechs mostly shouln't go through them, even while phasing.
 		var/mob/M = obstacle
 		M.Move(get_step(obstacle,src.dir))
-	else if(istype(obstacle, /obj))//Then we check for regular obstacles.
+	else if(istype(obstacle, /obj) || istype(obstacle, /turf))//Then we check for regular obstacles.
 		var/obj/O = obstacle
 
 		if(phasing && get_charge()>=phasing_energy_drain)//Phazon check. This could use an improvement elsewhere.
@@ -933,21 +933,15 @@
 			. = ..(obstacle)
 			return
 		if(istype(O, /obj/effect/portal))	//derpfix
-			src.anchored = 0				//I have no idea what this really fix.
+			src.anchored = 0				// Portals can only move unanchored objects.
 			O.Crossed(src)
 			spawn(0)//countering portal teleport spawn(0), hurr
 				src.anchored = 1
-		else if(O.anchored)
-			obstacle.Bumped(src)
-		else
-			step(obstacle,src.dir)
-
-	else if(istype(obstacle, /turf))
-		if(phasing && get_charge()>=phasing_energy_drain)
-			src.use_power(phasing_energy_drain)
-			phase()
-			. = ..(obstacle)
-			return
+		else if(istype(O))
+			if(O.anchored)
+				obstacle.Bumped(src)
+			else
+				step(obstacle,src.dir)
 
 	else//No idea when this triggers, so i won't touch it.
 		. = ..(obstacle)
