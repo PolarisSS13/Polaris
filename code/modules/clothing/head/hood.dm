@@ -176,3 +176,9 @@
 	desc = "A hood that looks just like a corgi's head, it won't guarantee dog biscuits."
 	icon_state = "ian"
 	item_state_slots = list(slot_r_hand_str = "ian", slot_l_hand_str = "ian") //Does not exist -S2-
+
+/obj/item/clothing/head/hood/siffet_hood
+	name = "siffet hood"
+	desc = "A hood that looks vaguely like a siffet's head. Guaranteed to traumatize your Promethean coworkers."
+	icon_state = "siffet"
+	item_state_slots = list(slot_r_hand_str = "siffet", slot_l_hand_str = "siffet")
