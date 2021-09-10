@@ -61,7 +61,6 @@
 					"Nurse" = /datum/alt_title/nurse,
 					"Virologist" = /datum/alt_title/virologist)
 
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 //Medical Doctor Alt Titles
@@ -109,7 +108,6 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics)
 	minimal_access = list(access_medical, access_medical_equip, access_chemistry)
 	minimal_player_age = 3
-	minimum_character_age = 0
 	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
@@ -196,7 +194,6 @@
 	alt_titles = list("Emergency Medical Technician" = /datum/alt_title/emt)
 	banned_job_species = list(SPECIES_DIONA)
 
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 // Paramedic Alt Titles

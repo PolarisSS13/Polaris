@@ -58,7 +58,6 @@
 						"Engine Technician" = /datum/alt_title/engine_tech, "Electrician" = /datum/alt_title/electrician)
 
 	minimal_player_age = 3
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
@@ -99,7 +98,6 @@
 	minimal_access = list(access_eva, access_engine, access_atmospherics, access_maint_tunnels, access_emergency_storage, access_construction, access_external_airlocks)
 
 	minimal_player_age = 3
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos

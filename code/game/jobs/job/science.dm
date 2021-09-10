@@ -107,7 +107,6 @@
 	banned_job_species = list("digital")
 
 	minimal_player_age = 14
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
@@ -138,7 +137,6 @@
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_player_age = 7
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 	banned_job_species = list("digital")
 
