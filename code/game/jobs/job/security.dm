@@ -125,7 +125,6 @@
 						No one is above the Law, not Security or Command."
 	alt_titles = list("Junior Officer" = /datum/alt_title/junior_officer)
 
-	minimum_character_age = 1
 	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 // Security Officer Alt Titles

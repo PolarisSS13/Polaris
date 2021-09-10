@@ -54,7 +54,7 @@ var/global/datum/controller/occupations/job_master
 		var/datum/job/job = GetJob(rank)
 		if(!job)
 			return 0
-		if(job.minimum_character_age && (player.client.prefs.age < job.get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
+		if((job.minimum_character_age || job.min_age_by_species) && (player.client.prefs.age < job.get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
 			return 0
 		if(jobban_isbanned(player, rank))
 			return 0
@@ -111,7 +111,7 @@ var/global/datum/controller/occupations/job_master
 		if(!job)
 			continue
 
-		if(job.minimum_character_age && (player.client.prefs.age < job.get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
+		if((job.minimum_character_age || job.min_age_by_species) && (player.client.prefs.age < job.get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
 			continue
 
 		if(job.is_species_banned(player.client.prefs.species, player.client.prefs.organ_data["brain"]) == TRUE)
