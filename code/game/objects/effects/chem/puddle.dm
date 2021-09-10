@@ -12,7 +12,6 @@
 	create_reagents(100)
 
 	addtimer(CALLBACK(src, .proc/evaporation_pulse), 10 SECONDS)
-		evaporation_pulse()
 
 /obj/effect/decal/cleanable/chempuddle/Destroy()
 	var/turf/T = get_turf(src)
