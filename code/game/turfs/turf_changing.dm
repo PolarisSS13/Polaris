@@ -28,7 +28,7 @@
 
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
+		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)) && (!istype(below, /turf/unsimulated/wall) && !istype(below, /turf/simulated/sky)))	// VOREStation Edit: Weird open space
 			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire
@@ -41,6 +41,7 @@
 	var/old_directional_opacity = directional_opacity
 	var/old_outdoors = outdoors
 	var/old_dangerous_objects = dangerous_objects
+	var/old_dynamic_lumcount = dynamic_lumcount
 
 	var/turf/Ab = GetAbove(src)
 	if(Ab)
@@ -59,6 +60,7 @@
 		if(S.zone) S.zone.rebuild()
 
 	cut_overlays(TRUE)
+	RemoveElement(/datum/element/turf_z_transparency)
 
 	if(ispath(N, /turf/simulated/floor))
 		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
@@ -109,6 +111,8 @@
 	lighting_corner_SE = old_lighting_corner_SE
 	lighting_corner_SW = old_lighting_corner_SW
 	lighting_corner_NW = old_lighting_corner_NW
+
+	dynamic_lumcount = old_dynamic_lumcount
 
 	if(SSlighting.subsystem_initialized)
 		lighting_object = old_lighting_object

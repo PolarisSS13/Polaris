@@ -1,6 +1,6 @@
 /obj/effect/overlay
 	name = "overlay"
-	unacidable = 1
+	unacidable = TRUE
 	var/i_attached//Added for possible image attachments to objects. For hallucinations and the like.
 
 /obj/effect/overlay/beam//Not actually a projectile, just an effect.
@@ -18,19 +18,19 @@
 	name = "Palm tree"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "palm1"
-	density = 1
+	density = TRUE
 	plane = MOB_PLANE
 	layer = ABOVE_MOB_LAYER
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/overlay/palmtree_l
 	name = "Palm tree"
 	icon = 'icons/misc/beach2.dmi'
 	icon_state = "palm2"
-	density = 1
+	density = TRUE
 	plane = MOB_PLANE
 	layer = ABOVE_MOB_LAYER
-	anchored = 1
+	anchored = TRUE
 
 /obj/effect/overlay/coconut
 	name = "Coconuts"
@@ -47,8 +47,8 @@
 	name = "wallrot"
 	desc = "Ick..."
 	icon = 'icons/effects/wallrot.dmi'
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	plane = MOB_PLANE
 	layer = ABOVE_MOB_LAYER
 	mouse_opacity = 0
@@ -62,8 +62,8 @@
 	name = "snow"
 	icon = 'icons/turf/overlays.dmi'
 	icon_state = "snow"
+	anchored = TRUE
 	plane = TURF_PLANE
-	anchored = 1
 
 // Todo: Add a version that gradually reaccumulates over time by means of alpha transparency. -Spades
 /obj/effect/overlay/snow/attackby(obj/item/W as obj, mob/user as mob)
@@ -113,13 +113,6 @@
 	pixel_x = -32
 	pixel_y = -32
 
-/obj/effect/overlay/closet_door
-	anchored = TRUE
-	plane = FLOAT_PLANE
-	layer = FLOAT_LAYER
-	vis_flags = VIS_INHERIT_ID
-	appearance_flags = KEEP_TOGETHER | LONG_GLIDE | PIXEL_SCALE
-
 /obj/effect/overlay/vis
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
 	anchored = TRUE
@@ -138,7 +131,6 @@
 	appearance_flags = RESET_TRANSFORM | TILE_BOUND
 	invisibility = INVISIBILITY_ABSTRACT
 	mouse_opacity = MOUSE_OPACITY_TRANSPARENT
-
 	plane = ATMOS_GROUP_PLANE
 */
 
@@ -152,6 +144,12 @@
 	alpha = 0
 	vis_flags = NONE
 	blocks_emissive = FALSE
+
+/obj/effect/overlay/light_visible/Destroy(force)
+	if(!force)
+		stack_trace("Movable light visible mask deleted, but not by our component")
+		return QDEL_HINT_LETMELIVE
+	return ..()
 
 /obj/effect/overlay/light_cone
 	name = ""
@@ -183,3 +181,10 @@
 		stack_trace("Directional light cone deleted, but not by our component")
 		return QDEL_HINT_LETMELIVE
 	return ..()
+
+/obj/effect/overlay/closet_door
+	anchored = TRUE
+	plane = FLOAT_PLANE
+	layer = FLOAT_LAYER
+	vis_flags = VIS_INHERIT_ID
+	appearance_flags = KEEP_TOGETHER | LONG_GLIDE | PIXEL_SCALE
