@@ -49,11 +49,9 @@ What is the naming convention for planes or layers?
 #define PLANE_LOOKINGGLASS		-78 // For the Looking Glass holodecks
 #define PLANE_LOOKINGGLASS_IMG	-77 // For the Looking Glass holodecks
 
-// OPENSPACE_PLANE reserves all planes between OPENSPACE_PLANE_START and OPENSPACE_PLANE_END inclusive
-#define OPENSPACE_PLANE 		-75 // /turf/simulated/open will use OPENSPACE_PLANE + z (Valid z's being 2 thru 17)
-#define OPENSPACE_PLANE_START	-73
-#define OPENSPACE_PLANE_END		-58
-#define OVER_OPENSPACE_PLANE	-57
+#define OPENSPACE_PLANE			-51 // Has to be lower than turfs
+	#define OPENSPACE_LAYER 	600 // Above every other layer
+#define OPENSPACE_BACKDROP_PLANE	-50 // Black square has to be above openspace turfs
 
 // Turf Planes
 #define PLATING_PLANE			-44 // Plating
@@ -70,8 +68,11 @@ What is the naming convention for planes or layers?
 	#define WATER_LAYER			3.0 // Layer for water overlays.
 	#define ABOVE_TURF_LAYER	3.1	// Snow and wallmounted/floormounted equipment
 #define DECAL_PLANE				-44 // Permanent decals
+	#define DECAL_LAYER			10
 #define DIRTY_PLANE				-43 // Nonpermanent decals
+	#define DIRTY_LAYER			11
 #define BLOOD_PLANE				-42 // Blood is really dirty, but we can do special stuff if we separate it
+	#define BLOOD_DECAL_LAYER	12
 
 // Obj planes
 #define OBJ_PLANE				-35
@@ -87,6 +88,8 @@ What is the naming convention for planes or layers?
 	#define WINDOW_LAYER			3.2	// Windows
 	#define ON_WINDOW_LAYER			3.3 // Ontop of a window
 	#define ABOVE_WINDOW_LAYER 		3.4 //Above full tile windows so wall items are clickable
+
+#define ABOVE_OBJ_PLANE			 -30
 
 // Mob planes
 #define MOB_PLANE				-25

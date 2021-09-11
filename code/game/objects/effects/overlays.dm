@@ -7,6 +7,7 @@
 	name="beam"
 	icon='icons/effects/beam.dmi'
 	icon_state="b_beam"
+	plane = ABOVE_OBJ_PLANE
 	var/tmp/atom/BeamSource
 
 /obj/effect/overlay/beam/New()
@@ -61,6 +62,7 @@
 	name = "snow"
 	icon = 'icons/turf/overlays.dmi'
 	icon_state = "snow"
+	plane = TURF_PLANE
 	anchored = 1
 
 // Todo: Add a version that gradually reaccumulates over time by means of alpha transparency. -Spades
@@ -161,3 +163,23 @@
 	vis_flags = NONE
 	alpha = 110
 	blocks_emissive = FALSE
+
+	var/static/matrix/normal_transform
+
+/obj/effect/overlay/light_cone/Initialize()
+	. = ..()
+	apply_standard_transform()
+
+/obj/effect/overlay/light_cone/proc/reset_transform(apply_standard)
+	transform = initial(transform)
+	if(apply_standard)
+		apply_standard_transform()
+
+/obj/effect/overlay/light_cone/proc/apply_standard_transform()
+	transform = transform.Translate(-32, -32)
+
+/obj/effect/overlay/light_cone/Destroy(force)
+	if(!force)
+		stack_trace("Directional light cone deleted, but not by our component")
+		return QDEL_HINT_LETMELIVE
+	return ..()

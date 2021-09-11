@@ -30,6 +30,7 @@
 	icon = 'icons/obj/monitors.dmi'
 	icon_state = "alarm0"
 	layer = ABOVE_WINDOW_LAYER
+	vis_flags = VIS_HIDE // They have an emissive that looks bad in openspace due to their wall-mounted nature
 	anchored = 1
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 80
@@ -529,7 +530,7 @@
 			"unit" = "%",
 			"danger_level" = get_danger_level(environment.gas[gas_id] * partial_pressure, TLV[gas_id])
 		))
-	
+
 	if(!locked || issilicon(user) || data["remoteUser"])
 		data["vents"] = list()
 		for(var/id_tag in A.air_vent_names)
@@ -634,7 +635,7 @@
 			else
 				target_temperature = input_temperature + T0C
 		return TRUE
-	
+
 	// Account for remote users here.
 	// Yes, this is kinda snowflaky; however, I would argue it would be far more snowflakey
 	// to include "custom hrefs" and all the other bullshit that nano states have just for the

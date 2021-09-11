@@ -16,6 +16,7 @@ would spawn and follow the beaker, even if it is carried or thrown.
 	pass_flags = PASSTABLE | PASSGRILLE
 	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 	light_on = TRUE
+	plane = ABOVE_OBJ_PLANE
 
 /datum/effect/effect/system
 	var/number = 3

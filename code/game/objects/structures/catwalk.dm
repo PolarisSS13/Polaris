@@ -4,7 +4,7 @@
 	icon = 'icons/turf/catwalks.dmi'
 	icon_state = "catwalk"
 	plane = DECAL_PLANE
-	layer = ABOVE_UTILITY
+	layer = DECAL_LAYER
 	density = 0
 	anchored = 1.0
 	var/hatch_open = FALSE
@@ -133,7 +133,7 @@
 	anchored = 1.0
 	var/activated = FALSE
 	plane = DECAL_PLANE
-	layer = ABOVE_UTILITY
+	layer = DECAL_LAYER
 	var/tile = /obj/item/stack/tile/floor
 	var/platecolor = "#858a8f"
 

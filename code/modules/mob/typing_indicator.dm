@@ -31,9 +31,6 @@
 		cut_overlay(typing_indicator, TRUE)
 		typing = FALSE
 
-	if(shadow) //Multi-Z above-me shadows
-		shadow.set_typing_indicator(state)
-
 	return state
 
 /mob/verb/say_wrapper()
@@ -43,7 +40,7 @@
 	set_typing_indicator(TRUE)
 	var/message = input("","say (text)") as text
 	set_typing_indicator(FALSE)
-	
+
 	if(message)
 		say_verb(message)
 

@@ -14,9 +14,6 @@ SUBSYSTEM_DEF(planets)
 	var/static/list/needs_sun_update = list()
 	var/static/list/needs_temp_update = list()
 
-	var/static/list/queued_turfs = list()
-	var/static/accepting_turfs = FALSE
-
 /datum/controller/subsystem/planets/Initialize(timeofday)
 	admin_notice("<span class='danger'>Initializing planetary weather.</span>", R_DEBUG)
 	createPlanets()
@@ -34,34 +31,21 @@ SUBSYSTEM_DEF(planets)
 				admin_notice("<span class='danger'>Z[Z] is shared by more than one planet!</span>", R_DEBUG)
 				continue
 			z_to_planet[Z] = NP
-	accepting_turfs = TRUE
-	while(queued_turfs.len)
-		addTurf(queued_turfs[queued_turfs.len])
-		queued_turfs.len--
-		CHECK_TICK
-	/* Seems to cause active edges, SOMEHOW. IT'S LIGHT AAAA.
-	for(var/datum/planet/P as anything in planets)
-		updateSunlight(P)
-	*/
 
 // DO NOT CALL THIS DIRECTLY UNLESS IT'S IN INITIALIZE,
 // USE turf/simulated/proc/make_indoors() and
-//     tyrf/simulated/proc/make_outdoors()
+//     turf/simulated/proc/make_outdoors()
 /datum/controller/subsystem/planets/proc/addTurf(var/turf/T)
-	if(!accepting_turfs)
-		queued_turfs |= T
-		return
 	if(z_to_planet.len >= T.z && z_to_planet[T.z])
 		var/datum/planet/P = z_to_planet[T.z]
 		if(!istype(P))
 			return
 		if(istype(T, /turf/unsimulated/wall/planetary))
 			P.planet_walls += T
-		else if(istype(T, /turf/simulated) && T.outdoors)
+		else if(istype(T, /turf/simulated) && T.is_outdoors())
 			P.planet_floors += T
-			T.vis_contents |= P.weather_holder.visuals
-			T.vis_contents |= P.weather_holder.special_visuals
-
+			P.weather_holder.apply_to_turf(T)
+			P.sun_holder.apply_to_turf(T)
 
 /datum/controller/subsystem/planets/proc/removeTurf(var/turf/T,var/is_edge)
 	if(z_to_planet.len >= T.z)
@@ -72,8 +56,8 @@ SUBSYSTEM_DEF(planets)
 			P.planet_walls -= T
 		else
 			P.planet_floors -= T
-			T.vis_contents -= P.weather_holder.visuals
-			T.vis_contents -= P.weather_holder.special_visuals
+			P.weather_holder.remove_from_turf(T)
+			P.sun_holder.remove_from_turf(T)
 
 
 /datum/controller/subsystem/planets/fire(resumed = 0)
@@ -88,6 +72,7 @@ SUBSYSTEM_DEF(planets)
 		if(MC_TICK_CHECK)
 			return
 
+	#ifndef UNIT_TEST // Don't be updating temperatures and such during unit tests
 	var/list/needs_temp_update = src.needs_temp_update
 	while(needs_temp_update.len)
 		var/datum/planet/P = needs_temp_update[needs_temp_update.len]
@@ -95,6 +80,7 @@ SUBSYSTEM_DEF(planets)
 		updateTemp(P)
 		if(MC_TICK_CHECK)
 			return
+	#endif
 
 	var/list/currentrun = src.currentrun
 	while(currentrun.len)
@@ -118,18 +104,14 @@ SUBSYSTEM_DEF(planets)
 
 /datum/controller/subsystem/planets/proc/updateSunlight(var/datum/planet/P)
 	var/new_brightness = P.sun["brightness"]
-	P.sun_source.light_power = new_brightness
+	P.sun_holder.update_brightness(new_brightness, P.planet_floors)
 
 	var/new_color = P.sun["color"]
-	P.sun_source.light_color = new_color
-
-	// Ask our light source to update all the corners on these turfs
-	P.sun_source.update_corners(P.planet_floors + P.planet_walls)
+	P.sun_holder.update_color(new_color)
 
 /datum/controller/subsystem/planets/proc/updateTemp(var/datum/planet/P)
 	//Set new temperatures
-	for(var/W in P.planet_walls)
-		var/turf/unsimulated/wall/planetary/wall = W
+	for(var/turf/unsimulated/wall/planetary/wall as anything in P.planet_walls)
 		wall.set_temperature(P.weather_holder.temperature)
 		CHECK_TICK
 
@@ -137,8 +119,7 @@ SUBSYSTEM_DEF(planets)
 	var/count = 100000
 	while(count > 0)
 		count--
-		for(var/planet in planets)
-			var/datum/planet/P = planet
+		for(var/datum/planet/P as anything in planets)
 			if(P.weather_holder)
 				P.weather_holder.change_weather(pick(P.weather_holder.allowed_weather_types))
 		sleep(3)

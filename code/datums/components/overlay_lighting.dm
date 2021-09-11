@@ -94,7 +94,6 @@
 		cone = new()
 		cone_hint_x = movable_parent.light_cone_x_offset
 		cone_hint_y = movable_parent.light_cone_y_offset
-		cone.transform = cone.transform.Translate(-32, -32)
 		set_direction(movable_parent.dir)
 	if(!isnull(_range))
 		movable_parent.set_light_range(_range)
@@ -156,17 +155,23 @@
 	set_parent_attached_to(null)
 	set_holder(null)
 	clean_old_turfs()
-	QDEL_NULL(visible_mask)
+
+	qdel(visible_mask, TRUE)
+	visible_mask = null
+
 	if(directional)
-		QDEL_NULL(directional_atom)
-		QDEL_NULL(cone)
+		qdel(directional_atom, TRUE)
+		directional_atom = null
+
+		qdel(cone, TRUE)
+		cone = null
+
 	return ..()
 
 
 ///Clears the affected_turfs lazylist, removing from its contents the effects of being near the light.
 /datum/component/overlay_lighting/proc/clean_old_turfs()
-	for(var/t in affected_turfs)
-		var/turf/lit_turf = t
+	for(var/turf/lit_turf as anything in affected_turfs)
 		lit_turf.dynamic_lumcount -= lum_power
 	affected_turfs = null
 
@@ -176,9 +181,12 @@
 	if(!current_holder)
 		return
 	var/atom/movable/light_source = GET_LIGHT_SOURCE
+	. = list()
 	for(var/turf/lit_turf in view(lumcount_range, get_turf(light_source)))
 		lit_turf.dynamic_lumcount += lum_power
-		LAZYADD(affected_turfs, lit_turf)
+		. += lit_turf
+	if(length(.))
+		affected_turfs = .
 
 
 ///Clears the old affected turfs and populates the new ones.
@@ -425,23 +433,55 @@
 	. = lum_power
 	lum_power = new_lum_power
 	var/difference = . - lum_power
-	for(var/t in affected_turfs)
-		var/turf/lit_turf = t
+	for(var/turf/lit_turf as anything in affected_turfs)
 		lit_turf.dynamic_lumcount -= difference
 
-///Here we append the behavior associated to changing lum_power.
+///Moves the light directional_atom that emits our "light" based on our position and our direction
 /datum/component/overlay_lighting/proc/cast_directional_light()
 	var/final_distance = cast_range
+
 	//Lower the distance by 1 if we're not looking at a cardinal direction, and we're not a short cast
 	if(final_distance > SHORT_CAST && !(ALL_CARDINALS & current_direction))
 		final_distance -= 1
 	var/turf/scanning = get_turf(current_holder)
+
+	. = 0
 	for(var/i in 1 to final_distance)
 		var/turf/next_turf = get_step(scanning, current_direction)
-		if(isnull(next_turf) || IS_OPAQUE_TURF(next_turf))
+		if(isnull(next_turf) || IS_OPAQUE_TURF_DIR(next_turf, reverse_dir[current_direction]))
 			break
 		scanning = next_turf
+		.++
+
 	directional_atom.forceMove(scanning)
+	directional_atom.face_light(GET_PARENT, dir2angle(current_direction), .)
+
+///Tries to place the directional light in a specific turf
+/datum/component/overlay_lighting/proc/place_directional_light(turf/target)
+	var/final_distance = round(cast_range*2)
+
+	//Lower the distance by 1 if we're not looking at a cardinal direction, and we're not a short cast
+	if(final_distance > SHORT_CAST && !(ALL_CARDINALS & get_dir(GET_PARENT, target)))
+		final_distance -= 1
+	var/turf/scanning = get_turf(GET_PARENT)
+
+	. = 0
+	for(var/i in 1 to final_distance)
+		var/next_dir = get_dir(scanning, target)
+		var/turf/next_turf = get_step(scanning, next_dir)
+		if(isnull(next_turf) || IS_OPAQUE_TURF_DIR(next_turf, get_dir(scanning, next_turf)))
+			break
+		scanning = next_turf
+		.++
+
+	directional_atom.forceMove(scanning)
+	var/turf/Ts = get_turf(GET_PARENT)
+	var/turf/To = get_turf(GET_LIGHT_SOURCE)
+
+	var/angle = Get_Angle(Ts, To)
+
+	directional_atom.face_light(GET_PARENT, angle, .)
+	set_cone_direction(NORTH, angle)
 
 ///Called when current_holder changes loc.
 /datum/component/overlay_lighting/proc/on_holder_dir_change(atom/movable/source, olddir, newdir)
@@ -453,14 +493,23 @@
 	SIGNAL_HANDLER
 	set_direction(newdir)
 
+///Sets the cone's direction for directional lighting
+/datum/component/overlay_lighting/proc/set_cone_direction(dir, angle)
+	cone.reset_transform()
+	if(dir)
+		cone.set_dir(dir)
+	if(angle)
+		cone.transform = turn(cone.transform, angle)
+	cone.apply_standard_transform()
+
 ///Sets a new direction for the directional cast, then updates luminosity
-/datum/component/overlay_lighting/proc/set_direction(newdir)
+/datum/component/overlay_lighting/proc/set_direction(newdir, skip_update)
 	if(!newdir)
 		return
 	if(current_direction == newdir)
 		return
 	current_direction = newdir
-	cone.set_dir(newdir)
+	set_cone_direction(newdir)
 
 	if(newdir & NORTH)
 		cone.pixel_y = 16
@@ -469,8 +518,10 @@
 	else
 		if(!isnull(cone_hint_y))
 			cone.pixel_y = cone_hint_y
+			directional_atom.pixel_y = cone_hint_y
 		else
 			cone.pixel_y = 0
+			directional_atom.pixel_y = 0
 
 	if(newdir & EAST)
 		cone.pixel_x = 16
@@ -480,12 +531,15 @@
 		if(!isnull(cone_hint_x))
 			if(newdir & NORTH)
 				cone.pixel_x = -1*cone_hint_x
+				directional_atom.pixel_x = -1*cone_hint_x
 			else
 				cone.pixel_x = cone_hint_x
+				directional_atom.pixel_x = cone_hint_x
 		else
 			cone.pixel_x = 0
+			directional_atom.pixel_x = 0
 
-	if(overlay_lighting_flags & LIGHTING_ON)
+	if(!skip_update && (overlay_lighting_flags & LIGHTING_ON))
 		make_luminosity_update()
 
 /datum/component/overlay_lighting/proc/on_parent_crafted(datum/source, atom/movable/new_craft)

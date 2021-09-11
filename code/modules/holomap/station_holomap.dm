@@ -7,6 +7,7 @@
 	icon = 'icons/obj/machines/stationmap.dmi'
 	icon_state = "station_map"
 	layer = ABOVE_WINDOW_LAYER
+	vis_flags = VIS_HIDE // They have an emissive that looks bad in openspace due to their wall-mounted nature
 	anchored = 1
 	density = 0
 	use_power = USE_POWER_IDLE
