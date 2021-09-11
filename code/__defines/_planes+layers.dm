@@ -1,43 +1,33 @@
 /*This file is a list of all preclaimed planes & layers
-
 All planes & layers should be given a value here instead of using a magic/arbitrary number.
-
 After fiddling with planes and layers for some time, I figured I may as well provide some documentation:
-
 What are planes?
 	Think of Planes as a sort of layer for a layer - if plane X is a larger number than plane Y, the highest number for a layer in X will be below the lowest
 	number for a layer in Y.
 	Planes also have the added bonus of having planesmasters.
-
 What are Planesmasters?
 	Planesmasters, when in the sight of a player, will have its appearance properties (for example, colour matrices, alpha, transform, etc)
 	applied to all the other objects in the plane. This is all client sided.
 	Usually you would want to add the planesmaster as an invisible image in the client's screen.
-
 What can I do with Planesmasters?
 	You can: Make certain players not see an entire plane,
 	Make an entire plane have a certain colour matrices,
 	Make an entire plane transform in a certain way,
 	Make players see a plane which is hidden to normal players - I intend to implement this with the antag HUDs for example.
 	Planesmasters can be used as a neater way to deal with client images or potentially to do some neat things
-
 How do planes work?
 	A plane can be any integer from -10000 to 10000.
 	All planes above 0, the 'base plane', are visible even when your character cannot 'see' them, for example, the HUD.
 	All planes below 0, the 'base plane', are only visible when a character can see them.
-
 How do I add a plane?
 	Think of where you want the plane to appear, look through the pre-existing planes and find where it is above and where it is below
 	Slot it in in that place, and change the pre-existing planes, making sure no plane shares a number.
 	Add a description with a comment as to what the plane does.
-
 How do I make something a planesmaster?
 	Add the PLANE_MASTER appearance flag to the appearance_flags variable.
-
 What is the naming convention for planes or layers?
 	Make sure to use the name of your object before the _LAYER or _PLANE, eg: [NAME_OF_YOUR_OBJECT HERE]_LAYER or [NAME_OF_YOUR_OBJECT HERE]_PLANE
 	Also, as it's a define, it is standard practice to use capital letters for the variable so people know this.
-
 */
 
 
@@ -49,9 +39,13 @@ What is the naming convention for planes or layers?
 #define PLANE_LOOKINGGLASS		-78 // For the Looking Glass holodecks
 #define PLANE_LOOKINGGLASS_IMG	-77 // For the Looking Glass holodecks
 
+
 #define OPENSPACE_PLANE			-51 // Has to be lower than turfs
 	#define OPENSPACE_LAYER 	600 // Above every other layer
 #define OPENSPACE_BACKDROP_PLANE	-50 // Black square has to be above openspace turfs
+
+#define MAP_VIEW_PLANE			-48 // Plane for 'embedded' maps in consoles and such
+	#define MAP_VIEW_LAYER			0
 
 // Turf Planes
 #define PLATING_PLANE			-44 // Plating
@@ -89,7 +83,7 @@ What is the naming convention for planes or layers?
 	#define ON_WINDOW_LAYER			3.3 // Ontop of a window
 	#define ABOVE_WINDOW_LAYER 		3.4 //Above full tile windows so wall items are clickable
 
-#define ABOVE_OBJ_PLANE			 -30
+#define ABOVE_OBJ_PLANE -30
 
 // Mob planes
 #define MOB_PLANE				-25
@@ -124,7 +118,6 @@ What is the naming convention for planes or layers?
 #define PLANE_STATUS			2 //Status Indicators that show over mobs' heads when certain things like stuns affect them.
 
 #define PLANE_ADMIN1			3 //Purely for shenanigans (below lighting)
-
 #define PLANE_PLANETLIGHTING	4 //Lighting on planets
 
 #define PLANE_LIGHTING			5 //Where the lighting (and darkness) lives
@@ -194,7 +187,6 @@ What is the naming convention for planes or layers?
 /atom/proc/reset_plane_and_layer()
 	plane = initial(plane)
 	layer = initial(layer)
-
 
 // Check if a mob can "logically" see an atom plane
 #define MOB_CAN_SEE_PLANE(M, P) (P <= PLANE_WORLD || (P in M.planes_visible))

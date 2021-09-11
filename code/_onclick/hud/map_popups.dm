@@ -41,8 +41,8 @@
 	name = "background"
 	icon = 'icons/mob/map_backgrounds.dmi'
 	icon_state = "clear"
-	layer = SPACE_PLANE
-	plane = SPACE_PLANE
+	layer = MAP_VIEW_LAYER
+	plane = MAP_VIEW_PLANE
 
 /**
  * Sets screen_loc of this screen object, in form of point coordinates,

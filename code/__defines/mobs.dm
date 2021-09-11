@@ -376,9 +376,9 @@
 //Vision flags, for dealing with plane visibility
 #define VIS_FULLBRIGHT		1
 #define VIS_LIGHTING		2
-#define VIS_O_LIGHT         3
-#define VIS_EMISSIVE        4
-#define VIS_OPENSPACE       5
+#define VIS_O_LIGHT			3
+#define VIS_EMISSIVE		4
+#define VIS_OPENSPACE		5
 
 #define VIS_GHOSTS			6
 #define VIS_AI_EYE			7
