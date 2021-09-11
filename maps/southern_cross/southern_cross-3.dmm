@@ -857,24 +857,6 @@
 /obj/machinery/status_display,
 /turf/simulated/wall,
 /area/surface/outpost/main/gateway)
-"cl" = (
-/obj/machinery/gateway{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/surface/outpost/main/gateway)
-"cm" = (
-/obj/machinery/gateway{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/surface/outpost/main/gateway)
-"cn" = (
-/obj/machinery/gateway{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/surface/outpost/main/gateway)
 "co" = (
 /obj/machinery/ai_status_display,
 /turf/simulated/wall,
@@ -1063,18 +1045,21 @@
 /turf/simulated/floor/tiled/dark,
 /area/surface/outpost/main/gateway)
 "cM" = (
-/obj/machinery/gateway{
-	dir = 8
+/obj/item/stack/cable_coil{
+	amount = 3
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/outpost/main/gateway)
 "cN" = (
-/obj/machinery/gateway/centerdummy,
+/obj/structure/frame{
+	desc = "This used to be a bluespace gateway, but it was decommissioned due to stability and safety concerns.";
+	name = "dismantled gateway"
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/outpost/main/gateway)
 "cO" = (
-/obj/machinery/gateway{
-	dir = 4
+/obj/item/stack/material/steel{
+	amount = 3
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/outpost/main/gateway)
@@ -1303,29 +1288,7 @@
 /obj/machinery/atmospherics/unary/vent_pump/on,
 /turf/simulated/floor/tiled/dark,
 /area/surface/outpost/main/gateway)
-"dn" = (
-/obj/machinery/gateway{
-	dir = 10
-	},
-/obj/effect/landmark{
-	name = "JoinLateGateway"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/surface/outpost/main/gateway)
-"do" = (
-/obj/machinery/gateway,
-/obj/effect/landmark{
-	name = "JoinLateGateway"
-	},
-/turf/simulated/floor/tiled/techfloor,
-/area/surface/outpost/main/gateway)
 "dp" = (
-/obj/machinery/gateway{
-	dir = 6
-	},
-/obj/effect/landmark{
-	name = "JoinLateGateway"
-	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/outpost/main/gateway)
 "dq" = (
@@ -1829,6 +1792,7 @@
 /obj/machinery/door/airlock/glass_security{
 	name = "Security Checkpoint"
 	},
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/main/security)
 "ep" = (
@@ -1921,6 +1885,7 @@
 /obj/machinery/door/airlock/glass_medical{
 	name = "First-Aid Station"
 	},
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/main/first_aid)
 "eu" = (
@@ -2199,11 +2164,12 @@
 	pixel_x = 11;
 	pixel_y = -24
 	},
+/obj/structure/cable/blue,
 /obj/machinery/power/apc{
-	name = "south bump";
+	name = "deactivated south bump";
+	operating = 0;
 	pixel_y = -24
 	},
-/obj/structure/cable/blue,
 /turf/simulated/floor/tiled,
 /area/surface/outpost/main/gateway)
 "eZ" = (
@@ -2581,6 +2547,7 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/item/taperoll/engineering/applied,
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/main/gateway)
 "fC" = (
@@ -52333,9 +52300,9 @@ al
 al
 bo
 bL
-cl
+dp
 cM
-dn
+dp
 dR
 eq
 eV
@@ -52590,9 +52557,9 @@ al
 al
 bp
 bM
-cm
+dp
 cN
-do
+dp
 dR
 er
 eW
@@ -52847,7 +52814,7 @@ al
 al
 bo
 bN
-cn
+dp
 cO
 dp
 dR

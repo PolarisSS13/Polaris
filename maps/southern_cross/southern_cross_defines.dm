@@ -81,7 +81,6 @@
 	usable_email_tlds = list("freemail.nt")
 	allowed_spawns = list(
 		"Arrivals Shuttle",
-		"Gateway",
 		"Checkpoint",
 		"Cryogenic Storage",
 		"Cyborg Storage"
