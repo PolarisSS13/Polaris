@@ -402,6 +402,9 @@
 	if((dir & NORTH) && !corner_piece)
 		plane = MOB_PLANE
 		layer = ABOVE_MOB_LAYER
+		MA = mutable_appearance(icon, icon_state = "o[icon_state]", layer = BELOW_MOB_LAYER, plane = MOB_PLANE, appearance_flags = KEEP_APART|RESET_COLOR)
+	else
+		MA = mutable_appearance(icon, icon_state = "o[icon_state]", appearance_flags = KEEP_APART|RESET_COLOR)
 	MA.color = padding_color
 	add_overlay(MA)
 
