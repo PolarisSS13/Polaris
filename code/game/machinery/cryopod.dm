@@ -299,7 +299,7 @@
 
 /obj/machinery/cryopod/robot/door/checkpoint
 	name = "automated checkpoint"
-	desc = "A reinforced, automated checkpoint tracking arrivals and departures from the outpost. Beyond this vault is untamed wilderness."
+	desc = "A reinforced, automated checkpoint tracking arrivals and departures from the outpost. Beyond this vault is a small airstrip, then nothing but untamed wilderness."
 	on_store_message = "has departed from the colony."
 	on_store_name = "Travel Oversight"
 	on_enter_occupant_message = "The checkpoint unseals and grinds open, and you step through."
