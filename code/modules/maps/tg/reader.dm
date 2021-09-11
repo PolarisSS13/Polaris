@@ -147,7 +147,7 @@ var/global/use_preloader = FALSE
 					if(xcrd > world.maxx)
 						if(cropMap)
 							break
-						else
+						else if(!measureOnly)
 							world.maxx = xcrd
 
 					if(xcrd >= 1)

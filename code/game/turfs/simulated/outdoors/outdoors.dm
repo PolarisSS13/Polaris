@@ -8,7 +8,7 @@ var/list/turf_edge_cache = list()
 	var/outdoors = OUTDOORS_AREA
 
 /area
-	// If a turf's `outdoors` variable is set to `OUTDOORS_AREA`, 
+	// If a turf's `outdoors` variable is set to `OUTDOORS_AREA`,
 	// it will decide if it's outdoors or not when being initialized based on this var.
 	var/outdoors = OUTDOORS_NO
 
@@ -125,7 +125,7 @@ var/list/turf_edge_cache = list()
 	edge_blending_priority = 1
 
 /turf/simulated/floor/outdoors/rocks/caves
-	outdoors = FALSE
+	outdoors = OUTDOORS_NO
 
 // This proc adds a 'layer' on top of the turf.
 /turf/simulated/floor/outdoors/proc/promote(var/new_turf_type)

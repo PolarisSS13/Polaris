@@ -28,7 +28,7 @@
 	name = "alarm"
 	desc = "Used to control various station atmospheric systems. The light indicates the current air status of the area."
 	icon = 'icons/obj/monitors.dmi'
-	icon_state = "alarm0"
+	icon_state = "alarm_0"
 	layer = ABOVE_WINDOW_LAYER
 	vis_flags = VIS_HIDE // They have an emissive that looks bad in openspace due to their wall-mounted nature
 	anchored = 1
@@ -39,6 +39,8 @@
 	req_one_access = list(access_atmospherics, access_engine_equip)
 	clicksound = "button"
 	clickvol = 30
+	blocks_emissive = NONE
+	light_power = 0.25
 	var/alarm_id = null
 	var/breach_detection = 1 // Whether to use automatic breach detection or not
 	var/frequency = 1439
@@ -101,6 +103,8 @@
 	TLV["temperature"] =	list(20, 40, 140, 160) // K
 	target_temperature = 90
 
+
+
 /obj/machinery/alarm/Initialize(mapload)
 	. = ..()
 	first_run()
@@ -131,6 +135,8 @@
 	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
+
+	update_icon()
 
 /obj/machinery/alarm/Initialize()
 	. = ..()
@@ -294,13 +300,16 @@
 	return 0
 
 /obj/machinery/alarm/update_icon()
+	cut_overlays()
 	if(panel_open)
 		icon_state = "alarmx"
 		set_light(0)
+		set_light_on(FALSE)
 		return
 	if((stat & (NOPOWER|BROKEN)) || shorted)
 		icon_state = "alarmp"
 		set_light(0)
+		set_light_on(FALSE)
 		return
 
 	var/icon_level = danger_level
@@ -310,16 +319,23 @@
 	var/new_color = null
 	switch(icon_level)
 		if(0)
-			icon_state = "alarm0"
+			icon_state = "alarm_0"
+			add_overlay(mutable_appearance(icon, "alarm_ov0"))
+			add_overlay(emissive_appearance(icon, "alarm_ov0"))
 			new_color = "#03A728"
 		if(1)
-			icon_state = "alarm2" //yes, alarm2 is yellow alarm
+			icon_state = "alarm_2" //yes, alarm2 is yellow alarm
+			add_overlay(mutable_appearance(icon, "alarm_ov2"))
+			add_overlay(emissive_appearance(icon, "alarm_ov2"))
 			new_color = "#EC8B2F"
 		if(2)
-			icon_state = "alarm1"
+			icon_state = "alarm_1"
+			add_overlay(mutable_appearance(icon, "alarm_ov1"))
+			add_overlay(emissive_appearance(icon, "alarm_ov1"))
 			new_color = "#DA0205"
 
 	set_light(l_range = 2, l_power = 0.25, l_color = new_color)
+	set_light_on(TRUE)
 
 /obj/machinery/alarm/receive_signal(datum/signal/signal)
 	if(stat & (NOPOWER|BROKEN))
