@@ -4,7 +4,7 @@
 /obj/machinery/light_switch
 	name = "light switch"
 	desc = "It turns lights on and off. What are you, simple?"
-	icon = 'icons/obj/power_vr.dmi' // VOREStation Edit
+	icon = 'icons/obj/power.dmi'
 	icon_state = "light1"
 	layer = ABOVE_WINDOW_LAYER
 	anchored = 1.0
@@ -61,7 +61,7 @@
 
 	area.lightswitch = on
 	area.updateicon()
-	playsound(src, 'sound/machines/button.ogg', 100, 1, 0) // VOREStation Edit
+	playsound(src, 'sound/machines/button.ogg', 100, 1, 0)
 
 	for(var/obj/machinery/light_switch/L in area)
 		L.on = on

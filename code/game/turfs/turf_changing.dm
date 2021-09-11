@@ -98,7 +98,7 @@
 
 	dangerous_objects = old_dangerous_objects
 
-lighting_corner_NE = old_lighting_corner_NE
+	lighting_corner_NE = old_lighting_corner_NE
 	lighting_corner_SE = old_lighting_corner_SE
 	lighting_corner_SW = old_lighting_corner_SW
 	lighting_corner_NW = old_lighting_corner_NW

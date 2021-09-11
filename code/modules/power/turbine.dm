@@ -271,7 +271,7 @@
 
 	// If it works, put an overlay that it works!
 	if(lastgen > 100)
-		dd_overlay(image('icons/obj/pipes.dmi', "turb-o", FLY_LAYER))
+		add_overlay(image('icons/obj/pipes.dmi', "turb-o", FLY_LAYER))
 
 	updateDialog()
 

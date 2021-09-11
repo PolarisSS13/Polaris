@@ -29,7 +29,6 @@
 /obj/structure/tanning_rack/update_icon()
 	cut_overlays()
 	if(drying)
-		var/image/I
 		if(drying.wetness)
 			add_overlay("leather_wet")
 		else
