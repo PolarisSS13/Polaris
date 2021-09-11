@@ -288,7 +288,7 @@
 	name = "Lithium-6"
 	id = "lithium6"
 	description = "An isotope of lithium. It has 3 neutrons, but shares all chemical characteristics with regular lithium."
-	
+
 /datum/reagent/helium/helium3
 	name = "Helium-3"
 	id = "helium3"
@@ -317,11 +317,11 @@
 /datum/reagent/supermatter/affect_ingest(mob/living/carbon/M, alien, removed)
 	. = ..()
 	M.ash()
-	
+
 /datum/reagent/supermatter/affect_blood(mob/living/carbon/M, alien, removed)
 	. = ..()
 	M.ash()
-	
+
 
 /datum/reagent/adrenaline
 	name = "Adrenaline"
@@ -408,7 +408,7 @@
 		if(istype(T, /turf/simulated/wall))
 			var/turf/simulated/wall/W = T
 			W.thermite = 1
-			W.overlays += image('icons/effects/effects.dmi',icon_state = "#673910")
+			W.add_overlay(image('icons/effects/effects.dmi',icon_state = "#673910")) //Yeeah that's definitely not an icon is it
 			remove_self(5)
 	return
 

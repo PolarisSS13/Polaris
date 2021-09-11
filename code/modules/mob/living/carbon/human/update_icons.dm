@@ -193,7 +193,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		else
 			DI = damage_icon_parts[cache_index]
 
-		standing_image.overlays += DI
+		standing_image.add_overlay(DI)
 
 	overlays_standing[MOB_DAM_LAYER]	= standing_image
 	apply_layer(MOB_DAM_LAYER)
@@ -460,10 +460,17 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		face_standing += rgb(,,,120)
 
 	var/icon/ears_s = get_ears_overlay()
+	var/image/em_block_ears
 	if(ears_s)
 		face_standing.Blend(ears_s, ICON_OVERLAY)
+		if(ear_style?.em_block)
+			em_block_ears = em_block_image_generic(image(ears_s))
 
-	overlays_standing[HAIR_LAYER] = image(face_standing, layer = BODY_LAYER+HAIR_LAYER, "pixel_y" = head_organ.head_offset)
+	var/image/semifinal = image(face_standing, layer = BODY_LAYER+HAIR_LAYER, "pixel_y" = head_organ.head_offset)
+	if(em_block_ears)
+		semifinal.overlays += em_block_ears // Leaving this as overlays +=
+
+	overlays_standing[HAIR_LAYER] = semifinal
 	apply_layer(HAIR_LAYER)
 	return
 
@@ -1095,7 +1102,9 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	if(synthetic && synthetic.includes_wing && !wing_style)
 		var/icon/wing_s = new/icon("icon" = synthetic.icon, "icon_state" = "wing") //I dunno. If synths have some custom wing?
 		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
-		return image(wing_s)
+		var/image/working = image(wing_s)
+		working.overlays += em_block_image_generic(working) // Leaving this as overlays +=
+		return working
 
 	//If you have custom wings selected
 	if(wing_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
@@ -1118,7 +1127,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				overlay.Blend(rgb(src.r_wing3, src.g_wing3, src.b_wing3), wing_style.color_blend_mode)
 				wing_s.Blend(overlay, ICON_OVERLAY)
 				qdel(overlay)
-		return image(wing_s)
+		var/image/working = image(wing_s)
+		if(wing_style.em_block)
+			working.overlays += em_block_image_generic(working) // Leaving this as overlays +=
+		return working
 
 /mob/living/carbon/human/proc/get_ears_overlay()
 	if(ear_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
@@ -1176,15 +1188,20 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				tail_s.Blend(overlay, ICON_OVERLAY)
 				qdel(overlay)
 
+		var/image/working = image(tail_s)
+		if(tail_style.em_block)
+			working.overlays += em_block_image_generic(working) // Leaving this as overlays +=
+
 		if(istaurtail(tail_style))
 			var/datum/sprite_accessory/tail/taur/taurtype = tail_style
+			working.pixel_x = -16
 			if(taurtype.can_ride && !riding_datum)
 				riding_datum = new /datum/riding/taur(src)
 				verbs |= /mob/living/carbon/human/proc/taur_mount
 				verbs |= /mob/living/proc/toggle_rider_reins
-			return image(tail_s, "pixel_x" = -16)
+			return working
 		else
-			return image(tail_s)
+			return working
 	return null
 
 // TODO - Move this to where it should go ~Leshana

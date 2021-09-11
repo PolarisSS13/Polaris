@@ -159,10 +159,10 @@
 		I = getFlatIcon(src, defdir = SOUTH, no_anim = TRUE)
 		set_cached_examine_icon(src, I, 200 SECONDS)
 	return I
-	
+
 /mob/observer/dead/examine(mob/user)
 	. = ..()
-	
+
 	if(is_admin(user))
 		. += "\t><span class='admin'>[ADMIN_FULLMONTY(src)]</span>"
 
@@ -334,7 +334,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/area/A as anything in areas)
 		if(A.z in using_map?.secret_levels)
 			areas -= A
-	return areas				
+	return areas
 
 /mob/observer/dead/proc/jumpable_mobs()
 	var/list/mobs = getmobs()
@@ -360,7 +360,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		A = input(usr, "Select an area:", "Ghost Teleport") as null|anything in jumpable_areas()
 	if(!A)
 		return
-	
+
 	usr.forceMove(pick(get_area_turfs(A)))
 	usr.on_mob_jump()
 
@@ -373,7 +373,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		input = input(usr, "Select a mob:", "Ghost Follow") as null|anything in jumpable_mobs()
 	if(!input)
 		return
-	
+
 	var/target = jumpable_mobs()[input]
 	if(!target) return
 	ManualFollow(target)
@@ -897,7 +897,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 		if(choice)
 			icon = 'icons/mob/ghost.dmi'
-			overlays.Cut()
+			cut_overlays()
 
 			if(icon_state && icon)
 				previous_state = icon_state
@@ -920,16 +920,16 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Blank pAI alert"
 	set desc = "Flash an indicator light on available blank pAI devices for a smidgen of hope."
-	
+
 	if(usr.client.prefs?.be_special & BE_PAI)
 		var/count = 0
 		for(var/obj/item/device/paicard/p in all_pai_cards)
 			var/obj/item/device/paicard/PP = p
 			if(PP.pai == null)
 				count++
-				PP.overlays += "pai-ghostalert"
+				PP.add_overlay("pai-ghostalert")
 				spawn(54)
-					PP.overlays.Cut()
+					PP.cut_overlays()
 		to_chat(usr,"<span class='notice'>Flashing the displays of [count] unoccupied PAIs.</span>")
 	else
 		to_chat(usr,"<span class='warning'>You have 'Be pAI' disabled in your character prefs, so we can't help you.</span>")

@@ -606,6 +606,7 @@
 	light_range = 4
 	light_power = 5
 	light_color = "#FF0000"
+	light_on = TRUE
 	pulses_remaining = 10
 	pulse_delay = 1 SECOND
 
@@ -627,6 +628,7 @@
 	aspect = ASPECT_UNHOLY
 	light_color = "#FF5C5C"
 	light_power = -2
+	light_on = TRUE
 
 /obj/item/weapon/spell/construct/mend_occult/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)
 	if(isliving(hit_atom))
@@ -643,6 +645,7 @@
 	aspect = ASPECT_UNHOLY
 	light_color = "#FF5C5C"
 	light_power = -2
+	light_on = TRUE
 	cooldown = 15
 
 /obj/item/weapon/spell/construct/slam/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)

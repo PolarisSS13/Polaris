@@ -13,6 +13,7 @@
 	layer = DOOR_OPEN_LAYER
 	var/open_layer = DOOR_OPEN_LAYER
 	var/closed_layer = DOOR_CLOSED_LAYER
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 
 	var/visible = 1
 	var/p_open = 0

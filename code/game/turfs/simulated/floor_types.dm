@@ -215,10 +215,12 @@
 	light_power = 0.6
 	light_color = "#66ffff" // Bright cyan.
 	block_tele = TRUE
+	light_on = TRUE
 
 /turf/simulated/shuttle/floor/alien/Initialize()
 	. = ..()
 	icon_state = "alienpod[rand(1, 9)]"
+	update_light()
 
 /turf/simulated/shuttle/floor/alienplating
 	icon_state = "alienplating"

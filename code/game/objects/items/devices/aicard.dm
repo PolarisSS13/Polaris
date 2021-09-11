@@ -83,14 +83,14 @@
 			if(carded_ai.control_disabled && carded_ai.deployed_shell)
 				carded_ai.disconnect_shell("Disconnecting from remote shell due to [src] wireless access interface being disabled.")
 			update_icon()
-	
+
 	return TRUE
 
 /obj/item/device/aicard/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(carded_ai)
 		if (!carded_ai.control_disabled)
-			overlays += image('icons/obj/pda.dmi', "aicard-on")
+			add_overlay("aicard-on")
 		if(carded_ai.stat)
 			icon_state = "aicard-404"
 		else

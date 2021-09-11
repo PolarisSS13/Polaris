@@ -126,7 +126,7 @@
 
 	if(path_display)
 		var/turf/T = src.path[1]
-		T.overlays -= path_overlay
+		T.cut_overlay(path_overlay)
 
 //	step_towards(holder, src.path[1])
 	if(holder.IMove(get_step_towards(holder, src.path[1])) != MOVEMENT_ON_COOLDOWN)
@@ -164,13 +164,13 @@
 	// No target, don't use the ladder
 	// Target is visible, don't use the ladder
 	if(!target || can_see_target(target))
-		return 
+		return
 
 	var/has_hands = TRUE
 	if(istype(holder, /mob/living/simple_mob))
 		var/mob/living/simple_mob/S = holder
 		has_hands = S.has_hands
-	
+
 	// Don't have means to use a ladder or the space around it, don't use the ladder
 	if(!has_hands && !holder.hovering)
 		return
@@ -178,7 +178,7 @@
 	var/obj/structure/ladder/L = locate() in get_turf(holder)
 	if(!istype(L))
 		return // No ladder, can't use it
-	
+
 	if(!holder.may_climb_ladders(L))
 		return // Can't climb the ladder for other reasons (Probably inconsequential?)
 
@@ -187,6 +187,6 @@
 		directions += L.target_down
 	if(L.allowed_directions & UP)
 		directions += L.target_up
-	
+
 	if(directions.len)
 		L.climbLadder(holder, pick(directions))

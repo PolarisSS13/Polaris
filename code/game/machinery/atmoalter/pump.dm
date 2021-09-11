@@ -29,7 +29,7 @@
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
 
 /obj/machinery/portable_atmospherics/powered/pump/update_icon()
-	src.overlays = 0
+	cut_overlays()
 
 	if(on && cell && cell.charge)
 		icon_state = "psiphon:1"
@@ -37,10 +37,10 @@
 		icon_state = "psiphon:0"
 
 	if(holding)
-		overlays += "siphon-open"
+		add_overlay("siphon-open")
 
 	if(connected_port)
-		overlays += "siphon-connector"
+		add_overlay("siphon-connector")
 
 	return
 
@@ -141,7 +141,7 @@
 	data["default_pressure"] = round(initial(target_pressure))
 	data["min_pressure"] = round(pressuremin)
 	data["max_pressure"] = round(pressuremax)
-	
+
 	data["powerDraw"] = round(last_power_draw)
 	data["cellCharge"] = cell ? cell.charge : 0
 	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
@@ -152,7 +152,7 @@
 		data["holding"]["pressure"] = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0)
 	else
 		data["holding"] = null
-	
+
 	return data
 
 /obj/machinery/portable_atmospherics/powered/pump/tgui_act(action, params)

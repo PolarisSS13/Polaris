@@ -92,6 +92,7 @@ Class Procs:
 	icon = 'icons/obj/stationobjs.dmi'
 	w_class = ITEMSIZE_NO_CONTAINER
 	layer = UNDER_JUNK_LAYER
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 
 	var/stat = 0
 	var/emagged = 0

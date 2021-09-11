@@ -39,6 +39,9 @@
 	// Ckey of person allowed to use this, if defined.
 	var/list/ckeys_allowed = null
 
+	/// Should this sprite block emissives?
+	var/em_block = FALSE
+
 /*
 ////////////////////////////
 /  =--------------------=  /
@@ -1449,6 +1452,8 @@ shaved
 	gender = NEUTER
 	species_allowed = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 */
+
+
 /datum/sprite_accessory/facial_hair/neck_fluff
 	name = "Neck Fluff"
 	icon = 'icons/mob/human_face_or_alt.dmi'
@@ -1540,6 +1545,7 @@ shaved
 /datum/sprite_accessory/facial_hair
 	icon = 'icons/mob/Human_face.dmi'
 	color_blend_mode = ICON_ADD
+	em_block = TRUE
 
 /datum/sprite_accessory/facial_hair/shaved
 	name = "Shaved"

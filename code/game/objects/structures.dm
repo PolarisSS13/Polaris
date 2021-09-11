@@ -1,6 +1,7 @@
 /obj/structure
 	icon = 'icons/obj/structures.dmi'
 	w_class = ITEMSIZE_NO_CONTAINER
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 
 	var/climbable
 	var/climb_delay = 3.5 SECONDS
@@ -8,7 +9,7 @@
 	var/parts
 	var/list/climbers = list()
 	var/block_turf_edges = FALSE // If true, turf edge icons will not be made on the turf this occupies.
-	
+
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
 	var/list/blend_objects = newlist() // Objects which to blend with

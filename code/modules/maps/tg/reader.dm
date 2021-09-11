@@ -215,7 +215,6 @@ var/global/use_preloader = FALSE
 										throw EXCEPTION("Undefined model key in DMM: [dmm_file], [key_list[i][j]]")
 									parse_grid(grid_models[key_list[i][j]], key_list[i][j], xcrd, ycrd, zcrd, no_afterchange, orientation)
 								#ifdef TESTING
-								else
 									++turfsSkipped
 								#endif
 								CHECK_TICK

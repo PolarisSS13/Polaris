@@ -44,6 +44,7 @@
 	idle_power_usage = 50		//when inactive, this turret takes up constant 50 Equipment power
 	active_power_usage = 300	//when active, this turret takes up constant 300 Equipment power
 	power_channel = EQUIP	//drains power from the EQUIPMENT channel
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 	req_one_access = list(access_security, access_heads)
 
 	var/raised = FALSE			//if the turret cover is "open" and the turret is raised

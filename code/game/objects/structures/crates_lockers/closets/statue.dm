@@ -5,6 +5,7 @@
 	icon_state = "human_male"
 	density = 1
 	anchored = 1
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 	health = 0 //destroying the statue kills the mob within
 	door_anim_time = 0 // Why is this a closet??
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock

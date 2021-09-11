@@ -58,8 +58,8 @@
 		. = B[STAT_ENTRY_COUNT] - A[STAT_ENTRY_COUNT]
 
 /proc/cmp_typepaths_asc(A, B)
-	return sorttext("[B]","[A]") 
-	
+	return sorttext("[B]","[A]")
+
 /**
  * Sorts crafting recipe requirements before the crafting recipe is inserted into GLOB.crafting_recipes
  *
@@ -78,3 +78,6 @@
 
 /proc/cmp_text_asc(a,b)
 	return sorttext(b,a)
+
+/proc/cmp_filter_data_priority(list/A, list/B)
+	return A["priority"] - B["priority"]
