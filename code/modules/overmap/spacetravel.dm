@@ -21,6 +21,8 @@
 	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
+	if(LAZYLEN(map_z) <= 1)
+		return 0
 	testing("Checking if sector at [map_z[1]] can die.")
 	for(var/mob/M in global.player_list)
 		if(M != observer && (M.z in map_z))
