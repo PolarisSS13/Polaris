@@ -5,7 +5,7 @@
 	known = 0
 	in_space = TRUE
 
-/obj/effect/overmap/visitable/sector/temporary/New(var/nx, var/ny)
+/obj/effect/overmap/visitable/sector/temporary/Initialize(var/nx, var/ny)
 	loc = locate(nx, ny, global.using_map.overmap_z)
 	x = nx
 	y = ny
@@ -13,6 +13,7 @@
 	map_z += emptyz
 	map_sectors["[emptyz]"] = src
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [emptyz].")
+	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 	for(var/zlevel in map_z)
@@ -21,14 +22,15 @@
 	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
-	if(LAZYLEN(map_z) <= 1)
-		return 0
+	if(!LAZYLEN(map_z))
+		log_and_message_admins("CANARY: [src] tried to check can_die, but map_z is `[map_z]`[map_z == null ? "(null)" : ""]")
+		return TRUE
 	testing("Checking if sector at [map_z[1]] can die.")
 	for(var/mob/M in global.player_list)
 		if(M != observer && (M.z in map_z))
 			testing("There are people on it.")
-			return 0
-	return 1
+			return FALSE
+	return TRUE
 
 /obj/effect/overmap/visitable/sector/temporary/cleanup()
 	if(can_die())
