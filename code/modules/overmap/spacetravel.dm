@@ -21,11 +21,11 @@
 	testing("Temporary sector at [x],[y] was destroyed, returning empty zlevel [map_z[1]] to map datum.")
 	return ..()
 
-/obj/effect/overmap/visitable/sector/temporary/proc/can_die(var/mob/observer)
+/obj/effect/overmap/visitable/sector/temporary/proc/is_empty(var/mob/observer)
 	if(!LAZYLEN(map_z))
-		log_and_message_admins("CANARY: [src] tried to check can_die, but map_z is `[map_z]`[map_z == null ? "(null)" : ""]")
+		log_and_message_admins("CANARY: [src] tried to check is_empty, but map_z is `[map_z || "null"]`")
 		return TRUE
-	testing("Checking if sector at [map_z[1]] can die.")
+	testing("Checking if sector at [map_z[1]] has no players.")
 	for(var/mob/M in global.player_list)
 		if(M != observer && (M.z in map_z))
 			testing("There are people on it.")
@@ -33,7 +33,7 @@
 	return TRUE
 
 /obj/effect/overmap/visitable/sector/temporary/cleanup()
-	if(can_die())
+	if(is_empty())
 		qdel(src)
 
 /proc/get_deepspace(x,y)
