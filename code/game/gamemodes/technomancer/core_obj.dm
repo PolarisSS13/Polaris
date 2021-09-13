@@ -142,6 +142,7 @@
 	var/ability_icon_state = null
 
 /obj/spellbutton/Initialize(var/ml, var/path, var/new_name, var/new_icon_state)
+	. = ..()
 	if(!path || !ispath(path))
 		message_admins("ERROR: /obj/spellbutton/Initialize() was not given a proper path!")
 		qdel(src)

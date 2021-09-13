@@ -18,6 +18,7 @@
 
 INITIALIZE_IMMEDIATE(/mob/zshadow)
 /mob/zshadow/Initialize(var/ml, var/mob/L)
+	. = ..()
 	if(!istype(L))
 		return INITIALIZE_HINT_QDEL
 	owner = L

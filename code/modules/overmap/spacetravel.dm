@@ -5,11 +5,16 @@
 	known = 0
 	in_space = TRUE
 
+<<<<<<< HEAD
 /obj/effect/overmap/visitable/sector/temporary/Initialize(var/nx, var/ny)
 	. = ..()
 	loc = locate(nx, ny, global.using_map.overmap_z)
 	x = nx
 	y = ny
+=======
+/obj/effect/overmap/visitable/sector/temporary/Initialize()
+	. = ..()
+>>>>>>> 8251838c57 (Trying to isolate init problems.)
 	var/emptyz = global.using_map.get_empty_zlevel()
 	map_z += emptyz
 	map_sectors["[emptyz]"] = src

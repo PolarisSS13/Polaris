@@ -124,14 +124,20 @@
 			var/mob/living/carbon/human/H = body
 			add_overlay(H.overlays_standing)
 
-	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	forceMove(T)
+	if(!T && length(latejoin))	
+		T = pick(latejoin)			//Safety in case we cannot find the body's position
+	if(T)
+		forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	real_name = name
 	animate(src, pixel_y = 2, time = 10, loop = -1)
-	..()
+
+	. = ..()
+
+	exonet = new(src)
+	init_exonet()
 
 /mob/observer/dead/Topic(href, href_list)
 	if (href_list["track"])

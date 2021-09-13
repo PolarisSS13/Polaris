@@ -8,9 +8,7 @@
 
 /obj/effect/expl_particles/Initialize()
 	. = ..()
-	spawn (15)
-		qdel(src)
-	return
+	QDEL_IN(src, 15)
 
 /datum/effect/system/expl_particles
 	var/number = 10
@@ -44,9 +42,7 @@
 
 /obj/effect/explosion/Initialize()
 	. = ..()
-	spawn (10)
-		qdel(src)
-	return
+	QDEL_IN(src, 10)
 
 /datum/effect/system/explosion
 	var/turf/location

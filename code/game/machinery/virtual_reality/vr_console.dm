@@ -179,6 +179,9 @@
 	return
 
 /obj/machinery/vr_sleeper/proc/go_out(var/forced = TRUE)
+	
+	set waitfor = FALSE
+	
 	if(!occupant)
 		return
 

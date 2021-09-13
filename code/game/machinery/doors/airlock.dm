@@ -1376,6 +1376,14 @@ About the new airlock wires panel:
 	return ..(M)
 
 /obj/machinery/door/airlock/Initialize(var/ml, var/obj/structure/door_assembly/assembly=null)
+
+	if(src.closeOtherId != null)
+		for (var/obj/machinery/door/airlock/A in machines)
+			if(A.closeOtherId == src.closeOtherId && A != src)
+				src.closeOther = A
+				break
+	name = "\improper [name]"
+	
 	. = ..()
 
 	//if assembly is given, create the new door from the assembly
@@ -1412,14 +1420,9 @@ About the new airlock wires panel:
 	else
 		wires = new/datum/wires/airlock(src)
 
-/obj/machinery/door/airlock/Initialize()
-	if(src.closeOtherId != null)
-		for (var/obj/machinery/door/airlock/A in machines)
-			if(A.closeOtherId == src.closeOtherId && A != src)
-				src.closeOther = A
-				break
-	name = "\improper [name]"
-	. = ..()
+	if(frequency)
+		set_frequency(frequency)
+	update_icon()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)

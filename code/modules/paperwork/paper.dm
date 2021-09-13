@@ -117,6 +117,9 @@
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
 	stamps = ""
+	addtimer(CALLBACK(src, .proc/update_info), 0)
+
+/obj/item/weapon/paper/proc/update_info()
 
 	if(name != "paper")
 		desc = "This is a paper titled '" + name + "'."
@@ -126,11 +129,9 @@
 		info = replacetext(info, "\n", "<BR>")
 		info = parsepencode(info)
 
-	spawn(2)
-		update_icon()
-		update_space(info)
-		updateinfolinks()
-		return
+	update_icon()
+	update_space(info)
+	updateinfolinks()
 
 /obj/item/weapon/paper/update_icon()
 	if(icon_state == "paper_talisman")

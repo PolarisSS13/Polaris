@@ -521,8 +521,8 @@ var/list/possible_cable_coil_colours = list(
 	charge_costs = list(1)
 
 /obj/item/stack/cable_coil/Initialize(var/ml, length = MAXCOIL, var/param_color = null)
-	..()
-	src.amount = length
+	. = ..()
+	amount = length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
 	pixel_x = rand(-2,2)
@@ -950,6 +950,7 @@ var/list/possible_cable_coil_colours = list(
 	toolspeed = 0.25
 
 /obj/item/stack/cable_coil/alien/Initialize(var/ml, length = MAXCOIL, var/param_color = null)		//There has to be a better way to do this.
+	. = ..()
 	if(embed_chance == -1)		//From /obj/item, don't want to do what the normal cable_coil does
 		if(sharp)
 			embed_chance = force/w_class

@@ -3,7 +3,7 @@
 	be less than 200 kPa above the ambient pressure to do this.  More pipes can be obtained from the pipe dispenser."
 
 /obj/machinery/atmospherics/pipe/Initialize() //This is needed or else 20+ lines of copypasta to dance around inheritence.
-	. = .()
+	. = ..()
 	description_info += "<br>Most pipes and atmospheric devices can be connected or disconnected with a wrench.  The pipe's pressure must not be too high, \
 	or if it is a device, it must be turned off first."
 

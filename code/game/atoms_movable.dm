@@ -413,6 +413,7 @@
 				src.throw_impact(A,speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
+	set waitfor = FALSE
 	if(!target || !src)
 		return 0
 	if(target.z != src.z)

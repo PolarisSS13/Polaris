@@ -310,7 +310,7 @@ var/global/list/light_type_cache = list()
 
 // create a new lighting fixture
 /obj/machinery/light/Initialize(var/ml, obj/machinery/light_construct/construct = null)
-	..(ml)
+	. = ..(ml)
 
 	if(construct)
 		start_with_cell = FALSE

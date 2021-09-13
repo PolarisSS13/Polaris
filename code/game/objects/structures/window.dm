@@ -385,7 +385,7 @@
 	return
 
 /obj/structure/window/Initialize(var/ml, start_dir=null, constructed=0)
-	..()
+	. = ..()
 
 	if (start_dir)
 		set_dir(start_dir)
@@ -403,6 +403,9 @@
 	update_nearby_tiles(need_rebuild=1)
 	update_nearby_icons()
 
+	for(var/obj/structure/table/T in view(src, 1))
+		T.update_connections()
+		T.update_icon()
 
 /obj/structure/window/Destroy()
 	density = 0
@@ -411,13 +414,21 @@
 	. = ..()
 	for(var/obj/structure/window/W in orange(location, 1))
 		W.update_icon()
+	for(var/obj/structure/table/T in view(location, 1))
+		T.update_connections()
+		T.update_icon()
 
 /obj/structure/window/Move()
 	var/ini_dir = dir
 	update_nearby_tiles(need_rebuild=1)
+	var/oldloc = loc
 	. = ..()
 	set_dir(ini_dir)
 	update_nearby_tiles(need_rebuild=1)
+	if(loc != oldloc)
+		for(var/obj/structure/table/T in view(oldloc, 1) | view(loc, 1))
+			T.update_connections()
+			T.update_icon()
 
 //checks if this window is full-tile one
 /obj/structure/window/proc/is_fulltile()

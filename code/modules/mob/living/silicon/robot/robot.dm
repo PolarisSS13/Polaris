@@ -145,7 +145,7 @@
 	else if(ispath(cell))
 		cell = new cell(src)
 
-	..()
+	. = ..()
 
 	if(cell)
 		var/datum/robot_component/cell_component = components["power cell"]

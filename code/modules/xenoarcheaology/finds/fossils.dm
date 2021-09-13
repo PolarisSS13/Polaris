@@ -17,6 +17,7 @@
 	)
 
 /obj/item/weapon/fossil/base/Initialize()
+	..()
 	var/t = pickweight(l)
 	new t(src.loc)
 	return INITIALIZE_HINT_QDEL

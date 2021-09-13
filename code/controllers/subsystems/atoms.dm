@@ -26,7 +26,8 @@ SUBSYSTEM_DEF(atoms)
 	InitializeAtoms()
 	return ..()
 
-/datum/controller/subsystem/atoms/proc/InitializeAtoms()
+/datum/controller/subsystem/atoms/proc/InitializeAtoms(var/list/supplied_atoms)
+
 	if(atom_init_stage <= INITIALIZATION_INSSATOMS_LATE)
 		return
 
@@ -35,21 +36,19 @@ SUBSYSTEM_DEF(atoms)
 	LAZYINITLIST(late_loaders)
 
 	var/list/mapload_arg = list(TRUE)
-
-	var/count = LAZYLEN(global.pre_init_created_atoms)
+	var/count = LAZYLEN(supplied_atoms)
 	if(count)
-		while(LAZYLEN(global.pre_init_created_atoms))
-			var/atom/A = global.pre_init_created_atoms[global.pre_init_created_atoms.len]
-			global.pre_init_created_atoms.len--
+		while(supplied_atoms.len)
+			var/atom/A = supplied_atoms[supplied_atoms.len]
+			supplied_atoms.len--
 			if(!A.initialized)
 				InitAtom(A, GetArguments(A, mapload_arg))
 				CHECK_TICK
-		UNSETEMPTY(global.pre_init_created_atoms)
+	else if(!subsystem_initialized)
+		// If wondering why not just store all atoms in a list and use the block above: that turns out unbearably expensive.
+		// Instead, atoms without extra arguments in New created on server start are fished out of world directly.
+		// We do this exactly once.
 
-	// If wondering why not just store all atoms in global.pre_init_created_atoms and use the block above: that turns out unbearably expensive.
-	// Instead, atoms without extra arguments in New created on server start are fished out of world directly.
-	// We do this exactly once.
-	if(!subsystem_initialized)
 		for(var/atom/A in world)
 			if(!A.initialized)
 				InitAtom(A, GetArguments(A, mapload_arg, FALSE))
@@ -68,6 +67,7 @@ SUBSYSTEM_DEF(atoms)
 		late_loaders.Cut()
 
 /datum/controller/subsystem/atoms/proc/InitAtom(atom/A, list/arguments)
+	LAZYREMOVE(global.pre_init_created_atoms, A)
 	var/the_type = A.type
 	if(QDELING(A))
 		BadInitializeCalls[the_type] |= BAD_INIT_QDEL_BEFORE

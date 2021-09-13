@@ -12,45 +12,34 @@
 	. = ..()
 	tag = text("landmark*[]", name)
 	invisibility = 101
-
 	switch(name)			//some of these are probably obsolete
 		if("monkey")
 			monkeystart += loc
 			delete_me = 1
-			return
 		if("start")
 			newplayer_start += loc
 			delete_me = 1
-			return
 		if("JoinLate") // Bit difference, since we need the spawn point to move.
 			latejoin += src
 			simulated = 1
-		//	delete_me = 1
-			return
 		if("JoinLateGateway")
 			latejoin_gateway += loc
 			delete_me = 1
-			return
 		if("JoinLateElevator")
 			latejoin_elevator += loc
 			delete_me = 1
-			return
 		if("JoinLateCheckpoint")
 			latejoin_checkpoint += loc
 			delete_me = 1
-			return
 		if("JoinLateCryo")
 			latejoin_cryo += loc
 			delete_me = 1
-			return
 		if("JoinLateCyborg")
 			latejoin_cyborg += loc
 			delete_me = 1
-			return
 		if("prisonwarp")
 			prisonwarp += loc
 			delete_me = 1
-			return
 		if("Holding Facility")
 			holdingfacility += loc
 		if("tdome1")
@@ -64,34 +53,26 @@
 		if("prisonsecuritywarp")
 			prisonsecuritywarp += loc
 			delete_me = 1
-			return
 		if("blobstart")
 			blobstart += loc
 			delete_me = 1
-			return
 		if("xeno_spawn")
 			xeno_spawn += loc
 			delete_me = 1
-			return
 		if("endgame_exit")
 			endgame_safespawns += loc
 			delete_me = 1
-			return
 		if("bluespacerift")
 			endgame_exits += loc
 			delete_me = 1
-			return
+
+	if(delete_me)
+		return INITIALIZE_HINT_QDEL
 
 	landmarks_list += src
-	return 1
 
 /obj/effect/landmark/proc/delete()
 	delete_me = 1
-
-/obj/effect/landmark/Initialize()
-	. = ..()
-	if(delete_me)
-		return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/Destroy(var/force = FALSE)
 	if(delete_me || force)
@@ -136,9 +117,10 @@
 //Costume spawner landmarks
 /obj/effect/landmark/costume/Initialize() //costume spawner, selects a random subclass and disappears
 	..()
-	var/list/options = typesof(/obj/effect/landmark/costume)
-	var/PICK= options[rand(1,options.len)]
-	new PICK(src.loc)
+	if(type == /obj/effect/landmark/costume)
+		var/list/options = subtypesof(/obj/effect/landmark/costume)
+		var/PICK = options[rand(1,options.len)]
+		new PICK(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
@@ -156,6 +138,7 @@
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/madscientist/Initialize()
+	..()
 	new /obj/item/clothing/under/gimmick/rank/captain/suit(src.loc)
 	new /obj/item/clothing/head/flatcap(src.loc)
 	new /obj/item/clothing/suit/storage/toggle/labcoat/mad(src.loc)

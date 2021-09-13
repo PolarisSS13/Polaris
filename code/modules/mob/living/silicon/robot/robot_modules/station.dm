@@ -54,10 +54,10 @@ var/global/list/robot_modules = list(
 	handle_shell(R)
 
 	if(R.radio)
-		R.radio.recalculateChannels()
+		addtimer(CALLBACK(R.radio, /obj/item/device/radio/proc/recalculateChannels), 0)
 
 	R.set_module_sprites(sprites)
-	R.choose_icon(R.module_sprites.len + 1, R.module_sprites)
+	addtimer(CALLBACK(R, /mob/living/silicon/robot/proc/choose_icon, R.module_sprites.len + 1, R.module_sprites), 0)
 
 	for(var/obj/item/I in modules)
 		I.canremove = 0

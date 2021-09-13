@@ -24,9 +24,9 @@
 	w_class = ITEMSIZE_SMALL
 
 /obj/item/weapon/strangerock/Initialize(var/ml, var/inside_item_type = 0)
+	. = ..()
 	pixel_x = rand(0,16)-8
 	pixel_y = rand(0,8)-8
-
 	if(inside_item_type)
 		new /obj/item/weapon/archaeological_find(src, inside_item_type)
 

@@ -34,8 +34,8 @@
 	set background = TRUE // avoid infinite loop warning; SS will still wait for us.
 	var/fail = FALSE
 	for(var/atom/atom in world)
-		if(!(atom.initialized))
-			log_bad("Uninitialized atom: [atom.log_info_line()]")
+		if(!atom.initialized && !QDELETED(atom)) // Not ideal to skip over qdeleted atoms, but a lot of current code uses pre-init qdels
+			log_bad("Uninitialized atom: [atom.type] - [atom.log_info_line()]")
 			fail = TRUE
 	if(fail)
 		fail("There were uninitialized atoms.")

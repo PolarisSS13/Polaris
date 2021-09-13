@@ -53,13 +53,12 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
 		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
 		SSatoms.InitAtom(src, args)
-		return
-
-	var/list/argument_list
-	if(length(args) > 1)
-		argument_list = args.Copy(2)
-	if(argument_list || do_initialize == INITIALIZATION_INSSATOMS_LATE)
-		LAZYSET(global.pre_init_created_atoms, src, argument_list)
+	else
+		var/list/argument_list
+		if(length(args) > 1)
+			argument_list = args.Copy(2)
+		if(length(argument_list))
+			LAZYSET(global.pre_init_created_atoms, src, argument_list)
 
 // Note: I removed "auto_init" feature (letting types disable auto-init) since it shouldn't be needed anymore.
 // 	You can replicate the same by checking the value of the first parameter to initialize() ~Leshana
@@ -71,6 +70,8 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 // Other parameters are passed from New (excluding loc), this does not happen if mapload is TRUE
 // Must return an Initialize hint. Defined in code/__defines/subsystems.dm
 /atom/proc/Initialize(mapload, ...)
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 	if(QDELETED(src))
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 	if(initialized)

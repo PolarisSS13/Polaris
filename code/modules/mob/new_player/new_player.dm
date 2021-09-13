@@ -417,7 +417,7 @@
 	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
 	if(character && character.client)
-		var/obj/screen/splash/Spl = new(character.client, TRUE)
+		var/obj/screen/splash/Spl = new(null, character.client, TRUE)
 		Spl.Fade(TRUE)
 
 	var/datum/job/J = SSjob.get_job(rank)

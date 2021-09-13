@@ -5,6 +5,7 @@
 	var/find_type = 0
 
 /obj/item/weapon/archaeological_find/Initialize(var/ml, var/new_item_type)
+	. = ..()
 	if(new_item_type)
 		find_type = new_item_type
 	else
