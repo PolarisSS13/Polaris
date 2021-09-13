@@ -22,8 +22,8 @@
 	var/base_icon = "bed"
 	var/applies_material_colour = 1 //Set to 0 whenever defining a custom colour or it will apply additively to the material, or when no colour overlay should be present.
 
-/obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
-	..(newloc)
+/obj/structure/bed/Initialize(var/ml, var/new_material, var/new_padding_material)
+	. = ..(ml)
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(new_material)
@@ -173,19 +173,19 @@
 	icon_state = "psychbed"
 	base_icon = "psychbed"
 
-/obj/structure/bed/psych/New(var/newloc)
-	..(newloc,"wood","leather")
+/obj/structure/bed/psych/Initialize(var/ml)
+	. = ..(ml, MAT_WOOD, MAT_LEATHER)
 
-/obj/structure/bed/padded/New(var/newloc)
-	..(newloc,"plastic","cotton")
+/obj/structure/bed/padded/Initialize(var/ml)
+	. = ..(ml, MAT_PLASTIC, MAT_CLOTH)
 
 /obj/structure/bed/double
 	name = "double bed"
 	icon_state = "doublebed"
 	base_icon = "doublebed"
 
-/obj/structure/bed/double/padded/New(var/newloc)
-	..(newloc,"wood","cotton")
+/obj/structure/bed/double/padded/Initialize(var/ml)
+	. = ..(ml, MAT_WOOD, MAT_CLOTH)
 
 /obj/structure/bed/double/post_buckle_mob(mob/living/M as mob)
 	if(M.buckled == src)

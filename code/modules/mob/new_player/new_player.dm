@@ -17,8 +17,8 @@
 
 	anchored = 1	//  don't get pushed around
 
-/mob/new_player/New() // Use New() for adding to the list as Initialize() on atoms is deferred during world init.
-	..()
+/mob/new_player/Initialize()
+	. = ..()
 	mob_list += src
 
 /mob/new_player/verb/new_player_panel()

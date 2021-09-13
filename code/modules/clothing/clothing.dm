@@ -254,12 +254,16 @@
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
-/obj/item/clothing/ears/offear/New(var/obj/O)
-		name = O.name
-		desc = O.desc
-		icon = O.icon
-		icon_state = O.icon_state
-		set_dir(O.dir)
+/obj/item/clothing/ears/offear/Initialize()
+	. = ..()
+	var/obj/O = loc
+	if(!istype(O))
+		return INITIALIZE_HINT_QDEL
+	name = O.name
+	desc = O.desc
+	icon = O.icon
+	icon_state = O.icon_state
+	set_dir(O.dir)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //Gloves

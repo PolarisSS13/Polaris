@@ -381,7 +381,7 @@
 	var/ticks = 0
 	var/target_strength = 0
 
-/obj/effect/alien/acid/New(loc, target)
+/obj/effect/alien/acid/Initialize(var/ml, target)
 	..(loc)
 	src.target = target
 

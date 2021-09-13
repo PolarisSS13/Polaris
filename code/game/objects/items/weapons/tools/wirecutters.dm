@@ -97,8 +97,8 @@
 	random_color = FALSE
 	var/obj/item/weapon/tool/crowbar/power/counterpart = null
 
-/obj/item/weapon/tool/wirecutters/power/New(newloc, no_counterpart = TRUE)
-	..(newloc)
+/obj/item/weapon/tool/wirecutters/power/Initialize(var/ml, no_counterpart = TRUE)
+	. = ..(ml)
 	if(!counterpart && no_counterpart)
 		counterpart = new(src, FALSE)
 		counterpart.counterpart = src

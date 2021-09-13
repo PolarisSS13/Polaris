@@ -622,8 +622,9 @@
 	plane = PLANE_PLAYER_HUD_ABOVE
 	var/client/holder
 
-/obj/screen/splash/New(client/C, visible)
-	. = ..()
+INITIALIZE_IMMEDIATE(/obj/screen/splash)
+/obj/screen/splash/Initialize(var/ml, client/C, visible)
+	. = ..(ml)
 
 	holder = C
 

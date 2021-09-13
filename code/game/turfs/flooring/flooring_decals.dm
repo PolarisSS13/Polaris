@@ -10,16 +10,13 @@ var/list/floor_decals = list()
 	layer = MAPPER_DECAL_LAYER
 	var/supplied_dir
 
-/obj/effect/floor_decal/New(var/newloc, var/newdir, var/newcolour)
-	supplied_dir = newdir
-	if(newcolour)
-		color = newcolour
-	..(newloc)
-
 // TODO: identify what is causing these atoms to be qdeleted in New()/Initialize()
 // somewhere in this chain. Alternatively repath to /obj/floor_decal or some other
 // abstract handler that explicitly doesn't invoke any obj behavior.
-/obj/effect/floor_decal/Initialize()
+/obj/effect/floor_decal/Initialize(var/ml, var/newdir, var/newcolour)
+	supplied_dir = newdir
+	if(newcolour)
+		color = newcolour
 	add_to_turf_decals()
 	initialized = TRUE
 	return INITIALIZE_HINT_QDEL

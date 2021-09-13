@@ -112,7 +112,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /obj/effect/statclick/ticket_list
 	var/current_state
 
-/obj/effect/statclick/ticket_list/New(loc, name, state)
+/obj/effect/statclick/ticket_list/Initialize(var/ml, name, state)
 	current_state = state
 	..()
 
@@ -501,7 +501,7 @@ GLOBAL_DATUM_INIT(ahelp_tickets, /datum/admin_help_tickets, new)
 /obj/effect/statclick/ahelp
 	var/datum/admin_help/ahelp_datum
 
-/obj/effect/statclick/ahelp/New(loc, datum/admin_help/AH)
+/obj/effect/statclick/ahelp/Initialize(var/ml, datum/admin_help/AH)
 	ahelp_datum = AH
 	..(loc)
 

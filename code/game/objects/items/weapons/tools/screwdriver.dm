@@ -124,8 +124,8 @@
 	random_color = FALSE
 	var/obj/item/weapon/tool/wrench/power/counterpart = null
 
-/obj/item/weapon/tool/screwdriver/power/New(newloc, no_counterpart = TRUE)
-	..(newloc)
+/obj/item/weapon/tool/screwdriver/power/Initialize(var/ml, no_counterpart = TRUE)
+	. = ..()
 	if(!counterpart && no_counterpart)
 		counterpart = new(src, FALSE)
 		counterpart.counterpart = src

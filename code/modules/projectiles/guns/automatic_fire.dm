@@ -14,7 +14,7 @@
 	var/active = 0//Just tells us that it was clicked on so we should start shooting
 	var/delay_del = 0//Delays the del if we retarget without shooting
 
-/obj/screen/auto_target/New(loc, var/obj/item/weapon/gun/G)
+/obj/screen/auto_target/Initialize(var/ml, var/obj/item/weapon/gun/G)
 		..()
 		gun = G
 		var/image/I = image('icons/effects/Targeted.dmi', src, "locked")

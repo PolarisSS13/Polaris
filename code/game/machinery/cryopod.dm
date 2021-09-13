@@ -307,7 +307,7 @@
 	on_store_visible_message_2 = "passes through it."
 	time_till_despawn = 10 // 1 second, because math
 
-/obj/machinery/cryopod/Initialize
+/obj/machinery/cryopod/Initialize()
 	. = ..()
 	announce = new /obj/item/device/radio/intercom(src)
 

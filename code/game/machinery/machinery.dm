@@ -114,8 +114,8 @@ Class Procs:
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
-/obj/machinery/New(l, d=0)
-	..(l)
+/obj/machinery/Initialize(var/ml, d=0)
+	. = ..()
 	if(d)
 		set_dir(d)
 	if(ispath(circuit))

@@ -580,9 +580,9 @@
 /obj/item/weapon/shockpaddles/linked
 	var/obj/item/device/defib_kit/base_unit
 
-/obj/item/weapon/shockpaddles/linked/New(newloc, obj/item/device/defib_kit/defib)
+/obj/item/weapon/shockpaddles/linked/Initialize(var/ml, obj/item/device/defib_kit/defib)
 	base_unit = defib
-	..(newloc)
+	. = ..()
 
 /obj/item/weapon/shockpaddles/linked/Destroy()
 	if(base_unit)

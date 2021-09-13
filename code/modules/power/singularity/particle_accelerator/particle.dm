@@ -33,7 +33,7 @@
 	movement_range = 25
 	energy = 50
 
-/obj/effect/accelerated_particle/New(loc, dir = 2)
+/obj/effect/accelerated_particle/Initialize(var/ml, dir = 2)
 	src.loc = loc
 	src.set_dir(dir)
 	spawn(0)

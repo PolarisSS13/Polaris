@@ -90,9 +90,13 @@
 
 	var/current_pda_messaging = null
 
-/mob/living/silicon/pai/New(var/obj/item/device/paicard)
-	src.loc = paicard
-	card = paicard
+/mob/living/silicon/pai/Initialize()
+
+	card = loc
+	if(!istype(card))
+		initialized = TRUE
+		return INITIALIZE_HINT_QDEL
+
 	sradio = new(src)
 	communicator = new(src)
 	if(card)

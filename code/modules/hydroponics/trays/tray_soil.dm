@@ -40,8 +40,8 @@
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed)
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize(var/ml, var/datum/seed/newseed)
+	. = ..(ml)
 	seed = newseed
 	dead = 0
 	age = 1

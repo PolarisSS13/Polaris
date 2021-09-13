@@ -22,7 +22,7 @@
 	icon_modifier = "grey_"
 	icon_state = "grey_railing0"
 
-/obj/structure/railing/New(loc, constructed = 0)
+/obj/structure/railing/Initialize(var/ml, constructed = 0)
 	..()
 	// TODO - "constructed" is not passed to us. We need to find a way to do this safely.
 	if (constructed) // player-constructed railings

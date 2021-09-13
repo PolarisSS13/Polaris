@@ -9,8 +9,8 @@
 
 	var/do_rotation = TRUE
 
-/obj/item/weapon/broken_gun/New(var/newloc, var/path)
-	..()
+/obj/item/weapon/broken_gun/Initialize(var/ml, var/path)
+	. = ..(ml)
 	if(path)
 		if(!setup_gun(path))
 			qdel(src)

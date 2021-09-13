@@ -20,9 +20,9 @@
 	var/mob/living/host = null
 	var/spell_power_at_creation = 1.0 // This is here because the spell object that made this object probably won't exist.
 
-/obj/item/weapon/inserted_spell/New(var/newloc, var/user, var/obj/item/weapon/spell/insert/inserter)
-	..(newloc)
-	host = newloc
+/obj/item/weapon/inserted_spell/Initialize(var/ml, var/user, var/obj/item/weapon/spell/insert/inserter)
+	. = ..()
+	host = loc
 	origin = user
 	if(light_color)
 		spawn(1)

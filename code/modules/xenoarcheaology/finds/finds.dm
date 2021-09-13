@@ -23,7 +23,7 @@
 	origin_tech = list(TECH_MATERIAL = 5)
 	w_class = ITEMSIZE_SMALL
 
-/obj/item/weapon/strangerock/New(loc, var/inside_item_type = 0)
+/obj/item/weapon/strangerock/Initialize(var/ml, var/inside_item_type = 0)
 	pixel_x = rand(0,16)-8
 	pixel_y = rand(0,8)-8
 

@@ -12,8 +12,8 @@
 /obj/item/robot_parts/set_dir()
 	return
 
-/obj/item/robot_parts/New(var/newloc, var/model)
-	..(newloc)
+/obj/item/robot_parts/Initialize(var/ml, var/model)
+	. = ..(ml)
 
 /obj/item/robot_parts/l_arm
 	name = "cyborg left arm"

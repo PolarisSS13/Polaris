@@ -9,17 +9,12 @@
 	var/obj/item/weapon/extinguisher/has_extinguisher
 	var/opened = 0
 
-/obj/structure/extinguisher_cabinet/New(var/loc, var/dir, var/building = 0)
-	..()
-
+/obj/structure/extinguisher_cabinet/Initialize(var/ml, var/dir, var/building = 0)
+	. = ..()
 	if(building)
-		if(loc)
-			src.loc = loc
-
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -27 : 27)
 		pixel_y = (dir & 3)? (dir ==1 ? -27 : 27) : 0
 		update_icon()
-		return
 	else
 		has_extinguisher = new/obj/item/weapon/extinguisher(src)
 
