@@ -54,8 +54,8 @@
 	var/wight_check_index = 1
 	var/list/shadow_wights = list()
 
-/obj/item/weapon/vampiric/New()
-	..()
+/obj/item/weapon/vampiric/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/vampiric/process()
@@ -141,8 +141,8 @@
 	var/turf/target_turf
 	var/loc_last_process
 
-/obj/effect/decal/cleanable/blood/splatter/animated/New()
-	..()
+/obj/effect/decal/cleanable/blood/splatter/animated/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 	loc_last_process = src.loc
 

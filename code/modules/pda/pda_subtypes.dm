@@ -171,44 +171,44 @@
 	)
 	var/list/cartridges_to_send_to = list()
 
-/obj/item/device/pda/multicaster/command/New()
-	..()
+/obj/item/device/pda/multicaster/command/Initialize()
+	. = ..()
 	owner = "Command Department"
 	name = "Command Department (Relay)"
 	cartridges_to_send_to = command_cartridges
 
-/obj/item/device/pda/multicaster/security/New()
-	..()
+/obj/item/device/pda/multicaster/security/Initialize()
+	. = ..()
 	owner = "Security Department"
 	name = "Security Department (Relay)"
 	cartridges_to_send_to = security_cartridges
 
-/obj/item/device/pda/multicaster/engineering/New()
-	..()
+/obj/item/device/pda/multicaster/engineering/Initialize()
+	. = ..()
 	owner = "Engineering Department"
 	name = "Engineering Department (Relay)"
 	cartridges_to_send_to = engineering_cartridges
 
-/obj/item/device/pda/multicaster/medical/New()
-	..()
+/obj/item/device/pda/multicaster/medical/Initialize()
+	. = ..()
 	owner = "Medical Department"
 	name = "Medical Department (Relay)"
 	cartridges_to_send_to = medical_cartridges
 
-/obj/item/device/pda/multicaster/research/New()
-	..()
+/obj/item/device/pda/multicaster/research/Initialize()
+	. = ..()
 	owner = "Research Department"
 	name = "Research Department (Relay)"
 	cartridges_to_send_to = research_cartridges
 
-/obj/item/device/pda/multicaster/cargo/New()
-	..()
+/obj/item/device/pda/multicaster/cargo/Initialize()
+	. = ..()
 	owner = "Cargo Department"
 	name = "Cargo Department (Relay)"
 	cartridges_to_send_to = cargo_cartridges
 
-/obj/item/device/pda/multicaster/civilian/New()
-	..()
+/obj/item/device/pda/multicaster/civilian/Initialize()
+	. = ..()
 	owner = "Civilian Services Department"
 	name = "Civilian Services Department (Relay)"
 	cartridges_to_send_to = civilian_cartridges
@@ -230,8 +230,8 @@
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-/obj/item/weapon/storage/box/PDAs/New()
-	..()
+/obj/item/weapon/storage/box/PDAs/Initialize()
+	. = ..()
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)

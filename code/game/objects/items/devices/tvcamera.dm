@@ -9,8 +9,8 @@
 	var/obj/machinery/camera/network/thunder/camera
 	var/obj/item/device/radio/radio
 
-/obj/item/device/tvcamera/New()
-	..()
+/obj/item/device/tvcamera/Initialize()
+	. = ..()
 	listening_objects += src
 
 /obj/item/device/tvcamera/Destroy()

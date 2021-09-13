@@ -36,8 +36,8 @@
 	var/list/wards_in_use = list()	// Wards don't count against the cap for other summons.
 	var/max_summons = 10			// Maximum allowed summoned entities.  Some cores will have different caps.
 
-/obj/item/weapon/technomancer_core/New()
-	..()
+/obj/item/weapon/technomancer_core/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/technomancer_core/Destroy()

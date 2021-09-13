@@ -465,8 +465,8 @@
 	on = 1 //Bio-luminesence has one setting, on.
 	power_use = 0
 
-/obj/item/device/flashlight/slime/New()
-	..()
+/obj/item/device/flashlight/slime/Initialize()
+	. = ..()
 	set_light(brightness_on, flashlight_power, flashlight_colour)
 
 /obj/item/device/flashlight/slime/update_icon()

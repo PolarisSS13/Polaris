@@ -56,8 +56,8 @@
 	hardware_size = 1
 	battery_rating = 30000
 
-/obj/item/weapon/computer_hardware/battery_module/lambda/New()
-	..()
+/obj/item/weapon/computer_hardware/battery_module/lambda/Initialize()
+	. = ..()
 	battery = new/obj/item/weapon/cell/infinite(src)
 
 /obj/item/weapon/computer_hardware/battery_module/diagnostics(var/mob/user)

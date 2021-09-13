@@ -16,8 +16,8 @@
 
 	clicksound = "keyboard"
 
-/obj/machinery/computer/New()
-	..()
+/obj/machinery/computer/Initialize()
+	. = ..()
 
 /obj/machinery/computer/Initialize()
 	. = ..()

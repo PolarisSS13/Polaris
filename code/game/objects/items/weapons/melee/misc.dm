@@ -23,8 +23,8 @@
 	w_class = ITEMSIZE_NORMAL
 	var/open = FALSE
 
-/obj/item/weapon/melee/umbrella/New()
-	..()
+/obj/item/weapon/melee/umbrella/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/weapon/melee/umbrella/attack_self()

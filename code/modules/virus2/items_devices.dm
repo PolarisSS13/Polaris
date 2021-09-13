@@ -47,8 +47,8 @@
 /obj/item/weapon/virusdish/random
 	name = "virus sample"
 
-/obj/item/weapon/virusdish/random/New()
-	..()
+/obj/item/weapon/virusdish/random/Initialize()
+	. = ..()
 	src.virus2 = new /datum/disease2/disease
 	src.virus2.makerandom()
 	growth = rand(5, 50)

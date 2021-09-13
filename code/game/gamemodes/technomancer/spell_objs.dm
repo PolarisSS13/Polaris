@@ -110,8 +110,8 @@
 // Proc: New()
 // Parameters: 0
 // Description: Sets owner to equal its loc, links to the owner's core, then applies overlays if needed.
-/obj/item/weapon/spell/New()
-	..()
+/obj/item/weapon/spell/Initialize()
+	. = ..()
 	if(isliving(loc))
 		owner = loc
 	if(owner)

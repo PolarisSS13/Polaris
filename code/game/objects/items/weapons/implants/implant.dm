@@ -372,8 +372,8 @@ Can only be loaded while still in its original case.<BR>
 the implant may become unstable and either pre-maturely inject the subject or simply break."}
 	return dat
 
-/obj/item/weapon/implant/chem/New()
-	..()
+/obj/item/weapon/implant/chem/Initialize()
+	. = ..()
 	var/datum/reagents/R = new/datum/reagents(50)
 	reagents = R
 	R.my_atom = src

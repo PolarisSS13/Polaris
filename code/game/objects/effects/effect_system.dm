@@ -97,8 +97,8 @@ steam.start() -- spawns the effect
 	anchored = 1.0
 	mouse_opacity = 0
 
-/obj/effect/effect/sparks/New()
-	..()
+/obj/effect/effect/sparks/Initialize()
+	. = ..()
 	playsound(src, "sparks", 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
@@ -177,8 +177,8 @@ steam.start() -- spawns the effect
 	pixel_x = -32
 	pixel_y = -32
 
-/obj/effect/effect/smoke/New()
-	..()
+/obj/effect/effect/smoke/Initialize()
+	. = ..()
 	if(time_to_live)
 		spawn (time_to_live)
 			if(!QDELETED(src))

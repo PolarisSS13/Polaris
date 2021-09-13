@@ -178,8 +178,8 @@
 		ability_master.toggle_open(1)
 		client.screen -= ability_master
 
-/mob/New()
-	..()
+/mob/Initialize()
+	. = ..()
 	ability_master = new /obj/screen/movable/ability_master(src)
 
 ///////////ACTUAL ABILITIES////////////

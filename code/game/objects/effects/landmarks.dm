@@ -8,8 +8,8 @@
 	invisibility = 100
 	var/delete_me = 0
 
-/obj/effect/landmark/New()
-	..()
+/obj/effect/landmark/Initialize()
+	. = ..()
 	tag = text("landmark*[]", name)
 	invisibility = 101
 
@@ -105,8 +105,8 @@
 	icon_state = "x"
 	anchored = 1.0
 
-/obj/effect/landmark/start/New()
-	..()
+/obj/effect/landmark/start/Initialize()
+	. = ..()
 	tag = "start*[name]"
 	invisibility = 101
 
@@ -128,8 +128,8 @@
 	icon_state = "x"
 	anchored = 1.0
 
-/obj/effect/landmark/virtual_reality/New()
-	..()
+/obj/effect/landmark/virtual_reality/Initialize()
+	. = ..()
 	tag = "virtual_reality*[name]"
 	invisibility = 101
 	return 1

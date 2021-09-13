@@ -290,8 +290,8 @@
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_MATERIAL = 3, TECH_DATA = 4)
 	ghost_query_type = /datum/ghost_query/drone_brain
 
-/obj/item/device/mmi/digital/robot/New()
-	..()
+/obj/item/device/mmi/digital/robot/Initialize()
+	. = ..()
 	src.brainmob.name = "[pick(list("ADA","DOS","GNU","MAC","WIN","NJS","SKS","DRD","IOS","CRM","IBM","TEX","LVM","BSD",))]-[rand(1000, 9999)]"
 	src.brainmob.real_name = src.brainmob.name
 
@@ -333,8 +333,8 @@
 	..()
 	icon_state = "posibrain"
 
-/obj/item/device/mmi/digital/posibrain/New()
-	..()
+/obj/item/device/mmi/digital/posibrain/Initialize()
+	. = ..()
 	src.brainmob.name = "[pick(list("PBU","HIU","SINA","ARMA","OSI"))]-[rand(100, 999)]"
 	src.brainmob.real_name = src.brainmob.name
 

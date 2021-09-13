@@ -23,8 +23,8 @@ var/list/holder_mob_icon_cache = list()
 	pixel_y = 8
 	var/mob/living/held_mob
 
-/obj/item/weapon/holder/New()
-	..()
+/obj/item/weapon/holder/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/weapon/holder/throw_at(atom/target, range, speed, thrower)

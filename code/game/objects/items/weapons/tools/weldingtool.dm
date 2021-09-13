@@ -546,8 +546,8 @@
 /obj/item/weapon/weldingtool/electric/unloaded/New()
 	cell_type = null
 
-/obj/item/weapon/weldingtool/electric/New()
-	..()
+/obj/item/weapon/weldingtool/electric/Initialize()
+	. = ..()
 	if(cell_type == null)
 		update_icon()
 	else if(cell_type)

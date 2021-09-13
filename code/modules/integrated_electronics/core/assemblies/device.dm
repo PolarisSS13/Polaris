@@ -70,8 +70,8 @@
 	max_complexity = IC_COMPLEXITY_BASE * 3/4
 
 
-/obj/item/device/electronic_assembly/device/New()
-	..()
+/obj/item/device/electronic_assembly/device/Initialize()
+	. = ..()
 	var/obj/item/integrated_circuit/built_in/device_input/input = new(src)
 	var/obj/item/integrated_circuit/built_in/device_output/output = new(src)
 	input.assembly = src

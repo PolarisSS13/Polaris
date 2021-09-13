@@ -23,8 +23,8 @@
 	name = "sample bag box"
 	desc = "A box claiming to contain sample bags."
 
-/obj/item/weapon/storage/box/samplebags/New()
-	..()
+/obj/item/weapon/storage/box/samplebags/Initialize()
+	. = ..()
 	for(var/i = 1 to 7)
 		var/obj/item/weapon/evidencebag/S = new(src)
 		S.name = "sample bag"
@@ -227,8 +227,8 @@
 	var/scan_ticks = 0
 	var/obj/item/device/radio/target_radio
 
-/obj/item/device/beacon_locator/New()
-	..()
+/obj/item/device/beacon_locator/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/item/device/beacon_locator/Destroy()

@@ -241,8 +241,8 @@
 	use_cell = TRUE
 	hitcost = 120
 
-/obj/item/weapon/melee/energy/axe/charge/loaded/New()
-	..()
+/obj/item/weapon/melee/energy/axe/charge/loaded/Initialize()
+	. = ..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 
 /*
@@ -401,8 +401,8 @@
 
 	hitcost = 75
 
-/obj/item/weapon/melee/energy/sword/charge/loaded/New()
-	..()
+/obj/item/weapon/melee/energy/sword/charge/loaded/Initialize()
+	. = ..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 
 //Energy Blade (ninja uses this)
