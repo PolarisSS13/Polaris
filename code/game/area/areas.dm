@@ -19,7 +19,7 @@
 
 	var/debug = 0
 	var/requires_power = 1
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
+	var/always_unpowered = 0	//this gets overriden to 1 for space in area/Initialize()
 
 	// Power channel status - Is it currently energized?
 	var/power_equip = TRUE
