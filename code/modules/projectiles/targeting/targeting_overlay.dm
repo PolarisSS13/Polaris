@@ -23,7 +23,7 @@
 	owner = loc
 	if(!istype(owner))
 		return INITIALIZE_HINT_QDEL
-	forceMove(null)
+	moveToNullspace()
 	verbs.Cut()
 
 /obj/aiming_overlay/proc/toggle_permission(var/perm)

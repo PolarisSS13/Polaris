@@ -122,7 +122,7 @@
 /obj/screen/plane_master/Initialize()
 	. = ..()
 	if(loc)
-		forceMove(null) //Never be in anything ever.
+		moveToNullspace() //Never be in anything ever.
 
 /obj/screen/plane_master/proc/set_desired_alpha(var/new_alpha)
 	if(new_alpha != alpha && new_alpha > 0 && new_alpha <= 255)

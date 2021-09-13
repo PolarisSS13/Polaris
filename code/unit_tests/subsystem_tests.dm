@@ -16,7 +16,6 @@
 
 	return 1
 
-/* Uncomment when all atoms init properly
 /datum/unit_test/subsystem_atom_shall_have_no_bad_init_calls
 	name = "SUBSYSTEM - ATOMS: Shall have no bad init calls"
 
@@ -43,4 +42,3 @@
 	else
 		pass("All atoms were initialized")
 	return 1
-*/

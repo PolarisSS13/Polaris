@@ -17,7 +17,7 @@
 /obj/landed_holder/Initialize(var/ml, var/turf/simulated/shuttle/turf)
 	. = ..()
 	if(loc)
-		forceMove(null)
+		moveToNullspace()
 	my_turf = turf
 
 /obj/landed_holder/proc/land_on(var/turf/T)

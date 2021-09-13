@@ -340,7 +340,7 @@ var/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	if(mineral)
+	if(initialized && istype(mineral))
 		new /obj/effect/mineral(src, mineral)
 	update_icon()
 
@@ -699,5 +699,6 @@ var/list/mining_overlay_cache = list()
 
 	if(mineral_name && (mineral_name in GLOB.ore_data))
 		mineral = GLOB.ore_data[mineral_name]
-		UpdateMineral()
+		if(initialized)
+			UpdateMineral()
 	update_icon()
