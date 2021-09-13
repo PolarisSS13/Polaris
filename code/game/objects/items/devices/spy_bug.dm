@@ -158,8 +158,9 @@
 	var/obj/machinery/camera/bug/selected_camera
 	var/list/obj/machinery/camera/bug/cameras = new()
 /*
-/obj/item/device/bug_monitor/New()
+/obj/item/device/bug_monitor/Initialize()
 	radio = new(src)
+	. = ..()
 */
 /obj/item/device/bug_monitor/attack_self(mob/user)
 	if(operating)

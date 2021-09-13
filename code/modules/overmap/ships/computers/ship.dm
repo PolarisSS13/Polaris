@@ -10,7 +10,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	var/list/whitelisted_types = list(/obj/effect/overmap/visitable/ship)
 	var/list/blacklisted_types = list()
 
-/obj/machinery/computer/ship/New()
+/obj/machinery/computer/ship/Initialize()
 	. = ..()
 	var/list/L = list()
 	for(var/type in whitelisted_types)

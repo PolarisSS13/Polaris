@@ -110,9 +110,9 @@ GLOBAL_LIST_BOILERPLATE(all_tracking_implants, /obj/item/weapon/implant/tracking
 /obj/item/weapon/implant/tracking/weak	//This is for the loadout
 	degrade_time = 2.5 MINUTES
 
-/obj/item/weapon/implant/tracking/New()
+/obj/item/weapon/implant/tracking/Initialize()
 	id = rand(1, 1000)
-	..()
+	. = ..()
 
 /obj/item/weapon/implant/tracking/post_implant(var/mob/source)
 	START_PROCESSING(SSobj, src)

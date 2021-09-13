@@ -43,7 +43,7 @@
 	default_cartridge = /obj/item/weapon/cartridge/mime
 	icon_state = "pda-mime"
 
-/obj/item/device/pda/mime/New()
+/obj/item/device/pda/mime/Initialize()
 	. = ..()
 	var/datum/data/pda/app/M = find_program(/datum/data/pda/app/messenger)
 	if(M)
@@ -128,7 +128,7 @@
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
 	model_name = "Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant"
 
-/obj/item/device/pda/librarian/New()
+/obj/item/device/pda/librarian/Initialize()
 	. = ..()
 	var/datum/data/pda/app/M = find_program(/datum/data/pda/app/messenger)
 	if(M)

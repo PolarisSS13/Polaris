@@ -112,9 +112,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		return 0
 
 
-/obj/machinery/telecomms/New()
+/obj/machinery/telecomms/Initialize()
 	telecomms_list += src
-	..()
+	. = ..()
 
 	//Set the listening_level if there's none.
 	if(!listening_level)

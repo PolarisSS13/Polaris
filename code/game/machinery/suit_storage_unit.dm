@@ -33,7 +33,8 @@
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space
 	MASK_TYPE = /obj/item/clothing/mask/breath
 
-/obj/machinery/suit_storage_unit/New()
+/obj/machinery/suit_storage_unit/Initialize()
+	. = ..()
 	update_icon()
 	if(SUIT_TYPE)
 		SUIT = new SUIT_TYPE(src)

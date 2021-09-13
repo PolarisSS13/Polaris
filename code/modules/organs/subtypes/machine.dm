@@ -7,9 +7,9 @@
 	vital = 1
 	var/defib_timer = 1 // This sits in the brain organ slot, but is not a brain.
 
-/obj/item/organ/internal/cell/New()
+/obj/item/organ/internal/cell/Initialize()
 	robotize()
-	..()
+	. = ..()
 
 /obj/item/organ/internal/cell/replaced()
 	..()

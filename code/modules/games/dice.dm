@@ -8,7 +8,8 @@
 	var/result = 6
 	attack_verb = list("diced")
 
-/obj/item/weapon/dice/New()
+/obj/item/weapon/dice/Initialize()
+	. = ..()
 	icon_state = "[name][rand(1,sides)]"
 
 /obj/item/weapon/dice/d4

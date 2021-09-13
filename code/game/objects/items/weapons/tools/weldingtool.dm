@@ -543,7 +543,7 @@
 	acti_sound = 'sound/effects/sparks4.ogg'
 	deac_sound = 'sound/effects/sparks4.ogg'
 
-/obj/item/weapon/weldingtool/electric/unloaded/New()
+/obj/item/weapon/weldingtool/electric/unloaded
 	cell_type = null
 
 /obj/item/weapon/weldingtool/electric/Initialize()

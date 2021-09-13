@@ -36,11 +36,10 @@ var/const/MAX_ACTIVE_TIME = 400
 	user.drop_from_inventory(src)
 	Attach(M)
 
-/obj/item/clothing/mask/facehugger/New()
-	if(config.aliens_allowed)
-		..()
-	else
-		qdel(src)
+/obj/item/clothing/mask/facehugger/Initialize()
+		. = ..()
+	if(!config.aliens_allowed)
+		return INITIALIZE_HINT_QDEL
 
 /obj/item/clothing/mask/facehugger/examine(mob/user)
 	..(user)

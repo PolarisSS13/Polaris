@@ -22,8 +22,8 @@
 /obj/item/device/defib_kit/get_cell()
 	return bcell
 
-/obj/item/device/defib_kit/New() //starts without a cell for rnd
-	..()
+/obj/item/device/defib_kit/Initialize() //starts without a cell for rnd
+	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
 	else

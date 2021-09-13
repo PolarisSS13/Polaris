@@ -63,20 +63,13 @@
 				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
 
-/obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
-	..()
+/obj/item/weapon/melee/baton/loaded/Initialize() //this one starts with a cell pre-installed.
+	. = ..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 	update_icon()
-	return
 
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
-	if(status == 1)		//Only deducts charge when it's on
-		if(bcell)
-			if(bcell.checked_use(chrgdeductamt))
-				return 1
-			else
-				return 0
-	return null
+	return (status == 1 && bcell?.checked_use(chrgdeductamt))
 
 /obj/item/weapon/melee/baton/proc/powercheck(var/chrgdeductamt)
 	if(bcell)

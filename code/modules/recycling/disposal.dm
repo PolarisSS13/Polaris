@@ -1238,7 +1238,7 @@
 	else
 		name = initial(name)
 
-/obj/structure/disposalpipe/tagger/New()
+/obj/structure/disposalpipe/tagger/Initialize()
 	. = ..()
 	dpdir = dir | turn(dir, 180)
 	if(sort_tag) GLOB.tagger_locations |= sort_tag
@@ -1305,7 +1305,7 @@
 
 	dpdir = sortdir | posdir | negdir
 
-/obj/structure/disposalpipe/sortjunction/New()
+/obj/structure/disposalpipe/sortjunction/Initialize()
 	. = ..()
 	if(sortType) GLOB.tagger_locations |= sortType
 

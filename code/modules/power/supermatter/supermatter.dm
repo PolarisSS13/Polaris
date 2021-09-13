@@ -541,7 +541,7 @@
 	icon = 'icons/obj/engine.dmi'
 	icon_state = "darkmatter_broken"
 
-/obj/item/broken_sm/New()
+/obj/item/broken_sm/Initialize()
 	message_admins("Broken SM shard created at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
 	START_PROCESSING(SSobj, src)
 	return ..()

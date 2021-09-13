@@ -89,12 +89,12 @@ SUBSYSTEM_DEF(open_space)
 
 // Ouch... this is painful. But is there any other way?
 /* - No for now
-/obj/New()
+/obj/Initialize()
 	. = ..()
 	if(open_space_initialised && !invisibility)
 		var/turf/T = GetAbove(src)
 		if(isopenspace(T))
-			// log_debug("[T] ([T.x],[T.y],[T.z]) queued for update for [src]New()")
+			// log_debug("[T] ([T.x],[T.y],[T.z]) queued for update for [src]Initialize()")
 			OS_controller.add_turf(T, 1)
 */
 

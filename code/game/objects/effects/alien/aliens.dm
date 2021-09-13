@@ -444,15 +444,15 @@
 	var/health = 100
 	var/status = BURST //can be GROWING, GROWN or BURST; all mutually exclusive
 
-/obj/effect/alien/egg/New()
 /*
+/obj/effect/alien/egg/Initialize()
+	. = ..()
 	if(config.aliens_allowed)
-		..()
-		spawn(rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
-			Grow()
+		addtimer(CALLBACK(src, .proc/Grow), rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
 	else
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 */
+
 /obj/effect/alien/egg/attack_hand(user as mob)
 
 	var/mob/living/carbon/M = user

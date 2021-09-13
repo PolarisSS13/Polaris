@@ -291,7 +291,8 @@
 	drop_sound = 'sound/items/drop/gloves.ogg'
 	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
-/obj/item/weapon/pen/crayon/New()
+/obj/item/weapon/pen/crayon/Initialize()
+	. = ..()
 	name = "[colourName] crayon"
 
 /obj/item/weapon/pen/crayon/marker
@@ -299,5 +300,6 @@
 	desc = "A chisel-tip permanent marker. Hopefully non-toxic."
 	icon_state = "markerred"
 
-/obj/item/weapon/pen/crayon/marker/New()
+/obj/item/weapon/pen/crayon/marker/Initialize()
+	. = ..()
 	name = "[colourName] marker"

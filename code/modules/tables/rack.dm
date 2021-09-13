@@ -28,9 +28,9 @@
 /obj/structure/table/rack/steel
 	color = "#666666"
 
-/obj/structure/table/rack/steel/New()
+/obj/structure/table/rack/steel/Initialize()
 	material = get_material_by_name(MAT_STEEL)
-	..()
+	. = ..()
 
 //Shelves
 
@@ -42,9 +42,9 @@
 /obj/structure/table/rack/shelf/steel
 	color = "#666666"
 
-/obj/structure/table/rack/shelf/steel/New()
+/obj/structure/table/rack/shelf/steel/Initialize()
 	material = get_material_by_name(MAT_STEEL)
-	..()
+	. = ..()
 
 //Gunrack
 // SOMEONE should add cool overlay stuff to this
@@ -56,6 +56,6 @@
 /obj/structure/table/rack/gun_rack/steel
 	color = "#666666"
 
-/obj/structure/table/rack/gun_rack/steel/New()
+/obj/structure/table/rack/gun_rack/steel/Initialize()
 	material = get_material_by_name(MAT_STEEL)
-	..()
+	. = ..()

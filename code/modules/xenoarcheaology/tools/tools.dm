@@ -325,9 +325,10 @@
 	var/obj/item/device/ano_scanner/anomaly_scanner = null
 	var/obj/item/device/depth_scanner/depth_scanner = null
 
-/obj/item/device/xenoarch_multi_tool/New()
+/obj/item/device/xenoarch_multi_tool/Initialize()
 	anomaly_scanner = new/obj/item/device/ano_scanner(src)
 	depth_scanner = new/obj/item/device/depth_scanner(src)
+	. = ..()
 
 /obj/item/device/xenoarch_multi_tool/attack_self(var/mob/living/user)
 	depth_scanner.interact(user)

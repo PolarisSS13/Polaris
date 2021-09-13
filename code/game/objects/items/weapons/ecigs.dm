@@ -153,7 +153,8 @@
 	volume = 20
 	flags = OPENCONTAINER
 
-/obj/item/weapon/reagent_containers/ecig_cartridge/New()
+/obj/item/weapon/reagent_containers/ecig_cartridge/Initialize()
+	. = ..()
 	create_reagents(volume)
 
 /obj/item/weapon/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left

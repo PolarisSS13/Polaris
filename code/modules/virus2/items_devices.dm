@@ -104,8 +104,9 @@
 	var/stage = 1
 	var/analysed = 1
 
-/obj/item/weapon/diseasedisk/premade/New()
+/obj/item/weapon/diseasedisk/premade/Initialize()
 	name = "blank GNA disk (stage: [stage])"
 	effect = new /datum/disease2/effectholder
 	effect.effect = new /datum/disease2/effect/invisible
 	effect.stage = stage
+	. = ..()

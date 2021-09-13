@@ -14,14 +14,6 @@
 
 	var/list/areas_to_use = list()
 
-/obj/turbolift_map_holder/Destroy()
-	turbolifts -= src
-	return ..()
-
-/obj/turbolift_map_holder/New()
-	turbolifts += src
-	..()
-
 /obj/turbolift_map_holder/Initialize()
 	. = ..()
 	// Create our system controller.

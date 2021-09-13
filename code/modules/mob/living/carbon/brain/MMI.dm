@@ -19,8 +19,9 @@
 	var/obj/mecha = null//This does not appear to be used outside of reference in mecha.dm.
 	var/obj/item/device/radio/headset/mmi_radio/radio = null//Let's give it a radio.
 
-/obj/item/device/mmi/New()
+/obj/item/device/mmi/Initialize()
 	radio = new(src)//Spawns a radio inside the MMI.
+	. = ..()
 
 /obj/item/device/mmi/verb/toggle_radio()
 	set name = "Toggle Brain Radio"
@@ -180,7 +181,7 @@
 	mecha = null//This does not appear to be used outside of reference in mecha.dm.
 	var/ghost_query_type = null
 
-/obj/item/device/mmi/digital/New()
+/obj/item/device/mmi/digital/Initialize()
 	src.brainmob = new(src)
 //	src.brainmob.add_language("Robot Talk")//No binary without a binary communication device
 	src.brainmob.add_language(LANGUAGE_GALCOM)
@@ -191,6 +192,7 @@
 	src.brainmob.silent = 0
 	radio = new(src)
 	dead_mob_list -= src.brainmob
+	. = ..()
 
 /obj/item/device/mmi/digital/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	return	//Doesn't do anything right now because none of the things that can be done to a regular MMI make any sense for these

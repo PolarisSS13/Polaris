@@ -17,14 +17,13 @@
 
 	anchored = 1	//  don't get pushed around
 
-/mob/new_player/New()
+/mob/new_player/New() // Use New() for adding to the list as Initialize() on atoms is deferred during world init.
+	..()
 	mob_list += src
-	initialized = TRUE // Explicitly don't use Initialize().  New players join super early and use New()
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 	new_player_panel_proc()
-
 
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
