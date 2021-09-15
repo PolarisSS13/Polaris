@@ -35,8 +35,8 @@
 
 /datum/artifact_effect/vampire/DoEffectAura()
 	var/atom/holder = master.holder
-	nearby_mobs.Cut()
-
+	if(nearby_mobs.len)
+		nearby_mobs.Cut()
 	var/turf/T = get_turf(master.holder)
 
 	for(var/mob/living/L in oview(effectrange, T))
