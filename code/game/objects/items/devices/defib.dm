@@ -597,12 +597,24 @@
 /obj/item/weapon/shockpaddles/rig/check_charge(var/charge_amt)
 	var/obj/item/weapon/cell/C = get_cell()
 
-	return (C && C.check_charge(charge_amt))
+	return (C?.check_charge(charge_amt))
 
 /obj/item/weapon/shockpaddles/rig/checked_use(var/charge_amt)
 	var/obj/item/weapon/cell/C = get_cell()
 
-	return (C && C.checked_use(charge_amt))
+	return (C?.checked_use(charge_amt))
+
+/obj/item/weapon/shockpaddles/rig/universal/can_defib(mob/living/carbon/human/H)
+	if((H.species.flags & NO_DEFIB))
+		return "buzzes, \"Incompatible physiology. Operation aborted.\""
+
+	if(H.stat != DEAD)
+		return "buzzes, \"Patient is not in a valid state. Operation aborted.\""
+
+	if(!check_contact(H))
+		return "buzzes, \"Patient's chest is obstructed. Operation aborted.\""
+
+	return null
 
 /*
 	Shockpaddles that are linked to a base unit
@@ -633,11 +645,11 @@
 
 /obj/item/weapon/shockpaddles/linked/check_charge(var/charge_amt)
 	var/obj/item/weapon/cell/Cell = get_cell()
-	return (Cell && Cell.check_charge(charge_amt))
+	return (Cell?.check_charge(charge_amt))
 
 /obj/item/weapon/shockpaddles/linked/checked_use(var/charge_amt)
 	var/obj/item/weapon/cell/Cell = get_cell()
-	return (Cell && Cell.checked_use(charge_amt))
+	return (Cell?.checked_use(charge_amt))
 
 /obj/item/weapon/shockpaddles/linked/make_announcement(var/message, var/msg_class)
 	base_unit.audible_message("<b>\The [base_unit]</b> [message]", "\The [base_unit] vibrates slightly.")

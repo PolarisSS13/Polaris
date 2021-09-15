@@ -109,9 +109,7 @@
 	..()
 
 /obj/item/rig_module/get_cell()
-	if(holder)
-		return holder.get_cell()
-	return FALSE
+	return holder?.get_cell()
 
 /obj/item/rig_module/New()
 	..()

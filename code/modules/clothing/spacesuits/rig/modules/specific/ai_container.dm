@@ -190,38 +190,33 @@
 
 	// The ONLY THING all the different AI systems have in common is that they all store the mob inside an item.
 	var/mob/living/ai_mob = locate(/mob/living) in ai.contents
-	if(ai_mob)
+	if(ai_mob?.key && ai_mob.client)
+		if(istype(ai, /obj/item/device/aicard))
 
-		if(ai_mob.key && ai_mob.client)
+			if(!ai_card)
+				ai_card = new /obj/item/device/aicard(src)
 
-			if(istype(ai, /obj/item/device/aicard))
-
-				if(!ai_card)
-					ai_card = new /obj/item/device/aicard(src)
-
-				var/obj/item/device/aicard/source_card = ai
-				var/obj/item/device/aicard/target_card = ai_card
-				if(istype(source_card) && istype(target_card))
-					if(target_card.grab_ai(ai_mob, user))
-						source_card.clear()
-					else
-						return 0
+			var/obj/item/device/aicard/source_card = ai
+			var/obj/item/device/aicard/target_card = ai_card
+			if(istype(source_card) && istype(target_card))
+				if(target_card.grab_ai(ai_mob, user))
+					source_card.clear()
 				else
 					return 0
 			else
-				user.drop_from_inventory(ai)
-				ai.forceMove(src)
-				ai_card = ai
-				to_chat(ai_mob, SPAN_NOTICE("You have been transferred to \the [holder]'s [src]."))
-				to_chat(user, SPAN_NOTICE("You load [ai_mob] into \the [holder]'s [src]."))
-
-			integrated_ai = ai_mob
-
-			if(!(locate(integrated_ai) in ai_card))
-				integrated_ai = null
-				eject_ai()
+				return 0
 		else
-			to_chat(user, SPAN_WARNING("There is no active AI within \the [ai]."))
+			user.drop_from_inventory(ai)
+			ai.forceMove(src)
+			ai_card = ai
+			to_chat(ai_mob, SPAN_NOTICE("You have been transferred to \the [holder]'s [src]."))
+			to_chat(user, SPAN_NOTICE("You load [ai_mob] into \the [holder]'s [src]."))
+
+		integrated_ai = ai_mob
+
+		if(!(locate(integrated_ai) in ai_card))
+			integrated_ai = null
+			eject_ai()
 	else
 		to_chat(user, SPAN_WARNING("There is no active AI within \the [ai]."))
 	update_verb_holder()
@@ -273,50 +268,41 @@
 	..()
 
 /obj/item/rig_module/ai_container/advanced/process()
-	if((holder.offline || !holder.ai_override_enabled) && controlling)
-		revert()
-
-	if(controlling)
-		var/mob/living/carbon/human/H = holder.wearer
-
-		var/mob/living/simple_mob/animal/borer/Borer = H.has_brain_worms()
-		if(Borer)	// As funny as it would be to see a borer, AI, and human swap minds like musical chairs, let's not.
+	if(holder)
+		if((holder.offline || !holder.ai_override_enabled) && controlling)
 			revert()
-			to_chat(integrated_ai, SPAN_DANGER("<span class='danger'>The neural jack signals a warning abruptly, before rapidly retracting.</span>"))
-			to_chat(H, SPAN_WARNING("You are shoved into consciousness as though you have been dropped into freezing water."))
-			return
 
-		var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
-		if(Brain)
-			if(Brain.robotic < ORGAN_ASSISTED)
-				H.add_modifier(/datum/modifier/mute, 30 SECONDS, suppress_failure = TRUE)
+		if(controlling)
+			var/mob/living/carbon/human/H = holder.wearer
 
-		if(H.stat == DEAD && world.time > last_defib + 1 MINUTE && (H.getBruteLoss() + H.getFireLoss()) < (H.getMaxHealth() * 2 - H.getCloneLoss() * 2))
-			H.setToxLoss(0)
+			var/mob/living/simple_mob/animal/borer/Borer = H.has_brain_worms()
+			if(Borer)	// As funny as it would be to see a borer, AI, and human swap minds like musical chairs, let's not.
+				revert()
+				to_chat(integrated_ai, SPAN_DANGER("<span class='danger'>The neural jack signals a warning abruptly, before rapidly retracting.</span>"))
+				to_chat(H, SPAN_WARNING("You are shoved into consciousness as though you have been dropped into freezing water."))
+				return
 
-			if(paddles && !paddles.busy)
-				if(H.isSynthetic())
-					paddles.use_on_synthetic = TRUE
-				else
-					paddles.use_on_synthetic = FALSE
+			var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
+			if(Brain)
+				if(Brain.robotic < ORGAN_ASSISTED)
+					H.add_modifier(/datum/modifier/mute, 30 SECONDS, suppress_failure = TRUE)
 
-				paddles.busy = TRUE
-				paddles.do_revive(H, integrated_ai)
-				paddles.busy = FALSE
+			if(H.stat == DEAD && world.time > last_defib + 1 MINUTE && (H.getBruteLoss() + H.getFireLoss()) < (H.getMaxHealth() * 2 - H.getCloneLoss()))
+				H.setToxLoss(0)
+				paddles.attack(holder,integrated_ai)
 				if(H.stat != DEAD)
 					corpse_pilot = TRUE
 
-		if(H.stat != DEAD)
-			if(corpse_pilot)
-				H.setOxyLoss(0)
-				H.add_modifier(/datum/modifier/risen_corpse, 30 SECONDS, suppress_failure = TRUE)
-				last_defib = world.time
-			if(H.sleeping)
-				H.AdjustSleeping(-10)
+			if(H.stat != DEAD)
+				if(corpse_pilot)
+					H.setOxyLoss(0)
+					H.add_modifier(/datum/modifier/risen_corpse, 30 SECONDS, suppress_failure = TRUE)
+					last_defib = world.time
+				if(H.sleeping)
+					H.AdjustSleeping(-10)
 
-		if(H.has_modifier_of_type(/datum/modifier/risen_corpse))
-			H.setToxLoss(min(H.getToxLoss(), 30))
-			H.setOxyLoss(min(H.getOxyLoss(), 20))
+			if(H.has_modifier_of_type(/datum/modifier/risen_corpse))
+				H.adjustToxLoss(0.1)
 
 	. = ..()
 

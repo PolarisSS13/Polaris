@@ -91,6 +91,7 @@
 		H.AdjustStunned(-1)
 		H.AdjustWeakened(-1)
 		H.add_chemical_effect(CE_PAINKILLER, 30)
+
 /datum/modifier/mute
 	name = "mute"
 	desc = "You can't speak!"
