@@ -1,6 +1,6 @@
 /mob/var/suiciding = 0
 
-/mob/living/carbon/human/verb/suicide()
+/mob/living/carbon/human/verb/suicide() /// At best, useful for admins to see if it's being called. Advising keeping function commented out.
 	set hidden = 1
 
 	if (stat == DEAD)
@@ -10,7 +10,11 @@
 	if (!ticker)
 		to_chat(src, "You can't commit suicide before the game starts!")
 		return
+	
+	to_chat(src, "No. Adminhelp if there is a legitimate reason, and please review our server rules.")
+	message_admins("[ckey] has tried to trigger the suicide verb as human, but it is currently disabled.")
 
+/* Only useful if the full function is implimented. 
 	if(!player_is_antag(mind))
 		message_admins("[ckey] has tried to suicide, but they were not permitted due to not being antagonist as human.", 1)
 		to_chat(src, "No. Adminhelp if there is a legitimate reason.")
@@ -19,7 +23,6 @@
 	if (suiciding)
 		to_chat(src, "You're already committing suicide! Be patient!")
 		return
-
 	var/confirm = alert("Are you sure you want to commit suicide?", "Confirm Suicide", "Yes", "No")
 
 	if(confirm == "Yes")
@@ -87,6 +90,7 @@
 
 		adjustOxyLoss(max(175 - getToxLoss() - getFireLoss() - getBruteLoss() - getOxyLoss(), 0))
 		updatehealth()
+*/
 
 /mob/living/carbon/brain/verb/suicide()
 	set hidden = 1
