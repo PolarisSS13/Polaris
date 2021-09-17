@@ -50,16 +50,6 @@
 /obj/item/ammo_magazine/mfoam_dart/pistol/smg
 	initial_ammo = 0
 
-/obj/item/ammo_magazine/sfoam_dart
-	name = "\improper Donk-Soft speedloader"
-	desc = "A speedloader for Donk-Soft revolvers."
-	icon_state = "T38"
-	caliber = "foam"
-	ammo_type = /obj/item/ammo_casing/afoam_dart
-	matter = list(MAT_STEEL = 250)
-	max_ammo = 6
-	multiple_sprites = 1
-
 ///////// .357 /////////
 
 /obj/item/ammo_magazine/s357

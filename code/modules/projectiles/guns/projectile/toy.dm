@@ -97,17 +97,18 @@
 	icon_state = "revolver"
 	item_state = "revolver"
 	caliber = "foam"
-	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
-	handle_casings = CYCLE_CASINGS
-	max_shells = 6
 	ammo_type = /obj/item/ammo_casing/afoam_dart
 	projectile_type = /obj/item/projectile/bullet/foam_dart
+	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
+	load_method = SINGLE_CASING
+	max_shells = 6
 	matter = list(MAT_PLASTIC = 1000)
+	handle_casings = null
 
 /*
  * Big Iron
  */
-/obj/item/weapon/gun/projectile/revolver/toy
+/obj/item/weapon/gun/projectile/revolver/toy/big_iron
 	name = "\improper Donk-Soft big iron"
 	desc = "A Donk-Soft pistol made special to promote 'A Fistful of Phoron' a popular frontier comic book."
 	icon_state = "big_iron"
@@ -117,13 +118,12 @@
 /*
  * Crossbow
  */
-/obj/item/weapon/gun/projectile/pistol/toy/crossbow
+/obj/item/weapon/gun/projectile/revolver/toy/crossbow
 	name = "\improper Donk-Soft crossbow"
 	desc = "Donk-Soft foam pistol! It's Donk or Don't! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
 	icon_state = "foamcrossbow"
 	item_state = "foamcrossbow"
-	projectile_type = /obj/item/projectile/bullet/foam_dart
 	caliber = "foam"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
 	load_method = SINGLE_CASING
@@ -150,5 +150,5 @@
 
 	firemodes = list(
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
-		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=2,    burst_accuracy=list(0,-5,-5), dispersion=list(0.0, 0.1, 0.3))
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=2,    burst_accuracy=list(0,-2,-2), dispersion=null)
 	)
