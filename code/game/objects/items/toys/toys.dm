@@ -146,6 +146,8 @@
 	icon_state = "singularity_s1"
 
 /*
+
+/*
  * Toy crossbow
  */
 
@@ -265,6 +267,8 @@
 	icon_state = "null"
 	anchored = 1
 	density = 0
+
+*/
 
 /*
  * Toy swords

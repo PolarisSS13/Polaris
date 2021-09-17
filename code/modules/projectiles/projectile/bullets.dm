@@ -75,16 +75,17 @@
 	nodamage = TRUE
 	icon = 'icons/obj/gun_toy.dmi'
 	icon_state = "foamdart_proj"
-	range = 10
+	range = 15
 	impact_effect_type = null
 	fire_sound = 'sound/items/syringeproj.ogg'
 
 /obj/item/projectile/bullet/foam_dart/on_impact(var/atom/A)
-	if(src.loc)
-    new /obj/item/ammo_casing/afoam_dart(get_turf(target))
+	. = ..()
+	new /obj/item/ammo_casing/afoam_dart(get_turf(loc))
 
-/obj/item/projectile/bullet/foam_dart/on_range()
-	new /obj/item/ammo_casing/afoam_dart()
+/obj/item/projectile/bullet/foam_dart/on_range(var/atom/A)
+	. = ..()
+	new /obj/item/ammo_casing/afoam_dart(get_turf(loc))
 
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 

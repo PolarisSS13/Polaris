@@ -9,7 +9,7 @@
 							/obj/item/clothing/under/syndicate/tacticool			= 2,
 							/obj/item/toy/sword										= 2,
 							/obj/item/weapon/gun/projectile/revolver/capgun			= 2,
-							/obj/item/toy/crossbow									= 2,
+							/obj/item/weapon/gun/projectile/pistol/toy/crossbow		= 2,
 							/obj/item/clothing/suit/syndicatefake					= 2,
 							/obj/item/weapon/storage/fancy/crayons					= 2,
 							/obj/item/toy/spinningtoy								= 2,
@@ -40,7 +40,7 @@
 		var/atom/movable/AM = pick_n_take(special_prizes)
 		AM.forceMove(get_turf(src))
 		special_prizes -= AM
-	
+
 	else if(LAZYLEN(prizes))
 		var/prizeselect = pickweight(prizes)
 		new prizeselect(src.loc)
@@ -1325,7 +1325,7 @@
 		gameStatus = "CLAWMACHINE_NEW"
 		emagged = 1
 		return 1
-		
+
 /obj/machinery/computer/arcade/attackby(obj/item/O, mob/user, params)
 	if(istype(O, /obj/item/stack/arcadeticket))
 		var/obj/item/stack/arcadeticket/T = O
