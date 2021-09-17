@@ -11,7 +11,7 @@
 		to_chat(src, "You can't commit suicide before the game starts!")
 		return
 	
-	to_chat(src, "No. Adminhelp if there is a legitimate reason, and please review our server rules.")
+	to_chat(src, "<span class='warning'>No. Adminhelp if there is a legitimate reason, and please review our server rules.</span>")
 	message_admins("[ckey] has tried to trigger the suicide verb as human, but it is currently disabled.")
 
 /mob/living/carbon/brain/verb/suicide()
