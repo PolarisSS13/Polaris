@@ -6,6 +6,7 @@
 	in_space = TRUE
 
 /obj/effect/overmap/visitable/sector/temporary/Initialize(var/nx, var/ny)
+	. = ..()
 	loc = locate(nx, ny, global.using_map.overmap_z)
 	x = nx
 	y = ny
@@ -13,7 +14,6 @@
 	map_z += emptyz
 	map_sectors["[emptyz]"] = src
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [emptyz].")
-	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 	for(var/zlevel in map_z)
