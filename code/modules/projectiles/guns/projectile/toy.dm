@@ -63,7 +63,7 @@
  */
 /obj/item/weapon/gun/projectile/pistol/toy/n99
 	name = "\improper Donk-Soft commemorative pistol"
-	desc = "A commemorative Donk-Soft pistol made special to promote 'Remnants' a popular apocolyptic TV series."
+	desc = "A commemorative Donk-Soft pistol made special to promote 'Remnants', a popular apocolyptic TV series."
 	icon_state = "n99"
 	item_state = "gun"
 	caliber = "foam"
@@ -110,7 +110,7 @@
  */
 /obj/item/weapon/gun/projectile/revolver/toy/big_iron
 	name = "\improper Donk-Soft big iron"
-	desc = "A Donk-Soft pistol made special to promote 'A Fistful of Phoron' a popular frontier comic book."
+	desc = "A Donk-Soft pistol made special to promote 'A Fistful of Phoron', a popular frontier comic book."
 	icon_state = "big_iron"
 	item_state = "revolver"
 	caliber = "foam"
