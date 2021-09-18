@@ -4,7 +4,6 @@
  *		Fake telebeacon
  *		Fake singularity
  *		Toy gun
- *		Toy crossbow
  *		Toy swords
  *		Toy bosun's whistle
  *		Snap pops
@@ -16,7 +15,7 @@
  *		Plushies
  *		Toy cult sword
  *		Bouquets
- 		Stick Horse
+ *		Stick Horse
  */
 
 

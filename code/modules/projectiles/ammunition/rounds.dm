@@ -22,6 +22,7 @@
 /*
  * Foam
  */
+
 /obj/item/ammo_casing/afoam_dart
 	name = "foam dart"
 	desc = "It's Donk or Don't! Ages 8 and up."

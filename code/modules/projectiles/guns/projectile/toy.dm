@@ -1,16 +1,13 @@
-/*
- * All the code relating to Toy Guns
- *
- *	Contains:
- *	-Shotgun
- *	-Pistol
- *	-N99 Pistol
- *	-Levergun
- *	-Revolver
- *	-Big Iron
- *	-Crossbow
- *	-SMG
- *
+/* Toys Guns!
+ * Contains:
+ *		Shotgun
+ *		Pistol
+ *		N99 Pistol
+ *		Levergun
+ *		Revolver
+ *		Big Iron
+ *		Crossbow
+ *		SMG
  */
 
 
