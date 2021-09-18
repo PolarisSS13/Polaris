@@ -63,7 +63,7 @@
  */
 /obj/item/weapon/gun/projectile/pistol/toy/n99
 	name = "\improper Donk-Soft commemorative pistol"
-	desc = "A commemorative Donk-Soft pistol made special to promote 'Remnants', a popular apocolyptic TV series."
+	desc = "A special made Donk-Soft pistol to promote 'Radius: Legend of the Demon Core', a popular post-apocolyptic TV series."
 	icon_state = "n99"
 	item_state = "gun"
 	caliber = "foam"
@@ -110,7 +110,7 @@
  */
 /obj/item/weapon/gun/projectile/revolver/toy/big_iron
 	name = "\improper Donk-Soft big iron"
-	desc = "A Donk-Soft pistol made special to promote 'A Fistful of Phoron', a popular frontier comic book."
+	desc = "A special made Donk-Soft pistol to promote 'A Fistful of Phoron', a popular frontier novel series."
 	icon_state = "big_iron"
 	item_state = "revolver"
 	caliber = "foam"
@@ -152,3 +152,9 @@
 		list(mode_name="semiauto",       burst=1, fire_delay=0,    move_delay=null, burst_accuracy=null, dispersion=null),
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=2,    burst_accuracy=list(0,-2,-2), dispersion=null)
 	)
+
+/obj/item/weapon/gun/projectile/automatic/toy/update_icon()
+	if(ammo_magazine)
+		icon_state = initial(icon_state)
+	else
+		icon_state = "[initial(icon_state)]-e"
