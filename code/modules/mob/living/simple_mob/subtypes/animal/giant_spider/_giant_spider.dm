@@ -83,7 +83,7 @@
 	response_disarm = "gently pushes aside"
 	response_harm   = "punches"
 
-	organ_names = list("cephalothorax", "abdomen", "left forelegs", "right forelegs", "left hind legs", "right hind legs", "pedipalp", "mouthparts")
+	organ_names = /decl/mob_organ_names/spider
 
 
 	melee_damage_lower = 18
@@ -144,3 +144,6 @@
 
 	if(poison_per_bite)
 		poison_per_bite *= 1.3
+
+/decl/mob_organ_names/spider
+	hit_zones = list("cephalothorax", "abdomen", "left forelegs", "right forelegs", "left hind legs", "right hind legs", "pedipalp", "mouthparts")

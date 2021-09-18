@@ -41,8 +41,6 @@ var/list/_cat_default_emotes = list(
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 
-	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
-
 	holder_type = /obj/item/weapon/holder/cat
 	mob_size = MOB_SMALL
 

@@ -14,8 +14,6 @@
 	response_disarm = "bops"
 	response_harm   = "kicks"
 
-	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
-
 	mob_size = MOB_SMALL
 
 	has_langs = list("Dog")
@@ -89,6 +87,7 @@
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
+	organ_names = /decl/mob_organ_names/corgi
 
 /mob/living/simple_mob/animal/passive/dog/corgi/puppy
 	name = "corgi puppy"
@@ -117,7 +116,6 @@
 	desc = "It's a corgi."
 	var/turns_since_scan = 0
 	var/obj/movement_target
-	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail", "heart") //You monster.
 
 /mob/living/simple_mob/animal/passive/dog/corgi/Ian/Life()
 	..()
@@ -245,3 +243,6 @@
 	icon_state = "brittany"
 	icon_living = "brittany"
 	icon_dead = "brittany_dead"
+
+/decl/mob_organ_names/corgi
+	hit_zones = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail", "heart") //You monster.

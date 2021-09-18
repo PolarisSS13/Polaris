@@ -51,7 +51,7 @@
 	attack_sound = 'sound/weapons/bite.ogg'
 	attacktext = list("bitten")
 
-	organ_names = list("head", "body", "dorsal fin", "left pectoral fin", "right pectoral fin", "tail fin")
+	organ_names = /decl/mob_organ_names/fish
 
 	meat_amount = 1
 	meat_type = /obj/item/weapon/reagent_containers/food/snacks/carpmeat

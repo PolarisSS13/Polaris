@@ -48,7 +48,7 @@
 	base_attack_cooldown = 1.5 SECONDS
 	attacktext = list("nipped", "bit", "pinched")
 
-	organ_names = list("head", "thorax", "abdomen", "left forewing", "left hindwing", "right forewing", "right hindwing", "left foreleg", "right foreleg", "left hindleg", "right hindleg")
+	organ_names = /decl/mob_organ_names/moth
 
 	projectiletype = /obj/item/projectile/energy/blob
 
@@ -142,3 +142,6 @@
 	if(energy >= 20)
 		return TRUE
 	return FALSE
+
+/decl/mob_organ_names/moth
+	hit_zones = list("head", "thorax", "abdomen", "left forewing", "left hindwing", "right forewing", "right hindwing", "left foreleg", "right foreleg", "left hindleg", "right hindleg")

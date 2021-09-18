@@ -15,7 +15,7 @@
 	response_harm   = "kicks"
 	attacktext = list("kicked")
 
-	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "udder")
+	organ_names = /decl/mob_organ_names/cow
 
 	say_list_type = /datum/say_list/cow
 
@@ -67,3 +67,6 @@
 	speak = list("moo?","moo","MOOOOOO")
 	emote_hear = list("brays", "moos","moos hauntingly")
 	emote_see = list("shakes its head")
+
+/decl/mob_organ_names/cow
+	hit_zones = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "udder")

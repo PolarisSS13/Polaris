@@ -47,7 +47,7 @@
 	base_attack_cooldown = 2 SECONDS
 	attacktext = list("gouged", "bit", "cut", "clawed", "whipped")
 
-	organ_names = list("head", "chest", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "far left tail", "far right tail", "left middle tail", "right middle tail")
+	organ_names = /decl/mob_organ_names/kururak
 
 	armor = list(
 		"melee" = 30,
@@ -423,3 +423,6 @@
 	evasion = 20
 	bleeding_rate_percent = 0.7
 	attack_speed_percent = 0.8
+
+/decl/mob_organ_names/kururak
+	hit_zones = list("head", "chest", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "far left tail", "far right tail", "left middle tail", "right middle tail")

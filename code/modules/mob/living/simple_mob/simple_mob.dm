@@ -1,6 +1,7 @@
 // Reorganized and somewhat cleaned up.
 // AI code has been made into a datum, inside the AI module folder.
 
+
 /mob/living/simple_mob
 	name = "animal"
 	desc = ""
@@ -59,8 +60,7 @@
 	var/harm_intent_damage = 3		// How much an unarmed harm click does to this mob.
 	var/list/loot_list = list()		// The list of lootable objects to drop, with "/path = prob%" structure
 	var/obj/item/weapon/card/id/myid// An ID card if they have one to give them access to stuff.
-	var/list/organ_names = list("body") //Bodyparts that can be shown as hit by projectiles.
-
+	var organ_names = /decl/mob_organ_names //'False' bodyparts that can be shown as hit by projectiles in place of the default humanoid bodyplan.
 
 	//Mob environment settings
 	var/minbodytemp = 250			// Minimum "okay" temperature in kelvin
@@ -280,3 +280,6 @@
 	hud_list[STATUS_HUD]  = gen_hud_image(buildmode_hud, src, "ai_0", plane = PLANE_BUILDMODE)
 	hud_list[LIFE_HUD]	  = gen_hud_image(buildmode_hud, src, "ais_1", plane = PLANE_BUILDMODE)
 	add_overlay(hud_list)
+
+/decl/mob_organ_names
+	var/list/hit_zones = list("body") //When in doubt, it's probably got a body.

@@ -15,8 +15,6 @@
 	response_disarm = "shoos"
 	response_harm   = "stomps on"
 
-	organ_names = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
-
 	attacktext = list("bitten")
 	melee_damage_lower = 1
 	melee_damage_upper = 2

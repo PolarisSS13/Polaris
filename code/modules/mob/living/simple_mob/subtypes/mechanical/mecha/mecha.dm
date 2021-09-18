@@ -14,7 +14,7 @@
 	maxHealth = 300
 	mob_size = MOB_LARGE
 
-	organ_names = list("central chassis", "control module", "hydraulics", "left arm", "right arm", "left leg", "right leg", "sensor suite", "radiator", "power supply", "left equipment mount", "right equipment mount")
+	organ_names = /decl/mob_organ_names/mecha
 
 	// Very close to the base 'damage_absorption' var on the base mecha class.
 	armor = list(
@@ -141,3 +141,6 @@
 		severity++ // This somewhat misleadingly makes it less severe.
 		deflect_sprite()
 	..(severity)
+
+/decl/mob_organ_names/mecha
+	hit_zones = list("central chassis", "control module", "hydraulics", "left arm", "right arm", "left leg", "right leg", "sensor suite", "radiator", "power supply", "left equipment mount", "right equipment mount")

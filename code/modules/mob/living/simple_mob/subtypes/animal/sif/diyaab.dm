@@ -31,8 +31,6 @@
 
 	movement_cooldown = 0
 
-	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg")
-
 	melee_damage_lower = 2
 	melee_damage_upper = 6
 	base_attack_cooldown = 1 SECOND

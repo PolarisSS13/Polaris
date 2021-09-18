@@ -127,7 +127,7 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stamps on"
-	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "pouch")
+	organ_names = /decl/mob_organ_names/possum
 	density = 0
 	minbodytemp = 223
 	maxbodytemp = 323
@@ -197,6 +197,12 @@
 	icon_dead = "poppy_dead"
 	icon_rest = "poppy_dead"
 	tt_desc = "Didelphis astrum salutem"
-	organ_names = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "pouch", "cute little jacket")
+	organ_names = /decl/mob_organ_names/poppy
 	holder_type = /obj/item/weapon/holder/possum/poppy
 	ai_holder_type = /datum/ai_holder/simple_mob/passive/possum/poppy
+
+/decl/mob_organ_names/possum
+	hit_zones = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "pouch")
+
+/decl/mob_organ_names/poppy
+	hit_zones = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "pouch", "cute little jacket")

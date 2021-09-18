@@ -29,7 +29,7 @@
 
 	attacktext = list("slammed")
 
-	organ_names = list("side")
+	organ_names = /decl/mob_organ_names
 
 	ai_holder_type = /datum/ai_holder/simple_mob/inert
 
