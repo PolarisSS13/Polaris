@@ -119,7 +119,7 @@
 	if(!on)
 		return
 
-	if(!cell || (cell.charge < (use * CELLRATE / efficiency)))
+	if(!cell || (cell.charge < (use * CELLRATE / efficiency * 4)))
 		turn_off(TRUE)
 		return
 
@@ -149,7 +149,7 @@
 /obj/machinery/pump/proc/turn_on(var/loud = 0)
 	if(!cell)
 		return FALSE
-	if(!cell.checked_use(200))
+	if(!cell.checked_use(use))
 		return FALSE
 
 	on = TRUE
@@ -260,11 +260,10 @@
 	var/turf/T = get_turf(src)
 
 	var/obj/structure/geyser/Geyser = locate() in T
-	if(Geyser)
-		if(Geyser.reagents.total_volume && cell.checked_use(use / efficiency / 2))
-			Geyser.reagents.trans_to_holder(reagents, efficiency)
+	if(Geyser?.reagents.total_volume && cell.checked_use(use / efficiency / 2 * CELLRATE))
+		Geyser.reagents.trans_to_holder(reagents, efficiency)
 
-	else if(istype(T, /turf/simulated/floor/water) && cell.checked_use(use / efficiency))
+	else if(istype(T, /turf/simulated/floor/water) && cell.checked_use(use / efficiency * CELLRATE))
 		reagents.add_reagent("water", reagents_per_cycle)
 
 		if(T.temperature <= T0C)
@@ -284,5 +283,5 @@
 				var/obj/effect/mineral/OR = MT.mineral
 				reagents.add_reagent(OR.ore_reagent, round(reagents_per_cycle / 20 * efficiency, 0.1))
 
-	else if(istype(T, /turf/simulated/floor/lava) && cell.checked_use(use / efficiency * 4))
+	else if(istype(T, /turf/simulated/floor/lava) && cell.checked_use(use / efficiency * 4 * CELLRATE))
 		reagents.add_reagent("mineralizedfluid", round(reagents_per_cycle * efficiency / 2, 0.1))
