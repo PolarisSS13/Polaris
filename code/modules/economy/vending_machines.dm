@@ -1092,9 +1092,11 @@
 	product_slogans = "Get your cool toys today!;Trigger a valid hunter today!;Quality toy weapons for cheap prices!;Give them to HoPs for all access!;Give them to HoS to get permabrigged!"
 	product_ads = "Feel robust with your toys!;Express your inner child today!;Toy weapons don't kill people, but valid hunters do!;Who needs responsibilities when you have toy weapons?;Make your next murder FUN!"
 	products = list(/obj/item/weapon/storage/box/foam_darts = 20,
+					/obj/item/weapon/storage/belt/dbandolier = 5,
 					/obj/item/ammo_magazine/mfoam_dart/pistol = 10,
 					/obj/item/ammo_magazine/mfoam_dart/smg = 10,
 					/obj/item/weapon/gun/projectile/shotgun/pump/toy = 5,
+					/obj/item/weapon/gun/projectile/revolver/toy/sawnoff = 5,
 					/obj/item/weapon/gun/projectile/pistol/toy = 5,
 					/obj/item/weapon/gun/projectile/pistol/toy/n99 = 5,
 					/obj/item/weapon/gun/projectile/shotgun/pump/toy/levergun = 5,
@@ -1105,9 +1107,11 @@
 					)
 	contraband = list()
 	prices = list(/obj/item/weapon/storage/box/foam_darts = 50,
+					/obj/item/weapon/storage/belt/dbandolier = 100,
 					/obj/item/ammo_magazine/mfoam_dart/pistol = 25,
 					/obj/item/ammo_magazine/mfoam_dart/smg  = 25,
 					/obj/item/weapon/gun/projectile/shotgun/pump/toy = 250,
+					/obj/item/weapon/gun/projectile/revolver/toy/sawnoff = 150,
 					/obj/item/weapon/gun/projectile/pistol/toy = 100,
 					/obj/item/weapon/gun/projectile/pistol/toy/n99 = 175,
 					/obj/item/weapon/gun/projectile/shotgun/pump/toy/levergun = 250,
