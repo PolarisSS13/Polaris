@@ -196,7 +196,8 @@
 	return
 
 /obj/item/mecha_parts/mecha_equipment/Destroy()
-	detach()
+	if(chassis)
+		detach()
 	return ..()
 
 /obj/item/mecha_parts/mecha_equipment/proc/detach(atom/moveto=null)
