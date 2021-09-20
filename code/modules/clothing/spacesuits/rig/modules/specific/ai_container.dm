@@ -198,13 +198,10 @@
 
 			var/obj/item/device/aicard/source_card = ai
 			var/obj/item/device/aicard/target_card = ai_card
-			if(istype(source_card) && istype(target_card))
-				if(target_card.grab_ai(ai_mob, user))
-					source_card.clear()
-				else
-					return 0
+			if(istype(source_card) && istype(target_card) && target_card.grab_ai(ai_mob, user))
+				source_card.clear()
 			else
-				return 0
+				return FALSE
 		else
 			user.drop_from_inventory(ai)
 			ai.forceMove(src)
@@ -332,44 +329,43 @@
 	if(do_after(jacker, 1 MINUTE, H, ignore_movement = TRUE))
 		if(!H || !integrated_ai || controlling || !rig.ai_override_enabled)
 			return
-		else
 
-			to_chat(jacker, SPAN_WARNING("You fully engage \the [src]'s neural jack, interfacing directly with the pilot's nervous system."))
-			var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
-			if(!Brain)
-				to_chat(jacker, SPAN_WARNING("\The [src] responds with an error code, as the neural jack swiftly retracts. The pilot has no neural cortex."))
-				return
-
-			if(H.has_brain_worms())
-				to_chat(jacker, SPAN_WARNING("\The [src] connects, but only for a moment. You see the world through.. alien eyes, for a brief instant, as the jack retracts."))
-				to_chat(H, SPAN_WARNING("Something moves under the surface of your neck."))
-				return
-
-			if(Brain.robotic < ORGAN_ASSISTED)
-				to_chat(H, SPAN_WARNING("You feel a strange shifting sensation behind your eyes as a consciousness displaces yours. Your final sensation is that of something wet tearing."))
-				H.adjustBrainLoss(rand(0,5))
-				imperfect_connection = TRUE
-
-			else
-				to_chat(H, SPAN_WARNING("You feel a strange shifting sensation behind your eyes as a consciousness displaces yours."))
-
-			if(H.stat == DEAD)
-				corpse_pilot = TRUE
-
-			// pilot -> brain
-			qdel(pilot_brain)
-			pilot_brain = new(src)
-
-			H.transfer_player(pilot_brain)
-
-			// AI -> pilot
-			jacker.transfer_player(H)
-			controlling = TRUE
-			ai_locked = TRUE
-
-			H.verbs += /mob/living/carbon/proc/release_control
-
+		to_chat(jacker, SPAN_WARNING("You fully engage \the [src]'s neural jack, interfacing directly with the pilot's nervous system."))
+		var/obj/item/organ/internal/brain/Brain = H.internal_organs_by_name[O_BRAIN]
+		if(!Brain)
+			to_chat(jacker, SPAN_WARNING("\The [src] responds with an error code, as the neural jack swiftly retracts. The pilot has no neural cortex."))
 			return
+
+		if(H.has_brain_worms())
+			to_chat(jacker, SPAN_WARNING("\The [src] connects, but only for a moment. You see the world through.. alien eyes, for a brief instant, as the jack retracts."))
+			to_chat(H, SPAN_WARNING("Something moves under the surface of your neck."))
+			return
+
+		if(Brain.robotic < ORGAN_ASSISTED)
+			to_chat(H, SPAN_WARNING("You feel a strange shifting sensation behind your eyes as a consciousness displaces yours. Your final sensation is that of something wet tearing."))
+			H.adjustBrainLoss(rand(0,5))
+			imperfect_connection = TRUE
+
+		else
+			to_chat(H, SPAN_WARNING("You feel a strange shifting sensation behind your eyes as a consciousness displaces yours."))
+
+		if(H.stat == DEAD)
+			corpse_pilot = TRUE
+
+		// pilot -> brain
+		qdel(pilot_brain)
+		pilot_brain = new(src)
+
+		H.transfer_player(pilot_brain)
+
+		// AI -> pilot
+		jacker.transfer_player(H)
+		controlling = TRUE
+		ai_locked = TRUE
+
+		H.verbs += /mob/living/carbon/proc/release_control
+
+		return
 
 /obj/item/rig_module/ai_container/advanced/proc/revert()
 	if(controlling && integrated_ai && pilot_brain)

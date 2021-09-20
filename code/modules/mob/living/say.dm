@@ -109,17 +109,10 @@ var/list/channel_to_radio_key = new
 			if(M.speech_mute)
 				force_mute += M.speech_mute
 
-		if(force_slurring < 1)
-			force_slurring = FALSE
-
-		if(force_shouting < 1)
-			force_shouting = FALSE
-
-		if(force_stuttering < 1)
-			force_stuttering = FALSE
-
-		if(force_mute < 1)
-			force_mute = FALSE
+		force_slurring = force_slurring > 0
+		force_shouting = force_shouting > 0
+		force_stuttering = force_stuttering > 0
+		force_mute = force_mute > 0
 
 		if(((HULK in mutations) || force_shouting) && health >= 25 && length(S.message))
 			S.message = "[uppertext(S.message)]!!!"

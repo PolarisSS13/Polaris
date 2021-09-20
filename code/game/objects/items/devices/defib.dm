@@ -616,6 +616,17 @@
 
 	return null
 
+/obj/item/weapon/shockpaddles/rig/universal/can_use(mob/user, mob/M)
+	if(busy)
+		return FALSE
+	if(!check_charge(chargecost))
+		to_chat(user, "<span class='warning'>\The [src] doesn't have enough charge left to do that.</span>")
+		return FALSE
+	if(cooldown)
+		to_chat(user, "<span class='warning'>\The [src] are re-energizing!</span>")
+		return FALSE
+	return TRUE
+
 /*
 	Shockpaddles that are linked to a base unit
 */
