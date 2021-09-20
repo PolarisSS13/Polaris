@@ -81,11 +81,15 @@
 
 /obj/item/projectile/bullet/foam_dart/on_impact(var/atom/A)
 	. = ..()
-	new /obj/item/ammo_casing/afoam_dart(get_turf(loc))
+	var/turf/T = get_turf(loc)
+	if(istype(T))
+		new /obj/item/ammo_casing/afoam_dart(get_turf(loc))
 
 /obj/item/projectile/bullet/foam_dart/on_range(var/atom/A)
 	. = ..()
-	new /obj/item/ammo_casing/afoam_dart(get_turf(loc))
+	var/turf/T = get_turf(loc)
+	if(istype(T))
+		new /obj/item/ammo_casing/afoam_dart(get_turf(loc))
 
 /* short-casing projectiles, like the kind used in pistols or SMGs */
 

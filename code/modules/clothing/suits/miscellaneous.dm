@@ -216,7 +216,7 @@
 
 /obj/item/clothing/suit/marine
 	name = "marine armor"
-	desc = "a set of marine prop armor from the popular game 'Ruin'."
+	desc = "A set of marine prop armor from the popular game 'Ruin'."
 	icon_state = "marine"
 	body_parts_covered = FEET|LOWER_TORSO|UPPER_TORSO|LEGS
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER

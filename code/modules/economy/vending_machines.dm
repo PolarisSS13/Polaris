@@ -1089,8 +1089,8 @@
 	desc = "A toy vendor owned by Donk-Soft, a NanoTrasen sub-company."
 	description_fluff = "Donk-Soft is a sub-company owned by NanoTrasen that distribute replica weapons that shoot squish foam darts. They've been a staple of personal entertainment for decades but their buisness has only just moved to the fringes of the galaxy."
 	icon_state = "donksoft"
-	product_slogans = "Get your cool toys today!;Trigger a valid hunter today!;Quality toy weapons for cheap prices!;Give them to HoPs for all access!;Give them to HoS to get permabrigged!"
-	product_ads = "Feel robust with your toys!;Express your inner child today!;Toy weapons don't kill people, but valid hunters do!;Who needs responsibilities when you have toy weapons?;Make your next murder FUN!"
+	product_slogans = "Get your cool toys today!;Quality toy weapons for cheap prices!"
+	product_ads = "Express your inner child today!;Who needs responsibilities when you have toy weapons?;Make your next murder FUN!"
 	products = list(/obj/item/weapon/storage/box/foam_darts = 20,
 					/obj/item/weapon/storage/belt/dbandolier = 5,
 					/obj/item/ammo_magazine/mfoam_dart/pistol = 10,
