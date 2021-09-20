@@ -12,7 +12,7 @@
 	. = ..()
 	QDEL_IN(src, 1 SECONDS)
 
-/datum/effect_system/explosion/set_up(n = 0, c = 0;, turf/loc)
+/datum/effect_system/explosion/set_up(n = 0, c = 0, turf/loc)
 	location = get_turf(loc)
 
 /datum/effect_system/explosion/start()

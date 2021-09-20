@@ -37,7 +37,7 @@
 	// Visual effect.
 	var/datum/effect_system/explosion/E = new/datum/effect_system/explosion/smokeless()
 	var/turf/T = get_turf(victim)
-	E.set_up(T)
+	E.set_up(loc=T)
 	E.start()
 
 	// Now for sounds.
