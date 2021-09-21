@@ -107,7 +107,6 @@
 #include "code\_helpers\global_lists.dm"
 #include "code\_helpers\icons.dm"
 #include "code\_helpers\logging.dm"
-#include "code\_helpers\math.dm"
 #include "code\_helpers\matrices.dm"
 #include "code\_helpers\mobs.dm"
 #include "code\_helpers\names.dm"
