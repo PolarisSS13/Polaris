@@ -20,10 +20,10 @@
 /datum/random_map/noise/set_map_size()
 	// Make sure the grid is a square with limits that are
 	// (n^2)+1, otherwise diamond-square won't work.
-	if(!IsPowerOfTwo((limit_x-1)))
-		limit_x = RoundUpToPowerOfTwo(limit_x) + 1
-	if(!IsPowerOfTwo((limit_y-1)))
-		limit_y = RoundUpToPowerOfTwo(limit_y) + 1
+	if(!ISPOWEROFTWO((limit_x-1)))
+		limit_x = ROUNDUPTOPOWEROFTWO(limit_x) + 1
+	if(!ISPOWEROFTWO((limit_y-1)))
+		limit_y = ROUNDUPTOPOWEROFTWO(limit_y) + 1
 	// Sides must be identical lengths.
 	if(limit_x > limit_y)
 		limit_y = limit_x
@@ -52,9 +52,6 @@
 	var/val = min(9,max(0,round((value/cell_range)*10)))
 	if(isnull(val)) val = 0
 	return "[val]"
-
-/datum/random_map/noise/proc/noise2value(var/value)
-	return min(9,max(0,round((value/cell_range)*10)))
 
 /datum/random_map/noise/proc/subdivide(var/iteration,var/x,var/y,var/input_size)
 
@@ -116,6 +113,7 @@
 		subdivide(iteration, x,       y+hsize, hsize)
 		subdivide(iteration, x+hsize, y+hsize, hsize)
 
+#define NOISE2VALUE(X) CLAMP(round(((X)/cell_range)*10), 0, 9)
 /datum/random_map/noise/cleanup()
 	var/is_not_border_left
 	var/is_not_border_right
@@ -177,11 +175,13 @@
 				var/mapcell = get_map_cell(x,y)
 				var/list/neighbors = get_neighbors(x, y)
 				buddies.Cut()
+				var/mapcellval = NOISE2VALUE(map[mapcell])
 				for(var/cell in neighbors)
-					if(noise2value(map[cell]) == noise2value(map[mapcell]))
+					if(NOISE2VALUE(map[cell]) == mapcellval)
 						buddies |= cell
 				if(!length(buddies))
 					map[mapcell] = map[pick(neighbors)]
+#undef NOISE2VALUE
 
 /datum/random_map/noise/proc/get_neighbors(x, y, include_diagonals)
 	. = list()
