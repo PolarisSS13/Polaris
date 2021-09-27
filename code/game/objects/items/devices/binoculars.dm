@@ -5,6 +5,7 @@
 	name = "binoculars"
 	desc = "A pair of binoculars."
 	zoomdevicename = "eyepieces"
+	icon = 'icons/obj/device.dmi'
 	icon_state = "binoculars"
 	force = 5.0
 	throwforce = 5.0

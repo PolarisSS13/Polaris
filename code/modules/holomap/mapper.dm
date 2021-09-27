@@ -1,6 +1,7 @@
 /obj/item/device/mapping_unit
 	name = "mapping unit"
 	desc = "A portable mapping unit, capable of locating other similar units on a map. Also has a short-range sonar mapping system."
+	icon = 'icons/obj/device.dmi'
 	icon_state = "mapping_unit"
 	item_state = null
 	w_class = ITEMSIZE_SMALL
@@ -395,6 +396,7 @@
 /obj/item/device/holomap_beacon
 	name = "holomap beacon"
 	desc = "When active, the beacon will show itself on mapping units of the same type."
+	icon = 'icons/obj/device.dmi'
 	icon_state = "holochip"
 	w_class = ITEMSIZE_TINY
 	var/mapper_filter = HOLOMAP_FILTER_STATIONMAP

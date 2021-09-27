@@ -4,6 +4,7 @@
 /obj/item/weapon/whetstone
 	name = "whetstone"
 	desc = "A simple, fine grit stone, useful for sharpening dull edges and polishing out dents."
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "whetstone"
 	force = 3
 	w_class = ITEMSIZE_SMALL

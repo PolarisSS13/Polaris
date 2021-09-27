@@ -1,6 +1,7 @@
 /obj/item/weapon/chainsaw
 	name = "chainsaw"
 	desc = "Vroom vroom."
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "chainsaw0"
 	item_state = "chainsaw0"
 	var/on = 0

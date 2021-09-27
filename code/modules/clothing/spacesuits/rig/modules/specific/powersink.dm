@@ -1,6 +1,7 @@
 /obj/item/rig_module/power_sink
 	name = "hardsuit power sink"
 	desc = "An heavy-duty power sink."
+	icon = 'icons/obj/device.dmi'
 	icon_state = "powersink"
 	toggleable = 1
 	activates_on_touch = 1

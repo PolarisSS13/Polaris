@@ -1,5 +1,6 @@
 /obj/item/weapon/grenade/empgrenade
 	name = "emp grenade"
+	icon = 'icons/obj/device.dmi'
 	icon_state = "emp"
 	item_state = "empgrenade"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)

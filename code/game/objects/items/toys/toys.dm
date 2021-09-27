@@ -1309,16 +1309,6 @@
 		return
 	..()
 
-/* NYET.
-/obj/item/weapon/toddler
-	icon_state = "toddler"
-	name = "toddler"
-	desc = "This baby looks almost real. Wait, did it just burp?"
-	force = 5
-	w_class = ITEMSIZE_LARGE
-	slot_flags = SLOT_BACK
-*/
-
 //This should really be somewhere else but I don't know where. w/e
 
 /obj/item/weapon/inflatable_duck

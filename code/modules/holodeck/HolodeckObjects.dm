@@ -273,6 +273,7 @@
 
 /obj/item/weapon/holo/esword
 	desc = "May the force be within you. Sorta."
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "esword"
 	var/lcolor
 	var/rainbow = FALSE

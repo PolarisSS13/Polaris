@@ -1,6 +1,7 @@
 /obj/item/device/flash
 	name = "flash"
 	desc = "Used for blinding and being an asshole."
+	icon = 'icons/obj/device.dmi'
 	icon_state = "flash"
 	item_state = "flashtool"
 	throwforce = 5

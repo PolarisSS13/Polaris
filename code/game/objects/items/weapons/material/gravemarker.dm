@@ -1,6 +1,7 @@
 /obj/item/weapon/material/gravemarker
 	name = "grave marker"
 	desc = "An object used in marking graves."
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "gravemarker"
 	w_class = ITEMSIZE_LARGE
 	fragile = 1

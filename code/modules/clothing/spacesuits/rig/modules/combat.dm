@@ -11,6 +11,7 @@
 /obj/item/rig_module/device/flash
 	name = "mounted flash"
 	desc = "You are the law."
+	icon = 'icons/obj/device.dmi'
 	icon_state = "flash"
 	interface_name = "mounted flash"
 	interface_desc = "Stuns your target by blinding them with a bright light."

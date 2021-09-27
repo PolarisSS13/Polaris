@@ -141,6 +141,7 @@
 /obj/item/weapon/cannonframe
 	name = "pneumatic cannon frame"
 	desc = "A half-finished pneumatic cannon."
+	icon = 'icons/obj/weapons.dmi'
 	icon_state = "pneumatic0"
 	item_state = "pneumatic"
 

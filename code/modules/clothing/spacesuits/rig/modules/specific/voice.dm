@@ -2,6 +2,7 @@
 
 	name = "hardsuit voice synthesiser"
 	desc = "A speaker box and sound processor."
+	icon = 'icons/obj/device.dmi'
 	icon_state = "megaphone"
 	usable = 1
 	selectable = 0
