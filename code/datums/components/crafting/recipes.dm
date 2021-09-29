@@ -93,3 +93,32 @@
 	var/obj/item/weapon/material/twohanded/spear/S = result
 	S.set_material(M.material.name)
 	qdel(M)
+
+/datum/crafting_recipe/material_armor
+	name = "Material Armor Plate"
+	result = /obj/item/clothing/accessory/material/advanced
+	reqs = list(list(/obj/item/weapon/material/armor_plating/insert = 2),
+				list(/datum/reagent/toxin/plasticide = 30),
+				list(/datum/reagent/glycerol = 30),
+				list(/datum/reagent/silicate = 30)
+					)
+	parts = list(/obj/item/weapon/material/armor_plating/insert = 1)
+	machinery = list(/obj/machinery/r_n_d/protolathe = 0)
+	time = 80
+	category = CAT_CLOTHING
+
+/datum/crafting_recipe/material_armor/on_craft_completion(mob/user, atom/result)
+	var/obj/item/weapon/material/M
+	for(var/path in parts)
+		var/obj/item/weapon/material/N = locate(path) in parts
+		if(istype(N, path))
+			if(!istype(M))
+				M = N
+			else
+				N.forceMove(get_turf(result))
+	if(!istype(M))
+		return
+
+	var/obj/item/clothing/accessory/material/advanced/S = result
+	S.set_material(M.material.name)
+	qdel(M)
