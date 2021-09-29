@@ -1,12 +1,11 @@
 /obj/machinery/gateway
 	name = "gateway"
-	desc = "A state-of-the-art Nanotrasen gateway, used to teleport rich commuters anywhere in the same planetary system."
+	desc = "A state-of-the-art NanoTrasen gateway, used to teleport rich commuters anywhere in the same planetary system. This is an arrivals terminal; it can't be used to leave."
 	icon = 'icons/obj/machines/gateway.dmi'
 	icon_state = "off"
 	density = 1
 	anchored = 1
 	var/active = 0
-
 
 /obj/machinery/gateway/Initialize()
 	update_icon()
@@ -20,7 +19,11 @@
 		return
 	icon_state = "off"
 
+/obj/machinery/gateway/centerdummy
+	icon_state = "offcenter"
 
+/obj/machinery/gateway/centerdummy/update_icon()
+	return
 
 //this is da important part wot makes things go
 /obj/machinery/gateway/centerstation
