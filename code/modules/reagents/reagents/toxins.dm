@@ -126,19 +126,20 @@
 	id = "energetic_phoron"
 	description = "A strange, liquid-like form of Phoron."
 	strength = 20
+	affects_robots = TRUE
 
-	var/fire_mult = 40
+	var/fire_mult = 4
 
 /datum/reagent/toxin/energized_phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.apply_damage(removed * 5, ELECTROCUTE)
-	M.apply_damage(removed * 5, BIOACID)
+	M.apply_damage(removed * 30, ELECTROCUTE, ran_zone())
+	M.apply_damage(removed * 10, BIOACID, ran_zone())
 	if(prob(10 * fire_mult))
 		M.pl_effects()
 
 /datum/reagent/toxin/energized_phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
-	M.apply_damage(removed * 10, ELECTROCUTE)
+	M.apply_damage(removed * 40, ELECTROCUTE, ran_zone())
 	M.adjust_fire_stacks(removed * 5)
 
 /datum/reagent/toxin/lead
