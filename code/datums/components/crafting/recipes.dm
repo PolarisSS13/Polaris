@@ -45,7 +45,7 @@
 /datum/crafting_recipe/proc/on_craft_completion(mob/user, atom/result)
 	return
 
-// Computes the total reagents volume 
+// Computes the total reagents volume
 /datum/crafting_recipe/proc/get_parts_reagents_volume()
 	. = 0
 	for(var/list/L in parts)
@@ -98,19 +98,45 @@
 	name = "Material Armor Plate"
 	result = /obj/item/clothing/accessory/material/advanced
 	reqs = list(list(/obj/item/weapon/material/armor_plating/insert = 2),
-				list(/datum/reagent/toxin/plasticide = 30),
-				list(/datum/reagent/glycerol = 30),
-				list(/datum/reagent/silicate = 30)
+				list(/datum/reagent/toxin/plasticide = 5),
+				list(/datum/reagent/glycerol = 10),
+				list(/datum/reagent/silicon = 10)
 					)
-	parts = list(/obj/item/weapon/material/armor_plating/insert = 1)
+	parts = list(/obj/item/weapon/material/armor_plating/insert = 2)
 	machinery = list(/obj/machinery/r_n_d/protolathe = 0)
+	always_available = FALSE
 	time = 80
 	category = CAT_CLOTHING
+
+/datum/crafting_recipe/material_armor/chestplate
+	name = "Material armor plate"
+	result = /obj/item/clothing/accessory/material/advanced
+	always_available = TRUE
+
+/datum/crafting_recipe/material_armor/legguards
+	name = "Material armor arm-guards"
+	result = /obj/item/clothing/accessory/material/advanced/armguards
+	reqs = list(list(/obj/item/weapon/material/armor_plating/insert = 1),
+				list(/datum/reagent/toxin/plasticide = 5),
+				list(/datum/reagent/glycerol = 10),
+				list(/datum/reagent/silicon = 10)
+					)
+	always_available = TRUE
+
+/datum/crafting_recipe/material_armor/armguards
+	name = "Material armor leg-guards"
+	result = /obj/item/clothing/accessory/material/advanced/legguards
+	reqs = list(list(/obj/item/weapon/material/armor_plating/insert = 1),
+				list(/datum/reagent/toxin/plasticide = 5),
+				list(/datum/reagent/glycerol = 10),
+				list(/datum/reagent/silicon = 10)
+					)
+	always_available = TRUE
 
 /datum/crafting_recipe/material_armor/on_craft_completion(mob/user, atom/result)
 	var/obj/item/weapon/material/M
 	for(var/path in parts)
-		var/obj/item/weapon/material/N = locate(path) in parts
+		var/obj/item/weapon/material/N = locate(path) in result
 		if(istype(N, path))
 			if(!istype(M))
 				M = N

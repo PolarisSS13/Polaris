@@ -230,7 +230,7 @@ Protectiveness | Armor %
 	material_slowdown_modifier = 0
 	material_slowdown_multiplier = 0.5
 
-/obj/item/clothing/accessory/material/advanced //Not yet craftable, advanced version made with science!
+/obj/item/clothing/accessory/material/advanced //Craftable using a protolathe & advanced chemicals.
 	name = "custom armor plate"
 	desc = "A composite plate of custom machined material, designed to fit into a plate carrier. Attaches to a plate carrier."
 	icon = 'icons/obj/clothing/modular_armor.dmi'
@@ -252,7 +252,7 @@ Protectiveness | Armor %
 	gender = PLURAL
 	body_parts_covered = ARMS
 	slot = ACCESSORY_SLOT_ARMOR_A
-	material_armor_modifier = 1.2
+	material_armor_modifier = 1.1
 	material_slowdown_modifier = 1
 	material_slowdown_multiplier = 0.4
 
@@ -266,7 +266,7 @@ Protectiveness | Armor %
 	gender = PLURAL
 	body_parts_covered = LEGS
 	slot = ACCESSORY_SLOT_ARMOR_L
-	material_armor_modifier = 1.2
+	material_armor_modifier = 1.1
 	material_slowdown_modifier = 1
 	material_slowdown_multiplier = 0.4
 
