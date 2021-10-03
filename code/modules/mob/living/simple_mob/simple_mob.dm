@@ -173,6 +173,9 @@
 	if(has_eye_glow)
 		add_eyes()
 
+	if(organ_names)
+		organ_names = GET_DECL(organ_names)
+
 	return ..()
 
 /mob/living/simple_mob/Destroy()

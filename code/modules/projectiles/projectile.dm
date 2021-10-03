@@ -670,7 +670,7 @@
 	var/impacted_organ = parse_zone(def_zone)
 	if(istype(target_mob, /mob/living/simple_mob))
 		var/mob/living/simple_mob/SM = target_mob
-		var/decl/mob_organ_names/organ_plan = GET_DECL(SM.organ_names)
+		var/decl/mob_organ_names/organ_plan = SM.organ_names
 		impacted_organ = pick(organ_plan.hit_zones)
 
 	//hit messages
