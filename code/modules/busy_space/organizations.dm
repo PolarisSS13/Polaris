@@ -785,9 +785,6 @@
 						"Titan"
 						)// autogen will add a lot of other places as well.
 
-
-// To be expanded upon later, once the military lore gets sorted out.
-
 // Military
 
 /datum/lore/organization/mil/sifguard
