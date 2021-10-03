@@ -2028,6 +2028,7 @@ shaved
 
 	color_blend_mode = ICON_ADD
 
+	var/genetic = TRUE
 	var/body_parts = list() //A list of bodyparts this covers, in organ_tag defines
 	//Reminder: BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND,BP_TORSO,BP_GROIN,BP_HEAD
 
@@ -2327,6 +2328,7 @@ shaved
 	name = "Nose Tape"
 	icon_state = "nosetape"
 	body_parts = list(BP_HEAD)
+	genetic = FALSE
 
 /datum/sprite_accessory/marking/scratch_abdomen_left
 	name = "Scar, Abdomen Left"
@@ -2367,6 +2369,7 @@ shaved
 	name = "Skull Paint"
 	icon_state = "skull"
 	body_parts = list(BP_HEAD)
+	genetic = FALSE
 
 //Heterochromia
 
@@ -2569,6 +2572,7 @@ shaved
 /datum/sprite_accessory/marking/aug
 	name = "Augment (Backports, Back)"
 	icon_state = "aug_backports"
+	genetic = FALSE
 	body_parts = list(BP_TORSO)
 	species_allowed = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJ,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_ZADDAT)
 
