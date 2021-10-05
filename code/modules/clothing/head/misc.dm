@@ -496,3 +496,10 @@
 	desc = "You... you're not actually going to wear that, right?"
 	icon_state = "fishskull"
 	flags_inv = HIDEEARS|BLOCKHAIR
+
+/obj/item/clothing/head/marine
+	name = "marine helmet"
+	desc = "A marine helmet prop from the popular game 'Ruin'."
+	icon_state = "marine"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	body_parts_covered = HEAD|FACE|EYES
