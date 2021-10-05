@@ -81,7 +81,10 @@
 		toggle(FALSE)
 		return
 
-	pump_reagents()
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+	T.pump_reagents()
 	update_icon()
 
 	if(Output.get_pairing())
@@ -163,26 +166,35 @@
 	RefreshParts()
 	update_icon()
 
-/obj/machinery/pump/proc/pump_reagents()
-	var/turf/T = get_turf(src)
-	if(istype(T, /turf/simulated/floor/water))
-		reagents.add_reagent("water", reagents_per_cycle)
-		if(T.temperature <= T0C)
-			reagents.add_reagent("ice", round(reagents_per_cycle / 2, 0.1))
 
-		if((istype(T,/turf/simulated/floor/water/pool) || istype(T,/turf/simulated/floor/water/deep/pool)))
-			reagents.add_reagent("chlorine", round(reagents_per_cycle / 10, 0.1))
+/turf/proc/pump_reagents()
+	return
 
-		else if(istype(T,/turf/simulated/floor/water/contaminated))
-			reagents.add_reagent("vatstabilizer", round(reagents_per_cycle / 2))
+/turf/simulated/floor/lava/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("mineralizedfluid", round(volume / 2, 0.1))
 
-		if(T.loc.name == "Sea")	// Saltwater.
-			reagents.add_reagent("sodiumchloride", round(reagents_per_cycle / 10, 0.1))
 
-		for(var/turf/simulated/mineral/MT in range(5))
-			if(MT.mineral)
-				var/obj/effect/mineral/OR = MT.mineral
-				reagents.add_reagent(OR.ore_reagent, round(reagents_per_cycle / 20, 0.1))
+/turf/simulated/floor/water/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("water", round(volume, 0.1))
 
-	else if(istype(T, /turf/simulated/floor/lava))
-		reagents.add_reagent("mineralizedfluid", round(reagents_per_cycle / 2, 0.1))
+	if(temperature <= T0C)
+		R.add_reagent("ice", round(volume / 2, 0.1))
+
+	for(var/turf/simulated/mineral/M in orange(5))
+		if(istype(M.mineral, /obj/effect/mineral))
+			var/obj/effect/mineral/ore = M.mineral
+			reagents.add_reagent(ore.ore_reagent, round(volume / 2, 0.1))
+
+/turf/simulated/floor/water/pool/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("chlorine", round(volume / 10, 0.1))
+
+/turf/simulated/floor/water/deep/pool/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("chlorine", round(volume / 10, 0.1))
+
+/turf/simulated/floor/water/contaminated/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("vatstabilizer", round(volume / 2, 0.1))
