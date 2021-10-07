@@ -1,12 +1,14 @@
 // Overmap object for Sif, hanging in the void of space
 /obj/effect/overmap/visitable/planet/Sif
 	name = "Sif"
+	desc = "A cold, Earth-like planet. Cynosure Station is located here."
 	map_z = list(
 		Z_LEVEL_STATION_ONE,
 		Z_LEVEL_STATION_TWO,
 		Z_LEVEL_STATION_THREE,
 		Z_LEVEL_SURFACE_WILD
 	)
+	base = 1
 	in_space = 0
 	start_x  = 10
 	start_y  = 10
@@ -29,8 +31,6 @@
 
 	. = ..()
 
-/obj/effect/overmap/visitable/planet/Sif/Initialize()
-	. = ..()
 	docking_codes = null
 
 /obj/effect/overmap/visitable/planet/Sif/get_skybox_representation()
@@ -44,13 +44,7 @@
 	initial_generic_waypoints = list(
 		"nav_telecomm_dockarm" //Tcomm sat docking
 		)
-	base = 1
 	in_space = 1
 	start_x =  10
 	start_y =  10
 	map_z = list(Z_LEVEL_TCOMM, Z_LEVEL_EMPTY_SPACE)
-//	extra_z_levels = list(Z_LEVEL_TRANSIT) // Hopefully temporary, so arrivals announcements work.
-
-/obj/effect/overmap/visitable/planet/Sif/Initialize()
-	. = ..()
-	docking_codes = null
