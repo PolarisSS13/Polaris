@@ -80,7 +80,7 @@
 	return
 
 /obj/item/weapon/reagent_containers/proc/standard_feed_mob(var/mob/user, var/mob/target) // This goes into attack
-	if(!istype(target))
+	if(!istype(target) || issilicon(target))
 		return 0
 
 	if(!reagents || !reagents.total_volume)
