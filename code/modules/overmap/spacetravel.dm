@@ -10,11 +10,11 @@
 	loc = locate(nx, ny, global.using_map.overmap_z)
 	x = nx
 	y = ny
-	map_sectors["[map_z[1]]"] = src
 	if(!map_z[1])
 		log_and_message_admins("Could not create empty sector at [nx], [ny]. No available z levels to allocate.")
 		return INITIALIZE_HINT_QDEL
 
+	map_sectors["[map_z[1]]"] = src
 	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z[1]].")
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
@@ -26,7 +26,7 @@
 /obj/effect/overmap/visitable/sector/temporary/find_z_levels()
 	if(!LAZYLEN(map_z))
 		map_z = list()
-	map_z += global.using_map.get_empty_zlevel()
+	LAZYADD(map_z, global.using_map.get_empty_zlevel())
 
 /obj/effect/overmap/visitable/sector/temporary/proc/is_empty(var/mob/observer)
 	if(!LAZYLEN(map_z))
