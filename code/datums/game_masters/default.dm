@@ -10,8 +10,12 @@
 /datum/game_master/default/choose_event()
 	log_game_master("Now starting event decision.")
 
+	var/target_region = pickweight(metric.assess_player_regions())
+	if(!lentext(target_region))
+		target_region = REGION_UNIVERSAL
+
 	var/list/most_active_departments = metric.assess_all_departments(3, list(last_department_used))
-	var/list/best_events = decide_best_events(most_active_departments)
+	var/list/best_events = decide_best_events(most_active_departments, target_region)
 
 	if(LAZYLEN(best_events))
 		log_game_master("Got [best_events.len] choice\s for the next event.")
@@ -32,12 +36,12 @@
 			last_department_used = LAZYACCESS(choice.departments, 1)
 			return choice
 
-/datum/game_master/default/proc/decide_best_events(list/most_active_departments)
+/datum/game_master/default/proc/decide_best_events(list/most_active_departments, var/target_region)
 	if(!LAZYLEN(most_active_departments)) // Server's empty?
 		log_game_master("Game Master failed to find any active departments.")
 		return list()
 
-	var/list/best_events = list()
+	var/list/best_events = filter_events_by_region(target_region)
 	if(most_active_departments.len >= 2)
 		var/list/top_two = list(most_active_departments[1], most_active_departments[2])
 		best_events = filter_events_by_departments(top_two)

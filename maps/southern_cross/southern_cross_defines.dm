@@ -162,6 +162,7 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES
 	holomap_legend_x = 220
 	holomap_legend_y = 160
+	event_regions = list(REGION_SPACESTATION)
 
 /datum/map_z_level/southern_cross/station/station_one
 	z = Z_LEVEL_STATION_ONE
@@ -192,24 +193,28 @@
 	name = "Empty"
 	flags = MAP_LEVEL_PLAYER
 	transit_chance = 76
+	event_regions = list(REGION_DEEPSPACE)
 
 /datum/map_z_level/southern_cross/surface
 	z = Z_LEVEL_SURFACE
 	name = "Plains"
 	flags = MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONSOLES
 	base_turf = /turf/simulated/floor/outdoors/rocks
+	event_region = list(REGION_PLANETSURFACE)
 
 /datum/map_z_level/southern_cross/surface_mine
 	z = Z_LEVEL_SURFACE_MINE
 	name = "Mountains"
 	flags = MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONSOLES
 	base_turf = /turf/simulated/floor/outdoors/rocks
+	event_region = list(REGION_PLANETSURFACE, REGION_SUBTERRANEAN)
 
 /datum/map_z_level/southern_cross/surface_wild
 	z = Z_LEVEL_SURFACE_WILD
 	name = "Wilderness"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONTACT|MAP_LEVEL_CONSOLES
 	base_turf = /turf/simulated/floor/outdoors/rocks
+	event_region = list(REGION_PLANETSURFACE)
 
 /datum/map_z_level/southern_cross/misc
 	z = Z_LEVEL_MISC
