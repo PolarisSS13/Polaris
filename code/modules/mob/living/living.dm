@@ -1141,7 +1141,7 @@
 	// A living player is always in a universal region
 	. = list(EVENT_REGION_UNIVERSAL)
 
-	var/turf/T = get_turf(L)
+	var/turf/T = get_turf(src)
 	var/obj/effect/overmap/visitable/M = get_overmap_sector(T.z)
 	
 	if(istype(M))
@@ -1153,6 +1153,6 @@
 		else
 			. |= EVENT_REGION_PLANETSURFACE
 
-	var/datum/map_level/zlevel = using_map.zlevels["[T.z]"]
+	var/datum/map_z_level/zlevel = using_map.zlevels["[T.z]"]
 	if(istype(zlevel))
 		. |= zlevel.event_regions
