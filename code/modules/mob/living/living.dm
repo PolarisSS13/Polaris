@@ -1139,7 +1139,7 @@
 
 /mob/living/proc/get_player_regions()
 	// A living player is always in a universal region
-	. = list(REGION_UNIVERSAL)
+	. = list(EVENT_REGION_UNIVERSAL)
 
 	var/turf/T = get_turf(L)
 	var/obj/effect/overmap/visitable/M = get_overmap_sector(T.z)
@@ -1147,12 +1147,12 @@
 	if(istype(M))
 		if(M.in_space)
 			if(T.z in using_map.station_levels)
-				. |= REGION_SPACESTATION
+				. |= EVENT_REGION_SPACESTATION
 			else
-				. |= REGION_DEEPSPACE
+				. |= EVENT_REGION_DEEPSPACE
 		else
-			. |= REGION_PLANETSURFACE
+			. |= EVENT_REGION_PLANETSURFACE
 
-	var/datum/map_level/Z = using_map.zlevels["[T.z]"]
-	if(istype(Z))
-		. |= Z.event_regions
+	var/datum/map_level/zlevel = using_map.zlevels["[T.z]"]
+	if(istype(zlevel))
+		. |= zlevel.event_regions

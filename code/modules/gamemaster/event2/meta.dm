@@ -17,7 +17,7 @@
 	// The region affects by this event
 	// Affects event weight by a similar metric to department population:
 	// If everybody is planetside, then a meteor storm on the station doesn't really add as much
-	var/list/regions = list(REGION_UNIVERSAL)
+	var/list/regions = list(EVENT_REGION_UNIVERSAL)
 
 	// A guess on how disruptive to a round the event might be. If the action is chosen, the GM's
 	// 'danger' score is increased by this number.

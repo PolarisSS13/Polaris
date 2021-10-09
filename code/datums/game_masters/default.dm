@@ -12,7 +12,7 @@
 
 	var/target_region = pickweight(metric.assess_player_regions())
 	if(!lentext(target_region))
-		target_region = REGION_UNIVERSAL
+		target_region = EVENT_REGION_UNIVERSAL
 
 	var/list/most_active_departments = metric.assess_all_departments(3, list(last_department_used))
 	var/list/best_events = decide_best_events(most_active_departments, target_region)
