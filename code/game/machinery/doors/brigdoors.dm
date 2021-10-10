@@ -285,7 +285,7 @@
 	name = "Cell 6"
 	id = "Cell 6"
 
-/obj/machinery/door_timer/tactical_pet_storage //Vorestation Addition
+/obj/machinery/door_timer/tactical_pet_storage
 	name = "Tactical Pet Storage"
 	id = "tactical_pet_storage"
 	desc = "Opens and Closes on a timer. This one seals away a tactical boost in morale."

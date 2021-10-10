@@ -424,7 +424,7 @@
 	return fulltile
 
 /obj/structure/window/is_between_turfs(var/turf/origin, var/turf/target)
-	if(fulltile)
+	if(is_fulltile())
 		return TRUE
 	return ..()
 

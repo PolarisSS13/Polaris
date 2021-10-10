@@ -16,31 +16,13 @@
 
 /obj/machinery/appliance/mixer/cereal/Initialize()
 	. = ..()
-	
+
 	cerealmaker_loop = new(list(src), FALSE)
-	
+
 /obj/machinery/appliance/mixer/cereal/Destroy()
 	. = ..()
-	
+
 	QDEL_NULL(cerealmaker_loop)
-
-/*
-/obj/machinery/appliance/mixer/cereal/change_product_strings(var/obj/item/weapon/reagent_containers/food/snacks/product, var/datum/cooking_item/CI)
-	. = ..()
-	product.name = "box of [CI.object.name] cereal"
-
-/obj/machinery/appliance/mixer/cereal/change_product_appearance(var/obj/item/weapon/reagent_containers/food/snacks/product)
-	product.icon = 'icons/obj/food.dmi'
-	product.icon_state = "cereal_box"
-	product.filling_color = CI.object.color
-
-	var/image/food_image = image(CI.object.icon, CI.object.icon_state)
-	food_image.color = CI.object.color
-	food_image.overlays += CI.object.overlays
-	food_image.transform *= 0.7
-
-	product.overlays += food_image
-*/
 
 /obj/machinery/appliance/mixer/cereal/update_icon()
 	. = ..()
@@ -83,4 +65,4 @@
 
 	result.color = result.filling_color
 	for (var/i in images)
-		result.overlays += images[i]
+		result.add_overlay(images[i])

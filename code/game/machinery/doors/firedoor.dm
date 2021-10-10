@@ -57,7 +57,7 @@
 		if(F != src)
 			log_debug("Duplicate firedoors at [x],[y],[z]")
 			return INITIALIZE_HINT_QDEL
-	
+
 	var/area/A = get_area(src)
 	ASSERT(istype(A))
 
@@ -80,7 +80,7 @@
 
 /obj/machinery/door/firedoor/examine(mob/user)
 	. = ..()
-	
+
 	if(!Adjacent(user))
 		return .
 
@@ -439,29 +439,29 @@
 
 
 /obj/machinery/door/firedoor/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(density)
 		icon_state = "door_closed"
 		if(prying)
 			icon_state = "prying_closed"
 		if(hatch_open)
-			overlays += "hatch"
+			add_overlay("hatch")
 		if(blocked)
-			overlays += "welded"
+			add_overlay("welded")
 		if(pdiff_alert)
-			overlays += "palert"
+			add_overlay("palert")
 		if(dir_alerts)
 			for(var/d=1;d<=4;d++)
 				var/cdir = cardinal[d]
 				for(var/i=1;i<=ALERT_STATES.len;i++)
 					if(dir_alerts[d] & (1<<(i-1)))
-						overlays += new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir)
+						add_overlay(new/icon(icon,"alert_[ALERT_STATES[i]]", dir=cdir))
 	else
 		icon_state = "door_open"
 		if(prying)
 			icon_state = "prying_open"
 		if(blocked)
-			overlays += "welded_open"
+			add_overlay("welded_open")
 	return
 
 //These are playing merry hell on ZAS.  Sorry fellas :(

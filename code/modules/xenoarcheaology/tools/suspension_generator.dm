@@ -29,7 +29,7 @@
 		for(var/obj/item/I in T)
 			if(!suspension_field.contents.len)
 				suspension_field.icon_state = "energynet"
-				suspension_field.overlays += "shield2"
+				suspension_field.add_overlay("shield2")
 			I.forceMove(suspension_field)
 
 		if(cell.charge <= 0)

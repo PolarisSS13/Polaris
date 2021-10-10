@@ -134,7 +134,7 @@ GLOBAL_LIST_EMPTY(apcs)
 	var/global/list/status_overlays_lighting
 	var/global/list/status_overlays_environ
 	var/alarms_hidden = FALSE //If power alarms from this APC are visible on consoles
-	
+
 	var/nightshift_lights = FALSE
 	var/nightshift_setting = NIGHTSHIFT_AUTO
 	var/last_nightshift_switch = 0
@@ -363,13 +363,11 @@ GLOBAL_LIST_EMPTY(apcs)
 			icon_state = "apcemag"
 
 	if(!(update_state & UPDATE_ALLGOOD))
-		if(overlays.len)
-			overlays = 0
-			return
+		cut_overlays()
+		return
 
 	if(update & 2)
-		if(overlays.len)
-			overlays.len = 0
+		cut_overlays()
 		if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
 			overlays += status_overlays_lock[locked+1]
 			overlays += status_overlays_charging[charging+1]

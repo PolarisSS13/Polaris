@@ -125,7 +125,7 @@
 	if(!check_icon_cache())
 		return
 
-	overlays.Cut()
+	cut_overlays()
 
 	var/vent_icon = "vent"
 
@@ -143,7 +143,7 @@
 	else
 		vent_icon += "[pump_direction ? "out" : "in"]"
 
-	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
+	add_overlay(icon_manager.get_atmos_icon("device", , , vent_icon))
 
 /obj/machinery/atmospherics/unary/vent_pump/update_underlays()
 	if(..())
@@ -168,7 +168,7 @@
 		soundloop.stop()
 		return 0
 	if(!use_power)
-		soundloop.stop() 
+		soundloop.stop()
 		return 0
 	if(welded)
 		soundloop.stop()

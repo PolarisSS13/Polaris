@@ -21,7 +21,7 @@
 
 	//R&D tech level
 	origin_tech = list(TECH_ENGINEERING = 1)
-	
+
 	tool_qualities = list(TOOL_WELDER)
 
 	//Welding tool specific stuff
@@ -203,11 +203,10 @@
 
 /obj/item/weapon/weldingtool/update_icon()
 	..()
-	overlays.Cut()
+	cut_overlays()
 	// Welding overlay.
 	if(welding)
-		var/image/I = image(icon, src, "[icon_state]-on")
-		overlays.Add(I)
+		add_overlay("[icon_state]-on")
 		item_state = "[initial(item_state)]1"
 	else
 		item_state = initial(item_state)
@@ -216,8 +215,7 @@
 	if(change_icons && get_max_fuel())
 		var/ratio = get_fuel() / get_max_fuel()
 		ratio = CEILING(ratio * 4, 1) * 25
-		var/image/I = image(icon, src, "[icon_state][ratio]")
-		overlays.Add(I)
+		add_overlay("[icon_state][ratio]")
 
 	// Lights
 	if(welding && flame_intensity)

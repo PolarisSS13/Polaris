@@ -162,7 +162,7 @@
 			var/icon/test = getFlatIcon(W)
 			test.Shift(NORTH,1)
 			test.Shift(EAST,6)
-			overlays += test
+			add_overlay(test)
 
 	return ..()
 
@@ -358,11 +358,9 @@
 
 /obj/structure/reagent_dispensers/water_cooler/update_icon()
 	icon_state = "water_cooler"
-	overlays.Cut()
-	var/image/I
+	cut_overlays()
 	if(bottle)
-		I = image(icon, "water_cooler_bottle")
-		overlays += I
+		add_overlay("water_cooler_bottle")
 	return
 
 /obj/structure/reagent_dispensers/beerkeg
@@ -405,7 +403,7 @@
 /obj/structure/reagent_dispensers/acid/Initialize()
 	. = ..()
 	reagents.add_reagent("sacid", 1000)
-	
+
 //Cooking oil refill tank
 /obj/structure/reagent_dispensers/cookingoil
 	name = "cooking oil tank"

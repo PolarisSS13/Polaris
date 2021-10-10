@@ -293,6 +293,7 @@
 	return 0
 
 /obj/machinery/alarm/update_icon()
+	cut_overlays()
 	if(panel_open)
 		icon_state = "alarmx"
 		set_light(0)
@@ -529,7 +530,7 @@
 			"unit" = "%",
 			"danger_level" = get_danger_level(environment.gas[gas_id] * partial_pressure, TLV[gas_id])
 		))
-	
+
 	if(!locked || issilicon(user) || data["remoteUser"])
 		data["vents"] = list()
 		for(var/id_tag in A.air_vent_names)
@@ -634,7 +635,7 @@
 			else
 				target_temperature = input_temperature + T0C
 		return TRUE
-	
+
 	// Account for remote users here.
 	// Yes, this is kinda snowflaky; however, I would argue it would be far more snowflakey
 	// to include "custom hrefs" and all the other bullshit that nano states have just for the

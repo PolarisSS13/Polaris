@@ -36,7 +36,7 @@
 	..(severity)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/update_icon()
-	src.overlays = 0
+	cut_overlays()
 
 	if(on && cell && cell.charge)
 		icon_state = "pscrubber:1"
@@ -44,10 +44,10 @@
 		icon_state = "pscrubber:0"
 
 	if(holding)
-		overlays += "scrubber-open"
+		add_overlay("scrubber-open")
 
 	if(connected_port)
-		overlays += "scrubber-connector"
+		add_overlay("scrubber-connector")
 
 	return
 
@@ -109,7 +109,7 @@
 	data["on"] = on ? 1 : 0
 	data["connected"] = connected_port ? 1 : 0
 	data["pressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
-	
+
 	data["rate"] = round(volume_rate)
 	data["minrate"] = round(minrate)
 	data["maxrate"] = round(maxrate)
@@ -199,7 +199,7 @@
 		update_use_power(new_use_power)
 	if(!on)
 		return
-	
+
 	var/power_draw = -1
 
 	var/datum/gas_mixture/environment = loc.return_air()

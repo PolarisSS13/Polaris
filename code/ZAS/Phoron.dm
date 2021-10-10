@@ -57,11 +57,11 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	else
 		if(!contaminated)
 			contaminated = 1
-			overlays += contamination_overlay
+			add_overlay(contamination_overlay)
 
 /obj/item/proc/decontaminate()
 	contaminated = 0
-	overlays -= contamination_overlay
+	cut_overlay(contamination_overlay)
 
 /mob/proc/contaminate()
 
@@ -96,7 +96,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	if(vsc.plc.SKIN_BURNS && (species.breath_type != "phoron"))
 		if(!pl_head_protected() || !pl_suit_protected())
 			burn_skin(0.75)
-			if(prob(20)) 
+			if(prob(20))
 				to_chat(src, "<span class='danger'>Your skin burns!</span>")
 			updatehealth()
 

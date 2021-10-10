@@ -131,7 +131,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/update_icon()
 	if(!seed || !plant_controller || !plant_controller.plant_icon_cache)
 		return
-	overlays.Cut()
+	cut_overlays()
 	var/image/plant_icon
 	var/icon_key = "fruit-[seed.get_trait(TRAIT_PRODUCT_ICON)]-[seed.get_trait(TRAIT_PRODUCT_COLOUR)]-[seed.get_trait(TRAIT_PLANT_COLOUR)]"
 	if(plant_controller.plant_icon_cache[icon_key])
@@ -140,13 +140,13 @@
 		plant_icon = image('icons/obj/hydroponics_products.dmi',"blank")
 		var/image/fruit_base = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-product")
 		fruit_base.color = "[seed.get_trait(TRAIT_PRODUCT_COLOUR)]"
-		plant_icon.overlays |= fruit_base
+		plant_icon.add_overlay(fruit_base)
 		if("[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf" in cached_icon_states('icons/obj/hydroponics_products.dmi'))
 			var/image/fruit_leaves = image('icons/obj/hydroponics_products.dmi',"[seed.get_trait(TRAIT_PRODUCT_ICON)]-leaf")
 			fruit_leaves.color = "[seed.get_trait(TRAIT_PLANT_COLOUR)]"
-			plant_icon.overlays |= fruit_leaves
+			add_overlay(fruit_leaves)
 		plant_controller.plant_icon_cache[icon_key] = plant_icon
-	overlays |= plant_icon
+	add_overlay(plant_icon)
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/Crossed(var/mob/living/M)
 	if(M.is_incorporeal())
@@ -191,7 +191,7 @@
 				pocell.charge = pocell.maxcharge
 				qdel(src)
 				return
-	
+
 		if(W.sharp)
 
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
@@ -219,7 +219,7 @@
 						to_chat(user, "You add the newly-formed wood to the stack. It now contains [NG.amount] planks.")
 					qdel(src)
 					return
-				
+
 				if(seed.kitchen_tag == "sunflower")
 					new /obj/item/weapon/reagent_containers/food/snacks/rawsunflower(get_turf(src))
 					to_chat(user, SPAN_NOTICE("You remove the seeds from the flower, slightly damaging them."))
@@ -231,25 +231,25 @@
 					new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
 					return
-				
+
 				if(!isnull(seed.chems["carrotjuice"]))
 					to_chat(user, "You slice \the [src] into sticks.")
 					new /obj/item/weapon/reagent_containers/food/snacks/carrotfries(get_turf(src))
 					qdel(src)
 					return
-				
+
 				if(!isnull(seed.chems["pineapplejuice"]))
 					to_chat(user, "You slice \the [src] into rings.")
 					new /obj/item/weapon/reagent_containers/food/snacks/pineapple_ring(get_turf(src))
 					qdel(src)
 					return
-				
+
 				if(!isnull(seed.chems["soymilk"]))
 					to_chat(user, "You roughly chop up \the [src].")
 					new /obj/item/weapon/reagent_containers/food/snacks/soydope(get_turf(src))
 					qdel(src)
 					return
-				
+
 				if(seed.get_trait(TRAIT_FLESH_COLOUR))
 					to_chat(user, "You slice up \the [src].")
 					var/slices = rand(3,5)
@@ -386,9 +386,9 @@ var/list/fruit_icon_cache = list()
 		var/image/I = image(icon,"fruit_rind")
 		I.color = rind_colour
 		fruit_icon_cache["rind-[rind_colour]"] = I
-	overlays |= fruit_icon_cache["rind-[rind_colour]"]
+	add_overlay(fruit_icon_cache["rind-[rind_colour]"])
 	if(!fruit_icon_cache["slice-[rind_colour]"])
 		var/image/I = image(icon,"fruit_slice")
 		I.color = flesh_colour
 		fruit_icon_cache["slice-[rind_colour]"] = I
-	overlays |= fruit_icon_cache["slice-[rind_colour]"]
+	add_overlay(fruit_icon_cache["slice-[rind_colour]"])
