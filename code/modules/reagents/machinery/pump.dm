@@ -34,6 +34,13 @@
 	RefreshParts()
 	update_icon()
 
+/obj/machinery/pump/Destroy()
+	qdel(cell)
+	qdel(Output)
+	cell = null
+	Output = null
+	. = ..()
+
 /obj/machinery/pump/RefreshParts()
 	var/obj/item/weapon/stock_parts/manipulator/SM = locate() in component_parts
 	active_power_usage = initial(active_power_usage) / SM.rating
@@ -78,26 +85,26 @@
 		return
 	
 	if(!anchored || !(cell?.use(active_power_usage)))
-		toggle(FALSE)
+		set_state(FALSE)
 		return
 
 	var/turf/T = get_turf(src)
 	if(!istype(T))
 		return
-	T.pump_reagents()
+	T.pump_reagents(reagents, reagents_per_cycle)
 	update_icon()
 
 	if(Output.get_pairing())
 		reagents.trans_to_holder(Output.reagents, Output.reagents.maximum_volume)
 		if(prob(5))
-			visible_message("<span class='notice'>\The [src] gurgles as it exports fluid.</span>")
+			visible_message("<span class='notice'>\The [src] gurgles as it pumps fluid.</span>")
 
 
-// Toggles the power state, if possible.
+// Sets the power state, if possible.
 // Returns TRUE/FALSE on power state changing
 // var/target = target power state
 // var/message = TRUE/FALSE whether to make a message about state change
-/obj/machinery/pump/proc/toggle(var/target, var/message = TRUE)
+/obj/machinery/pump/proc/set_state(var/target, var/message = TRUE)
 	if(target == on)
 		return FALSE
 
@@ -118,7 +125,7 @@
 	return attack_hand(user)
 
 /obj/machinery/pump/attack_ai(mob/user)
-	if(!toggle(!on))
+	if(!set_state(!on))
 		to_chat(user, "<span class='notice'>You try to toggle \the [src] but it does not respond.</span>")
 
 /obj/machinery/pump/attack_hand(mob/user)
@@ -127,11 +134,11 @@
 		cell.add_fingerprint(user)
 		cell.update_icon()
 		cell = null
-		toggle(FALSE)
+		set_state(FALSE)
 		to_chat(user, "<span class='notice'>You remove the power cell.</span>")
 		return
 
-	if(!toggle(!on))
+	if(!set_state(!on))
 		to_chat(user, "<span class='notice'>You try to toggle \the [src] but it does not respond.</span>")
 
 /obj/machinery/pump/attackby(obj/item/weapon/W, mob/user)
