@@ -26,6 +26,12 @@
 
 	..()
 
+/datum/artifact_effect/proc/get_master_holder()	// Return the effectmaster's holder, if it is set to an effectmaster. Otherwise, master is the target object.
+	if(istype(master))
+		return master.holder
+	else
+		return master
+
 /datum/artifact_effect/New(var/datum/component/artifact_master/newmaster)
 	..()
 
@@ -61,15 +67,17 @@
 	//so that other stuff happens first
 	set waitfor = FALSE
 
+	var/atom/target = get_master_holder()
+
 	if(world.time - last_activation > 1 SECOND)
 		last_activation = world.time
 		if(activated)
 			activated = 0
 		else
 			activated = 1
-		if(reveal_toggle && master.holder)
-			if(!isliving(master.holder))
-				master.holder.update_icon()
+		if(reveal_toggle && target)
+			if(!isliving(target))
+				target.update_icon()
 			var/display_msg
 			if(activated)
 				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
@@ -78,11 +86,11 @@
 
 			if(active_effect)
 				if(activated)
-					master.holder.underlays.Add(active_effect)
+					target.underlays.Add(active_effect)
 				else
-					master.holder.underlays.Remove(active_effect)
+					target.underlays.Remove(active_effect)
 
-			var/atom/toplevelholder = master.holder
+			var/atom/toplevelholder = target
 			while(!istype(toplevelholder.loc, /turf))
 				toplevelholder = toplevelholder.loc
 			toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")

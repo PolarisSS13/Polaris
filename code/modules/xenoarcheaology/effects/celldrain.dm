@@ -19,7 +19,7 @@
 		return 1
 
 /datum/artifact_effect/celldrain/DoEffectAura()
-	var/atom/holder = master.holder
+	var/atom/holder = get_master_holder()
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/obj/machinery/power/apc/C in range(200, T))
@@ -36,7 +36,7 @@
 	return 1
 
 /datum/artifact_effect/celldrain/DoEffectPulse()
-	var/atom/holder = master.holder
+	var/atom/holder = get_master_holder()
 	if(holder)
 		var/turf/T = get_turf(holder)
 		for (var/obj/machinery/power/apc/C in range(200, T))
