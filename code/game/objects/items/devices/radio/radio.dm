@@ -1,23 +1,23 @@
 // Access check is of the type requires one. These have been carefully selected to avoid allowing the janitor to see channels he shouldn't
 var/global/list/default_internal_channels = list(
-	num2text(PUB_FREQ) = list(),
-	num2text(AI_FREQ)  = list(access_synth),
-	num2text(ENT_FREQ) = list(),
-	num2text(ERT_FREQ) = list(access_cent_specops),
-	num2text(COMM_FREQ)= list(access_heads),
-	num2text(ENG_FREQ) = list(access_engine_equip, access_atmospherics),
-	num2text(MED_FREQ) = list(access_medical_equip),
-	num2text(MED_I_FREQ)=list(access_medical_equip),
-	num2text(SEC_FREQ) = list(access_security),
-	num2text(SEC_I_FREQ)=list(access_security),
-	num2text(SCI_FREQ) = list(access_tox,access_robotics,access_xenobiology),
-	num2text(SUP_FREQ) = list(access_cargo),
-	num2text(SRV_FREQ) = list(access_janitor, access_hydroponics)
+	num2text(PUB_FREQ) =   list(),
+	num2text(AI_FREQ)  =   list(access_synth),
+	num2text(ENT_FREQ) =   list(),
+	num2text(ERT_FREQ) =   list(access_cent_specops),
+	num2text(COMM_FREQ) =  list(access_heads),
+	num2text(ENG_FREQ) =   list(access_engine_equip, access_atmospherics),
+	num2text(MED_FREQ) =   list(access_medical_equip),
+	num2text(MED_I_FREQ) = list(access_medical_equip),
+	num2text(SEC_FREQ) =   list(access_security),
+	num2text(SEC_I_FREQ) = list(access_security),
+	num2text(SCI_FREQ) =   list(access_tox,access_robotics,access_xenobiology),
+	num2text(SUP_FREQ) =   list(access_cargo),
+	num2text(SRV_FREQ) =   list(access_janitor, access_hydroponics)
 )
 
 var/global/list/default_medbay_channels = list(
-	num2text(PUB_FREQ) = list(),
-	num2text(MED_FREQ) = list(access_medical_equip),
+	num2text(PUB_FREQ) =   list(),
+	num2text(MED_FREQ) =   list(access_medical_equip),
 	num2text(MED_I_FREQ) = list(access_medical_equip)
 )
 
@@ -70,12 +70,6 @@ var/global/list/default_medbay_channels = list(
 	frequency = new_frequency
 	radio_connection = radio_controller.add_object(src, frequency, RADIO_CHAT)
 
-/obj/item/device/radio/Initialize()
-	. = ..()
-	wires = new(src)
-	internal_channels = default_internal_channels.Copy()
-	listening_objects += src
-
 /obj/item/device/radio/Destroy()
 	qdel(wires)
 	wires = null
@@ -86,9 +80,13 @@ var/global/list/default_medbay_channels = list(
 			radio_controller.remove_object(src, radiochannels[ch_name])
 	return ..()
 
-
 /obj/item/device/radio/Initialize()
 	. = ..()
+
+	wires = new(src)
+	internal_channels = default_internal_channels.Copy()
+	listening_objects += src
+
 	if(frequency < RADIO_LOW_FREQ || frequency > RADIO_HIGH_FREQ)
 		frequency = sanitize_frequency(frequency, RADIO_LOW_FREQ, RADIO_HIGH_FREQ)
 	set_frequency(frequency)
