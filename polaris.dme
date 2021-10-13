@@ -1337,6 +1337,7 @@
 #include "code\game\turfs\simulated\dungeon\wall.dm"
 #include "code\game\turfs\simulated\outdoors\dirt.dm"
 #include "code\game\turfs\simulated\outdoors\grass.dm"
+#include "code\game\turfs\simulated\outdoors\grass_random.dm"
 #include "code\game\turfs\simulated\outdoors\outdoors.dm"
 #include "code\game\turfs\simulated\outdoors\outdoors_attackby.dm"
 #include "code\game\turfs\simulated\outdoors\sidewalk.dm"
