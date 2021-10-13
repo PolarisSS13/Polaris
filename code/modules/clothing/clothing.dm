@@ -824,6 +824,12 @@
 	var/icon/rolled_down_icon = 'icons/mob/uniform_rolled_down.dmi'
 	var/icon/rolled_down_sleeves_icon = 'icons/mob/uniform_sleeves_rolled.dmi'
 
+/obj/item/clothing/under/AltClick(mob/user)
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.AltClick(user))
+			return TRUE
+	. = ..()
+	
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(LAZYLEN(accessories))
 		..()
