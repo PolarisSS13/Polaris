@@ -128,7 +128,7 @@
 //	var/assembly_type = /obj/item/device/assembly/signaler
 
 	//Note that the maximum amount of gas you can put in a 70L air tank at 1013.25 kPa and 519K is 16.44 mol.
-/obj/effect/spawner/onetankbomb/full/Initialize() //just needs an assembly.
+/obj/effect/spawner/onetankbomb/frag/Initialize() //just needs an assembly.
 	. = ..()
 	var/type = pick(/obj/item/weapon/tank/phoron/onetankbomb/full, /obj/item/weapon/tank/oxygen/onetankbomb/full)
 	new type(src.loc)	

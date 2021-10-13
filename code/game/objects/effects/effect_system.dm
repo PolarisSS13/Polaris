@@ -103,9 +103,6 @@ steam.start() -- spawns the effect
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-
-/obj/effect/effect/sparks/Initialize()
-	. = ..()
 	QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/effect/sparks/Destroy()

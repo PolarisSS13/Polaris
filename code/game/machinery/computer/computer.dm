@@ -18,9 +18,6 @@
 
 /obj/machinery/computer/Initialize()
 	. = ..()
-
-/obj/machinery/computer/Initialize()
-	. = ..()
 	power_change()
 	update_icon()
 

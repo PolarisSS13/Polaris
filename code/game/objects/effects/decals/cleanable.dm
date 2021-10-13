@@ -20,6 +20,8 @@ generic_filth = TRUE means when the decal is saved, it will be switched out for 
 	if(!mapload || !config.persistence_ignore_mapload)
 		SSpersistence.track_value(src, /datum/persistent/filth)
 	. = ..()
+	if (random_icon_states && length(src.random_icon_states) > 0)
+		src.icon_state = pick(src.random_icon_states)
 
 /obj/effect/decal/cleanable/Destroy()
 	SSpersistence.forget_value(src, /datum/persistent/filth)
@@ -30,8 +32,3 @@ generic_filth = TRUE means when the decal is saved, it will be switched out for 
 		qdel(src)
 		return
 	..()
-
-/obj/effect/decal/cleanable/Initialize()
-	if (random_icon_states && length(src.random_icon_states) > 0)
-		src.icon_state = pick(src.random_icon_states)
-	. = ..()

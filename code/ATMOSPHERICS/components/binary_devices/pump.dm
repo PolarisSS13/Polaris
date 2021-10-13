@@ -41,6 +41,8 @@ Thus, the two variables affect pump operation are set in New():
 	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	if(frequency)
+		set_frequency(frequency)
 
 /obj/machinery/atmospherics/binary/pump/Destroy()
 	unregister_radio(src, frequency)
@@ -165,11 +167,6 @@ Thus, the two variables affect pump operation are set in New():
 	)
 
 	return data
-
-/obj/machinery/atmospherics/binary/pump/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
 
 /obj/machinery/atmospherics/binary/pump/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))

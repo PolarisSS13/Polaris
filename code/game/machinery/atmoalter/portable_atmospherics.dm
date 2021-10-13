@@ -14,15 +14,9 @@
 	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 
 /obj/machinery/portable_atmospherics/Initialize()
-	. = ..()
-
+	..()
 	air_contents.volume = volume
 	air_contents.temperature = T20C
-
-	return 1
-
-/obj/machinery/portable_atmospherics/Initialize()
-	..()
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/LateInitialize()

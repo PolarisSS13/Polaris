@@ -9,10 +9,6 @@
 	var/obj/machinery/camera/network/thunder/camera
 	var/obj/item/device/radio/radio
 
-/obj/item/device/tvcamera/Initialize()
-	. = ..()
-	listening_objects += src
-
 /obj/item/device/tvcamera/Destroy()
 	listening_objects -= src
 	qdel(camera)
@@ -28,6 +24,7 @@
 
 /obj/item/device/tvcamera/Initialize()
 	. = ..()
+	listening_objects += src
 	camera = new(src)
 	camera.c_tag = channel
 	camera.status = FALSE

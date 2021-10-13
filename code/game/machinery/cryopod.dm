@@ -310,17 +310,13 @@
 /obj/machinery/cryopod/Initialize()
 	. = ..()
 	announce = new /obj/item/device/radio/intercom(src)
+	find_control_computer()
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant.resting = 1
 	return ..()
-
-/obj/machinery/cryopod/Initialize()
-	. = ..()
-
-	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)
 	control_computer = null

@@ -44,6 +44,8 @@
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/Initialize()
 	. = ..()
+	if(frequency)
+		set_frequency(frequency)
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	icon = null
@@ -193,11 +195,6 @@
 	radio_connection.post_signal(src, signal, radio_filter = RADIO_ATMOSIA)
 
 	return 1
-
-/obj/machinery/atmospherics/binary/dp_vent_pump/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
 
 /obj/machinery/atmospherics/binary/dp_vent_pump/examine(mob/user)
 	. = ..()

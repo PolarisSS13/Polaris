@@ -12,9 +12,6 @@
 	if(newcolor)
 		color = newcolor
 	. = ..()
-
-/obj/effect/temporary_effect/eruption/Initialize()
-	. = ..()
 	flick("[icon_state]_create",src)
 
 /obj/effect/temporary_effect/eruption/Destroy()
