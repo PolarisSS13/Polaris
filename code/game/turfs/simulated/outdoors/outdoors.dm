@@ -48,7 +48,7 @@ var/list/turf_edge_cache = list()
 		if(do_after(user, delay, src))
 			if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in contents))
 				var/obj/machinery/portable_atmospherics/hydroponics/soil/soil = new(src)
-				user.visible_message(SPAN_NOTICE("\The [src] digs \a [soil] into \the [src]."))
+				user.visible_message(SPAN_NOTICE("\The [user] digs \a [soil] into \the [src]."))
 			else
 				var/loot_type = get_loot_type()
 				if(loot_type)
