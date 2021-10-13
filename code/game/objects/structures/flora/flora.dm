@@ -511,7 +511,7 @@
 	max_harvests = 3
 	min_harvests = 0
 	harvest_loot = list(
-		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/wabback = 15,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/whitewabback = 15,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/blackwabback = 1,
 		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/wildwabback = 30
 	)
