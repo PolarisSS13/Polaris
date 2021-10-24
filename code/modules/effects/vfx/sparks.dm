@@ -12,15 +12,12 @@
 	anchored = 1.0
 	mouse_opacity = 0
 
-/obj/effect/vfx/sparks/New()
-	..()
+/obj/effect/vfx/sparks/Initialize()
+	. = ..()
 	playsound(src, "sparks", 100, 1)
 	var/turf/T = src.loc
 	if (istype(T, /turf))
 		T.hotspot_expose(1000,100)
-
-/obj/effect/vfx/sparks/Initialize()
-	. = ..()
 	QDEL_IN(src, 5 SECONDS)
 
 /obj/effect/vfx/sparks/Destroy()

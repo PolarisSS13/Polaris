@@ -14,9 +14,7 @@
 
 	if(fleshcolor) src.fleshcolor = fleshcolor
 	if(bloodcolor) src.bloodcolor = bloodcolor
-	Gib(loc,MobDNA)
 
-/obj/effect/spawner/gibs/proc/Gib(atom/location, var/datum/dna/MobDNA = null)
 	if(gibtypes.len != gibamounts.len || gibamounts.len != gibdirections.len)
 		to_world("<span class='warning'>Gib list length mismatch!</span>")
 		return
@@ -25,14 +23,14 @@
 
 	if(sparks)
 		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread()
-		s.set_up(2, 1, get_turf(location)) // Not sure if it's safe to pass an arbitrary object to set_up, todo
+		s.set_up(2, 1, get_turf(loc)) // Not sure if it's safe to pass an arbitrary object to set_up, todo
 		s.start()
 
 	for(var/i = 1, i<= gibtypes.len, i++)
 		if(gibamounts[i])
 			for(var/j = 1, j<= gibamounts[i], j++)
 				var/gibType = gibtypes[i]
-				gib = new gibType(location)
+				gib = new gibType(loc)
 
 				// Apply human species colouration to masks.
 				if(fleshcolor)
@@ -47,12 +45,12 @@
 					gib.blood_DNA[MobDNA.unique_enzymes] = MobDNA.b_type
 				else if(istype(src, /obj/effect/spawner/gibs/human)) // Probably a monkey
 					gib.blood_DNA["Non-human DNA"] = "A+"
-				if(istype(location,/turf/))
+				if(isturf(loc))
 					var/list/directions = gibdirections[i]
 					if(directions.len)
 						gib.streak(directions)
 
-	qdel(src)
+	return INITIALIZE_HINT_QDEL
 
 /obj/effect/spawner/gibs/generic
 	gibtypes = list(/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs/core)
