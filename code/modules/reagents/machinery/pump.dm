@@ -35,10 +35,8 @@
 	update_icon()
 
 /obj/machinery/pump/Destroy()
-	qdel(cell)
-	qdel(Output)
-	cell = null
-	Output = null
+	QDEL_NULL(cell)
+	QDEL_NULL(Output)
 	. = ..()
 
 /obj/machinery/pump/RefreshParts()
