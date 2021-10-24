@@ -24,8 +24,6 @@
 	return ..()
 
 /obj/effect/overmap/visitable/sector/temporary/find_z_levels()
-	if(!LAZYLEN(map_z))
-		map_z = list()
 	LAZYADD(map_z, global.using_map.get_empty_zlevel())
 
 /obj/effect/overmap/visitable/sector/temporary/proc/is_empty(var/mob/observer)
