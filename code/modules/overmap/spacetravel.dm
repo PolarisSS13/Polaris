@@ -10,16 +10,21 @@
 	loc = locate(nx, ny, global.using_map.overmap_z)
 	x = nx
 	y = ny
-	var/emptyz = global.using_map.get_empty_zlevel()
-	map_z += emptyz
-	map_sectors["[emptyz]"] = src
-	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [emptyz].")
+	if(!map_z[1])
+		log_and_message_admins("Could not create empty sector at [nx], [ny]. No available z levels to allocate.")
+		return INITIALIZE_HINT_QDEL
+
+	map_sectors["[map_z[1]]"] = src
+	testing("Temporary sector at [x],[y] was created, corresponding zlevel is [map_z[1]].")
 
 /obj/effect/overmap/visitable/sector/temporary/Destroy()
 	for(var/zlevel in map_z)
 		using_map.cache_empty_zlevel(zlevel)
 	testing("Temporary sector at [x],[y] was destroyed, returning empty zlevel [map_z[1]] to map datum.")
 	return ..()
+
+/obj/effect/overmap/visitable/sector/temporary/find_z_levels()
+	LAZYADD(map_z, global.using_map.get_empty_zlevel())
 
 /obj/effect/overmap/visitable/sector/temporary/proc/is_empty(var/mob/observer)
 	if(!LAZYLEN(map_z))
@@ -43,7 +48,10 @@
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate() in overmap_turf
 	if(istype(res))
 		return res
-	return new /obj/effect/overmap/visitable/sector/temporary(x, y)
+	res = new /obj/effect/overmap/visitable/sector/temporary(x, y)
+	if(QDELETED(res))
+		res = null
+	return res
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)
@@ -128,8 +136,10 @@
 		if(O != M && O.in_space && prob(50))
 			TM = O
 			break
-	if(!TM)
+	if(!istype(TM))
 		TM = get_deepspace(M.x,M.y)
+	if(!istype(TM))
+		return
 	nz = pick(TM.get_space_zlevels())
 
 	var/turf/dest = locate(nx,ny,nz)
@@ -139,5 +149,7 @@
 			var/mob/D = A
 			if(D.pulling)
 				D.pulling.forceMove(dest)
+	else
+		to_world("CANARY: Could not move [A] to [nx], [ny], [nz]: [dest ? "[dest]" : "null"]")
 
 	M.cleanup()
