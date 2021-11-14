@@ -5,13 +5,11 @@
 	known = 0
 	in_space = TRUE
 
-/obj/effect/overmap/visitable/sector/temporary/Initialize(var/nx, var/ny)
+/obj/effect/overmap/visitable/sector/temporary/Initialize()
 	. = ..()
-	loc = locate(nx, ny, global.using_map.overmap_z)
-	x = nx
-	y = ny
+
 	if(!map_z[1])
-		log_and_message_admins("Could not create empty sector at [nx], [ny]. No available z levels to allocate.")
+		log_and_message_admins("Could not create empty sector at [x], [y]. No available z levels to allocate.")
 		return INITIALIZE_HINT_QDEL
 
 	map_sectors["[map_z[1]]"] = src
@@ -48,10 +46,9 @@
 	var/obj/effect/overmap/visitable/sector/temporary/res = locate() in overmap_turf
 	if(istype(res))
 		return res
-	res = new /obj/effect/overmap/visitable/sector/temporary(x, y)
-	if(QDELETED(res))
-		res = null
-	return res
+	res = new /obj/effect/overmap/visitable/sector/temporary(overmap_turf)
+	if(!QDELETED(res))
+		return res
 
 /atom/movable/proc/lost_in_space()
 	for(var/atom/movable/AM in contents)

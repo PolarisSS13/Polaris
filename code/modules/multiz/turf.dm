@@ -42,7 +42,11 @@
 	. = ..()
 
 /turf/simulated/open/Initialize()
-	. = ..()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/turf/simulated/open/LateInitialize()
+	..()
 	ASSERT(HasBelow(z))
 	update()
 	var/turf/T = GetBelow(src)

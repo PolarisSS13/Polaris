@@ -8,9 +8,9 @@
 	var/enabled = 0
 
 
-/obj/item/weapon/shield_diffuser/New()
+/obj/item/weapon/shield_diffuser/Initialize()
 	cell = new(src)
-	..()
+	. = ..()
 
 /obj/item/weapon/shield_diffuser/Destroy()
 	qdel(cell)

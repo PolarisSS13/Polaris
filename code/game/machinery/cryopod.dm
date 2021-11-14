@@ -307,20 +307,16 @@
 	on_store_visible_message_2 = "passes through it."
 	time_till_despawn = 10 // 1 second, because math
 
-/obj/machinery/cryopod/New()
+/obj/machinery/cryopod/Initialize()
+	. = ..()
 	announce = new /obj/item/device/radio/intercom(src)
-	..()
+	find_control_computer()
 
 /obj/machinery/cryopod/Destroy()
 	if(occupant)
 		occupant.forceMove(loc)
 		occupant.resting = 1
 	return ..()
-
-/obj/machinery/cryopod/Initialize()
-	. = ..()
-
-	find_control_computer()
 
 /obj/machinery/cryopod/proc/find_control_computer(urgent=0)
 	control_computer = null

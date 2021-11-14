@@ -17,8 +17,8 @@
 	var/reinforcing = 0
 	var/applies_material_colour = 1
 
-/obj/structure/girder/New(var/newloc, var/material_key)
-	..(newloc)
+/obj/structure/girder/Initialize(var/ml, var/material_key)
+	. = ..(ml)
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
@@ -73,8 +73,8 @@
 	health = 50
 	cover = 25
 
-/obj/structure/girder/displaced/New(var/newloc, var/material_key)
-	..(newloc, material_key)
+/obj/structure/girder/displaced/Initialize(var/ml, var/material_key)
+	. = ..()
 	displace()
 
 /obj/structure/girder/proc/displace()

@@ -41,8 +41,8 @@
 	gunshot_residue = null
 
 
-/obj/item/clothing/New()
-	..()
+/obj/item/clothing/Initialize()
+	. = ..()
 	if(starting_accessories)
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/tie = new T(src)
@@ -254,12 +254,16 @@
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
-/obj/item/clothing/ears/offear/New(var/obj/O)
-		name = O.name
-		desc = O.desc
-		icon = O.icon
-		icon_state = O.icon_state
-		set_dir(O.dir)
+/obj/item/clothing/ears/offear/Initialize()
+	. = ..()
+	var/obj/O = loc
+	if(!istype(O))
+		return INITIALIZE_HINT_QDEL
+	name = O.name
+	desc = O.desc
+	icon = O.icon
+	icon_state = O.icon_state
+	set_dir(O.dir)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //Gloves
@@ -384,8 +388,8 @@
 	var/datum/unarmed_attack/special_attack = null //do the gloves have a special unarmed attack?
 	var/special_attack_type = null
 
-/obj/item/clothing/gloves/New()
-	..()
+/obj/item/clothing/gloves/Initialize()
+	. = ..()
 	if(special_attack_type && ispath(special_attack_type))
 		special_attack = new special_attack_type
 
@@ -831,8 +835,8 @@
 		return
 	..()
 
-/obj/item/clothing/under/New()
-	..()
+/obj/item/clothing/under/Initialize()
+	. = ..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -1038,6 +1042,6 @@
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 
-/obj/item/clothing/under/rank/New()
+/obj/item/clothing/under/rank/Initialize()
 	sensor_mode = pick(0,1,2,3)
-	..()
+	. = ..()

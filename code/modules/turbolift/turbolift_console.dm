@@ -29,9 +29,9 @@
 			user.visible_message("<span class='notice'>\The [user] presses the lift button.</span>")
 
 
-/obj/structure/lift/New(var/newloc, var/datum/turbolift/_lift)
+/obj/structure/lift/Initialize(var/ml, var/datum/turbolift/_lift)
 	lift = _lift
-	return ..(newloc)
+	. = ..(ml)
 
 /obj/structure/lift/attack_ai(var/mob/user)
 	return attack_hand(user)

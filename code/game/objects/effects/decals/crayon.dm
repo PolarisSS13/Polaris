@@ -5,9 +5,8 @@
 	plane = DIRTY_PLANE
 	anchored = 1
 
-/obj/effect/decal/cleanable/crayon/New(location,main = "#FFFFFF",shade = "#000000",var/type = "rune")
-	..()
-	loc = location
+/obj/effect/decal/cleanable/crayon/Initialize(var/ml, main = "#FFFFFF",shade = "#000000",var/type = "rune")
+	. = ..()
 
 	name = type
 	desc = "A [type] drawn in crayon."
