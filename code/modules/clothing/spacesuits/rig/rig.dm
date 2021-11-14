@@ -112,8 +112,8 @@
 		if(open)
 			. += "It's equipped with [english_list(installed_modules)]."
 
-/obj/item/weapon/rig/New()
-	..()
+/obj/item/weapon/rig/Initialize()
+	. = ..()
 
 	suit_state = icon_state
 	item_state = icon_state

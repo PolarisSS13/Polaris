@@ -160,12 +160,11 @@ GLOBAL_LIST_EMPTY(solars_list)
 	return
 
 
-/obj/machinery/power/solar/fake/New(var/turf/loc, var/glass_type)
-	..(loc, glass_type, 0)
+/obj/machinery/power/solar/fake/Initialize(mapload, glass_type)
+	. = ..(mapload, glass_type, 0)
 
 /obj/machinery/power/solar/fake/process()
-	. = PROCESS_KILL
-	return
+	return PROCESS_KILL
 
 //trace towards SSsun.sun to see if we're in shadow
 /obj/machinery/power/solar/proc/occlusion()

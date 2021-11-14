@@ -32,11 +32,7 @@
 /obj/machinery/pros_fabricator/Initialize()
 	. = ..()
 	default_apply_parts()
-
 	files = new /datum/research(src) //Setup the research data holder.
-
-/obj/machinery/pros_fabricator/Initialize()
-	. = ..()
 	manufacturer = basic_robolimb.company
 	update_categories()
 

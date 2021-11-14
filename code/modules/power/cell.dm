@@ -33,8 +33,8 @@
 	var/overlay_full_state = "cell-o2" // Overlay used when fully charged.
 	var/last_overlay_state = null // Used to optimize update_icon() calls.
 
-/obj/item/weapon/cell/New()
-	..()
+/obj/item/weapon/cell/Initialize()
+	. = ..()
 	c_uid = cell_uid++
 	charge = maxcharge
 	update_icon()

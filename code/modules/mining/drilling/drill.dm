@@ -328,8 +328,8 @@
 	circuit = /obj/item/weapon/circuitboard/miningdrillbrace
 	var/obj/machinery/mining/drill/connected
 
-/obj/machinery/mining/brace/New()
-	..()
+/obj/machinery/mining/brace/Initialize()
+	. = ..()
 
 	component_parts = list()
 

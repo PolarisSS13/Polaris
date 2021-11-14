@@ -93,8 +93,8 @@
 
 	var/last_shot = 0			//records the last shot fired
 
-/obj/item/weapon/gun/New()
-	..()
+/obj/item/weapon/gun/Initialize()
+	. = ..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
@@ -307,6 +307,7 @@
 		src.add_fingerprint(usr)
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
+	set waitfor = FALSE
 	if(!user || !target) return
 	if(target.z != user.z) return
 

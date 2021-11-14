@@ -112,8 +112,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		close(usr)
 	return 0
 
-/obj/item/device/pda/New(var/mob/living/carbon/human/H)
-	..()
+/obj/item/device/pda/Initialize()
+	. = ..()
 	PDAs += src
 	PDAs = sortAtom(PDAs)
 	update_programs()
@@ -121,7 +121,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		cartridge = new default_cartridge(src)
 		cartridge.update_programs(src)
 	new /obj/item/weapon/pen(src)
-	pdachoice = isnull(H) ? 1 : (ishuman(H) ? H.pdachoice : 1)
+
+	if(ishuman(loc))
+		var/mob/living/carbon/human/H = loc
+		pdachoice = H.pdachoice
+	else
+		pdachoice = 1
+
 	switch(pdachoice)
 		if(1) icon = 'icons/obj/pda.dmi'
 		if(2) icon = 'icons/obj/pda_slim.dmi'
@@ -473,8 +479,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-/obj/item/weapon/storage/box/PDAs/New()
-	..()
+/obj/item/weapon/storage/box/PDAs/Initialize()
+	. = ..()
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)

@@ -230,8 +230,9 @@ research holder datum.
 	matter = list(MAT_STEEL = 30, "glass" = 10)
 	var/datum/tech/stored
 
-/obj/item/weapon/disk/tech_disk/New()
+/obj/item/weapon/disk/tech_disk/Initialize()
 	randpixel_xy()
+	. = ..()
 
 /obj/item/weapon/disk/design_disk
 	name = "component design disk"
@@ -244,5 +245,6 @@ research holder datum.
 	matter = list(MAT_STEEL = 30, "glass" = 10)
 	var/datum/design/blueprint
 
-/obj/item/weapon/disk/design_disk/New()
+/obj/item/weapon/disk/design_disk/Initialize()
 	randpixel_xy()
+	. = ..()

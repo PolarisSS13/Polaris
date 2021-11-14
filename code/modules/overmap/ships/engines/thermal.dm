@@ -88,12 +88,10 @@
 	icon_state = "exhaust"
 	anchored = 1
 
-	New(var/turf/nloc, var/ndir, var/temp)
-		set_dir(ndir)
-		..(nloc)
-
-		if(nloc)
-			nloc.hotspot_expose(temp,125)
-
-		spawn(20)
-			loc = null
+/obj/effect/engine_exhaust/Initialize(var/ml, var/ndir, var/temp)
+	set_dir(ndir)
+	. = ..()
+	if(isturf(loc))
+		var/turf/nloc = turf
+		nloc.hotspot_expose(temp,125)
+	QDEL_IN(2 SECONDS)

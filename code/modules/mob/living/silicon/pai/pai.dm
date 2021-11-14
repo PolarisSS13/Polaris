@@ -90,9 +90,14 @@
 
 	var/current_pda_messaging = null
 
-/mob/living/silicon/pai/New(var/obj/item/device/paicard)
-	src.loc = paicard
-	card = paicard
+/mob/living/silicon/pai/Initialize()
+
+	. = ..()
+
+	card = loc
+	if(!istype(card))
+		return INITIALIZE_HINT_QDEL
+
 	sradio = new(src)
 	communicator = new(src)
 	if(card)
@@ -111,17 +116,18 @@
 	verbs += /mob/living/silicon/pai/proc/choose_chassis
 	verbs += /mob/living/silicon/pai/proc/choose_verbs
 
-	//PDA
 	pda = new(src)
-	spawn(5)
+	addtimer(CALLBACK(src, .proc/init_pda), 5)
+
+/mob/living/silicon/pai/proc/init_pda()
+	set waitfor = FALSE
+	if(pda)
 		pda.ownjob = "Personal Assistant"
 		pda.owner = text("[]", src)
 		pda.name = pda.owner + " (" + pda.ownjob + ")"
-
 		var/datum/data/pda/app/messenger/M = pda.find_program(/datum/data/pda/app/messenger)
 		if(M)
 			M.toff = TRUE
-	..()
 
 // this function shows the information about being silenced as a pAI in the Status panel
 /mob/living/silicon/pai/proc/show_silenced()
