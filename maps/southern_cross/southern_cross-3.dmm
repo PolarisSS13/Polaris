@@ -9593,7 +9593,7 @@
 /turf/simulated/floor/tiled/steel/sif/planetuse,
 /area/surface/outside/path/plains)
 "uy" = (
-/turf/simulated/floor/outdoors/grass/sif/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/outpost)
 "uz" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -9923,7 +9923,7 @@
 /turf/simulated/mineral/sif,
 /area/surface/outside/plains/normal)
 "vp" = (
-/turf/simulated/floor/outdoors/grass/sif/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/normal)
 "vq" = (
 /turf/simulated/floor/outdoors/rocks/sif/planetuse,
@@ -10126,7 +10126,7 @@
 /area/surface/outpost/research/xenoresearch)
 "vL" = (
 /obj/effect/zone_divider,
-/turf/simulated/floor/outdoors/grass/sif/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/outpost)
 "vM" = (
 /turf/simulated/floor/outdoors/dirt/sif/planetuse,
@@ -13589,7 +13589,7 @@
 /area/surface/outpost/research/xenoresearch/xenobiology)
 "Dk" = (
 /obj/effect/zone_divider,
-/turf/simulated/floor/outdoors/grass/sif/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/normal)
 "Dl" = (
 /obj/effect/zone_divider,
@@ -13615,7 +13615,7 @@
 "Dq" = (
 /obj/effect/step_trigger/teleporter/bridge/north_to_south,
 /obj/structure/railing,
-/turf/simulated/floor/outdoors/grass/sif/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/normal)
 "Dr" = (
 /obj/machinery/atmospherics/pipe/simple/visible{
@@ -13635,7 +13635,7 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/turf/simulated/floor/outdoors/grass/sif/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/normal)
 "Du" = (
 /obj/effect/step_trigger/teleporter/bridge/south_to_north,
@@ -13667,7 +13667,7 @@
 /turf/simulated/floor/outdoors/dirt/sif/planetuse,
 /area/syndicate_station/planet)
 "DA" = (
-/turf/simulated/floor/outdoors/grass/sif/forest/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/normal)
 "DB" = (
 /turf/simulated/floor/plating/sif/planetuse,
@@ -13688,7 +13688,7 @@
 /area/surface/outside/river/faxalven)
 "DE" = (
 /obj/effect/zone_divider,
-/turf/simulated/floor/outdoors/grass/sif/forest/planetuse,
+/turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/normal)
 "DF" = (
 /obj/effect/zone_divider,
