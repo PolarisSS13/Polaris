@@ -23,12 +23,19 @@
 	return 1
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/weapon/shovel) && user.a_intent == I_HURT)
-		user.visible_message(SPAN_NOTICE("\The [user] begins filling in \the [src]."))
-		if(do_after(user, 3 SECONDS) && !QDELETED(src))
-			user.visible_message(SPAN_NOTICE("\The [user] fills in \the [src]."))
-			qdel(src)
-		return
+	if(istype(O, /obj/item/weapon/shovel))
+
+		if(user.a_intent == I_HURT)
+			user.visible_message(SPAN_NOTICE("\The [user] begins filling in \the [src]."))
+			if(do_after(user, 3 SECONDS) && !QDELETED(src))
+				user.visible_message(SPAN_NOTICE("\The [user] fills in \the [src]."))
+				qdel(src)
+			return TRUE
+
+		var/turf/T = get_turf(src)
+		if(istype(T))
+			return T.attackby(O, user)	
+	
 	. = ..()
 	
 

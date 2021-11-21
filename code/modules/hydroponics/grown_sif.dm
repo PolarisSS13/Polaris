@@ -23,8 +23,8 @@
 /obj/item/weapon/reagent_containers/food/snacks/grown/sif/sifpod
 	plantname = "sifbulb"
 
-/obj/item/weapon/reagent_containers/food/snacks/grown/sif/wabback
-	plantname = "wabback"
+/obj/item/weapon/reagent_containers/food/snacks/grown/sif/whitewabback
+	plantname = "whitewabback"
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/sif/blackwabback
 	plantname = "blackwabback"
