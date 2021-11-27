@@ -9,6 +9,7 @@ SUBSYSTEM_DEF(mapping)
 	var/dmm_suite/maploader = null
 	var/obj/effect/landmark/engine_loader/engine_loader
 	var/list/shelter_templates = list()
+	var/list/static_poi_landmarks = list()
 
 /datum/controller/subsystem/mapping/Recover()
 	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.
@@ -22,6 +23,7 @@ SUBSYSTEM_DEF(mapping)
 	load_map_templates()
 
 	if(config.generate_map)
+		load_static_points_of_interest()
 		// Map-gen is still very specific to the map, however putting it here should ensure it loads in the correct order.
 		using_map.perform_map_generation()
 	
@@ -75,6 +77,55 @@ SUBSYSTEM_DEF(mapping)
 	//CHECK_TICK //Don't let anything else happen for now
 	// Actually load it
 	chosen_type.load(T)
+
+/datum/controller/subsystem/mapping/proc/load_static_points_of_interest()
+	to_world_log("Going to load [static_poi_landmarks.len] static PoI\s.")
+	for(var/thing in static_poi_landmarks)
+		var/obj/effect/landmark/poi_position/P = thing
+		
+		var/turf/T = get_turf(P)
+		if(!istype(T))
+			to_world_log("[log_info_line(src)] not on a turf! Cannot place PoI template.")
+			continue
+		
+		var/datum/map_template/template = P.get_submap_template()
+		if(!istype(template))
+			to_world_log("[log_info_line(src)] was not given a submap template, but was instead given [log_info_line(template)].")
+			return
+		
+		to_world_log("[P.name] chose [template.name] to load.")
+		admin_notice("[P.name] chose [template.name] to load.")
+		
+		P.moveToNullspace()
+		var/time_started = REALTIMEOFDAY
+		template.load(T)
+		var/time_ended = (REALTIMEOFDAY - time_started) / 10
+		to_world_log("[template.name] loaded in [time_ended] second\s.")
+		qdel(P)
+/*
+/obj/effect/landmark/poi_position/LateInitialize()
+	if(loaded)
+		return
+	loaded = TRUE
+
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		to_world_log("[log_info_line(src)] not on a turf! Cannot place PoI template.")
+		return
+
+	var/datum/map_template/template = get_submap_template()
+	if(!istype(template))
+		to_world_log("[log_info_line(src)] was not given a submap template, but was instead given [log_info_line(template)].")
+		return
+	
+	to_world_log("[name] chose [template.name] to load.")
+	admin_notice("[name] chose [template.name] to load.")
+	moveToNullspace()
+
+	template.load(T)
+	qdel(src)
+*/
+
 
 // Commenting out lateload at the moment, this will need to be enabled once Polaris adds lateload maps (Expedition areas offmap)
 /*	
