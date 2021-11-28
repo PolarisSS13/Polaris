@@ -855,10 +855,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/mining_main/locker)
-"bO" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_nine_by_ten_maint,
-/turf/simulated/wall,
-/area/surface/station/construction/bmt/construction3)
 "bQ" = (
 /obj/structure/closet/hydrant{
 	pixel_x = -32
@@ -2561,6 +2557,10 @@
 "fG" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/construction/genetics)
+"fH" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_nine_by_eight_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction2)
 "fI" = (
 /obj/structure/sign/warning/high_voltage,
 /turf/simulated/wall,
@@ -4218,10 +4218,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/bmt/west)
-"jk" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_sixteen_by_eleven_maint,
-/turf/simulated/mineral/sif,
-/area/surface/cave/unexplored/normal)
 "jl" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -5040,6 +5036,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/vault)
+"kX" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_eight_by_nine_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction1)
 "kZ" = (
 /obj/structure/closet/l3closet/medical,
 /obj/machinery/atmospherics/unary/vent_pump/on{
@@ -7834,6 +7834,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/bmt/east)
+"qX" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_eight_by_five_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction6)
 "qY" = (
 /obj/item/weapon/camera_assembly,
 /turf/simulated/floor/tiled/white,
@@ -9421,6 +9425,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/bmt/south)
+"ui" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_nine_by_ten_maint,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction3)
 "uk" = (
 /turf/simulated/floor/tiled,
 /area/surface/station/mining_main/storage)
@@ -10637,10 +10645,6 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_b)
-"wT" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_eight_by_five_maint,
-/turf/simulated/wall,
-/area/surface/station/construction/bmt/construction6)
 "wU" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/grille,
@@ -11086,10 +11090,6 @@
 /obj/effect/floor_decal/industrial/warning/full,
 /turf/simulated/floor/plating,
 /area/surface/outpost/research/xenoarcheology/anomaly)
-"xZ" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_ten_by_nine_maint,
-/turf/simulated/wall/r_wall,
-/area/surface/station/construction/warehouse)
 "ya" = (
 /obj/structure/table/rack,
 /obj/item/weapon/circuitboard/unary_atmos/cooler,
@@ -19644,6 +19644,10 @@
 	name = "reinforced floor"
 	},
 /area/surface/station/rnd/mixing)
+"Qk" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_medical_basement,
+/turf/simulated/wall,
+/area/surface/station/construction/bmt/construction4)
 "Ql" = (
 /obj/machinery/ai_status_display,
 /turf/simulated/wall/r_wall,
@@ -21033,10 +21037,6 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/hallway/primary/bmt/east)
-"Th" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_medical_basement,
-/turf/simulated/wall,
-/area/surface/station/construction/bmt/construction4)
 "Ti" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -21047,6 +21047,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/incineratormaint)
+"Tj" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_sixteen_by_eleven_maint,
+/turf/simulated/mineral/sif,
+/area/surface/cave/unexplored/normal)
 "To" = (
 /turf/simulated/floor/tiled/steel_dirty,
 /area/surface/station/hallway/primary/bmt/east)
@@ -21965,10 +21969,6 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/bmt/west)
-"Vo" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_eight_by_nine_maint,
-/turf/simulated/wall,
-/area/surface/station/construction/bmt/construction1)
 "Vp" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -22700,10 +22700,6 @@
 /obj/machinery/portable_atmospherics/powered/pump/filled,
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/engineering/auxiliary_engineering)
-"WP" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_nine_by_eight_maint,
-/turf/simulated/wall,
-/area/surface/station/construction/bmt/construction2)
 "WQ" = (
 /obj/effect/floor_decal/industrial/warning/dust/corner{
 	dir = 1
@@ -23543,7 +23539,7 @@
 /turf/simulated/floor/plating,
 /area/surface/station/construction/warehouse)
 "YR" = (
-/obj/effect/landmark/poi_position/random_subtype/cynosure_seven_by_seven_maint,
+/obj/effect/landmark/submap_position/random_subtype/cynosure_seven_by_seven_maint,
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/bmt/east)
 "YT" = (
@@ -23956,6 +23952,10 @@
 "ZF" = (
 /turf/simulated/wall,
 /area/surface/station/construction/basement)
+"ZG" = (
+/obj/effect/landmark/submap_position/random_subtype/cynosure_ten_by_nine_maint,
+/turf/simulated/wall/r_wall,
+/area/surface/station/construction/warehouse)
 "ZH" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -51580,7 +51580,7 @@ Mv
 Mv
 Mv
 Mv
-xZ
+ZG
 HE
 HE
 vd
@@ -52082,7 +52082,7 @@ cB
 cB
 cB
 cB
-Vo
+kX
 Uk
 Fr
 hZ
@@ -54900,7 +54900,7 @@ JA
 XR
 XR
 XR
-WP
+fH
 Ze
 Dt
 fr
@@ -55962,7 +55962,7 @@ KO
 KO
 KO
 KO
-jk
+Tj
 HE
 HE
 HE
@@ -56956,7 +56956,7 @@ VS
 VS
 VS
 VS
-bO
+ui
 yV
 En
 fr
@@ -58728,7 +58728,7 @@ jL
 jL
 jL
 jL
-Th
+Qk
 fg
 xg
 xU
@@ -60319,7 +60319,7 @@ pd
 pd
 pd
 cp
-wT
+qX
 BA
 BA
 BA
