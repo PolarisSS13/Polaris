@@ -108,13 +108,13 @@
 	// First, place a bunch of submaps. This comes before tunnel/forest generation as to not interfere with the submap.
 
 	// Cave submaps are first.
-	seed_submaps(
+	SSmapping.seed_area_submaps(
 		list(Z_LEVEL_STATION_ONE),
 		75,
 		/area/surface/cave/unexplored/normal,
 		/datum/map_template/surface/mountains/normal
 	)
-	seed_submaps(
+	SSmapping.seed_area_submaps(
 		list(Z_LEVEL_STATION_ONE),
 		75,
 		/area/surface/cave/unexplored/deep,
@@ -122,7 +122,7 @@
 	)
 
 	// Plains to make them less plain.
-	seed_submaps(
+	SSmapping.seed_area_submaps(
 		list(Z_LEVEL_STATION_TWO),
 		100,
 		/area/surface/outside/plains/normal,
@@ -130,14 +130,14 @@
 	) // Center area is WIP until map editing settles down.
 
 	// Wilderness is next.
-	seed_submaps(
+	SSmapping.seed_area_submaps(
 		list(Z_LEVEL_SURFACE_WILD),
 		75,
 		/area/surface/outside/wilderness/normal,
 		/datum/map_template/surface/wilderness/normal
 	)
 
-	seed_submaps(
+	SSmapping.seed_area_submaps(
 		list(Z_LEVEL_SURFACE_WILD),
 		75,
 		/area/surface/outside/wilderness/deep,
@@ -146,8 +146,12 @@
 	// If Space submaps are made, add a line to make them here as well.
 
 	// Now for the tunnels.
+	var/time_started = REALTIMEOFDAY
 	new /datum/random_map/automata/cave_system/no_cracks(null, 1, 1, Z_LEVEL_STATION_ONE, world.maxx, world.maxy) // Create the mining Z-level.
+	to_world_log("Generated caves in [(REALTIMEOFDAY - time_started) / 10] second\s.")
+	time_started = REALTIMEOFDAY
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_STATION_ONE, 64, 64)         // Create the mining ore distribution map.
+	to_world_log("Generated ores in [(REALTIMEOFDAY - time_started) / 10] second\s.")
 	// Todo: Forest generation.
 	return 1
 

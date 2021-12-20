@@ -20,7 +20,7 @@
 	name = "Cynosure Specific Content"
 	desc = "New Map New Shiny"
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_medical_basement
+/obj/effect/landmark/submap_position/random_subtype/cynosure_medical_basement
 	name = "5x7 Medical Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/medical_basement
 
@@ -40,7 +40,7 @@
 
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_seven_by_seven_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_seven_by_seven_maint
 	name = "7x7 Maintenance Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/seven_by_seven_maint
 
@@ -60,7 +60,7 @@
 
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_eight_by_five_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_eight_by_five_maint
 	name = "8x5 Maintenance Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/eight_by_five_maint
 
@@ -84,7 +84,7 @@
 
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_eight_by_nine_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_eight_by_nine_maint
 	name = "8x9 Maintenance Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/eight_by_nine_maint
 
@@ -108,7 +108,7 @@
 
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_nine_by_eight_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_nine_by_eight_maint
 	name = "9x8 Maint Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/nine_by_eight_maint
 
@@ -128,7 +128,7 @@
 
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_nine_by_ten_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_nine_by_ten_maint
 	name = "9x10 Maint Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/nine_by_ten_maint
 
@@ -152,7 +152,7 @@
 
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_ten_by_nine_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_ten_by_nine_maint
 	name = "10x9 Maint Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/ten_by_nine_maint
 
@@ -179,7 +179,7 @@
 	mappath = 'maps/cynosure/submaps/10x9/Warehouse3.dmm'
 
 
-/obj/effect/landmark/poi_loader/random_subtype/cynosure_sixteen_by_eleven_maint
+/obj/effect/landmark/submap_position/random_subtype/cynosure_sixteen_by_eleven_maint
 	name = "16x11 Maint Submap Loader"
 	submap_path = /datum/map_template/cynosure_fixed/sixteen_by_eleven_maint
 
