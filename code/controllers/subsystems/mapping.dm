@@ -26,6 +26,10 @@ SUBSYSTEM_DEF(mapping)
 	maploader = new()
 	load_map_templates()
 
+	#if UNIT_TEST
+	config.generate_map = TRUE
+	#endif
+
 	if(config.generate_map)
 		// Load the engine and other submaps.
 		load_static_submaps(static_submap_landmarks)

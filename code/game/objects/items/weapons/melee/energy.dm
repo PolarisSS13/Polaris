@@ -23,23 +23,28 @@
 			slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
 			)
 
-/obj/item/weapon/melee/energy/sword/green/New()
+/obj/item/weapon/melee/energy/sword/green/Initialize()
+	. = ..()
 	colorable = FALSE
 	lcolor = "#008000"
 
-/obj/item/weapon/melee/energy/sword/red/New()
+/obj/item/weapon/melee/energy/sword/red/Initialize()
+	. = ..()
 	colorable = FALSE
 	lcolor = "#FF0000"
 
-/obj/item/weapon/melee/energy/sword/blue/New()
+/obj/item/weapon/melee/energy/sword/blue/Initialize()
+	. = ..()
 	colorable = FALSE
 	lcolor = "#0000FF"
 
-/obj/item/weapon/melee/energy/sword/purple/New()
+/obj/item/weapon/melee/energy/sword/purple/Initialize()
+	. = ..()
 	colorable = FALSE
 	lcolor = "#800080"
 
-/obj/item/weapon/melee/energy/sword/white/New()
+/obj/item/weapon/melee/energy/sword/white/Initialize()
+	. = ..()
 	colorable = FALSE
 	lcolor = "#FFFFFF"
 
@@ -116,13 +121,6 @@
 
 	add_fingerprint(user)
 	return
-
-/obj/item/weapon/melee/energy/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	if(active)
-		user.visible_message(pick("<span class='danger'>\The [user] is slitting [TU.his] stomach open with \the [src]! It looks like [TU.he] [TU.is] trying to commit seppuku.</span>",\
-			"<span class='danger'>\The [user] is falling on \the [src]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>"))
-		return (BRUTELOSS|FIRELOSS)
 
 /obj/item/weapon/melee/energy/attack(mob/M, mob/user)
 	if(active && use_cell)
@@ -238,11 +236,6 @@
 	damtype = BRUTE
 	to_chat(user, "<span class='notice'>\The [src] is de-energised. It's just a regular axe now.</span>")
 
-/obj/item/weapon/melee/energy/axe/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	visible_message("<span class='warning'>\The [user] swings \the [src] towards [TU.his] head! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
-	return (BRUTELOSS|FIRELOSS)
-
 /obj/item/weapon/melee/energy/axe/charge
 	name = "charge axe"
 	desc = "An energised axe."
@@ -253,8 +246,8 @@
 	use_cell = TRUE
 	hitcost = 120
 
-/obj/item/weapon/melee/energy/axe/charge/loaded/New()
-	..()
+/obj/item/weapon/melee/energy/axe/charge/loaded/Initialize()
+	. = ..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 
 /*
@@ -413,8 +406,8 @@
 
 	hitcost = 75
 
-/obj/item/weapon/melee/energy/sword/charge/loaded/New()
-	..()
+/obj/item/weapon/melee/energy/sword/charge/loaded/Initialize()
+	. = ..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 
 //Energy Blade (ninja uses this)
@@ -441,7 +434,8 @@
 	projectile_parry_chance = 60
 	lcolor = "#00FF00"
 
-/obj/item/weapon/melee/energy/blade/New()
+/obj/item/weapon/melee/energy/blade/Initialize()
+	. = ..()
 
 	spark_system = new /datum/effect/effect/system/spark_spread()
 	spark_system.set_up(5, 0, src)

@@ -7,8 +7,8 @@
 	icon = 'icons/obj/musician.dmi'
 	force = 10
 
-/obj/item/device/instrument/New()
-	..()
+/obj/item/device/instrument/Initialize()
+	. = ..()
 	song = new(instrumentId, src)
 	song.instrumentExt = instrumentExt
 

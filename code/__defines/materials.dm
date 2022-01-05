@@ -43,6 +43,10 @@
 #define MAT_PAINITE			"painite"
 #define MAT_BOROSILICATE	"borosilicate glass"
 #define MAT_SANDSTONE		"sandstone"
+#define MAT_PLATINUM		"platinum"
+#define MAT_TRITIUM			"tritium"
+#define MAT_DEUTERIUM		"deuterium"
+
 
 #define DEFAULT_TABLE_MATERIAL MAT_PLASTIC
 #define DEFAULT_WALL_MATERIAL MAT_STEEL

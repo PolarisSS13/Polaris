@@ -183,25 +183,28 @@ var/list/all_maps = list()
 	return text2num(pickweight(candidates))
 
 /datum/map/proc/get_empty_zlevel()
+	// Try to free up a z level from existing temp sectors
+	if(!empty_levels.len)
+		for(var/Z in map_sectors)
+			var/obj/effect/overmap/visitable/sector/temporary/T = map_sectors[Z]
+			T.cleanup() // If we can release some of these, do that.
+
+	// Else, we need to buy a new one.
 	if(!empty_levels.len)
 		world.increment_max_z()
 		empty_levels += world.maxz
 	return pick_n_take(empty_levels)
 
 /datum/map/proc/cache_empty_zlevel(var/z)
-	empty_levels |= z
+	if(z) // Else, it's not a valid z and we want to expunge it
+		empty_levels |= z
 
 // Get a list of 'nearby' or 'connected' zlevels.
 // You should at least return a list with the given z if nothing else.
 /datum/map/proc/get_map_levels(var/srcz, var/long_range = FALSE, var/om_range = -1)
-	//Overmap behavior
-	if(use_overmap)
-		//Get what sector we're in
-		var/obj/effect/overmap/visitable/O = get_overmap_sector(srcz)
-		if(!istype(O))
-			//Not in a sector, just the passed zlevel
-			return list(srcz)
-
+	//Get what sector we're in
+	var/obj/effect/overmap/visitable/O = get_overmap_sector(srcz)
+	if(istype(O))
 		//Just the sector we're in
 		if(om_range == -1)
 			return O.map_z.Copy()
@@ -214,7 +217,7 @@ var/list/all_maps = list()
 			connections += V.map_z // Adding list to list adds contents
 		return connections
 
-	//Traditional behavior
+	//Traditional behavior, if not in an overmap sector
 	else
 		//If long range, and they're at least in contact levels, return contact levels.
 		if (long_range && (srcz in contact_levels))

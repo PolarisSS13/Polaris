@@ -60,6 +60,9 @@
 	if(!loc || !newloc)
 		return FALSE
 
+	if(SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_MOVE, newloc, direct, movetime) & COMPONENT_MOVABLE_BLOCK_PRE_MOVE)
+		return FALSE
+
 	// Store this early before we might move, it's used several places
 	var/atom/oldloc = loc
 
@@ -205,6 +208,9 @@
 	if(riding_datum)
 		riding_datum.handle_vehicle_layer()
 		riding_datum.handle_vehicle_offsets()
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, direction)
+
 	return TRUE
 
 /atom/movable/set_dir(newdir)
@@ -247,6 +253,9 @@
 		throwing = 0
 		if(QDELETED(A))
 			return
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_BUMP, A)
+
 	A.Bumped(src)
 	A.last_bumped = world.time
 
@@ -404,6 +413,7 @@
 				src.throw_impact(A,speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
+	set waitfor = FALSE
 	if(!target || !src)
 		return 0
 	if(target.z != src.z)
@@ -495,10 +505,10 @@
 	var/atom/master = null
 	anchored = 1
 
-/atom/movable/overlay/New()
+/atom/movable/overlay/Initialize()
 	for(var/x in src.verbs)
 		src.verbs -= x
-	..()
+	. = ..()
 
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)

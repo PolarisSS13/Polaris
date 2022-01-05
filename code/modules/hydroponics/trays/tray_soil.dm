@@ -13,8 +13,8 @@
 	else
 		..()
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/New()
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/soil/Initialize()
+	. = ..()
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/close_lid_verb
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/remove_label
 	verbs -= /obj/machinery/portable_atmospherics/hydroponics/verb/setlight
@@ -23,12 +23,19 @@
 	return 1
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/weapon/shovel) && user.a_intent == I_HURT)
-		user.visible_message(SPAN_NOTICE("\The [user] begins filling in \the [src]."))
-		if(do_after(user, 3 SECONDS) && !QDELETED(src))
-			user.visible_message(SPAN_NOTICE("\The [user] fills in \the [src]."))
-			qdel(src)
-		return
+	if(istype(O, /obj/item/weapon/shovel))
+
+		if(user.a_intent == I_HURT)
+			user.visible_message(SPAN_NOTICE("\The [user] begins filling in \the [src]."))
+			if(do_after(user, 3 SECONDS) && !QDELETED(src))
+				user.visible_message(SPAN_NOTICE("\The [user] fills in \the [src]."))
+				qdel(src)
+			return TRUE
+
+		var/turf/T = get_turf(src)
+		if(istype(T))
+			return T.attackby(O, user)	
+	
 	. = ..()
 	
 
@@ -40,8 +47,8 @@
 	icon = 'icons/obj/seeds.dmi'
 	icon_state = "blank"
 
-/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/New(var/newloc,var/datum/seed/newseed)
-	..()
+/obj/machinery/portable_atmospherics/hydroponics/soil/invisible/Initialize(var/ml, var/datum/seed/newseed)
+	. = ..(ml)
 	seed = newseed
 	dead = 0
 	age = 1

@@ -17,14 +17,13 @@
 
 	anchored = 1	//  don't get pushed around
 
-/mob/new_player/New()
+/mob/new_player/Initialize()
+	. = ..()
 	mob_list += src
-	initialized = TRUE // Explicitly don't use Initialize().  New players join super early and use New()
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 	new_player_panel_proc()
-
 
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
@@ -418,7 +417,7 @@
 	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
 	if(character && character.client)
-		var/obj/screen/splash/Spl = new(character.client, TRUE)
+		var/obj/screen/splash/Spl = new(null, character.client, TRUE)
 		Spl.Fade(TRUE)
 
 	var/datum/job/J = SSjob.get_job(rank)
@@ -494,7 +493,7 @@
 	for(var/datum/job/job in job_master.occupations)
 		if(job && IsJobAvailable(job.title))
 			// Checks for jobs with minimum age requirements
-			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
+			if((job.minimum_character_age || job.min_age_by_species) && (client.prefs.age < job.get_min_age(client.prefs.species, client.prefs.organ_data["brain"])))
 				continue
 			// Checks for jobs set to "Never" in preferences	//TODO: Figure out a better way to check for this
 			if(!(client.prefs.GetJobDepartment(job, 1) & job.flag))

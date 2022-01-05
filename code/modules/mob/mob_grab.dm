@@ -36,15 +36,13 @@
 	w_class = ITEMSIZE_HUGE
 
 
-/obj/item/weapon/grab/New(mob/user, mob/victim)
-	..()
-	loc = user
-	assailant = user
+/obj/item/weapon/grab/Initialize(var/ml, mob/victim)
+	. = ..()
+	assailant = loc
 	affecting = victim
 
-	if(affecting.anchored || !assailant.Adjacent(victim))
-		qdel(src)
-		return
+	if(!istype(assailant) || !istype(affecting) || affecting.anchored || !assailant.Adjacent(victim))
+		return INITIALIZE_HINT_QDEL
 
 	affecting.grabbed_by += src
 

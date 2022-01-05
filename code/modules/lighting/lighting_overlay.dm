@@ -18,22 +18,15 @@
 
 	var/needs_update = FALSE
 
-/atom/movable/lighting_overlay/Initialize()
-	// doesn't need special init
-	initialized = TRUE
-	return INITIALIZE_HINT_NORMAL
-
-/atom/movable/lighting_overlay/New(var/atom/loc, var/no_update = FALSE)
-	. = ..()
+/atom/movable/lighting_overlay/Initialize(var/ml, var/no_update = FALSE)
+	. = ..(ml)
 	verbs.Cut()
 	total_lighting_overlays++
-
 	var/turf/T = loc //If this runtimes atleast we'll know what's creating overlays outside of turfs.
 	T.lighting_overlay = src
 	T.luminosity = 0
-	if(no_update)
-		return
-	update_overlay()
+	if(!no_update)
+		update_overlay()
 
 /atom/movable/lighting_overlay/proc/update_overlay()
 	set waitfor = FALSE

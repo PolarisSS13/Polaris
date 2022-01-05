@@ -65,8 +65,8 @@
 	defend_chance = 40	// The base chance for the weapon to parry.
 	projectile_parry_chance = 15	// The base chance for a projectile to be deflected.
 
-/obj/item/weapon/melee/changeling/New(location)
-	..()
+/obj/item/weapon/melee/changeling/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 	if(ismob(loc))
 		visible_message("<span class='warning'>A grotesque weapon forms around [loc.name]\'s arm!</span>",
@@ -87,11 +87,6 @@
 	STOP_PROCESSING(SSobj, src)
 	creator = null
 	..()
-
-/obj/item/weapon/melee/changeling/suicide_act(mob/user)
-	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	user.visible_message("<span class='danger'>[user] is impaling [T.himself] with the [src.name]! It looks like [T.he] [T.is] trying to commit suicide.</span>")
-	return(BRUTELOSS)
 
 /obj/item/weapon/melee/changeling/process()  //Stolen from ninja swords.
 	if(!creator || loc != creator || !creator.item_is_in_hands(src))

@@ -11,9 +11,9 @@
 	var/open = 0
 	var/brightness_on = 8		//can't remember what the maxed out value is
 
-/obj/machinery/floodlight/New()
+/obj/machinery/floodlight/Initialize()
+	. = ..()
 	cell = new(src)
-	..()
 
 /obj/machinery/floodlight/update_icon()
 	overlays.Cut()

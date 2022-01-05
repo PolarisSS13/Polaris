@@ -273,7 +273,8 @@ var/list/civilian_cartridges = list(
 	programs = list(new/datum/data/pda/utility/toggle_door)
 	messenger_plugins = list(new/datum/data/pda/messenger_plugin/virus/detonate)
 
-/obj/item/weapon/cartridge/syndicate/New()
+/obj/item/weapon/cartridge/syndicate/Initialize()
+	. = ..()
 	var/datum/data/pda/utility/toggle_door/D = programs[1]
 	if(istype(D))
 		D.remote_door_id = initial_remote_door_id

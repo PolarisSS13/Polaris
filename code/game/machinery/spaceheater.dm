@@ -13,8 +13,8 @@
 	clicksound = "switch"
 	interact_offline = TRUE
 
-/obj/machinery/space_heater/New()
-	..()
+/obj/machinery/space_heater/Initialize()
+	. = ..()
 	if(cell_type)
 		cell = new cell_type(src)
 	update_icon()

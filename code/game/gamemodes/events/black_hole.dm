@@ -8,9 +8,9 @@
 	density = 0
 	anchored = 1
 
-/obj/effect/bhole/New()
-	spawn(4)
-		controller()
+/obj/effect/bhole/Initialize()
+	. = ..()
+	addtimer(CALLBACK(src, .proc/controller), 4)
 
 /obj/effect/bhole/proc/controller()
 	while(src)

@@ -16,6 +16,8 @@
 	attacktext = list("nipped")
 	friendly = list("prods")
 
+	organ_names = /decl/mob_organ_names/borer
+
 	status_flags = CANPUSH
 	pass_flags = PASSTABLE
 	movement_cooldown = 5
@@ -55,7 +57,7 @@
 	true_name = "[pick("Primary","Secondary","Tertiary","Quaternary")] [rand(1000,9999)]"
 
 	if(!roundstart)
-		request_player()
+		addtimer(CALLBACK(src, .proc/request_player), 0)
 
 	return ..()
 
@@ -260,3 +262,7 @@
 			continue
 		else if(M.stat == DEAD && M.is_preference_enabled(/datum/client_preference/ghost_ears))
 			to_chat(M, "[src.true_name] whispers to [host], \"[message]\"")
+
+
+/decl/mob_organ_names/borer
+	hit_zones = list("head", "central segment", "tail segment")

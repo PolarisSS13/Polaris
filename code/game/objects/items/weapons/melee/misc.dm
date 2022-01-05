@@ -11,11 +11,6 @@
 
 	reach = 2
 
-/obj/item/weapon/melee/chainofcommand/suicide_act(mob/user)
-	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	user.visible_message(span("danger", "\The [user] [T.is] strangling [T.himself] with \the [src]! It looks like [T.he] [T.is] trying to commit suicide."), span("danger", "You start to strangle yourself with \the [src]!"), span("danger", "You hear the sound of someone choking!"))
-	return (OXYLOSS)
-
 /obj/item/weapon/melee/umbrella
 	name = "umbrella"
 	desc = "To keep the rain off you. Use with caution on windy days."
@@ -25,11 +20,11 @@
 	slot_flags = SLOT_BELT
 	force = 5
 	throwforce = 5
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEMSIZE_SMALL
 	var/open = FALSE
 
-/obj/item/weapon/melee/umbrella/New()
-	..()
+/obj/item/weapon/melee/umbrella/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/item/weapon/melee/umbrella/attack_self()
@@ -41,15 +36,16 @@
 	addblends = icon_state + "_a"
 	item_state = icon_state
 	update_icon()
+	w_class = open ? ITEMSIZE_NORMAL : ITEMSIZE_SMALL
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		H.update_inv_l_hand(0)
 		H.update_inv_r_hand()
 
 // Randomizes color
-/obj/item/weapon/melee/umbrella/random/New()
+/obj/item/weapon/melee/umbrella/random/Initialize()
 	color = "#"+get_random_colour()
-	..()
+	. = ..()
 
 /obj/item/weapon/melee/cursedblade
 	name = "crystal blade"
