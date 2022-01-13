@@ -39,6 +39,7 @@
 	if(T)
 		GLOB.turf_entered_event.unregister(T, src, .proc/BelowOpenUpdated)
 		GLOB.turf_exited_event.unregister(T, src, .proc/BelowOpenUpdated)
+		turf_changed_event.unregister(T, src, /atom/proc/update_icon)
 	. = ..()
 
 /turf/simulated/open/Initialize()
