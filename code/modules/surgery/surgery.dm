@@ -98,8 +98,6 @@
 /decl/surgery_step/proc/fail_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	return null
 
-
-
 /proc/spread_germs_to_organ(var/obj/item/organ/external/E, var/mob/living/carbon/human/user)
 	if(!istype(user) || !istype(E)) return
 
@@ -152,7 +150,12 @@
 				// Not staying still fails you too.
 				if(success)
 					var/calc_duration = rand(S.min_duration, S.max_duration)
-					if(!do_mob(user, M, calc_duration * get_tool_speed(qual), zone))
+					if(istext(qual))
+						calc_duration *= src.get_tool_speed(qual)
+					else if(ispath(qual))
+						calc_duration *= src.tool_qualities[1] // Hack to get around still matching on types
+
+					if(!do_mob(user, M, calc_duration, zone))
 						success = FALSE
 						to_chat(user, "<span class='warning'>You must remain close to and keep focused on your patient to conduct surgery.</span>")
 

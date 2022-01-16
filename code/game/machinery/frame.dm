@@ -132,6 +132,16 @@
 	frame_class = FRAME_CLASS_MACHINE
 	frame_size = 4
 
+/datum/frame/frame_types/teleporter_hub
+	name = "Teleporter Hub"
+	frame_class = FRAME_CLASS_MACHINE
+	frame_size = 4
+
+/datum/frame/frame_types/teleporter_station
+	name = "Teleporter Hub"
+	frame_class = FRAME_CLASS_MACHINE
+	frame_size = 4
+
 /datum/frame/frame_types/display
 	name = "Display"
 	frame_class = FRAME_CLASS_DISPLAY

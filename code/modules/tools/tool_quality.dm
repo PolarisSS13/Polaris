@@ -1,5 +1,5 @@
 /obj/item
-	var/list/tool_qualities
+	var/list/tool_qualities = list()
 
 /obj/item/examine(mob/user)
 	. = ..()

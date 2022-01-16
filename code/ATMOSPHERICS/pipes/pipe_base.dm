@@ -118,11 +118,12 @@
 
 	if (!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
+	
 	var/turf/T = src.loc
 	if (level==1 && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 
 /obj/machinery/atmospherics/pipe/proc/change_color(var/new_color)
