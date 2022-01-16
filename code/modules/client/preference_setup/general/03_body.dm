@@ -73,16 +73,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 		// Is an admin OR
 		// Instance is species-whitelisted AND current species matches whitelist OR
-		// ~~Is NOT species-whitelisted AND~~ config ckey-whitelist is enabled AND ckey matches whitelist
-		
-		// There's 3 dedicated species for events that are species-whitelisted for ALL sprites,
-		// so the list at present actually has a minimum length of 3.
-		// But because I don't trust SS13 developers to actually respect a #define I set somewhere,
-		// I'm just throwing out that requirement altogether. -Ater
-		// TODO: Implement a framework for dynamically creating new singleton even species in-round (Don't @ me with this)
+		// config ckey-whitelist is enabled AND ckey matches whitelist AND the ckey-whitelist enables this instance for current species.
+		// That last list is entirely arbitrary. Take complaints up with Kholdstare.
 		if((istype(client) && check_rights(R_ADMIN | R_EVENT | R_FUN, 0, client)) || \
 				(LAZYLEN(instance.species_allowed) && species && (species in instance.species_allowed)) || \
-				(config.genemod_whitelist && is_genemod_whitelisted(src)))
+				(config.genemod_whitelist && is_genemod_whitelisted(src) && LAZYLEN(instance.whitelist_allowed) && (species in instance.whitelist_allowed)))
 			.[instance.name] = instance
 
 /datum/category_item/player_setup_item/general/body

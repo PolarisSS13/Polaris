@@ -25,6 +25,7 @@
 	var/icon/clip_mask = null //Instantiated clip mask of given icon and state
 
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	whitelist_allowed = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_PROMETHEAN)
 
 /datum/sprite_accessory/tail/New()
 	. = ..()
@@ -203,6 +204,7 @@
 	extra_overlay = "nevreantail_dc_tail"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/nevreanwagdc
 	name = "nevrean wagtail, dual-color"
@@ -211,6 +213,7 @@
 	extra_overlay = "wagtail_dc_tail"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/nevreanwagdc_alt
 	name = "nevrean wagtail, marked, dual-color"
@@ -219,6 +222,7 @@
 	extra_overlay = "wagtail2_dc_mark"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/crossfox
 	name = "cross fox"
@@ -229,6 +233,7 @@
 	name = "bee thorax"
 	desc = ""
 	icon_state = "beethorax"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/doublekitsune
 	name = "double kitsune tail, colorable"
@@ -242,16 +247,19 @@
 	desc = ""
 	icon_state = "spadetail-black"
 	do_colouration = 1
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/snag
 	name = "xenomorph tail 1"
 	desc = ""
 	icon_state = "snag"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/xenotail
 	name = "xenomorph tail 2"
 	desc = ""
 	icon_state = "xenotail"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/eboop
 	name = "EGN mech tail (dual color)"
@@ -260,6 +268,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "eboop_mark"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/ketrai_wag
 	name = "fennix tail (vwag)"
@@ -267,12 +276,14 @@
 	icon_state = "ketraitail"
 	ani_state = "ketraitail_w"
 	//ckeys_allowed = list("ketrai") //They requested it to be enabled for everyone.
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/ketrainew_wag
 	name = "new fennix tail (vwag)"
 	desc = ""
 	icon_state = "ketraitailnew"
 	ani_state = "ketraitailnew_w"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/redpanda
 	name = "red panda"
@@ -296,6 +307,7 @@
 	hide_body_parts = list(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT) //Exclude pelvis just in case.
 	clip_mask_icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'
 	clip_mask_state = "taur_clip_mask_def" //Used to clip off the lower part of suits & uniforms.
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/tailmaw
 	name = "tailmaw, colorable"
@@ -303,6 +315,7 @@
 	icon_state = "tailmaw"
 	color_blend_mode = ICON_MULTIPLY
 	do_colouration = 1
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/curltail
 	name = "curltail (vwag)"
@@ -331,7 +344,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "sneptail_mark"
 	extra_overlay_w = "sneptail_mark_w"
-
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/tiger_new
 	name = "tiger tail (vwag)"
@@ -352,6 +365,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "vulptail_mark"
 	extra_overlay_w = "vulptail_mark_w"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/otietail
 	name = "otie tail (vwag)"
@@ -360,6 +374,7 @@
 	ani_state = "otie_w"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/newtailmaw
 	name = "new tailmaw (vwag)"
@@ -368,6 +383,7 @@
 	ani_state = "newtailmaw_w"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/ztail
 	name = "jagged flufftail"
@@ -389,6 +405,7 @@
 	icon_state = "vulptail_alt"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/sergaltaildc
 	name = "sergal, dual-color"
@@ -397,6 +414,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "sergal_mark"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/skunktail
 	name = "skunk, dual-color"
@@ -422,6 +440,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/nightstalker
 	name = "Nightstalker, colorable"
@@ -429,11 +448,13 @@
 	icon_state = "nightstalker"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 //For all species tails. Includes haircolored tails.
 /datum/sprite_accessory/tail/special
 	name = "Blank tail. Do not select."
 	icon = 'icons/effects/species_tails.dmi'
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/special/unathi
 	name = "unathi tail"
@@ -443,6 +464,7 @@
 	color_blend_mode = ICON_MULTIPLY
 
 	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/special/tajaran
 	name = "tajaran tail"
@@ -451,6 +473,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_TAJ, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/special/sergal
 	name = "sergal tail"
@@ -458,6 +481,7 @@
 	icon_state = "sergtail_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/special/akula
 	name = "akula tail"
@@ -465,6 +489,7 @@
 	icon_state = "sharktail_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/special/nevrean
 	name = "nevrean tail"
@@ -633,6 +658,7 @@
 	name = "Zeng-Hu Tajaran Synth tail"
 	desc = ""
 	icon_state = "zenghu_taj"
+	whitelist_allowed = list()
 
 //Taurs moved to a separate file due to extra code around them
 
@@ -644,6 +670,7 @@
 	icon_state = "buggo_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggobee
 	name = "Bug abdomen, bee top, dual-colorable"
@@ -652,6 +679,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobee_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggobeefull
 	name = "Bug abdomen, bee full, dual-colorable"
@@ -660,6 +688,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobeefull_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggounder
 	name = "Bug abdomen, underside, dual-colorable"
@@ -668,6 +697,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggounder_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofirefly
 	name = "Bug abdomen, firefly, dual-colorable"
@@ -676,6 +706,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofirefly_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofat
 	name = "Fat bug abdomen, colorable"
@@ -683,6 +714,7 @@
 	icon_state = "buggofat_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofatbee
 	name = "Fat bug abdomen, bee top, dual-colorable"
@@ -691,6 +723,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatbee_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofatbeefull
 	name = "Fat bug abdomen, bee full, dual-colorable"
@@ -699,6 +732,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatbeefull_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofatunder
 	name = "Fat bug abdomen, underside, dual-colorable"
@@ -707,6 +741,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatunder_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofatfirefly
 	name = "Fat bug abdomen, firefly, dual-colorable"
@@ -715,6 +750,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatfirefly_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggowag
 	name = "Bug abdomen, colorable, vwag change"
@@ -723,6 +759,7 @@
 	ani_state = "buggofat_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggobeewag
 	name = "Bug abdomen, bee top, dual color, vwag"
@@ -733,6 +770,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobee_markings"
 	extra_overlay_w = "buggofatbee_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggobeefullwag
 	name = "Bug abdomen, bee full, dual color, vwag"
@@ -743,6 +781,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobeefull_markings"
 	extra_overlay_w = "buggofatbeefull_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggounderwag
 	name = "Bug abdomen, underside, dual color, vwag"
@@ -753,6 +792,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggounder_markings"
 	extra_overlay_w = "buggofatunder_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggofireflywag
 	name = "Bug abdomen, firefly, dual color, vwag"
@@ -763,6 +803,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofirefly_markings"
 	extra_overlay_w = "buggofatfirefly_markings"
+	whitelist_allowed = list()
 
 //Vass buggo variants!
 
@@ -772,6 +813,7 @@
 	icon_state = "buggo_vass_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassbee
 	name = "Bug abdomen, bee top, dc, vass"
@@ -780,6 +822,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobee_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassbeefull
 	name = "Bug abdomen, bee full, dc, vass"
@@ -788,6 +831,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobeefull_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassunder
 	name = "Bug abdomen, underside, dc, vass"
@@ -796,6 +840,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggounder_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfirefly
 	name = "Bug abdomen, firefly, dc, vass"
@@ -804,6 +849,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofirefly_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfat
 	name = "Fat bug abdomen, vass, colorable"
@@ -811,6 +857,7 @@
 	icon_state = "buggofat_vass_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfatbee
 	name = "Fat bug abdomen, bee top, dc, vass"
@@ -819,6 +866,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatbee_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfatbeefull
 	name = "Fat bug abdomen, bee full, dc, vass"
@@ -827,6 +875,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatbeefull_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfatunder
 	name = "Fat bug abdomen, underside, dc, vass"
@@ -835,6 +884,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatunder_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfatfirefly
 	name = "Fat bug abdomen, firefly, dc, vass"
@@ -843,6 +893,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofatfirefly_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovasswag
 	name = "Bug abdomen, vass, colorable, vwag change"
@@ -851,6 +902,7 @@
 	ani_state = "buggofat_vass_s"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassbeewag
 	name = "Bug abdomen, bee top, dc, vass, vwag"
@@ -861,6 +913,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobee_vass_markings"
 	extra_overlay_w = "buggofatbee_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassbeefullwag
 	name = "Bug abdomen, bee full, dc, vass, vwag"
@@ -871,6 +924,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggobeefull_vass_markings"
 	extra_overlay_w = "buggofatbeefull_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassunderwag
 	name = "Bug abdomen, underside, dc, vass, vwag"
@@ -881,6 +935,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggounder_vass_markings"
 	extra_overlay_w = "buggofatunder_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/buggovassfireflywag
 	name = "Bug abdomen, firefly, dc, vass, vwag"
@@ -891,6 +946,7 @@
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "buggofirefly_vass_markings"
 	extra_overlay_w = "buggofatfirefly_vass_markings"
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/tail_smooth
 	name = "Smooth Lizard Tail, colorable"
@@ -923,6 +979,7 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	//species_allowed = list(SPECIES_SHADEKIN, SPECIES_SHADEKIN_CREW)
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/wartacosushi_tail //brightened +20RGB from matching roboparts
 	name = "Ward-Takahashi Tail"
@@ -930,6 +987,7 @@
 	icon_state = "wardtakahashi_vulp"
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
+	whitelist_allowed = list()
 
 /datum/sprite_accessory/tail/wartacosushi_tail_dc
 	name = "Ward-Takahashi Tail, dual-color"
@@ -938,3 +996,4 @@
 	do_colouration = 1
 	color_blend_mode = ICON_MULTIPLY
 	extra_overlay = "wardtakahashi_vulp_dc_mark"
+	whitelist_allowed = list()
