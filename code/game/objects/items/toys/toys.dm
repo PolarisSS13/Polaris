@@ -750,7 +750,7 @@
 		opened = FALSE
 		return
 
-	if(is_sharp(I) && !opened)
+	if(I.sharp && !opened)
 		to_chat(user, "You open a small incision in [src]. You can place tiny items inside.")
 		opened = TRUE
 		return
@@ -871,7 +871,7 @@
 		opened = FALSE
 		return
 
-	if(is_sharp(I) && !opened)
+	if(I.sharp && !opened)
 		to_chat(user, "You open a small incision in [src]. You can place tiny items inside.")
 		opened = TRUE
 		return

@@ -176,7 +176,7 @@ var/list/possible_cable_coil_colours = list(
 	if(!T.is_plating())
 		return
 
-	if(W.is_wirecutter())
+	if(W.get_tool_quality(TOOL_WIRECUTTER))
 		var/obj/item/stack/cable_coil/CC
 		if(d1 == UP || d2 == UP)
 			to_chat(user, "<span class='warning'>You must cut this cable from above.</span>")
@@ -510,7 +510,7 @@ var/list/possible_cable_coil_colours = list(
 	stacktype = /obj/item/stack/cable_coil
 	drop_sound = 'sound/items/drop/accessory.ogg'
 	pickup_sound = 'sound/items/pickup/accessory.ogg'
-	tool_qualities = list(TOOL_CABLE_COIL)
+	tool_qualities = list(TOOL_CABLE_COIL =  TOOL_QUALITY_STANDARD)
 
 /obj/item/stack/cable_coil/cyborg
 	name = "cable coil synthesizer"
@@ -947,7 +947,7 @@ var/list/possible_cable_coil_colours = list(
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = null
-	toolspeed = 0.25
+	tool_qualities = list(TOOL_CABLE_COIL =  TOOL_QUALITY_GOOD)
 
 /obj/item/stack/cable_coil/alien/Initialize(var/ml, length = MAXCOIL, var/param_color = null)		//There has to be a better way to do this.
 	. = ..()

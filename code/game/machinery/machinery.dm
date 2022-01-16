@@ -166,7 +166,7 @@ Class Procs:
 		pulse2.icon = 'icons/effects/effects.dmi'
 		pulse2.icon_state = "empdisable"
 		pulse2.name = "emp sparks"
-		pulse2.anchored = 1
+		pulse2.anchored = TRUE
 		pulse2.set_dir(pick(cardinal))
 
 		spawn(10)
@@ -177,16 +177,12 @@ Class Procs:
 	switch(severity)
 		if(1.0)
 			qdel(src)
-			return
 		if(2.0)
 			if(prob(50))
 				qdel(src)
-				return
 		if(3.0)
 			if(prob(25))
 				qdel(src)
-				return
-		else
 	return
 
 /obj/machinery/vv_edit_var(var/var_name, var/new_value)
@@ -234,22 +230,21 @@ Class Procs:
 		return attack_hand(user)
 
 /obj/machinery/attack_hand(mob/user as mob)
-
 	if(inoperable(MAINT))
-		return 1
+		return TRUE
 	if(user.lying || user.stat)
-		return 1
+		return TRUE
 	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon)))
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
-		return 1
+		return TRUE
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user
 		if(H.getBrainLoss() >= 55)
 			visible_message("<span class='warning'>[H] stares cluelessly at [src].</span>")
-			return 1
+			return TRUE
 		else if(prob(H.getBrainLoss()))
 			to_chat(user, "<span class='warning'>You momentarily forget how to use [src].</span>")
-			return 1
+			return TRUE
 
 	if(clicksound && istype(user, /mob/living/carbon))
 		playsound(src, clicksound, clickvol)
@@ -278,9 +273,9 @@ Class Procs:
 
 /obj/machinery/proc/shock(mob/user, prb)
 	if(inoperable())
-		return 0
+		return FALSE
 	if(!prob(prb))
-		return 0
+		return FALSE
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
@@ -292,8 +287,8 @@ Class Procs:
 			if(temp_apc && temp_apc.terminal && temp_apc.terminal.powernet)
 				temp_apc.terminal.powernet.trigger_warning()
 		if(user.stunned)
-			return 1
-	return 0
+			return TRUE
+	return TRUE
 
 /obj/machinery/proc/default_apply_parts()
 	var/obj/item/weapon/circuitboard/CB = circuit
@@ -313,9 +308,9 @@ Class Procs:
 
 /obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
 	if(!istype(R))
-		return 0
+		return FALSE
 	if(!component_parts)
-		return 0
+		return FALSE
 	to_chat(user, "<span class='notice'>Following parts detected in [src]:</span>")
 	for(var/obj/item/C in component_parts)
 		to_chat(user, "<span class='notice'>    [C.name]</span>")
@@ -339,20 +334,22 @@ Class Procs:
 						break
 			update_icon()
 			RefreshParts()
-	return 1
+	return TRUE
 
 // Default behavior for wrenching down machines.  Supports both delay and instant modes.
 /obj/machinery/proc/default_unfasten_wrench(var/mob/user, var/obj/item/W, var/time = 0)
-	if(!W.is_wrench())
+	if(!W.get_tool_quality(TOOL_WRENCH))
 		return FALSE
 	if(panel_open)
 		return FALSE // Close panel first!
+
 	playsound(src, W.usesound, 50, 1)
-	var/actual_time = W.toolspeed * time
+	var/actual_time = W.get_tool_speed(TOOL_WRENCH) * time
 	if(actual_time != 0)
 		user.visible_message( \
 			"<span class='warning'>\The [user] begins [anchored ? "un" : ""]securing \the [src].</span>", \
 			"<span class='notice'>You start [anchored ? "un" : ""]securing \the [src].</span>")
+
 	if(actual_time == 0 || do_after(user, actual_time, target = src))
 		user.visible_message( \
 			"<span class='warning'>\The [user] has [anchored ? "un" : ""]secured \the [src].</span>", \
@@ -363,29 +360,33 @@ Class Procs:
 	return TRUE
 
 /obj/machinery/proc/default_deconstruction_crowbar(var/mob/user, var/obj/item/C)
-	if(!C.is_crowbar())
-		return 0
+	if(!C.get_tool_quality(TOOL_CROWBAR))
+		return FALSE
 	if(!panel_open)
-		return 0
+		return FALSE
 	. = dismantle()
 
 /obj/machinery/proc/default_deconstruction_screwdriver(var/mob/user, var/obj/item/S)
-	if(!S.is_screwdriver())
-		return 0
+	if(!S.get_tool_quality(TOOL_SCREWDRIVER))
+		return FALSE
 	playsound(src, S.usesound, 50, 1)
 	panel_open = !panel_open
 	to_chat(user, "<span class='notice'>You [panel_open ? "open" : "close"] the maintenance hatch of [src].</span>")
 	update_icon()
-	return 1
+	return TRUE
+
+// Unimplemented on base type, but other machinery types may yet have use
+/obj/machinery/proc/default_deconstruction_wrench(var/mob/user, var/obj/item/S)
+	return
 
 /obj/machinery/proc/computer_deconstruction_screwdriver(var/mob/user, var/obj/item/S)
-	if(!S.is_screwdriver())
-		return 0
+	if(!S.get_tool_quality(TOOL_SCREWDRIVER))
+		return FALSE
 	if(!circuit)
-		return 0
+		return FALSE
 	to_chat(user, "<span class='notice'>You start disconnecting the monitor.</span>")
 	playsound(src, S.usesound, 50, 1)
-	if(do_after(user, 20 * S.toolspeed))
+	if(do_after(user, 20 * S.get_tool_speed(TOOL_SCREWDRIVER)))
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 			new /obj/item/weapon/material/shard(src.loc)
@@ -394,19 +395,19 @@ Class Procs:
 		. = dismantle()
 
 /obj/machinery/proc/alarm_deconstruction_screwdriver(var/mob/user, var/obj/item/S)
-	if(!S.is_screwdriver())
-		return 0
+	if(!S.get_tool_quality(TOOL_SCREWDRIVER))
+		return FALSE
 	playsound(src, S.usesound, 50, 1)
 	panel_open = !panel_open
 	to_chat(user, "The wires have been [panel_open ? "exposed" : "unexposed"]")
 	update_icon()
-	return 1
+	return FALSE
 
 /obj/machinery/proc/alarm_deconstruction_wirecutters(var/mob/user, var/obj/item/W)
-	if(!W.is_wirecutter())
-		return 0
+	if(!W.get_tool_quality(TOOL_WIRECUTTER))
+		return FALSE
 	if(!panel_open)
-		return 0
+		return FALSE
 	user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
 	playsound(src, W.usesound, 50, 1)
 	new/obj/item/stack/cable_coil(get_turf(src), 5)
@@ -418,19 +419,19 @@ Class Procs:
 		if(istype(I,/obj/item/weapon/card/id))
 			I.forceMove(src.loc)
 	if(!circuit)
-		return 0
+		return FALSE
 	var/obj/structure/frame/A = new /obj/structure/frame(src.loc)
 	var/obj/item/weapon/circuitboard/M = circuit
 	A.circuit = M
-	A.anchored = 1
+	A.anchored = TRUE
 	A.frame_type = M.board_type
 	if(A.frame_type.circuit)
-		A.need_circuit = 0
+		A.need_circuit = FALSE
 
 	if(A.frame_type.frame_class == FRAME_CLASS_ALARM || A.frame_type.frame_class == FRAME_CLASS_DISPLAY)
-		A.density = 0
+		A.density = FALSE
 	else
-		A.density = 1
+		A.density = TRUE
 
 	if(A.frame_type.frame_class == FRAME_CLASS_MACHINE)
 		for(var/obj/D in component_parts)
@@ -460,11 +461,10 @@ Class Procs:
 	M.loc = null
 	M.deconstruct(src)
 	qdel(src)
-	return 1
+	return TRUE
 
 /datum/proc/apply_visual(mob/M)
-	M.sight = 0 //Just reset their mesons and stuff so they can't use them, by default.
-	return
+	M.sight = FALSE //Just reset their mesons and stuff so they can't use them, by default.
 
 /datum/proc/remove_visual(mob/M)
 	return

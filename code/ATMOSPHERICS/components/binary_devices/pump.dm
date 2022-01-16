@@ -240,20 +240,9 @@ Thus, the two variables affect pump operation are set in New():
 		update_icon()
 
 /obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!W.is_wrench())
+	if (!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
 		to_chat(user, "<span class='warning'>You cannot unwrench this [src], turn it off first.</span>")
-		return 1
-	if(!can_unwrench())
-		to_chat(user, "<span class='warning'>You cannot unwrench this [src], it too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src, W.usesound, 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40 * W.toolspeed))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear ratchet.")
-		deconstruct()
+		return TRUE
+	return default_deconstruction_wrench(user, W)

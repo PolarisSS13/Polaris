@@ -17,6 +17,7 @@
 	matter = list(MAT_STEEL = 50000)
 	preserve_item = TRUE // RCDs are pretty important.
 	var/datum/effect_system/spark_spread/spark_system
+	var/toolspeed = 1
 	var/stored_matter = 0
 	var/max_stored_matter = RCD_MAX_CAPACITY
 	var/ranged = FALSE
