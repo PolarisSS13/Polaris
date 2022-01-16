@@ -15515,10 +15515,6 @@
 "heM" = (
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/cafeteria)
-"heS" = (
-/obj/effect/shuttle_landmark/cynosure/large_escape_pod1/station,
-/turf/simulated/shuttle/floor,
-/area/shuttle/large_escape_pod1/station)
 "heZ" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 10
@@ -24639,6 +24635,7 @@
 	pixel_y = -26;
 	tag_door = "large_escape_pod_1_hatch"
 	},
+/obj/effect/shuttle_landmark/cynosure/large_escape_pod1/station,
 /turf/simulated/shuttle/floor,
 /area/shuttle/large_escape_pod1/station)
 "lyg" = (
@@ -81795,7 +81792,7 @@ cei
 nNo
 nUW
 qdT
-heS
+qdT
 itc
 dof
 cHr
