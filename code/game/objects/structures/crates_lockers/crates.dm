@@ -8,6 +8,8 @@
 	climbable = 1
 	dir = 4 //Spawn facing 'forward' by default.
 	door_anim_time = 0 //Unsupported until appropriate sprites are available
+	open_sound = 'sound/machines/closet/crate_open.ogg'
+	close_sound = 'sound/machines/closet/crate_close.ogg'
 	var/points_per_crate = 5
 	var/rigged = 0
 
@@ -33,7 +35,7 @@
 				if(usr.stunned)
 					return 2
 
-	playsound(src, 'sound/machines/click.ogg', 15, 1, -3)
+	playsound(src, open_sound, 15, 1, -3)
 	for(var/obj/O in src)
 		O.forceMove(get_turf(src))
 	src.opened = 1
@@ -49,7 +51,7 @@
 	if(!src.can_close())
 		return 0
 
-	playsound(src, 'sound/machines/click.ogg', 15, 1, -3)
+	playsound(src, close_sound, 15, 1, -3)
 	var/itemcount = 0
 	for(var/obj/O in get_turf(src))
 		if(itemcount >= storage_capacity)

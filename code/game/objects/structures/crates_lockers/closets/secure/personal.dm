@@ -27,6 +27,8 @@
 /obj/structure/closet/secure_closet/personal/cabinet
 	closet_appearance = /decl/closet_appearance/cabinet/secure
 	door_anim_time = 0 //Unsupported
+	open_sound = 'sound/machines/closet/closet_wood_open.ogg'
+	close_sound = 'sound/machines/closet/closet_wood_close.ogg'
 
 	starts_with = list(
 		/obj/item/weapon/storage/backpack/satchel/withwallet,
