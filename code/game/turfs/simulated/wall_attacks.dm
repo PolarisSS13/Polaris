@@ -239,7 +239,7 @@
 		return
 
 	// Basic dismantling.
-	var/dismantle_toolspeed = 1
+	var/dismantle_toolspeed = 0
 	if(isnull(construction_stage) || !reinf_material)
 
 		var/cut_delay = 60 - material.cut_delay
@@ -260,6 +260,7 @@
 		else if(istype(W,/obj/item/weapon/melee/energy/blade))
 			dismantle_sound = "sparks"
 			dismantle_verb = "slicing"
+			dismantle_toolspeed = 1
 			cut_delay *= 0.5
 		else if(W.get_tool_quality(TOOL_MINING))
 			var/obj/item/weapon/pickaxe/P = W
@@ -274,7 +275,7 @@
 			if(dismantle_sound)
 				playsound(src, dismantle_sound, 100, 1)
 
-			if(cut_delay<0)
+			if(cut_delay < 0)
 				cut_delay = 0
 
 			if(!do_after(user,cut_delay * dismantle_toolspeed))
@@ -388,7 +389,7 @@
 					construction_stage = 0
 					user.update_examine_panel(src)
 					update_icon()
-					to_chat(user, "<span class='notice'>The slice through the support rods.</span>")
+					to_chat(user, "<span class='notice'>You slice through the support rods.</span>")
 					return
 			if(0)
 				if(W.get_tool_quality(TOOL_CROWBAR))
