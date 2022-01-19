@@ -101,7 +101,7 @@
 	var/list/equipment = new		//This lists holds what stuff you bolted onto your baby ride
 	var/obj/item/mecha_parts/mecha_equipment/selected
 	var/max_equip = 2
-	
+
 	// What direction to float in, if inertial movement is active.
 	var/float_direction = 0
 	// Process() iterator count.
@@ -2026,7 +2026,7 @@
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
-		playsound(src, 'sound/machines/door/windowdoor.ogg', 50, 1)
+		playsound(src, 'sound/mecha/mech_enter.ogg', 50, 1)
 		if(occupant.client && cloaked_selfimage)
 			occupant.client.images += cloaked_selfimage
 		play_entered_noise(occupant)
@@ -2119,6 +2119,7 @@
 		update_icon()
 		set_dir(dir_in)
 		verbs -= /obj/mecha/verb/eject
+		playsound(src, 'sound/mecha/mech_exit.ogg', 50, 1)
 
 		//src.zoom = 0
 

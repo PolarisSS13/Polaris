@@ -66,6 +66,8 @@
 	catalogue_data = list(/datum/category_item/catalogue/information/objects/oldreactor)
 	climbable = 0
 	door_anim_time = 0 //Unsupported
+	open_sound = 'sound/machines/door/hatchforced.ogg'
+	close_sound = 'sound/machines/door/hatchclose.ogg'
 
 	starts_with = list(
 		/obj/item/weapon/fuel_assembly/deuterium = 6)
