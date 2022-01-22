@@ -68,6 +68,7 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	drop_sound = 'sound/items/drop/knife.ogg'
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_POOR, TOOL_KNIFE = TOOL_QUALITY_STANDARD)
 
 // These no longer inherit from hatchets.
 /obj/item/weapon/material/knife/tacknife
@@ -139,6 +140,8 @@
 	attack_verb = list("slashed", "chopped", "gouged", "ripped", "cut")
 	can_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
 	slot_flags = SLOT_BELT
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_MEDIOCRE, TOOL_KNIFE = TOOL_QUALITY_STANDARD)
+
 
 /obj/item/weapon/material/knife/machete/cyborg
 	name = "integrated machete"
