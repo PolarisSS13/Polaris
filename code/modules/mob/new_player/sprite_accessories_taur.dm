@@ -3,7 +3,6 @@
 	nonhuman_key_exemption = FALSE	// If true, nonhumans who can't hold keys don't need them, like borgs and simplemobs.
 	key_name = "a riding crop"		// What the 'keys' for the thing being rided on would be called.
 	only_one_driver = TRUE			// If true, only the person in 'front' (first on list of riding mobs) can drive.
-	whitelist_allowed = list()
 
 /datum/riding/taur/handle_vehicle_layer()
 	if(ridden.has_buckled_mobs())
@@ -135,6 +134,7 @@
 	hide_body_parts	= list(BP_L_LEG, BP_L_FOOT, BP_R_LEG, BP_R_FOOT) //Exclude pelvis just in case.
 	clip_mask_icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'
 	clip_mask_state = "taur_clip_mask_def" //Used to clip off the lower part of suits & uniforms.
+	whitelist_allowed = list()
 
 // Species-unique long tails/taurhalves
 
