@@ -266,7 +266,7 @@
 			var/obj/item/weapon/pickaxe/P = W
 			dismantle_verb = P.drill_verb
 			dismantle_sound = P.drill_sound
-			cut_delay -= P.digspeed
+			cut_delay -= 40 / P.get_tool_quality(TOOL_MINING)
 			dismantle_toolspeed = W.get_tool_speed(TOOL_MINING)
 
 		if(dismantle_toolspeed)
