@@ -188,7 +188,7 @@
 	icon_state = "sleek"
 
 /datum/sprite_accessory/ears/drake
-	name = "drake frills"
+	name = "frills"
 	icon_state = "drake"
 	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	whitelist_allowed = list(SPECIES_PROMETHEAN)
