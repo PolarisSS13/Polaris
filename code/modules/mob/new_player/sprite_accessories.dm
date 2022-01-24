@@ -2734,6 +2734,7 @@ shaved
 //skin styles - WIP
 //going to have to re-integrate this with surgery
 //let the icon_state hold an icon preview for now
+
 /datum/sprite_accessory/skin
 	icon = 'icons/mob/human_races/r_human.dmi'
 
