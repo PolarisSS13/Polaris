@@ -20,8 +20,7 @@
 	matter = list(MAT_STEEL = 75)
 	attack_verb = list("stabbed")
 	sharp  = 1
-	toolspeed = 1
-	tool_qualities = list(TOOL_SCREWDRIVER)
+	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_STANDARD)
 	var/random_color = TRUE
 
 /obj/item/weapon/tool/screwdriver/Initialize()
@@ -83,7 +82,7 @@
 	icon_state = "screwdriver_a"
 	item_state = "screwdriver_black"
 	usesound = 'sound/items/pshoom.ogg'
-	toolspeed = 0.1
+	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_BEST)
 	random_color = FALSE
 
 /obj/item/weapon/tool/screwdriver/hybrid
@@ -94,7 +93,7 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3)
 	w_class = ITEMSIZE_NORMAL
 	usesound = 'sound/effects/uncloak.ogg'
-	toolspeed = 0.4
+	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_DECENT)
 	random_color = FALSE
 	reach = 2
 
@@ -102,11 +101,11 @@
 	name = "powered screwdriver"
 	desc = "An electrical screwdriver, designed to be both precise and quick."
 	usesound = 'sound/items/drill_use.ogg'
-	toolspeed = 0.5
+	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_DECENT)
 
-/obj/item/weapon/tool/screwdriver/power
+/obj/item/weapon/tool/powerdrill
 	name = "hand drill"
-	desc = "A simple powered hand drill. It's fitted with a screw bit."
+	desc = "A simple powered hand drill."
 	icon_state = "drill_screw"
 	item_state = "drill"
 	matter = list(MAT_STEEL = 150, MAT_SILVER = 50)
@@ -120,26 +119,12 @@
 	attack_verb = list("drilled", "screwed", "jabbed", "whacked")
 	hitsound = 'sound/items/drill_hit.ogg'
 	usesound = 'sound/items/drill_use.ogg'
-	toolspeed = 0.25
-	random_color = FALSE
-	var/obj/item/weapon/tool/wrench/power/counterpart = null
+	var/state = 0 // Technically boolean, but really a state machine
+	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_GOOD)
 
-/obj/item/weapon/tool/screwdriver/power/Initialize(var/ml, no_counterpart = TRUE)
-	. = ..()
-	if(!counterpart && no_counterpart)
-		counterpart = new(src, FALSE)
-		counterpart.counterpart = src
-
-/obj/item/weapon/tool/screwdriver/power/Destroy()
-	if(counterpart)
-		counterpart.counterpart = null // So it can qdel cleanly.
-		QDEL_NULL(counterpart)
-	return ..()
-
-/obj/item/weapon/tool/screwdriver/power/attack_self(mob/user)
+/obj/item/weapon/tool/powerdrill/attack_self(mob/user)
 	playsound(src,'sound/items/change_drill.ogg',50,1)
-	user.drop_item(src)
-	counterpart.forceMove(get_turf(src))
-	src.forceMove(counterpart)
-	user.put_in_active_hand(counterpart)
+	set_tool_quality(TOOL_SCREWDRIVER, state ? TOOL_QUALITY_GOOD : TOOL_QUALITY_NONE)
+	set_tool_quality(TOOL_WRENCH,      state ? TOOL_QUALITY_NONE : TOOL_QUALITY_GOOD)
+	state = !state
 	to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")

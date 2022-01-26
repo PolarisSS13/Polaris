@@ -2,7 +2,4 @@
 	gib_on_butchery = TRUE
 
 /mob/living/simple_mob/can_butcher(var/mob/user, var/obj/item/I)	// Override for special butchering checks.
-	. = ..()
-
-	if(. && (!is_sharp(I) || !has_edge(I)))
-		return FALSE
+	return ..() && I.sharp && I.edge

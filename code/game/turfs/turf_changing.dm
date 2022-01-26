@@ -3,12 +3,6 @@
 	spawn()
 		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 
-// Removes all signs of lattice on the pos of the turf -Donkieyo
-/turf/proc/RemoveLattice()
-	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-	if(L)
-		qdel(L)
-
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
@@ -44,12 +38,11 @@
 	qdel(src)
 
 	var/turf/W = new N( locate(src.x, src.y, src.z) )
-	if(istype(W, /turf/simulated/floor))
-		if(old_fire)
+	if(old_fire)
+		if(istype(W, /turf/simulated/floor))
 			W.fire = old_fire
-		W.RemoveLattice()
-	else if(old_fire)
-		old_fire.RemoveFire()
+		else
+			old_fire.RemoveFire()
 
 	if(tell_universe)
 		universe.OnTurfChange(W)

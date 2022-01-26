@@ -22,8 +22,8 @@
 			damage *= B.overmind.blob_type.burn_multiplier
 		B.adjust_integrity(-damage)
 
-	new /obj/effect/effect/sparks(src.loc)
-	new /obj/effect/effect/smoke/illumination(src.loc, 5, 30, 30, "#FFFFFF")
+	new /obj/effect/vfx/sparks(src.loc)
+	new /obj/effect/vfx/smoke/illumination(src.loc, 5, 30, 30, "#FFFFFF")
 
 	qdel(src)
 

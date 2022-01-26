@@ -2,6 +2,7 @@
 	name = "pda spam"
 	departments = list(DEPARTMENT_EVERYONE)
 	event_type = /datum/event2/event/pda_spam
+	regions = list(EVENT_REGION_UNIVERSAL)
 
 /datum/event2/meta/pda_spam/get_weight()
 	return metric.count_people_in_department(DEPARTMENT_EVERYONE) * 2
@@ -96,7 +97,7 @@
 			message = pick("Luxury watches for Blowout sale prices!",\
 			"Watches, Jewelry & Accessories, Bags & Wallets !",\
 			"Deposit 100$ and get 300$ totally free!",\
-			" 100K NT.|WOWGOLD õnly $89            <HOT>",\
+			" 100K NT.|WOWGOLD ï¿½nly $89            <HOT>",\
 			"We have been filed with a complaint from one of your customers in respect of their business relations with you.",\
 			"We kindly ask you to open the COMPLAINT REPORT (attached) to reply on this complaint..")
 		if(4)

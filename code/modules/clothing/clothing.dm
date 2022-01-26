@@ -72,7 +72,7 @@
 	if (!..())
 		return 0
 
-	if(LAZYLEN(species_restricted) && istype(M,/mob/living/carbon/human))
+	if(LAZYLEN(species_restricted) && ishuman(M))
 		var/exclusive = null
 		var/wearable = null
 		var/mob/living/carbon/human/H = M
@@ -191,19 +191,15 @@
 		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi')
 
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
-	if (!user) return
-
-	if (src.loc != user || !istype(user,/mob/living/carbon/human))
-		..()
+	if (!user || !canremove)
 		return
+
+	if (src.loc != user || !ishuman(user))
+		return ..()
 
 	var/mob/living/carbon/human/H = user
 	if(H.l_ear != src && H.r_ear != src)
-		..()
-		return
-
-	if(!canremove)
-		return
+		return ..()
 
 	var/obj/item/clothing/ears/O
 	if(slot_flags & SLOT_TWOEARS )
@@ -315,25 +311,6 @@
 // Called just before an attack_hand(), in mob/UnarmedAttack()
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
-
-/*/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/scalpel))
-		if (clipped)
-			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
-			update_icon()
-			return
-
-		playsound(src, W.usesound, 50, 1)
-		user.visible_message("<font color='red'>[user] cuts the fingertips off of the [src].</font>","<font color='red'>You cut the fingertips off of the [src].</font>")
-
-		clipped = 1
-		name = "modified [name]"
-		desc = "[desc]<br>They have had the fingertips cut off of them."
-		if("exclude" in species_restricted)
-			species_restricted -= SPECIES_UNATHI
-			species_restricted -= SPECIES_TAJ
-		return
-*/
 
 /obj/item/clothing/gloves/clean_blood()
 	. = ..()
