@@ -150,9 +150,14 @@
 	new /datum/random_map/automata/cave_system/no_cracks(null, 1, 1, Z_LEVEL_STATION_ONE, world.maxx, world.maxy) // Create the mining Z-level.
 	to_world_log("Generated caves in [(REALTIMEOFDAY - time_started) / 10] second\s.")
 	time_started = REALTIMEOFDAY
+	new /datum/random_map/noise/sif/underground(null, 1, 1, Z_LEVEL_STATION_ONE, world.maxx, world.maxy)
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_STATION_ONE, 64, 64)         // Create the mining ore distribution map.
 	to_world_log("Generated ores in [(REALTIMEOFDAY - time_started) / 10] second\s.")
-	// Todo: Forest generation.
+
+	// Forest/wilderness generation.
+	new /datum/random_map/noise/sif(       null, 1, 1, Z_LEVEL_STATION_TWO,      world.maxx, world.maxy)
+	new /datum/random_map/noise/sif/forest(null, 1, 1, Z_LEVEL_SURFACE_WILD, world.maxx, world.maxy)
+
 	return 1
 
 // Skybox Settings
