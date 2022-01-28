@@ -223,13 +223,13 @@
 	if(!istype(W)) return//I really wish I did not need this
 
 	// Fixing.
-	if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent == I_HELP)
+	if(W.get_tool_quality(TOOL_WELDER) && user.a_intent == I_HELP)
 		var/obj/item/weapon/weldingtool/WT = W
 		if(health < maxhealth)
 			if(WT.remove_fuel(1 ,user))
 				to_chat(user, "<span class='notice'>You begin repairing [src]...</span>")
 				playsound(src, WT.usesound, 50, 1)
-				if(do_after(user, 40 * WT.toolspeed, target = src))
+				if(do_after(user, 40 * WT.get_tool_speed(TOOL_WELDER), target = src))
 					health = maxhealth
 			//		playsound(src, 'sound/items/Welder.ogg', 50, 1)
 					update_icon()
@@ -265,7 +265,7 @@
 
 	if(W.flags & NOBLUDGEON) return
 
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if(reinf && state >= 1)
 			state = 3 - state
 			update_nearby_icons()
@@ -283,11 +283,11 @@
 			update_verbs()
 			playsound(src, W.usesound, 75, 1)
 			to_chat(user, "<span class='notice'>You have [anchored ? "" : "un"]fastened the window [anchored ? "to" : "from"] the floor.</span>")
-	else if(W.is_crowbar() && reinf && state <= 1)
+	else if(W.get_tool_quality(TOOL_CROWBAR) && reinf && state <= 1)
 		state = 1 - state
 		playsound(src, W.usesound, 75, 1)
 		to_chat(user, "<span class='notice'>You have pried the window [state ? "into" : "out of"] the frame.</span>")
-	else if(W.is_wrench() && !anchored && (!state || !reinf))
+	else if(W.get_tool_quality(TOOL_WRENCH) && !anchored && (!state || !reinf))
 		if(!glasstype)
 			to_chat(user, "<span class='notice'>You're not sure how to dismantle \the [src] properly.</span>")
 		else
@@ -297,7 +297,7 @@
 			if(is_fulltile())
 				mats.amount = 4
 			qdel(src)
-	else if(istype(W, /obj/item/stack/cable_coil) && reinf && state == 0 && !istype(src, /obj/structure/window/reinforced/polarized))
+	else if(W.get_tool_quality(TOOL_CABLE_COIL) && reinf && state == 0 && !istype(src, /obj/structure/window/reinforced/polarized))
 		var/obj/item/stack/cable_coil/C = W
 		if (C.use(1))
 			playsound(src, 'sound/effects/sparks1.ogg', 75, 1)
@@ -305,7 +305,7 @@
 				"<span class='notice'>\The [user] begins to wire \the [src] for electrochromic tinting.</span>", \
 				"<span class='notice'>You begin to wire \the [src] for electrochromic tinting.</span>", \
 				"You hear sparks.")
-			if(do_after(user, 20 * C.toolspeed, src) && state == 0)
+			if(do_after(user, 20 * C.get_tool_speed(TOOL_CABLE_COIL), src) && state == 0)
 				playsound(src, 'sound/items/Deconstruct.ogg', 50, 1)
 				var/obj/structure/window/reinforced/polarized/P = new(loc, dir)
 				if(is_fulltile())

@@ -381,7 +381,7 @@
 		var/obj/item/weapon/weldingtool/WT = W
 		if (WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>Now welding the vent.</span>")
-			if(do_after(user, 20 * WT.toolspeed))
+			if(do_after(user, 20 * WT.get_tool_speed(TOOL_WELDER)))
 				if(!src || !WT.isOn()) return
 				playsound(src, WT.usesound, 50, 1)
 				if(!welded)
@@ -416,27 +416,16 @@
 		update_icon()
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if (!W.is_wrench())
+	if (!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
 	if (!(stat & NOPOWER) && use_power)
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
-		return 1
+		return TRUE
 	var/turf/T = src.loc
 	if (node && node.level==1 && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
-		return 1
-	if(!can_unwrench())
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	playsound(src, W.usesound, 50, 1)
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	if (do_after(user, 40 * W.toolspeed))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		deconstruct()
+		return TRUE
+	return default_deconstruction_wrench(user, W)
 
 #undef DEFAULT_PRESSURE_DELTA
 

@@ -6,7 +6,7 @@
 	icon_state = "nanopaste"
 	origin_tech = list(TECH_MATERIAL = 4, TECH_ENGINEERING = 3)
 	amount = 10
-	toolspeed = 0.75 //Used in surgery, shouldn't be the same speed as a normal screwdriver on mechanical organ repair.
+	tool_qualities = list(TOOL_NANOPASTE = TOOL_QUALITY_STANDARD) //Used in surgery, shouldn't be the same speed as a normal screwdriver on mechanical organ repair.
 	w_class = ITEMSIZE_SMALL
 	no_variants = FALSE
 
@@ -16,7 +16,7 @@
 	if (istype(M,/mob/living/silicon/robot))	//Repairing cyborgs
 		var/mob/living/silicon/robot/R = M
 		if (R.getBruteLoss() || R.getFireLoss())
-			if(do_after(user,7 * toolspeed))
+			if(do_after(user,7 * get_tool_speed(TOOL_NANOPASTE)))
 				R.adjustBruteLoss(-15)
 				R.adjustFireLoss(-15)
 				R.updatehealth()
@@ -45,13 +45,13 @@
 
 		if (S && (S.robotic >= ORGAN_ROBOT))
 			if(!S.get_damage())
-				user << "<span class='notice'>Nothing to fix here.</span>"
+				to_chat(user, "<span class='notice'>Nothing to fix here.</span>")
 			else if(can_use(1))
 				user.setClickCooldown(user.get_attack_speed(src))
 				if(S.open >= 2)
-					if(do_after(user,5 * toolspeed))
+					if(do_after(user,5 * get_tool_speed(TOOL_NANOPASTE)))
 						S.heal_damage(20, 20, robo_repair = 1)
-				else if(do_after(user,5 * toolspeed))
+				else if(do_after(user,5 * get_tool_speed(TOOL_NANOPASTE)))
 					S.heal_damage(10,10, robo_repair =1)
 				H.updatehealth()
 				use(1)

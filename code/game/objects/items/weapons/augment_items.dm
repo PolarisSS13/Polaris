@@ -32,6 +32,6 @@
 	force = 30
 	armor_penetration = 15
 	edge = 1
-	pry = 1
+	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_STANDARD)
 	defend_chance = 40
 	projectile_parry_chance = 20

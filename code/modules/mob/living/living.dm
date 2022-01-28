@@ -1136,3 +1136,23 @@
 // Each mob does vision a bit differently so this is just for inheritence and also so overrided procs can make the vision apply instantly if they call `..()`.
 /mob/living/proc/disable_spoiler_vision()
 	handle_vision()
+
+/mob/living/proc/get_player_regions()
+	// A living player is always in a universal region
+	. = list(EVENT_REGION_UNIVERSAL)
+
+	var/turf/T = get_turf(src)
+	var/obj/effect/overmap/visitable/M = get_overmap_sector(T.z)
+	
+	if(istype(M))
+		if(M.in_space)
+			if(T.z in using_map.station_levels)
+				. |= EVENT_REGION_SPACESTATION
+			else
+				. |= EVENT_REGION_DEEPSPACE
+		else
+			. |= EVENT_REGION_PLANETSURFACE
+
+	var/datum/map_z_level/zlevel = using_map.zlevels["[T.z]"]
+	if(istype(zlevel))
+		. |= zlevel.event_regions
