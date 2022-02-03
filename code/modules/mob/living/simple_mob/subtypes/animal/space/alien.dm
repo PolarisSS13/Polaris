@@ -45,7 +45,6 @@
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	projectiletype = /obj/item/projectile/energy/skathari
-	projectilesound = 'sound/weapons/pierce.ogg'
 
 /*
 To be replaced with equivalents later
@@ -126,7 +125,6 @@ To be replaced with equivalents later
 	movement_cooldown = 8
 
 	projectiletype = /obj/item/projectile/energy/skathari
-	projectilesound = 'sound/weapons/pierce.ogg'
 
 	pixel_x = -32
 	old_x = -32
