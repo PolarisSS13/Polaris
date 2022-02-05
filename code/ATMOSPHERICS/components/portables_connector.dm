@@ -154,4 +154,4 @@
 		return TRUE
 	if(locate(/obj/machinery/portable_atmospherics, src.loc))
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W,user)

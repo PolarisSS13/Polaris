@@ -245,4 +245,4 @@ Thus, the two variables affect pump operation are set in New():
 	if (!(stat & NOPOWER) && use_power)
 		to_chat(user, "<span class='warning'>You cannot unwrench this [src], turn it off first.</span>")
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)

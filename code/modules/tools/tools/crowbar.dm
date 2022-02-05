@@ -69,6 +69,7 @@
 /obj/item/weapon/tool/hydraulic_cutter
 	name = "jaws of life"
 	desc = "A set of jaws of life, compressed through the magic of science."
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "jaws_pry"
 	item_state = "jawsoflife"
 	matter = list(MAT_METAL=150, MAT_SILVER=50)
@@ -82,5 +83,6 @@
 	playsound(src, 'sound/items/change_jaws.ogg', 50, 1)
 	set_tool_quality(TOOL_CROWBAR,    state ? TOOL_QUALITY_GOOD : TOOL_QUALITY_NONE)
 	set_tool_quality(TOOL_WIRECUTTER, state ? TOOL_QUALITY_NONE : TOOL_QUALITY_GOOD)
+	icon_state = state ? "jaws_pry" : "jaws_cutter"
+	to_chat(user, "<span class='notice'>You attach the [state ? "prying" : "cutting"] jaws to [src].</span>")
 	state = !state
-	to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")
