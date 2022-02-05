@@ -1124,13 +1124,13 @@ Turf and target are seperate in case you want to teleport some distance from a t
 // The RNG with table/rollerbeds comes into play in do_surgery() so that fail_step() can be used instead.
 /proc/can_operate(mob/living/carbon/M, mob/living/user)
 	// You can, technically, always operate on yourself after standing still. Inadvised, but you can.
-	if(istype(user) && \
+	return M.lying || \
+		(
 			M == user && \
 			user.allow_self_surgery && \
 			user.a_intent == I_HELP && \
-			!M.isSynthetic())
-		return TRUE
-	return M.lying
+			!M.isSynthetic()
+		)
 
 // Returns an instance of a valid surgery surface.
 /mob/living/proc/get_surgery_surface(mob/living/user)
