@@ -293,7 +293,7 @@
 	if (istype(src, /obj/machinery/atmospherics/valve/digital) && !src.allowed(user))
 		to_chat(user, "<span class='warning'>Access denied.</span>")
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 
 /obj/machinery/atmospherics/valve/examine(mob/user)

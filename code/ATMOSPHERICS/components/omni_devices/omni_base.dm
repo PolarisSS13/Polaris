@@ -82,7 +82,7 @@
 /obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if(!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 /obj/machinery/atmospherics/omni/attack_hand(user as mob)
 	if(..())
