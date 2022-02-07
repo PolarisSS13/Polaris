@@ -92,10 +92,8 @@ var/list/mob_hat_cache = list()
 	hat_y_offset = -12
 	can_pull_mobs = MOB_PULL_SAME
 
-/mob/living/silicon/robot/drone/New()
-
-	..()
-
+/mob/living/silicon/robot/drone/Initialize()
+	. = ..()
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
 	remove_language("Robot Talk")
@@ -180,7 +178,7 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>\The [src] is not compatible with \the [W].</span>")
 		return
 
-	else if (W.is_crowbar())
+	else if (W.get_tool_quality(TOOL_CROWBAR))
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 

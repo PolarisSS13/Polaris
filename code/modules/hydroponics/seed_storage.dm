@@ -39,45 +39,50 @@
 	var/lockdown = 0
 	var/datum/wires/seedstorage/wires = null
 
-/obj/machinery/seed_storage/New()
-	..()
+/obj/machinery/seed_storage/Initialize()
+	. = ..()
 	wires = new(src)
 	if(!contraband_seeds.len)
-		contraband_seeds = pick(list(
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/greengrapeseed = 3,
-					/obj/item/seeds/reishimycelium = 2,
-					/obj/item/seeds/bloodtomatoseed = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/plastiseed = 3,
-					/obj/item/seeds/kudzuseed = 2,
-					/obj/item/seeds/rose/blood = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/amanitamycelium = 3,
-					/obj/item/seeds/libertymycelium = 2,
-					/obj/item/seeds/glowshroom = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/glowberryseed = 3,
-					/obj/item/seeds/icepepperseed = 2,
-					/obj/item/seeds/bluetomatoseed = 1
-					),
-			list(
-					/obj/item/seeds/durian = 2,
-					/obj/item/seeds/ambrosiadeusseed = 1,
-					/obj/item/seeds/killertomatoseed = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/random = 6
-					)
-			))
+		contraband_seeds = pick( 	/// Some form of ambrosia in all lists.
+			prob(30);list( /// General produce
+				/obj/item/seeds/ambrosiavulgarisseed = 3,
+				/obj/item/seeds/greengrapeseed = 3,
+				/obj/item/seeds/icepepperseed = 2,
+				/obj/item/seeds/kudzuseed = 1
+			),
+			prob(30);list( ///Mushroom batch
+				/obj/item/seeds/ambrosiavulgarisseed = 1,
+				/obj/item/seeds/glowberryseed = 2,
+				/obj/item/seeds/libertymycelium = 1,
+				/obj/item/seeds/reishimycelium = 2,
+				/obj/item/seeds/sporemycelium = 1
+			),
+			prob(15);list( /// Survivalist
+				/obj/item/seeds/ambrosiadeusseed = 2,
+				/obj/item/seeds/redtowermycelium = 2,
+				/obj/item/seeds/vale = 2,
+				/obj/item/seeds/siflettuce = 2
+			),
+			prob(20);list( /// Cold plants
+				/obj/item/seeds/ambrosiavulgarisseed = 2,
+				/obj/item/seeds/thaadra = 2,
+				/obj/item/seeds/icepepperseed = 2,
+				/obj/item/seeds/siflettuce = 1
+			),
+			prob(10);list( ///Poison party
+				/obj/item/seeds/ambrosiavulgarisseed = 3,
+				/obj/item/seeds/surik = 1,
+				/obj/item/seeds/telriis = 1,
+				/obj/item/seeds/nettleseed = 2,
+				/obj/item/seeds/poisonberryseed = 1
+			),
+			prob(5);list( /// Extra poison party!
+				/obj/item/seeds/ambrosiainfernusseed = 1,
+				/obj/item/seeds/amauri = 1,
+				/obj/item/seeds/surik = 1,
+				/obj/item/seeds/deathberryseed = 1 /// Very ow.
+			)
+		)
 	return
 
 /obj/machinery/seed_storage/process()
@@ -503,18 +508,18 @@
 		else
 			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
-	else if(O.is_wrench())
+	else if(O.get_tool_quality(TOOL_WRENCH))
 		playsound(src, O.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
-	else if(O.is_screwdriver())
+	else if(O.get_tool_quality(TOOL_SCREWDRIVER))
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance panel.")
 		playsound(src, O.usesound, 50, 1)
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, "[initial(icon_state)]-panel")
-	else if((O.is_wirecutter() || istype(O, /obj/item/device/multitool)) && panel_open)
+	else if((O.get_tool_quality(TOOL_WIRECUTTER) || O.get_tool_quality(TOOL_MULTITOOL)) && panel_open)
 		wires.Interact(user)
 
 /obj/machinery/seed_storage/emag_act(var/remaining_charges, var/mob/user)
@@ -527,7 +532,7 @@
 			req_access = list()
 			req_one_access = list()
 			to_chat(user, "<span class='warning'>\The [src]'s access mechanism shorts out.</span>")
-			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+			var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 			sparks.set_up(3, 0, get_turf(src))
 			sparks.start()
 			visible_message("<span class='warning'>\The [src]'s panel sparks!</span>")

@@ -11,14 +11,14 @@
 	var/glass = 1
 	var/datum/tgui_module/appearance_changer/mirror/M
 
-/obj/structure/mirror/New(var/loc, var/dir, var/building = 0, mob/user as mob)
+/obj/structure/mirror/Initialize(var/ml, var/dir, var/building = 0, mob/user as mob)
+	. = ..()
 	M = new(src, null)
 	if(building)
 		glass = 0
 		icon_state = "mirror_frame"
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -28 : 28)
 		pixel_y = (dir & 3)? (dir == 1 ? -30 : 30) : 0
-	return
 
 /obj/structure/mirror/Destroy()
 	QDEL_NULL(M)
@@ -50,15 +50,15 @@
 	..()
 
 /obj/structure/mirror/attackby(obj/item/I as obj, mob/user as mob)
-	if(I.is_wrench())
+	if(I.get_tool_quality(TOOL_WRENCH))
 		if(!glass)
 			playsound(src, I.usesound, 50, 1)
-			if(do_after(user, 20 * I.toolspeed))
+			if(do_after(user, 20 * I.get_tool_speed(TOOL_WRENCH)))
 				to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 				new /obj/item/frame/mirror( src.loc )
 				qdel(src)
 		return
-	if(I.is_wrench())
+	if(I.get_tool_quality(TOOL_WRENCH))
 		if(shattered && glass)
 			to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
 			icon_state = "mirror_frame"

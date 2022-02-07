@@ -13,8 +13,8 @@
 	var/alarm = 0
 	var/enabled = 1
 
-/obj/machinery/shield_diffuser/New()
-	..()
+/obj/machinery/shield_diffuser/Initialize()
+	. = ..()
 	var/turf/T = get_turf(src)
 	hide(!T.is_plating())
 

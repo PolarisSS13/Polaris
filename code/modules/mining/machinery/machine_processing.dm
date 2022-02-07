@@ -65,7 +65,7 @@
 		dat += "<A href='?src=\ref[src];choice=claim'>Claim points.</A><br>"
 	else
 		dat += "No ID inserted.  <A href='?src=\ref[src];choice=insert'>Insert ID.</A><br>"
-	dat += "High-speed processing is <A href='?src=\ref[src];toggle_speed=1'>[(machine.speed_process ? "<font color='green'>active</font>" : "<font color='red'>inactive</font>")]."
+	dat += "High-speed processing is <A href='?src=\ref[src];toggle_speed=1'>[(machine.speed_process ? "<font color='green'>active</font>" : "<font color='red'>inactive</font>")]</A>."
 	dat += "<hr><table>"
 
 	for(var/ore in machine.ores_processing)

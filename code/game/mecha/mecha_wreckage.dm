@@ -15,8 +15,8 @@
 	var/list/crowbar_salvage
 	var/salvage_num = 5
 
-/obj/effect/decal/mecha_wreckage/New()
-	..()
+/obj/effect/decal/mecha_wreckage/Initialize()
+	. = ..()
 	crowbar_salvage = new
 	return
 
@@ -49,7 +49,7 @@
 		else
 			to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 			return
-	if(W.is_wirecutter())
+	if(W.get_tool_quality(TOOL_WIRECUTTER))
 		if(salvage_num <= 0)
 			to_chat(user, "You don't see anything that can be cut with [W].")
 			return
@@ -61,7 +61,7 @@
 				salvage_num--
 			else
 				to_chat(user, "You failed to salvage anything valuable from [src].")
-	if(W.is_crowbar())
+	if(W.get_tool_quality(TOOL_CROWBAR))
 		if(!isemptylist(crowbar_salvage))
 			var/obj/S = pick(crowbar_salvage)
 			if(S)
@@ -80,8 +80,8 @@
 	name = "Gygax wreckage"
 	icon_state = "gygax-broken"
 
-/obj/effect/decal/mecha_wreckage/gygax/New()
-	..()
+/obj/effect/decal/mecha_wreckage/gygax/Initialize()
+	. = ..()
 	var/list/parts = list(/obj/item/mecha_parts/part/gygax_torso,
 								/obj/item/mecha_parts/part/gygax_head,
 								/obj/item/mecha_parts/part/gygax_left_arm,
@@ -128,8 +128,8 @@
 	name = "Ripley wreckage"
 	icon_state = "ripley-broken"
 
-/obj/effect/decal/mecha_wreckage/ripley/New()
-	..()
+/obj/effect/decal/mecha_wreckage/ripley/Initialize()
+	. = ..()
 	var/list/parts = list(/obj/item/mecha_parts/part/ripley_torso,
 								/obj/item/mecha_parts/part/ripley_left_arm,
 								/obj/item/mecha_parts/part/ripley_right_arm,
@@ -146,8 +146,8 @@
 	name = "Firefighter wreckage"
 	icon_state = "firefighter-broken"
 
-/obj/effect/decal/mecha_wreckage/ripley/firefighter/New()
-	..()
+/obj/effect/decal/mecha_wreckage/ripley/firefighter/Initialize()
+	. = ..()
 	var/list/parts = list(/obj/item/mecha_parts/part/ripley_torso,
 								/obj/item/mecha_parts/part/ripley_left_arm,
 								/obj/item/mecha_parts/part/ripley_right_arm,
@@ -169,8 +169,8 @@
 	name = "Durand wreckage"
 	icon_state = "durand-broken"
 
-/obj/effect/decal/mecha_wreckage/durand/New()
-	..()
+/obj/effect/decal/mecha_wreckage/durand/Initialize()
+	. = ..()
 	var/list/parts = list(
 								/obj/item/mecha_parts/part/durand_torso,
 								/obj/item/mecha_parts/part/durand_head,
@@ -194,8 +194,8 @@
 	name = "Odysseus wreckage"
 	icon_state = "odysseus-broken"
 
-/obj/effect/decal/mecha_wreckage/odysseus/New()
-	..()
+/obj/effect/decal/mecha_wreckage/odysseus/Initialize()
+	. = ..()
 	var/list/parts = list(
 								/obj/item/mecha_parts/part/odysseus_torso,
 								/obj/item/mecha_parts/part/odysseus_head,

@@ -18,8 +18,8 @@
 	var/dpdir = 0	// directions as disposalpipe
 	var/base_state = "pipe-s"
 
-/obj/structure/disposalconstruct/New(var/newturf, var/newtype, var/newdir, var/flipped, var/newsubtype)
-	..(newturf)
+/obj/structure/disposalconstruct/Initialize(var/ml, var/newtype, var/newdir, var/flipped, var/newsubtype)
+	. = ..(ml)
 	ptype = newtype
 	dir = newdir
 	// Disposals handle "bent"/"corner" strangely, handle this specially.
@@ -246,7 +246,7 @@
 	var/obj/structure/disposalpipe/CP = locate() in T
 
 	// wrench: (un)anchor
-	if(I.is_wrench())
+	if(I.get_tool_quality(TOOL_WRENCH))
 		if(anchored)
 			anchored = 0
 			if(ispipe)
@@ -285,13 +285,13 @@
 		update()
 
 	// weldingtool: convert to real pipe
-	else if(istype(I, /obj/item/weapon/weldingtool))
+	else if(I.get_tool_quality(TOOL_WELDER))
 		if(anchored)
 			var/obj/item/weapon/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src, W.usesound, 100, 1)
 				to_chat(user, "Welding the [nicetype] in place.")
-				if(do_after(user, 20 * W.toolspeed))
+				if(do_after(user, 20 * W.get_tool_speed(TOOL_WELDER)))
 					if(!src || !W.isOn()) return
 					to_chat(user, "The [nicetype] has been welded in place!")
 					update() // TODO: Make this neat

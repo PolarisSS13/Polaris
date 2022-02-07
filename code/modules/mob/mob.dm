@@ -590,6 +590,9 @@
 /mob/proc/get_gender()
 	return gender
 
+/mob/proc/name_gender()
+	return gender
+
 /mob/proc/see(message)
 	if(!is_active())
 		return 0
@@ -1111,7 +1114,7 @@
 
 //Throwing stuff
 /mob/proc/throw_item(atom/target)
-	return
+	return FALSE
 
 /mob/proc/will_show_tooltip()
 	if(alpha <= EFFECTIVE_INVIS)

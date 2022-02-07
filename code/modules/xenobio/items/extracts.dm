@@ -15,8 +15,8 @@
 	flags = OPENCONTAINER
 
 
-/obj/item/slime_extract/New()
-	..()
+/obj/item/slime_extract/Initialize()
+	. = ..()
 	create_reagents(60)
 
 /obj/item/slime_extract/attackby(obj/item/O, mob/user)
@@ -90,7 +90,7 @@
 
 /decl/chemical_reaction/instant/slime/grey_monkey/on_reaction(var/datum/reagents/holder)
 	for(var/i = 1 to 4)
-		new /obj/item/weapon/reagent_containers/food/snacks/monkeycube(get_turf(holder.my_atom))
+		new /obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube(get_turf(holder.my_atom))
 	..()
 
 /decl/chemical_reaction/instant/slime/grey_slimejelly

@@ -25,14 +25,13 @@
 	var/obj/item/weapon/storage/briefcase/new_briefcase = new(H)
 	for(var/obj/item/briefcase_item in new_briefcase)
 		qdel(briefcase_item)
-	new_briefcase.contents += new /obj/item/toy/crossbow
-	new_briefcase.contents += new /obj/item/weapon/gun/projectile/revolver/capgun
+	new_briefcase.contents += new /obj/item/weapon/gun/projectile/pistol/toy
 	new_briefcase.contents += new /obj/item/clothing/mask/gas/clown_hat
 	H.equip_to_slot_or_del(new_briefcase, slot_l_hand)
 
 /decl/hierarchy/outfit/costume/horrorcop
 	name = OUTFIT_COSTUME("Slasher Movie Cop")
-	uniform = /obj/item/clothing/under/pcrc{ starting_accessories=list(/obj/item/clothing/accessory/holster/hip) }
+	uniform = /obj/item/clothing/under/corp/pcrc{ starting_accessories=list(/obj/item/clothing/accessory/holster/hip) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/black
 	glasses = /obj/item/clothing/glasses/fakesunglasses
@@ -103,7 +102,7 @@
 	suit = /obj/item/clothing/suit/storage/toggle/brown_jacket/sleeveless
 	shoes = /obj/item/clothing/shoes/boots/jackboots
 	gloves = /obj/item/clothing/gloves/fingerless
-	l_pocket = /obj/item/toy/crossbow
+	l_pocket = /obj/item/weapon/gun/projectile/revolver/toy/crossbow
 	r_pocket = /obj/item/device/flashlight/color/red
 
 /decl/hierarchy/outfit/costume/pirate
@@ -121,3 +120,11 @@
 	suit = /obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whiteout
 	gloves = /obj/item/clothing/gloves/white
 	mask = /obj/item/clothing/mask/surgical
+
+/decl/hierarchy/outfit/costume/marine
+	name = OUTFIT_COSTUME("Ruin Marine")
+	uniform = /obj/item/clothing/under/color/grey
+	shoes = /obj/item/clothing/shoes/brown
+	head = /obj/item/clothing/head/marine
+	suit = /obj/item/clothing/suit/marine
+	r_hand = /obj/item/weapon/gun/projectile/revolver/toy/sawnoff

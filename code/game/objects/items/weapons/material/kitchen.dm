@@ -84,15 +84,24 @@
 		to_chat(user, SPAN_WARNING("You don't have anything on \the [src]."))	//if we have help intent and no food scooped up DON'T STAB OURSELVES WITH THE FORK
 		return
 
+/obj/item/weapon/material/kitchen/utensil/on_rag_wipe()
+	. = ..()
+	if(reagents.total_volume > 0)
+		reagents.clear_reagents()
+		cut_overlays()
+	return
+
 /obj/item/weapon/material/kitchen/utensil/fork
 	name = "fork"
 	desc = "It's a fork. Sure is pointy."
 	icon_state = "fork"
 	sharp = TRUE
 	edge = FALSE
+	tool_qualities = list(TOOL_SCREWDRIVER = TOOL_QUALITY_WORST) // Really bad, but in a pinch...
 
 /obj/item/weapon/material/kitchen/utensil/fork/plastic
 	default_material = "plastic"
+	tool_qualities = list()
 
 /obj/item/weapon/material/kitchen/utensil/foon
 	name = "foon"

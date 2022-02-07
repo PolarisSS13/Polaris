@@ -60,6 +60,7 @@
 	emagged = 0 //Ignores if somebody doesn't have card access to that machine.
 	var/seconds_electrified = 0 //Shock customers like an airlock.
 	var/shoot_inventory = 0 //Fire items at customers! We're broken!
+	var/shoot_inventory_chance = 1
 
 	var/scan_id = 1
 	var/obj/item/weapon/coin/coin
@@ -155,7 +156,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 	if(I || istype(W, /obj/item/weapon/spacecash))
 		attack_hand(user)
 		return
-	else if(W.is_screwdriver())
+	else if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance panel.")
 		playsound(src, W.usesound, 50, 1)
@@ -167,7 +168,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 		SStgui.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool) || W.is_wirecutter())
+	else if(W.get_tool_quality(TOOL_MULTITOOL) || W.get_tool_quality(TOOL_WIRECUTTER))
 		if(panel_open)
 			attack_hand(user)
 		return
@@ -179,14 +180,14 @@ GLOBAL_LIST_EMPTY(vending_products)
 		to_chat(user, "<span class='notice'>You insert \the [W] into \the [src].</span>")
 		SStgui.update_uis(src)
 		return
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		playsound(src, W.usesound, 100, 1)
 		if(anchored)
 			user.visible_message("[user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 		else
 			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
 
-		if(do_after(user, 20 * W.toolspeed))
+		if(do_after(user, 20 * W.get_tool_speed(TOOL_WRENCH)))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 			anchored = !anchored
@@ -662,7 +663,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		speak(slogan)
 		last_slogan = world.time
 
-	if(shoot_inventory && prob(2))
+	if(shoot_inventory && prob(shoot_inventory_chance))
 		throw_item()
 
 	return
@@ -702,20 +703,20 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 //Somebody cut an important wire and now we're following a new definition of "pitch."
 /obj/machinery/vending/proc/throw_item()
-	var/obj/throw_item = null
+	var/obj/item/throw_item = null
 	var/mob/living/target = locate() in view(7,src)
 	if(!target)
 		return 0
 
-	for(var/datum/stored_item/vending_product/R in product_records)
+	for(var/datum/stored_item/vending_product/R in shuffle(product_records))
 		throw_item = R.get_product(loc)
 		if(!throw_item)
 			continue
 		break
 	if(!throw_item)
-		return 0
-	spawn(0)
-		throw_item.throw_at(target, 16, 3, src)
+		return FALSE
+	throw_item.vendor_action(src)
+	INVOKE_ASYNC(throw_item, /atom/movable.proc/throw_at, target, rand(3, 10), rand(1, 3), src)
 	visible_message("<span class='warning'>\The [src] launches \a [throw_item] at \the [target]!</span>")
 	return 1
 

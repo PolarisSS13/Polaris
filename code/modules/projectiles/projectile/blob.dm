@@ -14,21 +14,21 @@
 /obj/item/projectile/energy/blob/splattering
 	splatter = TRUE
 
-/obj/item/projectile/energy/blob/New()
+/obj/item/projectile/energy/blob/Initialize()
 	if(splatter)
 		create_reagents(splatter_volume)
 		ready_chemicals()
-	..()
+	. = ..()
 
 /obj/item/projectile/energy/blob/Destroy()
 	qdel(reagents)
 	reagents = null
-	..()
+	. = ..()
 
 /obj/item/projectile/energy/blob/on_impact(var/atom/A)
 	if(splatter)
 		var/turf/location = get_turf(src)
-		var/datum/effect/effect/system/smoke_spread/chem/blob/S = new /datum/effect/effect/system/smoke_spread/chem/blob
+		var/datum/effect_system/smoke_spread/chem/blob/S = new /datum/effect_system/smoke_spread/chem/blob
 		S.attach(location)
 		S.set_up(reagents, rand(1, splatter_volume), 0, location)
 		playsound(location, 'sound/effects/slime_squish.ogg', 30, 1, -3)

@@ -29,8 +29,8 @@
 	var/stored_power = 0//Power to deploy per tick
 
 
-/obj/machinery/power/am_control_unit/New()
-	..()
+/obj/machinery/power/am_control_unit/Initialize()
+	. = ..()
 	linked_shielding = list()
 	linked_cores = list()
 
@@ -140,7 +140,7 @@
 
 /obj/machinery/power/am_control_unit/attackby(obj/item/W, mob/user)
 	if(!istype(W) || !user) return
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		if(!anchored)
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] secures the [src.name] to the floor.", \

@@ -115,7 +115,7 @@ var/list/_client_preferences_by_type
 	key = "SOUND_AIRPUMP"
 	enabled_description = "Audible"
 	disabled_description = "Silent"
-	
+
 /datum/client_preference/old_door_sounds
 	description ="Old Door Sounds"
 	key = "SOUND_OLDDOORS"
@@ -253,6 +253,12 @@ var/list/_client_preferences_by_type
 	enabled_description = "Show"
 	disabled_description = "Hide"
 
+/datum/client_preference/radio_sounds
+	description = "Radio Sounds"
+	key = "RADIO_SOUNDS"
+	enabled_description = "On"
+	disabled_description = "Off"
+
 /datum/client_preference/runechat_mob
 	description = "Runechat (Mobs)"
 	key = "RUNECHAT_MOB"
@@ -270,13 +276,13 @@ var/list/_client_preferences_by_type
 	key = "RUNECHAT_BORDER"
 	enabled_description = "Show"
 	disabled_description = "Hide"
-	enabled_by_default = FALSE
+	enabled_by_default = TRUE
 
 /datum/client_preference/runechat_long_messages
 	description = "Runechat Message Length"
 	key = "RUNECHAT_LONG"
-	enabled_description = "ERP KING"
-	disabled_description = "Normie"
+	enabled_description = "Long"
+	disabled_description = "Short"
 	enabled_by_default = FALSE
 
 /datum/client_preference/status_indicators/toggled(mob/preference_mob, enabled)
@@ -284,6 +290,13 @@ var/list/_client_preferences_by_type
 	if(preference_mob && preference_mob.plane_holder)
 		var/datum/plane_holder/PH = preference_mob.plane_holder
 		PH.set_vis(VIS_STATUS, enabled)
+
+/datum/client_preference/show_lore_news
+	description = "Lore News Popup"
+	key = "NEWS_POPUP"
+	enabled_by_default = TRUE
+	enabled_description = "Popup New On Login"
+	disabled_description = "Do Nothing"
 
 /********************
 * Staff Preferences *

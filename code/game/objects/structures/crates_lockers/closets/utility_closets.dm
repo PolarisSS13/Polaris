@@ -186,6 +186,7 @@
 	anchored = 1
 	density = 0
 	wall_mounted = 1
+	door_anim_time = 0 // Unsupported
 
 	starts_with = list(
 		/obj/item/clothing/suit/fire/firefighter,

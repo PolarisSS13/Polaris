@@ -22,17 +22,14 @@
 	icon_modifier = "grey_"
 	icon_state = "grey_railing0"
 
-/obj/structure/railing/New(loc, constructed = 0)
-	..()
+/obj/structure/railing/Initialize(var/ml, constructed = 0)
+	. = ..()
 	// TODO - "constructed" is not passed to us. We need to find a way to do this safely.
 	if (constructed) // player-constructed railings
 		anchored = 0
 	if(climbable)
 		verbs += /obj/structure/proc/climb_on
-
-/obj/structure/railing/Initialize()
-	. = ..()
-	if(src.anchored)
+	if(anchored)
 		update_icon(0)
 
 /obj/structure/railing/Destroy()
@@ -202,7 +199,7 @@
 
 /obj/structure/railing/attackby(obj/item/W as obj, mob/user as mob)
 	// Dismantle
-	if(W.is_wrench() && !anchored)
+	if(W.get_tool_quality(TOOL_WRENCH) && !anchored)
 		playsound(src, W.usesound, 50, 1)
 		if(do_after(user, 20, src))
 			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
@@ -221,7 +218,7 @@
 				return
 
 	// Install
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrewing \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
 		playsound(src, W.usesound, 75, 1)
 		if(do_after(user, 10, src))

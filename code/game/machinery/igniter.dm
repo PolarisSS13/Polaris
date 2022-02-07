@@ -30,8 +30,8 @@
 			location.hotspot_expose(1000,500,1)
 	return 1
 
-/obj/machinery/igniter/New()
-	..()
+/obj/machinery/igniter/Initialize()
+	. = ..()
 	icon_state = "igniter[on]"
 
 /obj/machinery/igniter/power_change()
@@ -58,9 +58,6 @@
 	idle_power_usage = 2
 	active_power_usage = 4
 
-/obj/machinery/sparker/New()
-	..()
-
 /obj/machinery/sparker/power_change()
 	..()
 	if(!(stat & NOPOWER) && disable == 0)
@@ -72,7 +69,7 @@
 //		sd_SetLuminosity(0)
 
 /obj/machinery/sparker/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		add_fingerprint(user)
 		disable = !disable
 		playsound(src, W.usesound, 50, 1)
@@ -100,7 +97,7 @@
 		return
 
 	flick("[base_state]-spark", src)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(2, 1, src)
 	s.start()
 	last_spark = world.time

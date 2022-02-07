@@ -42,8 +42,8 @@
 //-------------------------------------------
 // Standard procs
 //-------------------------------------------
-/obj/vehicle/train/engine/New()
-	..()
+/obj/vehicle/train/engine/Initialize()
+	. = ..()
 	cell = new /obj/item/weapon/cell/high(src)
 	key = new key_type(src)
 	var/image/I = new(icon = 'icons/obj/vehicles.dmi', icon_state = "cargo_engine_overlay", layer = src.layer + 0.2) //over mobs
@@ -67,7 +67,7 @@
 	return ..()
 
 /obj/vehicle/train/trolley/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(open && W.is_wirecutter())
+	if(open && W.get_tool_quality(TOOL_WIRECUTTER))
 		passenger_allowed = !passenger_allowed
 		user.visible_message("<span class='notice'>[user] [passenger_allowed ? "cuts" : "mends"] a cable in [src].</span>","<span class='notice'>You [passenger_allowed ? "cut" : "mend"] the load limiter cable.</span>")
 	else

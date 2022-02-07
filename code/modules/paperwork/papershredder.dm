@@ -35,7 +35,7 @@
 	if(istype(W, /obj/item/weapon/storage))
 		empty_bin(user, W)
 		return
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		playsound(src, W.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
@@ -149,8 +149,8 @@
 	throw_range = 3
 	throw_speed = 1
 
-/obj/item/weapon/shreddedp/New()
-	..()
+/obj/item/weapon/shreddedp/Initialize()
+	. = ..()
 	pixel_x = rand(-5,5)
 	pixel_y = rand(-5,5)
 	if(prob(65)) color = pick("#BABABA","#7F7F7F")

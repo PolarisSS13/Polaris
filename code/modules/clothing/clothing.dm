@@ -41,8 +41,8 @@
 	gunshot_residue = null
 
 
-/obj/item/clothing/New()
-	..()
+/obj/item/clothing/Initialize()
+	. = ..()
 	if(starting_accessories)
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/tie = new T(src)
@@ -72,7 +72,7 @@
 	if (!..())
 		return 0
 
-	if(LAZYLEN(species_restricted) && istype(M,/mob/living/carbon/human))
+	if(LAZYLEN(species_restricted) && ishuman(M))
 		var/exclusive = null
 		var/wearable = null
 		var/mob/living/carbon/human/H = M
@@ -191,19 +191,15 @@
 		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi')
 
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
-	if (!user) return
-
-	if (src.loc != user || !istype(user,/mob/living/carbon/human))
-		..()
+	if (!user || !canremove)
 		return
+
+	if (src.loc != user || !ishuman(user))
+		return ..()
 
 	var/mob/living/carbon/human/H = user
 	if(H.l_ear != src && H.r_ear != src)
-		..()
-		return
-
-	if(!canremove)
-		return
+		return ..()
 
 	var/obj/item/clothing/ears/O
 	if(slot_flags & SLOT_TWOEARS )
@@ -254,12 +250,16 @@
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
-/obj/item/clothing/ears/offear/New(var/obj/O)
-		name = O.name
-		desc = O.desc
-		icon = O.icon
-		icon_state = O.icon_state
-		set_dir(O.dir)
+/obj/item/clothing/ears/offear/Initialize()
+	. = ..()
+	var/obj/O = loc
+	if(!istype(O))
+		return INITIALIZE_HINT_QDEL
+	name = O.name
+	desc = O.desc
+	icon = O.icon
+	icon_state = O.icon_state
+	set_dir(O.dir)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //Gloves
@@ -311,25 +311,6 @@
 // Called just before an attack_hand(), in mob/UnarmedAttack()
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
-
-/*/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/scalpel))
-		if (clipped)
-			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
-			update_icon()
-			return
-
-		playsound(src, W.usesound, 50, 1)
-		user.visible_message("<font color='red'>[user] cuts the fingertips off of the [src].</font>","<font color='red'>You cut the fingertips off of the [src].</font>")
-
-		clipped = 1
-		name = "modified [name]"
-		desc = "[desc]<br>They have had the fingertips cut off of them."
-		if("exclude" in species_restricted)
-			species_restricted -= SPECIES_UNATHI
-			species_restricted -= SPECIES_TAJ
-		return
-*/
 
 /obj/item/clothing/gloves/clean_blood()
 	. = ..()
@@ -384,8 +365,8 @@
 	var/datum/unarmed_attack/special_attack = null //do the gloves have a special unarmed attack?
 	var/special_attack_type = null
 
-/obj/item/clothing/gloves/New()
-	..()
+/obj/item/clothing/gloves/Initialize()
+	. = ..()
 	if(special_attack_type && ispath(special_attack_type))
 		special_attack = new special_attack_type
 
@@ -824,6 +805,12 @@
 	var/icon/rolled_down_icon = 'icons/mob/uniform_rolled_down.dmi'
 	var/icon/rolled_down_sleeves_icon = 'icons/mob/uniform_sleeves_rolled.dmi'
 
+/obj/item/clothing/under/AltClick(mob/user)
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.AltClick(user))
+			return TRUE
+	. = ..()
+	
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(LAZYLEN(accessories))
 		..()
@@ -831,8 +818,8 @@
 		return
 	..()
 
-/obj/item/clothing/under/New()
-	..()
+/obj/item/clothing/under/Initialize()
+	. = ..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -1038,6 +1025,6 @@
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 
-/obj/item/clothing/under/rank/New()
+/obj/item/clothing/under/rank/Initialize()
 	sensor_mode = pick(0,1,2,3)
-	..()
+	. = ..()

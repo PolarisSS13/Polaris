@@ -25,26 +25,26 @@
 
 	paint_color = "#ffffff"
 
-	var/datum/effect/effect/system/ion_trail_follow/ion
+	var/datum/effect_system/ion_trail_follow/ion
 	var/kickstand = 1
 
 /obj/vehicle/bike/Initialize()
 	. = ..()
 	cell = new /obj/item/weapon/cell/high(src)
-	ion = new /datum/effect/effect/system/ion_trail_follow()
+	ion = new /datum/effect_system/ion_trail_follow()
 	ion.set_up(src)
 	turn_off()
 	icon_state = "[bike_icon]_off"
 	update_icon()
 
-/obj/vehicle/bike/built/New()
-	..()
+/obj/vehicle/bike/built/Initialize()
+	. = ..()
 	qdel(cell)
 	cell = null
 
-/obj/vehicle/bike/random/New()
+/obj/vehicle/bike/random/Initialize()
 	paint_color = rgb(rand(1,255),rand(1,255),rand(1,255))
-	..()
+	. = ..()
 
 /obj/vehicle/bike/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/device/multitool) && open)

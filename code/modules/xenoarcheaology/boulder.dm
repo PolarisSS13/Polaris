@@ -11,9 +11,10 @@
 	var/datum/artifact_find/artifact_find
 	var/last_act = 0
 
-/obj/structure/boulder/New()
+/obj/structure/boulder/Initialize()
 	icon_state = "boulder[rand(1,4)]"
 	excavation_level = rand(5, 50)
+	. = ..()
 
 /obj/structure/boulder/attackby(var/obj/item/I, var/mob/user)
 	if(istype(I, /obj/item/device/core_sampler))
@@ -49,14 +50,15 @@
 
 	if(istype(I, /obj/item/weapon/pickaxe))
 		var/obj/item/weapon/pickaxe/P = I
+		var/digspeed = 40 / P.get_tool_quality(TOOL_MINING)
 
-		if(last_act + P.digspeed > world.time)//prevents message spam
+		if(last_act + digspeed > world.time)//prevents message spam
 			return
 		last_act = world.time
 
 		to_chat(user, "<span class='warning'>You start [P.drill_verb] [src].</span>")
 
-		if(!do_after(user, P.digspeed))
+		if(!do_after(user, digspeed))
 			return
 
 		to_chat(user, "<span class='notice'>You finish [P.drill_verb] [src].</span>")
@@ -75,8 +77,8 @@
 				var/obj/O = new spawn_type(get_turf(src))
 				if(istype(O, /obj/machinery/artifact))
 					var/obj/machinery/artifact/X = O
-					if(X.my_effect)
-						X.my_effect.artifact_id = artifact_find.artifact_id
+					if(X.artifact_master)
+						X.artifact_master.artifact_id = artifact_find.artifact_id
 				O.anchored = FALSE	// Anchored finds are lame.
 				src.visible_message("<span class='warning'>\The [src] suddenly crumbles away.</span>")
 			else

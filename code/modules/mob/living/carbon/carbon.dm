@@ -189,7 +189,7 @@
 			if(31 to INFINITY)
 				Weaken(10) //This should work for now, more is really silly and makes you lay there forever
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, loc)
 	s.start()
 
@@ -413,14 +413,21 @@
 /mob/living/carbon/cannot_use_vents()
 	return
 
-/mob/living/carbon/slip(var/slipped_on,stun_duration=8)
+/mob/living/carbon/slip(var/slipped_on, var/stun_duration = 8, var/slip_dist = 1)
 	if(buckled)
-		return 0
+		return FALSE
 	stop_pulling()
 	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
 	playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
 	Weaken(FLOOR(stun_duration/2, 1))
-	return 1
+	slide_for(slip_dist)
+	return TRUE
+
+/mob/living/carbon/proc/slide_for(var/slip_dist)
+	set waitfor = FALSE
+	for(var/i = 1 to slip_dist)
+		step(src, dir)
+		sleep(1)
 
 /mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)

@@ -114,14 +114,17 @@
 	color_weight = 20
 
 /datum/reagent/paint/touch_turf(var/turf/T)
+	..()
 	if(istype(T) && !istype(T, /turf/space))
 		T.color = color
 
 /datum/reagent/paint/touch_obj(var/obj/O)
+	..()
 	if(istype(O))
 		O.color = color
 
 /datum/reagent/paint/touch_mob(var/mob/M)
+	..()
 	if(istype(M) && !istype(M, /mob/observer)) //painting ghosts: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
@@ -267,6 +270,7 @@
 	M.apply_effect(5 * removed, IRRADIATE, 0)
 
 /datum/reagent/uranium/touch_turf(var/turf/T)
+	..()
 	if(volume >= 3)
 		if(!istype(T, /turf/space))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
@@ -288,7 +292,7 @@
 	name = "Lithium-6"
 	id = "lithium6"
 	description = "An isotope of lithium. It has 3 neutrons, but shares all chemical characteristics with regular lithium."
-	
+
 /datum/reagent/helium/helium3
 	name = "Helium-3"
 	id = "helium3"
@@ -317,11 +321,11 @@
 /datum/reagent/supermatter/affect_ingest(mob/living/carbon/M, alien, removed)
 	. = ..()
 	M.ash()
-	
+
 /datum/reagent/supermatter/affect_blood(mob/living/carbon/M, alien, removed)
 	. = ..()
 	M.ash()
-	
+
 
 /datum/reagent/adrenaline
 	name = "Adrenaline"
@@ -357,6 +361,7 @@
 			cult.remove_antagonist(M.mind)
 
 /datum/reagent/water/holywater/touch_turf(var/turf/T)
+	..()
 	if(volume >= 5)
 		T.holy = 1
 	return
@@ -404,6 +409,7 @@
 	touch_met = 50
 
 /datum/reagent/thermite/touch_turf(var/turf/T)
+	..()
 	if(volume >= 5)
 		if(istype(T, /turf/simulated/wall))
 			var/turf/simulated/wall/W = T
@@ -413,6 +419,7 @@
 	return
 
 /datum/reagent/thermite/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
@@ -429,14 +436,17 @@
 	touch_met = 50
 
 /datum/reagent/space_cleaner/touch_mob(var/mob/M)
+	..()
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
 		C.clean_blood()
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
+	..()
 	O.clean_blood()
 
 /datum/reagent/space_cleaner/touch_turf(var/turf/T)
+	..()
 	if(volume >= 1)
 		if(istype(T, /turf/simulated))
 			var/turf/simulated/S = T
@@ -484,6 +494,7 @@
 			M.vomit()
 
 /datum/reagent/space_cleaner/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = L
 		if(H.wear_mask)
@@ -502,6 +513,7 @@
 	color = "#009CA8"
 
 /datum/reagent/lube/touch_turf(var/turf/simulated/T)
+	..()
 	if(!istype(T))
 		return
 	if(volume >= 1)
@@ -516,6 +528,7 @@
 	color = "#C7FFFF"
 
 /datum/reagent/silicate/touch_obj(var/obj/O)
+	..()
 	if(istype(O, /obj/structure/window))
 		var/obj/structure/window/W = O
 		W.apply_silicate(volume)
@@ -589,9 +602,11 @@
 	color = "#F2F3F4"
 
 /datum/reagent/luminol/touch_obj(var/obj/O)
+	..()
 	O.reveal_blood()
 
 /datum/reagent/luminol/touch_mob(var/mob/living/L)
+	..()
 	L.reveal_blood()
 
 /datum/reagent/nutriment/biomass
@@ -627,10 +642,11 @@
 	M.adjustToxLoss(2 * removed)
 	M.adjustCloneLoss(2 * removed)
 
-/datum/reagent/fishbait
+/datum/reagent/nutriment/fishbait
 	name = "Fish Bait"
 	id = "fishbait"
 	description = "A natural slurry that particularily appeals to fish."
-	taste_description = "earthy"
+	taste_description = "slimy dirt"
 	reagent_state = LIQUID
 	color = "#62764E"
+	nutriment_factor = 15

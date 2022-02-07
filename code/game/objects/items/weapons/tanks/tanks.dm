@@ -133,7 +133,7 @@ var/list/global/tank_gauge_cache = list()
 			to_chat(user, "<span class='notice'>You attach the wires to the tank.</span>")
 			src.add_bomb_overlay()
 
-	if(W.is_wirecutter())
+	if(W.get_tool_quality(TOOL_WIRECUTTER))
 		if(wired && src.proxyassembly.assembly)
 
 			to_chat(user, "<span class='notice'>You carefully begin clipping the wires that attach to the tank.</span>")
@@ -564,29 +564,29 @@ var/list/global/tank_gauge_cache = list()
 	src.overlays += "bomb_assembly"
 
 
-/obj/item/weapon/tank/phoron/onetankbomb/New()
-	..()
+/obj/item/weapon/tank/phoron/onetankbomb/Initialize()
+	. = ..()
 	src.onetankbomb()
 
-/obj/item/weapon/tank/oxygen/onetankbomb/New()
-	..()
+/obj/item/weapon/tank/oxygen/onetankbomb/Initialize()
+	. = ..()
 	src.onetankbomb()
 
 
-/obj/item/weapon/tank/phoron/onetankbomb/full/New()
-	..()
+/obj/item/weapon/tank/phoron/onetankbomb/full/Initialize()
+	. = ..()
 	src.onetankbomb(2)
 
-/obj/item/weapon/tank/oxygen/onetankbomb/full/New()
-	..()
+/obj/item/weapon/tank/oxygen/onetankbomb/full/Initialize()
+	. = ..()
 	src.onetankbomb(2)
 
-/obj/item/weapon/tank/phoron/onetankbomb/small/New()
-	..()
+/obj/item/weapon/tank/phoron/onetankbomb/small/Initialize()
+	. = ..()
 	src.onetankbomb(0)
 
-/obj/item/weapon/tank/oxygen/onetankbomb/small/New()
-	..()
+/obj/item/weapon/tank/oxygen/onetankbomb/small/Initialize()
+	. = ..()
 	src.onetankbomb(0)
 
 /////////////////////////////////

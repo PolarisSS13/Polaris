@@ -28,8 +28,8 @@
 	//Excessively long because it won't accept subtypes for some reason!
 
 
-/obj/item/weapon/gun/energy/modular/New() //Initialize our components.
-	..()
+/obj/item/weapon/gun/energy/modular/Initialize()
+	. = ..()
 	guncomponents = list()
 	guncomponents += new /obj/item/weapon/stock_parts/capacitor
 	guncomponents += new /obj/item/weapon/stock_parts/micro_laser
@@ -51,12 +51,12 @@
 	FireModeModify()
 
 /obj/item/weapon/gun/energy/modular/attackby(obj/item/O, mob/user)
-	if(O.is_screwdriver())
+	if(O.get_tool_quality(TOOL_SCREWDRIVER))
 		to_chat(user, "<span class='notice'>You [assembled ? "disassemble" : "assemble"] the gun.</span>")
 		assembled = !assembled
 		playsound(src, O.usesound, 50, 1)
 		return
-	if(O.is_crowbar())
+	if(O.get_tool_quality(TOOL_CROWBAR))
 		if(assembled == 1)
 			to_chat(user, "<span class='warning'>Disassemble the [src] first!</span>")
 			return

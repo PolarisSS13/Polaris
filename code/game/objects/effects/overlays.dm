@@ -9,9 +9,9 @@
 	icon_state="b_beam"
 	var/tmp/atom/BeamSource
 
-/obj/effect/overlay/beam/New()
-	..()
-	spawn(10) qdel(src)
+/obj/effect/overlay/beam/Initialize()
+	. = ..()
+	QDEL_IN(src, 10)
 
 /obj/effect/overlay/palmtree_r
 	name = "Palm tree"
@@ -52,8 +52,8 @@
 	layer = ABOVE_MOB_LAYER
 	mouse_opacity = 0
 
-/obj/effect/overlay/wallrot/New()
-	..()
+/obj/effect/overlay/wallrot/Initialize()
+	. = ..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
 
@@ -110,3 +110,10 @@
 	plane = PLANE_LIGHTING_ABOVE
 	pixel_x = -32
 	pixel_y = -32
+
+/obj/effect/overlay/closet_door
+	anchored = TRUE
+	plane = FLOAT_PLANE
+	layer = FLOAT_LAYER
+	vis_flags = VIS_INHERIT_ID
+	appearance_flags = KEEP_TOGETHER | LONG_GLIDE | PIXEL_SCALE

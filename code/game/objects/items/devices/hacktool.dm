@@ -7,8 +7,8 @@
 	var/list/supported_types
 	var/datum/topic_state/default/must_hack/hack_state
 
-/obj/item/device/multitool/hacktool/New()
-	..()
+/obj/item/device/multitool/hacktool/Initialize()
+	. = ..()
 	known_targets = list()
 	max_known_targets = 5 + rand(1,3)
 	supported_types = list(/obj/machinery/door/airlock)
@@ -24,7 +24,7 @@
 	return ..()
 
 /obj/item/device/multitool/hacktool/attackby(var/obj/item/W, var/mob/user)
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		in_hack_mode = !in_hack_mode
 		playsound(src, W.usesound, 50, 1)
 	else

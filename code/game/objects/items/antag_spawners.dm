@@ -3,11 +3,11 @@
 	var/used = 0
 	var/ghost_query_type = null
 	var/searching = FALSE
-	var/datum/effect/effect/system/spark_spread/sparks
+	var/datum/effect_system/spark_spread/sparks
 
-/obj/item/weapon/antag_spawner/New()
-	..()
-	sparks = new /datum/effect/effect/system/spark_spread()
+/obj/item/weapon/antag_spawner/Initialize()
+	. = ..()
+	sparks = new /datum/effect_system/spark_spread()
 	sparks.set_up(5, 0, src)
 	sparks.attach(loc)
 
@@ -80,7 +80,7 @@
 		qdel(src)
 
 /obj/item/weapon/antag_spawner/technomancer_apprentice/equip_antag(mob/technomancer_mob)
-	var/datum/antagonist/technomancer/antag_datum = all_antag_types[MODE_TECHNOMANCER]
+	var/datum/antagonist/technomancer/antag_datum = SSantags.antag_datums[MODE_TECHNOMANCER]
 	antag_datum.equip_apprentice(technomancer_mob)
 
 

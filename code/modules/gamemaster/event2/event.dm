@@ -76,20 +76,13 @@ This allows for events that have their announcement happen after the end itself.
 
 
 /datum/event2/event/proc/is_planet_z_level(z_level)
-	var/datum/planet/P = LAZYACCESS(SSplanets.z_to_planet, z_level)
-	if(!istype(P))
-		return FALSE
-	return TRUE
+	return istype(LAZYACCESS(SSplanets.z_to_planet, z_level), /datum/planet)
 
 // Returns a list of empty turfs in the same area.
 /datum/event2/event/proc/find_random_turfs(minimum_free_space = 5, list/specific_areas = list(), ignore_occupancy = FALSE)
 	var/list/area/grand_list_of_areas = find_random_areas(specific_areas)
 
-	if(!LAZYLEN(grand_list_of_areas))
-		return list()
-
-	for(var/thing in grand_list_of_areas)
-		var/list/A = thing
+	for(var/area/A in grand_list_of_areas)
 		var/list/turfs = list()
 		for(var/turf/T in A)
 			if(!T.check_density())
@@ -98,7 +91,6 @@ This allows for events that have their announcement happen after the end itself.
 		if(turfs.len < minimum_free_space)
 			continue // Not enough free space.
 		return turfs
-
 	return list()
 
 /datum/event2/event/proc/find_random_areas(list/specific_areas = list(), ignore_occupancy = FALSE)
@@ -107,8 +99,7 @@ This allows for events that have their announcement happen after the end itself.
 
 	var/list/area/grand_list_of_areas = get_all_existing_areas_of_types(specific_areas)
 	. = list()
-	for(var/thing in shuffle(grand_list_of_areas))
-		var/area/A = thing
+	for(var/area/A in shuffle(grand_list_of_areas))
 		if(A.forbid_events)
 			continue
 		if(!(A.z in get_location_z_levels()))
@@ -182,7 +173,7 @@ This allows for events that have their announcement happen after the end itself.
 		return
 
 	if(!check_rights(R_ADMIN|R_EVENT|R_DEBUG))
-		message_admins("[usr] has attempted to manipulate an event without sufficent privilages.")
+		message_admins("[usr] has attempted to manipulate an event without sufficent privileges.")
 		return
 
 	if(href_list["abort"])

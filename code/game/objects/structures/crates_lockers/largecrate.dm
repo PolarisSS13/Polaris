@@ -25,7 +25,7 @@
 	var/turf/T = get_turf(src)
 	if(!T)
 		to_chat(user, "<span class='notice'>You can't open this here!</span>")
-	if(W.is_crowbar())
+	if(W.get_tool_quality(TOOL_CROWBAR))
 		new /obj/item/stack/material/wood(src)
 
 		for(var/atom/movable/AM in contents)
@@ -48,7 +48,7 @@
 	icon_state = "vehiclecrate"
 
 /obj/structure/largecrate/hoverpod/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_crowbar())
+	if(W.get_tool_quality(TOOL_CROWBAR))
 		var/obj/item/mecha_parts/mecha_equipment/ME
 		var/obj/mecha/working/hoverpod/H = new (loc)
 
@@ -57,6 +57,11 @@
 		ME = new /obj/item/mecha_parts/mecha_equipment/tool/passenger
 		ME.attach(H)
 	..()
+
+/obj/structure/largecrate/donksoftvendor
+	name = "\improper Donk-Soft vendor crate"
+	desc = "A hefty wooden crate displaying the logo of Donk-Soft. It's rather heavy."
+	starts_with = list(/obj/machinery/vending/donksoft)
 
 /obj/structure/largecrate/vehicle
 	name = "vehicle crate"

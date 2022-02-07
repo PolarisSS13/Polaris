@@ -42,8 +42,8 @@
 	opacity = 0
 	health = 120
 
-/obj/effect/alien/resin/New()
-	..()
+/obj/effect/alien/resin/Initialize()
+	. = ..()
 	var/turf/T = get_turf(src)
 	T.thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 
@@ -174,7 +174,7 @@
 
 /obj/effect/alien/weeds/Initialize(var/mapload, var/node, var/newcolor)
 	. = ..()
-	if(isspace(loc))
+	if(isspace(loc) || (locate(/obj/effect/alien/weeds) in loc) != src)
 		return INITIALIZE_HINT_QDEL
 
 	linked_node = node
@@ -188,14 +188,11 @@
 
 /obj/effect/alien/weeds/Destroy()
 	var/turf/T = get_turf(src)
-	// To not mess up the overlay updates.
-	loc = null
-
-	for (var/obj/effect/alien/weeds/W in range(1,T))
-		W.updateWeedOverlays()
-
 	linked_node = null
-	return ..()
+	. = ..()
+	if(T)
+		for (var/obj/effect/alien/weeds/W in range(1,T))
+			W.updateWeedOverlays()
 
 /obj/effect/alien/weeds/node
 	icon_state = "weednode"
@@ -210,10 +207,10 @@
 /obj/effect/alien/weeds/node/Initialize(var/mapload, var/node, var/newcolor)
 	. = ..()
 
-	for(var/obj/effect/alien/weeds/existing in loc)
-		if(existing == src)
-			continue
-		else
+	if(. != INITIALIZE_HINT_QDEL && !mapload)
+		for(var/obj/effect/alien/weeds/existing in loc)
+			if(existing == src)
+				continue
 			qdel(existing)
 
 	linked_node = src
@@ -255,8 +252,6 @@
 /obj/effect/alien/weeds/proc/fullUpdateWeedOverlays()
 	for (var/obj/effect/alien/weeds/W in range(1,src))
 		W.updateWeedOverlays()
-
-	return
 
 // NB: This is not actually called by a processing subsystem, it's called by the node processing
 /obj/effect/alien/weeds/process()
@@ -381,7 +376,7 @@
 	var/ticks = 0
 	var/target_strength = 0
 
-/obj/effect/alien/acid/New(loc, target)
+/obj/effect/alien/acid/Initialize(var/ml, target)
 	..(loc)
 	src.target = target
 
@@ -444,15 +439,15 @@
 	var/health = 100
 	var/status = BURST //can be GROWING, GROWN or BURST; all mutually exclusive
 
-/obj/effect/alien/egg/New()
 /*
+/obj/effect/alien/egg/Initialize()
+	. = ..()
 	if(config.aliens_allowed)
-		..()
-		spawn(rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
-			Grow()
+		addtimer(CALLBACK(src, .proc/Grow), rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
 	else
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 */
+
 /obj/effect/alien/egg/attack_hand(user as mob)
 
 	var/mob/living/carbon/M = user

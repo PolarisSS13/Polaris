@@ -6,23 +6,24 @@ var/list/mining_overlay_cache = list()
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock-dark"
 	density = 1
-
+	
 /turf/simulated/mineral //wall piece
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
-	var/rock_side_icon_state = "rock_side"
-	var/sand_icon_state = "asteroid"
-	var/rock_icon_state = "rock"
-	var/random_icon = 0
 	oxygen = 0
 	nitrogen = 0
 	opacity = 1
 	density = 1
 	blocks_air = 1
 	temperature = T0C
-
 	can_dirty = FALSE
+
+	var/floor_name = "sand"
+	var/rock_side_icon_state = "rock_side"
+	var/sand_icon_state = "asteroid"
+	var/rock_icon_state = "rock"
+	var/random_icon = 0
 
 	var/ore/mineral
 	var/sand_dug
@@ -64,6 +65,10 @@ var/list/mining_overlay_cache = list()
 	)
 
 	has_resources = 1
+
+/turf/simulated/mineral/ChangeTurf(turf/N, tell_universe, force_lighting_update, preserve_outdoors)
+	clear_ore_effects()
+	. = ..()
 
 // Alternative rock wall sprites.
 /turf/simulated/mineral/light
@@ -109,6 +114,14 @@ var/list/mining_overlay_cache = list()
 	blocks_air = 0
 	can_build_into_floor = TRUE
 
+/turf/simulated/mineral/floor/mud
+	icon_state = "mud"
+	sand_icon_state = "mud"
+
+/turf/simulated/mineral/floor/dirt
+	icon_state = "dirt"
+	sand_icon_state = "dirt"
+
 //Alternative sand floor sprite.
 /turf/simulated/mineral/floor/light
 	icon_state = "sand-light"
@@ -140,6 +153,7 @@ var/list/mining_overlay_cache = list()
 	opacity = 0
 	blocks_air = 0
 	can_build_into_floor = TRUE
+	clear_ore_effects()
 	update_general()
 
 /turf/simulated/mineral/proc/make_wall()
@@ -223,7 +237,7 @@ var/list/mining_overlay_cache = list()
 
 	//We are a sand floor
 	else
-		name = "sand"
+		name = floor_name
 		icon = 'icons/turf/flooring/asteroid.dmi'
 		icon_state = sand_icon_state
 
@@ -326,7 +340,7 @@ var/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	if(mineral)
+	if(initialized && istype(mineral))
 		new /obj/effect/mineral(src, mineral)
 	update_icon()
 
@@ -338,39 +352,7 @@ var/list/mining_overlay_cache = list()
 		return
 
 	if(!density)
-		var/valid_tool = 0
-		var/digspeed = 40
-
-		if(istype(W, /obj/item/weapon/shovel))
-			var/obj/item/weapon/shovel/S = W
-			valid_tool = 1
-			digspeed = S.digspeed
-
-		if(istype(W, /obj/item/weapon/pickaxe))
-			var/obj/item/weapon/pickaxe/P = W
-			if(P.sand_dig)
-				valid_tool = 1
-				digspeed = P.digspeed
-
-
-		if(valid_tool)
-			if (sand_dug)
-				to_chat(user, "<span class='warning'>This area has already been dug.</span>")
-				return
-
-			var/turf/T = user.loc
-			if (!(istype(T)))
-				return
-
-			to_chat(user, "<span class='notice'>You start digging.</span>")
-			playsound(user, 'sound/effects/rustle1.ogg', 50, 1)
-
-			if(!do_after(user,digspeed)) return
-
-			to_chat(user, "<span class='notice'>You dug a hole.</span>")
-			GetDrilled()
-
-		else if(istype(W,/obj/item/weapon/storage/bag/ore))
+		if(istype(W,/obj/item/weapon/storage/bag/ore))
 			var/obj/item/weapon/storage/bag/ore/S = W
 			if(S.collection_mode)
 				for(var/obj/item/weapon/ore/O in contents)
@@ -409,20 +391,38 @@ var/list/mining_overlay_cache = list()
 				to_chat(user, "<span class='warning'>The plating is going to need some support.</span>")
 				return
 
+		else if(W.get_tool_quality(TOOL_SHOVEL))
+			var/digspeed = 40 / W.get_tool_quality(TOOL_SHOVEL)
+			if(sand_dug)
+				to_chat(user, "<span class='warning'>This area has already been dug.</span>")
+				return
+
+			var/turf/T = user.loc
+			if(!istype(T))
+				return
+
+			to_chat(user, "<span class='notice'>You start digging.</span>")
+			playsound(user, 'sound/effects/rustle1.ogg', 50, 1)
+
+			if(!do_after(user,digspeed))
+				return
+
+			to_chat(user, "<span class='notice'>You dug a hole.</span>")
+			GetDrilled()
 
 	else
-		if (istype(W, /obj/item/device/core_sampler))
+		if(istype(W, /obj/item/device/core_sampler))
 			geologic_data.UpdateNearbyArtifactInfo(src)
 			var/obj/item/device/core_sampler/C = W
 			C.sample_item(src, user)
 			return
 
-		if (istype(W, /obj/item/device/depth_scanner))
+		if(istype(W, /obj/item/device/depth_scanner))
 			var/obj/item/device/depth_scanner/C = W
 			C.scan_atom(user, src)
 			return
 
-		if (istype(W, /obj/item/device/measuring_tape))
+		if(istype(W, /obj/item/device/measuring_tape))
 			var/obj/item/device/measuring_tape/P = W
 			user.visible_message("<span class='notice'>\The [user] extends \a [P] towards \the [src].</span>","<span class='notice'>You extend \the [P] towards \the [src].</span>")
 			if(do_after(user, 15))
@@ -439,12 +439,13 @@ var/list/mining_overlay_cache = list()
 					to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
 			return
 
-		if (istype(W, /obj/item/weapon/pickaxe))
-			if(!istype(user.loc, /turf))
+		if(istype(W, /obj/item/weapon/pickaxe))
+			if(!isturf(user.loc))
 				return
 
+			var/digspeed = 40 / W.get_tool_quality(TOOL_MINING)
 			var/obj/item/weapon/pickaxe/P = W
-			if(last_act + P.digspeed > world.time)//prevents message spam
+			if(last_act + digspeed > world.time)//prevents message spam
 				return
 			last_act = world.time
 
@@ -460,7 +461,7 @@ var/list/mining_overlay_cache = list()
 					wreckfinds(P.destroy_artefacts)
 			to_chat(user, "<span class='notice'>You start [P.drill_verb][fail_message].</span>")
 
-			if(do_after(user,P.digspeed))
+			if(do_after(user,digspeed))
 
 				if(finds && finds.len)
 					var/datum/find/F = finds[1]
@@ -623,9 +624,9 @@ var/list/mining_overlay_cache = list()
 	//otherwise, they come out inside a chunk of rock
 	var/obj/item/weapon/X
 	if(is_clean)
-		X = new /obj/item/weapon/archaeological_find(src, new_item_type = F.find_type)
+		X = new /obj/item/weapon/archaeological_find(src, F.find_type)
 	else
-		X = new /obj/item/weapon/strangerock(src, inside_item_type = F.find_type)
+		X = new /obj/item/weapon/strangerock(src, F.find_type)
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		var/obj/item/weapon/strangerock/SR = X
 		SR.geologic_data = geologic_data
@@ -685,5 +686,6 @@ var/list/mining_overlay_cache = list()
 
 	if(mineral_name && (mineral_name in GLOB.ore_data))
 		mineral = GLOB.ore_data[mineral_name]
-		UpdateMineral()
+		if(initialized)
+			UpdateMineral()
 	update_icon()

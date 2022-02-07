@@ -29,7 +29,7 @@ LINEN BINS
 	return
 
 /obj/item/weapon/bedsheet/attackby(obj/item/I, mob/user)
-	if(is_sharp(I))
+	if(I.sharp)
 		user.visible_message("<span class='notice'>\The [user] begins cutting up [src] with [I].</span>", "<span class='notice'>You begin cutting up [src] with [I].</span>")
 		if(do_after(user, 50))
 			to_chat(user, "<span class='notice'>You cut [src] into pieces!</span>")

@@ -21,7 +21,7 @@
 	fruit = list("banana" = 1)
 	reagents = list("sodiumchloride" = 1, "blackpepper" = 1, "flour" = 10)
 	items = list(
-		/obj/item/weapon/reagent_containers/food/snacks/monkeycube
+		/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/monkeysdelight
 	reagent_mix = RECIPE_REAGENT_REPLACE
@@ -512,12 +512,16 @@
 
 /datum/recipe/pancakes
 	appliance = OVEN
-	fruit = list("berries" = 2)
+	reagents = list("milk" = 5, "sugar" = 15)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/weapon/reagent_containers/food/snacks/sliceable/flatdough
 	)
 	result = /obj/item/weapon/reagent_containers/food/snacks/pancakes
+
+/datum/recipe/pancakes/berry
+	fruit = list("berries" = 2)
+	result = /obj/item/weapon/reagent_containers/food/snacks/pancakes/berry
 
 /datum/recipe/lasagna
 	appliance = OVEN
@@ -690,3 +694,34 @@
 	)
 	reagent_mix = RECIPE_REAGENT_REPLACE //Get that water outta here
 	result = /obj/item/weapon/reagent_containers/food/snacks/veggiemomo
+
+/datum/recipe/lobster
+	appliance = OVEN
+	fruit = list("lemon" = 1, "cabbage" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/lobster
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/lobstercooked
+
+/datum/recipe/cuttlefish
+	appliance = OVEN
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/cuttlefish
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/cuttlefishcooked
+
+/datum/recipe/monkfish
+	appliance = OVEN
+	fruit = list("chili" = 1, "onion" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/monkfishfillet
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/monkfishcooked
+
+/datum/recipe/sharksteak
+	appliance = OVEN
+	reagents = list("blackpepper"= 1, "sodiumchloride" = 1)
+	items = list(
+		/obj/item/weapon/reagent_containers/food/snacks/carpmeat/fish/sharkmeat
+	)
+	result = /obj/item/weapon/reagent_containers/food/snacks/sharkmeatcooked

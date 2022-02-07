@@ -27,8 +27,8 @@
 	var/datum/material/material
 	var/drops_debris = 1
 
-/obj/item/weapon/material/New(var/newloc, var/material_key)
-	..(newloc)
+/obj/item/weapon/material/Initialize(var/ml, var/material_key)
+	. = ..(ml)
 	if(!material_key)
 		material_key = default_material
 	set_material(material_key)
@@ -119,9 +119,8 @@
 	T.visible_message("<span class='danger'>\The [src] goes dull!</span>")
 	playsound(src, "shatter", 70, 1)
 	dulled = 1
-	if(is_sharp() || has_edge())
-		sharp = 0
-		edge = 0
+	sharp = 0
+	edge = 0
 
 /obj/item/weapon/material/proc/repair(var/repair_amount, var/repair_time, mob/living/user)
 	if(!fragile)

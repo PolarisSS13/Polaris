@@ -56,7 +56,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	*/
 // Loop through all linked machines and send the signal or copy.
 	for(var/obj/machinery/telecomms/machine in links)
-		if(filter && !istype( machine, text2path(filter) ))
+		if(filter && !istype(machine, filter))
 			continue
 		if(!machine.on)
 			continue
@@ -111,10 +111,14 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	else
 		return 0
 
-
-/obj/machinery/telecomms/New()
+/obj/machinery/telecomms/Initialize()
 	telecomms_list += src
 	..()
+	default_apply_parts()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/telecomms/LateInitialize()
+	. = ..()
 
 	//Set the listening_level if there's none.
 	if(!listening_level)
@@ -122,7 +126,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		var/turf/position = get_turf(src)
 		listening_level = position.z
 
-/obj/machinery/telecomms/Initialize()
 	if(autolinkers.len)
 		// Links nearby machines
 		if(!long_range_link)
@@ -131,7 +134,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 		else
 			for(var/obj/machinery/telecomms/T in telecomms_list)
 				add_link(T)
-	. = ..()
 
 /obj/machinery/telecomms/Destroy()
 	telecomms_list -= src
@@ -264,10 +266,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 	var/list/linked_radios_weakrefs = list()
 
-/obj/machinery/telecomms/receiver/Initialize()
-	. = ..()
-	default_apply_parts()
-
 /obj/machinery/telecomms/receiver/proc/link_radio(var/obj/item/device/radio/R)
 	if(!istype(R))
 		return
@@ -288,9 +286,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			//Remove the level and then start adding levels that it is being broadcasted in.
 			signal.data["level"] = list()
 
-			var/can_send = relay_information(signal, "/obj/machinery/telecomms/hub") // ideally relay the copied information to relays
+			var/can_send = relay_information(signal, /obj/machinery/telecomms/hub) // ideally relay the copied information to relays
 			if(!can_send)
-				relay_information(signal, "/obj/machinery/telecomms/bus") // Send it to a bus instead, if it's linked to one
+				relay_information(signal, /obj/machinery/telecomms/bus) // Send it to a bus instead, if it's linked to one
 
 /obj/machinery/telecomms/receiver/proc/check_receive_level(datum/signal/signal)
 	// If it's a direct message from a bluespace radio, we eat it and convert it into a subspace signal locally
@@ -347,19 +345,15 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	long_range_link = 1
 	netspeed = 40
 
-/obj/machinery/telecomms/hub/Initialize()
-	. = ..()
-	default_apply_parts()
-
 /obj/machinery/telecomms/hub/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 	if(is_freq_listening(signal))
 		if(istype(machine_from, /obj/machinery/telecomms/receiver))
 			//If the signal is compressed, send it to the bus.
-			relay_information(signal, "/obj/machinery/telecomms/bus", 1) // ideally relay the copied information to bus units
+			relay_information(signal, /obj/machinery/telecomms/bus, 1) // ideally relay the copied information to bus units
 		else
 			// Get a list of relays that we're linked to, then send the signal to their levels.
-			relay_information(signal, "/obj/machinery/telecomms/relay", 1)
-			relay_information(signal, "/obj/machinery/telecomms/broadcaster", 1) // Send it to a broadcaster.
+			relay_information(signal, /obj/machinery/telecomms/relay, 1)
+			relay_information(signal, /obj/machinery/telecomms/broadcaster, 1) // Send it to a broadcaster.
 
 
 /*
@@ -386,10 +380,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	long_range_link = 1
 	var/broadcasting = 1
 	var/receiving = 1
-
-/obj/machinery/telecomms/relay/Initialize()
-	. = ..()
-	default_apply_parts()
 
 /obj/machinery/telecomms/relay/forceMove(var/newloc)
 	. = ..(newloc)
@@ -444,10 +434,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	netspeed = 40
 	var/change_frequency = 0
 
-/obj/machinery/telecomms/bus/Initialize()
-	. = ..()
-	default_apply_parts()
-
 /obj/machinery/telecomms/bus/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
 	if(is_freq_listening(signal))
@@ -457,7 +443,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 
 		if(!istype(machine_from, /obj/machinery/telecomms/processor) && machine_from != src) // Signal must be ready (stupid assuming machine), let's send it
 			// send to one linked processor unit
-			var/send_to_processor = relay_information(signal, "/obj/machinery/telecomms/processor")
+			var/send_to_processor = relay_information(signal, /obj/machinery/telecomms/processor)
 
 			if(send_to_processor)
 				return
@@ -466,7 +452,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			src.receive_information(signal, src)
 
 		// Try sending it!
-		var/list/try_send = list("/obj/machinery/telecomms/server", "/obj/machinery/telecomms/hub", "/obj/machinery/telecomms/broadcaster", "/obj/machinery/telecomms/bus")
+		var/list/try_send = list(/obj/machinery/telecomms/server, /obj/machinery/telecomms/hub, /obj/machinery/telecomms/broadcaster, /obj/machinery/telecomms/bus)
 		var/i = 0
 		for(var/send in try_send)
 			if(i)
@@ -500,10 +486,6 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 	circuit = /obj/item/weapon/circuitboard/telecomms/processor
 	var/process_mode = 1 // 1 = Uncompress Signals, 0 = Compress Signals
 
-/obj/machinery/telecomms/processor/Initialize()
-	. = ..()
-	default_apply_parts()
-
 /obj/machinery/telecomms/processor/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
 	if(is_freq_listening(signal))
@@ -517,7 +499,7 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 			relay_direct_information(signal, machine_from) // send the signal back to the machine
 		else // no bus detected - send the signal to servers instead
 			signal.data["slow"] += rand(5, 10) // slow the signal down
-			relay_information(signal, "/obj/machinery/telecomms/server")
+			relay_information(signal, /obj/machinery/telecomms/server)
 
 
 /*
@@ -555,15 +537,11 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 							// would add up to md5("password123comsat")
 	var/obj/item/device/radio/headset/server_radio = null
 
-/obj/machinery/telecomms/server/New()
-	..()
-	Compiler = new()
-	Compiler.Holder = src
-	server_radio = new()
-
 /obj/machinery/telecomms/server/Initialize()
+	Compiler = new
+	Compiler.Holder = src
+	server_radio = new
 	. = ..()
-	default_apply_parts()
 
 /obj/machinery/telecomms/server/receive_information(datum/signal/signal, obj/machinery/telecomms/machine_from)
 
@@ -643,9 +621,9 @@ var/global/list/obj/machinery/telecomms/telecomms_list = list()
 				if(Compiler && autoruncode)
 					Compiler.Run(signal)	// execute the code
 
-			var/can_send = relay_information(signal, "/obj/machinery/telecomms/hub")
+			var/can_send = relay_information(signal, /obj/machinery/telecomms/hub)
 			if(!can_send)
-				relay_information(signal, "/obj/machinery/telecomms/broadcaster")
+				relay_information(signal, /obj/machinery/telecomms/broadcaster)
 
 
 /obj/machinery/telecomms/server/proc/setcode(var/t)
