@@ -1,5 +1,5 @@
 /mob/living/carbon/alien
-	name = "skathari"
+	name = "alien"
 	desc = "What IS that?"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "alien"
@@ -58,7 +58,7 @@
 	return GLOB.all_languages["Skathari"]
 
 /mob/living/carbon/alien/say_quote(var/message, var/datum/language/speaking = null)
-	var/verb = "clicks"
+	var/verb = "hisses"
 	var/ending = copytext(message, length(message))
 
 	if(speaking && (speaking.name != "Galactic Common")) //this is so adminbooze xenos speaking common have their custom verbs,
@@ -67,6 +67,6 @@
 		if(ending == "!")
 			verb = "roars"
 		else if(ending == "?")
-			verb = "clicks curiously"
+			verb = "hisses curiously"
 	return verb
 

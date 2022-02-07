@@ -170,7 +170,9 @@
 /obj/item/projectile/energy/skathari //Skathari equivalent of above, but less biological more... Blue.
 	name = "bluespace spit"
 	icon_state = "bluespace_small"
-	fire_sound = 'sound/weapons/pierce.ogg'
+	fire_sound = 'sound/weapons/skath_spit.ogg'
+	hitsound_wall = 'sound/weapons/skath_spit.ogg'
+	hitsound = 'sound/weapons/pierce.ogg'
 	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
 	damage = 20
 	damage_type = BIOACID //Still biological weirdness

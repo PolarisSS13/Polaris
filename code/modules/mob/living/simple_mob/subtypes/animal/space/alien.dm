@@ -19,9 +19,11 @@
 	response_harm = "hits"
 	organ_names = /decl/mob_organ_names/skathari
 
-	maxHealth = 100
-	health = 100
+	maxHealth = 120
+	health = 120
 	see_in_dark = 7
+
+	turn_sound = "skathari_chitter"
 
 	harm_intent_damage = 5
 	melee_damage_lower = 25
@@ -41,7 +43,7 @@
 	icon_living = "aliend_running"
 	icon_dead = "aliend_l"
 	icon_rest = "aliend_sleep"
-	health = 60
+	health = 80
 	melee_damage_lower = 15
 	melee_damage_upper = 15
 	projectiletype = /obj/item/projectile/energy/skathari
