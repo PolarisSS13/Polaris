@@ -332,7 +332,7 @@
 	if(istype(src, /obj/machinery/atmospherics/tvalve/digital))
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it's too complicated.</span>")
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 
 /obj/machinery/atmospherics/tvalve/mirrored

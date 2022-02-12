@@ -54,7 +54,7 @@
 /obj/machinery/atmospherics/trinary/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
 	if (!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 // Housekeeping and pipe network stuff below
 /obj/machinery/atmospherics/trinary/get_neighbor_nodes_for_init()

@@ -106,6 +106,7 @@
 /obj/item/weapon/tool/powerdrill
 	name = "hand drill"
 	desc = "A simple powered hand drill."
+	icon = 'icons/obj/tools.dmi'
 	icon_state = "drill_screw"
 	item_state = "drill"
 	matter = list(MAT_STEEL = 150, MAT_SILVER = 50)
@@ -126,5 +127,6 @@
 	playsound(src,'sound/items/change_drill.ogg',50,1)
 	set_tool_quality(TOOL_SCREWDRIVER, state ? TOOL_QUALITY_GOOD : TOOL_QUALITY_NONE)
 	set_tool_quality(TOOL_WRENCH,      state ? TOOL_QUALITY_NONE : TOOL_QUALITY_GOOD)
+	icon_state = state ? "drill_screw" : "drill_bolt"
+	to_chat(user, "<span class='notice'>You attach the [state ? "screw" : "bolt"] driver bit to [src].</span>")
 	state = !state
-	to_chat(user, "<span class='notice'>You attach the bolt driver bit to [src].</span>")

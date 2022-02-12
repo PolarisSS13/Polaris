@@ -234,7 +234,7 @@
 	SA_bonus_damage = 35 // 50 total on animals.
 	SA_vulnerability = SA_ANIMAL
 
-/obj/item/projectile/bullet/rifle/a145 // 14.5×114mm is bigger than a .50 BMG round.
+/obj/item/projectile/bullet/rifle/a145 // 14.5ï¿½114mm is bigger than a .50 BMG round.
 	fire_sound = 'sound/weapons/Gunshot_cannon.ogg' // This is literally an anti-tank rifle caliber. It better sound like a fucking cannon.
 	damage = 80
 	stun = 3
@@ -350,3 +350,23 @@
 /obj/item/projectile/bullet/blank/cap/process()
 	loc = null
 	qdel(src)
+
+/* BB Rounds */
+/obj/item/projectile/bullet/bb // Generic single BB
+	name = "BB"
+	damage = 0
+	agony = 0
+	embed_chance = 0
+	sharp = FALSE
+	silenced = TRUE	
+
+/obj/item/projectile/bullet/pellet/shotgun/bb // Shotgun
+	name = "BB"
+	damage = 0
+	agony = 0
+	embed_chance = 0
+	sharp = FALSE
+	pellets = 6
+	range_step = 1
+	spread_step = 10
+	silenced = TRUE

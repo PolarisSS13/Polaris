@@ -284,7 +284,7 @@
 	if (unlocked)
 		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], turn it off first.</span>")
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 #undef REGULATE_NONE
 #undef REGULATE_INPUT

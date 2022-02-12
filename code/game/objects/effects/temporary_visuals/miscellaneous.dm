@@ -24,6 +24,10 @@
 	icon_state = "smoke"
 	duration = 50
 
+/obj/effect/temp_visual/bluespace_tear
+	icon_state = "bs_rift"
+	duration = 4
+
 /obj/effect/temp_visual/impact_effect
 	icon_state = "impact_bullet"
 	plane = PLANE_LIGHTING_ABOVE // So they're visible even in a shootout in maint.

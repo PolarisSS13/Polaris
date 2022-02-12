@@ -273,7 +273,7 @@
 	if (node && node.level==1 && isturf(T) && !T.is_plating())
 		to_chat(user, "<span class='warning'>You must remove the plating first.</span>")
 		return TRUE
-	return default_deconstruction_wrench(user, W)
+	return default_deconstruction_wrench(W, user)
 
 
 /obj/machinery/atmospherics/unary/vent_scrubber/examine(mob/user)
