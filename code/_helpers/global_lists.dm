@@ -206,28 +206,28 @@ var/global/list/string_slot_flags = list(
 			GLOB.whitelisted_species += S.name
 
 	//Ores
-	paths = typesof(/ore)-/ore
+	paths = subtypesof(/ore)
 	for(var/oretype in paths)
 		var/ore/OD = new oretype()
 		GLOB.ore_data[OD.name] = OD
 
-	paths = typesof(/datum/alloy)-/datum/alloy
+	paths = subtypesof(/datum/alloy)
 	for(var/alloytype in paths)
 		GLOB.alloy_data += new alloytype()
 
-	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	paths = subtypesof(/datum/sprite_accessory/ears)
 	for(var/path in paths)
 		var/obj/item/clothing/head/instance = new path()
 		ear_styles_list[path] = instance
 
 	// Custom Tails
-	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail - /datum/sprite_accessory/tail/taur
+	paths = subtypesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail/taur
 	for(var/path in paths)
 		var/datum/sprite_accessory/tail/instance = new path()
 		tail_styles_list[path] = instance
 
 	// Custom Wings
-	paths = typesof(/datum/sprite_accessory/wing) - /datum/sprite_accessory/wing
+	paths = subtypesof(/datum/sprite_accessory/wing)
 	for(var/path in paths)
 		var/datum/sprite_accessory/wing/instance = new path()
 		wing_styles_list[path] = instance

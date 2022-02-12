@@ -20,15 +20,15 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	whitelisted_types = L
 
 // A late init operation called in SSshuttles, used to attach the thing to the right ship.
-/obj/machinery/computer/ship/proc/attempt_hook_up(obj/effect/overmap/visitable/sector)
-	if(!sector || !(sector.type in whitelisted_types))
-		return FALSE
+/obj/machinery/computer/ship/proc/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
+	if(!istype(sector))
+		return
 	if(sector.check_ownership(src))
 		linked = sector
-		return TRUE
+		return 1
 
 /obj/machinery/computer/ship/proc/sync_linked(var/user = null)
-	var/obj/effect/overmap/visitable/sector = get_overmap_sector(z)
+	var/obj/effect/overmap/visitable/ship/sector = get_overmap_sector(z)
 	if(!sector)
 		return
 	. = attempt_hook_up_recursive(sector)
@@ -36,10 +36,10 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		to_chat(user, "<span class='notice'>[src] reconnected to [linked]</span>")
 		user << browse(null, "window=[src]") // close reconnect dialog
 
-/obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/visitable/sector)
+/obj/machinery/computer/ship/proc/attempt_hook_up_recursive(obj/effect/overmap/visitable/ship/sector)
 	if(attempt_hook_up(sector))
 		return sector
-	for(var/obj/effect/overmap/visitable/candidate in sector)
+	for(var/obj/effect/overmap/visitable/ship/candidate in sector)
 		if((. = .(candidate)))
 			return
 
@@ -47,6 +47,14 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	var/datum/browser/popup = new (user, "[src]", "[src]")
 	popup.set_content("<center><strong><font color = 'red'>Error</strong></font><br>Unable to connect to [flavor].<br><a href='?src=\ref[src];sync=1'>Reconnect</a></center>")
 	popup.open()
+
+/obj/machinery/computer/ship/Topic(href, href_list)
+	if(..())
+		return TRUE
+	if(href_list["sync"])
+		if(sync_linked(usr))
+			interface_interact(usr)
+		return TRUE
 
 // In computer_shims for now - we had to define it.
 // /obj/machinery/computer/ship/interface_interact(var/mob/user)
@@ -71,6 +79,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 	if(linked)
 		apply_visual(user)
 		user.reset_view(linked)
+	user.set_machine(src)
 	if(isliving(user))
 		var/mob/living/L = user
 		L.looking_elsewhere = 1
@@ -104,7 +113,7 @@ somewhere on that shuttle. Subtypes of these can be then used to perform ship ov
 		look(user)
 
 /obj/machinery/computer/ship/check_eye(var/mob/user)
-	if (!get_dist(user, src) > 1 || user.blinded || !linked )
+	if(!get_dist(user, src) > 1 || user.blinded || !linked)
 		unlook(user)
 		return -1
 	else
