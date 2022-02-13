@@ -42,7 +42,7 @@
 	if(moving_status == SHUTTLE_INTRANSIT)
 		return FALSE //already going somewhere, current_location may be an intransit location instead of in a sector
 	var/our_sector = waypoint_sector(current_location)
-	if(!our_sector && myship?.landmark && next_location == myship.landmark)
+	if(myship?.landmark && next_location == myship.landmark)
 		return TRUE //We're not on the overmap yet (admin spawned probably), and we're trying to hook up with our openspace sector
 	return get_dist(our_sector, waypoint_sector(next_location)) <= range
 
@@ -167,7 +167,7 @@
 	..()
 
 /obj/structure/fuel_port/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_crowbar())
+	if(W.get_tool_quality(TOOL_CROWBAR))
 		if(opened)
 			to_chat(user, "<spawn class='notice'>You tightly shut \the [src] door.")
 			playsound(src, 'sound/effects/locker_close.ogg', 25, 0, -3)

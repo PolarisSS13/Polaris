@@ -7,8 +7,8 @@
 	open_sound_powered = 'sound/machines/door/WideOpen.ogg'
 	close_sound_powered = 'sound/machines/door/WideClose.ogg'
 
-/obj/machinery/door/airlock/multi_tile/New()
-	..()
+/obj/machinery/door/airlock/multi_tile/Initialize()
+	. = ..()
 	SetBounds()
 	if(opacity)
 		create_fillers()

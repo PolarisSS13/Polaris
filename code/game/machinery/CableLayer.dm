@@ -8,10 +8,10 @@
 	var/max_cable = 100
 	var/on = 0
 
-/obj/machinery/cablelayer/New()
+/obj/machinery/cablelayer/Initialize()
 	cable = new(src)
 	cable.amount = 100
-	..()
+	. = ..()
 
 /obj/machinery/cablelayer/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
@@ -35,7 +35,7 @@
 			to_chat(user, "You load [result] lengths of cable into [src].")
 		return
 
-	if(O.is_wirecutter())
+	if(O.get_tool_quality(TOOL_WIRECUTTER))
 		if(cable && cable.amount)
 			var/m = round(input(usr,"Please specify the length of cable to cut","Cut cable",min(cable.amount,30)) as num, 1)
 			m = min(m, cable.amount)

@@ -12,7 +12,7 @@
 	var/mob/living/carbon/human/occupant = null
 	var/mob/living/carbon/human/avatar = null
 	var/datum/mind/vr_mind = null
-	var/datum/effect/effect/system/smoke_spread/bad/smoke
+	var/datum/effect_system/smoke_spread/bad/smoke
 
 	var/eject_dead = TRUE
 
@@ -26,9 +26,6 @@
 /obj/machinery/vr_sleeper/Initialize()
 	. = ..()
 	default_apply_parts()
-
-/obj/machinery/vr_sleeper/Initialize()
-	. = ..()
 	smoke = new
 	update_icon()
 
@@ -179,13 +176,17 @@
 	return
 
 /obj/machinery/vr_sleeper/proc/go_out(var/forced = TRUE)
+	
+	set waitfor = FALSE
+	
 	if(!occupant)
 		return
 
 	if(!forced && avatar && alert(avatar, "Someone wants to remove you from virtual reality. Do you want to leave?", "Leave VR?", "Yes", "No") == "No")
 		return
 
-	avatar.exit_vr()
+	if(avatar)
+		avatar.exit_vr()
 	avatar = null
 
 	if(occupant.client)

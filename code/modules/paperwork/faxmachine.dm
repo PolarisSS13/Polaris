@@ -23,12 +23,12 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	var/department = "Unknown" // our department
 	var/destination = null // the department we're sending to
 
-/obj/machinery/photocopier/faxmachine/New()
+/obj/machinery/photocopier/faxmachine/Initialize()
 	allfaxes += src
 	if(!destination) destination = "[using_map.boss_name]"
 	if( !(("[department]" in alldepartments) || ("[department]" in admin_departments)) )
 		alldepartments |= department
-	..()
+	. = ..()
 
 /obj/machinery/photocopier/faxmachine/attack_hand(mob/user as mob)
 	user.set_machine(src)
@@ -120,7 +120,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	SSnanoui.update_uis(src)
 
 /obj/machinery/photocopier/faxmachine/attackby(obj/item/O as obj, mob/user as mob)
-	if(O.is_multitool() && panel_open)
+	if(O.get_tool_quality(TOOL_MULTITOOL) && panel_open)
 		var/input = sanitize(input(usr, "What Department ID would you like to give this fax machine?", "Multitool-Fax Machine Interface", department))
 		if(!input)
 			to_chat(usr, "No input found. Please hang up and try your call again.")

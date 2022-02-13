@@ -9,17 +9,12 @@
 	var/obj/item/weapon/extinguisher/has_extinguisher
 	var/opened = 0
 
-/obj/structure/extinguisher_cabinet/New(var/loc, var/dir, var/building = 0)
-	..()
-
+/obj/structure/extinguisher_cabinet/Initialize(var/ml, var/dir, var/building = 0)
+	. = ..()
 	if(building)
-		if(loc)
-			src.loc = loc
-
 		pixel_x = (dir & 3)? 0 : (dir == 4 ? -27 : 27)
 		pixel_y = (dir & 3)? (dir ==1 ? -27 : 27) : 0
 		update_icon()
-		return
 	else
 		has_extinguisher = new/obj/item/weapon/extinguisher(src)
 
@@ -34,11 +29,11 @@
 			to_chat(user, "<span class='notice'>You place [O] in [src].</span>")
 		else
 			opened = !opened
-	if(O.is_wrench())
+	if(O.get_tool_quality(TOOL_WRENCH))
 		if(!has_extinguisher)
 			to_chat(user, "<span class='notice'>You start to unwrench the extinguisher cabinet.</span>")
 			playsound(src, O.usesound, 50, 1)
-			if(do_after(user, 15 * O.toolspeed))
+			if(do_after(user, 15 * O.get_tool_speed(TOOL_WRENCH)))
 				to_chat(user, "<span class='notice'>You unwrench the extinguisher cabinet.</span>")
 				new /obj/item/frame/extinguisher_cabinet( src.loc )
 				qdel(src)

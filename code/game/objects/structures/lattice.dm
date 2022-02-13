@@ -6,6 +6,7 @@
 	density = 0
 	anchored = 1.0
 	w_class = ITEMSIZE_NORMAL
+	layer = BELOW_UTILITY
 	plane = PLATING_PLANE
 
 /obj/structure/lattice/Initialize()
@@ -18,6 +19,7 @@
 		if(LAT != src)
 			crash_with("Found multiple lattices at '[log_info_line(loc)]'")
 			return INITIALIZE_HINT_QDEL
+
 	icon = 'icons/obj/smoothlattice.dmi'
 	icon_state = "latticeblank"
 	updateOverlays()

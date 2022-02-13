@@ -16,8 +16,8 @@
 	drop_sound = 'sound/items/drop/cardboardbox.ogg'
 	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
 
-/obj/item/weapon/a_gift/New()
-	..()
+/obj/item/weapon/a_gift/Initialize()
+	. = ..()
 	pixel_x = rand(-10,10)
 	pixel_y = rand(-10,10)
 	if(w_class > 0 && w_class < ITEMSIZE_LARGE)
@@ -49,7 +49,7 @@
 /obj/effect/spresent/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	..()
 
-	if (!W.is_wirecutter())
+	if (!W.get_tool_quality(TOOL_WIRECUTTER))
 		to_chat(user, "<span class='warning'>I need wirecutters for that.</span>")
 		return
 
@@ -85,7 +85,7 @@
 		/obj/item/weapon/beach_ball/holoball,
 		/obj/item/toy/balloon,
 		/obj/item/toy/blink,
-		/obj/item/toy/crossbow,
+		/obj/item/weapon/gun/projectile/revolver/toy/crossbow,
 		/obj/item/weapon/gun/projectile/revolver/capgun,
 		/obj/item/toy/katana,
 		/obj/item/toy/mecha/deathripley,
@@ -135,7 +135,7 @@
 		to_chat(user, "<span class='warning'>You MUST put the paper on a table!</span>")
 	if (W.w_class < ITEMSIZE_LARGE)
 		var/obj/item/I = user.get_inactive_hand()
-		if(I.is_wirecutter())
+		if(I.get_tool_quality(TOOL_WIRECUTTER))
 			var/a_used = 2 ** (src.w_class - 1)
 			if (src.amount < a_used)
 				to_chat(user, "<span class='warning'>You need more paper!</span>")

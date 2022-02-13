@@ -151,8 +151,6 @@
 	starts_with = list(/obj/item/ammo_casing/a12g/beanbag = 8)
 	drop_sound = 'sound/items/drop/ammobox.ogg'
 	pickup_sound = 'sound/items/pickup/ammobox.ogg'
-
-/obj/item/weapon/storage/box/beanbags/large/New()
 	starts_with = list(/obj/item/ammo_casing/a12g/beanbag = 16)
 
 /obj/item/weapon/storage/box/shotgunammo
@@ -404,23 +402,23 @@
 	desc = "Drymate brand monkey cubes. Just add water!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "monkeycubebox"
-	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube)
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped = 4)
+	can_hold = list(/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube/wrapped = 4)
 
 /obj/item/weapon/storage/box/monkeycubes/farwacubes
 	name = "farwa cube box"
 	desc = "Drymate brand farwa cubes, shipped from Meralar. Just add water!"
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/farwacube = 4)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube/wrapped/farwacube = 4)
 
 /obj/item/weapon/storage/box/monkeycubes/stokcubes
 	name = "stok cube box"
 	desc = "Drymate brand stok cubes, shipped from Moghes. Just add water!"
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/stokcube = 4)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube/wrapped/stokcube = 4)
 
 /obj/item/weapon/storage/box/monkeycubes/neaeracubes
 	name = "neaera cube box"
 	desc = "Drymate brand neaera cubes, shipped from Qerr'balak. Just add water!"
-	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped/neaeracube = 4)
+	starts_with = list(/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube/wrapped/neaeracube = 4)
 
 /obj/item/weapon/storage/box/ids
 	name = "box of spare IDs"
@@ -551,3 +549,14 @@
 	name = "ambrosia deus seeds box"
 	desc = "Contains the seeds you need to get a proper healthy high."
 	starts_with = list(/obj/item/seeds/ambrosiadeusseed = 7)
+
+/obj/item/weapon/storage/box/foam_darts
+	name = "\improper Donk-Soft ammo box"
+	desc = "Contains Donk-Soft foam darts. It's Donk or Don't! Ages 8 and up."
+	icon = 'icons/obj/gun_toy.dmi'
+	icon_state = "foambox"
+	starts_with = list(/obj/item/ammo_casing/afoam_dart = 15)
+	max_w_class = ITEMSIZE_TINY
+	max_storage_space = ITEMSIZE_COST_TINY * 15
+	drop_sound = 'sound/items/drop/ammobox.ogg'
+	pickup_sound = 'sound/items/pickup/ammobox.ogg'

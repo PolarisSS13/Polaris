@@ -136,7 +136,7 @@ var/list/preferences_datums = list()
 	var/communicator_visibility = 0
 
 	var/datum/category_collection/player_setup_collection/player_setup
-	var/datum/browser/panel
+	var/datum/browser/panel = null
 
 	var/lastnews // Hash of last seen lobby news content.
 	var/lastlorenews //ID of last seen lore news article.
@@ -222,7 +222,7 @@ var/list/preferences_datums = list()
 	if(!user || !user.client)	return
 
 	if(!get_mob_by_key(client_ckey))
-		to_chat(user, "<span class='danger'>No mob exists for the given client!</span>")
+		to_chat(user, "<span class='danger'>No mob exists for the given client! If the round is still initializing, please try again later.</span>")
 		close_load_dialog(user)
 		return
 
@@ -353,7 +353,8 @@ var/list/preferences_datums = list()
 
 /datum/preferences/proc/close_load_dialog(mob/user)
 	//user << browse(null, "window=saves")
-	panel.close()
+	if(panel)
+		panel.close()
 
 /datum/preferences/proc/open_copy_dialog(mob/user)
 	var/dat = "<body>"

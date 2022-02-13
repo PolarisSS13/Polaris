@@ -148,11 +148,11 @@ var/global/list/string_slot_flags = list(
 		var/datum/sprite_accessory/marking/M = new path()
 		body_marking_styles_list[M.name] = M
 
-	//Surgery Steps - Initialize all /datum/surgery_step into a list
-	paths = typesof(/datum/surgery_step)-/datum/surgery_step
+	//Surgery Steps - Initialize all /decl/surgery_step into a list
+	paths = subtypesof(/decl/surgery_step)
 	for(var/T in paths)
-		var/datum/surgery_step/S = new T
-		surgery_steps += S
+		var/decl/surgery_step/S = new T
+		surgery_steps += S // TODO: Actually treat this like a decl
 	sort_surgeries()
 
 	//List of job. I can't believe this was calculated multiple times per tick!
@@ -206,28 +206,28 @@ var/global/list/string_slot_flags = list(
 			GLOB.whitelisted_species += S.name
 
 	//Ores
-	paths = typesof(/ore)-/ore
+	paths = subtypesof(/ore)
 	for(var/oretype in paths)
 		var/ore/OD = new oretype()
 		GLOB.ore_data[OD.name] = OD
 
-	paths = typesof(/datum/alloy)-/datum/alloy
+	paths = subtypesof(/datum/alloy)
 	for(var/alloytype in paths)
 		GLOB.alloy_data += new alloytype()
 
-	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	paths = subtypesof(/datum/sprite_accessory/ears)
 	for(var/path in paths)
 		var/obj/item/clothing/head/instance = new path()
 		ear_styles_list[path] = instance
 
 	// Custom Tails
-	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail - /datum/sprite_accessory/tail/taur
+	paths = subtypesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail/taur
 	for(var/path in paths)
 		var/datum/sprite_accessory/tail/instance = new path()
 		tail_styles_list[path] = instance
 
 	// Custom Wings
-	paths = typesof(/datum/sprite_accessory/wing) - /datum/sprite_accessory/wing
+	paths = subtypesof(/datum/sprite_accessory/wing)
 	for(var/path in paths)
 		var/datum/sprite_accessory/wing/instance = new path()
 		wing_styles_list[path] = instance

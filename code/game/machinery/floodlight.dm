@@ -11,9 +11,9 @@
 	var/open = 0
 	var/brightness_on = 8		//can't remember what the maxed out value is
 
-/obj/machinery/floodlight/New()
+/obj/machinery/floodlight/Initialize()
+	. = ..()
 	cell = new(src)
-	..()
 
 /obj/machinery/floodlight/update_icon()
 	overlays.Cut()
@@ -96,7 +96,7 @@
 	update_icon()
 
 /obj/machinery/floodlight/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if(!open)
 			if(unlocked)
 				unlocked = 0
@@ -105,7 +105,7 @@
 				unlocked = 1
 				to_chat(user, "You unscrew the battery panel.")
 
-	if(W.is_crowbar())
+	if(W.get_tool_quality(TOOL_CROWBAR))
 		if(unlocked)
 			if(open)
 				open = 0

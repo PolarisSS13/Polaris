@@ -23,8 +23,8 @@
 	var/obj/structure/reagent_dispensers/watertank/tank
 
 
-/mob/living/bot/farmbot/New(var/newloc, var/newTank)
-	..(newloc)
+/mob/living/bot/farmbot/Initialize(var/ml, var/newTank)
+	. = ..(ml)
 	if(!newTank)
 		newTank = new /obj/structure/reagent_dispensers/watertank(src)
 	tank = newTank
@@ -279,7 +279,7 @@
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
@@ -334,8 +334,8 @@
 	w_class = ITEMSIZE_NORMAL
 
 
-/obj/item/weapon/farmbot_arm_assembly/New(var/newloc, var/theTank)
-	..(newloc)
+/obj/item/weapon/farmbot_arm_assembly/Initialize(var/ml, var/theTank)
+	. = ..(ml)
 	if(!theTank) // If an admin spawned it, it won't have a watertank it, so lets make one for em!
 		tank = new /obj/structure/reagent_dispensers/watertank(src)
 	else

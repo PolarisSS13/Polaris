@@ -1,4 +1,3 @@
-
 /obj/machinery/pump
 	name = "fluid pump"
 	desc = "A fluid pumping machine."
@@ -28,56 +27,17 @@
 	create_reagents(200)
 	. = ..()
 	default_apply_parts()
-
-	if(ispath(cell))
-		cell = new cell(src)
-
-	else
-		cell = default_use_hicell()
+	cell = default_use_hicell()
 
 	Output = new(src)
 
 	RefreshParts()
 	update_icon()
 
-/obj/machinery/pump/update_icon()
-	..()
-	cut_overlays()
-	add_overlay("[icon_state]-tank")
-	if(!(cell?.check_charge(active_power_usage)))
-		add_overlay("[icon_state]-lowpower")
-
-	if(reagents.total_volume >= 1)
-		var/image/I = image(icon, "[icon_state]-volume")
-		I.color = reagents.get_color()
-		add_overlay(I)
-	add_overlay("[icon_state]-glass")
-
-	if(open)
-		add_overlay("[icon_state]-open")
-		if(istype(cell))
-			add_overlay("[icon_state]-cell")
-
-		if(panel_open)
-			add_overlay("[icon_state]-panel")
-
-	icon_state = "[initial(icon_state)][on ? "-running" : ""]"
-
-/obj/machinery/pump/process()
-	if(!on)
-		return
-
-	if(!anchored || !(cell?.checked_use(active_power_usage)))
-		toggle(FALSE)
-		return
-
-	pump_reagents()
-	update_icon()
-
-	if(Output.get_pairing())
-		reagents.trans_to_holder(Output.reagents, Output.reagents.maximum_volume)
-		if(prob(5))
-			visible_message(SPAN_NOTICE("\The [src] gurgles as it exports fluid."))
+/obj/machinery/pump/Destroy()
+	QDEL_NULL(cell)
+	QDEL_NULL(Output)
+	. = ..()
 
 /obj/machinery/pump/RefreshParts()
 	var/obj/item/weapon/stock_parts/manipulator/SM = locate() in component_parts
@@ -97,12 +57,52 @@
 	src.reagents.trans_to_holder(R, src.reagents.total_volume)
 	qdel(src.reagents)
 	src.reagents = R
+	
+/obj/machinery/pump/update_icon()
+	..()
+	cut_overlays()
+	add_overlay("[icon_state]-tank")
+	if(!(cell?.check_charge(active_power_usage)))
+		add_overlay("[icon_state]-lowpower")
 
-// Toggles the power state, if possible.
+	if(reagents.total_volume >= 1)
+		var/image/I = image(icon, "[icon_state]-volume")
+		I.color = reagents.get_color()
+		add_overlay(I)
+	add_overlay("[icon_state]-glass")
+
+	if(open)
+		add_overlay("[icon_state]-open")
+		if(istype(cell))
+			add_overlay("[icon_state]-cell")
+
+	icon_state = "[initial(icon_state)][on ? "-running" : ""]"
+
+/obj/machinery/pump/process()
+	if(!on)
+		return
+	
+	if(!anchored || !(cell?.use(active_power_usage)))
+		set_state(FALSE)
+		return
+
+	var/turf/T = get_turf(src)
+	if(!istype(T))
+		return
+	T.pump_reagents(reagents, reagents_per_cycle)
+	update_icon()
+
+	if(Output.get_pairing())
+		reagents.trans_to_holder(Output.reagents, Output.reagents.maximum_volume)
+		if(prob(5))
+			visible_message("<span class='notice'>\The [src] gurgles as it pumps fluid.</span>")
+
+
+// Sets the power state, if possible.
 // Returns TRUE/FALSE on power state changing
 // var/target = target power state
 // var/message = TRUE/FALSE whether to make a message about state change
-/obj/machinery/pump/proc/toggle(var/target, var/message = TRUE)
+/obj/machinery/pump/proc/set_state(var/target, var/message = TRUE)
 	if(target == on)
 		return FALSE
 
@@ -123,8 +123,8 @@
 	return attack_hand(user)
 
 /obj/machinery/pump/attack_ai(mob/user)
-	if(!toggle(!on))
-		to_chat(user, SPAN_NOTICE("You try to toggle \the [src] but it does not respond."))
+	if(!set_state(!on))
+		to_chat(user, "<span class='notice'>You try to toggle \the [src] but it does not respond.</span>")
 
 /obj/machinery/pump/attack_hand(mob/user)
 	if(open && istype(cell))
@@ -132,83 +132,74 @@
 		cell.add_fingerprint(user)
 		cell.update_icon()
 		cell = null
-		toggle(FALSE)
-		to_chat(user, SPAN_NOTICE("You remove the power cell."))
+		set_state(FALSE)
+		to_chat(user, "<span class='notice'>You remove the power cell.</span>")
 		return
 
-	if(!toggle(!on))
-		to_chat(user, SPAN_NOTICE("You try to toggle \the [src] but it does not respond."))
+	if(!set_state(!on))
+		to_chat(user, "<span class='notice'>You try to toggle \the [src] but it does not respond.</span>")
 
-/obj/machinery/pump/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_screwdriver())
-		if(!open)
-			to_chat(user, SPAN_NOTICE("You [unlocked ? "screw" : "unscrew"] the battery panel."))
-			unlocked = !unlocked
-		else if(!cell)
-			default_deconstruction_screwdriver(user, W)
-			update_icon()
-			return
+/obj/machinery/pump/attackby(obj/item/weapon/W, mob/user)
+	. = TRUE
+	if(W.get_tool_quality(TOOL_SCREWDRIVER) && !open)
+		to_chat(user, SPAN_NOTICE("You [unlocked ? "screw" : "unscrew"] the battery panel."))
+		unlocked = !unlocked
 
-	else if(W.is_crowbar())
-		if(unlocked)
-			if(open)
-				if(panel_open && (alert(usr,"Confirm deconstruction.", "Deconstruction","No","Yes") == "Yes") && default_deconstruction_crowbar(user, W))
-					return
-
-				open = FALSE
-				to_chat(user, SPAN_NOTICE("You pry the battery panel into place."))
-			else
-				open = TRUE
-				to_chat(user, SPAN_NOTICE("You remove the battery panel."))
-
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_CROWBAR) && unlocked)
+		to_chat(user, open ? \
+			"<span class='notice'>You crowbar the battery panel in place.</span>" : \
+			"<span class='notice'>You remove the battery panel.</span>" \
+		)
+		open = !open
+	
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		if(on)
-			to_chat(user, SPAN_NOTICE("\The [src] is active. Turn it off before trying to move it!"))
-			return
+			to_chat(user, "<span class='notice'>\The [src] is active. Turn it off before trying to move it!</span>")
+			return FALSE
 		default_unfasten_wrench(user, W, 2 SECONDS)
 
-	else if(istype(W, /obj/item/weapon/cell))
-		if(open)
-			if(panel_open)
-				to_chat(user, SPAN_NOTICE("The cell can't be connected directly to the machine's wires. Replace the maintenance panel."))
-			if(cell)
-				to_chat(user, SPAN_NOTICE("There is a power cell already installed."))
-			else
-				user.drop_from_inventory(W)
-				W.loc = src
-				cell = W
-				to_chat(user, SPAN_NOTICE("You insert the power cell."))
+	else if(istype(W, /obj/item/weapon/cell) && open)
+		if(istype(cell))
+			to_chat(user, "<span class='notice'>There is a power cell already installed.</span>")
+			return FALSE
+		user.drop_from_inventory(W, src)
+		to_chat(user, "<span class='notice'>You insert the power cell.</span>")
+
 	else
 		. = ..()
+
 	RefreshParts()
 	update_icon()
 
-/obj/machinery/pump/proc/pump_reagents()
-	var/turf/T = get_turf(src)
 
-	var/obj/structure/geyser/Geyser = locate() in T
-	if(Geyser?.reagents.total_volume)
-		Geyser.reagents.trans_to_holder(reagents, reagents_per_cycle)
+/turf/proc/pump_reagents()
+	return
 
-	else if(istype(T, /turf/simulated/floor/water))
-		reagents.add_reagent("water", reagents_per_cycle)
+/turf/simulated/floor/lava/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("mineralizedfluid", round(volume / 2, 0.1))
 
-		if(T.temperature <= T0C)
-			reagents.add_reagent("ice", round(reagents_per_cycle / 2, 0.1))
 
-		if(istype(T,/turf/simulated/floor/water/pool))
-			reagents.add_reagent("chlorine", round(reagents_per_cycle / 10, 0.1))
+/turf/simulated/floor/water/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("water", round(volume, 0.1))
 
-		else if(istype(T,/turf/simulated/floor/water/contaminated))
-			reagents.add_reagent("vatstabilizer", round(reagents_per_cycle / 2))
+	if(temperature <= T0C)
+		R.add_reagent("ice", round(volume / 2, 0.1))
 
-		if(T.loc.name == "Sea")	// Saltwater.
-			reagents.add_reagent("sodiumchloride", round(reagents_per_cycle / 10, 0.1))
+	for(var/turf/simulated/mineral/M in orange(5))
+		if(istype(M.mineral, /obj/effect/mineral))
+			var/obj/effect/mineral/ore = M.mineral
+			reagents.add_reagent(ore.ore_reagent, round(volume / 2, 0.1))
 
-		for(var/turf/simulated/mineral/MT in range(5))
-			if(MT.mineral)
-				var/obj/effect/mineral/OR = MT.mineral
-				reagents.add_reagent(OR.ore_reagent, round(reagents_per_cycle, 0.1))
+/turf/simulated/floor/water/pool/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("chlorine", round(volume / 10, 0.1))
 
-	else if(istype(T, /turf/simulated/floor/lava))
-		reagents.add_reagent("mineralizedfluid", round(reagents_per_cycle / 2, 0.1))
+/turf/simulated/floor/water/deep/pool/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("chlorine", round(volume / 10, 0.1))
+
+/turf/simulated/floor/water/contaminated/pump_reagents(var/datum/reagents/R, var/volume)
+	. = ..()
+	R.add_reagent("vatstabilizer", round(volume / 2, 0.1))

@@ -12,13 +12,13 @@
 	var/active_force = 55
 	var/inactive_force = 10
 
-/obj/item/weapon/chainsaw/New()
+/obj/item/weapon/chainsaw/Initialize()
 	var/datum/reagents/R = new/datum/reagents(max_fuel)
 	reagents = R
 	R.my_atom = src
 	R.add_reagent("fuel", max_fuel)
 	START_PROCESSING(SSobj, src)
-	..()
+	. = ..()
 
 /obj/item/weapon/chainsaw/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -116,11 +116,6 @@
 	. = ..()
 	if(max_fuel && get_dist(user, src) == 0)
 		. += "<span class = 'notice'>The [src] feels like it contains roughtly [get_fuel()] units of fuel left.</span>"
-
-/obj/item/weapon/chainsaw/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	to_chat(viewers(user), "<span class='danger'>[user] is lying down and pulling the chainsaw into [TU.him], it looks like [TU.he] [TU.is] trying to commit suicide!</span>")
-	return(BRUTELOSS)
 
 /obj/item/weapon/chainsaw/update_icon()
 	if(on)

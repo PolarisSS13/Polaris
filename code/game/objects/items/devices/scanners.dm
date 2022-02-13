@@ -26,19 +26,18 @@ HALOGEN COUNTER	- Radcount on mobs
 	var/advscan = 0
 	var/showadvscan = 1
 
-/obj/item/device/healthanalyzer/New()
+/obj/item/device/healthanalyzer/Initialize()
 	if(advscan >= 1)
 		verbs += /obj/item/device/healthanalyzer/proc/toggle_adv
-	..()
+	. = ..()
 
 /obj/item/device/healthanalyzer/do_surgery(mob/living/M, mob/living/user)
-	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
-		return ..()
 	scan_mob(M, user) //default surgery behaviour is just to scan as usual
-	return 1
+	return TRUE
 
 /obj/item/device/healthanalyzer/attack(mob/living/M, mob/living/user)
 	scan_mob(M, user)
+	return TRUE
 
 /obj/item/device/healthanalyzer/proc/scan_mob(mob/living/M, mob/living/user)
 	var/dat = ""
@@ -375,8 +374,8 @@ HALOGEN COUNTER	- Radcount on mobs
 	var/details = 0
 	var/recent_fail = 0
 
-/obj/item/device/mass_spectrometer/New()
-	..()
+/obj/item/device/mass_spectrometer/Initialize()
+	. = ..()
 	var/datum/reagents/R = new/datum/reagents(5)
 	reagents = R
 	R.my_atom = src

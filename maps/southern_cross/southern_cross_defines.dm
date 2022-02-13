@@ -79,7 +79,12 @@
 							NETWORK_SUPPLY
 							)
 	usable_email_tlds = list("freemail.nt")
-	allowed_spawns = list("Arrivals Shuttle","Gateway", "Cryogenic Storage", "Cyborg Storage")
+	allowed_spawns = list(
+		"Arrivals Shuttle",
+		"Checkpoint",
+		"Cryogenic Storage",
+		"Cyborg Storage"
+	)
 
 
 	use_overmap = 			TRUE
@@ -127,19 +132,24 @@
 	// First, place a bunch of submaps. This comes before tunnel/forest generation as to not interfere with the submap.
 
 	// Cave submaps are first.
-	seed_submaps(list(Z_LEVEL_SURFACE_MINE), 75, /area/surface/cave/unexplored/normal, /datum/map_template/surface/mountains/normal)
-	seed_submaps(list(Z_LEVEL_SURFACE_MINE), 75, /area/surface/cave/unexplored/deep, /datum/map_template/surface/mountains/deep)
+	SSmapping.seed_area_submaps(list(Z_LEVEL_SURFACE_MINE), 75, /area/surface/cave/unexplored/normal, /datum/map_template/surface/mountains/normal)
+	SSmapping.seed_area_submaps(list(Z_LEVEL_SURFACE_MINE), 75, /area/surface/cave/unexplored/deep, /datum/map_template/surface/mountains/deep)
 	// Plains to make them less plain.
-	seed_submaps(list(Z_LEVEL_SURFACE), 100, /area/surface/outside/plains/normal, /datum/map_template/surface/plains) // Center area is WIP until map editing settles down.
+	SSmapping.seed_area_submaps(list(Z_LEVEL_SURFACE), 100, /area/surface/outside/plains/normal, /datum/map_template/surface/plains) // Center area is WIP until map editing settles down.
 	// Wilderness is next.
-	seed_submaps(list(Z_LEVEL_SURFACE_WILD), 75, /area/surface/outside/wilderness/normal, /datum/map_template/surface/wilderness/normal)
-	seed_submaps(list(Z_LEVEL_SURFACE_WILD), 75, /area/surface/outside/wilderness/deep, /datum/map_template/surface/wilderness/deep)
+	SSmapping.seed_area_submaps(list(Z_LEVEL_SURFACE_WILD), 75, /area/surface/outside/wilderness/normal, /datum/map_template/surface/wilderness/normal)
+	SSmapping.seed_area_submaps(list(Z_LEVEL_SURFACE_WILD), 75, /area/surface/outside/wilderness/deep, /datum/map_template/surface/wilderness/deep)
 	// If Space submaps are made, add a line to make them here as well.
 
 	// Now for the tunnels.
 	new /datum/random_map/automata/cave_system/no_cracks(null, 1, 1, Z_LEVEL_SURFACE_MINE, world.maxx, world.maxy) // Create the mining Z-level.
+	new /datum/random_map/noise/sif/underground(null, 1, 1, Z_LEVEL_SURFACE_MINE, world.maxx, world.maxy)
 	new /datum/random_map/noise/ore(null, 1, 1, Z_LEVEL_SURFACE_MINE, 64, 64)         // Create the mining ore distribution map.
-	// Todo: Forest generation.
+
+	// Forest/wilderness generation.
+	new /datum/random_map/noise/sif(       null, 1, 1, Z_LEVEL_SURFACE,      world.maxx, world.maxy)
+	new /datum/random_map/noise/sif/forest(null, 1, 1, Z_LEVEL_SURFACE_WILD, world.maxx, world.maxy)
+
 	return 1
 
 // Skybox Settings
@@ -157,6 +167,7 @@
 	flags = MAP_LEVEL_STATION|MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_CONSOLES
 	holomap_legend_x = 220
 	holomap_legend_y = 160
+	event_regions = list(EVENT_REGION_SPACESTATION, EVENT_REGION_PLAYER_MAIN_AREA)
 
 /datum/map_z_level/southern_cross/station/station_one
 	z = Z_LEVEL_STATION_ONE
@@ -187,24 +198,28 @@
 	name = "Empty"
 	flags = MAP_LEVEL_PLAYER
 	transit_chance = 76
+	event_regions = list(EVENT_REGION_DEEPSPACE)
 
 /datum/map_z_level/southern_cross/surface
 	z = Z_LEVEL_SURFACE
 	name = "Plains"
 	flags = MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONSOLES
 	base_turf = /turf/simulated/floor/outdoors/rocks
+	event_regions = list(EVENT_REGION_PLANETSURFACE, EVENT_REGION_PLAYER_MAIN_AREA)
 
 /datum/map_z_level/southern_cross/surface_mine
 	z = Z_LEVEL_SURFACE_MINE
 	name = "Mountains"
 	flags = MAP_LEVEL_CONTACT|MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONSOLES
 	base_turf = /turf/simulated/floor/outdoors/rocks
+	event_regions = list(EVENT_REGION_PLANETSURFACE, EVENT_REGION_SUBTERRANEAN)
 
 /datum/map_z_level/southern_cross/surface_wild
 	z = Z_LEVEL_SURFACE_WILD
 	name = "Wilderness"
 	flags = MAP_LEVEL_PLAYER|MAP_LEVEL_SEALED|MAP_LEVEL_CONTACT|MAP_LEVEL_CONSOLES
 	base_turf = /turf/simulated/floor/outdoors/rocks
+	event_regions = list(EVENT_REGION_PLANETSURFACE)
 
 /datum/map_z_level/southern_cross/misc
 	z = Z_LEVEL_MISC
@@ -224,28 +239,28 @@
 
 //Teleport to Mine
 
-/obj/effect/step_trigger/teleporter/mine/to_mining/New()
-	..()
+/obj/effect/step_trigger/teleporter/mine/to_mining/Initialize()
+	. = ..()
 	teleport_x = src.x
 	teleport_y = 2
 	teleport_z = Z_LEVEL_SURFACE_MINE
 
-/obj/effect/step_trigger/teleporter/mine/from_mining/New()
-	..()
+/obj/effect/step_trigger/teleporter/mine/from_mining/Initialize()
+	. = ..()
 	teleport_x = src.x
 	teleport_y = world.maxy - 1
 	teleport_z = Z_LEVEL_SURFACE
 
 //Teleport to Wild
 
-/obj/effect/step_trigger/teleporter/wild/to_wild/New()
-	..()
+/obj/effect/step_trigger/teleporter/wild/to_wild/Initialize()
+	. = ..()
 	teleport_x = src.x
 	teleport_y = 2
 	teleport_z = Z_LEVEL_SURFACE_WILD
 
-/obj/effect/step_trigger/teleporter/wild/from_wild/New()
-	..()
+/obj/effect/step_trigger/teleporter/wild/from_wild/Initialize()
+	. = ..()
 	teleport_x = src.x
 	teleport_y = world.maxy - 1
 	teleport_z = Z_LEVEL_SURFACE_MINE

@@ -28,7 +28,7 @@
 	desc = "The top of this twisted chunk of metal is faintly stamped with a five pointed star. 'Property of US Army, Pascal B - 1957'."
 	catalogue_data = list(/datum/category_item/catalogue/information/objects/pascalb)
 
-/obj/item/poi/pascalb/New()
+/obj/item/poi/pascalb/Initialize()
 	START_PROCESSING(SSobj, src)
 	return ..()
 
@@ -66,6 +66,8 @@
 	catalogue_data = list(/datum/category_item/catalogue/information/objects/oldreactor)
 	climbable = 0
 	door_anim_time = 0 //Unsupported
+	open_sound = 'sound/machines/door/hatchforced.ogg'
+	close_sound = 'sound/machines/door/hatchclose.ogg'
 
 	starts_with = list(
 		/obj/item/weapon/fuel_assembly/deuterium = 6)
@@ -76,7 +78,7 @@
 	desc = "This broken hunk of machinery looks extremely dangerous."
 	catalogue_data = list(/datum/category_item/catalogue/information/objects/oldreactor)
 
-/obj/item/poi/brokenoldreactor/New()
+/obj/item/poi/brokenoldreactor/Initialize()
 	START_PROCESSING(SSobj, src)
 	return ..()
 

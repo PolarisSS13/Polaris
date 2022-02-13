@@ -4,8 +4,8 @@
 	unacidable = 1
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_DATA = 2, TECH_BIO = 2)
 
-/obj/item/integrated_circuit/reagent/New()
-	..()
+/obj/item/integrated_circuit/reagent/Initialize()
+	. = ..()
 	if(volume)
 		create_reagents(volume)
 
@@ -38,7 +38,7 @@
 
 /obj/item/integrated_circuit/reagent/smoke/do_work()
 	playsound(src, 'sound/effects/smoke.ogg', 50, 1, -3)
-	var/datum/effect/effect/system/smoke_spread/chem/smoke_system = new()
+	var/datum/effect_system/smoke_spread/chem/smoke_system = new()
 	smoke_system.set_up(reagents, 10, 0, get_turf(src))
 	spawn(0)
 		for(var/i = 1 to 8)

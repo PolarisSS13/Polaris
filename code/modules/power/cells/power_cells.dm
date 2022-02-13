@@ -5,8 +5,8 @@
 	maxcharge = 500
 	matter = list(MAT_STEEL = 700, "glass" = 40)
 
-/obj/item/weapon/cell/crap/empty/New()
-	..()
+/obj/item/weapon/cell/crap/empty/Initialize()
+	. = ..()
 	charge = 0
 
 /obj/item/weapon/cell/secborg
@@ -15,8 +15,8 @@
 	maxcharge = 600	//600 max charge / 100 charge per shot = six shots
 	matter = list(MAT_STEEL = 700, "glass" = 40)
 
-/obj/item/weapon/cell/secborg/empty/New()
-	..()
+/obj/item/weapon/cell/secborg/empty/Initialize()
+	. = ..()
 	charge = 0
 	update_icon()
 
@@ -33,8 +33,8 @@
 	maxcharge = 10000
 	matter = list(MAT_STEEL = 700, "glass" = 60)
 
-/obj/item/weapon/cell/high/empty/New()
-	..()
+/obj/item/weapon/cell/high/empty/Initialize()
+	. = ..()
 	charge = 0
 	update_icon()
 
@@ -45,8 +45,8 @@
 	maxcharge = 20000
 	matter = list(MAT_STEEL = 700, "glass" = 70)
 
-/obj/item/weapon/cell/super/empty/New()
-	..()
+/obj/item/weapon/cell/super/empty/Initialize()
+	. = ..()
 	charge = 0
 	update_icon()
 
@@ -57,8 +57,8 @@
 	maxcharge = 30000
 	matter = list(MAT_STEEL = 700, "glass" = 80)
 
-/obj/item/weapon/cell/hyper/empty/New()
-	..()
+/obj/item/weapon/cell/hyper/empty/Initialize()
+	. = ..()
 	charge = 0
 	update_icon()
 
@@ -112,7 +112,8 @@
 	var/used = FALSE
 
 /obj/item/device/fbp_backup_cell/Initialize()
-	overlays += image(icon,"[icon_state]1")
+	. = ..()
+	add_overlay("[icon_state]1")
 
 /obj/item/device/fbp_backup_cell/attack(mob/living/M as mob, mob/user as mob)
 	if(!used && ishuman(M))
@@ -134,7 +135,7 @@
 		return
 	used = TRUE
 	desc += " This one has already been used."
-	overlays.Cut()
+	cut_overlays()
 	target.adjust_nutrition(amount)
 	user.custom_emote(message = "connects \the [src] to [user == target ? "their" : "[target]'s"] charging port, expending it.")
 

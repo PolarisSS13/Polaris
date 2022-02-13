@@ -452,8 +452,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	icon_state = "datadisk2"
 	var/company = ""
 
-/obj/item/weapon/disk/limb/New(var/newloc)
-	..()
+/obj/item/weapon/disk/limb/Initialize()
+	. = ..()
 	if(company)
 		name = "[company] [initial(name)]"
 

@@ -13,16 +13,10 @@
 	var/start_pressure = ONE_ATMOSPHERE
 	var/maximum_pressure = 90 * ONE_ATMOSPHERE
 
-/obj/machinery/portable_atmospherics/New()
-	..()
-
-	air_contents.volume = volume
-	air_contents.temperature = T20C
-
-	return 1
-
 /obj/machinery/portable_atmospherics/Initialize()
 	..()
+	air_contents.volume = volume
+	air_contents.temperature = T20C
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/machinery/portable_atmospherics/LateInitialize()
@@ -115,7 +109,7 @@
 		update_icon()
 		return
 
-	else if (W.is_wrench())
+	else if (W.get_tool_quality(TOOL_WRENCH))
 		if(connected_port)
 			disconnect()
 			to_chat(user, "<span class='notice'>You disconnect \the [src] from the port.</span>")
@@ -171,7 +165,7 @@
 		power_change()
 		return
 
-	if(I.is_screwdriver() && removeable_cell)
+	if(I.get_tool_quality(TOOL_SCREWDRIVER) && removeable_cell)
 		if(!cell)
 			to_chat(user, "<span class='warning'>There is no power cell installed.</span>")
 			return

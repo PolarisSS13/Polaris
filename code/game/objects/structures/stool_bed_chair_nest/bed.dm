@@ -22,8 +22,8 @@
 	var/base_icon = "bed"
 	var/applies_material_colour = 1 //Set to 0 whenever defining a custom colour or it will apply additively to the material, or when no colour overlay should be present.
 
-/obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
-	..(newloc)
+/obj/structure/bed/Initialize(var/ml, var/new_material, var/new_padding_material)
+	. = ..(ml)
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(new_material)
@@ -87,7 +87,7 @@
 				return
 
 /obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		playsound(src, W.usesound, 50, 1)
 		dismantle()
 		qdel(src)
@@ -118,7 +118,7 @@
 		add_padding(padding_type)
 		return
 
-	else if(W.is_wirecutter())
+	else if(W.get_tool_quality(TOOL_WIRECUTTER))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
@@ -173,19 +173,19 @@
 	icon_state = "psychbed"
 	base_icon = "psychbed"
 
-/obj/structure/bed/psych/New(var/newloc)
-	..(newloc,"wood","leather")
+/obj/structure/bed/psych/Initialize(var/ml)
+	. = ..(ml, MAT_WOOD, MAT_LEATHER)
 
-/obj/structure/bed/padded/New(var/newloc)
-	..(newloc,"plastic","cotton")
+/obj/structure/bed/padded/Initialize(var/ml)
+	. = ..(ml, MAT_PLASTIC, MAT_CLOTH)
 
 /obj/structure/bed/double
 	name = "double bed"
 	icon_state = "doublebed"
 	base_icon = "doublebed"
 
-/obj/structure/bed/double/padded/New(var/newloc)
-	..(newloc,"wood","cotton")
+/obj/structure/bed/double/padded/Initialize(var/ml)
+	. = ..(ml, MAT_WOOD, MAT_CLOTH)
 
 /obj/structure/bed/double/post_buckle_mob(mob/living/M as mob)
 	if(M.buckled == src)
@@ -218,7 +218,7 @@
 	return
 
 /obj/structure/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_wrench() || istype(W,/obj/item/stack) || W.is_wirecutter())
+	if(W.get_tool_quality(TOOL_WRENCH) || istype(W,/obj/item/stack) || W.get_tool_quality(TOOL_WIRECUTTER))
 		return
 	else if(istype(W,/obj/item/roller_holder))
 		if(has_buckled_mobs())
@@ -277,8 +277,8 @@
 	icon_state = "rollerbed"
 	var/obj/item/roller/held
 
-/obj/item/roller_holder/New()
-	..()
+/obj/item/roller_holder/Initialize()
+	. = ..()
 	held = new /obj/item/roller(src)
 
 /obj/item/roller_holder/attack_self(mob/user as mob)

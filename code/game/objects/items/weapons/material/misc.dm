@@ -23,6 +23,7 @@
 	applies_material_colour = 0
 	drop_sound = 'sound/items/drop/axe.ogg'
 	pickup_sound = 'sound/items/pickup/axe.ogg'
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_STANDARD, TOOL_KNIFE = TOOL_QUALITY_STANDARD)
 
 /obj/item/weapon/material/knife/machete/hatchet/stone
 	name = "sharp rock"
@@ -31,6 +32,7 @@
 	icon_state = "rock"
 	item_state = "rock"
 	attack_verb = list("chopped", "torn", "cut")
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_POOR, TOOL_KNIFE = TOOL_QUALITY_POOR)
 
 /obj/item/weapon/material/knife/machete/hatchet/stone/set_material(var/new_material)
 	var/old_name = name
@@ -44,6 +46,7 @@
 	attack_verb = list("ripped", "torn", "cut")
 	can_cleave = FALSE
 	var/hits = 0
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_POOR, TOOL_KNIFE = TOOL_QUALITY_POOR)
 
 /obj/item/weapon/material/knife/machete/hatchet/unathiknife/attack(mob/M as mob, mob/user as mob)
 	if(hits > 0)
@@ -209,11 +212,6 @@
 						visible_message("<span class='danger'>\The [src] has disarmed [H]!</span>")
 						playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 						return
-
-/obj/item/weapon/material/whip/suicide_act(mob/user)
-	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	user.visible_message(span("danger", "\The [user] [T.is] strangling [T.himself] with \the [src]! It looks like [T.he] [T.is] trying to commit suicide."), span("danger", "You start to strangle yourself with \the [src]!"), span("danger", "You hear the sound of someone choking!"))
-	return (OXYLOSS)
 
 /obj/item/weapon/material/whip/attack_self(mob/user)
 	user.visible_message("<span class='warning'>\The [user] cracks \the [src]!</span>")

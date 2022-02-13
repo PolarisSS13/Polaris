@@ -22,11 +22,6 @@
 	var/camo_net = FALSE
 	var/stun_length = 0.25 SECONDS
 
-/obj/item/weapon/beartrap/suicide_act(mob/user)
-	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	to_chat(viewers(user),"<span class='danger'>[user] is putting the [src.name] on [T.his] head! It looks like [T.hes] trying to commit suicide.</span>")
-	return (BRUTELOSS)
-
 /obj/item/weapon/beartrap/proc/can_use(mob/user)
 	return (user.IsAdvancedToolUser() && !issilicon(user) && !user.stat && !user.restrained())
 
@@ -249,7 +244,7 @@
 
 		var/inc_damage = W.force
 
-		if(W.is_wirecutter())
+		if(W.get_tool_quality(TOOL_WIRECUTTER))
 			if(!shock(user, 100, pick(BP_L_HAND, BP_R_HAND)))
 				playsound(src, W.usesound, 100, 1)
 				inc_damage *= 3
@@ -322,7 +317,7 @@
 						var/mob/living/L = user
 						L.electrocute_act(PN_damage, src, 0.8)
 
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			if(user.stunned)

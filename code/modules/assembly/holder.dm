@@ -103,7 +103,7 @@
 	..()
 
 /obj/item/device/assembly_holder/attackby(var/obj/item/weapon/W, var/mob/user)
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'> BUG:Assembly part missing, please report this!</span>")
 			return
@@ -170,8 +170,8 @@
 /obj/item/device/assembly_holder/timer_igniter
 	name = "timer-igniter assembly"
 
-/obj/item/device/assembly_holder/timer_igniter/New()
-	..()
+/obj/item/device/assembly_holder/timer_igniter/Initialize()
+	. = ..()
 
 	var/obj/item/device/assembly/igniter/ign = new(src)
 	ign.secured = 1

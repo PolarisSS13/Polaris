@@ -82,8 +82,8 @@
 /obj/effect/plant/single
 	spread_chance = 0
 
-/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent)
-	..()
+/obj/effect/plant/Initialize(var/ml, var/datum/seed/newseed, var/obj/effect/plant/newparent)
+	. = ..(ml)
 
 	if(!newparent)
 		parent = src
@@ -91,11 +91,8 @@
 		parent = newparent
 
 	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
-	if(!plant_controller)
 		to_world("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	if(!istype(newseed))
 		newseed = plant_controller.seeds[DEFAULT_SEED]
@@ -242,7 +239,7 @@
 	user.setClickCooldown(user.get_attack_speed(W))
 	plant_controller.add_plant(src)
 
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/surgical/scalpel))
+	if(W.get_tool_quality(TOOL_WIRECUTTER) || W.get_tool_quality(TOOL_SCALPEL))
 		if(sampled)
 			to_chat(user, "<span class='warning'>\The [src] has already been sampled recently.</span>")
 			return

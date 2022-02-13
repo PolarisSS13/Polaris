@@ -83522,7 +83522,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = -3
 	},
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker{
 	pixel_x = 3
 	},
 /obj/item/weapon/reagent_containers/food/condiment/small/sugar,
@@ -85840,7 +85840,7 @@
 /obj/item/weapon/reagent_containers/food/condiment/small/saltshaker{
 	pixel_x = -3
 	},
-/obj/item/weapon/reagent_containers/food/condiment/small/peppermill{
+/obj/item/weapon/reagent_containers/food/condiment/small/peppershaker{
 	pixel_x = 3
 	},
 /turf/simulated/floor/tiled/white,
@@ -106149,7 +106149,8 @@
 	dir = 8
 	},
 /obj/structure/closet/secure_closet/guncabinet/sidearm{
-	anchored = 1
+	anchored = 1;
+	req_one_access = list(3, 20, 30, 39, 56, 57, 58)
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
@@ -111650,7 +111651,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/weapon/reagent_containers/food/snacks/monkeycube/wrapped,
+/obj/item/weapon/reagent_containers/food/snacks/cube/monkeycube/wrapped,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 6
 	},

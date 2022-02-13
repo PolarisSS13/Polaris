@@ -43,7 +43,7 @@
 		else
 			light = new /datum/light_source(src, .)
 
-/atom/New()
+/atom/Initialize()
 	. = ..()
 
 	if(light_power && light_range)

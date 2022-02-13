@@ -35,8 +35,8 @@ Protectiveness | Armor %
 	var/material_slowdown_modifier = 0
 	var/material_slowdown_multiplier = 0.5
 
-/obj/item/clothing/New(var/newloc, var/material_key)
-	..(newloc)
+/obj/item/clothing/Initialize(var/ml, var/material_key)
+	. = ..(ml)
 	if(!material_key)
 		material_key = default_material
 	if(material_key) // May still be null if a material was not specified as a default.
@@ -124,7 +124,7 @@ Protectiveness | Armor %
 		var/turf/picked = pick(turfs)
 		if(!isturf(picked)) return
 
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(src, 'sound/effects/teleport.ogg', 50, 1)

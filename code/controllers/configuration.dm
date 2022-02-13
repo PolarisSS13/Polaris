@@ -290,6 +290,9 @@ var/list/gamemode_cache = list()
 	// How strictly the loadout enforces object species whitelists
 	var/loadout_whitelist = LOADOUT_WHITELIST_LAX
 
+	// Whether whitelists are enforced for ears/tail/etc modifications
+	var/genemod_whitelist = FALSE
+
 	var/disable_webhook_embeds = FALSE
 
 /datum/configuration/New()
@@ -940,6 +943,9 @@ var/list/gamemode_cache = list()
 
 				if("enable_night_shifts")
 					config.enable_night_shifts = TRUE
+
+				if("genemod_whitelist")
+					config.genemod_whitelist = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

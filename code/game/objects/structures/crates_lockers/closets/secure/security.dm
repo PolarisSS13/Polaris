@@ -224,6 +224,8 @@
 	req_access = list(access_forensics_lockers)
 	closet_appearance = /decl/closet_appearance/cabinet/secure
 	door_anim_time = 0 //Unsupported
+	open_sound = 'sound/machines/closet/closet_wood_open.ogg'
+	close_sound = 'sound/machines/closet/closet_wood_close.ogg'
 
 	starts_with = list(
 		/obj/item/clothing/accessory/badge/holo/detective,

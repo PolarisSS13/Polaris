@@ -547,3 +547,7 @@ ENGINE_MAP Supermatter Engine,Edison's Bane
 # Controls how strictly the species whitelists on loadout entries are enforced
 # Possible values: 0 (Off), 1 (Lax, user must be whitelisted for the species), 2 (Strict, user must be the species)
 LOADOUT_WHITELIST 1
+
+# Enables whitelisting ckeys for ears/tail/etc modifications to players.
+# Uncomment to ENABLE the whitelist
+# GENEMOD_WHITELIST

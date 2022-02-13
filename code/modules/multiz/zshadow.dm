@@ -16,10 +16,11 @@
 /mob/zshadow/can_fall()
 	return FALSE
 
-/mob/zshadow/New(var/mob/L)
+INITIALIZE_IMMEDIATE(/mob/zshadow)
+/mob/zshadow/Initialize(var/ml, var/mob/L)
+	. = ..()
 	if(!istype(L))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	owner = L
 	sync_icon(L)
 
@@ -83,7 +84,7 @@
 		var/turf/simulated/open/OS = GetAbove(src)
 		while(OS && istype(OS))
 			if(!M.shadow)
-				M.shadow = new /mob/zshadow(M)
+				M.shadow = new /mob/zshadow(null, M)
 			M.shadow.forceMove(OS)
 			M = M.shadow
 			OS = GetAbove(M)

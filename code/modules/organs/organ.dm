@@ -62,37 +62,35 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/update_health()
 	return
 
-/obj/item/organ/New(var/mob/living/holder, var/internal)
-	..(holder)
+/obj/item/organ/Initialize(var/ml, var/internal)
+	. = ..(ml)
 	create_reagents(5)
 
-	if(isliving(holder))
-		src.owner = holder
-		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
+	if(isliving(loc))
+		owner = loc
+		w_class = max(src.w_class + mob_size_difference(owner.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		if(internal)
-			if(!LAZYLEN(holder.internal_organs))
-				holder.internal_organs = list()
-			if(!LAZYLEN(holder.internal_organs_by_name))
-				holder.internal_organs_by_name = list()
-
-			holder.internal_organs |= src
-			holder.internal_organs_by_name[organ_tag] = src
-
+			if(!LAZYLEN(owner.internal_organs))
+				owner.internal_organs = list()
+			if(!LAZYLEN(owner.internal_organs_by_name))
+				owner.internal_organs_by_name = list()
+			owner.internal_organs |= src
+			owner.internal_organs_by_name[organ_tag] = src
 		else
-			if(!LAZYLEN(holder.organs))
-				holder.organs = list()
-			if(!LAZYLEN(holder.organs_by_name))
-				holder.organs_by_name = list()
+			if(!LAZYLEN(owner.organs))
+				owner.organs = list()
+			if(!LAZYLEN(owner.organs_by_name))
+				owner.organs_by_name = list()
 
-			holder.organs |= src
-			holder.organs_by_name[organ_tag] = src
+			owner.organs |= src
+			owner.organs_by_name[organ_tag] = src
 
 	if(!max_damage)
 		max_damage = min_broken_damage * 2
-	if(iscarbon(holder))
-		var/mob/living/carbon/C = holder
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
 		species = GLOB.all_species[SPECIES_HUMAN]
-		if(holder.dna)
+		if(owner.dna)
 			dna = C.dna.Clone()
 			species = GLOB.all_species[dna.species]
 		else
@@ -114,8 +112,6 @@ var/list/organ_cache = list()
 
 	handle_organ_mod_special()
 
-/obj/item/organ/Initialize()
-	. = ..()
 	if(owner)
 		if(!meat_type)
 			if(owner.isSynthetic())
@@ -462,20 +458,11 @@ var/list/organ_cache = list()
 	return ..()
 
 /obj/item/organ/proc/can_butcher(var/obj/item/O, var/mob/living/user)
-	if(butcherable && meat_type)
-
-		if(istype(O, /obj/machinery/gibber))	// The great equalizer.
-			return TRUE
-
-		if(robotic >= ORGAN_ROBOT)
-			if(O.is_screwdriver())
-				return TRUE
-
-		else
-			if(is_sharp(O) && has_edge(O))
-				return TRUE
-
-	return FALSE
+	return (butcherable && meat_type) && ( \
+		istype(O, /obj/machinery/gibber) || \
+		(robotic >= ORGAN_ROBOT && O.get_tool_quality(TOOL_SCREWDRIVER)) || \
+		(O.sharp && O.edge)
+	)
 
 /obj/item/organ/proc/butcher(var/obj/item/O, var/mob/living/user, var/atom/newtarget)
 	if(robotic >= ORGAN_ROBOT)

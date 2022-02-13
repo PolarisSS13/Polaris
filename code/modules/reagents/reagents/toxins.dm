@@ -95,6 +95,7 @@
 	var/fire_mult = 30
 
 /datum/reagent/toxin/hydrophoron/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
 
@@ -106,6 +107,7 @@
 /datum/reagent/toxin/hydrophoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
+	..()
 	T.assume_gas("phoron", CEILING(volume/2, 1), T20C)
 	for(var/turf/simulated/floor/target_tile in range(0,T))
 		target_tile.assume_gas("phoron", volume/2, 400+T0C)
@@ -168,6 +170,7 @@
 	skin_danger = 1
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
@@ -189,6 +192,7 @@
 	..()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T, var/amount)
+	..()
 	if(!istype(T))
 		return
 	T.assume_gas("volatile_fuel", amount, T20C)
@@ -410,6 +414,7 @@
 	color = "#e67819"
 
 /datum/reagent/toxin/fertilizer/tannin/touch_obj(var/obj/O, var/volume)
+	..()
 	if(istype(O, /obj/item/stack/hairlesshide))
 		var/obj/item/stack/hairlesshide/HH = O
 		HH.rapidcure(round(volume))
@@ -425,6 +430,7 @@
 	strength = 4
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
+	..()
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		if(locate(/obj/effect/overlay/wallrot) in W)
@@ -433,6 +439,7 @@
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
 /datum/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/volume)
+	..()
 	if(istype(O, /obj/effect/plant))
 		qdel(O)
 	else if(istype(O, /obj/effect/alien/weeds/))

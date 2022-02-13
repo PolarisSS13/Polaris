@@ -16,6 +16,8 @@
 	harm_intent_damage = 3
 	friendly = "hugs"
 
+	organ_names = /decl/mob_organ_names/golem
+
 	melee_damage_lower = 30 // It has a built in esword.
 	melee_damage_upper = 30
 	attack_armor_pen = 20
@@ -71,7 +73,7 @@
 	..()
 	visible_message("\The [src] disintegrates!")
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
@@ -151,3 +153,6 @@
 /mob/living/simple_mob/mechanical/technomancer_golem/special_post_animation(atom/A)
 	casting = FALSE
 	ranged_post_animation(A)
+
+/decl/mob_organ_names/golem
+	hit_zones = list("helmet", "cuirass", "left tasset", "right tasset", "left gauntlet", "right gauntlet", "weapon")

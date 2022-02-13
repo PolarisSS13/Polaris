@@ -19,6 +19,8 @@
 	attacktext = list("clawed")
 	projectilesound = 'sound/weapons/Gunshot_old.ogg'
 
+	organ_names = /decl/mob_organ_names/hivebot
+
 	ai_holder_type = /datum/ai_holder/simple_mob/hivebot
 	say_list_type = /datum/say_list/hivebot
 
@@ -27,7 +29,7 @@
 	..()
 	visible_message(span("warning","\The [src] blows apart!"))
 	new /obj/effect/decal/cleanable/blood/gibs/robot(src.loc)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
@@ -53,3 +55,6 @@
 	conserve_ammo = TRUE
 	firing_lanes = TRUE
 	can_flee = FALSE // Fearless dumb machines.
+
+/decl/mob_organ_names/hivebot
+	hit_zones = list("central chassis", "positioning servo", "head", "sensor suite", "manipulator arm", "shoulder weapon mount", "weapons array", "front right leg", "front left leg", "rear left leg", "rear right leg")

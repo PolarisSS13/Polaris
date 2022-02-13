@@ -8,8 +8,8 @@
 	var/list/genes = list()
 	var/genesource = "unknown"
 
-/obj/item/weapon/disk/botany/New()
-	..()
+/obj/item/weapon/disk/botany/Initialize()
+	. = ..()
 	pixel_x = rand(-5,5)
 	pixel_y = rand(-5,5)
 
@@ -27,8 +27,8 @@
 	name = "flora disk box"
 	desc = "A box of flora data disks, apparently."
 
-/obj/item/weapon/storage/box/botanydisk/New()
-	..()
+/obj/item/weapon/storage/box/botanydisk/Initialize()
+	. = ..()
 	for(var/i = 0;i<7;i++)
 		new /obj/item/weapon/disk/botany(src)
 
@@ -96,7 +96,7 @@
 
 	if(default_deconstruction_screwdriver(user, W))
 		return
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		playsound(src, W.usesound, 100, 1)
 		to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]secure \the [src].</span>")
 		anchored = !anchored

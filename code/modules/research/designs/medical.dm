@@ -40,7 +40,7 @@
 	id = "scalpel_manager"
 	req_tech = list(TECH_BIO = 4, TECH_MATERIAL = 7, TECH_MAGNET = 5, TECH_DATA = 4)
 	materials = list (MAT_STEEL = 12500, "glass" = 7500, "silver" = 1500, "gold" = 1500, "diamond" = 750)
-	build_path = /obj/item/weapon/surgical/scalpel/manager
+	build_path = /obj/item/weapon/surgical/manager
 	sort_string = "KAAAD"
 
 /datum/design/item/medical/saw_manager

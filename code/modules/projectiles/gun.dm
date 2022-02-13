@@ -93,8 +93,8 @@
 
 	var/last_shot = 0			//records the last shot fired
 
-/obj/item/weapon/gun/New()
-	..()
+/obj/item/weapon/gun/Initialize()
+	. = ..()
 	for(var/i in 1 to firemodes.len)
 		firemodes[i] = new /datum/firemode(src, firemodes[i])
 
@@ -250,11 +250,11 @@
 		verbs += /obj/item/weapon/gun/verb/allow_dna
 		return
 
-	if(A.is_screwdriver())
+	if(A.get_tool_quality(TOOL_SCREWDRIVER))
 		if(dna_lock && attached_lock && !attached_lock.controller_lock)
 			to_chat(user, "<span class='notice'>You begin removing \the [attached_lock] from \the [src].</span>")
 			playsound(src, A.usesound, 50, 1)
-			if(do_after(user, 25 * A.toolspeed))
+			if(do_after(user, 25 * A.get_tool_speed(TOOL_SCREWDRIVER)))
 				to_chat(user, "<span class='notice'>You remove \the [attached_lock] from \the [src].</span>")
 				user.put_in_hands(attached_lock)
 				dna_lock = 0
@@ -307,6 +307,7 @@
 		src.add_fingerprint(usr)
 
 /obj/item/weapon/gun/proc/Fire(atom/target, mob/living/user, clickparams, pointblank=0, reflex=0)
+	set waitfor = FALSE
 	if(!user || !target) return
 	if(target.z != user.z) return
 
@@ -429,7 +430,7 @@
 			P.dispersion = disp
 
 			P.shot_from = src.name
-			P.silenced = silenced
+			P.silenced |= silenced // A silent bullet (e.g., BBs) can be fired quietly from any gun.
 
 			P.old_style_target(target)
 			P.fire()

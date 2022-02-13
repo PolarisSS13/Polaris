@@ -29,14 +29,14 @@
 /obj/item/device/laser_pointer/purple
 	pointer_icon_state = "purple_laser"
 
-/obj/item/device/laser_pointer/New()
-	..()
+/obj/item/device/laser_pointer/Initialize()
+	. = ..()
 	diode = new(src)
 	if(!pointer_icon_state)
 		pointer_icon_state = pick("red_laser","green_laser","blue_laser","purple_laser")
 
-/obj/item/device/laser_pointer/upgraded/New()
-	..()
+/obj/item/device/laser_pointer/upgraded/Initialize()
+	. = ..()
 	diode = new /obj/item/weapon/stock_parts/micro_laser/ultra
 
 
@@ -54,7 +54,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src] already has a diode.</span>")
 
-	else if(W.is_screwdriver())
+	else if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if(diode)
 			to_chat(user, "<span class='notice'>You remove the [diode.name] from the [src].</span>")
 			diode.loc = get_turf(src.loc)

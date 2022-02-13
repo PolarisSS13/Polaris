@@ -8,6 +8,12 @@
 	var/holster_in = 'sound/items/holsterin.ogg'
 	var/holster_out = 'sound/items/holsterout.ogg'
 
+/obj/item/clothing/accessory/holster/AltClick(mob/user)
+	if(holstered)
+		unholster(user)
+		return TRUE
+	. = ..()
+
 /obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(holstered && istype(user))
 		to_chat(user, "<span class='warning'>There is already \a [holstered] holstered here!</span>")
@@ -34,7 +40,7 @@
 	holstered = null
 	name = initial(name)
 
-/obj/item/clothing/accessory/holster/proc/unholster(mob/user as mob)
+/obj/item/clothing/accessory/holster/proc/unholster(mob/user)
 	if(!holstered)
 		return
 
