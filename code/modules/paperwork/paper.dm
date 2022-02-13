@@ -113,16 +113,14 @@
         name = title
     if(istext(text))
         info = text
-
+		addtimer(CALLBACK(src, .proc/update_info), 0)
+	
     if(mapload) // Jank, but we do this to prevent maploaded papers from somehow stacking across rounds if re-added to the board by a player.
         was_maploaded = TRUE
 
-/obj/item/weapon/paper/Initialize()
-	. = ..()
 	pixel_y = rand(-8, 8)
 	pixel_x = rand(-9, 9)
 	stamps = ""
-	addtimer(CALLBACK(src, .proc/update_info), 0)
 
 /obj/item/weapon/paper/proc/update_info()
 
