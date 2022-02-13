@@ -38,15 +38,15 @@
 					possible_targets |= target
 
 	if(LAZYLEN(possible_targets))
-		for(var/turf/T in possible_targets)
+		while(possible_targets.len)
+			var/turf/T = pick(possible_targets)	// Don't always go NORTH, please. It's kind of weird.
+			possible_targets -= T
+
 			var/obj/effect/decal/cleanable/chempuddle/other_puddle = locate() in T
-			if(other_puddle)
-				reagents.trans_to_holder(other_puddle.reagents, (reagents.total_volume - (25 * reagents.get_viscosity())) * (1 / possible_targets.len))
-				other_puddle.Spread(exclude)
-			else
+			if(!istype(other_puddle))
 				other_puddle = new(T)
-				reagents.trans_to_holder(other_puddle.reagents, (reagents.total_volume - (25 * reagents.get_viscosity())) * (1 / possible_targets.len))
-				other_puddle.Spread(exclude)
+			reagents.trans_to_holder(other_puddle.reagents, (reagents.total_volume - (25 * reagents.get_viscosity())) * (1 / possible_targets.len))
+			other_puddle.Spread(exclude)
 
 	if(reagents.total_volume)
 		for(var/datum/reagent/current in reagents.reagent_list)
@@ -60,10 +60,10 @@
 	Spread()
 
 /obj/effect/decal/cleanable/chempuddle/Crossed(atom/movable/AM, oldloc)
-	Spread()
+	Spread()	// Splashing through puddles can disturb them enough to spread them.
 	. = ..()
 
-	if(reagents.total_volume)	// Splashing through puddles can disturb them enough to spread them.
+	if(reagents.total_volume)
 		reagents.touch(AM, max(min(3, reagents.total_volume),reagents.total_volume / 3))
 
 /obj/effect/decal/cleanable/chempuddle/update_icon(var/recursion = FALSE)

@@ -10,7 +10,7 @@
 	anchored = 0
 	pressure_resistance = 2*ONE_ATMOSPHERE
 
-	var/modded = FALSE
+	var/faucet = FALSE
 
 	var/obj/item/hose_connector/input/active/InputSocket
 	var/obj/item/hose_connector/output/active/OutputSocket
@@ -21,11 +21,11 @@
 /obj/structure/reagent_dispensers/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (W.get_tool_quality(TOOL_WRENCH))
-		user.visible_message("[user] wrenches [src]'s faucet [modded ? "closed" : "open"].", \
-			"You wrench [src]'s faucet [modded ? "closed" : "open"]")
-		modded = modded ? 0 : 1
+		user.visible_message("[user] wrenches [src]'s faucet [faucet ? "closed" : "open"].", \
+			"You wrench [src]'s faucet [faucet ? "closed" : "open"]")
+		faucet = !faucet
 		playsound(src, W.usesound, 75, 1)
-		if (modded)
+		if (faucet)
 			message_admins("[key_name_admin(user)] opened a reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking [LAZYLEN(reagents.reagent_list) ? english_list(reagents.reagent_list) : "nothing"]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
 			log_game("[key_name(user)] opened reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking [LAZYLEN(reagents.reagent_list) ? english_list(reagents.reagent_list) : "nothing"].")
 			leak(amount_per_transfer_from_this)
@@ -34,7 +34,7 @@
 /obj/structure/reagent_dispensers/examine(mob/user)
 	. = ..()
 	if(get_dist(user, src) <= 2)
-		if(modded)
+		if(faucet)
 			. += SPAN_WARNING("The faucet is wrenched open, leaking the contents!")
 
 /obj/structure/reagent_dispensers/Destroy()
@@ -77,7 +77,7 @@
 
 /obj/structure/reagent_dispensers/Move()
 	. = ..()
-	if (. && modded)
+	if (. && faucet)
 		leak(amount_per_transfer_from_this / 5 / reagents.get_viscosity())
 
 /obj/structure/reagent_dispensers/proc/leak(amount)
@@ -119,7 +119,7 @@
 			message_admins("[key_name_admin(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>).")
 			log_game("[key_name(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]).")
 
-		if(!istype(Proj ,/obj/item/projectile/beam/lasertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
+		if(Proj.sharp || (istype(Proj, /obj/item/projectile/beam) && !Proj.damage))
 			rupture()
 
 /obj/structure/reagent_dispensers/ex_act()
@@ -158,7 +158,7 @@
 			qdel(src)
 
 /obj/structure/reagent_dispensers/fire_act(datum/gas_mixture/air, temperature, volume)
-	if (modded)
+	if (faucet)
 		rupture()
 	else if (temperature > T0C+500)
 		rupture()
@@ -207,7 +207,7 @@
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	. = ..()
 	if(get_dist(user, src) <= 2)
-		if(modded)
+		if(faucet)
 			. += "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>"
 		if(rig)
 			. += "<span class='notice'>There is some kind of device rigged to the tank.</span>"
@@ -442,7 +442,7 @@
 /obj/structure/reagent_dispensers/acid/Initialize()
 	. = ..()
 	reagents.add_reagent("sacid", 1000)
-	
+
 //Cooking oil refill tank
 /obj/structure/reagent_dispensers/cookingoil
 	name = "cooking oil tank"

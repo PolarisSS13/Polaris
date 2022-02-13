@@ -67,17 +67,12 @@
 	return the_id
 
 /datum/reagents/proc/get_viscosity() // Returns a multiplier for the mixture's viscosity.
-	var/avg_viscosity = 0
+	. = 0
+	if(total_volume <= 0)
+		return
 	for(var/datum/reagent/A in reagent_list)
-		avg_viscosity = (A.viscosity * A.volume) + avg_viscosity
-
-	if(total_volume > 0)
-		avg_viscosity /= total_volume
-
-	if(avg_viscosity <= 0)
-		return 0.1
-
-	return avg_viscosity
+		. += A.viscosity * A.volume
+	. = max(0.1, . / total_volume)
 
 /datum/reagents/proc/update_total() // Updates volume.
 	total_volume = 0
@@ -545,7 +540,7 @@
 	trans_to(T, total_volume, multiplier, copy)
 	if (total_volume <= 0)
 		qdel(src)
-		
+
 /**
  * Calls [/datum/reagent/proc/on_update] on every reagent in this holder
  *

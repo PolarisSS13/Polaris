@@ -21,7 +21,7 @@
 
 	var/icon/reagent_overlay_icon
 
-	var/datum/effect/effect/system/smoke_spread/chem/Smoke
+	var/datum/effect_system/smoke_spread/chem/Smoke
 
 /obj/structure/geyser/Initialize()
 	. = ..()
@@ -41,7 +41,7 @@
 	if(!LAZYLEN(reagent_set) && LAZYLEN(from_reag))
 		LAZYINITLIST(reagent_set)
 		var/reag_count = rand(1, max_reagent_picks)
-		for(var/count = 1, count <= reag_count, count++)		
+		for(var/count = 1, count <= reag_count, count++)
 			var/targ_reagent = pick(from_reag)
 
 			if(targ_reagent in SSchemistry.chemical_reagents)
