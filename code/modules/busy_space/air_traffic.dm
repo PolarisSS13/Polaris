@@ -109,7 +109,7 @@ var/datum/lore/atc_controller/atc = new/datum/lore/atc_controller
 		if("wrong_lang")
 			//Can't implement this until autosay has language support
 		if("emerg")
-			var/problem = pick("hull breaches on multiple decks","unknown life forms on board","a drive about to go critical","lost attitude control","asteroids impacting the hull","an engine on fire","a total loss of engine power","a malfunctioning bluespace drive","people trying to board the ship","instrument failure and zero visability")
+			var/problem = pick("hull breaches on multiple decks","unknown life forms on board","a drive about to go critical","lost attitude control","asteroids impacting the hull","an engine on fire","a total loss of engine power","a malfunctioning bluespace drive","people trying to board the ship","instrument failure and zero visibility")
 			full_request = "This is [combined_name] declaring an emergency! We have [problem]!"
 			full_response = "[combined_name], this is [using_map.station_short] TraCon, copy. Switch to emergency responder channel [rand(700,999)].[rand(1,9)]."
 			full_closure = "[using_map.station_short] TraCon, okay, switching now."
