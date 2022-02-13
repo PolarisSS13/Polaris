@@ -1026,7 +1026,7 @@
 			var/mob/living/carbon/human/H = target
 			if(H.in_throw_mode && H.a_intent == I_HELP && unEquip(item))
 				H.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
-				visible_message("<b>[src]</b> hands \the [H] \a [item].", SPAN_NOTICE("You give \the [target] \a [I]."))
+				visible_message("<b>[src]</b> hands \the [H] \a [item].", SPAN_NOTICE("You give \the [target] \a [item]."))
 			else
 				to_chat(src, SPAN_NOTICE("You offer \the [item] to \the [target]."))
 				do_give(H)
