@@ -328,7 +328,8 @@
 		"a SolGov dockyard in Saint Columbia",
 		"an anti-piracy outpost in The Bowl",
 		"a Fleet outpost on the Almach border",
-		"a Fleet outpost on the Moghes border"
+		"a Fleet outpost on the Moghes border",
+		"a Five Arrows outpost in the Sagittarius Heights",
 		)
 
 /datum/lore/organization/tsc/vey_med
@@ -843,7 +844,7 @@
 						"Tyr orbit",
 						"Magni orbit",
 						"a wreck in VirGov territory",
-						"a military outpost"
+						"a military outpost",
 						"an incursion site within Vir",
 						"rendezvous to an incursion site in Oasis",
 						"rendezvous to an incursion site in Gavel"
