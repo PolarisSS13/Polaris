@@ -340,7 +340,7 @@
 			var/name = occupant ? occupant.name : "Unknown"
 			P.info = "<CENTER><B>Body Scan - [name]</B></CENTER><BR>"
 			P.info += "<b>Time of scan:</b> [worldtime2stationtime(world.time)]<br><br>"
-			P.info += "[generate_printing_text()]"
+			P.info += generate_printing_text()
 			P.info += "<br><br><b>Notes:</b><br>"
 			P.name = "Body Scan - [name] ([worldtime2stationtime(world.time)]"
 		else
