@@ -389,31 +389,31 @@
 	return material
 
 /obj/item/clothing/accessory/bracelet/material/wood/Initialize(var/ml)
-	..(ml, MAT_WOOD)
+	. = ..(ml, MAT_WOOD)
 
 /obj/item/clothing/accessory/bracelet/material/plastic/Initialize(var/ml)
-	..(ml, MAT_PLASTIC)
+	. = ..(ml, MAT_PLASTIC)
 
 /obj/item/clothing/accessory/bracelet/material/iron/Initialize(var/ml)
-	..(ml, MAT_IRON)
+	. = ..(ml, MAT_IRON)
 
 /obj/item/clothing/accessory/bracelet/material/steel/Initialize(var/ml)
-	..(ml, MAT_STEEL)
+	. = ..(ml, MAT_STEEL)
 
 /obj/item/clothing/accessory/bracelet/material/silver/Initialize(var/ml)
-	..(ml, MAT_SILVER)
+	. = ..(ml, MAT_SILVER)
 
 /obj/item/clothing/accessory/bracelet/material/gold/Initialize(var/ml)
-	..(ml, MAT_GOLD)
+	. = ..(ml, MAT_GOLD)
 
 /obj/item/clothing/accessory/bracelet/material/platinum/Initialize(var/ml)
-	..(ml, MAT_PLATINUM)
+	. = ..(ml, MAT_PLATINUM)
 
 /obj/item/clothing/accessory/bracelet/material/phoron/Initialize(var/ml)
-	..(ml, MAT_PHORON)
+	. = ..(ml, MAT_PHORON)
 
 /obj/item/clothing/accessory/bracelet/material/glass/Initialize(var/ml)
-	..(ml, MAT_GLASS)
+	. = ..(ml, MAT_GLASS)
 
 /obj/item/clothing/accessory/halfcape
 	name = "half cape"
