@@ -1678,7 +1678,7 @@
 /area/skipjack_station)
 "bXb" = (
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/light{
+/obj/machinery/light/no_nightshift{
 	dir = 8
 	},
 /turf/simulated/shuttle/floor/white,
@@ -3346,7 +3346,7 @@
 /turf/simulated/shuttle/wall/dark/no_join,
 /area/shuttle/arrival/pre_game)
 "dZT" = (
-/obj/machinery/light,
+/obj/machinery/light/no_nightshift,
 /turf/simulated/shuttle/floor,
 /area/shuttle/arrival/pre_game)
 "ebh" = (
@@ -4397,7 +4397,7 @@
 /obj/structure/table/standard,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/machinery/light,
+/obj/machinery/light/no_nightshift,
 /turf/simulated/shuttle/floor/white,
 /area/shuttle/arrival/pre_game)
 "fjB" = (
@@ -7121,7 +7121,7 @@
 /area/syndicate_station)
 "irx" = (
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/light{
+/obj/machinery/light/no_nightshift{
 	dir = 4
 	},
 /turf/simulated/shuttle/floor/white,
@@ -11709,7 +11709,7 @@
 	},
 /area/centcom/specops)
 "nol" = (
-/obj/machinery/light{
+/obj/machinery/light/no_nightshift{
 	dir = 1
 	},
 /turf/simulated/shuttle/floor,
@@ -17499,7 +17499,7 @@
 /area/centcom/evac)
 "tDS" = (
 /obj/structure/bed/chair/shuttle,
-/obj/machinery/light{
+/obj/machinery/light/no_nightshift{
 	dir = 1
 	},
 /turf/simulated/shuttle/floor/white,
@@ -18718,7 +18718,7 @@
 	},
 /area/centcom/medical)
 "uTx" = (
-/obj/machinery/light{
+/obj/machinery/light/no_nightshift{
 	dir = 1
 	},
 /turf/simulated/shuttle/floor/red,
@@ -19212,7 +19212,7 @@
 	icon_state = "ai-red";
 	name = "Arrivals Announcement Computer"
 	},
-/obj/machinery/light{
+/obj/machinery/light/no_nightshift{
 	dir = 1
 	},
 /turf/simulated/shuttle/floor{
@@ -20984,7 +20984,7 @@
 /obj/machinery/computer/shuttle_control/emergency{
 	dir = 1
 	},
-/obj/machinery/light,
+/obj/machinery/light/no_nightshift,
 /turf/simulated/shuttle/floor,
 /area/shuttle/escape/centcom)
 "xpp" = (
