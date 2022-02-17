@@ -38,6 +38,10 @@
 	display_name = "bomber jacket 2"
 	path = /obj/item/clothing/suit/storage/bomber/alt
 
+/datum/gear/suit/bomber_retro
+	display_name = "bomber jacket, retro"
+	path = /obj/item/clothing/suit/storage/toggle/bomber/retro
+
 /datum/gear/suit/leather_jacket
 	display_name = "leather jacket, black"
 	path = /obj/item/clothing/suit/storage/toggle/leather_jacket
@@ -165,6 +169,11 @@
 /datum/gear/suit/labcoat/yellow
 	display_name = "labcoat, yellow"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
+
+/datum/gear/suit/labcoat/rd
+	display_name = "labcoat, research director (RD)"
+	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
+	allowed_roles = list("Research Director")
 
 /datum/gear/suit/labcoat/emt
 	display_name = "labcoat, EMT (Medical)"
@@ -558,6 +567,18 @@
 /datum/gear/suit/miscellaneous/med_dep_jacket
 	display_name = "department jacket, medical"
 	path = /obj/item/clothing/suit/storage/toggle/med_dep_jacket
+
+/datum/gear/suit/miscellaneous/light_jacket
+	display_name = "light jacket selection"
+	path = /obj/item/clothing/suit/storage/toggle/light_jacket
+
+/datum/gear/suit/miscellaneous/light_jacket/New()
+	..()
+	var/list/jacket = list(
+		"grey light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket,
+		"dark blue light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket/blue
+	)
+	gear_tweaks += new/datum/gear_tweak/path(jacket)
 
 /datum/gear/suit/miscellaneous/peacoat
 	display_name = "peacoat"

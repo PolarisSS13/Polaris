@@ -92,7 +92,7 @@
 
 	// Wiring! How exciting.
 	var/datum/wires/rig/wires
-	var/datum/effect/effect/system/spark_spread/spark_system
+	var/datum/effect_system/spark_spread/spark_system
 	var/datum/mini_hud/rig/minihud
 
 /obj/item/weapon/rig/examine()
@@ -112,8 +112,8 @@
 		if(open)
 			. += "It's equipped with [english_list(installed_modules)]."
 
-/obj/item/weapon/rig/New()
-	..()
+/obj/item/weapon/rig/Initialize()
+	. = ..()
 
 	suit_state = icon_state
 	item_state = icon_state

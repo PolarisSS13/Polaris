@@ -7,10 +7,10 @@
 	density = 1
 	w_class = ITEMSIZE_HUGE
 	layer = UNDER_JUNK_LAYER
-	
+
 	var/opened = 0
 	var/sealed = 0
-	
+
 	var/seal_tool = /obj/item/weapon/weldingtool	//Tool used to seal the closet, defaults to welder
 	var/wall_mounted = 0 //never solid (You can always pass over it)
 	var/health = 100
@@ -23,8 +23,8 @@
 							  //then open it in a populated area to crash clients.
 	var/storage_cost = 40	//How much space this closet takes up if it's stuffed in another closet
 
-	var/open_sound = 'sound/machines/click.ogg'
-	var/close_sound = 'sound/machines/click.ogg'
+	var/open_sound = 'sound/machines/closet/closet_open.ogg'
+	var/close_sound = 'sound/machines/closet/closet_close.ogg'
 
 	var/store_misc = 1		//Chameleon item check
 	var/store_items = 1		//Will the closet store items?
@@ -34,6 +34,19 @@
 	var/list/starts_with // List of type = count (or just type for 1)
 
 	var/closet_appearance = /decl/closet_appearance // The /decl that defines what decals we end up with, that makes our look unique
+
+	/// Currently animating the door transform
+	var/is_animating_door = FALSE
+	/// Length of time (ds) to animate the door transform
+	var/door_anim_time = 2.0
+	/// Amount to 'squish' the full width of the door by
+	var/door_anim_squish = 0.30
+	/// Virtual angle at which the door is opened to (136 by default, so not a full 180)
+	var/door_anim_angle = 136
+	/// Offset for the door hinge location from centerline
+	var/door_hinge = -6.5
+	/// Our visual object for the closet door
+	var/obj/effect/overlay/closet_door/door_obj
 
 /obj/structure/closet/Initialize()
 	..()
@@ -64,6 +77,10 @@
 			icon = app.icon
 			color = null
 	update_icon()
+
+/obj/structure/closet/Destroy()
+	. = ..()
+	qdel_null(door_obj)
 
 /obj/structure/closet/examine(mob/user)
 	. = ..()
@@ -133,7 +150,7 @@
 	playsound(src, open_sound, 15, 1, -3)
 	if(initial(density))
 		density = !density
-	update_icon()
+	animate_door()
 	return 1
 
 /obj/structure/closet/proc/close()
@@ -158,7 +175,7 @@
 	playsound(src, close_sound, 15, 1, -3)
 	if(initial(density))
 		density = !density
-	update_icon()
+	animate_door(TRUE)
 	return 1
 
 //Cham Projector Exception
@@ -213,10 +230,11 @@
 
 
 /obj/structure/closet/proc/toggle(mob/user as mob)
+	if(is_animating_door)
+		return
 	if(!(opened ? close() : open()))
 		to_chat(user, "<span class='notice'>It won't budge!</span>")
 		return
-	update_icon()
 
 // this should probably use dump_contents()
 /obj/structure/closet/ex_act(severity)
@@ -259,13 +277,13 @@
 	return
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		if(opened)
 			if(anchored)
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 			else
 				user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-			if(do_after(user, 20 * W.toolspeed))
+			if(do_after(user, 20 * W.get_tool_speed(TOOL_WRENCH)))
 				if(!src) return
 				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 				anchored = !anchored
@@ -314,7 +332,7 @@
 	else if(seal_tool)
 		if(istype(W, seal_tool))
 			var/obj/item/weapon/S = W
-			if(istype(S, /obj/item/weapon/weldingtool))
+			if(S.get_tool_quality(TOOL_WELDER))
 				var/obj/item/weapon/weldingtool/WT = S
 				if(!WT.remove_fuel(0,user))
 					if(!WT.isOn())
@@ -322,7 +340,7 @@
 					else
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
-			if(do_after(user, 20 * S.toolspeed))
+			if(do_after(user, 20 * S.get_tool_speed(TOOL_WELDER)))
 				playsound(src, S.usesound, 50)
 				sealed = !sealed
 				update_icon()
@@ -480,8 +498,45 @@
 	spawn(1) qdel(src)
 	return 1
 
-// Just a generic cabinet for mappers to use
-/obj/structure/closet/cabinet
-	name = "cabinet"
-	icon = 'icons/obj/closets/bases/cabinet.dmi'
-	closet_appearance = /decl/closet_appearance/cabinet
+/obj/structure/closet/proc/animate_door(closing = FALSE)
+	if(!door_anim_time)
+		update_icon()
+		return
+	if(!door_obj)
+		door_obj = new
+	vis_contents |= door_obj
+	door_obj.icon = icon
+	door_obj.icon_state = "door_front"
+	is_animating_door = TRUE
+	if(!closing)
+		update_icon()
+	var/num_steps = door_anim_time / world.tick_lag
+	for(var/I in 0 to num_steps)
+		var/angle = door_anim_angle * (closing ? 1 - (I/num_steps) : (I/num_steps))
+		var/matrix/M = get_door_transform(angle)
+		var/door_state = angle >= 90 ? "door_back" : "door_front"
+		var/door_layer = angle >= 90 ? FLOAT_LAYER : ABOVE_MOB_LAYER
+
+		if(I == 0)
+			door_obj.transform = M
+			door_obj.icon_state = door_state
+			door_obj.layer = door_layer
+		else if(I == 1)
+			animate(door_obj, transform = M, icon_state = door_state, layer = door_layer, time = world.tick_lag, flags = ANIMATION_END_NOW)
+		else
+			animate(transform = M, icon_state = door_state, layer = door_layer, time = world.tick_lag)
+	addtimer(CALLBACK(src,.proc/end_door_animation,closing),door_anim_time,TIMER_UNIQUE|TIMER_OVERRIDE)
+
+/obj/structure/closet/proc/end_door_animation(closing = FALSE)
+	is_animating_door = FALSE
+	if(closing)
+		// There's not really harm in leaving it on, but, one less atom to send to clients to render when lockers are closed
+		vis_contents -= door_obj
+		update_icon()
+
+/obj/structure/closet/proc/get_door_transform(angle)
+	var/matrix/M = matrix()
+	M.Translate(-door_hinge, 0)
+	M.Multiply(matrix(cos(angle), 0, 0, -sin(angle) * door_anim_squish, 1, 0))
+	M.Translate(door_hinge, 0)
+	return M

@@ -644,7 +644,7 @@
 	mix_message = null
 
 /decl/chemical_reaction/instant/explosion_potassium/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/datum/effect/effect/system/reagents_explosion/e = new()
+	var/datum/effect_system/reagents_explosion/e = new()
 	e.set_up(round (created_volume/10, 1), holder.my_atom, 0, 0)
 	if(isliving(holder.my_atom))
 		e.amount *= 0.5
@@ -664,7 +664,7 @@
 
 /decl/chemical_reaction/instant/flash_powder/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(2, 1, location)
 	s.start()
 	for(var/mob/living/carbon/M in viewers(world.view, location))
@@ -709,7 +709,7 @@
 	log_is_important = 1
 
 /decl/chemical_reaction/instant/nitroglycerin/on_reaction(var/datum/reagents/holder, var/created_volume)
-	var/datum/effect/effect/system/reagents_explosion/e = new()
+	var/datum/effect_system/reagents_explosion/e = new()
 	e.set_up(round (created_volume/2, 1), holder.my_atom, 0, 0)
 	if(isliving(holder.my_atom))
 		e.amount *= 0.5
@@ -745,7 +745,7 @@
 
 /decl/chemical_reaction/instant/chemsmoke/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
-	var/datum/effect/effect/system/smoke_spread/chem/S = new /datum/effect/effect/system/smoke_spread/chem
+	var/datum/effect_system/smoke_spread/chem/S = new /datum/effect_system/smoke_spread/chem
 	S.attach(location)
 	S.set_up(holder, created_volume, 0, location)
 	playsound(location, 'sound/effects/smoke.ogg', 50, 1, -3)
@@ -768,7 +768,7 @@
 	for(var/mob/M in viewers(5, location))
 		to_chat(M, "<span class='warning'>The solution spews out foam!</span>")
 
-	var/datum/effect/effect/system/foam_spread/s = new()
+	var/datum/effect_system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 0)
 	s.start()
 	holder.clear_reagents()
@@ -787,7 +787,7 @@
 	for(var/mob/M in viewers(5, location))
 		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
 
-	var/datum/effect/effect/system/foam_spread/s = new()
+	var/datum/effect_system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 1)
 	s.start()
 	return
@@ -805,7 +805,7 @@
 	for(var/mob/M in viewers(5, location))
 		to_chat(M, "<span class='warning'>The solution spews out a metalic foam!</span>")
 
-	var/datum/effect/effect/system/foam_spread/s = new()
+	var/datum/effect_system/foam_spread/s = new()
 	s.set_up(created_volume, location, holder, 2)
 	s.start()
 	return
@@ -1054,6 +1054,14 @@
 	inhibitors = list("nitrogen" = 1) //So it doesn't mess with lexorin
 	result_amount = 2
 
+/decl/chemical_reaction/instant/energized_phoron
+	name = "phoron plasma"
+	id = "inst_energetic_phoron"
+	result = "energetic_phoron"
+	required_reagents = list("phoron" = 1, "hydrophoron" = 3)
+	inhibitors = list("nitrogen" = 1) //So it doesn't mess with hydrophoron
+	result_amount = 3
+
 /decl/chemical_reaction/instant/deuterium
 	name = "Deuterium"
 	id = "deuterium"
@@ -1092,6 +1100,21 @@
 	required_reagents = list("protein" = 1, "sugar" = 1, "phoron" = 1)
 	result_amount = 1	// Roughly 20u per phoron sheet
 
+//Cube Food Colonies
+/decl/chemical_reaction/instant/meatcolony
+	name = "protein"
+	id = "meatcolony"
+	result = "protein"
+	required_reagents = list("meatcolony" = 5, "virusfood" = 5)
+	result_amount = 60
+
+/decl/chemical_reaction/instant/plantcolony
+	name = "nutriment"
+	id = "plantcolony"
+	result = "nutriment"
+	required_reagents = list("plantcolony" = 5, "virusfood" = 5)
+	result_amount = 60
+
 // Neutralization.
 
 /decl/chemical_reaction/instant/neutralize_neurotoxic_protein
@@ -1105,14 +1128,12 @@
 	name = "Neutralize Carpotoxin"
 	id = "carpotoxin_neutral"
 	result = "protein"
-	required_reagents = list("radium" = 1, "carpotoxin" = 1, "sifsap" = 1)
-	catalysts = list("sifsap" = 10)
-	result_amount = 2
+	required_reagents = list("enzyme" = 1, "carpotoxin" = 1, "sifsap" = 1)
+	result_amount = 1
 
 /decl/chemical_reaction/instant/neutralize_spidertoxin
 	name = "Neutralize Spidertoxin"
 	id = "spidertoxin_neutral"
 	result = "protein"
-	required_reagents = list("radium" = 1, "spidertoxin" = 1, "sifsap" = 1)
-	catalysts = list("sifsap" = 10)
-	result_amount = 2
+	required_reagents = list("enzyme" = 1, "spidertoxin" = 1, "sifsap" = 1)
+	result_amount = 1

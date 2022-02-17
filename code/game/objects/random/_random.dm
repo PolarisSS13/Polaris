@@ -1,8 +1,8 @@
 /obj/random
 	name = "random object"
 	desc = "This item type is used to spawn random objects at round-start"
-	icon = 'icons/misc/mark.dmi'
-	icon_state = "rup"
+	icon = 'icons/misc/random_spawners.dmi'
+	icon_state = "generic"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 	var/drop_get_turf = TRUE
 
@@ -38,7 +38,8 @@
 // creates the random item
 /obj/random/proc/spawn_item()
 	var/build_path = item_to_spawn()
-	return new build_path(drop_location())
+	if(build_path)
+		return new build_path(drop_location())
 
 var/list/random_junk_
 var/list/random_useful_
@@ -80,7 +81,7 @@ var/list/random_useful_
 /obj/random/single
 	name = "randomly spawned object"
 	desc = "This item type is used to randomly spawn a given object at round-start"
-	icon_state = "x3"
+	icon_state = "generic"
 	var/spawn_object = null
 
 /obj/random/single/item_to_spawn()
@@ -104,8 +105,8 @@ var/list/multi_point_spawns
 /obj/random_multi
 	name = "random object spawn point"
 	desc = "This item type is used to spawn random objects at round-start. Only one spawn point for a given group id is selected."
-	icon = 'icons/misc/mark.dmi'
-	icon_state = "x3"
+	icon = 'icons/misc/random_spawners.dmi'
+	icon_state = "generic_3"
 	invisibility = INVISIBILITY_MAXIMUM
 	var/id     // Group id
 	var/weight // Probability weight for this spawn point

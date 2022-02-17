@@ -68,7 +68,7 @@
 	var/maint_access = 1
 	var/dna								//Dna-locking the mech
 	var/list/proc_res = list() 			//Stores proc owners, like proc_res["functionname"] = owner reference
-	var/datum/effect/effect/system/spark_spread/spark_system = new
+	var/datum/effect_system/spark_spread/spark_system = new
 	var/lights = 0
 	var/lights_power = 6
 	var/force = 0
@@ -101,7 +101,7 @@
 	var/list/equipment = new		//This lists holds what stuff you bolted onto your baby ride
 	var/obj/item/mecha_parts/mecha_equipment/selected
 	var/max_equip = 2
-	
+
 	// What direction to float in, if inertial movement is active.
 	var/float_direction = 0
 	// Process() iterator count.
@@ -179,7 +179,7 @@
 	var/smoke_reserve = 5			//How many shots you have. Might make a reload later on. MIGHT.
 	var/smoke_ready = 1				//This is a check for the whether or not the cooldown is ongoing.
 	var/smoke_cooldown = 100		//How long you have between uses.
-	var/datum/effect/effect/system/smoke_spread/smoke_system = new
+	var/datum/effect_system/smoke_spread/smoke_system = new
 
 	var/cloak_possible = FALSE		// Can this exosuit innately cloak?
 
@@ -204,6 +204,7 @@
 	var/weapons_only_cycle = FALSE	//So combat mechs don't switch to their equipment at times.
 
 /obj/mecha/Initialize()
+
 	. = ..()
 
 	for(var/path in starting_components)
@@ -215,20 +216,10 @@
 			var/obj/item/mecha_parts/mecha_equipment/ME = new path(src)
 			ME.attach(src)
 
+	START_PROCESSING(SSobj, src)
+
 	update_transform()
 
-/obj/mecha/drain_power(var/drain_check)
-
-	if(drain_check)
-		return 1
-
-	if(!cell)
-		return 0
-
-	return cell.drain_power(drain_check)
-
-/obj/mecha/New()
-	..()
 	icon_state += "-open"
 	add_radio()
 	add_cabin()
@@ -248,7 +239,16 @@
 	log_message("[src.name] created.")
 	loc.Entered(src)
 	mechas_list += src //global mech list
-	return
+
+/obj/mecha/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!cell)
+		return 0
+
+	return cell.drain_power(drain_check)
 
 /obj/mecha/Exit(atom/movable/O)
 	if(O in cargo)
@@ -330,6 +330,8 @@
 
 	QDEL_NULL(spark_system)
 	QDEL_NULL(minihud)
+
+	STOP_PROCESSING(SSobj, src)
 
 	mechas_list -= src //global mech list
 	. = ..()
@@ -920,27 +922,19 @@
 	if(istype(obstacle, /mob))//First we check if it is a mob. Mechs mostly shouln't go through them, even while phasing.
 		var/mob/M = obstacle
 		M.Move(get_step(obstacle,src.dir))
+	else if(phasing && get_charge()>=phasing_energy_drain)//Phazon check. This could use an improvement elsewhere.
+		src.use_power(phasing_energy_drain)
+		phase()
+		. = ..(obstacle)
+		return
 	else if(istype(obstacle, /obj))//Then we check for regular obstacles.
 		var/obj/O = obstacle
-
-		if(phasing && get_charge()>=phasing_energy_drain)//Phazon check. This could use an improvement elsewhere.
-			spawn()
-				if(can_phase)
-					can_phase = FALSE
-					flick("[initial_icon]-phase", src)
-					src.loc = get_step(src,src.dir)
-					src.use_power(phasing_energy_drain)
-					sleep(get_step_delay() * 3)
-					can_phase = TRUE
-					occupant_message("Phazed.")
-			. = ..(obstacle)
-			return
 		if(istype(O, /obj/effect/portal))	//derpfix
-			src.anchored = 0				//I have no idea what this really fix.
+			src.anchored = 0				// Portals can only move unanchored objects.
 			O.Crossed(src)
 			spawn(0)//countering portal teleport spawn(0), hurr
 				src.anchored = 1
-		else if(O.anchored)
+		if(O.anchored)
 			obstacle.Bumped(src)
 		else
 			step(obstacle,src.dir)
@@ -948,6 +942,18 @@
 	else//No idea when this triggers, so i won't touch it.
 		. = ..(obstacle)
 	return
+
+/obj/mecha/proc/phase()	// Force the mecha to move forward by phasing.
+	set waitfor = FALSE
+	if(can_phase)
+		can_phase = FALSE
+		flick("[initial_icon]-phase", src)
+		forceMove(get_step(src,src.dir))
+		sleep(get_step_delay() * 3)
+		can_phase = TRUE
+		occupant_message("Phazed.")
+		return TRUE	// In the event this is sequenced
+	return FALSE
 
 ///////////////////////////////////
 ////////  Internal damage  ////////
@@ -1462,7 +1468,7 @@
 				to_chat(user, "<span class='warning'>Invalid ID: Access denied.</span>")
 		else
 			to_chat(user, "<span class='warning'>Maintenance protocols disabled by operator.</span>")
-	else if(W.is_wrench())
+	else if(W.get_tool_quality(TOOL_WRENCH))
 		if(state==MECHA_BOLTS_SECURED)
 			state = MECHA_PANEL_LOOSE
 			to_chat(user, "You undo the securing bolts.")
@@ -1470,7 +1476,7 @@
 			state = MECHA_BOLTS_SECURED
 			to_chat(user, "You tighten the securing bolts.")
 		return
-	else if(W.is_crowbar())
+	else if(W.get_tool_quality(TOOL_CROWBAR))
 		if(state==MECHA_PANEL_LOOSE)
 			state = MECHA_CELL_OPEN
 			to_chat(user, "You open the hatch to the power unit")
@@ -1503,7 +1509,7 @@
 			else
 				to_chat(user, "There's not enough wire to finish the task.")
 		return
-	else if(W.is_screwdriver())
+	else if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if(hasInternalDamage(MECHA_INT_TEMP_CONTROL))
 			clearInternalDamage(MECHA_INT_TEMP_CONTROL)
 			to_chat(user, "You repair the damaged temperature controller.")
@@ -1706,8 +1712,7 @@
 	return
 
 /obj/mecha/remove_air(amount)
-	var/obj/item/mecha_parts/component/gas/GC = internal_components[MECH_GAS]
-	if(use_internal_tank && (GC && prob(GC.get_efficiency() * 100)))
+	if(use_internal_tank)
 		return cabin_air.remove(amount)
 	else
 		var/turf/T = get_turf(src)
@@ -1716,7 +1721,8 @@
 	return
 
 /obj/mecha/return_air()
-	if(use_internal_tank)
+	var/obj/item/mecha_parts/component/gas/GC = internal_components[MECH_GAS]
+	if(use_internal_tank && (GC && prob(GC.get_efficiency() * 100)))
 		return cabin_air
 	return get_turf_air()
 
@@ -2020,7 +2026,7 @@
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
-		playsound(src, 'sound/machines/door/windowdoor.ogg', 50, 1)
+		playsound(src, 'sound/mecha/mech_enter.ogg', 50, 1)
 		if(occupant.client && cloaked_selfimage)
 			occupant.client.images += cloaked_selfimage
 		play_entered_noise(occupant)
@@ -2113,6 +2119,7 @@
 		update_icon()
 		set_dir(dir_in)
 		verbs -= /obj/mecha/verb/eject
+		playsound(src, 'sound/mecha/mech_exit.ogg', 50, 1)
 
 		//src.zoom = 0
 

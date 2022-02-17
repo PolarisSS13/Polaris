@@ -66,9 +66,7 @@
 	if(!seed)
 		return
 	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine.
-	if(!plant_controller)
-		to_world("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
+		testing("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
 		qdel(src)
 		return
 
@@ -191,13 +189,17 @@
 				pocell.charge = pocell.maxcharge
 				qdel(src)
 				return
-		else if(W.sharp)
+	
+		if(W.sharp)
+
 			if(seed.kitchen_tag == "pumpkin") // Ugggh these checks are awful.
 				user.show_message("<span class='notice'>You carve a face into [src]!</span>", 1)
 				new /obj/item/clothing/head/pumpkinhead (user.loc)
 				qdel(src)
 				return
-			else if(seed.chems)
+
+			if(seed.chems)
+
 				if(W.sharp && W.edge && !isnull(seed.chems["woodpulp"]))
 					user.show_message("<span class='notice'>You make planks out of \the [src]!</span>", 1)
 					playsound(src, 'sound/effects/woodcutting.ogg', 50, 1)
@@ -215,36 +217,49 @@
 						to_chat(user, "You add the newly-formed wood to the stack. It now contains [NG.amount] planks.")
 					qdel(src)
 					return
-				else if(!isnull(seed.chems["potato"]))
+				
+				if(seed.kitchen_tag == "sunflower")
+					new /obj/item/weapon/reagent_containers/food/snacks/rawsunflower(get_turf(src))
+					to_chat(user, SPAN_NOTICE("You remove the seeds from the flower, slightly damaging them."))
+					qdel(src)
+					return
+
+				if(seed.kitchen_tag == "potato" || !isnull(seed.chems["potato"]))
 					to_chat(user, "You slice \the [src] into sticks.")
 					new /obj/item/weapon/reagent_containers/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
 					return
-				else if(!isnull(seed.chems["carrotjuice"]))
+				
+				if(!isnull(seed.chems["carrotjuice"]))
 					to_chat(user, "You slice \the [src] into sticks.")
 					new /obj/item/weapon/reagent_containers/food/snacks/carrotfries(get_turf(src))
 					qdel(src)
 					return
-				else if(!isnull(seed.chems["pineapplejuice"]))
+				
+				if(!isnull(seed.chems["pineapplejuice"]))
 					to_chat(user, "You slice \the [src] into rings.")
 					new /obj/item/weapon/reagent_containers/food/snacks/pineapple_ring(get_turf(src))
 					qdel(src)
 					return
-				else if(!isnull(seed.chems["soymilk"]))
+				
+				if(!isnull(seed.chems["soymilk"]))
 					to_chat(user, "You roughly chop up \the [src].")
 					new /obj/item/weapon/reagent_containers/food/snacks/soydope(get_turf(src))
 					qdel(src)
 					return
-				else if(seed.get_trait(TRAIT_FLESH_COLOUR))
+				
+				if(seed.get_trait(TRAIT_FLESH_COLOUR))
 					to_chat(user, "You slice up \the [src].")
 					var/slices = rand(3,5)
 					var/reagents_to_transfer = round(reagents.total_volume/slices)
 					for(var/i=1; i<=slices; i++)
 						var/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/F = new(get_turf(src),seed)
-						if(reagents_to_transfer) reagents.trans_to_obj(F,reagents_to_transfer)
+						if(reagents_to_transfer)
+							reagents.trans_to_obj(F,reagents_to_transfer)
 					qdel(src)
 					return
-	..()
+
+	. = ..()
 
 /obj/item/weapon/reagent_containers/food/snacks/grown/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
 	. = ..()
@@ -350,12 +365,11 @@
 
 var/list/fruit_icon_cache = list()
 
-/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/New(var/newloc, var/datum/seed/S)
-	..(newloc)
+/obj/item/weapon/reagent_containers/food/snacks/fruit_slice/Initialize(var/ml, var/datum/seed/S)
+	. = ..(ml)
 	// Need to go through and make a general image caching controller. Todo.
 	if(!istype(S))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	name = "[S.seed_name] slice"
 	desc = "A slice of \a [S.seed_name]. Tasty, probably."

@@ -202,11 +202,11 @@
 
 	if(W.flags & NOBLUDGEON) return
 
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		to_chat(user, "<span class='notice'>It's a holowindow, you can't unfasten it!</span>")
-	else if(W.is_crowbar() && reinf && state <= 1)
+	else if(W.get_tool_quality(TOOL_CROWBAR) && reinf && state <= 1)
 		to_chat(user, "<span class='notice'>It's a holowindow, you can't pry it!</span>")
-	else if(W.is_wrench() && !anchored && (!state || !reinf))
+	else if(W.get_tool_quality(TOOL_WRENCH) && !anchored && (!state || !reinf))
 		to_chat(user, "<span class='notice'>It's a holowindow, you can't dismantle it!</span>")
 	else
 		if(W.damtype == BRUTE || W.damtype == BURN)
@@ -263,7 +263,7 @@
 	qdel(src)
 
 /obj/structure/bed/chair/holochair/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		to_chat(user, "<span class='notice'>It's a holochair, you can't dismantle it!</span>")
 	return
 
@@ -288,17 +288,17 @@
 	flags = NOBLOODY
 	var/active = 0
 
-/obj/item/weapon/holo/esword/green/New()
-		lcolor = "#008000"
+/obj/item/weapon/holo/esword/green
+	lcolor = "#008000"
 
-/obj/item/weapon/holo/esword/red/New()
-		lcolor = "#FF0000"
+/obj/item/weapon/holo/esword/red
+	lcolor = "#FF0000"
 
 /obj/item/weapon/holo/esword/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(active && default_parry_check(user, attacker, damage_source) && prob(50))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
@@ -416,8 +416,8 @@
 	to_chat(user, "The station AI is not to interact with these devices!")
 	return
 
-/obj/machinery/readybutton/New()
-	..()
+/obj/machinery/readybutton/Initialize()
+	. = ..()
 
 
 /obj/machinery/readybutton/attackby(obj/item/weapon/W as obj, mob/user as mob)
@@ -486,8 +486,8 @@
 	meat_amount = 0
 	meat_type = null
 
-/mob/living/simple_mob/animal/space/carp/holodeck/New()
-	..()
+/mob/living/simple_mob/animal/space/carp/holodeck/Initialize()
+	. = ..()
 	set_light(2) //hologram lighting
 
 /mob/living/simple_mob/animal/space/carp/holodeck/proc/set_safety(var/safe)

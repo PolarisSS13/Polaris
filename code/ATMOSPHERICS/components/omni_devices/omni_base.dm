@@ -25,8 +25,8 @@
 
 	var/list/ports = new()
 
-/obj/machinery/atmospherics/omni/New()
-	..()
+/obj/machinery/atmospherics/omni/Initialize()
+	. = ..()
 	icon_state = "base"
 
 	ports = new()
@@ -80,21 +80,9 @@
 		update_icon()
 
 /obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(!W.is_wrench())
+	if(!W.get_tool_quality(TOOL_WRENCH))
 		return ..()
-
-	if(!can_unwrench())
-		to_chat(user, "<span class='warning'>You cannot unwrench \the [src], it is too exerted due to internal pressure.</span>")
-		add_fingerprint(user)
-		return 1
-	to_chat(user, "<span class='notice'>You begin to unfasten \the [src]...</span>")
-	playsound(src, W.usesound, 50, 1)
-	if(do_after(user, 40 * W.toolspeed))
-		user.visible_message( \
-			"<span class='notice'>\The [user] unfastens \the [src].</span>", \
-			"<span class='notice'>You have unfastened \the [src].</span>", \
-			"You hear a ratchet.")
-		deconstruct()
+	return default_deconstruction_wrench(W, user)
 
 /obj/machinery/atmospherics/omni/attack_hand(user as mob)
 	if(..())

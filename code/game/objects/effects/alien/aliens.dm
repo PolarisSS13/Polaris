@@ -19,8 +19,8 @@
  * Resin
  */
 /obj/effect/alien/resin
-	name = "resin"
-	desc = "Looks like some kind of slimy growth."
+	name = "magmellite coating"
+	desc = "Looks like some kind of crystaline growth."
 	icon_state = "resin"
 
 	density = 1
@@ -31,19 +31,19 @@
 	//var/mob/living/affecting = null
 
 /obj/effect/alien/resin/wall
-	name = "resin wall"
-	desc = "Purple slime solidified into a wall."
+	name = "magmellite wall"
+	desc = "Matter reformed into a crystaline wall."
 	icon_state = "resinwall" //same as resin, but consistency ho!
 
 /obj/effect/alien/resin/membrane
-	name = "resin membrane"
-	desc = "Purple slime just thin enough to let light pass through."
+	name = "magmellite pane"
+	desc = "Purple crystal just thin enough to let light pass through."
 	icon_state = "resinmembrane"
 	opacity = 0
 	health = 120
 
-/obj/effect/alien/resin/New()
-	..()
+/obj/effect/alien/resin/Initialize()
+	. = ..()
 	var/turf/T = get_turf(src)
 	T.thermal_conductivity = WALL_HEAT_TRANSFER_COEFFICIENT
 
@@ -55,6 +55,7 @@
 /obj/effect/alien/resin/proc/healthcheck()
 	if(health <=0)
 		density = 0
+		playsound(src, 'sound/effects/hit_on_shattered_glass.ogg', 100, 1)
 		qdel(src)
 	return
 
@@ -66,7 +67,7 @@
 
 /obj/effect/alien/resin/attack_generic(var/mob/user, var/damage, var/attack_verb)
 	visible_message("<span class='danger'>[user] [attack_verb] the [src]!</span>")
-	playsound(src, 'sound/effects/attackblob.ogg', 100, 1)
+	playsound(src, 'sound/effects/glasshit.ogg', 100, 1)
 	user.do_attack_animation(src)
 	health -= damage
 	healthcheck()
@@ -100,7 +101,7 @@
 		tforce = 10
 	else
 		tforce = AM:throwforce
-	playsound(src, 'sound/effects/attackblob.ogg', 100, 1)
+	playsound(src, 'sound/effects/glasshit.ogg', 100, 1)
 	health = max(0, health - tforce)
 	healthcheck()
 	..()
@@ -120,7 +121,7 @@
 			var/mob/living/carbon/M = usr
 			if(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
 				for(var/mob/O in oviewers(src))
-					O.show_message("<span class='warning'>[usr] strokes the [name] and it melts away!</span>", 1)
+					O.show_message("<span class='warning'>[usr] strokes the [name] and it shifts away!</span>", 1)
 				health = 0
 				healthcheck()
 				return
@@ -137,7 +138,7 @@
 	user.setClickCooldown(user.get_attack_speed(W))
 	var/aforce = W.force
 	health = max(0, health - aforce)
-	playsound(src, 'sound/effects/attackblob.ogg', 100, 1)
+	playsound(src, 'sound/effects/glasshit.ogg', 100, 1)
 	healthcheck()
 	..()
 	return
@@ -174,7 +175,7 @@
 
 /obj/effect/alien/weeds/Initialize(var/mapload, var/node, var/newcolor)
 	. = ..()
-	if(isspace(loc))
+	if(isspace(loc) || (locate(/obj/effect/alien/weeds) in loc) != src)
 		return INITIALIZE_HINT_QDEL
 
 	linked_node = node
@@ -188,14 +189,11 @@
 
 /obj/effect/alien/weeds/Destroy()
 	var/turf/T = get_turf(src)
-	// To not mess up the overlay updates.
-	loc = null
-
-	for (var/obj/effect/alien/weeds/W in range(1,T))
-		W.updateWeedOverlays()
-
 	linked_node = null
-	return ..()
+	. = ..()
+	if(T)
+		for (var/obj/effect/alien/weeds/W in range(1,T))
+			W.updateWeedOverlays()
 
 /obj/effect/alien/weeds/node
 	icon_state = "weednode"
@@ -210,10 +208,10 @@
 /obj/effect/alien/weeds/node/Initialize(var/mapload, var/node, var/newcolor)
 	. = ..()
 
-	for(var/obj/effect/alien/weeds/existing in loc)
-		if(existing == src)
-			continue
-		else
+	if(. != INITIALIZE_HINT_QDEL && !mapload)
+		for(var/obj/effect/alien/weeds/existing in loc)
+			if(existing == src)
+				continue
 			qdel(existing)
 
 	linked_node = src
@@ -255,8 +253,6 @@
 /obj/effect/alien/weeds/proc/fullUpdateWeedOverlays()
 	for (var/obj/effect/alien/weeds/W in range(1,src))
 		W.updateWeedOverlays()
-
-	return
 
 // NB: This is not actually called by a processing subsystem, it's called by the node processing
 /obj/effect/alien/weeds/process()
@@ -381,7 +377,7 @@
 	var/ticks = 0
 	var/target_strength = 0
 
-/obj/effect/alien/acid/New(loc, target)
+/obj/effect/alien/acid/Initialize(var/ml, target)
 	..(loc)
 	src.target = target
 
@@ -444,15 +440,15 @@
 	var/health = 100
 	var/status = BURST //can be GROWING, GROWN or BURST; all mutually exclusive
 
-/obj/effect/alien/egg/New()
 /*
+/obj/effect/alien/egg/Initialize()
+	. = ..()
 	if(config.aliens_allowed)
-		..()
-		spawn(rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
-			Grow()
+		addtimer(CALLBACK(src, .proc/Grow), rand(MIN_GROWTH_TIME,MAX_GROWTH_TIME))
 	else
-		qdel(src)
+		return INITIALIZE_HINT_QDEL
 */
+
 /obj/effect/alien/egg/attack_hand(user as mob)
 
 	var/mob/living/carbon/M = user

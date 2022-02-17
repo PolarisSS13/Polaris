@@ -6,7 +6,6 @@
 	circuit = /obj/item/weapon/circuitboard/sensors
 	extra_view = 4
 	var/obj/machinery/shipsensors/sensors
-	whitelisted_types = list(/obj/effect/overmap/visitable) // Stationary emplacements can support sensors
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!(. = ..()))
@@ -194,7 +193,7 @@
 			toggle()
 		if(heat > critical_heat)
 			src.visible_message("<span class='danger'>\The [src] violently spews out sparks!</span>")
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 

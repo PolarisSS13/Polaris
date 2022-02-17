@@ -12,8 +12,8 @@
 	var/toggle = 1	// If we /should/ be active or not,
 	var/list/internal_PDAs = list() // Assoc list of PDAs inside of this, with the department name being the index,
 
-/obj/machinery/pda_multicaster/New()
-	..()
+/obj/machinery/pda_multicaster/Initialize()
+	. = ..()
 	internal_PDAs = list("command" = new /obj/item/device/pda/multicaster/command(src),
 		"security" = new /obj/item/device/pda/multicaster/security(src),
 		"engineering" = new /obj/item/device/pda/multicaster/engineering(src),
@@ -38,9 +38,9 @@
 		icon_state = "[initial(icon_state)]_off"
 
 /obj/machinery/pda_multicaster/attackby(obj/item/I, mob/user)
-	if(I.is_screwdriver())
+	if(I.get_tool_quality(TOOL_SCREWDRIVER))
 		default_deconstruction_screwdriver(user, I)
-	else if(I.is_crowbar())
+	else if(I.get_tool_quality(TOOL_CROWBAR))
 		default_deconstruction_crowbar(user, I)
 	else
 		..()

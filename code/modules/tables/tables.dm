@@ -99,7 +99,7 @@
 
 /obj/structure/table/attackby(obj/item/weapon/W, mob/user)
 
-	if(reinforced && W.is_screwdriver())
+	if(reinforced && W.get_tool_quality(TOOL_SCREWDRIVER))
 		remove_reinforced(W, user)
 		if(!reinforced)
 			update_desc()
@@ -107,7 +107,7 @@
 			update_material()
 		return 1
 
-	if(carpeted && W.is_crowbar())
+	if(carpeted && W.get_tool_quality(TOOL_CROWBAR))
 		user.visible_message("<span class='notice'>\The [user] removes the carpet from \the [src].</span>",
 		                              "<span class='notice'>You remove the carpet from \the [src].</span>")
 		new carpeted_type(loc)
@@ -127,7 +127,7 @@
 		else
 			to_chat(user, "<span class='warning'>You don't have enough carpet!</span>")
 
-	if(!reinforced && !carpeted && material && W.is_wrench())
+	if(!reinforced && !carpeted && material && W.get_tool_quality(TOOL_WRENCH))
 		remove_material(W, user)
 		if(!material)
 			update_connections(1)
@@ -138,16 +138,16 @@
 			update_material()
 		return 1
 
-	if(!carpeted && !reinforced && !material && W.is_wrench())
-		dismantle(W, user)
-		return 1
+	if(!carpeted && !reinforced && !material && W.get_tool_quality(TOOL_WRENCH))
+		return dismantle(W, user)
+		
 
-	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
+	if(health < maxhealth && W.get_tool_quality(TOOL_WELDER))
 		var/obj/item/weapon/weldingtool/F = W
 		if(F.welding)
 			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src, F.usesound, 50, 1)
-			if(!do_after(user, 20 * F.toolspeed) || !F.remove_fuel(1, user))
+			if(!do_after(user, 20 * F.get_tool_speed(TOOL_WELDER)) || !F.remove_fuel(1, user))
 				return
 			user.visible_message("<span class='notice'>\The [user] repairs some damage to \the [src].</span>",
 			                              "<span class='notice'>You repair some damage to \the [src].</span>")
@@ -272,25 +272,28 @@
 	return null
 
 /obj/structure/table/proc/remove_reinforced(obj/item/weapon/S, mob/user)
-	reinforced = common_material_remove(user, reinforced, 40 * S.toolspeed, "reinforcements", "screws", S.usesound)
+	reinforced = common_material_remove(user, reinforced, 40 * S.get_tool_speed(TOOL_SCREWDRIVER), "reinforcements", "screws", S.usesound)
 
 /obj/structure/table/proc/remove_material(obj/item/weapon/W, mob/user)
-	material = common_material_remove(user, material, 20 * W.toolspeed, "plating", "bolts", W.usesound)
+	material = common_material_remove(user, material, 20 * W.get_tool_speed(TOOL_WRENCH), "plating", "bolts", W.usesound)
 
 /obj/structure/table/proc/dismantle(obj/item/W, mob/user)
-	if(manipulating) return
-	manipulating = 1
+	if(manipulating)
+		return FALSE
+	if(!W.get_tool_quality(TOOL_WRENCH))
+		return FALSE
+	manipulating = TRUE
 	user.visible_message("<span class='notice'>\The [user] begins dismantling \the [src].</span>",
 	                              "<span class='notice'>You begin dismantling \the [src].</span>")
 	playsound(src, W.usesound, 50, 1)
-	if(!do_after(user, 20 * W.toolspeed))
-		manipulating = 0
-		return
+	if(!do_after(user, 20 * W.get_tool_speed(TOOL_WRENCH)))
+		manipulating = FALSE
+		return FALSE
 	user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>",
 	                              "<span class='notice'>You dismantle \the [src].</span>")
 	new /obj/item/stack/material/steel(src.loc)
 	qdel(src)
-	return
+	return TRUE
 
 // Returns a list of /obj/item/weapon/material/shard objects that were created as a result of this table's breakage.
 // Used for !fun! things such as embedding shards in the faces of tableslammed people.

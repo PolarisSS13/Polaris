@@ -35,8 +35,8 @@ var/global/list/light_type_cache = list()
 
 	var/cell_connectors = TRUE
 
-/obj/machinery/light_construct/New(var/atom/newloc, var/newdir, var/building = 0, var/datum/frame/frame_types/frame_type, var/obj/machinery/light/fixture = null)
-	..(newloc)
+/obj/machinery/light_construct/Initialize(var/ml, var/newdir, var/building = 0, var/datum/frame/frame_types/frame_type, var/obj/machinery/light/fixture = null)
+	. = ..(ml)
 	if(fixture)
 		fixture_type = fixture.type
 		fixture.transfer_fingerprints_to(src)
@@ -75,7 +75,7 @@ var/global/list/light_type_cache = list()
 
 /obj/machinery/light_construct/attack_hand(mob/user)
 	. = ..()
-	if(.) 
+	if(.)
 		return . // obj/machinery/attack_hand returns 1 if user can't use the machine
 	if(cell)
 		user.visible_message("[user] removes [cell] from [src]!","<span class='notice'>You remove [cell].</span>")
@@ -103,11 +103,11 @@ var/global/list/light_type_cache = list()
 			add_fingerprint(user)
 		return
 
-	if (W.is_wrench())
+	if (W.get_tool_quality(TOOL_WRENCH))
 		if (src.stage == 1)
 			playsound(src, W.usesound, 75, 1)
 			to_chat(usr, "You begin deconstructing [src].")
-			if (!do_after(usr, 30 * W.toolspeed))
+			if (!do_after(usr, 30 * W.get_tool_speed(TOOL_WRENCH)))
 				return
 			new /obj/item/stack/material/steel( get_turf(src.loc), sheets_refunded )
 			user.visible_message("[user.name] deconstructs [src].", \
@@ -122,7 +122,7 @@ var/global/list/light_type_cache = list()
 			to_chat(usr, "You have to unscrew the case first.")
 			return
 
-	if(W.is_wirecutter())
+	if(W.get_tool_quality(TOOL_WIRECUTTER))
 		if (src.stage != 2) return
 		src.stage = 1
 		src.update_icon()
@@ -142,7 +142,7 @@ var/global/list/light_type_cache = list()
 				"You add wires to [src].")
 		return
 
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		if (src.stage == 2)
 			src.stage = 3
 			src.update_icon()
@@ -261,6 +261,9 @@ var/global/list/light_type_cache = list()
 	light_type = /obj/item/weapon/light/bulb
 	construct_type = /obj/machinery/light_construct/small
 
+/obj/machinery/light/small/no_nightshift
+	nightshift_allowed = FALSE
+
 /obj/machinery/light/small/flicker
 	auto_flicker = TRUE
 
@@ -280,16 +283,15 @@ var/global/list/light_type_cache = list()
 	construct_type = /obj/machinery/light_construct/flamp
 	var/lamp_shade = 1
 
-/obj/machinery/light/flamp/New(atom/newloc, obj/machinery/light_construct/construct = null)
-	..(newloc, construct)
+/obj/machinery/light/flamp/Initialize(var/ml, obj/machinery/light_construct/construct = null)
+	. = ..(ml, construct)
 	if(construct)
 		start_with_cell = FALSE
 		lamp_shade = 0
 		update_icon()
-	else	
-		if(start_with_cell && !no_emergency)
-			cell = new/obj/item/weapon/cell/emergency_light(src)
-	
+	else if(start_with_cell && !no_emergency)
+		cell = new/obj/item/weapon/cell/emergency_light(src)
+
 
 /obj/machinery/light/flamp/flicker
 	auto_flicker = TRUE
@@ -310,8 +312,8 @@ var/global/list/light_type_cache = list()
 	auto_flicker = TRUE
 
 // create a new lighting fixture
-/obj/machinery/light/New(atom/newloc, obj/machinery/light_construct/construct = null)
-	..(newloc)
+/obj/machinery/light/Initialize(var/ml, obj/machinery/light_construct/construct = null)
+	. = ..(ml)
 
 	if(construct)
 		start_with_cell = FALSE
@@ -559,7 +561,7 @@ var/global/list/light_type_cache = list()
 
 	// attempt to stick weapon into light socket
 	else if(status == LIGHT_EMPTY)
-		if(W.is_screwdriver()) //If it's a screwdriver open it.
+		if(W.get_tool_quality(TOOL_SCREWDRIVER)) //If it's a screwdriver open it.
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] opens [src]'s casing.", \
 				"You open [src]'s casing.", "You hear a noise.")
@@ -569,7 +571,7 @@ var/global/list/light_type_cache = list()
 
 		to_chat(user, "You stick \the [W] into the light socket!")
 		if(has_power() && !(W.flags & NOCONDUCT))
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			//if(!user.mutations & COLD_RESISTANCE)
@@ -577,7 +579,7 @@ var/global/list/light_type_cache = list()
 				electrocute_mob(user, get_area(src), src, rand(0.7,1.0))
 
 /obj/machinery/light/flamp/attackby(obj/item/W, mob/user)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		anchored = !anchored
 		playsound(src, W.usesound, 50, 1)
 		to_chat(user, "<span class='notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
@@ -590,7 +592,7 @@ var/global/list/light_type_cache = list()
 			return
 
 	else
-		if(W.is_screwdriver())
+		if(W.get_tool_quality(TOOL_SCREWDRIVER))
 			playsound(src, W.usesound, 75, 1)
 			user.visible_message("[user.name] removes [src]'s lamp shade.", \
 				"You remove [src]'s lamp shade.", "You hear a noise.")
@@ -665,7 +667,7 @@ var/global/list/light_type_cache = list()
 	update(FALSE)
 	return
 
-// ai alt click - Make light flicker.  Very important for atmosphere.  
+// ai alt click - Make light flicker.  Very important for atmosphere.
 /obj/machinery/light/AIAltClick(mob/user)
 	flicker(1)
 
@@ -755,7 +757,7 @@ var/global/list/light_type_cache = list()
 		if(status == LIGHT_OK || status == LIGHT_BURNED)
 			playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 		if(on)
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 	status = LIGHT_BROKEN
@@ -852,7 +854,7 @@ var/global/list/light_type_cache = list()
 	var/brightness_color = LIGHT_COLOR_INCANDESCENT_TUBE
 
 	var/nightshift_range = 8
-	var/nightshift_power = 0.7
+	var/nightshift_power = 0.8
 	var/nightshift_color = LIGHT_COLOR_NIGHTSHIFT
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
@@ -874,7 +876,7 @@ var/global/list/light_type_cache = list()
 	brightness_power = 9
 
 	nightshift_range = 10
-	nightshift_power = 0.9
+	nightshift_power = 7
 
 /obj/item/weapon/light/bulb
 	name = "light bulb"
@@ -888,7 +890,7 @@ var/global/list/light_type_cache = list()
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
 
 	nightshift_range = 3
-	nightshift_power = 0.35
+	nightshift_power = 2
 
 /obj/item/weapon/light/throw_impact(atom/hit_atom)
 	..()
@@ -921,8 +923,8 @@ var/global/list/light_type_cache = list()
 			desc = "A broken [name]."
 
 
-/obj/item/weapon/light/New(atom/newloc, obj/machinery/light/fixture = null)
-	..()
+/obj/item/weapon/light/Initialize(var/ml, obj/machinery/light/fixture = null)
+	. = ..(ml)
 	if(fixture)
 		status = fixture.status
 		rigged = fixture.rigged

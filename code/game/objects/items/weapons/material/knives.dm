@@ -68,13 +68,7 @@
 	origin_tech = list(TECH_MATERIAL = 1)
 	attack_verb = list("slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	drop_sound = 'sound/items/drop/knife.ogg'
-
-/obj/item/weapon/material/knife/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	to_chat(viewers(user), pick("<span class='danger'>\The [user] is slitting [TU.his] wrists with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting [TU.his] throat with \the [src]! It looks like [TU.hes] trying to commit suicide.</span>", \
-	                      "<span class='danger'>\The [user] is slitting [TU.his] stomach open with \the [src]! It looks like [TU.hes] trying to commit seppuku.</span>"))
-	return (BRUTELOSS)
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_POOR, TOOL_KNIFE = TOOL_QUALITY_STANDARD)
 
 // These no longer inherit from hatchets.
 /obj/item/weapon/material/knife/tacknife
@@ -146,6 +140,8 @@
 	attack_verb = list("slashed", "chopped", "gouged", "ripped", "cut")
 	can_cleave = TRUE //Now hatchets inherit from the machete, and thus knives. Tables turned.
 	slot_flags = SLOT_BELT
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_MEDIOCRE, TOOL_KNIFE = TOOL_QUALITY_STANDARD)
+
 
 /obj/item/weapon/material/knife/machete/cyborg
 	name = "integrated machete"
@@ -159,4 +155,4 @@
 	icon_state = "survivalknife"
 	item_state = "knife"
 	applies_material_colour = FALSE
-	toolspeed = 2 // Use a real axe if you want to chop logs.
+	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_POOR) // Use a real axe if you want to chop logs.

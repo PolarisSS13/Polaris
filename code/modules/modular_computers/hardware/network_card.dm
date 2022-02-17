@@ -25,8 +25,8 @@ var/global/ntnet_card_uid = 1
 	if(ethernet)
 		to_chat(user, "OpenEth (Physical Connection) - Physical network connection port")
 
-/obj/item/weapon/computer_hardware/network_card/New(var/l)
-	..(l)
+/obj/item/weapon/computer_hardware/network_card/Initialize()
+	. = ..()
 	identification_id = ntnet_card_uid
 	ntnet_card_uid++
 
@@ -103,7 +103,7 @@ var/global/ntnet_card_uid = 1
 		var/holderz = get_z(holder2)
 		if(!holderz) //no reception in nullspace
 			return 0
-		var/list/zlevels_in_range = using_map.get_map_levels(holderz, FALSE)
+		var/list/zlevels_in_range = using_map.get_map_levels(holderz, FALSE, om_range = DEFAULT_OVERMAP_RANGE)
 		var/list/zlevels_in_long_range = using_map.get_map_levels(holderz, TRUE, om_range = DEFAULT_OVERMAP_RANGE) - zlevels_in_range
 		var/best = 0
 		for(var/relay in ntnet_global.relays)

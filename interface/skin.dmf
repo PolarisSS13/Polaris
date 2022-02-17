@@ -1324,9 +1324,19 @@ window "rpane"
 		saved-params = "splitter"
 		right = "outputwindow"
 		is-vert = false
+	elem "discord"
+		type = BUTTON
+		pos = 428,0
+		size = 60x16
+		anchor1 = none
+		anchor2 = none
+		saved-params = "is-checked"
+		text = "Discord"
+		command = "discord"
+		group = "rpanemode"
 	elem "github"
 		type = BUTTON
-		pos = 392,0
+		pos = 368,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1336,7 +1346,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "mapb"
 		type = BUTTON
-		pos = 332,0
+		pos = 308,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1346,7 +1356,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "rulesb"
 		type = BUTTON
-		pos = 272,0
+		pos = 248,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1366,7 +1376,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "forumb"
 		type = BUTTON
-		pos = 212,0
+		pos = 188,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1376,7 +1386,7 @@ window "rpane"
 		group = "rpanemode"
 	elem "wikib"
 		type = BUTTON
-		pos = 152,0
+		pos = 128,0
 		size = 60x16
 		anchor1 = none
 		anchor2 = none
@@ -1443,6 +1453,31 @@ window "browserwindow"
 		saved-params = ""
 		on-show = ".winset\"rpane.infob.is-visible=true?rpane.infob.pos=130,0;rpane.textb.is-visible=true;rpane.browseb.is-visible=true;rpane.browseb.is-checked=true;rpane.rpanewindow.pos=0,30;rpane.rpanewindow.size=0x0;rpane.rpanewindow.left=browserwindow\""
 		on-hide = ".winset\"rpane.infob.is-visible=true?rpane.infob.is-checked=true rpane.infob.pos=65,0 rpane.rpanewindow.left=infowindow:rpane.rpanewindow.left=textwindow rpane.textb.is-visible=true rpane.rpanewindow.pos=0,30 rpane.rpanewindow.size=0x0\""
+
+window "preferences_window"
+	elem "preferences_window"
+		type = MAIN
+		pos = 281,0
+		size = 1000x800
+		anchor1 = none
+		anchor2 = none
+		is-visible = false
+		saved-params = "pos;size;is-minimized;is-maximized"
+		statusbar = false
+	elem "preferences_browser"
+		type = BROWSER
+		pos = 0,0
+		size = 800x800
+		anchor1 = 0,0
+		anchor2 = 80,100
+		saved-params = ""
+	elem "character_preview_map"
+		type = MAP
+		pos = 800,0
+		size = 200x800
+		anchor1 = 80,0
+		anchor2 = 100,100
+		right-click = false
 
 window "infowindow"
 	elem "infowindow"

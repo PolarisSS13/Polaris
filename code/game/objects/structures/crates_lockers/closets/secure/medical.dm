@@ -200,6 +200,8 @@
 	desc = "Store psychology tools and medicines in here."
 	req_access = list(access_psychiatrist)
 	closet_appearance = /decl/closet_appearance/cabinet/secure
+	open_sound = 'sound/machines/closet/closet_wood_open.ogg'
+	close_sound = 'sound/machines/closet/closet_wood_close.ogg'
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/psych,
@@ -227,6 +229,7 @@
 	wall_mounted = 1
 	req_access = list(access_medical_equip)
 	closet_appearance = /decl/closet_appearance/wall/medical
+	door_anim_time = 0 // Unsupported
 
 /obj/structure/closet/secure_closet/medical_wall/pills
 	name = "pill cabinet"

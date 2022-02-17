@@ -33,8 +33,8 @@
 	var/overlay_full_state = "cell-o2" // Overlay used when fully charged.
 	var/last_overlay_state = null // Used to optimize update_icon() calls.
 
-/obj/item/weapon/cell/New()
-	..()
+/obj/item/weapon/cell/Initialize()
+	. = ..()
 	c_uid = cell_uid++
 	charge = maxcharge
 	update_icon()
@@ -265,8 +265,3 @@
 			return min(rand(10,20),rand(10,20))
 		else
 			return 0
-
-/obj/item/weapon/cell/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	to_chat(viewers(user),"<span class='danger'>\The [user] is licking the electrodes of \the [src]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
-	return (FIRELOSS)

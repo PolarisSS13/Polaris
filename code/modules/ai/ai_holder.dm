@@ -293,6 +293,9 @@
 
 // 'Tactical' processes such as moving a step, meleeing an enemy, firing a projectile, and other fairly cheap actions that need to happen quickly.
 /datum/ai_holder/proc/handle_tactics()
+	if(!istype(holder) || QDELETED(holder))
+		qdel(src)
+		return
 	if(holder.key && !autopilot)
 		return
 	handle_special_tactic()
@@ -300,6 +303,9 @@
 
 // 'Strategical' processes that are more expensive on the CPU and so don't get run as often as the above proc, such as A* pathfinding or robust targeting.
 /datum/ai_holder/proc/handle_strategicals()
+	if(!istype(holder) || QDELETED(holder))
+		qdel(src)
+		return
 	if(holder.key && !autopilot)
 		return
 	handle_special_strategical()

@@ -1,5 +1,5 @@
-/mob/living/New()
-	..()
+/mob/living/Initialize()
+	. = ..()
 
 	//Prime this list if we need it.
 	if(has_huds)
@@ -706,7 +706,7 @@
 	return FALSE
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
-	return 0
+	return FALSE
 
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
@@ -839,9 +839,9 @@
 
 	if(lying)
 		density = 0
-		if(l_hand) 
+		if(l_hand)
 			unEquip(l_hand)
-		if(r_hand) 
+		if(r_hand)
 			unEquip(r_hand)
 		for(var/obj/item/weapon/holder/holder in get_mob_riding_slots())
 			unEquip(holder)
@@ -984,17 +984,16 @@
 		swap_hand()
 
 /mob/living/throw_item(atom/target)
-	src.throw_mode_off()
-	if(usr.stat || !target)
-		return
-	if(target.type == /obj/screen) return
+	if(incapacitated() || !target || istype(target, /obj/screen))
+		return FALSE
 
 	var/atom/movable/item = src.get_active_hand()
 
-	if(!item) return
+	if(!item)
+		return FALSE
 
 	var/throw_range = item.throw_range
-	if (istype(item, /obj/item/weapon/grab))
+	if(istype(item, /obj/item/weapon/grab))
 		var/obj/item/weapon/grab/G = item
 		item = G.throw_held() //throw the person instead of the grab
 		if(ismob(item))
@@ -1012,9 +1011,35 @@
 					N.adjustBruteLoss(rand(10,30))
 			src.drop_from_inventory(G)
 
-	src.drop_from_inventory(item)
-	if(!item || !isturf(item.loc))
-		return
+			src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
+
+			if((isspace(src.loc)) || (src.lastarea?.has_gravity == 0))
+				src.inertia_dir = get_dir(target, src)
+				step(src, inertia_dir)
+			item.throw_at(target, throw_range, item.throw_speed, src)
+
+			return TRUE
+		return FALSE
+
+	if(a_intent == I_HELP && Adjacent(target) && isitem(item))
+		if(ishuman(target))
+			var/mob/living/carbon/human/H = target
+			if(H.in_throw_mode && H.a_intent == I_HELP && unEquip(item))
+				H.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
+				visible_message("<b>[src]</b> hands \the [H] \a [item].", SPAN_NOTICE("You give \the [target] \a [item]."))
+			else
+				to_chat(src, SPAN_NOTICE("You offer \the [item] to \the [target]."))
+				do_give(H)
+			return TRUE
+
+		drop_from_inventory(item)
+		item.forceMove(get_turf(target))
+		return TRUE
+
+	drop_from_inventory(item)
+
+	if(!item || QDELETED(item))
+		return TRUE //It may not have thrown, but it sure as hell left your hand successfully.
 
 	//actually throw it!
 	src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
@@ -1035,6 +1060,7 @@
 
 
 	item.throw_at(target, throw_range, item.throw_speed, src)
+	return TRUE
 
 /mob/living/get_sound_env(var/pressure_factor)
 	if (hallucination)
@@ -1110,3 +1136,23 @@
 // Each mob does vision a bit differently so this is just for inheritence and also so overrided procs can make the vision apply instantly if they call `..()`.
 /mob/living/proc/disable_spoiler_vision()
 	handle_vision()
+
+/mob/living/proc/get_player_regions()
+	// A living player is always in a universal region
+	. = list(EVENT_REGION_UNIVERSAL)
+
+	var/turf/T = get_turf(src)
+	var/obj/effect/overmap/visitable/M = get_overmap_sector(T.z)
+	
+	if(istype(M))
+		if(M.in_space)
+			if(T.z in using_map.station_levels)
+				. |= EVENT_REGION_SPACESTATION
+			else
+				. |= EVENT_REGION_DEEPSPACE
+		else
+			. |= EVENT_REGION_PLANETSURFACE
+
+	var/datum/map_z_level/zlevel = using_map.zlevels["[T.z]"]
+	if(istype(zlevel))
+		. |= zlevel.event_regions

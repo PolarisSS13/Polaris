@@ -69,7 +69,7 @@
 
 /obj/item/weapon/flamethrower/attackby(obj/item/W as obj, mob/user as mob)
 	if(user.stat || user.restrained() || user.lying)	return
-	if(W.is_wrench() && !status)//Taking this apart
+	if(W.get_tool_quality(TOOL_WRENCH) && !status)//Taking this apart
 		var/turf/T = get_turf(src)
 		if(weldtool)
 			weldtool.loc = T
@@ -84,7 +84,7 @@
 		qdel(src)
 		return
 
-	if(W.is_screwdriver() && igniter && !lit)
+	if(W.get_tool_quality(TOOL_SCREWDRIVER) && igniter && !lit)
 		status = !status
 		to_chat(user, "<span class='notice'>[igniter] is now [status ? "secured" : "unsecured"]!</span>")
 		update_icon()
@@ -193,12 +193,11 @@
 	//location.hotspot_expose(1000,500,1)
 	return
 
-/obj/item/weapon/flamethrower/full/New(var/loc)
-	..()
+/obj/item/weapon/flamethrower/full/Initialize(var/ml)
+	. = ..(ml)
 	weldtool = new /obj/item/weapon/weldingtool(src)
 	weldtool.status = 0
 	igniter = new /obj/item/device/assembly/igniter(src)
 	igniter.secured = 0
 	status = 1
 	update_icon()
-	return

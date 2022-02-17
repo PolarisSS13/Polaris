@@ -55,7 +55,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 
 /obj/machinery/power/solar/attackby(obj/item/weapon/W, mob/user)
 
-	if(W.is_crowbar())
+	if(W.get_tool_quality(TOOL_CROWBAR))
 		playsound(src, 'sound/machines/click.ogg', 50, 1)
 		user.visible_message("<span class='notice'>[user] begins to take the glass off the solar panel.</span>")
 		if(do_after(user, 50))
@@ -160,12 +160,11 @@ GLOBAL_LIST_EMPTY(solars_list)
 	return
 
 
-/obj/machinery/power/solar/fake/New(var/turf/loc, var/glass_type)
-	..(loc, glass_type, 0)
+/obj/machinery/power/solar/fake/Initialize(mapload, glass_type)
+	. = ..(mapload, glass_type, 0)
 
 /obj/machinery/power/solar/fake/process()
-	. = PROCESS_KILL
-	return
+	return PROCESS_KILL
 
 //trace towards SSsun.sun to see if we're in shadow
 /obj/machinery/power/solar/proc/occlusion()
@@ -213,13 +212,13 @@ GLOBAL_LIST_EMPTY(solars_list)
 	if (!isturf(loc))
 		return 0
 	if(!anchored)
-		if(W.is_wrench())
+		if(W.get_tool_quality(TOOL_WRENCH))
 			anchored = 1
 			user.visible_message("<span class='notice'>[user] wrenches the solar assembly into place.</span>")
 			playsound(src, W.usesound, 75, 1)
 			return 1
 	else
-		if(W.is_wrench())
+		if(W.get_tool_quality(TOOL_WRENCH))
 			anchored = 0
 			user.visible_message("<span class='notice'>[user] unwrenches the solar assembly from it's place.</span>")
 			playsound(src, W.usesound, 75, 1)
@@ -248,7 +247,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 			user.visible_message("<span class='notice'>[user] inserts the electronics into the solar assembly.</span>")
 			return 1
 	else
-		if(W.is_crowbar())
+		if(W.get_tool_quality(TOOL_CROWBAR))
 			new /obj/item/weapon/tracker_electronics(src.loc)
 			tracker = 0
 			user.visible_message("<span class='notice'>[user] takes out the electronics from the solar assembly.</span>")
@@ -408,7 +407,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 	return data
 
 /obj/machinery/power/solar_control/attackby(obj/item/I, user as mob)
-	if(I.is_screwdriver())
+	if(I.get_tool_quality(TOOL_SCREWDRIVER))
 		playsound(src, I.usesound, 50, 1)
 		if(do_after(user, 20))
 			if (src.stat & BROKEN)

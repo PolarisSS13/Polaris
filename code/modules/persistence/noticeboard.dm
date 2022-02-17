@@ -85,7 +85,7 @@
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/weapon/thing, var/mob/user)
-	if(thing.is_screwdriver())
+	if(thing.get_tool_quality(TOOL_SCREWDRIVER))
 		var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 		if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -103,7 +103,7 @@
 					pixel_x = -32
 					pixel_y = 0
 		return
-	else if(thing.is_wrench())
+	else if(thing.get_tool_quality(TOOL_WRENCH))
 		visible_message(SPAN_WARNING("\The [user] begins dismantling \the [src]."))
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 50, src))
@@ -185,7 +185,9 @@
 	notices = 5
 	icon_state = "nboard05"
 
-/obj/structure/noticeboard/anomaly/New()
+/obj/structure/noticeboard/anomaly/Initialize()
+	. = ..()
+	
 	var/obj/item/weapon/paper/P = new()
 	P.name = "Memo RE: proper analysis procedure"
 	P.info = "<br>We keep test dummies in pens here for a reason, so standard procedure should be to activate newfound alien artifacts and place the two in close proximity. Promising items I might even approve monkey testing on."

@@ -21,9 +21,9 @@
 		"heat exchange pipes" = /obj/machinery/atmospherics/pipe/simple/heat_exchanging
 	)
 
-/obj/machinery/pipelayer/New()
+/obj/machinery/pipelayer/Initialize()
 	W = new(src)
-	..()
+	. = ..()
 	default_apply_parts()
 	update_icon()
 
@@ -81,12 +81,12 @@
 		return
 	if(default_part_replacement(user, W))
 		return
-	if (!panel_open && W.is_wrench())
+	if (!panel_open && W.get_tool_quality(TOOL_WRENCH))
 		P_type_t = input("Choose pipe type", "Pipe type") as null|anything in Pipes
 		P_type = Pipes[P_type_t]
 		user.visible_message("<span class='notice'>[user] has set \the [src] to manufacture [P_type_t].</span>", "<span class='notice'>You set \the [src] to manufacture [P_type_t].</span>")
 		return
-	if(!panel_open && W.is_crowbar())
+	if(!panel_open && W.get_tool_quality(TOOL_CROWBAR))
 		a_dis = !a_dis
 		user.visible_message("<span class='notice'>[user] has [!a_dis?"de":""]activated auto-dismantling.</span>", "<span class='notice'>You [!a_dis?"de":""]activate auto-dismantling.</span>")
 		return

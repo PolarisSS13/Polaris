@@ -6,6 +6,7 @@
 	force = 2
 	throwforce = 2
 	w_class = 2.0
+	matter = list(MAT_STEEL = 50)
 	var/broken
 	attack_verb = list("annoyed")
 	var/static/radial_examine = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_examine")
@@ -86,7 +87,7 @@
 /obj/item/weapon/deskbell/attackby(obj/item/W, mob/user, params)
 	if(!istype(W))
 		return
-	if(W.is_wrench() && isturf(loc))
+	if(W.get_tool_quality(TOOL_WRENCH) && isturf(loc))
 		if(do_after(5))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You dissasemble the desk bell</span>")

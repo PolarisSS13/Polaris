@@ -151,13 +151,13 @@
 		var/field_dir = get_dir(T2,get_step(T2, NSEW))
 		T = get_step(T2, NSEW)
 		T2 = T
-		var/obj/machinery/shieldwall/CF = new/obj/machinery/shieldwall/(src, G) //(ref to this gen, ref to connected gen)
+		var/obj/machinery/shieldwall/CF = new /obj/machinery/shieldwall(src, src, G) //(ref to this gen, ref to connected gen)
 		CF.loc = T
 		CF.set_dir(field_dir)
 
 
 /obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		if(active)
 			to_chat(user, "Turn off the field generator first.")
 			return
@@ -239,19 +239,19 @@
 		var/power_usage = 2500	//how much power it takes to sustain the shield
 		var/generate_power_usage = 7500	//how much power it takes to start up the shield
 
-/obj/machinery/shieldwall/New(var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
-	..()
+/obj/machinery/shieldwall/Initialize(var/ml, var/obj/machinery/shieldwallgen/A, var/obj/machinery/shieldwallgen/B)
+	. = ..(ml)
 	update_nearby_tiles()
 	src.gen_primary = A
 	src.gen_secondary = B
-	if(A && B && A.active && B.active)
+	if(istype(A) && istype(B) && A.active && B.active)
 		needs_power = 1
 		if(prob(50))
 			A.storedpower -= generate_power_usage
 		else
 			B.storedpower -= generate_power_usage
 	else
-		qdel(src) //need at least two generator posts
+		return INITIALIZE_HINT_QDEL
 
 /obj/machinery/shieldwall/Destroy()
 	update_nearby_tiles()

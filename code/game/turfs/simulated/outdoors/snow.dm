@@ -27,9 +27,9 @@
 		add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = "snow_footprints", dir = text2num(d)))
 
 /turf/simulated/floor/outdoors/snow/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/weapon/shovel))
+	if(W.get_tool_quality(TOOL_SHOVEL))
 		to_chat(user, "<span class='notice'>You begin to remove \the [src] with your [W].</span>")
-		if(do_after(user, 4 SECONDS * W.toolspeed))
+		if(do_after(user, 4 SECONDS * W.get_tool_speed(TOOL_SHOVEL)))
 			to_chat(user, "<span class='notice'>\The [src] has been dug up, and now lies in a pile nearby.</span>")
 			var/obj/item/stack/material/snow/S = new(src)
 			S.amount = 10
@@ -64,11 +64,15 @@
 	desc = "Dark rock that has been smoothened to be perfectly even. It's coated in a layer of slippey ice"
 
 /turf/simulated/floor/outdoors/ice/Entered(var/mob/living/M)
-	sleep(1 * world.tick_lag)
-	if(istype(M, /mob/living))
+	..()
+	if(istype(M))
+		M.SetStunned(1)
+		addtimer(CALLBACK(src, .proc/slip_mob, M), 1 * world.tick_lag)
+
+/turf/simulated/floor/outdoors/ice/proc/slip_mob(var/mob/living/M)
+	if(istype(M, /mob/living) && M.loc == src)
 		if(M.stunned == 0)
 			to_chat(M, "<span class='warning'>You slide across the ice!</span>")
-		M.SetStunned(1)
 		step(M,M.dir)
 
 // Ice that is used for, say, areas floating on water or similar.

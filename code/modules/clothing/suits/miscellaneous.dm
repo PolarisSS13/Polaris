@@ -214,6 +214,14 @@
 	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
 	item_state_slots = list(slot_r_hand_str = "red_labcoat", slot_l_hand_str = "red_labcoat")
 
+/obj/item/clothing/suit/marine
+	name = "marine armor"
+	desc = "A set of marine prop armor from the popular game 'Ruin'."
+	icon_state = "marine"
+	body_parts_covered = FEET|LOWER_TORSO|UPPER_TORSO|LEGS
+	flags_inv = HIDESHOES|HIDEJUMPSUIT|HIDETIE|HIDEHOLSTER
+	item_state_slots = list(slot_r_hand_str = "green_labcoat", slot_l_hand_str = "green_labcoat")
+
 /*
  * Misc
  */
@@ -463,6 +471,11 @@
 	cold_protection = UPPER_TORSO|ARMS
 	min_cold_protection_temperature = T0C - 20
 	siemens_coefficient = 0.7
+
+/obj/item/clothing/suit/storage/toggle/bomber/retro
+	name = "retro bomber jacket"
+	desc = "A retro style, fur-lined leather bomber jacket that invokes the early days of space exploration when spacemen were spacemen, and laser guns had funny little antennae on them."
+	icon_state = "retro_bomber"
 
 /obj/item/clothing/suit/storage/bomber/alt
 	name = "bomber jacket"
@@ -715,6 +728,19 @@
 	item_state_slots = list(slot_r_hand_str = "med_dep_jacket", slot_l_hand_str = "med_dep_jacket")
 	flags_inv = HIDEHOLSTER
 
+/obj/item/clothing/suit/storage/toggle/light_jacket
+	name = "grey light jacket"
+	desc = "A light, cozy jacket. Now in grey."
+	icon_state = "grey_dep_jacket"
+	item_state_slots = list(slot_r_hand_str = "grey_dep_jacket", slot_l_hand_str = "grey_dep_jacket")
+	flags_inv = HIDEHOLSTER
+
+/obj/item/clothing/suit/storage/toggle/light_jacket/blue
+	name = "dark blue light jacket"
+	desc = "A light, cozy jacket. Now in dark blue."
+	icon_state = "blue_dep_jacket"
+	item_state_slots = list(slot_r_hand_str = "blue_dep_jacket", slot_l_hand_str = "blue_dep_jacket")
+
 /*
  * Track Jackets
  */
@@ -903,6 +929,7 @@
 
 /obj/item/clothing/suit/caution/AltClick()
 	toggle()
+	return TRUE
 
 /obj/item/clothing/suit/caution/proc/toggle()
 	if(!usr || usr.stat || usr.lying || usr.restrained() || !Adjacent(usr))	return

@@ -18,8 +18,8 @@
 	throw_speed = 4
 	throw_range = 20
 
-/obj/item/device/taperecorder/New()
-	..()
+/obj/item/device/taperecorder/Initialize()
+	. = ..()
 	if(ispath(mytape))
 		mytape = new mytape(src)
 		update_icon()
@@ -408,10 +408,10 @@
 
 
 /obj/item/device/tape/attackby(obj/item/I, mob/user, params)
-	if(ruined && I.is_screwdriver())
+	if(ruined && I.get_tool_quality(TOOL_SCREWDRIVER))
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
 		playsound(src, I.usesound, 50, 1)
-		if(do_after(user, 120 * I.toolspeed, target = src))
+		if(do_after(user, 120 * I.get_tool_speed(TOOL_SCREWDRIVER), target = src))
 			to_chat(user, "<span class='notice'>You wound the tape back in.</span>")
 			fix()
 		return
@@ -431,5 +431,6 @@
 
 
 //Random colour tapes
-/obj/item/device/tape/random/New()
+/obj/item/device/tape/random/Initialize()
+	. = ..()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"

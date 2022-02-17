@@ -67,7 +67,7 @@
 /datum/reagent/toxin/neurotoxic_protein
 	name = "toxic protein"
 	id = "neurotoxic_protein"
-	description = "A weak neurotoxic chemical commonly found in Sivian fish meat."
+	description = "A weak neurotoxic chemical."
 	taste_description = "fish"
 	reagent_state = LIQUID
 	color = "#005555"
@@ -89,11 +89,13 @@
 /datum/reagent/toxin/hydrophoron
 	name = "Hydrophoron"
 	id = "hydrophoron"
+	reagent_state = SOLID
 	description = "An exceptionally flammable molecule formed from deuterium synthesis."
 	strength = 80
 	var/fire_mult = 30
 
 /datum/reagent/toxin/hydrophoron/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
 
@@ -105,6 +107,7 @@
 /datum/reagent/toxin/hydrophoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
+	..()
 	T.assume_gas("phoron", CEILING(volume/2, 1), T20C)
 	for(var/turf/simulated/floor/target_tile in range(0,T))
 		target_tile.assume_gas("phoron", volume/2, 400+T0C)
@@ -119,6 +122,27 @@
 			to_chat(M, "<span class='critical'>You feel something boiling within you!</span>")
 			spawn(rand(30, 60))
 				M.IgniteMob()
+
+/datum/reagent/toxin/energized_phoron
+	name = "phoron plasma"
+	id = "energetic_phoron"
+	description = "A strange, liquid-like form of Phoron."
+	strength = 20
+	affects_robots = TRUE
+
+	var/fire_mult = 4
+
+/datum/reagent/toxin/energized_phoron/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.apply_damage(removed * 30, ELECTROCUTE, ran_zone())
+	M.apply_damage(removed * 10, BIOACID, ran_zone())
+	if(prob(10 * fire_mult))
+		M.pl_effects()
+
+/datum/reagent/toxin/energized_phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+	M.apply_damage(removed * 40, ELECTROCUTE, ran_zone())
+	M.adjust_fire_stacks(removed * 5)
 
 /datum/reagent/toxin/lead
 	name = "lead"
@@ -137,15 +161,16 @@
 /datum/reagent/toxin/phoron
 	name = "Phoron"
 	id = "phoron"
-	description = "Phoron in its liquid form."
+	description = "Phoron in a powdered form."
 	taste_mult = 1.5
-	reagent_state = LIQUID
+	reagent_state = SOLID
 	color = "#9D14DB"
 	strength = 30
 	touch_met = 5
 	skin_danger = 1
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
@@ -167,6 +192,7 @@
 	..()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T, var/amount)
+	..()
 	if(!istype(T))
 		return
 	T.assume_gas("volatile_fuel", amount, T20C)
@@ -388,6 +414,7 @@
 	color = "#e67819"
 
 /datum/reagent/toxin/fertilizer/tannin/touch_obj(var/obj/O, var/volume)
+	..()
 	if(istype(O, /obj/item/stack/hairlesshide))
 		var/obj/item/stack/hairlesshide/HH = O
 		HH.rapidcure(round(volume))
@@ -403,6 +430,7 @@
 	strength = 4
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
+	..()
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		if(locate(/obj/effect/overlay/wallrot) in W)
@@ -411,6 +439,7 @@
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
 /datum/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/volume)
+	..()
 	if(istype(O, /obj/effect/plant))
 		qdel(O)
 	else if(istype(O, /obj/effect/alien/weeds/))

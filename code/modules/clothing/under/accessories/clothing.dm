@@ -252,10 +252,11 @@
 /obj/item/clothing/accessory/hawaii/random
 	name = "flower-pattern shirt"
 
-/obj/item/clothing/accessory/hawaii/random/New()
+/obj/item/clothing/accessory/hawaii/random/Initialize()
 	if(prob(50))
 		icon_state = "hawaii2"
 	color = color_rotation(rand(-11,12)*15)
+	. = ..()
 
 /obj/item/clothing/accessory/wcoat
 	name = "waistcoat"
@@ -375,6 +376,13 @@
 	name = "red turtleneck"
 	desc = "A comfortable turtleneck in a dark red."
 	icon_state = "turtleneck_red"
+
+/obj/item/clothing/accessory/sweater/virgin
+	name = "virgin killer"
+	desc = "A knit sweater that leaves little to the imagination."
+	icon_state = "virginkiller"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
 
 //***
 // End of sweaters

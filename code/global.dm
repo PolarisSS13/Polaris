@@ -37,7 +37,7 @@ var/href_logfile		= null
 // var/const/starsys_name	= "Vir"
 var/const/game_version	= "Polaris"
 var/changelog_hash		= ""
-var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 544)
+var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 552)
 var/round_progressing = 1
 
 var/master_mode       = "extended" // "extended"
@@ -59,11 +59,12 @@ var/list/wizardstart     = list()
 var/list/newplayer_start = list()
 
 //Spawnpoints.
-var/list/latejoin          = list()
-var/list/latejoin_gateway  = list()
-var/list/latejoin_elevator = list()
-var/list/latejoin_cryo     = list()
-var/list/latejoin_cyborg   = list()
+var/list/latejoin            = list()
+var/list/latejoin_gateway    = list()
+var/list/latejoin_elevator   = list()
+var/list/latejoin_cryo       = list()
+var/list/latejoin_cyborg     = list()
+var/list/latejoin_checkpoint = list()
 
 var/list/prisonwarp         = list() // Prisoners go to these
 var/list/holdingfacility    = list() // Captured people go here

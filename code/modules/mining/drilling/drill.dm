@@ -328,8 +328,8 @@
 	circuit = /obj/item/weapon/circuitboard/miningdrillbrace
 	var/obj/machinery/mining/drill/connected
 
-/obj/machinery/mining/brace/New()
-	..()
+/obj/machinery/mining/brace/Initialize()
+	. = ..()
 
 	component_parts = list()
 
@@ -343,7 +343,7 @@
 	if(default_deconstruction_crowbar(user, W))
 		return
 
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 
 		if(istype(get_turf(src), /turf/space))
 			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")

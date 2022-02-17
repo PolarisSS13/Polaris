@@ -6,13 +6,15 @@
 	density = 1
 	anchored = 1
 	health = 0 //destroying the statue kills the mob within
+	door_anim_time = 0 // Why is this a closet??
 	var/intialTox = 0 	//these are here to keep the mob from taking damage from things that logically wouldn't affect a rock
 	var/intialFire = 0	//it's a little sloppy I know but it was this or the GODMODE flag. Lesser of two evils.
 	var/intialBrute = 0
 	var/intialOxy = 0
 	var/timer = 240 //eventually the person will be freed
 
-/obj/structure/closet/statue/New(loc, var/mob/living/L)
+/obj/structure/closet/statue/Initialize(var/ml, var/mob/living/L)
+	. = ..()
 	if(L && (ishuman(L) || L.isMonkey() || iscorgi(L)))
 		if(L.buckled)
 			L.buckled = 0
@@ -40,11 +42,8 @@
 			desc = "If it takes forever, I will wait for you..."
 
 	if(health == 0) //meaning if the statue didn't find a valid target
-		qdel(src)
-		return
-
+		return INITIALIZE_HINT_QDEL
 	START_PROCESSING(SSobj, src)
-	..()
 
 /obj/structure/closet/statue/process()
 	timer--

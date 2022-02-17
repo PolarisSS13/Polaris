@@ -18,8 +18,8 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/padded
 	icon_state = "stool_padded_preview" //set for the map
 
-/obj/item/weapon/stool/New(var/newloc, var/new_material, var/new_padding_material)
-	..(newloc)
+/obj/item/weapon/stool/Initialize(var/ml, var/new_material, var/new_padding_material)
+	. = ..()
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(new_material)
@@ -31,8 +31,8 @@ var/global/list/stool_cache = list() //haha stool
 	force = round(material.get_blunt_damage()*0.4)
 	update_icon()
 
-/obj/item/weapon/stool/padded/New(var/newloc, var/new_material)
-	..(newloc, "steel", "carpet")
+/obj/item/weapon/stool/padded/Initialize(var/ml, var/new_material)
+	. = ..(ml, MAT_STEEL, "carpet")
 
 /obj/item/weapon/stool/update_icon()
 	// Prep icon.
@@ -110,7 +110,7 @@ var/global/list/stool_cache = list() //haha stool
 	qdel(src)
 
 /obj/item/weapon/stool/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_wrench())
+	if(W.get_tool_quality(TOOL_WRENCH))
 		playsound(src, W.usesound, 50, 1)
 		dismantle()
 		qdel(src)
@@ -140,7 +140,7 @@ var/global/list/stool_cache = list() //haha stool
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
-	else if (W.is_wirecutter())
+	else if (W.get_tool_quality(TOOL_WIRECUTTER))
 		if(!padding_material)
 			to_chat(user, "\The [src] has no padding to remove.")
 			return
@@ -166,5 +166,5 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/weapon/stool/barstool/padded
 	icon_state = "bar_stool_padded_preview" //set for the map
 
-/obj/item/weapon/stool/barstool/padded/New(var/newloc, var/new_material)
-	..(newloc, "steel", "carpet")
+/obj/item/weapon/stool/barstool/padded/Initialize(var/ml, var/new_material)
+	. = ..(ml, MAT_STEEL, "carpet")

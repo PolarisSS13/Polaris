@@ -90,7 +90,7 @@
 
 
 /obj/item/weapon/grenade/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.is_screwdriver())
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))
 		switch(det_time)
 			if (1)
 				det_time = 10
@@ -112,3 +112,6 @@
 	walk(src, null, null)
 	..()
 	return
+
+/obj/item/weapon/grenade/vendor_action(var/obj/machinery/vending/V)
+	activate(V)

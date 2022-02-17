@@ -172,13 +172,13 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		playsound(src, 'sound/items/cigs_lighters/cig_light.ogg', 75, 1, -1)
 		damtype = "fire"
 		if(reagents.get_reagent_amount("phoron")) // the phoron explodes when exposed to fire
-			var/datum/effect/effect/system/reagents_explosion/e = new()
+			var/datum/effect_system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("phoron") / 2.5, 1), get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
 			return
 		if(reagents.get_reagent_amount("fuel")) // the fuel explodes, too, but much less violently
-			var/datum/effect/effect/system/reagents_explosion/e = new()
+			var/datum/effect_system/reagents_explosion/e = new()
 			e.set_up(round(reagents.get_reagent_amount("fuel") / 5, 1), get_turf(src), 0, 0)
 			e.start()
 			qdel(src)
@@ -207,8 +207,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 				to_chat(M, "<span class='notice'>Your [name] goes out.</span>")
 			M.remove_from_mob(src) //un-equip it so the overlays can update
 			M.update_inv_wear_mask(0)
-			M.update_inv_l_hand(0)
-			M.update_inv_r_hand(1)
 		qdel(src)
 	else
 		new /obj/effect/decal/cleanable/ash(T)
@@ -221,8 +219,6 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			icon_state = initial(icon_state)
 			item_state = initial(item_state)
 			M.update_inv_wear_mask(0)
-			M.update_inv_l_hand(0)
-			M.update_inv_r_hand(1)
 			smoketime = 0
 			reagents.clear_reagents()
 			name = "empty [initial(name)]"
@@ -424,8 +420,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	ignitermes = "<span class='notice'>USER fiddles with FLAME, and manages to light their NAME with the power of science.</span>"
 	is_pipe = 1
 
-/obj/item/clothing/mask/smokable/pipe/New()
-	..()
+/obj/item/clothing/mask/smokable/pipe/Initialize()
+	. = ..()
 	name = "empty [initial(name)]"
 
 /obj/item/clothing/mask/smokable/pipe/attack_self(mob/user as mob)
@@ -583,8 +579,8 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 	activation_sound = 'sound/items/zippo_on.ogg'
 	deactivation_sound = 'sound/items/zippo_off.ogg'
 
-/obj/item/weapon/flame/lighter/random
-/obj/item/weapon/flame/lighter/random/New()
+/obj/item/weapon/flame/lighter/random/Initialize()
+	. = ..()
 	icon_state = "lighter-[pick("r","c","y","g")]"
 	item_state = icon_state
 	base_state = icon_state

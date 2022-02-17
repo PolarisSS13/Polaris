@@ -23,18 +23,13 @@
 	var/hitcost = 240
 	var/use_external_power = FALSE //only used to determine if it's a cyborg baton
 
-/obj/item/weapon/melee/baton/New()
-	..()
+/obj/item/weapon/melee/baton/Initialize()
+	. = ..()
 	update_icon()
 	return
 
 /obj/item/weapon/melee/baton/get_cell()
 	return bcell
-
-/obj/item/weapon/melee/baton/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	user.visible_message("<span class='suicide'>\The [user] is putting the live [name] in [TU.his] mouth! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
-	return (FIRELOSS)
 
 /obj/item/weapon/melee/baton/MouseDrop(obj/over_object as obj)
 	if(!canremove)
@@ -68,20 +63,13 @@
 				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
 
-/obj/item/weapon/melee/baton/loaded/New() //this one starts with a cell pre-installed.
-	..()
+/obj/item/weapon/melee/baton/loaded/Initialize() //this one starts with a cell pre-installed.
+	. = ..()
 	bcell = new/obj/item/weapon/cell/device/weapon(src)
 	update_icon()
-	return
 
 /obj/item/weapon/melee/baton/proc/deductcharge(var/chrgdeductamt)
-	if(status == 1)		//Only deducts charge when it's on
-		if(bcell)
-			if(bcell.checked_use(chrgdeductamt))
-				return 1
-			else
-				return 0
-	return null
+	return (status == 1 && bcell?.checked_use(chrgdeductamt))
 
 /obj/item/weapon/melee/baton/proc/powercheck(var/chrgdeductamt)
 	if(bcell)

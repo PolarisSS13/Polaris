@@ -24,7 +24,7 @@
 	throw_range = 5
 	w_class = ITEMSIZE_NORMAL
 	matter = list(MAT_STEEL = 50000, MAT_GLASS = 25000)
-	var/datum/effect/effect/system/spark_spread/spark_system
+	var/datum/effect_system/spark_spread/spark_system
 	var/p_dir = NORTH 			// Next pipe will be built with this dir
 	var/p_flipped = FALSE		// If the next pipe should be built flipped
 	var/paint_color = "grey"	// Pipe color index for next pipe painted/built.
@@ -45,7 +45,7 @@
 
 /obj/item/weapon/pipe_dispenser/Initialize()
 	. = ..()
-	src.spark_system = new /datum/effect/effect/system/spark_spread
+	src.spark_system = new /datum/effect_system/spark_spread
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)
 	tool = new /obj/item/weapon/tool/wrench/cyborg(src) // RPDs have wrenches inside of them, so that they can wrench down spawned pipes without being used as superior wrenches themselves.
@@ -61,13 +61,6 @@
 	qdel_null(spark_system)
 	qdel_null(tool)
 	return ..()
-
-/obj/item/weapon/pipe_dispenser/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	user.visible_message("<span class='suicide'>[user] points the end of the RPD down [TU.his] throat and presses a button! It looks like [TU.hes] trying to commit suicide...</span>")
-	playsound(src, 'sound/machines/click.ogg', 50, 1)
-	playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
-	return(BRUTELOSS)
 
 /obj/item/weapon/pipe_dispenser/attack_self(mob/user)
 	tgui_interact(user)

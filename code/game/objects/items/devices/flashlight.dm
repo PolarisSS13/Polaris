@@ -335,9 +335,9 @@
 	drop_sound = 'sound/items/drop/gloves.ogg'
 	pickup_sound = 'sound/items/pickup/gloves.ogg'
 
-/obj/item/device/flashlight/flare/New()
+/obj/item/device/flashlight/flare/Initialize()
 	fuel = rand(800, 1000) // Sorry for changing this so much but I keep under-estimating how long X number of ticks last in seconds.
-	..()
+	. = ..()
 
 /obj/item/device/flashlight/flare/process()
 	var/turf/pos = get_turf(src)
@@ -395,9 +395,9 @@
 	var/fuel = 0
 	power_use = 0
 
-/obj/item/device/flashlight/glowstick/New()
+/obj/item/device/flashlight/glowstick/Initialize()
 	fuel = rand(1600, 2000)
-	..()
+	. = ..()
 
 /obj/item/device/flashlight/glowstick/process()
 	fuel = max(fuel - 1, 0)
@@ -465,8 +465,8 @@
 	on = 1 //Bio-luminesence has one setting, on.
 	power_use = 0
 
-/obj/item/device/flashlight/slime/New()
-	..()
+/obj/item/device/flashlight/slime/Initialize()
+	. = ..()
 	set_light(brightness_on, flashlight_power, flashlight_colour)
 
 /obj/item/device/flashlight/slime/update_icon()

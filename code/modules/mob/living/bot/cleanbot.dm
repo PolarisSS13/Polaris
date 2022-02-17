@@ -16,8 +16,8 @@
 	var/spray_blood = 0
 	var/list/target_types = list()
 
-/mob/living/bot/cleanbot/New()
-	..()
+/mob/living/bot/cleanbot/Initialize()
+	. = ..()
 	get_targets()
 
 /mob/living/bot/cleanbot/Destroy()
@@ -137,7 +137,7 @@
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)

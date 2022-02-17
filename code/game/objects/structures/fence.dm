@@ -69,7 +69,7 @@
 	return ..()
 
 /obj/structure/fence/attackby(obj/item/W, mob/user)
-	if(W.is_wirecutter())
+	if(W.get_tool_quality(TOOL_WIRECUTTER))
 		if(!cuttable)
 			to_chat(user, span("warning", "This section of the fence can't be cut."))
 			return
@@ -85,7 +85,7 @@
 		span("danger", "You start cutting through \the [src] with \the [W]."))
 		playsound(src, W.usesound, 50, 1)
 
-		if(do_after(user, CUT_TIME * W.toolspeed, target = src))
+		if(do_after(user, CUT_TIME * W.get_tool_speed(TOOL_WIRECUTTER), target = src))
 			if(current_stage == hole_size)
 				switch(++hole_size)
 					if(MEDIUM_HOLE)

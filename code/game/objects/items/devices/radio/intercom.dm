@@ -67,23 +67,23 @@
 	channels = radiochannels.Copy()
 	return ..()
 
-/obj/item/device/radio/intercom/New()
-	..()
+/obj/item/device/radio/intercom/Initialize()
+	. = ..()
 	circuit = new circuit(src)
 
-/obj/item/device/radio/intercom/department/medbay/New()
-	..()
+/obj/item/device/radio/intercom/department/medbay/Initialize()
+	. = ..()
 	internal_channels = default_medbay_channels.Copy()
 
-/obj/item/device/radio/intercom/department/security/New()
-	..()
+/obj/item/device/radio/intercom/department/security/Initialize()
+	. = ..()
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
 		num2text(SEC_I_FREQ) = list(access_security)
 	)
 
-/obj/item/device/radio/intercom/entertainment/New()
-	..()
+/obj/item/device/radio/intercom/entertainment/Initialize()
+	. = ..()
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
 		num2text(ENT_FREQ) = list()
@@ -96,8 +96,8 @@
 	subspace_transmission = 1
 	syndie = 1
 
-/obj/item/device/radio/intercom/syndicate/New()
-	..()
+/obj/item/device/radio/intercom/syndicate/Initialize()
+	. = ..()
 	internal_channels[num2text(SYND_FREQ)] = list(access_syndicate)
 
 /obj/item/device/radio/intercom/raider
@@ -107,8 +107,8 @@
 	subspace_transmission = 1
 	syndie = 1
 
-/obj/item/device/radio/intercom/raider/New()
-	..()
+/obj/item/device/radio/intercom/raider/Initialize()
+	. = ..()
 	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
 
 /obj/item/device/radio/intercom/attack_ai(mob/user as mob)
@@ -123,12 +123,12 @@
 
 /obj/item/device/radio/intercom/attackby(obj/item/W as obj, mob/user as mob)
 	add_fingerprint(user)
-	if(W.is_screwdriver())  // Opening the intercom up.
+	if(W.get_tool_quality(TOOL_SCREWDRIVER))  // Opening the intercom up.
 		wiresexposed = !wiresexposed
 		to_chat(user, "The wires have been [wiresexposed ? "exposed" : "unexposed"]")
 		playsound(src, W.usesound, 50, 1)
 		update_icon()
-	else if(wiresexposed && W.is_wirecutter())
+	else if(wiresexposed && W.get_tool_quality(TOOL_WIRECUTTER))
 		user.visible_message("<span class='warning'>[user] has cut the wires inside \the [src]!</span>", "You have cut the wires inside \the [src].")
 		playsound(src, W.usesound, 50, 1)
 		new/obj/item/stack/cable_coil(get_turf(src), 5)

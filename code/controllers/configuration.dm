@@ -124,6 +124,7 @@ var/list/gamemode_cache = list()
 	var/wikisearchurl
 	var/forumurl
 	var/githuburl
+	var/discordurl
 	var/rulesurl
 	var/mapurl
 
@@ -288,6 +289,9 @@ var/list/gamemode_cache = list()
 
 	// How strictly the loadout enforces object species whitelists
 	var/loadout_whitelist = LOADOUT_WHITELIST_LAX
+
+	// Whether whitelists are enforced for ears/tail/etc modifications
+	var/genemod_whitelist = FALSE
 
 	var/disable_webhook_embeds = FALSE
 
@@ -540,6 +544,9 @@ var/list/gamemode_cache = list()
 					config.githuburl = value
 				if ("guest_jobban")
 					config.guest_jobban = 1
+
+				if ("discordurl")
+					config.discordurl = value
 
 				if ("guest_ban")
 					config.guests_allowed = 0
@@ -937,6 +944,9 @@ var/list/gamemode_cache = list()
 				if("enable_night_shifts")
 					config.enable_night_shifts = TRUE
 
+				if("genemod_whitelist")
+					config.genemod_whitelist = TRUE
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -1002,10 +1012,10 @@ var/list/gamemode_cache = list()
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
-				
+
 				if("loadout_whitelist")
 					config.loadout_whitelist = text2num(value)
-				
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 

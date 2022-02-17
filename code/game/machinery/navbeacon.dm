@@ -18,8 +18,8 @@ var/global/list/navbeacons = list()	// no I don't like putting this in, but it w
 	var/list/codes = list()	// assoc. list of transponder codes
 	req_access = list(access_engine)
 
-/obj/machinery/navbeacon/New()
-	..()
+/obj/machinery/navbeacon/Initialize()
+	. = ..()
 	set_codes_from_txt(codes_txt)
 	if(freq)
 		warning("[src] at [x],[y],[z] has deprecated var freq=[freq].  Replace it with proper type.")
@@ -72,7 +72,7 @@ var/global/list/navbeacons = list()	// no I don't like putting this in, but it w
 	if(!T.is_plating())
 		return		// prevent intraction when T-scanner revealed
 
-	if(I.is_screwdriver())
+	if(I.get_tool_quality(TOOL_SCREWDRIVER))
 		open = !open
 		playsound(src, I.usesound, 50, 1)
 		user.visible_message("[user] [open ? "opens" : "closes"] the beacon's cover.", "You [open ? "open" : "close"] the beacon's cover.")
@@ -233,6 +233,6 @@ Transponder Codes:<UL>"}
 /obj/machinery/navbeacon/patrol
 	var/next_patrol
 
-/obj/machinery/navbeacon/patrol/New()
+/obj/machinery/navbeacon/patrol/Initialize()
 	codes = list("patrol" = 1, "next_patrol" = next_patrol)
-	..()
+	. = ..()

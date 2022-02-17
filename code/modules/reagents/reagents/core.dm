@@ -11,6 +11,8 @@
 	color = "#C80000"
 	var/volume_mod = 1	// So if you add different subtypes of blood, you can affect how much vessel blood each unit of reagent adds
 
+	viscosity = 0.3 // Slightly thicker than water.
+
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
@@ -31,6 +33,9 @@
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
 	if(!istype(T) || volume < 3)
 		return
+
+	..()
+
 	if(!data["donor"] || istype(data["donor"], /mob/living/carbon/human))
 		blood_splatter(T, src, 1)
 	else if(istype(data["donor"], /mob/living/carbon/alien))
@@ -154,12 +159,16 @@
 	color = "#0064C877"
 	metabolism = REM * 10
 
+	viscosity = 0.2 // For puddle flow, this forms puddles roughly of 5 units. Little bit of water goes a long way.
+
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."
 
 /datum/reagent/water/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
+
+	..()
 
 	var/datum/gas_mixture/environment = T.return_air()
 	var/min_temperature = T0C + 100 // 100C, the boiling point of water
@@ -182,14 +191,16 @@
 		T.wet_floor(1)
 
 /datum/reagent/water/touch_obj(var/obj/O, var/amount)
-	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/monkeycube))
-		var/obj/item/weapon/reagent_containers/food/snacks/monkeycube/cube = O
+	..()
+	if(istype(O, /obj/item/weapon/reagent_containers/food/snacks/cube))
+		var/obj/item/weapon/reagent_containers/food/snacks/cube/cube = O
 		if(!cube.wrapped)
 			cube.Expand()
 	else
 		O.water_act(amount / 5)
 
 /datum/reagent/water/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		// First, kill slimes.
 		if(istype(L, /mob/living/simple_mob/slime))
@@ -243,6 +254,7 @@
 	glass_desc = "Unless you are an industrial tool, this is probably not safe for consumption."
 
 /datum/reagent/fuel/touch_turf(var/turf/T, var/amount)
+	..()
 	new /obj/effect/decal/cleanable/liquid_fuel(T, amount, FALSE)
 	remove_self(amount)
 	return
@@ -252,6 +264,7 @@
 	M.adjustToxLoss(4 * removed)
 
 /datum/reagent/fuel/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 10) // Splashing people with welding fuel to make them easy to ignite!
 

@@ -3,12 +3,6 @@
 	spawn()
 		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 
-// Removes all signs of lattice on the pos of the turf -Donkieyo
-/turf/proc/RemoveLattice()
-	var/obj/structure/lattice/L = locate(/obj/structure/lattice, src)
-	if(L)
-		qdel(L)
-
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
@@ -40,59 +34,28 @@
 	var/old_outdoors = outdoors
 	var/old_dangerous_objects = dangerous_objects
 
-	//to_world("Replacing [src.type] with [N]")
+	changing_turf = TRUE
+	qdel(src)
 
-	if(connections) connections.erase_all()
-
-	if(istype(src,/turf/simulated))
-		//Yeah, we're just going to rebuild the whole thing.
-		//Despite this being called a bunch during explosions,
-		//the zone will only really do heavy lifting once.
-		var/turf/simulated/S = src
-		if(S.zone) S.zone.rebuild()
-
-	if(ispath(N, /turf/simulated/floor))
-		var/turf/simulated/W = new N( locate(src.x, src.y, src.z) )
-		if(old_fire)
-			fire = old_fire
-
-		if (istype(W,/turf/simulated/floor))
-			W.RemoveLattice()
-
-		if(tell_universe)
-			universe.OnTurfChange(W)
-
-		if(air_master)
-			air_master.mark_for_update(src) //handle the addition of the new turf.
-
-		for(var/turf/space/S in range(W,1))
-			S.update_starlight()
-
-		W.levelupdate()
-		W.update_icon(1)
-		W.post_change()
-		. = W
-
-	else
-
-		var/turf/W = new N( locate(src.x, src.y, src.z) )
-
-		if(old_fire)
+	var/turf/W = new N( locate(src.x, src.y, src.z) )
+	if(old_fire)
+		if(istype(W, /turf/simulated/floor))
+			W.fire = old_fire
+		else
 			old_fire.RemoveFire()
 
-		if(tell_universe)
-			universe.OnTurfChange(W)
+	if(tell_universe)
+		universe.OnTurfChange(W)
 
-		if(air_master)
-			air_master.mark_for_update(src)
+	if(air_master)
+		air_master.mark_for_update(W)
 
-		for(var/turf/space/S in range(W,1))
-			S.update_starlight()
-
-		W.levelupdate()
-		W.update_icon(1)
-		W.post_change()
-		. =  W
+	for(var/turf/space/S in range(W, 1))
+		S.update_starlight()
+	W.levelupdate()
+	W.update_icon(1)
+	W.post_change()
+	. =  W
 
 	recalc_atom_opacity()
 

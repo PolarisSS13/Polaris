@@ -13,6 +13,7 @@
 	var/min_x_scale = 0.9
 	var/min_y_scale = 0.9
 
+	var/removal_tool = /obj/item/weapon/shovel
 	var/harvest_tool = null // The type of item used to harvest the plant.
 	var/harvest_count = 0
 
@@ -39,21 +40,34 @@
 	. = ..()
 	if(harvest_count < max_harvests)
 		. += get_harvestable_desc()
+		if(harvest_tool)
+			var/obj/item/tool = harvest_tool
+			. += SPAN_NOTICE("\The [src] can be harvested with \a [initial(tool.name)].")
+
+	if(removal_tool)
+		var/obj/item/tool = removal_tool
+		. += SPAN_NOTICE("\The [src] can be removed with \a [initial(tool.name)].")
 
 /obj/structure/flora/proc/get_harvestable_desc()
 	return "<span class='notice'>\The [src] seems to have something hanging from it.</span>"
 
 /obj/structure/flora/attackby(var/obj/item/weapon/W, var/mob/living/user)
+
 	if(can_harvest(W))
 		var/harvest_spawn = pickweight(harvest_loot)
 		var/atom/movable/AM = spawn_harvest(harvest_spawn, user)
-
-		if(!AM)
-			to_chat(user, "<span class='notice'>You fail to harvest anything from \the [src].</span>")
-
+		if(AM)
+			to_chat(user, SPAN_NOTICE("You harvest \the [AM] from \the [src]."))
 		else
-			to_chat(user, "<span class='notice'>You harvest \the [AM] from \the [src].</span>")
-			return
+			to_chat(user, SPAN_NOTICE("You fail to harvest anything from \the [src]."))
+		return
+
+	if(removal_tool && istype(W, removal_tool))
+		to_chat(user, SPAN_WARNING("You start uprooting \the [src]..."))
+		if(do_after(user, 30))
+			visible_message(SPAN_NOTICE("\The [user] uproots and discards \the [src]!"))
+			qdel(src)
+		return
 
 	..(W, user)
 
@@ -81,8 +95,8 @@
 	icon = 'icons/obj/flora/snowflora.dmi'
 	icon_state = "snowbush1"
 
-/obj/structure/flora/bush/New()
-	..()
+/obj/structure/flora/bush/Initialize()
+	. = ..()
 	icon_state = "snowbush[rand(1, 6)]"
 
 /obj/structure/flora/pottedplant
@@ -100,113 +114,113 @@
 	icon = 'icons/obj/flora/ausflora.dmi'
 	icon_state = "firstbush_1"
 
-/obj/structure/flora/ausbushes/New()
-	..()
+/obj/structure/flora/ausbushes/Initialize()
+	. = ..()
 	icon_state = "firstbush_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/reedbush
 	icon_state = "reedbush_1"
 
-/obj/structure/flora/ausbushes/reedbush/New()
-	..()
+/obj/structure/flora/ausbushes/reedbush/Initialize()
+	. = ..()
 	icon_state = "reedbush_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/leafybush
 	icon_state = "leafybush_1"
 
-/obj/structure/flora/ausbushes/leafybush/New()
-	..()
+/obj/structure/flora/ausbushes/leafybush/Initialize()
+	. = ..()
 	icon_state = "leafybush_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/palebush
 	icon_state = "palebush_1"
 
-/obj/structure/flora/ausbushes/palebush/New()
-	..()
+/obj/structure/flora/ausbushes/palebush/Initialize()
+	. = ..()
 	icon_state = "palebush_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/stalkybush
 	icon_state = "stalkybush_1"
 
-/obj/structure/flora/ausbushes/stalkybush/New()
-	..()
+/obj/structure/flora/ausbushes/stalkybush/Initialize()
+	. = ..()
 	icon_state = "stalkybush_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/grassybush
 	icon_state = "grassybush_1"
 
-/obj/structure/flora/ausbushes/grassybush/New()
-	..()
+/obj/structure/flora/ausbushes/grassybush/Initialize()
+	. = ..()
 	icon_state = "grassybush_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/fernybush
 	icon_state = "fernybush_1"
 
-/obj/structure/flora/ausbushes/fernybush/New()
-	..()
+/obj/structure/flora/ausbushes/fernybush/Initialize()
+	. = ..()
 	icon_state = "fernybush_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/sunnybush
 	icon_state = "sunnybush_1"
 
-/obj/structure/flora/ausbushes/sunnybush/New()
-	..()
+/obj/structure/flora/ausbushes/sunnybush/Initialize()
+	. = ..()
 	icon_state = "sunnybush_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/genericbush
 	icon_state = "genericbush_1"
 
-/obj/structure/flora/ausbushes/genericbush/New()
-	..()
+/obj/structure/flora/ausbushes/genericbush/Initialize()
+	. = ..()
 	icon_state = "genericbush_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/pointybush
 	icon_state = "pointybush_1"
 
-/obj/structure/flora/ausbushes/pointybush/New()
-	..()
+/obj/structure/flora/ausbushes/pointybush/Initialize()
+	. = ..()
 	icon_state = "pointybush_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/lavendergrass
 	icon_state = "lavendergrass_1"
 
-/obj/structure/flora/ausbushes/lavendergrass/New()
-	..()
+/obj/structure/flora/ausbushes/lavendergrass/Initialize()
+	. = ..()
 	icon_state = "lavendergrass_[rand(1, 4)]"
 
 /obj/structure/flora/ausbushes/ywflowers
 	icon_state = "ywflowers_1"
 
-/obj/structure/flora/ausbushes/ywflowers/New()
-	..()
+/obj/structure/flora/ausbushes/ywflowers/Initialize()
+	. = ..()
 	icon_state = "ywflowers_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/brflowers
 	icon_state = "brflowers_1"
 
-/obj/structure/flora/ausbushes/brflowers/New()
-	..()
+/obj/structure/flora/ausbushes/brflowers/Initialize()
+	. = ..()
 	icon_state = "brflowers_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/ppflowers
 	icon_state = "ppflowers_1"
 
-/obj/structure/flora/ausbushes/ppflowers/New()
-	..()
+/obj/structure/flora/ausbushes/ppflowers/Initialize()
+	. = ..()
 	icon_state = "ppflowers_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/sparsegrass
 	icon_state = "sparsegrass_1"
 
-/obj/structure/flora/ausbushes/sparsegrass/New()
-	..()
+/obj/structure/flora/ausbushes/sparsegrass/Initialize()
+	. = ..()
 	icon_state = "sparsegrass_[rand(1, 3)]"
 
 /obj/structure/flora/ausbushes/fullgrass
 	icon_state = "fullgrass_1"
 
-/obj/structure/flora/ausbushes/fullgrass/New()
-	..()
+/obj/structure/flora/ausbushes/fullgrass/Initialize()
+	. = ..()
 	icon_state = "fullgrass_[rand(1, 3)]"
 
 /obj/structure/flora/skeleton
@@ -408,19 +422,28 @@
 	desc = "This is a tiny well lit decorative christmas tree."
 	icon_state = "plant-xmas"
 
+/obj/structure/flora/mushroom
+	name = "mushroom"
+	desc = "Hey, this one seems like a fun guy."
+	icon_state = "mush1"
+	icon = 'icons/obj/flora/mushrooms.dmi'
+	harvest_loot = list(/obj/item/weapon/reagent_containers/food/snacks/mushroomslice = 1)
+	harvest_tool = /obj/item/weapon/material/knife
+	max_harvests = 2
+	min_harvests = 0
+
+/obj/structure/flora/mushroom/Initialize()
+	. = ..()
+	icon_state = "mush[rand(1,4)]"
+	if(prob(50))
+		adjust_scale(-1, 1)
+	pixel_x = rand(-4, 4)
+
 /obj/structure/flora/sif
 	icon = 'icons/obj/flora/sifflora.dmi'
 
-/obj/structure/flora/sif/attack_hand(mob/user)
-	if (user.a_intent == I_HURT)
-		if(do_after(user, 5 SECONDS))
-			user.visible_message("<span class='filter_notice'>\The [user] digs up \the [src.name].", "You dig up \the [src.name].</span>")
-			qdel(src)
-	else
-		user.visible_message("<span class='filter_notice'>\The [user] pokes \the [src.name].", "You poke \the [src.name].</span>")
-
 /datum/category_item/catalogue/flora/subterranean_bulbs
-	name = "Sivian Flora - Subterranean Bulbs"
+	name = "Sivian Flora - Cavebulbs"
 	desc = "A plant which is native to Sif, it continues the trend of being a bioluminescent specimen. These plants \
 	are generally suited for conditions experienced in caverns, which are generally dark and cold. It is not \
 	known why this plant evolved to be bioluminescent, however this property has, unintentionally, allowed for \
@@ -433,18 +456,21 @@
 	value = CATALOGUER_REWARD_EASY
 
 /obj/structure/flora/sif/subterranean
-	name = "subterranean plant"
+	name = "subterranean bulbs"
 	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
 	icon_state = "glowplant"
 	light_range = 2
 	light_power = 0.6
 	light_color = "#FF6633"
 	catalogue_data = list(/datum/category_item/catalogue/flora/subterranean_bulbs)
+	harvest_loot = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sif/cavebulbs = 1)
+	harvest_tool = /obj/item/weapon/material/knife
+	max_harvests = 2
+	min_harvests = 0
 
 /obj/structure/flora/sif/subterranean/Initialize()
 	icon_state = "[initial(icon_state)][rand(1,2)]"
 	. = ..()
-
 
 /datum/category_item/catalogue/flora/eyebulbs
 	name = "Sivian Flora - Eyebulbs"
@@ -454,10 +480,14 @@
 	value = CATALOGUER_REWARD_EASY
 
 /obj/structure/flora/sif/eyes
-	name = "mysterious bulbs"
-	desc = "This is a mysterious looking plant. They kind of look like eyeballs. Creepy."
+	name = "eyebulbs"
+	desc = "This is a mysterious-looking plant. They kind of look like eyeballs. Creepy."
 	icon_state = "eyeplant"
 	catalogue_data = list(/datum/category_item/catalogue/flora/eyebulbs)
+	harvest_tool = /obj/item/weapon/material/knife
+	max_harvests = 2
+	min_harvests = 0
+	harvest_loot = list(/obj/item/weapon/reagent_containers/food/snacks/grown/sif/eyebulbs = 1)
 
 /obj/structure/flora/sif/eyes/Initialize()
 	icon_state = "[initial(icon_state)][rand(1,3)]"
@@ -471,20 +501,20 @@
 	value = CATALOGUER_REWARD_TRIVIAL
 
 /obj/structure/flora/sif/tendrils
-	name = "stocky tendrils"
+	name = "wabback tendrils"
 	desc = "A 'plant' made up of hardened moss. It has tiny hairs that bunch together to look like snow."
 	icon_state = "grass"
 	randomize_size = TRUE
 	catalogue_data = list(/datum/category_item/catalogue/flora/mosstendrils)
 
 	harvest_tool = /obj/item/weapon/material/knife
-	max_harvests = 1
-	min_harvests = -4
+	max_harvests = 3
+	min_harvests = 0
 	harvest_loot = list(
-		/obj/item/seeds/wabback = 15,
-		/obj/item/seeds/blackwabback = 1,
-		/obj/item/seeds/wildwabback = 30
-		)
+		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/whitewabback = 15,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/blackwabback = 1,
+		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/wildwabback = 30
+	)
 
 /obj/structure/flora/sif/tendrils/Initialize()
 	icon_state = "[initial(icon_state)][rand(1,3)]"
@@ -503,26 +533,24 @@
 	value = CATALOGUER_REWARD_HARD
 
 /obj/structure/flora/sif/frostbelle
-	name = "gnarly shrub"
+	name = "frostbelle shrub"
 	desc = "A stocky plant with fins bearing luminescent veins along its branches."
-	icon_state = "grass"
+	icon_state = "frostbelle"
 	randomize_size = TRUE
 	catalogue_data = list(/datum/category_item/catalogue/flora/frostbelle)
 
 	harvest_tool = /obj/item/weapon/material/knife
 	max_harvests = 2
-	min_harvests = -4
+	min_harvests = 0
 	harvest_loot = list(
 		/obj/item/weapon/reagent_containers/food/snacks/frostbelle = 1
-		)
+	)
 
 	var/variantnum = null
 
 /obj/structure/flora/sif/frostbelle/Initialize()
 	. = ..()
-
 	variantnum = rand(1,3)
-
 	update_icon()
 
 /obj/structure/flora/sif/frostbelle/update_icon()
@@ -530,7 +558,6 @@
 
 	if(max_harvests > 0 && harvest_count < max_harvests)
 		icon_state = "[initial(icon_state)][variantnum]"
-
 	else
 		icon_state = initial(icon_state)
 
