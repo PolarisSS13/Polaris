@@ -14,7 +14,6 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"Maschine Klash" = /decl/music_track/digit_one,
 	"Comet Halley" = /decl/music_track/comet_haley,
 	"Human" = /decl/music_track/human,
-	"Memories of Lysendraa" = /decl/music_track/lysendraa,
 	"Marhaba" = /decl/music_track/marhaba,
 	"Space Oddity" = /decl/music_track/space_oddity,
 	"Treacherous Voyage" = /decl/music_track/treacherous_voyage,
@@ -28,7 +27,6 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"80s All Over Again" = /decl/music_track/eighties,
 	"Wild Encounters" = /decl/music_track/wildencounters,
 	"Torn" = /decl/music_track/torn,
-	"Nebula" = /decl/music_track/nebula,
 	"Stellar Transit" = /decl/music_track/stellartransit
 ))
 

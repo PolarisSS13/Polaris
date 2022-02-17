@@ -252,6 +252,7 @@
 	for(var/mob/living/M in mobs_in_area(main_area))
 		if(M.mind)
 			to_world("Attempting to play Jukebox song for a mob") //DEBUG
+			to_world("[current_track.GetTrack()]")
 			main_area.play_ambience(M)
 
 	playing = 1

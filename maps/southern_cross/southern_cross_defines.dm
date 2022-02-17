@@ -25,8 +25,8 @@
 		/decl/music_track/human,
 		/decl/music_track/marhaba,
 		/decl/music_track/treacherous_voyage,
+		/decl/music_track/asfarasitgets,
 		/decl/music_track/space_oddity,
-		/decl/music_track/lysendraa,
 		/decl/music_track/martiancowboy)
 
 	holomap_smoosh = list(list(
