@@ -152,7 +152,7 @@ default behaviour is:
 		if(!T2) // Map edge
 			now_pushing = 0
 			return
-		var/move_time = movement_delay(loc, t)
+		var/move_time = movement_delay(loc, t) * sqrt(2) / 2
 		move_time = DS2NEARESTTICK(move_time)
 		if(AM.Move(T2, t, move_time))
 			Move(T, t, move_time)
