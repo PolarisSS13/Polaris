@@ -7,7 +7,7 @@
 
 /datum/gear/ears/headphones
 	display_name = "headphones"
-	path = /obj/item/clothing/ears/headphones
+	path = /obj/item/clothing/head/headphones
 
 /datum/gear/ears/circuitry
 	display_name = "earwear, circuitry (empty)"

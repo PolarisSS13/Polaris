@@ -134,6 +134,14 @@
 	license = /decl/license/cc_by_3_0
 	url = "http://freemusicarchive.org/music/Ian_Alex_Mac/Cues/Marhaba"
 
+/decl/music_track/lysendraa
+	artist = "TALES"
+	title = "Memories Of Lysendraa"
+	album = "The Seskian Wars"
+	song = 'sound/music/lysendraa.ogg'
+	license = /decl/license/cc_by_nc_nd_4_0
+	url = "http://freemusicarchive.org/music/TALES/The_Seskian_Wars/8-Memories_Of_Lysendraa"
+
 /decl/music_track/misanthropic_corridors
 	artist = "Mikazu"
 	title = "Misanthropic Corridors"
@@ -252,6 +260,13 @@
 	song = 'sound/music/europa/Macamoto_-_05_-_Torn.ogg'
 	license = /decl/license/cc_by_nc_sa_3_0
 	url = "https://macamoto.bandcamp.com/track/torn"
+
+/decl/music_track/nebula
+	artist = "Pulse Emitter"
+	title = "Nebula"
+	song = 'sound/music/europa/Pulse_Emitter_-_04_-_Nebula.ogg'
+	license = /decl/license/cc_by_nc_sa_3_0
+	url = "https://pulseemitter.bandcamp.com/track/nebula"
 
 /decl/music_track/stellartransit
 	artist = "Serithi"

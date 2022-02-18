@@ -14,6 +14,7 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"Maschine Klash" = /decl/music_track/digit_one,
 	"Comet Halley" = /decl/music_track/comet_haley,
 	"Human" = /decl/music_track/human,
+	"Memories of Lysendraa" = /decl/music_track/lysendraa,
 	"Marhaba" = /decl/music_track/marhaba,
 	"Space Oddity" = /decl/music_track/space_oddity,
 	"Treacherous Voyage" = /decl/music_track/treacherous_voyage,
@@ -27,6 +28,7 @@ GLOBAL_LIST_INIT(music_tracks, list(
 	"80s All Over Again" = /decl/music_track/eighties,
 	"Wild Encounters" = /decl/music_track/wildencounters,
 	"Torn" = /decl/music_track/torn,
+	"Nebula" = /decl/music_track/nebula,
 	"Stellar Transit" = /decl/music_track/stellartransit
 ))
 
@@ -40,16 +42,13 @@ GLOBAL_LIST_INIT(jukebox_secret_tracks, list(
 /proc/setup_music_tracks(var/list/tracks)
 	. = list()
 	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.music_tracks
-	to_world("Building music track list...") //DEBUG REMOVE ME
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)
-		to_world("Added song: [track_name]") //DEBUG REMOVE ME
 
 /proc/setup_secret_music_tracks(var/list/tracks)
 	. = list()
 	var/track_list = LAZYLEN(tracks) ? tracks : GLOB.jukebox_secret_tracks
-	to_world("Building Secret Jukebox track list...") //DEBUG
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)

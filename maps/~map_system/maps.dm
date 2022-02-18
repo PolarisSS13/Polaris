@@ -116,7 +116,7 @@ var/list/all_maps = list()
 	var/list/unit_test_z_levels //To test more than Z1, set your z-levels to test here.
 
 	var/list/planet_datums_to_make = list() // Types of `/datum/planet`s that will be instantiated by SSPlanets.
-	
+
 /datum/map/New()
 	..()
 	if(zlevel_datum_type)
@@ -337,12 +337,9 @@ var/list/all_maps = list()
 /datum/map/proc/get_lobby_track(var/exclude)
 	var/lobby_track_type
 	if(LAZYLEN(lobby_tracks) == 1)
-		admin_notice("Map has a lobby track, assigning.") //DEBUG REMOVE ME
 		lobby_track_type = lobby_tracks[1]
 	else if(LAZYLEN(lobby_tracks))
-		admin_notice("Picking from predefined list of lobby tracks...") //DEBUG REMOVE ME
 		lobby_track_type = pickweight(lobby_tracks - exclude)
 	else
-		admin_notice("Picking full random lobby track...") //DEBUG REMOVE ME
 		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
 	return GET_DECL(lobby_track_type)
