@@ -222,6 +222,12 @@
 				return 0
 	return 0
 
+/datum/reagents/proc/has_any_other_reagent(var/list/check_reagents)
+	for(var/datum/reagent/current in reagent_list)
+		if(!(current.id in check_reagents))
+			return TRUE
+	return FALSE
+
 /datum/reagents/proc/has_all_reagents(var/list/check_reagents)
 	//this only works if check_reagents has no duplicate entries... hopefully okay since it expects an associative list
 	var/missing = check_reagents.len
@@ -446,6 +452,18 @@
 			return trans_to_holder(R, amount, multiplier, copy)
 		if(type == CHEM_INGEST)
 			var/datum/reagents/R = C.ingested
+			if(C.should_have_organ(O_STOMACH) || C.should_have_organ(O_CYCLER))
+				var/obj/item/organ/internal/stomach/ST = C.internal_organs_by_name[O_STOMACH]
+				if(!ST)
+					ST = C.internal_organs_by_name[O_CYCLER]
+				
+				if(ST?.reagents)
+					var/allowed_volume = min(ST.reagents.maximum_volume - ST.reagents.total_volume, amount)
+					R = ST.reagents
+					amount = allowed_volume
+				else
+					amount = min(amount, 3)	// If you are meant to have a stomach, and you do not have a stomach, this will take a while.
+
 			return C.ingest(src, R, amount, multiplier, copy)
 		if(type == CHEM_TOUCH)
 			var/datum/reagents/R = C.touching

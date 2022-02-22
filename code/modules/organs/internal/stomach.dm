@@ -14,18 +14,24 @@
 /obj/item/organ/internal/stomach/Initialize()
 	. = ..()
 	if(reagents)
-		reagents.maximum_volume = 30
+		reagents.maximum_volume = max_acid_volume * 3
 	else
-		create_reagents(30)
+		create_reagents(max_acid_volume * 3)
 
 /obj/item/organ/internal/stomach/handle_organ_proc_special()
 	if(owner && istype(owner, /mob/living/carbon/human))
+		var/mob/living/carbon/human/H = owner
 		if(reagents)
 			if(reagents.total_volume + 2 < max_acid_volume && prob(20))
 				reagents.add_reagent(acidtype, rand(1,2))
 
 			for(var/mob/living/L in owner.stomach_contents) // Splashes mobs inside with acid. Twice as effective as being splashed with the same acid outside the body.
 				reagents.trans_to(L, 2, 2, 0)
+
+			if(reagents.has_any_other_reagent(list(acidtype)))
+				var/obj/item/organ/internal/intestine/IN = H.internal_organs_by_name[O_INTESTINE]
+				if(IN)
+					reagents.trans_to_holder(IN.reagents, rand(5,10))
 
 		if(is_broken() && prob(1))
 			owner.custom_pain("There's a twisting pain in your abdomen!",1)
@@ -54,11 +60,15 @@
 	icon_state = "cycler"
 	organ_tag = O_CYCLER
 
+	can_reject = FALSE
+	decays = FALSE
+
 	robotic = ORGAN_ROBOT
+	butcherable = FALSE
 
 	acidtype = "sacid"
 
-/obj/item/organ/internal/stomach/machine/handle_organ_proc_special()
+/obj/item/organ/internal/stomach/machine/handle_organ_proc_special()	// Acts as a normal stomach, but additionally, will move ingested reagents to the bloodstream.
 	..()
 	if(owner && owner.stat != DEAD)
 		owner.bodytemperature += round(owner.robobody_count * 0.25, 0.1)
