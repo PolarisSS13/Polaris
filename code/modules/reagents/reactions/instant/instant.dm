@@ -1137,3 +1137,79 @@
 	result = "protein"
 	required_reagents = list("enzyme" = 1, "spidertoxin" = 1, "sifsap" = 1)
 	result_amount = 1
+
+/*
+ * Inhibiting
+ * via Active Carbon
+ */
+/decl/chemical_reaction/instant/inhibit_neurotoxic_protein
+	name = "Inhibit Toxic Proteins"
+	id = "neurotoxic_protein_inhibit"
+	result = "toxin"
+	required_reagents = list("activecarbon" = 3, "neurotoxic_protein" = 1)
+	result_amount = 2
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_carpotoxin
+	name = "Inhibit Carpotoxin"
+	id = "carpotoxin_inhibit"
+	result = "toxin"
+	required_reagents = list("activecarbon" = 3, "carpotoxin" = 1)
+	result_amount = 1
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_spidertoxin
+	name = "Inhibit Spidertoxin"
+	id = "spidertoxin_inhibit"
+	result = "toxin"
+	required_reagents = list("activecarbon" = 3, "spidertoxin" = 1)
+	result_amount = 1
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_sacid
+	name = "Inhibit Sulphiric Acid"
+	id = "sacid_inhibit"
+	result = "carbon"
+	required_reagents = list("activecarbon" = 3, "sacid" = 1)
+	result_amount = 1
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_stomacid
+	name = "Inhibit Stomach Acid"
+	id = "stomacid_inhibit"
+	result = "carbon"
+	required_reagents = list("activecarbon" = 3, "stomacid" = 2)
+	result_amount = 2
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_pacid
+	name = "Inhibit Polytrinic Acid"
+	id = "pacid_inhibit"
+	result = "carbon"
+	required_reagents = list("activecarbon" = 5, "pacid" = 1)
+	result_amount = 2
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_mutagen
+	name = "Inhibit Mutagen"
+	id = "mutagen_inhibit"
+	result = "toxin"
+	required_reagents = list("activecarbon" = 3, "mutagen" = 1)
+	result_amount = 2
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_chloral
+	name = "Inhibit Chloral Hydrate"
+	id = "chloral_inhibit"
+	result = "stoxin"
+	required_reagents = list("activecarbon" = 3, "chloralhydrate" = 1)
+	result_amount = 2
+	mix_message = FALSE
+
+/decl/chemical_reaction/instant/inhibit_impedrezene
+	name = "Inhibit Impedrezene"
+	id = "impedrez_inhibit"
+	result = "serotrotium"
+	required_reagents = list("activecarbon" = 3, "impedrezene" = 1)
+	result_amount = 2
+	mix_message = FALSE

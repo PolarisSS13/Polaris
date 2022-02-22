@@ -60,6 +60,17 @@
 	temp_shift = -2
 
 // Medicinal
+/decl/chemical_reaction/distilling/activatedcarbon
+	name = "Activating Carbon"
+	id = "distill_acarbon"
+	result = "activecarbon"
+	required_reagents = list("carbon" = 3)
+	result_amount = 2
+
+	reaction_rate = HALF_LIFE(10)
+
+	temp_range = list(T0C + 150, T0C + 300)
+
 /decl/chemical_reaction/distilling/inaprovalaze
 	name = "Distilling Inaprovalaze"
 	id = "distill_inaprovalaze"

@@ -208,6 +208,15 @@
 		if(prob(10))
 			M.remove_a_modifier_of_type(/datum/modifier/poisoned)
 
+/datum/reagent/carbon/acarbon
+	name = "Active Carbon"
+	id = "activecarbon"
+	description = "Activated carbon, or commonly \"activated charcoal\" is useful for many things, especially including neutralizing toxins."
+	taste_description = "a piece of used firewood"
+	reagent_state = SOLID
+	color = "#000000"
+	scannable = 0
+
 /datum/reagent/carthatoline
 	name = "Carthatoline"
 	id = "carthatoline"
