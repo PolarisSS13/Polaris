@@ -11,12 +11,14 @@
 
 	var/deadly_hold = TRUE	// Does the stomach do damage to mobs eaten by its owner? Xenos should probably have this FALSE.
 
+	var/list/pills
+
 /obj/item/organ/internal/stomach/Initialize()
 	. = ..()
 	if(reagents)
-		reagents.maximum_volume = max_acid_volume * 3
+		reagents.maximum_volume = max_acid_volume * 2
 	else
-		create_reagents(max_acid_volume * 3)
+		create_reagents(max_acid_volume * 2)
 
 /obj/item/organ/internal/stomach/handle_organ_proc_special()
 	if(owner && istype(owner, /mob/living/carbon/human))
@@ -27,6 +29,26 @@
 
 			for(var/mob/living/L in owner.stomach_contents) // Splashes mobs inside with acid. Twice as effective as being splashed with the same acid outside the body.
 				reagents.trans_to(L, 2, 2, 0)
+
+			if(reagents.has_reagent(acidtype, 5) && LAZYLEN(pills))
+				var/datum/reagent/acid/acid = reagents.get_reagent(acidtype)
+				for(var/obj/item/weapon/reagent_containers/pill/pill in pills)	// Bigger pill, more likely to crack before breakdown.
+					var/pill_integrity = pills[pill]
+					if((pill_integrity < (pill.reagents.total_volume / 4) && prob(pill.reagents.total_volume)) || pill_integrity <= 0)
+						var/obj/item/organ/internal/intestine/IN = H.internal_organs_by_name[O_INTESTINE]
+						if(IN)	// Transfer what of the pill you can to the intestine directly.
+							pill.reagents.trans_to_holder(IN.reagents, pill.reagents.total_volume)
+						
+						if(pill.reagents.total_volume > 0)	// Still pill left? Try putting it in the stomach.
+							pill.reagents.trans_to_holder(reagents, pill.reagents.total_volume)
+						
+						if(pill.reagents.total_volume <= 0)	// If the pill is "empty", forget about it and delete it.
+							pills.Remove(pill)
+							qdel(pill)
+							continue
+
+					pills[pill] = max(pill_integrity - acid.power, 0)	// Melt pill. Stronger stomach acid, faster melt.
+					reagents.remove_reagent(acidtype, rand(2,5))
 
 			if(reagents.has_any_other_reagent(list(acidtype)))
 				var/obj/item/organ/internal/intestine/IN = H.internal_organs_by_name[O_INTESTINE]
@@ -50,6 +72,20 @@
 		if(prob(1) && owner.getToxLoss() < owner.getMaxHealth()*0.2)
 			owner.adjustToxLoss(3)
 			owner.vomit(FALSE, TRUE)
+
+/obj/item/organ/internal/stomach/proc/handle_pill(var/obj/item/weapon/reagent_containers/pill/pill)
+	if(!istype(pill))	// ..Not a pill.
+		return FALSE
+
+	if(!LAZYLEN(pills))
+		pills = list()
+
+	pill.forceMove(src)
+
+	var/pill_volume = pill.reagents.total_volume	// How big is the pill?
+	pills[pill] = pill_volume * (rand(7,12) / 10)
+
+	return TRUE
 
 /obj/item/organ/internal/stomach/xeno
 	color = "#555555"

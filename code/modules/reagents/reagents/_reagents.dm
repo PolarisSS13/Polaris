@@ -94,23 +94,30 @@
 		if(ishuman(M))
 			var/mob/living/carbon/human/H = M
 			if(!H.isSynthetic())
-				if(H.species.has_organ[O_HEART] && (active_metab.metabolism_class == CHEM_BLOOD))
+				var/heartrate_mod = 1	// No heart-rate means what chems you do ingest process slower, as your body isn't cycling them.
+				if(H.species.has_organ[O_HEART])
 					var/obj/item/organ/internal/heart/Pump = H.internal_organs_by_name[O_HEART]
 					if(!Pump)
-						removed *= 0.1
+						heartrate_mod = 0.1
+						if(active_metab.metabolism_class == CHEM_BLOOD)
+							removed *= heartrate_mod
 					else if(Pump.standard_pulse_level == PULSE_NONE)	// No pulse normally means chemicals process a little bit slower than normal.
-						removed *= 0.8
+						heartrate_mod = 0.8
+						if(active_metab.metabolism_class == CHEM_BLOOD)
+							removed *= heartrate_mod
 					else	// Otherwise, chemicals process as per percentage of your current pulse, or, if you have no pulse but are alive, by a miniscule amount.
-						removed *= max(0.1, H.pulse / Pump.standard_pulse_level)
+						heartrate_mod = max(0.1, H.pulse / Pump.standard_pulse_level)
+						if(active_metab.metabolism_class == CHEM_BLOOD)
+							removed *= heartrate_mod
 
 				if(H.species.has_organ[O_STOMACH] && (active_metab.metabolism_class == CHEM_INGEST))
 					var/obj/item/organ/internal/stomach/Chamber = H.internal_organs_by_name[O_STOMACH]
-					if(Chamber)
+					if(Chamber)	// If your stomach is damaged, you won't process ("digest") compounds properly, thus slower. If you don't have one, you can't intake as many chems -to- ingest anyway. Bloodflow modifies processing speed, but not waste.
 						ingest_rem_mult *= max(0.1, 1 - (Chamber.damage / Chamber.max_damage))
-					else
-						ingest_rem_mult = 0.1
 
-				if(H.species.has_organ[O_INTESTINE] && (active_metab.metabolism_class == CHEM_INGEST))
+					ingest_rem_mult *= heartrate_mod
+
+				if(H.species.has_organ[O_INTESTINE] && (active_metab.metabolism_class == CHEM_INGEST))	// Damage to the intestines means you don't actually -absorb- some of the chemicals you process, thus wasting them.
 					var/obj/item/organ/internal/intestine/Tube = H.internal_organs_by_name[O_INTESTINE]
 					if(Tube)
 						ingest_abs_mult *= max(0.1, 1 - (Tube.damage / Tube.max_damage))

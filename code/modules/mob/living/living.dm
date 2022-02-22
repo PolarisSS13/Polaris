@@ -789,6 +789,17 @@
 					playsound(src, 'sound/effects/splat.ogg', 50, 1)
 
 					var/turf/simulated/T = get_turf(src)	//TODO: Make add_blood_floor remove blood from human mobs
+
+					if(ishuman(src))	// Woe human mobs, pill loss be upon ye. If you vomit while having a pill un-digested, you will vomit out the pill.
+						var/mob/living/carbon/human/H = src
+						if(H.should_have_organ(O_STOMACH))
+							var/obj/item/organ/internal/stomach/ST = H.internal_organs_by_name[O_STOMACH]
+							if(ST && LAZYLEN(ST.pills))
+								for(var/obj/item/I in ST.pills)
+									I.name = "[pick("melted","partially dissolved","sticky","warped")] [pick("pill","mass","chunk")]"
+									I.forceMove(T)
+									ST.pills.Remove(I)
+
 					if(istype(T))
 						if(blood_vomit)
 							T.add_blood_floor(src)

@@ -36,6 +36,15 @@
 
 			to_chat(M, "<span class='notice'>You swallow \the [src].</span>")
 			M.drop_from_inventory(src) //icon update
+
+			if(H.should_have_organ(O_STOMACH))	// Species with stomachs handle pills uniquely.
+				var/obj/item/organ/internal/stomach/ST = H.internal_organs_by_name[O_STOMACH]
+				if(ST && !(ST.status & DEAD) && ST.handle_pill(src))
+					return 1
+				to_chat(H, SPAN_WARNING("But you wretch!"))
+				H.vomit(TRUE, (ST?.status & DEAD))
+				return
+
 			if(reagents.total_volume)
 				reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)
 			qdel(src)
@@ -63,6 +72,14 @@
 
 		var/contained = reagentlist()
 		add_attack_logs(user,M,"Fed a pill containing [contained]")
+
+		if(H.should_have_organ(O_STOMACH))	// Species with stomachs handle pills uniquely.
+			var/obj/item/organ/internal/stomach/ST = H.internal_organs_by_name[O_STOMACH]
+			if(ST && !(ST.status & DEAD) && ST.handle_pill(src))
+				return 1
+			H.visible_message(SPAN_WARNING("But [H] wretches!"))
+			H.vomit(TRUE, (ST?.status & DEAD))
+			return
 
 		if(reagents && reagents.total_volume)
 			reagents.trans_to_mob(M, reagents.total_volume, CHEM_INGEST)

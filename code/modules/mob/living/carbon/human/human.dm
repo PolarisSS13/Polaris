@@ -1463,7 +1463,7 @@
 	var/obj/item/organ/external/affecting
 	if(organ_check in list(O_HEART, O_LUNGS))
 		affecting = organs_by_name[BP_TORSO]
-	else if(organ_check in list(O_LIVER, O_KIDNEYS))
+	else if(organ_check in list(O_STOMACH, O_LIVER, O_KIDNEYS))
 		affecting = organs_by_name[BP_GROIN]
 
 	if(affecting && (affecting.robotic >= ORGAN_ROBOT))

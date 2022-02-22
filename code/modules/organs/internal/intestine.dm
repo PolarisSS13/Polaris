@@ -3,6 +3,9 @@
 	icon_state = "intestine"
 	organ_tag = O_INTESTINE
 	parent_organ = BP_GROIN
+
+	var/absorb_rate = 1	// Multiplier of how fast the intestines move reagents into the "ingested" metabolism.
+
 	var/list/nullified_acids	// The reagents considered "stomach acid". If you have a stomach that produces ex: polyacid, you can drink all of it you want.
 
 /obj/item/organ/internal/intestine/Initialize()
@@ -11,7 +14,7 @@
 	nullified_acids = list()
 
 	if(!reagents)
-		create_reagents(60)
+		create_reagents(120)
 
 /obj/item/organ/internal/intestine/handle_organ_proc_special()
 	if(owner && istype(owner, /mob/living/carbon/human))
@@ -24,7 +27,7 @@
 				for(var/acid in nullified_acids)
 					reagents.remove_reagent(acid, reagents.maximum_volume)
 			
-			reagents.trans_to_holder(H.ingested, max(1, reagents.total_volume / 4))
+			reagents.trans_to_holder(H.ingested, 3 * absorb_rate)
 	return
 
 /obj/item/organ/internal/intestine/handle_germ_effects()
