@@ -230,7 +230,7 @@ ORGAN
 			restore_bone: Retractor -> Clears opened internals wound
 			detach_organ: Scalpel -> Creates detached organ wound
 			insert_organ: Organ -> Inserts Organ, creates detached organ wound
-		a
+		
 		SURGERY_DETACHED_ORGAN = list(
 			attach_organ: FixOVein -> Clears detached organ wound
 			remove_organ: Hemostat -> Removes Organ, clears detached organ wound
