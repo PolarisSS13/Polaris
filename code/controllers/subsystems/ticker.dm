@@ -65,9 +65,9 @@ var/global/datum/controller/subsystem/ticker/ticker
 	pregame_timeleft = config.pregame_time
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
 	SSwebhooks.send(
-		WEBHOOK_ROUNDPREP, 
+		WEBHOOK_ROUNDPREP,
 		list(
-			"map" = station_name(), 
+			"map" = station_name(),
 			"url" = get_world_url()
 		)
 	)
@@ -424,9 +424,6 @@ var/global/datum/controller/subsystem/ticker/ticker
 			// Created their playable character, delete their /mob/new_player
 			if(new_char)
 				qdel(player)
-				if(new_char.client)
-					var/obj/screen/splash/S = new(null, new_char.client, TRUE)
-					S.Fade(TRUE)
 
 			// If they're a carbon, they can get manifested
 			if(J?.mob_type & JOB_CARBON)
