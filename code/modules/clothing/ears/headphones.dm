@@ -70,7 +70,7 @@
 		return
 	user << sound(null, channel = sound_channel)
 
-obj/item/clothing/head/headphones/interact(var/mob/user)
+/obj/item/clothing/head/headphones/interact(var/mob/user)
 	if(!CanInteract(user, physical_state))
 		return
 	var/list/dat = list()

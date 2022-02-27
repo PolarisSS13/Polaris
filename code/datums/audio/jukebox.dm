@@ -52,4 +52,3 @@ GLOBAL_LIST_INIT(jukebox_secret_tracks, list(
 	for(var/track_name in track_list)
 		var/track_path = track_list[track_name]
 		. += new/datum/track(track_name, track_path)
-		to_world("Added secret song: [track_name]")
