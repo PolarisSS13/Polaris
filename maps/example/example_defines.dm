@@ -6,8 +6,7 @@
 	full_name = "The Test Map"
 	path = "example"
 
-	lobby_icon = 'icons/misc/title.dmi'
-	lobby_screens = list("mockingjay00")
+	lobby_screens = list('maps/example/example.png')
 	lobby_tracks = list(/decl/music_track/absconditus)
 
 	zlevel_datum_type = /datum/map_z_level/example

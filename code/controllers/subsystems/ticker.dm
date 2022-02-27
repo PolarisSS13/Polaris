@@ -413,9 +413,6 @@ var/global/datum/controller/subsystem/ticker/ticker
 			// Created their playable character, delete their /mob/new_player
 			if(new_char)
 				qdel(player)
-				if(new_char.client)
-					var/obj/screen/splash/S = new(null, new_char.client, TRUE)
-					S.Fade(TRUE)
 
 			// If they're a carbon, they can get manifested
 			if(J?.mob_type & JOB_CARBON)

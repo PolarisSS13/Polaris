@@ -15,10 +15,6 @@
 	name = "Southern Cross"
 	full_name = "Southern Cross"
 	path = "southern_cross"
-
-	lobby_icon = 'icons/misc/title.dmi'
-	lobby_screens = list("mockingjay00") // New lobby screen if possible.
-
 	lobby_tracks = list(
 		/decl/music_track/chasing_time,
 		/decl/music_track/epicintro2015,

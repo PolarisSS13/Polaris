@@ -13,8 +13,7 @@
 	full_name = "Cynosure Station"
 	path = "cynosure"
 
-	lobby_icon = 'icons/misc/title.dmi'
-	lobby_screens = list("mockingjay00") // New lobby screen if possible.
+	lobby_screens = list('icons/default_lobby.png', 'icons/lobby_old.gif') // New lobby screen if possible.
 
 	lobby_tracks = list(
 		/decl/music_track/chasing_time,

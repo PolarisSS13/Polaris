@@ -40,12 +40,12 @@
 	if(LAZYLEN(possible_targets))
 		while(possible_targets.len)
 			var/turf/T = pick(possible_targets)	// Don't always go NORTH, please. It's kind of weird.
-			possible_targets -= T
 
 			var/obj/effect/decal/cleanable/chempuddle/other_puddle = locate() in T
 			if(!istype(other_puddle))
 				other_puddle = new(T)
 			reagents.trans_to_holder(other_puddle.reagents, (reagents.total_volume - (25 * reagents.get_viscosity())) * (1 / possible_targets.len))
+			possible_targets -= T
 			other_puddle.Spread(exclude)
 
 	if(reagents.total_volume)
