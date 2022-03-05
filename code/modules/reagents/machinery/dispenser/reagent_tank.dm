@@ -119,7 +119,7 @@
 			message_admins("[key_name_admin(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>).")
 			log_game("[key_name(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]).")
 
-		if(Proj.sharp || (istype(Proj, /obj/item/projectile/beam) && !Proj.damage))
+		if(Proj.sharp || (istype(Proj, /obj/item/projectile/beam) && Proj.damage))
 			rupture()
 
 /obj/structure/reagent_dispensers/ex_act()
