@@ -22,6 +22,10 @@
 		CP.update_icon(TRUE)
 
 /obj/effect/decal/cleanable/chempuddle/proc/Spread(exclude=list())
+	if(!reagents && !QDELETED(src))
+		qdel(src)
+		return
+
 	if(reagents.total_volume < (25 * reagents.get_viscosity())) return
 	var/turf/simulated/S = get_turf(src)
 	if(!istype(S)) return
@@ -99,7 +103,7 @@
 
 	reagents.remove_any(evaporation_rate)
 
-	if(reagents.total_volume <= 0)
+	if(!reagents || reagents.total_volume <= 0)
 		qdel(src)
 		return
 
