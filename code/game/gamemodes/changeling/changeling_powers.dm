@@ -65,6 +65,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
+	verbs.Add(/datum/changeling/proc/EvolutionTree)
 	verbs.Add(/datum/changeling/proc/EvolutionMenu)
 	verbs.Add(/mob/proc/changeling_respec)
 	add_language("Changeling")

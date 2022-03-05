@@ -2,24 +2,6 @@
 
 //Ling power's evolution menu entry datum should be contained alongside the mob proc for the actual power, in their own file.
 
-var/list/powers = typesof(/datum/power/changeling) - /datum/power/changeling	//needed for the badmin verb for now
-var/list/datum/power/changeling/powerinstances = list()
-
-/datum/power			//Could be used by other antags too
-	var/name = "Power"
-	var/desc = "Placeholder"
-	var/helptext = ""
-	var/enhancedtext = ""
-	var/isVerb = 1 	// Is it an active power, or passive?
-	var/verbpath // Path to a verb that contains the effects.
-	var/make_hud_button = 1 // Is this ability significant enough to dedicate screen space for a HUD button?
-	var/ability_icon_state = null // icon_state for icons for the ability HUD.  Must be in screen_spells.dmi.
-
-/datum/power/changeling
-	var/allowduringlesserform = 0
-	var/genomecost = 500000 // Cost for the changling to evolve this power.
-
-
 // Modularchangling, totally stolen from the new player panel.  YAYY
 /datum/changeling/proc/EvolutionMenu()//The new one
 	set name = "-Evolution Menu-"
