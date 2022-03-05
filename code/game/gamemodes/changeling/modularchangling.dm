@@ -1,3 +1,4 @@
+/* New menu found in changeling_evolutiontree.dm 
 // READ: Don't use the apostrophe in name or desc. Causes script errors.
 
 //Ling power's evolution menu entry datum should be contained alongside the mob proc for the actual power, in their own file.
@@ -289,7 +290,6 @@
 		call(/datum/changeling/proc/EvolutionMenu)()
 
 
-
 /datum/changeling/proc/purchasePower(var/datum/mind/M, var/Pname, var/remake_verbs = 1)
 	if(!M || !M.changeling)
 		return
@@ -339,4 +339,4 @@
 		call(M.current, Thepower.verbpath)()
 	else if(remake_verbs)
 		M.current.make_changeling()
-
+*/
