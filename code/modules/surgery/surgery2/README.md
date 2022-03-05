@@ -5,6 +5,7 @@ More or less a complete rewrite of the Medical System. Targetting not many user-
 
 # Why do we need it?
 The code messed with the Honk, and it gets the Bonk.
+
 Our code is really smelly, and a bug with the operating computer prompted me to rewrite surgery. Which, as honestly should be expected of me, snowballed into a huge refactor to support what I want to do. The specific goal is to improve surgery QoL by introducing a radial menu, and expand the organs and chemistry/metabolism systems to allow for more interesting features and gameplay decisions to be implemented in the future.
 
 # How does it work?
@@ -12,19 +13,23 @@ Our code is really smelly, and a bug with the operating computer prompted me to 
 The basic proposal is that, instead of **organs** tracking all of their wounds internally, wounds are made into distinct objects with the Datum Component System.
 Individual wounds can separately process or disable **autohealing**, so one really big, bleeding gash won't get better, but all those scrapes from rolling down the stairs will over time. Different types of wounds can have a variety of qualities, like **broken bones**, **bleeding**, **infection**, etc,.You probably don't want to find them all.
 The processing of wounds will be aware of other wounds on the parent organ, but should *not* need to know about wounds on *other organs*. You can do some holder-foo to get there, but that is a bad design practice.
+
 **Open Trade:** I'm considering adding notifications for particular types of wounds to the HUD, so players will get a visual indication that "Hey you're bones are broken" or "you're bleeding". The HUD element itself would only describe the type of injury, but examining it or opening up a tooltip for it might describe the location. This has uses from a QoL perspective, but could make it easier to get healing.
 
 ## Surgery
 Each **wound** knows of certain **surgical procedures** that can be applied to it (With specific circumstances per-surgery). When you try to do surgery on a human, the organ that you target will start with a few basic surgeries (Like opening an incision), go around to all of its wounds, and collate a list of what surgeries you can actually perform on it, given what you've got in your hand. The organ will also be responsible for handling those basic operations like bandaging 15 wounds at once, and this should have precedence over actually trying to do surgery on Help intent. Because **multi-stage operations**, like mending a broken bone, are a thing, certain wounds may be required to unlock other surgeries to fix the original problem. Certain wounds may also *prevent* operations on other wounds. So if you cut open someone's ribcage to do heart surgery, you can't just forget to put their ribs back in place before closing it up.
 
 Pretty much all of the existing surgery procedures will continue to exist, but the biggest improvement here will be a radial menu to select which operation you want to perform. This will replace the current "priority" system, where certain procedures are always performed over other procedures, and filtering among them is dependent upon very specific circumstances. 
+
 **Open Trade:** The radial menu adds more clicks to actually doing a thing (Though click proximity is kept pretty tight). Should things like bandaging wounds or applying splints be wrapped into the surgical system?
+
 **Open Trade:** New intent? Cleans up this nonsense with help/not-help intents. If you want to do surgery, it is your *intent* to do surgery.
 
 ## What about [Other damage type here]?
 The changes described above are *entirely* focused on **BRUTE** and **BURN**. They're the two damage types that are most often encountered in surgery, after all, and this whole idea started as a surgery refactor. The four other primary damage types are **TOX** (Toxins), **OXY** (Suffocation), HALLOSS (**Pain**), **CLONELOSS** (`G E N E S`).
 ### Toxins
 **Toxins** represent things being in your body, and especially your blood, that are not supposed to be there. The simplest source is being injected with the extraordinarily *generic* and *descriptive* "toxins" reagent, but the most common instances are *either* **chemical overdoses** OR wounds becoming **infected**.
+
 In the case of "chemicals in your blood", the current system for tracking toxloss makes sense. Damage isn't really targeted to specific organs, so unless we start introducing a lot of things that specifically target [*this organ*], it doesn't make sense to expand upon that.
 However, in the case of infected wounds (/sepsis/necrosis), it actually makes more sense to create and track the toxloss on each organ (But having it be tracked by the *organ*, not wounds!). When a wound becomes infected, it creates an "infection" wound. The infection wound has different stages, and causes toxloss only on the infected organ until the last stage, at which point it starts causing massive toxloss to the rest of the body (*Don't let infections reach 100%*).
 
@@ -36,32 +41,35 @@ Having too much oxyloss could *create wounds* on other parts of the body (Mostly
 **Pain** will be tracked by each organ. There isn't really a semantic difference in the pain caused by a single stun-baton whack or ten bruises, but the more you hurt, the longer it takes to stop hurting (Each wound tracking pain separately would make multiple wounds hurt for less time than a single big wound).
 Tracking pain on each organ also opens the floor to things like local anesthesia. Such things are out of scope to the work being described by this proposal, but it becomes a possibility.
 ### Cloneloss
-**Cloneloss** is... a weird damage type. It's inflicted by
+**Cloneloss** is... a weird damage type. It's inflicted by:
 * Slimes (They suck out all your delicious DNA... why not the rest of you?)
 * Cloning (Generic instability or something?)
 * Radiation (If you have enough of it)
+
 And it's not really clear *what* the damage actually *is*. "Body not working right" is already covered by toxloss. Body is physically deteriorating is covered by brute/burn.
+
 It is dumb and it should be removed.
+
 Slimes should inflict wounds that generate burns and toxloss.
 Being cloned should inflict that spooky "You got cloned" modifier, but still be treated by cryo. Speaking of cryo...
 
 ## Chemistry
-Much as the proposal needs special consideration for other damage types that don't as easily fit into this round hole I'm shaping, the entire premise by which **Chemistry** treats injuries needs to be reexamined.
-The human (mob) body contains a few **reservoirs** for reagents (Bloodstream, stomach), and each Life() tick, those reservoirs metabolize certain amounts of each reagent contained within them. Different reagents are metabolized at different rates, and have different effects when metabolized from the **bloodstream**, from the **stomach**, as well as when contacted via the **skin** or the **lungs**.
+Much as the proposal needs special consideration for other damage types that don't as easily fit into this round hole I'm shaping, the entire premise by which **Chemistry** treats injuries needs to be reexamined. The human (mob) body contains a few **reservoirs** for reagents (Bloodstream, stomach), and each Life() tick, those reservoirs metabolize certain amounts of each reagent contained within them. Different reagents are metabolized at different rates, and have different effects when metabolized from the **bloodstream**, from the **stomach**, as well as when contacted via the **skin** or the **lungs**.
 ### Skin-Contact Metabolism
 The most common way of "ingesting" reagents via skin-contact are through specifically prepared **"patches"** (You've probably heard of nicotine patches IRL). You might also **spill** your sulphuric acid beaker all over your pants when you drop it. The common trend here is that **skin-contact** is typically *isolated* to individual external organs. When ingested by this mechanism, reagents may have some effect upon the individual organ doing the ingestion, and a *small* amount will be transmitted to the bloodstream.
 ### Inhalation Metabolism
 There's a very small handful of things that you expect to be inhaling. Oxygen (g), nitrogen (g), and carbon dioxide (g) are mostly **handled by breathing mechanics** (~~Did you remember to say "*exhale"?~~), so we're going to ignore them here (If you actually inject oxygen (g) into your blood, Very Bad Things start happening).
-Of more interest are things **airborne chemical agents**, like phoron (g), and **inhaled medicines** (Asthma inhalers IRL).
-Inhaling this stuff may have some effect upon the lungs. Most of the time you just start coughing, and it usually smells terrible. *Most* of the amount will be transmitted into the bloodstream. (Phoron causes burns to the lungs, Dex and Dex+ do their oxyloss thing *here*)
+Of more interest are things **airborne chemical agents**, like phoron (g), and **inhaled medicines** (Asthma inhalers IRL). Yes, this will probably have to have some interaction with breathing, but I'm trying to limit the complexity.
+Inhaling this stuff may have some effect upon the lungs. Most of the time you just start coughing, and it usually smells terrible. *Most* of the amount will be transmitted into the bloodstream. (Phoron causes burns to the lungs, Dex and Dex+ do most their oxyloss thing *here*, but will still have some effect in the blood)
 ### Stomach Metabolism
 Whenever you swallow a **pill**, it goes here without passing "Go" or collecting $200. Doctors like pills, because they don't have to stab people with needles, but the chemicals in the pills take a bit longer to get into your bloodstream. You can also just **drink reagents** directly!
 This may seem like a weird use of the wounds system, but swallowing pills or eating food will actually create a stomach "wound" containing the eaten thing, that *slowly releases the reagents* contained within to your stomach. Drinking things directly sends *all the reagents to your stomach at once*, but your mouth may hate you for it.  (Chemical burns)
 When the stomach metabolizes its reagents, they may have some effect upon it (Heart burn, anyone?), and a *moderate* amount of the reagents will be transmitted to the bloodstream.
 ### Bloodstream Metabolism
 This is the part where things get complicated. Some of our reagents **act universally** on the whole body, like bicaridine, to heal injuries everywhere. Others only work on **specific organs**.
+
 Generally speaking, a *little bit* of each reagent get ingested into *every organ*, where they may or may not do a thing to that organ. A *lot* of each reagent gets filtered by your **kidneys** as waste to be expelled from your system (Including blood!). Mechanically, each life tick, each of your organs (Internal and external) *asks* for a certain amount of blood from the body's **bloodstream** (And all the chemicals inside that blood), and *returns* a certain amount of reagents (E.g., blood from bone marrow, or chemicals from the stomach). Different organs may request or return different amounts. If organs receive too much of a particular reagent, it will **Overdose**, triggering effects per-organ, and usually triggering **Toxloss**.
-Because your kidneys are responsible for removing most of the reagents from your system, having a lower-than-normal number of kidneys means that both good and bad reagents will affect you for longer. Because your kidneys are independent to the number of bone-containing organs producing blood, **missing limbs** may mean you are destroying more blood than you are creating.  Your body has a limited capacity for *adjusting its blood production* to account for this, based on the amount of blood each organ receives during its metabolism.
+Because your kidneys are responsible for removing most of the reagents from your system, having a lower-than-normal number of kidneys means that both good and bad reagents will affect you for longer. Because your kidneys are independent to the number of bone-containing organs producing blood, **missing limbs** may mean you are destroying more blood than you are creating.  Your body has a limited capacity for *adjusting its blood production/destruction* to account for this, based on the amount of blood each organ receives during its metabolism.
 #### Wait what's that about waste?
 No, you don't have to use the bathroom every 20 minutes. Reagents filtered by the kidneys will just be deleted.
 ### Cryo
