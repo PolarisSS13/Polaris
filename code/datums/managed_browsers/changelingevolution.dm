@@ -103,7 +103,7 @@
 		my_client.mob.mind.changeling.purchasePower(M, Thepower)
 	
 	if(href_list["tutorial"])
-		textbody = "<tr><th><font color='#c72121'><center>What am I?</font><br></th></tr>"
+		textbody = "<tr><th><font color='#c72121'><center>What am I?</center></font><br></th></tr>"
 		textbody += "<tr><td>"
 		textbody += "<font color='#F7F7ED'>You are a changeling, a creature empowered with genetic-based abilities that change your body in bizarre ways."
 		textbody += " It's probably best the crew doesn't know about your power -- at least not right away.</font><br><br>"
