@@ -84,7 +84,6 @@
 	var/spawn_blob_type = /obj/structure/blob/core/random_medium
 	var/number_of_blobs = 1
 	var/list/blobs = list() // A list containing weakrefs to blob cores created. Weakrefs mean this event won't interfere with qdel.
-	var/regions = list(EVENT_REGION_PLAYER_MAIN_AREA)
 
 /datum/event2/event/blob/hard_blob
 	spawn_blob_type = /obj/structure/blob/core/random_hard
