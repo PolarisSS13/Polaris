@@ -84,6 +84,7 @@
 	var/spawn_blob_type = /obj/structure/blob/core/random_medium
 	var/number_of_blobs = 1
 	var/list/blobs = list() // A list containing weakrefs to blob cores created. Weakrefs mean this event won't interfere with qdel.
+	var/regions = list(EVENT_REGION_PLAYER_MAIN_AREA)
 
 /datum/event2/event/blob/hard_blob
 	spawn_blob_type = /obj/structure/blob/core/random_hard
@@ -104,6 +105,8 @@
 		abort()
 
 /datum/event2/event/blob/start()
+	if(!open_turfs.len)
+		set_up()
 	for(var/i = 1 to number_of_blobs)
 		var/turf/T = pick(open_turfs)
 		var/obj/structure/blob/core/new_blob = new spawn_blob_type(T)
