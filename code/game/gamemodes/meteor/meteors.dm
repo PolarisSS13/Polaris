@@ -37,28 +37,48 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel)
-	log_debug("Spawning [number] meteors on the [dir2text(startSide)] of [zlevel]")
+/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel, var/planetary)
+	log_debug("Spawning [number] meteors on the [dir2text(startSide)] of [zlevel][(planetary ? ", in Planetary mode" : ".")]")
 	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes, startSide, zlevel)
+		spawn_meteor(meteortypes, startSide, zlevel, planetary)
 
-/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/startLevel)
+/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/startLevel, var/planetary)
 	if(isnull(startSide))
 		startSide = pick(cardinal)
 	if(isnull(startLevel))
 		startLevel = pick(using_map.station_levels - using_map.sealed_levels)
+	if(isnull(planetary))
+		planetary = FALSE
 
 	var/turf/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
 
+	if(planetary)
+		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE)
+		if(LAZYLEN(Targ))
+			if(get_dist(pickedstart, Targ[1] < get_dist(pickedstart, pickedgoal)))	// If the target turf is actually outdoors, don't redirect the rock, just hammer it normally.
+				pickedgoal = Targ[1]
+
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
+	M.start = pickedstart
+	if(!isnull(planetary))	// If we're lazily spawning meteors, let's lazy-check the type we make. If it's "outdoors", I.E. on a planet, it's a -rite, otherwise, -roid.
+		M.planetary = planetary
+
+	else
+		var/turf/T = get_turf(M)
+		if(T.outdoors)
+			M.planetary = TRUE
+
+	if(planetary)
+		M.startheight = rand(5, 20)	// Random "height" of falling meteors. Angle of attack, changes visibility.
+
 	spawn(0)
 		walk_towards(M, M.dest, 1)
 	return
 
-/proc/spaceDebrisStartLoc(startSide, Z)
+/proc/spaceDebrisStartLoc(var/startSide, var/Z, var/planetary)
 	var/starty
 	var/startx
 	switch(startSide)
@@ -77,7 +97,7 @@
 	var/turf/T = locate(startx, starty, Z)
 	return T
 
-/proc/spaceDebrisFinishLoc(startSide, Z)
+/proc/spaceDebrisFinishLoc(var/startSide, var/Z, var/planetary)
 	var/endy
 	var/endx
 	switch(startSide)
@@ -113,10 +133,17 @@
 	anchored = TRUE
 	var/hits = 4
 	var/hitpwr = 2 //Level of ex_act to be called on hit.
-	var/dest
+	var/atom/dest
+	var/atom/start
+	var/startheight = 0
 	pass_flags = PASSTABLE
 	var/heavy = FALSE
 	var/z_original
+
+	// Planetary meteors slope in, and impact only their target turf. They can be hard to see before impact, but have a shadow.
+	var/planetary
+	// They also have shadows.
+	var/obj/effect/projectile_shadow/shadow
 
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 2
@@ -133,6 +160,19 @@
 	SpinAnimation()
 
 /obj/effect/meteor/Move()
+	if(planetary)
+		if(!shadow)
+			shadow = new(get_turf(src))
+		if(loc == dest)
+			die(TRUE)
+			return
+
+		var/max_dist = get_dist(start, dest)
+		var/cur_dist = get_dist(loc, dest)
+
+		if(max_dist && cur_dist)
+			pixel_z = 32 * startheight * cur_dist / max_dist
+
 	if(z != z_original || loc == dest)
 		qdel(src)
 		return
@@ -141,11 +181,15 @@
 
 /obj/effect/meteor/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
-	var/turf/T = get_turf(loc)
-	ram_turf(T)
+	// Planetary roids only hit the turf they target, since they're, you know, in the air.
+	if(!planetary)
+		var/turf/T = get_turf(loc)
+		ram_turf(T)
 
-	if(prob(10) && !istype(T, /turf/space)) //randomly takes a 'hit' from ramming
-		get_hit()
+		if(prob(10) && !istype(T, /turf/space)) //randomly takes a 'hit' from ramming
+			get_hit()
+	else if(shadow)	// We are planetary, and have a shadow. So make it keep up.
+		shadow.forceMove(get_turf(src))
 
 /obj/effect/meteor/Destroy()
 	walk(src,FALSE) //this cancels the walk_towards() proc
