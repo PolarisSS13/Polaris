@@ -37,41 +37,33 @@
 //Meteor spawning global procs
 ///////////////////////////////
 
-/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel, var/planetary)
-	log_debug("Spawning [number] meteors on the [dir2text(startSide)] of [zlevel][(planetary ? ", in Planetary mode" : ".")]")
+/proc/spawn_meteors(var/number = 10, var/list/meteortypes, var/startSide, var/zlevel)
+	log_debug("Spawning [number] meteors on the [dir2text(startSide)] of [zlevel].")
 	for(var/i = 0; i < number; i++)
-		spawn_meteor(meteortypes, startSide, zlevel, planetary)
+		spawn_meteor(meteortypes, startSide, zlevel)
 
-/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/startLevel, var/planetary)
+/proc/spawn_meteor(var/list/meteortypes, var/startSide, var/startLevel)
 	if(isnull(startSide))
 		startSide = pick(cardinal)
 	if(isnull(startLevel))
 		startLevel = pick(using_map.station_levels - using_map.sealed_levels)
-	if(isnull(planetary))
-		planetary = FALSE
 
 	var/turf/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
-
-	if(planetary)
-		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE)
-		if(LAZYLEN(Targ))
-			if(get_dist(pickedstart, Targ[1] < get_dist(pickedstart, pickedgoal)))	// If the target turf is actually outdoors, don't redirect the rock, just hammer it normally.
-				pickedgoal = Targ[1]
 
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
 	M.dest = pickedgoal
 	M.start = pickedstart
-	if(!isnull(planetary))	// If we're lazily spawning meteors, let's lazy-check the type we make. If it's "outdoors", I.E. on a planet, it's a -rite, otherwise, -roid.
-		M.planetary = planetary
+	var/turf/T = get_turf(M)
+	if(T.outdoors)
+		M.planetary = TRUE
 
-	else
-		var/turf/T = get_turf(M)
-		if(T.outdoors)
-			M.planetary = TRUE
-
-	if(planetary)
+	if(M.planetary)
+		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE)
+		if(LAZYLEN(Targ))
+			if(get_dist(pickedstart, Targ[1] < get_dist(pickedstart, pickedgoal)))	// If the target turf is actually outdoors, don't redirect the rock, just hammer it normally.
+				pickedgoal = Targ[1]
 		M.startheight = rand(5, 20)	// Random "height" of falling meteors. Angle of attack, changes visibility.
 
 	spawn(0)
@@ -198,6 +190,8 @@
 
 /obj/effect/meteor/Bump(atom/A)
 	if(A)
+		if(planetary && loc != dest)
+			return
 		if(A.handle_meteor_impact(src)) // Used for special behaviour when getting hit specifically by a meteor, like a shield.
 			ram_turf(get_turf(A))
 			get_hit()
