@@ -233,8 +233,6 @@
 	if(locs && locs.len >= 2)	// If something is standing on top of us, let them pass.
 		if(mover.loc in locs)
 			. = TRUE
-	if(mover?.checkpass(PASSALL))
-		. = TRUE
 	return .
 
 //oldloc = old location on atom, inserted when forceMove is called and ONLY when forceMove is called!

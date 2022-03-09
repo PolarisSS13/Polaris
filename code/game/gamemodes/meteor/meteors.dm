@@ -31,7 +31,8 @@
 	/obj/effect/meteor/medium/spalling = 3,
 	/obj/effect/meteor/big=75,
 	/obj/effect/meteor/flaming=10,
-	/obj/effect/meteor/irradiated=10,
+	/obj/effect/meteor/irradiated=8,
+	/obj/effect/meteor/irradiated/super=2,
 	/obj/effect/meteor/emp=10)
 
 
@@ -49,13 +50,20 @@
 	if(isnull(startSide))
 		startSide = pick(cardinal)
 	if(isnull(startLevel))
-		startLevel = pick(using_map.station_levels/* - using_map.sealed_levels*/)
+		startLevel = pick(using_map.station_levels - using_map.underground_levels)
 
 	var/turf/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
 
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
+
+	if(M.planetary && !pickedgoal.outdoors)
+		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE)
+		if(LAZYLEN(Targ))
+			var/turf/TargetTurf = get_step(get_turf(Targ[1]), get_dir(pickedgoal, pickedstart))
+			if(get_dist(pickedstart, Targ[1]) < get_dist(pickedstart, pickedgoal))
+				pickedgoal = TargetTurf
 
 	M.launch_to_turf(pickedgoal, 1)
 
@@ -129,6 +137,8 @@
 	// They also have shadows.
 	var/obj/effect/projectile_shadow/shadow
 
+	var/list/chunk_tech = list(TECH_MATERIAL = 5)
+
 	var/meteordrop = /obj/item/weapon/ore/iron
 	var/dropamt = 2
 
@@ -140,6 +150,9 @@
 /obj/effect/meteor/Initialize()
 	. = ..()
 	z_original = z
+	var/turf/T = get_turf(src)
+	if(T.outdoors)
+		planetary = TRUE
 	GLOB.meteor_list += src
 	SpinAnimation()
 
@@ -175,8 +188,13 @@
 /obj/effect/meteor/Bump(atom/A)
 	if(A)
 		if(A.handle_meteor_impact(src)) // Used for special behaviour when getting hit specifically by a meteor, like a shield.
-			ram_turf(get_turf(A))
-			get_hit()
+
+			if(planetary)
+				if(curheight > 1)
+					forceMove(get_turf(A))
+			else
+				ram_turf(get_turf(A))
+				get_hit()
 		else
 			die(FALSE)
 
@@ -189,15 +207,9 @@
 	var/turf/Current = get_turf(src)
 	var/turf/Target = get_turf(target)
 	if(Current.outdoors)
-		planetary = TRUE
-		pass_flags = PASSALL
+		startheight = rand(5,15)
 
 	if(planetary && !Target.outdoors)
-		var/list/Targ = check_trajectory(Target, Current, PASSTABLE)
-		if(LAZYLEN(Targ))
-			var/turf/TargetTurf = get_turf(Targ[1])
-			if(get_dist(Current, Targ[1]) < get_dist(Current, Target))	// If the target turf is actually outdoors, don't redirect the rock, just hammer it normally.
-				Target = TargetTurf
 		startheight = rand(5, 20)	// Random "height" of falling meteors. Angle of attack, changes visibility.
 
 	move_toward(Target, delay, TRUE)	// Begin the movement loop.
@@ -205,10 +217,6 @@
 /obj/effect/meteor/proc/move_toward(var/target, var/delay = 0, var/allow_recursion = FALSE)
 	if(!target)
 		return
-
-	if(checkpass(PASSALL))	// If we're passing "through" objects
-		if(curheight <= 1)	// And we're at a height of impact...
-			pass_flags = null	// No more speceial treatment. Smash something.
 
 	var/turf/StartTurf = get_turf(src)
 	var/turf/EndTurf = get_step(StartTurf, get_dir(StartTurf, target))
@@ -225,8 +233,7 @@
 		var/dist_percent = calc_distance_percent()
 		if(!isnull(dist_percent))
 			curheight = startheight * dist_percent
-			pixel_y = (32 * curheight)
-			to_world("pixel height is [pixel_y]")
+			src.pixel_y = (curheight * 32)
 
 	if(EndTurf)	// Have we somehow reached the edge of a map without a teleport boundary?
 		Move(EndTurf, delay)
@@ -252,11 +259,7 @@
 		return 0
 
 	current_dest_distance = get_dist(get_turf(src), dest)
-	to_world("current distance is [current_dest_distance]")
 	max_dest_distance = get_dist(start, dest)
-	to_world("max distance is [max_dest_distance]")
-
-	to_world("returning [current_dest_distance / max_dest_distance]")
 	return current_dest_distance / max_dest_distance
 
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
@@ -289,7 +292,8 @@
 /obj/effect/meteor/proc/die(var/explode = TRUE)
 	make_debris()
 	meteor_effect(explode)
-	qdel(src)
+	if(!QDELETED(src))
+		qdel(src)
 
 /obj/effect/meteor/ex_act()
 	return
@@ -313,6 +317,10 @@
 	return
 
 /obj/effect/meteor/proc/make_debris()
+	if(prob(5 * dropamt))
+		var/obj/item/meteor_chunk/MC = new(get_turf(src))
+		MC.copy_meteor(src)
+		MC.throw_at(dest, 5, 10)
 	for(var/throws = dropamt, throws > 0, throws--)
 		var/obj/item/O = new meteordrop(get_turf(src))
 		O.throw_at(dest, 5, 10)
@@ -344,11 +352,15 @@
 	meteordrop = /obj/item/weapon/ore/glass
 	wall_power = 50
 
+	chunk_tech = list(TECH_MATERIAL = 3)
+
 // Medium-sized meteors aren't very special and can be stopped easily by r-walls.
 /obj/effect/meteor/medium
 	name = "meteor"
 	dropamt = 3
 	wall_power = 200
+
+	chunk_tech = list(TECH_MATERIAL = 5)
 
 /obj/effect/meteor/medium/meteor_effect(var/explode)
 	..()
@@ -358,6 +370,8 @@
 /obj/effect/meteor/medium/spalling
 	name = "spalling meteor"
 	wall_power = 150
+
+	chunk_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 3)
 
 /obj/effect/meteor/medium/spalling/handle_unique_movement(var/turf/oldloc, var/direction)
 	var/turf/T = get_turf(src)
@@ -376,10 +390,40 @@
 	dropamt = 4
 	wall_power = 400
 
+	chunk_tech = list(TECH_MATERIAL = 6)
+
 /obj/effect/meteor/big/meteor_effect(var/explode)
 	..()
 	if(explode)
 		explosion(src.loc, 1, 2, 3, 4, 0)
+
+// Huge-sized meteors pack -the biggest- punch, leaving a clump of rock behind.
+/obj/effect/meteor/huge
+	name = "massive meteor"
+	icon_state = "large"
+	hits = 10
+	hitpwr = 0
+	heavy = 1
+	dropamt = 0
+	wall_power = 800
+
+	var/spawned_terrain = FALSE
+
+	chunk_tech = list(TECH_MATERIAL = 7)
+
+/obj/effect/meteor/huge/Initialize()
+	. = ..()
+	adjust_scale(2)
+
+/obj/effect/meteor/huge/meteor_effect(var/explode)
+	..()
+	if(!spawned_terrain)
+		spawned_terrain = TRUE
+		var/dest_x = x - 2
+		var/dest_y = y - 2
+		var/dest_z = z
+		spawn(0)	// Needs to be asynchronous due to how spawning the maps functions.
+			var/datum/random_map/meteor/M = new(null, dest_x, dest_y, dest_z)
 
 // 'Flaming' meteors do less overall damage but are spread out more due to a larger but weaker explosion at the end.
 /obj/effect/meteor/flaming
@@ -389,6 +433,8 @@
 	heavy = 1
 	meteordrop = /obj/item/weapon/ore/phoron
 	wall_power = 100
+
+	chunk_tech = list(TECH_MATERIAL = 6, TECH_PHORON = 4)
 
 /obj/effect/meteor/flaming/meteor_effect(var/explode)
 	..()
@@ -403,6 +449,7 @@
 	meteordrop = /obj/item/weapon/ore/uranium
 	wall_power = 75
 
+	chunk_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 
 /obj/effect/meteor/irradiated/meteor_effect(var/explode)
 	..()
@@ -410,6 +457,17 @@
 		explosion(src.loc, 0, 0, 4, 3, 0)
 	new /obj/effect/decal/cleanable/greenglow(get_turf(src))
 	SSradiation.radiate(src, 50)
+
+// A -supermatter- irradiated meteor.
+/obj/effect/meteor/irradiated/super
+	name = "supermatteor"
+	desc = "Act of god, or ejected core gone wrong, something terrible is going to happen."
+	icon_state = "glowing_blue"
+
+	chunk_tech = list(TECH_MATERIAL = 7, TECH_ENGINEERING = 6)
+
+	meteordrop = /obj/item/stack/material/supermatter
+	wall_power = 200
 
 // This meteor fries toasters.
 /obj/effect/meteor/emp
@@ -419,6 +477,8 @@
 	meteordrop = /obj/item/weapon/ore/osmium
 	dropamt = 3
 	wall_power = 80
+
+	chunk_tech = list(TECH_MATERIAL = 6, TECH_POWER = 5)
 
 /obj/effect/meteor/emp/meteor_effect(var/explode)
 	..()
@@ -437,6 +497,8 @@
 	meteordrop = /obj/item/weapon/ore/phoron
 	wall_power = 150
 
+	chunk_tech = list(TECH_MATERIAL = 10, TECH_PHORON = 8)
+
 /obj/effect/meteor/tunguska/meteor_effect(var/explode)
 	..()
 	if(explode)
@@ -446,3 +508,56 @@
 	..()
 	if(prob(20))
 		explosion(src.loc,2,4,6,8)
+
+// Meat. It's a- it's- it has- It's a meatyor.
+
+/obj/effect/meteor/meaty
+	name = "meatyor"
+	desc = "A horrific amalgam of compacted flesh. Your skin crawls looking at this."
+	icon_state = "meat"
+
+	wall_power = 70
+	hits = 3
+	hitpwr = 1
+
+	meteordrop = /obj/item/weapon/reagent_containers/food/snacks/meat
+	dropamt = 4
+
+// Blob! By default, it spawns a blob weaker than the lethargic by grow-rate, but slightly hardier defense-wise. Like a barnacle, from space!
+/obj/effect/meteor/blobby
+	name = "blobteor"
+	desc = "A pulsing amalgam of gel. It writhes."
+	icon_state = "blob"
+
+	wall_power = 120
+	hits = 5
+	hitpwr = 1
+
+	meteordrop = /obj/structure/blob/core/barnacle
+	dropamt = 1
+
+/*
+ * Meteor core chunks.
+ */
+
+/obj/item/meteor_chunk	// It's not just a pebble.. it's a rock! From space!
+	name = "meteoric iron"
+	desc = "A meteor chunk. Cool."
+	icon = 'icons/obj/meteor.dmi'
+	icon_state = "small"
+	w_class = ITEMSIZE_SMALL
+	origin_tech = list(TECH_MATERIAL = 5)
+
+/obj/item/meteor_chunk/proc/copy_meteor(var/obj/effect/meteor/Parent)
+	if(!Parent)
+		return FALSE
+
+	name = "[Parent.name]ite chunk"	// The single case this doesn't presently work for meteors would be incredibly funny, "space dustite", and so I leave it.
+	desc = "A recovered piece of a [Parent.name]."
+	icon_state = Parent.icon_state
+
+	adjust_scale(0.7)
+	return TRUE
+
+/obj/item/meteor_chunk/ex_act()	// Meteor tuff
+	return
