@@ -9,7 +9,8 @@
 //for normal meteor event
 /var/list/meteors_normal = list(
 	/obj/effect/meteor/dust=3,
-	/obj/effect/meteor/medium=8,
+	/obj/effect/meteor/medium=5,
+	/obj/effect/meteor/medium/spalling = 3,
 	/obj/effect/meteor/big=3,
 	/obj/effect/meteor/flaming=1,
 	/obj/effect/meteor/irradiated=3
@@ -17,7 +18,8 @@
 
 //for threatening meteor event
 /var/list/meteors_threatening = list(
-	/obj/effect/meteor/medium=5,
+	/obj/effect/meteor/medium=3,
+	/obj/effect/meteor/medium/spalling = 2,
 	/obj/effect/meteor/big=10,
 	/obj/effect/meteor/flaming=3,
 	/obj/effect/meteor/irradiated=3,
@@ -25,7 +27,8 @@
 
 //for catastrophic meteor event
 /var/list/meteors_catastrophic = list(
-	/obj/effect/meteor/medium=5,
+	/obj/effect/meteor/medium=2,
+	/obj/effect/meteor/medium/spalling = 3,
 	/obj/effect/meteor/big=75,
 	/obj/effect/meteor/flaming=10,
 	/obj/effect/meteor/irradiated=10,
@@ -46,28 +49,16 @@
 	if(isnull(startSide))
 		startSide = pick(cardinal)
 	if(isnull(startLevel))
-		startLevel = pick(using_map.station_levels - using_map.sealed_levels)
+		startLevel = pick(using_map.station_levels/* - using_map.sealed_levels*/)
 
 	var/turf/pickedstart = spaceDebrisStartLoc(startSide, startLevel)
 	var/turf/pickedgoal = spaceDebrisFinishLoc(startSide, startLevel)
 
 	var/Me = pickweight(meteortypes)
 	var/obj/effect/meteor/M = new Me(pickedstart)
-	M.dest = pickedgoal
-	M.start = pickedstart
-	var/turf/T = get_turf(M)
-	if(T.outdoors)
-		M.planetary = TRUE
 
-	if(M.planetary)
-		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE)
-		if(LAZYLEN(Targ))
-			if(get_dist(pickedstart, Targ[1] < get_dist(pickedstart, pickedgoal)))	// If the target turf is actually outdoors, don't redirect the rock, just hammer it normally.
-				pickedgoal = Targ[1]
-		M.startheight = rand(5, 20)	// Random "height" of falling meteors. Angle of attack, changes visibility.
+	M.launch_to_turf(pickedgoal, 1)
 
-	spawn(0)
-		walk_towards(M, M.dest, 1)
 	return
 
 /proc/spaceDebrisStartLoc(var/startSide, var/Z, var/planetary)
@@ -134,6 +125,7 @@
 
 	// Planetary meteors slope in, and impact only their target turf. They can be hard to see before impact, but have a shadow.
 	var/planetary
+	var/curheight = 0	// How "high" we are
 	// They also have shadows.
 	var/obj/effect/projectile_shadow/shadow
 
@@ -152,19 +144,6 @@
 	SpinAnimation()
 
 /obj/effect/meteor/Move()
-	if(planetary)
-		if(!shadow)
-			shadow = new(get_turf(src))
-		if(loc == dest)
-			die(TRUE)
-			return
-
-		var/max_dist = get_dist(start, dest)
-		var/cur_dist = get_dist(loc, dest)
-
-		if(max_dist && cur_dist)
-			pixel_z = 32 * startheight * cur_dist / max_dist
-
 	if(z != z_original || loc == dest)
 		qdel(src)
 		return
@@ -173,6 +152,9 @@
 
 /obj/effect/meteor/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()
+
+	handle_unique_movement(old_loc, direction)
+
 	// Planetary roids only hit the turf they target, since they're, you know, in the air.
 	if(!planetary)
 		var/turf/T = get_turf(loc)
@@ -184,14 +166,14 @@
 		shadow.forceMove(get_turf(src))
 
 /obj/effect/meteor/Destroy()
+	if(shadow)
+		QDEL_NULL(shadow)
 	walk(src,FALSE) //this cancels the walk_towards() proc
 	GLOB.meteor_list -= src
 	return ..()
 
 /obj/effect/meteor/Bump(atom/A)
 	if(A)
-		if(planetary && loc != dest)
-			return
 		if(A.handle_meteor_impact(src)) // Used for special behaviour when getting hit specifically by a meteor, like a shield.
 			ram_turf(get_turf(A))
 			get_hit()
@@ -200,6 +182,82 @@
 
 /obj/effect/meteor/CanPass(atom/movable/mover, turf/target)
 	return istype(mover, /obj/effect/meteor) ? TRUE : ..()
+
+/obj/effect/meteor/proc/launch_to_turf(var/target, var/delay = 0)
+	dest = get_turf(target)
+	start = get_turf(src)
+	var/turf/Current = get_turf(src)
+	var/turf/Target = get_turf(target)
+	if(Current.outdoors)
+		planetary = TRUE
+		pass_flags = PASSALL
+
+	if(planetary && !Target.outdoors)
+		var/list/Targ = check_trajectory(Target, Current, PASSTABLE)
+		if(LAZYLEN(Targ))
+			var/turf/TargetTurf = get_turf(Targ[1])
+			if(get_dist(Current, Targ[1]) < get_dist(Current, Target))	// If the target turf is actually outdoors, don't redirect the rock, just hammer it normally.
+				Target = TargetTurf
+		startheight = rand(5, 20)	// Random "height" of falling meteors. Angle of attack, changes visibility.
+
+	move_toward(Target, delay, TRUE)	// Begin the movement loop.
+
+/obj/effect/meteor/proc/move_toward(var/target, var/delay = 0, var/allow_recursion = FALSE)
+	if(!target)
+		return
+
+	if(checkpass(PASSALL))	// If we're passing "through" objects
+		if(curheight <= 1)	// And we're at a height of impact...
+			pass_flags = null	// No more speceial treatment. Smash something.
+
+	var/turf/StartTurf = get_turf(src)
+	var/turf/EndTurf = get_step(StartTurf, get_dir(StartTurf, target))
+
+	if(planetary)
+		if(!shadow)
+			shadow = new(get_turf(src))
+			shadow.pixel_y = -20
+
+		if(loc == dest)
+			die(TRUE)
+			return
+
+		var/dist_percent = calc_distance_percent()
+		if(!isnull(dist_percent))
+			curheight = startheight * dist_percent
+			pixel_y = (32 * curheight)
+			to_world("pixel height is [pixel_y]")
+
+	if(EndTurf)	// Have we somehow reached the edge of a map without a teleport boundary?
+		Move(EndTurf, delay)
+		if(get_turf(src) == StartTurf)	// If it doesn't move, IE, is blocked by something, take a hit.
+			get_hit()
+		
+		if(allow_recursion)
+			if(!QDELETED(src))
+				addtimer(CALLBACK(src, .proc/move_toward, target, delay, allow_recursion), delay)
+
+	else if(!QDELETED(src))	// Then delete ourselves if we haven't been deleted already.
+		qdel(src)
+		return
+
+/obj/effect/meteor/proc/calc_distance_percent()
+	var/current_dest_distance
+	var/max_dest_distance
+
+	if(!start)
+		start = get_turf(src)
+
+	if(!dest)
+		return 0
+
+	current_dest_distance = get_dist(get_turf(src), dest)
+	to_world("current distance is [current_dest_distance]")
+	max_dest_distance = get_dist(start, dest)
+	to_world("max distance is [max_dest_distance]")
+
+	to_world("returning [current_dest_distance / max_dest_distance]")
+	return current_dest_distance / max_dest_distance
 
 /obj/effect/meteor/proc/ram_turf(var/turf/T)
 	//first bust whatever is in the turf
@@ -216,13 +274,17 @@
 			var/turf/simulated/wall/W = T
 			W.take_damage(wall_power) // Stronger walls can halt asteroids.
 
-
 //process getting 'hit' by colliding with a dense object
 //or randomly when ramming turfs
 /obj/effect/meteor/proc/get_hit()
 	hits--
 	if(hits <= 0)
 		die(TRUE)
+
+
+// Meteor effects on traversal.
+/obj/effect/meteor/proc/handle_unique_movement(var/turf/oldloc, var/direction)
+	return
 
 /obj/effect/meteor/proc/die(var/explode = TRUE)
 	make_debris()
@@ -292,6 +354,18 @@
 	..()
 	if(explode)
 		explosion(src.loc, 0, 1, 2, 3, 0)
+
+/obj/effect/meteor/medium/spalling
+	name = "spalling meteor"
+	wall_power = 150
+
+/obj/effect/meteor/medium/spalling/handle_unique_movement(var/turf/oldloc, var/direction)
+	var/turf/T = get_turf(src)
+	if(prob(20))
+		for(var/I = 1 to rand(2,5))
+			var/obj/item/projectile/bullet/pellet/fragment/meteor/frag = new(T)
+			var/turf/Targ = pick(orange(7,src))
+			frag.launch_projectile_from_turf(Targ, BP_TORSO)
 
 // Large-sized meteors generally pack the most punch, but are more concentrated towards the epicenter.
 /obj/effect/meteor/big

@@ -102,6 +102,12 @@ var/list/mining_overlay_cache = list()
 	sand_icon_state = "sand-icey" // to be replaced
 	rock_icon_state = "rock-crystal-shiny"
 
+/turf/simulated/mineral/moon
+	icon_state = "rock-moon"
+	rock_side_icon_state = "rock-moon_side"
+	sand_icon_state = "moonsand_fine"
+	rock_icon_state = "rock-moon"
+
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
 
@@ -142,6 +148,10 @@ var/list/mining_overlay_cache = list()
 /turf/simulated/mineral/floor/light_corner
 	icon_state = "sand-light-corner"
 	sand_icon_state = "sand-light-corner"
+
+/turf/simulated/mineral/floor/moon
+	icon_state = "moonsand_fine"
+	sand_icon_state = "moonsand_fine"
 
 /turf/simulated/mineral/floor/ignore_mapgen
 	ignore_mapgen = 1
@@ -195,7 +205,7 @@ var/list/mining_overlay_cache = list()
 /turf/simulated/mineral/Initialize()
 	. = ..()
 	if(prob(20))
-		overlay_detail = "asteroid[rand(0,9)]"
+		overlay_detail = "[sand_icon_state][rand(0,9)]"
 	update_icon(1)
 	if(density && mineral)
 		. = INITIALIZE_HINT_LATELOAD
@@ -256,7 +266,8 @@ var/list/mining_overlay_cache = list()
 					add_overlay(get_cached_border(rock_side_icon_state,direction,'icons/turf/walls.dmi',rock_side_icon_state))
 
 		if(overlay_detail)
-			add_overlay('icons/turf/flooring/decals.dmi',overlay_detail)
+			if(overlay_detail in icon_states(icon))
+				add_overlay('icons/turf/flooring/decals.dmi',overlay_detail)
 
 		if(update_neighbors)
 			for(var/direction in alldirs)
@@ -284,7 +295,8 @@ var/list/mining_overlay_cache = list()
 				var/amount_to_give = rand(CEILING(resources[ore]/2, 1), resources[ore])  // Should result in at least one piece of ore.
 				for(var/i=1, i <= amount_to_give, i++)
 					var/oretype = ore_types[ore]
-					new oretype(src)
+					if(oretype)
+						new oretype(src)
 				resources[ore] = 0
 
 /turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj) // only emitters for now

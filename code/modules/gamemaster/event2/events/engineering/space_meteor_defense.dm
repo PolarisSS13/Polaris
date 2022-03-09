@@ -25,8 +25,8 @@
 
 
 /datum/event2/event/meteor_defense
-	start_delay_lower_bound = 10 MINUTES
-	start_delay_upper_bound = 15 MINUTES
+	start_delay_lower_bound = 1 MINUTES
+	start_delay_upper_bound = 1 MINUTES
 	var/soon_announced = FALSE
 	var/direction = null // Actual dir used for which side the meteors come from.
 	var/dir_text = null // Direction shown in the announcement.
