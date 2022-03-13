@@ -634,16 +634,17 @@
 
 /mob/living/carbon/human/proc/handle_allergens()
 	if(chem_effects[CE_ALLERGEN])
-		var/damage_severity = species.allergen_damage_severity
-		var/disable_severity = species.allergen_disable_severity
+		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple seperate allergen typess simultaneously hurts more
+		var/damage_severity = species.allergen_damage_severity * chem_effects[CE_ALLERGEN]
+		var/disable_severity = species.allergen_disable_severity * chem_effects[CE_ALLERGEN]
 		if(species.allergen_reaction & AG_TOX_DMG)
 			adjustToxLoss(damage_severity)
 		if(species.allergen_reaction & AG_OXY_DMG)
 			adjustOxyLoss(damage_severity)
-			if(prob(2*disable_severity))
+			if(prob(disable_severity/2))
 				emote(pick("cough","gasp","choke"))
 		if(species.allergen_reaction & AG_EMOTE)
-			if(prob(2*disable_severity))
+			if(prob(disable_severity/2))
 				emote(pick("pale","shiver","twitch"))
 		if(species.allergen_reaction & AG_PAIN)
 			adjustHalLoss(disable_severity)
