@@ -82,6 +82,8 @@
 		handle_shock()
 
 		handle_pain()
+		
+		handle_allergens()
 
 		handle_medical_side_effects()
 
@@ -629,6 +631,30 @@
 
 	breath.update_values()
 	return 1
+
+/mob/living/carbon/human/proc/handle_allergens()
+	if(chem_effects[CE_ALLERGEN])
+		var/damage_severity = species.allergen_damage_severity
+		var/disable_severity = species.allergen_disable_severity
+		if(species.allergen_reaction & AG_TOX_DMG)
+			adjustToxLoss(damage_severity)
+		if(species.allergen_reaction & AG_OXY_DMG)
+			adjustOxyLoss(damage_severity)
+			if(prob(2*disable_severity))
+				emote(pick("cough","gasp","choke"))
+		if(species.allergen_reaction & AG_EMOTE)
+			if(prob(2*disable_severity))
+				emote(pick("pale","shiver","twitch"))
+		if(species.allergen_reaction & AG_PAIN)
+			adjustHalLoss(disable_severity)
+		if(species.allergen_reaction & AG_WEAKEN)
+			Weaken(disable_severity)
+		if(species.allergen_reaction & AG_BLURRY)
+			eye_blurry = max(eye_blurry, disable_severity)
+		if(species.allergen_reaction & AG_SLEEPY)
+			drowsyness = max(drowsyness, disable_severity)
+		if(species.allergen_reaction & AG_CONFUSE)
+			Confuse(disable_severity/4)
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
