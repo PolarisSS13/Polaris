@@ -1185,3 +1185,6 @@
 /mob/proc/grab_ghost(force)
 	if(mind)
 		return mind.grab_ghost(force = force)
+
+/mob/proc/get_sound_volume_multiplier()
+	return !ear_deaf

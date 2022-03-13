@@ -7,6 +7,7 @@
 	path = "example"
 
 	lobby_screens = list('maps/example/example.png')
+	lobby_tracks = list(/decl/music_track/absconditus)
 
 	zlevel_datum_type = /datum/map_z_level/example
 

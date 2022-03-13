@@ -28,8 +28,6 @@ SUBSYSTEM_DEF(ticker)
 	var/last_restart_notify				// world.time of last restart warning.
 	var/delay_end = FALSE               // If set, the round will not restart on its own.
 
-	var/login_music						// music played in pregame lobby
-
 	var/list/datum/mind/minds = list()	// The people in the game. Used for objective tracking.
 
 	// TODO - I am sure there is a better place these can go.
@@ -51,15 +49,6 @@ SUBSYSTEM_DEF(ticker)
 var/global/datum/controller/subsystem/ticker/ticker
 /datum/controller/subsystem/ticker/PreInit()
 	global.ticker = src // TODO - Remove this! Change everything to point at SSticker intead
-	login_music = pick(\
-	/*'sound/music/halloween/skeletons.ogg',\
-	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
-	'sound/music/space.ogg',\
-	'sound/music/traitor.ogg',\
-	'sound/music/title2.ogg',\
-	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 
 /datum/controller/subsystem/ticker/Initialize()
 	pregame_timeleft = config.pregame_time
