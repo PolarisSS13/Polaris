@@ -637,6 +637,10 @@
 		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple seperate allergen typess simultaneously hurts more
 		var/damage_severity = species.allergen_damage_severity * chem_effects[CE_ALLERGEN]
 		var/disable_severity = species.allergen_disable_severity * chem_effects[CE_ALLERGEN]
+		if(species.allergen_reaction & AG_PHYS_DMG)
+			adjustBruteLoss(damage_severity)
+		if(species.allergen_reaction & AG_BURN_DMG)
+			adjustFireLoss(damage_severity)
 		if(species.allergen_reaction & AG_TOX_DMG)
 			adjustToxLoss(damage_severity)
 		if(species.allergen_reaction & AG_OXY_DMG)
