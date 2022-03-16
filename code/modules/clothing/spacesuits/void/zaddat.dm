@@ -38,7 +38,7 @@
 		to_chat(M, "This Shroud has already been customized!")
 		return 0
 
-	suit_style = input(M, "Which suit style would you like?") in list("Engineer", "Spacer", "Knight", "Fashion", "Bishop", "Hegemony", "Rugged", "Soft","Ancient","Healer","Clockwork","Retro")
+	suit_style = input(M, "Which suit style would you like?") in list("Engineer", "Spacer", "Knight", "Fashion", "Bishop", "Hegemony", "Rugged", "Soft", "Ancient", "Healer", "Clockwork", "Retro")
 	switch(suit_style)
 		if("Engineer")
 			name = "\improper Engineer's Guild Shroud"
@@ -119,7 +119,7 @@
 				helmet.item_state = "zaddat_soft"
 		if("Ancient")
 			name = "ancient Shroud"
-			base_name = " ancient Shroud"
+			base_name = "ancient Shroud"
 			desc = "Often seen among the guildless or dishonored, this is an extremely old design of Shroud and has clearly seen its years."
 			icon_state = "zaddat_ancient"
 			item_state = "zaddat_ancient"
@@ -130,7 +130,7 @@
 				helmet.item_state = "zaddat_ancient"
 		if("Healer")
 			name = "healer Shroud"
-			base_name = " healer Shroud"
+			base_name = "healer Shroud"
 			desc = "A shroud designed for those working within medicine, a common pursuit for Zaddat. it is clearly marked with the standard cross and colors."
 			icon_state = "zaddat_healer"
 			item_state = "zaddat_healer"
@@ -146,7 +146,7 @@
 			icon_state = "zaddat_clockwork"
 			item_state = "zaddat_clockwork"
 			if(helmet)
-				helmet.name = "\improper clockword Shroud helmet"
+				helmet.name = "clockword Shroud helmet"
 				helmet.desc = "Plated in brass."
 				helmet.icon_state = "zaddat_clockwork"
 				helmet.item_state = "zaddat_clockwork"
