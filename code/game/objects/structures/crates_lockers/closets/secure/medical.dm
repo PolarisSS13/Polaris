@@ -116,7 +116,10 @@
 		/obj/item/weapon/extinguisher/mini,
 		/obj/item/weapon/storage/box/freezer,
 		/obj/item/clothing/accessory/storage/white_vest,
-		/obj/item/taperoll/medical)
+		/obj/item/taperoll/medical,
+		/obj/item/device/gps/medical,
+		/obj/item/device/geiger
+		)
 
 /obj/structure/closet/secure_closet/CMO
 	name = "chief medical officer's locker"
@@ -142,7 +145,8 @@
 		/obj/item/taperoll/medical,
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
-		/obj/item/clothing/shoes/white)
+		/obj/item/clothing/shoes/white,
+		/obj/item/device/gps/medical/cmo)
 
 /obj/structure/closet/secure_closet/CMO/Initialize()
 	if(prob(50))
