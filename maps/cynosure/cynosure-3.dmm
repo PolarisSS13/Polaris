@@ -782,6 +782,14 @@
 	pixel_x = 21
 	},
 /obj/effect/floor_decal/spline/plain,
+/obj/structure/window/reinforced{
+	dir = 8;
+	pixel_x = -6
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 7
+	},
 /turf/simulated/floor/tiled/old_tile/gray,
 /area/surface/station/park/skybridge)
 "ayR" = (
@@ -6464,10 +6472,6 @@
 /obj/structure/railing{
 	dir = 4
 	},
-/obj/structure/window/reinforced{
-	dir = 4
-	},
-/obj/structure/window/reinforced,
 /turf/simulated/open,
 /area/surface/station/park/skybridge)
 "erq" = (
@@ -8947,10 +8951,6 @@
 /obj/structure/railing{
 	dir = 8
 	},
-/obj/structure/window/reinforced{
-	dir = 8
-	},
-/obj/structure/window/reinforced,
 /turf/simulated/open,
 /area/surface/station/park/skybridge)
 "fXe" = (
@@ -11521,6 +11521,9 @@
 /obj/effect/floor_decal/steeldecal/steel_decals7{
 	dir = 9
 	},
+/obj/structure/window/reinforced{
+	dir = 8
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "huz" = (
@@ -12397,6 +12400,10 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 1
 	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "hYb" = (
@@ -12437,12 +12444,6 @@
 	dir = 1
 	},
 /obj/structure/railing{
-	dir = 4
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
 	dir = 4
 	},
 /turf/simulated/open,
@@ -12494,6 +12495,9 @@
 /obj/machinery/camera/network/second_floor{
 	c_tag = "Second Floor - Skybridge 1";
 	dir = 1
+	},
+/obj/structure/window/reinforced{
+	pixel_y = -6
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
@@ -14325,6 +14329,10 @@
 	},
 /obj/effect/floor_decal/corner/green/border{
 	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
@@ -16560,6 +16568,9 @@
 "kos" = (
 /obj/effect/floor_decal/borderfloor/corner,
 /obj/effect/floor_decal/corner/green/bordercorner,
+/obj/structure/window/reinforced{
+	pixel_y = -6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "kox" = (
@@ -16569,6 +16580,12 @@
 	},
 /obj/effect/floor_decal/spline/plain{
 	dir = 1
+	},
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 4;
+	pixel_x = 6;
+	pixel_y = 1
 	},
 /turf/simulated/floor/tiled/old_tile/gray,
 /area/surface/station/park/skybridge)
@@ -16585,6 +16602,10 @@
 	},
 /obj/effect/floor_decal/corner/green/border{
 	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
@@ -19226,6 +19247,9 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/green/border,
+/obj/structure/window/reinforced{
+	pixel_y = -6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "mwp" = (
@@ -23250,6 +23274,10 @@
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 4
 	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "pkV" = (
@@ -24679,6 +24707,9 @@
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 8
 	},
+/obj/structure/window/reinforced{
+	pixel_y = -6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "qcZ" = (
@@ -24984,6 +25015,9 @@
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
+/obj/structure/window/reinforced{
+	pixel_y = -6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "qrc" = (
@@ -25833,6 +25867,9 @@
 "qRF" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
+/obj/structure/window/reinforced{
+	pixel_y = -6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "qRK" = (
@@ -30715,6 +30752,10 @@
 /obj/effect/floor_decal/steeldecal/steel_decals7{
 	dir = 10
 	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	pixel_x = 6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "udx" = (
@@ -31132,9 +31173,6 @@
 /obj/structure/railing{
 	dir = 1
 	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
 /turf/simulated/open,
 /area/surface/station/park/skybridge)
 "usH" = (
@@ -31145,6 +31183,9 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
 /obj/machinery/light/spot,
+/obj/structure/window/reinforced{
+	pixel_y = -6
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "usO" = (
@@ -31203,9 +31244,6 @@
 /area/surface/station/engineering/locker_room)
 "uwi" = (
 /obj/structure/railing{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/yellow/bordercorner{
@@ -32264,12 +32302,6 @@
 	dir = 1
 	},
 /obj/structure/railing{
-	dir = 8
-	},
-/obj/structure/window/reinforced{
-	dir = 1
-	},
-/obj/structure/window/reinforced{
 	dir = 8
 	},
 /turf/simulated/open,
@@ -36187,7 +36219,6 @@
 /area/surface/station/engineering/hallway/sndaccess)
 "xzd" = (
 /obj/structure/railing,
-/obj/structure/window/reinforced,
 /turf/simulated/open,
 /area/surface/station/park/skybridge)
 "xzL" = (
@@ -36463,6 +36494,10 @@
 	},
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
@@ -37425,6 +37460,10 @@
 	},
 /obj/machinery/camera/network/second_floor{
 	c_tag = "Second Floor - Skybridge 2"
+	},
+/obj/structure/window/reinforced{
+	dir = 1;
+	pixel_y = 6
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
