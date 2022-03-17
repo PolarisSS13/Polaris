@@ -45,6 +45,7 @@
 		/obj/item/weapon/storage/box/mousetraps = 2,
 		/obj/item/clothing/under/rank/chef,
 		/obj/item/clothing/head/chefhat,
+		/obj/item/clothing/head/surgery/hairnet = 2,
 		/obj/item/weapon/storage/bag/food = 2)
 
 /*
