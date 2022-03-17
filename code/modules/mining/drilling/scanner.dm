@@ -47,7 +47,7 @@
 				if("diamond", "painite")	ore_type = "precious gems"
 				if("uranium")									ore_type = "nuclear fuel"
 				if("phoron", "osmium", "hydrogen")				ore_type = "exotic matter"
-				if("verdantium", "void opal")				ore_type = "anomalous matter"
+				if("verdantium", "magmellite")				ore_type = "anomalous matter"
 
 			if(ore_type) metals[ore_type] += T.resources[metal]
 
