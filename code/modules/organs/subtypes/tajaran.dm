@@ -12,4 +12,4 @@
 	icon_state = "tajaran_liver"
 
 /obj/item/organ/internal/stomach/tajaran
-	icon_state = "tajaran_liver"
+	icon_state = "tajaran_stomach"
