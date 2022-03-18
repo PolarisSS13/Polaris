@@ -2109,10 +2109,13 @@
 "bxR" = (
 /obj/structure/sign/directions/cargo{
 	dir = 8;
-	pixel_y = 6
+	pixel_y = -6
 	},
 /obj/structure/sign/directions/science{
 	dir = 8
+	},
+/obj/structure/sign/level/two{
+	pixel_y = 10
 	},
 /turf/simulated/wall,
 /area/surface/station/hallway/primary/secondfloor/east)
@@ -2993,6 +2996,10 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals7,
+/obj/structure/sign/level/two{
+	pixel_x = 32;
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
 "bXv" = (
@@ -5775,6 +5782,10 @@
 	dir = 1;
 	pixel_y = 30
 	},
+/obj/structure/sign/level/two{
+	pixel_x = -31;
+	pixel_y = 26
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/reactor)
 "dNq" = (
@@ -6316,6 +6327,10 @@
 /obj/structure/sign/directions/cargo{
 	dir = 8;
 	pixel_y = 32
+	},
+/obj/structure/sign/levels/security{
+	dir = 5;
+	pixel_y = 26
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
@@ -7393,14 +7408,14 @@
 /area/surface/station/hallway/secondary/secondfloor/weststairwell)
 "eUC" = (
 /obj/structure/sign/directions/engineering/engeqp{
-	dir = 8;
-	pixel_y = 6
-	},
-/obj/structure/sign/directions/engineering/reactor{
-	dir = 1
+	dir = 8
 	},
 /obj/structure/sign/directions/engineering/atmospherics{
 	pixel_y = -6
+	},
+/obj/structure/sign/levels/engineering/reactor{
+	dir = 5;
+	pixel_y = 6
 	},
 /turf/simulated/wall,
 /area/surface/station/engineering/hallway/snd)
@@ -8462,6 +8477,10 @@
 "fEP" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/hallway/secondary/secondfloor/weststairwell)
+"fFc" = (
+/obj/structure/sign/level/two,
+/turf/simulated/wall,
+/area/surface/station/maintenance/cargo)
 "fFn" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -9447,6 +9466,9 @@
 /obj/item/device/radio/intercom/department/security{
 	dir = 8;
 	pixel_x = 21
+	},
+/obj/structure/sign/level/two/large{
+	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/primary/secondfloor/east)
@@ -11524,6 +11546,10 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/structure/sign/level/two{
+	dir = 8;
+	pixel_x = 50
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
 "huz" = (
@@ -11692,6 +11718,9 @@
 /obj/machinery/light_switch{
 	pixel_x = 12;
 	pixel_y = 24
+	},
+/obj/structure/sign/level/two{
+	pixel_x = -32
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/security/snd)
@@ -12237,6 +12266,7 @@
 /obj/item/weapon/stool/padded{
 	dir = 8
 	},
+/obj/structure/sign/levels/evac,
 /turf/simulated/floor/tiled,
 /area/surface/station/holodeck_control)
 "hUe" = (
@@ -13033,25 +13063,30 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/obj/structure/sign/directions/medical/cloning{
-	dir = 1;
-	pixel_x = 32;
-	pixel_y = 26
-	},
-/obj/structure/sign/directions/medical/surgery{
-	dir = 1;
-	pixel_x = 32;
-	pixel_y = 32
-	},
-/obj/structure/sign/directions/medical/morgue{
-	dir = 1;
-	pixel_x = 32;
-	pixel_y = 38
-	},
 /obj/structure/sign/directions/stairs_down{
 	dir = 1;
 	pixel_x = 32;
 	pixel_y = 20
+	},
+/obj/structure/sign/levels/medical/morgue{
+	dir = 9;
+	pixel_x = 32;
+	pixel_y = 26
+	},
+/obj/structure/sign/levels/medical/surgery{
+	dir = 5;
+	pixel_x = 32;
+	pixel_y = 32
+	},
+/obj/structure/sign/levels/medical/cloning{
+	dir = 5;
+	pixel_x = 32;
+	pixel_y = 44
+	},
+/obj/structure/sign/levels/medical/chemlab{
+	dir = 5;
+	pixel_x = 32;
+	pixel_y = 38
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/medical/hallway/snd)
@@ -14232,6 +14267,10 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/structure/sign/level/two/large{
+	pixel_x = 32;
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/holodeck_control)
 "iVV" = (
@@ -14752,16 +14791,16 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/secondfloor/east)
 "jmb" = (
-/obj/structure/sign/directions/evac{
-	dir = 4;
-	pixel_y = 6
-	},
-/obj/structure/sign/directions/cryo{
-	dir = 4
-	},
 /obj/structure/sign/directions/stairs_down{
 	dir = 4;
 	pixel_y = -6
+	},
+/obj/structure/sign/levels/evac{
+	dir = 5;
+	pixel_y = 6
+	},
+/obj/structure/sign/levels/cryo{
+	dir = 5
 	},
 /turf/simulated/wall,
 /area/surface/station/hallway/primary/secondfloor/east)
@@ -18884,6 +18923,9 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
+/obj/structure/sign/level/two{
+	pixel_x = 32
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/research/snd)
 "mkS" = (
@@ -19031,7 +19073,7 @@
 /turf/simulated/wall/r_wall,
 /area/surface/station/engineering/foyer/secondfloor)
 "mrb" = (
-/obj/structure/closet/emcloset,
+/obj/random/vendorfood,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/hallway/secondary/secondfloor/command)
 "mrz" = (
@@ -19891,6 +19933,12 @@
 	},
 /turf/simulated/floor/carpet/sblucarpet,
 /area/surface/station/medical/psych)
+"mPU" = (
+/obj/random/vendorfood{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/dark,
+/area/surface/station/hallway/primary/secondfloor/east)
 "mPV" = (
 /obj/machinery/light{
 	dir = 4
@@ -23708,6 +23756,9 @@
 "pBM" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/sign/level/two{
+	pixel_y = 32
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/weststairwell/snd)
 "pBN" = (
@@ -24064,24 +24115,24 @@
 	},
 /obj/effect/catwalk_plated,
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/structure/sign/directions/security{
-	dir = 4;
-	pixel_x = -32;
-	pixel_y = 6
-	},
-/obj/structure/sign/directions/engineering{
-	dir = 4;
-	pixel_x = -32
-	},
-/obj/structure/sign/directions/medical{
-	dir = 4;
-	pixel_x = -32;
-	pixel_y = -6
-	},
 /obj/structure/sign/directions/stairs_down{
 	dir = 4;
 	pixel_x = -32;
 	pixel_y = -12
+	},
+/obj/structure/sign/levels/security{
+	dir = 5;
+	pixel_x = -32;
+	pixel_y = 6
+	},
+/obj/structure/sign/levels/engineering{
+	dir = 5;
+	pixel_x = -32
+	},
+/obj/structure/sign/levels/medical{
+	dir = 5;
+	pixel_x = -32;
+	pixel_y = -6
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/secondfloor/east)
@@ -24100,6 +24151,10 @@
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
+	},
+/obj/structure/sign/level/two{
+	dir = 8;
+	pixel_x = 48
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/eva)
@@ -24129,6 +24184,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals5{
 	dir = 8
 	},
+/obj/structure/sign/level/two,
 /turf/simulated/floor/tiled,
 /area/surface/station/quartermaster/office)
 "pNl" = (
@@ -24615,6 +24671,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
+"qbs" = (
+/obj/structure/closet/emcloset,
+/turf/simulated/floor/tiled/techmaint,
+/area/surface/station/hallway/secondary/secondfloor/command)
 "qbt" = (
 /obj/structure/cable/green{
 	d2 = 8;
@@ -27068,6 +27128,10 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/structure/sign/level/two{
+	pixel_x = 32;
+	pixel_y = 8
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/engineering/snd)
 "rPw" = (
@@ -27789,6 +27853,9 @@
 "spA" = (
 /obj/structure/ladder,
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/sign/level/two{
+	pixel_x = 32
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/medbay/snd)
 "srf" = (
@@ -27803,6 +27870,10 @@
 	dir = 4
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/structure/sign/level/two{
+	dir = 8;
+	pixel_x = 37
+	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/patient_wing)
 "srn" = (
@@ -28890,6 +28961,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/crew_quarters/heads/cmo)
+"sVu" = (
+/obj/random/vendordrink,
+/turf/simulated/floor/tiled/techmaint,
+/area/surface/station/hallway/secondary/secondfloor/command)
 "sVx" = (
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -29011,6 +29086,9 @@
 	},
 /obj/structure/flora/pottedplant/smallcactus{
 	pixel_y = 10
+	},
+/obj/structure/sign/level/two{
+	pixel_x = 64
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/medical/hallway/snd)
@@ -29545,6 +29623,10 @@
 /obj/structure/extinguisher_cabinet{
 	pixel_y = -30
 	},
+/obj/structure/sign/level/two/large{
+	pixel_x = 32;
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/weststairwell)
 "tsl" = (
@@ -29668,6 +29750,20 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals3{
 	dir = 9
+	},
+/obj/structure/sign/levels/security/seceqp{
+	dir = 5;
+	pixel_x = 64
+	},
+/obj/structure/sign/levels/security/interrogation{
+	dir = 5;
+	pixel_x = 64;
+	pixel_y = 6
+	},
+/obj/structure/sign/levels/security/forensics{
+	dir = 5;
+	pixel_x = 64;
+	pixel_y = -6
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/security/hallway/stairwell)
@@ -29838,14 +29934,20 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/structure/sign/directions/evac{
-	pixel_y = -26
-	},
 /obj/structure/sign/directions/stairs_down{
 	pixel_y = -38
 	},
-/obj/structure/sign/directions/cryo{
+/obj/structure/sign/levels/cryo{
+	dir = 5;
 	pixel_y = -32
+	},
+/obj/structure/sign/levels/evac{
+	dir = 5;
+	pixel_y = -26
+	},
+/obj/structure/sign/levels/recreation{
+	dir = 5;
+	pixel_y = -20
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
@@ -30755,6 +30857,10 @@
 /obj/structure/window/reinforced{
 	dir = 4;
 	pixel_x = 6
+	},
+/obj/structure/sign/level/two{
+	dir = 4;
+	pixel_x = -48
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/park/skybridge)
@@ -31867,6 +31973,10 @@
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
+	},
+/obj/structure/sign/level/two{
+	pixel_x = 32;
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/hallway/stairwell)
@@ -33035,6 +33145,9 @@
 	},
 /obj/effect/floor_decal/borderfloor/corner,
 /obj/effect/floor_decal/corner/brown/bordercorner,
+/obj/structure/extinguisher_cabinet{
+	pixel_y = -30
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/secondfloor/west)
 "vHm" = (
@@ -33086,6 +33199,10 @@
 /obj/structure/sign/directions/command{
 	dir = 4;
 	pixel_y = 38
+	},
+/obj/structure/sign/levels/medical{
+	dir = 5;
+	pixel_y = 26
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
@@ -34583,6 +34700,9 @@
 /obj/effect/floor_decal/steeldecal/steel_decals7{
 	dir = 6
 	},
+/obj/structure/sign/level/two{
+	pixel_y = 32
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/sndaccess)
 "wGL" = (
@@ -35294,6 +35414,11 @@
 	},
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 4
+	},
+/obj/structure/sign/level/two{
+	dir = 8;
+	pixel_x = 35;
+	pixel_y = -11
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/quartermaster/office)
@@ -64708,7 +64833,7 @@ cqr
 hgN
 hgN
 vjy
-iyT
+fFc
 sfy
 ozu
 iyT
@@ -65483,7 +65608,7 @@ nWW
 nWW
 nWW
 nWW
-lMj
+sVu
 gdk
 imJ
 fAL
@@ -67282,7 +67407,7 @@ kzF
 fnp
 wym
 nWW
-lMj
+qbs
 dLh
 uiT
 tsE
@@ -73694,7 +73819,7 @@ wIt
 nUP
 nUP
 fAz
-ggd
+mPU
 hWE
 jRF
 rcC
