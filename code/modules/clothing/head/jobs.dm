@@ -11,7 +11,7 @@
 	icon_state = "hairnet"
 	item_state = "hairnet"
 	sprite_sheets = list(
-		SPECIES_TAJARAN = 'icons/mob/species/tajaran/head.dmi'
+		SPECIES_TAJARAN = 'icons/mob/species/tajaran/helmet.dmi'
 		)
 
 //Captain
