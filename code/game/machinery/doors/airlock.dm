@@ -737,7 +737,7 @@ About the new airlock wires panel:
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 // The preceding comment was borrowed from the grille's shock script
-/obj/machinery/door/airlock/shock(mob/user, prb)
+/obj/machinery/door/airlock/shock(mob/living/user, prb)
 	if(!arePowerSystemsOn())
 		return 0
 	if(hasShocked)
