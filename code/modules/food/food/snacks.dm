@@ -3580,7 +3580,7 @@
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=12)
 	nutriment_amt = 4
-	nutriment_desc = "bun"
+	nutriment_desc = list("bun" = 4)
 
 /obj/item/weapon/reagent_containers/food/snacks/bun/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	// Bun + meatball = burger
