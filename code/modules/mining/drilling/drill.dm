@@ -51,7 +51,7 @@
 
 	// Found with an ultra laser. exotic_drilling >= 2
 	var/list/ore_types_rare = list(
-		"void opal" = /obj/item/weapon/ore/void_opal,
+		"magmellite" = /obj/item/weapon/ore/magmellite,
 		MAT_VERDANTIUM = /obj/item/weapon/ore/verdantium
 		)
 
