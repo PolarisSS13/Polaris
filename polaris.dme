@@ -2667,6 +2667,7 @@
 #include "code\modules\organs\subtypes\indestructible.dm"
 #include "code\modules\organs\subtypes\machine.dm"
 #include "code\modules\organs\subtypes\replicant.dm"
+#include "code\modules\organs\subtypes\skrell.dm"
 #include "code\modules\organs\subtypes\slime.dm"
 #include "code\modules\organs\subtypes\standard.dm"
 #include "code\modules\organs\subtypes\tajaran.dm"
