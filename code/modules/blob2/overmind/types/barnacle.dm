@@ -19,7 +19,7 @@
 
 	to_chat(user, "<span class='alien'>\The [B] produces a cauterizing ooze!</span>")
 
-	T.visible_message("<span class='alium'>\The [B] shudders at \the [user]'s touch, before disgorging a disgusting ooze.</span>")
+	T.visible_message("<span class='alium'>\The [B] shudders at \the [user]'s touch, before disgorging a disgusting ooze.</span>", "<span class='notice'>A fleshy slop hits the ground.</span>", list(user))
 
 	for(var/turf/simulated/floor/F in view(2, T))
 		spawn()

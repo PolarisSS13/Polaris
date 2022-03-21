@@ -751,7 +751,7 @@ var/list/mining_overlay_cache = list()
 		if(isnull(T.geologic_data))
 			T.geologic_data = new /datum/geosample(T)
 		
-		if(isnull(T.finds))
+		if(isnull(T.finds) || isemptylist(T.finds))
 			T.finds = list()
 			if(prob(50))
 				T.finds.Add(new /datum/find(digsite, rand(10, 190)))

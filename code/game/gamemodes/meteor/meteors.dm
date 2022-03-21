@@ -423,7 +423,7 @@
 		var/dest_y = y - 2
 		var/dest_z = z
 		spawn(0)	// Needs to be asynchronous due to how spawning the maps functions.
-			var/datum/random_map/meteor/M = new(null, dest_x, dest_y, dest_z)
+			new /datum/random_map/meteor(null, dest_x, dest_y, dest_z)
 
 // 'Flaming' meteors do less overall damage but are spread out more due to a larger but weaker explosion at the end.
 /obj/effect/meteor/flaming
