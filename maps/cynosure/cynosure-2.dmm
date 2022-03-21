@@ -5534,12 +5534,12 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/workshop)
 "cJc" = (
-/obj/structure/closet,
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = -24
 	},
+/obj/structure/filingcabinet,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/security/evidence_storage)
 "cJk" = (
@@ -26122,7 +26122,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/security/range)
 "maD" = (
-/obj/structure/closet,
+/obj/structure/closet{
+	name = "evidence locker"
+	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/light/small{
 	dir = 1
@@ -32652,7 +32654,9 @@
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/reactor_room)
 "oRs" = (
-/obj/structure/closet,
+/obj/structure/closet{
+	name = "contraband locker"
+	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
@@ -52179,7 +52183,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/security/lobby)
 "xKl" = (
-/obj/structure/closet,
+/obj/structure/closet{
+	name = "evidence locker"
+	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
 /obj/item/device/radio/intercom{
@@ -52928,7 +52934,9 @@
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/station)
 "xXF" = (
-/obj/structure/closet,
+/obj/structure/closet{
+	name = "evidence locker"
+	},
 /obj/effect/floor_decal/industrial/outline/grey,
 /obj/machinery/alarm{
 	pixel_y = 22
