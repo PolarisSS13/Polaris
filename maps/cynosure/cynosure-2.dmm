@@ -4593,7 +4593,7 @@
 /area/surface/station/medical/ward)
 "cgM" = (
 /obj/structure/table/glass,
-/obj/item/weapon/reagent_containers/food/drinks/britcup,
+/obj/random/mug,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/medical/hallway/gnd)
 "cgV" = (
@@ -18872,6 +18872,9 @@
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 4
 	},
+/obj/structure/sign/level/ground{
+	pixel_y = -32
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/quartermaster/storage)
 "iPF" = (
@@ -29015,6 +29018,7 @@
 /obj/structure/table/marble,
 /obj/item/weapon/material/knife/butch,
 /obj/item/weapon/material/kitchen/rollingpin,
+/obj/random/mug,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/surface/station/crew_quarters/kitchen)
 "nnd" = (
@@ -30007,6 +30011,7 @@
 	dir = 8
 	},
 /obj/structure/table/woodentable,
+/obj/random/mug,
 /turf/simulated/floor/tiled/hydro,
 /area/surface/station/park)
 "nLW" = (
@@ -31043,6 +31048,9 @@
 	pixel_y = 22
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/sign/level/ground{
+	pixel_x = -32
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/civilian)
 "oiZ" = (
@@ -34509,7 +34517,7 @@
 	name = "Medical Reception";
 	req_access = list(5)
 	},
-/obj/item/weapon/reagent_containers/food/drinks/britcup,
+/obj/random/mug,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/medical/reception)
 "pzA" = (
