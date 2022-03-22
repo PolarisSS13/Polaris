@@ -15,6 +15,16 @@
 
 	lobby_screens = list('icons/default_lobby.png', 'icons/lobby_old.gif') // New lobby screen if possible.
 
+	lobby_tracks = list(
+		/decl/music_track/chasing_time,
+		/decl/music_track/epicintro2015,
+		/decl/music_track/human,
+		/decl/music_track/marhaba,
+		/decl/music_track/treacherous_voyage,
+		/decl/music_track/asfarasitgets,
+		/decl/music_track/space_oddity,
+		/decl/music_track/martiancowboy)
+
 	holomap_smoosh = list(list(
 		Z_LEVEL_STATION_ONE,
 		Z_LEVEL_STATION_TWO,
@@ -102,6 +112,25 @@
 			Z_LEVEL_STATION_THREE,
 			Z_LEVEL_SURFACE_WILD
 		)
+
+	the_station_areas = list(
+	/area/surface/station,
+	/area/shuttle/arrival,
+	/area/shuttle/escape/station,
+	/area/shuttle/escape_pod1/station,
+	/area/shuttle/escape_pod2/station,
+	/area/shuttle/escape_pod3/station,
+	/area/shuttle/escape_pod5/station,
+	/area/shuttle/large_escape_pod1/station,
+	/area/shuttle/large_escape_pod2/station,
+	/area/shuttle/mining/station,
+	/area/shuttle/transport1/station,
+	/area/shuttle/prison/station,
+	/area/shuttle/administration/station,
+	/area/shuttle/specops/station
+	)
+
+	hallway_areas = /area/surface/station/hallway
 
 /datum/map/cynosure/perform_map_generation()
 	// First, place a bunch of submaps. This comes before tunnel/forest generation as to not interfere with the submap.

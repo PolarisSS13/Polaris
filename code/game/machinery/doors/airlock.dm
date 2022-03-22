@@ -737,7 +737,7 @@ About the new airlock wires panel:
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 // The preceding comment was borrowed from the grille's shock script
-/obj/machinery/door/airlock/shock(mob/user, prb)
+/obj/machinery/door/airlock/shock(mob/living/user, prb)
 	if(!arePowerSystemsOn())
 		return 0
 	if(hasShocked)
@@ -1159,7 +1159,7 @@ About the new airlock wires panel:
 	for (var/mob/O in viewers(src, null))
 		if ((O.client && !( O.blinded )))
 			O.show_message("[src.name]'s control panel bursts open, sparks spewing out!")
-
+	playsound(src.loc, 'sound/machines/airlock_break.ogg', 100, 1)
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
@@ -1383,7 +1383,7 @@ About the new airlock wires panel:
 				src.closeOther = A
 				break
 	name = "\improper [name]"
-	
+
 	. = ..()
 
 	//if assembly is given, create the new door from the assembly

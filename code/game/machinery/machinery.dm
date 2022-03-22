@@ -271,11 +271,13 @@ Class Procs:
 	state(text, "blue")
 	playsound(src, 'sound/machines/ping.ogg', 50, 0)
 
-/obj/machinery/proc/shock(mob/user, prb)
+/obj/machinery/proc/shock(mob/living/user, prb)
 	if(inoperable())
 		return FALSE
 	if(!prob(prb))
 		return FALSE
+	if (!istype(user))
+		return
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()

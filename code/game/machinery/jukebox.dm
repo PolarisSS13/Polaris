@@ -1,11 +1,3 @@
-/datum/track
-	var/title
-	var/sound
-
-/datum/track/New(var/title_name, var/audio)
-	title = title_name
-	sound = audio
-
 /obj/machinery/media/jukebox/
 	name = "space jukebox"
 	desc = "Filled with songs both past and present!"
@@ -29,36 +21,24 @@
 	var/freq = 0
 
 	var/datum/track/current_track
-	var/list/datum/track/tracks = list(
-		new/datum/track("Beyond", 'sound/ambience/ambispace.ogg'),
-		new/datum/track("Clouds of Fire", 'sound/music/clouds.s3m'),
-		new/datum/track("D`Bert", 'sound/music/title2.ogg'),
-		new/datum/track("D`Fort", 'sound/ambience/song_game.ogg'),
-		new/datum/track("Floating", 'sound/music/main.ogg'),
-		new/datum/track("Endless Space", 'sound/music/space.ogg'),
-		new/datum/track("Part A", 'sound/misc/TestLoop1.ogg'),
-		new/datum/track("Scratch", 'sound/music/title1.ogg'),
-		new/datum/track("Trai`Tor", 'sound/music/traitor.ogg'),
-		new/datum/track("Stellar Transit", 'sound/ambience/space/space_serithi.ogg'),
-	)
+	var/list/datum/track/tracks
 
 	// Only visible if hacked
-	var/list/datum/track/secret_tracks = list(
-		new/datum/track("Clown", 'sound/music/clown.ogg'),
-		new/datum/track("Space Asshole", 'sound/music/space_asshole.ogg'),
-		new/datum/track("Thunderdome", 'sound/music/THUNDERDOME.ogg'),
-		new/datum/track("Russkiy rep Diskoteka", 'sound/music/russianrapdisco.ogg')
-	)
+	var/list/datum/track/secret_tracks
 
 /obj/machinery/media/jukebox/Initialize()
 	. = ..()
 	default_apply_parts()
 	wires = new/datum/wires/jukebox(src)
+	tracks = setup_music_tracks(tracks)
+	secret_tracks = setup_secret_music_tracks(secret_tracks)
 	update_icon()
 
 /obj/machinery/media/jukebox/Destroy()
 	StopPlaying()
 	qdel(wires)
+	QDEL_NULL_LIST(tracks)
+	current_track = null
 	wires = null
 	return ..()
 
@@ -144,7 +124,7 @@
 		if(emagged)
 			playsound(src, 'sound/items/AirHorn.ogg', 100, 1)
 			for(var/mob/living/carbon/M in ohearers(6, src))
-				if(M.get_ear_protection() >= 2)
+				if(M.get_sound_volume_multiplier() < 0.2)
 					continue
 				M.SetSleeping(0)
 				M.stuttering += 20
@@ -260,11 +240,11 @@
 
 	var/area/main_area = get_area(src)
 	if(freq)
-		var/sound/new_song = sound(current_track.sound, channel = 1, repeat = 1, volume = 25)
+		var/sound/new_song = sound(current_track.GetTrack(), channel = 1, repeat = 1, volume = 25)
 		new_song.frequency = freq
 		main_area.forced_ambience = list(new_song)
 	else
-		main_area.forced_ambience = list(current_track.sound)
+		main_area.forced_ambience = list(current_track.GetTrack())
 
 	for(var/mob/living/M in mobs_in_area(main_area))
 		if(M.mind)

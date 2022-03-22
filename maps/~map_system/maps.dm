@@ -103,6 +103,9 @@ var/list/all_maps = list()
 	var/list/lobby_screens = list('icons/default_lobby.png')                 // The list of lobby screen to pick() from.
 	var/current_lobby_screen
 
+	var/decl/music_track/lobby_track                     // The track that will play in the lobby screen.
+	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
+
 	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
 	var/id_hud_icons = 'icons/mob/hud.dmi' // Used by the ID HUD (primarily sechud) overlay.
@@ -114,6 +117,65 @@ var/list/all_maps = list()
 	var/list/unit_test_z_levels //To test more than Z1, set your z-levels to test here.
 
 	var/list/planet_datums_to_make = list() // Types of `/datum/planet`s that will be instantiated by SSPlanets.
+
+	// CENTCOM Areas
+	var/list/centcom_areas = list (
+	/area/centcom,
+	/area/shuttle/escape/centcom,
+	/area/shuttle/escape_pod1/centcom,
+	/area/shuttle/escape_pod2/centcom,
+	/area/shuttle/escape_pod3/centcom,
+	/area/shuttle/escape_pod5/centcom,
+	/area/shuttle/transport1/centcom,
+	/area/shuttle/administration/centcom,
+	/area/shuttle/specops/centcom,
+	)
+
+	//Station Areas
+	var/list/the_station_areas = list (
+	/area/shuttle/arrival,
+	/area/shuttle/escape/station,
+	/area/shuttle/escape_pod1/station,
+	/area/shuttle/escape_pod2/station,
+	/area/shuttle/escape_pod3/station,
+	/area/shuttle/escape_pod5/station,
+	/area/shuttle/mining/station,
+	/area/shuttle/transport1/station,
+	/area/shuttle/prison/station,
+	/area/shuttle/administration/station,
+	/area/shuttle/specops/station,
+	/area/maintenance,
+	/area/hallway,
+	/area/bridge,
+	/area/crew_quarters,
+	/area/holodeck,
+	/area/mint,
+	/area/library,
+	/area/chapel,
+	/area/lawoffice,
+	/area/engineering,
+	/area/solar,
+	/area/assembly,
+	/area/teleporter,
+	/area/medical,
+	/area/security,
+	/area/quartermaster,
+	/area/janitor,
+	/area/hydroponics,
+	/area/rnd,
+	/area/storage,
+	/area/construction,
+	/area/ai_monitored/storage/eva,
+	/area/ai_monitored/storage/secure,
+	/area/ai_monitored/storage/emergency,
+	/area/ai_upload,
+	/area/ai_upload_foyer,
+	/area/ai
+	)
+
+	//Hallway Areas
+	var/hallway_areas = /area/hallway
+
 
 /datum/map/New()
 	..()
@@ -344,3 +406,13 @@ var/list/all_maps = list()
 	if(C.mob) // Check if the client is still connected to something
 		// Hide title screen, allowing player to see the map
 		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+
+/datum/map/proc/get_lobby_track(var/exclude)
+	var/lobby_track_type
+	if(LAZYLEN(lobby_tracks) == 1)
+		lobby_track_type = lobby_tracks[1]
+	else if(LAZYLEN(lobby_tracks))
+		lobby_track_type = pickweight(lobby_tracks - exclude)
+	else
+		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
+	return GET_DECL(lobby_track_type)
