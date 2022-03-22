@@ -646,8 +646,8 @@
 				/obj/item/weapon/ore/verdantium
 			),
 			prob(2);list(
-				/obj/item/weapon/ore/void_opal,
-				/obj/item/weapon/ore/void_opal
+				/obj/item/weapon/ore/magmellite,
+				/obj/item/weapon/ore/magmellite
 			),
 		)
 

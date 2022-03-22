@@ -45,7 +45,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	female_cough_sounds = list('sound/effects/slime_squish.ogg')
 
 	min_age =		1
-	max_age =		16
+	max_age =		24
 
 	economic_modifier = 3
 
@@ -201,12 +201,13 @@ var/datum/species/shapeshifter/promethean/prometheans
 					H.adjust_nutrition(rand(10, 20))
 		if(H.clean_blood(1))
 			H.adjust_nutrition(rand(5, 15))
-		if(H.r_hand)
-			if(H.r_hand.clean_blood())
-				H.adjust_nutrition(rand(5, 15))
-		if(H.l_hand)
-			if(H.l_hand.clean_blood())
-				H.adjust_nutrition(rand(5, 15))
+		if(!(H.gloves || (H.wear_suit && (H.wear_suit.body_parts_covered & HANDS))))
+			if(H.r_hand)
+				if(H.r_hand.clean_blood())
+					H.adjust_nutrition(rand(5, 15))
+			if(H.l_hand)
+				if(H.l_hand.clean_blood())
+					H.adjust_nutrition(rand(5, 15))
 		if(H.head)
 			if(H.head.clean_blood())
 				H.update_inv_head(0)

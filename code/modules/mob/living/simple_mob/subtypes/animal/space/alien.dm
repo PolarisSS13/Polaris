@@ -9,33 +9,41 @@
 	icon_dead = "alien_dead"
 	icon_gib = "syndicate_gib"
 	icon_rest = "alienh_sleep"
-
 	faction = "xeno"
-
 	mob_class = MOB_CLASS_ABERRATION
-
 	response_help = "pokes"
 	response_disarm = "shoves"
 	response_harm = "hits"
 	organ_names = /decl/mob_organ_names/skathari
-
 	maxHealth = 120
 	health = 120
 	see_in_dark = 7
-
 	turn_sound = "skathari_chitter"
-
 	harm_intent_damage = 5
 	melee_damage_lower = 25
 	melee_damage_upper = 25
 	attack_armor_pen = 15
 	attack_sharp = TRUE
 	attack_edge = TRUE
-
 	attacktext = list("slashed")
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 
-	// meat_type = /obj/item/weapon/reagent_containers/food/snacks/xenomeat //Make this something special in full implementation
+
+/mob/living/simple_mob/animal/space/alien/death()
+	var/turf/center = get_turf(src)
+	if (isturf(center))
+		playsound(center, 'sound/effects/mob_effects/skathari_teleport.ogg', 75, TRUE)
+		for (var/mob/living/carbon/victim in oviewers(5, center))
+			victim.flash_eyes(3)
+		visible_message(
+			SPAN_WARNING("\The [src] disappears with a screech and a flash of light!"),
+			SPAN_WARNING("You hear a thin, high screech, ended by a sudden echoing snap!")
+		)
+		new /obj/effect/decal/cleanable/blood/skathari (center)
+		new /obj/effect/temp_visual/bluespace_tear (center)
+	qdel(src)
+	..()
+
 
 /mob/living/simple_mob/animal/space/alien/drone
 	name = "skathari worker"
@@ -48,68 +56,6 @@
 	melee_damage_upper = 15
 	projectiletype = /obj/item/projectile/energy/skathari
 
-/*
-To be replaced with equivalents later
-/mob/living/simple_mob/animal/space/alien/sentinel
-	name = "alien sentinel"
-	icon_state = "aliens_running"
-	icon_living = "aliens_running"
-	icon_dead = "aliens_l"
-	icon_rest = "aliens_sleep"
-	health = 120
-	melee_damage_lower = 15
-	melee_damage_upper = 15
-
-
-/mob/living/simple_mob/animal/space/alien/sentinel/praetorian
-	name = "alien praetorian"
-	icon = 'icons/mob/64x64.dmi'
-	icon_state = "prat_s"
-	icon_living = "prat_s"
-	icon_dead = "prat_dead"
-	icon_rest = "prat_sleep"
-	maxHealth = 200
-	health = 200
-
-	pixel_x = -16
-	old_x = -16
-	icon_expected_width = 64
-	icon_expected_height = 64
-	meat_amount = 5
-
-/mob/living/simple_mob/animal/space/alien/queen
-	name = "alien queen"
-	icon_state = "alienq_running"
-	icon_living = "alienq_running"
-	icon_dead = "alienq_l"
-	icon_rest = "alienq_sleep"
-	health = 250
-	maxHealth = 250
-	melee_damage_lower = 15
-	melee_damage_upper = 15
-	projectiletype = /obj/item/projectile/energy/neurotoxin/toxic
-	projectilesound = 'sound/weapons/pierce.ogg'
-
-
-	movement_cooldown = 8
-
-/mob/living/simple_mob/animal/space/alien/queen/empress
-	name = "alien empress"
-	icon = 'icons/mob/64x64.dmi'
-	icon_state = "queen_s"
-	icon_living = "queen_s"
-	icon_dead = "queen_dead"
-	icon_rest = "queen_sleep"
-	maxHealth = 400
-	health = 400
-	meat_amount = 5
-
-	pixel_x = -16
-	old_x = -16
-	icon_expected_width = 64
-	icon_expected_height = 64
-
-*/
 
 /mob/living/simple_mob/animal/space/alien/queen/empress/mother
 	name = "skathari tyrant"
@@ -125,20 +71,11 @@ To be replaced with equivalents later
 	melee_damage_lower = 15
 	melee_damage_upper = 25
 	movement_cooldown = 8
-
 	projectiletype = /obj/item/projectile/energy/skathari
-
 	pixel_x = -32
 	old_x = -32
 	icon_expected_width = 96
 	icon_expected_height = 96
-
-/mob/living/simple_mob/animal/space/alien/death()
-	..()
-	visible_message("[src] lets out a waning guttural screech, green ichor bubbling from its maw...")
-	playsound(src, 'sound/voice/hiss6.ogg', 100, 1)
-	new /obj/effect/decal/cleanable/blood/skathari(src.loc)
-	new /obj/effect/temp_visual/bluespace_tear(src.loc)
 
 
 /decl/mob_organ_names/skathari

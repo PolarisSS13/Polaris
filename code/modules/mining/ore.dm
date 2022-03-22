@@ -127,10 +127,10 @@
 	icon_state = "ore_rutile"
 	material = "rutile"
 
-/obj/item/weapon/ore/void_opal
-	name = "raw void opal"
+/obj/item/weapon/ore/magmellite
+	name = "impure magmellite"
 	icon_state = "ore_void_opal"
-	material = "void opal"
+	material = "magmellite"
 
 /obj/item/weapon/ore/painite
 	name = "raw painite"
