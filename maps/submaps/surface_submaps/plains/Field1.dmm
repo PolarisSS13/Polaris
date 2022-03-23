@@ -7,6 +7,7 @@
 "g" = (/obj/vehicle/train/trolley,/turf/simulated/floor/outdoors/dirt,/area/submap/Field1)
 "h" = (/obj/vehicle/train/engine,/turf/simulated/floor/outdoors/dirt,/area/submap/Field1)
 "i" = (/obj/item/device/flashlight,/turf/simulated/floor/outdoors/dirt,/area/submap/Field1)
+"B" = (/obj/random/tech_supply/anom,/turf/simulated/floor/outdoors/dirt,/area/submap/Field1)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -26,7 +27,7 @@ aaaabbbbbbbddddddddddddbbbbbba
 aaaabbbbbbbddddddddddddbbbbcba
 aaaabbbbbbbdddedfddddbbbbbbbba
 aaabbbbbbbbbdegghdddbbbbbbbbba
-aaabbbbbbbbbbbdibdbbbbbbbbbbba
+aaabbbbbbbbbbbBibdbbbbbbbbbbba
 aabbbbbbbbbbbbbbbbbbbbbbbcbbba
 abbbcbbbbbbbbbbbbbbbbbbbbbbbba
 abbbbbbbbbbbbbbbbbbbbbbbbbbbba

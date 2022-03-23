@@ -113,7 +113,7 @@
 "SZ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "TU" = (/turf/simulated/floor/wood/broken,/area/submap/oldhotel)
 "Ut" = (/obj/structure/kitchenspike,/turf/simulated/floor/outdoors/dirt,/area/submap/oldhotel)
-"Uw" = (/obj/structure/table/wooden_reinforced,/obj/item/weapon/book/manual/chef_recipes,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
+"Uw" = (/obj/structure/table/wooden_reinforced,/obj/item/weapon/book/manual/chef_recipes{start_anomalous = 1},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
 "UU" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/lighter/zippo/royal,/obj/item/weapon/lipstick/random,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "Vf" = (/obj/structure/window/reinforced/tinted{dir = 4},/obj/machinery/shower{dir = 1},/obj/structure/curtain/open/shower/medical,/obj/random/soap,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
 "Vj" = (/turf/simulated/floor/carpet/oracarpet,/area/submap/oldhotel)
@@ -122,6 +122,7 @@
 "WH" = (/obj/item/device/flashlight{pixel_x = 2; pixel_y = 2},/turf/simulated/floor/wood,/area/submap/oldhotel)
 "YI" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "YQ" = (/obj/item/weapon/material/shard,/obj/structure/grille/broken/rustic,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
+"Zz" = (/obj/structure/bed/chair/wood{dir = 1},/obj/random/maintenance/anom,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "ZG" = (/obj/structure/girder,/turf/simulated/floor,/area/submap/oldhotel)
 
 (1,1,1) = {"
@@ -145,7 +146,7 @@ gAMUMUnDZGOQqgWySZtnRQbbhQWDSywmCxeKCxCxMUCxMUMUgA
 gAMUMUhQZGhQhQZGhQhQSZDNhQwVJqCxCxJVMUMUMUMUMUMUgA
 gAMUMUhQhQMkPOvNJTtnSZkWhQDxmRmREsMUMUMUMUMUMUMUgA
 gAMUMUCxdLDNPdkIjehQSZdnhQDiSyzsCxCxMUMUMUMUMUMUgA
-gAMUMUCxdLvAhpPdlynDCSGkhQgMCxGCyjMUMUMUMUMUMUMUgA
+gAMUMUCxdLvAhpPdlynDCSZzhQgMCxGCyjMUMUMUMUMUMUMUgA
 gAMUMUhQhQGkqgqgAZhQdLdLZGIlJqCxCxMUMUMUMUMUMUMUgA
 gAMUMUhQhQhQZGhQhQhQMUMUnDIQCxAOAOMUMoMUGNMUMUMUgA
 gAMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUMUgA

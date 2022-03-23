@@ -2,12 +2,12 @@
 "b" = (/turf/simulated/mineral/floor,/area/submap/AbandonedTemple)
 "c" = (/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "d" = (/turf/simulated/wall/sandstone,/area/submap/AbandonedTemple)
-"e" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
+"e" = (/obj/effect/decal/cleanable/cobweb,/obj/random/maintenance/anom,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
 "f" = (/obj/effect/decal/remains/mummy1,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
 "g" = (/turf/simulated/wall/sandstonediamond,/area/submap/AbandonedTemple)
 "h" = (/obj/item/weapon/flame/candle/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "i" = (/obj/item/weapon/ectoplasm,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
-"j" = (/obj/structure/table/wooden_reinforced,/obj/item/weapon/coin/iron,/obj/item/weapon/coin/platinum,/obj/item/weapon/coin/uranium,/obj/item/weapon/coin/diamond,/obj/item/weapon/coin/iron,/obj/item/weapon/coin/uranium,/obj/item/weapon/coin/iron,/obj/item/weapon/coin/phoron,/obj/item/weapon/coin/platinum,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
+"j" = (/obj/structure/table/wooden_reinforced,/obj/item/weapon/coin/iron,/obj/item/weapon/coin/platinum,/obj/item/weapon/coin/uranium,/obj/item/weapon/coin/diamond,/obj/item/weapon/coin/iron,/obj/item/weapon/coin/uranium,/obj/item/weapon/coin/iron,/obj/item/weapon/coin/phoron,/obj/item/weapon/coin/platinum,/obj/effect/decal/cleanable/cobweb,/obj/random/coin/anom,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "k" = (/obj/structure/table/wooden_reinforced,/obj/item/weapon/coin/gold,/obj/item/weapon/coin/gold,/obj/item/weapon/coin/gold,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/gold,/obj/item/weapon/coin/gold,/obj/item/weapon/coin/gold,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/obj/item/weapon/coin/silver,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "l" = (/obj/effect/decal/remains/xeno,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "m" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
@@ -39,6 +39,7 @@
 "M" = (/obj/effect/decal/cleanable/cobweb,/obj/item/weapon/flame/candle/candelabra/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "N" = (/obj/effect/decal/cleanable/cobweb2,/obj/item/weapon/flame/candle/candelabra/everburn,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "O" = (/obj/effect/decal/cleanable/blood,/turf/simulated/mineral/floor,/area/submap/AbandonedTemple)
+"U" = (/obj/structure/table/woodentable,/obj/item/weapon/flame/candle/candelabra/everburn{start_anomalous = 1},/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaa
@@ -53,7 +54,7 @@ abcdppgccccccccccgccdcbaa
 abcdppggggzggzggggcAdcbaa
 abcdwcgBCccccccCDgcndcbaa
 abcdcEgccwpFppcccgcldcbaa
-abcdcczcccpGyHlcczwndcbaa
+abcdcczcccpGUHlcczwndcbaa
 abcddsgccIIccIIccgnddcbaa
 abcmddgccccccccccgddJcbaa
 abbcmddccKIccIIcsddccbbaa

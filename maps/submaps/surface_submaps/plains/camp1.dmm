@@ -6,7 +6,7 @@
 "f" = (/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
 "g" = (/obj/machinery/space_heater,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
 "h" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
-"i" = (/obj/structure/table/rack,/obj/item/weapon/gun/launcher/crossbow,/obj/item/stack/rods{amount = 17},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
+"i" = (/obj/structure/table/rack,/obj/item/weapon/gun/launcher/crossbow,/obj/item/stack/rods{amount = 17},/obj/random/tool/anom,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
 "j" = (/obj/item/stack/material/log/sif{amount = 25},/turf/template_noop,/area/template_noop)
 "k" = (/obj/structure/table/bench/wooden,/turf/simulated/floor/outdoors/dirt,/area/submap/camp1)
 "l" = (/turf/simulated/floor/outdoors/dirt,/area/submap/camp1)
