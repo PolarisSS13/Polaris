@@ -90,7 +90,7 @@
 		to_chat(user, "<span class='notice'>We send an electrical pulse up our finger, and into \the [O].</span>")
 		O.add_fingerprint(user)
 		O.emag_act(1,user,src)
-		log_and_message_admins("finger-lockpicked \an [O].")
+		log_and_message_admins("finger-lockpicked \an [O].", user)
 		ling_datum.chem_charges -= 10
 
 		return 1
