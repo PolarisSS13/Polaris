@@ -81,7 +81,7 @@
 		else //Probably broken or no power.
 			to_chat(user, "<span class='warning'>The door does not respond to the pulse.</span>")
 		door.add_fingerprint(user)
-		log_and_message_admins("finger-lockpicked \an [door].")
+		log_and_message_admins("finger-lockpicked \an [door].", user)
 		ling_datum.chem_charges -= 10
 		return 1
 
