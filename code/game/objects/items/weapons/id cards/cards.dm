@@ -110,7 +110,7 @@
 
 	uses -= used_uses
 	A.add_fingerprint(user)
-	log_and_message_admins("emagged \an [A].")
+	log_and_message_admins("emagged \an [A].", user)
 
 	if(uses<1)
 		user.visible_message("<span class='warning'>\The [src] fizzles and sparks - it seems it's been used once too often, and is now spent.</span>")
