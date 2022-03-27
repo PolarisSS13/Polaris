@@ -224,7 +224,7 @@
 
 			if ("issue")
 				if (giver)
-					var/number = add_zero("[rand(0,9999)]", 4)
+					var/number = pad_left("[rand(1, 9999)]", 4, "0")
 					var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Grants access to following areas: "
 					for (var/i=1 to accesses.len)
 						var/A = accesses[i]
