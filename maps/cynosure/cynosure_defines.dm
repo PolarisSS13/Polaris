@@ -13,7 +13,7 @@
 	full_name = "Cynosure Station"
 	path = "cynosure"
 
-	lobby_screens = list('maps/cynosure/title_cynosure.png') //Title screen created for Polaris by Adrien Perrier - www.artstation.com/gasgano
+	lobby_screens = list('maps/cynosure/title_cynosure.png')
 
 	lobby_tracks = list(
 		/decl/music_track/chasing_time,
