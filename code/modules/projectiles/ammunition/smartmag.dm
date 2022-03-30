@@ -87,7 +87,7 @@
 				update_icon()
 				return
 
-	else if(I.get_tool_quality(TOOL_SCREWDRIVER))
+	else if(I.is_screwdriver())
 		if(attached_cell)
 			to_chat(user, "You begin removing \the [attached_cell] from \the [src].")
 			if(do_after(user, 10))	// Faster than doing it by hand

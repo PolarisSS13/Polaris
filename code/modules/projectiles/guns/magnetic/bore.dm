@@ -86,7 +86,7 @@
 
 /obj/item/weapon/gun/magnetic/matfed/attackby(var/obj/item/thing, var/mob/user)
 	if(removable_components)
-		if(thing.get_tool_quality(TOOL_CROWBAR))
+		if(thing.is_crowbar())
 			if(!manipulator)
 				to_chat(user, "<span class='warning'>\The [src] has no manipulator installed.</span>")
 				return

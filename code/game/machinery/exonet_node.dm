@@ -76,9 +76,9 @@
 // Parameters: 2 (I - the item being whacked against the machine, user - the person doing the whacking)
 // Description: Handles deconstruction.
 /obj/machinery/exonet_node/attackby(obj/item/I, mob/user)
-	if(I.get_tool_quality(TOOL_SCREWDRIVER))
+	if(I.is_screwdriver())
 		default_deconstruction_screwdriver(user, I)
-	else if(I.get_tool_quality(TOOL_CROWBAR))
+	else if(I.is_crowbar())
 		default_deconstruction_crowbar(user, I)
 	else
 		..()

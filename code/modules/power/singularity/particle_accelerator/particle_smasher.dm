@@ -71,7 +71,7 @@
 		to_chat(user, "<span class='notice'>You add \the [reagent_container] to \the [src].</span>")
 		update_icon()
 		return
-	else if(W.get_tool_quality(TOOL_WRENCH))
+	else if(W.is_wrench())
 		anchored = !anchored
 		playsound(src, W.usesound, 75, 1)
 		if(anchored)

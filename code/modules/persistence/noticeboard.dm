@@ -85,7 +85,7 @@
 	icon_state = "[base_icon_state][LAZYLEN(notices)]"
 
 /obj/structure/noticeboard/attackby(var/obj/item/weapon/thing, var/mob/user)
-	if(thing.get_tool_quality(TOOL_SCREWDRIVER))
+	if(thing.is_screwdriver())
 		var/choice = input("Which direction do you wish to place the noticeboard?", "Noticeboard Offset") as null|anything in list("North", "South", "East", "West")
 		if(choice && Adjacent(user) && thing.loc == user && !user.incapacitated())
 			playsound(loc, 'sound/items/Screwdriver.ogg', 50, 1)
@@ -103,7 +103,7 @@
 					pixel_x = -32
 					pixel_y = 0
 		return
-	else if(thing.get_tool_quality(TOOL_WRENCH))
+	else if(thing.is_wrench())
 		visible_message(SPAN_WARNING("\The [user] begins dismantling \the [src]."))
 		playsound(loc, 'sound/items/Ratchet.ogg', 50, 1)
 		if(do_after(user, 50, src))

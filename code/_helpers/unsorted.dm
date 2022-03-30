@@ -1069,10 +1069,32 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		loc = loc.loc
 	return null
 
+/proc/get_turf_or_move(turf/location)
+	return get_turf(location)
+
+
+//Quick type checks for some tools
+var/global/list/common_tools = list(
+/obj/item/stack/cable_coil,
+/obj/item/weapon/tool/wrench,
+/obj/item/weapon/weldingtool,
+/obj/item/weapon/tool/screwdriver,
+/obj/item/weapon/tool/wirecutters,
+/obj/item/device/multitool,
+/obj/item/weapon/tool/crowbar)
+
+/proc/istool(O)
+	if(O && is_type_in_list(O, common_tools))
+		return 1
+	return 0
+
+
 /proc/is_wire_tool(obj/item/I)
-	return I.get_tool_quality(TOOL_MULTITOOL) || \
-		I.get_tool_quality(TOOL_WIRECUTTER) || \
-		istype(I, /obj/item/device/assembly/signaler)
+	if(istype(I, /obj/item/device/multitool) || I.is_wirecutter())
+		return TRUE
+	if(istype(I, /obj/item/device/assembly/signaler))
+		return TRUE
+	return
 
 /proc/is_hot(obj/item/W as obj)
 	switch(W.type)
@@ -1104,6 +1126,24 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		else
 			return 0
 
+//Whether or not the given item counts as sharp in terms of dealing damage
+/proc/is_sharp(obj/O as obj)
+	if(!O)
+		return FALSE
+	if(O.sharp)
+		return TRUE
+	if(O.edge)
+		return TRUE
+	return FALSE
+
+//Whether or not the given item counts as cutting with an edge in terms of removing limbs
+/proc/has_edge(obj/O as obj)
+	if(!O)
+		return FALSE
+	if(O.edge)
+		return TRUE
+	return FALSE
+
 //Returns 1 if the given item is capable of popping things like balloons, inflatable barriers, or cutting police tape.
 /proc/can_puncture(obj/item/W as obj)		// For the record, WHAT THE HELL IS THIS METHOD OF DOING IT?
 	if(!W)
@@ -1111,13 +1151,23 @@ Turf and target are seperate in case you want to teleport some distance from a t
 	if(W.sharp)
 		return TRUE
 	return ( \
-		W.get_tool_quality(TOOL_SCREWDRIVER)		     				              || \
+		W.is_screwdriver()		     				              || \
 		istype(W, /obj/item/weapon/pen)                           || \
 		istype(W, /obj/item/weapon/weldingtool)					  || \
 		istype(W, /obj/item/weapon/flame/lighter/zippo)			  || \
 		istype(W, /obj/item/weapon/flame/match)            		  || \
 		istype(W, /obj/item/clothing/mask/smokable/cigarette) 		      || \
 		istype(W, /obj/item/weapon/shovel) \
+	)
+
+/proc/is_surgery_tool(obj/item/W as obj)
+	return (	\
+	istype(W, /obj/item/weapon/surgical/scalpel)			||	\
+	istype(W, /obj/item/weapon/surgical/hemostat)		||	\
+	istype(W, /obj/item/weapon/surgical/retractor)		||	\
+	istype(W, /obj/item/weapon/surgical/cautery)			||	\
+	istype(W, /obj/item/weapon/surgical/bonegel)			||	\
+	istype(W, /obj/item/weapon/surgical/bonesetter)
 	)
 
 // check if mob is lying down on something we can operate him on.

@@ -246,7 +246,7 @@
 	var/obj/structure/disposalpipe/CP = locate() in T
 
 	// wrench: (un)anchor
-	if(I.get_tool_quality(TOOL_WRENCH))
+	if(I.is_wrench())
 		if(anchored)
 			anchored = 0
 			if(ispipe)
@@ -285,13 +285,13 @@
 		update()
 
 	// weldingtool: convert to real pipe
-	else if(I.get_tool_quality(TOOL_WELDER))
+	else if(istype(I, /obj/item/weapon/weldingtool))
 		if(anchored)
 			var/obj/item/weapon/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src, W.usesound, 100, 1)
 				to_chat(user, "Welding the [nicetype] in place.")
-				if(do_after(user, 20 * W.get_tool_speed(TOOL_WELDER)))
+				if(do_after(user, 20 * W.toolspeed))
 					if(!src || !W.isOn()) return
 					to_chat(user, "The [nicetype] has been welded in place!")
 					update() // TODO: Make this neat

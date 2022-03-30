@@ -96,7 +96,7 @@
 	update_icon()
 
 /obj/machinery/floodlight/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.get_tool_quality(TOOL_SCREWDRIVER))
+	if(W.is_screwdriver())
 		if(!open)
 			if(unlocked)
 				unlocked = 0
@@ -105,7 +105,7 @@
 				unlocked = 1
 				to_chat(user, "You unscrew the battery panel.")
 
-	if(W.get_tool_quality(TOOL_CROWBAR))
+	if(W.is_crowbar())
 		if(unlocked)
 			if(open)
 				open = 0

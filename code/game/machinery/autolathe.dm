@@ -156,7 +156,7 @@
 
 	if(panel_open)
 		//Don't eat multitools or wirecutters used on an open lathe.
-		if(O.get_tool_quality(TOOL_MULTITOOL) || O.get_tool_quality(TOOL_WIRECUTTER))
+		if(O.is_multitool() || O.is_wirecutter())
 			wires.Interact(user)
 			return
 

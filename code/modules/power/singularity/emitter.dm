@@ -147,7 +147,7 @@
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
 
-	if(W.get_tool_quality(TOOL_WRENCH))
+	if(W.is_wrench())
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return
@@ -171,7 +171,7 @@
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return
 
-	if(W.get_tool_quality(TOOL_WELDER))
+	if(istype(W, /obj/item/weapon/weldingtool))
 		var/obj/item/weapon/weldingtool/WT = W
 		if(active)
 			to_chat(user, "Turn off [src] first.")
@@ -185,7 +185,7 @@
 					user.visible_message("[user.name] starts to weld [src] to the floor.", \
 						"You start to weld [src] to the floor.", \
 						"You hear welding")
-					if (do_after(user,20 * WT.get_tool_speed(TOOL_WELDER)))
+					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						state = 2
 						to_chat(user, "You weld [src] to the floor.")
@@ -198,7 +198,7 @@
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
 						"You start to cut [src] free from the floor.", \
 						"You hear welding")
-					if (do_after(user,20 * WT.get_tool_speed(TOOL_WELDER)))
+					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						state = 1
 						to_chat(user, "You cut [src] free from the floor.")

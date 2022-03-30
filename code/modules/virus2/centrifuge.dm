@@ -10,7 +10,7 @@
 	var/datum/disease2/disease/virus2 = null
 
 /obj/machinery/computer/centrifuge/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.get_tool_quality(TOOL_SCREWDRIVER))
+	if(O.is_screwdriver())
 		return ..(O,user)
 
 	if(default_unfasten_wrench(user, O, 20))

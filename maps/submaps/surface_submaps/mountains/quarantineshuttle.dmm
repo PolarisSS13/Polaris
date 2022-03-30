@@ -112,7 +112,7 @@
 "ch" = (/obj/structure/table/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "ci" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/syringe/antiviral,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cj" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'"; name = "Chemistry Cleaner"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
-"ck" = (/obj/structure/table/steel,/obj/item/weapon/tool/hydraulic_cutter,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"ck" = (/obj/structure/table/steel,/obj/item/weapon/tool/crowbar/power,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cl" = (/obj/structure/table/rack,/obj/item/clothing/head/bio_hood,/obj/item/clothing/suit/bio_suit,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cm" = (/obj/item/weapon/weldingtool/largetank,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cn" = (/obj/structure/closet/crate/medical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)

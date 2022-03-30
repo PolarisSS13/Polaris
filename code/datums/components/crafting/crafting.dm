@@ -85,10 +85,8 @@
 			if(istype(item, /obj/item/stack))
 				var/obj/item/stack/stack = item
 				.["other"][item.type] += stack.amount
-			else if(LAZYLEN(item.tool_qualities))
-				for(var/tool_quality in item.tool_qualities)
-					if(.["tool_qualities"][tool_quality] < item.tool_qualities[tool_quality])
-						.["tool_qualities"][tool_quality] = item.tool_qualities[tool_quality]
+			else if(item.tool_qualities)
+				.["tool_qualities"] |= item.tool_qualities
 				.["other"][item.type] += 1
 			else
 				if(istype(item, /obj/item/weapon/reagent_containers))
@@ -163,10 +161,10 @@
 					present_qualities[behavior] = TRUE
 		available_tools[contained_item.type] = TRUE
 		for(var/behavior in contained_item.tool_qualities)
-			present_qualities[behavior] = max(present_qualities[behavior], contained_item.tool_qualities[behavior])
+			present_qualities[behavior] = TRUE
 
 	for(var/quality in surroundings["tool_behaviour"])
-		present_qualities[quality] = max(present_qualities[quality], surroundings[quality])
+		present_qualities[quality] = TRUE
 
 	for(var/path in surroundings["other"])
 		available_tools[path] = TRUE

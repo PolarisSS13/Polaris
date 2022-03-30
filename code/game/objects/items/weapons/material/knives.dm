@@ -152,4 +152,4 @@
 	icon_state = "survivalknife"
 	item_state = "knife"
 	applies_material_colour = FALSE
-	tool_qualities = list(TOOL_WOODCUT = TOOL_QUALITY_POOR) // Use a real axe if you want to chop logs.
+	toolspeed = 2 // Use a real axe if you want to chop logs.

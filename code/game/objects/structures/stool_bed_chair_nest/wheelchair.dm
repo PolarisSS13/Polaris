@@ -56,9 +56,9 @@
 				L.set_dir(dir)
 
 /obj/structure/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.get_tool_quality(TOOL_WRENCH) || W.get_tool_quality(TOOL_WIRECUTTER) || istype(W,/obj/item/stack))
-		return TRUE
-	return ..()
+	if(W.is_wrench() || W.is_wirecutter() || istype(W,/obj/item/stack))
+		return
+	..()
 
 /obj/structure/bed/chair/wheelchair/relaymove(mob/user, direction)
 	// Redundant check?

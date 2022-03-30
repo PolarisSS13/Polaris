@@ -140,7 +140,7 @@
 	return
 
 /obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || W.get_tool_quality(TOOL_WIRECUTTER))
+	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 
@@ -240,7 +240,7 @@
 	color = WOOD_COLOR_CHOCOLATE
 
 /obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/stack) || W.get_tool_quality(TOOL_WIRECUTTER))
+	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
 

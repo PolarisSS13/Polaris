@@ -41,9 +41,9 @@ var/list/turf_edge_cache = list()
 
 /turf/simulated/floor/outdoors/attackby(obj/item/C, mob/user)
 
-	if(can_dig && C.get_tool_quality(TOOL_SHOVEL))
+	if(can_dig && istype(C, /obj/item/weapon/shovel))
 		to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
-		var/delay = (3 SECONDS * C.get_tool_quality(TOOL_SHOVEL))
+		var/delay = (3 SECONDS * C.toolspeed)
 		user.setClickCooldown(delay)
 		if(do_after(user, delay, src))
 			if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in contents))

@@ -277,13 +277,13 @@
 	return
 
 /obj/structure/closet/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.get_tool_quality(TOOL_WRENCH))
+	if(W.is_wrench())
 		if(opened)
 			if(anchored)
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 			else
 				user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-			if(do_after(user, 20 * W.get_tool_speed(TOOL_WRENCH)))
+			if(do_after(user, 20 * W.toolspeed))
 				if(!src) return
 				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 				anchored = !anchored
@@ -332,7 +332,7 @@
 	else if(seal_tool)
 		if(istype(W, seal_tool))
 			var/obj/item/weapon/S = W
-			if(S.get_tool_quality(TOOL_WELDER))
+			if(istype(S, /obj/item/weapon/weldingtool))
 				var/obj/item/weapon/weldingtool/WT = S
 				if(!WT.remove_fuel(0,user))
 					if(!WT.isOn())
@@ -340,7 +340,7 @@
 					else
 						to_chat(user, "<span class='notice'>You need more welding fuel to complete this task.</span>")
 						return
-			if(do_after(user, 20 * S.get_tool_speed(TOOL_WELDER)))
+			if(do_after(user, 20 * S.toolspeed))
 				playsound(src, S.usesound, 50)
 				sealed = !sealed
 				update_icon()
