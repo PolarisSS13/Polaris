@@ -180,7 +180,7 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 9
 	},
-/obj/item/weapon/cell,
+/obj/item/cell,
 /turf/simulated/floor/tiled/techmaint,
 /area/tcommsat/cynosure/teleporter)
 "cw" = (
@@ -234,7 +234,7 @@
 	},
 /area/tcommsat/cynosure/chamber)
 "cM" = (
-/obj/item/weapon/camera_assembly,
+/obj/item/camera_assembly,
 /turf/simulated/floor/tiled/techmaint,
 /area/tcommsat/cynosure/teleporter)
 "cN" = (
@@ -675,8 +675,8 @@
 	dir = 8
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/transmitter,
-/obj/item/weapon/stock_parts/subspace/transmitter{
+/obj/item/stock_parts/subspace/transmitter,
+/obj/item/stock_parts/subspace/transmitter{
 	pixel_x = 2;
 	pixel_y = 2
 	},
@@ -1056,20 +1056,20 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/sub_filter{
+/obj/item/stock_parts/subspace/sub_filter{
 	pixel_x = -4;
 	pixel_y = 4
 	},
-/obj/item/weapon/stock_parts/subspace/sub_filter{
+/obj/item/stock_parts/subspace/sub_filter{
 	pixel_x = -2;
 	pixel_y = 2
 	},
-/obj/item/weapon/stock_parts/subspace/sub_filter,
-/obj/item/weapon/stock_parts/subspace/sub_filter{
+/obj/item/stock_parts/subspace/sub_filter,
+/obj/item/stock_parts/subspace/sub_filter{
 	pixel_x = 2;
 	pixel_y = -2
 	},
-/obj/item/weapon/stock_parts/subspace/sub_filter{
+/obj/item/stock_parts/subspace/sub_filter{
 	pixel_x = 4;
 	pixel_y = -4
 	},
@@ -1118,9 +1118,9 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 9
 	},
-/obj/item/weapon/bedsheet/green,
+/obj/item/bedsheet/green,
 /obj/structure/bed/padded,
-/obj/item/weapon/material/twohanded/riding_crop,
+/obj/item/material/twohanded/riding_crop,
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/lounge)
 "lT" = (
@@ -1524,35 +1524,35 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/micro_laser,
-/obj/item/weapon/stock_parts/manipulator{
+/obj/item/stock_parts/micro_laser,
+/obj/item/stock_parts/manipulator{
 	pixel_x = 3;
 	pixel_y = -4
 	},
-/obj/item/weapon/stock_parts/manipulator{
+/obj/item/stock_parts/manipulator{
 	pixel_x = 2;
 	pixel_y = -2
 	},
-/obj/item/weapon/stock_parts/manipulator{
+/obj/item/stock_parts/manipulator{
 	pixel_x = -3
 	},
-/obj/item/weapon/stock_parts/manipulator{
+/obj/item/stock_parts/manipulator{
 	pixel_x = -4;
 	pixel_y = 3
 	},
-/obj/item/weapon/stock_parts/capacitor,
-/obj/item/weapon/stock_parts/micro_laser/high{
+/obj/item/stock_parts/capacitor,
+/obj/item/stock_parts/micro_laser/high{
 	pixel_x = 4;
 	pixel_y = 2
 	},
-/obj/item/weapon/stock_parts/micro_laser/high{
+/obj/item/stock_parts/micro_laser/high{
 	pixel_x = 3;
 	pixel_y = -3
 	},
-/obj/item/weapon/stock_parts/micro_laser/high{
+/obj/item/stock_parts/micro_laser/high{
 	pixel_x = -2
 	},
-/obj/item/weapon/stock_parts/micro_laser/high{
+/obj/item/stock_parts/micro_laser/high{
 	pixel_x = -4;
 	pixel_y = 4
 	},
@@ -1571,7 +1571,7 @@
 	dir = 1
 	},
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/brown,
+/obj/item/bedsheet/brown,
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/lounge)
 "pZ" = (
@@ -1608,7 +1608,7 @@
 	pixel_y = 22
 	},
 /obj/structure/bed/padded,
-/obj/item/weapon/bedsheet/red,
+/obj/item/bedsheet/red,
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/lounge)
 "qm" = (
@@ -1985,7 +1985,7 @@
 /obj/effect/floor_decal/rust/part_rusted1{
 	dir = 1
 	},
-/obj/item/weapon/storage/toolbox/mechanical,
+/obj/item/storage/toolbox/mechanical,
 /turf/simulated/floor/tiled/old_tile/gray,
 /area/tcommsat/cynosure/storage)
 "ug" = (
@@ -2274,8 +2274,8 @@
 /area/tcommsat/cynosure/entrance)
 "xc" = (
 /obj/structure/table/standard,
-/obj/item/weapon/paper_bin,
-/obj/item/weapon/pen/blue{
+/obj/item/paper_bin,
+/obj/item/pen/blue{
 	pixel_x = -3;
 	pixel_y = 2
 	},
@@ -2980,8 +2980,8 @@
 	dir = 8;
 	pixel_x = 22
 	},
-/obj/item/weapon/folder/yellow,
-/obj/item/weapon/folder/yellow{
+/obj/item/folder/yellow,
+/obj/item/folder/yellow{
 	pixel_x = 2;
 	pixel_y = 2
 	},
@@ -3169,7 +3169,7 @@
 /obj/structure/bed/chair{
 	dir = 8
 	},
-/obj/item/weapon/storage/box/lights/mixed{
+/obj/item/storage/box/lights/mixed{
 	pixel_x = 2;
 	pixel_y = 2
 	},
@@ -3229,12 +3229,12 @@
 	pixel_x = 22
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/analyzer{
+/obj/item/stock_parts/subspace/analyzer{
 	pixel_x = -3;
 	pixel_y = -3
 	},
-/obj/item/weapon/stock_parts/subspace/analyzer,
-/obj/item/weapon/stock_parts/subspace/analyzer{
+/obj/item/stock_parts/subspace/analyzer,
+/obj/item/stock_parts/subspace/analyzer{
 	pixel_x = 3;
 	pixel_y = 2
 	},
@@ -3456,12 +3456,12 @@
 	dir = 10
 	},
 /obj/structure/closet/crate/freezer/rations,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
-/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/lounge)
 "Ju" = (
@@ -3938,12 +3938,12 @@
 	pixel_y = -24
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/crystal{
+/obj/item/stock_parts/subspace/crystal{
 	pixel_x = 3;
 	pixel_y = -2
 	},
-/obj/item/weapon/stock_parts/subspace/crystal,
-/obj/item/weapon/stock_parts/subspace/crystal{
+/obj/item/stock_parts/subspace/crystal,
+/obj/item/stock_parts/subspace/crystal{
 	pixel_x = -4;
 	pixel_y = 2
 	},
@@ -4101,12 +4101,12 @@
 	dir = 1
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/treatment{
+/obj/item/stock_parts/subspace/treatment{
 	pixel_x = 5;
 	pixel_y = -2
 	},
-/obj/item/weapon/stock_parts/subspace/treatment,
-/obj/item/weapon/stock_parts/subspace/treatment{
+/obj/item/stock_parts/subspace/treatment,
+/obj/item/stock_parts/subspace/treatment{
 	pixel_x = -2;
 	pixel_y = 4
 	},
@@ -4379,15 +4379,15 @@
 /area/tcommsat/cynosure/teleporter)
 "Sn" = (
 /obj/structure/table/rack,
-/obj/item/weapon/circuitboard/telecomms/processor,
-/obj/item/weapon/circuitboard/telecomms/processor,
-/obj/item/weapon/circuitboard/telecomms/receiver,
-/obj/item/weapon/circuitboard/telecomms/server,
-/obj/item/weapon/circuitboard/telecomms/server,
-/obj/item/weapon/circuitboard/telecomms/bus,
-/obj/item/weapon/circuitboard/telecomms/bus,
-/obj/item/weapon/circuitboard/telecomms/broadcaster,
-/obj/item/weapon/circuitboard/telecomms/exonet_node,
+/obj/item/circuitboard/telecomms/processor,
+/obj/item/circuitboard/telecomms/processor,
+/obj/item/circuitboard/telecomms/receiver,
+/obj/item/circuitboard/telecomms/server,
+/obj/item/circuitboard/telecomms/server,
+/obj/item/circuitboard/telecomms/bus,
+/obj/item/circuitboard/telecomms/bus,
+/obj/item/circuitboard/telecomms/broadcaster,
+/obj/item/circuitboard/telecomms/exonet_node,
 /obj/structure/window/reinforced,
 /obj/structure/window/reinforced{
 	dir = 1
@@ -4721,12 +4721,12 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/ansible,
-/obj/item/weapon/stock_parts/subspace/ansible{
+/obj/item/stock_parts/subspace/ansible,
+/obj/item/stock_parts/subspace/ansible{
 	pixel_x = 3;
 	pixel_y = 3
 	},
-/obj/item/weapon/stock_parts/subspace/ansible{
+/obj/item/stock_parts/subspace/ansible{
 	pixel_x = -3;
 	pixel_y = -3
 	},
@@ -4837,11 +4837,11 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/item/weapon/deck/cah/black{
+/obj/item/deck/cah/black{
 	pixel_x = -4;
 	pixel_y = 6
 	},
-/obj/item/weapon/deck/cah{
+/obj/item/deck/cah{
 	pixel_x = -3;
 	pixel_y = 3
 	},
@@ -4898,12 +4898,12 @@
 	icon_state = "2-8"
 	},
 /obj/structure/table/standard,
-/obj/item/weapon/stock_parts/subspace/amplifier{
+/obj/item/stock_parts/subspace/amplifier{
 	pixel_x = 3;
 	pixel_y = -3
 	},
-/obj/item/weapon/stock_parts/subspace/amplifier,
-/obj/item/weapon/stock_parts/subspace/amplifier{
+/obj/item/stock_parts/subspace/amplifier,
+/obj/item/stock_parts/subspace/amplifier{
 	pixel_x = -2;
 	pixel_y = 3
 	},

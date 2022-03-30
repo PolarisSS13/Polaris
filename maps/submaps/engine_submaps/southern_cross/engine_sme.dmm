@@ -74,7 +74,7 @@
 "yL" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 4},/obj/structure/lattice,/turf/space,/area/space)
 "yU" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor,/area/engineering/engine_room)
 "zi" = (/obj/machinery/atmospherics/pipe/simple/visible/green{dir = 6},/obj/machinery/door/blast/regular{density = 0; icon_state = "pdoor0"; id = "EngineRadiatorViewport1"; name = "Engine Radiator Viewport Shutter"; opacity = 0},/obj/machinery/door/firedoor/border_only,/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor,/area/engineering/engine_room)
-"zl" = (/obj/structure/table/reinforced,/obj/item/weapon/book/manual/supermatter_engine,/turf/template_noop,/area/template_noop)
+"zl" = (/obj/structure/table/reinforced,/obj/item/book/manual/supermatter_engine,/turf/template_noop,/area/template_noop)
 "zA" = (/obj/machinery/atmospherics/binary/circulator{anchored = 1; dir = 8},/obj/effect/floor_decal/industrial/outline/yellow,/turf/simulated/floor,/area/engineering/engine_room)
 "zC" = (/obj/machinery/atmospherics/pipe/simple/visible/cyan,/obj/item/device/radio/intercom{dir = 4; name = "Station Intercom (General)"; pixel_x = 21},/obj/machinery/meter,/turf/simulated/floor,/area/engineering/engine_waste)
 "zX" = (/obj/effect/floor_decal/industrial/warning/corner,/obj/machinery/light{dir = 4},/turf/simulated/floor,/area/engineering/engine_room)

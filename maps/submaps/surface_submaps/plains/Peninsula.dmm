@@ -5,7 +5,7 @@
 "e" = (/obj/structure/flora/tree/sif,/turf/template_noop,/area/submap/Peninsula)
 "f" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Peninsula)
 "g" = (/obj/structure/table/woodentable,/obj/item/device/flashlight,/turf/template_noop,/area/submap/Peninsula)
-"h" = (/obj/structure/table/woodentable,/obj/item/weapon/cell/device,/obj/item/weapon/cell/device,/turf/template_noop,/area/submap/Peninsula)
+"h" = (/obj/structure/table/woodentable,/obj/item/cell/device,/obj/item/cell/device,/turf/template_noop,/area/submap/Peninsula)
 "i" = (/obj/structure/bonfire,/turf/template_noop,/area/submap/Peninsula)
 "j" = (/obj/structure/flora/tree/sif,/turf/template_noop,/area/template_noop)
 

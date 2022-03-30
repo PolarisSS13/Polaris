@@ -2,7 +2,7 @@
 "b" = (/obj/structure/table/standard,/obj/random/toy,/obj/item/toy/colorballoon{color = "#FF00BB"},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 "d" = (/turf/simulated/floor/plating,/area/template_noop)
 "e" = (/obj/random/obstruction,/obj/structure/cable{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/plating,/area/template_noop)
-"f" = (/obj/structure/table/standard,/obj/item/weapon/wrapping_paper,/obj/item/toy/colorballoon{color = "#FFCC00"},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
+"f" = (/obj/structure/table/standard,/obj/item/wrapping_paper,/obj/item/toy/colorballoon{color = "#FFCC00"},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 "j" = (/obj/machinery/power/apc{dir = 8; name = "west bump"; operating = 0; pixel_x = -24},/obj/structure/cable,/obj/structure/sign/poster/custom{pixel_y = -32; poster_decl = /decl/poster/nanotrasen/nt_8},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 "o" = (/obj/item/stack/material/cardboard,/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 "p" = (/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
@@ -21,7 +21,7 @@
 "V" = (/obj/structure/bed/chair/comfy/blue{dir = 8},/obj/item/trash/plate,/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 "X" = (/obj/structure/bed/chair/comfy/teal{dir = 4},/obj/item/trash/plate{pixel_y = 5},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 "Y" = (/turf/simulated/wall,/area/template_noop)
-"Z" = (/obj/structure/table/standard,/obj/machinery/light/small{dir = 1},/obj/item/weapon/storage/fancy/whitecandle_box,/obj/item/weapon/storage/box/matches{pixel_x = -4; pixel_y = -8},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
+"Z" = (/obj/structure/table/standard,/obj/machinery/light/small{dir = 1},/obj/item/storage/fancy/whitecandle_box,/obj/item/storage/box/matches{pixel_x = -4; pixel_y = -8},/turf/simulated/floor/carpet/purcarpet,/area/template_noop)
 
 (1,1,1) = {"
 YLLLLLL
