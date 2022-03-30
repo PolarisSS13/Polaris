@@ -520,7 +520,7 @@
 	hits = 3
 	hitpwr = 1
 
-	meteordrop = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meteordrop = /obj/item/reagent_containers/food/snacks/meat
 	dropamt = 4
 
 // Blob! By default, it spawns a blob weaker than the lethargic by grow-rate, but slightly hardier defense-wise. Like a barnacle, from space!

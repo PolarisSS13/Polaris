@@ -14,7 +14,7 @@
 	brute_multiplier = 0.35
 	burn_multiplier = 0.8
 
-/datum/blob_type/barnacle/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+/datum/blob_type/barnacle/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)
 	var/turf/T = get_turf(B)
 
 	to_chat(user, "<span class='alien'>\The [B] produces a cauterizing ooze!</span>")
