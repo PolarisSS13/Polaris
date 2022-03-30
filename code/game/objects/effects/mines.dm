@@ -3,7 +3,7 @@
 	desc = "A small explosive land mine."
 	density = 0
 	anchored = 1
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "uglymine"
 	var/triggered = 0
 	var/smoke_strength = 3
@@ -286,7 +286,7 @@
 /obj/item/mine
 	name = "mine"
 	desc = "A small explosive mine with 'HE' and a grenade symbol on the side."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "uglymine"
 	var/countdown = 10
 	var/minetype = /obj/effect/mine		//This MUST be an /obj/effect/mine type, or it'll runtime.

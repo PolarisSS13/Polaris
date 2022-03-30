@@ -101,7 +101,7 @@
 /obj/item/electric_hand
 	name = "electrified hand"
 	desc = "You could probably shock someone badly if you touched them, or recharge something."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "electric_hand"
 	show_examine = FALSE
 

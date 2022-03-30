@@ -1,7 +1,7 @@
 /obj/item/cane
 	name = "cane"
 	desc = "A cane used by a true gentleman."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "cane"
 	item_icons = list(
 			slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',

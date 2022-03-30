@@ -12,7 +12,7 @@
 /obj/item/melee
 	name = "weapon"
 	desc = "Murder device."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "baton"
 	slot_flags = SLOT_BELT
 	force = 10
@@ -21,7 +21,7 @@
 /obj/item/melee/classic_baton
 	name = "police baton"
 	desc = "A wooden truncheon for beating criminal scum."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "baton"
 	item_state = "classic_baton"
 	slot_flags = SLOT_BELT
@@ -45,7 +45,7 @@
 /obj/item/melee/telebaton
 	name = "telescopic baton"
 	desc = "A compact yet rebalanced personal defense weapon. Can be concealed when folded."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "telebaton0"
 	item_state = "telebaton0"
 	slot_flags = SLOT_BELT

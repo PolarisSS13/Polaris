@@ -11,7 +11,7 @@
 /obj/item/material/knife/machete/hatchet
 	name = "hatchet"
 	desc = "A very sharp axe blade upon a short fibremetal handle. It has a long history of chopping things, but now it is used for chopping wood."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "hatchet"
 	force_divisor = 0.2 // 12 with hardness 60 (steel)
 	thrown_force_divisor = 0.75 // 15 with weight 20 (steel)
@@ -39,7 +39,7 @@
 /obj/item/material/knife/machete/hatchet/unathiknife
 	name = "duelling knife"
 	desc = "A length of leather-bound wood studded with razor-sharp teeth. How crude."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "unathiknife"
 	attack_verb = list("ripped", "torn", "cut")
 	can_cleave = FALSE
@@ -63,7 +63,7 @@
 /obj/item/material/minihoe // -- Numbers
 	name = "mini hoe"
 	desc = "It's used for removing weeds or scratching your back."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "hoe"
 	force_divisor = 0.25 // 5 with weight 20 (steel)
 	thrown_force_divisor = 0.25 // as above
@@ -74,7 +74,7 @@
 /obj/item/material/snow/snowball
 	name = "loose packed snowball"
 	desc = "A fun snowball. Throw it at your friends!"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "snowball"
 	default_material = MAT_SNOW
 	health = 1
@@ -111,7 +111,7 @@
 	Disarm - Disarming strike. Attempts to disarm the target at range, similar to an unarmed disarm. Additionally, will force the target (if possible) to move away from you.<br>\
 	Grab - Grappling strike. Attempts to pull the target toward you. This can also move objects.<br>\
 	Harm - A standard strike with a small chance to disarm."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "whip"
 	item_state = "chain"
 	default_material = MAT_LEATHER

@@ -73,7 +73,7 @@
 /obj/item/material/knife/tacknife
 	name = "tactical knife"
 	desc = "You'd be killing loads of people if this was Medal of Valor: Heroes of Space."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "tacknife"
 	item_state = "knife"
 	force_divisor = 0.25 //15 when hardness 60 (steel)
@@ -83,7 +83,7 @@
 /obj/item/material/knife/tacknife/combatknife
 	name = "combat knife"
 	desc = "If only you had a boot to put it in."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "tacknife"
 	item_state = "knife"
 	force_divisor = 0.34 // 20 with hardness 60 (steel)
@@ -96,7 +96,7 @@
 /obj/item/material/knife/tacknife/boot
 	name = "boot knife"
 	desc = "A small fixed-blade knife for putting inside a boot."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "tacknife"
 	item_state = "knife"
 	force_divisor = 0.15

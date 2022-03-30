@@ -59,7 +59,7 @@
 /obj/item/shield/riot
 	name = "riot shield"
 	desc = "A shield adept for close quarters engagement.  It's also capable of protecting from less powerful projectiles."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "riot"
 	slot_flags = SLOT_BACK
 	force = 5.0
@@ -114,7 +114,7 @@
 /obj/item/shield/energy
 	name = "energy combat shield"
 	desc = "A shield capable of stopping most projectile and melee attacks. It can be retracted, expanded, and stored anywhere."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "eshield"
 	item_state = "eshield"
 	slot_flags = SLOT_EARS
@@ -221,7 +221,7 @@
 /obj/item/shield/riot/tele
 	name = "telescopic shield"
 	desc = "An advanced riot shield made of lightweight materials that collapses for easy storage."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "teleriot0"
 	slot_flags = null
 	force = 3

@@ -59,7 +59,7 @@
 /obj/item/brokenbug/spy
 	name = "broken bug"
 	desc = ""	//Even when it's broken it's inconspicuous
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "eshield"
 	item_state = "nothing"
 	layer = TURF_LAYER+0.2
@@ -74,7 +74,7 @@
 /obj/item/device/camerabug/spy
 	name = "bug"
 	desc = ""	//Nothing to see here
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "eshield"
 	item_state = "nothing"
 	layer = TURF_LAYER+0.2

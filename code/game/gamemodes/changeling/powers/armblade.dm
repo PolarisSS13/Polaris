@@ -52,7 +52,7 @@
 /obj/item/melee/changeling
 	name = "arm weapon"
 	desc = "A grotesque weapon made out of bone and flesh that cleaves through people as a hot knife through butter."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "arm_blade"
 	w_class = ITEMSIZE_HUGE
 	force = 5

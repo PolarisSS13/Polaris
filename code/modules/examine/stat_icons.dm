@@ -23,12 +23,12 @@ var/global/list/description_icons = list(
 	"air tank" = image(icon='icons/obj/tank.dmi',icon_state="oxygen"),
 	"connector" = image(icon='icons/obj/pipes.dmi',icon_state="connector"),
 
-	"stunbaton" = image(icon='icons/obj/weapons.dmi',icon_state="stunbaton_active"),
-	"slimebaton" = image(icon='icons/obj/weapons.dmi',icon_state="slimebaton_active"),
+	"stunbaton" = image(icon='icons/obj/items.dmi',icon_state="stunbaton_active"),
+	"slimebaton" = image(icon='icons/obj/items.dmi',icon_state="slimebaton_active"),
 
 	"power cell" = image(icon='icons/obj/power.dmi',icon_state="hcell"),
 	"device cell" = image(icon='icons/obj/power.dmi',icon_state="dcell"),
 	"weapon cell" = image(icon='icons/obj/power.dmi',icon_state="wcell"),
 
-	"hatchet" = image(icon='icons/obj/weapons.dmi',icon_state="hatchet"),
+	"hatchet" = image(icon='icons/obj/items.dmi',icon_state="hatchet"),
 	)

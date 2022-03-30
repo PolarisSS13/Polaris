@@ -76,7 +76,7 @@
 
 //Offhand
 /obj/item/storage/laundry_basket/offhand
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "offhand"
 	name = "second hand"
 	use_to_pickup = 0

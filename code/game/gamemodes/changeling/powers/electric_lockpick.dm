@@ -29,7 +29,7 @@
 /obj/item/finger_lockpick
 	name = "finger lockpick"
 	desc = "This finger appears to be an organic datajack."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "electric_hand"
 	show_examine = FALSE
 

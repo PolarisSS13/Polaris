@@ -178,7 +178,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 /obj/item/book/tome
 	name = "arcane tome"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	item_icons = list(
 		icon_l_hand = 'icons/mob/items/lefthand_books.dmi',
 		icon_r_hand = 'icons/mob/items/righthand_books.dmi',

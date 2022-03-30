@@ -3,7 +3,7 @@
 /obj/item/arrow
 	name = "bolt"
 	desc = "It's got a tip for you - get the point?"
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "bolt"
 	item_state = "bolt"
 	drop_sound = 'sound/items/drop/sword.ogg'
@@ -23,7 +23,7 @@
 	edge = 0
 	throwforce = 5
 	w_class = ITEMSIZE_SMALL
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "metal-rod"
 	item_state = "bolt"
 	drop_sound = 'sound/items/drop/sword.ogg'
@@ -32,7 +32,7 @@
 /obj/item/arrow/quill
 	name = "alien quill"
 	desc = "A wickedly barbed quill from some bizarre animal."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "quill"
 	item_state = "quill"
 	throwforce = 5
@@ -52,7 +52,7 @@
 /obj/item/gun/launcher/crossbow
 	name = "powered crossbow"
 	desc = "A 2564AD twist on an old classic. Pick up that can."
-	icon = 'icons/obj/weapons.dmi'
+	icon = 'icons/obj/items.dmi'
 	icon_state = "crossbow"
 	item_state = "crossbow-solid"
 	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
