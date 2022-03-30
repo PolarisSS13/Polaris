@@ -19,7 +19,7 @@
 	id = "handdrill"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 300, "silver" = 100)
-	build_path = /obj/item/weapon/tool/powerdrill
+	build_path = /obj/item/weapon/tool/screwdriver/power
 	sort_string = "NAAAB"
 
 /datum/design/item/tool/jaws_life
@@ -28,7 +28,7 @@
 	id = "jawslife"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 300, "silver" = 100)
-	build_path = /obj/item/weapon/tool/hydraulic_cutter
+	build_path = /obj/item/weapon/tool/crowbar/power
 	sort_string = "NAAAC"
 
 // Other devices

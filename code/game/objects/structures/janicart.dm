@@ -50,7 +50,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 
 /obj/structure/janitorialcart/attackby(obj/item/I, mob/user)
 	if(istype(I, /obj/item/weapon/mop) || istype(I, /obj/item/weapon/reagent_containers/glass/rag) || istype(I, /obj/item/weapon/soap))
-		if(mybucket)
+		if (mybucket)
 			if(I.reagents.total_volume < I.reagents.maximum_volume)
 				if(mybucket.reagents.total_volume < 1)
 					to_chat(user, "<span class='notice'>[mybucket] is empty!</span>")
@@ -62,47 +62,47 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 				to_chat(user, "<span class='notice'>[I] can't absorb anymore liquid!</span>")
 		else
 			to_chat(user, "<span class='notice'>There is no bucket mounted here to dip [I] into!</span>")
-		return TRUE
+		return 1
 
 	else if (istype(I, /obj/item/weapon/reagent_containers/glass/bucket) && mybucket)
 		I.afterattack(mybucket, usr, 1)
 		update_icon()
-		return TRUE
+		return 1
 
 	else if(istype(I, /obj/item/weapon/reagent_containers/spray) && !myspray)
-		user.drop_from_inventory(I, src)
+		user.unEquip(I, 0, src)
 		myspray = I
 		update_icon()
 		updateUsrDialog()
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
-		return TRUE
+		return 1
 
 	else if(istype(I, /obj/item/device/lightreplacer) && !myreplacer)
-		user.drop_from_inventory(I, src)
+		user.unEquip(I, 0, src)
 		myreplacer = I
 		update_icon()
 		updateUsrDialog()
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
-		return TRUE
+		return 1
 
 	else if(istype(I, /obj/item/weapon/storage/bag/trash) && !mybag)
-		user.drop_from_inventory(I, src)
+		user.unEquip(I, 0, src)
 		mybag = I
 		update_icon()
 		updateUsrDialog()
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
-		return TRUE
+		return 1
 
 	else if(istype(I, /obj/item/clothing/suit/caution))
 		if(signs < 4)
-			user.drop_from_inventory(I, src)
+			user.unEquip(I, 0, src)
 			signs++
 			update_icon()
 			updateUsrDialog()
 			to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 		else
 			to_chat(user, "<span class='notice'>[src] can't hold any more signs.</span>")
-		return TRUE
+		return 1
 
 	else if(mybag)
 		return mybag.attackby(I, user)
@@ -110,11 +110,12 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 		//This prevents dumb stuff like splashing the cart with the contents of a container, after putting said container into trash
 
 	else if (!has_items)
-		if (I.get_tool_quality(TOOL_WRENCH))
+		if (I.is_wrench())
 			if (do_after(user, 5 SECONDS, src))
 				dismantle(user)
-			return TRUE
-	return ..()
+			return
+	..()
+
 
 //New Altclick functionality!
 //Altclick the cart with a mop to stow the mop away

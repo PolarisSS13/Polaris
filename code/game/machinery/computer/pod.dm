@@ -50,7 +50,7 @@
 
 /*
 /obj/machinery/computer/pod/attackby(I as obj, user as mob)
-	if(I.get_tool_quality(TOOL_SCREWDRIVER))
+	if(I.is_screwdriver())
 		playsound(src, W.usesound, 50, 1)
 		if(do_after(user, 20))
 			if(stat & BROKEN)

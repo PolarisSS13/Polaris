@@ -154,7 +154,7 @@
 					amount *= M.incoming_damage_percent
 				if(!isnull(M.incoming_brute_damage_percent))
 					amount *= M.incoming_brute_damage_percent
-			O.take_damage(amount, 0, damage_source.sharp, damage_source.edge, damage_source)
+			O.take_damage(amount, 0, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			for(var/datum/modifier/M in modifiers)
 				if(!isnull(M.incoming_healing_percent))
@@ -175,7 +175,7 @@
 					amount *= M.incoming_damage_percent
 				if(!isnull(M.incoming_fire_damage_percent))
 					amount *= M.incoming_fire_damage_percent
-			O.take_damage(0, amount, damage_source.sharp, damage_source.edge, damage_source)
+			O.take_damage(0, amount, sharp=is_sharp(damage_source), edge=has_edge(damage_source), used_weapon=damage_source)
 		else
 			for(var/datum/modifier/M in modifiers)
 				if(!isnull(M.incoming_healing_percent))

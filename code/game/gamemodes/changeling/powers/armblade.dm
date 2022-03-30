@@ -135,7 +135,7 @@
 	armor_penetration = 15
 	sharp = 1
 	edge = 1
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_STANDARD)
+	pry = 1
 	attack_verb = list("attacked", "slashed", "stabbed", "sliced", "torn", "ripped", "diced", "cut")
 	defend_chance = 60
 	projectile_parry_chance = 25
@@ -162,6 +162,6 @@
 	name = "hand greatclaw"
 	force = 20
 	armor_penetration = 20
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_STANDARD)
+	pry = 1
 	defend_chance = 60
 	projectile_parry_chance = 25

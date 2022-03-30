@@ -22,7 +22,7 @@
 	//R&D tech level
 	origin_tech = list(TECH_ENGINEERING = 1)
 	
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_STANDARD)
+	tool_qualities = list(TOOL_WELDER)
 
 	//Welding tool specific stuff
 	var/welding = 0 	//Whether or not the welding tool is off(0), on(1) or currently welding(2)
@@ -38,6 +38,7 @@
 	var/eye_safety_modifier = 0 // Increasing this will make less eye protection needed to stop eye damage.  IE at 1, sunglasses will fully protect.
 	var/burned_fuel_for = 0 // Keeps track of how long the welder's been on, used to gradually empty the welder if left one, without RNG.
 	var/always_process = FALSE // If true, keeps the welder on the process list even if it's off.  Used for when it needs to regenerate fuel.
+	toolspeed = 1
 	drop_sound = 'sound/items/drop/weldingtool.ogg'
 	pickup_sound = 'sound/items/pickup/weldingtool.ogg'
 
@@ -278,7 +279,6 @@
 			else if(T)
 				T.visible_message("<span class='danger'>\The [src] turns on.</span>")
 			playsound(src, acti_sound, 50, 1)
-			set_tool_quality(TOOL_WELDER, initial(tool_qualities[TOOL_WELDER]))
 			src.force = 15
 			src.damtype = "fire"
 			src.w_class = ITEMSIZE_LARGE
@@ -301,7 +301,6 @@
 		else if(T)
 			T.visible_message("<span class='warning'>\The [src] turns off.</span>")
 		playsound(src, deac_sound, 50, 1)
-		set_tool_quality(TOOL_WELDER, TOOL_QUALITY_NONE)
 		src.force = 3
 		src.damtype = "brute"
 		src.w_class = initial(src.w_class)
@@ -369,7 +368,7 @@
 /obj/item/weapon/weldingtool/largetank/cyborg
 	name = "integrated welding tool"
 	desc = "An advanced welder designed to be used in robotic systems."
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_DECENT)
+	toolspeed = 0.5
 
 /obj/item/weapon/weldingtool/hugetank
 	name = "upgraded welding tool"
@@ -388,7 +387,7 @@
 	w_class = ITEMSIZE_SMALL
 	matter = list(MAT_METAL = 30, MAT_GLASS = 10)
 	change_icons = 0
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_MEDIOCRE)
+	toolspeed = 2
 	eye_safety_modifier = 1 // Safer on eyes.
 
 /datum/category_item/catalogue/anomalous/precursor_a/alien_welder
@@ -421,7 +420,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_welder)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "welder"
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_BEST)
+	toolspeed = 0.1
 	flame_color = "#6699FF" // Light bluish.
 	eye_safety_modifier = 2
 	change_icons = 0
@@ -441,7 +440,7 @@
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
 	matter = list(MAT_STEEL = 70, "glass" = 120)
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_DECENT)
+	toolspeed = 0.5
 	change_icons = 0
 	flame_intensity = 3
 	always_process = TRUE
@@ -459,7 +458,7 @@
 	icon_state = "hybwelder"
 	max_fuel = 80 //more max fuel is better! Even if it doesn't actually use fuel.
 	eye_safety_modifier = -2	// Brighter than the sun. Literally, you can look at the sun with a welding mask of proper grade, this will burn through that.
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_GOOD)
+	toolspeed = 0.25
 	w_class = ITEMSIZE_NORMAL
 	flame_intensity = 5
 	origin_tech = list(TECH_ENGINEERING = 5, TECH_PHORON = 4, TECH_PRECURSOR = 1)
@@ -476,7 +475,7 @@
 	max_fuel = 10
 	w_class = ITEMSIZE_NO_CONTAINER
 	matter = null
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_MEDIOCRE)
+	toolspeed = 1.25
 	change_icons = 0
 	flame_intensity = 1
 	eye_safety_modifier = 1
@@ -524,7 +523,7 @@
 	desc = "A bulky, cooler-burning welding tool that draws from a worn welding tank."
 	icon_state = "tubewelder"
 	max_fuel = 5
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_POOR)
+	toolspeed = 1.75
 	eye_safety_modifier = 2
 
 /*
@@ -659,7 +658,7 @@
 	use_external_power = 1
 
 /obj/item/weapon/weldingtool/electric/mounted/cyborg
-	tool_qualities = list(TOOL_WELDER = TOOL_QUALITY_DECENT)
+	toolspeed = 0.5
 
 /obj/item/weapon/weldingtool/electric/mounted/exosuit
 	var/obj/item/mecha_parts/mecha_equipment/equip_mount = null

@@ -132,16 +132,6 @@
 	frame_class = FRAME_CLASS_MACHINE
 	frame_size = 4
 
-/datum/frame/frame_types/teleporter_hub
-	name = "Teleporter Hub"
-	frame_class = FRAME_CLASS_MACHINE
-	frame_size = 4
-
-/datum/frame/frame_types/teleporter_station
-	name = "Teleporter Hub"
-	frame_class = FRAME_CLASS_MACHINE
-	frame_size = 4
-
 /datum/frame/frame_types/display
 	name = "Display"
 	frame_class = FRAME_CLASS_DISPLAY
@@ -314,11 +304,11 @@
 	update_icon()
 
 /obj/structure/frame/attackby(obj/item/P as obj, mob/user as mob)
-	if(P.get_tool_quality(TOOL_WRENCH))
+	if(P.is_wrench())
 		if(state == FRAME_PLACED && !anchored)
 			to_chat(user, "<span class='notice'>You start to wrench the frame into place.</span>")
 			playsound(src, P.usesound, 50, 1)
-			if(do_after(user, 20 * P.get_tool_speed(TOOL_WRENCH)))
+			if(do_after(user, 20 * P.toolspeed))
 				anchored = TRUE
 				if(!need_circuit && circuit)
 					state = FRAME_FASTENED
@@ -330,16 +320,16 @@
 
 		else if(state == FRAME_PLACED && anchored)
 			playsound(src, P.usesound, 50, 1)
-			if(do_after(user, 20 * P.get_tool_speed(TOOL_WRENCH)))
+			if(do_after(user, 20 * P.toolspeed))
 				to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 				anchored = FALSE
 
-	else if(P.get_tool_quality(TOOL_WELDER))
+	else if(istype(P, /obj/item/weapon/weldingtool))
 		if(state == FRAME_PLACED)
 			var/obj/item/weapon/weldingtool/WT = P
 			if(WT.remove_fuel(0, user))
 				playsound(src, P.usesound, 50, 1)
-				if(do_after(user, 20 * P.get_tool_speed(TOOL_WELDER)))
+				if(do_after(user, 20 * P.toolspeed))
 					if(src && WT.isOn())
 						to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 						new /obj/item/stack/material/steel(src.loc, frame_type.frame_size)
@@ -367,7 +357,7 @@
 				to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 				return
 
-	else if(P.get_tool_quality(TOOL_SCREWDRIVER))
+	else if(P.is_screwdriver())
 		if(state == FRAME_UNFASTENED)
 			if(need_circuit && circuit)
 				playsound(src, P.usesound, 50, 1)
@@ -462,7 +452,7 @@
 				qdel(src)
 				return
 
-	else if(P.get_tool_quality(TOOL_CROWBAR))
+	else if(P.is_crowbar())
 		if(state == FRAME_UNFASTENED)
 			if(need_circuit && circuit)
 				playsound(src, P.usesound, 50, 1)
@@ -540,7 +530,7 @@
 						break
 				to_chat(user, desc)
 
-	else if(P.get_tool_quality(TOOL_WIRECUTTER))
+	else if(P.is_wirecutter())
 		if(state == FRAME_WIRED)
 			if( \
 				frame_type.frame_class == FRAME_CLASS_COMPUTER || \

@@ -73,7 +73,7 @@
 			phorontanks++
 		else
 			full = TRUE
-	else if(I.get_tool_quality(TOOL_WRENCH))
+	else if(I.is_wrench())
 		if(anchored)
 			to_chat(user, "<span class='notice'>You lean down and unwrench [src].</span>")
 			anchored = 0

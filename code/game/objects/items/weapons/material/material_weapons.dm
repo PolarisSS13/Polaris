@@ -119,8 +119,9 @@
 	T.visible_message("<span class='danger'>\The [src] goes dull!</span>")
 	playsound(src, "shatter", 70, 1)
 	dulled = 1
-	sharp = 0
-	edge = 0
+	if(is_sharp() || has_edge())
+		sharp = 0
+		edge = 0
 
 /obj/item/weapon/material/proc/repair(var/repair_amount, var/repair_time, mob/living/user)
 	if(!fragile)

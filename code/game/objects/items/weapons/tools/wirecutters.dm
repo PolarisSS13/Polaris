@@ -21,7 +21,8 @@
 	pickup_sound = 'sound/items/pickup/wirecutter.ogg'
 	sharp = 1
 	edge = 1
-	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_STANDARD)
+	toolspeed = 1
+	tool_qualities = list(TOOL_WIRECUTTER)
 	var/random_color = TRUE
 
 /obj/item/weapon/tool/wirecutters/Initialize()
@@ -62,7 +63,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wirecutters)
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "cutters"
-	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_BEST)
+	toolspeed = 0.1
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 4)
 	random_color = FALSE
 
@@ -70,7 +71,7 @@
 	name = "wirecutters"
 	desc = "This cuts wires.  With science."
 	usesound = 'sound/items/jaws_cut.ogg'
-	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_GOOD)
+	toolspeed = 0.5
 
 /obj/item/weapon/tool/wirecutters/hybrid
 	name = "strange wirecutters"
@@ -80,6 +81,38 @@
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ENGINEERING = 3, TECH_PHORON = 2)
 	attack_verb = list("pinched", "nipped", "warped", "blasted")
 	usesound = 'sound/effects/stealthoff.ogg'
-	tool_qualities = list(TOOL_WIRECUTTER =  TOOL_QUALITY_GOOD)
+	toolspeed = 0.4
 	reach = 2
-	
+
+/obj/item/weapon/tool/wirecutters/power
+	name = "jaws of life"
+	desc = "A set of jaws of life, compressed through the magic of science. It's fitted with a cutting head."
+	icon_state = "jaws_cutter"
+	item_state = "jawsoflife"
+	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
+	matter = list(MAT_METAL=150, MAT_SILVER=50)
+	usesound = 'sound/items/jaws_cut.ogg'
+	force = 15
+	toolspeed = 0.25
+	random_color = FALSE
+	var/obj/item/weapon/tool/crowbar/power/counterpart = null
+
+/obj/item/weapon/tool/wirecutters/power/Initialize(var/ml, no_counterpart = TRUE)
+	. = ..(ml)
+	if(!counterpart && no_counterpart)
+		counterpart = new(src, FALSE)
+		counterpart.counterpart = src
+
+/obj/item/weapon/tool/wirecutters/power/Destroy()
+	if(counterpart)
+		counterpart.counterpart = null // So it can qdel cleanly.
+		QDEL_NULL(counterpart)
+	return ..()
+
+/obj/item/weapon/tool/wirecutters/power/attack_self(mob/user)
+	playsound(src, 'sound/items/change_jaws.ogg', 50, 1)
+	user.drop_item(src)
+	counterpart.forceMove(get_turf(src))
+	src.forceMove(counterpart)
+	user.put_in_active_hand(counterpart)
+	to_chat(user, "<span class='notice'>You attach the pry jaws to [src].</span>")

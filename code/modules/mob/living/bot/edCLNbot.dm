@@ -193,7 +193,7 @@
 				qdel(W)
 
 		if(7)
-			if(W.get_tool_quality(TOOL_SCREWDRIVER))
+			if(W.is_screwdriver())
 				playsound(src, W.usesound, 100, 1)
 				var/turf/T = get_turf(user)
 				to_chat(user, "<span class='notice'>Attatching the mop to the frame...</span>")

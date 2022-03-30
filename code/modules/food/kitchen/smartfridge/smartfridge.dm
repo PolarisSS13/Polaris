@@ -109,7 +109,7 @@
 ********************/
 
 /obj/machinery/smartfridge/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(O.get_tool_quality(TOOL_SCREWDRIVER))
+	if(O.is_screwdriver())
 		panel_open = !panel_open
 		user.visible_message("[user] [panel_open ? "opens" : "closes"] the maintenance panel of \the [src].", "You [panel_open ? "open" : "close"] the maintenance panel of \the [src].")
 		playsound(src, O.usesound, 50, 1)
@@ -119,7 +119,7 @@
 	if(wrenchable && default_unfasten_wrench(user, O, 20))
 		return
 
-	if(O.get_tool_quality(TOOL_MULTITOOL) || O.get_tool_quality(TOOL_WIRECUTTER))
+	if(istype(O, /obj/item/device/multitool) || O.is_wirecutter())
 		if(panel_open)
 			attack_hand(user)
 		return

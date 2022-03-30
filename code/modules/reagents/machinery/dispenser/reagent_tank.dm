@@ -20,7 +20,7 @@
 
 /obj/structure/reagent_dispensers/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if (W.get_tool_quality(TOOL_WRENCH))
+	if(W.is_wrench())
 		user.visible_message("[user] wrenches [src]'s faucet [faucet ? "closed" : "open"].", \
 			"You wrench [src]'s faucet [faucet ? "closed" : "open"]")
 		faucet = !faucet
@@ -232,7 +232,6 @@
 
 /obj/structure/reagent_dispensers/fueltank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-
 	if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
 			to_chat(user, "<span class='warning'>There is another device in the way.</span>")
@@ -311,7 +310,7 @@
 	return 1
 
 /obj/structure/reagent_dispensers/water_cooler/attackby(obj/item/I as obj, mob/user as mob)
-	if(I.get_tool_quality(TOOL_WRENCH))
+	if(I.is_wrench())
 		src.add_fingerprint(user)
 		if(bottle)
 			playsound(src, I.usesound, 50, 1)
@@ -329,14 +328,14 @@
 				user.visible_message("\The [user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
 			else
 				user.visible_message("\The [user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
-			if(do_after(user, 20 * I.get_tool_speed(TOOL_WRENCH), src))
+			if(do_after(user, 20 * I.toolspeed, src))
 				if(!src) return
 				to_chat(user, "<span class='notice'>You [anchored? "un" : ""]secured \the [src]!</span>")
 				anchored = !anchored
 				playsound(src, I.usesound, 50, 1)
 		return
 
-	if(I.get_tool_quality(TOOL_SCREWDRIVER))
+	if(I.is_screwdriver())
 		if(cupholder)
 			playsound(src, I.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You take the cup dispenser off.</span>")
@@ -351,7 +350,7 @@
 		if(!bottle && !cupholder)
 			playsound(src, I.usesound, 50, 1)
 			to_chat(user, "<span class='notice'>You start taking the water-cooler apart.</span>")
-			if(do_after(user, 20 * I.get_tool_speed(TOOL_SCREWDRIVER)) && !bottle && !cupholder)
+			if(do_after(user, 20 * I.toolspeed) && !bottle && !cupholder)
 				to_chat(user, "<span class='notice'>You take the water-cooler apart.</span>")
 				new /obj/item/stack/material/plastic( src.loc, 4 )
 				qdel(src)

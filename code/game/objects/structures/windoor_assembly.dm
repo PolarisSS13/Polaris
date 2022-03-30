@@ -86,13 +86,13 @@
 
 	switch(state)
 		if("01")
-			if(W.get_tool_quality(TOOL_WELDER) && !anchored )
+			if(istype(W, /obj/item/weapon/weldingtool) && !anchored )
 				var/obj/item/weapon/weldingtool/WT = W
 				if (WT.remove_fuel(0,user))
 					user.visible_message("[user] disassembles the windoor assembly.", "You start to disassemble the windoor assembly.")
 					playsound(src, WT.usesound, 50, 1)
 
-					if(do_after(user, 40 * WT.get_tool_speed(TOOL_WELDER)))
+					if(do_after(user, 40 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
 						to_chat(user,"<span class='notice'>You disassembled the windoor assembly!</span>")
 						if(secure)
@@ -104,32 +104,30 @@
 					to_chat(user,"<span class='notice'>You need more welding fuel to disassemble the windoor assembly.</span>")
 					return
 
-			
-			if(W.get_tool_quality(TOOL_WRENCH))
+			//Wrenching an unsecure assembly anchors it in place. Step 4 complete
+			if(W.is_wrench() && !anchored)
 				playsound(src, W.usesound, 100, 1)
-			
-				//Wrenching an unsecure assembly anchors it in place. Step 4 complete
-				if(!anchored)
-					user.visible_message("[user] secures the windoor assembly to the floor.", "You start to secure the windoor assembly to the floor.")
-					if(do_after(user, 40 * W.get_tool_speed(TOOL_WRENCH)))
-						if(!src)
-							return
-						to_chat(user,"<span class='notice'>You've secured the windoor assembly!</span>")
-						src.anchored = TRUE
-						step = 0
-			
-				//Unwrenching an unsecure assembly un-anchors it. Step 4 undone
-				else
-					user.visible_message("[user] unsecures the windoor assembly to the floor.", "You start to unsecure the windoor assembly to the floor.")
-					if(do_after(user, 40 * W.get_tool_speed(TOOL_WRENCH)))
-						if(!src)
-							return
-						to_chat(user,"<span class='notice'>You've unsecured the windoor assembly!</span>")
-						src.anchored = FALSE
-						step = null
+				user.visible_message("[user] secures the windoor assembly to the floor.", "You start to secure the windoor assembly to the floor.")
+
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src) return
+					to_chat(user,"<span class='notice'>You've secured the windoor assembly!</span>")
+					src.anchored = 1
+					step = 0
+
+			//Unwrenching an unsecure assembly un-anchors it. Step 4 undone
+			else if(W.is_wrench() && anchored)
+				playsound(src, W.usesound, 100, 1)
+				user.visible_message("[user] unsecures the windoor assembly to the floor.", "You start to unsecure the windoor assembly to the floor.")
+
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src) return
+					to_chat(user,"<span class='notice'>You've unsecured the windoor assembly!</span>")
+					src.anchored = 0
+					step = null
 
 			//Adding cable to the assembly. Step 5 complete.
-			else if(W.get_tool_quality(TOOL_CABLE_COIL) && anchored)
+			else if(istype(W, /obj/item/stack/cable_coil) && anchored)
 				user.visible_message("[user] wires the windoor assembly.", "You start to wire the windoor assembly.")
 
 				var/obj/item/stack/cable_coil/CC = W
@@ -144,13 +142,12 @@
 		if("02")
 
 			//Removing wire from the assembly. Step 5 undone.
-			if(W.get_tool_quality(TOOL_WIRECUTTER) && !src.electronics)
+			if(W.is_wirecutter() && !src.electronics)
 				playsound(src, W.usesound, 100, 1)
 				user.visible_message("[user] cuts the wires from the airlock assembly.", "You start to cut the wires from airlock assembly.")
 
-				if(do_after(user, 40 * W.get_tool_speed(TOOL_WIRECUTTER)))
-					if(!src)
-						return
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src) return
 
 					to_chat(user,"<span class='notice'>You cut the windoor wires.!</span>")
 					new/obj/item/stack/cable_coil(get_turf(user), 1)
@@ -174,13 +171,12 @@
 					W.loc = src.loc
 
 			//Screwdriver to remove airlock electronics. Step 6 undone.
-			else if(W.get_tool_quality(TOOL_SCREWDRIVER) && src.electronics)
+			else if(W.is_screwdriver() && src.electronics)
 				playsound(src, W.usesound, 100, 1)
 				user.visible_message("[user] removes the electronics from the airlock assembly.", "You start to uninstall electronics from the airlock assembly.")
 
-				if(do_after(user, 40 * W.get_tool_speed(TOOL_SCREWDRIVER)))
-					if(!src || !src.electronics)
-						return
+				if(do_after(user, 40 * W.toolspeed))
+					if(!src || !src.electronics) return
 					to_chat(user,"<span class='notice'>You've removed the airlock electronics!</span>")
 					step = 1
 					var/obj/item/weapon/airlock_electronics/ae = electronics
@@ -188,7 +184,7 @@
 					ae.loc = src.loc
 
 			//Crowbar to complete the assembly, Step 7 complete.
-			else if(W.get_tool_quality(TOOL_CROWBAR))
+			else if(W.is_crowbar())
 				if(!src.electronics)
 					to_chat(usr,"<span class='warning'>The assembly is missing electronics.</span>")
 					return
@@ -199,9 +195,9 @@
 				playsound(src, W.usesound, 100, 1)
 				user.visible_message("[user] pries the windoor into the frame.", "You start prying the windoor into the frame.")
 
-				if(do_after(user, 40 * W.get_tool_speed(TOOL_CROWBAR)))
-					if(!src)
-						return
+				if(do_after(user, 40 * W.toolspeed))
+
+					if(!src) return
 
 					density = 1 //Shouldn't matter but just incase
 					to_chat(user,"<span class='notice'>You finish the windoor!</span>")

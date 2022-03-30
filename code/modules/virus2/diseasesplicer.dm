@@ -12,7 +12,7 @@
 	var/scanning = 0
 
 /obj/machinery/computer/diseasesplicer/attackby(var/obj/item/I as obj, var/mob/user as mob)
-	if(I.get_tool_quality(TOOL_SCREWDRIVER))
+	if(I.is_screwdriver())
 		return ..(I,user)
 
 	if(default_unfasten_wrench(user, I, 20))

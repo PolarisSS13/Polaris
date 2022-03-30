@@ -70,11 +70,11 @@
 
 /obj/structure/closet/grave/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	if(src.opened)
-		if(W.get_tool_quality(TOOL_SHOVEL))
+		if(istype(W, /obj/item/weapon/shovel))
 			user.visible_message("<span class='notice'>[user] piles dirt into \the [src.name].</span>", \
 								 "<span class='notice'>You start to pile dirt into \the [src.name].</span>", \
 								 "<span class='notice'>You hear dirt being moved.</span>")
-			if(do_after(user, 40 * W.get_tool_speed(TOOL_SHOVEL)))
+			if(do_after(user, 40 * W.toolspeed))
 				user.visible_message("<span class='notice'>[user] pats down the dirt on top of \the [src.name].</span>", \
 								 "<span class='notice'>You finish filling in \the [src.name].</span>")
 				close()
@@ -106,12 +106,12 @@
 		if(W)
 			W.forceMove(src.loc)
 	else
-		if(W.get_tool_quality(TOOL_SHOVEL))
+		if(istype(W, /obj/item/weapon/shovel))
 			if(user.a_intent == I_HURT)	// Hurt intent means you're trying to kill someone, or just get rid of the grave
 				user.visible_message("<span class='notice'>[user] begins to smoothe out the dirt of \the [src.name].</span>", \
 									 "<span class='notice'>You start to smoothe out the dirt of \the [src.name].</span>", \
 									 "<span class='notice'>You hear dirt being moved.</span>")
-				if(do_after(user, 40 * W.get_tool_speed(TOOL_SHOVEL)))
+				if(do_after(user, 40 * W.toolspeed))
 					user.visible_message("<span class='notice'>[user] finishes smoothing out \the [src.name].</span>", \
 										 "<span class='notice'>You finish smoothing out \the [src.name].</span>")
 					if(LAZYLEN(contents))
@@ -127,7 +127,7 @@
 				user.visible_message("<span class='notice'>[user] begins to unearth \the [src.name].</span>", \
 									 "<span class='notice'>You start to unearth \the [src.name].</span>", \
 									 "<span class='notice'>You hear dirt being moved.</span>")
-				if(do_after(user, 40 * W.get_tool_speed(TOOL_SHOVEL)))
+				if(do_after(user, 40 * W.toolspeed))
 					user.visible_message("<span class='notice'>[user] reaches the bottom of \the [src.name].</span>", \
 										 "<span class='notice'>You finish digging out \the [src.name].</span>")
 					break_open()

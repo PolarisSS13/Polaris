@@ -41,7 +41,7 @@
 							state = 2
 							icon_state = "box_1"
 				else
-					if(P.get_tool_quality(TOOL_WRENCH))
+					if(P.is_wrench())
 						playsound(src, W.usesound, 75, 1)
 						to_chat(user, "<span class='notice'>You dismantle the frame</span>")
 						new /obj/item/stack/material/steel(src.loc, 5)
@@ -71,7 +71,7 @@
 					else
 						to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
 				else
-					if(P.get_tool_quality(TOOL_WIRECUTTER))
+					if(P.is_wirecutter())
 						playsound(src, P.usesound, 50, 1)
 						to_chat(user, "<span class='notice'>You remove the cables.</span>")
 						state = 1
@@ -80,7 +80,7 @@
 						A.amount = 5
 
 			if(3)
-				if(P.get_tool_quality(TOOL_CROWBAR))
+				if(P.is_crowbar())
 					playsound(src, P.usesound, 50, 1)
 					state = 2
 					circuit.loc = src.loc
@@ -96,7 +96,7 @@
 					components = null
 					icon_state = "box_1"
 				else
-					if(P.get_tool_quality(TOOL_SCREWDRIVER))
+					if(P.is_screwdriver())
 						var/component_check = 1
 						for(var/R in req_components)
 							if(req_components[R] > 0)
