@@ -41,7 +41,7 @@ var/list/_cat_default_emotes = list(
 	response_disarm = "gently pushes aside"
 	response_harm   = "kicks"
 
-	holder_type = /obj/item/weapon/holder/cat
+	holder_type = /obj/item/holder/cat
 	mob_size = MOB_SMALL
 
 	has_langs = list("Cat")
@@ -128,7 +128,7 @@ var/list/_cat_default_emotes = list(
 	icon_state = "cat"
 	item_state = "cat"
 	named = TRUE
-	holder_type = /obj/item/weapon/holder/cat/runtime
+	holder_type = /obj/item/holder/cat/runtime
 
 /mob/living/simple_mob/animal/passive/cat/kitten
 	name = "kitten"
@@ -147,7 +147,7 @@ var/list/_cat_default_emotes = list(
 	item_state = "cat"
 
 // Leaving this here for now.
-/obj/item/weapon/holder/cat/fluff/bones
+/obj/item/holder/cat/fluff/bones
 	name = "Bones"
 	desc = "It's Bones! Meow."
 	gender = MALE
@@ -160,7 +160,7 @@ var/list/_cat_default_emotes = list(
 	icon_state = "cat3"
 	item_state = "cat3"
 	named = TRUE
-	holder_type = /obj/item/weapon/holder/cat/fluff/bones
+	holder_type = /obj/item/holder/cat/fluff/bones
 
 /datum/say_list/cat
 	speak = list("Meow!","Esp!","Purr!","HSSSSS")
@@ -169,8 +169,8 @@ var/list/_cat_default_emotes = list(
 	say_maybe_target = list("Meow?","Mew?","Mao?")
 	say_got_target = list("MEOW!","HSSSS!","REEER!")
 
-/mob/living/simple_mob/animal/passive/cat/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/pen) || istype(W, /obj/item/device/flashlight/pen))
+/mob/living/simple_mob/animal/passive/cat/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
 		if(named)
 			to_chat(user, "<span class='notice'>\the [name] already has a name!</span>")
 		else
@@ -184,19 +184,19 @@ var/list/_cat_default_emotes = list(
 	else
 		..()
 
-/obj/item/weapon/cat_box
+/obj/item/cat_box
 	name = "faintly purring box"
 	desc = "This box is purring faintly. You're pretty sure there's a cat inside it."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "box"
 	var/cattype = /mob/living/simple_mob/animal/passive/cat
 
-/obj/item/weapon/cat_box/attack_self(var/mob/user)
+/obj/item/cat_box/attack_self(var/mob/user)
 	var/turf/catturf = get_turf(src)
 	to_chat(user, "<span class='notice'>You peek into \the [name]-- and a cat jumps out!</span>")
 	new cattype(catturf)
 	new /obj/item/stack/material/cardboard(catturf) //if i fits i sits
 	qdel(src)
 
-/obj/item/weapon/cat_box/black
+/obj/item/cat_box/black
 	cattype = /mob/living/simple_mob/animal/passive/cat/black

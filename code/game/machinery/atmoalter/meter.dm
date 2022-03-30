@@ -133,5 +133,5 @@
 /obj/machinery/meter/turf/select_target()
 	return loc
 
-/obj/machinery/meter/turf/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/meter/turf/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	return

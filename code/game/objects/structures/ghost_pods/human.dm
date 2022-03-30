@@ -97,7 +97,7 @@
 		H.equip_to_appropriate_slot(C)
 
 	if(spawn_with_emag)
-		var/obj/item/weapon/card/emag/E = new(H)
+		var/obj/item/card/emag/E = new(H)
 		E.name = "broken card"
 		E.description_antag = "This is a 'disguised' emag, to make your escape from wherever you happen to be trapped."
 		H.equip_to_appropriate_slot(E)

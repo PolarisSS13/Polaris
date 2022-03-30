@@ -2,7 +2,7 @@
 	name = "\improper AI system integrity restorer"
 	desc = "Used with intelliCards containing nonfunctional AIs to restore them to working order."
 	req_one_access = list(access_robotics, access_heads)
-	circuit = /obj/item/weapon/circuitboard/aifixer
+	circuit = /obj/item/circuitboard/aifixer
 	icon_keyboard = "tech_key"
 	icon_screen = "ai-fixer"
 	light_color = LIGHT_COLOR_PINK

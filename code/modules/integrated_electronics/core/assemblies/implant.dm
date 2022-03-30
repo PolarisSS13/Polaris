@@ -8,7 +8,7 @@
 	w_class = ITEMSIZE_TINY
 	max_components = IC_COMPONENTS_BASE / 2
 	max_complexity = IC_COMPLEXITY_BASE / 2
-	var/obj/item/weapon/implant/integrated_circuit/implant = null
+	var/obj/item/implant/integrated_circuit/implant = null
 
 /obj/item/device/electronic_assembly/implant/nano_host()
 	return implant

@@ -1,14 +1,14 @@
-/obj/item/weapon/gun/energy
+/obj/item/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
 	icon_state = "energy"
 	fire_sound_text = "laser blast"
 
-	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
+	var/obj/item/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 240 //How much energy is needed to fire.
 
-	var/accept_cell_type = /obj/item/weapon/cell/device
-	var/cell_type = /obj/item/weapon/cell/device/weapon
+	var/accept_cell_type = /obj/item/cell/device
+	var/cell_type = /obj/item/cell/device/weapon
 	projectile_type = /obj/item/projectile/beam/practice
 
 	var/modifystate
@@ -24,10 +24,10 @@
 
 	var/battery_lock = 0	//If set, weapon cannot switch batteries
 
-/obj/item/weapon/gun/energy/Initialize()
+/obj/item/gun/energy/Initialize()
 	. = ..()
 	if(self_recharge)
-		power_supply = new /obj/item/weapon/cell/device/weapon(src)
+		power_supply = new /obj/item/cell/device/weapon(src)
 		START_PROCESSING(SSobj, src)
 	else
 		if(cell_type)
@@ -37,15 +37,15 @@
 
 	update_icon()
 
-/obj/item/weapon/gun/energy/Destroy()
+/obj/item/gun/energy/Destroy()
 	if(self_recharge)
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/weapon/gun/energy/get_cell()
+/obj/item/gun/energy/get_cell()
 	return power_supply
 
-/obj/item/weapon/gun/energy/process()
+/obj/item/gun/energy/process()
 	if(self_recharge) //Every [recharge_time] ticks, recharge a shot for the battery
 		if(world.time > last_shot + charge_delay)	//Doesn't work if you've fired recently
 			if(!power_supply || power_supply.charge >= power_supply.maxcharge)
@@ -58,7 +58,7 @@
 			var/rechargeamt = power_supply.maxcharge*0.2
 
 			if(use_external_power)
-				var/obj/item/weapon/cell/external = get_external_power_supply()
+				var/obj/item/cell/external = get_external_power_supply()
 				if(!external || !external.use(rechargeamt)) //Take power from the borg...
 					return 0
 
@@ -94,30 +94,30 @@
 			charge_tick = 0
 	return 1
 
-/obj/item/weapon/gun/energy/attackby(var/obj/item/A as obj, mob/user as mob)
+/obj/item/gun/energy/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()
 
-/obj/item/weapon/gun/energy/switch_firemodes(mob/user)
+/obj/item/gun/energy/switch_firemodes(mob/user)
 	if(..())
 		update_icon()
 
-/obj/item/weapon/gun/energy/emp_act(severity)
+/obj/item/gun/energy/emp_act(severity)
 	..()
 	update_icon()
 
-/obj/item/weapon/gun/energy/consume_next_projectile()
+/obj/item/gun/energy/consume_next_projectile()
 	if(!power_supply) return null
 	if(!ispath(projectile_type)) return null
 	if(!power_supply.checked_use(charge_cost)) return null
 	return new projectile_type(src)
 
-/obj/item/weapon/gun/energy/proc/load_ammo(var/obj/item/C, mob/user)
-	if(istype(C, /obj/item/weapon/cell))
+/obj/item/gun/energy/proc/load_ammo(var/obj/item/C, mob/user)
+	if(istype(C, /obj/item/cell))
 		if(self_recharge || battery_lock)
 			to_chat(user, "<span class='notice'>[src] does not have a battery port.</span>")
 			return
 		if(istype(C, accept_cell_type))
-			var/obj/item/weapon/cell/P = C
+			var/obj/item/cell/P = C
 			if(power_supply)
 				to_chat(user, "<span class='notice'>[src] already has a power cell.</span>")
 			else
@@ -134,7 +134,7 @@
 			to_chat(user, "<span class='notice'>This cell is not fitted for [src].</span>")
 	return
 
-/obj/item/weapon/gun/energy/proc/unload_ammo(mob/user)
+/obj/item/gun/energy/proc/unload_ammo(mob/user)
 	if(self_recharge || battery_lock)
 		to_chat(user, "<span class='notice'>[src] does not have a battery port.</span>")
 		return
@@ -149,17 +149,17 @@
 	else
 		to_chat(user, "<span class='notice'>[src] does not have a power cell.</span>")
 
-/obj/item/weapon/gun/energy/attackby(var/obj/item/A as obj, mob/user as mob)
+/obj/item/gun/energy/attackby(var/obj/item/A as obj, mob/user as mob)
 	..()
 	load_ammo(A, user)
 
-/obj/item/weapon/gun/energy/attack_hand(mob/user as mob)
+/obj/item/gun/energy/attack_hand(mob/user as mob)
 	if(user.get_inactive_hand() == src)
 		unload_ammo(user)
 	else
 		return ..()
 
-/obj/item/weapon/gun/energy/proc/get_external_power_supply()
+/obj/item/gun/energy/proc/get_external_power_supply()
 	if(isrobot(src.loc))
 		var/mob/living/silicon/robot/R = src.loc
 		return R.cell
@@ -168,12 +168,12 @@
 		if(module.holder && module.holder.wearer)
 			var/mob/living/carbon/human/H = module.holder.wearer
 			if(istype(H) && H.get_rig())
-				var/obj/item/weapon/rig/suit = H.get_rig()
+				var/obj/item/rig/suit = H.get_rig()
 				if(istype(suit))
 					return suit.cell
 	return null
 
-/obj/item/weapon/gun/energy/examine(mob/user)
+/obj/item/gun/energy/examine(mob/user)
 	. = ..()
 	if(power_supply)
 		if(charge_cost)
@@ -184,7 +184,7 @@
 	else
 		. += "Does not have a power cell."
 
-/obj/item/weapon/gun/energy/update_icon(var/ignore_inhands)
+/obj/item/gun/energy/update_icon(var/ignore_inhands)
 	if(power_supply == null)
 		if(modifystate)
 			icon_state = "[modifystate]_open"
@@ -213,14 +213,14 @@
 
 	if(!ignore_inhands) update_held_icon()
 
-/obj/item/weapon/gun/energy/proc/start_recharge()
+/obj/item/gun/energy/proc/start_recharge()
 	if(power_supply == null)
-		power_supply = new /obj/item/weapon/cell/device/weapon(src)
+		power_supply = new /obj/item/cell/device/weapon(src)
 	self_recharge = 1
 	START_PROCESSING(SSobj, src)
 	update_icon()
 
-/obj/item/weapon/gun/energy/get_description_interaction()
+/obj/item/gun/energy/get_description_interaction()
 	var/list/results = list()
 
 	if(!battery_lock && !self_recharge)

@@ -313,10 +313,10 @@ GLOBAL_LIST_EMPTY(all_cataloguers)
 	interact(usr) // So it refreshes the window.
 	return 1
 
-/obj/item/device/cataloguer/attackby(obj/item/weapon/W, mob/user)
-	if(istype(W, /obj/item/weapon/card/id) && !busy)
+/obj/item/device/cataloguer/attackby(obj/item/W, mob/user)
+	if(istype(W, /obj/item/card/id) && !busy)
 		busy = TRUE
-		var/obj/item/weapon/card/id/ID = W
+		var/obj/item/card/id/ID = W
 		if(points_stored)
 			ID.survey_points += points_stored
 			points_stored = 0

@@ -7,7 +7,7 @@
 	matter = list(MAT_STEEL = 100)
 	w_class = ITEMSIZE_SMALL
 
-/obj/item/weapon/storage/bag/fossils
+/obj/item/storage/bag/fossils
 	name = "Fossil Satchel"
 	desc = "Transports delicate fossils in suspension so they don't break during transit."
 	icon = 'icons/obj/mining.dmi'
@@ -17,16 +17,16 @@
 	storage_slots = 50
 	max_storage_space = ITEMSIZE_COST_NORMAL * 50
 	max_w_class = ITEMSIZE_NORMAL
-	can_hold = list(/obj/item/weapon/fossil)
+	can_hold = list(/obj/item/fossil)
 
-/obj/item/weapon/storage/box/samplebags
+/obj/item/storage/box/samplebags
 	name = "sample bag box"
 	desc = "A box claiming to contain sample bags."
 
-/obj/item/weapon/storage/box/samplebags/Initialize()
+/obj/item/storage/box/samplebags/Initialize()
 	. = ..()
 	for(var/i = 1 to 7)
-		var/obj/item/weapon/evidencebag/S = new(src)
+		var/obj/item/evidencebag/S = new(src)
 		S.name = "sample bag"
 		S.desc = "a bag for holding research samples."
 

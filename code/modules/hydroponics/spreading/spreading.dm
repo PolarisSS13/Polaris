@@ -234,12 +234,12 @@
 	floor = 1
 	return 1
 
-/obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/plant/attackby(var/obj/item/W, var/mob/user)
 
 	user.setClickCooldown(user.get_attack_speed(W))
 	plant_controller.add_plant(src)
 
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/surgical/scalpel))
+	if(W.is_wirecutter() || istype(W, /obj/item/surgical/scalpel))
 		if(sampled)
 			to_chat(user, "<span class='warning'>\The [src] has already been sampled recently.</span>")
 			return

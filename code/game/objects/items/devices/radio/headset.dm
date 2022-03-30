@@ -333,7 +333,7 @@
 		return -1 //Transciever Disabled.
 	return ..(freq, level, 1)
 
-/obj/item/device/radio/headset/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/device/radio/headset/attackby(obj/item/W as obj, mob/user as mob)
 //	..()
 	user.set_machine(src)
 	if(!(W.is_screwdriver() || istype(W, /obj/item/device/encryptionkey)))

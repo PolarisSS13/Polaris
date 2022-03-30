@@ -5,7 +5,7 @@
 
 	cut_overlays()
 	underlays.Cut()
-	var/obj/item/weapon/robot_module/robot/platform/tank_module = module
+	var/obj/item/robot_module/robot/platform/tank_module = module
 	if(!istype(tank_module))
 		icon = initial(icon)
 		icon_state = initial(icon_state)
@@ -60,7 +60,7 @@
 
 /mob/living/silicon/robot/platform/proc/try_paint(var/obj/item/device/floor_painter/painting, var/mob/user)
 
-	var/obj/item/weapon/robot_module/robot/platform/tank_module = module
+	var/obj/item/robot_module/robot/platform/tank_module = module
 	if(!istype(tank_module))
 		to_chat(user, SPAN_WARNING("\The [src] is not paintable."))
 		return FALSE

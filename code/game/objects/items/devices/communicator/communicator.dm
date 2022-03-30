@@ -97,8 +97,8 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 	if(ismob(loc))
 		register_device(loc.name)
 		initialize_exonet(loc)
-	else if(istype(loc, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = loc
+	else if(istype(loc, /obj/item/storage))
+		var/obj/item/storage/S = loc
 		if(ismob(S.loc))
 			register_device(S.loc.name)
 			initialize_exonet(S.loc)
@@ -207,8 +207,8 @@ var/global/list/obj/item/device/communicator/all_communicators = list()
 // Description: When an ID is swiped on the communicator, the communicator reads the job and checks it against the Owner name, if success, the occupation is added.
 /obj/item/device/communicator/attackby(obj/item/C as obj, mob/user as mob)
 	..()
-	if(istype(C, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/idcard = C
+	if(istype(C, /obj/item/card/id))
+		var/obj/item/card/id/idcard = C
 		if(!idcard.registered_name || !idcard.assignment)
 			to_chat(user, "<span class='notice'>\The [src] rejects the ID.</span>")
 		else if(!owner)

@@ -1,47 +1,47 @@
-/datum/design/item/weapon/mining/AssembleDesignName()
+/datum/design/item/mining/AssembleDesignName()
 	..()
 	name = "Mining equipment design ([item_name])"
 
 // Mining digging devices
 
-/datum/design/item/weapon/mining/drill
+/datum/design/item/mining/drill
 	id = "drill"
 	req_tech = list(TECH_MATERIAL = 2, TECH_POWER = 3, TECH_ENGINEERING = 2)
 	materials = list(MAT_STEEL = 6000, "glass" = 1000) //expensive, but no need for miners.
-	build_path = /obj/item/weapon/pickaxe/drill
+	build_path = /obj/item/pickaxe/drill
 	sort_string = "FAAAA"
 
-/datum/design/item/weapon/mining/jackhammer
+/datum/design/item/mining/jackhammer
 	id = "jackhammer"
 	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2)
 	materials = list(MAT_STEEL = 2000, "glass" = 500, "silver" = 500)
-	build_path = /obj/item/weapon/pickaxe/jackhammer
+	build_path = /obj/item/pickaxe/jackhammer
 	sort_string = "FAAAB"
 
-/datum/design/item/weapon/mining/plasmacutter
+/datum/design/item/mining/plasmacutter
 	id = "plasmacutter"
 	req_tech = list(TECH_MATERIAL = 4, TECH_PHORON = 3, TECH_ENGINEERING = 3)
 	materials = list(MAT_STEEL = 1500, "glass" = 500, "gold" = 500, "phoron" = 500)
-	build_path = /obj/item/weapon/pickaxe/plasmacutter
+	build_path = /obj/item/pickaxe/plasmacutter
 	sort_string = "FAAAC"
 
-/datum/design/item/weapon/mining/pick_diamond
+/datum/design/item/mining/pick_diamond
 	id = "pick_diamond"
 	req_tech = list(TECH_MATERIAL = 6)
 	materials = list("diamond" = 3000)
-	build_path = /obj/item/weapon/pickaxe/diamond
+	build_path = /obj/item/pickaxe/diamond
 	sort_string = "FAAAD"
 
-/datum/design/item/weapon/mining/drill_diamond
+/datum/design/item/mining/drill_diamond
 	id = "drill_diamond"
 	req_tech = list(TECH_MATERIAL = 6, TECH_POWER = 4, TECH_ENGINEERING = 4)
 	materials = list(MAT_STEEL = 3000, "glass" = 1000, "diamond" = 2000)
-	build_path = /obj/item/weapon/pickaxe/diamonddrill
+	build_path = /obj/item/pickaxe/diamonddrill
 	sort_string = "FAAAE"
 
 // Mining other equipment
 
-/datum/design/item/weapon/mining/depth_scanner
+/datum/design/item/mining/depth_scanner
 	desc = "Used to check spatial depth and density of rock outcroppings."
 	id = "depth_scanner"
 	req_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)

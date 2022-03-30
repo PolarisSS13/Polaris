@@ -1,7 +1,7 @@
 /obj/machinery/computer/fusion_core_control
 	name = "\improper R-UST Mk. 8 core control"
 	light_color = COLOR_ORANGE
-	circuit = /obj/item/weapon/circuitboard/fusion_core_control
+	circuit = /obj/item/circuitboard/fusion_core_control
 
 	icon_keyboard = "tech_key"
 	icon_screen = "core_control"

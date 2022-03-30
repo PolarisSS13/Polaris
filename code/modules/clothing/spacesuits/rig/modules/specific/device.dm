@@ -48,7 +48,7 @@
 	suit_overlay_inactive = "plasmacutter"
 	use_power_cost = 0.5
 
-	device_type = /obj/item/weapon/pickaxe/plasmacutter
+	device_type = /obj/item/pickaxe/plasmacutter
 
 /obj/item/rig_module/device/healthscanner
 	name = "health scanner module"
@@ -69,7 +69,7 @@
 	suit_overlay_inactive = "mounted-drill"
 	use_power_cost = 0.1
 
-	device_type = /obj/item/weapon/pickaxe/diamonddrill
+	device_type = /obj/item/pickaxe/diamonddrill
 
 /obj/item/rig_module/device/anomaly_scanner
 	name = "hardsuit anomaly scanner"
@@ -91,7 +91,7 @@
 	engage_string = "Begin Scan"
 	usable = 1
 	selectable = 0
-	device_type = /obj/item/weapon/mining_scanner
+	device_type = /obj/item/mining_scanner
 
 /obj/item/rig_module/device/rcd
 	name = "RCD mount"
@@ -102,7 +102,7 @@
 	usable = 1
 	engage_string = "Configure RCD"
 
-	device_type = /obj/item/weapon/rcd/electric/mounted/rig
+	device_type = /obj/item/rcd/electric/mounted/rig
 
 /obj/item/rig_module/device/arch_drill
 	name = "archaeology drill mount"
@@ -113,7 +113,7 @@
 	usable = 1
 	engage_string = "Configure Drill Depth"
 
-	device_type = /obj/item/weapon/pickaxe/excavationdrill
+	device_type = /obj/item/pickaxe/excavationdrill
 
 /obj/item/rig_module/device/paperdispenser
 	name = "hardsuit paper dispenser"
@@ -124,7 +124,7 @@
 	engage_string = "Dispense"
 	usable = 1
 	selectable = 0
-	device_type = /obj/item/weapon/paper_bin
+	device_type = /obj/item/paper_bin
 
 /obj/item/rig_module/device/paperdispenser/engage(atom/target)
 
@@ -143,7 +143,7 @@
 	interface_desc = "Signatures with style(tm)."
 	engage_string = "Change color"
 	usable = 1
-	device_type = /obj/item/weapon/pen/multi
+	device_type = /obj/item/pen/multi
 
 /obj/item/rig_module/device/stamp
 	name = "mounted internal affairs stamp"
@@ -158,8 +158,8 @@
 
 /obj/item/rig_module/device/stamp/Initialize()
 	. = ..()
-	iastamp = new /obj/item/weapon/stamp/internalaffairs(src)
-	deniedstamp = new /obj/item/weapon/stamp/denied(src)
+	iastamp = new /obj/item/stamp/internalaffairs(src)
+	deniedstamp = new /obj/item/stamp/denied(src)
 	device = iastamp
 
 /obj/item/rig_module/device/stamp/engage(atom/target)

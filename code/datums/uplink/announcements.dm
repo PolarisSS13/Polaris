@@ -27,7 +27,7 @@
 /datum/uplink_item/abstract/announcements/fake_centcom/get_goods(var/obj/item/device/uplink/U, var/loc, var/mob/user, var/list/args)
 	for (var/obj/machinery/computer/communications/C in machines)
 		if(! (C.stat & (BROKEN|NOPOWER) ) )
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper( C.loc )
+			var/obj/item/paper/P = new /obj/item/paper( C.loc )
 			P.name = "'[command_name()] Update.'"
 			P.info = replacetext(args["message"], "\n", "<br/>")
 			P.update_space(P.info)
@@ -45,7 +45,7 @@
 	if(!user)
 		return 0
 
-	var/obj/item/weapon/card/id/I = user.GetIdCard()
+	var/obj/item/card/id/I = user.GetIdCard()
 	var/datum/data/record/random_general_record
 	var/datum/data/record/random_medical_record
 	if(data_core.general.len)

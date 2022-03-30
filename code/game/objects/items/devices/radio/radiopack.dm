@@ -41,7 +41,7 @@
 		add_fingerprint(usr)
 		M.put_in_any_hand_if_possible(src)
 
-/obj/item/device/bluespaceradio/attackby(var/obj/item/weapon/W, var/mob/user, var/params)
+/obj/item/device/bluespaceradio/attackby(var/obj/item/W, var/mob/user, var/params)
 	if(W == handset)
 		reattach_handset(user)
 	else

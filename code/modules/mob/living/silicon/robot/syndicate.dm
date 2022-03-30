@@ -4,11 +4,11 @@
 	icon_state = "securityrobot"
 	modtype = "Security"
 	lawchannel = "State"
-	idcard_type = /obj/item/weapon/card/id/syndicate
+	idcard_type = /obj/item/card/id/syndicate
 
 /mob/living/silicon/robot/syndicate/Initialize()
 	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
+		cell = new /obj/item/cell(src)
 		cell.maxcharge = 25000
 		cell.charge = 25000
 	. = ..()
@@ -19,7 +19,7 @@
 	laws = new /datum/ai_laws/syndicate_override
 	overlays.Cut()
 	init_id()
-	new /obj/item/weapon/robot_module/robot/syndicate(src)
+	new /obj/item/robot_module/robot/syndicate(src)
 
 	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
 	radio.recalculateChannels()

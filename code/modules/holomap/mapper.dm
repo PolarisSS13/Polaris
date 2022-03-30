@@ -28,8 +28,8 @@
 	var/datum/mini_hud/mapper/hud_datum
 	var/obj/screen/movable/mapper_holder/hud_item
 
-	var/obj/item/weapon/cell/cell
-	var/cell_type = /obj/item/weapon/cell/device
+	var/obj/item/cell/cell
+	var/cell_type = /obj/item/cell/device
 	var/power_usage = 0.5 // Usage per map scan (doubled for ping mode)
 	var/uses_power = 1 // If it uses power at all
 
@@ -68,10 +68,10 @@
 	)
 	
 	prefix_update_rig = list(
-		"/obj/item/weapon/rig/ert" = "ertc",
-		"/obj/item/weapon/rig/ert/security" = "erts",
-		"/obj/item/weapon/rig/ert/engineer" = "erte",
-		"/obj/item/weapon/rig/ert/medical" = "ertm"
+		"/obj/item/rig/ert" = "ertc",
+		"/obj/item/rig/ert/security" = "erts",
+		"/obj/item/rig/ert/engineer" = "erte",
+		"/obj/item/rig/ert/medical" = "ertm"
 	)
 
 /obj/item/device/mapping_unit/Initialize()
@@ -381,7 +381,7 @@
 	if (prefix_update_rig)
 		if(ishuman(loc))
 			var/mob/living/carbon/human/H = loc
-			var/obj/item/weapon/rig = H.get_rig()
+			var/obj/item/rig = H.get_rig()
 			if(rig && ("[rig.type]" in prefix_update_rig))
 				marker_prefix = prefix_update_rig["[rig.type]"]
 				return

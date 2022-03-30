@@ -1,6 +1,6 @@
 //Version of the newspaper that uses the lobby-style news reports from one channel only. Currently unused.
 
-/obj/item/weapon/newspaper
+/obj/item/newspaper
 	name = "newspaper"
 	desc = "This seems to be a generic, worn up newspaper."
 	icon = 'icons/obj/bureaucracy.dmi'
@@ -14,7 +14,7 @@
 	pickup_sound = 'sound/items/pickup/wrapper.ogg'
 	drop_sound = 'sound/items/drop/paper.ogg'
 
-/obj/item/weapon/newspaper/Initialize()
+/obj/item/newspaper/Initialize()
 	. = ..()
 	if(!news_source && GLOB.news_data)
 		news_source = GLOB.news_data.station_newspaper
@@ -24,7 +24,7 @@
 		desc = "This is a newspaper that contains the articles of the [news_source.channel_name]."
 
 
-/obj/item/weapon/newspaper/attack_self(mob/user)
+/obj/item/newspaper/attack_self(mob/user)
 	var/dat
 
 	if(!current_news_page)
@@ -47,7 +47,7 @@
 	popup.open()
 
 
-/obj/item/weapon/newspaper/Topic(href, href_list[])
+/obj/item/newspaper/Topic(href, href_list[])
 	..()
 
 	if(href_list["next_news"])

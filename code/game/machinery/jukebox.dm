@@ -10,7 +10,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 100
-	circuit = /obj/item/weapon/circuitboard/jukebox
+	circuit = /obj/item/circuitboard/jukebox
 	clicksound = 'sound/machines/buttonbeep.ogg'
 
 	var/playing = 0

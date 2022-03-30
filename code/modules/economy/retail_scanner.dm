@@ -165,16 +165,16 @@
 
 /obj/item/device/retail_scanner/attackby(obj/O as obj, user as mob)
 	// Check for a method of paying (ID, PDA, e-wallet, cash, ect.)
-	var/obj/item/weapon/card/id/I = O.GetID()
+	var/obj/item/card/id/I = O.GetID()
 	if(I)
 		scan_card(I, O)
-	else if (istype(O, /obj/item/weapon/spacecash/ewallet))
-		var/obj/item/weapon/spacecash/ewallet/E = O
+	else if (istype(O, /obj/item/spacecash/ewallet))
+		var/obj/item/spacecash/ewallet/E = O
 		scan_wallet(E)
-	else if (istype(O, /obj/item/weapon/spacecash))
+	else if (istype(O, /obj/item/spacecash))
 		to_chat(usr, "<span class='warning'>This device does not accept cash.</span>")
 
-	else if(istype(O, /obj/item/weapon/card/emag))
+	else if(istype(O, /obj/item/card/emag))
 		return ..()
 	// Not paying: Look up price and add it to transaction_amount
 	else
@@ -196,7 +196,7 @@
 		return 0
 
 
-/obj/item/device/retail_scanner/proc/scan_card(var/obj/item/weapon/card/id/I, var/obj/item/ID_container)
+/obj/item/device/retail_scanner/proc/scan_card(var/obj/item/card/id/I, var/obj/item/ID_container)
 	if (!transaction_amount)
 		return
 
@@ -256,7 +256,7 @@
 					transaction_complete()
 
 
-/obj/item/device/retail_scanner/proc/scan_wallet(var/obj/item/weapon/spacecash/ewallet/E)
+/obj/item/device/retail_scanner/proc/scan_wallet(var/obj/item/spacecash/ewallet/E)
 	if (!transaction_amount)
 		return
 

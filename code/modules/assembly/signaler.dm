@@ -71,7 +71,7 @@
 
 	update_icon()
 
-/obj/item/device/assembly/signaler/attackby(var/obj/item/weapon/W, mob/user, params)
+/obj/item/device/assembly/signaler/attackby(var/obj/item/W, mob/user, params)
 	if(issignaler(W))
 		var/obj/item/device/assembly/signaler/signaler2 = W
 		if(secured && signaler2.secured)

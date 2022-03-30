@@ -2,7 +2,7 @@
 	name = "gyrotron control console"
 	desc = "Used to control the R-UST stability beams."
 	light_color = COLOR_BLUE
-	circuit = /obj/item/weapon/circuitboard/gyrotron_control
+	circuit = /obj/item/circuitboard/gyrotron_control
 
 	icon_keyboard = "generic_key"
 	icon_screen = "mass_driver"

@@ -61,7 +61,7 @@
 	id = "chameleon"
 	req_tech = list(TECH_ILLEGAL = 2)
 	materials = list(MAT_STEEL = 500)
-	build_path = /obj/item/weapon/storage/box/syndie_kit/chameleon
+	build_path = /obj/item/storage/box/syndie_kit/chameleon
 	sort_string = "TBAAB"
 
 /datum/design/item/general/bsflare

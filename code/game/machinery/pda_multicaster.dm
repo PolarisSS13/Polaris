@@ -5,7 +5,7 @@
 	icon_state = "pdamulti"
 	density = 1
 	anchored = 1
-	circuit = /obj/item/weapon/circuitboard/telecomms/pda_multicaster
+	circuit = /obj/item/circuitboard/telecomms/pda_multicaster
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 750
 	var/on = 1		// If we're currently active,

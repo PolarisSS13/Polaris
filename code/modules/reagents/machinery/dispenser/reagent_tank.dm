@@ -16,7 +16,7 @@
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = list(10,25,50,100)
 
-/obj/structure/reagent_dispensers/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 
 /obj/structure/reagent_dispensers/Destroy()
@@ -131,7 +131,7 @@
 			rig = null
 			overlays = new/list()
 
-/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/reagent_dispensers/fueltank/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if (W.is_wrench())
 		user.visible_message("[user] wrenches [src]'s faucet [modded ? "closed" : "open"].", \
@@ -271,7 +271,7 @@
 			playsound(src, I.usesound, 50, 1)
 			if(do_after(user, 20) && bottle)
 				to_chat(user, "<span class='notice'>You unfasten the jug.</span>")
-				var/obj/item/weapon/reagent_containers/glass/cooler_bottle/G = new /obj/item/weapon/reagent_containers/glass/cooler_bottle( src.loc )
+				var/obj/item/reagent_containers/glass/cooler_bottle/G = new /obj/item/reagent_containers/glass/cooler_bottle( src.loc )
 				for(var/datum/reagent/R in reagents.reagent_list)
 					var/total_reagent = reagents.get_reagent_amount(R.id)
 					G.reagents.add_reagent(R.id, total_reagent)
@@ -297,7 +297,7 @@
 			new /obj/item/stack/material/plastic( src.loc )
 			if(cups)
 				for(var/i = 0 to cups)
-					new /obj/item/weapon/reagent_containers/food/drinks/sillycup(src.loc)
+					new /obj/item/reagent_containers/food/drinks/sillycup(src.loc)
 			cups = 0
 			cupholder = 0
 			update_icon()
@@ -311,11 +311,11 @@
 				qdel(src)
 		return
 
-	if(istype(I, /obj/item/weapon/reagent_containers/glass/cooler_bottle))
+	if(istype(I, /obj/item/reagent_containers/glass/cooler_bottle))
 		src.add_fingerprint(user)
 		if(!bottle)
 			if(anchored)
-				var/obj/item/weapon/reagent_containers/glass/cooler_bottle/G = I
+				var/obj/item/reagent_containers/glass/cooler_bottle/G = I
 				to_chat(user, "<span class='notice'>You start to screw the bottle onto the water-cooler.</span>")
 				if(do_after(user, 20) && !bottle && anchored)
 					bottle = 1
@@ -351,7 +351,7 @@
 
 /obj/structure/reagent_dispensers/water_cooler/attack_hand(mob/user)
 	if(cups)
-		new /obj/item/weapon/reagent_containers/food/drinks/sillycup(src.loc)
+		new /obj/item/reagent_containers/food/drinks/sillycup(src.loc)
 		cups--
 		flick("[icon_state]-vend", src)
 		return

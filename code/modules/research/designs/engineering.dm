@@ -10,7 +10,7 @@
 	id = "expwelder"
 	req_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3, TECH_MATERIAL = 4)
 	materials = list(MAT_STEEL = 70, "glass" = 120, "phoron" = 100)
-	build_path = /obj/item/weapon/weldingtool/experimental
+	build_path = /obj/item/weldingtool/experimental
 	sort_string = "NAAAA"
 
 /datum/design/item/tool/hand_drill
@@ -19,7 +19,7 @@
 	id = "handdrill"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 300, "silver" = 100)
-	build_path = /obj/item/weapon/tool/screwdriver/power
+	build_path = /obj/item/tool/screwdriver/power
 	sort_string = "NAAAB"
 
 /datum/design/item/tool/jaws_life
@@ -28,7 +28,7 @@
 	id = "jawslife"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 2)
 	materials = list(MAT_STEEL = 300, "silver" = 100)
-	build_path = /obj/item/weapon/tool/crowbar/power
+	build_path = /obj/item/tool/crowbar/power
 	sort_string = "NAAAC"
 
 // Other devices

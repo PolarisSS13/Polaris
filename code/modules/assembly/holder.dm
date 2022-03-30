@@ -102,7 +102,7 @@
 		a_right.holder_movement()
 	..()
 
-/obj/item/device/assembly_holder/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/item/device/assembly_holder/attackby(var/obj/item/W, var/mob/user)
 	if(W.is_screwdriver())
 		if(!a_left || !a_right)
 			to_chat(user, "<span class='warning'> BUG:Assembly part missing, please report this!</span>")
@@ -201,8 +201,8 @@
 
 	if ( !(usr.stat || usr.restrained()) )
 		var/obj/item/device/assembly_holder/holder
-		if(istype(src,/obj/item/weapon/grenade/chem_grenade))
-			var/obj/item/weapon/grenade/chem_grenade/gren = src
+		if(istype(src,/obj/item/grenade/chem_grenade))
+			var/obj/item/grenade/chem_grenade/gren = src
 			holder=gren.detonator
 		var/obj/item/device/assembly/timer/tmr = holder.a_left
 		if(!istype(tmr,/obj/item/device/assembly/timer))

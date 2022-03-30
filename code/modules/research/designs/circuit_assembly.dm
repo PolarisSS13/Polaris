@@ -19,7 +19,7 @@
 	id = "ic_printer_upgrade_adv"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_DATA = 4)
 	materials = list(MAT_STEEL = 2000)
-	build_path = /obj/item/weapon/disk/integrated_circuit/upgrade/advanced
+	build_path = /obj/item/disk/integrated_circuit/upgrade/advanced
 	sort_string = "UBAAA"
 
 /datum/design/item/integrated_circuitry/wirer
@@ -95,5 +95,5 @@
 	id = "assembly-implant"
 	req_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 4, TECH_POWER = 3, TECH_BIO = 5)
 	materials = list(MAT_STEEL = 2000)
-	build_path = /obj/item/weapon/implant/integrated_circuit
+	build_path = /obj/item/implant/integrated_circuit
 	sort_string = "UDAAF"

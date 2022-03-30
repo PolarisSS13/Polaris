@@ -49,7 +49,7 @@
 		use(1, user)
 
 // Generic use
-/obj/item/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/device/kit))
 		var/obj/item/device/kit/K = W
 		K.customize(src, user)
@@ -155,7 +155,7 @@
 	uses = 1
 
 /obj/item/device/kit/suit/rig/customize(var/obj/item/I, var/mob/user)
-	var/obj/item/weapon/rig/RIG = I
+	var/obj/item/rig/RIG = I
 	RIG.suit_state = new_icon
 	RIG.item_state = new_icon
 	RIG.suit_type = "customized [initial(RIG.suit_type)]"
@@ -188,9 +188,9 @@
 	use(1,user)
 
 /obj/item/device/kit/suit/rig/can_customize(var/obj/item/I)
-	return istype(I, /obj/item/weapon/rig)
+	return istype(I, /obj/item/rig)
 
-/obj/item/weapon/rig/attackby(var/obj/item/O, var/mob/user)
+/obj/item/rig/attackby(var/obj/item/O, var/mob/user)
 	if(istype(O,/obj/item/device/kit/suit))
 		var/obj/item/device/kit/suit/rig/kit = O
 		kit.customize(src, user)
@@ -245,7 +245,7 @@
 	M.update_icon()
 	use(1, user)
 
-/obj/mecha/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/mecha/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W, /obj/item/device/kit/paint))
 		var/obj/item/device/kit/paint/P = W
 		P.customize(src, user)

@@ -22,7 +22,7 @@
 	especially useful if short on time or in a hostile enviroment."
 	icon = 'icons/obj/robobag.dmi'
 	item_path = /obj/item/bodybag/cryobag/robobag
-	tank_type = /obj/item/weapon/tank/stasis/nitro_cryo
+	tank_type = /obj/item/tank/stasis/nitro_cryo
 	stasis_level = 2	// Lower than the normal cryobag, because it's not made for meat that dies. It's made for robots and is freezing.
 	var/obj/item/clothing/accessory/badge/corptag	// The tag on the bag.
 

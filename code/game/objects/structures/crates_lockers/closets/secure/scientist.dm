@@ -8,16 +8,16 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/device/radio/headset/headset_sci,
-		/obj/item/weapon/tank/air,
+		/obj/item/tank/air,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
 		/obj/item/clothing/shoes/boots/winter/science)
 
 /obj/structure/closet/secure_closet/scientist/Initialize()
 	if(prob(50))
-		starts_with += /obj/item/weapon/storage/backpack/dufflebag/sci
+		starts_with += /obj/item/storage/backpack/dufflebag/sci
 	else
-		starts_with += /obj/item/weapon/storage/backpack/toxins
+		starts_with += /obj/item/storage/backpack/toxins
 	return ..()
 
 
@@ -34,13 +34,13 @@
 		/obj/item/clothing/under/rank/research_director/dress_rd,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/suit/storage/toggle/labcoat/rd,
-		/obj/item/weapon/cartridge/rd,
+		/obj/item/cartridge/rd,
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/shoes/laceup/brown,
 		/obj/item/clothing/gloves/sterile/latex,
 		/obj/item/device/radio/headset/heads/rd,
 		/obj/item/device/radio/headset/heads/rd/alt,
-		/obj/item/weapon/tank/air,
+		/obj/item/tank/air,
 		/obj/item/clothing/mask/gas,
 		/obj/item/device/flash,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
@@ -55,19 +55,19 @@
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
-		/obj/item/weapon/melee/umbrella, // vorestation addition,
+		/obj/item/melee/umbrella, // vorestation addition,
 		/obj/item/clothing/glasses/science,
 		/obj/item/device/radio/headset/headset_sci,
-		/obj/item/weapon/storage/belt/archaeology,
-		/obj/item/weapon/storage/excavation)
+		/obj/item/storage/belt/archaeology,
+		/obj/item/storage/excavation)
 
 /obj/structure/closet/excavation
 	name = "Excavation tools"
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/tools/xenoarch
 
 	starts_with = list(
-		/obj/item/weapon/storage/belt/archaeology,
-		/obj/item/weapon/storage/excavation,
+		/obj/item/storage/belt/archaeology,
+		/obj/item/storage/excavation,
 		/obj/item/device/flashlight/lantern,
 		/obj/item/device/ano_scanner,
 		/obj/item/device/depth_scanner,
@@ -76,8 +76,8 @@
 		/obj/item/device/beacon_locator,
 		/obj/item/device/radio/beacon,
 		/obj/item/clothing/glasses/meson,
-		/obj/item/weapon/pickaxe,
+		/obj/item/pickaxe,
 		/obj/item/device/measuring_tape,
-		/obj/item/weapon/pickaxe/hand,
-		/obj/item/weapon/storage/bag/fossils,
-		/obj/item/weapon/hand_labeler)
+		/obj/item/pickaxe/hand,
+		/obj/item/storage/bag/fossils,
+		/obj/item/hand_labeler)

@@ -30,7 +30,7 @@
 
 /obj/vehicle/bike/Initialize()
 	. = ..()
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/cell/high(src)
 	ion = new /datum/effect_system/ion_trail_follow()
 	ion.set_up(src)
 	turn_off()
@@ -46,7 +46,7 @@
 	paint_color = rgb(rand(1,255),rand(1,255),rand(1,255))
 	. = ..()
 
-/obj/vehicle/bike/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/vehicle/bike/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W, /obj/item/device/multitool) && open)
 		var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
 		if(new_paint)

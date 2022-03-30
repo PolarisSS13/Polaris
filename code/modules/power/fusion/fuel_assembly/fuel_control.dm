@@ -1,7 +1,7 @@
 /obj/machinery/computer/fusion_fuel_control
 	name = "fuel injection control computer"
 	desc = "Displays information about the fuel rods."
-	circuit = /obj/item/weapon/circuitboard/fusion_fuel_control
+	circuit = /obj/item/circuitboard/fusion_fuel_control
 
 	icon_keyboard = "tech_key"
 	icon_screen = "fuel_screen"

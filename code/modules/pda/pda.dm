@@ -17,7 +17,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/pdachoice = 1
 	var/owner = null
 	var/default_cartridge = 0 // Access level defined by cartridge
-	var/obj/item/weapon/cartridge/cartridge = null //current cartridge
+	var/obj/item/cartridge/cartridge = null //current cartridge
 
 	//Secondary variables
 	var/model_name = "Thinktronic 5230 Personal Data Assistant"
@@ -38,7 +38,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/hidden = 0 // Is the PDA hidden from the PDA list?
 	var/touch_silent = 0 //If 1, no beeps on interacting.
 
-	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
+	var/obj/item/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above - this is assignment (potentially alt title)
 	var/ownrank = null // this one is rank, never alt title
 
@@ -120,7 +120,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
 		cartridge.update_programs(src)
-	new /obj/item/weapon/pen(src)
+	new /obj/item/pen(src)
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
@@ -283,7 +283,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		id = null
 
 /obj/item/device/pda/proc/remove_pen()
-	var/obj/item/weapon/pen/O = locate() in src
+	var/obj/item/pen/O = locate() in src
 	if(O)
 		if(istype(loc, /mob))
 			var/mob/M = loc
@@ -380,13 +380,13 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			return 1
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
+			if (istype(I, /obj/item/card/id) && user.unEquip(I))
 				I.loc = src
 				id = I
 			return 1
 	else
-		var/obj/item/weapon/card/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.unEquip(I))
+		var/obj/item/card/I = user.get_active_hand()
+		if (istype(I, /obj/item/card/id) && I:registered_name && user.unEquip(I))
 			var/obj/old_id = id
 			I.loc = src
 			id = I
@@ -397,7 +397,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 // access to status display signals
 /obj/item/device/pda/attackby(obj/item/C as obj, mob/user as mob)
 	..()
-	if(istype(C, /obj/item/weapon/cartridge) && !cartridge)
+	if(istype(C, /obj/item/cartridge) && !cartridge)
 		cartridge = C
 		user.drop_item()
 		cartridge.loc = src
@@ -407,8 +407,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(cartridge.radio)
 			cartridge.radio.hostpda = src
 
-	else if(istype(C, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/idcard = C
+	else if(istype(C, /obj/item/card/id))
+		var/obj/item/card/id/idcard = C
 		if(!idcard.registered_name)
 			to_chat(user, "<span class='notice'>\The [src] rejects the ID.</span>")
 			return
@@ -432,8 +432,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		pai = C
 		to_chat(user, "<span class='notice'>You slot \the [C] into \the [src].</span>")
 		SStgui.update_uis(src) // update all UIs attached to src
-	else if(istype(C, /obj/item/weapon/pen))
-		var/obj/item/weapon/pen/O = locate() in src
+	else if(istype(C, /obj/item/pen))
+		var/obj/item/pen/O = locate() in src
 		if(O)
 			to_chat(user, "<span class='notice'>There is already a pen in \the [src].</span>")
 		else
@@ -473,25 +473,25 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return ..()
 
 //Some spare PDAs in a box
-/obj/item/weapon/storage/box/PDAs
+/obj/item/storage/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-/obj/item/weapon/storage/box/PDAs/Initialize()
+/obj/item/storage/box/PDAs/Initialize()
 	. = ..()
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)
 	new /obj/item/device/pda(src)
-	new /obj/item/weapon/cartridge/head(src)
+	new /obj/item/cartridge/head(src)
 
-	var/newcart = pick(	/obj/item/weapon/cartridge/engineering,
-						/obj/item/weapon/cartridge/security,
-						/obj/item/weapon/cartridge/medical,
-						/obj/item/weapon/cartridge/signal/science,
-						/obj/item/weapon/cartridge/quartermaster)
+	var/newcart = pick(	/obj/item/cartridge/engineering,
+						/obj/item/cartridge/security,
+						/obj/item/cartridge/medical,
+						/obj/item/cartridge/signal/science,
+						/obj/item/cartridge/quartermaster)
 	new newcart(src)
 
 // Pass along the pulse to atoms in contents, largely added so pAIs are vulnerable to EMP

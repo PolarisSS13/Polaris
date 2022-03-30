@@ -25,7 +25,7 @@
 			flick("[icon_state]0",src)
 			return 0
 		else if(user.zone_sel.selecting == "r_hand" || user.zone_sel.selecting == "l_hand")
-			var/obj/item/weapon/sample/print/P = new /obj/item/weapon/sample/print(user.loc)
+			var/obj/item/sample/print/P = new /obj/item/sample/print(user.loc)
 			P.attack(M, user)
 			to_chat(user, "<span class='notice'>Done printing.</span>")
 	//		to_chat(user, "<span class='notice'>[M]'s Fingerprints: [md5(M.dna.uni_identity)]</span>")
@@ -51,7 +51,7 @@
 		return
 */
 
-	if(istype(A,/obj/item/weapon/sample/print))
+	if(istype(A,/obj/item/sample/print))
 		to_chat(user, "The scanner displays on the screen: \"ERROR 43: Object on Excluded Object List.\"")
 		flick("[icon_state]0",src)
 		return
