@@ -106,7 +106,7 @@
 
 // Get heading in degrees (like a compass heading)
 /obj/effect/overmap/visitable/ship/proc/get_heading_degrees()
-	return (ATAN2(speed[2], speed[1]) + 360) % 360 // Yes ATAN2(y, x) is correct to get clockwise degrees
+	return (arctan(speed[2], speed[1]) + 360) % 360 // Yes arctan(y, x) is correct to get clockwise degrees
 
 /obj/effect/overmap/visitable/ship/proc/adjust_speed(n_x, n_y)
 	var/old_still = is_still()
