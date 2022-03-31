@@ -9,8 +9,6 @@
 
 #define SHORT_REAL_LIMIT 16777216
 
-#define CLAMP01(x) clamp(x, 0, 1)
-
 #define TAN(x) tan(x)
 
 #define ATAN2(x, y) arctan(x, y)
