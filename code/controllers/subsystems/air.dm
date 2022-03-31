@@ -65,7 +65,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 
 	..()
 
-/datum/controller/subsystem/air/fire(resumed = 0)
+/datum/controller/subsystem/air/fire(resumed, no_mc_tick)
 	var/timer
 	if(!resumed)
 		// Santity checks to make sure we don't somehow have items left over from last cycle

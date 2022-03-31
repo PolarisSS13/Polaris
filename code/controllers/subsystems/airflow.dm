@@ -19,7 +19,7 @@ SUBSYSTEM_DEF(airflow)
 	var/list/processing = list()
 	var/list/currentrun = list()
 
-/datum/controller/subsystem/airflow/fire(resumed = FALSE)
+/datum/controller/subsystem/airflow/fire(resumed, no_mc_tick)
 	if (!resumed)
 		currentrun = processing.Copy()
 

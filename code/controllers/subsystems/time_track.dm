@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(time_track)
 	var/last_tick_byond_time = 0
 	var/last_tick_tickcount = 0
 
-/datum/controller/subsystem/time_track/fire()
+/datum/controller/subsystem/time_track/fire(resumed, no_mc_tick)
 
 	var/current_realtime = REALTIMEOFDAY
 	var/current_byondtime = world.time

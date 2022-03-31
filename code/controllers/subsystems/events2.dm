@@ -13,7 +13,7 @@ SUBSYSTEM_DEF(event_ticker)
 	var/list/finished_events = list()
 
 // Process active events.
-/datum/controller/subsystem/event_ticker/fire(resumed)
+/datum/controller/subsystem/event_ticker/fire(resumed, no_mc_tick)
 	for(var/E in active_events)
 		var/datum/event2/event/event = E
 		event.process()

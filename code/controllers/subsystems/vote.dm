@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(vote)
 	var/list/current_votes = list()
 	var/list/additional_text = list()
 
-/datum/controller/subsystem/vote/fire(resumed)
+/datum/controller/subsystem/vote/fire(resumed, no_mc_tick)
 	if(mode)
 		time_remaining = round((started_time + duration - world.time)/10)
 		if(mode == VOTE_GAMEMODE && ticker.current_state >= GAME_STATE_SETTING_UP)

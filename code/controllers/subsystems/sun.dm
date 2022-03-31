@@ -3,5 +3,5 @@ SUBSYSTEM_DEF(sun)
 	wait = 600
 	var/static/datum/sun/sun = new
 
-/datum/controller/subsystem/sun/fire()
+/datum/controller/subsystem/sun/fire(resumed, no_mc_tick)
 	sun.calc_position()

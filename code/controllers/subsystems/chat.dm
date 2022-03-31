@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(chat)
 	init_vchat()
 	..()
 
-/datum/controller/subsystem/chat/fire()
+/datum/controller/subsystem/chat/fire(resumed, no_mc_tick)
 	var/list/msg_queue = src.msg_queue // Local variable for sanic speed.
 	for(var/i in msg_queue)
 		var/client/C = i

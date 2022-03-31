@@ -36,7 +36,7 @@ SUBSYSTEM_DEF(timer)
 /datum/controller/subsystem/timer/stat_entry(msg)
 	..("B:[bucket_count] P:[length(second_queue)] H:[length(hashes)] C:[length(clienttime_timers)] S:[length(timer_id_dict)]")
 
-/datum/controller/subsystem/timer/fire(resumed = FALSE)
+/datum/controller/subsystem/timer/fire(resumed, no_mc_tick)
 	var/lit = last_invoke_tick
 	var/last_check = world.time - TICKS2DS(BUCKET_LEN*1.5)
 	var/list/bucket_list = src.bucket_list

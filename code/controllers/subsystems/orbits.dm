@@ -11,7 +11,7 @@ SUBSYSTEM_DEF(orbit)
 	..("P:[processing.len]")
 
 
-/datum/controller/subsystem/orbit/fire(resumed = 0)
+/datum/controller/subsystem/orbit/fire(resumed, no_mc_tick)
 	if (!resumed)
 		src.currentrun = processing.Copy()
 

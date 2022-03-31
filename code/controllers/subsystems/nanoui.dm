@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(nanoui)
 /datum/controller/subsystem/nanoui/stat_entry()
 	return ..("[processing_uis.len] UIs")
 
-/datum/controller/subsystem/nanoui/fire(resumed)
+/datum/controller/subsystem/nanoui/fire(resumed, no_mc_tick)
 	for(var/thing in processing_uis)
 		var/datum/nanoui/UI = thing
 		UI.process()

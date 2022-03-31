@@ -38,7 +38,7 @@ SUBSYSTEM_DEF(game_master)
 
 	return ..()
 
-/datum/controller/subsystem/game_master/fire(resumed)
+/datum/controller/subsystem/game_master/fire(resumed, no_mc_tick)
 	adjust_staleness(1)
 	adjust_danger(-1)
 

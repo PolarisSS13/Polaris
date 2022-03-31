@@ -5,7 +5,7 @@ SUBSYSTEM_DEF(inactivity)
 	var/tmp/list/client_list
 	var/number_kicked = 0
 
-/datum/controller/subsystem/inactivity/fire(resumed = FALSE)
+/datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)
 	if (!config.kick_inactive)
 		can_fire = FALSE
 		return
