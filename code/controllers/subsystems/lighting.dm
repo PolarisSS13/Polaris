@@ -19,7 +19,7 @@
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
-	wait = 2 // Ticks, not deciseconds
+	wait = 2  // SS_TICKER - Ticks
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
 

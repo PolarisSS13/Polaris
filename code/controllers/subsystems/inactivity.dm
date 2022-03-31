@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(inactivity)
 	name = "Inactivity"
-	wait = 1 MINUTE
+	wait = 60 SECONDS
 	flags = SS_NO_INIT | SS_BACKGROUND
 	var/tmp/list/client_list
 	var/number_kicked = 0

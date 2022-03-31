@@ -6,7 +6,7 @@
 // This subsystem holds the logic that chooses events. Actual event processing is handled in a seperate subsystem.
 SUBSYSTEM_DEF(game_master)
 	name = "Events (Game Master)"
-	wait = 1 MINUTE
+	wait = 60 SECONDS
 	runlevels = RUNLEVEL_GAME
 
 	// The GM object is what actually chooses events.

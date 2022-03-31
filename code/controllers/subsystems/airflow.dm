@@ -11,7 +11,7 @@
 // No point in making this a processing substem, it overrides fire() and handles its own processing list!
 SUBSYSTEM_DEF(airflow)
 	name = "Airflow"
-	wait = 2
+	wait = 0.2 SECONDS
 	flags = SS_NO_INIT
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	priority = FIRE_PRIORITY_AIRFLOW

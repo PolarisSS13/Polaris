@@ -6,7 +6,7 @@ GLOBAL_VAR_INIT(open_space_initialised, FALSE)
 
 SUBSYSTEM_DEF(open_space)
 	name = "Open Space"
-	wait = 2 // 5 times per second.
+	wait = 0.2 SECONDS
 	init_order = INIT_ORDER_OPENSPACE
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = null	// List of turfs currently being updated.
