@@ -13,27 +13,27 @@
 /obj/structure/computerframe/attackby(obj/item/P as obj, mob/user as mob)
 	switch(state)
 		if(0)
-			if(P.get_tool_quality(TOOL_WRENCH))
+			if(P.is_wrench())
 				playsound(src, P.usesound, 50, 1)
-				if(do_after(user, 20 * P.get_tool_speed(TOOL_WRENCH)))
+				if(do_after(user, 20 * P.toolspeed))
 					to_chat(user, "<span class='notice'>You wrench the frame into place.</span>")
 					src.anchored = 1
 					src.state = 1
-			if(get_tool_quality(TOOL_WELDER))
+			if(istype(P, /obj/item/weapon/weldingtool))
 				var/obj/item/weapon/weldingtool/WT = P
 				if(!WT.remove_fuel(0, user))
 					to_chat(user, "The welding tool must be on to complete this task.")
 					return
 				playsound(src, WT.usesound, 50, 1)
-				if(do_after(user, 20 * WT.get_tool_speed(TOOL_WELDER)))
+				if(do_after(user, 20 * WT.toolspeed))
 					if(!src || !WT.isOn()) return
 					to_chat(user, "<span class='notice'>You deconstruct the frame.</span>")
 					new /obj/item/stack/material/steel( src.loc, 5 )
 					qdel(src)
 		if(1)
-			if(P.get_tool_quality(TOOL_WRENCH))
+			if(P.is_wrench())
 				playsound(src, P.usesound, 50, 1)
-				if(do_after(user, 20 * P.get_tool_speed(TOOL_WRENCH)))
+				if(do_after(user, 20 * P.toolspeed))
 					to_chat(user, "<span class='notice'>You unfasten the frame.</span>")
 					src.anchored = 0
 					src.state = 0
@@ -48,12 +48,12 @@
 					P.loc = src
 				else
 					to_chat(user, "<span class='warning'>This frame does not accept circuit boards of this type!</span>")
-			if(P.get_tool_quality(TOOL_SCREWDRIVER) && circuit)
+			if(P.is_screwdriver() && circuit)
 				playsound(src, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You screw the circuit board into place.</span>")
 				src.state = 2
 				src.icon_state = "2"
-			if(P.get_tool_quality(TOOL_CROWBAR)) && circuit)
+			if(P.is_crowbar()) && circuit)
 				playsound(src, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the circuit board.</span>")
 				src.state = 1
@@ -61,7 +61,7 @@
 				circuit.loc = src.loc
 				src.circuit = null
 		if(2)
-			if(P.get_tool_quality(TOOL_SCREWDRIVER) && circuit)
+			if(P.is_screwdriver() && circuit)
 				playsound(src, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You unfasten the circuit board.</span>")
 				src.state = 1
@@ -79,7 +79,7 @@
 						state = 3
 						icon_state = "3"
 		if(3)
-			if(P.get_tool_quality(TOOL_WIRECUTTER))
+			if(P.is_wirecutter())
 				playsound(src, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the cables.</span>")
 				src.state = 2
@@ -100,13 +100,13 @@
 						src.state = 4
 						src.icon_state = "4"
 		if(4)
-			if(P.get_tool_quality(TOOL_CROWBAR))
+			if(P.is_crowbar())
 				playsound(src, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You remove the glass panel.</span>")
 				src.state = 3
 				src.icon_state = "3"
 				new /obj/item/stack/material/glass( src.loc, 2 )
-			if(P.get_tool_quality(TOOL_SCREWDRIVER))
+			if(P.is_screwdriver())
 				playsound(src, P.usesound, 50, 1)
 				to_chat(user, "<span class='notice'>You connect the monitor.</span>")
 				var/B = new src.circuit.build_path ( src.loc )

@@ -38,12 +38,12 @@
 /obj/machinery/power/grid_checker/attackby(obj/item/W, mob/user)
 	if(!user)
 		return
-	if(W.get_tool_quality(TOOL_SCREWDRIVER))
+	if(W.is_screwdriver())
 		default_deconstruction_screwdriver(user, W)
 		opened = !opened
-	else if(W.get_tool_quality(TOOL_CROWBAR))
+	else if(W.is_crowbar())
 		default_deconstruction_crowbar(user, W)
-	else if(W.get_tool_quality(TOOL_MULTITOOL) || W.get_tool_quality(TOOL_WIRECUTTER))
+	else if(istype(W, /obj/item/device/multitool) || W.is_wirecutter())
 		attack_hand(user)
 
 /obj/machinery/power/grid_checker/attack_hand(mob/user)

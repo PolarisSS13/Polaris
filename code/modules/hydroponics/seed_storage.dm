@@ -508,18 +508,18 @@
 		else
 			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
-	else if(O.get_tool_quality(TOOL_WRENCH))
+	else if(O.is_wrench())
 		playsound(src, O.usesound, 50, 1)
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
-	else if(O.get_tool_quality(TOOL_SCREWDRIVER))
+	else if(O.is_screwdriver())
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance panel.")
 		playsound(src, O.usesound, 50, 1)
 		overlays.Cut()
 		if(panel_open)
 			overlays += image(icon, "[initial(icon_state)]-panel")
-	else if((O.get_tool_quality(TOOL_WIRECUTTER) || O.get_tool_quality(TOOL_MULTITOOL)) && panel_open)
+	else if((O.is_wirecutter() || istype(O, /obj/item/device/multitool)) && panel_open)
 		wires.Interact(user)
 
 /obj/machinery/seed_storage/emag_act(var/remaining_charges, var/mob/user)

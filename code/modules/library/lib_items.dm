@@ -38,14 +38,14 @@
 			return
 		else
 			name = ("bookcase ([newname])")
-	else if(O.get_tool_quality(TOOL_WRENCH))
+	else if(O.is_wrench())
 		playsound(src, O.usesound, 100, 1)
 		to_chat(user, (anchored ? "<span class='notice'>You unfasten \the [src] from the floor.</span>" : "<span class='notice'>You secure \the [src] to the floor.</span>"))
 		anchored = !anchored
-	else if(O.get_tool_quality(TOOL_SCREWDRIVER))
+	else if(O.is_screwdriver())
 		playsound(src, O.usesound, 75, 1)
 		to_chat(user, "<span class='notice'>You begin dismantling \the [src].</span>")
-		if(do_after(user,25 * O.get_tool_speed(TOOL_SCREWDRIVER)))
+		if(do_after(user,25 * O.toolspeed))
 			to_chat(user, "<span class='notice'>You dismantle \the [src].</span>")
 			new /obj/item/stack/material/wood(get_turf(src), 3)
 			for(var/obj/item/weapon/book/b in contents)
@@ -281,7 +281,7 @@ Book Cart End
 							return
 					scanner.computer.inventory.Add(src)
 					to_chat(user, "[W]'s screen flashes: 'Book stored in buffer. Title added to general inventory.'")
-	else if(istype(W, /obj/item/weapon/material/knife) || W.get_tool_quality(TOOL_WIRECUTTER))
+	else if(istype(W, /obj/item/weapon/material/knife) || W.is_wirecutter())
 		if(carved)	return
 		to_chat(user, "<span class='notice'>You begin to carve out [title].</span>")
 		if(do_after(user, 30))

@@ -145,24 +145,24 @@
 		reinforce_girder()
 
 /obj/structure/girder/attackby(obj/item/W as obj, mob/user as mob)
-	if(W.get_tool_quality(TOOL_WRENCH) && state == 0)
+	if(W.is_wrench() && state == 0)
 		if(anchored && !reinf_material)
 			playsound(src, W.usesound, 100, 1)
 			to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-			if(do_after(user, (35 + round(max_health/50)) * W.get_tool_speed(TOOL_WRENCH)))
+			if(do_after(user,(35 + round(max_health/50)) * W.toolspeed))
 				if(!src) return
 				to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 				dismantle()
 		else if(!anchored)
 			playsound(src, W.usesound, 100, 1)
 			to_chat(user, "<span class='notice'>Now securing the girder...</span>")
-			if(do_after(user, 40 * W.get_tool_speed(TOOL_WRENCH), src))
+			if(do_after(user, 40 * W.toolspeed, src))
 				to_chat(user, "<span class='notice'>You secured the girder!</span>")
 				reset_girder()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(do_after(user, 30 * W.get_tool_speed(TOOL_WELDER))) // TODO: Welding tool usage checks
+		if(do_after(user,30 * W.toolspeed))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 			dismantle()
@@ -171,11 +171,11 @@
 		to_chat(user, "<span class='notice'>You drill through the girder!</span>")
 		dismantle()
 
-	else if(W.get_tool_quality(TOOL_SCREWDRIVER))
+	else if(W.is_screwdriver())
 		if(state == 2)
 			playsound(src, W.usesound, 100, 1)
 			to_chat(user, "<span class='notice'>Now unsecuring support struts...</span>")
-			if(do_after(user, 40 * W.get_tool_speed(TOOL_SCREWDRIVER)))
+			if(do_after(user,40 * W.toolspeed))
 				if(!src) return
 				to_chat(user, "<span class='notice'>You unsecured the support struts!</span>")
 				state = 1
@@ -184,20 +184,20 @@
 			reinforcing = !reinforcing
 			to_chat(user, "<span class='notice'>\The [src] can now be [reinforcing? "reinforced" : "constructed"]!</span>")
 
-	else if(W.get_tool_quality(TOOL_WIRECUTTER) && state == 1)
+	else if(W.is_wirecutter() && state == 1)
 		playsound(src, W.usesound, 100, 1)
 		to_chat(user, "<span class='notice'>Now removing support struts...</span>")
-		if(do_after(user, 40 * W.get_tool_speed(TOOL_WIRECUTTER)))
+		if(do_after(user,40 * W.toolspeed))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You removed the support struts!</span>")
 			reinf_material.place_dismantled_product(get_turf(src))
 			reinf_material = null
 			reset_girder()
 
-	else if(W.get_tool_quality(TOOL_CROWBAR) && state == 0 && anchored)
+	else if(W.is_crowbar() && state == 0 && anchored)
 		playsound(src, W.usesound, 100, 1)
 		to_chat(user, "<span class='notice'>Now dislodging the girder...</span>")
-		if(do_after(user, 40 * W.get_tool_speed(TOOL_CROWBAR)))
+		if(do_after(user, 40 * W.toolspeed))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You dislodged the girder!</span>")
 			displace()
@@ -240,7 +240,7 @@
 
 	to_chat(user, "<span class='notice'>You begin adding the plating...</span>")
 
-	if(!do_after(user, 40) || !S.use(amount_to_use))
+	if(!do_after(user,40) || !S.use(amount_to_use))
 		return 1 //once we've gotten this far don't call parent attackby()
 
 	if(anchored)
@@ -274,7 +274,7 @@
 		return 0
 
 	to_chat(user, "<span class='notice'>Now reinforcing...</span>")
-	if (!do_after(user, 40) || !S.use(1))
+	if (!do_after(user,40) || !S.use(1))
 		return 1 //don't call parent attackby() past this point
 	to_chat(user, "<span class='notice'>You added reinforcement!</span>")
 
@@ -338,16 +338,16 @@
 	qdel(src)
 
 /obj/structure/girder/cult/attackby(obj/item/W as obj, mob/user as mob)
-	if(W.get_tool_quality(TOOL_WRENCH))
+	if(W.is_wrench())
 		playsound(src, W.usesound, 100, 1)
 		to_chat(user, "<span class='notice'>Now disassembling the girder...</span>")
-		if(do_after(user, 40 * W.get_tool_speed(TOOL_WRENCH)))
+		if(do_after(user,40 * W.toolspeed))
 			to_chat(user, "<span class='notice'>You dissasembled the girder!</span>")
 			dismantle()
 
 	else if(istype(W, /obj/item/weapon/pickaxe/plasmacutter))
 		to_chat(user, "<span class='notice'>Now slicing apart the girder...</span>")
-		if(do_after(user, 30 * W.get_tool_speed(TOOL_WELDER))) // TODO: #8284 welding tool usage
+		if(do_after(user,30 * W.toolspeed))
 			to_chat(user, "<span class='notice'>You slice apart the girder!</span>")
 		dismantle()
 

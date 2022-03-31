@@ -101,7 +101,7 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 	return data
 
 /obj/machinery/pointdefense_control/attackby(var/obj/item/W, var/mob/user)
-	if(W?.get_tool_quality(TOOL_MULTITOOL))
+	if(W?.is_multitool())
 		var/new_ident = input(user, "Enter a new ident tag.", "[src]", id_tag) as null|text
 		if(new_ident && new_ident != id_tag && user.Adjacent(src) && CanInteract(user, physical_state))
 			// Check for duplicate controllers with this ID
@@ -180,7 +180,7 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 			return PDC
 
 /obj/machinery/pointdefense/attackby(var/obj/item/W, var/mob/user)
-	if(W?.get_tool_quality(TOOL_MULTITOOL))
+	if(W?.is_multitool())
 		var/new_ident = input(user, "Enter a new ident tag.", "[src]", id_tag) as null|text
 		if(new_ident && new_ident != id_tag && user.Adjacent(src) && CanInteract(user, physical_state))
 			to_chat(user, "<span class='notice'>You register [src] with the [new_ident] network.</span>")

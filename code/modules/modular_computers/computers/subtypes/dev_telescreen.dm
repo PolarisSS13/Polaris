@@ -25,7 +25,7 @@
 	name = "telescreen"
 
 /obj/item/modular_computer/telescreen/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
-	if(W.get_tool_quality(TOOL_CROWBAR))
+	if(W.is_crowbar())
 		if(anchored)
 			shutdown_computer()
 			anchored = FALSE

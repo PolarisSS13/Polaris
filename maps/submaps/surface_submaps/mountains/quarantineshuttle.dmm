@@ -102,7 +102,7 @@
 "bX" = (/obj/structure/lattice,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "bY" = (/obj/structure/sign/warning/secure_area,/turf/simulated/wall/iron,/area/submap/cave/qShuttle)
 "bZ" = (/obj/structure/sign/kiddieplaque{desc = "By order of the S.D.D.C, this site or craft is to be buried and not disturbed until such time that sterility can be confirmed. Dated: 20/12/2491 "; name = "\improper Sif Department of Disease Control notice"},/turf/simulated/wall/iron,/area/submap/cave/qShuttle)
-"ca" = (/obj/structure/sign/biohazard,/turf/simulated/wall/iron,/area/submap/cave/qShuttle)
+"ca" = (/obj/structure/table/steel,/obj/random/tool/power,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cb" = (/obj/item/bodybag,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cc" = (/obj/structure/table/steel,/obj/item/weapon/storage/box/bodybags,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cd" = (/obj/structure/table/steel,/obj/item/clothing/suit/bio_suit,/obj/random/medical/lite,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
@@ -112,11 +112,11 @@
 "ch" = (/obj/structure/table/steel,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "ci" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/syringe/antiviral,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cj" = (/obj/structure/table/steel,/obj/item/weapon/reagent_containers/spray/cleaner{desc = "Someone has crossed out the 'Space' from Space Cleaner and written in Chemistry. Scrawled on the back is, 'Okay, whoever filled this with polytrinic acid, it was only funny the first time. It was hard enough replacing the CMO's first cat!'"; name = "Chemistry Cleaner"},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
-"ck" = (/obj/structure/table/steel,/obj/item/weapon/tool/hydraulic_cutter,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"ck" = (/obj/structure/table/steel,/obj/item/weapon/tool/crowbar/power,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cl" = (/obj/structure/table/rack,/obj/item/clothing/head/bio_hood,/obj/item/clothing/suit/bio_suit,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cm" = (/obj/item/weapon/weldingtool/largetank,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
 "cn" = (/obj/structure/closet/crate/medical,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
-"Zz" = (/obj/structure/table/steel,/obj/random/tool/power,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/qShuttle)
+"co" = (/obj/structure/sign/biohazard,/turf/simulated/wall/iron,/area/submap/cave/qShuttle)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
@@ -137,11 +137,12 @@ aaababadadbHbIbJbKadbLaQbMadbNbOadbPbQbRadagahabaa
 ababacabadaiajakakbSaiadaiadadadadadadadadadadaaaa
 ababababbTabaeaeafaeababababbUabababababadagahaaaa
 aaabababbVbWbWbWbWbWbWbWbWbWbWbWbWbWbWbWadadadaaaa
-aaaaababababababababbXbYbZcacbcbcbabcccdceabcfaaaa
+aaaaababababababababbXbYbZcocbcbcbabcccdceabcfaaaa
 aaaaacababcgchcicjckclababcmabcbcbababababababaaaa
-aaaaaaababcnZzababababababababaaaaaaaaaaababacaaaa
+aaaaaaababcncaababababababababaaaaaaaaaaababacaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
+

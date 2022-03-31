@@ -343,7 +343,7 @@
 	if(default_deconstruction_crowbar(user, W))
 		return
 
-	if(W.get_tool_quality(TOOL_WRENCH))
+	if(W.is_wrench())
 
 		if(istype(get_turf(src), /turf/space))
 			to_chat(user, "<span class='notice'>You can't anchor something to empty space. Idiot.</span>")

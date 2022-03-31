@@ -14,9 +14,9 @@
 	return
 
 /obj/structure/salvageable/attackby(obj/item/I, mob/user)
-	if(I.get_tool_quality(TOOL_CROWBAR))
+	if(I.is_crowbar())
 		playsound(src, I.usesound, 50, 1)
-		var/actual_time = I.get_tool_speed(TOOL_CROWBAR) * 170
+		var/actual_time = I.toolspeed * 170
 		user.visible_message( \
 			"<span class='notice'>\The [user] begins salvaging from \the [src].</span>", \
 			"<span class='notice'>You start salvaging from \the [src].</span>")

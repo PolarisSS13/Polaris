@@ -38,9 +38,9 @@
 		icon_state = "[initial(icon_state)]_off"
 
 /obj/machinery/pda_multicaster/attackby(obj/item/I, mob/user)
-	if(I.get_tool_quality(TOOL_SCREWDRIVER))
+	if(I.is_screwdriver())
 		default_deconstruction_screwdriver(user, I)
-	else if(I.get_tool_quality(TOOL_CROWBAR))
+	else if(I.is_crowbar())
 		default_deconstruction_crowbar(user, I)
 	else
 		..()

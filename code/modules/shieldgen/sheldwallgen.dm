@@ -157,7 +157,7 @@
 
 
 /obj/machinery/shieldwallgen/attackby(obj/item/W, mob/user)
-	if(W.get_tool_quality(TOOL_WRENCH))
+	if(W.is_wrench())
 		if(active)
 			to_chat(user, "Turn off the field generator first.")
 			return

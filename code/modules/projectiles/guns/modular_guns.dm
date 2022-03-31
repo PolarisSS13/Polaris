@@ -51,12 +51,12 @@
 	FireModeModify()
 
 /obj/item/weapon/gun/energy/modular/attackby(obj/item/O, mob/user)
-	if(O.get_tool_quality(TOOL_SCREWDRIVER))
+	if(O.is_screwdriver())
 		to_chat(user, "<span class='notice'>You [assembled ? "disassemble" : "assemble"] the gun.</span>")
 		assembled = !assembled
 		playsound(src, O.usesound, 50, 1)
 		return
-	if(O.get_tool_quality(TOOL_CROWBAR))
+	if(O.is_crowbar())
 		if(assembled == 1)
 			to_chat(user, "<span class='warning'>Disassemble the [src] first!</span>")
 			return

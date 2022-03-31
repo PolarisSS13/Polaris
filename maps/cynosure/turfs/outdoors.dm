@@ -78,6 +78,16 @@
 	nitrogen	= MOLES_N2SIF
 	temperature	= TEMPERATURE_SIF
 
+/turf/simulated/mineral/floor/sif/mud
+	name = "mud"
+	icon_state = "mud"
+	sand_icon_state = "mud"
+
+/turf/simulated/mineral/floor/sif/dirt
+	name = "sand"
+	icon_state = "dirt"
+	sand_icon_state = "dirt"
+
 /turf/simulated/floor/outdoors/mud/sif/planetuse
 	oxygen		= MOLES_O2SIF
 	nitrogen	= MOLES_N2SIF

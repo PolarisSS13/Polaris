@@ -38,7 +38,7 @@
 		/obj/item/clothing/accessory/badge,
 		/obj/item/weapon/makeover
 		)
-	cant_hold = list(/obj/item/weapon/tool/powerdrill)
+	cant_hold = list(/obj/item/weapon/tool/screwdriver/power)
 	slot_flags = SLOT_ID
 
 	var/obj/item/weapon/card/id/front_id = null

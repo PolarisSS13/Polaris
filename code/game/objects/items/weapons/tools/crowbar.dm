@@ -10,6 +10,7 @@
 	slot_flags = SLOT_BELT
 	force = 6
 	throwforce = 7
+	pry = 1
 	item_state = "crowbar"
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_ENGINEERING = 1)
@@ -18,7 +19,8 @@
 	usesound = 'sound/items/crowbar.ogg'
 	drop_sound = 'sound/items/drop/crowbar.ogg'
 	pickup_sound = 'sound/items/pickup/crowbar.ogg'
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_STANDARD)
+	toolspeed = 1
+	tool_qualities = list(TOOL_CROWBAR)
 
 /obj/item/weapon/tool/crowbar/red
 	icon = 'icons/obj/tools.dmi'
@@ -46,7 +48,7 @@
 	icon = 'icons/obj/abductor.dmi'
 	usesound = 'sound/weapons/sonic_jackhammer.ogg'
 	icon_state = "crowbar"
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_BEST)
+	toolspeed = 0.1
 	origin_tech = list(TECH_COMBAT = 4, TECH_ENGINEERING = 4)
 
 /obj/item/weapon/tool/crowbar/hybrid
@@ -55,7 +57,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_crowbar)
 	icon_state = "hybcrowbar"
 	usesound = 'sound/weapons/sonic_jackhammer.ogg'
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_DECENT)
+	toolspeed = 0.4
 	origin_tech = list(TECH_COMBAT = 4, TECH_ENGINEERING = 3)
 	reach = 2
 
@@ -64,25 +66,36 @@
 	desc = "A hydraulic prying tool, compact but powerful. Designed to replace crowbars in industrial synthetics."
 	usesound = 'sound/items/jaws_pry.ogg'
 	force = 10
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_DECENT)
+	toolspeed = 0.5
 
-/obj/item/weapon/tool/hydraulic_cutter
+/obj/item/weapon/tool/crowbar/power
 	name = "jaws of life"
-	desc = "A set of jaws of life, compressed through the magic of science."
-	icon = 'icons/obj/tools.dmi'
+	desc = "A set of jaws of life, compressed through the magic of science. It's fitted with a prying head."
 	icon_state = "jaws_pry"
 	item_state = "jawsoflife"
 	matter = list(MAT_METAL=150, MAT_SILVER=50)
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 	usesound = 'sound/items/jaws_pry.ogg'
 	force = 15
-	var/state = 0 // Technically boolean, but really a state machine
-	tool_qualities = list(TOOL_CROWBAR = TOOL_QUALITY_GOOD)
+	toolspeed = 0.25
+	var/obj/item/weapon/tool/wirecutters/power/counterpart = null
 
-/obj/item/weapon/tool/hydraulic_cutter/attack_self(mob/user)
+/obj/item/weapon/tool/crowbar/power/Initialize(var/ml, no_counterpart = TRUE)
+	. = ..()
+	if(!counterpart && no_counterpart)
+		counterpart = new(src, FALSE)
+		counterpart.counterpart = src
+
+/obj/item/weapon/tool/crowbar/power/Destroy()
+	if(counterpart)
+		counterpart.counterpart = null // So it can qdel cleanly.
+		QDEL_NULL(counterpart)
+	return ..()
+
+/obj/item/weapon/tool/crowbar/power/attack_self(mob/user)
 	playsound(src, 'sound/items/change_jaws.ogg', 50, 1)
-	set_tool_quality(TOOL_CROWBAR,    state ? TOOL_QUALITY_GOOD : TOOL_QUALITY_NONE)
-	set_tool_quality(TOOL_WIRECUTTER, state ? TOOL_QUALITY_NONE : TOOL_QUALITY_GOOD)
-	icon_state = state ? "jaws_pry" : "jaws_cutter"
-	to_chat(user, "<span class='notice'>You attach the [state ? "prying" : "cutting"] jaws to [src].</span>")
-	state = !state
+	user.drop_item(src)
+	counterpart.forceMove(get_turf(src))
+	src.forceMove(counterpart)
+	user.put_in_active_hand(counterpart)
+	to_chat(user, "<span class='notice'>You attach the cutting jaws to [src].</span>")

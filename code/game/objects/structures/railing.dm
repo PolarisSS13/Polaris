@@ -199,7 +199,7 @@
 
 /obj/structure/railing/attackby(obj/item/W as obj, mob/user as mob)
 	// Dismantle
-	if(W.get_tool_quality(TOOL_WRENCH) && !anchored)
+	if(W.is_wrench() && !anchored)
 		playsound(src, W.usesound, 50, 1)
 		if(do_after(user, 20, src))
 			user.visible_message("<span class='notice'>\The [user] dismantles \the [src].</span>", "<span class='notice'>You dismantle \the [src].</span>")
@@ -218,7 +218,7 @@
 				return
 
 	// Install
-	if(W.get_tool_quality(TOOL_SCREWDRIVER))
+	if(W.is_screwdriver())
 		user.visible_message(anchored ? "<span class='notice'>\The [user] begins unscrewing \the [src].</span>" : "<span class='notice'>\The [user] begins fasten \the [src].</span>" )
 		playsound(src, W.usesound, 75, 1)
 		if(do_after(user, 10, src))

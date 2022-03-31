@@ -119,7 +119,7 @@
 		return
 
 /obj/machinery/power/singularity_beacon/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(W.get_tool_quality(TOOL_SCREWDRIVER))
+	if(W.is_screwdriver())
 		if(active)
 			to_chat(user, "<span class='danger'>You need to deactivate the beacon first!</span>")
 			return

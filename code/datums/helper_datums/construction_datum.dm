@@ -34,17 +34,31 @@
 	if(valid_step)
 		if(custom_action(valid_step, I, user))
 			next_step()
-			return TRUE
-	return FALSE
+			return 1
+	return 0
 
 /datum/construction/proc/is_right_key(var/obj/item/I) // returns current step num if I is of the right type.
 	var/list/L = steps[steps.len]
-	if(istype(I, L["key"]) || I.get_tool_quality(L["key"]))
+	switch(L["key"])
+		if(IS_SCREWDRIVER)
+			if(I.is_screwdriver())
+				return steps.len
+		if(IS_CROWBAR)
+			if(I.is_crowbar())
+				return steps.len
+		if(IS_WIRECUTTER)
+			if(I.is_wirecutter())
+				return steps.len
+		if(IS_WRENCH)
+			if(I.is_wrench())
+				return steps.len
+
+	if(istype(I, L["key"]))
 		return steps.len
 	return 0
 
 /datum/construction/proc/custom_action(step, I, user)
-	return TRUE
+	return 1
 
 /datum/construction/proc/check_all_steps(var/obj/item/I,mob/user as mob) //check all steps, remove matching one.
 	for(var/i=1;i<=steps.len;i++)
@@ -55,8 +69,8 @@
 				listclearnulls(steps);
 				if(!steps.len)
 					spawn_result()
-				return TRUE
-	return FALSE
+				return 1
+	return 0
 
 
 /datum/construction/proc/spawn_result()
@@ -91,11 +105,34 @@
 
 /datum/construction/reversible/is_right_key(var/obj/item/I) // returns index step
 	var/list/L = steps[index]
-	if(I.get_tool_quality(L["key"]))
-		return FORWARD
 
-	if(I.get_tool_quality(L["backkey"]))
-		return BACKWARD
+	switch(L["key"])
+		if(IS_SCREWDRIVER)
+			if(I.is_screwdriver())
+				return FORWARD
+		if(IS_CROWBAR)
+			if(I.is_crowbar())
+				return FORWARD
+		if(IS_WIRECUTTER)
+			if(I.is_wirecutter())
+				return FORWARD
+		if(IS_WRENCH)
+			if(I.is_wrench())
+				return FORWARD
+
+	switch(L["backkey"])
+		if(IS_SCREWDRIVER)
+			if(I.is_screwdriver())
+				return BACKWARD
+		if(IS_CROWBAR)
+			if(I.is_crowbar())
+				return BACKWARD
+		if(IS_WIRECUTTER)
+			if(I.is_wirecutter())
+				return BACKWARD
+		if(IS_WRENCH)
+			if(I.is_wrench())
+				return BACKWARD
 
 	if(istype(I, L["key"]))
 		return FORWARD //to the first step -> forward
@@ -108,8 +145,8 @@
 	if(diff)
 		if(custom_action(index, diff, I, user))
 			update_index(diff)
-			return TRUE
-	return FALSE
+			return 1
+	return 0
 
 /datum/construction/reversible/custom_action(index, diff, I, user)
-	return TRUE
+	return 1

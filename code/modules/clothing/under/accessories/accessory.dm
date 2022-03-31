@@ -164,8 +164,10 @@
 	slot = ACCESSORY_SLOT_TIE
 
 /obj/item/clothing/accessory/stethoscope/do_surgery(mob/living/carbon/human/M, mob/living/user)
-	return attack(M, user) //default surgery behaviour is just to scan as usual
-
+	if(user.a_intent != I_HELP) //in case it is ever used as a surgery tool
+		return ..()
+	attack(M, user) //default surgery behaviour is just to scan as usual
+	return 1
 
 /obj/item/clothing/accessory/stethoscope/attack(mob/living/carbon/human/M, mob/living/user)
 	if(ishuman(M) && isliving(user))
