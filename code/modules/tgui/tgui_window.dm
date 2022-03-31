@@ -55,8 +55,7 @@
 	else
 		options += "titlebar=1;can_resize=1;"
 	// Generate page html
-	var/html = SStgui.basehtml
-	html = replacetextEx(html, "\[tgui:windowId]", id)
+	var/html = replacetextEx(SStgui.base_html, "\[tgui:windowId]", id)
 	// Process inline assets
 	var/inline_styles = ""
 	var/inline_scripts = ""
