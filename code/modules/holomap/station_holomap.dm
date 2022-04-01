@@ -168,7 +168,7 @@
 /obj/machinery/station_map/update_icon()
 	if(!holomap_datum)
 		return //Not yet.
-		
+
 	overlays.Cut()
 	if(stat & BROKEN)
 		icon_state = "station_mapb"

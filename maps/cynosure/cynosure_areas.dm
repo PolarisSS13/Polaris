@@ -286,59 +286,76 @@
 	sound_env = SMALL_ENCLOSED
 	ambience = AMBIENCE_SUBSTATION
 
+
 /area/surface/station/maintenance/substation/arrivals
 	name = "Arrivals Substation"
 
 /area/surface/station/maintenance/substation/atmospherics
 	name = "Atmospherics Substation"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/maintenance/substation/civilian
 	name = "Civilian Substation"
 
 /area/surface/station/maintenance/substation/command
 	name = "Command Substation"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/maintenance/substation/cargo/bmt
 	name = "Basement Cargo Substation"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/surface/station/maintenance/substation/cargo/gnd
 	name = "Ground Floor Cargo Substation"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/surface/station/maintenance/substation/cargo/snd
 	name = "Second Floor Cargo Substation"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/surface/station/maintenance/substation/engineering/bmt
 	name = "Basement Engineering Substation"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/maintenance/substation/engineering/gnd
 	name = "Ground Floor Engineering Substation"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/maintenance/substation/engineering/snd
 	name = "Second Floor Engineering Substation"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/maintenance/substation/medbay/bmt
 	name = "Medbay - Basement Substation"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/surface/station/maintenance/substation/medbay/gnd
 	name = "Medbay - Ground Floor Substation"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/surface/station/maintenance/substation/medbay/snd
 	name = "Medbay - Second Floor Substation"
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/surface/station/maintenance/substation/research/bmt
 	name = "Research - Basement Substation"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/surface/station/maintenance/substation/research/gnd
 	name = "Research - Ground Floor Substation"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/surface/station/maintenance/substation/research/snd
 	name = "Research - Second Floor Substation"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/surface/station/maintenance/substation/security/gnd
 	name = "Security - Ground Floor Substation"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/surface/station/maintenance/substation/security/snd
 	name = "Security - Second Floor Substation"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //Civilian
 
@@ -381,22 +398,27 @@
 /area/surface/station/crew_quarters/sleep/Dorm_1
 	name = "\improper Dormitory Room 1"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/surface/station/crew_quarters/sleep/Dorm_2
 	name = "\improper Dormitory Room 2"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/surface/station/crew_quarters/sleep/Dorm_3
 	name = "\improper Dormitory Room 3"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/surface/station/crew_quarters/sleep/Dorm_4
 	name = "\improper Dormitory Room 4"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/surface/station/crew_quarters/sleep/Dorm_5
 	name = "\improper Dormitory Room 5"
 	icon_state = "Sleep"
+	holomap_color = HOLOMAP_AREACOLOR_DORMS
 
 /area/surface/station/crew_quarters/gym
 	name = "\improper Station Gym"
@@ -459,11 +481,13 @@
 /area/surface/station/storage/tech
 	name = "Technical Storage"
 	icon_state = "auxstorage"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/vault
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
 	ambience = AMBIENCE_HIGHSEC
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 //Command
 
@@ -475,52 +499,63 @@
 	name = "\improper Command - Site Manager's Office"
 	icon_state = "captain"
 	sound_env = MEDIUM_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/crew_quarters/heads/chief
 	name = "\improper Engineering - Chief Engineer's Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/crew_quarters/heads/cmo
 	name = "\improper Medbay - CMO's Office"
 	icon_state = "head_quarters"
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/surface/station/crew_quarters/heads/hop
 	name = "\improper Head of Personnel's Office"
 	icon_state = "head_quarters"
 	flags = RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/crew_quarters/heads/hos
 	name = "\improper Security - HoS' Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/surface/station/crew_quarters/heads/rdoffice
 	name = "\improper Research - Research Director's Office"
 	icon_state = "head_quarters"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/surface/station/command/internalaffairs
 	name = "\improper Command - Internal Affairs"
 	icon_state = "law"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/command/liaison
 	name = "\improper Command - Liaison Office"
 	icon_state = "law"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/command/meeting_room
 	name = "\improper Command - Meeting Room"
 	icon_state = "bridge"
 	music = null
 	sound_env = MEDIUM_SOFTFLOOR
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/command/operations
 	name = "\improper Command - Operations Center"
 	icon_state = "bridge"
 	music = "signal"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 /area/surface/station/command/teleporter
 	name = "\improper Command - Teleporter"
 	icon_state = "teleporter"
 	music = "signal"
+	holomap_color = HOLOMAP_AREACOLOR_COMMAND
 
 //Engineering
 
@@ -528,6 +563,7 @@
 	name = "\improper Engineering"
 	icon_state = "engineering"
 	ambience = AMBIENCE_ENGINEERING
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/surface/station/engineering/atmos
  	name = "\improper Engineering - Atmospherics"
@@ -816,6 +852,7 @@
 	name = "\improper Medbay"
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/surface/station/medical/chemistry
 	name = "\improper Medical - Chemistry"
@@ -931,6 +968,7 @@
 /area/surface/station/mining_main
 	name = "Mining"
 	icon_state = "mining"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/surface/station/mining_main/locker
 	name = "Mining Locker Room"
@@ -1009,6 +1047,7 @@
 /area/surface/station/quartermaster
 	name = "\improper Quartermasters"
 	icon_state = "quart"
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/surface/station/quartermaster/office
 	name = "\improper Cargo Office"
@@ -1043,6 +1082,7 @@
 
 /area/surface/outpost/research
 	icon_state = "outpost_research"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/surface/outpost/research/xenoarcheology
 	name = "\improper Xenoarcheology"
@@ -1087,21 +1127,22 @@
 
 // SCIENCE
 
+/area/surface/station/rnd
+	name = "\improper Research"
+	icon_state = "research"
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
+
 /area/surface/station/rnd/hallway/bmt
 	name = "\improper Research - Basement Hallway"
-	icon_state = "research"
 
 /area/surface/station/rnd/hallway/gnd
 	name = "\improper Research - Ground Floor Hallway"
-	icon_state = "research"
 
 /area/surface/station/rnd/hallway/snd
 	name = "\improper Research - Second Floor Hallway"
-	icon_state = "research"
 
 /area/surface/station/rnd/hallway/stairwell
 	name = "\improper Research - Stairwell"
-	icon_state = "research"
 
 /area/surface/station/rnd/exploration
 	name = "\improper Research - Exploration Prep"
@@ -1109,7 +1150,6 @@
 
 /area/surface/station/rnd/research
 	name = "\improper Research - RnD"
-	icon_state = "research"
 
 /area/surface/station/rnd/research_foyer
 	name = "\improper Research - Foyer"
@@ -1178,13 +1218,16 @@
 
 //Security
 
+/area/surface/station/security
+	name = "\improper Security"
+	icon_state = "security"
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
+
 /area/surface/station/security/main
 	name = "\improper Security - Office"
-	icon_state = "security"
 
 /area/surface/station/security/lobby
 	name = "\improper Security - Lobby"
-	icon_state = "security"
 
 /area/surface/station/security/brig
 	name = "\improper Security - Brig"
@@ -1344,18 +1387,21 @@
 	lift_floor_name = "Basement"
 	lift_announce_str = "Arriving at Basement: Drone Fabrication."
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/turbolift/eng_gnd
 	name = "lift (ground floor)"
 	lift_floor_label = "Ground Floor"
 	lift_floor_name = "Ground Floor"
 	lift_announce_str = "Arriving at Ground Floor: Monitoring Room. Atmospherics. Storage. Reactor."
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/turbolift/eng_snd
 	name = "lift (ground floor)"
 	lift_floor_label = "Second Floor"
 	lift_floor_name = "Second Floor"
 	lift_announce_str = "Arriving at Second Floor: Atmospherics. EVA. CE Office. Locker Rooms."
+	holomap_color = HOLOMAP_AREACOLOR_ENGINEERING
 
 /area/turbolift/center_gnd
 	name = "lift (ground floor)"
@@ -1376,12 +1422,14 @@
 	lift_floor_name = "Ground Floor"
 	lift_announce_str = "Arriving at Cargo Delivery Bay."
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/turbolift/cargo_snd
 	name = "lift (second deck)"
 	lift_floor_label = "Second Floor"
 	lift_floor_name = "Second Floor"
 	lift_announce_str = "Arriving at Cargo Office."
+	holomap_color = HOLOMAP_AREACOLOR_CARGO
 
 /area/turbolift/med_bmt
 	name = "lift (basement)"
@@ -1389,18 +1437,21 @@
 	lift_floor_name = "Basement"
 	lift_announce_str = "Arriving at Basement: Morgue.Medical Storage."
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/turbolift/med_gnd
 	name = "lift (ground floor)"
 	lift_floor_label = "Ground Floor"
 	lift_floor_name = "Ground Floor"
 	lift_announce_str = "Arriving at Ground Floor: Emergency Treatment. Surgery. Cloning. Chemistry. Foyer."
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/turbolift/med_snd
 	name = "lift (ground floor)"
 	lift_floor_label = "Second Floor"
 	lift_floor_name = "Second Floor"
 	lift_announce_str = "Arriving at Second Floor: Patient Rooms. Mental Health. Virology. CMO Office. Locker Rooms."
+	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
 
 /area/turbolift/sci_bmt
 	name = "lift (basement)"
@@ -1408,12 +1459,14 @@
 	lift_floor_name = "Basement"
 	lift_announce_str = "Arriving at Basement: Xenoarchaeology."
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/turbolift/sci_gnd
 	name = "lift (ground floor)"
 	lift_floor_label = "Ground Floor"
 	lift_floor_name = "Ground Floor"
 	lift_announce_str = "Arriving at Ground Floor: Xenoarch Surface Exit."
+	holomap_color = HOLOMAP_AREACOLOR_SCIENCE
 
 /area/turbolift/sec_gnd
 	name = "lift (ground floor)"
@@ -1421,12 +1474,14 @@
 	lift_floor_name = "Ground Floor"
 	lift_announce_str = "Arriving at Ground Floor: Foyer. Detective Office. HoS Office. Locker Room. Processing. Evidence Storage"
 	base_turf = /turf/simulated/floor
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 /area/turbolift/sec_snd
 	name = "lift (ground floor)"
 	lift_floor_label = "Second Floor"
 	lift_floor_name = "Second Floor"
 	lift_announce_str = "Arriving at Second Floor: Armory. Warden Office. Cells."
+	holomap_color = HOLOMAP_AREACOLOR_SECURITY
 
 //Wilderness Shuttle Shelter
 
