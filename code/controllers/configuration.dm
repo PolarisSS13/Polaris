@@ -48,6 +48,7 @@ var/list/gamemode_cache = list()
 	var/static/continous_rounds = 0			// Gamemodes which end instantly will instead keep on going until the round ends by escape shuttle or nuke.
 	var/static/allow_Metadata = 0				// Metadata is supported.
 	var/static/popup_admin_pm = 0				//adminPMs to non-admins show in a pop-up 'reply' window when set to 1.
+	var/static/ticklag = 0.9					// 'ticklag' for world.tick_lag, delta-time of a game tick in deciseconds.
 	var/static/fps = 20
 	var/static/tick_limit_mc_init = TICK_LIMIT_MC_INIT_DEFAULT	//SSinitialization throttling
 	var/static/Tickcomp = 0
@@ -704,7 +705,7 @@ var/list/gamemode_cache = list()
 					irc_bot_export = 1
 
 				if("ticklag")
-					var/ticklag = text2num(value)
+					ticklag = text2num(value)
 					if(ticklag > 0)
 						fps = 10 / ticklag
 
