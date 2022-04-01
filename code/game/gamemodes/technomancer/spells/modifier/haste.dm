@@ -9,7 +9,7 @@
 
 /obj/item/weapon/spell/modifier/haste
 	name = "haste"
-	desc = "Now you can outrun a Teshari!"
+	desc = "Now you can outrun a  !"
 	icon_state = "haste"
 	cast_methods = CAST_RANGED
 	aspect = ASPECT_FORCE

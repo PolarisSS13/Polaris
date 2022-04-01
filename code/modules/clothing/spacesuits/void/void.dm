@@ -18,13 +18,13 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
 		SPECIES_TAJ = 'icons/mob/species/tajaran/helmet.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/helmet.dmi'
-		//Teshari have a general sprite sheet defined in modules/clothing/clothing.dm
+		//  have a general sprite sheet defined in modules/clothing/clothing.dm
 		)
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/hats.dmi',
 		SPECIES_TAJ = 'icons/obj/clothing/species/tajaran/hats.dmi',
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/hats.dmi',
-		SPECIES_TESHARI = 'icons/obj/clothing/species/teshari/hats.dmi'
+		SPECIES_  = 'icons/obj/clothing/species/ /hats.dmi'
 		)
 
 	light_overlay = "helmet_light"
@@ -48,13 +48,13 @@
 		SPECIES_UNATHI = 'icons/mob/species/unathi/suit.dmi',
 		SPECIES_TAJ = 'icons/mob/species/tajaran/suit.dmi',
 		SPECIES_SKRELL = 'icons/mob/species/skrell/suit.dmi'
-		//Teshari have a general sprite sheet defined in modules/clothing/clothing.dm
+		//  have a general sprite sheet defined in modules/clothing/clothing.dm
 		)
 	sprite_sheets_obj = list(
 		SPECIES_UNATHI = 'icons/obj/clothing/species/unathi/suits.dmi',
 		SPECIES_TAJ = 'icons/obj/clothing/species/tajaran/suits.dmi',
 		SPECIES_SKRELL = 'icons/obj/clothing/species/skrell/suits.dmi',
-		SPECIES_TESHARI = 'icons/obj/clothing/species/teshari/suits.dmi'
+		SPECIES_  = 'icons/obj/clothing/species/ /suits.dmi'
 		)
 
 	//Breach thresholds, should ideally be inherited by most (if not all) voidsuits.
@@ -67,7 +67,7 @@
 	var/obj/item/clothing/head/helmet/helmet = null   // Deployable helmet, if any.
 	var/obj/item/weapon/tank/tank = null              // Deployable tank, if any.
 	var/obj/item/device/suit_cooling_unit/cooler = null// Cooling unit, for FBPs.  Cannot be installed alongside a tank.
-	
+
 	//Cycler settings
 	var/no_cycle = FALSE	//stop this item from being put in a cycler
 

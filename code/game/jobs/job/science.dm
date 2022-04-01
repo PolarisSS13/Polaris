@@ -29,7 +29,7 @@
 	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10, SPECIES_HUMAN_VATBORN = 14)
 	ideal_character_age = 50
 	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
-	banned_job_species = list(SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
+	banned_job_species = list(SPECIES_ , SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
 	job_description = "The Research Director manages and maintains the Research department. They are required to ensure the safety of the entire crew, \

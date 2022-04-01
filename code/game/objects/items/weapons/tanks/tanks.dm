@@ -6,7 +6,7 @@ var/list/global/tank_gauge_cache = list()
 	name = "tank"
 	icon = 'icons/obj/tank.dmi'
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/back.dmi'
+		SPECIES_  = 'icons/mob/species/ /back.dmi'
 		)
 	drop_sound = 'sound/items/drop/gascan.ogg'
 	pickup_sound = 'sound/items/pickup/gascan.ogg'

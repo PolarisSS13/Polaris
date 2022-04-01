@@ -529,7 +529,7 @@
 	//Departments that the cycler can paint suits to look like.
 	var/list/departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Emergency Medical Response","Crowd Control","Security EVA")
 	//Species that the suits can be configured to fit.
-	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_TAJ, SPECIES_TESHARI)
+	var/list/species = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_UNATHI,SPECIES_TAJ, SPECIES_ )
 
 	var/target_department
 	var/target_species
@@ -628,7 +628,7 @@
 	departments = list("Vintage Crew","Vintage Engineering","Vintage Pilot (Bubble Helm)","Vintage Pilot (Closed Helm)","Vintage Medical (Bubble Helm)","Vintage Medical (Closed Helm)","Vintage Research (Bubble Helm)","Vintage Research (Closed Helm)","Vintage Marine","Vintage Officer","Vintage Mercenary","No Change")
 
 /obj/machinery/suit_cycler/vintage/Initialize()
-	species -= SPECIES_TESHARI
+	species -= SPECIES_
 	return ..()
 
 /obj/machinery/suit_cycler/attack_ai(mob/user as mob)
@@ -751,7 +751,7 @@
 	//Clear the access reqs, disable the safeties, and open up all paintjobs.
 	to_chat(user, "<span class='danger'>You run the sequencer across the interface, corrupting the operating protocols.</span>")
 	departments = list("Engineering","Mining","Medical","Security","Atmospherics","HAZMAT","Construction","Biohazard","Crowd Control","Security EVA","Emergency Medical Response","^%###^%$", "Charring","No Change")
-	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_TESHARI)
+	species = list(SPECIES_HUMAN,SPECIES_TAJ,SPECIES_SKRELL,SPECIES_UNATHI, SPECIES_ )
 
 	emagged = 1
 	safeties = 0
@@ -1115,9 +1115,9 @@
 			var/suit_check = ((suit!=null && (initial(parent_suit.icon_state) in icon_states(suit.sprite_sheets_obj[target_species],1))) || suit==null)
 			var/suit_helmet_check = ((suit!=null && suit.helmet!=null && (initial(parent_helmet.icon_state) in icon_states(suit.helmet.sprite_sheets_obj[target_species],1))) || suit==null || suit.helmet==null)
 			if(helmet_check && suit_check && suit_helmet_check)
-				if(helmet) 
+				if(helmet)
 					helmet.refit_for_species(target_species)
-				if(suit) 
+				if(suit)
 					suit.refit_for_species(target_species)
 					if(suit.helmet)
 						suit.helmet.refit_for_species(target_species)
@@ -1126,9 +1126,9 @@
 				T.visible_message("[bicon(src)]<span class='warning'>Unable to apply specified cosmetics with specified species. Please try again with a different species or cosmetic option selected.</span>")
 				return
 		else
-			if(helmet) 
+			if(helmet)
 				helmet.refit_for_species(target_species)
-			if(suit) 
+			if(suit)
 				suit.refit_for_species(target_species)
 				if(suit.helmet)
 					suit.helmet.refit_for_species(target_species)

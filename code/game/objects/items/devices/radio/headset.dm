@@ -8,7 +8,7 @@
 	subspace_transmission = 1
 	canhear_range = 0 // can't hear headsets from very far away
 	slot_flags = SLOT_EARS
-	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi')
+	sprite_sheets = list(SPECIES_  = 'icons/mob/species/ /ears.dmi')
 
 	var/translate_binary = 0
 	var/translate_hive = 0
@@ -355,7 +355,7 @@
 
 		else
 			to_chat(user, "This headset doesn't have any encryption keys!  How useless...")
-		
+
 		return TRUE
 
 	else if(istype(W, /obj/item/device/encryptionkey/))
@@ -366,13 +366,13 @@
 		else if(!keyslot2)
 			user.drop_from_inventory(W, src)
 			keyslot2 = W
-		
+
 		else
 			to_chat(user, "The headset can't hold another key!")
 
 		recalculateChannels()
 		return TRUE
-	
+
 	return ..()
 
 

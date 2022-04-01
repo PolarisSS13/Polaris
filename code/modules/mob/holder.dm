@@ -11,7 +11,7 @@ var/list/holder_mob_icon_cache = list()
 	show_messages = 1
 
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi',
+		SPECIES_ = 'icons/mob/species//head.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/head.dmi'
 		)
 
@@ -111,7 +111,7 @@ var/list/holder_mob_icon_cache = list()
 	else if(istype(loc, /obj/item/clothing/accessory/holster))
 		var/obj/item/clothing/accessory/holster/holster = loc
 		if(holster.holstered == src)
-			holster.clear_holster()			
+			holster.clear_holster()
 		to_chat(held, "<span class='warning'>You extricate yourself from [holster].</span>")
 		held.forceMove(get_turf(held))
 	else if(isitem(loc))

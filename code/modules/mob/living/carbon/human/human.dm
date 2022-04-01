@@ -1502,7 +1502,7 @@
 		permit.set_name(real_name)
 		equip_to_appropriate_slot(permit) // If for some reason it can't find room, it'll still be on the floor.
 
-/mob/living/carbon/human/proc/update_icon_special() //For things such as teshari hiding and whatnot.
+/mob/living/carbon/human/proc/update_icon_special() //For things such as   hiding and whatnot.
 	if(status_flags & HIDING) // Hiding? Carry on.
 		if(stat == DEAD || paralysis || weakened || stunned || restrained()) //stunned/knocked down by something that isn't the rest verb? Note: This was tried with INCAPACITATION_STUNNED, but that refused to work.
 			reset_plane_and_layer()

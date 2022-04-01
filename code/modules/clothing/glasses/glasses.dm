@@ -31,7 +31,7 @@ BLIND     // can't see anything
 	pickup_sound = 'sound/items/pickup/accessory.ogg'
 
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/eyes.dmi',
+		SPECIES_  = 'icons/mob/species/ /eyes.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/eyes.dmi'
 		)
 
@@ -558,14 +558,14 @@ BLIND     // can't see anything
 
 /obj/item/clothing/glasses/aerogelgoggles
 	name = "orange goggles"
-	desc = "Teshari designed lightweight goggles."
+	desc = "  designed lightweight goggles."
 	icon_state = "orange-g"
 	item_state_slots = list(slot_r_hand_str = "glasses", slot_l_hand_str = "glasses")
 	action_button_name = "Adjust Orange Goggles"
 	var/up = 0
 	item_flags = AIRTIGHT
 	body_parts_covered = EYES
-	species_restricted = list(SPECIES_TESHARI)
+	species_restricted = list(SPECIES_ )
 
 /obj/item/clothing/glasses/aerogelgoggles/attack_self()
 	toggle()

@@ -207,14 +207,14 @@ GLOBAL_DATUM_INIT(catalogue_data, /datum/category_collection/catalogue, new)
 	minds can be hard to sympathize with."
 	value = CATALOGUER_REWARD_TRIVIAL
 
-/datum/category_item/catalogue/fauna/teshari
-	name = "Sapients - Teshari"
-	desc = "The Teshari are reptilian pack predators from the Skrell homeworld. \
+/datum/category_item/catalogue/fauna/
+	name = "Sapients -  "
+	desc = "The   are reptilian pack predators from the Skrell homeworld. \
 	While they evolved alongside the Skrell, their interactions with them tended \
 	to be confused and violent, and until peaceful contact was made they largely \
 	stayed in their territories on and around the poles, in tundral terrain far \
 	too desolate and cold to be of interest to the Skrell. In more enlightened \
-	times, the Teshari are a minority culture on many Skrell worlds, maintaining \
+	times, the   are a minority culture on many Skrell worlds, maintaining \
 	their own settlements and cultures, but often finding themselves standing \
 	on the shoulders of their more technologically advanced neighbors when it \
 	comes to meeting and exploring the rest of the galaxy."

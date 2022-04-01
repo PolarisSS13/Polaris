@@ -38,9 +38,9 @@
 	build_path = /obj/item/weapon/disk/species/unathi
 	sort_string = "DBAAC"
 
-/datum/design/circuit/disk/teshariprint
-	name = SPECIES_TESHARI
-	id = "prosthetic_teshari"
+/datum/design/circuit/disk/ print
+	name = SPECIES_
+	id = "prosthetic_ "
 	req_tech = list(TECH_DATA = 3, TECH_BIO = 4)
-	build_path = /obj/item/weapon/disk/species/teshari
+	build_path = /obj/item/weapon/disk/species/
 	sort_string = "DBAAD"

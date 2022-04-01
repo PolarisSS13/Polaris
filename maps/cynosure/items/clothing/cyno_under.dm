@@ -8,7 +8,7 @@
 	item_icons = list(slot_w_uniform_str = 'maps/cynosure/icons/mob/cyno_under.dmi')
 	icon = 'maps/cynosure/icons/obj/cyno_uniforms.dmi'
 	sprite_sheets = list(
-			"Teshari" = 'maps/cynosure/icons/mob/species/teshari/cyno_uniform.dmi'
+			" " = 'maps/cynosure/icons/mob/species/ /cyno_uniform.dmi'
 			)
 	starting_accessories = list(/obj/item/clothing/accessory/storage/webbing/pilot1)
 
@@ -22,6 +22,6 @@
 	item_icons = list(slot_w_uniform_str = 'maps/cynosure/icons/mob/cyno_under.dmi')
 	icon = 'maps/cynosure/icons/obj/cyno_uniforms.dmi'
 	sprite_sheets = list(
-			"Teshari" = 'maps/cynosure/icons/mob/species/teshari/cyno_uniform.dmi'
+			" " = 'maps/cynosure/icons/mob/species/ /cyno_uniform.dmi'
 			)
 	starting_accessories = list(/obj/item/clothing/accessory/storage/webbing/pilot2)

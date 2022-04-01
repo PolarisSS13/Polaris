@@ -39,7 +39,7 @@
 	name = "hide species-sprite tail"
 	icon = null
 	icon_state = null
-	species_allowed = list(SPECIES_TAJ, SPECIES_UNATHI, SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_TAJ, SPECIES_UNATHI, SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/tail/squirrel
 	name = "squirrel"
@@ -200,11 +200,11 @@
 	icon_state = "deertail"
 	extra_overlay = "deertail_mark"
 
-/datum/sprite_accessory/tail/teshari_fluffytail
-	name = "Teshari alternative"
-	icon_state = "teshari_fluffytail"
-	extra_overlay = "teshari_fluffytail_mark"
-	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+/datum/sprite_accessory/tail/ _fluffytail
+	name = "  alternative"
+	icon_state = " _fluffytail"
+	extra_overlay = " _fluffytail_mark"
+	species_allowed = list(SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	whitelist_allowed = list()
 
 //For all species tails. Includes haircolored tails.
@@ -227,16 +227,16 @@
 	name = "monkey tail"
 	icon_state = "chimptail_s"
 
-/datum/sprite_accessory/tail/special/tesharitail
-	name = "teshari tail"
+/datum/sprite_accessory/tail/special/ tail
+	name = "  tail"
 	icon_state = "seromitail_s"
-	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
-/datum/sprite_accessory/tail/special/tesharitailfeathered
-	name = "teshari tail w/ feathers"
+/datum/sprite_accessory/tail/special/ tailfeathered
+	name = "  tail w/ feathers"
 	icon_state = "seromitail_s"
 	extra_overlay = "seromitail_feathers_s"
-	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/tail/special/unathihc
 	name = "unathi tail"
@@ -260,12 +260,12 @@
 	name = "monkey tail"
 	icon_state = "chimptail_hc_s"
 
-/datum/sprite_accessory/tail/special/tesharitailhc
-	name = "teshari tail"
+/datum/sprite_accessory/tail/special/ tailhc
+	name = "  tail"
 	icon_state = "seromitail_hc_s"
 
-/datum/sprite_accessory/tail/special/tesharitailfeatheredhc
-	name = "teshari tail w/ feathers"
+/datum/sprite_accessory/tail/special/ tailfeatheredhc
+	name = "  tail w/ feathers"
 	icon_state = "seromitail_feathers_hc_s"
 
 /datum/sprite_accessory/tail/special/vulpan

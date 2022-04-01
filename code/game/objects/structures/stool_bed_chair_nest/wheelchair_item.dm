@@ -23,7 +23,7 @@
 
 /obj/item/wheelchair/motor/small
 	name = "small electric wheelchair"
-	desc = "A small motorized wheelchair, it looks around the right size for a Teshari."
+	desc = "A small motorized wheelchair, it looks around the right size for a  ."
 	icon_state = "teshchair_folded"
 	item_state = "teshchair"
 	unfolded_type = /obj/structure/bed/chair/wheelchair/smallmotor

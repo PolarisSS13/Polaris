@@ -100,18 +100,18 @@
 	flags_inv = HIDEJUMPSUIT|HIDETAIL|HIDETIE|HIDEHOLSTER
 	item_flags = THICKMATERIAL
 
-/obj/item/clothing/suit/radiation/teshari
+/obj/item/clothing/suit/radiation/
 	name = "Small radiation suit"
-	desc = "A specialist suit that protects against radiation, designed specifically for use by Teshari. Made to order by Aether."
-	icon = 'icons/obj/clothing/species/teshari/suits.dmi'
-	icon_override = 'icons/mob/species/teshari/suit.dmi'
+	desc = "A specialist suit that protects against radiation, designed specifically for use by  . Made to order by Aether."
+	icon = 'icons/obj/clothing/species/ /suits.dmi'
+	icon_override = 'icons/mob/species/ /suit.dmi'
 	icon_state = "rad_fitted"
-	species_restricted = list(SPECIES_TESHARI)
+	species_restricted = list(SPECIES_ )
 
-/obj/item/clothing/head/radiation/teshari
+/obj/item/clothing/head/radiation/
 	name = "Small radiation hood"
-	desc = "A specialist hood with radiation protective properties, designed specifically for use by Teshari. Made to order by Aether."
-	icon = 'icons/obj/clothing/species/teshari/hats.dmi'
-	icon_override = 'icons/mob/species/teshari/head.dmi'
+	desc = "A specialist hood with radiation protective properties, designed specifically for use by  . Made to order by Aether."
+	icon = 'icons/obj/clothing/species/ /hats.dmi'
+	icon_override = 'icons/mob/species/ /head.dmi'
 	icon_state = "rad_fitted"
-	species_restricted = list(SPECIES_TESHARI)
+	species_restricted = list(SPECIES_ )

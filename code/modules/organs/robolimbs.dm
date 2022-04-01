@@ -62,7 +62,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	var/robo_brute_mod = 1                               // Multiplier for incoming brute damage.
 	var/robo_burn_mod = 1                                // As above for burn.
 	// Species in this list cannot take these prosthetics.
-	var/list/species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA)
+	var/list/species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA)
 	// "Species Name" = "Robolimb Company", List, when initialized, will become "Species Name" = RobolimbDatum, used for alternate species sprites.
 	var/list/species_alternates = list(SPECIES_TAJ = "Unbranded - Tajaran", SPECIES_UNATHI = "Unbranded - Unathi")
 
@@ -90,7 +90,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 
 /datum/robolimb/unbranded_tajaran
 	company = "Unbranded - Tajaran"
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
 	suggested_species = SPECIES_TAJ
 	desc = "A simple robotic limb with feline design. Seems rather stiff."
 	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_tajaran.dmi'
@@ -99,25 +99,25 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 
 /datum/robolimb/unbranded_unathi
 	company = "Unbranded - Unathi"
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
 	suggested_species = SPECIES_UNATHI
 	desc = "A simple robotic limb with reptilian design. Seems rather stiff."
 	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_unathi.dmi'
 	unavailable_to_build = 1
 	modular_bodyparts = MODULAR_BODYPART_CYBERNETIC
 
-/datum/robolimb/unbranded_teshari
-	company = "Unbranded - Teshari"
+/datum/robolimb/unbranded_
+	company = "Unbranded -  "
 	species_cannot_use = list(SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
-	suggested_species = SPECIES_TESHARI
+	suggested_species = SPECIES_
 	desc = "A simple robotic limb with a small, raptor-like design. Seems rather stiff."
-	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_teshari.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/unbranded/unbranded_ .dmi'
 	unavailable_to_build = 0
 	modular_bodyparts = MODULAR_BODYPART_CYBERNETIC
 	parts = list(BP_HEAD, BP_TORSO, BP_GROIN)
 
-/datum/robolimb/unbranded_teshari/limbs
-	company = "Unbranded - Teshari (Limbs)"
+/datum/robolimb/unbranded_ /limbs
+	company = "Unbranded -   (Limbs)"
 	parts = list(BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 	modular_bodyparts = MODULAR_BODYPART_PROSTHETIC
 
@@ -130,7 +130,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 
 /datum/robolimb/nanotrasen_tajaran
 	company = "NanoTrasen - Tajaran"
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
 	suggested_species = SPECIES_TAJ
 	desc = "A simple but efficient robotic limb, created by NanoTrasen."
@@ -140,7 +140,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 
 /datum/robolimb/nanotrasen_unathi
 	company = "NanoTrasen - Unathi"
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
 	suggested_species = SPECIES_UNATHI
 	desc = "A simple but efficient robotic limb, created by NanoTrasen."
@@ -148,13 +148,13 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	modular_bodyparts = MODULAR_BODYPART_CYBERNETIC
 
-/datum/robolimb/cenilimicybernetics_teshari
+/datum/robolimb/cenilimicybernetics_
 	company = "Cenilimi Cybernetics"
 	species_cannot_use = list(SPECIES_UNATHI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
-	suggested_species = SPECIES_TESHARI
-	desc = "Made by a Teshari-owned company, for Teshari."
-	icon = 'icons/mob/human_races/cyberlimbs/cenilimicybernetics/cenilimicybernetics_teshari.dmi'
+	suggested_species = SPECIES_
+	desc = "Made by a  -owned company, for  ."
+	icon = 'icons/mob/human_races/cyberlimbs/cenilimicybernetics/cenilimicybernetics_ .dmi'
 	unavailable_to_build = 1
 	modular_bodyparts = MODULAR_BODYPART_CYBERNETIC
 
@@ -193,7 +193,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	blood_name = "synthetic ichor"
 	speech_bubble_appearance = "machine"
 	unavailable_to_build = 1
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_TAJ, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_TAJ, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
 	suggested_species = SPECIES_DIONA
 	// Dionaea are naturally very tanky, so the robotic limbs are actually far weaker than their normal bodies.
 	robo_brute_mod = 1.3
@@ -345,7 +345,7 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 	unavailable_to_build = 1
 	lifelike = 1
 	skin_color = TRUE
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_TAJ, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_DIONA, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_TAJ, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_DIONA, SPECIES_ZADDAT)
 	blood_color = "#4451cf"
 	blood_name = "coolant"
 	speech_bubble_appearance = "normal"
@@ -520,8 +520,8 @@ var/const/standard_monitor_styles = "blank=ipc_blank;\
 /obj/item/weapon/disk/species/tajaran
 	species = SPECIES_TAJ
 
-/obj/item/weapon/disk/species/teshari
-	species = SPECIES_TESHARI
+/obj/item/weapon/disk/species/
+	species = SPECIES_
 
 // In case of bus, presently.
 /obj/item/weapon/disk/species/diona

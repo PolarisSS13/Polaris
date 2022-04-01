@@ -10,7 +10,7 @@ Category: Non-Fiction
 /obj/item/weapon/book/custom_library/nonfiction/freesirisailightbulbs
 	name = "Free Sirisai: Light Bulbs"
 	desc = "A hardbound book titled \"Free Sirisai: Light Bulbs\" by Sene of Sheraeshi."
-	description_info = "This book is titled \"Free Sirisai: Light Bulbs\" by Sene of Sheraeshi. It appears to be about the different lighting needs of different sapient species, written from a Teshari author's view."
+	description_info = "This book is titled \"Free Sirisai: Light Bulbs\" by Sene of Sheraeshi. It appears to be about the different lighting needs of different sapient species, written from a   author's view."
 
 	title = "Free Sirisai: Light Bulbs"
 	icon_state = "book5"
@@ -31,9 +31,9 @@ Category: Non-Fiction
 				<sup>by Sene of Sheraeshi.</sup></center>
 				<hr>
 				<p class="borders">
-				One may find the problems inherent in co-habitation well illustrated through the ubiquity of light bulbs among virtually all settlements. In colonies like the <i>NCS Northern Star</i>, where I make my residence, the bulbs are uniform in design and output. But it is clear to see that various species require different amounts of light for proper vision -- we Teshari and our Tajaran comrades require less, while Dionaea require more. In addition, these light bulbs are low-heat, which the cold-blooded Unathi would certainly not prefer.
+				One may find the problems inherent in co-habitation well illustrated through the ubiquity of light bulbs among virtually all settlements. In colonies like the <i>NCS Northern Star</i>, where I make my residence, the bulbs are uniform in design and output. But it is clear to see that various species require different amounts of light for proper vision -- we   and our Tajaran comrades require less, while Dionaea require more. In addition, these light bulbs are low-heat, which the cold-blooded Unathi would certainly not prefer.
 				<br><br>
-				In short-- the standard light bulbs aboard even a cosmopolitan space station in the Vir Cluster are calibrated for the preferences and biology of humans and Skrell. It is obvious that we Teshari would benefit greatly from having structures tailored to our own culture and anatomy, from hallway redesign to the very filaments of the light-bulbs.
+				In short-- the standard light bulbs aboard even a cosmopolitan space station in the Vir Cluster are calibrated for the preferences and biology of humans and Skrell. It is obvious that we   would benefit greatly from having structures tailored to our own culture and anatomy, from hallway redesign to the very filaments of the light-bulbs.
 				</p>
 				<hr>
 				</body>

@@ -333,7 +333,7 @@
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_LEG,BP_R_LEG,BP_L_ARM,BP_R_ARM,BP_L_HAND,BP_R_HAND)
 
 /datum/sprite_accessory/marking/vr/tesh_feathers
-	name = "Teshari Feathers"
+	name = "  Feathers"
 	icon_state = "tesh-feathers"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_HAND,BP_R_HAND)
@@ -438,7 +438,7 @@
 	body_parts = list(BP_L_LEG)
 
 /datum/sprite_accessory/marking/vr/teshi_small_feathers
-	name = "Teshari small wingfeathers"
+	name = "  small wingfeathers"
 	icon_state = "teshi_sf"
 	color_blend_mode = ICON_MULTIPLY
 	body_parts = list(BP_L_FOOT,BP_R_FOOT,BP_L_HAND,BP_R_HAND,BP_TORSO)

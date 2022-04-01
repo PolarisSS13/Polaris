@@ -15,7 +15,7 @@
 
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.haste) && M.haste == TRUE)
-			return ..() + HUMAN_LOWEST_SLOWDOWN // Returning -1 will actually result in a slowdown for Teshari.
+			return ..() + HUMAN_LOWEST_SLOWDOWN // Returning -1 will actually result in a slowdown for  .
 		if(!isnull(M.slowdown))
 			. += M.slowdown
 

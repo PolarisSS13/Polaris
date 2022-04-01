@@ -648,3 +648,70 @@
 		//traumatic_shock is updated every tick, incrementing that is pointless - shock_stage is the counter.
 		//Not that it matters much for diona, who have NO_PAIN.
 		H.shock_stage++
+
+/datum/species/skathari
+	name = SPECIES_SKATHARI
+	name_plural = "Skathari"
+	icobase = 'icons/mob/human_races/r_zaddat.dmi'
+	deform = 'icons/mob/human_races/r_zaddat.dmi'
+	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick, /datum/unarmed_attack/claws, /datum/unarmed_attack/bite/sharp)
+	darksight = 8
+	slowdown = -0.5
+	brute_mod = 0.25
+	burn_mod =  0.25
+	toxins_mod = 0.25
+	flash_mod = 2
+	metabolic_rate = 20
+	gluttonous = 1
+	num_alternate_languages = 0
+	name_language = LANGUAGE_SKATHARI
+	species_language = LANGUAGE_SKATHARI
+	health_hud_intensity = 2.5
+	melee_damage_lower = 50
+	melee_damage_upper = 50
+	projectiletype = /obj/item/projectile/energy/skathari
+
+	economic_modifier = 3
+
+	min_age = 1
+	max_age = 8
+
+	blurb = "The Skathari, sometimes colloquially known as Bluespace Bugs are a species of insectoid aliens believed to originate from outwith the galactic plane. Their manipulation of bluespace is unknown in any other species, and their apparent consumption of tachyon particles has led to widespread disruption in travel among the intelligent species of the known galaxy. "
+	catalogue_data = list(/datum/category_item/catalogue/fauna/zaddat)
+
+
+	genders = list(PLURAL)
+
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
+	appearance_flags = null
+
+	flesh_color = "#AFA59E"
+	base_color = "#e2e4a6"
+	blood_color = "#FFCC00" //a gross sort of orange color
+
+	reagent_tag = IS_SKATHARI
+
+	heat_discomfort_strings = list(
+		"Your joints itch.",
+		"You feel uncomfortably warm.",
+		"Your carapace feels like a stove."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your antenna ache."
+		)
+
+	has_organ = list(
+	O_STOMACH =	 /obj/item/organ/internal/stomach,
+	)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = 0,
+		/datum/mob_descriptor/build = -1
+		)
+
+	default_emotes = list(
+		/decl/emote/audible/chirp
+	)

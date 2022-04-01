@@ -9,7 +9,7 @@
 		/datum/lore/codex/page/diona,
 		/datum/lore/codex/page/promethean,
 		/datum/lore/codex/page/vatborn,
-		/datum/lore/codex/category/teshari,
+		/datum/lore/codex/category/ ,
 		/datum/lore/codex/category/positronic,
 		/datum/lore/codex/category/drone
 		)
@@ -72,60 +72,22 @@
 	Introduced by the Skrell, and quite slow and peaceful, the Diona share good relations with the other species."
 
 // Bird lore
-/datum/lore/codex/category/teshari/add_content()
-	name = "Teshari"
-	data = "The Teshari are reptilian pack predators from the [quick_link("Skrell")] homeworld, Sirisai (Qerr'balak). While they evolved alongside the Skrell, their interactions with them \
-	tended to be confused and violent, and until peaceful contact was made they largely stayed in their territories on and around the poles, in tundral \
-	terrain far too desolate and cold to be of interest to the Skrell. In more enlightened times, the Teshari are a minority culture on many Skrell worlds, \
-	maintaining their own settlements and cultures, but often finding themselves standing on the shoulders of their more technologically advanced neighbors \
-	when it comes to meeting and exploring the rest of the galaxy.\
-	<br><br>\
-	It is important to note that Teshari names are unlike standard human names.  Their pack name precedes their given name."
+/datum/lore/codex/category/ /add_content()
+	name = " "
+	data = "got eaten by skathari :("
 	children = list(
-		/datum/lore/codex/page/teshari_packs,
-		/datum/lore/codex/page/teshari_physical
+		/datum/lore/codex/page/ _packs,
+		/datum/lore/codex/page/ _physical
 	)
 
-/datum/lore/codex/page/teshari_packs/add_content()
-	name = "Teshari Packs"
+/datum/lore/codex/page/ _packs/add_content()
+	name = "  Packs"
 	keywords += list("Packs")
-	data = "There are several packs you may come across;<small>\
-	<br><br>\
-	<b>Eshi</b><br>\
-	A large, old, politically neutral pack heavily involved in efforts to get Teshari into space. Probably the most \
-	common pack to see outside of a [quick_link("Skrell")] colony, and probably the most numerous Teshari pack outside of Sirisai and associated colonies.\
-	<br><br>\
-	<b>Nasemari</b><br>\
-	A very small pack. Generally focused around supporting and providing for packs on the homeworlds, they have devoted \
-	themselves to training as technicians and engineers in order to obtain skills and training to take back to Sirisai. \
-	The pack is only around thirty people in size, but owns and maintains a nuclear power plant.\
-	<br><br>\
-	<b>Schasaraca</b><br>\
-	One of the more Skrell-devoted and integrated packs. They tend to be rather sycophantic towards the Skrell and work as \
-	scientists and field researchers on a variety of projects, generally biology or technical research. They have a reputation \
-	for working as spies and informants for the Skrell governments amongst other Teshari.\
-	<br><br>\
-	<b>Ceea</b><br>\
-	An isolationist pack from the northern tundra of Sirisai; generally known as disliking the Skrell. Small to average in size; \
-	only around sixty members. Their regional culture is built around the study culture and anthropology, as well as archaeology, \
-	originally for the purposes of recovering history and materials \"lost\" due to Skrell interference.  It would be very rare to \
-	see them on your travels, however they are listed here for the sake of completeness.\
-	<br><br>\
-	<b>Resca</b><br>\
-	A pack that sold off its small native territory for the chance to get into space. Very musically inclined. They tend towards medical professions.</small>"
+	data = "none left"
 
-/datum/lore/codex/page/teshari_physical/add_content()
-	name = "Physiology of Teshari"
-	data = "The Teshari are, relative to other species, smaller than average, rarely reaching more than 2-3'/1m in height, and weigh less than \
-	90lbs/40kg. They have rapid metabolisms and very efficient digestive systems, and thanks to sharing in \
-	the medical technology of the [quick_link("Skrell")], they tend to have robust and effective immune systems. They evolved \
-	for very cold and very barren areas, generally the polar regions. Because of this, their skin is a fine \
-	insulator and many of their internal processes are not particularly energy-efficient; they cannot cope \
-	well at all with high temperatures.\
-	<br><br>\
-	Their hearing is exceptionally sensitive to the point that they can detect a person moving on the other \
-	side of a wall, but this comes at a cost.  Very loud noises are very painful for Teshari, so be mindful of \
-	your indoor voice when speaking with one. The Teshari are omnivorous but generally prefer to eat meat wherever possible."
+/datum/lore/codex/page/ _physical/add_content()
+	name = "Physiology of  "
+	data = "The   are, gone"
 
 // Promethean Lore
 /datum/lore/codex/page/promethean/add_content()

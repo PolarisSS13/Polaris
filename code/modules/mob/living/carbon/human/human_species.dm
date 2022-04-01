@@ -29,9 +29,9 @@
 /mob/living/carbon/human/diona/Initialize(var/new_loc)
 	return ..(new_loc, SPECIES_DIONA)
 
-/mob/living/carbon/human/teshari/Initialize(var/new_loc)
-	h_style = "Teshari Default"
-	return ..(new_loc, SPECIES_TESHARI)
+/mob/living/carbon/human/ /Initialize(var/new_loc)
+	h_style = "  Default"
+	return ..(new_loc, SPECIES_ )
 
 /mob/living/carbon/human/promethean/Initialize(var/new_loc)
 	return ..(new_loc, SPECIES_PROMETHEAN)

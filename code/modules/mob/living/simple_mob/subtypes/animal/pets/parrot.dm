@@ -21,7 +21,7 @@
 		"OH GOD ITS FREE CALL THE SHUTTLE",
 		"Danger! Crystal hyperstructure instability!",
 		"CRYSTAL DELAMINATION IMMINENT.",
-		"Tweet tweet, I'm a Teshari.",
+		"Tweet tweet, I'm a  .",
 		"Chitters.",
 		"Meteors have been detected on a collision course with the station!"
 		)

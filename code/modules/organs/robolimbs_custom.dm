@@ -10,7 +10,7 @@
 	company = "Uesseka Prototyping Ltd."
 	desc = "This limb seems meticulously hand-crafted, and distinctly Unathi in design."
 	icon = 'icons/mob/human_races/cyberlimbs/_fluff_vr/rahboop.dmi'
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
 	suggested_species = SPECIES_UNATHI
 	blood_color = "#5e280d"
@@ -34,7 +34,7 @@
 	company = "Zeng-Hu - Tajaran"
 	desc = "This limb has a rubbery covering with basic faux fur and visible seams."
 	icon = 'icons/mob/human_races/cyberlimbs/zenghu/zenghu_taj.dmi'
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
 	suggested_species = SPECIES_TAJ
 	unavailable_to_build = 1
 	parts = list(BP_HEAD)
@@ -43,7 +43,7 @@
 	company = "Uesseka Prototyping Ltd. - Red"
 	desc = "This limb seems meticulously hand-crafted, and distinctly Unathi in design. This one's red!"
 	icon = 'icons/mob/human_races/cyberlimbs/rahboopred/rahboopred.dmi'
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_ , SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_VOX, SPECIES_HUMAN_VATBORN, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_ZADDAT)
 	species_alternates = list(SPECIES_HUMAN = "NanoTrasen")
 	suggested_species = SPECIES_UNATHI
 	blood_color = "#5e280d"
@@ -161,19 +161,19 @@
 /obj/item/weapon/disk/limb/dsi_spider
 	company = "DSI - Vasilissan"
 */
-/datum/robolimb/dsi_teshari
-	company = "DSI - Teshari"
+/datum/robolimb/dsi_
+	company = "DSI -  "
 	desc = "This limb has a thin synthflesh casing with a few connection ports."
-	icon = 'icons/mob/human_races/cyberlimbs/DSITeshari/dsi_teshari.dmi'
+	icon = 'icons/mob/human_races/cyberlimbs/DSI /dsi_ .dmi'
 	lifelike = 1
 	skin_tone = 1
-	suggested_species = SPECIES_TESHARI
+	suggested_species = SPECIES_
 
-/datum/robolimb/dsi_teshari/New()
+/datum/robolimb/dsi_ /New()
 	species_cannot_use = GLOB.all_species.Copy()
-//	species_cannot_use -= SPECIES_TESHARI
+//	species_cannot_use -= SPECIES_
 //	species_cannot_use -= SPECIES_CUSTOM
 	..()
 
-/obj/item/weapon/disk/limb/dsi_teshari
-	company = "DSI - Teshari"
+/obj/item/weapon/disk/limb/dsi_
+	company = "DSI -  "

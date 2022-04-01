@@ -266,8 +266,8 @@
 
 /datum/reagent/nutriment/protein/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
-		if(IS_TESHARI)
-			..(M, alien, removed*1.2) // Teshari get a bit more nutrition from meat.
+		if(IS_ )
+			..(M, alien, removed*1.2) //   get a bit more nutrition from meat.
 		if(IS_UNATHI)
 			..(M, alien, removed*2.25) //Unathi get most of their nutrition from meat.
 		else

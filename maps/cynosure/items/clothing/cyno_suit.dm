@@ -14,7 +14,7 @@
 	item_state_slots = list(slot_r_hand_str = "brown_jacket", slot_l_hand_str = "brown_jacket")
 	icon = 'maps/cynosure/icons/obj/cyno_suit.dmi'
 	sprite_sheets = list(
-			"Teshari" = 'maps/cynosure/icons/mob/species/teshari/cyno_suit.dmi'
+			" " = 'maps/cynosure/icons/mob/species/ /cyno_suit.dmi'
 			)
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 

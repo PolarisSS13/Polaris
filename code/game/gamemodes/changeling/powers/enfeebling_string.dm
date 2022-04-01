@@ -18,7 +18,7 @@
 	on_created_text = "<span class='danger'>You feel a small prick and you feel extremly weak!</span>"
 	on_expired_text = "<span class='notice'>You no longer feel extremly weak.</span>"
 
-// Now YOU'RE the Teshari!
+// Now YOU'RE the  !
 /datum/modifier/enfeeble/strong
 	max_health_percent = 0.5
 	outgoing_melee_damage_percent = 0.5

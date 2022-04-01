@@ -132,7 +132,7 @@
 	name = "Bald"
 	icon_state = "bald"
 	flags = HAIR_VERY_SHORT
-	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_VOX,SPECIES_TESHARI)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_UNATHI,SPECIES_PROMETHEAN,SPECIES_HUMAN_VATBORN,SPECIES_VOX,SPECIES_ )
 
 /datum/sprite_accessory/hair/baldfade
 	name = "Balding Fade"
@@ -1448,7 +1448,7 @@ shaved
 	name = "Shaved"
 	icon_state = "bald"
 	gender = NEUTER
-	species_allowed = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	species_allowed = list(SPECIES_HUMAN, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 */
 /datum/sprite_accessory/facial_hair/neck_fluff
 	name = "Neck Fluff"
@@ -1546,7 +1546,7 @@ shaved
 	name = "Shaved"
 	icon_state = "bald"
 	gender = NEUTER
-	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_TAJ,SPECIES_SKRELL, "Machine", SPECIES_TESHARI, SPECIES_TESHARI,SPECIES_PROMETHEAN)
+	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_TAJ,SPECIES_SKRELL, "Machine", SPECIES_ , SPECIES_ ,SPECIES_PROMETHEAN)
 
 /datum/sprite_accessory/facial_hair/watson
 	name = "Watson Mustache"
@@ -1899,83 +1899,83 @@ shaved
 	name = "Tajaran Finger Curls"
 	icon_state = "hair_fingerwave"
 
-//Teshari things
-/datum/sprite_accessory/hair/teshari
-	name = "Teshari Default"
-	icon_state = "teshari_default"
-	species_allowed = list(SPECIES_TESHARI)
+//  things
+/datum/sprite_accessory/hair/
+	name = "  Default"
+	icon_state = " _default"
+	species_allowed = list(SPECIES_ )
 
-/datum/sprite_accessory/hair/teshari/altdefault
-	name = "Teshari Alt. Default"
-	icon_state = "teshari_ears"
+/datum/sprite_accessory/hair/ /altdefault
+	name = "  Alt. Default"
+	icon_state = " _ears"
 
-/datum/sprite_accessory/hair/teshari/tight
-	name = "Teshari Tight"
-	icon_state = "teshari_tight"
+/datum/sprite_accessory/hair/ /tight
+	name = "  Tight"
+	icon_state = " _tight"
 
-/datum/sprite_accessory/hair/teshari/excited
-	name = "Teshari Spiky"
-	icon_state = "teshari_spiky"
+/datum/sprite_accessory/hair/ /excited
+	name = "  Spiky"
+	icon_state = " _spiky"
 
-/datum/sprite_accessory/hair/teshari/spike
-	name = "Teshari Spike"
-	icon_state = "teshari_spike"
+/datum/sprite_accessory/hair/ /spike
+	name = "  Spike"
+	icon_state = " _spike"
 
-/datum/sprite_accessory/hair/teshari/long
-	name = "Teshari Overgrown"
-	icon_state = "teshari_long"
+/datum/sprite_accessory/hair/ /long
+	name = "  Overgrown"
+	icon_state = " _long"
 
-/datum/sprite_accessory/hair/teshari/burst
-	name = "Teshari Starburst"
-	icon_state = "teshari_burst"
+/datum/sprite_accessory/hair/ /burst
+	name = "  Starburst"
+	icon_state = " _burst"
 
-/datum/sprite_accessory/hair/teshari/shortburst
-	name = "Teshari Short Starburst"
-	icon_state = "teshari_burst_short"
+/datum/sprite_accessory/hair/ /shortburst
+	name = "  Short Starburst"
+	icon_state = " _burst_short"
 
-/datum/sprite_accessory/hair/teshari/mohawk
-	name = "Teshari Mohawk"
-	icon_state = "teshari_mohawk"
+/datum/sprite_accessory/hair/ /mohawk
+	name = "  Mohawk"
+	icon_state = " _mohawk"
 
-/datum/sprite_accessory/hair/teshari/pointy
-		name = "Teshari Pointy"
-		icon_state = "teshari_pointy"
+/datum/sprite_accessory/hair/ /pointy
+		name = "  Pointy"
+		icon_state = " _pointy"
 
-/datum/sprite_accessory/hair/teshari/upright
-	name = "Teshari Upright"
-	icon_state = "teshari_upright"
+/datum/sprite_accessory/hair/ /upright
+	name = "  Upright"
+	icon_state = " _upright"
 
-/datum/sprite_accessory/hair/teshari/mane
-	name = "Teshari Mane"
-	icon_state = "teshari_mane"
+/datum/sprite_accessory/hair/ /mane
+	name = "  Mane"
+	icon_state = " _mane"
 
-/datum/sprite_accessory/hair/teshari/droopy
-	name = "Teshari Droopy"
-	icon_state = "teshari_droopy"
+/datum/sprite_accessory/hair/ /droopy
+	name = "  Droopy"
+	icon_state = " _droopy"
 
-/datum/sprite_accessory/hair/teshari/mushroom
-	name = "Teshari Mushroom"
-	icon_state = "teshari_mushroom"
+/datum/sprite_accessory/hair/ /mushroom
+	name = "  Mushroom"
+	icon_state = " _mushroom"
 
-/datum/sprite_accessory/hair/teshari/twies
-	name = "Teshari Twies"
-	icon_state = "teshari_twies"
+/datum/sprite_accessory/hair/ /twies
+	name = "  Twies"
+	icon_state = " _twies"
 
-/datum/sprite_accessory/hair/teshari/backstrafe
-	name = "Teshari Backstrafe"
-	icon_state = "teshari_backstrafe"
+/datum/sprite_accessory/hair/ /backstrafe
+	name = "  Backstrafe"
+	icon_state = " _backstrafe"
 
-/datum/sprite_accessory/hair/teshari/_longway
-	name = "Teshari Long way"
-	icon_state = "teshari_longway"
+/datum/sprite_accessory/hair/ /_longway
+	name = "  Long way"
+	icon_state = " _longway"
 
-/datum/sprite_accessory/hair/teshari/tree
-	name = "Teshari Tree"
-	icon_state = "teshari_tree"
+/datum/sprite_accessory/hair/ /tree
+	name = "  Tree"
+	icon_state = " _tree"
 
-/datum/sprite_accessory/hair/teshari/fluffymohawk
-	name = "Teshari Fluffy Mohawk"
-	icon_state = "teshari_fluffymohawk"
+/datum/sprite_accessory/hair/ /fluffymohawk
+	name = "  Fluffy Mohawk"
+	icon_state = " _fluffymohawk"
 
 // Vox things
 /datum/sprite_accessory/hair/vox
@@ -2046,21 +2046,21 @@ shaved
 	icon_state = "facial_dorsalfrill"
 
 
-//Teshari face things
-/datum/sprite_accessory/facial_hair/teshari
-	name = "Teshari Beard"
-	icon_state = "teshari_chin"
-	species_allowed = list(SPECIES_TESHARI)
+//  face things
+/datum/sprite_accessory/facial_hair/
+	name = "  Beard"
+	icon_state = " _chin"
+	species_allowed = list(SPECIES_ )
 	gender = NEUTER
 
-/datum/sprite_accessory/facial_hair/teshari/scraggly
-	name = "Teshari Scraggly"
-	icon_state = "teshari_scraggly"
+/datum/sprite_accessory/facial_hair/ /scraggly
+	name = "  Scraggly"
+	icon_state = " _scraggly"
 
 
-/datum/sprite_accessory/facial_hair/teshari/chops
-	name = "Teshari Chops"
-	icon_state = "teshari_gap"
+/datum/sprite_accessory/facial_hair/ /chops
+	name = "  Chops"
+	icon_state = " _gap"
 
 /*
 ////////////////////////////
@@ -2563,16 +2563,16 @@ shaved
 	//Tesh stuff.
 
 /datum/sprite_accessory/marking/teshi_fluff
-	name = "Underfluff (Teshari)"
+	name = "Underfluff ( )"
 	icon_state = "teshi_fluff"
 	body_parts = list(BP_HEAD, BP_TORSO, BP_GROIN, BP_R_LEG, BP_L_LEG)
-	species_allowed = list(SPECIES_TESHARI)
+	species_allowed = list(SPECIES_ )
 
 /datum/sprite_accessory/marking/teshi_heterochromia
-	name = "Heterochromia (Teshari) (right eye)"
+	name = "Heterochromia ( ) (right eye)"
 	icon_state = "teshi_heterochromia"
 	body_parts = list(BP_HEAD)
-	species_allowed = list(SPECIES_TESHARI)
+	species_allowed = list(SPECIES_ )
 
 	//Diona stuff.
 

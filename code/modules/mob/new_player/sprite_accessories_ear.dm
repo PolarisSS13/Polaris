@@ -215,25 +215,25 @@
 	name = "floopy bunny ears"
 	icon_state = "floppy_bun"
 
-/datum/sprite_accessory/ears/teshari
-	name = "Teshari (colorable fluff)"
-	icon_state = "teshari"
-	extra_overlay = "teshariinner"
-	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+/datum/sprite_accessory/ears/
+	name = "  (colorable fluff)"
+	icon_state = " "
+	extra_overlay = " inner"
+	species_allowed = list(SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	whitelist_allowed = list()
 
-/datum/sprite_accessory/ears/tesharihigh
-	name = "Teshari upper ears (colorable fluff)"
-	icon_state = "tesharihigh"
-	extra_overlay = "tesharihighinner"
-	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+/datum/sprite_accessory/ears/ high
+	name = "  upper ears (colorable fluff)"
+	icon_state = " high"
+	extra_overlay = " highinner"
+	species_allowed = list(SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	whitelist_allowed = list()
 
-/datum/sprite_accessory/ears/tesharilow
-	name = "Teshari lower ears (colorable fluff)"
-	icon_state = "tesharilow"
-	extra_overlay = "tesharilowinner"
-	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+/datum/sprite_accessory/ears/ low
+	name = "  lower ears (colorable fluff)"
+	icon_state = " low"
+	extra_overlay = " lowinner"
+	species_allowed = list(SPECIES_ , SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	whitelist_allowed = list()
 
 // Special snowflake ears go below here.

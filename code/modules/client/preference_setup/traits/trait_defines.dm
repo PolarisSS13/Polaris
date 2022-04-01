@@ -257,7 +257,7 @@
 		/datum/trait/modifier/mental/skrellphobe,
 		/datum/trait/modifier/mental/tajaraphobe,
 		/datum/trait/modifier/mental/unathiphobe,
-		/datum/trait/modifier/mental/teshariphobe,
+		/datum/trait/modifier/mental/ phobe,
 		/datum/trait/modifier/mental/prometheanphobe
 	)
 
@@ -287,8 +287,8 @@
 	desc = "Boilerplate racism for trees goes here."
 	mutually_exclusive = list(/datum/trait/modifier/mental/xenophobe)
 
-/datum/trait/modifier/mental/teshariphobe
-	name = "Teshari-phobic"
+/datum/trait/modifier/mental/ phobe
+	name = " -phobic"
 	desc = "Boilerplate racism for birds goes here."
 	mutually_exclusive = list(/datum/trait/modifier/mental/xenophobe)
 

@@ -30,7 +30,7 @@
 	are expected to wear clothes appropiate to protect against common risks for the department.  Off duty personnel, visitors, and those engaging in certain recreational \
 	areas such as the Pool (if one is available on your facility) have less strict dresscode, however clothing of some form must still be worn in public.\
 	<br><br>\
-	Exceptions: Skrell, Teshari, and Unathi are expected to cover at minimum their lower bodies.  Tajaran males may go topless, as a means to keep cool.  \
+	Exceptions: Skrell,  , and Unathi are expected to cover at minimum their lower bodies.  Tajaran males may go topless, as a means to keep cool.  \
 	Dionaea and 'robotic' synthetics have no minimum required amount of clothing, however they should still wear a departmental marker if in a department.  \
 	'Realistic' synthetics are expected to have the same minimum as the species they appear as.\
 	<br>\

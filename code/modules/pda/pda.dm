@@ -11,7 +11,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	item_state = "electronic"
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_ID | SLOT_BELT
-	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/teshari/id.dmi')
+	sprite_sheets = list(SPECIES_  = 'icons/mob/species/ /id.dmi')
 
 	//Main variables
 	var/pdachoice = 1
@@ -145,8 +145,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			desc = "A portable microcomputer by Thinktronic Systems, LTD. This model is a wrist-bound version."
 			slot_flags = SLOT_ID | SLOT_BELT | SLOT_GLOVES
 			sprite_sheets = list(
-				SPECIES_TESHARI = 'icons/mob/species/teshari/pda_wrist.dmi',
-				SPECIES_VR_TESHARI = 'icons/mob/species/teshari/pda_wrist.dmi',
+				SPECIES_  = 'icons/mob/species/ /pda_wrist.dmi',
+				SPECIES_VR_  = 'icons/mob/species/ /pda_wrist.dmi',
 			)
 		else
 			icon = 'icons/obj/pda_old.dmi'

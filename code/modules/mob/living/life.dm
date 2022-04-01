@@ -41,10 +41,10 @@
 
 	//Check if we're on fire
 	handle_fire()
-	
+
 	if(client && !(client.prefs.ambience_freq == 0))	// Handle re-running ambience to mobs if they've remained in an area, AND have an active client assigned to them, and do not have repeating ambience disabled.
 		handle_ambience()
-	
+
 	//stuff in the stomach
 	handle_stomach()
 
@@ -265,7 +265,7 @@
 	//Snowflake treatment of potential locations
 	else if(istype(loc,/obj/mecha)) //I imagine there's like displays and junk in there. Use the lights!
 		brightness = 1
-	else if(istype(loc,/obj/item/weapon/holder)) //Poor carried teshari and whatnot should adjust appropriately
+	else if(istype(loc,/obj/item/weapon/holder)) //Poor carried   and whatnot should adjust appropriately
 		var/turf/T = get_turf(src)
 		brightness = T.get_lumcount()
 

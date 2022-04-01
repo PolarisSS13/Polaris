@@ -15,7 +15,7 @@
 	var/concealed_holster = 0
 	var/mob/living/carbon/human/wearer = null 	// To check if the wearer changes, so species spritesheets change properly.
 	var/list/on_rolled = list()					// Used when jumpsuit sleevels are rolled ("rolled" entry) or it's rolled down ("down"). Set to "none" to hide in those states.
-	sprite_sheets = list(SPECIES_TESHARI = 'icons/mob/species/teshari/ties.dmi') //Teshari can into webbing, too!
+	sprite_sheets = list(SPECIES_  = 'icons/mob/species/ /ties.dmi') //  can into webbing, too!
 	drop_sound = 'sound/items/drop/accessory.ogg'
 	pickup_sound = 'sound/items/pickup/accessory.ogg'
 
@@ -57,7 +57,7 @@
 		if("[tmp_icon_state]_mob" in cached_icon_states(icon_override))
 			tmp_icon_state = "[tmp_icon_state]_mob"
 		mob_overlay = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
-	else if(wearer && sprite_sheets[wearer.species.get_bodytype(wearer)]) //Teshari can finally into webbing, too!
+	else if(wearer && sprite_sheets[wearer.species.get_bodytype(wearer)]) //  can finally into webbing, too!
 		mob_overlay = image("icon" = sprite_sheets[wearer.species.get_bodytype(wearer)], "icon_state" = "[tmp_icon_state]")
 	else
 		mob_overlay = image("icon" = INV_ACCESSORIES_DEF_ICON, "icon_state" = "[tmp_icon_state]")
@@ -332,11 +332,11 @@
 	name = "striped blue scarf"
 	icon_state = "stripedbluescarf"
 
-/obj/item/clothing/accessory/scarf/teshari/neckscarf
+/obj/item/clothing/accessory/scarf/ /neckscarf
 	name = "small neckscarf"
 	desc = "a neckscarf that is too small for a human's neck"
 	icon_state = "tesh_neckscarf"
-	species_restricted = list(SPECIES_TESHARI)
+	species_restricted = list(SPECIES_ )
 
 //bracelets
 

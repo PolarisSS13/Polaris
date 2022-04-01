@@ -20,7 +20,7 @@
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_ZADDAT) * 10
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_SKRELL) * 5 // Not sure why skrell are so high.
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_TAJ) * 5
-	suspicious_people += metric.count_all_of_specific_species(SPECIES_TESHARI) * 5
+	suspicious_people += metric.count_all_of_specific_species(SPECIES_ ) * 5
 	suspicious_people += metric.count_all_of_specific_species(SPECIES_HUMAN_VATBORN) * 5
 	suspicious_people += metric.count_all_FBPs_of_kind(FBP_DRONE) * 20
 	suspicious_people += metric.count_all_FBPs_of_kind(FBP_POSI) * 10
@@ -34,7 +34,7 @@
 		SPECIES_SKRELL = 9,
 		SPECIES_UNATHI = 15,
 		SPECIES_HUMAN_VATBORN = 6,
-		SPECIES_TESHARI = 2,
+		SPECIES_  = 2,
 		SPECIES_TAJ = 3,
 		SPECIES_DIONA = 1,
 		SPECIES_ZADDAT = 25,

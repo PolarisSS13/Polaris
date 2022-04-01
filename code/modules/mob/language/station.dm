@@ -99,7 +99,7 @@
 	speaker.say_signlang(message, pick(signlang_verb), src)
 
 /datum/language/tajsign/can_speak_special(var/mob/speaker)	// TODO: If ever we make external organs assist languages, convert this over to the new format
-	var/list/allowed_species = list(SPECIES_TAJ, SPECIES_TESHARI)	// Need a tail and ears and such to use this.
+	var/list/allowed_species = list(SPECIES_TAJ, SPECIES_ )	// Need a tail and ears and such to use this.
 	if(iscarbon(speaker))
 		var/obj/item/organ/external/hand/hands = locate() in speaker //you can't sign without hands
 		if(!hands)
@@ -187,9 +187,9 @@
 	else
 		return pick(ai_names)
 
-/datum/language/teshari
+/datum/language/
 	name = LANGUAGE_SCHECHI
-	desc = "A trilling language spoken by the diminutive Teshari."
+	desc = "A trilling language spoken by the diminutive  ."
 	speech_verb = "chirps"
 	ask_verb = "chirrups"
 	exclaim_verb = "trills"
@@ -203,7 +203,7 @@
 			"ci", "ri", "mi", "si", "ni", "ti", "li", "shi", "schi", "i", "i"
 		)
 
-/datum/language/teshari/get_random_name(gender)
+/datum/language/ /get_random_name(gender)
 	return ..(gender, 2, 4, 1.5)
 
 

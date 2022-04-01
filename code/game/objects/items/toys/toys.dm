@@ -896,10 +896,10 @@
 	icon_state = "nymphplushie"
 	pokephrase = "Chirp!"
 
-/obj/item/toy/plushie/teshari
-	name = "teshari plush"
-	desc = "This is a plush teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
-	icon_state = "teshariplushie"
+/obj/item/toy/plushie/
+	name = "  plush"
+	desc = "This is a plush  . Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
+	icon_state = " plushie"
 	pokephrase = "Rya!"
 
 /obj/item/toy/plushie/mouse

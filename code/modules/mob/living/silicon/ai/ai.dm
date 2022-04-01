@@ -87,7 +87,7 @@ var/list/ai_verbs_default = list(
 	var/datum/ai_icon/selected_sprite			// The selected icon set
 	var/custom_sprite 	= 0 					// Whether the selected icon is custom
 	var/carded
-	
+
 	// Multicam Vars
 	var/multicam_allowed = TRUE
 	var/multicam_on = FALSE
@@ -486,7 +486,7 @@ var/list/ai_verbs_default = list(
 		else
 			to_chat(src, "<font color='red'>System error. Cannot locate [html_decode(href_list["trackname"])].</font>")
 		return
-		
+
 	if(href_list["trackbot"])
 		var/mob/living/bot/target = locate(href_list["trackbot"]) in mob_list
 		if(target)
@@ -656,8 +656,8 @@ var/list/ai_verbs_default = list(
 				"female unathi",
 				"male tajaran",
 				"female tajaran",
-				"male tesharii",
-				"female tesharii",
+				"male  i",
+				"female  i",
 				"male skrell",
 				"female skrell"
 			)
@@ -701,9 +701,9 @@ var/list/ai_verbs_default = list(
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotajm"))
 					if("female tajaran")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotajf"))
-					if("male tesharii")
+					if("male  i")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotesm"))
-					if("female tesharii")
+					if("female  i")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotesf"))
 					if("male skrell")
 						holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrm"))
@@ -814,21 +814,21 @@ var/list/ai_verbs_default = list(
 
 /mob/living/silicon/ai/proc/check_unable(var/flags = 0, var/feedback = 1)
 	if(stat == DEAD)
-		if(feedback) 
+		if(feedback)
 			to_chat(src, "<span class='warning'>You are dead!</span>")
 		return 1
 
 	if(aiRestorePowerRoutine)
-		if(feedback) 
+		if(feedback)
 			to_chat(src, "<span class='warning'>You lack power!</span>")
 		return 1
 
 	if((flags & AI_CHECK_WIRELESS) && src.control_disabled)
-		if(feedback) 
+		if(feedback)
 			to_chat(src, "<span class='warning'>Wireless control is disabled!</span>")
 		return 1
 	if((flags & AI_CHECK_RADIO) && src.aiRadio.disabledAi)
-		if(feedback) 
+		if(feedback)
 			to_chat(src, "<span class='warning'>System Error - Transceiver Disabled!</span>")
 		return 1
 	return 0
@@ -972,7 +972,7 @@ var/list/ai_verbs_default = list(
 	//This communication is imperfect because the holopad "filters" voices and is only designed to connect to the master only.
 	var/rendered = "<i><span class='game say'>Relayed Speech: <span class='name'>[name_used]</span> [message]</span></i>"
 	show_message(rendered, 2)
-	
+
 /mob/living/silicon/ai/proc/toggle_multicam_verb()
 	set name = "Toggle Multicam"
 	set category = "AI Commands"
