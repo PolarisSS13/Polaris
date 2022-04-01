@@ -492,6 +492,7 @@
 	M.Weaken(rand(10,25))
 	M.updatehealth()
 	apply_brain_damage(M)
+	M.adjustHalLoss(40)
 	SSgame_master.adjust_danger(-20)
 
 /obj/item/weapon/shockpaddles/proc/apply_brain_damage(mob/living/carbon/human/H)
