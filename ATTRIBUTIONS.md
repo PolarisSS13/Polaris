@@ -44,3 +44,9 @@
 **License:** [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)<br>
 **URL:** [Patreon Post](https://www.patreon.com/posts/diable-avionics-44573931)<br>
 **Notes:** Permission to use assets also given in writing.<br>
+<br>
+**File:** `maps/cynosure/title_cynosure.png`<br>
+**Creator:** Adrien "Gasgano" Perrier<br>
+**License:** [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)<br>
+**URL:** [Artstation Portfolio] (http://www.artstation.com/gasgano)<br>
+**Notes:** Artwork commissioned under contract for Polaris.<br>
