@@ -140,13 +140,13 @@
 				helmet.icon_state = "zaddat_healer"
 				helmet.item_state = "zaddat_healer"
 		if("Clockwork")
-			name = "clockword Shroud"
-			base_name = "clockword Shroud"
+			name = "clockwork Shroud"
+			base_name = "clockwork Shroud"
 			desc = "Inspired by clockwork designs seen in some ancient human technologies and subcultures, this suit was popularized through osmosis with those subcultures."
 			icon_state = "zaddat_clockwork"
 			item_state = "zaddat_clockwork"
 			if(helmet)
-				helmet.name = "clockword Shroud helmet"
+				helmet.name = "clockwork Shroud helmet"
 				helmet.desc = "Plated in brass."
 				helmet.icon_state = "zaddat_clockwork"
 				helmet.item_state = "zaddat_clockwork"
