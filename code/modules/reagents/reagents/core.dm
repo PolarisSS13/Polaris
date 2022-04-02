@@ -11,8 +11,6 @@
 	color = "#C80000"
 	var/volume_mod = 1	// So if you add different subtypes of blood, you can affect how much vessel blood each unit of reagent adds
 
-	viscosity = 0.3 // Slightly thicker than water.
-
 	glass_name = "tomato juice"
 	glass_desc = "Are you sure this is tomato juice?"
 
@@ -158,8 +156,6 @@
 	reagent_state = LIQUID
 	color = "#0064C877"
 	metabolism = REM * 10
-
-	viscosity = 0.2 // For puddle flow, this forms puddles roughly of 5 units. Little bit of water goes a long way.
 
 	glass_name = "water"
 	glass_desc = "The father of all refreshments."

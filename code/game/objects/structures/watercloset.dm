@@ -267,14 +267,7 @@
 	reagents.splash(O, 10)
 
 /obj/machinery/shower/process()
-// A drain for every shower! ..If, there's a liquid on its turf.
-	var/obj/effect/decal/cleanable/chempuddle/to_drain = locate() in get_turf(src)
-	if(to_drain)
-		if(!QDELETED(to_drain))
-			qdel(to_drain)
-
 	if(!on) return
-
 	for(var/thing in loc)
 		var/atom/movable/AM = thing
 		var/mob/living/L = thing

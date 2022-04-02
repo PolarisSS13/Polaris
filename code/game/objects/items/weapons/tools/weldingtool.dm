@@ -145,11 +145,9 @@
 
 /obj/item/weapon/weldingtool/afterattack(obj/O as obj, mob/user as mob, proximity)
 	if(!proximity) return
-	if (istype(O, /obj/structure/reagent_dispensers) && get_dist(src,O) <= 1)
-		var/obj/structure/reagent_dispensers/tank = O
+	if (istype(O, /obj/structure/reagent_dispensers/fueltank) && get_dist(src,O) <= 1)
 		if(!welding && max_fuel)
 			O.reagents.trans_to_obj(src, max_fuel)
-			reagents.isolate_reagent("fuel")
 			to_chat(user, "<span class='notice'>Welder refueled</span>")
 			playsound(src, 'sound/effects/refill.ogg', 50, 1, -6)
 			return
@@ -157,11 +155,11 @@
 			to_chat(user, "<span class='notice'>[src] doesn't use fuel.</span>")
 			return
 		else
-			if(O.reagents.has_any_reagent(list("phoron","fuel","hydrophoron")))
-				message_admins("[key_name_admin(user)] ruptured a reagent tank with a welding tool, triggering an explosion.")
-				log_game("[key_name(user)] ruptured a reagent tank with a welding tool, triggering an explosion.")
-			to_chat(user, "<span class='danger'>You begin welding on the reagent tank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
-			tank.rupture()
+			message_admins("[key_name_admin(user)] triggered a fueltank explosion with a welding tool.")
+			log_game("[key_name(user)] triggered a fueltank explosion with a welding tool.")
+			to_chat(user, "<span class='danger'>You begin welding on the fueltank and with a moment of lucidity you realize, this might not have been the smartest thing you've ever done.</span>")
+			var/obj/structure/reagent_dispensers/fueltank/tank = O
+			tank.explode()
 			return
 	if (src.welding)
 		remove_fuel(1)
