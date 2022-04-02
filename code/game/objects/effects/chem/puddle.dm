@@ -22,9 +22,8 @@
 		CP.update_icon(TRUE)
 
 /obj/effect/decal/cleanable/chempuddle/proc/Spread(exclude=list())
-	if(!reagents)	// Destroy ourselves if we are an empty husk somehow.
-		if(!QDELETED(src))
-			qdel(src)
+	if(!reagents && !QDELETED(src))
+		qdel(src)
 		return
 
 	if(reagents.total_volume < (25 * reagents.get_viscosity())) return
