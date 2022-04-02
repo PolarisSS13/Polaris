@@ -409,6 +409,7 @@
 		if(!CP)
 			CP = new(target)
 		trans_to_holder(CP.reagents, amount)
+		CP.Spread()
 
 	update_total()
 

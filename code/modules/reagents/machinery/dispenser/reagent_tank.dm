@@ -119,7 +119,7 @@
 			message_admins("[key_name_admin(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>).")
 			log_game("[key_name(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]).")
 
-		if(Proj.sharp || (istype(Proj, /obj/item/projectile/beam) && Proj.damage))
+		if(Proj.sharp || (istype(Proj, /obj/item/projectile/beam) && !Proj.damage))
 			rupture()
 
 /obj/structure/reagent_dispensers/ex_act()
@@ -129,32 +129,23 @@
 	rupture()
 
 /obj/structure/reagent_dispensers/proc/rupture()
+	var/severity = 1
 	var/violent = FALSE
 
 	if (reagents.total_volume > 500)
+		severity = 3
 		reagents.trans_to_turf(get_turf(src), reagents.total_volume / 5)
 	else if (reagents.total_volume > 100)
+		severity = 2
 		reagents.trans_to_turf(get_turf(src), reagents.total_volume / 3)
 	else if (reagents.total_volume > 50)
+		severity = 1
 		reagents.trans_to_turf(get_turf(src), reagents.total_volume / 2)
 
-	var/list/explodium = list("phoron","fuel","hydrophoron")
-	if(reagents.has_any_reagent(explodium))
+	if(reagents.has_any_reagent(list("phoron","fuel","hydrophoron")))
 		violent = TRUE
 
 	if(violent)
-		var/severity = 1
-		var/fuelvolume = 0
-		for(var/ID in explodium)
-			fuelvolume += reagents.get_reagent_amount(ID)
-		
-		if(fuelvolume >= 500)
-			severity = 3
-		else if(fuelvolume >= 100)
-			severity = 2
-		else if(fuelvolume >= 50)
-			severity = 1
-
 		switch(severity)
 			if(3)
 				explosion(get_turf(src),1,2,4)
