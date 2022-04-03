@@ -57,9 +57,12 @@
 	health -= Proj.get_structure_damage()
 	healthcheck()
 
+/obj/effect/spider/proc/die()
+	qdel(src)
+
 /obj/effect/spider/proc/healthcheck()
 	if(health <= 0)
-		qdel(src)
+		die()
 
 /obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300 + T0C)
@@ -175,13 +178,14 @@
 /obj/effect/spider/spiderling/proc/die()
 	visible_message("<span class='alert'>[src] dies!</span>")
 	new /obj/effect/decal/cleanable/spiderling_remains(src.loc)
-	qdel(src)
+	..()
 
 /obj/effect/spider/spiderling/healthcheck()
 	if(health <= 0)
 		die()
 
 /obj/effect/spider/spiderling/process()
+	healthcheck()
 	if(travelling_in_vent)
 		if(istype(src.loc, /turf))
 			travelling_in_vent = 0
