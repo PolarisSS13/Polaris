@@ -115,10 +115,6 @@
 			if (O.orbiter)
 				O.orbiter.stop_orbit()
 
-/atom/movable/Destroy(force = FALSE)
-	. = ..()
-	if (orbiting)
-		stop_orbit()
 
 /*
 /atom/movable/proc/transfer_observers_to(atom/movable/target)

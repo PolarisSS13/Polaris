@@ -12,9 +12,6 @@
 	create_reagents(500)
 	return
 
-/obj/effect/vfx/smoke/chem/Destroy()
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
-	return ..()
 
 /obj/effect/vfx/smoke/chem/transparent
 	opacity = FALSE
