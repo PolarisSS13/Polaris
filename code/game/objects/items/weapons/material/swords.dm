@@ -51,7 +51,7 @@
 	desc = "A sharp curved sword, a favored weapon of pirates far in the past."
 	icon_state = "sabre"
 	item_state = "sabre"
-	applies_material_colour = 0
+	applies_material_colour = 0 //messes up the hilt color otherwise
 	slot_flags = SLOT_BELT
 
 /obj/item/weapon/material/sword/battleaxe
@@ -96,4 +96,5 @@
 	desc = "An ancient short sword, designed to stab and cut."
 	icon_state = "gladius"
 	item_state = "gladius"
+	applies_material_colour = 0 //messes up the hilt color otherwise
 	slot_flags = SLOT_BELT
