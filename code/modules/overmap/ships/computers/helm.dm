@@ -163,8 +163,8 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				if(!CanInteract(user,state))
 					return TOPIC_NOACTION
-				R.fields["x"] = CLAMP(newx, 1, world.maxx)
-				R.fields["y"] = CLAMP(newy, 1, world.maxy)
+				R.fields["x"] = clamp(newx, 1, world.maxx)
+				R.fields["y"] = clamp(newy, 1, world.maxy)
 		known_sectors[sec_name] = R
 
 	if (href_list["remove"])
@@ -178,14 +178,14 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 		if(!CanInteract(user,state))
 			return
 		if (newx)
-			dx = CLAMP(newx, 1, world.maxx)
+			dx = clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
 		if(!CanInteract(user,state))
 			return
 		if (newy)
-			dy = CLAMP(newy, 1, world.maxy)
+			dy = clamp(newy, 1, world.maxy)
 
 	if (href_list["x"] && href_list["y"])
 		dx = text2num(href_list["x"])
@@ -198,7 +198,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	if (href_list["speedlimit"])
 		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
-			speedlimit = CLAMP(newlimit/1000, 0, 100)
+			speedlimit = clamp(newlimit/1000, 0, 100)
 	if (href_list["accellimit"])
 		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
 		if(newlimit)

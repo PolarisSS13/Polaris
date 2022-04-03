@@ -49,7 +49,7 @@
 				continue
 			if(!O.scannable)
 				continue
-			var/bearing = round(90 - ATAN2(O.x - linked.x, O.y - linked.y),5)
+			var/bearing = round(90 - arctan(O.x - linked.x, O.y - linked.y),5)
 			if(bearing < 0)
 				bearing += 360
 			contacts.Add(list(list("name"=O.name, "ref"="\ref[O]", "bearing"=bearing)))
@@ -91,7 +91,7 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(CLAMP(nrange, 1, world.view))
+				sensors.set_range(clamp(nrange, 1, world.view))
 			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
