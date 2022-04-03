@@ -11,6 +11,7 @@
 	var/datum/wires/explosive/c4/wires = null
 	var/timer = 10
 	var/atom/target = null
+	var/list/location = list()
 	var/open_panel = 0
 	var/image_overlay = null
 	var/blast_dev = -1
@@ -54,9 +55,11 @@
 	to_chat(user, "Planting explosives...")
 	user.do_attack_animation(target)
 
-	if(do_after(user, 50) && in_range(user, target))
+	if(do_after(user, 5 SECONDS) && in_range(user, target))
 		user.drop_item()
 		src.target = target
+		var/turf/T = get_turf(target)
+		location = list(T.x, T.y, T.z) // Saving coordinates in case the reference becomes invalid
 		loc = null
 
 		if (ismob(target))
@@ -68,16 +71,19 @@
 
 		target.overlays += image_overlay
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
-		spawn(timer*10)
-			explode(get_turf(target))
+		addtimer(CALLBACK(src, .proc/detonate), timer SECONDS)
 
-/obj/item/weapon/plastique/proc/explode(var/location)
+/obj/item/weapon/plastique/proc/detonate()
 	if(!target)
 		target = get_atom_on_turf(src)
 	if(!target)
 		target = src
-	if(location)
-		explosion(location, blast_dev, blast_heavy, blast_light, blast_flash)
+	var/turf/T = get_turf(src)
+	if(!istype(T) && location.len == 3)
+		T = locate(location[1], location[2], location[3])
+
+	if(istype(T))
+		explosion(T, blast_dev, blast_heavy, blast_light, blast_flash)
 
 	if(target)
 		if (istype(target, /turf/simulated/wall))
