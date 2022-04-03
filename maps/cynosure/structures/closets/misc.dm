@@ -119,7 +119,7 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/shoes/black,
 		/obj/item/clothing/gloves/fingerless,
-		/obj/item/device/radio/headset/pilot/alt,
+		/obj/item/device/radio/headset/explorer/alt,
 		/obj/item/device/flashlight,
 		/obj/item/weapon/reagent_containers/food/snacks/liquidfood,
 		/obj/item/weapon/reagent_containers/food/drinks/cans/waterbottle,
