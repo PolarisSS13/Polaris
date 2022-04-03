@@ -14,7 +14,7 @@ SUBSYSTEM_DEF(ai)
 	msg += "P:[processing.len]"
 	..(msg.Join())
 
-/datum/controller/subsystem/ai/fire(resumed = 0)
+/datum/controller/subsystem/ai/fire(resumed, no_mc_tick)
 	if (!resumed)
 		src.currentrun = processing.Copy()
 

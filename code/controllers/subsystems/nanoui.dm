@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(nanoui)
 	name = "NanoUI"
-	wait = 5
+	wait = 0.5 SECONDS
 	flags = SS_NO_INIT
 	// a list of current open /nanoui UIs, grouped by src_object and ui_key
 	var/list/open_uis = list()
@@ -16,7 +16,7 @@ SUBSYSTEM_DEF(nanoui)
 /datum/controller/subsystem/nanoui/stat_entry()
 	return ..("[processing_uis.len] UIs")
 
-/datum/controller/subsystem/nanoui/fire(resumed)
+/datum/controller/subsystem/nanoui/fire(resumed, no_mc_tick)
 	for(var/thing in processing_uis)
 		var/datum/nanoui/UI = thing
 		UI.process()
