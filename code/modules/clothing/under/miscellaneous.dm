@@ -1275,7 +1275,7 @@ Uniforms and such
 //Ranger uniforms
 //On-mob sprites go in icons\mob\uniform.dmi with the format "white_ranger_uniform_s" - with 'white' replaced with green, cyan, etc... of course! Note the _s - this is not optional.
 //Item sprites go in icons\obj\clothing\ranger.dmi with the format "white_ranger_uniform"
-/obj/item/clothing/under/color/ranger
+/obj/item/clothing/under/ranger
 	var/unicolor = "white"
 	name = "ranger uniform"
 	desc = "Made from a space-proof fibre and tight fitting, this uniform usually gives the agile Rangers all kinds of protection while not inhibiting their movement. \
@@ -1283,26 +1283,26 @@ Uniforms and such
 	icon = 'icons/obj/clothing/ranger.dmi'
 	icon_state = "ranger_uniform"
 
-/obj/item/clothing/under/color/ranger/Initialize()
+/obj/item/clothing/under/ranger/Initialize()
 	. = ..()
 	if(icon_state == "ranger_uniform") //allows for custom items
 		name = "[unicolor] ranger uniform"
 		icon_state = "[unicolor]_ranger_uniform"
 
-/obj/item/clothing/under/color/ranger/black
+/obj/item/clothing/under/ranger/black
 	unicolor = "black"
 
-/obj/item/clothing/under/color/ranger/pink
+/obj/item/clothing/under/ranger/pink
 	unicolor = "pink"
 
-/obj/item/clothing/under/color/ranger/green
+/obj/item/clothing/under/ranger/green
 	unicolor = "green"
 
-/obj/item/clothing/under/color/ranger/cyan
+/obj/item/clothing/under/ranger/cyan
 	unicolor = "cyan"
 
-/obj/item/clothing/under/color/ranger/orange
+/obj/item/clothing/under/ranger/orange
 	unicolor = "orange"
 
-/obj/item/clothing/under/color/ranger/yellow
+/obj/item/clothing/under/ranger/yellow
 	unicolor = "yellow"
