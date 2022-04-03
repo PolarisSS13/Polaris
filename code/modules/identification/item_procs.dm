@@ -1,8 +1,7 @@
 // This is on the base /item so badmins can play with it by calling hide_identity().
-/obj/item
-	var/datum/identification/identity = null
-	var/identity_type = /datum/identification
-	var/init_hide_identity = FALSE // Set to true to automatically obscure the object on initialization.
+/obj/item/var/datum/identification/identity = null
+/obj/item/var/identity_type = /datum/identification
+/obj/item/var/init_hide_identity = FALSE // Set to true to automatically obscure the object on initialization.
 
 /obj/item/Initialize()
 	if(init_hide_identity)

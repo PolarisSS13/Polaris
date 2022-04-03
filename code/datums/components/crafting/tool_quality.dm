@@ -1,5 +1,4 @@
-/obj/item
-	var/list/tool_qualities
+/obj/item/var/list/tool_qualities
 
 /// Used to check for a specific tool quality on an item.
 /// Returns TRUE or FALSE depending on whether `tool_quality` is found.

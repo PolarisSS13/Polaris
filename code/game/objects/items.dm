@@ -106,6 +106,9 @@
 
 	var/tip_timer // reference to timer id for a tooltip we might open soon
 
+	var/can_cleave = FALSE // If true, a 'cleaving' attack will occur.
+	var/cleaving = FALSE // Used to avoid infinite cleaving.
+
 /obj/item/Initialize()
 	. = ..()
 	if(embed_chance < 0)
@@ -129,6 +132,11 @@
 		m.update_inv_l_hand()
 		src.loc = null
 	return ..()
+
+/obj/item/Bump(mob/M)
+	spawn(0)
+		..()
+	return
 
 // Check if target is reasonable for us to operate on.
 /obj/item/proc/check_allowed_items(atom/target, not_inside, target_self)
