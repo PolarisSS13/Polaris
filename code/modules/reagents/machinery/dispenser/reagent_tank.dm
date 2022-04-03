@@ -10,8 +10,6 @@
 	anchored = 0
 	pressure_resistance = 2*ONE_ATMOSPHERE
 
-	var/faucet = FALSE
-
 	var/obj/item/hose_connector/input/active/InputSocket
 	var/obj/item/hose_connector/output/active/OutputSocket
 
@@ -20,22 +18,6 @@
 
 /obj/structure/reagent_dispensers/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if(W.is_wrench())
-		user.visible_message("[user] wrenches [src]'s faucet [faucet ? "closed" : "open"].", \
-			"You wrench [src]'s faucet [faucet ? "closed" : "open"]")
-		faucet = !faucet
-		playsound(src, W.usesound, 75, 1)
-		if (faucet)
-			message_admins("[key_name_admin(user)] opened a reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking [LAZYLEN(reagents.reagent_list) ? english_list(reagents.reagent_list) : "nothing"]. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
-			log_game("[key_name(user)] opened reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking [LAZYLEN(reagents.reagent_list) ? english_list(reagents.reagent_list) : "nothing"].")
-			leak(amount_per_transfer_from_this)
-	return ..()
-
-/obj/structure/reagent_dispensers/examine(mob/user)
-	. = ..()
-	if(get_dist(user, src) <= 2)
-		if(faucet)
-			. += SPAN_WARNING("The faucet is wrenched open, leaking the contents!")
 
 /obj/structure/reagent_dispensers/Destroy()
 	QDEL_NULL(InputSocket)
@@ -75,26 +57,6 @@
 	if (N)
 		amount_per_transfer_from_this = N
 
-/obj/structure/reagent_dispensers/Move()
-	. = ..()
-	if (. && faucet)
-		leak(amount_per_transfer_from_this / 5 / reagents.get_viscosity())
-
-/obj/structure/reagent_dispensers/proc/leak(amount)
-	if (reagents.total_volume <= 0)
-		return
-
-	amount = min(amount, reagents.total_volume)
-
-	var/turf/T = get_turf(src)
-
-	var/obj/effect/decal/cleanable/chempuddle/CP = locate() in T
-	if(!CP)
-		CP = new(T)
-	reagents.trans_to_holder(CP.reagents, amount)
-	spawn(1)
-		CP.Spread()
-
 /obj/structure/reagent_dispensers/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -113,72 +75,10 @@
 		else
 	return
 
-/obj/structure/reagent_dispensers/bullet_act(var/obj/item/projectile/Proj)
-	if(Proj.get_structure_damage())
-		if(istype(Proj.firer))
-			message_admins("[key_name_admin(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>).")
-			log_game("[key_name(Proj.firer)] shot reagent tank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]).")
-
-		if(Proj.sharp || (istype(Proj, /obj/item/projectile/beam) && Proj.damage))
-			rupture()
-
-/obj/structure/reagent_dispensers/ex_act()
-	rupture()
-
 /obj/structure/reagent_dispensers/blob_act()
-	rupture()
+	qdel(src)
 
-/obj/structure/reagent_dispensers/proc/rupture()
-	var/violent = FALSE
 
-	if (reagents.total_volume > 500)
-		reagents.trans_to_turf(get_turf(src), reagents.total_volume / 5)
-	else if (reagents.total_volume > 100)
-		reagents.trans_to_turf(get_turf(src), reagents.total_volume / 3)
-	else if (reagents.total_volume > 50)
-		reagents.trans_to_turf(get_turf(src), reagents.total_volume / 2)
-
-	var/list/explodium = list("phoron","fuel","hydrophoron")
-	if(reagents.has_any_reagent(explodium))
-		violent = TRUE
-
-	if(violent)
-		var/severity = 1
-		var/fuelvolume = 0
-		for(var/ID in explodium)
-			fuelvolume += reagents.get_reagent_amount(ID)
-		
-		if(fuelvolume >= 500)
-			severity = 3
-		else if(fuelvolume >= 100)
-			severity = 2
-		else if(fuelvolume >= 50)
-			severity = 1
-
-		switch(severity)
-			if(3)
-				explosion(get_turf(src),1,2,4)
-			if(2)
-				explosion(get_turf(src),0,1,3)
-			if(1)
-				explosion(get_turf(src),-1,1,2)
-
-		if(!QDELETED(src))
-			qdel(src)
-
-/obj/structure/reagent_dispensers/fire_act(datum/gas_mixture/air, temperature, volume)
-	if (faucet)
-		rupture()
-	else if (temperature > T0C+500)
-		rupture()
-	return ..()
-
-/obj/structure/reagent_dispensers/empty
-	name = "chemical tank"
-	desc = "A chemical tank."
-	icon = 'icons/obj/machines/reagent.dmi'
-	icon_state = "chemtank"
-	amount_per_transfer_from_this = 10
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
@@ -207,6 +107,7 @@
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "weldtank"
 	amount_per_transfer_from_this = 10
+	var/modded = 0
 	var/obj/item/device/assembly_holder/rig = null
 
 /obj/structure/reagent_dispensers/fueltank/Initialize()
@@ -216,7 +117,7 @@
 /obj/structure/reagent_dispensers/fueltank/examine(mob/user)
 	. = ..()
 	if(get_dist(user, src) <= 2)
-		if(faucet)
+		if(modded)
 			. += "<span class='warning'>Fuel faucet is wrenched open, leaking the fuel!</span>"
 		if(rig)
 			. += "<span class='notice'>There is some kind of device rigged to the tank.</span>"
@@ -232,6 +133,15 @@
 
 /obj/structure/reagent_dispensers/fueltank/attackby(obj/item/weapon/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
+	if (W.is_wrench())
+		user.visible_message("[user] wrenches [src]'s faucet [modded ? "closed" : "open"].", \
+			"You wrench [src]'s faucet [modded ? "closed" : "open"]")
+		modded = modded ? 0 : 1
+		playsound(src, W.usesound, 75, 1)
+		if (modded)
+			message_admins("[key_name_admin(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel. (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>)")
+			log_game("[key_name(user)] opened fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]), leaking fuel.")
+			leak_fuel(amount_per_transfer_from_this)
 	if (istype(W,/obj/item/device/assembly_holder))
 		if (rig)
 			to_chat(user, "<span class='warning'>There is another device in the way.</span>")
@@ -255,6 +165,51 @@
 			overlays += test
 
 	return ..()
+
+
+/obj/structure/reagent_dispensers/fueltank/bullet_act(var/obj/item/projectile/Proj)
+	if(Proj.get_structure_damage())
+		if(istype(Proj.firer))
+			message_admins("[key_name_admin(Proj.firer)] shot fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]) (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[loc.x];Y=[loc.y];Z=[loc.z]'>JMP</a>).")
+			log_game("[key_name(Proj.firer)] shot fueltank at [loc.loc.name] ([loc.x],[loc.y],[loc.z]).")
+
+		if(!istype(Proj ,/obj/item/projectile/beam/lasertag) && !istype(Proj ,/obj/item/projectile/beam/practice) )
+			explode()
+
+/obj/structure/reagent_dispensers/fueltank/ex_act()
+	explode()
+
+/obj/structure/reagent_dispensers/fueltank/blob_act()
+	explode()
+
+/obj/structure/reagent_dispensers/fueltank/proc/explode()
+	if (reagents.total_volume > 500)
+		explosion(src.loc,1,2,4)
+	else if (reagents.total_volume > 100)
+		explosion(src.loc,0,1,3)
+	else if (reagents.total_volume > 50)
+		explosion(src.loc,-1,1,2)
+	if(src)
+		qdel(src)
+
+/obj/structure/reagent_dispensers/fueltank/fire_act(datum/gas_mixture/air, temperature, volume)
+	if (modded)
+		explode()
+	else if (temperature > T0C+500)
+		explode()
+	return ..()
+
+/obj/structure/reagent_dispensers/fueltank/Move()
+	if (..() && modded)
+		leak_fuel(amount_per_transfer_from_this/10.0)
+
+/obj/structure/reagent_dispensers/fueltank/proc/leak_fuel(amount)
+	if (reagents.total_volume == 0)
+		return
+
+	amount = min(amount, reagents.total_volume)
+	reagents.remove_reagent("fuel",amount)
+	new /obj/effect/decal/cleanable/liquid_fuel(src.loc, amount,1)
 
 /obj/structure/reagent_dispensers/peppertank
 	name = "Pepper Spray Refiller"
@@ -450,7 +405,7 @@
 /obj/structure/reagent_dispensers/acid/Initialize()
 	. = ..()
 	reagents.add_reagent("sacid", 1000)
-
+	
 //Cooking oil refill tank
 /obj/structure/reagent_dispensers/cookingoil
 	name = "cooking oil tank"

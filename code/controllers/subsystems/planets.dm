@@ -62,7 +62,7 @@ SUBSYSTEM_DEF(planets)
 		T.outdoors = OUTDOORS_NO
 
 
-/datum/controller/subsystem/planets/fire(resumed = 0)
+/datum/controller/subsystem/planets/fire(resumed, no_mc_tick)
 	if(!resumed)
 		src.currentrun = planets.Copy()
 

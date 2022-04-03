@@ -127,3 +127,62 @@
 	reqs = list(list(/obj/item/stack/material/leather = 8))
 	time = 60
 	category = CAT_STORAGE
+
+/datum/crafting_recipe/material_armor
+	name = "Material Armor Plate"
+	result = /obj/item/clothing/accessory/material/advanced
+	reqs = list(
+		list(/obj/item/weapon/material/armor_plating/insert = 1),
+		list(/datum/reagent/toxin/plasticide = 5),
+		list(/datum/reagent/glycerol = 10),
+		list(/datum/reagent/silicon = 10)
+	)
+	parts = list(
+		/obj/item/weapon/material/armor_plating/insert = 1
+	)
+	machinery = list(
+		/obj/machinery/r_n_d/protolathe = CRAFTING_MACHINERY_USE
+	)
+	always_available = FALSE
+	time = 80
+	category = CAT_CLOTHING
+
+
+/datum/crafting_recipe/material_armor/chestplate
+	name = "Material armor plate"
+	result = /obj/item/clothing/accessory/material/advanced
+	always_available = TRUE
+
+
+/datum/crafting_recipe/material_armor/legguards
+	name = "Material armor arm-guards"
+	result = /obj/item/clothing/accessory/material/advanced/armguards
+	reqs = list(
+		list(/obj/item/weapon/material/armor_plating/insert = 1),
+		list(/datum/reagent/toxin/plasticide = 5),
+		list(/datum/reagent/glycerol = 10),
+		list(/datum/reagent/silicon = 10)
+	)
+	always_available = TRUE
+
+
+/datum/crafting_recipe/material_armor/armguards
+	name = "Material armor leg-guards"
+	result = /obj/item/clothing/accessory/material/advanced/legguards
+	reqs = list(
+		list(/obj/item/weapon/material/armor_plating/insert = 1),
+		list(/datum/reagent/toxin/plasticide = 5),
+		list(/datum/reagent/glycerol = 10),
+		list(/datum/reagent/silicon = 10)
+	)
+	always_available = TRUE
+
+
+/datum/crafting_recipe/material_armor/on_craft_completion(mob/user, obj/item/clothing/result)
+	var/obj/item/weapon/material/armor_plating/insert/insert = locate() in result
+	var/material_name = insert?.material?.name
+	if (!material_name)
+		qdel(result)
+		return
+	result.set_material(material_name)
+	qdel(insert)

@@ -30,24 +30,30 @@
 	var/cloaked = FALSE //If we're cloaked or not
 	var/image/cloaked_selfimage //The image we use for our client to let them see where we are
 
+
 /atom/movable/Destroy()
-	. = ..()
-	if(reagents)
+	if (reagents)
 		qdel(reagents)
 		reagents = null
-	for(var/atom/movable/AM in contents)
-		qdel(AM)
-	var/turf/un_opaque
-	if(opacity && isturf(loc))
-		un_opaque = loc
-
+	walk(src, 0)
+	for (var/atom/movable/movable in contents)
+		qdel(movable)
+	if (orbiting)
+		stop_orbit()
+	var/turf/origin
+	if (opacity && isturf(loc))
+		origin = loc
+	unbuckle_all_mobs()
 	moveToNullspace()
-	if(un_opaque)
-		un_opaque.recalc_atom_opacity()
+	if (origin)
+		origin.recalc_atom_opacity()
+		origin.reconsider_lights()
 	if (pulledby)
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
+	return ..()
+
 
 /atom/movable/vv_edit_var(var_name, var_value)
 	if(var_name in GLOB.VVpixelmovement)			//Pixel movement is not yet implemented, changing this will break everything irreversibly.

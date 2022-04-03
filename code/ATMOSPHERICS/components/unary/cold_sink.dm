@@ -100,7 +100,7 @@
 			else
 				set_temperature = max(amount, 0)
 		if("setPower") //setting power to 0 is redundant anyways
-			var/new_setting = CLAMP(text2num(params["value"]), 0, 100)
+			var/new_setting = clamp(text2num(params["value"]), 0, 100)
 			set_power_level(new_setting)
 
 	add_fingerprint(usr)

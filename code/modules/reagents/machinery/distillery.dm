@@ -205,7 +205,7 @@
 
 		if("adjust temp")
 			target_temp = input("Choose a target temperature.", "Temperature.", T20C) as num
-			target_temp = CLAMP(target_temp, min_temp, max_temp)
+			target_temp = clamp(target_temp, min_temp, max_temp)
 
 	update_icon()
 
@@ -310,7 +310,7 @@
 				// As of initial testing, a *10 gives ~5-6 minutes to go from room temp to 500C (+/-0.5C)
 				var/temp_diff = (current_temp < target_temp ? dy * 10 * target_temp / current_temp : dy * -10 * current_temp / target_temp)
 
-				current_temp = CLAMP(round((current_temp + temp_diff), 0.01), min_temp, max_temp)
+				current_temp = clamp(round((current_temp + temp_diff), 0.01), min_temp, max_temp)
 				use_power(power_rating * CELLRATE)
 
 				if(target_temp == round(current_temp, 1.0))

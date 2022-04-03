@@ -19,7 +19,7 @@
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
-	wait = 2 // Ticks, not deciseconds
+	wait = 2  // SS_TICKER - Ticks
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
 
@@ -42,7 +42,7 @@ SUBSYSTEM_DEF(lighting)
 	internal_process_overlays(FALSE, TRUE)
 	return ..()
 
-/datum/controller/subsystem/lighting/fire(resumed = FALSE)
+/datum/controller/subsystem/lighting/fire(resumed, no_mc_tick)
 	var/timer
 	if(!resumed)
 		// Santity checks to make sure we don't somehow have items left over from last cycle

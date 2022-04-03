@@ -6,7 +6,7 @@ GLOBAL_VAR_INIT(open_space_initialised, FALSE)
 
 SUBSYSTEM_DEF(open_space)
 	name = "Open Space"
-	wait = 2 // 5 times per second.
+	wait = 0.2 SECONDS
 	init_order = INIT_ORDER_OPENSPACE
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = null	// List of turfs currently being updated.
@@ -26,7 +26,7 @@ SUBSYSTEM_DEF(open_space)
 	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.
 	. = ..()
 
-/datum/controller/subsystem/open_space/fire(resumed = 0, init_tick_checks = FALSE)
+/datum/controller/subsystem/open_space/fire(resumed, no_mc_tick)
 	// We use a different list so any additions to the update lists during a delay from MC_TICK_CHECK
 	// don't cause things to be cut from the list without being updated.
 
@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(open_space)
 		counter += 1
 		if(!QDELETED(T))
 			update_turf(T)
-		if (init_tick_checks)
+		if (no_mc_tick)
 			CHECK_TICK // Used during initialization processing
 		else if (MC_TICK_CHECK)
 			src.counter = counter // Save for when we're resumed

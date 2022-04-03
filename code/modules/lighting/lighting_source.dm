@@ -189,7 +189,7 @@
 	);
 
 // This is the define used to calculate falloff.
-#define LUM_FALLOFF(C, T)(1 - CLAMP01(((C.x - T.x) ** 2 +(C.y - T.y) ** 2 + LIGHTING_HEIGHT) ** 0.6 / max(1, light_range)))
+#define LUM_FALLOFF(C, T)(1 - clamp(((C.x - T.x) ** 2 +(C.y - T.y) ** 2 + LIGHTING_HEIGHT) ** 0.6 / max(1, light_range), 0, 1))
 
 /datum/light_source/proc/apply_lum()
 	var/static/update_gen = 1
