@@ -2313,7 +2313,7 @@
 	name = "Shuttle Hatch";
 	req_access = list(13)
 	},
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/plating,
 /area/shuttle/supply)
 "cLJ" = (
 /obj/effect/floor_decal/steeldecal/steel_decals4,
@@ -2333,6 +2333,10 @@
 /obj/effect/floor_decal/corner/white/diagonal,
 /obj/effect/floor_decal/spline/plain{
 	dir = 4
+	},
+/obj/item/weapon/reagent_containers/food/snacks/beetsoup,
+/obj/item/weapon/reagent_containers/food/snacks/flowerchildsalad{
+	pixel_y = 9
 	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
@@ -5553,6 +5557,21 @@
 	icon_state = "carpet"
 	},
 /area/centcom/living)
+"gza" = (
+/obj/structure/table/marble,
+/obj/effect/floor_decal/corner/white/diagonal,
+/obj/effect/floor_decal/spline/plain{
+	dir = 4
+	},
+/obj/item/weapon/reagent_containers/food/snacks/spesslaw,
+/obj/item/weapon/reagent_containers/food/snacks/crab_legs{
+	pixel_y = 11
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "steel"
+	},
+/area/centcom/bar)
 "gzc" = (
 /obj/machinery/body_scanconsole{
 	dir = 4
@@ -6966,7 +6985,10 @@
 	name = "Security Processing";
 	req_access = list(1)
 	},
-/turf/space,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "dark"
+	},
 /area/centcom/security)
 "ift" = (
 /obj/machinery/door/airlock{
@@ -10521,7 +10543,9 @@
 	dir = 4;
 	id = "QMLoad"
 	},
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/floor{
+	outdoors = 0
+	},
 /area/shuttle/supply)
 "lUp" = (
 /obj/machinery/door/airlock/multi_tile/glass{
@@ -10837,7 +10861,9 @@
 	},
 /area/syndicate_station)
 "mpn" = (
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/floor{
+	outdoors = 0
+	},
 /area/shuttle/supply)
 "mpv" = (
 /obj/item/toy/chess/bishop_black,
@@ -11152,7 +11178,9 @@
 	dir = 4;
 	id = "QMLoad2"
 	},
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/floor{
+	outdoors = 0
+	},
 /area/shuttle/supply)
 "mHX" = (
 /obj/machinery/vending/cigarette{
@@ -12681,7 +12709,9 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/floor{
+	outdoors = 0
+	},
 /area/shuttle/supply)
 "oyt" = (
 /obj/machinery/shower{
@@ -19018,7 +19048,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/floor{
+	outdoors = 0
+	},
 /area/shuttle/supply)
 "vpD" = (
 /obj/structure/table/bench/padded,
@@ -20235,7 +20267,9 @@
 	tag_door = "supply_shuttle_hatch"
 	},
 /obj/effect/shuttle_landmark/cynosure/supply_offsite,
-/turf/simulated/shuttle/floor,
+/turf/simulated/shuttle/floor{
+	outdoors = 0
+	},
 /area/shuttle/supply)
 "wGX" = (
 /obj/structure/window/reinforced,
@@ -30777,7 +30811,7 @@ fVm
 fVm
 fVm
 cMH
-cMH
+gza
 ogY
 tKn
 lwf
