@@ -144,7 +144,7 @@
 	layer = HIDING_LAYER
 	health = 3
 	var/last_itch = 0
-	var/amount_grown = -1
+	var/amount_grown = 0
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
 	var/list/grow_as = list(/mob/living/simple_mob/animal/giant_spider, /mob/living/simple_mob/animal/giant_spider/nurse, /mob/living/simple_mob/animal/giant_spider/hunter)
