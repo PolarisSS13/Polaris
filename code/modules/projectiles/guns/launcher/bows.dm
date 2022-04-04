@@ -18,7 +18,7 @@
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "hardlight"
 	item_state = "bolt"
-	throwforce = 10
+	throwforce = 6
 	w_class = ITEMSIZE_NORMAL
 	sharp = 1
 	edge = 1
@@ -42,7 +42,7 @@
 	icon_state = "bow"
 	item_state = "bow"
 	fire_sound = 'sound/weapons/punchmiss.ogg' // TODO: Decent THWOK noise.
-	fire_sound_text = "a solid thunk"
+	fire_sound_text = "a light swoosh of air"
 	fire_delay = 25
 	slot_flags = SLOT_BACK
 	release_speed = 15
@@ -106,11 +106,14 @@
 		user.visible_message("<b>[user]</b> draws the string on [src] back fully!", "You draw the string on [src] back fully!")
 	update_icon()
 
+/obj/item/weapon/gun/launcher/crossbow/bow/handle_click_empty(mob/user)
+		return
+
 /obj/item/weapon/gun/launcher/crossbow/bow/attackby(obj/item/W as obj, mob/user)
 	if(!bolt && istype(W,/obj/item/weapon/arrow/wood))
 		user.drop_from_inventory(W, src)
 		bolt = W
-		user.visible_message("[user] slides [bolt] into [src].","You slide [bolt] into [src].")
+		user.visible_message("[user] nocks [bolt] in [src].","You nock [bolt] in [src].")
 		update_icon()
 
 /obj/item/weapon/gun/launcher/crossbow/bow/update_icon()
@@ -121,13 +124,18 @@
 	else
 		icon_state = "[initial(icon_state)]"
 
+/obj/item/weapon/gun/launcher/crossbow/bow/dropped(mob/user)
+	if(drawn)
+		to_chat(user, "<span class='warning'>\The [src]'s tension is relaxed as you let go of it!</span>")
+		drawn = FALSE
+	update_icon()
 
 
 /obj/item/weapon/gun/launcher/crossbow/bow/hardlight
 	name = "hardlight bow"
 	icon_state = "bow_hardlight"
 	item_state = "bow_hardlight"
-	desc = "An energy bow, capable of producing arrows from an internal power supply."
+	desc = "A modern twist on an ancient weapon, generating arrows from energy!"
 	drop_sound = 'sound/items/drop/gun.ogg'
 	pickup_sound = 'sound/items/pickup/gun.ogg'
 

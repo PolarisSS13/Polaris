@@ -200,16 +200,18 @@
 	base_icon = "halberd"
 	name = "halberd"
 	desc = "A sharp axe mounted on the top of a long spear."
-	force = 10
+	force = 6
 	applies_material_colour = 0
 	unwielded_force_divisor = 0.4
-	force_divisor = 0.6
+	force_divisor = 0.5
 	sharp = 1
 	edge = 1
+	reach = 2
 	attack_verb = list("attacked", "poked", "jabbed","gored", "chopped", "cleaved", "torn", "cut", "stabbed")
 	slot_flags = SLOT_BACK
 	drop_sound = 'sound/items/drop/woodweapon.ogg'
 	pickup_sound = 'sound/items/pickup/woodweapon.ogg'
+	can_cleave = TRUE
 
 
 /obj/item/weapon/material/twohanded/pike/pitchfork
@@ -235,11 +237,7 @@
 	edge = 1
 	attack_verb = list("attacked", "chopped", "cleaved", "torn", "cut")
 	default_material = "steel"
-
-/obj/item/weapon/material/twohanded/zweihander/pre_attack(var/mob/living/target, var/mob/living/user)
-	if(!wielded && istype(target))
-		cleave(user, target)
-	..()
+	can_cleave = TRUE
 
 /obj/item/weapon/material/twohanded/zweihander/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(unique_parry_check(user, attacker, damage_source) && prob(10))
