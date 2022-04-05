@@ -57,9 +57,7 @@
 
 	if(do_after(user, 5 SECONDS) && in_range(user, target))
 		user.drop_item()
-		src.target = target
-		var/turf/T = get_turf(target)
-		location = list(T.x, T.y, T.z) // Saving coordinates in case the reference becomes invalid
+		set_target(target) // Saving coordinates in case the reference becomes invalid
 		loc = null
 
 		if (ismob(target))
@@ -73,16 +71,27 @@
 		to_chat(user, "Bomb has been planted. Timer counting down from [timer].")
 		addtimer(CALLBACK(src, .proc/detonate), timer SECONDS)
 
+/obj/item/weapon/plastique/proc/set_target(var/atom/T)
+	if(!isatom(T))
+		return
+	target = T
+	location = list(T.x, T.y, T.z)
+
 /obj/item/weapon/plastique/proc/detonate()
 	if(!target)
 		target = get_atom_on_turf(src)
 	if(!target)
 		target = src
-	var/turf/T = get_turf(src)
-	if(!istype(T) && location.len == 3)
+	
+	var/turf/T = null
+	if(isturf(get_turf(target))
+		T = get_turf(target)
+	if(LAZYLEN(location) == 3)
 		T = locate(location[1], location[2], location[3])
+	else
+		T = get_turf(target)
 
-	if(istype(T))
+	if(isturf(T))
 		explosion(T, blast_dev, blast_heavy, blast_light, blast_flash)
 
 	if(target)
