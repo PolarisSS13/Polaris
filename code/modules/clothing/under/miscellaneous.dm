@@ -1282,6 +1282,7 @@ Uniforms and such
 	This costume is instead made from genuine cotton fibre and is based on the season three uniform."
 	icon = 'icons/obj/clothing/ranger.dmi'
 	icon_state = "ranger_uniform"
+	rolled_sleeves = FALSE
 
 /obj/item/clothing/under/ranger/Initialize()
 	. = ..()

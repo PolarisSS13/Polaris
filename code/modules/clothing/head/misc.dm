@@ -515,6 +515,7 @@
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	drop_sound = 'sound/items/drop/helm.ogg'
 	pickup_sound = 'sound/items/pickup/helm.ogg'
+	w_class = ITEMSIZE_NORMAL
 
 /obj/item/clothing/head/ranger/Initialize()
 	. = ..()

@@ -181,6 +181,8 @@
 	 These ones are just a well-made pair of boots in appropriate colours."
 	icon = 'icons/obj/clothing/ranger.dmi'
 	icon_state = "ranger_boots"
+	step_volume_mod = 1.2
+	drop_sound = 'sound/items/drop/boots.ogg'
 
 /obj/item/clothing/shoes/ranger/Initialize()
 	. = ..()
