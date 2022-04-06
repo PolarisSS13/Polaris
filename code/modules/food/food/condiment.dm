@@ -135,6 +135,11 @@
 				desc = "Barbecue sauce, it's labeled 'sweet and spicy'."
 				icon_state = "barbecue"
 				center_of_mass = list("x"=16, "y"=6)
+			if("sprinkles")
+				name = "sprinkles"
+				desc = "Bottle of sprinkles, colourful!"
+				icon_state= "sprinkles"
+				center_of_mass = list("x"=16, "y"=6)
 			else
 				name = "Misc Condiment Bottle"
 				if (reagents.reagent_list.len==1)
@@ -200,6 +205,13 @@
 /obj/item/weapon/reagent_containers/food/condiment/yeast/Initialize()
 	. = ..()
 	reagents.add_reagent("yeast", 50)
+
+/obj/item/weapon/reagent_containers/food/condiment/sprinkles
+	name = "Sprinkles"
+
+/obj/item/weapon/reagent_containers/food/condiment/sprinkles/Initialize()
+	. = ..()
+	reagents.add_reagent("sprinkles", 50)
 
 /obj/item/weapon/reagent_containers/food/condiment/small
 	possible_transfer_amounts = list(1,20)
@@ -441,30 +453,87 @@
 
 //End of MRE stuff.
 
-/obj/item/weapon/reagent_containers/food/condiment/flour
-	name = "flour sack"
-	desc = "A big bag of flour. Good for baking!"
+/obj/item/weapon/reagent_containers/food/condiment/advanced/flour
+	name = "flour carton"
+	desc = "A big carton of flour. Good for baking!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "flour"
 	volume = 220
 	center_of_mass = list("x"=16, "y"=8)
 
-/obj/item/weapon/reagent_containers/food/condiment/flour/on_reagent_change()
+/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/on_reagent_change()
+	update_icon()
 	return
 
-/obj/item/weapon/reagent_containers/food/condiment/flour/Initialize()
+/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/Initialize()
 	. = ..()
 	reagents.add_reagent("flour", 200)
 	randpixel_xy()
 
-/obj/item/weapon/reagent_containers/food/condiment/spacespice
-	name = "space spices"
-	desc = "An exotic blend of spices for cooking. Definitely not worms."
+/obj/item/weapon/reagent_containers/food/condiment/advanced/update_icon()
+	overlays.Cut()
+
+	if(reagents.total_volume)
+		var/image/filling = image('icons/obj/food.dmi', src, "[icon_state]10")
+
+		var/percent = round((reagents.total_volume / volume) * 100)
+		switch(percent)
+			if(-1 to 9)		filling.icon_state = "[icon_state]-10"
+			if(10 to 24) 	filling.icon_state = "[icon_state]-25"
+			if(25 to 49)	filling.icon_state = "[icon_state]-50"
+			if(50 to 85)	filling.icon_state = "[icon_state]-75"
+			if(86 to INFINITY)	filling.icon_state = "[icon_state]-100"
+
+		overlays += filling
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/rustic
+	name = "flour sack"
+	desc = "An artisanal sack of flour. Classy!"
+	icon_state = "flour_bag"
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/rustic/empty
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/rustic/empty/Initialize()
+	. = ..()
+	reagents.remove_reagent("flour", 200)
+	randpixel_xy()
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar
+	name = "sugar carton"
+	desc = "A big carton of sugar. Sweet!"
 	icon = 'icons/obj/food.dmi'
-	icon_state = "spacespicebottle"
-	possible_transfer_amounts = list(1,40) //for clown turning the lid off
-	amount_per_transfer_from_this = 1
-	volume = 40
+	icon_state = "sugar"
+	volume = 110
+	center_of_mass = list("x"=16, "y"=8)
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/on_reagent_change()
+	update_icon()
+	return
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/Initialize()
+	. = ..()
+	reagents.add_reagent("sugar", 100)
+	randpixel_xy()
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic
+	name = "sugar sack"
+	desc = "An artisanal sack of sugar. Classy!"
+	icon_state = "sugar_bag"
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic/empty
+
+/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic/empty/Initialize()
+	. = ..()
+	reagents.remove_reagent("sugar", 100)
+	randpixel_xy()
+
+/obj/item/weapon/reagent_containers/food/condiment/spacespice
+	name = "flour carton"
+	desc = "A big carton of flour. Good for baking!"
+	icon = 'icons/obj/food.dmi'
+	icon_state = "flour"
+	volume = 220
+	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/condiment/spacespice/on_reagent_change()
 	return
