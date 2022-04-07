@@ -9,7 +9,7 @@
 /datum/supply_pack/supply/food
 	name = "Kitchen supply crate"
 	contains = list(
-			/obj/item/weapon/reagent_containers/food/condiment/advanced/flour = 6,
+			/obj/item/weapon/reagent_containers/food/condiment/carton/flour = 6,
 			/obj/item/weapon/reagent_containers/food/drinks/milk = 3,
 			/obj/item/weapon/reagent_containers/food/drinks/soymilk = 2,
 			/obj/item/weapon/storage/fancy/egg_box = 2,
@@ -25,8 +25,8 @@
 /datum/supply_pack/supply/fancyfood
 	name = "Artisanal food delivery"
 	contains = list(
-			/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/rustic = 6,
-			/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic = 6
+			/obj/item/weapon/reagent_containers/food/condiment/carton/flour/rustic = 6,
+			/obj/item/weapon/reagent_containers/food/condiment/carton/sugar/rustic = 6
 			)
 	cost = 25
 	containertype = /obj/structure/closet/crate/freezer/centauri
