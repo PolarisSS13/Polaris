@@ -460,6 +460,8 @@
 	icon_state = "flour"
 	volume = 220
 	center_of_mass = list("x"=16, "y"=8)
+	//var/starts_with = list(
+	//	/datum/reagent/nutriment/flour = 100)
 
 /obj/item/weapon/reagent_containers/food/condiment/advanced/flour/on_reagent_change()
 	update_icon()
@@ -503,7 +505,7 @@
 	desc = "A big carton of sugar. Sweet!"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "sugar"
-	volume = 110
+	volume = 120
 	center_of_mass = list("x"=16, "y"=8)
 
 /obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/on_reagent_change()
