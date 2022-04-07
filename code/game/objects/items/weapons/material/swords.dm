@@ -31,6 +31,7 @@
 	icon_state = "rapier"
 	item_state = "rapier"
 	slot_flags = SLOT_BELT
+	applies_material_colour = 0
 	attack_verb = list("attacked", "stabbed", "prodded", "poked", "lunged")
 	edge = 0 //rapiers are pointy, but not cutty like other swords
 
@@ -39,6 +40,7 @@
 	desc = "A double-edged large blade."
 	icon_state = "longsword"
 	item_state = "longsword"
+	applies_material_colour = 0
 	slot_flags = SLOT_BELT | SLOT_BACK
 
 /obj/item/weapon/material/sword/longsword/pre_attack(var/mob/living/target, var/mob/living/user)
@@ -82,6 +84,7 @@
 	desc = "An ancient sword shapped like a sickle."
 	icon_state = "khopesh"
 	item_state = "khopesh"
+	applies_material_colour = 0
 	slot_flags = SLOT_BELT
 
 /obj/item/weapon/material/sword/dao
@@ -89,6 +92,7 @@
 	desc = "A single-edged broadsword."
 	icon_state = "dao"
 	item_state = "dao"
+	applies_material_colour = 0
 	slot_flags = SLOT_BELT
 
 /obj/item/weapon/material/sword/gladius
@@ -96,5 +100,5 @@
 	desc = "An ancient short sword, designed to stab and cut."
 	icon_state = "gladius"
 	item_state = "gladius"
-	applies_material_colour = 0 //messes up the hilt color otherwise
+	applies_material_colour = 0
 	slot_flags = SLOT_BELT
