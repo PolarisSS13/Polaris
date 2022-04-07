@@ -5,9 +5,9 @@
 /obj/item/weapon/reagent_containers/cooking_container
 	icon = 'icons/obj/cooking_machines.dmi'
 	var/shortname
-	var/max_space = 20//Maximum sum of w-classes of foods in this container at once
-	var/max_reagents = 80//Maximum units of reagents
-	var/food_items = 0//Used for icon updates
+	var/max_space = 20 //Maximum sum of w-classes of foods in this container at once
+	var/max_reagents = 80 //Maximum units of reagents
+	var/food_items = 0 //Used for icon updates
 	flags = OPENCONTAINER | NOREACT
 	var/list/insertable = list(
 		/obj/item/weapon/reagent_containers/food/snacks,
