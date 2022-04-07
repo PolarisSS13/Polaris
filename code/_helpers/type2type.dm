@@ -1,55 +1,3 @@
-/*
- * Holds procs designed to change one type of value, into another.
- * Contains:
- *			hex2num & num2hex
- *			text2list & list2text
- *			file2list
- *			angle2dir
- *			angle2text
- *			worldtime2text
- */
-
-// Returns an integer given a hexadecimal number string as input.
-/proc/hex2num(hex)
-	if (!istext(hex))
-		return
-
-	var/num   = 0
-	var/power = 1
-	var/i     = length(hex)
-
-	while (i)
-		var/char = text2ascii(hex, i)
-		switch(char)
-			if(48)                                  // 0 -- do nothing
-			if(49 to 57) num += (char - 48) * power // 1-9
-			if(97,  65)  num += power * 10          // A
-			if(98,  66)  num += power * 11          // B
-			if(99,  67)  num += power * 12          // C
-			if(100, 68)  num += power * 13          // D
-			if(101, 69)  num += power * 14          // E
-			if(102, 70)  num += power * 15          // F
-			else
-				return
-		power *= 16
-		i--
-	return num
-
-// Returns the hex value of a number given a value assumed to be a base-ten value
-/proc/num2hex(num, padlength)
-	var/global/list/hexdigits = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
-
-	. = ""
-	while(num > 0)
-		var/hexdigit = hexdigits[(num & 0xF) + 1]
-		. = "[hexdigit][.]"
-		num >>= 4 //go to the next half-byte
-
-	//pad with zeroes
-	var/left = padlength - length(.)
-	while (left-- > 0)
-		. = "0[.]"
-
 /proc/text2numlist(text, delimiter="\n")
 	var/list/num_list = list()
 	for(var/x in splittext(text, delimiter))
@@ -151,25 +99,6 @@
 	if (rights & R_EVENT)       . += "[seperator]+EVENT"
 	return .
 
-// Converts a hexadecimal color (e.g. #FF0050) to a list of numbers for red, green, and blue (e.g. list(255,0,80) ).
-/proc/hex2rgb(hex)
-	// Strips the starting #, in case this is ever supplied without one, so everything doesn't break.
-	if(findtext(hex,"#",1,2))
-		hex = copytext(hex, 2)
-	return list(hex2rgb_r(hex), hex2rgb_g(hex), hex2rgb_b(hex))
-
-// The three procs below require that the '#' part of the hex be stripped, which hex2rgb() does automatically.
-/proc/hex2rgb_r(hex)
-	var/hex_to_work_on = copytext(hex,1,3)
-	return hex2num(hex_to_work_on)
-
-/proc/hex2rgb_g(hex)
-	var/hex_to_work_on = copytext(hex,3,5)
-	return hex2num(hex_to_work_on)
-
-/proc/hex2rgb_b(hex)
-	var/hex_to_work_on = copytext(hex,5,7)
-	return hex2num(hex_to_work_on)
 
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 /proc/heat2color(temp)
