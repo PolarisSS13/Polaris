@@ -83,15 +83,10 @@
 	if(!target)
 		target = src
 	
-	var/turf/T = null
-	if(isturf(get_turf(target))
-		T = get_turf(target)
-	if(LAZYLEN(location) == 3)
+	var/turf/T = get_turf(target)
+	if (!T && length(location))
 		T = locate(location[1], location[2], location[3])
-	else
-		T = get_turf(target)
-
-	if(isturf(T))
+	if (T)
 		explosion(T, blast_dev, blast_heavy, blast_light, blast_flash)
 
 	if(target)
