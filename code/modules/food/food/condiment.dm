@@ -528,12 +528,12 @@
 	randpixel_xy()
 
 /obj/item/weapon/reagent_containers/food/condiment/spacespice
-	name = "flour carton"
-	desc = "A big carton of flour. Good for baking!"
-	icon = 'icons/obj/food.dmi'
-	icon_state = "flour"
-	volume = 220
-	center_of_mass = list("x"=16, "y"=8)
+	name = "space spices"
+	desc = "An exotic blend of spices for cooking. Definitely not worms."
+	icon_state = "spacespicebottle"
+	possible_transfer_amounts = list(1,40) //for clown turning the lid off
+	amount_per_transfer_from_this = 1
+	volume = 40
 
 /obj/item/weapon/reagent_containers/food/condiment/spacespice/on_reagent_change()
 	return
