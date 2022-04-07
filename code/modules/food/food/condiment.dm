@@ -470,7 +470,6 @@
 /obj/item/weapon/reagent_containers/food/condiment/advanced/flour/Initialize()
 	. = ..()
 	reagents.add_reagent("flour", 200)
-	randpixel_xy()
 
 /obj/item/weapon/reagent_containers/food/condiment/advanced/update_icon()
 	overlays.Cut()
@@ -493,13 +492,6 @@
 	desc = "An artisanal sack of flour. Classy!"
 	icon_state = "flour_bag"
 
-/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/rustic/empty
-
-/obj/item/weapon/reagent_containers/food/condiment/advanced/flour/rustic/empty/Initialize()
-	. = ..()
-	reagents.remove_reagent("flour", 200)
-	randpixel_xy()
-
 /obj/item/weapon/reagent_containers/food/condiment/advanced/sugar
 	name = "sugar carton"
 	desc = "A big carton of sugar. Sweet!"
@@ -515,19 +507,11 @@
 /obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/Initialize()
 	. = ..()
 	reagents.add_reagent("sugar", 100)
-	randpixel_xy()
 
 /obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic
 	name = "sugar sack"
 	desc = "An artisanal sack of sugar. Classy!"
 	icon_state = "sugar_bag"
-
-/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic/empty
-
-/obj/item/weapon/reagent_containers/food/condiment/advanced/sugar/rustic/empty/Initialize()
-	. = ..()
-	reagents.remove_reagent("sugar", 100)
-	randpixel_xy()
 
 /obj/item/weapon/reagent_containers/food/condiment/spacespice
 	name = "space spices"
