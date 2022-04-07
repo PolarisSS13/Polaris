@@ -5,9 +5,9 @@
 /obj/item/weapon/reagent_containers/cooking_container
 	icon = 'icons/obj/cooking_machines.dmi'
 	var/shortname
-	var/max_space = 20 //Maximum sum of w-classes of foods in this container at once
-	var/max_reagents = 80 //Maximum units of reagents
-	var/food_items = 0 //Used for icon updates
+	var/max_space = 20 // Maximum sum of w-classes of foods in this container at once
+	var/max_reagents = 80 // Maximum units of reagents
+	var/food_items = 0 // Used for icon updates
 	flags = OPENCONTAINER | NOREACT
 	var/list/insertable = list(
 		/obj/item/weapon/reagent_containers/food/snacks,
@@ -171,12 +171,12 @@
 
 		var/percent = round((food_items / max_space) * 100)
 		switch(percent)
-			if(0 to 2)		filling.icon_state = "[icon_state]"
-			if(3 to 24) 	filling.icon_state = "[icon_state]1"
-			if(25 to 49)	filling.icon_state = "[icon_state]2"
-			if(50 to 74)	filling.icon_state = "[icon_state]3"
-			if(75 to 79)	filling.icon_state = "[icon_state]4"
-			if(80 to INFINITY)	filling.icon_state = "[icon_state]5"
+			if(0 to 2)	        filling.icon_state = "[icon_state]"
+			if(3 to 24)         filling.icon_state = "[icon_state]1"
+			if(25 to 49)        filling.icon_state = "[icon_state]2"
+			if(50 to 74)        filling.icon_state = "[icon_state]3"
+			if(75 to 79)        filling.icon_state = "[icon_state]4"
+			if(80 to INFINITY)  filling.icon_state = "[icon_state]5"
 
 		overlays += filling
 
