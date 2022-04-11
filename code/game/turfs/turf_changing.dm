@@ -3,6 +3,7 @@
 	spawn()
 		new /obj/structure/lattice( locate(src.x, src.y, src.z) )
 
+
 // Called after turf replaces old one
 /turf/proc/post_change()
 	levelupdate()
@@ -22,7 +23,7 @@
 
 	if(N == /turf/space)
 		var/turf/below = GetBelow(src)
-		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)))
+		if(istype(below) && (air_master.has_valid_zone(below) || air_master.has_valid_zone(src)) && (!istype(below, /turf/unsimulated/wall) && !istype(below, /turf/simulated/sky)))
 			N = /turf/simulated/open
 
 	var/obj/fire/old_fire = fire

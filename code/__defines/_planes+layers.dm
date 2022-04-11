@@ -139,9 +139,6 @@ What is the naming convention for planes or layers?
 
 #define PLANE_RUNECHAT			9
 
-#define PLANE_LIGHTING_ABOVE	6 //For glowy eyes etc. that shouldn't be affected by darkness
-#define PLANE_RUNECHAT			7
-
 #define PLANE_GHOSTS			10 //Spooooooooky ghooooooosts
 #define PLANE_AI_EYE			11 //The AI eye lives here
 

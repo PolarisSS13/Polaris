@@ -27,18 +27,15 @@
 	lighting_corner_NW?.vis_update()
 
 /turf/proc/lighting_clear_overlay()
-	if (lighting_object)
+	if(lighting_object)
 		qdel(lighting_object, force=TRUE)
 
 // Builds a lighting object for us, but only if our area is dynamic.
 /turf/proc/lighting_build_overlay()
-	if (lighting_object)
-		qdel(lighting_object, force=TRUE) //Shitty fix for lighting objects persisting after death
-
-	var/area/our_area = loc
-	if (!IS_DYNAMIC_LIGHTING(our_area) && !light_sources)
+	if(!has_dynamic_lighting())
 		return
 
+	lighting_clear_overlay()
 	new/datum/lighting_object(src)
 
 // Used to get a scaled lumcount.
@@ -68,7 +65,7 @@
 
 	totallums += dynamic_lumcount
 
-	return clamp(totallums, 0, 1)
+	return clamp(totallums,0,1)
 
 // Returns a boolean whether the turf is on soft lighting.
 // Soft lighting being the threshold at which point the overlay considers
@@ -124,7 +121,12 @@
 			else
 				lighting_clear_overlay()
 
+/turf/proc/has_dynamic_lighting()
+	var/area/A = loc
+	return (IS_DYNAMIC_LIGHTING(src) && IS_DYNAMIC_LIGHTING(A))
+
 /turf/proc/generate_missing_corners()
+
 	if (!lighting_corner_NE)
 		lighting_corner_NE = new/datum/lighting_corner(src, NORTH|EAST)
 

@@ -635,7 +635,8 @@
 	else
 		animate(src, color="#222222", time=5)
 		set_opacity(1)
-
+	var/turf/T = get_turf(src)
+	T.recalculate_directional_opacity()
 
 
 /obj/machinery/button/windowtint
