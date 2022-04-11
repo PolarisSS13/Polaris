@@ -400,7 +400,7 @@
 	toggle_preference(pref_path)
 	SScharacter_setup.queue_preferences_save(prefs)
 
-	to_chat(src, "You will now [(is_preference_enabled(/datum/client_preference/TEngraveGraffiti)) ? "engrave" : "not engrave"] graffiti.")
+	to_chat(src, "You will now [(is_preference_enabled(/datum/client_preference/engrave_graffiti)) ? "engrave" : "not engrave"] graffiti.")
 
 	feedback_add_details("admin_verb","TEngraveGraffiti")
 
