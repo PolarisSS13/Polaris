@@ -216,7 +216,7 @@ var/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/update_general()
 	update_icon(1)
-	recalc_atom_opacity()
+	recalculate_directional_opacity()
 	if(ticker && ticker.current_state == GAME_STATE_PLAYING)
 		reconsider_lights()
 		if(air_master)
@@ -767,7 +767,7 @@ var/list/mining_overlay_cache = list()
 
 		if(isnull(T.geologic_data))
 			T.geologic_data = new /datum/geosample(T)
-		
+
 		if(isnull(T.finds) || isemptylist(T.finds))
 			T.finds = list()
 			if(prob(50))

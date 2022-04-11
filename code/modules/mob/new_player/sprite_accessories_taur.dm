@@ -135,6 +135,7 @@
 	clip_mask_icon = 'icons/mob/human_races/sprite_accessories/taurs.dmi'
 	clip_mask_state = "taur_clip_mask_def" //Used to clip off the lower part of suits & uniforms.
 	whitelist_allowed = list()
+	em_block = TRUE
 
 // Species-unique long tails/taurhalves
 

@@ -180,7 +180,12 @@
 	light_range = 3
 	light_power = 0.75
 	light_color = "#ff0066" // Pink-ish
+	light_on = TRUE
 	block_tele = TRUE // Will be used for dungeons so this is needed to stop cheesing with handteles.
+
+/turf/simulated/shuttle/wall/alien/Initialize()
+	. = ..()
+	update_light()
 
 /turf/simulated/shuttle/wall/alien/hard_corner
 	name = "hardcorner wall"
@@ -290,10 +295,10 @@
 // Fake corners for making hulls look pretty
 /obj/structure/hull_corner
 	name = "hull corner"
-	
+
 	icon = 'icons/turf/wall_masks.dmi'
 	icon_state = "hull_corner"
-	
+
 	anchored = TRUE
 	density = TRUE
 	breakable = TRUE
@@ -311,19 +316,19 @@
 
 /obj/structure/hull_corner/proc/update_look()
 	cut_overlays()
-	
+
 	var/turf/simulated/wall/T
 	for(var/direction in get_dirs_to_test())
 		T = get_step(src, direction)
 		if(!istype(T))
 			continue
-		
+
 		name = T.name
 		desc = T.desc
-		
+
 		var/datum/material/B = T.material
 		var/datum/material/R = T.reinf_material
-		
+
 		if(B?.icon_colour)
 			color = B.icon_colour
 		if(R?.icon_colour)
@@ -331,7 +336,7 @@
 			I.color = R.icon_colour
 			add_overlay(I)
 		break
-	
+
 	if(!T)
 		warning("Hull corner at [x],[y] not placed adjacent to a hull it can find.")
 

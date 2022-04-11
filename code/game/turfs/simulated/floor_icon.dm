@@ -12,9 +12,6 @@ var/image/no_ceiling_image = null
 
 /turf/simulated/floor/update_icon(var/update_neighbors)
 
-	if(lava)
-		return
-
 	cut_overlays()
 
 	if(flooring)
@@ -108,7 +105,7 @@ var/image/no_ceiling_image = null
 		// Has to have it's own edge_blending_priority
 		// Has to have a higher priority than us
 		// Their icon_state is not our icon_state
-		// They don't forbid_turf_edge			
+		// They don't forbid_turf_edge
 		if(istype(T) && T.edge_blending_priority && edge_blending_priority < T.edge_blending_priority && icon_state != T.icon_state && !T.forbid_turf_edge())
 			var/cache_key = "[T.get_edge_icon_state()]-[checkdir]" // Usually [icon_state]-[dirnum]
 			if(!turf_edge_cache[cache_key])

@@ -427,10 +427,11 @@
 	w_class = ITEMSIZE_SMALL
 	blood_sprite_state = "helmetblood"
 
+	light_system = MOVABLE_LIGHT_DIRECTIONAL
+	light_cone_y_offset = 14
+
+	var/on = FALSE
 	var/light_overlay = "helmet_light"
-	var/light_applied
-	var/brightness_on
-	var/on = 0
 	var/image/helmet_light
 
 	sprite_sheets = list(
@@ -441,23 +442,19 @@
 	pickup_sound = 'sound/items/pickup/hat.ogg'
 
 /obj/item/clothing/head/attack_self(mob/user)
-	if(brightness_on)
+	if(light_range)
 		if(!isturf(user.loc))
-			to_chat(user, "You cannot turn the light on while in this [user.loc]")
+			to_chat(user, "You cannot toggle the light while in this [user.loc]")
 			return
-		on = !on
-		to_chat(user, "You [on ? "enable" : "disable"] the helmet light.")
 		update_flashlight(user)
+		to_chat(user, "You [on ? "enable" : "disable"] the helmet light.")
 	else
 		return ..(user)
 
 /obj/item/clothing/head/proc/update_flashlight(var/mob/user = null)
-	if(on && !light_applied)
-		set_light(brightness_on)
-		light_applied = 1
-	else if(!on && light_applied)
-		set_light(0)
-		light_applied = 0
+	set_light_on(!light_on)
+	if(light_system == STATIC_LIGHT)
+		update_light()
 	update_icon(user)
 	user.update_action_buttons()
 
@@ -501,7 +498,7 @@
 	if(ishuman(user))
 		H = user
 
-	if(on)
+	if(light_on)
 		// Generate object icon.
 		if(!light_overlay_cache["[light_overlay]_icon"])
 			light_overlay_cache["[light_overlay]_icon"] = image(icon = 'icons/obj/light_overlays.dmi', icon_state = "[light_overlay]")
@@ -834,7 +831,7 @@
 		if(accessory.AltClick(user))
 			return TRUE
 	. = ..()
-	
+
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(LAZYLEN(accessories))
 		..()

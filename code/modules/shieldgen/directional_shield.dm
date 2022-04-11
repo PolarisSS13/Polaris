@@ -84,6 +84,7 @@
 	but allow those projectiles to leave the shield from the inside.  Blocking too many damaging projectiles will cause the shield to fail."
 	icon = 'icons/obj/device.dmi'
 	icon_state = "signmaker_sec"
+	light_on = TRUE
 	light_range = 4
 	light_power = 4
 	var/active = FALSE					// If it's on.

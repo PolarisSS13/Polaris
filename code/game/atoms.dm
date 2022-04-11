@@ -25,9 +25,15 @@
 	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
 	///Chemistry.
 
-	// Overlays
-	var/list/our_overlays	//our local copy of (non-priority) overlays without byond magic. Use procs in SSoverlays to manipulate
-	var/list/priority_overlays	//overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
+	///Our local copy of (non-priority) overlays without byond magic. Use procs in SSoverlays to manipulate
+	var/list/our_overlays
+	///Overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
+	var/list/priority_overlays
+	///vis overlays managed by SSvis_overlays to automaticaly turn them like other overlays
+	var/list/managed_vis_overlays
+
+	///Our local copy of filter data so we can add/remove it
+	var/list/filter_data
 
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
@@ -48,7 +54,7 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 	//atom creation method that preloads variables at creation
 	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
 		global._preloader.load(src)
-		
+
 	var/do_initialize = SSatoms?.atom_init_stage
 	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
 		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
@@ -651,3 +657,10 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 
 /atom/proc/get_visible_gender(mob/user, force)
 	return gender
+
+/atom/Destroy()
+	if(reagents)
+		QDEL_NULL(reagents)
+	if(light)
+		QDEL_NULL(light)
+	return ..()

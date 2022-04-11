@@ -30,29 +30,47 @@
 	var/cloaked = FALSE //If we're cloaked or not
 	var/image/cloaked_selfimage //The image we use for our client to let them see where we are
 
+/atom/movable/Initialize(mapload)
+	. = ..()
+	switch(blocks_emissive)
+		if(EMISSIVE_BLOCK_GENERIC)
+			var/mutable_appearance/gen_emissive_blocker = mutable_appearance(icon, icon_state, plane = PLANE_EMISSIVE, alpha = src.alpha)
+			gen_emissive_blocker.color = GLOB.em_block_color
+			gen_emissive_blocker.dir = dir
+			gen_emissive_blocker.appearance_flags |= appearance_flags
+			add_overlay(list(gen_emissive_blocker), TRUE)
+		if(EMISSIVE_BLOCK_UNIQUE)
+			render_target = ref(src)
+			em_block = new(src, render_target)
+			add_overlay(list(em_block), TRUE)
+	if(opacity)
+		AddElement(/datum/element/light_blocking)
+	switch(light_system)
+		if(STATIC_LIGHT)
+			update_light()
+		if(MOVABLE_LIGHT)
+			AddComponent(/datum/component/overlay_lighting, starts_on = light_on)
+		if(MOVABLE_LIGHT_DIRECTIONAL)
+			AddComponent(/datum/component/overlay_lighting, is_directional = TRUE, starts_on = light_on)
 
 /atom/movable/Destroy()
-	if (reagents)
+	. = ..()
+	if(reagents)
 		qdel(reagents)
 		reagents = null
-	walk(src, 0)
-	for (var/atom/movable/movable in contents)
-		qdel(movable)
-	if (orbiting)
-		stop_orbit()
-	var/turf/origin
-	if (opacity && isturf(loc))
-		origin = loc
-	unbuckle_all_mobs()
+	for(var/atom/movable/AM in contents)
+		qdel(AM)
+
+	if(opacity)
+		RemoveElement(/datum/element/light_blocking)
+
 	moveToNullspace()
-	if (origin)
-		origin.recalc_atom_opacity()
-		origin.reconsider_lights()
-	if (pulledby)
-		if (pulledby.pulling == src)
-			pulledby.pulling = null
-		pulledby = null
-	return ..()
+
+	if(pulledby)
+		pulledby.stop_pulling()
+
+	if(orbiting)
+		stop_orbit()
 
 
 /atom/movable/vv_edit_var(var_name, var_value)
@@ -208,14 +226,15 @@
 
 //Called after a successful Move(). By this point, we've already moved
 /atom/movable/proc/Moved(atom/old_loc, direction, forced = FALSE, movetime)
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, direction, forced, movetime)
 	// Handle any buckled mobs on this movable
 	if(has_buckled_mobs())
 		handle_buckled_mob_movement(old_loc, direction, movetime)
 	if(riding_datum)
 		riding_datum.handle_vehicle_layer()
 		riding_datum.handle_vehicle_offsets()
-
-	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, direction)
+	for (var/datum/light_source/light as anything in light_sources) // Cycle through the light sources on this atom and tell them to update.
+		light.source_atom.update_light()
 
 	return TRUE
 

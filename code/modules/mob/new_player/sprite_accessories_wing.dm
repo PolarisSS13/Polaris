@@ -19,6 +19,7 @@
 	var/ani_state // State when flapping/animated
 	var/extra_overlay_w // Flapping state for extra overlay
 	var/extra_overlay2_w
+	em_block = TRUE
 
 	species_allowed = list(SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	whitelist_allowed = list()

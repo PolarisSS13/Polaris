@@ -844,10 +844,10 @@
 	var/static/list/ammo_screen_loc_list = list(ui_ammo_hud1, ui_ammo_hud2, ui_ammo_hud3 ,ui_ammo_hud4)
 
 /obj/screen/ammo/proc/add_hud(var/mob/living/user, var/obj/item/weapon/gun/G)
-	
+
 	if(!user?.client)
 		return
-	
+
 	if(!G)
 		CRASH("/obj/screen/ammo/proc/add_hud() has been called from [src] without the required param of G")
 
@@ -910,3 +910,10 @@
 			overlays += image('icons/mob/screen_ammo.dmi', src, "o9")
 			overlays += image('icons/mob/screen_ammo.dmi', src, "t9")
 			overlays += image('icons/mob/screen_ammo.dmi', src, "h9")
+
+/obj/screen/setup_preview/pm_helper
+	icon = null
+	icon_state = null
+	appearance_flags = PLANE_MASTER
+	plane = PLANE_EMISSIVE
+	alpha = 0

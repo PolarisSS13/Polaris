@@ -37,13 +37,14 @@
 
 /turf/Initialize(mapload)
 	. = ..()
-	
+
 	for(var/atom/movable/AM in src)
 		Entered(AM)
 
 	//Lighting related
 	luminosity = !(dynamic_lighting)
-	has_opaque_atom |= (opacity)
+	if(opacity)
+		directional_opacity = ALL_CARDINALS
 
 	//Pathfinding related
 	if(movement_cost && pathweight == 1) // This updates pathweight automatically.

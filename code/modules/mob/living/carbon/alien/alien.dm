@@ -4,6 +4,7 @@
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "alien"
 	pass_flags = PASSTABLE
+	blocks_emissive = EMISSIVE_BLOCK_UNIQUE
 	health = 100
 	maxHealth = 100
 	mob_size = 4

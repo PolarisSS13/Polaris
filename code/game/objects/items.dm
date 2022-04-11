@@ -2,6 +2,7 @@
 	name = "item"
 	icon = 'icons/obj/items.dmi'
 	w_class = ITEMSIZE_NORMAL
+	blocks_emissive = EMISSIVE_BLOCK_GENERIC
 
 	matter = list(MAT_STEEL = 1)
 
@@ -811,6 +812,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		apply_blood(standing)			//Some items show blood when bloodied
 		apply_accessories(standing)		//Some items sport accessories like webbing
 
+	//Apply overlays to our...overlay
+	apply_overlays(standing)
+
 	//Return our icon
 	return standing
 
@@ -891,6 +895,15 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 /obj/item/proc/apply_accessories(var/image/standing)
 	return standing
 
+/obj/item/proc/apply_overlays(var/image/standing)
+	if(!blocks_emissive)
+		return standing
+
+	var/mutable_appearance/blocker_overlay = mutable_appearance(standing.icon, standing.icon_state, plane = PLANE_EMISSIVE, appearance_flags = KEEP_APART)
+	blocker_overlay.color = GLOB.em_block_color
+	standing.overlays += blocker_overlay
+	return standing
+
 /obj/item/MouseEntered(location,control,params)
 	. = ..()
 	if(usr.is_preference_enabled(/datum/client_preference/inv_tooltips) && ((src in usr) || isstorage(loc))) // If in inventory or in storage we're looking at
@@ -917,3 +930,4 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // this gets called when the item gets chucked by the vending machine
 /obj/item/proc/vendor_action(var/obj/machinery/vending/V)
 	return
+

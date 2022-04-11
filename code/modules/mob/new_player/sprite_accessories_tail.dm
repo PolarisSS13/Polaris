@@ -9,6 +9,7 @@
 	name = "You should not see this..."
 	icon = 'icons/mob/human_races/sprite_accessories/tails.dmi'
 	do_colouration = TRUE // If you set it to false you're doing it wrong
+	em_block = TRUE
 
 	color_blend_mode = ICON_MULTIPLY // Only appliciable if do_coloration = 1
 	var/extra_overlay // Icon state of an additional overlay to blend in.

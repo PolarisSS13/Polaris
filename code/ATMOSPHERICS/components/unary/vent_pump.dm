@@ -19,6 +19,7 @@
 	power_rating = 7500			//7500 W ~ 10 HP
 
 	connect_types = CONNECT_TYPE_REGULAR|CONNECT_TYPE_SUPPLY //connects to regular and supply pipes
+	blocks_emissive = FALSE
 
 	var/area/initial_loc
 	level = 1
@@ -165,7 +166,7 @@
 		soundloop.stop()
 		return 0
 	if(!use_power)
-		soundloop.stop() 
+		soundloop.stop()
 		return 0
 	if(welded)
 		soundloop.stop()
