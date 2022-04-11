@@ -121,6 +121,18 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/accessory/bowtie
+	display_name = "bowtie selection"
+	path = /obj/item/clothing/accessory/bowtie
+	cost = 1
+
+/datum/gear/accessory/bowtie/New()
+	..()
+	var/list/bowties = list()
+	for(var/obj/item/clothing/accessory/bowtie_type as anything in typesof(/obj/item/clothing/accessory/bowtie))
+		bowties[initial(bowtie_type.name)] = bowtie_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bowties))
+
 /datum/gear/accessory/jacket
 	display_name = "suit jacket selection"
 	path = /obj/item/clothing/accessory/jacket
@@ -307,3 +319,16 @@
 		var/obj/item/clothing/accessory/pridepin_type = pridepin
 		pridepins[initial(pridepin_type.name)] = pridepin_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pridepins))
+
+/datum/gear/accessory/corpbadge
+	display_name = "investigator holobadge (IAA)"
+	path = /obj/item/clothing/accessory/badge/holo/investigator
+	allowed_roles = list("Internal affairs agent")
+
+/datum/gear/accessory/pressbadge
+	display_name = "corporate press pass"
+	path = /obj/item/clothing/accessory/badge/press
+
+/datum/gear/accessory/pressbadge
+	display_name = "freelance press pass"
+	path = /obj/item/clothing/accessory/badge/press/independent
