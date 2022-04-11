@@ -28,7 +28,6 @@
 	attacktext = list("slashed")
 	attack_sound = 'sound/weapons/bladeslice.ogg'
 	ai_holder_type = /datum/ai_holder/simple_mob/xeno_alien /// Found in xeno_alien_ai.dm 
-	
 	special_attack_min_range = 1
 	special_attack_max_range = 7
 	var/teleport_distance = 1 /// How far away to be when we teleport. 
@@ -37,12 +36,12 @@
 	var/obj/effect/overlay/skathari_telegrab/displacement_warning = null
 
 /mob/living/simple_mob/animal/space/alien/do_special_attack(atom/A)
-	. = TRUE
 	switch(a_intent)
 		if(I_DISARM)
 			xeno_teleport(A)
 		if(I_GRAB)
 			xeno_telegrab()
+	return TRUE /// Prevents shooting when using, mostly noticable for player-controlled. 
 
 /mob/living/simple_mob/animal/space/alien/proc/xeno_teleport(atom/target)
 	/// Copied MOSTLY from bluespace slime's do_special_attack
@@ -198,7 +197,10 @@
 	projectiletype = /obj/item/projectile/energy/skathari
 	ai_holder_type = /datum/ai_holder/simple_mob/xeno_alien/empress
 	pixel_x = -32
+	pixel_y = -16
 	old_x = -32
+	default_pixel_x = -32
+	default_pixel_y = -16 /// Help center it a bit more. 
 	icon_expected_width = 96
 	icon_expected_height = 96
 
