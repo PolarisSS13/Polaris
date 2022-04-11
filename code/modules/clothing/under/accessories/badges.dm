@@ -168,7 +168,7 @@
 
 /obj/item/clothing/accessory/badge/solid
 	name = "\improper SolGov ID badge"
-	desc = "A descriptive identification badge with the holder's credentials. This one is blue with the emblem of the SCG."
+	desc = "A descriptive identification badge with the holder's credentials. This one indicates the holder is representing the SCG."
 	icon_state = "solbadge"
 	badge_string = null
 
