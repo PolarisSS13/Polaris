@@ -111,6 +111,16 @@
 	pixel_x = -32
 	pixel_y = -32
 
+// For skathari empress' telegrab warning, could replace down the line. 
+/obj/effect/overlay/skathari_telegrab
+	name = "bluespace displacement"
+	desc = "An eerie field of bluespace energy, you might want to run!"
+	icon = 'icons/effects/96x96.dmi'
+	icon_state = "emfield_s3"
+	alpha = 100
+	plane = MOB_PLANE
+	layer = BELOW_MOB_LAYER
+
 /obj/effect/overlay/closet_door
 	anchored = TRUE
 	plane = FLOAT_PLANE
