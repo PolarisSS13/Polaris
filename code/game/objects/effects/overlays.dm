@@ -118,6 +118,8 @@
 	icon = 'icons/effects/96x96.dmi'
 	icon_state = "emfield_s3"
 	alpha = 100
+	pixel_x = -32
+	pixel_y = -16 /// Line up with the big sprite that spawns it! 
 	plane = MOB_PLANE
 	layer = BELOW_MOB_LAYER
 
