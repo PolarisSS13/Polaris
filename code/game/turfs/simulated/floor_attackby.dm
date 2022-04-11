@@ -9,8 +9,11 @@
 			attack_tile(C, L) // Be on help intent if you want to decon something.
 			return
 
-	if(!(C.is_screwdriver() && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)) && try_graffiti(user, C))
-		return
+	if(!(C.has_tool_quality(TOOL_SCREWDRIVER) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)))
+		if(isliving(user))
+			var/mob/living/L = user
+			if(L.a_intent == I_HELP && L.is_preference_enabled(/datum/client_preference/engrave_graffiti))
+				try_graffiti(L, C)
 
 	if(istype(C, /obj/item/stack/tile/roofing))
 		var/expended_tile = FALSE // To track the case. If a ceiling is built in a multiz zlevel, it also necessarily roofs it against weather
@@ -161,3 +164,10 @@
 	if(flooring)
 		return
 	attackby(T, user)
+
+/turf/simulated/floor/AltClick(mob/user)
+	if(isliving(user))
+		var/mob/living/livingUser = user
+		if(try_graffiti(livingUser, livingUser.get_active_hand()))
+			return
+	. = ..()

@@ -131,8 +131,9 @@
 
 	user.setClickCooldown(user.get_attack_speed(W))
 
-	if(!construction_stage && try_graffiti(user, W))
-		return
+	if(!construction_stage && user.a_intent == I_HELP && user.is_preference_enabled(/datum/client_preference/engrave_graffiti))
+		if(try_graffiti(user,W))
+			return
 
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
@@ -407,3 +408,9 @@
 		return attack_hand(user)
 
 
+/turf/simulated/wall/AltClick(mob/user)
+	if(isliving(user))
+		var/mob/living/livingUser = user
+		if(try_graffiti(livingUser, livingUser.get_active_hand()))
+			return
+	. = ..()
