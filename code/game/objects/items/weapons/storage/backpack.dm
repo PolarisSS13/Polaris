@@ -214,7 +214,6 @@
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
 	icon_state = "satchel"
-	item_state_slots = list(slot_r_hand_str = "briefcase", slot_l_hand_str = "briefcase")
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
 	starts_with = list(/obj/item/weapon/storage/wallet/random)
