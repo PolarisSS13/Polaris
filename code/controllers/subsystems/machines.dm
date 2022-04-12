@@ -161,16 +161,6 @@ SUBSYSTEM_DEF(machines)
 		if(MC_TICK_CHECK)
 			return
 
-/datum/controller/subsystem/machines/Recover()
-	// TODO - PHASE 2
-	// if (istype(SSmachines.pipenets))
-	// 	pipenets = SSmachines.pipenets
-	// if (istype(SSmachines.machinery))
-	// 	machinery = SSmachines.machinery
-	// if (istype(SSmachines.powernets))
-	// 	powernets = SSmachines.powernets
-	// if (istype(SSmachines.power_objects))
-	// 	power_objects = SSmachines.power_objects
 
 #undef SSMACHINES_PIPENETS
 #undef SSMACHINES_MACHINERY

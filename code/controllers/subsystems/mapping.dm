@@ -16,7 +16,6 @@ SUBSYSTEM_DEF(mapping)
 	var/list/engine_submap_landmarks = list()
 
 /datum/controller/subsystem/mapping/Recover()
-	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.
 	shelter_templates = SSmapping.shelter_templates
 
 /datum/controller/subsystem/mapping/Initialize(timeofday)
