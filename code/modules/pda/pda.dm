@@ -306,7 +306,7 @@ var/global/list/obj/item/pda/PDAs = list()
 	if(can_use(usr))
 		start_program(find_program(/datum/data/pda/app/main_menu))
 		notifying_programs.Cut()
-		overlays -= image('icons/obj/pda.dmi', "pda-r")
+		cut_overlay("pda-r")
 		to_chat(usr, "<span class='notice'>You press the reset button on \the [src].</span>")
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")

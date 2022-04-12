@@ -338,14 +338,14 @@
 /obj/structure/table/update_icon()
 	if(flipped != 1)
 		icon_state = "blank"
-		overlays.Cut()
+		cut_overlays()
 
 		var/image/I
 
 		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
 		for(var/i = 1 to 4)
 			I = image(icon, dir = 1<<(i-1), icon_state = connections[i])
-			overlays += I
+			add_overlay(I)
 
 		// Standard table image
 		if(material)
@@ -353,7 +353,7 @@
 				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
 				if(material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
-				overlays += I
+				add_overlay(I)
 
 		// Reinforcements
 		if(reinforced)
@@ -361,14 +361,14 @@
 				I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1<<(i-1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
-				overlays += I
+				add_overlay(I)
 
 		if(carpeted)
 			for(var/i = 1 to 4)
 				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
-				overlays += I
+				add_overlay(I)
 	else
-		overlays.Cut()
+		cut_overlays()
 		var/type = 0
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
@@ -389,7 +389,7 @@
 			var/image/I = image(icon, "[material.icon_base]_flip[type]")
 			I.color = material.icon_colour
 			I.alpha = 255 * material.opacity
-			overlays += I
+			add_overlay(I)
 			name = "[material.display_name] table"
 		else
 			name = "table frame"
@@ -398,10 +398,10 @@
 			var/image/I = image(icon, "[reinforced.icon_reinf]_flip[type]")
 			I.color = reinforced.icon_colour
 			I.alpha = 255 * reinforced.opacity
-			overlays += I
+			add_overlay(I)
 
 		if(carpeted)
-			overlays += "carpet_flip[type]"
+			add_overlay("carpet_flip[type]")
 
 
 #define CORNER_NONE 0

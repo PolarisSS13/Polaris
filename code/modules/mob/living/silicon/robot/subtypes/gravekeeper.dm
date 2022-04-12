@@ -12,9 +12,9 @@
 /mob/living/silicon/robot/gravekeeper/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
 
-	mmi = new /obj/item/mmi/digital/robot(src) // Explicitly a drone.
+	mmi = new /obj/item/mmi/digital/robot(src)
 	module = new /obj/item/robot_module/robot/gravekeeper(src)
-	overlays.Cut()
+	cut_overlays()
 	init_id()
 
 	updatename("Gravekeeper")

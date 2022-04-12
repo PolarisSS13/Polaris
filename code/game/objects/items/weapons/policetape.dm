@@ -114,7 +114,7 @@ var/list/tape_roll_applications = list()
 	color = COLOR_DEEP_SKY_BLUE
 
 /obj/item/taperoll/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	var/image/overlay = image(icon = src.icon)
 	overlay.appearance_flags = RESET_COLOR
 	if(ismob(loc))
@@ -122,7 +122,7 @@ var/list/tape_roll_applications = list()
 			overlay.icon_state = "start"
 		else
 			overlay.icon_state = "stop"
-		overlays += overlay
+		add_overlay(overlay)
 
 
 /obj/item/taperoll/dropped(mob/user)

@@ -57,11 +57,11 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	else
 		if(!contaminated)
 			contaminated = 1
-			overlays += contamination_overlay
+			add_overlay(contamination_overlay)
 
 /obj/item/proc/decontaminate()
 	contaminated = 0
-	overlays -= contamination_overlay
+	cut_overlay(contamination_overlay)
 
 /mob/proc/contaminate()
 

@@ -290,6 +290,7 @@
 	return 0
 
 /obj/machinery/alarm/update_icon()
+	cut_overlays()
 	if(panel_open)
 		icon_state = "alarmx"
 		set_light(0)
