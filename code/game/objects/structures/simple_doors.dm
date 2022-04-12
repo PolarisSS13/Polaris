@@ -21,6 +21,7 @@
 	CheckHardness()
 
 /obj/structure/simple_door/Initialize(var/material_name)
+	. = ..()
 	if(material_name && !material)
 		material = material_name
 	else if(!material)
