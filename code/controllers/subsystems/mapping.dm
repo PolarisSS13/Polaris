@@ -46,7 +46,6 @@ SUBSYSTEM_DEF(mapping)
 	// Lateload Code related to Expedition areas.
 	// if(using_map)
 		// loadLateMaps()
-	..()
 
 /datum/controller/subsystem/mapping/proc/log_mapload(msg)
 	to_world_log("  [name]: [msg]")

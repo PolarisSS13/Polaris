@@ -19,7 +19,6 @@ SUBSYSTEM_DEF(circuit)
 
 /datum/controller/subsystem/circuit/Initialize(timeofday)
 	circuits_init()
-	return ..()
 
 /datum/controller/subsystem/circuit/proc/circuits_init()
 	//Cached lists for free performance

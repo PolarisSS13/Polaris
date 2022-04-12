@@ -20,9 +20,8 @@ var/global/image/appearance_bro = new() // Temporarily super-global because of B
 	queue = list()
 	stats = list()
 
-/datum/controller/subsystem/overlays/Initialize()
+/datum/controller/subsystem/overlays/Initialize(timeofday)
 	fire(FALSE, TRUE)
-	..()
 
 /datum/controller/subsystem/overlays/stat_entry()
 	..("Ov:[length(queue)]")

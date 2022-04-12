@@ -16,9 +16,8 @@ SUBSYSTEM_DEF(alarm)
 	var/tmp/list/currentrun = null
 	var/static/list/active_alarm_cache = list()
 
-/datum/controller/subsystem/alarm/Initialize()
+/datum/controller/subsystem/alarm/Initialize(timeofday)
 	all_handlers = list(atmosphere_alarm, camera_alarm, fire_alarm, motion_alarm, power_alarm)
-	. = ..()
 
 /datum/controller/subsystem/alarm/fire(resumed, no_mc_tick)
 	if(!resumed)

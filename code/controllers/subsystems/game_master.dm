@@ -23,7 +23,7 @@ SUBSYSTEM_DEF(game_master)
 
 	var/debug_messages = FALSE // If true, debug information is written to `log_debug()`.
 
-/datum/controller/subsystem/game_master/Initialize()
+/datum/controller/subsystem/game_master/Initialize(timeofday)
 	var/list/subtypes = subtypesof(/datum/event2/meta)
 	for(var/T in subtypes)
 		var/datum/event2/meta/M = new T()
@@ -35,8 +35,6 @@ SUBSYSTEM_DEF(game_master)
 
 	if(config && !config.enable_game_master)
 		can_fire = FALSE
-
-	return ..()
 
 /datum/controller/subsystem/game_master/fire(resumed, no_mc_tick)
 	adjust_staleness(1)

@@ -37,7 +37,6 @@ SUBSYSTEM_DEF(machines)
 	admin_notice("<span class='danger'>Initializing atmos machinery.</span>", R_DEBUG)
 	setup_atmos_machinery(global.machines)
 	fire()
-	..()
 
 /datum/controller/subsystem/machines/fire(resumed, no_mc_tick)
 	var/timer = TICK_USAGE

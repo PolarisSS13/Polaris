@@ -62,8 +62,6 @@ SUBSYSTEM_DEF(skybox)
 
 	. = ..()
 
-/datum/controller/subsystem/skybox/Initialize()
-	. = ..()
 
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if(!skybox_cache["[z]"])
