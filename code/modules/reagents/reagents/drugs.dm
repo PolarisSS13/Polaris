@@ -1,7 +1,5 @@
 /// Recreational and psychiatric drugs go here! Please keep them separated in the file. 
 
-#define DRUG_MESSAGE_DELAY 5*60*10
-
 /datum/reagent/drugs
 	name = "generic drugs"
 	id = "drugs"
@@ -13,9 +11,12 @@
 	var/list/high_message_list = list("You feel great! For now...", "You feel a wave of happiness!")
 	var/list/sober_message_list = list("You feel like garbage...", "Your head aches.")
 	data = 0
+	
+	var/prob_proc = FALSE /// ANY probabilities in specific drugs should check for this to be TRUE + the desired probability AND set this back to false. 
 
 	reagent_state = LIQUID
 	metabolism = REM * 0.5
+	ingest_met = REM * 1.5 /// Be very careful with this, ingestion is weird and will spam high/sober messages horribly!
 	mrate_static = TRUE
 	overdose = REAGENTS_OVERDOSE
 
@@ -24,15 +25,16 @@
 		return
 
 	if(high_messages == TRUE)
-		if(world.time > data + DRUG_MESSAGE_DELAY && volume > 0.8)
+		if(world.time > data + 90 SECONDS && volume > 0.5) /// Spam prevention.
 			data = world.time
 			var/msg = pick(high_message_list)
 			to_chat(M, "<span class='warning'>[msg]</span>")
-		else if(volume <= 0.1 && data != -1)
+		else if(volume <= 0.2 && data != -1)
 			data = -1
 			var/msg = pick(sober_message_list)
 			to_chat(M, "<span class='warning'>[msg]</span>")
-
+	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again. 
+		prob_proc = TRUE
 
 /datum/reagent/drugs/ecstasy /// Replaces Space Drugs. 
 	name = "Ecstasy"
@@ -59,14 +61,17 @@
 		drug_strength = drug_strength * 1.2
 	
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+	if(prob_proc == TRUE && prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
-	if(prob(7))
+		prob_proc = FALSE
+	if(prob_proc == TRUE && prob(7))
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
+		prob_proc = FALSE
 
-/datum/reagent/drug/ecstasy/overdose(var/mob/living/M as mob)
-	if(prob(20))
+/datum/reagent/drugs/ecstasy/overdose(var/mob/living/M as mob)
+	if(prob_proc == TRUE && prob(20))
 		M.hallucination = max(M.hallucination, 5)
+		prob_proc = FALSE
 	M.adjustBrainLoss(0.25*REM)
 	M.adjustToxLoss(0.25*REM)
 	..()
@@ -104,10 +109,12 @@
 	M.heal_organ_damage(6)
 	M.adjustOxyLoss(-3)
 	M.AdjustStunned(-1)
-	if(prob(5))
+	if(prob(5) && prob_proc == TRUE)
 		M.emote("giggle")
-	if(prob(10))
+		prob_proc = FALSE
+	if(prob(10) && prob_proc == TRUE)
 		M.adjust_nutrition(-10)
+		prob_proc = FALSE
 
 /datum/reagent/drugs/psilocybin
 	name = "Psilocybin"
@@ -138,22 +145,25 @@
 	if(effective_dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
-		if(prob(3))
+		if(prob(3) && prob_proc == TRUE)
 			M.emote(pick("twitch", "giggle"))
+			prob_proc = FALSE
 	else if(effective_dose < 2 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(5)
 		M.make_dizzy(5)
 		M.druggy = max(M.druggy, 35)
-		if(prob(5))
+		if(prob(5) && prob_proc == TRUE)
 			M.emote(pick("twitch", "giggle"))
+			prob_proc = FALSE
 	else
 		M.apply_effect(3, STUTTER)
 		M.make_jittery(10)
 		M.make_dizzy(10)
 		M.druggy = max(M.druggy, 40)
-		if(prob(10))
+		if(prob(10) && prob_proc == TRUE)
 			M.emote(pick("twitch", "giggle"))
+			prob_proc = FALSE
 
 /datum/reagent/drugs/talum_quem
 	name = "Talum-quem"
@@ -178,10 +188,12 @@
 		M.adjustToxLoss(10 * removed) //Given incorporations of other toxins with similiar damage, this seems right.
 
 	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+	if(prob(10) && prob_proc == TRUE && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
-	if(prob(7))
+		prob_proc = FALSE
+	if(prob(7) && prob_proc == TRUE)
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
+		prob_proc = FALSE
 
 /datum/reagent/drugs/nicotine
 	name = "Nicotine"
@@ -210,12 +222,13 @@
 /datum/reagent/drugs/cocaine/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
 	M.add_chemical_effect(CE_PAINKILLER, painkiller_str)
-	if(prob(7))
+	if(prob(7) && prob_proc == TRUE)
 		M.emote(pick("shiver", "sniff"))
+		prob_proc = FALSE
 
 /datum/reagent/drugs/cocaine/overdose(mob/living/carbon/M, alien, removed)
 	..()
-	if(prob(50))
+	if(prob(50) && prob_proc == TRUE)
 		M.vomit()
 		M.adjustToxLoss(10)
 		M.adjustBrainLoss(5)
@@ -241,8 +254,9 @@
 /datum/reagent/drugs/cocaine/crack/overdose(mob/living/carbon/M, alien, removed)
 	..()
 	M.drowsyness = max(M.drowsyness, 10)
-	if(prob(50))
+	if(prob(50) && prob_proc == TRUE)
 		M.adjustToxLoss(10) /// Extra chance for toxloss. 
+		prob_proc = FALSE
 
 /*///////////////////////////////////////////////////////////////////////////
 ///						PSYCHIATRIC DRUGS								/////
@@ -253,7 +267,7 @@
 	name = "Methylphenidate"
 	id = "methylphenidate"
 	description = "Improves the ability to concentrate."
-	taste_description = "bitterness"
+	taste_description = "mild grape" ///Referencing real life oral solutions for these meds. 
 	color = "#BF80BF"
 	high_message_list = list("You feel focused.", "Your attention is undivided.")
 	sober_message_list = list("It becomes harder to focus...", "You feel distractible.")
@@ -262,7 +276,7 @@
 	name = "Citalopram"
 	id = "citalopram"
 	description = "Stabilizes the mind a little."
-	taste_description = "bitterness"
+	taste_description = "mild peppermint"
 	color = "#FF80FF"
 	high_message_list = list("Everything feels a bit more steady.", "Your mind feels stable.")
 	sober_message_list = list("You feel a little tired.", "You feel a little more listless...")
@@ -271,17 +285,17 @@
 	name = "Paroxetine"
 	id = "paroxetine"
 	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
-	taste_description = "bitterness"
+	taste_description = "mild oranges"
 	color = "#FF80BF"
 	high_message_list = list("Everything feels good, stable.", "You feel grounded.")
 	sober_message_list = list("The stability is gone...", "Everything is much less stable.")
 
 /datum/reagent/drugs/paroxetine/affect_blood(mob/living/carbon/M, var/alien, var/removed)
-	. = ..()
-	if(world.time > data + DRUG_MESSAGE_DELAY && alien != IS_DIONA)
-		if(prob(5))
-			to_chat(M, "<span class='warning'>Your mind breaks apart...</span>")
-			M.hallucination += 200
+	..()
+	if(prob(5) && prob_proc == TRUE)
+		to_chat(M, "<span class='warning'>Everything feels out of control...</span>")
+		M.hallucination += 200
+		prob_proc = FALSE
 
 /datum/reagent/drugs/qerr_quem
 	name = "Qerr-quem"

@@ -5,7 +5,7 @@
 	display_name = "ambrosia vulgaris"
 	kitchen_tag = "ambrosia"
 	mutants = list("ambrosiadeus")
-	chems = list("nutriment" = list(1), "ambrosia_extract" = list(1,8), "kelotane" = list(1,8,1), "bicaridine" = list(1,10,1), "toxin" = list(1,10))
+	chems = list("nutriment" = list(1), "ambrosia_extract" = list(1,8), "kelotane" = list(1,8,1), "bicaridine" = list(1,10,1))
 
 /datum/seed/ambrosia/New()
 	..()
