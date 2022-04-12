@@ -79,11 +79,11 @@
 
 /obj/item/weapon/pen/fountain2
 	desc = "A well made fountain pen, with a faux wood body. This one has golden accents."
-	icon_state = "pen_fountain"
+	icon_state = "pen_fountain2"
 
 /obj/item/weapon/pen/fountain3
 	desc = "A well made expensive rosewood pen with golden accents. Very pretty."
-	icon_state = "pen_fountain"
+	icon_state = "red_fountain"
 
 /obj/item/weapon/pen/fountain4
 	desc = "A well made and expensive fountain pen. This one has silver accents."
