@@ -41,14 +41,20 @@
 	return ..()
 
 
-/// Initializes the subsystem AFTER map load. The preferred initialization proc.
-/datum/controller/subsystem/Initialize(start_timeofday)
+/// Wrapper for non-implementation initialization behaviors.
+/datum/controller/subsystem/proc/DoInitialize(timeofday)
+	Initialize(timeofday)
 	subsystem_initialized = TRUE
-	var/time = (REALTIMEOFDAY - start_timeofday) / 10
+	var/time = (REALTIMEOFDAY - timeofday) / 10
 	var/msg = "Initialized [name] subsystem within [time] second[time == 1 ? "" : "s"]!"
 	to_chat(world, "<span class='boldannounce'>[msg]</span>")
 	log_world(msg)
 	return time
+
+
+/// Initializes the subsystem AFTER map load. The preferred initialization proc. Do not implement any base behaviors here.
+/datum/controller/subsystem/Initialize(timeofday)
+	return
 
 
 /// Initializes the subsystem BEFORE map load. Called after recover, if recover is called.
