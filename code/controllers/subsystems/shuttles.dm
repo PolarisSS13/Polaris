@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(shuttles)
 
 	var/tmp/list/current_run                       // Shuttles remaining to process this fire() tick
 
-/datum/controller/subsystem/shuttles/PreInit()
+/datum/controller/subsystem/shuttles/OnNew()
 	global.shuttle_controller = src // TODO - Remove this! Change everything to point at SSshuttles intead
 
 /datum/controller/subsystem/shuttles/Initialize(timeofday)

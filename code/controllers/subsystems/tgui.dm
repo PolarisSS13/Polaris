@@ -22,7 +22,7 @@ SUBSYSTEM_DEF(tgui)
 	current.Cut()
 
 
-/datum/controller/subsystem/tgui/PreInit()
+/datum/controller/subsystem/tgui/OnNew()
 	base_html = file2text('tgui/packages/tgui/public/tgui.html')
 
 

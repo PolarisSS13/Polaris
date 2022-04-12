@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(air)
 	// This is used to tell CI WHERE the edges are.
 	var/list/startup_active_edge_log = list()
 
-/datum/controller/subsystem/air/PreInit()
+/datum/controller/subsystem/air/OnNew()
 	air_master = src
 
 /datum/controller/subsystem/air/Initialize(timeofday)

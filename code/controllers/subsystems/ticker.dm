@@ -47,7 +47,7 @@ SUBSYSTEM_DEF(ticker)
 
 // This global variable exists for legacy support so we don't have to rename every 'ticker' to 'SSticker' yet.
 var/global/datum/controller/subsystem/ticker/ticker
-/datum/controller/subsystem/ticker/PreInit()
+/datum/controller/subsystem/ticker/OnNew()
 	global.ticker = src // TODO - Remove this! Change everything to point at SSticker intead
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
