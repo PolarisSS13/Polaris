@@ -1,0 +1,293 @@
+/// Recreational and psychiatric drugs go here! Please keep them separated in the file. 
+
+#define DRUG_MESSAGE_DELAY 5*60*10
+
+/datum/reagent/drugs
+	name = "generic drugs"
+	id = "drugs"
+	description = "Some generic drugs."
+	taste_description = "a bad investment"
+	taste_mult = 1.2 /// The overwhelming flavor of a good(?) time!
+	color = "#f2f2f2"
+	var/high_messages = TRUE
+	var/list/high_message_list = list("You feel great! For now...", "You feel a wave of happiness!")
+	var/list/sober_message_list = list("You feel like garbage...", "Your head aches.")
+	data = 0
+
+	reagent_state = LIQUID
+	metabolism = REM * 0.5
+	mrate_static = TRUE
+	overdose = REAGENTS_OVERDOSE
+
+/datum/reagent/drugs/affect_blood(mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_DIONA)
+		return
+
+	if(high_messages == TRUE)
+		if(world.time > data + DRUG_MESSAGE_DELAY && volume > 0.8)
+			data = world.time
+			var/msg = pick(high_message_list)
+			to_chat(M, "<span class='warning'>[msg]</span>")
+		else if(volume <= 0.1 && data != -1)
+			data = -1
+			var/msg = pick(sober_message_list)
+			to_chat(M, "<span class='warning'>[msg]</span>")
+
+
+/datum/reagent/drugs/ecstasy /// Replaces Space Drugs. 
+	name = "Ecstasy"
+	id = "ecstasy"
+	description = "Also known as MDMA or simply \"E\", this psychoactive drug is often used recreationally."
+	taste_description = "unpleasant bitterness"
+	taste_mult = 0.4
+	high_message_list = list("You don't quite know what up or down is anymore...",
+	"Colors just seem much more amazing.",
+	"You feel incredibly confident. No one can stop you.",
+	"You clench your jaw involuntarily.",
+	"You feel... unsteady.",
+	"You really feel like talking about your feelings!")
+	sober_message_list = list("Everything feels a little more grounded.",
+	"Colors seem... flatter.",
+	"Everything feels a little dull, now.")
+
+/datum/reagent/drugs/ecstasy/affect_blood(mob/living/carbon/M, var/alien, var/removed)
+	..()
+	var/drug_strength = 15
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+	if(alien == IS_SLIME)
+		drug_strength = drug_strength * 1.2
+	
+	M.druggy = max(M.druggy, drug_strength)
+	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+		step(M, pick(cardinal))
+	if(prob(7))
+		M.emote(pick("twitch", "drool", "moan", "giggle"))
+
+/datum/reagent/drug/ecstasy/overdose(var/mob/living/M as mob)
+	if(prob(20))
+		M.hallucination = max(M.hallucination, 5)
+	M.adjustBrainLoss(0.25*REM)
+	M.adjustToxLoss(0.25*REM)
+	..()
+
+/datum/reagent/drugs/ambrosia_extract
+	name = "Ambrosia extract"
+	id = "ambrosia_extract"
+	description = "The extract from the plant family ambrosia, responsible for the more \"recreational\" effects."
+	taste_description = "a strong-tasting plant"
+	color = "#358f49"
+	high_message_list = list("You feel so much more relaxed.",
+	"You can't quite focus on anything.",
+	"Colors around you seem much more intense.",
+	"You could snack on something right now...",
+	"You feel lightheaded and giggly.",
+	"Everything seems so hilarious.",
+	"You really could go for some takeout right now.",
+	"You momentarily forget where you are.",
+	"You have a mild urge to look over your shoulder.")
+	sober_message_list = list("You feel the urge to just sit there and do nothing.",
+	"Reality seems like a real pain in the ass to deal with right now.",
+	"Things feel really colourless to you all of a sudden.",
+	"You feel the urge to lie down and nap.")
+
+/datum/reagent/drugs/ambrosia_extract/affect_blood(mob/living/carbon/M, var/alien, var/removed)
+	..()
+	var/drug_strength = 3
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+	if(alien == IS_SLIME)
+		drug_strength = drug_strength * 1.2
+
+	M.adjustToxLoss(-2)
+	M.druggy = max(M.druggy, drug_strength)
+	M.heal_organ_damage(6)
+	M.adjustOxyLoss(-3)
+	M.AdjustStunned(-1)
+	if(prob(5))
+		M.emote("giggle")
+	if(prob(10))
+		M.adjust_nutrition(-10)
+
+/datum/reagent/drugs/psilocybin
+	name = "Psilocybin"
+	id = "psilocybin"
+	description = "A strong psycotropic derived from certain species of mushroom."
+	taste_description = "mushroom"
+	color = "#E700E7"
+	high_message_list = list("The world distorts around you...!",
+	"The walls look like they're moving...",
+	"Nothing really makes sense right now.",
+	"It feels like you've melded with the world around you...")
+	sober_message_list = list("Everything feels... flat.", "You feel almost TOO grounded in your surroundings.")
+
+/datum/reagent/drugs/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+
+	var/threshold = 1 * M.species.chem_strength_tox
+	if(alien == IS_SKRELL)
+		threshold = 1.2
+
+	if(alien == IS_SLIME)
+		threshold = 0.8
+
+	M.druggy = max(M.druggy, 30)
+
+	var/effective_dose = dose
+	if(issmall(M)) effective_dose *= 2
+	if(effective_dose < 1 * threshold)
+		M.apply_effect(3, STUTTER)
+		M.make_dizzy(5)
+		if(prob(3))
+			M.emote(pick("twitch", "giggle"))
+	else if(effective_dose < 2 * threshold)
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(5)
+		M.make_dizzy(5)
+		M.druggy = max(M.druggy, 35)
+		if(prob(5))
+			M.emote(pick("twitch", "giggle"))
+	else
+		M.apply_effect(3, STUTTER)
+		M.make_jittery(10)
+		M.make_dizzy(10)
+		M.druggy = max(M.druggy, 40)
+		if(prob(10))
+			M.emote(pick("twitch", "giggle"))
+
+/datum/reagent/drugs/talum_quem
+	name = "Talum-quem"
+	id = "talum_quem"
+	description = " A very carefully tailored hallucinogen, for use of the Talum-Katish."
+	taste_description = "bubblegum"
+	taste_mult = 1.6
+	color = "#db2ed8"
+	high_message_list = list("The world distorts around you...!",
+	"The walls look like they're moving...",
+	"Nothing really makes sense right now.",
+	"It feels like you've melded with the world around you...")
+	sober_message_list = list("Everything feels... flat.", "You feel almost TOO grounded in your surroundings.")
+
+/datum/reagent/drugs/talum_quem/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+
+	var/drug_strength = 29 * M.species.chem_strength_tox
+	if(alien == IS_SKRELL)
+		drug_strength = drug_strength * 0.8
+	else
+		M.adjustToxLoss(10 * removed) //Given incorporations of other toxins with similiar damage, this seems right.
+
+	M.druggy = max(M.druggy, drug_strength)
+	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
+		step(M, pick(cardinal))
+	if(prob(7))
+		M.emote(pick("twitch", "drool", "moan", "giggle"))
+
+/datum/reagent/drugs/nicotine
+	name = "Nicotine"
+	id = "nicotine"
+	description = "A highly addictive stimulant extracted from the tobacco plant."
+	taste_description = "sour staleness"
+	color = "#181818"
+	high_messages = FALSE
+
+/datum/reagent/drugs/cocaine
+	name = "Cocaine"
+	id = "cocaine"
+	description = "A recreational drug known for its sharp, but short, energy boost."
+	taste_description = "numbing powder"
+	color = "#FFFFFF"
+	high_message_list = list("You feel euphoric!",
+	"You feel like you can take on the world!",
+	"You sniffle compulsively...",
+	"You feel terrible.",
+	"Your tongue feels very dry.",
+	"Your eyes feel dry.")
+	sober_message_list = list("The world seems slower...", "Everything feels so much more annoying!")
+
+	var/painkiller_str = 3
+
+/datum/reagent/drugs/cocaine/affect_blood(mob/living/carbon/M, alien, removed)
+	..()
+	M.add_chemical_effect(CE_PAINKILLER, painkiller_str)
+	if(prob(7))
+		M.emote(pick("shiver", "sniff"))
+
+/datum/reagent/drugs/cocaine/overdose(mob/living/carbon/M, alien, removed)
+	..()
+	if(prob(50))
+		M.vomit()
+		M.adjustToxLoss(10)
+		M.adjustBrainLoss(5)
+
+/datum/reagent/drugs/cocaine/crack
+	name = "Crack"
+	id = "crack"
+	description = "A cheaper and less pure version of cocaine, it carries similar properties with worse side effects."
+	taste_description = "car fuel"
+	overdose = 15
+	high_message_list = list("You sniffle a bit.",
+	"You have a mild... headache",
+	"You feel a bit sick...",
+	"You feel hyper and confident",
+	"You feel terrible.")
+
+	painkiller_str = 1
+
+/datum/reagent/drugs/cocaine/crack/affect_blood(mob/living/carbon/M, alien, removed)
+	..()
+	M.adjustBrainLoss(0.30)
+
+/datum/reagent/drugs/cocaine/crack/overdose(mob/living/carbon/M, alien, removed)
+	..()
+	M.drowsyness = max(M.drowsyness, 10)
+	if(prob(50))
+		M.adjustToxLoss(10) /// Extra chance for toxloss. 
+
+/*///////////////////////////////////////////////////////////////////////////
+///						PSYCHIATRIC DRUGS								/////
+///																		/////
+/// Psychiatric drugs use similar mechanics and will go under "drugs".  /////
+*////////////////////////////////////////////////////////////////////////////
+/datum/reagent/drugs/methylphenidate
+	name = "Methylphenidate"
+	id = "methylphenidate"
+	description = "Improves the ability to concentrate."
+	taste_description = "bitterness"
+	color = "#BF80BF"
+	high_message_list = list("You feel focused.", "Your attention is undivided.")
+	sober_message_list = list("It becomes harder to focus...", "You feel distractible.")
+
+/datum/reagent/drugs/citalopram
+	name = "Citalopram"
+	id = "citalopram"
+	description = "Stabilizes the mind a little."
+	taste_description = "bitterness"
+	color = "#FF80FF"
+	high_message_list = list("Everything feels a bit more steady.", "Your mind feels stable.")
+	sober_message_list = list("You feel a little tired.", "You feel a little more listless...")
+
+/datum/reagent/drugs/paroxetine
+	name = "Paroxetine"
+	id = "paroxetine"
+	description = "Stabilizes the mind greatly, but has a chance of adverse effects."
+	taste_description = "bitterness"
+	color = "#FF80BF"
+	high_message_list = list("Everything feels good, stable.", "You feel grounded.")
+	sober_message_list = list("The stability is gone...", "Everything is much less stable.")
+
+/datum/reagent/drugs/paroxetine/affect_blood(mob/living/carbon/M, var/alien, var/removed)
+	. = ..()
+	if(world.time > data + DRUG_MESSAGE_DELAY && alien != IS_DIONA)
+		if(prob(5))
+			to_chat(M, "<span class='warning'>Your mind breaks apart...</span>")
+			M.hallucination += 200
+
+/datum/reagent/drugs/qerr_quem
+	name = "Qerr-quem"
+	id = "qerr_quem"
+	description = "A potent sedative and anti-anxiety medication, made for the Qerr-Katish."
+	taste_description = "mint"
+	color = "#e6efe3"
+	high_message_list = list("You feel sluggish...", "You feel calm and collected.")
+	sober_message_list = list("You feel so much more antsy...", "Your concentration wavers.")
