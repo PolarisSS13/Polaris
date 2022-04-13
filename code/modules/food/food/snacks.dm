@@ -3750,7 +3750,7 @@
 
 	reagents.add_reagent("oxycodone", 1)
 	reagents.add_reagent("sifsap", 5)
-	reagents.add_reagent("ecstasy", 5)
+	reagents.add_reagent("bliss", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/bellefritter
 	name = "frostbelle fritters"

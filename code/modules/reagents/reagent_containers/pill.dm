@@ -317,7 +317,7 @@
 
 /obj/item/weapon/reagent_containers/pill/happy/Initialize()
 	. = ..()
-	reagents.add_reagent("ecstasy", 15)
+	reagents.add_reagent("bliss", 15)
 	reagents.add_reagent("sugar", 15)
 	color = reagents.get_color()
 

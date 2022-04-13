@@ -338,7 +338,7 @@
 	if(c_data)
 		data = c_data
 	else
-		data = pick("bicaridine", "kelotane", "anti_toxin", "inaprovaline", "ecstasy", "sugar",
+		data = pick("bicaridine", "kelotane", "anti_toxin", "inaprovaline", "bliss", "sugar",
 					"tramadol", "dexalin", "cryptobiolin", "impedrezene", "hyperzine", "ethylredoxrazine",
 					"mindbreaker", "glucose")
 	var/datum/reagent/R = SSchemistry.chemical_reagents[data]

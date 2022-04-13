@@ -1,4 +1,7 @@
+/*
 /// Recreational and psychiatric drugs go here! Please keep them separated in the file. 
+/// Due to concerns and safety for our repo, illegal real-world drug names should generally be avoided. 
+*/
 
 /datum/reagent/drugs
 	name = "generic drugs"
@@ -36,10 +39,10 @@
 	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again. 
 		prob_proc = TRUE
 
-/datum/reagent/drugs/ecstasy /// Replaces Space Drugs. 
-	name = "Ecstasy"
-	id = "ecstasy"
-	description = "Also known as MDMA or simply \"E\", this psychoactive drug is often used recreationally."
+/datum/reagent/drugs/bliss /// Replaces Space Drugs. 
+	name = "Bliss"
+	id = "bliss"
+	description = "Known for providing a euphoric high, this psychoactive drug is often used recreationally."
 	taste_description = "unpleasant bitterness"
 	taste_mult = 0.4
 	high_message_list = list("You don't quite know what up or down is anymore...",
@@ -52,7 +55,7 @@
 	"Colors seem... flatter.",
 	"Everything feels a little dull, now.")
 
-/datum/reagent/drugs/ecstasy/affect_blood(mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drugs/bliss/affect_blood(mob/living/carbon/M, var/alien, var/removed)
 	..()
 	var/drug_strength = 15
 	if(alien == IS_SKRELL)
@@ -68,7 +71,7 @@
 		M.emote(pick("twitch", "drool", "moan", "giggle"))
 		prob_proc = FALSE
 
-/datum/reagent/drugs/ecstasy/overdose(var/mob/living/M as mob)
+/datum/reagent/drugs/bliss/overdose(var/mob/living/M as mob)
 	if(prob_proc == TRUE && prob(20))
 		M.hallucination = max(M.hallucination, 5)
 		prob_proc = FALSE
@@ -202,61 +205,6 @@
 	taste_description = "sour staleness"
 	color = "#181818"
 	high_messages = FALSE
-
-/datum/reagent/drugs/cocaine
-	name = "Cocaine"
-	id = "cocaine"
-	description = "A recreational drug known for its sharp, but short, energy boost."
-	taste_description = "numbing powder"
-	color = "#FFFFFF"
-	high_message_list = list("You feel euphoric!",
-	"You feel like you can take on the world!",
-	"You sniffle compulsively...",
-	"You feel terrible.",
-	"Your tongue feels very dry.",
-	"Your eyes feel dry.")
-	sober_message_list = list("The world seems slower...", "Everything feels so much more annoying!")
-
-	var/painkiller_str = 3
-
-/datum/reagent/drugs/cocaine/affect_blood(mob/living/carbon/M, alien, removed)
-	..()
-	M.add_chemical_effect(CE_PAINKILLER, painkiller_str)
-	if(prob(7) && prob_proc == TRUE)
-		M.emote(pick("shiver", "sniff"))
-		prob_proc = FALSE
-
-/datum/reagent/drugs/cocaine/overdose(mob/living/carbon/M, alien, removed)
-	..()
-	if(prob(50) && prob_proc == TRUE)
-		M.vomit()
-		M.adjustToxLoss(10)
-		M.adjustBrainLoss(5)
-
-/datum/reagent/drugs/cocaine/crack
-	name = "Crack"
-	id = "crack"
-	description = "A cheaper and less pure version of cocaine, it carries similar properties with worse side effects."
-	taste_description = "car fuel"
-	overdose = 15
-	high_message_list = list("You sniffle a bit.",
-	"You have a mild... headache",
-	"You feel a bit sick...",
-	"You feel hyper and confident",
-	"You feel terrible.")
-
-	painkiller_str = 1
-
-/datum/reagent/drugs/cocaine/crack/affect_blood(mob/living/carbon/M, alien, removed)
-	..()
-	M.adjustBrainLoss(0.30)
-
-/datum/reagent/drugs/cocaine/crack/overdose(mob/living/carbon/M, alien, removed)
-	..()
-	M.drowsyness = max(M.drowsyness, 10)
-	if(prob(50) && prob_proc == TRUE)
-		M.adjustToxLoss(10) /// Extra chance for toxloss. 
-		prob_proc = FALSE
 
 /*///////////////////////////////////////////////////////////////////////////
 ///						PSYCHIATRIC DRUGS								/////
