@@ -254,12 +254,13 @@
 	desc = "A chocolate-coated biscuit stick."
 	icon_state = "pocky"
 	item_state = "pocky"
+	filling = list("sugar" = 2, "chocolate" = 5) /// Constant, so no need to add on initialize.
+	type_butt = null
 
 /obj/item/clothing/mask/chewable/candy/pocky/process()
 	chew()
 	if(chewtime < 1)
+		if(ismob(loc))
+			var/mob/living/M = loc
+			to_chat(M, SPAN_NOTICE("There's no more of \the [name] left!"))
 		spitout(0)
-
-/obj/item/clothing/mask/chewable/candy/pocky/Initialize()
-	. = ..()
-	reagents.add_reagent("chocolate", 10)
