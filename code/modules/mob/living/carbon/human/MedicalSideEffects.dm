@@ -134,7 +134,7 @@
 // ====
 /datum/medical_effect/itch
 	name = "Itch"
-	triggers = list("ecstasy" = 10)
+	triggers = list("bliss" = 10)
 	cures = list("inaprovaline")
 	cure_message = "The itching stops..."
 

@@ -21,7 +21,7 @@
 
 /obj/item/weapon/reagent_containers/glass/beaker/vial/random/toxin
 	random_reagent_list = list(
-		list("mindbreaker" = 10, "ecstasy" = 20)	= 3,
+		list("mindbreaker" = 10, "bliss" = 20)	= 3,
 		list("carpotoxin" = 15)							= 2,
 		list("impedrezene" = 15)						= 2,
 		list("zombiepowder" = 10)						= 1)
