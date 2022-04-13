@@ -63,7 +63,7 @@
 	if(is_infesting)
 		cut_overlays()
 		icon = infested.icon
-		add_overlay(infested.overlays)
+		copy_overlays(infested)
 		var/mutable_appearance/blob_head_overlay = mutable_appearance('icons/mob/blob.dmi', "blob_head")
 		if(overmind)
 			blob_head_overlay.color = overmind.blob_type.complementary_color

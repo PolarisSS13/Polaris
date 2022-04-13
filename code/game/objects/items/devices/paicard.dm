@@ -308,7 +308,7 @@ GLOBAL_LIST_BOILERPLATE(all_pai_cards, /obj/item/paicard)
 	var/current_emotion = 1
 /obj/item/paicard/proc/setEmotion(var/emotion)
 	if(pai)
-		src.overlays.Cut()
+		cut_overlays()
 		switch(emotion)
 			if(1) add_overlay("pai-happy")
 			if(2) add_overlay("pai-cat")

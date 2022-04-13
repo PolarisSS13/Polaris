@@ -51,7 +51,7 @@
 	set_clothing_index()
 
 /obj/item/clothing/update_icon()
-	overlays.Cut() //This removes all the overlays on the sprite and then goes down a checklist adding them as required.
+	cut_overlays()
 	if(blood_DNA)
 		add_blood()
 	. = ..()
@@ -618,7 +618,7 @@
 		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
 		playsound(src, 'sound/weapons/holster/sheathout.ogg', 25)
 		holding = null
-		overlays -= image(icon, "[icon_state]_knife")
+		cut_overlay(image(icon, "[icon_state]_knife"))
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
@@ -665,7 +665,7 @@
 /obj/item/clothing/shoes/update_icon()
 	. = ..()
 	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
+		add_overlay(image(icon, "[icon_state]_knife"))
 	if(ismob(usr))
 		var/mob/M = usr
 		M.update_inv_shoes()

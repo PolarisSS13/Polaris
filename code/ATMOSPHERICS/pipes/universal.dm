@@ -54,8 +54,10 @@
 
 	alpha = 255
 
-	overlays.Cut()
-	overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "universal")
+	cut_overlays()
+	var/icon/add = icon_manager.get_atmos_icon("pipe", , pipe_color, "universal")
+	add_overlay(add)
+
 	underlays.Cut()
 
 	if (node1)

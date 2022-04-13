@@ -313,7 +313,7 @@
 	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = ABOVE_MOB_LAYER
 	I.plane = MOB_PLANE
-	overlays |= I
+	add_overlay(I)
 
 /obj/structure/bed/chair/modern_bar_stool
 	name = "bar stool"

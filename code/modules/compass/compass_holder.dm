@@ -72,10 +72,12 @@
 		. = 0
 
 /obj/compass_holder/update_icon()
-	var/set_overlays = (compass_static_labels | compass_waypoint_markers)
+	var/list/add = (compass_static_labels | compass_waypoint_markers)
 	if(show_heading)
-		set_overlays |= compass_heading_marker
-	overlays = set_overlays
+		add |= compass_heading_marker
+	if (add.len)
+		cut_overlays()
+		add_overlay(add)
 
 /obj/compass_holder/proc/clear_waypoint(var/id)
 	LAZYREMOVE(compass_waypoints, id)

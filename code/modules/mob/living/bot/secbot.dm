@@ -441,7 +441,7 @@
 		build_step = 3
 		to_chat(user, "You add \the [W] to [src].")
 		name = "helmet/signaler/prox sensor/robot arm assembly"
-		overlays += image('icons/obj/aibots.dmi', "hs_arm")
+		add_overlay(image('icons/obj/aibots.dmi', "hs_arm"))
 		qdel(W)
 
 	else if(istype(W, /obj/item/melee/baton) && build_step == 3)

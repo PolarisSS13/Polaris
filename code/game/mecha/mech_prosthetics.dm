@@ -49,11 +49,11 @@
 	update_icon()
 
 /obj/machinery/pros_fabricator/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	icon_state = initial(icon_state)
 
 	if(panel_open)
-		overlays.Add(image(icon, "[icon_state]_panel"))
+		add_overlay(image(icon, "[icon_state]_panel"))
 	if(stat & NOPOWER)
 		return
 	if(busy)

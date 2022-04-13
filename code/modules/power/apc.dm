@@ -369,12 +369,17 @@ GLOBAL_LIST_EMPTY(apcs)
 	if(update & 2)
 		cut_overlays()
 		if(!(stat & (BROKEN|MAINT)) && update_state & UPDATE_ALLGOOD)
-			overlays += status_overlays_lock[locked+1]
-			overlays += status_overlays_charging[charging+1]
-			if(operating)
-				overlays += status_overlays_equipment[equipment+1]
-				overlays += status_overlays_lighting[lighting+1]
-				overlays += status_overlays_environ[environ+1]
+			var/list/add = list(
+				status_overlays_lock[locked+1],
+				status_overlays_charging[charging+1]
+			)
+			if (operating)
+				add += list(
+					status_overlays_equipment[equipment+1],
+					status_overlays_lighting[lighting+1],
+					status_overlays_environ[environ+1]
+				)
+			add_overlay(add)
 
 	if(update & 3)
 		if(update_state & UPDATE_BLUESCREEN)
