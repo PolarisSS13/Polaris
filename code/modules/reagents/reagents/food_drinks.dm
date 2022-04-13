@@ -401,7 +401,7 @@
 	nutriment_factor = 5
 	color = "#302000"
 
-/datum/reagent/nutriment/chocolate /// Added so pocky would stop breaking, To Do: Impliment into cooking recipes. - Sypsoti
+/datum/reagent/nutriment/chocolate
 	name = "Chocolate"
 	id = "chocolate"
 	description = "Great for cooking or on its own!"
