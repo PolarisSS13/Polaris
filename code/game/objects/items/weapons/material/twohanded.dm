@@ -175,46 +175,32 @@
 	icon_state = "riding_crop0"
 	attack_verb = list("cropped","spanked","swatted","smacked","peppered")
 
-/obj/item/weapon/material/twohanded/pike
+/obj/item/weapon/material/twohanded/spear/pike
 	name = "pike"
 	icon_state = "pike0"
 	base_icon = "pike"
 	desc = "A long spear used by the infantry in ancient times."
-	force = 5
-	applies_material_colour = 1
-	unwielded_force_divisor = 0.2
-	force_divisor = 0.3
 	edge = TRUE
-	w_class = ITEMSIZE_LARGE
-	slot_flags = SLOT_BACK
 	attack_verb = list("attacked", "poked", "jabbed", "gored", "stabbed")
 	default_material = "steel"
-	reach = 2
 	applies_material_colour = 0
-	sharp = 1
 	drop_sound = 'sound/items/drop/woodweapon.ogg'
 	pickup_sound = 'sound/items/pickup/woodweapon.ogg'
 
-/obj/item/weapon/material/twohanded/halberd
+/obj/item/weapon/material/twohanded/spear/halberd
 	icon_state = "halberd0"
 	base_icon = "halberd"
 	name = "halberd"
 	desc = "A sharp axe mounted on the top of a long spear."
-	force = 6
 	applies_material_colour = 0
-	unwielded_force_divisor = 0.4
-	force_divisor = 0.5
-	sharp = 1
 	edge = 1
-	reach = 2
 	attack_verb = list("attacked", "poked", "jabbed","gored", "chopped", "cleaved", "torn", "cut", "stabbed")
-	slot_flags = SLOT_BACK
 	drop_sound = 'sound/items/drop/woodweapon.ogg'
 	pickup_sound = 'sound/items/pickup/woodweapon.ogg'
 	can_cleave = TRUE
 
 
-/obj/item/weapon/material/twohanded/pike/pitchfork
+/obj/item/weapon/material/twohanded/spear/pike/pitchfork
 	icon_state = "pitchfork0"
 	base_icon = "pitchfork"
 	name = "pitchfork"

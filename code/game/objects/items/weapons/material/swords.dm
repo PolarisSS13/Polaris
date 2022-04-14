@@ -42,11 +42,7 @@
 	item_state = "longsword"
 	applies_material_colour = 0
 	slot_flags = SLOT_BELT | SLOT_BACK
-
-/obj/item/weapon/material/sword/longsword/pre_attack(var/mob/living/target, var/mob/living/user)
-	if(istype(target))
-		cleave(user, target)
-	..()
+	can_cleave = TRUE
 
 /obj/item/weapon/material/sword/sabre
 	name = "sabre"
@@ -66,6 +62,7 @@
 	applies_material_colour = 0
 	drop_sound = 'sound/items/drop/axe.ogg'
 	pickup_sound = 'sound/items/pickup/axe.ogg'
+	can_cleave = TRUE
 
 /obj/item/weapon/material/sword/battleaxe/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(unique_parry_check(user, attacker, damage_source) && prob(10))
@@ -73,11 +70,6 @@
 		playsound(src, 'sound/weapons/punchmiss.ogg', 50, 1)
 		return 1
 	return 0
-
-/obj/item/weapon/material/sword/battleaxe/pre_attack(var/mob/living/target, var/mob/living/user)
-	if(istype(target))
-		cleave(user, target)
-	..()
 
 /obj/item/weapon/material/sword/khopesh
 	name = "khopesh"

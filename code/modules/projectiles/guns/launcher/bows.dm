@@ -1,6 +1,6 @@
 /obj/item/weapon/arrow/wood
 	name = "wooden arrow"
-	desc = "A wooden arrow with a stone tip, simple, but gets the job done"
+	desc = "A wooden arrow with a stone tip. Simple, but gets the job done."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "arrow"
 	item_state = "bolt"
