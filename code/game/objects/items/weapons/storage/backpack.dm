@@ -127,6 +127,18 @@
 	desc = "It's an orange backpack which was designed to hold beakers, pill bottles and bottles."
 	icon_state = "chempack"
 
+/obj/item/weapon/storage/backpack/white
+	name = "white backpack"
+	icon_state = "backpack_white"
+
+/obj/item/weapon/storage/backpack/fancy
+	name = "fancy backpack"
+	icon_state = "backpack_fancy"
+
+/obj/item/weapon/storage/backpack/military
+	name = "military backpack"
+	icon_state = "backpack_military"
+
 /*
  * Duffle Types
  */
@@ -184,6 +196,16 @@
 	desc = "A large dufflebag for holding circuits and beakers."
 	icon_state = "duffle_sci"
 
+/obj/item/weapon/storage/backpack/dufflebag/drone
+	name = "drone dufflebag"
+	desc = "A large dufflebag for holding small robots? Or maybe it's one used by robots!"
+	icon_state = "duffle_drone"
+
+/obj/item/weapon/storage/backpack/dufflebag/cursed
+	name = "cursed dufflebag"
+	desc = "That probably shouldn't be moving..."
+	icon_state = "duffle_cursed"
+
 /*
  * Satchel Types
  */
@@ -192,7 +214,6 @@
 	name = "leather satchel"
 	desc = "It's a very fancy satchel made with fine leather."
 	icon_state = "satchel"
-	item_state_slots = list(slot_r_hand_str = "briefcase", slot_l_hand_str = "briefcase")
 
 /obj/item/weapon/storage/backpack/satchel/withwallet
 	starts_with = list(/obj/item/weapon/storage/wallet/random)
@@ -206,43 +227,36 @@
 	name = "industrial satchel"
 	desc = "A tough satchel with extra pockets."
 	icon_state = "satchel-eng"
-	item_state_slots = list(slot_r_hand_str = "engiepack", slot_l_hand_str = "engiepack")
 
 /obj/item/weapon/storage/backpack/satchel/med
 	name = "medical satchel"
 	desc = "A sterile satchel used in medical departments."
 	icon_state = "satchel-med"
-	item_state_slots = list(slot_r_hand_str = "medicalpack", slot_l_hand_str = "medicalpack")
 
 /obj/item/weapon/storage/backpack/satchel/vir
 	name = "virologist satchel"
 	desc = "A sterile satchel with virologist colours."
 	icon_state = "satchel-vir"
-	item_state_slots = list(slot_r_hand_str = "viropack", slot_l_hand_str = "viropack")
 
 /obj/item/weapon/storage/backpack/satchel/chem
 	name = "chemist satchel"
 	desc = "A sterile satchel with chemist colours."
 	icon_state = "satchel-chem"
-	item_state_slots = list(slot_r_hand_str = "chempack", slot_l_hand_str = "chempack")
 
 /obj/item/weapon/storage/backpack/satchel/gen
 	name = "geneticist satchel"
 	desc = "A sterile satchel with geneticist colours."
 	icon_state = "satchel-gen"
-	item_state_slots = list(slot_r_hand_str = "genpack", slot_l_hand_str = "genpack")
 
 /obj/item/weapon/storage/backpack/satchel/tox
 	name = "scientist satchel"
 	desc = "Useful for holding research materials."
 	icon_state = "satchel-tox"
-	item_state_slots = list(slot_r_hand_str = "toxpack", slot_l_hand_str = "toxpack")
 
 /obj/item/weapon/storage/backpack/satchel/sec
 	name = "security satchel"
 	desc = "A robust satchel for security related needs."
 	icon_state = "satchel-sec"
-	item_state_slots = list(slot_r_hand_str = "securitypack", slot_l_hand_str = "securitypack")
 
 /obj/item/weapon/storage/backpack/satchel/hyd
 	name = "hydroponics satchel"
@@ -253,7 +267,18 @@
 	name = "site manager's satchel"
 	desc = "An exclusive satchel for officers."
 	icon_state = "satchel-cap"
-	item_state_slots = list(slot_r_hand_str = "captainpack", slot_l_hand_str = "captainpack")
+
+/obj/item/weapon/storage/backpack/satchel/white
+	name = "white satchel"
+	icon_state = "satchel_white"
+
+/obj/item/weapon/storage/backpack/satchel/fancy
+	name = "fancy satchel"
+	icon_state = "satchel_fancy"
+
+/obj/item/weapon/storage/backpack/satchel/military
+	name = "military satchel"
+	icon_state = "satchel_military"
 
 //ERT backpacks.
 /obj/item/weapon/storage/backpack/ert
@@ -293,56 +318,104 @@
 	name = "messenger bag"
 	desc = "A sturdy backpack worn over one shoulder."
 	icon_state = "courierbag"
-	item_state_slots = list(slot_r_hand_str = "backpack", slot_l_hand_str = "backpack")
+	item_state_slots = list(slot_r_hand_str = "satchel-norm", slot_l_hand_str = "satchel-norm")
 
 /obj/item/weapon/storage/backpack/messenger/chem
 	name = "chemistry messenger bag"
 	desc = "A serile backpack worn over one shoulder.  This one is in Chemsitry colors."
 	icon_state = "courierbagchem"
-	item_state_slots = list(slot_r_hand_str = "chempack", slot_l_hand_str = "chempack")
+	item_state_slots = list(slot_r_hand_str = "satchel-chem", slot_l_hand_str = "satchel-chem")
 
 /obj/item/weapon/storage/backpack/messenger/med
 	name = "medical messenger bag"
 	desc = "A sterile backpack worn over one shoulder used in medical departments."
 	icon_state = "courierbagmed"
-	item_state_slots = list(slot_r_hand_str = "medicalpack", slot_l_hand_str = "medicalpack")
+	item_state_slots = list(slot_r_hand_str = "satchel-med", slot_l_hand_str = "satchel-med")
 
 /obj/item/weapon/storage/backpack/messenger/viro
 	name = "virology messenger bag"
 	desc = "A sterile backpack worn over one shoulder.  This one is in Virology colors."
 	icon_state = "courierbagviro"
-	item_state_slots = list(slot_r_hand_str = "viropack", slot_l_hand_str = "viropack")
+	item_state_slots = list(slot_r_hand_str = "satchel-vir", slot_l_hand_str = "satchel-vir")
 
 /obj/item/weapon/storage/backpack/messenger/tox
 	name = "research messenger bag"
 	desc = "A backpack worn over one shoulder.  Useful for holding science materials."
 	icon_state = "courierbagtox"
-	item_state_slots = list(slot_r_hand_str = "toxpack", slot_l_hand_str = "toxpack")
+	item_state_slots = list(slot_r_hand_str = "satchel-tox", slot_l_hand_str = "satchel-tox")
 
 /obj/item/weapon/storage/backpack/messenger/com
 	name = "command messenger bag"
 	desc = "A special backpack worn over one shoulder.  This one is made specifically for officers."
 	icon_state = "courierbagcom"
-	item_state_slots = list(slot_r_hand_str = "captainpack", slot_l_hand_str = "captainpack")
+	item_state_slots = list(slot_r_hand_str = "satchel-cap", slot_l_hand_str = "satchel-cap")
 
 /obj/item/weapon/storage/backpack/messenger/engi
 	name = "engineering messenger bag"
 	icon_state = "courierbagengi"
-	item_state_slots = list(slot_r_hand_str = "engiepack", slot_l_hand_str = "engiepack")
+	item_state_slots = list(slot_r_hand_str = "satchel-eng", slot_l_hand_str = "satchel-eng")
 
 /obj/item/weapon/storage/backpack/messenger/hyd
 	name = "hydroponics messenger bag"
 	desc = "A backpack worn over one shoulder.  This one is designed for plant-related work."
 	icon_state = "courierbaghyd"
+	item_state_slots = list(slot_r_hand_str = "satchel_hyd", slot_l_hand_str = "satchel_hyd")
 
 /obj/item/weapon/storage/backpack/messenger/sec
 	name = "security messenger bag"
 	desc = "A tactical backpack worn over one shoulder. This one is in Security colors."
 	icon_state = "courierbagsec"
-	item_state_slots = list(slot_r_hand_str = "securitypack", slot_l_hand_str = "securitypack")
+	item_state_slots = list(slot_r_hand_str = "satchel-sec", slot_l_hand_str = "satchel-sec")
 
 /obj/item/weapon/storage/backpack/messenger/black
 	icon_state = "courierbagblk"
+	item_state_slots = list(slot_r_hand_str = "satchel-sec", slot_l_hand_str = "satchel-sec")
+
+/*
+ * Sport Bags
+ */
+
+/obj/item/weapon/storage/backpack/sport
+	name = "sports backpack"
+	icon_state = "backsport"
+
+/obj/item/weapon/storage/backpack/sport/white
+	name = "white sports backpack"
+	icon_state = "backsport_white"
+
+/obj/item/weapon/storage/backpack/sport/fancy
+	name = "fancy sports backpack"
+	icon_state = "backsport_fancy"
+
+/obj/item/weapon/storage/backpack/sport/vir
+	name = "virologist sports backpack"
+	desc = "A sterile sports backpack with virologist colours."
+	icon_state = "backsport_green"
+
+/obj/item/weapon/storage/backpack/sport/chem
+	name = "chemist sports backpack"
+	desc = "A sterile sports backpack with chemist colours."
+	icon_state = "backsport_orange"
+
+/obj/item/weapon/storage/backpack/sport/gen
+	name = "geneticist sports backpack"
+	desc = "A sterile sports backpack with geneticist colours."
+	icon_state = "backsport_blue"
+
+/obj/item/weapon/storage/backpack/sport/tox
+	name = "scientist sports backpack"
+	desc = "Useful for holding research materials."
+	icon_state = "backsport_purple"
+
+/obj/item/weapon/storage/backpack/sport/sec
+	name = "security sports backpack"
+	desc = "A robust sports backpack for security related needs."
+	icon_state = "backsport_security"
+
+/obj/item/weapon/storage/backpack/sport/hyd
+	name = "hydroponics sports backpack"
+	desc = "A green sports backpack for plant related work."
+	icon_state = "backsport_hydro"
 
 
 //Purses
