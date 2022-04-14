@@ -347,6 +347,14 @@
 		return
 	..()
 
+	for(var/obj/effect/vfx/smoke/chem/smoke in view(1, src))
+		if(smoke.reagents.total_volume)
+			smoke.reagents.trans_to_mob(src, 10, CHEM_INGEST, copy = 1)
+			//maybe check air pressure here or something to see if breathing in smoke is even possible.
+			// I dunno, maybe the reagents enter the blood stream through the lungs?
+			break // If they breathe in the nasty stuff once, no need to continue checking
+
+
 /mob/living/carbon/human/handle_post_breath(datum/gas_mixture/breath)
 	..()
 	//spread some viruses while we are at it

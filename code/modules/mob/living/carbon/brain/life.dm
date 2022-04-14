@@ -70,21 +70,10 @@
 
 
 /mob/living/carbon/brain/handle_chemicals_in_body()
-	chem_effects.Cut()
-
-	if(touching) touching.metabolize()
-	if(ingested) ingested.metabolize()
-	if(bloodstr) bloodstr.metabolize()
-
 	// decrement dizziness counter, clamped to 0
-	if(resting)
-		dizziness = max(0, dizziness - 5)
-	else
-		dizziness = max(0, dizziness - 1)
-
+	dizziness = max(0, dizziness - (resting ? 5 : 1))
 	updatehealth()
-
-	return //TODO: DEFERRED
+	return
 
 /mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
