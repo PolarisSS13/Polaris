@@ -154,3 +154,6 @@
 
 	// Custom Species Name
 	var/custom_species
+
+	var/list/chem_effects = list()
+	var/pulse = PULSE_NORM	//current pulse level

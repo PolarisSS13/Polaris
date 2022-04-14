@@ -641,3 +641,52 @@ emp_act
 		flick(G.hud.icon_state, G.hud)
 
 	return 1
+
+/mob/living/carbon/human/help_shake_act(mob/living/carbon/M)
+	w_uniform?.add_fingerprint(M)
+
+	if (src.health >= config.health_threshold_crit && src == M)
+		var/mob/living/carbon/human/H = src
+		var/datum/gender/T = gender_datums[src.get_visible_gender()]
+		src.visible_message( \
+			"<span class='notice'>[src] examines [T.himself].</span>", \
+			"<span class='notice'>You check yourself for injuries.</span>" \
+			)
+
+		for(var/obj/item/organ/external/org in H.organs)
+			var/list/status = list()
+			var/brutedamage = org.brute_dam
+			var/burndamage = org.burn_dam
+			switch(brutedamage)
+				if(1 to 20)
+					status += "bruised"
+				if(20 to 40)
+					status += "wounded"
+				if(40 to INFINITY)
+					status += "mangled"
+
+			switch(burndamage)
+				if(1 to 10)
+					status += "numb"
+				if(10 to 40)
+					status += "blistered"
+				if(40 to INFINITY)
+					status += "peeling away"
+
+			if(org.is_stump())
+				status += "MISSING"
+			if(org.status & ORGAN_MUTATED)
+				status += "weirdly shapen"
+			if(org.dislocated == 2)
+				status += "dislocated"
+			if(org.status & ORGAN_BROKEN)
+				status += "hurts when touched"
+			if(org.status & ORGAN_DEAD)
+				status += "is bruised and necrotic"
+			if(!org.is_usable() || org.is_dislocated())
+				status += "dangling uselessly"
+			if(status.len)
+				src.show_message("My [org.name] is <span class='warning'> [english_list(status)].</span>",1)
+			else
+				src.show_message("My [org.name] is <span class='notice'> OK.</span>",1)
+	else ..()
