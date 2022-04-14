@@ -80,10 +80,6 @@
 	name = "\improper Sol Government logo stamp"
 	icon_state = "stamp-sol"
 
-/obj/item/weapon/stamp/solgovlogo
-	name = "\improper Sol Government logo stamp"
-	icon_state = "stamp-sol"
-
 /obj/item/stamp/einstein
 	name = "\improper Einstein Engines rubber stamp"
 	icon_state = "stamp-einstein"
