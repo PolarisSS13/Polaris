@@ -27,7 +27,7 @@
 /obj/item/weapon/smes_coil/super_capacity
 	name = "superconductive capacitance coil"
 	desc = "A specialised type of superconductive magnetic coil with a significantly stronger containment field, allowing for larger power storage. Its IO rating is much lower, however."
-	icon_state = "smes_coil_capacitance
+	icon_state = "smes_coil_capacitance"
 	ChargeCapacity = 60000000			// 1000 kWh
 	IOCapacity = 50000					// 50 kW
 
