@@ -9,6 +9,7 @@
 	var/cell_type = /obj/item/weapon/cell/high
 	var/on = 0
 	var/set_temperature = T0C + 20	//K
+	var/active = 0
 	var/heating_power = 40000
 	clicksound = "switch"
 	interact_offline = TRUE
@@ -19,15 +20,25 @@
 		cell = new cell_type(src)
 	update_icon()
 
-/obj/machinery/space_heater/update_icon()
-	overlays.Cut()
-	icon_state = "sheater[on]"
-	if(panel_open)
-		overlays  += "sheater-open"
-	if(on)
-		set_light(3, 3, "#FFCC00")
-	else
+/obj/machinery/space_heater/update_icon(var/rebuild_overlay = 0)
+	if(!on)
+		icon_state = "sheater-off"
 		set_light(0)
+	else if(active > 0)
+		icon_state = "sheater-heat"
+		set_light(3, 3, COLOR_SEDONA)
+	else if(active < 0)
+		icon_state = "sheater-cool"
+		set_light(3, 3, COLOR_DEEP_SKY_BLUE)
+	else
+		icon_state = "sheater-standby"
+		set_light(0)
+
+	if(rebuild_overlay)
+		overlays.Cut()
+		if(panel_open)
+			overlays  += "sheater-open"
+
 
 /obj/machinery/space_heater/examine(mob/user)
 	. = ..()
@@ -76,7 +87,7 @@
 		panel_open = !panel_open
 		playsound(src, I.usesound, 50, 1)
 		user.visible_message("<span class='notice'>[user] [panel_open ? "opens" : "closes"] the hatch on the [src].</span>", "<span class='notice'>You [panel_open ? "open" : "close"] the hatch on the [src].</span>")
-		update_icon()
+		update_icon(1)
 		if(!panel_open && user.machine == src)
 			user << browse(null, "window=spaceheater")
 			user.unset_machine()
@@ -162,7 +173,9 @@
 	if(on)
 		if(cell && cell.charge)
 			var/datum/gas_mixture/env = loc.return_air()
-			if(env && abs(env.temperature - set_temperature) > 0.1)
+			if(env && abs(env.temperature - set_temperature) <= 0.1)
+				active = 0
+			else
 				var/transfer_moles = 0.25 * env.total_moles
 				var/datum/gas_mixture/removed = env.remove(transfer_moles)
 
@@ -184,9 +197,11 @@
 
 						var/power_used = abs(heat_transfer)/cop
 						cell.use(power_used*CELLRATE)
+					active = heat_transfer
 
 				env.merge(removed)
 		else
 			on = 0
+			active = 0
 			power_change()
-			update_icon()
+		update_icon()
