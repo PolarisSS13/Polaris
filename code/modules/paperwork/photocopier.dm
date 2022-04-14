@@ -2,8 +2,8 @@
 	name = "photocopier"
 	desc = "Copy all your important papers here!"
 	icon = 'icons/obj/library.dmi'
-	icon_state = "bigscanner"
-	var/insert_anim = "bigscanner1"
+	icon_state = "photocopier"
+	var/insert_anim = "photocopier_scan"
 	anchored = 1
 	density = 1
 	use_power = USE_POWER_IDLE
@@ -72,12 +72,14 @@
 			sleep(11)
 			copy(copyitem)
 			audible_message("<span class='notice'>You can hear [src] whirring as it finishes printing.</span>", runemessage = "whirr")
+			flick("photocopier_print", src)
 			playsound(src, "sound/machines/buzzbeep.ogg", 30)
 		else if (istype(copyitem, /obj/item/weapon/photo))
 			playsound(loc, "sound/machines/copier.ogg", 100, 1)
 			sleep(11)
 			photocopy(copyitem)
 			audible_message("<span class='notice'>You can hear [src] whirring as it finishes printing.</span>", runemessage = "whirr")
+			flick("photocopier_print", src)
 			playsound(src, "sound/machines/buzzbeep.ogg", 30)
 		else if (istype(copyitem, /obj/item/weapon/paper_bundle))
 			sleep(11)
@@ -85,6 +87,7 @@
 			var/obj/item/weapon/paper_bundle/B = bundlecopy(copyitem)
 			sleep(11*B.pages.len)
 			audible_message("<span class='notice'>You can hear [src] whirring as it finishes printing.</span>", runemessage = "whirr")
+			flick("photocopier_print", src)
 			playsound(src, "sound/machines/buzzbeep.ogg", 30)
 		else
 			to_chat(user, "<span class='warning'>\The [copyitem] can't be copied by [src].</span>")
@@ -151,11 +154,15 @@
 		if(toner <= 10) //allow replacing when low toner is affecting the print darkness
 			user.drop_item()
 			to_chat(user, "<span class='notice'>You insert the toner cartridge into \the [src].</span>")
+			flick("photocopier_toner", src)
+			playsound(loc, 'sound/machines/click.ogg', 50, 1)
 			var/obj/item/device/toner/T = O
 			toner += T.toner_amount
 			qdel(O)
 		else
 			to_chat(user, "<span class='notice'>This cartridge is not yet ready for replacement! Use up the rest of the toner.</span>")
+			flick("photocopier_notoner", src)
+			playsound(loc, 'sound/machines/buzz-two.ogg', 75, 1)
 	else if(O.is_wrench())
 		playsound(src, O.usesound, 50, 1)
 		anchored = !anchored

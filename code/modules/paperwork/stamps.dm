@@ -48,6 +48,10 @@
 	icon_state = "stamp-deny"
 	attack_verb = list("DENIED")
 
+/obj/item/weapon/stamp/accepted
+	name = "\improper ACCEPTED rubber stamp"
+	icon_state = "stamp-ok"
+
 /obj/item/weapon/stamp/clown
 	name = "clown's rubber stamp"
 	icon_state = "stamp-clown"
@@ -72,6 +76,21 @@
 	name = "\improper Sol Government rubber stamp"
 	icon_state = "stamp-sg"
 
+/obj/item/weapon/stamp/solgovlogo
+	name = "\improper Sol Government logo stamp"
+	icon_state = "stamp-sol"
+
+/obj/item/stamp/einstein
+	name = "\improper Einstein Engines rubber stamp"
+	icon_state = "stamp-einstein"
+
+/obj/item/stamp/hephaestus
+	name = "\improper Hephaestus Industries rubber stamp"
+	icon_state = "stamp-heph"
+
+/obj/item/stamp/zeng_hu
+	name = "\improper Zeng-Hu Pharmaceuticals rubber stamp"
+	icon_state = "stamp-zenghu"
 
 // Syndicate stamp to forge documents.
 /obj/item/weapon/stamp/chameleon/attack_self(mob/user as mob)
