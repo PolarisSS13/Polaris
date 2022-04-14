@@ -164,10 +164,3 @@
 	if(flooring)
 		return
 	attackby(T, user)
-
-/turf/simulated/floor/AltClick(mob/user)
-	if(isliving(user))
-		var/mob/living/livingUser = user
-		if(try_graffiti(livingUser, livingUser.get_active_hand()))
-			return
-	. = ..()
