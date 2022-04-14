@@ -26,6 +26,7 @@
 #include "code\__defines\_protect.dm"
 #include "code\__defines\_tick.dm"
 #include "code\__defines\admin.dm"
+#include "code\__defines\ai.dm"
 #include "code\__defines\appearance.dm"
 #include "code\__defines\atmos.dm"
 #include "code\__defines\callbacks.dm"

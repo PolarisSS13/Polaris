@@ -328,8 +328,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetSEBlock(block,newBlock,defer)
 
 
-/proc/EncodeDNABlock(var/value)
-	return add_zero2(num2hex(value,1), 3)
+/proc/EncodeDNABlock(value)
+	return pad_left(num2hex(value), 3, "0")
 
 /datum/dna/proc/UpdateUI()
 	src.uni_identity=""

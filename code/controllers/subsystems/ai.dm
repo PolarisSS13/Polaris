@@ -1,32 +1,53 @@
 SUBSYSTEM_DEF(ai)
 	name = "AI"
-	init_order = INIT_ORDER_AI
-	priority = FIRE_PRIORITY_AI
-	wait = 2 SECONDS
 	flags = SS_NO_INIT
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	priority = FIRE_PRIORITY_AI
+	wait = 2 SECONDS
 
-	var/list/processing = list()
-	var/list/currentrun = list()
+	/// The list of AI datums to be processed.
+	var/static/tmp/list/queue = list()
+
+	/// The list of AI datums currently being processed.
+	var/static/tmp/list/current = list()
+
 
 /datum/controller/subsystem/ai/stat_entry(msg_prefix)
 	var/list/msg = list(msg_prefix)
-	msg += "P:[processing.len]"
+	msg += "P:[queue.len]"
 	..(msg.Join())
+
+
+/datum/controller/subsystem/ai/Recover()
+	current.Cut()
+
 
 /datum/controller/subsystem/ai/fire(resumed, no_mc_tick)
 	if (!resumed)
-		src.currentrun = processing.Copy()
-
-	//cache for sanic speed (lists are references anyways)
-	var/list/currentrun = src.currentrun
-
-	while(currentrun.len)
-		var/datum/ai_holder/A = currentrun[currentrun.len]
-		--currentrun.len
-		if(!A || QDELETED(A) || A.busy) // Doesn't exist or won't exist soon or not doing it this tick
+		current = queue.Copy()
+	var/datum/ai_holder/subject
+	for (var/i = current.len to 1 step -1)
+		subject = current[i]
+		if (QDELETED(subject) || subject.busy)
 			continue
-		A.handle_strategicals()
-
-		if(MC_TICK_CHECK)
+		subject.handle_strategicals()
+		if (no_mc_tick)
+			CHECK_TICK
+		else if (MC_TICK_CHECK)
+			current.Cut(i)
 			return
+	current.Cut()
+
+
+/// Convenience define for safely enqueueing an AI datum for slow processing.
+#define START_AIPROCESSING(DATUM) \
+if (!(DATUM.process_flags & AI_PROCESSING)) {\
+	DATUM.process_flags |= AI_PROCESSING;\
+	SSai.queue += DATUM;\
+}
+
+
+/// Convenience define for safely dequeueing an AI datum from slow processing.
+#define STOP_AIPROCESSING(DATUM) \
+DATUM.process_flags &= ~AI_PROCESSING; \
+SSai.queue -= DATUM;
