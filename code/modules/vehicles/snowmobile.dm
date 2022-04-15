@@ -1,6 +1,7 @@
 /obj/vehicle/snowmobile
 	name = "snowmobile"
 	desc = "An electric snowmobile for traversing snow and ice with ease! Other terrain, not so much."
+	description_info = "Use ctrl-click to quickly toggle the engine if you're adjacent. Alt-click to quickly remove keys. Click-drag a person to mount as a passenger."
 	icon = 'icons/obj/vehicles.dmi'
 	icon_state = "snowmobile"
 
@@ -98,8 +99,6 @@
 		src.visible_message("\The [src] rumbles to life.", "You hear something rumble deeply.")
 	else
 		turn_off()
-		soundloop.stop()
-		src.visible_message("\The [src] putters before turning off.", "You hear something putter slowly.")
 
 
 /obj/vehicle/snowmobile/AltClick(var/mob/user)
@@ -107,6 +106,12 @@
 		remove_key()
 	else
 		return ..()
+
+/obj/vehicle/snowmobile/turn_off()
+	..()
+	if(!on)
+		soundloop.stop()
+		src.visible_message("\The [src] putters before turning off.", "You hear something putter slowly.")
 
 /obj/vehicle/snowmobile/verb/remove_key()
 	set name = "Remove key"
@@ -138,7 +143,10 @@
 
 /obj/vehicle/snowmobile/MouseDrop_T(var/atom/movable/C, var/mob/user as mob)
 	if(ismob(C))
-		user_buckle_mob(C, user)
+		if(C in buckled_mobs)
+			user_unbuckle_mob(C, user)
+		else
+			user_buckle_mob(C, user)
 	else
 		..(C, user)
 
@@ -146,8 +154,13 @@
 	if(user == load)
 		unload(load, user)
 		to_chat(user, "You unbuckle yourself from \the [src].")
+		return
+	if(user in buckled_mobs)
+		unbuckle_mob(user)
+		return
 	else if(!load && load(user, user))
 		to_chat(user, "You buckle yourself to \the [src].")
+		return
 
 /obj/vehicle/snowmobile/relaymove(mob/user, direction)
 	if(user != load || !on)
