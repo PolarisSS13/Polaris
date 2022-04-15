@@ -20,6 +20,7 @@
 
 	var/frame_state = "quad" //Custom-item proofing!
 	var/custom_frame = FALSE
+	var/datum/looping_sound/vehicle_engine/soundloop
 
 	paint_color = "#ffffff"
 
@@ -28,6 +29,7 @@
 /obj/vehicle/train/engine/quadbike/Initialize()
 	cell = new /obj/item/weapon/cell/high(src)
 	key = new key_type(src)
+	soundloop = new(list(src), FALSE)
 	. = ..()
 	turn_off()
 
@@ -39,6 +41,10 @@
 /obj/vehicle/train/engine/quadbike/random/Initialize()
 	paint_color = rgb(rand(1,255),rand(1,255),rand(1,255))
 	. = ..()
+
+/obj/vehicle/train/engine/quadbike/Destroy()
+	QDEL_NULL(soundloop)
+	return ..()
 
 /obj/item/weapon/key/quadbike
 	name = "key"
@@ -54,7 +60,7 @@
 			speed_mod = outdoors_speed_mod * 4 //It kind of floats due to its tires, but it is slow.
 		else if(istype(loc, /turf/simulated/floor/outdoors/rocks))
 			speed_mod = initial(speed_mod) //Rocks are good, rocks are solid.
-		else if(istype(loc, /turf/simulated/floor/outdoors/dirt) || istype(loc, /turf/simulated/floor/outdoors/grass))
+		else if(istype(loc, /turf/simulated/floor/outdoors/dirt) || istype(loc, /turf/simulated/floor/outdoors/grass) || istype(loc, /turf/simulated/floor/outdoors/newdirt) || istype(loc, /turf/simulated/floor/outdoors/newdirt_nograss))
 			speed_mod = outdoors_speed_mod //Dirt and grass are the outdoors bench mark.
 		else if(istype(loc, /turf/simulated/floor/outdoors/mud))
 			speed_mod = outdoors_speed_mod * 1.5 //Gets us roughly 1. Mud may be fun, but it's not the best.
@@ -154,6 +160,15 @@
 	var/turf/T = get_step(M, pick(throw_dirs))
 	M.throw_at(T, 1, 1, src)
 
+/obj/vehicle/train/engine/quadbike/turn_on()
+	..()
+	if(on)
+		soundloop.start()
+
+/obj/vehicle/train/engine/quadbike/turn_off()
+	..()
+	soundloop.stop()
+
 /*
  * Trailer bits and bobs.
  */
@@ -193,6 +208,7 @@
 /obj/vehicle/train/trolley/trailer/Initialize()
 	. = ..()
 	update_icon()
+
 
 /obj/vehicle/train/trolley/trailer/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()

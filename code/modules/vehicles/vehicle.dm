@@ -197,6 +197,7 @@
 		return FALSE
 	on = 1
 	set_light(initial(light_range))
+	playsound(src, 'sound/machines/vehicle/ignition.ogg', 50, 1, -3)
 	update_icon()
 	return TRUE
 
