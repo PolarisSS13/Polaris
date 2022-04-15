@@ -37,7 +37,7 @@
 	if(rebuild_overlay)
 		cut_overlays()
 		if(panel_open)
-			overlays  += "sheater-open"
+			add_overlay("sheater-open")
 
 
 /obj/machinery/space_heater/examine(mob/user)
