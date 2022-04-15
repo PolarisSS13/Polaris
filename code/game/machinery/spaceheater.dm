@@ -35,7 +35,7 @@
 		set_light(0)
 
 	if(rebuild_overlay)
-		overlays.Cut()
+		cut_overlays()
 		if(panel_open)
 			overlays  += "sheater-open"
 
