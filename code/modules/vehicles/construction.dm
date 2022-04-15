@@ -364,7 +364,7 @@
 				to_chat(user, "<span class='notice'>You begin your finishing touches on \the [src].</span>")
 				if(do_after(user, 20) && build_stage == 7)
 					playsound(src, W.usesound, 30, 1)
-					var/obj/vehicle/train/snowmobile/built/product = new(src)
+					var/obj/vehicle/snowmobile/built/product = new(src)
 					to_chat(user, "<span class='notice'>You finish \the [product]</span>")
 					product.loc = get_turf(src)
 					product.cell = cell
