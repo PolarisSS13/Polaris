@@ -1,4 +1,4 @@
-var/datum/antagonist/ninja/ninjas
+var/global/datum/antagonist/ninja/ninjas
 
 /datum/antagonist/ninja
 	id = MODE_NINJA

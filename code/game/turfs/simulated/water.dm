@@ -152,7 +152,7 @@
 	remove_modifiers_of_type(/datum/modifier/fire)
 	inflict_water_damage(20 * amount) // Only things vulnerable to water will actually be harmed (slimes/prommies).
 
-var/list/shoreline_icon_cache = list()
+var/global/list/shoreline_icon_cache = list()
 
 /turf/simulated/floor/water/beach
 	name = "beach shoreline"

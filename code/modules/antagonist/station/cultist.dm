@@ -1,4 +1,4 @@
-var/datum/antagonist/cultist/cult
+var/global/datum/antagonist/cultist/cult
 
 /proc/iscultist(var/mob/player)
 	if(!cult || !player.mind)

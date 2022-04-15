@@ -12,10 +12,10 @@
 #define DUAL_TICK_CHECK if (init_tick_checks) { CHECK_TICK; } else if (MC_TICK_CHECK) { return; }
 
 // Globals
-/var/lighting_overlays_initialised = FALSE
-/var/list/lighting_update_lights    = list()    // List of lighting sources  queued for update.
-/var/list/lighting_update_corners   = list()    // List of lighting corners  queued for update.
-/var/list/lighting_update_overlays  = list()    // List of lighting overlays queued for update.
+var/global/lighting_overlays_initialised = FALSE
+var/global/list/lighting_update_lights    = list()    // List of lighting sources  queued for update.
+var/global/list/lighting_update_corners   = list()    // List of lighting corners  queued for update.
+var/global/list/lighting_update_overlays  = list()    // List of lighting overlays queued for update.
 
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"

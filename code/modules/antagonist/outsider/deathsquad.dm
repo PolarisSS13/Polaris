@@ -1,4 +1,4 @@
-var/datum/antagonist/deathsquad/deathsquad
+var/global/datum/antagonist/deathsquad/deathsquad
 
 /datum/antagonist/deathsquad
 	id = MODE_DEATHSQUAD

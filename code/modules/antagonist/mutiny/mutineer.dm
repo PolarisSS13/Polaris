@@ -1,4 +1,4 @@
-var/datum/antagonist/mutineer/mutineers
+var/global/datum/antagonist/mutineer/mutineers
 
 /datum/antagonist/mutineer
 	role_type = BE_MUTINEER

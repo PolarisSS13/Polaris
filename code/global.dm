@@ -16,12 +16,12 @@ var/global/datum/universal_state/universe = new
 var/global/list/global_map = null
 
 // Noises made when hit while typing.
-var/list/hit_appends	= list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
-var/log_path			= "data/logs/" //See world.dm for the full calculated path
-var/diary				= null
-var/error_log			= null
-var/debug_log			= null
-var/href_logfile		= null
+var/global/list/hit_appends	= list("-OOF", "-ACK", "-UGH", "-HRNK", "-HURGH", "-GLORF")
+var/global/log_path			= "data/logs/" //See world.dm for the full calculated path
+var/global/diary				= null
+var/global/error_log			= null
+var/global/debug_log			= null
+var/global/href_logfile		= null
 // var/station_name		= "Northern Star"
 // var/const/station_orig	= "Northern Star" //station_name can't be const due to event prefix/suffix
 // var/const/station_short	= "Northern Star"
@@ -32,115 +32,115 @@ var/href_logfile		= null
 // var/const/company_short	= "NT"
 // var/const/star_name		= "Vir"
 // var/const/starsys_name	= "Vir"
-var/const/game_version	= "Polaris"
-var/changelog_hash		= ""
-var/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 552)
-var/round_progressing = 1
+var/global/const/game_version	= "Polaris"
+var/global/changelog_hash		= ""
+var/global/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 552)
+var/global/round_progressing = 1
 
-var/master_mode       = "extended" // "extended"
-var/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
+var/global/master_mode       = "extended" // "extended"
+var/global/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
 
-var/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
+var/global/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 
-var/list/jobMax        = list()
-var/list/bombers       = list()
-var/list/admin_log     = list()
-var/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
-var/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
-var/list/reg_dna       = list()
+var/global/list/jobMax        = list()
+var/global/list/bombers       = list()
+var/global/list/admin_log     = list()
+var/global/list/lastsignalers = list() // Keeps last 100 signals here in format: "[src] used \ref[src] @ location [src.loc]: [freq]/[code]"
+var/global/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
+var/global/list/reg_dna       = list()
 
-var/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
+var/global/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
 
-var/list/monkeystart     = list()
-var/list/wizardstart     = list()
-var/list/newplayer_start = list()
+var/global/list/monkeystart     = list()
+var/global/list/wizardstart     = list()
+var/global/list/newplayer_start = list()
 
 //Spawnpoints.
-var/list/latejoin            = list()
-var/list/latejoin_gateway    = list()
-var/list/latejoin_elevator   = list()
-var/list/latejoin_cryo       = list()
-var/list/latejoin_cyborg     = list()
-var/list/latejoin_checkpoint = list()
+var/global/list/latejoin            = list()
+var/global/list/latejoin_gateway    = list()
+var/global/list/latejoin_elevator   = list()
+var/global/list/latejoin_cryo       = list()
+var/global/list/latejoin_cyborg     = list()
+var/global/list/latejoin_checkpoint = list()
 
-var/list/prisonwarp         = list() // Prisoners go to these
-var/list/holdingfacility    = list() // Captured people go here
-var/list/xeno_spawn         = list() // Aliens spawn at at these.
-var/list/tdome1             = list()
-var/list/tdome2             = list()
-var/list/tdomeobserve       = list()
-var/list/tdomeadmin         = list()
-var/list/prisonsecuritywarp = list() // Prison security goes to these.
-var/list/prisonwarped       = list() // List of players already warped.
-var/list/blobstart          = list()
-var/list/ninjastart         = list()
+var/global/list/prisonwarp         = list() // Prisoners go to these
+var/global/list/holdingfacility    = list() // Captured people go here
+var/global/list/xeno_spawn         = list() // Aliens spawn at at these.
+var/global/list/tdome1             = list()
+var/global/list/tdome2             = list()
+var/global/list/tdomeobserve       = list()
+var/global/list/tdomeadmin         = list()
+var/global/list/prisonsecuritywarp = list() // Prison security goes to these.
+var/global/list/prisonwarped       = list() // List of players already warped.
+var/global/list/blobstart          = list()
+var/global/list/ninjastart         = list()
 
-var/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
-var/list/cardinalz   = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
-var/list/cornerdirs  = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-var/list/cornerdirsz = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, NORTH|UP, EAST|UP, WEST|UP, SOUTH|UP, NORTH|DOWN, EAST|DOWN, WEST|DOWN, SOUTH|DOWN)
-var/list/alldirs     = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
-var/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
+var/global/list/cardinal    = list(NORTH, SOUTH, EAST, WEST)
+var/global/list/cardinalz   = list(NORTH, SOUTH, EAST, WEST, UP, DOWN)
+var/global/list/cornerdirs  = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+var/global/list/cornerdirsz = list(NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST, NORTH|UP, EAST|UP, WEST|UP, SOUTH|UP, NORTH|DOWN, EAST|DOWN, WEST|DOWN, SOUTH|DOWN)
+var/global/list/alldirs     = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+var/global/list/reverse_dir = list( // reverse_dir[dir] = reverse of dir
 	 2,  1,  3,  8, 10,  9, 11,  4,  6,  5,  7, 12, 14, 13, 15, 32, 34, 33, 35, 40, 42,
 	41, 43, 36, 38, 37, 39, 44, 46, 45, 47, 16, 18, 17, 19, 24, 26, 25, 27, 20, 22, 21,
 	23, 28, 30, 29, 31, 48, 50, 49, 51, 56, 58, 57, 59, 52, 54, 53, 55, 60, 62, 61, 63
 )
 
-var/datum/configuration/config      = null
+var/global/datum/configuration/config      = null
 
-var/list/combatlog = list()
-var/list/IClog     = list()
-var/list/OOClog    = list()
-var/list/adminlog  = list()
+var/global/list/combatlog = list()
+var/global/list/IClog     = list()
+var/global/list/OOClog    = list()
+var/global/list/adminlog  = list()
 
-var/list/powernets = list()	// TODO - Move into SSmachines
+var/global/list/powernets = list()	// TODO - Move into SSmachines
 
-var/Debug2 = 0
-var/datum/debug/debugobj
+var/global/Debug2 = 0
+var/global/datum/debug/debugobj
 
-var/datum/moduletypes/mods = new()
+var/global/datum/moduletypes/mods = new()
 
-var/gravity_is_on = 1
+var/global/gravity_is_on = 1
 
-var/join_motd = null
+var/global/join_motd = null
 
-var/datum/metric/metric = new() // Metric datum, used to keep track of the round.
+var/global/datum/metric/metric = new() // Metric datum, used to keep track of the round.
 
-var/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
+var/global/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
 
 // Forum MySQL configuration. (for use with forum account/key authentication)
 // These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
-var/forumsqladdress = "localhost"
-var/forumsqlport    = "3306"
-var/forumsqldb      = "tgstation"
-var/forumsqllogin   = "root"
-var/forumsqlpass    = ""
-var/forum_activated_group     = "2"
-var/forum_authenticated_group = "10"
+var/global/forumsqladdress = "localhost"
+var/global/forumsqlport    = "3306"
+var/global/forumsqldb      = "tgstation"
+var/global/forumsqllogin   = "root"
+var/global/forumsqlpass    = ""
+var/global/forum_activated_group     = "2"
+var/global/forum_authenticated_group = "10"
 
 // For FTP requests. (i.e. downloading runtime logs.)
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.
-var/fileaccess_timer = 0
-var/custom_event_msg = null
+var/global/fileaccess_timer = 0
+var/global/custom_event_msg = null
 
 // Database connections. A connection is established on world creation.
 // Ideally, the connection dies when the server restarts (After feedback logging.).
-var/DBConnection/dbcon     = new() // Feedback    database (New database)
-var/DBConnection/dbcon_old = new() // /tg/station database (Old database) -- see the files in the SQL folder for information on what goes where.
+var/global/DBConnection/dbcon     = new() // Feedback    database (New database)
+var/global/DBConnection/dbcon_old = new() // /tg/station database (Old database) -- see the files in the SQL folder for information on what goes where.
 
 // Added for Xenoarchaeology, might be useful for other stuff.
 var/global/list/alphabet_uppercase = list("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z")
 
 
 // Used by robots and robot preferences.
-var/list/robot_module_types = list(
+var/global/list/robot_module_types = list(
 	"Standard", "Engineering", "Surgeon",  "Crisis",
 	"Miner",    "Janitor",     "Service",      "Clerical", "Security",
 	"Research"
 )
 
 // Some scary sounds.
-var/static/list/scarySounds = list(
+var/global/static/list/scarySounds = list(
 	'sound/weapons/thudswoosh.ogg',
 	'sound/weapons/Taser.ogg',
 	'sound/weapons/armbomb.ogg',
@@ -161,18 +161,18 @@ var/static/list/scarySounds = list(
 )
 
 // Bomb cap!
-var/max_explosion_range = 14
+var/global/max_explosion_range = 14
 
 // Announcer intercom, because too much stuff creates an intercom for one message then hard del()s it.
 var/global/obj/item/radio/intercom/omni/global_announcer = new /obj/item/radio/intercom/omni(null)
 
-var/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
+var/global/list/station_departments = list("Command", "Medical", "Engineering", "Science", "Security", "Cargo", "Civilian")
 
 //Icons for in-game HUD glasses. Why don't we just share these a little bit?
-var/static/icon/ingame_hud = icon('icons/mob/hud.dmi')
-var/static/icon/ingame_hud_med = icon('icons/mob/hud_med.dmi')
-var/static/icon/buildmode_hud = icon('icons/misc/buildmode.dmi')
+var/global/static/icon/ingame_hud = icon('icons/mob/hud.dmi')
+var/global/static/icon/ingame_hud_med = icon('icons/mob/hud_med.dmi')
+var/global/static/icon/buildmode_hud = icon('icons/misc/buildmode.dmi')
 
 //Keyed list for caching icons so you don't need to make them for records, IDs, etc all separately.
 //Could be useful for AI impersonation or something at some point?
-var/static/list/cached_character_icons = list()
+var/global/static/list/cached_character_icons = list()

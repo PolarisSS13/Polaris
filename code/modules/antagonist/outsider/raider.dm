@@ -1,4 +1,4 @@
-var/datum/antagonist/raider/raiders
+var/global/datum/antagonist/raider/raiders
 
 /datum/antagonist/raider
 	id = MODE_RAIDER

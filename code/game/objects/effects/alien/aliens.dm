@@ -420,14 +420,13 @@
 /*
  * Egg
  */
-/var/const //for the status var
-	BURST = 0
-	BURSTING = 1
-	GROWING = 2
-	GROWN = 3
 
-	MIN_GROWTH_TIME = 1800 //time it takes to grow a hugger
-	MAX_GROWTH_TIME = 3000
+var/global/const/BURST = 0
+var/global/const/BURSTING = 1
+var/global/const/GROWING = 2
+var/global/const/GROWN = 3
+var/global/const/MIN_GROWTH_TIME = 1800 //time it takes to grow a hugger
+var/global/const/MAX_GROWTH_TIME = 3000
 
 /obj/effect/alien/egg
 	desc = "It looks like a weird egg"

@@ -1,5 +1,5 @@
-var/list/powers = typesof(/datum/power/changeling) - /datum/power/changeling	//needed for the badmin verb for now
-var/list/datum/power/changeling/powerinstances = list()
+var/global/list/powers = typesof(/datum/power/changeling) - /datum/power/changeling	//needed for the badmin verb for now
+var/global/list/datum/power/changeling/powerinstances = list()
 
 /datum/power			//Could be used by other antags too
 	var/name = "Power"

@@ -1,8 +1,8 @@
-var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
-var/list/alldepartments = list()
+var/global/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
+var/global/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
+var/global/list/alldepartments = list()
 
-var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
+var/global/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
