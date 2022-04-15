@@ -697,7 +697,7 @@
 
 /datum/recipe/lobster
 	appliance = OVEN
-	fruit = list("lemon" = 1, "cabbage" = 1)
+	fruit = list("lemon" = 1, "lettuce" = 1)
 	items = list(
 		/obj/item/weapon/reagent_containers/food/snacks/lobster
 	)
