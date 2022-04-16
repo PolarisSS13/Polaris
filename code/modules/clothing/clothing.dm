@@ -480,8 +480,8 @@
 		else
 			D.wear_hat(src)
 			success = 1
-	else if(istype(user, /mob/living/carbon/alien/diona))
-		var/mob/living/carbon/alien/diona/D = user
+	else if(istype(user, /mob/living/carbon/diona_nymph))
+		var/mob/living/carbon/diona_nymph/D = user
 		if(D.hat)
 			success = 2
 		else
