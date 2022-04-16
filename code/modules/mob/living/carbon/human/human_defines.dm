@@ -157,3 +157,6 @@
 
 	var/list/chem_effects = list()
 	var/pulse = PULSE_NORM	//current pulse level
+
+	var/list/datum/disease2/disease/virus2 = list()
+	var/list/antibodies = list()
