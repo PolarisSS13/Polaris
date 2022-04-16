@@ -264,3 +264,8 @@
 	. = ..()
 	if(. && species.tail)
 		update_tail_showing()
+
+/mob/living/carbon/human/Bump(atom/A)
+	. = ..()
+	if(iscarbon(A) && prob(10))
+		spread_disease_to(A, "Contact")

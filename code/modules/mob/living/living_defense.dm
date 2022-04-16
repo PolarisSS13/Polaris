@@ -95,17 +95,18 @@
 // Clicking with an empty hand
 /mob/living/attack_hand(mob/living/L)
 	..()
+	if(!istype(L))
+		return
 
-	if (ishuman(L))
-		var/mob/living/carbon/human/H = M
-		var/obj/item/organ/external/temp = L.organs_by_name[ "[L.hand ? "r" : "l"]_hand"]
-		if(temp && !temp.is_usable())
-			to_chat(H, "<font color='red'>You can't use your [temp.name]</font>")
-			return
+	var/mob/living/carbon/human/H = L
+	var/obj/item/organ/external/temp = L.organs_by_name[ "[L.hand ? "r" : "l"]_hand"]
+	if(temp && !temp.is_usable())
+		to_chat(H, "<font color='red'>You can't use your [temp.name]</font>")
+		return
 
-	if(istype(L) && L.a_intent != I_HELP)
-		if(ai_holder) // Using disarm, grab, or harm intent is considered a hostile action to the mob's AI.
-			ai_holder.react_to_attack(L)
+	// Using disarm, grab, or harm intent is considered a hostile action to the mob's AI.
+	if(L.a_intent != I_HELP && ai_holder)
+		ai_holder.react_to_attack(L)
 
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 

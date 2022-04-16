@@ -6,7 +6,6 @@
 /mob/living/carbon/Life()
 	..()
 
-	handle_viruses()
 	adjust_nutrition(DEFAULT_HUNGER_FACTOR)
 
 	// Increase germ_level regularly
@@ -28,7 +27,7 @@
 		M.loc = src.loc
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
-				N.show_message(span(SPAN_DANGER, "[M] bursts out of [src]!"), 2)
+				N.show_message(SPAN_DANGER("[M] bursts out of [src]!"), 2)
 	..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null, var/stun = 1)
@@ -203,8 +202,6 @@
 	if(now_pushing)
 		return
 	..()
-	if(iscarbon(A) && prob(10))
-		spread_disease_to(A, "Contact")
 
 /mob/living/carbon/slip(var/slipped_on, var/stun_duration = 8, var/slip_dist = 1)
 	if(buckled)
