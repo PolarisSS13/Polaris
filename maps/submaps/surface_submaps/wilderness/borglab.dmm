@@ -8,7 +8,7 @@
 "ah" = (/obj/effect/floor_decal/industrial/warning,/obj/machinery/light/small/emergency/flicker,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/random/contraband,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "ai" = (/obj/effect/floor_decal/industrial/warning,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/mob/living/simple_mob/humanoid/merc/ranged{health = 15; maxHealth = 15},/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "aj" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/random/energy/highend,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
-"ak" = (/obj/effect/floor_decal/techfloor/orange,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
+"ak" = (/obj/effect/floor_decal/techfloor/orange,/obj/random/grenade/lethal,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
 "al" = (/obj/effect/floor_decal/techfloor/orange,/obj/random/contraband,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
 "bj" = (/obj/structure/bed/padded,/obj/item/weapon/bedsheet/brown,/obj/effect/floor_decal/rust,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "bz" = (/obj/random/trash,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
@@ -100,7 +100,7 @@
 "AI" = (/mob/living/simple_mob/mechanical/combat_drone/lesser{faction = "corrupt"},/turf/simulated/floor/reinforced,/area/submap/BorgLab)
 "Bl" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Bq" = (/obj/random/trash,/mob/living/simple_mob/mechanical/mining_drone,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
-"Cf" = (/obj/structure/table/standard,/obj/effect/floor_decal/industrial/warning/corner{dir = 8},/obj/effect/floor_decal/rust,/obj/item/weapon/module/power_control,/turf/simulated/floor/tiled,/area/submap/BorgLab)
+"Cf" = (/obj/structure/table/standard,/obj/effect/floor_decal/industrial/warning/corner{dir = 8},/obj/effect/floor_decal/rust,/obj/item/weapon/module/power_control{start_anomalous = 1},/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Cz" = (/obj/item/stack/material/phoron{amount = 10},/turf/simulated/floor/plating,/area/submap/BorgLab)
 "CA" = (/obj/effect/floor_decal/rust,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "CS" = (/obj/effect/floor_decal/rust,/obj/effect/spawner/gibs/robot,/turf/simulated/floor/plating,/area/submap/BorgLab)
@@ -131,13 +131,13 @@
 "KH" = (/obj/structure/grille,/obj/structure/window/reinforced{dir = 4; health = 1e+006},/obj/item/weapon/material/shard{pixel_y = 10},/obj/item/weapon/material/shard{pixel_x = 6; pixel_y = -6},/obj/effect/decal/cleanable/generic,/obj/machinery/door/blast/regular/open{dir = 4},/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Lr" = (/obj/structure/window/reinforced{dir = 8},/obj/structure/window/reinforced{dir = 1},/obj/structure/grille/broken,/obj/item/weapon/material/shard{pixel_x = -3; pixel_y = -6},/obj/item/weapon/material/shard{pixel_y = 10},/obj/machinery/door/blast/regular{dir = 8; id = "borg"; layer = 3.3; name = "Containment Door"},/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Lz" = (/obj/structure/table/standard,/obj/effect/floor_decal/rust,/obj/effect/floor_decal/rust,/obj/random/trash,/obj/random/maintenance/research,/turf/simulated/floor/tiled,/area/submap/BorgLab)
-"LB" = (/obj/item/stack/material/phoron{amount = 10},/obj/random/toolbox,/obj/random/toolbox,/obj/item/weapon/storage/box/lights/mixed,/obj/random/maintenance/research,/obj/random/maintenance/research,/obj/random/maintenance/research,/obj/random/maintenance/research,/obj/item/stack/material/phoron{amount = 10},/obj/structure/table/rack,/turf/simulated/floor/plating,/area/submap/BorgLab)
+"LB" = (/obj/item/stack/material/phoron{amount = 10},/obj/random/toolbox,/obj/item/weapon/storage/box/lights/mixed,/obj/random/maintenance/research,/obj/random/maintenance/research,/obj/random/maintenance/research,/obj/random/maintenance/research,/obj/item/stack/material/phoron{amount = 10},/obj/structure/table/rack,/obj/random/toolbox/anom,/turf/simulated/floor/plating,/area/submap/BorgLab)
 "LC" = (/obj/effect/spawner/gibs/human,/mob/living/simple_mob/mechanical/mecha/odysseus/murdysseus{faction = "corrupt"},/turf/simulated/floor/reinforced,/area/submap/BorgLab)
 "MT" = (/obj/machinery/space_heater,/obj/effect/floor_decal/rust,/obj/machinery/light/small/emergency/flicker{dir = 4},/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Nb" = (/obj/effect/floor_decal/industrial/warning,/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Nj" = (/obj/effect/floor_decal/rust,/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Nq" = (/obj/effect/floor_decal/rust,/obj/item/weapon/material/shard,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/BorgLab)
-"Ns" = (/obj/effect/floor_decal/rust,/obj/effect/spawner/gibs/robot,/turf/simulated/floor/tiled,/area/submap/BorgLab)
+"Ns" = (/obj/effect/floor_decal/rust,/obj/effect/spawner/gibs/robot,/obj/random/maintenance/anom,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Nt" = (/obj/effect/floor_decal/industrial/warning/corner{dir = 1},/obj/effect/floor_decal/rust,/obj/effect/floor_decal/industrial/warning/corner,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Nv" = (/obj/effect/floor_decal/rust,/obj/effect/floor_decal/rust/mono_rusted3,/obj/effect/floor_decal/industrial/warning{dir = 4},/obj/random/trash,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "NB" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/item/weapon/material/shard{pixel_x = 6; pixel_y = -6},/turf/simulated/floor/reinforced,/area/submap/BorgLab)
@@ -148,7 +148,7 @@
 "OH" = (/obj/effect/wingrille_spawn/reinforced,/obj/machinery/door/blast/regular/open{dir = 4},/turf/simulated/floor/plating,/area/submap/BorgLab)
 "OW" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp,/obj/effect/floor_decal/techfloor/orange{dir = 1},/obj/item/weapon/broken_gun/laserrifle,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
 "Pf" = (/obj/effect/floor_decal/industrial/warning{dir = 1},/obj/effect/decal/cleanable/generic,/turf/simulated/floor/tiled,/area/submap/BorgLab)
-"Qe" = (/obj/effect/map_effect/interval/sound_emitter/energy_gunfight,/turf/simulated/floor/plating,/area/submap/BorgLab)
+"Qe" = (/obj/effect/floor_decal/industrial/warning,/obj/random/tool/power/anom,/turf/simulated/floor/reinforced,/area/submap/BorgLab)
 "Qg" = (/turf/simulated/mineral/ignore_mapgen,/area/template_noop)
 "Qn" = (/obj/structure/window/reinforced/tinted/frosted{dir = 4},/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Qs" = (/obj/effect/floor_decal/industrial/warning,/obj/machinery/light/small/emergency/flicker,/turf/simulated/floor/plating,/area/submap/BorgLab)
@@ -192,7 +192,7 @@
 "YZ" = (/obj/effect/floor_decal/rust,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Za" = (/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled,/area/submap/BorgLab)
 "Zc" = (/obj/structure/railing,/turf/simulated/floor/plating,/area/submap/BorgLab)
-"Zn" = (/obj/item/device/measuring_tape,/turf/simulated/floor/plating,/area/submap/BorgLab)
+"Zn" = (/obj/item/device/measuring_tape{start_anomalous = 1},/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Zq" = (/obj/machinery/door/window/brigdoor/westright{dir = 1; name = "Containment Pen"; req_one_access = list(43,1)},/obj/effect/floor_decal/industrial/hatch/yellow,/obj/effect/decal/cleanable/generic,/obj/machinery/door/blast/regular/open{dir = 4},/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Zt" = (/obj/effect/wingrille_spawn/reinforced,/turf/simulated/floor/plating,/area/submap/BorgLab)
 "Zy" = (/obj/effect/floor_decal/rust,/obj/effect/floor_decal/rust,/obj/random/junk,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/BorgLab)
@@ -208,10 +208,10 @@ DFsrQgQgWQVHTUOqCzWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQRGRGDqRPDFDFDF
 DFDFQgWQWQWQWQGAWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQWQRGRGDqDFDFDF
 DFDFQgWQmiUjQWQnDvWQaaxzOWWQuXTDNjWQmwTDbYWQpeWKJrWQWQRGRGDFDFDF
 DFQgQgWQrPZayISycCWQjfLCnkWQTWGzuQWQTUyBtxWQWhxOWqWQWQWQRGQgDFDF
-srQgQgWQtagfbjicUzWQVcJpabWQUVVcUMWQVcODVcWQyzububWQsKWQWQQgDFDF
+srQgQgWQtagfbjicUzWQVcJpabWQUVVcUMWQVcODQeWQyzububWQsKWQWQQgDFDF
 DFQgQgWQNsZOCAgNWQWQbIugOHWQYDwtyqWQYDmBYDWQJomBYDlzWQWQWQWQWQDF
 srQgWQWQZtmfNCWQWQeVRLejPfghyRrarOiiAsAsifacGCVriSNtWQnylJWQZcsr
-QgQgWQTjlUCANqOzhWzkNjXGnWLzFvaeJhaftyCSCXththBlYkNvkIYZWRmsQesr
+QgQgWQTjlUCANqOzhWzkNjXGnWLzFvaeJhaftyCSCXththBlYkNvkIYZWRmsqWsr
 QgQgWQDjkjktdTUyZtJZagnbYZahFtJmYkaiddoaNbQsFjqWVhSGWQTNDsWQgcDF
 QgWQxkCfYkfhGyMTWQWQYDneYDcALrneheadUWdKOHmaKHZqtXTvWQWQWQWQWQDF
 QgWQjzRtFuZyDWxUqaWQJdajVUWQJdRLopWQgaTpopWQNBopJdWQqWWQWQQgDFDF
@@ -225,4 +225,3 @@ DFDFDFRPQgQgbLRPDFDFDFDFDFDFDFDFDFDFQgQgDFDFDFDFRPRPRPQgQgQgDFDF
 DFDFsrDFQgQgQgDFDFsrDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFQgQgQgDFDF
 DFDFDFDFDFDFDFsrDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFDFsrDFDFDFDFDFDFDF
 "}
-

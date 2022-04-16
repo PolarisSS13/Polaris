@@ -1161,6 +1161,7 @@
 #include "code\game\objects\items\weapons\tools\wirecutters.dm"
 #include "code\game\objects\items\weapons\tools\wrench.dm"
 #include "code\game\objects\random\_random.dm"
+#include "code\game\objects\random\anomalous.dm"
 #include "code\game\objects\random\guns_and_ammo.dm"
 #include "code\game\objects\random\maintenance.dm"
 #include "code\game\objects\random\mapping.dm"

@@ -10,6 +10,7 @@
 "j" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
 "k" = (/mob/living/simple_mob/animal/space/bats,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
 "l" = (/mob/living/simple_mob/animal/space/bats/cult,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
+"T" = (/obj/random/outcrop,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/swordcave)
 
 (1,1,1) = {"
 aaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaa
@@ -18,7 +19,7 @@ aaaabbbbbbcccccccccccccccccccccbbbbbbaaaa
 aaabbbbbbcccccccccccccccccccccccdbbbbbaaa
 aabbbbccccccceeeeeeeeeeeeeccccccccbbbbbaa
 aabbbccccccceeeeeeeeeeeeeeeccccccccbbbbaa
-aabbbcdcccceeeffffffffffffeeeccccccbbbbaa
+aabbbcTcccceeeffffffffffffeeecccTccbbbbaa
 aabbbccccceefeeeeeeefeeeeeeeeecccccbbbbaa
 aabbbccccceefeeccceeeeeeeefffeeccccbbbaaa
 aabbbcccceeffeecccccecccceefffeecccbbbaaa
@@ -28,23 +29,23 @@ abbbccccceefffeeeccccccceeefeeccccccbbaaa
 abbbcccccceefffeeeccccceeeffeeccccccbbbaa
 abbbcdccccceefffeeeeeeeeffffeeccccccbbbaa
 abbcccclcccceeffffeeeeefffffeeccccccbbbaa
-abbcccccccccceeffffffffffffeeccccdccbbbaa
+abbcccccccccceeffffffffffffeeccccTccbbbaa
 abbccccccccccceeffeeeeeefffeecccccccbbbaa
 abbbccccdcccccceefeeeeeeeeeeckccccccbbbaa
 abbbcccccccccccceeecccdceeecccccccccbbaaa
 abbbcccccccccccccecccccccceccccdclccbbaaa
 abbbcccccccccclcccccccccccccccccccccbbaaa
 abbbbcccccclccccccccccccccclccccccccbbaaa
-abbbbbcccccccccccccccclccccccccclcccbbaaa
+abbbbbTccccccccccccccclccccccccclcccbbaaa
 aabbbbbccccccccccccccccccccccccccccbbbaaa
 aabbbbbccccccccccccdccccccccccccccbbbbaaa
 aabbbbbcccccdccccccccccccccccccccbbbbbaaa
-aabbbbbccccccccccclccccccccdcccccbbbbaaaa
+aabbbbbccccccccccclccccccccTcccccbbbbaaaa
 aabbbbbbbccccccccccccccccccccccccbbbbaaaa
 aaabbbbbbbcccccccccccccccdccccccbbbbaaaaa
 aaaabbbbbbcclcccccdcccccccccccccbbbbaaaaa
-aaaaabbbbbcccccccccccccccccccccbbbbbaaaaa
-aaaaabbbbbccccccccccccccccccccbbbbbaaaaaa
+aaaaabbbbbccccccccccccccccccccTbbbbbaaaaa
+aaaaabbbbbcccccccccccccTccccccbbbbbaaaaaa
 aaaaaabbbbbcccdccccccccccccccbbbbbaaaaaaa
 aaaaaaabbbbbcccccccclccccclcbbbbbbaaaaaaa
 aaaaaaabbbbbbcccccccccccccccbbbbbaaaaaaaa

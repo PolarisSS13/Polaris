@@ -2,39 +2,46 @@
 "b" = (/turf/template_noop,/area/submap/cave/IceCave1B)
 "c" = (/turf/simulated/floor/outdoors/ice{outdoors = 0},/area/submap/cave/IceCave1B)
 "d" = (/obj/machinery/crystal/ice,/turf/simulated/floor/outdoors/ice{outdoors = 0},/area/submap/cave/IceCave1B)
-"e" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"e" = (/obj/effect/decal/remains/mummy2,/obj/item/clothing/suit/armor/pcarrier/blue/sol,/obj/item/clothing/head/helmet/solgov,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
 "f" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
 "g" = (/obj/machinery/crystal/ice,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
-"h" = (/obj/random/firstaid,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
-"i" = (/obj/random/ammo,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"h" = (/mob/living/simple_mob/animal/passive/mouse/rat,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"i" = (/obj/random/gun/random/anomalous,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"A" = (/obj/effect/decal/remains/human,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"C" = (/obj/random/medical/lite/anom,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"D" = (/obj/effect/decal/remains/mummy2,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"J" = (/obj/item/clothing/head/helmet/solgov,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"O" = (/obj/effect/decal/remains/mouse,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"Q" = (/obj/random/contraband/anom,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
+"X" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1B)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaa
-aaccccccccccccccddaabbbbbbbbbbaaaefggaaa
-aaccdcccccccccccddaaabbbbbbbbaaagfffghaa
-aacccccccccdccccaaaaaaaaaaaaaaaafffffiaa
-aaccccccccccccccaaaaaaaaaaaaaaaffffffeaa
-aaccdcccccccccccaaaaaacccccccggffffffaaa
-aacccccccccccccdaaaaaacccccccffffgefgaaa
-aaccccccccccccccffffffdccccccgggaaaaaaaa
-aacccdccccccccccffggffcccccccgggaaaaaaab
-aacccccccccccccdaaaaaaddaaaaaaaaaaabbbbb
-aacccccdccccccccaaaaaaddageffffaaaabbbbb
+bbaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaa
+baaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaa
+baccccccccccccccddaabbbbbbbbbbaaaefggaaa
+baccdcccccccccccddaaabbbbbbbbaaagfffgfaa
+bacccccccccdccccaaaaaaaaaaaaaaaafffffiaa
+baccccccccccccccaaaaaaaaaaaaaaafffhffAaa
+baccdcccccccccccaaaaaacccccccggQfffffaaa
+bacccccccccccccdaaaaaacccccccfXfJgDCgaaa
+baccccccccccccccffffffdccccccgggaaaaaaab
+bacccdccccccccccffggffcccccccgggaaaaaabb
+bacccccccccccccdaaaaaaddaaaaaaaaaaabbbbb
+aacccccdccccccccaaaaaaddagOffffaaaabbbbb
 aacccccccccdccccaaggffgdagfffffaabbbbbbb
 aacdccccccccccccaafffffgaaafafgaabbbbbbb
 aaaaaadddddddddfffffgfffffffaffaabbbbbbb
 aaaaaagggfffgddddggggggffgffaffaabbbbbbb
-aagggfffffffffccaaaaaaaafffgagfaabbbbbbb
-aagfffffffffffccaaaaaaaaggggaffaabbbbbbb
-aaaggfaaaaaaaaccaaaaaaagfffffffaabbbbbbb
-aaaaffaaaaaaaaccaaaaaaaffffffaaaabbbbbbb
-aaaaffgaaaaaaaccccccddafffffgaaaabbbbbbb
-aaaaaffgaaaaaaccccccddaagfaaaaabbbbbbbbb
-aaaagfffaaaaaaaaddccffgfffaaaaabbbbbbbbb
-aaaggafffaaaaaaaddccffffffaabbbbbbbbbbbb
-faaaaafffgaaaaaaaaaaaafffgaabbbbbbbbbbbb
-ffaaaagffaaaaaaaaaaaaaggggaabbbbbbbbbbbb
-fffffffffaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb
-ffffffffaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb
+bagggfffffffffccaaaaaaaafffgagfaabbbbbbb
+bagfffffffffffccaaaaaaaaggggaffaabbbbbbb
+baaggfaaaaaaaaccaaaaaaagfffffffaabbbbbbb
+baaaffaaaaaaaaccaaaaaaaffffffaaaabbbbbbb
+baaaffgaaaaaaaccccccddafffffgaaabbbbbbbb
+baaaaffgaaaaaaccccccddaagfaaaaabbbbbbbbb
+baaagfffaaaaaaaaddccffgfffaaaaabbbbbbbbb
+baaggafffaaabaaaddccffffffaabbbbbbbbbbbb
+faaaaafffgaabbaaaaaaaafffgaabbbbbbbbbbbb
+ffaaaagffaaabbbbbbbbaaggggaabbbbbbbbbbbb
+fffffffffaaabbbbbbbbaaaaaaaabbbbbbbbbbbb
+ffffffffaabbbbbbbbbbbbbababbbbbbbbbbbbbb
 "}

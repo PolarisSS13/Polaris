@@ -10,7 +10,7 @@
 "k" = (/obj/effect/vfx/steam,/obj/effect/map_effect/interval/effect_emitter/steam,/turf/simulated/floor/water,/area/submap/hotspring)
 "m" = (/obj/effect/vfx/steam,/turf/simulated/floor/water/shoreline/corner,/area/submap/hotspring)
 "n" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood/sif,/area/submap/hotspring)
-"o" = (/obj/structure/table/woodentable,/obj/item/weapon/material/harpoon,/obj/item/pizzabox/vegetable,/turf/simulated/floor/wood/sif,/area/submap/hotspring)
+"o" = (/obj/structure/table/woodentable,/obj/item/weapon/material/harpoon,/obj/item/pizzabox/vegetable,/obj/random/maintenance/anom,/turf/simulated/floor/wood/sif,/area/submap/hotspring)
 "p" = (/obj/effect/vfx/steam,/turf/simulated/floor/water/shoreline{dir = 1},/area/submap/hotspring)
 "r" = (/obj/item/weapon/material/shard,/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/wood/sif,/area/submap/hotspring)
 "s" = (/obj/random/junk,/turf/simulated/floor/outdoors/dirt,/area/submap/hotspring)
