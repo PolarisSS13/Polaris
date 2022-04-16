@@ -45,7 +45,7 @@
 /datum/crafting_recipe/proc/on_craft_completion(mob/user, atom/result)
 	return
 
-// Computes the total reagents volume
+// Computes the total reagents volume 
 /datum/crafting_recipe/proc/get_parts_reagents_volume()
 	. = 0
 	for(var/list/L in parts)
@@ -94,39 +94,6 @@
 	S.set_material(M.material.name)
 	qdel(M)
 
-/datum/crafting_recipe/shortbow
-	name = "Shortbow"
-	result = /obj/item/weapon/gun/launcher/crossbow/bow
-	reqs = list(list(/obj/item/stack/material/wood = 10),
-		list(/obj/item/stack/material/cloth = 5))
-	time = 120
-	category = CAT_WEAPONRY
-	subcategory = CAT_WEAPON
-
-/datum/crafting_recipe/arrow_sandstone
-	name = "Wood arrow (sandstone tip)"
-	result = /obj/item/weapon/arrow/wood
-	reqs = list(list(/obj/item/stack/material/wood = 2),
-		list(/obj/item/stack/material/sandstone = 2))
-	time = 20
-	category = CAT_WEAPONRY
-	subcategory = CAT_AMMO
-
-/datum/crafting_recipe/arrow_marble
-	name = "Wood arrow (marble tip)"
-	result = /obj/item/weapon/arrow/wood
-	reqs = list(list(/obj/item/stack/material/wood = 2),
-		list(/obj/item/stack/material/marble = 2))
-	time = 20
-	category = CAT_WEAPONRY
-	subcategory = CAT_AMMO
-
-/datum/crafting_recipe/quiver
-	name = "Arrow quiver"
-	result = /obj/item/weapon/storage/bag/quiver
-	reqs = list(list(/obj/item/stack/material/leather = 8))
-	time = 60
-	category = CAT_STORAGE
 
 /datum/crafting_recipe/material_armor
 	name = "Material Armor Plate"
