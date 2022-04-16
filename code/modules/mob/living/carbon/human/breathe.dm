@@ -51,10 +51,6 @@
 			internals.icon_state = "internal0"
 		return null
 
-
-	if ((!rig_supply && !contents.Find(internal)) || !((wear_mask && (wear_mask.item_flags & AIRTIGHT)) || (head && (head.item_flags & AIRTIGHT))))
-		internal = null
-
 	//Because rigs store their tanks out of reach of contents.Find(), a check has to be made to make
 	//sure the rig is still worn, still online, and that its air supply still exists.
 	var/obj/item/weapon/rig/Rig = get_rig()
@@ -101,7 +97,7 @@
 			break
 
 // TODO SURGERY_REFACTOR: Pass over this with lungs
-/mob/living/carbon/human/handle_breath(datum/gas_mixture/breath)
+/mob/living/carbon/human/proc/handle_breath(datum/gas_mixture/breath)
 	if(suiciding)
 		failed_last_breath = 1
 		adjustOxyLoss(2) // If you are suiciding, you should die a little bit faster

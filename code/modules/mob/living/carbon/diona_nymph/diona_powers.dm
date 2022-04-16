@@ -8,7 +8,7 @@
 	if(stat == DEAD || paralysis || weakened || stunned || restrained())
 		return
 
-	if(ishuman(src.loc)
+	if(ishuman(src.loc))
 		src.verbs -= /mob/living/carbon/diona_nymph/proc/merge
 		return
 
@@ -17,9 +17,8 @@
 		if(!(Adjacent(H)) || !(H.client))
 			continue
 
-		var/mob/living/carbon/human/D = C
 		if(H?.species?.name == SPECIES_DIONA)
-			choices += C
+			choices += H
 
 	var/mob/living/M = input(src,"Who do you wish to merge with?") in null|choices
 
