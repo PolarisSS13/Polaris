@@ -3750,7 +3750,7 @@
 
 	reagents.add_reagent("oxycodone", 1)
 	reagents.add_reagent("sifsap", 5)
-	reagents.add_reagent("space_drugs", 5)
+	reagents.add_reagent("bliss", 5)
 
 /obj/item/weapon/reagent_containers/food/snacks/bellefritter
 	name = "frostbelle fritters"
@@ -5897,7 +5897,7 @@
 /obj/item/weapon/reagent_containers/food/snacks/sliceable/cosmicbrownies/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2)
-	reagents.add_reagent("space_drugs", 2)
+	reagents.add_reagent("ambrosia_extract", 2)
 	reagents.add_reagent("bicaridine", 1)
 	reagents.add_reagent("kelotane", 1)
 	reagents.add_reagent("toxin", 1)
