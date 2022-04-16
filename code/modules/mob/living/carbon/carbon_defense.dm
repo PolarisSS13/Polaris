@@ -45,26 +45,26 @@
 			if(G.assailant == user)
 				if(G.state >= GRAB_AGGRESSIVE)
 					if(hit_zone == BP_TORSO && shank_attack(W, G, user))
-						return 1
+						return TRUE
 				if(G.state >= GRAB_NECK)
 					if(hit_zone == BP_HEAD && attack_throat(W, G, user, hit_zone))
-						return 1
-	return 0
+						return TRUE
+	return FALSE
 
 
 // Knifing
 /mob/living/carbon/proc/attack_throat(obj/item/W, obj/item/grab/G, mob/user)
 
 	if(!W.edge || !W.force || W.damtype != BRUTE)
-		return 0 //unsuitable weapon
+		return FALSE //unsuitable weapon
 
 	user.visible_message("<span class='danger'>\The [user] begins to slit [src]'s throat with \the [W]!</span>")
 
 	user.next_move = world.time + 20 //also should prevent user from triggering this repeatedly
 	if(!do_after(user, 20))
-		return 0
+		return FALSE
 	if(!(G && G.assailant == user && G.affecting == src)) //check that we still have a grab
-		return 0
+		return FALSE
 
 	var/damage_mod = 1
 	//presumably, if they are wearing a helmet that stops pressure effects, then it probably covers the throat as well
@@ -99,12 +99,12 @@
 
 	add_attack_logs(user,src,"Knifed (throat slit)")
 
-	return 1
+	return TRUE
 
 /mob/living/carbon/proc/shank_attack(obj/item/W, obj/item/grab/G, mob/user, hit_zone)
 
 	if(!W.sharp || !W.force || W.damtype != BRUTE)
-		return 0 //unsuitable weapon
+		return FALSE //unsuitable weapon
 
 	user.visible_message("<span class='danger'>\The [user] plunges \the [W] into \the [src]!</span>")
 
@@ -116,7 +116,7 @@
 
 	add_attack_logs(user,src,"Knifed (shanked)")
 
-	return 1
+	return TRUE
 
 /mob/living/carbon/proc/shank_armor_helper(obj/item/W, obj/item/grab/G, mob/user)
 	var/damage = W.force

@@ -28,7 +28,7 @@
 		M.loc = src.loc
 		for(var/mob/N in viewers(src, null))
 			if(N.client)
-				N.show_message(span(SPAN_DANGER, "[M] bursts out of [src]!")), 2)
+				N.show_message(span(SPAN_DANGER, "[M] bursts out of [src]!"), 2)
 	..()
 
 /mob/living/carbon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 1.0, var/def_zone = null, var/stun = 1)

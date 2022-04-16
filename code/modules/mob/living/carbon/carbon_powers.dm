@@ -26,11 +26,7 @@
 	set desc = "Punish your host with agony."
 
 	var/mob/living/simple_mob/animal/borer/B = has_brain_worms()
-
-	if(!B)
-		return
-
-	if(B.host_brain.ckey)
+	if(B?.host_brain.ckey)
 		to_chat(src, "<span class='danger'>You send a punishing spike of psychic agony lancing into your host's brain.</span>")
 		if (!can_feel_pain())
 			to_chat(B.host_brain, "<span class='warning'>You feel a strange sensation as a foreign influence prods your mind.</span>")
