@@ -62,6 +62,10 @@
 	max_ammo = 6
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/s357/bb
+	name = "speedloader (.357 BB)"
+	ammo_type = /obj/item/ammo_casing/a357/bb
+
 ///////// .38 /////////
 
 /obj/item/ammo_magazine/s38
@@ -82,6 +86,11 @@
 /obj/item/ammo_magazine/s38/emp
 	name = "speedloader (.38 haywire)"
 	ammo_type = /obj/item/ammo_casing/a38/emp
+
+/obj/item/ammo_magazine/s38/bb
+	name = "speedloader (.38 BB)"
+	icon_state = "38"
+	ammo_type = /obj/item/ammo_casing/a38/bb
 
 ///////// .45 /////////
 
@@ -122,6 +131,10 @@
 	name = "ammunition box (.45 haywire)"
 	ammo_type = /obj/item/ammo_casing/a45/emp
 
+/obj/item/ammo_magazine/m45/bb
+	name = "magazine (.45 BB)"
+	ammo_type = /obj/item/ammo_casing/a45/bb
+
 /obj/item/ammo_magazine/m45uzi
 	name = "stick magazine (.45)"
 	icon_state = "uzi45"
@@ -131,6 +144,10 @@
 	caliber = ".45"
 	max_ammo = 16
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m45uzi/bb
+	name = "stick magazine (.45 BB)"
+	ammo_type = /obj/item/ammo_casing/a45/bb
 
 /obj/item/ammo_magazine/m45uzi/empty
 	initial_ammo = 0
@@ -151,6 +168,10 @@
 /obj/item/ammo_magazine/m45tommy/empty
 	initial_ammo = 0
 
+/obj/item/ammo_magazine/m45tommy/bb
+	name = "Tommy Gun magazine (.45 BB)"
+	ammo_type = /obj/item/ammo_casing/a45/bb
+
 /obj/item/ammo_magazine/m45tommydrum
 	name = "Tommy Gun drum magazine (.45)"
 	icon_state = "tommy-drum"
@@ -164,6 +185,10 @@
 /obj/item/ammo_magazine/m45tommydrum/ap
 	name = "Tommy Gun drum magazine (.45 AP)"
 	ammo_type = /obj/item/ammo_casing/a45/ap
+
+/obj/item/ammo_magazine/m45tommydrum/bb
+	name = "Tommy Gun drum magazine (.45 BB)"
+	ammo_type = /obj/item/ammo_casing/a45/bb
 
 /obj/item/ammo_magazine/m45tommydrum/empty
 	initial_ammo = 0
@@ -189,6 +214,10 @@
 /obj/item/ammo_magazine/clip/c45/flash
 	name = "ammo clip (.45 flash)"
 	ammo_type = /obj/item/ammo_casing/a45/flash
+
+/obj/item/ammo_magazine/clip/c45/bb
+	name = "ammo clip (.45 BB)"
+	ammo_type = /obj/item/ammo_casing/a45/bb
 
 /obj/item/ammo_magazine/s45
 	name = "speedloader (.45)"
@@ -218,6 +247,10 @@
 	name = "speedloader (.45 AP)"
 	ammo_type = /obj/item/ammo_casing/a45/ap
 
+/obj/item/ammo_magazine/s45/bb
+	name = "speedloader (.45 BB)"
+	ammo_type = /obj/item/ammo_casing/a45/bb
+
 ///////// 5mm Caseless /////////
 
 /obj/item/ammo_magazine/m5mmcaseless
@@ -232,6 +265,11 @@
 /obj/item/ammo_magazine/m5mmcaseless/stun
 	icon_state = "caseless-mag-alt"
 	ammo_type = /obj/item/ammo_casing/a5mmcaseless/stun
+
+/obj/item/ammo_magazine/m5mmcaseless/bb
+	name = "prototype rifle magazine (5mm caseless BB)"
+	icon_state = "caseless-mag"
+	ammo_type = /obj/item/ammo_casing/a5mmcaseless/bb
 
 ///////// 9mm /////////
 
@@ -270,6 +308,10 @@
 	name = "magazine (9mm practice)"
 	ammo_type = /obj/item/ammo_casing/a9mm/practice
 
+/obj/item/ammo_magazine/m9mm/bb
+	name = "magazine (9mm BB)"
+	ammo_type = /obj/item/ammo_casing/a9mm/bb
+
 // Compact
 /obj/item/ammo_magazine/m9mm/compact
 	name = "compact magazine (9mm)"
@@ -296,6 +338,10 @@
 /obj/item/ammo_magazine/m9mm/compact/practice
 	name = "compact magazine (9mm practice)"
 	ammo_type = /obj/item/ammo_casing/a9mm/practice
+
+/obj/item/ammo_magazine/m9mm/compact/bb
+	name = "compact magazine (9mm BB)"
+	ammo_type = /obj/item/ammo_casing/a9mm/bb
 
 // SMG
 /obj/item/ammo_magazine/m9mmt
@@ -328,6 +374,10 @@
 	ammo_type = /obj/item/ammo_casing/a9mm/ap
 	matter = list(MAT_STEEL = 1000, MAT_PLASTEEL = 2000)
 
+/obj/item/ammo_magazine/m9mmt/bb
+	name = "top mounted magazine (9mm BB)"
+	ammo_type = /obj/item/ammo_casing/a9mm/bb
+
 /obj/item/ammo_magazine/m9mmp90
 	name = "large capacity top mounted magazine (9mm armor-piercing)"
 	icon_state = "p90"
@@ -337,6 +387,10 @@
 	caliber = "9mm"
 	max_ammo = 50
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m9mmp90/bb
+	name = "large capacity top mounted magazine (9mm BB)"
+	ammo_type = /obj/item/ammo_casing/a9mm/bb
 
 /obj/item/ammo_magazine/m9mmp90/empty
 	initial_ammo = 0
@@ -374,6 +428,10 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_ILLEGAL = 1)
 	multiple_sprites = 1
 
+/obj/item/ammo_magazine/m9mmAdvanced/bb
+	name = "top mounted magazine (9mm BB)"
+	ammo_type = /obj/item/ammo_casing/a9mm/bb
+
 /obj/item/ammo_magazine/m9mmAdvanced/ap
 	desc = "A high capacity double stack magazine made specially for the Advanced SMG. Filled with 21 9mm armor piercing bullets."
 	icon_state = "S9mm"
@@ -395,6 +453,10 @@
 	ammo_type = /obj/item/ammo_casing/a10mm
 	max_ammo = 20
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m10mm/bb
+	name = "top mounted magazine (10mm BB)"
+	ammo_type = /obj/item/ammo_casing/a10mm/bb
 
 /obj/item/ammo_magazine/m10mm/empty
 	initial_ammo = 0
@@ -426,40 +488,48 @@
 	max_ammo = 20
 	multiple_sprites = 1
 
-/obj/item/ammo_magazine/m545/ext
-	name = "extended magazine (5.45mm)"
-	matter = list(MAT_STEEL = 2700)
-	max_ammo = 30
-
-/obj/item/ammo_magazine/m545/empty
-	initial_ammo = 0
-
-/obj/item/ammo_magazine/m545/ext/empty
-	initial_ammo = 0
-
 /obj/item/ammo_magazine/m545/practice
 	name = "magazine (5.45mm practice)"
 	ammo_type = /obj/item/ammo_casing/a545/practice
-
-/obj/item/ammo_magazine/m545/practice/ext
-	name = "extended magazine (5.45mm practice)"
-	max_ammo = 30
 
 /obj/item/ammo_magazine/m545/ap
 	name = "magazine (5.45mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a545/ap
 
-/obj/item/ammo_magazine/m545/ap/ext
-	name = "extended magazine (5.45mm armor-piercing)"
-	max_ammo = 30
+/obj/item/ammo_magazine/m545/bb
+	name = "magazine (5.45mm BB)"
+	ammo_type = /obj/item/ammo_casing/a545/bb
 
 /obj/item/ammo_magazine/m545/hunter
 	name = "magazine (5.45mm hunting)"
 	ammo_type = /obj/item/ammo_casing/a545/hunter
 
-/obj/item/ammo_magazine/m545/hunter/ext
-	name = "extended magazine (5.45mm hunting)"
+/obj/item/ammo_magazine/m545/empty
+	initial_ammo = 0
+
+/obj/item/ammo_magazine/m545/ext
+	name = "extended magazine (5.45mm)"
+	matter = list(MAT_STEEL = 2700)
 	max_ammo = 30
+
+/obj/item/ammo_magazine/m545/ext/practice
+	name = "extended magazine (5.45mm practice)"
+	ammo_type = /obj/item/ammo_casing/a545/practice
+
+/obj/item/ammo_magazine/m545/ext/ap
+	name = "extended magazine (5.45mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a545/ap
+
+/obj/item/ammo_magazine/m545/ext/bb
+	name = "extended magazine (5.45mm BB)"
+	ammo_type = /obj/item/ammo_casing/a545/bb
+
+/obj/item/ammo_magazine/m545/ext/hunter
+	name = "extended magazine (5.45mm hunting)"
+	ammo_type = /obj/item/ammo_casing/a545/hunter
+
+/obj/item/ammo_magazine/m545/ext/empty
+	initial_ammo = 0
 
 /obj/item/ammo_magazine/m545/small
 	name = "reduced magazine (5.45mm)"
@@ -477,6 +547,10 @@
 /obj/item/ammo_magazine/m545/small/ap
 	name = "magazine (5.45mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a545/ap
+
+/obj/item/ammo_magazine/m545/small/bb
+	name = "magazine (5.45mm BB)"
+	ammo_type = /obj/item/ammo_casing/a545/bb
 
 /obj/item/ammo_magazine/m545/small/hunter
 	name = "magazine (5.45mm hunting)"
@@ -519,6 +593,10 @@
 	name = "magazine box (5.45mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a545/ap
 
+/obj/item/ammo_magazine/m545saw/bb
+	name = "magazine box (5.45mm BB)"
+	ammo_type = /obj/item/ammo_casing/a545/bb
+
 /obj/item/ammo_magazine/m545saw/hunter
 	name = "magazine box (5.45mm hunting)"
 	ammo_type = /obj/item/ammo_casing/a545/hunter
@@ -538,6 +616,10 @@
 	ammo_type = /obj/item/ammo_casing/a44
 	max_ammo = 7
 	multiple_sprites = 1
+
+/obj/item/ammo_magazine/m44/empty
+	name = "magazine (.44 BB)"
+	ammo_type = /obj/item/ammo_casing/a44/bb
 
 /obj/item/ammo_magazine/m44/empty
 	initial_ammo = 0
@@ -569,6 +651,10 @@
 	icon_state = "R44"
 	ammo_type = /obj/item/ammo_casing/a44/rubber
 
+/obj/item/ammo_magazine/s44/bb
+	name = "speedloader (.44 BB)"
+	ammo_type = /obj/item/ammo_casing/a44/bb
+
 /obj/item/ammo_magazine/s44/rifle
 	name = "speedloader (.44 rifle)"
 	icon_state = "RI44"
@@ -590,6 +676,10 @@
 	name = "magazine (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
 
+/obj/item/ammo_magazine/m762/bb
+	name = "magazine (7.62mm BB)"
+	ammo_type = /obj/item/ammo_casing/a762/bb
+
 /obj/item/ammo_magazine/m762/empty
 	initial_ammo = 0
 
@@ -607,6 +697,10 @@
 	name = "magazine (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
 
+/obj/item/ammo_magazine/m762m/bb
+	name = "magazine (7.62mm BB)"
+	ammo_type = /obj/item/ammo_casing/a762/bb
+
 /obj/item/ammo_magazine/m762m/empty
 	initial_ammo = 0
 
@@ -623,6 +717,10 @@
 /obj/item/ammo_magazine/m762garand/ap
 	name = "garand clip (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
+
+/obj/item/ammo_magazine/m762garand/bb
+	name = "garand clip (7.62mm BB)"
+	ammo_type = /obj/item/ammo_casing/a762/bb
 
 /obj/item/ammo_magazine/m762/empty
 	initial_ammo = 0
@@ -648,6 +746,10 @@
 	name = "rifle clip (7.62mm hunting)"
 	ammo_type = /obj/item/ammo_casing/a762/hunter
 
+/obj/item/ammo_magazine/clip/c762/ap
+	name = "rifle clip (7.62mm armor-piercing)"
+	ammo_type = /obj/item/ammo_casing/a762/ap
+
 /obj/item/ammo_magazine/m762svd
 	name = "\improper SVD magazine (7.62mm)"
 	icon_state = "SVD"
@@ -661,6 +763,10 @@
 /obj/item/ammo_magazine/m762svd/ap
 	name = "\improper SVD magazine (7.62mm armor-piercing)"
 	ammo_type = /obj/item/ammo_casing/a762/ap
+
+/obj/item/ammo_magazine/m762svd/bb
+	name = "\improper SVD magazine (7.62mm BB)"
+	ammo_type = /obj/item/ammo_casing/a762/bb
 
 /obj/item/ammo_magazine/m762svd/empty
 	initial_ammo = 0
@@ -689,6 +795,10 @@
 	name = "magazine (12 gauge flash)"
 	ammo_type = /obj/item/ammo_casing/a12g/flash
 
+/obj/item/ammo_magazine/m12gdrum/bb
+	name = "magazine (12 gauge BB)"
+	ammo_type = /obj/item/ammo_casing/a12g/bb
+
 /obj/item/ammo_magazine/m12gdrum/empty
 	initial_ammo = 0
 
@@ -715,6 +825,13 @@
 	desc = "A color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with beanbags."
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
 	matter = list(MAT_STEEL = 710) //beanbags x2 + 350 metal
+
+/obj/item/ammo_magazine/clip/c12g/bb
+	name = "ammo clip (12g BB)"
+	icon_state = "12gclipshell"
+	desc = "A replica color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with airsoft BBs."
+	ammo_type = /obj/item/ammo_casing/a12g/pellet
+	matter = list(MAT_PLASTIC = 1070) // buckshot and slugs cost the same
 
 ///////// .75 Gyrojet /////////
 
