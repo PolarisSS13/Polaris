@@ -26,7 +26,7 @@
 
 /datum/persistent/storage/smartfridge/sheet_storage/lossy
 	name = "sheet storage lossy"
-	max_storage = 250
+	max_storage = 150
 	stacks_go_missing = TRUE
 
 /datum/persistent/storage/smartfridge/sheet_storage/generate_items(var/list/L)
@@ -62,8 +62,8 @@
 
 /datum/persistent/storage/smartfridge/produce
 	name = "fruit storage"
-	max_storage = 50
-	store_per_type = FALSE
+	max_storage = 10
+	store_per_type = TRUE
 	target_type = /obj/machinery/smartfridge/produce
 
 /datum/persistent/storage/smartfridge/produce/lossy
