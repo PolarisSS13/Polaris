@@ -131,8 +131,9 @@
 
 	user.setClickCooldown(user.get_attack_speed(W))
 
-	if(!construction_stage && try_graffiti(user, W))
-		return
+	if(!construction_stage && user.a_intent == I_HELP && user.is_preference_enabled(/datum/client_preference/engrave_graffiti))
+		if(try_graffiti(user,W))
+			return
 
 	if (!user.IsAdvancedToolUser())
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
@@ -405,5 +406,3 @@
 
 	else if(!istype(W,/obj/item/weapon/rcd) && !istype(W, /obj/item/weapon/reagent_containers))
 		return attack_hand(user)
-
-
