@@ -961,7 +961,7 @@
 		return
 	return md5(dna.uni_identity)
 
-/mob/living/carbon/human/clean_blood(var/washshoes)
+/mob/living/carbon/human/clean_blood()
 	. = ..()
 	var/washshoes = TRUE
 	var/washmask = TRUE
@@ -977,8 +977,8 @@
 		washears = !(head.flags_inv & HIDEEARS)
 
 	if(wear_mask)
-		washears = wash_ears && !(wear_mask.flags_inv & HIDEEARS)
-		washglasses = wash_glasses && !(wear_mask.flags_inv & HIDEEYES)
+		washears = washears && !(wear_mask.flags_inv & HIDEEARS)
+		washglasses = washglasses && !(wear_mask.flags_inv & HIDEEYES)
 
 	if(head?.clean_blood())
 		update_inv_head()
@@ -1005,7 +1005,7 @@
 			feet_blood_DNA = null
 			feet_blood_color = null
 
-	if(washmask && mask?.clean_blood())
+	if(washmask && wear_mask?.clean_blood())
 		update_inv_wear_mask(0)
 
 	if(washglasses && glasses?.clean_blood())
