@@ -18,8 +18,6 @@
 	pathtext = input("Select the path of the object you wish to create.", "Path", "/obj") as null|anything in list("/obj",
 	"/obj/structure",
 	"/obj/item",
-	"/obj/item/device",
-	"/obj/item/weapon",
 	"/obj/item/gun",
 	"/obj/item/reagent_containers",
 	"/obj/item/reagent_containers/food",

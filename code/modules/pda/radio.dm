@@ -97,14 +97,6 @@
 /obj/item/radio/integrated/signal
 	frequency = 1457
 	var/code = 30.0
-	last_transmission
-	datum/radio_frequency/radio_connection
-
-/obj/item/radio/integrated/signal/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
-	radio_connection = null
-	return ..()
 
 /obj/item/radio/integrated/signal/Initialize()
 	. = ..()
@@ -112,6 +104,12 @@
 		if(src.frequency < PUBLIC_LOW_FREQ || src.frequency > PUBLIC_HIGH_FREQ)
 			src.frequency = sanitize_frequency(src.frequency)
 		set_frequency(frequency)
+
+/obj/item/radio/integrated/signal/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	radio_connection = null
+	return ..()
 
 /obj/item/radio/integrated/signal/proc/send_signal(message="ACTIVATE")
 	if(last_transmission && world.time < (last_transmission + 5))
