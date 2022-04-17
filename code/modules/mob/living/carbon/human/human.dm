@@ -1360,8 +1360,15 @@
 			break
 	if((species.flags & NO_SLIP && !footcoverage_check) || (shoes && (shoes.item_flags & NOSLIP))) //Footwear negates a species' natural traction.
 		return FALSE
-	if(..(slipped_on,stun_duration))
-		return TRUE
+
+	if(buckled)
+		return FALSE
+	stop_pulling()
+	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
+	playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
+	Weaken(FLOOR(stun_duration/2, 1))
+	slide_for(slip_dist)
+	return TRUE
 
 /mob/living/carbon/human/proc/relocate()
 	set category = "Object"

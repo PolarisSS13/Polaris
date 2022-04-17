@@ -1,5 +1,4 @@
 /mob/living/carbon
-	gender = MALE
 	var/datum/species/species //Contains icon generation and language information, set during New().
 
 
@@ -8,7 +7,6 @@
 	var/obj/item/handcuffed = null // Whether or not the mob is handcuffed
 	var/obj/item/legcuffed = null  // Same as handcuffs but for legs. Bear traps use this.
 
-	var/pose = null // Active emote/pose
 
 	var/does_not_breathe = FALSE // Used for specific mobs that can't take advantage of the species flags (changelings)
 

@@ -378,3 +378,13 @@
 		E.eye_icon = states[choice]
 		to_chat(src,"<span class='warning'>You set your monitor to display [choice]!</span>")
 		update_icons_body()
+
+/mob/living/carbon/human/verb/mob_sleep()
+	set name = "Sleep"
+	set category = "IC"
+
+	if(usr.sleeping)
+		to_chat(usr, "<font color='red'>You are already sleeping</font>")
+		return
+	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
+		usr.AdjustSleeping(20)

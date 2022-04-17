@@ -269,3 +269,9 @@
 	. = ..()
 	if(iscarbon(A) && prob(10))
 		spread_disease_to(A, "Contact")
+
+/mob/living/carbon/human/proc/slide_for(var/slip_dist)
+	set waitfor = FALSE
+	for(var/i = 1 to slip_dist)
+		step(src, dir)
+		sleep(1)

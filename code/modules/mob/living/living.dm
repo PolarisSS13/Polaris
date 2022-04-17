@@ -873,9 +873,7 @@
 	return
 
 /mob/living/proc/can_feel_pain(var/check_organ)
-	if(isSynthetic())
-		return FALSE
-	return TRUE
+	return isSynthetic()
 
 // Gets the correct icon_state for being on fire. See OnFire.dmi for the icons.
 /mob/living/proc/get_fire_icon_state()
@@ -1163,3 +1161,15 @@
 	set category = "IC"
 
 	pose =  sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text)
+
+// Clears blood overlays
+/mob/living/clean_blood()
+	. = ..()
+	src.r_hand?.clean_blood()
+	src.l_hand?.clean_blood()
+	if(src.back?.clean_blood())
+		src.update_inv_back(0)
+
+	// If the mob is not human, it cleans the mask without asking for bitflags
+	if(!ishuman(src) && src.wear_mask?.clean_blood())
+		src.update_inv_wear_mask(0)
