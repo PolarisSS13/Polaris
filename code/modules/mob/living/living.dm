@@ -1156,3 +1156,10 @@
 	var/datum/map_z_level/zlevel = using_map.zlevels["[T.z]"]
 	if(istype(zlevel))
 		. |= zlevel.event_regions
+
+/mob/living/verb/pose()
+	set name = "Set Pose"
+	set desc = "Sets a description which will be shown when someone examines you."
+	set category = "IC"
+
+	pose =  sanitize(input(usr, "This is [src]. It is...", "Pose", null)  as text)

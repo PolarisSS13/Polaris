@@ -98,7 +98,7 @@ var/list/_human_default_emotes = list(
 	if(length(species?.default_emotes))
 		. |= species.default_emotes
 
-/mob/living/carbon/human/verb/pose()
+/mob/living/carbon/human/pose()
 	set name = "Set Pose"
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
