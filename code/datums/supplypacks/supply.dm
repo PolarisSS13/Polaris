@@ -23,7 +23,7 @@
 
 /datum/supply_pack/supply/toner
 	name = "Toner cartridges"
-	contains = list(/obj/item/device/toner = 6)
+	contains = list(/obj/item/toner = 6)
 	cost = 10
 	containertype = /obj/structure/closet/crate/ummarcar
 	containername = "Toner cartridges"
@@ -41,7 +41,7 @@
 			/obj/item/clothing/shoes/galoshes,
 			/obj/item/clothing/suit/caution = 4,
 			/obj/item/storage/bag/trash,
-			/obj/item/device/lightreplacer,
+			/obj/item/lightreplacer,
 			/obj/item/reagent_containers/spray/cleaner,
 			/obj/item/reagent_containers/glass/rag,
 			/obj/item/grenade/chem_grenade/cleaner = 3,
@@ -57,7 +57,7 @@
 				/obj/fiftyspawner/cardboard,
 				/obj/item/packageWrap = 4,
 				/obj/item/wrapping_paper = 2,
-				/obj/item/device/destTagger,
+				/obj/item/destTagger,
 				/obj/item/hand_labeler,
 				/obj/item/tool/wirecutters,
 				/obj/item/tape_roll = 2)
@@ -71,7 +71,7 @@
 			/obj/item/pen/red,
 			/obj/item/pen/blue,
 			/obj/item/pen/blue,
-			/obj/item/device/camera_film,
+			/obj/item/camera_film,
 			/obj/item/folder/blue,
 			/obj/item/folder/red,
 			/obj/item/folder/yellow,
@@ -97,7 +97,7 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate/thinktronic
 	containername = "Spare PDA crate"
-	contains = list(/obj/item/device/pda = 3)
+	contains = list(/obj/item/pda = 3)
 
 /datum/supply_pack/supply/minergear
 	name = "Shaft miner equipment"
@@ -105,13 +105,13 @@
 			/obj/item/storage/backpack/industrial,
 			/obj/item/storage/backpack/satchel/eng,
 			/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
-			/obj/item/device/radio/headset/headset_cargo,
+			/obj/item/radio/headset/headset_cargo,
 			/obj/item/clothing/under/rank/miner,
 			/obj/item/clothing/gloves/black,
 			/obj/item/clothing/shoes/black,
-			/obj/item/device/analyzer,
+			/obj/item/analyzer,
 			/obj/item/storage/bag/ore,
-			/obj/item/device/flashlight/lantern,
+			/obj/item/flashlight/lantern,
 			/obj/item/shovel,
 			/obj/item/pickaxe,
 			/obj/item/mining_scanner,

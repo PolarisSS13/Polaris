@@ -14,7 +14,7 @@
 		/obj/item/clothing/suit/storage/vest/hoscoat/jensen,
 		/obj/item/clothing/suit/storage/vest/hoscoat,
 		/obj/item/cartridge/hos,
-		/obj/item/device/radio/headset/heads/hos,
+		/obj/item/radio/headset/heads/hos,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/storage/box/holobadge/hos,
 		/obj/item/clothing/accessory/badge/holo/hos,

@@ -11,8 +11,8 @@
 		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo,
 		/obj/item/clothing/shoes/boots/winter/supply,
 		/obj/item/clothing/shoes/black,
-		/obj/item/device/radio/headset/headset_cargo,
-		/obj/item/device/radio/headset/headset_cargo/alt,
+		/obj/item/radio/headset/headset_cargo,
+		/obj/item/radio/headset/headset_cargo/alt,
 		/obj/item/clothing/gloves/black,
 		/obj/item/clothing/gloves/fingerless,
 		/obj/item/clothing/head/soft)
@@ -37,8 +37,8 @@
 		/obj/item/clothing/under/rank/cargo/jeans,
 		/obj/item/clothing/under/rank/cargo/jeans/female,
 		/obj/item/clothing/shoes/brown,
-		/obj/item/device/radio/headset/headset_cargo,
-		/obj/item/device/radio/headset/headset_cargo/alt,
+		/obj/item/radio/headset/headset_cargo,
+		/obj/item/radio/headset/headset_cargo/alt,
 		/obj/item/clothing/gloves/black,
 		/obj/item/clothing/gloves/fingerless,
 		/obj/item/clothing/suit/fire/firefighter,
@@ -64,13 +64,13 @@
 	closet_appearance = /decl/closet_appearance/secure_closet/mining
 
 	starts_with = list(
-		/obj/item/device/radio/headset/headset_mine,
+		/obj/item/radio/headset/headset_mine,
 		/obj/item/clothing/under/rank/miner,
 		/obj/item/clothing/gloves/black,
 		/obj/item/clothing/shoes/black,
-		/obj/item/device/analyzer,
+		/obj/item/analyzer,
 		/obj/item/storage/bag/ore,
-		/obj/item/device/flashlight/lantern,
+		/obj/item/flashlight/lantern,
 		/obj/item/shovel,
 		/obj/item/pickaxe,
 		/obj/item/clothing/glasses/material,

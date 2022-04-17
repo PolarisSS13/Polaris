@@ -2,7 +2,7 @@
 #define DEFIB_TIME_LOSS  (2 MINUTES) //past this many seconds, brain damage occurs.
 
 //backpack item
-/obj/item/device/defib_kit
+/obj/item/defib_kit
 	name = "defibrillator"
 	desc = "A device that delivers powerful shocks to detachable paddles that resuscitate incapacitated patients."
 	icon = 'icons/obj/defibrillator.dmi'
@@ -19,10 +19,10 @@
 	var/obj/item/shockpaddles/linked/paddles
 	var/obj/item/cell/bcell = null
 
-/obj/item/device/defib_kit/get_cell()
+/obj/item/defib_kit/get_cell()
 	return bcell
 
-/obj/item/device/defib_kit/Initialize() //starts without a cell for rnd
+/obj/item/defib_kit/Initialize() //starts without a cell for rnd
 	. = ..()
 	if(ispath(paddles))
 		paddles = new paddles(src, src)
@@ -33,16 +33,16 @@
 		bcell = new bcell(src)
 	update_icon()
 
-/obj/item/device/defib_kit/Destroy()
+/obj/item/defib_kit/Destroy()
 	. = ..()
 	QDEL_NULL(paddles)
 	QDEL_NULL(bcell)
 
-/obj/item/device/defib_kit/loaded //starts with a cell
+/obj/item/defib_kit/loaded //starts with a cell
 	bcell = /obj/item/cell/apc
 
 
-/obj/item/device/defib_kit/update_icon()
+/obj/item/defib_kit/update_icon()
 	var/list/new_overlays = list()
 
 	if(paddles && paddles.loc == src) //in case paddles got destroyed somehow.
@@ -63,16 +63,16 @@
 
 	overlays = new_overlays
 
-/obj/item/device/defib_kit/ui_action_click()
+/obj/item/defib_kit/ui_action_click()
 	toggle_paddles()
 
-/obj/item/device/defib_kit/attack_hand(mob/user)
+/obj/item/defib_kit/attack_hand(mob/user)
 	if(loc == user)
 		toggle_paddles()
 	else
 		..()
 
-/obj/item/device/defib_kit/MouseDrop()
+/obj/item/defib_kit/MouseDrop()
 	if(ismob(src.loc))
 		if(!CanMouseDrop(src))
 			return
@@ -83,7 +83,7 @@
 		M.put_in_any_hand_if_possible(src)
 
 
-/obj/item/device/defib_kit/attackby(obj/item/W, mob/user, params)
+/obj/item/defib_kit/attackby(obj/item/W, mob/user, params)
 	if(W == paddles)
 		reattach_paddles(user)
 	else if(istype(W, /obj/item/cell))
@@ -107,7 +107,7 @@
 	else
 		return ..()
 
-/obj/item/device/defib_kit/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/defib_kit/emag_act(var/remaining_charges, var/mob/user)
 	if(paddles)
 		. = paddles.emag_act(user)
 		update_icon()
@@ -115,7 +115,7 @@
 
 //Paddle stuff
 
-/obj/item/device/defib_kit/verb/toggle_paddles()
+/obj/item/defib_kit/verb/toggle_paddles()
 	set name = "Toggle Paddles"
 	set category = "Object"
 
@@ -136,7 +136,7 @@
 		update_icon() //success
 
 //checks that the base unit is in the correct slot to be used
-/obj/item/device/defib_kit/proc/slot_check()
+/obj/item/defib_kit/proc/slot_check()
 	var/mob/M = loc
 	if(!istype(M))
 		return 0 //not equipped
@@ -148,11 +148,11 @@
 
 	return 0
 
-/obj/item/device/defib_kit/dropped(mob/user)
+/obj/item/defib_kit/dropped(mob/user)
 	..()
 	reattach_paddles(user) //paddles attached to a base unit should never exist outside of their base unit or the mob equipping the base unit
 
-/obj/item/device/defib_kit/proc/reattach_paddles(mob/user)
+/obj/item/defib_kit/proc/reattach_paddles(mob/user)
 	if(!paddles) return
 
 	if(ismob(paddles.loc))
@@ -168,7 +168,7 @@
 	Base Unit Subtypes
 */
 
-/obj/item/device/defib_kit/compact
+/obj/item/defib_kit/compact
 	name = "compact defibrillator"
 	desc = "A belt-equipped defibrillator that can be rapidly deployed."
 	icon_state = "defibcompact"
@@ -177,16 +177,16 @@
 	slot_flags = SLOT_BELT
 	origin_tech = list(TECH_BIO = 5, TECH_POWER = 3)
 
-/obj/item/device/defib_kit/compact/loaded
+/obj/item/defib_kit/compact/loaded
 	bcell = /obj/item/cell/high
 
 
-/obj/item/device/defib_kit/compact/combat
+/obj/item/defib_kit/compact/combat
 	name = "combat defibrillator"
 	desc = "A belt-equipped blood-red defibrillator that can be rapidly deployed. Does not have the restrictions or safeties of conventional defibrillators and can revive through space suits."
 	paddles = /obj/item/shockpaddles/linked/combat
 
-/obj/item/device/defib_kit/compact/combat/loaded
+/obj/item/defib_kit/compact/combat/loaded
 	bcell = /obj/item/cell/high
 
 /obj/item/shockpaddles/linked/combat
@@ -579,9 +579,9 @@
 	Shockpaddles that are linked to a base unit
 */
 /obj/item/shockpaddles/linked
-	var/obj/item/device/defib_kit/base_unit
+	var/obj/item/defib_kit/base_unit
 
-/obj/item/shockpaddles/linked/Initialize(var/ml, obj/item/device/defib_kit/defib)
+/obj/item/shockpaddles/linked/Initialize(var/ml, obj/item/defib_kit/defib)
 	base_unit = defib
 	. = ..()
 
@@ -663,7 +663,7 @@
 */
 
 //FBP Defibs
-/obj/item/device/defib_kit/jumper_kit
+/obj/item/defib_kit/jumper_kit
 	name = "jumper cable kit"
 	desc = "A device that delivers powerful shocks to detachable jumper cables that are capable of reviving full body prosthetics."
 	icon_state = "jumperunit"
@@ -671,7 +671,7 @@
 //	item_state = "jumperunit"
 	paddles = /obj/item/shockpaddles/linked/jumper
 
-/obj/item/device/defib_kit/jumper_kit/loaded
+/obj/item/defib_kit/jumper_kit/loaded
 	bcell = /obj/item/cell/high
 
 /obj/item/shockpaddles/linked/jumper

@@ -4,6 +4,8 @@
 	name = "matter assimilator"
 	desc = "Used to eat some forms of simple machinery; and large, wall-shaped blocks of metal with energetic fields."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "decompiler_swarm"
 
 	var/field_cooldown = 1 MINUTE

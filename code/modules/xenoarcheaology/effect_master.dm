@@ -306,7 +306,7 @@
 				istype(W,/obj/item/melee/energy) ||\
 				istype(W,/obj/item/melee/cultblade) ||\
 				istype(W,/obj/item/card/emag) ||\
-				istype(W,/obj/item/device/multitool))
+				istype(W,/obj/item/multitool))
 			if (my_effect.trigger == TRIGGER_ENERGY)
 				my_effect.ToggleActivate()
 

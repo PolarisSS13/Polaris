@@ -9,6 +9,8 @@
 	name = "disposable teleporter"
 	desc = "A very compact personal teleportation device.  It's very precise and safe, however it can only be used a few times."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "hand_tele" //temporary
 	var/uses = 3.0
 	w_class = ITEMSIZE_TINY

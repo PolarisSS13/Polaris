@@ -16,7 +16,7 @@
 "p" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 "q" = (/obj/structure/table/rack,/obj/item/tank/emergency/oxygen/engi,/obj/item/tank/emergency/oxygen/engi,/obj/item/clothing/mask/gas,/obj/item/clothing/suit/armor/material/makeshift,/obj/item/clothing/head/helmet/bucket,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 "r" = (/obj/structure/bed,/obj/item/bedsheet,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
-"s" = (/obj/structure/table/steel,/obj/item/device/flashlight/lantern,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
+"s" = (/obj/structure/table/steel,/obj/item/flashlight/lantern,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 "t" = (/obj/structure/table/rack,/obj/random/multiple/gun/projectile/rifle,/turf/simulated/floor/plating,/area/submap/cave/prepper1)
 
 (1,1,1) = {"

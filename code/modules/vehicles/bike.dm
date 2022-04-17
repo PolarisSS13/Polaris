@@ -47,7 +47,7 @@
 	. = ..()
 
 /obj/vehicle/bike/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool) && open)
+	if(istype(W, /obj/item/multitool) && open)
 		var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
 		if(new_paint)
 			paint_color = new_paint

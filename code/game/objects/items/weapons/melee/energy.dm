@@ -130,7 +130,7 @@
 	return ..()
 
 /obj/item/melee/energy/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/multitool) && colorable && !active)
+	if(istype(W, /obj/item/multitool) && colorable && !active)
 		if(!rainbow)
 			rainbow = TRUE
 		else

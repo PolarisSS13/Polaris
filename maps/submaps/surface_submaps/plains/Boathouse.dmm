@@ -48,7 +48,7 @@
 "aV" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aW" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/clothing/head/hood/winter,/obj/item/clothing/shoes/boots/winter,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aX" = (/obj/structure/table/rack,/obj/item/clothing/accessory/storage,/obj/item/clothing/accessory/storage,/turf/simulated/floor/wood,/area/submap/Boathouse)
-"aY" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/carpet/bcarpet,/area/submap/Boathouse)
+"aY" = (/obj/structure/table/woodentable,/obj/item/flashlight/lamp,/turf/simulated/floor/carpet/bcarpet,/area/submap/Boathouse)
 "aZ" = (/obj/structure/table/woodentable,/obj/random/snack,/turf/simulated/floor/carpet/bcarpet,/area/submap/Boathouse)
 "ba" = (/turf/simulated/floor/outdoors/dirt,/area/submap/Boathouse)
 "lN" = (/obj/random/multiple/corp_crate/no_weapons,/turf/simulated/floor/wood,/area/submap/Boathouse)

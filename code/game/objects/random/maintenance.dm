@@ -26,13 +26,13 @@ something, make sure it's not in one of the other lists.*/
 
 /obj/random/maintenance/clean/item_to_spawn()
 	return pick(prob(10);/obj/random/contraband,
-				prob(2);/obj/item/device/flashlight/flare,
-				prob(2);/obj/item/device/flashlight/glowstick,
-				prob(2);/obj/item/device/flashlight/glowstick/blue,
-				prob(1);/obj/item/device/flashlight/glowstick/orange,
-				prob(1);/obj/item/device/flashlight/glowstick/red,
-				prob(1);/obj/item/device/flashlight/glowstick/yellow,
-				prob(1);/obj/item/device/flashlight/pen,
+				prob(2);/obj/item/flashlight/flare,
+				prob(2);/obj/item/flashlight/glowstick,
+				prob(2);/obj/item/flashlight/glowstick/blue,
+				prob(1);/obj/item/flashlight/glowstick/orange,
+				prob(1);/obj/item/flashlight/glowstick/red,
+				prob(1);/obj/item/flashlight/glowstick/yellow,
+				prob(1);/obj/item/flashlight/pen,
 				prob(4);/obj/item/cell,
 				prob(4);/obj/item/cell/device,
 				prob(3);/obj/item/cell/high,
@@ -56,7 +56,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(1);/obj/item/storage/box/cups,
 				prob(3);/obj/item/storage/box/mousetraps,
 				prob(3);/obj/item/storage/wallet,
-				prob(1);/obj/item/device/paicard,
+				prob(1);/obj/item/paicard,
 				prob(2);/obj/item/clothing/shoes/galoshes,
 				prob(1);/obj/item/clothing/shoes/syndigaloshes,
 				prob(4);/obj/item/clothing/shoes/black,
@@ -100,9 +100,9 @@ something, make sure it's not in one of the other lists.*/
 				prob(4);/obj/item/clothing/suit/caution,
 				prob(3);/obj/item/clothing/head/cone,
 				prob(1);/obj/item/card/emag_broken,
-				prob(2);/obj/item/device/camera,
-				prob(3);/obj/item/device/pda,
-				prob(3);/obj/item/device/radio/headset)
+				prob(2);/obj/item/camera,
+				prob(3);/obj/item/pda,
+				prob(3);/obj/item/radio/headset)
 
 /obj/random/maintenance/security
 /*Maintenance loot list. This one is for around security areas*/
@@ -112,8 +112,8 @@ something, make sure it's not in one of the other lists.*/
 
 /obj/random/maintenance/security/item_to_spawn()
 	return pick(prob(320);/obj/random/maintenance/clean,
-				prob(2);/obj/item/device/flashlight/maglight,
-				prob(2);/obj/item/device/flash,
+				prob(2);/obj/item/flashlight/maglight,
+				prob(2);/obj/item/flash,
 				prob(1);/obj/item/cell/device/weapon,
 				prob(1);/obj/item/clothing/mask/gas/swat,
 				prob(1);/obj/item/clothing/mask/gas/syndicate,
@@ -207,7 +207,7 @@ something, make sure it's not in one of the other lists.*/
 
 /obj/random/maintenance/engineering/item_to_spawn()
 	return pick(prob(320);/obj/random/maintenance/clean,
-				prob(2);/obj/item/device/flashlight/maglight,
+				prob(2);/obj/item/flashlight/maglight,
 				prob(3);/obj/item/clothing/mask/gas/half,
 				prob(2);/obj/item/clothing/mask/balaclava,
 				prob(2);/obj/item/storage/briefcase/inflatable,
@@ -244,8 +244,8 @@ something, make sure it's not in one of the other lists.*/
 
 /obj/random/maintenance/research/item_to_spawn()
 	return pick(prob(320);/obj/random/maintenance/clean,
-				prob(3);/obj/item/device/analyzer/plant_analyzer,
-				prob(1);/obj/item/device/flash/synthetic,
+				prob(3);/obj/item/analyzer/plant_analyzer,
+				prob(1);/obj/item/flash/synthetic,
 				prob(2);/obj/item/bucket_sensor,
 				prob(1);/obj/item/cell/device/weapon,
 				prob(5);/obj/item/storage/backpack/toxins,
@@ -274,7 +274,7 @@ something, make sure it's not in one of the other lists.*/
 
 /obj/random/maintenance/cargo/item_to_spawn()
 	return pick(prob(320);/obj/random/maintenance/clean,
-				prob(3);/obj/item/device/flashlight/lantern,
+				prob(3);/obj/item/flashlight/lantern,
 				prob(4);/obj/item/pickaxe,
 				prob(5);/obj/item/storage/backpack/industrial,
 				prob(5);/obj/item/storage/backpack/satchel/norm,
@@ -283,8 +283,8 @@ something, make sure it's not in one of the other lists.*/
 				prob(1);/obj/item/storage/toolbox/syndicate,
 				prob(1);/obj/item/storage/belt/utility/full,
 				prob(2);/obj/item/storage/belt/utility,
-				prob(4);/obj/item/device/toner,
-				prob(1);/obj/item/device/destTagger,
+				prob(4);/obj/item/toner,
+				prob(1);/obj/item/destTagger,
 				prob(3);/obj/item/clothing/glasses/material,
 				prob(3);/obj/item/clothing/head/soft/yellow,
 				prob(4);/obj/item/clothing/suit/storage/hazardvest,

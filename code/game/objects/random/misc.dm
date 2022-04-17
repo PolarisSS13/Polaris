@@ -15,8 +15,8 @@
 				/obj/item/weldingtool/largetank,
 				/obj/item/tool/crowbar,
 				/obj/item/tool/wrench,
-				/obj/item/device/flashlight,
-				/obj/item/device/multitool)
+				/obj/item/flashlight,
+				/obj/item/multitool)
 
 /obj/random/tool/powermaint
 	name = "random powertool"
@@ -53,7 +53,7 @@
 				/obj/item/tool/crowbar/alien,
 				/obj/item/tool/wrench/alien,
 				/obj/item/stack/cable_coil/alien,
-				/obj/item/device/multitool/alien)
+				/obj/item/multitool/alien)
 
 /obj/random/technology_scanner
 	name = "random scanner"
@@ -61,9 +61,9 @@
 	icon_state = "tech"
 
 /obj/random/technology_scanner/item_to_spawn()
-	return pick(prob(5);/obj/item/device/t_scanner,
-				prob(2);/obj/item/device/radio,
-				prob(5);/obj/item/device/analyzer)
+	return pick(prob(5);/obj/item/t_scanner,
+				prob(2);/obj/item/radio,
+				prob(5);/obj/item/analyzer)
 
 /obj/random/powercell
 	name = "random powercell"
@@ -84,11 +84,11 @@
 	icon_state = "tech"
 
 /obj/random/bomb_supply/item_to_spawn()
-	return pick(/obj/item/device/assembly/igniter,
-				/obj/item/device/assembly/prox_sensor,
-				/obj/item/device/assembly/signaler,
-				/obj/item/device/assembly/timer,
-				/obj/item/device/multitool)
+	return pick(/obj/item/assembly/igniter,
+				/obj/item/assembly/prox_sensor,
+				/obj/item/assembly/signaler,
+				/obj/item/assembly/timer,
+				/obj/item/multitool)
 
 /obj/random/toolbox
 	name = "random toolbox"
@@ -142,7 +142,7 @@
 				prob(2);/obj/item/tape_roll,
 				prob(2);/obj/item/taperoll/engineering,
 				prob(1);/obj/item/taperoll/atmos,
-				prob(1);/obj/item/device/flashlight/maglight)
+				prob(1);/obj/item/flashlight/maglight)
 
 /obj/random/tech_supply/nofail
 	name = "guaranteed random tech supply"
@@ -217,7 +217,7 @@
 				prob(2);/obj/item/stack/medical/advanced/bruise_pack,
 				prob(2);/obj/item/stack/medical/advanced/ointment,
 				prob(1);/obj/item/stack/medical/splint,
-				prob(4);/obj/item/device/healthanalyzer,
+				prob(4);/obj/item/healthanalyzer,
 				prob(1);/obj/item/bodybag,
 				prob(3);/obj/item/reagent_containers/hypospray/autoinjector,
 				prob(2);/obj/item/storage/pill_bottle/kelotane,
@@ -558,7 +558,7 @@
 				prob(4);/obj/item/tank/emergency/oxygen,
 				prob(3);/obj/item/tank/emergency/oxygen/engi,
 				prob(2);/obj/item/tank/emergency/oxygen/double,
-				prob(1);/obj/item/device/suit_cooling_unit)
+				prob(1);/obj/item/suit_cooling_unit)
 
 /obj/random/cigarettes
 	name = "random cigarettes"
@@ -743,8 +743,8 @@
 	icon_state = "mousetrap"
 
 /obj/random/mouseremains/item_to_spawn()
-	return pick(/obj/item/device/assembly/mousetrap,
-				/obj/item/device/assembly/mousetrap/armed,
+	return pick(/obj/item/assembly/mousetrap,
+				/obj/item/assembly/mousetrap/armed,
 				/obj/effect/decal/cleanable/spiderling_remains,
 				/obj/effect/decal/cleanable/ash,
 				/obj/item/trash/cigbutt,

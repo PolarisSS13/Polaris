@@ -59,7 +59,7 @@
 "bg" = (/obj/effect/spawner/gibs/generic,/turf/template_noop,/area/submap/crashedcontainmentshuttle)
 "bh" = (/obj/effect/decal/remains/human,/turf/simulated/shuttle/floor/yellow,/area/submap/crashedcontainmentshuttle)
 "bi" = (/obj/item/circuitboard/broken,/obj/effect/decal/remains/human,/obj/random/energy/highend,/turf/simulated/shuttle/floor/black,/area/submap/crashedcontainmentshuttle)
-"bj" = (/obj/item/device/gps/internal/poi,/turf/simulated/shuttle/floor/red,/area/submap/crashedcontainmentshuttle)
+"bj" = (/obj/item/gps/internal/poi,/turf/simulated/shuttle/floor/red,/area/submap/crashedcontainmentshuttle)
 "bk" = (/obj/effect/decal/cleanable/vomit,/turf/simulated/shuttle/floor/black,/area/submap/crashedcontainmentshuttle)
 "bl" = (/obj/effect/decal/remains/robot,/turf/simulated/shuttle/floor/red,/area/submap/crashedcontainmentshuttle)
 "bm" = (/obj/effect/decal/cleanable/liquid_fuel,/turf/template_noop,/area/submap/crashedcontainmentshuttle)

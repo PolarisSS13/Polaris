@@ -1,7 +1,9 @@
-/obj/item/device/laser_pointer
+/obj/item/laser_pointer
 	name = "laser pointer"
 	desc = "Don't shine it in your eyes!"
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "pointer"
 	item_state = "pen"
 	var/pointer_icon_state
@@ -20,31 +22,31 @@
 	var/obj/item/stock_parts/micro_laser/diode //used for upgrading!
 
 
-/obj/item/device/laser_pointer/red
+/obj/item/laser_pointer/red
 	pointer_icon_state = "red_laser"
-/obj/item/device/laser_pointer/green
+/obj/item/laser_pointer/green
 	pointer_icon_state = "green_laser"
-/obj/item/device/laser_pointer/blue
+/obj/item/laser_pointer/blue
 	pointer_icon_state = "blue_laser"
-/obj/item/device/laser_pointer/purple
+/obj/item/laser_pointer/purple
 	pointer_icon_state = "purple_laser"
 
-/obj/item/device/laser_pointer/Initialize()
+/obj/item/laser_pointer/Initialize()
 	. = ..()
 	diode = new(src)
 	if(!pointer_icon_state)
 		pointer_icon_state = pick("red_laser","green_laser","blue_laser","purple_laser")
 
-/obj/item/device/laser_pointer/upgraded/Initialize()
+/obj/item/laser_pointer/upgraded/Initialize()
 	. = ..()
 	diode = new /obj/item/stock_parts/micro_laser/ultra
 
 
 
-/obj/item/device/laser_pointer/attack(mob/living/M, mob/user)
+/obj/item/laser_pointer/attack(mob/living/M, mob/user)
 	laser_act(M, user)
 
-/obj/item/device/laser_pointer/attackby(obj/item/W, mob/user)
+/obj/item/laser_pointer/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stock_parts/micro_laser))
 		if(!diode)
 			user.drop_item()
@@ -63,12 +65,12 @@
 		..()
 	return
 
-/obj/item/device/laser_pointer/afterattack(var/atom/target, var/mob/living/user, flag, params)
+/obj/item/laser_pointer/afterattack(var/atom/target, var/mob/living/user, flag, params)
 	if(flag)	//we're placing the object on a table or in backpack
 		return
 	laser_act(target, user)
 
-/obj/item/device/laser_pointer/proc/laser_act(var/atom/target, var/mob/living/user)
+/obj/item/laser_pointer/proc/laser_act(var/atom/target, var/mob/living/user)
 	if(!(user in (viewers(world.view,target))))
 		return
 	if(!(target in view(user, world.view)))
@@ -211,7 +213,7 @@
 	spawn(cooldown)
 		icon_state = "pointer"
 
-/obj/item/device/laser_pointer/process()
+/obj/item/laser_pointer/process()
 	if(prob(20 - recharge_locked*5))
 		energy += 1
 		if(energy >= max_energy)

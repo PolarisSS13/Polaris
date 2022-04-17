@@ -82,8 +82,8 @@
 	if(opened)
 		..()
 	else //Allows the bag to respond to a cyborg analyzer and tag.
-		if(istype(W,/obj/item/device/robotanalyzer))
-			var/obj/item/device/robotanalyzer/analyzer = W
+		if(istype(W,/obj/item/robotanalyzer))
+			var/obj/item/robotanalyzer/analyzer = W
 			for(var/mob/living/L in contents)
 				analyzer.attack(L,user)
 

@@ -232,7 +232,7 @@
 	if (src.operating == 1)
 		return
 
-	if(src.density && istype(I, /obj/item/weapon) && !istype(I, /obj/item/card))
+	if(src.density && istype(I) && !istype(I, /obj/item/card))
 		var/aforce = I.force
 		playsound(src, 'sound/effects/Glasshit.ogg', 75, 1)
 		visible_message("<font color='red'><B>[src] was hit by [I].</B></font>")
@@ -326,7 +326,7 @@
 	return
 
 /obj/item/holo/esword/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/multitool) && !active)
+	if(istype(W, /obj/item/multitool) && !active)
 		if(!rainbow)
 			rainbow = TRUE
 		else

@@ -47,15 +47,15 @@
 		/obj/item/clothing/mask/gas/explorer,
 		/obj/item/clothing/shoes/boots/winter/explorer,
 		/obj/item/clothing/gloves/black,
-		/obj/item/device/radio/headset/explorer,
-		/obj/item/device/flashlight,
-		/obj/item/device/gps/explorer,
+		/obj/item/radio/headset/explorer,
+		/obj/item/flashlight,
+		/obj/item/gps/explorer,
 		/obj/item/storage/box/flare,
-		/obj/item/device/geiger,
+		/obj/item/geiger,
 		/obj/item/cell/device,
-		/obj/item/device/radio,
+		/obj/item/radio,
 		/obj/item/stack/marker_beacon/thirty,
-		/obj/item/device/cataloguer
+		/obj/item/cataloguer
 		)
 
 /obj/structure/closet/secure_closet/explorer/Initialize()
@@ -87,21 +87,21 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/medical/sar,
 		/obj/item/clothing/shoes/boots/winter/explorer,
-		/obj/item/device/radio/headset/sar,
+		/obj/item/radio/headset/sar,
 		/obj/item/cartridge/medical,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/engi,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/device/healthanalyzer,
-		/obj/item/device/radio/off,
+		/obj/item/healthanalyzer,
+		/obj/item/radio/off,
 		/obj/random/medical,
 		/obj/item/tool/crowbar,
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/box/freezer,
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/taperoll/medical,
-		/obj/item/device/gps,
-		/obj/item/device/geiger,
+		/obj/item/gps,
+		/obj/item/geiger,
 		/obj/item/bodybag/cryobag)
 
 //Pilot Locker
@@ -119,13 +119,13 @@
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/shoes/black,
 		/obj/item/clothing/gloves/fingerless,
-		/obj/item/device/radio/headset/explorer/alt,
-		/obj/item/device/flashlight,
+		/obj/item/radio/headset/explorer/alt,
+		/obj/item/flashlight,
 		/obj/item/reagent_containers/food/snacks/liquidfood,
 		/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 		/obj/item/storage/box/flare,
 		/obj/item/cell/device,
-		/obj/item/device/radio)
+		/obj/item/radio)
 
 /obj/structure/closet/secure_closet/pilot/Initialize()
 	if(prob(50))

@@ -119,7 +119,7 @@ var/list/mob_hat_cache = list()
 
 /mob/living/silicon/robot/drone/init()
 	if(!scrambledcodes && !foreign_droid)
-		aiCamera = new/obj/item/device/camera/siliconcam/drone_camera(src)
+		aiCamera = new/obj/item/camera/siliconcam/drone_camera(src)
 	additional_law_channels["Drone"] = ":d"
 	if(!laws) laws = new law_type
 	if(!module) module = new module_type(src)
@@ -182,7 +182,7 @@ var/list/mob_hat_cache = list()
 		to_chat(user, "<span class='danger'>\The [src] is hermetically sealed. You can't open the case.</span>")
 		return
 
-	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/device/pda))
+	else if (istype(W, /obj/item/card/id)||istype(W, /obj/item/pda))
 		var/datum/gender/TU = gender_datums[user.get_visible_gender()]
 		if(stat == 2)
 

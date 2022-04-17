@@ -1066,7 +1066,7 @@ datum
 
 				check_completion()
 					if(steal_target)
-						for(var/obj/item/device/aicard/C in owner.current.get_contents())
+						for(var/obj/item/aicard/C in owner.current.get_contents())
 							for(var/mob/living/silicon/ai/M in C)
 								if(istype(M, /mob/living/silicon/ai) && M.stat != 2)
 									return 1
@@ -1378,7 +1378,7 @@ datum
 				if(!owner.current||owner.current.stat==2)//If you're otherwise dead.
 					return 0
 				var/list/all_items = owner.current.get_contents()
-				for(var/obj/item/device/mmi/mmi in all_items)
+				for(var/obj/item/mmi/mmi in all_items)
 					if(mmi.brainmob&&mmi.brainmob.mind==target)	return 1
 				for(var/obj/item/organ/brain/brain in all_items)
 					if(brain.brainmob&&brain.brainmob.mind==target)	return 1

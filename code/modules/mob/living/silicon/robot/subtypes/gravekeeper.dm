@@ -10,9 +10,9 @@
 	can_be_antagged = FALSE
 
 /mob/living/silicon/robot/gravekeeper/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
 
-	mmi = new /obj/item/device/mmi/digital/robot(src) // Explicitly a drone.
+	mmi = new /obj/item/mmi/digital/robot(src) // Explicitly a drone.
 	module = new /obj/item/robot_module/robot/gravekeeper(src)
 	overlays.Cut()
 	init_id()

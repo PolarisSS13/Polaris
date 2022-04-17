@@ -88,7 +88,7 @@
 	starts_with = list(
 		/obj/item/reagent_containers/hypospray/autoinjector,
 		/obj/item/stack/medical/bruise_pack,
-		/obj/item/device/flashlight/glowstick,
+		/obj/item/flashlight/glowstick,
 		/obj/item/reagent_containers/food/snacks/candy/proteinbar,
 		/obj/item/clothing/mask/breath
 	)
@@ -320,7 +320,7 @@
 /obj/item/storage/box/flare
 	name = "box of flares"
 	desc = "A box containing 4 flares."
-	starts_with = list(/obj/item/device/flashlight/flare = 4)
+	starts_with = list(/obj/item/flashlight/flare = 4)
 
 /obj/item/storage/box/trackimp
 	name = "boxed tracking implant kit"
@@ -348,8 +348,8 @@
 	desc = "A box containing some mobile camera pods."
 	icon_state = "pda"
 	starts_with = list(
-		/obj/item/device/camerabug = 6,
-		/obj/item/device/bug_monitor
+		/obj/item/camerabug = 6,
+		/obj/item/bug_monitor
 	)
 
 /obj/item/storage/box/rxglasses
@@ -442,7 +442,7 @@
 	name = "box of Pest-B-Gon mousetraps"
 	desc = "<B><FONT color='red'>WARNING:</FONT></B> <I>Keep out of reach of children</I>."
 	icon_state = "mousetraps"
-	starts_with = list(/obj/item/device/assembly/mousetrap = 7)
+	starts_with = list(/obj/item/assembly/mousetrap = 7)
 
 /obj/item/storage/box/pillbottles
 	name = "box of pill bottles"

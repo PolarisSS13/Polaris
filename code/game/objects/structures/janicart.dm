@@ -15,7 +15,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 	var/obj/item/storage/bag/trash/mybag	= null
 	var/obj/item/mop/mymop = null
 	var/obj/item/reagent_containers/spray/myspray = null
-	var/obj/item/device/lightreplacer/myreplacer = null
+	var/obj/item/lightreplacer/myreplacer = null
 	var/obj/structure/mopbucket/mybucket = null
 	var/has_items = FALSE
 	var/dismantled = TRUE
@@ -77,7 +77,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 		to_chat(user, "<span class='notice'>You put [I] into [src].</span>")
 		return 1
 
-	else if(istype(I, /obj/item/device/lightreplacer) && !myreplacer)
+	else if(istype(I, /obj/item/lightreplacer) && !myreplacer)
 		user.unEquip(I, 0, src)
 		myreplacer = I
 		update_icon()

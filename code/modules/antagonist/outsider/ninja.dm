@@ -103,10 +103,10 @@ var/datum/antagonist/ninja/ninjas
 	if(!..())
 		return 0
 
-	var/obj/item/device/radio/R = new /obj/item/device/radio/headset(player)
+	var/obj/item/radio/R = new /obj/item/radio/headset(player)
 	player.equip_to_slot_or_del(R, slot_l_ear)
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/color/black(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_belt)
+	player.equip_to_slot_or_del(new /obj/item/flashlight(player), slot_belt)
 	create_id("Infiltrator", player)
 
 	var/obj/item/rig/light/ninja/ninjasuit = new(get_turf(player))

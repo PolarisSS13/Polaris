@@ -27,7 +27,7 @@
 			user.visible_message(SPAN_NOTICE("\The [user] slots \the [W] into \the [src]'s recharging port."))
 		return TRUE
 
-	if(istype(W, /obj/item/device/floor_painter))
+	if(istype(W, /obj/item/floor_painter))
 		return FALSE // Paint sprayer wil call try_paint() in afterattack()
 
 	. = ..()

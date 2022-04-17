@@ -3,7 +3,7 @@
 	if(!C || !user)
 		return 0
 
-	if(isliving(user) && istype(C, /obj/item/weapon))
+	if(isliving(user) && istype(C))
 		var/mob/living/L = user
 		if(L.a_intent != I_HELP)
 			attack_tile(C, L) // Be on help intent if you want to decon something.
@@ -60,7 +60,7 @@
 		return
 
 	if(!is_plating())
-		if(istype(C, /obj/item/weapon))
+		if(istype(C))
 			try_deconstruct_tile(C, user)
 			return
 		else if(istype(C, /obj/item/stack/cable_coil))
@@ -156,7 +156,7 @@
 /turf/simulated/floor/proc/try_replace_tile(obj/item/stack/tile/T as obj, mob/user as mob)
 	if(T.type == flooring.build_type)
 		return
-	var/obj/item/W = user.is_holding_item_of_type(/obj/item/weapon)
+	var/obj/item/W = user.is_holding_item_of_type(/obj/item)
 	if(!istype(W))
 		return
 	if(!try_deconstruct_tile(W, user))

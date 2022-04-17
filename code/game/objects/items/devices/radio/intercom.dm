@@ -1,4 +1,4 @@
-/obj/item/device/radio/intercom
+/obj/item/radio/intercom
 	name = "station intercom (General)"
 	desc = "Talk through this."
 	icon_state = "intercom"
@@ -11,117 +11,117 @@
 	var/number = 0
 	var/wiresexposed = 0
 
-/obj/item/device/radio/intercom/Initialize()
+/obj/item/radio/intercom/Initialize()
 	. = ..()
 	var/area/A = get_area(src)
 	if(A)
 		GLOB.apc_event.register(A, src, /atom/proc/update_icon)
 
-/obj/item/device/radio/intercom/Destroy()
+/obj/item/radio/intercom/Destroy()
 	var/area/A = get_area(src)
 	if(A)
 		GLOB.apc_event.unregister(A, src, /atom/proc/update_icon)
 	return ..()
 
-/obj/item/device/radio/intercom/custom
+/obj/item/radio/intercom/custom
 	name = "station intercom (Custom)"
 	broadcasting = 0
 	listening = 0
 
-/obj/item/device/radio/intercom/interrogation
+/obj/item/radio/intercom/interrogation
 	name = "station intercom (Interrogation)"
 	frequency  = 1449
 
-/obj/item/device/radio/intercom/private
+/obj/item/radio/intercom/private
 	name = "station intercom (Private)"
 	frequency = AI_FREQ
 
-/obj/item/device/radio/intercom/specops
+/obj/item/radio/intercom/specops
 	name = "\improper Spec Ops intercom"
 	frequency = ERT_FREQ
 	subspace_transmission = 1
 	centComm = 1
 
-/obj/item/device/radio/intercom/department
+/obj/item/radio/intercom/department
 	canhear_range = 5
 	broadcasting = 0
 	listening = 1
 
-/obj/item/device/radio/intercom/department/medbay
+/obj/item/radio/intercom/department/medbay
 	name = "station intercom (Medbay)"
 	icon_state = "medintercom"
 	frequency = MED_I_FREQ
 
-/obj/item/device/radio/intercom/department/security
+/obj/item/radio/intercom/department/security
 	name = "station intercom (Security)"
 	icon_state = "secintercom"
 	frequency = SEC_I_FREQ
 
-/obj/item/device/radio/intercom/entertainment
+/obj/item/radio/intercom/entertainment
 	name = "entertainment intercom"
 	frequency = ENT_FREQ
 
-/obj/item/device/radio/intercom/omni
+/obj/item/radio/intercom/omni
 	name = "global announcer"
-/obj/item/device/radio/intercom/omni/Initialize()
+/obj/item/radio/intercom/omni/Initialize()
 	channels = radiochannels.Copy()
 	return ..()
 
-/obj/item/device/radio/intercom/Initialize()
+/obj/item/radio/intercom/Initialize()
 	. = ..()
 	circuit = new circuit(src)
 
-/obj/item/device/radio/intercom/department/medbay/Initialize()
+/obj/item/radio/intercom/department/medbay/Initialize()
 	. = ..()
 	internal_channels = default_medbay_channels.Copy()
 
-/obj/item/device/radio/intercom/department/security/Initialize()
+/obj/item/radio/intercom/department/security/Initialize()
 	. = ..()
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
 		num2text(SEC_I_FREQ) = list(access_security)
 	)
 
-/obj/item/device/radio/intercom/entertainment/Initialize()
+/obj/item/radio/intercom/entertainment/Initialize()
 	. = ..()
 	internal_channels = list(
 		num2text(PUB_FREQ) = list(),
 		num2text(ENT_FREQ) = list()
 	)
 
-/obj/item/device/radio/intercom/syndicate
+/obj/item/radio/intercom/syndicate
 	name = "illicit intercom"
 	desc = "Talk through this. Evilly"
 	frequency = SYND_FREQ
 	subspace_transmission = 1
 	syndie = 1
 
-/obj/item/device/radio/intercom/syndicate/Initialize()
+/obj/item/radio/intercom/syndicate/Initialize()
 	. = ..()
 	internal_channels[num2text(SYND_FREQ)] = list(access_syndicate)
 
-/obj/item/device/radio/intercom/raider
+/obj/item/radio/intercom/raider
 	name = "illicit intercom"
 	desc = "Pirate radio, but not in the usual sense of the word."
 	frequency = RAID_FREQ
 	subspace_transmission = 1
 	syndie = 1
 
-/obj/item/device/radio/intercom/raider/Initialize()
+/obj/item/radio/intercom/raider/Initialize()
 	. = ..()
 	internal_channels[num2text(RAID_FREQ)] = list(access_syndicate)
 
-/obj/item/device/radio/intercom/attack_ai(mob/user as mob)
+/obj/item/radio/intercom/attack_ai(mob/user as mob)
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)
 
-/obj/item/device/radio/intercom/attack_hand(mob/user as mob)
+/obj/item/radio/intercom/attack_hand(mob/user as mob)
 	src.add_fingerprint(user)
 	spawn (0)
 		attack_self(user)
 
-/obj/item/device/radio/intercom/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/radio/intercom/attackby(obj/item/W as obj, mob/user as mob)
 	add_fingerprint(user)
 	if(W.is_screwdriver())  // Opening the intercom up.
 		wiresexposed = !wiresexposed
@@ -147,7 +147,7 @@
 	else
 		src.attack_hand(user)
 
-/obj/item/device/radio/intercom/receive_range(freq, level)
+/obj/item/radio/intercom/receive_range(freq, level)
 	if (!on)
 		return -1
 	if(!(0 in level))
@@ -162,7 +162,7 @@
 
 	return canhear_range
 
-/obj/item/device/radio/intercom/update_icon()
+/obj/item/radio/intercom/update_icon()
 	var/area/A = get_area(src)
 	on = A?.powered(EQUIP)
 
@@ -177,22 +177,22 @@
 		else
 			icon_state = initial(icon_state)
 
-/obj/item/device/radio/intercom/locked
+/obj/item/radio/intercom/locked
     var/locked_frequency
 
-/obj/item/device/radio/intercom/locked/set_frequency(var/frequency)
+/obj/item/radio/intercom/locked/set_frequency(var/frequency)
 	if(frequency == locked_frequency)
 		..(locked_frequency)
 
-/obj/item/device/radio/intercom/locked/list_channels()
+/obj/item/radio/intercom/locked/list_channels()
 	return ""
 
-/obj/item/device/radio/intercom/locked/ai_private
+/obj/item/radio/intercom/locked/ai_private
 	name = "\improper AI intercom"
 	frequency = AI_FREQ
 	broadcasting = 1
 	listening = 1
 
-/obj/item/device/radio/intercom/locked/confessional
+/obj/item/radio/intercom/locked/confessional
 	name = "confessional intercom"
 	frequency = 1480

@@ -19,8 +19,8 @@
 		new /datum/data/mining_equipment("Absinthe",					/obj/item/reagent_containers/food/drinks/bottle/absinthe,	125),
 		new /datum/data/mining_equipment("Cigar",						/obj/item/clothing/mask/smokable/cigarette/cigar/havana,			150),
 		new /datum/data/mining_equipment("Soap",						/obj/item/soap/nanotrasen,									200),
-		new /datum/data/mining_equipment("Laser Pointer",				/obj/item/device/laser_pointer,										900),
-		new /datum/data/mining_equipment("Geiger Counter",				/obj/item/device/geiger,											750),
+		new /datum/data/mining_equipment("Laser Pointer",				/obj/item/laser_pointer,										900),
+		new /datum/data/mining_equipment("Geiger Counter",				/obj/item/geiger,											750),
 		new /datum/data/mining_equipment("Plush Toy",					/obj/random/plushie,												300),
 		new /datum/data/mining_equipment("Umbrella",					/obj/item/melee/umbrella/random,								200),
 //		new /datum/data/mining_equipment("Fulton Beacon",				/obj/item/fulton_core,												500),
@@ -43,7 +43,7 @@
 		new /datum/data/mining_equipment("Industrial Equipment - Sheet-Snatcher",/obj/item/storage/bag/sheetsnatcher,					500),		new /datum/data/mining_equipment("Digital Tablet - Standard",	/obj/item/modular_computer/tablet/preset/custom_loadout/standard,	500),
 		new /datum/data/mining_equipment("Digital Tablet - Advanced",	/obj/item/modular_computer/tablet/preset/custom_loadout/advanced,	1000),
 		new /datum/data/mining_equipment("Fine Excavation Kit - Chisels",/obj/item/storage/excavation,								500),
-		new /datum/data/mining_equipment("Fine Excavation Kit - Measuring Tape",/obj/item/device/measuring_tape,							125),
+		new /datum/data/mining_equipment("Fine Excavation Kit - Measuring Tape",/obj/item/measuring_tape,							125),
 		new /datum/data/mining_equipment("Fine Excavation Kit - Hand Pick",/obj/item/pickaxe/hand,									375),
 		new /datum/data/mining_equipment("Explosive Excavation Kit - Plastic Charge",/obj/item/plastique/seismic,					1500),
 		new /datum/data/mining_equipment("Injector (L) - Glucose",/obj/item/reagent_containers/hypospray/autoinjector/biginjector/glucose,	500),
@@ -201,7 +201,7 @@
 		// if("Mining Drone")
 		// 	new /obj/item/storage/box/drone_kit(drop_location)
 		// if("Advanced Scanner")
-		// 	new /obj/item/device/t_scanner/adv_mining_scanner(drop_location)
+		// 	new /obj/item/t_scanner/adv_mining_scanner(drop_location)
 		// if("Crusher")
 		// 	new /obj/item/twohanded/required/mining_hammer(drop_location)
 	qdel(voucher)

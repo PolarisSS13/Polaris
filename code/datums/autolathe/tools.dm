@@ -4,11 +4,11 @@
 
 /datum/category_item/autolathe/tools/multitool
 	name = "multitool"
-	path =/obj/item/device/multitool
+	path =/obj/item/multitool
 
 /datum/category_item/autolathe/tools/t_scanner
 	name = "T-ray scanner"
-	path =/obj/item/device/t_scanner
+	path =/obj/item/t_scanner
 
 /datum/category_item/autolathe/tools/weldertool
 	name = "welding tool"

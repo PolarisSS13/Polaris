@@ -47,8 +47,8 @@
 	contains = list(
 			/obj/item/storage/fancy/crayons,
 			/obj/item/storage/fancy/markers,
-			/obj/item/device/camera,
-			/obj/item/device/camera_film = 2,
+			/obj/item/camera,
+			/obj/item/camera_film = 2,
 			/obj/item/storage/photo_album,
 			/obj/item/packageWrap,
 			/obj/item/reagent_containers/glass/paint/red,
@@ -71,9 +71,9 @@
 	containername = "station painting supplies crate"
 	containertype = /obj/structure/closet/crate/grayson
 	contains = list(
-			/obj/item/device/pipe_painter = 2,
-			/obj/item/device/floor_painter = 2,
-			///obj/item/device/closet_painter = 2
+			/obj/item/pipe_painter = 2,
+			/obj/item/floor_painter = 2,
+			///obj/item/closet_painter = 2
 			)
 
 /datum/supply_pack/recreation/cheapbait

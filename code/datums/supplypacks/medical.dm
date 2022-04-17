@@ -112,7 +112,7 @@
 	contains = list(
 			/obj/item/storage/belt/medical = 3,
 			/obj/item/clothing/glasses/hud/health = 3,
-			/obj/item/device/radio/headset/headset_med/alt = 3,
+			/obj/item/radio/headset/headset_med/alt = 3,
 			/obj/item/clothing/suit/storage/hooded/wintercoat/medical = 3
 			)
 	cost = 10
@@ -124,7 +124,7 @@
 	name = "Chief medical officer equipment"
 	contains = list(
 			/obj/item/storage/belt/medical,
-			/obj/item/device/radio/headset/heads/cmo,
+			/obj/item/radio/headset/heads/cmo,
 			/obj/item/clothing/under/rank/chief_medical_officer,
 			/obj/item/reagent_containers/hypospray/vial,
 			/obj/item/clothing/accessory/stethoscope,
@@ -135,8 +135,8 @@
 			/obj/item/clothing/shoes/white,
 			/obj/item/cartridge/cmo,
 			/obj/item/clothing/gloves/sterile/latex,
-			/obj/item/device/healthanalyzer,
-			/obj/item/device/flashlight/pen,
+			/obj/item/healthanalyzer,
+			/obj/item/flashlight/pen,
 			/obj/item/reagent_containers/syringe
 			)
 	cost = 50
@@ -148,7 +148,7 @@
 	name = "Medical Doctor equipment"
 	contains = list(
 			/obj/item/storage/belt/medical,
-			/obj/item/device/radio/headset/headset_med,
+			/obj/item/radio/headset/headset_med,
 			/obj/item/clothing/under/rank/medical,
 			/obj/item/clothing/accessory/stethoscope,
 			/obj/item/clothing/glasses/hud/health,
@@ -158,8 +158,8 @@
 			/obj/item/clothing/shoes/white,
 			/obj/item/cartridge/medical,
 			/obj/item/clothing/gloves/sterile/latex,
-			/obj/item/device/healthanalyzer,
-			/obj/item/device/flashlight/pen,
+			/obj/item/healthanalyzer,
+			/obj/item/flashlight/pen,
 			/obj/item/reagent_containers/syringe
 			)
 	cost = 20
@@ -171,7 +171,7 @@
 	name = "Chemist equipment"
 	contains = list(
 			/obj/item/storage/box/beakers,
-			/obj/item/device/radio/headset/headset_med,
+			/obj/item/radio/headset/headset_med,
 			/obj/item/storage/box/autoinjectors,
 			/obj/item/clothing/under/rank/chemist,
 			/obj/item/clothing/glasses/science,
@@ -181,7 +181,7 @@
 			/obj/item/cartridge/chemistry,
 			/obj/item/clothing/gloves/sterile/latex,
 			/obj/item/reagent_containers/dropper,
-			/obj/item/device/healthanalyzer,
+			/obj/item/healthanalyzer,
 			/obj/item/storage/box/pillbottles,
 			/obj/item/reagent_containers/syringe
 			)
@@ -194,7 +194,7 @@
 	name = "Paramedic equipment"
 	contains = list(
 			/obj/item/storage/belt/medical/emt,
-			/obj/item/device/radio/headset/headset_med,
+			/obj/item/radio/headset/headset_med,
 			/obj/item/clothing/under/rank/medical/scrubs/black,
 			/obj/item/clothing/accessory/armband/medblue,
 			/obj/item/clothing/glasses/hud/health,
@@ -207,9 +207,9 @@
 			/obj/item/storage/firstaid/adv,
 			/obj/item/clothing/shoes/boots/jackboots,
 			/obj/item/clothing/gloves/sterile/latex,
-			/obj/item/device/healthanalyzer,
+			/obj/item/healthanalyzer,
 			/obj/item/cartridge/medical,
-			/obj/item/device/flashlight/pen,
+			/obj/item/flashlight/pen,
 			/obj/item/reagent_containers/syringe,
 			/obj/item/clothing/accessory/storage/white_vest
 			)
@@ -222,7 +222,7 @@
 	name = "Psychiatrist equipment"
 	contains = list(
 			/obj/item/clothing/under/rank/psych,
-			/obj/item/device/radio/headset/headset_med,
+			/obj/item/radio/headset/headset_med,
 			/obj/item/clothing/under/rank/psych/turtleneck,
 			/obj/item/clothing/shoes/laceup,
 			/obj/item/clothing/suit/storage/toggle/labcoat,
@@ -262,8 +262,8 @@
 	name = "Autopsy equipment"
 	contains = list(
 			/obj/item/folder/white,
-			/obj/item/device/camera,
-			/obj/item/device/camera_film = 2,
+			/obj/item/camera,
+			/obj/item/camera_film = 2,
 			/obj/item/autopsy_scanner,
 			/obj/item/surgical/scalpel,
 			/obj/item/storage/box/masks,
@@ -338,7 +338,7 @@
 
 /datum/supply_pack/med/defib
 	name = "Defibrillator crate"
-	contains = list(/obj/item/device/defib_kit = 2)
+	contains = list(/obj/item/defib_kit = 2)
 	cost = 30
 	containertype = /obj/structure/closet/crate/veymed
 	containername = "Defibrillator crate"

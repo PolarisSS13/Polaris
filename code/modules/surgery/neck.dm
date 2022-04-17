@@ -27,7 +27,7 @@
 	allowed_tools = list(
 		/obj/item/surgical/FixOVein = 100,
 		/obj/item/stack/cable_coil = 40,
-		/obj/item/device/assembly/mousetrap = 5)
+		/obj/item/assembly/mousetrap = 5)
 
 	min_duration = 80
 	max_duration = 100
@@ -144,7 +144,7 @@
 		/obj/item/surgical/FixOVein = 100,
 		/obj/item/stack/nanopaste = 50,
 		/obj/item/stack/cable_coil = 40,
-		/obj/item/device/assembly/mousetrap = 5)
+		/obj/item/assembly/mousetrap = 5)
 
 	min_duration = 100
 	max_duration = 200

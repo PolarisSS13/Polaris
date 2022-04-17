@@ -16,7 +16,7 @@
 /area/submap/Rockb1)
 "f" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/lino,
 /area/submap/Rockb1)
 "g" = (

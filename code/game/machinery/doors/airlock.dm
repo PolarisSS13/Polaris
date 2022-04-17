@@ -1072,9 +1072,9 @@ About the new airlock wires panel:
 		src.update_icon()
 	else if(C.is_wirecutter())
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/multitool))
+	else if(istype(C, /obj/item/multitool))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/assembly/signaler))
+	else if(istype(C, /obj/item/assembly/signaler))
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/pai_cable))	// -- TLE
 		var/obj/item/pai_cable/cable = C
@@ -1122,26 +1122,22 @@ About the new airlock wires panel:
 				spawn(0)	close(1)
 
 	// Check if we're using a crowbar or armblade, and if the airlock's unpowered for whatever reason (off, broken, etc).
-	else if(istype(C, /obj/item/weapon))
-		var/obj/item/W = C
-		if((W.pry == 1) && !arePowerSystemsOn())
-			if(locked)
-				to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
-			else if( !welded && !operating )
-				if(istype(C, /obj/item/material/twohanded/fireaxe)) // If this is a fireaxe, make sure it's held in two hands.
-					var/obj/item/material/twohanded/fireaxe/F = C
-					if(!F.wielded)
-						to_chat(user, "<span class='warning'>You need to be wielding \the [F] to do that.</span>")
-						return
-				// At this point, it's an armblade or a fireaxe that passed the wielded test, let's try to open it.
-				if(density)
-					spawn(0)
-						open(1)
-				else
-					spawn(0)
-						close(1)
-		else
-			..()
+	if((C.pry == 1) && !arePowerSystemsOn())
+		if(locked)
+			to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
+		else if( !welded && !operating )
+			if(istype(C, /obj/item/material/twohanded/fireaxe)) // If this is a fireaxe, make sure it's held in two hands.
+				var/obj/item/material/twohanded/fireaxe/F = C
+				if(!F.wielded)
+					to_chat(user, "<span class='warning'>You need to be wielding \the [F] to do that.</span>")
+					return
+			// At this point, it's an armblade or a fireaxe that passed the wielded test, let's try to open it.
+			if(density)
+				spawn(0)
+					open(1)
+			else
+				spawn(0)
+					close(1)
 	else
 		..()
 	return

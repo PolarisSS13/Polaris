@@ -181,10 +181,10 @@
 	icon_state = "rup"
 
 /obj/random/sfr/item_to_spawn()
-	return pick(prob(25);/obj/item/device/radio/headset/heads/captain/sfr,
-				prob(25);/obj/item/device/radio/headset/headset_cargo/alt,
-				prob(25);/obj/item/device/radio/headset/headset_com/alt,
-				prob(25);/obj/item/device/radio/headset)
+	return pick(prob(25);/obj/item/radio/headset/heads/captain/sfr,
+				prob(25);/obj/item/radio/headset/headset_cargo/alt,
+				prob(25);/obj/item/radio/headset/headset_com/alt,
+				prob(25);/obj/item/radio/headset)
 
 // Mining Goodies
 /obj/random/multiple/minevault
@@ -441,7 +441,7 @@
 				/obj/item/melee/cultblade,
 				/obj/item/clothing/suit/cultrobes,
 				/obj/item/clothing/head/culthood,
-				/obj/item/device/soulstone,
+				/obj/item/soulstone,
 				/obj/structure/closet/crate
 			),
 			prob(1);list(
@@ -464,7 +464,7 @@
 				/obj/item/storage/backpack/clown,
 				/obj/item/clothing/under/rank/clown,
 				/obj/item/clothing/shoes/clown_shoes,
-				/obj/item/device/pda/clown,
+				/obj/item/pda/clown,
 				/obj/item/clothing/mask/gas/clown_hat,
 				/obj/item/bikehorn,
 				/obj/item/reagent_containers/spray/waterflower,
@@ -474,7 +474,7 @@
 			prob(1);list(
 				/obj/item/clothing/under/mime,
 				/obj/item/clothing/shoes/black,
-				/obj/item/device/pda/mime,
+				/obj/item/pda/mime,
 				/obj/item/clothing/gloves/white,
 				/obj/item/clothing/mask/gas/mime,
 				/obj/item/clothing/head/beret,
@@ -847,15 +847,15 @@
 				/obj/structure/closet/crate/zenghu //ZENGHU PILLS
 			),
 			prob(10);list(
-				/obj/item/device/toner,
-				/obj/item/device/toner,
-				/obj/item/device/toner,
+				/obj/item/toner,
+				/obj/item/toner,
+				/obj/item/toner,
 				/obj/item/clipboard,
 				/obj/item/clipboard,
 				/obj/item/pen/red,
 				/obj/item/pen/blue,
 				/obj/item/pen/blue,
-				/obj/item/device/camera_film,
+				/obj/item/camera_film,
 				/obj/item/folder/blue,
 				/obj/item/folder/red,
 				/obj/item/folder/yellow,
@@ -886,7 +886,7 @@
 				/obj/item/storage/belt/janitor,
 				/obj/item/clothing/shoes/galoshes,
 				/obj/item/storage/bag/trash,
-				/obj/item/device/lightreplacer,
+				/obj/item/lightreplacer,
 				/obj/item/reagent_containers/spray/cleaner,
 				/obj/item/reagent_containers/glass/rag,
 				/obj/item/grenade/chem_grenade/cleaner,
@@ -1118,15 +1118,15 @@
 				/obj/structure/closet/crate/zenghu //ZENGHU PILLS
 			),
 			prob(10);list(
-				/obj/item/device/toner,
-				/obj/item/device/toner,
-				/obj/item/device/toner,
+				/obj/item/toner,
+				/obj/item/toner,
+				/obj/item/toner,
 				/obj/item/clipboard,
 				/obj/item/clipboard,
 				/obj/item/pen/red,
 				/obj/item/pen/blue,
 				/obj/item/pen/blue,
-				/obj/item/device/camera_film,
+				/obj/item/camera_film,
 				/obj/item/folder/blue,
 				/obj/item/folder/red,
 				/obj/item/folder/yellow,
@@ -1157,7 +1157,7 @@
 				/obj/item/storage/belt/janitor,
 				/obj/item/clothing/shoes/galoshes,
 				/obj/item/storage/bag/trash,
-				/obj/item/device/lightreplacer,
+				/obj/item/lightreplacer,
 				/obj/item/reagent_containers/spray/cleaner,
 				/obj/item/reagent_containers/glass/rag,
 				/obj/item/grenade/chem_grenade/cleaner,

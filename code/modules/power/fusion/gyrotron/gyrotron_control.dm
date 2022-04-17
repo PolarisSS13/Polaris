@@ -118,7 +118,7 @@
 
 /obj/machinery/computer/gyrotron_control/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Gyrotron Control", monitor.gyro_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			monitor.gyro_tag = new_ident

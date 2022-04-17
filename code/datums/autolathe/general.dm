@@ -51,7 +51,7 @@
 
 /datum/category_item/autolathe/general/flashlight
 	name = "flashlight"
-	path =/obj/item/device/flashlight
+	path =/obj/item/flashlight
 
 /datum/category_item/autolathe/general/floor_light
 	name = "floor light"
@@ -71,15 +71,15 @@
 
 /datum/category_item/autolathe/general/radio_headset
 	name = "radio headset"
-	path =/obj/item/device/radio/headset
+	path =/obj/item/radio/headset
 
 /datum/category_item/autolathe/general/radio_bounced
 	name = "station bounced radio"
-	path =/obj/item/device/radio/off
+	path =/obj/item/radio/off
 
 /datum/category_item/autolathe/general/suit_cooler
 	name = "suit cooling unit"
-	path =/obj/item/device/suit_cooling_unit
+	path =/obj/item/suit_cooling_unit
 
 /datum/category_item/autolathe/general/weldermask
 	name = "welding mask"
@@ -95,7 +95,7 @@
 
 /datum/category_item/autolathe/general/taperecorder
 	name = "tape recorder"
-	path =/obj/item/device/taperecorder
+	path =/obj/item/taperecorder
 
 /datum/category_item/autolathe/general/tube
 	name = "light tube"
@@ -117,7 +117,7 @@
 
 /datum/category_item/autolathe/general/maglight
 	name = "maglight"
-	path =/obj/item/device/flashlight/maglight
+	path =/obj/item/flashlight/maglight
 
 /datum/category_item/autolathe/general/ecigcartridge
 	name = "ecigarette cartridge"

@@ -9,12 +9,12 @@
 		if("stealth")
 			new /obj/item/gun/energy/crossbow(src)
 			new /obj/item/pen/reagent/paralysis(src)
-			new /obj/item/device/chameleon(src)
+			new /obj/item/chameleon(src)
 
 		if("screwed")
 			new /obj/effect/spawner/newbomb/timer/syndicate(src)
 			new /obj/effect/spawner/newbomb/timer/syndicate(src)
-			new /obj/item/device/powersink(src)
+			new /obj/item/powersink(src)
 			new /obj/item/clothing/suit/space/syndicate(src)
 			new /obj/item/clothing/head/helmet/space/syndicate(src)
 			new /obj/item/clothing/mask/gas/syndicate(src)
@@ -40,13 +40,13 @@
 			U.imp = new /obj/item/implant/uplink(U)
 
 		if("hacker")
-			new /obj/item/device/encryptionkey/syndicate(src)
+			new /obj/item/encryptionkey/syndicate(src)
 			new /obj/item/aiModule/syndicate(src)
 			new /obj/item/card/emag(src)
-			new /obj/item/device/encryptionkey/binary(src)
+			new /obj/item/encryptionkey/binary(src)
 
 		if("lordsingulo")
-			new /obj/item/device/radio/beacon/syndicate(src)
+			new /obj/item/radio/beacon/syndicate(src)
 			new /obj/item/clothing/suit/space/syndicate(src)
 			new /obj/item/clothing/head/helmet/space/syndicate(src)
 			new /obj/item/clothing/mask/gas/syndicate(src)
@@ -158,7 +158,7 @@
 	starts_with = list(
 		/obj/item/stamp/chameleon,
 		/obj/item/pen/chameleon,
-		/obj/item/device/destTagger,
+		/obj/item/destTagger,
 		/obj/item/packageWrap,
 		/obj/item/hand_labeler
 	)
@@ -167,8 +167,8 @@
 	name = "spy kit"
 	desc = "For when you want to conduct voyeurism from afar."
 	starts_with = list(
-		/obj/item/device/camerabug/spy = 6,
-		/obj/item/device/bug_monitor/spy
+		/obj/item/camerabug/spy = 6,
+		/obj/item/bug_monitor/spy
 	)
 
 /obj/item/storage/box/syndie_kit/g9mm

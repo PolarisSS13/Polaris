@@ -40,7 +40,7 @@
 "aN" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/standard,/obj/item/tank/phoron{start_anomalous = 1},/obj/item/fuel_assembly/phoron,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)
 "aO" = (/obj/effect/decal/remains/human,/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled/steel{icon_state = "steel_dirty"},/area/submap/BoomBase)
 "aP" = (/obj/item/material/shard,/turf/simulated/floor/tiled/steel{icon_state = "steel_dirty"},/area/submap/BoomBase)
-"aQ" = (/obj/item/device/transfer_valve,/turf/simulated/floor/outdoors/rocks,/area/submap/BoomBase)
+"aQ" = (/obj/item/transfer_valve,/turf/simulated/floor/outdoors/rocks,/area/submap/BoomBase)
 "aR" = (/obj/item/material/shard,/turf/template_noop,/area/submap/BoomBase)
 "aS" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/plating,/area/submap/BoomBase)
 "aT" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/tiled/steel,/area/submap/BoomBase)

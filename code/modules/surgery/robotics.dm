@@ -304,7 +304,7 @@
 /datum/surgery_step/robotics/detatch_organ_robotic
 
 	allowed_tools = list(
-	/obj/item/device/multitool = 100
+	/obj/item/multitool = 100
 	)
 
 	min_duration = 90
@@ -405,7 +405,7 @@
 
 /datum/surgery_step/robotics/install_mmi
 	allowed_tools = list(
-		/obj/item/device/mmi = 100
+		/obj/item/mmi = 100
 	)
 
 	min_duration = 60
@@ -415,7 +415,7 @@
 	if(target_zone != BP_HEAD)
 		return
 
-	var/obj/item/device/mmi/M = tool
+	var/obj/item/mmi/M = tool
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if(!(affected && affected.open == 3))
 		return 0
@@ -452,7 +452,7 @@
 	user.visible_message("<span class='notice'>[user] has installed \the [tool] into [target]'s [affected.name].</span>", \
 	"<span class='notice'>You have installed \the [tool] into [target]'s [affected.name].</span>")
 
-	var/obj/item/device/mmi/M = tool
+	var/obj/item/mmi/M = tool
 	var/obj/item/organ/internal/mmi_holder/holder = new(target, 1)
 	target.internal_organs_by_name["brain"] = holder
 	user.drop_from_inventory(tool)

@@ -477,26 +477,26 @@ var/list/mining_overlay_cache = list()
 
 
 	else
-		if (istype(W, /obj/item/device/core_sampler))
+		if (istype(W, /obj/item/core_sampler))
 			geologic_data.UpdateNearbyArtifactInfo(src)
-			var/obj/item/device/core_sampler/C = W
+			var/obj/item/core_sampler/C = W
 			C.sample_item(src, user)
 			return
 
-		if (istype(W, /obj/item/device/depth_scanner))
-			var/obj/item/device/depth_scanner/C = W
+		if (istype(W, /obj/item/depth_scanner))
+			var/obj/item/depth_scanner/C = W
 			C.scan_atom(user, src)
 			return
 
-		if (istype(W, /obj/item/device/measuring_tape))
-			var/obj/item/device/measuring_tape/P = W
+		if (istype(W, /obj/item/measuring_tape))
+			var/obj/item/measuring_tape/P = W
 			user.visible_message("<span class='notice'>\The [user] extends \a [P] towards \the [src].</span>","<span class='notice'>You extend \the [P] towards \the [src].</span>")
 			if(do_after(user, 15))
 				to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
 			return
 
-		if(istype(W, /obj/item/device/xenoarch_multi_tool))
-			var/obj/item/device/xenoarch_multi_tool/C = W
+		if(istype(W, /obj/item/xenoarch_multi_tool))
+			var/obj/item/xenoarch_multi_tool/C = W
 			if(C.mode) //Mode means scanning
 				C.depth_scanner.scan_atom(user, src)
 			else

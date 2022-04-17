@@ -62,7 +62,7 @@
 "VF" = (/obj/item/trash/candy/proteinbar,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "Yw" = (/obj/effect/floor_decal/rust/part_rusted1,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 "YR" = (/obj/machinery/washing_machine,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
-"ZR" = (/obj/structure/table/standard,/obj/item/device/flashlight/lamp,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
+"ZR" = (/obj/structure/table/standard,/obj/item/flashlight/lamp,/turf/simulated/floor/tiled,/area/submap/cave/AMine1)
 
 (1,1,1) = {"
 axaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxaxax

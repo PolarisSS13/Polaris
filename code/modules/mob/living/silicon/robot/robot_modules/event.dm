@@ -20,7 +20,7 @@
 	src.modules += new /obj/item/borg/combat/shield(src)
 
 	// Med
-	src.modules += new /obj/item/device/healthanalyzer(src)
+	src.modules += new /obj/item/healthanalyzer(src)
 	src.modules += new /obj/item/reagent_containers/borghypo/lost(src)
 
 	// Engi
@@ -28,10 +28,10 @@
 	src.modules += new /obj/item/tool/screwdriver/cyborg(src)
 	src.modules += new /obj/item/tool/wrench/cyborg(src)
 	src.modules += new /obj/item/tool/wirecutters/cyborg(src)
-	src.modules += new /obj/item/device/multitool(src)
+	src.modules += new /obj/item/multitool(src)
 
 	// Sci
-	src.modules += new /obj/item/device/robotanalyzer(src)
+	src.modules += new /obj/item/robotanalyzer(src)
 
 	// Potato
 	src.emag = new /obj/item/gun/energy/retro/mounted(src)
@@ -69,7 +69,7 @@
 	// For growing flowers
 	src.modules += new /obj/item/material/minihoe(src)
 	src.modules += new /obj/item/material/knife/machete/hatchet(src)
-	src.modules += new /obj/item/device/analyzer/plant_analyzer(src)
+	src.modules += new /obj/item/analyzer/plant_analyzer(src)
 	src.modules += new /obj/item/storage/bag/plants(src)
 	src.modules += new /obj/item/robot_harvester(src)
 

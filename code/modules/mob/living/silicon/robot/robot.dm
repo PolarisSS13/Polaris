@@ -48,8 +48,8 @@
 	var/module_state_2 = null
 	var/module_state_3 = null
 
-	var/obj/item/device/radio/borg/radio = null
-	var/obj/item/device/communicator/integrated/communicator = null
+	var/obj/item/radio/borg/radio = null
+	var/obj/item/communicator/integrated/communicator = null
 	var/mob/living/silicon/ai/connected_ai = null
 	var/obj/item/cell/cell = null
 	var/obj/machinery/camera/camera = null
@@ -59,9 +59,9 @@
 	// Components are basically robot organs.
 	var/list/components = list()
 
-	var/obj/item/device/mmi/mmi = null
+	var/obj/item/mmi/mmi = null
 
-	var/obj/item/device/pda/ai/rbPDA = null
+	var/obj/item/pda/ai/rbPDA = null
 
 	var/opened = 0
 	var/emagged = 0
@@ -117,8 +117,8 @@
 	updatename(modtype)
 	updateicon()
 
-	radio = new /obj/item/device/radio/borg(src)
-//	communicator = new /obj/item/device/communicator/integrated(src)
+	radio = new /obj/item/radio/borg(src)
+//	communicator = new /obj/item/communicator/integrated(src)
 //	communicator.register_device(src)
 	common_radio = radio
 
@@ -165,7 +165,7 @@
 	hud_list[SPECIALROLE_HUD] = gen_hud_image('icons/mob/hud.dmi', src, "hudblank", plane = PLANE_CH_SPECIAL)
 
 /mob/living/silicon/robot/proc/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
 	laws = new /datum/ai_laws/nanotrasen()
 	additional_law_channels["Binary"] = "#b"
 	var/new_ai = select_active_ai_with_fewest_borgs()
@@ -208,12 +208,12 @@
 // setup the PDA and its name
 /mob/living/silicon/robot/proc/setup_PDA()
 	if (!rbPDA)
-		rbPDA = new/obj/item/device/pda/ai(src)
+		rbPDA = new/obj/item/pda/ai(src)
 	rbPDA.set_name_and_job(custom_name,"[modtype] [braintype]")
 
 /mob/living/silicon/robot/proc/setup_communicator()
 	if (!communicator)
-		communicator = new/obj/item/device/communicator/integrated(src)
+		communicator = new/obj/item/communicator/integrated(src)
 	communicator.register_device(src.name, "[modtype] [braintype]")
 
 //If there's an MMI in the robot, have it ejected when the mob goes away. --NEO
@@ -282,11 +282,11 @@
 	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/update_braintype()
-	if(istype(mmi, /obj/item/device/mmi/digital/posibrain))
+	if(istype(mmi, /obj/item/mmi/digital/posibrain))
 		braintype = BORG_BRAINTYPE_POSI
-	else if(istype(mmi, /obj/item/device/mmi/digital/robot))
+	else if(istype(mmi, /obj/item/mmi/digital/robot))
 		braintype = BORG_BRAINTYPE_DRONE
-	else if(istype(mmi, /obj/item/device/mmi/inert/ai_remote))
+	else if(istype(mmi, /obj/item/mmi/inert/ai_remote))
 		braintype = BORG_BRAINTYPE_AI_SHELL
 	else
 		braintype = BORG_BRAINTYPE_CYBORG
@@ -617,7 +617,7 @@
 			C.brute_damage = 0
 			C.electronics_damage = 0
 
-	else if (W.is_wirecutter() || istype(W, /obj/item/device/multitool))
+	else if (W.is_wirecutter() || istype(W, /obj/item/multitool))
 		if (wiresexposed)
 			wires.Interact(user)
 		else
@@ -651,7 +651,7 @@
 
 		return
 
-	else if(istype(W, /obj/item/device/encryptionkey/) && opened)
+	else if(istype(W, /obj/item/encryptionkey/) && opened)
 		if(radio)//sanityyyyyy
 			radio.attackby(W,user)//GTFO, you have your own procs
 		else
@@ -688,7 +688,7 @@
 
 
 	else
-		if( !(istype(W, /obj/item/device/robotanalyzer) || istype(W, /obj/item/device/healthanalyzer)) )
+		if( !(istype(W, /obj/item/robotanalyzer) || istype(W, /obj/item/healthanalyzer)) )
 			if(W.force > 0)
 				spark_system.start()
 		return ..()

@@ -53,9 +53,9 @@
 	offline_slowdown = 2.5
 	allowed = list(
 		/obj/item/gun,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/storage
 		)
 

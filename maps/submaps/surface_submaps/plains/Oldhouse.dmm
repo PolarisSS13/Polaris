@@ -45,7 +45,7 @@
 "S" = (/obj/item/paper/crumpled,/turf/simulated/floor/wood,/area/submap/Oldhouse)
 "T" = (/obj/structure/table/woodentable,/obj/item/storage/backpack/satchel,/turf/simulated/floor/wood,/area/submap/Oldhouse)
 "U" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/clothing/head/hood/winter,/obj/item/clothing/head/hood/winter,/turf/simulated/floor/wood,/area/submap/Oldhouse)
-"V" = (/obj/item/device/flashlight,/turf/simulated/floor/wood,/area/submap/Oldhouse)
+"V" = (/obj/item/flashlight,/turf/simulated/floor/wood,/area/submap/Oldhouse)
 "W" = (/obj/structure/table/rack,/obj/item/clothing/shoes/boots/winter,/obj/item/clothing/shoes/boots/winter,/obj/item/clothing/shoes/boots/winter,/turf/simulated/floor/wood,/area/submap/Oldhouse)
 "X" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/Oldhouse)
 "Y" = (/obj/structure/table/woodentable,/turf/simulated/floor/wood{icon_state = "wood_broken6"},/area/submap/Oldhouse)

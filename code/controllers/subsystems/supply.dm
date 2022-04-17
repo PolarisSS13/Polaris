@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(supply)
 		return 1
 	if(istype(A,/obj/machinery/nuclearbomb))
 		return 1
-	if(istype(A,/obj/item/device/radio/beacon))
+	if(istype(A,/obj/item/radio/beacon))
 		return 1
 
 	for(var/atom/B in A.contents)

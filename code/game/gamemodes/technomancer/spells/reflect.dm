@@ -72,7 +72,7 @@
 
 				return PROJECTILE_CONTINUE // complete projectile permutation
 
-		else if(istype(damage_source, /obj/item/weapon))
+		else if(istype(damage_source))
 			var/obj/item/W = damage_source
 			if(attacker)
 				W.attack(attacker)

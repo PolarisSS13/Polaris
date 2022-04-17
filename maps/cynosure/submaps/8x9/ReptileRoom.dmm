@@ -21,7 +21,7 @@
 "O" = (/obj/machinery/light/small,/obj/item/stack/emptysandbag,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood/broken,/area/template_noop)
 "P" = (/obj/machinery/door/window/northleft,/obj/structure/window/basic{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/template_noop)
 "R" = (/obj/structure/disposalpipe/trunk,/obj/structure/disposaloutlet{dir = 4},/turf/simulated/mineral/floor/ignore_mapgen,/area/template_noop)
-"T" = (/obj/structure/window/basic{dir = 1},/obj/structure/table/standard,/obj/item/device/flashlight/lamp/green,/obj/item/paper_bin{pixel_x = 1; pixel_y = 9},/turf/simulated/floor/wood,/area/template_noop)
+"T" = (/obj/structure/window/basic{dir = 1},/obj/structure/table/standard,/obj/item/flashlight/lamp/green,/obj/item/paper_bin{pixel_x = 1; pixel_y = 9},/turf/simulated/floor/wood,/area/template_noop)
 "U" = (/obj/item/toy/plushie/lizard,/turf/simulated/mineral/floor/ignore_mapgen,/area/template_noop)
 "V" = (/obj/machinery/space_heater,/turf/simulated/mineral/floor/ignore_mapgen,/area/template_noop)
 "W" = (/obj/item/stack/sandbags,/obj/machinery/power/apc{coverlocked = 0; locked = 0; name = "south bump"; operating = 0; pixel_y = -24},/turf/simulated/floor/wood,/area/template_noop)

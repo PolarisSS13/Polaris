@@ -856,15 +856,15 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = -21
 	},
 /obj/structure/closet/crate/nanotrasen{
 	dir = 2
 	},
-/obj/item/device/aicard,
-/obj/item/device/multitool,
+/obj/item/aicard,
+/obj/item/multitool,
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/teleporter)
 "jW" = (
@@ -876,7 +876,7 @@
 	d2 = 8;
 	icon_state = "2-8"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = 21
 	},
@@ -1855,7 +1855,7 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 1
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = 21
 	},
@@ -2279,7 +2279,7 @@
 	pixel_x = -3;
 	pixel_y = 2
 	},
-/obj/item/device/multitool,
+/obj/item/multitool,
 /turf/simulated/floor/tiled/dark,
 /area/tcommsat/cynosure/computer)
 "xe" = (
@@ -2510,7 +2510,7 @@
 	name = "Emergency NanoMed";
 	pixel_x = -28
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = 21
 	},
@@ -2522,7 +2522,7 @@
 	},
 /obj/effect/floor_decal/industrial/warning/corner,
 /obj/effect/floor_decal/rust/mono_rusted3,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = -21
 	},
 /turf/simulated/floor/tiled/techmaint,
@@ -2674,7 +2674,7 @@
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	pixel_y = -21
 	},
 /turf/simulated/floor/tiled/steel_dirty,
@@ -3870,7 +3870,7 @@
 	c_tag = "Tcoms - Solar Control";
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = 21
 	},
@@ -3947,7 +3947,7 @@
 	pixel_x = -4;
 	pixel_y = 2
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	pixel_x = 21
 	},
@@ -4089,7 +4089,7 @@
 /obj/effect/floor_decal/techfloor{
 	dir = 6
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = 21
 	},
@@ -5042,7 +5042,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/rust/steel_decals_rusted1,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	pixel_y = 21
 	},

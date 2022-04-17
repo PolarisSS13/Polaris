@@ -37,8 +37,8 @@
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/shoes/white,
 		/obj/item/cartridge/medical,
-		/obj/item/device/radio/headset/headset_med,
-		/obj/item/device/radio/headset/headset_med/alt,
+		/obj/item/radio/headset/headset_med,
+		/obj/item/radio/headset/headset_med/alt,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/medical,
 		/obj/item/clothing/shoes/boots/winter/medical,
 		/obj/item/clothing/under/rank/nursesuit,
@@ -103,22 +103,22 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/toggle/fr_jacket,
 		/obj/item/clothing/suit/storage/toggle/labcoat/emt,
-		/obj/item/device/radio/headset/headset_med/alt,
+		/obj/item/radio/headset/headset_med/alt,
 		/obj/item/cartridge/medical,
 		/obj/item/storage/briefcase/inflatable,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank/emergency/oxygen/engi,
 		/obj/item/clothing/glasses/hud/health,
-		/obj/item/device/healthanalyzer,
-		/obj/item/device/radio/off,
+		/obj/item/healthanalyzer,
+		/obj/item/radio/off,
 		/obj/random/medical,
 		/obj/item/tool/crowbar,
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/box/freezer,
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/taperoll/medical,
-		/obj/item/device/gps/medical,
-		/obj/item/device/geiger
+		/obj/item/gps/medical,
+		/obj/item/geiger
 		)
 
 /obj/structure/closet/secure_closet/CMO
@@ -134,9 +134,9 @@
 		/obj/item/cartridge/cmo,
 		/obj/item/clothing/gloves/sterile/latex,
 		/obj/item/clothing/shoes/brown,
-		/obj/item/device/radio/headset/heads/cmo,
-		/obj/item/device/radio/headset/heads/cmo/alt,
-		/obj/item/device/flash,
+		/obj/item/radio/headset/heads/cmo,
+		/obj/item/radio/headset/heads/cmo/alt,
+		/obj/item/flash,
 		/obj/item/reagent_containers/hypospray/vial,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/medical,
 		/obj/item/clothing/shoes/boots/winter/medical,
@@ -146,7 +146,7 @@
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/white,
-		/obj/item/device/gps/medical/cmo)
+		/obj/item/gps/medical/cmo)
 
 /obj/structure/closet/secure_closet/CMO/Initialize()
 	if(prob(50))
@@ -179,8 +179,8 @@
 	req_access = list(access_surgery)
 
 	starts_with = list(
-		/obj/item/device/assembly/signaler,
-		/obj/item/device/radio/electropack = 3)
+		/obj/item/assembly/signaler,
+		/obj/item/radio/electropack = 3)
 
 
 /obj/structure/closet/secure_closet/chemical
@@ -217,9 +217,9 @@
 		/obj/item/reagent_containers/pill/methylphenidate,
 		/obj/item/clipboard,
 		/obj/item/folder/white,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape/random = 3,
-		/obj/item/device/camera,
+		/obj/item/taperecorder,
+		/obj/item/tape/random = 3,
+		/obj/item/camera,
 		/obj/item/toy/plushie/therapy/blue)
 
 

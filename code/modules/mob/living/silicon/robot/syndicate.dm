@@ -14,14 +14,14 @@
 	. = ..()
 
 /mob/living/silicon/robot/syndicate/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
 
 	laws = new /datum/ai_laws/syndicate_override
 	overlays.Cut()
 	init_id()
 	new /obj/item/robot_module/robot/syndicate(src)
 
-	radio.keyslot = new /obj/item/device/encryptionkey/syndicate(radio)
+	radio.keyslot = new /obj/item/encryptionkey/syndicate(radio)
 	radio.recalculateChannels()
 
 	playsound(src, 'sound/mecha/nominalsyndi.ogg', 75, 0)

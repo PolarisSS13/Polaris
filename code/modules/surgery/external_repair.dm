@@ -36,7 +36,7 @@
 /datum/surgery_step/repairflesh/scan_injury
 	allowed_tools = list(
 	/obj/item/autopsy_scanner = 100,
-	/obj/item/device/analyzer = 10
+	/obj/item/analyzer = 10
 	)
 
 	priority = 2

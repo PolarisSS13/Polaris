@@ -100,7 +100,7 @@
 
 	modules += new /obj/item/packageWrap(src)
 	modules += new /obj/item/pen/multi(src)
-	modules += new /obj/item/device/destTagger(src)
+	modules += new /obj/item/destTagger(src)
 	emag = new /obj/item/stamp/denied
 
 /obj/item/robot_module/robot/platform/cargo/respawn_consumable(mob/living/silicon/robot/R, rate)

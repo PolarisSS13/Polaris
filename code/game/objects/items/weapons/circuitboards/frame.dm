@@ -58,7 +58,7 @@
 
 /obj/item/circuitboard/intercom
 	name = T_BOARD("intercom")
-	build_path = /obj/item/device/radio/intercom
+	build_path = /obj/item/radio/intercom
 	board_type = new /datum/frame/frame_types/intercom
 	matter = list(MAT_STEEL = 50, "glass" = 50)
 
@@ -70,7 +70,7 @@
 
 /obj/item/circuitboard/geiger
 	name = T_BOARD("geiger counter")
-	build_path = /obj/item/device/geiger/wall
+	build_path = /obj/item/geiger/wall
 	board_type = new /datum/frame/frame_types/geiger
 	matter = list(MAT_STEEL = 50, "glass" = 50)
 

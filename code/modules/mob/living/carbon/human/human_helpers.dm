@@ -131,11 +131,11 @@
 	if(B) // Incase we lost our brain for some reason, like if we got decapped.
 		if(istype(B, /obj/item/organ/internal/mmi_holder))
 			var/obj/item/organ/internal/mmi_holder/mmi_holder = B
-			if(istype(mmi_holder.stored_mmi, /obj/item/device/mmi/digital/posibrain))
+			if(istype(mmi_holder.stored_mmi, /obj/item/mmi/digital/posibrain))
 				return FBP_POSI
-			else if(istype(mmi_holder.stored_mmi, /obj/item/device/mmi/digital/robot))
+			else if(istype(mmi_holder.stored_mmi, /obj/item/mmi/digital/robot))
 				return FBP_DRONE
-			else if(istype(mmi_holder.stored_mmi, /obj/item/device/mmi)) // This needs to come last because inheritence.
+			else if(istype(mmi_holder.stored_mmi, /obj/item/mmi)) // This needs to come last because inheritence.
 				return FBP_CYBORG
 
 	return FBP_NONE

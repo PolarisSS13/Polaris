@@ -25,13 +25,13 @@
 	starts_with = list(
 		/obj/item/tool/crowbar/red,
 		/obj/item/extinguisher/mini,
-		/obj/item/device/radio
+		/obj/item/radio
 	)
 /obj/item/storage/toolbox/emergency/Initialize()
 	if(prob(50))
-		new /obj/item/device/flashlight(src)
+		new /obj/item/flashlight(src)
 	else
-		new /obj/item/device/flashlight/flare(src)
+		new /obj/item/flashlight/flare(src)
 	. = ..()
 
 /obj/item/storage/toolbox/mechanical
@@ -43,7 +43,7 @@
 		/obj/item/tool/wrench,
 		/obj/item/weldingtool,
 		/obj/item/tool/crowbar,
-		/obj/item/device/analyzer,
+		/obj/item/analyzer,
 		/obj/item/tool/wirecutters
 	)
 
@@ -54,7 +54,7 @@
 	starts_with = list(
 		/obj/item/tool/screwdriver,
 		/obj/item/tool/wirecutters,
-		/obj/item/device/t_scanner,
+		/obj/item/t_scanner,
 		/obj/item/tool/crowbar,
 		/obj/item/stack/cable_coil/random_belt,
 		/obj/item/stack/cable_coil/random_belt
@@ -80,7 +80,7 @@
 		/obj/item/weldingtool,
 		/obj/item/tool/crowbar,
 		/obj/item/tool/wirecutters,
-		/obj/item/device/multitool
+		/obj/item/multitool
 	)
 
 /obj/item/storage/toolbox/syndicate/powertools
@@ -89,9 +89,9 @@
 		/obj/item/tool/screwdriver/power,
 		/obj/item/weldingtool/experimental,
 		/obj/item/tool/crowbar/power,
-		/obj/item/device/multitool,
+		/obj/item/multitool,
 		/obj/item/stack/cable_coil/random_belt,
-		/obj/item/device/analyzer
+		/obj/item/analyzer
 	)
 
 /obj/item/storage/toolbox/lunchbox

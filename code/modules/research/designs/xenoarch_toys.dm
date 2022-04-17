@@ -10,14 +10,14 @@
 	desc = "Aids in triangulation of exotic particles."
 	req_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
 	materials = list(MAT_STEEL = 10000,"glass" = 5000)
-	build_path = /obj/item/device/ano_scanner
+	build_path = /obj/item/ano_scanner
 	sort_string = "GAAAA"
 
 /datum/design/item/weapon/xenoarch/xenoarch_multi_tool
 	name = "xenoarcheology multitool"
 	id = "xenoarch_multitool"
 	req_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3, TECH_BLUESPACE = 3)
-	build_path = /obj/item/device/xenoarch_multi_tool
+	build_path = /obj/item/xenoarch_multi_tool
 	materials = list(MAT_STEEL = 2000, "glass" = 1000, "uranium" = 500, "phoron" = 500)
 	sort_string = "GAAAB"
 

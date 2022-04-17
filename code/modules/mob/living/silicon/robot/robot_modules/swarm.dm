@@ -12,7 +12,7 @@
 	id = R.idcard
 	src.modules += id
 	src.modules += new /obj/item/rcd/electric/mounted/borg/swarm(src)
-	src.modules += new /obj/item/device/flash/robot(src)
+	src.modules += new /obj/item/flash/robot(src)
 	src.modules += new /obj/item/handcuffs/cable/tape/cyborg(src)
 	src.modules += new /obj/item/melee/baton/robot(src)
 	src.modules += new /obj/item/gun/energy/taser/mounted/cyborg/swarm(src)

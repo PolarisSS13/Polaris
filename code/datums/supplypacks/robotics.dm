@@ -14,9 +14,9 @@
 /datum/supply_pack/robotics/robotics_assembly
 	name = "Robotics assembly crate"
 	contains = list(
-			/obj/item/device/assembly/prox_sensor = 3,
+			/obj/item/assembly/prox_sensor = 3,
 			/obj/item/storage/toolbox/electrical,
-			/obj/item/device/flash = 4,
+			/obj/item/flash = 4,
 			/obj/item/cell/high = 2
 			)
 	cost = 10
@@ -151,10 +151,10 @@
 /datum/supply_pack/randomised/robotics/exosuit_mod
 	num_contained = 1
 	contains = list(
-			/obj/item/device/kit/paint/ripley,
-			/obj/item/device/kit/paint/ripley/death,
-			/obj/item/device/kit/paint/ripley/flames_red,
-			/obj/item/device/kit/paint/ripley/flames_blue
+			/obj/item/kit/paint/ripley,
+			/obj/item/kit/paint/ripley/death,
+			/obj/item/kit/paint/ripley/flames_red,
+			/obj/item/kit/paint/ripley/flames_blue
 			)
 	name = "Random APLU modkit"
 	cost = 200
@@ -163,18 +163,18 @@
 
 /datum/supply_pack/randomised/robotics/exosuit_mod/durand
 	contains = list(
-			/obj/item/device/kit/paint/durand,
-			/obj/item/device/kit/paint/durand/seraph,
-			/obj/item/device/kit/paint/durand/phazon
+			/obj/item/kit/paint/durand,
+			/obj/item/kit/paint/durand/seraph,
+			/obj/item/kit/paint/durand/phazon
 			)
 	name = "Random Durand exosuit modkit"
 	containertype = /obj/structure/closet/crate/heph
 
 /datum/supply_pack/randomised/robotics/exosuit_mod/gygax
 	contains = list(
-			/obj/item/device/kit/paint/gygax,
-			/obj/item/device/kit/paint/gygax/darkgygax,
-			/obj/item/device/kit/paint/gygax/recitence
+			/obj/item/kit/paint/gygax,
+			/obj/item/kit/paint/gygax/darkgygax,
+			/obj/item/kit/paint/gygax/recitence
 			)
 	name = "Random Gygax exosuit modkit"
 	containertype = /obj/structure/closet/crate/heph
@@ -182,7 +182,7 @@
 /datum/supply_pack/robotics/jumper_cables
 	name = "Jumper kit crate"
 	contains = list(
-			/obj/item/device/defib_kit/jumper_kit = 2
+			/obj/item/defib_kit/jumper_kit = 2
 			)
 	cost = 30
 	containertype = /obj/structure/closet/crate/secure/einstein

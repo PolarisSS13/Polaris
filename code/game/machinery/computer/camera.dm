@@ -74,7 +74,7 @@
 	light_range_on = 2
 	network = list(NETWORK_THUNDER)
 	circuit = /obj/item/circuitboard/security/telescreen/entertainment
-	var/obj/item/device/radio/radio = null
+	var/obj/item/radio/radio = null
 
 /obj/machinery/computer/security/telescreen/entertainment/Initialize()
 	. = ..()

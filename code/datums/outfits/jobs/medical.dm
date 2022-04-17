@@ -1,8 +1,8 @@
 /decl/hierarchy/outfit/job/medical
 	hierarchy_type = /decl/hierarchy/outfit/job/medical
-	l_ear = /obj/item/device/radio/headset/headset_med
+	l_ear = /obj/item/radio/headset/headset_med
 	shoes = /obj/item/clothing/shoes/white
-	pda_type = /obj/item/device/pda/medical
+	pda_type = /obj/item/pda/medical
 	pda_slot = slot_l_store
 	backpack = /obj/item/storage/backpack/medic
 	satchel_one = /obj/item/storage/backpack/satchel/med
@@ -10,21 +10,21 @@
 
 /decl/hierarchy/outfit/job/medical/cmo
 	name = OUTFIT_JOB_NAME("Chief Medical Officer")
-	l_ear  =/obj/item/device/radio/headset/heads/cmo
+	l_ear  =/obj/item/radio/headset/heads/cmo
 	uniform = /obj/item/clothing/under/rank/chief_medical_officer
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/cmo
 	shoes = /obj/item/clothing/shoes/brown
 	l_hand = /obj/item/storage/firstaid/adv
-	r_pocket = /obj/item/device/healthanalyzer
+	r_pocket = /obj/item/healthanalyzer
 	id_type = /obj/item/card/id/medical/head
-	pda_type = /obj/item/device/pda/heads/cmo
+	pda_type = /obj/item/pda/heads/cmo
 
 /decl/hierarchy/outfit/job/medical/doctor
 	name = OUTFIT_JOB_NAME("Medical Doctor")
 	uniform = /obj/item/clothing/under/rank/medical
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat
 	l_hand = /obj/item/storage/firstaid/regular
-	r_pocket = /obj/item/device/flashlight/pen
+	r_pocket = /obj/item/flashlight/pen
 	id_type = /obj/item/card/id/medical
 
 /decl/hierarchy/outfit/job/medical/doctor/emergency_physician
@@ -67,17 +67,17 @@
 	satchel_one = /obj/item/storage/backpack/satchel/chem
 	sports_bag = /obj/item/storage/backpack/sport/chem
 	id_type = /obj/item/card/id/medical/chemist
-	pda_type = /obj/item/device/pda/chemist
+	pda_type = /obj/item/pda/chemist
 
 /decl/hierarchy/outfit/job/medical/geneticist
 	name = OUTFIT_JOB_NAME("Geneticist")
 	uniform = /obj/item/clothing/under/rank/geneticist
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/genetics
 	backpack = /obj/item/storage/backpack/genetics
-	r_pocket = /obj/item/device/flashlight/pen
+	r_pocket = /obj/item/flashlight/pen
 	satchel_one = /obj/item/storage/backpack/satchel/gen
 	id_type = /obj/item/card/id/medical/geneticist
-	pda_type = /obj/item/device/pda/geneticist
+	pda_type = /obj/item/pda/geneticist
 
 /decl/hierarchy/outfit/job/medical/psychiatrist
 	name = OUTFIT_JOB_NAME("Psychiatrist")

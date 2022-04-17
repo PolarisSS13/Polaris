@@ -23,7 +23,7 @@
 "R" = (/obj/machinery/light_construct/small{dir = 1},/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/tiled/techfloor/grid,/area/template_noop)
 "V" = (/obj/structure/salvageable/server,/obj/machinery/alarm{pixel_y = 24},/turf/simulated/floor/tiled/techfloor/grid,/area/template_noop)
 "W" = (/obj/machinery/atmospherics/unary/vent_pump,/turf/simulated/floor/tiled/techfloor/grid,/area/template_noop)
-"Z" = (/obj/structure/sign/poster{dir = 8; pixel_x = -32; poster_decl = /decl/poster/bay_3},/obj/item/device/radio/intercom{dir = 1; pixel_y = 21},/obj/random/technology_scanner,/obj/item/bikehorn/rubberducky,/obj/structure/table/steel,/turf/simulated/floor/tiled/techfloor/grid,/area/template_noop)
+"Z" = (/obj/structure/sign/poster{dir = 8; pixel_x = -32; poster_decl = /decl/poster/bay_3},/obj/item/radio/intercom{dir = 1; pixel_y = 21},/obj/random/technology_scanner,/obj/item/bikehorn/rubberducky,/obj/structure/table/steel,/turf/simulated/floor/tiled/techfloor/grid,/area/template_noop)
 
 (1,1,1) = {"
 paaaaaaaa

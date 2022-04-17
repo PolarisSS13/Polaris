@@ -55,10 +55,10 @@ var/list/ai_verbs_default = list(
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
 	var/list/connected_robots = list()
-	var/obj/item/device/pda/ai/aiPDA = null
-	var/obj/item/device/communicator/aiCommunicator = null
-	var/obj/item/device/multitool/aiMulti = null
-	var/obj/item/device/radio/headset/heads/ai_integrated/aiRadio = null
+	var/obj/item/pda/ai/aiPDA = null
+	var/obj/item/communicator/aiCommunicator = null
+	var/obj/item/multitool/aiMulti = null
+	var/obj/item/radio/headset/heads/ai_integrated/aiRadio = null
 	var/camera_light_on = 0	//Defines if the AI toggled the light on the camera it's looking through.
 	var/datum/trackable/track = null
 	var/last_announcement = ""
@@ -106,7 +106,7 @@ var/list/ai_verbs_default = list(
 	src.verbs -= ai_verbs_default
 	src.verbs -= silicon_subsystems
 
-/mob/living/silicon/ai/Initialize(var/ml, var/datum/ai_laws/L, var/obj/item/device/mmi/B, var/safety = 0)
+/mob/living/silicon/ai/Initialize(var/ml, var/datum/ai_laws/L, var/obj/item/mmi/B, var/safety = 0)
 
 	announcement = new()
 	announcement.title = "A.I. Announcement"
@@ -124,7 +124,7 @@ var/list/ai_verbs_default = list(
 				pickedName = null
 
 	if(!is_dummy)
-		aiPDA = new/obj/item/device/pda/ai(src)
+		aiPDA = new/obj/item/pda/ai(src)
 	SetName(pickedName)
 	anchored = 1
 	canmove = 0
@@ -132,7 +132,7 @@ var/list/ai_verbs_default = list(
 	loc = loc
 
 	if(!is_dummy)
-		aiCommunicator = new /obj/item/device/communicator/integrated(src)
+		aiCommunicator = new /obj/item/communicator/integrated(src)
 
 	holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holo1"))
 
@@ -151,7 +151,7 @@ var/list/ai_verbs_default = list(
 	additional_law_channels["Binary"] = "#b"
 	additional_law_channels["Holopad"] = ":h"
 
-	aiCamera = new/obj/item/device/camera/siliconcam/ai_camera(src)
+	aiCamera = new/obj/item/camera/siliconcam/ai_camera(src)
 
 	if (istype(loc, /turf))
 		add_ai_verbs(src)
@@ -755,9 +755,9 @@ var/list/ai_verbs_default = list(
 
 
 /mob/living/silicon/ai/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/aicard))
+	if(istype(W, /obj/item/aicard))
 
-		var/obj/item/device/aicard/card = W
+		var/obj/item/aicard/card = W
 		card.grab_ai(src, user)
 
 	else if(W.is_wrench())

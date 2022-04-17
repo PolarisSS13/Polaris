@@ -29,7 +29,7 @@
 /decl/hierarchy/outfit/soviet_soldier/admiral
 	name = "Soviet admiral"
 	head = /obj/item/clothing/head/hgpiratecap
-	l_ear = /obj/item/device/radio/headset/heads/captain
+	l_ear = /obj/item/radio/headset/heads/captain
 	glasses = /obj/item/clothing/glasses/thermal/plain/eyepatch
 	suit = /obj/item/clothing/suit/hgpirate
 
@@ -40,12 +40,12 @@
 /decl/hierarchy/outfit/merchant
 	name = "Merchant"
 	shoes = /obj/item/clothing/shoes/black
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	uniform = /obj/item/clothing/under/color/grey
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/civilian	//merchant
 	pda_slot = slot_r_store
-	pda_type = /obj/item/device/pda/chef //cause I like the look
+	pda_type = /obj/item/pda/chef //cause I like the look
 	id_pda_assignment = "Merchant"
 
 /decl/hierarchy/outfit/merchant/vox

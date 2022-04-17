@@ -69,7 +69,7 @@
 			to_chat(user, "<span class='notice'>You [locked ? "" : "un"]lock the circuit controls.</span>")
 		else
 			to_chat(user, "<span class='warning'>Access denied.</span>")
-	else if(istype(I,/obj/item/device/multitool))
+	else if(istype(I,/obj/item/multitool))
 		if(locked)
 			to_chat(user, "<span class='warning'>Circuit controls are locked.</span>")
 			return

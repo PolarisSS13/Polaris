@@ -173,7 +173,7 @@
 		/obj/item/tool/wrench = null,
 		/obj/item/tool/crowbar = null,
 		/obj/item/tool/wirecutters = null,
-		/obj/item/device/multitool = null,
+		/obj/item/multitool = null,
 		/obj/item/stack/cable_coil/gray = null,
 		/obj/item/tape_roll = null
 		)

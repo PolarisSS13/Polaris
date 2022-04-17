@@ -103,8 +103,8 @@
 		/obj/item/toy/sword,
 		/obj/item/reagent_containers/food/snacks/grown/ambrosiadeus,
 		/obj/item/reagent_containers/food/snacks/grown/ambrosiavulgaris,
-		/obj/item/device/paicard,
-		/obj/item/device/instrument/violin,
+		/obj/item/paicard,
+		/obj/item/instrument/violin,
 		/obj/item/storage/belt/utility/full,
 		/obj/item/clothing/accessory/tie/horrible)
 

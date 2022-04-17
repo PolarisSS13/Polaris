@@ -605,8 +605,8 @@
 	fulltile = TRUE
 
 /obj/structure/window/reinforced/polarized/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool) && !anchored) // Only allow programming if unanchored!
-		var/obj/item/device/multitool/MT = W
+	if(istype(W, /obj/item/multitool) && !anchored) // Only allow programming if unanchored!
+		var/obj/item/multitool/MT = W
 		// First check if they have a windowtint button buffered
 		if(istype(MT.connectable, /obj/machinery/button/windowtint))
 			var/obj/machinery/button/windowtint/buffered_button = MT.connectable
@@ -665,8 +665,8 @@
 	icon_state = "light[active]"
 
 /obj/machinery/button/windowtint/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/MT = W
+	if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/MT = W
 		if(!id)
 			// If no ID is set yet (newly built button?) let them select an ID for first-time use!
 			var/t = sanitizeSafe(input(user, "Enter an ID for \the [src].", src.name, null), MAX_NAME_LEN)

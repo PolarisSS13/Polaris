@@ -574,7 +574,7 @@
 		anchored = !anchored
 		to_chat(user, "You [anchored ? "wrench" : "unwrench"] \the [src].")
 
-	else if(istype(O,/obj/item/device/multitool))
+	else if(istype(O,/obj/item/multitool))
 		if(!anchored)
 			to_chat(user, "<span class='warning'>Anchor it first!</span>")
 			return

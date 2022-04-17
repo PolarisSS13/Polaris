@@ -148,7 +148,7 @@ GLOBAL_LIST_EMPTY(fusion_cores)
 	if(default_part_replacement(user, W))
 		return
 
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Fusion Core", id_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			id_tag = new_ident

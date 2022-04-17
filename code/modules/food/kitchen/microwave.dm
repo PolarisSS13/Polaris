@@ -60,7 +60,7 @@
 		// impure carbon. ~Z
 		acceptable_items |= /obj/item/holder
 		acceptable_items |= /obj/item/reagent_containers/food/snacks/grown
-		acceptable_items |= /obj/item/device/soulstone
+		acceptable_items |= /obj/item/soulstone
 		acceptable_items |= /obj/item/fuel_assembly/supermatter
 
 	soundloop = new(list(src), FALSE)

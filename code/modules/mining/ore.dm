@@ -153,8 +153,8 @@
 	randpixel_xy()
 
 /obj/item/ore/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/device/core_sampler))
-		var/obj/item/device/core_sampler/C = W
+	if(istype(W,/obj/item/core_sampler))
+		var/obj/item/core_sampler/C = W
 		C.sample_item(src, user)
 	else
 		return ..()

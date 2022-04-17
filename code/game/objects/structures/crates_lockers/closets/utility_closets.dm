@@ -72,7 +72,7 @@
 	starts_with = list(
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
 		/obj/item/clothing/head/hardhat/red)
@@ -81,7 +81,7 @@
 	starts_with = list(
 		/obj/item/clothing/suit/fire/firefighter = 2,
 		/obj/item/clothing/mask/gas = 2,
-		/obj/item/device/flashlight = 2,
+		/obj/item/flashlight = 2,
 		/obj/item/tank/oxygen/red = 2,
 		/obj/item/extinguisher = 2,
 		/obj/item/clothing/head/hardhat/red = 2)
@@ -99,7 +99,7 @@
 	if(prob(40))
 		starts_with += /obj/item/clothing/suit/storage/hazardvest
 	if(prob(70))
-		starts_with += /obj/item/device/flashlight
+		starts_with += /obj/item/flashlight
 	if(prob(70))
 		starts_with += /obj/item/tool/screwdriver
 	if(prob(70))
@@ -111,7 +111,7 @@
 	if(prob(70))
 		starts_with += /obj/item/tool/wirecutters
 	if(prob(70))
-		starts_with += /obj/item/device/t_scanner
+		starts_with += /obj/item/t_scanner
 	if(prob(20))
 		starts_with += /obj/item/storage/belt/utility
 	if(prob(30))
@@ -121,7 +121,7 @@
 	if(prob(30))
 		starts_with += /obj/item/stack/cable_coil/random
 	if(prob(20))
-		starts_with += /obj/item/device/multitool
+		starts_with += /obj/item/multitool
 	if(prob(5))
 		starts_with += /obj/item/clothing/gloves/yellow
 	if(prob(40))
@@ -140,7 +140,7 @@
 	starts_with = list(
 		/obj/item/clothing/suit/radiation = 2,
 		/obj/item/clothing/head/radiation = 2,
-		/obj/item/device/geiger = 2)
+		/obj/item/geiger = 2)
 
 /*
  * Bombsuit closet
@@ -191,7 +191,7 @@
 	starts_with = list(
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
 		/obj/item/clothing/head/hardhat/red)

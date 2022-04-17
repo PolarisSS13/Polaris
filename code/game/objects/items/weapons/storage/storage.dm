@@ -425,8 +425,8 @@
 	if(isrobot(user))
 		return //Robots can't interact with storage items.
 
-	if(istype(W, /obj/item/device/lightreplacer))
-		var/obj/item/device/lightreplacer/LP = W
+	if(istype(W, /obj/item/lightreplacer))
+		var/obj/item/lightreplacer/LP = W
 		var/amt_inserted = 0
 		var/turf/T = get_turf(user)
 		for(var/obj/item/light/L in src.contents)

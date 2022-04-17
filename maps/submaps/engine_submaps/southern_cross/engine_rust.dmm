@@ -1265,7 +1265,7 @@
 /turf/simulated/floor,
 /area/engineering/engine_room)
 "de" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 2;
 	pixel_y = -24
 	},

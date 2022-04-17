@@ -47,7 +47,7 @@
 	return list("<span class='notice'>\The [src] reads an energy level of [energy].</span>")
 
 /obj/machinery/particle_smasher/attackby(obj/item/W as obj, mob/user as mob)
-	if(W.type == /obj/item/device/analyzer)
+	if(W.type == /obj/item/analyzer)
 		return
 	else if(istype(W, /obj/item/stack/material))
 		var/obj/item/stack/material/M = W

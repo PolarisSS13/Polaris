@@ -56,7 +56,7 @@
 "bd" = (/obj/effect/floor_decal/corner/red/diagonal,/obj/structure/closet/secure_closet/freezer/fridge,/obj/item/storage/fancy/egg_box,/obj/item/storage/fancy/egg_box,/obj/item/reagent_containers/food/drinks/bottle/orangejuice,/obj/item/reagent_containers/food/drinks/bottle/orangejuice,/obj/item/reagent_containers/food/drinks/bottle/orangejuice,/obj/item/reagent_containers/food/drinks/bottle/orangejuice,/obj/item/reagent_containers/food/drinks/bottle/orangejuice,/obj/item/reagent_containers/food/drinks/bottle/milk,/obj/item/reagent_containers/food/drinks/bottle/milk,/obj/item/reagent_containers/food/drinks/bottle/milk,/obj/item/reagent_containers/food/drinks/bottle/milk,/obj/item/reagent_containers/food/drinks/bottle/cream,/obj/item/reagent_containers/food/drinks/bottle/cream,/turf/simulated/floor/tiled/white,/area/submap/Diner)
 "be" = (/obj/structure/table/standard,/obj/machinery/chemical_dispenser/bar_coffee,/turf/simulated/floor/tiled/white,/area/submap/Diner)
 "bf" = (/obj/item/frame/apc,/turf/simulated/floor/lino,/area/submap/Diner)
-"bg" = (/obj/structure/table/woodentable,/obj/item/device/flashlight/lamp,/turf/simulated/floor/lino,/area/submap/Diner)
+"bg" = (/obj/structure/table/woodentable,/obj/item/flashlight/lamp,/turf/simulated/floor/lino,/area/submap/Diner)
 "bh" = (/obj/structure/bed/chair/office/light,/turf/simulated/floor/lino,/area/submap/Diner)
 "bi" = (/turf/simulated/floor/lino,/area/submap/Diner)
 "bj" = (/obj/structure/table/standard,/obj/random/mug,/turf/simulated/floor/tiled/white,/area/submap/Diner)

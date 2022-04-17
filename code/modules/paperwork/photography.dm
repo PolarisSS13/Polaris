@@ -9,7 +9,7 @@
 /*******
 * film *
 *******/
-/obj/item/device/camera_film
+/obj/item/camera_film
 	name = "film cartridge"
 	icon = 'icons/obj/items.dmi'
 	desc = "A camera film cartridge. Insert it into a camera to reload it."
@@ -119,7 +119,7 @@ var/global/photo_count = 0
 /*********
 * camera *
 *********/
-/obj/item/device/camera
+/obj/item/camera
 	name = "camera"
 	icon = 'icons/obj/items.dmi'
 	desc = "A polaroid camera. 10 photos left."
@@ -136,7 +136,7 @@ var/global/photo_count = 0
 	var/size = 3
 	var/list/picture_planes = list()
 
-/obj/item/device/camera/verb/change_size()
+/obj/item/camera/verb/change_size()
 	set name = "Set Photo Focus"
 	set category = "Object"
 	var/nsize = input("Photo Size","Pick a size of resulting photo.") as null|anything in list(1,3,5,7)
@@ -144,10 +144,10 @@ var/global/photo_count = 0
 		size = nsize
 		to_chat(usr, "<span class='notice'>Camera will now take [size]x[size] photos.</span>")
 
-/obj/item/device/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/camera/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	return
 
-/obj/item/device/camera/attack_self(mob/user as mob)
+/obj/item/camera/attack_self(mob/user as mob)
 	on = !on
 	if(on)
 		src.icon_state = icon_on
@@ -156,8 +156,8 @@ var/global/photo_count = 0
 	to_chat(user, "You switch the camera [on ? "on" : "off"].")
 	return
 
-/obj/item/device/camera/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/device/camera_film))
+/obj/item/camera/attackby(obj/item/I as obj, mob/user as mob)
+	if(istype(I, /obj/item/camera_film))
 		if(pictures_left)
 			to_chat(user, "<span class='notice'>[src] still has some film in it!</span>")
 			return
@@ -169,7 +169,7 @@ var/global/photo_count = 0
 	..()
 
 
-/obj/item/device/camera/proc/get_icon(list/turfs, turf/center)
+/obj/item/camera/proc/get_icon(list/turfs, turf/center)
 
 	//Bigger icon base to capture those icons that were shifted to the next tile
 	//i.e. pretty much all wall-mounted machinery
@@ -219,7 +219,7 @@ var/global/photo_count = 0
 	return res
 
 
-/obj/item/device/camera/proc/get_mobs(turf/the_turf as turf)
+/obj/item/camera/proc/get_mobs(turf/the_turf as turf)
 	var/mob_detail
 	for(var/mob/living/carbon/A in the_turf)
 		if(A.invisibility) continue
@@ -239,7 +239,7 @@ var/global/photo_count = 0
 
 	return mob_detail
 
-/obj/item/device/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
+/obj/item/camera/afterattack(atom/target as mob|obj|turf|area, mob/user as mob, flag)
 	if(!on || !pictures_left || ismob(target.loc)) return
 	captureimage(target, user, flag)
 
@@ -254,7 +254,7 @@ var/global/photo_count = 0
 		icon_state = icon_on
 		on = 1
 
-/obj/item/device/camera/proc/can_capture_turf(turf/T, mob/user)
+/obj/item/camera/proc/can_capture_turf(turf/T, mob/user)
 	var/viewer = user
 	if(user.client)		//To make shooting through security cameras possible
 		viewer = user.client.eye
@@ -262,7 +262,7 @@ var/global/photo_count = 0
 
 	return can_see
 
-/obj/item/device/camera/proc/captureimage(atom/target, mob/user, flag)
+/obj/item/camera/proc/captureimage(atom/target, mob/user, flag)
 	var/x_c = target.x - (size-1)/2
 	var/y_c = target.y + (size-1)/2
 	var/z_c	= target.z
@@ -282,7 +282,7 @@ var/global/photo_count = 0
 
 	printpicture(user, p)
 
-/obj/item/device/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
+/obj/item/camera/proc/createpicture(atom/target, mob/user, list/turfs, mobs, flag)
 	var/icon/photoimage = get_icon(turfs, target)
 
 	var/icon/small_img = icon(photoimage)
@@ -305,7 +305,7 @@ var/global/photo_count = 0
 	p.photo_size = size
 	return p
 
-/obj/item/device/camera/proc/printpicture(mob/user, obj/item/photo/p)
+/obj/item/camera/proc/printpicture(mob/user, obj/item/photo/p)
 	p.loc = user.loc
 	if(!user.get_inactive_hand())
 		user.put_in_inactive_hand(p)

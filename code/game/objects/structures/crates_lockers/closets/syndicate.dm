@@ -15,7 +15,7 @@
 		/obj/item/tool/crowbar/red,
 		/obj/item/cell/high,
 		/obj/item/card/id/syndicate,
-		/obj/item/device/multitool,
+		/obj/item/multitool,
 		/obj/item/shield/energy,
 		/obj/item/clothing/shoes/magboots)
 
@@ -40,8 +40,8 @@
 	/obj/item/storage/box/flashbangs,
 	/obj/item/gun/energy/gun = 5,
 	/obj/item/pinpointer/nukeop = 5,
-	/obj/item/device/pda/syndicate,
-	/obj/item/device/radio/uplink)
+	/obj/item/pda/syndicate,
+	/obj/item/radio/uplink)
 
 /obj/structure/closet/syndicate/resources
 	desc = "An old, dusty locker."

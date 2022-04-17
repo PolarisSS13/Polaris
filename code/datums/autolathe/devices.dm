@@ -4,23 +4,23 @@
 
 /datum/category_item/autolathe/devices/igniter
 	name = "igniter"
-	path =/obj/item/device/assembly/igniter
+	path =/obj/item/assembly/igniter
 
 /datum/category_item/autolathe/devices/signaler
 	name = "signaler"
-	path =/obj/item/device/assembly/signaler
+	path =/obj/item/assembly/signaler
 
 /datum/category_item/autolathe/devices/sensor_infra
 	name = "infrared sensor"
-	path =/obj/item/device/assembly/infra
+	path =/obj/item/assembly/infra
 
 /datum/category_item/autolathe/devices/timer
 	name = "timer"
-	path =/obj/item/device/assembly/timer
+	path =/obj/item/assembly/timer
 
 /datum/category_item/autolathe/devices/sensor_prox
 	name = "proximity sensor"
-	path =/obj/item/device/assembly/prox_sensor
+	path =/obj/item/assembly/prox_sensor
 
 /datum/category_item/autolathe/devices/beartrap
 	name = "mechanical trap"
@@ -34,5 +34,5 @@
 
 /datum/category_item/autolathe/devices/electropack
 	name = "electropack"
-	path =/obj/item/device/radio/electropack
+	path =/obj/item/radio/electropack
 	hidden = 1

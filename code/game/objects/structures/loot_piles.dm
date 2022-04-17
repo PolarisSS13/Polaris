@@ -131,13 +131,13 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	icon_states_to_use = list("junk_pile1", "junk_pile2", "junk_pile3", "junk_pile4", "junk_pile5")
 
 	common_loot = list(
-		/obj/item/device/flashlight/flare,
-		/obj/item/device/flashlight/glowstick,
-		/obj/item/device/flashlight/glowstick/blue,
-		/obj/item/device/flashlight/glowstick/orange,
-		/obj/item/device/flashlight/glowstick/red,
-		/obj/item/device/flashlight/glowstick/yellow,
-		/obj/item/device/flashlight/pen,
+		/obj/item/flashlight/flare,
+		/obj/item/flashlight/glowstick,
+		/obj/item/flashlight/glowstick/blue,
+		/obj/item/flashlight/glowstick/orange,
+		/obj/item/flashlight/glowstick/red,
+		/obj/item/flashlight/glowstick/yellow,
+		/obj/item/flashlight/pen,
 		/obj/item/cell,
 		/obj/item/cell/device,
 		/obj/item/clothing/mask/gas,
@@ -195,10 +195,10 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/clothing/suit/caution,
 		/obj/item/clothing/head/cone,
 		/obj/item/card/emag_broken,
-		/obj/item/device/camera,
-		/obj/item/device/pda,
-		/obj/item/device/radio/headset,
-		/obj/item/device/paicard,
+		/obj/item/camera,
+		/obj/item/pda,
+		/obj/item/radio/headset,
+		/obj/item/paicard,
 		/obj/item/reagent_containers/hypospray/autoinjector/biginjector/glucose
 	)
 
@@ -363,20 +363,20 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/circuitboard/rcon_console,
 		/obj/item/smes_coil,
 		/obj/item/cartridge/engineering,
-		/obj/item/device/analyzer,
-		/obj/item/device/healthanalyzer,
-		/obj/item/device/robotanalyzer,
-		/obj/item/device/lightreplacer,
-		/obj/item/device/radio,
-		/obj/item/device/hailer,
-		/obj/item/device/gps,
-		/obj/item/device/geiger,
-		/obj/item/device/mass_spectrometer,
+		/obj/item/analyzer,
+		/obj/item/healthanalyzer,
+		/obj/item/robotanalyzer,
+		/obj/item/lightreplacer,
+		/obj/item/radio,
+		/obj/item/hailer,
+		/obj/item/gps,
+		/obj/item/geiger,
+		/obj/item/mass_spectrometer,
 		/obj/item/tool/wrench,
 		/obj/item/tool/screwdriver,
 		/obj/item/tool/wirecutters,
 		/obj/item/mining_scanner/advanced,
-		/obj/item/device/multitool,
+		/obj/item/multitool,
 		/obj/item/mecha_parts/mecha_equipment/generator,
 		/obj/item/mecha_parts/mecha_equipment/tool/cable_layer,
 		/obj/item/mecha_parts/mecha_equipment/tool/drill,
@@ -402,9 +402,9 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/smes_coil/super_io,
 		/obj/item/cartridge/captain,
 		/obj/item/disk/integrated_circuit/upgrade/advanced,
-		/obj/item/device/tvcamera,
-		/obj/item/device/universal_translator,
-		/obj/item/device/aicard,
+		/obj/item/tvcamera,
+		/obj/item/universal_translator,
+		/obj/item/aicard,
 		/obj/item/borg/upgrade/jetpack,
 		/obj/item/borg/upgrade/advhealth,
 		/obj/item/borg/upgrade/vtec,
@@ -456,7 +456,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 // May contain alien tools.
 /obj/structure/loot_pile/surface/alien/engineering
 	uncommon_loot = list(
-		/obj/item/device/multitool/alien,
+		/obj/item/multitool/alien,
 		/obj/item/stack/cable_coil/alien,
 		/obj/item/tool/crowbar/alien,
 		/obj/item/tool/screwdriver/alien,
@@ -502,7 +502,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 	chance_rare = 10
 
 	common_loot = list(
-		/obj/item/device/multitool/alien,
+		/obj/item/multitool/alien,
 		/obj/item/stack/cable_coil/alien,
 		/obj/item/tool/crowbar/alien,
 		/obj/item/tool/screwdriver/alien,
@@ -640,9 +640,9 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/part/ripley_right_arm,
 		/obj/item/mecha_parts/part/ripley_left_leg,
 		/obj/item/mecha_parts/part/ripley_right_leg,
-		/obj/item/device/kit/paint/ripley,
-		/obj/item/device/kit/paint/ripley/flames_red,
-		/obj/item/device/kit/paint/ripley/flames_blue
+		/obj/item/kit/paint/ripley,
+		/obj/item/kit/paint/ripley/flames_red,
+		/obj/item/kit/paint/ripley/flames_blue
 		)
 
 	uncommon_loot = list(
@@ -683,7 +683,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/part/ripley_right_arm,
 		/obj/item/mecha_parts/part/ripley_left_leg,
 		/obj/item/mecha_parts/part/ripley_right_leg,
-		/obj/item/device/kit/paint/ripley/death
+		/obj/item/kit/paint/ripley/death
 		)
 
 	uncommon_loot = list(
@@ -770,9 +770,9 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/taser,
-		/obj/item/device/kit/paint/gygax,
-		/obj/item/device/kit/paint/gygax/darkgygax,
-		/obj/item/device/kit/paint/gygax/recitence
+		/obj/item/kit/paint/gygax,
+		/obj/item/kit/paint/gygax/darkgygax,
+		/obj/item/kit/paint/gygax/recitence
 		)
 
 	rare_loot = list(
@@ -823,9 +823,9 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/missile_rack/grenade,
 		/obj/item/mecha_parts/mecha_equipment/weapon/energy/laser,
 		/obj/item/mecha_parts/mecha_equipment/antiproj_armor_booster,
-		/obj/item/device/kit/paint/durand,
-		/obj/item/device/kit/paint/durand/seraph,
-		/obj/item/device/kit/paint/durand/phazon
+		/obj/item/kit/paint/durand,
+		/obj/item/kit/paint/durand/seraph,
+		/obj/item/kit/paint/durand/phazon
 		)
 
 	rare_loot = list(

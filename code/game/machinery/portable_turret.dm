@@ -524,7 +524,7 @@
 					if(prob(50))
 						new /obj/item/stack/material/steel(loc, rand(1,4))
 					if(prob(50))
-						new /obj/item/device/assembly/prox_sensor(loc)
+						new /obj/item/assembly/prox_sensor(loc)
 				else
 					to_chat(user, "<span class='notice'>You remove the turret but did not manage to salvage anything.</span>")
 				qdel(src) // qdel
@@ -560,7 +560,7 @@
 				update_icon()
 		wrenching = FALSE
 
-	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/device/pda))
+	else if(istype(I, /obj/item/card/id)||istype(I, /obj/item/pda))
 		//Behavior lock/unlock mangement
 		if(allowed(user))
 			locked = !locked
@@ -1143,7 +1143,7 @@
 
 		if(5)
 			to_chat(user, "<span class='notice'>You remove the prox sensor from the turret frame.</span>")
-			new /obj/item/device/assembly/prox_sensor(loc)
+			new /obj/item/assembly/prox_sensor(loc)
 			build_step = 4
 
 /obj/machinery/porta_turret_construct/attack_ai()

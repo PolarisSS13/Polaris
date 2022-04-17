@@ -388,7 +388,7 @@
 	required = /obj/item/slime_extract/yellow
 
 /decl/chemical_reaction/instant/slime/yellow_flashlight/on_reaction(var/datum/reagents/holder)
-	new /obj/item/device/flashlight/slime(get_turf(holder.my_atom))
+	new /obj/item/flashlight/slime(get_turf(holder.my_atom))
 	..()
 
 // ***************

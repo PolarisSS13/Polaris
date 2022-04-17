@@ -31,8 +31,8 @@
 /obj/machinery/computer/xenobio2/attackby(var/obj/item/W, var/mob/user)
 
 	//Did you want to link it?
-	if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/P = W
+	if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/P = W
 		if(P.connectable)
 			if(istype(P.connectable, /obj/machinery/xenobio2/manualinjector))
 				var/obj/machinery/xenobio2/manualinjector/I = P.connectable

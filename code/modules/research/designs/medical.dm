@@ -76,7 +76,7 @@
 	id = "medical_analyzer"
 	req_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	materials = list(MAT_STEEL = 500, "glass" = 500)
-	build_path = /obj/item/device/healthanalyzer
+	build_path = /obj/item/healthanalyzer
 	sort_string = "KBAAA"
 
 /datum/design/item/medical/improved_analyzer
@@ -85,7 +85,7 @@
 	id = "improved_analyzer"
 	req_tech = list(TECH_MAGNET = 5, TECH_BIO = 6)
 	materials = list(MAT_STEEL = 2000, "glass" = 1000, "silver" = 1000, "gold" = 1500)
-	build_path = /obj/item/device/healthanalyzer/improved
+	build_path = /obj/item/healthanalyzer/improved
 	sort_string = "KBAAB"
 
 /datum/design/item/medical/advanced_roller

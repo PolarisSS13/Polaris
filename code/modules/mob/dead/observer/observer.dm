@@ -930,8 +930,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	
 	if(usr.client.prefs?.be_special & BE_PAI)
 		var/count = 0
-		for(var/obj/item/device/paicard/p in all_pai_cards)
-			var/obj/item/device/paicard/PP = p
+		for(var/obj/item/paicard/p in all_pai_cards)
+			var/obj/item/paicard/PP = p
 			if(PP.pai == null)
 				count++
 				PP.overlays += "pai-ghostalert"

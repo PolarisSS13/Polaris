@@ -32,9 +32,9 @@
 	offline_vision_restriction = 0
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/storage,
 		)
 
@@ -79,11 +79,11 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/industrial
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/storage,
-		/obj/item/device/t_scanner,
+		/obj/item/t_scanner,
 		/obj/item/pickaxe,
 		/obj/item/rcd
 		)
@@ -117,11 +117,11 @@
 	glove_type = /obj/item/clothing/gloves/gauntlets/rig/eva
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/storage,
-		/obj/item/device/t_scanner,
+		/obj/item/t_scanner,
 		/obj/item/rcd
 		)
 
@@ -163,11 +163,11 @@
 	glove_type = /obj/item/clothing/gloves/gauntlets/rig/ce
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/storage,
-		/obj/item/device/t_scanner,
+		/obj/item/t_scanner,
 		/obj/item/rcd
 		)
 
@@ -206,20 +206,20 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/hazmat
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/stack/flag,
 		/obj/item/storage,
 		/obj/item/pickaxe,
-		/obj/item/device/healthanalyzer,
-		/obj/item/device/measuring_tape,
-		/obj/item/device/ano_scanner,
-		/obj/item/device/depth_scanner,
-		/obj/item/device/core_sampler,
-		/obj/item/device/gps,
-		/obj/item/device/beacon_locator,
-		/obj/item/device/radio/beacon,
+		/obj/item/healthanalyzer,
+		/obj/item/measuring_tape,
+		/obj/item/ano_scanner,
+		/obj/item/depth_scanner,
+		/obj/item/core_sampler,
+		/obj/item/gps,
+		/obj/item/beacon_locator,
+		/obj/item/radio/beacon,
 		/obj/item/pickaxe/hand
 		)
 
@@ -251,11 +251,11 @@
 	helm_type = /obj/item/clothing/head/helmet/space/rig/medical
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/storage,
-		/obj/item/device/healthanalyzer,
+		/obj/item/healthanalyzer,
 		/obj/item/stack/medical,
 		/obj/item/roller
 		)
@@ -291,9 +291,9 @@
 
 	allowed = list(
 		/obj/item/gun,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/melee/baton,
 		/obj/item/storage
 		)

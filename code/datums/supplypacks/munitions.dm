@@ -12,7 +12,7 @@
 /datum/supply_pack/munitions/weapons
 	name = "Weapons - Security basic equipment"
 	contains = list(
-			/obj/item/device/flash = 2,
+			/obj/item/flash = 2,
 			/obj/item/reagent_containers/spray/pepper = 2,
 			/obj/item/melee/baton/loaded = 2,
 			/obj/item/gun/energy/taser = 2,
@@ -132,7 +132,7 @@
 /datum/supply_pack/munitions/bolt_rifles_competitive
  	name = "Weapons - Competitive shooting rifles"
  	contains = list(
- 			/obj/item/device/assembly/timer,
+ 			/obj/item/assembly/timer,
  			/obj/item/gun/projectile/shotgun/pump/rifle/practice = 2,
  			/obj/item/ammo_magazine/clip/c762/practice = 4,
  			/obj/item/target = 2,

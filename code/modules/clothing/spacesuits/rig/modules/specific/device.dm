@@ -34,10 +34,12 @@
 	name = "mounted flash"
 	desc = "You are the law."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "flash"
 	interface_name = "mounted flash"
 	interface_desc = "Stuns your target by blinding them with a bright light."
-	device_type = /obj/item/device/flash/robot
+	device_type = /obj/item/flash/robot
 
 /obj/item/rig_module/device/plasmacutter
 	name = "hardsuit plasma cutter"
@@ -58,7 +60,7 @@
 	interface_name = "health scanner"
 	interface_desc = "Shows an informative health readout when used on a subject."
 
-	device_type = /obj/item/device/healthanalyzer
+	device_type = /obj/item/healthanalyzer
 
 /obj/item/rig_module/device/drill
 	name = "hardsuit drill mount"
@@ -81,7 +83,7 @@
 	engage_string = "Begin Scan"
 	usable = 1
 	selectable = 0
-	device_type = /obj/item/device/ano_scanner
+	device_type = /obj/item/ano_scanner
 
 /obj/item/rig_module/device/orescanner
 	name = "ore scanner module"

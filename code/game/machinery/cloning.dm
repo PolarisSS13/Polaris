@@ -229,7 +229,7 @@
 			return
 		if(default_part_replacement(user, W))
 			return
-	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/device/pda))
+	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/pda))
 		if(!check_access(W))
 			to_chat(user, "<span class='warning'>Access Denied.</span>")
 			return
@@ -265,8 +265,8 @@
 				user.visible_message("[user] secures [src] to the floor.", "You secure [src] to the floor.")
 			else
 				user.visible_message("[user] unsecures [src] from the floor.", "You unsecure [src] from the floor.")
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
+	else if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/M = W
 		M.connecting = src
 		to_chat(user, "<span class='notice'>You load connection data from [src] to [M].</span>")
 		M.update_icon()

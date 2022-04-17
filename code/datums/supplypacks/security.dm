@@ -431,7 +431,7 @@
 	contains = list(
 			/obj/item/storage/belt/security = 3,
 			/obj/item/clothing/glasses/sunglasses/sechud = 3,
-			/obj/item/device/radio/headset/headset_sec/alt = 3,
+			/obj/item/radio/headset/headset_sec/alt = 3,
 			/obj/item/clothing/suit/storage/hooded/wintercoat/security = 3
 			)
 	cost = 10
@@ -444,20 +444,20 @@
 			/obj/item/storage/box/evidence = 2,
 			/obj/item/clothing/suit/storage/vest/detective,
 			/obj/item/cartridge/detective,
-			/obj/item/device/radio/headset/headset_sec,
+			/obj/item/radio/headset/headset_sec,
 			/obj/item/taperoll/police,
 			/obj/item/clothing/glasses/sunglasses,
-			/obj/item/device/camera,
+			/obj/item/camera,
 			/obj/item/folder/red,
 			/obj/item/folder/blue,
 			/obj/item/storage/belt/detective,
 			/obj/item/clothing/gloves/black,
-			/obj/item/device/taperecorder,
-			/obj/item/device/mass_spectrometer,
-			/obj/item/device/camera_film = 2,
+			/obj/item/taperecorder,
+			/obj/item/mass_spectrometer,
+			/obj/item/camera_film = 2,
 			/obj/item/storage/photo_album,
-			/obj/item/device/reagent_scanner,
-			/obj/item/device/flashlight/maglight,
+			/obj/item/reagent_scanner,
+			/obj/item/flashlight/maglight,
 			/obj/item/storage/briefcase/crimekit,
 			/obj/item/storage/bag/detective
 			)
@@ -469,10 +469,10 @@
 /datum/supply_pack/security/detectivescan
 	name = "Forensic - Scanning Equipment"
 	contains = list(
-			/obj/item/device/mass_spectrometer,
-			/obj/item/device/reagent_scanner,
+			/obj/item/mass_spectrometer,
+			/obj/item/reagent_scanner,
 			/obj/item/storage/briefcase/crimekit,
-			/obj/item/device/detective_scanner
+			/obj/item/detective_scanner
 			)
 	cost = 60
 	containertype = /obj/structure/closet/crate/secure/ward
@@ -509,22 +509,22 @@
 			/obj/item/cartridge/security,
 			/obj/item/clothing/accessory/badge/holo,
 			/obj/item/clothing/accessory/badge/holo/cord,
-			/obj/item/device/radio/headset/headset_sec,
+			/obj/item/radio/headset/headset_sec,
 			/obj/item/storage/belt/security,
-			/obj/item/device/flash,
+			/obj/item/flash,
 			/obj/item/reagent_containers/spray/pepper,
 			/obj/item/grenade/flashbang,
 			/obj/item/melee/baton/loaded,
 			/obj/item/clothing/glasses/sunglasses/sechud,
 			/obj/item/taperoll/police,
 			/obj/item/clothing/gloves/black,
-			/obj/item/device/hailer,
-			/obj/item/device/flashlight/flare,
+			/obj/item/hailer,
+			/obj/item/flashlight/flare,
 			/obj/item/clothing/accessory/storage/black_vest,
 			/obj/item/clothing/head/soft/sec/corp,
 			/obj/item/clothing/under/rank/security/corp,
 			/obj/item/gun/energy/taser,
-			/obj/item/device/flashlight/maglight
+			/obj/item/flashlight/maglight
 			)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure/nanotrasen
@@ -541,10 +541,10 @@
 			/obj/item/clothing/suit/storage/vest/wardencoat/alt,
 			/obj/item/clothing/head/helmet/warden,
 			/obj/item/cartridge/security,
-			/obj/item/device/radio/headset/headset_sec,
+			/obj/item/radio/headset/headset_sec,
 			/obj/item/clothing/glasses/sunglasses/sechud,
 			/obj/item/taperoll/police,
-			/obj/item/device/hailer,
+			/obj/item/hailer,
 			/obj/item/clothing/accessory/badge/holo/warden,
 			/obj/item/storage/box/flashbangs,
 			/obj/item/storage/belt/security,
@@ -552,7 +552,7 @@
 			/obj/item/melee/baton/loaded,
 			/obj/item/storage/box/holobadge,
 			/obj/item/clothing/head/beret/sec/corporate/warden,
-			/obj/item/device/flashlight/maglight
+			/obj/item/flashlight/maglight
 			)
 	cost = 20
 	containertype = /obj/structure/closet/crate/secure/nanotrasen
@@ -568,17 +568,17 @@
 			/obj/item/clothing/suit/storage/vest/hoscoat,
 			/obj/item/clothing/head/helmet/dermal,
 			/obj/item/cartridge/hos,
-			/obj/item/device/radio/headset/heads/hos,
+			/obj/item/radio/headset/heads/hos,
 			/obj/item/clothing/glasses/sunglasses/sechud,
 			/obj/item/storage/belt/security,
-			/obj/item/device/flash,
-			/obj/item/device/hailer,
+			/obj/item/flash,
+			/obj/item/hailer,
 			/obj/item/clothing/accessory/badge/holo/hos,
 			/obj/item/clothing/accessory/holster/waist,
 			/obj/item/melee/telebaton,
 			/obj/item/shield/riot/tele,
 			/obj/item/clothing/head/beret/sec/corporate/hos,
-			/obj/item/device/flashlight/maglight
+			/obj/item/flashlight/maglight
 			)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/nanotrasen

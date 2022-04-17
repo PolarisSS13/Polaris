@@ -21,7 +21,7 @@
 	cell_type =  null
 
 	allowed = list(
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/storage/box
 		)
 

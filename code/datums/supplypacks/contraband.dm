@@ -78,15 +78,15 @@
 					/obj/item/melee/energy/sword/ionic_rapier,
 					/obj/item/storage/box/syndie_kit/space, //doesn't matter what species you are,
 					/obj/item/storage/box/syndie_kit/demolitions,
-					/obj/item/device/multitool/ai_detector,
+					/obj/item/multitool/ai_detector,
 					/obj/item/plastique,
 					/obj/item/storage/toolbox/syndicate/powertools
 					),
 			list( //the infiltrator,
 					/obj/item/gun/projectile/silenced,
-					/obj/item/device/chameleon,
+					/obj/item/chameleon,
 					/obj/item/storage/box/syndie_kit/chameleon,
-					/obj/item/device/encryptionkey/syndicate,
+					/obj/item/encryptionkey/syndicate,
 					/obj/item/card/id/syndicate,
 					/obj/item/clothing/mask/gas/voice,
 					/obj/item/makeover

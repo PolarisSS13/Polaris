@@ -5,7 +5,7 @@
 	gloves = /obj/item/clothing/gloves/black
 	mask = /obj/item/clothing/mask/gas/clown_hat
 	head = /obj/item/clothing/head/chaplain_hood
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/storage/hooded/chaplain_hoodie
 	r_pocket = /obj/item/bikehorn
@@ -22,7 +22,7 @@
 	gloves = /obj/item/clothing/gloves/sterile/latex
 	mask = /obj/item/clothing/mask/surgical
 	head = /obj/item/clothing/head/welding
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
 	suit = /obj/item/clothing/suit/storage/apron
 	l_pocket = /obj/item/material/knife/tacknife
@@ -39,7 +39,7 @@
 	uniform = /obj/item/clothing/under/suit_jacket{ starting_accessories=list(/obj/item/clothing/accessory/wcoat) }
 	shoes = /obj/item/clothing/shoes/black
 	gloves = /obj/item/clothing/gloves/black
-	l_ear = /obj/item/device/radio/headset
+	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_pocket = /obj/item/melee/energy/sword
 	mask = /obj/item/clothing/mask/gas/clown_hat
@@ -47,7 +47,7 @@
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/syndicate/station_access
 	pda_slot = slot_belt
-	pda_type = /obj/item/device/pda/heads
+	pda_type = /obj/item/pda/heads
 
 /decl/hierarchy/outfit/professional/post_equip(var/mob/living/carbon/human/H)
 	var/obj/item/storage/secure/briefcase/sec_briefcase = new(H)

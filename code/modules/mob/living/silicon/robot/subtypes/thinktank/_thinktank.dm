@@ -67,7 +67,7 @@
 /mob/living/silicon/robot/platform/Initialize(var/mapload)
 	. = ..()
 	if(!mmi)
-		mmi = new /obj/item/device/mmi/digital/robot(src)
+		mmi = new /obj/item/mmi/digital/robot(src)
 	SetName("inactive [initial(name)]")
 	updateicon()
 

@@ -17,4 +17,4 @@
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/shoes/laceup/brown,
 		/obj/item/clothing/gloves/sterile/latex,
-		/obj/item/device/radio/headset/heads/rd)
+		/obj/item/radio/headset/heads/rd)

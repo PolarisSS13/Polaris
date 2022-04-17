@@ -195,12 +195,12 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/reagent_containers/food/drinks/glass2/fitnessflask/proteinshake,
 		/obj/item/tool/crowbar,
 		/obj/item/tool/crowbar,
-		/obj/item/device/flashlight,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
+		/obj/item/flashlight,
 		/obj/item/clothing/suit/storage/hazardvest,
 		/obj/item/clothing/suit/storage/hazardvest,
-		/obj/item/device/flashlight/flare,
-		/obj/item/device/flashlight/flare)
+		/obj/item/flashlight/flare,
+		/obj/item/flashlight/flare)
 
 /datum/supply_drop_loot/plushie
 	name = "Cuddly Fun!"

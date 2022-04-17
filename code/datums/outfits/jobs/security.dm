@@ -1,7 +1,7 @@
 /decl/hierarchy/outfit/job/security
 	hierarchy_type = /decl/hierarchy/outfit/job/security
 	glasses = /obj/item/clothing/glasses/sunglasses/sechud
-	l_ear = /obj/item/device/radio/headset/headset_sec
+	l_ear = /obj/item/radio/headset/headset_sec
 	gloves = /obj/item/clothing/gloves/black
 	shoes = /obj/item/clothing/shoes/boots/jackboots
 	backpack = /obj/item/storage/backpack/security
@@ -12,17 +12,17 @@
 
 /decl/hierarchy/outfit/job/security/hos
 	name = OUTFIT_JOB_NAME("Head of security")
-	l_ear = /obj/item/device/radio/headset/heads/hos
+	l_ear = /obj/item/radio/headset/heads/hos
 	uniform = /obj/item/clothing/under/rank/head_of_security
 	id_type = /obj/item/card/id/security/head
-	pda_type = /obj/item/device/pda/heads/hos
+	pda_type = /obj/item/pda/heads/hos
 
 /decl/hierarchy/outfit/job/security/warden
 	name = OUTFIT_JOB_NAME("Warden")
 	uniform = /obj/item/clothing/under/rank/warden
-	l_pocket = /obj/item/device/flash
+	l_pocket = /obj/item/flash
 	id_type = /obj/item/card/id/security/warden
-	pda_type = /obj/item/device/pda/warden
+	pda_type = /obj/item/pda/warden
 
 /decl/hierarchy/outfit/job/security/detective
 	name = OUTFIT_JOB_NAME("Detective")
@@ -33,7 +33,7 @@
 	shoes = /obj/item/clothing/shoes/laceup
 	r_hand = /obj/item/storage/briefcase/crimekit
 	id_type = /obj/item/card/id/security/detective
-	pda_type = /obj/item/device/pda/detective
+	pda_type = /obj/item/pda/detective
 	backpack = /obj/item/storage/backpack
 	satchel_one = /obj/item/storage/backpack/satchel/norm
 	backpack_contents = list(/obj/item/storage/box/evidence = 1)
@@ -46,6 +46,6 @@
 /decl/hierarchy/outfit/job/security/officer
 	name = OUTFIT_JOB_NAME("Security Officer")
 	uniform = /obj/item/clothing/under/rank/security
-	l_pocket = /obj/item/device/flash
+	l_pocket = /obj/item/flash
 	id_type = /obj/item/card/id/security
-	pda_type = /obj/item/device/pda/security
+	pda_type = /obj/item/pda/security

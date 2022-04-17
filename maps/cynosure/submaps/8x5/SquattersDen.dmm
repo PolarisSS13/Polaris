@@ -8,7 +8,7 @@
 "D" = (/obj/item/trash/ramen,/obj/structure/mirror{pixel_y = 25},/turf/simulated/floor/plating,/area/template_noop)
 "G" = (/turf/simulated/floor/plating,/area/template_noop)
 "K" = (/obj/structure/plushie/ian,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/plating,/area/template_noop)
-"L" = (/obj/structure/table/standard,/obj/item/reagent_containers/food/drinks/cans/waterbottle{pixel_x = 6; pixel_y = 12},/obj/item/device/flashlight/lamp/green{pixel_x = -6; pixel_y = 1},/obj/item/toy/plushie/girly_corgi,/turf/simulated/floor/plating,/area/template_noop)
+"L" = (/obj/structure/table/standard,/obj/item/reagent_containers/food/drinks/cans/waterbottle{pixel_x = 6; pixel_y = 12},/obj/item/flashlight/lamp/green{pixel_x = -6; pixel_y = 1},/obj/item/toy/plushie/girly_corgi,/turf/simulated/floor/plating,/area/template_noop)
 "Q" = (/obj/structure/table/standard,/obj/machinery/reagentgrinder,/turf/simulated/floor/plating,/area/template_noop)
 "V" = (/turf/simulated/wall/r_wall,/area/template_noop)
 "W" = (/obj/structure/table/rack,/obj/random/toy,/obj/random/contraband,/obj/random/contraband,/obj/random/tank,/obj/random/toolbox,/obj/random/maintenance/engineering,/turf/simulated/floor/plating,/area/template_noop)

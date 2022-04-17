@@ -41,7 +41,7 @@
 
 	if(open)
 		// Hacking.
-		if(W.is_wirecutter() || istype(W, /obj/item/device/multitool))
+		if(W.is_wirecutter() || istype(W, /obj/item/multitool))
 			if(open)
 				wires.Interact(user)
 			else

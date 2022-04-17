@@ -402,7 +402,7 @@
 		/obj/item/clothing/under/rank/centcom,
 		/obj/item/clothing/under/ert,
 		/obj/item/clothing/under/syndicate/combat,
-		/obj/item/device/radio/headset/ert/alt,
+		/obj/item/radio/headset/ert/alt,
 		/obj/item/clothing/glasses/sunglasses,
 		/obj/item/clothing/shoes/boots/swat,
 		/obj/item/clothing/gloves/swat,

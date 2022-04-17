@@ -81,10 +81,12 @@
 				else
 					SSxenoarch.artifact_spawning_turfs.Remove(T)
 
-/obj/item/device/core_sampler
+/obj/item/core_sampler
 	name = "core sampler"
 	desc = "Used to extract geological core samples."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "sampler0"
 	item_state = "screwdriver_brown"
 	w_class = ITEMSIZE_TINY
@@ -93,12 +95,12 @@
 	var/num_stored_bags = 10
 	var/obj/item/evidencebag/filled_bag
 
-/obj/item/device/core_sampler/examine(var/mob/user)
+/obj/item/core_sampler/examine(var/mob/user)
 	. = ..()
 	if(get_dist(user, src) <= 2)
 		. += "<span class='notice'>Used to extract geological core samples - this one is [sampled_turf ? "full" : "empty"], and has [num_stored_bags] bag[num_stored_bags != 1 ? "s" : ""] remaining.</span>"
 
-/obj/item/device/core_sampler/attackby(var/obj/item/I, var/mob/living/user)
+/obj/item/core_sampler/attackby(var/obj/item/I, var/mob/living/user)
 	if(istype(I, /obj/item/evidencebag))
 		if(I.contents.len)
 			to_chat(user, "<span class='warning'>\The [I] is full.</span>")
@@ -112,7 +114,7 @@
 	else
 		return ..()
 
-/obj/item/device/core_sampler/proc/sample_item(var/item_to_sample, var/mob/user)
+/obj/item/core_sampler/proc/sample_item(var/item_to_sample, var/mob/user)
 	var/datum/geosample/geo_data
 
 	if(istype(item_to_sample, /turf/simulated/mineral))
@@ -152,7 +154,7 @@
 	else
 		to_chat(user, "<span class='warning'>You are unable to take a sample of [item_to_sample].</span>")
 
-/obj/item/device/core_sampler/attack_self(var/mob/living/user)
+/obj/item/core_sampler/attack_self(var/mob/living/user)
 	if(filled_bag)
 		to_chat(user, "<span class='notice'>You eject the full sample bag.</span>")
 		var/success = 0

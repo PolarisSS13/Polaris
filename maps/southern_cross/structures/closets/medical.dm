@@ -16,7 +16,7 @@
 		/obj/item/cartridge/cmo,
 		/obj/item/clothing/gloves/sterile/latex,
 		/obj/item/clothing/shoes/brown,
-		/obj/item/device/radio/headset/heads/cmo,
+		/obj/item/radio/headset/heads/cmo,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/medical,
 		/obj/item/clothing/shoes/white)
 

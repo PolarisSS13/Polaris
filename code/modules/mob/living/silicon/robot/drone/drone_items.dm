@@ -6,6 +6,8 @@
 	description_info = "Ctrl-Clicking on the gripper will drop whatever it is holding.<br>\
 	Using an object on the gripper will interact with the item inside it, if it exists, instead."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "gripper"
 
 	flags = NOBLUDGEON
@@ -71,9 +73,9 @@
 	/obj/item/pen,
 	/obj/item/sample,
 	/obj/item/forensics/sample_kit,
-	/obj/item/device/taperecorder,
-	/obj/item/device/tape,
-	/obj/item/device/uv_light
+	/obj/item/taperecorder,
+	/obj/item/tape,
+	/obj/item/uv_light
 	)
 
 /obj/item/gripper/paperwork
@@ -109,15 +111,15 @@
 	can_hold = list(
 		/obj/item/cell,
 		/obj/item/stock_parts,
-		/obj/item/device/mmi,
+		/obj/item/mmi,
 		/obj/item/robot_parts,
 		/obj/item/borg/upgrade,
-		/obj/item/device/flash, //to build borgs,
+		/obj/item/flash, //to build borgs,
 		/obj/item/disk,
 		/obj/item/circuitboard,
 		/obj/item/reagent_containers/glass,
-		/obj/item/device/assembly/prox_sensor,
-		/obj/item/device/healthanalyzer, //to build medibots,
+		/obj/item/assembly/prox_sensor,
+		/obj/item/healthanalyzer, //to build medibots,
 		/obj/item/slime_cube,
 		/obj/item/slime_crystal,
 		/obj/item/disposable_teleporter/slime,
@@ -134,8 +136,8 @@
 
 	can_hold = list(
 		/obj/item/cell/device,
-		/obj/item/device/electronic_assembly,
-		/obj/item/device/assembly/electronic_assembly,
+		/obj/item/electronic_assembly,
+		/obj/item/assembly/electronic_assembly,
 		/obj/item/clothing/under/circuitry,
 		/obj/item/clothing/gloves/circuitry,
 		/obj/item/clothing/glasses/circuitry,
@@ -409,6 +411,8 @@
 	name = "matter decompiler"
 	desc = "Eating trash, bits of glass, or other debris will replenish your stores."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "decompiler"
 
 	//Metal, glass, wood, plastic.
@@ -571,7 +575,7 @@
 		else
 			module_string += text("[O]: <A HREF=?src=\ref[src];act=\ref[O]>Activate</A><BR>")
 
-		if((istype(O,/obj/item/weapon) || istype(O,/obj/item/device)) && !(istype(O,/obj/item/stack/cable_coil)))
+		if(istype(O, /obj/item) && !(istype(O,/obj/item/stack/cable_coil)))
 			tools += module_string
 		else
 			resources += module_string

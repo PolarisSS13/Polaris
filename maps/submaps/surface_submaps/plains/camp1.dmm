@@ -2,7 +2,7 @@
 "b" = (/turf/simulated/wall/log_sif,/area/submap/camp1)
 "c" = (/obj/structure/grille/rustic,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/submap/camp1)
 "d" = (/obj/structure/bed/padded,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
-"e" = (/obj/item/device/flashlight/lantern,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
+"e" = (/obj/item/flashlight/lantern,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
 "f" = (/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
 "g" = (/obj/machinery/space_heater,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)
 "h" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/camp1)

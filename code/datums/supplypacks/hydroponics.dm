@@ -56,7 +56,7 @@
 			/obj/item/reagent_containers/glass/bottle/ammonia = 2,
 			/obj/item/material/knife/machete/hatchet,
 			/obj/item/material/minihoe,
-			/obj/item/device/analyzer/plant_analyzer,
+			/obj/item/analyzer/plant_analyzer,
 			/obj/item/clothing/gloves/botanic_leather,
 			/obj/item/clothing/suit/storage/apron,
 			/obj/item/material/minihoe,

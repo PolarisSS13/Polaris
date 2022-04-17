@@ -100,13 +100,13 @@
 	src.modules += new /obj/item/tool/screwdriver/cyborg(src)
 	src.modules += new /obj/item/tool/wrench/cyborg(src)
 	src.modules += new /obj/item/tool/wirecutters/cyborg(src)
-	src.modules += new /obj/item/device/multitool/ai_detector(src)
+	src.modules += new /obj/item/multitool/ai_detector(src)
 	src.modules += new /obj/item/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/rcd/electric/mounted/borg/lesser(src) // Can't eat rwalls to prevent AI core cheese.
 	src.modules += new /obj/item/melee/energy/sword/ionic_rapier(src)
 
 	// FBP repair.
-	src.modules += new /obj/item/device/robotanalyzer(src)
+	src.modules += new /obj/item/robotanalyzer(src)
 	src.modules += new /obj/item/shockpaddles/robot/jumper(src)
 	src.modules += new /obj/item/gripper/no_use/organ/robotics(src)
 
@@ -167,7 +167,7 @@
 		return
 
 	src.modules += new /obj/item/borg/sight/hud/med(src)
-	src.modules += new /obj/item/device/healthanalyzer/advanced(src)
+	src.modules += new /obj/item/healthanalyzer/advanced(src)
 	src.modules += new /obj/item/reagent_containers/borghypo/merc(src)
 
 	// Surgery things.

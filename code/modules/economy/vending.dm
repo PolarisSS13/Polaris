@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 		SStgui.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool) || W.is_wirecutter())
+	else if(istype(W, /obj/item/multitool) || W.is_wirecutter())
 		if(panel_open)
 			attack_hand(user)
 		return

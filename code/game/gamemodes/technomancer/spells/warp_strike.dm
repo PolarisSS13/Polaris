@@ -67,7 +67,7 @@
 				to_chat(user, "<span class='danger'>You can't use \the [I] while warping!</span>")
 				return
 
-			if(istype(I, /obj/item/weapon))
+			if(istype(I))
 				var/obj/item/W = I
 				W.attack(chosen_target, user)
 				W.afterattack(chosen_target, user)

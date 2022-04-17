@@ -17,7 +17,7 @@
 "q" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/wooden_reinforced,/obj/item/material/twohanded/fireaxe/scythe,/turf/simulated/floor/wood,/area/submap/Shack1)
 "r" = (/obj/effect/decal/cleanable/spiderling_remains,/turf/simulated/floor/wood,/area/submap/Shack1)
 "s" = (/turf/simulated/floor/holofloor/wood{icon_state = "wood_broken6"},/area/submap/Shack1)
-"t" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/wooden_reinforced,/obj/item/device/flashlight/lamp{start_anomalous = 1},/turf/simulated/floor/wood,/area/submap/Shack1)
+"t" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/wooden_reinforced,/obj/item/flashlight/lamp{start_anomalous = 1},/turf/simulated/floor/wood,/area/submap/Shack1)
 "u" = (/obj/structure/flora/tree/dead,/turf/template_noop,/area/submap/Shack1)
 "O" = (/obj/effect/decal/cleanable/dirt,/obj/random/maintenance/anom,/turf/simulated/floor/wood,/area/submap/Shack1)
 

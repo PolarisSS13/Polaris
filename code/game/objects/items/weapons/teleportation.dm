@@ -11,6 +11,8 @@
 	name = "locator"
 	desc = "Used to track those with locater implants."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "locator"
 	var/temp = null
 	var/frequency = 1451
@@ -59,7 +61,7 @@ Frequency:
 			if (sr)
 				src.temp += "<B>Located Beacons:</B><BR>"
 
-				for(var/obj/item/device/radio/beacon/W in all_beacons)
+				for(var/obj/item/radio/beacon/W in all_beacons)
 					if (W.frequency == src.frequency)
 						var/turf/tr = get_turf(W)
 						if (tr.z == sr.z && tr)
@@ -120,6 +122,8 @@ Frequency:
 	name = "hand tele"
 	desc = "A portable item using blue-space technology."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "hand_tele"
 	item_state = "electronic"
 	throwforce = 5

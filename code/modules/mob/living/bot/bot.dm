@@ -128,7 +128,7 @@
 		else
 			to_chat(user, "<span class='notice'>[src] does not need a repair.</span>")
 		return
-	else if(istype(O, /obj/item/device/assembly/prox_sensor) && emagged)
+	else if(istype(O, /obj/item/assembly/prox_sensor) && emagged)
 		if(open)
 			to_chat(user, "<span class='notice'>You repair the bot's systems.</span>")
 			emagged = 0

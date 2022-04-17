@@ -125,7 +125,7 @@
 	var/selfdestruct = 0.0
 	var/traitor_frequency = 0.0
 	var/mob/currentUser = null
-	var/obj/item/device/radio/origradio = null
+	var/obj/item/radio/origradio = null
 	flags = ONBELT
 	w_class = ITEMSIZE_SMALL
 	item_state = "radio"
@@ -143,7 +143,7 @@
 	var/uses = 4.0
 	var/selfdestruct = 0.0
 	var/traitor_frequency = 0.0
-	var/obj/item/device/radio/origradio = null
+	var/obj/item/radio/origradio = null
 	slot_flags = SLOT_BELT
 	item_state = "radio"
 	throwforce = 5
@@ -234,9 +234,11 @@
 	item_state = "std_mod"
 	desc = "Charging circuits for power cells."
 
-/obj/item/device/camera_bug
+/obj/item/camera_bug
 	name = "camera bug"
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "flash"
 	w_class = ITEMSIZE_TINY
 	item_state = "electronic"

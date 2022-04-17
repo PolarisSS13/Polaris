@@ -155,7 +155,7 @@
 /obj/effect/floor_decal/corner/purple{
 	dir = 5
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 1;
 	name = "Station Intercom (General)";
 	pixel_y = 21
@@ -223,7 +223,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	name = "Station Intercom (General)";
 	pixel_x = 21
@@ -441,7 +441,7 @@
 /obj/item/storage/excavation,
 /obj/item/pickaxe,
 /obj/item/tool/wrench,
-/obj/item/device/measuring_tape,
+/obj/item/measuring_tape,
 /obj/item/stack/flag/yellow,
 /obj/structure/table/steel,
 /turf/simulated/floor/tiled,
@@ -829,7 +829,7 @@
 /area/surface/outpost/research/xenoarcheology/longtermstorage)
 "bS" = (
 /obj/effect/floor_decal/industrial/outline/grey,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = -21
 	},
@@ -866,7 +866,7 @@
 /obj/item/storage/excavation,
 /obj/item/pickaxe,
 /obj/item/tool/wrench,
-/obj/item/device/measuring_tape,
+/obj/item/measuring_tape,
 /obj/item/stack/flag/yellow,
 /obj/structure/table/steel,
 /obj/effect/floor_decal/corner/purple{
@@ -922,7 +922,7 @@
 /area/surface/outpost/research/xenoarcheology/exp_prep)
 "bZ" = (
 /obj/structure/table/steel,
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/machinery/power/apc{
 	dir = 2;
 	name = "south bump";
@@ -933,10 +933,10 @@
 	pixel_y = -24
 	},
 /obj/structure/cable/blue,
-/obj/item/device/suit_cooling_unit,
-/obj/item/device/gps/science,
-/obj/item/device/gps/science,
-/obj/item/device/gps/science,
+/obj/item/suit_cooling_unit,
+/obj/item/gps/science,
+/obj/item/gps/science,
+/obj/item/gps/science,
 /turf/simulated/floor/tiled/dark,
 /area/surface/outpost/research/xenoarcheology/exp_prep)
 "ca" = (
@@ -962,7 +962,7 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoarcheology)
 "cd" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	name = "Station Intercom (General)";
 	pixel_x = 21
@@ -1158,7 +1158,7 @@
 /area/surface/outpost/research/xenoarcheology/isolation_a)
 "ct" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/reinforced,
 /area/surface/outpost/research/xenoarcheology/isolation_a)
 "cu" = (
@@ -1225,7 +1225,7 @@
 	frequency = 1441;
 	pixel_y = 22
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	name = "Station Intercom (General)";
 	pixel_x = -21
@@ -1811,7 +1811,7 @@
 	},
 /obj/item/melee/baton/loaded,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/item/device/multitool,
+/obj/item/multitool,
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoarcheology/anomaly)
 "dH" = (
@@ -1852,7 +1852,7 @@
 /obj/machinery/computer/crew{
 	dir = 1
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	name = "Station Intercom (General)";
 	pixel_x = -21
@@ -1865,8 +1865,8 @@
 	},
 /obj/structure/table/glass,
 /obj/machinery/recharger,
-/obj/item/device/defib_kit/loaded,
-/obj/item/device/radio{
+/obj/item/defib_kit/loaded,
+/obj/item/radio{
 	frequency = 1487;
 	icon_state = "med_walkietalkie";
 	name = "Medbay Emergency Radio Link"
@@ -1934,7 +1934,7 @@
 	},
 /obj/item/clipboard,
 /obj/item/pen,
-/obj/item/device/taperecorder,
+/obj/item/taperecorder,
 /obj/item/folder,
 /obj/item/stamp,
 /turf/simulated/floor/tiled/neutral,
@@ -1963,7 +1963,7 @@
 /area/surface/outpost/research/xenoarcheology)
 "dU" = (
 /obj/structure/table/reinforced,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
@@ -2126,11 +2126,11 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/device/camera_film{
+/obj/item/camera_film{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/device/camera,
+/obj/item/camera,
 /obj/machinery/recharger,
 /obj/item/tape_roll,
 /obj/machinery/firealarm{
@@ -2305,7 +2305,7 @@
 "eG" = (
 /obj/structure/table/reinforced,
 /obj/item/paper_bin,
-/obj/item/device/camera,
+/obj/item/camera,
 /obj/structure/window/reinforced,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 6
@@ -2326,7 +2326,7 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/universal{
 	dir = 4
 	},
-/obj/item/device/geiger,
+/obj/item/geiger,
 /turf/simulated/floor/tiled,
 /area/surface/outpost/research/xenoarcheology/anomaly)
 "eI" = (
@@ -2632,7 +2632,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 10
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = -21
 	},
@@ -3138,7 +3138,7 @@
 	c_tag = "OPR - Anomalous Materials 1";
 	dir = 4
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	name = "Station Intercom (General)";
 	pixel_x = -21
@@ -3771,7 +3771,7 @@
 /obj/structure/closet/toolcloset,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	name = "Station Intercom (General)";
 	pixel_y = -21
 	},
@@ -3960,7 +3960,7 @@
 	pixel_x = 0;
 	pixel_y = -24
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	name = "Station Intercom (General)";
 	pixel_x = -21
@@ -4030,9 +4030,9 @@
 /obj/item/storage/toolbox/emergency,
 /obj/item/clothing/accessory/armband/science,
 /obj/item/clothing/glasses/science,
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/item/extinguisher,
-/obj/item/device/flashlight,
+/obj/item/flashlight,
 /turf/simulated/floor/plating,
 /area/surface/outpost/research/xenoarcheology/emergencystorage)
 "id" = (

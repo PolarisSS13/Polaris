@@ -68,7 +68,7 @@ var/list/civilian_cartridges = list(
 	QDEL_LIST(messenger_plugins)
 	return ..()
 
-/obj/item/cartridge/proc/update_programs(obj/item/device/pda/pda)
+/obj/item/cartridge/proc/update_programs(obj/item/pda/pda)
 	for(var/A in programs)
 		var/datum/data/pda/P = A
 		P.pda = pda

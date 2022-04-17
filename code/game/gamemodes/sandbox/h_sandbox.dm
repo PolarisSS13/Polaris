@@ -119,7 +119,7 @@ mob
 					//hsb.loc = usr.loc
 				if("hsbtoolbox")
 					var/obj/item/storage/hsb = new/obj/item/storage/toolbox/mechanical
-					for(var/obj/item/device/radio/T in hsb)
+					for(var/obj/item/radio/T in hsb)
 						qdel(T)
 					new/obj/item/tool/crowbar (hsb)
 					hsb.loc = usr.loc
@@ -136,7 +136,7 @@ mob
 							continue
 						if(istype(O, /obj/item/assembly))
 							continue
-						if(istype(O, /obj/item/device/camera))
+						if(istype(O, /obj/item/camera))
 							continue
 						if(istype(O, /obj/item/dummy))
 							continue

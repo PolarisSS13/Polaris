@@ -3,7 +3,7 @@
 	desc = "It's a case, for building very tiny electronics with."
 	icon = 'icons/obj/integrated_electronics/electronic_setups.dmi'
 	icon_state = "setup_implant"
-	var/obj/item/device/electronic_assembly/implant/IC = null
+	var/obj/item/electronic_assembly/implant/IC = null
 
 /obj/item/implant/integrated_circuit/islegal()
 	return TRUE
@@ -39,7 +39,7 @@
 	return IC.examine(user)
 
 /obj/item/implant/integrated_circuit/attackby(var/obj/item/O, var/mob/user)
-	if(O.is_crowbar() || istype(O, /obj/item/device/integrated_electronics) || istype(O, /obj/item/integrated_circuit) || O.is_screwdriver() || istype(O, /obj/item/cell/device) )
+	if(O.is_crowbar() || istype(O, /obj/item/integrated_electronics) || istype(O, /obj/item/integrated_circuit) || O.is_screwdriver() || istype(O, /obj/item/cell/device) )
 		IC.attackby(O, user)
 	else
 		..()

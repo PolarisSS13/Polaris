@@ -116,7 +116,7 @@
 
 /obj/machinery/computer/fusion_fuel_control/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Fuel Control", monitor.fuel_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			monitor.fuel_tag = new_ident

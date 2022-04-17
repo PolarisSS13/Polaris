@@ -67,7 +67,7 @@
 		add_overlay(central_paint_mask)
 
 /obj/mecha/working/hoverpod/shuttlecraft/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W,/obj/item/device/multitool) && state == 1)
+	if(istype(W,/obj/item/multitool) && state == 1)
 		var/new_paint_location = input("Please select a target zone.", "Paint Zone", null) as null|anything in list("Central", "Engine", "Base", "Front", "CANCEL")
 		if(new_paint_location && new_paint_location != "CANCEL")
 			var/new_paint_color = input("Please select a paint color.", "Paint Color", null) as color|null

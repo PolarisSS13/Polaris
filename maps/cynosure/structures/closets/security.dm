@@ -14,8 +14,8 @@
 		/obj/item/clothing/suit/storage/vest/hoscoat,
 		/obj/item/clothing/head/helmet/dermal,
 		/obj/item/cartridge/hos,
-		/obj/item/device/radio/headset/heads/hos,
-		/obj/item/device/radio/headset/heads/hos/alt,
+		/obj/item/radio/headset/heads/hos,
+		/obj/item/radio/headset/heads/hos/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/shield/riot,
@@ -26,7 +26,7 @@
 		/obj/item/tool/crowbar/red,
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/security,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/melee/baton/loaded,
 		/obj/item/cell/device/weapon,
 		/obj/item/clothing/accessory/holster/waist,
@@ -34,7 +34,7 @@
 		/obj/item/clothing/head/beret/sec/corporate/hos,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
 		/obj/item/clothing/shoes/boots/winter/security,
-		/obj/item/device/flashlight/maglight,
+		/obj/item/flashlight/maglight,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/mask/gas/sechailer/swat/hos)
 
@@ -64,8 +64,8 @@
 		/obj/item/clothing/head/helmet/warden,
 		/obj/item/clothing/head/helmet/warden/hat,
 		/obj/item/cartridge/security,
-		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/device/radio/headset/headset_sec/alt,
+		/obj/item/radio/headset/headset_sec,
+		/obj/item/radio/headset/headset_sec/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
 		/obj/item/clothing/accessory/badge/holo/warden,
@@ -79,8 +79,8 @@
 		/obj/item/clothing/head/beret/sec/corporate/warden,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
 		/obj/item/clothing/shoes/boots/winter/security,
-		/obj/item/device/flashlight/maglight,
-		/obj/item/device/megaphone,
+		/obj/item/flashlight/maglight,
+		/obj/item/megaphone,
 		/obj/item/clothing/mask/gas/half,
 		/obj/item/clothing/mask/gas/sechailer/swat/warden)
 
@@ -102,17 +102,17 @@
 		/obj/item/clothing/suit/armor/pcarrier/light/nt/cynosure,
 		/obj/item/clothing/head/helmet,
 		/obj/item/cartridge/security,
-		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/device/radio/headset/headset_sec/alt,
+		/obj/item/radio/headset/headset_sec,
+		/obj/item/radio/headset/headset_sec/alt,
 		/obj/item/storage/belt/security,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/grenade/flashbang,
 		/obj/item/melee/baton/loaded,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
-		/obj/item/device/hailer,
-		/obj/item/device/flashlight/flare,
+		/obj/item/hailer,
+		/obj/item/flashlight/flare,
 		/obj/item/clothing/accessory/storage/black_vest,
 		/obj/item/clothing/head/soft/sec/corp,
 		/obj/item/clothing/under/rank/security/corp,
@@ -121,7 +121,7 @@
 		/obj/item/cell/device/weapon,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
 		/obj/item/clothing/shoes/boots/winter/security,
-		/obj/item/device/flashlight/maglight)
+		/obj/item/flashlight/maglight)
 
 /obj/structure/closet/secure_closet/security/Initialize()
 	if(prob(50))
@@ -134,22 +134,22 @@
 
 /obj/structure/closet/secure_closet/security/cargo/Initialize()
 	starts_with += /obj/item/clothing/accessory/armband/cargo
-	starts_with += /obj/item/device/encryptionkey/headset_cargo
+	starts_with += /obj/item/encryptionkey/headset_cargo
 	return ..()
 
 /obj/structure/closet/secure_closet/security/engine/Initialize()
 	starts_with += /obj/item/clothing/accessory/armband/engine
-	starts_with += /obj/item/device/encryptionkey/headset_eng
+	starts_with += /obj/item/encryptionkey/headset_eng
 	return ..()
 
 /obj/structure/closet/secure_closet/security/science/Initialize()
 	starts_with += /obj/item/clothing/accessory/armband/science
-	starts_with += /obj/item/device/encryptionkey/headset_sci
+	starts_with += /obj/item/encryptionkey/headset_sci
 	return ..()
 
 /obj/structure/closet/secure_closet/security/med/Initialize()
 	starts_with += /obj/item/clothing/accessory/armband/medblue
-	starts_with += /obj/item/device/encryptionkey/headset_med
+	starts_with += /obj/item/encryptionkey/headset_med
 	return ..()
 
 
@@ -164,14 +164,14 @@
 		/obj/item/gunbox,
 		/obj/item/storage/belt/detective,
 		/obj/item/storage/box/evidence,
-		/obj/item/device/radio/headset/headset_sec,
-		/obj/item/device/radio/headset/headset_sec/alt,
+		/obj/item/radio/headset/headset_sec,
+		/obj/item/radio/headset/headset_sec/alt,
 		/obj/item/clothing/suit/storage/vest/detective,
 		/obj/item/taperoll/police,
 		/obj/item/clothing/accessory/holster/armpit,
-		/obj/item/device/flashlight/maglight,
+		/obj/item/flashlight/maglight,
 		/obj/item/reagent_containers/food/drinks/flask/detflask,
 		/obj/item/storage/briefcase/crimekit,
-		/obj/item/device/taperecorder,
+		/obj/item/taperecorder,
 		/obj/item/storage/bag/detective,
-		/obj/item/device/tape/random = 3)
+		/obj/item/tape/random = 3)

@@ -58,8 +58,8 @@
 				W.remove_fuel(1)
 			return
 
-	else if(istype(I, /obj/item/device/core_sampler))
-		var/obj/item/device/core_sampler/S = I
+	else if(istype(I, /obj/item/core_sampler))
+		var/obj/item/core_sampler/S = I
 		S.sample_item(src, user)
 		return
 

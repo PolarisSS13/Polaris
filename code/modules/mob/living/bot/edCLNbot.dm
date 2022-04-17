@@ -63,7 +63,7 @@
 		if(prob(50))
 			new /obj/item/reagent_containers/glass/bucket(Tsec)
 		else
-			new /obj/item/device/assembly/prox_sensor(Tsec)
+			new /obj/item/assembly/prox_sensor(Tsec)
 
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)

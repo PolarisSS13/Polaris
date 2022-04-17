@@ -51,25 +51,25 @@
 		/obj/item/weldingtool,
 		/obj/item/tool/wirecutters,
 		/obj/item/tool/wrench,
-		/obj/item/device/multitool,
-		/obj/item/device/flashlight,
+		/obj/item/multitool,
+		/obj/item/flashlight,
 		/obj/item/cell/device,
 		/obj/item/stack/cable_coil,
-		/obj/item/device/t_scanner,
-		/obj/item/device/analyzer,
+		/obj/item/t_scanner,
+		/obj/item/analyzer,
 		/obj/item/clothing/glasses,
 		/obj/item/clothing/gloves,
-		/obj/item/device/pda,
-		/obj/item/device/megaphone,
+		/obj/item/pda,
+		/obj/item/megaphone,
 		/obj/item/taperoll,
-		/obj/item/device/radio/headset,
-		/obj/item/device/robotanalyzer,
+		/obj/item/radio/headset,
+		/obj/item/robotanalyzer,
 		/obj/item/material/minihoe,
 		/obj/item/material/knife/machete/hatchet,
-		/obj/item/device/analyzer/plant_analyzer,
+		/obj/item/analyzer/plant_analyzer,
 		/obj/item/extinguisher/mini,
 		/obj/item/tape_roll,
-		/obj/item/device/integrated_electronics/wirer,
+		/obj/item/integrated_electronics/wirer,
 		)
 
 /obj/item/storage/belt/utility/full
@@ -90,7 +90,7 @@
 		/obj/item/tool/crowbar,
 		/obj/item/tool/wirecutters,
 		/obj/item/stack/cable_coil/random_belt,
-		/obj/item/device/multitool
+		/obj/item/multitool
 	)
 
 /obj/item/storage/belt/utility/atmostech
@@ -113,10 +113,10 @@
 		/obj/item/tool/screwdriver/power,
 		/obj/item/tool/crowbar/power,
 		/obj/item/weldingtool/experimental,
-		/obj/item/device/multitool,
+		/obj/item/multitool,
 		/obj/item/stack/cable_coil/random_belt,
 		/obj/item/extinguisher/mini,
-		/obj/item/device/analyzer
+		/obj/item/analyzer
 	)
 
 /obj/item/storage/belt/medical
@@ -124,7 +124,7 @@
 	desc = "Can hold various medical equipment."
 	icon_state = "medical"
 	can_hold = list(
-		/obj/item/device/healthanalyzer,
+		/obj/item/healthanalyzer,
 		/obj/item/dnainjector,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/glass/beaker,
@@ -135,17 +135,17 @@
 		/obj/item/storage/fancy/cigarettes,
 		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
-		/obj/item/device/radio/headset,
-		/obj/item/device/pda,
+		/obj/item/radio/headset,
+		/obj/item/pda,
 		/obj/item/taperoll,
-		/obj/item/device/megaphone,
+		/obj/item/megaphone,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/clothing/glasses,
 		/obj/item/tool/crowbar,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/cell/device,
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/quickdraw/syringe_case
@@ -165,7 +165,7 @@
 		/obj/item/grenade,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/handcuffs,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/a12g,
 		/obj/item/ammo_magazine,
@@ -178,21 +178,21 @@
 		/obj/item/gun/magnetic/railgun/heater/pistol,
 		/obj/item/gun/energy/gun,
 		/obj/item/flame/lighter,
-		/obj/item/device/flashlight,
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
-		/obj/item/device/pda,
-		/obj/item/device/radio/headset,
+		/obj/item/flashlight,
+		/obj/item/taperecorder,
+		/obj/item/tape,
+		/obj/item/pda,
+		/obj/item/radio/headset,
 		/obj/item/clothing/gloves,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
+		/obj/item/hailer,
+		/obj/item/megaphone,
 		/obj/item/melee,
 		/obj/item/clothing/accessory/badge,
 		/obj/item/gun/projectile/sec,
 		/obj/item/gun/projectile/p92x,
 		/obj/item/taperoll,
 		/obj/item/gun/projectile/colt/detective,
-		/obj/item/device/holowarrant
+		/obj/item/holowarrant
 		)
 
 /obj/item/storage/belt/detective
@@ -202,40 +202,40 @@
 	storage_slots = 7
 	max_w_class = ITEMSIZE_NORMAL
 	can_hold = list(
-		/obj/item/device/taperecorder,
-		/obj/item/device/tape,
+		/obj/item/taperecorder,
+		/obj/item/tape,
 		/obj/item/clothing/glasses,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/cell/device,
 		/obj/item/reagent_containers/spray/luminol,
 		/obj/item/sample,
 		/obj/item/forensics/sample_kit/powder,
 		/obj/item/forensics/swab,
-		/obj/item/device/uv_light,
+		/obj/item/uv_light,
 		/obj/item/forensics/sample_kit,
 		/obj/item/photo,
-		/obj/item/device/camera_film,
-		/obj/item/device/camera,
+		/obj/item/camera_film,
+		/obj/item/camera,
 		/obj/item/autopsy_scanner,
-		/obj/item/device/mass_spectrometer,
+		/obj/item/mass_spectrometer,
 		/obj/item/clothing/accessory/badge,
-		/obj/item/device/reagent_scanner,
+		/obj/item/reagent_scanner,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/syringe,
-		/obj/item/device/pda,
-		/obj/item/device/hailer,
-		/obj/item/device/megaphone,
-		/obj/item/device/radio/headset,
+		/obj/item/pda,
+		/obj/item/hailer,
+		/obj/item/megaphone,
+		/obj/item/radio/headset,
 		/obj/item/clothing/gloves,
 		/obj/item/taperoll,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/handcuffs,
-		/obj/item/device/flash,
+		/obj/item/flash,
 		/obj/item/flame/lighter,
 		/obj/item/reagent_containers/food/snacks/donut/,
 		/obj/item/ammo_magazine,
 		/obj/item/gun/projectile/colt/detective,
-		/obj/item/device/holowarrant
+		/obj/item/holowarrant
 		)
 
 /obj/item/storage/belt/soulstone
@@ -244,11 +244,11 @@
 	icon_state = "soulstone"
 	storage_slots = 6
 	can_hold = list(
-		/obj/item/device/soulstone
+		/obj/item/soulstone
 		)
 
 /obj/item/storage/belt/soulstone/full
-	starts_with = list(/obj/item/device/soulstone = 6)
+	starts_with = list(/obj/item/soulstone = 6)
 
 /obj/item/storage/belt/utility/alien
 	name = "alien belt"
@@ -264,7 +264,7 @@
 		/obj/item/weldingtool/alien,
 		/obj/item/tool/crowbar/alien,
 		/obj/item/tool/wirecutters/alien,
-		/obj/item/device/multitool/alien,
+		/obj/item/multitool/alien,
 		/obj/item/stack/cable_coil/alien
 	)
 
@@ -276,7 +276,7 @@
 	item_state = "security"
 	storage_slots = 8
 	can_hold = list(
-		/obj/item/device/healthanalyzer,
+		/obj/item/healthanalyzer,
 		/obj/item/dnainjector,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/glass/beaker,
@@ -287,17 +287,17 @@
 		/obj/item/storage/fancy/cigarettes,
 		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
-		/obj/item/device/radio/headset,
-		/obj/item/device/pda,
+		/obj/item/radio/headset,
+		/obj/item/pda,
 		/obj/item/taperoll,
-		/obj/item/device/megaphone,
+		/obj/item/megaphone,
 		/obj/item/clothing/mask/surgical,
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves,
 		/obj/item/reagent_containers/hypospray,
 		/obj/item/clothing/glasses,
 		/obj/item/tool/crowbar,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/cell/device,
 		/obj/item/extinguisher/mini,
 		/obj/item/surgical
@@ -345,18 +345,18 @@
 	max_w_class = ITEMSIZE_NORMAL
 	can_hold = list(
 		/obj/item/clothing/glasses,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/cell/device,
 		/obj/item/grenade,
-		/obj/item/device/pda,
-		/obj/item/device/radio/headset,
+		/obj/item/pda,
+		/obj/item/radio/headset,
 		/obj/item/clothing/gloves,
 		/obj/item/clothing/mask/surgical, //sterile mask,
-		/obj/item/device/assembly/mousetrap,
+		/obj/item/assembly/mousetrap,
 		/obj/item/light/bulb,
 		/obj/item/light/tube,
 		/obj/item/flame/lighter,
-		/obj/item/device/megaphone,
+		/obj/item/megaphone,
 		/obj/item/taperoll,
 		/obj/item/reagent_containers/spray,
 		/obj/item/soap
@@ -368,16 +368,16 @@
 	icon_state = "gear"
 	can_hold = list(
 		/obj/item/storage/box/samplebags,
-		/obj/item/device/core_sampler,
-		/obj/item/device/beacon_locator,
-		/obj/item/device/radio/beacon,
-		/obj/item/device/gps,
-		/obj/item/device/measuring_tape,
-		/obj/item/device/flashlight,
+		/obj/item/core_sampler,
+		/obj/item/beacon_locator,
+		/obj/item/radio/beacon,
+		/obj/item/gps,
+		/obj/item/measuring_tape,
+		/obj/item/flashlight,
 		/obj/item/cell/device,
 		/obj/item/pickaxe,
-		/obj/item/device/depth_scanner,
-		/obj/item/device/camera,
+		/obj/item/depth_scanner,
+		/obj/item/camera,
 		/obj/item/paper,
 		/obj/item/photo,
 		/obj/item/folder,
@@ -389,9 +389,9 @@
 		/obj/item/tool/wrench,
 		/obj/item/storage/excavation,
 		/obj/item/anobattery,
-		/obj/item/device/ano_scanner,
+		/obj/item/ano_scanner,
 		/obj/item/pickaxe/hand,
-		/obj/item/device/xenoarch_multi_tool,
+		/obj/item/xenoarch_multi_tool,
 		/obj/item/pickaxe/excavationdrill
 		)
 

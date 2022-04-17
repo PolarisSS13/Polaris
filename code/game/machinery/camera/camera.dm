@@ -162,7 +162,7 @@
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
 		playsound(src, W.usesound, 50, 1)
 
-	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
+	else if((W.is_wirecutter() || istype(W, /obj/item/multitool)) && panel_open)
 		interact(user)
 
 	else if(istype(W, /obj/item/weldingtool) && (wires.CanDeconstruct() || (stat & BROKEN)))
@@ -185,10 +185,10 @@
 			qdel(src)
 
 	// OTHER
-	else if (can_use() && (istype(W, /obj/item/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
+	else if (can_use() && (istype(W, /obj/item/paper) || istype(W, /obj/item/pda)) && isliving(user))
 		var/mob/living/U = user
 		var/obj/item/paper/X = null
-		var/obj/item/device/pda/P = null
+		var/obj/item/pda/P = null
 
 		var/itemname = ""
 		var/info = ""

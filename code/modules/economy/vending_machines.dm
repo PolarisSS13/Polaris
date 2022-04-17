@@ -108,13 +108,13 @@
 	vending_sound = "machines/vending/vending_cans.ogg"
 
 /obj/machinery/vending/assist
-	products = list(	/obj/item/device/assembly/prox_sensor = 5,
-						/obj/item/device/assembly/igniter = 3,
-						/obj/item/device/assembly/signaler = 4,
+	products = list(	/obj/item/assembly/prox_sensor = 5,
+						/obj/item/assembly/igniter = 3,
+						/obj/item/assembly/signaler = 4,
 						/obj/item/tool/wirecutters = 1,
 						/obj/item/cartridge/signal = 4)
-	contraband = list(/obj/item/device/flashlight = 5,
-						/obj/item/device/assembly/timer = 2)
+	contraband = list(/obj/item/flashlight = 5,
+						/obj/item/assembly/timer = 2)
 	product_ads = "Only the finest!;Have some tools.;The most robust equipment.;The finest gear in space!"
 
 /obj/machinery/vending/coffee
@@ -286,7 +286,7 @@
 	icon_state = "cart"
 	req_access = list(access_hop)
 	products = list(/obj/item/cartridge/medical = 10,/obj/item/cartridge/engineering = 10,/obj/item/cartridge/security = 10,
-					/obj/item/cartridge/janitor = 10,/obj/item/cartridge/signal/science = 10,/obj/item/device/pda/heads = 10,
+					/obj/item/cartridge/janitor = 10,/obj/item/cartridge/signal/science = 10,/obj/item/pda/heads = 10,
 					/obj/item/cartridge/captain = 3,/obj/item/cartridge/quartermaster = 10)
 	req_log_access = access_hop
 	has_logs = 1
@@ -368,7 +368,7 @@
 					/obj/item/reagent_containers/glass/bottle/toxin = 4,
 					/obj/item/reagent_containers/syringe/antiviral = 4,
 					/obj/item/reagent_containers/syringe = 12,
-					/obj/item/device/healthanalyzer = 5,
+					/obj/item/healthanalyzer = 5,
 					/obj/item/reagent_containers/glass/beaker = 4,
 					/obj/item/reagent_containers/dropper = 2,
 					/obj/item/stack/medical/advanced/bruise_pack = 6,
@@ -388,11 +388,11 @@
 	products = list(/obj/item/clothing/under/rank/scientist = 6,
 					/obj/item/clothing/suit/bio_suit = 6,
 					/obj/item/clothing/head/bio_hood = 6,
-					/obj/item/device/transfer_valve = 6,
-					/obj/item/device/assembly/timer = 6,
-					/obj/item/device/assembly/signaler = 6,
-					/obj/item/device/assembly/prox_sensor = 6,
-					/obj/item/device/assembly/igniter = 6)
+					/obj/item/transfer_valve = 6,
+					/obj/item/assembly/timer = 6,
+					/obj/item/assembly/signaler = 6,
+					/obj/item/assembly/prox_sensor = 6,
+					/obj/item/assembly/igniter = 6)
 	req_log_access = access_rd
 	has_logs = 1
 
@@ -407,7 +407,7 @@
 	products = list(/obj/item/stack/medical/bruise_pack = 2,
 				/obj/item/stack/medical/ointment = 2,
 				/obj/item/reagent_containers/hypospray/autoinjector = 4,
-				/obj/item/device/healthanalyzer = 1)
+				/obj/item/healthanalyzer = 1)
 	contraband = list(/obj/item/reagent_containers/syringe/antitoxin = 4,
 				/obj/item/reagent_containers/syringe/antiviral = 4,
 				/obj/item/reagent_containers/pill/tox = 1)
@@ -426,7 +426,7 @@
 				/obj/item/reagent_containers/syringe/antitoxin = 3,
 				/obj/item/stack/medical/bruise_pack = 3,
 				/obj/item/stack/medical/ointment =3,
-				/obj/item/device/healthanalyzer = 3)
+				/obj/item/healthanalyzer = 3)
 	contraband = list(/obj/item/reagent_containers/pill/tox = 3)
 	req_log_access = access_cmo
 	has_logs = 1
@@ -441,7 +441,7 @@
 	req_access = list(access_security)
 	products = list(/obj/item/handcuffs = 8,
 					/obj/item/grenade/flashbang = 4,
-					/obj/item/device/flash = 5,
+					/obj/item/flash = 5,
 					/obj/item/reagent_containers/food/snacks/donut/plain = 6,
 					/obj/item/reagent_containers/food/snacks/donut/plain/jelly = 6,
 					/obj/item/storage/box/evidence = 6)
@@ -598,14 +598,14 @@
 					/obj/item/weldingtool = 3,
 					/obj/item/tool/wirecutters = 5,
 					/obj/item/tool/wrench = 5,
-					/obj/item/device/analyzer = 5,
-					/obj/item/device/t_scanner = 5,
+					/obj/item/analyzer = 5,
+					/obj/item/t_scanner = 5,
 					/obj/item/tool/screwdriver = 5,
-					/obj/item/device/flashlight/glowstick = 3,
-					/obj/item/device/flashlight/glowstick/red = 3,
-					/obj/item/device/flashlight/glowstick/blue = 3,
-					/obj/item/device/flashlight/glowstick/orange =3,
-					/obj/item/device/flashlight/glowstick/yellow = 3)
+					/obj/item/flashlight/glowstick = 3,
+					/obj/item/flashlight/glowstick/red = 3,
+					/obj/item/flashlight/glowstick/blue = 3,
+					/obj/item/flashlight/glowstick/orange =3,
+					/obj/item/flashlight/glowstick/yellow = 3)
 	contraband = list(/obj/item/weldingtool/hugetank = 2,
 					/obj/item/clothing/gloves/fyellow = 2)
 	premium = list(/obj/item/clothing/gloves/yellow = 1)
@@ -617,9 +617,9 @@
 	desc = "Spare tool vending. What? Did you expect some witty description?"
 	icon_state = "engivend"
 	req_access = list(access_engine_equip)
-	products = list(/obj/item/device/geiger = 4,
+	products = list(/obj/item/geiger = 4,
 					/obj/item/clothing/glasses/meson = 2,
-					/obj/item/device/multitool = 4,
+					/obj/item/multitool = 4,
 					/obj/item/cell/high = 10,
 					/obj/item/airlock_electronics = 10,
 					/obj/item/module/power_control = 10,
@@ -669,9 +669,9 @@
 					/obj/item/tool/screwdriver = 12,
 					/obj/item/tool/crowbar = 12,
 					/obj/item/tool/wirecutters = 12,
-					/obj/item/device/multitool = 12,
+					/obj/item/multitool = 12,
 					/obj/item/tool/wrench = 12,
-					/obj/item/device/t_scanner = 12,
+					/obj/item/t_scanner = 12,
 					/obj/item/stack/cable_coil/heavyduty = 8,
 					/obj/item/cell = 8,
 					/obj/item/weldingtool = 8,
@@ -694,11 +694,11 @@
 	products = list(/obj/item/clothing/suit/storage/toggle/labcoat = 4,
 					/obj/item/clothing/under/rank/roboticist = 4,
 					/obj/item/stack/cable_coil = 4,
-					/obj/item/device/flash = 4,
+					/obj/item/flash = 4,
 					/obj/item/cell/high = 12,
-					/obj/item/device/assembly/prox_sensor = 3,
-					/obj/item/device/assembly/signaler = 3,
-					/obj/item/device/healthanalyzer = 3,
+					/obj/item/assembly/prox_sensor = 3,
+					/obj/item/assembly/signaler = 3,
+					/obj/item/healthanalyzer = 3,
 					/obj/item/surgical/scalpel = 2,
 					/obj/item/surgical/circular_saw = 2,
 					/obj/item/tank/anesthetic = 2,
@@ -740,7 +740,7 @@
 					/obj/item/toy/plushie/carp = 1,
 					/obj/item/toy/plushie/deer = 1,
 					/obj/item/toy/plushie/tabby_cat = 1,
-					/obj/item/device/threadneedle = 3)
+					/obj/item/threadneedle = 3)
 	premium = list(/obj/item/reagent_containers/food/drinks/bottle/champagne = 1,
 					/obj/item/storage/trinketbox = 2)
 	prices = list(/obj/item/storage/fancy/heartbox = 15,
@@ -769,7 +769,7 @@
 					/obj/item/toy/plushie/carp = 50,
 					/obj/item/toy/plushie/deer = 50,
 					/obj/item/toy/plushie/tabby_cat = 50,
-					/obj/item/device/threadneedle = 2)
+					/obj/item/threadneedle = 2)
 
 
 /obj/machinery/vending/fishing

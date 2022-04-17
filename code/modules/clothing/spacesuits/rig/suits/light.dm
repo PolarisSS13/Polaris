@@ -11,7 +11,7 @@
 		/obj/item/melee/baton,
 		/obj/item/handcuffs,
 		/obj/item/tank,
-		/obj/item/device/suit_cooling_unit,
+		/obj/item/suit_cooling_unit,
 		/obj/item/cell,
 		/obj/item/storage
 		)

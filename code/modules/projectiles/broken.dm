@@ -83,7 +83,7 @@
 		material_needs[component_needed] = 1
 
 	if(ispath(my_guntype, /obj/item/gun/magnetic) && prob(70))
-		var/component_needed = pick(/obj/item/smes_coil, /obj/item/device/assembly/prox_sensor, /obj/item/module/power_control)
+		var/component_needed = pick(/obj/item/smes_coil, /obj/item/assembly/prox_sensor, /obj/item/module/power_control)
 		material_needs[component_needed] = 1
 
 	material_needs[/obj/item/stack/material/steel] = rand(1,5)

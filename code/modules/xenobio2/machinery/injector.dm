@@ -104,8 +104,8 @@
 		return
 
 	//Did you want to link it?
-	if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/P = W
+	if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/P = W
 		if(P.connectable)
 			if(istype(P.connectable, /obj/machinery/computer/xenobio2))
 				var/obj/machinery/computer/xenobio2/C = P.connectable

@@ -69,8 +69,8 @@
 			U.update_rolldown_status()
 
 	// Kits are dumb so this is going to have to be hardcoded/snowflake.
-	if(istype(item, /obj/item/device/kit))
-		var/obj/item/device/kit/K = item
+	if(istype(item, /obj/item/kit))
+		var/obj/item/kit/K = item
 		K.set_info(kit_name, kit_desc, kit_icon, additional_data = additional_data)
 	return item
 
@@ -211,8 +211,8 @@
 		var/obj/item/existing_item
 		if(citem.item_path == /obj/item/card/id && istype(current_id)) //Set earlier.
 			existing_item = M.wear_id
-		else if(citem.item_path == /obj/item/device/pda)
-			existing_item = locate(/obj/item/device/pda) in M.contents
+		else if(citem.item_path == /obj/item/pda)
+			existing_item = locate(/obj/item/pda) in M.contents
 		else if(citem.item_path == /obj/item/storage/backpack)
 			existing_item = locate(/obj/item/storage/backpack) in M.contents
 

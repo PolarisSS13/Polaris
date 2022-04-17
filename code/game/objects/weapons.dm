@@ -1,10 +1,3 @@
-/obj/item/weapon
-	name = "weapon"
-	icon = 'icons/obj/weapons.dmi'
-	hitsound = "swing_hit"
-	var/can_cleave = FALSE // If true, a 'cleaving' attack will occur.
-	var/cleaving = FALSE // Used to avoid infinite cleaving.
-
 /obj/item/melee
 	icon = 'icons/obj/weapons.dmi'
 	item_icons = list(

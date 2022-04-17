@@ -30,7 +30,7 @@
 	//	hasaxe = 1
 
 	if (isrobot(user) || locked)
-		if(istype(O, /obj/item/device/multitool))
+		if(istype(O, /obj/item/multitool))
 			to_chat(user, "<span class='warning'>Resetting circuitry...</span>")
 			playsound(src, 'sound/machines/lockreset.ogg', 50, 1)
 			if(do_after(user, 20 * O.toolspeed))
@@ -38,7 +38,7 @@
 				to_chat(user, "<span class = 'caution'> You disable the locking modules.</span>")
 				update_icon()
 			return
-		else if(istype(O, /obj/item/weapon))
+		else if(istype(O))
 			var/obj/item/W = O
 			if(smashed || open)
 				if(open)
@@ -75,7 +75,7 @@
 	else
 		if(smashed)
 			return
-		if(istype(O, /obj/item/device/multitool))
+		if(istype(O, /obj/item/multitool))
 			if(open)
 				open = 0
 				update_icon()

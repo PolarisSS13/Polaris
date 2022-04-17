@@ -210,7 +210,7 @@
 	. += "<span class='notice'>Alt-click to recolor it.</span>"
 
 /obj/item/toy/sword/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/multitool) && !active)
+	if(istype(W, /obj/item/multitool) && !active)
 		if(!rainbow)
 			rainbow = TRUE
 		else
@@ -745,7 +745,7 @@
 
 
 /obj/structure/plushie/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/device/threadneedle) && opened)
+	if(istype(I, /obj/item/threadneedle) && opened)
 		to_chat(user, "You sew the hole in [src].")
 		opened = FALSE
 		return
@@ -866,7 +866,7 @@
 		return
 
 
-	if(istype(I, /obj/item/device/threadneedle) && opened)
+	if(istype(I, /obj/item/threadneedle) && opened)
 		to_chat(user, "You sew the hole underneath [src].")
 		opened = FALSE
 		return

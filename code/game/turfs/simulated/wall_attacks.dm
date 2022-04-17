@@ -148,8 +148,8 @@
 		if(is_hot(W))
 			burn(is_hot(W))
 
-	if(istype(W, /obj/item/device/electronic_assembly/wallmount))
-		var/obj/item/device/electronic_assembly/wallmount/IC = W
+	if(istype(W, /obj/item/electronic_assembly/wallmount))
+		var/obj/item/electronic_assembly/wallmount/IC = W
 		IC.mount_assembly(src, user)
 		return
 

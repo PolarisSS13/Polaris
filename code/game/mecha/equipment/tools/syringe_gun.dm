@@ -494,4 +494,4 @@
 	ready_sound = 'sound/weapons/flash.ogg'
 	required_type = list(/obj/mecha/medical)
 
-	tooltype = /obj/item/device/healthanalyzer/advanced
+	tooltype = /obj/item/healthanalyzer/advanced

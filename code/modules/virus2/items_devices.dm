@@ -1,14 +1,16 @@
 ///////////////ANTIBODY SCANNER///////////////
 
-/obj/item/device/antibody_scanner
+/obj/item/antibody_scanner
 	name = "antibody scanner"
 	desc = "Scans living beings for antibodies in their blood."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "health"
 	w_class = ITEMSIZE_SMALL
 	item_state = "electronic"
 
-/obj/item/device/antibody_scanner/attack(mob/M as mob, mob/user as mob)
+/obj/item/antibody_scanner/attack(mob/M as mob, mob/user as mob)
 	if(!istype(M,/mob/living/carbon/))
 		report("Scan aborted: Incompatible target.", user)
 		return
@@ -30,7 +32,7 @@
 	else
 		report("Antibodies detected: [antigens2string(C.antibodies)]", user)
 
-/obj/item/device/antibody_scanner/proc/report(var/text, mob/user as mob)
+/obj/item/antibody_scanner/proc/report(var/text, mob/user as mob)
 	to_chat(user, "<font color='blue'>[bicon(src)] \The [src] beeps,</font> \"<font color='blue'>[text]</font>\"")
 
 ///////////////VIRUS DISH///////////////

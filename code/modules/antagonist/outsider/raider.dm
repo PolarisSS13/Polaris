@@ -311,7 +311,7 @@ var/datum/antagonist/raider/raiders
 	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(player), slot_gloves) // AS ABOVE.
 	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
 	player.equip_to_slot_or_del(new /obj/item/tank/vox(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/device/flashlight(player), slot_r_store)
+	player.equip_to_slot_or_del(new /obj/item/flashlight(player), slot_r_store)
 
 	player.internal = locate(/obj/item/tank) in player.contents
 	if(istype(player.internal,/obj/item/tank) && player.internals)

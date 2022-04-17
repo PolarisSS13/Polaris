@@ -767,7 +767,7 @@
 	req_tech = list(TECH_MAGNET = 3, TECH_COMBAT = 2)
 	build_type = MECHFAB
 	materials = list(MAT_STEEL = 562, MAT_GLASS = 562)
-	build_path = /obj/item/device/flash/synthetic
+	build_path = /obj/item/flash/synthetic
 	category = "Misc"
 
 /*
@@ -1044,7 +1044,7 @@
 /datum/design/item/mechfab/uav/basic
 	name = "UAV - Recon Skimmer"
 	id = "recon_skimmer"
-	build_path = /obj/item/device/uav
+	build_path = /obj/item/uav
 	time = 20
 	req_tech = list(TECH_MATERIAL = 6, TECH_ENGINEERING = 5, TECH_PHORON = 3, TECH_MAGNET = 4, TECH_POWER = 6)
 	materials = list(MAT_STEEL = 10000, MAT_GLASS = 6000, MAT_SILVER = 4000)

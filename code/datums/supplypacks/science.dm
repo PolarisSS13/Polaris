@@ -17,11 +17,11 @@
 	contains = list(
 			/obj/item/tank/phoron = 3,
 			/obj/item/tank/oxygen = 3,
-			/obj/item/device/assembly/igniter = 3,
-			/obj/item/device/assembly/prox_sensor = 3,
-			/obj/item/device/assembly/timer = 3,
-			/obj/item/device/assembly/signaler = 3,
-			/obj/item/device/transfer_valve = 3
+			/obj/item/assembly/igniter = 3,
+			/obj/item/assembly/prox_sensor = 3,
+			/obj/item/assembly/timer = 3,
+			/obj/item/assembly/signaler = 3,
+			/obj/item/transfer_valve = 3
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/phoron
@@ -45,7 +45,7 @@
 
 /datum/supply_pack/sci/integrated_circuit_printer
 	name = "Integrated circuit printer"
-	contains = list(/obj/item/device/integrated_circuit_printer = 2)
+	contains = list(/obj/item/integrated_circuit_printer = 2)
 	cost = 15
 	containertype = /obj/structure/closet/crate/ward
 	containername = "Integrated circuit crate"
@@ -61,15 +61,15 @@
 	name = "Xenoarchaeology Tech crate"
 	contains = list(
 				/obj/item/pickaxe/excavationdrill,
-				/obj/item/device/xenoarch_multi_tool,
+				/obj/item/xenoarch_multi_tool,
 				/obj/item/clothing/suit/space/anomaly,
 				/obj/item/clothing/head/helmet/space/anomaly,
 				/obj/item/storage/belt/archaeology,
-				/obj/item/device/flashlight/lantern,
-				/obj/item/device/core_sampler,
-				/obj/item/device/gps,
-				/obj/item/device/beacon_locator,
-				/obj/item/device/radio/beacon,
+				/obj/item/flashlight/lantern,
+				/obj/item/core_sampler,
+				/obj/item/gps,
+				/obj/item/beacon_locator,
+				/obj/item/radio/beacon,
 				/obj/item/clothing/glasses/meson,
 				/obj/item/pickaxe,
 				/obj/item/storage/bag/fossils,

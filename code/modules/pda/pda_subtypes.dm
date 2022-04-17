@@ -1,167 +1,167 @@
 
-/obj/item/device/pda/medical
+/obj/item/pda/medical
 	default_cartridge = /obj/item/cartridge/medical
 	icon_state = "pda-m"
 
-/obj/item/device/pda/viro
+/obj/item/pda/viro
 	default_cartridge = /obj/item/cartridge/medical
 	icon_state = "pda-v"
 
-/obj/item/device/pda/engineering
+/obj/item/pda/engineering
 	default_cartridge = /obj/item/cartridge/engineering
 	icon_state = "pda-e"
 
-/obj/item/device/pda/security
+/obj/item/pda/security
 	default_cartridge = /obj/item/cartridge/security
 	icon_state = "pda-s"
 
-/obj/item/device/pda/detective
+/obj/item/pda/detective
 	default_cartridge = /obj/item/cartridge/detective
 	icon_state = "pda-det"
 
-/obj/item/device/pda/warden
+/obj/item/pda/warden
 	default_cartridge = /obj/item/cartridge/security
 	icon_state = "pda-warden"
 
-/obj/item/device/pda/janitor
+/obj/item/pda/janitor
 	default_cartridge = /obj/item/cartridge/janitor
 	icon_state = "pda-j"
 	ttone = "slip"
 
-/obj/item/device/pda/science
+/obj/item/pda/science
 	default_cartridge = /obj/item/cartridge/signal/science
 	icon_state = "pda-tox"
 	ttone = "boom"
 
-/obj/item/device/pda/clown
+/obj/item/pda/clown
 	default_cartridge = /obj/item/cartridge/clown
 	icon_state = "pda-clown"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. The surface is coated with polytetrafluoroethylene and banana drippings."
 	ttone = "honk"
 
-/obj/item/device/pda/mime
+/obj/item/pda/mime
 	default_cartridge = /obj/item/cartridge/mime
 	icon_state = "pda-mime"
 
-/obj/item/device/pda/mime/Initialize()
+/obj/item/pda/mime/Initialize()
 	. = ..()
 	var/datum/data/pda/app/M = find_program(/datum/data/pda/app/messenger)
 	if(M)
 		M.notify_silent = TRUE
 
-/obj/item/device/pda/heads
+/obj/item/pda/heads
 	default_cartridge = /obj/item/cartridge/head
 	icon_state = "pda-h"
 
-/obj/item/device/pda/heads/hop
+/obj/item/pda/heads/hop
 	default_cartridge = /obj/item/cartridge/hop
 	icon_state = "pda-hop"
 
-/obj/item/device/pda/heads/hos
+/obj/item/pda/heads/hos
 	default_cartridge = /obj/item/cartridge/hos
 	icon_state = "pda-hos"
 
-/obj/item/device/pda/heads/ce
+/obj/item/pda/heads/ce
 	default_cartridge = /obj/item/cartridge/ce
 	icon_state = "pda-ce"
 
-/obj/item/device/pda/heads/cmo
+/obj/item/pda/heads/cmo
 	default_cartridge = /obj/item/cartridge/cmo
 	icon_state = "pda-cmo"
 
-/obj/item/device/pda/heads/rd
+/obj/item/pda/heads/rd
 	default_cartridge = /obj/item/cartridge/rd
 	icon_state = "pda-rd"
 
-/obj/item/device/pda/captain
+/obj/item/pda/captain
 	default_cartridge = /obj/item/cartridge/captain
 	icon_state = "pda-c"
 	detonate = 0
 	//toff = 1
 
-/obj/item/device/pda/ert
+/obj/item/pda/ert
 	default_cartridge = /obj/item/cartridge/captain
 	icon_state = "pda-h"
 	detonate = 0
 //	hidden = 1
 
-/obj/item/device/pda/cargo
+/obj/item/pda/cargo
 	default_cartridge = /obj/item/cartridge/quartermaster
 	icon_state = "pda-cargo"
 
-/obj/item/device/pda/quartermaster
+/obj/item/pda/quartermaster
 	default_cartridge = /obj/item/cartridge/quartermaster
 	icon_state = "pda-q"
 
-/obj/item/device/pda/shaftminer
+/obj/item/pda/shaftminer
 	icon_state = "pda-miner"
 	default_cartridge = /obj/item/cartridge/miner
 
-/obj/item/device/pda/syndicate
+/obj/item/pda/syndicate
 	default_cartridge = /obj/item/cartridge/syndicate
 	icon_state = "pda-syn"
 	name = "Military PDA"
 	owner = "John Doe"
 	hidden = 1
 
-/obj/item/device/pda/chaplain
+/obj/item/pda/chaplain
 	default_cartridge = /obj/item/cartridge/service
 	icon_state = "pda-holy"
 	ttone = "holy"
 
-/obj/item/device/pda/lawyer
+/obj/item/pda/lawyer
 	default_cartridge = /obj/item/cartridge/lawyer
 	icon_state = "pda-lawyer"
 	ttone = "..."
 
-/obj/item/device/pda/botanist
+/obj/item/pda/botanist
 	default_cartridge = /obj/item/cartridge/service
 	icon_state = "pda-hydro"
 
-/obj/item/device/pda/roboticist
+/obj/item/pda/roboticist
 	default_cartridge = /obj/item/cartridge/signal/science
 	icon_state = "pda-robot"
 
-/obj/item/device/pda/librarian
+/obj/item/pda/librarian
 	default_cartridge = /obj/item/cartridge/service
 	icon_state = "pda-libb"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a WGW-11 series e-reader."
 	model_name = "Thinktronic 5290 WGW-11 Series E-reader and Personal Data Assistant"
 
-/obj/item/device/pda/librarian/Initialize()
+/obj/item/pda/librarian/Initialize()
 	. = ..()
 	var/datum/data/pda/app/M = find_program(/datum/data/pda/app/messenger)
 	if(M)
 		M.notify_silent = TRUE //Quiet in the library!
 
-/obj/item/device/pda/clear
+/obj/item/pda/clear
 	icon_state = "pda-transp"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. This is model is a special edition with a transparent case."
 	model_name = "Thinktronic 5230 Personal Data Assistant Deluxe Special Max Turbo Limited Edition"
 
-/obj/item/device/pda/chef
+/obj/item/pda/chef
 	default_cartridge = /obj/item/cartridge/service
 	icon_state = "pda-chef"
 
-/obj/item/device/pda/bar
+/obj/item/pda/bar
 	default_cartridge = /obj/item/cartridge/service
 	icon_state = "pda-bar"
 
-/obj/item/device/pda/atmos
+/obj/item/pda/atmos
 	default_cartridge = /obj/item/cartridge/atmos
 	icon_state = "pda-atmo"
 
-/obj/item/device/pda/chemist
+/obj/item/pda/chemist
 	default_cartridge = /obj/item/cartridge/chemistry
 	icon_state = "pda-chem"
 
-/obj/item/device/pda/geneticist
+/obj/item/pda/geneticist
 	default_cartridge = /obj/item/cartridge/medical
 	icon_state = "pda-gene"
 
 
 // Used for the PDA multicaster, which mirrors messages sent to it to a specific department,
-/obj/item/device/pda/multicaster
+/obj/item/pda/multicaster
 	ownjob = "Relay"
 	icon_state = "NONE"
 	detonate = 0
@@ -171,49 +171,49 @@
 	)
 	var/list/cartridges_to_send_to = list()
 
-/obj/item/device/pda/multicaster/command/Initialize()
+/obj/item/pda/multicaster/command/Initialize()
 	. = ..()
 	owner = "Command Department"
 	name = "Command Department (Relay)"
 	cartridges_to_send_to = command_cartridges
 
-/obj/item/device/pda/multicaster/security/Initialize()
+/obj/item/pda/multicaster/security/Initialize()
 	. = ..()
 	owner = "Security Department"
 	name = "Security Department (Relay)"
 	cartridges_to_send_to = security_cartridges
 
-/obj/item/device/pda/multicaster/engineering/Initialize()
+/obj/item/pda/multicaster/engineering/Initialize()
 	. = ..()
 	owner = "Engineering Department"
 	name = "Engineering Department (Relay)"
 	cartridges_to_send_to = engineering_cartridges
 
-/obj/item/device/pda/multicaster/medical/Initialize()
+/obj/item/pda/multicaster/medical/Initialize()
 	. = ..()
 	owner = "Medical Department"
 	name = "Medical Department (Relay)"
 	cartridges_to_send_to = medical_cartridges
 
-/obj/item/device/pda/multicaster/research/Initialize()
+/obj/item/pda/multicaster/research/Initialize()
 	. = ..()
 	owner = "Research Department"
 	name = "Research Department (Relay)"
 	cartridges_to_send_to = research_cartridges
 
-/obj/item/device/pda/multicaster/cargo/Initialize()
+/obj/item/pda/multicaster/cargo/Initialize()
 	. = ..()
 	owner = "Cargo Department"
 	name = "Cargo Department (Relay)"
 	cartridges_to_send_to = cargo_cartridges
 
-/obj/item/device/pda/multicaster/civilian/Initialize()
+/obj/item/pda/multicaster/civilian/Initialize()
 	. = ..()
 	owner = "Civilian Services Department"
 	name = "Civilian Services Department (Relay)"
 	cartridges_to_send_to = civilian_cartridges
 
-/obj/item/device/pda/clown/Crossed(atom/movable/AM as mob|obj) //Clown PDA is slippery.
+/obj/item/pda/clown/Crossed(atom/movable/AM as mob|obj) //Clown PDA is slippery.
 	if(AM.is_incorporeal())
 		return
 	if (istype(AM, /mob/living))
@@ -232,10 +232,10 @@
 
 /obj/item/storage/box/PDAs/Initialize()
 	. = ..()
-	new /obj/item/device/pda(src)
-	new /obj/item/device/pda(src)
-	new /obj/item/device/pda(src)
-	new /obj/item/device/pda(src)
+	new /obj/item/pda(src)
+	new /obj/item/pda(src)
+	new /obj/item/pda(src)
+	new /obj/item/pda(src)
 	new /obj/item/cartridge/head(src)
 
 	var/newcart = pick(	/obj/item/cartridge/engineering,

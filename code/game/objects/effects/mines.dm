@@ -67,8 +67,8 @@
 			msg_admin_attack("[key_name_admin(victim)] stepped on \a [src.name], triggering [trap]")
 		G.activate()
 
-	if(istype(trap, /obj/item/device/transfer_valve))
-		var/obj/item/device/transfer_valve/TV = trap
+	if(istype(trap, /obj/item/transfer_valve))
+		var/obj/item/transfer_valve/TV = trap
 		trap = null
 		TV.forceMove(get_turf(src))
 		TV.toggle_valve()
@@ -109,7 +109,7 @@
 		// Panel open, stay uncloaked, or uncloak if already cloaked. If you don't cloak on place, ignore it and just be normal alpha.
 		alpha = camo_net ? (panel_open ? 255 : 50) : 255
 
-	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
+	else if((W.is_wirecutter() || istype(W, /obj/item/multitool)) && panel_open)
 		interact(user)
 	else
 		..()
@@ -394,7 +394,7 @@
 	name = "gadget mine"
 	desc = "A small pressure-triggered device. If no component is added, the internal release bolts will detonate in unison when triggered."
 
-	allowed_gadgets = list(/obj/item/grenade, /obj/item/device/transfer_valve)
+	allowed_gadgets = list(/obj/item/grenade, /obj/item/transfer_valve)
 
 // This tells AI mobs to not be dumb and step on mines willingly.
 /obj/item/mine/is_safe_to_step(mob/living/L)

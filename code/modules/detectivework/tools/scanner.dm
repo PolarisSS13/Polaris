@@ -1,4 +1,4 @@
-/obj/item/device/detective_scanner
+/obj/item/detective_scanner
 	name = "forensic scanner"
 	desc = "Used to scan objects for DNA and fingerprints."
 	icon_state = "forensic"
@@ -13,7 +13,7 @@
 	var/reveal_blood = TRUE
 	var/reveal_fibers = FALSE
 
-/obj/item/device/detective_scanner/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/detective_scanner/attack(mob/living/carbon/human/M as mob, mob/user as mob)
 	if (!ishuman(M))
 		to_chat(user, "<span class='warning'>\The [M] does not seem to be compatible with this device.</span>")
 		flick("[icon_state]0",src)
@@ -37,7 +37,7 @@
 				to_chat(user, "<span class='notice'>Blood type: [M.blood_DNA[blood]]\nDNA: [blood]</span>")
 	return
 
-/obj/item/device/detective_scanner/afterattack(atom/A as obj|turf, mob/user, proximity)
+/obj/item/detective_scanner/afterattack(atom/A as obj|turf, mob/user, proximity)
 	if(!proximity) return
 	if(ismob(A))
 		return
@@ -125,7 +125,7 @@
 	flick("[icon_state]1",src)
 	return 0
 
-/obj/item/device/detective_scanner/proc/add_data(atom/A as mob|obj|turf|area)
+/obj/item/detective_scanner/proc/add_data(atom/A as mob|obj|turf|area)
 	var/datum/data/record/forensic/old = stored["\ref [A]"]
 	var/datum/data/record/forensic/fresh = new(A)
 
@@ -134,7 +134,7 @@
 		. = 1
 	stored["\ref [A]"] = fresh
 
-/obj/item/device/detective_scanner/verb/examine_data()
+/obj/item/detective_scanner/verb/examine_data()
 	set name = "Examine Forensic Data"
 	set category = "Object"
 	set src in view(1)
@@ -142,7 +142,7 @@
 	//to_world("usr is [usr]") //why was this a thing? -KK.
 	display_data(usr)
 
-/obj/item/device/detective_scanner/proc/display_data(var/mob/user)
+/obj/item/detective_scanner/proc/display_data(var/mob/user)
 	if(user && stored && stored.len)
 		for(var/objref in stored)
 			if(!do_after(user, 1 SECOND)) // So people can move and stop the spam, if they refuse to wipe data.
@@ -185,7 +185,7 @@
 					for(var/bloodsample in bloods)
 						to_chat(user, " - <span class='warning'>[bloodsample]</span> Type: [bloods[bloodsample]]")
 
-/obj/item/device/detective_scanner/verb/wipe()
+/obj/item/detective_scanner/verb/wipe()
 	set name = "Wipe Forensic Data"
 	set category = "Object"
 	set src in view(1)
@@ -194,7 +194,7 @@
 		stored = list()
 		to_chat(usr, "<span class='notice'>Forensic data erase complete.</span>")
 
-/obj/item/device/detective_scanner/advanced
+/obj/item/detective_scanner/advanced
 	name = "advanced forensic scanner"
 	icon_state = "forensic_neo"
 	reveal_fibers = TRUE

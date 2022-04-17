@@ -551,8 +551,8 @@
 /obj/machinery/body_scanconsole/attackby(var/obj/item/I, var/mob/user)
 	if(computer_deconstruction_screwdriver(user, I))
 		return
-	else if(istype(I, /obj/item/device/multitool)) //Did you want to link it?
-		var/obj/item/device/multitool/P = I
+	else if(istype(I, /obj/item/multitool)) //Did you want to link it?
+		var/obj/item/multitool/P = I
 		if(P.connectable)
 			if(istype(P.connectable, /obj/machinery/bodyscanner))
 				var/obj/machinery/bodyscanner/C = P.connectable

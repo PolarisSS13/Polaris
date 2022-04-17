@@ -556,7 +556,7 @@ GLOBAL_LIST_EMPTY(apcs)
 			playsound(src, W.usesound, 50, 1)
 			update_icon()
 
-	else if(istype(W, /obj/item/card/id)||istype(W, /obj/item/device/pda))			// trying to unlock the interface with an ID card
+	else if(istype(W, /obj/item/card/id)||istype(W, /obj/item/pda))			// trying to unlock the interface with an ID card
 		togglelock(user)
 
 	else if(istype(W, /obj/item/stack/cable_coil) && !terminal && opened && has_electronics != APC_HAS_ELECTRONICS_SECURED)
@@ -659,7 +659,7 @@ GLOBAL_LIST_EMPTY(apcs)
 				if(opened==2)
 					opened = 1
 				update_icon()
-		else if(istype(W, /obj/item/device/multitool) && (hacker || emagged))
+		else if(istype(W, /obj/item/multitool) && (hacker || emagged))
 			if(cell)
 				to_chat(user, "<span class='warning'>You need to remove the power cell first.</span>")
 				return
@@ -687,7 +687,7 @@ GLOBAL_LIST_EMPTY(apcs)
 		else
 			if(istype(user, /mob/living/silicon))
 				return attack_hand(user)
-			if(!opened && wiresexposed && (istype(W, /obj/item/device/multitool) || W.is_wirecutter() || istype(W, /obj/item/device/assembly/signaler)))
+			if(!opened && wiresexposed && (istype(W, /obj/item/multitool) || W.is_wirecutter() || istype(W, /obj/item/assembly/signaler)))
 				return attack_hand(user)
 			//Placeholder until someone can do take_damage() for APCs or something.
 			to_chat(user, "<span class='notice'>The [name] looks too sturdy to bash open with \the [W.name].</span>")

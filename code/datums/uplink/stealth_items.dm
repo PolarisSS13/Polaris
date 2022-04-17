@@ -27,7 +27,7 @@
 /datum/uplink_item/item/stealth_items/chameleon_projector
 	name = "Chameleon-Projector"
 	item_cost = 30
-	path = /obj/item/device/chameleon
+	path = /obj/item/chameleon
 
 /datum/uplink_item/item/stealth_items/voice
 	name = "Voice Changer"

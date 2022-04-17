@@ -195,7 +195,7 @@ var/global/list/engineering_networks = list(
 	return null
 
 /obj/machinery/camera/proc/isMotion()
-	var/O = locate(/obj/item/device/assembly/prox_sensor) in assembly.upgrades
+	var/O = locate(/obj/item/assembly/prox_sensor) in assembly.upgrades
 	return O
 
 // UPGRADE PROCS
@@ -213,7 +213,7 @@ var/global/list/engineering_networks = list(
 /obj/machinery/camera/proc/upgradeMotion()
 	if(!isturf(loc))
 		return //nooooo
-	assembly.upgrades.Add(new /obj/item/device/assembly/prox_sensor(assembly))
+	assembly.upgrades.Add(new /obj/item/assembly/prox_sensor(assembly))
 	setPowerUsage()
 	START_MACHINE_PROCESSING(src)
 	sense_proximity(callback = /atom/proc/HasProximity)

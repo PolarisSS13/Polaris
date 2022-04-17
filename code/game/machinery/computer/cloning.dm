@@ -99,8 +99,8 @@
 			to_chat(user, "You insert [W].")
 			SStgui.update_uis(src)
 			return
-	else if(istype(W, /obj/item/device/multitool))
-		var/obj/item/device/multitool/M = W
+	else if(istype(W, /obj/item/multitool))
+		var/obj/item/multitool/M = W
 		var/obj/machinery/clonepod/P = M.connecting
 		if(P && !(P in pods))
 			pods += P
@@ -205,7 +205,7 @@
 		if(TGUI_MODAL_ANSWER)
 			if(params["id"] == "del_rec" && active_record)
 				var/obj/item/card/id/C = usr.get_active_hand()
-				if(!istype(C) && !istype(C, /obj/item/device/pda))
+				if(!istype(C) && !istype(C, /obj/item/pda))
 					set_temp("ID not in hand.", "danger")
 					return
 				if(check_access(C))

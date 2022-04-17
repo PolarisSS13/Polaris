@@ -9,9 +9,9 @@
 	icon_selected = FALSE
 
 /mob/living/silicon/robot/lost/init()
-	aiCamera = new/obj/item/device/camera/siliconcam/robot_camera(src)
+	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
 
-	mmi = new /obj/item/device/mmi/digital/robot(src) // Explicitly a drone.
+	mmi = new /obj/item/mmi/digital/robot(src) // Explicitly a drone.
 	module = new /obj/item/robot_module/robot/lost(src)
 	overlays.Cut()
 	init_id()

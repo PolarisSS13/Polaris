@@ -176,7 +176,7 @@
 /area/centcom/medical)
 "ajd" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/captain,
+/obj/item/pda/captain,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -190,18 +190,18 @@
 /area/skipjack_station)
 "ajm" = (
 /obj/structure/table/rack,
-/obj/item/device/camera_film,
-/obj/item/device/camera_film,
-/obj/item/device/camera_film,
-/obj/item/device/camera_film,
-/obj/item/device/camera_film,
-/obj/item/device/camera_film,
-/obj/item/device/camera,
-/obj/item/device/camera,
-/obj/item/device/camera,
-/obj/item/device/camera,
-/obj/item/device/camera,
-/obj/item/device/camera,
+/obj/item/camera_film,
+/obj/item/camera_film,
+/obj/item/camera_film,
+/obj/item/camera_film,
+/obj/item/camera_film,
+/obj/item/camera_film,
+/obj/item/camera,
+/obj/item/camera,
+/obj/item/camera,
+/obj/item/camera,
+/obj/item/camera,
+/obj/item/camera,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -374,7 +374,7 @@
 /area/skipjack_station/start)
 "aqF" = (
 /obj/structure/table/steel,
-/obj/item/device/pda/syndicate,
+/obj/item/pda/syndicate,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"
@@ -1050,7 +1050,7 @@
 /area/shuttle/arrival/pre_game)
 "biP" = (
 /obj/structure/undies_wardrobe,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 4;
 	frequency = 1213;
@@ -1073,8 +1073,8 @@
 /obj/structure/table/rack,
 /obj/item/gun/energy/stunrevolver,
 /obj/item/gun/energy/stunrevolver,
-/obj/item/device/flash,
-/obj/item/device/flash,
+/obj/item/flash,
+/obj/item/flash,
 /obj/item/clothing/accessory/storage/brown_vest,
 /obj/item/clothing/accessory/storage/brown_vest,
 /obj/item/clothing/accessory/storage/brown_vest,
@@ -1276,8 +1276,8 @@
 /area/syndicate_station/start)
 "bvG" = (
 /obj/structure/table/rack,
-/obj/item/device/lightreplacer,
-/obj/item/device/lightreplacer,
+/obj/item/lightreplacer,
+/obj/item/lightreplacer,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -1818,10 +1818,10 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/item/device/kit/paint/ripley/death,
-/obj/item/device/kit/paint/ripley/flames_blue,
-/obj/item/device/kit/paint/ripley/flames_red,
-/obj/item/device/kit/paint/ripley,
+/obj/item/kit/paint/ripley/death,
+/obj/item/kit/paint/ripley/flames_blue,
+/obj/item/kit/paint/ripley/flames_red,
+/obj/item/kit/paint/ripley,
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
 "cfm" = (
@@ -2031,12 +2031,12 @@
 /area/centcom/medical)
 "csT" = (
 /obj/structure/table/rack,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -2131,7 +2131,7 @@
 /obj/machinery/computer/station_alert/all{
 	dir = 1
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 4;
 	frequency = 1213;
@@ -2259,12 +2259,12 @@
 /area/holodeck/source_chess)
 "cIv" = (
 /obj/structure/table/rack,
-/obj/item/device/flashlight/maglight,
-/obj/item/device/flashlight/maglight,
-/obj/item/device/flashlight/maglight,
-/obj/item/device/flashlight/maglight,
-/obj/item/device/flashlight/maglight,
-/obj/item/device/flashlight/maglight,
+/obj/item/flashlight/maglight,
+/obj/item/flashlight/maglight,
+/obj/item/flashlight/maglight,
+/obj/item/flashlight/maglight,
+/obj/item/flashlight/maglight,
+/obj/item/flashlight/maglight,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -2561,7 +2561,7 @@
 	},
 /area/centcom/specops)
 "dfg" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	broadcasting = 1;
 	dir = 1;
 	frequency = 1213;
@@ -2801,7 +2801,7 @@
 /area/skipjack_station/start)
 "dsW" = (
 /obj/structure/table/steel,
-/obj/item/device/radio/uplink,
+/obj/item/radio/uplink,
 /turf/unsimulated/floor{
 	icon_state = "cult";
 	name = "plating"
@@ -2911,7 +2911,7 @@
 "dzV" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/book/manual/engineering_hacking,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 4;
 	frequency = 1213;
@@ -3077,18 +3077,18 @@
 /area/wizard_station)
 "dHt" = (
 /obj/structure/table/rack,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
-/obj/item/device/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
+/obj/item/flashlight/flare,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -3108,12 +3108,12 @@
 /area/shuttle/large_escape_pod2/transit)
 "dIT" = (
 /obj/structure/table/rack,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
-/obj/item/device/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
+/obj/item/binoculars,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -3403,12 +3403,12 @@
 /obj/item/taperoll/police,
 /obj/item/taperoll/police,
 /obj/item/taperoll/police,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/device/flash,
-/obj/item/device/flash,
+/obj/item/flash,
+/obj/item/flash,
+/obj/item/flash,
+/obj/item/flash,
+/obj/item/flash,
+/obj/item/flash,
 /obj/item/melee/baton/loaded,
 /obj/item/melee/baton/loaded,
 /obj/item/melee/baton/loaded,
@@ -3512,7 +3512,7 @@
 /area/syndicate_mothership/elite_squad)
 "eid" = (
 /obj/structure/table/standard,
-/obj/item/device/paicard,
+/obj/item/paicard,
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -3620,9 +3620,9 @@
 "epY" = (
 /obj/structure/closet/chefcloset,
 /obj/item/glass_jar,
-/obj/item/device/retail_scanner/civilian,
+/obj/item/retail_scanner/civilian,
 /obj/item/soap/nanotrasen,
-/obj/item/device/destTagger{
+/obj/item/destTagger{
 	pixel_x = 4;
 	pixel_y = 3
 	},
@@ -5192,7 +5192,7 @@
 	},
 /area/centcom/command)
 "gbs" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 4;
 	frequency = 1213;
@@ -5487,7 +5487,7 @@
 /turf/simulated/floor/holofloor/wmarble,
 /area/holodeck/source_chess)
 "guR" = (
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	pixel_y = -21
 	},
 /turf/simulated/shuttle/floor/red,
@@ -5727,10 +5727,10 @@
 /area/centcom/bar)
 "gJo" = (
 /obj/structure/table/reinforced,
-/obj/item/device/defib_kit/loaded{
+/obj/item/defib_kit/loaded{
 	pixel_y = 2
 	},
-/obj/item/device/defib_kit/loaded{
+/obj/item/defib_kit/loaded{
 	pixel_y = -2
 	},
 /turf/simulated/shuttle/floor/white,
@@ -5908,7 +5908,7 @@
 /turf/simulated/shuttle/plating/airless/carry,
 /area/shuttle/merchant/home)
 "gTz" = (
-/obj/item/device/camera{
+/obj/item/camera{
 	desc = "A one use - polaroid camera. 30 photos left.";
 	name = "detectives camera";
 	pictures_left = 30;
@@ -5945,7 +5945,7 @@
 /obj/structure/flora/pottedplant{
 	icon_state = "plant-03"
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -6151,7 +6151,7 @@
 	},
 /area/centcom/bar)
 "hkb" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	frequency = 1213;
 	name = "Subversive Intercom";
@@ -6888,7 +6888,7 @@
 	},
 /area/centcom/specops)
 "hYD" = (
-/obj/item/device/multitool,
+/obj/item/multitool,
 /obj/item/reagent_containers/spray/cleaner,
 /obj/structure/table/reinforced,
 /turf/simulated/shuttle/floor/red,
@@ -6958,7 +6958,7 @@
 "idn" = (
 /obj/structure/table/rack,
 /obj/item/storage/belt/utility/full,
-/obj/item/device/multitool,
+/obj/item/multitool,
 /turf/simulated/shuttle/floor/voidcraft/dark,
 /area/syndicate_station/start)
 "idR" = (
@@ -8050,7 +8050,7 @@
 	},
 /area/skipjack_station)
 "jqO" = (
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /turf/simulated/shuttle/plating,
 /area/skipjack_station/start)
 "jrv" = (
@@ -8312,7 +8312,7 @@
 	},
 /area/centcom/specops)
 "jFD" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -8938,7 +8938,7 @@
 /area/syndicate_station)
 "knl" = (
 /obj/structure/table/wooden_reinforced,
-/obj/item/device/radio/intercom/specops{
+/obj/item/radio/intercom/specops{
 	pixel_y = -21
 	},
 /obj/machinery/button/remote/blast_door{
@@ -9365,7 +9365,7 @@
 "kER" = (
 /obj/machinery/atmospherics/pipe/simple/visible,
 /obj/item/tool/crowbar,
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /turf/simulated/shuttle/plating,
 /area/skipjack_station/start)
 "kFb" = (
@@ -9736,7 +9736,7 @@
 /area/centcom/main_hall)
 "kYD" = (
 /obj/structure/table/reinforced,
-/obj/item/device/taperecorder,
+/obj/item/taperecorder,
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 4
 	},
@@ -9756,7 +9756,7 @@
 /obj/structure/table/steel,
 /obj/effect/spawner/newbomb/timer/syndicate,
 /obj/item/tool/screwdriver,
-/obj/item/device/assembly/signaler{
+/obj/item/assembly/signaler{
 	pixel_y = 2
 	},
 /turf/simulated/shuttle/floor/voidcraft,
@@ -9893,10 +9893,10 @@
 /area/ninja_dojo/start)
 "liK" = (
 /obj/structure/table/reinforced,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
-/obj/item/device/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
+/obj/item/paicard,
 /obj/item/storage/box/donut,
 /obj/item/storage/box,
 /turf/unsimulated/floor{
@@ -10300,7 +10300,7 @@
 /obj/item/roller,
 /obj/item/roller,
 /obj/item/roller,
-/obj/item/device/defib_kit/compact/combat/loaded,
+/obj/item/defib_kit/compact/combat/loaded,
 /turf/simulated/shuttle/floor/voidcraft/light,
 /area/syndicate_station/start)
 "lKk" = (
@@ -10482,10 +10482,10 @@
 /area/beach)
 "lQh" = (
 /obj/structure/table/standard,
-/obj/item/device/radio/headset/syndicate/alt,
-/obj/item/device/radio/headset/syndicate/alt,
-/obj/item/device/radio/headset/syndicate/alt,
-/obj/item/device/radio/headset/syndicate/alt,
+/obj/item/radio/headset/syndicate/alt,
+/obj/item/radio/headset/syndicate/alt,
+/obj/item/radio/headset/syndicate/alt,
+/obj/item/radio/headset/syndicate/alt,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -11005,7 +11005,7 @@
 /area/centcom/bar)
 "mxq" = (
 /obj/structure/table/reinforced,
-/obj/item/device/megaphone,
+/obj/item/megaphone,
 /obj/item/storage/box/trackimp,
 /obj/item/storage/box/cdeathalarm_kit,
 /obj/structure/window/reinforced{
@@ -11161,12 +11161,12 @@
 /area/ninja_dojo/dojo)
 "mGD" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
-/obj/item/device/pda/ert,
+/obj/item/pda/ert,
+/obj/item/pda/ert,
+/obj/item/pda/ert,
+/obj/item/pda/ert,
+/obj/item/pda/ert,
+/obj/item/pda/ert,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
@@ -11788,12 +11788,12 @@
 /area/shuttle/administration/centcom)
 "nrP" = (
 /obj/structure/table/reinforced,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
-/obj/item/device/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
+/obj/item/megaphone,
 /obj/effect/floor_decal/industrial/outline/blue,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
@@ -11985,12 +11985,12 @@
 /area/holodeck/source_chess)
 "nJi" = (
 /obj/structure/table/rack,
-/obj/item/device/aicard,
+/obj/item/aicard,
 /turf/simulated/shuttle/floor/voidcraft/dark,
 /area/syndicate_station/start)
 "nKa" = (
 /obj/structure/table/standard,
-/obj/item/device/flashlight/lamp{
+/obj/item/flashlight/lamp{
 	pixel_x = 4;
 	pixel_y = 8
 	},
@@ -12305,7 +12305,7 @@
 /area/tdome)
 "oby" = (
 /obj/structure/table/reinforced,
-/obj/item/device/aicard,
+/obj/item/aicard,
 /obj/item/stamp/centcomm,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
@@ -12608,7 +12608,7 @@
 /area/shuttle/administration/centcom)
 "orQ" = (
 /obj/structure/table/woodentable,
-/obj/item/device/paicard,
+/obj/item/paicard,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -12616,7 +12616,7 @@
 /area/wizard_station)
 "orR" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp/green{
+/obj/item/flashlight/lamp/green{
 	on = 0;
 	pixel_x = -3;
 	pixel_y = 8
@@ -12729,7 +12729,7 @@
 /area/wizard_station)
 "ozF" = (
 /obj/structure/table/glass,
-/obj/item/device/paicard,
+/obj/item/paicard,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -12841,7 +12841,7 @@
 /area/centcom/command)
 "oKg" = (
 /obj/machinery/iv_drip,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -13140,7 +13140,7 @@
 /area/centcom/terminal)
 "pbz" = (
 /obj/structure/table/standard,
-/obj/item/device/pda/syndicate,
+/obj/item/pda/syndicate,
 /turf/unsimulated/floor{
 	icon_state = "lino"
 	},
@@ -13296,9 +13296,9 @@
 /area/centcom/bar)
 "plP" = (
 /obj/structure/table/rack,
-/obj/item/device/suit_cooling_unit,
-/obj/item/device/suit_cooling_unit,
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -13326,7 +13326,7 @@
 	dir = 8
 	},
 /obj/structure/table/steel_reinforced,
-/obj/item/device/paicard,
+/obj/item/paicard,
 /turf/simulated/shuttle/floor/voidcraft/light,
 /area/ninja_dojo/start)
 "pnP" = (
@@ -13776,7 +13776,7 @@
 /turf/simulated/shuttle/floor/yellow,
 /area/centcom/evac)
 "pLy" = (
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /obj/structure/table/steel_reinforced,
 /obj/machinery/newscaster{
 	layer = 3.3;
@@ -15293,7 +15293,7 @@
 /turf/simulated/shuttle/floor/black,
 /area/centcom/evac)
 "rof" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	broadcasting = 1;
 	dir = 1;
 	frequency = 1443;
@@ -15916,7 +15916,7 @@
 "rQI" = (
 /obj/structure/table/reinforced,
 /obj/item/handcuffs,
-/obj/item/device/flash,
+/obj/item/flash,
 /obj/item/melee/baton/loaded,
 /obj/item/storage/belt/security/tactical,
 /obj/item/gun/energy/stunrevolver,
@@ -15977,7 +15977,7 @@
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_theatre)
 "rRM" = (
-/obj/item/device/radio/electropack,
+/obj/item/radio/electropack,
 /obj/structure/table/steel,
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
@@ -16172,7 +16172,7 @@
 /area/shuttle/escape/centcom)
 "sdE" = (
 /obj/structure/table/reinforced,
-/obj/item/device/defib_kit/compact/combat/loaded{
+/obj/item/defib_kit/compact/combat/loaded{
 	pixel_x = 2;
 	pixel_y = 2
 	},
@@ -16180,7 +16180,7 @@
 	pixel_y = -4
 	},
 /obj/item/cell/high,
-/obj/item/device/defib_kit/compact/combat/loaded{
+/obj/item/defib_kit/compact/combat/loaded{
 	pixel_x = -2;
 	pixel_y = -2
 	},
@@ -16238,7 +16238,7 @@
 /area/skipjack_station)
 "shD" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/mmi/radio_enabled,
+/obj/item/mmi/radio_enabled,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -16816,7 +16816,7 @@
 /area/syndicate_station/start)
 "sNL" = (
 /obj/structure/table/wooden_reinforced,
-/obj/item/device/radio/uplink,
+/obj/item/radio/uplink,
 /turf/unsimulated/floor{
 	dir = 8;
 	icon_state = "wood"
@@ -16895,7 +16895,7 @@
 	},
 /area/centcom/specops)
 "sRz" = (
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -17201,7 +17201,7 @@
 /area/shuttle/merchant/home)
 "thM" = (
 /obj/structure/closet/emcloset,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 8;
 	name = "Station Intercom (General)";
 	pixel_x = -21
@@ -17524,7 +17524,7 @@
 "tDM" = (
 /obj/structure/table/standard,
 /obj/item/paper_bin,
-/obj/item/device/radio/off,
+/obj/item/radio/off,
 /turf/simulated/shuttle/floor/black,
 /area/centcom/evac)
 "tDS" = (
@@ -17954,7 +17954,7 @@
 /area/holodeck/source_meetinghall)
 "uak" = (
 /obj/structure/table/standard,
-/obj/item/device/defib_kit/loaded,
+/obj/item/defib_kit/loaded,
 /obj/item/tool/wrench,
 /obj/item/reagent_containers/glass/beaker/cryoxadone{
 	pixel_x = -4
@@ -18131,8 +18131,8 @@
 /obj/item/reagent_containers/spray/cleaner,
 /obj/item/reagent_containers/spray/sterilizine,
 /obj/item/reagent_containers/spray/sterilizine,
-/obj/item/device/flashlight/pen,
-/obj/item/device/flashlight/pen,
+/obj/item/flashlight/pen,
+/obj/item/flashlight/pen,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -18533,7 +18533,7 @@
 /obj/structure/table/woodentable,
 /obj/item/paper_bin,
 /obj/item/pen,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -18795,7 +18795,7 @@
 /area/centcom/medical)
 "uWn" = (
 /obj/structure/closet/emcloset,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	dir = 4;
 	name = "Station Intercom (General)";
 	pixel_x = 21
@@ -18977,7 +18977,7 @@
 	},
 /area/shuttle/trade)
 "vle" = (
-/obj/item/device/suit_cooling_unit,
+/obj/item/suit_cooling_unit,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -19225,7 +19225,7 @@
 "vzY" = (
 /obj/structure/table/rack,
 /obj/item/storage/belt/utility/full,
-/obj/item/device/multitool,
+/obj/item/multitool,
 /obj/machinery/light/small,
 /turf/simulated/shuttle/floor/voidcraft/dark,
 /area/syndicate_station/start)
@@ -19475,7 +19475,7 @@
 /obj/machinery/vending/assist{
 	contraband = null;
 	name = "AntagCorpVend";
-	products = list(/obj/item/device/assembly/prox_sensor = 5, /obj/item/device/assembly/signaler = 4, /obj/item/device/assembly/infra = 4, /obj/item/device/assembly/prox_sensor = 4, /obj/item/handcuffs = 8, /obj/item/device/flash = 4, /obj/item/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
+	products = list(/obj/item/assembly/prox_sensor = 5, /obj/item/assembly/signaler = 4, /obj/item/assembly/infra = 4, /obj/item/assembly/prox_sensor = 4, /obj/item/handcuffs = 8, /obj/item/flash = 4, /obj/item/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
 	},
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
@@ -19566,7 +19566,7 @@
 "vTt" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/head/philosopher_wig,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 4;
 	frequency = 1213;
@@ -19711,7 +19711,7 @@
 /obj/machinery/light{
 	dir = 8
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -19927,11 +19927,11 @@
 "wjq" = (
 /obj/structure/table/rack,
 /obj/effect/floor_decal/industrial/warning,
-/obj/item/device/kit/paint/gygax/darkgygax,
-/obj/item/device/kit/paint/gygax/recitence,
-/obj/item/device/kit/paint/durand,
-/obj/item/device/kit/paint/durand/phazon,
-/obj/item/device/kit/paint/durand/seraph,
+/obj/item/kit/paint/gygax/darkgygax,
+/obj/item/kit/paint/gygax/recitence,
+/obj/item/kit/paint/durand,
+/obj/item/kit/paint/durand/phazon,
+/obj/item/kit/paint/durand/seraph,
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
 "wjG" = (
@@ -20197,7 +20197,7 @@
 /area/centcom/terminal)
 "wDu" = (
 /obj/structure/table/woodentable,
-/obj/item/device/radio/headset,
+/obj/item/radio/headset,
 /obj/item/spacecash/c500,
 /turf/unsimulated/floor{
 	dir = 8;
@@ -20505,18 +20505,18 @@
 /obj/item/tool/crowbar,
 /obj/item/tool/crowbar,
 /obj/item/tool/crowbar,
-/obj/item/device/radio/off,
-/obj/item/device/radio/off,
-/obj/item/device/radio/off,
-/obj/item/device/radio/off,
-/obj/item/device/radio/off,
-/obj/item/device/radio/off,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
-/obj/item/device/flashlight,
+/obj/item/radio/off,
+/obj/item/radio/off,
+/obj/item/radio/off,
+/obj/item/radio/off,
+/obj/item/radio/off,
+/obj/item/radio/off,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
+/obj/item/flashlight,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -20608,7 +20608,7 @@
 /area/centcom/specops)
 "wUM" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/device/pda/syndicate,
+/obj/item/pda/syndicate,
 /turf/simulated/shuttle/floor/voidcraft/light,
 /area/ninja_dojo/start)
 "wWb" = (
@@ -20732,8 +20732,8 @@
 /area/wizard_station)
 "xcN" = (
 /obj/structure/table/standard,
-/obj/item/device/flash,
-/obj/item/device/flash,
+/obj/item/flash,
+/obj/item/flash,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/reagent_containers/spray/pepper,
 /obj/item/clothing/glasses/sunglasses/sechud/tactical,
@@ -21411,8 +21411,8 @@
 /obj/structure/table/rack,
 /obj/item/storage/belt/utility/full,
 /obj/item/storage/belt/utility/full,
-/obj/item/device/multitool,
-/obj/item/device/multitool,
+/obj/item/multitool,
+/obj/item/multitool,
 /obj/item/clothing/shoes/magboots,
 /turf/simulated/shuttle/plating,
 /area/skipjack_station/start)
@@ -21468,7 +21468,7 @@
 	contraband = null;
 	dir = 1;
 	name = "Old Vending Machine";
-	products = list(/obj/item/device/assembly/prox_sensor = 5, /obj/item/device/assembly/signaler = 4, /obj/item/device/assembly/infra = 4, /obj/item/device/assembly/prox_sensor = 4, /obj/item/handcuffs = 8, /obj/item/device/flash = 4, /obj/item/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
+	products = list(/obj/item/assembly/prox_sensor = 5, /obj/item/assembly/signaler = 4, /obj/item/assembly/infra = 4, /obj/item/assembly/prox_sensor = 4, /obj/item/handcuffs = 8, /obj/item/flash = 4, /obj/item/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
 	},
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
@@ -21513,7 +21513,7 @@
 	name = "Cell";
 	req_access = list(150)
 	},
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	frequency = 1213;
 	name = "Subversive Intercom";
@@ -21611,7 +21611,7 @@
 "xWw" = (
 /obj/item/target,
 /obj/effect/floor_decal/industrial/outline/yellow,
-/obj/item/device/radio/intercom{
+/obj/item/radio/intercom{
 	desc = "Talk through this. Evilly";
 	dir = 8;
 	frequency = 1213;
@@ -21834,7 +21834,7 @@
 /area/centcom/evac)
 "yjS" = (
 /obj/structure/table/reinforced,
-/obj/item/device/pda/ert,
+/obj/item/pda/ert,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"

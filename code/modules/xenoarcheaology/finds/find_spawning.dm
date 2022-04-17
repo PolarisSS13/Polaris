@@ -221,7 +221,7 @@
 			if(prob(10))
 				apply_image_decorations = TRUE
 			if(prob(25))
-				new_item = new /obj/item/device/soulstone(src.loc)
+				new_item = new /obj/item/soulstone(src.loc)
 				new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 				new_item.icon_state = icon_state
 				LAZYSET(new_item.origin_tech, TECH_ARCANE, 2)
@@ -232,7 +232,7 @@
 			apply_material_decorations = FALSE
 			apply_image_decorations = FALSE
 		if(ARCHAEO_TELEBEACON)
-			new_item = new /obj/item/device/radio/beacon(src.loc)
+			new_item = new /obj/item/radio/beacon(src.loc)
 			talkative = FALSE
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "unknown[rand(1,4)]"
@@ -261,7 +261,7 @@
 			//soulstone
 			become_anomalous = TRUE
 			apply_prefix = FALSE
-			new_item = new /obj/item/device/soulstone(src.loc)
+			new_item = new /obj/item/soulstone(src.loc)
 			item_type = new_item.name
 			apply_material_decorations = FALSE
 			LAZYSET(new_item.origin_tech, TECH_ARCANE, 2)
@@ -456,7 +456,7 @@
 			apply_material_decorations = FALSE
 
 			var/list/alien_stuff = list(
-				/obj/item/device/multitool/alien,
+				/obj/item/multitool/alien,
 				/obj/item/stack/cable_coil/alien,
 				/obj/item/tool/crowbar/alien,
 				/obj/item/tool/screwdriver/alien,

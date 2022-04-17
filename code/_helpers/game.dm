@@ -225,7 +225,7 @@
 	return hear
 
 
-/proc/get_mobs_in_radio_ranges(var/list/obj/item/device/radio/radios)
+/proc/get_mobs_in_radio_ranges(var/list/obj/item/radio/radios)
 
 	set background = 1
 
@@ -233,7 +233,7 @@
 	// Returns a list of mobs who can hear any of the radios given in @radios
 	var/list/speaker_coverage = list()
 	for(var/r in radios)
-		var/obj/item/device/radio/R = r // You better fucking be a radio.
+		var/obj/item/radio/R = r // You better fucking be a radio.
 		var/turf/speaker = get_turf(R)
 		if(speaker)
 			for(var/turf/T in hear(R.canhear_range,speaker))
@@ -255,7 +255,7 @@
 
 /mob/living/silicon/robot/can_hear_radio(var/list/hearturfs)
 	var/turf/T = get_turf(src)
-	var/obj/item/device/radio/borg/R = hearturfs[T] // this should be an assoc list of turf-to-radio
+	var/obj/item/radio/borg/R = hearturfs[T] // this should be an assoc list of turf-to-radio
 	
 	// We heard it on our own radio? We use power for that.
 	if(istype(R) && R.myborg == src)

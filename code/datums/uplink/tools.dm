@@ -7,7 +7,7 @@
 /datum/uplink_item/item/tools/binoculars
 	name = "Binoculars"
 	item_cost = 5
-	path = /obj/item/device/binoculars
+	path = /obj/item/binoculars
 
 /datum/uplink_item/item/tools/toolbox // Leaving the basic as an option since powertools are loud.
 	name = "Fully Loaded Toolbox"
@@ -27,7 +27,7 @@
 /datum/uplink_item/item/tools/encryptionkey_radio
 	name = "Encrypted Radio Channel Key"
 	item_cost = 10
-	path = /obj/item/device/encryptionkey/syndicate
+	path = /obj/item/encryptionkey/syndicate
 
 /datum/uplink_item/item/tools/money
 	name = "Operations Funding"
@@ -61,12 +61,12 @@
 /datum/uplink_item/item/tools/encryptionkey_binary
 	name = "Binary Translator Key"
 	item_cost = 15
-	path = /obj/item/device/encryptionkey/binary
+	path = /obj/item/encryptionkey/binary
 
 /datum/uplink_item/item/tools/hacking_tool
 	name = "Door Hacking Tool"
 	item_cost = 20
-	path = /obj/item/device/multitool/hacktool
+	path = /obj/item/multitool/hacktool
 	desc = "Appears and functions as a standard multitool until the mode is toggled by applying a screwdriver appropriately. \
 			When in hacking mode this device will grant full access to any standard airlock within 20 to 40 seconds. \
 			This device will also be able to immediately access the last 6 to 8 hacked airlocks."
@@ -74,7 +74,7 @@
 /datum/uplink_item/item/tools/ai_detector
 	name = "Anti-Surveillance Tool"
 	item_cost = 20
-	path = /obj/item/device/multitool/ai_detector
+	path = /obj/item/multitool/ai_detector
 	desc = "This functions like a normal multitool, but includes an integrated camera network sensor that will warn the holder if they are being \
 	watched, by changing color and beeping.  It is able to detect both AI visual surveillance and security camera utilization from terminals, and \
 	will give different warnings by beeping and changing colors based on what it detects.  Only the holder can hear the warnings."
@@ -82,7 +82,7 @@
 /datum/uplink_item/item/tools/radio_jammer
 	name = "Subspace Jammer"
 	item_cost = 25
-	path = /obj/item/device/radio_jammer
+	path = /obj/item/radio_jammer
 	desc = "A device which is capable of disrupting subspace communications, preventing the use of headsets, PDAs, and communicators within \
 	a radius of seven meters.  It runs off weapon cells, which can be replaced as needed.  One cell will last for approximately ten minutes."
 
@@ -116,7 +116,7 @@
 /datum/uplink_item/item/tools/powersink
 	name = "Powersink (DANGER!)"
 	item_cost = 40
-	path = /obj/item/device/powersink
+	path = /obj/item/powersink
 
 /datum/uplink_item/item/tools/packagebomb/large
 	name = "Package Bomb (Large)"
@@ -126,7 +126,7 @@
 /datum/uplink_item/item/tools/integratedcircuitprinter
 	name = "Integrated Circuit Printer (Upgraded)"
 	item_cost = 10
-	path = /obj/item/device/integrated_circuit_printer/upgraded
+	path = /obj/item/integrated_circuit_printer/upgraded
 
 /*
 /datum/uplink_item/item/tools/packagebomb/huge

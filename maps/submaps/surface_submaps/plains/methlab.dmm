@@ -5,7 +5,7 @@
 "bA" = (/obj/item/cell/hyper,/turf/simulated/floor/tiled/steel_dirty,/area/submap/methlab)
 "bJ" = (/obj/effect/floor_decal/rust,/obj/random/maintenance,/obj/random/medical/pillbottle,/turf/simulated/floor/tiled/steel_dirty,/area/submap/methlab)
 "bQ" = (/obj/item/material/shard{icon_state = "medium"},/obj/item/material/shard{pixel_x = 9},/obj/item/material/shard{pixel_x = 5},/turf/template_noop,/area/submap/methlab)
-"cg" = (/obj/structure/table/steel_reinforced,/obj/item/device/radio{anchored = 1; canhear_range = 1; frequency = 1487; icon = 'icons/obj/items.dmi'; icon_state = "red_phone"; name = "Reception Emergency Phone"},/turf/simulated/floor/tiled/steel_dirty,/area/submap/methlab)
+"cg" = (/obj/structure/table/steel_reinforced,/obj/item/radio{anchored = 1; canhear_range = 1; frequency = 1487; icon = 'icons/obj/items.dmi'; icon_state = "red_phone"; name = "Reception Emergency Phone"},/turf/simulated/floor/tiled/steel_dirty,/area/submap/methlab)
 "ck" = (/obj/machinery/portable_atmospherics/hydroponics,/obj/item/seeds/ambrosiadeusseed,/obj/effect/floor_decal/industrial/hatch/yellow,/turf/simulated/floor/tiled/old_tile/white,/area/submap/methlab)
 "dy" = (/obj/effect/floor_decal/industrial/warning/corner,/obj/effect/floor_decal/rust,/obj/random/maintenance,/turf/simulated/floor/tiled/steel_dirty,/area/submap/methlab)
 "fr" = (/obj/structure/fence,/turf/template_noop,/area/submap/methlab)

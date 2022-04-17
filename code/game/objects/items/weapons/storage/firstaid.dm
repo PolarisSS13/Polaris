@@ -31,7 +31,7 @@
 	item_state_slots = list(slot_r_hand_str = "firstaid-ointment", slot_l_hand_str = "firstaid-ointment")
 	icon_variety = list("ointment","firefirstaid")
 	starts_with = list(
-		/obj/item/device/healthanalyzer,
+		/obj/item/healthanalyzer,
 		/obj/item/reagent_containers/hypospray/autoinjector,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/ointment,
@@ -48,7 +48,7 @@
 		/obj/item/stack/medical/bruise_pack,
 		/obj/item/stack/medical/ointment,
 		/obj/item/stack/medical/ointment,
-		/obj/item/device/healthanalyzer,
+		/obj/item/healthanalyzer,
 		/obj/item/reagent_containers/hypospray/autoinjector
 	)
 
@@ -65,7 +65,7 @@
 		/obj/item/reagent_containers/pill/antitox,
 		/obj/item/reagent_containers/pill/antitox,
 		/obj/item/reagent_containers/pill/antitox,
-		/obj/item/device/healthanalyzer
+		/obj/item/healthanalyzer
 	)
 
 /obj/item/storage/firstaid/o2
@@ -80,7 +80,7 @@
 		/obj/item/reagent_containers/pill/dexalin,
 		/obj/item/reagent_containers/hypospray/autoinjector,
 		/obj/item/reagent_containers/syringe/inaprovaline,
-		/obj/item/device/healthanalyzer
+		/obj/item/healthanalyzer
 	)
 
 /obj/item/storage/firstaid/adv
@@ -112,7 +112,7 @@
 		/obj/item/storage/pill_bottle/spaceacillin,
 		/obj/item/reagent_containers/hypospray/autoinjector/biginjector/clotting,
 		/obj/item/stack/medical/splint,
-		/obj/item/device/healthanalyzer/advanced
+		/obj/item/healthanalyzer/advanced
 	)
 
 /obj/item/storage/firstaid/surgery
@@ -134,7 +134,7 @@
 		/obj/item/surgical/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
 		/obj/item/stack/nanopaste,
-		/obj/item/device/healthanalyzer/advanced,
+		/obj/item/healthanalyzer/advanced,
 		/obj/item/autopsy_scanner
 		)
 
@@ -149,7 +149,7 @@
 		/obj/item/surgical/bonegel,
 		/obj/item/surgical/FixOVein,
 		/obj/item/stack/medical/advanced/bruise_pack,
-		/obj/item/device/healthanalyzer/advanced,
+		/obj/item/healthanalyzer/advanced,
 		/obj/item/autopsy_scanner
 		)
 
@@ -205,7 +205,7 @@
 		overlays += I
 
 /obj/item/storage/pill_bottle/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/pen) || istype(W, /obj/item/device/flashlight/pen))
+	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 50)
 			to_chat(user, "<span class='notice'>The label can be at most 50 characters long.</span>")

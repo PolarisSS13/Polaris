@@ -132,7 +132,7 @@
 		if(do_after(user,digTool.digspeed*hardness) && src)
 			visible_message("<span class='danger'>[user] finished digging [src]!</span>")
 			Dismantle()
-	else if(istype(W,/obj/item/weapon)) //not sure, can't not just weapons get passed to this proc?
+	else if(istype(W)) //not sure, can't not just weapons get passed to this proc?
 		hardness -= W.force/10
 		visible_message("<span class='danger'>[user] hits [src] with [W]!</span>")
 		if(material == get_material_by_name("resin"))

@@ -23,8 +23,8 @@
 	qdel(src)
 
 /obj/structure/bigDelivery/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = W
+	if(istype(W, /obj/item/destTagger))
+		var/obj/item/destTagger/O = W
 		if(O.currTag)
 			if(src.sortTag != O.currTag)
 				to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
@@ -134,8 +134,8 @@
 	return
 
 /obj/item/smallDelivery/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = W
+	if(istype(W, /obj/item/destTagger))
+		var/obj/item/destTagger/O = W
 		if(O.currTag)
 			if(src.sortTag != O.currTag)
 				to_chat(user, "<span class='notice'>You have labeled the destination as [O.currTag].</span>")
@@ -329,10 +329,12 @@
 		AM.forceMove(T)
 	return ..()
 
-/obj/item/device/destTagger
+/obj/item/destTagger
 	name = "destination tagger"
 	desc = "Used to set the destination of properly wrapped packages."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "dest_tagger"
 	var/currTag = 0
 
@@ -340,7 +342,7 @@
 	item_state = "electronic"
 	slot_flags = SLOT_BELT
 
-/obj/item/device/destTagger/proc/openwindow(mob/user as mob)
+/obj/item/destTagger/proc/openwindow(mob/user as mob)
 	var/dat = "<tt><center><h1><b>TagMaster 2.3</b></h1></center>"
 
 	dat += "<table style='width:100%; padding:4px;'><tr>"
@@ -355,11 +357,11 @@
 	user << browse(dat, "window=destTagScreen;size=450x350")
 	onclose(user, "destTagScreen")
 
-/obj/item/device/destTagger/attack_self(mob/user as mob)
+/obj/item/destTagger/attack_self(mob/user as mob)
 	openwindow(user)
 	return
 
-/obj/item/device/destTagger/Topic(href, href_list)
+/obj/item/destTagger/Topic(href, href_list)
 	src.add_fingerprint(usr)
 	if(href_list["nextTag"] && (href_list["nextTag"] in GLOB.tagger_locations))
 		src.currTag = href_list["nextTag"]

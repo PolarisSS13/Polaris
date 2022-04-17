@@ -237,8 +237,8 @@
 	//ID
 	if(wear_id && wear_id.show_examine)
 		/*var/id
-		if(istype(wear_id, /obj/item/device/pda))
-			var/obj/item/device/pda/pda = wear_id
+		if(istype(wear_id, /obj/item/pda))
+			var/obj/item/pda/pda = wear_id
 			id = pda.owner
 		else if(istype(wear_id, /obj/item/card/id)) //just in case something other than a PDA/ID card somehow gets in the ID slot :[
 			var/obj/item/card/id/idcard = wear_id
@@ -370,8 +370,8 @@
 			if(istype(wear_id, /obj/item/card/id))
 				var/obj/item/card/id/I = wear_id
 				perpname = I.registered_name
-			else if(istype(wear_id, /obj/item/device/pda))
-				var/obj/item/device/pda/P = wear_id
+			else if(istype(wear_id, /obj/item/pda))
+				var/obj/item/pda/P = wear_id
 				perpname = P.owner
 
 		for (var/datum/data/record/R in data_core.security)
@@ -389,8 +389,8 @@
 			if(istype(wear_id, /obj/item/card/id))
 				var/obj/item/card/id/I = wear_id
 				perpname = I.registered_name
-			else if(istype(wear_id, /obj/item/device/pda))
-				var/obj/item/device/pda/P = wear_id
+			else if(istype(wear_id, /obj/item/pda))
+				var/obj/item/pda/P = wear_id
 				perpname = P.owner
 
 		for (var/datum/data/record/R in data_core.medical)

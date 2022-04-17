@@ -5,7 +5,7 @@
 	var/registered_name = null
 
 	starts_with = list(
-		/obj/item/device/radio/headset)
+		/obj/item/radio/headset)
 
 /obj/structure/closet/secure_closet/personal/Initialize()
 	if(prob(50))
@@ -32,7 +32,7 @@
 
 	starts_with = list(
 		/obj/item/storage/backpack/satchel/withwallet,
-		/obj/item/device/radio/headset
+		/obj/item/radio/headset
 		)
 
 /obj/structure/closet/secure_closet/personal/attackby(obj/item/W as obj, mob/user as mob)

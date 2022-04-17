@@ -10,25 +10,25 @@
 
 /datum/gear/utility/tts_device
 	display_name = "text to speech device"
-	path = /obj/item/device/text_to_speech
+	path = /obj/item/text_to_speech
 	cost = 3 //Not extremely expensive, but it's useful for mute chracters.
 
 /datum/gear/utility/communicator
 	display_name = "communicator selection"
-	path = /obj/item/device/communicator
+	path = /obj/item/communicator
 	cost = 0
 
 /datum/gear/utility/communicator/New()
 	..()
 	var/list/communicators = list()
-	for(var/communicator in typesof(/obj/item/device/communicator) - list(/obj/item/device/communicator/integrated))
-		var/obj/item/device/communicator_type = communicator
+	for(var/communicator in typesof(/obj/item/communicator) - list(/obj/item/communicator/integrated))
+		var/obj/item/communicator_type = communicator
 		communicators[initial(communicator_type.name)] = communicator_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
 
 /datum/gear/utility/camera
 	display_name = "camera"
-	path = /obj/item/device/camera
+	path = /obj/item/camera
 
 /datum/gear/utility/codex
 	display_name = "the traveler's guide to vir"
@@ -72,7 +72,7 @@
 
 /datum/gear/utility/paicard
 	display_name = "personal AI device"
-	path = /obj/item/device/paicard
+	path = /obj/item/paicard
 
 /datum/gear/utility/securecase
 	display_name = "secure briefcase"
@@ -81,32 +81,32 @@
 
 /datum/gear/utility/laserpointer
 	display_name = "laser pointer"
-	path =/obj/item/device/laser_pointer
+	path =/obj/item/laser_pointer
 	cost = 2
 
 /datum/gear/utility/flashlight
 	display_name = "flashlight"
-	path = /obj/item/device/flashlight
+	path = /obj/item/flashlight
 
 /datum/gear/utility/flashlight_blue
 	display_name = "flashlight, blue"
-	path = /obj/item/device/flashlight/color
+	path = /obj/item/flashlight/color
 
 /datum/gear/utility/flashlight_orange
 	display_name = "flashlight, orange"
-	path = /obj/item/device/flashlight/color/orange
+	path = /obj/item/flashlight/color/orange
 
 /datum/gear/utility/flashlight_red
 	display_name = "flashlight, red"
-	path = /obj/item/device/flashlight/color/red
+	path = /obj/item/flashlight/color/red
 
 /datum/gear/utility/flashlight_yellow
 	display_name = "flashlight, yellow"
-	path = /obj/item/device/flashlight/color/yellow
+	path = /obj/item/flashlight/color/yellow
 
 /datum/gear/utility/maglight
 	display_name = "flashlight, maglight"
-	path = /obj/item/device/flashlight/maglight
+	path = /obj/item/flashlight/maglight
 	cost = 2
 
 /datum/gear/utility/battery

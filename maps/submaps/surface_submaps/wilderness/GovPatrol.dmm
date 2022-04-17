@@ -2,7 +2,7 @@
 "b" = (/turf/template_noop,/area/submap/GovPatrol)
 "c" = (/turf/template_noop,/area/submap/Cragzone1)
 "d" = (/obj/structure/flora/tree/sif,/turf/template_noop,/area/submap/GovPatrol)
-"e" = (/obj/item/device/radio/off,/turf/template_noop,/area/submap/GovPatrol)
+"e" = (/obj/item/radio/off,/turf/template_noop,/area/submap/GovPatrol)
 "f" = (/obj/item/storage/backpack/parachute,/turf/template_noop,/area/submap/GovPatrol)
 "g" = (/obj/item/storage/box/flare,/obj/random/medical/lite/anom,/turf/template_noop,/area/submap/GovPatrol)
 "h" = (/obj/item/ammo_casing,/turf/template_noop,/area/submap/GovPatrol)
