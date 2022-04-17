@@ -17,3 +17,21 @@
 
  	if(!client)
  		handle_npc(src)
+
+/mob/living/carbon/alien/handle_mutations_and_radiation()
+	if(!radiation)
+		return
+
+	var/rads = radiation/25
+	radiation -= rads
+	adjust_nutrition(rads)
+	heal_overall_damage(rads,rads)
+	adjustOxyLoss(-(rads))
+	adjustToxLoss(-(rads))
+	return
+
+/mob/living/carbon/alien/Life()
+	..()
+	if (stat != DEAD) //still breathing
+		// GROW!
+		update_progression()

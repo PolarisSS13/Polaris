@@ -1559,5 +1559,12 @@
 
 	brain.tick_defib_timer()
 
-#undef HUMAN_MAX_OXYLOSS
-#undef HUMAN_CRIT_MAX_OXYLOSS
+/mob/living/carbon/human/proc/add_chemical_effect(var/effect, var/magnitude = 1)
+	if(effect in chem_effects)
+		chem_effects[effect] += magnitude
+	else
+		chem_effects[effect] = magnitude
+
+/mob/living/carbon/human/proc/remove_chemical_effect(var/effect, var/magnitude)
+	if(effect in chem_effects)
+		chem_effects[effect] = magnitude ? max(0, chem_effects[effect] - magnitude) : 0

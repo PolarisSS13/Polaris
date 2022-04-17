@@ -188,47 +188,6 @@
 		return ..()
 	return TRUE
 
-/mob/living/carbon/verb/mob_sleep()
-	set name = "Sleep"
-	set category = "IC"
-
-	if(usr.sleeping)
-		to_chat(usr, "<font color='red'>You are already sleeping</font>")
-		return
-	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
-		usr.AdjustSleeping(20)
-
-/mob/living/carbon/Bump(atom/A)
-	if(now_pushing)
-		return
-	..()
-
-/mob/living/carbon/slip(var/slipped_on, var/stun_duration = 8, var/slip_dist = 1)
-	if(buckled)
-		return FALSE
-	stop_pulling()
-	to_chat(src, "<span class='warning'>You slipped on [slipped_on]!</span>")
-	playsound(src, 'sound/misc/slip.ogg', 50, 1, -3)
-	Weaken(FLOOR(stun_duration/2, 1))
-	slide_for(slip_dist)
-	return TRUE
-
-/mob/living/carbon/proc/slide_for(var/slip_dist)
-	set waitfor = FALSE
-	for(var/i = 1 to slip_dist)
-		step(src, dir)
-		sleep(1)
-
-/mob/living/carbon/proc/add_chemical_effect(var/effect, var/magnitude = 1)
-	if(effect in chem_effects)
-		chem_effects[effect] += magnitude
-	else
-		chem_effects[effect] = magnitude
-
-/mob/living/carbon/proc/remove_chemical_effect(var/effect, var/magnitude)
-	if(effect in chem_effects)
-		chem_effects[effect] = magnitude ? max(0, chem_effects[effect] - magnitude) : 0
-
 /mob/living/carbon/get_default_language()
 	if(default_language && can_speak(default_language))
 		return default_language
@@ -239,14 +198,10 @@
 	return species.default_language ? GLOB.all_languages[species.default_language] : GLOB.all_languages[LANGUAGE_GIBBERISH]
 
 /mob/living/carbon/can_feel_pain(var/check_organ)
-	if(isSynthetic())
-		return 0
-	return !(species.flags & NO_PAIN)
+	return !(species.flags & NO_PAIN) || ..()
 
 /mob/living/carbon/needs_to_breathe()
-	if(does_not_breathe)
-		return FALSE
-	return ..()
+	return !does_not_breathe || ..()
 
 /mob/living/carbon/proc/update_handcuffed()
 	if(handcuffed)
@@ -258,15 +213,3 @@
 		clear_alert("handcuffed")
 	update_action_buttons() //Some of our action buttons might be unusable when we're handcuffed.
 	update_inv_handcuffed()
-
-// Clears blood overlays
-/mob/living/carbon/clean_blood()
-	. = ..()
-	src.r_hand?.clean_blood()
-	src.l_hand?.clean_blood()
-	if(src.back?.clean_blood())
-		src.update_inv_back(0)
-
-	// If the mob is not human, it cleans the mask without asking for bitflags
-	if(!ishuman(src) && src.wear_mask?.clean_blood())
-		src.update_inv_wear_mask(0)
