@@ -66,7 +66,7 @@
 	cost = 15
 	contains = list(
 					/obj/fiftyspawner/geocarpet,
-					/obj/fiftyspawner/retrocarpet
+					/obj/fiftyspawner/retrocarpet,
 					/obj/fiftyspawner/retrocarpet_red
 					)
 
