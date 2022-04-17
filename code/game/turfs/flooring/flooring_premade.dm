@@ -62,7 +62,7 @@
 
 /turf/simulated/floor/carpet/retro_red
 	name = "red retro carpet"
-	icon_state = "retrocarpet"
+	icon_state = "retrocarpet_red"
 	initial_flooring = /decl/flooring/carpet/retro_red
 
 /turf/simulated/floor/bluegrid

@@ -67,6 +67,7 @@
 	contains = list(
 					/obj/fiftyspawner/geocarpet,
 					/obj/fiftyspawner/retrocarpet
+					/obj/fiftyspawner/retrocarpet_red
 					)
 
 /datum/supply_pack/materials/linoleum
