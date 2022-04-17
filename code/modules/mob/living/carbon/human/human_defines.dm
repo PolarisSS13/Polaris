@@ -160,3 +160,5 @@
 
 	var/list/datum/disease2/disease/virus2 = list()
 	var/list/antibodies = list()
+
+	var/shock_stage = 0

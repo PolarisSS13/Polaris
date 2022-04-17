@@ -83,3 +83,5 @@
 	var/last_resist_time = 0 // world.time of the most recent resist that wasn't on cooldown.
 
 	var/pose = null // Active emote/pose
+
+	var/traumatic_shock = 0

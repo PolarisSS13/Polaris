@@ -626,7 +626,6 @@
 			process_resist()
 
 /mob/living/proc/process_resist()
-
 	if(istype(src.loc, /mob/living/silicon/robot/platform))
 		var/mob/living/silicon/robot/platform/R = src.loc
 		R.drop_stored_atom(src, src)
@@ -641,12 +640,8 @@
 		var/obj/C = loc
 		C.container_resist(src)
 		return TRUE
+	return FALSE
 
-	else if(canmove)
-		if(on_fire)
-			resist_fire() //stop, drop, and roll
-		else
-			resist_restraints()
 /mob/living/proc/resist_buckle()
 	if(buckled)
 		if(istype(buckled, /obj/vehicle))

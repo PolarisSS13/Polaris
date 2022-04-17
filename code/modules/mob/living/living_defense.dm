@@ -252,23 +252,44 @@
 
 //returns 0 if the effects failed to apply for some reason, 1 otherwise.
 /mob/living/proc/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/soaked, var/hit_zone)
-	if(!effective_force || blocked >= 100)
+	if(!effective_force || blocked >= 100 || !istype(I))
+		return FALSE
+
+	//If the armor soaks all of the damage, it just skips the rest of the checks
+	if(effective_force <= soaked)
 		return 0
+
+
 	//Apply weapon damage
 	var/weapon_sharp = is_sharp(I)
 	var/weapon_edge = has_edge(I)
+	var/hit_embed_chance = I.embed_chance
 
 	if(getsoak(hit_zone, "melee",) - (I.armor_penetration/5) > round(effective_force*0.8)) //soaking a hit turns sharp attacks into blunt ones
-		weapon_sharp = 0
-		weapon_edge = 0
+		weapon_sharp = FALSE
+		weapon_edge = FALSE
 
 	if(prob(max(getarmor(hit_zone, "melee") - I.armor_penetration, 0))) //melee armour provides a chance to turn sharp/edge weapon attacks into blunt ones
-		weapon_sharp = 0
-		weapon_edge = 0
+		weapon_sharp = FALSE
+		weapon_edge = FALSE
+		hit_embed_chance = I.force/(I.w_class*3)
 
 	apply_damage(effective_force, I.damtype, hit_zone, blocked, soaked, sharp=weapon_sharp, edge=weapon_edge, used_weapon=I)
 
-	return 1
+	//Melee weapon embedded object code.
+	if(I.damtype == BRUTE && !I.anchored && !is_robot_module(I) && hit_embed_chance > 0)
+		var/damage = effective_force
+		if (blocked)
+			damage *= (100 - blocked)/100
+			hit_embed_chance *= (100 - blocked)/100
+
+		//blunt objects should really not be embedding in things unless a huge amount of force is involved
+		var/embed_threshold = weapon_sharp? 5*I.w_class : 15*I.w_class
+
+		if(damage > embed_threshold && prob(hit_embed_chance))
+			src.embed(I, hit_zone)
+
+	return TRUE
 
 //this proc handles being hit by a thrown atom
 /mob/living/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)//Standardization and logging -Sieve

@@ -182,27 +182,12 @@
 				update |= temp.take_damage(b_loss * 0.05, f_loss * 0.05, used_weapon = weapon_message)
 	if(update)	UpdateDamageIcon()
 
-/mob/living/carbon/human/proc/implant_loyalty(override = FALSE) // Won't override by default.
-	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
-
-	var/obj/item/implant/loyalty/L = new/obj/item/implant/loyalty(src)
-	if(L.handle_implant(src, BP_HEAD))
-		L.post_implant(src)
-
-/mob/living/carbon/human/proc/is_loyalty_implanted()
-	for(var/L in src.contents)
-		if(istype(L, /obj/item/implant/loyalty))
-			for(var/obj/item/organ/external/O in src.organs)
-				if(L in O.implants)
-					return 1
-	return 0
-
 /mob/living/carbon/human/restrained()
 	if (handcuffed)
-		return 1
+		return TRUE
 	if (istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 /mob/living/carbon/human/var/co2overloadtime = null
 /mob/living/carbon/human/var/temperature_resistance = T0C+75
@@ -1622,7 +1607,7 @@
 	msg += get_display_species()
 	return msg
 
-/mob/living/carbon/human/reduce_cuff_time()
+/mob/living/carbon/human/proc/reduce_cuff_time()
 	if(istype(gloves, /obj/item/clothing/gloves/gauntlets/rig))
 		return 2
 	return ..()
