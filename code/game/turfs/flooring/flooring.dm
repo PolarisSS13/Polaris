@@ -321,6 +321,24 @@ var/list/flooring_types
 	icon_base = "tealcarpet"
 	build_type = /obj/item/stack/tile/carpet/teal
 
+/decl/flooring/carpet/geo
+	name = "geometric carpet"
+	icon_base = "geocarpet"
+	build_type = /obj/item/stack/tile/carpet/geo
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
+/decl/flooring/carpet/retro
+	name = "blue retro carpet"
+	icon_base = "retrocarpet"
+	build_type = /obj/item/stack/tile/carpet/retro
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
+/decl/flooring/carpet/retro_red
+	name = "red retro carpet"
+	icon_base = "retrocarpet_red"
+	build_type = /obj/item/stack/tile/carpet/retro_red
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
 /decl/flooring/tiling
 	name = "floor"
 	desc = "Scuffed from the passage of countless greyshirts."
@@ -483,6 +501,24 @@ var/list/flooring_types
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_base = "sifwood"
 	build_type = /obj/item/stack/tile/wood/sif
+
+/decl/flooring/wood/panel
+	desc = "Polished wooden panels."
+	icon_base = "wood_large"
+	build_type = /obj/item/stack/tile/wood/panel
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
+/decl/flooring/wood/parquet
+	desc = "Polished wooden tiles."
+	icon_base = "wood_parquet"
+	build_type = /obj/item/stack/tile/wood/parquet
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
+
+/decl/flooring/wood/tile
+	desc = "Polished wooden tiles."
+	icon_base = "wood_tile"
+	build_type = /obj/item/stack/tile/wood/tile
+	flags = TURF_REMOVE_CROWBAR | TURF_CAN_BURN
 
 /decl/flooring/reinforced
 	name = "reinforced floor"
