@@ -1,6 +1,5 @@
 //Verbs after this point.
 /mob/living/carbon/diona_nymph/proc/merge()
-
 	set category = "Abilities"
 	set name = "Merge with gestalt"
 	set desc = "Merge with another diona."
@@ -63,7 +62,6 @@
 	src.verbs += /mob/living/carbon/diona_nymph/proc/merge
 
 /mob/living/carbon/diona_nymph/confirm_evolution()
-
 	if(!is_alien_whitelisted(src, GLOB.all_species[SPECIES_DIONA]))
 		alert(src, "You are currently not whitelisted to play as a full diona.")
 		return null
@@ -81,3 +79,54 @@
 
 	src.visible_message("<font color='red'>[src] begins to shift and quiver, and erupts in a shower of shed bark as it splits into a tangle of nearly a dozen new dionaea.</font>","<font color='red'>You begin to shift and quiver, feeling your awareness splinter. All at once, we consume our stored nutrients to surge with growth, splitting into a tangle of at least a dozen new dionaea. We have attained our gestalt form.</font>")
 	return SPECIES_DIONA
+
+/mob/living/carbon/diona_nymph/verb/evolve()
+	set name = "Evolve"
+	set desc = "Evolve into your adult form."
+	set category = "Abilities"
+
+	if(stat != CONSCIOUS)
+		return
+
+	if(!adult_form)
+		verbs -= /mob/living/carbon/alien/verb/evolve
+		return
+
+	if(amount_grown < max_grown)
+		to_chat(src, "<font color='red'>You are not fully grown.</font>")
+		return
+
+	// confirm_evolution() handles choices and other specific requirements.
+	var/new_species = confirm_evolution()
+	if(!new_species || !adult_form )
+		return
+
+	var/mob/living/carbon/human/adult = new adult_form(get_turf(src))
+	adult.set_species(new_species)
+	show_evolution_blurb()
+
+	transfer_languages(src, adult)
+
+	if(src.faction != "neutral")
+		adult.faction = src.faction
+
+	if(mind)
+		mind.transfer_to(adult)
+		if (can_namepick_as_adult)
+			var/newname = sanitize(input(adult, "You have become an adult. Choose a name for yourself.", "Adult Name") as null|text, MAX_NAME_LEN)
+
+			if(!newname)
+				adult.fully_replace_character_name(name, "[src.adult_name] ([instance_num])")
+			else
+				adult.fully_replace_character_name(name, newname)
+	else
+		adult.key = src.key
+
+	for (var/obj/item/W in src.contents)
+		src.drop_from_inventory(W)
+
+	qdel(src)
+
+/mob/living/carbon/diona_nymph/proc/update_progression()
+	if(amount_grown < max_grown)
+		amount_grown++
