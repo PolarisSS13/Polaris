@@ -4,9 +4,9 @@
 	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/condiment/flour = 7,
-		/obj/item/weapon/reagent_containers/food/condiment/sugar = 2,
-		/obj/item/weapon/reagent_containers/food/condiment/spacespice = 2
+		/obj/item/reagent_containers/food/condiment/flour = 7,
+		/obj/item/reagent_containers/food/condiment/sugar = 2,
+		/obj/item/reagent_containers/food/condiment/spacespice = 2
 		)
 
 /obj/structure/closet/secure_closet/freezer/kitchen/mining
@@ -20,7 +20,7 @@
 	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/snacks/meat/monkey = 10)
+		/obj/item/reagent_containers/food/snacks/meat/monkey = 10)
 
 
 /obj/structure/closet/secure_closet/freezer/fridge
@@ -30,10 +30,10 @@
 	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/drinks/milk = 6,
-		/obj/item/weapon/reagent_containers/food/drinks/soymilk = 4,
-		/obj/item/weapon/storage/fancy/egg_box = 4,
-		/obj/item/weapon/reagent_containers/hypospray/autoinjector/biginjector/glucose = 2)
+		/obj/item/reagent_containers/food/drinks/milk = 6,
+		/obj/item/reagent_containers/food/drinks/soymilk = 4,
+		/obj/item/storage/fancy/egg_box = 4,
+		/obj/item/reagent_containers/hypospray/autoinjector/biginjector/glucose = 2)
 
 
 /obj/structure/closet/secure_closet/freezer/money
@@ -45,6 +45,6 @@
 
 
 	starts_with = list(
-		/obj/item/weapon/spacecash/c1000 = 3,
-		/obj/item/weapon/spacecash/c500 = 4,
-		/obj/item/weapon/spacecash/c200 = 5)
+		/obj/item/spacecash/c1000 = 3,
+		/obj/item/spacecash/c500 = 4,
+		/obj/item/spacecash/c200 = 5)

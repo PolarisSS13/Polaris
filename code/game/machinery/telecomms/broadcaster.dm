@@ -22,7 +22,7 @@ var/message_delay = 0 // To make sure restarting the recentmessages list is kept
 	machinetype = 5
 	produces_heat = 0
 	delay = 7
-	circuit = /obj/item/weapon/circuitboard/telecomms/broadcaster
+	circuit = /obj/item/circuitboard/telecomms/broadcaster
 	//Vars only used if you're using the overmap
 	var/overmap_range = 0
 	var/overmap_range_min = 0

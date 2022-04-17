@@ -1,6 +1,6 @@
 /datum/category_item/autolathe/devices/consolescreen
 	name = "console screen"
-	path =/obj/item/weapon/stock_parts/console_screen
+	path =/obj/item/stock_parts/console_screen
 
 /datum/category_item/autolathe/devices/igniter
 	name = "igniter"
@@ -24,11 +24,11 @@
 
 /datum/category_item/autolathe/devices/beartrap
 	name = "mechanical trap"
-	path =/obj/item/weapon/beartrap
+	path =/obj/item/beartrap
 
 /datum/category_item/autolathe/devices/barbedwire
 	name = "barbed wire"
-	path = /obj/item/weapon/material/barbedwire
+	path = /obj/item/material/barbedwire
 	hidden = 1
 	resources = list(MAT_STEEL = 10000)
 

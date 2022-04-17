@@ -1,6 +1,6 @@
 /decl/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")
-	id_type = /obj/item/weapon/card/id/assistant
+	id_type = /obj/item/card/id/assistant
 
 /decl/hierarchy/outfit/job/assistant/visitor
 	name = OUTFIT_JOB_NAME("Visitor")
@@ -19,7 +19,7 @@
 /decl/hierarchy/outfit/job/service/bartender
 	name = OUTFIT_JOB_NAME("Bartender")
 	uniform = /obj/item/clothing/under/rank/bartender
-	id_type = /obj/item/weapon/card/id/civilian/bartender
+	id_type = /obj/item/card/id/civilian/bartender
 	pda_type = /obj/item/device/pda/bar
 	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/bar = 1)
 
@@ -38,7 +38,7 @@
 	uniform = /obj/item/clothing/under/rank/chef
 	suit = /obj/item/clothing/suit/chef
 	head = /obj/item/clothing/head/chefhat
-	id_type = /obj/item/weapon/card/id/civilian/chef
+	id_type = /obj/item/card/id/civilian/chef
 	pda_type = /obj/item/device/pda/chef
 
 /decl/hierarchy/outfit/job/service/chef/cook
@@ -51,28 +51,28 @@
 	suit = /obj/item/clothing/suit/storage/apron
 	gloves = /obj/item/clothing/gloves/botanic_leather
 	r_pocket = /obj/item/device/analyzer/plant_analyzer
-	backpack = /obj/item/weapon/storage/backpack/hydroponics
-	satchel_one = /obj/item/weapon/storage/backpack/satchel/hyd
-	messenger_bag = /obj/item/weapon/storage/backpack/messenger/hyd
-	sports_bag = /obj/item/weapon/storage/backpack/sport/hyd
-	id_type = /obj/item/weapon/card/id/civilian/botanist
+	backpack = /obj/item/storage/backpack/hydroponics
+	satchel_one = /obj/item/storage/backpack/satchel/hyd
+	messenger_bag = /obj/item/storage/backpack/messenger/hyd
+	sports_bag = /obj/item/storage/backpack/sport/hyd
+	id_type = /obj/item/card/id/civilian/botanist
 	pda_type = /obj/item/device/pda/botanist
 
 /decl/hierarchy/outfit/job/service/janitor
 	name = OUTFIT_JOB_NAME("Janitor")
 	uniform = /obj/item/clothing/under/rank/janitor
-	id_type = /obj/item/weapon/card/id/civilian/janitor
+	id_type = /obj/item/card/id/civilian/janitor
 	pda_type = /obj/item/device/pda/janitor
 
 /decl/hierarchy/outfit/job/librarian
 	name = OUTFIT_JOB_NAME("Librarian")
 	uniform = /obj/item/clothing/under/suit_jacket/red
-	l_hand = /obj/item/weapon/barcodescanner
-	id_type = /obj/item/weapon/card/id/civilian
+	l_hand = /obj/item/barcodescanner
+	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/device/pda/librarian
 
 /decl/hierarchy/outfit/job/librarian/journalist
-	id_type = /obj/item/weapon/card/id/civilian/journalist
+	id_type = /obj/item/card/id/civilian/journalist
 
 /decl/hierarchy/outfit/job/internal_affairs_agent
 	name = OUTFIT_JOB_NAME("Internal affairs agent")
@@ -81,15 +81,15 @@
 	suit = /obj/item/clothing/suit/storage/toggle/internalaffairs
 	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses/big
-	l_hand = /obj/item/weapon/clipboard
-	id_type = /obj/item/weapon/card/id/civilian/internal_affairs
+	l_hand = /obj/item/clipboard
+	id_type = /obj/item/card/id/civilian/internal_affairs
 	pda_type = /obj/item/device/pda/lawyer
 
 /decl/hierarchy/outfit/job/chaplain
 	name = OUTFIT_JOB_NAME("Chaplain")
 	uniform = /obj/item/clothing/under/rank/chaplain
-	l_hand = /obj/item/weapon/storage/bible
-	id_type = /obj/item/weapon/card/id/civilian/chaplain
+	l_hand = /obj/item/storage/bible
+	id_type = /obj/item/card/id/civilian/chaplain
 	pda_type = /obj/item/device/pda/chaplain
 
 /decl/hierarchy/outfit/job/explorer
@@ -101,7 +101,7 @@
 	gloves = /obj/item/clothing/gloves/black
 	l_ear = /obj/item/device/radio/headset
 	id_slot = slot_wear_id
-	id_type = /obj/item/weapon/card/id/science/explorer
+	id_type = /obj/item/card/id/science/explorer
 	pda_slot = slot_belt
 	pda_type = /obj/item/device/pda/cargo // Brown looks more rugged
 	r_pocket = /obj/item/device/gps/explorer

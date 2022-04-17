@@ -42,7 +42,7 @@
 	var/obj/screen/robot_modules_background
 
 //3 Modules can be activated at any one time.
-	var/obj/item/weapon/robot_module/module = null
+	var/obj/item/robot_module/module = null
 	var/module_active = null
 	var/module_state_1 = null
 	var/module_state_2 = null
@@ -51,7 +51,7 @@
 	var/obj/item/device/radio/borg/radio = null
 	var/obj/item/device/communicator/integrated/communicator = null
 	var/mob/living/silicon/ai/connected_ai = null
-	var/obj/item/weapon/cell/cell = null
+	var/obj/item/cell/cell = null
 	var/obj/machinery/camera/camera = null
 
 	var/cell_emp_mult = 2
@@ -91,7 +91,7 @@
 	var/tracking_entities = 0 //The number of known entities currently accessing the internal camera
 	var/braintype = "Cyborg"
 
-	var/obj/item/weapon/implant/restrainingbolt/bolt	// The restraining bolt installed into the cyborg.
+	var/obj/item/implant/restrainingbolt/bolt	// The restraining bolt installed into the cyborg.
 
 	var/list/robot_verbs_default = list(
 		/mob/living/silicon/robot/proc/sensor_mode,
@@ -139,7 +139,7 @@
 		C.wrapped = new C.external_type
 
 	if(!cell)
-		cell = new /obj/item/weapon/cell(src)
+		cell = new /obj/item/cell(src)
 		cell.maxcharge = 7500
 		cell.charge = 7500
 	else if(ispath(cell))
@@ -223,7 +223,7 @@
 		var/turf/T = get_turf(loc)//To hopefully prevent run time errors.
 		if(T)	mmi.loc = T
 		if(mmi.brainmob)
-			var/obj/item/weapon/robot_module/M = locate() in contents
+			var/obj/item/robot_module/M = locate() in contents
 			if(M)
 				mmi.brainmob.languages = M.original_languages
 			else
@@ -416,7 +416,7 @@
 // this function displays jetpack pressure in the stat panel
 /mob/living/silicon/robot/proc/show_jetpack_pressure()
 	// if you have a jetpack, show the internal tank pressure
-	var/obj/item/weapon/tank/jetpack/current_jetpack = installed_jetpack()
+	var/obj/item/tank/jetpack/current_jetpack = installed_jetpack()
 	if (current_jetpack)
 		stat("Internal Atmosphere Info", current_jetpack.name)
 		stat("Tank Pressure", current_jetpack.air_contents.return_pressure())
@@ -425,7 +425,7 @@
 // this function returns the robots jetpack, if one is installed
 /mob/living/silicon/robot/proc/installed_jetpack()
 	if(module)
-		return (locate(/obj/item/weapon/tank/jetpack) in module.modules)
+		return (locate(/obj/item/tank/jetpack) in module.modules)
 	return 0
 
 
@@ -458,8 +458,8 @@
 	if(prob(75) && Proj.damage > 0) spark_system.start()
 	return 2
 
-/mob/living/silicon/robot/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
+/mob/living/silicon/robot/attackby(obj/item/W as obj, mob/user as mob)
+	if (istype(W, /obj/item/handcuffs)) // fuck i don't even know why isrobot() in handcuff code isn't working so this will have to do
 		return
 
 	if(opened) // Are they trying to insert something?
@@ -481,7 +481,7 @@
 
 				return
 
-		if(istype(W, /obj/item/weapon/implant/restrainingbolt) && !cell)
+		if(istype(W, /obj/item/implant/restrainingbolt) && !cell)
 			if(bolt)
 				to_chat(user, "<span class='notice'>There is already a restraining bolt installed in this cyborg.</span>")
 				return
@@ -495,7 +495,7 @@
 
 				return
 
-	if(istype(W, /obj/item/weapon/aiModule)) // Trying to modify laws locally.
+	if(istype(W, /obj/item/aiModule)) // Trying to modify laws locally.
 		if(!opened)
 			to_chat(user, "<span class='warning'>You need to open \the [src]'s panel before you can modify them.</span>")
 			return
@@ -504,11 +504,11 @@
 			to_chat(user, span("warning", "\The [src] is controlled remotely! You cannot upload new laws this way!"))
 			return
 
-		var/obj/item/weapon/aiModule/M = W
+		var/obj/item/aiModule/M = W
 		M.install(src, user)
 		return
 
-	if (istype(W, /obj/item/weapon/weldingtool) && user.a_intent != I_HURT)
+	if (istype(W, /obj/item/weldingtool) && user.a_intent != I_HURT)
 		if (src == user)
 			to_chat(user, "<span class='warning'>You lack the reach to be able to repair yourself.</span>")
 			return
@@ -516,7 +516,7 @@
 		if (!getBruteLoss())
 			to_chat(user, "Nothing to fix here!")
 			return
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if (WT.remove_fuel(0))
 			user.setClickCooldown(user.get_attack_speed(WT))
 			adjustBruteLoss(-30)
@@ -596,7 +596,7 @@
 				opened = 1
 				updateicon()
 
-	else if (istype(W, /obj/item/weapon/cell) && opened)	// trying to put a cell inside
+	else if (istype(W, /obj/item/cell) && opened)	// trying to put a cell inside
 		var/datum/robot_component/C = components["power cell"]
 		if(wiresexposed)
 			to_chat(user, "Close the panel first.")
@@ -699,7 +699,7 @@
 	return idcard
 
 /mob/living/silicon/robot/get_restraining_bolt()
-	var/obj/item/weapon/implant/restrainingbolt/RB = bolt
+	var/obj/item/implant/restrainingbolt/RB = bolt
 
 	if(istype(RB))
 		if(!RB.malfunction)
@@ -787,7 +787,7 @@
 			return 1
 	else if(istype(M, /mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = M
-		if(check_access(R.get_active_hand()) || istype(R.get_active_hand(), /obj/item/weapon/card/robot))
+		if(check_access(R.get_active_hand()) || istype(R.get_active_hand(), /obj/item/card/robot))
 			return 1
 	return 0
 
@@ -1185,8 +1185,8 @@
 
 
 /mob/living/silicon/robot/drop_item()
-	if(module_active && istype(module_active,/obj/item/weapon/gripper))
-		var/obj/item/weapon/gripper/G = module_active
+	if(module_active && istype(module_active,/obj/item/gripper))
+		var/obj/item/gripper/G = module_active
 		G.drop_item_nm()
 
 /mob/living/silicon/robot/disable_spoiler_vision()

@@ -46,7 +46,7 @@
 	icon_state = "chest"
 	part = list(BP_GROIN,BP_TORSO)
 	var/wires = 0.0
-	var/obj/item/weapon/cell/cell = null
+	var/obj/item/cell/cell = null
 
 /obj/item/robot_parts/head
 	name = "cyborg head"
@@ -100,7 +100,7 @@
 	if(istype(W, /obj/item/stack/material) && W.get_material_name() == MAT_STEEL && !l_arm && !r_arm && !l_leg && !r_leg && !chest && !head)
 		var/obj/item/stack/material/M = W
 		if (M.use(1))
-			var/obj/item/weapon/secbot_assembly/ed209_assembly/B = new /obj/item/weapon/secbot_assembly/ed209_assembly
+			var/obj/item/secbot_assembly/ed209_assembly/B = new /obj/item/secbot_assembly/ed209_assembly
 			B.loc = get_turf(src)
 			to_chat(user, "<span class='notice'>You armed the robot frame.</span>")
 			if (user.get_inactive_hand()==src)
@@ -225,7 +225,7 @@
 		else
 			to_chat(user, "<span class='warning'>The MMI must go in after everything else!</span>")
 
-	if (istype(W, /obj/item/weapon/pen))
+	if (istype(W, /obj/item/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", src.name, src.created_name), MAX_NAME_LEN)
 		if (!t)
 			return
@@ -238,7 +238,7 @@
 
 /obj/item/robot_parts/chest/attackby(obj/item/W as obj, mob/user as mob)
 	..()
-	if(istype(W, /obj/item/weapon/cell))
+	if(istype(W, /obj/item/cell))
 		if(src.cell)
 			to_chat(user, "<span class='warning'>You have already inserted a cell!</span>")
 			return

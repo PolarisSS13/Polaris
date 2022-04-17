@@ -9,7 +9,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
-	circuit = /obj/item/weapon/circuitboard/prosthetics
+	circuit = /obj/item/circuitboard/prosthetics
 
 	var/speed = 1
 	var/mat_efficiency = 1
@@ -66,13 +66,13 @@
 
 /obj/machinery/pros_fabricator/RefreshParts()
 	res_max_amount = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
+	for(var/obj/item/stock_parts/matter_bin/M in component_parts)
 		res_max_amount += M.rating * 100000 // 200k -> 600k
 	var/T = 0
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		T += M.rating
 	mat_efficiency = max(0.2, 1 - (T - 1) / 4) // 1 -> 0.2
-	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts) // Not resetting T is intended; speed is affected by both
+	for(var/obj/item/stock_parts/micro_laser/M in component_parts) // Not resetting T is intended; speed is affected by both
 		T += M.rating
 	speed = T / 2 // 1 -> 3
 
@@ -160,8 +160,8 @@
 	if(default_part_replacement(user, I))
 		return
 
-	if(istype(I,/obj/item/weapon/disk/limb))
-		var/obj/item/weapon/disk/limb/D = I
+	if(istype(I,/obj/item/disk/limb))
+		var/obj/item/disk/limb/D = I
 		if(!D.company || !(D.company in all_robolimbs))
 			to_chat(user, "<span class='warning'>This disk seems to be corrupted!</span>")
 		else
@@ -173,8 +173,8 @@
 				qdel(I)
 		return
 
-	if(istype(I,/obj/item/weapon/disk/species))
-		var/obj/item/weapon/disk/species/D = I
+	if(istype(I,/obj/item/disk/species))
+		var/obj/item/disk/species/D = I
 		if(!D.species || !(D.species in GLOB.all_species))
 			to_chat(user, "<span class='warning'>This disk seems to be corrupted!</span>")
 		else

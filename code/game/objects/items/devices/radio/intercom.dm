@@ -7,7 +7,7 @@
 	w_class = ITEMSIZE_LARGE
 	canhear_range = 2
 	flags = NOBLOODY
-	var/circuit = /obj/item/weapon/circuitboard/intercom
+	var/circuit = /obj/item/circuitboard/intercom
 	var/number = 0
 	var/wiresexposed = 0
 
@@ -133,7 +133,7 @@
 		playsound(src, W.usesound, 50, 1)
 		new/obj/item/stack/cable_coil(get_turf(src), 5)
 		var/obj/structure/frame/A = new /obj/structure/frame(src.loc)
-		var/obj/item/weapon/circuitboard/M = circuit
+		var/obj/item/circuitboard/M = circuit
 		A.frame_type = M.board_type
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y

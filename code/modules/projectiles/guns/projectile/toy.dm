@@ -15,7 +15,7 @@
 /*
  * Shotgun
  */
-/obj/item/weapon/gun/projectile/shotgun/pump/toy
+/obj/item/gun/projectile/shotgun/pump/toy
 	name = "\improper Donk-Soft shotgun"
 	desc = "Donk-Soft foam shotgun! It's Donk or Don't! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
@@ -37,7 +37,7 @@
 /*
  * Pistol
  */
-/obj/item/weapon/gun/projectile/pistol/toy
+/obj/item/gun/projectile/pistol/toy
 	name = "\improper Donk-Soft pistol"
 	desc = "Donk-Soft foam pistol! It's Donk or Don't! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
@@ -52,7 +52,7 @@
 	matter = list(MAT_PLASTIC = 1000)
 	recoil = null //it's a toy
 
-/obj/item/weapon/gun/projectile/pistol/toy/update_icon()
+/obj/item/gun/projectile/pistol/toy/update_icon()
 	if(ammo_magazine)
 		icon_state = initial(icon_state)
 	else
@@ -61,13 +61,13 @@
 /*
  * N99 Pistol
  */
-/obj/item/weapon/gun/projectile/pistol/toy/n99
+/obj/item/gun/projectile/pistol/toy/n99
 	name = "\improper Donk-Soft commemorative pistol"
 	desc = "A special made Donk-Soft pistol to promote 'Radius: Legend of the Demon Core', a popular post-apocolyptic TV series."
 	icon_state = "n99"
 	item_state = "gun"
 
-/obj/item/weapon/gun/projectile/pistol/toy/n99/update_icon()
+/obj/item/gun/projectile/pistol/toy/n99/update_icon()
 	if(ammo_magazine)
 		icon_state = initial(icon_state)
 	else
@@ -76,7 +76,7 @@
 /*
  * Levergun
  */
-/obj/item/weapon/gun/projectile/shotgun/pump/toy/levergun
+/obj/item/gun/projectile/shotgun/pump/toy/levergun
 	name = "\improper Donk-Soft levergun"
 	desc = "Donk-Soft foam levergun! Time to cowboy up! Ages 8 and up."
 	icon_state = "leveraction"
@@ -87,7 +87,7 @@
 /*
  * Revolver
  */
-/obj/item/weapon/gun/projectile/revolver/toy
+/obj/item/gun/projectile/revolver/toy
 	name = "\improper Donk-Soft revolver"
 	desc = "Donk-Soft foam revolver! Time to cowboy up! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
@@ -106,7 +106,7 @@
 /*
  * Big Iron
  */
-/obj/item/weapon/gun/projectile/revolver/toy/big_iron
+/obj/item/gun/projectile/revolver/toy/big_iron
 	name = "\improper Donk-Soft big iron"
 	desc = "A special made Donk-Soft pistol to promote 'A Fistful of Phoron', a popular frontier novel series."
 	icon_state = "big_iron"
@@ -115,7 +115,7 @@
 /*
  * Crossbow
  */
-/obj/item/weapon/gun/projectile/revolver/toy/crossbow
+/obj/item/gun/projectile/revolver/toy/crossbow
 	name = "\improper Donk-Soft crossbow"
 	desc = "Donk-Soft foam pistol! It's Donk or Don't! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
@@ -126,7 +126,7 @@
 /*
  * Sawn Off
  */
-/obj/item/weapon/gun/projectile/revolver/toy/sawnoff //revolver code just because it's easier
+/obj/item/gun/projectile/revolver/toy/sawnoff //revolver code just because it's easier
 	name = "\improper Donk-Soft sawn off shotgun"
 	desc = "Donk-Soft foam sawn off! It's Donk or Don't! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
@@ -139,7 +139,7 @@
 /*
  * SMG
  */
-/obj/item/weapon/gun/projectile/automatic/toy
+/obj/item/gun/projectile/automatic/toy
 	name = "\improper Donk-Soft SMG"
 	desc = "Donk-Soft foam SMG! It's Donk or Don't! Ages 8 and up."
 	icon = 'icons/obj/gun_toy.dmi'
@@ -160,7 +160,7 @@
 		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=2,    burst_accuracy=list(0,-2,-2), dispersion=null)
 	)
 
-/obj/item/weapon/gun/projectile/automatic/toy/update_icon()
+/obj/item/gun/projectile/automatic/toy/update_icon()
 	if(ammo_magazine)
 		icon_state = initial(icon_state)
 	else

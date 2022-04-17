@@ -27,5 +27,5 @@
 	req_tech = list(TECH_MATERIAL = 3, TECH_POWER = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
 	build_type = PROTOLATHE
 	materials = list(MAT_STEEL = 4000, "glass" = 4000)
-	build_path = /obj/item/weapon/pickaxe/excavationdrill
+	build_path = /obj/item/pickaxe/excavationdrill
 	sort_string = "GAAAC"

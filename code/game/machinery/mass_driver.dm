@@ -9,7 +9,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 2
 	active_power_usage = 50
-	circuit = /obj/item/weapon/circuitboard/mass_driver
+	circuit = /obj/item/circuitboard/mass_driver
 
 	var/power = 1.0
 	var/code = 1.0

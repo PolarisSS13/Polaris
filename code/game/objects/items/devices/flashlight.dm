@@ -11,8 +11,8 @@
 	var/brightness_on = 4 //luminosity when on
 	var/flashlight_power = 0.8	//lighting power when on
 	var/flashlight_colour = LIGHT_COLOR_INCANDESCENT_FLASHLIGHT	//lighting colour when on
-	var/obj/item/weapon/cell/cell
-	var/cell_type = /obj/item/weapon/cell/device
+	var/obj/item/cell/cell
+	var/cell_type = /obj/item/cell/device
 	var/list/brightness_levels
 	var/brightness_level = "medium"
 	var/power_usage
@@ -215,10 +215,10 @@
 				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
 
-/obj/item/device/flashlight/attackby(obj/item/weapon/W, mob/user as mob)
+/obj/item/device/flashlight/attackby(obj/item/W, mob/user as mob)
 	if(power_use)
-		if(istype(W, /obj/item/weapon/cell))
-			if(istype(W, /obj/item/weapon/cell/device))
+		if(istype(W, /obj/item/cell))
+			if(istype(W, /obj/item/cell/device))
 				if(!cell)
 					user.drop_item()
 					W.loc = src

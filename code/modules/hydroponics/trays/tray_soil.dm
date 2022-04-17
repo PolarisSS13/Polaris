@@ -8,7 +8,7 @@
 	frozen = -1
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O,/obj/item/weapon/tank))
+	if(istype(O,/obj/item/tank))
 		return
 	else
 		..()
@@ -23,7 +23,7 @@
 	return 1
 
 /obj/machinery/portable_atmospherics/hydroponics/soil/attackby(obj/item/O, mob/user)
-	if(istype(O, /obj/item/weapon/shovel))
+	if(istype(O, /obj/item/shovel))
 
 		if(user.a_intent == I_HURT)
 			user.visible_message(SPAN_NOTICE("\The [user] begins filling in \the [src]."))

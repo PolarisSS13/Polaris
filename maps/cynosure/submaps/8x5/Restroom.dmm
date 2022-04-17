@@ -10,7 +10,7 @@
 "K" = (/obj/structure/mirror{pixel_x = 28},/obj/structure/sink{dir = 4; pixel_x = 12},/turf/simulated/floor/tiled/freezer,/area/template_noop)
 "L" = (/obj/machinery/light_construct/small{dir = 4},/obj/structure/table/standard,/obj/random/soap,/turf/simulated/floor/tiled/freezer,/area/template_noop)
 "O" = (/obj/random/obstruction,/turf/simulated/floor/plating,/area/template_noop)
-"Q" = (/obj/structure/frame,/obj/item/weapon/circuitboard/recharge_station,/turf/simulated/floor/plating,/area/template_noop)
+"Q" = (/obj/structure/frame,/obj/item/circuitboard/recharge_station,/turf/simulated/floor/plating,/area/template_noop)
 "V" = (/turf/simulated/wall/r_wall,/area/template_noop)
 "W" = (/obj/item/frame/apc,/turf/simulated/floor/plating,/area/template_noop)
 "Y" = (/turf/simulated/floor/tiled/freezer,/area/template_noop)

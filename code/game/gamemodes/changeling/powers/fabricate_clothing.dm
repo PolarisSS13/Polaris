@@ -6,9 +6,9 @@ var/global/list/changeling_fabricated_clothing = list(
 	"gloves" = /obj/item/clothing/gloves/chameleon/changeling,
 	"wear_mask" = /obj/item/clothing/mask/chameleon/changeling,
 	"glasses" = /obj/item/clothing/glasses/chameleon/changeling,
-	"back" = /obj/item/weapon/storage/backpack/chameleon/changeling,
-	"belt" = /obj/item/weapon/storage/belt/chameleon/changeling,
-	"wear_id" = /obj/item/weapon/card/id/syndicate/changeling
+	"back" = /obj/item/storage/backpack/chameleon/changeling,
+	"belt" = /obj/item/storage/belt/chameleon/changeling,
+	"wear_id" = /obj/item/card/id/syndicate/changeling
 	)
 
 /datum/power/changeling/fabricate_clothing
@@ -129,7 +129,7 @@ var/global/list/changeling_fabricated_clothing = list(
 		"<span class='notice'>We remove [src].</span>")
 		qdel(src)
 
-/obj/item/weapon/storage/backpack/chameleon/changeling
+/obj/item/storage/backpack/chameleon/changeling
 	name = "backpack"
 	icon_state = "backpack"
 	item_icons = list(
@@ -141,10 +141,10 @@ var/global/list/changeling_fabricated_clothing = list(
 	origin_tech = list()
 	canremove = 0
 
-/obj/item/weapon/storage/backpack/chameleon/changeling/emp_act()
+/obj/item/storage/backpack/chameleon/changeling/emp_act()
 	return
 
-/obj/item/weapon/storage/backpack/chameleon/changeling/verb/shred()
+/obj/item/storage/backpack/chameleon/changeling/verb/shred()
 	set name = "Shred Backpack"
 	set category = "Chameleon Items"
 	if(ishuman(loc))
@@ -229,7 +229,7 @@ var/global/list/changeling_fabricated_clothing = list(
 		"<span class='notice'>We remove [src].</span>")
 		qdel(src)
 
-/obj/item/weapon/storage/belt/chameleon/changeling
+/obj/item/storage/belt/chameleon/changeling
 	name = "waist pouch"
 	desc = "We can store objects in this, as well as shift it's appearance, so that it resembles various common belts."
 	icon_state = "lingchameleon"
@@ -241,10 +241,10 @@ var/global/list/changeling_fabricated_clothing = list(
 	origin_tech = list()
 	canremove = 0
 
-/obj/item/weapon/storage/belt/chameleon/changeling/emp_act()
+/obj/item/storage/belt/chameleon/changeling/emp_act()
 	return
 
-/obj/item/weapon/storage/belt/chameleon/changeling/verb/shred()
+/obj/item/storage/belt/chameleon/changeling/verb/shred()
 	set name = "Shred Belt"
 	set category = "Chameleon Items"
 	if(ishuman(loc))
@@ -254,7 +254,7 @@ var/global/list/changeling_fabricated_clothing = list(
 		"<span class='notice'>We remove [src].</span>")
 		qdel(src)
 
-/obj/item/weapon/card/id/syndicate/changeling
+/obj/item/card/id/syndicate/changeling
 	name = "chitinous card"
 	desc = "A card that we can reform to resemble identification cards.  Due to the nature of the material this is made of, it cannot store any access codes."
 	icon_state = "changeling"
@@ -265,13 +265,13 @@ var/global/list/changeling_fabricated_clothing = list(
 	access = null
 	canremove = 0
 
-/obj/item/weapon/card/id/syndicate/changeling/Initialize()
+/obj/item/card/id/syndicate/changeling/Initialize()
 	. = ..()
 	if(ismob(loc))
 		registered_user = loc
 	access = null
 
-/obj/item/weapon/card/id/syndicate/changeling/verb/shred()
+/obj/item/card/id/syndicate/changeling/verb/shred()
 	set name = "Shred ID Card"
 	set category = "Chameleon Items"
 	if(ishuman(loc))
@@ -281,7 +281,7 @@ var/global/list/changeling_fabricated_clothing = list(
 		"<span class='notice'>We remove [src].</span>")
 		qdel(src)
 
-/obj/item/weapon/card/id/syndicate/changeling/Click() //Since we can't hold it in our hands, and attack_hand() doesn't work if it in inventory...
+/obj/item/card/id/syndicate/changeling/Click() //Since we can't hold it in our hands, and attack_hand() doesn't work if it in inventory...
 	if(!registered_user)
 		registered_user = usr
 		usr.set_id_info(src)

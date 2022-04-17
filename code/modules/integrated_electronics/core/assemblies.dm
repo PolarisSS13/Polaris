@@ -15,7 +15,7 @@
 	var/max_complexity = IC_COMPLEXITY_BASE
 	var/opened = FALSE
 	var/can_anchor = FALSE // If true, wrenching it will anchor it.
-	var/obj/item/weapon/cell/device/battery = null // Internal cell which most circuits need to work.
+	var/obj/item/cell/device/battery = null // Internal cell which most circuits need to work.
 	var/net_power = 0 // Set every tick, to display how much power is being drawn in total.
 	var/detail_color = COLOR_ASSEMBLY_BLACK
 
@@ -273,14 +273,14 @@
 		detail_color = D.detail_color
 		update_icon()
 
-	else if(istype(I, /obj/item/weapon/cell/device))
+	else if(istype(I, /obj/item/cell/device))
 		if(!opened)
 			to_chat(user, "<span class='warning'>\The [src] isn't opened, so you can't put anything inside.  Try using a crowbar.</span>")
 			return FALSE
 		if(battery)
 			to_chat(user, "<span class='warning'>\The [src] already has \a [battery] inside.  Remove it first if you want to replace it.</span>")
 			return FALSE
-		var/obj/item/weapon/cell/device/cell = I
+		var/obj/item/cell/device/cell = I
 		user.drop_item(cell)
 		cell.forceMove(src)
 		battery = cell
@@ -359,4 +359,4 @@
 
 // Returns TRUE if I is something that could/should have a valid interaction. Used to tell circuitclothes to hit the circuit with something instead of the clothes
 /obj/item/device/electronic_assembly/proc/is_valid_tool(var/obj/item/I)
-	return I.is_crowbar() || I.is_screwdriver() || istype(I, /obj/item/integrated_circuit) || istype(I, /obj/item/weapon/cell/device) || istype(I, /obj/item/device/integrated_electronics)
+	return I.is_crowbar() || I.is_screwdriver() || istype(I, /obj/item/integrated_circuit) || istype(I, /obj/item/cell/device) || istype(I, /obj/item/device/integrated_electronics)

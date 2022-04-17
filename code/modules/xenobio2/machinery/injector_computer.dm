@@ -14,7 +14,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 250
 	active_power_usage = 500
-	circuit = /obj/item/weapon/circuitboard/xenobio2computer
+	circuit = /obj/item/circuitboard/xenobio2computer
 	var/obj/machinery/xenobio2/manualinjector/injector
 	var/transfer_amount
 	var/active
@@ -107,7 +107,7 @@
 	usr.set_machine(src)
 	src.add_fingerprint(usr)
 
-/obj/item/weapon/circuitboard/xenobio2computer
+/obj/item/circuitboard/xenobio2computer
 	name = T_BOARD("injector control console")
 	build_path = /obj/machinery/computer/xenobio2
 	origin_tech = list()	//To be filled

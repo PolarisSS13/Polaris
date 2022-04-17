@@ -11,12 +11,12 @@ GLOBAL_LIST_EMPTY(fuel_injectors)
 	idle_power_usage = 10
 	active_power_usage = 500
 
-	circuit = /obj/item/weapon/circuitboard/fusion_injector
+	circuit = /obj/item/circuitboard/fusion_injector
 
 	var/fuel_usage = 30
 	var/id_tag
 	var/injecting = 0
-	var/obj/item/weapon/fuel_assembly/cur_assembly
+	var/obj/item/fuel_assembly/cur_assembly
 
 /obj/machinery/fusion_fuel_injector/Initialize()
 	. = ..()
@@ -48,7 +48,7 @@ GLOBAL_LIST_EMPTY(fuel_injectors)
 			id_tag = new_ident
 		return
 
-	if(istype(W, /obj/item/weapon/fuel_assembly))
+	if(istype(W, /obj/item/fuel_assembly))
 
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off before playing with the fuel rod!</span>")
@@ -68,7 +68,7 @@ GLOBAL_LIST_EMPTY(fuel_injectors)
 		cur_assembly = W
 		return
 
-	if(W.is_wrench() || W.is_screwdriver() || W.is_crowbar() || istype(W, /obj/item/weapon/storage/part_replacer))
+	if(W.is_wrench() || W.is_screwdriver() || W.is_crowbar() || istype(W, /obj/item/storage/part_replacer))
 		if(injecting)
 			to_chat(user, "<span class='warning'>Shut \the [src] off first!</span>")
 			return

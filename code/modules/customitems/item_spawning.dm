@@ -189,7 +189,7 @@
 			continue
 
 		// Check for required access.
-		var/obj/item/weapon/card/id/current_id = M.wear_id
+		var/obj/item/card/id/current_id = M.wear_id
 		if(citem.req_access && citem.req_access > 0) // These are numbers, not lists
 			if(!(istype(current_id) && (citem.req_access in current_id.access)))
 				log_debug("Custom Item: [key_name(M)] Does not have required access.")
@@ -209,12 +209,12 @@
 
 		// ID cards and PDAs are applied directly to the existing object rather than spawned fresh.
 		var/obj/item/existing_item
-		if(citem.item_path == /obj/item/weapon/card/id && istype(current_id)) //Set earlier.
+		if(citem.item_path == /obj/item/card/id && istype(current_id)) //Set earlier.
 			existing_item = M.wear_id
 		else if(citem.item_path == /obj/item/device/pda)
 			existing_item = locate(/obj/item/device/pda) in M.contents
-		else if(citem.item_path == /obj/item/weapon/storage/backpack)
-			existing_item = locate(/obj/item/weapon/storage/backpack) in M.contents
+		else if(citem.item_path == /obj/item/storage/backpack)
+			existing_item = locate(/obj/item/storage/backpack) in M.contents
 
 		// Spawn and equip the item.
 		if(existing_item)

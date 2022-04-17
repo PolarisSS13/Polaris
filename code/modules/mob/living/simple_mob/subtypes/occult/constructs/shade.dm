@@ -30,7 +30,7 @@
 
 	universal_speak = 1
 
-	loot_list = list(/obj/item/weapon/ectoplasm = 100)
+	loot_list = list(/obj/item/ectoplasm = 100)
 
 /mob/living/simple_mob/construct/shade/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/device/soulstone))

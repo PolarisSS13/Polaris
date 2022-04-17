@@ -10,7 +10,7 @@ GLOBAL_LIST_EMPTY(gyrotrons)
 	use_power = USE_POWER_IDLE
 	active_power_usage = 50000
 
-	circuit = /obj/item/weapon/circuitboard/gyrotron
+	circuit = /obj/item/circuitboard/gyrotron
 
 	var/id_tag
 	var/rate = 3

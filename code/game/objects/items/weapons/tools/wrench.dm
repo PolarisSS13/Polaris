@@ -1,7 +1,7 @@
 /*
  * Wrench
  */
-/obj/item/weapon/tool/wrench
+/obj/item/tool/wrench
 	name = "wrench"
 	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/tools.dmi'
@@ -19,13 +19,13 @@
 	pickup_sound = 'sound/items/pickup/wrench.ogg'
 	tool_qualities = list(TOOL_WRENCH)
 
-/obj/item/weapon/tool/wrench/cyborg
+/obj/item/tool/wrench/cyborg
 	name = "automatic wrench"
 	desc = "An advanced robotic wrench. Can be found in industrial synthetic shells."
 	usesound = 'sound/items/drill_use.ogg'
 	toolspeed = 0.5
 
-/obj/item/weapon/tool/wrench/hybrid	// Slower and bulkier than normal power tools, but it has the power of reach. If reach even worked half the time.
+/obj/item/tool/wrench/hybrid	// Slower and bulkier than normal power tools, but it has the power of reach. If reach even worked half the time.
 	name = "strange wrench"
 	desc = "A wrench with many common uses. Can be usually found in your hand."
 	icon = 'icons/obj/tools.dmi'
@@ -56,7 +56,7 @@
 	purpose, however it is very well suited to act in a wrench's capacity regardless."
 	value = CATALOGUER_REWARD_EASY
 
-/obj/item/weapon/tool/wrench/alien
+/obj/item/tool/wrench/alien
 	name = "alien wrench"
 	desc = "A polarized wrench. It causes anything placed between the jaws to turn."
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_wrench)
@@ -66,7 +66,7 @@
 	toolspeed = 0.1
 	origin_tech = list(TECH_MATERIAL = 5, TECH_ENGINEERING = 5)
 
-/obj/item/weapon/tool/wrench/power
+/obj/item/tool/wrench/power
 	name = "hand drill"
 	desc = "A simple powered hand drill. It's fitted with a bolt bit."
 	icon_state = "drill_bolt"
@@ -79,21 +79,21 @@
 	throwforce = 8
 	attack_verb = list("drilled", "screwed", "jabbed")
 	toolspeed = 0.25
-	var/obj/item/weapon/tool/screwdriver/power/counterpart = null
+	var/obj/item/tool/screwdriver/power/counterpart = null
 
-/obj/item/weapon/tool/wrench/power/Initialize(var/ml, no_counterpart = TRUE)
+/obj/item/tool/wrench/power/Initialize(var/ml, no_counterpart = TRUE)
 	. = ..()
 	if(!counterpart && no_counterpart)
 		counterpart = new(src, FALSE)
 		counterpart.counterpart = src
 
-/obj/item/weapon/tool/wrench/power/Destroy()
+/obj/item/tool/wrench/power/Destroy()
 	if(counterpart)
 		counterpart.counterpart = null // So it can qdel cleanly.
 		QDEL_NULL(counterpart)
 	return ..()
 
-/obj/item/weapon/tool/wrench/power/attack_self(mob/user)
+/obj/item/tool/wrench/power/attack_self(mob/user)
 	playsound(src,'sound/items/change_drill.ogg',50,1)
 	user.drop_item(src)
 	counterpart.forceMove(get_turf(src))

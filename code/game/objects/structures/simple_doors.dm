@@ -124,10 +124,10 @@
 	else
 		icon_state = material.door_icon_base
 
-/obj/structure/simple_door/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/simple_door/attackby(obj/item/W as obj, mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(istype(W,/obj/item/weapon/pickaxe))
-		var/obj/item/weapon/pickaxe/digTool = W
+	if(istype(W,/obj/item/pickaxe))
+		var/obj/item/pickaxe/digTool = W
 		visible_message("<span class='danger'>[user] starts digging [src]!</span>")
 		if(do_after(user,digTool.digspeed*hardness) && src)
 			visible_message("<span class='danger'>[user] finished digging [src]!</span>")
@@ -142,8 +142,8 @@
 		else
 			playsound(src, 'sound/weapons/smash.ogg', 50, 1)
 		CheckHardness()
-	else if(istype(W,/obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	else if(istype(W,/obj/item/weldingtool))
+		var/obj/item/weldingtool/WT = W
 		if(material.ignition_point && WT.remove_fuel(0, user))
 			TemperatureAct(150)
 	else

@@ -27,11 +27,11 @@
 
 	var/base_icon = "flash"
 
-	var/obj/item/weapon/cell/power_supply //What type of power cell this uses
+	var/obj/item/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 30 //How much energy is needed to flash.
 	var/use_external_power = FALSE // Do we use charge from an external source?
 
-	var/cell_type = /obj/item/weapon/cell/device
+	var/cell_type = /obj/item/cell/device
 
 /obj/item/device/flash/Initialize()
 	. = ..()
@@ -57,7 +57,7 @@
 		..()
 
 /obj/item/device/flash/update_icon()
-	var/obj/item/weapon/cell/battery = power_supply
+	var/obj/item/cell/battery = power_supply
 
 	if(use_external_power)
 		battery = get_external_power_supply()
@@ -80,7 +80,7 @@
 		if(module.holder && module.holder.wearer)
 			var/mob/living/carbon/human/H = module.holder.wearer
 			if(istype(H) && H.get_rig())
-				var/obj/item/weapon/rig/suit = H.get_rig()
+				var/obj/item/rig/suit = H.get_rig()
 				if(istype(suit))
 					return suit.cell
 	return null
@@ -100,7 +100,7 @@
 			break
 
 		else if(use_external_power)
-			var/obj/item/weapon/cell/external = get_external_power_supply()
+			var/obj/item/cell/external = get_external_power_supply()
 			if(!external || !external.use(charge_cost)) //Take power from the borg or rig!
 				break
 
@@ -118,7 +118,7 @@
 /obj/item/device/flash/proc/check_capacitor(var/mob/user)
 	//spamming the flash before it's fully charged (60 seconds) increases the chance of it breaking
 	//It will never break on the first use.
-	var/obj/item/weapon/cell/battery = power_supply
+	var/obj/item/cell/battery = power_supply
 
 	if(use_external_power)
 		battery = get_external_power_supply()

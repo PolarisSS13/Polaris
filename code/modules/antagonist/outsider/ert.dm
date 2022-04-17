@@ -16,7 +16,7 @@ var/datum/antagonist/ert/ert
 		rules aside from those without explicit exceptions apply to the ERT.</b>"
 	leader_welcome_text = "As leader of the Emergency Response Team, you answer only to the Company, and have authority to override the Site Manager where it is necessary to achieve your mission goals. It is recommended that you attempt to cooperate with the Site Manager where possible, however."
 	landmark_id = "Response Team"
-	id_type = /obj/item/weapon/card/id/centcom/ERT
+	id_type = /obj/item/card/id/centcom/ERT
 
 	flags = ANTAG_OVERRIDE_JOB | ANTAG_SET_APPEARANCE | ANTAG_HAS_LEADER | ANTAG_CHOOSE_NAME
 	antaghud_indicator = "hudloyalist"

@@ -9,7 +9,7 @@
 	clicksound = "button"
 	clickvol = 40
 
-	circuit = /obj/item/weapon/circuitboard/washing
+	circuit = /obj/item/circuitboard/washing
 	var/state = 1
 	//1 = empty, open door
 	//2 = empty, closed door
@@ -95,7 +95,7 @@
 /obj/machinery/washing_machine/update_icon()
 	icon_state = "wm_[state][panel_open]"
 
-/obj/machinery/washing_machine/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/washing_machine/attackby(obj/item/W as obj, mob/user as mob)
 	if(state == 2 && washing.len < 1)
 		if(default_deconstruction_screwdriver(user, W))
 			return
@@ -106,7 +106,7 @@
 	/*if(W.is_screwdriver())
 		panel = !panel
 		to_chat(user, "<span class='notice'>You [panel ? "open" : "close"] the [src]'s maintenance panel</span>")*/
-	if(istype(W,/obj/item/weapon/pen/crayon) || istype(W,/obj/item/weapon/stamp))
+	if(istype(W,/obj/item/pen/crayon) || istype(W,/obj/item/stamp))
 		if(state in list(	1, 3, 6))
 			if(!crayon)
 				user.drop_item()
@@ -116,9 +116,9 @@
 				..()
 		else
 			..()
-	else if(istype(W,/obj/item/weapon/grab))
+	else if(istype(W,/obj/item/grab))
 		if((state == 1) && hacked)
-			var/obj/item/weapon/grab/G = W
+			var/obj/item/grab/G = W
 			if(ishuman(G.assailant) && iscorgi(G.affecting))
 				G.affecting.loc = src
 				qdel(G)
@@ -130,7 +130,7 @@
 		to_chat(user, "<span class='warning'>You can't fit \the [W] inside.</span>")
 		return
 
-	else if(istype(W, /obj/item/clothing) || istype(W, /obj/item/weapon/bedsheet) || istype(W, /obj/item/stack/hairlesshide))
+	else if(istype(W, /obj/item/clothing) || istype(W, /obj/item/bedsheet) || istype(W, /obj/item/stack/hairlesshide))
 		if(washing.len < 5)
 			if(state in list(1, 3))
 				user.drop_item()

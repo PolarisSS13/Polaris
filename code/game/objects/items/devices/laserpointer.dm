@@ -17,7 +17,7 @@
 	var/last_used_time = 0
 	var/recharging = 0
 	var/recharge_locked = 0
-	var/obj/item/weapon/stock_parts/micro_laser/diode //used for upgrading!
+	var/obj/item/stock_parts/micro_laser/diode //used for upgrading!
 
 
 /obj/item/device/laser_pointer/red
@@ -37,7 +37,7 @@
 
 /obj/item/device/laser_pointer/upgraded/Initialize()
 	. = ..()
-	diode = new /obj/item/weapon/stock_parts/micro_laser/ultra
+	diode = new /obj/item/stock_parts/micro_laser/ultra
 
 
 
@@ -45,7 +45,7 @@
 	laser_act(M, user)
 
 /obj/item/device/laser_pointer/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/stock_parts/micro_laser))
+	if(istype(W, /obj/item/stock_parts/micro_laser))
 		if(!diode)
 			user.drop_item()
 			W.loc = src

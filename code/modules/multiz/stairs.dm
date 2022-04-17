@@ -174,7 +174,7 @@
 		// If the object is pulling or grabbing anything, we'll want to move those too. A grab chain may be disrupted in doing so.
 		if(L.pulling && !L.pulling.anchored)
 			pulling |= L.pulling
-		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
+		for(var/obj/item/grab/G in list(L.l_hand, L.r_hand))
 			pulling |= G.affecting
 	
 	// If the stairs aren't broken, go up.
@@ -221,7 +221,7 @@
 			P.forceMove(get_turf(top))
 			L.start_pulling(P)
 
-		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
+		for(var/obj/item/grab/G in list(L.l_hand, L.r_hand))
 			G.affecting.forceMove(get_turf(top))
 
 		L.forceMove(get_turf(top))
@@ -430,7 +430,7 @@
 		// If the object is pulling or grabbing anything, we'll want to move those too. A grab chain may be disrupted in doing so.
 		if(L.pulling && !L.pulling.anchored)
 			pulling |= L.pulling
-		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
+		for(var/obj/item/grab/G in list(L.l_hand, L.r_hand))
 			pulling |= G.affecting
 	
 	// If the stairs aren't broken, go up.
@@ -475,7 +475,7 @@
 			P.forceMove(get_turf(bottom))
 			L.start_pulling(P)
 
-		for(var/obj/item/weapon/grab/G in list(L.l_hand, L.r_hand))
+		for(var/obj/item/grab/G in list(L.l_hand, L.r_hand))
 			G.affecting.forceMove(get_turf(bottom))
 		
 		L.forceMove(get_turf(bottom))

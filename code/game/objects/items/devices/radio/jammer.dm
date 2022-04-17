@@ -23,7 +23,7 @@ var/global/list/active_radio_jammers = list()
 
 	var/on = 0
 	var/jam_range = 7
-	var/obj/item/weapon/cell/device/weapon/power_source
+	var/obj/item/cell/device/weapon/power_source
 	var/tick_cost = 8 // Will last for roughly ten minutes, as process() ticks every 2 seconds.
 
 	origin_tech = list(TECH_ILLEGAL = 7, TECH_BLUESPACE = 5) //Such technology! Subspace jamming!
@@ -88,7 +88,7 @@ var/global/list/active_radio_jammers = list()
 			to_chat(user,"<span class='warning'>\The [src] has no power source!</span>")
 
 /obj/item/device/radio_jammer/attackby(obj/W, mob/user)
-	if(istype(W,/obj/item/weapon/cell/device/weapon) && !power_source)
+	if(istype(W,/obj/item/cell/device/weapon) && !power_source)
 		power_source = W
 		power_source.update_icon() //Why doesn't a cell do this already? :|
 		user.unEquip(power_source)

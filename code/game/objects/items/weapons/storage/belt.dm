@@ -1,4 +1,4 @@
-/obj/item/weapon/storage/belt
+/obj/item/storage/belt
 	name = "belt"
 	desc = "Can hold various things."
 	icon = 'icons/obj/clothing/belts.dmi'
@@ -15,7 +15,7 @@
 
 	var/show_above_suit = 0
 
-/obj/item/weapon/storage/belt/verb/toggle_layer()
+/obj/item/storage/belt/verb/toggle_layer()
 	set name = "Switch Belt Layer"
 	set category = "Object"
 
@@ -26,7 +26,7 @@
 	update_icon()
 
 //Some belts have sprites to show icons
-/obj/item/weapon/storage/belt/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask = null)
+/obj/item/storage/belt/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask = null)
 	var/image/standing = ..()
 	if(!inhands && contents.len)
 		for(var/obj/item/i in contents)
@@ -35,25 +35,25 @@
 			standing.add_overlay(image(icon = INV_BELT_DEF_ICON, icon_state = i_state))
 	return standing
 
-/obj/item/weapon/storage/update_icon()
+/obj/item/storage/update_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
 		M.update_inv_belt()
 
-/obj/item/weapon/storage/belt/utility
+/obj/item/storage/belt/utility
 	name = "tool-belt" //Carn: utility belt is nicer, but it bamboozles the text parsing.
 	desc = "Can hold various tools."
 	icon_state = "utility"
 	can_hold = list(
-		///obj/item/weapon/combitool,
-		/obj/item/weapon/tool/crowbar,
-		/obj/item/weapon/tool/screwdriver,
-		/obj/item/weapon/weldingtool,
-		/obj/item/weapon/tool/wirecutters,
-		/obj/item/weapon/tool/wrench,
+		///obj/item/combitool,
+		/obj/item/tool/crowbar,
+		/obj/item/tool/screwdriver,
+		/obj/item/weldingtool,
+		/obj/item/tool/wirecutters,
+		/obj/item/tool/wrench,
 		/obj/item/device/multitool,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/cell/device,
+		/obj/item/cell/device,
 		/obj/item/stack/cable_coil,
 		/obj/item/device/t_scanner,
 		/obj/item/device/analyzer,
@@ -64,76 +64,76 @@
 		/obj/item/taperoll,
 		/obj/item/device/radio/headset,
 		/obj/item/device/robotanalyzer,
-		/obj/item/weapon/material/minihoe,
-		/obj/item/weapon/material/knife/machete/hatchet,
+		/obj/item/material/minihoe,
+		/obj/item/material/knife/machete/hatchet,
 		/obj/item/device/analyzer/plant_analyzer,
-		/obj/item/weapon/extinguisher/mini,
-		/obj/item/weapon/tape_roll,
+		/obj/item/extinguisher/mini,
+		/obj/item/tape_roll,
 		/obj/item/device/integrated_electronics/wirer,
 		)
 
-/obj/item/weapon/storage/belt/utility/full
+/obj/item/storage/belt/utility/full
 	starts_with = list(
-		/obj/item/weapon/tool/screwdriver,
-		/obj/item/weapon/tool/wrench,
-		/obj/item/weapon/weldingtool,
-		/obj/item/weapon/tool/crowbar,
-		/obj/item/weapon/tool/wirecutters,
+		/obj/item/tool/screwdriver,
+		/obj/item/tool/wrench,
+		/obj/item/weldingtool,
+		/obj/item/tool/crowbar,
+		/obj/item/tool/wirecutters,
 		/obj/item/stack/cable_coil/random_belt
 	)
 
-/obj/item/weapon/storage/belt/utility/full/multitool
+/obj/item/storage/belt/utility/full/multitool
 	starts_with = list(
-		/obj/item/weapon/tool/screwdriver,
-		/obj/item/weapon/tool/wrench,
-		/obj/item/weapon/weldingtool,
-		/obj/item/weapon/tool/crowbar,
-		/obj/item/weapon/tool/wirecutters,
+		/obj/item/tool/screwdriver,
+		/obj/item/tool/wrench,
+		/obj/item/weldingtool,
+		/obj/item/tool/crowbar,
+		/obj/item/tool/wirecutters,
 		/obj/item/stack/cable_coil/random_belt,
 		/obj/item/device/multitool
 	)
 
-/obj/item/weapon/storage/belt/utility/atmostech
+/obj/item/storage/belt/utility/atmostech
 	starts_with = list(
-		/obj/item/weapon/tool/screwdriver,
-		/obj/item/weapon/tool/wrench,
-		/obj/item/weapon/weldingtool,
-		/obj/item/weapon/tool/crowbar,
-		/obj/item/weapon/tool/wirecutters
+		/obj/item/tool/screwdriver,
+		/obj/item/tool/wrench,
+		/obj/item/weldingtool,
+		/obj/item/tool/crowbar,
+		/obj/item/tool/wirecutters
 	)
 
-/obj/item/weapon/storage/belt/utility/chief
+/obj/item/storage/belt/utility/chief
 	name = "chief engineer's toolbelt"
 	desc = "Holds tools, looks snazzy."
 	icon_state = "utilitybelt_ce"
 	item_state = "utility_ce"
 
-/obj/item/weapon/storage/belt/utility/chief/full
+/obj/item/storage/belt/utility/chief/full
 	starts_with = list(
-		/obj/item/weapon/tool/screwdriver/power,
-		/obj/item/weapon/tool/crowbar/power,
-		/obj/item/weapon/weldingtool/experimental,
+		/obj/item/tool/screwdriver/power,
+		/obj/item/tool/crowbar/power,
+		/obj/item/weldingtool/experimental,
 		/obj/item/device/multitool,
 		/obj/item/stack/cable_coil/random_belt,
-		/obj/item/weapon/extinguisher/mini,
+		/obj/item/extinguisher/mini,
 		/obj/item/device/analyzer
 	)
 
-/obj/item/weapon/storage/belt/medical
+/obj/item/storage/belt/medical
 	name = "medical belt"
 	desc = "Can hold various medical equipment."
 	icon_state = "medical"
 	can_hold = list(
 		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/dnainjector,
-		/obj/item/weapon/reagent_containers/dropper,
-		/obj/item/weapon/reagent_containers/glass/beaker,
-		/obj/item/weapon/reagent_containers/glass/bottle,
-		/obj/item/weapon/reagent_containers/pill,
-		/obj/item/weapon/reagent_containers/syringe,
-		/obj/item/weapon/flame/lighter/zippo,
-		/obj/item/weapon/storage/fancy/cigarettes,
-		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/dnainjector,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/glass/beaker,
+		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/flame/lighter/zippo,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
 		/obj/item/device/radio/headset,
 		/obj/item/device/pda,
@@ -142,42 +142,42 @@
 		/obj/item/clothing/mask/surgical,
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves,
-		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/reagent_containers/hypospray,
 		/obj/item/clothing/glasses,
-		/obj/item/weapon/tool/crowbar,
+		/obj/item/tool/crowbar,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/cell/device,
-		/obj/item/weapon/extinguisher/mini,
-		/obj/item/weapon/storage/quickdraw/syringe_case
+		/obj/item/cell/device,
+		/obj/item/extinguisher/mini,
+		/obj/item/storage/quickdraw/syringe_case
 		)
 
-/obj/item/weapon/storage/belt/medical/emt
+/obj/item/storage/belt/medical/emt
 	name = "EMT utility belt"
 	desc = "A sturdy black webbing belt with attached pouches."
 	icon_state = "ems"
 
-/obj/item/weapon/storage/belt/security
+/obj/item/storage/belt/security
 	name = "security belt"
 	desc = "Can hold security gear like handcuffs and flashes."
 	icon_state = "security"
 	max_w_class = ITEMSIZE_NORMAL
 	can_hold = list(
-		/obj/item/weapon/grenade,
-		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/handcuffs,
+		/obj/item/grenade,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/handcuffs,
 		/obj/item/device/flash,
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/a12g,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/cell/device,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/,
-		/obj/item/weapon/melee/baton,
-		/obj/item/weapon/gun/energy/taser,
-		/obj/item/weapon/gun/energy/stunrevolver,
-		/obj/item/weapon/gun/energy/stunrevolver/vintage,
-		/obj/item/weapon/gun/magnetic/railgun/heater/pistol,
-		/obj/item/weapon/gun/energy/gun,
-		/obj/item/weapon/flame/lighter,
+		/obj/item/cell/device,
+		/obj/item/reagent_containers/food/snacks/donut/,
+		/obj/item/melee/baton,
+		/obj/item/gun/energy/taser,
+		/obj/item/gun/energy/stunrevolver,
+		/obj/item/gun/energy/stunrevolver/vintage,
+		/obj/item/gun/magnetic/railgun/heater/pistol,
+		/obj/item/gun/energy/gun,
+		/obj/item/flame/lighter,
 		/obj/item/device/flashlight,
 		/obj/item/device/taperecorder,
 		/obj/item/device/tape,
@@ -186,16 +186,16 @@
 		/obj/item/clothing/gloves,
 		/obj/item/device/hailer,
 		/obj/item/device/megaphone,
-		/obj/item/weapon/melee,
+		/obj/item/melee,
 		/obj/item/clothing/accessory/badge,
-		/obj/item/weapon/gun/projectile/sec,
-		/obj/item/weapon/gun/projectile/p92x,
+		/obj/item/gun/projectile/sec,
+		/obj/item/gun/projectile/p92x,
 		/obj/item/taperoll,
-		/obj/item/weapon/gun/projectile/colt/detective,
+		/obj/item/gun/projectile/colt/detective,
 		/obj/item/device/holowarrant
 		)
 
-/obj/item/weapon/storage/belt/detective
+/obj/item/storage/belt/detective
 	name = "forensic utility belt"
 	desc = "A belt for holding forensics equipment."
 	icon_state = "security"
@@ -206,39 +206,39 @@
 		/obj/item/device/tape,
 		/obj/item/clothing/glasses,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/cell/device,
-		/obj/item/weapon/reagent_containers/spray/luminol,
-		/obj/item/weapon/sample,
-		/obj/item/weapon/forensics/sample_kit/powder,
-		/obj/item/weapon/forensics/swab,
+		/obj/item/cell/device,
+		/obj/item/reagent_containers/spray/luminol,
+		/obj/item/sample,
+		/obj/item/forensics/sample_kit/powder,
+		/obj/item/forensics/swab,
 		/obj/item/device/uv_light,
-		/obj/item/weapon/forensics/sample_kit,
-		/obj/item/weapon/photo,
+		/obj/item/forensics/sample_kit,
+		/obj/item/photo,
 		/obj/item/device/camera_film,
 		/obj/item/device/camera,
-		/obj/item/weapon/autopsy_scanner,
+		/obj/item/autopsy_scanner,
 		/obj/item/device/mass_spectrometer,
 		/obj/item/clothing/accessory/badge,
 		/obj/item/device/reagent_scanner,
-		/obj/item/weapon/reagent_containers/dropper,
-		/obj/item/weapon/reagent_containers/syringe,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/syringe,
 		/obj/item/device/pda,
 		/obj/item/device/hailer,
 		/obj/item/device/megaphone,
 		/obj/item/device/radio/headset,
 		/obj/item/clothing/gloves,
 		/obj/item/taperoll,
-		/obj/item/weapon/reagent_containers/spray/pepper,
-		/obj/item/weapon/handcuffs,
+		/obj/item/reagent_containers/spray/pepper,
+		/obj/item/handcuffs,
 		/obj/item/device/flash,
-		/obj/item/weapon/flame/lighter,
-		/obj/item/weapon/reagent_containers/food/snacks/donut/,
+		/obj/item/flame/lighter,
+		/obj/item/reagent_containers/food/snacks/donut/,
 		/obj/item/ammo_magazine,
-		/obj/item/weapon/gun/projectile/colt/detective,
+		/obj/item/gun/projectile/colt/detective,
 		/obj/item/device/holowarrant
 		)
 
-/obj/item/weapon/storage/belt/soulstone
+/obj/item/storage/belt/soulstone
 	name = "soul stone belt"
 	desc = "Designed for ease of access to the shards during a fight, as to not let a single enemy spirit slip away"
 	icon_state = "soulstone"
@@ -247,28 +247,28 @@
 		/obj/item/device/soulstone
 		)
 
-/obj/item/weapon/storage/belt/soulstone/full
+/obj/item/storage/belt/soulstone/full
 	starts_with = list(/obj/item/device/soulstone = 6)
 
-/obj/item/weapon/storage/belt/utility/alien
+/obj/item/storage/belt/utility/alien
 	name = "alien belt"
 	desc = "A belt(?) that can hold things."
 	icon = 'icons/obj/abductor.dmi'
 	icon_state = "belt"
 	item_state = "security"
 
-/obj/item/weapon/storage/belt/utility/alien/full
+/obj/item/storage/belt/utility/alien/full
 	starts_with = list(
-		/obj/item/weapon/tool/screwdriver/alien,
-		/obj/item/weapon/tool/wrench/alien,
-		/obj/item/weapon/weldingtool/alien,
-		/obj/item/weapon/tool/crowbar/alien,
-		/obj/item/weapon/tool/wirecutters/alien,
+		/obj/item/tool/screwdriver/alien,
+		/obj/item/tool/wrench/alien,
+		/obj/item/weldingtool/alien,
+		/obj/item/tool/crowbar/alien,
+		/obj/item/tool/wirecutters/alien,
 		/obj/item/device/multitool/alien,
 		/obj/item/stack/cable_coil/alien
 	)
 
-/obj/item/weapon/storage/belt/medical/alien
+/obj/item/storage/belt/medical/alien
 	name = "alien belt"
 	desc = "A belt(?) that can hold things."
 	icon = 'icons/obj/abductor.dmi'
@@ -277,15 +277,15 @@
 	storage_slots = 8
 	can_hold = list(
 		/obj/item/device/healthanalyzer,
-		/obj/item/weapon/dnainjector,
-		/obj/item/weapon/reagent_containers/dropper,
-		/obj/item/weapon/reagent_containers/glass/beaker,
-		/obj/item/weapon/reagent_containers/glass/bottle,
-		/obj/item/weapon/reagent_containers/pill,
-		/obj/item/weapon/reagent_containers/syringe,
-		/obj/item/weapon/flame/lighter/zippo,
-		/obj/item/weapon/storage/fancy/cigarettes,
-		/obj/item/weapon/storage/pill_bottle,
+		/obj/item/dnainjector,
+		/obj/item/reagent_containers/dropper,
+		/obj/item/reagent_containers/glass/beaker,
+		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/pill,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/flame/lighter/zippo,
+		/obj/item/storage/fancy/cigarettes,
+		/obj/item/storage/pill_bottle,
 		/obj/item/stack/medical,
 		/obj/item/device/radio/headset,
 		/obj/item/device/pda,
@@ -294,28 +294,28 @@
 		/obj/item/clothing/mask/surgical,
 		/obj/item/clothing/head/surgery,
 		/obj/item/clothing/gloves,
-		/obj/item/weapon/reagent_containers/hypospray,
+		/obj/item/reagent_containers/hypospray,
 		/obj/item/clothing/glasses,
-		/obj/item/weapon/tool/crowbar,
+		/obj/item/tool/crowbar,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/cell/device,
-		/obj/item/weapon/extinguisher/mini,
-		/obj/item/weapon/surgical
+		/obj/item/cell/device,
+		/obj/item/extinguisher/mini,
+		/obj/item/surgical
 		)
 
-/obj/item/weapon/storage/belt/medical/alien
+/obj/item/storage/belt/medical/alien
 	starts_with = list(
-		/obj/item/weapon/surgical/scalpel/alien,
-		/obj/item/weapon/surgical/hemostat/alien,
-		/obj/item/weapon/surgical/retractor/alien,
-		/obj/item/weapon/surgical/circular_saw/alien,
-		/obj/item/weapon/surgical/FixOVein/alien,
-		/obj/item/weapon/surgical/bone_clamp/alien,
-		/obj/item/weapon/surgical/cautery/alien,
-		/obj/item/weapon/surgical/surgicaldrill/alien
+		/obj/item/surgical/scalpel/alien,
+		/obj/item/surgical/hemostat/alien,
+		/obj/item/surgical/retractor/alien,
+		/obj/item/surgical/circular_saw/alien,
+		/obj/item/surgical/FixOVein/alien,
+		/obj/item/surgical/bone_clamp/alien,
+		/obj/item/surgical/cautery/alien,
+		/obj/item/surgical/surgicaldrill/alien
 	)
 
-/obj/item/weapon/storage/belt/champion
+/obj/item/storage/belt/champion
 	name = "championship belt"
 	desc = "Proves to the world that you are the strongest!"
 	icon_state = "champion"
@@ -324,7 +324,7 @@
 		"/obj/item/clothing/mask/luchador"
 		)
 
-/obj/item/weapon/storage/belt/security/tactical
+/obj/item/storage/belt/security/tactical
 	name = "combat belt"
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
 	icon_state = "swat"
@@ -332,12 +332,12 @@
 	max_w_class = ITEMSIZE_NORMAL
 	max_storage_space = ITEMSIZE_COST_NORMAL * 7
 
-/obj/item/weapon/storage/belt/security/tactical/bandolier
+/obj/item/storage/belt/security/tactical/bandolier
 	name = "combat belt"
 	desc = "Can hold security gear like handcuffs and flashes, with more pouches for more storage."
 	icon_state = "bandolier"
 
-/obj/item/weapon/storage/belt/janitor
+/obj/item/storage/belt/janitor
 	name = "janitorial belt"
 	desc = "A belt used to hold most janitorial supplies."
 	icon_state = "janitor"
@@ -346,56 +346,56 @@
 	can_hold = list(
 		/obj/item/clothing/glasses,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/cell/device,
-		/obj/item/weapon/grenade,
+		/obj/item/cell/device,
+		/obj/item/grenade,
 		/obj/item/device/pda,
 		/obj/item/device/radio/headset,
 		/obj/item/clothing/gloves,
 		/obj/item/clothing/mask/surgical, //sterile mask,
 		/obj/item/device/assembly/mousetrap,
-		/obj/item/weapon/light/bulb,
-		/obj/item/weapon/light/tube,
-		/obj/item/weapon/flame/lighter,
+		/obj/item/light/bulb,
+		/obj/item/light/tube,
+		/obj/item/flame/lighter,
 		/obj/item/device/megaphone,
 		/obj/item/taperoll,
-		/obj/item/weapon/reagent_containers/spray,
-		/obj/item/weapon/soap
+		/obj/item/reagent_containers/spray,
+		/obj/item/soap
 		)
 
-/obj/item/weapon/storage/belt/archaeology
+/obj/item/storage/belt/archaeology
 	name = "excavation gear-belt"
 	desc = "Can hold various excavation gear."
 	icon_state = "gear"
 	can_hold = list(
-		/obj/item/weapon/storage/box/samplebags,
+		/obj/item/storage/box/samplebags,
 		/obj/item/device/core_sampler,
 		/obj/item/device/beacon_locator,
 		/obj/item/device/radio/beacon,
 		/obj/item/device/gps,
 		/obj/item/device/measuring_tape,
 		/obj/item/device/flashlight,
-		/obj/item/weapon/cell/device,
-		/obj/item/weapon/pickaxe,
+		/obj/item/cell/device,
+		/obj/item/pickaxe,
 		/obj/item/device/depth_scanner,
 		/obj/item/device/camera,
-		/obj/item/weapon/paper,
-		/obj/item/weapon/photo,
-		/obj/item/weapon/folder,
-		/obj/item/weapon/pen,
-		/obj/item/weapon/folder,
-		/obj/item/weapon/clipboard,
-		/obj/item/weapon/anodevice,
+		/obj/item/paper,
+		/obj/item/photo,
+		/obj/item/folder,
+		/obj/item/pen,
+		/obj/item/folder,
+		/obj/item/clipboard,
+		/obj/item/anodevice,
 		/obj/item/clothing/glasses,
-		/obj/item/weapon/tool/wrench,
-		/obj/item/weapon/storage/excavation,
-		/obj/item/weapon/anobattery,
+		/obj/item/tool/wrench,
+		/obj/item/storage/excavation,
+		/obj/item/anobattery,
 		/obj/item/device/ano_scanner,
-		/obj/item/weapon/pickaxe/hand,
+		/obj/item/pickaxe/hand,
 		/obj/item/device/xenoarch_multi_tool,
-		/obj/item/weapon/pickaxe/excavationdrill
+		/obj/item/pickaxe/excavationdrill
 		)
 
-/obj/item/weapon/storage/belt/fannypack
+/obj/item/storage/belt/fannypack
 	name = "leather fannypack"
 	desc = "A dorky fannypack for keeping small items in."
 	icon_state = "fannypack_leather"
@@ -404,58 +404,58 @@
 	storage_slots = null
 	max_storage_space = ITEMSIZE_COST_NORMAL * 2
 
-/obj/item/weapon/storage/belt/fannypack/black
+/obj/item/storage/belt/fannypack/black
  	name = "black fannypack"
  	icon_state = "fannypack_black"
  	item_state = "fannypack_black"
 
-/obj/item/weapon/storage/belt/fannypack/blue
+/obj/item/storage/belt/fannypack/blue
  	name = "blue fannypack"
  	icon_state = "fannypack_blue"
  	item_state = "fannypack_blue"
 
-/obj/item/weapon/storage/belt/fannypack/cyan
+/obj/item/storage/belt/fannypack/cyan
  	name = "cyan fannypack"
  	icon_state = "fannypack_cyan"
  	item_state = "fannypack_cyan"
 
-/obj/item/weapon/storage/belt/fannypack/green
+/obj/item/storage/belt/fannypack/green
  	name = "green fannypack"
  	icon_state = "fannypack_green"
  	item_state = "fannypack_green"
 
-/obj/item/weapon/storage/belt/fannypack/orange
+/obj/item/storage/belt/fannypack/orange
  	name = "orange fannypack"
  	icon_state = "fannypack_orange"
  	item_state = "fannypack_orange"
 
-/obj/item/weapon/storage/belt/fannypack/purple
+/obj/item/storage/belt/fannypack/purple
  	name = "purple fannypack"
  	icon_state = "fannypack_purple"
  	item_state = "fannypack_purple"
 
-/obj/item/weapon/storage/belt/fannypack/red
+/obj/item/storage/belt/fannypack/red
  	name = "red fannypack"
  	icon_state = "fannypack_red"
  	item_state = "fannypack_red"
 
-/obj/item/weapon/storage/belt/fannypack/white
+/obj/item/storage/belt/fannypack/white
  	name = "white fannypack"
  	icon_state = "fannypack_white"
  	item_state = "fannypack_white"
 
-/obj/item/weapon/storage/belt/fannypack/yellow
+/obj/item/storage/belt/fannypack/yellow
  	name = "yellow fannypack"
  	icon_state = "fannypack_yellow"
  	item_state = "fannypack_yellow"
 
-/obj/item/weapon/storage/belt/ranger
+/obj/item/storage/belt/ranger
 	name = "ranger belt"
 	desc = "The fancy utility-belt holding the tools, cuffs and gadgets of the Go Go ERT-Rangers. The belt buckle is not real phoron, but it is still surprisingly comfortable to wear."
 	icon = 'icons/obj/clothing/ranger.dmi'
 	icon_state = "ranger_belt"
 
-/obj/item/weapon/storage/belt/dbandolier
+/obj/item/storage/belt/dbandolier
 	name = "\improper Donk-Soft bandolier"
 	desc = "A Donk-Soft bandolier! Carry your spare darts anywhere! Ages 8 and up."
 	icon_state = "dbandolier"

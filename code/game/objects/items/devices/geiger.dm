@@ -102,7 +102,7 @@
 	layer = ABOVE_TURF_LAYER
 	w_class = ITEMSIZE_LARGE
 	flags = NOBLOODY
-	var/circuit = /obj/item/weapon/circuitboard/geiger
+	var/circuit = /obj/item/circuitboard/geiger
 	var/number = 0
 	var/last_tick //used to delay the powercheck
 	var/wiresexposed = 0

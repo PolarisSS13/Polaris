@@ -79,7 +79,7 @@ SUBSYSTEM_DEF(circuit)
 		/obj/item/device/electronic_assembly/wallmount/light,
 		/obj/item/device/electronic_assembly/wallmount,
 		/obj/item/device/electronic_assembly/wallmount/heavy,
-		/obj/item/weapon/implant/integrated_circuit,
+		/obj/item/implant/integrated_circuit,
 		/obj/item/clothing/under/circuitry,
 		/obj/item/clothing/gloves/circuitry,
 		/obj/item/clothing/glasses/circuitry,

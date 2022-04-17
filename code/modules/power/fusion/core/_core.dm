@@ -18,7 +18,7 @@ GLOBAL_LIST_EMPTY(fusion_cores)
 	active_power_usage = 500 //multiplied by field strength
 	anchored = 0
 
-	circuit = /obj/item/weapon/circuitboard/fusion_core
+	circuit = /obj/item/circuitboard/fusion_core
 
 	var/obj/item/hose_connector/output/Output
 

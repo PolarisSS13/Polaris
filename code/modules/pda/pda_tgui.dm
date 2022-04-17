@@ -86,7 +86,7 @@
 				var/turf/T = loc
 				if(ismob(T))
 					T = T.loc
-				var/obj/item/weapon/cartridge/C = cartridge
+				var/obj/item/cartridge/C = cartridge
 				C.forceMove(T)
 				if(scanmode in C.programs)
 					scanmode = null
