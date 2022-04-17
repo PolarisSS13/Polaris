@@ -74,74 +74,6 @@
 
 	return shock_damage
 
-/mob/living/carbon/proc/help_shake_act(mob/living/carbon/M)
-	if (src.health >= config.health_threshold_crit)
-		if (on_fire)
-			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-			if (M.on_fire)
-				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>",
-				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
-			else
-				M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>",
-				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
-				if(do_mob(M, src, 15))
-					src.adjust_fire_stacks(-0.5)
-					if (prob(10) && (M.fire_stacks <= 0))
-						M.adjust_fire_stacks(1)
-					M.IgniteMob()
-					if (M.on_fire)
-						M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>",
-						"<span class='danger'>The fire spreads to you as well!</span>")
-					else
-						src.adjust_fire_stacks(-0.5) //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
-						if (src.fire_stacks <= 0)
-							M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>",
-							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
-							src.ExtinguishMob()
-							src.fire_stacks = 0
-			return TRUE
-
-		var/show_ssd
-		var/mob/living/carbon/human/H = src
-		var/datum/gender/T = gender_datums[H.get_visible_gender()] // make sure to cast to human before using get_gender() or get_visible_gender()!
-		if(istype(H)) show_ssd = H.species.show_ssd
-		if(show_ssd && !client && !teleop)
-			M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [T.him] up!</span>", \
-			"<span class='notice'>You shake [src], but [T.he] [T.does] not respond... Maybe [T.he] [T.has] S.S.D?</span>")
-		else if(lying || src.sleeping)
-			AdjustSleeping(-5)
-			if(src.sleeping == 0)
-				src.resting = 0
-			M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [T.him] up!</span>", \
-								"<span class='notice'>You shake [src] trying to wake [T.him] up!</span>")
-		else
-			var/mob/living/carbon/human/hugger = M
-			var/datum/gender/TM = gender_datums[M.get_visible_gender()]
-			if(M.resting) //Are they resting on the ground?
-				M.visible_message("<span class='notice'>[M] grabs onto [src] and pulls [TM.himself] up</span>", \
-						"<span class='notice'>You grip onto [src] and pull yourself up off the ground!</span>")
-				if(M.fire_stacks >= (src.fire_stacks + 3)) //Fire checks.
-					src.adjust_fire_stacks(1)
-					M.adjust_fire_stacks(-1)
-				if(M.on_fire)
-					src.IgniteMob()
-				if(do_after(M, 0.5 SECONDS)) //.5 second delay. Makes it a bit stronger than just typing rest.
-					M.resting = FALSE //Hoist yourself up up off the ground. No para/stunned/weakened removal.
-			else if(istype(hugger))
-				hugger.species.hug(hugger,src)
-			else
-				M.visible_message("<span class='notice'>[M] hugs [src] to make [T.him] feel better!</span>", \
-							"<span class='notice'>You hug [src] to make [T.him] feel better!</span>")
-			if(M.fire_stacks >= (src.fire_stacks + 3))
-				src.adjust_fire_stacks(1)
-				M.adjust_fire_stacks(-1)
-			if(M.on_fire)
-				src.IgniteMob()
-		AdjustParalysis(-3)
-		AdjustStunned(-3)
-		AdjustWeakened(-3)
-
-		playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 /mob/living/carbon/flash_eyes(intensity = FLASH_PROTECTION_MODERATE, override_blindness_check = FALSE, affect_silicon = FALSE, visual = FALSE, type = /obj/screen/fullscreen/flash)
 	if(eyecheck() < intensity || override_blindness_check)
@@ -168,24 +100,6 @@
 		return FALSE
 	if(buckled && istype(buckled, /obj/structure/bed/nest)) // buckling does not restrict hands
 		return FALSE
-	return TRUE
-
-/mob/living/carbon/restrained()
-	return handcuffed
-
-/mob/living/carbon/u_equip(obj/item/W as obj)
-	if(!W)	return FALSE
-
-	if (W == handcuffed)
-		handcuffed = null
-		update_handcuffed()
-		if(buckled && buckled.buckle_require_restraints)
-			buckled.unbuckle_mob()
-	else if (W == legcuffed)
-		legcuffed = null
-		update_inv_legcuffed()
-	else
-		return ..()
 	return TRUE
 
 /mob/living/carbon/get_default_language()
