@@ -27,12 +27,13 @@ var/global/list/_nymph_default_emotes = list(
 /mob/living/carbon/diona_nymph
 	name = "diona nymph"
 	voice_name = "diona nymph"
-	adult_form = /mob/living/carbon/human
-	can_namepick_as_adult = TRUE
-	adult_name = "diona gestalt"
 	speak_emote = list("chirrups")
+	icon = 'icons/mob/alien.dmi'
 	icon_state = "nymph"
 	item_state = "nymph"
+	gender = NEUTER
+
+	mob_size = MOB_SMALL
 	language = LANGUAGE_ROOTLOCAL
 	species_language = LANGUAGE_ROOTLOCAL
 	only_species_language = TRUE
@@ -44,8 +45,14 @@ var/global/list/_nymph_default_emotes = list(
 	can_pull_mobs = MOB_PULL_SMALLER
 
 	holder_type = /obj/item/holder/diona
+
+	var/adult_form = /mob/living/carbon/human
+	can_namepick_as_adult = TRUE
+	adult_name = "diona gestalt"
+
 	var/obj/item/hat
 
+	var/instance_num = 1
 	var/amount_grown = 0
 	var/max_grown = 200
 
@@ -54,10 +61,19 @@ var/global/list/_nymph_default_emotes = list(
 
 /mob/living/carbon/diona_nymph/Initialize()
 	. = ..()
+
+	verbs += /mob/living/proc/ventcrawl
+	verbs += /mob/living/proc/hide
+	verbs += /mob/living/carbon/diona_nymph/proc/merge
+	
+	instance_num = rand(1, 1000)
+	name = "[initial(name)] ([instance_num])"
+	real_name = name
+
 	species = GLOB.all_species[SPECIES_DIONA]
 	add_language(LANGUAGE_ROOTGLOBAL)
+	add_language(LANGUAGE_ROOTLOCAL)
 	add_language(LANGUAGE_GALCOM)
-	verbs += /mob/living/carbon/diona_nymph/proc/merge
 
 /mob/living/carbon/diona_nymph/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
@@ -96,3 +112,7 @@ var/global/list/_nymph_default_emotes = list(
 	overlays.Cut()
 	if(hat)
 		overlays |= get_hat_icon(hat, 0, -8)
+	
+/mob/living/carbon/diona_nymph/Stat()
+	..()
+	stat(null, "Progress: [amount_grown]/[max_grown]")
