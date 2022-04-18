@@ -175,7 +175,7 @@
 	icon_state = "riding_crop0"
 	attack_verb = list("cropped","spanked","swatted","smacked","peppered")
 
-/obj/item/weapon/material/twohanded/spear/pike
+/obj/item/material/twohanded/spear/pike
 	name = "pike"
 	icon_state = "pike0"
 	base_icon = "pike"
@@ -187,7 +187,7 @@
 	drop_sound = 'sound/items/drop/woodweapon.ogg'
 	pickup_sound = 'sound/items/pickup/woodweapon.ogg'
 
-/obj/item/weapon/material/twohanded/spear/halberd
+/obj/item/material/twohanded/spear/halberd
 	icon_state = "halberd0"
 	base_icon = "halberd"
 	name = "halberd"
@@ -200,14 +200,14 @@
 	can_cleave = TRUE
 
 
-/obj/item/weapon/material/twohanded/spear/pike/pitchfork
+/obj/item/material/twohanded/spear/pike/pitchfork
 	icon_state = "pitchfork0"
 	base_icon = "pitchfork"
 	name = "pitchfork"
 	desc = "An old farming tool, not something you would find at hydroponics."
 	applies_material_colour = 0
 
-/obj/item/weapon/material/twohanded/zweihander
+/obj/item/material/twohanded/zweihander
 	icon_state = "zweihander0"
 	base_icon = "zweihander"
 	name = "zweihander"
@@ -225,7 +225,7 @@
 	default_material = "steel"
 	can_cleave = TRUE
 
-/obj/item/weapon/material/twohanded/zweihander/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/material/twohanded/zweihander/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(unique_parry_check(user, attacker, damage_source) && prob(10))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 		playsound(src, 'sound/weapons/punchmiss.ogg', 50, 1)

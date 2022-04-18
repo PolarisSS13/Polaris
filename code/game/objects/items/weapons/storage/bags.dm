@@ -401,7 +401,7 @@
 	// -----------------------------
 	//           Quiver (arrow bag)
 	// -----------------------------
-/obj/item/weapon/storage/bag/quiver
+/obj/item/storage/bag/quiver
 	name = "quiver"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "quiver"
@@ -410,4 +410,4 @@
 	max_w_class = ITEMSIZE_NORMAL
 	w_class = ITEMSIZE_LARGE
 	slot_flags = SLOT_BACK
-	can_hold = list(/obj/item/weapon/arrow/wood)
+	can_hold = list(/obj/item/arrow/wood)
