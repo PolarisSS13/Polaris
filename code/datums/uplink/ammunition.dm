@@ -81,7 +81,7 @@
 	name = "Rifle Magazine (5.45mm AP)"
 	path = /obj/item/ammo_magazine/m545/ap
 
-/datum/uplink_item/item/ammo/c545/ap/ext
+/datum/uplink_item/item/ammo/c545/ext/ap
 	name = "Rifle Magazine (5.45mm AP Extended)"
 	path = /obj/item/ammo_magazine/m545/ext/ap
 

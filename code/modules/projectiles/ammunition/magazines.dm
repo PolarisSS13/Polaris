@@ -830,7 +830,7 @@
 	name = "ammo clip (12g BB)"
 	icon_state = "12gclipshell"
 	desc = "A replica color-coded metal clip for holding and quickly loading shotgun shells. This one is loaded with airsoft BBs."
-	ammo_type = /obj/item/ammo_casing/a12g/pellet
+	ammo_type = /obj/item/ammo_casing/a12g/bb
 	matter = list(MAT_PLASTIC = 1070) // buckshot and slugs cost the same
 
 ///////// .75 Gyrojet /////////
