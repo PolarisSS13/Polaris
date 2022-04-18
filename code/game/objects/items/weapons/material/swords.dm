@@ -71,22 +71,6 @@
 		return 1
 	return 0
 
-/obj/item/weapon/material/sword/khopesh
-	name = "khopesh"
-	desc = "An ancient sword shapped like a sickle."
-	icon_state = "khopesh"
-	item_state = "khopesh"
-	applies_material_colour = 0
-	slot_flags = SLOT_BELT
-
-/obj/item/weapon/material/sword/dao
-	name = "dao"
-	desc = "A single-edged broadsword."
-	icon_state = "dao"
-	item_state = "dao"
-	applies_material_colour = 0
-	slot_flags = SLOT_BELT
-
 /obj/item/weapon/material/sword/gladius
 	name = "gladius"
 	desc = "An ancient short sword, designed to stab and cut."
