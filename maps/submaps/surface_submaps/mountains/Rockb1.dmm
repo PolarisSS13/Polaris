@@ -16,7 +16,7 @@
 /area/submap/Rockb1)
 "f" = (
 /obj/structure/table/woodentable,
-/obj/item/device/flashlight/lamp,
+/obj/item/flashlight/lamp,
 /turf/simulated/floor/lino,
 /area/submap/Rockb1)
 "g" = (
@@ -50,7 +50,7 @@
 /area/submap/Rockb1)
 "n" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/material/shard,
+/obj/item/material/shard,
 /turf/simulated/floor/plating,
 /area/submap/Rockb1)
 "o" = (
@@ -59,7 +59,7 @@
 /area/submap/Rockb1)
 "p" = (
 /obj/structure/bed,
-/obj/item/weapon/bedsheet/mime,
+/obj/item/bedsheet/mime,
 /turf/simulated/floor/lino,
 /area/submap/Rockb1)
 "q" = (
@@ -80,7 +80,7 @@
 /area/submap/Rockb1)
 "u" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/item/weapon/material/shard{
+/obj/item/material/shard{
 	icon_state = "medium"
 	},
 /turf/simulated/floor/tiled,
@@ -196,7 +196,7 @@
 /area/submap/Rockb1)
 "K" = (
 /obj/structure/table/standard,
-/obj/item/weapon/pickaxe/drill,
+/obj/item/pickaxe/drill,
 /turf/simulated/floor/tiled,
 /area/submap/Rockb1)
 "L" = (

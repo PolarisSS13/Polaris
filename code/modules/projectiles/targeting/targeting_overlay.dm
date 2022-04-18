@@ -176,7 +176,7 @@
 	to_chat(target, "<span class='critical'>If you fail to comply with your assailant, you accept the consequences of your actions.</span>")
 	aiming_with = thing
 	aiming_at = target
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		playsound(owner, 'sound/weapons/TargetOn.ogg', 50,1)
 	forceMove(get_turf(target))
 	START_PROCESSING(SSobj, src)
@@ -216,7 +216,7 @@
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)
 		return
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		playsound(owner, 'sound/weapons/TargetOff.ogg', 50,1)
 	if(!no_message)
 		owner.visible_message("<span class='notice'>\The [owner] lowers \the [aiming_with].</span>")

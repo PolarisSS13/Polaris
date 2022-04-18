@@ -53,8 +53,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 	. = ..()
 
 /obj/item/integrated_circuit/nano_host()
-	if(istype(src.loc, /obj/item/device/electronic_assembly))
-		var/obj/item/device/electronic_assembly/assembly = loc
+	if(istype(src.loc, /obj/item/electronic_assembly))
+		var/obj/item/electronic_assembly/assembly = loc
 		return assembly.resolve_nano_host()
 	return ..()
 
@@ -202,7 +202,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		return 1
 
 	var/update = 1
-	var/obj/item/device/electronic_assembly/A = src.assembly
+	var/obj/item/electronic_assembly/A = src.assembly
 	var/update_to_assembly = 0
 	var/datum/integrated_io/pin = locate(href_list["pin"]) in inputs + outputs + activators
 	var/datum/integrated_io/linked = null
@@ -215,21 +215,21 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		rename_component(usr)
 		if(href_list["from_assembly"])
 			update = 0
-			var/obj/item/device/electronic_assembly/ea = loc
+			var/obj/item/electronic_assembly/ea = loc
 			if(istype(ea))
 				ea.interact(usr)
 
 	if(href_list["pin_name"])
-		if (!istype(held_item, /obj/item/device/multitool) || !allow_multitool)
+		if (!istype(held_item, /obj/item/multitool) || !allow_multitool)
 			href_list["wire"] = 1
 		else
-			var/obj/item/device/multitool/M = held_item
+			var/obj/item/multitool/M = held_item
 			M.wire(pin,usr)
 
 
 
 	if(href_list["pin_data"])
-		if (!istype(held_item, /obj/item/device/multitool) || !allow_multitool)
+		if (!istype(held_item, /obj/item/multitool) || !allow_multitool)
 			href_list["wire"] = 1
 
 		else
@@ -265,22 +265,22 @@ a creative player the means to solve many problems.  Circuits are held inside an
 
 
 	if(href_list["pin_unwire"])
-		if (!istype(held_item, /obj/item/device/multitool) || !allow_multitool)
+		if (!istype(held_item, /obj/item/multitool) || !allow_multitool)
 			href_list["wire"] = 1
 		else
-			var/obj/item/device/multitool/M = held_item
+			var/obj/item/multitool/M = held_item
 			M.unwire(pin, linked, usr)
 
 	if(href_list["wire"])
-		if(istype(held_item, /obj/item/device/integrated_electronics/wirer))
-			var/obj/item/device/integrated_electronics/wirer/wirer = held_item
+		if(istype(held_item, /obj/item/integrated_electronics/wirer))
+			var/obj/item/integrated_electronics/wirer/wirer = held_item
 			if(linked)
 				wirer.wire(linked, usr)
 			else if(pin)
 				wirer.wire(pin, usr)
 
-		else if(istype(held_item, /obj/item/device/integrated_electronics/debugger))
-			var/obj/item/device/integrated_electronics/debugger/debugger = held_item
+		else if(istype(held_item, /obj/item/integrated_electronics/debugger))
+			var/obj/item/integrated_electronics/debugger/debugger = held_item
 			if(pin)
 				debugger.write_data(pin, usr)
 		else
@@ -306,8 +306,8 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		update_to_assembly = 1
 
 	if(href_list["scan"])
-		if(istype(held_item, /obj/item/device/integrated_electronics/debugger))
-			var/obj/item/device/integrated_electronics/debugger/D = held_item
+		if(istype(held_item, /obj/item/integrated_electronics/debugger))
+			var/obj/item/integrated_electronics/debugger/D = held_item
 			if(D.accepting_refs)
 				D.afterattack(src, usr, TRUE)
 			else
@@ -330,7 +330,7 @@ a creative player the means to solve many problems.  Circuits are held inside an
 		if(!removable)
 			to_chat(usr, "<span class='warning'>\The [src] seems to be permanently attached to the case.</span>")
 			return
-		var/obj/item/device/electronic_assembly/ea = loc
+		var/obj/item/electronic_assembly/ea = loc
 		power_fail()
 		disconnect_all()
 		var/turf/T = get_turf(src)

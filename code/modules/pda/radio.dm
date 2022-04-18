@@ -3,7 +3,7 @@
 	desc = "An electronic radio system."
 	icon = 'icons/obj/module.dmi'
 	icon_state = "power_mod"
-	var/obj/item/device/pda/hostpda = null
+	var/obj/item/pda/hostpda = null
 
 	var/list/botlist = null		// list of bots
 	var/mob/living/bot/active 	// the active bot; if null, show bot list
@@ -14,12 +14,12 @@
 
 	var/control_freq = BOT_FREQ
 
-	var/on = 0 //Are we currently active??
+	on = FALSE //Are we currently active??
 	var/menu_message = ""
 
 /obj/item/radio/integrated/Initialize()
 	. = ..()
-	if(istype(loc.loc, /obj/item/device/pda))
+	if(istype(loc.loc, /obj/item/pda))
 		hostpda = loc.loc
 	if(bot_filter)
 		spawn(5)
@@ -95,16 +95,8 @@
  *	Radio Cartridge, essentially a signaler.
  */
 /obj/item/radio/integrated/signal
-	var/frequency = 1457
+	frequency = 1457
 	var/code = 30.0
-	var/last_transmission
-	var/datum/radio_frequency/radio_connection
-
-/obj/item/radio/integrated/signal/Destroy()
-	if(radio_controller)
-		radio_controller.remove_object(src, frequency)
-	radio_connection = null
-	return ..()
 
 /obj/item/radio/integrated/signal/Initialize()
 	. = ..()
@@ -113,10 +105,11 @@
 			src.frequency = sanitize_frequency(src.frequency)
 		set_frequency(frequency)
 
-/obj/item/radio/integrated/signal/proc/set_frequency(new_frequency)
-	radio_controller.remove_object(src, frequency)
-	frequency = new_frequency
-	radio_connection = radio_controller.add_object(src, frequency)
+/obj/item/radio/integrated/signal/Destroy()
+	if(radio_controller)
+		radio_controller.remove_object(src, frequency)
+	radio_connection = null
+	return ..()
 
 /obj/item/radio/integrated/signal/proc/send_signal(message="ACTIVATE")
 	if(last_transmission && world.time < (last_transmission + 5))

@@ -1,10 +1,10 @@
-/obj/item/weapon/pack/spaceball
+/obj/item/pack/spaceball
 	name = "spaceball booster pack"
 	desc = "Officially licensed to take your money."
 	icon_state = "card_pack_spaceball"
 	parentdeck = "spaceball"
 
-/obj/item/weapon/pack/spaceball/Initialize()
+/obj/item/pack/spaceball/Initialize()
 	. = ..()
 	var/datum/playingcard/P
 	var/i

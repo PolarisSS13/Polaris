@@ -6,4 +6,4 @@
 	close_sound = 'sound/machines/closet/closet_wood_close.ogg'
 
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/drinks/bottle/small/beer = 10)
+		/obj/item/reagent_containers/food/drinks/bottle/small/beer = 10)

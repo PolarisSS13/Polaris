@@ -3,7 +3,7 @@
 	if(!C || !user)
 		return 0
 
-	if(isliving(user) && istype(C, /obj/item/weapon))
+	if(isliving(user) && istype(C))
 		var/mob/living/L = user
 		if(L.a_intent != I_HELP)
 			attack_tile(C, L) // Be on help intent if you want to decon something.
@@ -60,7 +60,7 @@
 		return
 
 	if(!is_plating())
-		if(istype(C, /obj/item/weapon))
+		if(istype(C))
 			try_deconstruct_tile(C, user)
 			return
 		else if(istype(C, /obj/item/stack/cable_coil))
@@ -106,8 +106,8 @@
 				playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
 				return
 		// Repairs.
-		else if(istype(C, /obj/item/weapon/weldingtool))
-			var/obj/item/weapon/weldingtool/welder = C
+		else if(istype(C, /obj/item/weldingtool))
+			var/obj/item/weldingtool/welder = C
 			if(welder.isOn() && (is_plating()))
 				if(broken || burnt)
 					if(welder.remove_fuel(0,user))
@@ -119,7 +119,7 @@
 					else
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 
-/turf/simulated/floor/proc/try_deconstruct_tile(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/floor/proc/try_deconstruct_tile(obj/item/W as obj, mob/user as mob)
 	if(W.is_crowbar())
 		if(broken || burnt)
 			to_chat(user, "<span class='notice'>You remove the broken [flooring.descriptor].</span>")
@@ -146,7 +146,7 @@
 		make_plating(1)
 		playsound(src, W.usesound, 80, 1)
 		return 1
-	else if(istype(W, /obj/item/weapon/shovel) && (flooring.flags & TURF_REMOVE_SHOVEL))
+	else if(istype(W, /obj/item/shovel) && (flooring.flags & TURF_REMOVE_SHOVEL))
 		to_chat(user, "<span class='notice'>You shovel off the [flooring.descriptor].</span>")
 		make_plating(1)
 		playsound(src, 'sound/items/Deconstruct.ogg', 80, 1)
@@ -156,7 +156,7 @@
 /turf/simulated/floor/proc/try_replace_tile(obj/item/stack/tile/T as obj, mob/user as mob)
 	if(T.type == flooring.build_type)
 		return
-	var/obj/item/weapon/W = user.is_holding_item_of_type(/obj/item/weapon)
+	var/obj/item/W = user.is_holding_item_of_type(/obj/item)
 	if(!istype(W))
 		return
 	if(!try_deconstruct_tile(W, user))

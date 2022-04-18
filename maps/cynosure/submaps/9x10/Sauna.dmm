@@ -7,7 +7,7 @@
 "t" = (/obj/item/frame/apc,/turf/simulated/floor/plating,/area/template_noop)
 "y" = (/turf/template_noop,/area/template_noop)
 "A" = (/obj/structure/window/reinforced,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/plating,/area/template_noop)
-"C" = (/obj/structure/closet,/obj/item/weapon/towel/random,/obj/item/weapon/towel/random,/turf/simulated/floor/plating,/area/template_noop)
+"C" = (/obj/structure/closet,/obj/item/towel/random,/obj/item/towel/random,/turf/simulated/floor/plating,/area/template_noop)
 "F" = (/obj/machinery/atmospherics/unary/heater{dir = 1},/turf/simulated/floor/plating,/area/template_noop)
 "G" = (/obj/random/maintenance,/turf/simulated/floor/plating,/area/template_noop)
 "I" = (/obj/item/stack/material/glass/reinforced{amount = 10},/turf/simulated/floor/plating,/area/template_noop)

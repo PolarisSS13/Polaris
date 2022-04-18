@@ -54,9 +54,9 @@
 			update_icon()
 			return
 
-	if(istype(I, /obj/item/weapon/grab))
+	if(istype(I, /obj/item/grab))
 		user.setClickCooldown(user.get_attack_speed(I))
-		var/obj/item/weapon/grab/G = I
+		var/obj/item/grab/G = I
 
 		if(isliving(G.affecting))
 			var/mob/living/GM = G.affecting
@@ -101,10 +101,10 @@
 	return
 
 /obj/structure/toilet/prison/attackby(obj/item/I, mob/living/user)
-	if(istype(I, /obj/item/weapon/grab))
+	if(istype(I, /obj/item/grab))
 		user.setClickCooldown(user.get_attack_speed(I))
 
-	var/obj/item/weapon/grab/G = I
+	var/obj/item/grab/G = I
 
 	if(isliving(G.affecting))
 		var/mob/living/GM = G.affecting
@@ -137,8 +137,8 @@
 	anchored = 1
 
 /obj/structure/urinal/attackby(obj/item/I as obj, mob/user as mob)
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 		if(isliving(G.affecting))
 			var/mob/living/GM = G.affecting
 			if(G.state>1)
@@ -202,7 +202,7 @@
 		soundloop.stop()
 
 /obj/machinery/shower/attackby(obj/item/I as obj, mob/user as mob)
-	if(I.type == /obj/item/device/analyzer)
+	if(I.type == /obj/item/analyzer)
 		to_chat(user, "<span class='notice'>The water temperature seems to be [watertemp].</span>")
 	if(I.is_wrench())
 		var/newtemp = input(user, "What setting would you like to set the temperature valve to?", "Water Temperature Valve") in temperature_settings
@@ -302,7 +302,7 @@
 		else if(temperature <= H.species.cold_level_1)
 			to_chat(H, "<span class='warning'>The water is freezing cold!</span>")
 
-/obj/item/weapon/bikehorn/rubberducky
+/obj/item/bikehorn/rubberducky
 	name = "rubber ducky"
 	desc = "Rubber ducky you're so fine, you make bathtime lots of fuuun. Rubber ducky I'm awfully fooooond of yooooouuuu~"	//thanks doohl
 	icon = 'icons/obj/watercloset.dmi'
@@ -371,15 +371,15 @@
 		to_chat(user, "<span class='warning'>Someone's already washing here.</span>")
 		return
 
-	var/obj/item/weapon/reagent_containers/RG = O
+	var/obj/item/reagent_containers/RG = O
 	if (istype(RG) && RG.is_open_container())
 		RG.reagents.add_reagent("water", min(RG.volume - RG.reagents.total_volume, RG.amount_per_transfer_from_this))
 		user.visible_message("<span class='notice'>[user] fills \the [RG] using \the [src].</span>","<span class='notice'>You fill \the [RG] using \the [src].</span>")
 		playsound(src, 'sound/effects/sink.ogg', 75, 1)
 		return 1
 
-	else if (istype(O, /obj/item/weapon/melee/baton))
-		var/obj/item/weapon/melee/baton/B = O
+	else if (istype(O, /obj/item/melee/baton))
+		var/obj/item/melee/baton/B = O
 		if(B.bcell)
 			if(B.bcell.charge > 0 && B.status == 1)
 				flick("baton_active", src)
@@ -396,7 +396,7 @@
 					"<span class='danger'>[user] was stunned by [TU.his] wet [O]!</span>", \
 					"<span class='userdanger'>[user] was stunned by [TU.his] wet [O]!</span>")
 				return 1
-	else if(istype(O, /obj/item/weapon/mop))
+	else if(istype(O, /obj/item/mop))
 		O.reagents.add_reagent("water", 5)
 		to_chat(user, "<span class='notice'>You wet \the [O] in \the [src].</span>")
 		playsound(src, 'sound/effects/slosh.ogg', 25, 1)
