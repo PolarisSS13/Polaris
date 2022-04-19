@@ -1,11 +1,11 @@
 //Common breathing procs
 
 //Start of a breath chain, calls breathe()
-/mob/living/carbon/human/proc/handle_breathing()
+/mob/living/human/proc/handle_breathing()
 	if(!(air_master.current_cycle % 4) || failed_last_breath || (health < config.health_threshold_crit)) 	//First, resolve location and get a breath
 		breathe()
 
-/mob/living/carbon/human/proc/breathe()
+/mob/living/human/proc/breathe()
 	if(!should_have_organ(O_LUNGS))
 		return
 
@@ -41,7 +41,7 @@
 	handle_breath(breath)
 	handle_post_breath(breath)
 
-/mob/living/carbon/human/proc/get_breath_from_internal(volume_needed=BREATH_VOLUME)
+/mob/living/human/proc/get_breath_from_internal(volume_needed=BREATH_VOLUME)
 	if(!istype(internal))
 		return null
 
@@ -62,7 +62,7 @@
 
 	return internal?.remove_air_volume(volume_needed)
 
-/mob/living/carbon/human/proc/get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
+/mob/living/human/proc/get_breath_from_environment(var/volume_needed=BREATH_VOLUME)
 	var/datum/gas_mixture/breath = null
 	var/datum/gas_mixture/environment = null
 	if(loc)
@@ -82,7 +82,7 @@
 	return null
 
 //Handle possble chem smoke effect
-/mob/living/carbon/human/proc/handle_chemical_smoke(var/datum/gas_mixture/environment)
+/mob/living/human/proc/handle_chemical_smoke(var/datum/gas_mixture/environment)
 	if(wear_mask && (wear_mask.item_flags & BLOCK_GAS_SMOKE_EFFECT))
 		return
 	if(glasses && (glasses.item_flags & BLOCK_GAS_SMOKE_EFFECT))
@@ -97,7 +97,7 @@
 			break
 
 // TODO SURGERY_REFACTOR: Pass over this with lungs
-/mob/living/carbon/human/proc/handle_breath(datum/gas_mixture/breath)
+/mob/living/human/proc/handle_breath(datum/gas_mixture/breath)
 	if(suiciding)
 		failed_last_breath = 1
 		adjustOxyLoss(2) // If you are suiciding, you should die a little bit faster
@@ -288,7 +288,7 @@
 	if(!does_not_breathe && client) // If we breathe, and have an active client, check if we have synthetic lungs.
 		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[O_LUNGS]
 		var/turf = get_turf(src)
-		var/mob/living/carbon/human/M = src
+		var/mob/living/human/M = src
 		if(L.robotic < ORGAN_ROBOT && is_below_sound_pressure(turf) && M.internal) // Only non-synthetic lungs, please, and only play these while the pressure is below that which we can hear sounds normally AND we're on internals.
 			if(!failed_inhale && (world.time >= (last_breath_sound + 7 SECONDS))) // Were we able to inhale successfully? Play inhale.
 				var/exhale = failed_exhale // Pass through if we passed exhale or not
@@ -361,15 +361,15 @@
 	breath.update_values()
 	return 1
 
-/mob/living/carbon/human/proc/handle_post_breath(datum/gas_mixture/breath)
+/mob/living/human/proc/handle_post_breath(datum/gas_mixture/breath)
 	if(breath)
 		loc.assume_air(breath) //by default, exhale
 	//spread some viruses while we are at it
 	if(breath && virus2.len > 0 && prob(10))
-		for(var/mob/living/carbon/M in view(1,src))
+		for(var/mob/living/human/M in view(1,src))
 			src.spread_disease_to(M)
 
-/mob/living/carbon/human/proc/play_inhale(var/mob/living/M, var/exhale)
+/mob/living/human/proc/play_inhale(var/mob/living/M, var/exhale)
 	var/suit_inhale_sound
 	if(species.suit_inhale_sound)
 		suit_inhale_sound = species.suit_inhale_sound
@@ -380,7 +380,7 @@
 	if(!exhale) // Did we fail exhale? If no, play it after inhale finishes.
 		addtimer(CALLBACK(src, .proc/play_exhale, M), 5 SECONDS)
 	
-/mob/living/carbon/human/proc/play_exhale(var/mob/living/M)
+/mob/living/human/proc/play_exhale(var/mob/living/M)
 	var/suit_exhale_sound
 	if(species.suit_exhale_sound)
 		suit_exhale_sound = species.suit_exhale_sound

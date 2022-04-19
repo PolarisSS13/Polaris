@@ -212,16 +212,16 @@ Variables you may want to make use of are:
 /datum/species/event1/proc/toggle_plant() //Maybe it's a distant cousin of the Venus Fly Trap.
 	flags ^= IS_PLANT
 
-/datum/species/event1/get_bodytype(var/mob/living/carbon/human/H) //Default to human sprites, if they're based on another species, var edit use_bodyshape to the correct thing in _defines/mobs.dm of the species you want to use.
+/datum/species/event1/get_bodytype(var/mob/living/human/H) //Default to human sprites, if they're based on another species, var edit use_bodyshape to the correct thing in _defines/mobs.dm of the species you want to use.
 	return use_bodyshape
 
 /datum/species/event1/can_breathe_water()
 	return waterbreathing
 
-/datum/species/event1/can_overcome_gravity(var/mob/living/carbon/human/H)
+/datum/species/event1/can_overcome_gravity(var/mob/living/human/H)
 	return overcome_gravity
 
-/datum/species/event1/can_fall(var/mob/living/carbon/human/H)
+/datum/species/event1/can_fall(var/mob/living/human/H)
 	return hover
 
 /datum/species/event1/sub1

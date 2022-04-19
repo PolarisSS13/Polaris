@@ -40,9 +40,9 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/tie_hair)
+		/mob/living/human/proc/tie_hair)
 
-/datum/species/human/get_bodytype(var/mob/living/carbon/human/H)
+/datum/species/human/get_bodytype(var/mob/living/human/H)
 	return SPECIES_HUMAN
 
 /datum/species/unathi
@@ -170,7 +170,7 @@
 		/decl/emote/human/stopsway
 	)
 
-/datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/unathi/equip_survival_gear(var/mob/living/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
@@ -270,7 +270,7 @@
 		/decl/emote/human/stopsway
 	)
 
-/datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/tajaran/equip_survival_gear(var/mob/living/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
@@ -452,7 +452,7 @@
 		/decl/emote/audible/chirp
 	)
 
-/datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/zaddat/equip_survival_gear(var/mob/living/human/H)
 	..()
 	if(H.wear_suit) //get rid of job labcoats so they don't stop us from equipping the Shroud
 		qdel(H.wear_suit) //if you know how to gently set it in like, their backpack or whatever, be my guest
@@ -464,7 +464,7 @@
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/zaddat/(H), slot_wear_mask) // mask has to come first or Shroud helmet will get in the way
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/space/void/zaddat/(H), slot_wear_suit)
 
-/datum/species/zaddat/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/zaddat/handle_environment_special(var/mob/living/human/H)
 
 	if(H.inStasisNow())
 		return
@@ -545,8 +545,8 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/diona_split_nymph,
-		/mob/living/carbon/human/proc/regenerate
+		/mob/living/human/proc/diona_split_nymph,
+		/mob/living/human/proc/regenerate
 		)
 
 	warning_low_pressure = 50
@@ -582,17 +582,17 @@
 		return TRUE
 	return FALSE
 
-/datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/diona/equip_survival_gear(var/mob/living/human/H)
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(new /obj/item/flashlight/flare(H), slot_r_hand)
 	else
 		H.equip_to_slot_or_del(new /obj/item/flashlight/flare(H.back), slot_in_backpack)
 
-/datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_post_spawn(var/mob/living/human/H)
 	H.gender = NEUTER
 	return ..()
 
-/datum/species/diona/handle_death(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_death(var/mob/living/human/H)
 
 	var/mob/living/simple_mob/diona_nymph/S = new(get_turf(H))
 
@@ -608,8 +608,8 @@
 			qdel(Org)
 
 		// Purge the diona verbs.
-		H.verbs -= /mob/living/carbon/human/proc/diona_split_nymph
-		H.verbs -= /mob/living/carbon/human/proc/regenerate
+		H.verbs -= /mob/living/human/proc/diona_split_nymph
+		H.verbs -= /mob/living/human/proc/regenerate
 
 		return
 
@@ -621,7 +621,7 @@
 
 	H.visible_message("<span class='danger'>\The [H] splits apart with a wet slithering noise!</span>")
 
-/datum/species/diona/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/diona/handle_environment_special(var/mob/living/human/H)
 	if(H.inStasisNow())
 		return
 

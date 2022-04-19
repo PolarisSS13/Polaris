@@ -77,7 +77,7 @@
 
 				M.op_stage.in_progress -= zone 									// Clear the in-progress flag.
 				if (ishuman(M))
-					var/mob/living/carbon/human/H = M
+					var/mob/living/human/H = M
 					H.update_surgery()
 				return	TRUE  												//don't want to do weapony things after surgery
 	return FALSE

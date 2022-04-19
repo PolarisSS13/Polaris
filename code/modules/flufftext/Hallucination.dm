@@ -3,11 +3,11 @@ Hallucinations should not be oOoOoOo whacky, that's dumb.
 Room for expanding on, but let's not imagine the crew wailing on you for taking some drugs.
 */
 
-/mob/living/carbon
+/mob/living/human
 	var/image/halimage
 	var/halmob_action
 
-/mob/living/carbon/proc/handle_hallucinations()
+/mob/living/human/proc/handle_hallucinations()
 	if(client && hallucination > 20)
 		var/list/halpick = list()
 		halpick |= list("messages", "sounds")
@@ -27,7 +27,7 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 					"What was that noise?",
 					"You feel like something is crawling on you...!")
 					to_chat(src, "<span class='warning'>[pick(msg_list)]</span>")
-				if("sounds") /// Relatively harmless sounds to hear. 
+				if("sounds") /// Relatively harmless sounds to hear.
 					var/list/soundlist = list('sound/items/bikehorn.ogg', 'sound/items/drink.ogg', 'sound/items/polaroid1.ogg', 'sound/items/lighter_on.ogg',
 					'sound/machines/vending/vending_cans.ogg', 'sound/weapons/flash.ogg')
 					src << pick(soundlist)
@@ -73,7 +73,7 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 	density = 0
 	anchored = 1
 	opacity = 0
-	var/mob/living/carbon/human/my_target = null
+	var/mob/living/human/my_target = null
 	var/image/stand_icon = null
 	var/image/currentimage = null
 	var/icon/base = null
@@ -162,9 +162,9 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 
 /proc/mob_hallucinate(var/mob/living/carbon/target)
 	var/list/possible_clones = new/list()
-	var/mob/living/carbon/human/clone = null
+	var/mob/living/human/clone = null
 
-	for(var/mob/living/carbon/human/H in living_mob_list)
+	for(var/mob/living/human/H in living_mob_list)
 		if(H.stat || H.lying)
 			continue
 		possible_clones += H

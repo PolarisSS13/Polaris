@@ -10,8 +10,8 @@ var/global/list/_brain_default_emotes = list(
 	/decl/emote/visible/flash
 )
 
-/mob/living/carbon/brain/can_emote()
+/mob/living/brain/can_emote()
 	return (istype(container, /obj/item/mmi) && ..())
 
-/mob/living/carbon/brain/get_available_emotes()
+/mob/living/brain/get_available_emotes()
 	return global._brain_default_emotes

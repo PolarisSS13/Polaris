@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/monkeyize()
+/mob/living/human/proc/monkeyize()
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
@@ -45,7 +45,7 @@
 	spawning = 1
 	return ..()
 
-/mob/living/carbon/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
+/mob/living/human/AIize(move=1) // 'move' argument needs defining here too because BYOND is dumb
 	if (transforming)
 		return
 	for(var/t in organs)
@@ -53,7 +53,7 @@
 
 	return ..(move)
 
-/mob/living/carbon/AIize(var/move = TRUE)
+/mob/living/human/AIize(var/move = TRUE)
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
@@ -135,7 +135,7 @@
 	return O
 
 //human -> robot
-/mob/living/carbon/human/proc/Robotize()
+/mob/living/human/proc/Robotize()
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
@@ -192,32 +192,7 @@
 		qdel(src)
 	return O
 
-//human -> alien
-/mob/living/carbon/human/proc/Alienize()
-	if (transforming)
-		return
-	for(var/obj/item/W in src)
-		drop_from_inventory(W)
-	regenerate_icons()
-	transforming = 1
-	canmove = 0
-	icon = null
-	invisibility = 101
-	for(var/t in organs)
-		qdel(t)
-
-	var/alien_caste = pick("Soldier","Guardian","Worker")
-	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
-
-	new_xeno.a_intent = I_HURT
-	new_xeno.key = key
-
-	to_chat(new_xeno, "<B>You are now a Skathari.</B>")
-	qdel(src)
-	return
-
-
-/mob/living/carbon/human/proc/corgize()
+/mob/living/human/proc/corgize()
 	if (transforming)
 		return
 	for(var/obj/item/W in src)
@@ -238,7 +213,7 @@
 	qdel(src)
 	return
 
-/mob/living/carbon/human/Animalize()
+/mob/living/human/Animalize()
 
 	var/list/mobtypes = typesof(/mob/living/simple_mob)
 	var/mobpath = input("Which type of mob should [src] turn into?", "Choose a type") in mobtypes

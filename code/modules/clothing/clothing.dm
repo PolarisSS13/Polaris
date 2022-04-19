@@ -73,10 +73,10 @@
 	if (!..())
 		return 0
 
-	if(LAZYLEN(species_restricted) && istype(M,/mob/living/carbon/human))
+	if(LAZYLEN(species_restricted) && istype(M,/mob/living/human))
 		var/exclusive = null
 		var/wearable = null
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 
 		if("exclude" in species_restricted)
 			exclusive = 1
@@ -194,11 +194,11 @@
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
 	if (!user) return
 
-	if (src.loc != user || !istype(user,/mob/living/carbon/human))
+	if (src.loc != user || !istype(user,/mob/living/human))
 		..()
 		return
 
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 	if(H.l_ear != src && H.r_ear != src)
 		..()
 		return
@@ -232,7 +232,7 @@
 
 /obj/item/clothing/ears/MouseDrop(var/obj/over_object)
 	if(ishuman(usr))
-		var/mob/living/carbon/human/H = usr
+		var/mob/living/human/H = usr
 		// If this covers both ears, we want to return the result of unequipping the primary object, and kill the off-ear one
 		if(slot_flags & SLOT_TWOEARS)
 			var/obj/item/clothing/ears/O = (H.l_ear == src ? H.r_ear : H.l_ear)
@@ -283,7 +283,7 @@
 	var/obj/item/cell/cell = 0
 	var/fingerprint_chance = 0	//How likely the glove is to let fingerprints through
 	var/obj/item/clothing/gloves/ring = null		//Covered ring
-	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
+	var/mob/living/human/wearer = null	//Used for covered rings when dropping
 	var/glove_level = 2			//What "layer" the glove is on
 	var/overgloves = 0			//Used by gauntlets and arm_guards
 	var/punch_force = 0			//How much damage do these gloves add to a punch?
@@ -342,7 +342,7 @@
 	update_icon()
 
 /obj/item/clothing/gloves/mob_can_equip(mob/user, slot, disable_warning = FALSE)
-	var/mob/living/carbon/human/H = user
+	var/mob/living/human/H = user
 
 	if(slot && slot == slot_gloves)
 		var/obj/item/clothing/gloves/G = H.gloves
@@ -377,7 +377,7 @@
 	if(!wearer)
 		return
 
-	var/mob/living/carbon/human/H = wearer
+	var/mob/living/human/H = wearer
 	if(ring && istype(H))
 		if(!H.equip_to_slot_if_possible(ring, slot_gloves))
 			ring.forceMove(get_turf(src))
@@ -500,7 +500,7 @@
 	if(!ismob(user))
 		return
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 	if(ishuman(user))
 		H = user
 
@@ -738,13 +738,13 @@
 
 /obj/item/clothing/suit/equipped(var/mob/user, var/slot)
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if((taurized && !istaurtail(H.tail_style)) || (!taurized && istaurtail(H.tail_style)))
 			taurize(user)
 
 	return ..()
 
-/obj/item/clothing/suit/proc/taurize(var/mob/living/carbon/human/Taur)
+/obj/item/clothing/suit/proc/taurize(var/mob/living/human/Taur)
 	if(istaurtail(Taur.tail_style))
 		var/datum/sprite_accessory/tail/taur/taurtail = Taur.tail_style
 		if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in cached_icon_states(taurtail.suit_sprites)))
@@ -837,7 +837,7 @@
 		if(accessory.AltClick(user))
 			return TRUE
 	. = ..()
-	
+
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(LAZYLEN(accessories))
 		..()
@@ -882,8 +882,8 @@
 	return 0
 
 /obj/item/clothing/under/proc/update_rolldown_status()
-	var/mob/living/carbon/human/H
-	if(istype(src.loc, /mob/living/carbon/human))
+	var/mob/living/human/H
+	if(istype(src.loc, /mob/living/human))
 		H = src.loc
 
 	var/icon/under_icon
@@ -905,8 +905,8 @@
 	if(H) update_clothing_icon()
 
 /obj/item/clothing/under/proc/update_rollsleeves_status()
-	var/mob/living/carbon/human/H
-	if(istype(src.loc, /mob/living/carbon/human))
+	var/mob/living/human/H
+	if(istype(src.loc, /mob/living/human))
 		H = src.loc
 
 	var/icon/under_icon

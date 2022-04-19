@@ -6,7 +6,7 @@
 
 /obj/item/organ/internal/liver/process()
 	..()
-	if(!iscarbon(owner)) return
+	if(!ishuman(owner)) return
 
 	if(owner.life_tick % PROCESS_ACCURACY == 0)
 
@@ -61,7 +61,7 @@
 
 /obj/item/organ/internal/liver/grey/colormatch/Initialize()
 	. = ..()
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	spawn(15)
 		if(ishuman(owner))
 			H = owner

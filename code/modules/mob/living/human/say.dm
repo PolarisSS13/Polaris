@@ -1,10 +1,10 @@
-/mob/living/carbon/human/GetAltName()
+/mob/living/human/GetAltName()
 	if(name != GetVoice())
 		return " (as [get_id_name("Unknown")])"
 
 	return ..()
 
-/mob/living/carbon/human/proc/forcesay(list/append)
+/mob/living/human/proc/forcesay(list/append)
 	if(stat == CONSCIOUS)
 		if(client)
 			var/virgin = 1	//has the text been modified yet?
@@ -36,7 +36,7 @@
 					say(temp)
 				winset(client, "input", "text=[null]")
 
-/mob/living/carbon/human/speech_bubble_appearance()
+/mob/living/human/speech_bubble_appearance()
 	var/sounds_synth = FALSE
 	var/datum/robolimb/robo = isSynthetic() //Will get torso manufacturer
 	if(robo)
@@ -59,7 +59,7 @@
 	// NORMIE
 	return ..()
 
-/mob/living/carbon/human/say_understands(var/mob/other, var/datum/language/speaking = null)
+/mob/living/human/say_understands(var/mob/other, var/datum/language/speaking = null)
 	if(has_brain_worms()) //Brain worms translate everything. Even mice and alien speak.
 		return TRUE
 
@@ -80,7 +80,7 @@
 
 	return ..()
 
-/mob/living/carbon/human/GetVoice()
+/mob/living/human/GetVoice()
 	var/voice_sub
 	if(istype(get_rig(),/obj/item/rig))
 		var/obj/item/rig/rig = get_rig()
@@ -105,19 +105,19 @@
 		return GetSpecialVoice()
 	return real_name
 
-/mob/living/carbon/human/proc/SetSpecialVoice(var/new_voice)
+/mob/living/human/proc/SetSpecialVoice(var/new_voice)
 	if(new_voice)
 		special_voice = new_voice
 	return
 
-/mob/living/carbon/human/proc/UnsetSpecialVoice()
+/mob/living/human/proc/UnsetSpecialVoice()
 	special_voice = ""
 	return
 
-/mob/living/carbon/human/proc/GetSpecialVoice()
+/mob/living/human/proc/GetSpecialVoice()
 	return special_voice
 
-/mob/living/carbon/human/handle_speech_problems(var/list/message_data)
+/mob/living/human/handle_speech_problems(var/list/message_data)
 	if(silent || (sdisabilities & MUTE))
 		message_data[1] = ""
 		. = 1
@@ -132,7 +132,7 @@
 	else
 		. = ..(message_data)
 
-/mob/living/carbon/human/handle_message_mode(message_mode, list/message_pieces, verb, used_radios)
+/mob/living/human/handle_message_mode(message_mode, list/message_pieces, verb, used_radios)
 	switch(message_mode)
 		if("intercom")
 			if(!restrained())
@@ -182,14 +182,14 @@
 					if(r_ear.talk_into(src, message_pieces, message_mode, verb))
 						used_radios += r_ear
 
-/mob/living/carbon/human/handle_speech_sound()
+/mob/living/human/handle_speech_sound()
 	var/list/returns[2]
 	if(species.speech_sounds && prob(species.speech_chance))
 		returns[1] = sound(pick(species.speech_sounds))
 		returns[2] = 50
 	return returns
 
-/mob/living/carbon/human/binarycheck()
+/mob/living/human/binarycheck()
 	. = FALSE
 	var/obj/item/radio/headset/R = null
 	if(istype(l_ear, /obj/item/radio/headset))

@@ -66,12 +66,12 @@ var/global/list/ventcrawl_machinery = list(
 	if(listed/* && !get_inventory_slot(carried_item)*/)
 		return 1
 
-/mob/living/carbon/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+/mob/living/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item in internal_organs)
 		return 1
 	return ..()
 
-/mob/living/carbon/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
+/mob/living/human/is_allowed_vent_crawl_item(var/obj/item/carried_item)
 	if(carried_item in organs)
 		return 1
 	return ..()
@@ -104,9 +104,6 @@ var/global/list/ventcrawl_machinery = list(
 		pipe = input("Crawl Through Vent", "Pick a pipe") as null|anything in pipes
 	if(canmove && pipe)
 		return pipe
-
-/mob/living/carbon/alien/ventcrawl_carry()
-	return 1
 
 /mob/living/var/ventcrawl_layer = 3
 

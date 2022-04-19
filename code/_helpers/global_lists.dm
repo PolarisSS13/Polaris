@@ -109,7 +109,7 @@ var/global/list/string_slot_flags = list(
 		mannequins_ = new()
  	. = mannequins_[ckey]
 	if(!.)
-		. = new/mob/living/carbon/human/dummy/mannequin()
+		. = new/mob/living/human/dummy/mannequin()
 		mannequins_[ckey] = .
 
 //////////////////////////

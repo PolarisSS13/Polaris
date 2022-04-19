@@ -155,8 +155,8 @@
 			if(M.buckled)
 				return
 
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
+			if(istype(M,/mob/living/human))
+				var/mob/living/human/H = M
 				if(H.shoes && H.shoes.item_flags & NOSLIP)
 					return
 
@@ -183,7 +183,7 @@
 				//TODO: generalize this.
 				to_chat(user, "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>")
 				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
-				if(src.loc == user && istype(user,/mob/living/carbon/human))
+				if(src.loc == user && istype(user,/mob/living/human))
 					user.put_in_hands(pocell)
 				pocell.maxcharge = src.potency * 10
 				pocell.charge = pocell.maxcharge
@@ -339,7 +339,7 @@
 	if(!seed)
 		return
 	if(seed.get_trait(TRAIT_STINGS))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H) && H.gloves)
 			return
 		if(!reagents || reagents.total_volume <= 0)

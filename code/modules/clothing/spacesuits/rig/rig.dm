@@ -55,7 +55,7 @@
 	var/obj/item/rig_module/selected_module = null            // Primary system (used with middle-click)
 	var/obj/item/rig_module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
 	var/obj/item/rig_module/voice/speech                      // As above.
-	var/mob/living/carbon/human/wearer                        // The person currently wearing the rig.
+	var/mob/living/human/wearer                        // The person currently wearing the rig.
 	var/image/mob_icon                                        // Holder for on-mob icon.
 	var/list/installed_modules = list()                       // Power consumption/use bookkeeping.
 
@@ -256,7 +256,7 @@
 	toggle_piece("chest", loc, ONLY_RETRACT, TRUE)
 	update_icon(1)
 
-/obj/item/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
+/obj/item/rig/proc/toggle_seals(var/mob/living/human/M,var/instant)
 
 	if(sealing) return
 
@@ -428,7 +428,7 @@
 
 /obj/item/rig/proc/get_environment_temperature()
 	if (ishuman(loc))
-		var/mob/living/carbon/human/H = loc
+		var/mob/living/human/H = loc
 		if(istype(H.loc, /obj/mecha))
 			var/obj/mecha/M = H.loc
 			return M.return_temperature()
@@ -450,7 +450,7 @@
 	if (!ishuman(M))
 		return 0
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 
 	if (!H.wear_suit || (H.back != src && H.belt != src))
 		return 0
@@ -470,7 +470,7 @@
 	if (!suit_is_deployed())		//inbuilt systems only work on the suit they're designed to work on
 		return
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 
 	var/turf/T = get_turf(src)
 	var/datum/gas_mixture/environment = T.return_air()
@@ -554,7 +554,7 @@
 	var/fail_msg
 
 	if(!user_is_ai)
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(istype(H) && (H.back != src && H.belt != src))
 			fail_msg = "<span class='warning'>You must be wearing \the [src] to do this.</span>"
 		else if(user.incorporeal_move)
@@ -606,7 +606,7 @@
 		wearer.update_inv_back()
 	return
 
-/obj/item/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
+/obj/item/rig/proc/check_suit_access(var/mob/living/human/user)
 
 	if(!security_check_enabled)
 		return 1
@@ -634,7 +634,7 @@
 			to_chat(module.integrated_ai, "[message]")
 			. = 1
 
-/obj/item/rig/equipped(mob/living/carbon/human/M)
+/obj/item/rig/equipped(mob/living/human/M)
 	..()
 
 	if(istype(M.back, /obj/item/rig) && istype(M.belt, /obj/item/rig))
@@ -660,7 +660,7 @@
 		wearer.wearing_rig = src
 		update_icon()
 
-/obj/item/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode, var/forced = FALSE)
+/obj/item/rig/proc/toggle_piece(var/piece, var/mob/living/human/H, var/deploy_mode, var/forced = FALSE)
 
 	if((sealing || !cell || !cell.charge) && !forced)
 		return
@@ -699,7 +699,7 @@
 	if(use_obj)
 		if(check_slot == use_obj && deploy_mode != ONLY_DEPLOY)
 
-			var/mob/living/carbon/human/holder
+			var/mob/living/human/holder
 
 			if(use_obj)
 				holder = use_obj.loc
@@ -732,7 +732,7 @@
 
 /obj/item/rig/proc/deploy(mob/M,var/sealed)
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 
 	if(!H || !istype(H)) return
 
@@ -845,7 +845,7 @@
 			to_chat(wearer, "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!</span>")
 	dam_module.deactivate()
 
-/obj/item/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
+/obj/item/rig/proc/malfunction_check(var/mob/living/human/user)
 	if(malfunction_delay)
 		if(offline)
 			to_chat(user, "<span class='danger'>The suit is completely unresponsive.</span>")
@@ -975,7 +975,7 @@
 /obj/item/rig/get_rig()
 	return src
 
-/mob/living/carbon/human/get_rig()
+/mob/living/human/get_rig()
 	if(istype(back, /obj/item/rig))
 		return back
 	else if(istype(belt, /obj/item/rig))

@@ -64,7 +64,7 @@
 
 /obj/item/clothing/accessory/poncho/equipped() /// Sets override, allows for mid-round changes && custom items. If you improve this code, please update paintkit.dm to accept it.
 	..()
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H) && H.wear_suit == src)
 		if(H.species.name == SPECIES_TESHARI)
 			icon_override = sprite_sheets[SPECIES_TESHARI]

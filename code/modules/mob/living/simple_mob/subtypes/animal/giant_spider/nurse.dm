@@ -58,7 +58,7 @@
 /mob/living/simple_mob/animal/giant_spider/nurse/inject_poison(mob/living/L, target_zone)
 	..() // Inject the stoxin here.
 	if(ishuman(L) && prob(egg_inject_chance))
-		var/mob/living/carbon/human/H = L
+		var/mob/living/human/H = L
 		var/obj/item/organ/external/O = H.get_organ(target_zone)
 		if(O)
 			var/eggcount = 0

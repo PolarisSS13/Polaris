@@ -123,7 +123,7 @@
 	else if(href_list["play"])
 		if(emagged)
 			playsound(src, 'sound/items/AirHorn.ogg', 100, 1)
-			for(var/mob/living/carbon/M in ohearers(6, src))
+			for(var/mob/living/human/M in ohearers(6, src))
 				if(M.get_sound_volume_multiplier() < 0.2)
 					continue
 				M.SetSleeping(0)

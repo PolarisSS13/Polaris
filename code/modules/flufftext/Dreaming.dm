@@ -18,7 +18,7 @@ var/global/list/dreams = list(
 	"unintelligible writings","a Fleet ship",
 	)
 
-/mob/living/carbon/proc/dream()
+/mob/living/human/proc/dream()
 	dreaming = 1
 
 	spawn(0)
@@ -31,8 +31,8 @@ var/global/list/dreams = list(
 		dreaming = 0
 		return
 
-/mob/living/carbon/proc/handle_dreams()
+/mob/living/human/proc/handle_dreams()
 	if(client && !dreaming && prob(5))
 		dream()
 
-/mob/living/carbon/var/dreaming = 0
+/mob/living/human/var/dreaming = 0

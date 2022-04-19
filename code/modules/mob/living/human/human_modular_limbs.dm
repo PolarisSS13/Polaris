@@ -17,7 +17,7 @@
 
 // Checks if a limb could theoretically be removed.
 // Note that this does not currently bother checking if a child or internal organ is vital.
-/obj/item/organ/external/proc/can_remove_modular_limb(var/mob/living/carbon/human/user)
+/obj/item/organ/external/proc/can_remove_modular_limb(var/mob/living/human/user)
 	if(vital || cannot_amputate)
 		return FALSE
 	var/bodypart_cat = get_modular_limb_category()
@@ -30,12 +30,12 @@
 	. = (bodypart_cat != MODULAR_BODYPART_INVALID)
 
 // Note that this proc is checking if the organ can be attached -to-, not attached itself.
-/obj/item/organ/external/proc/can_attach_modular_limb_here(var/mob/living/carbon/human/user)
+/obj/item/organ/external/proc/can_attach_modular_limb_here(var/mob/living/human/user)
 	var/list/limb_data = user?.species?.has_limbs[organ_tag]
 	if(islist(limb_data) && limb_data["has_children"] > 0)
 		. = (length(children) < limb_data["has_children"])
 
-/obj/item/organ/external/proc/can_be_attached_modular_limb(var/mob/living/carbon/user)
+/obj/item/organ/external/proc/can_be_attached_modular_limb(var/mob/living/human/user)
 	var/bodypart_cat = get_modular_limb_category()
 	if(bodypart_cat == MODULAR_BODYPART_INVALID)
 		return FALSE
@@ -51,13 +51,13 @@
 	return TRUE
 
 // Checks if an organ (or the parent of one) is in a fit state for modular limb stuff to happen.
-/obj/item/organ/external/proc/check_modular_limb_damage(var/mob/living/carbon/human/user)
+/obj/item/organ/external/proc/check_modular_limb_damage(var/mob/living/human/user)
 	. =  damage >= min_broken_damage || (status & ORGAN_BROKEN) || is_stump() // can't use is_broken() as the limb has ORGAN_CUT_AWAY
 
 // Human mob procs:
 // Checks the organ list for limbs meeting a predicate. Way overengineered for such a limited use 
 // case but I can see it being expanded in the future if meat limbs or doona limbs use it.
-/mob/living/carbon/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
+/mob/living/human/proc/get_modular_limbs(var/return_first_found = FALSE, var/validate_proc)
 	for(var/bp in organs)
 		var/obj/item/organ/external/E = bp
 		if(!validate_proc || call(E, validate_proc)(src) > MODULAR_BODYPART_INVALID)
@@ -73,7 +73,7 @@
 			. -= E.children
 
 // Called in robotize(), replaced() and removed() to update our modular limb verbs.
-/mob/living/carbon/human/proc/refresh_modular_limb_verbs()
+/mob/living/human/proc/refresh_modular_limb_verbs()
 	if(length(get_modular_limbs(return_first_found = TRUE, validate_proc = /obj/item/organ/external/proc/can_attach_modular_limb_here)))
 		verbs |= .proc/attach_limb_verb
 	else
@@ -84,7 +84,7 @@
 		verbs -= .proc/detach_limb_verb
 
 // Proc helper for attachment verb.
-/mob/living/carbon/human/proc/check_can_attach_modular_limb(var/obj/item/organ/external/E)
+/mob/living/human/proc/check_can_attach_modular_limb(var/obj/item/organ/external/E)
 	if(world.time < last_special + (2 SECONDS) || get_active_hand() != E)
 		return FALSE
 	if(incapacitated() || restrained())
@@ -116,7 +116,7 @@
 	return TRUE
 
 // Proc helper for detachment verb.
-/mob/living/carbon/human/proc/check_can_detach_modular_limb(var/obj/item/organ/external/E)
+/mob/living/human/proc/check_can_detach_modular_limb(var/obj/item/organ/external/E)
 	if(world.time < last_special + (2 SECONDS))
 		return FALSE
 	if(incapacitated() || restrained())
@@ -137,7 +137,7 @@
 
 // Verbs below:
 // Add or remove robotic limbs; check refresh_modular_limb_verbs() above.
-/mob/living/carbon/human/proc/attach_limb_verb()
+/mob/living/human/proc/attach_limb_verb()
 	set name = "Attach Limb"
 	set category = "Object"
 	set desc = "Attach a replacement limb."
@@ -166,7 +166,7 @@
 	regenerate_icons() // Not sure why this isn't called by removed(), but without it we don't update our limb appearance.
 	return TRUE
 
-/mob/living/carbon/human/proc/detach_limb_verb()
+/mob/living/human/proc/detach_limb_verb()
 	set name = "Remove Limb"
 	set category = "Object"
 	set desc = "Detach one of your limbs."

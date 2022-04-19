@@ -90,7 +90,7 @@
 	density = 1
 	anchored = 1
 	circuit = /obj/item/circuitboard/sleeper
-	var/mob/living/carbon/human/occupant = null
+	var/mob/living/human/occupant = null
 	var/list/available_chemicals = list()
 	var/list/base_chemicals = list("inaprovaline" = "Inaprovaline", "paracetamol" = "Paracetamol", "anti_toxin" = "Dylovene", "dexalin" = "Dexalin")
 	var/amounts = list(5, 10)

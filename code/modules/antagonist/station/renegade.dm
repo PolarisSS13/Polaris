@@ -75,7 +75,7 @@ var/global/datum/antagonist/renegade/renegades
 	survive.owner = player
 	player.objectives |= survive
 
-/datum/antagonist/renegade/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/renegade/equip(var/mob/living/human/player)
 
 	if(!..())
 		return
@@ -100,7 +100,7 @@ var/global/datum/antagonist/renegade/renegades
 /proc/rightandwrong()
 	to_chat(usr, "<B>You summoned guns!</B>")
 	message_admins("[key_name_admin(usr, 1)] summoned guns!")
-	for(var/mob/living/carbon/human/H in player_list)
+	for(var/mob/living/human/H in player_list)
 		if(H.stat == 2 || !(H.client)) continue
 		if(is_special_character(H)) continue
 		renegades.add_antagonist(H.mind)

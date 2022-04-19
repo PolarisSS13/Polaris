@@ -1,4 +1,4 @@
-/mob/living/carbon/human/examine(mob/user)
+/mob/living/human/examine(mob/user)
 	// . = ..() //Note that we don't call parent. We build the list by ourselves.
 
 	var/skip_gear = 0
@@ -273,7 +273,7 @@
 		msg += "<span class='warning'>[T.He] [T.is]n't responding to anything around [T.him] and seems to be asleep.</span>"
 		if((stat == 2 || src.losebreath) && get_dist(user, src) <= 3)
 			msg += "<span class='warning'>[T.He] [T.does] not appear to be breathing.</span>"
-		if(istype(user, /mob/living/carbon/human) && !user.stat && Adjacent(user))
+		if(istype(user, /mob/living/human) && !user.stat && Adjacent(user))
 			user.visible_message("<b>[usr]</b> checks [src]'s pulse.", "You check [src]'s pulse.")
 		spawn(15)
 			if(isobserver(user) || (Adjacent(user) && !user.stat)) // If you're a corpse then you can't exactly check their pulse, but ghosts can see anything
@@ -420,10 +420,10 @@
 
 	return msg
 
-//Helper procedure. Called by /mob/living/carbon/human/examine() and /mob/living/carbon/human/Topic() to determine HUD access to security and medical records.
+//Helper procedure. Called by /mob/living/human/examine() and /mob/living/human/Topic() to determine HUD access to security and medical records.
 /proc/hasHUD(mob/M as mob, hudtype)
-	if(istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
+	if(istype(M, /mob/living/human))
+		var/mob/living/human/H = M
 		switch(hudtype)
 			if("security")
 				return istype(H.glasses, /obj/item/clothing/glasses/hud/security) || istype(H.glasses, /obj/item/clothing/glasses/sunglasses/sechud)

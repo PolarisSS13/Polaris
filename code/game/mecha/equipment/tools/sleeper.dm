@@ -7,7 +7,7 @@
 	energy_drain = 20
 	range = MELEE
 	equip_cooldown = 30
-	var/mob/living/carbon/human/occupant = null
+	var/mob/living/human/occupant = null
 	var/inject_amount = 5
 	required_type = list(/obj/mecha/medical)
 	salvageable = 0
@@ -21,7 +21,7 @@
 /obj/item/mecha_parts/mecha_equipment/tool/sleeper/Exit(atom/movable/O)
 	return 0
 
-/obj/item/mecha_parts/mecha_equipment/tool/sleeper/action(var/mob/living/carbon/human/target)
+/obj/item/mecha_parts/mecha_equipment/tool/sleeper/action(var/mob/living/human/target)
 	if(!action_checks(target))
 		return
 	if(!istype(target))
@@ -219,7 +219,7 @@
 		log_message("Deactivated.")
 		occupant_message("[src] deactivated - no power.")
 		return PROCESS_KILL
-	var/mob/living/carbon/M = occupant
+	var/mob/living/human/M = occupant
 	if(!M)
 		return
 	if(M.health > 0)

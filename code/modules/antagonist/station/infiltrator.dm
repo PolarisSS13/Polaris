@@ -19,7 +19,7 @@ var/global/datum/antagonist/traitor/infiltrator/infiltrators
 	..()
 	infiltrators = src
 
-/datum/antagonist/traitor/infiltrator/equip(var/mob/living/carbon/human/traitor_mob)
+/datum/antagonist/traitor/infiltrator/equip(var/mob/living/human/traitor_mob)
 	..() // Give the uplink and other stuff.
 	// Now for the special headset.
 

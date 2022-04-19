@@ -280,7 +280,7 @@
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
 		if(ishuman(holder))
-			var/mob/living/carbon/human/H = holder
+			var/mob/living/human/H = holder
 			for(var/obj/item/organ/external/affecting in H.organs)
 				if(card in affecting.implants)
 					affecting.take_damage(rand(30,50))
@@ -423,7 +423,7 @@
 	return 0
 
 // Handle being picked up.
-/mob/living/silicon/pai/get_scooped(var/mob/living/carbon/grabber, var/self_drop)
+/mob/living/silicon/pai/get_scooped(var/mob/living/human/grabber, var/self_drop)
 	var/obj/item/holder/H = ..(grabber, self_drop)
 	if(!istype(H))
 		return

@@ -21,7 +21,7 @@
 	title = "Counselor"
 	title_blurb = "The Counselor attends to the emotional needs of the crew, without a specific medicinal or spiritual focus."
 
-/datum/job/chaplain/equip(var/mob/living/carbon/human/H, var/alt_title, var/ask_questions = TRUE)
+/datum/job/chaplain/equip(var/mob/living/human/H, var/alt_title, var/ask_questions = TRUE)
 	. = ..()
 	if(!.)
 		return
@@ -162,6 +162,6 @@
 	return 1
 
 /* If you uncomment this, every time the mob preview updates it makes a new PDA. It seems to work just fine and display without it, so why this exists, haven't a clue. -Hawk
-/datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title)
+/datum/job/chaplain/equip_preview(var/mob/living/human/H, var/alt_title)
 	return equip(H, alt_title, FALSE)
 */

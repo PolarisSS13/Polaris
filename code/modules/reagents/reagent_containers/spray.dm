@@ -244,7 +244,7 @@
 	if(InputSocket.get_pairing())
 		add_overlay(hose_overlay)
 
-/obj/item/reagent_containers/spray/chemsprayer/hosed/AltClick(mob/living/carbon/user)
+/obj/item/reagent_containers/spray/chemsprayer/hosed/AltClick(mob/living/human/user)
 	if(++spray_particles > 3) spray_particles = 1
 
 	to_chat(user, "<span class='notice'>You turn the dial on \the [src] to [spray_particles].</span>")

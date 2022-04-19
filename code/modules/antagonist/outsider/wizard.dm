@@ -70,7 +70,7 @@ var/global/datum/antagonist/wizard/wizards
 	wizard.current.real_name = "[pick(wizard_first)] [pick(wizard_second)]"
 	wizard.current.name = wizard.current.real_name
 
-/datum/antagonist/wizard/equip(var/mob/living/carbon/human/wizard_mob)
+/datum/antagonist/wizard/equip(var/mob/living/human/wizard_mob)
 
 	if(!..())
 		return 0
@@ -120,7 +120,7 @@ Made a proc so this is not repeated 14 (or more) times.*/
 	return 0
 
 // Humans can wear clothes.
-/mob/living/carbon/human/wearing_wiz_garb()
+/mob/living/human/wearing_wiz_garb()
 	if(!is_wiz_garb(src.wear_suit))
 		to_chat(src, "<span class='warning'>I don't feel strong enough without my robe.</span>")
 		return 0

@@ -6,62 +6,62 @@ var/global/list/wrapped_species_by_ref = list()
 /datum/species/shapeshifter
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/shapeshifter_select_shape,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair,
-		/mob/living/carbon/human/proc/shapeshifter_select_gender
+		/mob/living/human/proc/shapeshifter_select_shape,
+		/mob/living/human/proc/shapeshifter_select_hair,
+		/mob/living/human/proc/shapeshifter_select_gender
 		)
 
 	var/list/valid_transform_species = list()
 	var/monochromatic
 	var/default_form = SPECIES_HUMAN
 
-/datum/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_valid_shapeshifter_forms(var/mob/living/human/H)
 	return valid_transform_species
 
-/datum/species/shapeshifter/get_icobase(var/mob/living/carbon/human/H, var/get_deform)
+/datum/species/shapeshifter/get_icobase(var/mob/living/human/H, var/get_deform)
 	if(!H) return ..(null, get_deform)
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_icobase(H, get_deform)
 
-/datum/species/shapeshifter/get_race_key(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_race_key(var/mob/living/human/H)
 	return "[..()]-[wrapped_species_by_ref["\ref[H]"]]"
 
-/datum/species/shapeshifter/get_bodytype(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_bodytype(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_bodytype(H)
 
-/datum/species/shapeshifter/get_blood_mask(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_blood_mask(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_blood_mask(H)
 
-/datum/species/shapeshifter/get_damage_mask(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_damage_mask(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_damage_mask(H)
 
-/datum/species/shapeshifter/get_damage_overlays(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_damage_overlays(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_damage_overlays(H)
 
-/datum/species/shapeshifter/get_tail(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_tail(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_tail(H)
 
-/datum/species/shapeshifter/get_tail_animation(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_tail_animation(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_tail_animation(H)
 
-/datum/species/shapeshifter/get_tail_hair(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/get_tail_hair(var/mob/living/human/H)
 	if(!H) return ..()
 	var/datum/species/S = GLOB.all_species[wrapped_species_by_ref["\ref[H]"]]
 	return S.get_tail_hair(H)
 
-/datum/species/shapeshifter/handle_post_spawn(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/handle_post_spawn(var/mob/living/human/H)
 	..()
 	wrapped_species_by_ref["\ref[H]"] = default_form
 	if(monochromatic)
@@ -76,7 +76,7 @@ var/global/list/wrapped_species_by_ref = list()
 		E.sync_colour_to_human(H)
 
 // Verbs follow.
-/mob/living/carbon/human/proc/shapeshifter_select_hair()
+/mob/living/human/proc/shapeshifter_select_hair()
 
 	set name = "Select Hair"
 	set category = "Abilities"
@@ -120,7 +120,7 @@ var/global/list/wrapped_species_by_ref = list()
 		var/new_hair = input("Select a facial hair style.", "Shapeshifter Hair") as null|anything in valid_facialhairstyles
 		change_facial_hair(new_hair ? new_hair : "Shaved")
 
-/mob/living/carbon/human/proc/shapeshifter_select_gender()
+/mob/living/human/proc/shapeshifter_select_gender()
 
 	set name = "Select Gender"
 	set category = "Abilities"
@@ -142,7 +142,7 @@ var/global/list/wrapped_species_by_ref = list()
 	change_gender(new_gender)
 	change_gender_identity(new_gender_identity)
 
-/mob/living/carbon/human/proc/shapeshifter_select_shape()
+/mob/living/human/proc/shapeshifter_select_shape()
 
 	set name = "Select Body Shape"
 	set category = "Abilities"
@@ -159,7 +159,7 @@ var/global/list/wrapped_species_by_ref = list()
 		return
 	shapeshifter_change_shape(new_species)
 
-/mob/living/carbon/human/proc/shapeshifter_change_shape(var/new_species = null)
+/mob/living/human/proc/shapeshifter_change_shape(var/new_species = null)
 	if(!new_species)
 		return
 
@@ -167,7 +167,7 @@ var/global/list/wrapped_species_by_ref = list()
 	visible_message("<span class='notice'>\The [src] shifts and contorts, taking the form of \a [new_species]!</span>")
 	regenerate_icons()
 
-/mob/living/carbon/human/proc/shapeshifter_select_colour()
+/mob/living/human/proc/shapeshifter_select_colour()
 
 	set name = "Select Body Colour"
 	set category = "Abilities"
@@ -182,7 +182,7 @@ var/global/list/wrapped_species_by_ref = list()
 		return
 	shapeshifter_set_colour(new_skin)
 
-/mob/living/carbon/human/proc/shapeshifter_set_colour(var/new_skin)
+/mob/living/human/proc/shapeshifter_set_colour(var/new_skin)
 
 	r_skin =   hex2num(copytext(new_skin, 2, 4))
 	g_skin =   hex2num(copytext(new_skin, 4, 6))
@@ -205,7 +205,7 @@ var/global/list/wrapped_species_by_ref = list()
 
 	regenerate_icons()
 
-/mob/living/carbon/human/proc/shapeshifter_select_hair_colors()
+/mob/living/human/proc/shapeshifter_select_hair_colors()
 
 	set name = "Select Hair Colors"
 	set category = "Abilities"
@@ -228,20 +228,20 @@ var/global/list/wrapped_species_by_ref = list()
 		return
 	shapeshifter_set_facial_color(new_fhair)
 
-/mob/living/carbon/human/proc/shapeshifter_set_hair_color(var/new_hair)
+/mob/living/human/proc/shapeshifter_set_hair_color(var/new_hair)
 
 	change_hair_color(hex2num(copytext(new_hair, 2, 4)), hex2num(copytext(new_hair, 4, 6)), hex2num(copytext(new_hair, 6, 8)))
 
-/mob/living/carbon/human/proc/shapeshifter_set_grad_color(var/new_grad)
+/mob/living/human/proc/shapeshifter_set_grad_color(var/new_grad)
 
 	change_grad_color(hex2num(copytext(new_grad, 2, 4)), hex2num(copytext(new_grad, 4, 6)), hex2num(copytext(new_grad, 6, 8)))
 
-/mob/living/carbon/human/proc/shapeshifter_set_facial_color(var/new_fhair)
+/mob/living/human/proc/shapeshifter_set_facial_color(var/new_fhair)
 
 	change_facial_hair_color(hex2num(copytext(new_fhair, 2, 4)), hex2num(copytext(new_fhair, 4, 6)), hex2num(copytext(new_fhair, 6, 8)))
 
 // Replaces limbs and copies wounds
-/mob/living/carbon/human/proc/shapeshifter_change_species(var/new_species)
+/mob/living/human/proc/shapeshifter_change_species(var/new_species)
 	if(!species)
 		return
 
@@ -303,7 +303,7 @@ var/global/list/wrapped_species_by_ref = list()
 		apply_traits()
 	return
 
-/mob/living/carbon/human/proc/shapeshifter_select_eye_colour()
+/mob/living/human/proc/shapeshifter_select_eye_colour()
 
 	set name = "Select Eye Color"
 	set category = "Abilities"
@@ -320,7 +320,7 @@ var/global/list/wrapped_species_by_ref = list()
 	
 	shapeshifter_set_eye_color(new_eyes)
 
-/mob/living/carbon/human/proc/shapeshifter_set_eye_color(var/new_eyes)
+/mob/living/human/proc/shapeshifter_set_eye_color(var/new_eyes)
 	
 	var/list/new_color_rgb_list = rgb2num(new_eyes)
 	// First, update mob vars.

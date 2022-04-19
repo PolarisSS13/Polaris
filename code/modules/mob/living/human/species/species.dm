@@ -305,12 +305,12 @@
 	if(gluttonous)
 		if(!inherent_verbs)
 			inherent_verbs = list()
-		inherent_verbs |= /mob/living/carbon/human/proc/regurgitate
+		inherent_verbs |= /mob/living/human/proc/regurgitate
 
 /datum/species/proc/sanitize_name(var/name, var/robot = 0)
 	return sanitizeName(name, MAX_NAME_LEN, robot)
 
-/datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 0,var/comprehensive = 0)
+/datum/species/proc/equip_survival_gear(var/mob/living/human/H,var/extendedtank = 0,var/comprehensive = 0)
 	var/boxtype = /obj/item/storage/box/survival //Default survival box
 
 	var/synth = H.isSynthetic()
@@ -353,7 +353,7 @@
 	else
 		H.equip_to_slot_or_del(box, slot_in_backpack)
 
-/datum/species/proc/create_organs(var/mob/living/carbon/human/H) //Handles creation of mob organs.
+/datum/species/proc/create_organs(var/mob/living/human/H) //Handles creation of mob organs.
 
 	H.mob_size = mob_size
 	for(var/obj/item/organ/organ in H.contents)
@@ -388,11 +388,11 @@
 		H.internal_organs_by_name[organ_tag] = O
 
 
-/datum/species/proc/hug(var/mob/living/carbon/human/H, var/mob/living/target)
+/datum/species/proc/hug(var/mob/living/human/H, var/mob/living/target)
 
 	var/t_him = "them"
 	if(ishuman(target))
-		var/mob/living/carbon/human/T = target
+		var/mob/living/human/T = target
 		if(!T.species.ambiguous_genders || (T.species.ambiguous_genders && H.species == T.species))
 			switch(T.identifying_gender)
 				if(MALE)
@@ -425,42 +425,42 @@
 		H.visible_message("<span class='notice'>[H] hugs [target] to make [t_him] feel better!</span>", \
 						"<span class='notice'>You hug [target] to make [t_him] feel better!</span>")
 
-/datum/species/proc/remove_inherent_verbs(var/mob/living/carbon/human/H)
+/datum/species/proc/remove_inherent_verbs(var/mob/living/human/H)
 	if(inherent_verbs)
 		for(var/verb_path in inherent_verbs)
 			H.verbs -= verb_path
 	return
 
-/datum/species/proc/add_inherent_verbs(var/mob/living/carbon/human/H)
+/datum/species/proc/add_inherent_verbs(var/mob/living/human/H)
 	if(inherent_verbs)
 		for(var/verb_path in inherent_verbs)
 			H.verbs |= verb_path
 	return
 
-/datum/species/proc/handle_post_spawn(var/mob/living/carbon/human/H) //Handles anything not already covered by basic species assignment.
+/datum/species/proc/handle_post_spawn(var/mob/living/human/H) //Handles anything not already covered by basic species assignment.
 	add_inherent_verbs(H)
 	H.mob_bump_flag = bump_flag
 	H.mob_swap_flags = swap_flags
 	H.mob_push_flags = push_flags
 	H.pass_flags = pass_flags
 
-/datum/species/proc/handle_death(var/mob/living/carbon/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
+/datum/species/proc/handle_death(var/mob/living/human/H) //Handles any species-specific death events (such as dionaea nymph spawns).
 	return
 
 // Only used for alien plasma weeds atm, but could be used for Dionaea later.
-/datum/species/proc/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/proc/handle_environment_special(var/mob/living/human/H)
 	return
 
 // Used to update alien icons for aliens.
-/datum/species/proc/handle_login_special(var/mob/living/carbon/human/H)
+/datum/species/proc/handle_login_special(var/mob/living/human/H)
 	return
 
 // As above.
-/datum/species/proc/handle_logout_special(var/mob/living/carbon/human/H)
+/datum/species/proc/handle_logout_special(var/mob/living/human/H)
 	return
 
 // Builds the HUD using species-specific icons and usable slots.
-/datum/species/proc/build_hud(var/mob/living/carbon/human/H)
+/datum/species/proc/build_hud(var/mob/living/human/H)
 	return
 
 //Used by xenos understanding larvae and dionaea understanding nymphs.
@@ -468,7 +468,7 @@
 	return
 
 // Called when using the shredding behavior.
-/datum/species/proc/can_shred(var/mob/living/carbon/human/H, var/ignore_intent)
+/datum/species/proc/can_shred(var/mob/living/human/H, var/ignore_intent)
 
 	if(!ignore_intent && H.a_intent != I_HURT)
 		return 0
@@ -482,7 +482,7 @@
 	return 0
 
 // Called in life() when the mob has no client.
-/datum/species/proc/handle_npc(var/mob/living/carbon/human/H)
+/datum/species/proc/handle_npc(var/mob/living/human/H)
 	if(H.stat == CONSCIOUS && H.ai_holder)
 		if(H.resting)
 			H.resting = FALSE
@@ -494,23 +494,23 @@
 	return FALSE
 
 // Impliments different trails for species depending on if they're wearing shoes.
-/datum/species/proc/get_move_trail(var/mob/living/carbon/human/H)
+/datum/species/proc/get_move_trail(var/mob/living/human/H)
 	if( H.shoes || ( H.wear_suit && (H.wear_suit.body_parts_covered & FEET) ) )
 		return /obj/effect/decal/cleanable/blood/tracks/footprints
 	else
 		return move_trail
 
-/datum/species/proc/update_skin(var/mob/living/carbon/human/H)
+/datum/species/proc/update_skin(var/mob/living/human/H)
 	return
 
-/datum/species/proc/get_eyes(var/mob/living/carbon/human/H)
+/datum/species/proc/get_eyes(var/mob/living/human/H)
 	return
 
-/datum/species/proc/can_overcome_gravity(var/mob/living/carbon/human/H)
+/datum/species/proc/can_overcome_gravity(var/mob/living/human/H)
 	return FALSE
 
 // Used for any extra behaviour when falling and to see if a species will fall at all.
-/datum/species/proc/can_fall(var/mob/living/carbon/human/H)
+/datum/species/proc/can_fall(var/mob/living/human/H)
 	return TRUE
 
 // Used to find a special target for falling on, such as pouncing on someone from above.
@@ -518,18 +518,18 @@
 	return FALSE
 
 // Used to override normal fall behaviour. Use only when the species does fall down a level.
-/datum/species/proc/fall_impact_special(var/mob/living/carbon/human/H, var/atom/A)
+/datum/species/proc/fall_impact_special(var/mob/living/human/H, var/atom/A)
 	return FALSE
 
 // Allow species to display interesting information in the human stat panels
-/datum/species/proc/Stat(var/mob/living/carbon/human/H)
+/datum/species/proc/Stat(var/mob/living/human/H)
 	return
 
-/datum/species/proc/handle_water_damage(var/mob/living/carbon/human/H, var/amount = 0)
+/datum/species/proc/handle_water_damage(var/mob/living/human/H, var/amount = 0)
 	amount *= 1 - H.get_water_protection()
 	amount *= water_damage_mod
 	if(amount > 0)
 		H.adjustToxLoss(amount)
 
-/datum/species/proc/handle_falling(mob/living/carbon/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
+/datum/species/proc/handle_falling(mob/living/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
 	return FALSE

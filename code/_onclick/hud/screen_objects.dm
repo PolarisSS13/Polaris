@@ -263,7 +263,7 @@
 			if (istype(usr.loc,/obj/mecha)) // stops inventory actions in a mech
 				return 1
 			if(ishuman(usr))
-				var/mob/living/carbon/human/H = usr
+				var/mob/living/human/H = usr
 				H.quick_equip()
 
 		if("resist")
@@ -273,8 +273,8 @@
 
 		if("mov_intent")
 			if(isliving(usr))
-				if(iscarbon(usr))
-					var/mob/living/carbon/C = usr
+				if(ishuman(usr))
+					var/mob/living/human/C = usr
 					if(C.legcuffed)
 						to_chat(C, "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>")
 						C.m_intent = "walk"	//Just incase
@@ -311,8 +311,8 @@
 		if("Reset Machine")
 			usr.unset_machine()
 		if("internal")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
+			if(ishuman(usr))
+				var/mob/living/human/C = usr
 				if(!C.stat && !C.stunned && !C.paralysis && !C.restrained())
 					if(C.internal)
 						C.internal = null
@@ -323,7 +323,7 @@
 
 						var/no_mask
 						if(!(C.wear_mask && C.wear_mask.item_flags & AIRTIGHT))
-							var/mob/living/carbon/human/H = C
+							var/mob/living/human/H = C
 							if(!(H.head && H.head.item_flags & AIRTIGHT))
 								no_mask = 1
 
@@ -338,7 +338,7 @@
 							var/from = "on"
 
 							if(ishuman(C))
-								var/mob/living/carbon/human/H = C
+								var/mob/living/human/H = C
 								breathes = H.species.breath_type
 								nicename = list ("suit", "back", "belt", "right hand", "left hand", "left pocket", "right pocket")
 								tankcheck = list (H.s_store, C.back, H.belt, C.r_hand, C.l_hand, H.l_store, H.r_store)
@@ -570,12 +570,12 @@
 		return 1
 	switch(name)
 		if("r_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
+			if(ishuman(usr))
+				var/mob/living/human/C = usr
 				C.activate_hand("r")
 		if("l_hand")
-			if(iscarbon(usr))
-				var/mob/living/carbon/C = usr
+			if(ishuman(usr))
+				var/mob/living/human/C = usr
 				C.activate_hand("l")
 		if("swap")
 			usr:swap_hand()
@@ -844,10 +844,10 @@
 	var/static/list/ammo_screen_loc_list = list(ui_ammo_hud1, ui_ammo_hud2, ui_ammo_hud3 ,ui_ammo_hud4)
 
 /obj/screen/ammo/proc/add_hud(var/mob/living/user, var/obj/item/gun/G)
-	
+
 	if(!user?.client)
 		return
-	
+
 	if(!G)
 		CRASH("/obj/screen/ammo/proc/add_hud() has been called from [src] without the required param of G")
 

@@ -1,4 +1,4 @@
-/mob/living/carbon/brain/handle_mutations_and_radiation()
+/mob/living/brain/handle_mutations_and_radiation()
 	if (radiation)
 		if (radiation > 100)
 			radiation = 100
@@ -31,7 +31,7 @@
 				updatehealth()
 
 
-/mob/living/carbon/brain/handle_environment(datum/gas_mixture/environment)
+/mob/living/brain/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
 	var/environment_heat_capacity = environment.heat_capacity()
@@ -51,7 +51,7 @@
 
 	return //TODO: DEFERRED
 
-/mob/living/carbon/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
+/mob/living/brain/proc/handle_temperature_damage(body_part, exposed_temperature, exposed_intensity)
 	if(status_flags & GODMODE) return
 
 	if(exposed_temperature > bodytemperature)
@@ -65,7 +65,7 @@
 		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
-/mob/living/carbon/brain/handle_regular_status_updates()
+/mob/living/brain/handle_regular_status_updates()
 	// decrement dizziness counter, clamped to 0
 	dizziness = max(0, dizziness - (resting ? 5 : 1))
 	updatehealth()
@@ -135,7 +135,7 @@
 
 	return 1
 
-/mob/living/carbon/brain/handle_regular_hud_updates()
+/mob/living/brain/handle_regular_hud_updates()
 	if (stat == 2 || (XRAY in src.mutations))
 		sight |= SEE_TURFS
 		sight |= SEE_MOBS

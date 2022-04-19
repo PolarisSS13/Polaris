@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR,
+/mob/living/human/proc/change_appearance(var/flags = APPEARANCE_ALL_HAIR,
 												var/mob/user = src,
 												var/check_species_whitelist = 1,
 												var/list/species_whitelist = list(),
@@ -8,7 +8,7 @@
 	AC.flags = flags
 	AC.tgui_interact(user, custom_state = state)
 
-/mob/living/carbon/human/proc/change_species(var/new_species)
+/mob/living/human/proc/change_species(var/new_species)
 	if(!new_species)
 		return
 
@@ -22,7 +22,7 @@
 	reset_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_gender(var/gender)
+/mob/living/human/proc/change_gender(var/gender)
 	if(src.gender == gender)
 		return
 
@@ -32,14 +32,14 @@
 	update_icons_body()
 	return 1
 
-/mob/living/carbon/human/proc/change_gender_identity(var/identifying_gender)
+/mob/living/human/proc/change_gender_identity(var/identifying_gender)
 	if(src.identifying_gender == identifying_gender)
 		return
 
 	src.identifying_gender = identifying_gender
 	return 1
 
-/mob/living/carbon/human/proc/change_hair(var/hair_style)
+/mob/living/human/proc/change_hair(var/hair_style)
 	if(!hair_style)
 		return
 
@@ -54,7 +54,7 @@
 	update_hair()
 	return 1
 	
-/mob/living/carbon/human/proc/change_hair_gradient(var/hair_gradient)
+/mob/living/human/proc/change_hair_gradient(var/hair_gradient)
 	if(!hair_gradient)
 		return
 
@@ -69,7 +69,7 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_facial_hair(var/facial_hair_style)
+/mob/living/human/proc/change_facial_hair(var/facial_hair_style)
 	if(!facial_hair_style)
 		return
 
@@ -84,7 +84,7 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/reset_hair()
+/mob/living/human/proc/reset_hair()
 	var/list/valid_hairstyles = generate_valid_hairstyles()
 	var/list/valid_facial_hairstyles = generate_valid_facial_hairstyles()
 
@@ -102,7 +102,7 @@
 
 	update_hair()
 
-/mob/living/carbon/human/proc/change_eye_color(var/red, var/green, var/blue)
+/mob/living/human/proc/change_eye_color(var/red, var/green, var/blue)
 	if(red == r_eyes && green == g_eyes && blue == b_eyes)
 		return
 
@@ -114,7 +114,7 @@
 	update_icons_body()
 	return 1
 
-/mob/living/carbon/human/proc/change_hair_color(var/red, var/green, var/blue)
+/mob/living/human/proc/change_hair_color(var/red, var/green, var/blue)
 	if(red == r_hair && green == g_hair && blue == b_hair)
 		return
 
@@ -125,7 +125,7 @@
 	update_hair()
 	return 1
 	
-/mob/living/carbon/human/proc/change_grad_color(var/red, var/green, var/blue)
+/mob/living/human/proc/change_grad_color(var/red, var/green, var/blue)
 	if(red == r_grad && green == g_grad && blue == b_grad)
 		return
 
@@ -136,7 +136,7 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_facial_hair_color(var/red, var/green, var/blue)
+/mob/living/human/proc/change_facial_hair_color(var/red, var/green, var/blue)
 	if(red == r_facial && green == g_facial && blue == b_facial)
 		return
 
@@ -147,7 +147,7 @@
 	update_hair()
 	return 1
 
-/mob/living/carbon/human/proc/change_skin_color(var/red, var/green, var/blue)
+/mob/living/human/proc/change_skin_color(var/red, var/green, var/blue)
 	if(red == r_skin && green == g_skin && blue == b_skin || !(species.appearance_flags & HAS_SKIN_COLOR))
 		return
 
@@ -159,7 +159,7 @@
 	update_icons_body()
 	return 1
 
-/mob/living/carbon/human/proc/change_skin_tone(var/tone)
+/mob/living/human/proc/change_skin_tone(var/tone)
 	if(s_tone == tone || !(species.appearance_flags & HAS_SKIN_TONE))
 		return
 
@@ -169,13 +169,13 @@
 	update_icons_body()
 	return 1
 
-/mob/living/carbon/human/proc/update_dna()
+/mob/living/human/proc/update_dna()
 	check_dna()
 	dna.ready_dna(src)
 	for(var/obj/item/organ/O in organs)
 		O.dna = dna // Update all of those because apparently they're separate, and icons won't update properly
 
-/mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
+/mob/living/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
 	for(var/current_species_name in GLOB.all_species)
 		var/datum/species/current_species = GLOB.all_species[current_species_name]
@@ -194,7 +194,7 @@
 
 	return valid_species
 
-/mob/living/carbon/human/proc/generate_valid_hairstyles(var/check_gender = 1)
+/mob/living/human/proc/generate_valid_hairstyles(var/check_gender = 1)
 
 	var/use_species = species.get_bodytype(src)
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
@@ -216,7 +216,7 @@
 
 	return valid_hairstyles
 
-/mob/living/carbon/human/proc/generate_valid_facial_hairstyles()
+/mob/living/human/proc/generate_valid_facial_hairstyles()
 
 	var/use_species = species.get_bodytype(src)
 	var/obj/item/organ/external/head/H = get_organ(BP_HEAD)
@@ -239,7 +239,7 @@
 
 	return valid_facial_hairstyles
 
-/mob/living/carbon/human/proc/force_update_limbs()
+/mob/living/human/proc/force_update_limbs()
 	for(var/obj/item/organ/external/O in organs)
 		O.sync_colour_to_human(src)
 	update_icons_body(FALSE)

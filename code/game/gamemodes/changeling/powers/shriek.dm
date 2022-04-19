@@ -32,7 +32,7 @@
 		return 0
 
 	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
+		var/mob/living/human/H = src
 		if(H.silent)
 			to_chat(src, "<span class='danger'>You can't speak!</span>")
 			return 0
@@ -56,7 +56,7 @@
 	visible_message("<span class='notice'>[src] appears to shout.</span>")
 	var/list/affected = list()
 	for(var/mob/living/M in range(range, src))
-		if(iscarbon(M))
+		if(ishuman(M))
 			if(!M.mind || !M.mind.changeling)
 				if(M.get_ear_protection() >= 2)
 					continue
@@ -101,7 +101,7 @@
 		return 0
 
 	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
+		var/mob/living/human/H = src
 		if(H.silent)
 			to_chat(src, "<span class='danger'>You can't speak!</span>")
 			return 0

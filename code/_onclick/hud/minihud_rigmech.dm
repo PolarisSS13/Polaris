@@ -145,7 +145,7 @@
 	screen_loc = ui_rig_airtoggle
 
 /obj/screen/rig/airtoggle/Click()
-	var/mob/living/carbon/human/user = usr
+	var/mob/living/human/user = usr
 	if(!istype(user) || user.stat || user.incapacitated())
 		return
 	var/obj/item/rig/owner_rig = master
@@ -197,7 +197,7 @@
 	screen_loc = ui_mech_airtoggle
 
 /obj/screen/mech/airtoggle/Click()
-	var/mob/living/carbon/human/user = usr
+	var/mob/living/human/user = usr
 	if(!istype(user) || user.stat || user.incapacitated())
 		return
 	var/obj/mecha/owner_mech = master

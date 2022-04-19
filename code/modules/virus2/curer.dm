@@ -10,7 +10,7 @@
 
 /obj/machinery/computer/curer/attackby(var/obj/I as obj, var/mob/user as mob)
 	if(istype(I,/obj/item/reagent_containers))
-		var/mob/living/carbon/C = user
+		var/mob/living/human/C = user
 		if(!container)
 			container = I
 			C.drop_item()

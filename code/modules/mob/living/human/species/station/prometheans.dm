@@ -106,13 +106,13 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	cold_discomfort_strings = list("You feel too cool.")
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/shapeshifter_select_shape,
-		/mob/living/carbon/human/proc/shapeshifter_select_colour,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair,
-		/mob/living/carbon/human/proc/shapeshifter_select_eye_colour,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair_colors,
-		/mob/living/carbon/human/proc/shapeshifter_select_gender,
-		/mob/living/carbon/human/proc/regenerate
+		/mob/living/human/proc/shapeshifter_select_shape,
+		/mob/living/human/proc/shapeshifter_select_colour,
+		/mob/living/human/proc/shapeshifter_select_hair,
+		/mob/living/human/proc/shapeshifter_select_eye_colour,
+		/mob/living/human/proc/shapeshifter_select_hair_colors,
+		/mob/living/human/proc/shapeshifter_select_gender,
+		/mob/living/human/proc/regenerate
 		)
 
 	valid_transform_species = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_TESHARI, SPECIES_MONKEY)
@@ -132,7 +132,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	..()
 	prometheans = src
 
-/datum/species/shapeshifter/promethean/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/equip_survival_gear(var/mob/living/human/H)
 	var/boxtype = pick(list(/obj/item/storage/toolbox/lunchbox,
 							/obj/item/storage/toolbox/lunchbox/heart,
 							/obj/item/storage/toolbox/lunchbox/cat,
@@ -148,11 +148,11 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	else
 		H.equip_to_slot_or_del(L, slot_in_backpack)
 
-/datum/species/shapeshifter/promethean/hug(var/mob/living/carbon/human/H, var/mob/living/target)
+/datum/species/shapeshifter/promethean/hug(var/mob/living/human/H, var/mob/living/target)
 
 	var/t_him = "them"
 	if(ishuman(target))
-		var/mob/living/carbon/human/T = target
+		var/mob/living/human/T = target
 		switch(T.identifying_gender)
 			if(MALE)
 				t_him = "him"
@@ -169,12 +169,12 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 					"<span class='notice'>You glomp [target] to make [t_him] feel better!</span>")
 	H.apply_stored_shock_to(target)
 
-/datum/species/shapeshifter/promethean/handle_death(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/handle_death(var/mob/living/human/H)
 	spawn(1)
 		if(H)
 			H.gib()
 
-/datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/handle_environment_special(var/mob/living/human/H)
 	var/healing = TRUE	// Switches to FALSE if healing is not possible at all.
 	var/regen_brute = TRUE
 	var/regen_burn = TRUE
@@ -309,13 +309,13 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 			if((starve_mod <= 0.5 && (H.getHalLoss() + agony_to_apply) <= 90) || ((H.getHalLoss() + agony_to_apply) <= 70))	// Will max out at applying halloss at 70, unless they are starving; starvation regeneration will bring them up to a maximum of 120, the same amount of agony a human receives from three taser hits.
 				H.apply_damage(agony_to_apply, HALLOSS)
 
-/datum/species/shapeshifter/promethean/get_blood_colour(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/get_blood_colour(var/mob/living/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
 
-/datum/species/shapeshifter/promethean/get_flesh_colour(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/get_flesh_colour(var/mob/living/human/H)
 	return (H ? rgb(H.r_skin, H.g_skin, H.b_skin) : ..())
 
-/datum/species/shapeshifter/promethean/get_additional_examine_text(var/mob/living/carbon/human/H)
+/datum/species/shapeshifter/promethean/get_additional_examine_text(var/mob/living/human/H)
 
 	if(!stored_shock_by_ref["\ref[H]"])
 		return

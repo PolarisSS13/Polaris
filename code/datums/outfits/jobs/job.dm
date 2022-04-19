@@ -13,7 +13,7 @@
 
 	flags = OUTFIT_HAS_BACKPACK
 
-/decl/hierarchy/outfit/job/equip_id(mob/living/carbon/human/H, rank, assignment)
+/decl/hierarchy/outfit/job/equip_id(mob/living/human/H, rank, assignment)
 	var/obj/item/card/id/C = ..()
 	var/datum/job/J = job_master.GetJob(rank)
 	if(J)

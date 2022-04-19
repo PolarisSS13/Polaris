@@ -104,7 +104,7 @@ INITIALIZE_IMMEDIATE(/mob/zshadow)
 
 // WARNING - the true carbon/human/update_icons does not call ..(), therefore we must sideways override this.
 // But be careful, we don't want to screw with that proc.  So lets be cautious about what we do here.
-/mob/living/carbon/human/update_icons()
+/mob/living/human/update_icons()
 	. = ..()
 	if(shadow)
 		shadow.sync_icon(src)

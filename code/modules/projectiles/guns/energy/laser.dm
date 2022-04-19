@@ -290,7 +290,7 @@
 	battery_lock = 1
 	var/required_vest
 
-/obj/item/gun/energy/lasertag/special_check(var/mob/living/carbon/human/M)
+/obj/item/gun/energy/lasertag/special_check(var/mob/living/human/M)
 	if(ishuman(M))
 		if(!istype(M.wear_suit, required_vest))
 			to_chat(M, "<span class='warning'>You need to be wearing your laser tag vest!</span>")

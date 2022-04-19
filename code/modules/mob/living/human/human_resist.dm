@@ -1,4 +1,4 @@
-/mob/living/carbon/human/resist_restraints()
+/mob/living/human/resist_restraints()
 	if(wear_suit && istype(wear_suit, /obj/item/clothing/suit/straight_jacket))
 		return escape_straight_jacket()
 	return ..()
@@ -7,14 +7,14 @@
 #define RESIST_ATTACK_CLAWS		1
 #define RESIST_ATTACK_BITE		2
 
-/mob/living/carbon/human/proc/escape_straight_jacket()
+/mob/living/human/proc/escape_straight_jacket()
 	setClickCooldown(100)
 
 	if(can_break_straight_jacket())
 		break_straight_jacket()
 		return
 
-	var/mob/living/carbon/human/H = src
+	var/mob/living/human/H = src
 	var/obj/item/clothing/suit/straight_jacket/SJ = H.wear_suit
 
 	var/breakouttime = SJ.resist_time	// Configurable per-jacket!
@@ -64,11 +64,11 @@
 #undef RESIST_ATTACK_CLAWS
 #undef RESIST_ATTACK_BITE
 
-/mob/living/carbon/human/proc/can_break_straight_jacket()
+/mob/living/human/proc/can_break_straight_jacket()
 	if((HULK in mutations) || species.can_shred(src,1))
 		return 1
 
-/mob/living/carbon/human/proc/break_straight_jacket()
+/mob/living/human/proc/break_straight_jacket()
 	visible_message(
 		"<span class='danger'>[src] is trying to rip \the [wear_suit]!</span>",
 		"<span class='warning'>You attempt to rip your [wear_suit.name] apart. (This will take around 5 seconds and you need to stand still)</span>"
@@ -90,10 +90,10 @@
 		if(buckled && buckled.buckle_require_restraints)
 			buckled.unbuckle_mob()
 
-/mob/living/carbon/human/proc/can_break_cuffs()
+/mob/living/human/proc/can_break_cuffs()
 	return species.can_shred(src,1)
 
-/mob/living/carbon/human/resist_fire()
+/mob/living/human/resist_fire()
 	adjust_fire_stacks(-1.2)
 	Weaken(3)
 	spin(32,2)
@@ -110,7 +110,7 @@
 		ExtinguishMob()
 	return TRUE
 
-/mob/living/carbon/human/resist_restraints()
+/mob/living/human/resist_restraints()
 	var/obj/item/I = null
 	if(handcuffed)
 		I = handcuffed
@@ -121,7 +121,7 @@
 		setClickCooldown(100)
 		cuff_resist(I, cuff_break = can_break_cuffs())
 
-/mob/living/carbon/human/proc/cuff_resist(obj/item/handcuffs/I, breakouttime = 1200, cuff_break = 0)
+/mob/living/human/proc/cuff_resist(obj/item/handcuffs/I, breakouttime = 1200, cuff_break = 0)
 	
 	if(istype(I))
 		breakouttime = I.breakouttime
@@ -166,7 +166,7 @@
 			"<span class='notice'>You successfully remove [I].</span>")
 		drop_from_inventory(I)
 	
-/mob/living/carbon/human/resist_buckle()
+/mob/living/human/resist_buckle()
 	if(!buckled)
 		return
 
@@ -186,7 +186,7 @@
 						"<span class='notice'>You successfully unbuckle yourself.</span>")
 		buckled.user_unbuckle_mob(src, src)
 
-/mob/living/carbon/human/proc/update_handcuffed()
+/mob/living/human/proc/update_handcuffed()
 	if(handcuffed)
 		drop_l_hand()
 		drop_r_hand()

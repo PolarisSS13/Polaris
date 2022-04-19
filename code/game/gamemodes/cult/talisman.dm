@@ -43,7 +43,7 @@
 		return
 
 
-/obj/item/paper/talisman/attack(mob/living/carbon/T as mob, mob/living/user as mob)
+/obj/item/paper/talisman/attack(mob/living/human/T as mob, mob/living/user as mob)
 	if(iscultist(user))
 		if(imbue == "runestun")
 			user.take_organ_damage(5, 0)

@@ -20,7 +20,7 @@
 	clickvol = 30
 
 	var/temperature_archived
-	var/mob/living/carbon/occupant = null
+	var/mob/living/human/occupant = null
 	var/obj/item/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
@@ -276,7 +276,7 @@
 	SStgui.update_uis(src)
 	return
 
-/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/carbon/M as mob)
+/obj/machinery/atmospherics/unary/cryo_cell/proc/put_mob(mob/living/human/M as mob)
 	if(stat & (NOPOWER|BROKEN))
 		to_chat(usr, "<span class='warning'>The cryo cell is not functioning.</span>")
 		return

@@ -54,7 +54,7 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
-/datum/species/monkey/handle_npc(var/mob/living/carbon/human/H)
+/datum/species/monkey/handle_npc(var/mob/living/human/H)
 	if(H.stat != CONSCIOUS)
 		return
 	if(prob(33) && H.canmove && isturf(H.loc) && !H.pulledby) //won't move if being pulled

@@ -34,14 +34,10 @@
 
 	..()
 
-	if(!data["donor"] || istype(data["donor"], /mob/living/carbon/human))
+	if(!data["donor"] || istype(data["donor"], /mob/living/human))
 		blood_splatter(T, src, 1)
-	else if(istype(data["donor"], /mob/living/carbon/alien))
-		var/obj/effect/decal/cleanable/blood/B = blood_splatter(T, src, 1)
-		if(B)
-			B.blood_DNA["UNKNOWN DNA STRUCTURE"] = "X*"
 
-/datum/reagent/blood/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/blood/affect_ingest(var/mob/living/human/M, var/alien, var/removed)
 
 	var/effective_dose = dose
 	if(issmall(M)) effective_dose *= 2
@@ -70,9 +66,9 @@
 				if(V.spreadtype == "Contact")
 					infect_virus2(M, V.getcopy())
 
-/datum/reagent/blood/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/blood/affect_touch(var/mob/living/human/M, var/alien, var/removed)
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.isSynthetic())
 			return
 	if(alien == IS_SLIME)
@@ -88,7 +84,7 @@
 	if(data && data["antibodies"])
 		M.antibodies |= data["antibodies"]
 
-/datum/reagent/blood/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/blood/affect_blood(var/mob/living/human/M, var/alien, var/removed)
 	if(alien == IS_SLIME)	//They don't have blood, so it seems weird that they would instantly 'process' the chemical like another species does.
 		affect_ingest(M, alien, removed)
 		return
@@ -97,7 +93,7 @@
 		return
 
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 
 		var/datum/reagent/blood/recipient = H.get_blood(H.vessel)
 
@@ -142,7 +138,7 @@
 	color = "#0050F0"
 	mrate_static = TRUE
 
-/datum/reagent/antibodies/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/antibodies/affect_blood(var/mob/living/human/M, var/alien, var/removed)
 	if(src.data)
 		M.antibodies |= src.data["antibodies"]
 	..()
@@ -212,8 +208,8 @@
 		remove_self(needed)
 
 		// Put out cigarettes if splashed.
-		if(istype(L, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = L
+		if(istype(L, /mob/living/human))
+			var/mob/living/human/H = L
 			if(H.wear_mask)
 				if(istype(H.wear_mask, /obj/item/clothing/mask/smokable))
 					var/obj/item/clothing/mask/smokable/S = H.wear_mask
@@ -221,19 +217,19 @@
 						S.quench()
 						H.visible_message("<span class='notice'>[H]\'s [S.name] is put out.</span>")
 
-/datum/reagent/water/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_blood(var/mob/living/human/M, var/alien, var/removed)
 	if(alien == IS_SLIME)
 		M.adjustToxLoss(6 * removed)
 	else
 		..()
 
-/datum/reagent/water/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_ingest(var/mob/living/human/M, var/alien, var/removed)
 	if(alien == IS_SLIME)
 		M.adjustToxLoss(6 * removed)
 	else
 		..()
 
-/datum/reagent/water/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/water/affect_touch(var/mob/living/human/M, var/alien, var/removed)
 	if(alien == IS_SLIME && prob(10))
 		M.visible_message("<span class='warning'>[M]'s flesh sizzles where the water touches it!</span>", "<span class='danger'>Your flesh burns in the water!</span>")
 	..()
@@ -255,7 +251,7 @@
 	remove_self(amount)
 	return
 
-/datum/reagent/fuel/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/fuel/affect_blood(var/mob/living/human/M, var/alien, var/removed)
 	if(issmall(M)) removed *= 2
 	M.adjustToxLoss(4 * removed)
 

@@ -1,7 +1,7 @@
 // Pretty much everything here is stolen from the dna scanner FYI
 
 /obj/machinery/bodyscanner
-	var/mob/living/carbon/human/occupant
+	var/mob/living/human/occupant
 	var/locked
 	name = "Body Scanner"
 	icon = 'icons/obj/Cryogenic2.dmi'
@@ -66,7 +66,7 @@
 		if(default_deconstruction_crowbar(user, G))
 			return
 
-/obj/machinery/bodyscanner/MouseDrop_T(mob/living/carbon/human/O, mob/user as mob)
+/obj/machinery/bodyscanner/MouseDrop_T(mob/living/human/O, mob/user as mob)
 	if(!istype(O))
 		return 0 //not a mob
 	if(user.incapacitated())
@@ -182,7 +182,7 @@
 	var/occupantData[0]
 	if(occupant && ishuman(occupant))
 		icon_state = "body_scanner_1"
-		var/mob/living/carbon/human/H = occupant
+		var/mob/living/human/H = occupant
 		occupantData["name"] = H.name
 		occupantData["stat"] = H.stat
 		occupantData["health"] = H.health

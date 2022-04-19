@@ -69,7 +69,7 @@
 		id_card.fingerprint_hash= md5(dna.uni_identity)
 	id_card.update_name()
 
-/mob/living/carbon/human/set_id_info(var/obj/item/card/id/id_card)
+/mob/living/human/set_id_info(var/obj/item/card/id/id_card)
 	..()
 	id_card.age = age
 	id_card.sex = capitalize(name_gender())

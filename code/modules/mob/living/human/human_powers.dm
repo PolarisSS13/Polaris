@@ -1,7 +1,7 @@
 // These should all be procs, you can add them to humans/subspecies by
 // species.dm's inherent_verbs ~ Z
 
-/mob/living/carbon/human/proc/tie_hair()
+/mob/living/human/proc/tie_hair()
 	set name = "Tie Hair"
 	set desc = "Style your hair."
 	set category = "IC"
@@ -33,7 +33,7 @@
 		else
 			to_chat(src, "<span class ='notice'>You're already using that style.</span>")
 
-/mob/living/carbon/human/proc/tackle()
+/mob/living/human/proc/tackle()
 	set category = "Abilities"
 	set name = "Tackle"
 	set desc = "Tackle someone down."
@@ -80,7 +80,7 @@
 		if ((O.client && !( O.blinded )))
 			O.show_message(text("<font color='red'><B>[] [failed ? "tried to tackle" : "has tackled"] down []!</font></B>", src, T), 1)
 
-/mob/living/carbon/human/proc/commune()
+/mob/living/human/proc/commune()
 	set category = "Abilities"
 	set name = "Commune with creature"
 	set desc = "Send a telepathic message to an unlucky recipient."
@@ -109,14 +109,14 @@
 	log_say("(COMMUNE to [key_name(M)]) [text]",src)
 
 	to_chat(M, "<font color='blue'>Like lead slabs crashing into the ocean, alien thoughts drop into your mind: [text]</font>")
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
+	if(istype(M,/mob/living/human))
+		var/mob/living/human/H = M
 		if(H.species.name == src.species.name)
 			return
 		to_chat(H, "<font color='red'>Your nose begins to bleed...</font>")
 		H.drip(1)
 
-/mob/living/carbon/human/proc/regurgitate()
+/mob/living/human/proc/regurgitate()
 	set name = "Regurgitate"
 	set desc = "Empties the contents of your stomach"
 	set category = "Abilities"
@@ -131,7 +131,7 @@
 	// 	src.visible_message("<font color='red'><B>[src] hurls out the contents of their stomach!</B></font>")
 	return
 
-/mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
+/mob/living/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
 	set desc = "Whisper silently to someone over a distance."
 	set category = "Abilities"
@@ -143,13 +143,13 @@
 		to_chat(src, "<font color='green'>You said: \"[msg]\" to [M]</font>")
 	return
 
-/mob/living/carbon/human/proc/diona_split_nymph()
+/mob/living/human/proc/diona_split_nymph()
 	set name = "Split"
 	set desc = "Split your humanoid form into its constituent nymphs."
 	set category = "Abilities"
 	diona_split_into_nymphs(5)	// Separate proc to void argments being supplied when used as a verb
 
-/mob/living/carbon/human/proc/diona_split_into_nymphs(var/number_of_resulting_nymphs)
+/mob/living/human/proc/diona_split_into_nymphs(var/number_of_resulting_nymphs)
 	var/turf/T = get_turf(src)
 
 	var/mob/living/simple_mob/diona_nymph/S = new(T)
@@ -193,8 +193,8 @@
 			qdel(Org)
 
 		// Purge the diona verbs.
-		verbs -= /mob/living/carbon/human/proc/diona_split_nymph
-		verbs -= /mob/living/carbon/human/proc/regenerate
+		verbs -= /mob/living/human/proc/diona_split_nymph
+		verbs -= /mob/living/human/proc/regenerate
 
 		for(var/obj/item/organ/external/E in organs) // Just fall apart.
 			E.droplimb(TRUE)
@@ -203,7 +203,7 @@
 		visible_message("<span class='warning'>\The [src] quivers slightly, then splits apart with a wet slithering noise.</span>")
 		qdel(src)
 
-/mob/living/carbon/human/proc/self_diagnostics()
+/mob/living/human/proc/self_diagnostics()
 	set name = "Self-Diagnostics"
 	set desc = "Run an internal self-diagnostic to check for damage."
 	set category = "IC"
@@ -242,10 +242,10 @@
 
 		to_chat(src,output)
 
-/mob/living/carbon/human
+/mob/living/human
 	var/next_sonar_ping = 0
 
-/mob/living/carbon/human/proc/sonar_ping()
+/mob/living/human/proc/sonar_ping()
 	set name = "Listen In"
 	set desc = "Allows you to listen in to movement and noises around you."
 	set category = "Abilities"
@@ -290,7 +290,7 @@
 	if(!heard_something)
 		to_chat(src, "<span class='notice'>You hear no movement but your own.</span>")
 
-/mob/living/carbon/human/proc/regenerate()
+/mob/living/human/proc/regenerate()
 	set name = "Regenerate"
 	set desc = "Allows you to regrow limbs and heal organs after a period of rest."
 	set category = "Abilities"
@@ -354,7 +354,7 @@
 		adjust_nutrition(-75)
 		active_regen = FALSE
 
-/mob/living/carbon/human/proc/setmonitor_state()
+/mob/living/human/proc/setmonitor_state()
 	set name = "Set monitor display"
 	set desc = "Set your monitor display"
 	set category = "IC"
@@ -379,7 +379,7 @@
 		to_chat(src,"<span class='warning'>You set your monitor to display [choice]!</span>")
 		update_icons_body()
 
-/mob/living/carbon/human/verb/mob_sleep()
+/mob/living/human/verb/mob_sleep()
 	set name = "Sleep"
 	set category = "IC"
 
@@ -390,7 +390,7 @@
 		usr.AdjustSleeping(20)
 
 //Brain slug proc for voluntary removal of control.
-/mob/living/carbon/human/proc/release_control()
+/mob/living/human/proc/release_control()
 
 	set category = "Abilities"
 	set name = "Release Control"
@@ -403,15 +403,15 @@
 
 		B.detatch()
 
-		verbs -= /mob/living/carbon/human/proc/release_control
-		verbs -= /mob/living/carbon/human/proc/punish_host
-		verbs -= /mob/living/carbon/human/proc/spawn_larvae
+		verbs -= /mob/living/human/proc/release_control
+		verbs -= /mob/living/human/proc/punish_host
+		verbs -= /mob/living/human/proc/spawn_larvae
 
 	else
 		to_chat(src, "<span class='danger'>ERROR NO BORER OR BRAINMOB DETECTED IN THIS MOB, THIS IS A BUG !</span>")
 
 //Brain slug proc for tormenting the host.
-/mob/living/carbon/human/proc/punish_host()
+/mob/living/human/proc/punish_host()
 	set category = "Abilities"
 	set name = "Torment host"
 	set desc = "Punish your host with agony."
@@ -425,7 +425,7 @@
 		else
 			to_chat(B.host_brain, "<span class='danger'><FONT size=3>Horrific, burning agony lances through you, ripping a soundless scream from your trapped mind!</FONT></span>")
 
-/mob/living/carbon/human/proc/spawn_larvae()
+/mob/living/human/proc/spawn_larvae()
 	set category = "Abilities"
 	set name = "Reproduce"
 	set desc = "Spawn several young."

@@ -1,6 +1,6 @@
 #define HUMAN_LOWEST_SLOWDOWN -3
 
-/mob/living/carbon/human/movement_delay(oldloc, direct)
+/mob/living/human/movement_delay(oldloc, direct)
 
 	. = 0
 
@@ -75,7 +75,7 @@
 			var/obj/item/pulled = pulling
 			item_tally += max(pulled.slowdown, 0)
 		else if(ishuman(pulling))
-			var/mob/living/carbon/human/H = pulling
+			var/mob/living/human/H = pulling
 			var/their_slowdown = max(H.calculate_item_encumbrance(), 1)
 			item_tally = max(item_tally, their_slowdown) // If our slowdown is less than theirs, then we become as slow as them (before species modifires).
 
@@ -96,7 +96,7 @@
 	. = max(HUMAN_LOWEST_SLOWDOWN, . + config.human_delay)	// Minimum return should be the same as force_max_speed
 	. += ..()
 
-/mob/living/carbon/human/Moved()
+/mob/living/human/Moved()
 	. = ..()
 
 	// Walking is handled by regular life, but if you're running, you burn more calories.
@@ -113,7 +113,7 @@
 // This calculates the amount of slowdown to receive from items worn. This does NOT include species modifiers.
 // It is in a seperate place to avoid an infinite loop situation with dragging mobs dragging each other.
 // Also its nice to have these things seperated.
-/mob/living/carbon/human/proc/calculate_item_encumbrance()
+/mob/living/human/proc/calculate_item_encumbrance()
 	if(!buckled && shoes) // Shoes can make you go faster.
 		. += shoes.slowdown
 
@@ -128,7 +128,7 @@
 		. += max(I.slowdown, 0)
 
 // Similar to above, but for turf slowdown.
-/mob/living/carbon/human/proc/calculate_turf_slowdown(turf/T, direct)
+/mob/living/human/proc/calculate_turf_slowdown(turf/T, direct)
 	if(!T)
 		return 0
 
@@ -169,7 +169,7 @@
 
 #undef HUMAN_LOWEST_SLOWDOWN
 
-/mob/living/carbon/human/get_jetpack()
+/mob/living/human/get_jetpack()
 	if(back)
 		var/obj/item/rig/rig = get_rig()
 		if(istype(back, /obj/item/tank/jetpack))
@@ -178,7 +178,7 @@
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				return module.jets
 
-/mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
+/mob/living/human/Process_Spacemove(var/check_drift = 0)
 	//Can we act?
 	if(restrained())	return 0
 
@@ -196,7 +196,7 @@
 	return 0
 
 
-/mob/living/carbon/human/Process_Spaceslipping(var/prob_slip = 5)
+/mob/living/human/Process_Spaceslipping(var/prob_slip = 5)
 	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.
 
 	if(species.flags & NO_SLIP)
@@ -223,7 +223,7 @@
 	return(prob_slip)
 
 // Handle footstep sounds
-/mob/living/carbon/human/handle_footstep(var/turf/T)
+/mob/living/human/handle_footstep(var/turf/T)
 	if(!istype(T))
 		return
 	if(is_incorporeal())
@@ -269,17 +269,17 @@
 	playsound(T, S, volume, FALSE)
 	return
 
-/mob/living/carbon/human/set_dir(var/new_dir)
+/mob/living/human/set_dir(var/new_dir)
 	. = ..()
 	if(. && species.tail)
 		update_tail_showing()
 
-/mob/living/carbon/human/Bump(atom/A)
+/mob/living/human/Bump(atom/A)
 	. = ..()
-	if(iscarbon(A) && prob(10))
+	if(ishuman(A) && prob(10))
 		spread_disease_to(A, "Contact")
 
-/mob/living/carbon/human/proc/slide_for(var/slip_dist)
+/mob/living/human/proc/slide_for(var/slip_dist)
 	set waitfor = FALSE
 	for(var/i = 1 to slip_dist)
 		step(src, dir)

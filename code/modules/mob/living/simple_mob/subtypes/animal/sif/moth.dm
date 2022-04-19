@@ -87,13 +87,13 @@
 	color = "#80AB82"
 
 /obj/effect/vfx/smoke/elemental/mothspore/affect(mob/living/L) //Similar to a very weak flash, but depends on breathing instead of eye protection.
-	if(iscarbon(L))
-		var/mob/living/carbon/C = L
+	if(ishuman(L))
+		var/mob/living/human/C = L
 		if(C.stat != DEAD)
 			if(C.needs_to_breathe())
 				var/spore_strength = 5
 				if(ishuman(C))
-					var/mob/living/carbon/human/H = C
+					var/mob/living/human/H = C
 					H.Confuse(spore_strength)
 					H.eye_blurry = max(H.eye_blurry, spore_strength)
 					H.adjustHalLoss(10 * (spore_strength / 5))

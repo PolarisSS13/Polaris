@@ -172,8 +172,8 @@
 		. += "There is about [src.amount] square units of paper left!"
 
 /obj/item/wrapping_paper/attack(mob/target as mob, mob/user as mob)
-	if (!istype(target, /mob/living/carbon/human)) return
-	var/mob/living/carbon/human/H = target
+	if (!istype(target, /mob/living/human)) return
+	var/mob/living/human/H = target
 
 	if (istype(H.wear_suit, /obj/item/clothing/suit/straight_jacket) || H.stat)
 		if (src.amount > 2)
