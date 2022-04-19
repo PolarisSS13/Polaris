@@ -288,10 +288,7 @@
 
 //Removed the horrible safety parameter. It was only being used by ninja code anyways.
 //Now checks siemens_coefficient of the affected area by default
-/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null)
-
-	if(status_flags & GODMODE)	return 0	//godmode
-
+/mob/living/carbon/human/electrocute_act(var/shock_damage, var/obj/source, var/base_siemens_coeff = 1.0, var/def_zone = null, var/stun = FALSE)
 	if (!def_zone)
 		def_zone = pick("l_hand", "r_hand")
 
@@ -307,7 +304,48 @@
 	if(fire_stacks < 0) // Water makes you more conductive.
 		siemens_coeff *= 1.5
 
-	return ..(shock_damage, source, siemens_coeff, def_zone)
+	if(def_zone == "l_hand" || def_zone == "r_hand") //Diona (And any other potential plant people) hands don't get shocked.
+		if(species.flags & IS_PLANT)
+			return 0
+	shock_damage *= siemens_coeff
+	if (shock_damage < 1)
+		return 0
+
+	src.apply_damage(0.2 * shock_damage, BURN, def_zone, used_weapon="Electrocution") //shock the target organ
+	src.apply_damage(0.4 * shock_damage, BURN, BP_TORSO, used_weapon="Electrocution") //shock the torso more
+	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
+	src.apply_damage(0.2 * shock_damage, BURN, null, used_weapon="Electrocution") //shock a random part!
+
+	playsound(src, "sparks", 50, 1, -1)
+	if (shock_damage > 15)
+		src.visible_message(
+			"<span class='warning'>[src] was electrocuted[source ? " by the [source]" : ""]!</span>", \
+			"<span class='danger'>You feel a powerful shock course through your body!</span>", \
+			"<span class='warning'>You hear a heavy electrical crack.</span>" \
+		)
+	else
+		src.visible_message(
+			"<span class='warning'>[src] was shocked[source ? " by the [source]" : ""].</span>", \
+			"<span class='warning'>You feel a shock course through your body.</span>", \
+			"<span class='warning'>You hear a zapping sound.</span>" \
+		)
+
+	if(stun)
+		switch(shock_damage)
+			if(16 to 20)
+				Stun(2)
+			if(21 to 25)
+				Weaken(2)
+			if(26 to 30)
+				Weaken(5)
+			if(31 to INFINITY)
+				Weaken(10) //This should work for now, more is really silly and makes you lay there forever
+
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
+	s.set_up(5, 1, loc)
+	s.start()
+
+	return shock_damage
 
 
 /mob/living/carbon/human/Topic(href, href_list)
@@ -606,7 +644,9 @@
 	if(internal_organs_by_name[O_EYES]) // Eyes are fucked, not a 'weak point'.
 		var/obj/item/organ/internal/eyes/I = internal_organs_by_name[O_EYES]
 		I.additional_flash_effects(intensity)
-	return ..()
+	if(eyecheck() < intensity || override_blindness_check)
+		return ..()
+
 
 #define add_clothing_protection(A)	\
 	var/obj/item/clothing/C = A; \
@@ -1336,7 +1376,7 @@
 			return 1
 	return 0
 
-/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8)
+/mob/living/carbon/human/slip(var/slipped_on, stun_duration=8, var/slip_dist)
 	var/list/equipment = list(src.w_uniform,src.wear_suit,src.shoes)
 	var/footcoverage_check = FALSE
 	for(var/obj/item/clothing/C in equipment)
@@ -1691,3 +1731,6 @@
 		if(PULSE_THREADY)
 			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
 //			output for machines^	^^^^^^^output for people^^^^^^^^^
+
+/mob/living/carbon/human/needs_to_breathe()
+	return !does_not_breathe || ..()

@@ -61,7 +61,7 @@
 	src.verbs -= /mob/living/carbon/diona_nymph/proc/split
 	src.verbs += /mob/living/carbon/diona_nymph/proc/merge
 
-/mob/living/carbon/diona_nymph/confirm_evolution()
+/mob/living/carbon/diona_nymph/proc/confirm_evolution()
 	if(!is_alien_whitelisted(src, GLOB.all_species[SPECIES_DIONA]))
 		alert(src, "You are currently not whitelisted to play as a full diona.")
 		return null
@@ -89,7 +89,7 @@
 		return
 
 	if(!adult_form)
-		verbs -= /mob/living/carbon/alien/verb/evolve
+		verbs -= /mob/living/carbon/diona_nymph/verb/evolve
 		return
 
 	if(amount_grown < max_grown)
@@ -103,7 +103,6 @@
 
 	var/mob/living/carbon/human/adult = new adult_form(get_turf(src))
 	adult.set_species(new_species)
-	show_evolution_blurb()
 
 	transfer_languages(src, adult)
 

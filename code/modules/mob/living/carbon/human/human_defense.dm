@@ -614,7 +614,7 @@ emp_act
 
 	species.handle_water_damage(src, amount)
 
-/mob/living/carbon/human/shank_attack(obj/item/W, obj/item/grab/G, mob/user, hit_zone)
+/mob/living/carbon/human/proc/shank_attack(obj/item/W, obj/item/grab/G, mob/user, hit_zone)
 	if(!W.sharp || !W.force || W.damtype != BRUTE)
 		return FALSE //unsuitable weapon
 
@@ -651,12 +651,12 @@ emp_act
 
 	return 1
 
-/mob/living/carbon/human/proc/help_shake_act(mob/living/carbon/human/M)
-	w_uniform?.add_fingerprint(M)
+/mob/living/carbon/human/proc/help_shake_act(mob/living/carbon/human/H)
+	w_uniform?.add_fingerprint(H)
 	if(src.health < config.health_threshold_crit)
 		return
 
-	if(src == M)
+	if(src == H)
 		var/datum/gender/T = gender_datums[src.get_visible_gender()]
 		src.visible_message( \
 			"<span class='notice'>[src] examines [T.himself].</span>", \
@@ -703,64 +703,63 @@ emp_act
 	
 	if(on_fire)
 		playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
-		if (M.on_fire)
-			M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames, but to no avail!</span>",
+		if (H.on_fire)
+			H.visible_message("<span class='warning'>[H] tries to pat out [src]'s flames, but to no avail!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames, but to no avail! Put yourself out first!</span>")
 		else
-			M.visible_message("<span class='warning'>[M] tries to pat out [src]'s flames!</span>",
+			H.visible_message("<span class='warning'>[H] tries to pat out [src]'s flames!</span>",
 				"<span class='warning'>You try to pat out [src]'s flames! Hot!</span>")
-			if(do_mob(M, src, 15))
+			if(do_mob(H, src, 15))
 				src.adjust_fire_stacks(-0.5)
-				if (prob(10) && (M.fire_stacks <= 0))
-					M.adjust_fire_stacks(1)
-				M.IgniteMob()
-				if (M.on_fire)
-					M.visible_message("<span class='danger'>The fire spreads from [src] to [M]!</span>",
+				if (prob(10) && (H.fire_stacks <= 0))
+					H.adjust_fire_stacks(1)
+				H.IgniteMob()
+				if (H.on_fire)
+					H.visible_message("<span class='danger'>The fire spreads from [src] to [H]!</span>",
 						"<span class='danger'>The fire spreads to you as well!</span>")
 				else
 					src.adjust_fire_stacks(-0.5) //Less effective than stop, drop, and roll - also accounting for the fact that it takes half as long.
 					if (src.fire_stacks <= 0)
-						M.visible_message("<span class='warning'>[M] successfully pats out [src]'s flames.</span>",
+						H.visible_message("<span class='warning'>[H] successfully pats out [src]'s flames.</span>",
 							"<span class='warning'>You successfully pat out [src]'s flames.</span>")
 						src.ExtinguishMob()
 						src.fire_stacks = 0
 		return TRUE
 
 	var/show_ssd
-	var/mob/living/carbon/human/H = src
 	var/datum/gender/T = gender_datums[H.get_visible_gender()] // make sure to cast to human before using get_gender() or get_visible_gender()!
 	if(istype(H)) show_ssd = H.species.show_ssd
 	if(show_ssd && !client && !teleop)
-		M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [T.him] up!</span>", \
+		H.visible_message("<span class='notice'>[H] shakes [src] trying to wake [T.him] up!</span>", \
 			"<span class='notice'>You shake [src], but [T.he] [T.does] not respond... Maybe [T.he] [T.has] S.S.D?</span>")
 	else if(lying || src.sleeping)
 		AdjustSleeping(-5)
 		if(src.sleeping == 0)
 			src.resting = 0
-		M.visible_message("<span class='notice'>[M] shakes [src] trying to wake [T.him] up!</span>", \
+		H.visible_message("<span class='notice'>[H] shakes [src] trying to wake [T.him] up!</span>", \
 			"<span class='notice'>You shake [src] trying to wake [T.him] up!</span>")
 	else
-		var/mob/living/carbon/human/hugger = M
-		var/datum/gender/TM = gender_datums[M.get_visible_gender()]
-		if(M.resting) //Are they resting on the ground?
-			M.visible_message("<span class='notice'>[M] grabs onto [src] and pulls [TM.himself] up</span>", \
+		var/mob/living/carbon/human/hugger = H
+		var/datum/gender/TM = gender_datums[H.get_visible_gender()]
+		if(H.resting) //Are they resting on the ground?
+			H.visible_message("<span class='notice'>[H] grabs onto [src] and pulls [TM.himself] up</span>", \
 				"<span class='notice'>You grip onto [src] and pull yourself up off the ground!</span>")
-			if(M.fire_stacks >= (src.fire_stacks + 3)) //Fire checks.
+			if(H.fire_stacks >= (src.fire_stacks + 3)) //Fire checks.
 				src.adjust_fire_stacks(1)
-				M.adjust_fire_stacks(-1)
-			if(M.on_fire)
+				H.adjust_fire_stacks(-1)
+			if(H.on_fire)
 				src.IgniteMob()
-			if(do_after(M, 0.5 SECONDS)) //.5 second delay. Makes it a bit stronger than just typing rest.
-				M.resting = FALSE //Hoist yourself up up off the ground. No para/stunned/weakened removal.
+			if(do_after(H, 0.5 SECONDS)) //.5 second delay. Makes it a bit stronger than just typing rest.
+				H.resting = FALSE //Hoist yourself up up off the ground. No para/stunned/weakened removal.
 		else if(istype(hugger))
 			hugger.species.hug(hugger,src)
 		else
-			M.visible_message("<span class='notice'>[M] hugs [src] to make [T.him] feel better!</span>", \
+			H.visible_message("<span class='notice'>[H] hugs [src] to make [T.him] feel better!</span>", \
 				"<span class='notice'>You hug [src] to make [T.him] feel better!</span>")
-		if(M.fire_stacks >= (src.fire_stacks + 3))
+		if(H.fire_stacks >= (src.fire_stacks + 3))
 			src.adjust_fire_stacks(1)
-			M.adjust_fire_stacks(-1)
-		if(M.on_fire)
+			H.adjust_fire_stacks(-1)
+		if(H.on_fire)
 			src.IgniteMob()
 	AdjustParalysis(-3)
 	AdjustStunned(-3)
@@ -873,4 +872,9 @@ emp_act
 			resist_fire() //stop, drop, and roll
 		else
 			resist_restraints()
+
+/mob/living/carbon/human/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+	..()
+	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
+	bodytemperature += temp_inc
 

@@ -85,3 +85,10 @@
 	var/pose = null // Active emote/pose
 
 	var/traumatic_shock = 0
+
+	var/datum/species/species //Contains icon generation and language information, set during Initialize().
+
+	var/life_tick = 0      // The amount of life ticks that have processed on this mob.
+
+	var/last_taste_time = 0  // The last time a taste message was shown to the player.
+	var/last_taste_text = "" // The taste message in question.
