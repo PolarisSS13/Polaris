@@ -19,10 +19,10 @@
 	return ..()
 
 /mob/living/carbon/brain/say_understands(var/other)//Goddamn is this hackish, but this say code is so odd
-	return ishuman(other) || isslime(other) || (istype(container, /obj/item/device/mmi) && issilicon(other)) || ..()
+	return ishuman(other) || isslime(other) || (istype(container, /obj/item/mmi) && issilicon(other)) || ..()
 
 /mob/living/carbon/brain/update_canmove()
-	if(in_contents_of(/obj/mecha) || istype(container, /obj/item/device/mmi))
+	if(in_contents_of(/obj/mecha) || istype(container, /obj/item/mmi))
 		canmove = TRUE
 		use_me = TRUE
 	else
@@ -30,7 +30,7 @@
 	return canmove
 
 /mob/living/carbon/brain/isSynthetic()
-	return istype(container, /obj/item/device/mmi)
+	return istype(container, /obj/item/mmi)
 
 /mob/living/carbon/brain/set_typing_indicator(var/state)
 	if(isturf(loc))

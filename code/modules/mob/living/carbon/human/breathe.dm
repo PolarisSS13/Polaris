@@ -53,7 +53,7 @@
 
 	//Because rigs store their tanks out of reach of contents.Find(), a check has to be made to make
 	//sure the rig is still worn, still online, and that its air supply still exists.
-	var/obj/item/weapon/rig/Rig = get_rig()
+	var/obj/item/rig/Rig = get_rig()
 	if(!(internal in contents) && Rig?.air_supply)
 		internal = Rig.air_supply
 
