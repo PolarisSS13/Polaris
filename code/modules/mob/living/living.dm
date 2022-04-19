@@ -18,6 +18,9 @@
 
 	selected_image = image(icon = buildmode_hud, loc = src, icon_state = "ai_sel")
 
+	if (!default_language && species_language)
+		default_language = GLOB.all_languages[species_language]
+
 /mob/living/Destroy()
 	dsoverlay.loc = null //I'll take my coat with me
 	dsoverlay = null
@@ -868,7 +871,7 @@
 	return
 
 /mob/living/proc/can_feel_pain(var/check_organ)
-	return isSynthetic()
+	return isSynthetic() || (species && !(species.flags & NO_PAIN))
 
 // Gets the correct icon_state for being on fire. See OnFire.dmi for the icons.
 /mob/living/proc/get_fire_icon_state()
@@ -1168,3 +1171,9 @@
 	// If the mob is not human, it cleans the mask without asking for bitflags
 	if(!ishuman(src) && src.wear_mask?.clean_blood())
 		src.update_inv_wear_mask(0)
+
+/mob/living/proc/getDNA()
+	return dna
+
+/mob/living/proc/setDNA(var/datum/dna/newDNA)
+	dna = newDNA

@@ -91,6 +91,8 @@
 	if(radio_controller)
 		radio_controller.add_object(src, control_freq, radio_filter = bot_filter)
 
+/obj/item/clothing/head/soft/mbill/update_icon()
+
 /*
  *	Radio Cartridge, essentially a signaler.
  */

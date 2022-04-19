@@ -65,14 +65,9 @@
 		//adjustFireLoss(2.5*discomfort)
 		adjustFireLoss(5.0*discomfort)
 
-
-/mob/living/carbon/brain/handle_chemicals_in_body()
+/mob/living/carbon/brain/handle_regular_status_updates()
 	// decrement dizziness counter, clamped to 0
 	dizziness = max(0, dizziness - (resting ? 5 : 1))
-	updatehealth()
-	return
-
-/mob/living/carbon/brain/handle_regular_status_updates()	//TODO: comment out the unused bits >_>
 	updatehealth()
 
 	if(stat == DEAD)	//DEAD. BROWN BREAD. SWIMMING WITH THE SPESS CARP

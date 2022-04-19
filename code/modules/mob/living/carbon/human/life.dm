@@ -15,10 +15,6 @@
 	//to find it.
 	blinded = 0
 
-	//TODO: seperate this out
-	// update the current life tick, can be used to e.g. only do something every 4 ticks
-	life_tick++
-
 	// This is not an ideal place for this but it will do for now.
 	if(wearing_rig && wearing_rig.offline)
 		wearing_rig = null
@@ -34,12 +30,19 @@
 	if(getStasis() > 2)
 		Sleeping(20)
 
+	//Chemicals in the body, this is moved over here so that blood can be added after death
+	handle_chemicals_in_body()
+
 	//No need to update all of these procs if the guy is dead.
 	if(stat != DEAD && !stasis)
+		//Breathing, if applicable
+		handle_breathing()
+
 		//Updates the number of stored chemicals for powers
 		handle_changeling()
 
-		//Organs and blood
+		//Organs and Blood
+		handle_blood()
 		handle_organs()
 		stabilize_body_temperature() //Body temperature adjusts itself (self-regulation)
 
@@ -57,6 +60,12 @@
 
 		if(!client)
 			species.handle_npc(src)
+
+		adjust_nutrition(DEFAULT_HUNGER_FACTOR)
+
+		// Increase germ_level regularly
+		if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
+			germ_level++
 
 	else if(stat == DEAD && !stasis)
 		handle_defib_timer()
@@ -613,21 +622,13 @@
 			. += THERMAL_PROTECTION_HAND_RIGHT
 	return min(1,.)
 
-/mob/living/carbon/human/handle_chemicals_in_body()
+/mob/living/carbon/human/proc/handle_chemicals_in_body()
 
 	if(inStasisNow())
 		return
 
 	if(reagents)
 		chem_effects.Cut()
-
-		if(touching)
-			touching.metabolize()
-		if(ingested)
-			ingested.metabolize()
-		if(bloodstr)
-			bloodstr.metabolize()
-
 		if(!isSynthetic())
 
 			var/total_phoronloss = 0
@@ -646,11 +647,7 @@
 							r_hand_blocked = 1-(100-getarmor(BP_R_HAND, "bio"))/100	//This should get a number between 0 and 1
 							total_phoronloss += vsc.plc.CONTAMINATION_LOSS * r_hand_blocked
 			if(total_phoronloss)
-				if(!(status_flags & GODMODE))
-					adjustToxLoss(total_phoronloss)
-
-	if(status_flags & GODMODE)
-		return 0	//godmode
+				adjustToxLoss(total_phoronloss)
 
 	if(species.light_dam)
 		var/light_amount = 0

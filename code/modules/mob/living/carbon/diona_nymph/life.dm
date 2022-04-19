@@ -18,7 +18,7 @@
  	if(!client)
  		handle_npc(src)
 
-/mob/living/carbon/alien/handle_mutations_and_radiation()
+/mob/living/carbon/diona_nymph/handle_mutations_and_radiation()
 	if(!radiation)
 		return
 
@@ -30,7 +30,7 @@
 	adjustToxLoss(-(rads))
 	return
 
-/mob/living/carbon/alien/Life()
+/mob/living/carbon/diona_nymph/Life()
 	..()
 	if (stat != DEAD) //still breathing
 		// GROW!

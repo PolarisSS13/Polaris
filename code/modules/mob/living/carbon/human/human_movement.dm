@@ -98,6 +98,15 @@
 
 /mob/living/carbon/human/Moved()
 	. = ..()
+
+	// Walking is handled by regular life, but if you're running, you burn more calories.
+	if(src.nutrition > 0 && !(src.stat) && src.m_intent == "run")
+		adjust_nutrition(DEFAULT_HUNGER_FACTOR)
+
+	// Moving around increases germ_level faster
+	if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
+		germ_level++
+
 	if(embedded_flag)
 		handle_embedded_objects() //Moving with objects stuck in you can cause bad times.
 

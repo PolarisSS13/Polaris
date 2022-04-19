@@ -185,3 +185,14 @@
 		visible_message("<span class='danger'>[src] manages to unbuckle themself!</span>",
 						"<span class='notice'>You successfully unbuckle yourself.</span>")
 		buckled.user_unbuckle_mob(src, src)
+
+/mob/living/carbon/human/proc/update_handcuffed()
+	if(handcuffed)
+		drop_l_hand()
+		drop_r_hand()
+		stop_pulling()
+		throw_alert("handcuffed", /obj/screen/alert/restrained/handcuffed, new_master = handcuffed)
+	else
+		clear_alert("handcuffed")
+	update_action_buttons() //Some of our action buttons might be unusable when we're handcuffed.
+	update_inv_handcuffed()

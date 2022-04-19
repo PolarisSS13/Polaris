@@ -570,9 +570,6 @@
 		var/mob/pulled = AM
 		pulled.inertia_dir = 0
 
-/mob/proc/can_use_hands()
-	return
-
 /mob/proc/is_active()
 	return (0 >= usr.stat)
 

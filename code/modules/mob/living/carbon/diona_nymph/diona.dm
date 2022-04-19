@@ -34,10 +34,10 @@ var/list/_nymph_default_emotes = list(
 	gender = NEUTER
 
 	mob_size = MOB_SMALL
-	language = LANGUAGE_ROOTLOCAL
+	var/language = LANGUAGE_ROOTLOCAL
 	species_language = LANGUAGE_ROOTLOCAL
 	only_species_language = TRUE
-	death_msg = "expires with a pitiful chirrup..."
+	var/death_msg = "expires with a pitiful chirrup..."
 	universal_understand = FALSE
 	universal_speak = FALSE // Dionaea do not need to speak to people other than other dionaea.
 
@@ -47,8 +47,8 @@ var/list/_nymph_default_emotes = list(
 	holder_type = /obj/item/holder/diona
 
 	var/adult_form = /mob/living/carbon/human
-	can_namepick_as_adult = TRUE
-	adult_name = "diona gestalt"
+	var/can_namepick_as_adult = TRUE
+	var/adult_name = "diona gestalt"
 
 	var/obj/item/hat
 
