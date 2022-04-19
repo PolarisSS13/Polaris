@@ -408,7 +408,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 				continue
 
 			// Ask their new_player mob to spawn them
-			var/mob/living/carbon/human/new_char = player.create_character()
+			var/mob/living/human/new_char = player.create_character()
 
 			// Created their playable character, delete their /mob/new_player
 			if(new_char)
@@ -426,7 +426,7 @@ var/global/datum/controller/subsystem/ticker/ticker
 
 /datum/controller/subsystem/ticker/proc/equip_characters()
 	var/captainless=1
-	for(var/mob/living/carbon/human/player in player_list)
+	for(var/mob/living/human/player in player_list)
 		if(player && player.mind && player.mind.assigned_role)
 			if(player.mind.assigned_role == "Site Manager")
 				captainless=0

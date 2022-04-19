@@ -100,7 +100,7 @@
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
-	if(istype(M, /mob/living/carbon/human))
+	if(istype(M, /mob/living/human))
 		log_admin("[key_name(src)] has robotized [M.key].")
 		spawn(10)
 			M:Robotize()
@@ -156,31 +156,13 @@
 			paiController.pai_candidates.Remove(candidate)
 	feedback_add_details("admin_verb","MPAI") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
-/client/proc/cmd_admin_alienize(var/mob/M in mob_list)
-	set category = "Fun"
-	set name = "Make Alien"
-
-	if(!ticker)
-		alert("Wait until the game starts")
-		return
-	if(ishuman(M))
-		log_admin("[key_name(src)] has alienized [M.key].")
-		spawn(10)
-			M:Alienize()
-			feedback_add_details("admin_verb","MKAL") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
-		log_admin("[key_name(usr)] made [key_name(M)] into an alien.")
-		message_admins("<span class='notice'>[key_name_admin(usr)] made [key_name(M)] into an alien.</span>", 1)
-	else
-		alert("Invalid mob")
-
-
 //TODO: merge the vievars version into this or something maybe mayhaps
 /client/proc/cmd_debug_del_all()
 	set category = "Debug"
 	set name = "Del-All"
 
 	// to prevent REALLY stupid deletions
-	var/blocked = list(/obj, /mob, /mob/living, /mob/living/carbon, /mob/living/carbon/human, /mob/observer/dead, /mob/living/silicon, /mob/living/silicon/robot, /mob/living/silicon/ai)
+	var/blocked = list(/obj, /mob, /mob/living, /mob/living/human, /mob/living/human, /mob/observer/dead, /mob/living/silicon, /mob/living/silicon/robot, /mob/living/silicon/ai)
 	var/hsbitem = input(usr, "Choose an object to delete.", "Delete:") as null|anything in typesof(/obj) + typesof(/mob) - blocked
 	if(hsbitem)
 		for(var/atom/O in world)
@@ -274,8 +256,8 @@
 	if (!ticker)
 		alert("Wait until the game starts")
 		return
-	if (istype(M, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
+	if (istype(M, /mob/living/human))
+		var/mob/living/human/H = M
 		if (H.wear_id)
 			var/obj/item/card/id/id = H.wear_id
 			if(istype(H.wear_id, /obj/item/pda))
@@ -430,7 +412,7 @@
 	if(!ishuman(target))
 		return
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 
 	var/decl/hierarchy/outfit/outfit = input("Select outfit.", "Select equipment.") as null|anything in outfits()
 	if(!outfit)
@@ -439,7 +421,7 @@
 	feedback_add_details("admin_verb","SEQ")
 	dressup_human(H, outfit, 1)
 
-/proc/dressup_human(var/mob/living/carbon/human/H, var/decl/hierarchy/outfit/outfit)
+/proc/dressup_human(var/mob/living/human/H, var/decl/hierarchy/outfit/outfit)
 	if(!H || !outfit)
 		return
 	if(outfit.undress)
@@ -608,7 +590,7 @@
 	if(!ticker)
 		alert("Wait until the game starts")
 		return
-	if(istype(M, /mob/living/carbon))
+	if(istype(M, /mob/living/human))
 		M.dna.SetSEState(block,!M.dna.GetSEState(block))
 		domutcheck(M,null,MUTCHK_FORCED)
 		M.update_mutations()

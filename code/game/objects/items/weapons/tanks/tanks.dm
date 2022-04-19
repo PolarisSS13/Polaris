@@ -239,7 +239,7 @@ var/list/global/tank_gauge_cache = list()
 	data["minReleasePressure"] = 0
 	data["maxReleasePressure"] = round(TANK_MAX_RELEASE_PRESSURE)
 
-	var/mob/living/carbon/C = user
+	var/mob/living/human/C = user
 	if(!istype(C))
 		C = loc.loc
 	if(!istype(C))
@@ -254,7 +254,7 @@ var/list/global/tank_gauge_cache = list()
 	if(C.wear_mask && (C.wear_mask.item_flags & AIRTIGHT))
 		data["maskConnected"] = TRUE
 	else if(ishuman(C))
-		var/mob/living/carbon/human/H = C
+		var/mob/living/human/H = C
 		if(H.head && (H.head.item_flags & AIRTIGHT))
 			data["maskConnected"] = TRUE
 
@@ -287,8 +287,8 @@ var/list/global/tank_gauge_cache = list()
 	add_fingerprint(usr)
 
 /obj/item/tank/proc/toggle_valve(var/mob/user)
-	if(istype(loc,/mob/living/carbon))
-		var/mob/living/carbon/location = loc
+	if(istype(loc,/mob/living/human))
+		var/mob/living/human/location = loc
 		if(location.internal == src)
 			location.internal = null
 			location.internals.icon_state = "internal0"
@@ -299,8 +299,8 @@ var/list/global/tank_gauge_cache = list()
 			var/can_open_valve
 			if(location.wear_mask && (location.wear_mask.item_flags & AIRTIGHT))
 				can_open_valve = 1
-			else if(istype(location,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = location
+			else if(istype(location,/mob/living/human))
+				var/mob/living/human/H = location
 				if(H.head && (H.head.item_flags & AIRTIGHT))
 					can_open_valve = 1
 

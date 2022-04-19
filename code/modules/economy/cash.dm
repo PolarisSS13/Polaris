@@ -26,8 +26,8 @@
 		var/obj/item/spacecash/SC = W
 
 		SC.adjust_worth(src.worth)
-		if(istype(user, /mob/living/carbon/human))
-			var/mob/living/carbon/human/h_user = user
+		if(istype(user, /mob/living/human))
+			var/mob/living/human/h_user = user
 
 			h_user.drop_from_inventory(src)
 			h_user.drop_from_inventory(SC)
@@ -141,7 +141,7 @@
 	desc = "It's worth 1000 Thalers."
 	worth = 1000
 
-/proc/spawn_money(var/sum, spawnloc, mob/living/carbon/human/human_user as mob)
+/proc/spawn_money(var/sum, spawnloc, mob/living/human/human_user as mob)
 	var/obj/item/spacecash/SC = new (spawnloc)
 
 	SC.set_worth(sum)

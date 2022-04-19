@@ -4,7 +4,7 @@
 	ETA till a downstream ports this and adds boob and penis size: 2 days.
 */
 
-/mob/living/carbon/human/proc/show_descriptors_to(var/mob/user)
+/mob/living/human/proc/show_descriptors_to(var/mob/user)
 	if(LAZYLEN(descriptors))
 		if(user == src)
 			for(var/entry in descriptors)
@@ -54,7 +54,7 @@
 /datum/mob_descriptor/proc/get_initial_comparison_component(var/mob/me, var/datum/gender/my_gender, var/datum/gender/other_gender, var/my_value)
 	var/species_text
 	if(ishuman(me) && !skip_species_mention)
-		var/mob/living/carbon/human/H = me
+		var/mob/living/human/H = me
 		var/use_name = "\improper [H.species.name]"
 		species_text = " for \a [use_name]"
 	. = "[get_third_person_message_start(my_gender)] [get_standalone_value_descriptor(my_value)][species_text]"
@@ -83,7 +83,7 @@
 	// Append the same-descriptor comparison text.
 	var/comparing_value
 	if(ishuman(observer))
-		var/mob/living/carbon/human/human_observer = observer
+		var/mob/living/human/human_observer = observer
 		if(LAZYLEN(human_observer.descriptors) && !isnull(human_observer.species.descriptors[name]) && !isnull(human_observer.descriptors[name]))
 			var/datum/mob_descriptor/obs_descriptor = human_observer.species.descriptors[name]
 			comparing_value = human_observer.descriptors[name] + obs_descriptor.comparison_offset

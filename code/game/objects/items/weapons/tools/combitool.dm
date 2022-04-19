@@ -45,7 +45,7 @@
 		to_chat(user, "You switch \the [src] to the [tool.name] fitting.")
 	return 1
 
-/obj/item/combitool/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/combitool/attack(mob/living/human/M as mob, mob/living/human/user as mob)
 	if(!M.Adjacent(user))
 		return 0
 	var/obj/item/tool = tools[current_tool]

@@ -80,7 +80,7 @@
 	if(istype(src.loc, /obj/item/rig_module))
 		var/obj/item/rig_module/module = src.loc
 		if(module.holder && module.holder.wearer)
-			var/mob/living/carbon/human/H = module.holder.wearer
+			var/mob/living/human/H = module.holder.wearer
 			if(istype(H) && H.get_rig())
 				var/obj/item/rig/suit = H.get_rig()
 				if(istype(suit))
@@ -170,14 +170,14 @@
 	playsound(src, 'sound/weapons/flash.ogg', 100, 1)
 	var/flashfail = 0
 
-	if(iscarbon(M))
-		var/mob/living/carbon/C = M
+	if(ishuman(M))
+		var/mob/living/human/C = M
 		if(C.stat != DEAD)
 			var/safety = C.eyecheck()
 			if(safety <= 0)
 				var/flash_strength = 5
 				if(ishuman(C))
-					var/mob/living/carbon/human/H = C
+					var/mob/living/human/H = C
 					flash_strength *= H.species.flash_mod
 
 					if(flash_strength > 0)
@@ -234,7 +234,7 @@
 
 
 
-/obj/item/flash/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
+/obj/item/flash/attack_self(mob/living/human/user as mob, flag = 0, emp = 0)
 	if(!user || !clown_check(user)) 	return
 
 	user.setClickCooldown(user.get_attack_speed(src))
@@ -261,7 +261,7 @@
 			sleep(5)
 			qdel(animation)
 
-	for(var/mob/living/carbon/C in oviewers(3, null))
+	for(var/mob/living/human/C in oviewers(3, null))
 		var/safety = C.eyecheck()
 		if(!safety)
 			if(!C.blinded)
@@ -275,8 +275,8 @@
 	if(!check_capacitor())
 		return
 
-	if(istype(loc, /mob/living/carbon))
-		var/mob/living/carbon/C = loc
+	if(istype(loc, /mob/living/human))
+		var/mob/living/human/C = loc
 		var/safety = C.eyecheck()
 		if(safety <= 0)
 			C.adjustHalLoss(halloss_per_flash)
@@ -302,7 +302,7 @@
 		to_chat(user, "<span class='warning'>The bulb has burnt out!</span>")
 		update_icon()
 
-/obj/item/flash/synthetic/attack_self(mob/living/carbon/user as mob, flag = 0, emp = 0)
+/obj/item/flash/synthetic/attack_self(mob/living/human/user as mob, flag = 0, emp = 0)
 	..()
 	if(!broken)
 		broken = 1

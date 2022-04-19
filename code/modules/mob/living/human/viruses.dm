@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/handle_viruses()
+/mob/living/human/proc/handle_viruses()
 	if(bodytemperature > 406)
 		for (var/ID in virus2)
 			var/datum/disease2/disease/V = virus2[ID]

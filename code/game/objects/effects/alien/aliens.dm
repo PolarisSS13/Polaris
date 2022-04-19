@@ -117,8 +117,8 @@
 	else
 
 		// Aliens can get straight through these.
-		if(istype(usr,/mob/living/carbon))
-			var/mob/living/carbon/M = usr
+		if(istype(usr,/mob/living/human))
+			var/mob/living/human/M = usr
 			if(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs)
 				for(var/mob/O in oviewers(src))
 					O.show_message("<span class='warning'>[usr] strokes the [name] and it shifts away!</span>", 1)
@@ -451,7 +451,7 @@
 
 /obj/effect/alien/egg/attack_hand(user as mob)
 
-	var/mob/living/carbon/M = user
+	var/mob/living/human/M = user
 	if(!istype(M) || !(locate(/obj/item/organ/internal/xenos/hivenode) in M.internal_organs))
 		return attack_hand(user)
 

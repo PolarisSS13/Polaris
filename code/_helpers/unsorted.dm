@@ -446,11 +446,9 @@ Turf and target are seperate in case you want to teleport some distance from a t
 		moblist.Add(M)
 	for(var/mob/living/silicon/robot/M in sortmob)
 		moblist.Add(M)
-	for(var/mob/living/carbon/human/M in sortmob)
+	for(var/mob/living/human/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/living/brain/M in sortmob)
-		moblist.Add(M)
-	for(var/mob/living/carbon/alien/M in sortmob)
 		moblist.Add(M)
 	for(var/mob/observer/dead/M in sortmob)
 		moblist.Add(M)
@@ -1148,7 +1146,7 @@ var/global/list/common_tools = list(
 
 // check if mob is lying down on something we can operate him on.
 // The RNG with table/rollerbeds comes into play in do_surgery() so that fail_step() can be used instead.
-/proc/can_operate(mob/living/carbon/M, mob/living/user)
+/proc/can_operate(mob/living/human/M, mob/living/user)
 	// You can, technically, always operate on yourself after standing still. Inadvised, but you can.
 	return M.lying || \
 		(
@@ -1527,7 +1525,7 @@ var/mob/dview/dview_mob = new
 			/turf/unsimulated/floor = "US-FLOOR",
 			/turf/unsimulated = "UNSIMULATED",
 			/turf = "T",
-			/mob/living/carbon = "CARBON",
+			/mob/living/human = "CARBON",
 			/mob/living/simple_mob = "SIMPLE",
 			/mob/living = "LIVING",
 			/mob = "M"

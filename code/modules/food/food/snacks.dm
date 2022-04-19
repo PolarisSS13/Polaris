@@ -64,13 +64,13 @@
 		to_chat(M, "<span class='warning'>How do you expect to eat this with the packaging still on?</span>")
 		return FALSE
 
-	if(istype(M, /mob/living/carbon))
+	if(istype(M, /mob/living/human))
 		//TODO: replace with standard_feed_mob() call.
 
 		var/fullness = M.nutrition + (M.reagents.get_reagent_amount("nutriment") * 25)
 		if(M == user)								//If you're eating it yourself
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
+			if(istype(M,/mob/living/human))
+				var/mob/living/human/H = M
 				if(!H.check_has_mouth())
 					to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
 					return
@@ -97,8 +97,8 @@
 			return ..()
 
 		else
-			if(istype(M,/mob/living/carbon/human))
-				var/mob/living/carbon/human/H = M
+			if(istype(M,/mob/living/human))
+				var/mob/living/human/H = M
 				if(!H.check_has_mouth())
 					to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")
 					return
@@ -228,7 +228,7 @@
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
-	if(!isanimal(user) && !isalien(user))
+	if(!isanimal(user))
 		return
 	user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
 	bitecount++
@@ -1817,7 +1817,7 @@
 /obj/item/reagent_containers/food/snacks/cube/proc/Expand()
 	src.visible_message("<span class='notice'>\The [src] expands!</span>")
 	if (contents_type == "mob")
-		var/mob/living/carbon/human/H = new(get_turf(src))
+		var/mob/living/human/H = new(get_turf(src))
 		H.set_species(monkey_type)
 		H.real_name = H.species.get_random_name()
 		H.name = H.real_name
@@ -1842,7 +1842,7 @@
 	return
 
 /obj/item/reagent_containers/food/snacks/cube/On_Consume(var/mob/M)
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 	if(ishuman(M))
 		if (contents_type == "mob")
 			H.visible_message("<span class='warning'>A screeching creature bursts out of [M]'s chest!</span>")

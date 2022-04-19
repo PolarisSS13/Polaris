@@ -1,4 +1,4 @@
-/mob/living/carbon/human/gib()
+/mob/living/human/gib()
 
 	if(vr_holder)
 		exit_vr()
@@ -27,19 +27,19 @@
 	..(species.gibbed_anim) // uses the default mob.dmi file for these, so we only need to specify the first argument
 	gibs(loc, dna, null, species.get_flesh_colour(src), species.get_blood_colour(src))
 
-/mob/living/carbon/human/dust()
+/mob/living/human/dust()
 	if(species)
 		..(species.dusted_anim, species.remains_type)
 	else
 		..()
 
-/mob/living/carbon/human/ash()
+/mob/living/human/ash()
 	if(species)
 		..(species.dusted_anim)
 	else
 		..()
 
-/mob/living/carbon/human/death(gibbed)
+/mob/living/human/death(gibbed)
 
 	if(stat == DEAD) return
 
@@ -76,7 +76,7 @@
 			B.host_brain.name = "host brain"
 			B.host_brain.real_name = "host brain"
 
-		verbs -= /mob/living/carbon/human/proc/release_control
+		verbs -= /mob/living/human/proc/release_control
 
 	callHook("death", list(src, gibbed))
 
@@ -112,7 +112,7 @@
 
 	return ..(gibbed,species.get_death_message(src))
 
-/mob/living/carbon/human/proc/ChangeToHusk()
+/mob/living/human/proc/ChangeToHusk()
 	if(HUSK in mutations)	return
 
 	if(f_style)
@@ -126,12 +126,12 @@
 	update_icons_body()
 	return
 
-/mob/living/carbon/human/proc/Drain()
+/mob/living/human/proc/Drain()
 	ChangeToHusk()
 	mutations |= HUSK
 	return
 
-/mob/living/carbon/human/proc/ChangeToSkeleton()
+/mob/living/human/proc/ChangeToSkeleton()
 	if(SKELETON in src.mutations)	return
 
 	if(f_style)

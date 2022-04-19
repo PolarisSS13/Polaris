@@ -46,12 +46,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Add an entry to overlays, assuming it exists
-/mob/living/carbon/human/proc/apply_layer(cache_index)
+/mob/living/human/proc/apply_layer(cache_index)
 	if((. = overlays_standing[cache_index]))
 		add_overlay(.)
 
 //Remove an entry from overlays, and from the list
-/mob/living/carbon/human/proc/remove_layer(cache_index)
+/mob/living/human/proc/remove_layer(cache_index)
 	var/I = overlays_standing[cache_index]
 	if(I)
 		cut_overlay(I)
@@ -98,13 +98,13 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 #define GET_TAIL_LAYER (dir == NORTH ? TAIL_NORTH_LAYER : TAIL_SOUTH_LAYER)
 
-/mob/living/carbon/human
+/mob/living/human
 	var/list/overlays_standing[TOTAL_LAYERS]
 	var/previous_damage_appearance // store what the body last looked like, so we only have to update it if something changed
 
 //UPDATES OVERLAYS FROM OVERLAYS_LYING/OVERLAYS_STANDING
 //I'll work on removing that stuff by rewriting some of the cloaking stuff at a later date.
-/mob/living/carbon/human/update_icons()
+/mob/living/human/update_icons()
 	if(QDESTROYING(src))
 		return
 
@@ -115,7 +115,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	//Do any species specific layering updates, such as when hiding.
 	update_icon_special()
 
-/mob/living/carbon/human/update_transform()
+/mob/living/human/update_transform()
 	// First, get the correct size.
 	var/desired_scale_x = icon_scale_x
 	var/desired_scale_y = icon_scale_y
@@ -156,7 +156,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 //DAMAGE OVERLAYS
 //constructs damage icon for each organ from mask * damage field and saves it in our overlays_ lists
-/mob/living/carbon/human/UpdateDamageIcon()
+/mob/living/human/UpdateDamageIcon()
 	if(QDESTROYING(src))
 		return
 
@@ -201,7 +201,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	apply_layer(MOB_DAM_LAYER)
 
 //BASE MOB SPRITE
-/mob/living/carbon/human/update_icons_body()
+/mob/living/human/update_icons_body()
 	if(QDESTROYING(src))
 		return
 
@@ -352,7 +352,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	update_wing_showing()
 
 
-/mob/living/carbon/human/proc/update_skin()
+/mob/living/human/proc/update_skin()
 	if(QDESTROYING(src))
 		return
 
@@ -364,7 +364,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		overlays_standing[SKIN_LAYER] = skin
 		apply_layer(SKIN_LAYER)
 
-/mob/living/carbon/human/proc/update_bloodied()
+/mob/living/human/proc/update_bloodied()
 	if(QDESTROYING(src))
 		return
 
@@ -391,7 +391,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	apply_layer(BLOOD_LAYER)
 
 //UNDERWEAR OVERLAY
-/mob/living/carbon/human/proc/update_underwear()
+/mob/living/human/proc/update_underwear()
 	if(QDESTROYING(src))
 		return
 
@@ -409,7 +409,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		apply_layer(UNDERWEAR_LAYER)
 
 //HAIR OVERLAY
-/mob/living/carbon/human/proc/update_hair()
+/mob/living/human/proc/update_hair()
 	if(QDESTROYING(src))
 		return
 
@@ -470,7 +470,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	apply_layer(HAIR_LAYER)
 	return
 
-/mob/living/carbon/human/update_eyes()
+/mob/living/human/update_eyes()
 	if(QDESTROYING(src))
 		return
 
@@ -510,7 +510,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	overlays_standing[EYES_LAYER] = eyes_image
 	apply_layer(EYES_LAYER)
 
-/mob/living/carbon/human/update_mutations()
+/mob/living/human/update_mutations()
 	if(QDESTROYING(src))
 		return
 
@@ -546,7 +546,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 //Recomputes every icon on the mob. Expensive.
 //Useful if the species changed, or there's some
 //other drastic body-shape change, but otherwise avoid.
-/mob/living/carbon/human/regenerate_icons()
+/mob/living/human/regenerate_icons()
 	..()
 	if(transforming || QDELETED(src))
 		return
@@ -581,7 +581,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 /* --------------------------------------- */
 //vvvvvv UPDATE_INV PROCS vvvvvv
 
-/mob/living/carbon/human/update_inv_w_uniform()
+/mob/living/human/update_inv_w_uniform()
 	if(QDESTROYING(src))
 		return
 
@@ -614,7 +614,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER, clip_mask = c_mask)
 	apply_layer(UNIFORM_LAYER)
 
-/mob/living/carbon/human/update_inv_wear_id()
+/mob/living/human/update_inv_wear_id()
 	if(QDESTROYING(src))
 		return
 
@@ -631,7 +631,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(ID_LAYER)
 
-/mob/living/carbon/human/update_inv_gloves()
+/mob/living/human/update_inv_gloves()
 	if(QDESTROYING(src))
 		return
 
@@ -644,7 +644,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(GLOVES_LAYER)
 
-/mob/living/carbon/human/update_inv_glasses()
+/mob/living/human/update_inv_glasses()
 	if(QDESTROYING(src))
 		return
 
@@ -657,7 +657,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(GLASSES_LAYER)
 
-/mob/living/carbon/human/update_inv_ears()
+/mob/living/human/update_inv_ears()
 	if(QDESTROYING(src))
 		return
 
@@ -683,7 +683,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	overlays_standing[EARS_LAYER] = both
 	apply_layer(EARS_LAYER)
 
-/mob/living/carbon/human/update_inv_shoes()
+/mob/living/human/update_inv_shoes()
 	if(QDESTROYING(src))
 		return
 
@@ -711,7 +711,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	apply_layer(SHOES_LAYER)
 	apply_layer(SHOES_LAYER_ALT)
 
-/mob/living/carbon/human/update_inv_s_store()
+/mob/living/human/update_inv_s_store()
 	if(QDESTROYING(src))
 		return
 
@@ -729,7 +729,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(SUIT_STORE_LAYER)
 
-/mob/living/carbon/human/update_inv_head()
+/mob/living/human/update_inv_head()
 	if(QDESTROYING(src))
 		return
 
@@ -742,7 +742,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(HEAD_LAYER)
 
-/mob/living/carbon/human/update_inv_belt()
+/mob/living/human/update_inv_belt()
 	if(QDESTROYING(src))
 		return
 
@@ -764,7 +764,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(belt_layer)
 
-/mob/living/carbon/human/update_inv_wear_suit()
+/mob/living/human/update_inv_wear_suit()
 	if(QDESTROYING(src))
 		return
 
@@ -799,10 +799,10 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(SUIT_LAYER)
 
-/mob/living/carbon/human/update_inv_pockets()
+/mob/living/human/update_inv_pockets()
 	crash_with("Someone called update_inv_pockets even though it's dumb")
 
-/mob/living/carbon/human/update_inv_wear_mask()
+/mob/living/human/update_inv_wear_mask()
 	if(QDESTROYING(src))
 		return
 
@@ -815,7 +815,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(FACEMASK_LAYER)
 
-/mob/living/carbon/human/update_inv_back()
+/mob/living/human/update_inv_back()
 	if(QDESTROYING(src))
 		return
 
@@ -829,7 +829,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	apply_layer(BACK_LAYER)
 
 //TODO: Carbon procs in my human update_icons??
-/mob/living/carbon/human/update_hud()	//TODO: do away with this if possible
+/mob/living/human/update_hud()	//TODO: do away with this if possible
 	if(QDESTROYING(src))
 		return
 
@@ -839,7 +839,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			hud_used.hidden_inventory_update() 	//Updates the screenloc of the items on the 'other' inventory bar
 
 //update whether handcuffs appears on our hud.
-/mob/living/carbon/proc/update_hud_handcuffed()
+/mob/living/human/proc/update_hud_handcuffed()
 	if(QDESTROYING(src))
 		return
 
@@ -847,7 +847,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		hud_used.l_hand_hud_object.update_icon()
 		hud_used.r_hand_hud_object.update_icon()
 
-/mob/living/carbon/human/update_inv_handcuffed()
+/mob/living/human/update_inv_handcuffed()
 	if(QDESTROYING(src))
 		return
 
@@ -861,7 +861,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(HANDCUFF_LAYER)
 
-/mob/living/carbon/human/update_inv_legcuffed()
+/mob/living/human/update_inv_legcuffed()
 	if(QDESTROYING(src))
 		return
 
@@ -877,7 +877,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(LEGCUFF_LAYER)
 
-/mob/living/carbon/human/update_inv_r_hand()
+/mob/living/human/update_inv_r_hand()
 	if(QDESTROYING(src))
 		return
 
@@ -890,7 +890,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(R_HAND_LAYER)
 
-/mob/living/carbon/human/update_inv_l_hand()
+/mob/living/human/update_inv_l_hand()
 	if(QDESTROYING(src))
 		return
 
@@ -903,7 +903,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(L_HAND_LAYER)
 
-/mob/living/carbon/human/proc/update_tail_showing()
+/mob/living/human/proc/update_tail_showing()
 	if(QDESTROYING(src))
 		return
 
@@ -928,7 +928,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		animate_tail_reset()
 
 //TODO: Is this the appropriate place for this, and not on species...?
-/mob/living/carbon/human/proc/get_tail_icon()
+/mob/living/human/proc/get_tail_icon()
 	var/icon_key = "[species.get_race_key(src)][r_skin][g_skin][b_skin][r_hair][g_hair][b_hair]"
 	var/icon/tail_icon = tail_icon_cache[icon_key]
 	if(!tail_icon)
@@ -948,7 +948,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	return tail_icon
 
-/mob/living/carbon/human/proc/set_tail_state(var/t_state)
+/mob/living/human/proc/set_tail_state(var/t_state)
 	var/tail_layer = GET_TAIL_LAYER
 	var/image/tail_overlay = overlays_standing[tail_layer]
 
@@ -966,7 +966,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 //Not really once, since BYOND can't do that.
 //Update this if the ability to flick() images or make looping animation start at the first frame is ever added.
 //You can sort of flick images now with flick_overlay -Aro
-/mob/living/carbon/human/proc/animate_tail_once()
+/mob/living/human/proc/animate_tail_once()
 	if(QDESTROYING(src))
 		return
 
@@ -984,19 +984,19 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			if(overlays_standing[tail_layer] == tail_overlay && tail_overlay.icon_state == t_state)
 				animate_tail_stop()
 
-/mob/living/carbon/human/proc/animate_tail_start()
+/mob/living/human/proc/animate_tail_start()
 	if(QDESTROYING(src))
 		return
 
 	set_tail_state("[species.get_tail(src)]_slow[rand(0,9)]")
 
-/mob/living/carbon/human/proc/animate_tail_fast()
+/mob/living/human/proc/animate_tail_fast()
 	if(QDESTROYING(src))
 		return
 
 	set_tail_state("[species.get_tail(src)]_loop[rand(0,9)]")
 
-/mob/living/carbon/human/proc/animate_tail_reset()
+/mob/living/human/proc/animate_tail_reset()
 	if(QDESTROYING(src))
 		return
 
@@ -1006,13 +1006,13 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		set_tail_state("[species.get_tail(src)]_static")
 		toggle_tail(FALSE) //So tails stop when someone dies. TODO - Fix this hack ~Leshana
 
-/mob/living/carbon/human/proc/animate_tail_stop()
+/mob/living/human/proc/animate_tail_stop()
 	if(QDESTROYING(src))
 		return
 
 	set_tail_state("[species.get_tail(src)]_static")
 
-/mob/living/carbon/human/proc/update_wing_showing()
+/mob/living/human/proc/update_wing_showing()
 	if(QDESTROYING(src))
 		return
 
@@ -1025,7 +1025,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(WING_LAYER)
 
-/mob/living/carbon/human/update_modifier_visuals()
+/mob/living/human/update_modifier_visuals()
 	if(QDESTROYING(src))
 		return
 
@@ -1044,7 +1044,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(MODIFIER_EFFECTS_LAYER)
 
-/mob/living/carbon/human/update_fire()
+/mob/living/human/update_fire()
 	if(QDESTROYING(src))
 		return
 
@@ -1057,7 +1057,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(FIRE_LAYER)
 
-/mob/living/carbon/human/update_water()
+/mob/living/human/update_water()
 	if(QDESTROYING(src))
 		return
 
@@ -1074,7 +1074,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	apply_layer(MOB_WATER_LAYER)
 
-/mob/living/carbon/human/proc/update_surgery()
+/mob/living/human/proc/update_surgery()
 	if(QDESTROYING(src))
 		return
 
@@ -1090,7 +1090,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		overlays_standing[SURGERY_LAYER] = total
 		apply_layer(SURGERY_LAYER)
 
-/mob/living/carbon/human/proc/get_wing_image()
+/mob/living/human/proc/get_wing_image()
 	if(QDESTROYING(src))
 		return
 
@@ -1123,7 +1123,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				qdel(overlay)
 		return image(wing_s)
 
-/mob/living/carbon/human/proc/get_ears_overlay()
+/mob/living/human/proc/get_ears_overlay()
 	if(ear_style && !(head && (head.flags_inv & BLOCKHEADHAIR)))
 		var/icon/ears_s = new/icon("icon" = ear_style.icon, "icon_state" = ear_style.icon_state)
 		if(ear_style.do_colouration)
@@ -1142,7 +1142,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	return null
 
 
-/mob/living/carbon/human/proc/get_tail_image()
+/mob/living/human/proc/get_tail_image()
 	//If you are FBP with tail style and didn't set a custom one
 	var/datum/robolimb/model = isSynthetic()
 	if(istype(model) && model.includes_tail && !tail_style)
@@ -1183,7 +1183,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			var/datum/sprite_accessory/tail/taur/taurtype = tail_style
 			if(taurtype.can_ride && !riding_datum)
 				riding_datum = new /datum/riding/taur(src)
-				verbs |= /mob/living/carbon/human/proc/taur_mount
+				verbs |= /mob/living/human/proc/taur_mount
 				verbs |= /mob/living/proc/toggle_rider_reins
 			return image(tail_s, "pixel_x" = -16)
 		else
@@ -1197,7 +1197,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	flying = FALSE
 	return 1
 
-/mob/living/carbon/human/stop_flying()
+/mob/living/human/stop_flying()
 	if((. = ..()))
 		update_wing_showing()
 

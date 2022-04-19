@@ -117,7 +117,7 @@
 
 /obj/item/fbp_backup_cell/attack(mob/living/M as mob, mob/user as mob)
 	if(!used && ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.isSynthetic())
 			if(H.nutrition <= amount)
 				use(user,H)

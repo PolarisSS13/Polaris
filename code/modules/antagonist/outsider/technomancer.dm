@@ -32,7 +32,7 @@ var/datum/antagonist/technomancer/technomancers
 	technomancer.current.real_name = "[pick(wizard_first)] [pick(wizard_second)]"
 	technomancer.current.name = technomancer.current.real_name
 
-/datum/antagonist/technomancer/equip(var/mob/living/carbon/human/technomancer_mob)
+/datum/antagonist/technomancer/equip(var/mob/living/human/technomancer_mob)
 
 	if(!..())
 		return 0
@@ -50,7 +50,7 @@ var/datum/antagonist/technomancer/technomancers
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/clothing/head/technomancer/master(technomancer_mob), slot_head)
 	return 1
 
-/datum/antagonist/technomancer/proc/equip_apprentice(var/mob/living/carbon/human/technomancer_mob)
+/datum/antagonist/technomancer/proc/equip_apprentice(var/mob/living/human/technomancer_mob)
 
 	technomancer_mob.equip_to_slot_or_del(new /obj/item/clothing/under/technomancer/apprentice(technomancer_mob), slot_w_uniform)
 	create_id("Techno-apprentice", technomancer_mob)

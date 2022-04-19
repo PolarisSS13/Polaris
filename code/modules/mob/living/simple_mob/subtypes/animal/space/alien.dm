@@ -151,7 +151,7 @@
 	var/turf/center = get_turf(src)
 	if (isturf(center))
 		playsound(center, 'sound/effects/mob_effects/skathari_teleport.ogg', 75, TRUE)
-		for (var/mob/living/carbon/victim in oviewers(5, center))
+		for (var/mob/living/human/victim in oviewers(5, center))
 			victim.flash_eyes(3)
 		visible_message(
 			SPAN_WARNING("\The [src] disappears with a screech and a flash of light!"),

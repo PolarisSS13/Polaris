@@ -1,5 +1,5 @@
-/mob/living/carbon/diona_nymph/MouseDrop(var/atom/over_object)
-	var/mob/living/carbon/human/H = over_object
+/mob/living/simple_mob/diona_nymph/MouseDrop(var/atom/over_object)
+	var/mob/living/human/H = over_object
 	if(ishuman(H) && Adjacent(H) && H.a_intent == "grab" && hat && !H.hands_are_full())
 		hat.loc = get_turf(src)
 		H.put_in_hands(hat)
@@ -9,7 +9,7 @@
 		return
 	return ..()
 
-/mob/living/carbon/diona_nymph/attackby(var/obj/item/W, var/mob/user)
+/mob/living/simple_mob/diona_nymph/attackby(var/obj/item/W, var/mob/user)
 	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
@@ -20,7 +20,7 @@
 		return
 	return ..()
 
-/mob/living/carbon/diona_nymph/ex_act(severity)
+/mob/living/simple_mob/diona_nymph/ex_act(severity)
 
 	if(!blinded)
 		flash_eyes()

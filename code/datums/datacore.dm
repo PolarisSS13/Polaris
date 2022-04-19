@@ -284,7 +284,7 @@ var/global/list/PDA_Manifest = list()
 
 /datum/datacore/proc/manifest()
 	spawn()
-		for(var/mob/living/carbon/human/H in player_list)
+		for(var/mob/living/human/H in player_list)
 			manifest_inject(H)
 		return
 
@@ -318,7 +318,7 @@ var/global/list/PDA_Manifest = list()
 		foundrecord.fields["rank"] = assignment
 		foundrecord.fields["real_rank"] = real_title
 
-/datum/datacore/proc/manifest_inject(var/mob/living/carbon/human/H)
+/datum/datacore/proc/manifest_inject(var/mob/living/human/H)
 	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment = GetAssignment(H)
 		var/hidden
@@ -419,7 +419,7 @@ var/global/list/PDA_Manifest = list()
 	return "000[random_hex_text(3, TRUE)]"
 
 
-/datum/datacore/proc/CreateGeneralRecord(var/mob/living/carbon/human/H, var/id, var/hidden)
+/datum/datacore/proc/CreateGeneralRecord(var/mob/living/human/H, var/id, var/hidden)
 	ResetPDAManifest()
 	var/icon/front
 	var/icon/side
@@ -527,7 +527,7 @@ var/global/list/PDA_Manifest = list()
 		if(R.fields[field] == value)
 			return R
 
-/proc/GetAssignment(var/mob/living/carbon/human/H)
+/proc/GetAssignment(var/mob/living/human/H)
 	if(H.mind.role_alt_title)
 		return H.mind.role_alt_title
 	else if(H.mind.assigned_role)

@@ -43,12 +43,12 @@
 	valid_transform_species = list(SPECIES_HUMAN, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_TAJ, SPECIES_SKRELL, SPECIES_DIONA, SPECIES_TESHARI, SPECIES_MONKEY, SPECIES_VOX)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/shapeshifter_select_shape,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair,
-		/mob/living/carbon/human/proc/shapeshifter_select_gender,
-		/mob/living/carbon/human/proc/shapeshifter_select_colour,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair_colors,
-		/mob/living/carbon/human/proc/exit_vr
+		/mob/living/human/proc/shapeshifter_select_shape,
+		/mob/living/human/proc/shapeshifter_select_hair,
+		/mob/living/human/proc/shapeshifter_select_gender,
+		/mob/living/human/proc/shapeshifter_select_colour,
+		/mob/living/human/proc/shapeshifter_select_hair_colors,
+		/mob/living/human/proc/exit_vr
 		)
 
 	has_organ = list(
@@ -75,15 +75,15 @@
 	assisted_langs = list(LANGUAGE_ROOTGLOBAL, LANGUAGE_SOL_COMMON, LANGUAGE_SKRELLIANFAR)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/shapeshifter_select_shape,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair,
-		/mob/living/carbon/human/proc/shapeshifter_select_gender,
-		/mob/living/carbon/human/proc/shapeshifter_select_colour,
-		/mob/living/carbon/human/proc/shapeshifter_select_hair_colors,
-		/mob/living/carbon/human/proc/exit_vr,
-		/mob/living/carbon/human/proc/corrosive_acid,
-		/mob/living/carbon/human/proc/neurotoxin,
-		/mob/living/carbon/human/proc/acidspit
+		/mob/living/human/proc/shapeshifter_select_shape,
+		/mob/living/human/proc/shapeshifter_select_hair,
+		/mob/living/human/proc/shapeshifter_select_gender,
+		/mob/living/human/proc/shapeshifter_select_colour,
+		/mob/living/human/proc/shapeshifter_select_hair_colors,
+		/mob/living/human/proc/exit_vr,
+		/mob/living/human/proc/corrosive_acid,
+		/mob/living/human/proc/neurotoxin,
+		/mob/living/human/proc/acidspit
 		)
 
 	has_organ = list(

@@ -17,7 +17,7 @@
 "aq" = (/obj/structure/sign/warning/server_room,/turf/simulated/wall/rpshull,/area/submap/DJOutpost1)
 "ar" = (/obj/structure/sign/goldenplaque{desc = "An award given to Sif Free Radio for media excellency. It looks fake."; name = "Best Radio Station 2558"; pixel_y = 30},/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
 "as" = (/obj/structure/bookcase,/obj/structure/safe/floor,/obj/item/bone/skull/unknown,/obj/item/bone,/obj/item/bone/ribs{start_anomalous = 1},/obj/random/energy/highend,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
-"at" = (/mob/living/carbon/human/ai_controlled/replicant,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
+"at" = (/mob/living/human/ai_controlled/replicant,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
 "au" = (/obj/effect/decal/remains,/obj/effect/decal/cleanable/blood,/obj/item/clothing/under/frontier,/obj/random_multi/single_item/sfr_headset,/obj/item/archaeological_find,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
 "av" = (/obj/machinery/door/airlock/maintenance/int,/turf/simulated/floor/tiled/techfloor/grid,/area/submap/DJOutpost1)
 "aw" = (/obj/structure/table/steel_reinforced,/obj/item/radio/intercom{dir = 8; icon_state = "intercom"},/obj/random/firstaid,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)

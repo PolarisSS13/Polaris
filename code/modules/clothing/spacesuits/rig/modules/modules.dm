@@ -226,7 +226,7 @@
 /obj/item/rig_module/proc/accepts_item(var/obj/item/input_device)
 	return 0
 
-/mob/living/carbon/human/Stat()
+/mob/living/human/Stat()
 	. = ..()
 
 	if(. && istype(back,/obj/item/rig))

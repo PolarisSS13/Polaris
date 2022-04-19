@@ -93,12 +93,12 @@ var/list/_human_default_emotes = list(
 	/decl/emote/visible/flip
 )
 
-/mob/living/carbon/human/get_available_emotes()
+/mob/living/human/get_available_emotes()
 	. = global._human_default_emotes
 	if(length(species?.default_emotes))
 		. |= species.default_emotes
 
-/mob/living/carbon/human/pose()
+/mob/living/human/pose()
 	set name = "Set Pose"
 	set desc = "Sets a description which will be shown when someone examines you."
 	set category = "IC"
@@ -107,7 +107,7 @@ var/list/_human_default_emotes = list(
 
 	pose =  sanitize(input(usr, "This is [src]. [T.he]...", "Pose", null)  as text)
 
-/mob/living/carbon/human/verb/set_flavor()
+/mob/living/human/verb/set_flavor()
 	set name = "Set Flavour Text"
 	set desc = "Sets an extended description of your character's features."
 	set category = "IC"
@@ -148,7 +148,7 @@ var/list/_human_default_emotes = list(
 	HTML += "<tt>"
 	src << browse(HTML, "window=flavor_changes;size=430x300")
 
-/mob/living/carbon/human/proc/toggle_tail(var/setting,var/message = 0)
+/mob/living/human/proc/toggle_tail(var/setting,var/message = 0)
 	if(!tail_style || !tail_style.ani_state)
 		if(message)
 			to_chat(src, "<span class='warning'>You don't have a tail that supports this.</span>")
@@ -160,7 +160,7 @@ var/list/_human_default_emotes = list(
 		update_tail_showing()
 	return 1
 
-/mob/living/carbon/human/proc/toggle_wing(var/setting,var/message = 0)
+/mob/living/human/proc/toggle_wing(var/setting,var/message = 0)
 	if(!wing_style || !wing_style.ani_state)
 		if(message)
 			to_chat(src, "<span class='warning'>You don't have a wingtype that supports this.</span>")

@@ -1,4 +1,4 @@
-/mob/living/carbon/human/ai_controlled
+/mob/living/human/ai_controlled
 	name = "Nameless Joe"
 
 	ai_holder_type = /datum/ai_holder/simple_mob/melee/evasive
@@ -32,7 +32,7 @@
 	var/to_wear_l_hand = null
 	var/to_wear_r_hand = /obj/item/melee/baton
 
-/mob/living/carbon/human/ai_controlled/Initialize()
+/mob/living/human/ai_controlled/Initialize()
 	if(generate_gender)
 		gender = pick(list(MALE, FEMALE, PLURAL, NEUTER))
 
@@ -113,7 +113,7 @@
  * Subtypes.
  */
 
-/mob/living/carbon/human/ai_controlled/replicant
+/mob/living/human/ai_controlled/replicant
 	generate_species = SPECIES_REPLICANT_BETA
 
 	generate_gender = TRUE
@@ -139,7 +139,7 @@
 
 	to_wear_r_hand = null
 
-/mob/living/carbon/human/ai_controlled/replicant/Initialize()
+/mob/living/human/ai_controlled/replicant/Initialize()
 	. = ..()
 	name = species.get_random_name(gender)
 	add_modifier(/datum/modifier/homeothermic, 0, null)

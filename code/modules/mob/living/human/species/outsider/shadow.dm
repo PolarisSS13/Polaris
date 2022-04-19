@@ -27,7 +27,7 @@
 
 	assisted_langs = list()
 
-/datum/species/shadow/handle_death(var/mob/living/carbon/human/H)
+/datum/species/shadow/handle_death(var/mob/living/human/H)
 	spawn(1)
 		new /obj/effect/decal/cleanable/ash(H.loc)
 		qdel(H)

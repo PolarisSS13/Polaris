@@ -51,7 +51,7 @@
 
 /obj/item/organ/internal/lungs/grey/colormatch/Initialize()
 	. = ..()
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	spawn(15)
 		if(owner && ishuman(owner))
 			H = owner

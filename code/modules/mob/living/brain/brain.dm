@@ -1,4 +1,4 @@
-/mob/living/carbon/brain
+/mob/living/brain
 	var/obj/item/container = null
 	var/timeofhostdeath = 0
 	var/emp_damage = FALSE // Handles a type of MMI damage
@@ -7,21 +7,21 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "brain1"
 
-/mob/living/carbon/brain/Initialize()
+/mob/living/brain/Initialize()
 	. = ..()
 	default_language = GLOB.all_languages[LANGUAGE_GALCOM]
 
-/mob/living/carbon/brain/Destroy()
+/mob/living/brain/Destroy()
 	if(key)              //If there is a mob connected to this thing. Have to check key twice to avoid false death reporting.
 		if(stat != DEAD) //If not dead.
 			death(1)     //Brains can die again. AND THEY SHOULD AHA HA HA HA HA HA
 		ghostize()       //Ghostize checks for key so nothing else is necessary.
 	return ..()
 
-/mob/living/carbon/brain/say_understands(var/other)//Goddamn is this hackish, but this say code is so odd
+/mob/living/brain/say_understands(var/other)//Goddamn is this hackish, but this say code is so odd
 	return ishuman(other) || isslime(other) || (istype(container, /obj/item/mmi) && issilicon(other)) || ..()
 
-/mob/living/carbon/brain/update_canmove()
+/mob/living/brain/update_canmove()
 	if(in_contents_of(/obj/mecha) || istype(container, /obj/item/mmi))
 		canmove = TRUE
 		use_me = TRUE
@@ -29,10 +29,10 @@
 		canmove = FALSE
 	return canmove
 
-/mob/living/carbon/brain/isSynthetic()
+/mob/living/brain/isSynthetic()
 	return istype(container, /obj/item/mmi)
 
-/mob/living/carbon/brain/set_typing_indicator(var/state)
+/mob/living/brain/set_typing_indicator(var/state)
 	if(isturf(loc))
 		return ..()
 

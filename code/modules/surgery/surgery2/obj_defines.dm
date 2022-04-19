@@ -6,7 +6,7 @@
  * @param user: the mob holding [src]
  * @return: True if surgery steps are possible OR surgery is in progress, False otherwise
 **/
-/obj/item/proc/try_surgery(mob/living/carbon/M, mob/living/user)
+/obj/item/proc/try_surgery(mob/living/human/M, mob/living/user)
 	if(user.a_intent == I_HURT)	//check for Hippocratic Oath
 		return FALSE
 

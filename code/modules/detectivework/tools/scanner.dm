@@ -13,7 +13,7 @@
 	var/reveal_blood = TRUE
 	var/reveal_fibers = FALSE
 
-/obj/item/detective_scanner/attack(mob/living/carbon/human/M as mob, mob/user as mob)
+/obj/item/detective_scanner/attack(mob/living/human/M as mob, mob/user as mob)
 	if (!ishuman(M))
 		to_chat(user, "<span class='warning'>\The [M] does not seem to be compatible with this device.</span>")
 		flick("[icon_state]0",src)

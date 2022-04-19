@@ -1,4 +1,4 @@
-/mob/living/carbon/human/proc/handle_strip(var/slot_to_strip,var/mob/living/user)
+/mob/living/human/proc/handle_strip(var/slot_to_strip,var/mob/living/user)
 
 	if(!slot_to_strip || !istype(user))
 		return
@@ -102,7 +102,7 @@
 			user.put_in_hands(held)
 
 // Empty out everything in the target's pockets.
-/mob/living/carbon/human/proc/empty_pockets(var/mob/living/user)
+/mob/living/human/proc/empty_pockets(var/mob/living/user)
 	if(!r_store && !l_store)
 		to_chat(user, "<span class='warning'>\The [src] has nothing in their pockets.</span>")
 		return
@@ -113,7 +113,7 @@
 	visible_message("<span class='danger'>\The [user] empties \the [src]'s pockets!</span>")
 
 // Modify the current target sensor level.
-/mob/living/carbon/human/proc/toggle_sensors(var/mob/living/user)
+/mob/living/human/proc/toggle_sensors(var/mob/living/user)
 	var/obj/item/clothing/under/suit = w_uniform
 	if(!suit)
 		to_chat(user, "<span class='warning'>\The [src] is not wearing a suit with sensors.</span>")
@@ -125,7 +125,7 @@
 	suit.set_sensors(user)
 
 // Remove all splints.
-/mob/living/carbon/human/proc/remove_splints(var/mob/living/user)
+/mob/living/human/proc/remove_splints(var/mob/living/user)
 
 	var/can_reach_splints = 1
 	if(istype(wear_suit,/obj/item/clothing/suit/space))
@@ -150,7 +150,7 @@
 			to_chat(user, "<span class='warning'>\The [src] has no splints to remove.</span>")
 
 // Set internals on or off.
-/mob/living/carbon/human/proc/toggle_internals(var/mob/living/user)
+/mob/living/human/proc/toggle_internals(var/mob/living/user)
 	if(internal)
 		internal.add_fingerprint(user)
 		internal = null

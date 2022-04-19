@@ -72,7 +72,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 			owner.Confuse(2)
 
 /obj/item/organ/internal/brain/proc/replace_self_with(replace_path)
-	var/mob/living/carbon/human/tmp_owner = owner
+	var/mob/living/human/tmp_owner = owner
 	qdel(src)
 	if(tmp_owner)
 		tmp_owner.internal_organs_by_name[organ_tag] = new replace_path(tmp_owner, 1)
@@ -93,7 +93,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	QDEL_NULL(brainmob)
 	. = ..()
 
-/obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/carbon/H)
+/obj/item/organ/internal/brain/proc/transfer_identity(var/mob/living/human/H)
 
 	if(!brainmob)
 		brainmob = new(src)
@@ -135,7 +135,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 
 	var/obj/item/organ/internal/brain/B = src
 	if(istype(B) && owner)
-		if(istype(owner, /mob/living/carbon))
+		if(istype(owner, /mob/living/human))
 			B.transfer_identity(owner)
 
 	..()
@@ -190,7 +190,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 /obj/item/organ/internal/brain/slime/Initialize()
 	. = ..()
 	create_reagents(50)
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	spawn(15) //Match the core to the Promethean's starting color.
 		if(ishuman(owner))
 			H = owner
@@ -237,7 +237,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 		if(istype(modifier_type, /datum/modifier/no_clone))
 			return 0
 
-	var/mob/living/carbon/human/H = new /mob/living/carbon/human(get_turf(src), R.dna.species)
+	var/mob/living/human/H = new /mob/living/human(get_turf(src), R.dna.species)
 
 	if(!R.dna)
 		H.dna = new /datum/dna()
@@ -304,7 +304,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 
 /obj/item/organ/internal/brain/grey/colormatch/Initialize()
 	. = ..()
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	spawn(15)
 		if(ishuman(owner))
 			H = owner

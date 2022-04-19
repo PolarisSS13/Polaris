@@ -132,7 +132,7 @@
 		)
 
 	inherent_verbs = list(
-		/mob/living/carbon/human/proc/sonar_ping,
+		/mob/living/human/proc/sonar_ping,
 		/mob/living/proc/hide
 		)
 
@@ -158,11 +158,11 @@
 		/decl/emote/audible/teshtrill
 	)
 
-/datum/species/teshari/equip_survival_gear(var/mob/living/carbon/human/H)
+/datum/species/teshari/equip_survival_gear(var/mob/living/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
 
-/datum/species/teshari/handle_falling(mob/living/carbon/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
+/datum/species/teshari/handle_falling(mob/living/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
 
 	// Tesh can glide to save themselves from some falls. Basejumping bird
 	// without parachute, or falling bird without free wings, goes splat.

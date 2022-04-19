@@ -28,7 +28,7 @@ var/datum/antagonist/deathsquad/deathsquad
 	if(..())
 		deployed = 1
 
-/datum/antagonist/deathsquad/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/deathsquad/equip(var/mob/living/human/player)
 	if(!..())
 		return
 
@@ -77,7 +77,7 @@ var/datum/antagonist/deathsquad/deathsquad
 	player.current.name = player.name
 	player.current.real_name = player.current.name
 
-	var/mob/living/carbon/human/H = player.current
+	var/mob/living/human/H = player.current
 	if(istype(H))
 		H.gender = pick(MALE, FEMALE)
 		H.age = rand(25,45)

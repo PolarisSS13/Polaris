@@ -8,7 +8,7 @@ emp_act
 
 */
 
-/mob/living/carbon/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
+/mob/living/human/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	def_zone = check_zone(def_zone)
 	if(!has_organ(def_zone))
@@ -46,7 +46,7 @@ emp_act
 
 	return (..(P , def_zone))
 
-/mob/living/carbon/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
+/mob/living/human/stun_effect_act(var/stun_amount, var/agony_amount, var/def_zone)
 	var/obj/item/organ/external/affected = get_organ(check_zone(def_zone))
 	var/siemens_coeff = get_siemens_coefficient_organ(affected)
 	if(fire_stacks < 0) // Water makes you more conductive.
@@ -76,7 +76,7 @@ emp_act
 
 	..(stun_amount, agony_amount, def_zone)
 
-/mob/living/carbon/human/getarmor(var/def_zone, var/type)
+/mob/living/human/getarmor(var/def_zone, var/type)
 	var/armorval = 0
 	var/total = 0
 
@@ -99,7 +99,7 @@ emp_act
 	return (armorval/max(total, 1))
 
 //Like getarmor, but the value it returns will be numerical damage reduction
-/mob/living/carbon/human/getsoak(var/def_zone, var/type)
+/mob/living/human/getsoak(var/def_zone, var/type)
 	var/soakval = 0
 	var/total = 0
 
@@ -122,7 +122,7 @@ emp_act
 	return (soakval/max(total, 1))
 
 //this proc returns the Siemens coefficient of electrical resistivity for a particular external organ.
-/mob/living/carbon/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
+/mob/living/human/proc/get_siemens_coefficient_organ(var/obj/item/organ/external/def_zone)
 	if (!def_zone)
 		return 1.0
 
@@ -142,7 +142,7 @@ emp_act
 	return siemens_coefficient
 
 // Similar to above but is for the mob's overall protection, being the average of all slots.
-/mob/living/carbon/human/proc/get_siemens_coefficient_average()
+/mob/living/human/proc/get_siemens_coefficient_average()
 	var/siemens_value = 0
 	var/total = 0
 	for(var/organ_name in organs_by_name)
@@ -159,11 +159,11 @@ emp_act
 	return (siemens_value / max(total, 1))
 
 // Returns a number between 0 to 1, with 1 being total protection.
-/mob/living/carbon/human/get_shock_protection()
+/mob/living/human/get_shock_protection()
 	return min(1 - get_siemens_coefficient_average(), 1) // Don't go above 1, but negatives are fine.
 
 // Returns a list of clothing that is currently covering def_zone.
-/mob/living/carbon/human/proc/get_clothing_list_organ(var/obj/item/organ/external/def_zone, var/type)
+/mob/living/human/proc/get_clothing_list_organ(var/obj/item/organ/external/def_zone, var/type)
 	var/list/results = list()
 	var/list/clothing_items = list(head, wear_mask, wear_suit, w_uniform, gloves, shoes)
 	for(var/obj/item/clothing/C in clothing_items)
@@ -172,7 +172,7 @@ emp_act
 	return results
 
 //this proc returns the armour value for a particular external organ.
-/mob/living/carbon/human/proc/getarmor_organ(var/obj/item/organ/external/def_zone, var/type)
+/mob/living/human/proc/getarmor_organ(var/obj/item/organ/external/def_zone, var/type)
 	if(!type || !def_zone)
 		return 0
 	var/protection = 0
@@ -188,7 +188,7 @@ emp_act
 
 	return protection
 
-/mob/living/carbon/human/proc/getsoak_organ(var/obj/item/organ/external/def_zone, var/type)
+/mob/living/human/proc/getsoak_organ(var/obj/item/organ/external/def_zone, var/type)
 	if(!type || !def_zone)
 		return 0
 	var/soaked = 0
@@ -205,7 +205,7 @@ emp_act
 	return soaked
 
 // Checked in borer code
-/mob/living/carbon/human/proc/check_head_coverage()
+/mob/living/human/proc/check_head_coverage()
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 	var/list/body_parts = H.get_covering_clothing(EYES)
 	if(LAZYLEN(body_parts))
@@ -213,7 +213,7 @@ emp_act
 	return 0
 
 //Used to check if they can be fed food/drinks/pills
-/mob/living/carbon/human/proc/check_mouth_coverage()
+/mob/living/human/proc/check_mouth_coverage()
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 	var/list/protective_gear = H.get_covering_clothing(FACE)
 	for(var/obj/item/gear in protective_gear)
@@ -221,7 +221,7 @@ emp_act
 			return gear
 	return null
 
-/mob/living/carbon/human/proc/check_mouth_coverage_survival()
+/mob/living/human/proc/check_mouth_coverage_survival()
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 	var/list/protective_gear = H.get_covering_clothing(FACE)
 	for(var/obj/item/gear in protective_gear)
@@ -229,14 +229,14 @@ emp_act
 			return gear
 	return null
 
-/mob/living/carbon/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/mob/living/human/proc/check_shields(var/damage = 0, var/atom/damage_source = null, var/mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	for(var/obj/item/shield in list(l_hand, r_hand, wear_suit))
 		if(!shield) continue
 		. = shield.handle_shield(src, damage, damage_source, attacker, def_zone, attack_text)
 		if(.) return
 	return 0
 
-/mob/living/carbon/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
+/mob/living/human/resolve_item_attack(obj/item/I, mob/living/user, var/target_zone)
 	if(check_neckgrab_attack(I, user, target_zone))
 		return null
 
@@ -261,7 +261,7 @@ emp_act
 
 	return hit_zone
 
-/mob/living/carbon/human/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
+/mob/living/human/hit_with_weapon(obj/item/I, mob/living/user, var/effective_force, var/hit_zone)
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if(!affecting)
 		return //should be prevented by attacked_with_item() but for sanity.
@@ -276,7 +276,7 @@ emp_act
 
 	return blocked
 
-/mob/living/carbon/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/soaked, var/hit_zone)
+/mob/living/human/standard_weapon_hit_effects(obj/item/I, mob/living/user, var/effective_force, var/blocked, var/soaked, var/hit_zone)
 	var/obj/item/organ/external/affecting = get_organ(hit_zone)
 	if(!affecting)
 		return 0
@@ -318,7 +318,7 @@ emp_act
 			if(istype(location, /turf/simulated))
 				location.add_blood(src)
 			if(ishuman(user))
-				var/mob/living/carbon/human/H = user
+				var/mob/living/human/H = user
 				if(get_dist(H, src) <= 1) //people with TK won't get smeared with blood
 					H.bloody_body(src)
 					H.bloody_hands(src)
@@ -348,7 +348,7 @@ emp_act
 
 	return 1
 
-/mob/living/carbon/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked, var/soaked)
+/mob/living/human/proc/attack_joint(var/obj/item/organ/external/organ, var/obj/item/W, var/effective_force, var/dislocate_mult, var/blocked, var/soaked)
 	if(!organ || (organ.dislocated == 2) || (organ.dislocated == -1) || blocked >= 100)
 		return 0
 
@@ -366,7 +366,7 @@ emp_act
 		return 1
 	return 0
 
-/mob/living/carbon/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
+/mob/living/human/emag_act(var/remaining_charges, mob/user, var/emag_source)
 	var/obj/item/organ/external/affecting = get_organ(user.zone_sel.selecting)
 	if(!affecting || !(affecting.robotic >= ORGAN_ROBOT))
 		to_chat(user, "<span class='warning'>That limb isn't robotic.</span>")
@@ -379,7 +379,7 @@ emp_act
 	return 1
 
 //this proc handles being hit by a thrown atom
-/mob/living/carbon/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
+/mob/living/human/hitby(atom/movable/AM as mob|obj,var/speed = THROWFORCE_SPEED_DIVISOR)
 //	if(buckled && buckled == AM)
 //		return // Don't get hit by the thing we're buckled to.
 
@@ -489,7 +489,7 @@ emp_act
 					src.pinned += O
 
 // This does a prob check to catch the thing flying at you, with a minimum of 1%
-/mob/living/carbon/human/proc/can_catch(var/obj/O)
+/mob/living/human/proc/can_catch(var/obj/O)
 	if(!get_active_hand())	// If active hand is empty
 		var/obj/item/organ/external/temp = organs_by_name["r_hand"]
 		if (hand)
@@ -514,7 +514,7 @@ emp_act
 		return TRUE
 	return FALSE
 
-/mob/living/carbon/human/embed(var/obj/O, var/def_zone=null)
+/mob/living/human/embed(var/obj/O, var/def_zone=null)
 	if(!def_zone) ..()
 
 	var/obj/item/organ/external/affecting = get_organ(def_zone)
@@ -522,7 +522,7 @@ emp_act
 		affecting.embed(O)
 
 
-/mob/living/carbon/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
+/mob/living/human/proc/bloody_hands(var/mob/living/source, var/amount = 2)
 	if (gloves)
 		gloves.add_blood(source)
 		gloves:transfer_blood = amount
@@ -533,7 +533,7 @@ emp_act
 		bloody_hands_mob = source
 	update_inv_gloves()		//updates on-mob overlays for bloody hands and/or bloody gloves
 
-/mob/living/carbon/human/proc/bloody_body(var/mob/living/source)
+/mob/living/human/proc/bloody_body(var/mob/living/source)
 	if(wear_suit)
 		wear_suit.add_blood(source)
 		update_inv_wear_suit(0)
@@ -541,7 +541,7 @@ emp_act
 		w_uniform.add_blood(source)
 		update_inv_w_uniform(0)
 
-/mob/living/carbon/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
+/mob/living/human/proc/handle_suit_punctures(var/damtype, var/damage, var/def_zone)
 
 	// Tox and oxy don't matter to suits.
 	if(damtype != BURN && damtype != BRUTE) return
@@ -558,7 +558,7 @@ emp_act
 	var/penetrated_dam = max(0,(damage - SS.breach_threshold))
 	if(penetrated_dam) SS.create_breaches(damtype, penetrated_dam)
 
-/mob/living/carbon/human/reagent_permeability()
+/mob/living/human/reagent_permeability()
 	var/perm = 0
 
 	var/list/perm_by_part = list(
@@ -595,7 +595,7 @@ emp_act
 	return perm
 
 // This is for preventing harm by being covered in water, which only prometheans need to deal with.
-/mob/living/carbon/human/get_water_protection()
+/mob/living/human/get_water_protection()
 	var/protection = species.water_resistance
 	if(protection == 1) // No point doing permeability checks if it won't matter.
 		return protection
@@ -606,7 +606,7 @@ emp_act
 	converted_protection *= perm
 	return clamp(1-converted_protection, 0, 1)
 
-/mob/living/carbon/human/water_act(amount)
+/mob/living/human/water_act(amount)
 	adjust_fire_stacks(-amount * 5)
 	for(var/atom/movable/AM in contents)
 		AM.water_act(amount)
@@ -614,7 +614,7 @@ emp_act
 
 	species.handle_water_damage(src, amount)
 
-/mob/living/carbon/human/proc/shank_attack(obj/item/W, obj/item/grab/G, mob/user, hit_zone)
+/mob/living/human/proc/shank_attack(obj/item/W, obj/item/grab/G, mob/user, hit_zone)
 	if(!W.sharp || !W.force || W.damtype != BRUTE)
 		return FALSE //unsuitable weapon
 
@@ -651,7 +651,7 @@ emp_act
 
 	return 1
 
-/mob/living/carbon/human/proc/help_shake_act(mob/living/carbon/human/H)
+/mob/living/human/proc/help_shake_act(mob/living/human/H)
 	w_uniform?.add_fingerprint(H)
 	if(src.health < config.health_threshold_crit)
 		return
@@ -739,7 +739,7 @@ emp_act
 		H.visible_message("<span class='notice'>[H] shakes [src] trying to wake [T.him] up!</span>", \
 			"<span class='notice'>You shake [src] trying to wake [T.him] up!</span>")
 	else
-		var/mob/living/carbon/human/hugger = H
+		var/mob/living/human/hugger = H
 		var/datum/gender/TM = gender_datums[H.get_visible_gender()]
 		if(H.resting) //Are they resting on the ground?
 			H.visible_message("<span class='notice'>[H] grabs onto [src] and pulls [TM.himself] up</span>", \
@@ -768,7 +768,7 @@ emp_act
 	playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
 
 // Attacking someone with a weapon while they are neck-grabbed
-/mob/living/carbon/human/proc/check_neckgrab_attack(obj/item/W, mob/user, var/hit_zone)
+/mob/living/human/proc/check_neckgrab_attack(obj/item/W, mob/user, var/hit_zone)
 	if(user.a_intent == I_HURT)
 		for(var/obj/item/grab/G in src.grabbed_by)
 			if(G.assailant == user)
@@ -781,7 +781,7 @@ emp_act
 	return FALSE
 
 // Knifing
-/mob/living/carbon/proc/attack_throat(obj/item/W, obj/item/grab/G, mob/user)
+/mob/living/human/proc/attack_throat(obj/item/W, obj/item/grab/G, mob/user)
 	if(!W.edge || !W.force || W.damtype != BRUTE)
 		return FALSE //unsuitable weapon
 
@@ -828,7 +828,7 @@ emp_act
 
 	return TRUE
 
-/mob/living/carbon/human/proc/shank_armor_helper(obj/item/W, obj/item/grab/G, mob/user)
+/mob/living/human/proc/shank_armor_helper(obj/item/W, obj/item/grab/G, mob/user)
 	var/damage = W.force
 	var/damage_mod = 1
 	if(W.edge)
@@ -864,7 +864,7 @@ emp_act
 
 	return damage
 
-/mob/living/carbon/human/process_resist()
+/mob/living/human/process_resist()
 	if(..())
 		return TRUE
 	if(canmove)
@@ -873,7 +873,7 @@ emp_act
 		else
 			resist_restraints()
 
-/mob/living/carbon/human/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
+/mob/living/human/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
 	var/temp_inc = max(min(BODYTEMP_HEATING_MAX*(1-get_heat_protection()), exposed_temperature - bodytemperature), 0)
 	bodytemperature += temp_inc

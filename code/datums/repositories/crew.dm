@@ -25,8 +25,8 @@ var/global/datum/repository/crew/crew_repository = new()
 	for(var/obj/item/clothing/under/C in tracked)
 		var/turf/pos = get_turf(C)
 		if((C) && (C.has_sensor) && (pos) && (pos.z == zLevel) && (C.sensor_mode != SUIT_SENSOR_OFF) && !(is_jammed(C)))
-			if(istype(C.loc, /mob/living/carbon/human))
-				var/mob/living/carbon/human/H = C.loc
+			if(istype(C.loc, /mob/living/human))
+				var/mob/living/human/H = C.loc
 				if(H.w_uniform != C)
 					continue
 
@@ -64,7 +64,7 @@ var/global/datum/repository/crew/crew_repository = new()
 
 /datum/repository/crew/proc/scan()
 	var/list/tracked = list()
-	for(var/mob/living/carbon/human/H in mob_list)
+	for(var/mob/living/human/H in mob_list)
 		if(istype(H.w_uniform, /obj/item/clothing/under))
 			var/obj/item/clothing/under/C = H.w_uniform
 			if (C.has_sensor)

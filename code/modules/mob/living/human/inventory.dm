@@ -3,15 +3,15 @@ Add fingerprints to items when we put them in our hands.
 This saves us from having to call add_fingerprint() any time something is put in a human's hands programmatically.
 */
 
-/mob/living/carbon/human
+/mob/living/human
 	var/list/worn_clothing = list()	//Contains all CLOTHING items worn
 
-/mob/living/carbon/human/verb/quick_equip()
+/mob/living/human/verb/quick_equip()
 	set name = "quick-equip"
 	set hidden = 1
 
 	if(ishuman(src))
-		var/mob/living/carbon/human/H = src
+		var/mob/living/human/H = src
 		var/obj/item/I = H.get_active_hand()
 		if(!I)
 			to_chat(H, "<span class='notice'>You are not holding anything to equip.</span>")
@@ -24,7 +24,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		else
 			to_chat(H, "<font color='red'>You are unable to equip that.</font>")
 
-/mob/living/carbon/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
+/mob/living/human/proc/equip_in_one_of_slots(obj/item/W, list/slots, del_on_fail = 1)
 	for (var/slot in slots)
 		if (equip_to_slot_if_possible(W, slots[slot], del_on_fail = 0))
 			return slot
@@ -32,11 +32,11 @@ This saves us from having to call add_fingerprint() any time something is put in
 		qdel(W)
 	return null
 
-/mob/living/carbon/human/proc/has_organ(name)
+/mob/living/human/proc/has_organ(name)
 	var/obj/item/organ/external/O = organs_by_name[name]
 	return (O && !O.is_stump())
 
-/mob/living/carbon/human/proc/has_organ_for_slot(slot)
+/mob/living/human/proc/has_organ_for_slot(slot)
 	switch(slot)
 		if(slot_back)
 			return has_organ(BP_TORSO)
@@ -84,7 +84,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 /obj/item/var/suitlink = 1 //makes belt items require a jumpsuit- set individual items to suitlink = 0 to allow wearing on belt slot without suit
 
-/mob/living/carbon/human/u_equip(obj/W as obj)
+/mob/living/human/u_equip(obj/W as obj)
 	if(!W)	return 0
 
 	if (W == wear_suit)
@@ -200,7 +200,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 
 
 //This is an UNSAFE proc. Use mob_can_equip() before calling this one! Or rather use equip_to_slot_if_possible() or advanced_equip_to_slot_if_possible()
-/mob/living/carbon/human/equip_to_slot(obj/item/W as obj, slot)
+/mob/living/human/equip_to_slot(obj/item/W as obj, slot)
 
 	if(!slot)
 		return
@@ -351,7 +351,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return 1
 
 //Checks if a given slot can be accessed at this time, either to equip or unequip I
-/mob/living/carbon/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
+/mob/living/human/slot_is_accessible(var/slot, var/obj/item/I, mob/user=null)
 	var/obj/item/covering = null
 	var/check_flags = 0
 
@@ -370,7 +370,7 @@ This saves us from having to call add_fingerprint() any time something is put in
 		return 0
 	return 1
 
-/mob/living/carbon/human/get_equipped_item(var/slot)
+/mob/living/human/get_equipped_item(var/slot)
 	switch(slot)
 		if(slot_back)       return back
 		if(slot_legcuffed)  return legcuffed
@@ -394,14 +394,14 @@ This saves us from having to call add_fingerprint() any time something is put in
 	return ..()
 
 
-/mob/living/carbon/human/is_holding_item_of_type(typepath)
+/mob/living/human/is_holding_item_of_type(typepath)
 	for(var/obj/item/I in list(l_hand, r_hand))
 		if(istype(I, typepath))
 			return I
 	return FALSE
 
 // Returns a list of items held in both hands.
-/mob/living/carbon/human/get_all_held_items()
+/mob/living/human/get_all_held_items()
 	. = list()
 	if(l_hand)
 		. += l_hand

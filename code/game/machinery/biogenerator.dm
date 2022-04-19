@@ -257,7 +257,7 @@
 		if("chembag")
 			new/obj/item/storage/bag/chemistry(loc)
 		if("monkey")
-			new/mob/living/carbon/human/monkey(loc)
+			new/mob/living/human/monkey(loc)
 		if("workboots")
 			new/obj/item/clothing/shoes/boots/workboots(loc)
 		if("leatherchaps")

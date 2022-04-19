@@ -92,13 +92,13 @@ var/datum/antagonist/ninja/ninjas
 	..()
 	var/ninja_title = pick(ninja_titles)
 	var/ninja_name = pick(ninja_names)
-	var/mob/living/carbon/human/H = player.current
+	var/mob/living/human/H = player.current
 	if(istype(H))
 		H.real_name = "[ninja_title] [ninja_name]"
 		H.name = H.real_name
 	player.name = H.name
 
-/datum/antagonist/ninja/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/ninja/equip(var/mob/living/human/player)
 
 	if(!..())
 		return 0

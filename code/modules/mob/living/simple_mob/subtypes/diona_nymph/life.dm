@@ -1,5 +1,5 @@
 //Dionaea regenerate health and nutrition in light.
-/mob/living/carbon/diona_nymph/handle_environment(datum/gas_mixture/environment)
+/mob/living/simple_mob/diona_nymph/handle_environment(datum/gas_mixture/environment)
 
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 	if(isturf(loc)) //else, there's considered to be no light
@@ -18,7 +18,7 @@
  	if(!client)
  		handle_npc(src)
 
-/mob/living/carbon/diona_nymph/handle_mutations_and_radiation()
+/mob/living/simple_mob/diona_nymph/handle_mutations_and_radiation()
 	if(!radiation)
 		return
 
@@ -30,7 +30,7 @@
 	adjustToxLoss(-(rads))
 	return
 
-/mob/living/carbon/diona_nymph/Life()
+/mob/living/simple_mob/diona_nymph/Life()
 	..()
 	if (stat != DEAD) //still breathing
 		// GROW!

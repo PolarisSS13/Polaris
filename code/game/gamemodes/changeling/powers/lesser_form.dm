@@ -18,7 +18,7 @@
 		to_chat(src, "<span class='warning'>We cannot perform this ability at the present time!</span>")
 		return
 
-	var/mob/living/carbon/human/H = src
+	var/mob/living/human/H = src
 
 	if(!istype(H) || !H.species.primitive_form)
 		to_chat(src, "<span class='warning'>We cannot perform this ability in this form!</span>")
@@ -55,7 +55,7 @@
 	if(!chosen_dna)
 		return
 
-	var/mob/living/carbon/C = src
+	var/mob/living/human/C = src
 
 	changeling.chem_charges--
 	C.remove_changeling_powers()
@@ -82,7 +82,7 @@
 	for(var/obj/item/W in src)
 		C.drop_from_inventory(W)
 
-	var/mob/living/carbon/human/O = new /mob/living/carbon/human( src )
+	var/mob/living/human/O = new /mob/living/human( src )
 	if (C.dna.GetUIState(DNA_UI_GENDER))
 		O.gender = FEMALE
 	else

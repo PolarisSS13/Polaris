@@ -2,7 +2,7 @@
 #define HUMAN_EATING_NO_MOUTH		1
 #define HUMAN_EATING_BLOCKED_MOUTH	2
 
-/mob/living/carbon/human/can_eat(var/food, var/feedback = 1)
+/mob/living/human/can_eat(var/food, var/feedback = 1)
 	var/list/status = can_eat_status()
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
@@ -13,7 +13,7 @@
 			to_chat(src, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
-/mob/living/carbon/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
+/mob/living/human/can_force_feed(var/feeder, var/food, var/feedback = 1)
 	var/list/status = can_eat_status()
 	if(status[1] == HUMAN_EATING_NO_ISSUE)
 		return 1
@@ -24,7 +24,7 @@
 			to_chat(feeder, "<span class='warning'>\The [status[2]] is in the way!</span>")
 	return 0
 
-/mob/living/carbon/human/proc/can_eat_status()
+/mob/living/human/proc/can_eat_status()
 	if(!check_has_mouth())
 		return list(HUMAN_EATING_NO_MOUTH)
 	var/obj/item/blocked = check_mouth_coverage()
@@ -32,7 +32,7 @@
 		return list(HUMAN_EATING_BLOCKED_MOUTH, blocked)
 	return list(HUMAN_EATING_NO_ISSUE)
 
-/mob/living/carbon/human/proc/get_coverage()
+/mob/living/human/proc/get_coverage()
 	var/list/coverage = list()
 	for(var/obj/item/clothing/C in src)
 		if(item_is_in_hands(C))
@@ -55,7 +55,7 @@
 
 
 //This is called when we want different types of 'cloaks' to stop working, e.g. when attacking.
-/mob/living/carbon/human/break_cloak()
+/mob/living/human/break_cloak()
 	if(mind && mind.changeling) //Changeling visible camo
 		mind.changeling.cloaked = 0
 	if(istype(back, /obj/item/rig)) //Ninja cloak
@@ -66,7 +66,7 @@
 	for(var/obj/item/deadringer/dr in src)
 		dr.uncloak()
 
-/mob/living/carbon/human/is_cloaked()
+/mob/living/human/is_cloaked()
 	if(mind && mind.changeling && mind.changeling.cloaked) // Ling camo.
 		return TRUE
 	else if(istype(back, /obj/item/rig)) //Ninja cloak
@@ -79,7 +79,7 @@
 			return TRUE
 	return ..()
 
-/mob/living/carbon/human/get_ear_protection()
+/mob/living/human/get_ear_protection()
 	if (get_sound_volume_multiplier() <= 0.2)
 		return 2
 	else if (get_sound_volume_multiplier() <= 0.5)
@@ -87,10 +87,10 @@
 	else
 		return 0
 
-/mob/living/carbon/human/get_gender()
+/mob/living/human/get_gender()
 	return identifying_gender ? identifying_gender : gender
 
-/mob/living/carbon/human/name_gender() /// Returns proper names for gender identites
+/mob/living/human/name_gender() /// Returns proper names for gender identites
 	if(identifying_gender == "plural")
 		return "other"
 	if(identifying_gender == "neuter")
@@ -100,12 +100,12 @@
 
 // This is the 'mechanical' check for synthetic-ness, not appearance
 // Returns the company that made the synthetic
-/mob/living/carbon/human/isSynthetic()
+/mob/living/human/isSynthetic()
 	return synthetic
 
 // Would an onlooker know this person is synthetic?
 // Based on sort of logical reasoning, 'Look at head, look at torso'
-/mob/living/carbon/human/proc/looksSynthetic()
+/mob/living/human/proc/looksSynthetic()
 	var/obj/item/organ/external/T = organs_by_name[BP_TORSO]
 	var/obj/item/organ/external/H = organs_by_name[BP_HEAD]
 
@@ -123,7 +123,7 @@
 	return 0
 
 // Returns a string based on what kind of brain the FBP has.
-/mob/living/carbon/human/proc/get_FBP_type()
+/mob/living/human/proc/get_FBP_type()
 	if(!isSynthetic())
 		return FBP_NONE
 	var/obj/item/organ/internal/brain/B
@@ -140,7 +140,7 @@
 
 	return FBP_NONE
 
-/mob/living/carbon/human/make_hud_overlays()
+/mob/living/human/make_hud_overlays()
 	hud_list[HEALTH_HUD]      = gen_hud_image(ingame_hud_med, src, "100", plane = PLANE_CH_HEALTH)
 	if(isSynthetic())
 		hud_list[STATUS_HUD]  = gen_hud_image(ingame_hud, src, "hudrobo", plane = PLANE_CH_STATUS)
@@ -157,7 +157,7 @@
 	hud_list[STATUS_HUD_OOC]  = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_STATUS_OOC)
 	add_overlay(hud_list)
 
-/mob/living/carbon/human/recalculate_vis()
+/mob/living/human/recalculate_vis()
 	if(!vis_enabled || !plane_holder)
 		return
 
@@ -196,7 +196,7 @@
 		plane_holder.set_vis(vis,FALSE)
 		vis_enabled -= vis
 
-/mob/living/carbon/human/get_restraining_bolt()
+/mob/living/human/get_restraining_bolt()
 	var/obj/item/implant/restrainingbolt/RB
 
 	for(var/obj/item/organ/external/EX in organs)

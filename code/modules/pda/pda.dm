@@ -123,7 +123,7 @@ var/global/list/obj/item/pda/PDAs = list()
 	new /obj/item/pen(src)
 
 	if(ishuman(loc))
-		var/mob/living/carbon/human/H = loc
+		var/mob/living/human/H = loc
 		pdachoice = H.pdachoice
 	else
 		pdachoice = 1
@@ -443,7 +443,7 @@ var/global/list/obj/item/pda/PDAs = list()
 	return
 
 /obj/item/pda/attack(mob/living/C as mob, mob/living/user as mob)
-	if (istype(C, /mob/living/carbon) && scanmode)
+	if (istype(C, /mob/living/human) && scanmode)
 		scanmode.scan_mob(C, user)
 
 /obj/item/pda/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)

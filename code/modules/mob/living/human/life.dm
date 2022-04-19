@@ -1,8 +1,8 @@
-/mob/living/carbon/human
+/mob/living/human
 	var/in_stasis = 0
 	var/heartbeat = 0
 
-/mob/living/carbon/human/Life()
+/mob/living/human/Life()
 	set invisibility = 0
 	set background = BACKGROUND_ENABLED
 
@@ -78,12 +78,12 @@
 
 	pulse = handle_pulse()
 
-/mob/living/carbon/human/proc/skip_some_updates()
+/mob/living/human/proc/skip_some_updates()
 	if(life_tick > 5 && timeofdeath && (timeofdeath < 5 || world.time - timeofdeath > 6000))	//We are long dead, or we're junk mobs spawned like the clowns on the clown shuttle
 		return 1
 	return 0
 
-/mob/living/carbon/human/breathe()
+/mob/living/human/breathe()
 	if(!inStasisNow())
 		..()
 
@@ -91,7 +91,7 @@
 // Returns 0 (equals 0 %) if sealed in an undamaged suit that's rated for the pressure, 1 if unprotected (equals 100%).
 // Suitdamage can modifiy this in 10% steps.
 // Protection scales down from 100% at the boundary to 0% at 10% in excess of the boundary
-/mob/living/carbon/human/proc/get_pressure_weakness(pressure)
+/mob/living/human/proc/get_pressure_weakness(pressure)
 	if(pressure == null)
 		return 1 // No protection if someone forgot to give a pressure
 
@@ -138,7 +138,7 @@
 	return pressure_adjustment_coefficient
 
 // Calculate how much of the enviroment pressure-difference affects the human.
-/mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
+/mob/living/human/calculate_affecting_pressure(var/pressure)
 	var/pressure_difference
 
 	// First get the absolute pressure difference.
@@ -164,7 +164,7 @@
 	else
 		return species.safe_pressure + pressure_difference
 
-/mob/living/carbon/human/handle_disabilities()
+/mob/living/human/handle_disabilities()
 	..()
 
 	if(stat != CONSCIOUS) //Let's not worry about tourettes if you're not conscious.
@@ -223,7 +223,7 @@
 
 
 
-/mob/living/carbon/human/handle_mutations_and_radiation()
+/mob/living/human/handle_mutations_and_radiation()
 	if(inStasisNow())
 		return
 
@@ -312,7 +312,7 @@
 				if(istype(O))
 					O.add_autopsy_data("Radiation Poisoning", damage)
 
-/mob/living/carbon/human/proc/handle_allergens()
+/mob/living/human/proc/handle_allergens()
 	if(chem_effects[CE_ALLERGEN])
 		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple seperate allergen typess simultaneously hurts more
 		var/damage_severity = species.allergen_damage_severity * chem_effects[CE_ALLERGEN]
@@ -341,7 +341,7 @@
 		if(species.allergen_reaction & AG_CONFUSE)
 			Confuse(disable_severity/4)
 
-/mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
+/mob/living/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
 		return
 
@@ -481,7 +481,7 @@
 	return
 
 /*
-/mob/living/carbon/human/proc/adjust_body_temperature(current, loc_temp, boost)
+/mob/living/human/proc/adjust_body_temperature(current, loc_temp, boost)
 	var/temperature = current
 	var/difference = abs(current-loc_temp)	//get difference
 	var/increments// = difference/10			//find how many increments apart they are
@@ -499,7 +499,7 @@
 	return temp_change
 */
 
-/mob/living/carbon/human/proc/stabilize_body_temperature()
+/mob/living/human/proc/stabilize_body_temperature()
 	// We produce heat naturally.
 	if (species.passive_temp_gain)
 		bodytemperature += species.passive_temp_gain
@@ -541,7 +541,7 @@
 		bodytemperature += recovery_amt
 
 	//This proc returns a number made up of the flags for body parts which you are protected on. (such as HEAD, UPPER_TORSO, LOWER_TORSO, etc. See setup.dm for the full list)
-/mob/living/carbon/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
+/mob/living/human/proc/get_heat_protection_flags(temperature) //Temperature is the temperature you're being exposed to.
 	. = 0
 	//Handle normal clothing
 	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
@@ -550,7 +550,7 @@
 				. |= C.get_heat_protection_flags()
 
 //See proc/get_heat_protection_flags(temperature) for the description of this proc.
-/mob/living/carbon/human/proc/get_cold_protection_flags(temperature)
+/mob/living/human/proc/get_cold_protection_flags(temperature)
 	. = 0
 	//Handle normal clothing
 	for(var/obj/item/clothing/C in list(head,wear_suit,w_uniform,shoes,gloves,wear_mask))
@@ -558,7 +558,7 @@
 			if(C.handle_low_temperature(temperature))
 				. |= C.get_cold_protection_flags()
 
-/mob/living/carbon/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
+/mob/living/human/get_heat_protection(temperature) //Temperature is the temperature you're being exposed to.
 	var/thermal_protection_flags = get_heat_protection_flags(temperature)
 
 	. = get_thermal_protection(thermal_protection_flags)
@@ -574,7 +574,7 @@
 	. = 1 - .
 	. = min(., 1.0)
 
-/mob/living/carbon/human/get_cold_protection(temperature)
+/mob/living/human/get_cold_protection(temperature)
 	if(COLD_RESISTANCE in mutations)
 		return 1 //Fully protected from the cold.
 
@@ -595,7 +595,7 @@
 	. = 1 - .
 	. = min(., 1.0)
 
-/mob/living/carbon/human/proc/get_thermal_protection(var/flags)
+/mob/living/human/proc/get_thermal_protection(var/flags)
 	.=0
 	if(flags)
 		if(flags & HEAD)
@@ -622,7 +622,7 @@
 			. += THERMAL_PROTECTION_HAND_RIGHT
 	return min(1,.)
 
-/mob/living/carbon/human/proc/handle_chemicals_in_body()
+/mob/living/human/proc/handle_chemicals_in_body()
 
 	if(inStasisNow())
 		return
@@ -677,7 +677,7 @@
 	return //TODO: DEFERRED
 
 //DO NOT CALL handle_statuses() from this proc, it's called from living/Life() as long as this returns a true value.
-/mob/living/carbon/human/handle_regular_status_updates()
+/mob/living/human/handle_regular_status_updates()
 	if(skip_some_updates())
 		return 0
 
@@ -842,12 +842,12 @@
 
 	return 1
 
-/mob/living/carbon/human/set_stat(var/new_stat)
+/mob/living/human/set_stat(var/new_stat)
 	. = ..()
 	if(. && stat)
 		update_skin(1)
 
-/mob/living/carbon/human/handle_regular_hud_updates()
+/mob/living/human/handle_regular_hud_updates()
 	if(hud_updateflag) // update our mob's hud overlays, AKA what others see flaoting above our head
 		handle_hud_list()
 
@@ -1030,12 +1030,12 @@
 			if(found_welder)
 				client.screen |= global_hud.darkMask
 
-/mob/living/carbon/human/reset_view(atom/A)
+/mob/living/human/reset_view(atom/A)
 	..()
 	if(machine_visual && machine_visual != A)
 		machine_visual.remove_visual(src)
 
-/mob/living/carbon/human/handle_vision()
+/mob/living/human/handle_vision()
 	if(stat == DEAD)
 		sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS|SEE_SELF
 		see_in_dark = 8
@@ -1125,7 +1125,7 @@
 				reset_view(null, 0)
 	return 1
 
-/mob/living/carbon/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
+/mob/living/human/proc/process_glasses(var/obj/item/clothing/glasses/G)
 	if(G && G.active)
 		see_in_dark += G.darkness_view
 		if(G.overlay && client)
@@ -1140,7 +1140,7 @@
 		else if(!druggy && !seer)
 			see_invisible = see_invisible_default
 
-/mob/living/carbon/human/handle_random_events()
+/mob/living/human/handle_random_events()
 	if(inStasisNow())
 		return
 
@@ -1161,13 +1161,13 @@
 		if(T.get_lumcount() <= LIGHTING_SOFT_THRESHOLD)
 			playsound_local(src,pick(scarySounds),50, 1, -1)
 
-/mob/living/carbon/human/handle_stomach()
+/mob/living/human/handle_stomach()
 	// TODO SURGERY_REFACTOR: Handle this on the stomach organ
 	for(var/mob/living/M in stomach_contents)
 		if(M.loc != src)
 			stomach_contents.Remove(M)
 			continue
-		if(istype(M, /mob/living/carbon) && src.stat != DEAD)
+		if(istype(M, /mob/living/human) && src.stat != DEAD)
 			if(M.stat == DEAD)
 				M.death(TRUE)
 				stomach_contents.Remove(M)
@@ -1177,7 +1177,7 @@
 				M.adjustBruteLoss(5)
 				adjust_nutrition(10)
 
-/mob/living/carbon/human/proc/handle_changeling()
+/mob/living/human/proc/handle_changeling()
 	if(mind && mind.changeling)
 		mind.changeling.regenerate()
 		if(hud_used)
@@ -1222,7 +1222,7 @@
 		if(mind && hud_used)
 			ling_chem_display.invisibility = 101
 
-/mob/living/carbon/human/proc/handle_shock()
+/mob/living/human/proc/handle_shock()
 	updateshock()
 	if(!can_feel_pain()) return
 
@@ -1275,7 +1275,7 @@
 		Weaken(20)
 
 // proc to find out in how much pain the mob is at the moment
-/mob/living/carbon/human/proc/updateshock()
+/mob/living/human/proc/updateshock()
 	if (!can_feel_pain())
 		src.traumatic_shock = 0
 		return 0
@@ -1292,8 +1292,8 @@
 		src.traumatic_shock -= 20
 
 	// broken or ripped off organs will add quite a bit of pain
-	if(istype(src,/mob/living/carbon/human))
-		var/mob/living/carbon/human/M = src
+	if(istype(src,/mob/living/human))
+		var/mob/living/human/M = src
 		for(var/obj/item/organ/external/organ in M.organs)
 			if(organ.is_broken() || organ.open)
 				src.traumatic_shock += 30
@@ -1301,8 +1301,8 @@
 				src.traumatic_shock += 15
 	
 	// Some individuals/species are more or less supectible to pain. Default trauma_mod = 1. Does not affect painkillers
-	if(istype(src, /mob/living/carbon/human))
-		var/mob/living/carbon/human/H = src
+	if(istype(src, /mob/living/human))
+		var/mob/living/human/H = src
 		H.traumatic_shock *= H.species.trauma_mod
 		
 	src.traumatic_shock += -1 *  src.chem_effects[CE_PAINKILLER]
@@ -1313,7 +1313,7 @@
 	return src.traumatic_shock
 
 
-/mob/living/carbon/human/proc/handle_pulse()
+/mob/living/human/proc/handle_pulse()
 	if(life_tick % 5) return pulse	//update pulse every 5 life ticks (~1 tick/sec, depending on server load)
 
 	var/temp = PULSE_NORM
@@ -1403,7 +1403,7 @@
 
 	return max(0, round(temp * brain_modifier))
 
-/mob/living/carbon/human/proc/handle_heartbeat()
+/mob/living/human/proc/handle_heartbeat()
 	if(pulse == PULSE_NONE)
 		return
 
@@ -1429,7 +1429,7 @@
 	we only set those statuses and icons upon changes.  Then those HUD items will simply add those pre-made images.
 	This proc below is only called when those HUD elements need to change as determined by the mobs hud_updateflag.
 */
-/mob/living/carbon/human/proc/handle_hud_list()
+/mob/living/human/proc/handle_hud_list()
 	if (BITTEST(hud_updateflag, HEALTH_HUD))
 		var/image/holder = grab_hud(HEALTH_HUD)
 		if(stat == DEAD)
@@ -1559,7 +1559,7 @@
 
 	hud_updateflag = 0
 
-/mob/living/carbon/human/handle_fire()
+/mob/living/human/handle_fire()
 	if(..())
 		return
 
@@ -1578,13 +1578,13 @@
 
 		bodytemperature += fire_temp_add
 
-/mob/living/carbon/human/rejuvenate()
+/mob/living/human/rejuvenate()
 	restore_blood()
 	shock_stage = 0
 	traumatic_shock = 0
 	..()
 
-/mob/living/carbon/human/proc/handle_defib_timer()
+/mob/living/human/proc/handle_defib_timer()
 	if(!should_have_organ(O_BRAIN))
 		return // No brain.
 
@@ -1594,12 +1594,12 @@
 
 	brain.tick_defib_timer()
 
-/mob/living/carbon/human/proc/add_chemical_effect(var/effect, var/magnitude = 1)
+/mob/living/human/proc/add_chemical_effect(var/effect, var/magnitude = 1)
 	if(effect in chem_effects)
 		chem_effects[effect] += magnitude
 	else
 		chem_effects[effect] = magnitude
 
-/mob/living/carbon/human/proc/remove_chemical_effect(var/effect, var/magnitude)
+/mob/living/human/proc/remove_chemical_effect(var/effect, var/magnitude)
 	if(effect in chem_effects)
 		chem_effects[effect] = magnitude ? max(0, chem_effects[effect] - magnitude) : 0

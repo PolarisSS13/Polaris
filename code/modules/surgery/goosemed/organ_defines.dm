@@ -62,7 +62,7 @@
 
 
 
-/mob/living/carbon/human/proc/handle_organs()
+/mob/living/human/proc/handle_organs()
 	var/blood_fill_percent	
 
 

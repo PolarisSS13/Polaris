@@ -98,7 +98,7 @@
 	if(!istype(L))
 		return
 
-	var/mob/living/carbon/human/H = L
+	var/mob/living/human/H = L
 	var/obj/item/organ/external/temp = L.organs_by_name[ "[L.hand ? "r" : "l"]_hand"]
 	if(temp && !temp.is_usable())
 		to_chat(H, "<font color='red'>You can't use your [temp.name]</font>")
@@ -438,7 +438,7 @@
 	var/turf/location = get_turf(src)
 	location.hotspot_expose(fire_burn_temperature(), 50, 1)
 
-//altered this to cap at the temperature of the fire causing it, using the same 1:1500 value as /mob/living/carbon/human/handle_fire() in human/life.dm
+//altered this to cap at the temperature of the fire causing it, using the same 1:1500 value as /mob/living/human/handle_fire() in human/life.dm
 /mob/living/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature)
 		if(fire_stacks < exposed_temperature/1500) // Subject to balance
