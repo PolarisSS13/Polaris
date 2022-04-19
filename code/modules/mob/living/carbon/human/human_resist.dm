@@ -121,7 +121,7 @@
 		setClickCooldown(100)
 		cuff_resist(I, cuff_break = can_break_cuffs())
 
-/mob/living/carbon/human/proc/cuff_resist(obj/item/weapon/handcuffs/I, breakouttime = 1200, cuff_break = 0)
+/mob/living/carbon/human/proc/cuff_resist(obj/item/handcuffs/I, breakouttime = 1200, cuff_break = 0)
 	
 	if(istype(I))
 		breakouttime = I.breakouttime

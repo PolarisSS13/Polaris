@@ -9,7 +9,7 @@
 		return
 	return ..()
 
-/mob/living/carbon/diona_nymph/attackby(var/obj/item/weapon/W, var/mob/user)
+/mob/living/carbon/diona_nymph/attackby(var/obj/item/W, var/mob/user)
 	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
