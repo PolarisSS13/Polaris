@@ -275,6 +275,7 @@
 	range = 6
 	damage = 5
 	SA_bonus_damage = 45	// 50 total on animals
+	SA_vulnerability = SA_ANIMAL
 	hud_state = "laser_heat"
 
 /obj/item/projectile/energy/phase/light
