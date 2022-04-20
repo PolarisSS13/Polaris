@@ -1256,7 +1256,7 @@
 "yh" = (/turf/space,/obj/structure/shuttle/engine/propulsion,/turf/simulated/shuttle/plating/airless/carry,/area/syndicate_station/start)
 "yi" = (/turf/space,/obj/structure/shuttle/engine/propulsion{icon_state = "propulsion_r"},/turf/simulated/shuttle/plating/airless/carry,/area/syndicate_station/start)
 "yj" = (/obj/structure/table/woodentable{dir = 5},/turf/unsimulated/floor{dir = 2; icon_state = "dark"},/area/centcom/command)
-"yk" = (/obj/structure/device/piano{dir = 4},/obj/effect/floor_decal/corner/yellow/diagonal,/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/command)
+"yk" = (,/obj/effect/floor_decal/corner/yellow/diagonal,/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/command)
 "yl" = (/obj/machinery/door/airlock/external{frequency = 1380; icon_state = "door_locked"; id_tag = "mining_shuttle_hatch"; locked = 1; name = "Shuttle Hatch"},/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/centcom/command)
 "ym" = (/obj/structure/shuttle/engine/heater,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/airless,/area/supply/dock)
 "yn" = (/obj/structure/table/reinforced,/obj/item/material/minihoe,/obj/item/analyzer/plant_analyzer,/obj/effect/floor_decal/corner/orange{dir = 9},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/security)

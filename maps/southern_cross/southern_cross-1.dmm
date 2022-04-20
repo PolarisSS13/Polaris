@@ -92404,7 +92404,6 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/obj/structure/device/piano,
 /turf/simulated/floor/plating,
 /area/construction/seconddeck/construction2)
 "dpR" = (

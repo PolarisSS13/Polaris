@@ -16262,9 +16262,6 @@
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
 "shY" = (
-/obj/structure/device/piano{
-	dir = 4
-	},
 /obj/effect/floor_decal/corner/yellow/diagonal,
 /obj/effect/floor_decal/corner/blue/diagonal{
 	dir = 4

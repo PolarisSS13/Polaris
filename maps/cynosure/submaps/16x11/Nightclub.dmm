@@ -21,7 +21,7 @@
 "sf" = (/obj/machinery/vending/sol{dir = 4},/turf/simulated/floor/tiled/dark,/area/template_noop)
 "su" = (/obj/structure/bed/chair/comfy/black{dir = 4},/turf/simulated/floor/tiled/dark,/area/template_noop)
 "sx" = (/obj/item/flashlight/glowstick/orange,/obj/machinery/atmospherics/unary/vent_scrubber,/turf/simulated/floor/tiled/dark,/area/template_noop)
-"vL" = (/obj/effect/floor_decal/spline/fancy/wood{dir = 1},/obj/structure/device/piano/minimoog,/turf/simulated/floor/wood,/area/template_noop)
+"vL" = (/obj/effect/floor_decal/spline/fancy/wood{dir = 1},/turf/simulated/floor/wood,/area/template_noop)
 "vV" = (/obj/machinery/atmospherics/pipe/simple/hidden/supply,/obj/structure/railing{dir = 8},/turf/simulated/floor/tiled/dark,/area/template_noop)
 "xf" = (/obj/effect/floor_decal/spline/fancy/wood{dir = 1},/obj/structure/table/wooden_reinforced,/obj/item/radio/intercom/entertainment{dir = 1},/turf/simulated/floor/wood,/area/template_noop)
 "xS" = (/obj/effect/floor_decal/spline/fancy/wood{dir = 5},/obj/structure/table,/turf/simulated/floor/wood,/area/template_noop)

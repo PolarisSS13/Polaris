@@ -878,7 +878,7 @@
 "qT" = (/obj/item/stool/padded,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/centcom/bar)
 "qU" = (/obj/machinery/vending/boozeomat,/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/bar)
 "qV" = (/obj/structure/table/marble,/obj/machinery/chemical_dispenser/bar_alc/full,/turf/unsimulated/floor{icon_state = "lino"},/area/centcom/bar)
-"qW" = (/obj/structure/device/piano{dir = 4},/obj/effect/floor_decal/corner/yellow/diagonal,/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
+"qW" = (/obj/effect/floor_decal/corner/yellow/diagonal,/obj/effect/floor_decal/corner/blue/diagonal{dir = 4},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/living)
 "qX" = (/obj/structure/bed/chair/comfy/black{dir = 4},/turf/simulated/shuttle/floor/red,/area/shuttle/administration/centcom)
 "qY" = (/turf/simulated/shuttle/plating,/area/shuttle/escape_pod4/centcom)
 "qZ" = (/turf/simulated/shuttle/plating,/area/shuttle/escape_pod6/centcom)

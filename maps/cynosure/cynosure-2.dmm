@@ -6573,7 +6573,6 @@
 /turf/simulated/wall/r_wall,
 /area/surface/station/medical/surgeryobs)
 "daW" = (
-/obj/structure/device/piano,
 /obj/effect/zone_divider,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/kitchen)
