@@ -497,6 +497,9 @@
 	return 1
 
 /obj/item/clothing/head/update_icon(var/mob/user)
+	if(!ismob(user))
+		return
+
 	var/mob/living/carbon/human/H
 	if(ishuman(user))
 		H = user
