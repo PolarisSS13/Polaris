@@ -57,7 +57,7 @@
 			else
 				new_item = new /obj/item/reagent_containers/glass/beaker(src.loc)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
-			new_item.icon_state = "urn[rand(1,2)]"
+			new_item.icon_state = "urn[rand(1,3)]"
 			apply_image_decorations = TRUE
 			if(prob(20))
 				additional_desc = "It [pick("whispers faintly","makes a quiet roaring sound","whistles softly","thrums quietly","throbs")] if you put it to your ear."
@@ -137,7 +137,7 @@
 			if(prob(30))
 				apply_image_decorations = TRUE
 		if(ARCHAEO_BOX)
-			item_type = "box"
+			item_type = "container"
 			new_item = new /obj/item/storage/box(src.loc)
 			new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 			new_item.icon_state = "box"
@@ -211,6 +211,10 @@
 				icon = 'icons/obj/xenoarchaeology.dmi'
 				item_type = "irregular purple crystal"
 				icon_state = "Phazon"
+			else if(prob(33))
+				icon = 'icons/obj/xenoarchaeology.dmi'
+				item_type = "crystal cluster"
+				icon_state = "talk_crystal[rand(1,2)]"
 			else
 				icon = 'icons/obj/xenoarchaeology.dmi'
 				item_type = "rough red crystal"
@@ -246,6 +250,12 @@
 			if(prob(30))
 				new_item.icon = 'icons/obj/xenoarchaeology.dmi'
 				new_item.icon_state = "blade1"
+			else if(prob(30))
+				new_item.icon = 'icons/obj/weapons.dmi'
+				new_item.icon_state = "zweihander0"
+			else
+				new_item.icon = 'icons/obj/weapons.dmi'
+				new_item.icon_state = "longsword"
 		if(ARCHAEO_CULTROBES)
 			//arcane clothing
 			apply_prefix = FALSE
