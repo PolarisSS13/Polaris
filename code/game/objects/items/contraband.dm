@@ -5,13 +5,13 @@
 //Illicit drugs~
 /obj/item/storage/pill_bottle/happy
 	name = "bottle of Happy pills"
-	desc = "Highly illegal drug. When you want to see the rainbow."
+	desc = "A recreational drug. When you want to see the rainbow. Probably not work-approved..."
 	wrapper_color = COLOR_PINK
 	starts_with = list(/obj/item/reagent_containers/pill/happy = 7)
 
 /obj/item/storage/pill_bottle/zoom
 	name = "bottle of Zoom pills"
-	desc = "Highly illegal drug. Trade brain for speed."
+	desc = "Probably illegal. Trade brain for speed."
 	wrapper_color = COLOR_BLUE
 	starts_with = list(/obj/item/reagent_containers/pill/zoom = 7)
 
@@ -94,4 +94,36 @@
 	if(!reagents.total_volume) /// Did we use all of it? 
 		qdel(src)
 
-////// End powder. /////////
+////// End powder. ///////////
+//////////////////////////////
+///// Drugs for loadout///////
+
+/obj/item/storage/pill_bottle/bliss
+	name = "unlabeled pill bottle"
+	desc = "A pill bottle with its label suspiciously scratched out."
+	starts_with = list(/obj/item/reagent_containers/pill/bliss = 7)
+
+/obj/item/storage/pill_bottle/snowflake
+	name = "unlabeled pill bottle"
+	desc = "A pill bottle with its label suspiciously scratched out."
+	starts_with = list(/obj/item/reagent_containers/pill/snowflake = 7)
+
+/obj/item/storage/pill_bottle/royale
+	name = "unlabeled pill bottle"
+	desc = "A pill bottle with its label suspiciously scratched out."
+	starts_with = list(/obj/item/reagent_containers/pill/royale = 7)
+
+/obj/item/storage/pill_bottle/sinkhole
+	name = "unlabeled pill bottle"
+	desc = "A pill bottle with its label suspiciously scratched out."
+	starts_with = list(/obj/item/reagent_containers/pill/sinkhole = 7)
+
+/obj/item/storage/pill_bottle/colorspace
+	name = "unlabeled pill bottle"
+	desc = "A pill bottle with its label suspiciously scratched out."
+	starts_with = list(/obj/item/reagent_containers/pill/colorspace = 7)
+
+/obj/item/storage/pill_bottle/schnappi
+	name = "unlabeled pill bottle"
+	desc = "A pill bottle with its label suspiciously scratched out."
+	starts_with = list(/obj/item/reagent_containers/pill/schnappi = 7)
