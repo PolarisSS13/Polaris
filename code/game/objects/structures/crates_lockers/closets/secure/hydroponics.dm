@@ -12,8 +12,6 @@
 		/obj/item/weapon/material/minihoe,
 		/obj/item/weapon/material/knife/machete/hatchet,
 		/obj/item/weapon/reagent_containers/glass/beaker = 2,
-		//obj/item/weapon/reagent_containers/food/condiment/carton/flour/rustic/empty = 2,
-		//obj/item/weapon/reagent_containers/food/condiment/carton/sugar/rustic/empty = 2,
 		/obj/item/weapon/tool/wirecutters/clippers/trimmers,
 		/obj/item/weapon/reagent_containers/spray/plantbgone,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/hydro,

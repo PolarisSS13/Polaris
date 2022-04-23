@@ -453,9 +453,6 @@
 
 //End of MRE stuff.
 
-/obj/item/weapon/reagent_containers/food/condiment/carton/
-	var/do_overlay = 1
-
 /obj/item/weapon/reagent_containers/food/condiment/carton/flour
 	name = "flour carton"
 	desc = "A big carton of flour. Good for baking!"
@@ -463,8 +460,6 @@
 	icon_state = "flour"
 	volume = 220
 	center_of_mass = list("x"=16, "y"=8)
-	//var/starts_with = list(
-	//	/datum/reagent/nutriment/flour = 100)
 
 /obj/item/weapon/reagent_containers/food/condiment/carton/flour/on_reagent_change()
 	update_icon()
@@ -477,20 +472,17 @@
 /obj/item/weapon/reagent_containers/food/condiment/carton/update_icon()
 	overlays.Cut()
 
-	if(reagents.total_volume && do_overlay == 1)
+	if(reagents.total_volume)
 		var/image/filling = image('icons/obj/food.dmi', src, "[icon_state]10")
 
 		filling.icon_state = "[icon_state]-[clamp(round(100 * reagents.total_volume / volume, 25), 0, 100)]"
 
 		overlays += filling
-	else
-		icon_state = "[icon_state]-[clamp(round(100 * reagents.total_volume / volume, 25), 0, 100)]"
 
 /obj/item/weapon/reagent_containers/food/condiment/carton/flour/rustic
 	name = "flour sack"
 	desc = "An artisanal sack of flour. Classy!"
 	icon_state = "flour_bag"
-	do_overlay = 0
 
 /obj/item/weapon/reagent_containers/food/condiment/carton/sugar
 	name = "sugar carton"
@@ -512,7 +504,6 @@
 	name = "sugar sack"
 	desc = "An artisanal sack of sugar. Classy!"
 	icon_state = "sugar_bag"
-	do_overlay = 0
 
 /obj/item/weapon/reagent_containers/food/condiment/spacespice
 	name = "space spices"
