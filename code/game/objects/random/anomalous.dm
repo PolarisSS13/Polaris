@@ -96,7 +96,7 @@
 /obj/random/toolbox/anom
 	start_anomalous = TRUE
 
-/obj/random/tech_supply/component
+/obj/random/tech_supply/component/anom
 	start_anomalous = TRUE
 
 /obj/random/medical/lite/anom
