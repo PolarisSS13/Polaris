@@ -109,7 +109,6 @@
 
 	M.adjustToxLoss(-2)
 	M.druggy = max(M.druggy, drug_strength)
-	M.heal_organ_damage(6)
 	M.adjustOxyLoss(-3)
 	M.AdjustStunned(-1)
 	if(prob(5) && prob_proc == TRUE)
@@ -144,7 +143,8 @@
 	M.druggy = max(M.druggy, 30)
 
 	var/effective_dose = dose
-	if(issmall(M)) effective_dose *= 2
+	if(issmall(M)) 
+		effective_dose *= 2
 	if(effective_dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
 		M.make_dizzy(5)
@@ -209,7 +209,7 @@
 /datum/reagent/drugs/snowflake
 	name = "Snowflake"
 	id = "snowflake"
-	description = "A recreational stimulant." /// TODO: Fluff. -Sypsoti
+	description = "A recreational stimulant refined from frostoil found in certain plants."
 	taste_description = "metallic and bitter"
 	overdose = 15
 	color = "#bbd7eb"
@@ -253,14 +253,13 @@
 	"You feel like trash, but you can finally sit still...")
 
 /datum/reagent/drugs/royale/affect_blood(mob/living/carbon/M, alien, removed)
+	..()
 	if(alien == IS_TAJARA) /// Similar to hyperzine...
 		removed *= 1.25
-	..()
 	if(alien == IS_SLIME)
 		M.make_jittery(4)
 		if(dose >= 5)
 			M.adjust_nutrition(-removed * 2)
-	..()
 	if(prob(5) && prob_proc == TRUE)
 		M.emote(pick("twitch", "blink_r", "shiver"))
 		M.add_chemical_effect(CE_PAINKILLER, 20) /// With chance of pain numbing...
@@ -285,7 +284,7 @@
 /datum/reagent/drugs/sinkhole
 	name = "Sinkhole"
 	id = "sinkhole"
-	description = "A painkiller and recreational drug." /// TODO: Fluff -Sypsoti
+	description = "A painkiller and recreational drug that hampers brain function."
 	taste_description = "a grainy paste"
 	color = "#462d35"
 	high_message_list = list("You feel euphoric!",
@@ -329,7 +328,6 @@
 
 	if(alien == IS_TAJARA)
 		removed *= 1.25
-	..()
 	if(prob(15) && prob_proc == TRUE)
 		M.emote(pick("deathgasp", "sigh", "smile"))
 		prob_proc = FALSE
@@ -340,6 +338,7 @@
 		drug_strength *= 0.8
 	if(alien == IS_SLIME)
 		drug_strength *= 1.2
+	M.druggy = max(M.druggy, 5)
 	M.hallucination = max(M.hallucination, drug_strength)
 
 /datum/reagent/drugs/ayahuasca
@@ -362,20 +361,20 @@
 	if(prob(15) && prob_proc == TRUE)
 		M.emote(pick("deathgasp", "moan", "smile", "groan"))
 		prob_proc = FALSE
-	var/drug_strength = 25
+	var/drug_strength = 60
 
 	if(alien == IS_SKRELL)
 		drug_strength *= 0.8
 
 	if(alien == IS_SLIME)
 		drug_strength *= 1.2
-
+	M.druggy = max(M.druggy, 10)
 	M.hallucination = max(M.hallucination, drug_strength)
 
 /datum/reagent/drugs/colorspace
 	name = "Colorspace"
 	id = "colorspace"
-	description = "A hallucinogenic drug that alters thought and perception." //TODO: FLUFF -Sypsoti
+	description = "A psychedelic drug that alters thought and perception."
 	taste_description = "flavorless paste"
 	color = "#a7a6a4"
 	high_message_list = list("The floor is melting...",
@@ -395,12 +394,13 @@
 	if(alien == IS_SLIME)
 		drug_strength *= 1.2
 
+	M.druggy = max(M.druggy, 15)
 	M.hallucination = max(M.hallucination, drug_strength)
 
 /datum/reagent/drugs/schnappi
 	name = "Schnappi"
 	id = "schnappi"
-	description = "A dangerous opiate." /// TODO: FLUFF -Sypsoti
+	description = "A dangerous and impure opiate that can cause necrosis in prolonged use."
 	color = "#0264B4"
 	taste_description = "a little crocodile" /// Schnee Schnii Schnappi, das kleiner krokodil... 
 	overdose = 15
@@ -413,31 +413,29 @@
 	..()
 	M.drowsyness = max(M.drowsyness, 5)
 	M.add_chemical_effect(CE_PAINKILLER, 1)
-	M.adjustToxLoss(2)
+	if(prob(15) && prob_proc == TRUE)
+		M.adjustToxLoss(2)
+		prob_proc = FALSE
 	if(prob(10) && prob_proc == TRUE)
 		M.visible_message("<span class='warning'>[M] looks dazed!</span>")
 		M.Stun(5)
 		M.emote("drool")
+		prob_proc = FALSE
 
 /datum/reagent/drugs/schnappi/overdose(mob/living/carbon/M, alien, removed)
-	M.adjustToxLoss(1)
 	M.drowsyness = max(M.drowsyness, 10)
-	if(prob(40))
+	if(prob(10))
 		M.visible_message("<span class='warning'>[M] looks dazed!</span>")
 		M.Stun(3)
 		M.emote("drool")
-		..()
-	else if(prob(30))
+	else if(prob(10))
 		to_chat(M, "<span class ='warning'>Your skin is cracking and bleeding!</span>")
 		M.adjustBruteLoss(5)
-		M.adjustToxLoss(2)
-		M.adjustBrainLoss(1)
+		M.adjustToxLoss(1)
 		M.emote("cry")
-		..()
-	else if(prob(20))
+	else if(prob(10))
 		M.visible_message("<span class ='warning'>[M] sways and falls over!</span>")
-		M.adjustToxLoss(3)
-		M.adjustBrainLoss(3)
+		M.adjustToxLoss(10)
 		M.Weaken(8)
 		M.emote("faint")
 	..()

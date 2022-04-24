@@ -12,7 +12,7 @@
 	set_trait(TRAIT_PRODUCTION,5)
 	set_trait(TRAIT_YIELD,3)
 	set_trait(TRAIT_POTENCY,8)
-	set_trait(TRAIT_PRODUCT_ICON,"nuts") /// Temp sprite. TODO: replace now. -Sypsoti
+	set_trait(TRAIT_PRODUCT_ICON,"nutmeg")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#5a382f")
 	set_trait(TRAIT_PLANT_COLOUR,"#397437")
 	set_trait(TRAIT_PLANT_ICON,"bush2")

@@ -52,8 +52,8 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "powder"
 	item_state = "powder"
-	amount_per_transfer_from_this = 2
-	possible_transfer_amounts = 2
+	amount_per_transfer_from_this = 5
+	possible_transfer_amounts = 5
 	w_class = ITEMSIZE_TINY
 	volume = 50
 

@@ -370,7 +370,7 @@
 
 /obj/item/reagent_containers/pill/royale/Initialize()
 	. = ..()
-	reagents.add_reagent("royale", 6)
+	reagents.add_reagent("royale", 5)
 	color = reagents.get_color()
 
 /obj/item/reagent_containers/pill/sinkhole
@@ -380,7 +380,7 @@
 
 /obj/item/reagent_containers/pill/sinkhole/Initialize()
 	. = ..()
-	reagents.add_reagent("sinkhole", 6)
+	reagents.add_reagent("sinkhole", 5)
 	color = reagents.get_color()
 
 /obj/item/reagent_containers/pill/colorspace
@@ -400,5 +400,5 @@
 
 /obj/item/reagent_containers/pill/schnappi/Initialize()
 	. = ..()
-	reagents.add_reagent("schnappi", 6)
+	reagents.add_reagent("schnappi", 5)
 	color = reagents.get_color()
