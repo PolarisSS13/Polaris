@@ -161,6 +161,7 @@
 		if(powerdata in my_client.mob.mind.changeling.purchased_powers)
 			textbody += "<center><font color='#F7F7ED'><i><b>This ability is already evolved!</b></i></font></center>"
 		else if(cat != "Inherent")
+			textbody += "<center>Cost: [powerdata.genomecost]"
 			textbody += "<center><a style='background-color:#c72121;' href='?src=\ref[src];evolve=[A]'>Evolve</a></center>"
 		textbody += "</td></tr>"
 	display()
