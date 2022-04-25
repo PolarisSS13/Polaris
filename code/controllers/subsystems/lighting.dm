@@ -40,7 +40,6 @@ SUBSYSTEM_DEF(lighting)
 	internal_process_lights(FALSE, TRUE)
 	internal_process_corners(FALSE, TRUE)
 	internal_process_overlays(FALSE, TRUE)
-	return ..()
 
 /datum/controller/subsystem/lighting/fire(resumed, no_mc_tick)
 	var/timer

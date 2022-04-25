@@ -20,11 +20,6 @@ SUBSYSTEM_DEF(open_space)
 	initialize_open_space()
 	// Pre-process open space turfs once before the round starts.
 	fire(FALSE, TRUE)
-	return ..()
-
-/datum/controller/subsystem/open_space/Recover()
-	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.
-	. = ..()
 
 /datum/controller/subsystem/open_space/fire(resumed, no_mc_tick)
 	// We use a different list so any additions to the update lists during a delay from MC_TICK_CHECK

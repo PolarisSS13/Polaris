@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(events)
 
 	var/datum/event_meta/new_event = new
 
-/datum/controller/subsystem/events/Initialize()
+/datum/controller/subsystem/events/Initialize(timeofday)
 	allEvents = typesof(/datum/event) - /datum/event
 	event_containers = list(
 			EVENT_LEVEL_MUNDANE 	= new/datum/event_container/mundane,
@@ -21,7 +21,6 @@ SUBSYSTEM_DEF(events)
 		)
 	if(global.using_map.use_overmap)
 		GLOB.overmap_event_handler.create_events(global.using_map.overmap_z, global.using_map.overmap_size, global.using_map.overmap_event_areas)
-	return ..()
 
 /datum/controller/subsystem/events/fire(resumed, no_mc_tick)
 	if (!resumed)

@@ -24,7 +24,6 @@ SUBSYSTEM_DEF(atoms)
 	setupgenetics() //to set the mutations' place in structural enzymes, so initializers know where to put mutations.
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
-	return ..()
 
 /datum/controller/subsystem/atoms/proc/InitializeAtoms(var/list/supplied_atoms)
 

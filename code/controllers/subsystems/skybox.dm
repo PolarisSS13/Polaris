@@ -12,7 +12,7 @@ SUBSYSTEM_DEF(skybox)
 	var/static/list/phase_shift_by_x = list()
 	var/static/list/phase_shift_by_y = list()
 
-/datum/controller/subsystem/skybox/PreInit()
+/datum/controller/subsystem/skybox/OnNew()
 	//Static
 	for (var/i in 0 to 25)
 		var/image/im = image('icons/turf/space_dust.dmi', "[i]")
@@ -60,10 +60,6 @@ SUBSYSTEM_DEF(skybox)
 	phase_shift_by_x = get_cross_shift_list(15)
 	phase_shift_by_y = get_cross_shift_list(15)
 
-	. = ..()
-
-/datum/controller/subsystem/skybox/Initialize()
-	. = ..()
 
 /datum/controller/subsystem/skybox/proc/get_skybox(z)
 	if(!skybox_cache["[z]"])

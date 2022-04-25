@@ -22,10 +22,7 @@ SUBSYSTEM_DEF(antags)
 	var/list/antag_datums = list()
 	var/list/antag_spawnpoints = list()
 
-/datum/controller/subsystem/antags/Initialize()
-	. = ..()
-
-	// Set up antagonists.
+/datum/controller/subsystem/antags/Initialize(timeofday)
 	for(var/antag_type in subtypesof(/datum/antagonist))
 		var/datum/antagonist/A = new antag_type
 		antag_datums[A.id] = A
