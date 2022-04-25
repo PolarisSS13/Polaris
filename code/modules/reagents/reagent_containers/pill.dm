@@ -343,62 +343,37 @@
 	color = reagents.get_color()
 
 //// Recreational drugs for loadout
-/obj/item/reagent_containers/pill/bliss
+/obj/item/reagent_containers/pill/unidentified
 	name = "mysterious pill"
 	desc = "You're not quite sure what's in this..."
 	icon_state = "pill1"
 
-/obj/item/reagent_containers/pill/bliss/Initialize()
+/obj/item/reagent_containers/pill/unidentified/bliss/Initialize()
 	. = ..()
 	reagents.add_reagent("bliss", 10)
 	color = reagents.get_color()
 
-/obj/item/reagent_containers/pill/snowflake
-	name = "mysterious pill"
-	desc = "You're not quite sure what's in this..."
-	icon_state = "pill1"
-
-/obj/item/reagent_containers/pill/snowflake/Initialize()
+/obj/item/reagent_containers/pill/unidentified/snowflake/Initialize()
 	. = ..()
 	reagents.add_reagent("snowflake", 10)
 	color = reagents.get_color()
 
-/obj/item/reagent_containers/pill/royale
-	name = "mysterious pill"
-	desc = "You're not quite sure what's in this..."
-	icon_state = "pill1"
-
-/obj/item/reagent_containers/pill/royale/Initialize()
+/obj/item/reagent_containers/pill/unidentified/royale/Initialize()
 	. = ..()
 	reagents.add_reagent("royale", 5)
 	color = reagents.get_color()
 
-/obj/item/reagent_containers/pill/sinkhole
-	name = "mysterious pill"
-	desc = "You're not quite sure what's in this..."
-	icon_state = "pill1"
-
-/obj/item/reagent_containers/pill/sinkhole/Initialize()
+/obj/item/reagent_containers/pill/unidentified/sinkhole/Initialize()
 	. = ..()
 	reagents.add_reagent("sinkhole", 5)
 	color = reagents.get_color()
 
-/obj/item/reagent_containers/pill/colorspace
-	name = "mysterious pill"
-	desc = "You're not quite sure what's in this..."
-	icon_state = "pill1"
-
-/obj/item/reagent_containers/pill/colorspace/Initialize()
+/obj/item/reagent_containers/pill/unidentified/colorspace/Initialize()
 	. = ..()
 	reagents.add_reagent("colorspace", 10)
 	color = reagents.get_color()
 
-/obj/item/reagent_containers/pill/schnappi
-	name = "mysterious pill"
-	desc = "You're not quite sure what's in this..."
-	icon_state = "pill1"
-
-/obj/item/reagent_containers/pill/schnappi/Initialize()
+/obj/item/reagent_containers/pill/unidentified/schnappi/Initialize()
 	. = ..()
 	reagents.add_reagent("schnappi", 5)
 	color = reagents.get_color()

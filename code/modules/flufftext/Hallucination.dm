@@ -14,7 +14,7 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 		if(hallucination > 40)
 			halpick |= list("goodvoice", "badvoice")
 		if(hallucination > 65)
-			halpick |= list("ignoring")
+			halpick |= list("ignoring", "badsounds")
 		if(hallucination > 80)
 			halpick |= list("dangerimage")
 		var/chosenhal = pick(halpick)
@@ -44,6 +44,9 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 					if(prob(10))
 						halmob_action = "ignoring"
 						mob_hallucinate(src)
+				if("badsounds")
+					var/list/soundlist = list('sound/hallucinations/serithi/creepy1.ogg', 'sound/hallucinations/serithi/creepy2.ogg','sound/hallucinations/serithi/creepy3.ogg')
+					src << pick(soundlist)
 				if("dangerimage") /// Dangers like fire on random tiles.
 					var/list/possible_points = list()
 					for(var/turf/simulated/floor/F in range(7, src))

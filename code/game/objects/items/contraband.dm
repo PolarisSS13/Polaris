@@ -101,29 +101,29 @@
 /obj/item/storage/pill_bottle/bliss
 	name = "unlabeled pill bottle"
 	desc = "A pill bottle with its label suspiciously scratched out."
-	starts_with = list(/obj/item/reagent_containers/pill/bliss = 7)
+	starts_with = list(/obj/item/reagent_containers/pill/unidentified/bliss = 7)
 
 /obj/item/storage/pill_bottle/snowflake
 	name = "unlabeled pill bottle"
 	desc = "A pill bottle with its label suspiciously scratched out."
-	starts_with = list(/obj/item/reagent_containers/pill/snowflake = 7)
+	starts_with = list(/obj/item/reagent_containers/pill/unidentified/snowflake = 7)
 
 /obj/item/storage/pill_bottle/royale
 	name = "unlabeled pill bottle"
 	desc = "A pill bottle with its label suspiciously scratched out."
-	starts_with = list(/obj/item/reagent_containers/pill/royale = 7)
+	starts_with = list(/obj/item/reagent_containers/pill/unidentified/royale = 7)
 
 /obj/item/storage/pill_bottle/sinkhole
 	name = "unlabeled pill bottle"
 	desc = "A pill bottle with its label suspiciously scratched out."
-	starts_with = list(/obj/item/reagent_containers/pill/sinkhole = 7)
+	starts_with = list(/obj/item/reagent_containers/pill/unidentified/sinkhole = 7)
 
 /obj/item/storage/pill_bottle/colorspace
 	name = "unlabeled pill bottle"
 	desc = "A pill bottle with its label suspiciously scratched out."
-	starts_with = list(/obj/item/reagent_containers/pill/colorspace = 7)
+	starts_with = list(/obj/item/reagent_containers/pill/unidentified/colorspace = 7)
 
 /obj/item/storage/pill_bottle/schnappi
 	name = "unlabeled pill bottle"
 	desc = "A pill bottle with its label suspiciously scratched out."
-	starts_with = list(/obj/item/reagent_containers/pill/schnappi = 7)
+	starts_with = list(/obj/item/reagent_containers/pill/unidentified/schnappi = 7)
