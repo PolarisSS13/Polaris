@@ -32,9 +32,8 @@
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 		A.set_dir(dir)
-		if(start_anomalous)
-			if(prob(50))
-				A.become_anomalous()
+		if(start_anomalous && prob(50))
+			A.become_anomalous()
 
 /obj/random/drop_location()
 	return drop_get_turf ? get_turf(src) : ..()
