@@ -22,19 +22,19 @@
 
 	icon = 'icons/obj/smoothlattice.dmi'
 	icon_state = "latticeblank"
-	updateOverlays()
+	ImmediateOverlayUpdate()
 	for (var/dir in cardinal)
 		var/obj/structure/lattice/L
 		if(locate(/obj/structure/lattice, get_step(src, dir)))
 			L = locate(/obj/structure/lattice, get_step(src, dir))
-			L.updateOverlays()
+			L.UpdateAdjacentLattices()
 
 /obj/structure/lattice/Destroy()
 	for (var/dir in cardinal)
 		var/obj/structure/lattice/L
 		if(locate(/obj/structure/lattice, get_step(src, dir)))
 			L = locate(/obj/structure/lattice, get_step(src, dir))
-			L.updateOverlays(src.loc)
+			L.UpdateAdjacentLattices()
 	if(istype(loc, /turf/simulated/open))
 		var/turf/simulated/open/O = loc
 		spawn(1)
@@ -80,20 +80,14 @@
 		return
 	return
 
-/obj/structure/lattice/proc/updateOverlays()
-	//if(!(istype(src.loc, /turf/space)))
-	//	qdel(src)
+/obj/structure/lattice/proc/UpdateAdjacentLattices()
 	spawn(1)
-		overlays = list()
-
+		cut_overlays()
 		var/dir_sum = 0
-
 		for (var/direction in cardinal)
 			if(locate(/obj/structure/lattice, get_step(src, direction)))
 				dir_sum += direction
 			else
 				if(!(istype(get_step(src, direction), /turf/space)))
 					dir_sum += direction
-
 		icon_state = "lattice[dir_sum]"
-		return

@@ -3332,7 +3332,7 @@
 
 /obj/item/pizzabox/update_icon()
 
-	overlays = list()
+	cut_overlays()
 
 	// Set appropriate description
 	if( open && pizza )
@@ -3360,7 +3360,7 @@
 		if( pizza )
 			var/image/pizzaimg = image("food.dmi", icon_state = pizza.icon_state)
 			pizzaimg.pixel_y = -3
-			overlays += pizzaimg
+			add_overlay(pizzaimg)
 
 		return
 	else
@@ -3377,7 +3377,7 @@
 		if( doimgtag )
 			var/image/tagimg = image("food.dmi", icon_state = "pizzabox_tag")
 			tagimg.pixel_y = boxes.len * 3
-			overlays += tagimg
+			add_overlay(tagimg)
 
 	icon_state = "pizzabox[boxes.len+1]"
 
@@ -4308,7 +4308,7 @@
 	J.alpha = 200
 	J.blend_mode = BLEND_OVERLAY
 	J.tag = "coating"
-	overlays += J
+	add_overlay(J)
 
 	if (user)
 		user.visible_message(span("notice", "[user] dips \the [src] into \the [coating.name]"), span("notice", "You dip \the [src] into \the [coating.name]"))
@@ -4319,16 +4319,13 @@
 //Called by cooking machines. This is mainly intended to set properties on the food that differ between raw/cooked
 /obj/item/reagent_containers/food/snacks/proc/cook()
 	if (coating)
-		var/list/temp = overlays.Copy()
-		for (var/i in temp)
-			if (istype(i, /image))
-				var/image/I = i
-				if (I.tag == "coating")
-					temp.Remove(I)
-					break
-
-		overlays = temp
-		//Carefully removing the old raw-batter overlay
+		var/image/coating_overlay
+		for (var/image/image in overlays)
+			if (image.tag == "coating")
+				coating_overlay = image
+				break
+		if (coating_overlay)
+			cut_overlay(coating_overlay)
 
 		if (!flat_icon)
 			flat_icon = getFlatIcon(src)
@@ -4339,7 +4336,7 @@
 		var/image/J = image(I)
 		J.alpha = 200
 		J.tag = "coating"
-		overlays += J
+		add_overlay(J)
 
 
 		if (do_coating_prefix == 1)

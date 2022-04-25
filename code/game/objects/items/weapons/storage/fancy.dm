@@ -125,9 +125,9 @@
 
 /obj/item/storage/fancy/crayons/update_icon()
 	var/mutable_appearance/ma = new(src)
-	ma.overlays = list()
+	ma.cut_overlays()
 	for(var/obj/item/pen/crayon/crayon in contents)
-		ma.overlays += image('icons/obj/crayons.dmi',crayon.colourName)
+		add_overlay(image('icons/obj/crayons.dmi',crayon.colourName))
 	appearance = ma
 
 /obj/item/storage/fancy/crayons/attackby(obj/item/W as obj, mob/user as mob)
@@ -167,9 +167,9 @@
 
 /obj/item/storage/fancy/markers/update_icon()
 	var/mutable_appearance/ma = new(src)
-	ma.overlays = list()
+	ma.cut_overlays()
 	for(var/obj/item/pen/crayon/marker/marker in contents)
-		ma.overlays += image('icons/obj/crayons.dmi',"m"+marker.colourName)
+		ma.add_overlay(image('icons/obj/crayons.dmi',"m"+marker.colourName))
 	appearance = ma
 
 /obj/item/storage/fancy/markers/attackby(obj/item/W as obj, mob/user as mob)
@@ -399,14 +399,13 @@
 /obj/item/storage/lockbox/vials/update_icon(var/itemremoved = 0)
 	var/total_contents = contents.len - itemremoved
 	icon_state = "vialbox[total_contents]"
-	overlays.Cut()
+	cut_overlays()
 	if (!broken)
-		overlays += image(icon, src, "led[locked]")
+		add_overlay("led[locked]")
 		if(locked)
-			overlays += image(icon, src, "cover")
+			add_overlay("cover")
 	else
-		overlays += image(icon, src, "ledb")
-	return
+		add_overlay("ledb")
 
 /obj/item/storage/lockbox/vials/attackby(obj/item/W as obj, mob/user as mob)
 	..()

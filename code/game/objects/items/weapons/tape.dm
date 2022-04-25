@@ -134,7 +134,7 @@
 	W.forceMove(src)
 	icon_state = W.icon_state + "_taped"
 	name = W.name + " (taped)"
-	overlays = W.overlays
+	copy_overlays(W, TRUE)
 
 /obj/item/ducttape/attack_self(mob/user)
 	if(!stuck)
@@ -146,7 +146,7 @@
 	stuck.forceMove(get_turf(src))
 	user.put_in_hands(stuck)
 	stuck = null
-	overlays = null
+	cut_overlays()
 	qdel(src)
 
 /obj/item/ducttape/attackby(var/obj/item/I, var/mob/user)

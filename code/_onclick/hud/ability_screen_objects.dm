@@ -53,14 +53,14 @@
 				my_mob.client.screen -= O
 //			O.handle_icon_updates = 0
 		showing = 0
-		overlays.len = 0
-		overlays.Add(closed_state)
+		cut_overlays()
+		add_overlay(closed_state)
 	else if(forced_state != 1) // We're opening it, show the icons.
 		open_ability_master()
 		update_abilities(1)
 		showing = 1
-		overlays.len = 0
-		overlays.Add(open_state)
+		cut_overlays()
+		add_overlay(open_state)
 	update_icon()
 
 /obj/screen/movable/ability_master/proc/open_ability_master()
@@ -211,51 +211,13 @@
 	..()
 
 /obj/screen/ability/update_icon()
-//	if(!spell)
-//		qdel(src)
-//		return
-
-//	if((last_charge == spell.charge_counter || !handle_icon_updates) && !forced_update)
-//		return //nothing to see here
-
-//	overlays -= spell.hud_state
-
-//	if(spell.charge_type == Sp_RECHARGE || spell.charge_type == Sp_CHARGES)
-//		if(spell.charge_counter < spell.charge_max)
-//			icon_state = "[background_base_state]_spell_base"
-//			if(spell.charge_counter > 0)
-//				var/icon/partial_charge = icon(src.icon, "[spell_base]_spell_ready")
-//				partial_charge.Crop(1, 1, partial_charge.Width(), round(partial_charge.Height() * spell.charge_counter / spell.charge_max))
-//				overlays += partial_charge
-//				if(last_charged_icon)
-//					overlays -= last_charged_icon
-//				last_charged_icon = partial_charge
-//			else if(last_charged_icon)
-//				overlays -= last_charged_icon
-//				last_charged_icon = null
-//		else
-//			icon_state = "[spell_base]_spell_ready"
-//			if(last_charged_icon)
-//				overlays -= last_charged_icon
-//	else
-//		icon_state = "[spell_base]_spell_ready"
-	overlays.Cut()
+	cut_overlays()
 	icon_state = "[background_base_state]_spell_base"
-
-	overlays += ability_icon_state
-
-//	last_charge = spell.charge_counter
-
-//	overlays -= "silence"
-//	if(spell.silenced)
-//		overlays += "silence"
+	cut_overlay(ability_icon_state)
 
 /obj/screen/ability/Click()
 	if(!usr)
-//		qdel(src)
 		return
-
-//	spell.perform(usr)
 	activate()
 
 /obj/screen/ability/MouseDrop(var/atom/A)
