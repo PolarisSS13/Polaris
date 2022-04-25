@@ -298,7 +298,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/aisat)
+"P" = (
+/turf/simulated/floor/tiled/red,
+/area/aisat)
 "Q" = (
+/obj/turbolift_map_holder/example{
+	dir = 1;
+	icon = 'icons/obj/turbolift_preview_5x5.dmi'
+	},
 /turf/simulated/floor/tiled/red,
 /area/aisat)
 
@@ -769,10 +776,10 @@ F
 h
 h
 b
-Q
-Q
-Q
-Q
+P
+P
+P
+P
 Q
 b
 a
@@ -803,11 +810,11 @@ h
 h
 h
 n
-Q
-Q
-Q
-Q
-Q
+P
+P
+P
+P
+P
 b
 a
 a
@@ -837,11 +844,11 @@ n
 J
 n
 n
-Q
-Q
-Q
-Q
-Q
+P
+P
+P
+P
+P
 b
 a
 a
@@ -871,11 +878,11 @@ h
 h
 h
 n
-Q
-Q
-Q
-Q
-Q
+P
+P
+P
+P
+P
 b
 a
 a
@@ -905,11 +912,11 @@ h
 h
 h
 b
-Q
-Q
-Q
-Q
-Q
+P
+P
+P
+P
+P
 b
 a
 a
