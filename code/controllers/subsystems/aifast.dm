@@ -1,6 +1,5 @@
 SUBSYSTEM_DEF(aifast)
 	name = "AI Fast"
-	flags = SS_NO_INIT
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	priority = FIRE_PRIORITY_AI
 	wait = 0.25 SECONDS
@@ -51,3 +50,11 @@ if (!(DATUM.process_flags & AI_FASTPROCESSING)) {\
 #define STOP_AIFASTPROCESSING(DATUM) \
 DATUM.process_flags &= ~AI_FASTPROCESSING; \
 SSaifast.queue -= DATUM;
+
+
+// Prevent AI running during CI to avoid some irrelevant runtimes
+#ifdef UNIT_TEST
+/datum/controller/subsystem/aifast/flags = SS_NO_INIT | SS_NO_FIRE
+#else
+/datum/controller/subsystem/aifast/flags = SS_NO_INIT
+#endif
