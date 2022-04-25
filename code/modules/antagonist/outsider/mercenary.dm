@@ -1,4 +1,4 @@
-var/datum/antagonist/mercenary/mercs
+var/global/datum/antagonist/mercenary/mercs
 
 /datum/antagonist/mercenary
 	id = MODE_MERCENARY

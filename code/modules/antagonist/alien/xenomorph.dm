@@ -1,4 +1,4 @@
-var/datum/antagonist/xenos/xenomorphs
+var/global/datum/antagonist/xenos/xenomorphs
 
 /datum/antagonist/xenos
 	id = MODE_XENOMORPH

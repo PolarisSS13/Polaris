@@ -1,4 +1,4 @@
-var/datum/antagonist/ert/ert
+var/global/datum/antagonist/ert/ert
 
 /datum/antagonist/ert
 	id = MODE_ERT

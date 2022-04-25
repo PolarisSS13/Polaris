@@ -1,4 +1,4 @@
-var/datum/antagonist/trader/traders
+var/global/datum/antagonist/trader/traders
 
 /datum/antagonist/trader
 	id = MODE_TRADE

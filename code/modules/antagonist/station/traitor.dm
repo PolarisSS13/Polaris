@@ -1,4 +1,4 @@
-var/datum/antagonist/traitor/traitors
+var/global/datum/antagonist/traitor/traitors
 
 // Inherits most of its vars from the base datum.
 /datum/antagonist/traitor

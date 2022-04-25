@@ -1,7 +1,7 @@
-var/const/NETWORK_BASEMENT_FLOOR   = "Basement Floor"
-var/const/NETWORK_GROUND_FLOOR  = "Ground Floor"
-var/const/NETWORK_SECOND_FLOOR   = "Second Floor"
-var/const/NETWORK_SUPPLY       = "Supply"
+var/global/const/NETWORK_BASEMENT_FLOOR   = "Basement Floor"
+var/global/const/NETWORK_GROUND_FLOOR  = "Ground Floor"
+var/global/const/NETWORK_SECOND_FLOOR   = "Second Floor"
+var/global/const/NETWORK_SUPPLY       = "Supply"
 
 //
 // Cameras

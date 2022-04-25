@@ -26,7 +26,7 @@
 	var/obj/item/communicator/integrated/communicator	// Our integrated communicator.
 
 	var/chassis = "pai-repairbot"   // A record of your chosen chassis.
-	var/global/list/possible_chassis = list(
+	var/static/list/possible_chassis = list(
 		"Drone" = "pai-repairbot",
 		"Cat" = "pai-cat",
 		"Mouse" = "pai-mouse",
@@ -41,7 +41,7 @@
 		"Rabbit" = "pai-rabbit",
 		)
 
-	var/global/list/possible_say_verbs = list(
+	var/static/list/possible_say_verbs = list(
 		"Robotic" = list("states","declares","queries"),
 		"Natural" = list("says","yells","asks"),
 		"Beep" = list("beeps","beeps loudly","boops"),

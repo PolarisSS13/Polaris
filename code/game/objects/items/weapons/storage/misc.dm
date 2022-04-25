@@ -2,7 +2,7 @@
  * Donut Box
  */
 
-var/list/random_weighted_donuts = list(
+var/global/list/random_weighted_donuts = list(
 	/obj/item/reagent_containers/food/snacks/donut/plain = 5,
 	/obj/item/reagent_containers/food/snacks/donut/plain/jelly = 5,
 	/obj/item/reagent_containers/food/snacks/donut/pink = 4,

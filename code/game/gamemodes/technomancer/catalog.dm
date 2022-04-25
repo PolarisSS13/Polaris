@@ -4,10 +4,10 @@
 #define UTILITY_SPELLS "Utility"
 #define SUPPORT_SPELLS "Support"
 
-var/list/all_technomancer_spells = typesof(/datum/technomancer/spell) - /datum/technomancer/spell
-var/list/all_technomancer_equipment = typesof(/datum/technomancer/equipment) - /datum/technomancer/equipment
-var/list/all_technomancer_consumables = typesof(/datum/technomancer/consumable) - /datum/technomancer/consumable
-var/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) - /datum/technomancer/assistance
+var/global/list/all_technomancer_spells = typesof(/datum/technomancer/spell) - /datum/technomancer/spell
+var/global/list/all_technomancer_equipment = typesof(/datum/technomancer/equipment) - /datum/technomancer/equipment
+var/global/list/all_technomancer_consumables = typesof(/datum/technomancer/consumable) - /datum/technomancer/consumable
+var/global/list/all_technomancer_assistance = typesof(/datum/technomancer/assistance) - /datum/technomancer/assistance
 
 /datum/technomancer
 	var/name = "technomancer thing"

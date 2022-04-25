@@ -1,4 +1,4 @@
-var/datum/antagonist/technomancer/technomancers
+var/global/datum/antagonist/technomancer/technomancers
 
 /datum/antagonist/technomancer
 	id = MODE_TECHNOMANCER

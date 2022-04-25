@@ -20,12 +20,12 @@
 #define TICKS2DS(T) ((T) TICKS) 				// Convert ticks to deciseconds
 #define DS2NEARESTTICK(DS) TICKS2DS(-round(-(DS2TICKS(DS))))
 
-var/world_startup_time
+var/global/world_startup_time
 
 /proc/get_game_time()
-	var/global/time_offset = 0
-	var/global/last_time = 0
-	var/global/last_usage = 0
+	var/static/time_offset = 0
+	var/static/last_time = 0
+	var/static/last_usage = 0
 
 	var/wtime = world.time
 	var/wusage = TICK_USAGE * 0.01
@@ -39,8 +39,8 @@ var/world_startup_time
 	return wtime + (time_offset + wusage) * world.tick_lag
 
 GLOBAL_VAR_INIT(roundstart_hour, pick(2,7,12,17))
-var/station_date = ""
-var/next_station_date_change = 1 DAY
+var/global/station_date = ""
+var/global/next_station_date_change = 1 DAY
 
 #define duration2stationtime(time) time2text(station_time_in_ds + time, "hh:mm")
 #define worldtime2stationtime(time) time2text(GLOB.roundstart_hour HOURS + time, "hh:mm")
@@ -91,8 +91,8 @@ var/next_station_date_change = 1 DAY
 		//else
 			//return 1
 
-var/next_duration_update = 0
-var/last_round_duration = 0
+var/global/next_duration_update = 0
+var/global/last_round_duration = 0
 GLOBAL_VAR_INIT(round_start_time, 0)
 
 /hook/roundstart/proc/start_timer()
@@ -117,8 +117,8 @@ GLOBAL_VAR_INIT(round_start_time, 0)
 	next_duration_update = world.time + 1 MINUTES
 	return last_round_duration
 
-/var/midnight_rollovers = 0
-/var/rollovercheck_last_timeofday = 0
+var/global/midnight_rollovers = 0
+var/global/rollovercheck_last_timeofday = 0
 /proc/update_midnight_rollover()
 	if (world.timeofday < rollovercheck_last_timeofday) //TIME IS GOING BACKWARDS!
 		return midnight_rollovers++

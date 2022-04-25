@@ -363,7 +363,7 @@
 	icon = 'icons/obj/hydroponics_misc.dmi'
 	icon_state = ""
 
-var/list/fruit_icon_cache = list()
+var/global/list/fruit_icon_cache = list()
 
 /obj/item/reagent_containers/food/snacks/fruit_slice/Initialize(var/ml, var/datum/seed/S)
 	. = ..(ml)

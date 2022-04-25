@@ -1,4 +1,4 @@
-var/list/GPS_list = list()
+var/global/list/GPS_list = list()
 
 /obj/item/gps
 	name = "global positioning system"

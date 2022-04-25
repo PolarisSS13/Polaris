@@ -1,4 +1,4 @@
-var/datum/antagonist/deathsquad/mercenary/commandos
+var/global/datum/antagonist/deathsquad/mercenary/commandos
 
 /datum/antagonist/deathsquad/mercenary
 	id = MODE_COMMANDO

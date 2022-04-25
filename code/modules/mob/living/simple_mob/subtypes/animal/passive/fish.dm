@@ -25,7 +25,7 @@
 	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat/fish
 
 	// By default they can be in any water turf.  Subtypes might restrict to deep/shallow etc
-	var/global/list/suitable_turf_types =  list(
+	var/static/list/suitable_turf_types =  list(
 		/turf/simulated/floor/beach/water,
 		/turf/simulated/floor/beach/coastline,
 		/turf/simulated/floor/holofloor/beach/water,
