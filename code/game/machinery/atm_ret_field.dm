@@ -68,7 +68,7 @@
 		return
 	if(hatch_open && istype(W,/obj/item/weldingtool))
 		if(!src) return
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 		if(!WT.isOn())
 			return
 		if(!WT.remove_fuel(0,user))
@@ -83,6 +83,7 @@
 		return
 
 /obj/machinery/atmospheric_field_generator/perma/Initialize()
+	. = ..()
 	generate_field()
 
 /obj/machinery/atmospheric_field_generator/update_icon()
@@ -99,7 +100,7 @@
 
 /obj/machinery/atmospheric_field_generator/power_change()
 	var/oldstat
-	..()
+	. = ..()
 	if(!(stat & NOPOWER))
 		ispowered = 1
 		update_icon()
