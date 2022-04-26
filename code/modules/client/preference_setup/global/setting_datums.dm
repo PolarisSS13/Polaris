@@ -1,6 +1,6 @@
-var/list/_client_preferences
-var/list/_client_preferences_by_key
-var/list/_client_preferences_by_type
+var/global/list/_client_preferences
+var/global/list/_client_preferences_by_key
+var/global/list/_client_preferences_by_type
 
 /proc/get_client_preferences()
 	if(!_client_preferences)
@@ -297,6 +297,13 @@ var/list/_client_preferences_by_type
 	enabled_by_default = TRUE
 	enabled_description = "Popup New On Login"
 	disabled_description = "Do Nothing"
+
+/datum/client_preference/engrave_graffiti
+	description = "Engrave Graffiti with Sharp Objects"
+	key = "ENGRAVE_GRAFFITI"
+	enabled_by_default = TRUE
+	enabled_description = "Enabled"
+	disabled_description = "Disabled"
 
 /********************
 * Staff Preferences *

@@ -16,7 +16,7 @@
 	speed_mod = 0.45
 	car_limit = 1	//It gets a trailer. That's about it.
 	active_engines = 1
-	key_type = /obj/item/weapon/key/quadbike
+	key_type = /obj/item/key/quadbike
 
 	var/frame_state = "quad" //Custom-item proofing!
 	var/custom_frame = FALSE
@@ -26,7 +26,7 @@
 	var/outdoors_speed_mod = 0.7 //The general 'outdoors' speed. I.E., the general difference you'll be at when driving outside.
 
 /obj/vehicle/train/engine/quadbike/Initialize()
-	cell = new /obj/item/weapon/cell/high(src)
+	cell = new /obj/item/cell/high(src)
 	key = new key_type(src)
 	. = ..()
 	turn_off()
@@ -40,7 +40,7 @@
 	paint_color = rgb(rand(1,255),rand(1,255),rand(1,255))
 	. = ..()
 
-/obj/item/weapon/key/quadbike
+/obj/item/key/quadbike
 	name = "key"
 	desc = "A keyring with a small steel key, and a blue fob reading \"ZOOM!\"."
 	icon = 'icons/obj/vehicles.dmi'
@@ -74,8 +74,8 @@
 			pixel_y = 0
 
 
-/obj/vehicle/train/engine/quadbike/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool) && open)
+/obj/vehicle/train/engine/quadbike/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/multitool) && open)
 		var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
 		if(new_paint)
 			paint_color = new_paint
@@ -85,11 +85,11 @@
 
 /obj/vehicle/train/engine/quadbike/update_icon()
 	..()
-	overlays.Cut()
+	cut_overlays()
 	if(custom_frame)
 		var/image/Bodypaint = new(icon = 'icons/obj/custom_items_vehicle.dmi', icon_state = "[frame_state]_a", layer = src.layer)
 		Bodypaint.color = paint_color
-		overlays += Bodypaint
+		add_overlay(Bodypaint)
 
 		var/image/Overmob = new(icon = 'icons/obj/custom_items_vehicle.dmi', icon_state = "[frame_state]_overlay", layer = src.layer + 0.2) //over mobs
 		var/image/Overmob_color = new(icon = 'icons/obj/custom_items_vehicle.dmi', icon_state = "[frame_state]_overlay_a", layer = src.layer + 0.2) //over the over mobs, gives the color.
@@ -97,13 +97,13 @@
 		Overmob_color.plane = MOB_PLANE
 		Overmob_color.color = paint_color
 
-		overlays += Overmob
-		overlays += Overmob_color
+		add_overlay(Overmob)
+		add_overlay(Overmob_color)
 		return
 
 	var/image/Bodypaint = new(icon = 'icons/obj/vehicles_64x64.dmi', icon_state = "[frame_state]_a", layer = src.layer)
 	Bodypaint.color = paint_color
-	overlays += Bodypaint
+	add_overlay(Bodypaint)
 
 	var/image/Overmob = new(icon = 'icons/obj/vehicles_64x64.dmi', icon_state = "[frame_state]_overlay", layer = src.layer + 0.2) //over mobs
 	var/image/Overmob_color = new(icon = 'icons/obj/vehicles_64x64.dmi', icon_state = "[frame_state]_overlay_a", layer = src.layer + 0.2) //over the over mobs, gives the color.
@@ -111,8 +111,8 @@
 	Overmob_color.plane = MOB_PLANE
 	Overmob_color.color = paint_color
 
-	overlays += Overmob
-	overlays += Overmob_color
+	add_overlay(Overmob)
+	add_overlay(Overmob_color)
 
 /obj/vehicle/train/engine/quadbike/Bump(atom/Obstacle)
 	if(!istype(Obstacle, /atom/movable))
@@ -244,14 +244,14 @@
 
 /obj/vehicle/train/trolley/trailer/update_icon()
 	..()
-	overlays.Cut()
+	cut_overlays()
 
 	var/image/Bodypaint = new(icon = 'icons/obj/vehicles_64x64.dmi', icon_state = "[initial(icon_state)]_a", layer = src.layer)
 	Bodypaint.color = paint_color
-	overlays += Bodypaint
+	add_overlay(Bodypaint)
 
-/obj/vehicle/train/trolley/trailer/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/device/multitool) && open)
+/obj/vehicle/train/trolley/trailer/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/multitool) && open)
 		var/new_paint = input("Please select paint color.", "Paint Color", paint_color) as color|null
 		if(new_paint)
 			paint_color = new_paint

@@ -6,7 +6,7 @@
  * Defines the behavior of hardsuits/rigs/power armour.
  */
 
-/obj/item/weapon/rig
+/obj/item/rig
 
 	name = "hardsuit control module"
 	icon = 'icons/obj/rig_modules.dmi'
@@ -42,16 +42,16 @@
 	var/helm_type =  /obj/item/clothing/head/helmet/space/rig
 	var/boot_type =  /obj/item/clothing/shoes/magboots/rig
 	var/glove_type = /obj/item/clothing/gloves/gauntlets/rig
-	var/cell_type =  /obj/item/weapon/cell/high
-	var/air_type =   /obj/item/weapon/tank/oxygen
+	var/cell_type =  /obj/item/cell/high
+	var/air_type =   /obj/item/tank/oxygen
 
 	//Component/device holders.
-	var/obj/item/weapon/tank/air_supply                       // Air tank, if any.
+	var/obj/item/tank/air_supply                       // Air tank, if any.
 	var/obj/item/clothing/shoes/boots = null                  // Deployable boots, if any.
 	var/obj/item/clothing/suit/space/rig/chest                // Deployable chestpiece, if any.
 	var/obj/item/clothing/head/helmet/space/rig/helmet = null // Deployable helmet, if any.
 	var/obj/item/clothing/gloves/gauntlets/rig/gloves = null  // Deployable gauntlets, if any.
-	var/obj/item/weapon/cell/cell                             // Power supply, if any.
+	var/obj/item/cell/cell                             // Power supply, if any.
 	var/obj/item/rig_module/selected_module = null            // Primary system (used with middle-click)
 	var/obj/item/rig_module/vision/visor                      // Kinda shitty to have a var for a module, but saves time.
 	var/obj/item/rig_module/voice/speech                      // As above.
@@ -95,7 +95,7 @@
 	var/datum/effect_system/spark_spread/spark_system
 	var/datum/mini_hud/rig/minihud
 
-/obj/item/weapon/rig/examine()
+/obj/item/rig/examine()
 	. = ..()
 	if(wearer)
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))
@@ -112,7 +112,7 @@
 		if(open)
 			. += "It's equipped with [english_list(installed_modules)]."
 
-/obj/item/weapon/rig/Initialize()
+/obj/item/rig/Initialize()
 	. = ..()
 
 	suit_state = icon_state
@@ -139,18 +139,18 @@
 		air_supply = new air_type(src)
 	if(glove_type)
 		gloves = new glove_type(src)
-		verbs |= /obj/item/weapon/rig/proc/toggle_gauntlets
+		verbs |= /obj/item/rig/proc/toggle_gauntlets
 	if(helm_type)
 		helmet = new helm_type(src)
-		verbs |= /obj/item/weapon/rig/proc/toggle_helmet
+		verbs |= /obj/item/rig/proc/toggle_helmet
 	if(boot_type)
 		boots = new boot_type(src)
-		verbs |= /obj/item/weapon/rig/proc/toggle_boots
+		verbs |= /obj/item/rig/proc/toggle_boots
 	if(chest_type)
 		chest = new chest_type(src)
 		if(allowed)
 			chest.allowed = allowed
-		verbs |= /obj/item/weapon/rig/proc/toggle_chest
+		verbs |= /obj/item/rig/proc/toggle_chest
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!istype(piece))
@@ -170,7 +170,7 @@
 
 	update_icon(1)
 
-/obj/item/weapon/rig/Destroy()
+/obj/item/rig/Destroy()
 	for(var/obj/item/piece in list(gloves,boots,helmet,chest))
 		var/mob/living/M = piece.loc
 		if(istype(M))
@@ -184,7 +184,7 @@
 	return ..()
 
 // We only care about processing when we're on a mob
-/obj/item/weapon/rig/Moved(old_loc, direction, forced)
+/obj/item/rig/Moved(old_loc, direction, forced)
 	if(ismob(loc))
 		START_PROCESSING(SSobj, src)
 	else
@@ -200,7 +200,7 @@
 				M.unEquip(piece)
 			piece.forceMove(src)
 
-/obj/item/weapon/rig/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
+/obj/item/rig/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
 	if(!inhands && (slot_name == slot_back_str || slot_name == slot_belt_str))
 		if(icon_override)
 			return icon_override
@@ -209,7 +209,7 @@
 
 	return ..()
 
-/obj/item/weapon/rig/proc/suit_is_deployed()
+/obj/item/rig/proc/suit_is_deployed()
 	if(!istype(wearer) || src.loc != wearer || (wearer.back != src && wearer.belt != src))
 		return 0
 	if(helm_type && !(helmet && wearer.head == helmet))
@@ -225,7 +225,7 @@
 // Updates pressure protection
 // Seal = 1 sets protection
 // Seal = 0 unsets protection
-/obj/item/weapon/rig/proc/update_airtight(var/obj/item/piece, var/seal = 0)
+/obj/item/rig/proc/update_airtight(var/obj/item/piece, var/seal = 0)
 	if(seal == 1)
 		piece.min_pressure_protection = rigsuit_min_pressure
 		piece.max_pressure_protection = rigsuit_max_pressure
@@ -237,7 +237,7 @@
 	return
 
 
-/obj/item/weapon/rig/proc/reset()
+/obj/item/rig/proc/reset()
 	offline = 2
 	canremove = 1
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
@@ -247,7 +247,7 @@
 			update_airtight(piece, 0) // Unseal
 	update_icon(1)
 
-/obj/item/weapon/rig/proc/cut_suit()
+/obj/item/rig/proc/cut_suit()
 	offline = 2
 	canremove = 1
 	toggle_piece("helmet", loc, ONLY_RETRACT, TRUE)
@@ -256,7 +256,7 @@
 	toggle_piece("chest", loc, ONLY_RETRACT, TRUE)
 	update_icon(1)
 
-/obj/item/weapon/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
+/obj/item/rig/proc/toggle_seals(var/mob/living/carbon/human/M,var/instant)
 
 	if(sealing) return
 
@@ -389,23 +389,23 @@
 		update_component_sealed()
 	update_icon(1)
 
-/obj/item/weapon/rig/proc/update_component_sealed()
+/obj/item/rig/proc/update_component_sealed()
 	for(var/obj/item/piece in list(helmet,boots,gloves,chest))
 		if(canremove)
 			update_airtight(piece, 0) // Unseal
 		else
 			update_airtight(piece, 1) // Seal
 
-/obj/item/weapon/rig/ui_action_click()
+/obj/item/rig/ui_action_click()
 	toggle_cooling(usr)
 
-/obj/item/weapon/rig/proc/toggle_cooling(var/mob/user)
+/obj/item/rig/proc/toggle_cooling(var/mob/user)
 	if(cooling_on)
 		turn_cooling_off(user)
 	else
 		turn_cooling_on(user)
 
-/obj/item/weapon/rig/proc/turn_cooling_on(var/mob/user)
+/obj/item/rig/proc/turn_cooling_on(var/mob/user)
 	if(!cell)
 		return
 	if(cell.charge <= 0)
@@ -419,14 +419,14 @@
 	to_chat(usr, "<span class='notice'>You switch \the [src]'s cooling system on.</span>")
 
 
-/obj/item/weapon/rig/proc/turn_cooling_off(var/mob/user, var/failed)
+/obj/item/rig/proc/turn_cooling_off(var/mob/user, var/failed)
 	if(failed)
 		visible_message("\The [src]'s cooling system clicks and whines as it powers down.")
 	else
 		to_chat(usr, "<span class='notice'>You switch \the [src]'s cooling system off.</span>")
 	cooling_on = 0
 
-/obj/item/weapon/rig/proc/get_environment_temperature()
+/obj/item/rig/proc/get_environment_temperature()
 	if (ishuman(loc))
 		var/mob/living/carbon/human/H = loc
 		if(istype(H.loc, /obj/mecha))
@@ -446,7 +446,7 @@
 
 	return environment.temperature
 
-/obj/item/weapon/rig/proc/attached_to_user(mob/M)
+/obj/item/rig/proc/attached_to_user(mob/M)
 	if (!ishuman(M))
 		return 0
 
@@ -457,7 +457,7 @@
 
 	return 1
 
-/obj/item/weapon/rig/proc/coolingProcess()
+/obj/item/rig/proc/coolingProcess()
 	if (!cooling_on || !cell)
 		return
 
@@ -490,7 +490,7 @@
 	if(cell.charge <= 0)
 		turn_cooling_off(H, 1)
 
-/obj/item/weapon/rig/process()
+/obj/item/rig/process()
 	// Not on a mob...?
 	if(!ismob(loc))
 		if(wearer?.wearing_rig == src)
@@ -546,7 +546,7 @@
 	for(var/obj/item/rig_module/module in installed_modules)
 		cell.use(module.process()*10)
 
-/obj/item/weapon/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai)
+/obj/item/rig/proc/check_power_cost(var/mob/living/user, var/cost, var/use_unconcious, var/obj/item/rig_module/mod, var/user_is_ai)
 
 	if(!istype(user))
 		return 0
@@ -582,10 +582,9 @@
 	cell.use(cost*10)
 	return 1
 
-/obj/item/weapon/rig/update_icon(var/update_mob_icon)
+/obj/item/rig/update_icon(var/update_mob_icon)
 
-	//TODO: Maybe consider a cache for this (use mob_icon as blank canvas, use suit icon overlay).
-	overlays.Cut()
+	cut_overlays()
 	if(!mob_icon || update_mob_icon)
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
@@ -597,7 +596,7 @@
 	if(installed_modules.len)
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
-				chest.overlays += image("icon" = 'icons/mob/rig_modules.dmi', "icon_state" = "[module.suit_overlay]", "dir" = SOUTH)
+				chest.add_overlay(image('icons/mob/rig_modules.dmi', icon_state = "[module.suit_overlay]", dir = SOUTH))
 
 	if(wearer)
 		wearer.update_inv_shoes()
@@ -607,7 +606,7 @@
 		wearer.update_inv_back()
 	return
 
-/obj/item/weapon/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
+/obj/item/rig/proc/check_suit_access(var/mob/living/carbon/human/user)
 
 	if(!security_check_enabled)
 		return 1
@@ -629,16 +628,16 @@
 
 	return 1
 
-/obj/item/weapon/rig/proc/notify_ai(var/message)
+/obj/item/rig/proc/notify_ai(var/message)
 	for(var/obj/item/rig_module/ai_container/module in installed_modules)
 		if(module.integrated_ai && module.integrated_ai.client && !module.integrated_ai.stat)
 			to_chat(module.integrated_ai, "[message]")
 			. = 1
 
-/obj/item/weapon/rig/equipped(mob/living/carbon/human/M)
+/obj/item/rig/equipped(mob/living/carbon/human/M)
 	..()
 
-	if(istype(M.back, /obj/item/weapon/rig) && istype(M.belt, /obj/item/weapon/rig))
+	if(istype(M.back, /obj/item/rig) && istype(M.belt, /obj/item/rig))
 		to_chat(M, "<span class='notice'>You try to put on the [src], but it won't fit.</span>")
 		if(M && (M.back == src || M.belt == src))
 			if(!M.unEquip(src))
@@ -661,7 +660,7 @@
 		wearer.wearing_rig = src
 		update_icon()
 
-/obj/item/weapon/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode, var/forced = FALSE)
+/obj/item/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode, var/forced = FALSE)
 
 	if((sealing || !cell || !cell.charge) && !forced)
 		return
@@ -731,7 +730,7 @@
 	if(piece == "helmet" && helmet)
 		helmet.update_light(H)
 
-/obj/item/weapon/rig/proc/deploy(mob/M,var/sealed)
+/obj/item/rig/proc/deploy(mob/M,var/sealed)
 
 	var/mob/living/carbon/human/H = M
 
@@ -768,7 +767,7 @@
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, H, ONLY_DEPLOY)
 
-/obj/item/weapon/rig/dropped(var/mob/user)
+/obj/item/rig/dropped(var/mob/user)
 	..()
 	for(var/piece in list("helmet","gauntlets","chest","boots"))
 		toggle_piece(piece, user, ONLY_RETRACT)
@@ -777,10 +776,10 @@
 	wearer = null
 
 //Todo
-/obj/item/weapon/rig/proc/malfunction()
+/obj/item/rig/proc/malfunction()
 	return 0
 
-/obj/item/weapon/rig/emp_act(severity_class)
+/obj/item/rig/emp_act(severity_class)
 	//set malfunctioning
 	if(emp_protection < 30) //for ninjas, really.
 		malfunctioning += 10
@@ -793,14 +792,14 @@
 	//possibly damage some modules
 	take_hit((100/severity_class), "electrical pulse", 1)
 
-/obj/item/weapon/rig/proc/shock(mob/user)
+/obj/item/rig/proc/shock(mob/user)
 	if (electrocute_mob(user, cell, src)) //electrocute_mob() handles removing charge from the cell, no need to do that here.
 		spark_system.start()
 		if(user.stunned)
 			return 1
 	return 0
 
-/obj/item/weapon/rig/proc/take_hit(damage, source, is_emp=0)
+/obj/item/rig/proc/take_hit(damage, source, is_emp=0)
 
 	if(!installed_modules.len)
 		return
@@ -846,7 +845,7 @@
 			to_chat(wearer, "<span class='warning'>The [source] has damaged your [dam_module.interface_name]!</span>")
 	dam_module.deactivate()
 
-/obj/item/weapon/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
+/obj/item/rig/proc/malfunction_check(var/mob/living/carbon/human/user)
 	if(malfunction_delay)
 		if(offline)
 			to_chat(user, "<span class='danger'>The suit is completely unresponsive.</span>")
@@ -855,7 +854,7 @@
 		return 1
 	return 0
 
-/obj/item/weapon/rig/proc/ai_can_move_suit(var/mob/user, var/check_user_module = 0, var/check_for_ai = 0)
+/obj/item/rig/proc/ai_can_move_suit(var/mob/user, var/check_user_module = 0, var/check_for_ai = 0)
 
 	if(check_for_ai)
 		if(!(locate(/obj/item/rig_module/ai_container) in contents))
@@ -892,13 +891,13 @@
 		return 0
 	return 1
 
-/obj/item/weapon/rig/proc/force_rest(var/mob/user)
+/obj/item/rig/proc/force_rest(var/mob/user)
 	if(!ai_can_move_suit(user, check_user_module = 1))
 		return
 	wearer.lay_down()
 	to_chat(user, "<span class='notice'>\The [wearer] is now [wearer.resting ? "resting" : "getting up"].</span>")
 
-/obj/item/weapon/rig/proc/forced_move(var/direction, var/mob/user)
+/obj/item/rig/proc/forced_move(var/direction, var/mob/user)
 
 	// Why is all this shit in client/Move()? Who knows?
 	if(world.time < wearer_move_delay)
@@ -973,13 +972,13 @@
 		return loc.get_rig()
 	return null
 
-/obj/item/weapon/rig/get_rig()
+/obj/item/rig/get_rig()
 	return src
 
 /mob/living/carbon/human/get_rig()
-	if(istype(back, /obj/item/weapon/rig))
+	if(istype(back, /obj/item/rig))
 		return back
-	else if(istype(belt, /obj/item/weapon/rig))
+	else if(istype(belt, /obj/item/rig))
 		return belt
 	else
 		return null

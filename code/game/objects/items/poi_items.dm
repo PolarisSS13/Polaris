@@ -70,7 +70,7 @@
 	close_sound = 'sound/machines/door/hatchclose.ogg'
 
 	starts_with = list(
-		/obj/item/weapon/fuel_assembly/deuterium = 6)
+		/obj/item/fuel_assembly/deuterium = 6)
 
 /obj/item/poi/brokenoldreactor
 	icon_state = "poireactor_broken"

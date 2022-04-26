@@ -15,7 +15,7 @@
 
 	starts_with = list(
 		/obj/item/clothing/head/that = 2,
-		/obj/item/device/radio/headset/headset_service = 2,
+		/obj/item/radio/headset/headset_service = 2,
 		/obj/item/clothing/head/pin/flower,
 		/obj/item/clothing/head/pin/flower/pink,
 		/obj/item/clothing/head/pin/flower/yellow,
@@ -41,12 +41,12 @@
 	starts_with = list(
 		/obj/item/clothing/under/sundress,
 		/obj/item/clothing/under/waiter = 2,
-		/obj/item/device/radio/headset/headset_service = 2,
-		/obj/item/weapon/storage/box/mousetraps = 2,
+		/obj/item/radio/headset/headset_service = 2,
+		/obj/item/storage/box/mousetraps = 2,
 		/obj/item/clothing/under/rank/chef,
 		/obj/item/clothing/head/chefhat,
 		/obj/item/clothing/head/surgery/hairnet = 2,
-		/obj/item/weapon/storage/bag/food = 2)
+		/obj/item/storage/bag/food = 2)
 
 /*
  * Janitor
@@ -59,16 +59,16 @@
 	starts_with = list(
 		/obj/item/clothing/under/rank/janitor,
 		/obj/item/clothing/under/dress/maid/janitor,
-		/obj/item/device/radio/headset/headset_service,
-		/obj/item/weapon/cartridge/janitor,
+		/obj/item/radio/headset/headset_service,
+		/obj/item/cartridge/janitor,
 		/obj/item/clothing/gloves/black,
 		/obj/item/clothing/head/soft/purple,
 		/obj/item/clothing/head/beret/purple,
-		/obj/item/device/flashlight,
+		/obj/item/flashlight,
 		/obj/item/clothing/suit/caution = 4,
-		/obj/item/device/lightreplacer,
-		/obj/item/weapon/storage/bag/trash,
-		/obj/item/weapon/storage/belt/janitor,
+		/obj/item/lightreplacer,
+		/obj/item/storage/bag/trash,
+		/obj/item/storage/belt/janitor,
 		/obj/item/clothing/shoes/galoshes)
 
 /*
@@ -98,4 +98,4 @@
 		/obj/item/clothing/glasses/sunglasses/big = 2,
 		/obj/item/clothing/under/lawyer/blue = 2,
 		/obj/item/clothing/under/lawyer/blue/skirt = 2,
-		/obj/item/device/tape/random = 2)
+		/obj/item/tape/random = 2)

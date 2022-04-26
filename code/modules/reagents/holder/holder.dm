@@ -111,7 +111,7 @@
 	update_total()
 	amount = min(amount, get_free_space())
 
-	if(istype(my_atom,/obj/item/weapon/reagent_containers/food)) //The following code is targeted specifically at getting allergen reagents into food items, since for the most part they're not applied by default.
+	if(istype(my_atom,/obj/item/reagent_containers/food)) //The following code is targeted specifically at getting allergen reagents into food items, since for the most part they're not applied by default.
 		var/list/add_reagents = list()
 		var/totalnum = 0
 

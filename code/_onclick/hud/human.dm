@@ -243,7 +243,7 @@
 		internals = new /obj/screen()
 		internals.icon = HUD.ui_style
 		internals.icon_state = "internal0"
-		if(istype(internal, /obj/item/weapon/tank)) //Internals on already? Iight, prove it
+		if(istype(internal, /obj/item/tank)) //Internals on already? Iight, prove it
 			internals.icon_state = "internal1"
 		internals.name = "internal"
 		internals.screen_loc = ui_internal
@@ -279,8 +279,8 @@
 	zone_sel.icon = HUD.ui_style
 	zone_sel.color = HUD.ui_color
 	zone_sel.alpha = HUD.ui_alpha
-	zone_sel.overlays.Cut()
-	zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[zone_sel.selecting]")
+	zone_sel.cut_overlays()
+	zone_sel.add_overlay(image('icons/mob/zone_sel.dmi', "[zone_sel.selecting]"))
 	hud_elements |= zone_sel
 
 	//Handle the gun settings buttons

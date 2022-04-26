@@ -4,12 +4,12 @@
 //Blood levels. These are percentages based on the species blood_volume var.
 //Retained for archival/reference purposes - KK
 /*
-var/const/BLOOD_VOLUME_SAFE =    85
-var/const/BLOOD_VOLUME_OKAY =    75
-var/const/BLOOD_VOLUME_BAD =     60
-var/const/BLOOD_VOLUME_SURVIVE = 40
+var/global/const/BLOOD_VOLUME_SAFE =    85
+var/global/const/BLOOD_VOLUME_OKAY =    75
+var/global/const/BLOOD_VOLUME_BAD =     60
+var/global/const/BLOOD_VOLUME_SURVIVE = 40
 */
-var/const/CE_STABLE_THRESHOLD = 0.5
+var/global/const/CE_STABLE_THRESHOLD = 0.5
 
 /mob/living/carbon/human/var/datum/reagents/vessel // Container for blood and BLOOD ONLY. Do not transfer other chems here.
 /mob/living/carbon/human/var/var/pale = 0          // Should affect how mob sprite is drawn, but currently doesn't.
@@ -216,7 +216,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 ****************************************************/
 
 //Gets blood from mob to the container, preserving all data in it.
-/mob/living/carbon/proc/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+/mob/living/carbon/proc/take_blood(obj/item/reagent_containers/container, var/amount)
 
 	var/datum/reagent/B = get_blood(container.reagents)
 	if(!B)
@@ -247,7 +247,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 	return B
 
 //For humans, blood does not appear from blue, it comes from vessels.
-/mob/living/carbon/human/take_blood(obj/item/weapon/reagent_containers/container, var/amount)
+/mob/living/carbon/human/take_blood(obj/item/reagent_containers/container, var/amount)
 
 	if(!should_have_organ(O_HEART))
 		return null
@@ -355,7 +355,7 @@ var/const/CE_STABLE_THRESHOLD = 0.5
 
 	var/obj/effect/decal/cleanable/blood/drip/drop = B
 	if(istype(drop) && drips && drips.len && !large)
-		drop.overlays |= drips
+		drop.add_overlay(drips)
 		drop.drips |= drips
 
 	// If there's no data to copy, call it quits here.

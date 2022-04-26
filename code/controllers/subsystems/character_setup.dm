@@ -11,18 +11,7 @@ SUBSYSTEM_DEF(character_setup)
 	var/list/newplayers_requiring_init = list()
 
 	var/list/save_queue = list()
-/*
-/datum/controller/subsystem/character_setup/Initialize()
-	while(prefs_awaiting_setup.len)
-		var/datum/preferences/prefs = prefs_awaiting_setup[prefs_awaiting_setup.len]
-		prefs_awaiting_setup.len--
-		prefs.setup()
-	while(newplayers_requiring_init.len)
-		var/mob/new_player/new_player = newplayers_requiring_init[newplayers_requiring_init.len]
-		newplayers_requiring_init.len--
-		new_player.deferred_login()
-	. = ..()
-*/	//Might be useful if we ever switch to Bay prefs.
+
 /datum/controller/subsystem/character_setup/fire(resumed, no_mc_tick)
 	while(save_queue.len)
 		var/datum/preferences/prefs = save_queue[save_queue.len]

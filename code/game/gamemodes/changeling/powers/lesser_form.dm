@@ -30,7 +30,7 @@
 	changeling.geneticdamage = 30
 	to_chat(H, "<span class='warning'>Our genes cry out!</span>")
 	var/list/implants = list() //Try to preserve implants.
-	for(var/obj/item/weapon/implant/W in H)
+	for(var/obj/item/implant/W in H)
 		implants += W
 	H.monkeyize()
 	feedback_add_details("changeling_powers","LF")
@@ -63,13 +63,13 @@
 	C.dna = chosen_dna.Clone()
 
 	var/list/implants = list()
-	for (var/obj/item/weapon/implant/I in C) //Still preserving implants
+	for (var/obj/item/implant/I in C) //Still preserving implants
 		implants += I
 
 	C.transforming = 1
 	C.canmove = 0
 	C.icon = null
-	C.overlays.Cut()
+	C.cut_overlays()
 	C.invisibility = 101
 	var/atom/movable/overlay/animation = new /atom/movable/overlay( C.loc )
 	animation.icon_state = "blank"
@@ -103,7 +103,7 @@
 	O.setOxyLoss(C.getOxyLoss())
 	O.adjustFireLoss(C.getFireLoss())
 	O.set_stat(C.stat)
-	for (var/obj/item/weapon/implant/I in implants)
+	for (var/obj/item/implant/I in implants)
 		I.loc = O
 		I.implanted = O
 

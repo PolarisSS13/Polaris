@@ -3,7 +3,7 @@
 	name = "unknown person"
 	desc = "How are you examining me?"
 	see_invisible = SEE_INVISIBLE_LIVING
-	var/obj/item/device/communicator/comm = null
+	var/obj/item/communicator/comm = null
 
 	emote_type = 2 //This lets them emote through containers.  The communicator has a image feed of the person calling them so...
 
@@ -11,7 +11,7 @@
 	add_language(LANGUAGE_GALCOM)
 	set_default_language(GLOB.all_languages[LANGUAGE_GALCOM])
 
-	if(istype(loc, /obj/item/device/communicator))
+	if(istype(loc, /obj/item/communicator))
 		comm = loc
 	. = ..()
 
@@ -22,7 +22,7 @@
 	if(ismob(speaker))
 		icon = speaker.icon
 		icon_state = speaker.icon_state
-		overlays = speaker.overlays
+		copy_overlays(speaker, TRUE)
 		timeofdeath = speaker.timeofdeath
 
 		alpha = 127 //Maybe we'll have hologram calls later.

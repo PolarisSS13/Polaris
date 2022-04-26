@@ -6,7 +6,7 @@
 	overlay = over
 	ckey = key
 
-var/list/ai_status_emotions = list(
+var/global/list/ai_status_emotions = list(
 	"Very Happy" 				= new /datum/ai_emotion("ai_veryhappy"),
 	"Happy" 					= new /datum/ai_emotion("ai_happy"),
 	"Neutral" 					= new /datum/ai_emotion("ai_neutral"),
@@ -63,7 +63,7 @@ var/list/ai_status_emotions = list(
 	name = "AI display"
 	anchored = 1
 	density = 0
-	circuit =  /obj/item/weapon/circuitboard/ai_status_display
+	circuit =  /obj/item/circuitboard/ai_status_display
 
 	var/mode = 0	// 0 = Blank
 					// 1 = AI emoticon
@@ -90,7 +90,7 @@ var/list/ai_status_emotions = list(
 
 /obj/machinery/ai_status_display/proc/update()
 	if(mode==0) //Blank
-		overlays.Cut()
+		cut_overlays()
 		return
 
 	if(mode==1)	// AI emoticon
@@ -104,14 +104,12 @@ var/list/ai_status_emotions = list(
 
 /obj/machinery/ai_status_display/proc/set_picture(var/state)
 	picture_state = state
-	if(overlays.len)
-		overlays.Cut()
-	overlays += image('icons/obj/status_display.dmi', icon_state=picture_state)
+	cut_overlays()
+	add_overlay(picture_state)
 
 /obj/machinery/ai_status_display/power_change()
 	..()
 	if(stat & NOPOWER)
-		if(overlays.len)
-			overlays.Cut()
+		cut_overlays()
 	else
 		update()

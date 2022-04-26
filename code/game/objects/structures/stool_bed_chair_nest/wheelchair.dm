@@ -55,7 +55,7 @@
 				var/mob/living/L = A
 				L.set_dir(dir)
 
-/obj/structure/bed/chair/wheelchair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wheelchair/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_wrench() || W.is_wirecutter() || istype(W,/obj/item/stack))
 		return
 	..()

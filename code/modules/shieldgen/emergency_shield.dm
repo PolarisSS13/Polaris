@@ -39,7 +39,7 @@
 	update_nearby_tiles()
 	. = ..()
 
-/obj/machinery/shield/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/shield/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W)) return
 
 	//Calculate damage
@@ -136,7 +136,7 @@
 	var/check_delay = 60	//periodically recheck if we need to rebuild a shield
 	use_power = USE_POWER_OFF
 	idle_power_usage = 0
-	var/global/list/blockedturfs =  list(
+	var/static/list/blockedturfs =  list(
 		/turf/space,
 		/turf/simulated/floor/outdoors,
 	)
@@ -279,7 +279,7 @@
 		update_icon()
 		return 1
 
-/obj/machinery/shieldgen/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/shieldgen/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_screwdriver())
 		playsound(src, W.usesound, 100, 1)
 		if(is_open)
@@ -318,7 +318,7 @@
 			anchored = 1
 
 
-	else if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))
+	else if(istype(W, /obj/item/card/id) || istype(W, /obj/item/pda))
 		if(src.allowed(user))
 			src.locked = !src.locked
 			to_chat(user, "The controls are now [src.locked ? "locked." : "unlocked."]")

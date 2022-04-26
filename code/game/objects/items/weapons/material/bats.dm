@@ -1,4 +1,4 @@
-/obj/item/weapon/material/twohanded/baseballbat
+/obj/item/material/twohanded/baseballbat
 	name = "bat"
 	desc = "HOME RUN!"
 	icon_state = "metalbat0"
@@ -13,17 +13,17 @@
 	slot_flags = SLOT_BACK
 
 //Predefined materials go here.
-/obj/item/weapon/material/twohanded/baseballbat/metal/Initialize(var/ml)
+/obj/item/material/twohanded/baseballbat/metal/Initialize(var/ml)
 	. = ..(ml, MAT_STEEL)
 
-/obj/item/weapon/material/twohanded/baseballbat/uranium/Initialize(var/ml)
+/obj/item/material/twohanded/baseballbat/uranium/Initialize(var/ml)
 	. = ..(ml, MAT_URANIUM)
 
-/obj/item/weapon/material/twohanded/baseballbat/gold/Initialize(var/ml)
+/obj/item/material/twohanded/baseballbat/gold/Initialize(var/ml)
 	. = ..(ml, MAT_GOLD)
 
-/obj/item/weapon/material/twohanded/baseballbat/platinum/Initialize(var/ml)
+/obj/item/material/twohanded/baseballbat/platinum/Initialize(var/ml)
 	. = ..(ml, MAT_PLATINUM)
 
-/obj/item/weapon/material/twohanded/baseballbat/diamond/Initialize(var/ml)
+/obj/item/material/twohanded/baseballbat/diamond/Initialize(var/ml)
 	. = ..(ml, MAT_DIAMOND)

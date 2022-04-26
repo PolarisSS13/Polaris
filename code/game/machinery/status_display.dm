@@ -18,7 +18,7 @@
 	density = 0
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
-	circuit =  /obj/item/weapon/circuitboard/status_display
+	circuit =  /obj/item/circuitboard/status_display
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
 					// 2 = Arbitrary message(s)
@@ -197,7 +197,7 @@
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
-	overlays |= picture
+	add_overlay(picture)
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
@@ -233,8 +233,7 @@
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
-	if(overlays.len)
-		overlays.Cut()
+	cut_overlays()
 	if(maptext)
 		maptext = ""
 

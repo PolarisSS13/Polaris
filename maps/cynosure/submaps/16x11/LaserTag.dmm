@@ -21,7 +21,7 @@
 "B" = (/obj/effect/floor_decal/corner/blue{dir = 9},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "C" = (/obj/random/toolbox,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "D" = (/obj/machinery/deployable/barrier{anchored = 1; req_access = list()},/obj/effect/floor_decal/corner/blue{dir = 10},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
-"E" = (/obj/effect/floor_decal/corner/red{dir = 5},/obj/random/crate,/obj/item/device/floor_painter,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/random/maintenance/clean,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
+"E" = (/obj/effect/floor_decal/corner/red{dir = 5},/obj/random/crate,/obj/item/floor_painter,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/random/maintenance/engineering,/obj/random/maintenance/clean,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "F" = (/obj/item/tape/engineering,/turf/simulated/floor/plating,/area/template_noop)
 "G" = (/obj/effect/floor_decal/corner/blue{dir = 10},/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)
 "H" = (/obj/effect/floor_decal/corner/red{dir = 6},/obj/structure/closet/lasertag/red,/turf/simulated/floor/tiled/steel_dirty,/area/template_noop)

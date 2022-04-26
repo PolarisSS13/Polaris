@@ -51,7 +51,7 @@
 	set_clothing_index()
 
 /obj/item/clothing/update_icon()
-	overlays.Cut() //This removes all the overlays on the sprite and then goes down a checklist adding them as required.
+	cut_overlays()
 	if(blood_DNA)
 		add_blood()
 	. = ..()
@@ -280,7 +280,7 @@
 	siemens_coefficient = 0.9
 	blood_sprite_state = "bloodyhands"
 	var/wired = 0
-	var/obj/item/weapon/cell/cell = 0
+	var/obj/item/cell/cell = 0
 	var/fingerprint_chance = 0	//How likely the glove is to let fingerprints through
 	var/obj/item/clothing/gloves/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
@@ -317,8 +317,8 @@
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-/*/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/scalpel))
+/*/obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
+	if(W.is_wirecutter() || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
 			update_icon()
@@ -497,6 +497,9 @@
 	return 1
 
 /obj/item/clothing/head/update_icon(var/mob/user)
+	if(!ismob(user))
+		return
+
 	var/mob/living/carbon/human/H
 	if(ishuman(user))
 		H = user
@@ -615,7 +618,7 @@
 		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
 		playsound(src, 'sound/weapons/holster/sheathout.ogg', 25)
 		holding = null
-		overlays -= image(icon, "[icon_state]_knife")
+		cut_overlay(image(icon, "[icon_state]_knife"))
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
@@ -633,10 +636,10 @@
 	..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if((can_hold_knife == 1) && (istype(I, /obj/item/weapon/material/shard) || \
-	 istype(I, /obj/item/weapon/material/butterfly) || \
-	 istype(I, /obj/item/weapon/material/kitchen/utensil) || \
-	 istype(I, /obj/item/weapon/material/knife/tacknife)))
+	if((can_hold_knife == 1) && (istype(I, /obj/item/material/shard) || \
+	 istype(I, /obj/item/material/butterfly) || \
+	 istype(I, /obj/item/material/kitchen/utensil) || \
+	 istype(I, /obj/item/material/knife/tacknife)))
 		if(holding)
 			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
 			return
@@ -662,7 +665,7 @@
 /obj/item/clothing/shoes/update_icon()
 	. = ..()
 	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
+		add_overlay(image(icon, "[icon_state]_knife"))
 	if(ismob(usr))
 		var/mob/M = usr
 		M.update_inv_shoes()
@@ -691,7 +694,7 @@
 	name = "suit"
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	allowed = list(/obj/item/weapon/tank/emergency/oxygen)
+	allowed = list(/obj/item/tank/emergency/oxygen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"

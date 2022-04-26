@@ -5,6 +5,7 @@
 	icon_state = "generic"
 	var/spawn_nothing_percentage = 0 // this variable determines the likelyhood that this random object will not spawn anything
 	var/drop_get_turf = TRUE
+	var/start_anomalous = FALSE
 
 // creates a new object and deletes itself
 /obj/random/Initialize()
@@ -31,6 +32,8 @@
 		A.pixel_x = pixel_x
 		A.pixel_y = pixel_y
 		A.set_dir(dir)
+		if(start_anomalous)
+			A.become_anomalous()
 
 /obj/random/drop_location()
 	return drop_get_turf ? get_turf(src) : ..()
@@ -41,16 +44,16 @@
 	if(build_path)
 		return new build_path(drop_location())
 
-var/list/random_junk_
-var/list/random_useful_
+var/global/list/random_junk_
+var/global/list/random_useful_
 /proc/get_random_useful_type()
 	if(!random_useful_)
-		random_useful_ = subtypesof(/obj/item/weapon/pen/crayon)
-		random_useful_ += /obj/item/weapon/pen
-		random_useful_ += /obj/item/weapon/pen/blue
-		random_useful_ += /obj/item/weapon/pen/red
-		random_useful_ += /obj/item/weapon/pen/multi
-		random_useful_ += /obj/item/weapon/storage/box/matches
+		random_useful_ = subtypesof(/obj/item/pen/crayon)
+		random_useful_ += /obj/item/pen
+		random_useful_ += /obj/item/pen/blue
+		random_useful_ += /obj/item/pen/red
+		random_useful_ += /obj/item/pen/multi
+		random_useful_ += /obj/item/storage/box/matches
 		random_useful_ += /obj/item/stack/material/cardboard
 	return pick(random_useful_)
 
@@ -63,10 +66,10 @@ var/list/random_useful_
 			random_junk_ += /obj/effect/decal/cleanable/spiderling_remains
 			random_junk_ += /obj/effect/decal/remains/mouse
 			random_junk_ += /obj/effect/decal/remains/robot
-			random_junk_ += /obj/item/weapon/paper/crumpled
+			random_junk_ += /obj/item/paper/crumpled
 			random_junk_ += /obj/item/inflatable/torn
 			random_junk_ += /obj/effect/decal/cleanable/molten_item
-			random_junk_ += /obj/item/weapon/material/shard
+			random_junk_ += /obj/item/material/shard
 
 			random_junk_ -= /obj/item/trash/plate
 			random_junk_ -= /obj/item/trash/snack_bowl
@@ -100,7 +103,7 @@ var/list/random_useful_
 //	Multi Point Spawn
 //	Selects one spawn point out of a group of points with the same ID and asks it to generate its items
 */
-var/list/multi_point_spawns
+var/global/list/multi_point_spawns
 
 /obj/random_multi
 	name = "random object spawn point"

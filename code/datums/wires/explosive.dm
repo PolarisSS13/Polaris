@@ -21,15 +21,15 @@
 				explode()
 
 /datum/wires/explosive/c4
-	holder_type = /obj/item/weapon/plastique
+	holder_type = /obj/item/plastique
 
 /datum/wires/explosive/c4/interactable(mob/user)
-	var/obj/item/weapon/plastique/P = holder
+	var/obj/item/plastique/P = holder
 	if(P.open_panel)
 		return TRUE
 	return FALSE
 
 /datum/wires/explosive/c4/explode()
-	var/obj/item/weapon/plastique/P = holder
+	var/obj/item/plastique/P = holder
 	P.set_target(get_turf(P))
 	P.detonate()

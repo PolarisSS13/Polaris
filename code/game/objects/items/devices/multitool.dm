@@ -4,10 +4,13 @@
  *
  */
 
-/obj/item/device/multitool
+/obj/item/multitool
 	name = "multitool"
 	desc = "Used for pulsing wires to test which to cut. Not recommended by doctors."
 	description_info = "You can use this on airlocks or APCs to try to hack them without cutting wires."
+	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "multitool"
 	force = 5.0
 	w_class = ITEMSIZE_SMALL
@@ -31,7 +34,7 @@
 	toolspeed = 1
 	tool_qualities = list(TOOL_MULTITOOL)
 
-/obj/item/device/multitool/attack_self(mob/living/user)
+/obj/item/multitool/attack_self(mob/living/user)
 	var/choice = alert("What do you want to do with \the [src]?","Multitool Menu", "Switch Mode", "Clear Buffers", "Cancel")
 	switch(choice)
 		if("Cancel")
@@ -53,7 +56,7 @@
 
 	return ..()
 
-/obj/item/device/multitool/proc/mode_switch(mob/living/user)
+/obj/item/multitool/proc/mode_switch(mob/living/user)
 	if(mode_index + 1 > modes.len) mode_index = 1
 
 	else
@@ -66,10 +69,10 @@
 
 	return
 
-/obj/item/device/multitool/is_multitool()
+/obj/item/multitool/is_multitool()
 	return TRUE
 
-/obj/item/device/multitool/cyborg
+/obj/item/multitool/cyborg
 	name = "multitool"
 	desc = "Optimised and stripped-down version of a regular multitool."
 	toolspeed = 0.5
@@ -88,7 +91,7 @@
 	an airlock, if one knows how."
 	value = CATALOGUER_REWARD_EASY
 
-/obj/item/device/multitool/alien
+/obj/item/multitool/alien
 	name = "alien multitool"
 	desc = "An omni-technological interface."
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_multitool)
