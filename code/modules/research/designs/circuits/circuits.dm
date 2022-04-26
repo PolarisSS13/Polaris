@@ -431,7 +431,7 @@ CIRCUITS BELOW
 	name = "atmospheric field generator"
 	id = "arf_generator"
 	req_tech = list(TECH_MAGNET = 4, TECH_POWER = 4, TECH_BIO = 3)
-	build_path = /obj/item/weapon/circuitboard/arf_generator
+	build_path = /obj/item/circuitboard/arf_generator
 	sort_string = "LAAAD"
 
 /datum/design/circuit/mecha
