@@ -40,7 +40,7 @@
 
 
 /obj/item/taperecorder/attackby(obj/item/I, mob/user, params)
-	if(istype(I, /obj/item/tape))
+	if(istype(I, /obj/item/cassette_tape))
 		if(mytape)
 			to_chat(user, "<span class='notice'>There's already a tape inside.</span>")
 			return
@@ -358,8 +358,8 @@
 
 
 
-/obj/item/tape
-	name = "tape"
+/obj/item/cassette_tape
+	name = "cassette tape"
 	desc = "A magnetic tape that can hold up to ten minutes of content."
 	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
@@ -377,43 +377,43 @@
 	var/ruined = 0
 
 
-/obj/item/tape/update_icon()
+/obj/item/cassette_tape/update_icon()
 	cut_overlays()
 	if(ruined)
 		add_overlay("ribbonoverlay")
 
 
-/obj/item/tape/fire_act()
+/obj/item/cassette_tape/fire_act()
 	ruin()
 
-/obj/item/tape/attack_self(mob/user)
+/obj/item/cassette_tape/attack_self(mob/user)
 	if(!ruined)
 		to_chat(user, "<span class='notice'>You pull out all the tape!</span>")
 		ruin()
 
 
-/obj/item/tape/proc/ruin()
+/obj/item/cassette_tape/proc/ruin()
 	ruined = 1
 	update_icon()
 
 
-/obj/item/tape/proc/fix()
+/obj/item/cassette_tape/proc/fix()
 	ruined = 0
 	update_icon()
 
 
-/obj/item/tape/proc/record_speech(text)
+/obj/item/cassette_tape/proc/record_speech(text)
 	timestamp += used_capacity
 	storedinfo += "\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
 //shows up on the printed transcript as (Unrecognized sound)
-/obj/item/tape/proc/record_noise(text)
+/obj/item/cassette_tape/proc/record_noise(text)
 	timestamp += used_capacity
 	storedinfo += "*\[[time2text(used_capacity*10,"mm:ss")]\] [text]"
 
 
-/obj/item/tape/attackby(obj/item/I, mob/user, params)
+/obj/item/cassette_tape/attackby(obj/item/I, mob/user, params)
 	if(ruined && I.is_screwdriver())
 		to_chat(user, "<span class='notice'>You start winding the tape back in...</span>")
 		playsound(src, I.usesound, 50, 1)
@@ -437,6 +437,6 @@
 
 
 //Random colour tapes
-/obj/item/tape/random/Initialize()
+/obj/item/cassette_tape/random/Initialize()
 	. = ..()
 	icon_state = "tape_[pick("white", "blue", "red", "yellow", "purple")]"
