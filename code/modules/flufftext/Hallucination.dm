@@ -26,8 +26,7 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 					"You feel in tune with your surroundings. You're part of them...",
 					"What was that noise?",
 					"You feel like something is crawling on you...!")
-					var/msg = pick(msg_list)
-					to_chat(src, "<span class='warning'>[msg]</span>")
+					to_chat(src, "<span class='warning'>[pick(msg_list)]</span>")
 				if("sounds") /// Relatively harmless sounds to hear. 
 					var/list/soundlist = list('sound/items/bikehorn.ogg', 'sound/items/drink.ogg', 'sound/items/polaroid1.ogg', 'sound/items/lighter_on.ogg',
 					'sound/machines/vending/vending_cans.ogg', 'sound/weapons/flash.ogg')
@@ -142,22 +141,20 @@ Room for expanding on, but let's not imagine the crew wailing on you for taking 
 			"You look amazing!", "I forgive you.", "Everything is taken care of.", "You don't need to worry.", "Follow your bliss.",
 			"It's all going to turn out just fine.", "The universe understands you.", "The future is all assured.", "You are healing.",
 			"In a gentle way, you can shake the world...", "Endless opportunities flow from you.", "Keep going!")
-			var/msg = pick(msg_list)
 			if(name != "")
-				to_chat(H, "<span class='notice'>[name] says, \"[msg]\"</span>")
+				to_chat(H, "<span class='notice'>[name] says, \"[pick(msg_list)]\"</span>")
 			else
-				to_chat(H, "<span class='notice'>A hazy figure says, \"[msg]\"</span>")
+				to_chat(H, "<span class='notice'>A hazy figure says, \"[pick(msg_list)]\"</span>")
 		if(halaction == "badvoice")
 			var/list/msg_list = list("Your friends are lying.", "You shouldn't have done that.", "Haven't you forgotten something?",
 			"Mind your own business.", "They were right, you know.", "You aren't supposed to be here.", "We're watching you.", "Don't look at me.",
 			"You should be ashamed of yourself.", "Get out of here!", "You disgust me.", "The world is closing in.", "It's all your fault.",
 			"They're coming for you.", "It's only a matter of time.", "You ruined it.", "Nothing you do matters.", "You're wasting their time.",
 			"It wasn't an accident.")
-			var/msg = pick(msg_list)
 			if(name != "")
-				to_chat(H, "<span class='warning'>[name] says, \"[msg]\"</span>")
+				to_chat(H, "<span class='warning'>[name] says, \"[pick(msg_list)]\"</span>")
 			else
-				to_chat(H, "<span class='warning'>A hazy figure says, \"[msg]\"</span>")
+				to_chat(H, "<span class='warning'>A hazy figure says, \"[pick(msg_list)]\"</span>")
 		if(halaction == "ignoring")
 			step_away(src, H, 3)
 			if(prob(5))
