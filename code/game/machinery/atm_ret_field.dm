@@ -42,45 +42,42 @@
 	field_type = /obj/structure/atmospheric_retention_field/impassable
 
 /obj/machinery/atmospheric_field_generator/attackby(obj/item/W as obj, mob/user as mob)
-	if(W.is_crowbar() && isactive)
-		if(!src) return
-		to_chat(user, "<span class='warning'>You can't open the ARF-G whilst it's running!</span>")
-		return
-	if(W.is_crowbar() && !isactive)
-		if(!src) return
+	if(!src) return
+	if(W.is_crowbar())
+		if(isactive)
+			to_chat(user, "<span class='warning'>You can't open the ARF-G whilst it's running!</span>")
+			return
 		to_chat(user, "<span class='notice'>You [hatch_open? "close" : "open"] \the [src]'s access hatch.</span>")
 		hatch_open = !hatch_open
 		update_icon()
 		if(alwaysactive && wires_intact)
 			generate_field()
 		return
-	if(hatch_open && W.is_multitool())
-		if(!src) return
-		to_chat(user, "<span class='notice'>You toggle \the [src]'s activation behavior to [alwaysactive? "emergency" : "always-on"].</span>")
-		alwaysactive = !alwaysactive
-		update_icon()
-		return
-	if(hatch_open && W.is_wirecutter())
-		if(!src) return
-		to_chat(user, "<span class='warning'>You [wires_intact? "cut" : "mend"] \the [src]'s wires!</span>")
-		wires_intact = !wires_intact
-		update_icon()
-		return
-	if(hatch_open && istype(W,/obj/item/weldingtool))
-		if(!src) return
-		var/obj/item/weldingtool/WT = W
-		if(!WT.isOn())
+	if(hatch_open)
+		if(W.is_multitool())
+			to_chat(user, "<span class='notice'>You toggle \the [src]'s activation behavior to [alwaysactive? "emergency" : "always-on"].</span>")
+			alwaysactive = !alwaysactive
+			update_icon()
 			return
-		if(!WT.remove_fuel(0,user))
-			to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
+		else if(W.is_wirecutter())
+			to_chat(user, "<span class='warning'>You [wires_intact? "cut" : "mend"] \the [src]'s wires!</span>")
+			wires_intact = !wires_intact
+			update_icon()
 			return
-		user.visible_message("[user] starts to disassemble \the [src].", "You start to disassemble \the [src].")
-		playsound(src, WT.usesound, 50, 1)
-		if(do_after(user,15 * W.toolspeed))
-			if(!src || !user || !WT.remove_fuel(5, user)) return
-			to_chat(user, "<span class='notice'>You fully disassemble \the [src]. There were no salvageable parts.</span>")
-			qdel(src)
-		return
+		else if(istype(W,/obj/item/weldingtool))
+			var/obj/item/weldingtool/WT = W
+			if(!WT.isOn())
+				return
+			if(!WT.remove_fuel(0,user))
+				to_chat(user, "<span class='warning'>You need more fuel to complete this task.</span>")
+				return
+			user.visible_message("[user] starts to disassemble \the [src].", "You start to disassemble \the [src].")
+			playsound(src, WT.usesound, 50, 1)
+			if(do_after(user,15 * W.toolspeed))
+				if(!src || !user || !WT.remove_fuel(5, user)) return
+				to_chat(user, "<span class='notice'>You fully disassemble \the [src]. There were no salvageable parts.</span>")
+				qdel(src)
+			return
 
 /obj/machinery/atmospheric_field_generator/perma/Initialize()
 	. = ..()
@@ -99,17 +96,14 @@
 		icon_state = "arfg_off"
 
 /obj/machinery/atmospheric_field_generator/power_change()
-	var/oldstat
 	. = ..()
 	if(!(stat & NOPOWER))
-		ispowered = 1
-		update_icon()
+		ispowered = TRUE
 		if(alwaysactive || wasactive)	//reboot our field if we were on or are supposed to be always-on
 			generate_field()
-	if(stat != oldstat && isactive && (stat & NOPOWER))
-		ispowered = 0
+	if(isactive && (stat & NOPOWER))
+		ispowered = FALSE
 		disable_field()
-		update_icon()
 
 /obj/machinery/atmospheric_field_generator/emp_act()
 	. = ..()
@@ -134,24 +128,24 @@
 	return
 
 /obj/machinery/atmospheric_field_generator/proc/generate_field()
-	if(!ispowered || hatch_open || !wires_intact || isactive) //if it's not powered, the hatch is open, the wires are busted, or it's already on, don't do anything
-		return
-	else
-		isactive = 1
-		icon_state = "arfg_on"
-		new field_type (src.loc)
-		src.visible_message("<span class='warning'>The ARF-G crackles to life!</span>","<span class='warning'>You hear an ARF-G coming online!</span>")
-		update_use_power(USE_POWER_ACTIVE)
+	if(!ispowered || hatch_open || !wires_intact || isactive) return
+	isactive = TRUE
+	icon_state = "arfg_on"
+	new field_type (src.loc)
+	src.visible_message("<span class='warning'>The ARF-G crackles to life!</span>","<span class='warning'>You hear an ARF-G coming online!</span>")
+	update_use_power(USE_POWER_ACTIVE)
+	update_icon()
 	return
 
 /obj/machinery/atmospheric_field_generator/proc/disable_field()
-	if(isactive)
-		icon_state = "arfg_off"
-		for(var/obj/structure/atmospheric_retention_field/F in loc)
-			qdel(F)
-		src.visible_message("The ARF-G shuts down with a low hum.","You hear an ARF-G powering down.")
-		update_use_power(USE_POWER_IDLE)
-		isactive = 0
+	if(!isactive) return
+	icon_state = "arfg_off"
+	for(var/obj/structure/atmospheric_retention_field/F in loc)
+	qdel(F)
+	src.visible_message("The ARF-G shuts down with a low hum.","You hear an ARF-G powering down.")
+	update_use_power(USE_POWER_IDLE)
+	isactive = FALSE
+	update_icon()
 	return
 
 /obj/machinery/atmospheric_field_generator/Initialize()
