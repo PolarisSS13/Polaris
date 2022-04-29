@@ -14,7 +14,7 @@
 	var/recording = 0.0
 	var/playing = 0.0
 	var/playsleepseconds = 0.0
-	var/obj/item/tape/mytape = /obj/item/tape/random
+	var/obj/item/cassette_tape/mytape = /obj/item/cassette_tape/random
 	var/canprint = 1
 	slot_flags = SLOT_BELT
 	throwforce = 2
