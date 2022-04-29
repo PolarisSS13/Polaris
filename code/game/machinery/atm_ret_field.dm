@@ -141,7 +141,7 @@
 	if(!isactive) return
 	icon_state = "arfg_off"
 	for(var/obj/structure/atmospheric_retention_field/F in loc)
-	qdel(F)
+		qdel(F)
 	src.visible_message("The ARF-G shuts down with a low hum.","You hear an ARF-G powering down.")
 	update_use_power(USE_POWER_IDLE)
 	isactive = FALSE
