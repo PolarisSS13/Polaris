@@ -5123,7 +5123,7 @@
 	dir = 4
 	},
 /obj/machinery/alarm/monitor/isolation{
-	alarm_id = isolation_one;
+	alarm_id = "isolation_one";
 	dir = 4;
 	pixel_x = -22
 	},
@@ -10364,7 +10364,7 @@
 	dir = 4
 	},
 /obj/machinery/alarm/monitor/isolation{
-	alarm_id = isolation_three;
+	alarm_id = "isolation_three";
 	dir = 4;
 	pixel_x = -22
 	},
@@ -18727,7 +18727,7 @@
 	dir = 4
 	},
 /obj/machinery/alarm/monitor/isolation{
-	alarm_id = isolation_two;
+	alarm_id = "isolation_two";
 	dir = 4;
 	pixel_x = -22
 	},
