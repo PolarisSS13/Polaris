@@ -75,6 +75,21 @@
 	desc = "An easy to fit wooden floor tile. It's blue!"
 	icon_state = "tile-sifwood"
 
+/obj/item/stack/tile/wood/parquet
+	name = "parquet wood floor tile"
+	singular_name = "parquet wood floor tile"
+	icon_state = "tile-wood_parquet"
+
+/obj/item/stack/tile/wood/panel
+	name = "large wood floor tile"
+	singular_name = "large wood floor tile"
+	icon_state = "tile-wood_large"
+
+/obj/item/stack/tile/wood/tile
+	name = "tiled wood floor tile"
+	singular_name = "tiled wood floor tile"
+	icon_state = "tile-wood_tile"
+
 /obj/item/stack/tile/wood/cyborg
 	name = "wood floor tile synthesizer"
 	desc = "A device that makes wood floor tiles."
@@ -82,6 +97,8 @@
 	charge_costs = list(250)
 	stacktype = /obj/item/stack/tile/wood
 	build_type = /obj/item/stack/tile/wood
+
+
 
 /*
  * Carpets
@@ -106,6 +123,18 @@
 	desc = "A piece of teal carpet. It is the same size as a normal floor tile!"
 	icon_state = "tile-tealcarpet"
 	no_variants = FALSE
+
+/obj/item/stack/tile/carpet/geo
+	icon_state = "tile-carpet-deco"
+	desc = "A piece of carpet with a gnarly geometric design. It is the same size as a normal floor tile!"
+
+/obj/item/stack/tile/carpet/retro
+	icon_state = "tile-carpet-retro"
+	desc = "A piece of carpet with totally wicked blue space patterns. It is the same size as a normal floor tile!"
+
+/obj/item/stack/tile/carpet/retro_red
+	icon_state = "tile-carpet-retro-red"
+	desc = "A piece of carpet with red-ical space patterns. It is the same size as a normal floor tile!"
 
 // TODO - Add descriptions to these
 /obj/item/stack/tile/carpet/bcarpet

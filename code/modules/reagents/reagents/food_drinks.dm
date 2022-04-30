@@ -95,7 +95,7 @@
 			data["cooked"] = 0
 		return
 	data["cooked"] = 0
-	if (holder && holder.my_atom && istype(holder.my_atom,/obj/item/weapon/reagent_containers/food/snacks))
+	if (holder && holder.my_atom && istype(holder.my_atom,/obj/item/reagent_containers/food/snacks))
 		data["cooked"] = 1
 		name = cooked_name
 
@@ -400,6 +400,15 @@
 	reagent_state = SOLID
 	nutriment_factor = 5
 	color = "#302000"
+
+/datum/reagent/nutriment/chocolate
+	name = "Chocolate"
+	id = "chocolate"
+	description = "Great for cooking or on its own!"
+	taste_description = "chocolate"
+	color = "#582815"
+	nutriment_factor = 5
+	taste_mult = 1.3
 
 /datum/reagent/nutriment/instantjuice
 	name = "Juice Powder"
@@ -1044,11 +1053,21 @@
 	glass_desc = "Vitamins! Yay!"
 	allergen_type = ALLERGEN_FRUIT //Oranges are fruit
 
-/datum/reagent/drink/orangejuice/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
+/datum/reagent/drink/juice/orange/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
 	if(alien == IS_DIONA)
 		return
 	M.adjustOxyLoss(-2 * removed)
+
+/datum/reagent/drink/juice/lettuce
+	name = "Lettuce Juice"
+	id = "lettucejuice"
+	description = "It's mostly water, just a bit more lettucy."
+	taste_description = "fresh greens"
+	color = "#29df4b"
+
+	glass_name = "lettuce juice"
+	glass_desc = "This is just lettuce water. Fresh but boring."
 
 /datum/reagent/toxin/poisonberryjuice // It has more in common with toxins than drinks... but it's a juice
 	name = "Poison Berry Juice"

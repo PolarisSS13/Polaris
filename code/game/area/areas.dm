@@ -110,13 +110,13 @@
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
-		atmosphere_alarm.clearAlarm(src, alarm_source)
+		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
 		var/obj/machinery/alarm/atmosalarm = alarm_source //maybe other things can trigger these, who knows
 		if(istype(atmosalarm))
-			atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level, hidden = atmosalarm.alarms_hidden)
+			GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level, hidden = atmosalarm.alarms_hidden)
 		else
-			atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
+			GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)
@@ -346,7 +346,7 @@
 
 //////////////////////////////////////////////////////////////////
 
-var/list/mob/living/forced_ambiance_list = new
+var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
 	if(!istype(A,/mob/living))	return
@@ -471,7 +471,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
-var/list/teleportlocs = list()
+var/global/list/teleportlocs = list()
 
 /hook/startup/proc/setupTeleportLocs()
 	for(var/area/AR in world)
@@ -486,7 +486,7 @@ var/list/teleportlocs = list()
 
 	return 1
 
-var/list/ghostteleportlocs = list()
+var/global/list/ghostteleportlocs = list()
 
 /hook/startup/proc/setupGhostTeleportLocs()
 	for(var/area/AR in world)

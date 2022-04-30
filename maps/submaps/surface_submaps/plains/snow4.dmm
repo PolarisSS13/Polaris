@@ -1,16 +1,19 @@
 "a" = (/turf/template_noop,/area/template_noop)
 "b" = (/turf/template_noop,/area/submap/snow4)
 "c" = (/turf/simulated/floor/outdoors/snow,/area/submap/snow4)
+"e" = (/obj/structure/prop/rock/small,/turf/simulated/floor/outdoors/snow,/area/submap/snow4)
+"f" = (/obj/structure/prop/rock/small/alt,/turf/template_noop,/area/submap/snow4)
+"C" = (/obj/structure/prop/rock,/turf/simulated/floor/outdoors/snow,/area/submap/snow4)
 
 (1,1,1) = {"
 aaaaaaaaaa
 abbcbbbbba
 abcccbcbba
-abccccccba
+abcCccccba
 abbccccbba
 abcccccbba
 acccccccba
-acccbcccba
-abcbbbccba
+acccbeccba
+abcbbfecba
 aaaaaaaaaa
 "}

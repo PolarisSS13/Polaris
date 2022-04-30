@@ -5,7 +5,7 @@
 #define SYRINGE_INJECT 1
 #define SYRINGE_BROKEN 2
 
-/obj/item/weapon/reagent_containers/syringe
+/obj/item/reagent_containers/syringe
 	name = "syringe"
 	desc = "A syringe."
 	icon = 'icons/obj/syringe.dmi'
@@ -28,18 +28,18 @@
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
 
-/obj/item/weapon/reagent_containers/syringe/on_reagent_change()
+/obj/item/reagent_containers/syringe/on_reagent_change()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/pickup(mob/user)
+/obj/item/reagent_containers/syringe/pickup(mob/user)
 	..()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/dropped(mob/user)
+/obj/item/reagent_containers/syringe/dropped(mob/user)
 	..()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/attack_self(mob/user as mob)
+/obj/item/reagent_containers/syringe/attack_self(mob/user as mob)
 	switch(mode)
 		if(SYRINGE_DRAW)
 			mode = SYRINGE_INJECT
@@ -49,14 +49,14 @@
 			return
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/attack_hand()
+/obj/item/reagent_containers/syringe/attack_hand()
 	..()
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/attackby(obj/item/I as obj, mob/user as mob)
+/obj/item/reagent_containers/syringe/attackby(obj/item/I as obj, mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
+/obj/item/reagent_containers/syringe/afterattack(obj/target, mob/user, proximity)
 	if(!proximity || !target.reagents)
 		return
 
@@ -135,7 +135,7 @@
 					to_chat(user, "<span class='notice'>[target] is empty.</span>")
 					return
 
-				if(!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/weapon/reagent_containers/food))
+				if(!target.is_open_container() && !istype(target, /obj/structure/reagent_dispensers) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/reagent_containers/food))
 					to_chat(user, "<span class='notice'>You cannot directly remove reagents from this object.</span>")
 					return
 
@@ -153,10 +153,10 @@
 				to_chat(user, "<span class='notice'>The syringe is empty.</span>")
 				mode = SYRINGE_DRAW
 				return
-			if(istype(target, /obj/item/weapon/implantcase/chem))
+			if(istype(target, /obj/item/implantcase/chem))
 				return
 
-			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/weapon/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/weapon/storage/fancy/cigarettes))
+			if(!target.is_open_container() && !ismob(target) && !istype(target, /obj/item/reagent_containers/food) && !istype(target, /obj/item/slime_extract) && !istype(target, /obj/item/clothing/mask/smokable/cigarette) && !istype(target, /obj/item/storage/fancy/cigarettes))
 				to_chat(user, "<span class='notice'>You cannot directly fill this object.</span>")
 				return
 			if(!target.reagents.get_free_space())
@@ -230,8 +230,8 @@
 
 	return
 
-/obj/item/weapon/reagent_containers/syringe/update_icon()
-	overlays.Cut()
+/obj/item/reagent_containers/syringe/update_icon()
+	cut_overlays()
 
 	if(mode == SYRINGE_BROKEN)
 		icon_state = "broken"
@@ -245,7 +245,7 @@
 				injoverlay = "draw"
 			if (SYRINGE_INJECT)
 				injoverlay = "inject"
-		overlays += injoverlay
+		add_overlay(injoverlay)
 	icon_state = "[rounded_vol]"
 	item_state = "syringe_[rounded_vol]"
 
@@ -255,9 +255,9 @@
 		filling.icon_state = "syringe[rounded_vol]"
 
 		filling.color = reagents.get_color()
-		overlays += filling
+		add_overlay(filling)
 
-/obj/item/weapon/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
+/obj/item/reagent_containers/syringe/proc/syringestab(mob/living/carbon/target as mob, mob/living/carbon/user as mob)
 	if(istype(target, /mob/living/carbon/human))
 
 		var/mob/living/carbon/human/H = target
@@ -303,7 +303,7 @@
 	if(!issilicon(user))
 		break_syringe(target, user)
 
-/obj/item/weapon/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
+/obj/item/reagent_containers/syringe/proc/break_syringe(mob/living/carbon/target, mob/living/carbon/user)
 	desc += " It is broken."
 	mode = SYRINGE_BROKEN
 	if(target)
@@ -312,7 +312,7 @@
 		add_fingerprint(user)
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/ld50_syringe
+/obj/item/reagent_containers/syringe/ld50_syringe
 	name = "Lethal Injection Syringe"
 	desc = "A syringe used for lethal injections."
 	amount_per_transfer_from_this = 50
@@ -320,7 +320,7 @@
 	visible_name = "a giant syringe"
 	time = 300
 
-/obj/item/weapon/reagent_containers/syringe/ld50_syringe/afterattack(obj/target, mob/user, flag)
+/obj/item/reagent_containers/syringe/ld50_syringe/afterattack(obj/target, mob/user, flag)
 	if(mode == SYRINGE_DRAW && ismob(target)) // No drawing 50 units of blood at once
 		to_chat(user, "<span class='notice'>This needle isn't designed for drawing blood.</span>")
 		return
@@ -332,59 +332,59 @@
 /// Syringes. END
 ////////////////////////////////////////////////////////////////////////////////
 
-/obj/item/weapon/reagent_containers/syringe/inaprovaline
+/obj/item/reagent_containers/syringe/inaprovaline
 	name = "Syringe (inaprovaline)"
 	desc = "Contains inaprovaline - used to stabilize patients."
 
-/obj/item/weapon/reagent_containers/syringe/inaprovaline/Initialize()
+/obj/item/reagent_containers/syringe/inaprovaline/Initialize()
 	. = ..()
 	reagents.add_reagent("inaprovaline", 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/antitoxin
+/obj/item/reagent_containers/syringe/antitoxin
 	name = "Syringe (anti-toxin)"
 	desc = "Contains anti-toxins."
 
-/obj/item/weapon/reagent_containers/syringe/antitoxin/Initialize()
+/obj/item/reagent_containers/syringe/antitoxin/Initialize()
 	. = ..()
 	reagents.add_reagent("anti_toxin", 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/antiviral
+/obj/item/reagent_containers/syringe/antiviral
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."
 
-/obj/item/weapon/reagent_containers/syringe/antiviral/Initialize()
+/obj/item/reagent_containers/syringe/antiviral/Initialize()
 	. = ..()
 	reagents.add_reagent("spaceacillin", 15)
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/drugs
+/obj/item/reagent_containers/syringe/drugs
 	name = "Syringe (drugs)"
 	desc = "Contains aggressive drugs meant for torture."
 
-/obj/item/weapon/reagent_containers/syringe/drugs/Initialize()
+/obj/item/reagent_containers/syringe/drugs/Initialize()
 	. = ..()
-	reagents.add_reagent("space_drugs",  5)
+	reagents.add_reagent("bliss",  5)
 	reagents.add_reagent("mindbreaker",  5)
 	reagents.add_reagent("cryptobiolin", 5)
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/ld50_syringe/choral/Initialize()
+/obj/item/reagent_containers/syringe/ld50_syringe/choral/Initialize()
 	. = ..()
 	reagents.add_reagent("chloralhydrate", 50)
 	mode = SYRINGE_INJECT
 	update_icon()
 
-/obj/item/weapon/reagent_containers/syringe/steroid
+/obj/item/reagent_containers/syringe/steroid
 	name = "Syringe (anabolic steroids)"
 	desc = "Contains drugs for muscle growth."
 
-/obj/item/weapon/reagent_containers/syringe/steroid/Initialize()
+/obj/item/reagent_containers/syringe/steroid/Initialize()
 	. = ..()
 	reagents.add_reagent("adrenaline",5)
 	reagents.add_reagent("hyperzine",10)

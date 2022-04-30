@@ -133,7 +133,7 @@
 		if(target.buckled || target.lying)
 			return zone
 		// if your target is being grabbed aggressively by someone you cannot miss either
-		for(var/obj/item/weapon/grab/G in target.grabbed_by)
+		for(var/obj/item/grab/G in target.grabbed_by)
 			if(G.state >= GRAB_AGGRESSIVE)
 				return zone
 
@@ -315,7 +315,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 	return 0
 
 //converts intent-strings into numbers and back
-var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
+var/global/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 /proc/intent_numeric(argument)
 	if(istext(argument))
 		switch(argument)
@@ -518,24 +518,24 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 		return SAFE_PERP
 
 	//Agent cards lower threatlevel.
-	var/obj/item/weapon/card/id/id = GetIdCard()
-	if(id && istype(id, /obj/item/weapon/card/id/syndicate))
+	var/obj/item/card/id/id = GetIdCard()
+	if(id && istype(id, /obj/item/card/id/syndicate))
 		threatcount -= 2
 	// A proper	CentCom id is hard currency.
-	else if(id && istype(id, /obj/item/weapon/card/id/centcom))
+	else if(id && istype(id, /obj/item/card/id/centcom))
 		return SAFE_PERP
 
 	if(check_access && !access_obj.allowed(src))
 		threatcount += 4
 
 	if(auth_weapons && !access_obj.allowed(src))
-		if(istype(l_hand, /obj/item/weapon/gun) || istype(l_hand, /obj/item/weapon/melee))
+		if(istype(l_hand, /obj/item/gun) || istype(l_hand, /obj/item/melee))
 			threatcount += 4
 
-		if(istype(r_hand, /obj/item/weapon/gun) || istype(r_hand, /obj/item/weapon/melee))
+		if(istype(r_hand, /obj/item/gun) || istype(r_hand, /obj/item/melee))
 			threatcount += 4
 
-		if(istype(belt, /obj/item/weapon/gun) || istype(belt, /obj/item/weapon/melee))
+		if(istype(belt, /obj/item/gun) || istype(belt, /obj/item/melee))
 			threatcount += 2
 
 		if(species.name != SPECIES_HUMAN)
@@ -597,7 +597,7 @@ var/list/intents = list(I_HELP,I_DISARM,I_GRAB,I_HURT)
 //TODO: Integrate defence zones and targeting body parts with the actual organ system, move these into organ definitions.
 
 //The base miss chance for the different defence zones
-var/list/global/base_miss_chance = list(
+var/global/list/base_miss_chance = list(
 	"head" = 40,
 	"chest" = 10,
 	"groin" = 20,
@@ -613,7 +613,7 @@ var/list/global/base_miss_chance = list(
 
 //Used to weight organs when an organ is hit randomly (i.e. not a directed, aimed attack).
 //Also used to weight the protection value that armour provides for covering that body part when calculating protection from full-body effects.
-var/list/global/organ_rel_size = list(
+var/global/list/organ_rel_size = list(
 	"head" = 25,
 	"chest" = 70,
 	"groin" = 30,

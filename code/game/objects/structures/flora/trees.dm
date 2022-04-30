@@ -36,7 +36,7 @@
 		. = TRUE
 	return .
 
-/obj/structure/flora/tree/attackby(var/obj/item/weapon/W, var/mob/living/user)
+/obj/structure/flora/tree/attackby(var/obj/item/W, var/mob/living/user)
 	if(can_harvest(W))
 		..(W, user)
 		return
@@ -45,7 +45,7 @@
 		return ..()
 
 	if(is_stump)
-		if(istype(W,/obj/item/weapon/shovel))
+		if(istype(W,/obj/item/shovel))
 			if(do_after(user, 5 SECONDS))
 				visible_message("<span class='notice'>\The [user] digs up \the [src] stump with \the [W].</span>")
 				qdel(src)
@@ -115,7 +115,7 @@
 	is_stump = TRUE
 	density = FALSE
 	icon_state = "[base_state]_stump"
-	overlays.Cut() // For the Sif tree and other future glowy trees.
+	cut_overlays() // For the Sif tree and other future glowy trees.
 	set_light(0)
 
 /obj/structure/flora/tree/ex_act(var/severity)
@@ -164,7 +164,7 @@
 	icon_state = "pinepresents"
 	desc = "A wondrous decorated Christmas tree. It has presents!"
 	indestructable = TRUE
-	var/gift_type = /obj/item/weapon/a_gift
+	var/gift_type = /obj/item/a_gift
 	var/list/ckeys_that_took = list()
 
 /obj/structure/flora/tree/pine/xmas/presents/choose_icon_state()
@@ -270,12 +270,12 @@
 	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
 	randomize_size = TRUE
 
-	harvest_tool = /obj/item/weapon/material/knife
+	harvest_tool = /obj/item/material/knife
 	max_harvests = 2
 	min_harvests = 0
 	harvest_loot = list(
-		/obj/item/weapon/reagent_containers/food/snacks/siffruit = 20,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/sif/sifpod = 5,
+		/obj/item/reagent_containers/food/snacks/siffruit = 20,
+		/obj/item/reagent_containers/food/snacks/grown/sif/sifpod = 5,
 		/obj/item/seeds/sifbulb = 1
 	)
 
@@ -291,8 +291,4 @@
 
 /obj/structure/flora/tree/sif/update_icon()
 	cut_overlays()
-	var/bulbs = (5 - light_shift)
-	if(bulbs > 0)
-		set_light(bulbs, 1, "#33ccff")	// 5 variants, missing bulbs. 5th has no bulbs, so no glow.
-		add_overlay(mutable_appearance(icon, "[base_state][bulbs]_glow"))
-		add_overlay(emissive_appearance(icon, "[base_state][bulbs]_glow"))
+	add_overlay(glow)

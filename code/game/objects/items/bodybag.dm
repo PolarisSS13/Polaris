@@ -13,7 +13,7 @@
 	qdel(src)
 
 
-/obj/item/weapon/storage/box/bodybags
+/obj/item/storage/box/bodybags
 	name = "body bags"
 	desc = "This box contains body bags."
 	icon_state = "bodybags"
@@ -33,7 +33,7 @@
 	var/contains_body = 0
 
 /obj/structure/closet/body_bag/attackby(var/obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/pen))
+	if (istype(W, /obj/item/pen))
 		var/t = input(user, "What would you like the label to be?", text("[]", src.name), null)  as text
 		if (user.get_active_hand() != W)
 			return
@@ -43,7 +43,7 @@
 		if (t)
 			src.name = "body bag - "
 			src.name += t
-			src.overlays += image(src.icon, "bodybag_label")
+			add_overlay("bodybag_label")
 		else
 			src.name = "body bag"
 	//..() //Doesn't need to run the parent. Since when can fucking bodybags be welded shut? -Agouri
@@ -51,7 +51,7 @@
 	else if(W.is_wirecutter())
 		to_chat(user, "You cut the tag off the bodybag")
 		src.name = "body bag"
-		src.overlays.Cut()
+		cut_overlays()
 		return
 
 /obj/structure/closet/body_bag/store_mobs(var/stored_units)
@@ -99,12 +99,7 @@
 	else
 		icon_state = "closed_unlocked"
 
-	src.overlays.Cut()
-	/* Ours don't have toetags
-	if(has_label)
-		src.overlays += image(src.icon, "bodybag_label")
-	*/
-
+	cut_overlays()
 
 /obj/item/bodybag/cryobag
 	name = "stasis bag"
@@ -114,7 +109,7 @@
 	icon_state = "bodybag_folded"
 	item_state = "bodybag_cryo_folded"
 	origin_tech = list(TECH_BIO = 4)
-	var/obj/item/weapon/reagent_containers/syringe/syringe
+	var/obj/item/reagent_containers/syringe/syringe
 
 /obj/item/bodybag/cryobag/attack_self(mob/user)
 	var/obj/structure/closet/body_bag/cryobag/R = new /obj/structure/closet/body_bag/cryobag(user.loc)
@@ -133,10 +128,10 @@
 	store_misc = 0
 	store_items = 0
 	var/used = 0
-	var/obj/item/weapon/tank/tank = null
-	var/tank_type = /obj/item/weapon/tank/stasis/oxygen
+	var/obj/item/tank/tank = null
+	var/tank_type = /obj/item/tank/stasis/oxygen
 	var/stasis_level = 3 //Every 'this' life ticks are applied to the mob (when life_ticks%stasis_level == 1)
-	var/obj/item/weapon/reagent_containers/syringe/syringe
+	var/obj/item/reagent_containers/syringe/syringe
 
 /obj/structure/closet/body_bag/cryobag/Initialize()
 	tank = new tank_type(null) //It's in nullspace to prevent ejection when the bag is opened.
@@ -164,11 +159,11 @@
 
 /obj/structure/closet/body_bag/cryobag/update_icon()
 	..()
-	overlays.Cut()
+	cut_overlays()
 	var/image/I = image(icon, "indicator[opened]")
 	I.appearance_flags = RESET_COLOR
 	I.color = COLOR_LIME
-	overlays += I
+	add_overlay(I)
 
 /obj/structure/closet/body_bag/cryobag/MouseDrop(over_object, src_location, over_location)
 	. = ..()
@@ -228,16 +223,16 @@
 	if(opened)
 		..()
 	else //Allows the bag to respond to a health analyzer by analyzing the mob inside without needing to open it.
-		if(istype(W,/obj/item/device/healthanalyzer))
-			var/obj/item/device/healthanalyzer/analyzer = W
+		if(istype(W,/obj/item/healthanalyzer))
+			var/obj/item/healthanalyzer/analyzer = W
 			for(var/mob/living/L in contents)
 				analyzer.attack(L,user)
 
-		else if(istype(W,/obj/item/weapon/reagent_containers/syringe))
+		else if(istype(W,/obj/item/reagent_containers/syringe))
 			if(syringe)
 				to_chat(user,"<span class='warning'>\The [src] already has an injector! Remove it first.</span>")
 			else
-				var/obj/item/weapon/reagent_containers/syringe/syringe = W
+				var/obj/item/reagent_containers/syringe/syringe = W
 				to_chat(user,"<span class='info'>You insert \the [syringe] into \the [src], and it locks into place.</span>")
 				user.unEquip(syringe)
 				src.syringe = syringe

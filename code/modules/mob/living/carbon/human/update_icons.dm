@@ -195,7 +195,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		else
 			DI = damage_icon_parts[cache_index]
 
-		standing_image.overlays += DI
+		standing_image.add_overlay(DI)
 
 	overlays_standing[MOB_DAM_LAYER]	= standing_image
 	apply_layer(MOB_DAM_LAYER)
@@ -544,7 +544,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	for(var/mut in mutations)
 		if(mut == LASER)
-			standing.overlays += "lasereyes_s" //TODO
+			standing.add_overlay("lasereyes_s")
 
 	overlays_standing[MUTATIONS_LAYER]	= standing
 	apply_layer(MUTATIONS_LAYER)
@@ -761,8 +761,8 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 	//Toggle for belt layering with uniform
 	var/belt_layer = BELT_LAYER
-	if(istype(belt, /obj/item/weapon/storage/belt))
-		var/obj/item/weapon/storage/belt/ubelt = belt
+	if(istype(belt, /obj/item/storage/belt))
+		var/obj/item/storage/belt/ubelt = belt
 		if(ubelt.show_above_suit)
 			belt_layer = BELT_LAYER_ALT
 
@@ -1045,7 +1045,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	for(var/datum/modifier/M in modifiers)
 		if(M.mob_overlay_state)
 			var/image/I = image(icon = 'icons/mob/modifier_effects.dmi', icon_state = M.mob_overlay_state)
-			effects.overlays += I //TODO, this compositing is annoying.
+			effects.add_overlay(I)
 
 	overlays_standing[MODIFIER_EFFECTS_LAYER] = effects
 
@@ -1091,7 +1091,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	for(var/obj/item/organ/external/E in organs)
 		if(E.open)
 			var/image/I = image(icon = 'icons/mob/surgery.dmi',  icon_state = "[E.icon_name][round(E.open)]", layer = BODY_LAYER+SURGERY_LAYER)
-			total.overlays += I //TODO: This compositing is annoying
+			total.add_overlay(I)
 
 	if(total.overlays.len)
 		overlays_standing[SURGERY_LAYER] = total

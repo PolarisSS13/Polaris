@@ -1,4 +1,4 @@
-var/list/whitelist = list()
+var/global/list/whitelist = list()
 
 /hook/startup/proc/loadWhitelist()
 	if(config.usewhitelist)
@@ -14,7 +14,7 @@ var/list/whitelist = list()
 		return FALSE
 	return ("[M.ckey]" in whitelist)
 
-/var/list/alien_whitelist = list()
+var/global/list/alien_whitelist = list()
 
 /hook/startup/proc/loadAlienWhitelist()
 	if(config.usealienwhitelist)
@@ -73,7 +73,7 @@ var/list/whitelist = list()
 /proc/whitelist_overrides(mob/M)
 	return !config.usealienwhitelist || check_rights(R_ADMIN|R_EVENT, 0, M)
 
-/var/list/genemod_whitelist = list()
+var/global/list/genemod_whitelist = list()
 /hook/startup/proc/LoadGenemodWhitelist()
 	global.genemod_whitelist = file2list("config/genemodwhitelist.txt")
 	return TRUE

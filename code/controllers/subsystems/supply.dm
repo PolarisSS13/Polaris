@@ -4,7 +4,6 @@ SUBSYSTEM_DEF(supply)
 	name = "Supply"
 	wait = 20 SECONDS
 	priority = FIRE_PRIORITY_SUPPLY
-	//Initializes at default time
 	flags = SS_NO_TICK_CHECK
 
 	//supply points
@@ -24,7 +23,7 @@ SUBSYSTEM_DEF(supply)
 	var/movetime = 1200
 	var/datum/shuttle/autodock/ferry/supply/shuttle
 
-/datum/controller/subsystem/supply/Initialize()
+/datum/controller/subsystem/supply/Initialize(timeofday)
 	ordernum = rand(1,9000)
 
 	// build master supply list
@@ -34,8 +33,6 @@ SUBSYSTEM_DEF(supply)
 			supply_pack[P.name] = P
 		else
 			qdel(P)
-
-	. = ..()
 
 // Supply shuttle ticker - handles supply point regeneration. Just add points over time.
 /datum/controller/subsystem/supply/fire(resumed, no_mc_tick)
@@ -48,11 +45,11 @@ SUBSYSTEM_DEF(supply)
 /datum/controller/subsystem/supply/proc/forbidden_atoms_check(atom/A)
 	if(isliving(A))
 		return 1
-	if(istype(A,/obj/item/weapon/disk/nuclear))
+	if(istype(A,/obj/item/disk/nuclear))
 		return 1
 	if(istype(A,/obj/machinery/nuclearbomb))
 		return 1
-	if(istype(A,/obj/item/device/radio/beacon))
+	if(istype(A,/obj/item/radio/beacon))
 		return 1
 
 	for(var/atom/B in A.contents)
@@ -92,8 +89,8 @@ SUBSYSTEM_DEF(supply)
 						)
 
 					// Sell manifests
-					if(find_slip && istype(A,/obj/item/weapon/paper/manifest))
-						var/obj/item/weapon/paper/manifest/slip = A
+					if(find_slip && istype(A,/obj/item/paper/manifest))
+						var/obj/item/paper/manifest/slip = A
 						if(!slip.is_copy && slip.stamped && slip.stamped.len) //yes, the clown stamp will work. clown is the highest authority on the station, it makes sense
 							points += points_per_slip
 							EC.contents[EC.contents.len]["value"] = points_per_slip
@@ -110,8 +107,8 @@ SUBSYSTEM_DEF(supply)
 						EC.value += EC.contents[EC.contents.len]["value"]
 
 					//Sell spacebucks
-					if(istype(A, /obj/item/weapon/spacecash))
-						var/obj/item/weapon/spacecash/cashmoney = A
+					if(istype(A, /obj/item/spacecash))
+						var/obj/item/spacecash/cashmoney = A
 						EC.contents[EC.contents.len]["value"] = cashmoney.worth * points_per_money
 						EC.contents[EC.contents.len]["quantity"] = cashmoney.worth
 						EC.value += EC.contents[EC.contents.len]["value"]
@@ -183,9 +180,9 @@ SUBSYSTEM_DEF(supply)
 		A.name = "[SP.containername] [SO.comment ? "([SO.comment])":"" ]"
 
 		//supply manifest generation begin
-		var/obj/item/weapon/paper/manifest/slip
+		var/obj/item/paper/manifest/slip
 		if(!SP.contraband)
-			slip = new /obj/item/weapon/paper/manifest(A)
+			slip = new /obj/item/paper/manifest(A)
 			slip.is_copy = 0
 			slip.info = "<h3>[command_name()] Shipping Manifest</h3><hr><br>"
 			slip.info +="Order #[SO.ordernum]<br>"

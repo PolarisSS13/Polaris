@@ -32,7 +32,7 @@
 
 	var/is_manifest = 0 //If set to 1, the ghost is able to whisper. Usually only set if a cultist drags them through the veil.
 	var/ghost_sprite = null
-	var/global/list/possible_ghost_sprites = list(
+	var/static/list/possible_ghost_sprites = list(
 		"Clear" = "blank",
 		"Green Blob" = "otherthing",
 		"Bland" = "ghost",
@@ -149,7 +149,7 @@
 		return
 
 /mob/observer/dead/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/book/tome))
+	if(istype(W,/obj/item/book/tome))
 		var/mob/observer/dead/M = src
 		M.manifest(user)
 
@@ -904,7 +904,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 		if(choice)
 			icon = 'icons/mob/ghost.dmi'
-			overlays.Cut()
+			cut_overlays()
 
 			if(icon_state && icon)
 				previous_state = icon_state
@@ -930,13 +930,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	
 	if(usr.client.prefs?.be_special & BE_PAI)
 		var/count = 0
-		for(var/obj/item/device/paicard/p in all_pai_cards)
-			var/obj/item/device/paicard/PP = p
+		for(var/obj/item/paicard/p in all_pai_cards)
+			var/obj/item/paicard/PP = p
 			if(PP.pai == null)
 				count++
-				PP.overlays += "pai-ghostalert"
+				PP.add_overlay("pai-ghostalert")
 				spawn(54)
-					PP.overlays.Cut()
+					PP.cut_overlays()
 		to_chat(usr,"<span class='notice'>Flashing the displays of [count] unoccupied PAIs.</span>")
 	else
 		to_chat(usr,"<span class='warning'>You have 'Be pAI' disabled in your character prefs, so we can't help you.</span>")

@@ -29,7 +29,7 @@
 			all_underwear[WRC.name] = WRI.name
 
 
-	backbag = rand(1,5)
+	backbag = rand(1,6)
 	pdachoice = rand(1,5)
 	age = rand(current_species.min_age, current_species.max_age)
 	b_type = RANDOM_BLOOD_TYPE
@@ -259,7 +259,7 @@
 	mannequin.toggle_tail(setting = TRUE)
 	mannequin.toggle_wing(setting = TRUE)
 	mannequin.update_tail_showing()
-	COMPILE_OVERLAYS(mannequin)
+	mannequin.ImmediateOverlayUpdate()
 
 	update_character_previews(new /mutable_appearance(mannequin))
 

@@ -105,14 +105,14 @@
 
 
 /obj/machinery/am_shielding/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	for(var/direction in alldirs)
 		var/machine = locate(/obj/machinery, get_step(loc, direction))
 		if((istype(machine, /obj/machinery/am_shielding) && machine:control_unit == control_unit)||(istype(machine, /obj/machinery/power/am_control_unit) && machine == control_unit))
-			overlays += "shield_[direction]"
+			add_overlay("shield_[direction]")
 
 	if(core_check())
-		overlays += "core"
+		add_overlay("core")
 		if(!processing) setup_core()
 	else if(processing) shutdown_core()
 
@@ -181,7 +181,7 @@
 
 
 
-/obj/item/device/am_shielding_container
+/obj/item/am_shielding_container
 	name = "packaged antimatter reactor section"
 	desc = "A small storage unit containing an antimatter reactor section.  To use place near an antimatter control unit or deployed antimatter reactor section and use a multitool to activate this package."
 	icon = 'icons/obj/machines/antimatter.dmi'
@@ -193,8 +193,8 @@
 	throw_range = 2
 	matter = list(MAT_STEEL = 100)
 
-/obj/item/device/am_shielding_container/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I, /obj/item/device/multitool) && istype(src.loc,/turf))
+/obj/item/am_shielding_container/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I, /obj/item/multitool) && istype(src.loc,/turf))
 		new/obj/machinery/am_shielding(src.loc)
 		qdel(src)
 		return

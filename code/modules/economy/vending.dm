@@ -63,7 +63,7 @@
 	var/shoot_inventory_chance = 1
 
 	var/scan_id = 1
-	var/obj/item/weapon/coin/coin
+	var/obj/item/coin/coin
 	var/datum/wires/vending/wires = null
 
 	var/list/log = list()
@@ -150,10 +150,10 @@ GLOBAL_LIST_EMPTY(vending_products)
 		to_chat(user, "You short out \the [src]'s product lock.")
 		return 1
 
-/obj/machinery/vending/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	var/obj/item/weapon/card/id/I = W.GetID()
+/obj/machinery/vending/attackby(obj/item/W as obj, mob/user as mob)
+	var/obj/item/card/id/I = W.GetID()
 
-	if(I || istype(W, /obj/item/weapon/spacecash))
+	if(I || istype(W, /obj/item/spacecash))
 		attack_hand(user)
 		return
 	else if(W.is_screwdriver())
@@ -168,11 +168,11 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 		SStgui.update_uis(src)  // Speaker switch is on the main UI, not wires UI
 		return
-	else if(istype(W, /obj/item/device/multitool) || W.is_wirecutter())
+	else if(istype(W, /obj/item/multitool) || W.is_wirecutter())
 		if(panel_open)
 			attack_hand(user)
 		return
-	else if(istype(W, /obj/item/weapon/coin) && premium.len > 0)
+	else if(istype(W, /obj/item/coin) && premium.len > 0)
 		user.drop_item()
 		W.forceMove(src)
 		coin = W
@@ -205,7 +205,7 @@ GLOBAL_LIST_EMPTY(vending_products)
  *
  *  usr is the mob who gets the change.
  */
-/obj/machinery/vending/proc/pay_with_cash(var/obj/item/weapon/spacecash/cashmoney, mob/user)
+/obj/machinery/vending/proc/pay_with_cash(var/obj/item/spacecash/cashmoney, mob/user)
 	if(currently_vending.price > cashmoney.worth)
 
 		// This is not a status display message, since it's something the character
@@ -213,7 +213,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		to_chat(usr, "[bicon(cashmoney)] <span class='warning'>That is not enough money.</span>")
 		return 0
 
-	if(istype(cashmoney, /obj/item/weapon/spacecash))
+	if(istype(cashmoney, /obj/item/spacecash))
 
 		visible_message("<span class='info'>\The [usr] inserts some cash into \the [src].</span>")
 		cashmoney.worth -= currently_vending.price
@@ -234,7 +234,7 @@ GLOBAL_LIST_EMPTY(vending_products)
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed.
  */
-/obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/weapon/spacecash/ewallet/wallet)
+/obj/machinery/vending/proc/pay_with_ewallet(var/obj/item/spacecash/ewallet/wallet)
 	visible_message("<span class='info'>\The [usr] swipes \the [wallet] through \the [src].</span>")
 	playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
 	if(currently_vending.price > wallet.worth)
@@ -251,7 +251,7 @@ GLOBAL_LIST_EMPTY(vending_products)
  * Takes payment for whatever is the currently_vending item. Returns 1 if
  * successful, 0 if failed
  */
-/obj/machinery/vending/proc/pay_with_card(obj/item/weapon/card/id/I, mob/M)
+/obj/machinery/vending/proc/pay_with_card(obj/item/card/id/I, mob/M)
 	visible_message("<span class='info'>[M] swipes a card through [src].</span>")
 	playsound(src, 'sound/machines/id_swipe.ogg', 50, 1)
 
@@ -387,7 +387,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		data["panel"] = 0
 
 	var/mob/living/carbon/human/H
-	var/obj/item/weapon/card/id/C
+	var/obj/item/card/id/C
 
 	data["guestNotice"] = "No valid ID card detected. Wear your ID, or present cash.";
 	data["userMoney"] = 0
@@ -395,7 +395,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 	if(ishuman(user))
 		H = user
 		C = H.GetIdCard()
-		var/obj/item/weapon/spacecash/S = H.get_active_hand()
+		var/obj/item/spacecash/S = H.get_active_hand()
 		if(istype(S))
 			data["userMoney"] = S.worth
 			data["guestNotice"] = "Accepting [S.initial_name]. You have: [S.worth]₮."
@@ -474,7 +474,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 			vend_ready = FALSE // From this point onwards, vendor is locked to performing this transaction only, until it is resolved.
 
 			var/mob/living/carbon/human/H = usr
-			var/obj/item/weapon/card/id/C = H.GetIdCard()
+			var/obj/item/card/id/C = H.GetIdCard()
 
 			if(!vendor_account || vendor_account.suspended)
 				to_chat(usr, "Vendor account offline. Unable to process transaction.")
@@ -486,13 +486,13 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 			var/paid = FALSE
 
-			if(istype(usr.get_active_hand(), /obj/item/weapon/spacecash))
-				var/obj/item/weapon/spacecash/cash = usr.get_active_hand()
+			if(istype(usr.get_active_hand(), /obj/item/spacecash))
+				var/obj/item/spacecash/cash = usr.get_active_hand()
 				paid = pay_with_cash(cash, usr)
-			else if(istype(usr.get_active_hand(), /obj/item/weapon/spacecash/ewallet))
-				var/obj/item/weapon/spacecash/ewallet/wallet = usr.get_active_hand()
+			else if(istype(usr.get_active_hand(), /obj/item/spacecash/ewallet))
+				var/obj/item/spacecash/ewallet/wallet = usr.get_active_hand()
 				paid = pay_with_ewallet(wallet)
-			else if(istype(C, /obj/item/weapon/card))
+			else if(istype(C, /obj/item/card))
 				paid = pay_with_card(C, usr)
 			/*else if(usr.can_advanced_admin_interact())
 				to_chat(usr, "<span class='notice'>Vending object due to admin interaction.</span>")
@@ -579,7 +579,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 /obj/machinery/vending/proc/do_logging(datum/stored_item/vending_product/R, mob/user, var/vending = 0)
 	if(user.GetIdCard())
-		var/obj/item/weapon/card/id/tempid = user.GetIdCard()
+		var/obj/item/card/id/tempid = user.GetIdCard()
 		var/list/list_item = list()
 		if(vending)
 			list_item += "vend"
@@ -592,7 +592,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 /obj/machinery/vending/proc/show_log(mob/user as mob)
 	if(user.GetIdCard())
-		var/obj/item/weapon/card/id/tempid = user.GetIdCard()
+		var/obj/item/card/id/tempid = user.GetIdCard()
 		if(req_log_access in tempid.GetAccess())
 			var/datum/browser/popup = new(user, "vending_log", "Vending Log", 700, 500)
 			var/dat = ""
@@ -636,7 +636,7 @@ GLOBAL_LIST_EMPTY(vending_products)
  * Checks if item is vendable in this machine should be performed before
  * calling. W is the item being inserted, R is the associated vending_product entry.
  */
-/obj/machinery/vending/proc/stock(obj/item/weapon/W, var/datum/stored_item/vending_product/R, var/mob/user)
+/obj/machinery/vending/proc/stock(obj/item/W, var/datum/stored_item/vending_product/R, var/mob/user)
 	if(!user.unEquip(W))
 		return
 

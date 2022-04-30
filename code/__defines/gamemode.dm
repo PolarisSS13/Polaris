@@ -38,7 +38,7 @@
 #define BE_LOYALIST   0x4000
 #define BE_PAI        0x8000
 
-var/list/be_special_flags = list(
+var/global/list/be_special_flags = list(
 	"Traitor"          = BE_TRAITOR,
 	"Operative"        = BE_OPERATIVE,
 	"Changeling"       = BE_CHANGELING,

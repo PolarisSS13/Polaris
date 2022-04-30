@@ -48,12 +48,15 @@
 	build_icons()
 
 /obj/machinery/atmospherics/omni/update_icon()
+	cut_overlays()
 	if(stat & NOPOWER)
-		overlays = overlays_off
+		add_overlay(overlays_off)
 	else if(error_check())
-		overlays = overlays_error
+		add_overlay(overlays_error)
+	else if (use_power)
+		add_overlay(overlays_on)
 	else
-		overlays = use_power ? (overlays_on) : (overlays_off)
+		add_overlay(overlays_off)
 
 	underlays = underlays_current
 
@@ -79,7 +82,7 @@
 	if(old_stat != stat)
 		update_icon()
 
-/obj/machinery/atmospherics/omni/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/omni/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if(!W.is_wrench())
 		return ..()
 

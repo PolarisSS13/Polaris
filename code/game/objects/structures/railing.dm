@@ -105,27 +105,27 @@
 /obj/structure/railing/update_icon(var/UpdateNeighgors = 1)
 	NeighborsCheck(UpdateNeighgors)
 	//layer = (dir == SOUTH) ? FLY_LAYER : initial(layer) // wtf does this even do
-	overlays.Cut()
+	cut_overlays()
 	if (!check || !anchored)//|| !anchored
 		icon_state = "[icon_modifier]railing0"
 	else
 		icon_state = "[icon_modifier]railing1"
 		if (check & 32)
-			overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]corneroverlay")
+			add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]corneroverlay"))
 		if ((check & 16) || !(check & 32) || (check & 64))
-			overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]frontoverlay_l")
+			add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]frontoverlay_l"))
 		if (!(check & 2) || (check & 1) || (check & 4))
-			overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]frontoverlay_r")
+			add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]frontoverlay_r"))
 			if(check & 4)
 				switch (src.dir)
 					if (NORTH)
-						overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_x = 32)
+						add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_x = 32))
 					if (SOUTH)
-						overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_x = -32)
+						add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_x = -32))
 					if (EAST)
-						overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_y = -32)
+						add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_y = -32))
 					if (WEST)
-						overlays += image ('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_y = 32)
+						add_overlay(image('icons/obj/railing.dmi', src, "[icon_modifier]mcorneroverlay", pixel_y = 32))
 
 /obj/structure/railing/verb/rotate_counterclockwise()
 	set name = "Rotate Railing Counter-Clockwise"
@@ -208,8 +208,8 @@
 			return
 
 	// Repair
-	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/F = W
+	if(health < maxhealth && istype(W, /obj/item/weldingtool))
+		var/obj/item/weldingtool/F = W
 		if(F.welding)
 			playsound(src, F.usesound, 50, 1)
 			if(do_after(user, 20, src))
@@ -228,8 +228,8 @@
 			return
 
 	// Handle harm intent grabbing/tabling.
-	if(istype(W, /obj/item/weapon/grab) && get_dist(src,user)<2)
-		var/obj/item/weapon/grab/G = W
+	if(istype(W, /obj/item/grab) && get_dist(src,user)<2)
+		var/obj/item/grab/G = W
 		if (istype(G.affecting, /mob/living))
 			var/mob/living/M = G.affecting
 			var/obj/occupied = turf_is_crowded()

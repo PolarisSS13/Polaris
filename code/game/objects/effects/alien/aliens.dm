@@ -133,7 +133,7 @@
 	healthcheck()
 	return
 
-/obj/effect/alien/resin/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/effect/alien/resin/attackby(obj/item/W as obj, mob/user as mob)
 
 	user.setClickCooldown(user.get_attack_speed(W))
 	var/aforce = W.force
@@ -313,7 +313,7 @@
 				qdel(src)
 	return
 
-/obj/effect/alien/weeds/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/alien/weeds/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(user.get_attack_speed(W))
 	if(W.attack_verb.len)
 		visible_message("<span class='danger'>\The [src] have been [pick(W.attack_verb)] with \the [W][(user ? " by [user]." : ".")]</span>")
@@ -322,8 +322,8 @@
 
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool))
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -421,14 +421,13 @@
 /*
  * Egg
  */
-/var/const //for the status var
-	BURST = 0
-	BURSTING = 1
-	GROWING = 2
-	GROWN = 3
 
-	MIN_GROWTH_TIME = 1800 //time it takes to grow a hugger
-	MAX_GROWTH_TIME = 3000
+var/global/const/BURST = 0
+var/global/const/BURSTING = 1
+var/global/const/GROWING = 2
+var/global/const/GROWN = 3
+var/global/const/MIN_GROWTH_TIME = 1800 //time it takes to grow a hugger
+var/global/const/MAX_GROWTH_TIME = 3000
 
 /obj/effect/alien/egg
 	desc = "It looks like a weird egg"
@@ -516,7 +515,7 @@
 	return
 
 
-/obj/effect/alien/egg/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/alien/egg/attackby(var/obj/item/W, var/mob/user)
 	if(health <= 0)
 		return
 	if(W.attack_verb.len)
@@ -525,8 +524,8 @@
 		src.visible_message("<span class='danger'>\The [src] has been attacked with \the [W][(user ? " by [user]." : ".")]</span>")
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool))
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15

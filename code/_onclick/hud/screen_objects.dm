@@ -1,7 +1,6 @@
 /*
 	Screen objects
 	Todo: improve/re-implement
-
 	Screen objects are only used for the hud and should not appear anywhere "in-game".
 	They are used with the client/screen list and the screen_loc var.
 	For more information, see the byond documentation on the screen_loc and screen vars.
@@ -70,8 +69,8 @@
 
 /obj/screen/close/Click()
 	if(master)
-		if(istype(master, /obj/item/weapon/storage))
-			var/obj/item/weapon/storage/S = master
+		if(istype(master, /obj/item/storage))
+			var/obj/item/storage/S = master
 			S.close(usr)
 	return 1
 
@@ -102,7 +101,7 @@
 	name = "grab"
 
 /obj/screen/grab/Click()
-	var/obj/item/weapon/grab/G = master
+	var/obj/item/grab/G = master
 	G.s_click(src)
 	return 1
 
@@ -347,7 +346,7 @@
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							var/obj/item/weapon/rig/Rig = C.get_rig()
+							var/obj/item/rig/Rig = C.get_rig()
 							if(Rig)
 								if(Rig.air_supply && !Rig.offline)
 									from = "in"
@@ -355,8 +354,8 @@
 									tankcheck |= Rig.air_supply
 
 							for(var/i=1, i<tankcheck.len+1, ++i)
-								if(istype(tankcheck[i], /obj/item/weapon/tank))
-									var/obj/item/weapon/tank/t = tankcheck[i]
+								if(istype(tankcheck[i], /obj/item/tank))
+									var/obj/item/tank/t = tankcheck[i]
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
@@ -598,11 +597,11 @@
 	if(!handcuff_overlay)
 		var/state = (hud.l_hand_hud_object == src) ? "l_hand_hud_handcuffs" : "r_hand_hud_handcuffs"
 		handcuff_overlay = image("icon"='icons/mob/screen_gen.dmi', "icon_state"=state)
-	overlays.Cut()
+	cut_overlays()
 	if(hud.mymob && iscarbon(hud.mymob))
 		var/mob/living/carbon/C = hud.mymob
 		if(C.handcuffed)
-			overlays |= handcuff_overlay
+			add_overlay(handcuff_overlay)
 
 // PIP stuff
 /obj/screen/component_button
@@ -647,7 +646,7 @@
 	var/obj/screen/mapper/powbutton/powbutton
 	var/obj/screen/mapper/mapbutton/mapbutton
 
-	var/obj/item/device/mapping_unit/owner
+	var/obj/item/mapping_unit/owner
 	var/obj/screen/mapper/extras_holder/extras_holder
 
 /obj/screen/movable/mapper_holder/Initialize(mapload, newowner)
@@ -843,11 +842,11 @@
 	var/warned = FALSE
 	var/static/list/ammo_screen_loc_list = list(ui_ammo_hud1, ui_ammo_hud2, ui_ammo_hud3 ,ui_ammo_hud4)
 
-/obj/screen/ammo/proc/add_hud(var/mob/living/user, var/obj/item/weapon/gun/G)
-
+/obj/screen/ammo/proc/add_hud(var/mob/living/user, var/obj/item/gun/G)
+	
 	if(!user?.client)
 		return
-
+	
 	if(!G)
 		CRASH("/obj/screen/ammo/proc/add_hud() has been called from [src] without the required param of G")
 
@@ -859,7 +858,7 @@
 /obj/screen/ammo/proc/remove_hud(var/mob/living/user)
 	user?.client?.screen -= src
 
-/obj/screen/ammo/proc/update_hud(var/mob/living/user, var/obj/item/weapon/gun/G)
+/obj/screen/ammo/proc/update_hud(var/mob/living/user, var/obj/item/gun/G)
 	if(!user?.client?.screen.Find(src))
 		return
 
@@ -873,13 +872,13 @@
 	var/hud_state = ammo_type[1]
 	var/hud_state_empty = ammo_type[2]
 
-	overlays.Cut()
+	cut_overlays()
 
 	var/empty = image('icons/mob/screen_ammo.dmi', src, "[hud_state_empty]")
 
 	if(rounds == 0)
 		if(warned)
-			overlays += empty
+			add_overlay(empty)
 		else
 			warned = TRUE
 			var/obj/screen/ammo/F = new /obj/screen/ammo(src)
@@ -889,27 +888,29 @@
 			spawn(20)
 				user.client.screen -= F
 				qdel(F)
-				overlays += empty
+				add_overlay(empty)
 	else
 		warned = FALSE
-		overlays += image('icons/mob/screen_ammo.dmi', src, "[hud_state]")
+		var/image/image = image('icons/mob/screen_ammo.dmi', src, "[hud_state]")
+		add_overlay(image)
 
+	var/list/add = list()
 	rounds = num2text(rounds)
-	//Handle the amount of rounds
 	switch(length(rounds))
 		if(1)
-			overlays += image('icons/mob/screen_ammo.dmi', src, "o[rounds[1]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "o[rounds[1]]")
 		if(2)
-			overlays += image('icons/mob/screen_ammo.dmi', src, "o[rounds[2]]")
-			overlays += image('icons/mob/screen_ammo.dmi', src, "t[rounds[1]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "o[rounds[2]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "t[rounds[1]]")
 		if(3)
-			overlays += image('icons/mob/screen_ammo.dmi', src, "o[rounds[3]]")
-			overlays += image('icons/mob/screen_ammo.dmi', src, "t[rounds[2]]")
-			overlays += image('icons/mob/screen_ammo.dmi', src, "h[rounds[1]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "o[rounds[3]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "t[rounds[2]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "h[rounds[1]]")
 		else //"0" is still length 1 so this means it's over 999
-			overlays += image('icons/mob/screen_ammo.dmi', src, "o9")
-			overlays += image('icons/mob/screen_ammo.dmi', src, "t9")
-			overlays += image('icons/mob/screen_ammo.dmi', src, "h9")
+			add += image('icons/mob/screen_ammo.dmi', src, "o9")
+			add += image('icons/mob/screen_ammo.dmi', src, "t9")
+			add += image('icons/mob/screen_ammo.dmi', src, "h9")
+	add_overlay(add)
 
 /obj/screen/setup_preview/pm_helper
 	icon = null

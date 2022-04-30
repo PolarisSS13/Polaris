@@ -1,3 +1,4 @@
+
 #define ICON_NOT_SET "Not Set"
 //This is stored as a nested list instead of datums or whatever because it json encodes nicely for usage in tgui
 GLOBAL_LIST_INIT(master_filter_info, list(
@@ -136,7 +137,6 @@ GLOBAL_LIST_INIT(master_filter_info, list(
 ))
 
 #undef ICON_NOT_SET
-
 //Helpers to generate lists for filter helpers
 //This is the only practical way of writing these that actually produces sane lists
 /proc/alpha_mask_filter(x, y, icon/icon, render_source, flags)

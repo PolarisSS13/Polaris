@@ -1,9 +1,9 @@
 
 //The advanced pea-green monochrome lcd of tomorrow.
 
-var/global/list/obj/item/device/pda/PDAs = list()
+var/global/list/obj/item/pda/PDAs = list()
 
-/obj/item/device/pda
+/obj/item/pda
 	name = "\improper PDA"
 	desc = "A portable microcomputer by Thinktronic Systems, LTD. Functionality determined by a preprogrammed ROM cartridge."
 	icon = 'icons/obj/pda.dmi'
@@ -17,7 +17,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/pdachoice = 1
 	var/owner = null
 	var/default_cartridge = 0 // Access level defined by cartridge
-	var/obj/item/weapon/cartridge/cartridge = null //current cartridge
+	var/obj/item/cartridge/cartridge = null //current cartridge
 
 	//Secondary variables
 	var/model_name = "Thinktronic 5230 Personal Data Assistant"
@@ -38,11 +38,11 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/hidden = 0 // Is the PDA hidden from the PDA list?
 	var/touch_silent = 0 //If 1, no beeps on interacting.
 
-	var/obj/item/weapon/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
+	var/obj/item/card/id/id = null //Making it possible to slot an ID card into the PDA so it can function as both.
 	var/ownjob = null //related to above - this is assignment (potentially alt title)
 	var/ownrank = null // this one is rank, never alt title
 
-	var/obj/item/device/paicard/pai = null	// A slot for a personal AI device
+	var/obj/item/paicard/pai = null	// A slot for a personal AI device
 
 	var/spam_proof = FALSE // If true, it can't be spammed by random events.
 
@@ -62,12 +62,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	var/list/notifying_programs = list()
 	var/retro_mode = 0
 
-/obj/item/device/pda/examine(mob/user)
+/obj/item/pda/examine(mob/user)
 	. = ..()
 	if(Adjacent(user))
 		. += "The time [stationtime2text()] is displayed in the corner of the screen."
 
-/obj/item/device/pda/CtrlClick()
+/obj/item/pda/CtrlClick()
 	if(issilicon(usr))
 		return
 
@@ -76,7 +76,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		return
 	..()
 
-/obj/item/device/pda/AltClick()
+/obj/item/pda/AltClick()
 	if(issilicon(usr))
 		return
 
@@ -86,7 +86,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		else
 			to_chat(usr, "<span class='notice'>This PDA does not have an ID in it.</span>")
 
-/obj/item/device/pda/proc/play_ringtone()
+/obj/item/pda/proc/play_ringtone()
 	var/S
 
 	if(ttone in ttone_sound)
@@ -97,7 +97,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	for(var/mob/O in hearers(3, loc))
 		O.show_message(text("[bicon(src)] *[ttone]*"))
 
-/obj/item/device/pda/proc/set_ringtone()
+/obj/item/pda/proc/set_ringtone()
 	var/t = input("Please enter new ringtone", name, ttone) as text
 	if(in_range(src, usr) && loc == usr)
 		if(t)
@@ -112,7 +112,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		close(usr)
 	return 0
 
-/obj/item/device/pda/Initialize()
+/obj/item/pda/Initialize()
 	. = ..()
 	PDAs += src
 	PDAs = sortAtom(PDAs)
@@ -120,7 +120,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(default_cartridge)
 		cartridge = new default_cartridge(src)
 		cartridge.update_programs(src)
-	new /obj/item/weapon/pen(src)
+	new /obj/item/pen(src)
 
 	if(ishuman(loc))
 		var/mob/living/carbon/human/H = loc
@@ -153,28 +153,28 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			log_debug("Invalid switch for PDA, defaulting to old PDA icons. [pdachoice] chosen.")
 	start_program(find_program(/datum/data/pda/app/main_menu))
 
-/obj/item/device/pda/proc/can_use(mob/user)
+/obj/item/pda/proc/can_use(mob/user)
 	return (tgui_status(user, GLOB.tgui_inventory_state) == STATUS_INTERACTIVE)
 
-/obj/item/device/pda/GetAccess()
+/obj/item/pda/GetAccess()
 	if(id)
 		return id.GetAccess()
 	else
 		return ..()
 
-/obj/item/device/pda/GetID()
+/obj/item/pda/GetID()
 	return id
 
-/obj/item/device/pda/MouseDrop(obj/over_object as obj, src_location, over_location)
+/obj/item/pda/MouseDrop(obj/over_object as obj, src_location, over_location)
 	var/mob/M = usr
 	if((!istype(over_object, /obj/screen)) && can_use(usr))
 		return attack_self(M)
 	return
 
-/obj/item/device/pda/proc/close(mob/user)
+/obj/item/pda/proc/close(mob/user)
 	SStgui.close_uis(src)
 
-/obj/item/device/pda/attack_self(mob/user as mob)
+/obj/item/pda/attack_self(mob/user as mob)
 	user.set_machine(src)
 
 	if(active_uplink_check(user))
@@ -183,12 +183,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	tgui_interact(user)
 	return
 
-/obj/item/device/pda/proc/start_program(datum/data/pda/P)
+/obj/item/pda/proc/start_program(datum/data/pda/P)
 	if(P && ((P in programs) || (cartridge && (P in cartridge.programs))))
 		return P.start()
 	return 0
 
-/obj/item/device/pda/proc/find_program(type)
+/obj/item/pda/proc/find_program(type)
 	var/datum/data/pda/A = locate(type) in programs
 	if(A)
 		return A
@@ -199,15 +199,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return null
 
 // force the cache to rebuild on update_ui
-/obj/item/device/pda/proc/update_shortcuts()
+/obj/item/pda/proc/update_shortcuts()
 	shortcut_cache.Cut()
 
-/obj/item/device/pda/proc/update_programs()
+/obj/item/pda/proc/update_programs()
 	for(var/A in programs)
 		var/datum/data/pda/P = A
 		P.pda = src
 
-/obj/item/device/pda/proc/detonate_act(var/obj/item/device/pda/P)
+/obj/item/pda/proc/detonate_act(var/obj/item/pda/P)
 	//TODO: sometimes these attacks show up on the message server
 	var/i = rand(1,100)
 	var/j = rand(0,1) //Possibility of losing the PDA after the detonation
@@ -271,7 +271,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		message = "<span class='warning'>[message]</span>"
 		M.show_message(message, 1)
 
-/obj/item/device/pda/proc/remove_id()
+/obj/item/pda/proc/remove_id()
 	if (id)
 		if (ismob(loc))
 			var/mob/M = loc
@@ -282,8 +282,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			id.loc = get_turf(src)
 		id = null
 
-/obj/item/device/pda/proc/remove_pen()
-	var/obj/item/weapon/pen/O = locate() in src
+/obj/item/pda/proc/remove_pen()
+	var/obj/item/pen/O = locate() in src
 	if(O)
 		if(istype(loc, /mob))
 			var/mob/M = loc
@@ -295,7 +295,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		to_chat(usr, "<span class='notice'>This PDA does not have a pen in it.</span>")
 
-/obj/item/device/pda/verb/verb_reset_pda()
+/obj/item/pda/verb/verb_reset_pda()
 	set category = "Object"
 	set name = "Reset PDA"
 	set src in usr
@@ -306,12 +306,12 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	if(can_use(usr))
 		start_program(find_program(/datum/data/pda/app/main_menu))
 		notifying_programs.Cut()
-		overlays -= image('icons/obj/pda.dmi', "pda-r")
+		cut_overlay("pda-r")
 		to_chat(usr, "<span class='notice'>You press the reset button on \the [src].</span>")
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
 
-/obj/item/device/pda/verb/verb_remove_id()
+/obj/item/pda/verb/verb_remove_id()
 	set category = "Object"
 	set name = "Remove id"
 	set src in usr
@@ -328,7 +328,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
 
 
-/obj/item/device/pda/verb/verb_remove_pen()
+/obj/item/pda/verb/verb_remove_pen()
 	set category = "Object"
 	set name = "Remove pen"
 	set src in usr
@@ -341,7 +341,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	else
 		to_chat(usr, "<span class='notice'>You cannot do this while restrained.</span>")
 
-/obj/item/device/pda/verb/verb_remove_cartridge()
+/obj/item/pda/verb/verb_remove_cartridge()
 	set category = "Object"
 	set name = "Remove cartridge"
 	set src in usr
@@ -373,20 +373,20 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	start_program(find_program(/datum/data/pda/app/main_menu))
 
 
-/obj/item/device/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
+/obj/item/pda/proc/id_check(mob/user as mob, choice as num)//To check for IDs; 1 for in-pda use, 2 for out of pda use.
 	if(choice == 1)
 		if (id)
 			remove_id()
 			return 1
 		else
 			var/obj/item/I = user.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && user.unEquip(I))
+			if (istype(I, /obj/item/card/id) && user.unEquip(I))
 				I.loc = src
 				id = I
 			return 1
 	else
-		var/obj/item/weapon/card/I = user.get_active_hand()
-		if (istype(I, /obj/item/weapon/card/id) && I:registered_name && user.unEquip(I))
+		var/obj/item/card/I = user.get_active_hand()
+		if (istype(I, /obj/item/card/id) && I:registered_name && user.unEquip(I))
 			var/obj/old_id = id
 			I.loc = src
 			id = I
@@ -395,9 +395,9 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return 0
 
 // access to status display signals
-/obj/item/device/pda/attackby(obj/item/C as obj, mob/user as mob)
+/obj/item/pda/attackby(obj/item/C as obj, mob/user as mob)
 	..()
-	if(istype(C, /obj/item/weapon/cartridge) && !cartridge)
+	if(istype(C, /obj/item/cartridge) && !cartridge)
 		cartridge = C
 		user.drop_item()
 		cartridge.loc = src
@@ -407,8 +407,8 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		if(cartridge.radio)
 			cartridge.radio.hostpda = src
 
-	else if(istype(C, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/idcard = C
+	else if(istype(C, /obj/item/card/id))
+		var/obj/item/card/id/idcard = C
 		if(!idcard.registered_name)
 			to_chat(user, "<span class='notice'>\The [src] rejects the ID.</span>")
 			return
@@ -426,14 +426,14 @@ var/global/list/obj/item/device/pda/PDAs = list()
 					updateSelfDialog()//Update self dialog on success.
 			return	//Return in case of failed check or when successful.
 		updateSelfDialog()//For the non-input related code.
-	else if(istype(C, /obj/item/device/paicard) && !src.pai)
+	else if(istype(C, /obj/item/paicard) && !src.pai)
 		user.drop_item()
 		C.loc = src
 		pai = C
 		to_chat(user, "<span class='notice'>You slot \the [C] into \the [src].</span>")
 		SStgui.update_uis(src) // update all UIs attached to src
-	else if(istype(C, /obj/item/weapon/pen))
-		var/obj/item/weapon/pen/O = locate() in src
+	else if(istype(C, /obj/item/pen))
+		var/obj/item/pen/O = locate() in src
 		if(O)
 			to_chat(user, "<span class='notice'>There is already a pen in \the [src].</span>")
 		else
@@ -442,15 +442,15 @@ var/global/list/obj/item/device/pda/PDAs = list()
 			to_chat(user, "<span class='notice'>You slot \the [C] into \the [src].</span>")
 	return
 
-/obj/item/device/pda/attack(mob/living/C as mob, mob/living/user as mob)
+/obj/item/pda/attack(mob/living/C as mob, mob/living/user as mob)
 	if (istype(C, /mob/living/carbon) && scanmode)
 		scanmode.scan_mob(C, user)
 
-/obj/item/device/pda/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
+/obj/item/pda/afterattack(atom/A as mob|obj|turf|area, mob/user as mob, proximity)
 	if(proximity && scanmode)
 		scanmode.scan_atom(A, user)
 
-/obj/item/device/pda/proc/explode() //This needs tuning. //Sure did.
+/obj/item/pda/proc/explode() //This needs tuning. //Sure did.
 	if(!src.detonate) return
 	var/turf/T = get_turf(src.loc)
 	if(T)
@@ -458,7 +458,7 @@ var/global/list/obj/item/device/pda/PDAs = list()
 		explosion(T, 0, 0, 1, rand(1,2))
 	return
 
-/obj/item/device/pda/Destroy()
+/obj/item/pda/Destroy()
 	PDAs -= src
 	if (src.id && prob(90)) //IDs are kept in 90% of the cases
 		src.id.forceMove(get_turf(src.loc))
@@ -473,28 +473,28 @@ var/global/list/obj/item/device/pda/PDAs = list()
 	return ..()
 
 //Some spare PDAs in a box
-/obj/item/weapon/storage/box/PDAs
+/obj/item/storage/box/PDAs
 	name = "box of spare PDAs"
 	desc = "A box of spare PDA microcomputers."
 	icon = 'icons/obj/pda.dmi'
 	icon_state = "pdabox"
 
-/obj/item/weapon/storage/box/PDAs/Initialize()
+/obj/item/storage/box/PDAs/Initialize()
 	. = ..()
-	new /obj/item/device/pda(src)
-	new /obj/item/device/pda(src)
-	new /obj/item/device/pda(src)
-	new /obj/item/device/pda(src)
-	new /obj/item/weapon/cartridge/head(src)
+	new /obj/item/pda(src)
+	new /obj/item/pda(src)
+	new /obj/item/pda(src)
+	new /obj/item/pda(src)
+	new /obj/item/cartridge/head(src)
 
-	var/newcart = pick(	/obj/item/weapon/cartridge/engineering,
-						/obj/item/weapon/cartridge/security,
-						/obj/item/weapon/cartridge/medical,
-						/obj/item/weapon/cartridge/signal/science,
-						/obj/item/weapon/cartridge/quartermaster)
+	var/newcart = pick(	/obj/item/cartridge/engineering,
+						/obj/item/cartridge/security,
+						/obj/item/cartridge/medical,
+						/obj/item/cartridge/signal/science,
+						/obj/item/cartridge/quartermaster)
 	new newcart(src)
 
 // Pass along the pulse to atoms in contents, largely added so pAIs are vulnerable to EMP
-/obj/item/device/pda/emp_act(severity)
+/obj/item/pda/emp_act(severity)
 	for(var/atom/A in src)
 		A.emp_act(severity)

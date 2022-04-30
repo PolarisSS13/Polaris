@@ -9,7 +9,7 @@
 	idle_power_usage = 20
 	active_power_usage = 5000
 	req_access = list(access_robotics)
-	circuit = /obj/item/weapon/circuitboard/mechfab
+	circuit = /obj/item/circuitboard/mechfab
 
 	var/speed = 1
 	var/mat_efficiency = 1
@@ -55,13 +55,13 @@
 	update_icon()
 
 /obj/machinery/mecha_part_fabricator/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(panel_open)
 		icon_state = "mechfab-o"
 	else
 		icon_state = "mechfab-idle"
 	if(busy)
-		overlays += "mechfab-active"
+		add_overlay("mechfab-active")
 
 /obj/machinery/mecha_part_fabricator/dismantle()
 	for(var/f in materials)
@@ -70,13 +70,13 @@
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
 	res_max_amount = 0
-	for(var/obj/item/weapon/stock_parts/matter_bin/M in component_parts)
+	for(var/obj/item/stock_parts/matter_bin/M in component_parts)
 		res_max_amount += M.rating * 100000 // 200k -> 600k
 	var/T = 0
-	for(var/obj/item/weapon/stock_parts/manipulator/M in component_parts)
+	for(var/obj/item/stock_parts/manipulator/M in component_parts)
 		T += M.rating
 	mat_efficiency = max(1 - (T - 1) / 4, 0.2) // 1 -> 0.2
-	for(var/obj/item/weapon/stock_parts/micro_laser/M in component_parts) // Not resetting T is intended; speed is affected by both
+	for(var/obj/item/stock_parts/micro_laser/M in component_parts) // Not resetting T is intended; speed is affected by both
 		T += M.rating
 	speed = T / 2 // 1 -> 3
 
@@ -156,9 +156,9 @@
 		if(materials[S.material.name] + amnt <= res_max_amount)
 			if(S && S.get_amount() >= 1)
 				var/count = 0
-				overlays += "mechfab-load-metal"
+				add_overlay("mechfab-load-metal")
 				spawn(10)
-					overlays -= "mechfab-load-metal"
+					cut_overlays("mechfab-load-metal")
 				while(materials[S.material.name] + amnt <= res_max_amount && S.get_amount() >= 1)
 					materials[S.material.name] += amnt
 					S.use(1)

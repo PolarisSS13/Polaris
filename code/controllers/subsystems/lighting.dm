@@ -1,11 +1,11 @@
 SUBSYSTEM_DEF(lighting)
 	name = "Lighting"
-	wait = 2
+	wait = 2  // SS_TICKER - Ticks
 	init_order = INIT_ORDER_LIGHTING
 	flags = SS_TICKER
-	var/static/list/sources_queue = list() // List of lighting sources queued for update.
-	var/static/list/corners_queue = list() // List of lighting corners queued for update.
-	var/static/list/objects_queue = list() // List of lighting objects queued for update.
+	var/global/static/list/sources_queue = list() // List of lighting sources queued for update.
+	var/global/static/list/corners_queue = list() // List of lighting corners queued for update.
+	var/global/static/list/objects_queue = list() // List of lighting objects queued for update.
 
 /datum/controller/subsystem/lighting/stat_entry(msg)
 	msg = "L:[length(sources_queue)]|C:[length(corners_queue)]|O:[length(objects_queue)]"
@@ -25,7 +25,6 @@ SUBSYSTEM_DEF(lighting)
 	fire(FALSE, TRUE)
 
 	return ..()
-
 /datum/controller/subsystem/lighting/fire(resumed, init_tick_checks)
 	MC_SPLIT_TICK_INIT(3)
 	if(!init_tick_checks)

@@ -71,7 +71,7 @@
 		newChannel.announcement = "Breaking news from [channel_name]!"
 	network_channels += newChannel
 
-/datum/feed_network/proc/SubmitArticle(var/msg, var/author, var/channel_name, var/obj/item/weapon/photo/photo, var/adminMessage = 0, var/message_type = "", var/title)
+/datum/feed_network/proc/SubmitArticle(var/msg, var/author, var/channel_name, var/obj/item/photo/photo, var/adminMessage = 0, var/message_type = "", var/title)
 	var/datum/feed_message/newMsg = new /datum/feed_message
 	newMsg.author = author
 	newMsg.body = msg
@@ -104,7 +104,7 @@
 		NEWSCASTER.update_icon()
 
 	// var/list/receiving_pdas = new
-	// for (var/obj/item/device/pda/P in PDAs)
+	// for (var/obj/item/pda/P in PDAs)
 	// 	if(!P.owner)
 	// 		continue
 	// 	if(P.toff)
@@ -114,13 +114,13 @@
 	// spawn(0)	// get_receptions sleeps further down the line, spawn of elsewhere
 	// 	var/datum/receptions/receptions = get_receptions(null, receiving_pdas) // datums are not atoms, thus we have to assume the newscast network always has reception
 
-	// 	for(var/obj/item/device/pda/PDA in receiving_pdas)
+	// 	for(var/obj/item/pda/PDA in receiving_pdas)
 	// 		if(!(receptions.receiver_reception[PDA] & TELECOMMS_RECEPTION_RECEIVER))
 	// 			continue
 
 	// 		PDA.new_news(annoncement)
 
-var/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
+var/global/datum/feed_network/news_network = new /datum/feed_network     //The global news-network, which is coincidentally a global list.
 
 GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 /obj/machinery/newscaster
@@ -172,7 +172,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	light_range = 0
 	anchored = 1
 	var/obj/machinery/exonet_node/node = null
-	circuit = /obj/item/weapon/circuitboard/newscaster
+	circuit = /obj/item/circuitboard/newscaster
 
 /obj/machinery/newscaster/security_unit                   //Security unit
 	name = "Security Newscaster"
@@ -188,6 +188,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 
 /obj/machinery/newscaster/LateInitialize()
 	node = get_exonet_node()
+	update_icon()
 
 /obj/machinery/newscaster/Destroy()
 	allCasters -= src
@@ -195,24 +196,24 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 	return ..()
 
 /obj/machinery/newscaster/update_icon()
+	cut_overlays()
 	if(!ispowered || isbroken)
 		icon_state = "newscaster_off"
 		if(isbroken) //If the thing is smashed, add crack overlay on top of the unpowered sprite.
-			overlays.Cut()
-			overlays += image(icon, "crack3")
+			add_overlay("crack3")
 		return
 
-	overlays.Cut() //reset overlays
+	cut_overlays() //reset overlays
 
 	if(news_network.wanted_issue) //wanted icon state, there can be no overlays on it as it's a priority message
 		icon_state = "newscaster_wanted"
 		return
 
 	if(alert) //new message alert overlay
-		overlays += "newscaster_alert"
+		add_overlay("newscaster_alert")
 
 	if(hitstaken > 0) //Cosmetic damage overlay
-		overlays += image(icon, "crack[hitstaken]")
+		add_overlay("crack[hitstaken]")
 
 	icon_state = "newscaster_normal"
 	return
@@ -776,9 +777,9 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 
 /datum/news_photo
 	var/is_synth = 0
-	var/obj/item/weapon/photo/photo = null
+	var/obj/item/photo/photo = null
 
-/datum/news_photo/New(var/obj/item/weapon/photo/p, var/synth)
+/datum/news_photo/New(var/obj/item/photo/p, var/synth)
 	is_synth = synth
 	photo = p
 
@@ -790,14 +791,14 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 				user.put_in_inactive_hand(photo_data.photo)
 		qdel(photo_data)
 
-	if(istype(user.get_active_hand(), /obj/item/weapon/photo))
+	if(istype(user.get_active_hand(), /obj/item/photo))
 		var/obj/item/photo = user.get_active_hand()
 		user.drop_item()
 		photo.loc = src
 		photo_data = new(photo, 0)
 	else if(istype(user,/mob/living/silicon))
 		var/mob/living/silicon/tempAI = user
-		var/obj/item/weapon/photo/selection = tempAI.GetPicture()
+		var/obj/item/photo/selection = tempAI.GetPicture()
 		if(!selection)
 			return
 
@@ -808,7 +809,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 /obj/machinery/newscaster/proc/scan_user(mob/living/user as mob)
 	if(istype(user,/mob/living/carbon/human))                       //User is a human
 		var/mob/living/carbon/human/human_user = user
-		var/obj/item/weapon/card/id/I = human_user.GetIdCard()
+		var/obj/item/card/id/I = human_user.GetIdCard()
 		if(I)
 			scanned_user = GetNameAndAssignmentFromId(I)
 		else
@@ -819,7 +820,7 @@ GLOBAL_LIST_BOILERPLATE(allCasters, /obj/machinery/newscaster)
 
 /obj/machinery/newscaster/proc/print_paper()
 	feedback_inc("newscaster_newspapers_printed",1)
-	var/obj/item/weapon/newspaper/NEWSPAPER = new /obj/item/weapon/newspaper
+	var/obj/item/newspaper/NEWSPAPER = new /obj/item/newspaper
 	for(var/datum/feed_channel/FC in news_network.network_channels)
 		NEWSPAPER.news_content += FC
 	if(news_network.wanted_issue)

@@ -12,7 +12,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 500
-	circuit = /obj/item/weapon/circuitboard/station_map
+	circuit = /obj/item/circuitboard/station_map
 
 	// TODO - Port use_auto_lights from /vg - for now declare here
 	var/use_auto_lights = 1
@@ -169,7 +169,7 @@
 	if(!holomap_datum)
 		return //Not yet.
 
-	overlays.Cut()
+	cut_overlays()
 	if(stat & BROKEN)
 		icon_state = "station_mapb"
 	else if((stat & NOPOWER) || !anchored)
@@ -180,8 +180,8 @@
 		if(bogus)
 			holomap_datum.initialize_holomap_bogus()
 		else
-			small_station_map.icon = SSholomaps.extraMiniMaps["[HOLOMAP_EXTRA_STATIONMAPSMALL]_[original_zLevel]"]
-			overlays |= small_station_map
+			small_station_map = image(SSholomaps.extraMiniMaps["[HOLOMAP_EXTRA_STATIONMAPSMALL]_[original_zLevel]"], dir = src.dir)
+			add_overlay(small_station_map)
 			holomap_datum.initialize_holomap(get_turf(src))
 
 	// Put the little "map" overlay down where it looks nice
@@ -189,14 +189,14 @@
 		floor_markings.dir = src.dir
 		floor_markings.pixel_x = -src.pixel_x
 		floor_markings.pixel_y = -src.pixel_y
-		overlays += floor_markings
+		add_overlay(floor_markings)
 
 	if(panel_open)
-		overlays += "station_map-panel"
+		add_overlay("station_map-panel")
 	else
-		overlays -= "station_map-panel"
+		cut_overlay("station_map-panel")
 
-/obj/machinery/station_map/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/station_map/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
 	if(default_deconstruction_screwdriver(user, W))
 		return
@@ -224,7 +224,7 @@
 	frame_style = "wall"
 	x_offset = WORLD_ICON_SIZE
 	y_offset = WORLD_ICON_SIZE
-	circuit = /obj/item/weapon/circuitboard/station_map
+	circuit = /obj/item/circuitboard/station_map
 	icon_override = 'icons/obj/machines/stationmap.dmi'
 
 /datum/frame/frame_types/station_map/get_icon_state(var/state)
@@ -233,7 +233,7 @@
 /obj/structure/frame
 	layer = ABOVE_WINDOW_LAYER
 
-/obj/item/weapon/circuitboard/station_map
+/obj/item/circuitboard/station_map
 	name = T_BOARD("Station Map")
 	board_type = new /datum/frame/frame_types/station_map
 	build_path = /obj/machinery/station_map

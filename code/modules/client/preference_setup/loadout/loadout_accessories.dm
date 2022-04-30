@@ -28,15 +28,15 @@
 
 /datum/gear/accessory/wallet
 	display_name = "wallet, orange"
-	path = /obj/item/weapon/storage/wallet/random
+	path = /obj/item/storage/wallet/random
 
 /datum/gear/accessory/wallet_poly
 	display_name = "wallet, polychromic"
-	path = /obj/item/weapon/storage/wallet/poly
+	path = /obj/item/storage/wallet/poly
 
 /datum/gear/accessory/wallet/womens
 	display_name = "wallet, womens"
-	path = /obj/item/weapon/storage/wallet/womens
+	path = /obj/item/storage/wallet/womens
 
 /datum/gear/accessory/wallet/womens/New()
 	..()
@@ -44,7 +44,7 @@
 
 /datum/gear/accessory/clutch
 	display_name = "clutch bag"
-	path = /obj/item/weapon/storage/briefcase/clutch
+	path = /obj/item/storage/briefcase/clutch
 	cost = 2
 
 /datum/gear/accessory/clutch/New()
@@ -53,7 +53,7 @@
 
 /datum/gear/accessory/purse
 	display_name = "purse"
-	path = /obj/item/weapon/storage/backpack/purse
+	path = /obj/item/storage/backpack/purse
 	cost = 3
 
 /datum/gear/accessory/purse/New()
@@ -121,6 +121,18 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/accessory/bowtie
+	display_name = "bowtie selection"
+	path = /obj/item/clothing/accessory/bowtie
+	cost = 1
+
+/datum/gear/accessory/bowtie/New()
+	..()
+	var/list/bowties = list()
+	for(var/obj/item/clothing/accessory/bowtie_type as anything in typesof(/obj/item/clothing/accessory/bowtie))
+		bowties[initial(bowtie_type.name)] = bowtie_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(bowties))
+
 /datum/gear/accessory/jacket
 	display_name = "suit jacket selection"
 	path = /obj/item/clothing/accessory/jacket
@@ -171,13 +183,13 @@
 /datum/gear/accessory/fannypack
 	display_name = "fannypack selection"
 	cost = 2
-	path = /obj/item/weapon/storage/belt/fannypack
+	path = /obj/item/storage/belt/fannypack
 
 /datum/gear/accessory/fannypack/New()
 	..()
 	var/list/fannys = list()
-	for(var/fanny in typesof(/obj/item/weapon/storage/belt/fannypack))
-		var/obj/item/weapon/storage/belt/fannypack/fanny_type = fanny
+	for(var/fanny in typesof(/obj/item/storage/belt/fannypack))
+		var/obj/item/storage/belt/fannypack/fanny_type = fanny
 		fannys[initial(fanny_type.name)] = fanny_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(fannys))
 
@@ -307,3 +319,16 @@
 		var/obj/item/clothing/accessory/pridepin_type = pridepin
 		pridepins[initial(pridepin_type.name)] = pridepin_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pridepins))
+
+/datum/gear/accessory/corpbadge
+	display_name = "investigator holobadge (IAA)"
+	path = /obj/item/clothing/accessory/badge/holo/investigator
+	allowed_roles = list("Internal affairs agent")
+
+/datum/gear/accessory/pressbadge
+	display_name = "corporate press pass"
+	path = /obj/item/clothing/accessory/badge/press
+
+/datum/gear/accessory/pressbadge
+	display_name = "freelance press pass"
+	path = /obj/item/clothing/accessory/badge/press/independent

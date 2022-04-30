@@ -34,7 +34,7 @@
 		var/convopdas[0]
 		var/pdas[0]
 		for(var/A in PDAs)
-			var/obj/item/device/pda/P = A
+			var/obj/item/pda/P = A
 			var/datum/data/pda/app/messenger/PM = P.find_program(/datum/data/pda/app/messenger)
 
 			if(!P.owner || PM.toff || P == pda || PM.m_hidden)
@@ -83,7 +83,7 @@
 
 			active_conversation = null
 		if("Message")
-			var/obj/item/device/pda/P = locate(params["target"])
+			var/obj/item/pda/P = locate(params["target"])
 			create_message(usr, P)
 			if(params["target"] in conversations)            // Need to make sure the message went through, if not welp.
 				active_conversation = params["target"]
@@ -96,7 +96,7 @@
 			if(!params["target"] || !params["plugin"])
 				return
 
-			var/obj/item/device/pda/P = locate(params["target"])
+			var/obj/item/pda/P = locate(params["target"])
 			if(!P)
 				to_chat(usr, "PDA not found.")
 
@@ -115,13 +115,13 @@
 
 	switch(href_list["choice"])
 		if("Message")
-			var/obj/item/device/pda/P = locate(href_list["target"])
+			var/obj/item/pda/P = locate(href_list["target"])
 			create_message(usr, P)
 			if(href_list["target"] in conversations)            // Need to make sure the message went through, if not welp.
 				active_conversation = href_list["target"]
 
 
-/datum/data/pda/app/messenger/proc/create_message(var/mob/living/U, var/obj/item/device/pda/P)
+/datum/data/pda/app/messenger/proc/create_message(var/mob/living/U, var/obj/item/pda/P)
 	var/t = input(U, "Please enter message", name, null) as text|null
 	if(!t)
 		return
@@ -194,7 +194,7 @@
 		return
 
 	for(var/A in PDAs)
-		var/obj/item/device/pda/P = A
+		var/obj/item/pda/P = A
 		var/datum/data/pda/app/messenger/PM = P.find_program(/datum/data/pda/app/messenger)
 
 		if(!P.owner || !PM || PM.hidden || P == pda || PM.toff)
@@ -228,7 +228,7 @@
 /datum/data/pda/app/messenger/multicast/receive_message(list/data, ref)
 	. = ..()
 
-	var/obj/item/device/pda/multicaster/M = pda
+	var/obj/item/pda/multicaster/M = pda
 	if(!istype(M))
 		return
 
@@ -237,11 +237,11 @@
 	modified_message["target"] = "\ref[M]"
 
 	var/list/targets = list()
-	for(var/obj/item/device/pda/pda in PDAs)
+	for(var/obj/item/pda/pda in PDAs)
 		if(pda.cartridge && pda.owner && is_type_in_list(pda.cartridge, M.cartridges_to_send_to))
 			targets |= pda
 	if(targets.len)
-		for(var/obj/item/device/pda/target in targets)
+		for(var/obj/item/pda/target in targets)
 			var/datum/data/pda/app/messenger/P = target.find_program(/datum/data/pda/app/messenger)
 			if(P)
 				P.receive_message(modified_message, "\ref[M]")

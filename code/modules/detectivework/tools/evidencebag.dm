@@ -1,6 +1,6 @@
 //CONTAINS: Evidence bags and fingerprint cards
 
-/obj/item/weapon/evidencebag
+/obj/item/evidencebag
 	name = "evidence bag"
 	desc = "An empty evidence bag."
 	icon = 'icons/obj/storage.dmi'
@@ -9,7 +9,7 @@
 	w_class = ITEMSIZE_SMALL
 	var/obj/item/stored_item = null
 
-/obj/item/weapon/evidencebag/MouseDrop(var/obj/item/I as obj)
+/obj/item/evidencebag/MouseDrop(var/obj/item/I as obj)
 	if (!ishuman(usr))
 		return
 	if(!istype(I) || I.anchored)
@@ -25,12 +25,12 @@
 			return
 	else
 		//If it isn't on the floor. Do some checks to see if it's in our hands or a box. Otherwise give up.
-		if(istype(I.loc,/obj/item/weapon/storage))	//in a container.
+		if(istype(I.loc,/obj/item/storage))	//in a container.
 			var/sdepth = I.storage_depth(user)
 			if (sdepth == -1 || sdepth > 1)
 				return	//too deeply nested to access
 
-			var/obj/item/weapon/storage/U = I.loc
+			var/obj/item/storage/U = I.loc
 			user.client.screen -= I
 			U.contents.Remove(I)
 		else if(user.item_is_in_hands(I))
@@ -38,7 +38,7 @@
 		else
 			return
 
-	if(istype(I, /obj/item/weapon/evidencebag))
+	if(istype(I, /obj/item/evidencebag))
 		to_chat(user, "<span class='notice'>You find putting an evidence bag in another evidence bag to be slightly absurd.</span>")
 		return
 
@@ -62,8 +62,8 @@
 	var/image/img = image("icon"=I, "layer"=FLOAT_LAYER)	//take a snapshot. (necessary to stop the underlays appearing under our inventory-HUD slots ~Carn
 	I.pixel_x = xx		//and then return it
 	I.pixel_y = yy
-	overlays += img
-	overlays += "evidence"	//should look nicer for transparent stuff. not really that important, but hey.
+	add_overlay(img)
+	add_overlay("evidence")
 
 	desc = "An evidence bag containing [I]."
 	I.loc = src
@@ -72,12 +72,12 @@
 	return
 
 
-/obj/item/weapon/evidencebag/attack_self(mob/user as mob)
+/obj/item/evidencebag/attack_self(mob/user as mob)
 	if(contents.len)
 		var/obj/item/I = contents[1]
 		user.visible_message("[user] takes [I] out of [src]", "You take [I] out of [src].",\
 		"You hear someone rustle around in a plastic bag, and remove something.")
-		overlays.Cut()	//remove the overlays
+		cut_overlays()
 
 		user.put_in_hands(I)
 		stored_item = null
@@ -90,7 +90,7 @@
 		icon_state = "evidenceobj"
 	return
 
-/obj/item/weapon/evidencebag/examine(mob/user)
+/obj/item/evidencebag/examine(mob/user)
 	. = ..()
 	if(stored_item)
 		user.examinate(stored_item)

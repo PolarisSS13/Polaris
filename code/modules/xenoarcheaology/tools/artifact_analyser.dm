@@ -1,8 +1,8 @@
 /obj/machinery/artifact_analyser
 	name = "Anomaly Analyser"
 	desc = "Studies the emissions of anomalous materials to discover their uses."
-	icon = 'icons/obj/virology.dmi'
-	icon_state = "isolator"
+	icon = 'icons/obj/xenoarchaeology.dmi'
+	icon_state = "xenoarch_console"
 	anchored = 1
 	density = 1
 	var/scan_in_progress = 0
@@ -70,13 +70,13 @@
 			results = get_scan_info(scanned_object)
 
 		src.visible_message("<b>[name]</b> states, \"Scanning complete.\"")
-		var/obj/item/weapon/paper/P = new(src.loc)
+		var/obj/item/paper/P = new(src.loc)
 		P.name = "[src] report #[++report_num]"
 		P.info = "<b>[src] analysis report #[report_num]</b><br>"
 		P.info += "<br>"
 		P.info += "[bicon(scanned_object)] [results]"
-		P.stamped = list(/obj/item/weapon/stamp)
-		P.overlays = list("paper_stamped")
+		P.stamped = list(/obj/item/stamp)
+		P.add_overlay("paper_stamped")
 
 		if(scanned_object && istype(scanned_object, /obj/machinery/artifact))
 			var/obj/machinery/artifact/A = scanned_object

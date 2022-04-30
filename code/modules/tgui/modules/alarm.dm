@@ -11,7 +11,7 @@
 /datum/tgui_module/alarm_monitor/all
 /datum/tgui_module/alarm_monitor/all/New()
 	..()
-	alarm_handlers = SSalarm.all_handlers
+	alarm_handlers = SSalarm.handlers
 
 /datum/tgui_module/alarm_monitor/all/robot
 /datum/tgui_module/alarm_monitor/all/robot/tgui_state(mob/user)
@@ -20,7 +20,7 @@
 /datum/tgui_module/alarm_monitor/engineering
 /datum/tgui_module/alarm_monitor/engineering/New()
 	..()
-	alarm_handlers = list(atmosphere_alarm, fire_alarm, power_alarm)
+	alarm_handlers = list(GLOB.atmosphere_alarm, GLOB.fire_alarm, GLOB.power_alarm)
 
 // Subtype for NTOS
 /datum/tgui_module/alarm_monitor/engineering/ntos
@@ -29,7 +29,7 @@
 /datum/tgui_module/alarm_monitor/security
 /datum/tgui_module/alarm_monitor/security/New()
 	..()
-	alarm_handlers = list(camera_alarm, motion_alarm)
+	alarm_handlers = list(GLOB.camera_alarm, GLOB.motion_alarm)
 
 
 // Subtype for NTOS

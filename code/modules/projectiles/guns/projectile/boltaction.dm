@@ -1,7 +1,7 @@
 // For all intents and purposes, these work exactly the same as pump shotguns. It's unnecessary to make their own procs for them.
 
 ////////Base Rifle////////
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle
+/obj/item/gun/projectile/shotgun/pump/rifle
 	name = "bolt-action rifle"
 	desc = "The Hedberg-Hammarstrom Volsung is a modern interpretation of an almost ancient weapon design. The model is popular among hunters and collectors due to its reliability. Uses 7.62mm rounds."
 	description_fluff = "Sif’s largest home-grown firearms manufacturer, the Hedberg-Hammarstrom company offers a range of high-quality, high-cost hunting rifles and shotguns designed with the Sivian wilderness - and its wildlife - in mind. \
@@ -18,7 +18,7 @@
 	pump_animation = "boltaction-cycling"
 
 ////////Practice Rifle////////
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/practice // For target practice
+/obj/item/gun/projectile/shotgun/pump/rifle/practice // For target practice
 	name = "practice bolt-action rifle"
 	icon_state = "boltaction_practice"
 	desc = "A bolt-action rifle with a lightweight synthetic wood stock, designed for competitive shooting. Comes shipped with practice rounds pre-loaded into the gun. Popular among professional marksmen. Uses 7.62mm rounds."
@@ -26,7 +26,7 @@
 	pump_animation = "boltaction_practice-cycling"
 
 ////////Ceremonial Rifle////////
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/ceremonial
+/obj/item/gun/projectile/shotgun/pump/rifle/ceremonial
 	name = "ceremonial bolt-action rifle"
 	desc = "A bolt-action rifle with a heavy, high-quality wood stock that has a beautiful finish. Clearly not intended to be used in combat. Uses 7.62mm rounds."
 	item_state = "boltaction_c"
@@ -34,8 +34,8 @@
 	ammo_type = /obj/item/ammo_casing/a762/blank
 	pump_animation = "ceremonial_rifle-cycling"
 
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/ceremonial/attackby(var/obj/item/A as obj, mob/user as mob)
-	if(istype(A, /obj/item/weapon/surgical/circular_saw) || istype(A, /obj/item/weapon/melee/energy) || istype(A, /obj/item/weapon/pickaxe/plasmacutter) && w_class != ITEMSIZE_NORMAL)
+/obj/item/gun/projectile/shotgun/pump/rifle/ceremonial/attackby(var/obj/item/A as obj, mob/user as mob)
+	if(istype(A, /obj/item/surgical/circular_saw) || istype(A, /obj/item/melee/energy) || istype(A, /obj/item/pickaxe/plasmacutter) && w_class != ITEMSIZE_NORMAL)
 		to_chat(user, "<span class='notice'>You begin to shorten the barrel and stock of \the [src].</span>")
 		if(loaded.len)
 			afterattack(user, user)
@@ -60,7 +60,7 @@
 //Lever actions are the same thing, but bigger.
 
 ////////Standard Lever Action Rifle////////
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever
+/obj/item/gun/projectile/shotgun/pump/rifle/lever
 	name = "lever-action rifle"
 	desc = "The Hedberg-Hammarstrom Edda is the latest version of an almost ancient weapon design from the 19th century, popular with some due to its simplistic design. This one uses a lever-action to move new rounds into the chamber. Uses 7.62mm rounds."
 	description_fluff = "Sif’s largest home-grown firearms manufacturer, the Hedberg-Hammarstrom company offers a range of high-quality, high-cost hunting rifles and shotguns designed with the Sivian wilderness - and its wildlife - in mind. \
@@ -73,7 +73,7 @@
 	pump_animation = "leveraction-cycling"
 
 ////////Vintage Lever Action Rifle////////
-/obj/item/weapon/gun/projectile/shotgun/pump/rifle/lever/vintage
+/obj/item/gun/projectile/shotgun/pump/rifle/lever/vintage
 	name = "vintage repeater"
 	desc = "An iconic manually operated lever action rifle, offering adequate stopping power due to it's still powerful cartridge while at the same time having a rather respectable firing rate due to it's mechanism. It is very probable this is a replica instead of a museum piece, but rifles of this pattern still see usage as colonist guns in some far off regions. Uses 7.62mm rounds."
 	item_state = "levercarbine"

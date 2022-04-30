@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(shuttles)
 
 	var/tmp/list/current_run                       // Shuttles remaining to process this fire() tick
 
-/datum/controller/subsystem/shuttles/PreInit()
+/datum/controller/subsystem/shuttles/OnNew()
 	global.shuttle_controller = src // TODO - Remove this! Change everything to point at SSshuttles intead
 
 /datum/controller/subsystem/shuttles/Initialize(timeofday)
@@ -49,7 +49,6 @@ SUBSYSTEM_DEF(shuttles)
 			LAZYDISTINCTADD(shuttles_to_initialize, shuttle_type)
 	block_init_queue = FALSE
 	process_init_queues()
-	return ..()
 
 /datum/controller/subsystem/shuttles/fire(resumed, no_mc_tick)
 	if (!resumed)

@@ -11,7 +11,7 @@
 	. = ..()
 	update_layer()
 
-/obj/structure/bed/chair/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/attackby(obj/item/W as obj, mob/user as mob)
 	..()
 	if(!padding_material && istype(W, /obj/item/assembly/shock_kit))
 		var/obj/item/assembly/shock_kit/SK = W
@@ -132,6 +132,42 @@
 /obj/structure/bed/chair/comfy/orange/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "orange")
 
+/obj/structure/bed/chair/rounded
+	name = "rounded chair"
+	desc = "It's a rounded chair. It looks comfy."
+	icon_state = "roundedchair"
+	base_icon = "roundedchair"
+
+/obj/structure/bed/chair/rounded/brown/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, MAT_LEATHER)
+
+/obj/structure/bed/chair/rounded/red/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "carpet")
+
+/obj/structure/bed/chair/rounded/teal/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "teal")
+
+/obj/structure/bed/chair/rounded/black/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "black")
+
+/obj/structure/bed/chair/rounded/green/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "green")
+
+/obj/structure/bed/chair/rounded/purple/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "purple")
+
+/obj/structure/bed/chair/rounded/blue/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "blue")
+
+/obj/structure/bed/chair/rounded/beige/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "beige")
+
+/obj/structure/bed/chair/rounded/lime/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "lime")
+
+/obj/structure/bed/chair/rounded/yellow/Initialize(var/ml,var/newmaterial)
+	. = ..(ml, MAT_STEEL, "yellow")
+
 /obj/structure/bed/chair/office
 	anchored = 0
 	buckle_movable = 1
@@ -139,7 +175,7 @@
 /obj/structure/bed/chair/office/update_icon()
 	return
 
-/obj/structure/bed/chair/office/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/office/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
@@ -239,7 +275,7 @@
 	name = "mahogany chair"
 	color = WOOD_COLOR_CHOCOLATE
 
-/obj/structure/bed/chair/wood/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/chair/wood/attackby(obj/item/W as obj, mob/user as mob)
 	if(istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	..()
@@ -277,7 +313,7 @@
 	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = ABOVE_MOB_LAYER
 	I.plane = MOB_PLANE
-	overlays |= I
+	add_overlay(I)
 
 /obj/structure/bed/chair/modern_bar_stool
 	name = "bar stool"

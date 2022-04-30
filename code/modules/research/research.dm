@@ -219,7 +219,7 @@ research holder datum.
 	id = TECH_PRECURSOR
 	level = 0
 
-/obj/item/weapon/disk/tech_disk
+/obj/item/disk/tech_disk
 	name = "technology disk"
 	desc = "A disk for storing technology data for further research."
 	icon = 'icons/obj/cloning.dmi'
@@ -230,11 +230,11 @@ research holder datum.
 	matter = list(MAT_STEEL = 30, "glass" = 10)
 	var/datum/tech/stored
 
-/obj/item/weapon/disk/tech_disk/Initialize()
+/obj/item/disk/tech_disk/Initialize()
 	randpixel_xy()
 	. = ..()
 
-/obj/item/weapon/disk/design_disk
+/obj/item/disk/design_disk
 	name = "component design disk"
 	desc = "A disk for storing device design data for construction in lathes."
 	icon = 'icons/obj/cloning.dmi'
@@ -245,6 +245,6 @@ research holder datum.
 	matter = list(MAT_STEEL = 30, "glass" = 10)
 	var/datum/design/blueprint
 
-/obj/item/weapon/disk/design_disk/Initialize()
+/obj/item/disk/design_disk/Initialize()
 	randpixel_xy()
 	. = ..()

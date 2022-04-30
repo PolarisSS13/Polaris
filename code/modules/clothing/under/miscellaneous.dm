@@ -1216,6 +1216,7 @@ Uniforms and such
 	desc = "A waistline this high is just made for ripping bodices, swashing buckles, or - just occasionally - sucking blood."
 	icon_state = "gayvampire"
 	worn_state = "gayvampire"
+	index = 1
 
 /obj/item/clothing/under/rank/psych/turtleneck/sweater
 	desc = "A warm looking sweater and a pair of dark blue slacks."

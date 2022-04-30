@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(air)
 	// This is used to tell CI WHERE the edges are.
 	var/list/startup_active_edge_log = list()
 
-/datum/controller/subsystem/air/PreInit()
+/datum/controller/subsystem/air/OnNew()
 	air_master = src
 
 /datum/controller/subsystem/air/Initialize(timeofday)
@@ -95,7 +95,6 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		log_debug("Active Edges on ZAS Startup\n" + edge_log.Join("\n"))
 		startup_active_edge_log = edge_log.Copy()
 
-	..()
 
 /datum/controller/subsystem/air/fire(resumed, no_mc_tick)
 	var/timer
@@ -156,7 +155,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		T.post_update_air_properties()
 		T.needs_air_update = 0
 		#ifdef ZASDBG
-		T.overlays -= mark
+		T.cut_overlay(mark)
 		#endif
 		if(MC_TICK_CHECK)
 			return
@@ -171,7 +170,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		T.post_update_air_properties()
 		T.needs_air_update = 0
 		#ifdef ZASDBG
-		T.overlays -= mark
+		T.cut_overlay(mark)
 		#endif
 		if(MC_TICK_CHECK)
 			return

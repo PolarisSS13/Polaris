@@ -1,10 +1,10 @@
-/obj/item/weapon/pack/cardemon
+/obj/item/pack/cardemon
 	name = "cardemon booster pack"
 	desc = "Finally! A children's card game in space!"
 	icon_state = "card_pack_cardemon"
 	parentdeck = "cardemon"
 
-/obj/item/weapon/pack/cardemon/Initialize()
+/obj/item/pack/cardemon/Initialize()
 	. = ..()
 	var/datum/playingcard/P
 	var/i

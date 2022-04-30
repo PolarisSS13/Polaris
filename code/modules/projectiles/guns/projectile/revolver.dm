@@ -1,4 +1,4 @@
-/obj/item/weapon/gun/projectile/revolver
+/obj/item/gun/projectile/revolver
 	name = "revolver"
 	desc = "The MarsTech HE Colt is a choice revolver for when you absolutely, positively need to put a hole in the other guy. Uses .357 rounds."
 	description_fluff = "MarsTech first made their name in the Second Cold War as the 'Lunar Arms Company' providing home-grown arms to the Selene Federation, \
@@ -15,7 +15,7 @@
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 	var/chamber_offset = 0 //how many empty chambers in the cylinder until you hit a round
 
-/obj/item/weapon/gun/projectile/revolver/verb/spin_cylinder()
+/obj/item/gun/projectile/revolver/verb/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
 	set category = "Object"
@@ -28,23 +28,23 @@
 	if(rand(1,max_shells) > loaded.len)
 		chamber_offset = rand(0,max_shells - loaded.len)
 
-/obj/item/weapon/gun/projectile/revolver/consume_next_projectile()
+/obj/item/gun/projectile/revolver/consume_next_projectile()
 	if(chamber_offset)
 		chamber_offset--
 		return
 	return ..()
 
-/obj/item/weapon/gun/projectile/revolver/load_ammo(var/obj/item/A, mob/user)
+/obj/item/gun/projectile/revolver/load_ammo(var/obj/item/A, mob/user)
 	chamber_offset = 0
 	return ..()
 
-/obj/item/weapon/gun/projectile/revolver/mateba
+/obj/item/gun/projectile/revolver/mateba
 	name = "mateba"
 	desc = "This unique looking handgun is named after an Italian company famous for the original manufacture of these revolvers, and pasta kneading machines. Uses .357 rounds." // Yes I'm serious. -Spades
 	icon_state = "mateba"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 
-/obj/item/weapon/gun/projectile/revolver/detective
+/obj/item/gun/projectile/revolver/detective
 	name = "revolver"
 	desc = "A standard MarsTech R1 snubnose revolver, popular among some law enforcement agencies for its simple, long-lasting construction. Uses .38-Special rounds."
 	description_fluff = "The leading civilian-sector high-quality small arms brand of Hephaestus Industries, MarsTech has been the provider of choice for law enforcement and security forces for over 300 years."
@@ -53,7 +53,7 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	ammo_type = /obj/item/ammo_casing/a38
 
-/obj/item/weapon/gun/projectile/revolver/detective/verb/rename_gun()
+/obj/item/gun/projectile/revolver/detective/verb/rename_gun()
 	set name = "Name Gun"
 	set category = "Object"
 	set desc = "Click to rename your gun. If you're the detective."
@@ -71,7 +71,7 @@
 		to_chat(M, "You name the gun [input]. Say hello to your new friend.")
 		return 1
 
-/obj/item/weapon/gun/projectile/revolver/detective45
+/obj/item/gun/projectile/revolver/detective45
 	name = ".45 revolver"
 	desc = "A basic revolver, popular among some law enforcement agencies for its simple, long-lasting construction, modified for .45 rounds and a seven-shot cylinder."
 	icon_state = "detective"
@@ -81,7 +81,7 @@
 	max_shells = 7
 
 
-/obj/item/weapon/gun/projectile/revolver/detective45/verb/rename_gun()
+/obj/item/gun/projectile/revolver/detective45/verb/rename_gun()
 	set name = "Name Gun"
 	set category = "Object"
 	set desc = "Rename your gun. If you're the Detective."
@@ -100,7 +100,7 @@
 		to_chat(M, "You name the gun [input]. Say hello to your new friend.")
 		return 1
 
-/obj/item/weapon/gun/projectile/revolver/detective45/verb/reskin_gun()
+/obj/item/gun/projectile/revolver/detective45/verb/reskin_gun()
 	set name = "Resprite gun"
 	set category = "Object"
 	set desc = "Click to choose a sprite for your gun."
@@ -124,7 +124,7 @@
 
 
 // Blade Runner pistol.
-/obj/item/weapon/gun/projectile/revolver/deckard
+/obj/item/gun/projectile/revolver/deckard
 	name = "\improper Deckard .38"
 	desc = "A custom-built revolver, based off the semi-popular Detective Special model. Uses .38-Special rounds."
 	icon_state = "deckard-empty"
@@ -132,23 +132,23 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	ammo_type = /obj/item/ammo_casing/a38
 
-/obj/item/weapon/gun/projectile/revolver/deckard/emp
+/obj/item/gun/projectile/revolver/deckard/emp
 	ammo_type = /obj/item/ammo_casing/a38/emp
 
 
-/obj/item/weapon/gun/projectile/revolver/deckard/update_icon()
+/obj/item/gun/projectile/revolver/deckard/update_icon()
 	..()
 	if(loaded.len)
 		icon_state = "deckard-loaded"
 	else
 		icon_state = "deckard-empty"
 
-/obj/item/weapon/gun/projectile/revolver/deckard/load_ammo(var/obj/item/A, mob/user)
+/obj/item/gun/projectile/revolver/deckard/load_ammo(var/obj/item/A, mob/user)
 	if(istype(A, /obj/item/ammo_magazine))
 		flick("deckard-reload",src)
 	..()
 
-/obj/item/weapon/gun/projectile/revolver/capgun
+/obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
 	icon_state = "revolver"
@@ -160,7 +160,7 @@
 	ammo_type = /obj/item/ammo_casing/cap
 	projectile_type = /obj/item/projectile/bullet/pistol/strong
 
-/obj/item/weapon/gun/projectile/revolver/judge
+/obj/item/gun/projectile/revolver/judge
 	name = "\"The Judge\""
 	desc = "A revolving hand-shotgun by Jindal Arms that packs the power of a 12 guage in the palm of your hand (if you don't break your wrist). Uses 12g rounds."
 	description_fluff = "While wholly owned by Hephaestus Industries, the Jindal Arms brand does not appear prominently in most company catalogues (Perhaps owing to its less than prestigious image), \
@@ -175,7 +175,7 @@
 	projectile_type = /obj/item/projectile/bullet/shotgun
 	// ToDo: Remove accuracy debuf in exchange for slightly injuring your hand every time you fire it.
 
-/obj/item/weapon/gun/projectile/revolver/lemat
+/obj/item/gun/projectile/revolver/lemat
 	name = "Mako Revolver"
 	desc = "The Bishamonten P100 Mako is a 9 shot revolver with a secondary firing barrel loading shotgun shells. For when you really need something dead. A rare yet deadly collector's item. Uses .38-Special and 12g rounds depending on the barrel."
 	description_fluff = "The Bishamonten Company operated from roughly 2150-2280 - the height of the first extrasolar colonisation boom - before filing for bankruptcy and selling off its assets to various companies that would go on to become today’s TSCs. \
@@ -198,12 +198,12 @@
 	var/list/tertiary_loaded = list()
 
 
-/obj/item/weapon/gun/projectile/revolver/lemat/Initialize()
+/obj/item/gun/projectile/revolver/lemat/Initialize()
 	for(var/i in 1 to secondary_max_shells)
 		secondary_loaded += new secondary_ammo_type(src)
 	. = ..()
 
-/obj/item/weapon/gun/projectile/revolver/lemat/verb/swap_firingmode()
+/obj/item/gun/projectile/revolver/lemat/verb/swap_firingmode()
 	set name = "Swap Firing Mode"
 	set category = "Object"
 	set desc = "Click to swap from one method of firing to another."
@@ -245,7 +245,7 @@
 
 		flipped_firing = 0
 
-/obj/item/weapon/gun/projectile/revolver/lemat/spin_cylinder()
+/obj/item/gun/projectile/revolver/lemat/spin_cylinder()
 	set name = "Spin cylinder"
 	set desc = "Fun when you're bored out of your skull."
 	set category = "Object"
@@ -259,7 +259,7 @@
 		if(rand(1,max_shells) > loaded.len)
 			chamber_offset = rand(0,max_shells - loaded.len)
 
-/obj/item/weapon/gun/projectile/revolver/lemat/examine(mob/user)
+/obj/item/gun/projectile/revolver/lemat/examine(mob/user)
 	. = ..()
 	if(secondary_loaded)
 		var/to_print
@@ -271,7 +271,7 @@
 
 
 //Ported from Bay
-/obj/item/weapon/gun/projectile/revolver/webley
+/obj/item/gun/projectile/revolver/webley
 	name = "patrol revolver"
 	desc = "A rugged top break revolver commonly issued to members of the SifGuard. Uses .44 magnum rounds."
 	description_fluff = "The Heberg-Hammarstrom Althing is a simple, head-wearing revolver made with an anti-corrosive alloy. \
@@ -284,7 +284,7 @@
 	max_shells = 6
 	ammo_type = /obj/item/ammo_casing/a44
 
-/obj/item/weapon/gun/projectile/revolver/webley/auto
+/obj/item/gun/projectile/revolver/webley/auto
 	name = "autorevolver"
 	icon_state = "mosley"
 	desc = "A shiny Fosbery Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. Uses .44 magnum rounds."

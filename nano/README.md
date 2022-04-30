@@ -101,7 +101,7 @@ The `Topic()` interface is just the same as with more conventional,
 stringbuilder-based UIs, and this needs little explanation.
 
 ```
-    /obj/item/weapon/tank/Topic(href, href_list)
+    /obj/item/tank/Topic(href, href_list)
         if(..())
             return 1
 

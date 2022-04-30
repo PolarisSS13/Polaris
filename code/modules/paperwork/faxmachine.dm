@@ -1,8 +1,8 @@
-var/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
-var/list/alldepartments = list()
+var/global/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
+var/global/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
+var/global/list/alldepartments = list()
 
-var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
+var/global/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 /obj/machinery/photocopier/faxmachine
 	name = "fax machine"
@@ -15,9 +15,9 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 30
 	active_power_usage = 200
-	circuit = /obj/item/weapon/circuitboard/fax
+	circuit = /obj/item/circuitboard/fax
 
-	var/obj/item/weapon/card/id/scan = null // identification
+	var/obj/item/card/id/scan = null // identification
 	var/authenticated = 0
 	var/sendcooldown = 0 // to avoid spamming fax messages
 	var/department = "Unknown" // our department
@@ -99,7 +99,7 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 				scan = null
 		else
 			var/obj/item/I = usr.get_active_hand()
-			if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+			if (istype(I, /obj/item/card/id) && usr.unEquip(I))
 				I.loc = src
 				scan = I
 		authenticated = 0
@@ -162,11 +162,11 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 	// give the sprite some time to flick
 	sleep(20)
 
-	if (istype(incoming, /obj/item/weapon/paper))
+	if (istype(incoming, /obj/item/paper))
 		copy(incoming)
-	else if (istype(incoming, /obj/item/weapon/photo))
+	else if (istype(incoming, /obj/item/photo))
 		photocopy(incoming)
-	else if (istype(incoming, /obj/item/weapon/paper_bundle))
+	else if (istype(incoming, /obj/item/paper_bundle))
 		bundlecopy(incoming)
 	else
 		return 0
@@ -182,11 +182,11 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 	//received copies should not use toner since it's being used by admins only.
 	var/obj/item/rcvdcopy
-	if (istype(copyitem, /obj/item/weapon/paper))
+	if (istype(copyitem, /obj/item/paper))
 		rcvdcopy = copy(copyitem, 0)
-	else if (istype(copyitem, /obj/item/weapon/photo))
+	else if (istype(copyitem, /obj/item/photo))
 		rcvdcopy = photocopy(copyitem, 0)
-	else if (istype(copyitem, /obj/item/weapon/paper_bundle))
+	else if (istype(copyitem, /obj/item/paper_bundle))
 		rcvdcopy = bundlecopy(copyitem, 0)
 	else
 		visible_message("[src] beeps, \"Error transmitting message.\"")
@@ -213,14 +213,14 @@ var/list/adminfaxes = list()	//cache for faxes that have been sent to admins
 
 // Turns objects into just text.
 /obj/machinery/photocopier/faxmachine/proc/make_summary(obj/item/sent)
-	if(istype(sent, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/P = sent
+	if(istype(sent, /obj/item/paper))
+		var/obj/item/paper/P = sent
 		return P.info
-	if(istype(sent, /obj/item/weapon/paper_bundle))
+	if(istype(sent, /obj/item/paper_bundle))
 		. = ""
-		var/obj/item/weapon/paper_bundle/B = sent
+		var/obj/item/paper_bundle/B = sent
 		for(var/i in 1 to B.pages.len)
-			var/obj/item/weapon/paper/P = B.pages[i]
+			var/obj/item/paper/P = B.pages[i]
 			if(istype(P)) // Photos can show up here too.
 				if(.) // Space out different pages.
 					. += "<br>"

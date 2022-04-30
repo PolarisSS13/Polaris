@@ -1,4 +1,4 @@
-var/list/blob_cores = list()
+var/global/list/blob_cores = list()
 
 /obj/structure/blob/core
 	name = "blob core"
@@ -111,7 +111,7 @@ var/list/blob_cores = list()
 
 /obj/structure/blob/core/Destroy()
 	var/turf/T = get_turf(src)
-	new /obj/item/weapon/blobcore_chunk(T, overmind.blob_type)
+	new /obj/item/blobcore_chunk(T, overmind.blob_type)
 
 	blob_cores -= src
 	if(overmind)
@@ -122,14 +122,14 @@ var/list/blob_cores = list()
 	return ..()
 
 /obj/structure/blob/core/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	color = null
 	var/mutable_appearance/blob_overlay = mutable_appearance('icons/mob/blob.dmi', "blob")
 	if(overmind)
 		blob_overlay.color = overmind.blob_type.color
 		name = "[overmind.blob_type.name] [base_name]"
-	overlays += blob_overlay
-	overlays += mutable_appearance('icons/mob/blob.dmi', "blob_core_overlay")
+	add_overlay(blob_overlay)
+	add_overlay("blob_core_overlay")
 
 /obj/structure/blob/core/process()
 	set waitfor = FALSE

@@ -13,27 +13,27 @@
 
 /datum/gear/matchbook
 	display_name = "matchbook"
-	path = /obj/item/weapon/storage/box/matches
+	path = /obj/item/storage/box/matches
 
 /datum/gear/lighter
 	display_name = "cheap lighter"
-	path = /obj/item/weapon/flame/lighter
+	path = /obj/item/flame/lighter
 
 /datum/gear/lighter/zippo
 	display_name = "Zippo selection"
-	path = /obj/item/weapon/flame/lighter/zippo
+	path = /obj/item/flame/lighter/zippo
 
 /datum/gear/lighter/zippo/New()
 	..()
 	var/list/zippos = list()
-	for(var/zippo in typesof(/obj/item/weapon/flame/lighter/zippo))
-		var/obj/item/weapon/flame/lighter/zippo/zippo_type = zippo
+	for(var/zippo in typesof(/obj/item/flame/lighter/zippo))
+		var/obj/item/flame/lighter/zippo/zippo_type = zippo
 		zippos[initial(zippo_type.name)] = zippo_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(zippos))
 
 /datum/gear/ashtray
 	display_name = "ashtray, plastic"
-	path = /obj/item/weapon/material/ashtray/plastic
+	path = /obj/item/material/ashtray/plastic
 
 /datum/gear/cigar
 	display_name = "cigar"
@@ -41,13 +41,13 @@
 
 /datum/gear/cigarettes
 	display_name = "cigarette selection"
-	path = /obj/item/weapon/storage/fancy/cigarettes
+	path = /obj/item/storage/fancy/cigarettes
 
 /datum/gear/cigarettes/New()
 	..()
 	var/list/cigarettes = list()
-	for(var/cigarette in (typesof(/obj/item/weapon/storage/fancy/cigarettes) - typesof(/obj/item/weapon/storage/fancy/cigarettes/killthroat)))
-		var/obj/item/weapon/storage/fancy/cigarettes/cigarette_brand = cigarette
+	for(var/cigarette in (typesof(/obj/item/storage/fancy/cigarettes) - typesof(/obj/item/storage/fancy/cigarettes/killthroat)))
+		var/obj/item/storage/fancy/cigarettes/cigarette_brand = cigarette
 		cigarettes[initial(cigarette_brand.name)] = cigarette_brand
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cigarettes))
 
