@@ -3059,6 +3059,7 @@
 #include "code\modules\surgery\robotics.dm"
 #include "code\modules\surgery\surgery.dm"
 #include "code\modules\surgery\~defines.dm"
+#include "code\modules\surgery\goosemed\wounds.dm"
 #include "code\modules\tables\bench.dm"
 #include "code\modules\tables\flipping.dm"
 #include "code\modules\tables\interactions.dm"

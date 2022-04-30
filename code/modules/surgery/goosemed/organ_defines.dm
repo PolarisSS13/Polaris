@@ -7,6 +7,7 @@
 
 	// The amount of blood requested from the body's bloodstream per Life() tick.
 	var/blood_per_tick = 20
+	var/max_health = 40
 
 /obj/item/organ/Initialize()
 	. = ..()
