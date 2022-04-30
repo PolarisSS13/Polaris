@@ -1,6 +1,7 @@
 SUBSYSTEM_DEF(ai)
 	name = "AI"
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
+	flags = SS_NO_INIT | (UNIT_TEST ? SS_NO_FIRE : 0) // Prevent AI running during CI to avoid some irrelevant runtimes
 	priority = FIRE_PRIORITY_AI
 	wait = 2 SECONDS
 
@@ -50,11 +51,3 @@ if (!(DATUM.process_flags & AI_PROCESSING)) {\
 #define STOP_AIPROCESSING(DATUM) \
 DATUM.process_flags &= ~AI_PROCESSING; \
 SSai.queue -= DATUM;
-
-
-// Prevent AI running during CI to avoid some irrelevant runtimes
-#ifdef UNIT_TEST
-/datum/controller/subsystem/ai/flags = SS_NO_INIT | SS_NO_FIRE
-#else
-/datum/controller/subsystem/ai/flags = SS_NO_INIT
-#endif
