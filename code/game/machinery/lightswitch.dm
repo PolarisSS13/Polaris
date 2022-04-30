@@ -41,13 +41,15 @@
 		overlay = image(icon, "light1-overlay")
 		overlay.plane = PLANE_LIGHTING_ABOVE
 
-	cut_overlays()	if(stat & NOPOWER)
+	cut_overlays()
+	if(stat & NOPOWER)
 		icon_state = "light-p"
 		set_light(0)
 	else
 		icon_state = "light[on]"
 		overlay.icon_state = "light[on]-overlay"
-		add_overlay(overlay)		set_light(2, 0.1, on ? "#82FF4C" : "#F86060")
+		add_overlay(overlay)
+		set_light(2, 0.1, on ? "#82FF4C" : "#F86060")
 		. = list()
 		. += emissive_appearance(icon, "light[on]-overlay")
 
@@ -65,7 +67,7 @@
 
 	area.lightswitch = on
 	area.updateicon()
-	playsound(src, 'sound/machines/button.ogg', 100, 1, 0) 
+	playsound(src, 'sound/machines/button.ogg', 100, 1, 0)
 
 	for(var/obj/machinery/light_switch/L in area)
 		L.on = on

@@ -291,4 +291,8 @@
 
 /obj/structure/flora/tree/sif/update_icon()
 	cut_overlays()
-	add_overlay(glow)
+	var/bulbs = (5 - light_shift)
+	if(bulbs > 0)
+		set_light(bulbs, 1, "#33ccff")	// 5 variants, missing bulbs. 5th has no bulbs, so no glow.
+		add_overlay(mutable_appearance(icon, "[base_state][bulbs]_glow"))
+		add_overlay(emissive_appearance(icon, "[base_state][bulbs]_glow"))

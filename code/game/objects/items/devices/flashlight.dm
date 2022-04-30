@@ -49,10 +49,12 @@
 			update_brightness()
 			return PROCESS_KILL
 
-/obj/item/flashlight/proc/update_brightness()	if(on)
+/obj/item/flashlight/proc/update_brightness()
+	if(on)
 		icon_state = "[initial(icon_state)]-on"
 	else
 		icon_state = initial(icon_state)
+
 	set_light_on(on)
 	if(light_system == STATIC_LIGHT)
 		update_light()

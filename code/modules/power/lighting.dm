@@ -881,8 +881,9 @@ var/global/list/light_type_cache = list()
 	matter = list("glass" = 100)
 	brightness_range = 6
 	brightness_power = 1
+	w_class = ITEMSIZE_SMALL
 
-/obj/item/light/tube/large	w_class = ITEMSIZE_SMALL
+/obj/item/light/tube/large
 	name = "large light tube"
 	brightness_range = 8
 	brightness_power = 2
@@ -904,11 +905,12 @@ var/global/list/light_type_cache = list()
 	nightshift_range = 4
 	nightshift_power = 0.45
 
-/obj/item/weapon/light/throw_impact(atom/hit_atom)	..()
+/obj/item/light/throw_impact(atom/hit_atom)
+	..()
 	shatter()
 
 // For 'floor lamps' in outdoor use and such
-/obj/item/weapon/light/bulb/large
+/obj/item/light/bulb/large
 	name = "large light bulb"
 	brightness_range = 6
 	brightness_power = 1
