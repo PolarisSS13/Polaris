@@ -28,7 +28,7 @@ var/global/list/alien_whitelist = list()
 		return
 
 	var/list/whitelist_lines = splittext(text, "\n")
-	for(line in whitelist_lines)
+	for(var/line in whitelist_lines)
 		var/list/entry = splittext(line, " - ")
 		LAZYADD(alien_whitelist[entry[1]], entry[2])
 
