@@ -44,7 +44,7 @@ SUBSYSTEM_DEF(overlays)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(count)
+			queue.Cut(1, count)
 			return
 	queue.Cut()
 
