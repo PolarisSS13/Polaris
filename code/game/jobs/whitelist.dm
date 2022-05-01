@@ -14,7 +14,7 @@ var/global/list/whitelist = list()
 		return FALSE
 	return ("[M.ckey]" in whitelist)
 
-var/global/list/alien_whitelist = list()
+var/global/alien_whitelist = null
 
 /hook/startup/proc/loadAlienWhitelist()
 	if(config.usealienwhitelist)
@@ -22,15 +22,10 @@ var/global/list/alien_whitelist = list()
 	return TRUE
 
 /proc/load_alienwhitelist()
-	var/text = file2text("config/alienwhitelist.txt")
+	var/alien_whitelist = file2text("config/alienwhitelist.txt")
 	if (!text)
 		log_misc("Failed to load config/alienwhitelist.txt")
 		return
-
-	var/list/whitelist_lines = splittext(text, "\n")
-	for(var/line in whitelist_lines)
-		var/list/entry = splittext(line, " - ")
-		LAZYADD(alien_whitelist[entry[1]], entry[2])
 
 /proc/is_alien_whitelisted(mob/M, var/datum/species/species)
 	//They are admin or the whitelist isn't in use
@@ -46,11 +41,7 @@ var/global/list/alien_whitelist = list()
 		return TRUE
 
 	//If we have a loaded file, search it
-	if(LAZYLEN(alien_whitelist))
-		if(species.name in alien_whitelist[M.ckey])
-			return TRUE
-		if("All" in alien_whitelist[M.ckey])
-			return TRUE
+	return findtext(alien_whitelist, regex("[M.ckey] - [species.name]", "g"))
 
 /proc/is_lang_whitelisted(mob/M, var/datum/language/language)
 	//They are admin or the whitelist isn't in use
@@ -66,11 +57,7 @@ var/global/list/alien_whitelist = list()
 		return TRUE
 
 	//If we have a loaded file, search it
-	if(LAZYLEN(alien_whitelist))
-		if(language.name in alien_whitelist[M.ckey])
-			return TRUE
-		if("All" in alien_whitelist[M.ckey])
-			return TRUE
+	return findtext(alien_whitelist, regex("[M.ckey] - [language.name]", "g"))
 
 /proc/whitelist_overrides(mob/M)
 	return !config.usealienwhitelist || check_rights(R_ADMIN|R_EVENT, 0, M)
