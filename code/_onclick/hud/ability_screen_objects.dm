@@ -213,7 +213,7 @@
 /obj/screen/ability/update_icon()
 	cut_overlays()
 	icon_state = "[background_base_state]_spell_base"
-	cut_overlay(ability_icon_state)
+	add_overlay(ability_icon_state)
 
 /obj/screen/ability/Click()
 	if(!usr)
