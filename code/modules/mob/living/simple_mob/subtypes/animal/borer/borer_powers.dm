@@ -169,7 +169,7 @@
 
 	H.verbs |= /mob/living/carbon/human/proc/psychic_whisper
 	H.verbs |= /mob/living/carbon/human/proc/tackle
-	H.verbs |= /mob/living/carbon/proc/spawn_larvae
+	H.verbs |= /mob/living/carbon/human/proc/spawn_larvae
 
 	if(H.client)
 		H.ghostize(0)
@@ -330,9 +330,9 @@
 
 			controlling = 1
 
-			host.verbs += /mob/living/carbon/proc/release_control
-			host.verbs += /mob/living/carbon/proc/punish_host
-			host.verbs += /mob/living/carbon/proc/spawn_larvae
+			host.verbs += /mob/living/carbon/human/proc/release_control
+			host.verbs += /mob/living/carbon/human/proc/punish_host
+			host.verbs += /mob/living/carbon/human/proc/spawn_larvae
 
 			return
 

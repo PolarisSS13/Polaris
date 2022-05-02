@@ -80,7 +80,7 @@ GLOBAL_LIST_INIT(plant_mob_products, list(
 	/mob/living/simple_mob/animal/passive/mouse = 1,
 	/mob/living/simple_mob/animal/space/carp = 1,
 	/mob/living/carbon/human/monkey = 1,
-	/mob/living/carbon/alien/diona = 1
+	/mob/living/simple_mob/diona_nymph = 1
 	))
 
 GLOBAL_LIST_INIT(plant_item_products, list(

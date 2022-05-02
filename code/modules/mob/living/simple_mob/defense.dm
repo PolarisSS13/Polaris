@@ -190,6 +190,7 @@
 	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, loc)
 	s.start()
+	return 0
 
 /mob/living/simple_mob/get_shock_protection()
 	. = shock_resist
