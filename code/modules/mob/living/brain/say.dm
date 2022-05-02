@@ -1,5 +1,5 @@
 //TODO: Convert this over for languages.
-/mob/living/carbon/brain/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
+/mob/living/brain/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 	if(silent)
 		return
 
@@ -16,7 +16,7 @@
 
 		..()
 
-/mob/living/carbon/brain/handle_message_mode(message_mode, message, verb, speaking, used_radios)
+/mob/living/brain/handle_message_mode(message_mode, message, verb, speaking, used_radios)
 	..()
 	if(message_mode)
 		var/obj/item/mmi/R = container

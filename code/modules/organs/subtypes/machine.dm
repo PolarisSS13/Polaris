@@ -48,7 +48,7 @@
 
 /obj/item/organ/internal/mmi_holder/Initialize()
 	. = ..()
-	if(ishuman(loc) && !istype(loc, /mob/living/carbon/human/dummy/mannequin))
+	if(ishuman(loc) && !istype(loc, /mob/living/human/dummy/mannequin))
 		stored_mmi = new brain_type(src)
 		return INITIALIZE_HINT_LATELOAD
 

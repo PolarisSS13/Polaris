@@ -121,8 +121,8 @@ stringbuilder-based UIs, and this needs little explanation.
                 distribute_pressure = text2num(href_list["dist_p"])
             distribute_pressure = min(max(round(distribute_pressure), TANK_MIN_RELEASE_PRESSURE), TANK_MAX_RELEASE_PRESSURE)
         if(href_list["stat"])
-            if(istype(loc,/mob/living/carbon))
-                var/mob/living/carbon/location = loc
+            if(istype(loc,/mob/living/human))
+                var/mob/living/human/location = loc
                 if(location.internal == src)
                     location.internal = null
                     location.internals.icon_state = "internal0"

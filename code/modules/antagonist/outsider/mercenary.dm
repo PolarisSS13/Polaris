@@ -30,7 +30,7 @@ var/datum/antagonist/mercenary/mercs
 	global_objectives |= new /datum/objective/nuclear
 	return 1
 
-/datum/antagonist/mercenary/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/mercenary/equip(var/mob/living/human/player)
 
 	if(!..())
 		return 0

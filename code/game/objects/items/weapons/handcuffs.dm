@@ -27,7 +27,7 @@
 
 	return ..()
 
-/obj/item/handcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
+/obj/item/handcuffs/attack(var/mob/living/human/C, var/mob/living/user)
 
 	if(!user.IsAdvancedToolUser())
 		return
@@ -60,10 +60,10 @@
 				return 1
 	return 0
 
-/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/carbon/target, var/mob/user)
+/obj/item/handcuffs/proc/place_handcuffs(var/mob/living/human/target, var/mob/user)
 	playsound(src, cuff_sound, 30, 1, -2)
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(!istype(H))
 		return 0
 
@@ -113,11 +113,11 @@
 		user.stop_pulling()
 
 var/last_chew = 0
-/mob/living/carbon/human/RestrainedClickOn(var/atom/A)
+/mob/living/human/RestrainedClickOn(var/atom/A)
 	if (A != src) return ..()
 	if (last_chew + 26 > world.time) return
 
-	var/mob/living/carbon/human/H = A
+	var/mob/living/human/H = A
 	if (!H.handcuffed) return
 	if (H.a_intent != I_HURT) return
 	if (H.zone_sel.selecting != O_MOUTH) return
@@ -213,7 +213,7 @@ var/last_chew = 0
 
 	return ..()
 
-/obj/item/handcuffs/legcuffs/attack(var/mob/living/carbon/C, var/mob/living/user)
+/obj/item/handcuffs/legcuffs/attack(var/mob/living/human/C, var/mob/living/user)
 	if(!user.IsAdvancedToolUser())
 		return
 
@@ -233,10 +233,10 @@ var/last_chew = 0
 		else
 			to_chat(user, "<span class='danger'>You need to have a firm grip on [C] before you can put \the [src] on!</span>")
 
-/obj/item/handcuffs/legcuffs/proc/place_legcuffs(var/mob/living/carbon/target, var/mob/user)
+/obj/item/handcuffs/legcuffs/proc/place_legcuffs(var/mob/living/human/target, var/mob/user)
 	playsound(src, cuff_sound, 30, 1, -2)
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(!istype(H))
 		return 0
 
@@ -304,10 +304,10 @@ var/last_chew = 0
 	visible_message("<span class='notice'>\The [src] falls apart!</span>")
 	qdel(src)
 
-/obj/item/handcuffs/legcuffs/bola/place_legcuffs(var/mob/living/carbon/target, var/mob/user)
+/obj/item/handcuffs/legcuffs/bola/place_legcuffs(var/mob/living/human/target, var/mob/user)
 	playsound(src, cuff_sound, 30, 1, -2)
 
-	var/mob/living/carbon/human/H = target
+	var/mob/living/human/H = target
 	if(!istype(H))
 		src.dropped()
 		return 0

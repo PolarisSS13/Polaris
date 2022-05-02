@@ -42,7 +42,7 @@
 			A.attack_hand(user)
 		return
 	if (ishuman(user) && src.loc == user)
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(src != H.l_store && src != H.r_store && src != H.s_store)
 			return
 	return ..()

@@ -386,7 +386,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 	else
 		data["panel"] = 0
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 	var/obj/item/card/id/C
 
 	data["guestNotice"] = "No valid ID card detected. Wear your ID, or present cash.";
@@ -473,7 +473,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 
 			vend_ready = FALSE // From this point onwards, vendor is locked to performing this transaction only, until it is resolved.
 
-			var/mob/living/carbon/human/H = usr
+			var/mob/living/human/H = usr
 			var/obj/item/card/id/C = H.GetIdCard()
 
 			if(!vendor_account || vendor_account.suspended)

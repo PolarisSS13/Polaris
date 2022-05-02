@@ -9,8 +9,8 @@
 	density = 1
 	anchored = 1
 	circuit = /obj/item/circuitboard/vr_sleeper
-	var/mob/living/carbon/human/occupant = null
-	var/mob/living/carbon/human/avatar = null
+	var/mob/living/human/occupant = null
+	var/mob/living/human/avatar = null
 	var/datum/mind/vr_mind = null
 	var/datum/effect_system/smoke_spread/bad/smoke
 

@@ -28,7 +28,7 @@ var/datum/antagonist/trader/traders
 	can_speak_aooc = FALSE // They're not real antags.
 
 /datum/antagonist/trader/create_default(var/mob/source)
-	var/mob/living/carbon/human/M = ..()
+	var/mob/living/human/M = ..()
 	if(istype(M)) M.age = rand(25,45)
 
 /datum/antagonist/trader/New()
@@ -41,7 +41,7 @@ var/datum/antagonist/trader/traders
 	to_chat(player.current, "The Beruang is an independent cargo hauler, unless you decide otherwise. You're on your way to [station_name()].")
 	to_chat(player.current, "You may want to discuss a collective story with the rest of your crew. More members may be joining, so don't move out straight away!")
 
-/datum/antagonist/trader/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/trader/equip(var/mob/living/human/player)
 	player.equip_to_slot_or_del(new /obj/item/clothing/under/rank/cargotech(src), slot_w_uniform)
 	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/black(src), slot_shoes)
 	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/brown(src), slot_gloves)

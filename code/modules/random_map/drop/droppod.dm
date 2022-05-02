@@ -190,7 +190,7 @@
 		spawned_mob.tag = "awaiting drop"
 
 		// Equip them, if they are human and it is desirable.
-		if(istype(spawned_mob, /mob/living/carbon/human))
+		if(istype(spawned_mob, /mob/living/human))
 			var/antag_type = input("Select an equipment template to use or cancel for nude.", null) as null|anything in SSantags.antag_datums
 			if(antag_type)
 				var/datum/antagonist/A = SSantags.antag_datums[antag_type]

@@ -23,20 +23,20 @@
 	. = ..()
 	QDEL_IN(src, time_to_live)
 
-/obj/effect/vfx/smoke/Crossed(mob/living/carbon/M as mob )
+/obj/effect/vfx/smoke/Crossed(mob/living/human/M as mob )
 	if(M.is_incorporeal())
 		return
 	..()
 	if(istype(M))
 		affect(M)
 
-/obj/effect/vfx/smoke/proc/affect(var/mob/living/carbon/M)
+/obj/effect/vfx/smoke/proc/affect(var/mob/living/human/M)
 	if (!istype(M))
 		return 0
 	if(M.wear_mask && (M.wear_mask.item_flags & AIRTIGHT))
 		return 0
-	if(istype(M,/mob/living/carbon/human))
-		var/mob/living/carbon/human/H = M
+	if(istype(M,/mob/living/human))
+		var/mob/living/human/H = M
 		if(H.head && (H.head.item_flags & AIRTIGHT))
 			return 0
 	return 1

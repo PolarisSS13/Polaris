@@ -335,7 +335,7 @@
 						// TODO - tossing?
 						//M.visible_message("<span class='warning'>[M.name] is tossed around by the sudden acceleration!</span>")
 						//M.throw_at_random(FALSE, 4, 1)
-						if(istype(M, /mob/living/carbon))
+						if(istype(M, /mob/living/human))
 							M.Weaken(3)
 		// We only need to rebuild powernets for our cables.  No need to check machines because they are on top of cables.
 		for(var/obj/structure/cable/C in A)

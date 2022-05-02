@@ -61,7 +61,7 @@
 //	var/balloonPath = /obj/item/latexballon
 
 //TODO: Make inflating gloves a thing
-/*/obj/item/clothing/gloves/sterile/proc/Inflate(/mob/living/carbon/human/user)
+/*/obj/item/clothing/gloves/sterile/proc/Inflate(/mob/living/human/user)
 	user.visible_message("<span class='notice'>\The [src] expands!</span>")
 	qdel(src)*/
 

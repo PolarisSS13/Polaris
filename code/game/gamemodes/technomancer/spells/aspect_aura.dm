@@ -3,9 +3,9 @@
 	desc = "This aura function takes on the properties of other functions based on which aspect is introduced to it, applying \
 	it to everyone nearby."
 	cost = 200
-	obj_path = /mob/living/carbon/human/proc/technomancer_aspect_aura
+	obj_path = /mob/living/human/proc/technomancer_aspect_aura
 
-/mob/living/carbon/human/proc/technomancer_aspect_aura()
+/mob/living/human/proc/technomancer_aspect_aura()
 	place_spell_in_hand(/obj/item/spell/aspect_aura)
 
 /obj/item/spell/aspect_aura
@@ -15,7 +15,7 @@
 	cast_methods = CAST_COMBINE
 	aspect = ASPECT_CHROMATIC
 
-/obj/item/spell/aspect_aura/on_combine_cast(obj/item/W, var/mob/living/carbon/human/user)
+/obj/item/spell/aspect_aura/on_combine_cast(obj/item/W, var/mob/living/human/user)
 	if(istype(W, /obj/item/spell))
 		var/obj/item/spell/spell = W
 		if(!spell.aspect || spell.aspect == ASPECT_CHROMATIC)
@@ -65,7 +65,7 @@
 	if(!pay_energy(100))
 		qdel(src)
 	var/list/nearby_mobs = range(4,owner)
-	for(var/mob/living/carbon/human/H in nearby_mobs)
+	for(var/mob/living/human/H in nearby_mobs)
 		if(H == owner || H.mind && technomancers.is_antagonist(H.mind)) //Don't heat up allies.
 			continue
 
@@ -87,7 +87,7 @@
 	if(!pay_energy(100))
 		qdel(src)
 	var/list/nearby_mobs = range(4,owner)
-	for(var/mob/living/carbon/human/H in nearby_mobs)
+	for(var/mob/living/human/H in nearby_mobs)
 		if(H == owner || H.mind && technomancers.is_antagonist(H.mind)) //Don't chill allies.
 			continue
 
@@ -117,7 +117,7 @@
 		var/list/nearby_mobs = range(4,owner)
 		var/list/mobs_to_heal = list()
 		if(heal_allies_only)
-			for(var/mob/living/carbon/human/H in nearby_mobs) //Heal our apprentices
+			for(var/mob/living/human/H in nearby_mobs) //Heal our apprentices
 				if(H.mind && technomancers.is_antagonist(H.mind))
 					mobs_to_heal |= H
 			for(var/mob/living/simple_animal/hostile/SAH in nearby_mobs) //Heal our controlled mobs

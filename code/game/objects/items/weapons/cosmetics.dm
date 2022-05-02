@@ -45,7 +45,7 @@
 	if(!istype(M, /mob))	return
 
 	if(ishuman(M))
-		var/mob/living/carbon/human/H = M
+		var/mob/living/human/H = M
 		if(H.lip_style)	//if they already have lipstick on
 			to_chat(user, "<span class='notice'>You need to wipe off the old lipstick first!</span>")
 			return
@@ -78,7 +78,7 @@
 /obj/item/haircomb/attack_self(mob/living/user)
 	var/text = "person"
 	if(ishuman(user))
-		var/mob/living/carbon/human/U = user
+		var/mob/living/human/U = user
 		switch(U.identifying_gender)
 			if(MALE)
 				text = "guy"
@@ -104,11 +104,11 @@
 	. = ..()
 	M = new(src, null)
 
-/obj/item/makeover/attack_self(mob/living/carbon/user as mob)
+/obj/item/makeover/attack_self(mob/living/human/user as mob)
 	if(ishuman(user))
 		to_chat(user, "<span class='notice'>You flip open \the [src] and begin to adjust your appearance.</span>")
 		M.tgui_interact(user)
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		var/obj/item/organ/internal/eyes/E = H.internal_organs_by_name[O_EYES]
 		if(istype(E))
 			E.change_eye_color()

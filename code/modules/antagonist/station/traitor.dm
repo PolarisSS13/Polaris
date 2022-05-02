@@ -80,7 +80,7 @@ var/datum/antagonist/traitor/traitors
 					traitor.objectives += hijack_objective
 	return
 
-/datum/antagonist/traitor/equip(var/mob/living/carbon/human/traitor_mob)
+/datum/antagonist/traitor/equip(var/mob/living/human/traitor_mob)
 	if(istype(traitor_mob, /mob/living/silicon)) // this needs to be here because ..() returns false if the mob isn't human
 		add_law_zero(traitor_mob)
 		return 1
@@ -92,7 +92,7 @@ var/datum/antagonist/traitor/traitors
 	traitor_mob.mind.tcrystals = DEFAULT_TELECRYSTAL_AMOUNT
 	traitor_mob.mind.accept_tcrystals = 1
 	// Tell them about people they might want to contact.
-	var/mob/living/carbon/human/M = get_nt_opposed()
+	var/mob/living/human/M = get_nt_opposed()
 	if(M && M != traitor_mob)
 		to_chat(traitor_mob, "We have received credible reports that [M.real_name] might be willing to help our cause. If you need assistance, consider contacting them.")
 		traitor_mob.mind.store_memory("<b>Potential Collaborator</b>: [M.real_name]")
@@ -108,7 +108,7 @@ var/datum/antagonist/traitor/traitors
 	traitor_mob.mind.store_memory("<b>Code Response</b>: [syndicate_code_response]")
 	to_chat(traitor_mob, "Use the code words, preferably in the order provided, during regular conversation, to identify other agents. Proceed with caution, however, as everyone is a potential foe.")
 
-/datum/antagonist/traitor/proc/spawn_uplink(var/mob/living/carbon/human/traitor_mob)
+/datum/antagonist/traitor/proc/spawn_uplink(var/mob/living/human/traitor_mob)
 	if(!istype(traitor_mob))
 		return
 

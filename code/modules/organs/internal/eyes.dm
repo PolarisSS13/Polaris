@@ -24,7 +24,7 @@
 
 /obj/item/organ/internal/eyes/grey/colormatch/Initialize()
 	. = ..()
-	var/mob/living/carbon/human/H = null
+	var/mob/living/human/H = null
 	spawn(15)
 		if(ishuman(owner))
 			H = owner
@@ -50,7 +50,7 @@
 		// Finally, update the eye icon on the mob.
 		owner.regenerate_icons()
 
-/obj/item/organ/internal/eyes/replaced(var/mob/living/carbon/human/target)
+/obj/item/organ/internal/eyes/replaced(var/mob/living/human/target)
 
 	// Apply our eye colour to the target.
 	if(istype(target) && eye_colour)

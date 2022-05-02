@@ -147,7 +147,7 @@ Class Procs:
 	if(contents) // The same for contents.
 		for(var/atom/A in contents)
 			if(ishuman(A))
-				var/mob/living/carbon/human/H = A
+				var/mob/living/human/H = A
 				H.client.eye = H.client.mob
 				H.client.perspective = MOB_PERSPECTIVE
 				H.loc = src.loc
@@ -239,11 +239,11 @@ Class Procs:
 		return 1
 	if(user.lying || user.stat)
 		return 1
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon)))
+	if(!(istype(user, /mob/living/human) || istype(user, /mob/living/silicon)))
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return 1
 	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
+		var/mob/living/human/H = user
 		if(H.getBrainLoss() >= 55)
 			visible_message("<span class='warning'>[H] stares cluelessly at [src].</span>")
 			return 1
@@ -251,7 +251,7 @@ Class Procs:
 			to_chat(user, "<span class='warning'>You momentarily forget how to use [src].</span>")
 			return 1
 
-	if(clicksound && istype(user, /mob/living/carbon))
+	if(clicksound && istype(user, /mob/living/human))
 		playsound(src, clicksound, clickvol)
 
 	add_fingerprint(user)

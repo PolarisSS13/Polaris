@@ -381,7 +381,7 @@
 
 		env.merge(removed)
 
-	for(var/mob/living/carbon/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
+	for(var/mob/living/human/l in view(src, min(7, round(sqrt(power/6))))) // If they can see it without mesons on.  Bad on them.
 		var/eye_shield = 0	//How protected they are
 		if(istype(l.glasses, /obj/item/clothing/glasses/meson))
 			eye_shield += 1

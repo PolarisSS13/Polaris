@@ -19,7 +19,7 @@
 		return
 
 	if(istype(I,/obj/item/virusdish))
-		var/mob/living/carbon/c = user
+		var/mob/living/human/c = user
 		if(dish)
 			to_chat(user, "\The [src] is already loaded.")
 			return

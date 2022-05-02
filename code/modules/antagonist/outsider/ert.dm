@@ -30,7 +30,7 @@ var/datum/antagonist/ert/ert
 	can_speak_aooc = FALSE	// Just in case the above var bugs, or gets touched.
 
 /datum/antagonist/ert/create_default(var/mob/source)
-	var/mob/living/carbon/human/M = ..()
+	var/mob/living/human/M = ..()
 	if(istype(M)) M.age = rand(25,45)
 
 /datum/antagonist/ert/New()
@@ -43,7 +43,7 @@ var/datum/antagonist/ert/ert
 	to_chat(player.current, "The Emergency Response Team works for Asset Protection; your job is to protect [using_map.company_name]'s ass-ets. There is a code red alert on [station_name()], you are tasked to go and fix the problem.")
 	to_chat(player.current, "You should first gear up and discuss a plan with your team. More members may be joining, don't move out before you're ready.")
 
-/datum/antagonist/ert/equip(var/mob/living/carbon/human/player)
+/datum/antagonist/ert/equip(var/mob/living/human/player)
 
 	//Special radio setup
 	player.equip_to_slot_or_del(new /obj/item/radio/headset/ert(src), slot_l_ear)

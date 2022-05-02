@@ -29,7 +29,7 @@
 	r_pocket = /obj/item/surgical/scalpel
 	r_hand = /obj/item/material/twohanded/fireaxe
 
-/decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/masked_killer/post_equip(var/mob/living/human/H)
 	var/victim = get_mannequin(H.ckey)
 	for(var/obj/item/carried_item in H.get_equipped_items(TRUE))
 		carried_item.add_blood(victim) //Oh yes, there will be blood.. just not blood from the killer because that's odd
@@ -49,7 +49,7 @@
 	pda_slot = slot_belt
 	pda_type = /obj/item/pda/heads
 
-/decl/hierarchy/outfit/professional/post_equip(var/mob/living/carbon/human/H)
+/decl/hierarchy/outfit/professional/post_equip(var/mob/living/human/H)
 	var/obj/item/storage/secure/briefcase/sec_briefcase = new(H)
 	for(var/obj/item/briefcase_item in sec_briefcase)
 		qdel(briefcase_item)

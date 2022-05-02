@@ -238,7 +238,7 @@
 		reagents.trans_to_obj(C, (reagents.total_volume/contents.len))
 	..()
 
-/obj/item/storage/fancy/cigarettes/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/storage/fancy/cigarettes/attack(mob/living/human/M as mob, mob/living/human/user as mob)
 	if(!istype(M, /mob))
 		return
 

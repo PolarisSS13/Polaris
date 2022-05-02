@@ -119,7 +119,7 @@
 		return STATUS_DISABLED
 	return STATUS_CLOSE // Otherwise, we got nothing.
 
-/mob/living/carbon/human/shared_living_tgui_distance(atom/movable/src_object)
+/mob/living/human/shared_living_tgui_distance(atom/movable/src_object)
 	if((TK in mutations) && (get_dist(src, src_object) <= 2))
 		return STATUS_INTERACTIVE
 	return ..()

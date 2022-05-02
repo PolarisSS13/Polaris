@@ -53,7 +53,7 @@
 		qdel(loading)
 	update_icon()
 
-/obj/item/material/kitchen/utensil/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/material/kitchen/utensil/attack(mob/living/human/M as mob, mob/living/human/user as mob)
 	if(!istype(M))
 		return ..()
 

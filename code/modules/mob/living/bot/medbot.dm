@@ -108,7 +108,7 @@
 	if(is_tipped) // Don't look for targets if we're incapacitated!
 		return
 
-	for(var/mob/living/carbon/human/H in view(7, src)) // Time to find a patient!
+	for(var/mob/living/human/H in view(7, src)) // Time to find a patient!
 		if(confirmTarget(H))
 			target = H
 			if(last_newpatient_speak + 30 SECONDS < world.time)
@@ -125,7 +125,7 @@
 				last_newpatient_speak = world.time
 			break
 
-/mob/living/bot/medbot/UnarmedAttack(var/mob/living/carbon/human/H)
+/mob/living/bot/medbot/UnarmedAttack(var/mob/living/human/H)
 	if(!..())
 		return
 
@@ -194,7 +194,7 @@
 	else
 		icon_state = "medibot[on]"
 
-/mob/living/bot/medbot/attack_hand(mob/living/carbon/human/H)
+/mob/living/bot/medbot/attack_hand(mob/living/human/H)
 	if(H.a_intent == I_DISARM && !is_tipped)
 		H.visible_message("<span class='danger'>[H] begins tipping over [src].</span>", "<span class='warning'>You begin tipping over [src]...</span>")
 
@@ -433,7 +433,7 @@
 		if(MEDBOT_PANIC_FUCK to INFINITY)
 			. += "<span class='warning'><b>They are freaking out from being tipped over!</b></span>"
 
-/mob/living/bot/medbot/confirmTarget(var/mob/living/carbon/human/H)
+/mob/living/bot/medbot/confirmTarget(var/mob/living/human/H)
 	if(!..())
 		return 0
 

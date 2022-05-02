@@ -48,7 +48,7 @@
 	if (!attached_to_suit(loc))		//make sure they have a suit and we are attached to it
 		return
 
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 
 	var/turf/T = get_turf(src)
 	var/datum/gas_mixture/environment = T.return_air()
@@ -76,7 +76,7 @@
 
 /obj/item/suit_cooling_unit/proc/get_environment_temperature()
 	if (ishuman(loc))
-		var/mob/living/carbon/human/H = loc
+		var/mob/living/human/H = loc
 		if(istype(H.loc, /obj/mecha))
 			var/obj/mecha/M = H.loc
 			return M.return_temperature()
@@ -98,7 +98,7 @@
 	if (!ishuman(M))
 		return 0
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 
 	if (!H.wear_suit || (H.s_store != src && H.back != src))
 		return 0

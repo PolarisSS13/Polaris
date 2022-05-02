@@ -88,7 +88,7 @@
 /obj/item/clothing/suit/space/void/equipped(mob/M)
 	..()
 
-	var/mob/living/carbon/human/H = M
+	var/mob/living/human/H = M
 
 	if(!istype(H)) return
 
@@ -124,7 +124,7 @@
 /obj/item/clothing/suit/space/void/dropped()
 	..()
 
-	var/mob/living/carbon/human/H
+	var/mob/living/human/H
 
 	if(helmet)
 		helmet.canremove = 1
@@ -162,7 +162,7 @@
 		to_chat(usr, "There is no helmet installed.")
 		return
 
-	var/mob/living/carbon/human/H = usr
+	var/mob/living/human/H = usr
 
 	if(!istype(H))
 		return
@@ -198,7 +198,7 @@
 		to_chat(usr, "There is no tank or cooling unit inserted.")
 		return
 
-	var/mob/living/carbon/human/H = usr
+	var/mob/living/human/H = usr
 
 	if(!istype(H)) return
 	if(H.stat) return

@@ -51,7 +51,7 @@
 	ion_trail.set_up(src)
 	ion_trail.stop()
 
-/obj/mecha/combat/fighter/moved_inside(var/mob/living/carbon/human/H)
+/obj/mecha/combat/fighter/moved_inside(var/mob/living/human/H)
 	. = ..()
 	consider_gravity()
 

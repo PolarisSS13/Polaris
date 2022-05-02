@@ -407,7 +407,7 @@
 	if(isliving(target)) //will we ever even need to tranfer reagents to non-living mobs?
 		var/mob/living/L = target
 		if(ishuman(L))
-			var/mob/living/carbon/human/H = L
+			var/mob/living/human/H = L
 			if(H.check_shields(0, null, null, null, "the spray") == 1)		//If they block the spray, it does nothing.
 				amount = 0
 		perm = L.reagent_permeability()
@@ -417,7 +417,7 @@
 	if(!target || !istype(target))
 		return
 	if(ishuman(target))
-		var/mob/living/carbon/human/C = target
+		var/mob/living/human/C = target
 		if(type == CHEM_BLOOD)
 			var/datum/reagents/R = C.reagents
 			return trans_to_holder(R, amount, multiplier, copy)

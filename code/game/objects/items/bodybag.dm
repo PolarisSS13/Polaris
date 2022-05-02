@@ -84,7 +84,7 @@
 
 /obj/structure/closet/body_bag/proc/get_occupants()
 	var/list/occupants = list()
-	for(var/mob/living/carbon/human/H in contents)
+	for(var/mob/living/human/H in contents)
 		occupants += H
 	return occupants
 
@@ -179,7 +179,7 @@
 
 /obj/structure/closet/body_bag/cryobag/Entered(atom/movable/AM)
 	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
+		var/mob/living/human/H = AM
 		H.Stasis(stasis_level)
 		src.used = 1
 		inject_occupant(H)
@@ -193,7 +193,7 @@
 
 /obj/structure/closet/body_bag/cryobag/Exited(atom/movable/AM)
 	if(ishuman(AM))
-		var/mob/living/carbon/human/H = AM
+		var/mob/living/human/H = AM
 		H.Stasis(0)
 
 	if(istype(AM, /obj/item/organ))
@@ -208,7 +208,7 @@
 		return tank.air_contents
 	..()
 
-/obj/structure/closet/body_bag/cryobag/proc/inject_occupant(var/mob/living/carbon/human/H)
+/obj/structure/closet/body_bag/cryobag/proc/inject_occupant(var/mob/living/human/H)
 	if(!syringe)
 		return
 
@@ -242,7 +242,7 @@
 				user.unEquip(syringe)
 				src.syringe = syringe
 				syringe.loc = null
-				for(var/mob/living/carbon/human/H in contents)
+				for(var/mob/living/human/H in contents)
 					inject_occupant(H)
 					break
 

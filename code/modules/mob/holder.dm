@@ -95,7 +95,7 @@ var/list/holder_mob_icon_cache = list()
 	name = M.name
 	desc = M.desc
 	overlays |= M.overlays
-	var/mob/living/carbon/human/H = loc
+	var/mob/living/human/H = loc
 	if(istype(H))
 		if(H.l_hand == src)
 			H.update_inv_l_hand()
@@ -178,14 +178,14 @@ var/list/holder_mob_icon_cache = list()
 /mob/living/var/holder_type
 
 /mob/living/MouseDrop(var/atom/over_object)
-	var/mob/living/carbon/human/H = over_object
+	var/mob/living/human/H = over_object
 	if(holder_type && istype(H) && !H.lying && Adjacent(H) && (src.a_intent == I_HELP && H.a_intent == I_HELP))
-		if(!issmall(H) || !istype(src, /mob/living/carbon/human))
+		if(!issmall(H) || !istype(src, /mob/living/human))
 			get_scooped(H, (usr == src))
 		return
 	return ..()
 
-/mob/living/proc/get_scooped(var/mob/living/carbon/grabber, var/self_grab)
+/mob/living/proc/get_scooped(var/mob/living/human/grabber, var/self_grab)
 
 	if(!holder_type || buckled || pinned.len)
 		return
@@ -220,7 +220,7 @@ var/list/holder_mob_icon_cache = list()
 /obj/item/holder/human/sync(var/mob/living/M)
 
 	// Generate appropriate on-mob icons.
-	var/mob/living/carbon/human/owner = M
+	var/mob/living/human/owner = M
 	if(istype(owner) && owner.species)
 
 		var/skin_colour = rgb(owner.r_skin, owner.g_skin, owner.b_skin)
