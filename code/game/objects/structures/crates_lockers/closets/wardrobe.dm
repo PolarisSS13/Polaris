@@ -235,6 +235,7 @@
 	starts_with = list(
 		/obj/item/clothing/under/rank/roboticist = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat = 2,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science/robotics,
 		/obj/item/clothing/shoes/black = 2,
 		/obj/item/clothing/gloves/black = 2,
 		/obj/item/storage/backpack/toxins,
@@ -258,6 +259,7 @@
 		/obj/item/clothing/under/rank/chemist/skirt = 2,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/chemist = 2,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical/chemist,
 		/obj/item/storage/backpack/chemistry = 2,
 		/obj/item/storage/backpack/satchel/chem = 2,
 		/obj/item/storage/bag/chemistry = 2,)
@@ -285,6 +287,7 @@
 		/obj/item/clothing/under/rank/virologist/skirt = 2,
 		/obj/item/clothing/shoes/white = 2,
 		/obj/item/clothing/suit/storage/toggle/labcoat/virologist = 2,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical/viro,
 		/obj/item/clothing/mask/surgical = 2,
 		/obj/item/storage/backpack/virology = 2,
 		/obj/item/storage/backpack/satchel/vir = 2)

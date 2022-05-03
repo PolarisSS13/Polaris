@@ -44,6 +44,7 @@
 		/obj/item/clothing/mask/gas,
 		/obj/item/flash,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/science/rd,
 		/obj/item/clothing/shoes/boots/winter/science)
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
@@ -55,7 +56,7 @@
 		/obj/item/clothing/under/rank/scientist,
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
-		/obj/item/melee/umbrella, // vorestation addition,
+		/obj/item/melee/umbrella,
 		/obj/item/clothing/glasses/science,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/storage/belt/archaeology,
