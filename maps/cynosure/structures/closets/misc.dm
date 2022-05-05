@@ -104,6 +104,47 @@
 		/obj/item/geiger,
 		/obj/item/bodybag/cryobag)
 
+//Cynosure Paramedic Locker
+
+/obj/structure/closet/secure_closet/paramedic
+	name = "paramedic locker"
+	desc = "Supplies for a first responder."
+	req_access = list(access_medical_equip)
+	closet_appearance = /decl/closet_appearance/secure_closet/medical/paramedic
+
+	starts_with = list(
+		/obj/item/storage/backpack/dufflebag/emt,
+		/obj/item/storage/box/autoinjectors,
+		/obj/item/storage/box/syringes,
+		/obj/item/reagent_containers/glass/bottle/inaprovaline,
+		/obj/item/reagent_containers/glass/bottle/antitoxin,
+		/obj/item/storage/belt/medical/emt,
+		/obj/item/clothing/mask/gas,
+		/obj/item/clothing/suit/storage/toggle/fr_jacket,
+		/obj/item/clothing/suit/storage/toggle/labcoat/emt,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/medical/sar,
+		/obj/item/clothing/shoes/boots/winter/explorer,
+		/obj/item/radio/headset/headset_med/alt,
+		/obj/item/radio/headset/sar,
+		/obj/item/cartridge/medical,
+		/obj/item/storage/briefcase/inflatable,
+		/obj/item/flashlight,
+		/obj/item/tank/emergency/oxygen/engi,
+		/obj/item/clothing/glasses/hud/health,
+		/obj/item/healthanalyzer,
+		/obj/item/radio/off,
+		/obj/random/medical,
+		/obj/item/tool/crowbar,
+		/obj/item/extinguisher/mini,
+		/obj/item/storage/box/freezer,
+		/obj/item/clothing/accessory/storage/white_vest,
+		/obj/item/taperoll/medical,
+		/obj/item/gps/medical,
+		/obj/item/geiger,
+		/obj/item/gun/energy/phasegun/pistol,
+		/obj/item/cell/device/weapon
+		)
+
 //Pilot Locker
 
 /obj/structure/closet/secure_closet/pilot
