@@ -4544,7 +4544,7 @@
 	dir = 4
 	},
 /obj/structure/closet,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /obj/item/camera{
 	pixel_x = 2;
@@ -19837,7 +19837,7 @@
 "mMW" = (
 /obj/structure/table/woodentable,
 /obj/item/book/codex/corp_regs,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/captain)
@@ -20533,8 +20533,8 @@
 /area/surface/station/maintenance/substation/security/snd)
 "nod" = (
 /obj/structure/table/standard,
-/obj/item/tape/random,
-/obj/item/tape/random{
+/obj/item/cassette_tape/random,
+/obj/item/cassette_tape/random{
 	pixel_y = -2
 	},
 /obj/item/taperecorder,
@@ -20712,7 +20712,7 @@
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /turf/simulated/floor/tiled,
 /area/surface/station/security/prison)
@@ -22497,7 +22497,7 @@
 	},
 /obj/item/paper_bin,
 /obj/item/paicard,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /obj/item/reagent_containers/food/drinks/jar,
 /obj/structure/cable/green{
