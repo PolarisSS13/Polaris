@@ -42016,6 +42016,8 @@
 	pixel_y = -4
 	},
 /obj/effect/floor_decal/arrows,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/groundfloor/south)
 "sWe" = (
