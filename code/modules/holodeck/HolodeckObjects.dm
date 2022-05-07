@@ -4,6 +4,7 @@
 // Holographic racks are in code/modules/tables/rack.dm
 
 /turf/simulated/floor/holofloor
+	desc = "A convincing simulation."
 	thermal_conductivity = 0
 
 /turf/simulated/floor/holofloor/attackby(obj/item/W as obj, mob/user as mob)
@@ -272,6 +273,7 @@
 	no_attack_log = 1
 
 /obj/item/holo/esword
+	name = "holographic energy sword"
 	desc = "May the force be within you. Sorta."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "esword"
