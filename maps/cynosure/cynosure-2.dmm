@@ -51802,7 +51802,7 @@
 	},
 /obj/item/storage/pill_bottle/spaceacillin,
 /obj/item/roller,
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /turf/simulated/floor/tiled/freezer,
 /area/surface/station/crew_quarters/pool)
 "xAM" = (
