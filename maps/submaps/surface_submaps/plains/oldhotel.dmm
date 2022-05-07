@@ -69,7 +69,7 @@
 "zP" = (/obj/random/plushie,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "Ac" = (/obj/structure/table/wooden_reinforced,/obj/item/material/knife/butch,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
 "AO" = (/obj/structure/railing,/turf/simulated/floor/outdoors/dirt,/area/submap/oldhotel)
-"AU" = (/obj/structure/table/woodentable,/obj/item/tape,/turf/simulated/floor/wood,/area/submap/oldhotel)
+"AU" = (/obj/structure/table/woodentable,/obj/item/cassette_tape,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "AZ" = (/obj/structure/table/woodentable,/obj/item/trash/candle,/obj/item/paper{info = "This is a stupid tresure hunt task, that thing is not taking us anywhere. Go on and have fun finding a waste of time."; name = "Wrinkled sheet of paper"},/turf/simulated/floor/wood,/area/submap/oldhotel)
 "Bt" = (/obj/structure/closet/cabinet,/obj/item/clothing/gloves/yellow,/obj/random/projectile/scrapped_pistol,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/random/maintenance,/obj/random/maintenance,/obj/random/maintenance,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "Cx" = (/turf/simulated/floor/outdoors/dirt,/area/submap/oldhotel)

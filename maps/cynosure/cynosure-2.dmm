@@ -6910,7 +6910,7 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = -28
 	},
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /obj/item/megaphone,
 /obj/structure/closet/secure_closet/hos/cynosure,
@@ -8709,7 +8709,7 @@
 	pixel_y = -6
 	},
 /obj/item/handcuffs,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /turf/simulated/floor/carpet,
 /area/surface/station/security/detectives_office)
 "een" = (
@@ -9197,7 +9197,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals_central5{
 	dir = 4
 	},
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /turf/simulated/floor/tiled,
 /area/surface/station/security/processing)
@@ -12100,7 +12100,7 @@
 	dir = 4
 	},
 /obj/structure/table/standard,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/taperecorder,
 /obj/item/megaphone,
 /obj/item/packageWrap,
@@ -14494,7 +14494,7 @@
 /obj/structure/table/woodentable,
 /obj/item/taperecorder,
 /obj/item/book/codex/lore/news,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /turf/simulated/floor/wood,
 /area/surface/station/library)
 "gFo" = (
@@ -20537,10 +20537,10 @@
 "jGo" = (
 /obj/structure/table/woodentable,
 /obj/item/taperecorder,
-/obj/item/tape/random{
+/obj/item/cassette_tape/random{
 	pixel_y = -2
 	},
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/item/camera,
 /obj/item/barcodescanner,
 /turf/simulated/floor/wood,
@@ -43355,7 +43355,7 @@
 	pixel_y = -6
 	},
 /obj/item/handcuffs,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /turf/simulated/floor/carpet,
 /area/surface/station/security/detectives_office)
 "tCe" = (
@@ -50215,7 +50215,7 @@
 	pixel_y = -22
 	},
 /obj/item/folder/red,
-/obj/item/tape/random,
+/obj/item/cassette_tape/random,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 9
 	},

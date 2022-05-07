@@ -222,7 +222,7 @@
 		/obj/item/clipboard,
 		/obj/item/folder/white,
 		/obj/item/taperecorder,
-		/obj/item/tape/random = 3,
+		/obj/item/cassette_tape/random = 3,
 		/obj/item/camera,
 		/obj/item/toy/plushie/therapy/blue)
 
