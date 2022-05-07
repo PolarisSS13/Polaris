@@ -93,11 +93,25 @@
 	color = null
 	applies_material_colour = 0
 
-// Leaving this in for the sake of compilation.
 /obj/structure/bed/chair/comfy
+	name = "comfy chair"
 	desc = "It's a chair. It looks comfy."
 	icon_state = "comfychair"
 	base_icon = "comfychair"
+
+/obj/structure/bed/chair/comfy/Initialize()
+	. = ..()
+	var/image/I = image(icon, "[base_icon]_over")
+	I.layer = ABOVE_MOB_LAYER
+	I.plane = MOB_PLANE
+	I.color = material.icon_colour
+	add_overlay(I)
+	if(padding_material)
+		I = image(icon, "[base_icon]_padding_over")
+		I.layer = ABOVE_MOB_LAYER
+		I.plane = MOB_PLANE
+		I.color = padding_material.icon_colour
+		add_overlay(I)
 
 /obj/structure/bed/chair/comfy/brown/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, MAT_LEATHER)
@@ -132,40 +146,40 @@
 /obj/structure/bed/chair/comfy/orange/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "orange")
 
-/obj/structure/bed/chair/rounded
+/obj/structure/bed/chair/comfy/rounded
 	name = "rounded chair"
 	desc = "It's a rounded chair. It looks comfy."
 	icon_state = "roundedchair"
 	base_icon = "roundedchair"
 
-/obj/structure/bed/chair/rounded/brown/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/brown/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, MAT_LEATHER)
 
-/obj/structure/bed/chair/rounded/red/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/red/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "carpet")
 
-/obj/structure/bed/chair/rounded/teal/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/teal/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "teal")
 
-/obj/structure/bed/chair/rounded/black/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/black/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "black")
 
-/obj/structure/bed/chair/rounded/green/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/green/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "green")
 
-/obj/structure/bed/chair/rounded/purple/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/purple/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "purple")
 
-/obj/structure/bed/chair/rounded/blue/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/blue/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "blue")
 
-/obj/structure/bed/chair/rounded/beige/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/beige/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "beige")
 
-/obj/structure/bed/chair/rounded/lime/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/lime/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "lime")
 
-/obj/structure/bed/chair/rounded/yellow/Initialize(var/ml,var/newmaterial)
+/obj/structure/bed/chair/comfy/rounded/yellow/Initialize(var/ml,var/newmaterial)
 	. = ..(ml, MAT_STEEL, "yellow")
 
 /obj/structure/bed/chair/office
