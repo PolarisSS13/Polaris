@@ -99,8 +99,8 @@
 	icon_state = "comfychair"
 	base_icon = "comfychair"
 
-/obj/structure/bed/chair/comfy/Initialize()
-	. = ..()
+/obj/structure/bed/chair/comfy/update_icon()
+	..()
 	var/image/I = image(icon, "[base_icon]_over")
 	I.layer = ABOVE_MOB_LAYER
 	I.plane = MOB_PLANE
