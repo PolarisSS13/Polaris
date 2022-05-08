@@ -108,15 +108,6 @@ var/global/datum/metric/metric = new() // Metric datum, used to keep track of th
 
 var/global/list/awaydestinations = list() // Away missions. A list of landmarks that the warpgate can take you to.
 
-// Forum MySQL configuration. (for use with forum account/key authentication)
-// These are all default values that will load should the forumdbconfig.txt file fail to read for whatever reason.
-var/global/forumsqladdress = "localhost"
-var/global/forumsqlport    = "3306"
-var/global/forumsqldb      = "tgstation"
-var/global/forumsqllogin   = "root"
-var/global/forumsqlpass    = ""
-var/global/forum_activated_group     = "2"
-var/global/forum_authenticated_group = "10"
 
 // For FTP requests. (i.e. downloading runtime logs.)
 // However it'd be ok to use for accessing attack logs and such too, which are even laggier.

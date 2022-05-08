@@ -45,11 +45,6 @@ GLOBAL_DATUM(debug_real_globals, /debug_real_globals) // :3c
 
 /debug_real_globals/VV_hidden()
 	return list(
-		"forumsqladdress",
-		"forumsqldb",
-		"forumsqllogin",
-		"forumsqlpass",
-		"forumsqlport",
 		"sqladdress",
 		"sqldb",
 		"sqllogin",
