@@ -3219,6 +3219,7 @@
 #include "code\modules\xenoarcheaology\effects\resurrect.dm"
 #include "code\modules\xenoarcheaology\effects\roboheal.dm"
 #include "code\modules\xenoarcheaology\effects\robohurt.dm"
+#include "code\modules\xenoarcheaology\effects\singularity.dm"
 #include "code\modules\xenoarcheaology\effects\sleepy.dm"
 #include "code\modules\xenoarcheaology\effects\stun.dm"
 #include "code\modules\xenoarcheaology\effects\teleport.dm"
