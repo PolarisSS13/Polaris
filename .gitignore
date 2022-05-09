@@ -13,3 +13,5 @@ vchat.db*
 data/
 cfg/
 
+node_modules/
+package-lock.json

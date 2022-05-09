@@ -129,7 +129,7 @@
 
 /obj/item/reagent_containers/spray/pepper/Initialize()
 	. = ..()
-	reagents.add_reagent("condensedcapsaicin", 40)
+	reagents.add_reagent("condensedcapsaicin", volume)
 
 /obj/item/reagent_containers/spray/pepper/examine(mob/user)
 	. = ..()
@@ -145,6 +145,14 @@
 		to_chat(usr, "<span class = 'warning'>The safety is on!</span>")
 		return
 	. = ..()
+
+/obj/item/reagent_containers/spray/pepper/small
+	name = "personal pepperspray"
+	desc = "A small personal defense weapon with up to two smaller pumps of blinding spray."
+	icon_state = "pepperspray_small"
+	item_state = "pepperspray_small"
+	volume = 10
+	amount_per_transfer_from_this = 5
 
 /obj/item/reagent_containers/spray/waterflower
 	name = "water flower"

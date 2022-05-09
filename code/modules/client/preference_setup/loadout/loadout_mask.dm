@@ -26,7 +26,16 @@
 	display_name = "black veil"
 	path = /obj/item/clothing/mask/veil
 
-/datum/gear/mask/plaguedoctor2
-	display_name = "golden plague doctor's mask"
-	path = /obj/item/clothing/mask/gas/plaguedoctor/gold
-	cost = 3 ///Because it functions as a gas mask, and therefore has a mechanical advantage.
+/datum/gear/mask/gasmasks
+	display_name = "gas mask selection"
+	path = /obj/item/clothing/mask/gas
+	cost = 2
+
+/datum/gear/mask/gasmasks/New()
+	..()
+	var/masks = list()
+	masks["gas mask"] = /obj/item/clothing/mask/gas
+	masks["clear gas mask"] = /obj/item/clothing/mask/gas/clear
+	masks["plague doctor mask"] = /obj/item/clothing/mask/gas/plaguedoctor
+	masks["gold plague doctor mask"] = /obj/item/clothing/mask/gas/plaguedoctor/gold
+	gear_tweaks += new/datum/gear_tweak/path(masks)

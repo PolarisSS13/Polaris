@@ -25,6 +25,7 @@
 		/obj/item/clothing/under/sl_suit = 2,
 		/obj/item/clothing/under/rank/bartender = 2,
 		/obj/item/clothing/under/rank/bartender/skirt,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/bar,
 		/obj/item/clothing/under/dress/dress_saloon,
 		/obj/item/clothing/accessory/wcoat = 2,
 		/obj/item/clothing/shoes/black = 2,
@@ -59,6 +60,7 @@
 	starts_with = list(
 		/obj/item/clothing/under/rank/janitor,
 		/obj/item/clothing/under/dress/maid/janitor,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/janitor,
 		/obj/item/radio/headset/headset_service,
 		/obj/item/cartridge/janitor,
 		/obj/item/clothing/gloves/black,
@@ -98,4 +100,4 @@
 		/obj/item/clothing/glasses/sunglasses/big = 2,
 		/obj/item/clothing/under/lawyer/blue = 2,
 		/obj/item/clothing/under/lawyer/blue/skirt = 2,
-		/obj/item/tape/random = 2)
+		/obj/item/cassette_tape/random = 2)
