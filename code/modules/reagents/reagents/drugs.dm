@@ -1,6 +1,6 @@
 /*
-/// Recreational and psychiatric drugs go here! Please keep them separated in the file. 
-/// Due to concerns and safety for our repo, illegal real-world drug names should generally be avoided. 
+/// Recreational and psychiatric drugs go here! Please keep them separated in the file.
+/// Due to concerns and safety for our repo, illegal real-world drug names should generally be avoided.
 */
 
 /datum/reagent/drugs
@@ -14,8 +14,8 @@
 	var/list/high_message_list = list("You feel great! For now...", "You feel a wave of happiness!")
 	var/list/sober_message_list = list("You feel like garbage...", "Your head aches.")
 	data = 0
-	
-	var/prob_proc = FALSE /// ANY probabilities in specific drugs should check for this to be TRUE + the desired probability AND set this back to false. 
+
+	var/prob_proc = FALSE /// ANY probabilities in specific drugs should check for this to be TRUE + the desired probability AND set this back to false.
 
 	reagent_state = LIQUID
 	metabolism = REM * 0.5
@@ -36,10 +36,10 @@
 			data = -1
 			var/msg = pick(sober_message_list)
 			to_chat(M, "<span class='warning'>[msg]</span>")
-	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again. 
+	if(prob(5) && prob_proc == FALSE) /// Enables procs to activate, remains true until THAT PROC sets it to false again.
 		prob_proc = TRUE
 
-/datum/reagent/drugs/bliss /// Replaces Space Drugs. 
+/datum/reagent/drugs/bliss /// Replaces Space Drugs.
 	name = "Bliss"
 	id = "bliss"
 	description = "Known for providing a euphoric high, this psychoactive drug is often used recreationally."
@@ -62,7 +62,7 @@
 		drug_strength = drug_strength * 0.8
 	if(alien == IS_SLIME)
 		drug_strength = drug_strength * 1.2
-	
+
 	M.druggy = max(M.druggy, drug_strength)
 	if(prob_proc == TRUE && prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
 		step(M, pick(cardinal))
@@ -142,8 +142,9 @@
 
 	M.druggy = max(M.druggy, 30)
 
+	var/drug_strength = 20
 	var/effective_dose = dose
-	if(issmall(M)) 
+	if(issmall(M))
 		effective_dose *= 2
 	if(effective_dose < 1 * threshold)
 		M.apply_effect(3, STUTTER)
@@ -156,6 +157,7 @@
 		M.make_jittery(5)
 		M.make_dizzy(5)
 		M.druggy = max(M.druggy, 35)
+		M.hallucination = max(M.hallucination, drug_strength * threshold)
 		if(prob(5) && prob_proc == TRUE)
 			M.emote(pick("twitch", "giggle"))
 			prob_proc = FALSE
@@ -164,6 +166,7 @@
 		M.make_jittery(10)
 		M.make_dizzy(10)
 		M.druggy = max(M.druggy, 40)
+		M.hallucination = max(M.hallucination, drug_strength * threshold)
 		if(prob(10) && prob_proc == TRUE)
 			M.emote(pick("twitch", "giggle"))
 			prob_proc = FALSE
@@ -224,7 +227,7 @@
 
 /datum/reagent/drugs/snowflake/affect_blood(mob/living/carbon/M, alien, removed)
 	..()
-	
+
 	M.add_chemical_effect(CE_PAINKILLER,3)
 	if(prob(12) && prob_proc == TRUE)
 		M.emote(pick("shiver", "sniff"))
@@ -264,7 +267,7 @@
 		M.emote(pick("twitch", "blink_r", "shiver"))
 		M.add_chemical_effect(CE_PAINKILLER, 20) /// With chance of pain numbing...
 		prob_proc = FALSE
-	M.add_chemical_effect(CE_SPEEDBOOST, 1) /// And less speed boost. 
+	M.add_chemical_effect(CE_SPEEDBOOST, 1) /// And less speed boost.
 
 /datum/reagent/drugs/royale/overdose(mob/living/carbon/M, alien, removed)
 	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
@@ -331,7 +334,7 @@
 	if(prob(15) && prob_proc == TRUE)
 		M.emote(pick("deathgasp", "sigh", "smile"))
 		prob_proc = FALSE
-	
+
 	var/drug_strength = 30
 
 	if(alien == IS_SKRELL)
@@ -402,7 +405,7 @@
 	id = "schnappi"
 	description = "A dangerous and impure opiate that can cause necrosis in prolonged use."
 	color = "#0264B4"
-	taste_description = "a little crocodile" /// Schnee Schnii Schnappi, das kleiner krokodil... 
+	taste_description = "a little crocodile" /// Schnee Schnii Schnappi, das kleiner krokodil...
 	overdose = 15
 	high_message_list = list("You feel pretty chill.",
 	"Your skin feels all rough and dry.",
@@ -449,7 +452,7 @@
 	name = "Methylphenidate"
 	id = "methylphenidate"
 	description = "Improves the ability to concentrate."
-	taste_description = "mild grape" ///Referencing real life oral solutions for these meds. 
+	taste_description = "mild grape" ///Referencing real life oral solutions for these meds.
 	color = "#BF80BF"
 	high_message_list = list("You feel focused.", "Your attention is undivided.")
 	sober_message_list = list("It becomes harder to focus...", "You feel distractible.")
