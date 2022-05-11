@@ -39,3 +39,17 @@
 	masks["plague doctor mask"] = /obj/item/clothing/mask/gas/plaguedoctor
 	masks["gold plague doctor mask"] = /obj/item/clothing/mask/gas/plaguedoctor/gold
 	gear_tweaks += new/datum/gear_tweak/path(masks)
+
+/datum/gear/mask/cloth
+	display_name = "cloth mask (recolorable)"
+	path = /obj/item/clothing/mask/surgical/cloth
+	cost = 2
+
+/datum/gear/mask/cloth/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/mask/dust
+	display_name = "dust mask"
+	path = /obj/item/clothing/mask/surgical/dust
+	cost = 2
