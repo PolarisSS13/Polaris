@@ -302,10 +302,8 @@
 	name = "cloth mask"
 	desc = "A cloth mask designed to protect the wearer against allergens, illnesses, and social interaction."
 	icon_state = "cloth"
-	item_state = "cloth"
 
 /obj/item/clothing/mask/surgical/dust
 	name = "dust mask"
 	desc = "A dust mask designed to protect the wearer against construction and/or custodial particulate."
 	icon_state = "dust"
-	item_state = "dust"
