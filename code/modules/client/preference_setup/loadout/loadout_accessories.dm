@@ -352,11 +352,11 @@
 	display_name = "freelance press pass"
 	path = /obj/item/clothing/accessory/badge/press/independent
 
-datum/gear/accessory/legbrace
+/datum/gear/accessory/legbrace
 	display_name = "leg braces"
 	path = /obj/item/clothing/accessory/legbrace
 
-datum/gear/accessory/neckerchief
+/datum/gear/accessory/neckerchief
 	display_name = "neckerchief, color select"
 	path = /obj/item/clothing/accessory/neckerchief
 
