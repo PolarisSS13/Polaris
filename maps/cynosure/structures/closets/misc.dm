@@ -60,7 +60,7 @@
 
 /obj/structure/closet/secure_closet/explorer/Initialize()
 	if(prob(50))
-		starts_with += /obj/item/storage/backpack
+		starts_with += /obj/item/storage/backpack/rucksack
 	else
 		starts_with += /obj/item/storage/backpack/satchel/norm
 	if(prob(75))

@@ -61,6 +61,7 @@
 		/obj/item/clothing/under/rank/janitor,
 		/obj/item/clothing/under/dress/maid/janitor,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/janitor,
+		/obj/item/clothing/mask/surgical/dust,
 		/obj/item/radio/headset/headset_service,
 		/obj/item/cartridge/janitor,
 		/obj/item/clothing/gloves/black,
