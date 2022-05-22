@@ -453,6 +453,7 @@
 #include "code\defines\procs\dbcore.dm"
 #include "code\defines\procs\radio.dm"
 #include "code\defines\procs\statistics.dm"
+#include "code\game\allow_list.dm"
 #include "code\game\atoms.dm"
 #include "code\game\atoms_movable.dm"
 #include "code\game\base_turf.dm"

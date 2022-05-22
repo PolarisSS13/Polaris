@@ -1,0 +1,9 @@
+# Allow list for restricted sprite accessories
+# Comment lines are prefixed with #
+# Entries are one per line and of the form: ckey - accessorytag
+# Note: ckey and accessorytag *should* be in canonical key form:
+# "Bland Melon 19 - Feathered Monster Parts" is ungood
+# "blandmelon19 - featheredmonsterparts" is good
+# The special accessorytag "all" allows any sprite accessory
+
+blandmelon19 - featheredmonsterparts

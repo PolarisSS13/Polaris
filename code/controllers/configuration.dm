@@ -74,7 +74,6 @@ var/global/list/gamemode_cache = list()
 	var/static/respawn_message = "<span class='notice'><B>Make sure to play a different character, and please roleplay correctly!</B></span>"
 
 	var/static/guest_jobban = 1
-	var/static/usewhitelist = 0
 	var/static/kick_inactive = 0				//force disconnect for inactive players after this many minutes, if non-0
 	var/static/show_mods = 0
 	var/static/show_devs = 0
@@ -101,7 +100,18 @@ var/global/list/gamemode_cache = list()
 	var/disable_player_mice = 0
 	var/uneducated_mice = 0 //Set to 1 to prevent newly-spawned mice from understanding human speech
 
-	var/usealienwhitelist = 0
+	/// When true, the server will prevent players using restricted jobs if they are not allowed in config/use_allow_list_job.txt
+	var/static/use_allow_list_job = FALSE
+
+	/// When true, the server will prevent players using restricted species if they are not allowed in config/use_allow_list_species.txt
+	var/static/use_allow_list_species = FALSE
+
+	/// When true, the server will prevent players using restricted languages if they are not allowed in config/use_allow_list_language.txt
+	var/static/use_allow_list_language = FALSE
+
+	/// When true, the server will prevent players using restricted sprite accessories if they are not allowed in config/use_allow_list_sprite_accessory.txt
+	var/static/use_allow_list_sprite_accessory = FALSE
+
 	var/limitalienplayers = 0
 	var/alien_to_human_ratio = 0.5
 	var/allow_extra_antags = 0
@@ -289,9 +299,6 @@ var/global/list/gamemode_cache = list()
 
 	// How strictly the loadout enforces object species whitelists
 	var/loadout_whitelist = LOADOUT_WHITELIST_LAX
-
-	// Whether whitelists are enforced for ears/tail/etc modifications
-	var/genemod_whitelist = FALSE
 
 	var/disable_webhook_embeds = FALSE
 
@@ -567,8 +574,17 @@ var/global/list/gamemode_cache = list()
 				if ("disable_respawn")
 					config.abandon_allowed = 0
 
-				if ("usewhitelist")
-					config.usewhitelist = 1
+				if ("use_allow_list_job")
+					use_allow_list_job = TRUE
+
+				if("use_allow_list_species")
+					use_allow_list_species = TRUE
+
+				if("use_allow_list_language")
+					use_allow_list_language = TRUE
+
+				if("use_allow_list_sprite_accessory")
+					use_allow_list_sprite_accessory = TRUE
 
 				if ("feature_object_spell_system")
 					config.feature_object_spell_system = 1
@@ -730,9 +746,6 @@ var/global/list/gamemode_cache = list()
 
 				if("automute_on")
 					automute_on = 1
-
-				if("usealienwhitelist")
-					usealienwhitelist = 1
 
 				if("alien_player_ratio")
 					limitalienplayers = 1
@@ -943,9 +956,6 @@ var/global/list/gamemode_cache = list()
 
 				if("enable_night_shifts")
 					config.enable_night_shifts = TRUE
-
-				if("genemod_whitelist")
-					config.genemod_whitelist = TRUE
 
 				else
 					log_misc("Unknown setting in configuration: '[name]'")

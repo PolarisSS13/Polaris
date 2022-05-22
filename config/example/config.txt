@@ -223,9 +223,6 @@ GUEST_JOBBAN
 
 ## Uncomment this to stop people connecting to your server without a registered ckey. (i.e. guest-* are all blocked from connecting)
 GUEST_BAN
-## Set to jobban everyone who's key is not listed in data/whitelist.txt from Captain, HoS, HoP, CE, RD, CMO, Warden, Security, Detective, and AI positions.
-## Uncomment to 1 to jobban, leave commented out to allow these positions for everyone (but see GUEST_JOBBAN above and regular jobbans)
-# USEWHITELIST
 
 ## set a server location for world reboot. Don't include the byond://, just give the address and port.
 #SERVER server.net:port
@@ -295,8 +292,17 @@ GATEWAY_DELAY 18000
 ## Malf and Rev will let the shuttle be called when the antags/protags are dead.
 #CONTINUOUS_ROUNDS
 
-## Uncomment to restrict non-admins from using humanoid alien races
-USEALIENWHITELIST
+## Uncomment to apply allow list restrictions to players for jobs
+#USE_ALLOW_LIST_JOB
+
+## Uncomment to apply allow list restrictions to players for species
+#USE_ALLOW_LIST_SPECIES
+
+## Uncomment to apply allow list restrictions to players for languages
+#USE_ALLOW_LIST_LANGUAGE
+
+## Uncomment to apply allow list restrictions to players for sprite accessories
+#USE_ALLOW_LIST_SPRITE_ACCESSORY
 
 ## Comment this to unrestrict the number of alien players allowed in the round. The number represents the number of alien players for every human player.
 #ALIEN_PLAYER_RATIO 0.2
@@ -547,7 +553,3 @@ ENGINE_MAP Supermatter Engine,Edison's Bane
 # Controls how strictly the species whitelists on loadout entries are enforced
 # Possible values: 0 (Off), 1 (Lax, user must be whitelisted for the species), 2 (Strict, user must be the species)
 LOADOUT_WHITELIST 1
-
-# Enables whitelisting ckeys for ears/tail/etc modifications to players.
-# Uncomment to ENABLE the whitelist
-# GENEMOD_WHITELIST

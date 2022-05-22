@@ -19,6 +19,9 @@
 
 /datum/sprite_accessory
 
+	/// Used by allow_list_genemod to determine if a user may use an accessory
+	var/allow_list_tag
+
 	var/icon			// the icon file the accessory is located in
 	var/icon_state		// the icon_state of the accessory
 	var/preview_state	// a custom preview state for whatever reason

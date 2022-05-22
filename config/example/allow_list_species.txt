@@ -1,0 +1,9 @@
+# Allow list for restricted species
+# Comment lines are prefixed with #
+# Entries are one per line and of the form: ckey - speciesname
+# Note: ckey and speciesname *should* be in canonical key form:
+# "Bland Melon 19 - Spicy Human" is ungood
+# "blandmelon19 - spicyhuman" is good
+# The special speciesname "all" allows any species
+
+blandmelon19 - spicyhuman

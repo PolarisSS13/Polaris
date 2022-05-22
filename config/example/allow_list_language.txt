@@ -1,0 +1,9 @@
+# Allow list for restricted languages
+# Comment lines are prefixed with #
+# Entries are one per line and of the form: ckey - languagename
+# Note: ckey and languagename *should* be in canonical key form:
+# "Bland Melon 19 - Bigly'Unathi" is ungood
+# "blandmelon19 - biglyunathi" is good
+# The special languagename "all" allows any language
+
+blandmelon19 - biglyunathi

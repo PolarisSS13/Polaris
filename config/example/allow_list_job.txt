@@ -1,0 +1,9 @@
+# Allow list for restricted jobs
+# Comment lines are prefixed with #
+# Entries are one per line and of the form: ckey - jobtitle
+# Note: ckey and jobtitle *should* be in canonical key form:
+# "Bland Melon 19 - Not A Real Job" is ungood
+# "blandmelon19 - notarealjob" is good
+# The special jobtitle "all" allows any job
+
+blandmelon19 - notarealjob
