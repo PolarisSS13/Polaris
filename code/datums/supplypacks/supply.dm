@@ -25,8 +25,8 @@
 /datum/supply_pack/supply/fancyfood
 	name = "Artisanal food delivery"
 	contains = list(
-			/obj/item/weapon/reagent_containers/food/condiment/carton/flour/rustic = 6,
-			/obj/item/weapon/reagent_containers/food/condiment/carton/sugar/rustic = 6
+			/obj/item/reagent_containers/food/condiment/carton/flour/rustic = 6,
+			/obj/item/reagent_containers/food/condiment/carton/sugar/rustic = 6
 			)
 	cost = 25
 	containertype = /obj/structure/closet/crate/freezer/centauri

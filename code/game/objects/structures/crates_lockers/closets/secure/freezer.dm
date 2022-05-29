@@ -4,10 +4,10 @@
 	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
-		/obj/item/weapon/reagent_containers/food/condiment/carton/flour = 6,
-		/obj/item/weapon/reagent_containers/food/condiment/carton/sugar = 1,
-		/obj/item/weapon/reagent_containers/food/condiment/carton/flour/rustic = 1,
-		/obj/item/weapon/reagent_containers/food/condiment/carton/sugar/rustic = 1,
+		/obj/item/reagent_containers/food/condiment/carton/flour = 6,
+		/obj/item/reagent_containers/food/condiment/carton/sugar = 1,
+		/obj/item/reagent_containers/food/condiment/carton/flour/rustic = 1,
+		/obj/item/reagent_containers/food/condiment/carton/sugar/rustic = 1,
 		/obj/item/reagent_containers/food/condiment/spacespice = 2
 		)
 
