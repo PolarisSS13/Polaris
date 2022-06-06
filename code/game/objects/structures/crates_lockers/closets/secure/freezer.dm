@@ -4,8 +4,10 @@
 	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
-		/obj/item/reagent_containers/food/condiment/flour = 7,
-		/obj/item/reagent_containers/food/condiment/sugar = 2,
+		/obj/item/reagent_containers/food/condiment/carton/flour = 6,
+		/obj/item/reagent_containers/food/condiment/carton/sugar = 1,
+		/obj/item/reagent_containers/food/condiment/carton/flour/rustic = 1,
+		/obj/item/reagent_containers/food/condiment/carton/sugar/rustic = 1,
 		/obj/item/reagent_containers/food/condiment/spacespice = 2
 		)
 
