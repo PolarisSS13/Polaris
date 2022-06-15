@@ -66,19 +66,17 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	. = list("Normal" = null)
 	for(var/path in style_list)
 		var/datum/sprite_accessory/instance = style_list[path]
+		var/is_allowed = length(instance.species_allowed) && species && (species in instance.species_allowed)
 		if(!istype(instance))
 			continue
 		if(instance.ckeys_allowed && (!client || !(client.ckey in instance.ckeys_allowed)))
 			continue
+		if (species && istype(client) && (species in instance.species_allowed))
+			if (check_rights(R_ADMIN | R_EVENT | R_FUN, FALSE, client))
+				.[instance.name] = path
+			else if (check_allowed_sprite_accessory(client, instance))
+				.[instance.name] = path
 
-		// Is an admin OR
-		// Instance is species-whitelisted AND current species matches whitelist OR
-		// config ckey-whitelist is enabled AND ckey matches whitelist AND the ckey-whitelist enables this instance for current species.
-		// That last list is entirely arbitrary. Take complaints up with Kholdstare.
-		if((istype(client) && check_rights(R_ADMIN | R_EVENT | R_FUN, 0, client)) || \
-				(LAZYLEN(instance.species_allowed) && species && (species in instance.species_allowed)) || \
-				(config.genemod_whitelist && client.is_whitelisted(/whitelist/genemod) && LAZYLEN(instance.whitelist_allowed) && (species in instance.whitelist_allowed)))
-			.[instance.name] = instance
 
 /datum/category_item/player_setup_item/general/body
 	name = "Body"
@@ -658,8 +656,11 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		else
 			return TOPIC_NOACTION
 
-		if(((!(setting_species.spawn_flags & SPECIES_CAN_JOIN)) || (!is_alien_whitelisted(preference_mob(),setting_species))) && !check_rights(R_ADMIN|R_EVENT, 0))
-			return TOPIC_NOACTION
+		if (!check_rights(R_ADMIN|R_EVENT, FALSE))
+			if (!(setting_species.spawn_flags & SPECIES_CAN_JOIN))
+				return TOPIC_NOACTION
+			if (check_allowed_species(pref.client, setting_species))
+				return TOPIC_NOACTION
 
 		var/prev_species = pref.species
 		pref.species = href_list["set_species"]
@@ -1292,7 +1293,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 		restricted = 2
-	else if(!is_alien_whitelisted(preference_mob(),current_species))
+	else if(!check_allowed_species(pref.client, current_species))
 		restricted = 1
 
 	if(restricted)

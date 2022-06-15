@@ -206,7 +206,7 @@
 			to_chat(usr, "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>")
 			return
 
-		if(!is_alien_whitelisted(src, GLOB.all_species[client.prefs.species]))
+		if (!check_allowed_species(client,  GLOB.all_species[client.prefs.species]))
 			alert(src, "You are currently not whitelisted to play [client.prefs.species].")
 			return 0
 
@@ -531,7 +531,7 @@
 
 	if(chosen_species && use_species_name)
 		// Have to recheck admin due to no usr at roundstart. Latejoins are fine though.
-		if(is_alien_whitelisted(chosen_species))
+		if(check_allowed_species(client,  chosen_species))
 			new_character = new(T, use_species_name)
 
 	if(!new_character)
@@ -566,9 +566,13 @@
 
 	for(var/lang in client.prefs.alternate_languages)
 		var/datum/language/chosen_language = GLOB.all_languages[lang]
-		if(chosen_language)
-			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
+		if (chosen_language)
+			if (check_allowed_language(src, chosen_language))
 				new_character.add_language(lang)
+			else if (new_character.species)
+				if (chosen_language.name in new_character.species.secondary_langs)
+					new_character.add_language(lang)
+
 	// And uncomment this, too.
 	//new_character.dna.UpdateSE()
 
@@ -610,8 +614,7 @@
 
 	if(!chosen_species)
 		return SPECIES_HUMAN
-
-	if(is_alien_whitelisted(chosen_species))
+	if(check_allowed_species(client, chosen_species))
 		return chosen_species.name
 
 	return SPECIES_HUMAN

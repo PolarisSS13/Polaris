@@ -23,7 +23,7 @@
 		// Sanitize illegal languages
 		for(var/language in pref.alternate_languages)
 			var/datum/language/L = GLOB.all_languages[language]
-			if(!istype(L) || (L.flags & RESTRICTED) || (!(language in S.secondary_langs) && !is_lang_whitelisted(pref.client, L)))
+			if(!istype(L) || (L.flags & RESTRICTED) || (!(language in S.secondary_langs) && !check_allowed_language(pref.client, L)))
 				pref.alternate_languages -= language
 
 	if(isnull(pref.language_prefixes) || !pref.language_prefixes.len)
@@ -63,7 +63,7 @@
 			var/list/available_languages = S.secondary_langs.Copy()
 			for(var/L in GLOB.all_languages)
 				var/datum/language/lang = GLOB.all_languages[L]
-				if(!(lang.flags & RESTRICTED) && (is_lang_whitelisted(user, lang)))
+				if(!(lang.flags & RESTRICTED) && (check_allowed_language(user.client, lang)))
 					available_languages |= L
 
 			// make sure we don't let them waste slots on the default languages

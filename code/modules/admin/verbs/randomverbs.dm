@@ -499,9 +499,12 @@ Traitors and the like can also be revived with the previous role mostly intact.
 
 	for(var/lang in picked_client.prefs.alternate_languages)
 		var/datum/language/chosen_language = GLOB.all_languages[lang]
-		if(chosen_language)
-			if(is_lang_whitelisted(src,chosen_language) || (new_character.species && (chosen_language.name in new_character.species.secondary_langs)))
+		if (chosen_language)
+			if (check_allowed_language(src, chosen_language))
 				new_character.add_language(lang)
+			else if (new_character.species)
+				if (chosen_language.name in new_character.species.secondary_langs)
+					new_character.add_language(lang)
 
 	//If desired, apply equipment.
 	if(equipment)

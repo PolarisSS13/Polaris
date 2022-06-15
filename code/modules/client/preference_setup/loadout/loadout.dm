@@ -68,7 +68,7 @@ var/global/list/gear_datums = list()
 		if(G.whitelisted && config.loadout_whitelist != LOADOUT_WHITELIST_OFF)
 			if(config.loadout_whitelist == LOADOUT_WHITELIST_STRICT && G.whitelisted != pref.species)
 				continue
-			if(config.loadout_whitelist == LOADOUT_WHITELIST_LAX && !is_alien_whitelisted(preference_mob(), GLOB.all_species[G.whitelisted]))	
+			if(config.loadout_whitelist == LOADOUT_WHITELIST_LAX && !check_allowed_species(pref.client, GLOB.all_species[G.whitelisted]))
 				continue
 		if(max_cost && G.cost > max_cost)
 			continue

@@ -180,14 +180,14 @@
 	for(var/current_species_name in GLOB.all_species)
 		var/datum/species/current_species = GLOB.all_species[current_species_name]
 
-		if(check_whitelist && config.usealienwhitelist && !check_rights(R_ADMIN|R_EVENT, 0, src)) //If we're using the whitelist, make sure to check it!
+		if(check_whitelist && config.use_allow_list_species && !check_rights(R_ADMIN|R_EVENT, 0, src)) //If we're using the whitelist, make sure to check it!
 			if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))
 				continue
 			if(whitelist.len && !(current_species_name in whitelist))
 				continue
 			if(blacklist.len && (current_species_name in blacklist))
 				continue
-			if((current_species.spawn_flags & SPECIES_IS_WHITELISTED) && !is_alien_whitelisted(src, current_species))
+			if (!check_allowed_species(client, current_species))
 				continue
 
 		valid_species += current_species_name
