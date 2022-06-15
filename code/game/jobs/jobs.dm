@@ -43,6 +43,7 @@ var/global/const/LAWYER			=(1<<9)
 var/global/const/CHAPLAIN			=(1<<10)
 var/global/const/ASSISTANT			=(1<<11)
 var/global/const/BRIDGE			=(1<<12)
+var/global/const/HERMIT				=(1<<13)
 
 /proc/guest_jobbans(var/job)
 	return ( (job in SSjob.get_job_titles_in_department(DEPARTMENT_COMMAND)) || (job in SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC)) || (job in SSjob.get_job_titles_in_department(DEPARTMENT_SECURITY)) )

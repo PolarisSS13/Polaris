@@ -1786,6 +1786,10 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/groundfloor/civilian)
+"aUH" = (
+/obj/structure/simple_door/sifwood,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "aUJ" = (
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled,
@@ -3562,6 +3566,9 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/security/interrogation)
+"bGA" = (
+/turf/simulated/wall/sifwood,
+/area/surface/outpost/checkpoint)
 "bGL" = (
 /obj/machinery/vending/dinnerware{
 	dir = 4
@@ -8963,6 +8970,12 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/hallway/primary/groundfloor/south)
+"ejl" = (
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "ekq" = (
 /obj/structure/table/wooden_reinforced,
 /obj/item/taperecorder,
@@ -10285,6 +10298,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/etc)
+"eKw" = (
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outpost/checkpoint)
 "eKA" = (
 /obj/machinery/disposal,
 /obj/structure/disposalpipe/trunk{
@@ -13013,7 +13029,7 @@
 	input_tag = "o2_in";
 	name = "Oxygen Tank Control";
 	output_tag = "o2_out";
-	sensors = list("o2_sensor" = "Tank")
+	sensors = list("o2_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/blue/border,
@@ -13322,6 +13338,11 @@
 /obj/structure/closet/secure_closet/security/cynosure,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/lockerroom)
+"gdi" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/storage/firstaid,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "gdn" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/grille,
@@ -13959,6 +13980,12 @@
 /obj/effect/zone_divider,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/groundfloor/south)
+"gvb" = (
+/obj/effect/landmark/start{
+	name = "Survivalist"
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/normal)
 "gve" = (
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 10
@@ -14740,6 +14767,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/hallway/gnd)
+"gJv" = (
+/obj/effect/landmark{
+	name = "JoinLateCheckpoint"
+	},
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outside/path/plains)
 "gJA" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 5
@@ -16912,6 +16945,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/hallway/primary/groundfloor/north)
+"hMY" = (
+/obj/effect/wingrille_spawn,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "hNc" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
@@ -17633,6 +17670,10 @@
 	},
 /turf/simulated/wall,
 /area/surface/station/crew_quarters/cafeteria)
+"ike" = (
+/obj/machinery/computer/cryopod/checkpoint,
+/turf/unsimulated/wall/planetary/sif,
+/area/surface/outpost/checkpoint)
 "ikq" = (
 /obj/structure/table/woodentable,
 /obj/machinery/chemical_dispenser/bar_coffee/full{
@@ -20068,6 +20109,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/reactor_waste)
+"jvV" = (
+/obj/structure/table/sifwoodentable,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "jwg" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -20091,6 +20136,9 @@
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway)
+"jwy" = (
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "jwF" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -20743,6 +20791,12 @@
 /obj/item/clothing/gloves/sterile/latex,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/rnd/xenobiology)
+"jNe" = (
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif/broken,
+/area/surface/outpost/checkpoint)
 "jNq" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -21275,6 +21329,10 @@
 	initial_flooring = /decl/flooring/tiling/steel_dirty
 	},
 /area/space)
+"jUL" = (
+/obj/machinery/cryopod/robot/door/checkpoint,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outpost/checkpoint)
 "jUQ" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -26061,6 +26119,12 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/security/interrogation)
+"lZX" = (
+/obj/structure/bed/chair/wood{
+	dir = 8
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "mab" = (
 /obj/item/radio/intercom{
 	dir = 8;
@@ -29031,6 +29095,16 @@
 /obj/random/mug,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/surface/station/crew_quarters/kitchen)
+"nmT" = (
+/obj/machinery/power/apc/high{
+	dir = 1
+	},
+/obj/structure/cable{
+	d2 = 8;
+	icon_state = "0-8"
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "nnd" = (
 /obj/effect/floor_decal/spline/plain{
 	dir = 8
@@ -30569,6 +30643,12 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/medical/emt_bay)
+"nXB" = (
+/obj/effect/landmark{
+	name = "JoinLateCheckpoint"
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/normal)
 "nXP" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -33933,6 +34013,9 @@
 /obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway)
+"poX" = (
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outpost/checkpoint)
 "ppb" = (
 /obj/structure/table/glass,
 /obj/structure/disposalpipe/segment{
@@ -36894,6 +36977,11 @@
 	dir = 1
 	},
 /area/surface/station/security/lobby)
+"qBI" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/material/knife/tacknife/survival,
+/turf/simulated/floor/wood/sif/broken,
+/area/surface/outpost/checkpoint)
 "qBQ" = (
 /obj/effect/floor_decal/steeldecal/steel_decals9{
 	dir = 8
@@ -37013,6 +37101,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/ward)
+"qDR" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "qEr" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
@@ -37102,7 +37196,7 @@
 	input_tag = "n2_in";
 	name = "Nitrogen Tank Control";
 	output_tag = "n2_out";
-	sensors = list("n2_sensor" = "Tank")
+	sensors = list("n2_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/red/border,
@@ -38097,7 +38191,7 @@
 	input_tag = "waste_in";
 	name = "Gas Mix Tank Control";
 	output_tag = "waste_out";
-	sensors = list("waste_sensor" = "Tank")
+	sensors = list("waste_sensor"="Tank")
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
@@ -40185,6 +40279,12 @@
 	},
 /turf/simulated/floor/outdoors/snow/sif/planetuse,
 /area/surface/outside/plains/station)
+"sby" = (
+/obj/effect/landmark/start{
+	name = "Survivalist"
+	},
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outpost/checkpoint)
 "scm" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/floor_decal/spline/plain{
@@ -40847,7 +40947,7 @@
 	name = "Air Tank Control";
 	output_tag = "air_out";
 	pressure_setting = 2000;
-	sensors = list("air_sensor" = "Tank")
+	sensors = list("air_sensor"="Tank")
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
@@ -42239,6 +42339,9 @@
 /obj/machinery/smartfridge/produce/persistent_lossy,
 /turf/simulated/wall,
 /area/surface/station/rnd/xenobiology/xenoflora)
+"tbX" = (
+/turf/unsimulated/wall/planetary/sif,
+/area/surface/outpost/checkpoint)
 "tcy" = (
 /obj/effect/floor_decal/steeldecal/steel_decals4{
 	dir = 1
@@ -44117,7 +44220,7 @@
 	input_tag = "co2_in";
 	name = "Carbon Dioxide Supply Control";
 	output_tag = "co2_out";
-	sensors = list("co2_sensor" = "Tank")
+	sensors = list("co2_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -45148,6 +45251,15 @@
 "uvl" = (
 /turf/simulated/wall,
 /area/surface/station/medical/surgery_storage)
+"uvA" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/melee/umbrella/random,
+/obj/item/melee/umbrella/random,
+/obj/machinery/light{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "uvB" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -45332,6 +45444,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/ai/upload)
+"uzp" = (
+/obj/effect/zone_divider,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outside/path/plains)
 "uAd" = (
 /obj/machinery/power/smes/buildable{
 	RCon_tag = "Reactor - Main";
@@ -46330,7 +46446,7 @@
 	input_tag = "tox_in";
 	name = "Phoron Supply Control";
 	output_tag = "tox_out";
-	sensors = list("tox_sensor" = "Tank")
+	sensors = list("tox_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -47697,6 +47813,15 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/atmos)
+"vBG" = (
+/obj/machinery/power/port_gen/pacman,
+/obj/structure/cable{
+	d2 = 4;
+	icon_state = "0-4"
+	},
+/obj/fiftyspawner/phoron,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "vBN" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 10
@@ -48771,7 +48896,7 @@
 	input_tag = "n2o_in";
 	name = "Nitrous Oxide Supply Control";
 	output_tag = "n2o_out";
-	sensors = list("n2o_sensor" = "Tank")
+	sensors = list("n2o_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -49339,6 +49464,11 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/hallway/primary/groundfloor/south)
+"wtI" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/melee/umbrella/random,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "wtQ" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -51487,6 +51617,12 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/security/restroom)
+"xsG" = (
+/obj/effect/landmark{
+	name = "JoinLateCheckpoint"
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outpost/checkpoint)
 "xsT" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -52029,6 +52165,10 @@
 /obj/item/storage/pill_bottle/spaceacillin,
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/cafeteria)
+"xFI" = (
+/obj/structure/bed,
+/turf/simulated/floor/wood/sif,
+/area/surface/outpost/checkpoint)
 "xGi" = (
 /turf/simulated/wall,
 /area/surface/station/maintenance/substation/security/gnd)
@@ -53992,20 +54132,20 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+tbX
+ike
+jUL
+jUL
+jUL
+wYa
+wYa
 vwy
 vwy
 vwy
@@ -54249,18 +54389,18 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+poX
+poX
+fyc
 vwy
 vwy
 vwy
@@ -54506,18 +54646,18 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+poX
+poX
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -54763,21 +54903,21 @@ vwy
 vwy
 vwy
 vwy
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+xsG
+eKw
+sby
+fyc
+gJv
 vwy
+gvb
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+nXB
 vwy
 vwy
 vwy
@@ -55020,17 +55160,17 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+eKw
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -55277,17 +55417,17 @@ vwy
 vwy
 vwy
 vwy
+bGA
+bGA
+hMY
+hMY
+bGA
+bGA
+eKw
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -55534,17 +55674,17 @@ vwy
 vwy
 vwy
 vwy
+bGA
+vBG
+jwy
+jwy
+xFI
+hMY
+eKw
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -55791,18 +55931,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+nmT
+jwy
+jwy
+xFI
+hMY
+eKw
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -56048,18 +56188,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+jwy
+ejl
+jNe
+jwy
+bGA
+eKw
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -56305,18 +56445,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+qDR
+jvV
+jvV
+jwy
+aUH
+eKw
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -56562,18 +56702,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+jwy
+lZX
+jwy
+jwy
+bGA
+eKw
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -56819,18 +56959,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+jwy
+jwy
+jwy
+jwy
+hMY
+eKw
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -57076,18 +57216,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+qBI
+gdi
+wtI
+uvA
+hMY
+eKw
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -57333,18 +57473,18 @@ vwy
 vwy
 vwy
 vwy
+bGA
+bGA
+hMY
+hMY
+bGA
+bGA
+eKw
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -57599,9 +57739,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -57856,9 +57996,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -58113,9 +58253,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -58370,9 +58510,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -58627,9 +58767,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -58884,9 +59024,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -59140,10 +59280,10 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -59397,9 +59537,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -59654,9 +59794,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -59910,9 +60050,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -60167,9 +60307,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -60423,9 +60563,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -60680,8 +60820,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -60936,9 +61076,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -61193,8 +61333,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -61449,9 +61589,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -61705,9 +61845,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -61962,9 +62102,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -62218,9 +62358,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -62475,9 +62615,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -62732,8 +62872,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -62989,8 +63129,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -63246,8 +63386,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -63502,9 +63642,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -63759,9 +63899,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -64016,9 +64156,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -64273,9 +64413,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -64530,9 +64670,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -64787,9 +64927,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -65044,8 +65184,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -65301,8 +65441,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -65558,9 +65698,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -65815,9 +65955,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -66072,9 +66212,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -66330,8 +66470,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -66587,8 +66727,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -66844,8 +66984,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -67101,8 +67241,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -67359,8 +67499,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -67616,8 +67756,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -67873,8 +68013,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -68130,8 +68270,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -68387,8 +68527,8 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -68643,9 +68783,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -68900,9 +69040,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -69156,9 +69296,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -69413,9 +69553,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -69669,9 +69809,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -69926,9 +70066,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -70183,9 +70323,9 @@ xdu
 xdu
 xdu
 xdu
-xdu
-xdu
-xdu
+uzp
+uzp
+uzp
 xdu
 xdu
 xdu
@@ -70439,9 +70579,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -70696,9 +70836,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -70952,9 +71092,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -71208,9 +71348,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -71464,9 +71604,9 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -71720,10 +71860,10 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -71976,10 +72116,10 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -72231,11 +72371,11 @@ vwy
 vwy
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -72486,13 +72626,13 @@ fyc
 fyc
 vwy
 vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -72742,13 +72882,13 @@ fyc
 fyc
 fyc
 fyc
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -73000,11 +73140,11 @@ fyc
 fyc
 fyc
 fyc
-vwy
-vwy
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -73258,9 +73398,9 @@ fyc
 fyc
 fyc
 fyc
-vwy
-vwy
-vwy
+fyc
+fyc
+fyc
 vwy
 vwy
 vwy
@@ -73517,7 +73657,7 @@ fyc
 fyc
 fyc
 fyc
-vwy
+fyc
 vwy
 vwy
 vwy

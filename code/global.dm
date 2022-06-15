@@ -62,6 +62,7 @@ var/global/list/latejoin_elevator   = list()
 var/global/list/latejoin_cryo       = list()
 var/global/list/latejoin_cyborg     = list()
 var/global/list/latejoin_checkpoint = list()
+var/global/list/latejoin_wilderness = list()
 
 var/global/list/prisonwarp         = list() // Prisoners go to these
 var/global/list/holdingfacility    = list() // Captured people go here

@@ -31,6 +31,9 @@
 		if("JoinLateCheckpoint")
 			latejoin_checkpoint += loc
 			delete_me = 1
+		if("JoinLateWilderness")
+			latejoin_wilderness += loc
+			delete_me = 1
 		if("JoinLateCryo")
 			latejoin_cryo += loc
 			delete_me = 1
