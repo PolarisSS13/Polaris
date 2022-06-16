@@ -111,7 +111,7 @@ var/global/list/holder_mob_icon_cache = list()
 	else if(istype(loc, /obj/item/clothing/accessory/holster))
 		var/obj/item/clothing/accessory/holster/holster = loc
 		if(holster.holstered == src)
-			holster.clear_holster()			
+			holster.clear_holster()
 		to_chat(held, "<span class='warning'>You extricate yourself from [holster].</span>")
 		held.forceMove(get_turf(held))
 	else if(isitem(loc))
@@ -142,6 +142,9 @@ var/global/list/holder_mob_icon_cache = list()
 	origin_tech = list(TECH_BIO = 2, TECH_ENGINEERING = 4)
 
 /obj/item/holder/cat
+	origin_tech = list(TECH_BIO = 2)
+
+/obj/item/holder/fennec
 	origin_tech = list(TECH_BIO = 2)
 
 /obj/item/holder/cat/runtime
