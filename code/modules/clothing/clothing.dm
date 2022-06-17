@@ -837,7 +837,7 @@
 		if(accessory.AltClick(user))
 			return TRUE
 	. = ..()
-	
+
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(LAZYLEN(accessories))
 		..()

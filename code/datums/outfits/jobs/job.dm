@@ -15,12 +15,13 @@
 
 /decl/hierarchy/outfit/job/equip_id(mob/living/carbon/human/H, rank, assignment)
 	var/obj/item/card/id/C = ..()
-	var/datum/job/J = job_master.GetJob(rank)
-	if(J)
-		C.access = J.get_access()
-	if(H.mind)
-		var/datum/mind/M = H.mind
-		if(M.initial_account)
-			var/datum/money_account/A = M.initial_account
-			C.associated_account_number = A.account_number
+	if(C)
+		var/datum/job/J = job_master.GetJob(rank)
+		if(J)
+			C.access = J.get_access()
+		if(H.mind)
+			var/datum/mind/M = H.mind
+			if(M.initial_account)
+				var/datum/money_account/A = M.initial_account
+				C.associated_account_number = A.account_number
 	return C

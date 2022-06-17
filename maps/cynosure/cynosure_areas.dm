@@ -1975,3 +1975,10 @@
 
 /area/shuttle/large_escape_pod2/transit
 	icon_state = "shuttle"
+
+// Wilderness spawn areas.
+/area/surface/wilderness/shack
+	name = "Wilderness Shack"
+
+/area/surface/outpost/checkpoint
+	name = "Exterior Checkpoint"

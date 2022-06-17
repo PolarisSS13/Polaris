@@ -63,3 +63,27 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	id_type = /obj/item/card/id/medical
 	id_pda_assignment = "Search and Rescue"
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_EXTENDED_SURVIVAL|OUTFIT_COMPREHENSIVE_SURVIVAL
+
+/decl/hierarchy/outfit/job/survivalist
+	name = OUTFIT_JOB_NAME("Survivalist")
+	l_ear =    null
+	r_ear =    null
+	pda_slot = null
+	pda_type = null
+	id_slot =  null
+	id_type =  null
+	mask =     /obj/item/clothing/mask/gas
+	r_pocket = /obj/item/tank/emergency/oxygen/double
+	l_pocket = /obj/item/radio
+	uniform =  /obj/item/clothing/under/ascetic
+	shoes =    /obj/item/clothing/shoes/boots/winter
+	suit =     /obj/item/clothing/suit/storage/hooded/wintercoat
+	belt =     /obj/item/gun/energy/phasegun/pistol // better make that cell count
+
+/decl/hierarchy/outfit/job/survivalist/equip(mob/living/carbon/human/H, rank, assignment)
+	. = ..()
+	if(H && H.shoes)
+		var/obj/item/clothing/shoes/shoes = H.shoes
+		if(istype(shoes) && !shoes.holding && shoes.can_hold_knife)
+			shoes.holding = new /obj/item/material/knife/tacknife/survival(H)
+			shoes.update_icon()

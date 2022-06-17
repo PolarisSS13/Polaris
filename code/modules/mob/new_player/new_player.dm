@@ -405,7 +405,7 @@
 	var/join_message = join_props["msg"]
 	var/announce_channel = join_props["channel"] || "Common"
 
-	if(!T || !join_message)
+	if(!T)
 		return 0
 
 	spawning = 1
@@ -451,9 +451,11 @@
 	ticker.mode.latespawn(character)
 
 	if(J.mob_type & JOB_SILICON)
-		AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
+		if(join_message && announce_channel)
+			AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
 	else
-		AnnounceArrival(character, rank, join_message, announce_channel, character.z)
+		if(join_message && announce_channel)
+			AnnounceArrival(character, J?.substitute_announce_title || rank, join_message, announce_channel, character.z)
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
