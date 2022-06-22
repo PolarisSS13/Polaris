@@ -271,7 +271,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
 				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
-				icon_key += "[species?.limb_blend || ICON_ADD]"
+				icon_key += "[species?.limb_blend_mode || ICON_ADD]"
 			else
 				icon_key += "#000000"
 
@@ -519,9 +519,9 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 
 	var/icon/eyes_icon = new/icon(head_organ.eye_icon_location, head_organ.eye_icon)
 	if(eyes)
-		eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
+		eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), head_organ.eye_blend)
 	else
-		eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
+		eyes_icon.Blend(rgb(128,0,0), head_organ.eye_blend)
 
 	if (head_organ.nonsolid)
 		eyes_icon += rgb(,,,180)
@@ -1122,7 +1122,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	//If you are FBP with wing style and didn't set a custom one
 	if(synthetic && synthetic.includes_wing && !wing_style)
 		var/icon/wing_s = new/icon("icon" = synthetic.icon, "icon_state" = "wing") //I dunno. If synths have some custom wing?
-		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.limb_blend || ICON_ADD) // Are wings even used on Polaris? This might need an additional blend mode var.
+		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.limb_blend_mode || ICON_ADD) // Are wings even used on Polaris? This might need an additional blend mode var.
 		return image(wing_s)
 
 	//If you have custom wings selected

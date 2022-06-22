@@ -218,8 +218,11 @@
 
 		// There are a few things that will make us want to ignore all other languages in - namely, HIVEMIND languages.
 		var/datum/language/L = current[1]
-		if(L && (L.flags & HIVEMIND || L.flags & SIGNLANG))
-			return new /datum/multilingual_say_piece(L, trim(sanitize(strip_prefixes(message))))
+		if(L)
+			if(L.flags & HIVEMIND || L.flags & SIGNLANG)
+				return new /datum/multilingual_say_piece(L, trim(sanitize(strip_prefixes(message))))
+			if(!L.can_be_spoken_properly_by(src))
+				message = L.muddle(message)
 
 		if(i + 1 > length(prefix_locations)) // We are out of lookaheads, that means the rest of the message is in cur lang
 			var/spoke_message = sanitize(handle_autohiss(trim(copytext(message, current[3])), L))

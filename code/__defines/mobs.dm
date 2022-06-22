@@ -258,6 +258,9 @@
 #define O_VRLINK   "virtual node"
 #define O_ALL list(O_STANDARD, O_MOUTH, O_CELL, O_PLASMA, O_HIVE, O_NUTRIENT, O_STRATA, O_RESPONSE, O_GBLADDER, O_POLYP, O_ANCHOR, O_REGBRUTE, O_REGBURN, O_REGOXY, O_REGTOX, O_ACID, O_EGG, O_RESIN, O_AREJECT, O_VENTC, O_VRLINK)
 
+// Carmoney organs
+#define O_SYSTEM_CONTROLLER "system controller"
+
 // External organs, aka limbs
 #define BP_L_FOOT "l_foot"
 #define BP_R_FOOT "r_foot"
@@ -325,6 +328,7 @@
 #define SPECIES_DIONA			"Diona"
 #define SPECIES_VOX				"Vox"
 #define SPECIES_ZADDAT			"Zaddat"
+#define SPECIES_MANTID          "Mantid"
 
 // Monkey and alien monkeys.
 #define SPECIES_MONKEY			"Monkey"

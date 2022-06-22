@@ -225,6 +225,11 @@ var/global/list/priv_region_access
 		var/id = wear_id.GetID()
 		if(id)
 			return id
+	// Foul snowflake code begin
+	var/obj/item/organ/internal/robotic/system_controller/controller = locate() in internal_organs
+	if(controller && !controller.is_broken())
+		return controller.GetIdCard()
+	// Foul snowflake code end
 
 /mob/living/silicon/GetIdCard()
 	return idcard

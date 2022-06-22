@@ -60,7 +60,7 @@
 	flags = NO_SCAN
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR
-	limb_blend = ICON_MULTIPLY
+	limb_blend_mode = ICON_MULTIPLY
 
 	blood_color = "#9066BD"
 	flesh_color = "#808D11"

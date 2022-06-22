@@ -541,6 +541,12 @@
 	acti_sound = 'sound/effects/sparks4.ogg'
 	deac_sound = 'sound/effects/sparks4.ogg'
 
+/obj/item/weldingtool/electric/mantid
+	name = "mantid welding tool"
+	desc = "An oddly shaped alien welding tool."
+	icon = 'icons/obj/mantid.dmi'
+	cell_type = /obj/item/cell/mantid
+
 /obj/item/weldingtool/electric/unloaded
 	cell_type = null
 

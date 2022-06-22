@@ -42,6 +42,11 @@
 	. = ..()
 	reagents.add_reagent("water", 30)
 
+/obj/item/reagent_containers/drinks/cans/waterbottle/mantid
+	name = "hydration cylinder"
+	desc = "An alien portable long term storage device for potable water."
+	icon = 'icons/obj/mantid.dmi'
+
 /obj/item/reagent_containers/food/drinks/cans/space_mountain_wind
 	name = "\improper Space Mountain Wind"
 	desc = "Blows right through you like a space wind. Contains caffeine."

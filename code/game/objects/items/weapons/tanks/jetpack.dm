@@ -124,3 +124,21 @@
 
 /obj/item/tank/jetpack/rig/get_gas_supply()
 	return holder?.air_supply?.air_contents
+
+// Boilerplate due to hard typechecks in jetpack code. Todo: make it an extension.
+/obj/item/tank/jetpack/mantid
+	name = "catalytic maneuvering pack"
+	desc = "An integrated mantid-made gas processing plant and maneuvering pack that continuously synthesises 'breathable' atmosphere and propellant."
+	icon_state = "mantid_jetpack"
+	var/refill_gas_type = "oxygen"
+	var/gas_regen_amount = 0.03
+	var/gas_regen_cap = 30
+
+/obj/item/tank/jetpack/mantid/Initialize()
+	. = ..()
+	air_contents.adjust_gas(refill_gas_type, (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+
+/obj/item/tank/jetpack/mantid/process()
+	..()
+	if(air_contents.total_moles < gas_regen_cap)
+		air_contents.adjust_gas(refill_gas_type, gas_regen_amount)

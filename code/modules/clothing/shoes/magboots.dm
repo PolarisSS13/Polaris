@@ -127,3 +127,10 @@
 	. = ..()
 	if(magpulse)
 		. += "It would be hard to take these off without relaxing your grip first." // Theoretically this message should only be seen by the wearer when the claws are equipped.
+
+/obj/item/clothing/shoes/magboots/mantid
+	name = "mantid mag-claws"
+	desc = "A set of powerful gripping claws."
+	species_restricted = list(SPECIES_MANTID)
+	icon_state = "mantid_magboots0"
+	icon_base = "mantid_magboots"

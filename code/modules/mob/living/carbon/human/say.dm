@@ -186,7 +186,7 @@
 	var/list/returns[2]
 	if(species.speech_sounds && prob(species.speech_chance))
 		returns[1] = sound(pick(species.speech_sounds))
-		returns[2] = 50
+		returns[2] = species.speech_volume
 	return returns
 
 /mob/living/carbon/human/binarycheck()

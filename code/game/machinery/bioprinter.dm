@@ -271,7 +271,7 @@
 	var/malfunctioned = FALSE
 	if (malfunctioning && prob(30)) // Alien Tech is a hell of a drug.
 		malfunctioned = TRUE
-		var/possible_species = list(SPECIES_HUMAN, SPECIES_VOX, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_UNATHI, SPECIES_GOLEM, SPECIES_SHADOW)
+		var/possible_species = list(SPECIES_HUMAN, SPECIES_VOX, SPECIES_MANTID, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_UNATHI, SPECIES_GOLEM, SPECIES_SHADOW)
 		var/new_species = pick(possible_species)
 		if (!GLOB.all_species[new_species])
 			new_species = SPECIES_HUMAN

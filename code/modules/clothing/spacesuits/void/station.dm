@@ -199,7 +199,7 @@
 	icon_state = "rig0-medicalalt"
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 5, bomb = 15, bio = 100, rad = 30)
 	light_overlay = "helmet_light_dual_blue"
-	species_restricted = list("exclude",SPECIES_DIONA,SPECIES_VOX,SPECIES_TESHARI)	//this thing can autoadapt to most species, but Diona/vox are too weird, and tesh are too small
+	species_restricted = list("exclude", SPECIES_DIONA, SPECIES_VOX, SPECIES_MANTID, SPECIES_TESHARI)	//this thing can autoadapt to most species, but Diona/vox are too weird, and tesh are too small
 	no_cycle = TRUE
 
 /obj/item/clothing/head/helmet/space/void/medical/alt
@@ -235,7 +235,7 @@
 	icon_state = "rig-medicalalt"
 	slowdown = 0
 	armor = list(melee = 20, bullet = 5, laser = 20,energy = 5, bomb = 15, bio = 100, rad = 30)
-	species_restricted = list("exclude",SPECIES_DIONA,SPECIES_VOX,SPECIES_TESHARI)	//this thing can autoadapt, but Diona/vox are too weird, and tesh are too small
+	species_restricted = list("exclude", SPECIES_DIONA, SPECIES_VOX, SPECIES_MANTID, SPECIES_TESHARI)	//this thing can autoadapt, but Diona/vox are too weird, and tesh are too small
 	no_cycle = TRUE
 
 /obj/item/clothing/suit/space/void/medical/alt

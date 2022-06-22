@@ -132,7 +132,7 @@ var/global/list/limb_icon_cache = list()
 				var/cache_key = "[body_hair]-[icon_name]-[h_col[1]][h_col[2]][h_col[3]]"
 				if(!limb_icon_cache[cache_key])
 					var/icon/I = icon(species.get_icobase(owner), "[icon_name]_[body_hair]")
-					I.Blend(rgb(h_col[1],h_col[2],h_col[3]), ICON_ADD)
+					I.Blend(rgb(h_col[1],h_col[2],h_col[3]), species.hair_blend_mode)
 					limb_icon_cache[cache_key] = I
 				mob_icon.Blend(limb_icon_cache[cache_key], ICON_OVERLAY)
 
@@ -177,7 +177,7 @@ var/global/list/limb_icon_cache = list()
 			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[s_tone]"
 	else if(s_col && s_col.len >= 3)
-		var/blend = species?.limb_blend || ICON_ADD
+		var/blend = species?.limb_blend_mode || ICON_ADD
 		applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), blend)
 		icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[blend]"
 

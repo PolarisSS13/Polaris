@@ -310,7 +310,10 @@ Turf and target are separate in case you want to teleport some distance from a t
 					search_pda = 0
 	return 1
 
-
+/mob/living/carbon/human/fully_replace_character_name(var/oldname,var/newname)
+	. = ..()
+	if(. && wearing_rig?.update_visible_name && wearing_rig.helmet)
+		wearing_rig.helmet.visible_name = real_name
 
 //Generalised helper proc for letting mobs rename themselves. Used to be clname() and ainame()
 //Last modified by Carn
@@ -1252,6 +1255,10 @@ var/global/list/WALLITEMS = list(
 	if(istype(arglist,/list))
 		arglist = list2params(arglist)
 	return "<a href='?src=\ref[D];[arglist]'>[content]</a>"
+
+/proc/make_rainbow(var/msg)
+	for(var/i = 1 to length(msg))
+		. += "<font color='[get_random_colour(1)]'>[copytext(msg, i, i+1)]</font>"
 
 /proc/get_random_colour(var/simple, var/lower=0, var/upper=255)
 	var/colour

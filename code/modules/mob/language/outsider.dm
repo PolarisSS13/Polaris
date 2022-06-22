@@ -151,7 +151,7 @@
 	ask_verb = "asks"
 	exclaim_verb = "shouts"
 	colour = "warning"
-	key = "]"
+	key = "{"
 	flags = RESTRICTED
 	syllables = list("chan","ange","thi","se")
 

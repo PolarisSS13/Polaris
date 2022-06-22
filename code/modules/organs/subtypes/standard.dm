@@ -273,6 +273,7 @@
 	base_miss_chance = 40
 	var/can_intake_reagents = 1
 	var/head_offset = 0
+	var/eye_blend = ICON_ADD
 	var/eye_icon = "eyes_s"
 	var/eye_icon_location = 'icons/mob/human_face.dmi'
 	force = 3
@@ -357,14 +358,14 @@
 			//And we have them
 			if(eyes)
 				if(has_eye_color)
-					eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
+					eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), eye_blend)
 			//They're gone!
 			else
-				eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
+				eyes_icon.Blend(rgb(128,0,0), eye_blend)
 
 		//We have weird other-sorts of eyes (as we're not supposed to have eye organ, but we have HAS_EYE_COLOR species)
 		else
-			eyes_icon.Blend(rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes), ICON_ADD)
+			eyes_icon.Blend(rgb(owner.r_eyes, owner.g_eyes, owner.b_eyes), eye_blend)
 
 		add_overlay(eyes_icon)
 		mob_icon.Blend(eyes_icon, ICON_OVERLAY)

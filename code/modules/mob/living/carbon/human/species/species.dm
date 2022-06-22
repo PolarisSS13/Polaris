@@ -11,10 +11,9 @@
 	var/list/catalogue_data = null							// A list of /datum/category_item/catalogue datums, for the cataloguer, or null.
 
 	// Icon/appearance vars.
-	var/icobase = 'icons/mob/human_races/r_human.dmi'		 // Normal icon set.
-	var/icon_template = 'icons/mob/human_races/template.dmi' // Used for mob icon generation.
-	var/deform = 'icons/mob/human_races/r_def_human.dmi'	 // Mutated icon set.
-	var/limb_blend = ICON_ADD								 // Specify a blending mode for limb colourisation.
+	var/icobase = 'icons/mob/human_races/r_human.dmi'			// Normal icon set.
+	var/deform = 'icons/mob/human_races/r_def_human.dmi'		// Mutated icon set.
+	var/icon_template = 'icons/mob/human_races/template.dmi'	// Used for mob icon generation.
 
 	var/speech_bubble_appearance = "normal"					// Part of icon_state to use for speech bubbles when talking.	See talk.dmi for available icons.
 	var/fire_icon_state = "humanoid"						// The icon_state used inside OnFire.dmi for when on fire.
@@ -29,6 +28,9 @@
 	var/blood_color = "#A10808"								// Red.
 	var/flesh_color = "#FFC896"								// Pink.
 	var/base_color											// Used by changelings. Should also be used for icon previews.
+
+	var/hair_blend_mode = ICON_ADD
+	var/limb_blend_mode = ICON_ADD							// Specify a blending mode for limb colourisation.
 
 	var/tail												// Name of tail state in species effects icon file.
 	var/tail_animation										// If set, the icon to obtain tail animation states from.
@@ -72,6 +74,7 @@
 	var/list/secondary_langs = list()						// The names of secondary languages that are available to this species.
 	var/list/speech_sounds = list()							// A list of sounds to potentially play when speaking.
 	var/list/speech_chance = list()							// The likelihood of a speech sound playing.
+	var/speech_volume = 50
 	var/num_alternate_languages = 0							// How many secondary languages are available to select at character creation
 	var/name_language = LANGUAGE_GALCOM						// The language to use when determining names for this species, or null to use the first name/last name generator
 

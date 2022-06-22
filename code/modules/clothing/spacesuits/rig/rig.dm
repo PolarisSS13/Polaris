@@ -28,12 +28,14 @@
 	preserve_item = 1
 
 	var/suit_state //The string used for the suit's icon_state.
+	var/list/species_restricted
 
 	var/interface_path = "RIGSuit"
 	var/ai_interface_path = "RIGSuit"
 	var/interface_title = "Hardsuit Controller"
 	var/wearer_move_delay //Used for AI moving.
 	var/ai_controlled_move_delay = 10
+	var/equipment_overlay_icon = 'icons/mob/rig_modules.dmi'
 
 	// Keeps track of what this rig should spawn with.
 	var/suit_type = "hardsuit"
@@ -95,6 +97,8 @@
 	var/datum/effect_system/spark_spread/spark_system
 	var/datum/mini_hud/rig/minihud
 
+	var/update_visible_name = FALSE
+
 /obj/item/rig/examine()
 	. = ..()
 	if(wearer)
@@ -151,6 +155,16 @@
 		if(allowed)
 			chest.allowed = allowed
 		verbs |= /obj/item/rig/proc/toggle_chest
+
+	if(species_restricted)
+		if(chest)
+			chest.species_restricted = species_restricted.Copy()
+		if(gloves)
+			gloves.species_restricted = species_restricted.Copy()
+		if(helmet)
+			helmet.species_restricted = species_restricted.Copy()
+		if(boots)
+			boots.species_restricted = species_restricted.Copy()
 
 	for(var/obj/item/piece in list(gloves,helmet,boots,chest))
 		if(!istype(piece))
@@ -374,6 +388,9 @@
 		else
 			minihud = new (M.hud_used, src)
 	to_chat(M, "<span class='notice'><b>Your entire suit [canremove ? "loosens as the components relax" : "tightens around you as the components lock into place"].</b></span>")
+	if(!canremove && update_visible_name && helmet)
+		helmet.visible_name = wearer.real_name
+
 	playsound(src, 'sound/machines/rig/rigstarted.ogg', 10, FALSE)
 	M.client.screen -= booting_L
 	qdel(booting_L)
@@ -594,10 +611,10 @@
 			species_icon = LAZYACCESS(sprite_sheets, body_type)
 		mob_icon = icon(icon = species_icon, icon_state = "[icon_state]")
 
-	if(installed_modules.len)
+	if(installed_modules.len && equipment_overlay_icon)
 		for(var/obj/item/rig_module/module in installed_modules)
 			if(module.suit_overlay)
-				chest.add_overlay(image('icons/mob/rig_modules.dmi', icon_state = "[module.suit_overlay]", dir = SOUTH))
+				chest.add_overlay(image(equipment_overlay_icon, icon_state = "[module.suit_overlay]", dir = SOUTH))
 
 	if(wearer)
 		wearer.update_inv_shoes()
@@ -635,6 +652,16 @@
 			to_chat(module.integrated_ai, "[message]")
 			. = 1
 
+/obj/item/rig/proc/species_can_wear(var/species_name)
+	if(!species_restricted)
+		return TRUE
+	var/exclude = ("exclude" in species_restricted)
+	if(!species_name)
+		return exclude
+	if(species_name in species_restricted)
+		return !exclude
+	return FALSE
+
 /obj/item/rig/equipped(mob/living/carbon/human/M)
 	..()
 
@@ -646,6 +673,11 @@
 		src.forceMove(get_turf(src))
 		return
 
+	if(!species_can_wear(M.species.name))
+		to_chat(M, SPAN_WARNING("Your species cannot wear \the [src]."))
+		M.drop_from_inventory(src)
+		return
+
 	if(seal_delay > 0 && istype(M) && (M.back == src || M.belt == src))
 		M.visible_message("<span class='notice'>[M] starts putting on \the [src]...</span>", "<span class='notice'>You start putting on \the [src]...</span>")
 		if(!do_after(M,seal_delay))
@@ -653,12 +685,18 @@
 				if(!M.unEquip(src))
 					return
 			src.forceMove(get_turf(src))
-			return
+
+	if(!species_can_wear(M.species.name))
+		if(M)
+			M.drop_from_inventory(src)
+		return
 
 	if(istype(M) && (M.back == src || M.belt == src))
 		M.visible_message("<span class='notice'><b>[M] struggles into \the [src].</b></span>", "<span class='notice'><b>You struggle into \the [src].</b></span>")
 		wearer = M
 		wearer.wearing_rig = src
+		if(update_visible_name && helmet)
+			helmet.visible_name = wearer.real_name
 		update_icon()
 
 /obj/item/rig/proc/toggle_piece(var/piece, var/mob/living/carbon/human/H, var/deploy_mode, var/forced = FALSE)

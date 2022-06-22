@@ -228,3 +228,22 @@
 /obj/item/tank/stasis/nitro_cryo/Initialize()
 	. = ..()
 	src.air_contents.adjust_gas_temp("nitrogen", (3*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*TN60C), TN60C)
+
+// Self-refilling tank
+/obj/item/tank/mantid
+	name = "mantid gas reactor"
+	desc = "A mantid gas processing plant that continuously synthesises 'breathable' atmosphere."
+	icon = 'icons/obj/mantid.dmi'
+	icon_state = "tank"
+	var/refill_gas_type = "oxygen"
+	var/gas_regen_amount = 0.03
+	var/gas_regen_cap = 30
+
+/obj/item/tank/mantid/Initialize()
+	. = ..()
+	air_contents.adjust_gas(refill_gas_type, (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+
+/obj/item/tank/mantid/process()
+	..()
+	if(air_contents.total_moles < gas_regen_cap)
+		air_contents.adjust_gas(refill_gas_type, gas_regen_amount)

@@ -7,6 +7,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	pickup_sound = 'sound/items/pickup/clothing.ogg'
 	var/list/species_restricted = null //Only these species can wear this kit.
 	var/gunshot_residue //Used by forensics.
+	var/visible_name = "Unknown"
 
 	var/list/accessories
 	var/list/valid_accessory_slots
@@ -407,7 +408,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	w_class = ITEMSIZE_TINY
 	icon = 'icons/obj/clothing/rings.dmi'
 	gender = NEUTER
-	species_restricted = list("exclude", SPECIES_DIONA)
+	species_restricted = list("exclude", SPECIES_DIONA, SPECIES_MANTID)
 	siemens_coefficient = 1
 	glove_level = 1
 	fingerprint_chance = 100
@@ -616,7 +617,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	slowdown = SHOES_SLOWDOWN
 	force = 2
 	var/overshoes = 0
-	species_restricted = list("exclude",SPECIES_TESHARI, SPECIES_VOX)
+	species_restricted = list("exclude", SPECIES_TESHARI, SPECIES_VOX, SPECIES_MANTID)
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/shoes.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi'
@@ -770,6 +771,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	w_class = ITEMSIZE_NORMAL
 	show_messages = 1
 	blood_sprite_state = "uniformblood"
+	species_restricted = list("exclude", SPECIES_MANTID)
 
 	var/has_sensor = 1 //For the crew computer 2 = unable to change mode
 	var/sensor_mode = 0

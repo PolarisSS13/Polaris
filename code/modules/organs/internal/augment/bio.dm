@@ -101,4 +101,3 @@
 	if(istype(owner, /mob/living/carbon/human))
 		var/mob/living/carbon/human/H = owner
 		H.add_modifier(/datum/modifier/sprinting, 1 MINUTES)
-

@@ -98,8 +98,11 @@ var/global/const/access_explorer = 43
 	)
 
 /datum/job/survivalist/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
-	if(H.species?.name == SPECIES_VOX)
-		return outfit_by_type(/decl/hierarchy/outfit/vox/survivor)
+	switch(H?.get_species_name())
+		if(SPECIES_VOX)
+			return outfit_by_type(/decl/hierarchy/outfit/vox/survivor)
+		if(SPECIES_MANTID)
+			return outfit_by_type(/decl/hierarchy/outfit/job/ascent/survivor)
 	return ..()
 
 /datum/alt_title/crash_survivor

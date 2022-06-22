@@ -485,3 +485,10 @@ var/global/const/access_union = 120
 	id = access_union
 	desc = "Union Representative"
 	region = ACCESS_REGION_COMMAND
+
+var/global/const/access_ascent = 400 // For Ascent materiel
+/datum/access/ascent
+	id = access_ascent
+	desc = "Ascent Materiel"
+	access_type = ACCESS_TYPE_NONE
+

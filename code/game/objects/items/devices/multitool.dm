@@ -99,3 +99,9 @@
 	icon_state = "multitool"
 	toolspeed = 0.1
 	origin_tech = list(TECH_MAGNET = 5, TECH_ENGINEERING = 5)
+
+/obj/item/multitool/mantid
+	name = "mantid multitool"
+	desc = "An alien microcomputer of some kind."
+	icon = 'icons/obj/mantid.dmi'
+	icon_state = "multitool"

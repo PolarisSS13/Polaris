@@ -18,7 +18,7 @@
 	min_pressure_protection = 0 * ONE_ATMOSPHERE
 	max_pressure_protection = 2 * ONE_ATMOSPHERE
 	siemens_coefficient = 0.9
-	species_restricted = list("exclude",SPECIES_DIONA)
+	species_restricted = list("exclude", SPECIES_DIONA, SPECIES_MANTID)
 	preserve_item = 1
 	flash_protection = FLASH_PROTECTION_MAJOR
 	valid_accessory_slots = null
@@ -83,7 +83,7 @@
 	min_pressure_protection = 0 * ONE_ATMOSPHERE
 	max_pressure_protection = 2 * ONE_ATMOSPHERE
 	siemens_coefficient = 0.9
-	species_restricted = list("exclude",SPECIES_DIONA)
+	species_restricted = list("exclude", SPECIES_DIONA, SPECIES_MANTID)
 	preserve_item = 1
 	valid_accessory_slots = (ACCESSORY_SLOT_OVER | ACCESSORY_SLOT_ARMBAND | ACCESSORY_SLOT_DECOR)
 	var/list/supporting_limbs //If not-null, automatically splints breaks. Checked when removing the suit.

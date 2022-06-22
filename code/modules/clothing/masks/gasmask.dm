@@ -194,3 +194,10 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/mask/gas/mantid
+	name = "mantid facemask"
+	desc = "An alien facemask with chunky gas filters and a breathing valve."
+	icon_state = "mantid_mask"
+	species_restricted = list(SPECIES_MANTID)
+	flags_inv = 0

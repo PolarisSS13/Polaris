@@ -151,3 +151,25 @@
 	var/area/A = get_area(src)
 	if(!A.lightswitch || !A.light_power)
 		charge = 0 //For naturally depowered areas, we start with no power
+
+// Self-charging power cell.
+/obj/item/cell/mantid
+	name = "mantid microfusion plant"
+	desc = "An impossibly tiny fusion reactor of mantid design."
+	icon = 'icons/obj/mantid.dmi'
+	icon_state = "plant"
+	maxcharge = 1500
+	w_class = ITEMSIZE_NORMAL
+	var/recharge_amount = 12
+
+/obj/item/cell/mantid/Initialize()
+	START_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/cell/mantid/Destroy()
+	STOP_PROCESSING(SSobj, src)
+	. = ..()
+
+/obj/item/cell/mantid/process()
+	if(charge < maxcharge)
+		give(recharge_amount)

@@ -4109,3 +4109,11 @@ shaved
 	icon_state = "default"
 	icon = 'icons/mob/human_races/r_skrell.dmi'
 	species_allowed = list(SPECIES_SKRELL)
+
+// Mantid stuff.
+/datum/sprite_accessory/marking/mantid_highlights
+	name = "Mantid Highlights"
+	icon_state = "mantid_highlights"
+	body_parts = list(BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_L_ARM, BP_R_ARM, BP_L_HAND, BP_R_HAND, BP_GROIN, BP_HEAD)
+	species_allowed = list(SPECIES_MANTID)
+	color_blend_mode = ICON_MULTIPLY
