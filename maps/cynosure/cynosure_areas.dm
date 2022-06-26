@@ -1533,13 +1533,13 @@
 	icon_state = "shuttle2"
 
 /area/shuttle/exploration/general
-	name = "\improper Exploration Shuttle"
+	name = "\improper NTC Calvera Passenger Compartment"
 
 /area/shuttle/exploration/cockpit
-	name = "\improper Exploration Shuttle Cockpit"
+	name = "\improper NTC Calvera Cockpit"
 
 /area/shuttle/exploration/cargo
-	name = "\improper Exploration Shuttle Cargo"
+	name = "\improper NTC Calvera Cargo and Engine Room"
 
 //Centcomm Antags and Others
 
