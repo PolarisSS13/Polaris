@@ -144,7 +144,7 @@ var/global/list/holder_mob_icon_cache = list()
 /obj/item/holder/cat
 	origin_tech = list(TECH_BIO = 2)
 
-/obj/item/holder/fennec
+/obj/item/holder/karik
 	origin_tech = list(TECH_BIO = 2)
 
 /obj/item/holder/cat/runtime
