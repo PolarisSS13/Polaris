@@ -660,3 +660,33 @@
 	name = "Chat With Sally"
 	desc = "A poster depicting a familiar face readying to slurp a big mug of coffee. Thanks to a partnership with Kaleidoscope Cosmetics, the latest incarnation of Vir's 'Sally' chat-show host comes with the latest in cosmetic gene-mods! Or not, she's a drone."
 	listing_name = "Ad - Chat With Sally"
+
+/decl/poster/nanotrasen/pol_11
+	icon_state = "tgposter63"
+	name = "Phoron and the body"
+	desc = "This informational poster provides information on the effects of Phoron exposure, and what you should do if exposed to Phoron."
+	listing_name = "Safety - Phoron and the body"
+
+/decl/poster/pol_17
+	icon_state = "tgposter64"
+	name = "Periodic Table of the Elements"
+	desc = "It is displaying the periodic table of the elements, from Hydrogen to Oganesson, and everything inbetween."
+	listing_name = "Info - Periodic Table"
+
+/decl/poster/pol_18
+	icon_state = "tgposter65"
+	name = "24-Seven Supermarkets"
+	desc = "An advertisement for 24-Seven supermarkets, advertising their new 24-Stops as part of their partnership with Nanotrasen."
+	listing_name = "Ad - 24-stop"
+
+/decl/poster/pol_19
+	icon_state = "tgposter66"
+	name = "Midtown Slice Pizza"
+	desc = "An advertisement for Midtown Slice Pizza, the official pizzeria partner of Nanotrasen. Midtown Slice: like a slice of home, no matter where you are."
+	listing_name = "Ad - Midtown Pizza"
+
+/decl/poster/pol_20
+	icon_state = "tgposter67"
+	name = "Jim Norton's Coffee"
+	desc = "An advertisement for Jim Norton's, the coffee joint that's taken the galaxy by storm."
+	listing_name = "Ad - Jim Norton Coffee"

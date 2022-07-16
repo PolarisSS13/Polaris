@@ -5123,9 +5123,9 @@
 	dir = 4
 	},
 /obj/machinery/alarm/monitor/isolation{
+	alarm_id = "isolation_one";
 	dir = 4;
-	pixel_x = -22;
-	alarm_id = "isolation_one"
+	pixel_x = -22
 	},
 /obj/machinery/camera/network/research_outpost{
 	c_tag = "OPR - Isolation Cell A";
@@ -10364,9 +10364,9 @@
 	dir = 4
 	},
 /obj/machinery/alarm/monitor/isolation{
+	alarm_id = "isolation_three";
 	dir = 4;
-	pixel_x = -22;
-	alarm_id = "isolation_three"
+	pixel_x = -22
 	},
 /obj/machinery/camera/network/research_outpost{
 	c_tag = "OPR - Isolation Cell C";
@@ -14945,6 +14945,10 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/south)
+"FU" = (
+/obj/structure/sign/explosive,
+/turf/simulated/wall/r_wall,
+/area/surface/station/rnd/storage)
 "FV" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/door/firedoor/border_only,
@@ -18727,9 +18731,9 @@
 	dir = 4
 	},
 /obj/machinery/alarm/monitor/isolation{
+	alarm_id = "isolation_two";
 	dir = 4;
-	pixel_x = -22;
-	alarm_id = "isolation_two"
+	pixel_x = -22
 	},
 /obj/machinery/camera/network/research_outpost{
 	c_tag = "OPR - Isolation Cell B";
@@ -50172,7 +50176,7 @@ JV
 JV
 JV
 uB
-uB
+FU
 uB
 yq
 tM

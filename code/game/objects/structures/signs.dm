@@ -123,6 +123,11 @@
 	desc = "A warning sign which reads 'NO SMOKING'."
 	icon_state = "nosmoking2"
 
+/obj/structure/sign/nosmoking_2/burnt
+	name = "\improper NO SMOKING"
+	desc = "A warning sign which reads 'NO SMOKING'. It looks like someone didn't follow it's advice..."
+	icon_state = "nosmoking2_burnt"
+
 /obj/structure/sign/warning
 	name = "\improper WARNING"
 	icon_state = "securearea"
@@ -1111,3 +1116,31 @@
 
 /obj/structure/sign/bigname/seg_7
 	icon_state = "cyno_7"
+
+/obj/structure/sign/clock
+	name = "wall clock"
+	desc = "A basic wall clock, synced to the current system time."
+	icon_state = "clock"
+
+/obj/structure/sign/clock/Initialize()
+	. = ..()
+	desc += "\nThe clock shows that the time is [stationtime2text()]."
+
+/obj/structure/sign/calendar
+	name = "calendar"
+	desc = "It's an old-school, NanoTrasen branded wall calendar. Sure, it might be obsolete with modern technology, but it's still hard to imagine an office without one."
+	icon_state = "calendar"
+
+/obj/structure/sign/calendar/Initialize()
+	. = ..()
+	desc += "\nThe calendar shows that the date is [stationdate2text()]."
+
+/obj/structure/sign/explosive
+	name = "\improper HIGH EXPLOSIVES sign"
+	desc = "A warning sign which reads 'HIGH EXPLOSIVES'."
+	icon_state = "explosives"
+
+/obj/structure/sign/chemdiamond
+	name = "\improper REACTIVE CHEMICALS sign"
+	desc = "A sign that warns of potentially reactive chemicals nearby, be they explosive, flamable, or acidic."
+	icon_state = "chemdiamond"
