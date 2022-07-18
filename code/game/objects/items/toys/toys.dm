@@ -1474,7 +1474,7 @@
 	icon_state = "newtoncradle"
 
 /obj/item/toy/desk/fan
-	name = "office fan"
+	name = "desk fan"
 	desc = "Your greatest fan."
 	icon_state= "fan"
 

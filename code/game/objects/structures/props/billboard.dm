@@ -38,14 +38,14 @@
 	icon_state = "billboard_cvr"
 	description_fluff = "The Germania-class superyacht is a type of luxury vessel, built by Wulf Aeronautics and furnished by a subsidiary of Gilthari Exports."
 
-/obj/structure/prop/billboard/twenty_four_seven
-	name = "\improper 24-Seven billboard"
-	desc = "A billboard advertising 24-Seven's new range of limited-edition Slushee flavours. 24-Seven: All Day, Everyday."
-	icon_state = "billboard_twenty_four_seven"
+/obj/structure/prop/billboard/shop_n_large
+	name = "\improper Shop-N-Large billboard"
+	desc = "A billboard advertising Shop-N-Large's new range of limited-edition Ice Slush flavours. Shop-N-Large: The products you want for great prices."
+	icon_state = "billboard_shop_n_large"
 
 /obj/structure/prop/billboard/starway
 	name = "\improper Starway Transit billboard"
-	desc = "A billboard advertising Starway Transit's direct flight from Kalmar to New York: only 2000 Thalar for an economy class berth. Starway: Your Ticket to the Stars."
+	desc = "A billboard advertising Starway Transit's direct flight from Kalmar to New York: only 2000 Thaler for an economy class berth. Starway: Your Ticket to the Stars. Interstellar travel prices haven't been this low since before the Incursion..."
 	icon_state = "billboard_starway"
 
 /obj/structure/prop/billboard/smoothies

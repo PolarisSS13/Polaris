@@ -675,14 +675,14 @@
 
 /decl/poster/pol_18
 	icon_state = "tgposter65"
-	name = "24-Seven Supermarkets"
-	desc = "An advertisement for 24-Seven supermarkets, advertising their new 24-Stops as part of their partnership with Nanotrasen."
-	listing_name = "Ad - 24-stop"
+	name = "Shop-N-Large Supermarkets"
+	desc = "An advertisement for Shop-N-Large supermarkets, advertising their new Stop-N-Shop locations as part of their partnership with Nanotrasen."
+	listing_name = "Ad - Stop-N-Shop"
 
 /decl/poster/pol_19
 	icon_state = "tgposter66"
 	name = "Midtown Slice Pizza"
-	desc = "An advertisement for Midtown Slice Pizza, the official pizzeria partner of Nanotrasen. Midtown Slice: like a slice of home, no matter where you are."
+	desc = "An advertisement for Midtown Slice Pizza, a subsidiary of Nanotrasen. Midtown Slice: like a slice of home, no matter where you are."
 	listing_name = "Ad - Midtown Pizza"
 
 /decl/poster/pol_20

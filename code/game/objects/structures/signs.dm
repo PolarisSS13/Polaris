@@ -31,6 +31,7 @@
 		//var/icon/I = icon('icons/obj/decals.dmi', icon_state)
 		//S.icon = I.Scale(24, 24)
 		S.sign_state = icon_state
+		S.original_type = type
 		qdel(src)
 	else ..()
 
@@ -40,12 +41,14 @@
 	icon = 'icons/obj/decals.dmi'
 	w_class = ITEMSIZE_NORMAL		//big
 	var/sign_state = ""
+	var/original_type
 
 /obj/item/sign/attackby(obj/item/tool as obj, mob/user as mob)	//construction
 	if(tool.is_screwdriver() && isturf(user.loc))
 		var/direction = input("In which direction?", "Select direction.") in list("North", "East", "South", "West", "Cancel")
 		if(direction == "Cancel") return
-		var/obj/structure/sign/S = new(user.loc)
+		var/target_type = original_type || /obj/structure/sign
+		var/obj/structure/sign/S = new target_type(user.loc)
 		switch(direction)
 			if("North")
 				S.pixel_y = 32
@@ -125,7 +128,7 @@
 
 /obj/structure/sign/nosmoking_2/burnt
 	name = "\improper NO SMOKING"
-	desc = "A warning sign which reads 'NO SMOKING'. It looks like someone didn't follow it's advice..."
+	desc = "A warning sign which reads 'NO SMOKING'. It looks like someone didn't follow its advice..."
 	icon_state = "nosmoking2_burnt"
 
 /obj/structure/sign/warning
@@ -1122,18 +1125,20 @@
 	desc = "A basic wall clock, synced to the current system time."
 	icon_state = "clock"
 
-/obj/structure/sign/clock/Initialize()
+/obj/structure/sign/clock/examine(mob/user)
 	. = ..()
-	desc += "\nThe clock shows that the time is [stationtime2text()]."
+		. += "The clock shows that the time is [stationtime2text()]."
 
 /obj/structure/sign/calendar
 	name = "calendar"
 	desc = "It's an old-school, NanoTrasen branded wall calendar. Sure, it might be obsolete with modern technology, but it's still hard to imagine an office without one."
 	icon_state = "calendar"
 
-/obj/structure/sign/calendar/Initialize()
-	. = ..()
-	desc += "\nThe calendar shows that the date is [stationdate2text()]."
+/obj/structure/sign/calendar/examine(mob/user)
+    . = ..()
+    . += "The calendar shows that the date is [stationdate2text()]."
+    if (Holiday.len)
+        . += "Today is <strong><span class='green'>[english_list(Holiday)]</span></strong>."
 
 /obj/structure/sign/explosive
 	name = "\improper HIGH EXPLOSIVES sign"
@@ -1141,6 +1146,6 @@
 	icon_state = "explosives"
 
 /obj/structure/sign/chemdiamond
-	name = "\improper REACTIVE CHEMICALS sign"
-	desc = "A sign that warns of potentially reactive chemicals nearby, be they explosive, flamable, or acidic."
+	name = "\improper HAZARDOUS CHEMICALS sign"
+	desc = "A sign that warns of potentially hazardous chemicals nearby, indicating health risk, flash point, and reactivity."
 	icon_state = "chemdiamond"
