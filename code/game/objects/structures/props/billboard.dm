@@ -34,7 +34,7 @@
 
 /obj/structure/prop/billboard/cvr
 	name = "\improper Charlemagne von Rheinland billboard"
-	desc = "A billboard advertising Charlemagne von Rheinland's Germania-class superyacht. Charlemagne von Rheinland: Die Werft der K&#246;nige."
+	desc = "A billboard advertising Charlemagne von Rheinland's Germania-class superyacht. Charlemagne von Rheinland: Die Werft der Könige."
 	icon_state = "billboard_cvr"
 	description_fluff = "The Germania-class superyacht is a type of luxury vessel, built by Wulf Aeronautics and furnished by a subsidiary of Gilthari Exports."
 
