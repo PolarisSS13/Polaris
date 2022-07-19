@@ -1127,7 +1127,7 @@
 
 /obj/structure/sign/clock/examine(mob/user)
 	. = ..()
-		. += "The clock shows that the time is [stationtime2text()]."
+	. += "The clock shows that the time is [stationtime2text()]."
 
 /obj/structure/sign/calendar
 	name = "calendar"
@@ -1135,10 +1135,10 @@
 	icon_state = "calendar"
 
 /obj/structure/sign/calendar/examine(mob/user)
-    . = ..()
-    . += "The calendar shows that the date is [stationdate2text()]."
-    if (Holiday.len)
-        . += "Today is <strong><span class='green'>[english_list(Holiday)]</span></strong>."
+	. = ..()
+	. += "The calendar shows that the date is [stationdate2text()]."
+	if (Holiday.len)
+		. += "Today is <strong><span class='green'>[english_list(Holiday)]</span></strong>."
 
 /obj/structure/sign/explosive
 	name = "\improper HIGH EXPLOSIVES sign"
