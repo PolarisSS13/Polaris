@@ -16,7 +16,7 @@
 	result = /obj/item/arrow/wood
 	reqs = list(list(/obj/item/stack/material/wood = 2),
 		list(/obj/item/stack/material/sandstone = 2))
-	time = 20
+	time = 2 SECONDS
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
 
@@ -25,11 +25,21 @@
 	result = /obj/item/arrow/wood
 	reqs = list(list(/obj/item/stack/material/wood = 2),
 		list(/obj/item/stack/material/marble = 2))
-	time = 20
+	time = 2 SECONDS
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
 
-/datum/crafting_recipe/arrow/material
+/datum/crafting_recipe/arrow_chitin
+	name = "Wood Arrow (Chitin Tip)"
+	result = /obj/item/arrow/wood/chitin
+	reqs = list(list(/obj/item/stack/material/wood = 2),
+		list(/obj/item/stack/material/chitin = 2),
+		list(/obj/item/stack/material/cloth = 1))
+	time = 3 SECONDS
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
+
+/datum/crafting_recipe/arrow_material
 	name = "Metal Arrow (Custom Tip)"
 	result = /obj/item/material/arrow
 	reqs = list(list(/obj/item/handcuffs/cable = 1),
@@ -40,7 +50,7 @@
 	tool_paths = list(
 		/obj/item/material/sharpeningkit
 		)
-	time = 5 SECONDS
+	time = 6 SECONDS
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
 

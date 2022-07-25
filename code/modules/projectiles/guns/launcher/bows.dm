@@ -13,6 +13,11 @@
 
 	knock_point = list(9,8)
 
+/obj/item/arrow/wood/chitin
+	name = "chitin arrow"
+	desc = "A wooden arrow with a hard chitin tip. Simple, but gets the job done."
+	color = #a66008
+
 /obj/item/arrow/energy
 	name = "hardlight arrow"
 	desc = "An arrow made out of energy! Classic?"
