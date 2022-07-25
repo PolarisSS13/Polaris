@@ -319,6 +319,9 @@
 "akZ" = (
 /obj/structure/table/wooden_reinforced,
 /obj/machinery/computer/med_data/laptop,
+/obj/structure/sign/calendar{
+	pixel_y = 32
+	},
 /turf/simulated/floor/carpet/sblucarpet,
 /area/surface/station/medical/psych)
 "ala" = (
@@ -1787,8 +1790,11 @@
 /obj/item/material/ashtray/glass,
 /obj/item/flashlight/lamp/green,
 /obj/item/sticky_pad/random{
-	pixel_x = 8;
-	pixel_y = -1
+	pixel_x = 3;
+	pixel_y = -13
+	},
+/obj/item/toy/desk/fan{
+	pixel_x = 13
 	},
 /turf/simulated/floor/wood,
 /area/surface/station/command/internalaffairs)
@@ -7249,6 +7255,12 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/surface/station/security/prison)
+"eQv" = (
+/obj/structure/sign/clock{
+	pixel_x = -32
+	},
+/turf/simulated/floor/wood,
+/area/surface/station/command/liaison)
 "eQB" = (
 /obj/machinery/atmospherics/pipe/simple/hidden{
 	dir = 5
@@ -7281,6 +7293,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/command)
+"eQQ" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/obj/structure/sign/clock{
+	pixel_x = -32
+	},
+/turf/simulated/floor/carpet,
+/area/surface/station/crew_quarters/sleep/Dorm_2)
 "eRj" = (
 /obj/item/radio/intercom{
 	dir = 1;
@@ -7929,6 +7949,9 @@
 /obj/item/reagent_containers/food/drinks/flask,
 /obj/random_multi/single_item/captains_spare_id,
 /obj/item/material/ashtray/bronze,
+/obj/structure/sign/clock{
+	pixel_x = 32
+	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/captain)
 "fnz" = (
@@ -10159,6 +10182,9 @@
 /obj/item/hand_labeler,
 /obj/item/retail_scanner/command{
 	name = "retail scanner COM"
+	},
+/obj/structure/sign/clock{
+	pixel_x = -32
 	},
 /turf/simulated/floor/wood,
 /area/surface/station/command/meeting_room)
@@ -12418,6 +12444,9 @@
 /obj/item/sticky_pad/random{
 	pixel_x = 8;
 	pixel_y = -1
+	},
+/obj/item/toy/desk/officetoy{
+	pixel_x = -16
 	},
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/captain)
@@ -18892,6 +18921,14 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
+"miE" = (
+/obj/structure/bed/double/padded,
+/obj/item/bedsheet/browndouble,
+/obj/structure/sign/clock{
+	pixel_x = 32
+	},
+/turf/simulated/floor/carpet,
+/area/surface/station/crew_quarters/sleep/Dorm_5)
 "mjt" = (
 /obj/machinery/porta_turret/ai_defense,
 /obj/structure/cable{
@@ -22504,6 +22541,9 @@
 	d1 = 1;
 	d2 = 2;
 	icon_state = "1-2"
+	},
+/obj/item/toy/desk/newtoncradle{
+	pixel_y = 18
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/crew_quarters/heads/rdoffice)
@@ -26389,6 +26429,9 @@
 /area/surface/station/maintenance/substation/research/snd)
 "rmw" = (
 /obj/structure/table/reinforced,
+/obj/item/toy/desk/officetoy{
+	pixel_y = 15
+	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/crew_quarters/heads/cmo)
 "rmP" = (
@@ -26587,6 +26630,10 @@
 /obj/structure/table/wooden_reinforced,
 /obj/item/paper_bin,
 /obj/item/pen/multi,
+/obj/item/toy/desk/fan{
+	pixel_x = -13;
+	pixel_y = 3
+	},
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/captain)
 "rvR" = (
@@ -26600,6 +26647,9 @@
 /obj/structure/table/wooden_reinforced,
 /obj/item/melee/chainofcommand,
 /obj/item/hand_tele,
+/obj/structure/sign/calendar{
+	pixel_x = -32
+	},
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/captain)
 "rwZ" = (
@@ -26713,6 +26763,9 @@
 	},
 /obj/machinery/light{
 	dir = 1
+	},
+/obj/structure/sign/clock{
+	pixel_y = 32
 	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/captain)
@@ -27853,6 +27906,9 @@
 	dir = 4;
 	pixel_x = 30
 	},
+/obj/structure/sign/calendar{
+	pixel_y = -32
+	},
 /turf/simulated/floor/wood,
 /area/surface/station/command/internalaffairs)
 "spA" = (
@@ -28428,6 +28484,9 @@
 	},
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 9
+	},
+/obj/structure/sign/clock{
+	pixel_y = 32
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/exam_room)
@@ -29984,6 +30043,12 @@
 "twZ" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/rnd/lab)
+"txx" = (
+/obj/structure/sign/clock{
+	pixel_y = 32
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/station/rnd/research)
 "txz" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
@@ -30833,6 +30898,9 @@
 "ucJ" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/brown,
+/obj/structure/sign/clock{
+	pixel_x = -32
+	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/sleep/Dorm_4)
 "udq" = (
@@ -31335,6 +31403,9 @@
 	pixel_y = -2
 	},
 /obj/item/pen,
+/obj/structure/sign/clock{
+	pixel_y = 32
+	},
 /turf/simulated/floor/carpet/sblucarpet,
 /area/surface/station/medical/psych)
 "uvJ" = (
@@ -31482,6 +31553,12 @@
 /obj/structure/table/wooden_reinforced,
 /obj/machinery/computer/skills{
 	dir = 4
+	},
+/obj/item/toy/desk/fan{
+	pixel_y = 19
+	},
+/obj/structure/sign/clock{
+	pixel_y = -32
 	},
 /turf/simulated/floor/wood,
 /area/surface/station/command/internalaffairs)
@@ -33264,6 +33341,9 @@
 	},
 /obj/item/cartridge/quartermaster,
 /obj/item/retail_scanner/cargo,
+/obj/item/toy/desk/fan{
+	pixel_x = 15
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/quartermaster/qm)
 "vKq" = (
@@ -33766,6 +33846,14 @@
 /obj/structure/sign/warning/lethal_turrets,
 /turf/simulated/wall/r_wall,
 /area/surface/station/ai/upload_foyer)
+"wdD" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/obj/structure/sign/clock{
+	pixel_x = 32
+	},
+/turf/simulated/floor/carpet,
+/area/surface/station/crew_quarters/sleep/Dorm_1)
 "wdL" = (
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 8
@@ -33907,6 +33995,10 @@
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = -21
+	},
+/obj/item/toy/desk/dippingbird{
+	pixel_x = 16;
+	pixel_y = -3
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/crew_quarters/heads/chief)
@@ -34276,6 +34368,9 @@
 /area/surface/station/hallway/primary/secondfloor/east)
 "wvP" = (
 /obj/effect/zone_divider,
+/obj/structure/sign/calendar{
+	pixel_x = 32
+	},
 /turf/simulated/floor/wood,
 /area/surface/station/command/liaison)
 "wvW" = (
@@ -37640,6 +37735,9 @@
 "ymd" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/brown,
+/obj/structure/sign/clock{
+	pixel_x = 32
+	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/sleep/Dorm_3)
 
@@ -62247,7 +62345,7 @@ frL
 cDA
 xvn
 pjt
-xvn
+eQQ
 kYR
 gWu
 pHu
@@ -64560,7 +64658,7 @@ ovn
 cCD
 aPH
 isJ
-aPH
+wdD
 fya
 cpQ
 uiu
@@ -64568,7 +64666,7 @@ ymd
 vXG
 xgD
 nmx
-xgD
+miE
 aMD
 sBb
 sBb
@@ -64774,7 +64872,7 @@ sBb
 sBb
 sBb
 gae
-rNi
+txx
 rNi
 rNi
 tXh
@@ -67387,7 +67485,7 @@ uiT
 tsE
 hEv
 goT
-rXY
+eQv
 jUn
 sDi
 tcI

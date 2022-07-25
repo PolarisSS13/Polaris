@@ -1261,6 +1261,7 @@
 #include "code\game\objects\structures\ghost_pods\silicon.dm"
 #include "code\game\objects\structures\props\alien_props.dm"
 #include "code\game\objects\structures\props\beam_prism.dm"
+#include "code\game\objects\structures\props\billboard.dm"
 #include "code\game\objects\structures\props\blackbox.dm"
 #include "code\game\objects\structures\props\esoteric.dm"
 #include "code\game\objects\structures\props\fake_ai.dm"
