@@ -39,7 +39,7 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
 
-/datum/crafting_recipe/arrow_material
+/datum/crafting_recipe/arrow_metal_material
 	name = "Metal Arrow (Custom Tip)"
 	result = /obj/item/material/arrow
 	reqs = list(list(/obj/item/handcuffs/cable = 1),
@@ -54,8 +54,37 @@
 	category = CAT_WEAPONRY
 	subcategory = CAT_AMMO
 
-/datum/crafting_recipe/arrow/material/on_craft_completion(mob/user, atom/result)
+/datum/crafting_recipe/arrow_metal_material/on_craft_completion(mob/user, atom/result)
 	var/obj/item/stack/material/M
+	for(var/path in parts)
+		var/obj/item/material/N = locate(path) in result
+		if(istype(N, path))
+			if(!istype(M))
+				M = N
+			else
+				N.forceMove(get_turf(result))
+	if(!istype(M))
+		return
+
+	var/obj/item/material/arrow/A = result
+	A.set_material(M.material.name)
+	qdel(M)
+
+/datum/crafting_recipe/arrow_wood_material
+	name = "Wood Arrow (Crude Tip)"
+	result = /obj/item/material/arrow/crude
+	reqs = list(list(/obj/item/stack/material/wood = 2),
+		list(/obj/item/material/knife/machete/hatchet/stone = 1),
+		list(/obj/item/stack/material/cloth = 1))
+	parts = list(
+		/obj/item/material/knife/machete/hatchet/stone = 1
+	)
+	time = 3 SECONDS
+	category = CAT_WEAPONRY
+	subcategory = CAT_AMMO
+
+/datum/crafting_recipe/arrow_wood_material/on_craft_completion(mob/user, atom/result)
+	var/obj/item/material/M
 	for(var/path in parts)
 		var/obj/item/material/N = locate(path) in result
 		if(istype(N, path))

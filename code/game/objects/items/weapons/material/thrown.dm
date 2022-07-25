@@ -38,3 +38,11 @@
 	edge =  1
 
 	var/list/knock_point = list(7,7)
+
+/obj/item/material/arrow/crude
+	name = "crude arrow"
+	desc = "An ancient device for stabbing someone at range."
+	icon_state = "arrow"
+	thrown_force_divisor = 0.3
+	throw_range = 3
+	edge = 0
