@@ -173,3 +173,9 @@
 // Step trigger to fall down to planet Sif
 /obj/effect/step_trigger/teleporter/planetary_fall/sif/find_planet()
 	planet = planet_sif
+
+/turf/simulated/floor/concrete/sif/planetuse
+	oxygen		= MOLES_O2SIF
+	nitrogen	= MOLES_N2SIF
+	temperature	= TEMPERATURE_SIF
+	outdoors = OUTDOORS_YES

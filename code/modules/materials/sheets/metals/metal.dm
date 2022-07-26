@@ -12,6 +12,11 @@
 	no_variants = FALSE
 	apply_colour = TRUE
 
+/obj/item/stack/material/plasteel/rebar
+	name = MAT_PLASTEELREBAR
+	icon_state = "rods"
+	default_type = MAT_PLASTEELREBAR
+
 /obj/item/stack/material/durasteel
 	name = "durasteel"
 	icon_state = "sheet-reinforced"

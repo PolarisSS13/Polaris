@@ -25,3 +25,12 @@
 		new /datum/stack_recipe("roller bed", /obj/item/roller, 5, time = 30, on_floor = 1, recycle_material = "[name]"),
 		new /datum/stack_recipe("whetstone", /obj/item/whetstone, 2, time = 10, recycle_material = "[name]")
 	)
+
+/datum/material/plasteel/rebar //to give a different reinforced overlay
+	name = MAT_PLASTEELREBAR
+	icon_reinf = "reinf_metal"
+	icon_colour = "#6A6A6A"
+	stack_type = /obj/item/stack/material/plasteel/rebar
+
+/datum/material/plasteel/rebar/place_sheet(var/turf/target) //Deconstructed into normal plasteel sheets.
+	new /obj/item/stack/material/plasteel(target)
