@@ -668,6 +668,16 @@
 	new /obj/item/stack/material/plastic(get_turf(holder.my_atom), created_volume)
 	return
 
+/decl/chemical_reaction/instant/concrete
+	name = "Concrete"
+	id = "concretereagent"
+	required_reagents = list("calcium" = 2, "silicate" = 2, "water" = 2)
+	result_amount = 1
+
+/decl/chemical_reaction/instant/concrete/on_reaction(var/datum/reagents/holder, var/created_volume)
+	new /obj/item/stack/material/concrete(get_turf(holder.my_atom), created_volume)
+	return
+
 /* Grenade reactions */
 
 /decl/chemical_reaction/instant/explosion_potassium
