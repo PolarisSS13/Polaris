@@ -82,11 +82,11 @@
 /area/submap/BoomBase)
 "as" = (
 /obj/item/material/shard,
-/turf/simulated/floor/concrete/sif/planetuse,
+/turf/simulated/floor/concrete,
 /area/submap/BoomBase)
 "at" = (
 /obj/effect/spider/stickyweb,
-/turf/simulated/floor/concrete/sif/planetuse,
+/turf/simulated/floor/concrete,
 /area/submap/BoomBase)
 "au" = (
 /turf/simulated/floor/outdoors/dirt,
@@ -238,14 +238,14 @@
 /area/submap/BoomBase)
 "yy" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/concrete/sif/planetuse,
+/turf/simulated/floor/concrete,
 /area/submap/BoomBase)
 "AR" = (
-/turf/simulated/floor/concrete/sif/planetuse,
+/turf/simulated/floor/concrete,
 /area/submap/BoomBase)
 "Zg" = (
 /obj/structure/girder,
-/turf/simulated/floor/concrete/sif/planetuse,
+/turf/simulated/floor/concrete,
 /area/submap/BoomBase)
 
 (1,1,1) = {"

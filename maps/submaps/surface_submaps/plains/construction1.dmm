@@ -73,7 +73,9 @@
 /area/submap/construction1)
 "t" = (
 /obj/structure/door_assembly/door_assembly_mai,
-/turf/simulated/floor/concrete/sif/planetuse,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "v" = (
 /obj/item/airlock_electronics,
@@ -97,7 +99,9 @@
 /area/submap/construction1)
 "A" = (
 /obj/item/shovel,
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "B" = (
 /obj/item/airlock_electronics,
@@ -113,7 +117,9 @@
 /area/submap/construction1)
 "E" = (
 /obj/item/clothing/glasses/welding,
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "F" = (
 /obj/item/clothing/suit/storage/hazardvest,
@@ -121,7 +127,9 @@
 /area/submap/construction1)
 "G" = (
 /obj/random/toolbox,
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "I" = (
 /obj/item/stack/material/concrete{
@@ -132,7 +140,9 @@
 /area/submap/construction1)
 "K" = (
 /obj/structure/firedoor_assembly,
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "Q" = (
 /obj/item/stack/material/concrete{
@@ -142,11 +152,15 @@
 /turf/simulated/floor/tiled/external,
 /area/submap/construction1)
 "S" = (
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "V" = (
 /obj/random/tool/anom,
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 "X" = (
 /obj/fiftyspawner/concrete,
@@ -154,7 +168,9 @@
 /area/submap/construction1)
 "Z" = (
 /obj/random/maintenance/clean,
-/turf/simulated/floor/concrete,
+/turf/simulated/floor/concrete{
+	outdoors = 1
+	},
 /area/submap/construction1)
 
 (1,1,1) = {"
