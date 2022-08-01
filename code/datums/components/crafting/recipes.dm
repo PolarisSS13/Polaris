@@ -69,10 +69,10 @@
 	reqs = list(list(/obj/item/handcuffs/cable = 1),
 				list(/obj/item/stack/rods = 1),
 				list(/obj/item/material/shard = 1,
-					 /obj/item/material/butterflyblade = 1)
+					/obj/item/material/butterflyblade = 1)
 				)
 	parts = list(/obj/item/material/shard = 1,
-				 /obj/item/material/butterflyblade = 1)
+				/obj/item/material/butterflyblade = 1)
 	time = 40
 	category = CAT_WEAPONRY
 	subcategory = CAT_WEAPON
@@ -93,40 +93,6 @@
 	var/obj/item/material/twohanded/spear/S = result
 	S.set_material(M.material.name)
 	qdel(M)
-
-/datum/crafting_recipe/shortbow
-	name = "Shortbow"
-	result = /obj/item/gun/launcher/crossbow/bow
-	reqs = list(list(/obj/item/stack/material/wood = 10),
-		list(/obj/item/stack/material/cloth = 5))
-	time = 120
-	category = CAT_WEAPONRY
-	subcategory = CAT_WEAPON
-
-/datum/crafting_recipe/arrow_sandstone
-	name = "Wood arrow (sandstone tip)"
-	result = /obj/item/arrow/wood
-	reqs = list(list(/obj/item/stack/material/wood = 2),
-		list(/obj/item/stack/material/sandstone = 2))
-	time = 20
-	category = CAT_WEAPONRY
-	subcategory = CAT_AMMO
-
-/datum/crafting_recipe/arrow_marble
-	name = "Wood arrow (marble tip)"
-	result = /obj/item/arrow/wood
-	reqs = list(list(/obj/item/stack/material/wood = 2),
-		list(/obj/item/stack/material/marble = 2))
-	time = 20
-	category = CAT_WEAPONRY
-	subcategory = CAT_AMMO
-
-/datum/crafting_recipe/quiver
-	name = "Arrow quiver"
-	result = /obj/item/storage/bag/quiver
-	reqs = list(list(/obj/item/stack/material/leather = 8))
-	time = 60
-	category = CAT_STORAGE
 
 /datum/crafting_recipe/material_armor
 	name = "Material Armor Plate"

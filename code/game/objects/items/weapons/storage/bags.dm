@@ -410,4 +410,4 @@
 	max_w_class = ITEMSIZE_NORMAL
 	w_class = ITEMSIZE_LARGE
 	slot_flags = SLOT_BACK
-	can_hold = list(/obj/item/arrow/wood)
+	can_hold = list(/obj/item/arrow, /obj/item/material/arrow)
