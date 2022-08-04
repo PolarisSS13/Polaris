@@ -333,26 +333,29 @@ var/global/datum/controller/occupations/job_master
 	var/list/spawn_in_storage = list()
 
 	if(!joined_late)
-		var/obj/S = null
-		var/list/possible_spawns = list()
-		for(var/obj/effect/landmark/start/sloc in landmarks_list)
-			if(sloc.name != rank)	continue
-			if(locate(/mob/living) in sloc.loc)	continue
-			possible_spawns.Add(sloc)
-		if(possible_spawns.len)
-			S = pick(possible_spawns)
-		if(!S)
-			S = locate("start*[rank]") // use old stype
-		if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
-			H.forceMove(S.loc)
-		else
-			var/list/spawn_props = LateSpawn(H.client, rank)
-			var/turf/T = spawn_props["turf"]
-			if(!T)
-				to_chat(H, "<span class='critical'>You were unable to be spawned at your chosen late-join spawnpoint. Please verify your job/spawn point combination makes sense, and try another one.</span>")
-				return
+
+		// handle_variant_spawn() may override usual spawn behavior.
+		if(!job.handle_variant_spawn(H, rank))
+			var/obj/S = null
+			var/list/possible_spawns = list()
+			for(var/obj/effect/landmark/start/sloc in landmarks_list)
+				if(sloc.name != rank)	continue
+				if(locate(/mob/living) in sloc.loc)	continue
+				possible_spawns.Add(sloc)
+			if(possible_spawns.len)
+				S = pick(possible_spawns)
+			if(!S)
+				S = locate("start*[rank]") // use old stype
+			if(istype(S, /obj/effect/landmark/start) && istype(S.loc, /turf))
+				H.forceMove(S.loc)
 			else
-				H.forceMove(T)
+				var/list/spawn_props = LateSpawn(H.client, rank)
+				var/turf/T = spawn_props["turf"]
+				if(!T)
+					to_chat(H, "<span class='critical'>You were unable to be spawned at your chosen late-join spawnpoint. Please verify your job/spawn point combination makes sense, and try another one.</span>")
+					return
+				else
+					H.forceMove(T)
 
 		// Moving wheelchair if they have one
 		if(H.buckled && istype(H.buckled, /obj/structure/bed/chair/wheelchair))
@@ -617,10 +620,13 @@ var/global/datum/controller/occupations/job_master
 
 /datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank)
 
-	var/datum/spawnpoint/spawnpos
+	// If the job overrides spawn behavior, don't worry too much about the whole business.
 	var/datum/job/J = SSjob.get_job(rank)
-	var/fail_deadly = !!(J?.offmap_spawn)
+	if(J?.handle_variant_spawn(C.mob, rank))
+		return
 
+	var/fail_deadly = !!(J?.offmap_spawn)
+	var/datum/spawnpoint/spawnpos
 	//Spawn them at their preferred one
 	if(C && C.prefs.spawnpoint)
 		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))

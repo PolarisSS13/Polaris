@@ -39,6 +39,7 @@
 
 	// Description of the job's role and minimum responsibilities.
 	var/job_description = "This Job doesn't have a description! Please report it!"
+
 /datum/job/New()
 	. = ..()
 	department_accounts = department_accounts || departments_managed
@@ -178,3 +179,6 @@
 		return TRUE
 	if(brain_type in banned_job_species)
 		return TRUE
+
+/datum/job/proc/handle_variant_spawn(var/mob/spawning, var/rank)
+	return FALSE
