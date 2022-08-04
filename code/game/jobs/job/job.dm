@@ -25,7 +25,7 @@
 	var/list/min_age_by_species = null
 	var/ideal_character_age = 30
 	var/list/ideal_age_by_species = null
-	var/list/banned_job_species = null
+	var/list/banned_job_species = list(SPECIES_VOX)
 	var/has_headset = TRUE                //Do people with this job need to be given headsets and told how to use them?  E.g. Cyborgs don't.
 
 	var/account_allowed = 1				  // Does this job type come with a station account?

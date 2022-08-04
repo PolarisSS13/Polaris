@@ -87,3 +87,11 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 		if(istype(shoes) && !shoes.holding && shoes.can_hold_knife)
 			shoes.holding = new /obj/item/material/knife/tacknife/survival(H)
 			shoes.update_icon()
+
+/decl/hierarchy/outfit/job/survivalist/crash_survivor
+	name = OUTFIT_JOB_NAME("Crash Survivor")
+	uniform = /obj/item/clothing/under/color/lightblue
+	shoes = /obj/item/clothing/shoes/black
+	mask = null
+	suit = null
+	belt = null

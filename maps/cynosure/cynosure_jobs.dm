@@ -83,3 +83,10 @@ var/global/const/access_explorer = 43
 	account_allowed = FALSE
 	offmap_spawn = TRUE
 	substitute_announce_title = "Colonist"
+	banned_job_species = null
+	alt_titles = list("Crash Survivor" = /datum/alt_title/crash_survivor)
+
+/datum/alt_title/crash_survivor
+	title = "Crash Survivor"
+	title_blurb = "Crashing in the wilderness of Sif's anomalous region is not a recommended holiday activity."
+	title_outfit = /decl/hierarchy/outfit/job/survivalist/crash_survivor

@@ -48,7 +48,7 @@
 	siemens_coefficient = 0.2
 
 	flags = NO_SCAN | NO_DEFIB
-	spawn_flags = SPECIES_IS_WHITELISTED
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
 	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#9066BD"
