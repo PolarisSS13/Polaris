@@ -8,14 +8,20 @@
 	species_language = LANGUAGE_VOX
 	num_alternate_languages = 1
 	assisted_langs = list(LANGUAGE_ROOTGLOBAL)
-	unarmed_types = list(/datum/unarmed_attack/stomp, /datum/unarmed_attack/kick,  /datum/unarmed_attack/claws/strong, /datum/unarmed_attack/bite/strong)
-	rarity_value = 4
+	unarmed_types = list(
+		/datum/unarmed_attack/stomp,
+		/datum/unarmed_attack/kick,
+		/datum/unarmed_attack/claws/strong,
+		/datum/unarmed_attack/bite/strong
+	)
+	rarity_value = 5
 	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
 	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
 	alive. They are four to five feet tall, reptillian, beaked, tailed and quilled; human crews often \
-	refer to them as 'shitbirds' for their violent and offensive nature, as well as their horrible \
-	smell.<br/><br/>Most humans will never meet a Vox raider, instead learning of this insular species through \
-	dealing with their traders and merchants; those that do rarely enjoy the experience."
+	refer to them as 'shitbirds' for their violent and offensive nature, as well as their reputation for \
+	foul personal hygiene and a horrible smell.<br/><br/>Most humans will never meet a Vox, instead learning \
+	of this insular species through dealing with their traders and merchants; those that do rarely enjoy the \
+	experience."
 	catalogue_data = list(/datum/category_item/catalogue/fauna/vox)
 
 //	taste_sensitivity = TASTE_DULL
@@ -43,7 +49,7 @@
 
 	gluttonous = 1
 
-	breath_type = "phoron"
+	breath_type = "nitrogen"
 	poison_type = "oxygen"
 	siemens_coefficient = 0.2
 
