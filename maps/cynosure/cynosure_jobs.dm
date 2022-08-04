@@ -86,6 +86,13 @@ var/global/const/access_explorer = 43
 	banned_job_species = null
 	alt_titles = list("Crash Survivor" = /datum/alt_title/crash_survivor)
 
+/datum/job/survivalist/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+	if(H.species?.name == SPECIES_VOX)
+		if(alt_title == "Crash Survivor")
+			return outfit_by_type(/decl/hierarchy/outfit/vox/survivor)
+		return outfit_by_type(/decl/hierarchy/outfit/vox/vagrant)
+	return ..()
+
 /datum/alt_title/crash_survivor
 	title = "Crash Survivor"
 	title_blurb = "Crashing in the wilderness of Sif's anomalous region is not a recommended holiday activity."

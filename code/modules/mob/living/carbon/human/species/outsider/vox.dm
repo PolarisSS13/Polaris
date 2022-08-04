@@ -55,7 +55,7 @@
 
 	flags = NO_SCAN | NO_DEFIB
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_EYE_COLOR | HAS_HAIR_COLOR
+	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#9066BD"
 	flesh_color = "#808D11"
@@ -105,14 +105,4 @@
 
 /datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 0,var/comprehensive = 0)
 	. = ..()
-
-	H.equip_to_slot_or_del(new /obj/item/clothing/mask/breath(H), slot_wear_mask)
-	if(H.backbag == 1)
-		H.equip_to_slot_or_del(new /obj/item/tank/vox(H), slot_back)
-		H.internal = H.back
-	else
-		H.equip_to_slot_or_del(new /obj/item/tank/vox(H), slot_r_hand)
-		H.internal = H.r_hand
-	H.internal = locate(/obj/item/tank) in H.contents
-	if(istype(H.internal,/obj/item/tank) && H.internals)
-		H.internals.icon_state = "internal1"
+	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask)

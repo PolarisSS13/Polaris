@@ -355,6 +355,7 @@
 #include "code\datums\outfits\pirates.dm"
 #include "code\datums\outfits\spec_op.dm"
 #include "code\datums\outfits\tournament.dm"
+#include "code\datums\outfits\vox.dm"
 #include "code\datums\outfits\wizardry.dm"
 #include "code\datums\outfits\costumes\costume.dm"
 #include "code\datums\outfits\costumes\halloween.dm"
