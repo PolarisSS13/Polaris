@@ -191,5 +191,6 @@
 	icon_state = "respirator"
 	body_parts_covered = EYES
 	w_class = ITEMSIZE_SMALL
+	flags_inv = 0
 	species_restricted = list(SPECIES_VOX)
 	filtered_gases = list("phoron", "nitrous_oxide", "oxygen")

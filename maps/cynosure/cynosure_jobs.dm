@@ -99,6 +99,5 @@ var/global/const/access_explorer = 43
 	title_outfit = /decl/hierarchy/outfit/job/survivalist/crash_survivor
 
 /datum/job/survivalist/handle_variant_spawn(var/mob/spawning, var/rank)
-	if(rank == "Crash Survivor")
-		to_chat(spawning, "Dumping you in as a crash survivor TODO")
+	world << "Dumping [spawning] in as a [rank] TODO"
 	return FALSE

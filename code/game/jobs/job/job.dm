@@ -182,3 +182,14 @@
 
 /datum/job/proc/handle_variant_spawn(var/mob/spawning, var/rank)
 	return FALSE
+
+/datum/job/proc/passes_standard_join_checks(var/mob/player, var/rank)
+	if((minimum_character_age || min_age_by_species) && (player.client.prefs.age < get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
+		return FALSE
+	if(is_species_banned(player.client.prefs.species, player.client.prefs.organ_data["brain"]))
+		return FALSE
+	if(jobban_isbanned(player, rank))
+		return FALSE
+	if(!player_old_enough(player.client))
+		return FALSE
+	return TRUE
