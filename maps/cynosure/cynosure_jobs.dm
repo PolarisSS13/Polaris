@@ -150,10 +150,6 @@ var/global/const/access_explorer = 43
 		return get_spawn_locations(spawning, rank)
 	return ..()
 
-/obj/effect/landmark/crashed_pod
-	name = "Crash Survivor Spawn"
-	delete_me = FALSE
-
 /datum/job/survivalist/proc/get_existing_spawn_points()
 	for(var/obj/effect/landmark/crashed_pod/sloc in landmarks_list)
 		if(!(locate(/mob/living) in sloc.loc))

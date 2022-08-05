@@ -282,3 +282,7 @@
 	new /obj/item/clothing/mask/gas/sexymime(src.loc)
 	new /obj/item/clothing/under/sexymime(src.loc)
 	return INITIALIZE_HINT_QDEL
+
+/obj/effect/landmark/crashed_pod
+	name = "Crash Survivor Spawn"
+	delete_me = FALSE

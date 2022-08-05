@@ -43,9 +43,9 @@
 	warning_low_pressure = 50
 	hazard_low_pressure = 0
 
-	cold_level_1 = 80
-	cold_level_2 = 50
-	cold_level_3 = 0
+	cold_level_1 = 210	//Default 260
+	cold_level_2 = 150	//Default 200
+	cold_level_3 = 90	//Default 120
 
 	gluttonous = 1
 
