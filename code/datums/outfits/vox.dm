@@ -9,9 +9,7 @@
 
 /decl/hierarchy/outfit/vox/survivor
 	name = "Vox Survivor"
-
-/decl/hierarchy/outfit/vox/vagrant
-	name = "Vox Vagrant"
+	belt = /obj/item/gun/launcher/spikethrower/small
 
 /decl/hierarchy/outfit/vox/raider
 	name = "Vox Raider"
@@ -22,7 +20,7 @@
 	gloves = /obj/item/clothing/gloves/vox
 	r_hand = /obj/item/gun/launcher/spikethrower
 	uniform = /obj/item/clothing/under/vox/vox_utility
-	id_type = list(/obj/item/card/id/syndicate)
+	id_type = /obj/item/card/id/syndicate
 	id_pda_assignment = "Scavenger"
 
 /decl/hierarchy/outfit/vox/merchant

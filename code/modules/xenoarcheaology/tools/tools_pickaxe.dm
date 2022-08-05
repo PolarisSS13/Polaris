@@ -199,4 +199,3 @@
 /obj/item/pickaxe/excavationdrill/examine(mob/user)
 	. = ..()
 	. += "<span class='info'>It is currently set at [excavation_amount]cms.</span>"
-

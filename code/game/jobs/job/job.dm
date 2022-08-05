@@ -180,8 +180,16 @@
 	if(brain_type in banned_job_species)
 		return TRUE
 
-/datum/job/proc/handle_variant_spawn(var/mob/spawning, var/rank)
-	return FALSE
+/datum/job/proc/get_latejoin_spawn_locations(var/mob/spawning, var/rank)
+	return // If this proc does not return a list, spawn point prefs are checked instead.
+
+/datum/job/proc/get_spawn_locations(var/mob/spawning, var/rank)
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)
+			continue
+		if(locate(/mob/living) in sloc.loc)
+			continue
+		LAZYADD(., sloc)
 
 /datum/job/proc/passes_standard_join_checks(var/mob/player, var/rank)
 	if((minimum_character_age || min_age_by_species) && (player.client.prefs.age < get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))

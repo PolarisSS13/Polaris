@@ -92,6 +92,7 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	name = OUTFIT_JOB_NAME("Crash Survivor")
 	uniform = /obj/item/clothing/under/color/lightblue
 	shoes = /obj/item/clothing/shoes/black
+	head = /obj/item/clothing/head/helmet/space/emergency
+	suit = /obj/item/clothing/suit/space/emergency
+	suit_store = /obj/item/tank/oxygen
 	mask = null
-	suit = null
-	belt = null
