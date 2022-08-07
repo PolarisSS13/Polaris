@@ -93,8 +93,8 @@
 	return
 
 /obj/item/tank/vox	//Can't be a child of phoron or the gas amount gets screwey.
-	name = "phoron tank"
-	desc = "Contains dangerous phoron. Do not inhale. Warning: extremely flammable."
+	name = "alien nitrogen tank"
+	desc = "Contains nitrogen."
 	icon_state = "phoron_vox"
 	gauge_icon = null
 	distribute_pressure = ONE_ATMOSPHERE*O2STANDARD
@@ -102,7 +102,7 @@
 
 /obj/item/tank/vox/Initialize()
 	. = ..()
-	air_contents.adjust_gas("phoron", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
+	air_contents.adjust_gas("nitrogen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
 /obj/item/tank/phoron/pressurized
 	name = "fuel can"

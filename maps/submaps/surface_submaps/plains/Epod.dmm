@@ -8,7 +8,7 @@
 "h" = (/turf/simulated/shuttle/wall,/area/submap/Epod1)
 "i" = (/obj/structure/bed/chair,/obj/item/radio/intercom{dir = 8; name = "Station Intercom (General)"; pixel_x = -28},/obj/structure/closet/walllocker/emerglocker{pixel_x = 28},/obj/item/weldingtool,/turf/simulated/shuttle/floor,/area/submap/Epod1)
 "j" = (/turf/simulated/floor/outdoors/dirt,/area/submap/Epod1)
-"k" = (/obj/structure/bed/chair,/obj/machinery/vending/wallmed1{layer = 3.3; name = "Emergency NanoMed"; pixel_x = 28; pixel_y = 0},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/shuttle/floor,/area/submap/Epod1)
+"k" = (/obj/structure/bed/chair,/obj/machinery/vending/wallmed1{layer = 3.3; name = "Emergency NanoMed"; pixel_x = 28; pixel_y = 0},/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/obj/effect/landmark/crashed_pod,/turf/simulated/shuttle/floor,/area/submap/Epod1)
 "l" = (/obj/structure/bed/chair,/obj/machinery/status_display{density = 0; layer = 4; pixel_x = -32; pixel_y = 0},/obj/item/storage/backpack/satchel,/obj/random/cash/big,/obj/random/contraband,/turf/simulated/shuttle/floor,/area/submap/Epod1)
 "m" = (/obj/structure/shuttle/window,/obj/structure/grille,/turf/simulated/shuttle/plating,/area/submap/Epod1)
 "n" = (/obj/structure/flora/tree/dead,/turf/simulated/floor/outdoors/dirt,/area/submap/Epod1)
