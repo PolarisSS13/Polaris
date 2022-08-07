@@ -137,6 +137,7 @@
 	)
 
 	hallway_areas = /area/surface/station/hallway
+	maintenance_areas = /area/surface/station/maintenance
 
 /datum/map/cynosure/perform_map_generation()
 	// First, place a bunch of submaps. This comes before tunnel/forest generation as to not interfere with the submap.

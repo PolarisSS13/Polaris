@@ -175,6 +175,8 @@ var/global/list/all_maps = list()
 
 	//Hallway Areas
 	var/hallway_areas = /area/hallway
+	//Maintenance Areas
+	var/maintenance_areas = /area/maintenance
 
 
 /datum/map/New()
