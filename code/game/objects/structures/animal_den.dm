@@ -76,7 +76,7 @@
 			return TRUE
 		if(try_grab_occupant(user))
 			return TRUE
-		if(!do_after(user, src, 1 SECOND))
+		if(!do_after(user, 1 SECOND, src))
 			return TRUE
 		if(length(contents))
 			to_chat(user, SPAN_WARNING("You can't hide in \the [src]; it's occupied."))
@@ -104,7 +104,6 @@
 /obj/structure/animal_den/ghost_join
 	var/mob/living/critter
 	var/ban_check = "Critter"
-	var/welcome_text
 
 /obj/structure/animal_den/ghost_join/Initialize()
 	. = ..()
@@ -120,39 +119,38 @@
 		critter = null
 
 /obj/structure/animal_den/ghost_join/examine(mob/user, infix, suffix)
-	. = ..()
+	var/list/output = ..()
 	if(isobserver(user))
 		if(critter)
 			if(ban_check && ckey_is_jobbanned(user.ckey, ban_check))
-				to_chat(user, SPAN_WARNING("You are banned from [ban_check] roles and cannot join via this den."))
+				output += SPAN_WARNING("You are banned from [ban_check] roles and cannot join via this den.")
 			else if(user.MayRespawn(TRUE))
-				to_chat(user, SPAN_NOTICE("<b>Click on the den to join as \a [critter].</b>"))
+				output += SPAN_NOTICE("<b>Click on the den to join as \a [critter].</b>")
 		else
-			to_chat(user, SPAN_WARNING("This den is no longer available for joining."))
+			output += SPAN_WARNING("This den is no longer available for joining.")
+	return output
 
 /obj/structure/animal_den/ghost_join/attack_ghost(mob/user)
-	if(critter)
-		transfer_personality(user)
+	if(!critter)
+		return ..()
+	if(ban_check && ckey_is_jobbanned(user.ckey, ban_check))
+		to_chat(user, SPAN_WARNING("You are banned from [ban_check] roles and cannot join via this den."))
 		return
-	return ..()
+	transfer_personality(user)
 
 /obj/structure/animal_den/ghost_join/proc/transfer_personality(var/mob/user)
+
 	set waitfor = FALSE
 	if(!critter)
 		return
+
+	// Transfer over mind and key.
 	if(user.mind)
 		user.mind.transfer_to(critter)
-	else
-		critter.key = user.key
+	critter.key = user.key
 
 	var/mob/living/critter_ref = critter
 	critter = null
-
-	// Sleep long enough for them to login and get any other text out of the way.
-	sleep(1)
-	to_chat(critter_ref, SPAN_NOTICE("<b>You are \a [critter]!</b>"))
-	if(welcome_text)
-		to_chat(critter_ref, SPAN_NOTICE(welcome_text))
 
 	// Sleep long enough for the logged-in critter to update state and regen icon.
 	sleep(SSmobs.wait)

@@ -916,3 +916,8 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 // this gets called when the item gets chucked by the vending machine
 /obj/item/proc/vendor_action(var/obj/machinery/vending/V)
 	return
+
+// Called when a simple animal finishes eating the item.
+/obj/item/proc/animal_consumed(var/mob/user)
+	user.visible_message(SPAN_NOTICE("\The [user] finishes eating \the [src]."), SPAN_NOTICE("You finish eating \the [src]."))
+	qdel(src)

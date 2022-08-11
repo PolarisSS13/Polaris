@@ -47,6 +47,7 @@ var/global/list/turf_edge_cache = list()
 				to_chat(critter, SPAN_WARNING("There is already a den here."))
 				return TRUE
 			critter.visible_message(SPAN_NOTICE("\The [critter] begins digging industriously."))
+			critter.setClickCooldown(10 SECONDS)
 			if(!do_after(critter, 10 SECONDS, src))
 				return TRUE
 			if(locate(/obj/structure/animal_den) in contents)

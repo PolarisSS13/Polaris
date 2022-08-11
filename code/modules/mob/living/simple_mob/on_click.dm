@@ -19,8 +19,11 @@
 	if(can_special_attack(A) && special_attack_target(A))
 		return
 
-	if(projectiletype)
+	if(can_projectile_attack(A))
 		shoot_target(A)
+
+/mob/living/simple_mob/proc/can_projectile_attack(var/atom/A)
+	return !!projectiletype
 
 /mob/living/simple_mob/proc/do_interaction(var/atom/A)
 	switch(a_intent)

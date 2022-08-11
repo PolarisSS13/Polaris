@@ -1161,5 +1161,7 @@
 /mob/living/proc/rip_out_internal_organ(var/zone, var/skip_wounding = FALSE, var/damage_descriptor)
 	if(length(internal_organs))
 		. = pick_n_take(internal_organs)
+		if(ispath(.))
+			. = new .(src)
 		if(!skip_wounding)
 			take_damage(rand(10,20))
