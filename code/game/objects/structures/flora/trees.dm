@@ -30,9 +30,9 @@
 /obj/structure/flora/tree/proc/choose_icon_state()
 	return icon_state
 
-/obj/structure/flora/tree/can_harvest(var/obj/item/I)
+/obj/structure/flora/tree/can_harvest(var/obj/item/I, var/ignore_tool = FALSE)
 	. = FALSE
-	if(!is_stump && harvest_tool && istype(I, harvest_tool) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
+	if(!is_stump && (ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
 		. = TRUE
 	return .
 
@@ -138,6 +138,12 @@
 	results += ..()
 
 	return results
+
+/obj/structure/flora/tree/show_animal_foraging_message(var/mob/critter)
+	critter.visible_message(SPAN_NOTICE("\The [critter] begins searching through the foliage of \the [src]."))
+
+/obj/structure/flora/tree/show_animal_eating_message(var/mob/critter)
+	critter.visible_message(SPAN_NOTICE("\The [critter] pulls down some low-hanging fruit from \the [src]."))
 
 // Subtypes.
 
