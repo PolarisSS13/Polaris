@@ -90,7 +90,7 @@ var/global/const/access_explorer = 43
 	var/static/list/pod_templates = list(
 		/datum/map_template/surface/plains/Epod,
 		/datum/map_template/surface/plains/Epod2,
-		/datum/map_template/surface/wilderness/deep/Epod3,
+		///datum/map_template/surface/wilderness/deep/Epod3, // Don't use this one, it has spiders.
 		/datum/map_template/surface/wilderness/normal/Epod4
 	)
 
@@ -112,14 +112,22 @@ var/global/const/access_explorer = 43
 
 			// Spawn some kit for getting out of the pod, if they don't have it already.
 			var/turf/T = get_turf(H)
-			var/already_has_tools = FALSE
+
+			var/obj/item/storage/toolbox/mechanical/toolbox
 			for(var/turf/neighbor in RANGE_TURFS(1, T))
-				if(locate(/obj/item/storage/toolbox/mechanical) in neighbor)
-					already_has_tools = TRUE
+				toolbox = locate(/obj/item/storage/toolbox/mechanical) in neighbor
+				if(toolbox)
 					break
-			if(!already_has_tools)
-				var/obj/item/storage/toolbox/mechanical/toolbox = new(get_turf(H))
+
+			if(!toolbox)
+				toolbox = new(T)
+			if(!(locate(/obj/item/pickaxe/hand) in toolbox))
 				new /obj/item/pickaxe/hand(toolbox)
+			if(!(locate(/obj/item/gps) in toolbox))
+				new /obj/item/gps(toolbox)
+			toolbox.name = "emergency toolbox"
+			toolbox.desc = "A heavy toolbox stocked with tools for getting out of a crashed pod, as well as a GPS to aid with recovery."
+			toolbox.make_exact_fit()
 
 			// Clear the mark so it isn't available for other spawns.
 			for(var/obj/effect/landmark/crashed_pod/pod_landmark in T)
