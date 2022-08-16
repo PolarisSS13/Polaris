@@ -1165,3 +1165,6 @@
 			. = new .(src)
 		if(!skip_wounding)
 			take_damage(rand(10,20))
+
+/mob/living/proc/leaves_tracks_type()
+	return

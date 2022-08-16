@@ -27,9 +27,13 @@
 	var/scavenger = FALSE // Can eat from corpses.
 	var/burrower = FALSE  // Can dig dens.
 	var/bitesize = 3      // How many reagents to take per nibble
+	var/tracks_type = /obj/effect/decal/cleanable/blood/tracks/paw
 
 /decl/mob_organ_names/quadruped //Most subtypes have this basic body layout.
 	hit_zones = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
+
+/mob/living/simple_mob/animal/leaves_tracks_type()
+	return tracks_type
 
 /mob/living/simple_mob/animal/proc/has_appetite()
 	return TRUE
