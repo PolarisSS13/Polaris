@@ -1168,3 +1168,19 @@
 
 /mob/living/proc/leaves_tracks_type()
 	return
+
+/mob/living/proc/update_bloodied()
+	return
+
+/mob/living/proc/walk_through_blood(var/obj/effect/decal/cleanable/blood/blood)
+	if(!leaves_tracks_type())
+		return FALSE
+	feet_blood_color = blood.basecolor
+	track_blood = max(blood.amount, track_blood)
+	LAZYINITLIST(feet_blood_DNA)
+	feet_blood_DNA |= blood.blood_DNA.Copy()
+	update_bloodied()
+
+/mob/living/proc/get_snow_footprint_state()
+	if(!hovering) // Flying things shouldn't make footprints.
+		return "snow_footprints"

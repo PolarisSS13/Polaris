@@ -38,6 +38,10 @@
 /mob/living/simple_mob/animal/proc/has_appetite()
 	return TRUE
 
+/mob/living/simple_mob/animal/get_snow_footprint_state()
+	if(!hovering)
+		return "snow_animalprint"
+
 /mob/living/simple_mob/animal/do_interaction(var/atom/A)
 
 	// Can we do some critter interaction?
