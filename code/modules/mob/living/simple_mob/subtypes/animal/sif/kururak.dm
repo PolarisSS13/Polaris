@@ -432,10 +432,9 @@
 
 /datum/modifier/ace/expire(silent)
 	var/mob/living/old_holder = holder
-	if(old_holder)
-		var/health_percent = old_holder.health / old_holder.getMaxHealth()
+	var/health_percent = old_holder ? (old_holder.health / old_holder.getMaxHealth()) : 0
 	. = ..()
-	if(old_holder)
+	if(health_percent && old_holder)
 		old_holder.health = round(old_holder.getMaxHealth() * health_percent)
 		old_holder.updatehealth()
 

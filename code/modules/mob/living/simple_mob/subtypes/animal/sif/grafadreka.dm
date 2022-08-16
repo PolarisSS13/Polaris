@@ -126,6 +126,8 @@ var/global/list/last_drake_howl = list()
 	bitesize = 10 // chomp
 	has_langs = list("Drake")
 
+	see_in_dark = 8 // on par with Taj
+
 	tt_desc = "S tesca pabulator"
 	faction = "grafadreka"
 
@@ -486,15 +488,14 @@ var/global/list/last_drake_howl = list()
 		to_chat(src, SPAN_WARNING("You aren't the pack leader! Sit down!"))
 		return
 
+	audible_message("<b>\The [src]</b> barks loudly and rattles its neck spines.")
 	for(var/mob/living/simple_mob/animal/sif/grafadreka/drake in hearers(world.view * 3, src))
 		if(drake == src || drake.faction != faction)
 			continue
 		if(drake.client)
-			to_chat(drake, SPAN_NOTICE("The pack leader wishes for you to follow them."))
+			to_chat(drake, SPAN_NOTICE("<b>The pack leader wishes for you to follow them.</b>"))
 		else if(drake.ai_holder)
 			drake.ai_holder.set_follow(src)
-
-	audible_message("<b>\The [src]</b> barks loudly and rattles its neck spines.")
 
 /mob/living/simple_mob/animal/sif/grafadreka/has_appetite()
 	return reagents && abs(reagents.total_volume - reagents.maximum_volume) >= 10

@@ -157,3 +157,8 @@
 	if(critter_ref.resting) // get up lazybones
 		critter_ref.lay_down()
 	update_icon()
+
+	var/new_name = sanitize(input(critter_ref, "Would you like to customize your name?", "Critter Name", critter_ref.real_name), MAX_NAME_LEN)
+	if(new_name && !QDELETED(critter_ref))
+		critter_ref.real_name = new_name
+		critter_ref.name = critter_ref.real_name
