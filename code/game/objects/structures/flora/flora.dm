@@ -72,10 +72,7 @@
 	..(W, user)
 
 /obj/structure/flora/proc/can_harvest(var/obj/item/I, var/ignore_tool = FALSE)
-	. = FALSE
-	if((ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
-		. = TRUE
-	return .
+	return ((ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
 
 /obj/structure/flora/proc/spawn_harvest(var/path = null, var/mob/user = null)
 	if(!ispath(path))

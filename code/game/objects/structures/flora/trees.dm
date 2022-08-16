@@ -31,10 +31,7 @@
 	return icon_state
 
 /obj/structure/flora/tree/can_harvest(var/obj/item/I, var/ignore_tool = FALSE)
-	. = FALSE
-	if(!is_stump && (ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
-		. = TRUE
-	return .
+	return (!is_stump && (ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
 
 /obj/structure/flora/tree/attackby(var/obj/item/W, var/mob/living/user)
 	if(can_harvest(W))
