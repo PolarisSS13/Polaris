@@ -176,7 +176,7 @@ var/global/list/last_drake_howl = list()
 	var/next_alpha_check = 0
 	var/dominance = 0 // A score used to determine pack leader.
 	var/stored_sap = 0
-	var/max_stored_sap = 100
+	var/max_stored_sap = 60
 	var/attacked_by_human = FALSE
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
@@ -253,13 +253,13 @@ var/global/list/last_drake_howl = list()
 	return stored_sap >= amt
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/add_sap(var/amt)
-	stored_sap = clamp(stored_sap + amt, 0, max_stored_sap)
+	stored_sap = clamp(round(stored_sap + amt, 0.01), 0, max_stored_sap)
 	update_icon()
 	return TRUE
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/spend_sap(var/amt)
 	if(has_sap(amt))
-		stored_sap = clamp(stored_sap - amt, 0, max_stored_sap)
+		stored_sap = clamp(round(stored_sap - amt, 0.01), 0, max_stored_sap)
 		update_icon()
 		return TRUE
 	return FALSE
