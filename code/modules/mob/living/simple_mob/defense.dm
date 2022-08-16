@@ -80,8 +80,8 @@
 		if(length(MED.apply_sounds))
 			playsound(user, pick(MED.apply_sounds), 25)
 
-		if(do_mob(user, src, 1 SECOND) && MED.get_amount() >= 1 && health < getMaxHealth())
-			heal_organ_damage(MED.heal_brute * 5, MED.heal_burn * 5)
+		if(do_mob(user, src, 2 SECONDS) && MED.get_amount() >= 1 && health < getMaxHealth())
+			heal_organ_damage(MED.heal_brute * 25, MED.heal_burn * 25)
 			visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
 			MED.use(1)
 		return

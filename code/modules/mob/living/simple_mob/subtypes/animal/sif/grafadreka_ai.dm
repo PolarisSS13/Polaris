@@ -1,5 +1,4 @@
-/mob/living/simple_mob/animal/sif/grafadreka/ICheckRangedAttack(atom/A)
-
+/mob/living/simple_mob/animal/sif/grafadreka
 	// Some mobtypes are immune to stun, so trying to incapacitate them
 	// is pointless. Track them here so we don't endlessly run away from
 	// Beepsky until he beats us to death.
@@ -8,7 +7,8 @@
 		/mob/living/simple_mob/humanoid/merc
 	)
 
-	. = ..() && isliving(A)
+/mob/living/simple_mob/animal/sif/grafadreka/ICheckRangedAttack(atom/A)
+	. = ..() && isliving(A) && has_sap(2) && (world.time >= next_spit)
 	if(.)
 
 		var/mob/living/M = A
@@ -17,7 +17,7 @@
 
 		for(var/mobtype in stun_immune_types)
 			if(istype(A, mobtype))
-				return FALSE // bots are immune to stuns
+				return FALSE
 
 /mob/living/simple_mob/animal/sif/grafadreka/IIsAlly(mob/living/L)
 	. = ..()
@@ -57,7 +57,11 @@
 		if(!istype(drake) || prey.lying || prey.incapacitated())
 			return FALSE
 		// We can spit at them - disengage so you can pew pew.
-		if(get_dist(target, holder) <= 1 && drake.has_sap(2))
+		if(get_dist(target, holder) <= 1 && drake.has_sap(2) && (world.time >= drake.next_spit))
+			// No point spitting at immune mobs.
+			for(var/mobtype in drake.stun_immune_types)
+				if(istype(target, mobtype))
+					return FALSE
 			return TRUE
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/pre_ranged_attack(atom/A)

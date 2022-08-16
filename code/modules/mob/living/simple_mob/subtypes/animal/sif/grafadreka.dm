@@ -3,8 +3,8 @@
 	desc = "Your wounds have been salved with Sivian sap."
 	mob_overlay_state = "cyan_sparkles"
 	stacks = MODIFIER_STACK_FORBID
-	on_created_text = "<span class = 'notice'>The glowing sap seethes and bubbles in your wounds, tingling and stinging as infection is burned away.</span>"
-	on_expired_text = "<span class = 'notice'>The last of the sap in your wounds is absorbed by your body.</span>"
+	on_created_text = "<span class = 'notice'>The glowing sap seethes and bubbles in your wounds, tingling and stinging.</span>"
+	on_expired_text = "<span class = 'notice'>The last of the sap in your wounds fizzles away.</span>"
 
 /datum/modifier/sifsap_salve/tick()
 
@@ -351,6 +351,11 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/get_eye_color()
 	return eye_colour
 
+/mob/living/simple_mob/animal/sif/grafadreka/do_tame(var/obj/O, var/mob/user)
+	. = ..()
+	if(attacked_by_human && ishuman(user) && ((user in tamers) || (user in friends)))
+		attacked_by_human = FALSE
+
 /mob/living/simple_mob/animal/sif/grafadreka/handle_special()
 	..()
 	if(client || world.time >= next_alpha_check)
@@ -421,9 +426,12 @@ var/global/list/last_drake_howl = list()
 			var/mob/living/carbon/human/H = friend
 			for(var/obj/item/organ/external/E in H.organs)
 				if(E.status & ORGAN_BLEEDING)
+					E.organ_clamp()
 					H.bloodstr.add_reagent("sifsap", rand(1,2))
-					for(var/datum/wound/W in E.wounds)
-						W.salve()
+				for(var/datum/wound/W in E.wounds)
+					W.salve()
+					W.disinfect()
+
 		// Everyone else is just poisoned.
 		else if(!istype(friend, /mob/living/simple_mob/animal/sif))
 			friend.adjustToxLoss(rand(10,20))
