@@ -91,11 +91,17 @@ var/global/list/last_drake_howl = list()
 	var/turf/user_turf = get_turf(user)
 	if(!istype(user_turf))
 		return
+	var/list/affected_levels = GetConnectedZlevels(user_turf.z)
 	var/list/close_listeners = hearers(world.view * 3, user_turf)
 	for(var/mob/M in player_list)
 		var/turf/T = get_turf(M)
-		if(!istype(T) || istype(T,/turf/space) || T.z != user_turf.z || (M in close_listeners) || M.ear_deaf > 0)
+		if(!istype(T) || istype(T,/turf/space) || M.ear_deaf > 0 || (M in close_listeners) || !(T.z in affected_levels))
 			continue
+		var/turf/reference_point = locate(T.x, T.y, user_turf.z)
+		if(reference_point)
+			var/direction = get_dir(reference_point, T)
+			if(direction)
+				to_chat(M, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]"))
 		M << 'sound/effects/drakehowl_far.ogg'
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
@@ -172,7 +178,7 @@ var/global/list/last_drake_howl = list()
 	var/tmp/eye_colour
 
 	var/next_spit = 0
-	var/spit_cooldown = 5 SECONDS
+	var/spit_cooldown = 8 SECONDS
 	var/next_alpha_check = 0
 	var/dominance = 0 // A score used to determine pack leader.
 	var/stored_sap = 0
@@ -225,6 +231,7 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	if(.)
 		next_spit = world.time + spit_cooldown
+		setMoveCooldown(1 SECOND)
 		spend_sap(2)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
@@ -287,12 +294,12 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	if(istype(loc, /turf/space))
 		return
-	var/health_deficiency = (getMaxHealth() - health)
-	if(health_deficiency >= 40)
-		. += (health_deficiency / 25)
-	var/hungry = (max_nutrition - nutrition) / 5
-	if (hungry >= 70)
-		. += hungry/50
+	var/health_deficiency = 1-(health / maxHealth)
+	if(health_deficiency >= 0.4)
+		. += round(4 * health_deficiency, 0.1)
+	var/hungry = 1-(nutrition / max_nutrition)
+	if (hungry >= 0.3)
+		. += round(6 * hungry, 0.1)
 
 /mob/living/simple_mob/animal/sif/grafadreka/update_icon()
 
