@@ -31,6 +31,9 @@
 /decl/mob_organ_names/quadruped //Most subtypes have this basic body layout.
 	hit_zones = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
 
+/mob/living/simple_mob/animal/proc/has_appetite()
+	return TRUE
+
 /mob/living/simple_mob/animal/do_interaction(var/atom/A)
 
 	// Can we do some critter interaction?
@@ -50,6 +53,11 @@
 	if(scavenger && isliving(A) && a_intent == I_HURT)
 		var/mob/living/M = A
 		if(M.stat == DEAD && length(M.internal_organs))
+
+			if(!has_appetite())
+				to_chat(src, SPAN_WARNING("You don't have much of an appetite at the moment."))
+				return TRUE
+
 			to_chat(src, SPAN_NOTICE("You dig into the guts of \the [M], hunting for the sweetest meat."))
 			set_AI_busy(TRUE)
 			if(do_after(src, 2 SECONDS, M) && !QDELETED(M) && length(M.internal_organs))
@@ -65,18 +73,21 @@
 
 /mob/living/simple_mob/animal/proc/eat_food_item(var/obj/item/snack, var/override_bitesize, var/silent)
 
-	if(!silent)
-		visible_message("<b>\The [src]</b> nibbles away at \the [snack].")
-		playsound(src, 'sound/items/eatfood.ogg', rand(10,50), 1)
-
 	if(istype(snack, /obj/item/organ))
 		var/obj/item/organ/organ = snack
 		if(organ.meat_type)
 			snack = new organ.meat_type(src)
 			qdel(organ)
+	else if(!istype(snack) || !snack.reagents?.total_volume)
+		to_chat(src, SPAN_WARNING("\The [snack] doesn't seem edible."))
+		return
+
+	if(!silent)
+		visible_message("<b>\The [src]</b> nibbles away at \the [snack].")
+		playsound(src, 'sound/items/eatfood.ogg', rand(10,50), 1)
 
 	if(snack.reagents?.total_volume)
-		var/use_bitesize = (override_bitesize || bitesize)
+		var/use_bitesize = max(override_bitesize, bitesize)
 		var/removing_reagents = clamp(use_bitesize, 0, min(max(0, reagents?.maximum_volume - reagents?.total_volume), snack.reagents.total_volume))
 		if(reagents && removing_reagents)
 			snack.reagents.trans_to_holder(reagents, removing_reagents)

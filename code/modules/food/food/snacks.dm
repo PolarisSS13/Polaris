@@ -232,6 +232,9 @@
 		return
 	if(isanimal(user))
 		var/mob/living/simple_mob/animal/critter = user
+		if(!critter.has_appetite())
+			to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
+			return TRUE
 		critter.eat_food_item(src, bitesize)
 	else
 		user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")

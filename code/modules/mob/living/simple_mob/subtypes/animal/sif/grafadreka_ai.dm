@@ -24,14 +24,15 @@
 			drake_brain.hostile = TRUE
 
 /datum/ai_holder/simple_mob/intentional/grafadreka
-	hostile =         TRUE
-	retaliate =       TRUE
-	cooperative =     TRUE
-	can_flee =        TRUE
-	flee_when_dying = TRUE
-	var/next_food_check
-	var/next_sap_check
-	var/next_heal_check
+	hostile =             TRUE
+	retaliate =           TRUE
+	cooperative =         TRUE
+	can_flee =            TRUE
+	flee_when_dying =     TRUE
+	home_low_priority =   TRUE
+	var/next_food_check = 0
+	var/next_sap_check =  0
+	var/next_heal_check = 0
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/should_flee(force)
 	. = ..()
@@ -105,7 +106,7 @@
 					return
 
 	// These actions need space in our stomach to be worth considering at all.
-	if(drake.reagents && abs(drake.reagents.total_volume - drake.reagents.maximum_volume) >= 10)
+	if(drake.has_appetite() && !(locate(/datum/reagent/nutriment) in drake.reagents.reagent_list))
 
 		// Find some sap if we're low and aren't already digesting some.
 		if(!drake.has_sap(20) && !drake.reagents.has_reagent("sifsap"))

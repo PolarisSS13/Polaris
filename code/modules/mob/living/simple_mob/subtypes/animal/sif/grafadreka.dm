@@ -7,9 +7,16 @@
 	on_expired_text = "<span class = 'notice'>The last of the sap in your wounds is absorbed by your body.</span>"
 
 /datum/modifier/sifsap_salve/tick()
+
 	if(holder.stat == DEAD)
 		expire()
+
 	if(istype(holder, /mob/living/simple_mob/animal/sif))
+
+		var/mob/living/simple_mob/animal/sif/critter = holder
+		if(critter.health >= critter.sap_heal_threshold)
+			return
+
 		if(holder.resting)
 			if(istype(holder.loc, /obj/structure/animal_den))
 				holder.adjustBruteLoss(-3)
@@ -116,6 +123,11 @@ var/global/list/last_drake_howl = list()
 	tt_desc = "S tesca pabulator"
 	faction = "grafadreka"
 
+	mob_size = MOB_LARGE
+	mob_bump_flag = SIMPLE_ANIMAL
+	mob_swap_flags = SIMPLE_ANIMAL
+	mob_push_flags = SIMPLE_ANIMAL
+
 	maxHealth = 150
 	health = 150
 	movement_cooldown = 2
@@ -167,7 +179,6 @@ var/global/list/last_drake_howl = list()
 	var/max_stored_sap = 100
 	var/attacked_by_human = FALSE
 
-
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
 	if(ishuman(friend))
 		var/mob/living/carbon/human/H = friend
@@ -175,6 +186,9 @@ var/global/list/last_drake_howl = list()
 			if(E.status & ORGAN_BLEEDING)
 				return TRUE
 		return FALSE
+	if(istype(friend, /mob/living/simple_mob/animal/sif))
+		var/mob/living/simple_mob/animal/sif/critter = friend
+		return critter.health < critter.sap_heal_threshold
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
@@ -219,7 +233,7 @@ var/global/list/last_drake_howl = list()
 	// Process food and sap chems.
 	if(stat == CONSCIOUS) // Hibernating drakes don't get hungy.
 		// by default we lose nutrition. Hungry hungry drakes.
-		var/food_val = resting ? -0.2 : -0.5
+		var/food_val = resting ? 0 : -0.3
 
 		// Very basic metabolism.
 		if(reagents?.total_volume)
@@ -227,7 +241,7 @@ var/global/list/last_drake_howl = list()
 				var/removing = min(REM, chem.volume)
 				if(istype(chem, /datum/reagent/nutriment))
 					var/datum/reagent/nutriment/food = chem
-					food_val += (food.nutriment_factor * removing) * ((food.allergen_type & ALLERGEN_MEAT) ? 0.5 : 0.1)
+					food_val += (food.nutriment_factor * removing) * ((food.allergen_type & ALLERGEN_MEAT) ? 0.3 : 0.1)
 				else if(istype(chem, /datum/reagent/toxin/sifslurry))
 					add_sap(removing * 3)
 				reagents.remove_reagent(chem.id, removing)
@@ -341,9 +355,14 @@ var/global/list/last_drake_howl = list()
 
 		if(!can_tend_wounds(friend))
 			if(friend == src)
-				to_chat(src, SPAN_WARNING("You are unwounded."))
+				if(health == maxHealth)
+					to_chat(src, SPAN_WARNING("You are unwounded."))
+				else
+					to_chat(src, SPAN_WARNING("You cannot tend any of your wounds."))
 			else
-				return ..()
+				if(friend.health == friend.maxHealth)
+					return ..()
+				to_chat(src, SPAN_WARNING("You cannot tend any of \the [friend]'s wounds."))
 			return TRUE
 
 		if(friend.has_modifier_of_type(/datum/modifier/sifsap_salve))
@@ -460,7 +479,7 @@ var/global/list/last_drake_howl = list()
 		to_chat(src, SPAN_WARNING("You aren't the pack leader! Sit down!"))
 		return
 
-	for(var/mob/living/simple_mob/animal/sif/grafadreka/drake in hearers(7, src))
+	for(var/mob/living/simple_mob/animal/sif/grafadreka/drake in hearers(world.view * 3, src))
 		if(drake == src || drake.faction != faction)
 			continue
 		if(drake.client)
@@ -469,6 +488,9 @@ var/global/list/last_drake_howl = list()
 			drake.ai_holder.set_follow(src)
 
 	audible_message("<b>\The [src]</b> barks loudly and rattles its neck spines.")
+
+/mob/living/simple_mob/animal/sif/grafadreka/has_appetite()
+	return reagents && abs(reagents.total_volume - reagents.maximum_volume) >= 10
 
 /datum/say_list/grafadreka
 	speak = list("Chff!","Skhh.", "Rrrss...")

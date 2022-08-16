@@ -91,21 +91,29 @@
 		var/mob/living/simple_mob/animal/critter = user
 		if(!critter.forager)
 			return ..()
+
+		if(!critter.has_appetite())
+			to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
+			return TRUE
+
 		if(!can_forage(critter))
 			to_chat(critter, SPAN_WARNING("You cannot see any edible fruit on \the [src]."))
 			return TRUE
+
 		critter.set_AI_busy(TRUE)
 		show_animal_foraging_message(critter)
 		critter.setClickCooldown(5 SECONDS)
+
 		if(!do_after(critter, 5 SECONDS, src) || QDELETED(src) || !can_forage(user))
 			critter.set_AI_busy(FALSE)
 			return TRUE
+
 		critter.set_AI_busy(FALSE)
 		show_animal_eating_message(critter)
-		playsound(critter, 'sound/items/eatfood.ogg', rand(10,50), 1)
 		harvest_count++
 		critter.eat_food_item(spawn_harvest(pickweight(harvest_loot)))
 		return TRUE
+
 	return ..()
 
 /obj/structure/flora/proc/can_forage(var/mob/critter)
