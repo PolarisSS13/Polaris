@@ -56,7 +56,7 @@
 
 /mob/living/simple_mob/animal/get_snow_footprint_state()
 	if(!hovering)
-		return "snow_animalprint"
+		return "snow_animalprints"
 
 /mob/living/simple_mob/animal/do_interaction(var/atom/A)
 
