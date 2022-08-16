@@ -8,7 +8,7 @@
 /obj/item/reagent_containers/food/snacks/grown/sif/examine(mob/user)
 	. = ..()
 	if(seeds)
-		to_chat(user, SPAN_NOTICE("You can see [seeds] seed\s in \the [src]. You might be able to extract them with a sharp object."))
+		. += SPAN_NOTICE("You can see [seeds] seed\s in \the [src]. You might be able to extract them with a sharp object.")
 
 /obj/item/reagent_containers/food/snacks/grown/sif/attackby(var/obj/item/W, var/mob/living/user)
 	if(seed && W.sharp && seeds > 0)
