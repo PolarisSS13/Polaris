@@ -11,7 +11,7 @@
 
 	// Healing threshold for grafadreka healing spit effect.
 	var/sap_heal_threshold = 1
-	var/const/scarification_period = 0.15
+	var/const/scarification_period = 0.25
 
 /mob/living/simple_mob/animal/sif/Stat()
 	. = ..()

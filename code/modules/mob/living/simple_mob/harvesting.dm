@@ -17,7 +17,7 @@
 
 /mob/living/simple_mob/examine(mob/user)
 	. = ..()
-	if(user && (get_dist(user, src) <= 3))
+	if(user && (isobserver(user) || get_dist(user, src) <= 3))
 
 		var/datum/gender/G = gender_datums[get_visible_gender()]
 		if(stat == DEAD)
@@ -32,16 +32,35 @@
 			else
 				. += SPAN_NOTICE("It can be [harvest_verb] now.")
 
-		var/percent_health = health / maxHealth
-		if(percent_health >= 1)
-			. += SPAN_NOTICE("[G.He] [G.is] uninjured.")
-		else if(percent_health >= 0.7)
-			. += SPAN_WARNING("[G.He] [G.is] mildly injured.")
-		else if(percent_health >= 0.4)
-			. += SPAN_WARNING("[G.He] [G.is] moderately injured.")
-		else
-			. += SPAN_DANGER("[G.He] [G.is] badly injured.")
+		var/damage_strings = list()
+		var/percent_brute = getBruteLoss() / getMaxHealth()
+		if(percent_brute > 0.6)
+			damage_strings += SPAN_DANGER("maimed bloody")
+		else if(percent_brute > 0.3)
+			damage_strings += SPAN_WARNING("cut and bruised")
+		else if(percent_brute > 0)
+			damage_strings += "lightly bruised"
 
+		var/percent_burn =  getFireLoss() / getMaxHealth()
+		if(percent_burn > 0.6)
+			damage_strings += SPAN_DANGER("severely burned")
+		else if(percent_burn > 0.3)
+			damage_strings += SPAN_WARNING("covered in burns")
+		else if(percent_burn > 0)
+			damage_strings += "mildly burned"
+
+		if(!length(damage_strings))
+			var/percent_health = health / getMaxHealth()
+			if(percent_health >= 1)
+				. += SPAN_NOTICE("uninjured")
+			else if(percent_health >= 0.7)
+				. += "mildly injured"
+			else if(percent_health >= 0.4)
+				. += SPAN_WARNING("moderately injured")
+			else
+				. += SPAN_DANGER("badly injured")
+
+		. += "[G.He] [G.is] [english_list(damage_strings)]."
 
 /mob/living/simple_mob/proc/livestock_harvest(var/obj/item/tool, var/mob/living/user)
 	if(!LAZYLEN(harvest_results))	// Might be a unique interaction of an object using the proc to do something weird, or just someone's a donk.
