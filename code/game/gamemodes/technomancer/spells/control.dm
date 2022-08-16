@@ -142,4 +142,3 @@
 			adjust_instability(controlled_mobs.len)
 			to_chat(user, "<span class='notice'>You command your [controlled_mobs.len > 1 ? "entities" : "[controlled_mobs[1]]"] to move \
 			towards \the [T].</span>")
-
