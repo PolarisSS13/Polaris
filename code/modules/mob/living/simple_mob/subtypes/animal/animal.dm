@@ -66,7 +66,8 @@
 		/obj/structure/flora,
 		/turf/simulated/floor/outdoors,
 		/obj/item/organ,
-		/obj/item/reagent_containers/food
+		/obj/item/reagent_containers/food,
+		/obj/machinery/door
 	)
 	for(var/checktype in atom_types_with_animal_interactions)
 		if(istype(A, checktype))

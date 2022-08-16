@@ -72,9 +72,6 @@
 		else
 			visible_message("<span class='notice'>\The [user] strains fruitlessly to force \the [src] [density ? "open" : "closed"].</span>")
 		return
-	if(isanimal(user) && user.a_intent == I_HELP)
-		user.visible_message(SPAN_NOTICE("\The [user] scratches at the bottom of \the [src]."))
-		return
 	..()
 
 /obj/machinery/door/airlock/attack_alien(var/mob/user) //Familiar, right? Doors. -Mechoid

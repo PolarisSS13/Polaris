@@ -14,7 +14,7 @@
 	if(istype(holder, /mob/living/simple_mob/animal/sif))
 
 		var/mob/living/simple_mob/animal/sif/critter = holder
-		if(critter.health >= critter.sap_heal_threshold)
+		if(critter.health >= (critter.getMaxHealth() * critter.sap_heal_threshold))
 			return
 
 		if(holder.resting)
@@ -99,7 +99,7 @@ var/global/list/last_drake_howl = list()
 			continue
 		var/turf/reference_point = locate(T.x, T.y, user_turf.z)
 		if(reference_point)
-			var/direction = get_dir(reference_point, T)
+			var/direction = get_dir(reference_point, user_turf)
 			if(direction)
 				to_chat(M, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]"))
 		M << 'sound/effects/drakehowl_far.ogg'
@@ -158,6 +158,13 @@ var/global/list/last_drake_howl = list()
 	attack_armor_pen = 15
 	attack_sound = 'sound/weapons/slice.ogg'
 
+	tame_items = list(
+		/obj/item/reagent_containers/food/snacks/siffruit = 20,
+		/obj/item/reagent_containers/food/snacks/grown/sif/sifpod = 10,
+		/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat = 20,
+		/obj/item/reagent_containers/food/snacks/meat = 10
+	)
+
 	// Attack strings for swapping.
 	attacktext = null
 	var/static/list/claw_attacktext = list("slashed", "clawed", "swiped", "gouged")
@@ -196,7 +203,7 @@ var/global/list/last_drake_howl = list()
 		return FALSE
 	if(istype(friend, /mob/living/simple_mob/animal/sif))
 		var/mob/living/simple_mob/animal/sif/critter = friend
-		return critter.health < critter.sap_heal_threshold
+		return critter.health < (critter.getMaxHealth() * critter.sap_heal_threshold)
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
