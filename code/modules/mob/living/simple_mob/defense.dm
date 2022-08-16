@@ -5,7 +5,8 @@
 	//	if(!P.SA_vulnerability || P.SA_vulnerability == intelligence_level)
 		if(P.SA_vulnerability & mob_class)
 			P.damage += P.SA_bonus_damage
-
+		if(P.firer)
+			IWasAttackedBy(P.firer)
 	. = ..()
 
 
@@ -40,17 +41,15 @@
 			G.affecting = src
 			LAssailant = L
 
-			L.visible_message("<span class='warning'>\The [L] has grabbed [src] passively!</span>")
+			L.visible_message(SPAN_WARNING("\The [L] has grabbed [src] passively!"))
 			L.do_attack_animation(src)
 
 		if(I_HURT)
 			var/armor = run_armor_check(def_zone = null, attack_flag = "melee")
-			apply_damage(damage = harm_intent_damage, damagetype = BURN, def_zone = null, blocked = armor, blocked = resistance, used_weapon = null, sharp = FALSE, edge = FALSE)
-			L.visible_message("<span class='warning'>\The [L] [response_harm] \the [src]!</span>")
+			apply_damage(damage = harm_intent_damage, damagetype = BRUTE, def_zone = null, blocked = armor, blocked = resistance, used_weapon = null, sharp = FALSE, edge = FALSE)
+			L.visible_message(SPAN_WARNING("\The [L] [response_harm] \the [src]!"))
 			L.do_attack_animation(src)
 			IWasAttackedBy(L)
-
-	return
 
 /mob/living/simple_mob/proc/IWasAttackedBy(var/mob/living/attacker)
 	return
@@ -121,8 +120,10 @@
 	if(supernatural && istype(O,/obj/item/nullrod))
 		effective_force *= 2
 		purge = 3
+	if(user)
+		IWasAttackedBy(user)
 	if(O.force <= resistance)
-		to_chat(user,"<span class='danger'>This weapon is ineffective, it does no damage.</span>")
+		to_chat(user, SPAN_WARNING("This weapon is ineffective, it does no damage."))
 		return 2 //???
 
 	. = ..()

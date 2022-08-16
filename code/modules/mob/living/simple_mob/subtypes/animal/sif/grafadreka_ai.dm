@@ -1,9 +1,23 @@
 /mob/living/simple_mob/animal/sif/grafadreka/ICheckRangedAttack(atom/A)
+
+	// Some mobtypes are immune to stun, so trying to incapacitate them
+	// is pointless. Track them here so we don't endlessly run away from
+	// Beepsky until he beats us to death.
+	var/static/list/stun_immune_types = list(
+		/mob/living/bot,
+		/mob/living/simple_mob/humanoid/merc
+	)
+
 	. = ..() && isliving(A)
 	if(.)
+
 		var/mob/living/M = A
 		if(M.lying || M.incapacitated())
-			. = FALSE // They're already stunned, go bite their nipples off.
+			return FALSE // They're already stunned, go bite their nipples off.
+
+		for(var/mobtype in stun_immune_types)
+			if(istype(A, mobtype))
+				return FALSE // bots are immune to stuns
 
 /mob/living/simple_mob/animal/sif/grafadreka/IIsAlly(mob/living/L)
 	. = ..()

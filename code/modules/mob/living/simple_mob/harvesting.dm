@@ -52,13 +52,13 @@
 		if(!length(damage_strings))
 			var/percent_health = health / getMaxHealth()
 			if(percent_health >= 1)
-				. += SPAN_NOTICE("uninjured")
+				damage_strings += SPAN_NOTICE("uninjured")
 			else if(percent_health >= 0.7)
-				. += "mildly injured"
+				damage_strings += "mildly injured"
 			else if(percent_health >= 0.4)
-				. += SPAN_WARNING("moderately injured")
+				damage_strings += SPAN_WARNING("moderately injured")
 			else
-				. += SPAN_DANGER("badly injured")
+				damage_strings += SPAN_DANGER("badly injured")
 
 		. += "[G.He] [G.is] [english_list(damage_strings)]."
 
