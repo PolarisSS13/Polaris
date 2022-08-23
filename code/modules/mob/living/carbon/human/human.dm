@@ -1662,3 +1662,6 @@
 		else
 			take_damage(rand(10, 20))
 		return organ
+
+/mob/living/carbon/human/leaves_tracks_type()
+	return species.get_move_trail(src)

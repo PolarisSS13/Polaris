@@ -18,7 +18,6 @@
 /datum/artifact_effect/uncommon/cellcharge/DoEffectAura()
 	var/atom/holder = get_master_holder()
 	if(holder)
-		var/turf/T = get_turf(holder)
 		for (var/obj/machinery/power/apc/C in GLOB.apcs)
 			if(get_dist(holder, C) <= 200)
 				for (var/obj/item/cell/B in C.contents)

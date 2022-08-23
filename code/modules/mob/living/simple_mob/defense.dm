@@ -5,7 +5,8 @@
 	//	if(!P.SA_vulnerability || P.SA_vulnerability == intelligence_level)
 		if(P.SA_vulnerability & mob_class)
 			P.damage += P.SA_bonus_damage
-
+		if(P.firer)
+			IWasAttackedBy(P.firer)
 	. = ..()
 
 
@@ -40,37 +41,51 @@
 			G.affecting = src
 			LAssailant = L
 
-			L.visible_message("<span class='warning'>\The [L] has grabbed [src] passively!</span>")
+			L.visible_message(SPAN_WARNING("\The [L] has grabbed [src] passively!"))
 			L.do_attack_animation(src)
 
 		if(I_HURT)
 			var/armor = run_armor_check(def_zone = null, attack_flag = "melee")
-			apply_damage(damage = harm_intent_damage, damagetype = BURN, def_zone = null, blocked = armor, blocked = resistance, used_weapon = null, sharp = FALSE, edge = FALSE)
-			L.visible_message("<span class='warning'>\The [L] [response_harm] \the [src]!</span>")
+			apply_damage(damage = harm_intent_damage, damagetype = BRUTE, def_zone = null, blocked = armor, blocked = resistance, used_weapon = null, sharp = FALSE, edge = FALSE)
+			L.visible_message(SPAN_WARNING("\The [L] [response_harm] \the [src]!"))
 			L.do_attack_animation(src)
 			IWasAttackedBy(L)
-
-	return
 
 /mob/living/simple_mob/proc/IWasAttackedBy(var/mob/living/attacker)
 	return
 
 // When somoene clicks us with an item in hand
 /mob/living/simple_mob/attackby(var/obj/item/O, var/mob/user)
-	if(istype(O, /obj/item/stack/medical))
-		if(stat != DEAD)
-			// This could be done better.
-			var/obj/item/stack/medical/MED = O
-			if(health < getMaxHealth())
-				if(MED.amount >= 1)
-					adjustBruteLoss(-MED.heal_brute)
-					MED.amount -= 1
-					if(MED.amount <= 0)
-						qdel(MED)
-					visible_message("<span class='notice'>\The [user] applies the [MED] on [src].</span>")
-		else
-			var/datum/gender/T = gender_datums[src.get_visible_gender()]
-			to_chat(user, "<span class='notice'>\The [src] is dead, medical items won't bring [T.him] back to life.</span>") // the gender lookup is somewhat overkill, but it functions identically to the obsolete gender macros and future-proofs this code
+
+	if(istype(O, /obj/item/stack/medical) && (mob_class & (MOB_CLASS_HUMANOID|MOB_CLASS_ANIMAL)))
+
+		var/datum/gender/T = gender_datums[get_visible_gender()]
+		if(stat == DEAD)
+			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [T.him] back to life."))
+			return
+
+		var/obj/item/stack/medical/MED = O
+		if(health >= getMaxHealth())
+			to_chat(user, SPAN_WARNING("\The [src] does not need medical treatment."))
+			return
+
+		if(!((MED.heal_burn && getFireLoss()) || (MED.heal_brute && getBruteLoss())))
+			to_chat(user, SPAN_WARNING("\The [MED] does not seem appropriate to treat \the [src]."))
+			return
+
+		if(MED.get_amount() < 1)
+			to_chat(user, SPAN_WARNING("You do not have enough of \the [MED] to treat \the [src]."))
+			return
+
+		if(length(MED.apply_sounds))
+			playsound(user, pick(MED.apply_sounds), 25)
+
+		if(do_mob(user, src, 2 SECONDS) && MED.get_amount() >= 1 && health < getMaxHealth())
+			heal_organ_damage(MED.heal_brute * 25, MED.heal_burn * 25)
+			visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
+			MED.use(1)
+		return
+
 	if(can_butcher(user, O))	//if the animal can be butchered, do so and return. It's likely to be gibbed.
 		harvest(user, O)
 		return
@@ -105,8 +120,10 @@
 	if(supernatural && istype(O,/obj/item/nullrod))
 		effective_force *= 2
 		purge = 3
+	if(user)
+		IWasAttackedBy(user)
 	if(O.force <= resistance)
-		to_chat(user,"<span class='danger'>This weapon is ineffective, it does no damage.</span>")
+		to_chat(user, SPAN_WARNING("This weapon is ineffective, it does no damage."))
 		return 2 //???
 
 	. = ..()

@@ -3,13 +3,20 @@
 	desc = "Your wounds have been salved with Sivian sap."
 	mob_overlay_state = "cyan_sparkles"
 	stacks = MODIFIER_STACK_FORBID
-	on_created_text = "<span class = 'notice'>The glowing sap seethes and bubbles in your wounds, tingling and stinging as infection is burned away.</span>"
-	on_expired_text = "<span class = 'notice'>The last of the sap in your wounds is absorbed by your body.</span>"
+	on_created_text = "<span class = 'notice'>The glowing sap seethes and bubbles in your wounds, tingling and stinging.</span>"
+	on_expired_text = "<span class = 'notice'>The last of the sap in your wounds fizzles away.</span>"
 
 /datum/modifier/sifsap_salve/tick()
+
 	if(holder.stat == DEAD)
 		expire()
+
 	if(istype(holder, /mob/living/simple_mob/animal/sif))
+
+		var/mob/living/simple_mob/animal/sif/critter = holder
+		if(critter.health >= (critter.getMaxHealth() * critter.sap_heal_threshold))
+			return
+
 		if(holder.resting)
 			if(istype(holder.loc, /obj/structure/animal_den))
 				holder.adjustBruteLoss(-3)
@@ -84,11 +91,17 @@ var/global/list/last_drake_howl = list()
 	var/turf/user_turf = get_turf(user)
 	if(!istype(user_turf))
 		return
+	var/list/affected_levels = GetConnectedZlevels(user_turf.z)
 	var/list/close_listeners = hearers(world.view * 3, user_turf)
 	for(var/mob/M in player_list)
 		var/turf/T = get_turf(M)
-		if(!istype(T) || istype(T,/turf/space) || T.z != user_turf.z || (M in close_listeners) || M.ear_deaf > 0)
+		if(!istype(T) || istype(T,/turf/space) || M.ear_deaf > 0 || (M in close_listeners) || !(T.z in affected_levels))
 			continue
+		var/turf/reference_point = locate(T.x, T.y, user_turf.z)
+		if(reference_point)
+			var/direction = get_dir(reference_point, user_turf)
+			if(direction)
+				to_chat(M, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]"))
 		M << 'sound/effects/drakehowl_far.ogg'
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
@@ -113,8 +126,15 @@ var/global/list/last_drake_howl = list()
 	bitesize = 10 // chomp
 	has_langs = list("Drake")
 
+	see_in_dark = 8 // on par with Taj
+
 	tt_desc = "S tesca pabulator"
 	faction = "grafadreka"
+
+	mob_size = MOB_LARGE
+	mob_bump_flag = SIMPLE_ANIMAL
+	mob_swap_flags = SIMPLE_ANIMAL
+	mob_push_flags = SIMPLE_ANIMAL
 
 	maxHealth = 150
 	health = 150
@@ -138,6 +158,13 @@ var/global/list/last_drake_howl = list()
 	attack_armor_pen = 15
 	attack_sound = 'sound/weapons/slice.ogg'
 
+	tame_items = list(
+		/obj/item/reagent_containers/food/snacks/siffruit = 20,
+		/obj/item/reagent_containers/food/snacks/grown/sif/sifpod = 10,
+		/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat = 20,
+		/obj/item/reagent_containers/food/snacks/meat = 10
+	)
+
 	// Attack strings for swapping.
 	attacktext = null
 	var/static/list/claw_attacktext = list("slashed", "clawed", "swiped", "gouged")
@@ -160,13 +187,12 @@ var/global/list/last_drake_howl = list()
 	var/tmp/eye_colour
 
 	var/next_spit = 0
-	var/spit_cooldown = 5 SECONDS
+	var/spit_cooldown = 8 SECONDS
 	var/next_alpha_check = 0
 	var/dominance = 0 // A score used to determine pack leader.
 	var/stored_sap = 0
-	var/max_stored_sap = 100
+	var/max_stored_sap = 60
 	var/attacked_by_human = FALSE
-
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
 	if(ishuman(friend))
@@ -175,6 +201,9 @@ var/global/list/last_drake_howl = list()
 			if(E.status & ORGAN_BLEEDING)
 				return TRUE
 		return FALSE
+	if(istype(friend, /mob/living/simple_mob/animal/sif))
+		var/mob/living/simple_mob/animal/sif/critter = friend
+		return critter.health < (critter.getMaxHealth() * critter.sap_heal_threshold)
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
@@ -211,6 +240,7 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	if(.)
 		next_spit = world.time + spit_cooldown
+		setMoveCooldown(1 SECOND)
 		spend_sap(2)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
@@ -219,7 +249,7 @@ var/global/list/last_drake_howl = list()
 	// Process food and sap chems.
 	if(stat == CONSCIOUS) // Hibernating drakes don't get hungy.
 		// by default we lose nutrition. Hungry hungry drakes.
-		var/food_val = resting ? -0.2 : -0.5
+		var/food_val = resting ? 0 : -0.3
 
 		// Very basic metabolism.
 		if(reagents?.total_volume)
@@ -227,7 +257,7 @@ var/global/list/last_drake_howl = list()
 				var/removing = min(REM, chem.volume)
 				if(istype(chem, /datum/reagent/nutriment))
 					var/datum/reagent/nutriment/food = chem
-					food_val += (food.nutriment_factor * removing) * ((food.allergen_type & ALLERGEN_MEAT) ? 0.5 : 0.1)
+					food_val += (food.nutriment_factor * removing) * ((food.allergen_type & ALLERGEN_MEAT) ? 0.3 : 0.1)
 				else if(istype(chem, /datum/reagent/toxin/sifslurry))
 					add_sap(removing * 3)
 				reagents.remove_reagent(chem.id, removing)
@@ -239,13 +269,13 @@ var/global/list/last_drake_howl = list()
 	return stored_sap >= amt
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/add_sap(var/amt)
-	stored_sap = clamp(stored_sap + amt, 0, max_stored_sap)
+	stored_sap = clamp(round(stored_sap + amt, 0.01), 0, max_stored_sap)
 	update_icon()
 	return TRUE
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/spend_sap(var/amt)
 	if(has_sap(amt))
-		stored_sap = clamp(stored_sap - amt, 0, max_stored_sap)
+		stored_sap = clamp(round(stored_sap - amt, 0.01), 0, max_stored_sap)
 		update_icon()
 		return TRUE
 	return FALSE
@@ -273,12 +303,12 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	if(istype(loc, /turf/space))
 		return
-	var/health_deficiency = (getMaxHealth() - health)
-	if(health_deficiency >= 40)
-		. += (health_deficiency / 25)
-	var/hungry = (max_nutrition - nutrition) / 5
-	if (hungry >= 70)
-		. += hungry/50
+	var/health_deficiency = 1-(health / maxHealth)
+	if(health_deficiency >= 0.4)
+		. += round(4 * health_deficiency, 0.1)
+	var/hungry = 1-(nutrition / max_nutrition)
+	if (hungry >= 0.3)
+		. += round(6 * hungry, 0.1)
 
 /mob/living/simple_mob/animal/sif/grafadreka/update_icon()
 
@@ -321,6 +351,11 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/get_eye_color()
 	return eye_colour
 
+/mob/living/simple_mob/animal/sif/grafadreka/do_tame(var/obj/O, var/mob/user)
+	. = ..()
+	if(attacked_by_human && ishuman(user) && ((user in tamers) || (user in friends)))
+		attacked_by_human = FALSE
+
 /mob/living/simple_mob/animal/sif/grafadreka/handle_special()
 	..()
 	if(client || world.time >= next_alpha_check)
@@ -341,9 +376,14 @@ var/global/list/last_drake_howl = list()
 
 		if(!can_tend_wounds(friend))
 			if(friend == src)
-				to_chat(src, SPAN_WARNING("You are unwounded."))
+				if(health == maxHealth)
+					to_chat(src, SPAN_WARNING("You are unwounded."))
+				else
+					to_chat(src, SPAN_WARNING("You cannot tend any of your wounds."))
 			else
-				return ..()
+				if(friend.health == friend.maxHealth)
+					return ..()
+				to_chat(src, SPAN_WARNING("You cannot tend any of \the [friend]'s wounds."))
 			return TRUE
 
 		if(friend.has_modifier_of_type(/datum/modifier/sifsap_salve))
@@ -386,9 +426,12 @@ var/global/list/last_drake_howl = list()
 			var/mob/living/carbon/human/H = friend
 			for(var/obj/item/organ/external/E in H.organs)
 				if(E.status & ORGAN_BLEEDING)
+					E.organ_clamp()
 					H.bloodstr.add_reagent("sifsap", rand(1,2))
-					for(var/datum/wound/W in E.wounds)
-						W.salve()
+				for(var/datum/wound/W in E.wounds)
+					W.salve()
+					W.disinfect()
+
 		// Everyone else is just poisoned.
 		else if(!istype(friend, /mob/living/simple_mob/animal/sif))
 			friend.adjustToxLoss(rand(10,20))
@@ -460,15 +503,17 @@ var/global/list/last_drake_howl = list()
 		to_chat(src, SPAN_WARNING("You aren't the pack leader! Sit down!"))
 		return
 
-	for(var/mob/living/simple_mob/animal/sif/grafadreka/drake in hearers(7, src))
+	audible_message("<b>\The [src]</b> barks loudly and rattles its neck spines.")
+	for(var/mob/living/simple_mob/animal/sif/grafadreka/drake in hearers(world.view * 3, src))
 		if(drake == src || drake.faction != faction)
 			continue
 		if(drake.client)
-			to_chat(drake, SPAN_NOTICE("The pack leader wishes for you to follow them."))
+			to_chat(drake, SPAN_NOTICE("<b>The pack leader wishes for you to follow them.</b>"))
 		else if(drake.ai_holder)
 			drake.ai_holder.set_follow(src)
 
-	audible_message("<b>\The [src]</b> barks loudly and rattles its neck spines.")
+/mob/living/simple_mob/animal/sif/grafadreka/has_appetite()
+	return reagents && abs(reagents.total_volume - reagents.maximum_volume) >= 10
 
 /datum/say_list/grafadreka
 	speak = list("Chff!","Skhh.", "Rrrss...")

@@ -562,6 +562,9 @@ var/global/list/organ_cache = list()
 /obj/item/organ/attack_generic(mob/user)
 	if(isanimal(user))
 		var/mob/living/simple_mob/animal/critter = user
-		critter.eat_food_item(src)
+		if(!critter.has_appetite())
+			to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
+		else
+			critter.eat_food_item(src)
 		return TRUE
 	return ..()

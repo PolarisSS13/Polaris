@@ -16,6 +16,10 @@
 	var/upgrade_to	// The type path this stack can be upgraded to.
 
 /obj/item/stack/medical/attack(mob/living/carbon/M as mob, mob/user as mob)
+
+	if(istype(M, /mob/living/simple_mob))
+		return 1 // We handle this in simplemob attackby.
+
 	if (!istype(M))
 		to_chat(user, "<span class='warning'>\The [src] cannot be applied to [M]!</span>")
 		return 1
@@ -129,7 +133,7 @@
 				if(used >= available)
 					to_chat(user, "<span class='warning'>You run out of [src]!</span>")
 					break
-				
+
 				if (W.current_stage <= W.max_bleeding_stage)
 					user.visible_message("<span class='notice'>\The [user] bandages \a [W.desc] on [M]'s [affecting.name].</span>", \
 					                              "<span class='notice'>You bandage \a [W.desc] on [M]'s [affecting.name].</span>" )
@@ -157,7 +161,7 @@
 	apply_sounds = list('sound/effects/rip1.ogg','sound/effects/rip2.ogg')
 	drop_sound = 'sound/items/drop/gloves.ogg'
 	pickup_sound = 'sound/items/pickup/gloves.ogg'
-
+	heal_brute = 1
 	upgrade_to = /obj/item/stack/medical/advanced/bruise_pack
 
 /obj/item/stack/medical/bruise_pack/attack(mob/living/carbon/M as mob, mob/user as mob)

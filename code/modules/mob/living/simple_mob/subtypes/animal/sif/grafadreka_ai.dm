@@ -1,9 +1,23 @@
+/mob/living/simple_mob/animal/sif/grafadreka
+	// Some mobtypes are immune to stun, so trying to incapacitate them
+	// is pointless. Track them here so we don't endlessly run away from
+	// Beepsky until he beats us to death.
+	var/static/list/stun_immune_types = list(
+		/mob/living/bot,
+		/mob/living/simple_mob/humanoid/merc
+	)
+
 /mob/living/simple_mob/animal/sif/grafadreka/ICheckRangedAttack(atom/A)
-	. = ..() && isliving(A)
+	. = ..() && isliving(A) && has_sap(2) && (world.time >= next_spit)
 	if(.)
+
 		var/mob/living/M = A
 		if(M.lying || M.incapacitated())
-			. = FALSE // They're already stunned, go bite their nipples off.
+			return FALSE // They're already stunned, go bite their nipples off.
+
+		for(var/mobtype in stun_immune_types)
+			if(istype(A, mobtype))
+				return FALSE
 
 /mob/living/simple_mob/animal/sif/grafadreka/IIsAlly(mob/living/L)
 	. = ..()
@@ -24,14 +38,15 @@
 			drake_brain.hostile = TRUE
 
 /datum/ai_holder/simple_mob/intentional/grafadreka
-	hostile =         TRUE
-	retaliate =       TRUE
-	cooperative =     TRUE
-	can_flee =        TRUE
-	flee_when_dying = TRUE
-	var/next_food_check
-	var/next_sap_check
-	var/next_heal_check
+	hostile =             TRUE
+	retaliate =           TRUE
+	cooperative =         TRUE
+	can_flee =            TRUE
+	flee_when_dying =     TRUE
+	home_low_priority =   TRUE
+	var/next_food_check = 0
+	var/next_sap_check =  0
+	var/next_heal_check = 0
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/should_flee(force)
 	. = ..()
@@ -42,7 +57,11 @@
 		if(!istype(drake) || prey.lying || prey.incapacitated())
 			return FALSE
 		// We can spit at them - disengage so you can pew pew.
-		if(get_dist(target, holder) <= 1 && drake.has_sap(2))
+		if(get_dist(target, holder) <= 1 && drake.has_sap(2) && (world.time >= drake.next_spit))
+			// No point spitting at immune mobs.
+			for(var/mobtype in drake.stun_immune_types)
+				if(istype(target, mobtype))
+					return FALSE
 			return TRUE
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/pre_ranged_attack(atom/A)
@@ -105,7 +124,7 @@
 					return
 
 	// These actions need space in our stomach to be worth considering at all.
-	if(drake.reagents && abs(drake.reagents.total_volume - drake.reagents.maximum_volume) >= 10)
+	if(drake.has_appetite() && !(locate(/datum/reagent/nutriment) in drake.reagents.reagent_list))
 
 		// Find some sap if we're low and aren't already digesting some.
 		if(!drake.has_sap(20) && !drake.reagents.has_reagent("sifsap"))
