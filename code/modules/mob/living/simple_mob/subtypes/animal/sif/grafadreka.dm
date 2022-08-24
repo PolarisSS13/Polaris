@@ -107,6 +107,13 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
 	return global._default_mob_emotes | /decl/emote/audible/drake_howl
 
+/mob/living/simple_mob/animal/sif/grafadreka/hatchling
+	name = "grafadreka hatchling"
+	icon = 'icons/mob/drake_baby.dmi'
+	mob_size = MOB_SMALL
+	desc = "An immature snow drake, not long out of the shell."
+
+
 /mob/living/simple_mob/animal/sif/grafadreka
 	name = "grafadreka"
 	desc = "A large, sleek snow drake with heavy claws, powerful jaws and many pale spines along its body."
@@ -115,7 +122,7 @@ var/global/list/last_drake_howl = list()
 	(on <b><font color = '#009900'>help intent</font></b>).<br>There are humans moving through your territory; whether you help them get home safely, or treat them as a snack, \
 	is up to you."
 	color = "#608894"
-	icon = 'icons/mob/64x32.dmi'
+	icon = 'icons/mob/drake_adult.dmi'
 	catalogue_data = list(/datum/category_item/catalogue/fauna/grafadreka)
 	icon_state = "doggo"
 	icon_living = "doggo"
@@ -124,7 +131,9 @@ var/global/list/last_drake_howl = list()
 	projectileverb = "spits"
 	friendly = list("headbutts", "grooms", "play-bites", "rubs against")
 	bitesize = 10 // chomp
+
 	has_langs = list("Drake")
+	universal_understand = TRUE // they are smarties, even if they don't have the vocal cords to speak back.
 
 	see_in_dark = 8 // on par with Taj
 
@@ -207,11 +216,19 @@ var/global/list/last_drake_howl = list()
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
+
+	dominance = rand(5, 15)
+	stored_sap = rand(20, 30)
+	nutrition = rand(400,500)
+
 	gender = pick(MALE, FEMALE)
 	attacktext = claw_attacktext.Copy()
+
 	setup_colours()
 	create_reagents(50)
+
 	. = ..()
+
 	update_icon()
 
 /mob/living/simple_mob/animal/sif/grafadreka/examine(var/mob/living/user)
@@ -516,6 +533,16 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/has_appetite()
 	return reagents && abs(reagents.total_volume - reagents.maximum_volume) >= 10
 
+/mob/living/simple_mob/animal/sif/grafadreka/Login()
+	. = ..()
+	if(client)
+		dominance = INFINITY // Let players lead by default.
+
+/mob/living/simple_mob/animal/sif/grafadreka/Logout()
+	. = ..()
+	if(!client)
+		dominance = rand(5, 15)
+
 /datum/say_list/grafadreka
 	speak = list("Chff!","Skhh.", "Rrrss...")
 	emote_see = list("scratches its ears","grooms its spines", "sways its tail", "claws at the ground")
@@ -523,7 +550,7 @@ var/global/list/last_drake_howl = list()
 
 /obj/structure/animal_den/ghost_join/grafadreka
 	name = "grafadreka den"
-	critter = /mob/living/simple_mob/animal/sif/grafadreka/wild/hibernate
+	critter = /mob/living/simple_mob/animal/sif/grafadreka/hibernate
 
 // Subtypes!
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
@@ -534,23 +561,7 @@ var/global/list/last_drake_howl = list()
 	eye_colour =  get_random_colour(TRUE)
 	..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/wild/Initialize()
-	dominance = rand(5, 15)
-	stored_sap = rand(20, 30)
-	nutrition = rand(400,500)
-	. = ..()
-
-/mob/living/simple_mob/animal/sif/grafadreka/wild/Login()
-	. = ..()
-	if(client)
-		dominance = INFINITY // Let players lead by default.
-
-/mob/living/simple_mob/animal/sif/grafadreka/wild/Logout()
-	. = ..()
-	if(!client)
-		dominance = rand(5, 15)
-
-/mob/living/simple_mob/animal/sif/grafadreka/wild/hibernate/Initialize()
+/mob/living/simple_mob/animal/sif/grafadreka/hibernate/Initialize()
 	. = ..()
 	dominance = 0
 	lay_down()
