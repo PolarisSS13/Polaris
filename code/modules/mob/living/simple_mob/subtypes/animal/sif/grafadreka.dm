@@ -130,7 +130,7 @@ var/global/list/last_drake_howl = list()
 		resting = TRUE
 		sitting = TRUE
 
-	to_chat(src, SPAN_NOTICE("You are now [sitting ? "sitting" : "getting up"]".))
+	to_chat(src, SPAN_NOTICE("You are now [sitting ? "sitting" : "getting up"]."))
 	update_canmove()
 	update_icon()
 

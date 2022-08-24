@@ -14,6 +14,8 @@
 	AM.dropInto(get_turf(src))
 	if(ismob(AM))
 		var/mob/M = AM
+		if(M.resting)
+			M.lay_down() // you woke them up :(
 		if(M.client)
 			M.client.eye = M.client.mob
 			M.client.perspective = MOB_PERSPECTIVE
@@ -108,15 +110,6 @@
 /obj/structure/animal_den/ghost_join/Initialize()
 	. = ..()
 	name = "den" // to remove mapping identifiers.
-	if(ispath(critter))
-		critter = new critter(src)
-
-/obj/structure/animal_den/ghost_join/remove_from_den(var/atom/movable/AM)
-	. = ..()
-	if(critter == AM && critter.loc != src)
-		if(critter.resting)
-			critter.lay_down() // you woke them up :(
-		critter = null
 
 /obj/structure/animal_den/ghost_join/examine(mob/user, infix, suffix)
 	var/list/output = ..()
@@ -125,7 +118,7 @@
 			if(ban_check && ckey_is_jobbanned(user.ckey, ban_check))
 				output += SPAN_WARNING("You are banned from [ban_check] roles and cannot join via this den.")
 			else if(user.MayRespawn(TRUE))
-				output += SPAN_NOTICE("<b>Click on the den to join as \a [critter].</b>")
+				output += SPAN_NOTICE("<b>Click on the den to join as \a [initial(critter.name)].</b>")
 		else
 			output += SPAN_WARNING("This den is no longer available for joining.")
 	return output
@@ -141,16 +134,16 @@
 /obj/structure/animal_den/ghost_join/proc/transfer_personality(var/mob/user)
 
 	set waitfor = FALSE
-	if(!critter)
+	if(!ispath(critter))
 		return
+
+	var/mob/living/critter_ref = new critter(src)
+	critter = null
 
 	// Transfer over mind and key.
 	if(user.mind)
-		user.mind.transfer_to(critter)
-	critter.key = user.key
-
-	var/mob/living/critter_ref = critter
-	critter = null
+		user.mind.transfer_to(critter_ref)
+	critter_ref.key = user.key
 
 	// Sleep long enough for the logged-in critter to update state and regen icon.
 	sleep(SSmobs.wait)
