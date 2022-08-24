@@ -44,6 +44,11 @@
 	eyeblur = 5
 	fire_sound = 'sound/effects/splat.ogg'
 
+/obj/item/projectile/drake_spit/weak
+	stun = 0
+	weaken = 0
+	eyeblur = 2
+
 /datum/category_item/catalogue/fauna/grafadreka
 	name = "Sivian Fauna - Grafadreka"
 	desc = {"Classification: S tesca pabulator
@@ -107,12 +112,27 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
 	return global._default_mob_emotes | /decl/emote/audible/drake_howl
 
-/mob/living/simple_mob/animal/sif/grafadreka/hatchling
-	name = "grafadreka hatchling"
-	icon = 'icons/mob/drake_baby.dmi'
-	mob_size = MOB_SMALL
-	desc = "An immature snow drake, not long out of the shell."
+// Overriding this to handle sitting.
+/mob/living/simple_mob/animal/sif/grafadreka/lay_down()
+	. = ..()
+	if(!resting && sitting)
+		sitting = FALSE
+		update_icon()
 
+/mob/living/simple_mob/animal/sif/grafadreka/verb/sit_down()
+	set name = "Sit Down"
+	set category = "IC"
+
+	if(sitting)
+		resting = FALSE
+		sitting = FALSE
+	else
+		resting = TRUE
+		sitting = TRUE
+
+	to_chat(src, SPAN_NOTICE("You are now [sitting ? "sitting" : "getting up"]".))
+	update_canmove()
+	update_icon()
 
 /mob/living/simple_mob/animal/sif/grafadreka
 	name = "grafadreka"
@@ -165,6 +185,7 @@ var/global/list/last_drake_howl = list()
 	melee_damage_lower = 8
 	melee_damage_upper = 18
 	attack_armor_pen = 15
+
 	attack_sound = 'sound/weapons/slice.ogg'
 
 	tame_items = list(
@@ -180,9 +201,9 @@ var/global/list/last_drake_howl = list()
 	var/static/list/bite_attacktext = list("savaged", "bitten", "mauled")
 
 	// Bite attacks.
-	var/const/bite_melee_damage_lower = 30
-	var/const/bite_melee_damage_upper = 40
-	var/const/bite_attack_armor_pen = 60
+	var/bite_melee_damage_lower = 30
+	var/bite_melee_damage_upper = 40
+	var/bite_attack_armor_pen = 60
 	var/const/bite_attack_sound = 'sound/weapons/bite.ogg'
 
 	// Used to avoid setting vars every single attack.
@@ -195,6 +216,8 @@ var/global/list/last_drake_howl = list()
 	var/tmp/base_colour
 	var/tmp/eye_colour
 
+	var/is_baby = FALSE
+	var/sitting = FALSE
 	var/next_spit = 0
 	var/spit_cooldown = 8 SECONDS
 	var/next_alpha_check = 0
@@ -332,6 +355,9 @@ var/global/list/last_drake_howl = list()
 
 	. = ..()
 
+	if(sitting && stat == CONSCIOUS)
+		icon_state = "[initial(icon_state)]_sitting"
+
 	var/list/add_images = list()
 	var/image/I = image(icon, "[icon_state]")
 	I.color = base_colour
@@ -461,10 +487,11 @@ var/global/list/last_drake_howl = list()
 	var/pack = FALSE
 	var/mob/living/simple_mob/animal/sif/grafadreka/alpha = src
 	for(var/mob/living/simple_mob/animal/sif/grafadreka/beta in hearers(7, loc))
-		if(beta != src && beta.stat != DEAD)
-			pack = TRUE
-			if(beta.dominance > alpha.dominance)
-				alpha = beta
+		if(beta == src || beta.is_baby || beta.stat == DEAD)
+			continue
+		pack = TRUE
+		if(beta.dominance > alpha.dominance)
+			alpha = beta
 	if(pack)
 		return alpha
 
@@ -565,3 +592,21 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	dominance = 0
 	lay_down()
+
+/mob/living/simple_mob/animal/sif/grafadreka/hatchling
+	name = "grafadreka hatchling"
+	icon = 'icons/mob/drake_baby.dmi'
+	mob_size = MOB_SMALL
+	desc = "An immature snow drake, not long out of the shell."
+	is_baby = TRUE
+
+	melee_damage_lower = 3
+	melee_damage_upper = 5
+	attack_armor_pen = 2
+	bite_melee_damage_lower = 5
+	bite_melee_damage_upper = 10
+	bite_attack_armor_pen = 16
+
+	projectiletype = /obj/item/projectile/drake_spit/weak
+	maxHealth = 60
+	health = 60
