@@ -247,9 +247,10 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 
 	// Process food and sap chems.
-	if(stat == CONSCIOUS) // Hibernating drakes don't get hungy.
+	if(stat == CONSCIOUS && client) // Hibernating drakes don't get hungy.
 		// by default we lose nutrition. Hungry hungry drakes.
-		var/food_val = resting ? 0 : -0.3
+
+		var/food_val = (resting || !client) ? 0 : -0.3 // Don't make clientless drakes lose nutrition or they'll all go feral.
 
 		// Very basic metabolism.
 		if(reagents?.total_volume)
@@ -303,12 +304,12 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	if(istype(loc, /turf/space))
 		return
-	var/health_deficiency = 1-(health / maxHealth)
-	if(health_deficiency >= 0.4)
-		. += round(4 * health_deficiency, 0.1)
-	var/hungry = 1-(nutrition / max_nutrition)
-	if (hungry >= 0.3)
-		. += round(6 * hungry, 0.1)
+	var/health_slowdown_threshold = round(maxHealth * 0.65)
+	if(health < health_slowdown_threshold)
+		. += round(5 * (1-(health / health_slowdown_threshold)), 0.1)
+	var/nut_slowdown_threshold = round(max_nutrition * 0.65)
+	if(nutrition < nut_slowdown_threshold)
+		. += round(5 * (1-(nutrition / nut_slowdown_threshold)), 0.1)
 
 /mob/living/simple_mob/animal/sif/grafadreka/update_icon()
 
@@ -536,6 +537,7 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/wild/Initialize()
 	dominance = rand(5, 15)
 	stored_sap = rand(20, 30)
+	nutrition = rand(400,500)
 	. = ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/wild/Login()
