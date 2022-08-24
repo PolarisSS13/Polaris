@@ -129,7 +129,7 @@
 	icon_state = "frost"
 
 /obj/random/mob/sif/grafadreka/item_to_spawn()
-	return pick(prob(3);/mob/living/simple_mob/animal/sif/grafadreka/hibernate,
+	return pick(prob(3);/mob/living/simple_mob/animal/sif/grafadreka/hatchling,
 				prob(12);/mob/living/simple_mob/animal/sif/grafadreka)
 
 /obj/random/mob/spider

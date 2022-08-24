@@ -110,7 +110,9 @@ var/global/list/last_drake_howl = list()
 		M << 'sound/effects/drakehowl_far.ogg'
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
-	return global._default_mob_emotes | /decl/emote/audible/drake_howl
+	if(!is_baby)
+		return global._default_mob_emotes | /decl/emote/audible/drake_howl
+	return global._default_mob_emotes
 
 // Overriding this to handle sitting.
 /mob/living/simple_mob/animal/sif/grafadreka/lay_down()
@@ -153,7 +155,6 @@ var/global/list/last_drake_howl = list()
 	bitesize = 10 // chomp
 
 	has_langs = list("Drake")
-	universal_understand = TRUE // they are smarties, even if they don't have the vocal cords to speak back.
 
 	see_in_dark = 8 // on par with Taj
 
@@ -216,6 +217,7 @@ var/global/list/last_drake_howl = list()
 	var/tmp/base_colour
 	var/tmp/eye_colour
 
+	var/offset_compiled_icon = -16
 	var/is_baby = FALSE
 	var/sitting = FALSE
 	var/next_spit = 0
@@ -385,7 +387,8 @@ var/global/list/last_drake_howl = list()
 
 	for(var/image/adding in add_images)
 		adding.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
-		adding.pixel_x = -16 // Offset here so that things like modifiers, runechat text, etc. are centered
+		if(offset_compiled_icon)
+			adding.pixel_x = offset_compiled_icon // Offset here so that things like modifiers, runechat text, etc. are centered
 		add_overlay(adding)
 
 	// We do this last so the default mob icon_state can be used for the overlays.
@@ -485,7 +488,9 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/get_local_alpha()
 	var/pack = FALSE
-	var/mob/living/simple_mob/animal/sif/grafadreka/alpha = src
+	var/mob/living/simple_mob/animal/sif/grafadreka/alpha
+	if(!is_baby)
+		alpha = src
 	for(var/mob/living/simple_mob/animal/sif/grafadreka/beta in hearers(7, loc))
 		if(beta == src || beta.is_baby || beta.stat == DEAD)
 			continue
@@ -562,8 +567,10 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Login()
 	. = ..()
-	if(client)
+	if(client && !is_baby)
 		dominance = INFINITY // Let players lead by default.
+	else // But not if they are a baby.
+		dominance = 0
 
 /mob/living/simple_mob/animal/sif/grafadreka/Logout()
 	. = ..()
@@ -576,8 +583,12 @@ var/global/list/last_drake_howl = list()
 	emote_hear = list("hisses", "rattles", "rasps", "barks")
 
 /obj/structure/animal_den/ghost_join/grafadreka
-	name = "grafadreka den"
-	critter = /mob/living/simple_mob/animal/sif/grafadreka/hibernate
+	name = "drake den"
+	critter = /mob/living/simple_mob/animal/sif/grafadreka
+
+/obj/structure/animal_den/ghost_join/grafadreka_hatchling
+	name = "drake hatchling den"
+	critter = /mob/living/simple_mob/animal/sif/grafadreka/hatchling
 
 // Subtypes!
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
@@ -588,17 +599,13 @@ var/global/list/last_drake_howl = list()
 	eye_colour =  get_random_colour(TRUE)
 	..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/hibernate/Initialize()
-	. = ..()
-	dominance = 0
-	lay_down()
-
 /mob/living/simple_mob/animal/sif/grafadreka/hatchling
 	name = "grafadreka hatchling"
 	icon = 'icons/mob/drake_baby.dmi'
 	mob_size = MOB_SMALL
 	desc = "An immature snow drake, not long out of the shell."
 	is_baby = TRUE
+	offset_compiled_icon = null
 
 	melee_damage_lower = 3
 	melee_damage_upper = 5

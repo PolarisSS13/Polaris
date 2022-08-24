@@ -12,8 +12,8 @@
 
 /obj/structure/animal_den/proc/remove_from_den(var/atom/movable/AM)
 	AM.dropInto(get_turf(src))
-	if(ismob(AM))
-		var/mob/M = AM
+	if(isliving(AM))
+		var/mob/living/M = AM
 		if(M.resting)
 			M.lay_down() // you woke them up :(
 		if(M.client)
@@ -115,10 +115,11 @@
 	var/list/output = ..()
 	if(isobserver(user))
 		if(critter)
+			var/mob/critter_type = islist(critter) ? critter[1] : critter
 			if(ban_check && ckey_is_jobbanned(user.ckey, ban_check))
 				output += SPAN_WARNING("You are banned from [ban_check] roles and cannot join via this den.")
 			else if(user.MayRespawn(TRUE))
-				output += SPAN_NOTICE("<b>Click on the den to join as \a [initial(critter.name)].</b>")
+				output += SPAN_NOTICE("<b>Click on the den to join as \a [initial(critter_type.name)].</b>")
 		else
 			output += SPAN_WARNING("This den is no longer available for joining.")
 	return output
@@ -134,6 +135,8 @@
 /obj/structure/animal_den/ghost_join/proc/transfer_personality(var/mob/user)
 
 	set waitfor = FALSE
+	if(length(critter))
+		critter = pickweight(critter)
 	if(!ispath(critter))
 		return
 

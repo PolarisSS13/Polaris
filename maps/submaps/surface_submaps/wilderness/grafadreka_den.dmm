@@ -4,7 +4,7 @@
 "d" = (/obj/random/junk,/obj/random/humanoidremains,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
 "e" = (/obj/random/mob/sif/grafadreka,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
 "f" = (/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
-"g" = (/obj/structure/animal_den/ghost_join/grafadreka,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
+"g" = (/obj/structure/animal_den/ghost_join/grafadreka_hatchling,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
 "h" = (/obj/random/junk,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
 "i" = (/obj/random/outcrop,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)
 "j" = (/obj/random/humanoidremains,/obj/random/coin,/obj/random/contraband,/obj/random/projectile/random,/turf/simulated/mineral/floor/sif,/area/submap/GrafadrekaDen)

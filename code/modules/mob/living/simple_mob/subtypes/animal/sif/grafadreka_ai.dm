@@ -169,3 +169,11 @@
 					if(food)
 						give_destination(get_turf(food))
 						return
+
+/mob/living/simple_mob/animal/sif/grafadreka/hatchling/IWasAttackedBy(var/mob/living/attacker)
+	. = ..()
+	if(attacked_by_human)
+		for(var/mob/living/simple_mob/animal/sif/grafadreka/friend in viewers(world.view, src))
+			if(friend == src || !IIsAlly(friend))
+				continue
+			friend.IWasAttackedBy(attacker)
