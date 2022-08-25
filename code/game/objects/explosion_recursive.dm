@@ -112,7 +112,7 @@
 	T = get_step(src, turn(direction,90))
 	T.explosion_spread(spread_power, turn(direction,90), explosion_turfs)
 	T = get_step(src, turn(direction,-90))
-	T.explosion_spread(spread_power, turn(direction,90), explosion_turfs)
+	T.explosion_spread(spread_power, turn(direction,-90), explosion_turfs)
 
 /turf/unsimulated/explosion_spread(power)
 	return //So it doesn't get to the parent proc, which simulates explosions
