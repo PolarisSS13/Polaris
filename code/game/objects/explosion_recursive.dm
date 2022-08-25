@@ -94,12 +94,8 @@
 	if(power <= 0)
 		return
 	if(src in explosion_turfs)
-		return
-
-	explosion_turfs |= src
-
-	if(explosion_turfs[src] >= power)
-		return //The turf already sustained and spread a power greated than what we are dealing with. No point spreading again.
+		if(explosion_turfs[src] >= power)
+			return //The turf already sustained and spread a power greated than what we are dealing with. No point spreading again.
 	explosion_turfs[src] = power
 
 	var/spread_power = power - src.explosion_resistance //This is the amount of power that will be spread to the tile in the direction of the blast
