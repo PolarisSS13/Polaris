@@ -28,63 +28,16 @@ var/global/list/turf_edge_cache = list()
 	var/loot_count
 
 /turf/simulated/floor/outdoors/proc/get_loot_type()
-	if(loot_count && prob(60))
-		return pick( \
-			12;/obj/item/reagent_containers/food/snacks/worm, \
-			1;/obj/item/material/knife/machete/hatchet/stone  \
-		)
+	if(loot_count)
+		return pickweight(list(
+			/obj/item/reagent_containers/food/snacks/worm = 6,
+			/obj/item/material/knife/machete/hatchet/stone = 1
+		))
 
 /turf/simulated/floor/outdoors/Initialize(mapload)
 	. = ..()
 	if(can_dig && prob(33))
 		loot_count = rand(1,3)
-
-/turf/simulated/floor/outdoors/attack_generic(mob/user)
-	if(isanimal(user) && user.loc == src && user.a_intent == I_HELP)
-		var/mob/living/simple_mob/animal/critter = user
-		if(critter.burrower)
-			if(locate(/obj/structure/animal_den) in contents)
-				to_chat(critter, SPAN_WARNING("There is already a den here."))
-				return TRUE
-			critter.visible_message(SPAN_NOTICE("\The [critter] begins digging industriously."))
-			critter.setClickCooldown(10 SECONDS)
-			if(!do_after(critter, 10 SECONDS, src))
-				return TRUE
-			if(locate(/obj/structure/animal_den) in contents)
-				to_chat(critter, SPAN_WARNING("There is already a den here."))
-				return TRUE
-			critter.visible_message(SPAN_NOTICE("\The [critter] finishes digging a den!"))
-			new /obj/structure/animal_den(src)
-			if(prob(66))
-				var/worms = 0
-				for(var/worm in 1 to rand(3))
-					new /obj/item/reagent_containers/food/snacks/worm(src)
-					worms++
-				to_chat(critter, SPAN_NOTICE("You unearthed [worms] worm\s!"))
-			return TRUE
-	. = ..()
-
-/turf/simulated/floor/outdoors/attackby(obj/item/C, mob/user)
-
-	if(can_dig && istype(C, /obj/item/shovel))
-		to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
-		var/delay = (3 SECONDS * C.toolspeed)
-		user.setClickCooldown(delay)
-		if(do_after(user, delay, src))
-			if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in contents))
-				var/obj/machinery/portable_atmospherics/hydroponics/soil/soil = new(src)
-				user.visible_message(SPAN_NOTICE("\The [user] digs \a [soil] into \the [src]."))
-			else
-				var/loot_type = get_loot_type()
-				if(loot_type)
-					loot_count--
-					var/obj/item/loot = new loot_type(src)
-					to_chat(user, SPAN_NOTICE("You dug up \a [loot]!"))
-				else
-					to_chat(user, SPAN_NOTICE("You didn't find anything of note in \the [src]."))
-			return
-
-	. = ..()
 
 /turf/simulated/floor/Initialize(mapload)
 	if(is_outdoors())
