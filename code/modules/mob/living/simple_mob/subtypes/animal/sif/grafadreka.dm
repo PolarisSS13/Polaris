@@ -44,6 +44,11 @@
 	eyeblur = 5
 	fire_sound = 'sound/effects/splat.ogg'
 
+/obj/item/projectile/drake_spit/weak
+	stun = 0
+	weaken = 0
+	eyeblur = 2
+
 /datum/category_item/catalogue/fauna/grafadreka
 	name = "Sivian Fauna - Grafadreka"
 	desc = {"Classification: S tesca pabulator
@@ -105,7 +110,31 @@ var/global/list/last_drake_howl = list()
 		M << 'sound/effects/drakehowl_far.ogg'
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
-	return global._default_mob_emotes | /decl/emote/audible/drake_howl
+	if(!is_baby)
+		return global._default_mob_emotes | /decl/emote/audible/drake_howl
+	return global._default_mob_emotes
+
+// Overriding this to handle sitting.
+/mob/living/simple_mob/animal/sif/grafadreka/lay_down()
+	. = ..()
+	if(!resting && sitting)
+		sitting = FALSE
+		update_icon()
+
+/mob/living/simple_mob/animal/sif/grafadreka/verb/sit_down()
+	set name = "Sit Down"
+	set category = "IC"
+
+	if(sitting)
+		resting = FALSE
+		sitting = FALSE
+	else
+		resting = TRUE
+		sitting = TRUE
+
+	to_chat(src, SPAN_NOTICE("You are now [sitting ? "sitting" : "getting up"]."))
+	update_canmove()
+	update_icon()
 
 /mob/living/simple_mob/animal/sif/grafadreka
 	name = "grafadreka"
@@ -115,7 +144,7 @@ var/global/list/last_drake_howl = list()
 	(on <b><font color = '#009900'>help intent</font></b>).<br>There are humans moving through your territory; whether you help them get home safely, or treat them as a snack, \
 	is up to you."
 	color = "#608894"
-	icon = 'icons/mob/64x32.dmi'
+	icon = 'icons/mob/drake_adult.dmi'
 	catalogue_data = list(/datum/category_item/catalogue/fauna/grafadreka)
 	icon_state = "doggo"
 	icon_living = "doggo"
@@ -124,6 +153,8 @@ var/global/list/last_drake_howl = list()
 	projectileverb = "spits"
 	friendly = list("headbutts", "grooms", "play-bites", "rubs against")
 	bitesize = 10 // chomp
+	gender = NEUTER
+
 	has_langs = list("Drake")
 
 	see_in_dark = 8 // on par with Taj
@@ -156,6 +187,7 @@ var/global/list/last_drake_howl = list()
 	melee_damage_lower = 8
 	melee_damage_upper = 18
 	attack_armor_pen = 15
+
 	attack_sound = 'sound/weapons/slice.ogg'
 
 	tame_items = list(
@@ -171,21 +203,25 @@ var/global/list/last_drake_howl = list()
 	var/static/list/bite_attacktext = list("savaged", "bitten", "mauled")
 
 	// Bite attacks.
-	var/const/bite_melee_damage_lower = 30
-	var/const/bite_melee_damage_upper = 40
-	var/const/bite_attack_armor_pen = 60
+	var/bite_melee_damage_lower = 30
+	var/bite_melee_damage_upper = 40
+	var/bite_attack_armor_pen = 60
 	var/const/bite_attack_sound = 'sound/weapons/bite.ogg'
 
 	// Used to avoid setting vars every single attack.
 	var/attacking_with_claws = TRUE
 
 	// Set during initialize and used to generate overlays.
+	var/tmp/current_icon_state // used to track our 'actual' icon state due to overlay nonsense in update_icon
 	var/tmp/fur_colour
 	var/tmp/claw_colour
 	var/tmp/glow_colour
 	var/tmp/base_colour
 	var/tmp/eye_colour
 
+	var/offset_compiled_icon = -16
+	var/is_baby = FALSE
+	var/sitting = FALSE
 	var/next_spit = 0
 	var/spit_cooldown = 8 SECONDS
 	var/next_alpha_check = 0
@@ -207,11 +243,20 @@ var/global/list/last_drake_howl = list()
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
-	gender = pick(MALE, FEMALE)
+
+	dominance = rand(5, 15)
+	stored_sap = rand(20, 30)
+	nutrition = rand(400,500)
+
+	if(gender == NEUTER)
+		gender = pick(MALE, FEMALE)
 	attacktext = claw_attacktext.Copy()
+
 	setup_colours()
 	create_reagents(50)
+
 	. = ..()
+
 	update_icon()
 
 /mob/living/simple_mob/animal/sif/grafadreka/examine(var/mob/living/user)
@@ -247,9 +292,10 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 
 	// Process food and sap chems.
-	if(stat == CONSCIOUS) // Hibernating drakes don't get hungy.
+	if(stat == CONSCIOUS && client) // Hibernating drakes don't get hungy.
 		// by default we lose nutrition. Hungry hungry drakes.
-		var/food_val = resting ? 0 : -0.3
+
+		var/food_val = (resting || !client) ? 0 : -0.3 // Don't make clientless drakes lose nutrition or they'll all go feral.
 
 		// Very basic metabolism.
 		if(reagents?.total_volume)
@@ -303,16 +349,19 @@ var/global/list/last_drake_howl = list()
 	. = ..()
 	if(istype(loc, /turf/space))
 		return
-	var/health_deficiency = 1-(health / maxHealth)
-	if(health_deficiency >= 0.4)
-		. += round(4 * health_deficiency, 0.1)
-	var/hungry = 1-(nutrition / max_nutrition)
-	if (hungry >= 0.3)
-		. += round(6 * hungry, 0.1)
+	var/health_slowdown_threshold = round(maxHealth * 0.65)
+	if(health < health_slowdown_threshold)
+		. += round(5 * (1-(health / health_slowdown_threshold)), 0.1)
+	var/nut_slowdown_threshold = round(max_nutrition * 0.65)
+	if(nutrition < nut_slowdown_threshold)
+		. += round(5 * (1-(nutrition / nut_slowdown_threshold)), 0.1)
 
 /mob/living/simple_mob/animal/sif/grafadreka/update_icon()
 
 	. = ..()
+
+	if(sitting && stat == CONSCIOUS)
+		icon_state = "[initial(icon_state)]_sitting"
 
 	var/list/add_images = list()
 	var/image/I = image(icon, "[icon_state]")
@@ -327,26 +376,33 @@ var/global/list/last_drake_howl = list()
 	I.color = claw_colour
 	add_images += I
 
-	if(stat == CONSCIOUS)
+	if(stat == CONSCIOUS && !sleeping)
 		I = image(icon, "[icon_state]-eye_overlay")
 		I.color = eye_colour
 		add_images += I
 
 	if(stat != DEAD)
-		I = image(icon, "[icon_state]-glow")
-		I.color = glow_colour
-		I.plane = PLANE_LIGHTING_ABOVE
-		I.alpha = 35 + round(220 * clamp(stored_sap/max_stored_sap, 0, 1))
-		add_images += I
+		var/glow = add_glow()
+		if(glow)
+			add_images += glow
 
 	for(var/image/adding in add_images)
 		adding.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
-		adding.pixel_x = -16 // Offset here so that things like modifiers, runechat text, etc. are centered
+		if(offset_compiled_icon)
+			adding.pixel_x = offset_compiled_icon // Offset here so that things like modifiers, runechat text, etc. are centered
 		add_overlay(adding)
 
 	// We do this last so the default mob icon_state can be used for the overlays.
+	current_icon_state = icon_state
 	icon_state = "blank"
 	color = COLOR_WHITE // Due to KEEP_TOGETHER etc. overlays ignore RESET_COLOR.
+
+/mob/living/simple_mob/animal/sif/grafadreka/proc/add_glow()
+	var/image/I = image(icon, "[icon_state]-glow")
+	I.color = glow_colour
+	I.plane = PLANE_LIGHTING_ABOVE
+	I.alpha = 35 + round(220 * clamp(stored_sap/max_stored_sap, 0, 1))
+	return I
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_eye_color()
 	return eye_colour
@@ -441,12 +497,15 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/get_local_alpha()
 	var/pack = FALSE
-	var/mob/living/simple_mob/animal/sif/grafadreka/alpha = src
+	var/mob/living/simple_mob/animal/sif/grafadreka/alpha
+	if(!is_baby)
+		alpha = src
 	for(var/mob/living/simple_mob/animal/sif/grafadreka/beta in hearers(7, loc))
-		if(beta != src && beta.stat != DEAD)
-			pack = TRUE
-			if(beta.dominance > alpha.dominance)
-				alpha = beta
+		if(beta == src || beta.is_baby || beta.stat == DEAD)
+			continue
+		pack = TRUE
+		if(beta.dominance > alpha.dominance)
+			alpha = beta
 	if(pack)
 		return alpha
 
@@ -515,14 +574,30 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/has_appetite()
 	return reagents && abs(reagents.total_volume - reagents.maximum_volume) >= 10
 
+/mob/living/simple_mob/animal/sif/grafadreka/Login()
+	. = ..()
+	if(client && !is_baby)
+		dominance = INFINITY // Let players lead by default.
+	else // But not if they are a baby.
+		dominance = 0
+
+/mob/living/simple_mob/animal/sif/grafadreka/Logout()
+	. = ..()
+	if(!client)
+		dominance = rand(5, 15)
+
 /datum/say_list/grafadreka
 	speak = list("Chff!","Skhh.", "Rrrss...")
 	emote_see = list("scratches its ears","grooms its spines", "sways its tail", "claws at the ground")
 	emote_hear = list("hisses", "rattles", "rasps", "barks")
 
 /obj/structure/animal_den/ghost_join/grafadreka
-	name = "grafadreka den"
-	critter = /mob/living/simple_mob/animal/sif/grafadreka/wild/hibernate
+	name = "drake den"
+	critter = /mob/living/simple_mob/animal/sif/grafadreka
+
+/obj/structure/animal_den/ghost_join/grafadreka_hatchling
+	name = "drake hatchling den"
+	critter = /mob/living/simple_mob/animal/sif/grafadreka/hatchling
 
 // Subtypes!
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
@@ -533,22 +608,95 @@ var/global/list/last_drake_howl = list()
 	eye_colour =  get_random_colour(TRUE)
 	..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/wild/Initialize()
-	dominance = rand(5, 15)
-	stored_sap = rand(20, 30)
+/mob/living/simple_mob/animal/sif/grafadreka/hatchling
+	name = "grafadreka hatchling"
+	icon = 'icons/mob/drake_baby.dmi'
+	mob_size = MOB_SMALL
+	desc = "An immature snow drake, not long out of the shell."
+	is_baby = TRUE
+	offset_compiled_icon = null
+
+	melee_damage_lower = 3
+	melee_damage_upper = 5
+	attack_armor_pen = 2
+	bite_melee_damage_lower = 5
+	bite_melee_damage_upper = 10
+	bite_attack_armor_pen = 16
+
+	projectiletype = /obj/item/projectile/drake_spit/weak
+	maxHealth = 60
+	health = 60
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained
+	desc = "A large, sleek snow drake with heavy claws, powerful jaws and many pale spines along its body. This one is wearing some kind of vest with a pannier; maybe it belongs to someone."
+	player_msg = "You are a large Sivian pack predator in symbiosis with the local bioluminescent bacteria. You can eat glowing \
+	tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> \
+	(on <b><font color = '#009900'>help intent</font></b>).<br>Unlike your wild kin, you are <b>trained</b> and work happily with your two-legged packmates."
+	faction = "station"
+	ai_holder_type = null // These guys should not exist without players.
+	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
+	var/obj/item/storage/internal/pannier = /obj/item/storage/internal/drake_pannier
+
+// It's just a backpack.
+/obj/item/storage/internal/drake_pannier
+	color = COLOR_BEASTY_BROWN
+	max_w_class = ITEMSIZE_LARGE
+	max_storage_space = INVENTORY_STANDARD_SPACE
+
+/obj/item/storage/internal/drake_pannier/Initialize()
+	. = ..() // Name is set lower in Initialize() so we set it again here.
+	name = "drake's pannier"
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/attackby(obj/item/O, mob/user)
+	if(user.a_intent == I_HURT || (istype(O, /obj/item/stack/medical) && user.a_intent == I_HELP))
+		return ..()
+	if(pannier)
+		return pannier.attackby(O, user)
+	return ..()
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/add_glow()
+	. = ..()
+	if(. && pannier)
+		var/image/I = .
+		I.icon_state = "[I.icon_state]-pannier"
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/Logout()
+	..()
+	if(stat != DEAD)
+		lying = TRUE
+		resting = TRUE
+		sitting = FALSE
+		Sleeping(2)
+		update_icon()
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/Login()
+	..()
+	SetSleeping(0)
+	update_icon()
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/attack_hand(mob/living/L)
+	// Permit headpats/smacks
+	if(!pannier || L.a_intent == I_HURT || (L.a_intent == I_HELP && L.zone_sel?.selecting == BP_HEAD))
+		return ..()
+	return pannier.handle_attack_hand(L)
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/Initialize()
+	if(ispath(pannier))
+		pannier = new pannier(src)
 	. = ..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/wild/Login()
-	. = ..()
-	if(client)
-		dominance = INFINITY // Let players lead by default.
+// universal_understand is buggy and produces double lines, so we'll just do this hack instead.
+/mob/living/simple_mob/animal/sif/grafadreka/trained/say_understands(var/mob/other, var/datum/language/speaking = null)
+	if(!speaking || speaking.name == LANGUAGE_GALCOM)
+		return TRUE
+	return ..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/wild/Logout()
+/mob/living/simple_mob/animal/sif/grafadreka/trained/update_icon()
 	. = ..()
-	if(!client)
-		dominance = rand(5, 15)
-
-/mob/living/simple_mob/animal/sif/grafadreka/wild/hibernate/Initialize()
-	. = ..()
-	dominance = 0
-	lay_down()
+	if(pannier)
+		var/image/I = image(icon, "[current_icon_state]-pannier")
+		I.color = pannier.color
+		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
+		if(offset_compiled_icon)
+			I.pixel_x = offset_compiled_icon
+		add_overlay(I)

@@ -96,3 +96,9 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	suit = /obj/item/clothing/suit/space/emergency
 	suit_store = /obj/item/tank/oxygen
 	mask = null
+
+// This is basically a joke for the service drake spawn alt title.
+/decl/hierarchy/outfit/siffet
+	name = OUTFIT_JOB_NAME("Siffet")
+	suit = /obj/item/clothing/suit/storage/hooded/costume/siffet
+	head = /obj/item/clothing/head/hood/siffet_hood

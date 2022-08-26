@@ -201,3 +201,9 @@
 	if(!player_old_enough(player.client))
 		return FALSE
 	return TRUE
+
+/datum/job/proc/handle_nonhuman_mob(var/mob/living/carbon/human/player, var/alt_title)
+	if(mob_type & JOB_SILICON_ROBOT)
+		return player.Robotize()
+	if(mob_type & JOB_SILICON_AI)
+		return player

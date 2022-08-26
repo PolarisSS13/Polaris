@@ -33,13 +33,15 @@
 	if(stat != DEAD)
 		var/scarification = 1-sap_heal_threshold
 		var/datum/gender/G = gender_datums[get_visible_gender()]
+		var/scar_text = "[G.He] [G.is]"
 		if(scarification >= 0.75)
-			. += SPAN_DANGER("[G.He] [G.is] a solid mass of scar tissue.")
+			scar_text = "[scar_text] [SPAN_DANGER("a solid mass of scar tissue")]."
 		else if(scarification > 0.5)
-			. += SPAN_DANGER("[G.He] [G.is] heavily scarred.")
+			scar_text = "[scar_text] [SPAN_DANGER("heavily scarred")]."
 		else if(scarification > 0.25)
-			. += SPAN_WARNING("[G.He] [G.is] moderately scarred.")
+			scar_text = "[scar_text] [SPAN_WARNING("moderately scarred")]."
 		else if(scarification > 0)
-			. += SPAN_WARNING("[G.He] [G.is] lightly scarred.")
+			scar_text = "[scar_text] [SPAN_WARNING("lightly scarred")]."
 		else
-			. += SPAN_NOTICE("[G.He] [G.is] unscarred.")
+			scar_text = "[scar_text] [SPAN_NOTICE("unscarred")]."
+		. += scar_text

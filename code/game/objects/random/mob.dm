@@ -129,8 +129,8 @@
 	icon_state = "frost"
 
 /obj/random/mob/sif/grafadreka/item_to_spawn()
-	return pick(prob(3);/mob/living/simple_mob/animal/sif/grafadreka/wild/hibernate,
-				prob(12);/mob/living/simple_mob/animal/sif/grafadreka/wild)
+	return pick(prob(3);/mob/living/simple_mob/animal/sif/grafadreka/hatchling,
+				prob(12);/mob/living/simple_mob/animal/sif/grafadreka)
 
 /obj/random/mob/spider
 	name = "Random Spider" //Spiders should patrol where they spawn.
@@ -407,9 +407,9 @@
 				/mob/living/simple_mob/animal/sif/kururak
 			),
 			prob(3);list(
-				/mob/living/simple_mob/animal/sif/grafadreka/wild,
-				/mob/living/simple_mob/animal/sif/grafadreka/wild,
-				/mob/living/simple_mob/animal/sif/grafadreka/wild
+				/mob/living/simple_mob/animal/sif/grafadreka,
+				/mob/living/simple_mob/animal/sif/grafadreka,
+				/mob/living/simple_mob/animal/sif/grafadreka
 			),
 			prob(5);list(
 				/mob/living/simple_mob/animal/sif/glitterfly,

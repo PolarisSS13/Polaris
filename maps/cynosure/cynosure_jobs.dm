@@ -1,3 +1,6 @@
+#define CRASH_SURVIVOR_TITLE "Crash Survivor"
+#define DRAKE_SURVIVOR_TITLE "Working Drake"
+
 // Pilots
 
 var/global/const/EXPLORER 			=(1<<14)
@@ -84,7 +87,10 @@ var/global/const/access_explorer = 43
 	offmap_spawn = TRUE
 	substitute_announce_title = "Colonist"
 	banned_job_species = null
-	alt_titles = list(CRASH_SURVIVOR_TITLE = /datum/alt_title/crash_survivor)
+	alt_titles = list(
+		CRASH_SURVIVOR_TITLE = /datum/alt_title/crash_survivor,
+		DRAKE_SURVIVOR_TITLE = /datum/alt_title/working_drake
+	)
 	var/const/SPAWN_DAMAGE_MULT = 0.15
 	var/const/TOTAL_INJURIES = 3
 	var/static/list/pod_templates = list(
@@ -103,6 +109,11 @@ var/global/const/access_explorer = 43
 	title = CRASH_SURVIVOR_TITLE
 	title_blurb = "Crashing in the wilderness of Sif's anomalous region is not a recommended holiday activity."
 	title_outfit = /decl/hierarchy/outfit/job/survivalist/crash_survivor
+
+/datum/alt_title/working_drake
+	title = DRAKE_SURVIVOR_TITLE
+	title_outfit = /decl/hierarchy/outfit/siffet
+	title_blurb = "Some of the bolder colonists in Sif's anomalous region have partially domesticated some of the the local predators as working animals."
 
 /datum/job/survivalist/equip(mob/living/carbon/human/H, alt_title)
 	. = ..()
@@ -196,3 +207,55 @@ var/global/const/access_explorer = 43
 		existing_points = get_existing_spawn_points()
 
 	return existing_points
+
+/datum/job/survivalist/handle_nonhuman_mob(var/mob/living/carbon/human/player, var/alt_title)
+
+	if(alt_title == DRAKE_SURVIVOR_TITLE)
+
+		var/mob/living/simple_mob/animal/sif/grafadreka/trained/doggo = new(player.loc)
+
+		// Copy over some prefs.
+
+		if(player.client && player.client.prefs)
+			var/datum/preferences/P = player.client.prefs
+			doggo.gender = P.identifying_gender
+			doggo.flavor_text = LAZYACCESS(P.flavor_texts, "general")
+			doggo.eye_colour =  rgb(P.r_eyes, P.g_eyes, P.b_eyes)
+			doggo.fur_colour =  rgb(P.r_facial, P.g_facial, P.b_facial)
+			doggo.base_colour = rgb(P.r_hair, P.g_hair, P.b_hair)
+			doggo.update_icon()
+
+		// Transfer over key.
+		if(player.mind)
+			doggo.name = player.mind.name
+			doggo.real_name = doggo.name
+			player.mind.transfer_to(doggo)
+			doggo.mind.original = doggo
+		else
+			doggo.key = player.key
+
+		// Pass the mob back.
+		qdel(player)
+		prompt_rename(doggo)
+		return doggo
+
+	return ..()
+/datum/job/survivalist/proc/prompt_rename(var/mob/player)
+
+	set waitfor = FALSE
+	sleep(1 SECOND)
+	if(QDELETED(player))
+		return
+
+	// Let them customize their name in case they wanted something lowercase or nonstandard beyond what the prefs panel allowed.
+	var/new_name = sanitize(input(player, "Would you like to customize your name?", "Drake Name", player.real_name), MAX_NAME_LEN)
+	if(!new_name || QDELETED(player))
+		return
+
+	player.real_name = new_name
+	player.name = player.real_name
+	if(player.mind)
+		player.mind.name = player.real_name
+
+#undef CRASH_SURVIVOR_TITLE
+#undef DRAKE_SURVIVOR_TITLE
