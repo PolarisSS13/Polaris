@@ -28,24 +28,23 @@
 	var/burrower = FALSE  // Can dig dens.
 	var/bitesize = 3      // How many reagents to take per nibble
 	var/tracks_type = /obj/effect/decal/cleanable/blood/tracks/paw
-	var/flavour_text
 
 /decl/mob_organ_names/quadruped //Most subtypes have this basic body layout.
 	hit_zones = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
 
 /mob/living/simple_mob/animal/examine(var/mob/user)
 	. = ..()
-	if(flavour_text)
-		. += flavour_text
+	if(flavor_text)
+		. += flavor_text
 
 /mob/living/simple_mob/animal/verb/set_flavour_text()
 	set name = "Set Flavour Text"
 	set category = "IC"
 	set desc = "Set your flavour text."
 	set src = usr
-	var/new_flavour_text = sanitize((input("Please describe yourself.", "Flavour Text", flavour_text) as message|null), MAX_MESSAGE_LEN)
+	var/new_flavour_text = sanitize((input("Please describe yourself.", "Flavour Text", flavor_text) as message|null), MAX_MESSAGE_LEN)
 	if(length(new_flavour_text) && !QDELETED(src))
-		flavour_text = new_flavour_text
+		flavor_text = new_flavour_text
 		to_chat(src, SPAN_NOTICE("Your flavour text has been updated."))
 
 /mob/living/simple_mob/animal/leaves_tracks_type()

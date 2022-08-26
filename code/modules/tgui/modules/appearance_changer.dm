@@ -39,7 +39,7 @@
 	cam_screen.assigned_map = map_name
 	cam_screen.del_on_map_removal = FALSE
 	cam_screen.screen_loc = "[map_name]:1,1"
-	
+
 	cam_plane_masters = get_plane_masters()
 
 	for(var/plane in cam_plane_masters)
@@ -159,7 +159,7 @@
 		if(!ishuman(user))
 			return TRUE
 		target = user
-	
+
 	if(!target || !target.species)
 		return
 

@@ -431,9 +431,10 @@ var/global/datum/controller/subsystem/ticker/ticker
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
 				job_master.EquipRank(player, player.mind.assigned_role, 0)
-				UpdateFactionList(player)
-				equip_custom_items(player)
-				player.apply_traits()
+				if(!QDELETED(player))
+					UpdateFactionList(player)
+					equip_custom_items(player)
+					player.apply_traits()
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))
