@@ -36,6 +36,10 @@
 			if(data[taste]/totalFlavor < 0.1)
 				data -= taste
 
+/datum/reagent/nutriment/affect_animal(var/mob/living/simple_mob/animal/M, var/removed)
+	M.add_nutrition((nutriment_factor * removed) * M.get_dietary_food_modifier(src) * 0.5)
+	return ..()
+
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!injectable && alien != IS_SLIME)
 		M.adjustToxLoss(0.1 * removed)
@@ -45,9 +49,12 @@
 
 /datum/reagent/nutriment/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	switch(alien)
-		if(IS_DIONA) return
-		if(IS_UNATHI) removed *= 0.5
-	if(issmall(M)) removed *= 2 // Small bodymass, more effect from lower volume.
+		if(IS_DIONA)
+			return
+		if(IS_UNATHI)
+			removed *= 0.5
+	if(issmall(M))
+		removed *= 2 // Small bodymass, more effect from lower volume.
 	if(!(M.species.allergens & allergen_type))	//assuming it doesn't cause a horrible reaction, we'll be ok!
 		M.heal_organ_damage(0.5 * removed, 0)
 		M.adjust_nutrition(nutriment_factor * removed)

@@ -288,28 +288,24 @@ var/global/list/last_drake_howl = list()
 		setMoveCooldown(1 SECOND)
 		spend_sap(2)
 
+/mob/living/simple_mob/animal/sif/grafadreka/get_dietary_food_modifier(var/datum/reagent/nutriment/food)
+	if(food.allergen_type & ALLERGEN_MEAT)
+		return ..()
+	return 0.1
+
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
 	. = ..()
 
+	// Don't make clientless drakes lose nutrition or they'll all go feral.
+	if(stat == CONSCIOUS && !resting && client)
+		remove_nutrition(0.3)
+
 	// Process food and sap chems.
-	if(stat == CONSCIOUS && client) // Hibernating drakes don't get hungy.
-		// by default we lose nutrition. Hungry hungry drakes.
-
-		var/food_val = (resting || !client) ? 0 : -0.3 // Don't make clientless drakes lose nutrition or they'll all go feral.
-
-		// Very basic metabolism.
-		if(reagents?.total_volume)
-			for(var/datum/reagent/chem in reagents.reagent_list)
-				var/removing = min(REM, chem.volume)
-				if(istype(chem, /datum/reagent/nutriment))
-					var/datum/reagent/nutriment/food = chem
-					food_val += (food.nutriment_factor * removing) * ((food.allergen_type & ALLERGEN_MEAT) ? 0.3 : 0.1)
-				else if(istype(chem, /datum/reagent/toxin/sifslurry))
-					add_sap(removing * 3)
-				reagents.remove_reagent(chem.id, removing)
-
-		if(food_val != 0)
-			nutrition = clamp(nutrition + food_val, 0, max_nutrition)
+	if(reagents?.total_volume)
+		for(var/datum/reagent/chem in reagents.reagent_list)
+			var/removed = min(chem.ingest_met, chem.volume)
+			chem.affect_animal(src, removed)
+			reagents.remove_reagent(chem.id, removed)
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/has_sap(var/amt)
 	return stored_sap >= amt
@@ -648,10 +644,26 @@ var/global/list/last_drake_howl = list()
 	name = "drake's pannier"
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/attackby(obj/item/O, mob/user)
-	if(user.a_intent == I_HURT || (istype(O, /obj/item/stack/medical) && user.a_intent == I_HELP))
+
+	// bonk
+	if(user.a_intent == I_HURT)
 		return ..()
+
+	// Pass some items down to heal or run injection etc.
+	var/static/list/allow_type_to_pass = list(
+		/obj/item/healthanalyzer,
+		/obj/item/stack/medical,
+		/obj/item/reagent_containers/syringe
+	)
+	if(user.a_intent == I_HELP)
+		for(var/pass_type in allow_type_to_pass)
+			if(istype(O, pass_type))
+				return ..()
+
+	// Open our storage, if we have it.
 	if(pannier)
 		return pannier.attackby(O, user)
+
 	return ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/add_glow()

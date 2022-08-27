@@ -170,6 +170,9 @@
 	remove_self(removed)
 	return
 
+/datum/reagent/proc/affect_animal(var/mob/living/simple_mob/animal/M, var/removed)
+	return
+
 /datum/reagent/proc/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	return
 

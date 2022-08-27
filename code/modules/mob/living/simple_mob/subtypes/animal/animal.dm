@@ -53,6 +53,12 @@
 /mob/living/simple_mob/animal/proc/has_appetite()
 	return TRUE
 
+/mob/living/simple_mob/animal/proc/add_nutrition(var/amt)
+	nutrition = clamp(nutrition + amt, 0, max_nutrition)
+
+/mob/living/simple_mob/animal/proc/remove_nutrition(var/amt)
+	nutrition = clamp(nutrition - amt, 0, max_nutrition)
+
 /mob/living/simple_mob/animal/get_snow_footprint_state()
 	if(!hovering)
 		return "snow_animalprints"
@@ -123,3 +129,6 @@
 		snack.dropInto(loc)
 	else
 		snack.animal_consumed(src)
+
+/mob/living/simple_mob/animal/proc/get_dietary_food_modifier(var/datum/reagent/nutriment/food)
+	return 0.3
