@@ -215,14 +215,22 @@ var/global/const/access_explorer = 43
 		var/mob/living/simple_mob/animal/sif/grafadreka/trained/doggo = new(player.loc)
 
 		// Copy over some prefs.
-
 		if(player.client && player.client.prefs)
+
 			var/datum/preferences/P = player.client.prefs
 			doggo.gender = P.identifying_gender
 			doggo.flavor_text = LAZYACCESS(P.flavor_texts, "general")
-			doggo.eye_colour =  rgb(P.r_eyes, P.g_eyes, P.b_eyes)
-			doggo.fur_colour =  rgb(P.r_facial, P.g_facial, P.b_facial)
-			doggo.base_colour = rgb(P.r_hair, P.g_hair, P.b_hair)
+
+			// Protect against unset defaults creating a drake-shaped void.
+			var/col = rgb(P.r_eyes, P.g_eyes, P.b_eyes)
+			if(col != COLOR_BLACK)
+				doggo.eye_colour = col
+			col = rgb(P.r_facial, P.g_facial, P.b_facial)
+			if(col != COLOR_BLACK)
+				doggo.fur_colour = col
+			col = rgb(P.r_hair, P.g_hair, P.b_hair)
+			if(col != COLOR_BLACK)
+				doggo.base_colour = col
 			doggo.update_icon()
 
 		// Transfer over key.

@@ -76,38 +76,17 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 		"tail"
 	)
 
-var/global/list/last_drake_howl = list()
 /decl/emote/audible/drake_howl
 	key = "dhowl"
 	emote_message_3p = "lifts USER_THEIR head up and gives an eerie howl."
 	emote_sound = 'sound/effects/drakehowl_close.ogg'
-	var/cooldown = 20 SECONDS
+	broadcast_sound ='sound/effects/drakehowl_far.ogg'
+	emote_cooldown = 20 SECONDS
+	broadcast_distance = 90
 
-/decl/emote/audible/drake_howl/do_emote(var/atom/user, var/extra_params)
-	if(world.time < last_drake_howl["\ref[user]"])
-		to_chat(user, SPAN_WARNING("You cannot howl again so soon."))
-		return FALSE
-	. = ..()
-	if(.)
-		last_drake_howl["\ref[user]"] = world.time + cooldown
-
-/decl/emote/audible/drake_howl/do_sound(var/atom/user)
-	..()
-	var/turf/user_turf = get_turf(user)
-	if(!istype(user_turf))
-		return
-	var/list/affected_levels = GetConnectedZlevels(user_turf.z)
-	var/list/close_listeners = hearers(world.view * 3, user_turf)
-	for(var/mob/M in player_list)
-		var/turf/T = get_turf(M)
-		if(!istype(T) || istype(T,/turf/space) || M.ear_deaf > 0 || (M in close_listeners) || !(T.z in affected_levels))
-			continue
-		var/turf/reference_point = locate(T.x, T.y, user_turf.z)
-		if(reference_point)
-			var/direction = get_dir(reference_point, user_turf)
-			if(direction)
-				to_chat(M, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]"))
-		M << 'sound/effects/drakehowl_far.ogg'
+/decl/emote/audible/drake_howl/broadcast_emote_to(var/send_sound, var/mob/target, var/direction)
+	if((. = ..()))
+		to_chat(target, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]."))
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
 	if(!is_baby)
