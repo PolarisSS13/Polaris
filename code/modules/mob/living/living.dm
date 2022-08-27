@@ -1184,3 +1184,6 @@
 /mob/living/proc/get_snow_footprint_state()
 	if(!hovering) // Flying things shouldn't make footprints.
 		return "snow_footprints"
+
+/mob/living/proc/IWasAttackedBy(var/mob/living/attacker)
+	return

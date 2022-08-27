@@ -224,11 +224,11 @@ var/global/list/last_drake_howl = list()
 	var/sitting = FALSE
 	var/next_spit = 0
 	var/spit_cooldown = 8 SECONDS
-	var/next_alpha_check = 0
-	var/dominance = 0 // A score used to determine pack leader.
+	var/next_leader_check = 0
+	var/charisma = 0 // A score used to determine pack leader.
 	var/stored_sap = 0
 	var/max_stored_sap = 60
-	var/attacked_by_human = FALSE
+	var/attacked_by_neutral = FALSE
 
 	var/list/original_armor
 
@@ -246,7 +246,7 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
 
-	dominance = rand(5, 15)
+	charisma = rand(5, 15)
 	stored_sap = rand(20, 30)
 	nutrition = rand(400,500)
 
@@ -408,14 +408,13 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/do_tame(var/obj/O, var/mob/user)
 	. = ..()
-	if(attacked_by_human && ishuman(user) && ((user in tamers) || (user in friends)))
-		attacked_by_human = FALSE
+	attacked_by_neutral = FALSE
 
 /mob/living/simple_mob/animal/sif/grafadreka/handle_special()
 	..()
-	if(client || world.time >= next_alpha_check)
-		next_alpha_check = world.time + (60 SECONDS)
-		check_alpha_status()
+	if(client || world.time >= next_leader_check)
+		next_leader_check = world.time + (60 SECONDS)
+		check_leader_status()
 
 /mob/living/simple_mob/animal/sif/grafadreka/do_help_interaction(atom/A)
 
@@ -494,23 +493,23 @@ var/global/list/last_drake_howl = list()
 
 	return ..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/proc/get_local_alpha()
+/mob/living/simple_mob/animal/sif/grafadreka/proc/get_pack_leader()
 	var/pack = FALSE
-	var/mob/living/simple_mob/animal/sif/grafadreka/alpha
+	var/mob/living/simple_mob/animal/sif/grafadreka/leader
 	if(!is_baby)
-		alpha = src
-	for(var/mob/living/simple_mob/animal/sif/grafadreka/beta in hearers(7, loc))
-		if(beta == src || beta.is_baby || beta.stat == DEAD)
+		leader = src
+	for(var/mob/living/simple_mob/animal/sif/grafadreka/follower in hearers(7, loc))
+		if(follower == src || follower.is_baby || follower.stat == DEAD || follower.faction != faction)
 			continue
 		pack = TRUE
-		if(beta.dominance > alpha.dominance)
-			alpha = beta
+		if(!leader || follower.charisma > leader.charisma)
+			leader = follower
 	if(pack)
-		return alpha
+		return leader
 
-/mob/living/simple_mob/animal/sif/grafadreka/proc/check_alpha_status()
-	var/mob/living/simple_mob/animal/sif/grafadreka/alpha = get_local_alpha()
-	if(src == alpha)
+/mob/living/simple_mob/animal/sif/grafadreka/proc/check_leader_status()
+	var/mob/living/simple_mob/animal/sif/grafadreka/leader = get_pack_leader()
+	if(src == leader)
 		add_modifier(/datum/modifier/ace, 60 SECONDS)
 	else
 		remove_modifiers_of_type(/datum/modifier/ace)
@@ -521,14 +520,13 @@ var/global/list/last_drake_howl = list()
 		stat("Nutrition:", "[nutrition]/[max_nutrition]")
 		stat("Stored sap:", "[stored_sap]/[max_stored_sap]")
 
+/mob/living/simple_mob/animal/sif/grafadreka/proc/can_bite(var/mob/living/M)
+	return istype(M) && (M.lying || M.confused || M.incapacitated())
+
 /mob/living/simple_mob/animal/sif/grafadreka/apply_bonus_melee_damage(atom/A, damage_amount)
 	// Melee attack on incapacitated or prone enemies bites instead of slashing
 	var/last_attack_was_claws = attacking_with_claws
-	attacking_with_claws = TRUE
-	if(isliving(A))
-		var/mob/living/M = A
-		if(M.lying || M.incapacitated())
-			attacking_with_claws = FALSE
+	attacking_with_claws = !can_bite(A)
 
 	if(last_attack_was_claws != attacking_with_claws)
 		if(attacking_with_claws) // Use claws.
@@ -575,15 +573,12 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Login()
 	. = ..()
-	if(client && !is_baby)
-		dominance = INFINITY // Let players lead by default.
-	else // But not if they are a baby.
-		dominance = 0
+	charisma = (client && !is_baby) ? INFINITY : 0
 
 /mob/living/simple_mob/animal/sif/grafadreka/Logout()
 	. = ..()
 	if(!client)
-		dominance = rand(5, 15)
+		charisma = rand(5, 15)
 
 /datum/say_list/grafadreka
 	speak = list("Chff!","Skhh.", "Rrrss...")

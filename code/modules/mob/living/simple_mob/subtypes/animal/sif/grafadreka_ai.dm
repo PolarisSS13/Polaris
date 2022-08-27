@@ -12,7 +12,7 @@
 	if(.)
 
 		var/mob/living/M = A
-		if(M.lying || M.incapacitated())
+		if(M.lying || M.confused || M.incapacitated())
 			return FALSE // They're already stunned, go bite their nipples off.
 
 		for(var/mobtype in stun_immune_types)
@@ -21,21 +21,35 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/IIsAlly(mob/living/L)
 	. = ..()
-	// Avoid humans unless we're very hungry, very angry, or they are small).
-	if(!. && ishuman(L) && !attacked_by_human)
-		. = !issmall(L) && (nutrition > max_nutrition * 0.15)
+	// If we're starving or we've been attacked by a neutral party, all bets are off.
+	if(!. && (nutrition > max_nutrition * 0.15) && !attacked_by_neutral)
+		// Robots aren't every tasty.
+		if(isrobot(L))
+			return TRUE
+		// We don't normally target anything bigger than us.
+		if(L.mob_size > mob_size)
+			return TRUE
+		// Leave humans alone generally, unless they look like a snack.
+		if(ishuman(L) && !issmall(L))
+			return TRUE
+		// Avoid cannibalism.
+		if(istype(L, /mob/living/simple_mob/animal/sif/grafadreka))
+			return TRUE
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/IDoInteraction(var/obj/item/target)
 	set waitfor = FALSE
 	face_atom(target)
 	do_interaction(target)
 
+/mob/living/simple_mob/animal/sif/grafadreka/proc/is_supposedly_neutral(var/mob/living/person)
+	return istype(person) && (ishuman(person) || isrobot(person) || person.faction == "station")
+
+// If we get attacked by a nominally neutral mob, set us to angery mode.
 /mob/living/simple_mob/animal/sif/grafadreka/IWasAttackedBy(var/mob/living/attacker)
-	if(ishuman(attacker))
-		attacked_by_human = TRUE
-		if(istype(ai_holder, /datum/ai_holder/simple_mob/intentional/grafadreka))
-			var/datum/ai_holder/simple_mob/intentional/grafadreka/drake_brain = ai_holder
-			drake_brain.hostile = TRUE
+	. = ..()
+	if(is_supposedly_neutral(attacker))
+		attacked_by_neutral = TRUE
+		ai_holder.hostile = TRUE
 
 /datum/ai_holder/simple_mob/intentional/grafadreka
 	hostile =             TRUE
@@ -50,11 +64,11 @@
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/should_flee(force)
 	. = ..()
-	if(!. && ismob(target))
+	if(!. && isliving(target))
 		var/mob/living/prey = target
 		var/mob/living/simple_mob/animal/sif/grafadreka/drake = holder
 		// If they're incapacitated, don't need to spit on them again.
-		if(!istype(drake) || prey.lying || prey.incapacitated())
+		if(!istype(drake) || drake.can_bite(prey))
 			return FALSE
 		// We can spit at them - disengage so you can pew pew.
 		if(get_dist(target, holder) <= 1 && drake.has_sap(2) && (world.time >= drake.next_spit))
@@ -84,7 +98,7 @@
 		if(!leader)
 			var/mob/living/simple_mob/animal/sif/grafadreka/drake = holder
 			if(istype(drake))
-				set_follow(drake.get_local_alpha())
+				set_follow(drake.get_pack_leader())
 	return ..()
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/handle_stance_strategical()
@@ -172,7 +186,7 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/hatchling/IWasAttackedBy(var/mob/living/attacker)
 	. = ..()
-	if(attacked_by_human)
+	if(is_supposedly_neutral(attacker))
 		for(var/mob/living/simple_mob/animal/sif/grafadreka/friend in viewers(world.view, src))
 			if(friend == src || !IIsAlly(friend))
 				continue
