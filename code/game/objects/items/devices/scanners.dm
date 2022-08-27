@@ -61,7 +61,16 @@ HALOGEN COUNTER	- Radcount on mobs
 	flick("[icon_state]-scan", src)	//makes it so that it plays the scan animation on a succesful scan
 	user.visible_message("<span class='notice'>[user] has analyzed [M]'s vitals.</span>","<span class='notice'>You have analyzed [M]'s vitals.</span>")
 
-	if (!ishuman(M) || M.isSynthetic())
+	if(isanimal(M))
+		//these sensors are designed for organic life
+		dat += "<span class='notice'>Analyzing Results for \the [M]:\n\tOverall Status: ERROR<br>"
+		dat += "\tKey: <font color='cyan'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font><br>"
+		dat += "\tDamage Specifics: <font color='cyan'>[M.getOxyLoss()]</font> - <font color='green'>[M.getToxLoss()]</font> - <font color='#FFA500'>[M.getFireLoss()]</font> - <font color='red'>[M.getBruteLoss()]</font><br>"
+		dat += "Body temperature: [M.bodytemperature-T0C]&deg;C ([M.bodytemperature*1.8-459.67]&deg;F)</span><br>"
+		user.show_message(dat, 1)
+		return
+
+	else if (!ishuman(M) || M.isSynthetic())
 		//these sensors are designed for organic life
 		dat += "<span class='notice'>Analyzing Results for ERROR:\n\tOverall Status: ERROR<br>"
 		dat += "\tKey: <font color='cyan'>Suffocation</font>/<font color='green'>Toxin</font>/<font color='#FFA500'>Burns</font>/<font color='red'>Brute</font><br>"

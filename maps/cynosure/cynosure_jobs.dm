@@ -1,5 +1,5 @@
 #define CRASH_SURVIVOR_TITLE "Crash Survivor"
-#define DRAKE_SURVIVOR_TITLE "Working Drake"
+#define DRAKE_SURVIVOR_TITLE "Tamed Drake"
 
 // Pilots
 

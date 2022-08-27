@@ -230,6 +230,8 @@ var/global/list/last_drake_howl = list()
 	var/max_stored_sap = 60
 	var/attacked_by_human = FALSE
 
+	var/list/original_armor
+
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
 	if(ishuman(friend))
 		var/mob/living/carbon/human/H = friend
@@ -257,6 +259,7 @@ var/global/list/last_drake_howl = list()
 
 	. = ..()
 
+	original_armor = armor
 	update_icon()
 
 /mob/living/simple_mob/animal/sif/grafadreka/examine(var/mob/living/user)
@@ -303,7 +306,7 @@ var/global/list/last_drake_howl = list()
 	// Process food and sap chems.
 	if(reagents?.total_volume)
 		for(var/datum/reagent/chem in reagents.reagent_list)
-			var/removed = min(chem.ingest_met, chem.volume)
+			var/removed = min(REM, min(chem.ingest_met, chem.volume))
 			chem.affect_animal(src, removed)
 			reagents.remove_reagent(chem.id, removed)
 
@@ -622,93 +625,3 @@ var/global/list/last_drake_howl = list()
 	projectiletype = /obj/item/projectile/drake_spit/weak
 	maxHealth = 60
 	health = 60
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained
-	desc = "A large, sleek snow drake with heavy claws, powerful jaws and many pale spines along its body. This one is wearing some kind of vest with a pannier; maybe it belongs to someone."
-	player_msg = "You are a large Sivian pack predator in symbiosis with the local bioluminescent bacteria. You can eat glowing \
-	tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> \
-	(on <b><font color = '#009900'>help intent</font></b>).<br>Unlike your wild kin, you are <b>trained</b> and work happily with your two-legged packmates."
-	faction = "station"
-	ai_holder_type = null // These guys should not exist without players.
-	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
-	var/obj/item/storage/internal/pannier = /obj/item/storage/internal/drake_pannier
-
-// It's just a backpack.
-/obj/item/storage/internal/drake_pannier
-	color = COLOR_BEASTY_BROWN
-	max_w_class = ITEMSIZE_LARGE
-	max_storage_space = INVENTORY_STANDARD_SPACE
-
-/obj/item/storage/internal/drake_pannier/Initialize()
-	. = ..() // Name is set lower in Initialize() so we set it again here.
-	name = "drake's pannier"
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/attackby(obj/item/O, mob/user)
-
-	// bonk
-	if(user.a_intent == I_HURT)
-		return ..()
-
-	// Pass some items down to heal or run injection etc.
-	var/static/list/allow_type_to_pass = list(
-		/obj/item/healthanalyzer,
-		/obj/item/stack/medical,
-		/obj/item/reagent_containers/syringe
-	)
-	if(user.a_intent == I_HELP)
-		for(var/pass_type in allow_type_to_pass)
-			if(istype(O, pass_type))
-				return ..()
-
-	// Open our storage, if we have it.
-	if(pannier)
-		return pannier.attackby(O, user)
-
-	return ..()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/add_glow()
-	. = ..()
-	if(. && pannier)
-		var/image/I = .
-		I.icon_state = "[I.icon_state]-pannier"
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Logout()
-	..()
-	if(stat != DEAD)
-		lying = TRUE
-		resting = TRUE
-		sitting = FALSE
-		Sleeping(2)
-		update_icon()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Login()
-	..()
-	SetSleeping(0)
-	update_icon()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/attack_hand(mob/living/L)
-	// Permit headpats/smacks
-	if(!pannier || L.a_intent == I_HURT || (L.a_intent == I_HELP && L.zone_sel?.selecting == BP_HEAD))
-		return ..()
-	return pannier.handle_attack_hand(L)
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Initialize()
-	if(ispath(pannier))
-		pannier = new pannier(src)
-	. = ..()
-
-// universal_understand is buggy and produces double lines, so we'll just do this hack instead.
-/mob/living/simple_mob/animal/sif/grafadreka/trained/say_understands(var/mob/other, var/datum/language/speaking = null)
-	if(!speaking || speaking.name == LANGUAGE_GALCOM)
-		return TRUE
-	return ..()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/update_icon()
-	. = ..()
-	if(pannier)
-		var/image/I = image(icon, "[current_icon_state]-pannier")
-		I.color = pannier.color
-		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
-		if(offset_compiled_icon)
-			I.pixel_x = offset_compiled_icon
-		add_overlay(I)
