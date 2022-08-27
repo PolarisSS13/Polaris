@@ -1188,3 +1188,8 @@
 
 /mob/proc/get_sound_volume_multiplier()
 	return !ear_deaf
+
+/mob/proc/handle_reagent_transfer(var/datum/reagents/holder, var/amount = 1, var/chem_type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0)
+	var/datum/reagents/R = new /datum/reagents(amount)
+	. = holder.trans_to_holder(R, amount, multiplier, copy)
+	R.touch_mob(src)

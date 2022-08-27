@@ -296,6 +296,9 @@ var/global/list/last_drake_howl = list()
 		return ..()
 	return 0.25 // Quarter nutrition from non-meat.
 
+/mob/living/simple_mob/animal/sif/grafadreka/handle_reagent_transfer(var/datum/reagents/holder, var/amount = 1, var/chem_type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0)
+	return holder.trans_to_holder(reagents, amount, multiplier, copy)
+
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
 	. = ..()
 
