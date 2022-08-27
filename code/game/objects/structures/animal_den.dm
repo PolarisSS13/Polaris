@@ -5,6 +5,7 @@
 	desc = "A rough-walled, shallow den dug into the earth."
 	density = FALSE
 	opacity = FALSE
+	layer = ABOVE_TURF_LAYER
 
 /obj/structure/animal_den/Initialize()
 	icon_state = "den[rand(1,3)]"

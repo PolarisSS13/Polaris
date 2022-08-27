@@ -4,7 +4,7 @@
 	max_w_class = ITEMSIZE_LARGE
 	max_storage_space = INVENTORY_STANDARD_SPACE
 	var/obj/item/gps/attached_gps
-	var/obj/item/clothing/accessory/armor/attached_plate
+	var/obj/item/clothing/accessory/attached_plate
 	var/obj/item/radio/attached_radio
 
 /obj/item/storage/internal/animal_harness/Initialize()
@@ -53,20 +53,6 @@
 			W.forceMove(loc)
 			user.visible_message(SPAN_NOTICE("\The [user] attaches \the [W] to \the [loc]'s harness."))
 			attached_gps = W
-			loc.verbs |= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_gps
-		return TRUE
-
-	// Attach an armor plate.
-	if(istype(W, /obj/item/clothing/accessory/armor))
-		if(attached_plate)
-			to_chat(user, SPAN_WARNING("There is already \a [attached_plate] inside \the [loc]'s harness."))
-		else if(user.unEquip(W))
-			W.forceMove(loc)
-			user.visible_message(SPAN_NOTICE("\The [user] secures \the [W] inside \the [loc]'s harness."))
-			attached_plate = W
-			var/mob/living/simple_mob/animal/sif/grafadreka/trained/drake = loc
-			drake.armor = attached_plate.armor
-			loc.verbs |= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_plate
 		return TRUE
 
 	// Attach a radio.
@@ -77,10 +63,27 @@
 			W.forceMove(loc)
 			user.visible_message(SPAN_NOTICE("\The [user] attaches \the [W] to \the [loc]'s harness."))
 			attached_radio = W
-			loc.verbs |= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_radio
+		return TRUE
+
+	// Attach an armor plate.
+	if(istype(W, /obj/item/clothing/accessory/armor) || istype(W, /obj/item/clothing/accessory/material/makeshift))
+		if(attached_plate)
+			to_chat(user, SPAN_WARNING("There is already \a [attached_plate] inside \the [loc]'s harness."))
+		else if(user.unEquip(W))
+			W.forceMove(loc)
+			user.visible_message(SPAN_NOTICE("\The [user] secures \the [W] inside \the [loc]'s harness."))
+			attached_plate = W
+			var/mob/living/simple_mob/animal/sif/grafadreka/trained/drake = loc
+			drake.recalculate_armor()
 		return TRUE
 
 	. = ..()
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/recalculate_armor()
+	armor = list()
+	if(harness?.attached_plate)
+		for(var/armor_key in harness.attached_plate.armor)
+			armor[armor_key] = max(original_armor[armor_key], harness.attached_plate.armor[armor_key])
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_plate()
 	set name = "Remove Attached Plate"

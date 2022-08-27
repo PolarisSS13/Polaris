@@ -12,6 +12,7 @@
 	if(ispath(harness))
 		harness = new harness(src)
 		harness.attached_radio = new /obj/item/radio(src)
+		regenerate_harness_verbs()
 	. = ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/Destroy()
@@ -86,7 +87,32 @@
 				return ..()
 
 	// Open our storage, if we have it.
-	if(harness)
-		return harness.attackby(O, user)
+	if(harness?.attackby(O, user))
+		regenerate_harness_verbs()
+		return TRUE
 
 	return ..()
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/regenerate_harness_verbs()
+	if(!harness)
+		verbs -= list(
+			/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_gps,
+			/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_plate,
+			/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_radio
+		)
+		return
+
+	if(harness.attached_gps)
+		verbs |= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_gps
+	else
+		verbs -= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_gps
+
+	if(harness.attached_plate)
+		verbs |= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_plate
+	else
+		verbs -= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_plate
+
+	if(harness.attached_radio)
+		verbs |= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_radio
+	else
+		verbs -= /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_radio
