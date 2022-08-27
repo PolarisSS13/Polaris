@@ -223,7 +223,7 @@
 "eo" = (/obj/effect/decal/cleanable/dirt,/obj/structure/cable,/obj/machinery/power/apc{dir = 4; name = "Cargo Hold APC"},/turf/simulated/floor{ icon_state = "bot"; dir = 2},/area/ship/scrap/cargo)
 "ep" = (/obj/structure/table/standard,/obj/item/storage/pill_bottle/kelotane,/obj/item/storage/box/syringes,/obj/structure/cable,/obj/machinery/power/apc{name = "Medical Bay APC"},/obj/machinery/light_switch{pixel_x = -25},/turf/simulated/floor{icon_state = "white"},/area/ship/scrap/crew/medbay)
 "eq" = (/obj/structure/table/standard,/obj/item/storage/pill_bottle/antitox,/obj/item/storage/pill_bottle/kelotane,/obj/item/clothing/tie/stethoscope,/turf/simulated/floor{icon_state = "white"},/area/ship/scrap/crew/medbay)
-"er" = (/obj/structure/table/standard,/obj/item/storage/firstaid,/obj/item/healthanalyzer,/turf/simulated/floor{icon_state = "white"},/area/ship/scrap/crew/medbay)
+"er" = (/obj/structure/table/standard,/obj/item/storage/firstaid/regular,/obj/item/healthanalyzer,/turf/simulated/floor{icon_state = "white"},/area/ship/scrap/crew/medbay)
 "es" = (/obj/item/radio,/turf/simulated/floor/plating,/area)
 "et" = (/obj/machinery/light/small{ icon_state = "bulb1"; dir = 1},/obj/item/coin/gold,/obj/item/coin/silver,/turf/simulated/floor/plating{dir = 2; icon_state = "warnplate"},/area/ship/scrap/maintenance/engine)
 "eu" = (/turf/simulated/floor/plating{dir = 2; icon_state = "warnplate"},/area/ship/scrap/maintenance/engine)

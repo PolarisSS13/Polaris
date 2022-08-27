@@ -23941,7 +23941,7 @@
 	},
 /obj/item/roller,
 /obj/item/bodybag/cryobag,
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /obj/item/storage/pill_bottle/spaceacillin,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
