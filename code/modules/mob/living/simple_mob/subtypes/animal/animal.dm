@@ -131,4 +131,4 @@
 		snack.animal_consumed(src)
 
 /mob/living/simple_mob/animal/proc/get_dietary_food_modifier(var/datum/reagent/nutriment/food)
-	return 0.3
+	return 1

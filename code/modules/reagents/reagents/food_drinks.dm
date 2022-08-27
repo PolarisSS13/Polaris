@@ -36,9 +36,11 @@
 			if(data[taste]/totalFlavor < 0.1)
 				data -= taste
 
+#define ANIMAL_NUTRITION_MULTIPLIER 0.2
 /datum/reagent/nutriment/affect_animal(var/mob/living/simple_mob/animal/M, var/removed)
-	M.add_nutrition((nutriment_factor * removed) * M.get_dietary_food_modifier(src) * 0.5)
+	M.add_nutrition(nutriment_factor * removed * M.get_dietary_food_modifier(src) * ANIMAL_NUTRITION_MULTIPLIER)
 	return ..()
+#undef ANIMAL_NUTRITION_MULTIPLIER
 
 /datum/reagent/nutriment/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(!injectable && alien != IS_SLIME)

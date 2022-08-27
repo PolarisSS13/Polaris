@@ -294,7 +294,7 @@ var/global/list/last_drake_howl = list()
 /mob/living/simple_mob/animal/sif/grafadreka/get_dietary_food_modifier(var/datum/reagent/nutriment/food)
 	if(food.allergen_type & ALLERGEN_MEAT)
 		return ..()
-	return 0.1
+	return 0.25 // Quarter nutrition from non-meat.
 
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
 	. = ..()

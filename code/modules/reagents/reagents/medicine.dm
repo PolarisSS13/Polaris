@@ -56,6 +56,7 @@
 	if(istype(M, /mob/living/simple_mob/animal/sif/grafadreka))
 		var/mob/living/simple_mob/animal/sif/grafadreka/drake = M
 		drake.sap_heal_threshold = clamp(drake.sap_heal_threshold + (0.1 * removed), 0, 1)
+	M.adjustBruteLoss(-removed)
 	return ..()
 
 /datum/reagent/bicaridine/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
