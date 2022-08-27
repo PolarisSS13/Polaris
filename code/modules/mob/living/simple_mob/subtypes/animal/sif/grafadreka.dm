@@ -8,7 +8,7 @@
 
 /datum/modifier/sifsap_salve/tick()
 
-	if(holder.stat == DEAD)
+	if(holder.stat == DEAD || holder.isSynthetic())
 		expire()
 
 	if(istype(holder, /mob/living/simple_mob/animal/sif))
@@ -211,16 +211,31 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 
 	var/list/original_armor
 
+var/global/list/wounds_being_tended_by_drakes = list()
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
+
+	// We can't heal robots.
+	if(friend.isSynthetic())
+		return FALSE
+
+	// Check if someone else is looking after them already.
+	if(global.wounds_being_tended_by_drakes["\ref[friend]"] > world.time)
+		return FALSE
+
+	// Humans need to have a bleeding external organ to qualify.
 	if(ishuman(friend))
 		var/mob/living/carbon/human/H = friend
 		for(var/obj/item/organ/external/E in H.bad_external_organs)
 			if(E.status & ORGAN_BLEEDING)
 				return TRUE
 		return FALSE
+
+	// Sif animals need to be able to regenerate past their current HP value.
 	if(istype(friend, /mob/living/simple_mob/animal/sif))
 		var/mob/living/simple_mob/animal/sif/critter = friend
 		return critter.health < (critter.getMaxHealth() * critter.sap_heal_threshold)
+
+	// Other animals just need to be injured.
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
@@ -281,9 +296,16 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
 	. = ..()
 
-	// Don't make clientless drakes lose nutrition or they'll all go feral.
-	if(stat == CONSCIOUS && !resting && client)
-		remove_nutrition(0.3)
+	if(stat == CONSCIOUS)
+
+		// Don't make clientless drakes lose nutrition or they'll all go feral.
+		if(!resting && client)
+			remove_nutrition(0.3)
+
+		// Very slowly regenerate enough sap to defend ourselves. spit is 2 sap,
+		// spit cooldown is 8s, life is 2s, so this is one free spit per 12 seconds.
+		if(stored_sap < 10)
+			add_sap(0.35)
 
 	// Process food and sap chems.
 	if(reagents?.total_volume)
@@ -440,12 +462,19 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 			visible_message(SPAN_NOTICE("\The [src] begins to drool a blue-glowing liquid, which they start slathering over their wounds."))
 		else
 			visible_message(SPAN_NOTICE("\The [src] begins to drool a blue-glowing liquid, which they start slathering over \the [friend]'s wounds."))
+
 		playsound(src, 'sound/effects/ointment.ogg', 25)
 
+		var/friend_ref = "\ref[friend]"
+		global.wounds_being_tended_by_drakes[friend_ref] = world.time + (8 SECONDS)
 		set_AI_busy(TRUE)
+
 		if(!do_after(src, 8 SECONDS, friend) || QDELETED(friend) || friend.has_modifier_of_type(/datum/modifier/sifsap_salve) || incapacitated() || !spend_sap(10))
+			global.wounds_being_tended_by_drakes -= friend_ref
 			set_AI_busy(FALSE)
 			return TRUE
+
+		global.wounds_being_tended_by_drakes -= friend_ref
 		set_AI_busy(FALSE)
 
 		if(friend == src)

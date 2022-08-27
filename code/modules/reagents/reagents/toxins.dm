@@ -442,7 +442,8 @@
 	color = "#C6E2FF"
 	strength = 2
 	overdose = 20
-	var/sap_regen_power = 12
+	ingest_met = REM
+	var/sap_regen_power = 7
 
 /datum/reagent/toxin/sifslurry/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA) // Symbiotic bacteria.
