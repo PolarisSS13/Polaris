@@ -120,7 +120,7 @@
 /datum/gear/utility/umbrella
 	display_name = "Umbrella"
 	path = /obj/item/melee/umbrella
-	cost = 3
+	cost = 1
 
 /datum/gear/utility/umbrella/New()
 	..()
@@ -130,7 +130,7 @@
 	display_name = "wheelchair selection"
 	path = /obj/item/wheelchair
 	cost = 4
-	
+
 /datum/gear/utility/wheelchair/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
@@ -179,7 +179,7 @@ modular computers
 /datum/gear/utility/customlaptop
 	display_name = "laptop computer, custom"
 	path = /obj/item/modular_computer/laptop/preset/
-	cost = 7
+	cost = 5
 
 /datum/gear/utility/customlaptop/New()
 	..()

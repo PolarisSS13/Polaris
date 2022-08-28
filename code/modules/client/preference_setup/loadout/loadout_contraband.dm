@@ -44,7 +44,7 @@
 	display_name = "phase pistol"
 	description = "A phase pistol designed for handling the typical wildlife found on Sif. Not particularly effective against anything else..."
 	path = /obj/item/gun/energy/phasegun/pistol
-	cost = 5
+	cost = 4
 
 /datum/gear/contraband/knives /// Steel by default
 	display_name = "knife selection"

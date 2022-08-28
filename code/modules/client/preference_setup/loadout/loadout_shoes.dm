@@ -8,22 +8,27 @@
 /datum/gear/shoes/jackboots
 	display_name = "jackboots"
 	path = /obj/item/clothing/shoes/boots/jackboots
+	cost = 2
 
 /datum/gear/shoes/kneeboots
 	display_name = "jackboots, knee-length"
 	path = /obj/item/clothing/shoes/boots/jackboots/knee
+	cost = 2
 
 /datum/gear/shoes/thighboots
-	display_name = "jackboots. thigh-length"
+	display_name = "jackboots, thigh-length"
 	path = /obj/item/clothing/shoes/boots/jackboots/thigh
+	cost = 2
 
 /datum/gear/shoes/workboots
 	display_name = "workboots"
 	path = /obj/item/clothing/shoes/boots/workboots
+	cost = 2
 
 /datum/gear/shoes/workboots/toeless
 	display_name = "toe-less workboots"
 	path = /obj/item/clothing/shoes/boots/workboots/toeless
+	cost = 2
 
 /datum/gear/shoes/black
 	display_name = "shoes, black"
@@ -140,7 +145,7 @@
 
 /datum/gear/shoes/duty
 	display_name = "duty boots"
-	path = 	/obj/item/clothing/shoes/boots/duty
+	path = /obj/item/clothing/shoes/boots/duty
 	cost = 2
 
 /datum/gear/shoes/dress
