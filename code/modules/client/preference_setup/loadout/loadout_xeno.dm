@@ -656,14 +656,17 @@
 /datum/gear/shoes/toelessjack
 	display_name = "toe-less jackboots"
 	path = /obj/item/clothing/shoes/boots/jackboots/toeless
+	cost = 2
 
 /datum/gear/shoes/toelessknee
 	display_name = "toe-less jackboots, knee-length"
 	path = /obj/item/clothing/shoes/boots/jackboots/toeless/knee
+	cost = 2
 
 /datum/gear/shoes/toelessthigh
 	display_name = "toe-less jackboots, thigh-length"
 	path = /obj/item/clothing/shoes/boots/jackboots/toeless/thigh
+	cost = 2
 
 /datum/gear/eyes/aerogelgoggles
 	display_name = "airtight orange goggles (Teshari)"

@@ -126,3 +126,8 @@
 	display_name = "gloves, circuitry (empty)"
 	path = /obj/item/clothing/gloves/circuitry
 	cost = 1
+
+/datum/gear/gloves/botanic_leather
+	display_name = "gloves, botanic leather"
+	path = /obj/item/clothing/gloves/botanic_leather
+	cost = 2
