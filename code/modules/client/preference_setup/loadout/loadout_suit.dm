@@ -4,7 +4,7 @@
 	path = /obj/item/clothing/suit/storage/apron
 	slot = slot_wear_suit
 	sort_category = "Suits and Overwear"
-	cost = 2
+	cost = 1
 
 /datum/gear/suit/apron_white
 	display_name = "apron, colorable"
@@ -25,22 +25,27 @@
 /datum/gear/suit/puffer_coat
 	display_name = "puffer coat"
 	path = /obj/item/clothing/suit/jacket/puffer
+	cost = 2
 
 /datum/gear/suit/puffer_vest
 	display_name = "puffer vest"
 	path = /obj/item/clothing/suit/jacket/puffer/vest
+	cost = 2
 
 /datum/gear/suit/bomber
 	display_name = "bomber jacket"
 	path = /obj/item/clothing/suit/storage/toggle/bomber
+	cost = 2
 
 /datum/gear/suit/bomber_alt
 	display_name = "bomber jacket 2"
 	path = /obj/item/clothing/suit/storage/bomber/alt
+	cost = 2
 
 /datum/gear/suit/bomber_retro
 	display_name = "bomber jacket, retro"
 	path = /obj/item/clothing/suit/storage/toggle/bomber/retro
+	cost = 2
 
 /datum/gear/suit/leather_jacket
 	display_name = "leather jacket, black"
@@ -125,6 +130,7 @@
 /datum/gear/suit/hoodie
 	display_name = "hoodie selection"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
+	cost = 2
 
 /datum/gear/suit/hoodie/New()
 	..()
@@ -137,6 +143,7 @@
 /datum/gear/suit/labcoat
 	display_name = "labcoat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
+	cost = 2
 
 /datum/gear/suit/labcoat/blue
 	display_name = "labcoat, blue"
@@ -188,16 +195,15 @@
 	display_name = "surgical apron"
 	path = /obj/item/clothing/suit/surgicalapron
 	allowed_roles = list("Medical Doctor","Chief Medical Officer")
+	cost = 1
 
 /datum/gear/suit/overalls
 	display_name = "overalls"
 	path = /obj/item/clothing/suit/storage/apron/overalls
-	cost = 1
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
 	path = /obj/item/clothing/accessory/poncho
-	cost = 1
 
 /datum/gear/suit/poncho/New()
 	..()
@@ -210,7 +216,6 @@
 /datum/gear/suit/roles/poncho
 	display_name = "poncho, cargo"
 	path = /obj/item/clothing/accessory/poncho/roles/cargo
-	cost = 1
 
 /datum/gear/suit/roles/poncho/security
 	display_name = "poncho, security"
@@ -306,7 +311,6 @@
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
 	path = /obj/item/clothing/suit/unathi/robe
-	cost = 1
 
 /datum/gear/suit/black_lawyer_jacket
 	display_name = "suit jacket, black"
@@ -349,6 +353,7 @@
 /datum/gear/suit/wintercoat
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
+	cost = 2
 
 /datum/gear/suit/wintercoat/captain
 	display_name = "winter coat, site manager"
@@ -595,6 +600,7 @@
 /datum/gear/suit/snowsuit
 	display_name = "snowsuit"
 	path = /obj/item/clothing/suit/storage/snowsuit
+	cost = 2
 
 /datum/gear/suit/snowsuit/command
 	display_name = "snowsuit, command"
