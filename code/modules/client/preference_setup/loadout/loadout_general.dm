@@ -3,11 +3,11 @@
 	path = /obj/item/cane
 
 /datum/gear/cane/white
-	display_name = "white cane"
+	display_name = "cane, white"
 	path = /obj/item/cane/white
 
 /datum/gear/cane/white2
-	display_name = "telescopic white cane"
+	display_name = "cane, white, telescopic"
 	path = /obj/item/cane/white/collapsible
 
 /datum/gear/crutch
@@ -89,7 +89,7 @@
 
 
 /datum/gear/flask
-	display_name = "flask"
+	display_name = "flask, standard"
 	path = /obj/item/reagent_containers/food/drinks/flask/barflask
 
 /datum/gear/flask/New()
@@ -97,7 +97,7 @@
 	gear_tweaks += new/datum/gear_tweak/reagents(lunchables_ethanol_reagents())
 
 /datum/gear/vacflask
-	display_name = "vacuum-flask"
+	display_name = "flask, vacuum"
 	path = /obj/item/reagent_containers/food/drinks/flask/vacuumflask
 
 /datum/gear/vacflask/New()

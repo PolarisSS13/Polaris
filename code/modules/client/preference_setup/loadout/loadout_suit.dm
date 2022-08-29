@@ -96,7 +96,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(mil_jackets))
 
 /datum/gear/suit/greyjacket
-	display_name = "grey jacket"
+	display_name = "jacket, grey"
 	path = /obj/item/clothing/suit/storage/greyjacket
 
 /datum/gear/suit/brown_trenchcoat
@@ -192,7 +192,7 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/plaguedoctor
 
 /datum/gear/suit/roles/surgical_apron
-	display_name = "surgical apron"
+	display_name = "apron, surgical"
 	path = /obj/item/clothing/suit/surgicalapron
 	allowed_roles = list("Medical Doctor","Chief Medical Officer")
 	cost = 1
@@ -415,7 +415,6 @@
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/science
 	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist", "Xenobotanist")
 
-
 /datum/gear/suit/wintercoat/science/robotics
 	display_name = "winter coat, robotics"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/science/robotics
@@ -490,7 +489,7 @@
 // winter coats end here
 
 /datum/gear/suit/varsity
-	display_name = "varsity jacket selection"
+	display_name = "jacket, varsity selection"
 	path = /obj/item/clothing/suit/varsity
 
 /datum/gear/suit/varsity/New()
@@ -502,7 +501,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(varsities))
 
 /datum/gear/suit/track
-	display_name = "track jacket selection"
+	display_name = "jacket, track selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
 
 /datum/gear/suit/track/New()
@@ -514,19 +513,19 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tracks))
 
 /datum/gear/suit/flannel
-	display_name = "grey flannel"
+	display_name = "flannel, grey"
 	path = /obj/item/clothing/suit/storage/flannel
 
 /datum/gear/suit/flannel/red
-	display_name = "red flannel"
+	display_name = "flannel, red"
 	path = /obj/item/clothing/suit/storage/flannel/red
 
 /datum/gear/suit/flannel/aqua
-	display_name = "aqua flannel"
+	display_name = "flannel, aqua"
 	path = /obj/item/clothing/suit/storage/flannel/aqua
 
 /datum/gear/suit/flannel/brown
-	display_name = "brown flannel"
+	display_name = "flannel, brown"
 	path = /obj/item/clothing/suit/storage/flannel/brown
 
 /datum/gear/suit/denim_jacket

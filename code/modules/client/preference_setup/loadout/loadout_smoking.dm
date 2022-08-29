@@ -16,11 +16,11 @@
 	path = /obj/item/storage/box/matches
 
 /datum/gear/lighter
-	display_name = "cheap lighter"
+	display_name = "lighter, cheap"
 	path = /obj/item/flame/lighter
 
 /datum/gear/lighter/zippo
-	display_name = "Zippo selection"
+	display_name = "lighter, zippo selection"
 	path = /obj/item/flame/lighter/zippo
 
 /datum/gear/lighter/zippo/New()

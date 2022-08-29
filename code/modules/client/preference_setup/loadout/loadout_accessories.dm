@@ -35,7 +35,7 @@
 	path = /obj/item/storage/wallet/poly
 
 /datum/gear/accessory/wallet/womens
-	display_name = "wallet, womens"
+	display_name = "wallet, women's"
 	path = /obj/item/storage/wallet/womens
 
 /datum/gear/accessory/wallet/womens/New()
@@ -232,7 +232,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sweaters))
 
 /datum/gear/accessory/bracelet/material
-	display_name = "bracelet selection"
+	display_name = "bracelet, selection"
 	description = "Choose from a number of bracelets."
 	path = /obj/item/clothing/accessory/bracelet
 	cost = 1
@@ -254,11 +254,11 @@
 	gear_tweaks += new/datum/gear_tweak/path(bracelettype)
 
 /datum/gear/accessory/bracelet/friendship
-	display_name = "friendship bracelet"
+	display_name = "bracelet, friendship"
 	path = /obj/item/clothing/accessory/bracelet/friendship
 
 /datum/gear/accessory/bracelet/slap
-	display_name = "slap bracelet (recolorable)"
+	display_name = "bracelet, slap (recolorable)"
 	path = /obj/item/clothing/accessory/bracelet/slap
 
 /datum/gear/accessory/bracelet/slap/New()
@@ -266,7 +266,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/accessory/bracelet/beaded
-	display_name = "beaded bracelet (recolorable)"
+	display_name = "bracelet, beaded (recolorable)"
 	path = /obj/item/clothing/accessory/bracelet/beaded
 
 /datum/gear/accessory/bracelet/beaded/New()
@@ -283,11 +283,11 @@
 	path = /obj/item/clothing/accessory/locket
 
 /datum/gear/accessory/halfcape
-	display_name = "half cape"
+	display_name = "cape, half"
 	path = /obj/item/clothing/accessory/halfcape
 
 /datum/gear/accessory/fullcape
-	display_name = "full cape"
+	display_name = "cape, full"
 	path = /obj/item/clothing/accessory/fullcape
 
 /datum/gear/accessory/sash

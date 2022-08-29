@@ -18,7 +18,7 @@
 	path = /obj/item/clothing/mask/bandana/red
 
 /datum/gear/mask/sterile
-	display_name = "sterile mask"
+	display_name = "mask, sterile"
 	path = /obj/item/clothing/mask/surgical
 	cost = 2
 
@@ -41,7 +41,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(masks)
 
 /datum/gear/mask/cloth
-	display_name = "cloth mask (recolorable)"
+	display_name = "mask, cloth (recolorable)"
 	path = /obj/item/clothing/mask/surgical/cloth
 	cost = 2
 
@@ -50,6 +50,6 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/mask/dust
-	display_name = "dust mask"
+	display_name = "mask, dust"
 	path = /obj/item/clothing/mask/surgical/dust
 	cost = 2

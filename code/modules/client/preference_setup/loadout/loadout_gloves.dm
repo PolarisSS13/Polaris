@@ -67,7 +67,7 @@
 	cost = 1
 
 /datum/gear/gloves/evening
-	display_name = "evening gloves"
+	display_name = "gloves, evening"
 	path = /obj/item/clothing/gloves/evening
 	cost = 1
 
@@ -76,7 +76,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/gloves/duty
-	display_name = "duty gloves"
+	display_name = "gloves, duty"
 	path = /obj/item/clothing/gloves/duty
 	cost = 2
 
@@ -87,7 +87,7 @@
 	cost = 1
 
 /datum/gear/gloves/fingerless
-	display_name = "fingerless gloves"
+	display_name = "gloves, fingerless"
 	path = /obj/item/clothing/gloves/fingerless
 	cost = 1
 

@@ -78,7 +78,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/skirt
-	display_name = "skirt selection"
+	display_name = "skirt, selection"
 	path = /obj/item/clothing/under/skirt
 
 /datum/gear/uniform/skirt/New()
@@ -90,7 +90,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(skirts))
 
 /datum/gear/uniform/pants
-	display_name = "pants selection"
+	display_name = "pants, selection"
 	path = /obj/item/clothing/under/pants/white
 
 /datum/gear/uniform/pants/New()
@@ -312,7 +312,7 @@
 	path = /obj/item/clothing/under/sundress_white
 
 /datum/gear/uniform/dress_fire
-	display_name = "flame dress"
+	display_name = "dress, flame"
 	path = /obj/item/clothing/under/dress/dress_fire
 
 /datum/gear/uniform/uniform_captain
@@ -367,7 +367,7 @@
 	allowed_roles = list("Head of Security")
 
 /datum/gear/uniform/shortplaindress
-	display_name = "plain dress"
+	display_name = "dress, plain"
 	path = /obj/item/clothing/under/dress/white3
 
 /datum/gear/uniform/shortplaindress/New()
@@ -375,7 +375,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/longdress
-	display_name = "long dress"
+	display_name = "dress, long"
 	path = /obj/item/clothing/under/dress/white2
 
 /datum/gear/uniform/longdress/New()
@@ -383,7 +383,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/longwidedress
-	display_name = "long wide dress"
+	display_name = "dress, long and wide"
 	path = /obj/item/clothing/under/dress/white4
 
 /datum/gear/uniform/longwidedress/New()
@@ -391,27 +391,27 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/reddress
-	display_name = "red dress with belt"
+	display_name = "dress, red with belt"
 	path = /obj/item/clothing/under/dress/darkred
 
 /datum/gear/uniform/whitewedding
-	display_name= "white wedding dress"
+	display_name = "dress, white wedding"
 	path = /obj/item/clothing/under/wedding/bride_white
 
 /datum/gear/uniform/skirts
-	display_name = "executive skirt"
+	display_name = "skirt, executive"
 	path = /obj/item/clothing/under/suit_jacket/female/skirt
 
 /datum/gear/uniform/dresses
-	display_name = "sailor dress"
+	display_name = "dress, sailor"
 	path = /obj/item/clothing/under/dress/sailordress
 
 /datum/gear/uniform/dresses/eveninggown
-	display_name = "red evening gown"
+	display_name = "evening gown, red"
 	path = /obj/item/clothing/under/dress/redeveninggown
 
 /datum/gear/uniform/dresses/maid
-	display_name = "maid uniform selection"
+	display_name = "uniform, maid selection"
 	path = /obj/item/clothing/under/dress/maid
 
 /datum/gear/uniform/dresses/maid/New()
@@ -527,7 +527,7 @@
 	path = 	/obj/item/clothing/under/frontier
 
 /datum/gear/uniform/yogapants
-	display_name = "yoga pants"
+	display_name = "pants, yoga"
 	path = /obj/item/clothing/under/pants/yogapants
 
 /datum/gear/uniform/yogapants/New()
@@ -539,11 +539,11 @@
 	path = /obj/item/clothing/under/dress/black_corset
 
 /datum/gear/uniform/flower_dress
-	display_name = "flower dress"
+	display_name = "dress, flower"
 	path = /obj/item/clothing/under/dress/flower_dress
 
 /datum/gear/uniform/red_swept_dress
-	display_name = "red swept dress"
+	display_name = "dress, red swept"
 	path = /obj/item/clothing/under/dress/red_swept_dress
 
 /datum/gear/uniform/bathrobe
@@ -551,15 +551,15 @@
 	path = /obj/item/clothing/under/bathrobe
 
 /datum/gear/uniform/flamenco
-	display_name = "flamenco dress"
+	display_name = "dress, flamenco"
 	path = /obj/item/clothing/under/dress/flamenco
 
 /datum/gear/uniform/alpinedress
-	display_name = "alpine dress"
+	display_name = "dress, alpine"
 	path = /obj/item/clothing/under/dress/alpine
 
 /datum/gear/uniform/westernbustle
-	display_name = "western bustle"
+	display_name = "dress, western bustle"
 	path = /obj/item/clothing/under/dress/westernbustle
 
 /datum/gear/uniform/circuitry
@@ -595,39 +595,39 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/lilacdress
-	display_name = "lilac dress"
+	display_name = "dress, lilac"
 	path = /obj/item/clothing/under/dress/lilacdress
 
 /datum/gear/uniform/polka
-	display_name = "polka dot dress"
+	display_name = "dress, polka dot"
 	path = /obj/item/clothing/under/dress/polka
 
 /datum/gear/uniform/twistfront
-	display_name = "twistfront crop dress"
+	display_name = "dress, twistfront crop"
 	path = /obj/item/clothing/under/dress/twistfront
 
 /datum/gear/uniform/cropdress
-	display_name = "crop dress"
+	display_name = "dress, crop"
 	path = /obj/item/clothing/under/dress/cropdress
 
 /datum/gear/uniform/vneckdress
-	display_name = "v-neck dress"
+	display_name = "dress, v-neck"
 	path = /obj/item/clothing/under/dress/vneck
 
 /datum/gear/uniform/bluedress
-	display_name = "blue dress"
+	display_name = "dress, blue"
 	path = /obj/item/clothing/under/dress/bluedress
 
 /datum/gear/uniform/wench
-	display_name = "wench's dress"
+	display_name = "dress, wench"
 	path = /obj/item/clothing/under/dress/wench
 
 /datum/gear/uniform/littleblackdress
-	display_name = "little black dress"
+	display_name = "dress, little black"
 	path = /obj/item/clothing/under/dress/littleblackdress
 
 /datum/gear/uniform/golddress
-	display_name = "golden dress"
+	display_name = "dress, golden"
 	path =/obj/item/clothing/under/dress/golddress
 
 /datum/gear/uniform/goldwrap
@@ -639,7 +639,7 @@
 	path = /obj/item/clothing/under/dress/pinktutu
 
 /datum/gear/uniform/festivedress
-	display_name = "festive dress"
+	display_name = "dress, festive"
 	path = /obj/item/clothing/under/dress/festivedress
 
 /datum/gear/uniform/haltertop
@@ -647,7 +647,7 @@
 	path = /obj/item/clothing/under/haltertop
 
 /datum/gear/uniform/revealingdress
-	display_name = "revealing dress"
+	display_name = "dress, revealing"
 	path = /obj/item/clothing/under/dress/revealingdress
 
 /datum/gear/uniform/rippedpunk
@@ -655,19 +655,19 @@
 	path = /obj/item/clothing/under/rippedpunk
 
 /datum/gear/uniform/gothic
-	display_name = "gothic dress"
+	display_name = "dress, gothic"
 	path = /obj/item/clothing/under/dress/gothic
 
 /datum/gear/uniform/formalred
-	display_name = "formal red dress"
+	display_name = "dress, formal red"
 	path = /obj/item/clothing/under/dress/formalred
 
 /datum/gear/uniform/pentagram
-	display_name = "pentagram dress"
+	display_name = "dress, pentagram"
 	path = /obj/item/clothing/under/dress/pentagram
 
 /datum/gear/uniform/yellowswoop
-	display_name = "yellow swooped dress"
+	display_name = "dress, yellow swooped"
 	path = /obj/item/clothing/under/dress/yellowswoop
 
 /datum/gear/uniform/greenasym
@@ -683,7 +683,7 @@
 	path = /obj/item/clothing/under/wedding/whitegown
 
 /datum/gear/uniform/floofdress
-	display_name = "floofy dress"
+	display_name = "dress, floofy"
 	path = /obj/item/clothing/under/wedding/floofdress
 
 /datum/gear/uniform/floofdress/New()
@@ -695,7 +695,7 @@
 	path = /obj/item/clothing/under/blackngold
 
 /datum/gear/uniform/sheerblue
-	display_name = "sheer blue dress"
+	display_name = "dress, sheer blue"
 	path = /obj/item/clothing/under/sheerblue
 
 /datum/gear/uniform/disheveled
@@ -703,39 +703,39 @@
 	path = /obj/item/clothing/under/disheveled
 
 /datum/gear/uniform/orangedress
-	display_name = "orange dress"
+	display_name = "dress, orange"
 	path = /obj/item/clothing/under/dress/dress_orange
 
 /datum/gear/uniform/sundress_pink
-	display_name = "pink sundress"
+	display_name = "sundress, pink"
 	path = /obj/item/clothing/under/dress/sundress_pink
 
 /datum/gear/uniform/sundress_white
-	display_name = "white sundress"
+	display_name = "sundress, white"
 	path = /obj/item/clothing/under/dress/sundress_white
 
 /datum/gear/uniform/sundress_pinkbow
-	display_name = "bowed pink sundress"
+	display_name = "sundress, bowed pink"
 	path = /obj/item/clothing/under/dress/sundress_pinkbow
 
 /datum/gear/uniform/sundress_blue
-	display_name = "long blue sundress"
+	display_name = "sundress, long blue"
 	path = /obj/item/clothing/under/dress/sundress_blue
 
 /datum/gear/uniform/sundress_pinkshort
-	display_name = "short pink sundress"
+	display_name = "sundress, short pink"
 	path = /obj/item/clothing/under/dress/sundress_pinkshort
 
 /datum/gear/uniform/twopiece
-	display_name = "two-piece dress"
+	display_name = "dress, two-piece"
 	path = /obj/item/clothing/under/dress/twopiece
 
 /datum/gear/uniform/gothic2
-	display_name = "lacey gothic dress"
+	display_name = "dress, lacey gothic"
 	path = /obj/item/clothing/under/dress/gothic2
 
 /datum/gear/uniform/flowerskirt
-	display_name = "flower skirt"
+	display_name = "skirt, flower"
 	path = /obj/item/clothing/under/flower_skirt
 
 /datum/gear/uniform/flowerskirt/New()
@@ -743,7 +743,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/countess
-	display_name = "countess dress"
+	display_name = "dress, countess"
 	path = /obj/item/clothing/under/dress/countess
 
 /datum/gear/uniform/vampire
