@@ -33,7 +33,6 @@
 				H.eye_blurry = min(H.eye_blurry + 1 * weakness, 25 * weakness)
 		for (var/mob/living/silicon/robot/R in range(src.effectrange,holder))
 			to_chat(R, "<font color='red'>SYSTEM ALERT: CPU cycles slowing down.</font>")
-		return 1
 
 /datum/artifact_effect/uncommon/sleepy/DoEffectPulse()
 	var/atom/holder = get_master_holder()

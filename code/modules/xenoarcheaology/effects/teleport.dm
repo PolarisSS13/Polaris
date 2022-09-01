@@ -32,11 +32,9 @@
 				to_chat(M, "<font color='red'>You are displaced by a strange force!</font>")
 				if(M.buckled)
 					M.buckled.unbuckle_mob()
-
 				var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 				sparks.set_up(3, 0, get_turf(M))
 				sparks.start()
-
 				M.Move(pick(trange(50, T)))
 				sparks = new /datum/effect_system/spark_spread()
 				sparks.set_up(3, 0, M.loc)

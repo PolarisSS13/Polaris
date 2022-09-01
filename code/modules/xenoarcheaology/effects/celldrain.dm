@@ -33,7 +33,6 @@
 				if(world.time - last_message > 200)
 					to_chat(M, "<font color='red'>SYSTEM ALERT: Energy drain detected!</font>")
 					last_message = world.time
-	return 1
 
 /datum/artifact_effect/uncommon/celldrain/DoEffectPulse()
 	var/atom/holder = get_master_holder()

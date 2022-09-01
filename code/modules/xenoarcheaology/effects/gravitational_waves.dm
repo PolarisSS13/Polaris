@@ -26,7 +26,6 @@
 /datum/artifact_effect/extreme/gravity_wave/DoEffectAura()
 	var/atom/holder = get_master_holder()
 	var/seconds_since_last_pull = max(0, round((last_wave_pull - world.time) / 10))
-
 	if(prob(10 + seconds_since_last_pull))
 		holder.visible_message("<span class='alien'>\The [holder] distorts as local gravity intensifies, and shifts toward it.</span>")
 		last_wave_pull = world.time

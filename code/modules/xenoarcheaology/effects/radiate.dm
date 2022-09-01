@@ -19,7 +19,6 @@
 	var/atom/holder = get_master_holder()
 	if(holder)
 		SSradiation.flat_radiate(holder, radiation_amount, src.effectrange)
-		return 1
 
 /datum/artifact_effect/rare/radiate/DoEffectPulse()
 	var/atom/holder = get_master_holder()

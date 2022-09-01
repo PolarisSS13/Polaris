@@ -51,11 +51,8 @@
 		age_plantlife(Tray)
 		if(prob(2))
 			var/mob/living/simple_mob/animal/sif/glitterfly/G = new(get_turf(Tray))
-
 			my_glitterflies |= G
-
 			G.ai_holder.returns_home = TRUE
-
 	for(var/obj/effect/plant/P in view(effectrange,get_turf(holder)))
 		age_plantlife(P)
 

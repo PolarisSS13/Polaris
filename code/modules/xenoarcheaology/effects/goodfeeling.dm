@@ -49,10 +49,8 @@
 					to_chat(H, "<font color='blue'>[pick(messages)]</font>")
 				else
 					to_chat(H, "<font color='blue' size='[num2text(rand(1,5))]'><b>[pick(drastic_messages)]</b></font>")
-
 			if(prob(5))
 				H.dizziness += rand(3,5)
-		return 1
 
 /datum/artifact_effect/common/goodfeeling/DoEffectPulse()
 	var/atom/holder = get_master_holder()

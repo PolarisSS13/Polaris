@@ -27,12 +27,9 @@
 	for(var/mob/living/L in oview(get_turf(holder), effectrange))
 		if(L.stat || !L.mind)
 			continue
-
 		if(target && get_dist(get_turf(holder), L) > get_dist(get_turf(holder), target))
 			continue
-
 		target = L
-
 	if(target)
 		throw_at_mob(target, rand(15, 30))
 

@@ -28,7 +28,6 @@
 			M.adjustBruteLoss(-1)
 			M.adjustFireLoss(-1)
 			M.updatehealth()
-		return 1
 
 /datum/artifact_effect/uncommon/roboheal/DoEffectPulse()
 	var/atom/holder = get_master_holder()

@@ -37,7 +37,6 @@
 		for(var/mob/living/L in range(src.effectrange,T))
 			if(prob(10))
 				apply_modifier(L)
-		return TRUE
 
 /datum/artifact_effect/rare/feysight/DoEffectPulse()
 	var/atom/holder = get_master_holder()

@@ -44,12 +44,9 @@
 /datum/artifact_effect/common/animate_anomaly/DoEffectAura()
 	var/obj/O = get_master_holder()
 	find_target()
-
 	if(!target || !istype(O))
 		return
-
 	O.dir = get_dir(O, target)
-
 	if(istype(O.loc, /turf))
 		if(get_dist(O.loc, target.loc) > 1)
 			O.Move(get_step_to(O, target))
