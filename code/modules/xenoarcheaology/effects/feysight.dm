@@ -43,4 +43,3 @@
 		var/turf/T = get_turf(holder)
 		for(var/mob/living/L in range(src.effectrange,T))
 			apply_modifier(L)
-		return TRUE

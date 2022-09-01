@@ -63,9 +63,7 @@
 					to_chat(H, "<font color='red' size='[num2text(rand(1,5))]'><b>[pick(drastic_messages)]</b></font>")
 				else
 					to_chat(H, "<font color='red'>[pick(messages)]</font>")
-
 			if(prob(50))
 				H.dizziness += rand(3,5)
 			else if(prob(25))
 				H.dizziness += rand(5,15)
-		return 1

@@ -23,4 +23,3 @@
 	var/atom/holder = get_master_holder()
 	if(holder)
 		SSradiation.radiate(holder, ((radiation_amount * 25) * (sqrt(src.effectrange)))) //Need to get feedback on this
-		return 1

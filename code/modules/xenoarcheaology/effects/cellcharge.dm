@@ -56,4 +56,3 @@
 				if(world.time - last_message > 200)
 					to_chat(M, "<font color='blue'>SYSTEM ALERT: Energy boost detected!</font>")
 					last_message = world.time
-		return 1

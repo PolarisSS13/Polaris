@@ -44,4 +44,3 @@
 				H.eye_blurry = min(H.eye_blurry + rand(5,15) * weakness, 50 * weakness)
 		for (var/mob/living/silicon/robot/R in range(src.effectrange,holder))
 			to_chat(R, "<font color='red'>SYSTEM ALERT: CPU cycles slowing down.</font>")
-		return 1

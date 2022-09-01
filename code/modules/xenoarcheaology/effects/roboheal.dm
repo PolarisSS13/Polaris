@@ -39,4 +39,3 @@
 			M.adjustBruteLoss(-10)
 			M.adjustFireLoss(-10)
 			M.updatehealth()
-		return 1
