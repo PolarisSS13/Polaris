@@ -4,7 +4,8 @@
 	effect_state = "pulsing"
 	effect_color = "#88ffdb"
 
-/datum/artifact_effect/rare/teleport/DoEffectTouch(var/mob/user)
+
+/datum/artifact_effect/rare/teleport/DoEffectTouch(mob/living/user)
 	var/atom/holder = get_master_holder()
 	var/weakness = GetAnomalySusceptibility(user)
 	if(prob(100 * weakness))
@@ -18,6 +19,7 @@
 		sparks = new /datum/effect_system/spark_spread()
 		sparks.set_up(3, 0, user.loc)
 		sparks.start()
+
 
 /datum/artifact_effect/rare/teleport/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -36,6 +38,7 @@
 				sparks = new /datum/effect_system/spark_spread()
 				sparks.set_up(3, 0, M.loc)
 				sparks.start()
+
 
 /datum/artifact_effect/rare/teleport/DoEffectPulse()
 	var/atom/holder = get_master_holder()

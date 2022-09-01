@@ -1,20 +1,22 @@
 /datum/artifact_effect/uncommon/roboheal
 	name = "robotic healing"
+	effect_color = "#3879ad"
 	var/last_message
 
-	effect_color = "#3879ad"
 
 /datum/artifact_effect/uncommon/roboheal/New()
 	..()
 	effect_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)
 
-/datum/artifact_effect/uncommon/roboheal/DoEffectTouch(var/mob/user)
+
+/datum/artifact_effect/uncommon/roboheal/DoEffectTouch(mob/living/user)
 	if(user)
 		if (istype(user, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = user
 			to_chat(R, "<font color='blue'>Your systems report damaged components mending by themselves!</font>")
 			R.adjustBruteLoss(rand(-10,-30))
 			R.adjustFireLoss(rand(-10,-30))
+
 
 /datum/artifact_effect/uncommon/roboheal/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -27,6 +29,7 @@
 			M.adjustBruteLoss(-1)
 			M.adjustFireLoss(-1)
 			M.updatehealth()
+
 
 /datum/artifact_effect/uncommon/roboheal/DoEffectPulse()
 	var/atom/holder = get_master_holder()

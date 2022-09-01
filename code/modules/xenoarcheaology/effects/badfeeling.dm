@@ -1,7 +1,10 @@
 /datum/artifact_effect/common/badfeeling
 	name = "badfeeling"
 	effect_type = EFFECT_PSIONIC
-	var/list/messages = list("You feel worried.",
+	effect_state = "summoning"
+	effect_color = "#643232"
+	var/list/messages = list(
+		"You feel worried.",
 		"Something doesn't feel right.",
 		"You get a strange feeling in your gut.",
 		"Your instincts are trying to warn you about something.",
@@ -16,19 +19,19 @@
 		"The light seems to flicker.",
 		"The shadows seem to lengthen.",
 		"The walls are getting closer.",
-		"Something is wrong")
-
-	var/list/drastic_messages = list("You've got to get out of here!",
+		"Something is wrong."
+	)
+	var/list/drastic_messages = list(
+		"You've got to get out of here!",
 		"Someone's trying to kill you!",
 		"There's something out there!",
 		"What's happening to you?",
 		"OH GOD!",
-		"HELP ME!")
+		"HELP ME!"
+	)
 
-	effect_state = "summoning"
-	effect_color = "#643232"
 
-/datum/artifact_effect/common/badfeeling/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/common/badfeeling/DoEffectTouch(mob/living/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
@@ -39,6 +42,7 @@
 					to_chat(H, "<font color='red'>[pick(messages)]</font>")
 			if(prob(50))
 				H.dizziness += rand(3,5)
+
 
 /datum/artifact_effect/common/badfeeling/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -52,6 +56,7 @@
 					to_chat(H, "<font color='red' size='[num2text(rand(1,5))]'><b>[pick(drastic_messages)]</b></font>")
 			if(prob(10))
 				H.dizziness += rand(3,5)
+
 
 /datum/artifact_effect/common/badfeeling/DoEffectPulse()
 	var/atom/holder = get_master_holder()

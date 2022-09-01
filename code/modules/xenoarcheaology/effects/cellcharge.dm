@@ -1,18 +1,18 @@
-//todo
 /datum/artifact_effect/uncommon/cellcharge
 	name = "cell charge"
 	effect_type = EFFECT_ELECTRO
+	effect_color = "#ffee06"
 	var/last_message
 
-	effect_color = "#ffee06"
 
-/datum/artifact_effect/uncommon/cellcharge/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/uncommon/cellcharge/DoEffectTouch(mob/living/user)
 	if(user)
 		if(istype(user, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = user
 			for (var/obj/item/cell/D in R.contents)
 				D.charge += rand() * 100 + 50
 				to_chat(R, "<font color='blue'>SYSTEM ALERT: Large energy boost detected!</font>")
+
 
 /datum/artifact_effect/uncommon/cellcharge/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -40,6 +40,7 @@
 				charged_robots = TRUE
 	if (charged_robots)
 		last_message = world.time
+
 
 /datum/artifact_effect/uncommon/cellcharge/DoEffectPulse()
 	var/atom/holder = get_master_holder()

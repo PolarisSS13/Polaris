@@ -1,7 +1,10 @@
 /datum/artifact_effect/uncommon/cannibalfeeling
 	name = "cannibalfeeling"
 	effect_type = EFFECT_PSIONIC
-	var/list/messages = list("You feel peckish.",
+	effect_state = "summoning"
+	effect_color = "#c50303"
+	var/list/messages = list(
+		"You feel peckish.",
 		"Something doesn't feel right.",
 		"You get a strange feeling in your gut.",
 		"You feel particularly hungry.",
@@ -16,19 +19,19 @@
 		"Are they clean?",
 		"You feel weak.",
 		"The ground is getting closer.",
-		"Something is missing.")
-
-	var/list/drastic_messages = list("They look delicious.",
+		"Something is missing."
+	)
+	var/list/drastic_messages = list(
+		"They look delicious.",
 		"They'll take what's yours!",
 		"They're full of meat.",
 		"What's happening to you?",
 		"Butcher them!",
-		"Feast!")
+		"Feast!"
+	)
 
-	effect_state = "summoning"
-	effect_color = "#c50303"
 
-/datum/artifact_effect/uncommon/cannibalfeeling/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/uncommon/cannibalfeeling/DoEffectTouch(mob/living/user)
 	if(user)
 		if (istype(user, /mob/living/carbon/human))
 			var/mob/living/carbon/human/H = user
@@ -41,6 +44,7 @@
 				if(prob(50))
 					H.dizziness += rand(3,5)
 					H.nutrition = H.nutrition / 1.5
+
 
 /datum/artifact_effect/uncommon/cannibalfeeling/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -56,6 +60,7 @@
 				if(prob(10))
 					H.dizziness += rand(3,5)
 					H.nutrition = H.nutrition / 2
+
 
 /datum/artifact_effect/uncommon/cannibalfeeling/DoEffectPulse()
 	var/atom/holder = get_master_holder()

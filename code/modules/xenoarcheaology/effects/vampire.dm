@@ -1,7 +1,8 @@
-
 /datum/artifact_effect/rare/vampire
 	name = "vampire"
 	effect_type = EFFECT_ORGANIC
+	effect_state = "gravisphere"
+	effect_color = "#ff0000"
 	var/last_bloodcall = 0
 	var/bloodcall_interval = 50
 	var/last_eat = 0
@@ -9,29 +10,11 @@
 	var/charges = 0
 	var/list/nearby_mobs = list()
 
-	effect_state = "gravisphere"
-	effect_color = "#ff0000"
 
-/datum/artifact_effect/rare/vampire/proc/bloodcall(var/mob/living/carbon/human/M)
-	var/atom/holder = get_master_holder()
-	last_bloodcall = world.time
-	if(istype(M))
-		playsound(holder, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
-
-		var/target = pick(M.organs_by_name)
-		M.apply_damage(rand(5, 10), SEARING, target)
-		to_chat(M, "<span class='critical'>The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out.</span>")
-		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
-		B.basecolor = M.species.get_blood_colour(M)
-		B.color = M.species.get_blood_colour(M)
-		B.target_turf = pick(range(1, get_turf(holder)))
-		B.blood_DNA = list()
-		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
-		M.vessel.remove_reagent("blood",rand(10,30))
-
-/datum/artifact_effect/rare/vampire/DoEffectTouch(var/mob/user)
+/datum/artifact_effect/rare/vampire/DoEffectTouch(mob/living/user)
 	bloodcall(user)
 	DoEffectAura()
+
 
 /datum/artifact_effect/rare/vampire/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -76,5 +59,24 @@
 			holder.visible_message("<span class='alien'>\icon[holder] \The [holder] gleams a bloody red!</span>")
 			charges -= 0.1
 
+
 /datum/artifact_effect/rare/vampire/DoEffectPulse()
 	DoEffectAura()
+
+
+/datum/artifact_effect/rare/vampire/proc/bloodcall(mob/living/carbon/human/M)
+	var/atom/holder = get_master_holder()
+	last_bloodcall = world.time
+	if(istype(M))
+		playsound(holder, pick('sound/hallucinations/wail.ogg','sound/hallucinations/veryfar_noise.ogg','sound/hallucinations/far_noise.ogg'), 50, 1, -3)
+
+		var/target = pick(M.organs_by_name)
+		M.apply_damage(rand(5, 10), SEARING, target)
+		to_chat(M, "<span class='critical'>The skin on your [parse_zone(target)] feels like it's ripping apart, and a stream of blood flies out.</span>")
+		var/obj/effect/decal/cleanable/blood/splatter/animated/B = new(M.loc)
+		B.basecolor = M.species.get_blood_colour(M)
+		B.color = M.species.get_blood_colour(M)
+		B.target_turf = pick(range(1, get_turf(holder)))
+		B.blood_DNA = list()
+		B.blood_DNA[M.dna.unique_enzymes] = M.dna.b_type
+		M.vessel.remove_reagent("blood",rand(10,30))

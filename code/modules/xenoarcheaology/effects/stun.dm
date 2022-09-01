@@ -2,19 +2,22 @@
 	name = "stun"
 	effect_color = "#00eeff"
 
+
 /datum/artifact_effect/uncommon/stun/New()
 	..()
 	effect_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
-/datum/artifact_effect/uncommon/stun/DoEffectTouch(var/mob/toucher)
-	if(toucher && iscarbon(toucher))
-		var/mob/living/carbon/C = toucher
+
+/datum/artifact_effect/uncommon/stun/DoEffectTouch(mob/living/user)
+	if(user && iscarbon(user))
+		var/mob/living/carbon/C = user
 		var/susceptibility = GetAnomalySusceptibility(C)
 		if(prob(susceptibility * 100))
 			to_chat(C, "<font color='red'>A powerful force overwhelms your consciousness.</font>")
 			C.Weaken(rand(1,10) * susceptibility)
 			C.stuttering += 30 * susceptibility
 			C.Stun(rand(1,10) * susceptibility)
+
 
 /datum/artifact_effect/uncommon/stun/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -30,6 +33,7 @@
 					C.Stun(1)
 			else if(prob(10))
 				to_chat(C, "<font color='red'>You feel numb.</font>")
+
 
 /datum/artifact_effect/uncommon/stun/DoEffectPulse()
 	var/atom/holder = get_master_holder()

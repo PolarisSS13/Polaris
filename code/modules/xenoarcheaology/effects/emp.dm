@@ -1,12 +1,13 @@
 /datum/artifact_effect/rare/emp
 	name = "emp"
 	effect_type = EFFECT_ELECTRO
-
 	effect_state = "empdisable"
+
 
 /datum/artifact_effect/rare/emp/New()
 	..()
 	effect = EFFECT_PULSE
+
 
 /datum/artifact_effect/rare/emp/DoEffectPulse()
 	var/atom/holder = get_master_holder()

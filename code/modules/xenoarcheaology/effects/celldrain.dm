@@ -1,19 +1,19 @@
-//todo
 /datum/artifact_effect/uncommon/celldrain
 	name = "cell drain"
 	effect_type = EFFECT_ELECTRO
-	var/last_message
-
 	effect_state = "pulsing"
 	effect_color = "#fbff02"
+	var/last_message
 
-/datum/artifact_effect/uncommon/celldrain/DoEffectTouch(var/mob/user)
+
+/datum/artifact_effect/uncommon/celldrain/DoEffectTouch(mob/living/user)
 	if(user)
 		if(istype(user, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = user
 			for (var/obj/item/cell/D in R.contents)
 				D.charge = max(D.charge - rand() * 100, 0)
 				to_chat(R, "<font color='blue'>SYSTEM ALERT: Energy drain detected!</font>")
+
 
 /datum/artifact_effect/uncommon/celldrain/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -30,6 +30,7 @@
 				if(world.time - last_message > 200)
 					to_chat(M, "<font color='red'>SYSTEM ALERT: Energy drain detected!</font>")
 					last_message = world.time
+
 
 /datum/artifact_effect/uncommon/celldrain/DoEffectPulse()
 	var/atom/holder = get_master_holder()

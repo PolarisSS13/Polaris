@@ -1,12 +1,11 @@
 /datum/artifact_effect/extreme/gravity_wave
 	name = "gravity wave"
 	effect_type = EFFECT_ENERGY
-
+	effect_state = "gravisphere"
+	effect_color = "#d8c3ff"
 	var/last_wave_pull = 0
 	var/pull_power
 
-	effect_state = "gravisphere"
-	effect_color = "#d8c3ff"
 
 /datum/artifact_effect/extreme/gravity_wave/New()
 	..()
@@ -20,8 +19,10 @@
 			effectrange = rand(9, 14)
 	pull_power = rand(STAGE_ONE, STAGE_FOUR)
 
-/datum/artifact_effect/extreme/gravity_wave/DoEffectTouch(var/mob/user)
+
+/datum/artifact_effect/extreme/gravity_wave/DoEffectTouch(mob/living/user)
 	gravwave(user, effectrange, pull_power)
+
 
 /datum/artifact_effect/extreme/gravity_wave/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -31,11 +32,13 @@
 		last_wave_pull = world.time
 		gravwave(get_turf(holder), effectrange, pull_power)
 
+
 /datum/artifact_effect/extreme/gravity_wave/DoEffectPulse()
 	var/atom/holder = get_master_holder()
 	holder.visible_message("<span class='alien'>\The [holder] distorts as local gravity intensifies, and shifts toward it.</span>")
 	gravwave(get_turf(holder), effectrange, pull_power)
 
-/datum/artifact_effect/extreme/gravity_wave/proc/gravwave(var/atom/target, var/pull_range = 7, var/pull_power = STAGE_TWO)
-	for(var/atom/A in oview(pull_range, target))
+
+/datum/artifact_effect/extreme/gravity_wave/proc/gravwave(atom/target, pull_range = 7, pull_power = STAGE_TWO)
+	for(var/atom/A as anything in oview(pull_range, target))
 		A.singularity_pull(target, pull_power)

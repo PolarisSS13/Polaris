@@ -3,14 +3,15 @@
 	effect_type = EFFECT_ORGANIC
 	effect_color = "#4649ff"
 
-/datum/artifact_effect/uncommon/heal/DoEffectTouch(var/mob/toucher)
-	if(toucher && iscarbon(toucher))
-		var/weakness = GetAnomalySusceptibility(toucher)
+
+/datum/artifact_effect/uncommon/heal/DoEffectTouch(mob/living/user)
+	if(user && iscarbon(user))
+		var/weakness = GetAnomalySusceptibility(user)
 		if(prob(weakness * 100))
-			var/mob/living/carbon/C = toucher
+			var/mob/living/carbon/C = user
 			to_chat(C, "<font color='blue'>You feel a soothing energy invigorate you.</font>")
-			if(ishuman(toucher))
-				var/mob/living/carbon/human/H = toucher
+			if(ishuman(user))
+				var/mob/living/carbon/human/H = user
 				for(var/obj/item/organ/external/affecting in H.organs)
 					if(affecting && istype(affecting))
 						affecting.heal_damage(25 * weakness, 25 * weakness)
@@ -27,6 +28,7 @@
 			C.adjustFireLoss(-25 * weakness)
 			C.regenerate_icons()
 
+
 /datum/artifact_effect/uncommon/heal/DoEffectAura()
 	var/atom/holder = get_master_holder()
 	if(holder)
@@ -42,6 +44,7 @@
 				C.adjustOxyLoss(-1 * weakness)
 				C.adjustBrainLoss(-1 * weakness)
 				C.updatehealth()
+
 
 /datum/artifact_effect/uncommon/heal/DoEffectPulse()
 	var/atom/holder = get_master_holder()
