@@ -12,16 +12,16 @@
 
 /datum/artifact_effect/common/heat/DoEffectTouch(mob/living/user)
 	var/atom/holder = get_master_holder()
-	if(holder)
+	if (holder)
 		to_chat(user, "<font color='red'> You feel a wave of heat travel up your spine!</font>")
 		var/datum/gas_mixture/env = holder.loc.return_air()
-		if(env)
+		if (env)
 			env.temperature += rand(5,50)
 
 
 /datum/artifact_effect/common/heat/DoEffectAura()
 	var/atom/holder = get_master_holder()
-	if(holder)
+	if (holder)
 		var/datum/gas_mixture/env = holder.loc.return_air()
-		if(env && env.temperature < target_temp)
+		if (env && env.temperature < target_temp)
 			env.temperature += pick(0, 0, 1)

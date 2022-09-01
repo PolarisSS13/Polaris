@@ -6,8 +6,8 @@
 
 
 /datum/artifact_effect/uncommon/cellcharge/DoEffectTouch(mob/living/user)
-	if(user)
-		if(istype(user, /mob/living/silicon/robot))
+	if (user)
+		if (istype(user, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = user
 			for (var/obj/item/cell/D in R.contents)
 				D.charge += rand() * 100 + 50
@@ -44,7 +44,7 @@
 
 /datum/artifact_effect/uncommon/cellcharge/DoEffectPulse()
 	var/atom/holder = get_master_holder()
-	if(holder)
+	if (holder)
 		var/turf/T = get_turf(holder)
 		for (var/obj/machinery/power/apc/C in range(200, T))
 			for (var/obj/item/cell/B in C.contents)
@@ -54,6 +54,6 @@
 		for (var/mob/living/silicon/robot/M in range(100, T))
 			for (var/obj/item/cell/D in M.contents)
 				D.charge += rand() * 100
-				if(world.time - last_message > 200)
+				if (world.time - last_message > 200)
 					to_chat(M, "<font color='blue'>SYSTEM ALERT: Energy boost detected!</font>")
 					last_message = world.time
