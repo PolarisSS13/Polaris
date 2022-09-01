@@ -15,10 +15,8 @@
 			to_chat(H, pick("<font color='blue'>You feel like taking a nap.</font>","<font color='blue'> You feel a yawn coming on.</font>","<font color='blue'> You feel a little tired.</font>"))
 			H.drowsyness = min(H.drowsyness + rand(5,25) * weakness, 50 * weakness)
 			H.eye_blurry = min(H.eye_blurry + rand(1,3) * weakness, 50 * weakness)
-			return 1
 		else if(isrobot(toucher))
 			to_chat(toucher, "<font color='red'>SYSTEM ALERT: CPU cycles slowing down.</font>")
-			return 1
 
 /datum/artifact_effect/uncommon/sleepy/DoEffectAura()
 	var/atom/holder = get_master_holder()

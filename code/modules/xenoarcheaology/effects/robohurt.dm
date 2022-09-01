@@ -15,7 +15,6 @@
 			to_chat(R, "<font color='red'>Your systems report severe damage has been inflicted!</font>")
 			R.adjustBruteLoss(rand(10,50))
 			R.adjustFireLoss(rand(10,50))
-			return 1
 
 /datum/artifact_effect/uncommon/robohurt/DoEffectAura()
 	var/atom/holder = get_master_holder()

@@ -13,7 +13,6 @@
 	if(user)
 		user.apply_effect(radiation_amount * 5,IRRADIATE,0)
 		user.updatehealth()
-		return 1
 
 /datum/artifact_effect/rare/radiate/DoEffectAura()
 	var/atom/holder = get_master_holder()

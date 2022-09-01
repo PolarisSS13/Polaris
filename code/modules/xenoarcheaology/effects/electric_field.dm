@@ -13,15 +13,12 @@
 			continue
 		if(!L.stat)
 			nearby_mobs |= L
-
 	for(var/obj/machinery/light/light in range(effectrange, get_turf(holder)))
 		light.flicker()
-
 	for(var/mob/living/L in nearby_mobs)
 		if(L.isSynthetic())
 			to_chat(L, "<span class='danger'>ERROR: Electrical fault detected!</span>")
 			L.stuttering += 3
-
 		if(ishuman(L))
 			var/mob/living/carbon/human/H = L
 			var/obj/item/organ/external/affected = H.get_organ(check_zone(BP_TORSO))

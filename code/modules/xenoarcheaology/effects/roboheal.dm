@@ -15,7 +15,6 @@
 			to_chat(R, "<font color='blue'>Your systems report damaged components mending by themselves!</font>")
 			R.adjustBruteLoss(rand(-10,-30))
 			R.adjustFireLoss(rand(-10,-30))
-			return 1
 
 /datum/artifact_effect/uncommon/roboheal/DoEffectAura()
 	var/atom/holder = get_master_holder()

@@ -11,13 +11,10 @@
 		to_chat(user, "<font color='red'>You are suddenly zapped away elsewhere!</font>")
 		if (user.buckled)
 			user.buckled.unbuckle_mob()
-
 		var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 		sparks.set_up(3, 0, get_turf(user))
 		sparks.start()
-
 		user.Move(pick(trange(50, get_turf(holder))))
-
 		sparks = new /datum/effect_system/spark_spread()
 		sparks.set_up(3, 0, user.loc)
 		sparks.start()

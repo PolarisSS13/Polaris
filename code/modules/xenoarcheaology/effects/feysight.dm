@@ -28,7 +28,6 @@
 /datum/artifact_effect/rare/feysight/DoEffectTouch(var/mob/toucher)
 	if(toucher && isliving(toucher))
 		apply_modifier(toucher)
-		return TRUE
 
 /datum/artifact_effect/rare/feysight/DoEffectAura()
 	var/atom/holder = get_master_holder()

@@ -79,7 +79,6 @@
 	var/atom/holder = get_master_holder()
 	for(var/mob/living/L in oview(effectrange, get_turf(holder)))
 		stored_life += 4 * steal_life(L)
-
 	var/turf/T = get_turf(holder)
 	for(var/mob/living/L in T)
 		if(L.stat == DEAD)

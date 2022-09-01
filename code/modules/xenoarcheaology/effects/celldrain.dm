@@ -14,9 +14,6 @@
 			for (var/obj/item/cell/D in R.contents)
 				D.charge = max(D.charge - rand() * 100, 0)
 				to_chat(R, "<font color='blue'>SYSTEM ALERT: Energy drain detected!</font>")
-			return 1
-
-		return 1
 
 /datum/artifact_effect/uncommon/celldrain/DoEffectAura()
 	var/atom/holder = get_master_holder()

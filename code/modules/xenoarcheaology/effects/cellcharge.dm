@@ -13,7 +13,6 @@
 			for (var/obj/item/cell/D in R.contents)
 				D.charge += rand() * 100 + 50
 				to_chat(R, "<font color='blue'>SYSTEM ALERT: Large energy boost detected!</font>")
-			return 1
 
 /datum/artifact_effect/uncommon/cellcharge/DoEffectAura()
 	var/atom/holder = get_master_holder()

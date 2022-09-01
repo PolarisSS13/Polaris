@@ -28,7 +28,6 @@
 /datum/artifact_effect/uncommon/berserk/DoEffectTouch(var/mob/toucher)
 	if(toucher && isliving(toucher))
 		apply_berserk(toucher)
-		return TRUE
 
 /datum/artifact_effect/uncommon/berserk/DoEffectAura()
 	var/atom/holder = get_master_holder()

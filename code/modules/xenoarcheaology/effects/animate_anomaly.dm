@@ -36,7 +36,6 @@
 	var/atom/holder = get_master_holder()
 	var/obj/O = holder
 	var/turf/T = get_step_away(O, user)
-
 	if(target && istype(T) && istype(O.loc, /turf))
 		O.Move(T)
 		O.visible_message("<span class='alien'>\The [holder] lurches away from [user]</span>")
