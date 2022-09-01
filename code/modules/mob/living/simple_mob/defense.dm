@@ -5,8 +5,6 @@
 	//	if(!P.SA_vulnerability || P.SA_vulnerability == intelligence_level)
 		if(P.SA_vulnerability & mob_class)
 			P.damage += P.SA_bonus_damage
-		if(P.firer)
-			IWasAttackedBy(P.firer)
 	. = ..()
 
 
@@ -49,10 +47,6 @@
 			apply_damage(damage = harm_intent_damage, damagetype = BRUTE, def_zone = null, blocked = armor, blocked = resistance, used_weapon = null, sharp = FALSE, edge = FALSE)
 			L.visible_message(SPAN_WARNING("\The [L] [response_harm] \the [src]!"))
 			L.do_attack_animation(src)
-			IWasAttackedBy(L)
-
-/mob/living/simple_mob/proc/IWasAttackedBy(var/mob/living/attacker)
-	return
 
 // When somoene clicks us with an item in hand
 /mob/living/simple_mob/attackby(var/obj/item/O, var/mob/user)
@@ -120,8 +114,6 @@
 	if(supernatural && istype(O,/obj/item/nullrod))
 		effective_force *= 2
 		purge = 3
-	if(user)
-		IWasAttackedBy(user)
 	if(O.force <= resistance)
 		to_chat(user, SPAN_WARNING("This weapon is ineffective, it does no damage."))
 		return 2 //???

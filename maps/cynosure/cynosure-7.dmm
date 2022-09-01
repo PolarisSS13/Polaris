@@ -38,7 +38,7 @@
 /area/surface/outside/wilderness/mountains)
 "fP" = (
 /obj/structure/table/sifwoodentable,
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /obj/item/stack/medical/splint,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)

@@ -1,5 +1,5 @@
 "ai" = (/obj/random/trash,/turf/simulated/floor/carpet/purcarpet,/area/submap/oldhotel)
-"aJ" = (/obj/item/towel/random,/obj/item/towel/random,/obj/structure/table/standard,/obj/item/storage/firstaid,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
+"aJ" = (/obj/item/towel/random,/obj/item/towel/random,/obj/structure/table/standard,/obj/item/storage/firstaid/regular,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
 "bb" = (/obj/machinery/light/small{dir = 4},/obj/item/multitool,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "bQ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
 "bW" = (/obj/item/material/shard,/turf/template_noop,/area/submap/oldhotel)

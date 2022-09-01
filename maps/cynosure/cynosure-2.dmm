@@ -13343,7 +13343,7 @@
 /area/surface/station/security/lockerroom)
 "gdi" = (
 /obj/structure/table/sifwoodentable,
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /turf/simulated/floor/wood/sif,
 /area/surface/outpost/checkpoint)
 "gdn" = (
@@ -15529,7 +15529,7 @@
 /area/surface/station/hallway/primary/groundfloor/west/elevator)
 "hbD" = (
 /obj/structure/table/reinforced,
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /obj/item/glass_jar{
 	pixel_x = 2;
 	pixel_y = 2
@@ -38701,7 +38701,7 @@
 	pixel_y = 32
 	},
 /obj/item/storage/pill_bottle/spaceacillin,
-/obj/item/storage/firstaid,
+/obj/item/storage/firstaid/regular,
 /obj/item/roller,
 /obj/item/bodybag/cryobag,
 /turf/simulated/floor/tiled,

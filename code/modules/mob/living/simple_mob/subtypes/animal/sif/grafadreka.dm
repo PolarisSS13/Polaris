@@ -8,7 +8,7 @@
 
 /datum/modifier/sifsap_salve/tick()
 
-	if(holder.stat == DEAD)
+	if(holder.stat == DEAD || holder.isSynthetic())
 		expire()
 
 	if(istype(holder, /mob/living/simple_mob/animal/sif))
@@ -76,38 +76,17 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 		"tail"
 	)
 
-var/global/list/last_drake_howl = list()
 /decl/emote/audible/drake_howl
 	key = "dhowl"
 	emote_message_3p = "lifts USER_THEIR head up and gives an eerie howl."
 	emote_sound = 'sound/effects/drakehowl_close.ogg'
-	var/cooldown = 20 SECONDS
+	broadcast_sound ='sound/effects/drakehowl_far.ogg'
+	emote_cooldown = 20 SECONDS
+	broadcast_distance = 90
 
-/decl/emote/audible/drake_howl/do_emote(var/atom/user, var/extra_params)
-	if(world.time < last_drake_howl["\ref[user]"])
-		to_chat(user, SPAN_WARNING("You cannot howl again so soon."))
-		return FALSE
-	. = ..()
-	if(.)
-		last_drake_howl["\ref[user]"] = world.time + cooldown
-
-/decl/emote/audible/drake_howl/do_sound(var/atom/user)
-	..()
-	var/turf/user_turf = get_turf(user)
-	if(!istype(user_turf))
-		return
-	var/list/affected_levels = GetConnectedZlevels(user_turf.z)
-	var/list/close_listeners = hearers(world.view * 3, user_turf)
-	for(var/mob/M in player_list)
-		var/turf/T = get_turf(M)
-		if(!istype(T) || istype(T,/turf/space) || M.ear_deaf > 0 || (M in close_listeners) || !(T.z in affected_levels))
-			continue
-		var/turf/reference_point = locate(T.x, T.y, user_turf.z)
-		if(reference_point)
-			var/direction = get_dir(reference_point, user_turf)
-			if(direction)
-				to_chat(M, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]"))
-		M << 'sound/effects/drakehowl_far.ogg'
+/decl/emote/audible/drake_howl/broadcast_emote_to(var/send_sound, var/mob/target, var/direction)
+	if((. = ..()))
+		to_chat(target, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]."))
 
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
 	if(!is_baby)
@@ -224,27 +203,44 @@ var/global/list/last_drake_howl = list()
 	var/sitting = FALSE
 	var/next_spit = 0
 	var/spit_cooldown = 8 SECONDS
-	var/next_alpha_check = 0
-	var/dominance = 0 // A score used to determine pack leader.
+	var/next_leader_check = 0
+	var/charisma = 0 // A score used to determine pack leader.
 	var/stored_sap = 0
 	var/max_stored_sap = 60
-	var/attacked_by_human = FALSE
+	var/attacked_by_neutral = FALSE
 
+	var/list/original_armor
+
+var/global/list/wounds_being_tended_by_drakes = list()
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
+
+	// We can't heal robots.
+	if(friend.isSynthetic())
+		return FALSE
+
+	// Check if someone else is looking after them already.
+	if(global.wounds_being_tended_by_drakes["\ref[friend]"] > world.time)
+		return FALSE
+
+	// Humans need to have a bleeding external organ to qualify.
 	if(ishuman(friend))
 		var/mob/living/carbon/human/H = friend
 		for(var/obj/item/organ/external/E in H.bad_external_organs)
 			if(E.status & ORGAN_BLEEDING)
 				return TRUE
 		return FALSE
+
+	// Sif animals need to be able to regenerate past their current HP value.
 	if(istype(friend, /mob/living/simple_mob/animal/sif))
 		var/mob/living/simple_mob/animal/sif/critter = friend
 		return critter.health < (critter.getMaxHealth() * critter.sap_heal_threshold)
+
+	// Other animals just need to be injured.
 	return (friend.health < friend.maxHealth)
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
 
-	dominance = rand(5, 15)
+	charisma = rand(5, 15)
 	stored_sap = rand(20, 30)
 	nutrition = rand(400,500)
 
@@ -257,6 +253,7 @@ var/global/list/last_drake_howl = list()
 
 	. = ..()
 
+	original_armor = armor
 	update_icon()
 
 /mob/living/simple_mob/animal/sif/grafadreka/examine(var/mob/living/user)
@@ -288,28 +285,34 @@ var/global/list/last_drake_howl = list()
 		setMoveCooldown(1 SECOND)
 		spend_sap(2)
 
+/mob/living/simple_mob/animal/sif/grafadreka/get_dietary_food_modifier(var/datum/reagent/nutriment/food)
+	if(food.allergen_type & ALLERGEN_MEAT)
+		return ..()
+	return 0.25 // Quarter nutrition from non-meat.
+
+/mob/living/simple_mob/animal/sif/grafadreka/handle_reagent_transfer(var/datum/reagents/holder, var/amount = 1, var/chem_type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0)
+	return holder.trans_to_holder(reagents, amount, multiplier, copy)
+
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
 	. = ..()
 
+	if(stat == CONSCIOUS)
+
+		// Don't make clientless drakes lose nutrition or they'll all go feral.
+		if(!resting && client)
+			remove_nutrition(0.3)
+
+		// Very slowly regenerate enough sap to defend ourselves. spit is 2 sap,
+		// spit cooldown is 8s, life is 2s, so this is one free spit per 12 seconds.
+		if(stored_sap < 10)
+			add_sap(0.35)
+
 	// Process food and sap chems.
-	if(stat == CONSCIOUS && client) // Hibernating drakes don't get hungy.
-		// by default we lose nutrition. Hungry hungry drakes.
-
-		var/food_val = (resting || !client) ? 0 : -0.3 // Don't make clientless drakes lose nutrition or they'll all go feral.
-
-		// Very basic metabolism.
-		if(reagents?.total_volume)
-			for(var/datum/reagent/chem in reagents.reagent_list)
-				var/removing = min(REM, chem.volume)
-				if(istype(chem, /datum/reagent/nutriment))
-					var/datum/reagent/nutriment/food = chem
-					food_val += (food.nutriment_factor * removing) * ((food.allergen_type & ALLERGEN_MEAT) ? 0.3 : 0.1)
-				else if(istype(chem, /datum/reagent/toxin/sifslurry))
-					add_sap(removing * 3)
-				reagents.remove_reagent(chem.id, removing)
-
-		if(food_val != 0)
-			nutrition = clamp(nutrition + food_val, 0, max_nutrition)
+	if(reagents?.total_volume)
+		for(var/datum/reagent/chem in reagents.reagent_list)
+			var/removed = min(REM, min(chem.ingest_met, chem.volume))
+			chem.affect_animal(src, removed)
+			reagents.remove_reagent(chem.id, removed)
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/has_sap(var/amt)
 	return stored_sap >= amt
@@ -409,14 +412,13 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/do_tame(var/obj/O, var/mob/user)
 	. = ..()
-	if(attacked_by_human && ishuman(user) && ((user in tamers) || (user in friends)))
-		attacked_by_human = FALSE
+	attacked_by_neutral = FALSE
 
 /mob/living/simple_mob/animal/sif/grafadreka/handle_special()
 	..()
-	if(client || world.time >= next_alpha_check)
-		next_alpha_check = world.time + (60 SECONDS)
-		check_alpha_status()
+	if(client || world.time >= next_leader_check)
+		next_leader_check = world.time + (60 SECONDS)
+		check_leader_status()
 
 /mob/living/simple_mob/animal/sif/grafadreka/do_help_interaction(atom/A)
 
@@ -460,12 +462,19 @@ var/global/list/last_drake_howl = list()
 			visible_message(SPAN_NOTICE("\The [src] begins to drool a blue-glowing liquid, which they start slathering over their wounds."))
 		else
 			visible_message(SPAN_NOTICE("\The [src] begins to drool a blue-glowing liquid, which they start slathering over \the [friend]'s wounds."))
+
 		playsound(src, 'sound/effects/ointment.ogg', 25)
 
+		var/friend_ref = "\ref[friend]"
+		global.wounds_being_tended_by_drakes[friend_ref] = world.time + (8 SECONDS)
 		set_AI_busy(TRUE)
+
 		if(!do_after(src, 8 SECONDS, friend) || QDELETED(friend) || friend.has_modifier_of_type(/datum/modifier/sifsap_salve) || incapacitated() || !spend_sap(10))
+			global.wounds_being_tended_by_drakes -= friend_ref
 			set_AI_busy(FALSE)
 			return TRUE
+
+		global.wounds_being_tended_by_drakes -= friend_ref
 		set_AI_busy(FALSE)
 
 		if(friend == src)
@@ -495,23 +504,23 @@ var/global/list/last_drake_howl = list()
 
 	return ..()
 
-/mob/living/simple_mob/animal/sif/grafadreka/proc/get_local_alpha()
+/mob/living/simple_mob/animal/sif/grafadreka/proc/get_pack_leader()
 	var/pack = FALSE
-	var/mob/living/simple_mob/animal/sif/grafadreka/alpha
+	var/mob/living/simple_mob/animal/sif/grafadreka/leader
 	if(!is_baby)
-		alpha = src
-	for(var/mob/living/simple_mob/animal/sif/grafadreka/beta in hearers(7, loc))
-		if(beta == src || beta.is_baby || beta.stat == DEAD)
+		leader = src
+	for(var/mob/living/simple_mob/animal/sif/grafadreka/follower in hearers(7, loc))
+		if(follower == src || follower.is_baby || follower.stat == DEAD || follower.faction != faction)
 			continue
 		pack = TRUE
-		if(beta.dominance > alpha.dominance)
-			alpha = beta
+		if(!leader || follower.charisma > leader.charisma)
+			leader = follower
 	if(pack)
-		return alpha
+		return leader
 
-/mob/living/simple_mob/animal/sif/grafadreka/proc/check_alpha_status()
-	var/mob/living/simple_mob/animal/sif/grafadreka/alpha = get_local_alpha()
-	if(src == alpha)
+/mob/living/simple_mob/animal/sif/grafadreka/proc/check_leader_status()
+	var/mob/living/simple_mob/animal/sif/grafadreka/leader = get_pack_leader()
+	if(src == leader)
 		add_modifier(/datum/modifier/ace, 60 SECONDS)
 	else
 		remove_modifiers_of_type(/datum/modifier/ace)
@@ -522,14 +531,13 @@ var/global/list/last_drake_howl = list()
 		stat("Nutrition:", "[nutrition]/[max_nutrition]")
 		stat("Stored sap:", "[stored_sap]/[max_stored_sap]")
 
+/mob/living/simple_mob/animal/sif/grafadreka/proc/can_bite(var/mob/living/M)
+	return istype(M) && (M.lying || M.confused || M.incapacitated())
+
 /mob/living/simple_mob/animal/sif/grafadreka/apply_bonus_melee_damage(atom/A, damage_amount)
 	// Melee attack on incapacitated or prone enemies bites instead of slashing
 	var/last_attack_was_claws = attacking_with_claws
-	attacking_with_claws = TRUE
-	if(isliving(A))
-		var/mob/living/M = A
-		if(M.lying || M.incapacitated())
-			attacking_with_claws = FALSE
+	attacking_with_claws = !can_bite(A)
 
 	if(last_attack_was_claws != attacking_with_claws)
 		if(attacking_with_claws) // Use claws.
@@ -576,15 +584,12 @@ var/global/list/last_drake_howl = list()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Login()
 	. = ..()
-	if(client && !is_baby)
-		dominance = INFINITY // Let players lead by default.
-	else // But not if they are a baby.
-		dominance = 0
+	charisma = (client && !is_baby) ? INFINITY : 0
 
 /mob/living/simple_mob/animal/sif/grafadreka/Logout()
 	. = ..()
 	if(!client)
-		dominance = rand(5, 15)
+		charisma = rand(5, 15)
 
 /datum/say_list/grafadreka
 	speak = list("Chff!","Skhh.", "Rrrss...")
@@ -626,77 +631,3 @@ var/global/list/last_drake_howl = list()
 	projectiletype = /obj/item/projectile/drake_spit/weak
 	maxHealth = 60
 	health = 60
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained
-	desc = "A large, sleek snow drake with heavy claws, powerful jaws and many pale spines along its body. This one is wearing some kind of vest with a pannier; maybe it belongs to someone."
-	player_msg = "You are a large Sivian pack predator in symbiosis with the local bioluminescent bacteria. You can eat glowing \
-	tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> \
-	(on <b><font color = '#009900'>help intent</font></b>).<br>Unlike your wild kin, you are <b>trained</b> and work happily with your two-legged packmates."
-	faction = "station"
-	ai_holder_type = null // These guys should not exist without players.
-	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
-	var/obj/item/storage/internal/pannier = /obj/item/storage/internal/drake_pannier
-
-// It's just a backpack.
-/obj/item/storage/internal/drake_pannier
-	color = COLOR_BEASTY_BROWN
-	max_w_class = ITEMSIZE_LARGE
-	max_storage_space = INVENTORY_STANDARD_SPACE
-
-/obj/item/storage/internal/drake_pannier/Initialize()
-	. = ..() // Name is set lower in Initialize() so we set it again here.
-	name = "drake's pannier"
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/attackby(obj/item/O, mob/user)
-	if(user.a_intent == I_HURT || (istype(O, /obj/item/stack/medical) && user.a_intent == I_HELP))
-		return ..()
-	if(pannier)
-		return pannier.attackby(O, user)
-	return ..()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/add_glow()
-	. = ..()
-	if(. && pannier)
-		var/image/I = .
-		I.icon_state = "[I.icon_state]-pannier"
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Logout()
-	..()
-	if(stat != DEAD)
-		lying = TRUE
-		resting = TRUE
-		sitting = FALSE
-		Sleeping(2)
-		update_icon()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Login()
-	..()
-	SetSleeping(0)
-	update_icon()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/attack_hand(mob/living/L)
-	// Permit headpats/smacks
-	if(!pannier || L.a_intent == I_HURT || (L.a_intent == I_HELP && L.zone_sel?.selecting == BP_HEAD))
-		return ..()
-	return pannier.handle_attack_hand(L)
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Initialize()
-	if(ispath(pannier))
-		pannier = new pannier(src)
-	. = ..()
-
-// universal_understand is buggy and produces double lines, so we'll just do this hack instead.
-/mob/living/simple_mob/animal/sif/grafadreka/trained/say_understands(var/mob/other, var/datum/language/speaking = null)
-	if(!speaking || speaking.name == LANGUAGE_GALCOM)
-		return TRUE
-	return ..()
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/update_icon()
-	. = ..()
-	if(pannier)
-		var/image/I = image(icon, "[current_icon_state]-pannier")
-		I.color = pannier.color
-		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
-		if(offset_compiled_icon)
-			I.pixel_x = offset_compiled_icon
-		add_overlay(I)
