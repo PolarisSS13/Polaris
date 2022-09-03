@@ -310,7 +310,7 @@ var/global/list/wounds_being_tended_by_drakes = list()
 	// Process food and sap chems.
 	if(reagents?.total_volume)
 		for(var/datum/reagent/chem in reagents.reagent_list)
-			var/removed = min(REM, min(chem.ingest_met, chem.volume))
+			var/removed = clamp(chem.ingest_met, REM, chem.volume)
 			chem.affect_animal(src, removed)
 			reagents.remove_reagent(chem.id, removed)
 
