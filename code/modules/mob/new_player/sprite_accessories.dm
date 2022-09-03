@@ -1539,7 +1539,7 @@ shaved
 */
 
 /datum/sprite_accessory/facial_hair
-	icon = 'icons/mob/Human_face.dmi'
+	icon = 'icons/mob/human_face.dmi'
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/facial_hair/shaved
