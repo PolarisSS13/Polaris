@@ -4,7 +4,7 @@
 	path = /obj/item/clothing/suit/storage/apron
 	slot = slot_wear_suit
 	sort_category = "Suits and Overwear"
-	cost = 2
+	cost = 1
 
 /datum/gear/suit/apron_white
 	display_name = "apron, colorable"
@@ -25,22 +25,27 @@
 /datum/gear/suit/puffer_coat
 	display_name = "puffer coat"
 	path = /obj/item/clothing/suit/jacket/puffer
+	cost = 2
 
 /datum/gear/suit/puffer_vest
 	display_name = "puffer vest"
 	path = /obj/item/clothing/suit/jacket/puffer/vest
+	cost = 2
 
 /datum/gear/suit/bomber
 	display_name = "bomber jacket"
 	path = /obj/item/clothing/suit/storage/toggle/bomber
+	cost = 2
 
 /datum/gear/suit/bomber_alt
 	display_name = "bomber jacket 2"
 	path = /obj/item/clothing/suit/storage/bomber/alt
+	cost = 2
 
 /datum/gear/suit/bomber_retro
 	display_name = "bomber jacket, retro"
 	path = /obj/item/clothing/suit/storage/toggle/bomber/retro
+	cost = 2
 
 /datum/gear/suit/leather_jacket
 	display_name = "leather jacket, black"
@@ -91,7 +96,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(mil_jackets))
 
 /datum/gear/suit/greyjacket
-	display_name = "grey jacket"
+	display_name = "jacket, grey"
 	path = /obj/item/clothing/suit/storage/greyjacket
 
 /datum/gear/suit/brown_trenchcoat
@@ -125,6 +130,7 @@
 /datum/gear/suit/hoodie
 	display_name = "hoodie selection"
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
+	cost = 2
 
 /datum/gear/suit/hoodie/New()
 	..()
@@ -137,6 +143,7 @@
 /datum/gear/suit/labcoat
 	display_name = "labcoat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
+	cost = 2
 
 /datum/gear/suit/labcoat/blue
 	display_name = "labcoat, blue"
@@ -185,19 +192,18 @@
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/plaguedoctor
 
 /datum/gear/suit/roles/surgical_apron
-	display_name = "surgical apron"
+	display_name = "apron, surgical"
 	path = /obj/item/clothing/suit/surgicalapron
 	allowed_roles = list("Medical Doctor","Chief Medical Officer")
+	cost = 1
 
 /datum/gear/suit/overalls
 	display_name = "overalls"
 	path = /obj/item/clothing/suit/storage/apron/overalls
-	cost = 1
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
 	path = /obj/item/clothing/accessory/poncho
-	cost = 1
 
 /datum/gear/suit/poncho/New()
 	..()
@@ -210,7 +216,6 @@
 /datum/gear/suit/roles/poncho
 	display_name = "poncho, cargo"
 	path = /obj/item/clothing/accessory/poncho/roles/cargo
-	cost = 1
 
 /datum/gear/suit/roles/poncho/security
 	display_name = "poncho, security"
@@ -306,7 +311,6 @@
 /datum/gear/suit/unathi_robe
 	display_name = "roughspun robe"
 	path = /obj/item/clothing/suit/unathi/robe
-	cost = 1
 
 /datum/gear/suit/black_lawyer_jacket
 	display_name = "suit jacket, black"
@@ -349,6 +353,7 @@
 /datum/gear/suit/wintercoat
 	display_name = "winter coat"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
+	cost = 2
 
 /datum/gear/suit/wintercoat/captain
 	display_name = "winter coat, site manager"
@@ -409,7 +414,6 @@
 	display_name = "winter coat, science"
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat/science
 	allowed_roles = list("Research Director","Scientist", "Roboticist", "Xenobiologist", "Xenobotanist")
-
 
 /datum/gear/suit/wintercoat/science/robotics
 	display_name = "winter coat, robotics"
@@ -485,7 +489,7 @@
 // winter coats end here
 
 /datum/gear/suit/varsity
-	display_name = "varsity jacket selection"
+	display_name = "jacket, varsity selection"
 	path = /obj/item/clothing/suit/varsity
 
 /datum/gear/suit/varsity/New()
@@ -497,7 +501,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(varsities))
 
 /datum/gear/suit/track
-	display_name = "track jacket selection"
+	display_name = "jacket, track selection"
 	path = /obj/item/clothing/suit/storage/toggle/track
 
 /datum/gear/suit/track/New()
@@ -509,19 +513,19 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tracks))
 
 /datum/gear/suit/flannel
-	display_name = "grey flannel"
+	display_name = "flannel, grey"
 	path = /obj/item/clothing/suit/storage/flannel
 
 /datum/gear/suit/flannel/red
-	display_name = "red flannel"
+	display_name = "flannel, red"
 	path = /obj/item/clothing/suit/storage/flannel/red
 
 /datum/gear/suit/flannel/aqua
-	display_name = "aqua flannel"
+	display_name = "flannel, aqua"
 	path = /obj/item/clothing/suit/storage/flannel/aqua
 
 /datum/gear/suit/flannel/brown
-	display_name = "brown flannel"
+	display_name = "flannel, brown"
 	path = /obj/item/clothing/suit/storage/flannel/brown
 
 /datum/gear/suit/denim_jacket
@@ -595,6 +599,7 @@
 /datum/gear/suit/snowsuit
 	display_name = "snowsuit"
 	path = /obj/item/clothing/suit/storage/snowsuit
+	cost = 2
 
 /datum/gear/suit/snowsuit/command
 	display_name = "snowsuit, command"
