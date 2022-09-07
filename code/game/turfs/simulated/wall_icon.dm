@@ -126,6 +126,6 @@
 	wall_connections = dirs_to_corner_states(dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(istype(material) && istype(W.material) && material.icon_base == W.material.icon_base)
+	if (istype(material) && istype(W.material) && ((material.icon_base == W.material.icon_base) || (material.icon_base == "solid" && W.material.icon_base == "brick")))
 		return 1
 	return 0
