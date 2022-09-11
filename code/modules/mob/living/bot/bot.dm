@@ -250,7 +250,8 @@
 	return
 
 /mob/living/bot/proc/handleFrustrated(var/targ)
-	obstacle = targ ? target_path[1] : patrol_path[1]
+	if((targ && LAZYLEN(target_path)) || LAZYLEN(patrol_path))
+		obstacle = targ ? target_path[1] : patrol_path[1]
 	target_path = list()
 	patrol_path = list()
 	return
