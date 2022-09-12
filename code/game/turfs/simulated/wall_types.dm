@@ -103,8 +103,6 @@
 	desc = "A wall made out of concrete bricks"
 	material = MAT_CONCRETE
 	icon_state = "brick"
-
-
 /turf/simulated/wall/r_concrete
 	desc = "A sturdy wall made of concrete and reinforced with plasteel rebar"
 	material = MAT_CONCRETE
