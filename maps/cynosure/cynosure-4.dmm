@@ -3462,6 +3462,8 @@
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
 /obj/item/reagent_containers/food/drinks/cans/waterbottle,
+/obj/item/clothing/suit/space/sports,
+/obj/item/clothing/head/helmet/space/sports,
 /turf/simulated/floor/tiled,
 /area/tcommsat/cynosure/lounge)
 "Ju" = (

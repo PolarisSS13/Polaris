@@ -69,7 +69,7 @@
 /obj/item/clothing/head/helmet/space/void/scg/heavy
 	name = "heavy Fleet voidsuit helmet"
 	desc = "A heavier version of the standard issue SCG Marine armoured voidsuit helmet for use in hazardous environment combat scenarios."
-	icon_state = "scg_void"
+	icon_state = "scg_voidcombat"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 35, bio = 100, rad = 70)
 	siemens_coefficient = 0.6
 

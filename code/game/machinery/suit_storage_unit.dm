@@ -622,7 +622,7 @@
 	name = "Nonstandard suit cycler"
 	model_text = "Nonstandard"
 	req_access = list(access_syndicate)
-	departments = list("Mercenary", "Charring","No Change")
+	departments = list("Mercenary", "Light Boarding", "Charring","No Change")
 	can_repair = 1
 
 /obj/machinery/suit_cycler/exploration
@@ -1100,6 +1100,9 @@
 		if("Charring")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/merc/fire
 			parent_suit = /obj/item/clothing/suit/space/void/merc/fire
+		if("Light Boarding")
+			parent_helmet = /obj/item/clothing/head/helmet/space/void/boarding_ops
+			parent_suit = /obj/item/clothing/suit/space/void/boarding_ops
 		if("Gem-Encrusted", "Wizard")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/wizard
 			parent_suit = /obj/item/clothing/suit/space/void/wizard
@@ -1149,9 +1152,9 @@
 			var/suit_check = ((suit!=null && (initial(parent_suit.icon_state) in icon_states(suit.sprite_sheets_obj[target_species],1))) || suit==null)
 			var/suit_helmet_check = ((suit!=null && suit.helmet!=null && (initial(parent_helmet.icon_state) in icon_states(suit.helmet.sprite_sheets_obj[target_species],1))) || suit==null || suit.helmet==null)
 			if(helmet_check && suit_check && suit_helmet_check)
-				if(helmet) 
+				if(helmet)
 					helmet.refit_for_species(target_species)
-				if(suit) 
+				if(suit)
 					suit.refit_for_species(target_species)
 					if(suit.helmet)
 						suit.helmet.refit_for_species(target_species)
@@ -1160,9 +1163,9 @@
 				T.visible_message("[bicon(src)]<span class='warning'>Unable to apply specified cosmetics with specified species. Please try again with a different species or cosmetic option selected.</span>")
 				return
 		else
-			if(helmet) 
+			if(helmet)
 				helmet.refit_for_species(target_species)
-			if(suit) 
+			if(suit)
 				suit.refit_for_species(target_species)
 				if(suit.helmet)
 					suit.helmet.refit_for_species(target_species)

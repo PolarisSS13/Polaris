@@ -163,6 +163,11 @@
 /obj/random/landmine,
 /turf/template_noop,
 /area/submap/MilitaryCamp1)
+"M" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/random/helmet,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
 "P" = (
 /obj/item/cell/device/weapon/empty,
 /turf/simulated/floor/concrete,
@@ -472,7 +477,7 @@ V
 Z
 x
 m
-v
+M
 v
 m
 q

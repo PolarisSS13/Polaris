@@ -80,7 +80,7 @@
 /obj/item/clothing/head/helmet/riot/sifcop
 	name = "\improper SifGuard police helmet"
 	desc = "A visored helmet printed with the livery of the SifGuard Police Division."
-	icon_state = "sifcop"
+	icon_state = "sifcop_helmet"
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0)
 
 /obj/item/clothing/head/helmet/laserproof
