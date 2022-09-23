@@ -265,6 +265,11 @@
 	desc = "An Sif Defense Force beret carrying insignia of the Anti-Piracy taskforce. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_black_patrol"
 
+/obj/item/clothing/head/beret/solgov/sifguard/sifcop
+	name = "\improper SifGuard Police Division beret"
+	desc = "An Sif Defense Force beret carrying insignia of the civilian law enforcement division (SGPD). Standard issue."
+	icon_state = "beret_sifcop"
+
 /*
  * Fleet (Berets)
  */
