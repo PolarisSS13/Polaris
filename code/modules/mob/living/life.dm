@@ -41,10 +41,10 @@
 
 	//Check if we're on fire
 	handle_fire()
-	
+
 	if(client && !(client.prefs.ambience_freq == 0))	// Handle re-running ambience to mobs if they've remained in an area, AND have an active client assigned to them, and do not have repeating ambience disabled.
 		handle_ambience()
-	
+
 	//stuff in the stomach
 	handle_stomach()
 
@@ -66,6 +66,9 @@
 	handle_regular_hud_updates()
 
 	handle_vision()
+
+	handle_input_typing_indicator()
+
 
 /mob/living/proc/handle_breathing()
 	return

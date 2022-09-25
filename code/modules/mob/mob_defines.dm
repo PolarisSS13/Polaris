@@ -213,6 +213,7 @@
 	var/get_rig_stats = 0 //Moved from computer.dm
 
 	var/typing
+	var/textbox_typing // Typing messages in a textbox will keep the typing indicator active.
 	var/obj/effect/decal/typing_indicator
 
 	var/low_priority = FALSE //Skip processing life() if there's just no players on this Z-level

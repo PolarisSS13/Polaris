@@ -27,7 +27,7 @@
 	if(state && !typing)
 		add_overlay(typing_indicator, TRUE)
 		typing = TRUE
-	else if(typing)
+	else if(!state && typing)
 		cut_overlay(typing_indicator, TRUE)
 		typing = FALSE
 
@@ -41,9 +41,11 @@
 	set hidden = 1
 
 	set_typing_indicator(TRUE)
+	textbox_typing = TRUE
 	var/message = input("","say (text)") as text
 	set_typing_indicator(FALSE)
-	
+	textbox_typing = FALSE
+
 	if(message)
 		say_verb(message)
 
@@ -52,8 +54,25 @@
 	set hidden = 1
 
 	set_typing_indicator(TRUE)
+	textbox_typing = TRUE
 	var/message = input("","me (text)") as text
 	set_typing_indicator(FALSE)
+	textbox_typing = FALSE
 
 	if(message)
 		me_verb(message)
+
+/mob/proc/handle_input_typing_indicator()
+	if(!is_preference_enabled(/datum/client_preference/show_typing_indicator))
+		return
+
+	// winget() has to contact the client, so could block the rest of life() for poorer connections
+	// If a textbox has already latched this up, don't bother checking.
+	if(!textbox_typing)
+		spawn()
+			var/t = winget(src, "mainwindow.input", "text")
+			if(cmptext(copytext(t, 1, 6), "say \"") && length(copytext(t, 6)))
+				set_typing_indicator(TRUE)
+			// Could have changed during the winget()
+			else if(!textbox_typing)
+				set_typing_indicator(FALSE)
