@@ -63,16 +63,16 @@
 		me_verb(message)
 
 /mob/proc/handle_input_typing_indicator()
+	set waitfor=FALSE
 	if(!is_preference_enabled(/datum/client_preference/show_typing_indicator))
 		return
 
 	// winget() has to contact the client, so could block the rest of life() for poorer connections
 	// If a textbox has already latched this up, don't bother checking.
 	if(!textbox_typing)
-		spawn()
-			var/t = winget(src, "mainwindow.input", "text")
-			if(cmptext(copytext(t, 1, 6), "say \"") && length(copytext(t, 6)))
-				set_typing_indicator(TRUE)
-			// Could have changed during the winget()
-			else if(!textbox_typing)
-				set_typing_indicator(FALSE)
+		var/t = winget(src, "mainwindow.input", "text")
+		if(cmptext(copytext(t, 1, 6), "say \"") && length(copytext(t, 6)))
+			set_typing_indicator(TRUE)
+		// Could have changed during the winget()
+		else if(!textbox_typing)
+			set_typing_indicator(FALSE)
