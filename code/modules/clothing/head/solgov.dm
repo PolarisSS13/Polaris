@@ -330,22 +330,22 @@
 /obj/item/clothing/head/ushanka/solgov
 	name = "\improper SifGuard fur hat"
 	desc = "An Sif Defense Force synthfur-lined hat for operating in cold environments."
-	icon_state = "sifguardushankadown"
+	icon_state = "sifguardushanka"
 
 /obj/item/clothing/head/ushanka/solgov/fleet
 	name = "fleet fur hat"
 	desc = "An SCG Fleet synthfur-lined hat for operating in cold environments."
-	icon_state = "flushankadown"
+	icon_state = "flushanka"
 
 /obj/item/clothing/head/ushanka/solgov/marine
 	name = "marine fur hat"
 	desc = "An SCG Marine synthfur-lined hat for operating in cold environments."
-	icon_state = "mar1ushankadown"
+	icon_state = "mar1ushanka"
 
 /obj/item/clothing/head/ushanka/solgov/marine/green
 	name = "green marine fur hat"
 	desc = "An SCG Marine synthfur-lined hat for operating in cold environments."
-	icon_state = "mar2ushankadown"
+	icon_state = "mar2ushanka"
 
 /*
  * Almachi
