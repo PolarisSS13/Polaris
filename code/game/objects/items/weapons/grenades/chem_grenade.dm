@@ -1,7 +1,6 @@
 /obj/item/grenade/chem_grenade
 	name = "grenade casing"
 	icon_state = "chemg"
-	item_state = "grenade"
 	desc = "A hand made chemical grenade."
 	w_class = ITEMSIZE_SMALL
 	force = 2.0
@@ -193,6 +192,7 @@
 	name = "large chem grenade"
 	desc = "An oversized grenade that affects a larger area."
 	icon_state = "large_grenade"
+	item_state = "largechemg"
 	allowed_containers = list(/obj/item/reagent_containers/glass)
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
 	affected_area = 4
