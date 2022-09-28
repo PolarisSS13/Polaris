@@ -17,9 +17,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 	var/g_ears3 = 30	// Ear tertiary color
 	var/b_ears3 = 30	// Ear tertiary color
 	var/tail_style		// Type of selected tail style
-	var/r_tail = 30		// Tail/Taur color
-	var/g_tail = 30		// Tail/Taur color
-	var/b_tail = 30		// Tail/Taur color
+	var/r_tail = 30		// Tail color
+	var/g_tail = 30		// Tail color
+	var/b_tail = 30		// Tail color
 	var/r_tail2 = 30 	// For extra overlay.
 	var/g_tail2 = 30	// For extra overlay.
 	var/b_tail2 = 30	// For extra overlay.
@@ -693,9 +693,9 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 			reset_limbs() // Safety for species with incompatible manufacturers; easier than trying to do it case by case.
 			pref.body_markings.Cut() // Basically same as above.
-			
+
 			pref.sanitize_body_styles()
-			
+
 			var/min_age = get_min_age()
 			var/max_age = get_max_age()
 			pref.age = max(min(pref.age, max_age), min_age)
@@ -1146,7 +1146,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["tail_color"])
-		var/new_tailc = input(user, "Choose your character's tail/taur colour:", "Character Preference",
+		var/new_tailc = input(user, "Choose your character's tail colour:", "Character Preference",
 			rgb(pref.r_tail, pref.g_tail, pref.b_tail)) as color|null
 		if(new_tailc)
 			pref.r_tail = hex2num(copytext(new_tailc, 2, 4))
@@ -1155,7 +1155,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["tail_color2"])
-		var/new_tailc2 = input(user, "Choose your character's secondary tail/taur colour:", "Character Preference",
+		var/new_tailc2 = input(user, "Choose your character's secondary tail colour:", "Character Preference",
 			rgb(pref.r_tail2, pref.g_tail2, pref.b_tail2)) as color|null
 		if(new_tailc2)
 			pref.r_tail2 = hex2num(copytext(new_tailc2, 2, 4))
@@ -1164,7 +1164,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 			return TOPIC_REFRESH_UPDATE_PREVIEW
 
 	else if(href_list["tail_color3"])
-		var/new_tailc3 = input(user, "Choose your character's tertiary tail/taur colour:", "Character Preference",
+		var/new_tailc3 = input(user, "Choose your character's tertiary tail colour:", "Character Preference",
 			rgb(pref.r_tail3, pref.g_tail3, pref.b_tail3)) as color|null
 		if(new_tailc3)
 			pref.r_tail3 = hex2num(copytext(new_tailc3, 2, 4))
