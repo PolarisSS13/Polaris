@@ -568,12 +568,13 @@
 	item_state_slots = list(slot_r_hand_str = "denim_jacket", slot_l_hand_str = "denim_jacket")
 
 /obj/item/clothing/suit/storage/toggle/denim_jacket/nanotrasen
+	name = "corporate denim jacket"
 	desc = "A denim coat. A corporate logo is proudly displayed on the back."
 	icon_state = "denim_jacket_nt"
 	item_state_slots = list(slot_r_hand_str = "denim_jacket", slot_l_hand_str = "denim_jacket")
 
 /obj/item/clothing/suit/storage/toggle/denim_jacket/nanotrasen/sleeveless
-	name = "denim vest"
+	name = "corporate denim vest"
 	desc = "A denim vest. A corporate logo is proudly displayed on the back."
 	icon_state = "denim_jacket_nt_sleeveless"
 	body_parts_covered = UPPER_TORSO
@@ -872,9 +873,9 @@
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
 
-/obj/item/clothing/suit/storage/snowsuit
-	name = "snowsuit"
-	desc = "A suit made to keep you nice and toasty on cold winter days. Or at least alive."
+/obj/item/clothing/suit/storage/insulated
+	name = "insulted jacket"
+	desc = "A jacket made to keep you nice and toasty on cold winter days. Or at least alive."
 	icon_state = "snowsuit"
 	item_state_slots = list(slot_r_hand_str = "labcoat", slot_l_hand_str = "labcoat")
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS
@@ -884,28 +885,28 @@
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 10, rad = 0)
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/tank/emergency/oxygen, /obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/reagent_containers/food/drinks/flask)
 
-/obj/item/clothing/suit/storage/snowsuit/command
-	name = "command snowsuit"
+/obj/item/clothing/suit/storage/insulated/command
+	name = "command insulted jacket"
 	icon_state = "snowsuit_command"
 
-/obj/item/clothing/suit/storage/snowsuit/security
-	name = "security snowsuit"
+/obj/item/clothing/suit/storage/insulated/security
+	name = "security insulted jacket"
 	icon_state = "snowsuit_security"
 
-/obj/item/clothing/suit/storage/snowsuit/medical
-	name = "medical snowsuit"
+/obj/item/clothing/suit/storage/insulated/medical
+	name = "medical insulted jacket"
 	icon_state = "snowsuit_medical"
 
-/obj/item/clothing/suit/storage/snowsuit/engineering
-	name = "engineering snowsuit"
+/obj/item/clothing/suit/storage/insulated/engineering
+	name = "engineering insulted jacket"
 	icon_state = "snowsuit_engineering"
 
-/obj/item/clothing/suit/storage/snowsuit/cargo
-	name = "cargo snowsuit"
+/obj/item/clothing/suit/storage/insulated/cargo
+	name = "cargo insulted jacket"
 	icon_state = "snowsuit_cargo"
 
-/obj/item/clothing/suit/storage/snowsuit/science
-	name = "science snowsuit"
+/obj/item/clothing/suit/storage/insulated/science
+	name = "science insulted jacket"
 	icon_state = "snowsuit_science"
 
 /obj/item/clothing/suit/caution
