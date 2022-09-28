@@ -273,12 +273,12 @@ Ccomp's first proc.
 	var/target = input("Select a ckey to allow to rejoin", "Allow Respawn Selector") as null|anything in GLOB.respawn_timers
 	if(!target)
 		return
-	
+
 	if(GLOB.respawn_timers[target] == -1) // Their respawn timer is set to -1, which is 'not allowed to respawn'
 		var/response = alert(src, "Are you sure you wish to allow this individual to respawn? They would normally not be able to.","Allow impossible respawn?","No","Yes")
 		if(response == "No")
 			return
-	
+
 	GLOB.respawn_timers -= target
 
 	var/found_client = FALSE
@@ -295,7 +295,7 @@ Ccomp's first proc.
 
 	if(!found_client)
 		to_chat(src, "<span class='notice'>The associated client didn't appear to be connected, so they couldn't be notified, but they can now respawn if they reconnect.</span>")
-	
+
 	log_admin("[key_name(usr)] allowed [found_client ? key_name(found_client) : target] to bypass the respawn time limit")
 	message_admins("Admin [key_name_admin(usr)] allowed [found_client ? key_name_admin(found_client) : target] to bypass the respawn time limit", 1)
 
@@ -506,9 +506,11 @@ Traitors and the like can also be revived with the previous role mostly intact.
 	//If desired, apply equipment.
 	if(equipment)
 		if(charjob)
+			var/datum/mind/player_mind = new_character.mind
 			job_master.EquipRank(new_character, charjob, 1)
-			new_character.mind.assigned_role = charjob
-			new_character.mind.role_alt_title = job_master.GetPlayerAltTitle(new_character, charjob)
+			if(player_mind)
+				player_mind.assigned_role = charjob
+				player_mind.role_alt_title = job_master.GetPlayerAltTitle(new_character, charjob)
 		equip_custom_items(new_character)
 
 	//If desired, add records.

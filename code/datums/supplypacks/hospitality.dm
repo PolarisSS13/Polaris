@@ -47,7 +47,7 @@
 	cost = 10
 	containertype = /obj/structure/closet/crate/gilthari
 	containername = "crate of bar supplies"
-	
+
 /datum/supply_pack/hospitality/cookingoil
 	name = "Cooking oil tank crate"
 	contains = list(/obj/structure/reagent_dispensers/cookingoil)
@@ -79,6 +79,14 @@
 	containertype = /obj/structure/closet/crate/allico
 	containername = "crate of gifts"
 
+/datum/supply_pack/hospitality/holywater
+	name = "Holy water crate"
+	contains = list(
+		/obj/item/reagent_containers/food/drinks/bottle/holywater = 3
+		)
+	cost = 15
+	containertype = /obj/structure/closet/crate/gilthari
+	containername = "holy water crate"
+
 /datum/supply_pack/randomised/hospitality/
 	group = "Hospitality"
-

@@ -21,7 +21,7 @@
 	var/static/list/acceptable_items // List of the items you can put in
 	var/static/list/available_recipes // List of the recipes you can use
 	var/static/list/acceptable_reagents // List of the reagents you can put in
-	
+
 	var/static/max_n_of_items = 20
 	var/appliancetype = MICROWAVE
 	var/datum/looping_sound/microwave/soundloop
@@ -35,7 +35,7 @@
 
 /obj/machinery/microwave/Initialize()
 	. = ..()
-	
+
 	reagents = new/datum/reagents(100)
 	reagents.my_atom = src
 
@@ -47,7 +47,7 @@
 			var/datum/recipe/type = T
 			if((initial(type.appliance) & appliancetype))
 				available_recipes += new type
-		
+
 		acceptable_items = new
 		acceptable_reagents = new
 		for (var/datum/recipe/recipe in available_recipes)
@@ -302,7 +302,7 @@
 			cooked = fail()
 			cooked.forceMove(src.loc)
 		return
-		
+
 	//Making multiple copies of a recipe
 	var/halftime = round(recipe.time*4/10/2)
 	if(!wzhzhzh(halftime))
@@ -396,7 +396,7 @@
 		icon_state = "mw"
 	updateUsrDialog()
 	soundloop.stop()
-	
+
 /obj/machinery/microwave/proc/stop()
 	playsound(src.loc, 'sound/machines/ding.ogg', 50, 1)
 	operating = FALSE // Turn it off again aferwards
@@ -471,12 +471,13 @@
 
 	switch(href_list["action"])
 		if ("cook")
+			playsound(loc, 'sound/machines/quiet_beep.ogg', 50, 1)
 			cook()
 
 		if ("dispose")
 			dispose()
 	return
-	
+
 /obj/machinery/microwave/verb/Eject()
 	set src in oview(1)
 	set category = "Object"
@@ -488,7 +489,7 @@
 
 	if(!do_after(usr, 1 SECONDS, target = src))
 		return
-	
+
 	if(operating)
 		to_chat(usr, "<span class='warning'>You can't do that, [src] door is locked!</span>")
 		return
@@ -524,7 +525,7 @@
 		/obj/item/holder
 	)
 	result = /obj/effect/decal/cleanable/blood/gibs
-	
+
 /datum/recipe/splat/before_cook(obj/container)
 	if(istype(container, /obj/machinery/microwave))
 		var/obj/machinery/microwave/M = container

@@ -217,6 +217,12 @@
 	mappath = 'maps/submaps/surface_submaps/wilderness/kururakden.dmm'
 	cost = 5
 
+/datum/map_template/surface/wilderness/normal/GrafadrekaDen
+	name = "Grafadreka Den"
+	desc = "The den of a Grafadreka pack. May contain hibernating members."
+	mappath = 'maps/submaps/surface_submaps/wilderness/grafadreka_den.dmm'
+	cost = 5
+
 /datum/map_template/surface/wilderness/normal/DecoupledEngine
 	name = "Decoupled Engine"
 	desc = "A damaged fission engine jettisoned from a starship long ago."
@@ -342,4 +348,3 @@
 	desc = "Gathering of acolytes gone wrong."
 	mappath = 'maps/submaps/surface_submaps/wilderness/deathden.dmm'
 	cost = 15
-

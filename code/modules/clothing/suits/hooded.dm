@@ -253,7 +253,7 @@
 	hoodtype = /obj/item/clothing/head/hood/winter/engineering/atmos
 
 /obj/item/clothing/suit/storage/hooded/wintercoat/engineering/ce
-	name = "atmospherics winter coat"
+	name = "chief engineer's winter coat"
 	desc = "A heavy jacket made from 'synthetic' animal furs. It seems to have burn marks on the inside from a phoron fire."
 	icon_state = "coatce"
 	hoodtype = /obj/item/clothing/head/hood/winter/engineering/ce

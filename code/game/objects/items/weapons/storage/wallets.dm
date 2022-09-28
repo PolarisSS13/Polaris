@@ -10,7 +10,7 @@
 		/obj/item/card,
 		/obj/item/clothing/mask/smokable/cigarette/,
 		/obj/item/flashlight/pen,
-		/obj/item/tape,
+		/obj/item/cassette_tape,
 		/obj/item/cartridge,
 		/obj/item/encryptionkey,
 		/obj/item/seeds,
@@ -103,7 +103,7 @@
 /obj/item/storage/wallet/poly/Initialize()
 	. = ..()
 	verbs |= /obj/item/storage/wallet/poly/proc/change_color
-	color = "#"+get_random_colour()
+	color = get_random_colour()
 	update_icon()
 
 /obj/item/storage/wallet/poly/proc/change_color()

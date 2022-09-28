@@ -500,7 +500,8 @@
 				/obj/item/stack/rods{amount = 10},
 				/obj/item/stack/material/sandstone{amount = 10},
 				/obj/item/stack/material/marble{amount = 10},
-				/obj/item/stack/material/plasteel{amount = 10})
+				/obj/item/stack/material/plasteel{amount = 10},
+				/obj/item/stack/material/concrete{amount = 10})
 
 /obj/random/material/refined //Random materials for building stuff
 	name = "random refined material"
@@ -530,7 +531,9 @@
 				/obj/item/stack/material/osmium{amount = 3},
 				/obj/item/stack/material/titanium{amount = 5},
 				/obj/item/stack/material/tritium{amount = 3},
-				/obj/item/stack/material/verdantium{amount = 2})
+				/obj/item/stack/material/verdantium{amount = 2},
+				/obj/item/stack/material/concrete{amount =10},
+				/obj/item/stack/material/plasteel/rebar{amount = 5})
 
 /obj/random/material/precious //Precious metals, go figure
 	name = "random precious metal"

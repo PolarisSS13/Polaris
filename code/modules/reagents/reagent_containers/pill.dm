@@ -328,9 +328,8 @@
 
 /obj/item/reagent_containers/pill/zoom/Initialize()
 	. = ..()
-	reagents.add_reagent("impedrezene", 10)
+	reagents.add_reagent("royale", 10)
 	reagents.add_reagent("synaptizine", 5)
-	reagents.add_reagent("hyperzine", 5)
 	color = reagents.get_color()
 
 /obj/item/reagent_containers/pill/diet
@@ -341,4 +340,40 @@
 /obj/item/reagent_containers/pill/diet/Initialize()
 	. = ..()
 	reagents.add_reagent("lipozine", 2)
+	color = reagents.get_color()
+
+//// Recreational drugs for loadout
+/obj/item/reagent_containers/pill/unidentified
+	name = "mysterious pill"
+	desc = "You're not quite sure what's in this..."
+	icon_state = "pill1"
+
+/obj/item/reagent_containers/pill/unidentified/bliss/Initialize()
+	. = ..()
+	reagents.add_reagent("bliss", 10)
+	color = reagents.get_color()
+
+/obj/item/reagent_containers/pill/unidentified/snowflake/Initialize()
+	. = ..()
+	reagents.add_reagent("snowflake", 10)
+	color = reagents.get_color()
+
+/obj/item/reagent_containers/pill/unidentified/royale/Initialize()
+	. = ..()
+	reagents.add_reagent("royale", 5)
+	color = reagents.get_color()
+
+/obj/item/reagent_containers/pill/unidentified/sinkhole/Initialize()
+	. = ..()
+	reagents.add_reagent("sinkhole", 5)
+	color = reagents.get_color()
+
+/obj/item/reagent_containers/pill/unidentified/colorspace/Initialize()
+	. = ..()
+	reagents.add_reagent("colorspace", 10)
+	color = reagents.get_color()
+
+/obj/item/reagent_containers/pill/unidentified/schnappi/Initialize()
+	. = ..()
+	reagents.add_reagent("schnappi", 5)
 	color = reagents.get_color()

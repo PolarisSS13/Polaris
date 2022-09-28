@@ -218,7 +218,7 @@
 		if(H.reagents.reagent_list.len >= 1)
 			for(var/datum/reagent/R in H.reagents.reagent_list)
 				reagentData[++reagentData.len] = list(
-					"name" = R.name, 
+					"name" = R.name,
 					"amount" = R.volume,
 					"overdose" = (R.overdose && R.volume > R.overdose) ? TRUE : FALSE,
 				)
@@ -282,7 +282,7 @@
 
 			if(istype(E, /obj/item/organ/external/chest) && H.is_lung_ruptured())
 				organData["lungRuptured"] = 1
-			
+
 			for(var/datum/wound/W in E.wounds)
 				if(W.internal)
 					organData["internalBleeding"] = 1

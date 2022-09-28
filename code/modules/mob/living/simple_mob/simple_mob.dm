@@ -120,6 +120,7 @@
 	var/special_attack_charges = null		// If set, special attacks will work off of a charge system, and won't be usable if all charges are expended. Good for grenades.
 	var/special_attack_cooldown = null		// If set, special attacks will have a cooldown between uses.
 	var/last_special_attack = null			// world.time when a special attack occured last, for cooldown calculations.
+	var/projectileverb = "fires"
 
 	//Damage resistances
 	var/grab_resist = 0				// Chance for a grab attempt to fail. Note that this is not a true resist and is just a prob() of failure.
@@ -253,7 +254,7 @@
 /mob/living/simple_mob/Stat()
 	..()
 	if(statpanel("Status") && show_stat_health)
-		stat(null, "Health: [round((health / getMaxHealth()) * 100)]%")
+		stat("Health:", "[round((health / getMaxHealth()) * 100)]%")
 
 /mob/living/simple_mob/lay_down()
 	..()

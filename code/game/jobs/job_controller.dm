@@ -46,21 +46,15 @@ var/global/datum/controller/occupations/job_master
 	return null
 
 /datum/controller/occupations/proc/GetPlayerAltTitle(mob/new_player/player, rank)
-	return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
+	if(!QDELETED(player) && player.client)
+		return player.client.prefs.GetPlayerAltTitle(GetJob(rank))
 
 /datum/controller/occupations/proc/AssignRole(var/mob/new_player/player, var/rank, var/latejoin = 0)
 	Debug("Running AR, Player: [player], Rank: [rank], LJ: [latejoin]")
 	if(player && player.mind && rank)
 		var/datum/job/job = GetJob(rank)
-		if(!job)
+		if(!job?.passes_standard_join_checks(player, rank))
 			return 0
-		if((job.minimum_character_age || job.min_age_by_species) && (player.client.prefs.age < job.get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
-			return 0
-		if(jobban_isbanned(player, rank))
-			return 0
-		if(!job.player_old_enough(player.client))
-			return 0
-
 		var/position_limit = job.total_positions
 		if(!latejoin)
 			position_limit = job.spawn_positions
@@ -108,13 +102,8 @@ var/global/datum/controller/occupations/job_master
 /datum/controller/occupations/proc/GiveRandomJob(var/mob/new_player/player)
 	Debug("GRJ Giving random job, Player: [player]")
 	for(var/datum/job/job in shuffle(occupations))
-		if(!job)
-			continue
 
-		if((job.minimum_character_age || job.min_age_by_species) && (player.client.prefs.age < job.get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
-			continue
-
-		if(job.is_species_banned(player.client.prefs.species, player.client.prefs.organ_data["brain"]) == TRUE)
+		if(!job?.passes_standard_join_checks(player, job.title))
 			continue
 
 		if(istype(job, GetJob("Assistant"))) // We don't want to give him assistant, that's boring!
@@ -325,7 +314,6 @@ var/global/datum/controller/occupations/job_master
 			unassigned -= player
 	return 1
 
-
 /datum/controller/occupations/proc/EquipRank(var/mob/living/carbon/human/H, var/rank, var/joined_late = 0)
 	if(!H)	return null
 
@@ -333,13 +321,11 @@ var/global/datum/controller/occupations/job_master
 	var/list/spawn_in_storage = list()
 
 	if(!joined_late)
-		var/obj/S = null
-		var/list/possible_spawns = list()
-		for(var/obj/effect/landmark/start/sloc in landmarks_list)
-			if(sloc.name != rank)	continue
-			if(locate(/mob/living) in sloc.loc)	continue
-			possible_spawns.Add(sloc)
-		if(possible_spawns.len)
+
+		var/obj/S
+		var/list/possible_spawns = job.get_spawn_locations(H, rank)
+
+		if(LAZYLEN(possible_spawns))
 			S = pick(possible_spawns)
 		if(!S)
 			S = locate("start*[rank]") // use old stype
@@ -457,11 +443,10 @@ var/global/datum/controller/occupations/job_master
 		H.mind.assigned_role = rank
 		alt_title = H.mind.role_alt_title
 
-		// If we're a silicon, we may be done at this point
-		if(job.mob_type & JOB_SILICON_ROBOT)
-			return H.Robotize()
-		if(job.mob_type & JOB_SILICON_AI)
-			return H
+		// If we're not a human mob, we may be done at this point
+		var/variant_mob = job.handle_nonhuman_mob(H, alt_title)
+		if(variant_mob)
+			return variant_mob
 
 		// TWEET PEEP
 		if(rank == "Site Manager")
@@ -617,12 +602,19 @@ var/global/datum/controller/occupations/job_master
 
 /datum/controller/occupations/proc/LateSpawn(var/client/C, var/rank)
 
-	var/datum/spawnpoint/spawnpos
-	var/fail_deadly = FALSE
-
+	// If the job overrides spawn behavior, don't worry too much about the whole business.
 	var/datum/job/J = SSjob.get_job(rank)
-	fail_deadly = J?.offmap_spawn
+	if(!J)
+		return
 
+	var/fail_deadly = FALSE
+	if(J.offmap_spawn)
+		fail_deadly = TRUE
+		var/list/latejoin_points = J.get_latejoin_spawn_locations(C.mob, rank)
+		if(length(latejoin_points))
+			return list("turf" = pick(latejoin_points), "msg" = null)
+
+	var/datum/spawnpoint/spawnpos
 	//Spawn them at their preferred one
 	if(C && C.prefs.spawnpoint)
 		if(!(C.prefs.spawnpoint in using_map.allowed_spawns))
@@ -639,9 +631,9 @@ var/global/datum/controller/occupations/job_master
 	. = list("turf","msg")
 	if(spawnpos && istype(spawnpos) && spawnpos.turfs.len)
 		if(spawnpos.check_job_spawning(rank))
-			.["turf"] = spawnpos.get_spawn_position()
-			.["msg"] = spawnpos.msg
-			.["channel"] = spawnpos.announce_channel
+			.["turf"] =     spawnpos.get_spawn_position()
+			.["msg"] =      spawnpos.msg
+			.["channel"] =  spawnpos.announce_channel
 		else
 			if(fail_deadly)
 				to_chat(C, "<span class='warning'>Your chosen spawnpoint ([spawnpos.display_name]) is unavailable for your chosen job. Please correct your spawn point choice.</span>")

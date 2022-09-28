@@ -12,7 +12,7 @@
 	if(labelled)
 		name += " ([labelled])"
 
-	overlays.Cut()
+	cut_overlays()
 	// Updates the plant overlay.
 	if(!isnull(seed))
 

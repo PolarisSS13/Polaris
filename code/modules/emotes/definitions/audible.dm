@@ -33,6 +33,10 @@
 	emote_message_3p = "chokes."
 	conscious = FALSE
 
+/decl/emote/audible/snarl
+	key = "snarl"
+	emote_message_3p = "snarls menacingly."
+
 /decl/emote/audible/gnarl
 	key = "gnarl"
 	emote_message_3p = "gnarls and shows USER_THEIR teeth."
@@ -203,6 +207,10 @@
 	key = "purrl"
 	emote_message_3p = "purrs."
 	emote_sound = 'sound/voice/cat_purr_long.ogg'
+
+/decl/emote/audible/karikscream
+	key = "karikscream"
+	emote_message_3p = "screeches!"
 
 /decl/emote/audible/teshsqueak
 	key = "surprised"

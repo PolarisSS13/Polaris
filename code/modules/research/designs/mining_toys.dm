@@ -48,3 +48,11 @@
 	materials = list(MAT_STEEL = 1000,"glass" = 1000)
 	build_path = /obj/item/depth_scanner
 	sort_string = "FBAAA"
+
+/datum/design/item/mining/pick_set
+	desc = "A rugged case containing a set of standardized picks used in archaeological digs."
+	id = "pick_set"
+	req_tech = list(TECH_ENGINEERING = 2, TECH_MATERIAL = 2)
+	materials = list(MAT_STEEL = 1700,"glass" = 200)
+	build_path = /obj/item/storage/excavation
+	sort_string = "FBAAB"

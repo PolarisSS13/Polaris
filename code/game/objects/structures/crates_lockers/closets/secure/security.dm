@@ -57,6 +57,7 @@
 		/obj/item/clothing/head/caphat/hop,
 		/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 		/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit/skirt,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/hop,
 		/obj/item/clothing/glasses/sunglasses)
 
 
@@ -97,6 +98,7 @@
 		/obj/item/melee/telebaton,
 		/obj/item/clothing/head/beret/sec/corporate/hos,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/security/hos,
 		/obj/item/clothing/shoes/boots/winter/security,
 		/obj/item/flashlight/maglight,
 		/obj/item/clothing/mask/gas/half,
@@ -244,7 +246,7 @@
 		/obj/item/storage/briefcase/crimekit,
 		/obj/item/taperecorder,
 		/obj/item/storage/bag/detective,
-		/obj/item/tape/random = 3)
+		/obj/item/cassette_tape/random = 3)
 
 /obj/structure/closet/secure_closet/injection
 	name = "lethal injections locker"

@@ -99,6 +99,16 @@
 	material = "resin"
 	girder_material = "resin"
 
+/turf/simulated/wall/concrete
+	desc = "A wall made out of concrete bricks"
+	material = MAT_CONCRETE
+	icon_state = "brick"
+/turf/simulated/wall/r_concrete
+	desc = "A sturdy wall made of concrete and reinforced with plasteel rebar"
+	material = MAT_CONCRETE
+	reinf_material = MAT_PLASTEELREBAR
+	icon_state = "rbrick"
+
 // Kind of wondering if this is going to bite me in the butt.
 /turf/simulated/wall/skipjack
 	material = "alienalloy"

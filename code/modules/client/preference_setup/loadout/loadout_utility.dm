@@ -75,7 +75,7 @@
 	path = /obj/item/paicard
 
 /datum/gear/utility/securecase
-	display_name = "secure briefcase"
+	display_name = "briefcase, secure"
 	path =/obj/item/storage/secure/briefcase
 	cost = 2
 
@@ -114,13 +114,13 @@
 	path = /obj/item/cell/device
 
 /datum/gear/utility/pen
-	display_name = "Fountain Pen"
+	display_name = "fountain pen"
 	path = /obj/item/pen/fountain
 
 /datum/gear/utility/umbrella
-	display_name = "Umbrella"
+	display_name = "umbrella"
 	path = /obj/item/melee/umbrella
-	cost = 3
+	cost = 1
 
 /datum/gear/utility/umbrella/New()
 	..()
@@ -130,7 +130,7 @@
 	display_name = "wheelchair selection"
 	path = /obj/item/wheelchair
 	cost = 4
-	
+
 /datum/gear/utility/wheelchair/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
@@ -145,19 +145,16 @@ modular computers
 ****************/
 
 /datum/gear/utility/cheaptablet
-	display_name = "tablet computer: cheap"
 	display_name = "tablet computer, cheap"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/cheap
 	cost = 3
 
 /datum/gear/utility/normaltablet
-	display_name = "tablet computer: advanced"
 	display_name = "tablet computer, advanced"
 	path = /obj/item/modular_computer/tablet/preset/custom_loadout/advanced
 	cost = 4
 
 /datum/gear/utility/customtablet
-	display_name = "tablet computer: custom"
 	display_name = "tablet computer, custom"
 	path = /obj/item/modular_computer/tablet
 	cost = 4
@@ -179,7 +176,7 @@ modular computers
 /datum/gear/utility/customlaptop
 	display_name = "laptop computer, custom"
 	path = /obj/item/modular_computer/laptop/preset/
-	cost = 7
+	cost = 5
 
 /datum/gear/utility/customlaptop/New()
 	..()

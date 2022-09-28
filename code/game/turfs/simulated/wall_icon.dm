@@ -12,10 +12,10 @@
 
 	if(istype(reinf_material))
 		name = "reinforced [material.display_name] wall"
-		desc = "It seems to be a section of hull reinforced with [reinf_material.display_name] and plated with [material.display_name]."
+		desc = "It seems to be a section of wall reinforced with [reinf_material.display_name] and plated with [material.display_name]."
 	else
 		name = "[material.display_name] wall"
-		desc = "It seems to be a section of hull plated with [material.display_name]."
+		desc = "It seems to be a section of wall plated with [material.display_name]."
 
 	if(material.opacity > 0.5 && !opacity)
 		set_light(1)
@@ -73,6 +73,9 @@
 				I = image('icons/turf/wall_masks.dmi', reinf_material.icon_reinf)
 				I.color = reinf_material.icon_colour
 				add_overlay(I)
+	var/image/texture = material.get_wall_texture()
+	if(texture)
+		add_overlay(texture)
 
 	if(damage != 0)
 		var/integrity = material.integrity
@@ -123,6 +126,6 @@
 	wall_connections = dirs_to_corner_states(dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(istype(material) && istype(W.material) && material.icon_base == W.material.icon_base)
+	if (istype(material) && istype(W.material) && ((material.icon_base == W.material.icon_base) || (material.icon_base == "solid" && W.material.icon_base == "brick")))
 		return 1
 	return 0

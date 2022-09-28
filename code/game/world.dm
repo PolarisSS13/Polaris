@@ -435,7 +435,6 @@ var/global/world_topic_spam_protect_time = world.timeofday
 	config.load("config/config.txt")
 	config.load("config/game_options.txt","game_options")
 	config.loadsql("config/dbconfig.txt")
-	config.loadforumsql("config/forumdbconfig.txt")
 
 /hook/startup/proc/loadMods()
 	world.load_mods()
@@ -580,6 +579,8 @@ var/global/failed_old_db_connections = 0
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 /proc/establish_db_connection()
+	if (!config.sql_enabled)
+		return 0
 	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
 
@@ -625,6 +626,8 @@ var/global/failed_old_db_connections = 0
 
 //This proc ensures that the connection to the feedback database (global variable dbcon) is established
 /proc/establish_old_db_connection()
+	if (!config.sql_enabled)
+		return 0
 	if(failed_old_db_connections > FAILED_DB_CONNECTION_CUTOFF)
 		return 0
 

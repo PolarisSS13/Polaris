@@ -1,6 +1,6 @@
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = "Used to seperate and package chemicals in to patches, pills, or bottles. Warranty void if used to create Space Drugs."
+	desc = "Used to seperate and package chemicals in to patches, pills, or bottles. Warranty void if used to create illicit drugs."
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'

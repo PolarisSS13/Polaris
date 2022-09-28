@@ -50,6 +50,7 @@
 					/obj/item/reagent_containers/food/drinks/glass2/wine = 10,
 					/obj/item/reagent_containers/food/drinks/metaglass = 10,
 					/obj/item/reagent_containers/food/drinks/metaglass/metapint = 10,
+					/obj/item/reagent_containers/glass/beaker/stopperedbottle = 10,
 					/obj/item/reagent_containers/food/drinks/bottle/gin = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/absinthe = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/bluecuracao = 5,

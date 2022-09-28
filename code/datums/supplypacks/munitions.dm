@@ -74,6 +74,18 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Shotgun crate"
 	access = access_armory
+	
+/datum/supply_pack/munitions/shotgunsemi
+	name = "Weapons - Semi-Automatic Shotgun crate"
+	contains = list(
+			/obj/item/storage/box/shotgunammo,
+			/obj/item/storage/box/shotgunshells,
+			/obj/item/gun/projectile/shotgun/semi = 2
+			)
+	cost = 100
+	containertype = /obj/structure/closet/crate/secure/weapon
+	containername = "Semi-Auto Shotgun crate"
+	access = access_armory
 
 /datum/supply_pack/munitions/erifle
 	name = "Weapons - Energy marksman"

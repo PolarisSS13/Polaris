@@ -121,6 +121,7 @@
 		/obj/item/seeds/lettuce = 3,
 		/obj/item/seeds/limeseed = 3,
 		/obj/item/seeds/mtearseed = 2,
+		/obj/item/seeds/nutmeg = 3,
 		/obj/item/seeds/orangeseed = 3,
 		/obj/item/seeds/onionseed = 3,
 		/obj/item/seeds/peanutseed = 3,
@@ -178,6 +179,7 @@
 		/obj/item/seeds/limeseed = 3,
 		/obj/item/seeds/mtearseed = 2,
 		/obj/item/seeds/nettleseed = 2,
+		/obj/item/seeds/nutmeg = 3,
 		/obj/item/seeds/orangeseed = 3,
 		/obj/item/seeds/peanutseed = 3,
 		/obj/item/seeds/plastiseed = 3,
@@ -347,7 +349,7 @@
 				dat += "LUM "
 			dat += "</td>"
 			dat += "<td>[S.amount]</td>"
-			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[S.ID]'>Purge</a></td>"
+			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a></td>"
 			dat += "</tr>"
 		if(hacked || emagged)
 			for (var/datum/seed_pile/S in piles_contra)
@@ -436,7 +438,7 @@
 					dat += "LUM "
 				dat += "</td>"
 				dat += "<td>[S.amount]</td>"
-				dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[S.ID]'>Purge</a></td>"
+				dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a></td>"
 				dat += "</tr>"
 		dat += "</table>"
 
@@ -463,11 +465,6 @@
 				else
 					piles -= N
 					qdel(N)
-			else if (task == "purge")
-				for (var/obj/O in N.seeds)
-					qdel(O)
-					piles -= N
-					qdel(N)
 			break
 	if(hacked || emagged)
 		for (var/datum/seed_pile/N in piles_contra)
@@ -482,11 +479,6 @@
 							qdel(N)
 						O.loc = src.loc
 					else
-						piles_contra -= N
-						qdel(N)
-				else if (task == "purge")
-					for (var/obj/O in N.seeds)
-						qdel(O)
 						piles_contra -= N
 						qdel(N)
 				break

@@ -74,7 +74,7 @@
 	/obj/item/sample,
 	/obj/item/forensics/sample_kit,
 	/obj/item/taperecorder,
-	/obj/item/tape,
+	/obj/item/cassette_tape,
 	/obj/item/uv_light
 	)
 

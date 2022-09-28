@@ -303,18 +303,10 @@ var/global/datum/antagonist/raider/raiders
 		player.put_in_any_hand_if_possible(ammobox)
 
 /datum/antagonist/raider/proc/equip_vox(var/mob/living/carbon/human/player)
-
-	var/uniform_type = pick(list(/obj/item/clothing/under/vox/vox_robes,/obj/item/clothing/under/vox/vox_casual))
-
-	player.equip_to_slot_or_del(new uniform_type(player), slot_w_uniform)
-	player.equip_to_slot_or_del(new /obj/item/clothing/shoes/magboots/vox(player), slot_shoes) // REPLACE THESE WITH CODED VOX ALTERNATIVES.
-	player.equip_to_slot_or_del(new /obj/item/clothing/gloves/vox(player), slot_gloves) // AS ABOVE.
-	player.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/swat/vox(player), slot_wear_mask)
-	player.equip_to_slot_or_del(new /obj/item/tank/vox(player), slot_back)
-	player.equip_to_slot_or_del(new /obj/item/flashlight(player), slot_r_store)
-
+	player.set_species(SPECIES_VOX)
+	var/decl/hierarchy/outfit/vox_raider = outfit_by_type(/decl/hierarchy/outfit/vox/raider)
+	vox_raider.equip(player)
 	player.internal = locate(/obj/item/tank) in player.contents
 	if(istype(player.internal,/obj/item/tank) && player.internals)
 		player.internals.icon_state = "internal1"
-
-	return 1
+	return TRUE

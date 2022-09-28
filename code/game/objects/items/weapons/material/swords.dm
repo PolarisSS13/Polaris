@@ -25,6 +25,12 @@
 	icon_state = "katana"
 	slot_flags = SLOT_BELT | SLOT_BACK
 
+/obj/item/material/sword/katana/caneblade
+	name = "cane blade"
+	desc = "Used for making people fall over instead of helping them stand up."
+	icon_state = "caneblade"
+	item_state = "caneblade"
+
 /obj/item/material/sword/rapier
 	name = "rapier"
 	desc = "A slender, fancy and sharply pointed sword."

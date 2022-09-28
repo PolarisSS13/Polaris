@@ -4,7 +4,7 @@
 	var/hostile = FALSE						// Do we try to hurt others?
 	var/retaliate = FALSE					// Attacks whatever struck it first. Mobs will still attack back if this is false but hostile is true.
 	var/mauling = FALSE						// Attacks unconscious mobs
-	var/ignore_incapacitated = FALSE		// If it's interested in attacking targets that are STUNNED. 
+	var/ignore_incapacitated = FALSE		// If it's interested in attacking targets that are STUNNED.
 	var/handle_corpse = FALSE					// Allows AI to acknowledge corpses (e.g. nurse spiders)
 
 	var/atom/movable/target = null			// The thing (mob or object) we're trying to kill.
@@ -132,7 +132,7 @@
 					return FALSE
 		if(L.incapacitated(INCAPACITATION_STUNNED)) // Are they stunned and do we care?
 			if(ignore_incapacitated)
-				return FALSE 
+				return FALSE
 		if(holder.IIsAlly(L))
 			return FALSE
 		return TRUE
@@ -166,7 +166,7 @@
 	ai_log("lose_target() : Entering.", AI_LOG_TRACE)
 	if(target)
 		ai_log("lose_target() : Had a target, checking if still valid.", AI_LOG_DEBUG)
-		if(!can_attack(target, FALSE)) /// If it's not valid to chase, don't keep looking. 
+		if(!can_attack(target, FALSE)) /// If it's not valid to chase, don't keep looking.
 			remove_target()
 			return find_target()
 		ai_log("lose_target() : Had a target, setting to null and LTT.", AI_LOG_DEBUG)
@@ -251,6 +251,7 @@
 	if(holder.IIsAlly(attacker)) // I'll overlook it THIS time...
 		ai_log("react_to_attack() : Was attacked by [attacker], but they were an ally.", AI_LOG_TRACE)
 		return FALSE
+	holder.IWasAttackedBy(attacker)
 	if(target) // Already fighting someone. Switching every time we get hit would impact our combat performance.
 		if(!retaliate)	// If we don't get to fight back, we don't fight back...
 			ai_log("react_to_attack() : Was attacked by [attacker], but we already have a target.", AI_LOG_TRACE)

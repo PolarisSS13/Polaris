@@ -27,7 +27,7 @@
 	data["temp"] = temp
 
 	var/list/machinelist = list()
-	for(var/obj/machinery/telecomms/T in machinelist)
+	for(var/obj/machinery/telecomms/T in src.machinelist)
 		machinelist.Add(list(list(
 			"id" = T.id,
 			"name" = T.name,
@@ -108,7 +108,7 @@
 				network = newnet
 				machinelist = list()
 				set_temp("NEW NETWORK TAG SET IN ADDRESS \[[network]\]", "good")
-			
+
 			. = TRUE
 
 		if("cleartemp")

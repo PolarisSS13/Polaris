@@ -1542,7 +1542,7 @@ shaved
 */
 
 /datum/sprite_accessory/facial_hair
-	icon = 'icons/mob/Human_face.dmi'
+	icon = 'icons/mob/human_face.dmi'
 	color_blend_mode = ICON_ADD
 	em_block = TRUE
 
@@ -1998,6 +1998,10 @@ shaved
 /datum/sprite_accessory/hair/vox/quills_kingly
 	name = "Kingly Vox Quills"
 	icon_state = "vox_kingly"
+
+/datum/sprite_accessory/hair/vox/quills_stubble
+	name = "Vox Stubble"
+	icon_state = "vox_stubble"
 
 /datum/sprite_accessory/hair/vox/quills_mohawk
 	name = "Quill Mohawk"

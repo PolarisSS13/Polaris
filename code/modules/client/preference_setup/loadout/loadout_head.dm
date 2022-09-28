@@ -131,19 +131,19 @@
 	path = /obj/item/clothing/head/soft/mbill
 
 /datum/gear/head/cap/sol
-	display_name = "cap, sol"
+	display_name = "cap, solgov"
 	path = /obj/item/clothing/head/soft/solgov
 
 /datum/gear/head/cowboy
-	display_name = "cowboy, rodeo"
+	display_name = "cowboy hat, rodeo"
 	path = /obj/item/clothing/head/cowboy_hat
 
 /datum/gear/head/cowboy/black
-	display_name = "cowboy, black"
+	display_name = "cowboy hat, black"
 	path = /obj/item/clothing/head/cowboy_hat/black
 
 /datum/gear/head/cowboy/wide
-	display_name = "cowboy, wide"
+	display_name = "cowboy hat, wide"
 	path = /obj/item/clothing/head/cowboy_hat/wide
 
 /datum/gear/head/fedora
@@ -265,11 +265,11 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/kitty
-	display_name = "kitty ears"
+	display_name = "ears, kitty"
 	path = /obj/item/clothing/head/kitty
 
 /datum/gear/head/rabbit
-	display_name = "rabbit ears"
+	display_name = "ears, rabbit"
 	path = /obj/item/clothing/head/rabbitears
 
 /datum/gear/head/beanie
@@ -281,7 +281,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/loose_beanie
-	display_name = "loose beanie"
+	display_name = "beanie, loose"
 	path = /obj/item/clothing/head/beanie_loose
 
 /datum/gear/head/loose_beanie/New()
@@ -301,7 +301,7 @@
 	path = /obj/item/clothing/head/sombrero
 
 /datum/gear/head/flatcapg
-	display_name = "flat cap"
+	display_name = "cap, flat"
 	path = /obj/item/clothing/head/flatcap/grey
 
 /datum/gear/head/flatcapg/New()
@@ -339,7 +339,7 @@
 	path = /obj/item/clothing/head/welding/engie
 
 /datum/gear/head/beret/solgov
-	display_name = "beret government, selection"
+	display_name = "beret, solgov selection"
 	path = /obj/item/clothing/head/beret/solgov
 
 /datum/gear/head/beret/solgov/New()
@@ -351,7 +351,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(sols))
 
 /datum/gear/head/surgery
-	display_name = "surgical cap selection"
+	display_name = "cap, surgical selection"
 	description = "Choose from a number of rings of different caps."
 	path = /obj/item/clothing/head/surgery
 
@@ -386,19 +386,19 @@
 	path = /obj/item/clothing/head/jingasa
 
 /datum/gear/head/sunflower_crown
-	display_name = "sunflower crown"
+	display_name = "flower crown, sunflower"
 	path = /obj/item/clothing/head/sunflower_crown
 
 /datum/gear/head/lavender_crown
-	display_name = "lavender crown"
+	display_name = "flower crown, lavender"
 	path = /obj/item/clothing/head/lavender_crown
 
 /datum/gear/head/poppy_crown
-	display_name = "poppy crown"
+	display_name = "flower crown, poppy"
 	path = /obj/item/clothing/head/poppy_crown
 
 /datum/gear/head/rose_crown
-	display_name = "rose crown"
+	display_name = "flower crown, rose"
 	path = /obj/item/clothing/head/rose_crown
 
 /datum/gear/head/blackngoldheaddress
@@ -406,5 +406,5 @@
 	path = /obj/item/clothing/head/blackngoldheaddress
 
 /datum/gear/head/plaguedoctor2
-	display_name = "golden plague doctor's hat"
+	display_name = "hat, golden plague doctor"
 	path = /obj/item/clothing/head/plaguedoctorhat/gold

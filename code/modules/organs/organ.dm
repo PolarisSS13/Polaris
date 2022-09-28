@@ -350,6 +350,9 @@ var/global/list/organ_cache = list()
 	robotize()
 
 /obj/item/organ/emp_act(severity)
+	for(var/obj/O as anything in src.contents)
+		O.emp_act(severity)
+
 	if(!(robotic >= ORGAN_ASSISTED))
 		return
 	for(var/i = 1; i <= robotic; i++)
@@ -558,3 +561,13 @@ var/global/list/organ_cache = list()
 					return TRUE
 
 	return FALSE
+
+/obj/item/organ/attack_generic(mob/user)
+	if(isanimal(user))
+		var/mob/living/simple_mob/animal/critter = user
+		if(!critter.has_appetite())
+			to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
+		else
+			critter.eat_food_item(src)
+		return TRUE
+	return ..()

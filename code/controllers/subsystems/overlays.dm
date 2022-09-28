@@ -8,9 +8,6 @@ SUBSYSTEM_DEF(overlays)
 	/// The queue of atoms that need overlay updates.
 	var/static/tmp/list/queue = list()
 
-	/// An image used to create appearances to be cached.
-	var/static/tmp/image/renderer = new
-
 	/// A list([icon] = list([state] = [appearance], ...), ...) cache of appearances.
 	var/static/tmp/list/state_cache = list()
 
@@ -23,10 +20,12 @@ SUBSYSTEM_DEF(overlays)
 
 /datum/controller/subsystem/overlays/Recover()
 	queue.Cut()
-	renderer = new
 	state_cache.Cut()
 	icon_cache.Cut()
 	cache_size = 0
+	for (var/atom/atom)
+		atom.flags &= ~OVERLAY_QUEUED
+		CHECK_TICK
 
 
 /datum/controller/subsystem/overlays/Initialize(timeofday)
@@ -45,7 +44,7 @@ SUBSYSTEM_DEF(overlays)
 		if (no_mc_tick)
 			CHECK_TICK
 		else if (MC_TICK_CHECK)
-			queue.Cut(count)
+			queue.Cut(1, count)
 			return
 	queue.Cut()
 
@@ -56,17 +55,16 @@ SUBSYSTEM_DEF(overlays)
 		subcache = list()
 		state_cache[icon] = subcache
 	if (!subcache[state])
-		renderer.icon = icon
-		renderer.icon_state = state
-		subcache[state] = renderer.appearance
+		var/image/image = new (icon, null, state)
+		subcache[state] = image.appearance
 		++cache_size
 	return subcache[state]
 
 
 /datum/controller/subsystem/overlays/proc/GetIconAppearance(icon)
 	if (!icon_cache[icon])
-		renderer.icon = icon
-		icon_cache[icon] = renderer.appearance
+		var/image/image = new (icon)
+		icon_cache[icon] = image.appearance
 		++cache_size
 	return icon_cache[icon]
 
@@ -76,7 +74,6 @@ SUBSYSTEM_DEF(overlays)
 		return list()
 	if (!islist(sources))
 		sources = list(sources)
-	var/image/image
 	var/list/result = list()
 	var/icon/icon = subject.icon
 	for (var/atom/entry as anything in sources)
@@ -90,11 +87,11 @@ SUBSYSTEM_DEF(overlays)
 			if (isloc(entry))
 				if (entry.flags & OVERLAY_QUEUED)
 					entry.ImmediateOverlayUpdate()
-			renderer.appearance = entry
 			if (!ispath(entry))
-				image = entry
-				renderer.dir = image.dir
-			result += renderer.appearance
+				result += entry.appearance
+			else
+				var/image/image = entry
+				result += image.appearance
 	return result
 
 
