@@ -124,8 +124,7 @@ What is the naming convention for planes or layers?
 #define PLANE_ADMIN1			3 //Purely for shenanigans (below lighting)
 #define PLANE_PLANETLIGHTING	4 //Lighting on planets
 #define PLANE_LIGHTING			5 //Where the lighting (and darkness) lives
-
-#define LIGHTING_RENDER_TARGET	"LIGHT_PLANE"
+	#define LIGHTING_RENDER_TARGET	"LIGHT_PLANE"
 
 #define PLANE_O_LIGHTING_VISUAL	6 //For masking the lighting plane
 	#define O_LIGHTING_VISUAL_RENDER_TARGET	"O_LIGHT_VISUAL_PLANE"

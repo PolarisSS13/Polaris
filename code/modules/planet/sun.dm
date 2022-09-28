@@ -15,13 +15,13 @@
 	if(sun in T.vis_contents)
 		warning("Was asked to add fake sun to [T.x], [T.y], [T.z] despite already having us in it's vis contents")
 		return
-	T.vis_contents += sun
+	sun.apply_to_turf(T)
 
 /datum/sun_holder/proc/remove_from_turf(turf/T)
 	if(!(sun in T.vis_contents))
 		warning("Was asked to remove fake sun from [T.x], [T.y], [T.z] despite it not having us in it's vis contents")
 		return
-	T.vis_contents -= sun
+	sun.remove_from_turf(T)
 
 /datum/sun_holder/proc/rainbow()
 	var/end = world.time + 30 SECONDS
@@ -51,3 +51,13 @@
 	mouse_opacity = 0
 	alpha = 0
 	color = "#FFFFFF"
+
+/atom/movable/sun_visuals/proc/apply_to_turf(var/turf/T)
+	T.vis_contents += src
+	T.dynamic_lumcount += 0.5
+	T.luminosity = 1
+
+/atom/movable/sun_visuals/proc/remove_from_turf(var/turf/T)
+	T.vis_contents -= src
+	T.dynamic_lumcount -= 0.5
+	T.luminosity = 0

@@ -186,9 +186,9 @@
 	alpha = 255
 
 /obj/screen/plane_master/lighting/backdrop(mob/mymob)
-	mymob.overlay_fullscreen("lighting_backdrop_lit", /obj/screen/fullscreen/lighting_backdrop/lit)
+	/*mymob.overlay_fullscreen("lighting_backdrop_lit", /obj/screen/fullscreen/lighting_backdrop/lit)
 	mymob.overlay_fullscreen("lighting_backdrop_unlit", /obj/screen/fullscreen/lighting_backdrop/unlit)
-
+	*/
 /*!
  * This system works by exploiting BYONDs color matrix filter to use layers to handle emissive blockers.
  *
@@ -210,6 +210,7 @@
 	render_target = O_LIGHTING_VISUAL_RENDER_TARGET
 	blend_mode = BLEND_MULTIPLY
 	alpha = 255
+	appearance_flags = PLANE_MASTER|NO_CLIENT_COLOR
 
 /obj/screen/plane_master/emissive
 	plane = PLANE_EMISSIVE
