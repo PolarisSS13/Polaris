@@ -1711,6 +1711,7 @@
 	dir = 8
 	},
 /obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/milspec/color/silver/half,
 /turf/simulated/floor/tiled/milspec/sterile,
 /area/shuttle/escape/centcom)
 "bXp" = (
@@ -1899,6 +1900,9 @@
 /obj/effect/floor_decal/milspec/color/red,
 /obj/structure/bed/chair/shuttle{
 	dir = 4
+	},
+/obj/effect/floor_decal/milspec/color/black/half{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/milspec,
 /area/shuttle/escape/centcom)
@@ -2366,7 +2370,7 @@
 /turf/simulated/shuttle/plating,
 /area/skipjack_station/start)
 "cLf" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "supply_shuttle_hatch";
@@ -3421,6 +3425,9 @@
 /obj/machinery/light/no_nightshift,
 /obj/effect/floor_decal/milspec/color/blue,
 /obj/effect/floor_decal/milspec/color/white/half,
+/obj/effect/floor_decal/steeldecal/steel_decals_central5{
+	pixel_y = -2
+	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
 "ebh" = (
@@ -5502,6 +5509,14 @@
 	},
 /turf/simulated/floor/holofloor/tiled,
 /area/holodeck/source_thunderdomecourt)
+"gnm" = (
+/obj/machinery/door/airlock/external/white{
+	icon_state = "door_locked";
+	locked = 1;
+	name = "Shuttle Hatch"
+	},
+/turf/simulated/floor/tiled/milspec,
+/area/shuttle/escape/centcom)
 "gno" = (
 /obj/structure/hull_corner,
 /turf/simulated/shuttle/plating/carry,
@@ -5965,9 +5980,10 @@
 	},
 /area/centcom/bar)
 "gOt" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	icon_state = "door_locked";
-	locked = 1
+	locked = 1;
+	name = "Shuttle Hatch"
 	},
 /obj/effect/floor_decal/milspec/hatchmarks,
 /turf/simulated/floor/tiled/milspec,
@@ -6611,6 +6627,9 @@
 	tag_door = "escape_shuttle_hatch"
 	},
 /obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/escape/centcom)
 "hFy" = (
@@ -7310,6 +7329,7 @@
 	dir = 4
 	},
 /obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/milspec/color/silver/half,
 /turf/simulated/floor/tiled/milspec/sterile,
 /area/shuttle/escape/centcom)
 "irR" = (
@@ -7746,6 +7766,9 @@
 /obj/effect/floor_decal/milspec/color/red,
 /obj/structure/bed/chair/shuttle{
 	dir = 8
+	},
+/obj/effect/floor_decal/milspec/color/black/half{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/milspec,
 /area/shuttle/escape/centcom)
@@ -9297,7 +9320,7 @@
 	},
 /area/centcom/medical)
 "kuN" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "escape_shuttle_hatch";
@@ -10248,7 +10271,7 @@
 	},
 /area/tdome)
 "lqf" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "arrivals_shuttle_hatch";
@@ -10814,7 +10837,7 @@
 /turf/simulated/shuttle/floor/red,
 /area/shuttle/administration/centcom)
 "mac" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "supply_shuttle_hatch";
@@ -11990,6 +12013,18 @@
 	},
 /turf/space,
 /area/space)
+"nmf" = (
+/obj/effect/floor_decal/milspec/hatchmarks,
+/obj/machinery/door/airlock/external/white{
+	frequency = 1380;
+	icon_state = "door_locked";
+	id_tag = "escape_shuttle_hatch";
+	locked = 1;
+	name = "Shuttle Hatch";
+	req_access = list(13)
+	},
+/turf/simulated/floor/tiled/milspec,
+/area/shuttle/escape/centcom)
 "nmu" = (
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
@@ -12018,6 +12053,10 @@
 /obj/effect/floor_decal/milspec/color/blue,
 /obj/effect/floor_decal/milspec/color/white/half{
 	dir = 1
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals_central5{
+	dir = 1;
+	pixel_y = 2
 	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
@@ -13085,6 +13124,13 @@
 	},
 /turf/simulated/shuttle/floor/voidcraft/light,
 /area/ninja_dojo/start)
+"oCl" = (
+/obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/techfloor{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/escape/centcom)
 "oCy" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/effect/floor_decal/milspec/color/red,
@@ -14825,7 +14871,7 @@
 	},
 /area/ninja_dojo/dojo)
 "qzL" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	icon_state = "door_locked";
 	locked = 1;
 	name = "Shuttle Hatch"
@@ -15277,6 +15323,7 @@
 "qXg" = (
 /obj/structure/bed/chair/shuttle,
 /obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/milspec/color/silver/half,
 /turf/simulated/floor/tiled/milspec/sterile,
 /area/shuttle/escape/centcom)
 "qXp" = (
@@ -16894,7 +16941,7 @@
 	dir = 4;
 	id = "QMLoad"
 	},
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "supply_shuttle_hatch";
@@ -18489,7 +18536,7 @@
 /turf/simulated/shuttle/wall/dark/no_join,
 /area/shuttle/arrival/pre_game)
 "ucM" = (
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "centcom_shuttle_hatch";
@@ -20862,7 +20909,7 @@
 	dir = 4;
 	id = "QMLoad2"
 	},
-/obj/machinery/door/airlock/external{
+/obj/machinery/door/airlock/external/white{
 	frequency = 1380;
 	icon_state = "door_locked";
 	id_tag = "supply_shuttle_hatch";
@@ -36261,8 +36308,8 @@ boo
 mhh
 mhh
 boo
-gOt
-gOt
+gnm
+gnm
 eVJ
 eVJ
 puk
@@ -37293,7 +37340,7 @@ umC
 txG
 eVJ
 eVJ
-iNK
+oCl
 twM
 ale
 tEZ
@@ -37550,7 +37597,7 @@ tbG
 qCQ
 omB
 xdd
-iNK
+oCl
 gsq
 xoE
 tEZ
@@ -38826,7 +38873,7 @@ eVJ
 eVJ
 eVJ
 kuN
-kuN
+nmf
 boo
 mhh
 mhh
