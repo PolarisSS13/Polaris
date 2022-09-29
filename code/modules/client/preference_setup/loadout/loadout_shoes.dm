@@ -6,10 +6,9 @@
 	sort_category = "Shoes and Footwear"
 
 /datum/gear/shoes/jackboots
-	display_name = "jackboots selection (Security)"
+	display_name = "jackboots selection"
 	path = /obj/item/clothing/shoes/boots/jackboots
 	cost = 2
-	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
 /datum/gear/shoes/jackboots/New()
 	..()
@@ -106,16 +105,16 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/shoes/cowboy
-	display_name = "boots, cowboy"
+	display_name = "boots, cowboy selection"
 	path = /obj/item/clothing/shoes/boots/cowboy
 
-/datum/gear/shoes/cowboy/classic
-	display_name = "boots, cowboy classic"
-	path = /obj/item/clothing/shoes/boots/cowboy/classic
-
-/datum/gear/shoes/cowboy/snakeskin
-	display_name = "boots, cowboy snakeskin"
-	path = /obj/item/clothing/shoes/boots/cowboy/snakeskin
+/datum/gear/shoes/cowboy/New()
+	..()
+	var/list/cowboys = list()
+	for(var/cowboy in typesof(/obj/item/clothing/shoes/boots/cowboy))
+		var/obj/item/clothing/shoes/boots/cowboy/cowboy_type = cowboy
+		cowboys[initial(cowboy_type.name)] = cowboy_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cowboys))
 
 /datum/gear/shoes/jungle
 	display_name = "boots, jungle"
@@ -148,7 +147,7 @@
 	path = /obj/item/clothing/shoes/slippers
 
 /datum/gear/shoes/boots/winter
-	display_name = "winter boots selection"
+	display_name = "boots, winter selection"
 	path = /obj/item/clothing/shoes/boots/winter
 
 /datum/gear/shoes/boots/winter/New()

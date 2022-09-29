@@ -9,6 +9,7 @@
 
 /datum/gear/utility/implant/tracking
 	display_name = "implant, tracking"
+	description = "An implanted chip allowing authorities to pinpoint the location of an individual at all times. Primarily given as a condition of a criminal sentence."
 	path = /obj/item/implant/tracking/weak
 	cost = 10
 
