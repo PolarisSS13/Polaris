@@ -6319,7 +6319,7 @@
 /turf/simulated/open,
 /area/surface/station/engineering/reactor_monitoring)
 "efC" = (
-/turf/simulated/shuttle/wall,
+/turf/simulated/wall/thull,
 /area/shuttle/large_escape_pod2/station)
 "ehf" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -34362,11 +34362,7 @@
 /turf/simulated/floor/plating,
 /area/surface/station/rnd/research)
 "wss" = (
-/turf/simulated/shuttle/wall/no_join{
-	base_state = "orange";
-	icon = 'icons/turf/shuttle_orange.dmi';
-	icon_state = "orange"
-	},
+/turf/simulated/wall/dshull,
 /area/shuttle/large_escape_pod2/station)
 "wsI" = (
 /obj/machinery/atmospherics/pipe/manifold/hidden,
@@ -63406,7 +63402,7 @@ ddU
 sBb
 bFA
 efC
-oHb
+efC
 suE
 oHb
 efC
