@@ -332,7 +332,7 @@
 				else if(istype(object,/turf/simulated/floor))
 					var/turf/T = object
 					if(!holder.warned)
-						var/warning = tgui_alert(user, "Are you -sure- you want to delete this turf and make it the base turf for this Z level?", "GRIEF ALERT", list("No", "Yes"))
+						var/warning = alert("Are you -sure- you want to delete this turf and make it the base turf for this Z level?", "GRIEF ALERT", "No", "Yes")
 						if(warning == "Yes")
 							holder.warned = 1
 						else
