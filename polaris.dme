@@ -10,6 +10,7 @@
 #define DEBUG
 // END_PREFERENCES
 // BEGIN_INCLUDE
+#include "code\__spaceman_dmm.dm"
 #include "code\_macros.dm"
 #include "code\_map_tests.dm"
 #include "code\_unit_tests.dm"
@@ -65,7 +66,6 @@
 #include "code\__defines\rust_g.dm"
 #include "code\__defines\shuttle.dm"
 #include "code\__defines\sound.dm"
-#include "code\__defines\spaceman_dmm.dm"
 #include "code\__defines\species_languages.dm"
 #include "code\__defines\sqlite_defines.dm"
 #include "code\__defines\subsystems.dm"
