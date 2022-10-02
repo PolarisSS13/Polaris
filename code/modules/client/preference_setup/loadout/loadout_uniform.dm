@@ -102,7 +102,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pants))
 
 /datum/gear/uniform/shorts
-	display_name = "shorts selection"
+	display_name = "shorts, selection"
 	path = /obj/item/clothing/under/shorts/jeans
 
 /datum/gear/uniform/shorts/New()
@@ -113,60 +113,26 @@
 		shorts[initial(short_type.name)] = short_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(shorts))
 
-/datum/gear/uniform/job_skirt/ce
-	display_name = "skirt, ce"
+/datum/gear/uniform/job_skirt
+	display_name = "skirt, job selection"
+	description = "Skirt options for standard job uniforms."
 	path = /obj/item/clothing/under/rank/chief_engineer/skirt
-	allowed_roles = list("Chief Engineer")
 
-/datum/gear/uniform/job_skirt/atmos
-	display_name = "skirt, atmos"
-	path = /obj/item/clothing/under/rank/atmospheric_technician/skirt
-	allowed_roles = list("Chief Engineer","Atmospheric Technician")
-
-/datum/gear/uniform/job_skirt/eng
-	display_name = "skirt, engineer"
-	path = /obj/item/clothing/under/rank/engineer/skirt
-	allowed_roles = list("Chief Engineer","Station Engineer")
-
-/datum/gear/uniform/job_skirt/roboticist
-	display_name = "skirt, roboticist"
-	path = /obj/item/clothing/under/rank/roboticist/skirt
-	allowed_roles = list("Research Director","Roboticist")
-
-/datum/gear/uniform/job_skirt/cmo
-	display_name = "skirt, cmo"
-	path = /obj/item/clothing/under/rank/chief_medical_officer/skirt
-	allowed_roles = list("Chief Medical Officer")
-
-/datum/gear/uniform/job_skirt/chem
-	display_name = "skirt, chemist"
-	path = /obj/item/clothing/under/rank/chemist/skirt
-	allowed_roles = list("Chief Medical Officer","Chemist")
-
-/datum/gear/uniform/job_skirt/viro
-	display_name = "skirt, virologist"
-	path = /obj/item/clothing/under/rank/virologist/skirt
-	allowed_roles = list("Chief Medical Officer","Medical Doctor")
-
-/datum/gear/uniform/job_skirt/med
-	display_name = "skirt, medical"
-	path = /obj/item/clothing/under/rank/medical/skirt
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Psychiatrist","Paramedic")
-
-/datum/gear/uniform/job_skirt/sci
-	display_name = "skirt, scientist"
-	path = /obj/item/clothing/under/rank/scientist/skirt
-	allowed_roles = list("Research Director","Scientist", "Xenobiologist")
-
-/datum/gear/uniform/job_skirt/cargo
-	display_name = "skirt, cargo"
-	path = /obj/item/clothing/under/rank/cargotech/skirt
-	allowed_roles = list("Quartermaster","Cargo Technician")
-
-/datum/gear/uniform/job_skirt/qm
-	display_name = "skirt, QM"
-	path = /obj/item/clothing/under/rank/cargo/skirt
-	allowed_roles = list("Quartermaster")
+/datum/gear/uniform/job_skirt/New()
+	..()
+	var/skirttype = list()
+	skirttype["skirt, chief engineer"] = /obj/item/clothing/under/rank/chief_engineer/skirt
+	skirttype["skirt, atmospheric technician"] = /obj/item/clothing/under/rank/atmospheric_technician/skirt
+	skirttype["skirt, engineer"] = /obj/item/clothing/under/rank/engineer/skirt
+	skirttype["skirt, roboticist"] = /obj/item/clothing/under/rank/roboticist/skirt
+	skirttype["skirt, CMO"] = /obj/item/clothing/under/rank/chief_medical_officer/skirt
+	skirttype["skirt, chemist"] = /obj/item/clothing/under/rank/chemist/skirt
+	skirttype["skirt, virologist"] = /obj/item/clothing/under/rank/virologist/skirt
+	skirttype["skirt, medical"] = /obj/item/clothing/under/rank/medical/skirt
+	skirttype["skirt, scientist"] = /obj/item/clothing/under/rank/scientist/skirt
+	skirttype["skirt, cargo"] = /obj/item/clothing/under/rank/cargotech/skirt
+	skirttype["skirt, quartermaster"] = /obj/item/clothing/under/rank/cargotech/skirt
+	gear_tweaks += new/datum/gear_tweak/path(skirttype)
 
 /datum/gear/uniform/job_skirt/warden
 	display_name = "skirt, warden"
@@ -183,25 +149,18 @@
 	path = /obj/item/clothing/under/rank/head_of_security/skirt
 	allowed_roles = list("Head of Security")
 
-/datum/gear/uniform/job_turtle/science
-	display_name = "turtleneck, science"
+/datum/gear/uniform/job_turtle
+	display_name = "turtleneck, departmental selection"
 	path = /obj/item/clothing/under/rank/scientist/turtleneck
-	allowed_roles = list("Research Director", "Scientist", "Roboticist", "Xenobiologist")
 
-/datum/gear/uniform/job_turtle/security
-	display_name = "turtleneck, security"
-	path = /obj/item/clothing/under/rank/security/turtleneck
-	allowed_roles = list("Head of Security", "Warden", "Detective", "Security Officer")
-
-/datum/gear/uniform/job_turtle/engineering
-	display_name = "turtleneck, engineering"
-	path = /obj/item/clothing/under/rank/engineer/turtleneck
-	allowed_roles = list("Chief Engineer", "Atmospheric Technician", "Station Engineer")
-
-/datum/gear/uniform/job_turtle/medical
-	display_name = "turtleneck, medical"
-	path = /obj/item/clothing/under/rank/medical/turtleneck
-	allowed_roles = list("Chief Medical Officer", "Paramedic", "Medical Doctor", "Psychiatrist", "Search and Rescue", "Chemist")
+/datum/gear/uniform/job_turtle/New()
+	..()
+	var/turtletype = list()
+	turtletype["turtleneck, science"] = /obj/item/clothing/under/rank/scientist/turtleneck
+	turtletype["turtleneck, engineering"] = /obj/item/clothing/under/rank/engineer/turtleneck
+	turtletype["turtleneck, security"] = /obj/item/clothing/under/rank/security/turtleneck
+	turtletype["turtleneck, medical"] = /obj/item/clothing/under/rank/medical/turtleneck
+	gear_tweaks += new/datum/gear_tweak/path(turtletype)
 
 /datum/gear/uniform/jeans_qm
 	display_name = "jeans, QM"
@@ -209,7 +168,7 @@
 	allowed_roles = list("Quartermaster")
 
 /datum/gear/uniform/jeans_qmf
-	display_name = "female jeans, QM"
+	display_name = "jeans, feminine QM"
 	path = /obj/item/clothing/under/rank/cargo/jeans/female
 	allowed_roles = list("Quartermaster")
 
@@ -219,7 +178,7 @@
 	allowed_roles = list("Quartermaster","Cargo Technician")
 
 /datum/gear/uniform/jeans_cargof
-	display_name = "female jeans, cargo"
+	display_name = "jeans, feminine cargo"
 	path = /obj/item/clothing/under/rank/cargotech/jeans/female
 	allowed_roles = list("Quartermaster","Cargo Technician")
 
@@ -230,8 +189,8 @@
 /datum/gear/uniform/suit/lawyer/New()
 	..()
 	var/list/lsuits = list()
-	for(var/lsuit in typesof(/obj/item/clothing/under/lawyer))
-		var/obj/item/clothing/suit/lsuit_type = lsuit
+	for(var/lsuit in typesof(/obj/item/clothing/under/lawyer, /obj/item/clothing/under/sl_suit, /obj/item/clothing/under/gentlesuit))
+		var/obj/item/clothing/under/lsuit_type = lsuit
 		lsuits[initial(lsuit_type.name)] = lsuit_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(lsuits))
 
@@ -246,26 +205,6 @@
 		var/obj/item/clothing/suit/msuit_type = msuit
 		msuits[initial(msuit_type.name)] = msuit_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(msuits))
-
-/datum/gear/uniform/suit/amish  //amish
-	display_name = "suit, amish"
-	path = /obj/item/clothing/under/sl_suit
-
-/datum/gear/uniform/suit/gentle
-	display_name = "suit, gentlemen"
-	path = /obj/item/clothing/under/gentlesuit
-
-/datum/gear/uniform/suit/gentleskirt
-	display_name = "suit, lady"
-	path = /obj/item/clothing/under/gentlesuit/skirt
-
-/datum/gear/uniform/suit/white
-	display_name = "suit, white"
-	path = /obj/item/clothing/under/scratch
-
-/datum/gear/uniform/suit/whiteskirt
-	display_name = "suit, white skirt"
-	path = /obj/item/clothing/under/scratch/skirt
 
 /datum/gear/uniform/suit/detectiveblack
 	display_name = "suit, detective black (Detective)"
@@ -300,16 +239,24 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(scrubs))
 
 /datum/gear/uniform/oldwoman
-	display_name = "old woman attire"
+	display_name = "outfit, old woman"
 	path = /obj/item/clothing/under/oldwoman
 
 /datum/gear/uniform/sundress
-	display_name = "sundress"
+	display_name = "sundress selection"
 	path = /obj/item/clothing/under/sundress
 
-/datum/gear/uniform/sundress/white
-	display_name = "sundress, white"
-	path = /obj/item/clothing/under/sundress_white
+/datum/gear/uniform/sundress/New()
+	..()
+	var/sdresstype = list()
+	sdresstype["sundress"] = /obj/item/clothing/under/sundress
+	sdresstype["sundress, long blue"] = /obj/item/clothing/under/dress/sundress_blue
+	sdresstype["sundress, pink"] = /obj/item/clothing/under/dress/sundress_pink
+	sdresstype["sundress, pink with bow"] = /obj/item/clothing/under/dress/sundress_pinkbow
+	sdresstype["sundress, short pink"] = /obj/item/clothing/under/dress/sundress_pinkshort
+	sdresstype["sundress, white"] = /obj/item/clothing/under/sundress_white
+	sdresstype["sundress, white alt"] = /obj/item/clothing/under/dress/sundress_white
+	gear_tweaks += new/datum/gear_tweak/path(sdresstype)
 
 /datum/gear/uniform/dress_fire
 	display_name = "dress, flame"
@@ -320,54 +267,58 @@
 	path = /obj/item/clothing/under/dress/dress_cap
 	allowed_roles = list("Site Manager")
 
-/datum/gear/uniform/corpdetsuit
-	display_name = "uniform, corporate (Detective)"
-	path = /obj/item/clothing/under/det/corporate
-	allowed_roles = list("Detective","Head of Security")
-
-/datum/gear/uniform/corpsecsuit
-	display_name = "uniform, corporate (Security)"
+/datum/gear/uniform/uniform_security
+	display_name = "uniform, security selection"
 	path = /obj/item/clothing/under/rank/security/corp
-	allowed_roles = list("Security Officer","Head of Security","Warden")
+	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
-/datum/gear/uniform/corpwarsuit
-	display_name = "uniform, corporate (Warden)"
+/datum/gear/uniform/uniform_security/New()
+	..()
+	var/secunitype = list()
+	secunitype["officer uniform, corporate"] = /obj/item/clothing/under/rank/security/corp
+	secunitype["officer uniform, navy"] = /obj/item/clothing/under/rank/security/navyblue
+	secunitype["officer uniform, hedberg-hammarstrom"] = /obj/item/clothing/under/hedberg
+	secunitype["detective uniform, corporate"] = /obj/item/clothing/under/det/corporate
+	gear_tweaks += new/datum/gear_tweak/path(secunitype)
+
+/datum/gear/uniform/uniform_warden
+	display_name = "uniform, warden selection"
 	path = /obj/item/clothing/under/rank/warden/corp
 	allowed_roles = list("Head of Security","Warden")
 
-/datum/gear/uniform/corphossuit
-	display_name = "uniform, corporate (Head of Security)"
-	path = /obj/item/clothing/under/rank/head_of_security/corp
+/datum/gear/uniform/uniform_warden/New()
+	..()
+	var/warunitype = list()
+	warunitype["warden uniform, corporate"] = /obj/item/clothing/under/rank/warden/corp
+	warunitype["warden uniform, navy"] = /obj/item/clothing/under/rank/warden/navyblue
+	gear_tweaks += new/datum/gear_tweak/path(warunitype)
+
+/datum/gear/uniform/uniform_hos
+	display_name = "uniform, head of security selection"
+	path = /obj/item/clothing/under/rank/security/corp
 	allowed_roles = list("Head of Security")
+
+/datum/gear/uniform/uniform_hos/New()
+	..()
+	var/hosunitype = list()
+	hosunitype["HoS uniform, corporate"] = /obj/item/clothing/under/rank/head_of_security/corp
+	hosunitype["HoS uniform, navy"] = /obj/item/clothing/under/rank/head_of_security/navyblue
+	gear_tweaks += new/datum/gear_tweak/path(hosunitype)
 
 /datum/gear/uniform/uniform_hop
-	display_name = "uniform, HoP's dress"
-	path = /obj/item/clothing/under/dress/dress_hop
+	display_name = "uniform, head of personnel selection"
+	path = /obj/item/clothing/under/rank/security/corp
 	allowed_roles = list("Head of Personnel")
 
-/datum/gear/uniform/uniform_hr
-	display_name = "uniform, HR director (HoP)"
-	path = /obj/item/clothing/under/dress/dress_hr
-
-	allowed_roles = list("Head of Personnel")
-
-/datum/gear/uniform/navysecsuit
-	display_name = "uniform, navy blue (Security)"
-	path = /obj/item/clothing/under/rank/security/navyblue
-	allowed_roles = list("Security Officer","Head of Security","Warden")
-
-/datum/gear/uniform/navywarsuit
-	display_name = "uniform, navy blue (Warden)"
-	path = /obj/item/clothing/under/rank/warden/navyblue
-	allowed_roles = list("Head of Security","Warden")
-
-/datum/gear/uniform/navyhossuit
-	display_name = "uniform, navy blue (Head of Security)"
-	path = /obj/item/clothing/under/rank/head_of_security/navyblue
-	allowed_roles = list("Head of Security")
+/datum/gear/uniform/uniform_hop/New()
+	..()
+	var/hopunitype = list()
+	hopunitype["HoP dress"] = /obj/item/clothing/under/dress/dress_hop
+	hopunitype["HR director"] = /obj/item/clothing/under/dress/dress_hr
+	gear_tweaks += new/datum/gear_tweak/path(hopunitype)
 
 /datum/gear/uniform/shortplaindress
-	display_name = "dress, plain"
+	display_name = "dress, plain (colorable)"
 	path = /obj/item/clothing/under/dress/white3
 
 /datum/gear/uniform/shortplaindress/New()
@@ -375,7 +326,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/longdress
-	display_name = "dress, long"
+	display_name = "dress, long (colorable)"
 	path = /obj/item/clothing/under/dress/white2
 
 /datum/gear/uniform/longdress/New()
@@ -383,7 +334,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/longwidedress
-	display_name = "dress, long and wide"
+	display_name = "dress, long and wide (colorable)"
 	path = /obj/item/clothing/under/dress/white4
 
 /datum/gear/uniform/longwidedress/New()
@@ -397,10 +348,6 @@
 /datum/gear/uniform/whitewedding
 	display_name = "dress, white wedding"
 	path = /obj/item/clothing/under/wedding/bride_white
-
-/datum/gear/uniform/skirts
-	display_name = "skirt, executive"
-	path = /obj/item/clothing/under/suit_jacket/female/skirt
 
 /datum/gear/uniform/dresses
 	display_name = "dress, sailor"
@@ -423,24 +370,16 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(maids))
 
 /datum/gear/uniform/utility
-	display_name = "utility, black"
+	display_name = "jumpsuit, utility selection"
 	path = /obj/item/clothing/under/utility
 
-/datum/gear/uniform/utility/blue
-	display_name = "utility, blue"
-	path = /obj/item/clothing/under/utility/blue
-
-/datum/gear/uniform/utility/grey
-	display_name = "utility, grey"
-	path = /obj/item/clothing/under/utility/grey
-
-/datum/gear/uniform/utility/gsa
-	display_name = "utility, galactic survey"
-	path = /obj/item/clothing/under/gsa
-
-/datum/gear/uniform/utility/gsa_work
-	display_name = "heavy utility, galactic survey"
-	path = /obj/item/clothing/under/gsa_work
+/datum/gear/uniform/utility/New()
+	..()
+	var/list/utils = list()
+	for(var/util in typesof(/obj/item/clothing/under/utility, /obj/item/clothing/under/gsa_work, /obj/item/clothing/under/gsa))
+		var/obj/item/clothing/under/util_type = util
+		utils[initial(util_type.name)] = util_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(utils))
 
 /datum/gear/uniform/sweater
 	display_name = "sweater, grey"
@@ -450,84 +389,24 @@
 	display_name = "sweater, retro"
 	path = /obj/item/clothing/under/retrosweater
 
-/datum/gear/uniform/brandsuit/aether
-	display_name = "jumpsuit, aether"
+/datum/gear/uniform/brandsuit
+	display_name = "jumpsuit/uniform, corporate selection"
 	path = /obj/item/clothing/under/corp/aether
 
-/datum/gear/uniform/brandsuit/centauri
-	display_name = "jumpsuit, centauri provisions"
-	path = /obj/item/clothing/under/corp/centauri
-
-/datum/gear/uniform/brandsuit/focal
-	display_name = "jumpsuit, focal point"
-	path = /obj/item/clothing/under/corp/focal
-
-/datum/gear/uniform/brandsuit/grayson
-	display_name = "outfit, grayson"
-	path = /obj/item/clothing/under/corp/grayson
-
-/datum/gear/uniform/brandsuit/grayson_jump
-	display_name = "jumpsuit, grayson"
-	path = /obj/item/clothing/under/corp/grayson
-
-/datum/gear/uniform/brandsuit/hedberg
-	display_name = "uniform, hedberg officer (Security)"
-	path = 	/obj/item/clothing/under/hedberg
-	allowed_roles = list("Security Officer","Head of Security","Warden")
-
-/datum/gear/uniform/brandsuit/hedbergtech
-	display_name = "jumpsuit, hedberg technician"
-	path = 	/obj/item/clothing/under/hedbergtech
-
-/datum/gear/uniform/brandsuit/hephaestus
-	display_name = "jumpsuit, hephaestus"
-	path = 	/obj/item/clothing/under/corp/hephaestus
-
-/datum/gear/uniform/brandsuit/kaleidoscope
-	display_name = "outfit, kaleidoscope (Science)"
-	path = 	/obj/item/clothing/under/corp/kaleidoscope
-	allowed_roles = list("Research Director","Scientist","Xenobiologist")
-
-/datum/gear/uniform/mbill
-	display_name = "outfit, major bill's"
-	path = /obj/item/clothing/under/corp/mbill
-
-/datum/gear/uniform/mbill_flight
-	display_name = "flight suit, major bill's"
-	path = /obj/item/clothing/under/corp/mbill_flight
-
-/datum/gear/uniform/brandsuit/morpheus
-	display_name = "jumpsuit, morpheus"
-	path = /obj/item/clothing/under/corp/morpheus
-
-/datum/gear/uniform/pcrc
-	display_name = "uniform, PCRC (Security)"
-	path = /obj/item/clothing/under/corp/pcrc
-	allowed_roles = list("Security Officer","Head of Security","Warden")
-
-/datum/gear/uniform/brandsuit/wardt
-	display_name = "jumpsuit, ward-takahashi"
-	path = /obj/item/clothing/under/corp/wardt
-
-/datum/gear/uniform/brandsuit/wulf
-	display_name = "jumpsuit, wulf"
-	path = /obj/item/clothing/under/corp/wulf
-
-/datum/gear/uniform/brandsuit/vedmed
-	display_name = "jumpsuit, vey-med (Medical)"
-	path = /obj/item/clothing/under/corp/veymed
-	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Psychiatrist","Paramedic")
-
-/datum/gear/uniform/brandsuit/zenghu
-	display_name = "jumpsuit, zeng-hu"
-	path = /obj/item/clothing/under/corp/zenghu
+/datum/gear/uniform/brandsuit/New()
+	..()
+	var/list/brandsuits = list()
+	for(var/brandsuit in typesof(/obj/item/clothing/under/corp, /obj/item/clothing/under/hedbergtech))
+		var/obj/item/clothing/under/corp/brandsuit_type = brandsuit
+		brandsuits[initial(brandsuit_type.name)] = brandsuit_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(brandsuits))
 
 /datum/gear/uniform/frontier
 	display_name = "outfit, frontier"
 	path = 	/obj/item/clothing/under/frontier
 
 /datum/gear/uniform/yogapants
-	display_name = "pants, yoga"
+	display_name = "pants, yoga (colorable)"
 	path = /obj/item/clothing/under/pants/yogapants
 
 /datum/gear/uniform/yogapants/New()
@@ -651,7 +530,7 @@
 	path = /obj/item/clothing/under/dress/revealingdress
 
 /datum/gear/uniform/rippedpunk
-	display_name = "ripped punk jeans"
+	display_name = "jeans, ripped punk"
 	path = /obj/item/clothing/under/rippedpunk
 
 /datum/gear/uniform/gothic
@@ -671,11 +550,11 @@
 	path = /obj/item/clothing/under/dress/yellowswoop
 
 /datum/gear/uniform/greenasym
-	display_name = "green asymmetrical jumpsuit"
+	display_name = "jumpsuit, green asymmetrical"
 	path = /obj/item/clothing/under/greenasym
 
 /datum/gear/uniform/cyberpunkharness
-	display_name = "cyberpunk strapped harness"
+	display_name = "outfit, cyberpunk strapped harness"
 	path = /obj/item/clothing/under/cyberpunkharness
 
 /datum/gear/uniform/whitegown
@@ -699,32 +578,12 @@
 	path = /obj/item/clothing/under/sheerblue
 
 /datum/gear/uniform/disheveled
-	display_name = "disheveled suit"
+	display_name = "suit, disheveled"
 	path = /obj/item/clothing/under/disheveled
 
 /datum/gear/uniform/orangedress
 	display_name = "dress, orange"
 	path = /obj/item/clothing/under/dress/dress_orange
-
-/datum/gear/uniform/sundress_pink
-	display_name = "sundress, pink"
-	path = /obj/item/clothing/under/dress/sundress_pink
-
-/datum/gear/uniform/sundress_white
-	display_name = "sundress, white"
-	path = /obj/item/clothing/under/dress/sundress_white
-
-/datum/gear/uniform/sundress_pinkbow
-	display_name = "sundress, bowed pink"
-	path = /obj/item/clothing/under/dress/sundress_pinkbow
-
-/datum/gear/uniform/sundress_blue
-	display_name = "sundress, long blue"
-	path = /obj/item/clothing/under/dress/sundress_blue
-
-/datum/gear/uniform/sundress_pinkshort
-	display_name = "sundress, short pink"
-	path = /obj/item/clothing/under/dress/sundress_pinkshort
 
 /datum/gear/uniform/twopiece
 	display_name = "dress, two-piece"
@@ -747,5 +606,5 @@
 	path = /obj/item/clothing/under/dress/countess
 
 /datum/gear/uniform/vampire
-	display_name = "high-waisted trousers"
+	display_name = "pants, high-waisted trousers"
 	path = /obj/item/clothing/under/hightrousers
