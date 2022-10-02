@@ -113,15 +113,3 @@ INITIALIZE_IMMEDIATE(/mob/zshadow)
 	. = ..()
 	if(shadow)
 		shadow.set_dir(new_dir)
-
-/mob/zshadow/set_typing_indicator(var/state)
-	if(!typing_indicator)
-		init_typing_indicator("typing")
-	if(state && !typing)
-		add_overlay(typing_indicator)
-		typing = 1
-	else if(!state && typing)
-		cut_overlay(typing_indicator)
-		typing = 0
-	if(shadow)
-		shadow.set_typing_indicator(state)
