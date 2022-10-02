@@ -43,23 +43,3 @@
 
 /mob/living/carbon/brain/isSynthetic()
 	return istype(loc, /obj/item/mmi)
-
-/mob/living/carbon/brain/set_typing_indicator(var/state)
-	if(isturf(loc))
-		return ..()
-
-	if(!is_preference_enabled(/datum/client_preference/show_typing_indicator))
-		loc.cut_overlay(typing_indicator, TRUE)
-		return
-
-	if(!typing_indicator)
-		init_typing_indicator("[speech_bubble_appearance()]_typing")
-
-	if(state && !typing)
-		loc.add_overlay(typing_indicator, TRUE)
-		typing = TRUE
-	else if(typing)
-		loc.cut_overlay(typing_indicator, TRUE)
-		typing = FALSE
-
-	return state
