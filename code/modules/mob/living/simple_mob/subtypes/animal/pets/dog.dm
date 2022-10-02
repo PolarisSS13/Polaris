@@ -245,13 +245,13 @@
 /mob/living/simple_mob/animal/passive/dog/german
 	name = "german shepherd"
 	real_name = "german shepherd"
-	desc = "It's a german sherpherd."
+	desc = "It's a german shepherd."
 	icon_state = "german"
 	icon_living = "german"
 	icon_dead = "german_dead"
 
 /mob/living/simple_mob/animal/passive/dog/german/columbo
-	desc = "It's a german sherpherd. This one is wearing a security vest."
+	desc = "It's a german shepherd. This one is wearing a security vest."
 	icon_state = "columbo"
 	icon_living = "columbo"
 	icon_dead = "columbo_dead"
