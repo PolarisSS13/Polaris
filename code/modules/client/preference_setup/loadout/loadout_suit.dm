@@ -353,7 +353,7 @@
 	path = /obj/item/clothing/suit/storage/insulated
 	cost = 2
 
-/datum/gear/suit/insulted/New()
+/datum/gear/suit/insulated/New()
 	..()
 	var/list/insulated_jackets = list()
 	for(var/insulated_jacket_style in typesof(/obj/item/clothing/suit/storage/insulated))

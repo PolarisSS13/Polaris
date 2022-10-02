@@ -303,7 +303,6 @@
 	var/hosunitype = list()
 	hosunitype["HoS uniform, corporate"] = /obj/item/clothing/under/rank/head_of_security/corp
 	hosunitype["HoS uniform, navy"] = /obj/item/clothing/under/rank/head_of_security/navyblue
-	hosunitype["detective uniform, corporate"] = /obj/item/clothing/under/det/corporate
 	gear_tweaks += new/datum/gear_tweak/path(hosunitype)
 
 /datum/gear/uniform/uniform_hop
@@ -397,7 +396,7 @@
 /datum/gear/uniform/brandsuit/New()
 	..()
 	var/list/brandsuits = list()
-	for(var/brandsuit in typesof(/obj/item/clothing/under/corp))
+	for(var/brandsuit in typesof(/obj/item/clothing/under/corp, /obj/item/clothing/under/hedbergtech))
 		var/obj/item/clothing/under/corp/brandsuit_type = brandsuit
 		brandsuits[initial(brandsuit_type.name)] = brandsuit_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(brandsuits))

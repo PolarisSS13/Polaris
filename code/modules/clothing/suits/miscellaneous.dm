@@ -874,7 +874,7 @@
 	flags_inv = HIDEHOLSTER
 
 /obj/item/clothing/suit/storage/insulated
-	name = "insulted jacket"
+	name = "insulated jacket"
 	desc = "A jacket made to keep you nice and toasty on cold winter days. Or at least alive."
 	icon_state = "snowsuit"
 	item_state_slots = list(slot_r_hand_str = "labcoat", slot_l_hand_str = "labcoat")
@@ -886,27 +886,27 @@
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/tank/emergency/oxygen, /obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/reagent_containers/food/drinks/flask)
 
 /obj/item/clothing/suit/storage/insulated/command
-	name = "command insulted jacket"
+	name = "command insulated jacket"
 	icon_state = "snowsuit_command"
 
 /obj/item/clothing/suit/storage/insulated/security
-	name = "security insulted jacket"
+	name = "security insulated jacket"
 	icon_state = "snowsuit_security"
 
 /obj/item/clothing/suit/storage/insulated/medical
-	name = "medical insulted jacket"
+	name = "medical insulated jacket"
 	icon_state = "snowsuit_medical"
 
 /obj/item/clothing/suit/storage/insulated/engineering
-	name = "engineering insulted jacket"
+	name = "engineering insulated jacket"
 	icon_state = "snowsuit_engineering"
 
 /obj/item/clothing/suit/storage/insulated/cargo
-	name = "cargo insulted jacket"
+	name = "cargo insulated jacket"
 	icon_state = "snowsuit_cargo"
 
 /obj/item/clothing/suit/storage/insulated/science
-	name = "science insulted jacket"
+	name = "science insulated jacket"
 	icon_state = "snowsuit_science"
 
 /obj/item/clothing/suit/caution
