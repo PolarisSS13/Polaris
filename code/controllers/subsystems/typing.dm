@@ -171,6 +171,8 @@ SUBSYSTEM_DEF(typing)
 	if (owner)
 		owner.vis_contents -= src
 		owner.typing_indicator = null
+		if (owner.shadow)
+			owner.shadow.vis_contents -= src
 	owner = null
 	return ..()
 
@@ -198,6 +200,8 @@ SUBSYSTEM_DEF(typing)
 /mob/Logout()
 	if (typing_indicator)
 		vis_contents -= typing_indicator
+	if (shadow)
+		shadow.vis_contents -= typing_indicator
 	is_typing = FALSE
 	..()
 
