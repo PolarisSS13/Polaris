@@ -1450,7 +1450,7 @@
 	icon_state = "vystholm_r"
 
 /obj/item/flag/vystholm
-	name = "Almach Protectorate flag"
+	name = "Vystholm flag"
 	desc = "The black and gold flag of Vystholm."
 	description_fluff = "Vystholm is a faction of xenophobic humans who constructed an ark ship, the VHS Rodnakya, in response to the abolition of the hostile \
 	First Contact Policy in the early 24th century. Thought to have long departed known space, the Vystholm returned to within range of human territory in response \
@@ -1498,7 +1498,7 @@
 	flagtype = /obj/item/flag/icarus
 
 /obj/item/flag/icarus
-	name = "Five Arrows flag"
+	name = "Icarus Front flag"
 	desc = "The flag of the right-populist Icarus Front political party."
 	flag_path = "icarus"
 
