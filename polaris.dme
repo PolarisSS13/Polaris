@@ -2560,7 +2560,6 @@
 #include "code\modules\mob\new_player\sprite_accessories_ear.dm"
 #include "code\modules\mob\new_player\sprite_accessories_extra.dm"
 #include "code\modules\mob\new_player\sprite_accessories_tail.dm"
-#include "code\modules\mob\new_player\sprite_accessories_taur.dm"
 #include "code\modules\mob\new_player\sprite_accessories_wing.dm"
 #include "code\modules\modular_computers\laptop_vendor.dm"
 #include "code\modules\modular_computers\computers\modular_computer\core.dm"
