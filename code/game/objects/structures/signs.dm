@@ -1316,7 +1316,7 @@
 	flag_path = "solgov"
 
 /obj/item/flag/sol/l
-	name = "Large Solar Confederate Government flag"
+	name = "large Solar Confederate Government flag"
 	flag_size = 1
 
 //NanoTrasen
@@ -1338,7 +1338,7 @@
 	flag_path = "nanotrasen"
 
 /obj/item/flag/nt/l
-	name = "Large NanoTrasen corporate flag"
+	name = "large NanoTrasen corporate flag"
 	flag_size = 1
 
 //Vir
@@ -1368,7 +1368,7 @@
 	flag_path = "vir"
 
 /obj/item/flag/vir/l
-	name = "Large Vir Governmental Authority flag"
+	name = "large Vir Governmental Authority flag"
 	flag_size = 1
 
 //Almach Association
@@ -1399,7 +1399,7 @@
 	flag_path = "almach_a"
 
 /obj/item/flag/almach_a/l
-	name = "Large Almach Association flag"
+	name = "large Almach Association flag"
 	flag_size = 1
 
 //Almach Protectorate
@@ -1429,7 +1429,7 @@
 	flag_path = "almach_p"
 
 /obj/item/flag/almach_p/l
-	name = "Large Almach Protectorate flag"
+	name = "large Almach Protectorate flag"
 	flag_size = 1
 
 //Vystholm
@@ -1459,7 +1459,7 @@
 	flag_path = "vystholm"
 
 /obj/item/flag/vystholm/l
-	name = "Large Vystholm flag"
+	name = "large Vystholm flag"
 	flag_size = 1
 
 //Five Arrows
@@ -1487,7 +1487,51 @@
 	flag_path = "fivearrows"
 
 /obj/item/flag/fivearrows/l
-	name = "Large Five Arrows flag"
+	name = "large Five Arrows flag"
+	flag_size = 1
+
+//Pirates
+/obj/structure/sign/flag/pirate
+	name = "pirate flag"
+	desc = "Shiver me timbers, hoist the black!"
+	icon_state = "pirate"
+	flagtype = /obj/item/flag/pirate
+
+/obj/structure/sign/flag/pirate/left
+	icon_state = "pirate_l"
+
+/obj/structure/sign/flag/pirate/right
+	icon_state = "pirate_r"
+
+/obj/item/flag/pirate
+	name = "pirate flag"
+	desc = "Shiver me timbers, hoist the black!"
+	flag_path = "pirate""
+
+/obj/item/flag/pirate/l
+	name = "large pirate flag"
+	flag_size = 1
+
+//Catpirate
+/obj/structure/sign/flag/catpirate
+	name = "Tajaran pirate flag"
+	desc = "Shiver me whiskers, hoist the black!"
+	icon_state = "catpirate"
+	flagtype = /obj/item/flag/catpirate
+
+/obj/structure/sign/flag/catpirate/left
+	icon_state = "catpirate_l"
+
+/obj/structure/sign/flag/catpirate/right
+	icon_state = "catpirate_r"
+
+/obj/item/flag/catpirate
+	name = "Tajaran pirate flag"
+	desc = "Shiver me whiskers, hoist the black!"
+	flag_path = "catpirate""
+
+/obj/item/flag/catpirate/l
+	name = "large Tajaran pirate flag"
 	flag_size = 1
 
 //Political Parties
