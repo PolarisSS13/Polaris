@@ -30,6 +30,7 @@
 /datum/category_item/underwear/bottom/boxers_rwb
 	name = "Boxers, red, white & blue"
 	icon_state = "redwhiteblue"
+
 /datum/category_item/underwear/bottom/boxers_stripe
 	name = "Boxers, striped"
 	icon_state = "stripe"
@@ -37,10 +38,12 @@
 /datum/category_item/underwear/bottom/boxers_midway
 	name = "Boxers, midway"
 	icon_state = "midway"
+	has_color = TRUE
 
 /datum/category_item/underwear/bottom/jockstrap
 	name = "Jockstrap"
 	icon_state = "jock"
+	has_color = TRUE
 
 /datum/category_item/underwear/bottom/panties
 	name = "Panties"
