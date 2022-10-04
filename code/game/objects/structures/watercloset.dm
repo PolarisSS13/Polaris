@@ -154,7 +154,7 @@
 
 /obj/machinery/shower
 	name = "shower"
-	desc = "The HS-451. Installed in the 2550s by the Hygiene Division."
+	desc = "The HS-451. Graciously provided by the Hygiene Division."
 	icon = 'icons/obj/watercloset.dmi'
 	icon_state = "shower"
 	density = 0
@@ -214,7 +214,7 @@
 			add_fingerprint(user)
 
 /obj/machinery/shower/update_icon()	//this is terribly unreadable, but basically it makes the shower mist up
-	cut_overlay()							//once it's been on for a while, in addition to handling the water overlay.
+	cut_overlays()							//once it's been on for a while, in addition to handling the water overlay.
 	if(mymist)
 		qdel(mymist)
 		mymist = null
