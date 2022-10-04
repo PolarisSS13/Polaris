@@ -1,7 +1,7 @@
 /*
  * Trays - Agouri
  */
-/obj/item/weapon/tray
+/obj/item/tray
 	name = "tray"
 	icon = 'icons/obj/food.dmi'
 	icon_state = "tray"
@@ -16,10 +16,10 @@
 	var/max_carry = 10
 	drop_sound = 'sound/items/trayhit1.ogg'
 
-/obj/item/weapon/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
+/obj/item/tray/attack(mob/living/carbon/M as mob, mob/living/carbon/user as mob)
 	user.setClickCooldown(user.get_attack_speed(src))
 	// Drop all the things. All of them.
-	overlays.Cut()
+	cut_overlays()
 	for(var/obj/item/I in carrying)
 		I.loc = M.loc
 		carrying.Remove(I)
@@ -135,10 +135,10 @@
 				return
 			return
 
-/obj/item/weapon/tray/var/cooldown = 0	//shield bash cooldown. based on world.time
+/obj/item/tray/var/cooldown = 0	//shield bash cooldown. based on world.time
 
-/obj/item/weapon/tray/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/material/kitchen/rollingpin))
+/obj/item/tray/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/material/kitchen/rollingpin))
 		if(cooldown < world.time - 25)
 			user.visible_message("<span class='warning'>[user] bashes [src] with [W]!</span>")
 			playsound(src, 'sound/effects/shieldbash.ogg', 50, 1)
@@ -153,7 +153,7 @@
 =																			=
 ===============~~~~~================================~~~~~====================
 */
-/obj/item/weapon/tray/proc/calc_carry()
+/obj/item/tray/proc/calc_carry()
 	// calculate the weight of the items on the tray
 	var/val = 0 // value to return
 
@@ -167,7 +167,7 @@
 
 	return val
 
-/obj/item/weapon/tray/pickup(mob/user)
+/obj/item/tray/pickup(mob/user)
 
 	if(!isturf(loc))
 		return
@@ -189,13 +189,13 @@
 			Img.icon = I.icon
 			Img.icon_state = I.icon_state
 			Img.layer = layer + I.layer*0.01
-			if(istype(I, /obj/item/weapon/material))
-				var/obj/item/weapon/material/O = I
+			if(istype(I, /obj/item/material))
+				var/obj/item/material/O = I
 				if(O.applies_material_colour)
 					Img.color = O.color
-			overlays += Img
+			add_overlay(Img)
 
-/obj/item/weapon/tray/dropped(mob/user)
+/obj/item/tray/dropped(mob/user)
 	var/noTable = null
 
 	spawn() //Allows the tray to udpate location, rather than just checking against mob's location
@@ -203,7 +203,7 @@
 			noTable = 1
 
 		if(isturf(loc) && !(locate(/mob/living) in src.loc))
-			overlays.Cut()
+			cut_overlays()
 			for(var/obj/item/I in carrying)
 				I.forceMove(src.loc)
 				carrying.Remove(I)

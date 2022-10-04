@@ -14,8 +14,8 @@
 	var/cooldown_on = 0
 	req_access = list(access_ai_upload)
 
-/obj/machinery/ai_slipper/New()
-	..()
+/obj/machinery/ai_slipper/Initialize()
+	. = ..()
 	update_icon()
 
 /obj/machinery/ai_slipper/power_change()
@@ -33,7 +33,7 @@
 	uses = uses
 	power_change()
 
-/obj/machinery/ai_slipper/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/ai_slipper/attackby(obj/item/W, mob/user)
 	if(stat & (NOPOWER|BROKEN))
 		return
 	if(istype(user, /mob/living/silicon))
@@ -100,7 +100,7 @@
 		if(cooldown_on || disabled)
 			return
 		else
-			new /obj/effect/effect/foam(src.loc)
+			new /obj/effect/vfx/foam(src.loc)
 			uses--
 			cooldown_on = 1
 			cooldown_time = world.timeofday + 100

@@ -4,8 +4,8 @@
 	icon_state = "crystal"
 	density = 1
 
-/obj/structure/crystal/New()
-	..()
+/obj/structure/crystal/Initialize()
+	. = ..()
 
 	icon_state = pick("ano70","ano80")
 
@@ -19,17 +19,17 @@
 /obj/structure/crystal/Destroy()
 	src.visible_message("<font color='red'><b>[src] shatters!</b></font>")
 	if(prob(75))
-		new /obj/item/weapon/material/shard/phoron(src.loc)
+		new /obj/item/material/shard/phoron(src.loc)
 	if(prob(50))
-		new /obj/item/weapon/material/shard/phoron(src.loc)
+		new /obj/item/material/shard/phoron(src.loc)
 	if(prob(25))
-		new /obj/item/weapon/material/shard/phoron(src.loc)
+		new /obj/item/material/shard/phoron(src.loc)
 	if(prob(75))
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
 	if(prob(50))
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
 	if(prob(25))
-		new /obj/item/weapon/material/shard(src.loc)
+		new /obj/item/material/shard(src.loc)
 	..()
 
 //todo: laser_act

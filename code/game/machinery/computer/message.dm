@@ -6,11 +6,11 @@
 	icon_screen = "comm_logs"
 	light_color = "#00b000"
 	var/hack_icon = "error"
-	circuit = /obj/item/weapon/circuitboard/message_monitor
+	circuit = /obj/item/circuitboard/message_monitor
 	//Server linked to.
 	var/obj/machinery/message_server/linkedServer = null
 	//Sparks effect - For emag
-	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread
 	//Messages - Saves me time if I want to change something.
 	var/noserver = list("text" = "ALERT: No server detected.", "style" = "alert")
 	var/incorrectkey = list("text" = "ALERT: Incorrect decryption key!", "style" = "warning")
@@ -23,12 +23,12 @@
 	var/optioncount = 8
 	// Custom temp Properties
 	var/customsender = "System Administrator"
-	var/obj/item/device/pda/customrecepient = null
+	var/obj/item/pda/customrecepient = null
 	var/customjob		= "Admin"
 	var/custommessage 	= "This is a test, please ignore."
 	var/list/temp = null
 
-/obj/machinery/computer/message_monitor/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
+/obj/machinery/computer/message_monitor/attackby(obj/item/O as obj, mob/living/user as mob)
 	if(stat & (NOPOWER|BROKEN))
 		..()
 		return
@@ -50,7 +50,7 @@
 			emag = 1
 			spark_system.set_up(5, 0, src)
 			spark_system.start()
-			var/obj/item/weapon/paper/monitorkey/MK = new/obj/item/weapon/paper/monitorkey
+			var/obj/item/paper/monitorkey/MK = new/obj/item/paper/monitorkey
 			MK.loc = loc
 			// Will help make emagging the console not so easy to get away with.
 			MK.info += "<br><br><font color='red'>£%@%(*$%&(£&?*(%&£/{}</font>"
@@ -69,11 +69,15 @@
 	..()
 
 /obj/machinery/computer/message_monitor/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/machinery/computer/message_monitor/LateInitialize()
+	. = ..()
 	//Is the server isn't linked to a server, and there's a server available, default it to the first one in the list.
 	if(!linkedServer)
 		if(message_servers && message_servers.len > 0)
 			linkedServer = message_servers[1]
-	return ..()
 
 /obj/machinery/computer/message_monitor/tgui_interact(mob/user, datum/tgui/ui)
 	ui = SStgui.try_update_ui(user, src, ui)
@@ -132,8 +136,8 @@
 		data["linkedServer"]["spamFilter"] = spamfilter
 
 		//Get out list of viable PDAs
-		var/list/obj/item/device/pda/sendPDAs = list()
-		for(var/obj/item/device/pda/P in PDAs)
+		var/list/obj/item/pda/sendPDAs = list()
+		for(var/obj/item/pda/P in PDAs)
 			if(!P.owner || P.hidden)
 				continue
 			var/datum/data/pda/app/messenger/M = P.find_program(/datum/data/pda/app/messenger)
@@ -270,7 +274,7 @@
 			. = TRUE
 		if("set_recipient")
 			var/ref = params["val"]
-			var/obj/item/device/pda/P = locate(ref)
+			var/obj/item/pda/P = locate(ref)
 			if(!istype(P) || !P.owner || P.hidden)
 				return FALSE
 				
@@ -294,8 +298,8 @@
 				set_temp("NOTICE: No message entered!", "average")
 				return TRUE
 
-			var/obj/item/device/pda/PDARec = null
-			for(var/obj/item/device/pda/P in PDAs)
+			var/obj/item/pda/PDARec = null
+			for(var/obj/item/pda/P in PDAs)
 				if(!P.owner || P.hidden)
 					continue
 				var/datum/data/pda/app/messenger/M = P.find_program(/datum/data/pda/app/messenger)
@@ -334,14 +338,14 @@
 	if(update_now)
 		SStgui.update_uis(src)
 
-/obj/item/weapon/paper/monitorkey
+/obj/item/paper/monitorkey
 	name = "Monitor Decryption Key"
 
-/obj/item/weapon/paper/monitorkey/Initialize()
+/obj/item/paper/monitorkey/Initialize()
 	..()
 	return INITIALIZE_HINT_LATELOAD
 
-/obj/item/weapon/paper/monitorkey/LateInitialize()
+/obj/item/paper/monitorkey/LateInitialize()
 	if(message_servers)
 		for(var/obj/machinery/message_server/server in message_servers)
 			if(!isnull(server.decryptkey))

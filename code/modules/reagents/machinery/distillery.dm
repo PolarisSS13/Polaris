@@ -53,8 +53,8 @@
 	var/image/overlay_dumping
 	var/image/overlay_connected
 
-	var/obj/item/weapon/reagent_containers/glass/InputBeaker
-	var/obj/item/weapon/reagent_containers/glass/OutputBeaker
+	var/obj/item/reagent_containers/glass/InputBeaker
+	var/obj/item/reagent_containers/glass/OutputBeaker
 
 // A multiplier for the production amount. This should really only ever be lower than one, otherwise you end up with duping.
 	var/efficiency = 1
@@ -73,7 +73,7 @@
 
 /obj/machinery/portable_atmospherics/powered/reagent_distillery/RefreshParts()
 	var/total_laser_rating = 0
-	for(var/obj/item/weapon/stock_parts/micro_laser/ML in component_parts)
+	for(var/obj/item/stock_parts/micro_laser/ML in component_parts)
 		total_laser_rating += ML.rating
 
 	max_temp = initial(max_temp) + (50 * (total_laser_rating - 1))
@@ -205,13 +205,13 @@
 
 		if("adjust temp")
 			target_temp = input("Choose a target temperature.", "Temperature.", T20C) as num
-			target_temp = CLAMP(target_temp, min_temp, max_temp)
+			target_temp = clamp(target_temp, min_temp, max_temp)
 
 	update_icon()
 
-/obj/machinery/portable_atmospherics/powered/reagent_distillery/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/attackby(obj/item/W as obj, mob/user as mob)
 	var/list/options = list()
-	if(istype(W, /obj/item/weapon/reagent_containers/glass))
+	if(istype(W, /obj/item/reagent_containers/glass))
 		if(!InputBeaker)
 			options["install input"] = radial_install_input
 		if(!OutputBeaker)
@@ -310,7 +310,7 @@
 				// As of initial testing, a *10 gives ~5-6 minutes to go from room temp to 500C (+/-0.5C)
 				var/temp_diff = (current_temp < target_temp ? dy * 10 * target_temp / current_temp : dy * -10 * current_temp / target_temp)
 
-				current_temp = CLAMP(round((current_temp + temp_diff), 0.01), min_temp, max_temp)
+				current_temp = clamp(round((current_temp + temp_diff), 0.01), min_temp, max_temp)
 				use_power(power_rating * CELLRATE)
 
 				if(target_temp == round(current_temp, 1.0))

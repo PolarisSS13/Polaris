@@ -54,7 +54,7 @@
 
 	totallums =(totallums - minlum) /(maxlum - minlum)
 
-	return CLAMP01(totallums)
+	return clamp(totallums, 0, 1)
 
 // Can't think of a good name, this proc will recalculate the has_opaque_atom variable.
 /turf/proc/recalc_atom_opacity()

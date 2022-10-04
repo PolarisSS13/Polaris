@@ -33,6 +33,8 @@
 	var/icon/closed_locked_welded_icon
 	var/icon/closed_unlocked_icon
 	var/icon/closed_unlocked_welded_icon
+	var/icon/door_front_icon
+	var/icon/door_back_icon
 
 	// Create open icon.
 	var/icon/new_icon = new
@@ -40,6 +42,8 @@
 	open_icon.Blend(icon(base_icon, "open"), ICON_OVERLAY)
 	open_icon.Blend(color, BLEND_ADD)
 	open_icon.Blend(icon(base_icon, "interior"), ICON_OVERLAY)
+	door_back_icon = icon(base_icon, "door_back")
+	door_back_icon.Blend(color, BLEND_ADD)
 	if(decal_icon)
 		for(var/thing in decals)
 			var/icon/this_decal_icon = icon(decal_icon, "[thing]_open")
@@ -47,6 +51,8 @@
 			open_icon.Blend(this_decal_icon, ICON_OVERLAY)
 
 	// Generate basic closed icons.
+	door_front_icon = icon(base_icon, "door_front")
+	door_front_icon.Blend(color, BLEND_ADD)
 	closed_emagged_icon = icon(base_icon, "base")
 	if(can_lock)
 		closed_emagged_icon.Blend(icon(base_icon, "lock"), ICON_OVERLAY)
@@ -56,6 +62,10 @@
 			var/icon/this_decal_icon = icon(decal_icon, thing)
 			this_decal_icon.Blend(decals[thing], BLEND_ADD)
 			closed_emagged_icon.Blend(this_decal_icon, ICON_OVERLAY)
+			door_front_icon.Blend(this_decal_icon, ICON_OVERLAY)
+
+	door_front_icon.AddAlphaMask(icon(base_icon, "door_front")) // Remove pesky 'more than just door' decals
+
 	closed_locked_icon =   icon(closed_emagged_icon)
 	closed_unlocked_icon = icon(closed_emagged_icon)
 
@@ -90,6 +100,8 @@
 	new_icon.Insert(closed_locked_welded_icon,   "closed_locked_welded")
 	new_icon.Insert(closed_unlocked_icon,        "closed_unlocked")
 	new_icon.Insert(closed_unlocked_welded_icon, "closed_unlocked_welded")
+	new_icon.Insert(door_front_icon,             "door_front")
+	new_icon.Insert(door_back_icon,              "door_back")
 
 	// Set icon!
 	icon = new_icon

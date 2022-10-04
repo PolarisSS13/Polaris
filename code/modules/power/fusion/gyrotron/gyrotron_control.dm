@@ -2,7 +2,7 @@
 	name = "gyrotron control console"
 	desc = "Used to control the R-UST stability beams."
 	light_color = COLOR_BLUE
-	circuit = /obj/item/weapon/circuitboard/gyrotron_control
+	circuit = /obj/item/circuitboard/gyrotron_control
 
 	icon_keyboard = "generic_key"
 	icon_screen = "mass_driver"
@@ -11,8 +11,8 @@
 	var/scan_range = 25
 	var/datum/tgui_module/gyrotron_control/monitor
 
-/obj/machinery/computer/gyrotron_control/New()
-	..()
+/obj/machinery/computer/gyrotron_control/Initialize()
+	. = ..()
 	monitor = new(src)
 	monitor.gyro_tag = id_tag
 	monitor.scan_range = scan_range
@@ -94,7 +94,7 @@
 		if(!new_val)
 			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
 			return 1
-		G.mega_energy = CLAMP(new_val, 1, 50)
+		G.mega_energy = clamp(new_val, 1, 50)
 		G.update_active_power_usage(G.mega_energy * 1500)
 		updateUsrDialog()
 		return 1
@@ -104,7 +104,7 @@
 		if(!new_val)
 			to_chat(usr, "<span class='warning'>That's not a valid number.</span>")
 			return 1
-		G.rate = CLAMP(new_val, 1, 10)
+		G.rate = clamp(new_val, 1, 10)
 		updateUsrDialog()
 		return 1
 
@@ -118,7 +118,7 @@
 
 /obj/machinery/computer/gyrotron_control/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Gyrotron Control", monitor.gyro_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			monitor.gyro_tag = new_ident

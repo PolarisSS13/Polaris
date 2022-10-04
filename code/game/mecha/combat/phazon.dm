@@ -133,7 +133,7 @@
 
 	..()
 
-/obj/mecha/combat/phazon/janus/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/mecha/combat/phazon/janus/dynattackby(obj/item/W as obj, mob/user as mob)
 	if(prob(max(1, (50 - round((W.force / 2) * damage_absorption["brute"])) * (1 - (W.armor_penetration / 100)))))
 		src.occupant_message("<span class='alien'>The armor absorbs the incoming attack's force, negating it!</span>")
 		src.visible_message("<span class='alien'>The [src.name] absorbs the incoming attack's force, negating it!</span>")
@@ -158,8 +158,8 @@
 /obj/mecha/combat/phazon/old
 	desc = "An exosuit which can only be described as 'WTF?'. This one is particularly worn looking and likely isn't as sturdy."
 
-/obj/mecha/combat/phazon/old/New()
-	..()
+/obj/mecha/combat/phazon/old/Initialize()
+	. = ..()
 	health = 25
 	maxhealth = 150	//Just slightly worse.
 	cell.charge = rand(0, (cell.charge/2))

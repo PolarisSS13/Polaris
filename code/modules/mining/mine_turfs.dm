@@ -1,4 +1,4 @@
-var/list/mining_overlay_cache = list()
+var/global/list/mining_overlay_cache = list()
 
 /**********************Mineral deposits**************************/
 /turf/unsimulated/mineral
@@ -11,24 +11,28 @@ var/list/mining_overlay_cache = list()
 	name = "rock"
 	icon = 'icons/turf/walls.dmi'
 	icon_state = "rock"
-	var/rock_side_icon_state = "rock_side"
-	var/sand_icon_state = "asteroid"
-	var/rock_icon_state = "rock"
-	var/random_icon = 0
 	oxygen = 0
 	nitrogen = 0
 	opacity = 1
 	density = 1
 	blocks_air = 1
 	temperature = T0C
-
 	can_dirty = FALSE
+
+	var/floor_name = "sand"
+	var/rock_side_icon_state = "rock_side"
+	var/sand_icon_state = "asteroid"
+	var/rock_icon_state = "rock"
+	var/sand_icon_path = 'icons/turf/flooring/asteroid.dmi' // Override this on a subtype turf if you want a custom icon
+	var/rock_icon_path = 'icons/turf/walls.dmi' // Override this on a subtype turf if you want a custom icon
+	var/random_icon = 0
 
 	var/ore/mineral
 	var/sand_dug
 	var/mined_ore = 0
 	var/last_act = 0
 	var/overlay_detail
+	var/overlay_detail_icon_path = 'icons/turf/flooring/decals.dmi' // Override this on a subtype turf if you want a custom icon
 
 	var/datum/geosample/geologic_data
 	var/excavation_level = 0
@@ -36,34 +40,56 @@ var/list/mining_overlay_cache = list()
 	var/next_rock = 0
 	var/archaeo_overlay = ""
 	var/excav_overlay = ""
-	var/obj/item/weapon/last_find
+	var/obj/item/last_find
 	var/datum/artifact_find/artifact_find
 	var/ignore_mapgen
 
 	var/static/list/ore_types = list(
-		"hematite" = /obj/item/weapon/ore/iron,
-		"uranium" = /obj/item/weapon/ore/uranium,
-		"gold" = /obj/item/weapon/ore/gold,
-		"silver" = /obj/item/weapon/ore/silver,
-		"diamond" = /obj/item/weapon/ore/diamond,
-		"phoron" = /obj/item/weapon/ore/phoron,
-		"osmium" = /obj/item/weapon/ore/osmium,
-		"hydrogen" = /obj/item/weapon/ore/hydrogen,
-		"silicates" = /obj/item/weapon/ore/glass,
-		"carbon" = /obj/item/weapon/ore/coal,
-		"verdantium" = /obj/item/weapon/ore/verdantium,
-		"marble" = /obj/item/weapon/ore/marble,
-		"lead" = /obj/item/weapon/ore/lead,
-		"copper" = /obj/item/weapon/ore/copper,
-//		"tin" = /obj/item/weapon/ore/tin,
-		"bauxite" = /obj/item/weapon/ore/bauxite,
-//		"void opal" = /obj/item/weapon/ore/void_opal,
-//		"painite" = /obj/item/weapon/ore/painite,
-//		"quartz" = /obj/item/weapon/ore/quartz,
-		"rutile" = /obj/item/weapon/ore/rutile
+		"hematite" = /obj/item/ore/iron,
+		"uranium" = /obj/item/ore/uranium,
+		"gold" = /obj/item/ore/gold,
+		"silver" = /obj/item/ore/silver,
+		"diamond" = /obj/item/ore/diamond,
+		"phoron" = /obj/item/ore/phoron,
+		"osmium" = /obj/item/ore/osmium,
+		"hydrogen" = /obj/item/ore/hydrogen,
+		"silicates" = /obj/item/ore/glass,
+		"carbon" = /obj/item/ore/coal,
+		"verdantium" = /obj/item/ore/verdantium,
+		"marble" = /obj/item/ore/marble,
+		"lead" = /obj/item/ore/lead,
+		"copper" = /obj/item/ore/copper,
+//		"tin" = /obj/item/ore/tin,
+		"bauxite" = /obj/item/ore/bauxite,
+		"magmellite" = /obj/item/ore/magmellite,
+//		"painite" = /obj/item/ore/painite,
+//		"quartz" = /obj/item/ore/quartz,
+		"rutile" = /obj/item/ore/rutile
 	)
 
 	has_resources = 1
+
+/turf/simulated/mineral/ChangeTurf(turf/N, tell_universe, force_lighting_update, preserve_outdoors)
+	clear_ore_effects()
+	. = ..()
+
+/turf/simulated/mineral/xenoarch
+	name = "random digsite"
+
+/turf/simulated/mineral/xenoarch/Initialize()
+	. = ..()
+	name = "rock"
+
+	make_digsite(rand(0,2))
+
+/turf/simulated/mineral/ore
+	name = "random ore"
+
+/turf/simulated/mineral/ore/Initialize()
+	. = ..()
+	name = "rock"
+
+	make_ore(prob(30))
 
 // Alternative rock wall sprites.
 /turf/simulated/mineral/light
@@ -97,6 +123,30 @@ var/list/mining_overlay_cache = list()
 	sand_icon_state = "sand-icey" // to be replaced
 	rock_icon_state = "rock-crystal-shiny"
 
+/turf/simulated/mineral/moon
+	icon_state = "rock-moon"
+	rock_side_icon_state = "rock_side-moon"
+	sand_icon_state = "moonsand_fine"
+	rock_icon_state = "rock-moon"
+
+/turf/simulated/mineral/moon/xenoarch
+	name = "random thor digsite"
+
+/turf/simulated/mineral/moon/xenoarch/Initialize()
+	. = ..()
+	name = "rock"
+
+	make_digsite(rand(0,2))
+
+/turf/simulated/mineral/moon/ore
+	name = "random thor ore"
+
+/turf/simulated/mineral/moon/ore/Initialize()
+	. = ..()
+	name = "rock"
+
+	make_ore(prob(30))
+
 /turf/simulated/mineral/ignore_mapgen
 	ignore_mapgen = 1
 
@@ -108,6 +158,14 @@ var/list/mining_overlay_cache = list()
 	opacity = 0
 	blocks_air = 0
 	can_build_into_floor = TRUE
+
+/turf/simulated/mineral/floor/mud
+	icon_state = "mud"
+	sand_icon_state = "mud"
+
+/turf/simulated/mineral/floor/dirt
+	icon_state = "dirt"
+	sand_icon_state = "dirt"
 
 //Alternative sand floor sprite.
 /turf/simulated/mineral/floor/light
@@ -130,6 +188,10 @@ var/list/mining_overlay_cache = list()
 	icon_state = "sand-light-corner"
 	sand_icon_state = "sand-light-corner"
 
+/turf/simulated/mineral/floor/moon
+	icon_state = "moonsand_fine"
+	sand_icon_state = "moonsand_fine"
+
 /turf/simulated/mineral/floor/ignore_mapgen
 	ignore_mapgen = 1
 
@@ -140,6 +202,7 @@ var/list/mining_overlay_cache = list()
 	opacity = 0
 	blocks_air = 0
 	can_build_into_floor = TRUE
+	clear_ore_effects()
 	update_general()
 
 /turf/simulated/mineral/proc/make_wall()
@@ -181,7 +244,7 @@ var/list/mining_overlay_cache = list()
 /turf/simulated/mineral/Initialize()
 	. = ..()
 	if(prob(20))
-		overlay_detail = "asteroid[rand(0,9)]"
+		overlay_detail = "[sand_icon_state][rand(0,9)]"
 	update_icon(1)
 	if(density && mineral)
 		. = INITIALIZE_HINT_LATELOAD
@@ -206,7 +269,7 @@ var/list/mining_overlay_cache = list()
 		else
 			name = "rock"
 
-		icon = 'icons/turf/walls.dmi'
+		icon = rock_icon_path
 		icon_state = rock_icon_state
 
 		//Apply overlays if we should have borders
@@ -223,8 +286,8 @@ var/list/mining_overlay_cache = list()
 
 	//We are a sand floor
 	else
-		name = "sand"
-		icon = 'icons/turf/flooring/asteroid.dmi'
+		name = floor_name
+		icon = sand_icon_path
 		icon_state = sand_icon_state
 
 		if(sand_dug)
@@ -239,10 +302,11 @@ var/list/mining_overlay_cache = list()
 			else
 				var/turf/T = get_step(src, direction)
 				if(istype(T) && T.density)
-					add_overlay(get_cached_border(rock_side_icon_state,direction,'icons/turf/walls.dmi',rock_side_icon_state))
+					add_overlay(get_cached_border(rock_side_icon_state,direction,rock_icon_path,rock_side_icon_state))
 
 		if(overlay_detail)
-			add_overlay('icons/turf/flooring/decals.dmi',overlay_detail)
+			if(overlay_detail in icon_states(icon))
+				add_overlay(overlay_detail_icon_path,overlay_detail)
 
 		if(update_neighbors)
 			for(var/direction in alldirs)
@@ -264,14 +328,16 @@ var/list/mining_overlay_cache = list()
 			mined_ore = 2 //some of the stuff gets blown up
 			GetDrilled()
 
-	if(severity <= 2) // Now to expose the ore lying under the sand.
+	if(severity <= 2 && length(resources)) // Now to expose the ore lying under the sand.
 		spawn(1) // Otherwise most of the ore is lost to the explosion, which makes this rather moot.
 			for(var/ore in resources)
-				var/amount_to_give = rand(CEILING(resources[ore]/2, 1), resources[ore])  // Should result in at least one piece of ore.
-				for(var/i=1, i <= amount_to_give, i++)
+				var/amount_to_give = rand(CEILING(resources[ore] / 2, 1), resources[ore])  // Should result in at least one piece of ore.
+				for(var/i = 1 to amount_to_give)
 					var/oretype = ore_types[ore]
-					new oretype(src)
-				resources[ore] = 0
+					if(oretype)
+						new oretype(src)
+			resources = null
+
 
 /turf/simulated/mineral/bullet_act(var/obj/item/projectile/Proj) // only emitters for now
 	if(Proj.excavation_amount)
@@ -299,13 +365,13 @@ var/list/mining_overlay_cache = list()
 
 	if(istype(AM,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = AM
-		var/obj/item/weapon/pickaxe/P = H.get_inactive_hand()
+		var/obj/item/pickaxe/P = H.get_inactive_hand()
 		if(istype(P))
 			src.attackby(P, H)
 
 	else if(istype(AM,/mob/living/silicon/robot))
 		var/mob/living/silicon/robot/R = AM
-		if(istype(R.module_active,/obj/item/weapon/pickaxe))
+		if(istype(R.module_active,/obj/item/pickaxe))
 			attackby(R.module_active,R)
 
 	else if(istype(AM,/obj/mecha))
@@ -326,12 +392,12 @@ var/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	if(mineral)
+	if(initialized && istype(mineral))
 		new /obj/effect/mineral(src, mineral)
 	update_icon()
 
 //Not even going to touch this pile of spaghetti
-/turf/simulated/mineral/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/turf/simulated/mineral/attackby(obj/item/W as obj, mob/user as mob)
 
 	if (!(istype(usr, /mob/living/carbon/human) || ticker) && ticker.mode.name != "monkey")
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
@@ -341,13 +407,13 @@ var/list/mining_overlay_cache = list()
 		var/valid_tool = 0
 		var/digspeed = 40
 
-		if(istype(W, /obj/item/weapon/shovel))
-			var/obj/item/weapon/shovel/S = W
+		if(istype(W, /obj/item/shovel))
+			var/obj/item/shovel/S = W
 			valid_tool = 1
 			digspeed = S.digspeed
 
-		if(istype(W, /obj/item/weapon/pickaxe))
-			var/obj/item/weapon/pickaxe/P = W
+		if(istype(W, /obj/item/pickaxe))
+			var/obj/item/pickaxe/P = W
 			if(P.sand_dig)
 				valid_tool = 1
 				digspeed = P.digspeed
@@ -370,17 +436,17 @@ var/list/mining_overlay_cache = list()
 			to_chat(user, "<span class='notice'>You dug a hole.</span>")
 			GetDrilled()
 
-		else if(istype(W,/obj/item/weapon/storage/bag/ore))
-			var/obj/item/weapon/storage/bag/ore/S = W
+		else if(istype(W,/obj/item/storage/bag/ore))
+			var/obj/item/storage/bag/ore/S = W
 			if(S.collection_mode)
-				for(var/obj/item/weapon/ore/O in contents)
+				for(var/obj/item/ore/O in contents)
 					O.attackby(W,user)
 					return
 
-		else if(istype(W,/obj/item/weapon/storage/bag/fossils))
-			var/obj/item/weapon/storage/bag/fossils/S = W
+		else if(istype(W,/obj/item/storage/bag/fossils))
+			var/obj/item/storage/bag/fossils/S = W
 			if(S.collection_mode)
-				for(var/obj/item/weapon/fossil/F in contents)
+				for(var/obj/item/fossil/F in contents)
 					F.attackby(W,user)
 					return
 
@@ -411,26 +477,26 @@ var/list/mining_overlay_cache = list()
 
 
 	else
-		if (istype(W, /obj/item/device/core_sampler))
+		if (istype(W, /obj/item/core_sampler))
 			geologic_data.UpdateNearbyArtifactInfo(src)
-			var/obj/item/device/core_sampler/C = W
+			var/obj/item/core_sampler/C = W
 			C.sample_item(src, user)
 			return
 
-		if (istype(W, /obj/item/device/depth_scanner))
-			var/obj/item/device/depth_scanner/C = W
+		if (istype(W, /obj/item/depth_scanner))
+			var/obj/item/depth_scanner/C = W
 			C.scan_atom(user, src)
 			return
 
-		if (istype(W, /obj/item/device/measuring_tape))
-			var/obj/item/device/measuring_tape/P = W
+		if (istype(W, /obj/item/measuring_tape))
+			var/obj/item/measuring_tape/P = W
 			user.visible_message("<span class='notice'>\The [user] extends \a [P] towards \the [src].</span>","<span class='notice'>You extend \the [P] towards \the [src].</span>")
 			if(do_after(user, 15))
 				to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
 			return
 
-		if(istype(W, /obj/item/device/xenoarch_multi_tool))
-			var/obj/item/device/xenoarch_multi_tool/C = W
+		if(istype(W, /obj/item/xenoarch_multi_tool))
+			var/obj/item/xenoarch_multi_tool/C = W
 			if(C.mode) //Mode means scanning
 				C.depth_scanner.scan_atom(user, src)
 			else
@@ -439,11 +505,11 @@ var/list/mining_overlay_cache = list()
 					to_chat(user, "<span class='notice'>\The [src] has been excavated to a depth of [excavation_level]cm.</span>")
 			return
 
-		if (istype(W, /obj/item/weapon/pickaxe))
+		if (istype(W, /obj/item/pickaxe))
 			if(!istype(user.loc, /turf))
 				return
 
-			var/obj/item/weapon/pickaxe/P = W
+			var/obj/item/pickaxe/P = W
 			if(last_act + P.digspeed > world.time)//prevents message spam
 				return
 			last_act = world.time
@@ -485,7 +551,7 @@ var/list/mining_overlay_cache = list()
 				next_rock += P.excavation_amount
 				while(next_rock > 50)
 					next_rock -= 50
-					var/obj/item/weapon/ore/O = new(src)
+					var/obj/item/ore/O = new(src)
 					geologic_data.UpdateNearbyArtifactInfo(src)
 					O.geologic_data = geologic_data
 			return
@@ -548,7 +614,7 @@ var/list/mining_overlay_cache = list()
 	if(!mineral)
 		return
 	clear_ore_effects()
-	var/obj/item/weapon/ore/O = new mineral.ore (src)
+	var/obj/item/ore/O = new mineral.ore (src)
 	if(istype(O))
 		geologic_data.UpdateNearbyArtifactInfo(src)
 		O.geologic_data = geologic_data
@@ -580,7 +646,7 @@ var/list/mining_overlay_cache = list()
 		if(!sand_dug)
 			sand_dug = 1
 			for(var/i=0;i<5;i++)
-				new/obj/item/weapon/ore/glass(src)
+				new/obj/item/ore/glass(src)
 			update_icon()
 		return
 
@@ -621,16 +687,16 @@ var/list/mining_overlay_cache = list()
 /turf/simulated/mineral/proc/excavate_find(var/is_clean = 0, var/datum/find/F)
 	//with skill and luck, players can cleanly extract finds
 	//otherwise, they come out inside a chunk of rock
-	var/obj/item/weapon/X
+	var/obj/item/X
 	if(is_clean)
-		X = new /obj/item/weapon/archaeological_find(src, new_item_type = F.find_type)
+		X = new /obj/item/archaeological_find(src, F.find_type)
 	else
-		X = new /obj/item/weapon/strangerock(src, inside_item_type = F.find_type)
+		X = new /obj/item/strangerock(src, F.find_type)
 		geologic_data.UpdateNearbyArtifactInfo(src)
-		var/obj/item/weapon/strangerock/SR = X
+		var/obj/item/strangerock/SR = X
 		SR.geologic_data = geologic_data
 
-	//some find types delete the /obj/item/weapon/archaeological_find and replace it with something else, this handles when that happens
+	//some find types delete the /obj/item/archaeological_find and replace it with something else, this handles when that happens
 	//yuck
 	var/display_name = "Something"
 	if(!X)
@@ -665,10 +731,10 @@ var/list/mining_overlay_cache = list()
 				new /obj/item/stack/material/plasteel(src, rand(5,25))
 			if(5)
 				for(var/i=1 to rand(1,3))
-					new /obj/item/weapon/material/shard(src)
+					new /obj/item/material/shard(src)
 			if(6)
 				for(var/i=1 to rand(1,3))
-					new /obj/item/weapon/material/shard/phoron(src)
+					new /obj/item/material/shard/phoron(src)
 			if(7)
 				new /obj/item/stack/material/uranium(src, rand(5,25))
 
@@ -678,12 +744,52 @@ var/list/mining_overlay_cache = list()
 
 	var/mineral_name
 	if(rare_ore)
-		mineral_name = pickweight(list("marble" = 5,/* "quartz" = 15,*/ "copper" = 10, /*"tin" = 5,*/ "bauxite" = 5, "uranium" = 15, "platinum" = 20, "hematite" = 15, "rutile" = 20, "carbon" = 15, "diamond" = 3, "gold" = 15, "silver" = 15, "phoron" = 25, "lead" = 5,/* "void opal" = 1,*/ "verdantium" = 2/*, "painite" = 1*/))
+		mineral_name = pickweight(list("marble" = 5,/* "quartz" = 15,*/ "copper" = 10, /*"tin" = 5,*/ "bauxite" = 5, "uranium" = 15, "platinum" = 20, "hematite" = 15, "rutile" = 20, "carbon" = 15, "diamond" = 3, "gold" = 15, "silver" = 15, "phoron" = 25, "lead" = 5, "magmellite" = 1, "verdantium" = 2/*, "painite" = 1*/))
 
 	else
-		mineral_name = pickweight(list("marble" = 3,/* "quartz" = 10,*/ "copper" = 20, /*"tin" = 15,*/ "bauxite" = 15, "uranium" = 10, "platinum" = 10, "hematite" = 70, "rutile" = 15, "carbon" = 70, "diamond" = 2, "gold" = 10, "silver" = 10, "phoron" = 20, "lead" = 3,/* "void opal" = 1,*/ "verdantium" = 1/*, "painite" = 1*/))
+		mineral_name = pickweight(list("marble" = 3,/* "quartz" = 10,*/ "copper" = 20, /*"tin" = 15,*/ "bauxite" = 15, "uranium" = 10, "platinum" = 10, "hematite" = 70, "rutile" = 15, "carbon" = 70, "diamond" = 2, "gold" = 10, "silver" = 10, "phoron" = 20, "lead" = 3, "magmellite" = 1, "verdantium" = 1/*, "painite" = 1*/))
 
 	if(mineral_name && (mineral_name in GLOB.ore_data))
 		mineral = GLOB.ore_data[mineral_name]
-		UpdateMineral()
+		if(initialized)
+			UpdateMineral()
 	update_icon()
+
+// The value of range is turf-radius.
+// digsite_type allows you to specify what type of digsite is spawned. code/modules/xenoarchaeology/finds/finds_defines.dm
+// allow_anomalies is the probability, if any, of spawning an artifact in a turf, in the range. Garden and Animal digsites overwrite this probability.
+/turf/simulated/mineral/proc/make_digsite(var/range = 0, var/digsite_type , var/allow_anomalies = 5)
+	var/digsite = digsite_type ? digsite_type : get_random_digsite_type()
+
+	for(var/turf/simulated/mineral/T in range(range,src))
+		if(LAZYLEN(T.finds))
+			continue
+
+		if(isnull(T.geologic_data))
+			T.geologic_data = new /datum/geosample(T)
+		
+		if(isnull(T.finds) || isemptylist(T.finds))
+			T.finds = list()
+			if(prob(50))
+				T.finds.Add(new /datum/find(digsite, rand(10, 190)))
+			else if(prob(75))
+				T.finds.Add(new /datum/find(digsite, rand(10, 90)))
+				T.finds.Add(new /datum/find(digsite, rand(110, 190)))
+			else
+				T.finds.Add(new /datum/find(digsite, rand(10, 50)))
+				T.finds.Add(new /datum/find(digsite, rand(60, 140)))
+				T.finds.Add(new /datum/find(digsite, rand(150, 190)))
+
+			//sometimes a find will be close enough to the surface to show
+			var/datum/find/F = T.finds[1]
+			if(F.excavation_required <= F.view_range)
+				T.archaeo_overlay = "overlay_archaeo[rand(1,3)]"
+				T.update_icon()
+
+		if(!isnull(allow_anomalies) && prob(allow_anomalies))
+			//have a chance for an artifact to spawn here, but not in animal or plant digsites
+			if(isnull(T.artifact_find) && digsite != DIGSITE_GARDEN && digsite != DIGSITE_ANIMAL)
+				T.artifact_find = new()
+
+		T.update_icon()
+

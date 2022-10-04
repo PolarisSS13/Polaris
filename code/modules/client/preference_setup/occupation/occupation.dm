@@ -123,8 +123,11 @@
 			var/available_in_days = job.available_in_days(user.client)
 			. += "<del>[rank]</del></td></a><td> \[IN [(available_in_days)] DAYS]</td></tr>"
 			continue
-		if(job.minimum_character_age && user.client && (user.client.prefs.age < job.minimum_character_age))
-			. += "<del>[rank]</del></td></a><td> \[MINIMUM CHARACTER AGE: [job.minimum_character_age]]</td></tr>"
+		if(job.is_species_banned(user.client.prefs.species, user.client.prefs.organ_data["brain"]) == TRUE)
+			. += "<del>[rank]</del></td></a><td> \[THIS RACE/BRAIN TYPE CANNOT TAKE THIS ROLE.\]</td></tr>"
+			continue
+		if((job.minimum_character_age || job.min_age_by_species) && user.client && (user.client.prefs.age < job.get_min_age(user.client.prefs.species, user.client.prefs.organ_data["brain"])))
+			. += "<del>[rank]</del></td></a><td> \[MINIMUM CHARACTER AGE FOR SELECTED RACE/BRAIN TYPE: [job.get_min_age(user.client.prefs.species, user.client.prefs.organ_data["brain"])]\]</td></tr>"
 			continue
 		if((pref.job_civilian_low & ASSISTANT) && job.type != /datum/job/assistant)
 			. += "<font color=grey>[rank]</font></a></td><td></td></tr>"
@@ -267,17 +270,16 @@
 /datum/category_item/player_setup_item/occupation/proc/SetJob(mob/user, role, level)
 	var/datum/job/job = job_master.GetJob(role)
 	if(!job)
-		return 0
+		return FALSE
 
 	if(job.type == /datum/job/assistant)
 		if(pref.job_civilian_low & job.flag)
 			pref.job_civilian_low &= ~job.flag
 		else
 			pref.job_civilian_low |= job.flag
-		return 1
-
+		return TRUE
 	SetJobDepartment(job, level)
-	return 1
+	return TRUE
 
 /datum/category_item/player_setup_item/occupation/proc/reset_jobhigh()
 	pref.job_civilian_med |= pref.job_civilian_high
@@ -290,7 +292,7 @@
 // Level is equal to the desired new level of the job. So for a value of 4, we want to disable the job.
 /datum/category_item/player_setup_item/occupation/proc/SetJobDepartment(var/datum/job/job, var/level)
 	if(!job || !level)
-		return 0
+		return FALSE
 
 	switch(job.department_flag)
 		if(CIVILIAN)
@@ -329,7 +331,7 @@
 					pref.job_engsec_med |= job.flag
 				if(3)
 					pref.job_engsec_low |= job.flag
-	return 1
+	return TRUE
 
 /datum/category_item/player_setup_item/occupation/proc/ResetJobs()
 	pref.job_civilian_high = 0

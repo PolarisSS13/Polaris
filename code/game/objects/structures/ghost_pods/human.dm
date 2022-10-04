@@ -35,7 +35,7 @@
 	clothing_possibilities |= subtypesof(/obj/item/clothing/under/color)
 	clothing_possibilities |= subtypesof(/obj/item/clothing/head/soft)
 	clothing_possibilities |= /obj/item/clothing/shoes/black
-	clothing_possibilities |= /obj/item/device/radio/headset
+	clothing_possibilities |= /obj/item/radio/headset
 
 /obj/structure/ghost_pod/ghost_activated/human/create_occupant(var/mob/M)
 	..()
@@ -50,7 +50,7 @@
 		to_chat(M, "<span class='warning'>Your intent may not be completely beneficial.</span>")
 	H.ckey = M.ckey
 	visible_message("<span class='warning'>As \the [src] opens, the pipes on \the [src] surge, before it grows dark.</span>")
-	log_and_message_admins("successfully opened \a [src] and became a [occupant_type].")
+	log_and_message_admins("successfully opened \a [src] and became a [occupant_type].", H)
 
 	var/list/uniform_options
 	var/list/shoe_options
@@ -71,7 +71,7 @@
 				if(!head_options)
 					head_options = list()
 				head_options |= path
-			if(ispath(path, /obj/item/device/radio/headset))
+			if(ispath(path, /obj/item/radio/headset))
 				if(!headset_options)
 					headset_options = list()
 				headset_options |= path
@@ -97,7 +97,7 @@
 		H.equip_to_appropriate_slot(C)
 
 	if(spawn_with_emag)
-		var/obj/item/weapon/card/emag/E = new(H)
+		var/obj/item/card/emag/E = new(H)
 		E.name = "broken card"
 		E.description_antag = "This is a 'disguised' emag, to make your escape from wherever you happen to be trapped."
 		H.equip_to_appropriate_slot(E)
@@ -111,7 +111,7 @@
 	H.forceMove(T)
 
 	if(make_antag)
-		var/datum/antagonist/antag = all_antag_types[make_antag]
+		var/datum/antagonist/antag = SSantags.antag_datums[make_antag]
 		if(antag)
 			if(antag.add_antagonist(H.mind, 1, 1, 0, 1, 1))
 				log_admin("\The [src] made [key_name(src)] into a [antag.role_text].")
@@ -163,7 +163,7 @@
 	clothing_possibilities |= subtypesof(/obj/item/clothing/under/utility)
 	clothing_possibilities |= subtypesof(/obj/item/clothing/head/beret)
 	clothing_possibilities |= /obj/item/clothing/shoes/black
-	clothing_possibilities |= /obj/item/device/radio/headset
+	clothing_possibilities |= /obj/item/radio/headset
 
 /obj/structure/ghost_pod/manual/human/create_occupant(var/mob/M)
 	..()
@@ -178,7 +178,7 @@
 		to_chat(M, "<span class='warning'>Your intent may not be completely beneficial.</span>")
 	H.ckey = M.ckey
 	visible_message("<span class='warning'>As \the [src] opens, the pipes on \the [src] surge, before it grows dark.</span>")
-	log_and_message_admins("successfully opened \a [src] and got a [occupant_type].")
+	log_and_message_admins("successfully opened \a [src] and got a [occupant_type].", H)
 
 	var/list/uniform_options
 	var/list/shoe_options
@@ -199,7 +199,7 @@
 				if(!head_options)
 					head_options = list()
 				head_options |= path
-			if(ispath(path, /obj/item/device/radio/headset))
+			if(ispath(path, /obj/item/radio/headset))
 				if(!headset_options)
 					headset_options = list()
 				headset_options |= path
@@ -233,7 +233,7 @@
 	H.forceMove(T)
 
 	if(make_antag)
-		var/datum/antagonist/antag = all_antag_types[make_antag]
+		var/datum/antagonist/antag = SSantags.antag_datums[make_antag]
 		if(antag)
 			if(antag.add_antagonist(H.mind, 1, 1, 0, 1, 1))
 				log_admin("\The [src] made [key_name(src)] into a [antag.role_text].")

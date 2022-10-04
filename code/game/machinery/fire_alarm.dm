@@ -20,7 +20,7 @@ FIRE ALARM
 	var/last_process = 0
 	panel_open = 0
 	var/seclevel
-	circuit = /obj/item/weapon/circuitboard/firealarm
+	circuit = /obj/item/circuitboard/firealarm
 	var/alarms_hidden = FALSE //If the alarms from this machine are visible on consoles
 
 /obj/machinery/firealarm/alarms_hidden
@@ -90,7 +90,7 @@ FIRE ALARM
 		return
 
 	if(panel_open)
-		if(istype(W, /obj/item/device/multitool))
+		if(istype(W, /obj/item/multitool))
 			detecting = !(detecting)
 			if(detecting)
 				user.visible_message("<span class='notice'>\The [user] has reconnected [src]'s detecting unit!</span>", "<span class='notice'>You have reconnected [src]'s detecting unit.</span>")
@@ -142,7 +142,7 @@ FIRE ALARM
 		return
 	var/area/area = get_area(src)
 	for(var/obj/machinery/firealarm/FA in area)
-		fire_alarm.clearAlarm(src.loc, FA)
+		GLOB.fire_alarm.clearAlarm(src.loc, FA)
 	update_icon()
 	if(user)
 		log_game("[user] reset a fire alarm at [COORD(src)]")
@@ -152,7 +152,7 @@ FIRE ALARM
 		return
 	var/area/area = get_area(src)
 	for(var/obj/machinery/firealarm/FA in area)
-		fire_alarm.triggerAlarm(loc, FA, duration, hidden = alarms_hidden)
+		GLOB.fire_alarm.triggerAlarm(loc, FA, duration, hidden = alarms_hidden)
 	update_icon()
 	playsound(src, 'sound/machines/airalarm.ogg', 25, 0, 4, volume_channel = VOLUME_CHANNEL_ALARMS)
 	if(user)
@@ -167,7 +167,7 @@ FIRE ALARM
 FIRE ALARM CIRCUIT
 Just a object used in constructing fire alarms
 
-/obj/item/weapon/firealarm_electronics
+/obj/item/firealarm_electronics
 	name = "fire alarm electronics"
 	icon = 'icons/obj/doors/door_assembly.dmi'
 	icon_state = "door_electronics"

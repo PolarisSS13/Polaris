@@ -1,6 +1,6 @@
 #define SHIP_MOVE_RESOLUTION 0.00001
 #define MOVING(speed) abs(speed) >= min_speed
-#define SANITIZE_SPEED(speed) SIGN(speed) * CLAMP(abs(speed), 0, max_speed)
+#define SANITIZE_SPEED(speed) SIGN(speed) * clamp(abs(speed), 0, max_speed)
 #define CHANGE_SPEED_BY(speed_var, v_diff) \
 	v_diff = SANITIZE_SPEED(v_diff);\
 	if(!MOVING(speed_var + v_diff)) \
@@ -10,8 +10,9 @@
 // Uses Lorentzian dynamics to avoid going too fast.
 
 /obj/effect/overmap/visitable/ship
-	name = "generic ship"
-	desc = "Space faring vessel."
+	name = "spacecraft"
+	desc = "This marker represents a spaceship. Scan it for more information."
+	scanner_desc = "Unknown spacefaring vessel."
 	dir = NORTH
 	icon_state = "ship"
 	appearance_flags = TILE_BOUND|KEEP_TOGETHER|LONG_GLIDE
@@ -58,8 +59,19 @@
 
 /obj/effect/overmap/visitable/ship/get_scan_data(mob/user)
 	. = ..()
+	
 	if(!is_still())
-		. += "<br>Heading: [get_heading_degrees()], speed [get_speed() * 1000]"
+		. += {"\n\[i\]Heading\[/i\]: [get_heading_degrees()]\n\[i\]Velocity\[/i\]: [get_speed() * 1000]"}
+	else
+		. += {"\n\[i\]Vessel was stationary at time of scan.\[/i\]\n"}
+	
+	var/life = 0
+	
+	for(var/mob/living/L in living_mob_list)
+		if(L.z in map_z) //Things inside things we'll consider shielded, otherwise we'd want to use get_z(L)
+			life++
+	
+	. += {"\[i\]Life Signs\[/i\]: [life ? life : "None"]"}
 
 //Projected acceleration based on information from engines
 /obj/effect/overmap/visitable/ship/proc/get_acceleration()
@@ -94,7 +106,7 @@
 
 // Get heading in degrees (like a compass heading)
 /obj/effect/overmap/visitable/ship/proc/get_heading_degrees()
-	return (ATAN2(speed[2], speed[1]) + 360) % 360 // Yes ATAN2(y, x) is correct to get clockwise degrees
+	return (arctan(speed[2], speed[1]) + 360) % 360 // Yes arctan(y, x) is correct to get clockwise degrees
 
 /obj/effect/overmap/visitable/ship/proc/adjust_speed(n_x, n_y)
 	var/old_still = is_still()
@@ -239,6 +251,8 @@
 
 /obj/effect/overmap/visitable/ship/populate_sector_objects()
 	..()
+	for(var/obj/machinery/computer/ship/S in global.machines)
+		S.attempt_hook_up(src)
 	for(var/datum/ship_engine/E in ship_engines)
 		if(check_ownership(E.holder))
 			engines |= E

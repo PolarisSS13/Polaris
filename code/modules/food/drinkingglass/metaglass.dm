@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers/food/drinks/metaglass
+/obj/item/reagent_containers/food/drinks/metaglass
 	name = "metamorphic glass"
 	desc = "This glass changes shape and form depending on the drink inside... fancy!"
 	icon_state = "glass_empty"
@@ -9,13 +9,13 @@
 	matter = list("glass" = 500)
 	icon = 'icons/obj/drinks.dmi'
 
-/obj/item/weapon/reagent_containers/food/drinks/metaglass/metapint
+/obj/item/reagent_containers/food/drinks/metaglass/metapint
 	name = "metamorphic pint glass"
 	desc = "This glass changes shape and form depending on the drink inside... fancy!"
 	icon_state = "pglass_empty"
 	volume = 60
 
-/obj/item/weapon/reagent_containers/food/drinks/metaglass/on_reagent_change()
+/obj/item/reagent_containers/food/drinks/metaglass/on_reagent_change()
 	if (reagents.reagent_list.len > 0)
 		var/datum/reagent/R = reagents.get_master_reagent()
 
@@ -23,7 +23,7 @@
 			icon = R.glass_icon_file
 		else
 			icon = initial(icon)
-		
+
 		if(R.glass_icon_state)
 			icon_state = R.glass_icon_state
 		else
@@ -49,7 +49,7 @@
 		else
 			price_tag = null
 	else
-		if(type == /obj/item/weapon/reagent_containers/food/drinks/metaglass/metapint)
+		if(type == /obj/item/reagent_containers/food/drinks/metaglass/metapint)
 			icon_state = "pglass_empty"
 			name = "metamorphic pint glass"
 			desc = "This glass changes shape and form depending on the drink inside... fancy!"
@@ -372,6 +372,10 @@ Drinks Data
 /datum/reagent/ethanol/martini
 	glass_icon_state = "martiniglass"
 	glass_center_of_mass = list("x"=17, "y"=8)
+
+/datum/reagent/ethanol/rum_and_cola
+	glass_icon_state = "rumcolaglass"
+	glass_center_of_mass = list("x"=16, "y"=8)
 
 /datum/reagent/ethanol/cuba_libre
 	glass_icon_state = "cubalibreglass"

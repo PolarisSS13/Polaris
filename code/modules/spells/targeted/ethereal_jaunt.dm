@@ -64,7 +64,7 @@
 	flick("reappear",animation)
 
 /spell/targeted/ethereal_jaunt/proc/jaunt_steam(var/mobloc)
-	var/datum/effect/effect/system/steam_spread/steam = new /datum/effect/effect/system/steam_spread()
+	var/datum/effect_system/steam_spread/steam = new /datum/effect_system/steam_spread()
 	steam.set_up(10, 0, mobloc)
 	steam.start()
 
@@ -78,9 +78,9 @@
 	anchored = 1
 	var/turf/last_valid_turf
 
-/obj/effect/dummy/spell_jaunt/New(var/location)
-	..()
-	last_valid_turf = get_turf(location)
+/obj/effect/dummy/spell_jaunt/Initialize()
+	. = ..()
+	last_valid_turf = get_turf(loc)
 
 /obj/effect/dummy/spell_jaunt/Destroy()
 	// Eject contents if deleted somehow

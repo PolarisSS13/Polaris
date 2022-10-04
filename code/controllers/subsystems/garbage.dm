@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(garbage)
 	var/list/queues
 
 
-/datum/controller/subsystem/garbage/PreInit()
+/datum/controller/subsystem/garbage/OnNew()
 	queues = new(GC_QUEUE_COUNT)
 	pass_counts = new(GC_QUEUE_COUNT)
 	fail_counts = new(GC_QUEUE_COUNT)
@@ -83,7 +83,7 @@ SUBSYSTEM_DEF(garbage)
 			dellog += "\tNo hint: [I.no_hint] times"
 	text2file(dellog.Join(), "[log_path]-qdel.log")
 
-/datum/controller/subsystem/garbage/fire()
+/datum/controller/subsystem/garbage/fire(resumed, no_mc_tick)
 	//the fact that this resets its processing each fire (rather then resume where it left off) is intentional.
 	var/queue = GC_QUEUE_PREQUEUE
 

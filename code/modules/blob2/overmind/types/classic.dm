@@ -11,7 +11,7 @@
 	spread_modifier = 1.0
 	ai_aggressiveness = 0
 
-/datum/blob_type/classic/on_chunk_use(obj/item/weapon/blobcore_chunk/B, mob/living/user)
+/datum/blob_type/classic/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)
 	var/turf/T = get_turf(B)
 
 	to_chat(user, "<span class='alien'>\The [B] produces a soothing ooze!</span>")
@@ -20,7 +20,7 @@
 
 	for(var/turf/simulated/floor/F in view(2, T))
 		spawn()
-			var/obj/effect/effect/water/splash = new(T)
+			var/obj/effect/vfx/water/splash = new(T)
 			splash.create_reagents(15)
 			splash.reagents.add_reagent("blood", 10,list("blood_colour" = color))
 			splash.set_color()

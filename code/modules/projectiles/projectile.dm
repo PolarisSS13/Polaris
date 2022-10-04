@@ -79,10 +79,10 @@
 
 	//Misc/Polaris variables
 
-	var/def_zone = ""	//Aiming at
-	var/mob/firer = null//Who shot it
-	var/silenced = 0	//Attack message
-	var/shot_from = "" // name of the object which shot us
+	var/def_zone = ""	 //Aiming at
+	var/mob/firer = null //Who shot it
+	var/silenced = FALSE //Attack message
+	var/shot_from = ""   // name of the object which shot us
 
 	var/accuracy = 0
 	var/dispersion = 0.0
@@ -135,6 +135,10 @@
 	var/impact_effect_type = null
 
 	var/list/impacted_mobs = list()
+	
+	// TGMC Ammo HUD Port
+	var/hud_state = "unknown" // What HUD state we use when we have ammunition.
+	var/hud_state_empty = "unknown" // The empty state. DON'T USE _FLASH IN THE NAME OF THE EMPTY STATE STRING, THAT IS ADDED BY THE CODE.
 
 /obj/item/projectile/proc/Range()
 	range--
@@ -241,10 +245,10 @@
 	if(!homing_target)
 		return FALSE
 	var/datum/point/PT = RETURN_PRECISE_POINT(homing_target)
-	PT.x += CLAMP(homing_offset_x, 1, world.maxx)
-	PT.y += CLAMP(homing_offset_y, 1, world.maxy)
+	PT.x += clamp(homing_offset_x, 1, world.maxx)
+	PT.y += clamp(homing_offset_y, 1, world.maxy)
 	var/angle = closer_angle_difference(Angle, angle_between_points(RETURN_PRECISE_POINT(src), PT))
-	setAngle(Angle + CLAMP(angle, -homing_turn_speed, homing_turn_speed))
+	setAngle(Angle + clamp(angle, -homing_turn_speed, homing_turn_speed))
 
 /obj/item/projectile/proc/set_homing_target(atom/A)
 	if(!A || (!isturf(A) && !isturf(A.loc)))
@@ -322,7 +326,7 @@
 			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after angle was null!")
 			qdel(src)
 			return
-		var/turf/target = locate(CLAMP(starting + xo, 1, world.maxx), CLAMP(starting + yo, 1, world.maxy), starting.z)
+		var/turf/target = locate(clamp(starting + xo, 1, world.maxx), clamp(starting + yo, 1, world.maxy), starting.z)
 		setAngle(Get_Angle(src, target))
 	if(dispersion)
 		setAngle(Angle + rand(-dispersion, dispersion))
@@ -427,7 +431,7 @@
 
 		var/ox = round(screenviewX/2) - user.client.pixel_x //"origin" x
 		var/oy = round(screenviewY/2) - user.client.pixel_y //"origin" y
-		angle = ATAN2(y - oy, x - ox)
+		angle = arctan(y - oy, x - ox)
 	return list(angle, p_x, p_y)
 
 /obj/item/projectile/proc/redirect(x, y, starting, source)
@@ -464,7 +468,7 @@
 		// Multiply projectile damage by 1.2, then CLAMP the value between 30 and 100.
 		// This was 0.67 but in practice it made all projectiles that did 45 or less damage play at 30,
 		// which is hard to hear over the gunshots, and is rather rare for a projectile to do that much.
-		return CLAMP((value_to_use) * 1.2, 30, 100)
+		return clamp((value_to_use) * 1.2, 30, 100)
 	else
 		return 50 //if the projectile doesn't do damage or agony, play its hitsound at 50% volume.
 
@@ -550,7 +554,7 @@
 		var/mob/M = A
 		if(istype(A, /mob/living))
 			//if they have a neck grab on someone, that person gets hit instead
-			var/obj/item/weapon/grab/G = locate() in M
+			var/obj/item/grab/G = locate() in M
 			if(G && G.state >= GRAB_NECK)
 				if(G.affecting.stat == DEAD)
 					var/shield_chance = min(80, (30 * (M.mob_size / 10)))	//Small mobs have a harder time keeping a dead body as a shield than a human-sized one. Unathi would have an easier job, if they are made to be SIZE_LARGE in the future. -Mech
@@ -667,17 +671,23 @@
 			playsound(target_mob, "bullet_miss", 75, 1)
 		return FALSE
 
+	var/impacted_organ = parse_zone(def_zone)
+	if(istype(target_mob, /mob/living/simple_mob))
+		var/mob/living/simple_mob/SM = target_mob
+		var/decl/mob_organ_names/organ_plan = SM.organ_names
+		impacted_organ = pick(organ_plan.hit_zones)
+
 	//hit messages
 	if(silenced)
 		playsound(target_mob, hitsound, 5, 1, -1)
-		to_chat(target_mob, span("critical", "You've been hit in the [parse_zone(def_zone)] by \the [src]!"))
+		to_chat(target_mob, span("critical", "You've been hit in the [impacted_organ] by \the [src]!"))
 	else
 		var/volume = vol_by_damage()
 		playsound(target_mob, hitsound, volume, 1, -1)
 		// X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
 		target_mob.visible_message(
-			span("danger", "\The [target_mob] was hit in the [parse_zone(def_zone)] by \the [src]!"),
-			span("critical", "You've been hit in the [parse_zone(def_zone)] by \the [src]!")
+			span("danger", "\The [target_mob] was hit in the [impacted_organ] by \the [src]!"),
+			span("critical", "You've been hit in the [impacted_organ] by \the [src]!")
 		)
 
 	//admin logs
@@ -735,10 +745,10 @@
 	return fire(angle_override, direct_target)
 
 //called to launch a projectile from a gun
-/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/weapon/gun/launcher)
+/obj/item/projectile/proc/launch_from_gun(atom/target, target_zone, mob/user, params, angle_override, forced_spread, obj/item/gun/launcher)
 
 	shot_from = launcher.name
-	silenced = launcher.silenced
+	silenced |= launcher.silenced // Silent bullets (e.g., BBs) are always silent
 	if(user)
 		firer = user
 
@@ -806,7 +816,7 @@
 
 /obj/item/projectile/proc/impact_sounds(atom/A)
 	if(hitsound_wall && !ismob(A)) // Mob sounds are handled in attack_mob().
-		var/volume = CLAMP(vol_by_damage() + 20, 0, 100)
+		var/volume = clamp(vol_by_damage() + 20, 0, 100)
 		if(silenced)
 			volume = 5
 		playsound(A, hitsound_wall, volume, 1, -1)

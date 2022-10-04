@@ -8,13 +8,14 @@
 	var/state = 0
 	var/base_icon_state = ""
 	var/base_name = "airlock"
-	var/obj/item/weapon/airlock_electronics/electronics = null
+	var/obj/item/airlock_electronics/electronics = null
 	var/airlock_type = "" //the type path of the airlock once completed
 	var/glass_type = "/glass"
 	var/glass = 0 // 0 = glass can be installed. -1 = glass can't be installed. 1 = glass is already installed. Text = mineral plating is installed instead.
 	var/created_name = null
 
-/obj/structure/door_assembly/New()
+/obj/structure/door_assembly/Initialize()
+	. = ..()
 	update_state()
 
 /obj/structure/door_assembly/door_assembly_com
@@ -136,7 +137,8 @@
 	airlock_type = "/multi_tile/glass"
 	glass = -1 //To prevent bugs in deconstruction process.
 
-/obj/structure/door_assembly/multi_tile/New()
+/obj/structure/door_assembly/multi_tile/Initialize()
+	. = ..()
 	if(dir in list(EAST, WEST))
 		bound_width = width * world.icon_size
 		bound_height = world.icon_size
@@ -155,23 +157,23 @@
 		bound_height = width * world.icon_size
 
 /obj/structure/door_assembly/proc/rename_door(mob/living/user)
-	var/t = sanitizeSafe(input(user, "Enter the name for the windoor.", src.name, src.created_name), MAX_NAME_LEN)
+	var/t = sanitizeSafe(input(user, "Enter the name for the [base_name].", src.name, src.created_name), MAX_NAME_LEN)
 	if(!in_range(src, user) && src.loc != user)	return
 	created_name = t
 	update_state()
 
 /obj/structure/door_assembly/attack_robot(mob/living/silicon/robot/user)
-	if(Adjacent(user) && (user.module && (istype(user.module,/obj/item/weapon/robot_module/robot/engineering/general)) \
-	|| istype(user.module,/obj/item/weapon/robot_module/drone))) //Only dron (and engiborg) needs this.
+	if(Adjacent(user) && (user.module && (istype(user.module,/obj/item/robot_module/robot/engineering/general)) \
+	|| istype(user.module,/obj/item/robot_module/drone))) //Only dron (and engiborg) needs this.
 		rename_door(user)
 
 /obj/structure/door_assembly/attackby(obj/item/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/pen))
+	if(istype(W, /obj/item/pen))
 		rename_door(user)
 		return
 
-	if(istype(W, /obj/item/weapon/weldingtool) && ( (istext(glass)) || (glass == 1) || (!anchored) ))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool) && ( (istext(glass)) || (glass == 1) || (!anchored) ))
+		var/obj/item/weldingtool/WT = W
 		if (WT.remove_fuel(0, user))
 			playsound(src, WT.usesound, 50, 1)
 			if(istext(glass))
@@ -233,7 +235,7 @@
 			new/obj/item/stack/cable_coil(src.loc, 1)
 			src.state = 0
 
-	else if(istype(W, /obj/item/weapon/airlock_electronics) && state == 1)
+	else if(istype(W, /obj/item/airlock_electronics) && state == 1)
 		playsound(src, W.usesound, 100, 1)
 		user.visible_message("[user] installs the electronics into the airlock assembly.", "You start to install electronics into the airlock assembly.")
 

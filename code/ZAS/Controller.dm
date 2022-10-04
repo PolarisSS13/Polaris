@@ -1,6 +1,6 @@
-var/datum/controller/subsystem/air/air_master
+var/global/datum/controller/subsystem/air/air_master
 
-var/tick_multiplier = 2
+var/global/tick_multiplier = 2
 
 /*
 
@@ -170,7 +170,7 @@ Class Procs:
 	if(T.needs_air_update) return
 	tiles_to_update |= T
 	#ifdef ZASDBG
-	T.overlays += mark
+	T.add_overlay(mark)
 	#endif
 	T.needs_air_update = 1
 

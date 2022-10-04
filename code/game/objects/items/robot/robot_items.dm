@@ -5,7 +5,7 @@
 ***********************************************************************/
 //Might want to move this into several files later but for now it works here
 
-/obj/item/weapon/melee/baton/robot/arm
+/obj/item/melee/baton/robot/arm
 	name = "electrified arm"
 	icon = 'icons/obj/decals.dmi'
 	icon_state = "shock"
@@ -13,7 +13,7 @@
 	hitcost = 750
 	agonyforce = 70
 
-/obj/item/weapon/melee/baton/robot/arm/update_icon()
+/obj/item/melee/baton/robot/arm/update_icon()
 	if(status)
 		set_light(1.5, 1, lightcolor)
 	else
@@ -67,8 +67,8 @@
 	icon_state = "healthhud"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
-/obj/item/borg/sight/hud/med/New()
-	..()
+/obj/item/borg/sight/hud/med/Initialize()
+	. = ..()
 	hud = new /obj/item/clothing/glasses/hud/health(src)
 	return
 
@@ -78,7 +78,7 @@
 	icon_state = "securityhud"
 	icon = 'icons/obj/clothing/glasses.dmi'
 
-/obj/item/borg/sight/hud/sec/New()
-	..()
+/obj/item/borg/sight/hud/sec/Initialize()
+	. = ..()
 	hud = new /obj/item/clothing/glasses/hud/security(src)
 	return

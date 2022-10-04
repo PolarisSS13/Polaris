@@ -1,4 +1,4 @@
-var/list/gamemode_cache = list()
+var/global/list/gamemode_cache = list()
 
 /datum/configuration
 	var/server_name = null				// server name (for world name / status)
@@ -124,6 +124,7 @@ var/list/gamemode_cache = list()
 	var/wikisearchurl
 	var/forumurl
 	var/githuburl
+	var/discordurl
 	var/rulesurl
 	var/mapurl
 
@@ -288,6 +289,9 @@ var/list/gamemode_cache = list()
 
 	// How strictly the loadout enforces object species whitelists
 	var/loadout_whitelist = LOADOUT_WHITELIST_LAX
+
+	// Whether whitelists are enforced for ears/tail/etc modifications
+	var/genemod_whitelist = FALSE
 
 	var/disable_webhook_embeds = FALSE
 
@@ -540,6 +544,9 @@ var/list/gamemode_cache = list()
 					config.githuburl = value
 				if ("guest_jobban")
 					config.guest_jobban = 1
+
+				if ("discordurl")
+					config.discordurl = value
 
 				if ("guest_ban")
 					config.guests_allowed = 0
@@ -937,6 +944,9 @@ var/list/gamemode_cache = list()
 				if("enable_night_shifts")
 					config.enable_night_shifts = TRUE
 
+				if("genemod_whitelist")
+					config.genemod_whitelist = TRUE
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -1002,10 +1012,10 @@ var/list/gamemode_cache = list()
 
 				if("use_loyalty_implants")
 					config.use_loyalty_implants = 1
-				
+
 				if("loadout_whitelist")
 					config.loadout_whitelist = text2num(value)
-				
+
 				else
 					log_misc("Unknown setting in configuration: '[name]'")
 
@@ -1055,47 +1065,6 @@ var/list/gamemode_cache = list()
 			else
 				log_misc("Unknown setting in configuration: '[name]'")
 
-/datum/configuration/proc/loadforumsql(filename)  // -- TLE
-	var/list/Lines = file2list(filename)
-	for(var/t in Lines)
-		if(!t)	continue
-
-		t = trim(t)
-		if (length(t) == 0)
-			continue
-		else if (copytext(t, 1, 2) == "#")
-			continue
-
-		var/pos = findtext(t, " ")
-		var/name = null
-		var/value = null
-
-		if (pos)
-			name = lowertext(copytext(t, 1, pos))
-			value = copytext(t, pos + 1)
-		else
-			name = lowertext(t)
-
-		if (!name)
-			continue
-
-		switch (name)
-			if ("address")
-				forumsqladdress = value
-			if ("port")
-				forumsqlport = value
-			if ("database")
-				forumsqldb = value
-			if ("login")
-				forumsqllogin = value
-			if ("password")
-				forumsqlpass = value
-			if ("activatedgroup")
-				forum_activated_group = value
-			if ("authenticatedgroup")
-				forum_authenticated_group = value
-			else
-				log_misc("Unknown setting in configuration: '[name]'")
 
 /datum/configuration/proc/pick_mode(mode_name)
 	// I wish I didn't have to instance the game modes in order to look up

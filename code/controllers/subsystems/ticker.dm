@@ -28,8 +28,6 @@ SUBSYSTEM_DEF(ticker)
 	var/last_restart_notify				// world.time of last restart warning.
 	var/delay_end = FALSE               // If set, the round will not restart on its own.
 
-	var/login_music						// music played in pregame lobby
-
 	var/list/datum/mind/minds = list()	// The people in the game. Used for objective tracking.
 
 	// TODO - I am sure there is a better place these can go.
@@ -49,32 +47,22 @@ SUBSYSTEM_DEF(ticker)
 
 // This global variable exists for legacy support so we don't have to rename every 'ticker' to 'SSticker' yet.
 var/global/datum/controller/subsystem/ticker/ticker
-/datum/controller/subsystem/ticker/PreInit()
+/datum/controller/subsystem/ticker/OnNew()
 	global.ticker = src // TODO - Remove this! Change everything to point at SSticker intead
-	login_music = pick(\
-	/*'sound/music/halloween/skeletons.ogg',\
-	'sound/music/halloween/halloween.ogg',\
-	'sound/music/halloween/ghosts.ogg'*/
-	'sound/music/space.ogg',\
-	'sound/music/traitor.ogg',\
-	'sound/music/title2.ogg',\
-	'sound/music/clouds.s3m',\
-	'sound/music/space_oddity.ogg') //Ground Control to Major Tom, this song is cool, what's going on?
 
-/datum/controller/subsystem/ticker/Initialize()
+/datum/controller/subsystem/ticker/Initialize(timeofday)
 	pregame_timeleft = config.pregame_time
 	send2mainirc("Server lobby is loaded and open at byond://[config.serverurl ? config.serverurl : (config.server ? config.server : "[world.address]:[world.port]")]")
 	SSwebhooks.send(
-		WEBHOOK_ROUNDPREP, 
+		WEBHOOK_ROUNDPREP,
 		list(
-			"map" = station_name(), 
+			"map" = station_name(),
 			"url" = get_world_url()
 		)
 	)
 	GLOB.autospeaker = new (null, null, null, 1) //Set up Global Announcer
-	return ..()
 
-/datum/controller/subsystem/ticker/fire(resumed = FALSE)
+/datum/controller/subsystem/ticker/fire(resumed, no_mc_tick)
 	switch(current_state)
 		if(GAME_STATE_INIT)
 			pregame_welcome()
@@ -424,9 +412,6 @@ var/global/datum/controller/subsystem/ticker/ticker
 			// Created their playable character, delete their /mob/new_player
 			if(new_char)
 				qdel(player)
-				if(new_char.client)
-					var/obj/screen/splash/S = new(new_char.client, TRUE)
-					S.Fade(TRUE)
 
 			// If they're a carbon, they can get manifested
 			if(J?.mob_type & JOB_CARBON)
@@ -446,9 +431,10 @@ var/global/datum/controller/subsystem/ticker/ticker
 				captainless=0
 			if(!player_is_antag(player.mind, only_offstation_roles = 1))
 				job_master.EquipRank(player, player.mind.assigned_role, 0)
-				UpdateFactionList(player)
-				equip_custom_items(player)
-				player.apply_traits()
+				if(!QDELETED(player))
+					UpdateFactionList(player)
+					equip_custom_items(player)
+					player.apply_traits()
 	if(captainless)
 		for(var/mob/M in player_list)
 			if(!istype(M,/mob/new_player))

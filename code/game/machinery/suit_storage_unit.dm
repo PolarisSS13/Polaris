@@ -33,7 +33,8 @@
 	HELMET_TYPE = /obj/item/clothing/head/helmet/space
 	MASK_TYPE = /obj/item/clothing/mask/breath
 
-/obj/machinery/suit_storage_unit/New()
+/obj/machinery/suit_storage_unit/Initialize()
+	. = ..()
 	update_icon()
 	if(SUIT_TYPE)
 		SUIT = new SUIT_TYPE(src)
@@ -451,8 +452,8 @@
 		to_chat(user, "<font color='blue'>You [panelopen ? "open up" : "close"] the unit's maintenance panel.</font>")
 		updateUsrDialog()
 		return
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 		if(!(ismob(G.affecting)))
 			return
 		if(!isopen)
@@ -573,8 +574,8 @@
 
 	var/datum/wires/suit_storage_unit/wires = null
 
-/obj/machinery/suit_cycler/New()
-	..()
+/obj/machinery/suit_cycler/Initialize()
+	. = ..()
 
 	wires = new(src)
 	target_department = departments[1]
@@ -674,13 +675,13 @@
 			return
 
 	//Hacking init.
-	if(istype(I, /obj/item/device/multitool) || I.is_wirecutter())
+	if(istype(I, /obj/item/multitool) || I.is_wirecutter())
 		if(panel_open)
 			attack_hand(user)
 		return
 	//Other interface stuff.
-	if(istype(I, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = I
+	if(istype(I, /obj/item/grab))
+		var/obj/item/grab/G = I
 
 		if(!(ismob(G.affecting)))
 			return
@@ -1093,13 +1094,13 @@
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/pilot/alt
 			parent_suit = /obj/item/clothing/suit/space/void/pilot/alt
 		//Antag Suits
-		if("^%###^%$" || "Mercenary")
+		if("^%###^%$", "Mercenary")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/merc
 			parent_suit = /obj/item/clothing/suit/space/void/merc
 		if("Charring")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/merc/fire
 			parent_suit = /obj/item/clothing/suit/space/void/merc/fire
-		if("Gem-Encrusted" || "Wizard")
+		if("Gem-Encrusted", "Wizard")
 			parent_helmet = /obj/item/clothing/head/helmet/space/void/wizard
 			parent_suit = /obj/item/clothing/suit/space/void/wizard
 		//Special or Event suits

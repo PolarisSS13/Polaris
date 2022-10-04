@@ -1,4 +1,4 @@
-var/datum/species/shapeshifter/promethean/prometheans
+var/global/datum/species/shapeshifter/promethean/prometheans
 
 // Species definition follows.
 /datum/species/shapeshifter/promethean
@@ -45,7 +45,7 @@ var/datum/species/shapeshifter/promethean/prometheans
 	female_cough_sounds = list('sound/effects/slime_squish.ogg')
 
 	min_age =		1
-	max_age =		10
+	max_age =		24
 
 	economic_modifier = 3
 
@@ -133,16 +133,16 @@ var/datum/species/shapeshifter/promethean/prometheans
 	prometheans = src
 
 /datum/species/shapeshifter/promethean/equip_survival_gear(var/mob/living/carbon/human/H)
-	var/boxtype = pick(list(/obj/item/weapon/storage/toolbox/lunchbox,
-							/obj/item/weapon/storage/toolbox/lunchbox/heart,
-							/obj/item/weapon/storage/toolbox/lunchbox/cat,
-							/obj/item/weapon/storage/toolbox/lunchbox/nt,
-							/obj/item/weapon/storage/toolbox/lunchbox/mars,
-							/obj/item/weapon/storage/toolbox/lunchbox/cti,
-							/obj/item/weapon/storage/toolbox/lunchbox/nymph,
-							/obj/item/weapon/storage/toolbox/lunchbox/syndicate))	//Only pick the empty types
-	var/obj/item/weapon/storage/toolbox/lunchbox/L = new boxtype(get_turf(H))
-	new /obj/item/weapon/reagent_containers/food/snacks/candy/proteinbar(L)
+	var/boxtype = pick(list(/obj/item/storage/toolbox/lunchbox,
+							/obj/item/storage/toolbox/lunchbox/heart,
+							/obj/item/storage/toolbox/lunchbox/cat,
+							/obj/item/storage/toolbox/lunchbox/nt,
+							/obj/item/storage/toolbox/lunchbox/mars,
+							/obj/item/storage/toolbox/lunchbox/cti,
+							/obj/item/storage/toolbox/lunchbox/nymph,
+							/obj/item/storage/toolbox/lunchbox/syndicate))	//Only pick the empty types
+	var/obj/item/storage/toolbox/lunchbox/L = new boxtype(get_turf(H))
+	new /obj/item/reagent_containers/food/snacks/candy/proteinbar(L)
 	if(H.backbag == 1)
 		H.equip_to_slot_or_del(L, slot_r_hand)
 	else
@@ -201,12 +201,13 @@ var/datum/species/shapeshifter/promethean/prometheans
 					H.adjust_nutrition(rand(10, 20))
 		if(H.clean_blood(1))
 			H.adjust_nutrition(rand(5, 15))
-		if(H.r_hand)
-			if(H.r_hand.clean_blood())
-				H.adjust_nutrition(rand(5, 15))
-		if(H.l_hand)
-			if(H.l_hand.clean_blood())
-				H.adjust_nutrition(rand(5, 15))
+		if(!(H.gloves || (H.wear_suit && (H.wear_suit.body_parts_covered & HANDS))))
+			if(H.r_hand)
+				if(H.r_hand.clean_blood())
+					H.adjust_nutrition(rand(5, 15))
+			if(H.l_hand)
+				if(H.l_hand.clean_blood())
+					H.adjust_nutrition(rand(5, 15))
 		if(H.head)
 			if(H.head.clean_blood())
 				H.update_inv_head(0)

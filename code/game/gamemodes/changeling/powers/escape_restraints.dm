@@ -5,6 +5,7 @@
 	enhancedtext = "More frequent escapes."
 	ability_icon_state = "ling_escape_restraints"
 	genomecost = 2
+	power_category = CHANGELING_POWER_ENHANCEMENTS
 	verbpath = /mob/proc/changeling_escape_restraints
 
 //Escape Cuffs. By design this does not escape from straight jackets
@@ -30,7 +31,7 @@
 	to_chat(C,"<span class='notice'>We contort our extremities and slip our cuffs.</span>")
 	playsound(src, 'sound/effects/blobattack.ogg', 30, 1)
 	if(C.handcuffed)
-		var/obj/item/weapon/W = C.handcuffed
+		var/obj/item/W = C.handcuffed
 		C.handcuffed = null
 		if(C.buckled && C.buckled.buckle_require_restraints)
 			C.buckled.unbuckle_mob()
@@ -42,7 +43,7 @@
 		if(W)
 			W.layer = initial(W.layer)
 	if(C.legcuffed)
-		var/obj/item/weapon/W = C.legcuffed
+		var/obj/item/W = C.legcuffed
 		C.legcuffed = null
 		C.update_inv_legcuffed()
 		if(C.client)

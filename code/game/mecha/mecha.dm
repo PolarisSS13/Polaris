@@ -60,7 +60,7 @@
 	var/minimum_penetration = 15		//Incoming damage won't be fully applied if you don't have at least 20. Almost all AP clears this.
 	var/fail_penetration_value = 0.66	//By how much failing to penetrate reduces your shit. 66% by default. 100dmg = 66dmg if failed pen
 
-	var/obj/item/weapon/cell/cell
+	var/obj/item/cell/cell
 	var/state = MECHA_OPERATING
 	var/list/log = new
 	var/last_message = 0
@@ -68,7 +68,7 @@
 	var/maint_access = 1
 	var/dna								//Dna-locking the mech
 	var/list/proc_res = list() 			//Stores proc owners, like proc_res["functionname"] = owner reference
-	var/datum/effect/effect/system/spark_spread/spark_system = new
+	var/datum/effect_system/spark_spread/spark_system = new
 	var/lights = 0
 	var/lights_power = 6
 	var/force = 0
@@ -86,7 +86,7 @@
 	var/datum/gas_mixture/cabin_air
 	var/obj/machinery/atmospherics/portables_connector/connected_port = null
 
-	var/obj/item/device/radio/radio = null
+	var/obj/item/radio/radio = null
 
 	var/max_temperature = 25000			//Kelvin values.
 	var/internal_damage_threshold = 33	//Health percentage below which internal damage is possible
@@ -101,7 +101,7 @@
 	var/list/equipment = new		//This lists holds what stuff you bolted onto your baby ride
 	var/obj/item/mecha_parts/mecha_equipment/selected
 	var/max_equip = 2
-	
+
 	// What direction to float in, if inertial movement is active.
 	var/float_direction = 0
 	// Process() iterator count.
@@ -179,7 +179,7 @@
 	var/smoke_reserve = 5			//How many shots you have. Might make a reload later on. MIGHT.
 	var/smoke_ready = 1				//This is a check for the whether or not the cooldown is ongoing.
 	var/smoke_cooldown = 100		//How long you have between uses.
-	var/datum/effect/effect/system/smoke_spread/smoke_system = new
+	var/datum/effect_system/smoke_spread/smoke_system = new
 
 	var/cloak_possible = FALSE		// Can this exosuit innately cloak?
 
@@ -204,6 +204,7 @@
 	var/weapons_only_cycle = FALSE	//So combat mechs don't switch to their equipment at times.
 
 /obj/mecha/Initialize()
+
 	. = ..()
 
 	for(var/path in starting_components)
@@ -215,20 +216,10 @@
 			var/obj/item/mecha_parts/mecha_equipment/ME = new path(src)
 			ME.attach(src)
 
+	START_PROCESSING(SSobj, src)
+
 	update_transform()
 
-/obj/mecha/drain_power(var/drain_check)
-
-	if(drain_check)
-		return 1
-
-	if(!cell)
-		return 0
-
-	return cell.drain_power(drain_check)
-
-/obj/mecha/New()
-	..()
 	icon_state += "-open"
 	add_radio()
 	add_cabin()
@@ -248,7 +239,16 @@
 	log_message("[src.name] created.")
 	loc.Entered(src)
 	mechas_list += src //global mech list
-	return
+
+/obj/mecha/drain_power(var/drain_check)
+
+	if(drain_check)
+		return 1
+
+	if(!cell)
+		return 0
+
+	return cell.drain_power(drain_check)
 
 /obj/mecha/Exit(atom/movable/O)
 	if(O in cargo)
@@ -330,6 +330,8 @@
 
 	QDEL_NULL(spark_system)
 	QDEL_NULL(minihud)
+
+	STOP_PROCESSING(SSobj, src)
 
 	mechas_list -= src //global mech list
 	. = ..()
@@ -458,12 +460,12 @@
 	internal_tank = new /obj/machinery/portable_atmospherics/canister/air(src)
 	return internal_tank
 
-/obj/mecha/proc/add_cell(var/obj/item/weapon/cell/C=null)
+/obj/mecha/proc/add_cell(var/obj/item/cell/C=null)
 	if(C)
 		C.forceMove(src)
 		cell = C
 		return
-	cell = new /obj/item/weapon/cell/mech(src)
+	cell = new /obj/item/cell/mech(src)
 
 /obj/mecha/get_cell()
 	return cell
@@ -570,7 +572,6 @@
 
 /obj/mecha/proc/show_radial_occupant(var/mob/user)
 	var/list/choices = list(
-		"Eject" = radial_image_eject,
 		"Toggle Airtank" = radial_image_airtoggle,
 		"Toggle Light" = radial_image_lighttoggle,
 		"View Stats" = radial_image_statpanel
@@ -582,9 +583,6 @@
 	if(!choice)
 		return
 	switch(choice)
-		if("Eject")
-			go_out()
-			add_fingerprint(usr)
 		if("Toggle Airtank")
 			use_internal_tank = !use_internal_tank
 			occupant_message("Now taking air from [use_internal_tank?"internal airtank":"environment"].")
@@ -920,27 +918,19 @@
 	if(istype(obstacle, /mob))//First we check if it is a mob. Mechs mostly shouln't go through them, even while phasing.
 		var/mob/M = obstacle
 		M.Move(get_step(obstacle,src.dir))
+	else if(phasing && get_charge()>=phasing_energy_drain)//Phazon check. This could use an improvement elsewhere.
+		src.use_power(phasing_energy_drain)
+		phase()
+		. = ..(obstacle)
+		return
 	else if(istype(obstacle, /obj))//Then we check for regular obstacles.
 		var/obj/O = obstacle
-
-		if(phasing && get_charge()>=phasing_energy_drain)//Phazon check. This could use an improvement elsewhere.
-			spawn()
-				if(can_phase)
-					can_phase = FALSE
-					flick("[initial_icon]-phase", src)
-					src.loc = get_step(src,src.dir)
-					src.use_power(phasing_energy_drain)
-					sleep(get_step_delay() * 3)
-					can_phase = TRUE
-					occupant_message("Phazed.")
-			. = ..(obstacle)
-			return
 		if(istype(O, /obj/effect/portal))	//derpfix
-			src.anchored = 0				//I have no idea what this really fix.
+			src.anchored = 0				// Portals can only move unanchored objects.
 			O.Crossed(src)
 			spawn(0)//countering portal teleport spawn(0), hurr
 				src.anchored = 1
-		else if(O.anchored)
+		if(O.anchored)
 			obstacle.Bumped(src)
 		else
 			step(obstacle,src.dir)
@@ -948,6 +938,18 @@
 	else//No idea when this triggers, so i won't touch it.
 		. = ..(obstacle)
 	return
+
+/obj/mecha/proc/phase()	// Force the mecha to move forward by phasing.
+	set waitfor = FALSE
+	if(can_phase)
+		can_phase = FALSE
+		flick("[initial_icon]-phase", src)
+		forceMove(get_step(src,src.dir))
+		sleep(get_step_delay() * 3)
+		can_phase = TRUE
+		occupant_message("Phazed.")
+		return TRUE	// In the event this is sequenced
+	return FALSE
 
 ///////////////////////////////////
 ////////  Internal damage  ////////
@@ -1352,7 +1354,7 @@
 		src.check_for_internal_damage(list(MECHA_INT_FIRE, MECHA_INT_TEMP_CONTROL))
 	return
 
-/obj/mecha/proc/dynattackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/mecha/proc/dynattackby(obj/item/W as obj, mob/user as mob)
 	user.setClickCooldown(user.get_attack_speed(W))
 	src.log_message("Attacked by [W]. Attacker - [user]")
 	var/pass_damage_reduc_mod			//Modifer for failing to bring AP.
@@ -1409,17 +1411,17 @@
 ////// AttackBy //////
 //////////////////////
 
-/obj/mecha/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/mecha/attackby(obj/item/W as obj, mob/user as mob)
 
-	if(istype(W, /obj/item/device/mmi))
+	if(istype(W, /obj/item/mmi))
 		if(mmi_move_inside(W,user))
 			to_chat(user, "[src]-MMI interface initialized successfuly")
 		else
 			to_chat(user, "[src]-MMI interface initialization failed.")
 		return
 
-	if(istype(W, /obj/item/device/robotanalyzer))
-		var/obj/item/device/robotanalyzer/RA = W
+	if(istype(W, /obj/item/robotanalyzer))
+		var/obj/item/robotanalyzer/RA = W
 		RA.do_scan(src, user)
 		return
 
@@ -1443,18 +1445,18 @@
 				user.visible_message("[user] installs \the [W] in \the [src]", "You install \the [W] in \the [src].")
 		return
 
-	if(istype(W, /obj/item/weapon/card/robot))
-		var/obj/item/weapon/card/robot/RoC = W
+	if(istype(W, /obj/item/card/robot))
+		var/obj/item/card/robot/RoC = W
 		return attackby(RoC.dummy_card, user)
 
-	if(istype(W, /obj/item/weapon/card/id)||istype(W, /obj/item/device/pda))
+	if(istype(W, /obj/item/card/id)||istype(W, /obj/item/pda))
 		if(add_req_access || maint_access)
 			if(internals_access_allowed(usr))
-				var/obj/item/weapon/card/id/id_card
-				if(istype(W, /obj/item/weapon/card/id))
+				var/obj/item/card/id/id_card
+				if(istype(W, /obj/item/card/id))
 					id_card = W
 				else
-					var/obj/item/device/pda/pda = W
+					var/obj/item/pda/pda = W
 					id_card = pda.id
 				output_maintenance_dialog(id_card, user)
 				return
@@ -1518,7 +1520,7 @@
 			to_chat(user, "You screw the cell in place")
 		return
 
-	else if(istype(W, /obj/item/device/multitool))
+	else if(istype(W, /obj/item/multitool))
 		if(state>=MECHA_CELL_OPEN && src.occupant)
 			to_chat(user, "You attempt to eject the pilot using the maintenance controls.")
 			if(src.occupant.stat)
@@ -1530,7 +1532,7 @@
 				src.log_message("Eject attempt made using maintenance controls - rejected.")
 		return
 
-	else if(istype(W, /obj/item/weapon/cell))
+	else if(istype(W, /obj/item/cell))
 		if(state==MECHA_CELL_OUT)
 			if(!src.cell)
 				to_chat(user, "You install the powercell")
@@ -1542,8 +1544,8 @@
 				to_chat(user, "There's already a powercell installed.")
 		return
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && user.a_intent != I_HURT)
-		var/obj/item/weapon/weldingtool/WT = W
+	else if(istype(W, /obj/item/weldingtool) && user.a_intent != I_HURT)
+		var/obj/item/weldingtool/WT = W
 		var/obj/item/mecha_parts/component/hull/HC = internal_components[MECH_HULL]
 		var/obj/item/mecha_parts/component/armor/AC = internal_components[MECH_ARMOR]
 		if (WT.remove_fuel(0,user))
@@ -1634,7 +1636,7 @@
 ////////  Brain Stuff  ////////
 ///////////////////////////////
 
-/obj/mecha/proc/mmi_move_inside(var/obj/item/device/mmi/mmi_as_oc as obj,mob/user as mob)
+/obj/mecha/proc/mmi_move_inside(var/obj/item/mmi/mmi_as_oc as obj,mob/user as mob)
 	if(!mmi_as_oc.brainmob || !mmi_as_oc.brainmob.client)
 		to_chat(user, "Consciousness matrix not detected.")
 		return 0
@@ -1661,7 +1663,7 @@
 		to_chat(user, "You stop attempting to install the brain.")
 	return 0
 
-/obj/mecha/proc/mmi_moved_inside(var/obj/item/device/mmi/mmi_as_oc as obj,mob/user as mob)
+/obj/mecha/proc/mmi_moved_inside(var/obj/item/mmi/mmi_as_oc as obj,mob/user as mob)
 	if(mmi_as_oc && (user in range(1)))
 		if(!mmi_as_oc.brainmob || !mmi_as_oc.brainmob.client)
 			to_chat(user, "Consciousness matrix not detected.")
@@ -1706,8 +1708,7 @@
 	return
 
 /obj/mecha/remove_air(amount)
-	var/obj/item/mecha_parts/component/gas/GC = internal_components[MECH_GAS]
-	if(use_internal_tank && (GC && prob(GC.get_efficiency() * 100)))
+	if(use_internal_tank)
 		return cabin_air.remove(amount)
 	else
 		var/turf/T = get_turf(src)
@@ -1716,7 +1717,8 @@
 	return
 
 /obj/mecha/return_air()
-	if(use_internal_tank)
+	var/obj/item/mecha_parts/component/gas/GC = internal_components[MECH_GAS]
+	if(use_internal_tank && (GC && prob(GC.get_efficiency() * 100)))
 		return cabin_air
 	return get_turf_air()
 
@@ -2020,7 +2022,7 @@
 		update_cell_alerts()
 		update_damage_alerts()
 		set_dir(dir_in)
-		playsound(src, 'sound/machines/door/windowdoor.ogg', 50, 1)
+		playsound(src, 'sound/mecha/mech_enter.ogg', 50, 1)
 		if(occupant.client && cloaked_selfimage)
 			occupant.client.images += cloaked_selfimage
 		play_entered_noise(occupant)
@@ -2100,8 +2102,8 @@
 		occupant << browse(null, "window=exosuit")
 		if(occupant.client && cloaked_selfimage)
 			occupant.client.images -= cloaked_selfimage
-		if(istype(mob_container, /obj/item/device/mmi))
-			var/obj/item/device/mmi/mmi = mob_container
+		if(istype(mob_container, /obj/item/mmi))
+			var/obj/item/mmi/mmi = mob_container
 			if(mmi.brainmob)
 				occupant.loc = mmi
 			mmi.mecha = null
@@ -2113,6 +2115,7 @@
 		update_icon()
 		set_dir(dir_in)
 		verbs -= /obj/mecha/verb/eject
+		playsound(src, 'sound/mecha/mech_exit.ogg', 50, 1)
 
 		//src.zoom = 0
 
@@ -2147,13 +2150,13 @@
 	return 0
 
 
-/obj/mecha/check_access(obj/item/weapon/card/id/I, list/access_list)
+/obj/mecha/check_access(obj/item/card/id/I, list/access_list)
 	if(!istype(access_list))
 		return 1
 	if(!access_list.len) //no requirements
 		return 1
-	if(istype(I, /obj/item/device/pda))
-		var/obj/item/device/pda/pda = I
+	if(istype(I, /obj/item/pda))
+		var/obj/item/pda/pda = I
 		I = pda.id
 	if(!istype(I) || !I.access) //not ID or no access
 		return 0
@@ -2367,7 +2370,7 @@
 	return output
 
 
-/obj/mecha/proc/output_access_dialog(obj/item/weapon/card/id/id_card, mob/user)
+/obj/mecha/proc/output_access_dialog(obj/item/card/id/id_card, mob/user)
 	if(!id_card || !user) return
 	var/output = {"<html>
 						<head><style>
@@ -2392,7 +2395,7 @@
 	onclose(user, "exosuit_add_access")
 	return
 
-/obj/mecha/proc/output_maintenance_dialog(obj/item/weapon/card/id/id_card,mob/user)
+/obj/mecha/proc/output_maintenance_dialog(obj/item/card/id/id_card,mob/user)
 	if(!id_card || !user) return
 
 	var/maint_options = "<a href='?src=\ref[src];set_internal_tank_valve=1;user=\ref[user]'>Set Cabin Air Pressure</a>"

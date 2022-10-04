@@ -103,6 +103,11 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
+/obj/item/clothing/head/panama
+	name = "panama hat"
+	icon_state = "panama"
+	desc = "Columbian Pure."
+
 /obj/item/clothing/head/redcoat
 	name = "redcoat's hat"
 	icon_state = "redcoat"
@@ -272,7 +277,7 @@
 	name = "fedora"
 	desc = "A brown fedora - either the cornerstone of a reporter's style or a poor attempt at looking cool, depending on the person wearing it."
 	icon_state = "detective"
-	allowed = list(/obj/item/weapon/reagent_containers/food/snacks/candy_corn, /obj/item/weapon/pen)
+	allowed = list(/obj/item/reagent_containers/food/snacks/candy_corn, /obj/item/pen)
 
 /obj/item/clothing/head/fedora/grey
 	icon_state = "detective2"
@@ -485,3 +490,53 @@
 	name = "\improper Xion beret"
 	desc = "An orange beret denoting employment with Xion Manufacturing. For personnel that are more inclined towards style than safety."
 	icon_state = "beret_orange"
+
+/obj/item/clothing/head/fish
+	name = "fish skull"
+	desc = "You... you're not actually going to wear that, right?"
+	icon_state = "fishskull"
+	flags_inv = HIDEEARS|BLOCKHAIR
+
+/obj/item/clothing/head/marine
+	name = "marine helmet"
+	desc = "A marine helmet prop from the popular game 'Ruin'."
+	icon_state = "marine"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/head/ranger
+	var/hatcolor = "white"
+	name = "ranger helmet"
+	desc = "A special helmet designed for the Go Go ERT-Rangers, able to withstand a pressureless environment, filter gas and provide air. It has thermal vision and sometimes \
+	mesons to find breaches, as well as an integrated radio... well, only in the show, of course."
+	icon = 'icons/obj/clothing/ranger.dmi'
+	icon_state = "ranger_helmet"
+	light_overlay = "helmet_light"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
+	drop_sound = 'sound/items/drop/helm.ogg'
+	pickup_sound = 'sound/items/pickup/helm.ogg'
+	w_class = ITEMSIZE_NORMAL
+
+/obj/item/clothing/head/ranger/Initialize()
+	. = ..()
+	if(icon_state == "ranger_helmet")
+		name = "[hatcolor] ranger helmet"
+		icon_state = "[hatcolor]_ranger_helmet"
+
+/obj/item/clothing/head/ranger/black
+	hatcolor = "black"
+
+/obj/item/clothing/head/ranger/pink
+	hatcolor = "pink"
+
+/obj/item/clothing/head/ranger/green
+	hatcolor = "green"
+
+/obj/item/clothing/head/ranger/cyan
+	hatcolor = "cyan"
+
+/obj/item/clothing/head/ranger/orange
+	hatcolor = "orange"
+
+/obj/item/clothing/head/ranger/yellow
+	hatcolor = "yellow"

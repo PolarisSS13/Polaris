@@ -16,7 +16,7 @@
 	anchored = 1.0
 	var/invuln = 0
 	var/bugged = 0
-	var/obj/item/weapon/camera_assembly/assembly = null
+	var/obj/item/camera_assembly/assembly = null
 
 	var/toughness = 5 //sorta fragile
 
@@ -42,7 +42,7 @@
 
 	var/list/camera_computers_using_this = list()
 
-/obj/machinery/camera/New()
+/obj/machinery/camera/Initialize()
 	wires = new(src)
 	assembly = new(src)
 	assembly.state = 4
@@ -61,7 +61,7 @@
 			error("[src.name] in [get_area(src)]has errored. [src.network?"Empty network list":"Null network list"]")
 		ASSERT(src.network)
 		ASSERT(src.network.len > 0)
-	..()
+	. = ..()
 
 /obj/machinery/camera/Destroy()
 	if(isMotion())
@@ -162,10 +162,10 @@
 		"<span class='notice'>You screw the camera's panel [panel_open ? "open" : "closed"].</span>")
 		playsound(src, W.usesound, 50, 1)
 
-	else if((W.is_wirecutter() || istype(W, /obj/item/device/multitool)) && panel_open)
+	else if((W.is_wirecutter() || istype(W, /obj/item/multitool)) && panel_open)
 		interact(user)
 
-	else if(istype(W, /obj/item/weapon/weldingtool) && (wires.CanDeconstruct() || (stat & BROKEN)))
+	else if(istype(W, /obj/item/weldingtool) && (wires.CanDeconstruct() || (stat & BROKEN)))
 		if(weld(W, user))
 			if(assembly)
 				assembly.loc = src.loc
@@ -180,19 +180,19 @@
 				else
 					assembly.state = 1
 					to_chat(user, "<span class='notice'>You cut \the [src] free from the wall.</span>")
-					new /obj/item/stack/cable_coil(src.loc, length=2)
+					new /obj/item/stack/cable_coil(src.loc, 2)
 				assembly = null //so qdel doesn't eat it.
 			qdel(src)
 
 	// OTHER
-	else if (can_use() && (istype(W, /obj/item/weapon/paper) || istype(W, /obj/item/device/pda)) && isliving(user))
+	else if (can_use() && (istype(W, /obj/item/paper) || istype(W, /obj/item/pda)) && isliving(user))
 		var/mob/living/U = user
-		var/obj/item/weapon/paper/X = null
-		var/obj/item/device/pda/P = null
+		var/obj/item/paper/X = null
+		var/obj/item/pda/P = null
 
 		var/itemname = ""
 		var/info = ""
-		if(istype(W, /obj/item/weapon/paper))
+		if(istype(W, /obj/item/paper))
 			X = W
 			itemname = X.name
 			info = X.info
@@ -212,7 +212,7 @@
 				to_chat(O, "<b><a href='byond://?src=\ref[O];track2=\ref[O];track=\ref[U];trackname=[U.name]'>[U]</a></b> holds \a [itemname] up to one of your cameras ...")
 			O << browse(text("<HTML><HEAD><TITLE>[]</TITLE></HEAD><BODY><TT>[]</TT></BODY></HTML>", itemname, info), text("window=[]", itemname))
 
-	else if (istype(W, /obj/item/weapon/camera_bug))
+	else if (istype(W, /obj/item/camera_bug))
 		if (!src.can_use())
 			to_chat(user, "<span class='warning'>Camera non-functional.</span>")
 			return
@@ -278,7 +278,7 @@
 	update_coverage()
 
 	//sparks
-	var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+	var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 	spark_system.set_up(5, 0, loc)
 	spark_system.start()
 	playsound(src, "sparks", 50, 1)
@@ -303,14 +303,14 @@
 
 /obj/machinery/camera/proc/triggerCameraAlarm(var/duration = 0)
 	alarm_on = 1
-	camera_alarm.triggerAlarm(loc, src, duration)
+	GLOB.camera_alarm.triggerAlarm(loc, src, duration)
 
 /obj/machinery/camera/proc/cancelCameraAlarm()
 	if(wires.is_cut(WIRE_CAM_ALARM))
 		return
 
 	alarm_on = 0
-	camera_alarm.clearAlarm(loc, src)
+	GLOB.camera_alarm.clearAlarm(loc, src)
 
 //if false, then the camera is listed as DEACTIVATED and cannot be used
 /obj/machinery/camera/proc/can_use()
@@ -366,7 +366,7 @@
 
 	return null
 
-/obj/machinery/camera/proc/weld(var/obj/item/weapon/weldingtool/WT, var/mob/user)
+/obj/machinery/camera/proc/weld(var/obj/item/weldingtool/WT, var/mob/user)
 
 	if(busy)
 		return 0

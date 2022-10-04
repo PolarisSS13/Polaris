@@ -18,10 +18,12 @@
 	var/active =    0          // Is our owner intending to take hostages?
 	var/target_permissions = 0 // Permission bitflags.
 
-/obj/aiming_overlay/New(var/newowner)
-	..()
-	owner = newowner
-	loc = null
+/obj/aiming_overlay/Initialize()
+	. = ..()
+	owner = loc
+	if(!istype(owner))
+		return INITIALIZE_HINT_QDEL
+	moveToNullspace()
 	verbs.Cut()
 
 /obj/aiming_overlay/proc/toggle_permission(var/perm)
@@ -166,7 +168,7 @@
 		owner.visible_message("<span class='danger'>\The [owner] turns \the [thing] on \the [target]!</span>")
 	else
 		owner.visible_message("<span class='danger'>\The [owner] aims \the [thing] at \the [target]!</span>")
-	log_and_message_admins("aimed \a [thing] at [key_name(target)].")
+	log_and_message_admins("aimed \a [thing] at [key_name(target)].", owner)
 
 	if(owner.client)
 		owner.client.add_gun_icons()
@@ -174,7 +176,7 @@
 	to_chat(target, "<span class='critical'>If you fail to comply with your assailant, you accept the consequences of your actions.</span>")
 	aiming_with = thing
 	aiming_at = target
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		playsound(owner, 'sound/weapons/TargetOn.ogg', 50,1)
 	forceMove(get_turf(target))
 	START_PROCESSING(SSobj, src)
@@ -214,7 +216,7 @@
 /obj/aiming_overlay/proc/cancel_aiming(var/no_message = 0)
 	if(!aiming_with || !aiming_at)
 		return
-	if(istype(aiming_with, /obj/item/weapon/gun))
+	if(istype(aiming_with, /obj/item/gun))
 		playsound(owner, 'sound/weapons/TargetOff.ogg', 50,1)
 	if(!no_message)
 		owner.visible_message("<span class='notice'>\The [owner] lowers \the [aiming_with].</span>")

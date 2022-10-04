@@ -108,6 +108,9 @@
 	return ..()
 
 /obj/item/organ/external/emp_act(severity)
+	for(var/obj/O as anything in src.contents)
+		O.emp_act(severity)
+
 	if(!(robotic >= ORGAN_ROBOT))
 		return
 	var/burn_damage = 0
@@ -153,20 +156,20 @@
 				continue
 			. += "<span class='danger'>There is \a [I] sticking out of it.</span>"
 
-/obj/item/organ/external/attackby(obj/item/weapon/W as obj, mob/living/user as mob)
+/obj/item/organ/external/attackby(obj/item/W as obj, mob/living/user as mob)
 	switch(stage)
 		if(0)
-			if(istype(W,/obj/item/weapon/surgical/scalpel))
+			if(istype(W,/obj/item/surgical/scalpel))
 				user.visible_message("<span class='danger'><b>[user]</b> cuts [src] open with [W]!</span>")
 				stage++
 				return
 		if(1)
-			if(istype(W,/obj/item/weapon/surgical/retractor))
+			if(istype(W,/obj/item/surgical/retractor))
 				user.visible_message("<span class='danger'><b>[user]</b> cracks [src] open like an egg with [W]!</span>")
 				stage++
 				return
 		if(2)
-			if(istype(W,/obj/item/weapon/surgical/hemostat))
+			if(istype(W,/obj/item/surgical/hemostat))
 				if(contents.len)
 					var/obj/item/removing = pick(contents)
 					removing.loc = get_turf(user.loc)
@@ -219,14 +222,12 @@
 	damage = min(max_damage, (brute_dam + burn_dam))
 	return
 
-
-/obj/item/organ/external/New(var/mob/living/carbon/holder)
-	..(holder, 0)
+/obj/item/organ/external/Initialize(var/ml)
+	. = ..(ml, 0)
 	if(istype(owner))
 		replaced(owner)
 		sync_colour_to_human(owner)
-	spawn(1)
-		get_icon()
+	addtimer(CALLBACK(src, .proc/get_icon), 1)
 
 /obj/item/organ/external/replaced(var/mob/living/carbon/human/target)
 	owner = target
@@ -469,7 +470,7 @@ This function completely restores a damaged organ to perfect condition.
 
 	// remove embedded objects and drop them on the floor
 	for(var/obj/implanted_object in implants)
-		if(!istype(implanted_object,/obj/item/weapon/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
+		if(!istype(implanted_object,/obj/item/implant))	// We don't want to remove REAL implants. Just shrapnel etc.
 			implanted_object.loc = get_turf(src)
 			implants -= implanted_object
 	if(!owner.has_embedded_objects())
@@ -947,10 +948,10 @@ Note that amputating the affected organ does in fact remove the infection from t
 			qdel(src)
 
 	if(victim.l_hand)
-		if(istype(victim.l_hand,/obj/item/weapon/material/twohanded)) //if they're holding a two-handed weapon, drop it now they've lost a hand
+		if(istype(victim.l_hand,/obj/item/material/twohanded)) //if they're holding a two-handed weapon, drop it now they've lost a hand
 			victim.l_hand.update_held_icon()
 	if(victim.r_hand)
-		if(istype(victim.r_hand,/obj/item/weapon/material/twohanded))
+		if(istype(victim.r_hand,/obj/item/material/twohanded))
 			victim.r_hand.update_held_icon()
 
 /****************************************************
@@ -1173,7 +1174,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/proc/is_malfunctioning()
 	return ((robotic >= ORGAN_ROBOT) && (brute_dam + burn_dam) >= ROBOLIMB_REPAIR_CAP && prob(brute_dam + burn_dam))
 
-/obj/item/organ/external/proc/embed(var/obj/item/weapon/W, var/silent = 0)
+/obj/item/organ/external/proc/embed(var/obj/item/W, var/silent = 0)
 	if(!owner || loc != owner)
 		return
 	if(!silent)
@@ -1238,7 +1239,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 			"<span class='danger'>Your [src.name] explodes!</span>",\
 			"<span class='danger'>You hear an explosion!</span>")
 		explosion(get_turf(owner),-1,-1,2,3)
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, victim)
 		spark_system.attach(owner)
 		spark_system.start()
@@ -1377,7 +1378,7 @@ Note that amputating the affected organ does in fact remove the infection from t
 	. = 0
 	for(var/obj/item/organ/external/L in organs)
 		for(var/obj/item/I in L.implants)
-			if(!istype(I,/obj/item/weapon/implant))
+			if(!istype(I,/obj/item/implant))
 				return 1
 
 /obj/item/organ/external/proc/is_hidden_by_tail()

@@ -10,6 +10,8 @@
 "j" = (/obj/structure/flora/ausbushes/sunnybush,/turf/template_noop,/area/submap/Rocky2)
 "k" = (/obj/structure/flora/ausbushes/stalkybush,/turf/template_noop,/area/submap/Rocky2)
 "l" = (/obj/structure/flora/tree/dead,/turf/template_noop,/area/submap/Rocky2)
+"o" = (/obj/random/mre/spread/vegan,/turf/template_noop,/area/submap/Rocky2)
+"Z" = (/obj/random/contraband/anom,/turf/template_noop,/area/submap/Rocky2)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaaaaaaaaaaaa
@@ -26,10 +28,10 @@ abbbbbbcccbdbbhbbcccceeea
 abdbbbccccbbbbbbbbccceeea
 abbbbccccbbhbbbbbbcceeeea
 abbbccccccfbbbdbbbcccceea
-abbeccccccbbbbbbficccceea
+aboeccccccbbbbbbficccceea
 abbeccccccbgbhbbbbccccbba
 abbeecccccbbbbbbbbcccccba
-abbeecccccjbdbbbhbcccccba
+abbeecccccjbdbbbhZcccccba
 abbbecccccbbbbbbbccccccba
 abbbeccceebbkbbbbccccccba
 abbbbccceeccbbfbcccccbbba

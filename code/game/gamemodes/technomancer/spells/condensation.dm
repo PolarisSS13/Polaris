@@ -5,10 +5,10 @@
 	enhancement_desc = "Floors affected by condensation will also freeze."
 	ability_icon_state = "tech_condensation"
 	cost = 50
-	obj_path = /obj/item/weapon/spell/condensation
+	obj_path = /obj/item/spell/condensation
 	category = UTILITY_SPELLS
 
-/obj/item/weapon/spell/condensation
+/obj/item/spell/condensation
 	name = "condensation"
 	desc = "Stronger than it appears."
 	icon_state = "condensation"
@@ -16,7 +16,7 @@
 	aspect = ASPECT_AIR
 	cooldown = 2 SECONDS
 
-/obj/item/weapon/spell/condensation/on_ranged_cast(atom/hit_atom, mob/user)
+/obj/item/spell/condensation/on_ranged_cast(atom/hit_atom, mob/user)
 	if(pay_energy(200))
 		if(istype(hit_atom, /turf/simulated) && within_range(hit_atom))
 			var/turf/simulated/T = hit_atom
@@ -25,7 +25,7 @@
 				spawn(1)
 					var/turf/desired_turf = get_step(T,direction)
 					if(desired_turf) // This shouldn't fail but...
-						var/obj/effect/effect/water/W = new /obj/effect/effect/water(get_turf(T))
+						var/obj/effect/vfx/water/W = new /obj/effect/vfx/water(get_turf(T))
 						W.create_reagents(60)
 						W.reagents.add_reagent(id = "water", amount = 60, data = null, safety = 0)
 						W.set_color()

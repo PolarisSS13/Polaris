@@ -16,10 +16,11 @@
 /mob/zshadow/can_fall()
 	return FALSE
 
-/mob/zshadow/New(var/mob/L)
+INITIALIZE_IMMEDIATE(/mob/zshadow)
+/mob/zshadow/Initialize(var/ml, var/mob/L)
+	. = ..()
 	if(!istype(L))
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 	owner = L
 	sync_icon(L)
 
@@ -54,7 +55,7 @@
 	icon_state = M.icon_state
 	//color = M.color
 	color = "#848484"
-	overlays = M.overlays
+	copy_overlays(M, TRUE)
 	transform = M.transform
 	dir = M.dir
 	invisibility = M.invisibility
@@ -83,7 +84,7 @@
 		var/turf/simulated/open/OS = GetAbove(src)
 		while(OS && istype(OS))
 			if(!M.shadow)
-				M.shadow = new /mob/zshadow(M)
+				M.shadow = new /mob/zshadow(null, M)
 			M.shadow.forceMove(OS)
 			M = M.shadow
 			OS = GetAbove(M)
@@ -112,15 +113,3 @@
 	. = ..()
 	if(shadow)
 		shadow.set_dir(new_dir)
-
-/mob/zshadow/set_typing_indicator(var/state)
-	if(!typing_indicator)
-		init_typing_indicator("typing")
-	if(state && !typing)
-		overlays += typing_indicator
-		typing = 1
-	else if(!state && typing)
-		overlays -= typing_indicator
-		typing = 0
-	if(shadow)
-		shadow.set_typing_indicator(state)

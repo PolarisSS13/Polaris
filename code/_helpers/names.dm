@@ -1,4 +1,4 @@
-var/church_name = null
+var/global/church_name = null
 /proc/church_name()
 	if (church_name)
 		return church_name
@@ -25,7 +25,7 @@ var/church_name = null
 
 	return name
 
-var/religion_name = null
+var/global/religion_name = null
 /proc/religion_name()
 	if (religion_name)
 		return religion_name
@@ -111,7 +111,7 @@ var/religion_name = null
 
 	return name
 
-var/syndicate_name = null
+var/global/syndicate_name = null
 /proc/syndicate_name()
 	if (syndicate_name)
 		return syndicate_name
@@ -143,8 +143,8 @@ var/syndicate_name = null
 
 
 //Traitors and traitor silicons will get these. Revs will not.
-var/syndicate_code_phrase//Code phrase for traitors.
-var/syndicate_code_response//Code response for traitors.
+var/global/syndicate_code_phrase//Code phrase for traitors.
+var/global/syndicate_code_response//Code response for traitors.
 
 	/*
 	Should be expanded.
@@ -172,7 +172,7 @@ var/syndicate_code_response//Code response for traitors.
 
 	var/safety[] = list(1,2,3)//Tells the proc which options to remove later on.
 	var/nouns[] = list("love","hate","anger","peace","pride","sympathy","bravery","loyalty","honesty","integrity","compassion","charity","success","courage","deceit","skill","beauty","brilliance","pain","misery","beliefs","dreams","justice","truth","faith","liberty","knowledge","thought","information","culture","trust","dedication","progress","education","hospitality","leisure","trouble","friendships", "relaxation")
-	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepksy Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","wine","moonshine")
+	var/drinks[] = list("vodka and tonic","gin fizz","bahama mama","manhattan","black Russian","whiskey soda","long island tea","margarita","Irish coffee"," manly dwarf","Irish cream","doctor's delight","Beepksy Smash","tequilla sunrise","brave bull","gargle blaster","bloody mary","whiskey cola","white Russian","vodka martini","martini","Cuba libre","kahlua","vodka","redwine","moonshine")
 	var/locations[] = teleportlocs.len ? teleportlocs : drinks//if null, defaults to drinks instead.
 
 	var/names[] = list()

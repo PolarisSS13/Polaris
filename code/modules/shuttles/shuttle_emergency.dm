@@ -72,9 +72,9 @@
 			emergency_shuttle.autopilot = 0
 			to_world("<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Launch sequence initiated!</b></span>")
 
-	if(usr)
-		log_admin("[key_name(usr)] has overridden the departure shuttle's autopilot and activated the launch sequence.")
-		message_admins("[key_name_admin(usr)] has overridden the departure shuttle's autopilot and activated the launch sequence.")
+	if(user)
+		log_admin("[key_name(user)] has overridden the departure shuttle's autopilot and activated the launch sequence.")
+		message_admins("[key_name_admin(user)] has overridden the departure shuttle's autopilot and activated the launch sequence.")
 
 	..(user)
 
@@ -86,9 +86,9 @@
 			emergency_shuttle.autopilot = 0
 			to_world("<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Bluespace drive engaged!</b></span>")
 
-	if(usr)
-		log_admin("[key_name(usr)] has overridden the departure shuttle's autopilot and forced immediate launch.")
-		message_admins("[key_name_admin(usr)] has overridden the departure shuttle's autopilot and forced immediate launch.")
+	if(user)
+		log_admin("[key_name(user)] has overridden the departure shuttle's autopilot and forced immediate launch.")
+		message_admins("[key_name_admin(user)] has overridden the departure shuttle's autopilot and forced immediate launch.")
 
 	..(user)
 
@@ -100,9 +100,9 @@
 			emergency_shuttle.autopilot = 0
 			to_chat(world, "<span class='notice'><b>Alert: The shuttle autopilot has been overridden. Launch sequence aborted!</b></span>")
 
-	if(usr)
-		log_admin("[key_name(usr)] has overridden the departure shuttle's autopilot and cancelled the launch sequence.")
-		message_admins("[key_name_admin(usr)] has overridden the departure shuttle's autopilot and cancelled the launch sequence.")
+	if(user)
+		log_admin("[key_name(user)] has overridden the departure shuttle's autopilot and cancelled the launch sequence.")
+		message_admins("[key_name_admin(user)] has overridden the departure shuttle's autopilot and cancelled the launch sequence.")
 
 	..(user)
 
@@ -132,7 +132,7 @@
 	var/auth_name
 	var/dna_hash
 
-	var/obj/item/weapon/card/id/ID = ident.GetID()
+	var/obj/item/card/id/ID = ident.GetID()
 
 	if(!ID)
 		return
@@ -172,7 +172,7 @@
 		emagged = 1
 		return 1
 
-/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/computer/shuttle_control/emergency/attackby(obj/item/W as obj, mob/user as mob)
 	read_authorization(W)
 	..()
 

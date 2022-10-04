@@ -108,7 +108,7 @@
 	var/brightness = get_pin_data(IC_INPUT, 2)
 
 	if(new_color && isnum(brightness))
-		brightness = CLAMP(brightness, 0, 6)
+		brightness = clamp(brightness, 0, 6)
 		light_rgb = new_color
 		light_brightness = brightness
 
@@ -179,8 +179,8 @@
 	power_draw_per_use = 20
 	var/list/sounds = list()
 
-/obj/item/integrated_circuit/output/sound/New()
-	..()
+/obj/item/integrated_circuit/output/sound/Initialize()
+	. = ..()
 	extended_desc = list()
 	extended_desc += "The first input pin determines which sound is used. The choices are; "
 	extended_desc += jointext(sounds, ", ")
@@ -273,8 +273,8 @@
 	power_draw_idle = 5 // Raises to 80 when on.
 	var/obj/machinery/camera/network/circuits/camera
 
-/obj/item/integrated_circuit/output/video_camera/New()
-	..()
+/obj/item/integrated_circuit/output/video_camera/Initialize()
+	. = ..()
 	camera = new(src)
 	on_data_written()
 

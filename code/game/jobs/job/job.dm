@@ -22,7 +22,10 @@
 	var/department_accounts = null        // Which department accounts should people with this position be given the pin for?
 	var/assignable = TRUE                 // Should it show up on things like the ID computer?
 	var/minimum_character_age = 0
+	var/list/min_age_by_species = null
 	var/ideal_character_age = 30
+	var/list/ideal_age_by_species = null
+	var/list/banned_job_species = list(SPECIES_VOX)
 	var/has_headset = TRUE                //Do people with this job need to be given headsets and told how to use them?  E.g. Cyborgs don't.
 
 	var/account_allowed = 1				  // Does this job type come with a station account?
@@ -31,6 +34,7 @@
 	var/outfit_type						  // What outfit datum does this job use in its default title?
 
 	var/offmap_spawn = FALSE			  // Do we require weird and special spawning and datacore handling?
+	var/substitute_announce_title         // Set this to replace the actual job title in join/leave messages (for 'gamey' jobs like Survivalist)
 	var/mob_type = JOB_CARBON 		      // Bitflags representing mob type this job spawns
 
 	// Description of the job's role and minimum responsibilities.
@@ -144,7 +148,7 @@
 		var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin("#job_icon")
 		dress_mannequin(mannequin)
 		mannequin.dir = SOUTH
-		COMPILE_OVERLAYS(mannequin)
+		mannequin.ImmediateOverlayUpdate()
 		var/icon/preview_icon = getFlatIcon(mannequin)
 
 		preview_icon.Scale(preview_icon.Width() * 2, preview_icon.Height() * 2) // Scaling here to prevent blurring in the browser.
@@ -159,3 +163,47 @@
 		var/obj/O = mannequin.back
 		mannequin.drop_from_inventory(O)
 		qdel(O)
+
+///Assigns minimum age by race & brain type. Code says Positronic = mechanical and Drone = digital because nothing can be simple.
+///Will first check based on brain type, then based on species.
+/datum/job/proc/get_min_age(species_name, brain_type)
+    return (brain_type && LAZYACCESS(min_age_by_species, brain_type)) || LAZYACCESS(min_age_by_species, species_name) || minimum_character_age
+
+/datum/job/proc/get_ideal_age(species_name, brain_type)
+	return (brain_type && LAZYACCESS(ideal_age_by_species, brain_type)) || LAZYACCESS(ideal_age_by_species, brain_type) || ideal_character_age
+
+/datum/job/proc/is_species_banned(species_name, brain_type)
+	if(banned_job_species == null)
+		return
+	if(species_name in banned_job_species)
+		return TRUE
+	if(brain_type in banned_job_species)
+		return TRUE
+
+/datum/job/proc/get_latejoin_spawn_locations(var/mob/spawning, var/rank)
+	return // If this proc does not return a list, spawn point prefs are checked instead.
+
+/datum/job/proc/get_spawn_locations(var/mob/spawning, var/rank)
+	for(var/obj/effect/landmark/start/sloc in landmarks_list)
+		if(sloc.name != rank)
+			continue
+		if(locate(/mob/living) in sloc.loc)
+			continue
+		LAZYADD(., sloc)
+
+/datum/job/proc/passes_standard_join_checks(var/mob/player, var/rank)
+	if((minimum_character_age || min_age_by_species) && (player.client.prefs.age < get_min_age(player.client.prefs.species, player.client.prefs.organ_data["brain"])))
+		return FALSE
+	if(is_species_banned(player.client.prefs.species, player.client.prefs.organ_data["brain"]))
+		return FALSE
+	if(jobban_isbanned(player, rank))
+		return FALSE
+	if(!player_old_enough(player.client))
+		return FALSE
+	return TRUE
+
+/datum/job/proc/handle_nonhuman_mob(var/mob/living/carbon/human/player, var/alt_title)
+	if(mob_type & JOB_SILICON_ROBOT)
+		return player.Robotize()
+	if(mob_type & JOB_SILICON_AI)
+		return player

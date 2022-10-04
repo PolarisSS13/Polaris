@@ -1,8 +1,5 @@
 // These involve BYOND's built in filters that do visual effects, and not stuff that distinguishes between things.
 
-// All of this ported from TG.
-/atom/movable
-	var/list/filter_data // For handling persistent filters
 
 /proc/cmp_filter_data_priority(list/A, list/B)
 	return A["priority"] - B["priority"]

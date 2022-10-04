@@ -78,9 +78,6 @@
 /obj/machinery/atmospherics/unary/vent_pump/Initialize()
 	. = ..()
 	soundloop = new(list(src), FALSE)
-
-/obj/machinery/atmospherics/unary/vent_pump/New()
-	..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP
 
 	icon = null
@@ -108,8 +105,8 @@
 	icon_connect_type = "-aux"
 	connect_types = CONNECT_TYPE_AUX //connects to aux pipes
 
-/obj/machinery/atmospherics/unary/vent_pump/high_volume/New()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/high_volume/Initialize()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 800
 
 /obj/machinery/atmospherics/unary/vent_pump/engine
@@ -117,15 +114,15 @@
 	power_channel = ENVIRON
 	power_rating = 30000	//15 kW ~ 20 HP
 
-/obj/machinery/atmospherics/unary/vent_pump/engine/New()
-	..()
+/obj/machinery/atmospherics/unary/vent_pump/engine/Initialize()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_PUMP + 500 //meant to match air injector
 
 /obj/machinery/atmospherics/unary/vent_pump/update_icon(var/safety = 0)
 	if(!check_icon_cache())
 		return
 
-	overlays.Cut()
+	cut_overlays()
 
 	var/vent_icon = "vent"
 
@@ -143,7 +140,7 @@
 	else
 		vent_icon += "[pump_direction ? "out" : "in"]"
 
-	overlays += icon_manager.get_atmos_icon("device", , , vent_icon)
+	add_overlay(icon_manager.get_atmos_icon("device", , , vent_icon))
 
 /obj/machinery/atmospherics/unary/vent_pump/update_underlays()
 	if(..())
@@ -380,8 +377,8 @@
 	return
 
 /obj/machinery/atmospherics/unary/vent_pump/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool))
+		var/obj/item/weldingtool/WT = W
 		if (WT.remove_fuel(0,user))
 			to_chat(user, "<span class='notice'>Now welding the vent.</span>")
 			if(do_after(user, 20 * WT.toolspeed))
@@ -418,7 +415,7 @@
 	if(old_stat != stat)
 		update_icon()
 
-/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.is_wrench())
 		return ..()
 	if (!(stat & NOPOWER) && use_power)

@@ -37,12 +37,18 @@
 #define MAT_COPPER			"copper"
 #define MAT_QUARTZ			"quartz"
 #define MAT_TIN				"tin"
-#define MAT_VOPAL			"void opal"
+#define MAT_MAGMELLITE		"magmellite"
 #define MAT_ALUMINIUM		"aluminium"
 #define MAT_BRONZE			"bronze"
 #define MAT_PAINITE			"painite"
 #define MAT_BOROSILICATE	"borosilicate glass"
 #define MAT_SANDSTONE		"sandstone"
+#define MAT_PLATINUM		"platinum"
+#define MAT_TRITIUM			"tritium"
+#define MAT_DEUTERIUM		"deuterium"
+#define MAT_CONCRETE		"concrete"
+#define MAT_PLASTEELREBAR	"plasteel rebar"
+
 
 #define DEFAULT_TABLE_MATERIAL MAT_PLASTIC
 #define DEFAULT_WALL_MATERIAL MAT_STEEL

@@ -154,10 +154,10 @@ var/global/floorIsLava = 0
 				<b>Rudimentary transformation:</b><font size=2><br>These transformations only create a new mob type and copy stuff over. They do not take into account MMIs and similar mob-specific things. The buttons in 'Transformations' are preferred, when possible.</font><br>
 				<A href='?src=\ref[src];simplemake=observer;mob=\ref[M]'>Observer</A> |
 				\[ Xenos: <A href='?src=\ref[src];simplemake=larva;mob=\ref[M]'>Larva</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenomorph Drone;mob=\ref[M]'>Drone</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenomorph Hunter;mob=\ref[M]'>Hunter</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenomorph Sentinel;mob=\ref[M]'>Sentinel</A>
-				<A href='?src=\ref[src];simplemake=human;species=Xenomorph Queen;mob=\ref[M]'>Queen</A> \] |
+				<A href='?src=\ref[src];simplemake=human;species=Skathari Worker;mob=\ref[M]'>Worker</A>
+				<A href='?src=\ref[src];simplemake=human;species=Skathari Soldier;mob=\ref[M]'>Soldier</A>
+				<A href='?src=\ref[src];simplemake=human;species=Skathari Guardian;mob=\ref[M]'>Gurdian</A>
+				<A href='?src=\ref[src];simplemake=human;species=Skathari Queen;mob=\ref[M]'>Queen</A> \] |
 				\[ Crew: <A href='?src=\ref[src];simplemake=human;mob=\ref[M]'>Human</A>
 				<A href='?src=\ref[src];simplemake=human;species=Unathi;mob=\ref[M]'>Unathi</A>
 				<A href='?src=\ref[src];simplemake=human;species=Tajaran;mob=\ref[M]'>Tajaran</A>
@@ -814,7 +814,7 @@ var/global/floorIsLava = 0
 		to_world("<B>The OOC channel has been globally enabled!</B>")
 	else
 		to_world("<B>The OOC channel has been globally disabled!</B>")
-	log_and_message_admins("toggled OOC.")
+	log_and_message_admins("toggled OOC.", usr)
 	feedback_add_details("admin_verb","TOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 /datum/admins/proc/togglelooc()
@@ -830,7 +830,7 @@ var/global/floorIsLava = 0
 		to_world("<B>The LOOC channel has been globally enabled!</B>")
 	else
 		to_world("<B>The LOOC channel has been globally disabled!</B>")
-	log_and_message_admins("toggled LOOC.")
+	log_and_message_admins("toggled LOOC.", usr)
 	feedback_add_details("admin_verb","TLOOC") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -907,7 +907,7 @@ var/global/floorIsLava = 0
 	else
 		SSticker.start_immediately = FALSE
 		to_world("<span class='notice'>Immediate game start canceled.  Normal startup resumed.</span>")
-		log_and_message_admins("cancelled immediate game start.")
+		log_and_message_admins("cancelled immediate game start.", usr)
 
 /datum/admins/proc/toggleenter()
 	set category = "Server"
@@ -1197,7 +1197,7 @@ var/global/floorIsLava = 0
 	else
 		new chosen(usr.loc)
 
-	log_and_message_admins("spawned [chosen] at ([usr.x],[usr.y],[usr.z])")
+	log_and_message_admins("spawned [chosen] at ([usr.x],[usr.y],[usr.z])", usr)
 	feedback_add_details("admin_verb","SA") //If you are copy-pasting this, ensure the 2nd parameter is unique to the new proc!
 
 
@@ -1468,12 +1468,12 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Mode has not started.")
 		return
 
-	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in all_antag_types
-	if(!antag_type || !all_antag_types[antag_type])
+	var/antag_type = input("Choose a template.","Force Latespawn") as null|anything in SSantags.antag_datums
+	if(!antag_type || !SSantags.antag_datums[antag_type])
 		to_chat(usr, "Aborting.")
 		return
 
-	var/datum/antagonist/antag = all_antag_types[antag_type]
+	var/datum/antagonist/antag = SSantags.antag_datums[antag_type]
 	message_admins("[key_name(usr)] attempting to force latespawn with template [antag.id].")
 	antag.attempt_late_spawn()
 
@@ -1492,7 +1492,7 @@ var/global/floorIsLava = 0
 		to_chat(usr, "Mode has not started.")
 		return
 
-	log_and_message_admins("attempting to force mode autospawn.")
+	log_and_message_admins("attempting to force mode autospawn.", usr)
 	ticker.mode.try_latespawn()
 
 /datum/admins/proc/paralyze_mob(mob/living/H as mob)
@@ -1506,12 +1506,12 @@ var/global/floorIsLava = 0
 		if (H.paralysis == 0)
 			H.SetParalysis(8000)
 			msg = "has paralyzed [key_name(H)]."
-			log_and_message_admins(msg)
+			log_and_message_admins(msg, usr)
 		else
 			if(alert(src, "[key_name(H)] is paralyzed, would you like to unparalyze them?",,"Yes","No") == "Yes")
 				H.SetParalysis(0)
 				msg = "has unparalyzed [key_name(H)]."
-				log_and_message_admins(msg)
+				log_and_message_admins(msg, usr)
 
 /datum/admins/proc/set_tcrystals(mob/living/carbon/human/H as mob)
 	set category = "Debug"
@@ -1562,7 +1562,7 @@ var/global/floorIsLava = 0
 
 			var/replyorigin = input(src.owner, "Please specify who the fax is coming from", "Origin") as text|null
 
-			var/obj/item/weapon/paper/admin/P = new /obj/item/weapon/paper/admin( null ) //hopefully the null loc won't cause trouble for us
+			var/obj/item/paper/admin/P = new /obj/item/paper/admin( null ) //hopefully the null loc won't cause trouble for us
 			faxreply = P
 
 			P.admindatum = src
@@ -1572,9 +1572,9 @@ var/global/floorIsLava = 0
 			P.adminbrowse()
 
 
-/datum/admins/var/obj/item/weapon/paper/admin/faxreply // var to hold fax replies in
+/datum/admins/var/obj/item/paper/admin/faxreply // var to hold fax replies in
 
-/datum/admins/proc/faxCallback(var/obj/item/weapon/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
+/datum/admins/proc/faxCallback(var/obj/item/paper/admin/P, var/obj/machinery/photocopier/faxmachine/destination)
 	var/customname = input(src.owner, "Pick a title for the report", "Title") as text|null
 
 	P.name = "[P.origin] - [customname]"
@@ -1604,8 +1604,8 @@ var/global/floorIsLava = 0
 
 		if(!P.stamped)
 			P.stamped = new
-		P.stamped += /obj/item/weapon/stamp/centcomm
-		P.overlays += stampoverlay
+		P.stamped += /obj/item/stamp/centcomm
+		P.add_overlay(stampoverlay)
 
 	var/obj/item/rcvdcopy
 	rcvdcopy = destination.copy(P)
@@ -1626,8 +1626,8 @@ var/global/floorIsLava = 0
 			for(var/client/C in admins)
 				if((R_ADMIN | R_MOD | R_EVENT) & C.holder.rights)
 					to_chat(C, "<span class='log_message'><span class='prefix'>FAX LOG:</span>[key_name_admin(src.owner)] has sent a fax message to [destination.department] (<a href='?_src_=holder;AdminFaxView=\ref[rcvdcopy]'>VIEW</a>)</span>")
-		
-		var/plaintext_title = P.sender ? "replied to [key_name(P.sender)]'s fax" : "sent a fax message to [destination.department]" 
+
+		var/plaintext_title = P.sender ? "replied to [key_name(P.sender)]'s fax" : "sent a fax message to [destination.department]"
 		var/fax_text = paper_html_to_plaintext(P.info)
 		log_game(plaintext_title)
 		log_game(fax_text)

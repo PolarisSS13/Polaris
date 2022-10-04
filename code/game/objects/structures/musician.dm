@@ -298,8 +298,8 @@
 	icon_state = "minimoog"
 	desc = "This is a minimoog; just like a space piano, but more spacey!"
 
-/obj/structure/device/piano/New()
-	..()
+/obj/structure/device/piano/Initialize()
+	. = ..()
 	song = new("piano", src)
 
 	if(prob(50))

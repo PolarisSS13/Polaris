@@ -19,8 +19,8 @@
 	if(!ispath(critter, /mob/living/simple_mob))
 		return INITIALIZE_HINT_QDEL
 
-	var/obj/item/weapon/holder/critter_holder = initial(critter.holder_type)
-	if(!ispath(critter_holder, /obj/item/weapon/holder))
+	var/obj/item/holder/critter_holder = initial(critter.holder_type)
+	if(!ispath(critter_holder, /obj/item/holder))
 		return INITIALIZE_HINT_QDEL
 
 	var/mob/M = loc
@@ -76,10 +76,10 @@
 
 /datum/ai_holder/simple_mob/passive/possum/poppy
 	var/static/list/aaa_words = list(
-		"delaminat", 
-		"meteor", 
-		"fire", 
-		"breach", 
+		"delaminat",
+		"meteor",
+		"fire",
+		"breach",
 		"loose",
 		"level 7",
 		"level seven",
@@ -127,12 +127,13 @@
 	response_help = "pets"
 	response_disarm = "gently pushes aside"
 	response_harm = "stamps on"
+	organ_names = /decl/mob_organ_names/possum
 	density = 0
 	minbodytemp = 223
 	maxbodytemp = 323
 	universal_speak = FALSE
 	universal_understand = TRUE
-	holder_type = /obj/item/weapon/holder/possum
+	holder_type = /obj/item/holder/possum
 	mob_size = MOB_SMALL
 	can_pull_size = 2
 	can_pull_mobs = MOB_PULL_SMALLER
@@ -196,5 +197,12 @@
 	icon_dead = "poppy_dead"
 	icon_rest = "poppy_dead"
 	tt_desc = "Didelphis astrum salutem"
-	holder_type = /obj/item/weapon/holder/possum/poppy
+	organ_names = /decl/mob_organ_names/poppy
+	holder_type = /obj/item/holder/possum/poppy
 	ai_holder_type = /datum/ai_holder/simple_mob/passive/possum/poppy
+
+/decl/mob_organ_names/possum
+	hit_zones = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "pouch")
+
+/decl/mob_organ_names/poppy
+	hit_zones = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "pouch", "cute little jacket")

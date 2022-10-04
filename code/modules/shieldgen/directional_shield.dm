@@ -16,7 +16,7 @@
 	var/x_offset = 0 // Offset from the 'center' of where the projector is, so that if it moves, the shield can recalc its position.
 	var/y_offset = 0 // Ditto.
 
-/obj/effect/directional_shield/New(var/newloc, var/new_projector)
+/obj/effect/directional_shield/Initialize(var/ml, var/new_projector)
 	if(new_projector)
 		projector = new_projector
 		var/turf/us = get_turf(src)
@@ -26,7 +26,7 @@
 			y_offset = us.y - them.y
 	else
 		update_color()
-	..(newloc)
+	. = ..(ml)
 
 /obj/effect/directional_shield/proc/relocate()
 	if(!projector)
@@ -83,6 +83,8 @@
 	desc = "A miniturized and compact shield projector.  This type has been optimized to diffuse lasers or block high velocity projectiles from the outside, \
 	but allow those projectiles to leave the shield from the inside.  Blocking too many damaging projectiles will cause the shield to fail."
 	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "signmaker_sec"
 	light_range = 4
 	light_power = 4
@@ -102,7 +104,7 @@
 	if(always_on)
 		create_shields()
 	GLOB.moved_event.register(src, src, .proc/moved_event)
-	..()
+	return ..()
 
 /obj/item/shield_projector/Destroy()
 	destroy_shields()
@@ -158,12 +160,12 @@
 	// This is done at the projector instead of the shields themselves to avoid needing to calculate this more than once every update.
 	var/interpolate_weight = shield_health / max_shield_health
 
-	var/list/low_color_list = hex2rgb(low_color)
+	var/list/low_color_list = rgb2num(low_color)
 	var/low_r = low_color_list[1]
 	var/low_g = low_color_list[2]
 	var/low_b = low_color_list[3]
 
-	var/list/high_color_list = hex2rgb(high_color)
+	var/list/high_color_list = rgb2num(high_color)
 	var/high_r = high_color_list[1]
 	var/high_g = high_color_list[2]
 	var/high_b = high_color_list[3]

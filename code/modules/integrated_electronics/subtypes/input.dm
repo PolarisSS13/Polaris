@@ -296,7 +296,7 @@
 /obj/item/integrated_circuit/input/advanced_locator/on_data_written()
 	var/rad = get_pin_data(IC_INPUT, 2)
 	if(isnum(rad))
-		rad = CLAMP(rad, 0, 7)
+		rad = clamp(rad, 0, 7)
 		radius = rad
 
 /obj/item/integrated_circuit/input/advanced_locator/do_work()
@@ -442,9 +442,13 @@
 	power_draw_per_use = 50
 	var/datum/exonet_protocol/exonet = null
 
-/obj/item/integrated_circuit/input/EPv2/New()
-	..()
+/obj/item/integrated_circuit/input/EPv2/Initialize()
+	. = ..()
 	exonet = new(src)
+	init_address()
+
+/obj/item/integrated_circuit/input/EPv2/proc/init_address()
+	set waitfor = FALSE
 	exonet.make_address("EPv2_circuit-\ref[src]")
 	desc += "<br>This circuit's EPv2 address is: [exonet.address]"
 
@@ -517,8 +521,8 @@
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH
 	power_draw_per_use = 15
 
-/obj/item/integrated_circuit/input/microphone/New()
-	..()
+/obj/item/integrated_circuit/input/microphone/Initialize()
+	. = ..()
 	listening_objects |= src
 
 /obj/item/integrated_circuit/input/microphone/Destroy()
@@ -628,7 +632,7 @@
 /obj/item/integrated_circuit/input/sensor/proc/scan(var/atom/A)
 	var/ignore_bags = get_pin_data(IC_INPUT, 1)
 	if(ignore_bags)
-		if(istype(A, /obj/item/weapon/storage))
+		if(istype(A, /obj/item/storage))
 			return FALSE
 
 	set_pin_data(IC_OUTPUT, 1, weakref(A))
@@ -696,11 +700,11 @@
 	if(AM)
 
 
-		var/obj/item/weapon/cell/cell = null
-		if(istype(AM, /obj/item/weapon/cell)) // Is this already a cell?
+		var/obj/item/cell/cell = null
+		if(istype(AM, /obj/item/cell)) // Is this already a cell?
 			cell = AM
 		else // If not, maybe there's a cell inside it?
-			for(var/obj/item/weapon/cell/C in AM.contents)
+			for(var/obj/item/cell/C in AM.contents)
 				if(C) // Find one cell to charge.
 					cell = C
 					break

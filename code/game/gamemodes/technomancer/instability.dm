@@ -90,9 +90,9 @@
 	last_instability_event = world.time
 	spawn(1)
 		var/image/instability_flash = image('icons/obj/spells.dmi',"instability")
-		overlays |= instability_flash
+		add_overlay(instability_flash)
 		sleep(4)
-		overlays.Remove(instability_flash)
+		cut_overlay(instability_flash)
 		qdel(instability_flash)
 
 /mob/living/silicon/instability_effects()
@@ -106,7 +106,7 @@
 				rng = rand(0,1)
 				switch(rng)
 					if(0)
-						var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+						var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 						sparks.set_up(5, 0, src)
 						sparks.attach(loc)
 						sparks.start()
@@ -171,7 +171,7 @@
 				rng = rand(0,1)
 				switch(rng)
 					if(0)
-						var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+						var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 						sparks.set_up(5, 0, src)
 						sparks.attach(loc)
 						sparks.start()

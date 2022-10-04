@@ -82,6 +82,8 @@
 		player_setup.load_character(S)
 		S.cd = "/character[default_slot]"
 		player_setup.save_character(S)
+	
+	clear_character_previews() // Recalculate them on next show
 
 	return 1
 

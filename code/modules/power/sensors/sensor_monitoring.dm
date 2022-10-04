@@ -13,7 +13,7 @@
 	//computer stuff
 	density = 1
 	anchored = 1.0
-	circuit = /obj/item/weapon/circuitboard/powermonitor
+	circuit = /obj/item/circuitboard/powermonitor
 	var/alerting = 0
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 300
@@ -37,8 +37,8 @@
 	..()
 
 // On creation automatically connects to active sensors. This is delayed to ensure sensors already exist.
-/obj/machinery/computer/power_monitor/New()
-	..()
+/obj/machinery/computer/power_monitor/Initialize()
+	. = ..()
 	power_monitor = new(src)
 
 // On user click opens the UI of this computer.

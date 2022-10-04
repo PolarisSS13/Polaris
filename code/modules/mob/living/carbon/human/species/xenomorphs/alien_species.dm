@@ -1,9 +1,9 @@
 //Stand-in until this is made more lore-friendly.
 /datum/species/xenos
 	name = SPECIES_XENO
-	name_plural = "Xenomorphs"
+	name_plural = "Skathari"
 
-	default_language = "Xenomorph"
+	default_language = "Skathari"
 	language = "Hivemind"
 	assisted_langs = list()
 	unarmed_types = list(/datum/unarmed_attack/claws/strong/xeno, /datum/unarmed_attack/bite/strong/xeno)
@@ -166,7 +166,7 @@
 
 /datum/species/xenos/drone
 	name = SPECIES_XENO_DRONE
-	caste_name = "drone"
+	caste_name = "worker"
 	weeds_plasma_rate = 15
 	slowdown = 1
 	tail = "xenos_drone_tail"
@@ -207,7 +207,7 @@
 /datum/species/xenos/hunter
 	name = SPECIES_XENO_HUNTER
 	weeds_plasma_rate = 5
-	caste_name = "hunter"
+	caste_name = "soldier"
 	slowdown = -2
 	total_health = 150
 	tail = "xenos_hunter_tail"
@@ -237,7 +237,7 @@
 /datum/species/xenos/sentinel
 	name = SPECIES_XENO_SENTINEL
 	weeds_plasma_rate = 10
-	caste_name = "sentinel"
+	caste_name = "guardian"
 	slowdown = 0
 	total_health = 200
 	tail = "xenos_sentinel_tail"

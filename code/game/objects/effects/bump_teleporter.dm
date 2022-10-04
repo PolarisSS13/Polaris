@@ -1,4 +1,4 @@
-var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
+var/global/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 
 /obj/effect/bump_teleporter
 	name = "bump-teleporter"
@@ -11,8 +11,8 @@ var/list/obj/effect/bump_teleporter/BUMP_TELEPORTERS = list()
 	density = 1
 	opacity = 0
 
-/obj/effect/bump_teleporter/New()
-	..()
+/obj/effect/bump_teleporter/Initialize()
+	. = ..()
 	BUMP_TELEPORTERS += src
 
 /obj/effect/bump_teleporter/Destroy()

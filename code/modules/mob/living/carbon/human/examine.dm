@@ -76,22 +76,12 @@
 		BP_L_LEG = skip_body & EXAMINE_SKIPLEGS,
 		BP_R_LEG = skip_body & EXAMINE_SKIPLEGS)
 
-	var/datum/gender/T = gender_datums[get_visible_gender()]
-
-	if((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)) //big suits/masks/helmets make it hard to tell their gender
-		T = gender_datums[PLURAL]
-
-	else if(species && species.ambiguous_genders)
-		if(ishuman(user))
-			var/mob/living/carbon/human/H = user
-			if(H.species && !istype(species, H.species))
-				T = gender_datums[PLURAL]// Species with ambiguous_genders will not show their true gender upon examine if the examiner is not also the same species.
-		if(!(issilicon(user) || isobserver(user))) // Ghosts and borgs are all knowing
-			T = gender_datums[PLURAL]
-
-	if(!T)
-		// Just in case someone VVs the gender to something strange. It'll runtime anyway when it hits usages, better to CRASH() now with a helpful message.
-		CRASH("Gender datum was null; key was '[((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)) ? PLURAL : gender]'")
+	
+	var/gender_hidden = (skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)
+	var/gender_key = get_visible_gender(user, gender_hidden)
+	var/datum/gender/T = gender_datums[gender_key]
+	if (!T)
+		CRASH({"Null gender datum on examine: mob="[src]",hidden="[gender_hidden]",key="[gender_key]",bio="[gender]",id="[identifying_gender]""})
 
 	var/name_ender = ""
 	if(!((skip_gear & EXAMINE_SKIPJUMPSUIT) && (skip_body & EXAMINE_SKIPFACE)))
@@ -193,7 +183,7 @@
 
 	//handcuffed?
 	if(handcuffed && handcuffed.show_examine)
-		if(istype(handcuffed, /obj/item/weapon/handcuffs/cable))
+		if(istype(handcuffed, /obj/item/handcuffs/cable))
 			msg += "<span class='warning'>[T.He] [T.is] [bicon(handcuffed)] restrained with cable!</span>"
 		else
 			msg += "<span class='warning'>[T.He] [T.is] [bicon(handcuffed)] handcuffed!</span>"
@@ -221,7 +211,7 @@
 	//mask
 	if(wear_mask && !(skip_gear & EXAMINE_SKIPMASK) && wear_mask.show_examine)
 		var/descriptor = "on [T.his] face"
-		if(istype(wear_mask, /obj/item/weapon/grenade) && check_has_mouth())
+		if(istype(wear_mask, /obj/item/grenade) && check_has_mouth())
 			descriptor = "in [T.his] mouth"
 
 		if(wear_mask.blood_DNA)
@@ -247,11 +237,11 @@
 	//ID
 	if(wear_id && wear_id.show_examine)
 		/*var/id
-		if(istype(wear_id, /obj/item/device/pda))
-			var/obj/item/device/pda/pda = wear_id
+		if(istype(wear_id, /obj/item/pda))
+			var/obj/item/pda/pda = wear_id
 			id = pda.owner
-		else if(istype(wear_id, /obj/item/weapon/card/id)) //just in case something other than a PDA/ID card somehow gets in the ID slot :[
-			var/obj/item/weapon/card/id/idcard = wear_id
+		else if(istype(wear_id, /obj/item/card/id)) //just in case something other than a PDA/ID card somehow gets in the ID slot :[
+			var/obj/item/card/id/idcard = wear_id
 			id = idcard.registered_name
 		if(id && (id != real_name) && (get_dist(src, usr) <= 1) && prob(10))
 			msg += "<span class='warning'>[T.He] [T.is] wearing [bicon(wear_id)] \a [wear_id] yet something doesn't seem right...</span>"
@@ -377,11 +367,11 @@
 		var/criminal = "None"
 
 		if(wear_id)
-			if(istype(wear_id, /obj/item/weapon/card/id))
-				var/obj/item/weapon/card/id/I = wear_id
+			if(istype(wear_id, /obj/item/card/id))
+				var/obj/item/card/id/I = wear_id
 				perpname = I.registered_name
-			else if(istype(wear_id, /obj/item/device/pda))
-				var/obj/item/device/pda/P = wear_id
+			else if(istype(wear_id, /obj/item/pda))
+				var/obj/item/pda/P = wear_id
 				perpname = P.owner
 
 		for (var/datum/data/record/R in data_core.security)
@@ -396,11 +386,11 @@
 		var/medical = "None"
 
 		if(wear_id)
-			if(istype(wear_id, /obj/item/weapon/card/id))
-				var/obj/item/weapon/card/id/I = wear_id
+			if(istype(wear_id, /obj/item/card/id))
+				var/obj/item/card/id/I = wear_id
 				perpname = I.registered_name
-			else if(istype(wear_id, /obj/item/device/pda))
-				var/obj/item/device/pda/P = wear_id
+			else if(istype(wear_id, /obj/item/pda))
+				var/obj/item/pda/P = wear_id
 				perpname = P.owner
 
 		for (var/datum/data/record/R in data_core.medical)

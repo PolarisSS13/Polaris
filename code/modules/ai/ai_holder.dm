@@ -1,14 +1,6 @@
 // This is a datum-based artificial intelligence for simple mobs (and possibly others) to use.
 // The neat thing with having this here instead of on the mob is that it is independant of Life(), and that different mobs
 // can use a more or less complex AI by giving it a different datum.
-#define AI_NO_PROCESS			0
-#define AI_PROCESSING			(1<<0)
-#define AI_FASTPROCESSING		(1<<1)
-
-#define START_AIPROCESSING(Datum) if (!(Datum.process_flags & AI_PROCESSING)) {Datum.process_flags |= AI_PROCESSING;SSai.processing += Datum}
-#define STOP_AIPROCESSING(Datum) Datum.process_flags &= ~AI_PROCESSING;SSai.processing -= Datum
-#define START_AIFASTPROCESSING(Datum) if (!(Datum.process_flags & AI_FASTPROCESSING)) {Datum.process_flags |= AI_FASTPROCESSING;SSaifast.processing += Datum}
-#define STOP_AIFASTPROCESSING(Datum) Datum.process_flags &= ~AI_FASTPROCESSING;SSaifast.processing -= Datum
 
 /mob/living
 	var/datum/ai_holder/ai_holder = null
@@ -47,7 +39,7 @@
 										// consider sleeping the AI instead.
 	var/process_flags = 0				// Where we're processing, see flag defines.
 	var/list/snapshot = null			// A list used in mass-editing of AI datums, holding a snapshot of the 'before' state
-	var/list/static/fastprocess_stances = list(
+	var/static/list/fastprocess_stances = list(
 		STANCE_ALERT,
 		STANCE_APPROACH,
 		STANCE_FIGHT,
@@ -58,7 +50,7 @@
 		STANCE_FLEE,
 		STANCE_DISABLED
 	)
-	var/list/static/noprocess_stances = list(
+	var/static/list/noprocess_stances = list(
 		STANCE_SLEEP
 	)
 
@@ -293,6 +285,9 @@
 
 // 'Tactical' processes such as moving a step, meleeing an enemy, firing a projectile, and other fairly cheap actions that need to happen quickly.
 /datum/ai_holder/proc/handle_tactics()
+	if(!istype(holder) || QDELETED(holder))
+		qdel(src)
+		return
 	if(holder.key && !autopilot)
 		return
 	handle_special_tactic()
@@ -300,6 +295,9 @@
 
 // 'Strategical' processes that are more expensive on the CPU and so don't get run as often as the above proc, such as A* pathfinding or robust targeting.
 /datum/ai_holder/proc/handle_strategicals()
+	if(!istype(holder) || QDELETED(holder))
+		qdel(src)
+		return
 	if(holder.key && !autopilot)
 		return
 	handle_special_strategical()

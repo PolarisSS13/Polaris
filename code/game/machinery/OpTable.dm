@@ -14,8 +14,8 @@
 	var/strapped = 0.0
 	var/obj/machinery/computer/operating/computer = null
 
-/obj/machinery/optable/New()
-	..()
+/obj/machinery/optable/Initialize()
+	. = ..()
 	for(var/direction in list(NORTH,EAST,SOUTH,WEST))
 		computer = locate(/obj/machinery/computer/operating, get_step(src, direction))
 		if(computer)
@@ -110,9 +110,9 @@
 
 	take_victim(user, user)
 
-/obj/machinery/optable/attackby(obj/item/weapon/W, mob/living/carbon/user)
-	if(istype(W, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = W
+/obj/machinery/optable/attackby(obj/item/W, mob/living/carbon/user)
+	if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
 		if(iscarbon(G.affecting) && check_table(G.affecting, user))
 			take_victim(G.affecting, user)
 			qdel(W)

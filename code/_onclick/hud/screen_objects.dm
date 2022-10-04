@@ -19,7 +19,7 @@
 /obj/screen/Destroy()
 	master = null
 	return ..()
-	
+
 /obj/screen/proc/component_click(obj/screen/component_button/component, params)
 	return
 
@@ -70,8 +70,8 @@
 
 /obj/screen/close/Click()
 	if(master)
-		if(istype(master, /obj/item/weapon/storage))
-			var/obj/item/weapon/storage/S = master
+		if(istype(master, /obj/item/storage))
+			var/obj/item/storage/S = master
 			S.close(usr)
 	return 1
 
@@ -102,7 +102,7 @@
 	name = "grab"
 
 /obj/screen/grab/Click()
-	var/obj/item/weapon/grab/G = master
+	var/obj/item/grab/G = master
 	G.s_click(src)
 	return 1
 
@@ -168,13 +168,15 @@
 	vis_contents -= hover_overlays_cache[hovering_choice]
 	hovering_choice = choice
 
+	if(!choice)
+		return
+
 	var/obj/effect/overlay/zone_sel/overlay_object = hover_overlays_cache[choice]
 	if(!overlay_object)
 		overlay_object = new
 		overlay_object.icon_state = "[choice]"
 		hover_overlays_cache[choice] = overlay_object
 	vis_contents += overlay_object
-
 
 /obj/effect/overlay/zone_sel
 	icon = 'icons/mob/zone_sel.dmi'
@@ -241,7 +243,7 @@
 		update_icon()
 
 /obj/screen/zone_sel/update_icon()
-	cut_overlay(selecting_appearance)
+	cut_overlays()
 	selecting_appearance = mutable_appearance('icons/mob/zone_sel.dmi', "[selecting]")
 	add_overlay(selecting_appearance)
 
@@ -347,7 +349,7 @@
 								tankcheck = list(C.r_hand, C.l_hand, C.back)
 
 							// Rigs are a fucking pain since they keep an air tank in nullspace.
-							var/obj/item/weapon/rig/Rig = C.get_rig()
+							var/obj/item/rig/Rig = C.get_rig()
 							if(Rig)
 								if(Rig.air_supply && !Rig.offline)
 									from = "in"
@@ -355,8 +357,8 @@
 									tankcheck |= Rig.air_supply
 
 							for(var/i=1, i<tankcheck.len+1, ++i)
-								if(istype(tankcheck[i], /obj/item/weapon/tank))
-									var/obj/item/weapon/tank/t = tankcheck[i]
+								if(istype(tankcheck[i], /obj/item/tank))
+									var/obj/item/tank/t = tankcheck[i]
 									if (!isnull(t.manipulated_by) && t.manipulated_by != C.real_name && findtext(t.desc,breathes))
 										contents.Add(t.air_contents.total_moles)	//Someone messed with the tank and put unknown gasses
 										continue					//in it, so we're going to believe the tank is what it says it is
@@ -598,12 +600,12 @@
 	if(!handcuff_overlay)
 		var/state = (hud.l_hand_hud_object == src) ? "l_hand_hud_handcuffs" : "r_hand_hud_handcuffs"
 		handcuff_overlay = image("icon"='icons/mob/screen_gen.dmi', "icon_state"=state)
-	overlays.Cut()
+	cut_overlays()
 	if(hud.mymob && iscarbon(hud.mymob))
 		var/mob/living/carbon/C = hud.mymob
 		if(C.handcuffed)
-			overlays |= handcuff_overlay
-			
+			add_overlay(handcuff_overlay)
+
 // PIP stuff
 /obj/screen/component_button
 	var/obj/screen/parent
@@ -616,46 +618,6 @@
 	if(parent)
 		parent.component_click(src, params)
 
-/obj/screen/splash
-	screen_loc = "1,1"
-	layer = LAYER_HUD_ABOVE
-	plane = PLANE_PLAYER_HUD_ABOVE
-	var/client/holder
-
-/obj/screen/splash/New(client/C, visible)
-	. = ..()
-
-	holder = C
-
-	if(!visible)
-		alpha = 0
-
-	if(!lobby_image)
-		qdel(src)
-		return
-
-	icon = lobby_image.icon
-	icon_state = lobby_image.icon_state
-
-	holder.screen += src
-
-/obj/screen/splash/proc/Fade(out, qdel_after = TRUE)
-	if(QDELETED(src))
-		return
-	if(out)
-		animate(src, alpha = 0, time = 30)
-	else
-		alpha = 0
-		animate(src, alpha = 255, time = 30)
-	if(qdel_after)
-		QDEL_IN(src, 30)
-
-/obj/screen/splash/Destroy()
-	if(holder)
-		holder.screen -= src
-		holder = null
-	return ..()
-
 
 /**
  * This object holds all the on-screen elements of the mapping unit.
@@ -664,7 +626,7 @@
  * size of the screen. This is not ideal, as filter() is faster, and has
  * alpha masks, but the alpha masks it has can't be animated, so the 'ping'
  * mode of this device isn't possible using that technique.
- * 
+ *
  * The markers use that technique, though, so at least there's that.
  */
 /obj/screen/movable/mapper_holder
@@ -682,17 +644,20 @@
 	var/obj/screen/mapper/mask_full/mask_full
 	var/obj/screen/mapper/mask_ping/mask_ping
 	var/obj/screen/mapper/bg/bg
-	
+
 	var/obj/screen/mapper/frame/frame
 	var/obj/screen/mapper/powbutton/powbutton
 	var/obj/screen/mapper/mapbutton/mapbutton
 
-	var/obj/item/device/mapping_unit/owner
+	var/obj/item/mapping_unit/owner
 	var/obj/screen/mapper/extras_holder/extras_holder
 
 /obj/screen/movable/mapper_holder/Initialize(mapload, newowner)
+
+	. = ..()
+
 	owner = newowner
-	
+
 	mask_full = new(src) // Full white square mask
 	mask_ping = new(src) // Animated 'pinging' mask
 	bg = new(src) // Background color, holds map in vis_contents, uses mult against masks
@@ -700,19 +665,19 @@
 	frame = new(src) // Decorative frame
 	powbutton = new(src) // Clickable button
 	mapbutton = new(src) // Clickable button
-	
+
 	frame.icon_state = initial(frame.icon_state)+owner.hud_frame_hint
 
 	/**
 	 * The vis_contents layout is: this(frame,extras_holder,mask(bg(map)))
 	 * bg is set to BLEND_MULTIPLY against the mask to crop it.
 	 */
-	
+
 	mask_full.vis_contents.Add(bg)
 	mask_ping.vis_contents.Add(bg)
 	frame.vis_contents.Add(powbutton,mapbutton)
 	vis_contents.Add(frame)
-	
+
 
 /obj/screen/movable/mapper_holder/Destroy()
 	qdel_null(mask_full)
@@ -732,12 +697,12 @@
 		running = TRUE
 		if(ping)
 			vis_contents.Add(mask_ping)
-		else	
+		else
 			vis_contents.Add(mask_full)
 
 	bg.vis_contents.Cut()
 	bg.vis_contents.Add(map)
-	
+
 	if(extras && !extras_holder)
 		extras_holder = extras
 		vis_contents += extras_holder
@@ -750,7 +715,7 @@
 		off()
 	else
 		on()
-	
+
 /obj/screen/movable/mapper_holder/proc/mapClick()
 	if(owner)
 		if(running)
@@ -778,8 +743,8 @@
 	mouse_opacity = 0
 	var/obj/screen/movable/mapper_holder/parent
 
-/obj/screen/mapper/New()	
-	..()
+/obj/screen/mapper/Initialize()
+	. = ..()
 	parent = loc
 
 /obj/screen/mapper/Destroy()
@@ -870,3 +835,82 @@
 	icon_state = null
 	plane = PLANE_HOLOMAP_ICONS
 	appearance_flags = KEEP_TOGETHER
+
+// Begin TGMC Ammo HUD Port
+/obj/screen/ammo
+	name = "ammo"
+	icon = 'icons/mob/screen_ammo.dmi'
+	icon_state = "ammo"
+	screen_loc = ui_ammo_hud1
+	var/warned = FALSE
+	var/static/list/ammo_screen_loc_list = list(ui_ammo_hud1, ui_ammo_hud2, ui_ammo_hud3 ,ui_ammo_hud4)
+
+/obj/screen/ammo/proc/add_hud(var/mob/living/user, var/obj/item/gun/G)
+
+	if(!user?.client)
+		return
+
+	if(!G)
+		CRASH("/obj/screen/ammo/proc/add_hud() has been called from [src] without the required param of G")
+
+	if(!G.has_ammo_counter())
+		return
+
+	user.client.screen += src
+
+/obj/screen/ammo/proc/remove_hud(var/mob/living/user)
+	user?.client?.screen -= src
+
+/obj/screen/ammo/proc/update_hud(var/mob/living/user, var/obj/item/gun/G)
+	if(!user?.client?.screen.Find(src))
+		return
+
+	if(!G || !istype(G) || !G.has_ammo_counter() || !G.get_ammo_type() || isnull(G.get_ammo_count()))
+		remove_hud()
+		return
+
+	var/list/ammo_type = G.get_ammo_type()
+	var/rounds = G.get_ammo_count()
+
+	var/hud_state = ammo_type[1]
+	var/hud_state_empty = ammo_type[2]
+
+	cut_overlays()
+
+	var/empty = image('icons/mob/screen_ammo.dmi', src, "[hud_state_empty]")
+
+	if(rounds == 0)
+		if(warned)
+			add_overlay(empty)
+		else
+			warned = TRUE
+			var/obj/screen/ammo/F = new /obj/screen/ammo(src)
+			F.icon_state = "frame"
+			user.client.screen += F
+			flick("[hud_state_empty]_flash", F)
+			spawn(20)
+				user.client.screen -= F
+				qdel(F)
+				add_overlay(empty)
+	else
+		warned = FALSE
+		var/image/image = image('icons/mob/screen_ammo.dmi', src, "[hud_state]")
+		add_overlay(image)
+
+	var/list/add = list()
+	rounds = num2text(rounds)
+	switch(length(rounds))
+		if(1)
+			add += image('icons/mob/screen_ammo.dmi', src, "o[rounds[1]]")
+		if(2)
+			add += image('icons/mob/screen_ammo.dmi', src, "o[rounds[2]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "t[rounds[1]]")
+		if(3)
+			add += image('icons/mob/screen_ammo.dmi', src, "o[rounds[3]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "t[rounds[2]]")
+			add += image('icons/mob/screen_ammo.dmi', src, "h[rounds[1]]")
+		else //"0" is still length 1 so this means it's over 999
+			add += image('icons/mob/screen_ammo.dmi', src, "o9")
+			add += image('icons/mob/screen_ammo.dmi', src, "t9")
+			add += image('icons/mob/screen_ammo.dmi', src, "h9")
+	add_overlay(add)

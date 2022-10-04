@@ -11,7 +11,7 @@
 
 	var/damage = 0
 	var/damage_overlay = 0
-	var/global/damage_overlays[16]
+	var/static/damage_overlays[16]
 	var/active
 	var/can_open = 0
 	var/datum/material/girder_material
@@ -30,21 +30,30 @@
 /turf/simulated/wall/Initialize(mapload, materialtype, rmaterialtype, girdertype)
 	. = ..()
 	icon_state = "blank"
-	if(!materialtype)
-		materialtype = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(materialtype)
-	if(!girdertype)
-		girdertype = DEFAULT_WALL_MATERIAL
-	girder_material = get_material_by_name(girdertype)
-	if(!isnull(rmaterialtype))
-		reinf_material = get_material_by_name(rmaterialtype)
+
+	if(materialtype && !material)
+		material = materialtype
+	else if(!material)
+		material = DEFAULT_WALL_MATERIAL
+	material = get_material_by_name(material)
+
+	if(girdertype && !girder_material)
+		girder_material = girdertype
+	else if(!girder_material)
+		girder_material = DEFAULT_WALL_MATERIAL
+	girder_material = get_material_by_name(girder_material)
+
+	if(rmaterialtype && !reinf_material)
+		reinf_material = rmaterialtype
+	if(reinf_material)
+		reinf_material = get_material_by_name(reinf_material)
+
 	update_material()
 	START_PROCESSING(SSturfs, src)
 
 /turf/simulated/wall/Destroy()
 	STOP_PROCESSING(SSturfs, src)
-	dismantle_wall(null,null,1)
-	..()
+	return ..()
 
 /turf/simulated/wall/examine_icon()
 	return icon(icon=initial(icon), icon_state=initial(icon_state))
@@ -308,7 +317,7 @@
 /turf/simulated/wall/can_engrave()
 	return (material && material.hardness >= 10 && material.hardness <= 100)
 
-/turf/simulated/wall/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/turf/simulated/wall/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	if(material.integrity > 1000) // Don't decon things like elevatorium.
 		return FALSE
 	if(reinf_material && !the_rcd.can_remove_rwalls) // Gotta do it the old fashioned way if your RCD can't.
@@ -325,7 +334,7 @@
 			)
 	return FALSE
 
-/turf/simulated/wall/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/turf/simulated/wall/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	if(passed_mode == RCD_DECONSTRUCT)
 		to_chat(user, span("notice", "You deconstruct \the [src]."))
 		ChangeTurf(/turf/simulated/floor/airless, preserve_outdoors = TRUE)

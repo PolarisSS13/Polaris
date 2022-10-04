@@ -21,30 +21,30 @@
 
 	var/temperature_archived
 	var/mob/living/carbon/occupant = null
-	var/obj/item/weapon/reagent_containers/glass/beaker = null
+	var/obj/item/reagent_containers/glass/beaker = null
 
 	var/current_heat_capacity = 50
 
 	var/image/fluid
 
-/obj/machinery/atmospherics/unary/cryo_cell/New()
-	..()
+/obj/machinery/atmospherics/unary/cryo_cell/Initialize()
+	. = ..()
 	icon = 'icons/obj/cryogenics_split.dmi'
 	icon_state = "base"
 	initialize_directions = dir
 
-/obj/machinery/atmospherics/unary/cryo_cell/Initialize()
-	. = ..()
 	var/image/tank = image(icon,"tank")
 	tank.alpha = 200
 	tank.pixel_y = 18
 	tank.plane = MOB_PLANE
 	tank.layer = MOB_LAYER+0.2 //Above fluid
+
 	fluid = image(icon, "tube_filler")
 	fluid.pixel_y = 18
 	fluid.alpha = 200
 	fluid.plane = MOB_PLANE
 	fluid.layer = MOB_LAYER+0.1 //Below glass, above mob
+
 	add_overlay(tank)
 	update_icon()
 
@@ -165,8 +165,8 @@
 	add_fingerprint(usr)
 	return TRUE
 
-/obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/weapon/G as obj, var/mob/user as mob)
-	if(istype(G, /obj/item/weapon/reagent_containers/glass))
+/obj/machinery/atmospherics/unary/cryo_cell/attackby(var/obj/item/G as obj, var/mob/user as mob)
+	if(istype(G, /obj/item/reagent_containers/glass))
 		if(beaker)
 			to_chat(user, "<span class='warning'>A beaker is already loaded into the machine.</span>")
 			return
@@ -177,8 +177,8 @@
 		user.visible_message("[user] adds \a [G] to \the [src]!", "You add \a [G] to \the [src]!")
 		SStgui.update_uis(src)
 		update_icon()
-	else if(istype(G, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/grab = G
+	else if(istype(G, /obj/item/grab))
+		var/obj/item/grab/grab = G
 		if(!ismob(grab.affecting))
 			return
 		if(occupant)

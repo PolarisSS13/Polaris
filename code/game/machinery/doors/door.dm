@@ -41,15 +41,19 @@
 /obj/machinery/door/attack_generic(var/mob/user, var/damage)
 	if(isanimal(user))
 		var/mob/living/simple_mob/S = user
-		if(damage >= STRUCTURE_MIN_DAMAGE_THRESHOLD)
-			visible_message("<span class='danger'>\The [user] smashes into [src]!</span>")
+		if(S.a_intent == I_HURT && damage >= STRUCTURE_MIN_DAMAGE_THRESHOLD)
+			visible_message(SPAN_DANGER("\The [user] smashes into [src]!"))
 			playsound(src, S.attack_sound, 75, 1)
 			take_damage(damage)
+		else if(user.a_intent == I_HELP)
+			user.visible_message(SPAN_NOTICE("\The [user] scratches at the bottom of \the [src]."))
 		else
-			visible_message("<span class='notice'>\The [user] bonks \the [src] harmlessly.</span>")
-	user.do_attack_animation(src)
+			visible_message(SPAN_NOTICE("\The [user] bonks \the [src] harmlessly."))
+		user.do_attack_animation(src)
+		return
+	..()
 
-/obj/machinery/door/New()
+/obj/machinery/door/Initialize()
 	. = ..()
 	if(density)
 		layer = closed_layer
@@ -112,7 +116,7 @@
 		else
 			bumpopen(M)
 
-	if(istype(AM, /obj/item/device/uav))
+	if(istype(AM, /obj/item/uav))
 		if(check_access(null))
 			open()
 		else
@@ -246,12 +250,12 @@
 
 			return
 
-		if(repairing && istype(I, /obj/item/weapon/weldingtool))
+		if(repairing && istype(I, /obj/item/weldingtool))
 			if(!density)
 				to_chat(user, "<span class='warning'>\The [src] must be closed before you can repair it.</span>")
 				return
 
-			var/obj/item/weapon/weldingtool/welder = I
+			var/obj/item/weldingtool/welder = I
 			if(welder.remove_fuel(0,user))
 				to_chat(user, "<span class='notice'>You start to fix dents and weld \the [get_material_name()] into place.</span>")
 				playsound(src, welder.usesound, 50, 1)
@@ -272,8 +276,8 @@
 			return
 
 		//psa to whoever coded this, there are plenty of objects that need to call attack() on doors without bludgeoning them.
-		if(src.density && istype(I, /obj/item/weapon) && user.a_intent == I_HURT && !istype(I, /obj/item/weapon/card))
-			var/obj/item/weapon/W = I
+		if(src.density && istype(I) && user.a_intent == I_HURT && !istype(I, /obj/item/card))
+			var/obj/item/W = I
 			user.setClickCooldown(user.get_attack_speed(W))
 			if(W.damtype == BRUTE || W.damtype == BURN)
 				user.do_attack_animation(src)
@@ -364,7 +368,7 @@
 				take_damage(300)
 		if(3.0)
 			if(prob(80))
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 				s.set_up(2, 1, src)
 				s.start()
 			else

@@ -82,6 +82,7 @@
 				pressure_factor = max(pressure_factor, 0.15) //touching the source of the sound
 
 			S.volume *= pressure_factor
+			S.volume *= get_sound_volume_multiplier()
 			//End Atmosphere affecting sound
 
 		//Don't bother with doing anything below.
@@ -122,9 +123,10 @@
 	return rand(32000, 55000) //Frequency stuff only works with 45kbps oggs.
 
 /client/proc/playtitlemusic()
-	if(!ticker || !ticker.login_music)	return
 	if(is_preference_enabled(/datum/client_preference/play_lobby_music))
-		src << sound(ticker.login_music, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS
+		if(!using_map.lobby_track)
+			using_map.lobby_track = using_map.get_lobby_track()
+		using_map.lobby_track.play_to(src)
 
 /proc/get_sfx(soundin)
 	if(istext(soundin))
@@ -217,8 +219,12 @@
 					'sound/items/pickup/generic1.ogg',
 					'sound/items/pickup/generic2.ogg',
 					'sound/items/pickup/generic3.ogg')
+			if ("skathari_chitter")
+				soundin = pick(
+					'sound/effects/skath_chitter1.ogg',
+					'sound/effects/skath_chitter2.ogg')
 	return soundin
 
 //Are these even used?
-var/list/keyboard_sound = list ('sound/effects/keyboard/keyboard1.ogg','sound/effects/keyboard/keyboard2.ogg','sound/effects/keyboard/keyboard3.ogg', 'sound/effects/keyboard/keyboard4.ogg')
-var/list/bodyfall_sound = list('sound/effects/bodyfall1.ogg','sound/effects/bodyfall2.ogg','sound/effects/bodyfall3.ogg','sound/effects/bodyfall4.ogg')
+var/global/list/keyboard_sound = list ('sound/effects/keyboard/keyboard1.ogg','sound/effects/keyboard/keyboard2.ogg','sound/effects/keyboard/keyboard3.ogg', 'sound/effects/keyboard/keyboard4.ogg')
+var/global/list/bodyfall_sound = list('sound/effects/bodyfall1.ogg','sound/effects/bodyfall2.ogg','sound/effects/bodyfall3.ogg','sound/effects/bodyfall4.ogg')

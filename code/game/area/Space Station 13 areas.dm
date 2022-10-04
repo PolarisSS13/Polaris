@@ -1831,24 +1831,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	icon_state = "Tactical"
 	ambience = AMBIENCE_HIGHSEC
 
-
-/*
-	New()
-		..()
-
-		spawn(10) //let objects set up first
-			for(var/turf/turfToGrayscale in src)
-				if(turfToGrayscale.icon)
-					var/icon/newIcon = icon(turfToGrayscale.icon)
-					newIcon.GrayScale()
-					turfToGrayscale.icon = newIcon
-				for(var/obj/objectToGrayscale in turfToGrayscale) //1 level deep, means tables, apcs, locker, etc, but not locker contents
-					if(objectToGrayscale.icon)
-						var/icon/newIcon = icon(objectToGrayscale.icon)
-						newIcon.GrayScale()
-						objectToGrayscale.icon = newIcon
-*/
-
 /area/security/nuke_storage
 	name = "\improper Vault"
 	icon_state = "nuke_storage"
@@ -2555,71 +2537,6 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 	luminosity = 1
 	dynamic_lighting = 0
 	requires_power = 0
-
-/////////////////////////////////////////////////////////////////////
-/*
- Lists of areas to be used with is_type_in_list.
- Used in gamemodes code at the moment. --rastaf0
-*/
-
-// CENTCOM
-var/list/centcom_areas = list (
-	/area/centcom,
-	/area/shuttle/escape/centcom,
-	/area/shuttle/escape_pod1/centcom,
-	/area/shuttle/escape_pod2/centcom,
-	/area/shuttle/escape_pod3/centcom,
-	/area/shuttle/escape_pod5/centcom,
-	/area/shuttle/transport1/centcom,
-	/area/shuttle/administration/centcom,
-	/area/shuttle/specops/centcom,
-)
-
-//SPACE STATION 13
-var/list/the_station_areas = list (
-	/area/shuttle/arrival,
-	/area/shuttle/escape/station,
-	/area/shuttle/escape_pod1/station,
-	/area/shuttle/escape_pod2/station,
-	/area/shuttle/escape_pod3/station,
-	/area/shuttle/escape_pod5/station,
-	/area/shuttle/mining/station,
-	/area/shuttle/transport1/station,
-	// /area/shuttle/transport2/station,
-	/area/shuttle/prison/station,
-	/area/shuttle/administration/station,
-	/area/shuttle/specops/station,
-	/area/maintenance,
-	/area/hallway,
-	/area/bridge,
-	/area/crew_quarters,
-	/area/holodeck,
-	/area/mint,
-	/area/library,
-	/area/chapel,
-	/area/lawoffice,
-	/area/engineering,
-	/area/solar,
-	/area/assembly,
-	/area/teleporter,
-	/area/medical,
-	/area/security,
-	/area/quartermaster,
-	/area/janitor,
-	/area/hydroponics,
-	/area/rnd,
-	/area/storage,
-	/area/construction,
-	/area/ai_monitored/storage/eva,
-	/area/ai_monitored/storage/secure,
-	/area/ai_monitored/storage/emergency,
-	/area/ai_upload,
-	/area/ai_upload_foyer,
-	/area/ai
-)
-
-
-
 
 /area/beach
 	name = "Keelin's private beach"

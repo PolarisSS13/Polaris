@@ -3,6 +3,7 @@
 	desc = "Permits us to syphon the DNA from a human. They become one with us, and we become stronger if they were of our kind."
 	ability_icon_state = "ling_absorb_dna"
 	genomecost = 0
+	power_category = CHANGELING_POWER_INHERENT
 	verbpath = /mob/living/proc/changeling_absorb_dna
 
 //Absorbs the victim's DNA. Requires a strong grip on the victim.
@@ -14,7 +15,7 @@
 	var/datum/changeling/changeling = changeling_power(0,0,100)
 	if(!changeling)	return
 
-	var/obj/item/weapon/grab/G = src.get_active_hand()
+	var/obj/item/grab/G = src.get_active_hand()
 	if(!istype(G))
 		to_chat(src, "<span class='warning'>We must be grabbing a creature in our active hand to absorb them.</span>")
 		return

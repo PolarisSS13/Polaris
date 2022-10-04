@@ -102,10 +102,10 @@
 /mob/living/bullet_act(var/obj/item/projectile/P, var/def_zone)
 
 	//Being hit while using a deadman switch
-	if(istype(get_active_hand(),/obj/item/device/assembly/signaler))
-		var/obj/item/device/assembly/signaler/signaler = get_active_hand()
+	if(istype(get_active_hand(),/obj/item/assembly/signaler))
+		var/obj/item/assembly/signaler/signaler = get_active_hand()
 		if(signaler.deadman && prob(80))
-			log_and_message_admins("has triggered a signaler deadman's switch")
+			log_and_message_admins("has triggered a signaler deadman's switch", src)
 			src.visible_message("<font color='red'>[src] triggers their deadman's switch!</font>")
 			signaler.signal()
 
@@ -171,7 +171,7 @@
 	if(LAZYLEN(modifiers))
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.emp_modifier))
-				severity = CLAMP(severity + M.emp_modifier, 1, 5)
+				severity = clamp(severity + M.emp_modifier, 1, 5)
 
 	if(severity == 5)	// Effectively nullified.
 		return
@@ -385,7 +385,7 @@
 	return
 
 /mob/living/proc/adjust_fire_stacks(add_fire_stacks) //Adjusting the amount of fire_stacks we have on person
-    fire_stacks = CLAMP(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
+    fire_stacks = clamp(fire_stacks + add_fire_stacks, FIRE_MIN_STACKS, FIRE_MAX_STACKS)
 
 /mob/living/proc/handle_fire()
 	if(fire_stacks < 0)

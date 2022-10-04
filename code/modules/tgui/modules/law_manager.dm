@@ -7,8 +7,8 @@
 	var/supplied_law = "SuppliedLaw"
 	var/supplied_law_position = MIN_SUPPLIED_LAW_NUMBER
 
-	var/global/list/datum/ai_laws/admin_laws
-	var/global/list/datum/ai_laws/player_laws
+	var/static/list/datum/ai_laws/admin_laws
+	var/static/list/datum/ai_laws/player_laws
 	var/mob/living/silicon/owner = null
 
 /datum/tgui_module/law_manager/New(mob/living/silicon/S)
@@ -91,7 +91,7 @@
 		if("change_supplied_law_position")
 			var/new_position = input(usr, "Enter new supplied law position between 1 and [MAX_SUPPLIED_LAW_NUMBER], inclusive. Inherent laws at the same index as a supplied law will not be stated.", "Law Position", supplied_law_position) as num|null
 			if(isnum(new_position) && can_still_topic(usr, state))
-				supplied_law_position = CLAMP(new_position, 1, MAX_SUPPLIED_LAW_NUMBER)
+				supplied_law_position = clamp(new_position, 1, MAX_SUPPLIED_LAW_NUMBER)
 			return TRUE
 
 		if("edit_law")
@@ -100,7 +100,7 @@
 				if(AL)
 					var/new_law = sanitize(input(usr, "Enter new law. Leaving the field blank will cancel the edit.", "Edit Law", AL.law))
 					if(new_law && new_law != AL.law && is_malf(usr) && can_still_topic(usr, state))
-						log_and_message_admins("has changed a law of [owner] from '[AL.law]' to '[new_law]'")
+						log_and_message_admins("has changed a law of [owner] from '[AL.law]' to '[new_law]'", usr)
 						AL.law = new_law
 				return TRUE
 
@@ -125,7 +125,7 @@
 			if(is_malf(usr))
 				var/datum/ai_laws/ALs = locate(params["transfer_laws"]) in (is_admin(usr) ? admin_laws : player_laws)
 				if(ALs)
-					log_and_message_admins("has transfered the [ALs.name] laws to [owner].")
+					log_and_message_admins("has transfered the [ALs.name] laws to [owner].", usr)
 					ALs.sync(owner, 0)
 			return TRUE
 

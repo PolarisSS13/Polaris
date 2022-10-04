@@ -228,14 +228,14 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle = new
 	if (online())
 		if (shuttle.has_arrive_time())
 			var/timeleft = emergency_shuttle.estimate_arrival_time()
-			return "ETA-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
+			return "ETA-[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 
 		if (waiting_to_leave())
 			if (shuttle.moving_status == SHUTTLE_WARMUP)
 				return "Departing..."
 
 			var/timeleft = emergency_shuttle.estimate_launch_time()
-			return "ETD-[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]"
+			return "ETD-[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 
 	return ""
 /*
@@ -251,8 +251,8 @@ var/global/datum/emergency_shuttle_controller/emergency_shuttle = new
 	layer = TURF_LAYER
 	plane = TURF_PLANE
 
-/obj/effect/bgstar/New()
-	..()
+/obj/effect/bgstar/Initialize()
+	. = ..()
 	pixel_x += rand(-2,30)
 	pixel_y += rand(-2,30)
 	var/starnum = pick("1", "1", "1", "2", "3", "4")

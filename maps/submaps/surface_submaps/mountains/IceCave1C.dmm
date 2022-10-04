@@ -5,36 +5,44 @@
 "e" = (/obj/structure/loot_pile/surface/bones,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 "f" = (/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 "g" = (/obj/machinery/crystal/ice,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
-"h" = (/obj/random/firstaid,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"h" = (/obj/random/tool/power/anom,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 "i" = (/obj/random/ammo,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"l" = (/obj/random/projectile/scrapped_ionrifle,/turf/simulated/floor/outdoors/ice{outdoors = 0},/area/submap/cave/IceCave1C)
+"n" = (/obj/random/powercell/anom,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"u" = (/obj/random/trash,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"E" = (/obj/structure/loot_pile/surface/bones,/obj/random/multiple/voidsuit/vintage,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"G" = (/obj/random/outcrop,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"M" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"O" = (/obj/structure/loot_pile/mecha/ripley/random_sprite,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
+"Y" = (/obj/random/unidentified_medicine/viral,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1C)
 
 (1,1,1) = {"
-aaaaaaaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaa
-aaaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaaa
-aaccccccccccccccddaabbbbbbbbbbaaaefggaaa
-aacdccccccccccccddaaabbbbbbbbaaagfffghaa
-aacccccccccccccdaaaaaaaaaaaaaaaafffffiaa
-aaccccccccccccccaaaaaaaaaaaaaaaffffffeaa
-aacccccccccccdccaaaaaadcccccdgfffffffaaa
-aaccccdcccccccccaaaaaacccccddggffgefgaaa
-aaccccccccccccccfffffgcdcccccfffaaaaaaaa
-aacccccdccccccccffggffccccdddgggaaaaaaab
+bbbbbbbaaaaaaaaaaaabbbbbbbbbbbbbbbbbaaab
+baaaaaaaaaaaaaaaaaaabbbbbbbbbbaaaaaaaaab
+baccccccccccccccddaabbbbbbbbbbaaafYGGaab
+bacdccccccccccccddaaabbbbbbbbaaaGfffghab
+bacccccccccccccdaaaaaaaaaaaaaaaaOffffiab
+baccccccccccccccaaaaaaaaaaaaaaanfffffEab
+bacccccccccccdccaaaaaadccccldgfffffffaab
+aaccccdcccccccccaaaaaacccccddggufGefgaab
+aaccccccccccccccfffffGcdcccccfffaaaaaaab
+aacccccdccccccccffggffccccdddgggaaaaaabb
 aaccccccccdcccccaaaaaaddaaaaaaaaaaabbbbb
-aaccdcccccccccccaaaaaaddageffffaaaabbbbb
+aaccdcccccccccccaaaaaaddagMffffaaaabbbbb
 aadcccccccccccccaaggffgdagfffffaabbbbbbb
 aaccccccccccccdcaafffffgaaafafgaabbbbbbb
 aaaaaadddddddddfffffgfffffffaffaabbbbbbb
-aaaaaagggfffgddddggggggffgffaffaabbbbbbb
-aagggfffffffffccaaaaaaaafffgagfaabbbbbbb
-aagfffffffffffccaaaaaaaaggggaffaabbbbbbb
-aaaggfaaaaaaaaccaaaaaaagfffffffaabbbbbbb
-aaaaffaaaaaaaaccaaaaaaaffffffaaaabbbbbbb
-aaaaffgaaaaaaaccccccddafffffgaaaabbbbbbb
-aaaaaffgaaaaaaccccccddaagfaaaaabbbbbbbbb
-aaaagfffaaaaaaaaddccffgfffaaaaabbbbbbbbb
-aaaggafffaaaaaaaddccffffffaabbbbbbbbbbbb
-faaaaafffgaaaaaaaaaaaafffgaabbbbbbbbbbbb
-ffaaaagffaaaaaaaaaaaaaggggaabbbbbbbbbbbb
-fffffffffaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb
-ffffffffaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbb
+aaaaaaggGfffgddddggggggffgffaffabbbbbbbb
+aaGGgfffffffffccaaaaaaaafffgagfabbbbbbbb
+aaGfffffffffffccaaaaaaaaggggaffabbbbbbbb
+aaaggfaaaaaaaaccaaaaaaaGfffffffabbbbbbbb
+aaaaffaaaaaaaaccaaaaaaaffffffaaabbbbbbbb
+aaaaffgaaaaaaaccccccddafffffgaabbbbbbbbb
+aaaaaffgaaaaaaccccccddaagfaaaabbbbbbbbbb
+aaaagfffaaabaaaaddccffgfffaaabbbbbbbbbbb
+aaaggafffaabbaaaddccffffffaabbbbbbbbbbbb
+faaaaafffgaabbaaaaaaaafffgaabbbbbbbbbbbb
+ffaaaagffaabbbbbbbbbbaGGggaabbbbbbbbbbbb
+fffffffffaabbbbbbbbbbaaaaaaabbbbbbbbbbbb
+ffffffffaaabbbbbbbbbbbbbbbbabbbbbbbbbbbb
 "}

@@ -26,8 +26,15 @@
 	///Chemistry.
 
 	// Overlays
-	var/list/our_overlays	//our local copy of (non-priority) overlays without byond magic. Use procs in SSoverlays to manipulate
-	var/list/priority_overlays	//overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
+	///Our local copy of (non-priority) overlays without byond magic. Use procs in SSoverlays to manipulate
+	var/list/our_overlays
+	///Overlays that should remain on top and not normally removed when using cut_overlay functions, like c4.
+	var/list/priority_overlays
+	///vis overlays managed by SSvis_overlays to automaticaly turn them like other overlays
+	var/list/managed_vis_overlays
+
+	///Our local copy of filter data so we can add/remove it
+	var/list/filter_data
 
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
@@ -43,27 +50,22 @@
 	/// The chat color var, without alpha.
 	var/chat_color_hover
 
+var/global/list/pre_init_created_atoms // atom creation ordering means some stuff is trying to init before SSatoms exists, temp workaround
 /atom/New(loc, ...)
-	// Don't call ..() unless /datum/New() ever exists
-
-	// During dynamic mapload (reader.dm) this assigns the var overrides from the .dmm file
-	// Native BYOND maploading sets those vars before invoking New(), by doing this FIRST we come as close to that behavior as we can.
-	if(use_preloader && (src.type == _preloader.target_path))//in case the instanciated atom is creating other atoms in New()
-		_preloader.load(src)
-
-	// Pass our arguments to InitAtom so they can be passed to initialize(), but replace 1st with if-we're-during-mapload.
-	var/do_initialize = SSatoms.initialized
-	if(do_initialize > INITIALIZATION_INSSATOMS)
-		args[1] = (do_initialize == INITIALIZATION_INNEW_MAPLOAD)
-		if(SSatoms.InitAtom(src, args))
-			// We were deleted. No sense continuing
-			return
-
-	// Uncomment if anything ever uses the return value of SSatoms.InitializeAtoms ~Leshana
-	// If a map is being loaded, it might want to know about newly created objects so they can be handled.
-	// var/list/created = SSatoms.created_atoms
-	// if(created)
-	// 	created += src
+	//atom creation method that preloads variables at creation
+	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+		global._preloader.load(src)
+		
+	var/do_initialize = SSatoms?.atom_init_stage
+	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
+		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
+		SSatoms.InitAtom(src, args)
+	else
+		var/list/argument_list
+		if(length(args) > 1)
+			argument_list = args.Copy(2)
+		if(length(argument_list))
+			LAZYSET(global.pre_init_created_atoms, src, argument_list)
 
 // Note: I removed "auto_init" feature (letting types disable auto-init) since it shouldn't be needed anymore.
 // 	You can replicate the same by checking the value of the first parameter to initialize() ~Leshana
@@ -75,6 +77,8 @@
 // Other parameters are passed from New (excluding loc), this does not happen if mapload is TRUE
 // Must return an Initialize hint. Defined in code/__defines/subsystems.dm
 /atom/proc/Initialize(mapload, ...)
+	SHOULD_CALL_PARENT(TRUE)
+	SHOULD_NOT_SLEEP(TRUE)
 	if(QDELETED(src))
 		crash_with("GC: -- [type] had initialize() called after qdel() --")
 	if(initialized)
@@ -110,6 +114,8 @@
 
 /atom/proc/Bumped(AM as mob|obj)
 	set waitfor = FALSE
+
+	SEND_SIGNAL(src, COMSIG_ATOM_BUMPED, AM)
 
 // Convenience proc to see if a container is open for chemistry handling
 // returns true if open
@@ -157,6 +163,9 @@
 	return
 
 /atom/proc/bullet_act(obj/item/projectile/P, def_zone)
+	if(SEND_SIGNAL(src, COMSIG_ATOM_BULLET_ACT, P, def_zone) & COMPONENT_CANCEL_ATTACK_CHAIN)
+		return
+
 	P.on_hit(src, 0, def_zone)
 	. = 0
 
@@ -237,8 +246,8 @@
 	. = new_dir != dir
 	dir = new_dir
 
-/atom/proc/ex_act()
-	return
+/atom/proc/ex_act(var/strength = 3)
+	return (SEND_SIGNAL(src, COMSIG_ATOM_EX_ACT, strength, src) & COMPONENT_IGNORE_EXPLOSION)
 
 /atom/proc/emag_act(var/remaining_charges, var/mob/user, var/emag_source)
 	return -1
@@ -250,10 +259,10 @@
 // Returns an assoc list of RCD information.
 // Example would be: list(RCD_VALUE_MODE = RCD_DECONSTRUCT, RCD_VALUE_DELAY = 50, RCD_VALUE_COST = RCD_SHEETS_PER_MATTER_UNIT * 4)
 // This occurs before rcd_act() is called, and it won't be called if it returns FALSE.
-/atom/proc/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/atom/proc/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	return FALSE
 
-/atom/proc/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/atom/proc/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	return
 
 /atom/proc/melt()
@@ -454,7 +463,11 @@
 	src.germ_level = 0
 	if(istype(blood_DNA, /list))
 		blood_DNA = null
-		return 1
+		return TRUE
+
+/atom/proc/on_rag_wipe(var/obj/item/reagent_containers/glass/rag/R)
+	clean_blood()
+	R.reagents.splash(src, 1)
 
 /atom/proc/get_global_map_pos()
 	if(!islist(global_map) || isemptylist(global_map)) return
@@ -643,5 +656,5 @@
 	. = ..()
 	SEND_SIGNAL(src, COMSIG_ATOM_EXITED, AM, new_loc)
 
-/atom/proc/get_visible_gender()
+/atom/proc/get_visible_gender(mob/user, force)
 	return gender

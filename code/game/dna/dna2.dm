@@ -81,6 +81,7 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	// New stuff
 	var/species = SPECIES_HUMAN
 	var/list/body_markings = list()
+	var/list/body_markings_genetic = list()
 	var/list/body_descriptors = null
 	var/list/genetic_modifiers = list() // Modifiers with the MODIFIER_GENETIC flag are saved.  Note that only the type is saved, not an instance.
 
@@ -92,7 +93,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	new_dna.b_type=b_type
 	new_dna.real_name=real_name
 	new_dna.species=species
-	new_dna.body_markings=body_markings.Copy()
+	var/list/body_markings_genetic = (body_markings - body_marking_nopersist_list)
+	new_dna.body_markings=body_markings_genetic.Copy()
 	for(var/b=1;b<=DNA_SE_LENGTH;b++)
 		new_dna.SE[b]=SE[b]
 		if(b<=DNA_UI_LENGTH)
@@ -326,8 +328,8 @@ var/global/list/datum/dna/gene/dna_genes[0]
 	SetSEBlock(block,newBlock,defer)
 
 
-/proc/EncodeDNABlock(var/value)
-	return add_zero2(num2hex(value,1), 3)
+/proc/EncodeDNABlock(value)
+	return pad_left(num2hex(value), 3, "0")
 
 /datum/dna/proc/UpdateUI()
 	src.uni_identity=""

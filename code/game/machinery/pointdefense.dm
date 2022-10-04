@@ -14,7 +14,7 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 	icon_state = "control"
 	density = TRUE
 	anchored = TRUE
-	circuit = /obj/item/weapon/circuitboard/pointdefense_control
+	circuit = /obj/item/circuitboard/pointdefense_control
 	var/list/targets = list()  // Targets being engaged by associated batteries
 	var/ui_template = "pointdefense_control.tmpl"
 	var/id_tag = null
@@ -133,7 +133,7 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 	description_info = "Must have the same ident tag as a fire assist mainframe on the same facility. Use a multitool to set the ident tag."
 	density = TRUE
 	anchored = TRUE
-	circuit = /obj/item/weapon/circuitboard/pointdefense
+	circuit = /obj/item/circuitboard/pointdefense
 	idle_power_usage = 0.1 KILOWATTS
 	appearance_flags = PIXEL_SCALE
 	var/active = TRUE
@@ -213,7 +213,7 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 	addtimer(CALLBACK(src, .proc/finish_shot, target), rotation_speed)
 	animate(src, transform = rot_matrix, rotation_speed, easing = SINE_EASING)
 
-	set_dir(ATAN2(transform.b, transform.a) > 0 ? NORTH : SOUTH)
+	set_dir(arctan(transform.b, transform.a) > 0 ? NORTH : SOUTH)
 
 /obj/machinery/pointdefense/proc/finish_shot(var/weakref/target)
 
@@ -237,7 +237,7 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 		return
 	if(!active)
 		return
-	var/desiredir = ATAN2(transform.b, transform.a) > 0 ? NORTH : SOUTH
+	var/desiredir = arctan(transform.b, transform.a) > 0 ? NORTH : SOUTH
 	if(dir != desiredir)
 		set_dir(desiredir)
 
@@ -296,17 +296,17 @@ GLOBAL_LIST_BOILERPLATE(pointdefense_turrets, /obj/machinery/pointdefense)
 /obj/machinery/pointdefense/RefreshParts()
 	. = ..()
 	// Calculates an average rating of components that affect shooting rate
-	var/shootrate_divisor = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
+	var/shootrate_divisor = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
 
 	charge_cooldown = 2 SECONDS / (shootrate_divisor ? shootrate_divisor : 1)
 
 	//Calculate max shooting range
-	var/killrange_multiplier = total_component_rating_of_type(/obj/item/weapon/stock_parts/capacitor)
-	killrange_multiplier += 1.5 * total_component_rating_of_type(/obj/item/weapon/stock_parts/scanning_module)
+	var/killrange_multiplier = total_component_rating_of_type(/obj/item/stock_parts/capacitor)
+	killrange_multiplier += 1.5 * total_component_rating_of_type(/obj/item/stock_parts/scanning_module)
 
 	kill_range = 10 + 4 * killrange_multiplier
 
-	var/rotation_divisor = total_component_rating_of_type(/obj/item/weapon/stock_parts/manipulator)
+	var/rotation_divisor = total_component_rating_of_type(/obj/item/stock_parts/manipulator)
 	rotation_speed = 0.5 SECONDS / (rotation_divisor ? rotation_divisor : 1)
 
 /obj/machinery/pointdefense/proc/Activate()

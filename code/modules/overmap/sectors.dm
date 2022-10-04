@@ -4,8 +4,9 @@
 /obj/effect/overmap/visitable
 	name = "map object"
 	scannable = TRUE
+	scanner_desc = "!! No Data Available !!"
 
-	var/list/map_z = null
+	var/list/map_z = list()
 	var/list/extra_z_levels //if you need to manually insist that these z-levels are part of this sector, for things like edge-of-map step trigger transitions rather than multi-z complexes
 
 	var/list/initial_generic_waypoints //store landmark_tag of landmarks that should be added to the actual lists below on init.
@@ -30,8 +31,7 @@
 	if(. == INITIALIZE_HINT_QDEL)
 		return
 
-	if(!map_z)			// If map_z is already defined, we don't need to find where we are
-		find_z_levels() // This populates map_z and assigns z levels to the ship.
+	find_z_levels() // This populates map_z and assigns z levels to the ship.
 	register_z_levels() // This makes external calls to update global z level information.
 
 	if(!global.using_map.overmap_z)
@@ -57,8 +57,6 @@
 
 //This is called later in the init order by SSshuttles to populate sector objects. Importantly for subtypes, shuttles will be created by then.
 /obj/effect/overmap/visitable/proc/populate_sector_objects()
-	for(var/obj/machinery/computer/ship/S in global.machines)
-		S.attempt_hook_up(src)
 
 /obj/effect/overmap/visitable/proc/get_areas()
 	. = list()
@@ -104,7 +102,7 @@
 
 //Helper for init.
 /obj/effect/overmap/visitable/proc/check_ownership(obj/object)
-	if((object.z in map_z) && !(get_area(object) in SSshuttles.shuttle_areas))
+	if((get_z(object) in map_z) && !(get_area(object) in SSshuttles.shuttle_areas))
 		return 1
 
 //If shuttle_name is false, will add to generic waypoints; otherwise will add to restricted. Does not do checks.

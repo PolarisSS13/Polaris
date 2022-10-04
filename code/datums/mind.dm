@@ -86,7 +86,7 @@
 	if(current)					//remove ourself from our old body's mind variable
 		if(changeling)
 			current.remove_changeling_powers()
-			current.verbs -= /datum/changeling/proc/EvolutionMenu
+			current.verbs -= /datum/changeling/proc/EvolutionTree
 		current.mind = null
 
 		SSnanoui.user_transferred(current, new_character) // transfer active NanoUI instances to new user
@@ -131,8 +131,8 @@
 	out += "Assigned role: [assigned_role]. <a href='?src=\ref[src];role_edit=1'>Edit</a><br>"
 	out += "<hr>"
 	out += "Factions and special roles:<br><table>"
-	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
+	for(var/antag_type in SSantags.antag_datums)
+		var/datum/antagonist/antag = SSantags.antag_datums[antag_type]
 		out += "[antag.get_panel_entry(src)]"
 	out += "</table><hr>"
 	out += "<b>Objectives</b></br>"
@@ -160,7 +160,7 @@
 	if(!check_rights(R_ADMIN|R_FUN|R_EVENT))	return
 
 	if(href_list["add_antagonist"])
-		var/datum/antagonist/antag = all_antag_types[href_list["add_antagonist"]]
+		var/datum/antagonist/antag = SSantags.antag_datums[href_list["add_antagonist"]]
 		if(antag)
 			if(antag.add_antagonist(src, 1, 1, 0, 1, 1)) // Ignore equipment and role type for this.
 				log_admin("[key_name_admin(usr)] made [key_name(src)] into a [antag.role_text].")
@@ -168,19 +168,19 @@
 				to_chat(usr, "<span class='warning'>[src] could not be made into a [antag.role_text]!</span>")
 
 	else if(href_list["remove_antagonist"])
-		var/datum/antagonist/antag = all_antag_types[href_list["remove_antagonist"]]
+		var/datum/antagonist/antag = SSantags.antag_datums[href_list["remove_antagonist"]]
 		if(antag) antag.remove_antagonist(src)
 
 	else if(href_list["equip_antagonist"])
-		var/datum/antagonist/antag = all_antag_types[href_list["equip_antagonist"]]
+		var/datum/antagonist/antag = SSantags.antag_datums[href_list["equip_antagonist"]]
 		if(antag) antag.equip(src.current)
 
 	else if(href_list["unequip_antagonist"])
-		var/datum/antagonist/antag = all_antag_types[href_list["unequip_antagonist"]]
+		var/datum/antagonist/antag = SSantags.antag_datums[href_list["unequip_antagonist"]]
 		if(antag) antag.unequip(src.current)
 
 	else if(href_list["move_antag_to_spawn"])
-		var/datum/antagonist/antag = all_antag_types[href_list["move_antag_to_spawn"]]
+		var/datum/antagonist/antag = SSantags.antag_datums[href_list["move_antag_to_spawn"]]
 		if(antag) antag.place_mob(src.current)
 
 	else if (href_list["role_edit"])
@@ -203,7 +203,7 @@
 		if(mind)
 			mind.ambitions = sanitize(new_ambition)
 			to_chat(mind.current, "<span class='warning'>Your ambitions have been changed by higher powers, they are now: [mind.ambitions]</span>")
-		log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.")
+		log_and_message_admins("made [key_name(mind.current)]'s ambitions be '[mind.ambitions]'.", usr)
 
 	else if (href_list["obj_edit"] || href_list["obj_add"])
 		var/datum/objective/objective
@@ -343,7 +343,7 @@
 
 		switch(href_list["implant"])
 			if("remove")
-				for(var/obj/item/weapon/implant/loyalty/I in H.contents)
+				for(var/obj/item/implant/loyalty/I in H.contents)
 					for(var/obj/item/organ/external/organs in H.organs)
 						if(I in organs.implants)
 							qdel(I)
@@ -405,7 +405,7 @@
 				memory = null//Remove any memory they may have had.
 			if("crystals")
 				if (usr.client.holder.rights & R_FUN)
-				//	var/obj/item/device/uplink/hidden/suplink = find_syndicate_uplink() No longer needed, uses stored in mind
+				//	var/obj/item/uplink/hidden/suplink = find_syndicate_uplink() No longer needed, uses stored in mind
 					var/crystals
 					crystals = tcrystals
 					crystals = input("Amount of telecrystals for [key]", crystals) as null|num
@@ -428,7 +428,7 @@
 	return null
 
 /datum/mind/proc/take_uplink()
-	var/obj/item/device/uplink/hidden/H = find_syndicate_uplink()
+	var/obj/item/uplink/hidden/H = find_syndicate_uplink()
 	if(H)
 		qdel(H)
 
@@ -443,10 +443,10 @@
 	var/is_currently_brigged = 0
 	if(istype(T.loc,/area/security/brig))
 		is_currently_brigged = 1
-		for(var/obj/item/weapon/card/id/card in current)
+		for(var/obj/item/card/id/card in current)
 			is_currently_brigged = 0
 			break // if they still have ID they're not brigged
-		for(var/obj/item/device/pda/P in current)
+		for(var/obj/item/pda/P in current)
 			if(P.id)
 				is_currently_brigged = 0
 				break // if they still have ID they're not brigged

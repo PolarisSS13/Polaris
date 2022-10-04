@@ -65,7 +65,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	if(!mind)				return
 	if(!mind.changeling)	mind.changeling = new /datum/changeling(gender)
 
-	verbs.Add(/datum/changeling/proc/EvolutionMenu)
+	verbs.Add(/datum/changeling/proc/EvolutionTree)
 	verbs.Add(/mob/proc/changeling_respec)
 	add_language("Changeling")
 
@@ -79,7 +79,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 	for(var/datum/power/changeling/P in powerinstances)
 		if(!P.genomecost) // Is it free?
 			if(!(P in mind.changeling.purchased_powers)) // Do we not have it already?
-				mind.changeling.purchasePower(mind, P.name, 0)// Purchase it. Don't remake our verbs, we're doing it after this.
+				mind.changeling.purchased_powers += P /// Add it.
+				mind.changeling.purchasePower(mind, P, 0)// Purchase it. Don't remake our verbs, we're doing it after this.
 
 	for(var/datum/power/changeling/P in mind.changeling.purchased_powers)
 		if(P.isVerb)
@@ -88,7 +89,7 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 				verbs.Add(P.verbpath)
 			if(P.make_hud_button)
 				if(!src.ability_master)
-					src.ability_master = new /obj/screen/movable/ability_master(src)
+					src.ability_master = new /obj/screen/movable/ability_master(null, src)
 				src.ability_master.add_ling_ability(
 					object_given = src,
 					verb_given = P.verbpath,
@@ -102,7 +103,8 @@ var/global/list/possible_changeling_IDs = list("Alpha","Beta","Gamma","Delta","E
 
 	var/mob/living/carbon/human/H = src
 	if(istype(H))
-		var/datum/absorbed_dna/newDNA = new(H.real_name, H.dna, H.species.name, H.languages, H.identifying_gender, H.flavor_texts)
+		var/saved_dna = H.dna.Clone() /// Prevent transform from breaking. 
+		var/datum/absorbed_dna/newDNA = new(H.real_name, saved_dna, H.species.name, H.languages, H.identifying_gender, H.flavor_texts, H.modifiers)
 		absorbDNA(newDNA)
 
 	return 1

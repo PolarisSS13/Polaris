@@ -16,7 +16,7 @@
 	// Cooldown testing is done at click code (for players) and interface code (for AI).
 	setClickCooldown(get_attack_speed())
 
-	// Returns a value, but will be lost if 
+	// Returns a value, but will be lost if
 	. = do_attack(A, their_T)
 
 	if(melee_attack_delay)
@@ -86,6 +86,10 @@
 //The actual top-level ranged attack proc
 /mob/living/simple_mob/proc/shoot_target(atom/A)
 	set waitfor = FALSE
+
+	if(!istype(A) || QDELETED(A))
+		return
+
 	setClickCooldown(get_attack_speed())
 
 	face_atom(A)
@@ -99,7 +103,7 @@
 			try_reload()
 			return FALSE
 
-	visible_message("<span class='danger'><b>\The [src]</b> fires at \the [A]!</span>")
+	visible_message(SPAN_DANGER("\The [src] [projectileverb] at \the [A]!"))
 	shoot(A)
 	if(casingtype)
 		new casingtype(loc)

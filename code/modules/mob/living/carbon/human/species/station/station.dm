@@ -135,7 +135,7 @@
 		O_LUNGS =    /obj/item/organ/internal/lungs/unathi,
 		O_LIVER =    /obj/item/organ/internal/liver/unathi,
 		O_BRAIN =    /obj/item/organ/internal/brain/unathi,
-		O_EYES =     /obj/item/organ/internal/eyes,
+		O_EYES =     /obj/item/organ/internal/eyes/unathi,
 		O_STOMACH =		/obj/item/organ/internal/stomach/unathi,
 		O_INTESTINE =	/obj/item/organ/internal/intestine/unathi
 		)
@@ -235,7 +235,7 @@
 	base_color = "#333333"
 
 	reagent_tag = IS_TAJARA
-	allergens = ALLERGEN_COFFEE
+	allergens = ALLERGEN_STIMULANT
 
 	move_trail = /obj/effect/decal/cleanable/blood/tracks/paw
 
@@ -249,14 +249,14 @@
 	cold_discomfort_level = 215
 
 	has_organ = list(    //No appendix.
-		O_HEART =    /obj/item/organ/internal/heart,
-		O_LUNGS =    /obj/item/organ/internal/lungs,
+		O_HEART =    /obj/item/organ/internal/heart/tajaran,
+		O_LUNGS =    /obj/item/organ/internal/lungs/tajaran,
 		O_VOICE = 		/obj/item/organ/internal/voicebox,
-		O_LIVER =    /obj/item/organ/internal/liver,
+		O_LIVER =    /obj/item/organ/internal/liver/tajaran,
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys,
 		O_BRAIN =    /obj/item/organ/internal/brain,
-		O_EYES =     /obj/item/organ/internal/eyes,
-		O_STOMACH =		/obj/item/organ/internal/stomach,
+		O_EYES =     /obj/item/organ/internal/eyes/tajaran,
+		O_STOMACH =		/obj/item/organ/internal/stomach/tajaran,
 		O_INTESTINE =	/obj/item/organ/internal/intestine
 		)
 
@@ -349,6 +349,20 @@
 		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right)
 		)
 
+	has_organ = list(
+		O_HEART =		/obj/item/organ/internal/heart/skrell,
+		O_LUNGS =		/obj/item/organ/internal/lungs/skrell,
+		O_VOICE = 		/obj/item/organ/internal/voicebox/skrell,
+		O_LIVER =		/obj/item/organ/internal/liver/skrell,
+		O_KIDNEYS =		/obj/item/organ/internal/kidneys/skrell,
+		O_BRAIN =		/obj/item/organ/internal/brain/skrell,
+		O_APPENDIX = 	/obj/item/organ/internal/appendix/skrell,
+		O_SPLEEN = 		/obj/item/organ/internal/spleen/skrell,
+		O_EYES =		/obj/item/organ/internal/eyes/skrell,
+		O_STOMACH =		/obj/item/organ/internal/stomach/skrell,
+		O_INTESTINE =	/obj/item/organ/internal/intestine/skrell
+		)
+
 /datum/species/skrell/can_breathe_water()
 	return TRUE
 
@@ -433,6 +447,11 @@
 		/datum/mob_descriptor/height = 0,
 		/datum/mob_descriptor/build = -1
 		)
+
+	default_emotes = list(
+		/decl/emote/audible/chirp
+	)
+
 /datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	if(H.wear_suit) //get rid of job labcoats so they don't stop us from equipping the Shroud
@@ -565,9 +584,9 @@
 
 /datum/species/diona/equip_survival_gear(var/mob/living/carbon/human/H)
 	if(H.backbag == 1)
-		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H), slot_r_hand)
+		H.equip_to_slot_or_del(new /obj/item/flashlight/flare(H), slot_r_hand)
 	else
-		H.equip_to_slot_or_del(new /obj/item/device/flashlight/flare(H.back), slot_in_backpack)
+		H.equip_to_slot_or_del(new /obj/item/flashlight/flare(H.back), slot_in_backpack)
 
 /datum/species/diona/handle_post_spawn(var/mob/living/carbon/human/H)
 	H.gender = NEUTER

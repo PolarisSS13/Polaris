@@ -10,7 +10,7 @@
 
 	var/list/servers = list()	// the servers located by the computer
 	var/obj/machinery/telecomms/server/SelectedServer
-	circuit = /obj/item/weapon/circuitboard/comm_server
+	circuit = /obj/item/circuitboard/comm_server
 
 	var/network = "NULL"		// the network to probe
 	var/list/temp = null				// temporary feedback messages
@@ -27,7 +27,7 @@
 	data["temp"] = temp
 
 	var/list/servers = list()
-	for(var/obj/machinery/telecomms/T in servers)
+	for(var/obj/machinery/telecomms/T in src.servers)
 		servers.Add(list(list(
 			"id" = T.id,
 			"name" = T.name,
@@ -46,7 +46,7 @@
 		for(var/c in SelectedServer.log_entries)
 			i++
 			var/datum/comm_log_entry/C = c
-			
+
 			// This is necessary to prevent leaking information to the clientside
 			var/static/list/acceptable_params = list("uspeech", "intelligible", "message", "name", "race", "job", "timecode")
 			var/list/parameters = list()
@@ -74,7 +74,7 @@
 	if(!ui)
 		ui = new(user, src, "TelecommsLogBrowser", name)
 		ui.open()
-	
+
 /obj/machinery/computer/telecomms/server/tgui_act(action, params)
 	if(..())
 		return TRUE
@@ -139,7 +139,7 @@
 				set_temp("NEW NETWORK TAG SET IN ADDRESS \[[network]\]", "good")
 
 			. = TRUE
-		
+
 		if("cleartemp")
 			temp = null
 			. = TRUE

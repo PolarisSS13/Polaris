@@ -30,13 +30,10 @@
 /obj/structure/flora/tree/proc/choose_icon_state()
 	return icon_state
 
-/obj/structure/flora/tree/can_harvest(var/obj/item/I)
-	. = FALSE
-	if(!is_stump && harvest_tool && istype(I, harvest_tool) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
-		. = TRUE
-	return .
+/obj/structure/flora/tree/can_harvest(var/obj/item/I, var/ignore_tool = FALSE)
+	return (!is_stump && (ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
 
-/obj/structure/flora/tree/attackby(var/obj/item/weapon/W, var/mob/living/user)
+/obj/structure/flora/tree/attackby(var/obj/item/W, var/mob/living/user)
 	if(can_harvest(W))
 		..(W, user)
 		return
@@ -45,7 +42,7 @@
 		return ..()
 
 	if(is_stump)
-		if(istype(W,/obj/item/weapon/shovel))
+		if(istype(W,/obj/item/shovel))
 			if(do_after(user, 5 SECONDS))
 				visible_message("<span class='notice'>\The [user] digs up \the [src] stump with \the [W].</span>")
 				qdel(src)
@@ -115,7 +112,7 @@
 	is_stump = TRUE
 	density = FALSE
 	icon_state = "[base_state]_stump"
-	overlays.Cut() // For the Sif tree and other future glowy trees.
+	cut_overlays() // For the Sif tree and other future glowy trees.
 	set_light(0)
 
 /obj/structure/flora/tree/ex_act(var/severity)
@@ -138,6 +135,12 @@
 	results += ..()
 
 	return results
+
+/obj/structure/flora/tree/show_animal_foraging_message(var/mob/critter)
+	critter.visible_message(SPAN_NOTICE("\The [critter] begins searching through the foliage of \the [src]."))
+
+/obj/structure/flora/tree/show_animal_eating_message(var/mob/critter)
+	critter.visible_message(SPAN_NOTICE("\The [critter] pulls down some low-hanging fruit from \the [src]."))
 
 // Subtypes.
 
@@ -164,7 +167,7 @@
 	icon_state = "pinepresents"
 	desc = "A wondrous decorated Christmas tree. It has presents!"
 	indestructable = TRUE
-	var/gift_type = /obj/item/weapon/a_gift
+	var/gift_type = /obj/item/a_gift
 	var/list/ckeys_that_took = list()
 
 /obj/structure/flora/tree/pine/xmas/presents/choose_icon_state()
@@ -269,14 +272,14 @@
 	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
 	randomize_size = TRUE
 
-	harvest_tool = /obj/item/weapon/material/knife
+	harvest_tool = /obj/item/material/knife
 	max_harvests = 2
-	min_harvests = -4
+	min_harvests = 0
 	harvest_loot = list(
-		/obj/item/weapon/reagent_containers/food/snacks/siffruit = 20,
-		/obj/item/weapon/reagent_containers/food/snacks/grown/sifpod = 5,
+		/obj/item/reagent_containers/food/snacks/siffruit = 20,
+		/obj/item/reagent_containers/food/snacks/grown/sif/sifpod = 5,
 		/obj/item/seeds/sifbulb = 1
-		)
+	)
 
 	var/light_shift = 0
 
@@ -292,4 +295,5 @@
 	set_light(5 - light_shift, 1, "#33ccff")	// 5 variants, missing bulbs. 5th has no bulbs, so no glow.
 	var/image/glow = image(icon = icon, icon_state = "[base_state][light_shift]_glow")
 	glow.plane = PLANE_LIGHTING_ABOVE
-	overlays = list(glow)
+	cut_overlays()
+	add_overlay(glow)

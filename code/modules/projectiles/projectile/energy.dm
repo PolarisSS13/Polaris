@@ -8,6 +8,8 @@
 	impact_effect_type = /obj/effect/temp_visual/impact_effect
 	hitsound_wall = 'sound/weapons/effects/searwall.ogg'
 	hitsound = 'sound/weapons/zapbang.ogg'
+	hud_state = "plasma"
+	hud_state_empty = "battery_empty"
 
 	var/flash_strength = 10
 
@@ -22,6 +24,7 @@
 	var/flash_range = 0
 	var/brightness = 7
 	var/light_colour = "#ffffff"
+	hud_state = "grenade_dummy"
 
 /obj/item/projectile/energy/flash/on_impact(var/atom/A)
 	var/turf/T = flash_range? src.loc : get_turf(A)
@@ -45,12 +48,12 @@
 	playsound(src, 'sound/effects/snap.ogg', 50, 1)
 	src.visible_message("<span class='warning'>\The [src] explodes in a bright flash!</span>")
 
-	var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+	var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 	sparks.set_up(2, 1, T)
 	sparks.start()
 
 	new /obj/effect/decal/cleanable/ash(src.loc) //always use src.loc so that ash doesn't end up inside windows
-	new /obj/effect/effect/smoke/illumination(T, 5, brightness, brightness, light_colour)
+	new /obj/effect/vfx/smoke/illumination(T, 5, brightness, brightness, light_colour)
 
 //blinds people like the flash round, but can also be used for temporary illumination
 /obj/item/projectile/energy/flash/flare
@@ -59,6 +62,7 @@
 	flash_range = 1
 	brightness = 15
 	flash_strength = 20
+	hud_state = "grenade_dummy"
 
 /obj/item/projectile/energy/flash/flare/on_impact(var/atom/A)
 	light_colour = pick("#e58775", "#ffffff", "#90ff90", "#a09030")
@@ -66,7 +70,7 @@
 	..() //initial flash
 
 	//residual illumination
-	new /obj/effect/effect/smoke/illumination(src.loc, rand(190,240) SECONDS, range=8, power=3, color=light_colour) //same lighting power as flare
+	new /obj/effect/vfx/smoke/illumination(src.loc, rand(190,240) SECONDS, 8, 3, light_colour) //same lighting power as flare
 
 /obj/item/projectile/energy/electrode
 	name = "electrode"
@@ -77,15 +81,18 @@
 	light_range = 2
 	light_power = 0.5
 	light_color = "#FFFFFF"
+	hud_state = "taser"
 	//Damage will be handled on the MOB side, to prevent window shattering.
 
 /obj/item/projectile/energy/electrode/strong
 	agony = 55
+	hud_state = "taser"
 
 /obj/item/projectile/energy/electrode/stunshot
 	name = "stunshot"
 	damage = 5
 	agony = 80
+	hud_state = "taser"
 
 /obj/item/projectile/energy/declone
 	name = "declone"
@@ -100,6 +107,7 @@
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
 
 	combustion = FALSE
+	hud_state = "plasma_pistol"
 
 /obj/item/projectile/energy/excavate
 	name = "kinetic blast"
@@ -113,6 +121,7 @@
 
 	vacuum_traversal = 0
 	combustion = FALSE
+	hud_state = "plasma_blast"
 
 /obj/item/projectile/energy/dart
 	name = "dart"
@@ -121,6 +130,7 @@
 	damage_type = TOX
 	agony = 120
 	check_armour = "energy"
+	hud_state = "pistol_tranq"
 
 	combustion = FALSE
 
@@ -131,10 +141,12 @@
 	damage_type = TOX
 	agony = 40
 	stutter = 10
+	hud_state = "electrothermal"
 
 /obj/item/projectile/energy/bolt/large
 	name = "largebolt"
 	damage = 20
+	hud_state = "electrothermal"
 
 /obj/item/projectile/energy/acid //Slightly up-gunned (Read: The thing does agony and checks bio resist) variant of the simple alien mob's projectile, for queens and sentinels.
 	name = "acidic spit"
@@ -155,6 +167,7 @@
 	agony = 80
 	check_armour = "bio"
 	armor_penetration = 25	// It's acid-based
+	hud_state = "electrothermal"
 
 	combustion = FALSE
 
@@ -164,8 +177,24 @@
 	damage = 20
 	damage_type = BIOACID
 	agony = 20
+	hud_state = "electrothermal"
 	check_armour = "bio"
 	armor_penetration = 25	// It's acid-based
+
+/obj/item/projectile/energy/skathari //Skathari equivalent of above, but less biological more... Blue.
+	name = "bluespace spit"
+	icon_state = "bluespace_small"
+	fire_sound = 'sound/weapons/skath_spit.ogg'
+	hitsound_wall = 'sound/weapons/skath_spit.ogg'
+	hitsound = 'sound/weapons/pierce.ogg'
+	pass_flags = PASSTABLE | PASSGLASS | PASSGRILLE
+	damage = 20
+	damage_type = BIOACID //Still biological weirdness
+	agony = 20
+	armor_penetration = 50	// More normal armour type check (energy) but said armour less effective because bluespace shenanigans.
+	light_range = 2
+	light_power = 0.5
+	light_color = "#16D3F5"
 
 /obj/item/projectile/energy/phoron
 	name = "phoron bolt"
@@ -178,6 +207,7 @@
 	light_power = 0.5
 	light_color = "#33CC00"
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
+	hud_state = "plasma_rifle"
 
 	combustion = FALSE
 
@@ -191,6 +221,7 @@
 	agony = 55
 	damage_type = BURN
 	vacuum_traversal = 0	//Projectile disappears in empty space
+	hud_state = "plasma_rifle_blast"
 
 /obj/item/projectile/energy/plasmastun/proc/bang(var/mob/living/carbon/M)
 
@@ -235,24 +266,30 @@
 	embed_chance = 0
 	muzzle_type = /obj/effect/projectile/muzzle/pulse
 	impact_effect_type = /obj/effect/temp_visual/impact_effect/monochrome_laser
+	hud_state = "plasma_sphere"
 
 /obj/item/projectile/energy/phase
 	name = "phase wave"
 	icon_state = "phase"
+	fire_sound = 'sound/weapons/Gunshot_phase.ogg'
 	range = 6
 	damage = 5
 	SA_bonus_damage = 45	// 50 total on animals
 	SA_vulnerability = SA_ANIMAL
+	hud_state = "laser_heat"
 
 /obj/item/projectile/energy/phase/light
 	range = 4
 	SA_bonus_damage = 35	// 40 total on animals
+	hud_state = "laser_heat"
 
 /obj/item/projectile/energy/phase/heavy
 	range = 8
 	SA_bonus_damage = 55	// 60 total on animals
+	hud_state = "laser_heat"
 
 /obj/item/projectile/energy/phase/heavy/cannon
 	range = 10
 	damage = 15
 	SA_bonus_damage = 60	// 75 total on animals
+	hud_state = "laser_heat"

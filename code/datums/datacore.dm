@@ -319,24 +319,12 @@ var/global/list/PDA_Manifest = list()
 		foundrecord.fields["real_rank"] = real_title
 
 /datum/datacore/proc/manifest_inject(var/mob/living/carbon/human/H)
-	if(H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
+	if(istype(H) && H.mind && !player_is_antag(H.mind, only_offstation_roles = 1))
 		var/assignment = GetAssignment(H)
 		var/hidden
 		var/datum/job/J = SSjob.get_job(H.mind.assigned_role)
 		hidden = J?.offmap_spawn
-
-		/* Note: Due to cached_character_icon, a number of emergent properties occur due to the initialization
-		* order of readied-up vs latejoiners. Namely, latejoiners will get a uniform in their datacore picture, but readied-up will
-		* not. This is due to the fact that SSticker calls data_core.manifest_inject() inside of ticker/proc/create_characters(),
-		* but does not equip them until ticker/proc/equip_characters(), which is called later. So, this proc is literally called before
-		* they ever get their equipment, and so it can't get a picture of them in their equipment.
-		* Latejoiners do not have this problem, because /mob/new_player/proc/AttemptLateSpawn calls EquipRank() before it calls
-		* this proc, which means that they're already clothed by the time they get their picture taken here.
-		* The COMPILE_OVERLAYS() here is just to bypass SSoverlays taking for-fucking-ever to update the mob, since we're about to
-		* take a picture of them, we want all the overlays.
-		*/
-		COMPILE_OVERLAYS(H)
-		SSoverlays.queue -= H
+		H.ImmediateOverlayUpdate()
 
 		var/id = generate_record_id()
 		//General Record
@@ -416,7 +404,8 @@ var/global/list/PDA_Manifest = list()
 	return
 
 /proc/generate_record_id()
-	return add_zero(num2hex(rand(1, 65535)), 4)	//no point generating higher numbers because of the limitations of num2hex
+	return "000[random_hex_text(3, TRUE)]"
+
 
 /datum/datacore/proc/CreateGeneralRecord(var/mob/living/carbon/human/H, var/id, var/hidden)
 	ResetPDAManifest()
@@ -431,7 +420,7 @@ var/global/list/PDA_Manifest = list()
 		side = icon('html/images/no_image32.png')
 
 	if(!id)
-		id = text("[]", add_zero(num2hex(rand(1, 65536)), 4))
+		id = generate_record_id()
 	var/datum/data/record/G = new /datum/data/record()
 	G.name = "Employee Record #[id]"
 	G.fields["name"] = "New Record"

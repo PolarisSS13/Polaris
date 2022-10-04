@@ -1,6 +1,6 @@
 SUBSYSTEM_DEF(vote)
 	name = "Vote"
-	wait = 10
+	wait = 1 SECOND
 	priority = FIRE_PRIORITY_VOTE
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 	flags = SS_KEEP_TIMING | SS_NO_INIT
@@ -20,7 +20,7 @@ SUBSYSTEM_DEF(vote)
 	var/list/current_votes = list()
 	var/list/additional_text = list()
 
-/datum/controller/subsystem/vote/fire(resumed)
+/datum/controller/subsystem/vote/fire(resumed, no_mc_tick)
 	if(mode)
 		time_remaining = round((started_time + duration - world.time)/10)
 		if(mode == VOTE_GAMEMODE && ticker.current_state >= GAME_STATE_SETTING_UP)
@@ -162,7 +162,7 @@ SUBSYSTEM_DEF(vote)
 				if(isnull(.) || . == "None")
 					antag_add_failed = 1
 				else
-					additional_antag_types |= antag_names_to_ids[.]
+					additional_antag_types |= SSantags.get_antag_id_from_name(.)
 
 	if(mode == VOTE_GAMEMODE) //fire this even if the vote fails.
 		if(!round_progressing)
@@ -226,8 +226,8 @@ SUBSYSTEM_DEF(vote)
 			if(VOTE_ADD_ANTAGONIST)
 				if(!config.allow_extra_antags || ticker.current_state >= GAME_STATE_SETTING_UP)
 					return 0
-				for(var/antag_type in all_antag_types)
-					var/datum/antagonist/antag = all_antag_types[antag_type]
+				for(var/antag_type in SSantags.antag_datums)
+					var/datum/antagonist/antag = SSantags.antag_datums[antag_type]
 					if(!(antag.id in additional_antag_types) && antag.is_votable())
 						choices.Add(antag.role_text)
 				choices.Add("None")

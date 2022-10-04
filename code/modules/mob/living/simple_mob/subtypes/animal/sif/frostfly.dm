@@ -45,6 +45,8 @@
 	base_attack_cooldown = 1.5 SECONDS
 	attacktext = list("nipped", "bit", "pinched")
 
+	organ_names = /decl/mob_organ_names/frostfly
+
 	projectiletype = /obj/item/projectile/energy/blob/freezing
 
 	special_attack_cooldown = 5 SECONDS
@@ -72,7 +74,7 @@
 		"rad" = 0
 		)
 
-	var/datum/effect/effect/system/smoke_spread/frost/smoke_special
+	var/datum/effect_system/smoke_spread/frost/smoke_special
 
 	say_list_type = /datum/say_list/frostfly
 	ai_holder_type = /datum/ai_holder/simple_mob/ranged/kiting/threatening/frostfly
@@ -168,3 +170,6 @@
 
 	F.energy = max(0, F.energy - 1)	// The AI will eventually flee.
 
+
+/decl/mob_organ_names/frostfly
+	hit_zones = list("head", "thorax", "abdomen", "left vestigal wing", "right vestigal wing", "left legs", "right legs")

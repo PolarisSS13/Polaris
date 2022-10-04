@@ -34,10 +34,10 @@
 	var/turf/home
 	var/homeName
 
-	var/global/amount = 0
+	var/static/amount = 0
 
-/mob/living/bot/mulebot/New()
-	..()
+/mob/living/bot/mulebot/Initialize()
+	. = ..()
 
 	var/turf/T = get_turf(loc)
 	var/obj/machinery/navbeacon/N = locate() in T
@@ -253,12 +253,12 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 
 	var/turf/Tsec = get_turf(src)
-	new /obj/item/device/assembly/prox_sensor(Tsec)
+	new /obj/item/assembly/prox_sensor(Tsec)
 	new /obj/item/stack/rods(Tsec)
 	new /obj/item/stack/rods(Tsec)
 	new /obj/item/stack/cable_coil/cut(Tsec)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 
@@ -303,7 +303,7 @@
 	C.pixel_y += 9
 	if(C.layer < layer)
 		C.layer = layer + 0.1
-	overlays += C
+	add_overlay(C)
 
 	busy = 0
 
@@ -312,7 +312,7 @@
 		return
 
 	busy = 1
-	overlays.Cut()
+	cut_overlays()
 
 	load.forceMove(loc)
 	load.pixel_y -= 9

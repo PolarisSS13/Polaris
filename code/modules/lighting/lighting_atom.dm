@@ -43,7 +43,7 @@
 		else
 			light = new /datum/light_source(src, .)
 
-/atom/New()
+/atom/Initialize()
 	. = ..()
 
 	if(light_power && light_range)
@@ -59,11 +59,6 @@
 		light = null
 	return ..()
 
-/atom/movable/Destroy()
-	var/turf/T = loc
-	if(opacity && istype(T))
-		T.reconsider_lights()
-	return ..()
 
 /atom/movable/Moved(atom/old_loc, direction, forced = FALSE)
 	. = ..()

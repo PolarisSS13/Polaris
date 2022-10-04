@@ -242,7 +242,7 @@ GLOBAL_DATUM_INIT(iconCache, /savefile, new("data/iconCache.sav")) //Cache of ic
 			data = debugmsg(arglist(params))
 
 	if(href_list["showingnum"])
-		message_buffer = CLAMP(text2num(href_list["showingnum"]), 50, 2000)
+		message_buffer = clamp(text2num(href_list["showingnum"]), 50, 2000)
 
 	if(data)
 		send_event(event = data)
@@ -325,9 +325,9 @@ GLOBAL_LIST_EMPTY(bicon_cache) // Cache of the <img> tag results, not the icons
 /proc/is_valid_tochat_target(target)
 	return !istype(target, /savefile) && (ismob(target) || islist(target) || isclient(target) || target == world)
 
-var/to_chat_filename
-var/to_chat_line
-var/to_chat_src
+var/global/to_chat_filename
+var/global/to_chat_line
+var/global/to_chat_src
 
 //This proc is only really used if the SSchat subsystem is unavailable (not started yet)
 /proc/to_chat_immediate(target, time, message)

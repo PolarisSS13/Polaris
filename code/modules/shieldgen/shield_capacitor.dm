@@ -32,14 +32,14 @@
 		to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")
 		. = 1
 		updateDialog()
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
 
 /obj/machinery/shield_capacitor/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/weapon/card/id))
-		var/obj/item/weapon/card/id/C = W
+	if(istype(W, /obj/item/card/id))
+		var/obj/item/card/id/C = W
 		if((access_captain in C.access) || (access_security in C.access) || (access_engine in C.access))
 			src.locked = !src.locked
 			to_chat(user, "Controls are now [src.locked ? "locked." : "unlocked."]")

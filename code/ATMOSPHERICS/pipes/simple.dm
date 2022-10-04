@@ -26,8 +26,8 @@
 
 	level = 1
 
-/obj/machinery/atmospherics/pipe/simple/New()
-	..()
+/obj/machinery/atmospherics/pipe/simple/Initialize()
+	. = ..()
 
 	// Pipe colors and icon states are handled by an image cache - so color and icon should
 	//  be null. For mapping purposes color is defined in the object definitions.
@@ -79,7 +79,7 @@
 /obj/machinery/atmospherics/pipe/simple/proc/burst()
 	src.visible_message("<span class='danger'>\The [src] bursts!</span>");
 	playsound(src, 'sound/effects/bang.ogg', 25, 1)
-	var/datum/effect/effect/system/smoke_spread/smoke = new
+	var/datum/effect_system/smoke_spread/smoke = new
 	smoke.set_up(1,0, src.loc, 0)
 	smoke.start()
 	qdel(src)
@@ -117,12 +117,12 @@
 
 	alpha = 255
 
-	overlays.Cut()
+	cut_overlays()
 
 	if(node1 && node2)
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]")
+		add_overlay(icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]intact[icon_connect_type]"))
 	else
-		overlays += icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]")
+		add_overlay(icon_manager.get_atmos_icon("pipe", , pipe_color, "[pipe_icon]exposed[node1?1:0][node2?1:0][icon_connect_type]"))
 
 /obj/machinery/atmospherics/pipe/simple/update_underlays()
 	return

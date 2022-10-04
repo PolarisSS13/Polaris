@@ -213,23 +213,58 @@
 		t = replacetext(t, char, repl_chars[char])
 	return t
 
-//Adds 'u' number of zeros ahead of the text 't'
-/proc/add_zero(t, u)
-	while (length(t) < u)
-		t = "0[t]"
-	return t
 
-//Adds 'u' number of spaces ahead of the text 't'
-/proc/add_lspace(t, u)
-	while(length(t) < u)
-		t = " [t]"
-	return t
+/// Returns a string of hexadecimal characters of length size, uppercased if uppercase is truthy
+/proc/random_hex_text(size, uppercase)
+	if (!ISINTEGER(size))
+		return
+	var/list/result = list()
+	for (var/i = size to 1 step -1)
+		result += num2hex(rand(0, 0xF))
+	result = jointext(result, null)
+	if (uppercase)
+		return uppertext(result)
+	return result
 
-//Adds 'u' number of spaces behind the text 't'
-/proc/add_tspace(t, u)
-	while(length(t) < u)
-		t = "[t] "
-	return t
+
+/// Builds a string of padding repeated until its character count meets or exceeds size
+/proc/generate_padding(size, padding)
+	var/padding_size = length_char(padding)
+	if (!padding_size)
+		return ""
+	var/padding_count = CEILING(size / padding_size, 1)
+	var/list/result = list()
+	for (var/i = padding_count to 1 step -1)
+		result += padding // pow2 strategies could be used here at the cost of complexity
+	return result.Join(null)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_left(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[generate_padding(size - text_length, padding)][text]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, length_difference + 1)
+
+
+/// Pads the matter of padding onto the start of text until the result length is size
+/proc/pad_right(text, size, padding)
+	var/text_length = length_char(text)
+	if (text_length >= size)
+		return text
+	if (!text_length)
+		text = ""
+	var/result = "[text][generate_padding(size - text_length, padding)]"
+	var/length_difference = length_char(result) - size
+	if (!length_difference)
+		return result
+	return copytext_char(result, 1, -length_difference)
 
 //Returns a string with reserved characters and spaces before the first letter removed
 /proc/trim_left(text)
@@ -335,8 +370,8 @@
 //For generating neat chat tag-images
 //The icon var could be local in the proc, but it's a waste of resources
 //	to always create it and then throw it out.
-/var/icon/text_tag_icons = 'icons/chattags.dmi'
-/var/list/text_tag_cache = list()
+var/global/icon/text_tag_icons = 'icons/chattags.dmi'
+var/global/list/text_tag_cache = list()
 /proc/create_text_tag(var/tagname, var/tagdesc = tagname, var/client/C = null)
 	if(!(C && C.is_preference_enabled(/datum/client_preference/chat_tags)))
 		return tagdesc

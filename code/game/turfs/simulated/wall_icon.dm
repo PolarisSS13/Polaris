@@ -1,9 +1,5 @@
 /turf/simulated/wall/proc/update_material()
-
-	if(!material)
-		return
-
-	if(reinf_material)
+	if(istype(reinf_material))
 		construction_stage = 6
 	else
 		construction_stage = null
@@ -14,12 +10,12 @@
 	if(reinf_material && reinf_material.explosion_resistance > explosion_resistance)
 		explosion_resistance = reinf_material.explosion_resistance
 
-	if(reinf_material)
+	if(istype(reinf_material))
 		name = "reinforced [material.display_name] wall"
-		desc = "It seems to be a section of hull reinforced with [reinf_material.display_name] and plated with [material.display_name]."
+		desc = "It seems to be a section of wall reinforced with [reinf_material.display_name] and plated with [material.display_name]."
 	else
 		name = "[material.display_name] wall"
-		desc = "It seems to be a section of hull plated with [material.display_name]."
+		desc = "It seems to be a section of wall plated with [material.display_name]."
 
 	if(material.opacity > 0.5 && !opacity)
 		set_light(1)
@@ -41,7 +37,7 @@
 	update_material()
 
 /turf/simulated/wall/update_icon()
-	if(!material)
+	if(!istype(material))
 		return
 
 	if(!damage_overlays[1]) //list hasn't been populated
@@ -61,7 +57,7 @@
 		I.color = material.icon_colour
 		add_overlay(I)
 
-	if(reinf_material)
+	if(istype(reinf_material))
 		if(construction_stage != null && construction_stage < 6)
 			I = image('icons/turf/wall_masks.dmi', "reinf_construct-[construction_stage]")
 			I.color = reinf_material.icon_colour
@@ -77,6 +73,9 @@
 				I = image('icons/turf/wall_masks.dmi', reinf_material.icon_reinf)
 				I.color = reinf_material.icon_colour
 				add_overlay(I)
+	var/image/texture = material.get_wall_texture()
+	if(texture)
+		add_overlay(texture)
 
 	if(damage != 0)
 		var/integrity = material.integrity
@@ -88,7 +87,6 @@
 			overlay = damage_overlays.len
 
 		add_overlay(damage_overlays[overlay])
-	return
 
 /turf/simulated/wall/proc/generate_overlays()
 	var/alpha_inc = 256 / damage_overlays.len
@@ -101,11 +99,11 @@
 
 
 /turf/simulated/wall/proc/update_connections(propagate = 0)
-	if(!material)
+	if(!istype(material))
 		return
 	var/list/dirs = list()
 	for(var/turf/simulated/wall/W in orange(src, 1))
-		if(!W.material)
+		if(!istype(W.material))
 			continue
 		if(propagate)
 			W.update_connections()
@@ -128,6 +126,6 @@
 	wall_connections = dirs_to_corner_states(dirs)
 
 /turf/simulated/wall/proc/can_join_with(var/turf/simulated/wall/W)
-	if(material && W.material && material.icon_base == W.material.icon_base)
+	if (istype(material) && istype(W.material) && ((material.icon_base == W.material.icon_base) || (material.icon_base == "solid" && W.material.icon_base == "brick")))
 		return 1
 	return 0

@@ -33,7 +33,7 @@
 	var/justzap = 0
 	var/safe = 1
 	normalspeed = 1
-	var/obj/item/weapon/airlock_electronics/electronics = null
+	var/obj/item/airlock_electronics/electronics = null
 	var/hasShocked = 0 //Prevents multiple shocks from happening
 	var/secured_wires = 0
 	var/datum/wires/airlock/wires = null
@@ -598,11 +598,6 @@ About the new airlock wires panel:
 					return
 			else /*if(src.justzap)*/
 				return
-		else if(user.hallucination > 50 && prob(10) && src.operating == 0)
-			to_chat(user, "<span class='danger'>You feel a powerful shock course through your body!</span>")
-			user.halloss += 10
-			user.stunned += 10
-			return
 	..(user)
 
 /obj/machinery/door/airlock/proc/isElectrified()
@@ -737,7 +732,7 @@ About the new airlock wires panel:
 // shock user with probability prb (if all connections & power are working)
 // returns 1 if shocked, 0 otherwise
 // The preceding comment was borrowed from the grille's shock script
-/obj/machinery/door/airlock/shock(mob/user, prb)
+/obj/machinery/door/airlock/shock(mob/living/user, prb)
 	if(!arePowerSystemsOn())
 		return 0
 	if(hasShocked)
@@ -752,35 +747,35 @@ About the new airlock wires panel:
 
 
 /obj/machinery/door/airlock/update_icon()
-	if(overlays) overlays.Cut()
+	cut_overlays()
 	if(density)
 		if(locked && lights && src.arePowerSystemsOn())
 			icon_state = "door_locked"
 		else
 			icon_state = "door_closed"
 		if(p_open || welded)
-			overlays = list()
+			cut_overlays()
 			if(p_open)
-				overlays += image(icon, "panel_open")
+				add_overlay("panel_open")
 			if (!(stat & NOPOWER))
 				if(stat & BROKEN)
-					overlays += image(icon, "sparks_broken")
+					add_overlay("sparks_broken")
 				else if (health < maxhealth * 3/4)
-					overlays += image(icon, "sparks_damaged")
+					add_overlay("sparks_damaged")
 			if(welded)
-				overlays += image(icon, "welded")
+				add_overlay("welded")
 		else if (health < maxhealth * 3/4 && !(stat & NOPOWER))
-			overlays += image(icon, "sparks_damaged")
+			add_overlay("sparks_damaged")
 	else
 		icon_state = "door_open"
 		if((stat & BROKEN) && !(stat & NOPOWER))
-			overlays += image(icon, "sparks_open")
+			add_overlay("sparks_open")
 	return
 
 /obj/machinery/door/airlock/do_animate(animation)
 	switch(animation)
 		if("opening")
-			if(overlays) overlays.Cut()
+			cut_overlay()
 			if(p_open)
 				spawn(2) // The only work around that works. Downside is that the door will be gone for a millisecond.
 					flick("o_door_opening", src)  //can not use flick due to BYOND bug updating overlays right before flicking
@@ -789,7 +784,7 @@ About the new airlock wires panel:
 				flick("door_opening", src)//[stat ? "_stat":]
 				update_icon()
 		if("closing")
-			if(overlays) overlays.Cut()
+			cut_overlay()
 			if(p_open)
 				spawn(2)
 					flick("o_door_closing", src)
@@ -907,7 +902,7 @@ About the new airlock wires panel:
 		if (istype(mover, /obj/item))
 			var/obj/item/i = mover
 			if (i.matter && (DEFAULT_WALL_MATERIAL in i.matter) && i.matter[DEFAULT_WALL_MATERIAL] > 0)
-				var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+				var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 				s.set_up(5, 1, src)
 				s.start()
 	return ..()
@@ -1047,8 +1042,8 @@ About the new airlock wires panel:
 	if(istype(C, /mob/living))
 		..()
 		return
-	if(!repairing && istype(C, /obj/item/weapon/weldingtool) && !( src.operating > 0 ) && src.density)
-		var/obj/item/weapon/weldingtool/W = C
+	if(!repairing && istype(C, /obj/item/weldingtool) && !( src.operating > 0 ) && src.density)
+		var/obj/item/weldingtool/W = C
 		if(W.remove_fuel(0,user))
 			if(!src.welded)
 				src.welded = 1
@@ -1072,12 +1067,12 @@ About the new airlock wires panel:
 		src.update_icon()
 	else if(C.is_wirecutter())
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/multitool))
+	else if(istype(C, /obj/item/multitool))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/device/assembly/signaler))
+	else if(istype(C, /obj/item/assembly/signaler))
 		return src.attack_hand(user)
-	else if(istype(C, /obj/item/weapon/pai_cable))	// -- TLE
-		var/obj/item/weapon/pai_cable/cable = C
+	else if(istype(C, /obj/item/pai_cable))	// -- TLE
+		var/obj/item/pai_cable/cable = C
 		cable.plugin(src, user)
 	else if(!repairing && C.is_crowbar())
 		if(can_remove_electronics())
@@ -1101,7 +1096,7 @@ About the new airlock wires panel:
 				da.update_state()
 
 				if(operating == -1 || (stat & BROKEN))
-					new /obj/item/weapon/circuitboard/broken(src.loc)
+					new /obj/item/circuitboard/broken(src.loc)
 					operating = 0
 				else
 					if (!electronics) create_electronics()
@@ -1122,26 +1117,22 @@ About the new airlock wires panel:
 				spawn(0)	close(1)
 
 	// Check if we're using a crowbar or armblade, and if the airlock's unpowered for whatever reason (off, broken, etc).
-	else if(istype(C, /obj/item/weapon))
-		var/obj/item/weapon/W = C
-		if((W.pry == 1) && !arePowerSystemsOn())
-			if(locked)
-				to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
-			else if( !welded && !operating )
-				if(istype(C, /obj/item/weapon/material/twohanded/fireaxe)) // If this is a fireaxe, make sure it's held in two hands.
-					var/obj/item/weapon/material/twohanded/fireaxe/F = C
-					if(!F.wielded)
-						to_chat(user, "<span class='warning'>You need to be wielding \the [F] to do that.</span>")
-						return
-				// At this point, it's an armblade or a fireaxe that passed the wielded test, let's try to open it.
-				if(density)
-					spawn(0)
-						open(1)
-				else
-					spawn(0)
-						close(1)
-		else
-			..()
+	if((C.pry == 1) && !arePowerSystemsOn())
+		if(locked)
+			to_chat(user, "<span class='notice'>The airlock's bolts prevent it from being forced.</span>")
+		else if( !welded && !operating )
+			if(istype(C, /obj/item/material/twohanded/fireaxe)) // If this is a fireaxe, make sure it's held in two hands.
+				var/obj/item/material/twohanded/fireaxe/F = C
+				if(!F.wielded)
+					to_chat(user, "<span class='warning'>You need to be wielding \the [F] to do that.</span>")
+					return
+			// At this point, it's an armblade or a fireaxe that passed the wielded test, let's try to open it.
+			if(density)
+				spawn(0)
+					open(1)
+			else
+				spawn(0)
+					close(1)
 	else
 		..()
 	return
@@ -1159,8 +1150,8 @@ About the new airlock wires panel:
 	for (var/mob/O in viewers(src, null))
 		if ((O.client && !( O.blinded )))
 			O.show_message("[src.name]'s control panel bursts open, sparks spewing out!")
-
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	playsound(src.loc, 'sound/machines/airlock_break.ogg', 100, 1)
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
 
@@ -1375,8 +1366,16 @@ About the new airlock wires panel:
 		return 0
 	return ..(M)
 
-/obj/machinery/door/airlock/New(var/newloc, var/obj/structure/door_assembly/assembly=null)
-	..()
+/obj/machinery/door/airlock/Initialize(var/ml, var/obj/structure/door_assembly/assembly=null)
+
+	if(src.closeOtherId != null)
+		for (var/obj/machinery/door/airlock/A in machines)
+			if(A.closeOtherId == src.closeOtherId && A != src)
+				src.closeOther = A
+				break
+	name = "\improper [name]"
+
+	. = ..()
 
 	//if assembly is given, create the new door from the assembly
 	if (assembly && istype(assembly))
@@ -1404,7 +1403,7 @@ About the new airlock wires panel:
 		set_dir(assembly.dir)
 
 	//wires
-	var/turf/T = get_turf(newloc)
+	var/turf/T = get_turf(src)
 	if(T && (T.z in using_map.admin_levels))
 		secured_wires = 1
 	if (secured_wires)
@@ -1412,14 +1411,9 @@ About the new airlock wires panel:
 	else
 		wires = new/datum/wires/airlock(src)
 
-/obj/machinery/door/airlock/Initialize()
-	if(src.closeOtherId != null)
-		for (var/obj/machinery/door/airlock/A in machines)
-			if(A.closeOtherId == src.closeOtherId && A != src)
-				src.closeOther = A
-				break
-	name = "\improper [name]"
-	. = ..()
+	if(frequency)
+		set_frequency(frequency)
+	update_icon()
 
 /obj/machinery/door/airlock/Destroy()
 	qdel(wires)
@@ -1432,9 +1426,9 @@ About the new airlock wires panel:
 /obj/machinery/door/airlock/proc/create_electronics()
 	//create new electronics
 	if (secured_wires)
-		src.electronics = new/obj/item/weapon/airlock_electronics/secure( src.loc )
+		src.electronics = new/obj/item/airlock_electronics/secure( src.loc )
 	else
-		src.electronics = new/obj/item/weapon/airlock_electronics( src.loc )
+		src.electronics = new/obj/item/airlock_electronics( src.loc )
 
 	//update the electronics to match the door's access
 	if(LAZYLEN(req_access))
@@ -1466,7 +1460,7 @@ About the new airlock wires panel:
 	return
 
 
-/obj/machinery/door/airlock/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/machinery/door/airlock/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			// Old RCD code made it cost 10 units to decon an airlock.
@@ -1478,7 +1472,7 @@ About the new airlock wires panel:
 			)
 	return FALSE
 
-/obj/machinery/door/airlock/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/machinery/door/airlock/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			to_chat(user, span("notice", "You deconstruct \the [src]."))

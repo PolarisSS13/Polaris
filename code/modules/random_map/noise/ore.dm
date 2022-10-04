@@ -68,7 +68,7 @@
 				T.resources["tin"] =      rand(RESOURCE_LOW_MIN, RESOURCE_MID_MAX)
 				T.resources["bauxite"] =  rand(RESOURCE_LOW_MIN, RESOURCE_LOW_MAX)
 				T.resources["rutile"] =   0
-				T.resources["void opal"] = 0
+				T.resources["magmellite"] = 0
 				T.resources["quartz"] = 0
 				T.resources["painite"] = 0
 			else if(current_cell < deep_val) // Rare metals.
@@ -87,7 +87,7 @@
 				T.resources["tin"] =      rand(RESOURCE_MID_MIN, RESOURCE_MID_MAX)
 				T.resources["bauxite"] =  0
 				T.resources["rutile"] =   rand(RESOURCE_LOW_MIN, RESOURCE_MID_MAX)
-				T.resources["void opal"] = 0
+				T.resources["magmellite"] = 0
 				T.resources["quartz"] = 0
 				T.resources["painite"] = 0
 			else                             // Deep metals.
@@ -106,7 +106,7 @@
 				T.resources["tin"] =      0
 				T.resources["bauxite"] =  0
 				T.resources["rutile"] =   rand(RESOURCE_MID_MIN, RESOURCE_HIGH_MAX)
-				T.resources["void opal"] = 0
+				T.resources["magmellite"] = 0
 				T.resources["quartz"] = 0
 				T.resources["painite"] = 0
 	return

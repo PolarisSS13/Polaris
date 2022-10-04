@@ -4,18 +4,18 @@
 	however this must be done soon after they die, as this will have no effect on people who have died long ago.  It also doesn't \
 	resolve whatever caused them to die originally."
 	cost = 100
-	obj_path = /obj/item/weapon/spell/resurrect
+	obj_path = /obj/item/spell/resurrect
 	ability_icon_state = "tech_resurrect"
 	category = SUPPORT_SPELLS
 
-/obj/item/weapon/spell/resurrect
+/obj/item/spell/resurrect
 	name = "resurrect"
 	icon_state = "radiance"
 	desc = "Perhaps this can save a trip to cloning?"
 	cast_methods = CAST_MELEE
 	aspect = ASPECT_BIOMED
 
-/obj/item/weapon/spell/resurrect/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)
+/obj/item/spell/resurrect/on_melee_cast(atom/hit_atom, mob/living/user, def_zone)
 	if(isliving(hit_atom))
 		var/mob/living/L = hit_atom
 		if(L == user)
@@ -59,7 +59,7 @@
 					visible_message("<span class='danger'>\The [H]'s eyes open!</span>")
 					to_chat(user, "<span class='notice'>It's alive!</span>")
 					adjust_instability(50)
-					log_and_message_admins("has resurrected [H].")
+					log_and_message_admins("has resurrected [H].", user)
 				else
 					to_chat(user, "<span class='warning'>The body of \the [H] doesn't seem to respond, perhaps you could try again?</span>")
 					adjust_instability(10)

@@ -136,7 +136,7 @@ GLOBAL_LIST_EMPTY(all_turbines)
 
 	//Exceeding maximum power leads to some power loss
 	if(effective_gen > max_power && prob(5))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 		s.set_up(3, 1, src)
 		s.start()
 		stored_energy *= 0.5
@@ -168,7 +168,7 @@ GLOBAL_LIST_EMPTY(all_turbines)
 /obj/machinery/power/generator/attack_ai(mob/user)
 	attack_hand(user)
 
-/obj/machinery/power/generator/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/machinery/power/generator/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_wrench())
 		playsound(src, W.usesound, 75, 1)
 		anchored = !anchored

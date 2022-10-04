@@ -1,7 +1,7 @@
 //This file was auto-corrected by findeclaration.exe on 25.5.2012 20:42:32
 
-var/cultwords = list()
-var/runedec = 0
+var/global/cultwords = list()
+var/global/runedec = 0
 var/global/list/engwords = list("travel", "blood", "join", "hell", "destroy", "technology", "self", "see", "other", "hide")
 var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","mgar","balaq", "karazet", "geeri")
 
@@ -90,11 +90,11 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 
 
 /obj/effect/rune/attackby(I as obj, user as mob)
-	if(istype(I, /obj/item/weapon/book/tome) && iscultist(user))
+	if(istype(I, /obj/item/book/tome) && iscultist(user))
 		to_chat(user, "You retrace your steps, carefully undoing the lines of the rune.")
 		qdel(src)
 		return
-	else if(istype(I, /obj/item/weapon/nullrod))
+	else if(istype(I, /obj/item/nullrod))
 		to_chat(user, "<span class='notice'>You disrupt the vile magic with the deadening field of the null rod!</span>")
 		qdel(src)
 		return
@@ -176,7 +176,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 /obj/effect/rune/proc/check_icon()
 	icon = get_uristrune_cult(word1, word2, word3)
 
-/obj/item/weapon/book/tome
+/obj/item/book/tome
 	name = "arcane tome"
 	icon = 'icons/obj/weapons.dmi'
 	item_icons = list(
@@ -288,14 +288,14 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 				</html>
 				"}
 
-/obj/item/weapon/book/tome/Initialize()
+/obj/item/book/tome/Initialize()
 	. = ..()
 	if(!cultwords["travel"])
 		runerandom()
 	for(var/V in cultwords)
 		words[cultwords[V]] = V
 
-/obj/item/weapon/book/tome/attack(mob/living/M as mob, mob/living/user as mob)
+/obj/item/book/tome/attack(mob/living/M as mob, mob/living/user as mob)
 	add_attack_logs(user,M,"Hit with [name]")
 
 	if(istype(M,/mob/observer/dead))
@@ -314,7 +314,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 	to_chat(M, "<span class='danger'>You feel searing heat inside!</span>")
 
 
-/obj/item/weapon/book/tome/attack_self(mob/living/user as mob)
+/obj/item/book/tome/attack_self(mob/living/user as mob)
 	usr = user
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return
@@ -407,7 +407,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		user.take_overall_damage((rand(9)+1)/10) // 0.1 to 1.0 damage
 		if(do_after(user, 50))
 			var/area/A = get_area(user)
-			log_and_message_admins("created \an [chosen_rune] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].")
+			log_and_message_admins("created \an [chosen_rune] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].", user)
 			if(usr.get_active_hand() != src)
 				return
 			var/mob/living/carbon/human/H = user
@@ -425,20 +425,20 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 		to_chat(user, "The book seems full of illegible scribbles. Is this a joke?")
 		return
 
-/obj/item/weapon/book/tome/examine(mob/user)
+/obj/item/book/tome/examine(mob/user)
 	. = ..()
 	if(!iscultist(user))
 		. += "An old, dusty tome with frayed edges and a sinister looking cover."
 	else
 		. += "The scriptures of Nar-Sie, The One Who Sees, The Geometer of Blood. Contains the details of every ritual his followers could think of. Most of these are useless, though."
 
-/obj/item/weapon/book/tome/cultify()
+/obj/item/book/tome/cultify()
 	return
 
-/obj/item/weapon/book/tome/imbued //admin tome, spawns working runes without waiting
+/obj/item/book/tome/imbued //admin tome, spawns working runes without waiting
 	w_class = ITEMSIZE_SMALL
 	var/cultistsonly = 1
-/obj/item/weapon/book/tome/imbued/attack_self(mob/user as mob)
+/obj/item/book/tome/imbued/attack_self(mob/user as mob)
 	if(src.cultistsonly && !iscultist(usr))
 		return
 	if(!cultwords["travel"])
@@ -455,7 +455,7 @@ var/global/list/rnwords = list("ire","ego","nahlizet","certum","veri","jatkaa","
 			R.blood_DNA = list()
 			R.blood_DNA[H.dna.unique_enzymes] = H.dna.b_type
 		var/area/A = get_area(user)
-		log_and_message_admins("created \an [r] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].")
+		log_and_message_admins("created \an [r] rune at \the [A.name] - [user.loc.x]-[user.loc.y]-[user.loc.z].", user)
 		switch(r)
 			if("teleport")
 				var/list/words = list("ire", "ego", "nahlizet", "certum", "veri", "jatkaa", "balaq", "mgar", "karazet", "geeri")

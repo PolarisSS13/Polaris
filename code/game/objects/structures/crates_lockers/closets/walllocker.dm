@@ -10,13 +10,14 @@
 	anchored = 1
 	store_mobs = 0
 	wall_mounted = 1
+	door_anim_time = 0 // Unsupported
 
 //spawns 2 sets of breathmask, emergency oxy tank and crowbar
 
 /obj/structure/closet/walllocker/emerglocker
 	name = "emergency locker"
 	desc = "A wall mounted locker with emergency supplies."
-	var/list/spawnitems = list(/obj/item/weapon/tank/emergency/oxygen,/obj/item/clothing/mask/breath,/obj/item/weapon/tool/crowbar/red)
+	var/list/spawnitems = list(/obj/item/tank/emergency/oxygen,/obj/item/clothing/mask/breath,/obj/item/tool/crowbar/red)
 	var/amount = 2 // spawns each items X times.
 	closet_appearance = /decl/closet_appearance/wall/emergency
 
@@ -24,7 +25,7 @@
 	src.attack_hand(user)
 	return
 
-/obj/structure/closet/walllocker/emerglocker/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/closet/walllocker/emerglocker/attackby(obj/item/W as obj, mob/user as mob)
 	return
 
 /obj/structure/closet/walllocker/emerglocker/attack_hand(mob/user as mob)
@@ -68,6 +69,7 @@
 	wall_mounted = 1
 	plane = TURF_PLANE
 	layer = ABOVE_TURF_LAYER
+	door_anim_time = 0 // Unsupported
 
 /obj/structure/closet/walllocker_double/north
 	pixel_y = 32
@@ -108,7 +110,7 @@
 /obj/structure/closet/walllocker_double/kitchen/east
 	pixel_x = 32
 	dir = EAST
-	
+
 /obj/structure/closet/walllocker_double/medical
 	name = "Medical Cabinet"
 	desc = "A wall mounted medical supply cabinet. Probably full of drugs!"	//not actually full of drugs, sorry!
@@ -129,7 +131,7 @@
 /obj/structure/closet/walllocker_double/medical/east
 	pixel_x = 32
 	dir = EAST
-	
+
 /obj/structure/closet/walllocker_double/hydrant
 	name = "fire-safety closet"
 	desc = "It's a storage cabinet packed with fire-fighting supplies."
@@ -140,9 +142,9 @@
 	starts_with = list(
 		/obj/item/clothing/suit/fire/firefighter,
 		/obj/item/clothing/mask/gas,
-		/obj/item/device/flashlight,
-		/obj/item/weapon/tank/oxygen/red,
-		/obj/item/weapon/extinguisher,
+		/obj/item/flashlight,
+		/obj/item/tank/oxygen/red,
+		/obj/item/extinguisher,
 		/obj/item/clothing/head/hardhat/red)
 
 /obj/structure/closet/walllocker_double/hydrant/north

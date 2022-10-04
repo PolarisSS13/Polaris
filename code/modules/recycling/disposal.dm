@@ -70,11 +70,11 @@
 				playsound(src, I.usesound, 50, 1)
 				to_chat(user, "You attach the screws around the power connection.")
 				return
-		else if(istype(I, /obj/item/weapon/weldingtool) && mode==-1)
+		else if(istype(I, /obj/item/weldingtool) && mode==-1)
 			if(contents.len > 0)
 				to_chat(user, "Eject the items first!")
 				return
-			var/obj/item/weapon/weldingtool/W = I
+			var/obj/item/weldingtool/W = I
 			if(W.remove_fuel(0,user))
 				playsound(src, W.usesound, 100, 1)
 				to_chat(user, "You start slicing the floorweld off the disposal unit.")
@@ -94,12 +94,12 @@
 				to_chat(user, "You need more welding fuel to complete this task.")
 				return
 
-	if(istype(I, /obj/item/weapon/melee/energy/blade))
+	if(istype(I, /obj/item/melee/energy/blade))
 		to_chat(user, "You can't place that item inside the disposal unit.")
 		return
 
-	if(istype(I, /obj/item/weapon/storage/bag/trash))
-		var/obj/item/weapon/storage/bag/trash/T = I
+	if(istype(I, /obj/item/storage/bag/trash))
+		var/obj/item/storage/bag/trash/T = I
 		to_chat(user, "<font color='blue'>You empty the bag.</font>")
 		for(var/obj/item/O in T.contents)
 			T.remove_from_storage(O,src)
@@ -107,8 +107,8 @@
 		update()
 		return
 
-	if(istype(I, /obj/item/weapon/material/ashtray))
-		var/obj/item/weapon/material/ashtray/A = I
+	if(istype(I, /obj/item/material/ashtray))
+		var/obj/item/material/ashtray/A = I
 		if(A.contents.len > 0)
 			user.visible_message("<span class='notice'>\The [user] empties \the [A.name] into [src].</span>")
 			for(var/obj/item/O in A.contents)
@@ -117,7 +117,7 @@
 			update()
 			return
 
-	var/obj/item/weapon/grab/G = I
+	var/obj/item/grab/G = I
 	if(istype(G))	// handle grabbed mob
 		if(ismob(G.affecting))
 			var/mob/GM = G.affecting
@@ -386,7 +386,7 @@
 
 // update the icon & overlays to reflect mode & status
 /obj/machinery/disposal/proc/update()
-	overlays.Cut()
+	cut_overlays()
 	if(stat & BROKEN)
 		icon_state = "disposal-broken"
 		mode = 0
@@ -395,7 +395,7 @@
 
 	// flush handle
 	if(flush)
-		overlays += image(src.icon, "[initial(icon_state)]-handle")
+		add_overlay("[initial(icon_state)]-handle")
 
 	// only handle is shown if no power
 	if(stat & NOPOWER || mode == -1)
@@ -403,13 +403,13 @@
 
 	// 	check for items in disposal - occupied light
 	if(contents.len > 0)
-		overlays += image(src.icon, "[initial(icon_state)]-full")
+		add_overlay("[initial(icon_state)]-full")
 
 	// charging and ready light
 	if(mode == 1)
-		overlays += image(src.icon, "[initial(icon_state)]-charge")
+		add_overlay("[initial(icon_state)]-charge")
 	else if(mode == 2)
-		overlays += image(src.icon, "[initial(icon_state)]-ready")
+		add_overlay("[initial(icon_state)]-ready")
 
 // timed process
 // charge the gas reservoir and perform flush if ready
@@ -756,8 +756,8 @@
 	var/subtype = 0
 
 // new pipe, set the icon_state as on map
-/obj/structure/disposalpipe/New()
-	..()
+/obj/structure/disposalpipe/Initialize()
+	. = ..()
 	base_icon_state = icon_state
 	return
 
@@ -964,8 +964,8 @@
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
+	if(istype(I, /obj/item/weldingtool))
+		var/obj/item/weldingtool/W = I
 
 		if(W.remove_fuel(0,user))
 			playsound(src, W.usesound, 50, 1)
@@ -1061,8 +1061,8 @@
 /obj/structure/disposalpipe/segment
 	icon_state = "pipe-s"
 
-/obj/structure/disposalpipe/segment/New()
-	..()
+/obj/structure/disposalpipe/segment/Initialize()
+	. = ..()
 	if(icon_state == "pipe-s")
 		dpdir = dir | turn(dir, 180)
 	else
@@ -1075,8 +1075,8 @@
 /obj/structure/disposalpipe/up
 	icon_state = "pipe-u"
 
-/obj/structure/disposalpipe/up/New()
-	..()
+/obj/structure/disposalpipe/up/Initialize()
+	. = ..()
 	dpdir = dir
 	update()
 	return
@@ -1125,8 +1125,8 @@
 /obj/structure/disposalpipe/down
 	icon_state = "pipe-d"
 
-/obj/structure/disposalpipe/down/New()
-	..()
+/obj/structure/disposalpipe/down/Initialize()
+	. = ..()
 	dpdir = dir
 	update()
 	return
@@ -1180,8 +1180,8 @@
 /obj/structure/disposalpipe/junction
 	icon_state = "pipe-j1"
 
-/obj/structure/disposalpipe/junction/New()
-	..()
+/obj/structure/disposalpipe/junction/Initialize()
+	. = ..()
 	if(icon_state == "pipe-j1")
 		dpdir = dir | turn(dir, -90) | turn(dir,180)
 	else if(icon_state == "pipe-j2")
@@ -1238,7 +1238,7 @@
 	else
 		name = initial(name)
 
-/obj/structure/disposalpipe/tagger/New()
+/obj/structure/disposalpipe/tagger/Initialize()
 	. = ..()
 	dpdir = dir | turn(dir, 180)
 	if(sort_tag) GLOB.tagger_locations |= sort_tag
@@ -1250,8 +1250,8 @@
 	if(..())
 		return
 
-	if(istype(I, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = I
+	if(istype(I, /obj/item/destTagger))
+		var/obj/item/destTagger/O = I
 
 		if(O.currTag)// Tag set
 			sort_tag = O.currTag
@@ -1305,7 +1305,7 @@
 
 	dpdir = sortdir | posdir | negdir
 
-/obj/structure/disposalpipe/sortjunction/New()
+/obj/structure/disposalpipe/sortjunction/Initialize()
 	. = ..()
 	if(sortType) GLOB.tagger_locations |= sortType
 
@@ -1318,8 +1318,8 @@
 	if(..())
 		return
 
-	if(istype(I, /obj/item/device/destTagger))
-		var/obj/item/device/destTagger/O = I
+	if(istype(I, /obj/item/destTagger))
+		var/obj/item/destTagger/O = I
 
 		if(O.currTag)// Tag set
 			sortType = O.currTag
@@ -1439,8 +1439,8 @@
 	if(!T.is_plating())
 		return		// prevent interaction with T-scanner revealed pipes
 	src.add_fingerprint(user)
-	if(istype(I, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/W = I
+	if(istype(I, /obj/item/weldingtool))
+		var/obj/item/weldingtool/W = I
 
 		if(W.remove_fuel(0,user))
 			playsound(src, W.usesound, 100, 1)
@@ -1495,8 +1495,8 @@
 					// i.e. will be treated as an empty turf
 	desc = "A broken piece of disposal pipe."
 
-/obj/structure/disposalpipe/broken/New()
-	..()
+/obj/structure/disposalpipe/broken/Initialize()
+	. = ..()
 	update()
 	return
 
@@ -1565,8 +1565,8 @@
 			to_chat(user, "You attach the screws around the power connection.")
 			playsound(src, I.usesound, 50, 1)
 			return
-	else if(istype(I, /obj/item/weapon/weldingtool) && mode==1)
-		var/obj/item/weapon/weldingtool/W = I
+	else if(istype(I, /obj/item/weldingtool) && mode==1)
+		var/obj/item/weldingtool/W = I
 		if(W.remove_fuel(0,user))
 			playsound(src, W.usesound, 100, 1)
 			to_chat(user, "You start slicing the floorweld off the disposal outlet.")

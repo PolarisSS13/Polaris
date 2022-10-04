@@ -17,7 +17,7 @@
 	//  the specific order matters to get a usable icon_state, it is
 	//  copied here so that, in the unlikely case that alldirs is changed,
 	//  this continues to work.
-	var/global/list/tube_dir_list = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
+	var/static/list/tube_dir_list = list(NORTH, SOUTH, EAST, WEST, NORTHEAST, NORTHWEST, SOUTHEAST, SOUTHWEST)
 
 
 // A place where tube pods stop, and people can get in or out.
@@ -78,25 +78,17 @@
 
 
 
-/obj/structure/transit_tube_pod/New(loc)
-	..(loc)
-
+/obj/structure/transit_tube_pod/Initialize()
+	. = ..()
 	air_contents.adjust_multi("oxygen", MOLES_O2STANDARD * 2, "nitrogen", MOLES_N2STANDARD)
 	air_contents.temperature = T20C
-
 	// Give auto tubes time to align before trying to start moving
-	spawn(5)
-		follow_tube()
+	addtimer(CALLBACK(src, .proc/follow_tube), 5)
 
-
-
-/obj/structure/transit_tube/New(loc)
-	..(loc)
-
+/obj/structure/transit_tube/Initialize()
+	. = ..(loc)
 	if(tube_dirs == null)
 		init_dirs()
-
-
 
 /obj/structure/transit_tube/Bumped(mob/AM as mob|obj)
 	var/obj/structure/transit_tube/T = locate() in AM.loc
@@ -106,12 +98,6 @@
 	else
 		AM.loc = src.loc
 		to_chat(AM, "<span class='info'>You slip under the tube.</span>")
-
-
-/obj/structure/transit_tube/station/New(loc)
-	..(loc)
-
-
 
 /obj/structure/transit_tube/station/Bumped(mob/AM as mob|obj)
 	if(!pod_moving && icon_state == "open" && istype(AM, /mob))
@@ -534,7 +520,7 @@
 //  but it is probably safer to assume the existence of, and
 //  rely on, a sufficiently smart compiler/optimizer.
 /obj/structure/transit_tube/proc/parse_dirs(text)
-	var/global/list/direction_table = list()
+	var/static/list/direction_table = list()
 
 	if(text in direction_table)
 		return direction_table[text]

@@ -8,7 +8,7 @@
 	icon_state = "ntnet"
 	anchored = 1
 	density = 1
-	circuit = /obj/item/weapon/circuitboard/ntnet_relay
+	circuit = /obj/item/circuitboard/ntnet_relay
 	var/datum/ntnet/NTNet = null // This is mostly for backwards reference and to allow varedit modifications from ingame.
 	var/enabled = 1				// Set to 0 if the relay was turned off
 	var/dos_failure = 0			// Set to 1 if the relay failed due to (D)DoS attack
@@ -95,13 +95,10 @@
 			ntnet_global.add_log("Manual override: Network blacklist cleared.")
 			. = TRUE
 
-/obj/machinery/ntnet_relay/New()
-	..()
-	assign_uid()
-	default_apply_parts()
-
 /obj/machinery/ntnet_relay/Initialize()
 	. = ..()
+	assign_uid()
+	default_apply_parts()
 	if(ntnet_global)
 		ntnet_global.relays.Add(src)
 		NTNet = ntnet_global

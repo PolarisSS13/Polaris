@@ -210,7 +210,7 @@
 	else
 		..()
 
-/mob/living/simple_mob/slime/xenobio/dark_purple/attackby(var/obj/item/weapon/W, var/mob/user)
+/mob/living/simple_mob/slime/xenobio/dark_purple/attackby(var/obj/item/W, var/mob/user)
 	if(istype(W) && W.force && W.damtype == BURN)
 		log_and_message_admins("[src] ignited due to being hit with a burning weapon ([W]) by [key_name(user)].")
 		ignite()
@@ -358,9 +358,9 @@
 		to_chat(src, span("warning", "There wasn't an unoccupied spot to teleport to."))
 		return FALSE
 
-	var/datum/effect/effect/system/spark_spread/s1 = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s1 = new /datum/effect_system/spark_spread
 	s1.set_up(5, 1, T)
-	var/datum/effect/effect/system/spark_spread/s2 = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s2 = new /datum/effect_system/spark_spread
 	s2.set_up(5, 1, target_turf)
 
 
@@ -670,7 +670,7 @@
 	else
 		..()
 
-/mob/living/simple_mob/slime/xenobio/oil/attackby(obj/item/weapon/W, mob/living/user)
+/mob/living/simple_mob/slime/xenobio/oil/attackby(obj/item/W, mob/living/user)
 	if(istype(W) && W.force && W.damtype == BURN)
 		log_and_message_admins("[src] exploded due to being hit with a burning weapon ([W]) by [key_name(user)].")
 		explode()

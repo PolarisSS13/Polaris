@@ -4,7 +4,7 @@
 /proc/spacevine_infestation(var/potency_min=70, var/potency_max=100, var/maturation_min=5, var/maturation_max=15)
 	spawn() //to stop the secrets panel hanging
 		var/list/turf/simulated/floor/turfs = list() //list of all the empty floor turfs in the hallway areas
-		for(var/areapath in typesof(/area/hallway))
+		for(var/areapath in typesof(using_map.hallway_areas))
 			var/area/A = locate(areapath)
 			for(var/turf/simulated/floor/F in A.contents)
 				if(!F.check_density())
@@ -82,8 +82,8 @@
 /obj/effect/plant/single
 	spread_chance = 0
 
-/obj/effect/plant/New(var/newloc, var/datum/seed/newseed, var/obj/effect/plant/newparent)
-	..()
+/obj/effect/plant/Initialize(var/ml, var/datum/seed/newseed, var/obj/effect/plant/newparent)
+	. = ..(ml)
 
 	if(!newparent)
 		parent = src
@@ -91,11 +91,8 @@
 		parent = newparent
 
 	if(!plant_controller)
-		sleep(250) // ugly hack, should mean roundstart plants are fine. TODO initialize perhaps?
-	if(!plant_controller)
 		to_world("<span class='danger'>Plant controller does not exist and [src] requires it. Aborting.</span>")
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
 
 	if(!istype(newseed))
 		newseed = plant_controller.seeds[DEFAULT_SEED]
@@ -237,12 +234,12 @@
 	floor = 1
 	return 1
 
-/obj/effect/plant/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/plant/attackby(var/obj/item/W, var/mob/user)
 
 	user.setClickCooldown(user.get_attack_speed(W))
 	plant_controller.add_plant(src)
 
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/surgical/scalpel))
+	if(W.is_wirecutter() || istype(W, /obj/item/surgical/scalpel))
 		if(sampled)
 			to_chat(user, "<span class='warning'>\The [src] has already been sampled recently.</span>")
 			return

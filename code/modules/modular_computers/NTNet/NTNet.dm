@@ -31,7 +31,7 @@ var/global/datum/ntnet/ntnet_global = new()
 /datum/ntnet/New()
 	if(ntnet_global && (ntnet_global != src))
 		ntnet_global = src // There can be only one.
-	if (SSatoms && SSatoms.initialized > INITIALIZATION_INSSATOMS)
+	if(SSatoms?.atom_init_stage > INITIALIZATION_INSSATOMS)
 		for(var/obj/machinery/ntnet_relay/R in machines)
 			relays.Add(R)
 			R.NTNet = src
@@ -40,12 +40,12 @@ var/global/datum/ntnet/ntnet_global = new()
 	build_emails_list()
 	add_log("NTNet logging system activated.")
 
-/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log_with_ids_check(var/log_string, var/obj/item/computer_hardware/network_card/source = null)
 	if(intrusion_detection_enabled)
 		add_log(log_string, source)
 
 // Simplified logging: Adds a log. log_string is mandatory parameter, source is optional.
-/datum/ntnet/proc/add_log(var/log_string, var/obj/item/weapon/computer_hardware/network_card/source = null)
+/datum/ntnet/proc/add_log(var/log_string, var/obj/item/computer_hardware/network_card/source = null)
 	var/log_text = "[stationtime2text()] - "
 	if(source)
 		log_text += "[source.get_network_tag()] - "

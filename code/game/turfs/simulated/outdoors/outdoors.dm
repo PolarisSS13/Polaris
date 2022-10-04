@@ -1,4 +1,4 @@
-var/list/turf_edge_cache = list()
+var/global/list/turf_edge_cache = list()
 
 /turf
 	// If greater than 0, this turf will apply edge overlays on top of other turfs cardinally adjacent to it, if those adjacent turfs are of a different icon_state,
@@ -8,7 +8,7 @@ var/list/turf_edge_cache = list()
 	var/outdoors = OUTDOORS_AREA
 
 /area
-	// If a turf's `outdoors` variable is set to `OUTDOORS_AREA`, 
+	// If a turf's `outdoors` variable is set to `OUTDOORS_AREA`,
 	// it will decide if it's outdoors or not when being initialized based on this var.
 	var/outdoors = OUTDOORS_NO
 
@@ -24,6 +24,20 @@ var/list/turf_edge_cache = list()
 
 	// When a turf gets demoted or promoted, this list gets adjusted.  The top-most layer is the layer on the bottom of the list, due to how pop() works.
 	var/list/turf_layers = list(/turf/simulated/floor/outdoors/rocks)
+	var/can_dig = FALSE
+	var/loot_count
+
+/turf/simulated/floor/outdoors/proc/get_loot_type()
+	if(loot_count)
+		return pickweight(list(
+			/obj/item/reagent_containers/food/snacks/worm = 6,
+			/obj/item/material/knife/machete/hatchet/stone = 1
+		))
+
+/turf/simulated/floor/outdoors/Initialize(mapload)
+	. = ..()
+	if(can_dig && prob(33))
+		loot_count = rand(1,3)
 
 /turf/simulated/floor/Initialize(mapload)
 	if(is_outdoors())
@@ -80,6 +94,7 @@ var/list/turf_edge_cache = list()
 	icon_state = "mud_dark"
 	edge_blending_priority = 3
 	initial_flooring = /decl/flooring/mud
+	can_dig = TRUE
 
 /turf/simulated/floor/outdoors/rocks
 	name = "rocks"

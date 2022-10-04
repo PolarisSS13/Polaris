@@ -17,14 +17,13 @@
 
 	anchored = 1	//  don't get pushed around
 
-/mob/new_player/New()
+/mob/new_player/Initialize()
+	. = ..()
 	mob_list += src
-	initialized = TRUE // Explicitly don't use Initialize().  New players join super early and use New()
 
 /mob/new_player/verb/new_player_panel()
 	set src = usr
 	new_player_panel_proc()
-
 
 /mob/new_player/proc/new_player_panel_proc()
 	var/output = "<div align='center'>"
@@ -72,12 +71,20 @@
 		output += "<p>[href(src, list("give_feedback" = 1), "Give Feedback")]</p>"
 
 	if(GLOB.news_data.station_newspaper)
-		output += "<a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News</A>"
+		if(client.prefs.lastlorenews == GLOB.news_data.newsindex)
+			output += "<p><a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News</A></p>"
+		else
+			output += "<p><b><a href='byond://?src=\ref[src];open_station_news=1'>Show [using_map.station_name] News (NEW!)</A></b></p>"
 
 	output += "</div>"
 
-	if(GLOB.news_data.station_newspaper && !client.seen_news)
+	if (client.prefs.lastlorenews == GLOB.news_data.newsindex)
+		client.seen_news = 1
+
+	if(GLOB.news_data.station_newspaper && !client.seen_news && client.is_preference_enabled(/datum/client_preference/show_lore_news))
 		show_latest_news(GLOB.news_data.station_newspaper)
+		client.prefs.lastlorenews = GLOB.news_data.newsindex
+		SScharacter_setup.queue_preferences_save(client.prefs)
 
 	panel = new(src, "Welcome","Welcome", 500, 480, src)
 	panel.set_window_options("can_close=0")
@@ -398,7 +405,7 @@
 	var/join_message = join_props["msg"]
 	var/announce_channel = join_props["channel"] || "Common"
 
-	if(!T || !join_message)
+	if(!T)
 		return 0
 
 	spawning = 1
@@ -409,9 +416,6 @@
 	var/mob/living/character = create_character(T)	//creates the human and transfers vars and mind
 	character = job_master.EquipRank(character, rank, 1)					//equips the human
 	UpdateFactionList(character)
-	if(character && character.client)
-		var/obj/screen/splash/Spl = new(character.client, TRUE)
-		Spl.Fade(TRUE)
 
 	var/datum/job/J = SSjob.get_job(rank)
 
@@ -447,9 +451,11 @@
 	ticker.mode.latespawn(character)
 
 	if(J.mob_type & JOB_SILICON)
-		AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
+		if(join_message && announce_channel)
+			AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
 	else
-		AnnounceArrival(character, rank, join_message, announce_channel, character.z)
+		if(join_message && announce_channel)
+			AnnounceArrival(character, J?.substitute_announce_title || rank, join_message, announce_channel, character.z)
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
@@ -485,8 +491,7 @@
 	var/deferred = ""
 	for(var/datum/job/job in job_master.occupations)
 		if(job && IsJobAvailable(job.title))
-			// Checks for jobs with minimum age requirements
-			if(job.minimum_character_age && (client.prefs.age < job.minimum_character_age))
+			if(!job.passes_standard_join_checks(src, job.title))
 				continue
 			// Checks for jobs set to "Never" in preferences	//TODO: Figure out a better way to check for this
 			if(!(client.prefs.GetJobDepartment(job, 1) & job.flag))
@@ -592,7 +597,7 @@
 
 	src << browse(null, "window=latechoices") //closes late choices window
 	src << browse(null, "window=News") //closes news window
-	//src << browse(null, "window=playersetup") //closes the player setup window
+	src << browse(null, "window=preferences_window") //closes the player setup window
 	panel.close()
 
 /mob/new_player/proc/has_admin_rights()
@@ -634,3 +639,13 @@
 
 /mob/new_player/MayRespawn()
 	return 1
+
+/mob/new_player/verb/next_lobby_track()
+	set name = "Play Different Lobby Track"
+	set category = "OOC"
+
+	if(!is_preference_enabled(/datum/client_preference/play_lobby_music))
+		return
+	var/decl/music_track/new_track = using_map.get_lobby_track(using_map.lobby_track.type)
+	if(new_track)
+		new_track.play_to(src)

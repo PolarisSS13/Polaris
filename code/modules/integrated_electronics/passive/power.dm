@@ -69,8 +69,8 @@
 
 /obj/item/integrated_circuit/passive/power/metabolic_siphon/handle_passive_energy()
 	var/mob/living/carbon/human/host = null
-	if(assembly && istype(assembly, /obj/item/device/electronic_assembly/implant))
-		var/obj/item/device/electronic_assembly/implant/implant_assembly = assembly
+	if(assembly && istype(assembly, /obj/item/electronic_assembly/implant))
+		var/obj/item/electronic_assembly/implant/implant_assembly = assembly
 		if(implant_assembly.implant.imp_in)
 			host = implant_assembly.implant.imp_in
 	if(host && test_validity(host))
@@ -120,8 +120,8 @@
 	var/volume = 60
 	var/list/fuel = list("phoron" = 50000, "slimejelly" = 25000, "fuel" = 15000, "carbon" = 10000, "ethanol"= 10000, "nutriment" =8000, "blood" = 5000)
 
-/obj/item/integrated_circuit/passive/power/chemical_cell/New()
-	..()
+/obj/item/integrated_circuit/passive/power/chemical_cell/Initialize()
+	. = ..()
 	create_reagents(volume)
 
 /obj/item/integrated_circuit/passive/power/chemical_cell/interact(mob/user)

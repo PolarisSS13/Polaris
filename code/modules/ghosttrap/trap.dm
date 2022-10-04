@@ -1,7 +1,7 @@
 // This system is used to grab a ghost from observers with the required preferences and
 // lack of bans set. See posibrain.dm for an example of how they are called/used. ~Z
 
-var/list/ghost_traps
+var/global/list/ghost_traps
 
 /proc/get_ghost_trap(var/trap_key)
 	if(!ghost_traps)
@@ -84,7 +84,7 @@ var/list/ghost_traps
 	to_chat(target, "<b>Use say #b to speak to other artificial intelligences.</b>")
 	var/turf/T = get_turf(target)
 	T.visible_message("<span class='notice'>\The [src] chimes quietly.</span>")
-	var/obj/item/device/mmi/digital/posibrain/P = target.loc
+	var/obj/item/mmi/digital/posibrain/P = target.loc
 	if(!istype(P)) //wat
 		return
 	P.searching = 0

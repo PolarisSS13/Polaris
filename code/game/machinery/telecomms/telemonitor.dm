@@ -14,7 +14,7 @@
 	var/screen = 0				// the screen number:
 	var/list/machinelist = list()	// the machines located by the computer
 	var/obj/machinery/telecomms/SelectedMachine
-	circuit = /obj/item/weapon/circuitboard/comm_monitor
+	circuit = /obj/item/circuitboard/comm_monitor
 
 	var/network = "NULL"		// the network to probe
 
@@ -27,7 +27,7 @@
 	data["temp"] = temp
 
 	var/list/machinelist = list()
-	for(var/obj/machinery/telecomms/T in machinelist)
+	for(var/obj/machinery/telecomms/T in src.machinelist)
 		machinelist.Add(list(list(
 			"id" = T.id,
 			"name" = T.name,
@@ -108,7 +108,7 @@
 				network = newnet
 				machinelist = list()
 				set_temp("NEW NETWORK TAG SET IN ADDRESS \[[network]\]", "good")
-			
+
 			. = TRUE
 
 		if("cleartemp")

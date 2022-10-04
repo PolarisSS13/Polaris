@@ -231,7 +231,7 @@
 
 	var/datum/signal/newsign = new
 	var/obj/machinery/telecomms/server/S = data["server"]
-	var/obj/item/device/radio/hradio = S.server_radio
+	var/obj/item/radio/hradio = S.server_radio
 
 	if(!hradio)
 		error("[src] has no radio.")
@@ -275,7 +275,7 @@
 	newsign.data["vmask"] = 0
 	newsign.data["level"] = list()
 
-	var/pass = S.relay_information(newsign, "/obj/machinery/telecomms/hub")
+	var/pass = S.relay_information(newsign, /obj/machinery/telecomms/hub)
 	if(!pass)
-		S.relay_information(newsign, "/obj/machinery/telecomms/broadcaster") // send this simple message to broadcasters
+		S.relay_information(newsign, /obj/machinery/telecomms/broadcaster) // send this simple message to broadcasters
 

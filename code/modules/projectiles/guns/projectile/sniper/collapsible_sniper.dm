@@ -1,8 +1,8 @@
 ////////////// PTR-7 Anti-Materiel Rifle //////////////
 
-/obj/item/weapon/gun/projectile/heavysniper/collapsible
+/obj/item/gun/projectile/heavysniper/collapsible
 
-/obj/item/weapon/gun/projectile/heavysniper/collapsible/verb/take_down()
+/obj/item/gun/projectile/heavysniper/collapsible/verb/take_down()
 	set category = "Object"
 	set name = "Disassemble Rifle"
 
@@ -15,7 +15,7 @@
 	else
 		collapse_rifle(user)
 
-/obj/item/weapon/gun/projectile/heavysniper/proc/collapse_rifle(mob/user)
+/obj/item/gun/projectile/heavysniper/proc/collapse_rifle(mob/user)
 	to_chat(user, "<span class='warning'>You begin removing \the [src]'s barrel.</span>")
 	if(do_after(user, 40))
 		if(user.unEquip(src, force=1))
@@ -49,24 +49,24 @@
 	name = "AM rifle barrel"
 	icon_state = "heavysniper-barrel"
 
-/obj/item/sniper_rifle_part/barrel/New()
-	..()
+/obj/item/sniper_rifle_part/barrel/Initialize()
+	. = ..()
 	barrel = src
 
 /obj/item/sniper_rifle_part/stock
 	name = "AM rifle stock"
 	icon_state = "heavysniper-stock"
 
-/obj/item/sniper_rifle_part/stock/New()
-	..()
+/obj/item/sniper_rifle_part/stock/Initialize()
+	. = ..()
 	stock = src
 
 /obj/item/sniper_rifle_part/trigger_group
 	name = "AM rifle trigger assembly"
 	icon_state = "heavysniper-trig"
 
-/obj/item/sniper_rifle_part/trigger_group/New()
-	..()
+/obj/item/sniper_rifle_part/trigger_group/Initialize()
+	. = ..()
 	trigger_group = src
 
 /obj/item/sniper_rifle_part/attack_self(mob/user as mob)
@@ -162,14 +162,14 @@
 			w_class = ITEMSIZE_LARGE
 
 		if(3)
-			var/obj/item/weapon/gun/projectile/heavysniper/collapsible/gun = new (get_turf(src), 0)
+			var/obj/item/gun/projectile/heavysniper/collapsible/gun = new (get_turf(src), 0)
 			if(usr && istype(usr, /mob/living/carbon/human))
 				var/mob/living/carbon/human/user = usr
 				user.unEquip(src, force=1)
 				user.put_in_any_hand_if_possible(gun) || gun.dropInto(loc)
 			qdel(src)
 
-/obj/item/weapon/gun/projectile/heavysniper/update_icon()
+/obj/item/gun/projectile/heavysniper/update_icon()
 	if(bolt_open)
 		icon_state = "heavysniper-open"
 	else

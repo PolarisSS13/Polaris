@@ -10,7 +10,7 @@ SUBSYSTEM_DEF(air)
 	name = "Air"
 	init_order = INIT_ORDER_AIR
 	priority = FIRE_PRIORITY_AIR
-	wait = 2 SECONDS // seconds (We probably can speed this up actually)
+	wait = 2 SECONDS
 	flags = SS_BACKGROUND // TODO - Should this really be background? It might be important.
 	runlevels = RUNLEVEL_GAME | RUNLEVEL_POSTGAME
 	var/static/list/part_names = list("turfs", "edges", "fire zones", "hotspots", "zones")
@@ -30,7 +30,7 @@ SUBSYSTEM_DEF(air)
 	// This is used to tell CI WHERE the edges are.
 	var/list/startup_active_edge_log = list()
 
-/datum/controller/subsystem/air/PreInit()
+/datum/controller/subsystem/air/OnNew()
 	air_master = src
 
 /datum/controller/subsystem/air/Initialize(timeofday)
@@ -63,9 +63,8 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		log_debug("Active Edges on ZAS Startup\n" + edge_log.Join("\n"))
 		startup_active_edge_log = edge_log.Copy()
 
-	..()
 
-/datum/controller/subsystem/air/fire(resumed = 0)
+/datum/controller/subsystem/air/fire(resumed, no_mc_tick)
 	var/timer
 	if(!resumed)
 		// Santity checks to make sure we don't somehow have items left over from last cycle
@@ -124,7 +123,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		T.post_update_air_properties()
 		T.needs_air_update = 0
 		#ifdef ZASDBG
-		T.overlays -= mark
+		T.cut_overlay(mark)
 		#endif
 		if(MC_TICK_CHECK)
 			return
@@ -139,7 +138,7 @@ Total Unsimulated Turfs: [world.maxx*world.maxy*world.maxz - simulated_turf_coun
 		T.post_update_air_properties()
 		T.needs_air_update = 0
 		#ifdef ZASDBG
-		T.overlays -= mark
+		T.cut_overlay(mark)
 		#endif
 		if(MC_TICK_CHECK)
 			return

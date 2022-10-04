@@ -21,6 +21,16 @@
 #define COLD_GAS_DAMAGE_LEVEL_2 1.5 //Amount of damage applied when the current breath's temperature passes the 200K point
 #define COLD_GAS_DAMAGE_LEVEL_3 3 //Amount of damage applied when the current breath's temperature passes the 120K point
 
+#define COLD_ALERT_SEVERITY_LOW         1 // Constants passed to the cold and heat alerts.
+#define COLD_ALERT_SEVERITY_MODERATE    2
+#define COLD_ALERT_SEVERITY_MAX         3
+#define ENVIRONMENT_COMFORT_MARKER_COLD 1
+
+#define HOT_ALERT_SEVERITY_LOW          1
+#define HOT_ALERT_SEVERITY_MODERATE     2
+#define HOT_ALERT_SEVERITY_MAX          3
+#define ENVIRONMENT_COMFORT_MARKER_HOT  2
+
 #define RADIATION_SPEED_COEFFICIENT 0.1
 #define HUMAN_COMBUSTION_TEMP 524 //524k is the sustained combustion temperature of human fat
 
@@ -72,6 +82,8 @@
 		handle_shock()
 
 		handle_pain()
+		
+		handle_allergens()
 
 		handle_medical_side_effects()
 
@@ -253,7 +265,7 @@
 			if(gene.is_active(src))
 				gene.OnMobLife(src)
 
-	radiation = CLAMP(radiation,0,250)
+	radiation = clamp(radiation,0,250)
 
 	if(!radiation)
 		if(species.appearance_flags & RADIATION_GLOWS)
@@ -347,8 +359,8 @@
 	if(internal)
 		//Because rigs store their tanks out of reach of contents.Find(), a check has to be made to make
 		//sure the rig is still worn, still online, and that its air supply still exists.
-		var/obj/item/weapon/tank/rig_supply
-		var/obj/item/weapon/rig/Rig = get_rig()
+		var/obj/item/tank/rig_supply
+		var/obj/item/rig/Rig = get_rig()
 
 		if(Rig)
 			rig_supply = Rig.air_supply
@@ -521,7 +533,7 @@
 	if(toxins_pp > safe_toxins_max)
 		var/ratio = (poison/safe_toxins_max) * 10
 		if(reagents)
-			reagents.add_reagent("toxin", CLAMP(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
+			reagents.add_reagent("toxin", clamp(ratio, MIN_TOXIN_DAMAGE, MAX_TOXIN_DAMAGE))
 			breath.adjust_gas(poison_type, -poison/6, update = 0) //update after
 		throw_alert("tox_in_air", /obj/screen/alert/tox_in_air)
 	else
@@ -553,10 +565,20 @@
 	else
 		failed_last_breath = 0
 		adjustOxyLoss(-5)
+		
+	if(!does_not_breathe && client) // If we breathe, and have an active client, check if we have synthetic lungs.
+		var/obj/item/organ/internal/lungs/L = internal_organs_by_name[O_LUNGS]
+		var/turf = get_turf(src)
+		var/mob/living/carbon/human/M = src
+		if(L.robotic < ORGAN_ROBOT && is_below_sound_pressure(turf) && M.internal) // Only non-synthetic lungs, please, and only play these while the pressure is below that which we can hear sounds normally AND we're on internals.
+			if(!failed_inhale && (world.time >= (last_breath_sound + 7 SECONDS))) // Were we able to inhale successfully? Play inhale.
+				var/exhale = failed_exhale // Pass through if we passed exhale or not
+				play_inhale(M, exhale)
+				last_breath_sound = world.time
 
 
 	// Hot air hurts :(
-	if((breath.temperature < species.breath_cold_level_1 || breath.temperature > species.breath_heat_level_1) && !(COLD_RESISTANCE in mutations))
+	if((breath.temperature <= species.cold_discomfort_level || breath.temperature >= species.heat_discomfort_level) && !(COLD_RESISTANCE in mutations))
 
 		if(breath.temperature <= species.breath_cold_level_1)
 			if(prob(20))
@@ -565,27 +587,37 @@
 			if(prob(20))
 				to_chat(src, "<span class='danger'>You feel your face burning and a searing heat in your lungs!</span>")
 
-		if(breath.temperature >= species.breath_heat_level_1)
-			if(breath.temperature < species.breath_heat_level_2)
-				apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Heat")
-				throw_alert("temp", /obj/screen/alert/hot, 1)
-			else if(breath.temperature < species.breath_heat_level_3)
-				apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Heat")
-				throw_alert("temp", /obj/screen/alert/hot, 2)
-			else
+		if(breath.temperature >= species.heat_discomfort_level)
+		
+			if(breath.temperature >= species.breath_heat_level_3)
 				apply_damage(HEAT_GAS_DAMAGE_LEVEL_3, BURN, BP_HEAD, used_weapon = "Excessive Heat")
-				throw_alert("temp", /obj/screen/alert/hot, 3)
-
-		else if(breath.temperature <= species.breath_cold_level_1)
-			if(breath.temperature > species.breath_cold_level_2)
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Cold")
-				throw_alert("temp", /obj/screen/alert/cold, 1)
-			else if(breath.temperature > species.breath_cold_level_3)
-				apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Cold")
-				throw_alert("temp", /obj/screen/alert/cold, 2)
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MAX)
+			else if(breath.temperature >= species.breath_heat_level_2)
+				apply_damage(HEAT_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MODERATE)
+			else if(breath.temperature >= species.breath_heat_level_1)
+				apply_damage(HEAT_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Heat")
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_LOW)
+			else if(species.get_environment_discomfort(src, ENVIRONMENT_COMFORT_MARKER_HOT))
+				throw_alert("temp", /obj/screen/alert/warm, HOT_ALERT_SEVERITY_LOW)
 			else
+				clear_alert("temp")
+
+		else if(breath.temperature <= species.cold_discomfort_level)
+
+			if(breath.temperature <= species.breath_cold_level_3)
 				apply_damage(COLD_GAS_DAMAGE_LEVEL_3, BURN, BP_HEAD, used_weapon = "Excessive Cold")
-				throw_alert("temp", /obj/screen/alert/cold, 3)
+				throw_alert("temp", /obj/screen/alert/cold, COLD_ALERT_SEVERITY_MAX)
+			else if(breath.temperature <= species.breath_cold_level_2)
+				apply_damage(COLD_GAS_DAMAGE_LEVEL_1, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				throw_alert("temp", /obj/screen/alert/cold, COLD_ALERT_SEVERITY_LOW)
+			else if(breath.temperature <= species.breath_cold_level_1)
+				apply_damage(COLD_GAS_DAMAGE_LEVEL_2, BURN, BP_HEAD, used_weapon = "Excessive Cold")
+				throw_alert("temp", /obj/screen/alert/cold, COLD_ALERT_SEVERITY_MODERATE)
+			else if(species.get_environment_discomfort(src, ENVIRONMENT_COMFORT_MARKER_COLD))
+				throw_alert("temp", /obj/screen/alert/chilly, COLD_ALERT_SEVERITY_LOW)
+			else
+				clear_alert("temp")
 
 		//breathing in hot/cold air also heats/cools you a bit
 		var/temp_adj = breath.temperature - bodytemperature
@@ -597,21 +629,67 @@
 		var/relative_density = breath.total_moles / (MOLES_CELLSTANDARD * BREATH_PERCENTAGE)
 		temp_adj *= relative_density
 
-		if (temp_adj > BODYTEMP_HEATING_MAX) temp_adj = BODYTEMP_HEATING_MAX
-		if (temp_adj < BODYTEMP_COOLING_MAX) temp_adj = BODYTEMP_COOLING_MAX
-		//to_world("Breath: [breath.temperature], [src]: [bodytemperature], Adjusting: [temp_adj]")
-		bodytemperature += temp_adj
+		if(temp_adj > BODYTEMP_HEATING_MAX)
+			temp_adj = BODYTEMP_HEATING_MAX
+		if(temp_adj < BODYTEMP_COOLING_MAX)
+			temp_adj = BODYTEMP_COOLING_MAX
 
-	else if(breath.temperature >= species.heat_discomfort_level)
-		species.get_environment_discomfort(src,"heat")
-	else if(breath.temperature <= species.cold_discomfort_level)
-		species.get_environment_discomfort(src,"cold")
+		bodytemperature += temp_adj
 
 	else
 		clear_alert("temp")
 
 	breath.update_values()
 	return 1
+	
+/mob/living/carbon/human/proc/play_inhale(var/mob/living/M, var/exhale)
+	var/suit_inhale_sound
+	if(species.suit_inhale_sound)
+		suit_inhale_sound = species.suit_inhale_sound
+	else // Failsafe
+		suit_inhale_sound = 'sound/effects/mob_effects/suit_breathe_in.ogg'
+	
+	playsound_local(get_turf(src), suit_inhale_sound, 100, pressure_affected = FALSE, volume_channel = VOLUME_CHANNEL_AMBIENCE)
+	if(!exhale) // Did we fail exhale? If no, play it after inhale finishes.
+		addtimer(CALLBACK(src, .proc/play_exhale, M), 5 SECONDS)
+	
+/mob/living/carbon/human/proc/play_exhale(var/mob/living/M)
+	var/suit_exhale_sound
+	if(species.suit_exhale_sound)
+		suit_exhale_sound = species.suit_exhale_sound
+	else // Failsafe
+		suit_exhale_sound = 'sound/effects/mob_effects/suit_breathe_out.ogg'
+	
+	playsound_local(get_turf(src), suit_exhale_sound, 100, pressure_affected = FALSE, volume_channel = VOLUME_CHANNEL_AMBIENCE)
+
+/mob/living/carbon/human/proc/handle_allergens()
+	if(chem_effects[CE_ALLERGEN])
+		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple seperate allergen typess simultaneously hurts more
+		var/damage_severity = species.allergen_damage_severity * chem_effects[CE_ALLERGEN]
+		var/disable_severity = species.allergen_disable_severity * chem_effects[CE_ALLERGEN]
+		if(species.allergen_reaction & AG_PHYS_DMG)
+			adjustBruteLoss(damage_severity)
+		if(species.allergen_reaction & AG_BURN_DMG)
+			adjustFireLoss(damage_severity)
+		if(species.allergen_reaction & AG_TOX_DMG)
+			adjustToxLoss(damage_severity)
+		if(species.allergen_reaction & AG_OXY_DMG)
+			adjustOxyLoss(damage_severity)
+			if(prob(disable_severity/2))
+				emote(pick("cough","gasp","choke"))
+		if(species.allergen_reaction & AG_EMOTE)
+			if(prob(disable_severity/2))
+				emote(pick("pale","shiver","twitch"))
+		if(species.allergen_reaction & AG_PAIN)
+			adjustHalLoss(disable_severity)
+		if(species.allergen_reaction & AG_WEAKEN)
+			Weaken(disable_severity)
+		if(species.allergen_reaction & AG_BLURRY)
+			eye_blurry = max(eye_blurry, disable_severity)
+		if(species.allergen_reaction & AG_SLEEPY)
+			drowsyness = max(drowsyness, disable_severity)
+		if(species.allergen_reaction & AG_CONFUSE)
+			Confuse(disable_severity/4)
 
 /mob/living/carbon/human/handle_environment(datum/gas_mixture/environment)
 	if(!environment)
@@ -683,13 +761,13 @@
 			if(bodytemperature >= species.heat_level_2)
 				if(bodytemperature >= species.heat_level_3)
 					burn_dam = HEAT_DAMAGE_LEVEL_3
-					throw_alert("temp", /obj/screen/alert/hot, 3)
+					throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MAX)
 				else
 					burn_dam = HEAT_DAMAGE_LEVEL_2
-					throw_alert("temp", /obj/screen/alert/hot, 2)
+					throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_MODERATE)
 			else
 				burn_dam = HEAT_DAMAGE_LEVEL_1
-				throw_alert("temp", /obj/screen/alert/hot, 1)
+				throw_alert("temp", /obj/screen/alert/hot, HOT_ALERT_SEVERITY_LOW)
 
 		take_overall_damage(burn=burn_dam, used_weapon = "High Body Temperature")
 
@@ -988,10 +1066,7 @@
 
 		if(hallucination)
 			if(hallucination >= 20 && !(species.flags & (NO_POISON|IS_PLANT|NO_HALLUCINATION)) )
-				if(prob(3))
-					fake_attack(src)
-				if(!handling_hal)
-					spawn handle_hallucinations() //The not boring kind!
+				handle_hallucinations()
 				if(client && prob(5))
 					client.dir = pick(2,4,8)
 					spawn(rand(20,50))
@@ -1029,7 +1104,7 @@
 					if(client || sleeping > 3)
 						AdjustSleeping(-1)
 						throw_alert("asleep", /obj/screen/alert/asleep)
-				if( prob(2) && health && !hal_crit && client )
+				if( prob(2) && health && client )
 					spawn(0)
 						emote("snore")
 		//CONSCIOUS
@@ -1046,8 +1121,8 @@
 
 		//Eyes
 		//Check rig first because it's two-check and other checks will override it.
-		if(istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/O = back
+		if(istype(back,/obj/item/rig))
+			var/obj/item/rig/O = back
 			if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 				if((O.offline && O.offline_vision_restriction == 2) || (!O.offline && O.vision_restriction == 2))
 					blinded = 1
@@ -1236,7 +1311,7 @@
 				else if(no_damage)
 					health_images += image('icons/mob/screen1_health.dmi',"fullhealth")
 
-				healths_ma.overlays += health_images
+				healths_ma.add_overlay(health_images)
 				healths.appearance = healths_ma
 
 
@@ -1306,8 +1381,8 @@
 					var/obj/item/clothing/head/welding/O = head
 					if(!O.up)
 						found_welder = 1
-				if(!found_welder && istype(back, /obj/item/weapon/rig))
-					var/obj/item/weapon/rig/O = back
+				if(!found_welder && istype(back, /obj/item/rig))
+					var/obj/item/rig/O = back
 					if(O.helmet && O.helmet == head && (O.helmet.body_parts_covered & EYES))
 						if((O.offline && O.offline_vision_restriction == 1) || (!O.offline && O.vision_restriction == 1))
 							found_welder = 1
@@ -1363,7 +1438,7 @@
 			see_invisible = see_in_dark>2 ? SEE_INVISIBLE_LEVEL_ONE : see_invisible_default
 
 		var/glasses_processed = 0
-		var/obj/item/weapon/rig/rig = get_rig()
+		var/obj/item/rig/rig = get_rig()
 		if(istype(rig) && rig.visor && !looking_elsewhere)
 			if(!rig.helmet || (head && rig.helmet == head))
 				if(rig.visor && rig.visor.vision && rig.visor.active && rig.visor.vision.glasses)
@@ -1731,7 +1806,7 @@
 	if (BITTEST(hud_updateflag, ID_HUD))
 		var/image/holder = grab_hud(ID_HUD)
 		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			var/obj/item/card/id/I = wear_id.GetID()
 			if(I)
 				holder.icon_state = "hud[ckey(I.GetJobName())]"
 			else
@@ -1746,7 +1821,7 @@
 		holder.icon_state = "hudblank"
 		var/perpname = name
 		if(wear_id)
-			var/obj/item/weapon/card/id/I = wear_id.GetID()
+			var/obj/item/card/id/I = wear_id.GetID()
 			if(I)
 				perpname = I.registered_name
 
@@ -1780,14 +1855,14 @@
 		holder2.icon_state = "hudblank"
 		holder3.icon_state = "hudblank"
 
-		for(var/obj/item/weapon/implant/I in src)
+		for(var/obj/item/implant/I in src)
 			if(I.implanted)
 				if(!I.malfunction)
-					if(istype(I,/obj/item/weapon/implant/tracking))
+					if(istype(I,/obj/item/implant/tracking))
 						holder1.icon_state = "hud_imp_tracking"
-					if(istype(I,/obj/item/weapon/implant/loyalty))
+					if(istype(I,/obj/item/implant/loyalty))
 						holder2.icon_state = "hud_imp_loyal"
-					if(istype(I,/obj/item/weapon/implant/chem))
+					if(istype(I,/obj/item/implant/chem))
 						holder3.icon_state = "hud_imp_chem"
 
 		apply_hud(IMPTRACK_HUD, holder1)

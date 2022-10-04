@@ -42,13 +42,13 @@
 	name = "Firnir (Terrestrial Planet)"
 	keywords += list("Firnir")
 	data = "Firnir is the first planet of Vir, tidally locked to it, and having temperatures in excess of 570 degrees \
-	kelvin (299캜) on the day side has caused this planet to go mostly ignored."
+	kelvin (299째C) on the day side has caused this planet to go mostly ignored."
 
 /datum/lore/codex/page/tyr/add_content()
 	name = "Tyr (Terrestrial Planet)"
 	keywords += list("Tyr")
 	data = "The second closest planet to [quick_link("Vir")], this planet has a high concentration of minerals inside its crust, as well as active volcanism and plate tectonics.  \
-	The temperature on the surface can reach up to 405 degrees kelvin (132캜), which has deterred most people from the planet, except for two [quick_link("TSC", "TSCs")], \
+	The temperature on the surface can reach up to 405 degrees kelvin (132째C), which has deterred most people from the planet, except for two [quick_link("TSC", "TSCs")], \
 	Greyson Manufactories and [quick_link("Xion Manufacturing Group")].  In orbit, the two companies each have a space station, used to coordinate and \
 	control their stations on the surface without having to suffer the intense heat.  Xion's station also doubles as a control and oversight facility for their \
 	[quick_link("drones","autonomous mining drones")].\
@@ -92,13 +92,13 @@
 /datum/lore/codex/page/southern_cross/add_content()
 	name = "Southern Cross (Artificial Satellite)"
 	keywords += list("Southern Cross", "NLS Southern Cross")
-	data = "The Southern Cross is a telecommunications and supply hub for [quick_link("NanoTrasen")], named after it's companion satellite, the \
+	data = "The Southern Cross is a mostly automated telecommunications and supply hub for [quick_link("NanoTrasen")], named after it's companion satellite, the \
 	[quick_link("Northern Star")].  It acts as a logistics hub for the smaller installations NanoTrasen has in Sif orbit and on the surface."
 
 /datum/lore/codex/page/magni/add_content()
 	name = "Magni (Terrestrial Planet)"
 	keywords += list("Magni")
-	data = "Outside of the habitable zone, the barren world Magni is generally at 202 kelvin (-71캜)."
+	data = "Outside of the habitable zone, the barren world Magni is generally at 202 kelvin (-71째C)."
 
 /datum/lore/codex/page/kara/add_content()
 	name = "Kara (Gas Giant)"
@@ -107,7 +107,7 @@
 	to be the remnants of a much larger moon that was ripped apart by Kara, long ago. Curerntly, a large number of these \
 	asteroids are being used by many different businesses, and some governmental infrastructure has been built. The most prominent \
 	asteroid installation is the [quick_link("Northern Star", "NCS Northern Star")], a general purpose colony owned and operated by \
-	[quick_link("NanoTrasen")]. The mid-atmospheric temperature of the gas giant averages to around 150 kelvin (-108캜)."
+	[quick_link("NanoTrasen")]. The mid-atmospheric temperature of the gas giant averages to around 150 kelvin (-108째C)."
 
 /datum/lore/codex/page/northern_star/add_content()
 	name = "Northern Star (Artificial Satellite)"
@@ -126,4 +126,4 @@
 /datum/lore/codex/page/rota/add_content()
 	name = "Rota (Gas Giant)"
 	keywords += list("Rota")
-	data = "An ice giant, with a beautiful ring system circling it. The average temperature for it is 165 kelvin (-157캜)."
+	data = "An ice giant, with a beautiful ring system circling it. The average temperature for it is 165 kelvin (-157째C)."

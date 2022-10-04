@@ -1,7 +1,7 @@
 // This is something of an intermediary species used for species that
 // need to emulate the appearance of another race. Currently it is only
 // used for slimes but it may be useful for changelings later.
-var/list/wrapped_species_by_ref = list()
+var/global/list/wrapped_species_by_ref = list()
 
 /datum/species/shapeshifter
 
@@ -322,7 +322,7 @@ var/list/wrapped_species_by_ref = list()
 
 /mob/living/carbon/human/proc/shapeshifter_set_eye_color(var/new_eyes)
 	
-	var/list/new_color_rgb_list = hex2rgb(new_eyes)
+	var/list/new_color_rgb_list = rgb2num(new_eyes)
 	// First, update mob vars.
 	r_eyes = new_color_rgb_list[1]
 	g_eyes = new_color_rgb_list[2]

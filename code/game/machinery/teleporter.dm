@@ -6,21 +6,17 @@
 	desc = "Used to control a linked teleportation Hub and Station."
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
-	circuit = /obj/item/weapon/circuitboard/teleporter
+	circuit = /obj/item/circuitboard/teleporter
 	dir = 4
 	var/id = null
 	var/one_time_use = 0 //Used for one-time-use teleport cards (such as clown planet coordinates.)
 						 //Setting this to 1 will set locked to null after a player enters the portal and will not allow hand-teles to open portals to that location.
 	var/datum/nano_module/program/teleport_control/teleport_control
 
-/obj/machinery/computer/teleporter/New()
-	id = "[rand(1000, 9999)]"
-	..()
-	underlays.Cut()
-	underlays += image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires")
-
 /obj/machinery/computer/teleporter/Initialize()
+	id = "[rand(1000, 9999)]"
 	. = ..()
+	underlays = list(image('icons/obj/stationobjs.dmi', icon_state = "telecomp-wires"))
 	teleport_control = new(src)
 	var/obj/machinery/teleport/station/station = null
 	var/obj/machinery/teleport/hub/hub = null
@@ -48,8 +44,8 @@
 	return ..()
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)
-	if(istype(I, /obj/item/weapon/card/data/))
-		var/obj/item/weapon/card/data/C = I
+	if(istype(I, /obj/item/card/data/))
+		var/obj/item/card/data/C = I
 		if(stat & (NOPOWER|BROKEN) & (C.function != "teleporter"))
 			attack_hand()
 
@@ -127,7 +123,7 @@
 		var/list/L = list()
 		var/list/areaindex = list()
 
-		for(var/obj/item/device/radio/beacon/R in all_beacons)
+		for(var/obj/item/radio/beacon/R in all_beacons)
 			var/turf/T = get_turf(R)
 			if(!T)
 				continue
@@ -140,7 +136,7 @@
 				areaindex[tmpname] = 1
 			L[tmpname] = R
 
-		for (var/obj/item/weapon/implant/tracking/I in all_tracking_implants)
+		for (var/obj/item/implant/tracking/I in all_tracking_implants)
 			if(!I.implanted || !ismob(I.loc))
 				continue
 			else
@@ -241,7 +237,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 2000
-	circuit = /obj/item/weapon/circuitboard/teleporter_hub
+	circuit = /obj/item/circuitboard/teleporter_hub
 	var/obj/machinery/computer/teleporter/com
 
 /obj/machinery/teleport/hub/Initialize()
@@ -278,7 +274,7 @@
 			com.one_time_use = 0
 			com.teleport_control.locked = null
 	else
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
 		accurate = 1
@@ -300,7 +296,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
 	active_power_usage = 2000
-	circuit = /obj/item/weapon/circuitboard/teleporter_station
+	circuit = /obj/item/circuitboard/teleporter_station
 	var/obj/machinery/teleport/hub/com
 
 /obj/machinery/teleport/station/Initialize()

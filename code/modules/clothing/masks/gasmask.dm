@@ -45,7 +45,7 @@
 
 //Turn it into a hailer mask
 /obj/item/clothing/mask/gas/half/attackby(obj/item/I, mob/user)
-	if(istype(I, /obj/item/device/hailer))
+	if(istype(I, /obj/item/hailer))
 		playsound(src, 'sound/items/Screwdriver.ogg', 50, 1)
 		user.drop_item(src)
 		var/obj/item/clothing/mask/gas/sechailer/N = new /obj/item/clothing/mask/gas/sechailer(src.loc)
@@ -83,14 +83,14 @@
 
 // Vox mask, has special code for eating
 /obj/item/clothing/mask/gas/swat/vox
-	name = "\improper alien mask"
+	name = "alien mask"
 	desc = "Clearly not designed for a human face."
 	flags = PHORONGUARD
 	item_flags = BLOCK_GAS_SMOKE_EFFECT | AIRTIGHT
 	species_restricted = list(SPECIES_VOX)
-	filtered_gases = list("oxygen", "nitrous_oxide")
-	var/mask_open = FALSE	// Controls if the Vox can eat through this mask
+	filtered_gases = list("oxygen", "phoron", "nitrous_oxide")
 	action_button_name = "Toggle Feeding Port"
+	var/mask_open = FALSE	// Controls if the Vox can eat through this mask
 
 /obj/item/clothing/mask/gas/swat/vox/proc/feeding_port(mob/user)
 	if(user.canmove && !user.stat)
@@ -184,3 +184,13 @@
 	desc = "Twoooo!"
 	icon_state = "owl"
 	body_parts_covered = HEAD|FACE|EYES
+
+/obj/item/clothing/mask/gas/vox
+	name = "alien respirator"
+	desc = "A respiratory filter designed for an alien facial structure. The filter intakes seem nasally fitted, and the mouth covering is articulated to allow the wearer to eat."
+	icon_state = "respirator"
+	body_parts_covered = EYES
+	w_class = ITEMSIZE_SMALL
+	flags_inv = 0
+	species_restricted = list(SPECIES_VOX)
+	filtered_gases = list("phoron", "nitrous_oxide", "oxygen")

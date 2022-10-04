@@ -1,15 +1,15 @@
 /obj/machinery/chem_master
 	name = "ChemMaster 3000"
-	desc = "Used to seperate and package chemicals in to patches, pills, or bottles. Warranty void if used to create Space Drugs."
+	desc = "Used to seperate and package chemicals in to patches, pills, or bottles. Warranty void if used to create illicit drugs."
 	density = 1
 	anchored = 1
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "mixer0"
-	circuit = /obj/item/weapon/circuitboard/chem_master
+	circuit = /obj/item/circuitboard/chem_master
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 20
-	var/obj/item/weapon/reagent_containers/beaker = null
-	var/obj/item/weapon/storage/pill_bottle/loaded_pill_bottle = null
+	var/obj/item/reagent_containers/beaker = null
+	var/obj/item/storage/pill_bottle/loaded_pill_bottle = null
 	var/mode = 0
 	var/condi = 0
 	var/useramount = 15 // Last used amount
@@ -22,8 +22,8 @@
 	flags = OPENCONTAINER
 	clicksound = "button"
 
-/obj/machinery/chem_master/New()
-	..()
+/obj/machinery/chem_master/Initialize()
+	. = ..()
 	var/datum/reagents/R = new/datum/reagents(900)	//Just a huge random number so the buffer should (probably) never dump your reagents.
 	reagents = R	//There should be a nano ui thingy to warn of this.
 	R.my_atom = src
@@ -41,9 +41,9 @@
 /obj/machinery/chem_master/update_icon()
 	icon_state = "mixer[beaker ? "1" : "0"]"
 
-/obj/machinery/chem_master/attackby(var/obj/item/weapon/B as obj, var/mob/user as mob)
+/obj/machinery/chem_master/attackby(var/obj/item/B as obj, var/mob/user as mob)
 
-	if(istype(B, /obj/item/weapon/reagent_containers/glass) || istype(B, /obj/item/weapon/reagent_containers/food))
+	if(istype(B, /obj/item/reagent_containers/glass) || istype(B, /obj/item/reagent_containers/food))
 
 		if(src.beaker)
 			to_chat(user, "\A [beaker] is already loaded into the machine.")
@@ -54,7 +54,7 @@
 		to_chat(user, "You add \the [B] to the machine.")
 		update_icon()
 
-	else if(istype(B, /obj/item/weapon/storage/pill_bottle))
+	else if(istype(B, /obj/item/storage/pill_bottle))
 
 		if(src.loaded_pill_bottle)
 			to_chat(user, "A \the [loaded_pill_bottle] s already loaded into the machine.")
@@ -197,7 +197,7 @@
 					if(!num)
 						return
 					arguments["num"] = num
-					var/amount_per_pill = CLAMP(reagents.total_volume / num, 0, MAX_UNITS_PER_PILL)
+					var/amount_per_pill = clamp(reagents.total_volume / num, 0, MAX_UNITS_PER_PILL)
 					var/default_name = "[reagents.get_master_reagent_name()] ([amount_per_pill]u)"
 					var/pills_text = num == 1 ? "new pill" : "[num] new pills"
 					tgui_modal_input(src, id, "Please name your [pills_text]:", null, arguments, default_name, MAX_CUSTOM_NAME_LEN)
@@ -217,7 +217,7 @@
 					if(!num)
 						return
 					arguments["num"] = num
-					var/amount_per_patch = CLAMP(reagents.total_volume / num, 0, MAX_UNITS_PER_PATCH)
+					var/amount_per_patch = clamp(reagents.total_volume / num, 0, MAX_UNITS_PER_PATCH)
 					var/default_name = "[reagents.get_master_reagent_name()] ([amount_per_patch]u)"
 					var/patches_text = num == 1 ? "new patch" : "[num] new patches"
 					tgui_modal_input(src, id, "Please name your [patches_text]:", null, arguments, default_name, MAX_CUSTOM_NAME_LEN)
@@ -232,7 +232,7 @@
 					if(!num)
 						return
 					arguments["num"] = num
-					var/amount_per_bottle = CLAMP(reagents.total_volume / num, 0, MAX_UNITS_PER_BOTTLE)
+					var/amount_per_bottle = clamp(reagents.total_volume / num, 0, MAX_UNITS_PER_BOTTLE)
 					var/default_name = "[reagents.get_master_reagent_name()]"
 					var/bottles_text = num == 1 ? "new bottle" : "[num] new bottles"
 					tgui_modal_input(src, id, "Please name your [bottles_text] ([amount_per_bottle]u in bottle):", null, arguments, default_name, MAX_CUSTOM_NAME_LEN)
@@ -280,7 +280,7 @@
 						return
 					if(!length(answer))
 						answer = reagents.get_master_reagent_name()
-					var/obj/item/weapon/reagent_containers/pill/P = new(loc)
+					var/obj/item/reagent_containers/pill/P = new(loc)
 					P.name = "[answer] pack"
 					P.desc = "A small condiment pack. The label says it contains [answer]."
 					P.icon_state = "bouilloncube"//Reskinned monkey cube
@@ -288,19 +288,19 @@
 				if("create_pill")
 					if(condi || !reagents.total_volume)
 						return
-					var/count = CLAMP(round(text2num(arguments["num"]) || 0), 0, MAX_MULTI_AMOUNT)
+					var/count = clamp(round(text2num(arguments["num"]) || 0), 0, MAX_MULTI_AMOUNT)
 					if(!count)
 						return
 
 					if(!length(answer))
 						answer = reagents.get_master_reagent_name()
-					var/amount_per_pill = CLAMP(reagents.total_volume / count, 0, MAX_UNITS_PER_PILL)
+					var/amount_per_pill = clamp(reagents.total_volume / count, 0, MAX_UNITS_PER_PILL)
 					while(count--)
 						if(reagents.total_volume <= 0)
 							to_chat(usr, "<span class='notice'>Not enough reagents to create these pills!</span>")
 							return
 
-						var/obj/item/weapon/reagent_containers/pill/P = new(loc)
+						var/obj/item/reagent_containers/pill/P = new(loc)
 						P.name = "[answer] pill"
 						P.pixel_x = rand(-7, 7) // Random position
 						P.pixel_y = rand(-7, 7)
@@ -316,27 +316,27 @@
 						return
 					tgui_act("modal_open", list("id" = "create_pill", "arguments" = list("num" = answer)), ui, state)
 				if("change_pill_style")
-					var/new_style = CLAMP(text2num(answer) || 0, 0, MAX_PILL_SPRITE)
+					var/new_style = clamp(text2num(answer) || 0, 0, MAX_PILL_SPRITE)
 					if(!new_style)
 						return
 					pillsprite = new_style
 				if("create_patch")
 					if(condi || !reagents.total_volume)
 						return
-					var/count = CLAMP(round(text2num(arguments["num"]) || 0), 0, MAX_MULTI_AMOUNT)
+					var/count = clamp(round(text2num(arguments["num"]) || 0), 0, MAX_MULTI_AMOUNT)
 					if(!count)
 						return
 
 					if(!length(answer))
 						answer = reagents.get_master_reagent_name()
-					var/amount_per_patch = CLAMP(reagents.total_volume / count, 0, MAX_UNITS_PER_PATCH)
+					var/amount_per_patch = clamp(reagents.total_volume / count, 0, MAX_UNITS_PER_PATCH)
 					// var/is_medical_patch = chemical_safety_check(reagents)
 					while(count--)
 						if(reagents.total_volume <= 0)
 							to_chat(usr, "<span class='notice'>Not enough reagents to create these patches!</span>")
 							return
 
-						var/obj/item/weapon/reagent_containers/pill/patch/P = new(loc)
+						var/obj/item/reagent_containers/pill/patch/P = new(loc)
 						P.name = "[answer] patch"
 						P.pixel_x = rand(-7, 7) // random position
 						P.pixel_y = rand(-7, 7)
@@ -351,18 +351,18 @@
 				if("create_bottle")
 					if(condi || !reagents.total_volume)
 						return
-					var/count = CLAMP(round(text2num(arguments["num"]) || 0), 0, MAX_MULTI_AMOUNT)
+					var/count = clamp(round(text2num(arguments["num"]) || 0), 0, MAX_MULTI_AMOUNT)
 					if(!count)
 						return
 
 					if(!length(answer))
 						answer = reagents.get_master_reagent_name()
-					var/amount_per_bottle = CLAMP(reagents.total_volume / count, 0, MAX_UNITS_PER_BOTTLE)
+					var/amount_per_bottle = clamp(reagents.total_volume / count, 0, MAX_UNITS_PER_BOTTLE)
 					while(count--)
 						if(reagents.total_volume <= 0)
 							to_chat(usr, "<span class='notice'>Not enough reagents to create these bottles!</span>")
 							return
-						var/obj/item/weapon/reagent_containers/glass/bottle/P = new(loc)
+						var/obj/item/reagent_containers/glass/bottle/P = new(loc)
 						P.name = "[answer] bottle"
 						P.pixel_x = rand(-7, 7) // random position
 						P.pixel_y = rand(-7, 7)
@@ -374,7 +374,7 @@
 						return
 					tgui_act("modal_open", list("id" = "create_bottle", "arguments" = list("num" = answer)), ui, state)
 				if("change_bottle_style")
-					var/new_style = CLAMP(text2num(answer) || 0, 0, MAX_BOTTLE_SPRITE)
+					var/new_style = clamp(text2num(answer) || 0, 0, MAX_BOTTLE_SPRITE)
 					if(!new_style)
 						return
 					bottlesprite = new_style
@@ -419,7 +419,7 @@
 			visible_message("<span class='notice'>[src] rattles and prints out a sheet of paper.</span>")
 			// playsound(loc, 'sound/goonstation/machines/printer_dotmatrix.ogg', 50, 1)
 
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(loc)
+			var/obj/item/paper/P = new /obj/item/paper(loc)
 			P.info = "<center><b>Chemical Analysis</b></center><br>"
 			P.info += "<b>Time of analysis:</b> [worldtime2stationtime(world.time)]<br><br>"
 			P.info += "<b>Chemical name:</b> [R.name]<br>"
@@ -468,7 +468,7 @@
 		if("create_condi_bottle")
 			if(!condi || !reagents.total_volume)
 				return
-			var/obj/item/weapon/reagent_containers/food/condiment/P = new(loc)
+			var/obj/item/reagent_containers/food/condiment/P = new(loc)
 			reagents.trans_to_obj(P, 50)
 		else
 			return FALSE

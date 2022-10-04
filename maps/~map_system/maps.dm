@@ -1,6 +1,6 @@
 
-var/datum/map/using_map = new USING_MAP_DATUM
-var/list/all_maps = list()
+var/global/datum/map/using_map = new USING_MAP_DATUM
+var/global/list/all_maps = list()
 
 /hook/startup/proc/initialise_map_list()
 	for(var/type in typesof(/datum/map) - /datum/map)
@@ -32,6 +32,7 @@ var/list/all_maps = list()
 	var/static/list/contact_levels = list() // Z-levels that can be contacted from the station, for eg announcements
 	var/static/list/player_levels = list()  // Z-levels a character can typically reach
 	var/static/list/sealed_levels = list()  // Z-levels that don't allow random transit at edge
+	var/static/list/underground_levels = list()	// Z-levels that are underground.
 	var/static/list/xenoarch_exempt_levels = list()	//Z-levels exempt from xenoarch finds and digsites spawning.
 	var/static/list/persist_levels = list() // Z-levels where SSpersistence should persist between rounds. Defaults to station_levels if unset.
 	var/static/list/secret_levels = list() // Z-levels that (non-admin) ghosts can't get to
@@ -99,8 +100,11 @@ var/list/all_maps = list()
 
 	var/datum/skybox_settings/default_skybox // What skybox do we use if a zlevel doesn't have a custom one? Provide a type.
 
-	var/lobby_icon = 'icons/misc/title.dmi' // The icon which contains the lobby image(s)
-	var/list/lobby_screens = list("mockingjay00")                 // The list of lobby screen to pick() from. If left unset the first icon state is always selected.
+	var/list/lobby_screens = list('icons/default_lobby.png')                 // The list of lobby screen to pick() from.
+	var/current_lobby_screen
+
+	var/decl/music_track/lobby_track                     // The track that will play in the lobby screen.
+	var/list/lobby_tracks = list()                  // The list of lobby tracks to pick() from. If left unset will randomly select among all available /music_track subtypes.
 
 	var/default_law_type = /datum/ai_laws/nanotrasen // The default lawset use by synth units, if not overriden by their laws var.
 
@@ -113,6 +117,67 @@ var/list/all_maps = list()
 	var/list/unit_test_z_levels //To test more than Z1, set your z-levels to test here.
 
 	var/list/planet_datums_to_make = list() // Types of `/datum/planet`s that will be instantiated by SSPlanets.
+
+	// CENTCOM Areas
+	var/list/centcom_areas = list (
+	/area/centcom,
+	/area/shuttle/escape/centcom,
+	/area/shuttle/escape_pod1/centcom,
+	/area/shuttle/escape_pod2/centcom,
+	/area/shuttle/escape_pod3/centcom,
+	/area/shuttle/escape_pod5/centcom,
+	/area/shuttle/transport1/centcom,
+	/area/shuttle/administration/centcom,
+	/area/shuttle/specops/centcom,
+	)
+
+	//Station Areas
+	var/list/the_station_areas = list (
+	/area/shuttle/arrival,
+	/area/shuttle/escape/station,
+	/area/shuttle/escape_pod1/station,
+	/area/shuttle/escape_pod2/station,
+	/area/shuttle/escape_pod3/station,
+	/area/shuttle/escape_pod5/station,
+	/area/shuttle/mining/station,
+	/area/shuttle/transport1/station,
+	/area/shuttle/prison/station,
+	/area/shuttle/administration/station,
+	/area/shuttle/specops/station,
+	/area/maintenance,
+	/area/hallway,
+	/area/bridge,
+	/area/crew_quarters,
+	/area/holodeck,
+	/area/mint,
+	/area/library,
+	/area/chapel,
+	/area/lawoffice,
+	/area/engineering,
+	/area/solar,
+	/area/assembly,
+	/area/teleporter,
+	/area/medical,
+	/area/security,
+	/area/quartermaster,
+	/area/janitor,
+	/area/hydroponics,
+	/area/rnd,
+	/area/storage,
+	/area/construction,
+	/area/ai_monitored/storage/eva,
+	/area/ai_monitored/storage/secure,
+	/area/ai_monitored/storage/emergency,
+	/area/ai_upload,
+	/area/ai_upload_foyer,
+	/area/ai
+	)
+
+	//Hallway Areas
+	var/hallway_areas = /area/hallway
+	//Maintenance Areas
+	var/maintenance_areas = /area/maintenance
+
 
 /datum/map/New()
 	..()
@@ -131,6 +196,7 @@ var/list/all_maps = list()
 		default_skybox = new default_skybox()
 	else
 		default_skybox = new()
+	current_lobby_screen = pick(lobby_screens)
 
 // Gets the current time on a current zlevel, and returns a time datum
 /datum/map/proc/get_zlevel_time(var/z)
@@ -183,25 +249,28 @@ var/list/all_maps = list()
 	return text2num(pickweight(candidates))
 
 /datum/map/proc/get_empty_zlevel()
+	// Try to free up a z level from existing temp sectors
+	if(!empty_levels.len)
+		for(var/Z in map_sectors)
+			var/obj/effect/overmap/visitable/sector/temporary/T = map_sectors[Z]
+			T.cleanup() // If we can release some of these, do that.
+
+	// Else, we need to buy a new one.
 	if(!empty_levels.len)
 		world.increment_max_z()
 		empty_levels += world.maxz
 	return pick_n_take(empty_levels)
 
 /datum/map/proc/cache_empty_zlevel(var/z)
-	empty_levels |= z
+	if(z) // Else, it's not a valid z and we want to expunge it
+		empty_levels |= z
 
 // Get a list of 'nearby' or 'connected' zlevels.
 // You should at least return a list with the given z if nothing else.
 /datum/map/proc/get_map_levels(var/srcz, var/long_range = FALSE, var/om_range = -1)
-	//Overmap behavior
-	if(use_overmap)
-		//Get what sector we're in
-		var/obj/effect/overmap/visitable/O = get_overmap_sector(srcz)
-		if(!istype(O))
-			//Not in a sector, just the passed zlevel
-			return list(srcz)
-
+	//Get what sector we're in
+	var/obj/effect/overmap/visitable/O = get_overmap_sector(srcz)
+	if(istype(O))
 		//Just the sector we're in
 		if(om_range == -1)
 			return O.map_z.Copy()
@@ -214,7 +283,7 @@ var/list/all_maps = list()
 			connections += V.map_z // Adding list to list adds contents
 		return connections
 
-	//Traditional behavior
+	//Traditional behavior, if not in an overmap sector
 	else
 		//If long range, and they're at least in contact levels, return contact levels.
 		if (long_range && (srcz in contact_levels))
@@ -267,14 +336,18 @@ var/list/all_maps = list()
 	var/turf/base_turf		// Type path of the base turf for this z
 	var/transit_chance = 0	// Percentile chance this z will be chosen for map-edge space transit.
 
-// Holomaps
+	// Holomaps
 	var/holomap_offset_x = -1	// Number of pixels to offset the map right (for centering) for this z
 	var/holomap_offset_y = -1	// Number of pixels to offset the map up (for centering) for this z
 	var/holomap_legend_x = 96	// x position of the holomap legend for this z
 	var/holomap_legend_y = 96	// y position of the holomap legend for this z
 
-// Skybox
+	// Skybox
 	var/datum/skybox_settings/custom_skybox  // Can override skybox type here for this z
+
+	// List of regions for GameMaster events
+	var/list/event_regions = list()
+
 
 // Default constructor applies itself to the parent map datum
 /datum/map_z_level/New(var/datum/map/map)
@@ -287,6 +360,7 @@ var/list/all_maps = list()
 	if(flags & MAP_LEVEL_SEALED) map.sealed_levels += z
 	if(flags & MAP_LEVEL_XENOARCH_EXEMPT) map.xenoarch_exempt_levels += z
 	if(flags & MAP_LEVEL_PERSIST) map.persist_levels += z
+	if(flags & MAP_LEVEL_UNDERGROUND) map.underground_levels += z
 	if(flags & MAP_LEVEL_EMPTY)
 		if(!map.empty_levels) map.empty_levels = list()
 		map.empty_levels += z
@@ -323,3 +397,24 @@ var/list/all_maps = list()
 
 /datum/map/proc/get_map_info()
 	return "No map information available"
+
+/datum/map/proc/show_titlescreen(client/C)
+	winset(C, "lobbybrowser", "is-disabled=false;is-visible=true")
+
+	show_browser(C, current_lobby_screen, "file=titlescreen.png;display=0")
+	show_browser(C, file('html/lobby_titlescreen.html'), "window=lobbybrowser")
+
+/datum/map/proc/hide_titlescreen(client/C)
+	if(C.mob) // Check if the client is still connected to something
+		// Hide title screen, allowing player to see the map
+		winset(C, "lobbybrowser", "is-disabled=true;is-visible=false")
+
+/datum/map/proc/get_lobby_track(var/exclude)
+	var/lobby_track_type
+	if(LAZYLEN(lobby_tracks) == 1)
+		lobby_track_type = lobby_tracks[1]
+	else if(LAZYLEN(lobby_tracks))
+		lobby_track_type = pickweight(lobby_tracks - exclude)
+	else
+		lobby_track_type = pick(subtypesof(/decl/music_track) - exclude)
+	return GET_DECL(lobby_track_type)

@@ -50,6 +50,21 @@
 	icon_state = "oracarpet"
 	initial_flooring = /decl/flooring/carpet/oracarpet
 
+/turf/simulated/floor/carpet/geo
+	name = "geometric carpet"
+	icon_state = "geocarpet"
+	initial_flooring = /decl/flooring/carpet/geo
+
+/turf/simulated/floor/carpet/retro
+	name = "blue retro carpet"
+	icon_state = "retrocarpet"
+	initial_flooring = /decl/flooring/carpet/retro
+
+/turf/simulated/floor/carpet/retro_red
+	name = "red retro carpet"
+	icon_state = "retrocarpet_red"
+	initial_flooring = /decl/flooring/carpet/retro_red
+
 /turf/simulated/floor/bluegrid
 	name = "mainframe floor"
 	icon = 'icons/turf/flooring/circuit.dmi'
@@ -77,7 +92,6 @@
 
 /turf/simulated/floor/wood/sif
 	name = "alien wooden floor"
-	icon = 'icons/turf/flooring/wood.dmi'
 	icon_state = "sifwood"
 	initial_flooring = /decl/flooring/wood/sif
 
@@ -87,6 +101,18 @@
 /turf/simulated/floor/wood/sif/broken/Initialize()
 	break_tile()
 	return ..()
+
+/turf/simulated/floor/wood/tile
+	icon_state = "wood_tile"
+	initial_flooring = /decl/flooring/wood/tile
+
+/turf/simulated/floor/wood/panel
+	icon_state = "wood_panel"
+	initial_flooring = /decl/flooring/wood/panel
+
+/turf/simulated/floor/wood/parquet
+	icon_state = "wood_parquet"
+	initial_flooring = /decl/flooring/wood/parquet
 
 /turf/simulated/floor/grass
 	name = "grass patch"
@@ -225,6 +251,10 @@
 /turf/simulated/floor/reinforced/nitrogen
 	oxygen = 0
 	nitrogen = ATMOSTANK_NITROGEN
+
+/turf/simulated/floor/reinforced/supermatter_core
+	oxygen = 0
+	nitrogen = MOLES_N2STANDARD
 
 /turf/simulated/floor/reinforced/oxygen
 	oxygen = ATMOSTANK_OXYGEN
@@ -426,16 +456,23 @@
 /turf/simulated/floor/snow/Entered(atom/A)
 	if(isliving(A))
 		var/mob/living/L = A
-		if(L.hovering) // Flying things shouldn't make footprints.
+		var/footprint_state = L.get_snow_footprint_state()
+		if(!footprint_state)
 			return ..()
 		var/mdir = "[A.dir]"
-		crossed_dirs[mdir] = 1
+		crossed_dirs[mdir] = footprint_state
 		update_icon()
 	. = ..()
 
 /turf/simulated/floor/snow/update_icon()
 	..()
 	for(var/d in crossed_dirs)
-		add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = "snow_footprints", dir = text2num(d)))
+		add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = crossed_dirs[d], dir = text2num(d)))
 
 //**** Here ends snow ****
+
+/turf/simulated/floor/concrete
+	name = "concrete"
+	icon = 'icons/turf/concrete.dmi'
+	icon_state = "concrete"
+	initial_flooring = /decl/flooring/concrete

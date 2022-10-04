@@ -1,7 +1,7 @@
 /obj/machinery/computer/fusion_core_control
 	name = "\improper R-UST Mk. 8 core control"
 	light_color = COLOR_ORANGE
-	circuit = /obj/item/weapon/circuitboard/fusion_core_control
+	circuit = /obj/item/circuitboard/fusion_core_control
 
 	icon_keyboard = "tech_key"
 	icon_screen = "core_control"
@@ -12,8 +12,8 @@
 	var/obj/machinery/power/fusion_core/cur_viewed_device
 	var/datum/tgui_module/rustcore_monitor/monitor
 
-/obj/machinery/computer/fusion_core_control/New()
-	..()
+/obj/machinery/computer/fusion_core_control/Initialize()
+	. = ..()
 	monitor = new(src)
 	monitor.core_tag = id_tag
 
@@ -23,7 +23,7 @@
 
 /obj/machinery/computer/fusion_core_control/attackby(var/obj/item/thing, var/mob/user)
 	..()
-	if(istype(thing, /obj/item/device/multitool))
+	if(istype(thing, /obj/item/multitool))
 		var/new_ident = sanitize_text(input("Enter a new ident tag.", "Core Control", monitor.core_tag) as null|text)
 		if(new_ident && user.Adjacent(src))
 			monitor.core_tag = new_ident
@@ -162,7 +162,7 @@
 		return
 
 	if(href_list["access_device"])
-		var/idx = CLAMP(text2num(href_list["toggle_active"]), 1, connected_devices.len)
+		var/idx = clamp(text2num(href_list["toggle_active"]), 1, connected_devices.len)
 		cur_viewed_device = connected_devices[idx]
 		updateUsrDialog()
 		return 1

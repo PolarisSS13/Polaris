@@ -171,11 +171,11 @@
 /obj/machinery/computer/HolodeckControl/proc/update_projections()
 	if (safety_disabled)
 		item_power_usage = 2500
-		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
+		for(var/obj/item/holo/esword/H in linkedholodeck)
 			H.damtype = BRUTE
 	else
 		item_power_usage = initial(item_power_usage)
-		for(var/obj/item/weapon/holo/esword/H in linkedholodeck)
+		for(var/obj/item/holo/esword/H in linkedholodeck)
 			H.damtype = initial(H.damtype)
 
 	for(var/mob/living/simple_mob/animal/space/carp/holodeck/C in holographic_mobs)
@@ -183,8 +183,8 @@
 		if (last_to_emag)
 			C.friends = list(last_to_emag)
 
-/obj/machinery/computer/HolodeckControl/New()
-	..()
+/obj/machinery/computer/HolodeckControl/Initialize()
+	. = ..()
 	current_program = powerdown_program
 	linkedholodeck = locate(projection_area)
 	if(!linkedholodeck)
@@ -232,7 +232,7 @@
 
 			for(var/turf/T in linkedholodeck)
 				if(prob(30))
-					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+					var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 					s.set_up(2, 1, T)
 					s.start()
 				T.ex_act(3)
@@ -314,6 +314,9 @@
 	for(var/obj/effect/decal/cleanable/blood/B in linkedholodeck)
 		qdel(B)
 
+	for(var/obj/effect/landmark/L in linkedholodeck)
+		qdel(L)
+
 	holographic_objs = A.copy_contents_to(linkedholodeck , 1)
 	for(var/obj/holo_obj in holographic_objs)
 		holo_obj.alpha *= 0.8 //give holodeck objs a slight transparency
@@ -331,10 +334,11 @@
 
 	spawn(30)
 		for(var/obj/effect/landmark/L in linkedholodeck)
+			L.delete_me = 1
 			if(L.name=="Atmospheric Test Start")
 				spawn(20)
 					var/turf/T = get_turf(L)
-					var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+					var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 					s.set_up(2, 1, T)
 					s.start()
 					if(T)

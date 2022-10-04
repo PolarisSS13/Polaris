@@ -4,28 +4,28 @@
 	if(!target || !alien_caste) return
 
 	var/mob/living/carbon/human/new_alien = new(target)
-	new_alien.set_species("Xenomorph [alien_caste]")
+	new_alien.set_species("Skathari [alien_caste]")
 	return new_alien
 
-/mob/living/carbon/human/xdrone/New(var/new_loc)
+/mob/living/carbon/human/xdrone/Initialize(var/ml)
 	h_style = "Bald"
 	faction = "xeno"
-	..(new_loc, SPECIES_XENO_DRONE)
+	. = ..(ml, SPECIES_XENO_DRONE)
 
-/mob/living/carbon/human/xsentinel/New(var/new_loc)
+/mob/living/carbon/human/xsentinel/Initialize(var/ml)
 	h_style = "Bald"
 	faction = "xeno"
-	..(new_loc, SPECIES_XENO_SENTINEL)
+	. = ..(ml, SPECIES_XENO_SENTINEL)
 
-/mob/living/carbon/human/xhunter/New(var/new_loc)
+/mob/living/carbon/human/xhunter/Initialize(var/ml)
 	h_style = "Bald"
 	faction = "xeno"
-	..(new_loc, SPECIES_XENO_HUNTER)
+	. = ..(ml, SPECIES_XENO_HUNTER)
 
-/mob/living/carbon/human/xqueen/New(var/new_loc)
+/mob/living/carbon/human/xqueen/Initialize(var/ml)
 	h_style = "Bald"
 	faction = "xeno"
-	..(new_loc, SPECIES_XENO_QUEEN)
+	. = ..(ml, SPECIES_XENO_QUEEN)
 
 // I feel like we should generalize/condense down all the various icon-rendering antag procs.
 /*----------------------------------------

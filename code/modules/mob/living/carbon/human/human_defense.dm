@@ -38,7 +38,7 @@ emp_act
 		if(!prob(armor/2))		//Even if the armor doesn't stop the bullet from hurting you, it might stop it from embedding.
 			var/hit_embed_chance = P.embed_chance + (P.damage - armor)	//More damage equals more chance to embed
 			if(prob(max(hit_embed_chance, 0)))
-				var/obj/item/weapon/material/shard/shrapnel/SP = new()
+				var/obj/item/material/shard/shrapnel/SP = new()
 				SP.name = (P.name != "shrapnel")? "[P.name] shrapnel" : "shrapnel"
 				SP.desc = "[SP.desc] It looks like it was fired from [P.shot_from]."
 				SP.loc = organ
@@ -325,7 +325,7 @@ emp_act
 
 		if(!stat)
 			switch(hit_zone)
-				if("head")//Harder to score a stun but if you do it lasts a bit longer
+				if(BP_HEAD)//Harder to score a stun but if you do it lasts a bit longer
 					if(prob(effective_force))
 						apply_effect(20, PARALYZE, blocked, soaked)
 						visible_message("<span class='danger'>\The [src] has been knocked unconscious!</span>")
@@ -339,7 +339,7 @@ emp_act
 						if(glasses && prob(33))
 							glasses.add_blood(src)
 							update_inv_glasses(0)
-				if("chest")//Easier to score a stun but lasts less time
+				if(BP_TORSO)//Easier to score a stun but lasts less time
 					if(prob(effective_force + 10))
 						apply_effect(6, WEAKEN, blocked, soaked)
 						visible_message("<span class='danger'>\The [src] has been knocked down!</span>")
@@ -547,8 +547,8 @@ emp_act
 	if(damtype != BURN && damtype != BRUTE) return
 
 	// The rig might soak this hit, if we're wearing one.
-	if(istype(get_rig(),/obj/item/weapon/rig))
-		var/obj/item/weapon/rig/rig = get_rig()
+	if(istype(get_rig(),/obj/item/rig))
+		var/obj/item/rig/rig = get_rig()
 		rig.take_hit(damage)
 
 	// We may also be taking a suit breach.
@@ -604,7 +604,7 @@ emp_act
 	var/converted_protection = 1 - protection
 	var/perm = reagent_permeability()
 	converted_protection *= perm
-	return CLAMP(1-converted_protection, 0, 1)
+	return clamp(1-converted_protection, 0, 1)
 
 /mob/living/carbon/human/water_act(amount)
 	adjust_fire_stacks(-amount * 5)
@@ -614,7 +614,7 @@ emp_act
 
 	species.handle_water_damage(src, amount)
 
-/mob/living/carbon/human/shank_attack(obj/item/W, obj/item/weapon/grab/G, mob/user, hit_zone)
+/mob/living/carbon/human/shank_attack(obj/item/W, obj/item/grab/G, mob/user, hit_zone)
 
 	if(!..())
 		return 0

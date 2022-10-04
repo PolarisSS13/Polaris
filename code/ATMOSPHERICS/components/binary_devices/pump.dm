@@ -37,10 +37,12 @@ Thus, the two variables affect pump operation are set in New():
 	var/id = null
 	var/datum/radio_frequency/radio_connection
 
-/obj/machinery/atmospherics/binary/pump/New()
-	..()
+/obj/machinery/atmospherics/binary/pump/Initialize()
+	. = ..()
 	air1.volume = ATMOS_DEFAULT_VOLUME_PUMP
 	air2.volume = ATMOS_DEFAULT_VOLUME_PUMP
+	if(frequency)
+		set_frequency(frequency)
 
 /obj/machinery/atmospherics/binary/pump/Destroy()
 	unregister_radio(src, frequency)
@@ -166,11 +168,6 @@ Thus, the two variables affect pump operation are set in New():
 
 	return data
 
-/obj/machinery/atmospherics/binary/pump/Initialize()
-	. = ..()
-	if(frequency)
-		set_frequency(frequency)
-
 /obj/machinery/atmospherics/binary/pump/receive_signal(datum/signal/signal)
 	if(!signal.data["tag"] || (signal.data["tag"] != id) || (signal.data["sigtype"]!="command"))
 		return 0
@@ -242,7 +239,7 @@ Thus, the two variables affect pump operation are set in New():
 	if(old_stat != stat)
 		update_icon()
 
-/obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/binary/pump/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.is_wrench())
 		return ..()
 	if (!(stat & NOPOWER) && use_power)

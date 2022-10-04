@@ -33,9 +33,11 @@
 	var/block_tele = FALSE      // If true, most forms of teleporting to or from this turf tile will fail.
 	var/can_build_into_floor = FALSE // Used for things like RCDs (and maybe lattices/floor tiles in the future), to see if a floor should replace it.
 	var/list/dangerous_objects // List of 'dangerous' objs that the turf holds that can cause something bad to happen when stepped on, used for AI mobs.
+	var/tmp/changing_turf
 
 /turf/Initialize(mapload)
 	. = ..()
+	
 	for(var/atom/movable/AM in src)
 		Entered(AM)
 
@@ -48,9 +50,14 @@
 		pathweight = movement_cost
 
 /turf/Destroy()
-	. = QDEL_HINT_IWILLGC
+	if (!changing_turf)
+		crash_with("Improper turf qdel. Do not qdel turfs directly.")
+	changing_turf = FALSE
 	cleanbot_reserved_turfs -= src
+	if(connections)
+		connections.erase_all()
 	..()
+	return QDEL_HINT_IWILLGC
 
 /turf/ex_act(severity)
 	return 0
@@ -93,15 +100,15 @@
 		step(user.pulling, get_dir(user.pulling.loc, src))
 	return 1
 
-/turf/attackby(obj/item/weapon/W as obj, mob/user as mob)
-	if(istype(W, /obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = W
+/turf/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W, /obj/item/storage))
+		var/obj/item/storage/S = W
 		if(S.use_to_pickup && S.collection_mode)
 			S.gather_all(src, user)
 	return ..()
 
 // Hits a mob on the tile.
-/turf/proc/attack_tile(obj/item/weapon/W, mob/living/user)
+/turf/proc/attack_tile(obj/item/W, mob/living/user)
 	if(!istype(W))
 		return FALSE
 
@@ -365,7 +372,7 @@
 // This is all the way up here since its the common ancestor for things that need to get replaced with a floor when an RCD is used on them.
 // More specialized turfs like walls should instead override this.
 // The code for applying lattices/floor tiles onto lattices could also utilize something similar in the future.
-/turf/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/turf/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	if(density || !can_build_into_floor)
 		return FALSE
 	if(passed_mode == RCD_FLOORWALL)
@@ -380,7 +387,7 @@
 			)
 	return FALSE
 
-/turf/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/turf/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	if(passed_mode == RCD_FLOORWALL)
 		to_chat(user, span("notice", "You build a floor."))
 		ChangeTurf(/turf/simulated/floor/airless, preserve_outdoors = TRUE)

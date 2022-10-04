@@ -6,6 +6,7 @@
 	chaotic_threshold = EVENT_CHAOS_THRESHOLD_LOW_IMPACT
 	event_type = /datum/event2/event/ghost_pod_spawner/stowaway
 	var/safe_for_extended = FALSE
+	regions = list(EVENT_REGION_PLAYER_MAIN_AREA)
 
 /datum/event2/meta/stowaway/normal
 	name = "stowaway - normal"
@@ -35,7 +36,6 @@
 
 /datum/event2/event/ghost_pod_spawner/stowaway
 	pod_type = /obj/structure/ghost_pod/ghost_activated/human
-	desired_turf_areas = list(/area/maintenance)
 	announce_delay_lower_bound = 15 MINUTES
 	announce_delay_upper_bound = 30 MINUTES
 	var/antag_type = MODE_STOWAWAY

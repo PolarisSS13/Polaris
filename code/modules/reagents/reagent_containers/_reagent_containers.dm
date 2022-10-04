@@ -1,4 +1,4 @@
-/obj/item/weapon/reagent_containers
+/obj/item/reagent_containers
 	name = "Container"
 	desc = "..."
 	icon = 'icons/obj/chemical.dmi'
@@ -8,7 +8,7 @@
 	var/possible_transfer_amounts = list(5,10,15,25,30)
 	var/volume = 30
 
-/obj/item/weapon/reagent_containers/verb/set_APTFT() //set amount_per_transfer_from_this
+/obj/item/reagent_containers/verb/set_APTFT() //set amount_per_transfer_from_this
 	set name = "Set transfer amount"
 	set category = "Object"
 	set src in range(0)
@@ -16,24 +16,24 @@
 	if(N)
 		amount_per_transfer_from_this = N
 
-/obj/item/weapon/reagent_containers/Initialize()
+/obj/item/reagent_containers/Initialize()
 	. = ..()
 	if(!possible_transfer_amounts)
-		src.verbs -= /obj/item/weapon/reagent_containers/verb/set_APTFT
+		src.verbs -= /obj/item/reagent_containers/verb/set_APTFT
 	create_reagents(volume)
 
-/obj/item/weapon/reagent_containers/attack_self(mob/user as mob)
+/obj/item/reagent_containers/attack_self(mob/user as mob)
 	return
 
-/obj/item/weapon/reagent_containers/afterattack(obj/target, mob/user, flag)
+/obj/item/reagent_containers/afterattack(obj/target, mob/user, flag)
 	return
 
-/obj/item/weapon/reagent_containers/proc/reagentlist() // For attack logs
+/obj/item/reagent_containers/proc/reagentlist() // For attack logs
 	if(reagents)
 		return reagents.get_reagents()
 	return "No reagent holder"
 
-/obj/item/weapon/reagent_containers/proc/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target) // This goes into afterattack
+/obj/item/reagent_containers/proc/standard_dispenser_refill(var/mob/user, var/obj/structure/reagent_dispensers/target) // This goes into afterattack
 	if(!istype(target))
 		return 0
 
@@ -49,7 +49,7 @@
 	to_chat(user, "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>")
 	return 1
 
-/obj/item/weapon/reagent_containers/proc/standard_splash_mob(var/mob/user, var/mob/target) // This goes into afterattack
+/obj/item/reagent_containers/proc/standard_splash_mob(var/mob/user, var/mob/target) // This goes into afterattack
 	if(!istype(target))
 		return
 
@@ -67,68 +67,56 @@
 	reagents.splash(target, reagents.total_volume)
 	return 1
 
-/obj/item/weapon/reagent_containers/proc/self_feed_message(var/mob/user)
+/obj/item/reagent_containers/proc/self_feed_message(var/mob/user)
 	to_chat(user, "<span class='notice'>You eat \the [src]</span>")
 
-/obj/item/weapon/reagent_containers/proc/other_feed_message_start(var/mob/user, var/mob/target)
+/obj/item/reagent_containers/proc/other_feed_message_start(var/mob/user, var/mob/target)
 	user.visible_message("<span class='warning'>[user] is trying to feed [target] \the [src]!</span>")
 
-/obj/item/weapon/reagent_containers/proc/other_feed_message_finish(var/mob/user, var/mob/target)
+/obj/item/reagent_containers/proc/other_feed_message_finish(var/mob/user, var/mob/target)
 	user.visible_message("<span class='warning'>[user] has fed [target] \the [src]!</span>")
 
-/obj/item/weapon/reagent_containers/proc/feed_sound(var/mob/user)
+/obj/item/reagent_containers/proc/feed_sound(var/mob/user)
 	return
 
-/obj/item/weapon/reagent_containers/proc/standard_feed_mob(var/mob/user, var/mob/target) // This goes into attack
-	if(!istype(target))
-		return 0
+/obj/item/reagent_containers/proc/standard_feed_mob(var/mob/user, var/mob/target) // This goes into attack
+	if(!istype(target) || !target.can_feed())
+		return FALSE
 
 	if(!reagents || !reagents.total_volume)
 		to_chat(user, "<span class='notice'>\The [src] is empty.</span>")
-		return 1
+		return TRUE
 
-	if(target == user)
-		if(istype(user, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = user
-			if(!H.check_has_mouth())
-				to_chat(user, "Where do you intend to put \the [src]? You don't have a mouth!")
-				return
-			var/obj/item/blocked = H.check_mouth_coverage()
-			if(blocked)
-				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-				return
+	if(ishuman(target))
+		var/mob/living/carbon/human/H = target
+		if(!H.check_has_mouth())
+			to_chat(user, "Where do you intend to put \the [src]? [user == target ? "You don't" : "\The [H] doesn't"] have a mouth!")
+			return FALSE
+		var/obj/item/blocked = H.check_mouth_coverage()
+		if(blocked)
+			to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
+			return FALSE
 
-		user.setClickCooldown(user.get_attack_speed(src)) //puts a limit on how fast people can eat/drink things
+	user.setClickCooldown(user.get_attack_speed(src)) //puts a limit on how fast people can eat/drink things
+	if(user == target)	
 		self_feed_message(user)
 		reagents.trans_to_mob(user, issmall(user) ? CEILING(amount_per_transfer_from_this/2, 1) : amount_per_transfer_from_this, CHEM_INGEST)
 		feed_sound(user)
-		return 1
+		return TRUE
+		
 	else
-		if(istype(target, /mob/living/carbon/human))
-			var/mob/living/carbon/human/H = target
-			if(!H.check_has_mouth())
-				to_chat(user, "Where do you intend to put \the [src]? \The [H] doesn't have a mouth!")
-				return
-			var/obj/item/blocked = H.check_mouth_coverage()
-			if(blocked)
-				to_chat(user, "<span class='warning'>\The [blocked] is in the way!</span>")
-				return
-
 		other_feed_message_start(user, target)
-
-		user.setClickCooldown(user.get_attack_speed(src))
 		if(!do_mob(user, target))
-			return
-
+			return FALSE
 		other_feed_message_finish(user, target)
 
 		var/contained = reagentlist()
 		add_attack_logs(user,target,"Fed from [src.name] containing [contained]")
 		reagents.trans_to_mob(target, amount_per_transfer_from_this, CHEM_INGEST)
 		feed_sound(user)
-		return 1
+		return TRUE
 
-/obj/item/weapon/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
+/obj/item/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
 	if(!target.is_open_container() || !target.reagents)
 		return 0
 

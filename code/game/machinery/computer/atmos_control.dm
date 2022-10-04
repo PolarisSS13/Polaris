@@ -1,4 +1,4 @@
-/obj/item/weapon/circuitboard/atmoscontrol
+/obj/item/circuitboard/atmoscontrol
 	name = "\improper Central Atmospherics Computer Circuitboard"
 	build_path = /obj/machinery/computer/atmoscontrol
 
@@ -10,20 +10,18 @@
 	light_color = "#00b000"
 	density = 1
 	anchored = 1.0
-	circuit = /obj/item/weapon/circuitboard/atmoscontrol
+	circuit = /obj/item/circuitboard/atmoscontrol
 	req_access = list(access_ce)
 	var/list/monitored_alarm_ids = null
 	var/datum/tgui_module/atmos_control/atmos_control
-
-/obj/machinery/computer/atmoscontrol/New()
-	..()
 
 /obj/machinery/computer/atmoscontrol/laptop //[TO DO] Change name to PCU and update mapdata to include replacement computers
 	name = "\improper Atmospherics PCU"
 	desc = "A personal computer unit. It seems to have only the Atmosphereics Control program installed."
 	icon_screen = "pcu_atmo"
-	icon_state = "pcu"
+	icon_state = "pcu_engi"
 	icon_keyboard = "pcu_key"
+	light_color = "#00cc00"
 	density = 0
 
 /obj/machinery/computer/atmoscontrol/attack_ai(var/mob/user as mob)

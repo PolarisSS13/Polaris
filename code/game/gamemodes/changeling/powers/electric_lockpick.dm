@@ -5,6 +5,7 @@
 	helptext = "Use the ability, then touch something that utilizes an electrical locking system, to open it.  Each use costs 10 chemicals."
 	ability_icon_state = "ling_electric_lockpick"
 	genomecost = 3
+	power_category = CHANGELING_POWER_ENHANCEMENTS
 	verbpath = /mob/proc/changeling_electric_lockpick
 
 //Emag-lite
@@ -21,28 +22,29 @@
 		return 0
 
 	if(held_item == null)
-		if(changeling_generic_weapon(/obj/item/weapon/finger_lockpick,0,5))  //Chemical cost is handled in the equip proc.
+		if(changeling_generic_weapon(/obj/item/finger_lockpick,0,5))  //Chemical cost is handled in the equip proc.
 			return 1
 		return 0
 
-/obj/item/weapon/finger_lockpick
+/obj/item/finger_lockpick
 	name = "finger lockpick"
 	desc = "This finger appears to be an organic datajack."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "electric_hand"
 	show_examine = FALSE
 
-/obj/item/weapon/finger_lockpick/New()
+/obj/item/finger_lockpick/Initialize()
+	. = ..()
 	if(ismob(loc))
 		to_chat(loc, "<span class='notice'>We shape our finger to fit inside electronics, and are ready to force them open.</span>")
 
-/obj/item/weapon/finger_lockpick/dropped(mob/user)
+/obj/item/finger_lockpick/dropped(mob/user)
 	to_chat(user, "<span class='notice'>We discreetly shape our finger back to a less suspicious form.</span>")
 	spawn(1)
 		if(src)
 			qdel(src)
 
-/obj/item/weapon/finger_lockpick/afterattack(var/atom/target, var/mob/living/user, proximity)
+/obj/item/finger_lockpick/afterattack(var/atom/target, var/mob/living/user, proximity)
 	if(!target)
 		return
 	if(!proximity)
@@ -80,7 +82,7 @@
 		else //Probably broken or no power.
 			to_chat(user, "<span class='warning'>The door does not respond to the pulse.</span>")
 		door.add_fingerprint(user)
-		log_and_message_admins("finger-lockpicked \an [door].")
+		log_and_message_admins("finger-lockpicked \an [door].", user)
 		ling_datum.chem_charges -= 10
 		return 1
 
@@ -89,7 +91,7 @@
 		to_chat(user, "<span class='notice'>We send an electrical pulse up our finger, and into \the [O].</span>")
 		O.add_fingerprint(user)
 		O.emag_act(1,user,src)
-		log_and_message_admins("finger-lockpicked \an [O].")
+		log_and_message_admins("finger-lockpicked \an [O].", user)
 		ling_datum.chem_charges -= 10
 
 		return 1

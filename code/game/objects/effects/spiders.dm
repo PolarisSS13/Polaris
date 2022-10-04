@@ -20,7 +20,19 @@
 				qdel(src)
 	return
 
-/obj/effect/spider/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/effect/spider/attack_generic(mob/user)
+	if(isanimal(user))
+		var/mob/living/simple_mob/animal/critter = user
+		if(critter.melee_damage_lower > 0)
+			critter.do_attack_animation(src)
+			critter.setClickCooldown(critter.base_attack_cooldown)
+			visible_message(SPAN_WARNING("\The [src] has been [pick(critter.attacktext)] by \the [critter]!"))
+			health -= rand(critter.melee_damage_lower, critter.melee_damage_upper)
+			healthcheck()
+			return TRUE
+	. = ..()
+
+/obj/effect/spider/attackby(var/obj/item/W, var/mob/user)
 	user.setClickCooldown(user.get_attack_speed(W))
 
 	if(W.attack_verb.len)
@@ -30,8 +42,8 @@
 
 	var/damage = W.force / 4.0
 
-	if(istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	if(istype(W, /obj/item/weldingtool))
+		var/obj/item/weldingtool/WT = W
 
 		if(WT.remove_fuel(0, user))
 			damage = 15
@@ -57,9 +69,12 @@
 	health -= Proj.get_structure_damage()
 	healthcheck()
 
+/obj/effect/spider/proc/die()
+	qdel(src)
+
 /obj/effect/spider/proc/healthcheck()
 	if(health <= 0)
-		qdel(src)
+		die()
 
 /obj/effect/spider/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	if(exposed_temperature > 300 + T0C)
@@ -100,9 +115,9 @@
 	START_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/effect/spider/eggcluster/New(var/location, var/atom/parent)
+/obj/effect/spider/eggcluster/Initialize(var/ml, var/atom/parent)
 	get_light_and_color(parent)
-	..()
+	. = ..(ml)
 
 /obj/effect/spider/eggcluster/Destroy()
 	STOP_PROCESSING(SSobj, src)
@@ -141,7 +156,7 @@
 	layer = HIDING_LAYER
 	health = 3
 	var/last_itch = 0
-	var/amount_grown = -1
+	var/amount_grown = 0
 	var/obj/machinery/atmospherics/unary/vent_pump/entry_vent
 	var/travelling_in_vent = 0
 	var/list/grow_as = list(/mob/living/simple_mob/animal/giant_spider, /mob/living/simple_mob/animal/giant_spider/nurse, /mob/living/simple_mob/animal/giant_spider/hunter)
@@ -151,19 +166,18 @@
 /obj/effect/spider/spiderling/frost
 	grow_as = list(/mob/living/simple_mob/animal/giant_spider/frost)
 
-/obj/effect/spider/spiderling/New(var/location, var/atom/parent)
+/obj/effect/spider/spiderling/Initialize(var/ml, var/atom/parent)
 	pixel_x = rand(6,-6)
 	pixel_y = rand(6,-6)
 	START_PROCESSING(SSobj, src)
 	//50% chance to grow up
-	if(prob(50))
+	if(amount_grown != -1 && prob(50))
 		amount_grown = 1
 	get_light_and_color(parent)
-	..()
+	. = ..(ml)
 
 /obj/effect/spider/spiderling/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	walk(src, 0) // Because we might have called walk_to, we must stop the walk loop or BYOND keeps an internal reference to us forever.
 	return ..()
 
 /obj/effect/spider/spiderling/Bump(atom/user)
@@ -172,16 +186,17 @@
 	else
 		..()
 
-/obj/effect/spider/spiderling/proc/die()
+/obj/effect/spider/spiderling/die()
 	visible_message("<span class='alert'>[src] dies!</span>")
 	new /obj/effect/decal/cleanable/spiderling_remains(src.loc)
-	qdel(src)
+	..()
 
 /obj/effect/spider/spiderling/healthcheck()
 	if(health <= 0)
 		die()
 
 /obj/effect/spider/spiderling/process()
+	healthcheck()
 	if(travelling_in_vent)
 		if(istype(src.loc, /turf))
 			travelling_in_vent = 0
@@ -293,8 +308,9 @@
 	icon_state = "cocoon1"
 	health = 60
 
-/obj/effect/spider/cocoon/New()
-		icon_state = pick("cocoon1","cocoon2","cocoon3")
+/obj/effect/spider/cocoon/Initialize()
+	. = ..()
+	icon_state = pick("cocoon1","cocoon2","cocoon3")
 
 /obj/effect/spider/cocoon/Destroy()
 	src.visible_message("<span class='warning'>\The [src] splits open.</span>")

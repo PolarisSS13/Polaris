@@ -7,6 +7,8 @@
 	pass_flags = PASSBLOB | PASSTABLE
 	faction = "blob"
 
+	organ_names = /decl/mob_organ_names/blob
+
 	heat_damage_per_tick = 0
 	cold_damage_per_tick = 0
 	min_oxy = 0
@@ -75,10 +77,13 @@
 	if(!ally)
 		var/list/items = L.get_all_held_items()
 		for(var/obj/item/I in items)
-			if(istype(I, /obj/item/weapon/blobcore_chunk))
-				var/obj/item/weapon/blobcore_chunk/BC = I
+			if(istype(I, /obj/item/blobcore_chunk))
+				var/obj/item/blobcore_chunk/BC = I
 				if(!overmind || (BC.blob_type && overmind.blob_type.type == BC.blob_type.type) || BC.blob_type.faction == faction)
 					ally = TRUE
 				break
 
 	return ally
+
+/decl/mob_organ_names/blob
+	hit_zones = list("mass")

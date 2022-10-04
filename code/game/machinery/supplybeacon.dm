@@ -36,15 +36,15 @@
 	var/expended
 	var/drop_type
 
-/obj/machinery/power/supply_beacon/New()
-	..()
+/obj/machinery/power/supply_beacon/Initialize()
+	. = ..()
 	if(!drop_type) drop_type = pick(supply_drop_random_loot_types())
 
 /obj/machinery/power/supply_beacon/supermatter
 	name = "supermatter supply beacon"
 	drop_type = "supermatter"
 
-/obj/machinery/power/supply_beacon/attackby(var/obj/item/weapon/W, var/mob/user)
+/obj/machinery/power/supply_beacon/attackby(var/obj/item/W, var/mob/user)
 	if(!use_power && W.is_wrench())
 		if(!anchored && !connect_to_network())
 			to_chat(user, "<span class='warning'>This device must be placed over an exposed cable.</span>")

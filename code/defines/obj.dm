@@ -4,7 +4,7 @@
 	anchored = 1
 	density = 1
 
-/obj/structure/signpost/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/signpost/attackby(obj/item/W as obj, mob/user as mob)
 	return attack_hand(user)
 
 /obj/structure/signpost/attack_hand(mob/user as mob)
@@ -43,7 +43,7 @@
  * This item is completely unused, but removing it will break something in R&D and Radio code causing PDA and Ninja code to fail on compile
  */
 
-/var/list/acting_rank_prefixes = list("acting", "temporary", "interim", "provisional")
+var/global/list/acting_rank_prefixes = list("acting", "temporary", "interim", "provisional")
 
 /proc/make_list_rank(rank)
 	for(var/prefix in acting_rank_prefixes)
@@ -85,7 +85,7 @@
 
 /obj/item/mouse_drag_pointer = MOUSE_ACTIVE_POINTER
 
-/obj/item/weapon/beach_ball
+/obj/item/beach_ball
 	icon = 'icons/misc/beach.dmi'
 	icon_state = "beachball"
 	name = "beach ball"
@@ -99,7 +99,7 @@
 	drop_sound = 'sound/items/drop/rubber.ogg'
 	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
-/obj/item/weapon/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
+/obj/item/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 	user.drop_item()
 	src.throw_at(target, throw_range, throw_speed, user)
 

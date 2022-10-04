@@ -58,7 +58,7 @@
 
 	intent = I_HELP
 
-	holder_type = /obj/item/weapon/holder/leech
+	holder_type = /obj/item/holder/leech
 
 	movement_cooldown = 0
 	aquatic_movement = -2
@@ -68,6 +68,8 @@
 	attack_armor_pen = 15
 	attack_sharp = TRUE
 	attacktext = list("nipped", "bit", "pinched")
+
+	organ_names = /decl/mob_organ_names/leech
 
 	armor = list(
 		"melee" = 10,
@@ -493,7 +495,10 @@
 
 	else if(istype(A, /obj/item))
 		var/obj/item/I = A
-		if(istype(I, /obj/item/weapon/reagent_containers/food/snacks))
+		if(istype(I, /obj/item/reagent_containers/food/snacks))
 			holder.a_intent = I_HURT
 	else
 		holder.a_intent = I_HURT
+
+/decl/mob_organ_names/leech
+	hit_zones = list("mouthparts", "central segment", "tail segment")

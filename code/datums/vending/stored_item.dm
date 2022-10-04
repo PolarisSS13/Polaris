@@ -90,6 +90,8 @@
 		for(var/obj/item/stack/T as anything in instances)
 			if(count <= 0)
 				break
+			if(T.get_amount() <= count)
+				instances -= T
 			count -= T.transfer_to(S, count)
 
 	S.forceMove(product_location)

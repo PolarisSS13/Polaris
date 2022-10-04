@@ -15,7 +15,7 @@ CHANGING ICONS
 Several new procs have been added to the /icon datum to simplify working with icons. To use them,
 remember you first need to setup an /icon var like so:
 
-var/icon/my_icon = new('iconfile.dmi')
+	var/icon/my_icon = new('iconfile.dmi')
 
 icon/ChangeOpacity(amount = 1)
     A very common operation in DM is to try to make an icon more or less transparent. Making an icon more
@@ -929,9 +929,9 @@ GLOBAL_LIST_EMPTY(cached_examine_icons)
 	if (!value) return color
 
 	var/list/RGB = ReadRGB(color)
-	RGB[1] = CLAMP(RGB[1]+value,0,255)
-	RGB[2] = CLAMP(RGB[2]+value,0,255)
-	RGB[3] = CLAMP(RGB[3]+value,0,255)
+	RGB[1] = clamp(RGB[1]+value,0,255)
+	RGB[2] = clamp(RGB[2]+value,0,255)
+	RGB[3] = clamp(RGB[3]+value,0,255)
 	return rgb(RGB[1],RGB[2],RGB[3])
 
 /proc/sort_atoms_by_layer(var/list/atoms)

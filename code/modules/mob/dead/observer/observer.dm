@@ -32,7 +32,7 @@
 
 	var/is_manifest = 0 //If set to 1, the ghost is able to whisper. Usually only set if a cultist drags them through the veil.
 	var/ghost_sprite = null
-	var/global/list/possible_ghost_sprites = list(
+	var/static/list/possible_ghost_sprites = list(
 		"Clear" = "blank",
 		"Green Blob" = "otherthing",
 		"Bland" = "ghost",
@@ -86,8 +86,9 @@
 	var/last_revive_notification = null // world.time of last notification, used to avoid spamming players from defibs or cloners.
 	var/cleanup_timer // Refernece to a timer that will delete this mob if no client returns
 
-/mob/observer/dead/New(mob/body)
+/mob/observer/dead/Initialize()
 
+	var/mob/body = loc
 	appearance = body
 	invisibility = INVISIBILITY_OBSERVER
 	layer = BELOW_MOB_LAYER
@@ -122,15 +123,22 @@
 		if(ishuman(body))
 			var/mob/living/carbon/human/H = body
 			add_overlay(H.overlays_standing)
-
-	if(!T)	T = pick(latejoin)			//Safety in case we cannot find the body's position
-	forceMove(T)
+		default_pixel_x = body.default_pixel_x
+		default_pixel_y = body.default_pixel_y
+	if(!T && length(latejoin))	
+		T = pick(latejoin)			//Safety in case we cannot find the body's position
+	if(T)
+		forceMove(T)
 
 	if(!name)							//To prevent nameless ghosts
 		name = capitalize(pick(first_names_male)) + " " + capitalize(pick(last_names))
 	real_name = name
 	animate(src, pixel_y = 2, time = 10, loop = -1)
-	..()
+	animate(pixel_y = default_pixel_y, time = 10, loop = -1)
+	. = ..()
+
+	exonet = new(src)
+	init_exonet()
 
 /mob/observer/dead/Topic(href, href_list)
 	if (href_list["track"])
@@ -142,7 +150,7 @@
 		return
 
 /mob/observer/dead/attackby(obj/item/W, mob/user)
-	if(istype(W,/obj/item/weapon/book/tome))
+	if(istype(W,/obj/item/book/tome))
 		var/mob/observer/dead/M = src
 		M.manifest(user)
 
@@ -464,10 +472,11 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 /mob/observer/dead/stop_orbit()
 	. = ..()
 	//restart our floating animation after orbit is done.
-	pixel_y = 0
-	pixel_x = 0
+	pixel_y = default_pixel_y
+	pixel_x = default_pixel_x
 	transform = null
 	animate(src, pixel_y = 2, time = 10, loop = -1)
+	animate(pixel_y = default_pixel_y, time = 10, loop = -1)
 
 /mob/observer/dead/proc/stop_following()
 	following = null
@@ -897,7 +906,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 
 		if(choice)
 			icon = 'icons/mob/ghost.dmi'
-			overlays.Cut()
+			cut_overlays()
 
 			if(icon_state && icon)
 				previous_state = icon_state
@@ -923,13 +932,13 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	
 	if(usr.client.prefs?.be_special & BE_PAI)
 		var/count = 0
-		for(var/obj/item/device/paicard/p in all_pai_cards)
-			var/obj/item/device/paicard/PP = p
+		for(var/obj/item/paicard/p in all_pai_cards)
+			var/obj/item/paicard/PP = p
 			if(PP.pai == null)
 				count++
-				PP.overlays += "pai-ghostalert"
+				PP.add_overlay("pai-ghostalert")
 				spawn(54)
-					PP.overlays.Cut()
+					PP.cut_overlays()
 		to_chat(usr,"<span class='notice'>Flashing the displays of [count] unoccupied PAIs.</span>")
 	else
 		to_chat(usr,"<span class='warning'>You have 'Be pAI' disabled in your character prefs, so we can't help you.</span>")

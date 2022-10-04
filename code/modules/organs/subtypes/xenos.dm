@@ -13,8 +13,8 @@
 /obj/item/organ/internal/xenos/eggsac/grey
 	icon_state = "sac_grey"
 
-/obj/item/organ/internal/xenos/eggsac/grey/colormatch/New()
-	..()
+/obj/item/organ/internal/xenos/eggsac/grey/colormatch/Initialize()
+	. = ..()
 	var/mob/living/carbon/human/H = null
 	spawn(15)
 		if(ishuman(owner))
@@ -48,14 +48,14 @@
 	adjust_plasma(1)
 
 /obj/item/organ/internal/xenos/plasmavessel/proc/adjust_plasma(var/amount = 0)
-	stored_plasma = CLAMP(stored_plasma + amount, 0, max_plasma)
+	stored_plasma = clamp(stored_plasma + amount, 0, max_plasma)
 
 /obj/item/organ/internal/xenos/plasmavessel/grey
 	icon_state = "plasma_grey"
 	stored_plasma = 200
 
-/obj/item/organ/internal/xenos/plasmavessel/grey/colormatch/New()
-	..()
+/obj/item/organ/internal/xenos/plasmavessel/grey/colormatch/Initialize()
+	. = ..()
 	var/mob/living/carbon/human/H = null
 	spawn(15)
 		if(ishuman(owner))
@@ -91,8 +91,8 @@
 /obj/item/organ/internal/xenos/acidgland/grey
 	icon_state = "acidgland_grey"
 
-/obj/item/organ/internal/xenos/acidgland/grey/colormatch/New()
-	..()
+/obj/item/organ/internal/xenos/acidgland/grey/colormatch/Initialize()
+	. = ..()
 	var/mob/living/carbon/human/H = null
 	spawn(15)
 		if(ishuman(owner))
@@ -108,8 +108,8 @@
 /obj/item/organ/internal/xenos/hivenode/grey
 	icon_state = "xenode_grey"
 
-/obj/item/organ/internal/xenos/hivenode/grey/colormatch/New()
-	..()
+/obj/item/organ/internal/xenos/hivenode/grey/colormatch/Initialize()
+	. = ..()
 	var/mob/living/carbon/human/H = null
 	spawn(15)
 		if(ishuman(owner))
@@ -130,8 +130,8 @@
 /obj/item/organ/internal/xenos/resinspinner/grey
 	icon_state = "xenode_grey"
 
-/obj/item/organ/internal/xenos/resinspinner/grey/colormatch/New()
-	..()
+/obj/item/organ/internal/xenos/resinspinner/grey/colormatch/Initialize()
+	. = ..()
 	var/mob/living/carbon/human/H = null
 	spawn(15)
 		if(ishuman(owner))

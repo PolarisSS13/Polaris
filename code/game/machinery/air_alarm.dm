@@ -50,7 +50,7 @@
 	panel_open = 0 // If it's been screwdrivered open.
 	var/aidisabled = 0
 	var/shorted = 0
-	circuit = /obj/item/weapon/circuitboard/airalarm
+	circuit = /obj/item/circuitboard/airalarm
 
 	var/datum/wires/alarm/wires
 
@@ -103,6 +103,9 @@
 /obj/machinery/alarm/Initialize(mapload)
 	. = ..()
 	first_run()
+	set_frequency(frequency)
+	if(!master_is_operating())
+		elect_master()
 
 /obj/machinery/alarm/Destroy()
 	unregister_radio(src, frequency)
@@ -130,12 +133,6 @@
 	TLV["other"] =			list(-1.0, -1.0, 0.5, 1.0) // Partial pressure, kpa
 	TLV["pressure"] =		list(ONE_ATMOSPHERE * 0.80, ONE_ATMOSPHERE * 0.90, ONE_ATMOSPHERE * 1.10, ONE_ATMOSPHERE * 1.20) /* kpa */
 	TLV["temperature"] =	list(T0C - 26, T0C, T0C + 40, T0C + 66) // K
-
-/obj/machinery/alarm/Initialize()
-	. = ..()
-	set_frequency(frequency)
-	if(!master_is_operating())
-		elect_master()
 
 /obj/machinery/alarm/process()
 	if((stat & (NOPOWER|BROKEN)) || shorted)
@@ -293,6 +290,7 @@
 	return 0
 
 /obj/machinery/alarm/update_icon()
+	cut_overlays()
 	if(panel_open)
 		icon_state = "alarmx"
 		set_light(0)
@@ -753,7 +751,7 @@
 	if(alarm_deconstruction_wirecutters(user, W))
 		return
 
-	if(istype(W, /obj/item/weapon/card/id) || istype(W, /obj/item/device/pda))// trying to unlock the interface with an ID card
+	if(istype(W, /obj/item/card/id) || istype(W, /obj/item/pda))// trying to unlock the interface with an ID card
 		togglelock()
 	return ..()
 

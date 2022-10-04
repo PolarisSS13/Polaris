@@ -42,9 +42,9 @@
 
 /obj/machinery/atmospherics/valve/init_dir()
 	switch(dir)
-		if(NORTH || SOUTH)
+		if(NORTH, SOUTH)
 			initialize_directions = NORTH|SOUTH
-		if(EAST || WEST)
+		if(EAST, WEST)
 			initialize_directions = EAST|WEST
 
 /obj/machinery/atmospherics/valve/get_neighbor_nodes_for_init()
@@ -287,7 +287,7 @@
 			else
 				open()
 
-/obj/machinery/atmospherics/valve/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/valve/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.is_wrench())
 		return ..()
 	if (istype(src, /obj/machinery/atmospherics/valve/digital) && !src.allowed(user))

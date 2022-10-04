@@ -4,6 +4,7 @@
 	helptext = "To remove the suit, use the ability again."
 	ability_icon_state = "ling_space_suit"
 	genomecost = 1
+	power_category = CHANGELING_POWER_ARMOR
 	verbpath = /mob/proc/changeling_spacesuit
 
 /mob/proc/changeling_spacesuit()
@@ -19,6 +20,7 @@
 	helptext = "To remove the armor, use the ability again."
 	ability_icon_state = "ling_armor"
 	genomecost = 3
+	power_category = CHANGELING_POWER_ARMOR
 	verbpath = /mob/proc/changeling_spacearmor
 
 /mob/proc/changeling_spacearmor()
@@ -37,12 +39,12 @@
 	desc = "A huge, bulky mass of pressure and temperature-resistant organic tissue, evolved to facilitate space travel."
 	flags = 0	//Not THICKMATERIAL because it's organic tissue, so if somebody tries to inject something into it,
 				//it still ends up in your blood. (also balance but muh fluff)
-	allowed = list(/obj/item/device/flashlight, /obj/item/weapon/tank/emergency/oxygen, /obj/item/weapon/tank/oxygen)
+	allowed = list(/obj/item/flashlight, /obj/item/tank/emergency/oxygen, /obj/item/tank/oxygen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0) //No armor at all.
 	canremove = 0
 
-/obj/item/clothing/suit/space/changeling/New()
-	..()
+/obj/item/clothing/suit/space/changeling/Initialize()
+	. = ..()
 	if(ismob(loc))
 		loc.visible_message("<span class='warning'>[loc.name]\'s flesh rapidly inflates, forming a bloated mass around their body!</span>",
 		"<span class='warning'>We inflate our flesh, creating a spaceproof suit!</span>",
@@ -105,8 +107,8 @@
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	slowdown = 1.5
 
-/obj/item/clothing/suit/space/changeling/armored/New()
-	..()
+/obj/item/clothing/suit/space/changeling/armored/Initialize()
+	. = ..()
 	if(ismob(loc))
 		loc.visible_message("<span class='warning'>[loc.name]\'s flesh turns black, quickly transforming into a hard, chitinous mass!</span>",
 		"<span class='warning'>We harden our flesh, creating a suit of armor!</span>",

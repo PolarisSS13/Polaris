@@ -1,7 +1,7 @@
 /obj/machinery/computer/fusion_fuel_control
 	name = "fuel injection control computer"
 	desc = "Displays information about the fuel rods."
-	circuit = /obj/item/weapon/circuitboard/fusion_fuel_control
+	circuit = /obj/item/circuitboard/fusion_fuel_control
 
 	icon_keyboard = "tech_key"
 	icon_screen = "fuel_screen"
@@ -10,8 +10,8 @@
 	var/scan_range = 25
 	var/datum/tgui_module/rustfuel_control/monitor
 
-/obj/machinery/computer/fusion_fuel_control/New()
-	..()
+/obj/machinery/computer/fusion_fuel_control/Initialize()
+	. = ..()
 	monitor = new(src)
 	monitor.fuel_tag = id_tag
 
@@ -116,7 +116,7 @@
 
 /obj/machinery/computer/fusion_fuel_control/attackby(var/obj/item/W, var/mob/user)
 	..()
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/new_ident = input("Enter a new ident tag.", "Fuel Control", monitor.fuel_tag) as null|text
 		if(new_ident && user.Adjacent(src))
 			monitor.fuel_tag = new_ident

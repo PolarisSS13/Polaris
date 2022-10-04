@@ -17,8 +17,8 @@
 	var/datum/pipe_network/network2
 	var/datum/pipe_network/network3
 
-/obj/machinery/atmospherics/trinary/New()
-	..()
+/obj/machinery/atmospherics/trinary/Initialize()
+	. = ..()
 
 	air1 = new
 	air2 = new
@@ -51,7 +51,7 @@
 	if(old_stat != stat)
 		update_icon()
 
-/obj/machinery/atmospherics/trinary/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/trinary/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.is_wrench())
 		return ..()
 	if(!can_unwrench())

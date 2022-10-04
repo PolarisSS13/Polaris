@@ -7,6 +7,7 @@
 	chaotic_threshold = EVENT_CHAOS_THRESHOLD_HIGH_IMPACT
 	enabled = FALSE // Turns out they are in fact grossly OP.
 	var/safe_for_extended = FALSE
+	regions = list(EVENT_REGION_SPACESTATION, EVENT_REGION_DEEPSPACE)
 
 /datum/event2/meta/swarm_boarder/get_weight()
 	if(istype(ticker.mode, /datum/game_mode/extended) && !safe_for_extended)
@@ -39,7 +40,6 @@
 	announce_delay_lower_bound = 5 MINUTES
 	announce_delay_upper_bound = 15 MINUTES
 	pod_type = /obj/structure/ghost_pod/ghost_activated/swarm_drone/event
-	desired_turf_areas = list(/area/maintenance)
 	var/announce_odds = 80
 
 /datum/event2/event/ghost_pod_spawner/swarm_boarder/melee

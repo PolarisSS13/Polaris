@@ -24,7 +24,7 @@
 	return ..()
 
 /mob/living/carbon/brain/say_understands(var/other)//Goddamn is this hackish, but this say code is so odd
-	if(istype(container, /obj/item/device/mmi))
+	if(istype(container, /obj/item/mmi))
 		if(issilicon(other))
 			return TRUE
 	if(ishuman(other))
@@ -34,7 +34,7 @@
 	return ..()
 
 /mob/living/carbon/brain/update_canmove()
-	if(in_contents_of(/obj/mecha) || istype(loc, /obj/item/device/mmi))
+	if(in_contents_of(/obj/mecha) || istype(loc, /obj/item/mmi))
 		canmove = 1
 		use_me = 1
 	else
@@ -42,24 +42,4 @@
 	return canmove
 
 /mob/living/carbon/brain/isSynthetic()
-	return istype(loc, /obj/item/device/mmi)
-
-/mob/living/carbon/brain/set_typing_indicator(var/state)
-	if(isturf(loc))
-		return ..()
-
-	if(!is_preference_enabled(/datum/client_preference/show_typing_indicator))
-		loc.cut_overlay(typing_indicator, TRUE)
-		return
-
-	if(!typing_indicator)
-		init_typing_indicator("[speech_bubble_appearance()]_typing")
-
-	if(state && !typing)
-		loc.add_overlay(typing_indicator, TRUE)
-		typing = TRUE
-	else if(typing)
-		loc.cut_overlay(typing_indicator, TRUE)
-		typing = FALSE
-
-	return state
+	return istype(loc, /obj/item/mmi)

@@ -4,6 +4,7 @@
 	chaos = 10
 	chaotic_threshold = EVENT_CHAOS_THRESHOLD_LOW_IMPACT
 	event_type = /datum/event2/event/money_hacker
+	regions = list(EVENT_REGION_UNIVERSAL)
 
 /datum/event2/meta/money_hacker/get_weight()
 	var/command = metric.count_people_with_job(/datum/job/hop) + metric.count_people_with_job(/datum/job/captain)
@@ -102,7 +103,7 @@
 	T.date = pick("", current_date_string, date1, date2,"Nowhen")
 
 	var/time1 = rand(0, 99999999)
-	var/time2 = "[round(time1 / 36000)+12]:[(time1 / 600 % 60) < 10 ? add_zero(time1 / 600 % 60, 1) : time1 / 600 % 60]"
+	var/time2 = "[round(time1 / 36000)+12]:[(time1 / 600 % 60) < 10 ? pad_left("[time1 / 600 % 60]", 2, "0") : time1 / 600 % 60]"
 	T.time = pick("", stationtime2text(), time2, "Never")
 
 	T.source_terminal = pick("","[pick("Biesel","New Gibson")] GalaxyNet Terminal #[rand(111,999)]","your mums place","nantrasen high CommanD","Angessa's Pearl","Nowhere")

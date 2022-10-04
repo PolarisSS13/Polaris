@@ -172,11 +172,11 @@
 	O.job = "Cyborg"
 	if(O.mind.assigned_role == "Cyborg")
 		if(O.mind.role_alt_title == "Robot")
-			O.mmi = new /obj/item/device/mmi/digital/posibrain(O)
+			O.mmi = new /obj/item/mmi/digital/posibrain(O)
 		else if(O.mind.role_alt_title == "Drone")
-			O.mmi = new /obj/item/device/mmi/digital/robot(O)
+			O.mmi = new /obj/item/mmi/digital/robot(O)
 		else
-			O.mmi = new /obj/item/device/mmi(O)
+			O.mmi = new /obj/item/mmi(O)
 
 		O.mmi.transfer_identity(src)
 
@@ -206,13 +206,13 @@
 	for(var/t in organs)
 		qdel(t)
 
-	var/alien_caste = pick("Hunter","Sentinel","Drone")
+	var/alien_caste = pick("Soldier","Guardian","Worker")
 	var/mob/living/carbon/human/new_xeno = create_new_xenomorph(alien_caste,loc)
 
 	new_xeno.a_intent = I_HURT
 	new_xeno.key = key
 
-	to_chat(new_xeno, "<B>You are now an alien.</B>")
+	to_chat(new_xeno, "<B>You are now a Skathari.</B>")
 	qdel(src)
 	return
 
@@ -300,11 +300,6 @@
 	if(!MP)
 		return 0	//Sanity, this should never happen.
 
-/*
-	if(ispath(MP, /mob/living/simple_animal/space_worm))
-		return 0 //Unfinished. Very buggy, they seem to just spawn additional space worms everywhere and eating your own tail results in new worms spawning.
-*/
-
 //Good mobs!
 	if(ispath(MP, /mob/living/simple_mob/animal/passive/cat))
 		return 1
@@ -327,6 +322,3 @@
 
 	//Not in here? Must be untested!
 	return 0
-
-
-

@@ -19,9 +19,10 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	icon_keyboard = "teleport_key"
 	icon_screen = "helm"
 	light_color = "#7faaff"
-	circuit = /obj/item/weapon/circuitboard/helm
+	circuit = /obj/item/circuitboard/helm
 	core_skill = /datum/skill/pilot
 	var/autopilot = 0
+	var/autopilot_disabled = TRUE
 	var/list/known_sectors = list()
 	var/dx		//desitnation
 	var/dy		//coordinates
@@ -35,7 +36,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 /obj/machinery/computer/ship/helm/proc/get_known_sectors()
 	var/area/overmap/map = locate() in world
 	for(var/obj/effect/overmap/visitable/sector/S in map)
-		if (S.known)
+		if(S.known)
 			var/datum/computer_file/data/waypoint/R = new()
 			R.fields["name"] = S.name
 			R.fields["x"] = S.x
@@ -44,7 +45,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 
 /obj/machinery/computer/ship/helm/process()
 	..()
-	if (autopilot && dx && dy)
+	if(autopilot && dx && dy && !autopilot_disabled)
 		var/turf/T = locate(dx,dy,global.using_map.overmap_z)
 		if(linked.loc == T)
 			if(linked.is_still())
@@ -59,13 +60,13 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 			var/heading = linked.get_heading()
 
 			// Destination is current grid or speedlimit is exceeded
-			if ((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
+			if((get_dist(linked.loc, T) <= brake_path) || speed > speedlimit)
 				linked.decelerate()
 			// Heading does not match direction
-			else if (heading & ~direction)
+			else if(heading & ~direction)
 				linked.accelerate(turn(heading & ~direction, 180), accellimit)
 			// All other cases, move toward direction
-			else if (speed + acceleration <= speedlimit)
+			else if(speed + acceleration <= speedlimit)
 				linked.accelerate(direction, accellimit)
 		linked.operator_skill = null//if this is on you can't dodge meteors
 		return
@@ -162,8 +163,8 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 				var/newy = input("Input new entry y coordinate", "Coordinate input", linked.y) as num
 				if(!CanInteract(user,state))
 					return TOPIC_NOACTION
-				R.fields["x"] = CLAMP(newx, 1, world.maxx)
-				R.fields["y"] = CLAMP(newy, 1, world.maxy)
+				R.fields["x"] = clamp(newx, 1, world.maxx)
+				R.fields["y"] = clamp(newy, 1, world.maxy)
 		known_sectors[sec_name] = R
 
 	if (href_list["remove"])
@@ -177,14 +178,14 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 		if(!CanInteract(user,state))
 			return
 		if (newx)
-			dx = CLAMP(newx, 1, world.maxx)
+			dx = clamp(newx, 1, world.maxx)
 
 	if (href_list["sety"])
 		var/newy = input("Input new destiniation y coordinate", "Coordinate input", dy) as num|null
 		if(!CanInteract(user,state))
 			return
 		if (newy)
-			dy = CLAMP(newy, 1, world.maxy)
+			dy = clamp(newy, 1, world.maxy)
 
 	if (href_list["x"] && href_list["y"])
 		dx = text2num(href_list["x"])
@@ -197,7 +198,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	if (href_list["speedlimit"])
 		var/newlimit = input("Input new speed limit for autopilot (0 to brake)", "Autopilot speed limit", speedlimit*1000) as num|null
 		if(newlimit)
-			speedlimit = CLAMP(newlimit/1000, 0, 100)
+			speedlimit = clamp(newlimit/1000, 0, 100)
 	if (href_list["accellimit"])
 		var/newlimit = input("Input new acceleration limit", "Acceleration limit", accellimit*1000) as num|null
 		if(newlimit)
@@ -226,7 +227,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	name = "navigation console"
 	icon_keyboard = "generic_key"
 	icon_screen = "helm"
-	circuit = /obj/item/weapon/circuitboard/nav
+	circuit = /obj/item/circuitboard/nav
 
 /obj/machinery/computer/ship/navigation/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	if(!linked)
@@ -276,7 +277,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	layer = ABOVE_WINDOW_LAYER
 	icon_keyboard = null
 	icon_screen = null
-	circuit = /obj/item/weapon/circuitboard/nav/tele
+	circuit = /obj/item/circuitboard/nav/tele
 	density = 0
 
 /obj/machinery/computer/ship/navigation/telescreen/update_icon()

@@ -13,11 +13,7 @@
 	idle_power_usage = 800
 	var/delay = 10
 	req_access = list(access_rd) //Only the R&D can change server settings.
-	circuit = /obj/item/weapon/circuitboard/rdserver
-
-/obj/machinery/r_n_d/server/Initialize()
-	. = ..()
-	default_apply_parts()
+	circuit = /obj/item/circuitboard/rdserver
 
 /obj/machinery/r_n_d/server/Destroy()
 	griefProtection()
@@ -25,12 +21,13 @@
 
 /obj/machinery/r_n_d/server/RefreshParts()
 	var/tot_rating = 0
-	for(var/obj/item/weapon/stock_parts/SP in src)
+	for(var/obj/item/stock_parts/SP in src)
 		tot_rating += SP.rating
 	update_idle_power_usage(initial(idle_power_usage) / max(1, tot_rating))
 
 /obj/machinery/r_n_d/server/Initialize()
 	. = ..()
+	default_apply_parts()
 	if(!files)
 		files = new /datum/research(src)
 	var/list/temp_list
@@ -150,7 +147,7 @@
 	icon_keyboard = "rd_key"
 	icon_screen = "rdcomp"
 	light_color = "#a97faa"
-	circuit = /obj/item/weapon/circuitboard/rdservercontrol
+	circuit = /obj/item/circuitboard/rdservercontrol
 	var/screen = 0
 	var/obj/machinery/r_n_d/server/temp_server
 	var/list/servers = list()

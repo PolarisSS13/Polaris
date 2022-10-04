@@ -1,4 +1,4 @@
-/obj/item/weapon/melee/chainofcommand
+/obj/item/melee/chainofcommand
 	name = "chain of command"
 	desc = "A tool used by great men to placate the frothing masses."
 	icon_state = "chain"
@@ -11,12 +11,7 @@
 
 	reach = 2
 
-/obj/item/weapon/melee/chainofcommand/suicide_act(mob/user)
-	var/datum/gender/T = gender_datums[user.get_visible_gender()]
-	user.visible_message(span("danger", "\The [user] [T.is] strangling [T.himself] with \the [src]! It looks like [T.he] [T.is] trying to commit suicide."), span("danger", "You start to strangle yourself with \the [src]!"), span("danger", "You hear the sound of someone choking!"))
-	return (OXYLOSS)
-
-/obj/item/weapon/melee/umbrella
+/obj/item/melee/umbrella
 	name = "umbrella"
 	desc = "To keep the rain off you. Use with caution on windy days."
 	icon = 'icons/obj/items.dmi'
@@ -25,33 +20,34 @@
 	slot_flags = SLOT_BELT
 	force = 5
 	throwforce = 5
-	w_class = ITEMSIZE_NORMAL
+	w_class = ITEMSIZE_SMALL
 	var/open = FALSE
 
-/obj/item/weapon/melee/umbrella/New()
-	..()
+/obj/item/melee/umbrella/Initialize()
+	. = ..()
 	update_icon()
 
-/obj/item/weapon/melee/umbrella/attack_self()
+/obj/item/melee/umbrella/attack_self()
 	src.toggle_umbrella()
 
-/obj/item/weapon/melee/umbrella/proc/toggle_umbrella()
+/obj/item/melee/umbrella/proc/toggle_umbrella()
 	open = !open
 	icon_state = "umbrella_[open ? "open" : "closed"]"
 	addblends = icon_state + "_a"
 	item_state = icon_state
 	update_icon()
+	w_class = open ? ITEMSIZE_NORMAL : ITEMSIZE_SMALL
 	if(ishuman(src.loc))
 		var/mob/living/carbon/human/H = src.loc
 		H.update_inv_l_hand(0)
 		H.update_inv_r_hand()
 
 // Randomizes color
-/obj/item/weapon/melee/umbrella/random/New()
-	color = "#"+get_random_colour()
-	..()
+/obj/item/melee/umbrella/random/Initialize()
+	color = get_random_colour()
+	. = ..()
 
-/obj/item/weapon/melee/cursedblade
+/obj/item/melee/cursedblade
 	name = "crystal blade"
 	desc = "The red crystal blade's polished surface glints in the light, giving off a faint glow."
 	icon_state = "soulblade"
@@ -67,14 +63,14 @@
 	var/list/voice_mobs = list() //The curse of the sword is that it has someone trapped inside.
 
 
-/obj/item/weapon/melee/cursedblade/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
+/obj/item/melee/cursedblade/handle_shield(mob/user, var/damage, atom/damage_source = null, mob/attacker = null, var/def_zone = null, var/attack_text = "the attack")
 	if(default_parry_check(user, attacker, damage_source) && prob(50))
 		user.visible_message("<span class='danger'>\The [user] parries [attack_text] with \the [src]!</span>")
 		playsound(src, 'sound/weapons/punchmiss.ogg', 50, 1)
 		return 1
 	return 0
 
-/obj/item/weapon/melee/cursedblade/proc/ghost_inhabit(var/mob/candidate)
+/obj/item/melee/cursedblade/proc/ghost_inhabit(var/mob/candidate)
 	if(!isobserver(candidate))
 		return
 	//Handle moving the ghost into the new shell.

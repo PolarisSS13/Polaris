@@ -35,8 +35,8 @@ Protectiveness | Armor %
 	var/material_slowdown_modifier = 0
 	var/material_slowdown_multiplier = 0.5
 
-/obj/item/clothing/New(var/newloc, var/material_key)
-	..(newloc)
+/obj/item/clothing/Initialize(var/ml, var/material_key)
+	. = ..(ml)
 	if(!material_key)
 		material_key = default_material
 	if(material_key) // May still be null if a material was not specified as a default.
@@ -96,7 +96,7 @@ Protectiveness | Armor %
 		var/mob/living/M = loc
 		M.drop_from_inventory(src)
 		if(material.shard_type == SHARD_SHARD) // Wearing glass armor is a bad idea.
-			var/obj/item/weapon/material/shard/S = material.place_shard(T)
+			var/obj/item/material/shard/S = material.place_shard(T)
 			M.embed(S)
 
 	playsound(src, "shatter", 70, 1)
@@ -124,7 +124,7 @@ Protectiveness | Armor %
 		var/turf/picked = pick(turfs)
 		if(!isturf(picked)) return
 
-		var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+		var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 		spark_system.set_up(5, 0, user.loc)
 		spark_system.start()
 		playsound(src, 'sound/effects/teleport.ogg', 50, 1)
@@ -230,16 +230,47 @@ Protectiveness | Armor %
 	material_slowdown_modifier = 0
 	material_slowdown_multiplier = 0.5
 
-/obj/item/clothing/accessory/material/custom //Not yet craftable, advanced version made with science!
+
+/obj/item/clothing/accessory/material/advanced
 	name = "custom armor plate"
 	desc = "A composite plate of custom machined material, designed to fit into a plate carrier. Attaches to a plate carrier."
 	icon = 'icons/obj/clothing/modular_armor.dmi'
+	description_info = "This armoured plate has been custom machined out of a piece of material. It is backed by a shear-hardening gel layer, allowing the whole piece to flex and conform to the wearer's body shape. If it was made using strong materials it could be very protective."
 	icon_state = "armor_tactical"
-	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+	body_parts_covered = UPPER_TORSO | LOWER_TORSO
 	slot = ACCESSORY_SLOT_ARMOR_C
 	material_armor_modifier = 1.2
 	material_slowdown_modifier = 0.5
 	material_slowdown_multiplier = 0.4
+
+
+/obj/item/clothing/accessory/material/advanced/armguards
+	name = "arm guards"
+	desc = "A pair of arm pads reinforced with material. Attaches to a plate carrier."
+	icon = 'icons/obj/clothing/modular_armor.dmi'
+	icon_override = 'icons/mob/modular_armor.dmi'
+	icon_state = "armguards_material"
+	gender = PLURAL
+	body_parts_covered = ARMS
+	slot = ACCESSORY_SLOT_ARMOR_A
+	material_armor_modifier = 1.1
+	material_slowdown_modifier = 1
+	material_slowdown_multiplier = 0.4
+
+
+/obj/item/clothing/accessory/material/advanced/legguards
+	name = "leg guards"
+	desc = "A pair of leg guards reinforced with material. Attaches to a plate carrier."
+	icon = 'icons/obj/clothing/modular_armor.dmi'
+	icon_override = 'icons/mob/modular_armor.dmi'
+	icon_state = "legguards_material"
+	gender = PLURAL
+	body_parts_covered = LEGS
+	slot = ACCESSORY_SLOT_ARMOR_L
+	material_armor_modifier = 1.1
+	material_slowdown_modifier = 1
+	material_slowdown_multiplier = 0.4
+
 
 /obj/item/clothing/accessory/material/makeshift/armguards
 	name = "arm guards"
@@ -276,7 +307,7 @@ Protectiveness | Armor %
 	default_material = "glass"
 
 // Used to craft sheet armor, and possibly other things in the Future(tm).
-/obj/item/weapon/material/armor_plating
+/obj/item/material/armor_plating
 	name = "armor plating"
 	desc = "A sheet designed to protect something."
 	icon = 'icons/obj/items.dmi'
@@ -286,12 +317,12 @@ Protectiveness | Armor %
 	thrown_force_divisor = 0.2
 	var/wired = FALSE
 
-/obj/item/weapon/material/armor_plating/insert
+/obj/item/material/armor_plating/insert
 	unbreakable = FALSE
 	name = "plate insert"
 	desc = "used to craft armor plates for a plate carrier. Trim with a welder for light armor or add a second for heavy armor"
-	
-/obj/item/weapon/material/armor_plating/attackby(var/obj/O, mob/user)
+
+/obj/item/material/armor_plating/attackby(var/obj/O, mob/user)
 	if(istype(O, /obj/item/stack/cable_coil))
 		var/obj/item/stack/cable_coil/S = O
 		if(wired)
@@ -305,8 +336,8 @@ Protectiveness | Armor %
 		else
 			to_chat(user, "<span class='notice'>You need more wire for that.</span>")
 			return
-	if(istype(O, /obj/item/weapon/material/armor_plating))
-		var/obj/item/weapon/material/armor_plating/second_plate = O
+	if(istype(O, /obj/item/material/armor_plating))
+		var/obj/item/material/armor_plating/second_plate = O
 		if(!wired && !second_plate.wired)
 			to_chat(user, "<span class='warning'>You need something to hold the two pieces of plating together.</span>")
 			return
@@ -323,12 +354,12 @@ Protectiveness | Armor %
 		..()
 
 //Make plating inserts for modular armour.
-/obj/item/weapon/material/armor_plating/insert/attackby(var/obj/O, mob/user)
+/obj/item/material/armor_plating/insert/attackby(var/obj/O, mob/user)
 
 	. = ..()
 
-	if(istype(O, /obj/item/weapon/weldingtool))
-		var /obj/item/weapon/weldingtool/S = O
+	if(istype(O, /obj/item/weldingtool))
+		var /obj/item/weldingtool/S = O
 		if(S.remove_fuel(0,user))
 			if(!src || !S.isOn()) return
 			to_chat(user, "<span class='notice'>You trim down the edges to size.</span>")
@@ -338,8 +369,8 @@ Protectiveness | Armor %
 			qdel(src)
 			return
 
-	if(istype(O, /obj/item/weapon/material/armor_plating/insert))
-		var/obj/item/weapon/material/armor_plating/insert/second_plate = O
+	if(istype(O, /obj/item/material/armor_plating/insert))
+		var/obj/item/material/armor_plating/insert/second_plate = O
 		if(second_plate.material != src.material)
 			to_chat(user, "<span class='warning'>Both plates need to be the same type of material.</span>")
 			return
@@ -352,7 +383,7 @@ Protectiveness | Armor %
 		qdel(src)
 		return
 
-	if(istype(O, /obj/item/weapon/tool/wirecutters))
+	if(istype(O, /obj/item/tool/wirecutters))
 		to_chat(user, "<span class='notice'>You split the plate down the middle, and joint it at the elbow.</span>")
 		user.drop_from_inventory(src)
 		var/obj/item/clothing/accessory/material/makeshift/armguards/new_armor = new(null, src.material.name)

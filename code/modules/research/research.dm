@@ -202,8 +202,8 @@ research holder datum.
 	id = TECH_DATA
 
 /datum/tech/syndicate
-	name = "Illegal Technologies Research"
-	desc = "The study of technologies that violate standard government regulations."
+	name = "Transgressive Technologies Research"
+	desc = "The study of technologies that sit on the very boundaries of legality and ethics."
 	id = TECH_ILLEGAL
 	level = 0
 
@@ -219,7 +219,7 @@ research holder datum.
 	id = TECH_PRECURSOR
 	level = 0
 
-/obj/item/weapon/disk/tech_disk
+/obj/item/disk/tech_disk
 	name = "technology disk"
 	desc = "A disk for storing technology data for further research."
 	icon = 'icons/obj/cloning.dmi'
@@ -230,10 +230,11 @@ research holder datum.
 	matter = list(MAT_STEEL = 30, "glass" = 10)
 	var/datum/tech/stored
 
-/obj/item/weapon/disk/tech_disk/New()
+/obj/item/disk/tech_disk/Initialize()
 	randpixel_xy()
+	. = ..()
 
-/obj/item/weapon/disk/design_disk
+/obj/item/disk/design_disk
 	name = "component design disk"
 	desc = "A disk for storing device design data for construction in lathes."
 	icon = 'icons/obj/cloning.dmi'
@@ -244,5 +245,6 @@ research holder datum.
 	matter = list(MAT_STEEL = 30, "glass" = 10)
 	var/datum/design/blueprint
 
-/obj/item/weapon/disk/design_disk/New()
+/obj/item/disk/design_disk/Initialize()
 	randpixel_xy()
+	. = ..()

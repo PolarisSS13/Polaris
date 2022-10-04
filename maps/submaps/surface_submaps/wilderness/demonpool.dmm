@@ -18,11 +18,13 @@
 /area/submap/DemonPool)
 "ay" = (
 /obj/structure/girder/cult,
-/obj/item/weapon/material/twohanded/fireaxe/scythe,
+/obj/item/material/twohanded/fireaxe/scythe{
+	start_anomalous = 1
+	},
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "bb" = (
-/obj/item/weapon/melee/cursedblade,
+/obj/item/melee/cursedblade,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "bh" = (
@@ -60,8 +62,8 @@
 /area/submap/DemonPool)
 "eM" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/book,
-/obj/item/weapon/spellbook/oneuse/forcewall,
+/obj/item/book,
+/obj/item/spellbook/oneuse/forcewall,
 /turf/simulated/floor,
 /area/submap/DemonPool)
 "eR" = (
@@ -102,7 +104,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/DemonPool)
 "hF" = (
-/obj/effect/gibspawner/human,
+/obj/effect/spawner/gibs/human,
 /obj/effect/decal/cleanable/dirt,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/outdoors/dirt{
@@ -143,7 +145,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/template_noop)
 "jG" = (
-/obj/effect/gibspawner/human,
+/obj/effect/spawner/gibs/human,
 /obj/effect/rune,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
@@ -199,7 +201,7 @@
 	},
 /area/submap/DemonPool)
 "mO" = (
-/obj/effect/gibspawner/human,
+/obj/effect/spawner/gibs/human,
 /obj/item/clothing/head/culthood/alt,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
@@ -259,7 +261,7 @@
 /area/submap/DemonPool)
 "sb" = (
 /obj/item/clothing/shoes/cult,
-/obj/item/weapon/melee/energy/sword/red,
+/obj/item/melee/energy/sword/red,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "si" = (
@@ -363,7 +365,7 @@
 /area/submap/DemonPool)
 "Ah" = (
 /obj/effect/decal/cleanable/blood/gibs/body,
-/obj/item/weapon/stool,
+/obj/item/stool,
 /turf/simulated/floor/outdoors/dirt{
 	outdoors = 0
 	},
@@ -398,7 +400,7 @@
 	},
 /area/submap/DemonPool)
 "CY" = (
-/obj/effect/gibspawner/human,
+/obj/effect/spawner/gibs/human,
 /turf/simulated/floor/outdoors/rocks{
 	outdoors = 0
 	},
@@ -475,7 +477,7 @@
 	},
 /area/submap/DemonPool)
 "KR" = (
-/obj/effect/gibspawner/human,
+/obj/effect/spawner/gibs/human,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Lh" = (
@@ -512,7 +514,7 @@
 	},
 /area/submap/DemonPool)
 "NI" = (
-/obj/effect/gibspawner/human,
+/obj/effect/spawner/gibs/human,
 /obj/fire,
 /obj/effect/decal/cleanable/dirt,
 /turf/simulated/floor/cult,
@@ -537,9 +539,10 @@
 	},
 /area/submap/DemonPool)
 "Qq" = (
-/obj/item/weapon/beartrap/hunting{
+/obj/item/beartrap/hunting{
 	anchored = 1;
-	deployed = 1
+	deployed = 1;
+	start_anomalous = 1
 	},
 /obj/effect/decal/cleanable/blood/gibs/limb,
 /obj/effect/decal/cleanable/blood/gibs/limb,
@@ -550,7 +553,7 @@
 /area/submap/DemonPool)
 "Qr" = (
 /obj/structure/closet/crate/secure/loot,
-/obj/item/weapon/spellbook/oneuse/fireball,
+/obj/item/spellbook/oneuse/fireball,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Qv" = (
@@ -637,12 +640,12 @@
 /area/submap/DemonPool)
 "YK" = (
 /obj/structure/table/woodentable,
-/obj/item/weapon/pen/fountain,
+/obj/item/pen/fountain,
 /turf/simulated/floor,
 /area/submap/DemonPool)
 "Zc" = (
-/obj/effect/gibspawner/human,
-/obj/item/weapon/beartrap/hunting{
+/obj/effect/spawner/gibs/human,
+/obj/item/beartrap/hunting{
 	anchored = 1;
 	deployed = 1
 	},

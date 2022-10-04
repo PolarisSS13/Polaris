@@ -1,6 +1,6 @@
-var/list/outfits_decls_
-var/list/outfits_decls_root_
-var/list/outfits_decls_by_type_
+var/global/list/outfits_decls_
+var/global/list/outfits_decls_root_
+var/global/list/outfits_decls_by_type_
 
 /proc/outfit_by_type(var/outfit_type)
 	if(!outfits_decls_root_)
@@ -41,7 +41,7 @@ var/list/outfits_decls_by_type_
 	var/l_hand = null
 	// In the list(path=count,otherpath=count) format
 	var/list/uniform_accessories = list() // webbing, armbands etc - fits in slot_tie
-	var/list/backpack_contents = list() 
+	var/list/backpack_contents = list()
 
 	var/id_type
 	var/id_desc
@@ -52,10 +52,16 @@ var/list/outfits_decls_by_type_
 
 	var/id_pda_assignment
 
-	var/backpack = /obj/item/weapon/storage/backpack
-	var/satchel_one  = /obj/item/weapon/storage/backpack/satchel/norm
-	var/satchel_two  = /obj/item/weapon/storage/backpack/satchel
-	var/messenger_bag = /obj/item/weapon/storage/backpack/messenger
+	var/backpack = /obj/item/storage/backpack
+	var/satchel_one  = /obj/item/storage/backpack/satchel/norm
+	var/satchel_two  = /obj/item/storage/backpack/satchel
+	var/messenger_bag = /obj/item/storage/backpack/messenger
+	var/sports_bag = /obj/item/storage/backpack/sport
+	var/rucksack_black = /obj/item/storage/backpack/rucksack
+	var/rucksack_blue = /obj/item/storage/backpack/rucksack/blue
+	var/rucksack_green = /obj/item/storage/backpack/rucksack/green
+	var/rucksack_navy = /obj/item/storage/backpack/rucksack/navy
+	var/rucksack_tan = /obj/item/storage/backpack/rucksack/tan
 
 	var/flags // Specific flags
 
@@ -76,11 +82,17 @@ var/list/outfits_decls_by_type_
 			if(3) back = satchel_one
 			if(4) back = satchel_two
 			if(5) back = messenger_bag
+			if(6) back = sports_bag
+			if(7) back = rucksack_black
+			if(8) back = rucksack_blue
+			if(9) back = rucksack_green
+			if(10) back = rucksack_navy
+			if(11) back = rucksack_tan
 			else back = null
 
 /decl/hierarchy/outfit/proc/post_equip(mob/living/carbon/human/H)
 	if(flags & OUTFIT_HAS_JETPACK)
-		var/obj/item/weapon/tank/jetpack/J = locate(/obj/item/weapon/tank/jetpack) in H
+		var/obj/item/tank/jetpack/J = locate(/obj/item/tank/jetpack) in H
 		if(!J)
 			return
 		J.toggle()
@@ -91,7 +103,7 @@ var/list/outfits_decls_by_type_
 
 	rank = rank || id_pda_assignment
 	assignment = id_pda_assignment || assignment || rank
-	var/obj/item/weapon/card/id/W = equip_id(H, rank, assignment)
+	var/obj/item/card/id/W = equip_id(H, rank, assignment)
 	if(W)
 		rank = W.rank
 		assignment = W.assignment
@@ -158,7 +170,7 @@ var/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot || !id_type)
 		return
-	var/obj/item/weapon/card/id/W = new id_type(H)
+	var/obj/item/card/id/W = new id_type(H)
 	if(id_desc)
 		W.desc = id_desc
 	if(rank)
@@ -171,7 +183,7 @@ var/list/outfits_decls_by_type_
 /decl/hierarchy/outfit/proc/equip_pda(mob/living/carbon/human/H, rank, assignment)
 	if(!pda_slot || !pda_type)
 		return
-	var/obj/item/device/pda/pda = new pda_type(H)
+	var/obj/item/pda/pda = new pda_type(H)
 	if(H.equip_to_slot_or_del(pda, pda_slot))
 		pda.owner = H.real_name
 		pda.ownjob = assignment

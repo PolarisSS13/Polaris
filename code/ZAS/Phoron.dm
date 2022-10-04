@@ -1,4 +1,4 @@
-var/image/contamination_overlay = image('icons/effects/contamination.dmi')
+var/global/image/contamination_overlay = image('icons/effects/contamination.dmi')
 
 /pl_control
 	var/PHORON_DMG = 3
@@ -45,7 +45,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	//Clothing and backpacks can be contaminated.
 	if(flags & PHORONGUARD)
 		return 0
-	else if(istype(src,/obj/item/weapon/storage/backpack))
+	else if(istype(src,/obj/item/storage/backpack))
 		return 0 //Cannot be washed :(
 	else if(istype(src,/obj/item/clothing))
 		return 1
@@ -57,11 +57,11 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 	else
 		if(!contaminated)
 			contaminated = 1
-			overlays += contamination_overlay
+			add_overlay(contamination_overlay)
 
 /obj/item/proc/decontaminate()
 	contaminated = 0
-	overlays -= contamination_overlay
+	cut_overlay(contamination_overlay)
 
 /mob/proc/contaminate()
 
@@ -76,7 +76,7 @@ var/image/contamination_overlay = image('icons/effects/contamination.dmi')
 			suit_contamination() //Phoron can sometimes get through such an open suit.
 
 //Cannot wash backpacks currently.
-//	if(istype(back,/obj/item/weapon/storage/backpack))
+//	if(istype(back,/obj/item/storage/backpack))
 //		back.contaminate()
 
 /mob/proc/pl_effects()

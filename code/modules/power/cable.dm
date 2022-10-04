@@ -21,7 +21,7 @@ If d1 = 0 and d2 = dir, it's a O-X cable, getting from the center of the tile to
 If d1 = dir1 and d2 = dir2, it's a full X-X cable, getting from dir1 to dir2
 By design, d1 is the smallest direction and d2 is the highest
 */
-var/list/possible_cable_coil_colours = list(
+var/global/list/possible_cable_coil_colours = list(
 		"White" = COLOR_WHITE,
 		"Silver" = COLOR_SILVER,
 		"Gray" = COLOR_GRAY,
@@ -88,8 +88,8 @@ var/list/possible_cable_coil_colours = list(
 /obj/structure/cable/white
 	color = COLOR_WHITE
 
-/obj/structure/cable/New()
-	..()
+/obj/structure/cable/Initialize()
+	. = ..()
 
 	// ensure d1 & d2 reflect the icon_state for entering and exiting cable
 
@@ -220,7 +220,7 @@ var/list/possible_cable_coil_colours = list(
 			return
 		coil.cable_join(src, user)
 
-	else if(istype(W, /obj/item/device/multitool))
+	else if(istype(W, /obj/item/multitool))
 
 		if(powernet && (powernet.avail > 0))		// is it powered?
 			to_chat(user, "<span class='warning'>[DisplayPower(powernet.avail)] in power network.</span>")
@@ -241,7 +241,7 @@ var/list/possible_cable_coil_colours = list(
 	if(!prob(prb))
 		return 0
 	if (electrocute_mob(user, powernet, src, siemens_coeff))
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 		s.set_up(5, 1, src)
 		s.start()
 		if(usr.stunned)
@@ -520,17 +520,9 @@ var/list/possible_cable_coil_colours = list(
 	uses_charge = 1
 	charge_costs = list(1)
 
-/obj/item/stack/cable_coil/suicide_act(mob/user)
-	var/datum/gender/TU = gender_datums[user.get_visible_gender()]
-	if(locate(/obj/item/weapon/stool) in user.loc)
-		user.visible_message("<span class='suicide'>[user] is making a noose with the [src.name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
-	else
-		user.visible_message("<span class='suicide'>[user] is strangling [TU.himself] with the [src.name]! It looks like [TU.he] [TU.is] trying to commit suicide.</span>")
-	return(OXYLOSS)
-
-/obj/item/stack/cable_coil/New(loc, length = MAXCOIL, var/param_color = null)
-	..()
-	src.amount = length
+/obj/item/stack/cable_coil/Initialize(var/ml, length = MAXCOIL, var/param_color = null)
+	. = ..()
+	amount = length
 	if (param_color) // It should be red by default, so only recolor it if parameter was specified.
 		color = param_color
 	pixel_x = rand(-2,2)
@@ -608,7 +600,7 @@ var/list/possible_cable_coil_colours = list(
 		. += "There are [get_amount()] lengths of cable in the coil."
 
 /obj/item/stack/cable_coil/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/device/multitool))
+	if(istype(W, /obj/item/multitool))
 		var/selected_type = input("Pick new colour.", "Cable Colour", null, null) as null|anything in possible_cable_coil_colours
 		set_cable_color(selected_type, usr)
 		return
@@ -624,7 +616,7 @@ var/list/possible_cable_coil_colours = list(
 		if(src.amount <= 14)
 			to_chat(usr, "<span class='warning'>You need at least 15 lengths to make restraints!</span>")
 			return
-		var/obj/item/weapon/handcuffs/cable/B = new /obj/item/weapon/handcuffs/cable(usr.loc)
+		var/obj/item/handcuffs/cable/B = new /obj/item/handcuffs/cable(usr.loc)
 		B.color = color
 		to_chat(usr, "<span class='notice'>You wind some cable together to make some restraints.</span>")
 		src.use(15)
@@ -829,8 +821,8 @@ var/list/possible_cable_coil_colours = list(
 /obj/item/stack/cable_coil/cut
 	item_state = "coil2"
 
-/obj/item/stack/cable_coil/cut/New(loc)
-	..()
+/obj/item/stack/cable_coil/cut/Initialize()
+	. = ..()
 	src.amount = rand(1,2)
 	pixel_x = rand(-2,2)
 	pixel_y = rand(-2,2)
@@ -909,16 +901,16 @@ var/list/possible_cable_coil_colours = list(
 	stacktype = /obj/item/stack/cable_coil
 	color = COLOR_BROWN
 
-/obj/item/stack/cable_coil/random/New()
+/obj/item/stack/cable_coil/random/Initialize()
 	stacktype = /obj/item/stack/cable_coil
 	color = pick(COLOR_RED, COLOR_BLUE, COLOR_LIME, COLOR_WHITE, COLOR_PINK, COLOR_YELLOW, COLOR_CYAN, COLOR_SILVER, COLOR_GRAY, COLOR_BLACK, COLOR_MAROON, COLOR_OLIVE, COLOR_LIME, COLOR_TEAL, COLOR_NAVY, COLOR_PURPLE, COLOR_BEIGE, COLOR_BROWN)
-	..()
+	. = ..()
 
-/obj/item/stack/cable_coil/random_belt/New()
+/obj/item/stack/cable_coil/random_belt/Initialize()
 	stacktype = /obj/item/stack/cable_coil
 	color = pick(COLOR_RED, COLOR_YELLOW, COLOR_ORANGE)
 	amount = 30
-	..()
+	. = ..()
 
 //Endless alien cable coil
 
@@ -957,7 +949,8 @@ var/list/possible_cable_coil_colours = list(
 	stacktype = null
 	toolspeed = 0.25
 
-/obj/item/stack/cable_coil/alien/New(loc, length = MAXCOIL, var/param_color = null)		//There has to be a better way to do this.
+/obj/item/stack/cable_coil/alien/Initialize(var/ml, length = MAXCOIL, var/param_color = null)		//There has to be a better way to do this.
+	. = ..()
 	if(embed_chance == -1)		//From /obj/item, don't want to do what the normal cable_coil does
 		if(sharp)
 			embed_chance = force/w_class

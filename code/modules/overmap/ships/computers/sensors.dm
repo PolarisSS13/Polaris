@@ -3,10 +3,9 @@
 	icon_keyboard = "teleport_key"
 	icon_screen = "teleport"
 	light_color = "#77fff8"
-	circuit = /obj/item/weapon/circuitboard/sensors
+	circuit = /obj/item/circuitboard/sensors
 	extra_view = 4
 	var/obj/machinery/shipsensors/sensors
-	whitelisted_types = list(/obj/effect/overmap/visitable) // Stationary emplacements can support sensors
 
 /obj/machinery/computer/ship/sensors/attempt_hook_up(obj/effect/overmap/visitable/ship/sector)
 	if(!(. = ..()))
@@ -50,7 +49,7 @@
 				continue
 			if(!O.scannable)
 				continue
-			var/bearing = round(90 - ATAN2(O.x - linked.x, O.y - linked.y),5)
+			var/bearing = round(90 - arctan(O.x - linked.x, O.y - linked.y),5)
 			if(bearing < 0)
 				bearing += 360
 			contacts.Add(list(list("name"=O.name, "ref"="\ref[O]", "bearing"=bearing)))
@@ -92,7 +91,7 @@
 			if(!CanInteract(user,state))
 				return TOPIC_NOACTION
 			if (nrange)
-				sensors.set_range(CLAMP(nrange, 1, world.view))
+				sensors.set_range(clamp(nrange, 1, world.view))
 			return TOPIC_REFRESH
 		if (href_list["toggle"])
 			sensors.toggle()
@@ -102,7 +101,7 @@
 		var/obj/effect/overmap/O = locate(href_list["scan"])
 		if(istype(O) && !QDELETED(O) && (O in view(7,linked)))
 			playsound(src, "sound/machines/printer.ogg", 30, 1)
-			new/obj/item/weapon/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
+			new/obj/item/paper/(get_turf(src), O.get_scan_data(user), "paper (Sensor Scan - [O])")
 		return TOPIC_HANDLED
 
 /obj/machinery/computer/ship/sensors/process()
@@ -129,11 +128,11 @@
 	var/range = 1
 	idle_power_usage = 5000
 
-/obj/machinery/shipsensors/attackby(obj/item/weapon/W, mob/user)
+/obj/machinery/shipsensors/attackby(obj/item/W, mob/user)
 	var/damage = max_health - health
-	if(damage && istype(W, /obj/item/weapon/weldingtool))
+	if(damage && istype(W, /obj/item/weldingtool))
 
-		var/obj/item/weapon/weldingtool/WT = W
+		var/obj/item/weldingtool/WT = W
 
 		if(!WT.isOn())
 			return
@@ -194,7 +193,7 @@
 			toggle()
 		if(heat > critical_heat)
 			src.visible_message("<span class='danger'>\The [src] violently spews out sparks!</span>")
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 

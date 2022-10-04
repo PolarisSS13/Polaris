@@ -2,11 +2,11 @@
 
 //TODO: Make these simple_animals
 /*	//Commented out as reference for future reproduction methods, or addition later if needed. - Mech
-var/const/MIN_IMPREGNATION_TIME = 100 //time it takes to impregnate someone
-var/const/MAX_IMPREGNATION_TIME = 150
+var/global/const/MIN_IMPREGNATION_TIME = 100 //time it takes to impregnate someone
+var/global/const/MAX_IMPREGNATION_TIME = 150
 
-var/const/MIN_ACTIVE_TIME = 200 //time between being dropped and going idle
-var/const/MAX_ACTIVE_TIME = 400
+var/global/const/MIN_ACTIVE_TIME = 200 //time between being dropped and going idle
+var/global/const/MAX_ACTIVE_TIME = 400
 
 /obj/item/clothing/mask/facehugger
 	name = "alien"
@@ -36,11 +36,10 @@ var/const/MAX_ACTIVE_TIME = 400
 	user.drop_from_inventory(src)
 	Attach(M)
 
-/obj/item/clothing/mask/facehugger/New()
-	if(config.aliens_allowed)
-		..()
-	else
-		qdel(src)
+/obj/item/clothing/mask/facehugger/Initialize()
+		. = ..()
+	if(!config.aliens_allowed)
+		return INITIALIZE_HINT_QDEL
 
 /obj/item/clothing/mask/facehugger/examine(mob/user)
 	..(user)

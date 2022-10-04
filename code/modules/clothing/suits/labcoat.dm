@@ -6,7 +6,7 @@
 	blood_overlay_type = "coat"
 	body_parts_covered = UPPER_TORSO|ARMS
 	flags_inv = HIDEHOLSTER
-	allowed = list(/obj/item/device/analyzer,/obj/item/stack/medical,/obj/item/weapon/dnainjector,/obj/item/weapon/reagent_containers/dropper,/obj/item/weapon/reagent_containers/syringe,/obj/item/weapon/reagent_containers/hypospray,/obj/item/device/healthanalyzer,/obj/item/device/flashlight/pen,/obj/item/weapon/reagent_containers/glass/bottle,/obj/item/weapon/reagent_containers/glass/beaker,/obj/item/weapon/reagent_containers/pill,/obj/item/weapon/storage/pill_bottle,/obj/item/weapon/paper)
+	allowed = list(/obj/item/analyzer,/obj/item/stack/medical,/obj/item/dnainjector,/obj/item/reagent_containers/dropper,/obj/item/reagent_containers/syringe,/obj/item/reagent_containers/hypospray,/obj/item/healthanalyzer,/obj/item/flashlight/pen,/obj/item/reagent_containers/glass/bottle,/obj/item/reagent_containers/glass/beaker,/obj/item/reagent_containers/pill,/obj/item/storage/pill_bottle,/obj/item/paper)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 50, rad = 0)
 	index = 1
 
@@ -64,6 +64,12 @@
 	icon_state = "labcoat_cmoalt"
 	item_state_slots = list(slot_r_hand_str = "cmo_labcoat", slot_l_hand_str = "cmo_labcoat")
 
+/obj/item/clothing/suit/storage/toggle/labcoat/rd
+	name = "research director's labcoat"
+	desc = "A retro labcoat suitable for only the most eccentric scientists on the payroll."
+	icon_state = "labcoat_rd"
+	item_state_slots = list(slot_r_hand_str = "genetics_labcoat", slot_l_hand_str = "genetics_labcoat")
+
 /obj/item/clothing/suit/storage/toggle/labcoat/mad
 	name = "The Mad's labcoat"
 	desc = "It makes you look capable of konking someone on the noggin and shooting them into space."
@@ -94,6 +100,12 @@
 	desc = "A suit that protects against minor chemical spills. Has a purple stripe on the shoulder."
 	icon_state = "labcoat_tox"
 	item_state_slots = list(slot_r_hand_str = "science_labcoat", slot_l_hand_str = "science_labcoat")
+
+/obj/item/clothing/suit/storage/toggle/labcoat/roboticist
+	name = "roboticist labcoat"
+	desc = "More like an eccentric coat than a labcoat. Helps pass off bloodstains as part of the aesthetic. Comes with red shoulder pads."
+	icon_state = "labcoat_robo"
+	item_state_slots = list(slot_r_hand_str = "labcoat", slot_l_hand_str = "labcoat")
 
 /obj/item/clothing/suit/storage/toggle/labcoat/emt
 	name = "EMT's labcoat"

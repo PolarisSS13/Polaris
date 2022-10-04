@@ -14,6 +14,8 @@
 	maxHealth = 300
 	mob_size = MOB_LARGE
 
+	organ_names = /decl/mob_organ_names/mecha
+
 	// Very close to the base 'damage_absorption' var on the base mecha class.
 	armor = list(
 				"melee"		= 20,
@@ -33,7 +35,7 @@
 	ai_holder_type = /datum/ai_holder/simple_mob/melee
 	say_list_type = /datum/say_list/malf_drone
 
-	var/datum/effect/effect/system/spark_spread/sparks
+	var/datum/effect_system/spark_spread/sparks
 	var/wreckage = /obj/effect/decal/mecha_wreckage/gygax/dark
 	var/pilot_type = null // Set to spawn a pilot when destroyed. Setting this also makes the mecha vulnerable to things that affect sentient minds.
 	var/deflect_chance = 10 // Chance to outright stop an attack, just like a normal exosuit.
@@ -139,3 +141,6 @@
 		severity++ // This somewhat misleadingly makes it less severe.
 		deflect_sprite()
 	..(severity)
+
+/decl/mob_organ_names/mecha
+	hit_zones = list("central chassis", "control module", "hydraulics", "left arm", "right arm", "left leg", "right leg", "sensor suite", "radiator", "power supply", "left equipment mount", "right equipment mount")

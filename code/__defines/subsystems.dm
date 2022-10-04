@@ -19,9 +19,10 @@
 
 #define TIMER_ID_NULL -1
 
-#define INITIALIZATION_INSSATOMS 0	//New should not call Initialize
-#define INITIALIZATION_INNEW_MAPLOAD 1	//New should call Initialize(TRUE)
-#define INITIALIZATION_INNEW_REGULAR 2	//New should call Initialize(FALSE)
+#define INITIALIZATION_INSSATOMS      0 //New should not call Initialize
+#define INITIALIZATION_INSSATOMS_LATE 1 //New should not call Initialize; after the first pass is complete (handled differently)
+#define INITIALIZATION_INNEW_MAPLOAD  2 //New should call Initialize(TRUE)
+#define INITIALIZATION_INNEW_REGULAR  3 //New should call Initialize(FALSE)
 
 #define INITIALIZE_HINT_NORMAL   0  //Nothing happens
 #define INITIALIZE_HINT_LATELOAD 1  //Call LateInitialize
@@ -32,7 +33,7 @@
 	..();\
 	if(!initialized) {\
 		args[1] = TRUE;\
-		SSatoms.InitAtom(src, args);\
+		SSatoms?.InitAtom(src, args);\
 	}\
 }
 
@@ -80,6 +81,7 @@ var/global/list/runlevel_flags = list(RUNLEVEL_LOBBY, RUNLEVEL_SETUP, RUNLEVEL_G
 #define INIT_ORDER_AI_FAST		-23
 #define INIT_ORDER_GAME_MASTER	-24
 #define INIT_ORDER_PERSISTENCE	-25
+#define INIT_ORDER_ANTAG        -26
 #define INIT_ORDER_TICKER		-50
 #define INIT_ORDER_CHAT			-100 //Should be last to ensure chat remains smooth during init.
 
@@ -108,26 +110,3 @@ var/global/list/runlevel_flags = list(RUNLEVEL_LOBBY, RUNLEVEL_SETUP, RUNLEVEL_G
 #define FIRE_PRIORITY_CHAT			400
 #define FIRE_PRIORITY_OVERLAYS		500
 #define FIRE_PRIORITY_INPUT			1000 // This must always always be the max highest priority. Player input must never be lost.
-
-// Macro defining the actual code applying our overlays lists to the BYOND overlays list. (I guess a macro for speed)
-// TODO - I don't really like the location of this macro define.  Consider it. ~Leshana
-#define COMPILE_OVERLAYS(A)\
-	do {\
-		var/list/oo = A.our_overlays;\
-		var/list/po = A.priority_overlays;\
-		if(LAZYLEN(po)){\
-			if(LAZYLEN(oo)){\
-				A.overlays = oo + po;\
-			}\
-			else{\
-				A.overlays = po;\
-			}\
-		}\
-		else if(LAZYLEN(oo)){\
-			A.overlays = oo;\
-		}\
-		else{\
-			A.overlays.Cut();\
-		}\
-		A.flags &= ~OVERLAY_QUEUED;\
-	} while (FALSE)

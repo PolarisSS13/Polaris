@@ -11,8 +11,8 @@
 		if(!C) return
 		pai_key = C.key
 
-	log_and_message_admins("made a pAI with key=[pai_key] at ([t.x],[t.y],[t.z])")
-	var/obj/item/device/paicard/card = new(t)
+	log_and_message_admins("made a pAI with key=[pai_key] at ([t.x],[t.y],[t.z])", usr)
+	var/obj/item/paicard/card = new(t)
 	var/mob/living/silicon/pai/pai = new(card)
 	pai.key = pai_key
 	card.setPersonality(pai)

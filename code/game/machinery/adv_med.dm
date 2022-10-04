@@ -8,7 +8,7 @@
 	icon_state = "body_scanner_0"
 	density = 1
 	anchored = 1
-	circuit = /obj/item/weapon/circuitboard/body_scanner
+	circuit = /obj/item/circuitboard/body_scanner
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 60
 	active_power_usage = 10000	//10 kW. It's a big all-body scanner.
@@ -33,8 +33,8 @@
 		set_light(0)
 
 /obj/machinery/bodyscanner/attackby(var/obj/item/G, user as mob)
-	if(istype(G, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/H = G
+	if(istype(G, /obj/item/grab))
+		var/obj/item/grab/H = G
 		if(panel_open)
 			to_chat(user, "<span class='notice'>Close the maintenance panel first.</span>")
 			return
@@ -218,7 +218,7 @@
 		if(H.reagents.reagent_list.len >= 1)
 			for(var/datum/reagent/R in H.reagents.reagent_list)
 				reagentData[++reagentData.len] = list(
-					"name" = R.name, 
+					"name" = R.name,
 					"amount" = R.volume,
 					"overdose" = (R.overdose && R.volume > R.overdose) ? TRUE : FALSE,
 				)
@@ -256,7 +256,7 @@
 			var/implantData[0]
 			for(var/obj/thing in E.implants)
 				var/implantSubData[0]
-				var/obj/item/weapon/implant/I = thing
+				var/obj/item/implant/I = thing
 				implantSubData["name"] =  I.name
 				implantSubData["known"] = istype(I) && I.known_implant
 				implantData.Add(list(implantSubData))
@@ -282,7 +282,7 @@
 
 			if(istype(E, /obj/item/organ/external/chest) && H.is_lung_ruptured())
 				organData["lungRuptured"] = 1
-			
+
 			for(var/datum/wound/W in E.wounds)
 				if(W.internal)
 					organData["internalBleeding"] = 1
@@ -336,11 +336,11 @@
 			var/atom/target = console ? console : src
 			visible_message("<span class='notice'>[target] rattles and prints out a sheet of paper.</span>")
 			playsound(src, 'sound/machines/printer.ogg', 50, 1)
-			var/obj/item/weapon/paper/P = new /obj/item/weapon/paper(get_turf(target))
+			var/obj/item/paper/P = new /obj/item/paper(get_turf(target))
 			var/name = occupant ? occupant.name : "Unknown"
 			P.info = "<CENTER><B>Body Scan - [name]</B></CENTER><BR>"
 			P.info += "<b>Time of scan:</b> [worldtime2stationtime(world.time)]<br><br>"
-			P.info += "[generate_printing_text()]"
+			P.info += generate_printing_text()
 			P.info += "<br><br><b>Notes:</b><br>"
 			P.name = "Body Scan - [name] ([worldtime2stationtime(world.time)]"
 		else
@@ -466,7 +466,7 @@
 
 			var/unknown_body = 0
 			for(var/thing in e.implants)
-				var/obj/item/weapon/implant/I = thing
+				var/obj/item/implant/I = thing
 				if(istype(I) && I.known_implant)
 					imp += "[I] implanted:"
 				else
@@ -536,11 +536,11 @@
 	dir = 8
 	density = 0
 	anchored = 1
-	circuit = /obj/item/weapon/circuitboard/scanner_console
+	circuit = /obj/item/circuitboard/scanner_console
 	var/printing = null
 
-/obj/machinery/body_scanconsole/New()
-	..()
+/obj/machinery/body_scanconsole/Initialize()
+	. = ..()
 	findscanner()
 
 /obj/machinery/body_scanconsole/Destroy()
@@ -551,8 +551,8 @@
 /obj/machinery/body_scanconsole/attackby(var/obj/item/I, var/mob/user)
 	if(computer_deconstruction_screwdriver(user, I))
 		return
-	else if(istype(I, /obj/item/device/multitool)) //Did you want to link it?
-		var/obj/item/device/multitool/P = I
+	else if(istype(I, /obj/item/multitool)) //Did you want to link it?
+		var/obj/item/multitool/P = I
 		if(P.connectable)
 			if(istype(P.connectable, /obj/machinery/bodyscanner))
 				var/obj/machinery/bodyscanner/C = P.connectable

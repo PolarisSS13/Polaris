@@ -14,12 +14,12 @@
 
 	consume_range = 6
 
-/obj/singularity/narsie/large/exit/New()
-	..()
+/obj/singularity/narsie/large/exit/Initialize()
+	. = ..()
 	START_PROCESSING(SSobj, src)
 
 /obj/singularity/narsie/large/exit/update_icon()
-	overlays = 0
+	cut_overlays()
 
 /obj/singularity/narsie/large/exit/process()
 	for(var/mob/M in player_list)

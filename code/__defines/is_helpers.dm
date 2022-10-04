@@ -5,7 +5,7 @@
 //#define islist(D)		istype(D, /list)	//Built in
 
 //---------------
-#define isatom(D)		istype(D, /atom)
+#define isatom(D) (isloc(D) && !isarea(D))
 #define isclient(D)		istype(D, /client)
 
 //---------------
@@ -13,13 +13,13 @@
 
 #define isitem(D)		istype(D, /obj/item)
 
-#define isradio(A) istype(A, /obj/item/device/radio)
+#define isradio(A) istype(A, /obj/item/radio)
 
 #define isairlock(A)	istype(A, /obj/machinery/door/airlock)
 
 #define isorgan(A)		istype(A, /obj/item/organ/external)
 
-#define isstorage(A)	istype(A, /obj/item/weapon/storage)
+#define isstorage(A)	istype(A, /obj/item/storage)
 
 //---------------
 //#define isarea(D)		istype(D, /area)	//Built in
@@ -57,5 +57,3 @@
 //#define isturf(D)		istype(D, /turf)	//Built in
 #define isopenspace(A)	istype(A, /turf/simulated/open)
 #define isspace(A)		istype(A, /turf/space)
-
-#define istaurtail(A)	istype(A, /datum/sprite_accessory/tail/taur)

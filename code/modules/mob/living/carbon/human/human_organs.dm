@@ -92,7 +92,7 @@
 			stance_damage += 2
 			if(prob(10))
 				visible_message("\The [src]'s [E.name] [pick("twitches", "shudders")] and sparks!")
-				var/datum/effect/effect/system/spark_spread/spark_system = new ()
+				var/datum/effect_system/spark_spread/spark_system = new ()
 				spark_system.set_up(5, 0, src)
 				spark_system.attach(src)
 				spark_system.start()
@@ -108,9 +108,9 @@
 	// Canes and crutches help you stand (if the latter is ever added)
 	// One cane mitigates a broken leg+foot, or a missing foot.
 	// Two canes are needed for a lost leg. If you are missing both legs, canes aren't gonna help you.
-	if (l_hand && istype(l_hand, /obj/item/weapon/cane))
+	if (l_hand && istype(l_hand, /obj/item/cane))
 		stance_damage -= 2
-	if (r_hand && istype(r_hand, /obj/item/weapon/cane))
+	if (r_hand && istype(r_hand, /obj/item/cane))
 		stance_damage -= 2
 
 	// standing is poor
@@ -177,7 +177,7 @@
 
 			custom_emote(VISIBLE_MESSAGE, "drops what they were holding, their [E.name] malfunctioning!")
 
-			var/datum/effect/effect/system/spark_spread/spark_system = new /datum/effect/effect/system/spark_spread()
+			var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
 			spark_system.set_up(5, 0, src)
 			spark_system.attach(src)
 			spark_system.start()

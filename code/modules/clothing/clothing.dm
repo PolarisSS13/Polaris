@@ -24,6 +24,7 @@
 	*/
 	var/list/sprite_sheets_refit = null
 	var/ear_protection = 0
+	var/volume_multiplier = 1
 	var/blood_sprite_state
 
 	var/index			//null by default, if set, will change which dmi it uses
@@ -41,8 +42,8 @@
 	gunshot_residue = null
 
 
-/obj/item/clothing/New()
-	..()
+/obj/item/clothing/Initialize()
+	. = ..()
 	if(starting_accessories)
 		for(var/T in starting_accessories)
 			var/obj/item/clothing/accessory/tie = new T(src)
@@ -50,7 +51,7 @@
 	set_clothing_index()
 
 /obj/item/clothing/update_icon()
-	overlays.Cut() //This removes all the overlays on the sprite and then goes down a checklist adding them as required.
+	cut_overlays()
 	if(blood_DNA)
 		add_blood()
 	. = ..()
@@ -254,12 +255,16 @@
 	icon_state = "block"
 	slot_flags = SLOT_EARS | SLOT_TWOEARS
 
-/obj/item/clothing/ears/offear/New(var/obj/O)
-		name = O.name
-		desc = O.desc
-		icon = O.icon
-		icon_state = O.icon_state
-		set_dir(O.dir)
+/obj/item/clothing/ears/offear/Initialize()
+	. = ..()
+	var/obj/O = loc
+	if(!istype(O))
+		return INITIALIZE_HINT_QDEL
+	name = O.name
+	desc = O.desc
+	icon = O.icon
+	icon_state = O.icon_state
+	set_dir(O.dir)
 
 ////////////////////////////////////////////////////////////////////////////////////////
 //Gloves
@@ -275,7 +280,7 @@
 	siemens_coefficient = 0.9
 	blood_sprite_state = "bloodyhands"
 	var/wired = 0
-	var/obj/item/weapon/cell/cell = 0
+	var/obj/item/cell/cell = 0
 	var/fingerprint_chance = 0	//How likely the glove is to let fingerprints through
 	var/obj/item/clothing/gloves/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping
@@ -312,8 +317,8 @@
 /obj/item/clothing/gloves/proc/Touch(var/atom/A, var/proximity)
 	return 0 // return 1 to cancel attack_hand()
 
-/*/obj/item/clothing/gloves/attackby(obj/item/weapon/W, mob/user)
-	if(W.is_wirecutter() || istype(W, /obj/item/weapon/scalpel))
+/*/obj/item/clothing/gloves/attackby(obj/item/W, mob/user)
+	if(W.is_wirecutter() || istype(W, /obj/item/scalpel))
 		if (clipped)
 			to_chat(user, "<span class='notice'>The [src] have already been clipped!</span>")
 			update_icon()
@@ -384,8 +389,8 @@
 	var/datum/unarmed_attack/special_attack = null //do the gloves have a special unarmed attack?
 	var/special_attack_type = null
 
-/obj/item/clothing/gloves/New()
-	..()
+/obj/item/clothing/gloves/Initialize()
+	. = ..()
 	if(special_attack_type && ispath(special_attack_type))
 		special_attack = new special_attack_type
 
@@ -492,6 +497,9 @@
 	return 1
 
 /obj/item/clothing/head/update_icon(var/mob/user)
+	if(!ismob(user))
+		return
+
 	var/mob/living/carbon/human/H
 	if(ishuman(user))
 		H = user
@@ -610,7 +618,7 @@
 		usr.visible_message("<span class='danger'>\The [usr] pulls a knife out of their boot!</span>")
 		playsound(src, 'sound/weapons/holster/sheathout.ogg', 25)
 		holding = null
-		overlays -= image(icon, "[icon_state]_knife")
+		cut_overlay(image(icon, "[icon_state]_knife"))
 	else
 		to_chat(usr, "<span class='warning'>Your need an empty, unbroken hand to do that.</span>")
 		holding.forceMove(src)
@@ -628,10 +636,10 @@
 	..()
 
 /obj/item/clothing/shoes/attackby(var/obj/item/I, var/mob/user)
-	if((can_hold_knife == 1) && (istype(I, /obj/item/weapon/material/shard) || \
-	 istype(I, /obj/item/weapon/material/butterfly) || \
-	 istype(I, /obj/item/weapon/material/kitchen/utensil) || \
-	 istype(I, /obj/item/weapon/material/knife/tacknife)))
+	if((can_hold_knife == 1) && (istype(I, /obj/item/material/shard) || \
+	 istype(I, /obj/item/material/butterfly) || \
+	 istype(I, /obj/item/material/kitchen/utensil) || \
+	 istype(I, /obj/item/material/knife/tacknife)))
 		if(holding)
 			to_chat(user, "<span class='warning'>\The [src] is already holding \a [holding].</span>")
 			return
@@ -657,7 +665,7 @@
 /obj/item/clothing/shoes/update_icon()
 	. = ..()
 	if(holding)
-		overlays += image(icon, "[icon_state]_knife")
+		add_overlay(image(icon, "[icon_state]_knife"))
 	if(ismob(usr))
 		var/mob/M = usr
 		M.update_inv_shoes()
@@ -686,13 +694,12 @@
 	name = "suit"
 	var/fire_resist = T0C+100
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS|LEGS
-	allowed = list(/obj/item/weapon/tank/emergency/oxygen)
+	allowed = list(/obj/item/tank/emergency/oxygen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING
 	var/blood_overlay_type = "suit"
 	blood_sprite_state = "suitblood" //Defaults to the suit's blood overlay, so that some blood renders instead of no blood.
 
-	var/taurized = FALSE
 	siemens_coefficient = 0.9
 	w_class = ITEMSIZE_NORMAL
 	preserve_item = 1
@@ -727,43 +734,6 @@
 		M.update_inv_wear_suit()
 
 	set_clothing_index()
-
-/obj/item/clothing/suit/equipped(var/mob/user, var/slot)
-	if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if((taurized && !istaurtail(H.tail_style)) || (!taurized && istaurtail(H.tail_style)))
-			taurize(user)
-
-	return ..()
-
-/obj/item/clothing/suit/proc/taurize(var/mob/living/carbon/human/Taur)
-	if(istaurtail(Taur.tail_style))
-		var/datum/sprite_accessory/tail/taur/taurtail = Taur.tail_style
-		if(taurtail.suit_sprites && (get_worn_icon_state(slot_wear_suit_str) in cached_icon_states(taurtail.suit_sprites)))
-			icon_override = taurtail.suit_sprites
-			taurized = TRUE
-
-	if(!taurized)
-		icon_override = initial(icon_override)
-		taurized = FALSE
-
-// Taur suits need to be shifted so its centered on their taur half.
-/obj/item/clothing/suit/make_worn_icon(var/body_type,var/slot_name,var/inhands,var/default_icon,var/default_layer = 0,var/icon/clip_mask)
-	var/image/standing = ..()
-	if(taurized) //Special snowflake var on suits
-		standing.pixel_x = -16
-		standing.layer = BODY_LAYER + 15 // 15 is above tail layer, so will not be covered by taurbody.
-	return standing
-
-/obj/item/clothing/suit/apply_accessories(var/image/standing)
-	if(LAZYLEN(accessories) && taurized)
-		for(var/obj/item/clothing/accessory/A in accessories)
-			var/image/I = new(A.get_mob_overlay())
-			I.pixel_x = 16 //Opposite of the pixel_x on the suit (-16) from taurization to cancel it out and puts the accessory in the correct place on the body.
-			standing.add_overlay(I)
-	else
-		return ..()
-
 
 ///////////////////////////////////////////////////////////////////////
 //Under clothing
@@ -824,6 +794,12 @@
 	var/icon/rolled_down_icon = 'icons/mob/uniform_rolled_down.dmi'
 	var/icon/rolled_down_sleeves_icon = 'icons/mob/uniform_sleeves_rolled.dmi'
 
+/obj/item/clothing/under/AltClick(mob/user)
+	for(var/obj/item/clothing/accessory in accessories)
+		if(accessory.AltClick(user))
+			return TRUE
+	. = ..()
+
 /obj/item/clothing/under/attack_hand(var/mob/user)
 	if(LAZYLEN(accessories))
 		..()
@@ -831,8 +807,8 @@
 		return
 	..()
 
-/obj/item/clothing/under/New()
-	..()
+/obj/item/clothing/under/Initialize()
+	. = ..()
 	if(worn_state)
 		if(!item_state_slots)
 			item_state_slots = list()
@@ -1038,6 +1014,6 @@
 		to_chat(usr, "<span class='notice'>You roll down your [src]'s sleeves.</span>")
 	update_clothing_icon()
 
-/obj/item/clothing/under/rank/New()
+/obj/item/clothing/under/rank/Initialize()
 	sensor_mode = pick(0,1,2,3)
-	..()
+	. = ..()

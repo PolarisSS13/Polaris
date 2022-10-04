@@ -5,7 +5,7 @@
 	var/const/MAIN_CHANNEL = "Main Frequency"
 	var/lawchannel = MAIN_CHANNEL // Default channel on which to state laws
 	var/list/stating_laws = list()// Channels laws are currently being stated on
-	var/obj/item/device/radio/common_radio
+	var/obj/item/radio/common_radio
 
 	has_huds = TRUE
 	var/list/speech_synthesizer_langs = list()	//which languages can be vocalized by the speech synthesizer
@@ -15,21 +15,21 @@
 	var/speak_exclamation = "declares"
 	var/speak_query = "queries"
 	var/pose //Yes, now AIs can pose too.
-	var/obj/item/device/camera/siliconcam/aiCamera = null //photography
+	var/obj/item/camera/siliconcam/aiCamera = null //photography
 	var/local_transmit //If set, can only speak to others of the same type within a short range.
 
 	var/next_alarm_notice
 	var/list/datum/alarm/queued_alarms = new()
 
 	var/list/access_rights
-	var/obj/item/weapon/card/id/idcard
-	var/idcard_type = /obj/item/weapon/card/id/synthetic
+	var/obj/item/card/id/idcard
+	var/idcard_type = /obj/item/card/id/synthetic
 
 	var/hudmode = null
 
-/mob/living/silicon/New()
+/mob/living/silicon/Initialize()
 	silicon_mob_list |= src
-	..()
+	. = ..()
 	add_language(LANGUAGE_GALCOM)
 	set_default_language(GLOB.all_languages[LANGUAGE_GALCOM])
 	init_id()
@@ -37,7 +37,7 @@
 
 /mob/living/silicon/Destroy()
 	silicon_mob_list -= src
-	for(var/datum/alarm_handler/AH in SSalarm.all_handlers)
+	for(var/datum/alarm_handler/AH in SSalarm.handlers)
 		AH.unregister_alarm(src)
 	return ..()
 
@@ -81,7 +81,7 @@
 
 /mob/living/silicon/electrocute_act(var/shock_damage, var/obj/source, var/siemens_coeff = 0.0, var/def_zone = null, var/stun = 1)
 	if(shock_damage > 0)
-		var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 		s.set_up(5, 1, loc)
 		s.start()
 
@@ -289,7 +289,7 @@
 
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.explosion_modifier))
-			severity = CLAMP(severity + M.explosion_modifier, 1, 4)
+			severity = clamp(severity + M.explosion_modifier, 1, 4)
 
 	severity = round(severity)
 
@@ -417,3 +417,6 @@
 
 /mob/living/silicon/has_vision()
 	return 0 //NOT REAL EYES
+
+/mob/living/silicon/can_feed()
+	return FALSE

@@ -53,9 +53,9 @@
 
 	var/taste_sensitivity = TASTE_NORMAL							// How sensitive the species is to minute tastes.
 	var/allergens = null									// Things that will make this species very sick
-	var/allergen_reaction = AG_TOX_DMG|AG_OXY_DMG|AG_EMOTE|AG_PAIN|AG_WEAKEN		// What type of reactions will you have? These the 'main' options and are intended to approximate anaphylactic shock at high doses.
-	var/allergen_damage_severity = 1.2							// How bad are reactions to the allergen? Touch with extreme caution.
-	var/allergen_disable_severity = 3							// Whilst this determines how long nonlethal effects last and how common emotes are.
+	var/allergen_reaction = AG_TOX_DMG|AG_OXY_DMG|AG_EMOTE|AG_PAIN|AG_BLURRY|AG_CONFUSE	// What type of reactions will you have? These the 'main' options and are intended to approximate anaphylactic shock at high doses.
+	var/allergen_damage_severity = 2.5							// How bad are reactions to the allergen? Touch with extreme caution.
+	var/allergen_disable_severity = 10							// Whilst this determines how long nonlethal effects last and how common emotes are.
 
 	var/min_age = 17
 	var/max_age = 70
@@ -107,7 +107,7 @@
 	var/alcohol_mod =		1						// Multiplier to alcohol strength; 0.5 = half, 0 = no effect at all, 2 = double, etc.
 	var/pain_mod =			1						// Multiplier to pain effects; 0.5 = half, 0 = no effect (equal to NO_PAIN, really), 2 = double, etc.
 	var/spice_mod =			1						// Multiplier to spice/capsaicin/frostoil effects; 0.5 = half, 0 = no effect (immunity), 2 = double, etc.
-	var/trauma_mod = 		1						// Affects traumatic shock (how fast pain crit happens). 0 = no effect (immunity to pain crit), 2 = double etc.Overriden by "can_feel_pain" var	
+	var/trauma_mod = 		1						// Affects traumatic shock (how fast pain crit happens). 0 = no effect (immunity to pain crit), 2 = double etc.Overriden by "can_feel_pain" var
 	// set below is EMP interactivity for nonsynth carbons
 	var/emp_sensitivity =		0			// bitflag. valid flags are: EMP_PAIN, EMP_BLIND, EMP_DEAFEN, EMP_CONFUSE, EMP_STUN, and EMP_(BRUTE/BURN/TOX/OXY)_DMG
 	var/emp_dmg_mod =		1			// Multiplier to all EMP damage sustained by the mob, if it's EMP-sensitive
@@ -115,7 +115,7 @@
 	var/vision_flags = SEE_SELF							// Same flags as glasses.
 
 	// Death vars.
-	var/meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/human
+	var/meat_type = /obj/item/reagent_containers/food/snacks/meat/human
 	var/remains_type = /obj/effect/decal/remains/xeno
 	var/gibbed_anim = "gibbed-h"
 	var/dusted_anim = "dust-h"
@@ -129,6 +129,8 @@
 	var/breath_type = "oxygen"								// Non-oxygen gas breathed, if any.
 	var/poison_type = "phoron"								// Poisonous air.
 	var/exhale_type = "carbon_dioxide"						// Exhaled gas type.
+	var/suit_inhale_sound = 'sound/effects/mob_effects/suit_breathe_in.ogg'
+	var/suit_exhale_sound = 'sound/effects/mob_effects/suit_breathe_out.ogg'
 
 	var/body_temperature = 310.15							// Species will try to stabilize at this temperature. (also affects temperature processing)
 
@@ -309,26 +311,26 @@
 	return sanitizeName(name, MAX_NAME_LEN, robot)
 
 /datum/species/proc/equip_survival_gear(var/mob/living/carbon/human/H,var/extendedtank = 0,var/comprehensive = 0)
-	var/boxtype = /obj/item/weapon/storage/box/survival //Default survival box
+	var/boxtype = /obj/item/storage/box/survival //Default survival box
 
 	var/synth = H.isSynthetic()
 
 	//Empty box for synths
 	if(synth)
-		boxtype = /obj/item/weapon/storage/box/survival/synth
+		boxtype = /obj/item/storage/box/survival/synth
 
 	//Special box with extra equipment
 	else if(comprehensive)
-		boxtype = /obj/item/weapon/storage/box/survival/comp
+		boxtype = /obj/item/storage/box/survival/comp
 
 	//Create the box
-	var/obj/item/weapon/storage/box/box = new boxtype(H)
+	var/obj/item/storage/box/box = new boxtype(H)
 
 	//If not synth, they get an air tank (if they breathe)
 	if(!synth && breath_type)
 		//Create a tank (if such a thing exists for this species)
-		var/tanktext = "/obj/item/weapon/tank/emergency/" + "[breath_type]"
-		var/obj/item/weapon/tank/emergency/tankpath //Will force someone to come look here if they ever alter this path.
+		var/tanktext = "/obj/item/tank/emergency/" + "[breath_type]"
+		var/obj/item/tank/emergency/tankpath //Will force someone to come look here if they ever alter this path.
 		if(extendedtank)
 			tankpath = text2path(tanktext + "/engi")
 			if(!tankpath) //Is it just that there's no /engi?
@@ -342,7 +344,7 @@
 
 	//If they are synth, they get a smol battery
 	else if(synth)
-		new /obj/item/device/fbp_backup_cell(box)
+		new /obj/item/fbp_backup_cell(box)
 
 	box.calibrate_size()
 

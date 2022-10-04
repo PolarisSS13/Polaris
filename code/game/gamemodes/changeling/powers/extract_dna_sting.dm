@@ -4,6 +4,7 @@
 	helptext = "Will give you the DNA of your target, allowing you to transform into them. Does not count towards absorb objectives."
 	ability_icon_state = "ling_sting_extract"
 	genomecost = 0
+	power_category = CHANGELING_POWER_INHERENT
 	allowduringlesserform = 1
 	verbpath = /mob/proc/changeling_extract_dna_sting
 
@@ -37,7 +38,8 @@
 
 	add_attack_logs(src,T,"DNA extraction sting (changeling)")
 
-	var/datum/absorbed_dna/newDNA = new(T.real_name, T.dna, T.species.name, T.languages)
+	var/saved_dna = T.dna.Clone() /// Prevent transforming bugginess. 
+	var/datum/absorbed_dna/newDNA = new(T.real_name, saved_dna, T.species.name, T.languages, T.identifying_gender, T.flavor_text, T.modifiers)
 	absorbDNA(newDNA)
 
 	feedback_add_details("changeling_powers","ED")

@@ -1,4 +1,4 @@
-var/list/organ_cache = list()
+var/global/list/organ_cache = list()
 
 /obj/item/organ
 	name = "organ"
@@ -62,37 +62,35 @@ var/list/organ_cache = list()
 /obj/item/organ/proc/update_health()
 	return
 
-/obj/item/organ/New(var/mob/living/holder, var/internal)
-	..(holder)
+/obj/item/organ/Initialize(var/ml, var/internal)
+	. = ..(ml)
 	create_reagents(5)
 
-	if(isliving(holder))
-		src.owner = holder
-		src.w_class = max(src.w_class + mob_size_difference(holder.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
+	if(isliving(loc))
+		owner = loc
+		w_class = max(src.w_class + mob_size_difference(owner.mob_size, MOB_MEDIUM), 1) //smaller mobs have smaller organs.
 		if(internal)
-			if(!LAZYLEN(holder.internal_organs))
-				holder.internal_organs = list()
-			if(!LAZYLEN(holder.internal_organs_by_name))
-				holder.internal_organs_by_name = list()
-
-			holder.internal_organs |= src
-			holder.internal_organs_by_name[organ_tag] = src
-
+			if(!LAZYLEN(owner.internal_organs))
+				owner.internal_organs = list()
+			if(!LAZYLEN(owner.internal_organs_by_name))
+				owner.internal_organs_by_name = list()
+			owner.internal_organs |= src
+			owner.internal_organs_by_name[organ_tag] = src
 		else
-			if(!LAZYLEN(holder.organs))
-				holder.organs = list()
-			if(!LAZYLEN(holder.organs_by_name))
-				holder.organs_by_name = list()
+			if(!LAZYLEN(owner.organs))
+				owner.organs = list()
+			if(!LAZYLEN(owner.organs_by_name))
+				owner.organs_by_name = list()
 
-			holder.organs |= src
-			holder.organs_by_name[organ_tag] = src
+			owner.organs |= src
+			owner.organs_by_name[organ_tag] = src
 
 	if(!max_damage)
 		max_damage = min_broken_damage * 2
-	if(iscarbon(holder))
-		var/mob/living/carbon/C = holder
+	if(iscarbon(owner))
+		var/mob/living/carbon/C = owner
 		species = GLOB.all_species[SPECIES_HUMAN]
-		if(holder.dna)
+		if(owner.dna)
 			dna = C.dna.Clone()
 			species = GLOB.all_species[dna.species]
 		else
@@ -114,8 +112,6 @@ var/list/organ_cache = list()
 
 	handle_organ_mod_special()
 
-/obj/item/organ/Initialize()
-	. = ..()
 	if(owner)
 		if(!meat_type)
 			if(owner.isSynthetic())
@@ -128,7 +124,7 @@ var/list/organ_cache = list()
 				if(owner.meat_type)
 					meat_type = owner.meat_type
 				else
-					meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+					meat_type = /obj/item/reagent_containers/food/snacks/meat
 
 /obj/item/organ/proc/set_dna(var/datum/dna/new_dna)
 	if(new_dna)
@@ -148,7 +144,7 @@ var/list/organ_cache = list()
 		owner.death()
 
 /obj/item/organ/proc/adjust_germ_level(var/amount)		// Unless you're setting germ level directly to 0, use this proc instead
-	germ_level = CLAMP(germ_level + amount, 0, INFECTION_LEVEL_MAX)
+	germ_level = clamp(germ_level + amount, 0, INFECTION_LEVEL_MAX)
 
 /obj/item/organ/process()
 
@@ -159,7 +155,7 @@ var/list/organ_cache = list()
 	if(status & ORGAN_DEAD)
 		return
 	// Don't process if we're in a freezer, an MMI or a stasis bag.or a freezer or something I dunno
-	if(istype(loc,/obj/item/device/mmi))
+	if(istype(loc,/obj/item/mmi))
 		return
 	if(preserved)
 		return
@@ -354,6 +350,9 @@ var/list/organ_cache = list()
 	robotize()
 
 /obj/item/organ/emp_act(severity)
+	for(var/obj/O as anything in src.contents)
+		O.emp_act(severity)
+
 	if(!(robotic >= ORGAN_ASSISTED))
 		return
 	for(var/i = 1; i <= robotic; i++)
@@ -432,7 +431,7 @@ var/list/organ_cache = list()
 	blood_splatter(src,B,1)
 
 	user.drop_from_inventory(src)
-	var/obj/item/weapon/reagent_containers/food/snacks/organ/O = new(get_turf(src))
+	var/obj/item/reagent_containers/food/snacks/organ/O = new(get_turf(src))
 	O.name = name
 	O.icon = icon
 	O.icon_state = icon_state
@@ -454,7 +453,7 @@ var/list/organ_cache = list()
 		bitten(user)
 		return
 
-/obj/item/organ/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/organ/attackby(obj/item/W as obj, mob/user as mob)
 	if(can_butcher(W, user))
 		butcher(W, user)
 		return
@@ -489,7 +488,7 @@ var/list/organ_cache = list()
 
 	var/obj/item/newmeat = new meat_type(newtarget)
 
-	if(istype(newmeat, /obj/item/weapon/reagent_containers/food/snacks/meat))
+	if(istype(newmeat, /obj/item/reagent_containers/food/snacks/meat))
 		newmeat.name = "[src.name] [newmeat.name]"	// "liver meat" "heart meat", etc.
 
 	qdel(src)
@@ -562,3 +561,13 @@ var/list/organ_cache = list()
 					return TRUE
 
 	return FALSE
+
+/obj/item/organ/attack_generic(mob/user)
+	if(isanimal(user))
+		var/mob/living/simple_mob/animal/critter = user
+		if(!critter.has_appetite())
+			to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
+		else
+			critter.eat_food_item(src)
+		return TRUE
+	return ..()

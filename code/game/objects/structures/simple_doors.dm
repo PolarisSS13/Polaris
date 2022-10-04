@@ -20,14 +20,15 @@
 	hardness -= material.combustion_effect(get_turf(src),temperature, 0.3)
 	CheckHardness()
 
-/obj/structure/simple_door/New(var/newloc, var/material_name)
-	..()
-	if(!material_name)
-		material_name = DEFAULT_WALL_MATERIAL
-	material = get_material_by_name(material_name)
+/obj/structure/simple_door/Initialize(var/ml, var/material_name)
+	. = ..()
+	if(material_name && !material)
+		material = material_name
+	else if(!material)
+		material = DEFAULT_WALL_MATERIAL
 	if(!material)
-		qdel(src)
-		return
+		return INITIALIZE_HINT_QDEL
+	material = get_material_by_name(material)
 	hardness = max(1,round(material.integrity/10))
 	icon_state = material.door_icon_base
 	name = "[material.display_name] door"
@@ -123,15 +124,15 @@
 	else
 		icon_state = material.door_icon_base
 
-/obj/structure/simple_door/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/simple_door/attackby(obj/item/W as obj, mob/user as mob)
 	user.setClickCooldown(DEFAULT_ATTACK_COOLDOWN)
-	if(istype(W,/obj/item/weapon/pickaxe))
-		var/obj/item/weapon/pickaxe/digTool = W
+	if(istype(W,/obj/item/pickaxe))
+		var/obj/item/pickaxe/digTool = W
 		visible_message("<span class='danger'>[user] starts digging [src]!</span>")
 		if(do_after(user,digTool.digspeed*hardness) && src)
 			visible_message("<span class='danger'>[user] finished digging [src]!</span>")
 			Dismantle()
-	else if(istype(W,/obj/item/weapon)) //not sure, can't not just weapons get passed to this proc?
+	else if(istype(W)) //not sure, can't not just weapons get passed to this proc?
 		hardness -= W.force/10
 		visible_message("<span class='danger'>[user] hits [src] with [W]!</span>")
 		if(material == get_material_by_name("resin"))
@@ -141,8 +142,8 @@
 		else
 			playsound(src, 'sound/weapons/smash.ogg', 50, 1)
 		CheckHardness()
-	else if(istype(W,/obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/WT = W
+	else if(istype(W,/obj/item/weldingtool))
+		var/obj/item/weldingtool/WT = W
 		if(material.ignition_point && WT.remove_fuel(0, user))
 			TemperatureAct(150)
 	else
@@ -191,45 +192,44 @@
 		if(3)
 			hardness -= 0.1
 			CheckHardness()
-	return
 
 /obj/structure/simple_door/process()
 	if(!material.radioactivity)
 		return
 	SSradiation.radiate(src, round(material.radioactivity/3))
 
-/obj/structure/simple_door/iron/New(var/newloc,var/material_name)
-	..(newloc, "iron")
+/obj/structure/simple_door/iron
+	material = MAT_IRON
 
-/obj/structure/simple_door/silver/New(var/newloc,var/material_name)
-	..(newloc, "silver")
+/obj/structure/simple_door/silver
+	material = MAT_SILVER
 
-/obj/structure/simple_door/gold/New(var/newloc,var/material_name)
-	..(newloc, "gold")
+/obj/structure/simple_door/gold
+	material = MAT_GOLD
 
-/obj/structure/simple_door/uranium/New(var/newloc,var/material_name)
-	..(newloc, "uranium")
+/obj/structure/simple_door/uranium
+	material = MAT_URANIUM
 
-/obj/structure/simple_door/sandstone/New(var/newloc,var/material_name)
-	..(newloc, "sandstone")
+/obj/structure/simple_door/sandstone
+	material = MAT_SANDSTONE
 
-/obj/structure/simple_door/phoron/New(var/newloc,var/material_name)
-	..(newloc, "phoron")
+/obj/structure/simple_door/phoron
+	material = MAT_PHORON
 
-/obj/structure/simple_door/diamond/New(var/newloc,var/material_name)
-	..(newloc, "diamond")
+/obj/structure/simple_door/diamond
+	material = MAT_DIAMOND
 
-/obj/structure/simple_door/wood/New(var/newloc,var/material_name)
-	..(newloc, MAT_WOOD)
+/obj/structure/simple_door/wood
+	material = MAT_WOOD
 
-/obj/structure/simple_door/sifwood/New(var/newloc,var/material_name)
-	..(newloc, MAT_SIFWOOD)
+/obj/structure/simple_door/sifwood
+	material = MAT_SIFWOOD
 
-/obj/structure/simple_door/resin/New(var/newloc,var/material_name)
-	..(newloc, "resin")
+/obj/structure/simple_door/resin
+	material = "resin"
 
-/obj/structure/simple_door/cult/New(var/newloc,var/material_name)
-	..(newloc, "cult")
+/obj/structure/simple_door/cult
+	material = "cult"
 
 /obj/structure/simple_door/cult/TryToSwitchState(atom/user)
 	if(isliving(user))

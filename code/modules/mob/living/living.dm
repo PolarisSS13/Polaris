@@ -1,5 +1,5 @@
-/mob/living/New()
-	..()
+/mob/living/Initialize()
+	. = ..()
 
 	//Prime this list if we need it.
 	if(has_huds)
@@ -475,41 +475,41 @@
 
 
 //Recursive function to find everything a mob is holding.
-/mob/living/get_contents(var/obj/item/weapon/storage/Storage = null)
+/mob/living/get_contents(var/obj/item/storage/Storage = null)
 	var/list/L = list()
 
 	if(Storage) //If it called itself
 		L += Storage.return_inv()
 
 		//Leave this commented out, it will cause storage items to exponentially add duplicate to the list
-		//for(var/obj/item/weapon/storage/S in Storage.return_inv()) //Check for storage items
+		//for(var/obj/item/storage/S in Storage.return_inv()) //Check for storage items
 		//	L += get_contents(S)
 
-		for(var/obj/item/weapon/gift/G in Storage.return_inv()) //Check for gift-wrapped items
+		for(var/obj/item/gift/G in Storage.return_inv()) //Check for gift-wrapped items
 			L += G.gift
-			if(istype(G.gift, /obj/item/weapon/storage))
+			if(istype(G.gift, /obj/item/storage))
 				L += get_contents(G.gift)
 
 		for(var/obj/item/smallDelivery/D in Storage.return_inv()) //Check for package wrapped items
 			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
+			if(istype(D.wrapped, /obj/item/storage)) //this should never happen
 				L += get_contents(D.wrapped)
 		return L
 
 	else
 
 		L += src.contents
-		for(var/obj/item/weapon/storage/S in src.contents)	//Check for storage items
+		for(var/obj/item/storage/S in src.contents)	//Check for storage items
 			L += get_contents(S)
 
-		for(var/obj/item/weapon/gift/G in src.contents) //Check for gift-wrapped items
+		for(var/obj/item/gift/G in src.contents) //Check for gift-wrapped items
 			L += G.gift
-			if(istype(G.gift, /obj/item/weapon/storage))
+			if(istype(G.gift, /obj/item/storage))
 				L += get_contents(G.gift)
 
 		for(var/obj/item/smallDelivery/D in src.contents) //Check for package wrapped items
 			L += D.wrapped
-			if(istype(D.wrapped, /obj/item/weapon/storage)) //this should never happen
+			if(istype(D.wrapped, /obj/item/storage)) //this should never happen
 				L += get_contents(D.wrapped)
 		return L
 
@@ -657,7 +657,7 @@
 
 /mob/living/proc/resist_grab()
 	var/resisting = 0
-	for(var/obj/item/weapon/grab/G in grabbed_by)
+	for(var/obj/item/grab/G in grabbed_by)
 		resisting++
 		G.handle_resist()
 	if(resisting)
@@ -698,7 +698,7 @@
 	return 1
 
 /mob/living/proc/get_restraining_bolt()
-	var/obj/item/weapon/implant/restrainingbolt/RB = locate() in src
+	var/obj/item/implant/restrainingbolt/RB = locate() in src
 	if(RB)
 		if(!RB.malfunction)
 			return TRUE
@@ -706,7 +706,7 @@
 	return FALSE
 
 /mob/living/proc/slip(var/slipped_on,stun_duration=8)
-	return 0
+	return FALSE
 
 /mob/living/carbon/drop_from_inventory(var/obj/item/W, var/atom/Target = null)
 	if(W in internal_organs)
@@ -839,17 +839,17 @@
 
 	if(lying)
 		density = 0
-		if(l_hand) 
+		if(l_hand)
 			unEquip(l_hand)
-		if(r_hand) 
+		if(r_hand)
 			unEquip(r_hand)
-		for(var/obj/item/weapon/holder/holder in get_mob_riding_slots())
+		for(var/obj/item/holder/holder in get_mob_riding_slots())
 			unEquip(holder)
 		update_water() // Submerges the mob.
 	else
 		density = initial(density)
 
-	for(var/obj/item/weapon/grab/G in grabbed_by)
+	for(var/obj/item/grab/G in grabbed_by)
 		if(G.state >= GRAB_AGGRESSIVE)
 			canmove = 0
 			break
@@ -938,7 +938,7 @@
 			var/B = 0
 
 			for(var/C in colors_to_blend)
-				var/RGB = hex2rgb(C)
+				var/RGB = rgb2num(C)
 				R = between(0, R + RGB[1], 255)
 				G = between(0, G + RGB[2], 255)
 				B = between(0, B + RGB[3], 255)
@@ -984,18 +984,17 @@
 		swap_hand()
 
 /mob/living/throw_item(atom/target)
-	src.throw_mode_off()
-	if(usr.stat || !target)
-		return
-	if(target.type == /obj/screen) return
+	if(incapacitated() || !target || istype(target, /obj/screen))
+		return FALSE
 
 	var/atom/movable/item = src.get_active_hand()
 
-	if(!item) return
+	if(!item)
+		return FALSE
 
 	var/throw_range = item.throw_range
-	if (istype(item, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = item
+	if(istype(item, /obj/item/grab))
+		var/obj/item/grab/G = item
 		item = G.throw_held() //throw the person instead of the grab
 		if(ismob(item))
 			var/mob/M = item
@@ -1012,9 +1011,35 @@
 					N.adjustBruteLoss(rand(10,30))
 			src.drop_from_inventory(G)
 
-	src.drop_from_inventory(item)
-	if(!item || !isturf(item.loc))
-		return
+			src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
+
+			if((isspace(src.loc)) || (src.lastarea?.has_gravity == 0))
+				src.inertia_dir = get_dir(target, src)
+				step(src, inertia_dir)
+			item.throw_at(target, throw_range, item.throw_speed, src)
+
+			return TRUE
+		return FALSE
+
+	if(a_intent == I_HELP && Adjacent(target) && isitem(item))
+		if(ishuman(target))
+			var/mob/living/carbon/human/H = target
+			if(H.in_throw_mode && H.a_intent == I_HELP && unEquip(item))
+				H.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
+				visible_message("<b>[src]</b> hands \the [H] \a [item].", SPAN_NOTICE("You give \the [target] \a [item]."))
+			else
+				to_chat(src, SPAN_NOTICE("You offer \the [item] to \the [target]."))
+				do_give(H)
+			return TRUE
+
+		drop_from_inventory(item)
+		item.forceMove(get_turf(target))
+		return TRUE
+
+	drop_from_inventory(item)
+
+	if(!item || QDELETED(item))
+		return TRUE //It may not have thrown, but it sure as hell left your hand successfully.
 
 	//actually throw it!
 	src.visible_message("<span class='warning'>[src] has thrown [item].</span>")
@@ -1035,6 +1060,7 @@
 
 
 	item.throw_at(target, throw_range, item.throw_speed, src)
+	return TRUE
 
 /mob/living/get_sound_env(var/pressure_factor)
 	if (hallucination)
@@ -1110,3 +1136,54 @@
 // Each mob does vision a bit differently so this is just for inheritence and also so overrided procs can make the vision apply instantly if they call `..()`.
 /mob/living/proc/disable_spoiler_vision()
 	handle_vision()
+
+/mob/living/proc/get_player_regions()
+	// A living player is always in a universal region
+	. = list(EVENT_REGION_UNIVERSAL)
+
+	var/turf/T = get_turf(src)
+	var/obj/effect/overmap/visitable/M = get_overmap_sector(T.z)
+
+	if(istype(M))
+		if(M.in_space)
+			if(T.z in using_map.station_levels)
+				. |= EVENT_REGION_SPACESTATION
+			else
+				. |= EVENT_REGION_DEEPSPACE
+		else
+			. |= EVENT_REGION_PLANETSURFACE
+
+	var/datum/map_z_level/zlevel = using_map.zlevels["[T.z]"]
+	if(istype(zlevel))
+		. |= zlevel.event_regions
+
+// kali maaaaa
+/mob/living/proc/rip_out_internal_organ(var/zone, var/skip_wounding = FALSE, var/damage_descriptor)
+	if(length(internal_organs))
+		. = pick_n_take(internal_organs)
+		if(ispath(.))
+			. = new .(src)
+		if(!skip_wounding)
+			take_damage(rand(10,20))
+
+/mob/living/proc/leaves_tracks_type()
+	return
+
+/mob/living/proc/update_bloodied()
+	return
+
+/mob/living/proc/walk_through_blood(var/obj/effect/decal/cleanable/blood/blood)
+	if(!leaves_tracks_type())
+		return FALSE
+	feet_blood_color = blood.basecolor
+	track_blood = max(blood.amount, track_blood)
+	LAZYINITLIST(feet_blood_DNA)
+	feet_blood_DNA |= blood.blood_DNA.Copy()
+	update_bloodied()
+
+/mob/living/proc/get_snow_footprint_state()
+	if(!hovering) // Flying things shouldn't make footprints.
+		return "snow_footprints"
+
+/mob/living/proc/IWasAttackedBy(var/mob/living/attacker)
+	return

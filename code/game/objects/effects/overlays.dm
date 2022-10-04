@@ -9,9 +9,9 @@
 	icon_state="b_beam"
 	var/tmp/atom/BeamSource
 
-/obj/effect/overlay/beam/New()
-	..()
-	spawn(10) qdel(src)
+/obj/effect/overlay/beam/Initialize()
+	. = ..()
+	QDEL_IN(src, 10)
 
 /obj/effect/overlay/palmtree_r
 	name = "Palm tree"
@@ -52,8 +52,8 @@
 	layer = ABOVE_MOB_LAYER
 	mouse_opacity = 0
 
-/obj/effect/overlay/wallrot/New()
-	..()
+/obj/effect/overlay/wallrot/Initialize()
+	. = ..()
 	pixel_x += rand(-10, 10)
 	pixel_y += rand(-10, 10)
 
@@ -65,7 +65,7 @@
 
 // Todo: Add a version that gradually reaccumulates over time by means of alpha transparency. -Spades
 /obj/effect/overlay/snow/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/weapon/shovel))
+	if (istype(W, /obj/item/shovel))
 		user.visible_message("<span class='notice'>[user] begins to shovel away \the [src].</span>")
 		if(do_after(user, 40))
 			to_chat(user, "<span class='notice'>You have finished shoveling!</span>")
@@ -110,3 +110,22 @@
 	plane = PLANE_LIGHTING_ABOVE
 	pixel_x = -32
 	pixel_y = -32
+
+// For skathari empress' telegrab warning, could replace down the line. 
+/obj/effect/overlay/skathari_telegrab
+	name = "bluespace displacement"
+	desc = "An eerie field of bluespace energy, you might want to run!"
+	icon = 'icons/effects/96x96.dmi'
+	icon_state = "emfield_s3"
+	alpha = 100
+	pixel_x = -32
+	pixel_y = -16 /// Line up with the big sprite that spawns it! 
+	plane = MOB_PLANE
+	layer = BELOW_MOB_LAYER
+
+/obj/effect/overlay/closet_door
+	anchored = TRUE
+	plane = FLOAT_PLANE
+	layer = FLOAT_LAYER
+	vis_flags = VIS_INHERIT_ID
+	appearance_flags = KEEP_TOGETHER | LONG_GLIDE | PIXEL_SCALE

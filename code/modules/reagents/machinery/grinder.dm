@@ -9,9 +9,9 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 5
 	active_power_usage = 100
-	circuit = /obj/item/weapon/circuitboard/grinder
+	circuit = /obj/item/circuitboard/grinder
 	var/inuse = 0
-	var/obj/item/weapon/reagent_containers/beaker = null
+	var/obj/item/reagent_containers/beaker = null
 	var/limit = 10
 	var/list/holdingitems = list()
 	var/list/sheet_reagents = list( //have a number of reageents divisible by REAGENTS_PER_SHEET (default 20) unless you like decimals,
@@ -38,7 +38,7 @@
 
 /obj/machinery/reagentgrinder/Initialize()
 	. = ..()
-	beaker = new /obj/item/weapon/reagent_containers/glass/beaker/large(src)
+	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
 	default_apply_parts()
 
 /obj/machinery/reagentgrinder/examine(mob/user)
@@ -76,9 +76,9 @@
 		if(default_deconstruction_crowbar(user, O))
 			return
 
-	if (istype(O,/obj/item/weapon/reagent_containers/glass) || \
-		istype(O,/obj/item/weapon/reagent_containers/food/drinks/glass2) || \
-		istype(O,/obj/item/weapon/reagent_containers/food/drinks/shaker))
+	if (istype(O,/obj/item/reagent_containers/glass) || \
+		istype(O,/obj/item/reagent_containers/food/drinks/glass2) || \
+		istype(O,/obj/item/reagent_containers/food/drinks/shaker))
 
 		if (beaker)
 			return 1
@@ -97,8 +97,8 @@
 	if(!istype(O))
 		return
 
-	if(istype(O,/obj/item/weapon/storage/bag/plants))
-		var/obj/item/weapon/storage/bag/plants/bag = O
+	if(istype(O,/obj/item/storage/bag/plants))
+		var/obj/item/storage/bag/plants/bag = O
 		var/failed = 1
 		for(var/obj/item/G in O.contents)
 			if(!G.reagents || !G.reagents.total_volume)
@@ -121,8 +121,8 @@
 		src.updateUsrDialog()
 		return 0
 
-	if(istype(O,/obj/item/weapon/gripper))
-		var/obj/item/weapon/gripper/B = O	//B, for Borg.
+	if(istype(O,/obj/item/gripper))
+		var/obj/item/gripper/B = O	//B, for Borg.
 		if(!B.wrapped)
 			to_chat(user, "\The [B] is not holding anything.")
 			return 0
@@ -248,7 +248,7 @@
 			if (beaker.reagents.total_volume >= beaker.reagents.maximum_volume)
 				break
 
-/obj/machinery/reagentgrinder/proc/replace_beaker(mob/living/user, obj/item/weapon/reagent_containers/new_beaker)
+/obj/machinery/reagentgrinder/proc/replace_beaker(mob/living/user, obj/item/reagent_containers/new_beaker)
 	if(!user)
 		return FALSE
 	if(beaker)

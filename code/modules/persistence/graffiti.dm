@@ -14,8 +14,8 @@
 	var/graffiti_age = 0
 	var/author = "unknown"
 
-/obj/effect/decal/writing/New(var/newloc, var/_age, var/_message, var/_author)
-	..(newloc)
+/obj/effect/decal/writing/Initialize(var/ml, var/_age, var/_message, var/_author)
+	. = ..(ml)
 	if(!isnull(_age))
 		graffiti_age = _age
 	if(!isnull(_message))
@@ -42,8 +42,8 @@
 	to_chat(user,  "It reads \"[message]\".")
 
 /obj/effect/decal/writing/attackby(var/obj/item/thing, var/mob/user)
-	if(istype(thing, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/welder = thing
+	if(istype(thing, /obj/item/weldingtool))
+		var/obj/item/weldingtool/welder = thing
 		if(welder.isOn() && welder.remove_fuel(0,user) && do_after(user, 5, src) && !QDELETED(src))
 			playsound(src.loc, welder.usesound, 50, 1)
 			user.visible_message("<span class='notice'>\The [user] clears away some graffiti.</span>")

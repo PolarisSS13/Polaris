@@ -1,7 +1,7 @@
 /////////////////////////////////////////////
 //Guest pass ////////////////////////////////
 /////////////////////////////////////////////
-/obj/item/weapon/card/id/guest
+/obj/item/card/id/guest
 	name = "guest pass"
 	desc = "Allows temporary access to station areas."
 	icon_state = "guest"
@@ -12,20 +12,20 @@
 	var/expired = 0
 	var/reason = "NOT SPECIFIED"
 
-/obj/item/weapon/card/id/guest/GetAccess()
+/obj/item/card/id/guest/GetAccess()
 	if (world.time > expiration_time)
 		return access
 	else
 		return temp_access
 
-/obj/item/weapon/card/id/guest/examine(mob/user)
+/obj/item/card/id/guest/examine(mob/user)
 	. = ..()
 	if (world.time < expiration_time)
 		. += "<span class='notice'>This pass expires at [worldtime2stationtime(expiration_time)].</span>"
 	else
 		. += "<span class='warning'>It expired at [worldtime2stationtime(expiration_time)].</span>"
 
-/obj/item/weapon/card/id/guest/read()
+/obj/item/card/id/guest/read()
 	if(!Adjacent(usr))
 		return //Too far to read
 	if (world.time > expiration_time)
@@ -39,7 +39,7 @@
 	to_chat(usr, "<span class='notice'>Issuing reason: [reason].</span>")
 	return
 
-/obj/item/weapon/card/id/guest/attack_self(mob/living/user as mob)
+/obj/item/card/id/guest/attack_self(mob/living/user as mob)
 	if(user.a_intent == I_HURT)
 		if(icon_state == "guest-invalid")
 			to_chat(user, "<span class='warning'>This guest pass is already deactivated!</span>")
@@ -55,16 +55,16 @@
 			expired = 1
 	return ..()
 
-/obj/item/weapon/card/id/guest/Initialize()
+/obj/item/card/id/guest/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src)
 	update_icon()
 
-/obj/item/weapon/card/id/guest/Destroy()
+/obj/item/card/id/guest/Destroy()
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/weapon/card/id/guest/process()
+/obj/item/card/id/guest/process()
 	if(expired == 0 && world.time >= expiration_time)
 		visible_message("<span class='warning'>\The [src] flashes a few times before turning red.</span>")
 		icon_state = "guest-invalid"
@@ -85,9 +85,9 @@
 	icon_keyboard = null
 	icon_screen = "pass"
 	density = 0
-	circuit = /obj/item/weapon/circuitboard/guestpass
+	circuit = /obj/item/circuitboard/guestpass
 
-	var/obj/item/weapon/card/id/giver
+	var/obj/item/card/id/giver
 	var/list/accesses = list()
 	var/giv_name = "NOT SPECIFIED"
 	var/reason = "NOT SPECIFIED"
@@ -96,13 +96,13 @@
 	var/list/internal_log = list()
 	var/mode = 0  // 0 - making pass, 1 - viewing logs
 
-/obj/machinery/computer/guestpass/New()
-	..()
+/obj/machinery/computer/guestpass/Initialize()
+	. = ..()
 	uid = "[rand(100,999)]-G[rand(10,99)]"
 
 
 /obj/machinery/computer/guestpass/attackby(obj/I, mob/user)
-	if(istype(I, /obj/item/weapon/card/id))
+	if(istype(I, /obj/item/card/id))
 		if(!giver && user.unEquip(I))
 			I.forceMove(src)
 			giver = I
@@ -208,7 +208,7 @@
 					accesses.Cut()
 				else
 					var/obj/item/I = usr.get_active_hand()
-					if (istype(I, /obj/item/weapon/card/id) && usr.unEquip(I))
+					if (istype(I, /obj/item/card/id) && usr.unEquip(I))
 						I.loc = src
 						giver = I
 
@@ -218,13 +218,13 @@
 					dat += "[entry]<br><hr>"
 				//to_chat(usr, "Printing the log, standby...")
 				//sleep(50)
-				var/obj/item/weapon/paper/P = new/obj/item/weapon/paper( loc )
+				var/obj/item/paper/P = new/obj/item/paper( loc )
 				P.name = "activity log"
 				P.info = dat
 
 			if ("issue")
 				if (giver)
-					var/number = add_zero("[rand(0,9999)]", 4)
+					var/number = pad_left("[rand(1, 9999)]", 4, "0")
 					var/entry = "\[[stationtime2text()]\] Pass #[number] issued by [giver.registered_name] ([giver.assignment]) to [giv_name]. Reason: [reason]. Grants access to following areas: "
 					for (var/i=1 to accesses.len)
 						var/A = accesses[i]
@@ -234,7 +234,7 @@
 					entry += ". Expires at [worldtime2stationtime(world.time + duration*10*60)]."
 					internal_log.Add(entry)
 
-					var/obj/item/weapon/card/id/guest/pass = new(src.loc)
+					var/obj/item/card/id/guest/pass = new(src.loc)
 					pass.temp_access = accesses.Copy()
 					pass.registered_name = giv_name
 					pass.expiration_time = world.time + duration*10*60

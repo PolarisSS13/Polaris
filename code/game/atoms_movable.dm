@@ -30,24 +30,30 @@
 	var/cloaked = FALSE //If we're cloaked or not
 	var/image/cloaked_selfimage //The image we use for our client to let them see where we are
 
+
 /atom/movable/Destroy()
-	. = ..()
-	if(reagents)
+	if (reagents)
 		qdel(reagents)
 		reagents = null
-	for(var/atom/movable/AM in contents)
-		qdel(AM)
-	var/turf/un_opaque
-	if(opacity && isturf(loc))
-		un_opaque = loc
-
+	walk(src, 0)
+	for (var/atom/movable/movable in contents)
+		qdel(movable)
+	if (orbiting)
+		stop_orbit()
+	var/turf/origin
+	if (opacity && isturf(loc))
+		origin = loc
+	unbuckle_all_mobs()
 	moveToNullspace()
-	if(un_opaque)
-		un_opaque.recalc_atom_opacity()
+	if (origin)
+		origin.recalc_atom_opacity()
+		origin.reconsider_lights()
 	if (pulledby)
 		if (pulledby.pulling == src)
 			pulledby.pulling = null
 		pulledby = null
+	return ..()
+
 
 /atom/movable/vv_edit_var(var_name, var_value)
 	if(var_name in GLOB.VVpixelmovement)			//Pixel movement is not yet implemented, changing this will break everything irreversibly.
@@ -58,6 +64,9 @@
 /atom/movable/Move(atom/newloc, direct = 0, movetime)
 	// Didn't pass enough info
 	if(!loc || !newloc)
+		return FALSE
+
+	if(SEND_SIGNAL(src, COMSIG_MOVABLE_PRE_MOVE, newloc, direct, movetime) & COMPONENT_MOVABLE_BLOCK_PRE_MOVE)
 		return FALSE
 
 	// Store this early before we might move, it's used several places
@@ -206,6 +215,9 @@
 	if(riding_datum)
 		riding_datum.handle_vehicle_layer()
 		riding_datum.handle_vehicle_offsets()
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_MOVED, old_loc, direction)
+
 	return TRUE
 
 /atom/movable/set_dir(newdir)
@@ -248,6 +260,9 @@
 		throwing = 0
 		if(QDELETED(A))
 			return
+
+	SEND_SIGNAL(src, COMSIG_MOVABLE_BUMP, A)
+
 	A.Bumped(src)
 	A.last_bumped = world.time
 
@@ -405,6 +420,7 @@
 				src.throw_impact(A,speed)
 
 /atom/movable/proc/throw_at(atom/target, range, speed, thrower)
+	set waitfor = FALSE
 	if(!target || !src)
 		return 0
 	if(target.z != src.z)
@@ -496,10 +512,10 @@
 	var/atom/master = null
 	anchored = 1
 
-/atom/movable/overlay/New()
+/atom/movable/overlay/Initialize()
 	for(var/x in src.verbs)
 		src.verbs -= x
-	..()
+	. = ..()
 
 /atom/movable/overlay/attackby(a, b)
 	if (src.master)

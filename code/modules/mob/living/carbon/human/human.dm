@@ -8,7 +8,7 @@
 	has_huds = TRUE 					//We do have HUDs (like health, wanted, status, not inventory slots)
 
 	var/embedded_flag					//To check if we've need to roll for damage on movement while an item is imbedded in us.
-	var/obj/item/weapon/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
+	var/obj/item/rig/wearing_rig // This is very not good, but it's much much better than calling get_rig() every update_canmove() call.
 	var/last_push_time					//For human_attackhand.dm, keeps track of the last use of disarm
 
 	var/spitting = 0 					//Spitting and spitting related things. Any human based ranged attacks, be it innate or added abilities.
@@ -19,6 +19,7 @@
 	var/can_defib = 1					//Horrible damage (like beheadings) will prevent defibbing organics.
 	var/active_regen = FALSE //Used for the regenerate proc in human_powers.dm
 	var/active_regen_delay = 300
+	var/last_breath_sound				// Feels weird doing this, but allows us to store the value across proc calls per-mob.
 
 /mob/living/carbon/human/Initialize(mapload, var/new_species = null)
 	if(!dna)
@@ -85,8 +86,8 @@
 			stat(null, "Phoron Stored: [P.stored_plasma]/[P.max_plasma]")
 
 
-		if(back && istype(back,/obj/item/weapon/rig))
-			var/obj/item/weapon/rig/suit = back
+		if(back && istype(back,/obj/item/rig))
+			var/obj/item/rig/suit = back
 			var/cell_status = "ERROR"
 			if(suit.cell) cell_status = "[suit.cell.charge]/[suit.cell.maxcharge]"
 			stat(null, "Suit charge: [cell_status]")
@@ -105,7 +106,7 @@
 
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.explosion_modifier))
-			severity = CLAMP(severity + M.explosion_modifier, 1, 4)
+			severity = clamp(severity + M.explosion_modifier, 1, 4)
 
 	severity = round(severity)
 
@@ -138,7 +139,7 @@
 				b_loss = b_loss/1.5
 				f_loss = f_loss/1.5
 
-			if (!get_ear_protection() >= 2)
+			if (get_sound_volume_multiplier() >= 0.2)
 				ear_damage += 30
 				ear_deaf += 120
 			if (prob(70) && !shielded)
@@ -148,7 +149,7 @@
 			b_loss += 30
 			if (prob(getarmor(null, "bomb")))
 				b_loss = b_loss/2
-			if (!get_ear_protection() >= 2)
+			if (get_sound_volume_multiplier() >= 0.2)
 				ear_damage += 15
 				ear_deaf += 60
 			if (prob(50) && !shielded)
@@ -184,13 +185,13 @@
 /mob/living/carbon/human/proc/implant_loyalty(override = FALSE) // Won't override by default.
 	if(!config.use_loyalty_implants && !override) return // Nuh-uh.
 
-	var/obj/item/weapon/implant/loyalty/L = new/obj/item/weapon/implant/loyalty(src)
+	var/obj/item/implant/loyalty/L = new/obj/item/implant/loyalty(src)
 	if(L.handle_implant(src, BP_HEAD))
 		L.post_implant(src)
 
 /mob/living/carbon/human/proc/is_loyalty_implanted()
 	for(var/L in src.contents)
-		if(istype(L, /obj/item/weapon/implant/loyalty))
+		if(istype(L, /obj/item/implant/loyalty))
 			for(var/obj/item/organ/external/O in src.organs)
 				if(L in O.implants)
 					return 1
@@ -218,14 +219,14 @@
 
 // Get rank from ID, ID inside PDA, PDA, ID in wallet, etc.
 /mob/living/carbon/human/proc/get_authentification_rank(var/if_no_id = "No id", var/if_no_job = "No job")
-	var/obj/item/device/pda/pda = wear_id
+	var/obj/item/pda/pda = wear_id
 	if (istype(pda))
 		if (pda.id)
 			return pda.id.rank ? pda.id.rank : if_no_job
 		else
 			return pda.ownrank ? pda.ownrank : if_no_job
 	else
-		var/obj/item/weapon/card/id/id = get_idcard()
+		var/obj/item/card/id/id = get_idcard()
 		if(id)
 			return id.rank ? id.rank : if_no_job
 		else
@@ -234,14 +235,14 @@
 //gets assignment from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_assignment(var/if_no_id = "No id", var/if_no_job = "No job")
-	var/obj/item/device/pda/pda = wear_id
+	var/obj/item/pda/pda = wear_id
 	if (istype(pda))
 		if (pda.id)
 			return pda.id.assignment
 		else
 			return pda.ownjob ? pda.ownjob : if_no_job
 	else
-		var/obj/item/weapon/card/id/id = get_idcard()
+		var/obj/item/card/id/id = get_idcard()
 		if(id)
 			return id.assignment ? id.assignment : if_no_job
 		else
@@ -250,14 +251,14 @@
 //gets name from ID or ID inside PDA or PDA itself
 //Useful when player do something with computers
 /mob/living/carbon/human/proc/get_authentification_name(var/if_no_id = "Unknown")
-	var/obj/item/device/pda/pda = wear_id
+	var/obj/item/pda/pda = wear_id
 	if (istype(pda))
 		if (pda.id)
 			return pda.id.registered_name
 		else
 			return pda.owner ? pda.owner : if_no_id
 	else
-		var/obj/item/weapon/card/id/id = get_idcard()
+		var/obj/item/card/id/id = get_idcard()
 		if(id)
 			return id.registered_name
 		else
@@ -286,11 +287,11 @@
 //Useful when player is being seen by other mobs
 /mob/living/carbon/human/proc/get_id_name(var/if_no_id = "Unknown")
 	. = if_no_id
-	if(istype(wear_id,/obj/item/device/pda))
-		var/obj/item/device/pda/P = wear_id
+	if(istype(wear_id,/obj/item/pda))
+		var/obj/item/pda/P = wear_id
 		return P.owner ? P.owner : if_no_id
 	if(wear_id)
-		var/obj/item/weapon/card/id/I = wear_id.GetID()
+		var/obj/item/card/id/I = wear_id.GetID()
 		if(I)
 			return I.registered_name
 	return
@@ -339,7 +340,7 @@
 
 			var/modified = 0
 			var/perpname = "wot"
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -375,7 +376,7 @@
 			var/perpname = "wot"
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -402,7 +403,7 @@
 			var/perpname = "wot"
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -427,7 +428,7 @@
 	if (href_list["secrecordadd"])
 		if(hasHUD(usr,"security"))
 			var/perpname = "wot"
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -455,7 +456,7 @@
 			var/perpname = "wot"
 			var/modified = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -491,7 +492,7 @@
 			var/perpname = "wot"
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -519,7 +520,7 @@
 			var/perpname = "wot"
 			var/read = 0
 
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -544,7 +545,7 @@
 	if (href_list["medrecordadd"])
 		if(hasHUD(usr,"medical"))
 			var/perpname = "wot"
-			var/obj/item/weapon/card/id/I = GetIdCard()
+			var/obj/item/card/id/I = GetIdCard()
 			if(I)
 				perpname = I.registered_name
 			else
@@ -848,13 +849,27 @@
 		remoteview_target = null
 		reset_view(0)
 
-/mob/living/carbon/human/get_visible_gender()
-	if(wear_suit && wear_suit.flags_inv & HIDEJUMPSUIT && ((head && head.flags_inv & HIDEMASK) || wear_mask))
-		return PLURAL //plural is the gender-neutral default
-	if(species)
-		if(species.ambiguous_genders)
-			return PLURAL // regardless of what you're wearing, your gender can't be figured out
-	return get_gender()
+
+/mob/living/carbon/human/get_visible_gender(mob/user, force)
+	switch (force)
+		if (VISIBLE_GENDER_FORCE_PLURAL)
+			return PLURAL
+		if (VISIBLE_GENDER_FORCE_IDENTIFYING)
+			return get_gender()
+		if (VISIBLE_GENDER_FORCE_BIOLOGICAL)
+			return gender
+		else
+			if ((wear_mask || (head?.flags_inv & HIDEMASK)) && (wear_suit?.flags_inv & HIDEJUMPSUIT))
+				return PLURAL
+			if (species?.ambiguous_genders && user)
+				if (ishuman(user))
+					var/mob/living/carbon/human/human = user
+					if (!istype(human.species, species))
+						return PLURAL
+				else if (!isobserver(user) && !issilicon(user))
+					return PLURAL
+			return get_gender()
+
 
 /mob/living/carbon/human/proc/increase_germ_level(n)
 	if(gloves)
@@ -976,8 +991,8 @@
 
 	var/list/visible_implants = list()
 	for(var/obj/item/organ/external/organ in src.organs)
-		for(var/obj/item/weapon/O in organ.implants)
-			if(!istype(O,/obj/item/weapon/implant) && (O.w_class > class) && !istype(O,/obj/item/weapon/material/shard/shrapnel))
+		for(var/obj/item/O in organ.implants)
+			if(!istype(O,/obj/item/implant) && (O.w_class > class) && !istype(O,/obj/item/material/shard/shrapnel))
 				visible_implants += O
 
 	return(visible_implants)
@@ -985,7 +1000,7 @@
 /mob/living/carbon/human/embedded_needs_process()
 	for(var/obj/item/organ/external/organ in src.organs)
 		for(var/obj/item/O in organ.implants)
-			if(!istype(O, /obj/item/weapon/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
+			if(!istype(O, /obj/item/implant)) //implant type items do not cause embedding effects, see handle_embedded_objects()
 				return 1
 	return 0
 
@@ -995,7 +1010,7 @@
 		if(organ.splinted) //Splints prevent movement.
 			continue
 		for(var/obj/item/O in organ.implants)
-			if(!istype(O,/obj/item/weapon/implant) && prob(5)) //Moving with things stuck in you could be bad.
+			if(!istype(O,/obj/item/implant) && prob(5)) //Moving with things stuck in you could be bad.
 				// All kinds of embedded objects cause bleeding.
 				if(!can_feel_pain(organ.organ_tag))
 					to_chat(src, "<span class='warning'>You feel [O] moving inside your [organ.name].</span>")
@@ -1308,9 +1323,9 @@
 			footcoverage_check = TRUE
 			break
 	if((species.flags & NO_SLIP && !footcoverage_check) || (shoes && (shoes.item_flags & NOSLIP))) //Footwear negates a species' natural traction.
-		return 0
+		return FALSE
 	if(..(slipped_on,stun_duration))
-		return 1
+		return TRUE
 
 /mob/living/carbon/human/proc/relocate()
 	set category = "Object"
@@ -1488,7 +1503,7 @@
 	return ..()
 
 /mob/living/carbon/human/is_muzzled()
-	return (wear_mask && (istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(src.wear_mask, /obj/item/weapon/grenade)))
+	return (wear_mask && (istype(wear_mask, /obj/item/clothing/mask/muzzle) || istype(src.wear_mask, /obj/item/grenade)))
 
 /mob/living/carbon/human/get_fire_icon_state()
 	return species.fire_icon_state
@@ -1541,7 +1556,7 @@
 	if(hasHUD(user,"security"))
 		//Try to find their name
 		var/perpname
-		var/obj/item/weapon/card/id/I = GetIdCard()
+		var/obj/item/card/id/I = GetIdCard()
 		if(I)
 			perpname = I.registered_name
 		else
@@ -1610,7 +1625,7 @@
 			to_chat(src, span("warning", "Your [goggles.name] have suddenly turned off!"))
 
 	// RIGs.
-	var/obj/item/weapon/rig/rig = get_rig()
+	var/obj/item/rig/rig = get_rig()
 	if(istype(rig) && rig.visor?.active && rig.visor.vision?.glasses)
 		var/obj/item/clothing/glasses/rig_goggles = rig.visor.vision.glasses
 		if(rig_goggles.vision_flags & (SEE_TURFS|SEE_OBJS))
@@ -1621,3 +1636,32 @@
 
 /mob/living/carbon/human/get_mob_riding_slots()
 	return list(back, head, wear_suit)
+
+/mob/living/carbon/human/get_sound_volume_multiplier()
+	. = ..()
+	for(var/obj/item/clothing/C in list(l_ear, r_ear, head))
+		. = min(., C.volume_multiplier)
+
+/mob/living/carbon/human/rip_out_internal_organ(var/zone, var/skip_wounding = FALSE, var/damage_descriptor)
+
+	var/obj/item/organ/organ
+	var/obj/item/organ/external/limb
+	if(zone)
+		limb = organs_by_name[zone]
+		if(limb && length(limb.internal_organs))
+			organ = pick_n_take(limb.internal_organs)
+	if(!organ)
+		organ = ..(skip_wounding = TRUE)
+
+	if(organ)
+		organ.removed()
+		if(organ.parent_organ && !limb)
+			limb = organs_by_name[organ.parent_organ]
+		if(limb)
+			limb.take_damage(rand(10,20), 0, TRUE, TRUE, damage_descriptor)
+		else
+			take_damage(rand(10, 20))
+		return organ
+
+/mob/living/carbon/human/leaves_tracks_type()
+	return species.get_move_trail(src)

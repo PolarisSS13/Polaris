@@ -14,38 +14,37 @@
 	update_icon()
 
 /obj/structure/closet/secure_closet/guncabinet/update_icon()
-	overlays.Cut()
-	if(opened)
-		overlays += icon(icon,"door_open")
-	else
-		var/lazors = 0
-		var/shottas = 0
-		for (var/obj/item/weapon/gun/G in contents)
-			if (istype(G, /obj/item/weapon/gun/energy))
-				lazors++
-			if (istype(G, /obj/item/weapon/gun/projectile))
-				shottas++
+	cut_overlays()
+	var/list/add = list()
+	if (!opened)
+		var/energy_count = 0
+		var/projectile_count = 0
+		for (var/obj/item/gun/gun in contents)
+			if (istype(gun, /obj/item/gun/energy))
+				++energy_count
+			else if(istype(gun, /obj/item/gun/projectile))
+				++projectile_count
 		for (var/i = 0 to 2)
-			if(lazors || shottas) // only make icons if we have one of the two types.
-				var/image/gun = image(icon(src.icon))
-				if (lazors > shottas)
-					lazors--
-					gun.icon_state = "laser"
-				else if (shottas)
-					shottas--
-					gun.icon_state = "projectile"
-				gun.pixel_x = i*4
-				overlays += gun
-
-		overlays += icon(src.icon, "door")
-
-		if(sealed)
-			overlays += icon(src.icon,"sealed")
-
-		if(broken)
-			overlays += icon(src.icon,"broken")
+			if (!energy_count && !projectile_count)
+				break
+			var/image/image = new (icon)
+			image.pixel_x = i * 4
+			if (energy_count > projectile_count)
+				image.icon_state = "laser"
+				--energy_count
+			else if (projectile_count)
+				image.icon_state = "projectile"
+				--projectile_count
+			add += image
+		add += "door"
+		if (sealed)
+			add += "sealed"
+		if (broken)
+			add += "broken"
 		else if (locked)
-			overlays += icon(src.icon,"locked")
+			add += "locked"
 		else
-			overlays += icon(src.icon,"open")
-
+			add += "open"
+	else
+		add += "door_open"
+	add_overlay(add)

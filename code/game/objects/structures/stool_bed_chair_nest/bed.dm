@@ -22,8 +22,8 @@
 	var/base_icon = "bed"
 	var/applies_material_colour = 1 //Set to 0 whenever defining a custom colour or it will apply additively to the material, or when no colour overlay should be present.
 
-/obj/structure/bed/New(var/newloc, var/new_material, var/new_padding_material)
-	..(newloc)
+/obj/structure/bed/Initialize(var/ml, var/new_material, var/new_padding_material)
+	. = ..(ml)
 	if(!new_material)
 		new_material = DEFAULT_WALL_MATERIAL
 	material = get_material_by_name(new_material)
@@ -86,7 +86,7 @@
 				qdel(src)
 				return
 
-/obj/structure/bed/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_wrench())
 		playsound(src, W.usesound, 50, 1)
 		dismantle()
@@ -114,6 +114,7 @@
 		if(!istype(src.loc, /turf))
 			user.drop_from_inventory(src)
 			src.loc = get_turf(src)
+		playsound(src.loc, 'sound/effects/rustle5.ogg', 50, 1)
 		to_chat(user, "You add padding to \the [src].")
 		add_padding(padding_type)
 		return
@@ -126,8 +127,15 @@
 		playsound(src, W.usesound, 100, 1)
 		remove_padding()
 
-	else if(istype(W, /obj/item/weapon/grab))
-		var/obj/item/weapon/grab/G = W
+	else if(istype(W, /obj/item/disk) || (istype(W, /obj/item/toy/plushie)))
+		user.drop_from_inventory(W, get_turf(src))
+		W.pixel_x = 10 //make sure they reach the pillow
+		W.pixel_y = -6
+		if(istype(W, /obj/item/disk))
+			user.visible_message("<span class='notice'>[src] sleeps soundly. Sleep tight, disky.</span>")
+
+	else if(istype(W, /obj/item/grab))
+		var/obj/item/grab/G = W
 		var/mob/living/affecting = G.affecting
 		if(has_buckled_mobs()) //Handles trying to buckle someone else to a chair when someone else is on it
 			to_chat(user, "<span class='notice'>\The [src] already has someone buckled to it.</span>")
@@ -166,19 +174,19 @@
 	icon_state = "psychbed"
 	base_icon = "psychbed"
 
-/obj/structure/bed/psych/New(var/newloc)
-	..(newloc,"wood","leather")
+/obj/structure/bed/psych/Initialize(var/ml)
+	. = ..(ml, MAT_WOOD, MAT_LEATHER)
 
-/obj/structure/bed/padded/New(var/newloc)
-	..(newloc,"plastic","cotton")
+/obj/structure/bed/padded/Initialize(var/ml)
+	. = ..(ml, MAT_PLASTIC, MAT_CLOTH)
 
 /obj/structure/bed/double
 	name = "double bed"
 	icon_state = "doublebed"
 	base_icon = "doublebed"
 
-/obj/structure/bed/double/padded/New(var/newloc)
-	..(newloc,"wood","cotton")
+/obj/structure/bed/double/padded/Initialize(var/ml)
+	. = ..(ml, MAT_WOOD, MAT_CLOTH)
 
 /obj/structure/bed/double/post_buckle_mob(mob/living/M as mob)
 	if(M.buckled == src)
@@ -210,7 +218,7 @@
 /obj/structure/bed/roller/update_icon()
 	return
 
-/obj/structure/bed/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/structure/bed/roller/attackby(obj/item/W as obj, mob/user as mob)
 	if(W.is_wrench() || istype(W,/obj/item/stack) || W.is_wirecutter())
 		return
 	else if(istype(W,/obj/item/roller_holder))
@@ -243,7 +251,7 @@
 	R.add_fingerprint(user)
 	qdel(src)
 
-/obj/item/roller/attackby(obj/item/weapon/W as obj, mob/user as mob)
+/obj/item/roller/attackby(obj/item/W as obj, mob/user as mob)
 
 	if(istype(W,/obj/item/roller_holder))
 		var/obj/item/roller_holder/RH = W
@@ -270,8 +278,8 @@
 	icon_state = "rollerbed"
 	var/obj/item/roller/held
 
-/obj/item/roller_holder/New()
-	..()
+/obj/item/roller_holder/Initialize()
+	. = ..()
 	held = new /obj/item/roller(src)
 
 /obj/item/roller_holder/attack_self(mob/user as mob)
@@ -343,5 +351,5 @@
 /obj/structure/bed/alien/update_icon()
 	return // Doesn't care about material or anything else.
 
-/obj/structure/bed/alien/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/bed/alien/attackby(obj/item/W, mob/user)
 	return // No deconning.

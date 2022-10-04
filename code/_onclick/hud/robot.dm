@@ -1,4 +1,4 @@
-var/obj/screen/robot_inventory
+var/global/obj/screen/robot_inventory
 
 /mob/living/silicon/robot/create_mob_hud(datum/hud/HUD, apply_to_client = TRUE)
 	..()
@@ -141,8 +141,8 @@ var/obj/screen/robot_inventory
 	zone_sel = new /obj/screen/zone_sel()
 	zone_sel.icon = HUD.ui_style
 	zone_sel.alpha = HUD.ui_alpha
-	zone_sel.overlays.Cut()
-	zone_sel.overlays += image('icons/mob/zone_sel.dmi', "[zone_sel.selecting]")
+	zone_sel.cut_overlays()
+	zone_sel.add_overlay(image('icons/mob/zone_sel.dmi', "[zone_sel.selecting]"))
 
 	//Handle the gun settings buttons
 	gun_setting_icon = new /obj/screen/gun/mode(null)

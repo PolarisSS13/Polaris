@@ -97,7 +97,7 @@
 			if(0.5 to 1.0)
 				. += "<span class='notice'>It has a few scrapes and dents.</span>"
 
-/obj/structure/table/attackby(obj/item/weapon/W, mob/user)
+/obj/structure/table/attackby(obj/item/W, mob/user)
 
 	if(reinforced && W.is_screwdriver())
 		remove_reinforced(W, user)
@@ -142,8 +142,8 @@
 		dismantle(W, user)
 		return 1
 
-	if(health < maxhealth && istype(W, /obj/item/weapon/weldingtool))
-		var/obj/item/weapon/weldingtool/F = W
+	if(health < maxhealth && istype(W, /obj/item/weldingtool))
+		var/obj/item/weldingtool/F = W
 		if(F.welding)
 			to_chat(user, "<span class='notice'>You begin reparing damage to \the [src].</span>")
 			playsound(src, F.usesound, 50, 1)
@@ -271,10 +271,10 @@
 	manipulating = 0
 	return null
 
-/obj/structure/table/proc/remove_reinforced(obj/item/weapon/S, mob/user)
+/obj/structure/table/proc/remove_reinforced(obj/item/S, mob/user)
 	reinforced = common_material_remove(user, reinforced, 40 * S.toolspeed, "reinforcements", "screws", S.usesound)
 
-/obj/structure/table/proc/remove_material(obj/item/weapon/W, mob/user)
+/obj/structure/table/proc/remove_material(obj/item/W, mob/user)
 	material = common_material_remove(user, material, 20 * W.toolspeed, "plating", "bolts", W.usesound)
 
 /obj/structure/table/proc/dismantle(obj/item/W, mob/user)
@@ -292,7 +292,7 @@
 	qdel(src)
 	return
 
-// Returns a list of /obj/item/weapon/material/shard objects that were created as a result of this table's breakage.
+// Returns a list of /obj/item/material/shard objects that were created as a result of this table's breakage.
 // Used for !fun! things such as embedding shards in the faces of tableslammed people.
 
 // The repeated
@@ -302,7 +302,7 @@
 
 /obj/structure/table/proc/break_to_parts(full_return = 0)
 	var/list/shards = list()
-	var/obj/item/weapon/material/shard/S = null
+	var/obj/item/material/shard/S = null
 	if(reinforced)
 		if(reinforced.stack_type && (full_return || prob(20)))
 			reinforced.place_sheet(loc)
@@ -338,14 +338,14 @@
 /obj/structure/table/update_icon()
 	if(flipped != 1)
 		icon_state = "blank"
-		overlays.Cut()
+		cut_overlays()
 
 		var/image/I
 
 		// Base frame shape. Mostly done for glass/diamond tables, where this is visible.
 		for(var/i = 1 to 4)
 			I = image(icon, dir = 1<<(i-1), icon_state = connections[i])
-			overlays += I
+			add_overlay(I)
 
 		// Standard table image
 		if(material)
@@ -353,7 +353,7 @@
 				I = image(icon, "[material.icon_base]_[connections[i]]", dir = 1<<(i-1))
 				if(material.icon_colour) I.color = material.icon_colour
 				I.alpha = 255 * material.opacity
-				overlays += I
+				add_overlay(I)
 
 		// Reinforcements
 		if(reinforced)
@@ -361,14 +361,14 @@
 				I = image(icon, "[reinforced.icon_reinf]_[connections[i]]", dir = 1<<(i-1))
 				I.color = reinforced.icon_colour
 				I.alpha = 255 * reinforced.opacity
-				overlays += I
+				add_overlay(I)
 
 		if(carpeted)
 			for(var/i = 1 to 4)
 				I = image(icon, "carpet_[connections[i]]", dir = 1<<(i-1))
-				overlays += I
+				add_overlay(I)
 	else
-		overlays.Cut()
+		cut_overlays()
 		var/type = 0
 		var/tabledirs = 0
 		for(var/direction in list(turn(dir,90), turn(dir,-90)) )
@@ -389,7 +389,7 @@
 			var/image/I = image(icon, "[material.icon_base]_flip[type]")
 			I.color = material.icon_colour
 			I.alpha = 255 * material.opacity
-			overlays += I
+			add_overlay(I)
 			name = "[material.display_name] table"
 		else
 			name = "table frame"
@@ -398,10 +398,10 @@
 			var/image/I = image(icon, "[reinforced.icon_reinf]_flip[type]")
 			I.color = reinforced.icon_colour
 			I.alpha = 255 * reinforced.opacity
-			overlays += I
+			add_overlay(I)
 
 		if(carpeted)
-			overlays += "carpet_flip[type]"
+			add_overlay("carpet_flip[type]")
 
 
 #define CORNER_NONE 0

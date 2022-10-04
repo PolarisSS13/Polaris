@@ -19,7 +19,7 @@
 
 	var/debug = 0
 	var/requires_power = 1
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/New()
+	var/always_unpowered = 0	//this gets overriden to 1 for space in area/Initialize()
 
 	// Power channel status - Is it currently energized?
 	var/power_equip = TRUE
@@ -43,7 +43,9 @@
 	var/no_air = null
 //	var/list/lights				// list of all lights on this area
 	var/list/all_doors = null		//Added by Strumpetplaya - Alarm Change - Contains a list of doors adjacent to this area
+	var/list/all_arfgs = null		//Similar, but a list of all arfgs adjacent to this area
 	var/firedoors_closed = 0
+	var/arfgs_active = 0
 	var/list/ambience = list()
 	var/list/forced_ambience = null
 	var/sound_env = STANDARD_STATION
@@ -52,10 +54,13 @@
 	var/no_spoilers = FALSE // If true, makes it much more difficult to see what is inside an area with things like mesons.
 	var/soundproofed = FALSE // If true, blocks sounds from other areas and prevents hearers on other areas from hearing the sounds within.
 
+/area/New()
+	icon_state = ""
+	luminosity = !dynamic_lighting
+	..()
+
 /area/Initialize()
 	. = ..()
-	luminosity = !(dynamic_lighting)
-	icon_state = ""
 	return INITIALIZE_HINT_LATELOAD // Areas tradiationally are initialized AFTER other atoms.
 
 /area/LateInitialize()
@@ -66,6 +71,10 @@
 	power_change()		// all machines set to current power level, also updates lighting icon
 	if(no_spoilers)
 		set_spoiler_obfuscation(TRUE)
+
+	icon = 'icons/turf/areas.dmi'
+	icon_state = "white"
+	blend_mode = BLEND_MULTIPLY
 
 // Changes the area of T to A. Do not do this manually.
 // Area is expected to be a non-null instance.
@@ -103,13 +112,13 @@
 
 /area/proc/atmosalert(danger_level, var/alarm_source)
 	if (danger_level == 0)
-		atmosphere_alarm.clearAlarm(src, alarm_source)
+		GLOB.atmosphere_alarm.clearAlarm(src, alarm_source)
 	else
 		var/obj/machinery/alarm/atmosalarm = alarm_source //maybe other things can trigger these, who knows
 		if(istype(atmosalarm))
-			atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level, hidden = atmosalarm.alarms_hidden)
+			GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level, hidden = atmosalarm.alarms_hidden)
 		else
-			atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
+			GLOB.atmosphere_alarm.triggerAlarm(src, alarm_source, severity = danger_level)
 
 	//Check all the alarms before lowering atmosalm. Raising is perfectly fine.
 	for (var/obj/machinery/alarm/AA in src)
@@ -128,12 +137,14 @@
 		return 1
 	return 0
 
-// Either close or open firedoors depending on current alert statuses
+// Either close or open firedoors and arfgs depending on current alert statuses
 /area/proc/firedoors_update()
 	if(fire || party || atmosalm)
 		firedoors_close()
+		arfgs_activate()
 	else
 		firedoors_open()
+		arfgs_deactivate()
 
 // Close all firedoors in the area
 /area/proc/firedoors_close()
@@ -163,6 +174,25 @@
 					spawn(0)
 						E.open()
 
+// Activate all retention fields!
+/area/proc/arfgs_activate()
+	if(!arfgs_active)
+		arfgs_active = TRUE
+		if(!all_arfgs)
+			return
+		for(var/obj/machinery/atmospheric_field_generator/E in all_arfgs)
+			E.generate_field() //don't need to check powered state like doors, the arfgs handles it on its end
+			E.wasactive = TRUE
+
+// Deactivate retention fields!
+/area/proc/arfgs_deactivate()
+	if(arfgs_active)
+		arfgs_active = FALSE
+		if(!all_arfgs)
+			return
+		for(var/obj/machinery/atmospheric_field_generator/E in all_arfgs)
+			E.disable_field()
+			E.wasactive = FALSE
 
 /area/proc/fire_alert()
 	if(!fire)
@@ -339,7 +369,7 @@
 
 //////////////////////////////////////////////////////////////////
 
-var/list/mob/living/forced_ambiance_list = new
+var/global/list/mob/living/forced_ambiance_list = new
 
 /area/Entered(A)
 	if(!istype(A,/mob/living))	return
@@ -464,7 +494,7 @@ var/list/mob/living/forced_ambiance_list = new
 
 /*Adding a wizard area teleport list because motherfucking lag -- Urist*/
 /*I am far too lazy to make it a proper list of areas so I'll just make it run the usual telepot routine at the start of the game*/
-var/list/teleportlocs = list()
+var/global/list/teleportlocs = list()
 
 /hook/startup/proc/setupTeleportLocs()
 	for(var/area/AR in world)
@@ -479,7 +509,7 @@ var/list/teleportlocs = list()
 
 	return 1
 
-var/list/ghostteleportlocs = list()
+var/global/list/ghostteleportlocs = list()
 
 /hook/startup/proc/setupGhostTeleportLocs()
 	for(var/area/AR in world)

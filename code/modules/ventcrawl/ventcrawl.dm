@@ -1,13 +1,13 @@
-var/list/ventcrawl_machinery = list(
+var/global/list/ventcrawl_machinery = list(
 	/obj/machinery/atmospherics/unary/vent_pump,
 	/obj/machinery/atmospherics/unary/vent_scrubber
 	)
 
 // Vent crawling whitelisted items, whoo
 /mob/living/var/list/can_enter_vent_with = list(
-	/obj/item/weapon/implant,
-	/obj/item/device/radio/borg,
-	/obj/item/weapon/holder,
+	/obj/item/implant,
+	/obj/item/radio/borg,
+	/obj/item/holder,
 	/obj/machinery/camera,
 	/mob/living/simple_mob/animal/borer,
 	/obj/screen

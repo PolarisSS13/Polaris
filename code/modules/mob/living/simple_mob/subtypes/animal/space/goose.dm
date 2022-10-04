@@ -21,9 +21,11 @@
 	attacktext = list("pecked")
 	attack_sound = 'sound/weapons/bite.ogg'
 
+	organ_names = /decl/mob_organ_names/goose
+
 	has_langs = list("Bird")
 
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat
+	meat_type = /obj/item/reagent_containers/food/snacks/meat
 
 /datum/say_list/goose
 	speak = list("HONK!")
@@ -42,3 +44,6 @@
 	set category = "Abilities"
 
 	add_modifier(/datum/modifier/berserk, 30 SECONDS)
+
+/decl/mob_organ_names/goose
+	hit_zones = list("head", "chest", "left leg", "right leg", "left wing", "right wing", "neck")

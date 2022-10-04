@@ -21,14 +21,14 @@
 	say_list_type = /datum/say_list/dog
 
 	meat_amount = 3
-	meat_type = /obj/item/weapon/reagent_containers/food/snacks/meat/corgi
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/corgi
 
 	var/obj/item/inventory_head
 	var/obj/item/inventory_back
 
 
 /mob/living/simple_mob/animal/passive/dog/attackby(var/obj/item/O as obj, var/mob/user as mob)
-	if(istype(O, /obj/item/weapon/newspaper))
+	if(istype(O, /obj/item/newspaper))
 		if(!stat)
 			for(var/mob/M in viewers(user, null))
 				if ((M.client && !( M.blinded )))
@@ -41,7 +41,7 @@
 		..()
 
 /mob/living/simple_mob/animal/passive/dog/regenerate_icons()
-	overlays = list()
+	cut_overlays()
 
 	if(inventory_head)
 		var/head_icon_state = inventory_head.icon_state
@@ -50,7 +50,7 @@
 
 		var/icon/head_icon = image('icons/mob/corgi_head.dmi',head_icon_state)
 		if(head_icon)
-			overlays += head_icon
+			add_overlay(head_icon)
 
 	if(inventory_back)
 		var/back_icon_state = inventory_back.icon_state
@@ -59,14 +59,14 @@
 
 		var/icon/back_icon = image('icons/mob/corgi_back.dmi',back_icon_state)
 		if(back_icon)
-			overlays += back_icon
+			add_overlay(back_icon)
 
 	return
 
 
 
 
-/obj/item/weapon/reagent_containers/food/snacks/meat/corgi
+/obj/item/reagent_containers/food/snacks/meat/corgi
 	name = "corgi meat"
 	desc = "Tastes like... well, you know..."
 
@@ -87,6 +87,7 @@
 	icon_state = "corgi"
 	icon_living = "corgi"
 	icon_dead = "corgi_dead"
+	organ_names = /decl/mob_organ_names/corgi
 
 /mob/living/simple_mob/animal/passive/dog/corgi/puppy
 	name = "corgi puppy"
@@ -130,7 +131,7 @@
 				movement_target = null
 			if( !movement_target || !(movement_target.loc in oview(src, 3)) )
 				movement_target = null
-				for(var/obj/item/weapon/reagent_containers/food/snacks/S in oview(src,3))
+				for(var/obj/item/reagent_containers/food/snacks/S in oview(src,3))
 					if(isturf(S.loc) || ishuman(S.loc))
 						movement_target = S
 						break
@@ -242,3 +243,6 @@
 	icon_state = "brittany"
 	icon_living = "brittany"
 	icon_dead = "brittany_dead"
+
+/decl/mob_organ_names/corgi
+	hit_zones = list("head", "body", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail", "heart") //You monster.

@@ -518,7 +518,7 @@
 		if(M.grabbed_by.len)
 			// Only start pulling when nobody else has a grab on them
 			. = 1
-			for(var/obj/item/weapon/grab/G in M.grabbed_by)
+			for(var/obj/item/grab/G in M.grabbed_by)
 				if(G.assailant != usr)
 					. = 0
 				else
@@ -589,6 +589,9 @@
 	return client && !!mind
 
 /mob/proc/get_gender()
+	return gender
+
+/mob/proc/name_gender()
 	return gender
 
 /mob/proc/see(message)
@@ -830,10 +833,10 @@
 	return
 
 /mob/proc/AdjustLosebreath(amount)
-	losebreath = CLAMP(losebreath + amount, 0, 25)
+	losebreath = clamp(losebreath + amount, 0, 25)
 
 /mob/proc/SetLosebreath(amount)
-	losebreath = CLAMP(amount, 0, 25)
+	losebreath = clamp(amount, 0, 25)
 
 /mob/proc/get_species()
 	return ""
@@ -885,7 +888,7 @@
 			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
 		return
 
-	var/obj/item/weapon/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
+	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
 
 	if(self)
 		to_chat(src, "<span class='warning'>You attempt to get a good grip on [selection] in your body.</span>")
@@ -937,7 +940,7 @@
 	selection.forceMove(get_turf(src))
 	U.put_in_hands(selection)
 
-	for(var/obj/item/weapon/O in pinned)
+	for(var/obj/item/O in pinned)
 		if(O == selection)
 			pinned -= O
 		if(!pinned.len)
@@ -1113,7 +1116,7 @@
 
 //Throwing stuff
 /mob/proc/throw_item(atom/target)
-	return
+	return FALSE
 
 /mob/proc/will_show_tooltip()
 	if(alpha <= EFFECTIVE_INVIS)
@@ -1184,3 +1187,11 @@
 /mob/proc/grab_ghost(force)
 	if(mind)
 		return mind.grab_ghost(force = force)
+
+/mob/proc/get_sound_volume_multiplier()
+	return !ear_deaf
+
+/mob/proc/handle_reagent_transfer(var/datum/reagents/holder, var/amount = 1, var/chem_type = CHEM_BLOOD, var/multiplier = 1, var/copy = 0)
+	var/datum/reagents/R = new /datum/reagents(amount)
+	. = holder.trans_to_holder(R, amount, multiplier, copy)
+	R.touch_mob(src)

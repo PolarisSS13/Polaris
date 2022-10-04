@@ -1,5 +1,5 @@
 /*****************Marker Beacons**************************/
-var/list/marker_beacon_colors = list(
+var/global/list/marker_beacon_colors = list(
 "Random" = FALSE, //not a true color, will pick a random color
 "Burgundy" = LIGHT_COLOR_FLARE,
 "Bronze" = LIGHT_COLOR_ORANGE,
@@ -89,7 +89,7 @@ var/list/marker_beacon_colors = list(
 	var/perma = FALSE
 	var/mapped_in_color
 
-/obj/structure/marker_beacon/New(newloc, set_color)
+/obj/structure/marker_beacon/Initialize(var/ml, set_color)
 	. = ..()
 	if(set_color)
 		picked_color = set_color

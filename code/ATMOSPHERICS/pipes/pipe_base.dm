@@ -24,10 +24,10 @@
 /obj/machinery/atmospherics/pipe/drain_power()
 	return -1
 
-/obj/machinery/atmospherics/pipe/New()
+/obj/machinery/atmospherics/pipe/Initialize()
 	if(istype(get_turf(src), /turf/simulated/wall) || istype(get_turf(src), /turf/simulated/shuttle/wall) || istype(get_turf(src), /turf/unsimulated/wall))
 		level = 1
-	..()
+	. = ..()
 
 /obj/machinery/atmospherics/pipe/hides_under_flooring()
 	return level != 2
@@ -109,11 +109,11 @@
 			qdel(meter)
 	. = ..()
 
-/obj/machinery/atmospherics/pipe/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/pipe/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (istype(src, /obj/machinery/atmospherics/pipe/tank))
 		return ..()
 
-	if(istype(W,/obj/item/device/pipe_painter))
+	if(istype(W,/obj/item/pipe_painter))
 		return 0
 
 	if (!W.is_wrench())

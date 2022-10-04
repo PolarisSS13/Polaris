@@ -92,7 +92,7 @@
 /obj/structure/grille/attackby(obj/item/W as obj, mob/user as mob)
 	if(!istype(W))
 		return
-	if(istype(W, /obj/item/weapon/rcd)) // To stop us from hitting the grille when building windows, because grilles don't let parent handle it properly.
+	if(istype(W, /obj/item/rcd)) // To stop us from hitting the grille when building windows, because grilles don't let parent handle it properly.
 		return FALSE
 	else if(W.is_wirecutter())
 		if(!shock(user, 100))
@@ -196,7 +196,7 @@
 		if(electrocute_mob(user, C, src))
 			if(C.powernet)
 				C.powernet.trigger_warning()
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()
 			if(user.stunned)
@@ -225,8 +225,8 @@
 	icon_state = "grille-b"
 	density = 0
 
-/obj/structure/grille/broken/New()
-	..()
+/obj/structure/grille/broken/Initialize()
+	. = ..()
 	health = rand(-5, -1) //In the destroyed but not utterly threshold.
 	healthcheck() //Send this to healthcheck just in case we want to do something else with it.
 
@@ -249,7 +249,7 @@
 	icon_state = "grillerustic-b"
 
 
-/obj/structure/grille/rcd_values(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/structure/grille/rcd_values(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_WINDOWGRILLE)
 			// A full tile window costs 4 glass sheets.
@@ -267,7 +267,7 @@
 			)
 	return FALSE
 
-/obj/structure/grille/rcd_act(mob/living/user, obj/item/weapon/rcd/the_rcd, passed_mode)
+/obj/structure/grille/rcd_act(mob/living/user, obj/item/rcd/the_rcd, passed_mode)
 	switch(passed_mode)
 		if(RCD_DECONSTRUCT)
 			to_chat(user, span("notice", "You deconstruct \the [src]."))

@@ -67,7 +67,7 @@
 /datum/reagent/toxin/neurotoxic_protein
 	name = "toxic protein"
 	id = "neurotoxic_protein"
-	description = "A weak neurotoxic chemical commonly found in Sivian fish meat."
+	description = "A weak neurotoxic chemical."
 	taste_description = "fish"
 	reagent_state = LIQUID
 	color = "#005555"
@@ -94,6 +94,7 @@
 	var/fire_mult = 30
 
 /datum/reagent/toxin/hydrophoron/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / fire_mult)
 
@@ -105,6 +106,7 @@
 /datum/reagent/toxin/hydrophoron/touch_turf(var/turf/simulated/T)
 	if(!istype(T))
 		return
+	..()
 	T.assume_gas("phoron", CEILING(volume/2, 1), T20C)
 	for(var/turf/simulated/floor/target_tile in range(0,T))
 		target_tile.assume_gas("phoron", volume/2, 400+T0C)
@@ -146,6 +148,7 @@
 	skin_danger = 1
 
 /datum/reagent/toxin/phoron/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 5)
 
@@ -167,6 +170,7 @@
 	..()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T, var/amount)
+	..()
 	if(!istype(T))
 		return
 	T.assume_gas("volatile_fuel", amount, T20C)
@@ -388,6 +392,7 @@
 	color = "#e67819"
 
 /datum/reagent/toxin/fertilizer/tannin/touch_obj(var/obj/O, var/volume)
+	..()
 	if(istype(O, /obj/item/stack/hairlesshide))
 		var/obj/item/stack/hairlesshide/HH = O
 		HH.rapidcure(round(volume))
@@ -403,6 +408,7 @@
 	strength = 4
 
 /datum/reagent/toxin/plantbgone/touch_turf(var/turf/T)
+	..()
 	if(istype(T, /turf/simulated/wall))
 		var/turf/simulated/wall/W = T
 		if(locate(/obj/effect/overlay/wallrot) in W)
@@ -411,6 +417,7 @@
 			W.visible_message("<span class='notice'>The fungi are completely dissolved by the solution!</span>")
 
 /datum/reagent/toxin/plantbgone/touch_obj(var/obj/O, var/volume)
+	..()
 	if(istype(O, /obj/effect/plant))
 		qdel(O)
 	else if(istype(O, /obj/effect/alien/weeds/))
@@ -435,14 +442,21 @@
 	color = "#C6E2FF"
 	strength = 2
 	overdose = 20
+	ingest_met = REM
+	var/sap_regen_power = 7
 
 /datum/reagent/toxin/sifslurry/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA) // Symbiotic bacteria.
 		M.adjust_nutrition(strength * removed)
 		return
-	else
-		M.add_modifier(/datum/modifier/slow_pulse, 30 SECONDS)
+	M.add_modifier(/datum/modifier/slow_pulse, 30 SECONDS)
 	..()
+
+/datum/reagent/toxin/sifslurry/affect_animal(var/mob/living/simple_mob/animal/M, var/removed)
+	if(istype(M, /mob/living/simple_mob/animal/sif/grafadreka))
+		var/mob/living/simple_mob/animal/sif/grafadreka/drake = M
+		drake.add_sap(removed * sap_regen_power)
+	return ..()
 
 /datum/reagent/toxin/sifslurry/overdose(var/mob/living/carbon/M, var/alien, var/removed) // Overdose effect.
 	if(alien == IS_DIONA)
@@ -751,36 +765,6 @@
 	glass_name = "beer"
 	glass_desc = "A freezing pint of beer"
 
-/* Drugs */
-
-/datum/reagent/space_drugs
-	name = "Space drugs"
-	id = "space_drugs"
-	description = "An illegal chemical compound used as drug."
-	taste_description = "bitterness"
-	taste_mult = 0.4
-	reagent_state = LIQUID
-	color = "#60A584"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-
-/datum/reagent/space_drugs/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
-	var/drug_strength = 15 * M.species.chem_strength_tox
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
-
-	if(alien == IS_SLIME)
-		drug_strength = drug_strength * 1.2
-
-	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-		step(M, pick(cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
-
 /datum/reagent/serotrotium
 	name = "Serotrotium"
 	id = "serotrotium"
@@ -882,85 +866,6 @@
 		drug_strength *= 1.2
 
 	M.hallucination = max(M.hallucination, drug_strength)
-
-/datum/reagent/psilocybin
-	name = "Psilocybin"
-	id = "psilocybin"
-	description = "A strong psycotropic derived from certain species of mushroom."
-	taste_description = "mushroom"
-	color = "#E700E7"
-	overdose = REAGENTS_OVERDOSE
-	metabolism = REM * 0.5
-
-/datum/reagent/psilocybin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
-	var/threshold = 1 * M.species.chem_strength_tox
-	if(alien == IS_SKRELL)
-		threshold = 1.2
-
-	if(alien == IS_SLIME)
-		threshold = 0.8
-
-	M.druggy = max(M.druggy, 30)
-
-	var/effective_dose = dose
-	if(issmall(M)) effective_dose *= 2
-	if(effective_dose < 1 * threshold)
-		M.apply_effect(3, STUTTER)
-		M.make_dizzy(5)
-		if(prob(5))
-			M.emote(pick("twitch", "giggle"))
-	else if(effective_dose < 2 * threshold)
-		M.apply_effect(3, STUTTER)
-		M.make_jittery(5)
-		M.make_dizzy(5)
-		M.druggy = max(M.druggy, 35)
-		if(prob(10))
-			M.emote(pick("twitch", "giggle"))
-	else
-		M.apply_effect(3, STUTTER)
-		M.make_jittery(10)
-		M.make_dizzy(10)
-		M.druggy = max(M.druggy, 40)
-		if(prob(15))
-			M.emote(pick("twitch", "giggle"))
-
-/datum/reagent/nicotine
-	name = "Nicotine"
-	id = "nicotine"
-	description = "A highly addictive stimulant extracted from the tobacco plant."
-	taste_description = "bitterness"
-	reagent_state = LIQUID
-	color = "#181818"
-
-/datum/reagent/talum_quem
-	name = "Talum-quem"
-	id = "talum_quem"
-	description = " A very carefully tailored hallucinogen, for use of the Talum-Katish."
-	taste_description = "bubblegum"
-	taste_mult = 1.6
-	reagent_state = LIQUID
-	color = "#db2ed8"
-	metabolism = REM * 0.5
-	overdose = REAGENTS_OVERDOSE
-
-/datum/reagent/talum_quem/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(alien == IS_DIONA)
-		return
-
-	var/drug_strength = 29 * M.species.chem_strength_tox
-	if(alien == IS_SKRELL)
-		drug_strength = drug_strength * 0.8
-	else
-		M.adjustToxLoss(10 * removed) //Given incorporations of other toxins with similiar damage, this seems right.
-
-	M.druggy = max(M.druggy, drug_strength)
-	if(prob(10) && isturf(M.loc) && !istype(M.loc, /turf/space) && M.canmove && !M.restrained())
-		step(M, pick(cardinal))
-	if(prob(7))
-		M.emote(pick("twitch", "drool", "moan", "giggle"))
 
 /* Transformations */
 

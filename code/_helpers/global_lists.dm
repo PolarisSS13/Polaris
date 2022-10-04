@@ -1,4 +1,4 @@
-var/list/admins = list()							//list of all clients whom are admins
+var/global/list/admins = list()							//list of all clients whom are admins
 
 //Since it didn't really belong in any other category, I'm putting this here
 //This is for procs to replace all the goddamn 'in world's that are chilling around the code
@@ -23,7 +23,7 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
 
-var/list/mannequins_
+var/global/list/mannequins_
 
 // Times that players are allowed to respawn ("ckey" = world.time)
 GLOBAL_LIST_EMPTY(respawn_timers)
@@ -43,23 +43,24 @@ var/global/list/facial_hair_styles_male_list = list()
 var/global/list/facial_hair_styles_female_list = list()
 var/global/list/skin_styles_female_list = list()		//unused
 var/global/list/body_marking_styles_list = list()		//stores /datum/sprite_accessory/marking indexed by name
+var/global/list/body_marking_nopersist_list = list()	// Body marking styles, minus non-genetic markings and augments
 var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears indexed by type
 var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
 var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
 
 GLOBAL_LIST_INIT(custom_species_bases, new) // Species that can be used for a Custom Species icon base
 	//Underwear
-var/datum/category_collection/underwear/global_underwear = new()
+var/global/datum/category_collection/underwear/global_underwear = new()
 
 	//Backpacks
-var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag")
+var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag", "Sports Bag", "Black Rucksack", "Blue Rucksack", "Green Rucksack", "Navy Rucksack", "Tan Rucksack")
 var/global/list/pdachoicelist = list("Default", "Slim", "Old", "Rugged", "Holographic", "Wrist-Bound")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
 
 // Visual nets
-var/list/datum/visualnet/visual_nets = list()
-var/datum/visualnet/camera/cameranet = new()
-var/datum/visualnet/cult/cultnet = new()
+var/global/list/datum/visualnet/visual_nets = list()
+var/global/datum/visualnet/camera/cameranet = new()
+var/global/datum/visualnet/cult/cultnet = new()
 
 // Runes
 var/global/list/rune_list = new()
@@ -147,6 +148,8 @@ var/global/list/string_slot_flags = list(
 	for(var/path in paths)
 		var/datum/sprite_accessory/marking/M = new path()
 		body_marking_styles_list[M.name] = M
+		if(!M.genetic)
+			body_marking_nopersist_list[M.name] = M
 
 	//Surgery Steps - Initialize all /datum/surgery_step into a list
 	paths = typesof(/datum/surgery_step)-/datum/surgery_step
@@ -206,28 +209,28 @@ var/global/list/string_slot_flags = list(
 			GLOB.whitelisted_species += S.name
 
 	//Ores
-	paths = typesof(/ore)-/ore
+	paths = subtypesof(/ore)
 	for(var/oretype in paths)
 		var/ore/OD = new oretype()
 		GLOB.ore_data[OD.name] = OD
 
-	paths = typesof(/datum/alloy)-/datum/alloy
+	paths = subtypesof(/datum/alloy)
 	for(var/alloytype in paths)
 		GLOB.alloy_data += new alloytype()
 
-	paths = typesof(/datum/sprite_accessory/ears) - /datum/sprite_accessory/ears
+	paths = subtypesof(/datum/sprite_accessory/ears)
 	for(var/path in paths)
 		var/obj/item/clothing/head/instance = new path()
 		ear_styles_list[path] = instance
 
 	// Custom Tails
-	paths = typesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail - /datum/sprite_accessory/tail/taur
+	paths = subtypesof(/datum/sprite_accessory/tail)
 	for(var/path in paths)
 		var/datum/sprite_accessory/tail/instance = new path()
 		tail_styles_list[path] = instance
 
 	// Custom Wings
-	paths = typesof(/datum/sprite_accessory/wing) - /datum/sprite_accessory/wing
+	paths = subtypesof(/datum/sprite_accessory/wing)
 	for(var/path in paths)
 		var/datum/sprite_accessory/wing/instance = new path()
 		wing_styles_list[path] = instance

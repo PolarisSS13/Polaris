@@ -188,7 +188,7 @@
 
 /datum/map_template/surface/wilderness/deep/BluSD
 	name = "Blue Shuttle Down"
-	desc = "You REALLY shouldn't be near this. Mostly because they're Police."
+	desc = "You REALLY shouldn't be near this. Mostly because they're SolGov."
 	mappath = 'maps/submaps/surface_submaps/wilderness/Blueshuttledown.dmm'
 	cost = 50
 	template_group = "Shuttle Down"
@@ -215,6 +215,12 @@
 	name = "Kururak Den"
 	desc = "The den of a Kururak pack. May contain hibernating members."
 	mappath = 'maps/submaps/surface_submaps/wilderness/kururakden.dmm'
+	cost = 5
+
+/datum/map_template/surface/wilderness/normal/GrafadrekaDen
+	name = "Grafadreka Den"
+	desc = "The den of a Grafadreka pack. May contain hibernating members."
+	mappath = 'maps/submaps/surface_submaps/wilderness/grafadreka_den.dmm'
 	cost = 5
 
 /datum/map_template/surface/wilderness/normal/DecoupledEngine
@@ -342,4 +348,3 @@
 	desc = "Gathering of acolytes gone wrong."
 	mappath = 'maps/submaps/surface_submaps/wilderness/deathden.dmm'
 	cost = 15
-

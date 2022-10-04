@@ -20,7 +20,7 @@
 
 	var/hibernate = 0 //Do we even process?
 	var/scrubbing = 1 //0 = siphoning, 1 = scrubbing
-	var/list/scrubbing_gas = list("carbon_dioxide")
+	var/list/scrubbing_gas = list("carbon_dioxide", "phoron")
 
 	var/panic = 0 //is this scrubber panicked?
 
@@ -32,8 +32,8 @@
 	use_power = USE_POWER_IDLE
 	icon_state = "map_scrubber_on"
 
-/obj/machinery/atmospherics/unary/vent_scrubber/New()
-	..()
+/obj/machinery/atmospherics/unary/vent_scrubber/Initialize()
+	. = ..()
 	air_contents.volume = ATMOS_DEFAULT_VOLUME_FILTER
 
 	icon = null
@@ -54,7 +54,7 @@
 	if(!check_icon_cache())
 		return
 
-	overlays.Cut()
+	cut_overlays()
 
 	var/scrubber_icon = "scrubber"
 
@@ -67,7 +67,7 @@
 	else
 		scrubber_icon += "[use_power ? "[scrubbing ? "on" : "in"]" : "off"]"
 
-	overlays += icon_manager.get_atmos_icon("device", , , scrubber_icon)
+	add_overlay(icon_manager.get_atmos_icon("device", , , scrubber_icon))
 
 /obj/machinery/atmospherics/unary/vent_scrubber/update_underlays()
 	if(..())
@@ -263,7 +263,7 @@
 	if(old_stat != stat)
 		update_icon()
 
-/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/weapon/W as obj, var/mob/user as mob)
+/obj/machinery/atmospherics/unary/vent_scrubber/attackby(var/obj/item/W as obj, var/mob/user as mob)
 	if (!W.is_wrench())
 		return ..()
 	if (!(stat & NOPOWER) && use_power)

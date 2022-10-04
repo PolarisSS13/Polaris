@@ -1,4 +1,4 @@
-var/list/_slime_default_emotes = list(
+var/global/list/_slime_default_emotes = list(
 	/decl/emote/audible/moan,
 	/decl/emote/visible/twitch,
 	/decl/emote/visible/sway,
@@ -39,6 +39,8 @@ var/list/_slime_default_emotes = list(
 	mob_class = MOB_CLASS_SLIME
 
 	response_help = "pets"
+
+	organ_names = /decl/mob_organ_names/slime
 
 	// Atmos stuff.
 	minbodytemp = T0C-30
@@ -234,3 +236,6 @@ var/list/_slime_default_emotes = list(
 /mob/living/simple_mob/slime/proc/squish()
 	playsound(src, 'sound/effects/slime_squish.ogg', 50, 0)
 	visible_message("<b>\The [src]</b> squishes!")
+
+/decl/mob_organ_names/slime
+	hit_zones = list("cytoplasmic membrane")

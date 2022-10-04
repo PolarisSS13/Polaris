@@ -109,13 +109,13 @@
 		. += shoes.slowdown
 
 	// Loop through some slots, and add up their slowdowns.
-	// Includes slots which can provide armor, the back slot, and suit storage.
-	for(var/obj/item/I in list(wear_suit, w_uniform, back, gloves, head, s_store))
+	// Includes slots which can provide armor, the back slot, belt, and suit storage.
+	for(var/obj/item/I in list(wear_suit, w_uniform, back, gloves, head, s_store, belt))
 		. += I.slowdown
 
 	// Hands are also included, to make the 'take off your armor instantly and carry it with you to go faster' trick no longer viable.
 	// This is done seperately to disallow negative numbers (so you can't hold shoes in your hands to go faster).
-	for(var/obj/item/I in list(r_hand, l_hand) )
+	for(var/obj/item/I in list(r_hand, l_hand))
 		. += max(I.slowdown, 0)
 
 // Similar to above, but for turf slowdown.
@@ -127,22 +127,22 @@
 		var/turf_move_cost = T.movement_cost
 		if(istype(T, /turf/simulated/floor/water))
 			if(species.water_movement)
-				turf_move_cost = CLAMP(turf_move_cost + species.water_movement, HUMAN_LOWEST_SLOWDOWN, 15)
+				turf_move_cost = clamp(turf_move_cost + species.water_movement, HUMAN_LOWEST_SLOWDOWN, 15)
 			if(shoes)
 				var/obj/item/clothing/shoes/feet = shoes
 				if(feet.water_speed)
-					turf_move_cost = CLAMP(turf_move_cost + feet.water_speed, HUMAN_LOWEST_SLOWDOWN, 15)
+					turf_move_cost = clamp(turf_move_cost + feet.water_speed, HUMAN_LOWEST_SLOWDOWN, 15)
 			. += turf_move_cost
 		else if(istype(T, /turf/simulated/floor/outdoors/snow))
 			if(species.snow_movement)
-				turf_move_cost = CLAMP(turf_move_cost + species.snow_movement, HUMAN_LOWEST_SLOWDOWN, 15)
+				turf_move_cost = clamp(turf_move_cost + species.snow_movement, HUMAN_LOWEST_SLOWDOWN, 15)
 			if(shoes)
 				var/obj/item/clothing/shoes/feet = shoes
 				if(feet.water_speed)
-					turf_move_cost = CLAMP(turf_move_cost + feet.snow_speed, HUMAN_LOWEST_SLOWDOWN, 15)
+					turf_move_cost = clamp(turf_move_cost + feet.snow_speed, HUMAN_LOWEST_SLOWDOWN, 15)
 			. += turf_move_cost
 		else
-			turf_move_cost = CLAMP(turf_move_cost, HUMAN_LOWEST_SLOWDOWN, 15)
+			turf_move_cost = clamp(turf_move_cost, HUMAN_LOWEST_SLOWDOWN, 15)
 			. += turf_move_cost
 
 	// Wind makes it easier or harder to move, depending on if you're with or against the wind.
@@ -162,8 +162,8 @@
 
 /mob/living/carbon/human/get_jetpack()
 	if(back)
-		var/obj/item/weapon/rig/rig = get_rig()
-		if(istype(back, /obj/item/weapon/tank/jetpack))
+		var/obj/item/rig/rig = get_rig()
+		if(istype(back, /obj/item/tank/jetpack))
 			return back
 		else if(istype(rig))
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
@@ -177,7 +177,7 @@
 		return 1
 
 	//Do we have a working jetpack?
-	var/obj/item/weapon/tank/jetpack/thrust = get_jetpack()
+	var/obj/item/tank/jetpack/thrust = get_jetpack()
 
 	if(thrust)
 		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.do_thrust(0.01, src)))
@@ -193,7 +193,7 @@
 	if(species.flags & NO_SLIP)
 		return 0
 
-	var/obj/item/weapon/tank/jetpack/thrust = get_jetpack()
+	var/obj/item/tank/jetpack/thrust = get_jetpack()
 	if(thrust?.can_thrust(0.01))
 		return 0
 
@@ -259,3 +259,8 @@
 
 	playsound(T, S, volume, FALSE)
 	return
+
+/mob/living/carbon/human/set_dir(var/new_dir)
+	. = ..()
+	if(. && species.tail)
+		update_tail_showing()

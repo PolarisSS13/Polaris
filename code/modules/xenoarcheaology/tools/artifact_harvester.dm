@@ -8,7 +8,7 @@
 	active_power_usage = 750
 	use_power = USE_POWER_IDLE
 	var/harvesting = 0
-	var/obj/item/weapon/anobattery/inserted_battery
+	var/obj/item/anobattery/inserted_battery
 	var/obj/machinery/artifact/cur_artifact
 	var/obj/machinery/artifact_scanpad/owned_scanner = null
 	var/last_process = 0
@@ -20,7 +20,7 @@
 		owned_scanner = locate(/obj/machinery/artifact_scanpad) in orange(1, src)
 
 /obj/machinery/artifact_harvester/attackby(var/obj/I as obj, var/mob/user as mob)
-	if(istype(I,/obj/item/weapon/anobattery))
+	if(istype(I,/obj/item/anobattery))
 		if(!inserted_battery)
 			to_chat(user, "<font color='blue'>You insert [I] into [src].</font>")
 			user.drop_item()
@@ -145,9 +145,11 @@
 					cur_artifact = analysed
 
 					//if both effects are active, we can't harvest either
-					if(cur_artifact.my_effect && cur_artifact.my_effect.activated && cur_artifact.secondary_effect && cur_artifact.secondary_effect.activated)
+					var/list/active_effects = cur_artifact.artifact_master.get_active_effects()
+
+					if(active_effects.len > 1)
 						src.visible_message("<b>[src]</b> states, \"Cannot harvest. Source is emitting conflicting energy signatures.\"")
-					else if(!cur_artifact.my_effect.activated && !(cur_artifact.secondary_effect && cur_artifact.secondary_effect.activated))
+					else if(!active_effects.len)
 						src.visible_message("<b>[src]</b> states, \"Cannot harvest. No energy emitting from source.\"")
 
 					else
@@ -159,35 +161,24 @@
 
 						//
 						var/datum/artifact_effect/source_effect
+						var/datum/artifact_effect/active_effect = active_effects[1]
 
 						//if we already have charge in the battery, we can only recharge it from the source artifact
 						if(inserted_battery.stored_charge > 0)
 							var/battery_matches_primary_id = 0
-							if(inserted_battery.battery_effect && inserted_battery.battery_effect.artifact_id == cur_artifact.my_effect.artifact_id)
+							if(inserted_battery.battery_effect && inserted_battery.battery_effect.artifact_id == cur_artifact.artifact_master.artifact_id)
 								battery_matches_primary_id = 1
-							if(battery_matches_primary_id && cur_artifact.my_effect.activated)
+							if(battery_matches_primary_id && active_effect.activated)
 								//we're good to recharge the primary effect!
-								source_effect = cur_artifact.my_effect
-
-							var/battery_matches_secondary_id = 0
-							if(inserted_battery.battery_effect && inserted_battery.battery_effect.artifact_id == cur_artifact.secondary_effect.artifact_id)
-								battery_matches_secondary_id = 1
-							if(battery_matches_secondary_id && cur_artifact.secondary_effect.activated)
-								//we're good to recharge the secondary effect!
-								source_effect = cur_artifact.secondary_effect
+								source_effect = active_effect
 
 							if(!source_effect)
 								src.visible_message("<b>[src]</b> states, \"Cannot harvest. Battery is charged with a different energy signature.\"")
 						else
 							//we're good to charge either
-							if(cur_artifact.my_effect.activated)
+							if(active_effect.activated)
 								//charge the primary effect
-								source_effect = cur_artifact.my_effect
-
-							else if(cur_artifact.secondary_effect.activated)
-								//charge the secondary effect
-								source_effect = cur_artifact.secondary_effect
-
+								source_effect = active_effect
 
 						if(source_effect)
 							harvesting = 1

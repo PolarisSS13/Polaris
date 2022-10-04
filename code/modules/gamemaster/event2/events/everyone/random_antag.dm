@@ -10,6 +10,7 @@
 	departments = list(DEPARTMENT_EVERYONE)
 	chaotic_threshold = EVENT_CHAOS_THRESHOLD_MEDIUM_IMPACT
 	event_type = /datum/event2/event/random_antagonist
+	regions = list(EVENT_REGION_UNIVERSAL)
 
 // This has an abnormally high weight due to antags being very important for the round,
 // however the weight will decay with more antags, and more attempts to add antags.
@@ -22,8 +23,8 @@
 // The random spawn proc on the antag datum will handle announcing the spawn and whatnot, in theory.
 /datum/event2/event/random_antagonist/start()
 	var/list/valid_types = list()
-	for(var/antag_type in all_antag_types)
-		var/datum/antagonist/antag = all_antag_types[antag_type]
+	for(var/antag_type in SSantags.antag_datums)
+		var/datum/antagonist/antag = SSantags.antag_datums[antag_type]
 		if(antag.flags & ANTAG_RANDSPAWN)
 			valid_types |= antag
 	if(valid_types.len)

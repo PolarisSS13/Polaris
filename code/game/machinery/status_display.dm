@@ -18,7 +18,7 @@
 	density = 0
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 10
-	circuit =  /obj/item/weapon/circuitboard/status_display
+	circuit =  /obj/item/circuitboard/status_display
 	var/mode = 1	// 0 = Blank
 					// 1 = Shuttle timer
 					// 2 = Arbitrary message(s)
@@ -197,7 +197,7 @@
 	if(!picture || picture_state != state)
 		picture_state = state
 		picture = image('icons/obj/status_display.dmi', icon_state=picture_state)
-	overlays |= picture
+	add_overlay(picture)
 
 /obj/machinery/status_display/proc/update_display(line1, line2)
 	var/new_text = {"<div style="font-size:[FONT_SIZE];color:[FONT_COLOR];font:'[FONT_STYLE]';text-align:center;" valign="top">[line1]<br>[line2]</div>"}
@@ -210,7 +210,7 @@
 	var/timeleft = emergency_shuttle.estimate_arrival_time()
 	if(timeleft < 0)
 		return ""
-	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
+	return "[pad_left(num2text(timeleft / 60 % 60), 2, "0")]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 
 /obj/machinery/status_display/proc/get_shuttle_timer_departure()
 	if(!emergency_shuttle)
@@ -218,7 +218,7 @@
 	var/timeleft = emergency_shuttle.estimate_launch_time()
 	if(timeleft < 0)
 		return ""
-	return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
+	return "[pad_left(num2text(timeleft / 60 % 60), 2, "0")]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 
 /obj/machinery/status_display/proc/get_supply_shuttle_timer()
 	var/datum/shuttle/autodock/ferry/supply/shuttle = SSsupply.shuttle
@@ -229,12 +229,11 @@
 		var/timeleft = round((shuttle.arrive_time - world.time) / 10,1)
 		if(timeleft < 0)
 			return "Late"
-		return "[add_zero(num2text((timeleft / 60) % 60),2)]:[add_zero(num2text(timeleft % 60), 2)]"
+		return "[pad_left(num2text(timeleft / 60 % 60), 2, "0")]:[pad_left(num2text(timeleft % 60), 2, "0")]"
 	return ""
 
 /obj/machinery/status_display/proc/remove_display()
-	if(overlays.len)
-		overlays.Cut()
+	cut_overlays()
 	if(maptext)
 		maptext = ""
 

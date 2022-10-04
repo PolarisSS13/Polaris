@@ -1,6 +1,7 @@
 // Reorganized and somewhat cleaned up.
 // AI code has been made into a datum, inside the AI module folder.
 
+
 /mob/living/simple_mob
 	name = "animal"
 	desc = ""
@@ -58,7 +59,8 @@
 	var/list/friends = list()		// Mobs on this list wont get attacked regardless of faction status.
 	var/harm_intent_damage = 3		// How much an unarmed harm click does to this mob.
 	var/list/loot_list = list()		// The list of lootable objects to drop, with "/path = prob%" structure
-	var/obj/item/weapon/card/id/myid// An ID card if they have one to give them access to stuff.
+	var/obj/item/card/id/myid// An ID card if they have one to give them access to stuff.
+	var/organ_names = /decl/mob_organ_names //'False' bodyparts that can be shown as hit by projectiles in place of the default humanoid bodyplan.
 
 	//Mob environment settings
 	var/minbodytemp = 250			// Minimum "okay" temperature in kelvin
@@ -118,6 +120,7 @@
 	var/special_attack_charges = null		// If set, special attacks will work off of a charge system, and won't be usable if all charges are expended. Good for grenades.
 	var/special_attack_cooldown = null		// If set, special attacks will have a cooldown between uses.
 	var/last_special_attack = null			// world.time when a special attack occured last, for cooldown calculations.
+	var/projectileverb = "fires"
 
 	//Damage resistances
 	var/grab_resist = 0				// Chance for a grab attempt to fail. Note that this is not a true resist and is just a prob() of failure.
@@ -170,6 +173,9 @@
 
 	if(has_eye_glow)
 		add_eyes()
+
+	if(organ_names)
+		organ_names = GET_DECL(organ_names)
 
 	return ..()
 
@@ -248,7 +254,7 @@
 /mob/living/simple_mob/Stat()
 	..()
 	if(statpanel("Status") && show_stat_health)
-		stat(null, "Health: [round((health / getMaxHealth()) * 100)]%")
+		stat("Health:", "[round((health / getMaxHealth()) * 100)]%")
 
 /mob/living/simple_mob/lay_down()
 	..()
@@ -278,3 +284,6 @@
 	hud_list[STATUS_HUD]  = gen_hud_image(buildmode_hud, src, "ai_0", plane = PLANE_BUILDMODE)
 	hud_list[LIFE_HUD]	  = gen_hud_image(buildmode_hud, src, "ais_1", plane = PLANE_BUILDMODE)
 	add_overlay(hud_list)
+
+/decl/mob_organ_names
+	var/list/hit_zones = list("body") //When in doubt, it's probably got a body.

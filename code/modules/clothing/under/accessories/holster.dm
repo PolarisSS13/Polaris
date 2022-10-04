@@ -8,6 +8,12 @@
 	var/holster_in = 'sound/items/holsterin.ogg'
 	var/holster_out = 'sound/items/holsterout.ogg'
 
+/obj/item/clothing/accessory/holster/AltClick(mob/user)
+	if(holstered)
+		unholster(user)
+		return TRUE
+	. = ..()
+
 /obj/item/clothing/accessory/holster/proc/holster(var/obj/item/I, var/mob/living/user)
 	if(holstered && istype(user))
 		to_chat(user, "<span class='warning'>There is already \a [holstered] holstered here!</span>")
@@ -34,7 +40,7 @@
 	holstered = null
 	name = initial(name)
 
-/obj/item/clothing/accessory/holster/proc/unholster(mob/user as mob)
+/obj/item/clothing/accessory/holster/proc/unholster(mob/user)
 	if(!holstered)
 		return
 
@@ -129,22 +135,34 @@
 	desc = "A worn-out handgun holster. Perfect for concealed carry"
 	icon_state = "holster"
 
+/obj/item/clothing/accessory/holster/armpit/black
+	icon_state = "holster_b"
+
 /obj/item/clothing/accessory/holster/waist
 	name = "waist holster"
 	desc = "A handgun holster. Made of expensive leather."
-	icon_state = "holster"
+	icon_state = "holster_low"
 	overlay_state = "holster_low"
 	concealed_holster = 0
 
+/obj/item/clothing/accessory/holster/waist/black
+	icon_state = "holster_b_low"
+
 /obj/item/clothing/accessory/holster/hip
 	name = "hip holster"
-	desc = "A handgun holster slung low on the hip, draw pardner!"
+	desc = "<i>No one dared to ask his business, no one dared to make a slip. The stranger there among them had a big iron on his hip.</i>"
 	icon_state = "holster_hip"
 	concealed_holster = 0
 
+/obj/item/clothing/accessory/holster/hip/black
+	icon_state = "holster_b_hip"
+
 /obj/item/clothing/accessory/holster/leg
 	name = "leg holster"
-	desc = "A tacticool handgun holster. Worn on the upper leg."
+	desc = "A drop leg holster worn on the upper leg."
 	icon_state = "holster_leg"
 	overlay_state = "holster_leg"
 	concealed_holster = 0
+
+/obj/item/clothing/accessory/holster/leg/black
+	icon_state = "holster_b_leg"

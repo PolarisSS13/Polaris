@@ -13,8 +13,8 @@
 	var/set_temperature = T0C + 30	//K
 	var/heating_power = 80000
 
-/obj/structure/bonfire/New(newloc, material_name)
-	..(newloc)
+/obj/structure/bonfire/Initialize(var/ml, material_name)
+	. = ..()
 	if(!material_name)
 		material_name = MAT_WOOD
 	material = get_material_by_name("[material_name]")
@@ -24,15 +24,15 @@
 	color = material.icon_colour
 
 // Blue wood.
-/obj/structure/bonfire/sifwood/New(newloc, material_name)
-	..(newloc, MAT_SIFWOOD)
+/obj/structure/bonfire/sifwood/Initialize(var/ml, material_name)
+	. = ..(ml, MAT_SIFWOOD)
 
-/obj/structure/bonfire/permanent/New(newloc, material_name)
-	..()
+/obj/structure/bonfire/permanent/Initialize(var/ml, material_name)
+	. = ..()
 	ignite()
 
-/obj/structure/bonfire/permanent/sifwood/New(newloc, material_name)
-	..(newloc, MAT_SIFWOOD)
+/obj/structure/bonfire/permanent/sifwood/Initialize(var/ml, material_name)
+	. = ..(ml, MAT_SIFWOOD)
 
 /obj/structure/bonfire/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/stack/rods) && !can_buckle && !grill)
@@ -184,7 +184,7 @@
 			L.IgniteMob()
 
 /obj/structure/bonfire/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(burning)
 		var/state
 		switch(get_fuel_amount())
@@ -194,14 +194,14 @@
 				state = "bonfire_hot"
 		var/image/I = image(icon, state)
 		I.appearance_flags = RESET_COLOR
-		overlays += I
+		add_overlay(I)
 
 		if(has_buckled_mobs() && get_fuel_amount() >= 5)
 			I = image(icon, "bonfire_intense")
 			I.pixel_y = 13
 			I.layer = MOB_LAYER + 0.1
 			I.appearance_flags = RESET_COLOR
-			overlays += I
+			add_overlay(I)
 
 		var/light_strength = max(get_fuel_amount() / 2, 2)
 		set_light(light_strength, light_strength, "#FF9933")
@@ -211,7 +211,7 @@
 	if(grill)
 		var/image/grille_image = image(icon, "bonfire_grill")
 		grille_image.appearance_flags = RESET_COLOR
-		overlays += grille_image
+		add_overlay(grille_image)
 
 
 /obj/structure/bonfire/process()
@@ -373,7 +373,7 @@
 			O.fire_act(null, 1000, 500)
 
 /obj/structure/fireplace/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	if(burning)
 		var/state
 		switch(get_fuel_amount())
@@ -385,7 +385,7 @@
 				state = "fireplace_intense" //don't need to throw a corpse inside to make it burn hotter.
 		var/image/I = image(icon, state)
 		I.appearance_flags = RESET_COLOR
-		overlays += I
+		add_overlay(I)
 
 		var/light_strength = max(get_fuel_amount() / 2, 2)
 		set_light(light_strength, light_strength, "#FF9933")

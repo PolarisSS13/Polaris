@@ -17,7 +17,6 @@ SUBSYSTEM_DEF(planets)
 /datum/controller/subsystem/planets/Initialize(timeofday)
 	admin_notice("<span class='danger'>Initializing planetary weather.</span>", R_DEBUG)
 	createPlanets()
-	..()
 
 /datum/controller/subsystem/planets/proc/createPlanets()
 	var/list/planet_datums = using_map.planet_datums_to_make
@@ -59,9 +58,10 @@ SUBSYSTEM_DEF(planets)
 			P.planet_floors -= T
 			T.vis_contents -= P.weather_holder.visuals
 			T.vis_contents -= P.weather_holder.special_visuals
+		T.outdoors = OUTDOORS_NO
 
 
-/datum/controller/subsystem/planets/fire(resumed = 0)
+/datum/controller/subsystem/planets/fire(resumed, no_mc_tick)
 	if(!resumed)
 		src.currentrun = planets.Copy()
 

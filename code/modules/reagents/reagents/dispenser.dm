@@ -37,6 +37,7 @@
 			M.ingested.remove_reagent(R.id, removed * effect)
 
 /datum/reagent/carbon/touch_turf(var/turf/T)
+	..()
 	if(!istype(T, /turf/space))
 		var/obj/effect/decal/cleanable/dirt/dirtoverlay = locate(/obj/effect/decal/cleanable/dirt, T)
 		if (!dirtoverlay)
@@ -91,9 +92,10 @@
 
 	glass_name = "ethanol"
 	glass_desc = "A well-known alcohol with a variety of applications."
-	allergen_factor = 0.5	//simulates mixed drinks containing less of the allergen, as they have only a single actual reagent unlike food
+	allergen_factor = 1	//simulates mixed drinks containing less of the allergen, as they have only a single actual reagent unlike food
 
 /datum/reagent/ethanol/touch_mob(var/mob/living/L, var/amount)
+	..()
 	if(istype(L))
 		L.adjust_fire_stacks(amount / 15)
 
@@ -187,18 +189,19 @@
 		M.hallucination = max(M.hallucination, halluci)
 
 /datum/reagent/ethanol/touch_obj(var/obj/O)
-	if(istype(O, /obj/item/weapon/paper))
-		var/obj/item/weapon/paper/paperaffected = O
+	..()
+	if(istype(O, /obj/item/paper))
+		var/obj/item/paper/paperaffected = O
 		paperaffected.clearpaper()
 		to_chat(usr, "The solution dissolves the ink on the paper.")
 		return
-	if(istype(O, /obj/item/weapon/book))
+	if(istype(O, /obj/item/book))
 		if(volume < 5)
 			return
-		if(istype(O, /obj/item/weapon/book/tome))
+		if(istype(O, /obj/item/book/tome))
 			to_chat(usr, "<span class='notice'>The solution does nothing. Whatever this is, it isn't normal ink.</span>")
 			return
-		var/obj/item/weapon/book/affectedbook = O
+		var/obj/item/book/affectedbook = O
 		affectedbook.dat = null
 		to_chat(usr, "<span class='notice'>The solution dissolves the ink on the book.</span>")
 	return
@@ -330,6 +333,7 @@
 						M.adjustToxLoss(100)
 
 /datum/reagent/radium/touch_turf(var/turf/T)
+	..()
 	if(volume >= 3)
 		if(!istype(T, /turf/space))
 			var/obj/effect/decal/cleanable/greenglow/glow = locate(/obj/effect/decal/cleanable/greenglow, T)
@@ -414,6 +418,7 @@
 			M.take_organ_damage(0, removed * power * 0.1) // Balance. The damage is instant, so it's weaker. 10 units -> 5 damage, double for pacid. 120 units beaker could deal 60, but a) it's burn, which is not as dangerous, b) it's a one-use weapon, c) missing with it will splash it over the ground and d) clothes give some protection, so not everything will hit
 
 /datum/reagent/acid/touch_obj(var/obj/O)
+	..()
 	if(O.unacidable)
 		return
 	if((istype(O, /obj/item) || istype(O, /obj/effect/plant)) && (volume > meltdose))

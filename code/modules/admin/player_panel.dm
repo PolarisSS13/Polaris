@@ -393,11 +393,11 @@
 		else
 			if (emergency_shuttle.wait_for_launch)
 				var/timeleft = emergency_shuttle.estimate_launch_time()
-				dat += "ETL: <a href='?src=\ref[src];edit_shuttle_time=1'>[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]</a><BR>"
+				dat += "ETL: <a href='?src=\ref[src];edit_shuttle_time=1'>[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]</a><BR>"
 
 			else if (emergency_shuttle.shuttle.has_arrive_time())
 				var/timeleft = emergency_shuttle.estimate_arrival_time()
-				dat += "ETA: <a href='?src=\ref[src];edit_shuttle_time=1'>[(timeleft / 60) % 60]:[add_zero(num2text(timeleft % 60), 2)]</a><BR>"
+				dat += "ETA: <a href='?src=\ref[src];edit_shuttle_time=1'>[(timeleft / 60) % 60]:[pad_left(num2text(timeleft % 60), 2, "0")]</a><BR>"
 				dat += "<a href='?src=\ref[src];call_shuttle=2'>Send Back</a><br>"
 
 			if (emergency_shuttle.shuttle.moving_status == SHUTTLE_WARMUP)
@@ -405,8 +405,8 @@
 
 		dat += "<a href='?src=\ref[src];delay_round_end=1'>[ticker.delay_end ? "End Round Normally" : "Delay Round End"]</a><br>"
 		dat += "<hr>"
-		for(var/antag_type in all_antag_types)
-			var/datum/antagonist/A = all_antag_types[antag_type]
+		for(var/antag_type in SSantags.antag_datums)
+			var/datum/antagonist/A = SSantags.antag_datums[antag_type]
 			dat += A.get_check_antag_output(src)
 		dat += "</body></html>"
 		usr << browse(dat, "window=roundstatus;size=400x500")

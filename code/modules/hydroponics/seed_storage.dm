@@ -39,45 +39,50 @@
 	var/lockdown = 0
 	var/datum/wires/seedstorage/wires = null
 
-/obj/machinery/seed_storage/New()
-	..()
+/obj/machinery/seed_storage/Initialize()
+	. = ..()
 	wires = new(src)
 	if(!contraband_seeds.len)
-		contraband_seeds = pick(list(
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/greengrapeseed = 3,
-					/obj/item/seeds/reishimycelium = 2,
-					/obj/item/seeds/bloodtomatoseed = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/plastiseed = 3,
-					/obj/item/seeds/kudzuseed = 2,
-					/obj/item/seeds/rose/blood = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/amanitamycelium = 3,
-					/obj/item/seeds/libertymycelium = 2,
-					/obj/item/seeds/glowshroom = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/glowberryseed = 3,
-					/obj/item/seeds/icepepperseed = 2,
-					/obj/item/seeds/bluetomatoseed = 1
-					),
-			list(
-					/obj/item/seeds/durian = 2,
-					/obj/item/seeds/ambrosiadeusseed = 1,
-					/obj/item/seeds/killertomatoseed = 1
-					),
-			list(
-					/obj/item/seeds/ambrosiavulgarisseed = 3,
-					/obj/item/seeds/random = 6
-					)
-			))
+		contraband_seeds = pick( 	/// Some form of ambrosia in all lists.
+			prob(30);list( /// General produce
+				/obj/item/seeds/ambrosiavulgarisseed = 3,
+				/obj/item/seeds/greengrapeseed = 3,
+				/obj/item/seeds/icepepperseed = 2,
+				/obj/item/seeds/kudzuseed = 1
+			),
+			prob(30);list( ///Mushroom batch
+				/obj/item/seeds/ambrosiavulgarisseed = 1,
+				/obj/item/seeds/glowberryseed = 2,
+				/obj/item/seeds/libertymycelium = 1,
+				/obj/item/seeds/reishimycelium = 2,
+				/obj/item/seeds/sporemycelium = 1
+			),
+			prob(15);list( /// Survivalist
+				/obj/item/seeds/ambrosiadeusseed = 2,
+				/obj/item/seeds/redtowermycelium = 2,
+				/obj/item/seeds/vale = 2,
+				/obj/item/seeds/siflettuce = 2
+			),
+			prob(20);list( /// Cold plants
+				/obj/item/seeds/ambrosiavulgarisseed = 2,
+				/obj/item/seeds/thaadra = 2,
+				/obj/item/seeds/icepepperseed = 2,
+				/obj/item/seeds/siflettuce = 1
+			),
+			prob(10);list( ///Poison party
+				/obj/item/seeds/ambrosiavulgarisseed = 3,
+				/obj/item/seeds/surik = 1,
+				/obj/item/seeds/telriis = 1,
+				/obj/item/seeds/nettleseed = 2,
+				/obj/item/seeds/poisonberryseed = 1
+			),
+			prob(5);list( /// Extra poison party!
+				/obj/item/seeds/ambrosiainfernusseed = 1,
+				/obj/item/seeds/amauri = 1,
+				/obj/item/seeds/surik = 1,
+				/obj/item/seeds/deathberryseed = 1 /// Very ow.
+			)
+		)
 	return
 
 /obj/machinery/seed_storage/process()
@@ -116,6 +121,7 @@
 		/obj/item/seeds/lettuce = 3,
 		/obj/item/seeds/limeseed = 3,
 		/obj/item/seeds/mtearseed = 2,
+		/obj/item/seeds/nutmeg = 3,
 		/obj/item/seeds/orangeseed = 3,
 		/obj/item/seeds/onionseed = 3,
 		/obj/item/seeds/peanutseed = 3,
@@ -173,6 +179,7 @@
 		/obj/item/seeds/limeseed = 3,
 		/obj/item/seeds/mtearseed = 2,
 		/obj/item/seeds/nettleseed = 2,
+		/obj/item/seeds/nutmeg = 3,
 		/obj/item/seeds/orangeseed = 3,
 		/obj/item/seeds/peanutseed = 3,
 		/obj/item/seeds/plastiseed = 3,
@@ -342,7 +349,7 @@
 				dat += "LUM "
 			dat += "</td>"
 			dat += "<td>[S.amount]</td>"
-			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[S.ID]'>Purge</a></td>"
+			dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a></td>"
 			dat += "</tr>"
 		if(hacked || emagged)
 			for (var/datum/seed_pile/S in piles_contra)
@@ -431,7 +438,7 @@
 					dat += "LUM "
 				dat += "</td>"
 				dat += "<td>[S.amount]</td>"
-				dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a> <a href='byond://?src=\ref[src];task=purge;id=[S.ID]'>Purge</a></td>"
+				dat += "<td><a href='byond://?src=\ref[src];task=vend;id=[S.ID]'>Vend</a></td>"
 				dat += "</tr>"
 		dat += "</table>"
 
@@ -458,11 +465,6 @@
 				else
 					piles -= N
 					qdel(N)
-			else if (task == "purge")
-				for (var/obj/O in N.seeds)
-					qdel(O)
-					piles -= N
-					qdel(N)
 			break
 	if(hacked || emagged)
 		for (var/datum/seed_pile/N in piles_contra)
@@ -479,11 +481,6 @@
 					else
 						piles_contra -= N
 						qdel(N)
-				else if (task == "purge")
-					for (var/obj/O in N.seeds)
-						qdel(O)
-						piles_contra -= N
-						qdel(N)
 				break
 	updateUsrDialog()
 
@@ -492,8 +489,8 @@
 		add(O)
 		user.visible_message("[user] puts \the [O.name] into \the [src].", "You put \the [O] into \the [src].")
 		return
-	else if (istype(O, /obj/item/weapon/storage/bag/plants) && !lockdown)
-		var/obj/item/weapon/storage/P = O
+	else if (istype(O, /obj/item/storage/bag/plants) && !lockdown)
+		var/obj/item/storage/P = O
 		var/loaded = 0
 		for(var/obj/item/seeds/G in P.contents)
 			++loaded
@@ -511,10 +508,10 @@
 		panel_open = !panel_open
 		to_chat(user, "You [panel_open ? "open" : "close"] the maintenance panel.")
 		playsound(src, O.usesound, 50, 1)
-		overlays.Cut()
+		cut_overlays()
 		if(panel_open)
-			overlays += image(icon, "[initial(icon_state)]-panel")
-	else if((O.is_wirecutter() || istype(O, /obj/item/device/multitool)) && panel_open)
+			add_overlay("[initial(icon_state)]-panel")
+	else if((O.is_wirecutter() || istype(O, /obj/item/multitool)) && panel_open)
 		wires.Interact(user)
 
 /obj/machinery/seed_storage/emag_act(var/remaining_charges, var/mob/user)
@@ -527,7 +524,7 @@
 			req_access = list()
 			req_one_access = list()
 			to_chat(user, "<span class='warning'>\The [src]'s access mechanism shorts out.</span>")
-			var/datum/effect/effect/system/spark_spread/sparks = new /datum/effect/effect/system/spark_spread()
+			var/datum/effect_system/spark_spread/sparks = new /datum/effect_system/spark_spread()
 			sparks.set_up(3, 0, get_turf(src))
 			sparks.start()
 			visible_message("<span class='warning'>\The [src]'s panel sparks!</span>")
@@ -538,8 +535,8 @@
 	if (istype(O.loc, /mob))
 		var/mob/user = O.loc
 		user.remove_from_mob(O)
-	else if(istype(O.loc,/obj/item/weapon/storage))
-		var/obj/item/weapon/storage/S = O.loc
+	else if(istype(O.loc,/obj/item/storage))
+		var/obj/item/storage/S = O.loc
 		S.remove_from_storage(O, src)
 
 	O.loc = src

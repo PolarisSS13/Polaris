@@ -4,7 +4,7 @@
 	icon_keyboard = "atmos_key"
 	icon_screen = "area_atmos"
 	light_color = "#e6ffff"
-	circuit = /obj/item/weapon/circuitboard/area_atmos
+	circuit = /obj/item/circuitboard/area_atmos
 
 	var/list/connectedscrubbers = list()
 	var/status = ""
@@ -14,7 +14,7 @@
 	//Simple variable to prevent me from doing attack_hand in both this and the child computer
 	var/zone = "This computer is working on a wireless range, the range is currently limited to "
 
-/obj/machinery/computer/area_atmos/Initialize()
+/obj/machinery/computer/area_atmos/LateInitialize()
 	. = ..()
 	scanscrubbers()
 

@@ -69,17 +69,15 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 			//Messages having theese tokens will be rejected by server. Case sensitive
 	var/spamfilter_limit = MESSAGE_SERVER_DEFAULT_SPAM_LIMIT	//Maximal amount of tokens
 
-/obj/machinery/message_server/New()
+/obj/machinery/message_server/Initialize()
 	message_servers += src
 	decryptkey = GenerateKey()
 	send_pda_message("System Administrator", "system", "This is an automated message. The messaging system is functioning correctly.")
-	..()
-	return
+	. = ..()
 
 /obj/machinery/message_server/Destroy()
 	message_servers -= src
-	..()
-	return
+	. = ..()
 
 /obj/machinery/message_server/examine(mob/user, distance, infix, suffix)
 	. = ..()
@@ -148,9 +146,9 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 
 	return
 
-/obj/machinery/message_server/attackby(obj/item/weapon/O as obj, mob/living/user as mob)
+/obj/machinery/message_server/attackby(obj/item/O as obj, mob/living/user as mob)
 	if (active && !(stat & (BROKEN|NOPOWER)) && (spamfilter_limit < MESSAGE_SERVER_DEFAULT_SPAM_LIMIT*2) && \
-		istype(O,/obj/item/weapon/circuitboard/message_monitor))
+		istype(O,/obj/item/circuitboard/message_monitor))
 		spamfilter_limit += round(MESSAGE_SERVER_DEFAULT_SPAM_LIMIT / 2)
 		user.drop_item()
 		qdel(O)
@@ -230,7 +228,7 @@ var/global/list/obj/machinery/message_server/message_servers = list()
 /datum/feedback_variable/proc/get_parsed()
 	return list(variable,value,details)
 
-var/obj/machinery/blackbox_recorder/blackbox
+var/global/obj/machinery/blackbox_recorder/blackbox
 
 /obj/machinery/blackbox_recorder
 	icon = 'icons/obj/stationobjs.dmi'
@@ -261,10 +259,10 @@ var/obj/machinery/blackbox_recorder/blackbox
 	var/list/datum/feedback_variable/feedback = new()
 
 	//Only one can exist in the world!
-/obj/machinery/blackbox_recorder/New()
-	if(blackbox)
-		if(istype(blackbox,/obj/machinery/blackbox_recorder))
-			qdel(src)
+/obj/machinery/blackbox_recorder/Initialize()
+	. = ..()
+	if(istype(blackbox,/obj/machinery/blackbox_recorder))
+		return INITIALIZE_HINT_QDEL
 	blackbox = src
 
 /obj/machinery/blackbox_recorder/Destroy()

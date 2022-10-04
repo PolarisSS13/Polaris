@@ -1,4 +1,4 @@
-var/datum/planet/sif/planet_sif = null
+var/global/datum/planet/sif/planet_sif = null
 
 /datum/planet/sif
 	name = "Sif"
@@ -81,12 +81,12 @@ var/datum/planet/sif/planet_sif = null
 	if(weather_holder && weather_holder.current_weather && weather_holder.current_weather.light_color)
 		new_color = weather_holder.current_weather.light_color
 	else
-		var/list/low_color_list = hex2rgb(low_color)
+		var/list/low_color_list = rgb2num(low_color)
 		var/low_r = low_color_list[1]
 		var/low_g = low_color_list[2]
 		var/low_b = low_color_list[3]
 
-		var/list/high_color_list = hex2rgb(high_color)
+		var/list/high_color_list = rgb2num(high_color)
 		var/high_r = high_color_list[1]
 		var/high_g = high_color_list[2]
 		var/high_b = high_color_list[3]
@@ -206,7 +206,7 @@ var/datum/planet/sif/planet_sif = null
 	icon_state = "snowfall_med"
 	temp_high = T0C		// 0c
 	temp_low = 243.15	// -30c
-	wind_high = 2
+	wind_high = 1
 	wind_low = 0
 	light_modifier = 0.5
 	flight_failure_modifier = 5
@@ -242,7 +242,7 @@ var/datum/planet/sif/planet_sif = null
 	icon_state = "snowfall_heavy"
 	temp_high = 243.15 // -30c
 	temp_low = 233.15  // -40c
-	wind_high = 4
+	wind_high = 3
 	wind_low = 2
 	light_modifier = 0.3
 	flight_failure_modifier = 10
@@ -276,7 +276,7 @@ var/datum/planet/sif/planet_sif = null
 	name = "rain"
 	icon_state = "rain"
 	wind_high = 2
-	wind_low = 1
+	wind_low = 0
 	light_modifier = 0.5
 	effect_message = "<span class='warning'>Rain falls on you.</span>"
 
@@ -303,7 +303,7 @@ var/datum/planet/sif/planet_sif = null
 				continue // They're indoors, so no need to rain on them.
 
 			// If they have an open umbrella, it'll guard from rain
-			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			var/obj/item/melee/umbrella/U = L.get_active_hand()
 			if(!istype(U) || !U.open)
 				U = L.get_inactive_hand()
 
@@ -321,8 +321,8 @@ var/datum/planet/sif/planet_sif = null
 	icon_state = "storm"
 	temp_high = 243.15 // -30c
 	temp_low = 233.15  // -40c
-	wind_high = 4
-	wind_low = 2
+	wind_high = 3
+	wind_low = 1
 	light_modifier = 0.3
 	flight_failure_modifier = 10
 	effect_message = "<span class='warning'>Rain falls on you, drenching you in water.</span>"
@@ -337,7 +337,7 @@ var/datum/planet/sif/planet_sif = null
 		"A bright flash heralds the approach of a storm."
 	)
 	outdoor_sounds_type = /datum/looping_sound/weather/rain/heavy
-	indoor_sounds_type = /datum/looping_sound/weather/rain/heavy/indoors
+	indoor_sounds_type = /datum/looping_sound/weather/rain/indoors/heavy
 
 
 	transition_chances = list(
@@ -356,7 +356,7 @@ var/datum/planet/sif/planet_sif = null
 				continue // They're indoors, so no need to rain on them.
 
 			// If they have an open umbrella, it'll guard from rain
-			var/obj/item/weapon/melee/umbrella/U = L.get_active_hand()
+			var/obj/item/melee/umbrella/U = L.get_active_hand()
 			if(!istype(U) || !U.open)
 				U = L.get_inactive_hand()
 
@@ -414,13 +414,25 @@ var/datum/planet/sif/planet_sif = null
 				continue // They're indoors, so no need to pelt them with ice.
 
 			// If they have an open umbrella, it'll guard from hail
-			var/obj/item/weapon/melee/umbrella/U = H.get_active_hand()
+			var/obj/item/melee/umbrella/U = H.get_active_hand()
 			if(!istype(U) || !U.open)
 				U = H.get_inactive_hand()
 
 			if(istype(U) && U.open)
 				if(show_message)
-					to_chat(H, "<span class='notice'>Hail patters onto your umbrella.</span>")
+					to_chat(H, SPAN_NOTICE("Hail patters against your [U.name]."))
+				continue
+
+			// Being next to a tree will also guard from hail.
+			var/near_tree = FALSE
+			var/nearby_turfs = RANGE_TURFS(1, T)
+			for(var/turf/nearby in nearby_turfs)
+				if(locate(/obj/structure/flora/tree) in nearby)
+					near_tree = TRUE
+					break
+			if(near_tree)
+				if(show_message)
+					to_chat(H, SPAN_NOTICE("Hail patters against the canopy above."))
 				continue
 
 			var/target_zone = pick(BP_ALL)
@@ -486,8 +498,8 @@ var/datum/planet/sif/planet_sif = null
 	light_color = "#FF0000"
 	temp_high = 323.15	// 50c
 	temp_low = 313.15	// 40c
-	wind_high = 6
-	wind_low = 3
+	wind_high = 3
+	wind_low = 2
 	flight_failure_modifier = 50
 	transition_chances = list(
 		WEATHER_ASH_STORM = 100

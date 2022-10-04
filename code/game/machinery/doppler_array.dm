@@ -1,4 +1,4 @@
-var/list/doppler_arrays = list()
+var/global/list/doppler_arrays = list()
 
 /obj/machinery/doppler_array
 	anchored = 1
@@ -9,8 +9,8 @@ var/list/doppler_arrays = list()
 
 	icon_state = "doppler"
 
-/obj/machinery/doppler_array/New()
-	..()
+/obj/machinery/doppler_array/Initialize()
+	. = ..()
 	doppler_arrays += src
 
 /obj/machinery/doppler_array/Destroy()

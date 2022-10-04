@@ -35,9 +35,9 @@
 		L.blob_act()
 
 	// Visual effect.
-	var/datum/effect/system/explosion/E = new/datum/effect/system/explosion/smokeless()
+	var/datum/effect_system/explosion/E = new/datum/effect_system/explosion/smokeless()
 	var/turf/T = get_turf(victim)
-	E.set_up(T)
+	E.set_up(loc=T)
 	E.start()
 
 	// Now for sounds.
@@ -49,7 +49,7 @@
 
 	exploding = FALSE
 
-/datum/blob_type/explosive_lattice/on_chunk_tick(obj/item/weapon/blobcore_chunk/B)
+/datum/blob_type/explosive_lattice/on_chunk_tick(obj/item/blobcore_chunk/B)
 	var/turf/T = get_turf(B)
 	if(!T)
 		return

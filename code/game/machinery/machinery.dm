@@ -106,23 +106,20 @@ Class Procs:
 	var/list/component_parts = null //list of all the parts used to build it, if made from certain kinds of frames.
 	var/uid
 	var/panel_open = 0
-	var/global/gl_uid = 1
+	var/static/gl_uid = 1
 	var/clicksound			// sound played on succesful interface. Just put it in the list of vars at the start.
 	var/clickvol = 40		// volume
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
-	var/obj/item/weapon/circuitboard/circuit = null
+	var/obj/item/circuitboard/circuit = null
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
-/obj/machinery/New(l, d=0)
-	..(l)
+/obj/machinery/Initialize(var/ml, d=0)
+	. = ..()
 	if(d)
 		set_dir(d)
 	if(ispath(circuit))
 		circuit = new circuit(src)
-
-/obj/machinery/Initialize(var/mapload)
-	. = ..()
 	global.machines += src
 	if(ispath(circuit))
 		circuit = new circuit(src)
@@ -130,7 +127,7 @@ Class Procs:
 		START_MACHINE_PROCESSING(src)
 	else
 		START_PROCESSING(SSfastprocess, src)
-	if(!mapload)
+	if(!ml)
 		power_change()
 
 /obj/machinery/Destroy()
@@ -279,12 +276,14 @@ Class Procs:
 	state(text, "blue")
 	playsound(src, 'sound/machines/ping.ogg', 50, 0)
 
-/obj/machinery/proc/shock(mob/user, prb)
+/obj/machinery/proc/shock(mob/living/user, prb)
 	if(inoperable())
 		return 0
 	if(!prob(prb))
-		return 0
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+		return FALSE
+	if (!istype(user))
+		return
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(5, 1, src)
 	s.start()
 	if(electrocute_mob(user, get_area(src), src, 0.7))
@@ -299,22 +298,22 @@ Class Procs:
 	return 0
 
 /obj/machinery/proc/default_apply_parts()
-	var/obj/item/weapon/circuitboard/CB = circuit
+	var/obj/item/circuitboard/CB = circuit
 	if(!istype(CB))
 		return
 	CB.apply_default_parts(src)
 	RefreshParts()
 
 /obj/machinery/proc/default_use_hicell()
-	var/obj/item/weapon/cell/C = locate(/obj/item/weapon/cell) in component_parts
+	var/obj/item/cell/C = locate(/obj/item/cell) in component_parts
 	if(C)
 		component_parts -= C
 		qdel(C)
-		C = new /obj/item/weapon/cell/high(src)
+		C = new /obj/item/cell/high(src)
 		component_parts += C
 		return C
 
-/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/weapon/storage/part_replacer/R)
+/obj/machinery/proc/default_part_replacement(var/mob/user, var/obj/item/storage/part_replacer/R)
 	if(!istype(R))
 		return 0
 	if(!component_parts)
@@ -323,14 +322,14 @@ Class Procs:
 	for(var/obj/item/C in component_parts)
 		to_chat(user, "<span class='notice'>    [C.name]</span>")
 	if(panel_open || !R.panel_req)
-		var/obj/item/weapon/circuitboard/CB = circuit
+		var/obj/item/circuitboard/CB = circuit
 		var/P
-		for(var/obj/item/weapon/stock_parts/A in component_parts)
+		for(var/obj/item/stock_parts/A in component_parts)
 			for(var/T in CB.req_components)
 				if(ispath(A.type, T))
 					P = T
 					break
-			for(var/obj/item/weapon/stock_parts/B in R.contents)
+			for(var/obj/item/stock_parts/B in R.contents)
 				if(istype(B, P) && istype(A, P))
 					if(B.rating > A.rating)
 						R.remove_from_storage(B, src)
@@ -391,7 +390,7 @@ Class Procs:
 	if(do_after(user, 20 * S.toolspeed))
 		if(stat & BROKEN)
 			to_chat(user, "<span class='notice'>The broken glass falls out.</span>")
-			new /obj/item/weapon/material/shard(src.loc)
+			new /obj/item/material/shard(src.loc)
 		else
 			to_chat(user, "<span class='notice'>You disconnect the monitor.</span>")
 		. = dismantle()
@@ -418,12 +417,12 @@ Class Procs:
 /obj/machinery/proc/dismantle()
 	playsound(src, 'sound/items/Crowbar.ogg', 50, 1)
 	for(var/obj/I in contents)
-		if(istype(I,/obj/item/weapon/card/id))
+		if(istype(I,/obj/item/card/id))
 			I.forceMove(src.loc)
 	if(!circuit)
 		return 0
 	var/obj/structure/frame/A = new /obj/structure/frame(src.loc)
-	var/obj/item/weapon/circuitboard/M = circuit
+	var/obj/item/circuitboard/M = circuit
 	A.circuit = M
 	A.anchored = 1
 	A.frame_type = M.board_type

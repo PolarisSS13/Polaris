@@ -7,7 +7,7 @@
 	anchored = 1.0
 	icon_keyboard = "med_key"
 	icon_screen = "crew"
-	circuit = /obj/item/weapon/circuitboard/operating
+	circuit = /obj/item/circuitboard/operating
 	var/obj/machinery/optable/table = null
 	var/mob/living/carbon/human/victim = null
 	var/verbose = 1 //general speaker toggle
@@ -20,8 +20,8 @@
 	var/healthAlarm = 50
 	var/oxy = 1 //oxygen beeping toggle
 
-/obj/machinery/computer/operating/New()
-	..()
+/obj/machinery/computer/operating/Initialize()
+	. = ..()
 	for(var/direction in list(NORTH,EAST,SOUTH,WEST))
 		table = locate(/obj/machinery/optable, get_step(src, direction))
 		if(table)

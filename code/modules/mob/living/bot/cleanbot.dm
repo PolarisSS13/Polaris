@@ -16,8 +16,8 @@
 	var/spray_blood = 0
 	var/list/target_types = list()
 
-/mob/living/bot/cleanbot/New()
-	..()
+/mob/living/bot/cleanbot/Initialize()
+	. = ..()
 	get_targets()
 
 /mob/living/bot/cleanbot/Destroy()
@@ -132,12 +132,12 @@
 	visible_message("<span class='danger'>[src] blows apart!</span>")
 	var/turf/Tsec = get_turf(src)
 
-	new /obj/item/weapon/reagent_containers/glass/bucket(Tsec)
-	new /obj/item/device/assembly/prox_sensor(Tsec)
+	new /obj/item/reagent_containers/glass/bucket(Tsec)
+	new /obj/item/assembly/prox_sensor(Tsec)
 	if(prob(50))
 		new /obj/item/robot_parts/l_arm(Tsec)
 
-	var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+	var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 	s.set_up(3, 1, src)
 	s.start()
 	qdel(src)
@@ -214,7 +214,7 @@
 
 /* Assembly */
 
-/obj/item/weapon/bucket_sensor
+/obj/item/bucket_sensor
 	desc = "It's a bucket. With a sensor attached."
 	name = "proxy bucket"
 	icon = 'icons/obj/aibots.dmi'
@@ -226,7 +226,7 @@
 	w_class = ITEMSIZE_NORMAL
 	var/created_name = "Cleanbot"
 
-/obj/item/weapon/bucket_sensor/attackby(var/obj/item/W, var/mob/user)
+/obj/item/bucket_sensor/attackby(var/obj/item/W, var/mob/user)
 	..()
 	if(istype(W, /obj/item/robot_parts/l_arm) || istype(W, /obj/item/robot_parts/r_arm) || (istype(W, /obj/item/organ/external/arm) && ((W.name == "robotic left arm") || (W.name == "robotic right arm"))))
 		user.drop_item()
@@ -238,7 +238,7 @@
 		user.drop_from_inventory(src)
 		qdel(src)
 
-	else if(istype(W, /obj/item/weapon/pen))
+	else if(istype(W, /obj/item/pen))
 		var/t = sanitizeSafe(input(user, "Enter new robot name", name, created_name), MAX_NAME_LEN)
 		if(!t)
 			return

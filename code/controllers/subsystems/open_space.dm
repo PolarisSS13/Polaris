@@ -6,7 +6,7 @@ GLOBAL_VAR_INIT(open_space_initialised, FALSE)
 
 SUBSYSTEM_DEF(open_space)
 	name = "Open Space"
-	wait = 2 // 5 times per second.
+	wait = 0.2 SECONDS
 	init_order = INIT_ORDER_OPENSPACE
 	var/list/turfs_to_process = list()		// List of turfs queued for update.
 	var/list/turfs_to_process_old = null	// List of turfs currently being updated.
@@ -20,13 +20,8 @@ SUBSYSTEM_DEF(open_space)
 	initialize_open_space()
 	// Pre-process open space turfs once before the round starts.
 	fire(FALSE, TRUE)
-	return ..()
 
-/datum/controller/subsystem/open_space/Recover()
-	flags |= SS_NO_INIT // Make extra sure we don't initialize twice.
-	. = ..()
-
-/datum/controller/subsystem/open_space/fire(resumed = 0, init_tick_checks = FALSE)
+/datum/controller/subsystem/open_space/fire(resumed, no_mc_tick)
 	// We use a different list so any additions to the update lists during a delay from MC_TICK_CHECK
 	// don't cause things to be cut from the list without being updated.
 
@@ -44,7 +39,7 @@ SUBSYSTEM_DEF(open_space)
 		counter += 1
 		if(!QDELETED(T))
 			update_turf(T)
-		if (init_tick_checks)
+		if (no_mc_tick)
 			CHECK_TICK // Used during initialization processing
 		else if (MC_TICK_CHECK)
 			src.counter = counter // Save for when we're resumed
@@ -86,17 +81,6 @@ SUBSYSTEM_DEF(open_space)
 		if(isopenspace(T))
 			// log_debug("[T] ([T.x],[T.y],[T.z]) queued for update for [src].update_icon()")
 			SSopen_space.add_turf(T, 1)
-
-// Ouch... this is painful. But is there any other way?
-/* - No for now
-/obj/New()
-	. = ..()
-	if(open_space_initialised && !invisibility)
-		var/turf/T = GetAbove(src)
-		if(isopenspace(T))
-			// log_debug("[T] ([T.x],[T.y],[T.z]) queued for update for [src]New()")
-			OS_controller.add_turf(T, 1)
-*/
 
 // We probably should hook Destroy() If we can think of something more efficient, lets hear it.
 /obj/Destroy()

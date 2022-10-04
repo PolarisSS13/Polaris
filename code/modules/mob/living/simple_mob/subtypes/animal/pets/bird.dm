@@ -29,23 +29,24 @@
 	response_help  = "pets"
 	response_disarm = "gently moves aside"
 	response_harm   = "swats"
+	organ_names = /decl/mob_organ_names/bird
 
 	say_list_type = /datum/say_list/bird
-	holder_type = /obj/item/weapon/holder/bird
+	holder_type = /obj/item/holder/bird
 
 /datum/say_list/bird
 	speak = list("Chirp!","Caw!","Screech!","Squawk!")
 	emote_hear = list("chirps","caws")
 	emote_see = list("shakes their head", "ruffles their feathers")
 
-/obj/item/weapon/holder/bird
+/obj/item/holder/bird
 	name = "bird"
 	desc = "It's a bird!"
 	icon_state = null
 	item_icons = null
 	w_class = ITEMSIZE_SMALL
 
-/obj/item/weapon/holder/bird/sync(var/mob/living/simple_mob/SM)
+/obj/item/holder/bird/sync(var/mob/living/simple_mob/SM)
 	..()
 	icon_state = SM.icon_rest // Looks better if the bird isn't flapping constantly in the UI.
 
@@ -96,3 +97,6 @@
 	tt_desc = "E Streptopelia risoria" // This is actually disputed IRL but since we can't tell the future it'll stay the same for 500+ years.
 	icon_scale_x = 0.5
 	icon_scale_y = 0.5
+
+/decl/mob_organ_names/bird
+	hit_zones = list("head", "chest", "left leg", "right leg", "left wing", "right wing")

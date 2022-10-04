@@ -1,4 +1,4 @@
-var/list/pai_emotions = list(
+var/global/list/pai_emotions = list(
 		"Happy" = 1,
 		"Cat" = 2,
 		"Extremely Happy" = 3,
@@ -33,8 +33,8 @@ var/global/list/default_pai_software = list()
 			default_pai_software[P.id] = P
 	return r
 
-/mob/living/silicon/pai/New()
-	..()
+/mob/living/silicon/pai/Initialize()
+	. = ..()
 	software = default_pai_software.Copy()
 
 /mob/living/silicon/pai/verb/paiInterface()

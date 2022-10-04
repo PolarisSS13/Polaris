@@ -103,7 +103,7 @@
 			var/injecting = min(5,max(1,get_trait(TRAIT_POTENCY)/3))
 			R.add_reagent(rid,injecting)
 
-	var/datum/effect/effect/system/smoke_spread/chem/spores/S = new(src)
+	var/datum/effect_system/smoke_spread/chem/spores/S = new(src)
 	S.attach(T)
 	S.set_up(R, round(get_trait(TRAIT_POTENCY)/4), 0, T)
 	S.start()
@@ -352,7 +352,7 @@
 
 		if(turfs.len)
 			// Moves the mob, causes sparks.
-			var/datum/effect/effect/system/spark_spread/s = new /datum/effect/effect/system/spark_spread
+			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, get_turf(target))
 			s.start()
 			var/turf/picked = get_turf(pick(turfs))                      // Just in case...
@@ -413,8 +413,8 @@
 	set_trait(TRAIT_POTENCY,rand(5,30),200,0)
 	set_trait(TRAIT_PRODUCT_ICON,pick(plant_controller.accessible_product_sprites))
 	set_trait(TRAIT_PLANT_ICON,pick(plant_controller.accessible_plant_sprites))
-	set_trait(TRAIT_PLANT_COLOUR,"#[get_random_colour(0,75,190)]")
-	set_trait(TRAIT_PRODUCT_COLOUR,"#[get_random_colour(0,75,190)]")
+	set_trait(TRAIT_PLANT_COLOUR,get_random_colour(0,75,190))
+	set_trait(TRAIT_PRODUCT_COLOUR,get_random_colour(0,75,190))
 	update_growth_stages()
 
 	if(prob(20))
@@ -538,7 +538,7 @@
 
 	if(prob(5))
 		set_trait(TRAIT_BIOLUM,1)
-		set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
+		set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 
 	if(prob(3))
 		set_trait(TRAIT_SPORING,1)
@@ -644,7 +644,7 @@
 					if(get_trait(TRAIT_BIOLUM))
 						source_turf.visible_message("<span class='notice'>\The [display_name] begins to glow!</span>")
 						if(prob(degree*2))
-							set_trait(TRAIT_BIOLUM_COLOUR,"#[get_random_colour(0,75,190)]")
+							set_trait(TRAIT_BIOLUM_COLOUR,get_random_colour(0,75,190))
 							source_turf.visible_message("<span class='notice'>\The [display_name]'s glow </span><font color='[get_trait(TRAIT_BIOLUM_COLOUR)]'>changes colour</font>!")
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
@@ -811,12 +811,12 @@
 			else if(has_item_product)
 				product = new has_item_product(get_turf(user))
 			else
-				product = new /obj/item/weapon/reagent_containers/food/snacks/grown(get_turf(user),name)
+				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user),name)
 			if(get_trait(TRAIT_PRODUCT_COLOUR))
 				if(!istype(product, /mob))
 					product.color = get_trait(TRAIT_PRODUCT_COLOUR)
-					if(istype(product,/obj/item/weapon/reagent_containers/food))
-						var/obj/item/weapon/reagent_containers/food/food = product
+					if(istype(product,/obj/item/reagent_containers/food))
+						var/obj/item/reagent_containers/food/food = product
 						food.filling_color = get_trait(TRAIT_PRODUCT_COLOUR)
 
 			if(mysterious)

@@ -4,9 +4,8 @@ SUBSYSTEM_DEF(webhooks)
 	flags = SS_NO_FIRE
 	var/list/webhook_decls = list()
 
-/datum/controller/subsystem/webhooks/Initialize()
+/datum/controller/subsystem/webhooks/Initialize(timeofday)
 	load_webhooks()
-	. = ..()
 
 /datum/controller/subsystem/webhooks/proc/load_webhooks()
 
@@ -68,7 +67,7 @@ SUBSYSTEM_DEF(webhooks)
 		return
 
 	to_world_log("[usr.key] has reloaded webhooks.")
-	log_and_message_admins("has reloaded webhooks.")
+	log_and_message_admins("has reloaded webhooks.", usr)
 	SSwebhooks.load_webhooks()
 
 /client/proc/ping_webhook()
