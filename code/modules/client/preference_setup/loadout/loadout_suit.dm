@@ -348,8 +348,8 @@
 	display_name = "kamishimo"
 	path = /obj/item/clothing/suit/kamishimo
 
-/datum/gear/suit/insulted
-	display_name = "insulted jacket selection"
+/datum/gear/suit/insulated
+	display_name = "insulated jacket selection"
 	path = /obj/item/clothing/suit/storage/insulated
 	cost = 2
 
