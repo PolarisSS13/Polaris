@@ -151,21 +151,21 @@
 	labcoattype["labcoat, yellow"] = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
 	gear_tweaks += new/datum/gear_tweak/path(labcoattype)
 
-/datum/gear/suit/labcoat/rd
+/datum/gear/suit/labcoat_rd
 	display_name = "labcoat, research director (RD)"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/rd
 	allowed_roles = list("Research Director")
 
-/datum/gear/suit/labcoat/emt
+/datum/gear/suit/labcoat_emt
 	display_name = "labcoat, EMT (Medical)"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/emt
 	allowed_roles = list("Medical Doctor","Chief Medical Officer","Chemist","Paramedic","Geneticist", "Psychiatrist")
 
-/datum/gear/suit/miscellaneous/labcoat
+/datum/gear/suit/plague_coat
 	display_name = "plague doctor's coat"
 	path = /obj/item/clothing/suit/storage/toggle/labcoat/plaguedoctor
 
-/datum/gear/suit/roles/surgical_apron
+/datum/gear/suit/surgical_apron
 	display_name = "apron, surgical"
 	path = /obj/item/clothing/suit/surgicalapron
 	allowed_roles = list("Medical Doctor","Chief Medical Officer")
@@ -187,11 +187,11 @@
 		ponchos[initial(poncho.name)] = poncho
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ponchos))
 
-/datum/gear/suit/roles/poncho/cloak
+/datum/gear/suit/cloak
 	display_name = "cloak, departmental selection"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/cargo
 
-/datum/gear/suit/roles/poncho/cloak/New()
+/datum/gear/suit/cloak/New()
 	..()
 	var/list/cloaks = list()
 	for(var/cloak_style in (typesof(/obj/item/clothing/accessory/poncho/roles/cloak)))
@@ -199,7 +199,7 @@
 		cloaks[initial(cloak.name)] = cloak
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cloaks))
 
-/datum/gear/suit/roles/poncho/cloak/custom //A colorable cloak
+/datum/gear/suit/cloak_custom //A colorable cloak
 	display_name = "cloak (colorable)"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/custom
 
@@ -302,19 +302,19 @@
 		denim_jackets[initial(denim_jacket.name)] = denim_jacket
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(denim_jackets))
 
-/datum/gear/suit/miscellaneous/kimono
+/datum/gear/suit/kimono
 	display_name = "kimono"
 	path = /obj/item/clothing/suit/kimono
 
-/datum/gear/suit/miscellaneous/kimono/New()
+/datum/gear/suit/kimono/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
-/datum/gear/suit/miscellaneous/dep_jacket
+/datum/gear/suit/dep_jacket
 	display_name = "jacket, departmental selection"
 	path = /obj/item/clothing/suit/storage/toggle/sec_dep_jacket
 
-/datum/gear/suit/miscellaneous/dep_jacket/New()
+/datum/gear/suit/dep_jacket/New()
 	..()
 	var/jackettype = list()
 	jackettype["department jacket, engineering"] = /obj/item/clothing/suit/storage/toggle/engi_dep_jacket
@@ -324,11 +324,11 @@
 	jackettype["department jacket, supply"] = /obj/item/clothing/suit/storage/toggle/supply_dep_jacket
 	gear_tweaks += new/datum/gear_tweak/path(jackettype)
 
-/datum/gear/suit/miscellaneous/light_jacket
+/datum/gear/suit/light_jacket
 	display_name = "jacket, light selection"
 	path = /obj/item/clothing/suit/storage/toggle/light_jacket
 
-/datum/gear/suit/miscellaneous/light_jacket/New()
+/datum/gear/suit/light_jacket/New()
 	..()
 	var/list/jacket = list(
 		"grey light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket,
@@ -336,15 +336,15 @@
 	)
 	gear_tweaks += new/datum/gear_tweak/path(jacket)
 
-/datum/gear/suit/miscellaneous/peacoat
-	display_name = "peacoat"
+/datum/gear/suit/peacoat
+	display_name = "peacoat (colorable)"
 	path = /obj/item/clothing/suit/storage/toggle/peacoat
 
-/datum/gear/suit/miscellaneous/peacoat/New()
+/datum/gear/suit/peacoat/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
-/datum/gear/suit/miscellaneous/kamishimo
+/datum/gear/suit/kamishimo
 	display_name = "kamishimo"
 	path = /obj/item/clothing/suit/kamishimo
 
@@ -361,10 +361,10 @@
 		insulated_jackets[initial(insulated_jacket.name)] = insulated_jacket
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(insulated_jackets))
 
-/datum/gear/suit/miscellaneous/cardigan
-	display_name = "cardigan"
+/datum/gear/suit/cardigan
+	display_name = "cardigan (colorable)"
 	path = /obj/item/clothing/suit/storage/toggle/cardigan
 
-/datum/gear/suit/miscellaneous/cardigan/New()
+/datum/gear/suit/cardigan/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice

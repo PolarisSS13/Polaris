@@ -81,20 +81,20 @@
 		caps[initial(cap_type.name)] = cap_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(caps))
 
-/datum/gear/head/cap/flat
+/datum/gear/head/cap_flat
 	display_name = "cap, flat brown"
 	path = /obj/item/clothing/head/flatcap
 
-/datum/gear/head/cap/med
+/datum/gear/head/cap_med
 	display_name = "cap, medical (Medical)"
 	path = /obj/item/clothing/head/soft/med
 	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Psychiatrist","Paramedic","Search and Rescue")
 
-/datum/gear/head/cap/white
+/datum/gear/head/cap_colorable
 	display_name = "cap (colorable)"
 	path = /obj/item/clothing/head/soft/mime
 
-/datum/gear/head/cap/white/New()
+/datum/gear/head/cap_colorable/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
@@ -298,11 +298,11 @@
 		welding_helmets[initial(welding_helmet_type.name)] = welding_helmet_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(welding_helmets))
 
-/datum/gear/head/beret/solgov
+/datum/gear/head/beret_gov
 	display_name = "beret, government selection"
 	path = /obj/item/clothing/head/beret/solgov
 
-/datum/gear/head/beret/solgov/New()
+/datum/gear/head/beret_gov/New()
 	..()
 	var/list/sols = list()
 	for(var/sol_style in typesof(/obj/item/clothing/head/beret/solgov))

@@ -26,7 +26,6 @@
 /datum/gear/shoes/workboots/toeless
 	display_name = "workboots, toe-less"
 	path = /obj/item/clothing/shoes/boots/workboots/toeless
-	cost = 2
 
 /datum/gear/shoes/colored
 	display_name = "shoes, colored selection"
@@ -73,7 +72,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(hitops))
 
 /datum/gear/shoes/flipflops
-	display_name = "flip flops"
+	display_name = "flip flops (colorable)"
 	path = /obj/item/clothing/shoes/flipflop
 
 /datum/gear/shoes/flipflops/New()
@@ -81,7 +80,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/shoes/athletic
-	display_name = "shoes, athletic"
+	display_name = "shoes, athletic (colorable)"
 	path = /obj/item/clothing/shoes/athletic
 
 /datum/gear/shoes/athletic/New()
@@ -89,7 +88,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/shoes/skater
-	display_name = "shoes, skater"
+	display_name = "shoes, skater (colorable)"
 	path = /obj/item/clothing/shoes/skater
 
 /datum/gear/shoes/skater/New()
@@ -135,7 +134,7 @@
 	path = 	/obj/item/clothing/shoes/dress/white
 
 /datum/gear/shoes/heels
-	display_name = "high heels"
+	display_name = "high heels (colorable)"
 	path = /obj/item/clothing/shoes/heels
 
 /datum/gear/shoes/heels/New()
@@ -146,11 +145,11 @@
 	display_name = "bunny slippers"
 	path = /obj/item/clothing/shoes/slippers
 
-/datum/gear/shoes/boots/winter
+/datum/gear/shoes/winter_boots
 	display_name = "boots, winter selection"
 	path = /obj/item/clothing/shoes/boots/winter
 
-/datum/gear/shoes/boots/winter/New()
+/datum/gear/shoes/winter_boots/New()
 	..()
 	var/boottype = list()
 	boottype["winter boots, atmospherics"] = /obj/item/clothing/shoes/boots/winter/atmos

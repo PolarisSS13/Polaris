@@ -161,8 +161,11 @@
 	webbingtype["webbing, brown"] = /obj/item/clothing/accessory/storage/brown_vest
 	webbingtype["webbing, black"] = /obj/item/clothing/accessory/storage/black_vest
 	webbingtype["webbing, white"] = /obj/item/clothing/accessory/storage/white_vest
-	webbingtype["webbing, simple"] = /obj/item/clothing/accessory/storage/webbing
 	gear_tweaks += new/datum/gear_tweak/path(webbingtype)
+
+/datum/gear/accessory/webbing_simple
+	display_name = "webbing, simple"
+	path = /obj/item/clothing/accessory/storage/webbing
 
 /datum/gear/accessory/drop_pouches
 	display_name = "drop pouches selection (Engineering, Security, Medical)"
