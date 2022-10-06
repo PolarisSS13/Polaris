@@ -10,9 +10,14 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 2
 	active_power_usage = 4
+	dextrous_mobs = list(
+		/mob/living/carbon/human,
+		/mob/living/silicon,
+		/mob/living/simple_mob/animal/sif/grafadreka/trained
+	)
 
-/obj/machinery/button/attack_ai(mob/user as mob)
+/obj/machinery/button/attack_ai(mob/user)
 	return attack_hand(user)
 
-/obj/machinery/button/attackby(obj/item/W, mob/user as mob)
+/obj/machinery/button/attackby(obj/item/item, mob/user)
 	return attack_hand(user)

@@ -114,6 +114,12 @@ Class Procs:
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
+	/// Mob types that are considered dextrous enough to use this kind of machinery.
+	var/list/dextrous_mobs = list(
+		/mob/living/carbon/human,
+		/mob/living/silicon
+	)
+
 /obj/machinery/Initialize(var/ml, d=0)
 	. = ..()
 	if(d)
@@ -233,13 +239,14 @@ Class Procs:
 	else
 		return attack_hand(user)
 
+
 /obj/machinery/attack_hand(mob/user as mob)
 
 	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
 		return 1
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon)))
+	if(!is_type_in_list(user, dextrous_mobs))
 		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
 		return 1
 	if(ishuman(user))
