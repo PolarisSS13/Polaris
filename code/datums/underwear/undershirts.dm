@@ -161,7 +161,8 @@
 
 /datum/category_item/underwear/undershirt/shirt_band
 	name = "Shirt, band"
-	icon_state = "shirt_band"
+	icon_state = "band"
+
 
 /datum/category_item/underwear/undershirt/shirt_question
 	name = "Shirt, question mark"
