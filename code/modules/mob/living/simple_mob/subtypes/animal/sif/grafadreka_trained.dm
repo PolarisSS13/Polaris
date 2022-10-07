@@ -2,7 +2,8 @@
 	desc = "A large, sleek snow drake with heavy claws, powerful jaws and many pale spines along its body. This one is wearing some kind of harness; maybe it belongs to someone."
 	player_msg = "You are a large Sivian pack predator in symbiosis with the local bioluminescent bacteria. You can eat glowing \
 	tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> \
-	(on <b><font color = '#009900'>help intent</font></b>).<br>Using <font color='#e0a000'>grab intent</font> you can pick up and drop items on by clicking them or yourself, and can interact with some simple machines like buttons.<br>Unlike your wild kin, you are <b>trained</b> and work happily with your two-legged packmates."
+	(on <b><font color = '#009900'>help intent</font></b>).<br>Using <font color='#e0a000'>grab intent</font> you can pick up and drop items on by clicking them or yourself, \
+	and can interact with some simple machines like buttons and levers.<br>Unlike your wild kin, you are <b>trained</b> and work happily with your two-legged packmates."
 	faction = "station"
 	ai_holder_type = null // These guys should not exist without players.
 	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
@@ -21,8 +22,10 @@
 
 	/// A type path -> proc path mapping for objects that drakes can use.
 	var/list/interactable_objects = list(
-		/obj/machinery/button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/ButtonBasic,
-		/obj/machinery/access_button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/ButtonAccess
+		/obj/machinery/button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonBasic,
+		/obj/machinery/access_button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonAccess,
+		/obj/machinery/firealarm = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractFireAlarm,
+		/obj/machinery/conveyor_switch = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractConveyorSwitch
 	)
 
 
@@ -174,7 +177,7 @@
 			SPAN_ITALIC("You hear something rustling."),
 			runemessage = CHAT_MESSAGE_DEFAULT_ACTION
 		)
-	if (!do_after(src, 5 SECONDS, response, ignore_movement = TRUE))
+	if (!do_after(src, 5 SECONDS, ignore_movement = TRUE))
 		return ATTACK_FAILED
 	if (is_special)
 		if (!(response in src))
@@ -237,7 +240,7 @@
 	return call(src, handler)(obj)
 
 
-/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/ButtonBasic(obj/machinery/button/button)
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonBasic(obj/machinery/button/button)
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
 	visible_message(
 		SPAN_ITALIC("\The [src] stands up awkwardly on [gender.his] hind legs and paws at \a [button]."),
@@ -252,7 +255,7 @@
 	return ATTACK_SUCCESSFUL
 
 
-/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/ButtonAccess(obj/machinery/access_button/button)
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonAccess(obj/machinery/access_button/button)
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
 	visible_message(
 		SPAN_ITALIC("\The [src] stands up awkwardly on [gender.his] hind legs and paws at \a [button]."),
@@ -264,4 +267,32 @@
 		return ATTACK_FAILED
 	to_chat(src, SPAN_NOTICE("After some effort, you manage to push \the [button]."))
 	button.attack_hand(src)
+	return ATTACK_SUCCESSFUL
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractFireAlarm(obj/machinery/firealarm/alarm)
+	var/datum/gender/gender = gender_datums[get_visible_gender()]
+	visible_message(
+		SPAN_ITALIC("\The [src] stands up awkwardly on [gender.his] hind legs and paws at \a [alarm]."),
+		SPAN_ITALIC("You rear up, attempting to push \the [alarm] with your foreclaws."),
+		SPAN_WARNING("You hear something scratching and scrabbling."),
+		runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+	)
+	if (!do_after(src, 5 SECONDS, alarm))
+		return ATTACK_FAILED
+	to_chat(src, SPAN_NOTICE("After some effort, you manage to push \the [alarm]."))
+	alarm.attack_hand(src)
+	return ATTACK_SUCCESSFUL
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractConveyorSwitch(obj/machinery/conveyor_switch/lever)
+	visible_message(
+		SPAN_ITALIC("\The [src] pushes bodily against \a [lever]."),
+		SPAN_ITALIC("You press your shoulder into \the [lever], trying to change its direction."),
+		runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+	)
+	if (!do_after(src, 2 SECONDS, lever))
+		return ATTACK_FAILED
+	to_chat(src, SPAN_NOTICE("After some effort, you manage to push \the [lever]."))
+	lever.attack_hand(src)
 	return ATTACK_SUCCESSFUL

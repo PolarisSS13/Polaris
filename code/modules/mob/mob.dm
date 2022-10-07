@@ -83,7 +83,9 @@
 			exclude_mobs |= src
 		else
 			exclude_mobs = list(src)
-		src.show_message(self_message, 1, blind_message, 2)
+		show_message(self_message, 1, blind_message, 2)
+		if (runemessage)
+			create_chat_message(src, "[runemessage]", FALSE, list("emote"), audible = FALSE)
 	// Transfer messages about what we are doing to upstairs
 	if(shadow)
 		shadow.visible_message(message, self_message, blind_message, exclude_mobs, range)
