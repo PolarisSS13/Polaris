@@ -1529,7 +1529,7 @@
 /obj/item/flag/catpirate
 	name = "Tajaran pirate flag"
 	desc = "Shiver me whiskers, hoist the black!"
-	flag_path = "catpirate""
+	flag_path = "catpirate"
 
 /obj/item/flag/catpirate/l
 	name = "large Tajaran pirate flag"
