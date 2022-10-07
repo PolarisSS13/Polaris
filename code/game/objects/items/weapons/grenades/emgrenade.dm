@@ -1,6 +1,5 @@
 /obj/item/grenade/empgrenade
 	name = "emp grenade"
-	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "emp"
@@ -21,6 +20,7 @@
 	name = "low yield emp grenade"
 	desc = "A weaker variant of the EMP grenade"
 	icon_state = "lyemp"
+	item_state = "lyemp"
 	origin_tech = list(TECH_MATERIAL = 2, TECH_MAGNET = 3)
 	emp_heavy = 1
 	emp_med = 2

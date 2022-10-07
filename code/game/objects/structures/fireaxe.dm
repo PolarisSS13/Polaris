@@ -1,10 +1,9 @@
-//I still dont think this should be a closet but whatever
 /obj/structure/fireaxecabinet
 	name = "fire axe cabinet"
 	desc = "There is small label that reads \"For Emergency use only\" along with details for safe use of the axe. As if."
 	var/obj/item/material/twohanded/fireaxe/fireaxe
-	icon = 'icons/obj/closet.dmi'	//Not bothering to move icons out for now. But its dumb still.
-	icon_state = "fireaxe1000"
+	icon = 'icons/obj/axecabinet.dmi'
+	icon_state = "fireaxe"
 	layer = ABOVE_WINDOW_LAYER
 	anchored = 1
 	density = 0
@@ -16,6 +15,7 @@
 /obj/structure/fireaxecabinet/Initialize()
 	. = ..()
 	fireaxe = new /obj/item/material/twohanded/fireaxe()
+	update_icon()
 
 /obj/structure/fireaxecabinet/attackby(var/obj/item/O as obj, var/mob/user as mob)  //Marker -Agouri
 	//..() //That's very useful, Erro
@@ -179,8 +179,19 @@
 			to_chat(user, "<span class='notice'>Cabinet unlocked.</span>")
 		return
 
-/obj/structure/fireaxecabinet/update_icon() //Template: fireaxe[has fireaxe][is opened][hits taken][is smashed]. If you want the opening or closing animations, add "opening" or "closing" right after the numbers
-	var/hasaxe = 0
+/obj/structure/fireaxecabinet/update_icon()
+	cut_overlays()
 	if(fireaxe)
-		hasaxe = 1
-	icon_state = text("fireaxe[][][][]",hasaxe,open,hitstaken,smashed)
+		add_overlay("axe")
+	if(smashed)
+		add_overlay("glass_broken")
+	if(locked)
+		add_overlay("locked")
+	else
+		add_overlay("unlocked")
+	if(open)
+		add_overlay("glass_raised")
+	else
+		add_overlay("glass")
+		if(hitstaken)
+			add_overlay("crack[hitstaken]")
