@@ -62,7 +62,7 @@
 	glassestype["glasses, thin frame"] = /obj/item/clothing/glasses/thin
 	gear_tweaks += new/datum/gear_tweak/path(glassestype)
 
-/datum/gear/eyes/glasses/monocle
+/datum/gear/eyes/monocle
 	display_name = "monocle"
 	path = /obj/item/clothing/glasses/monocle
 
@@ -130,12 +130,11 @@
 	display_name = "optical material scanners, prescription (Mining)"
 	path = /obj/item/clothing/glasses/material/prescription
 
-
-/datum/gear/eyes/glasses/fakesun
+/datum/gear/eyes/fakesun
 	display_name = "sunglasses, stylish"
 	path = /obj/item/clothing/glasses/fakesunglasses
 
-/datum/gear/eyes/glasses/fakeaviator
+/datum/gear/eyes/fakeaviator
 	display_name = "sunglasses, stylish aviators"
 	path = /obj/item/clothing/glasses/fakesunglasses/aviator
 

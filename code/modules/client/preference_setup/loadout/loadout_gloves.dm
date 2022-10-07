@@ -37,7 +37,7 @@
 	path = /obj/item/clothing/gloves/sterile/nitrile
 	cost = 2
 /datum/gear/gloves/evening
-	display_name = "gloves, evening"
+	display_name = "gloves, evening (colorable)"
 	path = /obj/item/clothing/gloves/evening
 	cost = 1
 
@@ -57,7 +57,7 @@
 	cost = 1
 
 /datum/gear/gloves/fingerless
-	display_name = "gloves, fingerless"
+	display_name = "gloves, fingerless (colorable)"
 	path = /obj/item/clothing/gloves/fingerless
 	cost = 1
 
