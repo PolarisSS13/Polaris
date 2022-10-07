@@ -162,15 +162,13 @@
 		cohesionsuits[initial(cohesion_type.name)] = cohesion_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cohesionsuits))
 
-/datum/gear/uniform/dept
+/datum/gear/uniform/teshundercoat
+	display_name = "Teshari undercoat selection"
+	path = /obj/item/clothing/under/teshari/undercoat/jobs/hop
 	whitelisted = SPECIES_TESHARI
 	sort_category = "Xenowear"
 
-/datum/gear/uniform/dept/undercoat
-	display_name = "Teshari undercoat selection"
-	path = /obj/item/clothing/under/teshari/undercoat/jobs/hop
-
-/datum/gear/uniform/dept/undercoat/New()
+/datum/gear/uniform/teshundercoat/New()
 	..()
 	var/list/teshundercoats = list()
 	for(var/teshundercoat_style in typesof(/obj/item/clothing/under/teshari/undercoat/jobs))
@@ -178,12 +176,12 @@
 		teshundercoats[initial(teshundercoat.name)] = teshundercoat
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(teshundercoats))
 
-/datum/gear/suit/dept/cloak
+/datum/gear/suit/teshcloak
 	display_name = "Teshari cloak selection, jobs"
 	whitelisted = SPECIES_TESHARI
 	sort_category = "Xenowear"
 
-/datum/gear/suit/dept/cloak/New()
+/datum/gear/suit/teshcloak/New()
 	..()
 	var/list/teshcloaks = list()
 	for(var/teshcloak_style in typesof(/obj/item/clothing/suit/storage/teshari/cloak/jobs, /obj/item/clothing/suit/storage/teshari/beltcloak/jobs))
