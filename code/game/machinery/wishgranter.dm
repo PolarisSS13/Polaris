@@ -6,6 +6,7 @@
 	use_power = USE_POWER_OFF
 	anchored = 1
 	density = 1
+	required_dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
 	var/charges = 1
 	var/insisting = 0
 

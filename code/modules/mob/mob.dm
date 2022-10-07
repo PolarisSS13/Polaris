@@ -1195,3 +1195,12 @@
 	var/datum/reagents/R = new /datum/reagents(amount)
 	. = holder.trans_to_holder(R, amount, multiplier, copy)
 	R.touch_mob(src)
+
+
+/// Check the mob's dexterity var against a required level from MOB_DEXTERITY_*, optionally sending a message with optional target specificity.
+/mob/proc/check_dexterity(required_level, atom/target, silent)
+	if (dexterity < required_level)
+		if (!silent)
+			to_chat(src, SPAN_WARNING("You aren't dextrous enough to [target ? "use \the [target]" : "do that"]."))
+		return FALSE
+	return TRUE

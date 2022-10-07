@@ -114,11 +114,8 @@ Class Procs:
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
-	/// Mob types that are considered dextrous enough to use this kind of machinery.
-	var/list/dextrous_mobs = list(
-		/mob/living/carbon/human,
-		/mob/living/silicon
-	)
+	required_dexterity = MOB_DEXTERITY_TOUCHSCREENS
+
 
 /obj/machinery/Initialize(var/ml, d=0)
 	. = ..()
@@ -246,8 +243,7 @@ Class Procs:
 		return 1
 	if(user.lying || user.stat)
 		return 1
-	if(!is_type_in_list(user, dextrous_mobs))
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+	if (!user.check_dexterity(required_dexterity, src))
 		return 1
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user

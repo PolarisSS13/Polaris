@@ -35,6 +35,8 @@
 	dir = EAST
 	var/width = 1
 
+	required_dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
+
 	// turf animation
 	var/atom/movable/overlay/c_animation = null
 

@@ -7,6 +7,7 @@
 	ai_holder_type = null // These guys should not exist without players.
 	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
 	movement_cooldown = 1.5 // ~Red~ trained ones go faster.
+	dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
 
 	/// If a valid harness path, the harness this drake will be wearing on Initialize.
 	var/obj/item/storage/internal/animal_harness/harness = /obj/item/storage/internal/animal_harness
