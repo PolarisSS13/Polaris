@@ -198,6 +198,9 @@
 	open_sound_powered = 'sound/machines/door/space1o.ogg'
 	close_sound_powered = 'sound/machines/door/space1c.ogg'
 
+/obj/machinery/door/airlock/external/white
+	icon = 'icons/obj/doors/Doorextwhite.dmi'
+
 /obj/machinery/door/airlock/external/glass/bolted
 	icon_state = "door_locked" // So it looks visibly bolted in map editor
 	locked = 1
