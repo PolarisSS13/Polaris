@@ -61,6 +61,14 @@
 		jumpclothes[initial(jumps.name)] = jumps
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(jumpclothes))
 
+/datum/gear/uniform/colorable_jumpsuit
+	display_name = "jumpsuit, colorable"
+	path = /obj/item/clothing/under/colorable
+
+/datum/gear/uniform/colorable_jumpsuit/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/uniform/qipao
 	display_name = "qipao"
 	path = /obj/item/clothing/under/qipao
@@ -381,6 +389,11 @@
 		utils[initial(util_type.name)] = util_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(utils))
 
+/datum/gear/uniform/utility/medical
+	display_name = "utility, medical"
+	path = /obj/item/clothing/under/rank/medical/utility
+	allowed_roles = list("Chief Medical Officer", "Paramedic", "Medical Doctor", "Psychiatrist", "Search and Rescue", "Chemist")
+
 /datum/gear/uniform/sweater
 	display_name = "sweater, grey"
 	path = /obj/item/clothing/under/rank/psych/turtleneck/sweater
@@ -405,6 +418,9 @@
 	display_name = "outfit, frontier"
 	path = 	/obj/item/clothing/under/frontier
 
+/datum/gear/uniform/retro_outdoors
+	display_name = "outfit, retro outdoors"
+	path = /obj/item/clothing/under/retro_outdoors
 /datum/gear/uniform/yogapants
 	display_name = "pants, yoga (colorable)"
 	path = /obj/item/clothing/under/pants/yogapants
@@ -557,6 +573,10 @@
 	display_name = "outfit, cyberpunk strapped harness"
 	path = /obj/item/clothing/under/cyberpunkharness
 
+/datum/gear/uniform/cyberpunkpants
+	display_name = "cyberpunk split-side ensemble"
+	path = /obj/item/clothing/under/cyberpunkpants
+
 /datum/gear/uniform/whitegown
 	display_name = "white gown"
 	path = /obj/item/clothing/under/wedding/whitegown
@@ -608,3 +628,8 @@
 /datum/gear/uniform/vampire
 	display_name = "pants, high-waisted trousers"
 	path = /obj/item/clothing/under/hightrousers
+
+/datum/gear/uniform/chaplain_stripe
+	display_name = "jumpsuit, chaplain striped"
+	path = /obj/item/clothing/under/rank/chaplain/alt
+	allowed_roles = list("Chaplain")
