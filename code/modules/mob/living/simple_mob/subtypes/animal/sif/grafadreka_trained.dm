@@ -161,9 +161,19 @@
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
 	var/is_special = (response in attached)
 	if (is_special)
-		visible_emote("begins tugging at \the [response] on [gender.his] harness.")
+		visible_message(
+			SPAN_ITALIC("\The [src] begins tugging at \the [response] on [gender.his] harness."),
+			SPAN_ITALIC("You begin tugging \the [response] off your harness."),
+			SPAN_ITALIC("You hear something rustling."),
+			runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+		)
 	else
-		visible_emote("begins rooting around in the pouch on [gender.his] harness.")
+		visible_message(
+			SPAN_ITALIC("\The [src] begins rooting around in the pouch on [gender.his] harness."),
+			SPAN_ITALIC("You begin working \the [response] out of your harness pouch."),
+			SPAN_ITALIC("You hear something rustling."),
+			runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+		)
 	if (!do_after(src, 5 SECONDS, response, ignore_movement = TRUE))
 		return ATTACK_FAILED
 	if (is_special)
@@ -180,7 +190,12 @@
 		regenerate_harness_verbs()
 	else
 		harness.remove_from_storage(response, loc)
-	visible_emote("removes \a [response] from [gender.his] harness and drops it.")
+	visible_message(
+		SPAN_ITALIC("\The [src] pulls \a [response] from [gender.his] harness and drops it."),
+		SPAN_NOTICE("You pull \the [response] from your harness and drop it."),
+		SPAN_WARNING("Clank!"),
+		runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+	)
 	return ATTACK_SUCCESSFUL
 
 
@@ -190,14 +205,22 @@
 	if (!harness)
 		to_chat(src, SPAN_WARNING("Your harness is missing; you cannot store \the [item]."))
 		return ATTACK_FAILED
+	if (item.anchored)
+		to_chat(src, SPAN_WARNING("\The [item] is securely anchored; you can't take it."))
+		return ATTACK_FAILED
 	face_atom(item)
 	if (!do_after(src, 5 SECONDS, item))
 		return ATTACK_FAILED
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
-	if (harness?.attackby(item, src))
-		visible_emote("grabs \a [item] in [gender.his] teeth and noses it into [gender.his] pack.")
+	if (harness?.attackby(item, src, TRUE))
+		visible_message(
+			SPAN_ITALIC("\The [src] grabs \a [item] in [gender.his] teeth and noses it into [gender.his] harness pouch."),
+			SPAN_NOTICE("You grab \the [item] in your teeth and push it into your harness pouch."),
+			SPAN_ITALIC("You hear something rustling."),
+			runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+		)
 		return ATTACK_SUCCESSFUL
-	visible_emote("grabs \a [item] in [gender.his] teeth and tries to nose it into [gender.his] pack, but there's not enough space!")
+	to_chat(src, SPAN_WARNING("There's not enough space in your harness pouch for \the [item] to fit!"))
 	return ATTACK_FAILED
 
 
@@ -216,7 +239,12 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/ButtonBasic(obj/machinery/button/button)
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
-	visible_emote("stands up awkwardly on [gender.his] hind legs and paws at \a [button].")
+	visible_message(
+		SPAN_ITALIC("\The [src] stands up awkwardly on [gender.his] hind legs and paws at \a [button]."),
+		SPAN_ITALIC("You rear up, attempting to push \the [button] with your foreclaws."),
+		SPAN_WARNING("You hear something scratching and scrabbling."),
+		runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+	)
 	if (!do_after(src, 5 SECONDS, button))
 		return ATTACK_FAILED
 	to_chat(src, SPAN_NOTICE("After some effort, you manage to push \the [button]."))
@@ -226,7 +254,12 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/ButtonAccess(obj/machinery/access_button/button)
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
-	visible_emote("stands up awkwardly on [gender.his] hind legs and paws at \a [button].")
+	visible_message(
+		SPAN_ITALIC("\The [src] stands up awkwardly on [gender.his] hind legs and paws at \a [button]."),
+		SPAN_ITALIC("You rear up, attempting to push \the [button] with your foreclaws."),
+		SPAN_WARNING("You hear something scratching and scrabbling."),
+		runemessage = CHAT_MESSAGE_DEFAULT_ACTION
+	)
 	if (!do_after(src, 5 SECONDS, button))
 		return ATTACK_FAILED
 	to_chat(src, SPAN_NOTICE("After some effort, you manage to push \the [button]."))
