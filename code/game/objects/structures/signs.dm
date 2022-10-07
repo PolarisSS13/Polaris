@@ -1506,7 +1506,8 @@
 /obj/item/flag/pirate
 	name = "pirate flag"
 	desc = "Shiver me timbers, hoist the black!"
-	flag_path = "pirate""
+	flag_path = "pirate"
+
 
 /obj/item/flag/pirate/l
 	name = "large pirate flag"
