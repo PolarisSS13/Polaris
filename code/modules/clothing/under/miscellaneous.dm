@@ -1190,7 +1190,7 @@ Uniforms and such
 	rolled_sleeves = 0
 
 /obj/item/clothing/under/sifcop
-	name = "\improper SifGuard law enforcement uniform"
+	name = "\improper SifGuard Police Division uniform"
 	desc = "A sturdy law enforcement uniform typical of Vir's civilian law enforcement officers."
 	icon_state = "sifcop"
 	worn_state = "sifcop"

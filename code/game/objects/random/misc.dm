@@ -969,3 +969,44 @@
 				/obj/item/reagent_containers/food/drinks/glass2/coffeemug/green/dark,
 				/obj/item/reagent_containers/food/drinks/glass2/coffeemug/rainbow,
 				/obj/item/reagent_containers/food/drinks/glass2/coffeemug/metal)
+
+/obj/random/helmet
+	name = "Random Armour Helmet"
+	desc = "This is a random helmet that protects your head."
+
+/obj/random/helmet/item_to_spawn()
+	return pick(prob(5);/obj/item/clothing/head/helmet/space/void/boarding_ops/mk2,
+			prob(5);/obj/item/clothing/head/helmet/space/void/boarding_ops,
+			prob(20);/obj/item/clothing/head/helmet/riot/sifcop,
+			prob(20);/obj/item/clothing/head/helmet,
+			prob(10);/obj/item/clothing/head/helmet/bulletproof,
+			prob(10);/obj/item/clothing/head/helmet/flexitac,
+			prob(15);/obj/item/clothing/head/helmet/solgov,
+			prob(15);/obj/item/clothing/head/helmet/pcrc,
+			prob(10);/obj/item/clothing/head/helmet/space/void/scg,
+			prob(10);/obj/item/clothing/head/helmet/tac,
+			prob(10);/obj/item/clothing/head/helmet/merc,
+			prob(15);/obj/item/clothing/head/helmet/riot,
+			prob(10);/obj/item/clothing/head/helmet/space/void/grayson,
+			prob(10);/obj/item/clothing/head/helmet/space/void/hedberg,
+			prob(10);/obj/item/clothing/head/helmet/heavy,
+			prob(10);/obj/item/clothing/head/helmet/heavy/knight,
+			prob(5);/obj/item/clothing/head/helmet/newkyoto,
+			prob(5);/obj/item/clothing/head/helmet/space/void/scg/heavy
+			)
+
+/obj/random/helmet/highend
+	desc = "This is a random actually good helmet that protects your head."
+
+/obj/random/helmet/highend/item_to_spawn()
+	return pick(
+			prob(10);/obj/item/clothing/head/helmet/bulletproof,
+			prob(10);/obj/item/clothing/head/helmet/space/void/scg,
+			prob(10);/obj/item/clothing/head/helmet/merc,
+			prob(10);/obj/item/clothing/head/helmet/space/void/grayson,
+			prob(10);/obj/item/clothing/head/helmet/space/void/hedberg,
+			prob(10);/obj/item/clothing/head/helmet/heavy,
+			prob(10);/obj/item/clothing/head/helmet/heavy/knight,
+			prob(5);/obj/item/clothing/head/helmet/newkyoto,
+			prob(5);/obj/item/clothing/head/helmet/space/void/scg/heavy
+			)

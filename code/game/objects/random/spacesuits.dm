@@ -92,6 +92,26 @@
 			prob(5);list(
 				/obj/item/clothing/suit/space/void/pilot,
 				/obj/item/clothing/head/helmet/space/void/pilot
+			),
+			prob(2);list(
+				/obj/item/clothing/suit/space/void/boarding_ops,
+				/obj/item/clothing/head/helmet/space/void/boarding_ops
+			),
+			prob(2);list(
+				/obj/item/clothing/suit/space/void/boarding_ops,
+				/obj/item/clothing/head/helmet/space/void/boarding_ops/mk2
+			),
+			prob(2);list(
+				/obj/item/clothing/suit/space/void/scg,
+				/obj/item/clothing/head/helmet/space/void/scg
+			),
+			prob(2);list(
+				/obj/item/clothing/suit/space/void/scg,
+				/obj/item/clothing/head/helmet/space/void/scg/heavy
+			),
+			prob(1);list(
+				/obj/item/clothing/suit/space/void/pearlshield,
+				/obj/item/clothing/head/helmet/space/void/pearlshield
 			)
 		)
 
@@ -110,6 +130,10 @@
 			prob(1);list(
 				/obj/item/clothing/suit/space/void/mining/alt,
 				/obj/item/clothing/head/helmet/space/void/mining/alt
+			),
+			prob(1);list(
+				/obj/item/clothing/suit/space/void/mining/alt,
+				/obj/item/clothing/head/helmet/space/void/grayson
 			)
 		)
 
