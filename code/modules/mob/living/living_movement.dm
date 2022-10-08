@@ -1,3 +1,5 @@
+
+
 /mob/CanPass(atom/movable/mover, turf/target)
 	if(ismob(mover))
 		var/mob/moving_mob = mover
@@ -147,7 +149,15 @@ default behaviour is:
 				now_pushing = 0
 				return
 
-		step(AM, t)
+		var/turf/T = AM.loc
+		var/turf/T2 = get_step(AM,t)
+		if(!T2) // Map edge
+			now_pushing = 0
+			return
+		var/move_time = movement_delay(loc, t) * SQRT_TWO
+		move_time = DS2NEARESTTICK(move_time)
+		if(AM.Move(T2, t, move_time))
+			Move(T, t, move_time)
 
 		if(ishuman(AM) && AM:grabbed_by)
 			for(var/obj/item/grab/G in AM:grabbed_by)
