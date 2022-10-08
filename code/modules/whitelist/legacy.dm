@@ -22,10 +22,12 @@
 
 	// Load in the alien whitelists
 	for(var/line in read_lines("config/alienwhitelist.txt"))
+		if(!length(line))
+			continue
 		var/static/regex/R = regex(" - ")
 		var/list/tok = splittext(line, R)
 		// Whitelist is no longer valid.
-		if(!(tok[2] in alienwhitelist_dict))
+		if(length(tok) < 2 || !(tok[2] in alienwhitelist_dict))
 			continue
 
 		var/key = ckey(tok[1])
@@ -33,10 +35,10 @@
 		if(!fexists("data/player_saves/[copytext(key,1,2)]/[key]/preferences.sav"))
 			continue
 
-		LAZYADDASSOC(whitelists_to_write[key], tok[2], TRUE)
+		LAZYADDASSOC(whitelists_to_write[key], alienwhitelist_dict[tok[2]], TRUE)
 
 	// Load in the genemod whitelist
-	for(var/line in read_commentable("config/alienwhitelist.txt"))
+	for(var/line in read_commentable("config/genemodwhitelist.txt"))
 		var/key = ckey(line)
 		// If they don't have a preferences save file, then they probably don't play here any more.
 		if(!fexists("data/player_saves/[copytext(key,1,2)]/[key]/preferences.sav"))
@@ -48,10 +50,12 @@
 	for(var/key in whitelists_to_write)
 		var/filename = "data/player_saves/[copytext(key,1,2)]/[key]/whitelist.json"
 		var/list/whitelist = whitelists_to_write[key]
-		// If the file already exists, don't just blindly overwrite it.
 		try
+			// If the file already exists, don't just blindly overwrite it.
 			if(fexists(filename))
-				whitelist |= json_decode(file2text(filename) || "")
+				var/prior_whitelist = file2text(filename) || ""
+				if(length(prior_whitelist))
+					whitelist |= json_decode(prior_whitelist)
 			text2file(json_encode(whitelist), filename + ".tmp")
 			if(fexists(filename) && !fdel(filename))
 				error("Error overwriting whitelist file [filename]")

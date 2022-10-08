@@ -7,9 +7,15 @@
 	set desc = "Print the set of things you're whitelisted for."
 	set category = "OOC"
 
+	if(src.whitelists == null)
+		load_whitelist()
+
 	to_chat(src, "You are whitelisted for:")
 	for(var/key in src.whitelists)
-		to_chat(src, key)
+		try
+			to_chat(src, initial(initial(key:name)))
+		catch()
+			to_chat(src, key)
 
 
 // Load the whitelist from file.
