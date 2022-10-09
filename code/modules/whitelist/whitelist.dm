@@ -7,28 +7,18 @@
 	set desc = "Print the set of things you're whitelisted for."
 	set category = "OOC"
 
-	if(src.whitelists == null)
-		load_whitelist()
-
 	to_chat(src, "You are whitelisted for:")
 	to_chat(src, jointext(get_whitelists_list(), "\n"))
 
 /client/proc/get_whitelists_list()
 	. = list()
+	if(src.whitelists == null)
+		src.whitelists = load_whitelist(src.ckey)
 	for(var/key in src.whitelists)
 		try
 			. += initial(initial(key:name))
 		catch()
 			. += key
-
-
-// Load the whitelist from file.
-/client/proc/client_load_whitelist()
-	// If it's already loaded.
-	if(src.whitelists != null)
-		return
-
-	src.whitelists = load_whitelist(src.ckey)
 
 
 /proc/load_whitelist(var/key)
@@ -46,12 +36,12 @@
 
 		// Something was removing an entry from the whitelist and interrupted mid-overwrite.
 		else if(fexists(filename + ".tmp") && fcopy(filename + ".tmp", filename))
-			load_whitelist(key)
+			. = load_whitelist(key)
 			if(!fdel(filename + ".tmp"))
 				error("Exception when deleting tmp whitelist file [filename].tmp")
 
 		// Whitelist file doesn't exist, so they aren't whitelisted for anything. Create the file.
-		else
+		else if(fexists("data/player_saves/[copytext(ckey(key),1,2)]/[ckey(key)]/preferences.sav"))
 			text2file("", filename)
 			. = list()
 
@@ -65,8 +55,9 @@
 		path = text2path(path)
 	if(!ispath(path))
 		return
+	// If it hasn't already been loaded, load it.
 	if(src.whitelists == null)
-		src.client_load_whitelist()
+		src.whitelists = load_whitelist(src.ckey)
 	return src.whitelists[path]
 
 
@@ -83,7 +74,8 @@
 	if(!(species.spawn_flags & SPECIES_IS_WHITELISTED))
 		return TRUE
 
-	return M.client.is_whitelisted(species.type)
+	var/client/C = (!isclient(M)) ? M.client : M
+	return C.is_whitelisted(species.type)
 
 
 /proc/is_lang_whitelisted(mob/M, var/datum/language/language)
@@ -92,14 +84,15 @@
 		return TRUE
 
 	//You did something wrong
-	if(!M || !language)
+	if(!M || !language || !M.client)
 		return FALSE
 
 	//The language isn't even whitelisted
 	if(!(language.flags & WHITELISTED))
 		return TRUE
 
-	return M.client.is_whitelisted(language.type)
+	var/client/C = (!isclient(M)) ? M.client : M
+	return C.is_whitelisted(language.type)
 
 
 /proc/whitelist_overrides(mob/M)

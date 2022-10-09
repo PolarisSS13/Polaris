@@ -99,8 +99,8 @@ var/global/floorIsLava = 0
 	if (M.client)
 		body += "<br><br><b>Whitelists:</b><br>"
 		body += jointext(M.client.get_whitelists_list(), ", ")
-		body += "<br><A hrey='?src=\ref[src];modify_whitelist=\ref[M.client];set_value=1'>Add Whitelist</A>"
-		body += " - <A hrey='?src=\ref[src];modify_whitelist=\ref[M.client];set_value=0'>Remove Whitelist</A>"
+		body += "<br><A href='?src=\ref[src];modify_whitelist=\ref[M.client];set_value=1'>Add Whitelist</A>"
+		body += " - <A href='?src=\ref[src];modify_whitelist=\ref[M.client];set_value=0'>Remove Whitelist</A>"
 
 		if(!istype(M, /mob/new_player))
 			body += "<br><br>"
