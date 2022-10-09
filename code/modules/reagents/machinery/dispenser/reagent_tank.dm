@@ -82,7 +82,7 @@
 
 //Dispensers
 /obj/structure/reagent_dispensers/watertank
-	name = "watertank"
+	name = "water tank"
 	desc = "A watertank."
 	icon = 'icons/obj/objects.dmi'
 	icon_state = "watertank"
@@ -403,7 +403,7 @@
 /obj/structure/reagent_dispensers/acid/Initialize()
 	. = ..()
 	reagents.add_reagent("sacid", 1000)
-	
+
 //Cooking oil refill tank
 /obj/structure/reagent_dispensers/cookingoil
 	name = "cooking oil tank"
