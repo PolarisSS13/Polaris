@@ -203,7 +203,7 @@
 	display_name = "cloak (colorable)"
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/custom
 
-/datum/gear/suit/roles/poncho/cloak/custom/New()
+/datum/gear/suit/cloak_custom/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
