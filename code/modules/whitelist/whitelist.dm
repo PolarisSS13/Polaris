@@ -11,41 +11,49 @@
 		load_whitelist()
 
 	to_chat(src, "You are whitelisted for:")
+	to_chat(src, jointext(get_whitelists_list(), "\n"))
+
+/client/proc/get_whitelists_list()
+	. = list()
 	for(var/key in src.whitelists)
 		try
-			to_chat(src, initial(initial(key:name)))
+			. += initial(initial(key:name))
 		catch()
-			to_chat(src, key)
+			. += key
 
 
 // Load the whitelist from file.
-/client/proc/load_whitelist()
+/client/proc/client_load_whitelist()
 	// If it's already loaded.
 	if(src.whitelists != null)
 		return
 
-	var/filename = "data/player_saves/[copytext(ckey(src.ckey),1,2)]/[ckey(src.ckey)]/whitelist.json"
+	src.whitelists = load_whitelist(src.ckey)
+
+
+/proc/load_whitelist(var/key)
+	var/filename = "data/player_saves/[copytext(ckey(key),1,2)]/[ckey(key)]/whitelist.json"
 	try
 		// Check the player-specific whitelist file, if it exists.
 		if(fexists(filename))
 			// Load the whitelist entries from file, or empty string if empty.`
-			src.whitelists = list()
+			. = list()
 			for(var/T in json_decode(file2text(filename) || ""))
 				T = text2path(T)
 				if(!ispath(T))
 					continue
-				src.whitelists[T] = TRUE
+				.[T] = TRUE
 
 		// Something was removing an entry from the whitelist and interrupted mid-overwrite.
 		else if(fexists(filename + ".tmp") && fcopy(filename + ".tmp", filename))
-			src.load_whitelist()
+			load_whitelist(key)
 			if(!fdel(filename + ".tmp"))
 				error("Exception when deleting tmp whitelist file [filename].tmp")
 
 		// Whitelist file doesn't exist, so they aren't whitelisted for anything. Create the file.
 		else
 			text2file("", filename)
-			src.whitelists = list()
+			. = list()
 
 	catch(var/exception/E)
 		error("Exception when loading whitelist file [filename]: [E]")
@@ -58,51 +66,8 @@
 	if(!ispath(path))
 		return
 	if(src.whitelists == null)
-		src.load_whitelist()
+		src.client_load_whitelist()
 	return src.whitelists[path]
-
-
-// Add the selected path to the player's whitelists, if it's valid.
-/client/proc/add_whitelist(var/path)
-	if(istext(path))
-		path = text2path(path)
-	if(!ispath(path))
-		return
-	// If they're already whitelisted, do nothing (Also loads the whitelist)
-	if(is_whitelisted(path))
-		return
-
-	src.whitelists[path] = TRUE
-	src.write_whitelist()
-
-
-// Remove the selected path from the player's whitelists.
-/client/proc/remove_whitelist(var/path)
-	if(!ispath(path))
-		return
-	// If they're not whitelisted, do nothing (Also loads the whitelist)
-	if(!is_whitelisted(path))
-		return
-
-	src.whitelists -= path
-	src.write_whitelist()
-
-
-// Rewrites the client's whitelists to disk
-/client/proc/write_whitelist()
-	var/filename = "data/player_saves/[copytext(ckey(src.ckey),1,2)]/[ckey(src.ckey)]/whitelist.json"
-	try
-		// Byond doesn't have a mechanism for in-place modification of a file, so we have to make a new one and then overwrite the old one.
-		// If this is interrupted, the .tmp file exists and can be loaded at the start of the next round.
-		// The in-game list represents the set of valid entries within the whitelist file, so we may as well remove invalid lines in the process.
-		text2file(json_encode(src.whitelists), filename + ".tmp")
-		if(!fdel(filename))
-			error("Exception when overwriting whitelist file [filename]")
-		if(fcopy(filename + ".tmp", filename))
-			if(!fdel(filename + ".tmp"))
-				error("Exception when deleting tmp whitelist file [filename].tmp")
-	catch(var/exception/E)
-		error("Exception when writing to whitelist file [filename]: [E]")
 
 
 /proc/is_alien_whitelisted(mob/M, var/datum/species/species)
