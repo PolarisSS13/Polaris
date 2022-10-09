@@ -189,12 +189,12 @@
 	door_anim_time = 0 // Unsupported
 
 	starts_with = list(
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /*
  * First Aid
