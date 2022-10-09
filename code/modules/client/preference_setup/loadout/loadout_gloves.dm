@@ -6,30 +6,26 @@
 	slot = slot_gloves
 	sort_category = "Gloves and Handwear"
 
-/datum/gear/gloves/blue
-	display_name = "gloves, blue"
-	path = /obj/item/clothing/gloves/blue
+/datum/gear/gloves/color
+	display_name = "gloves, colored selection"
+	path = /obj/item/clothing/gloves/black
 	cost = 1
 
-/datum/gear/gloves/brown
-	display_name = "gloves, brown"
-	path = /obj/item/clothing/gloves/brown
-	cost = 1
-
-/datum/gear/gloves/light_brown
-	display_name = "gloves, light-brown"
-	path = /obj/item/clothing/gloves/light_brown
-	cost = 1
-
-/datum/gear/gloves/green
-	display_name = "gloves, green"
-	path = /obj/item/clothing/gloves/green
-	cost = 1
-
-/datum/gear/gloves/grey
-	display_name = "gloves, grey"
-	path = /obj/item/clothing/gloves/grey
-	cost = 1
+/datum/gear/gloves/color/New()
+	..()
+	var/glovetype = list()
+	glovetype["gloves, black"] = /obj/item/clothing/gloves/black
+	glovetype["gloves, blue"] = path = /obj/item/clothing/gloves/blue
+	glovetype["gloves, brown"] = /obj/item/clothing/gloves/brown
+	glovetype["gloves, light-brown"] = /obj/item/clothing/gloves/light_brown
+	glovetype["gloves, green"] = /obj/item/clothing/gloves/green
+	glovetype["gloves, grey"] = /obj/item/clothing/gloves/grey
+	glovetype["gloves, orange"] = /obj/item/clothing/gloves/orange
+	glovetype["gloves, purple"] = /obj/item/clothing/gloves/purple
+	glovetype["gloves, rainbow"] = /obj/item/clothing/gloves/rainbow
+	glovetype["gloves, red"] = /obj/item/clothing/gloves/red
+	glovetype["gloves, white"] = /obj/item/clothing/gloves/white
+	gear_tweaks += new/datum/gear_tweak/path(glovetype)
 
 /datum/gear/gloves/latex
 	display_name = "gloves, latex"
@@ -40,34 +36,8 @@
 	display_name = "gloves, nitrile"
 	path = /obj/item/clothing/gloves/sterile/nitrile
 	cost = 2
-
-/datum/gear/gloves/orange
-	display_name = "gloves, orange"
-	path = /obj/item/clothing/gloves/orange
-	cost = 1
-
-/datum/gear/gloves/purple
-	display_name = "gloves, purple"
-	path = /obj/item/clothing/gloves/purple
-	cost = 1
-
-/datum/gear/gloves/rainbow
-	display_name = "gloves, rainbow"
-	path = /obj/item/clothing/gloves/rainbow
-	cost = 1
-
-/datum/gear/gloves/red
-	display_name = "gloves, red"
-	path = /obj/item/clothing/gloves/red
-	cost = 1
-
-/datum/gear/gloves/white
-	display_name = "gloves, white"
-	path = /obj/item/clothing/gloves/white
-	cost = 1
-
 /datum/gear/gloves/evening
-	display_name = "gloves, evening"
+	display_name = "gloves, evening (colorable)"
 	path = /obj/item/clothing/gloves/evening
 	cost = 1
 
@@ -87,7 +57,7 @@
 	cost = 1
 
 /datum/gear/gloves/fingerless
-	display_name = "gloves, fingerless"
+	display_name = "gloves, fingerless (colorable)"
 	path = /obj/item/clothing/gloves/fingerless
 	cost = 1
 

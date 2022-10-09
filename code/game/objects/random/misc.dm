@@ -309,10 +309,30 @@
 	icon_state = "soap"
 
 /obj/random/soap/item_to_spawn()
-	return pick(prob(3);/obj/item/soap,
-				prob(2);/obj/item/soap/nanotrasen,
-				prob(2);/obj/item/soap/deluxe,
-				prob(1);/obj/item/soap/syndie)
+	return pick(/obj/item/soap,
+				/obj/item/soap/nanotrasen,
+				/obj/item/soap/deluxe,
+				/obj/item/soap/syndie,
+				/obj/item/soap/space_soap,
+				/obj/item/soap/space_soap,
+				/obj/item/soap/water_soap,
+				/obj/item/soap/fire_soap,
+				/obj/item/soap/rainbow_soap,
+				/obj/item/soap/diamond_soap,
+				/obj/item/soap/uranium_soap,
+				/obj/item/soap/silver_soap,
+				/obj/item/soap/brown_soap,
+				/obj/item/soap/white_soap,
+				/obj/item/soap/grey_soap,
+				/obj/item/soap/pink_soap,
+				/obj/item/soap/purple_soap,
+				/obj/item/soap/blue_soap,
+				/obj/item/soap/cyan_soap,
+				/obj/item/soap/green_soap,
+				/obj/item/soap/yellow_soap,
+				/obj/item/soap/orange_soap,
+				/obj/item/soap/red_soap,
+				/obj/item/soap/golden_soap)
 
 /obj/random/drinkbottle
 	name = "random drink"
@@ -969,3 +989,44 @@
 				/obj/item/reagent_containers/food/drinks/glass2/coffeemug/green/dark,
 				/obj/item/reagent_containers/food/drinks/glass2/coffeemug/rainbow,
 				/obj/item/reagent_containers/food/drinks/glass2/coffeemug/metal)
+
+/obj/random/helmet
+	name = "Random Armour Helmet"
+	desc = "This is a random helmet that protects your head."
+
+/obj/random/helmet/item_to_spawn()
+	return pick(prob(5);/obj/item/clothing/head/helmet/space/void/boarding_ops/mk2,
+			prob(5);/obj/item/clothing/head/helmet/space/void/boarding_ops,
+			prob(20);/obj/item/clothing/head/helmet/riot/sifcop,
+			prob(20);/obj/item/clothing/head/helmet,
+			prob(10);/obj/item/clothing/head/helmet/bulletproof,
+			prob(10);/obj/item/clothing/head/helmet/flexitac,
+			prob(15);/obj/item/clothing/head/helmet/solgov,
+			prob(15);/obj/item/clothing/head/helmet/pcrc,
+			prob(10);/obj/item/clothing/head/helmet/space/void/scg,
+			prob(10);/obj/item/clothing/head/helmet/tac,
+			prob(10);/obj/item/clothing/head/helmet/merc,
+			prob(15);/obj/item/clothing/head/helmet/riot,
+			prob(10);/obj/item/clothing/head/helmet/space/void/grayson,
+			prob(10);/obj/item/clothing/head/helmet/space/void/hedberg,
+			prob(10);/obj/item/clothing/head/helmet/heavy,
+			prob(10);/obj/item/clothing/head/helmet/heavy/knight,
+			prob(5);/obj/item/clothing/head/helmet/newkyoto,
+			prob(5);/obj/item/clothing/head/helmet/space/void/scg/heavy
+			)
+
+/obj/random/helmet/highend
+	desc = "This is a random actually good helmet that protects your head."
+
+/obj/random/helmet/highend/item_to_spawn()
+	return pick(
+			prob(10);/obj/item/clothing/head/helmet/bulletproof,
+			prob(10);/obj/item/clothing/head/helmet/space/void/scg,
+			prob(10);/obj/item/clothing/head/helmet/merc,
+			prob(10);/obj/item/clothing/head/helmet/space/void/grayson,
+			prob(10);/obj/item/clothing/head/helmet/space/void/hedberg,
+			prob(10);/obj/item/clothing/head/helmet/heavy,
+			prob(10);/obj/item/clothing/head/helmet/heavy/knight,
+			prob(5);/obj/item/clothing/head/helmet/newkyoto,
+			prob(5);/obj/item/clothing/head/helmet/space/void/scg/heavy
+			)

@@ -1,34 +1,31 @@
 /mob/proc/say(var/message, var/datum/language/speaking = null, var/whispering = 0)
 	return
 
+
 /mob/verb/whisper(message as text)
 	set name = "Whisper"
 	set category = "IC"
+	usr.say(message, whispering = TRUE)
 
-	usr.say(message,whispering=1)
 
 /mob/verb/say_verb(message as text)
 	set name = "Say"
 	set category = "IC"
-
-	set_typing_indicator(FALSE)
 	usr.say(message)
+
 
 /mob/verb/me_verb(message as message)
 	set name = "Me"
 	set category = "IC"
-
 	if(say_disabled)	//This is here to try to identify lag problems
-		to_chat(usr, "<font color='red'>Speech is currently admin-disabled.</font>")
+		to_chat(usr, SPAN_WARNING("Speech is currently admin-disabled."))
 		return
-
 	message = sanitize(message)
-
-	set_typing_indicator(FALSE)
 	if(use_me)
 		custom_emote(usr.emote_type, message)
 	else
 		usr.emote(message)
+
 
 /mob/proc/say_dead(var/message)
 	if(say_disabled)	//This is here to try to identify lag problems

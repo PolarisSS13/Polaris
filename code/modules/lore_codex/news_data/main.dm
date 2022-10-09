@@ -4,6 +4,13 @@
 	region. Each is labeled by date of publication and title. This list is self-updating, and from time to time the publisher will push new \
 	articles. You are encouraged to check back frequently."
 	children = list(
+		/datum/lore/codex/page/article114,
+		/datum/lore/codex/page/article113,
+		/datum/lore/codex/page/outage,
+		/datum/lore/codex/page/article112,
+		/datum/lore/codex/page/article111,
+		/datum/lore/codex/page/article110,
+		/datum/lore/codex/page/article109,
 		/datum/lore/codex/page/article108,
 		/datum/lore/codex/page/article107,
 		/datum/lore/codex/page/article106,
@@ -1212,3 +1219,67 @@
 	NanoTrasen are the Vir system's leading operator of gateway transport, offering 'luxury, near-instant interplanetary commutes' between most major company facilities, and the Vir Interstellar Spaceport. The company says it will be removing many smaller gate installations for 'full examination and required enhancements' and expects the service to return 'within a few weeks'.\
 	<br><br>\
 	Major Bill's Transportation have announced an increased frequency of service to affected NanoTrasen locations for the duration of the gateway suspension."
+
+/datum/lore/codex/page/article109
+	name = "10/23/65 - 12th Missing Ship Prompts Official Isavau Response"
+	data = "After a shocking 12th interstellar vessel was declared missing in the Isavau's Gamble system earlier this week, the SCG has formally announced the launch of an official investigation, including the deployment of a significant Fleet security presence in the region. The lost ship, the HFV El Cid is recorded as having a crew complement of eight, pushing the total missing people in the system over the past year over one hundred and fifty. A contingent of around twenty SCG vessels - search and rescue, salvage, and armed warships - has been dispatched to the region to take over from near-absent local investigators, but is not expected to arrive for at least a month due to worsening FTL flight conditions.\
+	<br><br>\
+	The El Cid is believed to have been hauling highly secure cargo internationally, which may have been the final deciding factor in launching a confederation-level investigation into the abnormal number of appearances, and the SCG has come under quick criticism for their apparent prioritization of lost cargo over sapient lives. Fleet Admiral Silvain Barka, celebrated veteran of the Almach War, has stated 'Lives are our number one concern. The matter of the Hephaestus cargo has simply moved our timeline forward due to concerns that if high-grade arms were to fall into pirate hands, the situation in Isavau's Gamble could rapidly worsen. We want to avoid that, and bring back as many of the missing crew as possible.'\
+	<br><br>\
+	While piracy has long been a concern in the Bowl, with the 'Jaguar Gang' pirates making their home in the region, and a general uptick having occurred since the beginning of the Almach Crisis, it is unusual for such a high proportion of missing ships crews to remain lost without report of recovery or ransom demands. Accusations of brutality have been levied at the Vystholm flotilla, despite their improbable distance from the star system. To date the XIV Sri Chamarajendra remains the single largest loss of life, at 32 believed dead during a large salvage mission late last year."
+
+/datum/lore/codex/page/article110
+	name = "10/26/65 - 'Bluespace Bug' Confirmed Activity Near Tajaran Space"
+	data = "The following address is from Khama Suketa enai-Lutiir, representative of the Tajaran Pearlshield Coalition:\
+	<br><br>\
+	'Good day, everyone. We would like to put the rumor mills to rest lest they get out of hand. Eleven Solar days ago, the Silk system's perimeter defenses picked up what appeared to be a derelict Vox raiding ship that had drifted into range. Security forces boarded the craft and found clear signs of fighting within the crew compartments, but no traces of the crew themselves. The craft's bluespace drives were notably ripped out of the hull, and it's believed the craft had been drifting for up to nearly two Solar weeks prior, as it has been identified as the 'Skiskatachtlakta', belonging to a well-known Vox raiding group our cousins in the Arrathiir system have been contending with for a few years now, and that was their last confirmed contact with it.\
+	<br><br>\
+	'Most importantly however, and the key reason for this address, is a significant portion of the ship's hull, particularly concentrated around the site of its bluespace drives, has been confirmed to've been converted to the material known as 'Magmellite', related to the so-called 'bluespace bugs' or X Extraneus Tarlevi that have been of note outside our borders. To acknowledge and assuage any natural alarm on our own part, there is no indication any part of the incident took place on our side of the Rift, and we are deploying additional reconnaissance and recovery ships, drones and general personnel throughout controlled space to keep a watchful eye, and we are negotiating with Solar forces in Silk to expand our presence as appropriate. We are currently analyzing the Magmellite samples recovered from the Skiskatachtlakta and will be sharing any findings with our fellows in the scientific sphere, as well as returning the ship's plundered riches if and when possible.\
+	<br><br>\
+	'There is currently no cause for concern beyond the understandable. If and when there is, we will rise to the occasion as always. Together, we will discover the truth of these strange times we find ourselves in. Until then, be safe, and be well. May our stars shine upon us all.'"
+
+/datum/lore/codex/page/article111
+	name = "01/14/66 - Unathi Border On Alert After Manoeuvre Scare"
+	data = "The Solar garrison at Abel's Rest remains on high alert following a critical near-miss scenario resulting from an unannounced Unathi fleet arrival at the disputed system's perimeter alert zone, which has since been determined to be not a deliberate act of war. According to the Moghes Hegemony the fleet is 'part of a re-evaluation of <the Hegemony's> key troop deployments, that will be of mutual benefit to peace in the region'.\
+	<br><br>\
+	The arriving fleet, comprised of mostly troop transport vessels, remained in distant orbit of the star for seven hours before diplomatic contact could be established, during which time the SCG garrison remained at battle-ready stance. This marks the closest proximity to open conflict in Abel's Rest since the end of the Unathi War over 45 years ago. SolGov peacekeepers have confirmed decreased planetside garrison activity over the past several months, and key Hegemony warships have departed in recent weeks.\
+	<br><br>\
+	It remains impossible to determine the Unathi's true intentions as such a withdrawal could preface devastating planetary bombardment, or invasion elsewhere, and some members of the Icarus Front have called for immediate redeployment to the front in response. The SCG Fleet has assured the public that relations with the Hegemony have 'never been better' and that long-range sensors indicate a withdrawal from the entire border region on a far wider scale."
+
+/datum/lore/codex/page/article112
+	name = "02/13/66 - Isavau's Gamble Fleet Report 'All Silent'"
+	data = "Early reports from the SCG contingent sent to investigate potential pirate activity in the Isavau's Gamble system include shocking descriptions of a system 'gone silent', with supposedly zero manmade signals originating from any ship or station in the entire area. Prior loss of contact several days prior had been ascribed to naturally occurring background noise 'overwhelming' the system Spaceport's bluespace relays, which had been operating at reduced efficiency due to the ongoing tachyon downtick.\
+	<br><br>\
+	While messages from the SCG-D Brazen Bull were similarly weakened by what has been described as a bluespace 'hum', no immediate cause for alarm was raised. The fleet indicated that they were proceeding to investigate the Isavau International Spaceport and hoped to make direct contact with the crew within a matter of hours.\
+	<br><br>\
+	While telecommunications outages were a forecasted consequence of the tachyon downtick, highly focused and widespread instances such as that occurring in Isavau's Gamble were not, which has cast doubt on the predictive models being used, and raised concerns of additional factors at play. A newly observed phenomena from the Brazen Bull's report, 'blue points of light suspended in space with no discernible origin' has led to some speculation of a re-concentration of tachyon particles which some hope may hold the key to preventing further deterioration of the energetic landscape."
+
+/datum/lore/codex/page/outage
+	name = "02/14/66 - 02/15/74 - RELAY DATA OUTAGE"
+	data = "Article data lost for 2922 day period. Reason: Damage sustained to Oculum systems during Skathari Incursion. Please contact your administrator for details."
+
+/datum/lore/codex/page/article113
+	name = "08/17/74 - Vox Continue To Show Alarming Divergence In Behaviour; Experts Baffled"
+	data = "Reports published by the Interspecies Joint Anti-Piracy Initiative this month continue to support an unsettling trend; the Vox, violent reptoavian aliens best known for engaging in rampant piracy, are simply not behaving as expected. Tactical and strategic models built painstakingly over the last three centuries are now showing accuracy ratings as low as 3%, with a rapidly growing number of raids either occurring outwith predicted regions or timeframes, or more alarmingly, not being predicted at all.\
+	<br><br>\
+	'Something has altered their priorities,' said Wataru Murata, the head of the Joint Operations Group in charge of tracking Vox activity. 'In some areas we're seeing vastly more unarmed transport, mining and salvaging vessels, than we were as recently as two months ago, and in others, we're seeing strength and frequency of raiding groups as much as tripling. It's a very complex situation.'\
+	<br><br>\
+	'They've never been so unpredictable before,' agreed senior naval officer Akira Doi. 'I understand that there is currently no official theory on why this is happening, but I believe it all goes back to the Skathari Incursion.'\
+	<br><br>\
+	Many leading scientists are skeptical that the Incursion, despite having thrown much of the galactic community into chaos over an eight-year period of conflict with the insectoid Skathari, could have seriously disrupted the Vox in the same way, given the relatively low indications of Skathari presence in known Vox operating territories, but Admiral Doi strongly disagrees.\
+	<br><br>\
+	'The Skathari are aggressive to an unprecedented degree,' he explained, 'and they had the ability and numbers to annihilate entire communities. I see no reason why that shouldn't have applied to the Vox.'\
+	<br><br>\
+	While some colonies and stations welcome this reprieve from raids and piracy, others are finding themselves under renewed pressure, with resources and labour withdrawn on the advice of apparently unreliable modelling. A representative of the Pearlshield Coalition territory of Arrathiir had this to say regarding the sluggish reallocation of resources after the latest wave of raids:\
+	<br><br>\
+	'On the frontier we are no strangers to fighting and rebuilding after raider attacks, but without reliable resupply of fuel and munitions from the home worlds, we cannot even field our ships. This is costing us dearly.'"
+
+/datum/lore/codex/page/article114
+	name = "09/25/74 - 'Emerald Skies' Conspiracy Protest Shuts Down New Reykjavik Mall"
+	data = "This weekend saw the Vinterlykke Shopping Center shut down after a surge of protesters crowded the mall. Vinterlykke is known as the largest mall in New Reykjavik, renowned for its expansive selection of shops, restaurants, and entertainment options.\
+	<br><br>\
+	According to witnesses, protesters crowded the major walkways, preventing shoppers from passing and leaving some stranded in shops to avoid the crowd. Many shops barred and locked the storefronts in response, an unnamed employee of one store commenting, 'That many people <...> you never know if it's going to get out of control.'\
+	<br><br>\
+	The protesters chanted with signs regarding NanoTrasen's exclusive rights in studying the Sif Anomalous Region, demanding that studies into the anomalous properties be public knowledge. The march appears to be headed by the Skathari conspiracy group 'Emerald Skies', known in recent months for many other smaller protests regarding the government response to the Incursion, and beliefs that Skathari are more intelligent than the public has been informed.\
+	<br><br>\
+	The disruption was eventually cleared out by mall security forces before the crowd could grow out of control. It is reported that Vinterlykke will reopen on Monday with additional security measures in place."

@@ -273,9 +273,6 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 			if(part.transparent)
 				icon_key += "_t"
 
-			if(istype(tail_style, /datum/sprite_accessory/tail/taur))
-				icon_key += tail_style.clip_mask_state
-
 	icon_key = "[icon_key][husk ? 1 : 0][fat ? 1 : 0][hulk ? 1 : 0][skeleton ? 1 : 0]"
 	var/icon/base_icon
 	if(human_icon_cache[icon_key])
@@ -286,16 +283,6 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		base_icon = chest.get_icon()
 
 		var/icon/Cutter = null
-
-		if(istype(tail_style, /datum/sprite_accessory/tail/taur))	// Tail icon 'cookie cutters' are filled in where icons are preserved. We need to invert that.
-			Cutter = new(icon = tail_style.icon, icon_state = tail_style.clip_mask)
-
-			Cutter.Blend("#000000", ICON_MULTIPLY)	// Make it all black.
-
-			Cutter.SwapColor("#00000000", "#FFFFFFFF")	// Everywhere empty, make white.
-			Cutter.SwapColor("#000000FF", "#00000000")	// Everywhere black, make empty.
-
-			Cutter.Blend("#000000", ICON_MULTIPLY)	// Black again.
 
 		for(var/obj/item/organ/external/part in organs)
 			if(isnull(part) || part.is_stump())
@@ -608,8 +595,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	//Build a uniform sprite
 	var/icon/c_mask = tail_style?.clip_mask
 	if(c_mask)
-		var/obj/item/clothing/suit/S = wear_suit
-		if((wear_suit?.flags_inv & HIDETAIL) || (istype(S) && S.taurized)) // Reasons to not mask: 1. If you're wearing a suit that hides the tail or if you're wearing a taurized suit.
+		if((wear_suit?.flags_inv & HIDETAIL)) // Reason to not mask: You're wearing a suit that hides the tail
 			c_mask = null
 	overlays_standing[UNIFORM_LAYER] = w_uniform.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_w_uniform_str, default_icon = uniform_sprite, default_layer = UNIFORM_LAYER, clip_mask = c_mask)
 	apply_layer(UNIFORM_LAYER)
@@ -790,11 +776,6 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		suit_sprite = "[INV_SUIT_DEF_ICON].dmi"
 
 	var/icon/c_mask = null
-	var/tail_is_rendered = (overlays_standing[TAIL_NORTH_LAYER] || overlays_standing[TAIL_SOUTH_LAYER])
-	var/valid_clip_mask = tail_style?.clip_mask
-
-	if(tail_is_rendered && valid_clip_mask && !(istype(suit) && suit.taurized)) //Clip the lower half of the suit off using the tail's clip mask for taurs since taur bodies aren't hidden.
-		c_mask = valid_clip_mask
 	overlays_standing[SUIT_LAYER] = wear_suit.make_worn_icon(body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER, clip_mask = c_mask)
 
 	apply_layer(SUIT_LAYER)
@@ -1151,7 +1132,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		return image(tail_s)
 
 	//If you have a custom tail selected
-	if(tail_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL && !istaurtail(tail_style)))
+	if(tail_style && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
 		var/icon/tail_s = new/icon("icon" = tail_style.icon, "icon_state" = wagging && tail_style.ani_state ? tail_style.ani_state : tail_style.icon_state)
 		if(tail_style.do_colouration)
 			tail_s.Blend(rgb(src.r_tail, src.g_tail, src.b_tail), tail_style.color_blend_mode)
@@ -1179,15 +1160,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				tail_s.Blend(overlay, ICON_OVERLAY)
 				qdel(overlay)
 
-		if(istaurtail(tail_style))
-			var/datum/sprite_accessory/tail/taur/taurtype = tail_style
-			if(taurtype.can_ride && !riding_datum)
-				riding_datum = new /datum/riding/taur(src)
-				verbs |= /mob/living/carbon/human/proc/taur_mount
-				verbs |= /mob/living/proc/toggle_rider_reins
-			return image(tail_s, "pixel_x" = -16)
-		else
-			return image(tail_s)
+		return image(tail_s)
 	return null
 
 // TODO - Move this to where it should go ~Leshana

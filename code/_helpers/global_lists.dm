@@ -224,7 +224,7 @@ var/global/list/string_slot_flags = list(
 		ear_styles_list[path] = instance
 
 	// Custom Tails
-	paths = subtypesof(/datum/sprite_accessory/tail) - /datum/sprite_accessory/tail/taur
+	paths = subtypesof(/datum/sprite_accessory/tail)
 	for(var/path in paths)
 		var/datum/sprite_accessory/tail/instance = new path()
 		tail_styles_list[path] = instance

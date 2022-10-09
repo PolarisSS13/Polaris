@@ -1,9 +1,9 @@
 /datum/gear/accessory
-	display_name = "accessory"
+	display_name = "locket"
 	slot = slot_tie
 	sort_category = "Accessories"
 	type_category = /datum/gear/accessory
-	path = /obj/item/clothing/accessory
+	path = /obj/item/clothing/accessory/locket
 	cost = 1
 
 /datum/gear/accessory/armband
@@ -19,7 +19,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(armbands))
 
 /datum/gear/accessory/armband/colored
-	display_name = "armband"
+	display_name = "armband (colorable)"
 	path = /obj/item/clothing/accessory/armband/med/color
 
 /datum/gear/accessory/armband/colored/New()
@@ -35,7 +35,7 @@
 	path = /obj/item/storage/wallet/poly
 
 /datum/gear/accessory/wallet/womens
-	display_name = "wallet, women's"
+	display_name = "wallet, women's (colorable)"
 	path = /obj/item/storage/wallet/womens
 
 /datum/gear/accessory/wallet/womens/New()
@@ -147,38 +147,38 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(jackets))
 
 /datum/gear/accessory/suitvest
-	display_name = "suit vest"
+	display_name = "suit vest, black"
 	path = /obj/item/clothing/accessory/vest
 
-/datum/gear/accessory/brown_vest
-	display_name = "webbing, brown"
+/datum/gear/accessory/webbing_vest
+	display_name = "webbing vest selection (Engineering, Security, Medical)"
 	path = /obj/item/clothing/accessory/storage/brown_vest
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
 
-/datum/gear/accessory/black_vest
-	display_name = "webbing, black"
-	path = /obj/item/clothing/accessory/storage/black_vest
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
+/datum/gear/accessory/webbing_vest/New()
+	..()
+	var/webbingtype = list()
+	webbingtype["webbing, brown"] = /obj/item/clothing/accessory/storage/brown_vest
+	webbingtype["webbing, black"] = /obj/item/clothing/accessory/storage/black_vest
+	webbingtype["webbing, white"] = /obj/item/clothing/accessory/storage/white_vest
+	gear_tweaks += new/datum/gear_tweak/path(webbingtype)
 
-/datum/gear/accessory/white_vest
-	display_name = "webbing, white"
-	path = /obj/item/clothing/accessory/storage/white_vest
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
+/datum/gear/accessory/webbing_simple
+	display_name = "webbing, simple"
+	path = /obj/item/clothing/accessory/storage/webbing
 
-/datum/gear/accessory/brown_drop_pouches
-	display_name = "drop pouches, brown"
+/datum/gear/accessory/drop_pouches
+	display_name = "drop pouches selection (Engineering, Security, Medical)"
 	path = /obj/item/clothing/accessory/storage/brown_drop_pouches
 	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
 
-/datum/gear/accessory/black_drop_pouches
-	display_name = "drop pouches, black"
-	path = /obj/item/clothing/accessory/storage/black_drop_pouches
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
-
-/datum/gear/accessory/white_drop_pouches
-	display_name = "drop pouches, white"
-	path = /obj/item/clothing/accessory/storage/white_drop_pouches
-	allowed_roles = list("Station Engineer","Atmospheric Technician","Chief Engineer","Security Officer","Detective","Head of Security","Warden","Paramedic","Chief Medical Officer","Medical Doctor", "Search and Rescue")
+/datum/gear/accessory/drop_pouches/New()
+	..()
+	var/pouchtype = list()
+	pouchtype["drop pouches, brown"] = /obj/item/clothing/accessory/storage/brown_drop_pouches
+	pouchtype["drop pouches, black"] = /obj/item/clothing/accessory/storage/black_drop_pouches
+	pouchtype["drop pouches, white"] = /obj/item/clothing/accessory/storage/white_drop_pouches
+	gear_tweaks += new/datum/gear_tweak/path(pouchtype)
 
 /datum/gear/accessory/fannypack
 	display_name = "fannypack selection"
@@ -192,12 +192,6 @@
 		var/obj/item/storage/belt/fannypack/fanny_type = fanny
 		fannys[initial(fanny_type.name)] = fanny_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(fannys))
-
-/datum/gear/accessory/webbing
-	display_name = "webbing, simple"
-	path = /obj/item/clothing/accessory/storage/webbing
-	cost = 2
-
 /datum/gear/accessory/chaps
 	display_name = "chaps, brown"
 	path = /obj/item/clothing/accessory/chaps
@@ -217,7 +211,6 @@
 	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
 	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
-
 
 /datum/gear/accessory/sweater
 	display_name = "sweater selection"
@@ -251,14 +244,11 @@
 	bracelettype["bracelet, plastic"] = /obj/item/clothing/accessory/bracelet/material/plastic
 	bracelettype["bracelet, copper"] = /obj/item/clothing/accessory/bracelet/material/copper
 	bracelettype["bracelet, bronze"] = /obj/item/clothing/accessory/bracelet/material/bronze
+	bracelettype["bracelet, friendship"] = /obj/item/clothing/accessory/bracelet/friendship
 	gear_tweaks += new/datum/gear_tweak/path(bracelettype)
 
-/datum/gear/accessory/bracelet/friendship
-	display_name = "bracelet, friendship"
-	path = /obj/item/clothing/accessory/bracelet/friendship
-
 /datum/gear/accessory/bracelet/slap
-	display_name = "bracelet, slap (recolorable)"
+	display_name = "bracelet, slap (colorable)"
 	path = /obj/item/clothing/accessory/bracelet/slap
 
 /datum/gear/accessory/bracelet/slap/New()
@@ -266,7 +256,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/accessory/bracelet/beaded
-	display_name = "bracelet, beaded (recolorable)"
+	display_name = "bracelet, beaded (colorable)"
 	path = /obj/item/clothing/accessory/bracelet/beaded
 
 /datum/gear/accessory/bracelet/beaded/New()
@@ -277,10 +267,6 @@
 	display_name = "stethoscope"
 	path = /obj/item/clothing/accessory/stethoscope
 	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Psychiatrist","Paramedic", "Search and Rescue")
-
-/datum/gear/accessory/locket
-	display_name = "locket"
-	path = /obj/item/clothing/accessory/locket
 
 /datum/gear/accessory/halfcape
 	display_name = "cape, half"
@@ -345,11 +331,11 @@
 	allowed_roles = list("Internal affairs agent")
 
 /datum/gear/accessory/pressbadge
-	display_name = "corporate press pass"
+	display_name = "press pass, corporate"
 	path = /obj/item/clothing/accessory/badge/press
 
-/datum/gear/accessory/pressbadge
-	display_name = "freelance press pass"
+/datum/gear/accessory/pressbadgefreelance
+	display_name = "press pass, freelance"
 	path = /obj/item/clothing/accessory/badge/press/independent
 
 /datum/gear/accessory/legbrace
