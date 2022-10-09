@@ -10,7 +10,7 @@
 		"Schechi" = /datum/language/teshari,
 		"Siik" = /datum/language/tajaran,
 		"Sinta'Unathi" = /datum/language/unathi,
-		"Skrell" = /datum/species/diona,
+		"Skrell" = /datum/species/skrell,
 		"Sol Common" = /datum/language/human,
 		"Tajara" = /datum/species/tajaran,
 		"Teshari" = /datum/species/teshari,
