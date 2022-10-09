@@ -208,7 +208,7 @@
 	if(throwing)
 		return
 
-	if(can_fall())
+	if(can_fall() && can_fall_to(below))
 		// We spawn here to let the current move operation complete before we start falling. fall() is normally called from
 		// Entered() which is part of Move(), by spawn()ing we let that complete.  But we want to preserve if we were in client movement
 		// or normal movement so other move behavior can continue.
@@ -278,6 +278,17 @@
 /obj/structure/catwalk/CheckFall(var/atom/movable/falling_atom)
 	return falling_atom.fall_impact(src)
 
+/atom/movable/proc/can_fall_to(turf/landing)
+	// Check if there is anything in our turf we are standing on to prevent falling.
+	for(var/obj/O in loc)
+		if(!O.CanFallThru(src, landing))
+			return FALSE
+	// See if something in turf below prevents us from falling into it.
+	for(var/atom/A in landing)
+		if(!A.CanPass(src, src.loc, 1, 0))
+			return FALSE
+	return TRUE
+
 /obj/structure/lattice/CanFallThru(atom/movable/mover as mob|obj, turf/target as turf)
 	if(target.z >= z)
 		return TRUE // We don't block sideways or upward movement.
@@ -297,15 +308,6 @@
 // Actually process the falling movement and impacts.
 /atom/movable/proc/handle_fall(var/turf/landing)
 	var/turf/oldloc = loc
-
-	// Check if there is anything in our turf we are standing on to prevent falling.
-	for(var/obj/O in loc)
-		if(!O.CanFallThru(src, landing))
-			return FALSE
-	// See if something in turf below prevents us from falling into it.
-	for(var/atom/A in landing)
-		if(!A.CanPass(src, src.loc, 1, 0))
-			return FALSE
 
 	// Now lets move there!
 	if(!Move(landing))

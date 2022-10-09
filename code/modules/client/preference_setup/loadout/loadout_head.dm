@@ -81,20 +81,20 @@
 		caps[initial(cap_type.name)] = cap_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(caps))
 
-/datum/gear/head/cap/flat
+/datum/gear/head/cap_flat
 	display_name = "cap, flat brown"
 	path = /obj/item/clothing/head/flatcap
 
-/datum/gear/head/cap/med
+/datum/gear/head/cap_med
 	display_name = "cap, medical (Medical)"
 	path = /obj/item/clothing/head/soft/med
 	allowed_roles = list("Chief Medical Officer","Medical Doctor","Chemist","Psychiatrist","Paramedic","Search and Rescue")
 
-/datum/gear/head/cap/white
+/datum/gear/head/cap_colorable
 	display_name = "cap (colorable)"
 	path = /obj/item/clothing/head/soft/mime
 
-/datum/gear/head/cap/white/New()
+/datum/gear/head/cap_colorable/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
@@ -298,11 +298,11 @@
 		welding_helmets[initial(welding_helmet_type.name)] = welding_helmet_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(welding_helmets))
 
-/datum/gear/head/beret/solgov
+/datum/gear/head/beret_gov
 	display_name = "beret, government selection"
 	path = /obj/item/clothing/head/beret/solgov
 
-/datum/gear/head/beret/solgov/New()
+/datum/gear/head/beret_gov/New()
 	..()
 	var/list/sols = list()
 	for(var/sol_style in typesof(/obj/item/clothing/head/beret/solgov))
@@ -368,3 +368,32 @@
 /datum/gear/head/plaguedoctor2
 	display_name = "hat, golden plague doctor"
 	path = /obj/item/clothing/head/plaguedoctorhat/gold
+
+/datum/gear/head/nonla
+	display_name = "non la"
+	path = /obj/item/clothing/head/nonla
+
+/datum/gear/head/buckethat
+	display_name = "hat, bucket"
+	path = /obj/item/clothing/head/buckethat
+
+/datum/gear/head/buckethat/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/head/redcoat
+	display_name = "hat, tricorne"
+	path =/obj/item/clothing/head/redcoat
+
+/datum/gear/head/tanker
+	display_name = "tanker cap selection"
+	path = /obj/item/clothing/head/hardhat
+	cost = 2
+
+/datum/gear/head/tanker/New()
+	..()
+	var/list/tankercaps = list()
+	for(var/tankercap in typesof(/obj/item/clothing/head/helmet/tank))
+		var/obj/item/clothing/head/helmet/tank/cap_type = tankercap
+		tankercaps[initial(cap_type.name)] = cap_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tankercaps))

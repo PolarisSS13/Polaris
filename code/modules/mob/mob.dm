@@ -40,6 +40,7 @@
 	else
 		living_mob_list += src
 	lastarea = get_area(src)
+	set_focus(src) // Key Handling
 	update_transform() // Some mobs may start bigger or smaller than normal.
 	return ..()
 
@@ -691,6 +692,7 @@
 
 /mob/proc/facedir(var/ndir)
 	if(!canface() || (client && (client.moving || !checkMoveCooldown())))
+		DEBUG_INPUT("Denying Facedir for [src] (moving=[client?.moving])")
 		return 0
 	set_dir(ndir)
 	if(buckled && buckled.buckle_movable)

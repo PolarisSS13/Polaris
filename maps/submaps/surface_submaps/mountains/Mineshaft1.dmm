@@ -257,6 +257,7 @@
 "Iw" = (
 /obj/structure/table/standard,
 /obj/item/clothing/under/rank/miner,
+/obj/item/clothing/head/helmet/space/void/grayson,
 /turf/simulated/floor/tiled,
 /area/submap/cave/AMine1)
 "IS" = (

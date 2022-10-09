@@ -44,6 +44,25 @@
 		if ("SOUTHEAST") return 6
 		if ("SOUTHWEST") return 10
 
+// Turns a direction into text showing all bits set
+/proc/dirs2text(direction)
+	if(!direction)
+		return ""
+	var/list/dirs = list()
+	if(direction & NORTH)
+		dirs += "NORTH"
+	if(direction & SOUTH)
+		dirs += "SOUTH"
+	if(direction & EAST)
+		dirs += "EAST"
+	if(direction & WEST)
+		dirs += "WEST"
+	if(direction & UP)
+		dirs += "UP"
+	if(direction & DOWN)
+		dirs += "DOWN"
+	return dirs.Join(" ")
+
 // Converts an angle (degrees) into an ss13 direction
 /proc/angle2dir(var/degree)
 	degree = (degree + 22.5) % 365 // 22.5 = 45 / 2
@@ -99,6 +118,25 @@
 	if (rights & R_EVENT)       . += "[seperator]+EVENT"
 	return .
 
+// Converts a hexadecimal color (e.g. #FF0050) to a list of numbers for red, green, and blue (e.g. list(255,0,80) ).
+/proc/hex2rgb(hex)
+	// Strips the starting #, in case this is ever supplied without one, so everything doesn't break.
+	if(findtext(hex,"#",1,2))
+		hex = copytext(hex, 2)
+	return list(hex2rgb_r(hex), hex2rgb_g(hex), hex2rgb_b(hex))
+
+// The three procs below require that the '#' part of the hex be stripped, which hex2rgb() does automatically.
+/proc/hex2rgb_r(hex)
+	var/hex_to_work_on = copytext(hex,1,3)
+	return hex2num(hex_to_work_on)
+
+/proc/hex2rgb_g(hex)
+	var/hex_to_work_on = copytext(hex,3,5)
+	return hex2num(hex_to_work_on)
+
+/proc/hex2rgb_b(hex)
+	var/hex_to_work_on = copytext(hex,5,7)
+	return hex2num(hex_to_work_on)
 
 // heat2color functions. Adapted from: http://www.tannerhelland.com/4435/convert-temperature-rgb-algorithm-code/
 /proc/heat2color(temp)
@@ -318,9 +356,9 @@
 		switch(child)
 			if(/datum)
 				return null
-			if(/obj, /mob)
+			if(/obj || /mob)
 				return /atom/movable
-			if(/area, /turf)
+			if(/area || /turf)
 				return /atom
 			else
 				return /datum

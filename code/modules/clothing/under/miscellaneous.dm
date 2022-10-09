@@ -926,6 +926,12 @@ Uniforms and such
 	icon_state = "cyberhell"
 	index = 1
 
+/obj/item/clothing/under/cyberpunkpants
+	name = "cyberpunk split-side ensemble"
+	desc = "Cyberpunk styled split-side pants and matching top. Just in time for the dystopian future."
+	icon_state = "hart_jumpsuit"
+	index = 1
+
 /obj/item/clothing/under/blackngold
 	name = "black and gold gown"
 	desc = "A black and gold gown. You get the impression this is typically worn for religious purposes."
@@ -1190,7 +1196,7 @@ Uniforms and such
 	rolled_sleeves = 0
 
 /obj/item/clothing/under/sifcop
-	name = "\improper SifGuard law enforcement uniform"
+	name = "\improper SifGuard Police Division uniform"
 	desc = "A sturdy law enforcement uniform typical of Vir's civilian law enforcement officers."
 	icon_state = "sifcop"
 	worn_state = "sifcop"
@@ -1210,6 +1216,12 @@ Uniforms and such
 	desc = "A rugged cableknit sweater and leather pants, fit for a dashing space adventurer."
 	icon_state = "retro_sweater"
 	worn_state = "retro_sweater"
+
+/obj/item/clothing/under/retro_outdoors
+	name = "retro outsdoorwear"
+	desc = "A puffer vest over utility pants, for when you're really rustic and want everybody to know it."
+	icon_state = "liaison_outing"
+	index = 1
 
 /obj/item/clothing/under/hightrousers
 	name = "high-waisted trousers"
