@@ -1,5 +1,6 @@
 /decl/hierarchy/outfit/job/assistant
 	name = OUTFIT_JOB_NAME("Assistant")
+	uniform = /obj/item/clothing/under/rank/assistant
 	id_type = /obj/item/card/id/assistant
 
 /decl/hierarchy/outfit/job/assistant/visitor
@@ -11,6 +12,11 @@
 	name = OUTFIT_JOB_NAME("Resident")
 	id_pda_assignment = "Resident"
 	uniform = /obj/item/clothing/under/color/white
+
+/decl/hierarchy/outfit/job/assistant/engineering
+	name = OUTFIT_JOB_NAME("Technical Assistant")
+	id_pda_assignment = "Technical Assistant"
+	uniform = /obj/item/clothing/under/rank/assistant/engineer
 
 /decl/hierarchy/outfit/job/service
 	l_ear = /obj/item/radio/headset/headset_service
