@@ -34,6 +34,7 @@
 
 /datum/gear/suit/bomber
 	display_name = "jacket, bomber selection"
+	description = "A selection of jackets styled on early aviation gear."
 	path = /obj/item/clothing/suit/storage/toggle/bomber
 	cost = 2
 
@@ -47,6 +48,7 @@
 
 /datum/gear/suit/leather_jacket
 	display_name = "jacket, leather selection"
+	description = "A selection of leather jackets in various styles."
 	path = /obj/item/clothing/suit/storage/toggle/leather_jacket
 
 /datum/gear/suit/leather_jacket/New()
@@ -61,6 +63,7 @@
 
 /datum/gear/suit/leather_vest
 	display_name = "jacket, leather vest selection"
+	description = "A selection of sleeveless leather jackets in various styles."
 	path = /obj/item/clothing/suit/storage/toggle/leather_jacket/sleeveless
 
 /datum/gear/suit/leather_vest/New()
@@ -74,6 +77,7 @@
 
 /datum/gear/suit/mil
 	display_name = "military jacket selection"
+	description = "A selection of jackets resembling vintage military gear."
 	path = /obj/item/clothing/suit/storage/miljacket
 
 /datum/gear/suit/mil/New()
@@ -90,6 +94,7 @@
 
 /datum/gear/suit/trenchcoat
 	display_name = "trenchcoat selection"
+	description = "A selection of long raincoats."
 	path = /obj/item/clothing/suit/storage/trench
 
 /datum/gear/suit/trenchcoat/New()
@@ -121,6 +126,7 @@
 
 /datum/gear/suit/hoodie
 	display_name = "hoodie selection"
+	description = "A selection of hooded sweatshirts."
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
 	cost = 2
 
@@ -134,6 +140,7 @@
 
 /datum/gear/suit/labcoat
 	display_name = "labcoat, colored selection"
+	description = "A selection of labcoats in standard, and non-standard colours."
 	path = /obj/item/clothing/suit/storage/toggle/labcoat
 	cost = 2
 
@@ -177,6 +184,7 @@
 
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
+	description = "A selection of ponchos in basic and departmental colours."
 	path = /obj/item/clothing/accessory/poncho
 
 /datum/gear/suit/poncho/New()
@@ -187,11 +195,12 @@
 		ponchos[initial(poncho.name)] = poncho
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ponchos))
 
-/datum/gear/suit/cloak
+/datum/gear/suit/cloak_department
 	display_name = "cloak, departmental selection"
+	description = "A selection of cloaks in departmental colours."
 	path = /obj/item/clothing/accessory/poncho/roles/cloak/cargo
 
-/datum/gear/suit/cloak/New()
+/datum/gear/suit/cloak_department/New()
 	..()
 	var/list/cloaks = list()
 	for(var/cloak_style in (typesof(/obj/item/clothing/accessory/poncho/roles/cloak)))
@@ -212,7 +221,8 @@
 	path = /obj/item/clothing/suit/unathi/robe
 
 /datum/gear/suit/suit_jackets
-	display_name = "suit jacket selection"
+	display_name = "jacket, suit selection"
+	description = "A selection of stylish suit jackets."
 	path = /obj/item/clothing/suit/storage/toggle/internalaffairs
 
 /datum/gear/suit/suit_jackets/New()
@@ -229,6 +239,7 @@
 
 /datum/gear/suit/forensics
 	display_name = "jacket, forensics selection (Detective)"
+	description = "A selection of windbreakers in security colours."
 	path = /obj/item/clothing/suit/storage/forensics/red/long
 	allowed_roles = list("Detective")
 
@@ -243,6 +254,7 @@
 
 /datum/gear/suit/wintercoat
 	display_name = "winter coat selection"
+	description = "A selection of heavy winter coats to keep you toasty in extreme weather."
 	path = /obj/item/clothing/suit/storage/hooded/wintercoat
 	cost = 2
 
@@ -256,6 +268,7 @@
 
 /datum/gear/suit/varsity
 	display_name = "jacket, varsity selection"
+	description = "A selection of two-tone cotton jackets."
 	path = /obj/item/clothing/suit/varsity
 
 /datum/gear/suit/varsity/New()
@@ -268,6 +281,7 @@
 
 /datum/gear/suit/track
 	display_name = "jacket, track selection"
+	description = "A selection of lightweight sports jackets."
 	path = /obj/item/clothing/suit/storage/toggle/track
 
 /datum/gear/suit/track/New()
@@ -280,6 +294,7 @@
 
 /datum/gear/suit/flannel
 	display_name = "flannel selection"
+	description = "A selection of comfortable plaid shirts."
 	path = /obj/item/clothing/suit/storage/flannel
 
 /datum/gear/suit/flannel/New()
@@ -292,6 +307,7 @@
 
 /datum/gear/suit/denim_jacket
 	display_name = "jacket, denim selection"
+	description = "A selection of denim jackets in a variety of styles."
 	path = /obj/item/clothing/suit/storage/toggle/denim_jacket
 
 /datum/gear/suit/denim_jacket/New()
@@ -312,6 +328,7 @@
 
 /datum/gear/suit/dep_jacket
 	display_name = "jacket, departmental selection"
+	description = "A selection of light jackets in departmental colours."
 	path = /obj/item/clothing/suit/storage/toggle/sec_dep_jacket
 
 /datum/gear/suit/dep_jacket/New()
@@ -326,6 +343,7 @@
 
 /datum/gear/suit/light_jacket
 	display_name = "jacket, light selection"
+	description = "A selection of lightweight outdoor jackets."
 	path = /obj/item/clothing/suit/storage/toggle/light_jacket
 
 /datum/gear/suit/light_jacket/New()
@@ -350,6 +368,7 @@
 
 /datum/gear/suit/insulated
 	display_name = "jacket, insulated selection"
+	description = "A selection of jackets made to keep you nice and toasty on cold winter days. Or at least alive."
 	path = /obj/item/clothing/suit/storage/insulated
 	cost = 2
 

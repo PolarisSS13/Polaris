@@ -313,7 +313,7 @@
 
 /obj/item/clothing/suit/storage/greyjacket
 	name = "grey jacket"
-	desc = "A fancy twead grey jacket."
+	desc = "A fancy tweed grey jacket."
 	icon_state = "gentlecoat"
 	item_state_slots = list(slot_r_hand_str = "leather_jacket", slot_l_hand_str = "leather_jacket")
 	flags_inv = HIDEHOLSTER
