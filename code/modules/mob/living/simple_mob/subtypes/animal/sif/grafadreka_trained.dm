@@ -14,14 +14,14 @@
 	var/obj/item/storage/internal/animal_harness/harness = /obj/item/storage/internal/animal_harness
 
 	/// On clicking with an item, stuff that should use behaviors instead of being placed in storage.
-	var/list/allow_type_to_pass = list(
+	var/static/list/allow_type_to_pass = list(
 		/obj/item/healthanalyzer,
 		/obj/item/stack/medical,
 		/obj/item/reagent_containers/syringe
 	)
 
 	/// A type path -> proc path mapping for objects that drakes can use.
-	var/list/interactable_objects = list(
+	var/static/list/interactable_objects = list(
 		/obj/machinery/button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonBasic,
 		/obj/machinery/access_button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonAccess,
 		/obj/machinery/firealarm = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractFireAlarm,
@@ -203,7 +203,7 @@
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/CollectItem(obj/item/item)
-	if (!item.Adjacent(src))
+	if (!item.simulated || item.abstract || !item.Adjacent(src))
 		return ATTACK_FAILED
 	if (!harness)
 		to_chat(src, SPAN_WARNING("Your harness is missing; you cannot store \the [item]."))
