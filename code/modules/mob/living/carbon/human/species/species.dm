@@ -208,7 +208,8 @@
 	var/primitive_form										// Lesser form, if any (ie. monkey for humans)
 	var/greater_form										// Greater form, if any, ie. human for monkeys.
 	var/holder_type
-	var/gluttonous											// Can eat some mobs. 1 for mice, 2 for monkeys, 3 for people.
+	var/gluttonous = 0										// Can eat some mobs. Values can be GLUT_TINY, GLUT_SMALLER, GLUT_ANYTHING, GLUT_ITEM_TINY, GLUT_ITEM_NORMAL, GLUT_ITEM_ANYTHING, GLUT_PROJECTILE_VOMIT
+	var/stomach_capacity = 5								// How much stuff they can stick in their stomach
 
 	var/rarity_value = 1									// Relative rarity/collector value for this species.
 	var/economic_modifier = 2								// How much money this species makes

@@ -21,10 +21,7 @@
 	qdel(ingested)
 	qdel(touching)
 	// We don't qdel(bloodstr) because it's the same as qdel(reagents)
-	for(var/guts in internal_organs)
-		qdel(guts)
-	for(var/food in stomach_contents)
-		qdel(food)
+	QDEL_NULL_LIST(internal_organs)
 	return ..()
 
 /mob/living/carbon/rejuvenate()
@@ -47,40 +44,38 @@
 	if(germ_level < GERM_LEVEL_MOVE_CAP && prob(8))
 		germ_level++
 
-/mob/living/carbon/relaymove(var/mob/living/user, direction)
-	if((user in src.stomach_contents) && istype(user))
-		if(user.last_special <= world.time)
-			user.last_special = world.time + 50
-			src.visible_message("<span class='danger'>You hear something rumbling inside [src]'s stomach...</span>")
-			var/obj/item/I = user.get_active_hand()
-			if(I && I.force)
-				var/d = rand(round(I.force / 4), I.force)
-				if(istype(src, /mob/living/carbon/human))
-					var/mob/living/carbon/human/H = src
-					var/obj/item/organ/external/organ = H.get_organ(BP_TORSO)
-					if (istype(organ))
-						if(organ.take_damage(d, 0))
-							H.UpdateDamageIcon()
-					H.updatehealth()
-				else
-					src.take_organ_damage(d)
-				user.visible_message("<span class='danger'>[user] attacks [src]'s stomach wall with the [I.name]!</span>")
-				playsound(user, 'sound/effects/attackblob.ogg', 50, 1)
+/mob/living/carbon/proc/take_internal_stomach_damage(var/d)
+	take_organ_damage(d)
 
-				if(prob(src.getBruteLoss() - 50))
-					for(var/atom/movable/A in stomach_contents)
-						A.loc = loc
-						stomach_contents.Remove(A)
-					src.gib()
+/mob/living/carbon/relaymove(var/mob/living/user, direction)
+
+	if(!istype(user))
+		return
+	if(!(user in get_stomach_contents()))
+		return
+	if(user.last_special > world.time)
+		return
+
+	var/obj/item/I = user.get_active_hand()
+	if(!I || !I.force)
+		return
+
+	user.last_special = world.time + 50
+	visible_message(SPAN_DANGER("You hear something rumbling inside \the [src]'s stomach..."))
+	take_internal_stomach_damage(rand(round(I.force / 4), I.force))
+	user.visible_message(SPAN_DANGER("\The [user] attacks \the [src]'s stomach wall with \the [I]!"))
+	playsound(user, 'sound/effects/attackblob.ogg', 50, 1)
+
+	if(prob(getBruteLoss() - 50))
+		for(var/atom/movable/A in get_stomach_contents())
+			remove_from_stomach(A)
+		gib()
 
 /mob/living/carbon/gib()
 	for(var/mob/M in src)
-		if(M in src.stomach_contents)
-			src.stomach_contents.Remove(M)
-		M.loc = src.loc
-		for(var/mob/N in viewers(src, null))
-			if(N.client)
-				N.show_message(text("<font color='red'><B>[M] bursts out of [src]!</B></font>"), 2)
+		if(M in get_stomach_contents())
+			remove_from_stomach(M)
+			visible_message(SPAN_DANGER("\The [M] bursts out of \the [src]!"))
 	..()
 
 /mob/living/carbon/attack_hand(mob/M as mob)

@@ -49,7 +49,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 
 	economic_modifier = 3
 
-	gluttonous =	1
+	gluttonous =	GLUT_SMALLER
 	virus_immune =	1
 	blood_volume =	560
 	brute_mod =		0.75

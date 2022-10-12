@@ -22,9 +22,13 @@
 	parent_organ = BP_TORSO
 
 /obj/item/organ/internal/liver/vox
-	name = "waste tract"
+	name = "filter tract"
 	parent_organ = BP_TORSO
 	color = "#0033cc"
 
 /obj/item/organ/external/groin/vox //vox have an extended ribcage for extra protection.
 	encased = "lower ribcage"
+
+/obj/item/organ/internal/stomach/vox/handle_organ_proc_special()
+	. = ..()
+	// digest stuff in the stomach organ

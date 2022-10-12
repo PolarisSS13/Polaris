@@ -334,7 +334,7 @@
 
 	//clicking on yourself while grabbing them
 	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		devour(affecting, assailant)
+		assailant.devour(affecting)
 
 /obj/item/grab/dropped()
 	loc = null

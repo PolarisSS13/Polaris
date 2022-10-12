@@ -52,7 +52,7 @@
 	pass_flags = PASSTABLE
 	holder_type = /obj/item/holder/human
 //	short_sighted = 1
-	gluttonous = 1
+	gluttonous = GLUT_TINY
 	blood_volume = 400
 	hunger_factor = 0.2
 

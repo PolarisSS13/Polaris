@@ -802,8 +802,13 @@
 						adjust_nutrition(-40)
 						adjustToxLoss(-3)
 
+					empty_stomach()
+
 		spawn(350)
 			lastpuke = 0
+
+/mob/living/proc/empty_stomach()
+	return
 
 /mob/living/update_canmove()
 	if(!resting && cannot_stand() && can_stand_overridden())

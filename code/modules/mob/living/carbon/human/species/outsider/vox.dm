@@ -47,7 +47,7 @@
 	cold_level_2 = 150	//Default 200
 	cold_level_3 = 90	//Default 120
 
-	gluttonous = 1
+	gluttonous = GLUT_SMALLER | GLUT_ITEM_NORMAL | GLUT_PROJECTILE_VOMIT
 
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
@@ -85,6 +85,7 @@
 		O_KIDNEYS =  /obj/item/organ/internal/kidneys/vox,
 		O_BRAIN =    /obj/item/organ/internal/brain/vox,
 		O_EYES =     /obj/item/organ/internal/eyes,
+		O_STOMACH =  /obj/item/organ/internal/stomach/vox,
 		)
 
 	genders = list(NEUTER)
