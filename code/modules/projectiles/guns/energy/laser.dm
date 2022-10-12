@@ -172,7 +172,7 @@
 	flux in a nuclear reactor core. This incredible technology may help YOU achieve high excitation rates with small laser volumes!"
 	icon_state = "lasercannon"
 	item_state = null
-	wielded_item_state = "mhdhowitzer-wielded" //Placeholder
+	wielded_item_state = "laser" //Placeholder
 	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_POWER = 3)
 	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = /obj/item/projectile/beam/heavylaser/cannon
@@ -240,7 +240,6 @@
 	name = "antique mono-rifle"
 	desc = "An old laser rifle. This one can only fire once before requiring recharging."
 	description_fluff = "Modeled after ancient hunting rifles, this rifle was dubbed the 'Rainy Day Special' by some, due to its use as some barmens' fight-stopper of choice. One shot is all it takes, or so they say."
-	icon = 'icons/obj/energygun.dmi'
 	icon_state = "mono"
 	item_state = "shotgun"
 	origin_tech = list(TECH_COMBAT = 6, TECH_MATERIAL = 4, TECH_POWER = 3)
@@ -317,9 +316,8 @@
 /obj/item/gun/energy/lasershotgun
 	name = "laser scattergun"
 	icon = 'icons/obj/energygun.dmi'
-	item_state = "laser"
 	icon_state = "scatter"
+	item_state = null
 	desc = "A strange Almachi weapon, utilizing a refracting prism to turn a single laser blast into a diverging cluster."
 	origin_tech = list(TECH_COMBAT = 3, TECH_MAGNET = 1, TECH_MATERIAL = 4)
-
 	projectile_type = /obj/item/projectile/scatter/laser

@@ -23,6 +23,13 @@
 	charge_cost = 400
 	recharge_time = 7 //Time it takes for shots to recharge (in ticks)
 
+/obj/item/gun/energy/taser/disabler
+	name = "disabler"
+	desc = "The RayZar S500 Disabler is a high-powered derivative of the same Mk30 taser design used by NanoTrasen security, and is capable of overloading prosthetic energy cells. It's use is heavily regulated due to potential for long-term effects on the body."
+	icon_state = "disabler"
+	projectile_type = /obj/item/projectile/beam/stun/disabler
+	charge_cost = 480
+
 /obj/item/gun/energy/taser/mounted/cyborg/swarm
 	name = "disabler"
 	desc = "An archaic device which attacks the target's nervous-system or control circuits."
