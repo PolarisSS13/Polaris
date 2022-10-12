@@ -92,7 +92,8 @@
 				prob(3);/obj/item/gun/projectile/sec/wood,
 				prob(4);/obj/item/gun/projectile/p92x,
 				prob(3);/obj/item/gun/projectile/p92x/brown,
-				prob(4);/obj/item/gun/projectile/pistol,
+				prob(2);/obj/item/gun/projectile/pistol,
+				prob(2);/obj/item/gun/projectile/pistol/alt,
 				prob(5);/obj/item/gun/projectile/pirate,
 				prob(2);/obj/item/gun/projectile/revolver,
 				prob(4);/obj/item/gun/projectile/revolver/deckard,
@@ -158,7 +159,8 @@
 				prob(3);/obj/item/gun/projectile/colt,
 				prob(2);/obj/item/gun/projectile/luger,
 				prob(2);/obj/item/gun/projectile/pistol,
-				prob(1);/obj/item/gun/projectile/luger/brown,
+				prob(2);/obj/item/gun/projectile/pistol/alt,
+				prob(2);/obj/item/gun/projectile/luger/brown,
 				prob(1);/obj/item/gun/projectile/compact_45)
 
 /obj/random/energy_pistol
