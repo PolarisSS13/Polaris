@@ -166,6 +166,7 @@
 /datum/gear/accessory/webbing_simple
 	display_name = "webbing, simple"
 	path = /obj/item/clothing/accessory/storage/webbing
+	cost = 2
 
 /datum/gear/accessory/drop_pouches
 	display_name = "drop pouches selection (Engineering, Security, Medical)"
