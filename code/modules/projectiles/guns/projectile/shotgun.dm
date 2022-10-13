@@ -90,7 +90,7 @@
 
 /obj/item/gun/projectile/shotgun/doublebarrel
 	name = "double-barreled shotgun"
-	desc = "A truely classic weapon. No need to change what works. Uses 12g rounds."
+	desc = "A truly classic weapon. No need to change what works. Uses 12g rounds."
 	icon_state = "dshotgun"
 	item_state = "dshotgun"
 	//SPEEDLOADER because rapid unloading.
@@ -104,6 +104,7 @@
 	caliber = "12g"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 1)
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
+	var/sawn_off = FALSE
 
 	burst_delay = 0
 	firemodes = list(
@@ -117,6 +118,7 @@
 /obj/item/gun/projectile/shotgun/doublebarrel/flare
 	name = "signal shotgun"
 	desc = "A double-barreled shotgun meant to fire signal flash shells. Uses 12g rounds."
+	icon_state = "dshotgun_g"
 	ammo_type = /obj/item/ammo_casing/a12g/flash
 
 /obj/item/gun/projectile/shotgun/doublebarrel/unload_ammo(user, allow_dump)
@@ -135,7 +137,9 @@
 			burst = burstsetting
 			return
 		if(do_after(user, 30))	//SHIT IS STEALTHY EYYYYY
-			icon_state = "sawnshotgun"
+			if(sawn_off)
+				return
+			icon_state = "[initial(icon_state)]-sawn"
 			item_state = "sawnshotgun"
 			w_class = ITEMSIZE_NORMAL
 			force = 5
@@ -144,18 +148,20 @@
 			name = "sawn-off shotgun"
 			desc = "Omar's coming!"
 			to_chat(user, "<span class='warning'>You shorten the barrel of \the [src]!</span>")
+			sawn_off = TRUE
 	else
 		..()
 
 /obj/item/gun/projectile/shotgun/doublebarrel/sawn
 	name = "sawn-off shotgun"
 	desc = "Omar's coming!" // I'm not gonna add "Uses 12g rounds." to this one. I'll just let this reference go undisturbed.
-	icon_state = "sawnshotgun"
+	icon_state = "dshotgun-sawn"
 	item_state = "sawnshotgun"
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	ammo_type = /obj/item/ammo_casing/a12g/pellet
 	w_class = ITEMSIZE_NORMAL
 	force = 5
+	sawn_off = TRUE
 
 //Sjorgen Inertial Shotgun
 /obj/item/gun/projectile/shotgun/semi
@@ -171,4 +177,3 @@
 	load_method = SINGLE_CASING
 	max_shells = 5
 	ammo_type = /obj/item/ammo_casing/a12g/beanbag
-	
