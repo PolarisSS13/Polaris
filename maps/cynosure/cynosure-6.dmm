@@ -968,6 +968,14 @@
 	icon_state = "dark"
 	},
 /area/centcom/specops)
+"bcL" = (
+/obj/structure/shuttle/falsewall_no_join,
+/obj/structure/shuttle/falsewall_no_join{
+	icon = 'icons/turf/wall_masks_tgmc.dmi';
+	icon_state = "white1"
+	},
+/turf/simulated/floor/plating,
+/area/shuttle/escape/centcom)
 "bcT" = (
 /obj/machinery/sleep_console,
 /turf/unsimulated/floor{
@@ -1157,7 +1165,11 @@
 /turf/simulated/shuttle/floor/white,
 /area/skipjack_station/start)
 "boo" = (
-/turf/simulated/wall/tgmc/whitewall,
+/obj/structure/shuttle/falsewall_no_join{
+	icon = 'icons/turf/wall_masks_tgmc.dmi';
+	icon_state = "white2"
+	},
+/turf/simulated/floor/plating,
 /area/shuttle/escape/centcom)
 "bos" = (
 /obj/effect/floor_decal/techfloor{
@@ -1793,10 +1805,18 @@
 /turf/simulated/floor/holofloor/bmarble,
 /area/holodeck/source_chess)
 "caf" = (
-/turf/simulated/wall/tgmc/window/white,
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_window2"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
 "cbu" = (
-/turf/simulated/wall/tgmc/window/white/reinf,
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_rwindow2"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
 "cbv" = (
 /obj/structure/closet/crate/freezer,
@@ -2774,6 +2794,13 @@
 	icon_state = "steel"
 	},
 /area/shuttle/trade)
+"dmu" = (
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_window1"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/arrival/pre_game)
 "dmM" = (
 /obj/structure/table/rack,
 /obj/item/clothing/under/color/green,
@@ -5006,6 +5033,13 @@
 	icon_state = "dark"
 	},
 /area/centcom/main_hall)
+"fJP" = (
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_rwindow1"
+	},
+/turf/simulated/wall/tgmc/window/white/reinf,
+/area/shuttle/escape/centcom)
 "fKy" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -7873,6 +7907,13 @@
 /obj/random/energy,
 /turf/simulated/shuttle/plating,
 /area/skipjack_station/start)
+"iQX" = (
+/obj/structure/shuttle/falsewall_no_join{
+	icon = 'icons/turf/wall_masks_tgmc.dmi';
+	icon_state = "white1"
+	},
+/turf/simulated/wall/tgmc/whitewall,
+/area/shuttle/escape/centcom)
 "iRf" = (
 /obj/machinery/floodlight,
 /turf/simulated/shuttle/plating,
@@ -8167,6 +8208,13 @@
 	icon_state = "dark"
 	},
 /area/wizard_station)
+"jfW" = (
+/obj/structure/shuttle/falsewall_no_join{
+	icon = 'icons/turf/wall_masks_tgmc.dmi';
+	icon_state = "white1"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/arrival/pre_game)
 "jgo" = (
 /obj/item/ore,
 /turf/unsimulated/floor{
@@ -11019,7 +11067,11 @@
 	},
 /area/centcom/main_hall)
 "mhh" = (
-/turf/simulated/wall/tgmc/window/white/reinf,
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_rwindow2"
+	},
+/turf/simulated/floor/plating,
 /area/shuttle/escape/centcom)
 "mhv" = (
 /obj/structure/flora/ausbushes/sparsegrass,
@@ -11613,6 +11665,13 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/shuttle/plating,
 /area/shuttle/merchant/home)
+"mPt" = (
+/obj/structure/shuttle/falsewall_no_join{
+	icon = 'icons/turf/wall_masks_tgmc.dmi';
+	icon_state = "white2"
+	},
+/turf/simulated/wall/tgmc/whitewall,
+/area/shuttle/escape/centcom)
 "mQd" = (
 /obj/structure/table/marble,
 /obj/effect/floor_decal/corner/white/diagonal,
@@ -13596,7 +13655,11 @@
 	},
 /area/centcom/main_hall)
 "pia" = (
-/turf/simulated/wall/tgmc/whitewall,
+/obj/structure/shuttle/falsewall_no_join{
+	icon = 'icons/turf/wall_masks_tgmc.dmi';
+	icon_state = "white2"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
 "piF" = (
 /turf/unsimulated/floor{
@@ -16635,6 +16698,13 @@
 	name = "plating"
 	},
 /area/wizard_station)
+"seQ" = (
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_rwindow1"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/arrival/pre_game)
 "sfb" = (
 /obj/item/reagent_containers/food/drinks/cans/cola,
 /obj/item/reagent_containers/food/drinks/cans/cola,
@@ -18181,6 +18251,13 @@
 /obj/effect/floor_decal/sign/small_f,
 /turf/simulated/floor/holofloor/wood,
 /area/holodeck/source_chess)
+"tPd" = (
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_rwindow2"
+	},
+/turf/simulated/wall/tgmc/window/white/reinf,
+/area/shuttle/escape/centcom)
 "tPB" = (
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
@@ -19018,6 +19095,19 @@
 	},
 /turf/simulated/shuttle/plating,
 /area/skipjack_station/start)
+"uGT" = (
+/obj/structure/bed/chair/shuttle{
+	dir = 4
+	},
+/obj/effect/landmark{
+	name = "JoinLate"
+	},
+/obj/structure/closet/walllocker/emerglocker{
+	pixel_x = -32
+	},
+/obj/effect/floor_decal/milspec/color/white,
+/turf/simulated/floor/tiled/milspec/sterile,
+/area/shuttle/arrival/pre_game)
 "uHS" = (
 /obj/structure/bed/chair/comfy/red{
 	dir = 4
@@ -20196,6 +20286,13 @@
 	icon_state = "dark"
 	},
 /area/centcom/specops)
+"vXp" = (
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_rwindow1"
+	},
+/turf/simulated/floor/plating,
+/area/shuttle/escape/centcom)
 "vYZ" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 8
@@ -21413,6 +21510,13 @@
 /obj/structure/window/reinforced,
 /turf/simulated/shuttle/floor/white,
 /area/centcom/evac)
+"xib" = (
+/obj/structure/shuttle/falsewall_no_join/window{
+	icon = 'icons/turf/wall_masks_tgmc_win.dmi';
+	icon_state = "white_window3"
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/arrival/pre_game)
 "xid" = (
 /obj/machinery/dna_scannernew,
 /obj/effect/floor_decal/borderfloorwhite{
@@ -29971,8 +30075,8 @@ lqf
 lqf
 pia
 cbu
-cbu
-pia
+seQ
+jfW
 lqf
 lqf
 tQa
@@ -30229,7 +30333,7 @@ cSk
 rBk
 bAY
 bAY
-rBk
+uGT
 cSk
 cSk
 thM
@@ -30998,9 +31102,9 @@ tgY
 pNX
 dZT
 caf
-caf
-caf
-caf
+xib
+xib
+dmu
 nol
 pNU
 jbe
@@ -32027,8 +32131,8 @@ qzL
 qzL
 pia
 cbu
-cbu
-pia
+seQ
+jfW
 qzL
 qzL
 tQa
@@ -36306,8 +36410,8 @@ gOt
 gOt
 boo
 mhh
-mhh
-boo
+vXp
+bcL
 gnm
 gnm
 eVJ
@@ -38874,10 +38978,10 @@ eVJ
 eVJ
 kuN
 nmf
-boo
-mhh
-mhh
-boo
+mPt
+tPd
+fJP
+iQX
 kuN
 kuN
 eVJ
