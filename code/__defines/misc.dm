@@ -313,6 +313,8 @@ var/global/list/##LIST_NAME = list();\
 
 #define send_link(target, url) target << link(url)
 
+#define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
+
 #define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"
 
 #define SPAN_WARNING(X) "<span class='warning'>[X]</span>"

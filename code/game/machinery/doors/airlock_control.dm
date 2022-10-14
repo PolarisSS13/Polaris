@@ -228,6 +228,8 @@
 	anchored = 1
 	power_channel = ENVIRON
 
+	required_dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
+
 	var/master_tag
 	var/frequency = 1449
 	var/command = "cycle"
