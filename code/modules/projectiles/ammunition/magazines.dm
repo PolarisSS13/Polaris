@@ -135,6 +135,11 @@
 	name = "magazine (.45 BB)"
 	ammo_type = /obj/item/ammo_casing/a45/bb
 
+/obj/item/ammo_magazine/m45/compact
+	name = "compact pistol magazine (.45)"
+	matter = list(MAT_STEEL = 375) //metal costs are very roughly based around 1 .45 casing = 75 metal
+	max_ammo = 5
+
 /obj/item/ammo_magazine/m45uzi
 	name = "stick magazine (.45)"
 	icon_state = "uzi45"

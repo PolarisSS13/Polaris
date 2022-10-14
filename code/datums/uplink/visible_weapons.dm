@@ -138,7 +138,7 @@
 	name = "Combat Shotgun"
 	item_cost = 75
 	path = /obj/item/gun/projectile/shotgun/pump/combat
-	
+
 /datum/uplink_item/item/visible_weapons/semishotgun
 	name = "Semi-Automatic Shotgun"
 	item_cost = 100
@@ -153,6 +153,11 @@
 	name = "Compact Energy Gun"
 	item_cost = 30
 	path = /obj/item/gun/energy/gun/compact
+
+/datum/uplink_item/item/visible_weapons/compact_45
+	name = "Compact .45 pistol"
+	item_cost = 40
+	path = /obj/item/gun/projectile/compact_45
 
 /datum/uplink_item/item/visible_weapons/lasercannon
 	name = "Laser Cannon"

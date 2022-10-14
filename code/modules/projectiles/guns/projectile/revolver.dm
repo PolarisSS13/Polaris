@@ -42,7 +42,7 @@
 	name = "mateba"
 	desc = "This unique looking handgun is named after an Italian company famous for the original manufacture of these revolvers, and pasta kneading machines. Uses .357 rounds." // Yes I'm serious. -Spades
 	icon_state = "mateba"
-	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
+
 
 /obj/item/gun/projectile/revolver/detective
 	name = "revolver"
@@ -71,6 +71,14 @@
 		to_chat(M, "You name the gun [input]. Say hello to your new friend.")
 		return 1
 
+/obj/item/gun/projectile/revolver/gold
+	name = "trophy revolver"
+	desc = "A prestigious engraved version of the MarsTech R1 Snubnose, mass-produced for presentation to long-serving law enforcement personnel upon retirement. Uses .38-Special rounds."
+	icon_state = "detective_gold"
+	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 4)
+	caliber = ".38"
+	ammo_type = /obj/item/ammo_casing/a38
+
 /obj/item/gun/projectile/revolver/detective45
 	name = ".45 revolver"
 	desc = "A basic revolver, popular among some law enforcement agencies for its simple, long-lasting construction, modified for .45 rounds and a seven-shot cylinder."
@@ -79,7 +87,6 @@
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2)
 	ammo_type = /obj/item/ammo_casing/a45/rubber
 	max_shells = 7
-
 
 /obj/item/gun/projectile/revolver/detective45/verb/rename_gun()
 	set name = "Name Gun"
@@ -108,12 +115,14 @@
 	var/mob/M = usr
 	var/list/options = list()
 	options["MarsTech R1 Snubnose"] = "detective"
-	options["ProTek Cowboy"] = "GP100"
 	options["MarsTech Frontiersman Classic"] = "detective_peacemaker"
 	options["MarsTech Frontiersman Shadow"] = "detective_peacemaker_dark"
 	options["MarsTech Panther"] = "detective_panther"
-	options["Jindal Duke"] = "lemat_old"
+	options["ProTek Cowboy"] = "GP100"
+	options["Jindal Duke"] = "lombardi_police"
+	options["Jindal Viscount Snub"] = "detective_black"
 	options["H-H Sindri"] = "webley"
+	options["H-H Brokkr"] = "nagant"
 	options["Lombardi Buzzard"] = "detective_buzzard"
 	options["Lombardi Constable Deluxe 2502"] = "detective_constable"
 	var/choice = input(M,"Choose your sprite!","Resprite Gun") in options
@@ -151,8 +160,8 @@
 /obj/item/gun/projectile/revolver/capgun
 	name = "cap gun"
 	desc = "Looks almost like the real thing! Ages 8 and up."
-	icon_state = "revolver"
-	item_state = "revolver"
+	icon_state = "detective_fitz"
+	item_state = "detective_fitz"
 	caliber = "caps"
 	origin_tech = list(TECH_COMBAT = 1, TECH_MATERIAL = 1)
 	handle_casings = CYCLE_CASINGS
@@ -176,7 +185,7 @@
 	// ToDo: Remove accuracy debuf in exchange for slightly injuring your hand every time you fire it.
 
 /obj/item/gun/projectile/revolver/lemat
-	name = "Mako Revolver"
+	name = "Mako revolver"
 	desc = "The Bishamonten P100 Mako is a 9 shot revolver with a secondary firing barrel loading shotgun shells. For when you really need something dead. A rare yet deadly collector's item. Uses .38-Special and 12g rounds depending on the barrel."
 	description_fluff = "The Bishamonten Company operated from roughly 2150-2280 - the height of the first extrasolar colonisation boom - before filing for bankruptcy and selling off its assets to various companies that would go on to become today’s TSCs. \
 	Focused on sleek ‘futurist’ designs which have largely fallen out of fashion but remain popular with collectors and people hoping to make some quick thalers from replica weapons. \
@@ -269,8 +278,6 @@
 	else
 		. += "It has a secondary barrel that is empty."
 
-
-//Ported from Bay
 /obj/item/gun/projectile/revolver/webley
 	name = "patrol revolver"
 	desc = "A rugged top break revolver commonly issued to members of the SifGuard. Uses .44 magnum rounds."
@@ -288,6 +295,31 @@
 	name = "autorevolver"
 	icon_state = "mosley"
 	desc = "A shiny Fosbery Autococker automatic revolver, with black accents. Marketed as the 'Revolver for the Modern Era'. Uses .44 magnum rounds."
+	description_fluff = null
 	fire_delay = 5.7 //Autorevolver. Also synced with the animation
 	fire_anim = "mosley_fire"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 2)
+
+/obj/item/gun/projectile/revolver/webley/large
+	name = "heavy revolver"
+	desc = "A high-capacity magnum revolver, polished to a mirror shine. Uses .44 magnum rounds."
+	description_fluff = "The Hedberg-Hammarstrom Wyrm was designed as a SifGuard sidearm, but the prototype was rejected in favour of the lighter Althing. \
+	Introduced to the consumer market by popular demand a few years later, the Wyrm has been a hit with collectors ever since."
+	icon_state = "revolver_stainless"
+	max_shells = 8
+
+/obj/item/gun/projectile/revolver/webley/magnetic
+	name = "Auditor revolver"
+	desc = "A high-powered revolver with a electromagnetically assisted firing mechanism for enhanced armor-piercing capability using standard ammunition. Uses .44 magnum rounds."
+	description_fluff = "The Lawson Arms LAM-2 Auditor is an experimental hybrid design using an electronic firing mechanism to propel standard ballistic ammunition at absurd velocities. \
+	Though prohibitively expensive to both obtain and maintain, the Auditor is a favourite with those particular gunmen with near unlimited budgets."
+	icon_state = "inspector"
+	projectile_type = /obj/item/projectile/bullet/pistol/strong/ap
+	origin_tech = list(TECH_COMBAT = 4, TECH_MATERIAL = 3, TECH_MAGNET = 2)
+
+/obj/item/gun/projectile/revolver/webley/magnetic/update_icon()
+	cut_overlays()
+	if(loaded.len==0)
+		add_overlay("inspector_off")
+	else
+		add_overlay("inspector_on")

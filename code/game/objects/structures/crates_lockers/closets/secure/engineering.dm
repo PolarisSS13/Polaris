@@ -20,6 +20,8 @@
 		/obj/item/radio/headset/heads/ce/alt,
 		/obj/item/storage/toolbox/mechanical,
 		/obj/item/clothing/suit/storage/hazardvest,
+		/obj/item/clothing/head/hardhat/firefighter/chief,
+		/obj/item/clothing/suit/fire/atmos,
 		/obj/item/clothing/mask/gas,
 		/obj/item/multitool,
 		/obj/item/storage/belt/utility/chief/full,
@@ -100,8 +102,8 @@
 
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
-		/obj/item/clothing/suit/fire/firefighter,
-		/obj/item/clothing/head/hardhat/red,
+		/obj/item/clothing/suit/fire/atmos,
+		/obj/item/clothing/head/hardhat/firefighter,
 		/obj/item/flashlight,
 		/obj/item/extinguisher,
 		/obj/item/clamp,

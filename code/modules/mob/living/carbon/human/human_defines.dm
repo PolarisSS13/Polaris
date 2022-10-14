@@ -154,3 +154,5 @@
 
 	// Custom Species Name
 	var/custom_species
+
+	dexterity = MOB_DEXTERITY_FULL

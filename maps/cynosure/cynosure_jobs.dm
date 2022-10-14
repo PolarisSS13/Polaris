@@ -202,6 +202,7 @@ var/global/const/access_explorer = 43
 				continue
 			chosen_template.load(T, centered = TRUE)
 			admin_notice("Crash survivor placed \"[chosen_template.name]\" at ([T.x], [T.y], [T.z])\n", R_DEBUG)
+			break
 
 		// Rebuild the spawn point list now that one has been spawned.
 		existing_points = get_existing_spawn_points()

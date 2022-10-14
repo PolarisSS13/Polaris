@@ -55,7 +55,7 @@
 	options["NT Mk. 58"] = "secguncomp"
 	options["NT Mk. 58 Custom"] = "secgundark"
 	options["MarsTech P11 Spur"] = "colt"
-	options["MarsTech P59 Massif"] = "fnseven"
+	options["MarsTech P59 Massif"] = "civil"
 	options["ProTek YC9"] = "usp"
 	options["ProTek Minx"] = "VP78"
 	options["Jindal T15 Chooha"] = "p08"
@@ -232,9 +232,22 @@
 /obj/item/gun/projectile/pistol/update_icon()
 	..()
 	if(silenced)
-		icon_state = "pistol-silencer"
+		if(ammo_magazine)
+			icon_state = "[initial(icon_state)]-silencer"
+		else
+			icon_state = "[initial(icon_state)]-silencer-e"
 	else
-		icon_state = "pistol"
+		if(ammo_magazine)
+			icon_state = "[initial(icon_state)]"
+		else
+			icon_state = "[initial(icon_state)]-e"
+
+/obj/item/gun/projectile/pistol/alt
+	name = "compact government pistol"
+	desc = "The Jindal PF. A compact, easily concealable gun, though it's only compatible with compact magazines. Uses 9mm rounds."
+	description_fluff = "The Jindal Arms PF was the company's first entry into the compact pistols market, and has served as the standard issue firearm \
+	of Tau Ceti government security forces since their consolidation in 2332."
+	icon_state = "compact"
 
 /obj/item/silencer
 	name = "silencer"
@@ -246,7 +259,7 @@
 /obj/item/gun/projectile/pirate
 	name = "zip gun"
 	desc = "Little more than a barrel, handle, and firing mechanism, cheap makeshift firearms like this one are not uncommon in frontier systems."
-	icon_state = "sawnshotgun"
+	icon_state = "zipgun"
 	item_state = "sawnshotgun"
 	handle_casings = CYCLE_CASINGS //player has to take the old casing out manually before reloading
 	load_method = SINGLE_CASING
@@ -340,3 +353,27 @@
 
 /obj/item/gun/projectile/p92x/large
 	magazine_type = /obj/item/ammo_magazine/m9mm/large // Spawns with illegal magazines.
+
+/obj/item/gun/projectile/compact_45
+	name = "compact .45 pistol"
+	desc = "A compact and easily concealable gun with surprising firepower, though it's only compatible with compact magazines. Uses .45 rounds."
+	description_fluff = "The MarsTech Ecureuil is the company's most popular compact .45 model. Perhaps best known as the official service pistol of the Free Relan Federation, despite a notoriously low magazine capacity."
+	icon_state = "ecureuil"
+	item_state = null
+	w_class = ITEMSIZE_SMALL
+	magazine_type = /obj/item/ammo_magazine/m45/compact
+	allowed_magazines = list(/obj/item/ammo_magazine/m45/compact)
+	projectile_type = /obj/item/projectile/bullet/pistol/medium
+	caliber = ".45"
+	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3)
+	load_method = MAGAZINE
+
+/obj/item/gun/projectile/compact_45/update_icon()
+	..()
+	if(ammo_magazine)
+		icon_state = "[initial(icon_state)]"
+	else
+		icon_state = "[initial(icon_state)]-e"
+
+/obj/item/gun/projectile/compact_45/tactical
+	icon_state = "tac_ecureuil"

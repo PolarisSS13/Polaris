@@ -37,47 +37,48 @@
 	QDEL_NULL(attached_radio)
 	QDEL_NULL(attached_gps)
 	QDEL_NULL(attached_plate)
-	. = ..()
+	return ..()
 
-/obj/item/storage/internal/animal_harness/attackby(obj/item/W, mob/user)
 
-	// Sanity check for some stuff below.
-	if(!istype(loc, /mob/living/simple_mob/animal/sif/grafadreka/trained))
+/obj/item/storage/internal/animal_harness/attackby(obj/item/W, mob/user, silent)
+	if (user == loc) // Drakes can't attach stuff to themselves, only shove it in their storage.
 		return ..()
-
-	// Attach a tracker.
-	if(istype(W, /obj/item/gps))
-		if(attached_gps)
-			to_chat(user, SPAN_WARNING("There is already \a [attached_gps] attached to \the [loc]'s harness."))
-		else if(user.unEquip(W))
+	if (!istype(loc, /mob/living/simple_mob/animal/sif/grafadreka/trained)) // Only allow attaching behaviors when worn by an appropriate subject.
+		return ..()
+	if (istype(W, /obj/item/gps)) // Attach a tracker.
+		if (attached_gps)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("There is already \a [attached_gps] attached to \the [loc]'s harness."))
+		else if (user.unEquip(W))
 			W.forceMove(loc)
-			user.visible_message(SPAN_NOTICE("\The [user] attaches \the [W] to \the [loc]'s harness."))
+			if (!silent)
+				user.visible_message(SPAN_NOTICE("\The [user] attaches \the [W] to \the [loc]'s harness."))
 			attached_gps = W
 		return TRUE
-
-	// Attach a radio.
-	if(istype(W, /obj/item/radio))
-		if(attached_radio)
-			to_chat(user, SPAN_WARNING("There is already \a [attached_radio] attached to \the [loc]'s harness."))
-		else if(user.unEquip(W))
+	if (istype(W, /obj/item/radio)) // Attach a radio.
+		if (attached_radio)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("There is already \a [attached_radio] attached to \the [loc]'s harness."))
+		else if (user.unEquip(W))
 			W.forceMove(loc)
-			user.visible_message(SPAN_NOTICE("\The [user] attaches \the [W] to \the [loc]'s harness."))
+			if (!silent)
+				user.visible_message(SPAN_NOTICE("\The [user] attaches \the [W] to \the [loc]'s harness."))
 			attached_radio = W
 		return TRUE
-
-	// Attach an armor plate.
-	if(istype(W, /obj/item/clothing/accessory/armor) || istype(W, /obj/item/clothing/accessory/material/makeshift))
-		if(attached_plate)
-			to_chat(user, SPAN_WARNING("There is already \a [attached_plate] inside \the [loc]'s harness."))
-		else if(user.unEquip(W))
+	if (istype(W, /obj/item/clothing/accessory/armor) || istype(W, /obj/item/clothing/accessory/material/makeshift)) // Attach an armor plate.
+		if (attached_plate)
+			if (!silent)
+				to_chat(user, SPAN_WARNING("There is already \a [attached_plate] inside \the [loc]'s harness."))
+		else if (user.unEquip(W))
 			W.forceMove(loc)
-			user.visible_message(SPAN_NOTICE("\The [user] secures \the [W] inside \the [loc]'s harness."))
+			if (!silent)
+				user.visible_message(SPAN_NOTICE("\The [user] secures \the [W] inside \the [loc]'s harness."))
 			attached_plate = W
 			var/mob/living/simple_mob/animal/sif/grafadreka/trained/drake = loc
 			drake.recalculate_armor()
 		return TRUE
+	return ..()
 
-	. = ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/recalculate_armor()
 	armor = list()

@@ -452,3 +452,14 @@
 
 /// Used by human/get_visible_gender(user, force) to return the mob's biological gender
 #define VISIBLE_GENDER_FORCE_BIOLOGICAL 3
+
+
+// Dexterity levels for mob/proc/check_dexterity
+#define MOB_DEXTERITY_NONE 0
+#define MOB_DEXTERITY_SIMPLE_MACHINES 10
+#define MOB_DEXTERITY_KEYBOARDS 20
+#define MOB_DEXTERITY_TOUCHSCREENS 30
+#define MOB_DEXTERITY_GRIP 40
+#define MOB_DEXTERITY_WEAPONS 50
+#define MOB_DEXTERITY_COMPLEX_TOOLS 60
+#define MOB_DEXTERITY_FULL 70
