@@ -12,6 +12,7 @@
 /datum/gear/uniform/cheongsam
 	description = "Various color variations of an old earth dress style. They are pretty close fitting around the waist."
 	display_name = "cheongsam selection"
+	path = /obj/item/clothing/under/cheongsam
 
 /datum/gear/uniform/cheongsam/New()
 	..()
@@ -24,6 +25,7 @@
 /datum/gear/uniform/croptop
 	description = "Light shirts which shows the midsection of the wearer."
 	display_name = "croptop selection"
+	path = /obj/item/clothing/under/croptop
 
 /datum/gear/uniform/croptop/New()
 	..()
@@ -42,15 +44,20 @@
 	path = /obj/item/clothing/under/kilt
 
 /datum/gear/uniform/cuttop
-	display_name = "cut top, grey"
+	display_name = "cut top selection"
+	description = "Loose, low-cut shirts with matching shorts."
 	path = /obj/item/clothing/under/cuttop
 
-/datum/gear/uniform/cuttop/red
-	display_name = "cut top, red"
-	path = /obj/item/clothing/under/cuttop/red
+/datum/gear/uniform/cuttop/New()
+	..()
+	var/cuttoptype = list()
+	cuttoptype["cut top, grey"] = /obj/item/clothing/under/cuttop
+	cuttoptype["cut top, red"] = /obj/item/clothing/under/cuttop/red
+	gear_tweaks += new/datum/gear_tweak/path(cuttoptype)
 
 /datum/gear/uniform/jumpsuit
 	display_name = "jumpclothes selection"
+	description = "Basic solid-colour durable jumpsuits."
 	path = /obj/item/clothing/under/color/grey
 
 /datum/gear/uniform/jumpsuit/New()
@@ -63,6 +70,7 @@
 
 /datum/gear/uniform/colorable_jumpsuit
 	display_name = "jumpsuit, colorable"
+	description = "A durable jumpsuit, in any colour."
 	path = /obj/item/clothing/under/colorable
 
 /datum/gear/uniform/colorable_jumpsuit/New()
@@ -87,6 +95,7 @@
 
 /datum/gear/uniform/skirt
 	display_name = "skirt, selection"
+	description = "Skirts to cover your lower body, in various styles."
 	path = /obj/item/clothing/under/skirt
 
 /datum/gear/uniform/skirt/New()
@@ -99,6 +108,7 @@
 
 /datum/gear/uniform/pants
 	display_name = "pants, selection"
+	description = "A variety of pants, jeans, chaps, and other long-legged lower body apparel."
 	path = /obj/item/clothing/under/pants/white
 
 /datum/gear/uniform/pants/New()
@@ -111,6 +121,7 @@
 
 /datum/gear/uniform/shorts
 	display_name = "shorts, selection"
+	description = "A variety of shorts, jorts, and other short-legged lower body apparel."
 	path = /obj/item/clothing/under/shorts/jeans
 
 /datum/gear/uniform/shorts/New()
@@ -144,6 +155,7 @@
 
 /datum/gear/uniform/job_turtle
 	display_name = "turtleneck, departmental selection"
+	description = "High-necked sweaters in a variety of departmental colours."
 	path = /obj/item/clothing/under/rank/scientist/turtleneck
 
 /datum/gear/uniform/job_turtle/New()
@@ -177,6 +189,7 @@
 
 /datum/gear/uniform/suit_lawyer
 	display_name = "suit, one-piece selection"
+	description = "A selection of suits without removable jackets."
 	path = /obj/item/clothing/under/lawyer
 
 /datum/gear/uniform/suit_lawyer/New()
@@ -189,6 +202,7 @@
 
 /datum/gear/uniform/suit_jacket
 	display_name = "suit, modular selection"
+	description = "A selection of suits with removable jackets, waistcoats, etc."
 	path = /obj/item/clothing/under/suit_jacket
 
 /datum/gear/uniform/suit_jacket/New()
@@ -221,6 +235,7 @@
 
 /datum/gear/uniform/scrub
 	display_name = "scrubs selection"
+	description = "Medical gear made of a special fiber that provides minor protection against biohazards."
 	path = /obj/item/clothing/under/rank/medical/scrubs
 
 /datum/gear/uniform/scrub/New()
@@ -262,6 +277,7 @@
 
 /datum/gear/uniform/uniform_security
 	display_name = "uniform, security selection"
+	description = "A selection of standard uniforms for security officers and detectives."
 	path = /obj/item/clothing/under/rank/security/corp
 	allowed_roles = list("Security Officer","Head of Security","Warden", "Detective")
 
@@ -277,6 +293,7 @@
 
 /datum/gear/uniform/uniform_warden
 	display_name = "uniform, warden selection"
+	description = "A selection of standard uniforms for security wardens."
 	path = /obj/item/clothing/under/rank/warden/corp
 	allowed_roles = list("Head of Security","Warden")
 
@@ -290,6 +307,7 @@
 
 /datum/gear/uniform/uniform_hos
 	display_name = "uniform, head of security selection"
+	description = "A selection of standard uniforms for heads of security."
 	path = /obj/item/clothing/under/rank/security/corp
 	allowed_roles = list("Head of Security")
 
@@ -303,6 +321,7 @@
 
 /datum/gear/uniform/uniform_hop
 	display_name = "uniform, head of personnel selection"
+	description = "A selection of formal uniforms for the Head of Personnel."
 	path = /obj/item/clothing/under/rank/security/corp
 	allowed_roles = list("Head of Personnel")
 
@@ -355,6 +374,7 @@
 
 /datum/gear/uniform/dresses/maid
 	display_name = "uniform, maid selection"
+	description = "A variety of maid uniform styles."
 	path = /obj/item/clothing/under/dress/maid
 
 /datum/gear/uniform/dresses/maid/New()
@@ -367,6 +387,7 @@
 
 /datum/gear/uniform/utility
 	display_name = "jumpsuit, utility selection"
+	description = "A selection of especially hard-wearing jumpclothes for heavy duties."
 	path = /obj/item/clothing/under/utility
 
 /datum/gear/uniform/utility/New()
@@ -392,12 +413,13 @@
 
 /datum/gear/uniform/brandsuit
 	display_name = "jumpsuit/uniform, corporate selection"
+	description = "Liveried durable jumpclothes and other Trans-Stellar corporate uniforms."
 	path = /obj/item/clothing/under/corp/aether
 
 /datum/gear/uniform/brandsuit/New()
 	..()
 	var/list/brandsuits = list()
-	for(var/brandsuit in typesof(/obj/item/clothing/under/corp, /obj/item/clothing/under/hedbergtech))
+	for(var/brandsuit in typesof(/obj/item/clothing/under/corp, /obj/item/clothing/under/hedbergtech) - /obj/item/clothing/under/corp)
 		var/obj/item/clothing/under/corp/brandsuit_type = brandsuit
 		brandsuits[initial(brandsuit_type.name)] = brandsuit_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(brandsuits))
@@ -462,11 +484,11 @@
 	path = /obj/item/clothing/under/dress/sari/green
 
 /datum/gear/uniform/wrappedcoat
-	display_name = "modern wrapped coat"
+	display_name = "outfit, modern wrapped coat"
 	path = /obj/item/clothing/under/moderncoat
 
 /datum/gear/uniform/ascetic
-	display_name = "plain ascetic garb"
+	display_name = "outfit, plain ascetic garb"
 	path = /obj/item/clothing/under/ascetic
 
 /datum/gear/uniform/pleated
@@ -518,7 +540,7 @@
 	path =/obj/item/clothing/under/dress/goldwrap
 
 /datum/gear/uniform/pinktutu
-	display_name = "pink tutu"
+	display_name = "skirt, pink tutu"
 	path = /obj/item/clothing/under/dress/pinktutu
 
 /datum/gear/uniform/festivedress
@@ -562,7 +584,7 @@
 	path = /obj/item/clothing/under/cyberpunkharness
 
 /datum/gear/uniform/cyberpunkpants
-	display_name = "cyberpunk split-side ensemble"
+	display_name = "outfit, cyberpunk split-side ensemble"
 	path = /obj/item/clothing/under/cyberpunkpants
 
 /datum/gear/uniform/whitegown

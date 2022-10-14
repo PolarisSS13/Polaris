@@ -13,6 +13,8 @@ var/global/list/floor_light_cache = list()
 	power_channel = LIGHT
 	matter = list(DEFAULT_WALL_MATERIAL = 2500, "glass" = 2750)
 
+	required_dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
+
 	var/on
 	var/damaged
 	var/default_light_range = 4

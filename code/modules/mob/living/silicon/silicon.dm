@@ -27,6 +27,8 @@
 
 	var/hudmode = null
 
+	dexterity = MOB_DEXTERITY_FULL
+
 /mob/living/silicon/Initialize()
 	silicon_mob_list |= src
 	. = ..()

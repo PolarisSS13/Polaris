@@ -200,6 +200,7 @@
 	anchored = 1
 	var/speed_active = FALSE // are the linked conveyors on SSfastprocess?
 
+	required_dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
 
 
 /obj/machinery/conveyor_switch/Initialize()

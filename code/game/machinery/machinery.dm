@@ -114,6 +114,9 @@ Class Procs:
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
+	required_dexterity = MOB_DEXTERITY_TOUCHSCREENS
+
+
 /obj/machinery/Initialize(var/ml, d=0)
 	. = ..()
 	if(d)
@@ -233,14 +236,14 @@ Class Procs:
 	else
 		return attack_hand(user)
 
+
 /obj/machinery/attack_hand(mob/user as mob)
 
 	if(inoperable(MAINT))
 		return 1
 	if(user.lying || user.stat)
 		return 1
-	if(!(istype(user, /mob/living/carbon/human) || istype(user, /mob/living/silicon)))
-		to_chat(user, "<span class='warning'>You don't have the dexterity to do this!</span>")
+	if (!user.check_dexterity(required_dexterity, src))
 		return 1
 	if(ishuman(user))
 		var/mob/living/carbon/human/H = user

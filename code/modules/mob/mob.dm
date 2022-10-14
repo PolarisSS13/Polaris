@@ -83,7 +83,9 @@
 			exclude_mobs |= src
 		else
 			exclude_mobs = list(src)
-		src.show_message(self_message, 1, blind_message, 2)
+		show_message(self_message, 1, blind_message, 2)
+		if (runemessage)
+			create_chat_message(src, "[runemessage]", FALSE, list("emote"), audible = FALSE)
 	// Transfer messages about what we are doing to upstairs
 	if(shadow)
 		shadow.visible_message(message, self_message, blind_message, exclude_mobs, range)
@@ -1195,3 +1197,12 @@
 	var/datum/reagents/R = new /datum/reagents(amount)
 	. = holder.trans_to_holder(R, amount, multiplier, copy)
 	R.touch_mob(src)
+
+
+/// Check the mob's dexterity var against a required level from MOB_DEXTERITY_*, optionally sending a message with optional target specificity.
+/mob/proc/check_dexterity(required_level, atom/target, silent)
+	if (dexterity < required_level)
+		if (!silent)
+			to_chat(src, SPAN_WARNING("You aren't dextrous enough to [target ? "use \the [target]" : "do that"]."))
+		return FALSE
+	return TRUE
