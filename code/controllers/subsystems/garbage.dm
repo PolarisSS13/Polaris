@@ -273,71 +273,73 @@ SUBSYSTEM_DEF(garbage)
 
 // Should be treated as a replacement for the 'del' keyword.
 // Datums passed to this will be given a chance to clean up references to allow the GC to collect them.
-/proc/qdel(datum/D, force=FALSE)
-	if(!istype(D))
-		del(D)
+/proc/qdel(datum/thing, force)
+	if (!thing)
 		return
-	var/datum/qdel_item/I = SSgarbage.items[D.type]
-	if (!I)
-		I = SSgarbage.items[D.type] = new /datum/qdel_item(D.type)
-	I.qdels++
-
-
-	if(isnull(D.gc_destroyed))
-		if(SEND_SIGNAL(D, COMSIG_PARENT_PREQDELETED, force)) // Give the components a chance to prevent their parent from being deleted
+	if (!istype(thing))
+		crash_with("qdel() can only handle /datum (sub)types, was passed: [log_info_line(thing)]")
+		del(thing)
+		return
+	var/datum/qdel_item/qdel_item = SSgarbage.items[thing.type]
+	if (!qdel_item)
+		qdel_item = new (thing.type)
+		SSgarbage.items[thing.type] = qdel_item
+	qdel_item.qdels++
+	if (isnull(thing.gc_destroyed))
+		if (SEND_SIGNAL(thing, COMSIG_PARENT_PREQDELETED, force)) // Give the components a chance to prevent their parent from being deleted
 			return
-		D.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
+		thing.gc_destroyed = GC_CURRENTLY_BEING_QDELETED
 		var/start_time = world.time
 		var/start_tick = world.tick_usage
-		SEND_SIGNAL(D, COMSIG_PARENT_QDELETING, force) // Let the (remaining) components know about the result of Destroy
-		var/hint = D.Destroy(force) // Let our friend know they're about to get fucked up.
-		if(world.time != start_time)
-			I.slept_destroy++
+		SEND_SIGNAL(thing, COMSIG_PARENT_QDELETING, force) // Let the (remaining) components know about the result of Destroy
+		var/hint = thing.Destroy(force) // Let our friend know they're about to get fucked up.
+		if (world.time != start_time)
+			qdel_item.slept_destroy++
 		else
-			I.destroy_time += TICK_USAGE_TO_MS(start_tick)
-		if(!D)
+			qdel_item.destroy_time += TICK_USAGE_TO_MS(start_tick)
+		if (!thing)
 			return
-		switch(hint)
+		switch (hint)
 			if (QDEL_HINT_QUEUE)		//qdel should queue the object for deletion.
-				SSgarbage.PreQueue(D)
+				SSgarbage.PreQueue(thing)
 			if (QDEL_HINT_IWILLGC)
-				D.gc_destroyed = world.time
+				thing.gc_destroyed = world.time
 				return
 			if (QDEL_HINT_LETMELIVE)	//qdel should let the object live after calling destory.
 				if(!force)
-					D.gc_destroyed = null //clear the gc variable (important!)
+					thing.gc_destroyed = null //clear the gc variable (important!)
 					return
 				// Returning LETMELIVE after being told to force destroy
 				// indicates the objects Destroy() does not respect force
-				#ifdef TESTING
-				if(!I.no_respect_force)
-					crash_with("[D.type] has been force deleted, but is \
+#ifdef TESTING
+				if(!qdel_item.no_respect_force)
+					crash_with("[thing.type] has been force deleted, but is \
 						returning an immortal QDEL_HINT, indicating it does \
 						not respect the force flag for qdel(). It has been \
 						placed in the queue, further instances of this type \
 						will also be queued.")
-				#endif
-				I.no_respect_force++
-
-				SSgarbage.PreQueue(D)
+#endif
+				qdel_item.no_respect_force++
+				SSgarbage.PreQueue(thing)
 			if (QDEL_HINT_HARDDEL)		//qdel should assume this object won't gc, and queue a hard delete using a hard reference to save time from the locate()
-				SSgarbage.HardQueue(D)
+				SSgarbage.HardQueue(thing)
 			if (QDEL_HINT_HARDDEL_NOW)	//qdel should assume this object won't gc, and hard del it post haste.
-				SSgarbage.HardDelete(D)
+				SSgarbage.HardDelete(thing)
 			if (QDEL_HINT_FINDREFERENCE)//qdel will, if TESTING is enabled, display all references to this object, then queue the object for deletion.
-				SSgarbage.PreQueue(D)
+				SSgarbage.PreQueue(thing)
 				#ifdef TESTING
-				D.find_references()
+				thing.find_references()
 				#endif
 			else
 				#ifdef TESTING
-				if(!I.no_hint)
-					crash_with("[D.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
+				if (!qdel_item.no_hint)
+					crash_with("[thing.type] is not returning a qdel hint. It is being placed in the queue. Further instances of this type will also be queued.")
 				#endif
-				I.no_hint++
-				SSgarbage.PreQueue(D)
-	else if(D.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
-		CRASH("[D.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
+				qdel_item.no_hint++
+				SSgarbage.PreQueue(thing)
+	else if (thing.gc_destroyed == GC_CURRENTLY_BEING_QDELETED)
+		CRASH("[thing.type] destroy proc was called multiple times, likely due to a qdel loop in the Destroy logic")
+
 
 #ifdef TESTING
 

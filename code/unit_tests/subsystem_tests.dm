@@ -35,7 +35,7 @@
 	var/fail = FALSE
 	for(var/atom/atom in world)
 		if(!atom.initialized && !QDELETED(atom)) // Not ideal to skip over qdeleted atoms, but a lot of current code uses pre-init qdels
-			log_bad("Uninitialized atom: [atom.type] - [atom.log_info_line()]")
+			log_bad("Uninitialized atom: [atom.type] - [atom.get_log_info_line()]")
 			fail = TRUE
 	if(fail)
 		fail("There were uninitialized atoms.")
