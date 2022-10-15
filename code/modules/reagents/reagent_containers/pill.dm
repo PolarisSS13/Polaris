@@ -91,27 +91,16 @@
 
 	return
 
-/obj/item/reagent_containers/pill/attackby(obj/item/W as obj, mob/user as mob)
-	if(is_sharp(W))
-		var/obj/item/reagent_containers/powder/J = new /obj/item/reagent_containers/powder(src.loc)
-		user.visible_message("<span class='warning'>[user] gently cuts up [src] with [W]!</span>")
-		playsound(src.loc, 'sound/effects/chop.ogg', 50, 1)
-
-		if(reagents)
-			reagents.trans_to_obj(J, reagents.total_volume)
-		J.get_appearance()
+/obj/item/reagent_containers/pill/attackby(obj/item/item, mob/living/user)
+	if (is_sharp(item) || istype(item, /obj/item/card))
+		user.visible_message(
+			SPAN_ITALIC("\The [user] cuts up \a [src] with \a [item]."),
+			SPAN_ITALIC("You cut up \the [src] with \the [item].")
+		)
+		playsound(loc, 'sound/effects/chop.ogg', 50, 1)
+		new /obj/item/reagent_containers/powder (loc, reagents)
 		qdel(src)
-
-	if(istype(W, /obj/item/card/id))
-		var/obj/item/reagent_containers/powder/J = new /obj/item/reagent_containers/powder(src.loc)
-		user.visible_message("<span class='warning'>[user] clumsily chops up [src] with [W]!</span>")
-		playsound(src.loc, 'sound/effects/chop.ogg', 50, 1)
-
-		if(reagents)
-			reagents.trans_to_obj(J, reagents.total_volume)
-		J.get_appearance()
-		qdel(src)
-
+		return TRUE
 	return ..()
 
 ////////////////////////////////////////////////////////////////////////////////
