@@ -20,11 +20,11 @@
 
 /datum/gear/utility/communicator/New()
 	..()
-	var/list/communicators = list()
-	for(var/communicator in typesof(/obj/item/communicator) - list(/obj/item/communicator/integrated))
-		var/obj/item/communicator_type = communicator
-		communicators[initial(communicator_type.name)] = communicator_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(communicators))
+	var/commtype = list()
+	commtype["communicator"] = /obj/item/communicator
+	commtype["communicator, watch"] = /obj/item/communicator/watch
+	commtype["communicator, sleek"] = /obj/item/communicator/sleek
+	gear_tweaks += new/datum/gear_tweak/path(commtype)
 
 /datum/gear/utility/camera
 	display_name = "camera"

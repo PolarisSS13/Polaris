@@ -133,10 +133,10 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Description: Shows all the voice mobs inside the device, and their status.
 /obj/item/communicator/examine(mob/user)
 	. = ..()
-	
+
 	for(var/mob/living/voice/voice in contents)
 		. += "<span class='notice'>On the screen, you can see a image feed of [voice].</span>"
-		
+
 		if(voice && voice.key)
 			switch(voice.stat)
 				if(CONSCIOUS)
@@ -363,3 +363,27 @@ var/global/list/obj/item/communicator/all_communicators = list()
 
 	icon_state = initial(icon_state)
 
+/obj/item/communicator/sleek
+	desc = "A personal device used to enable long range dialog between two people, utilizing existing telecommunications infrastructure to allow \
+	communications across different stations, planets, or even star systems. This one has a large, sleek touch screen."
+	icon = 'icons/obj/device.dmi'
+	pickup_sound = 'sound/items/pickup/device.ogg'
+	drop_sound = 'sound/items/drop/device.ogg'
+	icon_state = "commsleek"
+	note = "Thank you for choosing the T-17.4 Communicator, this is your notepad!" //Current note in the notepad function
+
+
+/obj/item/communicator/sleek/update_icon()
+	if(video_source)
+		icon_state = "commsleek-video"
+		return
+
+	if(voice_mobs.len || communicating.len)
+		icon_state = "commsleek-active"
+		return
+
+	if(alert_called)
+		icon_state = "commsleek-called"
+		return
+
+	icon_state = initial(icon_state)
