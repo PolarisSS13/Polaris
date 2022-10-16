@@ -226,6 +226,7 @@
 #include "code\controllers\subsystems\garbage.dm"
 #include "code\controllers\subsystems\holomaps.dm"
 #include "code\controllers\subsystems\inactivity.dm"
+#include "code\controllers\subsystems\init_misc_early.dm"
 #include "code\controllers\subsystems\input.dm"
 #include "code\controllers\subsystems\job.dm"
 #include "code\controllers\subsystems\lighting.dm"
