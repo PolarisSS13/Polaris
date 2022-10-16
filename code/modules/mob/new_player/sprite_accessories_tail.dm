@@ -218,11 +218,6 @@
 	icon_state = "sogtail_s"
 	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
-/datum/sprite_accessory/tail/special/unathi
-	name = "unathi tail"
-	icon_state = "sogtail_s"
-	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
-
 /datum/sprite_accessory/tail/special/unathi_damaged
 	name = "unathi tail, damaged"
 	icon_state = "unathitail_damaged_s"
