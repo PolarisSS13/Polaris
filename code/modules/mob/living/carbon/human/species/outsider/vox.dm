@@ -14,6 +14,7 @@
 		/datum/unarmed_attack/claws/strong,
 		/datum/unarmed_attack/bite/strong
 	)
+
 	rarity_value = 5
 	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
 	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
@@ -39,9 +40,6 @@
 	female_cough_sounds = list('sound/voice/shriekcough.ogg')
 	male_sneeze_sound = 'sound/voice/shrieksneeze.ogg'
 	female_sneeze_sound = 'sound/voice/shrieksneeze.ogg'
-
-	warning_low_pressure = 50
-	hazard_low_pressure = 0
 
 	cold_level_1 = 210	//Default 260
 	cold_level_2 = 150	//Default 200
@@ -98,6 +96,8 @@
 	default_emotes = list(
 		/decl/emote/audible/vox_shriek
 	)
+	inherent_verbs = list(/mob/living/carbon/human/proc/toggle_vox_pressure_seal)
+	var/list/current_pressure_toggle = list()
 
 /datum/species/vox/get_random_name(var/gender)
 	var/datum/language/species_language = GLOB.all_languages[default_language]
@@ -106,3 +106,57 @@
 /datum/species/vox/equip_survival_gear(var/mob/living/carbon/human/H, var/extendedtank = 0,var/comprehensive = 0)
 	. = ..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/mask/gas/vox(H), slot_wear_mask)
+
+/datum/species/vox/get_slowdown(var/mob/living/carbon/human/H)
+	if(current_pressure_toggle["\ref[H]"])
+		return 1.5
+	return ..()
+
+/datum/species/vox/get_warning_low_pressure(var/mob/living/carbon/human/H)
+	if(current_pressure_toggle["\ref[H]"])
+		return 50
+	return ..()
+
+/datum/species/vox/get_hazard_low_pressure(var/mob/living/carbon/human/H)
+	if(current_pressure_toggle["\ref[H]"])
+		return 0
+	return ..()
+
+/mob/living/carbon/human/proc/toggle_vox_pressure_seal()
+	set name = "Toggle Vox Pressure Seal"
+	set category = "Abilities"
+	set src = usr
+
+	if(!istype(species, /datum/species/vox))
+		verbs -= /mob/living/carbon/human/proc/toggle_vox_pressure_seal
+		return
+
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
+		to_chat(src, SPAN_WARNING("You are in no state to do that."))
+		return
+
+	var/datum/gender/G = gender_datums[get_visible_gender()]
+	visible_message(SPAN_NOTICE("\The [src] begins flexing and realigning [G.his] scaling..."))
+	if(!do_after(src, 2 SECONDS, src, FALSE))
+		visible_message(
+			SPAN_NOTICE("\The [src] ceases adjusting [G.his] scaling."),
+			self_message = SPAN_WARNING("You must remain still to seal or unseal your scaling."))
+		return
+
+	if(incapacitated(INCAPACITATION_KNOCKOUT))
+		to_chat(src, SPAN_WARNING("You are in no state to do that."))
+		return
+
+	// TODO: maybe add cold and heat thresholds to this.
+	var/my_ref = "\ref[src]"
+	var/datum/species/vox/kikiki = species
+	if((kikiki.current_pressure_toggle[my_ref] = !kikiki.current_pressure_toggle[my_ref]))
+		visible_message(
+			SPAN_NOTICE("\The [src]'s scaling flattens and smooths out."),
+			self_message = SPAN_NOTICE("You flatten your scaling and inflate internal bladders, protecting yourself against low pressure at the cost of dexterity.")
+		)
+	else
+		visible_message(
+			SPAN_NOTICE("\The [src]'s scaling bristles roughly."),
+			self_message = SPAN_NOTICE("You bristle your scaling and deflate your internal bladders, restoring mobility but leaving yourself vulnerable to low pressure.")
+		)

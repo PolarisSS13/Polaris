@@ -1147,8 +1147,6 @@
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/effect/floor_decal/steeldecal/steel_decals_central7{
 	dir = 8
 	},
@@ -1168,6 +1166,8 @@
 	},
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
 /turf/simulated/floor/tiled,
 /area/surface/station/arrivals/cynosure)
 "aGP" = (
@@ -2610,12 +2610,12 @@
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/item/melee/umbrella/random{
 	pixel_y = -4
 	},
 /obj/item/melee/umbrella/random,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
 /turf/simulated/floor/tiled,
 /area/surface/station/arrivals/cynosure)
 "bkP" = (
@@ -27785,6 +27785,12 @@
 	name = "Biohazard Shutter"
 	},
 /obj/structure/closet/emcloset,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
+/obj/item/clothing/shoes/boots/winter,
+/obj/item/clothing/shoes/boots/winter,
+/obj/item/melee/umbrella/random,
+/obj/item/melee/umbrella/random,
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/rnd/hallway/gnd)
 "mHN" = (
@@ -35441,12 +35447,12 @@
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/item/melee/umbrella/random{
 	pixel_y = -4
 	},
 /obj/item/melee/umbrella/random,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
 /turf/simulated/floor/tiled,
 /area/surface/station/arrivals/cynosure)
 "pVb" = (
@@ -42243,9 +42249,8 @@
 /obj/item/melee/umbrella/random{
 	pixel_y = -4
 	},
-/obj/effect/floor_decal/arrows,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/groundfloor/south)
 "sWe" = (
@@ -50374,14 +50379,14 @@
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/shoes/boots/winter,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
-/obj/item/clothing/suit/storage/hooded/wintercoat,
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
 /obj/machinery/camera/network/ground_floor{
 	c_tag = "Ground Floor - Arrivals North";
 	dir = 8
 	},
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
+/obj/item/clothing/suit/storage/hooded/wintercoat/parka/nanotrasen,
 /turf/simulated/floor/tiled,
 /area/surface/station/arrivals/cynosure)
 "wNJ" = (

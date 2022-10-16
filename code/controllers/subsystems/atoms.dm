@@ -1,159 +1,119 @@
-#define BAD_INIT_QDEL_BEFORE 1
-#define BAD_INIT_DIDNT_INIT 2
-#define BAD_INIT_SLEPT 4
-#define BAD_INIT_NO_HINT 8
-
 SUBSYSTEM_DEF(atoms)
 	name = "Atoms"
 	init_order = INIT_ORDER_ATOMS
 	flags = SS_NO_FIRE
 
-	// override and GetArguments() exists for mod-override/downstream hook functionality.
-	// Useful for total-overhaul type modifications.
-	var/adjust_init_arguments = FALSE
+	// Bad initialization types.
+	var/const/QDEL_BEFORE_INITIALIZE = 1
+	var/const/DID_NOT_SET_INITIALIZED = 2
+	var/const/SLEPT_IN_INITIALIZE = 4
+	var/const/DID_NOT_RETURN_HINT = 8
 
-	var/atom_init_stage = INITIALIZATION_INSSATOMS
-	var/old_init_stage
+	var/static/atom_init_stage = INITIALIZATION_INSSATOMS
+	var/static/old_init_stage
+	var/static/list/late_loaders = list()
+	var/static/list/created_atoms = list()
+	var/static/list/bad_init_calls = list()
 
-	var/list/late_loaders
-	var/list/BadInitializeCalls = list()
 
-/datum/controller/subsystem/atoms/Initialize(timeofday)
-	if(!plant_controller) // Initialize seed repo for /obj/item/seed and /obj/item/grown
-		plant_controller = new
-	setupgenetics() //to set the mutations' place in structural enzymes, so initializers know where to put mutations.
+/datum/controller/subsystem/atoms/Initialize(start_uptime)
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
 	InitializeAtoms()
 
-/datum/controller/subsystem/atoms/proc/InitializeAtoms(var/list/supplied_atoms)
-
-	if(atom_init_stage <= INITIALIZATION_INSSATOMS_LATE)
-		return
-
-	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
-
-	LAZYINITLIST(late_loaders)
-
-	var/list/mapload_arg = list(TRUE)
-	var/count = LAZYLEN(supplied_atoms)
-	if(count)
-		while(supplied_atoms.len)
-			var/atom/A = supplied_atoms[supplied_atoms.len]
-			supplied_atoms.len--
-			if(!A.initialized)
-				InitAtom(A, GetArguments(A, mapload_arg))
-				CHECK_TICK
-	else if(!subsystem_initialized)
-		// If wondering why not just store all atoms in a list and use the block above: that turns out unbearably expensive.
-		// Instead, atoms without extra arguments in New created on server start are fished out of world directly.
-		// We do this exactly once.
-
-		for(var/atom/A in world)
-			if(!A.initialized)
-				InitAtom(A, GetArguments(A, mapload_arg, FALSE))
-				++count
-				CHECK_TICK
-
-	report_progress("Initialized [count] atom\s")
-
-	atom_init_stage = INITIALIZATION_INNEW_REGULAR
-
-	if(late_loaders.len)
-		for(var/I in late_loaders)
-			var/atom/A = I
-			A.LateInitialize(arglist(late_loaders[A]))
-		report_progress("Late initialized [late_loaders.len] atom\s")
-		late_loaders.Cut()
-
-/datum/controller/subsystem/atoms/proc/InitAtom(atom/A, list/arguments)
-	LAZYREMOVE(global.pre_init_created_atoms, A)
-	var/the_type = A.type
-	if(QDELING(A))
-		BadInitializeCalls[the_type] |= BAD_INIT_QDEL_BEFORE
-		return TRUE
-
-	var/start_tick = world.time
-
-	var/result = A.Initialize(arglist(arguments))
-
-	if(start_tick != world.time)
-		BadInitializeCalls[the_type] |= BAD_INIT_SLEPT
-
-	var/qdeleted = FALSE
-
-	if(result != INITIALIZE_HINT_NORMAL)
-		switch(result)
-			if(INITIALIZE_HINT_LATELOAD)
-				if(arguments[1])	//mapload
-					late_loaders[A] = arguments
-				else
-					A.LateInitialize(arglist(arguments))
-			if(INITIALIZE_HINT_QDEL)
-				qdel(A)
-				qdeleted = TRUE
-			else
-				BadInitializeCalls[the_type] |= BAD_INIT_NO_HINT
-
-	if(!A)	//possible harddel
-		qdeleted = TRUE
-	else if(!A.initialized)
-		BadInitializeCalls[the_type] |= BAD_INIT_DIDNT_INIT
-
-	return qdeleted || QDELING(A)
-
-// override and GetArguments() exists for mod-override/downstream hook functionality.
-// Useful for total-overhaul type modifications.
-/atom/proc/AdjustInitializeArguments(list/arguments)
-	// Lists are passed by reference so can simply modify the arguments list without returning it
-
-/datum/controller/subsystem/atoms/proc/GetArguments(atom/A, list/mapload_arg, created=TRUE)
-	if(!created && !adjust_init_arguments)
-		return mapload_arg // Performance optimization. Nothing to do.
-	var/list/arguments = mapload_arg.Copy()
-	var/extra_args = LAZYACCESS(global.pre_init_created_atoms, A)
-	if(created && extra_args)
-		arguments += extra_args
-	if(adjust_init_arguments)
-		A.AdjustInitializeArguments(arguments)
-	return arguments
-
-/datum/controller/subsystem/atoms/stat_entry(msg)
-	..("Bad Initialize Calls:[BadInitializeCalls.len]")
-
-/datum/controller/subsystem/atoms/proc/map_loader_begin()
-	old_init_stage = atom_init_stage
-	atom_init_stage = INITIALIZATION_INSSATOMS_LATE
-
-/datum/controller/subsystem/atoms/proc/map_loader_stop()
-	atom_init_stage = old_init_stage
 
 /datum/controller/subsystem/atoms/Recover()
-	atom_init_stage = SSatoms.atom_init_stage
-	if(atom_init_stage == INITIALIZATION_INNEW_MAPLOAD)
+	created_atoms.Cut()
+	late_loaders.Cut()
+	if (atom_init_stage == INITIALIZATION_INNEW_MAPLOAD)
 		InitializeAtoms()
-	old_init_stage = SSatoms.old_init_stage
-	BadInitializeCalls = SSatoms.BadInitializeCalls
 
-/datum/controller/subsystem/atoms/proc/InitLog()
-	. = ""
-	for(var/path in BadInitializeCalls)
-		. += "Path : [path] \n"
-		var/fails = BadInitializeCalls[path]
-		if(fails & BAD_INIT_DIDNT_INIT)
-			. += "- Didn't call atom/Initialize()\n"
-		if(fails & BAD_INIT_NO_HINT)
-			. += "- Didn't return an Initialize hint\n"
-		if(fails & BAD_INIT_QDEL_BEFORE)
-			. += "- Qdel'd in New()\n"
-		if(fails & BAD_INIT_SLEPT)
-			. += "- Slept during Initialize()\n"
 
 /datum/controller/subsystem/atoms/Shutdown()
 	var/initlog = InitLog()
-	if(initlog)
-		text2file(initlog, "[log_path]-initialize.log")
+	if (!initlog)
+		return
+	text2file(initlog, "[log_path]/initialize.log")
 
-#undef BAD_INIT_QDEL_BEFORE
-#undef BAD_INIT_DIDNT_INIT
-#undef BAD_INIT_SLEPT
-#undef BAD_INIT_NO_HINT
+
+/datum/controller/subsystem/atoms/proc/InitializeAtoms()
+	if (atom_init_stage <= INITIALIZATION_INSSATOMS_LATE)
+		return
+	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
+	var/list/mapload_arg = list(TRUE)
+	var/count = 0
+	var/atom/created
+	var/list/arguments
+	for (var/i = 1 to length(created_atoms))
+		created = created_atoms[i]
+		if (!created.initialized)
+			arguments = created_atoms[created] ? mapload_arg + created_atoms[created] : mapload_arg
+			InitAtom(created, arguments)
+			CHECK_TICK
+	created_atoms.Cut()
+	if (!subsystem_initialized)
+		for (var/atom/atom in world)
+			if (!atom.initialized)
+				InitAtom(atom, mapload_arg)
+				++count
+				CHECK_TICK
+	report_progress("Initialized [count] atom\s")
+	atom_init_stage = INITIALIZATION_INNEW_REGULAR
+	if (!length(late_loaders))
+		return
+	for (var/atom/atom as anything in late_loaders)
+		atom.LateInitialize(arglist(late_loaders[atom]))
+	report_progress("Late initialized [length(late_loaders)] atom\s")
+	late_loaders.Cut()
+
+
+/datum/controller/subsystem/atoms/proc/InitAtom(atom/atom, list/arguments)
+	var/atom_type = atom?.type
+	if (QDELING(atom))
+		bad_init_calls[atom_type] |= QDEL_BEFORE_INITIALIZE
+		return TRUE
+	var/start_tick = world.time
+	var/result = atom.Initialize(arglist(arguments))
+	if (start_tick != world.time)
+		bad_init_calls[atom_type] |= SLEPT_IN_INITIALIZE
+	var/qdeleted = FALSE
+	if (result != INITIALIZE_HINT_NORMAL)
+		switch (result)
+			if (INITIALIZE_HINT_LATELOAD)
+				if (arguments[1])	//mapload
+					late_loaders[atom] = arguments
+				else
+					atom.LateInitialize(arglist(arguments))
+			if (INITIALIZE_HINT_QDEL)
+				qdel(atom)
+				qdeleted = TRUE
+			else
+				bad_init_calls[atom_type] |= DID_NOT_RETURN_HINT
+	if (!atom)
+		qdeleted = TRUE
+	else if (!atom.initialized)
+		bad_init_calls[atom_type] |= DID_NOT_SET_INITIALIZED
+	return qdeleted || QDELING(atom)
+
+
+/datum/controller/subsystem/atoms/proc/BeginMapLoad()
+	old_init_stage = atom_init_stage
+	atom_init_stage = INITIALIZATION_INSSATOMS_LATE
+
+
+/datum/controller/subsystem/atoms/proc/FinishMapLoad()
+	atom_init_stage = old_init_stage
+
+
+/datum/controller/subsystem/atoms/proc/InitLog()
+	. = ""
+	for (var/path in bad_init_calls)
+		. += "Path : [path] \n"
+		var/fails = bad_init_calls[path]
+		if (fails & DID_NOT_SET_INITIALIZED)
+			. += "- Didn't call atom/Initialize()\n"
+		if (fails & DID_NOT_RETURN_HINT)
+			. += "- Didn't return an Initialize hint\n"
+		if (fails & QDEL_BEFORE_INITIALIZE)
+			. += "- Qdel'd in New()\n"
+		if (fails & SLEPT_IN_INITIALIZE)
+			. += "- Slept during Initialize()\n"
