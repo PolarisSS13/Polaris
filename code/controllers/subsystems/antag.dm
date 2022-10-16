@@ -27,11 +27,6 @@ SUBSYSTEM_DEF(antags)
 		var/datum/antagonist/A = new antag_type
 		antag_datums[A.id] = A
 
-/datum/controller/subsystem/antags/Shutdown()
-	for(var/thing in antag_datums)
-		qdel(thing)
-	. = ..()
-
 
 /datum/controller/subsystem/antags/proc/get_antag_id_from_name(var/role_text)
 	for(var/datum/antagonist/A as anything in antag_datums)
