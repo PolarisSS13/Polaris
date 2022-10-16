@@ -62,29 +62,29 @@
 	closet_appearance = /decl/closet_appearance/oxygen/fire
 
 	starts_with = list(
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /obj/structure/closet/firecloset/full
 	starts_with = list(
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /obj/structure/closet/firecloset/full/double
 	starts_with = list(
-		/obj/item/clothing/suit/fire/firefighter = 2,
+		/obj/item/clothing/suit/fire = 2,
 		/obj/item/clothing/mask/gas = 2,
 		/obj/item/flashlight = 2,
 		/obj/item/tank/oxygen/red = 2,
 		/obj/item/extinguisher = 2,
-		/obj/item/clothing/head/hardhat/red = 2)
+		/obj/item/clothing/head/hardhat/firefighter = 2)
 
 /*
  * Tool Closet
@@ -189,12 +189,12 @@
 	door_anim_time = 0 // Unsupported
 
 	starts_with = list(
-		/obj/item/clothing/suit/fire/firefighter,
+		/obj/item/clothing/suit/fire,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flashlight,
 		/obj/item/tank/oxygen/red,
 		/obj/item/extinguisher,
-		/obj/item/clothing/head/hardhat/red)
+		/obj/item/clothing/head/hardhat/firefighter)
 
 /*
  * First Aid

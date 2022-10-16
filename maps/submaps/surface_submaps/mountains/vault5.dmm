@@ -14,7 +14,7 @@
 "d" = (
 /obj/effect/alien/weeds,
 /obj/structure/bed/nest,
-/obj/random/handgun,
+/obj/random/sidearm,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/cave/vault5)
 "e" = (

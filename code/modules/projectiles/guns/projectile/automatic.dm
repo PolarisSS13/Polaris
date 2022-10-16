@@ -1,7 +1,7 @@
 /obj/item/gun/projectile/automatic //This should never be spawned in, it is just here because of code necessities.
 	name = "daka SMG"
 	desc = "A small SMG. You really shouldn't be able to get this gun. Uses 9mm rounds."
-	icon_state = "c05r"	//Used because it's not used anywhere else
+	icon_state = "smg"	//Used because it's not used anywhere else
 	load_method = SPEEDLOADER
 	ammo_type = /obj/item/ammo_casing/a9mm
 	projectile_type = /obj/item/projectile/bullet/pistol
@@ -369,6 +369,27 @@
 
 /obj/item/gun/projectile/automatic/p90/update_icon()
 	icon_state = "p90smg-[ammo_magazine ? round(ammo_magazine.stored_ammo.len, 6) : "empty"]"
+
+/obj/item/gun/projectile/automatic/pearlshield
+	name = "\improper Tajaran PDW"
+	desc = "A century old Rhemazar military weapon adapted to use human-standard cartridges, the PCA-A9 Karik has been the standard submachine gun of the Pearlshield military since 2549. Uses 9mm rounds."
+	description_fluff = "Pearlshield Consolidated Armories are far from the most cutting edge firearm manufacturer, but the Tajaran’s long tradition of war is rivaled only by humanity, \
+	and the introduction of human technology to the Tajaran arms market has resulted in something of a revolution in finding new ways to kill each other at long distances with bullets. \
+	Usually made with mass-production in mind, PCA weapons combine an eye for design with a great desire to make people dead."
+	icon_state = "pdw"
+	item_state = "c20r"
+	w_class = ITEMSIZE_NORMAL
+	caliber = "9mm"
+	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2)
+	slot_flags = SLOT_BELT
+	load_method = MAGAZINE
+	magazine_type = /obj/item/ammo_magazine/m9mmt
+	allowed_magazines = list(/obj/item/ammo_magazine/m9mm, /obj/item/ammo_magazine/m9mmt)
+
+	firemodes = list(
+		list(mode_name="semiauto",       burst=1, fire_delay=0),
+		list(mode_name="3-round bursts", burst=3, fire_delay=null, move_delay=6,    burst_accuracy=list(0,-15,-30), dispersion=list(0.0, 0.6, 0.6))
+		)
 
 /obj/item/gun/projectile/automatic/tommygun
 	name = "\improper Tommy Gun"

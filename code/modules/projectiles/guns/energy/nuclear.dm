@@ -21,12 +21,11 @@
 	self_recharge = 1
 	use_external_power = 1
 
-
 /obj/item/gun/energy/gun/burst
 	name = "burst laser"
 	desc = "The Lawson Arms FM-2t is a versatile energy based weapon, capable of switching between stun or kill with a three round burst option for both settings."
 	description_fluff = "Lawson Arms is Hephaestus Industries’ main personal-energy-weapon branding, often sold alongside MarsTech projectile weapons to security and law enforcement agencies."
-	icon_state = "fm-2tstun100"	//May resprite this to be more rifley
+	icon_state = "riflestun100"
 	item_state = null	//so the human update icon uses the icon_state instead.
 	charge_cost = 100
 	force = 8
@@ -35,16 +34,16 @@
 
 	projectile_type = /obj/item/projectile/beam/stun/weak
 	origin_tech = list(TECH_COMBAT = 4, TECH_MAGNET = 2, TECH_ILLEGAL = 3)
-	modifystate = "fm-2tstun"
+	modifystate = "riflestun"
 
 //	requires_two_hands = 1
 //	one_handed_penalty = 30
 
 	firemodes = list(
-		list(mode_name="stun", burst=1, projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="fm-2tstun", charge_cost = 100),
-		list(mode_name="stun burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,0,0), dispersion=list(0.0, 0.2, 0.5), projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="fm-2tstun"),
-		list(mode_name="lethal", burst=1, projectile_type=/obj/item/projectile/beam/burstlaser, modifystate="fm-2tkill", charge_cost = 200),
-		list(mode_name="lethal burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,0,0), dispersion=list(0.0, 0.2, 0.5), projectile_type=/obj/item/projectile/beam/burstlaser, modifystate="fm-2tkill"),
+		list(mode_name="stun", burst=1, projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="riflestun", charge_cost = 100),
+		list(mode_name="stun burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,0,0), dispersion=list(0.0, 0.2, 0.5), projectile_type=/obj/item/projectile/beam/stun/weak, modifystate="riflestun"),
+		list(mode_name="lethal", burst=1, projectile_type=/obj/item/projectile/beam/burstlaser, modifystate="riflekill", charge_cost = 200),
+		list(mode_name="lethal burst", burst=3, fire_delay=null, move_delay=4, burst_accuracy=list(0,0,0), dispersion=list(0.0, 0.2, 0.5), projectile_type=/obj/item/projectile/beam/burstlaser, modifystate="riflekill"),
 		)
 
 /obj/item/gun/energy/gun/nuclear
@@ -83,4 +82,19 @@
 	firemodes = list(
 		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/med, modifystate="PDWstun", charge_cost = 240),
 		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="PDWkill", charge_cost = 480),
+		)
+
+//What if we went smaller?
+/obj/item/gun/energy/gun/pocket
+	name = "subcompact energy gun"
+	desc = "The LAEP90-S Perunika is a subcompact variant of the versatile Perun energy sidearm, for use by plainclothes security personnel with a desire for concealability."
+	description_fluff = "Lawson Arms is Hephaestus Industries’ main personal-energy-weapon branding, often sold alongside MarsTech projectile weapons to security and law enforcement agencies."
+	w_class = ITEMSIZE_SMALL
+	icon_state = "egunstun100"
+	item_state = "energystun"
+
+	modifystate = "egunstun"
+	firemodes = list(
+		list(mode_name="stun", projectile_type=/obj/item/projectile/beam/stun/med, modifystate="egunstun", charge_cost = 240),
+		list(mode_name="lethal", projectile_type=/obj/item/projectile/beam, modifystate="egunkill", charge_cost = 480),
 		)

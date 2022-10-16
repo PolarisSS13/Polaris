@@ -366,7 +366,7 @@ var/global/use_preloader = FALSE
 		first_turf_index++
 
 	//turn off base new Initialization until the whole thing is loaded
-	SSatoms.map_loader_begin()
+	SSatoms.BeginMapLoad()
 	//instanciate the first /turf
 	var/turf/T
 	if(members[first_turf_index] != /turf/template_noop)
@@ -385,7 +385,7 @@ var/global/use_preloader = FALSE
 	for(index in 1 to first_turf_index-1)
 		instance_atom(members[index],members_attributes[index],crds,no_changeturf,orientation)
 	//Restore initialization to the previous value
-	SSatoms.map_loader_stop()
+	SSatoms.FinishMapLoad()
 
 ////////////////
 //Helpers procs
@@ -406,9 +406,9 @@ var/global/use_preloader = FALSE
 
 	//custom CHECK_TICK here because we don't want things created while we're sleeping to not initialize
 	if(TICK_CHECK)
-		SSatoms.map_loader_stop()
+		SSatoms.FinishMapLoad()
 		stoplag()
-		SSatoms.map_loader_begin()
+		SSatoms.BeginMapLoad()
 
 	// Rotate the atom now that it exists, rather than changing its orientation beforehand through the fields["dir"]
 	if(orientation != 0) // 0 means no rotation

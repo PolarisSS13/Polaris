@@ -27,6 +27,10 @@
 	name = "Pistol Magazine (.45)"
 	path = /obj/item/ammo_magazine/m45
 
+/datum/uplink_item/item/ammo/c45mcompact
+	name = "Pistol Magazine (.45 Compact)"
+	path = /obj/item/ammo_magazine/m45/compact
+
 /datum/uplink_item/item/ammo/c45map
 	name = "Pistol Magazine (.45 AP)"
 	path = /obj/item/ammo_magazine/m45/ap

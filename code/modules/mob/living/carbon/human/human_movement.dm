@@ -7,8 +7,7 @@
 	if (istype(loc, /turf/space))
 		return ..() - 1
 
-	if(species.slowdown)
-		. += species.slowdown
+	. += species.get_slowdown(src)
 
 	if(force_max_speed)
 		return ..() + HUMAN_LOWEST_SLOWDOWN

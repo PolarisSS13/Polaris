@@ -224,3 +224,6 @@
 
 	var/in_enclosed_vehicle = 0	//For mechs and fighters ambiance. Can be used in other cases.
 	var/datum/focus //What receives our keyboard inputs. src by default
+
+	/// One of MOB_DEXTERITY_*, permitting various levels of machine and item interaction.
+	var/dexterity = MOB_DEXTERITY_NONE

@@ -1117,6 +1117,8 @@
 
 	//icon_state = lowertext(species.name) //Necessary?
 
+	dexterity = species.dexterity
+
 	species.create_organs(src)
 
 	species.handle_post_spawn(src)

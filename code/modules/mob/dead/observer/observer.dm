@@ -232,7 +232,8 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 			response = alert(src, "Are you -sure- you want to ghost?\n(You are alive, or otherwise have the potential to become alive. If you ghost, you won't be able to play this round until you respawn as a new character! You can't change your mind so choose wisely!)", "Are you sure you want to ghost?", "Ghost", "Stay in body")
 		if(response != "Ghost")
 			return
-		resting = 1
+		if(!resting)
+			lay_down()
 		var/turf/location = get_turf(src)
 		var/special_role = check_special_role()
 		if(!istype(loc,/obj/machinery/cryopod))

@@ -419,7 +419,7 @@
 	return 1
 
 //This proc is called when you want to place an item into the storage item.
-/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob, silent)
 	..()
 
 	if(isrobot(user))
@@ -437,7 +437,8 @@
 					remove_from_storage(L, T)
 					qdel(L)
 		if(amt_inserted)
-			to_chat(user, "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining.")
+			if (!silent)
+				to_chat(user, "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining.")
 			return
 
 	if(!can_be_inserted(W))
@@ -447,17 +448,19 @@
 		var/obj/item/tray/T = W
 		if(T.calc_carry() > 0)
 			if(prob(85))
-				to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
+				if (!silent)
+					to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
 				return
 			else
 				W.forceMove(get_turf(user))
 				if ((user.client && user.s_active != src))
 					user.client.screen -= W
 				W.dropped(user)
-				to_chat(user, "<span class='warning'>God damn it!</span>")
+				if (!silent)
+					to_chat(user, "<span class='warning'>God damn it!</span>")
 
 	W.add_fingerprint(user)
-	return handle_item_insertion(W)
+	return handle_item_insertion(W, silent)
 
 /obj/item/storage/dropped(mob/user as mob)
 	return
