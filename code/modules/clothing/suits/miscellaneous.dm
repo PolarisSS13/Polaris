@@ -225,8 +225,8 @@
 /*
  * Misc
  */
-/obj/item/clothing/suit/straight_jacket
-	name = "straight jacket"
+/obj/item/clothing/suit/straight_jacket //A mispelling from time immemorial...
+	name = "straitjacket"
 	desc = "A suit that completely restrains the wearer."
 	icon_state = "straight_jacket"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS

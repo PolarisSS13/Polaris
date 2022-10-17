@@ -5,6 +5,7 @@
 
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
+		/obj/item/clothing/accessory/storage/overalls/chief,
 		/obj/item/blueprints,
 		/obj/item/clamp,
 		/obj/item/clamp,
@@ -71,6 +72,7 @@
 
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
+		/obj/item/clothing/accessory/storage/overalls/engineer,
 		/obj/item/storage/toolbox/mechanical,
 		/obj/item/radio/headset/headset_eng,
 		/obj/item/radio/headset/headset_eng/alt,
@@ -96,14 +98,14 @@
 
 
 /obj/structure/closet/secure_closet/atmos_personal
-	name = "technician's locker"
+	name = "atmospheric technician's locker"
 	req_access = list(access_atmospherics)
 	closet_appearance = /decl/closet_appearance/secure_closet/engineering/atmos
 
 	starts_with = list(
 		/obj/item/clothing/accessory/storage/brown_vest,
-		/obj/item/clothing/suit/fire/atmos,
-		/obj/item/clothing/head/hardhat/firefighter,
+		/obj/item/clothing/accessory/storage/overalls/engineer,
+		/obj/item/clothing/head/hardhat/firefighter,		/obj/item/clothing/head/hardhat/dblue,
 		/obj/item/flashlight,
 		/obj/item/extinguisher,
 		/obj/item/clamp,

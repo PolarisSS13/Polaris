@@ -169,6 +169,26 @@
 	/obj/item/tool/crowbar, /obj/item/tool/screwdriver, /obj/item/weldingtool, /obj/item/tool/wirecutters, /obj/item/tool/wrench, /obj/item/tank/emergency/oxygen,
 	/obj/item/clothing/mask/gas, /obj/item/taperoll/engineering)
 	body_parts_covered = UPPER_TORSO
+	var/open = 0	//0 is closed, 1 is open, -1 means it won't be able to toggle
+
+/obj/item/clothing/suit/storage/hazardvest/verb/Toggle()
+	set name = "Toggle Hazard Vest"
+	set category = "Object"
+	set src in usr
+	if(!usr.canmove || usr.stat || usr.restrained())
+		return 0
+	if(open == 1)
+		open = 0
+		icon_state = initial(icon_state)
+		to_chat(usr, "You fasten up the [src]].")
+	else if(open == 0)
+		open = 1
+		icon_state = "[icon_state]_open"
+		to_chat(usr, "You unfasten the [src]].")
+	else
+		to_chat(usr, "You attempt to button-up the velcro on your [src], before promptly realising how silly you are.")
+		return
+	update_clothing_icon()
 
 /obj/item/clothing/suit/storage/hazardvest/blue
 	name = "blue hazard vest"
@@ -182,7 +202,7 @@
 
 /obj/item/clothing/suit/storage/hazardvest/white
 	name = "white hazard vest"
-	desc = "A high-visibility vest used in work zones. This one has a red cross!"
+	desc = "A high-visibility vest used in work zones. This one is white!"
 	icon_state = "hazard_w"
 
 //Lawyer
