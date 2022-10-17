@@ -116,7 +116,7 @@
  */
 
 /obj/item/pen/reagent
-	atom_flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ILLEGAL = 5)
 
 /obj/item/pen/reagent/Initialize()

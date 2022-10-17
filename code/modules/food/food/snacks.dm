@@ -1816,7 +1816,7 @@
 	filling_color = "#ADAC7F"
 	center_of_mass = list("x"=16, "y"=14)
 	w_class = ITEMSIZE_TINY
-	atom_flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 	var/wrapped = 0
 	var/contents_type = "item"
 	var/monkey_type = "Monkey"
@@ -1849,7 +1849,7 @@
 	desc = "Just add water!"
 	to_chat(user, "You unwrap the cube.")
 	wrapped = 0
-	atom_flags |= OPENCONTAINER
+	atom_flags |= ATOM_REAGENTS_IS_OPEN
 	return
 
 /obj/item/reagent_containers/food/snacks/cube/On_Consume(var/mob/M)
@@ -6869,7 +6869,7 @@
 	to_chat(user, "It is [sealed ? "" : "un"]sealed.")
 
 /obj/item/reagent_containers/food/snacks/canned/proc/unseal()
-	atom_flags |= OPENCONTAINER
+	atom_flags |= ATOM_REAGENTS_IS_OPEN
 	sealed = FALSE
 	update_icon()
 

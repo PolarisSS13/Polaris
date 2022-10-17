@@ -28,7 +28,7 @@
 /obj/item/reagent_containers/glass/beaker/vial/random/Initialize()
 	. = ..()
 	if(is_open_container())
-		atom_flags ^= OPENCONTAINER
+		atom_flags ^= ATOM_REAGENTS_IS_OPEN
 	var/list/picked_reagents = pickweight(random_reagent_list)
 	for(var/reagent in picked_reagents)
 		reagents.add_reagent(reagent, picked_reagents[reagent])

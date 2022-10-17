@@ -215,4 +215,4 @@
 	return	//do nothing for now
 
 /obj/effect/shuttle_landmark/transit
-	atom_flags = SLANDMARK_FLAG_ZERO_G|SLANDMARK_FLAG_AUTOSET
+	atom_flags = LANDMARK_REMOVES_GRAVITY|LANDMARK_CREATES_SAFE_SITE

@@ -119,14 +119,14 @@
 		to_chat(user, "<span class='notice'>You stuff [R] into [src].</span>")
 		rag = R
 		rag.forceMove(src)
-		atom_flags &= ~OPENCONTAINER
+		atom_flags &= ~ATOM_REAGENTS_IS_OPEN
 		update_icon()
 
 /obj/item/reagent_containers/food/drinks/bottle/proc/remove_rag(mob/user)
 	if(!rag) return
 	user.put_in_hands(rag)
 	rag = null
-	atom_flags |= (initial(atom_flags) & OPENCONTAINER)
+	atom_flags |= (initial(atom_flags) & ATOM_REAGENTS_IS_OPEN)
 	update_icon()
 
 /obj/item/reagent_containers/food/drinks/bottle/open(mob/user)
@@ -182,7 +182,7 @@
 	throw_speed = 3
 	throw_range = 5
 	item_state = "beer"
-	atom_flags = NOCONDUCT
+	atom_flags = ATOM_IS_INSULATED
 	attack_verb = list("stabbed", "slashed", "attacked")
 	sharp = 1
 	edge = 0

@@ -7,7 +7,7 @@
 	climbable = 1
 	w_class = ITEMSIZE_NORMAL
 	pressure_resistance = 5
-	atom_flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 	var/amount_per_transfer_from_this = 5	//shit I dunno, adding this so syringes stop runtime erroring. --NeoFite
 
 GLOBAL_LIST_BOILERPLATE(all_mopbuckets, /obj/structure/mopbucket)

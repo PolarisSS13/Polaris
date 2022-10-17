@@ -12,7 +12,7 @@
 	origin_tech = list(TECH_BIO = 4)
 	var/uses = 1 // uses before it goes inert
 	var/enhanced = FALSE
-	atom_flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 
 
 /obj/item/slime_extract/Initialize()

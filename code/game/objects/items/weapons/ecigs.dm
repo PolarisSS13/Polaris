@@ -153,7 +153,7 @@
 	icon_state = "ecartridge"
 	matter = list("metal" = 50, "glass" = 10)
 	volume = 20
-	atom_flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 
 /obj/item/reagent_containers/ecig_cartridge/Initialize()
 	. = ..()

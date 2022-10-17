@@ -550,7 +550,7 @@ var/global/list/light_type_cache = list()
 				if(M == user)
 					continue
 				M.show_message("[user.name] smashed the light!", 3, "You hear a tinkle of breaking glass", 2)
-			if(on && !(W.atom_flags & NOCONDUCT))
+			if(on && !(W.atom_flags & ATOM_IS_INSULATED))
 				//if(!user.mutations & COLD_RESISTANCE)
 				if (prob(12))
 					electrocute_mob(user, get_area(src), src, 0.3)
@@ -570,7 +570,7 @@ var/global/list/light_type_cache = list()
 			return
 
 		to_chat(user, "You stick \the [W] into the light socket!")
-		if(has_power() && !(W.atom_flags & NOCONDUCT))
+		if(has_power() && !(W.atom_flags & ATOM_IS_INSULATED))
 			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
 			s.set_up(3, 1, src)
 			s.start()

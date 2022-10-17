@@ -22,7 +22,7 @@
 	var/datum/reagents/reagents = null
 
 	//var/chem_is_open_container = 0
-	// replaced by OPENCONTAINER flags and atom/proc/is_open_container()
+	// replaced by ATOM_REAGENTS_IS_OPEN flags and atom/proc/is_open_container()
 	///Chemistry.
 
 	// Overlays
@@ -129,7 +129,7 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 // returns true if open
 // false if closed
 /atom/proc/is_open_container()
-	return atom_flags & OPENCONTAINER
+	return atom_flags & ATOM_REAGENTS_IS_OPEN
 
 /*//Convenience proc to see whether a container can be accessed in a certain way.
 

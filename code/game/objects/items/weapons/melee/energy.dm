@@ -7,7 +7,7 @@
 	sharp = 0
 	edge = 0
 	armor_penetration = 50
-	atom_flags = NOCONDUCT
+	atom_flags = ATOM_IS_INSULATED
 	item_flags = NOBLOODY
 	var/lrange = 2
 	var/lpower = 2

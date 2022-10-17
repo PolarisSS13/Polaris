@@ -17,13 +17,26 @@
 /// The atom has been initialized.
 #define ATOM_INITIALIZED (1<<0)
 
-#define NOCONDUCT					(1<<1)	// Conducts electricity. (metal etc.)
-#define ON_BORDER				(1<<2)	// Item has priority to check when entering or leaving.
-#define OPENCONTAINER			(1<<3)	// Is an open container for chemistry purposes.
-#define	NOREACT					(1<<4)	// Reagents don't react inside this container.
-#define OVERLAY_QUEUED			(1<<5)	// Atom is queued for an overlay update
-#define SLANDMARK_FLAG_AUTOSET (1<<6) // If set, will set base area and turf type to same as where it was spawned at
-#define SLANDMARK_FLAG_ZERO_G (1<<7) // Zero-G shuttles moved here will lose gravity unless the area has ambient gravity.
+/// The atom does not conduct electricity.
+#define ATOM_IS_INSULATED (1<<1)
+
+/// The atom should be considered ahead of others when changing turfs.
+#define ATOM_HAS_TRANSITION_PRIORITY (1<<2)
+
+/// For the purpose of reagents transfer, this atom can be interacted with syringes etc.
+#define ATOM_REAGENTS_IS_OPEN (1<<3)
+
+/// Reagents do not react inside this atom, regardless of recipes.
+#define	ATOM_REAGENTS_SKIP_REACTIONS (1<<4)
+
+/// This atom is queued for an overlay update.
+#define ATOM_AWAITING_OVERLAY_UPDATE (1<<5)
+
+/// This atom is a shuttle landmark that should create its own landing point.
+#define LANDMARK_CREATES_SAFE_SITE (1<<6)
+
+/// This atom is a shuttle landmark that causes arriving shuttles to have no gravity.
+#define LANDMARK_REMOVES_GRAVITY (1<<7)
 
 
 /* -- /turf/var/turf_flags -- */

@@ -11,7 +11,7 @@
 	active_power_usage = 2000
 	clicksound = "button"
 	clickvol = "30"
-	atom_flags = OPENCONTAINER | NOREACT
+	atom_flags = ATOM_REAGENTS_IS_OPEN | ATOM_REAGENTS_SKIP_REACTIONS
 	circuit = /obj/item/circuitboard/microwave
 	var/operating = 0 // Is it on?
 	var/dirty = 0 // = {0..100} Does it need cleaning?
@@ -100,7 +100,7 @@
 				src.icon_state = "mw"
 				src.broken = 0 // Fix it!
 				src.dirty = 0 // just to be sure
-				src.atom_flags = OPENCONTAINER | NOREACT
+				src.atom_flags = ATOM_REAGENTS_IS_OPEN | ATOM_REAGENTS_SKIP_REACTIONS
 		else
 			to_chat(user, "<span class='warning'>It's broken!</span>")
 			return 1
@@ -119,7 +119,7 @@
 				src.dirty = 0 // It's clean!
 				src.broken = 0 // just to be sure
 				src.icon_state = "mw"
-				src.atom_flags = OPENCONTAINER | NOREACT
+				src.atom_flags = ATOM_REAGENTS_IS_OPEN | ATOM_REAGENTS_SKIP_REACTIONS
 		else //Otherwise bad luck!!
 			to_chat(user, "<span class='warning'>It's dirty!</span>")
 			return 1

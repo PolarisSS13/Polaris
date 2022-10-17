@@ -10,7 +10,7 @@ GLOBAL_LIST_BOILERPLATE(all_mops, /obj/item/mop)
 	throw_speed = 5
 	throw_range = 10
 	w_class = ITEMSIZE_NORMAL
-	atom_flags = NOCONDUCT
+	atom_flags = ATOM_IS_INSULATED
 	attack_verb = list("mopped", "bashed", "bludgeoned", "whacked")
 	var/mopping = 0
 	var/mopcount = 0
