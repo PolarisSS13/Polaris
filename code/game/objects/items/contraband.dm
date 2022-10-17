@@ -13,7 +13,7 @@
 
 
 /obj/item/reagent_containers/glass/beaker/vial/random
-	atom_flags = 0
+	atom_flags = EMPTY_BITFIELD
 	var/list/random_reagent_list = list(list("water" = 15) = 1, list("cleaner" = 15) = 1)
 
 

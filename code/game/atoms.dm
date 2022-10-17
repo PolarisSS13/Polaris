@@ -1,7 +1,7 @@
 /atom
 	layer = TURF_LAYER //This was here when I got here. Why though?
 	var/level = 2
-	var/atom_flags = 0
+	var/atom_flags = EMPTY_BITFIELD
 	var/list/fingerprints
 	var/list/fingerprintshidden
 	var/fingerprintslast = null

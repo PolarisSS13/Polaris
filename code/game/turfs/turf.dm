@@ -3,7 +3,8 @@
 	layer = TURF_LAYER
 	plane = TURF_PLANE
 	level = 1
-	var/holy = 0
+
+	var/turf_flags = EMPTY_BITFIELD
 
 	// Initial air contents (in moles)
 	var/oxygen = 0

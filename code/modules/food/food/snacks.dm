@@ -1884,7 +1884,7 @@
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped
 	desc = "Still wrapped in some paper."
 	icon_state = "monkeycubewrap"
-	atom_flags = 0
+	atom_flags = EMPTY_BITFIELD
 	wrapped = 1
 
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/farwacube
@@ -6856,7 +6856,7 @@
 /obj/item/reagent_containers/food/snacks/canned
 	name = "void can"
 	icon = 'icons/obj/food_canned.dmi'
-	atom_flags = 0
+	atom_flags = EMPTY_BITFIELD
 	var/sealed = TRUE
 
 /obj/item/reagent_containers/food/snacks/canned/Initialize()

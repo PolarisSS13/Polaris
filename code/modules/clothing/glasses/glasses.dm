@@ -542,7 +542,7 @@ BLIND     // can't see anything
 	item_state_slots = list(slot_r_hand_str = "sunglasses", slot_l_hand_str = "sunglasses")
 	toggleable = 1
 	action_button_name = "Toggle Monocle"
-	atom_flags = 0
+	atom_flags = EMPTY_BITFIELD
 
 	body_parts_covered = 0
 

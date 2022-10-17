@@ -422,7 +422,7 @@
 /obj/machinery/microwave/proc/muck_finish()
 	src.visible_message("<span class='warning'>The microwave gets covered in muck!</span>")
 	src.dirty = 100 // Make it dirty so it can't be used util cleaned
-	src.atom_flags = 0 //So you can't add condiments
+	src.atom_flags = EMPTY_BITFIELD //So you can't add condiments
 	src.icon_state = "mwbloody" // Make it look dirty too
 	src.operating = 0 // Turn it off again aferwards
 	src.updateUsrDialog()
@@ -436,7 +436,7 @@
 	src.icon_state = "mwb" // Make it look all busted up and shit
 	src.visible_message("<span class='warning'>The microwave breaks!</span>") //Let them know they're stupid
 	src.broken = 2 // Make it broken so it can't be used util fixed
-	src.atom_flags = 0 //So you can't add condiments
+	src.atom_flags = EMPTY_BITFIELD //So you can't add condiments
 	src.operating = 0 // Turn it off again aferwards
 	src.updateUsrDialog()
 	soundloop.stop()
