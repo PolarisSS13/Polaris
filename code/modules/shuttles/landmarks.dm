@@ -7,7 +7,8 @@
 	unacidable = 1
 	simulated = 0
 	invisibility = 101
-	atom_flags = LANDMARK_CREATES_SAFE_SITE // We generally want to use current area/turf as base.
+
+	var/landmark_flags = LANDMARK_CREATES_SAFE_SITE // We generally want to use current area/turf as base.
 
 	//ID of the landmark
 	var/landmark_tag
@@ -30,7 +31,7 @@
 		. = INITIALIZE_HINT_LATELOAD
 
 	// Even if this flag is set, hardcoded values take precedence.
-	if(atom_flags & LANDMARK_CREATES_SAFE_SITE)
+	if(landmark_flags & LANDMARK_CREATES_SAFE_SITE)
 		if(ispath(base_area))
 			var/area/A = locate(base_area)
 			if(!istype(A))
@@ -123,7 +124,7 @@
 /obj/effect/shuttle_landmark/automatic
 	name = "Navpoint"
 	landmark_tag = "navpoint"
-	atom_flags = LANDMARK_CREATES_SAFE_SITE
+	landmark_flags = LANDMARK_CREATES_SAFE_SITE
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
 	landmark_tag += "-[x]-[y]-[z]-[random_id("landmarks",1,9999)]"

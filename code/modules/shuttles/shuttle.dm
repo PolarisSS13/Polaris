@@ -290,7 +290,7 @@
 	// If shuttle has no internal gravity, update our gravity with destination gravity
 	if((flags & SHUTTLE_FLAGS_ZERO_G))
 		var/new_grav = 1
-		if(destination.atom_flags & LANDMARK_REMOVES_GRAVITY)
+		if(destination.landmark_flags & LANDMARK_REMOVES_GRAVITY)
 			var/area/new_area = get_area(destination)
 			new_grav = new_area.has_gravity
 		for(var/area/our_area in shuttle_area)

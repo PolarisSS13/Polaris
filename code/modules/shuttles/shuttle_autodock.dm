@@ -215,4 +215,4 @@
 	return	//do nothing for now
 
 /obj/effect/shuttle_landmark/transit
-	atom_flags = LANDMARK_REMOVES_GRAVITY|LANDMARK_CREATES_SAFE_SITE
+	landmark_flags = LANDMARK_REMOVES_GRAVITY | LANDMARK_CREATES_SAFE_SITE

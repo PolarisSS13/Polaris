@@ -32,12 +32,6 @@
 /// This atom is queued for an overlay update.
 #define ATOM_AWAITING_OVERLAY_UPDATE (1<<5)
 
-/// This atom is a shuttle landmark that should create its own landing point.
-#define LANDMARK_CREATES_SAFE_SITE (1<<6)
-
-/// This atom is a shuttle landmark that causes arriving shuttles to have no gravity.
-#define LANDMARK_REMOVES_GRAVITY (1<<7)
-
 
 /* -- /turf/var/turf_flags -- */
 
@@ -73,3 +67,12 @@
 #define PASSGRILLE				(1<<2)
 #define PASSBLOB				(1<<3)
 #define PASSMOB					(1<<4)
+
+
+/* -- /obj/effect/shuttle_landmark/var/landmark_flags -- */
+
+/// This atom is a shuttle landmark that should create its own landing point.
+#define LANDMARK_CREATES_SAFE_SITE (1<<0)
+
+/// This atom is a shuttle landmark that causes arriving shuttles to have no gravity.
+#define LANDMARK_REMOVES_GRAVITY (1<<1)
