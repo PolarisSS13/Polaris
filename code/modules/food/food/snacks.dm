@@ -2104,6 +2104,15 @@
 	. = ..()
 	reagents.add_reagent("protein", 3)
 
+/obj/item/reagent_containers/food/snacks/clubsandwich
+	name = "Club Sandwich"
+	desc = "Tastes like the good feelings when you're part of a clique."
+	icon_state = "clubsandwich"
+	trash = "obj/item/trash/plate"
+	nutriment_amt = 3
+	nutriment_desc = list("a galactic economy coming together in pursuit of mundane foods" = 3)
+	bitesize = 2
+
 /obj/item/reagent_containers/food/snacks/toastedsandwich
 	name = "Toasted Sandwich"
 	desc = "Now if you only had a pepper bar."
