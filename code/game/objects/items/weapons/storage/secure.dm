@@ -85,11 +85,11 @@
 	tgui_interact(user)
 
 /obj/item/storage/secure/tgui_interact(mob/user, datum/tgui/ui = null)
-	ui = SStgui.try_update_ui(user, src, ui)	
+	ui = SStgui.try_update_ui(user, src, ui)
 	if(!ui)
 		ui = new(user, src, "SecureSafe", name)
 		ui.open()
-		
+
 /obj/item/storage/secure/tgui_data(mob/user)
 	var/list/data = list()
 	data["locked"] = locked
@@ -148,7 +148,6 @@
 	name = "secure briefcase"
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "secure"
-	item_state_slots = list(slot_r_hand_str = "case", slot_l_hand_str = "case")
 	desc = "A large briefcase with a digital locking system."
 	force = 8.0
 	throw_speed = 1
