@@ -392,7 +392,7 @@ var/global/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	if(initialized && istype(mineral))
+	if((atom_flags & ATOM_INITIALIZED) && istype(mineral))
 		new /obj/effect/mineral(src, mineral)
 	update_icon()
 

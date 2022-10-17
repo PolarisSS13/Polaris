@@ -38,8 +38,6 @@
 
 	//Detective Work, used for the duplicate data points kept in the scanners
 	var/list/original_atom
-	// Track if we are already had initialize() called to prevent double-initialization.
-	var/initialized = FALSE
 
 	/// Last name used to calculate a color for the chatmessage overlays
 	var/chat_color_name
