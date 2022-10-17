@@ -313,7 +313,6 @@
 					/obj/item/storage/box/matches = 10,
 					/obj/item/flame/lighter/random = 4,
 					/obj/item/clothing/mask/smokable/ecig/util = 2,
-					///obj/item/clothing/mask/smokable/ecig/deluxe = 2,
 					/obj/item/clothing/mask/smokable/ecig/simple = 2,
 					/obj/item/reagent_containers/ecig_cartridge/med_nicotine = 10,
 					/obj/item/reagent_containers/ecig_cartridge/high_nicotine = 5,
@@ -325,10 +324,12 @@
 					/obj/item/reagent_containers/ecig_cartridge/coffee = 5,
 					/obj/item/reagent_containers/ecig_cartridge/blanknico = 2,
 					/obj/item/storage/box/fancy/chewables/tobacco/nico = 5)
-	contraband = list(/obj/item/flame/lighter/zippo = 4)
+	contraband = list(/obj/item/flame/lighter/zippo = 4,
+					/obj/item/reagent_containers/ecig_cartridge/ambrosia = 5)
 	premium = list(/obj/item/storage/fancy/cigar = 5,
 					/obj/item/storage/fancy/cigarettes/carcinomas = 5,
-					/obj/item/storage/fancy/cigarettes/professionals = 5)
+					/obj/item/storage/fancy/cigarettes/professionals = 5,
+					/obj/item/clothing/mask/smokable/ecig/deluxe = 2)
 	prices = list(/obj/item/storage/fancy/cigarettes = 12,
 					/obj/item/storage/fancy/cigarettes/dromedaryco = 20,
 					/obj/item/storage/fancy/cigarettes/killthroat = 14,
@@ -341,9 +342,8 @@
 					/obj/item/storage/chewables/tobacco/fine = 20,
 					/obj/item/storage/box/matches = 1,
 					/obj/item/flame/lighter/random = 2,
-					/obj/item/clothing/mask/smokable/ecig/util = 100,
-					///obj/item/clothing/mask/smokable/ecig/deluxe = 300,
-					/obj/item/clothing/mask/smokable/ecig/simple = 150,
+					/obj/item/clothing/mask/smokable/ecig/util = 150,
+					/obj/item/clothing/mask/smokable/ecig/simple = 100,
 					/obj/item/reagent_containers/ecig_cartridge/med_nicotine = 10,
 					/obj/item/reagent_containers/ecig_cartridge/high_nicotine = 15,
 					/obj/item/reagent_containers/ecig_cartridge/orange = 15,
