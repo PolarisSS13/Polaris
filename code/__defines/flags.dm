@@ -1,27 +1,15 @@
 #define EMPTY_BITFIELD 0
 
-#define ENABLE_BITFIELD(variable, flag)				(variable |= (flag))
-#define DISABLE_BITFIELD(variable, flag)			(variable &= ~(flag))
-#define CHECK_BITFIELD(variable, flag)				(variable & (flag))
-
-//check if all bitflags specified are present
-#define CHECK_MULTIPLE_BITFIELDS(flagvar, flags)	((flagvar & (flags)) == flags)
-
-GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768))
-
 /* Directions */
 ///All the cardinal direction bitflags.
 #define ALL_CARDINALS (NORTH|SOUTH|EAST|WEST)
 
-// datum_flags
+
+/* -- /datum/var/datum_flags -- */
+
 #define DF_VAR_EDITED			(1<<0)
 #define DF_ISPROCESSING			(1<<1)
 #define DF_USE_TAG				(1<<2)
-
-
-/* -- /atom/movable/var/movement_type -- */
-
-#define UNSTOPPABLE				(1<<0)			//Can not be stopped from moving from Cross(), CanPass(), or Uncross() failing. Still bumps everything it passes through, though.
 
 
 /* -- /atom/var/atom_flags -- */
@@ -34,9 +22,22 @@ GLOBAL_LIST_INIT(bitflags, list(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 204
 #define OPENCONTAINER			(1<<3)	// Is an open container for chemistry purposes.
 #define	NOREACT					(1<<4)	// Reagents don't react inside this container.
 #define OVERLAY_QUEUED			(1<<5)	// Atom is queued for an overlay update
-#define NOJAUNT (1<<6) // blocks ethereal jaunt from landing/leaving on flagged turfs.
-#define SLANDMARK_FLAG_AUTOSET (1<<7) // If set, will set base area and turf type to same as where it was spawned at
-#define SLANDMARK_FLAG_ZERO_G (1<<8) // Zero-G shuttles moved here will lose gravity unless the area has ambient gravity.
+#define SLANDMARK_FLAG_AUTOSET (1<<6) // If set, will set base area and turf type to same as where it was spawned at
+#define SLANDMARK_FLAG_ZERO_G (1<<7) // Zero-G shuttles moved here will lose gravity unless the area has ambient gravity.
+
+
+/* -- /turf/var/turf_flags -- */
+
+/// The turf is blessed; it interferes with cult behaviors.
+#define TURF_IS_BLESSED (1<<0)
+
+/// The turf prevents wizard movement spells.
+#define TURF_PREVENTS_JAUNT (1<<1)
+
+
+/* -- /atom/movable/var/movement_type -- */
+
+#define UNSTOPPABLE				(1<<0)			//Can not be stopped from moving from Cross(), CanPass(), or Uncross() failing. Still bumps everything it passes through, though.
 
 
 /* -- /obj/item/var/item_flags -- */

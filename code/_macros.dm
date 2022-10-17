@@ -52,3 +52,10 @@
 #define WORLD_ICON_SIZE 32 //Needed for the R-UST port
 
 #define PIXEL_MULTIPLIER WORLD_ICON_SIZE/32 //Needed for the R-UST port
+
+#define ENABLE_BITFIELD(variable, flag)				(variable |= (flag))
+#define DISABLE_BITFIELD(variable, flag)			(variable &= ~(flag))
+#define CHECK_BITFIELD(variable, flag)				(variable & (flag))
+
+//check if all bitflags specified are present
+#define CHECK_MULTIPLE_BITFIELDS(flagvar, flags)	((flagvar & (flags)) == flags)
