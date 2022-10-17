@@ -95,7 +95,7 @@
 	icon_locked = "medalbox+l"
 	icon_closed = "medalbox"
 	icon_broken = "medalbox+b"
-	item_state_slots = list(slot_r_hand_str = "briefcase", slot_l_hand_str = "briefcase)
+	item_state_slots = list(slot_r_hand_str = "briefcase", slot_l_hand_str = "briefcase")
 	req_access = list(access_heads)
 	storage_slots = 7
 	starts_with = list(
