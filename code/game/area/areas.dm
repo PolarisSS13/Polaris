@@ -13,12 +13,17 @@
 	plane = PLANE_LIGHTING_ABOVE //In case we color them
 	luminosity = 0
 	mouse_opacity = 0
+
+	var/area_flags = 0
+
 	var/lightswitch = 1
 
 	var/eject = null
 
 	var/debug = 0
+
 	var/requires_power = 1
+
 	var/always_unpowered = 0	//this gets overriden to 1 for space in area/Initialize()
 
 	// Power channel status - Is it currently energized?

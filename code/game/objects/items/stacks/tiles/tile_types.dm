@@ -36,7 +36,7 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = 0
+	atom_flags = 0
 	origin_tech = list(TECH_BIO = 1)
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/herb.ogg'
@@ -64,7 +64,7 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = 0
+	atom_flags = 0
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/wooden.ogg'
 	pickup_sound = 'sound/items/pickup/wooden.ogg'
@@ -112,7 +112,7 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = 0
+	atom_flags = 0
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/cloth.ogg'
 	pickup_sound = 'sound/items/pickup/cloth.ogg'
@@ -244,7 +244,7 @@
 	throwforce = 1.0
 	throw_speed = 5
 	throw_range = 20
-	flags = 0
+	atom_flags = 0
 	no_variants = FALSE
 
 /obj/item/stack/tile/wmarble
@@ -256,7 +256,7 @@
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	flags = 0
+	atom_flags = 0
 	no_variants = FALSE
 
 /obj/item/stack/tile/bmarble
@@ -268,7 +268,7 @@
 	throwforce = 15.0
 	throw_speed = 5
 	throw_range = 20
-	flags = 0
+	atom_flags = 0
 	no_variants = FALSE
 
 /obj/item/stack/tile/roofing

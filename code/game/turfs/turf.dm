@@ -37,7 +37,7 @@
 
 /turf/Initialize(mapload)
 	. = ..()
-	
+
 	for(var/atom/movable/AM in src)
 		Entered(AM)
 
@@ -196,7 +196,7 @@
 					mover.Bump(thing)
 					continue
 				else
-					if(!firstbump || ((thing.layer > firstbump.layer || thing.flags & ON_BORDER) && !(firstbump.flags & ON_BORDER)))
+					if(!firstbump || ((thing.layer > firstbump.layer || thing.atom_flags & ON_BORDER) && !(firstbump.atom_flags & ON_BORDER)))
 						firstbump = thing
 	if(QDELETED(mover))					//Mover deleted from Cross/CanPass/Bump, do not proceed.
 		return FALSE
@@ -216,7 +216,7 @@
 			continue
 		var/atom/movable/thing = i
 		if(!thing.Uncross(mover, newloc))
-			if(thing.flags & ON_BORDER)
+			if(thing.atom_flags & ON_BORDER)
 				mover.Bump(thing)
 			if(!CHECK_BITFIELD(mover.movement_type, UNSTOPPABLE))
 				return FALSE
@@ -271,7 +271,7 @@
 	if(density)
 		return 1
 	for(var/atom/A in src)
-		if(A.density && !(A.flags & ON_BORDER))
+		if(A.density && !(A.atom_flags & ON_BORDER))
 			return 1
 	return 0
 

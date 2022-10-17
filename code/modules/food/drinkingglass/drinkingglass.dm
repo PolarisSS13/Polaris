@@ -23,7 +23,7 @@ var/global/const/DRINK_ICON_NOISY = "_noise"
 
 	amount_per_transfer_from_this = 5
 	possible_transfer_amounts = list(5,10,15,30)
-	flags = OPENCONTAINER
+	atom_flags = OPENCONTAINER
 
 	matter = list("glass" = 60)
 

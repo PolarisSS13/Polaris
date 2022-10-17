@@ -215,4 +215,4 @@
 	return	//do nothing for now
 
 /obj/effect/shuttle_landmark/transit
-	flags = SLANDMARK_FLAG_ZERO_G|SLANDMARK_FLAG_AUTOSET
+	atom_flags = SLANDMARK_FLAG_ZERO_G|SLANDMARK_FLAG_AUTOSET

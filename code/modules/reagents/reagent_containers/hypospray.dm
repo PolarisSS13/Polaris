@@ -12,7 +12,7 @@
 	unacidable = 1
 	volume = 30
 	possible_transfer_amounts = null
-	flags = OPENCONTAINER
+	atom_flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
 	drop_sound = 'sound/items/drop/gun.ogg'
 	pickup_sound = 'sound/items/pickup/gun.ogg'
@@ -115,7 +115,7 @@
 			if(!do_after(user,30) || loaded_vial || !(W in user))
 				return 0
 			if(W.is_open_container())
-				W.flags ^= OPENCONTAINER
+				W.atom_flags ^= OPENCONTAINER
 				W.update_icon()
 			user.drop_item()
 			W.loc = src
@@ -152,13 +152,13 @@
 
 /obj/item/reagent_containers/hypospray/autoinjector/used/Initialize()
 	. = ..()
-	flags &= ~OPENCONTAINER
+	atom_flags &= ~OPENCONTAINER
 	icon_state = "[initial(icon_state)]0"
 
 /obj/item/reagent_containers/hypospray/autoinjector/do_injection(mob/living/carbon/human/H, mob/living/user)
 	. = ..()
 	if(.) // Will occur if successfully injected.
-		flags &= ~OPENCONTAINER
+		atom_flags &= ~OPENCONTAINER
 		update_icon()
 
 /obj/item/reagent_containers/hypospray/autoinjector/update_icon()

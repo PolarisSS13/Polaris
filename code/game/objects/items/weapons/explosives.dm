@@ -5,7 +5,7 @@
 	icon = 'icons/obj/assemblies.dmi'
 	icon_state = "plastic-explosive0"
 	item_state = "plasticx"
-	flags = NOBLUDGEON
+	item_flags = NOBLUDGEON
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_ILLEGAL = 2)
 	var/datum/wires/explosive/c4/wires = null
@@ -81,7 +81,7 @@
 		target = get_atom_on_turf(src)
 	if(!target)
 		target = src
-	
+
 	var/turf/T = get_turf(target)
 	if (!T && length(location))
 		T = locate(location[1], location[2], location[3])

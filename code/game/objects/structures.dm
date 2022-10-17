@@ -8,7 +8,7 @@
 	var/parts
 	var/list/climbers = list()
 	var/block_turf_edges = FALSE // If true, turf edge icons will not be made on the turf this occupies.
-	
+
 	var/list/connections = list("0", "0", "0", "0")
 	var/list/other_connections = list("0", "0", "0", "0")
 	var/list/blend_objects = newlist() // Objects which to blend with
@@ -93,7 +93,7 @@
 		if(istype(O,/obj/structure))
 			var/obj/structure/S = O
 			if(S.climbable) continue
-		if(O && O.density && !(O.flags & ON_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
+		if(O && O.density && !(O.atom_flags & ON_BORDER)) //ON_BORDER structures are handled by the Adjacent() check.
 			return O
 	return 0
 

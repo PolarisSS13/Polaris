@@ -13,7 +13,7 @@
 
 
 /obj/item/reagent_containers/glass/beaker/vial/random
-	flags = 0
+	atom_flags = 0
 	var/list/random_reagent_list = list(list("water" = 15) = 1, list("cleaner" = 15) = 1)
 
 
@@ -28,7 +28,7 @@
 /obj/item/reagent_containers/glass/beaker/vial/random/Initialize()
 	. = ..()
 	if(is_open_container())
-		flags ^= OPENCONTAINER
+		atom_flags ^= OPENCONTAINER
 	var/list/picked_reagents = pickweight(random_reagent_list)
 	for(var/reagent in picked_reagents)
 		reagents.add_reagent(reagent, picked_reagents[reagent])

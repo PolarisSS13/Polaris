@@ -5,7 +5,8 @@
 	icon_state = "cleaner"
 	item_state = "cleaner"
 	center_of_mass = list("x" = 16,"y" = 10)
-	flags = OPENCONTAINER|NOBLUDGEON
+	atom_flags = OPENCONTAINER
+	item_flags = NOBLUDGEON
 	matter = list("glass" = 300, MAT_STEEL = 300)
 	slot_flags = SLOT_BELT
 	throwforce = 3

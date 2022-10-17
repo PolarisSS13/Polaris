@@ -6,7 +6,7 @@
 	anchored = 1
 	w_class = ITEMSIZE_LARGE
 	canhear_range = 2
-	flags = NOBLOODY
+	item_flags = NOBLOODY
 	var/circuit = /obj/item/circuitboard/intercom
 	var/number = 0
 	var/wiresexposed = 0

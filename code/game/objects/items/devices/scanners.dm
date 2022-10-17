@@ -381,7 +381,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "spectrometer"
 	w_class = ITEMSIZE_SMALL
-	flags = OPENCONTAINER
+	atom_flags = OPENCONTAINER
 	slot_flags = SLOT_BELT
 	throwforce = 5
 	throw_speed = 4
@@ -463,7 +463,7 @@ HALOGEN COUNTER	- Radcount on mobs
 		return
 
 	if(!isnull(O.reagents))
-		if(!(O.flags & OPENCONTAINER)) // The idea is that the scanner has to touch the reagents somehow. This is done to prevent cheesing unidentified autoinjectors.
+		if(!(O.atom_flags & OPENCONTAINER)) // The idea is that the scanner has to touch the reagents somehow. This is done to prevent cheesing unidentified autoinjectors.
 			to_chat(user, span("warning", "\The [O] is sealed, and cannot be scanned by \the [src] until unsealed."))
 			return
 

@@ -88,7 +88,7 @@
 		layer = ABOVE_MOB_LAYER
 	climbable = 0 //flipping tables allows them to be used as makeshift barriers
 	flipped = 1
-	flags |= ON_BORDER
+	atom_flags |= ON_BORDER
 	for(var/D in list(turn(direction, 90), turn(direction, -90)))
 		var/obj/structure/table/T = locate() in get_step(src,D)
 		if(T && T.flipped == 0 && material && T.material && T.material.name == material.name)
@@ -106,7 +106,7 @@
 	reset_plane_and_layer()
 	flipped = 0
 	climbable = initial(climbable)
-	flags &= ~ON_BORDER
+	atom_flags &= ~ON_BORDER
 	for(var/D in list(turn(dir, 90), turn(dir, -90)))
 		var/obj/structure/table/T = locate() in get_step(src.loc,D)
 		if(T && T.flipped == 1 && T.dir == src.dir && material && T.material&& T.material.name == material.name)

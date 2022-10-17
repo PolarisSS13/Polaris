@@ -1,7 +1,7 @@
 /datum/reagents/distilling/handle_reactions()
 	if(QDELETED(my_atom))
 		return FALSE
-	if(my_atom.flags & NOREACT)
+	if(my_atom.atom_flags & NOREACT)
 		return FALSE
 	var/reaction_occurred
 	var/list/eligible_reactions = list()

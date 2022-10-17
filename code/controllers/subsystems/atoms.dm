@@ -45,14 +45,14 @@ SUBSYSTEM_DEF(atoms)
 	var/list/arguments
 	for (var/i = 1 to length(created_atoms))
 		created = created_atoms[i]
-		if (!created.initialized)
+		if (!(created.atom_flags & ATOM_INITIALIZED))
 			arguments = created_atoms[created] ? mapload_arg + created_atoms[created] : mapload_arg
 			InitAtom(created, arguments)
 			CHECK_TICK
 	created_atoms.Cut()
 	if (!subsystem_initialized)
 		for (var/atom/atom in world)
-			if (!atom.initialized)
+			if (!(atom.atom_flags & ATOM_INITIALIZED))
 				InitAtom(atom, mapload_arg)
 				++count
 				CHECK_TICK
@@ -90,7 +90,7 @@ SUBSYSTEM_DEF(atoms)
 				bad_init_calls[atom_type] |= DID_NOT_RETURN_HINT
 	if (!atom)
 		qdeleted = TRUE
-	else if (!atom.initialized)
+	else if (!(atom.atom_flags & ATOM_INITIALIZED))
 		bad_init_calls[atom_type] |= DID_NOT_SET_INITIALIZED
 	return qdeleted || QDELING(atom)
 

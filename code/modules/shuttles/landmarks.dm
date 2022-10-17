@@ -7,7 +7,7 @@
 	unacidable = 1
 	simulated = 0
 	invisibility = 101
-	flags = SLANDMARK_FLAG_AUTOSET // We generally want to use current area/turf as base.
+	atom_flags = SLANDMARK_FLAG_AUTOSET // We generally want to use current area/turf as base.
 
 	//ID of the landmark
 	var/landmark_tag
@@ -30,7 +30,7 @@
 		. = INITIALIZE_HINT_LATELOAD
 
 	// Even if this flag is set, hardcoded values take precedence.
-	if(flags & SLANDMARK_FLAG_AUTOSET)
+	if(atom_flags & SLANDMARK_FLAG_AUTOSET)
 		if(ispath(base_area))
 			var/area/A = locate(base_area)
 			if(!istype(A))
@@ -123,7 +123,7 @@
 /obj/effect/shuttle_landmark/automatic
 	name = "Navpoint"
 	landmark_tag = "navpoint"
-	flags = SLANDMARK_FLAG_AUTOSET
+	atom_flags = SLANDMARK_FLAG_AUTOSET
 
 /obj/effect/shuttle_landmark/automatic/Initialize()
 	landmark_tag += "-[x]-[y]-[z]-[random_id("landmarks",1,9999)]"

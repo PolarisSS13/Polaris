@@ -91,7 +91,7 @@
 /obj/effect/dummy/spell_jaunt/relaymove(var/mob/user, direction)
 	if (!src.canmove || reappearing) return
 	var/turf/newLoc = get_step(src,direction)
-	if(!(newLoc.flags & NOJAUNT))
+	if(!(newLoc.atom_flags & NOJAUNT))
 		loc = newLoc
 		var/turf/T = get_turf(loc)
 		if(!T.contains_dense_objects())

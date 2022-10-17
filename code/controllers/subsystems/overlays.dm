@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(overlays)
 	icon_cache.Cut()
 	cache_size = 0
 	for (var/atom/atom)
-		atom.flags &= ~OVERLAY_QUEUED
+		atom.atom_flags &= ~OVERLAY_QUEUED
 		CHECK_TICK
 
 
@@ -85,7 +85,7 @@ SUBSYSTEM_DEF(overlays)
 			result += GetIconAppearance(entry)
 		else
 			if (isloc(entry))
-				if (entry.flags & OVERLAY_QUEUED)
+				if (entry.atom_flags & OVERLAY_QUEUED)
 					entry.ImmediateOverlayUpdate()
 			if (!ispath(entry))
 				result += entry.appearance
@@ -97,10 +97,10 @@ SUBSYSTEM_DEF(overlays)
 
 /// Enqueues the atom for an overlay update if not already queued
 /atom/proc/QueueOverlayUpdate()
-	if (flags & OVERLAY_QUEUED)
+	if (atom_flags & OVERLAY_QUEUED)
 		return
 	SSoverlays.queue += src
-	flags |= OVERLAY_QUEUED
+	atom_flags |= OVERLAY_QUEUED
 
 
 /// Builds the atom's overlay state from caches
@@ -109,7 +109,7 @@ SUBSYSTEM_DEF(overlays)
 		if (length(overlays))
 			overlays.Cut()
 		return
-	flags &= ~OVERLAY_QUEUED
+	atom_flags &= ~OVERLAY_QUEUED
 	if (length(priority_overlays))
 		if (length(our_overlays))
 			overlays = priority_overlays + our_overlays

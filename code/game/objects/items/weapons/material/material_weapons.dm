@@ -44,7 +44,7 @@
 				matter[material_type] *= force_divisor // May require a new var instead.
 
 	if(!(material.conductive))
-		src.flags |= NOCONDUCT
+		atom_flags |= NOCONDUCT
 
 /obj/item/material/get_material()
 	return material

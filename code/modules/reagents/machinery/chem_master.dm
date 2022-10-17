@@ -19,7 +19,7 @@
 	var/pillsprite = 1
 	var/max_pill_count = 20
 	var/printing = FALSE
-	flags = OPENCONTAINER
+	atom_flags = OPENCONTAINER
 	clicksound = "button"
 
 /obj/machinery/chem_master/Initialize()

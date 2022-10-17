@@ -16,7 +16,7 @@
 	for (var/obj/item/grab/G in H.grabbed_by)
 		if (G.loc == user && G.state >= GRAB_AGGRESSIVE)
 			return TRUE
-			
+
 	return FALSE
 
 /obj/item/tape_roll/attack(var/mob/living/carbon/human/H, var/mob/user)
@@ -116,15 +116,13 @@
 	icon = 'icons/obj/bureaucracy.dmi'
 	icon_state = "tape"
 	w_class = ITEMSIZE_TINY
+	item_flags = NOBLUDGEON
 	plane = MOB_PLANE
 	anchored = FALSE
 	drop_sound = null
 
 	var/obj/item/stuck = null
 
-/obj/item/ducttape/Initialize()
-	. = ..()
-	flags |= NOBLUDGEON
 
 /obj/item/ducttape/examine(mob/user)
 	return stuck.examine(user)

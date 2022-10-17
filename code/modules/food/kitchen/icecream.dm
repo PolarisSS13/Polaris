@@ -15,7 +15,7 @@
 	density = 1
 	anchored = 0
 	use_power = USE_POWER_OFF
-	flags = OPENCONTAINER | NOREACT
+	atom_flags = OPENCONTAINER | NOREACT
 
 	var/list/product_types = list()
 	var/dispense_flavour = ICECREAM_VANILLA

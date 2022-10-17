@@ -357,14 +357,14 @@
 
 // Called on everything that falling_atom might hit. Return TRUE if you're handling it so find_fall_target() will stop checking.
 /atom/proc/CheckFall(var/atom/movable/falling_atom)
-	if(density && !(flags & ON_BORDER))
+	if(density && !(atom_flags & ON_BORDER))
 		return TRUE
 
 // If you are hit: how is it handled.
 // Return TRUE if the generic fall_impact should be called
 // Return FALSE if you handled it yourself or if there's no effect from hitting you
 /atom/proc/check_impact(var/atom/movable/falling_atom)
-	if(density && !(flags & ON_BORDER))
+	if(density && !(atom_flags & ON_BORDER))
 		return TRUE
 
 // By default all turfs are gonna let you hit them regardless of density.
