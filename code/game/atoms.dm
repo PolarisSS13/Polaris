@@ -84,6 +84,9 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 	atom_flags |= ATOM_INITIALIZED
 	if (QDELING(src))
 		crash_with("GC: -- [type] had Initialize() called after qdel() --")
+	if (IsAbstract())
+		log_debug("Abstract atom [type] created!")
+		return INITIALIZE_HINT_QDEL
 	if (light_power && light_range)
 		update_light()
 	if (opacity && isturf(loc))
