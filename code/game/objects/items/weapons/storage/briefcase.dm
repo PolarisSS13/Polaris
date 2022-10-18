@@ -1,6 +1,6 @@
 /obj/item/storage/briefcase
-	name = "briefcase"
-	desc = "It's made of AUTHENTIC faux-leather and has a price-tag still attached. Its owner must be a real professional."
+	name = "brown briefcase"
+	desc = "It's made of AUTHENTIC faux-leather. Its owner must be a real professional."
 	icon_state = "briefcase"
 	force = 8.0
 	throw_speed = 1
@@ -12,9 +12,29 @@
 	drop_sound = 'sound/items/drop/backpack.ogg'
 	pickup_sound = 'sound/items/pickup/backpack.ogg'
 
+/obj/item/storage/briefcase/standard/black
+	name = "black briefcase"
+	icon_state = "briefcase_black"
+
+/obj/item/storage/briefcase/standard/nt
+	name = "branded briefcase"
+	desc = "It's made of AUTHENTIC faux-leather and printed with the NanoTrasen logo. Its owner must be a real executive."
+	icon_state = "briefcase_nt"
+
+
+/obj/item/storage/briefcase/standard/alum
+	name = "aluminium briefcase"
+	desc = "It's made of lightweight but sturdy metal. Its owner might be a real professional of a different kind."
+	icon_state = "briefcase_alum"
+
+/obj/item/storage/briefcase/standard/alum/Initialize()
+	if(prob(50))
+		name = "aluminum briefcase"
+	. = ..()
+
 /obj/item/storage/briefcase/clutch
 	name = "clutch purse"
-	desc = "A fashionable handheld bag typically used by women."
+	desc = "A fashionable handheld bag."
 	icon_state = "clutch"
 	item_state_slots = list(slot_r_hand_str = "smpurse", slot_l_hand_str = "smpurse")
 	force = 0
