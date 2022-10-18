@@ -18,7 +18,7 @@
 /datum/language/unathi/monkey
 	name = "Stok"
 	desc = "Hiss hiss hiss."
-	key = "7"
+	key = "S"
 	syllables = list("squick","croak")
 	machine_understands = 0
 
