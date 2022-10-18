@@ -12,7 +12,7 @@
 	body_parts_covered = 0
 	var/brightness_on = 1
 	chem_volume = 0 //ecig has no storage on its own but has reagent container created by parent obj
-	item_state = "ecigoff"
+	item_state = "ecigoff1"
 	is_pipe = TRUE //to avoid a runtime in examine()
 	var/icon_off
 	var/icon_empty
@@ -24,7 +24,7 @@
 
 /obj/item/clothing/mask/smokable/ecig/examine(mob/user)
 	. = ..()
-	
+
 	if(active)
 		. += "<span class='notice'>It is turned on.</span>"
 	else
@@ -61,6 +61,7 @@
 	icon_off = "ecigoff1"
 	icon_empty = "ecigoff1"
 	icon_on = "ecigon"
+
 /obj/item/clothing/mask/smokable/ecig/util/Initialize()
 	. = ..()
 	color = pick(ecig_colors)
@@ -69,6 +70,7 @@
 	name = "deluxe electronic cigarette"
 	desc = "A premium model eGavana MK3 electronic cigarette, shaped like a cigar."
 	description_fluff = "The eGavana is a product of Morpheus Cyberkinetics, and comes standard with additional jacks that allow cyborgs and positronics to experience a simulation of soothing artificial oil residues entering their lungs. It's a pretty good cig for meatbags, too."
+	cartridge_type = /obj/item/reagent_containers/ecig_cartridge/high_nicotine
 	icon_state = "pcigoff1"
 	icon_off = "pcigoff1"
 	icon_empty = "pcigoff2"
@@ -88,15 +90,15 @@
 
 /obj/item/clothing/mask/smokable/ecig/update_icon()
 	if (active)
-		item_state = icon_on
+		item_state = "ecigon"
 		icon_state = icon_on
 		set_light(brightness_on)
 	else if (ec_cartridge)
 		set_light(0)
-		item_state = icon_off
+		item_state = "ecigoff1"
 		icon_state = icon_off
 	else
-		icon_state = icon_empty
+		icon_state = "ecigoff2"
 		item_state = icon_empty
 		set_light(0)
 	if(ismob(loc))
@@ -243,13 +245,12 @@
 	reagents.add_reagent("nicotine", 5)
 	reagents.add_reagent("water", 10)
 	reagents.add_reagent("coffee", 5)
-/*
-/obj/item/reagent_containers/ecig_cartridge/cannabis
-	name = "herb flavour cartridge"
-	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label seems to be suspiciously scuffed off..."
-/obj/item/reagent_containers/ecig_cartridge/cannabis/Initialize()
+
+/obj/item/reagent_containers/ecig_cartridge/ambrosia
+	name = "ambrosia flavour cartridge"
+	desc = "A small metal cartridge which contains an atomizing coil and a solution to be atomized. The label says it contains ambrosia extract."
+/obj/item/reagent_containers/ecig_cartridge/ambrosia/Initialize()
 	. = ..()
 	reagents.add_reagent("nicotine", 5)
 	reagents.add_reagent("water", 10)
-	reagents.add_reagent("cannabis", 5)
-*/
+	reagents.add_reagent("ambrosia_extract", 5)
