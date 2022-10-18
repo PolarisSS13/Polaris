@@ -258,7 +258,6 @@
 	dress_preview_mob(mannequin)
 	mannequin.toggle_tail(setting = TRUE)
 	mannequin.toggle_wing(setting = TRUE)
-	mannequin.update_tail_showing()
 	mannequin.ImmediateOverlayUpdate()
 
 	update_character_previews(new /mutable_appearance(mannequin))
