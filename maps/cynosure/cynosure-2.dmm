@@ -1789,7 +1789,9 @@
 /area/surface/station/hallway/secondary/groundfloor/civilian)
 "aUH" = (
 /obj/structure/simple_door/sifwood,
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "aUJ" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -9012,7 +9014,9 @@
 /obj/structure/bed/chair/wood{
 	dir = 4
 	},
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "ekq" = (
 /obj/structure/table/wooden_reinforced,
@@ -13393,7 +13397,9 @@
 "gdi" = (
 /obj/structure/table/sifwoodentable,
 /obj/item/storage/firstaid/regular,
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "gdn" = (
 /obj/machinery/door/firedoor/border_only,
@@ -20171,7 +20177,9 @@
 /area/surface/station/engineering/reactor_waste)
 "jvV" = (
 /obj/structure/table/sifwoodentable,
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "jwg" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -20197,7 +20205,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway)
 "jwy" = (
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "jwF" = (
 /obj/structure/cable/green{
@@ -20855,7 +20865,9 @@
 /obj/structure/bed/chair/wood{
 	dir = 4
 	},
-/turf/simulated/floor/wood/sif/broken,
+/turf/simulated/floor/wood/sif/broken{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "jNq" = (
 /obj/structure/cable/green{
@@ -26196,7 +26208,9 @@
 /obj/structure/bed/chair/wood{
 	dir = 8
 	},
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "mab" = (
 /obj/item/radio/intercom{
@@ -29197,7 +29211,9 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "nnd" = (
 /obj/effect/floor_decal/spline/plain{
@@ -37099,7 +37115,9 @@
 "qBI" = (
 /obj/structure/table/sifwoodentable,
 /obj/item/material/knife/tacknife/survival,
-/turf/simulated/floor/wood/sif/broken,
+/turf/simulated/floor/wood/sif/broken{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "qBQ" = (
 /obj/effect/floor_decal/steeldecal/steel_decals9{
@@ -37224,7 +37242,9 @@
 /obj/machinery/light{
 	dir = 1
 	},
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "qEr" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
@@ -45395,7 +45415,9 @@
 /obj/machinery/light{
 	dir = 4
 	},
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "uvB" = (
 /obj/structure/cable{
@@ -47964,7 +47986,9 @@
 	icon_state = "0-4"
 	},
 /obj/fiftyspawner/phoron,
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "vBN" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
@@ -49614,7 +49638,9 @@
 "wtI" = (
 /obj/structure/table/sifwoodentable,
 /obj/item/melee/umbrella/random,
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "wtQ" = (
 /obj/structure/cable/green{
@@ -52323,7 +52349,9 @@
 /area/surface/station/crew_quarters/cafeteria)
 "xFI" = (
 /obj/structure/bed,
-/turf/simulated/floor/wood/sif,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
 /area/surface/outpost/checkpoint)
 "xGi" = (
 /turf/simulated/wall/concrete,
