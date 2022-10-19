@@ -1530,6 +1530,12 @@
 	if(trunk)
 		trunk.linked = src	// link the pipe trunk to self
 
+/obj/structure/disposaloutlet/Destroy()
+	var/obj/structure/disposalpipe/trunk/trunk = locate() in loc
+	if(trunk)
+		trunk.linked = null
+	return ..()
+
 	// expel the contents of the holder object, then delete it
 	// called when the holder exits the outlet
 /obj/structure/disposaloutlet/proc/expel(var/obj/structure/disposalholder/H)
