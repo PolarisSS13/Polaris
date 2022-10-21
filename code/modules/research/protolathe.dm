@@ -1,7 +1,7 @@
 /obj/machinery/r_n_d/protolathe
 	name = "Protolathe"
 	icon_state = "protolathe"
-	flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 	circuit = /obj/item/circuitboard/protolathe
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 30

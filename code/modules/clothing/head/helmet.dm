@@ -4,7 +4,7 @@
 	icon_state = "helmet"
 	valid_accessory_slots = (ACCESSORY_SLOT_HELM_C)
 	restricted_accessory_slots = (ACCESSORY_SLOT_HELM_C)
-	flags = THICKMATERIAL
+	item_flags = THICKMATERIAL
 	armor = list(melee = 40, bullet = 30, laser = 30, energy = 10, bomb = 10, bio = 0, rad = 0)
 	flags_inv = HIDEEARS|BLOCKHEADHAIR
 	cold_protection = HEAD
@@ -127,7 +127,7 @@
 	name = "explorer hood"
 	desc = "An armoured hood for exploring harsh environments."
 	icon_state = "explorer"
-	flags = THICKMATERIAL
+	item_flags = THICKMATERIAL
 	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.9
 	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
@@ -267,4 +267,3 @@
 	name = "emergency response team medical helmet"
 	desc = "A set of armor worn by medical members of the NanoTrasen Emergency Response Team. Has red and white highlights."
 	icon_state = "erthelmet_med"
-

@@ -8,7 +8,7 @@
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/pilot_helmet.dmi'
 		)
-	flags = THICKMATERIAL
+	item_flags = THICKMATERIAL
 	armor = list(melee = 20, bullet = 10, laser = 10, energy = 5, bomb = 10, bio = 0, rad = 0)
 	flags_inv = HIDEEARS
 	cold_protection = HEAD

@@ -392,7 +392,7 @@ var/global/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/UpdateMineral()
 	clear_ore_effects()
-	if(initialized && istype(mineral))
+	if((atom_flags & ATOM_INITIALIZED) && istype(mineral))
 		new /obj/effect/mineral(src, mineral)
 	update_icon()
 
@@ -751,7 +751,7 @@ var/global/list/mining_overlay_cache = list()
 
 	if(mineral_name && (mineral_name in GLOB.ore_data))
 		mineral = GLOB.ore_data[mineral_name]
-		if(initialized)
+		if(atom_flags & ATOM_INITIALIZED)
 			UpdateMineral()
 	update_icon()
 
@@ -767,7 +767,7 @@ var/global/list/mining_overlay_cache = list()
 
 		if(isnull(T.geologic_data))
 			T.geologic_data = new /datum/geosample(T)
-		
+
 		if(isnull(T.finds) || isemptylist(T.finds))
 			T.finds = list()
 			if(prob(50))
@@ -792,4 +792,3 @@ var/global/list/mining_overlay_cache = list()
 				T.artifact_find = new()
 
 		T.update_icon()
-

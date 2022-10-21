@@ -10,7 +10,7 @@
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "gripper"
 
-	flags = NOBLUDGEON
+	item_flags = NOBLUDGEON
 
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(

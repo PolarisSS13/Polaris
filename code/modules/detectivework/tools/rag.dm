@@ -23,7 +23,8 @@
 	possible_transfer_amounts = list(5)
 	volume = 10
 	can_be_placed_into = null
-	flags = OPENCONTAINER | NOBLUDGEON
+	atom_flags = ATOM_REAGENTS_IS_OPEN
+	item_flags = NOBLUDGEON
 	unacidable = 0
 	drop_sound = 'sound/items/drop/cloth.ogg'
 	pickup_sound = 'sound/items/pickup/cloth.ogg'

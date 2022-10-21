@@ -9,7 +9,7 @@
 	layer = WINDOW_LAYER
 	pressure_resistance = 4*ONE_ATMOSPHERE
 	anchored = 1.0
-	flags = ON_BORDER
+	atom_flags = ATOM_HAS_TRANSITION_PRIORITY
 	var/maxhealth = 14.0
 	var/maximal_heat = T0C + 100 		// Maximal heat before this window begins taking damage from fire
 	var/damage_per_fire_tick = 2.0 		// Amount of damage per fire tick. Regular windows are not fireproof so they might as well break quickly.
@@ -262,7 +262,7 @@
 					hit(50)
 			return
 
-	if(W.flags & NOBLUDGEON) return
+	if(W.item_flags & NOBLUDGEON) return
 
 	if(W.is_screwdriver())
 		if(reinf && state >= 1)

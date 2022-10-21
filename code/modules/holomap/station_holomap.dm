@@ -31,7 +31,7 @@
 
 /obj/machinery/station_map/Initialize()
 	. = ..()
-	flags |= ON_BORDER // Why? It doesn't help if its not density
+	atom_flags |= ATOM_HAS_TRANSITION_PRIORITY // Why? It doesn't help if its not density
 
 /obj/machinery/station_map/Initialize()
 	. = ..()

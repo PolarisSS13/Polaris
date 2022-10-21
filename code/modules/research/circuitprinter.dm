@@ -7,7 +7,7 @@ using metal and glass, it uses glass and reagents (usually sulphuric acid).
 /obj/machinery/r_n_d/circuit_imprinter
 	name = "Circuit Imprinter"
 	icon_state = "circuit_imprinter"
-	flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 	circuit = /obj/item/circuitboard/circuit_imprinter
 	var/list/datum/design/queue = list()
 	var/progress = 0

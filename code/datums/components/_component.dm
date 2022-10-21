@@ -312,10 +312,10 @@
 	if(!length(target))
 		var/datum/C = target
 		if(!C.signal_enabled)
-			return NONE
+			return EMPTY_BITFIELD
 		var/proctype = C.signal_procs[src][sigtype]
-		return NONE | CallAsync(C, proctype, arguments)
-	. = NONE
+		return EMPTY_BITFIELD | CallAsync(C, proctype, arguments)
+	. = EMPTY_BITFIELD
 	for(var/I in target)
 		var/datum/C = I
 		if(!C.signal_enabled)

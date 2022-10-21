@@ -15,7 +15,7 @@ var/global/list/floor_decals = list()
 // abstract handler that explicitly doesn't invoke any obj behavior.
 /obj/effect/floor_decal/Initialize(var/ml, var/newdir, var/newcolour)
 	SHOULD_CALL_PARENT(FALSE)
-	initialized = TRUE
+	atom_flags |= ATOM_INITIALIZED // this is a blight
 	supplied_dir = newdir
 	if(newcolour)
 		color = newcolour

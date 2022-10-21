@@ -15,7 +15,7 @@ var/global/list/cached_icons = list()
 	possible_transfer_amounts = list(10,20,30,60)
 	volume = 60
 	unacidable = 0
-	flags = OPENCONTAINER
+	atom_flags = ATOM_REAGENTS_IS_OPEN
 	var/paint_type = "red"
 
 /obj/item/reagent_containers/glass/paint/afterattack(turf/simulated/target, mob/user, proximity)
@@ -67,4 +67,3 @@ var/global/list/cached_icons = list()
 /obj/item/reagent_containers/glass/paint/white
 	icon_state = "paint_white"
 	paint_type = "white"
-

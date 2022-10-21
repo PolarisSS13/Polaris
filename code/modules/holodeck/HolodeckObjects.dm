@@ -201,7 +201,7 @@
 					hit(50)
 			return
 
-	if(W.flags & NOBLUDGEON) return
+	if(W.item_flags & NOBLUDGEON) return
 
 	if(W.is_screwdriver())
 		to_chat(user, "<span class='notice'>It's a holowindow, you can't unfasten it!</span>")
@@ -288,7 +288,7 @@
 	throw_range = 5
 	throwforce = 0
 	w_class = ITEMSIZE_SMALL
-	flags = NOBLOODY
+	item_flags = NOBLOODY
 	var/active = 0
 
 /obj/item/holo/esword/green

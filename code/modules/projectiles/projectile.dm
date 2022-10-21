@@ -135,7 +135,7 @@
 	var/impact_effect_type = null
 
 	var/list/impacted_mobs = list()
-	
+
 	// TGMC Ammo HUD Port
 	var/hud_state = "unknown" // What HUD state we use when we have ammunition.
 	var/hud_state_empty = "unknown" // The empty state. DON'T USE _FLASH IN THE NAME OF THE EMPTY STATE STRING, THAT IS ADDED BY THE CODE.
@@ -636,7 +636,7 @@
 	return 1
 
 /obj/item/projectile/proc/check_fire(atom/target as mob, mob/living/user as mob)  //Checks if you can hit them or not.
-	check_trajectory(target, user, pass_flags, flags)
+	check_trajectory(target, user, pass_flags, atom_flags)
 
 /obj/item/projectile/CanPass()
 	return TRUE

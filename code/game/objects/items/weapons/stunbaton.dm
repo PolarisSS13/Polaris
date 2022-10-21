@@ -9,7 +9,7 @@
 	sharp = 0
 	edge = 0
 	throwforce = 7
-	flags = NOCONDUCT
+	atom_flags = ATOM_IS_INSULATED
 	w_class = ITEMSIZE_NORMAL
 	drop_sound = 'sound/items/drop/metalweapon.ogg'
 	pickup_sound = 'sound/items/pickup/metalweapon.ogg'

@@ -5,7 +5,7 @@
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "retail_idle"
-	flags = NOBLUDGEON
+	item_flags = NOBLUDGEON
 	slot_flags = SLOT_BELT
 	req_access = list(access_heads)
 	w_class = ITEMSIZE_SMALL

@@ -125,7 +125,7 @@
 			add_overlay(H.overlays_standing)
 		default_pixel_x = body.default_pixel_x
 		default_pixel_y = body.default_pixel_y
-	if(!T && length(latejoin))	
+	if(!T && length(latejoin))
 		T = pick(latejoin)			//Safety in case we cannot find the body's position
 	if(T)
 		forceMove(T)
@@ -167,10 +167,10 @@
 		I = getFlatIcon(src, defdir = SOUTH, no_anim = TRUE)
 		set_cached_examine_icon(src, I, 200 SECONDS)
 	return I
-	
+
 /mob/observer/dead/examine(mob/user)
 	. = ..()
-	
+
 	if(is_admin(user))
 		. += "\t><span class='admin'>[ADMIN_FULLMONTY(src)]</span>"
 
@@ -343,7 +343,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	for(var/area/A as anything in areas)
 		if(A.z in using_map?.secret_levels)
 			areas -= A
-	return areas				
+	return areas
 
 /mob/observer/dead/proc/jumpable_mobs()
 	var/list/mobs = getmobs()
@@ -369,7 +369,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		A = input(usr, "Select an area:", "Ghost Teleport") as null|anything in jumpable_areas()
 	if(!A)
 		return
-	
+
 	usr.forceMove(pick(get_area_turfs(A)))
 	usr.on_mob_jump()
 
@@ -382,7 +382,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 		input = input(usr, "Select a mob:", "Ghost Follow") as null|anything in jumpable_mobs()
 	if(!input)
 		return
-	
+
 	var/target = jumpable_mobs()[input]
 	if(!target) return
 	ManualFollow(target)
@@ -524,7 +524,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(check_rights(R_ADMIN|R_FUN|R_EVENT, 0, src))
 		return 0
 
-	return (T && T.holy) && (is_manifest || (mind in cult.current_antagonists))
+	return (T?.turf_flags & TURF_IS_BLESSED) && (is_manifest || (mind in cult.current_antagonists))
 
 /mob/observer/dead/verb/jumptomob(input in jumpable_mobs()) //Moves the ghost instead of just changing the ghosts's eye -Nodrak
 	set category = "Ghost"
@@ -930,7 +930,7 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	set category = "Ghost"
 	set name = "Blank pAI alert"
 	set desc = "Flash an indicator light on available blank pAI devices for a smidgen of hope."
-	
+
 	if(usr.client.prefs?.be_special & BE_PAI)
 		var/count = 0
 		for(var/obj/item/paicard/p in all_pai_cards)

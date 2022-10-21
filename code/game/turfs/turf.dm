@@ -3,7 +3,8 @@
 	layer = TURF_LAYER
 	plane = TURF_PLANE
 	level = 1
-	var/holy = 0
+
+	var/turf_flags = EMPTY_BITFIELD
 
 	// Initial air contents (in moles)
 	var/oxygen = 0
@@ -37,7 +38,7 @@
 
 /turf/Initialize(mapload)
 	. = ..()
-	
+
 	for(var/atom/movable/AM in src)
 		Entered(AM)
 
@@ -196,7 +197,7 @@
 					mover.Bump(thing)
 					continue
 				else
-					if(!firstbump || ((thing.layer > firstbump.layer || thing.flags & ON_BORDER) && !(firstbump.flags & ON_BORDER)))
+					if(!firstbump || ((thing.layer > firstbump.layer || thing.atom_flags & ATOM_HAS_TRANSITION_PRIORITY) && !(firstbump.atom_flags & ATOM_HAS_TRANSITION_PRIORITY)))
 						firstbump = thing
 	if(QDELETED(mover))					//Mover deleted from Cross/CanPass/Bump, do not proceed.
 		return FALSE
@@ -216,7 +217,7 @@
 			continue
 		var/atom/movable/thing = i
 		if(!thing.Uncross(mover, newloc))
-			if(thing.flags & ON_BORDER)
+			if(thing.atom_flags & ATOM_HAS_TRANSITION_PRIORITY)
 				mover.Bump(thing)
 			if(!CHECK_BITFIELD(mover.movement_type, UNSTOPPABLE))
 				return FALSE
@@ -271,7 +272,7 @@
 	if(density)
 		return 1
 	for(var/atom/A in src)
-		if(A.density && !(A.flags & ON_BORDER))
+		if(A.density && !(A.atom_flags & ATOM_HAS_TRANSITION_PRIORITY))
 			return 1
 	return 0
 

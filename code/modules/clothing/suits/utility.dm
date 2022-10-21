@@ -21,7 +21,7 @@
 	allowed = list(/obj/item/flashlight,/obj/item/tank/emergency/oxygen,/obj/item/extinguisher)
 	slowdown = 0.8 //Slightly better than a voidsuit
 	flags_inv = HIDEGLOVES|HIDESHOES|HIDEJUMPSUIT|HIDETAIL|HIDETIE|HIDEHOLSTER
-	item_flags = 0
+	item_flags = EMPTY_BITFIELD
 	heat_protection = UPPER_TORSO|LOWER_TORSO|LEGS|FEET|ARMS|HANDS
 	max_heat_protection_temperature = FIRESUIT_MAX_HEAT_PROTECTION_TEMPERATURE
 	cold_protection = UPPER_TORSO | LOWER_TORSO | LEGS | FEET | ARMS | HANDS
