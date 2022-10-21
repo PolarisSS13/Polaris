@@ -96,6 +96,7 @@
 #define LANGUAGE_ZADDAT "Vedahq"
 #define LANGUAGE_PROMETHEAN "Promethean Biolinguistics"
 #define LANGUAGE_BLOB "Chemosense Transmission"
+#define LANGUAGE_SIVIAN "Sivian Creole"
 #define LANGUAGE_GIBBERISH "Babel"
 
 // Language flags.
