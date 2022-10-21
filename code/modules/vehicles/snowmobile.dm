@@ -25,6 +25,10 @@
 	icon_state = "sno_keys"
 	w_class = ITEMSIZE_TINY
 
+/obj/vehicle/train/engine/quadbike/snowmobile/random/Initialize()
+	paint_color = rgb(rand(1,255),rand(1,255),rand(1,255))
+	. = ..()
+
 /obj/vehicle/train/engine/quadbike/snowmobile/Initialize()
 	. = ..()
 	riding_datum = new riding_datum_type(src)
