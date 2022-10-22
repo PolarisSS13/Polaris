@@ -76,7 +76,6 @@ GLOBAL_DATUM(debug_real_globals, /debug_real_globals) // :3c
 		"admin_log",
 		"admin_ranks",
 		"admin_state",
-		"alien_whitelist",
 		"alldirs",
 		"ahelp_tickets",
 		"adminfaxes",
