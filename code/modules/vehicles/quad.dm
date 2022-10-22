@@ -61,20 +61,22 @@
 	handle_vehicle_icon()
 
 /obj/vehicle/train/engine/quadbike/proc/get_turf_speeds(atom/prev_loc)
-	if(!istype(loc, prev_loc.type) && !istype(prev_loc, loc.type))	//Did we move at all, and are we changing turf types?
-		if(istype(loc, /turf/simulated/floor/water))
-			speed_mod = outdoors_speed_mod * 4 //It kind of floats due to its tires, but it is slow.
-		else if(istype(loc, /turf/simulated/floor/outdoors/rocks))
-			speed_mod = initial(speed_mod) //Rocks are good, rocks are solid.
-		else if(istype(loc, /turf/simulated/floor/outdoors/dirt) || istype(loc, /turf/simulated/floor/outdoors/grass) || istype(loc, /turf/simulated/floor/outdoors/newdirt) || istype(loc, /turf/simulated/floor/outdoors/newdirt_nograss))
-			speed_mod = outdoors_speed_mod //Dirt and grass are the outdoors bench mark.
-		else if(istype(loc, /turf/simulated/floor/outdoors/mud))
-			speed_mod = outdoors_speed_mod * 1.5 //Gets us roughly 1. Mud may be fun, but it's not the best.
-		else if(istype(loc, /turf/simulated/floor/outdoors/snow))
-			speed_mod = outdoors_speed_mod * 1.7 //Roughly a 1.25. Snow is coarse and wet and gets everywhere, especially your electric motors.
-		else
-			speed_mod = initial(speed_mod)
-		update_car(train_length, active_engines)
+	// Same speed if turf type doesn't change
+	if(istype(loc, prev_loc.type) || istype(prev_loc, loc.type))
+		return
+	if(istype(loc, /turf/simulated/floor/water))
+		speed_mod = outdoors_speed_mod * 4 //It kind of floats due to its tires, but it is slow.
+	else if(istype(loc, /turf/simulated/floor/outdoors/rocks))
+		speed_mod = initial(speed_mod) //Rocks are good, rocks are solid.
+	else if(istype(loc, /turf/simulated/floor/outdoors/dirt) || istype(loc, /turf/simulated/floor/outdoors/grass) || istype(loc, /turf/simulated/floor/outdoors/newdirt) || istype(loc, /turf/simulated/floor/outdoors/newdirt_nograss))
+		speed_mod = outdoors_speed_mod //Dirt and grass are the outdoors bench mark.
+	else if(istype(loc, /turf/simulated/floor/outdoors/mud))
+		speed_mod = outdoors_speed_mod * 1.5 //Gets us roughly 1. Mud may be fun, but it's not the best.
+	else if(istype(loc, /turf/simulated/floor/outdoors/snow))
+		speed_mod = outdoors_speed_mod * 1.7 //Roughly a 1.25. Snow is coarse and wet and gets everywhere, especially your electric motors.
+	else
+		speed_mod = initial(speed_mod)
+	update_car(train_length, active_engines)
 
 /obj/vehicle/train/engine/quadbike/proc/handle_vehicle_icon()
 	switch(dir) //Due to being a Big Boy sprite, it has to have special pixel shifting to look 'normal' when being driven.

@@ -285,6 +285,7 @@
 	icon_state = "snowmobile-frame"
 
 /obj/item/vehicle_assembly/snowmobile/attackby(var/obj/item/W as obj, var/mob/user as mob)
+	..()
 	switch(build_stage)
 		if(0)
 			if(istype(W, /obj/item/stack/material/steel))

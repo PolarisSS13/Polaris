@@ -15,6 +15,7 @@
 	frame_state = "snowmobile" //Custom-item proofing!
 	paint_base = 'icons/obj/vehicles.dmi'
 	pixel_x = 0
+	latch_on_start = 0
 
 	var/riding_datum_type = /datum/riding/snowmobile
 
