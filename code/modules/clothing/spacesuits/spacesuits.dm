@@ -9,6 +9,7 @@
 	randpixel = 0
 	center_of_mass = null
 	item_flags = THICKMATERIAL | AIRTIGHT | ALLOW_SURVIVALFOOD | PHORONGUARD
+	flags_inv = HIDEEARS|BLOCKHAIR
 	permeability_coefficient = 0.01
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 50)
 	body_parts_covered = HEAD|FACE|EYES
