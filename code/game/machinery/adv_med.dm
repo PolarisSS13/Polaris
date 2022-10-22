@@ -128,7 +128,7 @@
 		occupant.client.perspective = MOB_PERSPECTIVE
 	occupant.loc = src.loc
 	occupant = null
-	icon_state = "body_scanner_1"
+	icon_state = "body_scanner_0"
 	SStgui.update_uis(src)
 	return
 
@@ -181,7 +181,7 @@
 
 	var/occupantData[0]
 	if(occupant && ishuman(occupant))
-		icon_state = "body_scanner_1"
+		icon_state = "body_scanner_2"
 		var/mob/living/carbon/human/H = occupant
 		occupantData["name"] = H.name
 		occupantData["stat"] = H.stat

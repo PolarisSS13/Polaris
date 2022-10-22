@@ -514,10 +514,10 @@
 
 /obj/item/storage/box/freezer
 	name = "portable freezer"
-	desc = "This nifty shock-resistant device will keep your 'groceries' nice and non-spoiled."
+	desc = "This nifty shock-resistant, self-refrigerating device will keep your 'groceries' nice and non-spoiled."
 	icon = 'icons/obj/storage.dmi'
 	icon_state = "portafreezer"
-	item_state_slots = list(slot_r_hand_str = "medicalpack", slot_l_hand_str = "medicalpack")
+	item_state_slots = list(slot_r_hand_str = "firstaid-advanced", slot_l_hand_str = "firstaid-advanced")
 	foldable = null
 	max_w_class = ITEMSIZE_NORMAL
 	can_hold = list(/obj/item/organ)
