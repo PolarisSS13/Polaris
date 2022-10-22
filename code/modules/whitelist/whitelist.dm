@@ -83,15 +83,16 @@
 	if(whitelist_overrides(M))
 		return TRUE
 
+	var/client/C = (!isclient(M)) ? M.client : M
+
 	//You did something wrong
-	if(!M || !language || !M.client)
+	if(!istype(C) || !istype(language))
 		return FALSE
 
 	//The language isn't even whitelisted
 	if(!(language.flags & WHITELISTED))
 		return TRUE
 
-	var/client/C = (!isclient(M)) ? M.client : M
 	return C.is_whitelisted(language.type)
 
 
