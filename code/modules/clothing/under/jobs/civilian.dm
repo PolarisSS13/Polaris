@@ -138,12 +138,13 @@
 	item_state_slots = list(slot_r_hand_str = "lightblue", slot_l_hand_str = "lightblue")
 
 /obj/item/clothing/under/lawyer/black
-	name = "tacky black lawyer suit"
+	name = "slick black suit"
 	icon_state = "lawyer_black"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
 
 /obj/item/clothing/under/lawyer/black/skirt
-	name = "tacky black lawyer skirt"
+	name = "slick black skirt"
+	index = 1
 	icon_state = "lawyer_black_skirt"
 	item_state_slots = list(slot_r_hand_str = "lawyer_black", slot_l_hand_str = "lawyer_black")
 
@@ -169,25 +170,54 @@
 	icon_state = "trim_skirtsuit"
 	index = 1
 	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
+
 /obj/item/clothing/under/lawyer/red
-	name = "tacky red suit"
+	name = "slick red suit"
 	icon_state = "lawyer_red"
 	item_state_slots = list(slot_r_hand_str = "lawyer_red", slot_l_hand_str = "lawyer_red")
 
 /obj/item/clothing/under/lawyer/red/skirt
-	name = "tacky red skirt"
+	name = "slick red skirt"
+	index = 1
 	icon_state = "lawyer_red_skirt"
 	item_state_slots = list(slot_r_hand_str = "lawyer_red", slot_l_hand_str = "lawyer_red")
 
 /obj/item/clothing/under/lawyer/blue
-	name = "tacky blue suit"
+	name = "slick blue suit"
 	icon_state = "lawyer_blue"
 	item_state_slots = list(slot_r_hand_str = "lawyer_blue", slot_l_hand_str = "lawyer_blue")
 
 /obj/item/clothing/under/lawyer/blue/skirt
-	name = "tacky blue skirt"
+	name = "slick blue skirt"
+	index = 1
 	icon_state = "lawyer_blue_skirt"
 	item_state_slots = list(slot_r_hand_str = "lawyer_blue", slot_l_hand_str = "lawyer_blue")
+
+/obj/item/clothing/under/lawyer/grey
+	name = "slick grey suit"
+	desc = "Man, this looks good."
+	icon_state = "good_suit"
+	item_state_slots = list(slot_r_hand_str = "grey", slot_l_hand_str = "grey")
+
+/obj/item/clothing/under/lawyer/grey/skirt
+	name = "slick grey skirt"
+	index = 1
+	icon_state = "good_suit_skirt"
+
+/obj/item/clothing/under/lawyer/white
+	name = "slick white suit"
+	icon_state = "good_suit"
+	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
+
+/obj/item/clothing/under/lawyer/white/skirt
+	name = "slick white skirt"
+	index = 1
+	icon_state = "white_suit_skirt"
+
+/obj/item/clothing/under/lawyer/beige
+	name = "beige suit"
+	icon_state = "beige_suit"
+	item_state_slots = list(slot_r_hand_str = "white", slot_l_hand_str = "white")
 
 /obj/item/clothing/under/lawyer/bluesuit
 	name = "blue suit"

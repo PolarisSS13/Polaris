@@ -93,13 +93,14 @@
 //Orange emergency space suit
 /obj/item/clothing/head/helmet/space/emergency
 	name = "Emergency Space Helmet"
-	icon_state = "syndicate-helm-orange"
+	icon_state = "emergencyhelm"
 	desc = "A simple helmet with a built in light, smells like mothballs."
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_NONE
 
 /obj/item/clothing/suit/space/emergency
 	name = "Emergency Softsuit"
-	icon_state = "syndicate-orange"
+	icon_state = "emergency_softsuit"
 	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
 	slowdown = 2
 
@@ -109,6 +110,7 @@
 	name = "performance sports space helmet"
 	icon_state = "sports_void"
 	desc = "A sleek space helmet for the civilian extra-vehicular extreme sports market. Please replace after any impact!"
+	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 
 /obj/item/clothing/suit/space/sports
 	name = "performance sports spacesuit"

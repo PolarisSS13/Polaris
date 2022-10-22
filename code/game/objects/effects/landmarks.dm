@@ -177,15 +177,6 @@
 	new /obj/item/clothing/head/that(src.loc)
 	return INITIALIZE_HINT_QDEL
 
-/obj/effect/landmark/costume/scratch/Initialize()
-	..()
-	new /obj/item/clothing/gloves/white(src.loc)
-	new /obj/item/clothing/shoes/white(src.loc)
-	new /obj/item/clothing/under/scratch(src.loc)
-	if (prob(30))
-		new /obj/item/clothing/head/cueball(src.loc)
-	return INITIALIZE_HINT_QDEL
-
 /obj/effect/landmark/costume/highlander/Initialize()
 	..()
 	new /obj/item/clothing/under/kilt(src.loc)
