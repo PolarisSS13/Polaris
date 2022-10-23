@@ -35,7 +35,7 @@
 		log_debug("Drake harness created without a drake!")
 		return INITIALIZE_HINT_QDEL
 	var/obj/item/gps/explorer/on/gps = new (owner)
-	gps.gps_tag = owner.name
+	gps.SetTag(owner.name)
 	attached_items[ATTACHED_GPS] = gps
 	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
 	new /obj/item/stack/medical/bruise_pack (src)

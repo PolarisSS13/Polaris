@@ -246,6 +246,10 @@ var/global/const/access_explorer = 43
 		// Pass the mob back.
 		qdel(player)
 		prompt_rename(doggo)
+		var/obj/item/storage/internal/animal_harness/grafadreka/harness = doggo.harness
+		var/obj/item/gps/gps = harness.attached_items[harness.ATTACHED_GPS]
+		if (gps)
+			gps.SetTag(doggo.name)
 		return doggo
 
 	return ..()
