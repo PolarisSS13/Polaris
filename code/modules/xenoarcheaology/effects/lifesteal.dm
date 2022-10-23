@@ -34,7 +34,8 @@
 
 			if(need_beam)
 				carrier.Beam(victim, icon_state = "lichbeam", time = 2 SECONDS)
-		get_master_holder().visible_message(
+		var/atom/A = get_master_holder()
+		A.visible_message(
 			"<span class='alien'>[bicon(get_master_holder())] \The [get_master_holder()] sends noxious spores toward \the [carrier]. A sickly light emanates from them!</span>")
 
 

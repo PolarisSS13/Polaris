@@ -9,7 +9,8 @@
 /datum/artifact_effect/common/noxious/proc/offgas()
 	var/mob/living/L = locate() in oview(get_master_holder())
 	if(prob(20) && !L.stat)	// There's some active living thing nearby, produce offgas.
-		get_master_holder().visible_message("<span class='alien'>[bicon(get_master_holder())] \The [get_master_holder()] disgorches a cloud of noxious gas!</span>")
+		var/atom/A = get_master_holder()
+		A.visible_message("<span class='alien'>[bicon(get_master_holder())] \The [get_master_holder()] disgorches a cloud of noxious gas!</span>")
 		var/turf/T = get_turf(get_master_holder())
 		var/datum/effect_system/smoke_spread/noxious/BS = new /datum/effect_system/smoke_spread/noxious
 		BS.attach(T)

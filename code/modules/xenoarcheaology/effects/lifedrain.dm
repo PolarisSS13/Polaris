@@ -71,7 +71,8 @@
 					carrier.add_modifier(/datum/modifier/berserk_exhaustion, total_heal SECONDS)
 					if(!QDELETED(drain_beam))
 						qdel(drain_beam)
-		get_master_holder().visible_message(
+		var/atom/A = get_master_holder()
+		A.visible_message(
 			"<span class='alien'>A sickly beam lashes out from [bicon(get_master_holder())] \the [get_master_holder()] at \the [carrier]!</span>")
 
 
