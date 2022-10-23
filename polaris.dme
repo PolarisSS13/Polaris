@@ -3228,6 +3228,7 @@
 #include "code\modules\xenoarcheaology\effects\faraday.dm"
 #include "code\modules\xenoarcheaology\effects\feysight.dm"
 #include "code\modules\xenoarcheaology\effects\forcefield.dm"
+#include "code\modules\xenoarcheaology\effects\fortify.dm"
 #include "code\modules\xenoarcheaology\effects\gaia.dm"
 #include "code\modules\xenoarcheaology\effects\gasco2.dm"
 #include "code\modules\xenoarcheaology\effects\gasnitro.dm"
