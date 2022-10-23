@@ -3240,6 +3240,7 @@
 #include "code\modules\xenoarcheaology\effects\heal.dm"
 #include "code\modules\xenoarcheaology\effects\heat.dm"
 #include "code\modules\xenoarcheaology\effects\hurt.dm"
+#include "code\modules\xenoarcheaology\effects\indiscriminate_spines.dm"
 #include "code\modules\xenoarcheaology\effects\poltergeist.dm"
 #include "code\modules\xenoarcheaology\effects\radiate.dm"
 #include "code\modules\xenoarcheaology\effects\resurrect.dm"

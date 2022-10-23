@@ -19,7 +19,7 @@
 		if(L in exempt)
 			continue
 
-		var/obj/item/projectile/P = new /obj/item/projectile/beam/shock(get_turf(B))
+		var/obj/item/projectile/P = new /obj/item/projectile/beam/shock(get_turf(get_master_holder()))
 		P.launch_projectile(L, BP_TORSO, carrier)
 		chargelevel -= 3
 
