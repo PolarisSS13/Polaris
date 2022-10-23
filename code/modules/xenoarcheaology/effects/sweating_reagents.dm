@@ -1,6 +1,8 @@
 /datum/artifact_effect/common/sweating
 	name = "sweating"
 	var/list/reagents = list()
+	effect_type = EFFECT_ORGANIC
+	effect_state = "oozes"
 
 
 /datum/artifact_effect/common/sweating/New(datum/component/artifact_master/newmaster)

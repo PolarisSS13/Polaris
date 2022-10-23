@@ -3223,6 +3223,7 @@
 #include "code\modules\xenoarcheaology\effects\cold.dm"
 #include "code\modules\xenoarcheaology\effects\electric_field.dm"
 #include "code\modules\xenoarcheaology\effects\emp.dm"
+#include "code\modules\xenoarcheaology\effects\faraday.dm"
 #include "code\modules\xenoarcheaology\effects\feysight.dm"
 #include "code\modules\xenoarcheaology\effects\forcefield.dm"
 #include "code\modules\xenoarcheaology\effects\gaia.dm"
