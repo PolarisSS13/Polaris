@@ -1,4 +1,4 @@
-/datum/artifact_effect/extreme/spines
+/datum/artifact_effect/rare/spines
 	name = "spines"
 	effect_color = "#8db6b2"
 	effect_type = EFFECT_ORGANIC

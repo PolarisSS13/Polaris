@@ -42,32 +42,3 @@
 		C.adjust_integrity(-(damage / blobs_to_hurt.len))
 
 	return damage / max(blobs_to_hurt.len, 1) // To hurt the blob that got hit.
-
-/datum/blob_type/synchronous_mesh/on_chunk_tick(obj/item/blobcore_chunk/B)
-	var/mob/living/carrier = B.get_carrier()
-
-	if(!carrier)
-		return
-
-	var/list/nearby_mobs = list()
-	for(var/mob/living/L in oview(world.view, carrier))
-		if(L.stat != DEAD)
-			nearby_mobs |= L
-
-	if(nearby_mobs.len)
-		for(var/mob/living/victim in nearby_mobs)
-			var/need_beam = FALSE
-
-			if(carrier.getBruteLoss())
-				need_beam = TRUE
-				victim.adjustBruteLoss(3 / nearby_mobs.len)
-				carrier.adjustBruteLoss(-3 / nearby_mobs.len)
-
-			if(carrier.getFireLoss())
-				need_beam = TRUE
-				victim.adjustFireLoss(3 / nearby_mobs.len)
-				carrier.adjustFireLoss(-3 / nearby_mobs.len)
-
-			if(need_beam)
-				carrier.visible_message("<span class='alien'>\icon [B] \The [B] sends noxious spores toward \the [victim]!</span>")
-				carrier.Beam(victim, icon_state = "lichbeam", time = 2 SECONDS)
