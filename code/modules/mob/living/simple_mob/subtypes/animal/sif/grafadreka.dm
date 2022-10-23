@@ -95,10 +95,12 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 
 // Overriding this to handle sitting.
 /mob/living/simple_mob/animal/sif/grafadreka/lay_down()
-	. = ..()
-	if(!resting && sitting)
+	if (sitting)
+		to_chat(src, SPAN_NOTICE("You are now lying down."))
 		sitting = FALSE
 		update_icon()
+	else
+		..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/verb/sit_down()
 	set name = "Sit Down"
@@ -560,6 +562,13 @@ var/global/list/wounds_being_tended_by_drakes = list()
 	if(. && tox_damage && spend_sap(5))
 		var/mob/living/M = A
 		M.adjustToxLoss(tox_damage)
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/rejuvenate()
+	remove_modifiers_of_type(/datum/modifier/sifsap_salve, TRUE)
+	stored_sap = rand(20, 30)
+	..()
+
 
 /mob/living/simple_mob/animal/sif/grafadreka/verb/rally_pack()
 	set name = "Rally Pack"
