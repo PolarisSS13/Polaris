@@ -46,11 +46,3 @@
 			T.wet_floor()
 		for(var/atom/movable/AM in T)
 			AM.water_act(2)
-
-/datum/blob_type/pressurized_slime/on_chunk_tick(obj/item/blobcore_chunk/B)
-	wet_surroundings(B, 10)
-
-/datum/blob_type/pressurized_slime/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)	// Drenches you in water.
-	if(user)
-		user.ExtinguishMob()
-		user.fire_stacks = clamp(user.fire_stacks - 1, -25, 25)
