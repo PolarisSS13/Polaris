@@ -4,18 +4,22 @@
 	preserve_item = 1
 	var/atom/movable/master_atom
 
+
+/obj/item/storage/internal/Destroy()
+	master_atom = null
+	. = ..()
+
+
 /obj/item/storage/internal/Initialize()
 	. = ..()
 	master_atom = loc
 	if(!istype(master_atom))
 		return INITIALIZE_HINT_QDEL
 	loc = master_atom
-	name = master_atom.name
+	if (name == "storage")
+		name = master_atom.name
 	verbs -= /obj/item/verb/verb_pickup	//make sure this is never picked up.
 
-/obj/item/storage/internal/Destroy()
-	master_atom = null
-	. = ..()
 
 /obj/item/storage/internal/attack_hand()
 	return		//make sure this is never picked up
