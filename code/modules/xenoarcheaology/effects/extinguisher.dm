@@ -22,7 +22,7 @@
 
 /datum/artifact_effect/common/extinguisher/DoEffectPulse()
 	for(var/turf/simulated/T in range(1, get_turf(get_master_holder())))
-		if(prob(probability))
+		if(prob(10))
 			T.wet_floor()
 		for(var/atom/movable/AM in T)
 			AM.water_act(2)

@@ -10,7 +10,7 @@
 	if(prob(33))
 		reagents += list(list("blood",
 		                      0.6,
-							  list("blood_colour" = rgb(rand(1,255),rand(1,255),rand(1,255))))
+							  list("blood_colour" = rgb(rand(1,255),rand(1,255),rand(1,255)))))
 
 	// Sample the color of the combined reagents
 	var/datum/reagents/R = new(120)
@@ -32,13 +32,13 @@
 		splash.reagents.add_reagent("blood", 10,list("blood_colour" = effect_color))
 		splash.set_color()
 
-		splash.set_up(F, 2, 3)
+		splash.set_up(T, 2, 3)
 
 	var/obj/effect/decal/cleanable/chemcoating/blood = locate() in T
 	if(!istype(blood))
 		blood = new(T)
 	for(var/list/chem in reagents)
-		R.add_reagent(chem[0], chem[1] * chargelevel, LAZYLEN(chem) > 2 ? chem[2] : null)
+		blood.reagents.add_reagent(chem[0], chem[1] * chargelevel, LAZYLEN(chem) > 2 ? chem[2] : null)
 	blood.update_icon()
 	chargelevel = round(0.8 * chargelevel)
 
@@ -48,14 +48,16 @@
 	disgorge(old_loc)
 
 
-/datum/artifact_effect/common/sweating/DoEffectTouch(mob/living/user)
-	user.bloody_hands()
+/datum/artifact_effect/common/sweating/DoEffectTouch(mob/living/carbon/human/user)
+	if(ishuman(user))
+		user.bloody_hands()
 	if(chargelevel >= 40 && prob(20))
 		user.visible_message(
 			"<span class='alium'>\The [get_master_holder()] shudders at \the [user]'s touch, before spraying a disgusting ooze everywhere.</span>",
-			"<span class='alium'>\The [get_master_holder()] shudders at your touch, before spraying a disgusting ooze all over you!</span>"
+			"<span class='alium'>\The [get_master_holder()] shudders at your touch, before spraying a disgusting ooze all over you!</span>",
 			"<span class='notice'>A spray of liquid is followed by a fleshy slop hitting the ground.</span>")
-		user.bloody_body()
+		if(ishuman(user))
+			user.bloody_body()
 		disgorge(get_turf(user), 0)
 
 

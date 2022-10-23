@@ -25,5 +25,3 @@
 		var/datum/gas_mixture/env = holder.loc.return_air()
 		if (env && env.temperature < target_temp)
 			env.temperature += pick(0, 0, 1)
-
-	get_turf(holder).freeze_floor()

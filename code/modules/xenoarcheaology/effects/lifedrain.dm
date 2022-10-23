@@ -2,6 +2,7 @@
 	name = "lifesteal"
 	effect_color = "#3b1f3b"
 	effect_type = EFFECT_ENERGY
+	var/list/active_beams
 
 
 /datum/artifact_effect/rare/lifedrain/New()
@@ -21,7 +22,7 @@
 	if(nearby_mobs.len)
 		listclearnulls(active_beams)
 		for(var/mob/living/L in nearby_mobs)
-			if(L.stat == DEAD || L.faction == faction)
+			if(L.stat == DEAD)
 				continue
 			if(!prob(5))
 				continue
@@ -41,7 +42,7 @@
 			var/datum/beam/drain_beam = carrier.Beam(L, icon_state = "drain_life", time = 10 SECONDS)
 			active_beams |= drain_beam
 			spawn(9 SECONDS)
-				if(B && drain_beam)
+				if(get_master_holder() && drain_beam)
 					carrier.visible_message(
 						"<span class='alien'>\The [get_master_holder()] siphons energy from \the [L]</span>")
 					L.add_modifier(/datum/modifier/berserk_exhaustion, 30 SECONDS)

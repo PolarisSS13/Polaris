@@ -351,7 +351,7 @@
 				my_effect.ToggleActivate()
 
 /datum/component/artifact_master/proc/on_moved(var/list/arguments)
-	var/turf/old_loc = getturf(holder) // If we don't get an oldturf, at least try to use the new one.
+	var/turf/old_loc = get_turf(holder) // If we don't get an oldturf, at least try to use the new one.
 	if(LAZYLEN(arguments) && isturf(arguments[0]))
 		old_loc = arguments[0]
 	for(var/datum/artifact_effect/my_effect in my_effects)

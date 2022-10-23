@@ -7,11 +7,12 @@
 
 /datum/artifact_effect/extreme/tesla/New()
 	. = ..()
-	effect = ick(EFFECT_TOUCH, EFFECT_PULSE)
+	effect = pick(EFFECT_TOUCH, EFFECT_PULSE)
 
 
 /datum/artifact_effect/extreme/tesla/proc/arc(var/list/exempt = list())
-	get_master_holdeR().visible_message("<span class='danger'>\The [get_master_holder()] discharges energy wildly in all directions!</span>")
+	var/atom/A = get_master_holder()
+	A.visible_message("<span class='danger'>\The [get_master_holder()] discharges energy wildly in all directions!</span>")
 	for(var/mob/living/L in oview(world.view, get_turf(get_master_holder())))
 		if(chargelevel < 3)
 			break
@@ -20,7 +21,7 @@
 			continue
 
 		var/obj/item/projectile/P = new /obj/item/projectile/beam/shock(get_turf(get_master_holder()))
-		P.launch_projectile(L, BP_TORSO, carrier)
+		P.launch_projectile(L, BP_TORSO, get_master_holder())
 		chargelevel -= 3
 
 

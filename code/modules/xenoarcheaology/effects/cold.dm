@@ -19,7 +19,9 @@
 		if (env)
 			env.temperature = max(env.temperature - rand(5,50), 0)
 
-	get_turf(holder).freeze_floor()
+	var/turf/simulated/T = get_turf(holder)
+	if(istype(T))
+		T.freeze_floor()
 
 /datum/artifact_effect/common/cold/DoEffectAura()
 	var/atom/holder = get_master_holder()
@@ -27,4 +29,6 @@
 		var/datum/gas_mixture/env = holder.loc.return_air()
 		if (env && env.temperature > target_temp)
 			env.temperature -= pick(0, 0, 1)
-	get_turf(holder).freeze_floor()
+	var/turf/simulated/T = get_turf(holder)
+	if(istype(T))
+		T.freeze_floor()

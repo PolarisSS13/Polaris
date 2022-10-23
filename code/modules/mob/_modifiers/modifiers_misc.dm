@@ -312,6 +312,45 @@ the artifact triggers the rage.
 
 	pulse_modifier = -1
 
+// Temperature Normalizer.
+/datum/modifier/homeothermic
+	name = "temperature resistance"
+	desc = "Your body normalizes to room temperature."
+
+	on_created_text = "<span class='notice'>You feel comfortable.</span>"
+	on_expired_text = "<span class='notice'>You feel.. still probably comfortable.</span>"
+	stacks = MODIFIER_STACK_EXTEND
+
+/datum/modifier/homeothermic/tick()
+	..()
+	holder.bodytemperature = round((holder.bodytemperature + T20C) / 2)
+
+/datum/modifier/exothermic
+	name = "heat resistance"
+	desc = "Your body lowers to room temperature."
+
+	on_created_text = "<span class='notice'>You feel comfortable.</span>"
+	on_expired_text = "<span class='notice'>You feel.. still probably comfortable.</span>"
+	stacks = MODIFIER_STACK_EXTEND
+
+/datum/modifier/exothermic/tick()
+	..()
+	if(holder.bodytemperature > T20C)
+		holder.bodytemperature = round((holder.bodytemperature + T20C) / 2)
+
+/datum/modifier/endothermic
+	name = "cold resistance"
+	desc = "Your body rises to room temperature."
+
+	on_created_text = "<span class='notice'>You feel comfortable.</span>"
+	on_expired_text = "<span class='notice'>You feel.. still probably comfortable.</span>"
+	stacks = MODIFIER_STACK_EXTEND
+
+/datum/modifier/endothermic/tick()
+	..()
+	if(holder.bodytemperature < T20C)
+		holder.bodytemperature = round((holder.bodytemperature + T20C) / 2)
+
 // Nullifies EMP.
 /datum/modifier/faraday
 	name = "EMP shielding"
