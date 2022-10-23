@@ -3243,6 +3243,7 @@
 #include "code\modules\xenoarcheaology\effects\robohurt.dm"
 #include "code\modules\xenoarcheaology\effects\sleepy.dm"
 #include "code\modules\xenoarcheaology\effects\stun.dm"
+#include "code\modules\xenoarcheaology\effects\sweating_reagents.dm"
 #include "code\modules\xenoarcheaology\effects\teleport.dm"
 #include "code\modules\xenoarcheaology\effects\vampire.dm"
 #include "code\modules\xenoarcheaology\finds\eguns.dm"

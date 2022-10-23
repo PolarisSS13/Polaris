@@ -12,7 +12,7 @@
 
 
 /datum/artifact_effect/common/animate_anomaly/ToggleActivate(reveal_toggle = TRUE)
-	..()
+	. = ..()
 	find_target()
 
 

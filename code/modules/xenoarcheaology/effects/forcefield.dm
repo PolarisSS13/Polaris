@@ -13,7 +13,7 @@
 
 /datum/artifact_effect/uncommon/forcefield/ToggleActivate()
 	var/atom/holder = get_master_holder()
-	..()
+	. = ..()
 	if (created_field.len)
 		for (var/obj/effect/energy_field/F in created_field)
 			created_field.Remove(F)
@@ -29,7 +29,6 @@
 			E.invisibility = 0
 		spawn(10)
 			UpdateMove()
-	return 1
 
 
 /datum/artifact_effect/uncommon/forcefield/process()
