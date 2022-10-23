@@ -23,7 +23,9 @@
 		/obj/machinery/button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonBasic,
 		/obj/machinery/access_button = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractButtonAccess,
 		/obj/machinery/firealarm = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractFireAlarm,
-		/obj/machinery/conveyor_switch = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractConveyorSwitch
+		/obj/machinery/conveyor_switch = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractConveyorSwitch,
+		/obj/structure/simple_door = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractSimpleDoor,
+		/obj/structure/loot_pile = /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractLootPile
 	)
 
 
@@ -225,4 +227,15 @@
 		return ATTACK_FAILED
 	to_chat(src, SPAN_NOTICE("After some effort, you manage to push \the [lever]."))
 	lever.attack_hand(src)
+	return ATTACK_SUCCESSFUL
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractSimpleDoor(obj/structure/simple_door/door)
+	if (!door.state) // Open. No close! Only open.
+		door.TryToSwitchState(src)
+	return ATTACK_SUCCESSFUL
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/InteractLootPile(obj/structure/loot_pile/pile)
+	pile.attack_hand(src)
 	return ATTACK_SUCCESSFUL
