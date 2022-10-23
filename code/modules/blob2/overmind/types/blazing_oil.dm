@@ -23,25 +23,3 @@
 /datum/blob_type/blazing_oil/on_water(obj/structure/blob/B, amount)
 	spawn(1)
 		B.adjust_integrity(-(amount * 5))
-
-/datum/blob_type/blazing_oil/on_pulse(var/obj/structure/blob/B)
-	var/turf/T = get_turf(B)
-	if(!T)
-		return
-	var/datum/gas_mixture/env = T.return_air()
-	if(env)
-		env.add_thermal_energy(10 * 1000)
-
-/datum/blob_type/blazing_oil/on_chunk_tick(obj/item/blobcore_chunk/B)
-	B.reagents.add_reagent("thermite_v", 0.5)
-
-	var/turf/T = get_turf(B)
-	if(!T)
-		return
-	var/datum/gas_mixture/env = T.return_air()
-	if(env)
-		env.add_thermal_energy(10 * 1000)
-
-/datum/blob_type/blazing_oil/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)
-	user.add_modifier(/datum/modifier/exothermic, 5 MINUTES)
-	return

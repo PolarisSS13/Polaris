@@ -35,27 +35,3 @@
 			H.bodytemperature = max(H.bodytemperature - temp_change, temp_cap)
 	else // Just do some extra burn for mobs who don't process bodytemp
 		victim.adjustFireLoss(20)
-
-/datum/blob_type/cryogenic_goo/on_pulse(var/obj/structure/blob/B)
-	var/turf/simulated/T = get_turf(B)
-	if(!istype(T))
-		return
-	T.freeze_floor()
-	var/datum/gas_mixture/env = T.return_air()
-	if(env)
-		env.add_thermal_energy(-10 * 1000)
-
-/datum/blob_type/cryogenic_goo/on_chunk_tick(obj/item/blobcore_chunk/B)
-	B.reagents.add_reagent("cryoslurry", 0.5)
-
-	var/turf/simulated/T = get_turf(B)
-	if(!istype(T))
-		return
-	T.freeze_floor()
-	var/datum/gas_mixture/env = T.return_air()
-	if(env)
-		env.add_thermal_energy(-10 * 1000)
-
-/datum/blob_type/cryogenic_goo/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)
-	user.add_modifier(/datum/modifier/endothermic, 5 MINUTES)
-	return

@@ -50,8 +50,8 @@
 	user.bloody_hands()
 	if(chargelevel >= 40 && prob(20))
 		user.visible_message(
-			"<span class='alium'>\The [B] shudders at \the [user]'s touch, before spraying a disgusting ooze everywhere.</span>",
-			"<span class='alium'>\The [B] shudders at your touch, before spraying a disgusting ooze all over you!</span>"
+			"<span class='alium'>\The [get_master_holder()] shudders at \the [user]'s touch, before spraying a disgusting ooze everywhere.</span>",
+			"<span class='alium'>\The [get_master_holder()] shudders at your touch, before spraying a disgusting ooze all over you!</span>"
 			"<span class='notice'>A spray of liquid is followed by a fleshy slop hitting the ground.</span>")
 		user.bloody_body()
 		disgorge(get_turf(user), 0)
@@ -59,7 +59,7 @@
 
 /datum/artifact_effect/common/sweating/attackby(mob/living/user, obj/item/I)
 	if(I.is_open_container())
-		to_chat(user, "<span class='alien'>You hold \the [I] against \the [master.holder], and a disgusting pus dribbles into \the [I].</span>")
+		to_chat(user, "<span class='alien'>You hold \the [I] against \the [get_master_holder()], and a disgusting pus dribbles into \the [I].</span>")
 		for(var/list/chem in reagents)
 			I.reagents.add_reagent(chem[0], chem[1] * chargelevel, LAZYLEN(chem) > 2 ? chem[2] : null)
 		return TRUE
