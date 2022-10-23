@@ -3217,6 +3217,7 @@
 #include "code\modules\xenoarcheaology\effects\animate_anomaly.dm"
 #include "code\modules\xenoarcheaology\effects\badfeeling.dm"
 #include "code\modules\xenoarcheaology\effects\berserk.dm"
+#include "code\modules\xenoarcheaology\effects\blast_shielding.dm"
 #include "code\modules\xenoarcheaology\effects\cannibal.dm"
 #include "code\modules\xenoarcheaology\effects\cellcharge.dm"
 #include "code\modules\xenoarcheaology\effects\celldrain.dm"
