@@ -49,6 +49,8 @@
 
 /decl/hierarchy/outfit/job/service/chef/cook
 	name = OUTFIT_JOB_NAME("Cook")
+	suit = /obj/item/clothing/suit/storage/apron/white
+	head = /obj/item/clothing/head/surgery/hairnet
 	id_pda_assignment = "Cook"
 
 /decl/hierarchy/outfit/job/service/gardener
@@ -72,7 +74,7 @@
 
 /decl/hierarchy/outfit/job/librarian
 	name = OUTFIT_JOB_NAME("Librarian")
-	uniform = /obj/item/clothing/under/suit_jacket/red
+	uniform = /obj/item/clothing/under/suit_jacket/tan
 	l_hand = /obj/item/barcodescanner
 	id_type = /obj/item/card/id/civilian
 	pda_type = /obj/item/pda/librarian

@@ -75,7 +75,7 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	mask =     /obj/item/clothing/mask/gas
 	r_pocket = /obj/item/tank/emergency/oxygen/double
 	l_pocket = /obj/item/radio
-	uniform =  /obj/item/clothing/under/ascetic
+	uniform =  /obj/item/clothing/under/color/grey
 	shoes =    /obj/item/clothing/shoes/boots/winter
 	suit =     /obj/item/clothing/suit/storage/hooded/wintercoat
 	belt =     /obj/item/gun/energy/phasegun/pistol // better make that cell count
