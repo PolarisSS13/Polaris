@@ -954,7 +954,6 @@
 #include "code\game\objects\items\crayons.dm"
 #include "code\game\objects\items\glassjar.dm"
 #include "code\game\objects\items\gunbox.dm"
-#include "code\game\objects\items\latexballoon.dm"
 #include "code\game\objects\items\magazine.dm"
 #include "code\game\objects\items\paintkit.dm"
 #include "code\game\objects\items\poi_items.dm"
