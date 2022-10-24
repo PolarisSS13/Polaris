@@ -50,15 +50,6 @@
 #define WIRE_PREV "Prev"
 #define WIRE_NEXT "Next"
 
-// Mulebot
-#define WIRE_MOB_AVOIDANCE "Mob Avoidance"
-#define WIRE_LOADCHECK "Load Checking"
-#define WIRE_MOTOR1 "Primary Motor"
-#define WIRE_MOTOR2 "Secondary Motor"
-#define WIRE_REMOTE_RX "Signal Receiver"
-#define WIRE_REMOTE_TX "Signal Sender"
-#define WIRE_BEACON_RX "Beacon Receiver"
-
 // Explosives, bombs
 #define WIRE_EXPLODE "Explode" // Explodes if pulsed or cut while active, defuses a bomb that isn't active on cut.
 #define WIRE_EXPLODE_DELAY "Explode Delay" // Explodes immediately if cut, explodes 3 seconds later if pulsed.

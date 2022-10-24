@@ -297,6 +297,5 @@
 
 	JaniData["mops"] = MopData.len ? MopData : null
 	JaniData["buckets"] = BucketData.len ? BucketData : null
-	JaniData["cleanbots"] = CbotData.len ? CbotData : null
 	JaniData["carts"] = CartData.len ? CartData : null
 	data["janitor"] = JaniData

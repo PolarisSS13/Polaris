@@ -15106,7 +15106,6 @@
 	},
 /area/syndicate_mothership/elite_squad)
 "qIt" = (
-/obj/item/farmbot_arm_assembly,
 /turf/unsimulated/floor{
 	dir = 5;
 	icon_state = "vault"
@@ -19981,7 +19980,6 @@
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
 "vJH" = (
-/obj/item/firstaid_arm_assembly,
 /turf/unsimulated/floor{
 	dir = 5;
 	icon_state = "vault"
@@ -21168,7 +21166,6 @@
 	},
 /area/centcom/specops)
 "wPl" = (
-/obj/item/bucket_sensor,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},

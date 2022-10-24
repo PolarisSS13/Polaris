@@ -278,31 +278,12 @@
 	pickup_sound = 'sound/items/pickup/helm.ogg'
 
 /obj/item/reagent_containers/glass/bucket/attackby(var/obj/item/D, mob/user as mob)
-	if(isprox(D))
-		to_chat(user, "You add [D] to [src].")
-		qdel(D)
-		user.put_in_hands(new /obj/item/bucket_sensor)
-		user.drop_from_inventory(src)
-		qdel(src)
-		return
-	else if(D.is_wirecutter())
+	if(D.is_wirecutter())
 		to_chat(user, "<span class='notice'>You cut a big hole in \the [src] with \the [D].  It's kinda useless as a bucket now.</span>")
 		user.put_in_hands(new /obj/item/clothing/head/helmet/bucket)
 		user.drop_from_inventory(src)
 		qdel(src)
 		return
-	else if(istype(D, /obj/item/stack/material) && D.get_material_name() == MAT_STEEL)
-		var/obj/item/stack/material/M = D
-		if (M.use(1))
-			var/obj/item/secbot_assembly/edCLN_assembly/B = new /obj/item/secbot_assembly/edCLN_assembly
-			B.loc = get_turf(src)
-			to_chat(user, "<span class='notice'>You armed the robot frame.</span>")
-			if (user.get_inactive_hand()==src)
-				user.remove_from_mob(src)
-				user.put_in_inactive_hand(B)
-			qdel(src)
-		else
-			to_chat(user, "<span class='warning'>You need one sheet of metal to arm the robot frame.</span>")
 	else if(istype(D, /obj/item/mop))
 		if(reagents.total_volume < 1)
 			to_chat(user, "<span class='warning'>\The [src] is empty!</span>")

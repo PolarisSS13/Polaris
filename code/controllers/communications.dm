@@ -89,8 +89,6 @@ On the map:
 1439 for air pumps, air scrubbers, atmo control
 1441 for atmospherics - supply tanks
 1443 for atmospherics - distribution loop/mixed air tank
-1445 for bot nav beacons
-1447 for mulebot, secbot and ed209 control
 1449 for airlock controls, electropack, magnets
 1451 for toxin lab access
 1453 for engineering access
@@ -203,8 +201,6 @@ var/global/const/RADIO_CHAT = "radio_telecoms"
 var/global/const/RADIO_ATMOSIA = "radio_atmos"
 var/global/const/RADIO_NAVBEACONS = "radio_navbeacon"
 var/global/const/RADIO_AIRLOCK = "radio_airlock"
-var/global/const/RADIO_SECBOT = "radio_secbot"
-var/global/const/RADIO_MULEBOT = "radio_mulebot"
 var/global/const/RADIO_MAGNETS = "radio_magnet"
 
 var/global/datum/controller/radio/radio_controller

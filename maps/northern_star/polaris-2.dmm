@@ -2391,9 +2391,9 @@
 "TY" = (/obj/effect/floor_decal/industrial/warning{dir = 6},/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/wizard_station)
 "TZ" = (/obj/effect/decal/mecha_wreckage/phazon,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/wizard_station)
 "Ua" = (/obj/item/robot_parts/head,/turf/unsimulated/floor{icon_state = "plating"; name = "plating"},/area/wizard_station)
-"Ub" = (/obj/item/firstaid_arm_assembly,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)
-"Uc" = (/obj/item/bucket_sensor,/turf/unsimulated/floor{icon_state = "dark"},/area/wizard_station)
-"Ud" = (/obj/item/farmbot_arm_assembly,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)
+"Ub" = (/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)
+"Uc" = (/turf/unsimulated/floor{icon_state = "dark"},/area/wizard_station)
+"Ud" = (/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)
 "Ue" = (/obj/structure/table/steel_reinforced,/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)
 "Uf" = (/obj/structure/table/steel_reinforced,/turf/unsimulated/floor{icon_state = "dark"},/area/wizard_station)
 "Ug" = (/obj/machinery/computer/teleporter,/turf/unsimulated/floor{icon_state = "dark"},/area/wizard_station)
@@ -2657,4 +2657,3 @@ lYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlYlY
 afafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaf
 afafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafafaf
 "}
-
