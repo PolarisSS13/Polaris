@@ -398,7 +398,7 @@
 		utils[initial(util_type.name)] = util_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(utils))
 
-/datum/gear/uniform/utility/medical
+/datum/gear/uniform/utility_medical
 	display_name = "utility, medical"
 	path = /obj/item/clothing/under/rank/medical/utility
 	allowed_roles = list("Chief Medical Officer", "Paramedic", "Medical Doctor", "Psychiatrist", "Search and Rescue", "Chemist")

@@ -35,7 +35,7 @@
 	path = /obj/item/storage/wallet/poly
 
 /datum/gear/accessory/wallet/womens
-	display_name = "wallet, women's (colorable)"
+	display_name = "wallet, womens (colorable)"
 	path = /obj/item/storage/wallet/womens
 
 /datum/gear/accessory/wallet/womens/New()
