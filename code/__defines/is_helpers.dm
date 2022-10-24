@@ -49,8 +49,6 @@
 #define isrobot(A)		istype(A, /mob/living/silicon/robot)
 #define ispAI(A)		istype(A, /mob/living/silicon/pai)
 
-#define isbot(A)		istype(A, /mob/living/bot)
-
 #define isvoice(A)		istype(A, /mob/living/voice)
 
 //---------------

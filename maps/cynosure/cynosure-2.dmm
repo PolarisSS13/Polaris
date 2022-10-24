@@ -14466,7 +14466,6 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 4
 	},
-/mob/living/bot/secbot/slime/slimesky,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/xenobiology)
 "gDr" = (
@@ -38892,7 +38891,6 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals_central2,
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
-/mob/living/bot/secbot/beepsky,
 /obj/item/radio/beacon,
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/hallway/primary/groundfloor/north)

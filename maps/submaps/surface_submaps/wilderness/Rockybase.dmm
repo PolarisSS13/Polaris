@@ -166,9 +166,6 @@
 /turf/simulated/floor/tiled,
 /area/submap/Rockybase)
 "aK" = (
-/mob/living/bot/cleanbot{
-	faction = "malf_drone"
-	},
 /turf/simulated/floor/tiled,
 /area/submap/Rockybase)
 "aL" = (
@@ -459,10 +456,6 @@
 /obj/effect/floor_decal/corner/lime/border{
 	dir = 8;
 	icon_state = "bordercolor"
-	},
-/mob/living/bot/farmbot{
-	faction = "malf_drone";
-	name = "Mr. Weddleton"
 	},
 /turf/simulated/floor/tiled,
 /area/submap/Rockybase)
@@ -1110,9 +1103,6 @@
 /area/submap/Rockybase)
 "dB" = (
 /obj/effect/decal/cleanable/dirt,
-/mob/living/bot/medbot{
-	faction = "malf_drone"
-	},
 /turf/simulated/floor/tiled,
 /area/submap/Rockybase)
 "dC" = (

@@ -37725,7 +37725,6 @@
 	location = "SEC";
 	next_patrol = "CH1"
 	},
-/mob/living/bot/secbot/beepsky,
 /turf/simulated/floor/tiled/monotile,
 /area/hallway/primary/seconddeck/fore)
 "bsr" = (
@@ -78053,7 +78052,6 @@
 /obj/machinery/navbeacon/delivery/north{
 	location = "QM #1"
 	},
-/mob/living/bot/mulebot,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "cPI" = (
@@ -78061,7 +78059,6 @@
 /obj/machinery/navbeacon/delivery/north{
 	location = "QM #2"
 	},
-/mob/living/bot/mulebot,
 /turf/simulated/floor/tiled,
 /area/quartermaster/office)
 "cPJ" = (
@@ -112129,7 +112126,6 @@
 	dir = 1;
 	pixel_y = -22
 	},
-/mob/living/bot/secbot/slime,
 /turf/simulated/floor/tiled/monotile,
 /area/rnd/xenobiology)
 "eaz" = (

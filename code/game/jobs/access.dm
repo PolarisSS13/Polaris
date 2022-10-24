@@ -212,9 +212,6 @@ var/global/list/priv_region_access
 /atom/movable/proc/GetIdCard()
 	return null
 
-/mob/living/bot/GetIdCard()
-	return botcard
-
 /mob/living/carbon/human/GetIdCard()
 	if(get_active_hand())
 		var/obj/item/I = get_active_hand()

@@ -63,15 +63,6 @@
 					"admin","ponies","heresy","meow","Pun Pun","monkey","Ian","moron","pizza","message","spam",\
 					"director", "Hello", "Hi!"," ","nuke","crate","dwarf","xeno")
 
-/datum/event/ionstorm/tick()
-	if(botEmagChance)
-		for(var/mob/living/bot/bot in mob_list)
-			if(!(bot.z in affecting_z))
-				continue
-			if(prob(botEmagChance))
-				bot.emag_act(1)
-
-
 // Overmap version
 /datum/event/ionstorm/overmap/announce()
 	return

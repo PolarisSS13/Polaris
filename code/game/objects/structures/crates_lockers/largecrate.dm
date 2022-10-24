@@ -91,12 +91,6 @@
 	icon_state = "crittercrate"
 	desc = "A hefty wooden crate with air holes. It is marked with the logo of NanoTrasen Pastures and the slogan, '90% less cloning defects* than competing brands**, or your money back***!'"
 
-/obj/structure/largecrate/animal/mulebot
-	name = "Mulebot crate"
-	desc = "A hefty wooden crate labelled 'Proud Product of the Xion Manufacturing Group'"
-	icon_state = "mulecrate"
-	starts_with = list(/mob/living/bot/mulebot)
-
 /obj/structure/largecrate/animal/corgi
 	name = "corgi carrier"
 	starts_with = list(/mob/living/simple_mob/animal/passive/dog/corgi)

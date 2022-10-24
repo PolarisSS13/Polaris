@@ -538,10 +538,6 @@
 /turf/simulated/floor/tiled,
 /area/submap/DoomP)
 "bN" = (
-/mob/living/bot/cleanbot{
-	faction = "syndicate";
-	name = "Fitz"
-	},
 /turf/simulated/floor/tiled,
 /area/submap/DoomP)
 "bO" = (

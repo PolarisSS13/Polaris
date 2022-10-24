@@ -19,7 +19,7 @@
 "s" = (/obj/machinery/portable_atmospherics/hydroponics/soil,/obj/item/seeds/icepepperseed,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/farm1)
 "t" = (/obj/structure/simple_door/wood,/turf/simulated/floor/wood,/area/submap/farm1)
 "u" = (/obj/machinery/door/window/eastleft,/obj/machinery/door/window/westleft,/turf/simulated/floor/outdoors/dirt,/area/submap/farm1)
-"v" = (/mob/living/bot/farmbot,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/farm1)
+"v" = (,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/farm1)
 "w" = (/obj/structure/sink/puddle,/turf/simulated/floor/outdoors/mud{outdoors = 0},/area/submap/farm1)
 "x" = (/obj/item/material/knife/machete/hatchet,/turf/simulated/floor/outdoors/mud{outdoors = 0},/area/submap/farm1)
 "y" = (/obj/structure/table/woodentable,/obj/item/storage/box/matches,/obj/item/flame/match,/turf/simulated/floor/wood,/area/submap/farm1)

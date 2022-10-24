@@ -42,12 +42,6 @@
 			target.add_ion_law(law)
 			target.show_laws()
 
-	// Emag bots.
-	for(var/mob/living/bot/B in mob_list)
-		if(B.z in get_location_z_levels())
-			if(prob(bot_emag_chance))
-				B.emag_act(1)
-
 	// Messaging server spam filters.
 	// This might be better served as a seperate event since it seems more like a hacker attack than a natural occurance.
 	if(message_servers)

@@ -171,27 +171,6 @@
 				for(var/ID in virusDB)
 					var/datum/data/record/v = virusDB[ID]
 					data["virus"] += list(list("name" = v.fields["name"], "D" = "\ref[v]"))
-			if(MED_DATA_MEDBOT)
-				data["medbots"] = list()
-				for(var/mob/living/bot/medbot/M in mob_list)
-					if(M.z != z)
-						continue
-					var/turf/T = get_turf(M)
-					if(T)
-						var/medbot = list()
-						var/area/A = get_area(T)
-						medbot["name"] = M.name
-						medbot["area"] = A.name
-						medbot["x"] = T.x
-						medbot["y"] = T.y
-						medbot["on"] = M.on
-						if(!isnull(M.reagent_glass) && M.use_beaker)
-							medbot["use_beaker"] = 1
-							medbot["total_volume"] = M.reagent_glass.reagents.total_volume
-							medbot["maximum_volume"] = M.reagent_glass.reagents.maximum_volume
-						else
-							medbot["use_beaker"] = 0
-						data["medbots"] += list(medbot)
 
 	data["modal"] = tgui_modal_data(src)
 	return data

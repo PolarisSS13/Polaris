@@ -286,15 +286,6 @@
 			var/direction = get_dir(pda,B)
 			BucketData[++BucketData.len] = list ("x" = bl.x, "y" = bl.y, "dir" = uppertext(dir2text(direction)), "volume" = B.reagents.total_volume, "max_volume" = B.reagents.maximum_volume)
 
-	var/CbotData[0]
-	for(var/mob/living/bot/cleanbot/B in mob_list)
-		var/turf/bl = get_turf(B)
-		if(bl)
-			if(bl.z != cl.z)
-				continue
-			var/direction = get_dir(pda,B)
-			CbotData[++CbotData.len] = list("x" = bl.x, "y" = bl.y, "dir" = uppertext(dir2text(direction)), "status" = B.on ? "Online" : "Offline")
-
 	var/CartData[0]
 	for(var/obj/structure/janitorialcart/B in all_janitorial_carts)//GLOB.janitorial_equipment)
 		var/turf/bl = get_turf(B)

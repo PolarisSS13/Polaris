@@ -62,13 +62,8 @@
 	return ..()
 
 /obj/machinery/door/window/Bumped(atom/movable/AM as mob|obj)
-	if (!( ismob(AM) ))
-		var/mob/living/bot/bot = AM
-		if(istype(bot))
-			if(density && src.check_access(bot.botcard))
-				open()
-				addtimer(CALLBACK(src, .proc/close), 50)
-		else if(istype(AM, /obj/mecha))
+	if (!ismob(AM))
+		if(istype(AM, /obj/mecha))
 			var/obj/mecha/mecha = AM
 			if(density)
 				if(mecha.occupant && src.allowed(mecha.occupant))
