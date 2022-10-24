@@ -4,7 +4,7 @@
 	ambience = AMBIENCE_RUINS
 	secret_name = TRUE
 	forbid_events = TRUE
-	area_flags = AREA_FLAG_IS_NOT_PERSISTENT | RAD_SHIELDED
+	area_flags = AREA_FLAG_IS_NOT_PERSISTENT | AREA_FLAG_IS_RAD_SHIELDED
 
 /area/submap/event //To be used for Events not for regular PoIs
 	name = "Unknown"
