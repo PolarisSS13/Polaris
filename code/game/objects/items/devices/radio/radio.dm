@@ -721,15 +721,10 @@ GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
 			src.syndie = 1
 
 	for (var/ch_name in src.channels)
-		if(!radio_controller)
-			sleep(30) // Waiting for the radio_controller to be created.
-		if(!radio_controller)
+		if(!radio_controller) // Should be exceedingly unlikely following New() => Initialize() changes.
 			src.name = "broken radio"
 			return
-
 		secure_radio_connections[ch_name] = radio_controller.add_object(src, radiochannels[ch_name],  RADIO_CHAT)
-
-	return
 
 /obj/item/radio/proc/config(op)
 	if(radio_controller)
