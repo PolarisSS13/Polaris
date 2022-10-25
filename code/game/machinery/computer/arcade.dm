@@ -10,7 +10,7 @@
 							/obj/item/toy/sword                                         = 2,
 							/obj/item/gun/projectile/revolver/capgun             = 2,
 							/obj/item/gun/projectile/revolver/toy/crossbow       = 2,
-							/obj/item/clothing/suit/syndicatefake                       = 2,
+							/obj/item/clothing/suit/costume/syndicatefake                       = 2,
 							/obj/item/storage/fancy/crayons                      = 2,
 							/obj/item/toy/spinningtoy                                   = 2,
 							/obj/random/mech_toy                                        = 1,
@@ -45,8 +45,8 @@
 		var/prizeselect = pickweight(prizes)
 		new prizeselect(src.loc)
 
-		if(istype(prizeselect, /obj/item/clothing/suit/syndicatefake)) //Helmet is part of the suit
-			new	/obj/item/clothing/head/syndicatefake(src.loc)
+		if(istype(prizeselect, /obj/item/clothing/suit/costume/syndicatefake)) //Helmet is part of the suit
+			new	/obj/item/clothing/head/collectable/syndicatefake(src.loc)
 
 /obj/machinery/computer/arcade/attack_ai(mob/user as mob)
 	return attack_hand(user)

@@ -65,7 +65,6 @@
 	captype["soft cap, solgov"] = /obj/item/clothing/head/soft/solgov
 	captype["soft cap, white"] = /obj/item/clothing/head/soft/mime
 	captype["soft cap, yellow"] = /obj/item/clothing/head/soft/yellow
-	captype["station cap, blue"] = /obj/item/clothing/head/mailman
 	gear_tweaks += new/datum/gear_tweak/path(captype)
 
 /datum/gear/head/sec_cap
@@ -169,7 +168,7 @@
 
 /datum/gear/head/wig/philosopher
 	display_name = "wig, natural philosopher"
-	path = /obj/item/clothing/head/philosopher_wig
+	path = /obj/item/clothing/head/collectable/philosopher_wig
 
 /datum/gear/head/wig
 	display_name = "wig, powdered"
@@ -365,10 +364,6 @@
 	display_name = "black and gold headdress"
 	path = /obj/item/clothing/head/blackngoldheaddress
 
-/datum/gear/head/plaguedoctor2
-	display_name = "hat, golden plague doctor"
-	path = /obj/item/clothing/head/plaguedoctorhat/gold
-
 /datum/gear/head/nonla
 	display_name = "non la"
 	path = /obj/item/clothing/head/nonla
@@ -397,3 +392,17 @@
 		var/obj/item/clothing/head/helmet/tank/cap_type = tankercap
 		tankercaps[initial(cap_type.name)] = cap_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(tankercaps))
+
+/datum/gear/head/costumes
+	display_name = "costume hat selection"
+	description = "A selection of fancy-dress hats."
+	path = /obj/item/clothing/head/collectable
+	cost = 2
+
+/datum/gear/head/costumes/New()
+	..()
+	var/list/costumes = list()
+	for(var/costume in typesof(/obj/item/clothing/head/collectable))
+		var/obj/item/clothing/head/collectable/costume_type = costume
+		costumes[initial(costume_type.name)] = costume_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))

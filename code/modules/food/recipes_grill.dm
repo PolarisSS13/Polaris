@@ -74,7 +74,7 @@
 	appliance = GRILL
 	items = list(
 		/obj/item/reagent_containers/food/snacks/bun,
-		/obj/item/clothing/mask/gas/clown_hat
+		/obj/item/clothing/mask/gas/costume
 	)
 	result = /obj/item/reagent_containers/food/snacks/clownburger
 

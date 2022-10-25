@@ -39,10 +39,6 @@
 	display_name = "cropped sweater"
 	path = /obj/item/clothing/under/wednesday
 
-/datum/gear/uniform/kilt
-	display_name = "kilt"
-	path = /obj/item/clothing/under/kilt
-
 /datum/gear/uniform/cuttop
 	display_name = "cut top selection"
 	description = "Loose, low-cut shirts with matching shorts."
@@ -643,3 +639,16 @@
 	display_name = "jumpsuit, chaplain striped"
 	path = /obj/item/clothing/under/rank/chaplain/alt
 	allowed_roles = list("Chaplain")
+
+/datum/gear/uniform/costumes
+	display_name = "costume clothing selection"
+	description = "A selection of fancy-dress costumes worn on the clothing slot."
+	path = /obj/item/clothing/under/costume
+
+/datum/gear/uniform/costumes/New()
+	..()
+	var/list/costumes = list()
+	for(var/costume in typesof(/obj/item/clothing/under/costume))
+		var/obj/item/clothing/under/costume/costume_type = costume
+		costumes[initial(costume_type.name)] = costume_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))

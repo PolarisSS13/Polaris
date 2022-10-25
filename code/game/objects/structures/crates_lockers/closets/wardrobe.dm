@@ -93,7 +93,7 @@
 		/obj/item/clothing/head/nun_hood,
 		/obj/item/clothing/suit/storage/hooded/chaplain_hoodie,
 		/obj/item/clothing/suit/storage/hooded/chaplain_hoodie/whiteout,
-		/obj/item/clothing/suit/holidaypriest,
+		/obj/item/clothing/suit/costume/holidaypriest,
 		/obj/item/clothing/under/wedding/bride_white,
 		/obj/item/storage/backpack/cultpack,
 		/obj/item/storage/fancy/candle_box = 2,

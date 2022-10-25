@@ -115,35 +115,6 @@
 	desc = "Stand and deliver!"
 	body_parts_covered = 0
 
-/obj/item/clothing/head/mailman
-	name = "station cap"
-	icon_state = "mailman"
-	item_state_slots = list(slot_r_hand_str = "hopcap", slot_l_hand_str = "hopcap")
-	desc = "<i>Choo-choo</i>!"
-	body_parts_covered = 0
-
-/obj/item/clothing/head/plaguedoctorhat
-	name = "plague doctor's hat"
-	desc = "These were once used by Plague doctors. They're pretty much useless."
-	icon_state = "plaguedoctor"
-	item_state_slots = list(slot_r_hand_str = "tophat", slot_l_hand_str = "tophat")
-	permeability_coefficient = 0.01
-	siemens_coefficient = 0.9
-	body_parts_covered = 0
-
-/obj/item/clothing/head/plaguedoctorhat/gold
-	name = "golden plague doctor's hat"
-	desc = "These were once used by plague doctors, allegedly. This one has gold accents."
-	icon_state = "plaguedoctor2"
-
-/obj/item/clothing/head/hasturhood
-	name = "hastur's hood"
-	desc = "It's unspeakably stylish"
-	icon_state = "hasturhood"
-	item_state_slots = list(slot_r_hand_str = "enginering_beret", slot_l_hand_str = "enginering_beret")
-	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
-
 /obj/item/clothing/head/nursehat
 	name = "nurse's hat"
 	desc = "It allows quick identification of trained medical personnel."
@@ -151,38 +122,12 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-/obj/item/clothing/head/syndicatefake
-	name = "red space-helmet replica"
-	item_state_slots = list(slot_r_hand_str = "syndicate-helm-black-red", slot_l_hand_str = "syndicate-helm-black-red")
-	icon_state = "syndicate"
-	desc = "A plastic replica of a bloodthirsty mercenary's space helmet, you'll look just like a real murderous criminal operative in this! This is a toy, it is not made for use in space!"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	siemens_coefficient = 2.0
-	body_parts_covered = HEAD|FACE|EYES
-
-/obj/item/clothing/head/cueball
-	name = "cueball helmet"
-	desc = "A large, featureless white orb mean to be worn on your head. How do you even see out of this thing?"
-	icon_state = "cueball"
-	flags_inv = BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
-
 /obj/item/clothing/head/greenbandana
 	name = "green bandana"
 	desc = "It's a green bandana with some fine nanotech lining."
 	icon_state = "greenbandana"
 	flags_inv = 0
 	body_parts_covered = 0
-
-/obj/item/clothing/head/cardborg
-	name = "cardborg helmet"
-	desc = "A helmet made out of a box."
-	icon_state = "cardborg_h"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE
-	body_parts_covered = HEAD|FACE|EYES
-	drop_sound = 'sound/items/drop/cardboardbox.ogg'
-	pickup_sound = 'sound/items/pickup/cardboardbox.ogg'
-
 /obj/item/clothing/head/justice
 	name = "justice hat"
 	desc = "fight for what's righteous!"
@@ -219,19 +164,6 @@
 	icon_state = "flat_capw"
 	addblends = "flat_capw_a"
 	item_state_slots = list(slot_r_hand_str = "greysoft", slot_l_hand_str = "greysoft")
-
-/obj/item/clothing/head/pirate
-	name = "pirate hat"
-	desc = "Yarr."
-	icon_state = "pirate"
-	body_parts_covered = 0
-
-/obj/item/clothing/head/hgpiratecap
-	name = "pirate hat"
-	desc = "Yarr."
-	icon_state = "hgpiratecap"
-	item_state_slots = list(slot_r_hand_str = "hoscap", slot_l_hand_str = "hoscap")
-	body_parts_covered = 0
 
 /obj/item/clothing/head/bandana
 	name = "pirate bandana"
@@ -316,47 +248,6 @@
 	name = "small cowboy hat"
 	desc = "For the tiniest of cowboys."
 	icon_state = "cowboy_small"
-
-/obj/item/clothing/head/witchwig
-	name = "witch costume wig"
-	desc = "Eeeee~heheheheheheh!"
-	icon_state = "witch"
-	flags_inv = BLOCKHAIR
-	siemens_coefficient = 2.0
-
-/obj/item/clothing/head/chicken
-	name = "chicken suit head"
-	desc = "Bkaw!"
-	icon_state = "chickenhead"
-	flags_inv = BLOCKHAIR
-	siemens_coefficient = 0.7
-	body_parts_covered = HEAD|FACE|EYES
-
-/obj/item/clothing/head/bearpelt
-	name = "bear pelt hat"
-	desc = "Fuzzy."
-	icon_state = "bearpelt"
-	item_state_slots = list(slot_r_hand_str = "beret_black", slot_l_hand_str = "beret_black")
-	flags_inv = BLOCKHAIR
-	siemens_coefficient = 0.7
-
-/obj/item/clothing/head/xenos
-	name = "xenos helmet"
-	icon_state = "xenos"
-	item_state_slots = list(slot_r_hand_str = "xenos_helm", slot_l_hand_str = "xenos_helm")
-	desc = "A helmet made out of chitinous alien hide."
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	siemens_coefficient = 2.0
-	body_parts_covered = HEAD|FACE|EYES
-
-/obj/item/clothing/head/philosopher_wig
-	name = "natural philosopher's wig"
-	desc = "A stylish monstrosity unearthed from Earth's Renaissance period. With this most distinguish'd wig, you'll be ready for your next soiree!"
-	icon_state = "philosopher_wig"
-	item_state_slots = list(slot_r_hand_str = "pwig", slot_l_hand_str = "pwig")
-	flags_inv = BLOCKHAIR
-	siemens_coefficient = 2.0 //why is it so conductive?!
-	body_parts_covered = 0
 
 /obj/item/clothing/head/orangebandana //themij: Taryn Kifer
 	name = "orange bandana"
@@ -511,47 +402,3 @@
 	desc = "You... you're not actually going to wear that, right?"
 	icon_state = "fishskull"
 	flags_inv = HIDEEARS|BLOCKHAIR
-
-/obj/item/clothing/head/marine
-	name = "marine helmet"
-	desc = "A marine helmet prop from the popular game 'Ruin'."
-	icon_state = "marine"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
-
-/obj/item/clothing/head/ranger
-	var/hatcolor = "white"
-	name = "ranger helmet"
-	desc = "A special helmet designed for the Go Go ERT-Rangers, able to withstand a pressureless environment, filter gas and provide air. It has thermal vision and sometimes \
-	mesons to find breaches, as well as an integrated radio... well, only in the show, of course."
-	icon = 'icons/obj/clothing/ranger.dmi'
-	icon_state = "ranger_helmet"
-	light_overlay = "helmet_light"
-	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
-	drop_sound = 'sound/items/drop/helm.ogg'
-	pickup_sound = 'sound/items/pickup/helm.ogg'
-	w_class = ITEMSIZE_NORMAL
-
-/obj/item/clothing/head/ranger/Initialize()
-	. = ..()
-	if(icon_state == "ranger_helmet")
-		name = "[hatcolor] ranger helmet"
-		icon_state = "[hatcolor]_ranger_helmet"
-
-/obj/item/clothing/head/ranger/black
-	hatcolor = "black"
-
-/obj/item/clothing/head/ranger/pink
-	hatcolor = "pink"
-
-/obj/item/clothing/head/ranger/green
-	hatcolor = "green"
-
-/obj/item/clothing/head/ranger/cyan
-	hatcolor = "cyan"
-
-/obj/item/clothing/head/ranger/orange
-	hatcolor = "orange"
-
-/obj/item/clothing/head/ranger/yellow
-	hatcolor = "yellow"

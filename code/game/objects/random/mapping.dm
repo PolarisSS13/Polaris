@@ -423,9 +423,9 @@
 				/obj/structure/closet/crate/science
 			),
 			prob(1);list(
-				/obj/item/clothing/head/bearpelt,
-				/obj/item/clothing/under/soviet,
-				/obj/item/clothing/under/soviet,
+				/obj/item/clothing/head/collectable/bearpelt,
+				/obj/item/clothing/under/costume/soviet,
+				/obj/item/clothing/under/costume/soviet,
 				/obj/item/gun/projectile/shotgun/pump/rifle/ceremonial,
 				/obj/item/gun/projectile/shotgun/pump/rifle/ceremonial,
 				/obj/structure/closet/crate
@@ -465,7 +465,7 @@
 				/obj/item/clothing/under/rank/clown,
 				/obj/item/clothing/shoes/clown_shoes,
 				/obj/item/pda/clown,
-				/obj/item/clothing/mask/gas/clown_hat,
+				/obj/item/clothing/mask/gas/costume,
 				/obj/item/bikehorn,
 				/obj/item/reagent_containers/spray/waterflower,
 				/obj/item/pen/crayon/rainbow,
@@ -476,7 +476,7 @@
 				/obj/item/clothing/shoes/black,
 				/obj/item/pda/mime,
 				/obj/item/clothing/gloves/white,
-				/obj/item/clothing/mask/gas/mime,
+				/obj/item/clothing/mask/gas/costume/mime,
 				/obj/item/clothing/head/beret,
 				/obj/item/clothing/suit/suspenders,
 				/obj/item/pen/crayon/mime,
