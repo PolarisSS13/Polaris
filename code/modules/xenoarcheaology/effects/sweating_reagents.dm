@@ -6,7 +6,7 @@
 
 
 /datum/artifact_effect/common/sweating/New(datum/component/artifact_master/newmaster)
-	reagents += list(list(pick(SSchemistry.chemical_reagents), 0.4))
+	reagents += list(list(pick(SSchemistry.chemical_reagents), 0.4, list()))
 	if(prob(33))
 		reagents += list(list("blood",
 		                      0.6,
@@ -15,7 +15,7 @@
 	// Sample the color of the combined reagents
 	var/datum/reagents/R = new(120)
 	for(var/list/chem in reagents)
-		R.add_reagent(chem[0], chem[1], LAZYLEN(chem) > 2 ? chem[2] : null)
+		R.add_reagent(chem[0], chem[1], chem[2])
 	effect_color = R.get_color()
 	qdel(R)
 
