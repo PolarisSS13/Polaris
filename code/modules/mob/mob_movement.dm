@@ -285,7 +285,7 @@
 					direct = turn(direct, pick(90, -90))
 					n = get_step(my_mob, direct)
 
-	//total_delay = DS2NEARESTTICK(total_delay) //Rounded to the next tick in equivalent ds
+	total_delay = DS2NEARESTTICK(total_delay) //Rounded to the next tick in equivalent ds
 	my_mob.setMoveCooldown(total_delay)
 
 	if(istype(my_mob.pulledby, /obj/structure/bed/chair/wheelchair))
