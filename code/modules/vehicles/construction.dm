@@ -40,7 +40,6 @@
 	pixel_x = -16
 
 /obj/item/vehicle_assembly/quadbike/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	..()
 
 	switch(build_stage)
 		if(0)
@@ -143,6 +142,7 @@
 					user.drop_from_inventory(src)
 					qdel(src)
 				return
+	..()
 
 /obj/item/vehicle_assembly/quadtrailer
 	name = "all terrain trailer"
@@ -285,7 +285,6 @@
 	icon_state = "snowmobile-frame"
 
 /obj/item/vehicle_assembly/snowmobile/attackby(var/obj/item/W as obj, var/mob/user as mob)
-	..()
 	switch(build_stage)
 		if(0)
 			if(istype(W, /obj/item/stack/material/steel))
@@ -374,3 +373,4 @@
 					user.drop_from_inventory(src)
 					qdel(src)
 				return
+	..()

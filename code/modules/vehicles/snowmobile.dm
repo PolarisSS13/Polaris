@@ -39,20 +39,22 @@
 	. = ..()
 
 /obj/vehicle/train/engine/quadbike/snowmobile/get_turf_speeds(atom/prev_loc)
-	if(!istype(loc, prev_loc.type) && !istype(prev_loc, loc.type))	//Did we move at all, and are we changing turf types?
-		if(istype(loc, /turf/simulated/floor/water))
-			speed_mod = outdoors_speed_mod * 6 //Well that was a stupid idea wasn't it?
-		else if(istype(loc, /turf/simulated/floor/outdoors/rocks))
-			speed_mod = initial(speed_mod) * 1.5 //Rocks are hard, hard and skids don't mix so you're relying on the treads. Basically foot speed.
-		else if(istype(loc, /turf/simulated/floor/outdoors/dirt) || istype(loc, /turf/simulated/floor/outdoors/grass) || istype(loc, /turf/simulated/floor/outdoors/newdirt) || istype(loc, /turf/simulated/floor/outdoors/newdirt_nograss))
-			speed_mod = outdoors_speed_mod //Dirt and grass aren't strictly what this is designed for but its a baseline.
-		else if(istype(loc, /turf/simulated/floor/outdoors/mud))
-			speed_mod = outdoors_speed_mod * 1.4 //Workable, not great though.
-		else if(istype(loc, /turf/simulated/floor/outdoors/snow) || istype(loc, /turf/simulated/floor/outdoors/ice))
-			speed_mod = outdoors_speed_mod * 0.8 //Now we're talking!
-		else
-			speed_mod = initial(speed_mod)
-		update_car(train_length, active_engines)
+	// Same speed if turf type doesn't change
+	if(istype(loc, prev_loc.type) || istype(prev_loc, loc.type))
+		return
+	if(istype(loc, /turf/simulated/floor/water))
+		speed_mod = outdoors_speed_mod * 6 //Well that was a stupid idea wasn't it?
+	else if(istype(loc, /turf/simulated/floor/outdoors/rocks))
+		speed_mod = initial(speed_mod) * 1.5 //Rocks are hard, hard and skids don't mix so you're relying on the treads. Basically foot speed.
+	else if(istype(loc, /turf/simulated/floor/outdoors/dirt) || istype(loc, /turf/simulated/floor/outdoors/grass) || istype(loc, /turf/simulated/floor/outdoors/newdirt) || istype(loc, /turf/simulated/floor/outdoors/newdirt_nograss))
+		speed_mod = outdoors_speed_mod //Dirt and grass aren't strictly what this is designed for but its a baseline.
+	else if(istype(loc, /turf/simulated/floor/outdoors/mud))
+		speed_mod = outdoors_speed_mod * 1.4 //Workable, not great though.
+	else if(istype(loc, /turf/simulated/floor/outdoors/snow) || istype(loc, /turf/simulated/floor/outdoors/ice))
+		speed_mod = outdoors_speed_mod * 0.8 //Now we're talking!
+	else
+		speed_mod = initial(speed_mod)
+	update_car(train_length, active_engines)
 
 /obj/vehicle/train/engine/quadbike/snowmobile/handle_vehicle_icon()
 	return
