@@ -58,12 +58,18 @@
 	fingerprint_chance = 25
 	drop_sound = 'sound/items/drop/rubber.ogg'
 	pickup_sound = 'sound/items/pickup/rubber.ogg'
-//	var/balloonPath = /obj/item/latexballon
+	var/balloon = /obj/item/toy/balloon/latex
 
-//TODO: Make inflating gloves a thing
-/*/obj/item/clothing/gloves/sterile/proc/Inflate(/mob/living/carbon/human/user)
-	user.visible_message("<span class='notice'>\The [src] expands!</span>")
-	qdel(src)*/
+/obj/item/clothing/gloves/sterile/attackby(var/obj/O, mob/user as mob)
+	if(istype(O, /obj/item/stack/cable_coil))
+		var/obj/item/stack/cable_coil/C = O
+		if(C.use(1))
+			var/obj/item/L = new src.balloon
+			user.drop_from_inventory(L,get_turf(src))
+			to_chat(user, "<span class='notice'>You make a balloon.</span>")
+			qdel(src)
+		else
+			to_chat(user, "<span class='warning'>You need one length of cable to finish the balloon!</span>")
 
 /obj/item/clothing/gloves/sterile/latex
 	name = "latex gloves"
@@ -74,7 +80,7 @@
 	desc = "Sterile nitrile gloves"
 	icon_state = "nitrile"
 	item_state = "ngloves"
-//	balloonPath = /obj/item/nitrileballoon
+	balloon = /obj/item/toy/balloon/nitrile
 
 /obj/item/clothing/gloves/botanic_leather
 	desc = "These leather work gloves protect against thorns, barbs, prickles, spikes and other harmful objects of floral origin."

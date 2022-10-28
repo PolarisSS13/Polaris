@@ -221,8 +221,8 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/random/action_figure,
 		/obj/random/action_figure,
 		/obj/random/action_figure,
-		/obj/item/toy/nanotrasenballoon,
-		/obj/item/toy/syndicateballoon,
+		/obj/random/balloon,
+		/obj/random/balloon,
 		/obj/item/toy/sword,
 		/obj/item/toy/sword,
 		/obj/item/toy/sword,
@@ -257,7 +257,9 @@ var/global/list/datum/supply_drop_loot/supply_drop
 		/obj/item/clothing/accessory/scarf/christmas,
 		/obj/item/clothing/accessory/scarf/christmas,
 		/obj/item/clothing/accessory/scarf/christmas,
-		/obj/item/clothing/accessory/scarf/christmas
+		/obj/item/clothing/accessory/scarf/christmas,
+		/obj/structure/balloon/candycane,
+		/obj/structure/balloon/xmas
 		)
 
 /datum/supply_drop_loot/materials

@@ -121,9 +121,10 @@ var/global/list/tank_gauge_cache = list()
 	if ((istype(W, /obj/item/analyzer)) && get_dist(user, src) <= 1)
 		var/obj/item/analyzer/A = W
 		A.analyze_gases(src, user)
-	else if (istype(W,/obj/item/latexballon))
-		var/obj/item/latexballon/LB = W
-		LB.blow(src)
+
+	if (istype(W, /obj/item/toy/balloon))
+		var/obj/item/toy/balloon/B = W
+		B.blow(src)
 		src.add_fingerprint(user)
 
 	if(istype(W, /obj/item/stack/cable_coil))
