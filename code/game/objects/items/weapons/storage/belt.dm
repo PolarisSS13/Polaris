@@ -235,7 +235,8 @@
 		/obj/item/reagent_containers/food/snacks/donut/,
 		/obj/item/ammo_magazine,
 		/obj/item/gun/projectile/colt/detective,
-		/obj/item/holowarrant
+		/obj/item/holowarrant,
+		/obj/item/reagent_containers/food/drinks/flask
 		)
 
 /obj/item/storage/belt/soulstone
