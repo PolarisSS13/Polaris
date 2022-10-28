@@ -117,16 +117,7 @@
 	gas_transfer_coefficient = 0.90
 	siemens_coefficient = 0
 
-/obj/item/clothing/mask/pig
-	name = "pig mask"
-	desc = "A rubber pig mask."
-	icon_state = "pig"
-	flags_inv = HIDEFACE|BLOCKHAIR
-	w_class = ITEMSIZE_SMALL
-	siemens_coefficient = 0.9
-	body_parts_covered = HEAD|FACE|EYES
-
-/obj/item/clothing/mask/shark
+/obj/item/clothing/mask/costume
 	name = "shark mask"
 	desc = "A rubber shark mask."
 	icon_state = "shark"
@@ -135,41 +126,49 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/mask/dolphin
+/obj/item/clothing/mask/costume/mummy
+	name = "mummy bandages"
+	desc = "Who's the father?"
+	icon_state = "mummy"
+	body_parts_covered = HEAD|FACE
+	item_flags = FLEXIBLEMATERIAL
+	flags_inv = HIDEFACE|BLOCKHAIR
+	siemens_coefficient = 0
+
+/obj/item/clothing/mask/costume/pig
+	name = "pig mask"
+	desc = "A rubber pig mask."
+	icon_state = "pig"
+	flags_inv = HIDEFACE|BLOCKHAIR
+
+/obj/item/clothing/mask/costume/dolphin
 	name = "dolphin mask"
 	desc = "A rubber dolphin mask."
 	icon_state = "dolphin"
-	flags_inv = HIDEFACE
-	w_class = ITEMSIZE_SMALL
-	siemens_coefficient = 0.9
-	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/mask/goblin
+/obj/item/clothing/mask/costume/goblin
 	name = "goblin mask"
 	desc = "A rubber goblin mask."
 	icon_state = "goblin"
-	flags_inv = HIDEFACE
-	w_class = ITEMSIZE_SMALL
-	siemens_coefficient = 0.9
-	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/mask/demon
+/obj/item/clothing/mask/costume/demon
 	name = "demon mask"
 	desc = "A rubber demon mask."
 	icon_state = "demon"
-	flags_inv = HIDEFACE
-	w_class = ITEMSIZE_SMALL
-	siemens_coefficient = 0.9
-	body_parts_covered = HEAD|FACE|EYES
 
-/obj/item/clothing/mask/horsehead
+/obj/item/clothing/mask/costume/horsehead
 	name = "horse head mask"
 	desc = "A mask made of soft vinyl and latex, representing the head of a horse."
 	icon_state = "horsehead"
 	flags_inv = HIDEFACE|BLOCKHAIR
-	body_parts_covered = HEAD|FACE|EYES
-	w_class = ITEMSIZE_SMALL
-	siemens_coefficient = 0.9
+
+/obj/item/clothing/mask/costume/horsehead/Initialize()
+    . = ..()
+    // The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
+    say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
+    say_verbs = list("whinnies", "neighs", "says")
+
+//None of the Nock masks have icons.
 
 /obj/item/clothing/mask/nock_scarab
 	name = "nock mask (blue, scarab)"
@@ -198,12 +197,6 @@
 	icon_state = "nock_ornate"
 	w_class = ITEMSIZE_SMALL
 	body_parts_covered = HEAD|FACE
-
-/obj/item/clothing/mask/horsehead/Initialize()
-    . = ..()
-    // The horse mask doesn't cause voice changes by default, the wizard spell changes the flag as necessary
-    say_messages = list("NEEIIGGGHHHH!", "NEEEIIIIGHH!", "NEIIIGGHH!", "HAAWWWWW!", "HAAAWWW!")
-    say_verbs = list("whinnies", "neighs", "says")
 
 /obj/item/clothing/mask/ai
 	name = "camera MIU"

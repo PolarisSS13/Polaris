@@ -290,7 +290,7 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/clothing/shoes/brown,
 		/obj/item/paper/Court = 3,
 		/obj/item/pen,
-		/obj/item/clothing/suit/judgerobe,
+		/obj/item/clothing/suit/costume/judgerobe,
 		/obj/item/clothing/head/powdered_wig,
 		/obj/item/storage/briefcase)
 

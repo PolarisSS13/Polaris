@@ -62,8 +62,8 @@
 		new /datum/stack_recipe("light tubes box", /obj/item/storage/box/lights/tubes, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("light bulbs box", /obj/item/storage/box/lights/bulbs, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("mouse traps box", /obj/item/storage/box/mousetraps, pass_stack_color = TRUE, recycle_material = "[name]"),
-		new /datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3, pass_stack_color = TRUE, recycle_material = "[name]"),
-		new /datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg, pass_stack_color = TRUE, recycle_material = "[name]"),
+		new /datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/costume/cardborg, 3, pass_stack_color = TRUE, recycle_material = "[name]"),
+		new /datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/collectable/cardborg, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("pizza box", /obj/item/pizzabox, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe_list("folders",list(
 			new /datum/stack_recipe("blue folder", /obj/item/folder/blue, recycle_material = "[name]"),

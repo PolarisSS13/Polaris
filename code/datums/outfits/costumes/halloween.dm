@@ -26,7 +26,7 @@
 	for(var/obj/item/briefcase_item in new_briefcase)
 		qdel(briefcase_item)
 	new_briefcase.contents += new /obj/item/gun/projectile/pistol/toy
-	new_briefcase.contents += new /obj/item/clothing/mask/gas/clown_hat
+	new_briefcase.contents += new /obj/item/clothing/mask/gas/costume
 	H.equip_to_slot_or_del(new_briefcase, slot_l_hand)
 
 /decl/hierarchy/outfit/costume/horrorcop
@@ -84,7 +84,7 @@
 
 /decl/hierarchy/outfit/costume/highlander
 	name = OUTFIT_COSTUME("Highlander")
-	uniform = /obj/item/clothing/under/kilt
+	uniform = /obj/item/clothing/under/costume/kilt
 	shoes = /obj/item/clothing/shoes/boots/jackboots
 	head = /obj/item/clothing/head/beret
 	r_hand = /obj/item/material/sword/foam
@@ -107,10 +107,10 @@
 
 /decl/hierarchy/outfit/costume/pirate
 	name = OUTFIT_COSTUME("Pirate")
-	uniform = /obj/item/clothing/under/pirate
+	uniform = /obj/item/clothing/under/costume/pirate
 	shoes = /obj/item/clothing/shoes/brown
-	head = /obj/item/clothing/head/pirate
-	suit = /obj/item/clothing/suit/pirate
+	head = /obj/item/clothing/head/collectable/pirate
+	suit = /obj/item/clothing/suit/costume
 	glasses = /obj/item/clothing/glasses/eyepatch
 
 /decl/hierarchy/outfit/costume/whiteout
@@ -125,6 +125,6 @@
 	name = OUTFIT_COSTUME("Ruin Marine")
 	uniform = /obj/item/clothing/under/color/grey
 	shoes = /obj/item/clothing/shoes/brown
-	head = /obj/item/clothing/head/marine
-	suit = /obj/item/clothing/suit/marine
+	head = /obj/item/clothing/head/collectable/marine
+	suit = /obj/item/clothing/suit/costume/marine
 	r_hand = /obj/item/gun/projectile/revolver/toy/sawnoff

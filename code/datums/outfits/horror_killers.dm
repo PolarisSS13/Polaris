@@ -3,7 +3,7 @@
 	uniform = /obj/item/clothing/under/rank/clown
 	shoes = /obj/item/clothing/shoes/clown_shoes
 	gloves = /obj/item/clothing/gloves/black
-	mask = /obj/item/clothing/mask/gas/clown_hat
+	mask = /obj/item/clothing/mask/gas/costume
 	head = /obj/item/clothing/head/chaplain_hood
 	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/thermal/plain/monocle
@@ -42,7 +42,7 @@
 	l_ear = /obj/item/radio/headset
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_pocket = /obj/item/melee/energy/sword
-	mask = /obj/item/clothing/mask/gas/clown_hat
+	mask = /obj/item/clothing/mask/gas/costume
 
 	id_slot = slot_wear_id
 	id_type = /obj/item/card/id/syndicate/station_access

@@ -184,7 +184,7 @@
 	corpseuniform = /obj/item/clothing/under/rank/clown
 	corpseshoes = /obj/item/clothing/shoes/clown_shoes
 	corpseradio = /obj/item/radio/headset
-	corpsemask = /obj/item/clothing/mask/gas/clown_hat
+	corpsemask = /obj/item/clothing/mask/gas/costume
 	corpsepocket1 = /obj/item/bikehorn
 	corpseback = /obj/item/storage/backpack/clown
 	corpseid = 1

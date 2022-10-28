@@ -31,8 +31,6 @@
 	var/masks = list()
 	masks["gas mask"] = /obj/item/clothing/mask/gas
 	masks["clear gas mask"] = /obj/item/clothing/mask/gas/clear
-	masks["plague doctor mask"] = /obj/item/clothing/mask/gas/plaguedoctor
-	masks["gold plague doctor mask"] = /obj/item/clothing/mask/gas/plaguedoctor/gold
 	gear_tweaks += new/datum/gear_tweak/path(masks)
 
 /datum/gear/mask/cloth
@@ -48,3 +46,16 @@
 	display_name = "mask, dust"
 	path = /obj/item/clothing/mask/surgical/dust
 	cost = 2
+
+/datum/gear/mask/costumes
+	display_name = "mask, costume selection"
+	description = "A selection of fancy-dress masks."
+	path = /obj/item/clothing/mask/costume
+
+/datum/gear/mask/costumes/New()
+	..()
+	var/list/costumes = list()
+	for(var/costume in typesof(/obj/item/clothing/mask/costume, /obj/item/clothing/mask/gas/costume))
+		var/obj/item/clothing/mask/costume/costume_type = costume
+		costumes[initial(costume_type.name)] = costume_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))

@@ -461,7 +461,7 @@
 /obj/structure/closet/cabinet,
 /obj/random/maintenance/clean,
 /obj/random/maintenance/clean,
-/obj/item/clothing/under/dress/maid/sexy,
+/obj/item/clothing/under/costume/sexymaid,
 /obj/item/clothing/head/kitty,
 /obj/random/maintenance/clean,
 /turf/simulated/floor/wood,

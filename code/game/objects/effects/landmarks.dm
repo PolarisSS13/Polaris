@@ -129,15 +129,15 @@
 //SUBCLASSES.  Spawn a bunch of items and disappear likewise
 /obj/effect/landmark/costume/chicken/Initialize()
 	..()
-	new /obj/item/clothing/suit/chickensuit(src.loc)
-	new /obj/item/clothing/head/chicken(src.loc)
+	new /obj/item/clothing/suit/costume/chickensuit(src.loc)
+	new /obj/item/clothing/head/collectable/chicken(src.loc)
 	new /obj/item/reagent_containers/food/snacks/egg(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/gladiator/Initialize()
 	..()
-	new /obj/item/clothing/under/gladiator(src.loc)
-	new /obj/item/clothing/head/helmet/gladiator(src.loc)
+	new /obj/item/clothing/under/costume/gladiator(src.loc)
+	new /obj/item/clothing/head/helmet/collectable/gladiator(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/madscientist/Initialize()
@@ -158,7 +158,7 @@
 
 /obj/effect/landmark/costume/nyangirl/Initialize()
 	..()
-	new /obj/item/clothing/under/schoolgirl(src.loc)
+	new /obj/item/clothing/under/costume/schoolgirl(src.loc)
 	new /obj/item/clothing/head/kitty(src.loc)
 	return INITIALIZE_HINT_QDEL
 
@@ -179,7 +179,7 @@
 
 /obj/effect/landmark/costume/highlander/Initialize()
 	..()
-	new /obj/item/clothing/under/kilt(src.loc)
+	new /obj/item/clothing/under/costume/kilt(src.loc)
 	new /obj/item/clothing/head/beret(src.loc)
 	return INITIALIZE_HINT_QDEL
 
@@ -198,13 +198,13 @@
 /obj/effect/landmark/costume/plaguedoctor/Initialize()
 	..()
 	new /obj/item/clothing/suit/bio_suit/plaguedoctorsuit(src.loc)
-	new /obj/item/clothing/head/plaguedoctorhat(src.loc)
+	new /obj/item/clothing/head/collectable/plaguedoctorhat(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/nightowl/Initialize()
 	..()
-	new /obj/item/clothing/under/owl(src.loc)
-	new /obj/item/clothing/mask/gas/owl_mask(src.loc)
+	new /obj/item/clothing/under/costume/owl(src.loc)
+	new /obj/item/clothing/mask/gas/costume/owl_mask(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/waiter/Initialize()
@@ -217,29 +217,22 @@
 
 /obj/effect/landmark/costume/pirate/Initialize()
 	..()
-	new /obj/item/clothing/under/pirate(src.loc)
-	new /obj/item/clothing/suit/pirate(src.loc)
-	var/CHOICE = pick( /obj/item/clothing/head/pirate , /obj/item/clothing/head/bandana )
+	new /obj/item/clothing/under/costume/pirate(src.loc)
+	new /obj/item/clothing/suit/costume(src.loc)
+	var/CHOICE = pick( /obj/item/clothing/head/collectable/pirate , /obj/item/clothing/head/bandana )
 	new CHOICE(src.loc)
 	new /obj/item/clothing/glasses/eyepatch(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/commie/Initialize()
 	..()
-	new /obj/item/clothing/under/soviet(src.loc)
+	new /obj/item/clothing/under/costume/soviet(src.loc)
 	new /obj/item/clothing/head/ushanka(src.loc)
-	return INITIALIZE_HINT_QDEL
-
-/obj/effect/landmark/costume/imperium_monk/Initialize()
-	..()
-	new /obj/item/clothing/suit/imperium_monk(src.loc)
-	if (prob(25))
-		new /obj/item/clothing/mask/gas/cyborg(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/holiday_priest/Initialize()
 	..()
-	new /obj/item/clothing/suit/holidaypriest(src.loc)
+	new /obj/item/clothing/suit/costume/holidaypriest(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/marisawizard/fake/Initialize()
@@ -251,7 +244,7 @@
 /obj/effect/landmark/costume/cutewitch/Initialize()
 	..()
 	new /obj/item/clothing/under/sundress(src.loc)
-	new /obj/item/clothing/head/witchwig(src.loc)
+	new /obj/item/clothing/head/collectable/witchwig(src.loc)
 	new /obj/item/staff/broom(src.loc)
 	return INITIALIZE_HINT_QDEL
 
@@ -264,14 +257,14 @@
 
 /obj/effect/landmark/costume/sexyclown/Initialize()
 	..()
-	new /obj/item/clothing/mask/gas/sexyclown(src.loc)
-	new /obj/item/clothing/under/sexyclown(src.loc)
+	new /obj/item/clothing/mask/gas/costume/sexyclown(src.loc)
+	new /obj/item/clothing/under/costume/sexyclown(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/costume/sexymime/Initialize()
 	..()
-	new /obj/item/clothing/mask/gas/sexymime(src.loc)
-	new /obj/item/clothing/under/sexymime(src.loc)
+	new /obj/item/clothing/mask/gas/costume/sexymime(src.loc)
+	new /obj/item/clothing/under/costume/sexymime(src.loc)
 	return INITIALIZE_HINT_QDEL
 
 /obj/effect/landmark/crashed_pod

@@ -1714,6 +1714,7 @@
 #include "code\modules\clothing\suits\aliens\unathi.dm"
 #include "code\modules\clothing\suits\aliens\vox.dm"
 #include "code\modules\clothing\under\color.dm"
+#include "code\modules\clothing\under\costume.dm"
 #include "code\modules\clothing\under\miscellaneous.dm"
 #include "code\modules\clothing\under\pants.dm"
 #include "code\modules\clothing\under\shorts.dm"
