@@ -22,7 +22,7 @@
 "av" = (/obj/structure/table/marble,/obj/random/drinkbottle,/turf/simulated/floor/tiled,/area/submap/house1)
 "aw" = (/obj/item/flashlight/lantern,/turf/simulated/floor/tiled,/area/submap/house1)
 "ax" = (/obj/structure/table/glass,/obj/structure/window/reinforced,/obj/item/coin/phoron{start_anomalous = 1},/turf/simulated/floor/wood,/area/submap/house1)
-"ay" = (/obj/item/clothing/head/bearpelt{pixel_y = 6},/obj/structure/table/glass,/obj/structure/window/reinforced,/turf/simulated/floor/wood,/area/submap/house1)
+"ay" = (/obj/item/clothing/head/collectable/bearpelt{pixel_y = 6},/obj/structure/table/glass,/obj/structure/window/reinforced,/turf/simulated/floor/wood,/area/submap/house1)
 "az" = (/obj/item/material/harpoon{start_anomalous = 1},/obj/structure/table/glass,/obj/structure/window/reinforced,/turf/simulated/floor/wood,/area/submap/house1)
 "aA" = (/obj/structure/table/glass,/obj/structure/window/reinforced,/obj/item/clothing/accessory/medal/conduct{pixel_y = 6},/turf/simulated/floor/wood,/area/submap/house1)
 "aB" = (/obj/structure/sink{dir = 8; icon_state = "sink"; pixel_x = -12; pixel_y = 2},/obj/structure/mirror{dir = 4; pixel_x = -28; pixel_y = 0},/turf/simulated/floor/tiled/freezer,/area/submap/house1)

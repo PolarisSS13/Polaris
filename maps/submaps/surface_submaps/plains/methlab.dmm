@@ -211,7 +211,7 @@
 /obj/item/clothing/shoes/dress{
 	pixel_y = -9
 	},
-/obj/item/clothing/mask/demon,
+/obj/item/clothing/mask/costume/demon,
 /obj/structure/curtain/black,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/methlab)
@@ -584,7 +584,7 @@
 /obj/item/clothing/shoes/dress{
 	pixel_y = -9
 	},
-/obj/item/clothing/mask/dolphin,
+/obj/item/clothing/mask/costume/dolphin,
 /obj/structure/curtain/black,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/methlab)
@@ -615,7 +615,7 @@
 /obj/item/clothing/shoes/dress{
 	pixel_y = -9
 	},
-/obj/item/clothing/mask/goblin,
+/obj/item/clothing/mask/costume/goblin,
 /obj/structure/curtain/black,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/methlab)
