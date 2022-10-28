@@ -144,11 +144,12 @@
 				var/list/accessory_descs = list()
 				for(var/accessory in U.accessories)
 					accessory_descs += "<a href='?src=\ref[src];lookitem_desc_only=\ref[accessory]'>\a [accessory]</a>"
+				tie_msg += " [lowertext(english_list(accessory_descs))]."
 
 		if(wear_suit.blood_DNA)
-			msg += "<span class='warning'>[T.He] [T.is] wearing [bicon(wear_suit)] [wear_suit.gender==PLURAL?"some":"a"] [(wear_suit.blood_color != "#030303") ? "blood" : "oil"]-stained <a href='?src=\ref[src];lookitem_desc_only=\ref[wear_suit]'>[wear_suit.name]</a>[tie_msg_warn].</span>"
+			msg += "<span class='warning'>[T.He] [T.is] wearing [bicon(wear_suit)] [wear_suit.gender==PLURAL?"some":"a"] [(wear_suit.blood_color != "#030303") ? "blood" : "oil"]-stained <a href='?src=\ref[src];lookitem_desc_only=\ref[wear_suit]'>[wear_suit.name]</a>![tie_msg]</span>"
 		else
-			msg += "[T.He] [T.is] wearing [bicon(wear_suit)] <a href='?src=\ref[src];lookitem_desc_only=\ref[wear_suit]'>\a [wear_suit]</a>[tie_msg]."
+			msg += "[T.He] [T.is] wearing [bicon(wear_suit)] <a href='?src=\ref[src];lookitem_desc_only=\ref[wear_suit]'>\a [wear_suit]</a>.[tie_msg]"
 
 		//suit/armour storage
 		if(s_store && !(skip_gear & EXAMINE_SKIPSUITSTORAGE) && s_store.show_examine)
