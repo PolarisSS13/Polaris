@@ -109,6 +109,21 @@
 	icon_scale_x_percent = 0.905
 	icon_scale_y_percent = 1
 
+/datum/modifier/trait/slow_minor
+	name = "Slow Mover (Minor)"
+	desc = "You move a little more slowly than others."
+	slowdown = 0.4
+
+/datum/modifier/trait/slow_moderate
+	name = "Slow Mover (Moderate)"
+	desc = "You move more slowly than others."
+	slowdown = 0.8
+
+/datum/modifier/trait/slow_major
+	name = "Slow Mover (Major)"
+	desc = "You move a lot more slowly than others."
+	slowdown = 1.2
+
 /datum/modifier/trait/colorblind_protanopia
 	name = "Protanopia"
 	desc = "You have a form of red-green colorblindness. You cannot see reds, and have trouble distinguishing them from yellows and greens."
