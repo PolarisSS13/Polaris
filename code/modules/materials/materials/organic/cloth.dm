@@ -14,6 +14,7 @@
 /datum/material/cloth/generate_recipes()
 	recipes = list(
 		new /datum/stack_recipe("poncho", /obj/item/clothing/accessory/storage/poncho/crafted, 8, time = 5 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]"),
+		new /datum/stack_recipe("cloak", /obj/item/clothing/accessory/storage/poncho/crafted/cloak, 8, time = 5 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]"),
 		new /datum/stack_recipe("woven net", /obj/item/material/fishing_net, 10, time = 30 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]"),
 		new /datum/stack_recipe("bedsheet", /obj/item/bedsheet, 10, time = 30 SECONDS, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("uniform", /obj/item/clothing/under/color/white, 8, time = 15 SECONDS, pass_stack_color = TRUE, recycle_material = "[name]"),
