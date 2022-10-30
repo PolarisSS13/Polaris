@@ -48,25 +48,20 @@
 	/// The chat color var, without alpha.
 	var/chat_color_hover
 
-var/global/list/pre_init_created_atoms // atom creation ordering means some stuff is trying to init before SSatoms exists, temp workaround
+
 /atom/New(loc, ...)
-	//atom creation method that preloads variables at creation
-	if(global.use_preloader && (src.type == global._preloader.target_path))//in case the instanciated atom is creating other atoms in New()
+	if (global.use_preloader && type == global._preloader.target_path)
 		global._preloader.load(src)
+	if (!SSatoms)
+		var/list/init_args = FALSE
+		if (length(args) > 1)
+			init_args = args.Copy(2)
+		if (!global.early_initialize_queue)
+			global.early_initialize_queue = list()
+		global.early_initialize_queue[src] = init_args
+		return
+	SSatoms.HandleNewAtom(src, args)
 
-	var/do_initialize = SSatoms?.atom_init_stage
-	if(do_initialize > INITIALIZATION_INSSATOMS_LATE)
-		args[1] = do_initialize == INITIALIZATION_INNEW_MAPLOAD
-		SSatoms.InitAtom(src, args)
-	else
-		var/list/argument_list
-		if(length(args) > 1)
-			argument_list = args.Copy(2)
-		if(length(argument_list))
-			LAZYSET(global.pre_init_created_atoms, src, argument_list)
-
-// Note: I removed "auto_init" feature (letting types disable auto-init) since it shouldn't be needed anymore.
-// 	You can replicate the same by checking the value of the first parameter to initialize() ~Leshana
 
 // Called after New if the map is being loaded, with mapload = TRUE
 // Called from base of New if the map is not being loaded, with mapload = FALSE

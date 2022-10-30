@@ -532,12 +532,13 @@
 		list(products, CAT_NORMAL),
 		list(contraband, CAT_HIDDEN),
 		list(premium, CAT_COIN))
-
+	var/list/seeds_created = list()
 	for(var/current_list in all_products)
 		var/category = current_list[2]
 
 		for(var/entry in current_list[1])
 			var/obj/item/seeds/S = new entry(src)
+			seeds_created += S
 			var/name = S.name
 			var/datum/stored_item/vending_product/product = new/datum/stored_item/vending_product(src, entry, name)
 
@@ -546,6 +547,7 @@
 			product.category = category
 
 			product_records.Add(product)
+	return seeds_created
 
 /obj/machinery/vending/magivend
 	name = "MagiVend"

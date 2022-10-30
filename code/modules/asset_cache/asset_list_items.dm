@@ -396,48 +396,16 @@
 		Insert(imgid, I)
 	return ..()
 
-// this is cursed but necessary or else vending product icons can be missing
-// basically, if there's any vending machines that aren't already mapped in, our register() will not know
-// that they exist, and therefore can't generate the entries in the spritesheet for them
-// and since assets are unique and can't be reloaded later, we have to make sure that GLOB.vending_products
-// is populated with every single type of vending machine
-// As this is only done at runtime, we have to create all the vending machines in existence and force them
-// to register their products when this asset initializes.
+
 /datum/asset/spritesheet/vending/proc/populate_vending_products()
-	SSatoms.BeginMapLoad()
-	for(var/path in subtypesof(/obj/machinery/vending))
-		var/obj/machinery/vending/x = new path(null)
-		// force an inventory build; with BeginMapLoad active, init isn't called
-		x.build_inventory()
-		qdel(x)
-	SSatoms.FinishMapLoad()
+	SSatoms.BeginManual() // Detestable, but prevents needing to dequeue these atoms.
+	for (var/obj/machinery/vending/vendor as anything in subtypesof(/obj/machinery/vending))
+		vendor = new vendor
+		for (var/atom/atom as anything in vendor.build_inventory())
+			qdel(atom)
+		qdel(vendor)
+	SSatoms.FinishManual()
 
-// /datum/asset/simple/genetics
-// 	assets = list(
-// 		"dna_discovered.gif"	= 'html/dna_discovered.gif',
-// 		"dna_undiscovered.gif"	= 'html/dna_undiscovered.gif',
-// 		"dna_extra.gif" 		= 'html/dna_extra.gif'
-// 	)
-
-// /datum/asset/simple/orbit
-// 	assets = list(
-// 		"ghost.png"	= 'html/ghost.png'
-// 	)
-
-// /datum/asset/simple/vv
-// 	assets = list(
-// 		"view_variables.css" = 'html/admin/view_variables.css'
-// 	)
-
-// /datum/asset/spritesheet/sheetmaterials
-// 	name = "sheetmaterials"
-
-// /datum/asset/spritesheet/sheetmaterials/register()
-// 	InsertAll("", 'icons/obj/stack_objects.dmi')
-
-// 	// Special case to handle Bluespace Crystals
-// 	Insert("polycrystal", 'icons/obj/telescience.dmi', "polycrystal")
-// 	..()
 
 /datum/asset/nanoui
 	var/list/common = list()

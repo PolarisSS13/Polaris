@@ -93,7 +93,7 @@
 			cable_turfs |= get_turf(C)
 
 	for(T in cable_turfs)
-		var/bad_msg = "--------------- [T.name] \[[T.x] / [T.y] / [T.z]\]"
+		var/bad_msg = "---- [T.name] \[[T.x] / [T.y] / [T.z]\] ([T.loc])"
 		dirs_checked.Cut()
 		for(C in T)
 			wire_test_count++

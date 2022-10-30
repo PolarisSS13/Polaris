@@ -243,7 +243,7 @@
 	set desc = "Displays a list of things that didn't handle Initialize() properly"
 
 	if(!check_rights(R_DEBUG))	return
-	src << browse(replacetext(SSatoms.InitLog(), "\n", "<br>"), "window=initlog")
+	src << browse(replacetext(SSatoms.GenerateBadInitLog(), "\n", "<br>"), "window=initlog")
 
 
 /client/proc/cmd_admin_grantfullaccess(var/mob/M in mob_list)

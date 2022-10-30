@@ -9,8 +9,8 @@
 	var/annihilate = FALSE // If true, all (movable) atoms at the location where the map is loaded will be deleted before the map is loaded in.
 	var/fixed_orientation = FALSE // If true, the submap will not be rotated randomly when loaded.
 
-	var/cost = null /* The map generator has a set 'budget' it spends to place down different submaps. It will pick available submaps randomly until 
-	it runs out. The cost of a submap should roughly corrispond with several factors such as size, loot, difficulty, desired scarcity, etc. 
+	var/cost = null /* The map generator has a set 'budget' it spends to place down different submaps. It will pick available submaps randomly until
+	it runs out. The cost of a submap should roughly corrispond with several factors such as size, loot, difficulty, desired scarcity, etc.
 	Set to -1 to force the submap to always be made. */
 	var/allow_duplicates = FALSE // If false, only one map template will be spawned by the game. Doesn't affect admins spawning then manually.
 	var/discard_prob = 0 // If non-zero, there is a chance that the map seeding algorithm will skip this template when selecting potential templates to use.
@@ -35,52 +35,41 @@
 			height = bounds[MAP_MAXY]
 	return bounds
 
-/datum/map_template/proc/initTemplateBounds(var/list/bounds)
-	if (SSatoms.atom_init_stage == INITIALIZATION_INSSATOMS)
-		return // let proper initialisation handle it later
 
+/datum/map_template/proc/initTemplateBounds(list/bounds)
+	if (SSatoms.init_stage == SSatoms.WORLD_START)
+		return
 	var/prev_shuttle_queue_state = SSshuttles.block_init_queue
 	SSshuttles.block_init_queue = TRUE
-	var/machinery_was_awake = SSmachines.suspend() // Suspend machinery (if it was not already suspended)
-
-	var/list/atom/atoms = list()
-	var/list/area/areas = list()
-	var/list/obj/structure/cable/cables = list()
-	var/list/obj/machinery/atmospherics/atmos_machines = list()
-	var/list/turf/turfs = block(locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]),
-	                   			locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ]))
-	for(var/L in turfs)
-		var/turf/B = L
-		atoms += B
-		areas |= B.loc
-		for(var/A in B)
-			atoms += A
-			if(istype(A, /obj/structure/cable))
-				cables += A
-			else if(istype(A, /obj/machinery/atmospherics))
-				atmos_machines += A
-	atoms |= areas
-
-	admin_notice("<span class='danger'>Initializing newly created atom(s) in submap.</span>", R_DEBUG)
-	SSatoms.InitializeAtoms(atoms)
-
-	admin_notice("<span class='danger'>Initializing atmos pipenets and machinery in submap.</span>", R_DEBUG)
+	var/machinery_was_awake = SSmachines.suspend()
+	var/list/areas = list()
+	var/list/cables = list()
+	var/list/atmos_machines = list()
+	var/list/turfs = block(
+		locate(bounds[MAP_MINX], bounds[MAP_MINY], bounds[MAP_MINZ]),
+		locate(bounds[MAP_MAXX], bounds[MAP_MAXY], bounds[MAP_MAXZ])
+	)
+	for (var/turf/turf as anything in turfs)
+		areas[turf.loc] = FALSE
+		SSatoms.HandleNewAtom(turf)
+		SSatoms.HandleNewAtom(turf.loc)
+		for (var/atom/atom as anything in turf)
+			SSatoms.HandleNewAtom(atom)
+			if (isobj(atom))
+				if (istype(atom, /obj/structure/cable))
+					cables += atom
+				else if (istype(atom, /obj/machinery/atmospherics))
+					atmos_machines += atom
+	SSatoms.InitializeAtoms()
 	SSmachines.setup_atmos_machinery(atmos_machines)
-
-	admin_notice("<span class='danger'>Rebuilding powernets due to submap creation.</span>", R_DEBUG)
 	SSmachines.setup_powernets_for_cables(cables)
-
-	// Ensure all machines in loaded areas get notified of power status
-	for(var/I in areas)
-		var/area/A = I
-		A.power_change()
-
-	if(machinery_was_awake)
-		SSmachines.wake() // Wake only if it was awake before we tried to suspended it. 
+	for (var/area/area as anything in areas)
+		area.power_change()
+	if (machinery_was_awake)
+		SSmachines.wake()
 	SSshuttles.block_init_queue = prev_shuttle_queue_state
-	SSshuttles.process_init_queues() // We will flush the queue unless there were other blockers, in which case they will do it.
+	SSshuttles.process_init_queues()
 
-	admin_notice("<span class='danger'>Submap initializations finished.</span>", R_DEBUG)
 
 /datum/map_template/proc/load_new_z(var/centered = FALSE, var/orientation = 0)
 	var/x = 1
@@ -154,4 +143,3 @@
 /proc/load_new_z_level(var/file, var/name, var/orientation = 0)
 	var/datum/map_template/template = new(file, name)
 	template.load_new_z(orientation)
-
