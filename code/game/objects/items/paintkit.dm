@@ -60,18 +60,18 @@
 	..()
 
 /// Ponchos specifically, but other accessories may eventually need this.
-/// Consequence of snowflake-y teshari code. 
-/obj/item/kit/accessory 
+/// Consequence of snowflake-y teshari code.
+/obj/item/kit/accessory
 	name = "accessory modification kit"
 	desc = "A kit for modifying accessories."
 
 /obj/item/kit/accessory/can_customize(var/obj/item/I)
-	return istype(I, /obj/item/clothing/accessory/poncho)
+	return istype(I, /obj/item/clothing/accessory/storage/poncho)
 
 /obj/item/kit/accessory/customize(var/obj/item/I, var/mob/user)
 	if(can_customize(I))
-		if(istype(I, /obj/item/clothing/accessory/poncho))
-			var/obj/item/clothing/accessory/poncho/P = I
+		if(istype(I, /obj/item/clothing/accessory/storage/poncho))
+			var/obj/item/clothing/accessory/storage/poncho/P = I
 			P.icon_override_state = new_icon_override_file
 			P.sprite_sheets[SPECIES_TESHARI] = new_icon_override_file  /// Will look the same on teshari and other species.
 			P.item_state = new_icon
