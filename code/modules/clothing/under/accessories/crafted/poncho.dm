@@ -57,6 +57,12 @@
 	QDEL_NULL_LIST(plates)
 	return ..()
 
+/obj/item/clothing/accessory/storage/poncho/crafted/update_clothing_icon()
+	if(ismob(loc))
+		var/mob/M = src.loc
+		M.update_inv_wear_suit()
+	. = ..()
+
 /obj/item/clothing/accessory/storage/poncho/crafted/proc/recalculate_armor()
 	LAZYINITLIST(armor)
 	if(!initial_armor)
@@ -115,10 +121,10 @@
 			to_chat(user, SPAN_WARNING("\The [src] has no plating to remove."))
 		else
 			var/obj/item/plate = plates[1]
-			user.visible_message(SPAN_NOTICE("\The [src] removes \the [plate] from \the [src]."))
-			recalculate_armor()
+			user.visible_message(SPAN_NOTICE("\The [user] removes \the [plate] from \the [src]."))
 			plate.dropInto(user.loc)
 			LAZYREMOVE(plates, plate)
+			recalculate_armor()
 		return TRUE
 
 	if(istype(O, /obj/item/reagent_containers/glass))
