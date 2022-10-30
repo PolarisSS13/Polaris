@@ -72,14 +72,14 @@
 		else if(icon_override_state)
 			icon_override = icon_override_state
 		else
-			icon_override = 'icons/mob/ties.dmi'
+			icon_override = initial(icon_override)
 		H.update_inv_wear_suit()
 
 /obj/item/clothing/accessory/storage/poncho/dropped() // Reset override
 	if(icon_override_state)
 		icon_override = icon_override_state
 	else
-		icon_override = 'icons/mob/ties.dmi'
+		icon_override = initial(icon_override)
 
 /obj/item/clothing/accessory/storage/poncho/on_attached(obj/item/clothing/S, mob/user) /// Otherwise gives teshari normal icon.
 	. = ..()
@@ -90,7 +90,7 @@
 		if(H.species.name == SPECIES_TESHARI)
 			icon_override = sprite_sheets[SPECIES_TESHARI]
 	else
-		icon_override = 'icons/mob/ties.dmi'
+		icon_override = initial(icon_override)
 
 /obj/item/clothing/accessory/storage/poncho/green
 	name = "green poncho"
