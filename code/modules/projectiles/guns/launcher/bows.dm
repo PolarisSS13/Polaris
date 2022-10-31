@@ -154,7 +154,7 @@
 
 /obj/item/gun/launcher/crossbow/bow/hardlight/unload(mob/user)
 	if(istype(bolt, /obj/item/arrow/energy))	// Let's not delete a Real Arrow^tm
-		qdel_null(bolt)
+		QDEL_NULL(bolt)
 		update_icon()
 	else
 		. = ..()

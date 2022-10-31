@@ -424,7 +424,7 @@
 	winset(src, null, "outputwindow.htmloutput.is-visible=false;outputwindow.oldoutput.is-visible=false;outputwindow.chatloadlabel.is-visible=true")
 
 	//The hard way
-	qdel_null(src.chatOutput)
+	QDEL_NULL(src.chatOutput)
 	chatOutput = new /datum/chatOutput(src) //veechat
 	chatOutput.send_resources()
 	spawn()
