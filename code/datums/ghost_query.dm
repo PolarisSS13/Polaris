@@ -45,7 +45,7 @@
 			return
 		window_flash(C)
 		if(query_sound)
-			SEND_SOUND(C, sound(query_sound))
+			sound_to(C, sound(query_sound))
 		var/response = alert(C, question, "[role_name] request", "Yes", "No", "Never for this round")
 		if(response == "Yes")
 			response = alert(C, "Are you sure you want to play as a [role_name]?", "[role_name] request", "Yes", "No") // Protection from a misclick.

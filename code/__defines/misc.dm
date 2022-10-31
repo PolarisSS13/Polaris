@@ -307,10 +307,6 @@ var/global/list/##LIST_NAME = list();\
 
 //Various stuff used in Persistence
 
-#define send_output(target, msg, control) target << output(msg, control)
-
-#define send_link(target, url) target << link(url)
-
 #define SPAN_ITALIC(X) "<span class='italic'>[X]</span>"
 
 #define SPAN_NOTICE(X) "<span class='notice'>[X]</span>"

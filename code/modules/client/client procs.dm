@@ -393,7 +393,7 @@
 /client/proc/findJoinDate()
 	var/list/http = world.Export("http://byond.com/members/[ckey]?format=text")
 	if(!http)
-		log_world("Failed to connect to byond age check for [ckey]")
+		to_world_log("Failed to connect to byond age check for [ckey]")
 		return
 	var/F = file2text(http["CONTENT"])
 	if(F)

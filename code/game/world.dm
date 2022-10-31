@@ -398,7 +398,7 @@ var/global/world_topic_spam_protect_time = world.timeofday
 			if(config.server)	//if you set a server location in config.txt, it sends you there instead of trying to reconnect to the same world address. -- NeoFite
 				C << link("byond://[config.server]")
 
-	log_world("World rebooted at [time_stamp()]")
+	to_world_log("World rebooted at [time_stamp()]")
 	..()
 
 /hook/startup/proc/loadMode()
