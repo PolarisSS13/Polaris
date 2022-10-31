@@ -60,7 +60,7 @@ var/global/datum/antagonist/raider/raiders
 		/obj/item/clothing/suit/storage/toggle/hoodie,
 		/obj/item/clothing/suit/storage/toggle/hoodie/black,
 		/obj/item/clothing/suit/unathi/mantle,
-		/obj/item/clothing/accessory/poncho,
+		/obj/item/clothing/accessory/storage/poncho,
 		)
 
 	var/list/raider_guns = list(

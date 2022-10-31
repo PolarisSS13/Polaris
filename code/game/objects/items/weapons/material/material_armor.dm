@@ -353,21 +353,28 @@ Protectiveness | Armor %
 	else
 		..()
 
+/obj/item/material/armor_plating/insert/proc/trim(var/mob/user)
+	to_chat(user, SPAN_NOTICE("You trim down the edges to size."))
+	user.drop_from_inventory(src)
+	user.put_in_hands(new /obj/item/clothing/accessory/material/makeshift/light(user, material.name))
+	qdel(src)
+
 //Make plating inserts for modular armour.
 /obj/item/material/armor_plating/insert/attackby(var/obj/O, mob/user)
 
 	. = ..()
 
 	if(istype(O, /obj/item/weldingtool))
-		var /obj/item/weldingtool/S = O
+		var/obj/item/weldingtool/S = O
+		if(!S.isOn())
+			return TRUE
 		if(S.remove_fuel(0,user))
-			if(!src || !S.isOn()) return
-			to_chat(user, "<span class='notice'>You trim down the edges to size.</span>")
-			user.drop_from_inventory(src)
-			var/obj/item/clothing/accessory/material/makeshift/light/new_armor = new(null, src.material.name)
-			user.put_in_hands(new_armor)
-			qdel(src)
-			return
+			trim(user)
+			return TRUE
+
+	if(O.sharp && material?.integrity <= 75) // wood and chitin
+		trim(user)
+		return TRUE
 
 	if(istype(O, /obj/item/material/armor_plating/insert))
 		var/obj/item/material/armor_plating/insert/second_plate = O

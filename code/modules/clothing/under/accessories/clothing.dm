@@ -43,14 +43,13 @@
 /*
  * Poncho
  */
-/obj/item/clothing/accessory/poncho
+/obj/item/clothing/accessory/storage/poncho
 	name = "poncho"
 	desc = "A simple, comfortable poncho."
 	icon_state = "classicponcho"
 	item_state = "classicponcho"
 	icon_override = 'icons/mob/ties.dmi'
-	var/icon_override_state		/// Change this for mid-round and paintkit. 
-	var/fire_resist = T0C+100
+	slots = 2
 	allowed = list(/obj/item/tank/emergency/oxygen)
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 0, rad = 0)
 	slot_flags = SLOT_OCLOTHING | SLOT_TIE
@@ -61,8 +60,10 @@
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
 	)
+	var/icon_override_state		/// Change this for mid-round and paintkit.
+	var/fire_resist = T0C+100
 
-/obj/item/clothing/accessory/poncho/equipped() /// Sets override, allows for mid-round changes && custom items. If you improve this code, please update paintkit.dm to accept it.
+/obj/item/clothing/accessory/storage/poncho/equipped() /// Sets override, allows for mid-round changes && custom items. If you improve this code, please update paintkit.dm to accept it.
 	..()
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_suit == src)
@@ -71,16 +72,16 @@
 		else if(icon_override_state)
 			icon_override = icon_override_state
 		else
-			icon_override = 'icons/mob/ties.dmi'
+			icon_override = initial(icon_override)
 		H.update_inv_wear_suit()
 
-/obj/item/clothing/accessory/poncho/dropped() // Reset override
+/obj/item/clothing/accessory/storage/poncho/dropped() // Reset override
 	if(icon_override_state)
 		icon_override = icon_override_state
 	else
-		icon_override = 'icons/mob/ties.dmi'
+		icon_override = initial(icon_override)
 
-/obj/item/clothing/accessory/poncho/on_attached(obj/item/clothing/S, mob/user) /// Otherwise gives teshari normal icon. 
+/obj/item/clothing/accessory/storage/poncho/on_attached(obj/item/clothing/S, mob/user) /// Otherwise gives teshari normal icon.
 	. = ..()
 	if(icon_override_state)
 		icon_override = icon_override_state
@@ -89,57 +90,57 @@
 		if(H.species.name == SPECIES_TESHARI)
 			icon_override = sprite_sheets[SPECIES_TESHARI]
 	else
-		icon_override = 'icons/mob/ties.dmi'
+		icon_override = initial(icon_override)
 
-/obj/item/clothing/accessory/poncho/green
+/obj/item/clothing/accessory/storage/poncho/green
 	name = "green poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is green."
 	icon_state = "greenponcho"
 	item_state = "greenponcho"
 
-/obj/item/clothing/accessory/poncho/red
+/obj/item/clothing/accessory/storage/poncho/red
 	name = "red poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is red."
 	icon_state = "redponcho"
 	item_state = "redponcho"
 
-/obj/item/clothing/accessory/poncho/purple
+/obj/item/clothing/accessory/storage/poncho/purple
 	name = "purple poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is purple."
 	icon_state = "purpleponcho"
 	item_state = "purpleponcho"
 
-/obj/item/clothing/accessory/poncho/blue
+/obj/item/clothing/accessory/storage/poncho/blue
 	name = "blue poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is blue."
 	icon_state = "blueponcho"
 	item_state = "blueponcho"
 
-/obj/item/clothing/accessory/poncho/roles/security
+/obj/item/clothing/accessory/storage/poncho/roles/security
 	name = "security poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is black and red, standard NanoTrasen Security colors."
 	icon_state = "secponcho"
 	item_state = "secponcho"
 
-/obj/item/clothing/accessory/poncho/roles/medical
+/obj/item/clothing/accessory/storage/poncho/roles/medical
 	name = "medical poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with green and blue tint, standard Medical colors."
 	icon_state = "medponcho"
 	item_state = "medponcho"
 
-/obj/item/clothing/accessory/poncho/roles/engineering
+/obj/item/clothing/accessory/storage/poncho/roles/engineering
 	name = "engineering poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is yellow and orange, standard Engineering colors."
 	icon_state = "engiponcho"
 	item_state = "engiponcho"
 
-/obj/item/clothing/accessory/poncho/roles/science
+/obj/item/clothing/accessory/storage/poncho/roles/science
 	name = "science poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is white with purple trim, standard NanoTrasen Science colors."
 	icon_state = "sciponcho"
 	item_state = "sciponcho"
 
-/obj/item/clothing/accessory/poncho/roles/cargo
+/obj/item/clothing/accessory/storage/poncho/roles/cargo
 	name = "cargo poncho"
 	desc = "A simple, comfortable cloak without sleeves. This one is tan and grey, the colors of Cargo."
 	icon_state = "cargoponcho"
@@ -148,105 +149,105 @@
 /*
  * Cloak
  */
-/obj/item/clothing/accessory/poncho/roles/cloak
+/obj/item/clothing/accessory/storage/poncho/roles/cloak
 	name = "quartermaster's cloak"
 	desc = "An elaborate brown and gold cloak."
 	icon_state = "qmcloak"
 	item_state = "qmcloak"
 	body_parts_covered = null
 
-/obj/item/clothing/accessory/poncho/roles/cloak/ce
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/ce
 	name = "chief engineer's cloak"
 	desc = "An elaborate cloak worn by the chief engineer."
 	icon_state = "cecloak"
 	item_state = "cecloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/cmo
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/cmo
 	name = "chief medical officer's cloak"
 	desc = "An elaborate cloak meant to be worn by the chief medical officer."
 	icon_state = "cmocloak"
 	item_state = "cmocloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/hop
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/hop
 	name = "head of personnel's cloak"
 	desc = "An elaborate cloak meant to be worn by the head of personnel."
 	icon_state = "hopcloak"
 	item_state = "hopcloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/rd
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/rd
 	name = "research director's cloak"
 	desc = "An elaborate cloak meant to be worn by the research director."
 	icon_state = "rdcloak"
 	item_state = "rdcloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/qm
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/qm
 	name = "quartermaster's cloak"
 	desc = "An elaborate cloak meant to be worn by the quartermaster."
 	icon_state = "qmcloak"
 	item_state = "qmcloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/hos
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/hos
 	name = "head of security's cloak"
 	desc = "An elaborate cloak meant to be worn by the head of security."
 	icon_state = "hoscloak"
 	item_state = "hoscloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/captain
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/captain
 	name = "site manager's cloak"
 	desc = "An elaborate cloak meant to be worn by the site manager."
 	icon_state = "capcloak"
 	item_state = "capcloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/cargo
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/cargo
 	name = "brown cloak"
 	desc = "A simple brown and black cloak."
 	icon_state = "cargocloak"
 	item_state = "cargocloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/mining
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/mining
 	name = "trimmed purple cloak"
 	desc = "A trimmed purple and brown cloak."
 	icon_state = "miningcloak"
 	item_state = "miningcloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/security
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/security
 	name = "red cloak"
 	desc = "A simple red and black cloak."
 	icon_state = "seccloak"
 	item_state = "seccloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/service
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/service
 	name = "green cloak"
 	desc = "A simple green and blue cloak."
 	icon_state = "servicecloak"
 	item_state = "servicecloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/engineer
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/engineer
 	name = "gold cloak"
 	desc = "A simple gold and brown cloak."
 	icon_state = "engicloak"
 	item_state = "engicloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/atmos
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/atmos
 	name = "yellow cloak"
 	desc = "A trimmed yellow and blue cloak."
 	icon_state = "atmoscloak"
 	item_state = "atmoscloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/research
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/research
 	name = "purple cloak"
 	desc = "A simple purple and white cloak."
 	icon_state = "scicloak"
 	item_state = "scicloak"
 
-/obj/item/clothing/accessory/poncho/roles/cloak/medical
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/medical
 	name = "blue cloak"
 	desc = "A simple blue and white cloak."
 	icon_state = "medcloak"
 	item_state = "medcloak"
 
 
-/obj/item/clothing/accessory/poncho/roles/cloak/custom //A colorable cloak
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/custom //A colorable cloak
 	name = "cloak"
 	desc = "A simple, bland cloak."
 	icon_state = "colorcloak"

@@ -44,7 +44,7 @@
 "aR" = (/obj/structure/table/woodentable,/obj/item/storage/bag/trash,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aS" = (/obj/structure/table/woodentable,/obj/item/flame/lighter,/obj/item/storage/fancy/candle_box,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aT" = (/obj/structure/bed/chair/wood,/turf/simulated/floor/carpet/bcarpet,/area/submap/Boathouse)
-"aU" = (/obj/structure/table/rack,/obj/item/clothing/accessory/poncho/blue,/obj/item/clothing/accessory/poncho/blue,/obj/random/thermalponcho,/turf/simulated/floor/wood,/area/submap/Boathouse)
+"aU" = (/obj/structure/table/rack,/obj/item/clothing/accessory/storage/poncho/blue,/obj/item/clothing/accessory/storage/poncho/blue,/obj/random/thermalponcho,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aV" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aW" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/clothing/head/hood/winter,/obj/item/clothing/shoes/boots/winter,/turf/simulated/floor/wood,/area/submap/Boathouse)
 "aX" = (/obj/structure/table/rack,/obj/item/clothing/accessory/storage,/obj/item/clothing/accessory/storage,/turf/simulated/floor/wood,/area/submap/Boathouse)

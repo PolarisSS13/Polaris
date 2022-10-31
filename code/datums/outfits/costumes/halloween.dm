@@ -53,7 +53,7 @@
 	shoes = /obj/item/clothing/shoes/boots/cowboy
 	head = /obj/item/clothing/head/cowboy_hat
 	gloves = /obj/item/clothing/gloves/fingerless
-	suit = /obj/item/clothing/accessory/poncho
+	suit = /obj/item/clothing/accessory/storage/poncho
 	r_hand = /obj/item/gun/projectile/revolver/capgun
 
 /decl/hierarchy/outfit/costume/cowboy/post_equip(var/mob/living/carbon/human/H)

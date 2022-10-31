@@ -1730,6 +1730,7 @@
 #include "code\modules\clothing\under\accessories\permits.dm"
 #include "code\modules\clothing\under\accessories\storage.dm"
 #include "code\modules\clothing\under\accessories\torch.dm"
+#include "code\modules\clothing\under\accessories\crafted\poncho.dm"
 #include "code\modules\clothing\under\accessories\temperature\poncho.dm"
 #include "code\modules\clothing\under\jobs\civilian.dm"
 #include "code\modules\clothing\under\jobs\engineering.dm"

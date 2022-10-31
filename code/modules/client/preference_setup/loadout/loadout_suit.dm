@@ -185,32 +185,32 @@
 /datum/gear/suit/poncho
 	display_name = "poncho selection"
 	description = "A selection of ponchos in basic and departmental colours."
-	path = /obj/item/clothing/accessory/poncho
+	path = /obj/item/clothing/accessory/storage/poncho
 
 /datum/gear/suit/poncho/New()
 	..()
 	var/list/ponchos = list()
-	for(var/poncho_style in (typesof(/obj/item/clothing/accessory/poncho) - typesof(/obj/item/clothing/accessory/poncho/roles/cloak)))
-		var/obj/item/clothing/accessory/poncho/poncho = poncho_style
+	for(var/poncho_style in (typesof(/obj/item/clothing/accessory/storage/poncho) - typesof(/obj/item/clothing/accessory/storage/poncho/roles/cloak)))
+		var/obj/item/clothing/accessory/storage/poncho/poncho = poncho_style
 		ponchos[initial(poncho.name)] = poncho
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(ponchos))
 
 /datum/gear/suit/cloak_department
 	display_name = "cloak, departmental selection"
 	description = "A selection of cloaks in departmental colours."
-	path = /obj/item/clothing/accessory/poncho/roles/cloak/cargo
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/cargo
 
 /datum/gear/suit/cloak_department/New()
 	..()
 	var/list/cloaks = list()
-	for(var/cloak_style in (typesof(/obj/item/clothing/accessory/poncho/roles/cloak)))
-		var/obj/item/clothing/accessory/poncho/roles/cloak/cloak = cloak_style
+	for(var/cloak_style in (typesof(/obj/item/clothing/accessory/storage/poncho/roles/cloak)))
+		var/obj/item/clothing/accessory/storage/poncho/roles/cloak/cloak = cloak_style
 		cloaks[initial(cloak.name)] = cloak
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cloaks))
 
 /datum/gear/suit/cloak_custom //A colorable cloak
 	display_name = "cloak (colorable)"
-	path = /obj/item/clothing/accessory/poncho/roles/cloak/custom
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/custom
 
 /datum/gear/suit/cloak_custom/New()
 	..()
