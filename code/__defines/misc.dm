@@ -317,6 +317,8 @@ var/global/list/##LIST_NAME = list();\
 
 #define SPAN_OCCULT(X) "<span class='cult'>[X]</span>"
 
+#define SPAN_GOOD(X) "<span class='green'>[X]</span>"
+
 #define FONT_SMALL(X) "<font size='1'>[X]</font>"
 
 #define FONT_NORMAL(X) "<font size='2'>[X]</font>"
