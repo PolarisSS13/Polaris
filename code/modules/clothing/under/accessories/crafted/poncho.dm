@@ -4,6 +4,7 @@
 	icon_state = "poncho_base"
 	item_state = "poncho_base"
 	default_material = MAT_CLOTH
+	material_slowdown_multiplier = 0
 	icon = 'icons/obj/clothing/crafted_poncho.dmi'
 	icon_override = 'icons/mob/crafted_poncho.dmi'
 	sprite_sheets = list(
