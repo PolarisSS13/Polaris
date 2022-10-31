@@ -21,7 +21,7 @@
 
 /obj/item/grenade/chem_grenade/Destroy()
 	QDEL_NULL(detonator)
-	QDEL_LIST_NULL(beakers)
+	QDEL_NULL_LIST(beakers)
 	return ..()
 
 /obj/item/grenade/chem_grenade/attack_self(mob/user as mob)
