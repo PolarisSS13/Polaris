@@ -7,6 +7,14 @@
 	pressure_resistance = 2
 	drop_sound = 'sound/items/drop/paper.ogg'
 	pickup_sound = 'sound/items/pickup/paper.ogg'
+	var/list/obj/item/paper/initial_contents
+
+
+/obj/item/folder/Initialize()
+	. = ..()
+	for (var/obj/item/paper/paper as anything in initial_contents)
+		new paper (src)
+
 
 /obj/item/folder/blue
 	desc = "A blue folder."
@@ -140,3 +148,96 @@
 		attack_self(usr)
 		update_icon()
 	return
+
+
+/obj/item/folder/envelope
+	abstract_type = /obj/item/folder/envelope
+	name = "envelope"
+	desc = "A thick envelope for holding documents securely."
+	icon_state = "envelope_sealed"
+
+	// When true, a confirmation is shown before opening. If accepted, it becomes false.
+	var/sealed = TRUE
+
+
+/obj/item/folder/envelope/update_icon()
+	if (sealed)
+		icon_state = "envelope_sealed"
+	else if (length(contents))
+		icon_state = "envelope_full"
+	else
+		icon_state = "envelope_empty"
+
+
+/obj/item/folder/envelope/examine(mob/user)
+	. = ..()
+	if (sealed)
+		. += "The seal is [SPAN_NOTICE("intact")]."
+	else
+		. += "The seal is [SPAN_WARNING("broken")]."
+
+
+/obj/item/folder/envelope/attack_self(mob/living/user)
+	if (sealed)
+		ConfirmBreakSeal(user)
+		return
+	..()
+
+
+/obj/item/folder/envelope/attackby(obj/item/item, mob/living/user)
+	if (sealed && is_sharp(item))
+		if (user.a_intent == I_HURT)
+			user.visible_message(
+				SPAN_WARNING("\The [user] slashes open \a [src] with \a [item]!"),
+				SPAN_ITALIC("You slash open \the [src] with \the [item]!"),
+				range = 5
+			)
+			BreakSeal()
+			return TRUE
+		ConfirmBreakSeal(user)
+		return TRUE
+	..()
+
+
+/obj/item/folder/envelope/proc/ConfirmBreakSeal(mob/living/user)
+	PROTECTED_PROC(TRUE)
+	if (!istype(user))
+		return
+	if (!Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	var/response = alert(user, "Break the seal?", "[src]", "Yes", "No")
+	if (response != "Yes")
+		return
+	if (!Adjacent(user) || user.incapacitated())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
+		return
+	user.visible_message(
+		SPAN_WARNING("\The [user] breaks the seal on \a [src]."),
+		SPAN_ITALIC("You break the seal on \the [src]."),
+		range = 5
+	)
+	BreakSeal()
+
+
+/// Forces the envelope to be open. Internal / pcall.
+/obj/item/folder/envelope/proc/BreakSeal()
+	PROTECTED_PROC(TRUE)
+	sealed = FALSE
+	update_icon()
+
+
+// Implement at map level. This is only an example.
+/obj/item/folder/envelope/example
+	name = "exemplary envelope"
+	initial_contents = list(
+		/obj/item/paper/envelope_example
+	)
+
+
+/obj/item/paper/envelope_example
+	info = {"\
+		<h1>Hello World</h1>\
+		<p>I am a demonstration paper for an envelope.</p>\
+		<p>Am I not <b>cool</b> and <i>neat</i>?</p>\
+	"}
