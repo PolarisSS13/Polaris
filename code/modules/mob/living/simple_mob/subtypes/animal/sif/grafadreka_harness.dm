@@ -1,7 +1,11 @@
 /obj/item/storage/internal/animal_harness/grafadreka
+	name = "grafadreka harness"
+
+	// keys for animal_harness/attachable_type
 	var/const/ATTACHED_GPS = "gps"
 	var/const/ATTACHED_RADIO = "radio"
 	var/const/ATTACHED_ARMOR = "armor plate"
+	var/const/ATTACHED_LIGHT = "light"
 
 	/// An attachable_types list shared between drake harness instances.
 	var/static/list/grafadreka_attachable_types = list(
@@ -14,7 +18,8 @@
 		/obj/item/clothing/accessory/material/makeshift = list(
 			ATTACHED_ARMOR,
 			/obj/item/storage/internal/animal_harness/grafadreka/proc/UpdateArmor
-		)
+		),
+		/obj/item/flashlight = ATTACHED_LIGHT
 	)
 
 	/// The drake that owns this harness.
@@ -38,6 +43,7 @@
 	gps.SetTag(owner.name)
 	attached_items[ATTACHED_GPS] = gps
 	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
+	attached_items[ATTACHED_LIGHT] = new /obj/item/flashlight/glowstick/grafadreka (owner)
 	new /obj/item/stack/medical/bruise_pack (src)
 	new /obj/item/stack/medical/ointment (src)
 	new /obj/item/storage/mre/menu13 (src)
@@ -52,3 +58,20 @@
 		return
 	for (var/key in armor.armor)
 		armor[key] = max(owner.original_armor[key], armor.armor[key])
+
+
+/obj/item/flashlight/glowstick/grafadreka
+	name = "high duration glowstick"
+	action_button_name = null
+
+
+/obj/item/flashlight/glowstick/grafadreka/Initialize()
+	. = ..()
+	var/obj/item/flashlight/glowstick/archetype = pick(typesof(/obj/item/flashlight/glowstick) - type)
+	flashlight_colour = initial(archetype.flashlight_colour)
+	icon_state = initial(archetype.icon_state)
+	item_state = initial(archetype.item_state)
+	fuel = rand(3200, 4800)
+	on = TRUE
+	update_icon()
+	START_PROCESSING(SSobj, src)
