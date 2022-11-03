@@ -36,7 +36,8 @@
 	if(istype(M))
 		return max(1, M.mind?.tcrystals)
 	if(istype(M, /datum/mind))
-		return max(1, M.tcrystals)
+		var/datum/mind/m = M
+		return max(1, m.tcrystals)
 	return max(1, M)
 
 /datum/uplink_item/item/badassery/random_many/get_goods(var/obj/item/uplink/U, var/loc, var/mob/M)
