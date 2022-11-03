@@ -44,7 +44,7 @@
 		if(!fexists("data/player_saves/[copytext(key,1,2)]/[key]/preferences.sav"))
 			continue
 
-		LAZYADDASSOC(whitelists_to_write[key], /whitelist/genemod, TRUE)
+		LAZYADDASSOC(whitelists_to_write[key], "/whitelist/genemod", TRUE)
 
 	// Write the whitelists to files. Second stage, so we don't make a million individual writes.
 	for(var/key in whitelists_to_write)
@@ -63,3 +63,37 @@
 				error("Exception when deleting tmp whitelist file [filename].tmp")
 		catch(var/exception/E)
 			error("Exception when writing to whitelist file [filename]: [E]")
+
+/proc/translate_whitelist_v1_1(var/list/decode)
+	var/static/list/alienwhitelist_dict_v1_1 = list(
+		"/datum/language/human" = /decl/whitelist/language/human,
+		"/datum/language/skrell" = /decl/whitelist/language/skrell,
+		"/datum/language/skrellfar" = /decl/whitelist/language/skrell/high,
+		"/datum/language/teshari" = /decl/whitelist/language/teshari,
+		"/datum/language/akhani" = /decl/whitelist/language/taj/akhani,
+		"/datum/language/tajaran" = /decl/whitelist/language/taj,
+		"/datum/language/tajsign" = /decl/whitelist/language/taj/sign,
+		"/datum/language/unathi" = /decl/whitelist/language/unathi,
+		"/datum/species/diona" = /decl/whitelist/species/diona,
+		"/datum/species/shapeshifter/promethean" = /decl/whitelist/species/promethean,
+		"/datum/species/skrell" = /decl/whitelist/species/skrell,
+		"/datum/species/tajaran" = /decl/whitelist/species/tajara,
+		"/datum/species/teshari" = /decl/whitelist/species/teshari,
+		"/datum/species/unathi" = /decl/whitelist/species/unathi,
+		"/datum/species/vox" = /decl/whitelist/species/vox,
+		"/datum/species/zaddat" = /decl/whitelist/species/zaddat,
+		"/whitelist/genemod" = /decl/whitelist/genemod,
+	)
+
+	. = list()
+	for(var/T in decode)
+		var/decl/D
+		var/P = text2path(T)
+		if(ispath(P))
+			var/datum/d = P
+			D = GET_DECL(initial(d.whitelist_decl))
+		else if(T in alienwhitelist_dict_v1_1)
+			D = GET_DECL(alienwhitelist_dict_v1_1[T])
+
+		if(istype(D))
+			. += D

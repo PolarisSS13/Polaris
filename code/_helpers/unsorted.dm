@@ -1583,3 +1583,7 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 /proc/CallAsync(datum/source, proctype, list/arguments)
 	set waitfor = FALSE
 	return call(source, proctype)(arglist(arguments))
+
+// call to generate a stack trace and print to runtime logs
+/proc/get_stack_trace(msg, file, line)
+	CRASH("%% [file],[line] %% [msg]")

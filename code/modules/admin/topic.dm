@@ -1944,13 +1944,7 @@
 		var/client/C = locate(href_list["modify_whitelist"])
 		if(!istype(C))
 			return
-		var/entry = input(usr, "Please enter the path of the whitelist you wish to modify:", "Whitelist target", "") as text|null
-		if(!entry || !ispath(text2path(entry)))
-			return
-		if(href_list["set_value"] == "1")
-			C.add_whitelist(entry)
-		else if(href_list["set_value"] == "0")
-			C.remove_whitelist(entry)
+		usr.client.admin_modify_whitelist(text2num(href_list["set_value"]), C.ckey)
 
 /mob/living/proc/can_centcom_reply()
 	return 0

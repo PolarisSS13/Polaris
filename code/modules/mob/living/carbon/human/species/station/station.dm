@@ -170,6 +170,8 @@
 		/decl/emote/human/stopsway
 	)
 
+	whitelist_decl = /decl/whitelist/species/unathi
+
 /datum/species/unathi/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
@@ -270,6 +272,8 @@
 		/decl/emote/human/stopsway
 	)
 
+	whitelist_decl = /decl/whitelist/species/tajara
+
 /datum/species/tajaran/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
 	H.equip_to_slot_or_del(new /obj/item/clothing/shoes/sandal(H),slot_shoes)
@@ -363,6 +367,9 @@
 		O_INTESTINE =	/obj/item/organ/internal/intestine/skrell
 		)
 
+	whitelist_decl = /decl/whitelist/species/skrell
+
+
 /datum/species/skrell/can_breathe_water()
 	return TRUE
 
@@ -451,6 +458,9 @@
 	default_emotes = list(
 		/decl/emote/audible/chirp
 	)
+
+	whitelist_decl = /decl/whitelist/species/zaddat
+
 
 /datum/species/zaddat/equip_survival_gear(var/mob/living/carbon/human/H)
 	..()
@@ -576,6 +586,9 @@
 		/decl/emote/audible/chirp,
 		/decl/emote/audible/multichirp
 	)
+
+	whitelist_decl = /decl/whitelist/species/diona
+
 
 /datum/species/diona/can_understand(var/mob/other)
 	if(istype(other, /mob/living/carbon/alien/diona))

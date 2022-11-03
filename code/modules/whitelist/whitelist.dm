@@ -10,15 +10,13 @@
 	to_chat(src, "You are whitelisted for:")
 	to_chat(src, jointext(get_whitelists_list(), "\n"))
 
+
 /client/proc/get_whitelists_list()
 	. = list()
 	if(src.whitelists == null)
 		src.whitelists = load_whitelist(src.ckey)
-	for(var/key in src.whitelists)
-		try
-			. += initial(initial(key:name))
-		catch()
-			. += key
+	for(var/decl/whitelist/D in src.whitelists)
+		. += D.display_name
 
 
 /proc/load_whitelist(var/key)
@@ -28,11 +26,14 @@
 		if(fexists(filename))
 			// Load the whitelist entries from file, or empty string if empty.`
 			. = list()
-			for(var/T in json_decode(file2text(filename) || ""))
-				T = text2path(T)
-				if(!ispath(T))
-					continue
-				.[T] = TRUE
+			var/list/decode = json_decode(file2text(filename) || "")
+			if(!decode["version"])
+				. = translate_whitelist_v1_1(decode)
+				write_whitelist(key, .)
+			else if(decode["version"] == 1.1)
+				. = load_whitelist_v1_1(decode)
+			else
+				error("Tried loading whitelist of unknown rev [decode["version"]] for ckey [key].")
 
 		// Something was removing an entry from the whitelist and interrupted mid-overwrite.
 		else if(fexists(filename + ".tmp") && fcopy(filename + ".tmp", filename))
@@ -42,23 +43,31 @@
 
 		// Whitelist file doesn't exist, so they aren't whitelisted for anything. Create the file.
 		else if(fexists("data/player_saves/[copytext(ckey(key),1,2)]/[ckey(key)]/preferences.sav"))
-			text2file("", filename)
+			text2file("{\"version\":[WHITELIST_REV]}", filename)
 			. = list()
 
 	catch(var/exception/E)
 		error("Exception when loading whitelist file [filename]: [E]")
 
 
+/proc/load_whitelist_v1_1(var/list/decode)
+	. = list()
+	for(var/uid in decode["whitelists"])
+		var/decl/D = decls_repository.get_decl_by_id(uid)
+		if(istype(D))
+			. += D
+
 // Returns true if the specified path is in the player's whitelists, false otw.
-/client/proc/is_whitelisted(var/path)
-	if(istext(path))
-		path = text2path(path)
-	if(!ispath(path))
-		return
+/client/proc/is_whitelisted(var/datum/D)
+	if(!D)
+		return FALSE
+
 	// If it hasn't already been loaded, load it.
 	if(src.whitelists == null)
 		src.whitelists = load_whitelist(src.ckey)
-	return src.whitelists[path]
+	if(istype(D, /decl/whitelist))
+		return D in src.whitelists
+	return GET_DECL(D.whitelist_decl) in src.whitelists
 
 
 /proc/is_alien_whitelisted(mob/M, var/datum/species/species)
@@ -66,16 +75,17 @@
 	if(whitelist_overrides(M))
 		return TRUE
 
+	var/client/C = (!isclient(M)) ? M.client : M
+
 	//You did something wrong
-	if(!M || !species)
+	if(!istype(C) || !species)
 		return FALSE
 
 	//The species isn't even whitelisted
 	if(!(species.spawn_flags & SPECIES_IS_WHITELISTED))
 		return TRUE
 
-	var/client/C = (!isclient(M)) ? M.client : M
-	return C.is_whitelisted(species.type)
+	return C.is_whitelisted(species)
 
 
 /proc/is_lang_whitelisted(mob/M, var/datum/language/language)
@@ -93,7 +103,7 @@
 	if(!(language.flags & WHITELISTED))
 		return TRUE
 
-	return C.is_whitelisted(language.type)
+	return C.is_whitelisted(language)
 
 
 /proc/whitelist_overrides(mob/M)

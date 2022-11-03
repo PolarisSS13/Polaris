@@ -128,6 +128,9 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 		/decl/emote/visible/vibrate
 	)
 
+	whitelist_decl = /decl/whitelist/species/promethean
+
+
 /datum/species/shapeshifter/promethean/New()
 	..()
 	prometheans = src

@@ -449,3 +449,6 @@ GLOBAL_LIST_INIT(all_volume_channels, list(
 #endif
 
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
+
+#define DECL_TYPE_IS_ABSTRACT(DECL) (initial(DECL.abstract_type) == DECL)
+#define DECL_INSTANCE_IS_ABSTRACT(DECL) (DECL.abstract_type == DECL.type)

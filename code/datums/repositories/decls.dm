@@ -1,4 +1,4 @@
-// /decl is a subtype used for singletons that should never have more than one instance 
+// /decl is a subtype used for singletons that should never have more than one instance
 // in existence at a time. If you want to use a /decl you should use a pattern like:
 //     var/decl/somedecl/mydecl = GET_DECL(/decl/somedecl)
 
@@ -16,26 +16,39 @@
 
 var/global/repository/decls/decls_repository = new()
 /repository/decls
-	var/list/fetched_decls
-	var/list/fetched_decl_types
-	var/list/fetched_decl_subtypes
+	var/list/fetched_decls         = list()
+	var/list/fetched_decl_ids      = list()
+	var/list/fetched_decl_types    = list()
+	var/list/fetched_decl_subtypes = list()
 
 /repository/decls/New()
 	..()
-	fetched_decls = list()
-	fetched_decl_types = list()
-	fetched_decl_subtypes = list()
+	for(var/decl_type in typesof(/decl))
+		var/decl/decl = decl_type
+		var/decl_uid = initial(decl.uid)
+		if(decl_uid && (!DECL_TYPE_IS_ABSTRACT(decl) || initial(decl.allow_abstract_init)))
+			fetched_decl_ids[decl_uid] = decl
 
-/repository/decls/proc/get_decl(var/decl_type)
-	ASSERT(ispath(decl_type))
+/repository/decls/proc/get_decl_by_id(var/decl_id)
+	. = get_decl(fetched_decl_ids[decl_id])
+
+/repository/decls/proc/get_decl(var/decl/decl_type)
+	ASSERT(ispath(decl_type, /decl))
 	. = fetched_decls[decl_type]
+	if(DECL_TYPE_IS_ABSTRACT(decl_type) && !initial(decl_type.allow_abstract_init))
+		return // We do not instantiate abstract decls.
 	if(!.)
-		. = new decl_type()
-		fetched_decls[decl_type] = .
+		var/decl/decl = new decl_type()
+		fetched_decls[decl_type] = decl
+		var/init_result = decl.Initialize()
+		switch(init_result)
+			if(INITIALIZE_HINT_NORMAL)
+				. = decl
+			else
+				if(fetched_decls[decl_type] == decl)
+					fetched_decls -= decl_type
+				PRINT_STACK_TRACE("Invalid return hint to [decl_type]/Initialize(): [init_result || "NULL"]")
 
-		var/decl/decl = .
-		if(istype(decl))
-			decl.Initialize()
 
 /repository/decls/proc/get_decls(var/list/decl_types)
 	. = list()
@@ -59,10 +72,19 @@ var/global/repository/decls/decls_repository = new()
 		. = get_decls(subtypesof(decl_prototype))
 		fetched_decl_subtypes[decl_prototype] = .
 
+/decl
+	var/uid
+	abstract_type = /decl
+	var/initialized = FALSE
+	var/allow_abstract_init = FALSE
+
 /decl/proc/Initialize()
 	SHOULD_CALL_PARENT(TRUE)
 	SHOULD_NOT_SLEEP(TRUE)
-	return
+	if(initialized)
+		CRASH("[type] initialized more than once!")
+	initialized = TRUE
+	return INITIALIZE_HINT_NORMAL
 
 /decl/Destroy()
 	SHOULD_CALL_PARENT(FALSE)

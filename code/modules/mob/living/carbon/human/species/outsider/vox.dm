@@ -99,6 +99,8 @@
 	inherent_verbs = list(/mob/living/carbon/human/proc/toggle_vox_pressure_seal)
 	var/list/current_pressure_toggle = list()
 
+	whitelist_decl = /decl/whitelist/species/vox
+
 /datum/species/vox/get_random_name(var/gender)
 	var/datum/language/species_language = GLOB.all_languages[default_language]
 	return species_language.get_random_name(gender)

@@ -42,6 +42,7 @@
  		"ra", "ar", "re", "er", "ri", "ir", "ro", "or", "ru", "ur", "rs", "sr",
  		"a",  "a",  "e",  "e",  "i",  "i",  "o",  "o",  "u",  "u",  "s",  "s"
 	)
+	whitelist_decl = /decl/whitelist/language/unathi
 
 /datum/language/unathi/get_random_name()
 
@@ -64,6 +65,7 @@
 	"mi","jri","dynh","manq","rhe","zar","rrhaz","kal","chur","eech","thaa","dra","jurl","mah","sanu","dra","ii'r",
 	"ka","aasi","far","wa","baq","ara","qara","zir","saam","mak","hrar","nja","rir","khan","jun","dar","rik","kah",
 	"hal","ket","jurl","mah","tul","cresh","azu","ragh","mro","mra","mrro","mrra")
+	whitelist_decl = /decl/whitelist/language/taj
 
 /datum/language/tajaran/get_random_name(var/gender)
 	var/new_name = ..(gender,1)
@@ -87,6 +89,7 @@
 	"ara","ka","zar","mah","ner","zir","mur","hai","raz","ni","ri","nar","njar","jir","ri","ahn","kha","sir",
 	"kar","yar","kzar","rha","hrar","err","fer","rir","rar","yarr","arr","ii'r","jar","kur","ran","rii","ii",
 	"nai","ou","kah","oa","ama","uuk","bel","chi","ayt","kay","kas","akor","tam","yir","enai")
+	whitelist_decl = /decl/whitelist/language/taj/akhani
 
 /datum/language/tajsign
 	name = LANGUAGE_ALAI
@@ -96,6 +99,7 @@
 	colour = "tajaran"
 	key = "l"
 	flags = WHITELISTED | SIGNLANG | NO_STUTTER //nonverbal define was not needed here, and i need to use it ~Layne
+	whitelist_decl = /decl/whitelist/language/taj/sign
 
 /datum/language/tajsign/broadcast(var/mob/living/speaker, var/message, var/speaker_mask)
 	log_say("(SIGN) [message]", speaker)
@@ -127,6 +131,7 @@
 	flags = WHITELISTED
 	partial_understanding = list(LANGUAGE_GALCOM = 20, LANGUAGE_SOL_COMMON = 5, LANGUAGE_TRADEBAND = 40, LANGUAGE_TERMINUS = 15, LANGUAGE_GUTTER = 15, LANGUAGE_SIVIAN = 5, LANGUAGE_SKRELLIANFAR = 75, LANGUAGE_SCHECHI = 15)
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix")
+	whitelist_decl = /decl/whitelist/language/skrell
 
 /datum/language/skrellfar
 	name = LANGUAGE_SKRELLIANFAR
@@ -141,6 +146,7 @@
 	flags = WHITELISTED
 	partial_understanding = list(LANGUAGE_GALCOM = 15, LANGUAGE_TRADEBAND = 15, LANGUAGE_SKRELLIAN = 90)
 	syllables = list("qr","qrr","xuq","qil","quum","xuqm","vol","xrim","zaoo","qu-uu","qix","qoo","zix", "...", "oo", "q", "nq", "x", "xq", "ll", "...", "...", "...") //should sound like there's holes in it
+	whitelist_decl = /decl/whitelist/language/skrell/high
 
 /datum/language/skrell/get_random_name(var/gender)
 	var/list/first_names = file2list('config/names/first_name_skrell.txt')
@@ -157,6 +163,7 @@
 	flags = WHITELISTED
 	partial_understanding = list(LANGUAGE_GALCOM = 70, LANGUAGE_TRADEBAND = 20, LANGUAGE_TERMINUS = 20, LANGUAGE_GUTTER = 20, LANGUAGE_SIVIAN = 40, LANGUAGE_SKRELLIAN = 5)
 	//syllables are at the bottom of the file
+	whitelist_decl = /decl/whitelist/language/human
 
 /datum/language/human/get_spoken_verb(var/msg_end)
 	switch(msg_end)
@@ -209,6 +216,7 @@
 			"ce", "re", "me", "se", "ne", "te", "le", "she", "sche", "e", "e",
 			"ci", "ri", "mi", "si", "ni", "ti", "li", "shi", "schi", "i", "i"
 		)
+	whitelist_decl = /decl/whitelist/language/teshari
 
 /datum/language/teshari/get_random_name(gender)
 	return ..(gender, 2, 4, 1.5)
