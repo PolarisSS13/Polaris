@@ -32,8 +32,12 @@
 	name = "Random Items"
 	desc = "Buys you as many random items you can afford. Convenient packaging NOT included."
 
-/datum/uplink_item/item/badassery/random_many/cost(obj/item/uplink/U, var/telecrystals)
-	return max(1, telecrystals)
+/datum/uplink_item/item/badassery/random_many/cost(obj/item/uplink/U, mob/M)
+	if(istype(M))
+		return max(1, M.mind?.tcrystals)
+	if(istype(M, /datum/mind))
+		return max(1, M.tcrystals)
+	return max(1, M)
 
 /datum/uplink_item/item/badassery/random_many/get_goods(var/obj/item/uplink/U, var/loc, var/mob/M)
 	var/list/bought_items = list()
