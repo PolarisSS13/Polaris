@@ -74,10 +74,11 @@ SUBSYSTEM_DEF(mapping)
 		if(!istype(template))
 			log_mapload("[log_info_line(src)] was not given a submap template, but was instead given [log_info_line(template)].")
 			return
-		
-		log_mapload("[P.name] chose '[template.name]' to load.")
-		admin_notice("[P.name] chose '[template.name]' to load.", R_DEBUG)
-		
+
+		var/log_message = {"[P.name] chose '[template.name]' to load at \[[P.x],[P.y],[P.z]\] ([get_area(P)])."}
+		log_mapload(log_message)
+		admin_notice(log_message, R_DEBUG)
+
 		P.moveToNullspace()
 		var/time_started = REALTIMEOFDAY
 		if(P.annihilate_bounds)
