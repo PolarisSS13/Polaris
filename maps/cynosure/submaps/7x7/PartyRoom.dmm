@@ -10,9 +10,6 @@
 "b" = (
 /obj/structure/table/standard,
 /obj/random/toy,
-/obj/item/toy/colorballoon{
-	color = "#FF00BB"
-	},
 /turf/simulated/floor/carpet/purcarpet,
 /area/template_noop)
 "d" = (
@@ -29,9 +26,6 @@
 "f" = (
 /obj/structure/table/standard,
 /obj/item/wrapping_paper,
-/obj/item/toy/colorballoon{
-	color = "#FFCC00"
-	},
 /turf/simulated/floor/carpet/purcarpet,
 /area/template_noop)
 "j" = (
@@ -64,9 +58,6 @@
 /obj/item/trash/plate{
 	pixel_x = -9;
 	pixel_y = -6
-	},
-/obj/item/toy/colorballoon{
-	color = "#00BBFF"
 	},
 /turf/simulated/floor/carpet/purcarpet,
 /area/template_noop)

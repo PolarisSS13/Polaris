@@ -253,7 +253,7 @@
 /obj/effect/floor_decal/corner/paleblue/border,
 /obj/machinery/door/airlock/medical{
 	name = "Morgue Access";
-	req_one_access = list(5, 6, 12, 47)
+	req_one_access = list(5,6,12,47)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_dirty,
@@ -2464,7 +2464,7 @@
 	dir = 4;
 	frequency = 1430;
 	name = "Mixing Chamber Monitor";
-	sensors = list("toxins_mixing_exterior" = "Mixing Chamber - Exterior", "toxins_mixing_interior" = "Mixing Chamber - Interior")
+	sensors = list("toxins_mixing_exterior"="Mixing Chamber - Exterior","toxins_mixing_interior"="Mixing Chamber - Interior")
 	},
 /obj/machinery/light{
 	dir = 8
@@ -7495,7 +7495,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/medical{
 	name = "Morgue Access";
-	req_one_access = list(5, 6, 12, 47)
+	req_one_access = list(5,6,12,47)
 	},
 /turf/simulated/floor/tiled/steel_dirty,
 /area/surface/station/maintenance/eaststairwell)
@@ -14805,7 +14805,7 @@
 /obj/effect/catwalk_plated/dark,
 /obj/machinery/door/airlock/medical{
 	name = "Morgue Access";
-	req_one_access = list(5, 6, 12, 47)
+	req_one_access = list(5,6,12,47)
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/south)
