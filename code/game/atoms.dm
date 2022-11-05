@@ -228,6 +228,11 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 
 	var/list/output = list("[bicon(src)] That's [f_name] [suffix]", desc)
 
+	if(description_fluff || description_info)
+		to_chat(user, span("notice", "This item has additional examine info. <a href=?src=\ref[src];examine=fluff>\[View\]</a>"))
+	if(description_antag && player_is_antag(user.mind))
+		to_chat(user, span("notice", "This item has additional antag info. <a href=?src=\ref[src];examine=fluff>\[View\]</a>"))
+
 	if(user.client?.prefs.examine_text_mode == EXAMINE_MODE_INCLUDE_USAGE)
 		output += description_info
 
@@ -236,6 +241,15 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 
 	SEND_SIGNAL(src, COMSIG_PARENT_EXAMINE, user, output)
 	return output
+
+/atom/Topic(href,href_list[])
+	. = ..()
+	if (.)
+		return
+
+	switch(href_list["examine"])
+		if("fluff")
+			usr.client.statpanel = "Examine"
 
 // Don't make these call bicon or anything, these are what bicon uses. They need to return an icon.
 /atom/proc/examine_icon()
