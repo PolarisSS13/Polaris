@@ -7,9 +7,19 @@
 /obj/item/reagent_containers/food
 	possible_transfer_amounts = null
 	volume = 50 //Sets the default container amount for all food items.
-	var/filling_color = "#FFFFFF" //Used by sandwiches.
+	description_info = "Food can be alt-clicked to rename it."
+	var/filling_color = "#FFFFFF" //Used by sandwiches and custom food.
 	drop_sound = 'sound/items/drop/food.ogg'
 	pickup_sound = 'sound/items/pickup/food.ogg'
+
+/obj/item/reagent_containers/food/AltClick(mob/user)
+	. = ..()
+	if(Adjacent(src))
+		var/n_name = sanitizeSafe(input(usr, "What would you like to name \the [src]? Leave blank to reset.", "Food Naming", null) as text, MAX_NAME_LEN)
+		if(!n_name)
+			n_name = initial(name)
+
+		name = n_name
 
 /obj/item/reagent_containers/food/Initialize()
 	. = ..()
