@@ -80,7 +80,7 @@
 
 /obj/structure/closet/Destroy()
 	. = ..()
-	qdel_null(door_obj)
+	QDEL_NULL(door_obj)
 
 /obj/structure/closet/examine(mob/user)
 	. = ..()

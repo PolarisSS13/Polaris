@@ -58,8 +58,8 @@
 		first_disposal = GLOB.disposal_pipe_recipes[GLOB.disposal_pipe_recipes[1]][1]
 
 /obj/item/pipe_dispenser/Destroy()
-	qdel_null(spark_system)
-	qdel_null(tool)
+	QDEL_NULL(spark_system)
+	QDEL_NULL(tool)
 	return ..()
 
 /obj/item/pipe_dispenser/attack_self(mob/user)

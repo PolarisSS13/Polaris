@@ -502,7 +502,7 @@
 	QDEL_NULL(hologram)
 
 //	holo_beam.End()
-//	qdel_null(holo_beam)
+//	QDEL_NULL(holo_beam)
 
 	power_draw_idle = 0
 

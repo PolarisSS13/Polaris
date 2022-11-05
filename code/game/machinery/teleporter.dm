@@ -40,7 +40,7 @@
 		teleport_control.station = station
 
 /obj/machinery/computer/teleporter/Destroy()
-	qdel_null(teleport_control)
+	QDEL_NULL(teleport_control)
 	return ..()
 
 /obj/machinery/computer/teleporter/attackby(I as obj, mob/living/user as mob)

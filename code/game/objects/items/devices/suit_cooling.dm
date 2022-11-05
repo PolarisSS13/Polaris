@@ -35,7 +35,7 @@
 	cell = new/obj/item/cell/high(src)	//comes not with the crappy default power cell - because this is dedicated EVA equipment
 
 /obj/item/suit_cooling_unit/Destroy()
-	qdel_null(cell)
+	QDEL_NULL(cell)
 	return ..()
 
 /obj/item/suit_cooling_unit/process()
