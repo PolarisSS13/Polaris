@@ -517,6 +517,9 @@
 	if(reagents_determine_color)
 		totalcolour = result.reagents.get_color()
 
+		for(var/datum/reagent/reag in result.reagents.reagent_list)
+			words |= text2list(reag.name, " ")
+
 	//Filling overlay
 	var/image/I = image(result.icon, "[result.icon_state]_filling")
 	I.color = totalcolour
