@@ -11,6 +11,12 @@
 	/// Null, or a list of ("item key" = null|Instance)
 	var/list/attached_items
 
+	/// The time it takes for the wearer to adjust this harness' attachments.
+	var/self_attach_delay = 5 SECONDS
+
+	/// The time it takes for someone else to adjust this harness' attachments.
+	var/other_attach_delay = 3 SECONDS
+
 
 /obj/item/storage/internal/animal_harness/Destroy()
 	var/mob/living/simple_mob/animal/wearer = loc
@@ -154,7 +160,7 @@
 		SPAN_ITALIC("You begin to remove \the [response] from [(user == src) ? "your" : "\the [src]'s"] harness."),
 		range = 5
 	)
-	if (!do_after(user, (user == src) ? 5 SECONDS : 3 SECONDS, loc))
+	if (!do_after(user, (user == src) ? harness.self_attach_delay : harness.other_attach_delay, loc))
 		return
 	if (!(response in harness.GetAttachedKeys()))
 		to_chat(user, SPAN_WARNING("\The [response] is already missing from \the [src]."))

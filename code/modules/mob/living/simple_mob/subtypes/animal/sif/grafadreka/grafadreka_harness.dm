@@ -1,5 +1,6 @@
 /obj/item/storage/internal/animal_harness/grafadreka
 	name = "grafadreka harness"
+	self_attach_delay = 3 SECONDS
 
 	// keys for animal_harness/attachable_type
 	var/const/ATTACHED_GPS = "gps"

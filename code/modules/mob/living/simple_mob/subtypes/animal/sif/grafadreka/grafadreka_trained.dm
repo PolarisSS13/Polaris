@@ -100,7 +100,7 @@
 		SPAN_ITALIC("You hear something rustling."),
 		runemessage = CHAT_MESSAGE_DEFAULT_ACTION
 	)
-	if (!do_after(src, 5 SECONDS, ignore_movement = TRUE))
+	if (!do_after(src, 3 SECONDS, ignore_movement = TRUE))
 		return
 	harness.remove_from_storage(response, loc)
 	visible_message(
@@ -122,7 +122,7 @@
 		to_chat(src, SPAN_WARNING("\The [item] is securely anchored; you can't take it."))
 		return
 	face_atom(item)
-	if (!do_after(src, 5 SECONDS, item))
+	if (!do_after(src, 3 SECONDS, item))
 		return
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
 	if (harness?.attackby(item, src, TRUE))
