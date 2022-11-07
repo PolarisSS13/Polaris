@@ -139,8 +139,9 @@
 	new /obj/item/pickaxe/six_pick(src)
 
 /obj/item/storage/excavation/handle_item_insertion()
-	..()
-	sort_picks()
+	. = ..()
+	if(.)
+		sort_picks()
 
 /obj/item/storage/excavation/proc/sort_picks()
 	var/list/obj/item/pickaxe/picksToSort = list()

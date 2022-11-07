@@ -51,13 +51,12 @@
 		use(1, user)
 
 // Generic use
-/obj/item/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/kit))
 		var/obj/item/kit/K = W
 		K.customize(src, user)
-		return
-
-	..()
+		return TRUE
+	return ..()
 
 /// Ponchos specifically, but other accessories may eventually need this.
 /// Consequence of snowflake-y teshari code.
