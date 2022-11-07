@@ -15,35 +15,35 @@
 	uid = "genemod"
 
 /decl/whitelist/language/skrell
-	display_name = "Common Skrellian"
+	display_name = LANGUAGE_SKRELLIAN
 	uid = "lang_skrell_common"
 
 /decl/whitelist/language/skrell/high
-	display_name = "High Skrellian"
+	display_name = LANGUAGE_SKRELLIANFAR
 	uid = "lang_skrell_high"
 
 /decl/whitelist/language/unathi
-	display_name = "Sinta'Unathi"
+	display_name = LANGUAGE_UNATHI
 	uid = "lang_unathi"
 
 /decl/whitelist/language/taj
-	display_name = "Siik"
+	display_name =LANGUAGE_SIIK
 	uid = "lang_taj"
 
 /decl/whitelist/language/taj/akhani
-	display_name = "Akhani"
+	display_name = LANGUAGE_AKHANI
 	uid = "lang_taj2"
 
 /decl/whitelist/language/taj/sign
-	display_name = "Alai"
+	display_name = LANGUAGE_ALAI
 	uid = "lang_taj_sign"
 
 /decl/whitelist/language/teshari
-	display_name = "Schechi"
+	display_name = LANGUAGE_SCHECHI
 	uid = "lang_tesh"
 
 /decl/whitelist/language/human
-	display_name = "Sol Common"
+	display_name = LANGUAGE_SOL_COMMON
 	uid = "lang_human"
 
 /decl/whitelist/species/skrell
