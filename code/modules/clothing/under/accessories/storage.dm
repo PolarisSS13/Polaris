@@ -105,12 +105,13 @@
 	new /obj/item/material/knife/machete/hatchet/unathiknife(hold)
 
 /obj/item/clothing/accessory/storage/overalls
-	name = "overalls"
-	desc = "Heavy-duty overalls for use on the work site, with plenty of convenient pockets to boot."
+	name = "dark overalls"
+	desc = "Heavy-duty overalls with reflective strips for use on the work site, with plenty of convenient pockets to boot."
 	icon_state = "mining_overalls"
 
 /obj/item/clothing/accessory/storage/overalls/engineer
-	name = "engineer's overalls"
+	name = "brown overalls"
+	desc = "Heavy-duty overalls for use on the work site, with plenty of convenient pockets to boot."
 	icon_state = "engineering_overalls"
 
 /obj/item/clothing/accessory/storage/overalls/chief

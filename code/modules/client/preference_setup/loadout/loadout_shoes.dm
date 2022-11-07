@@ -19,13 +19,17 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(jacks))
 
 /datum/gear/shoes/workboots
-	display_name = "workboots"
+	display_name = "workboots selection"
 	path = /obj/item/clothing/shoes/boots/workboots
 	cost = 2
 
-/datum/gear/shoes/workboots/toeless
-	display_name = "workboots, toe-less"
-	path = /obj/item/clothing/shoes/boots/workboots/toeless
+/datum/gear/shoes/workboots/New()
+	..()
+	var/list/works = list()
+	for(var/work in typesof(/obj/item/clothing/shoes/boots/workboots))
+		var/obj/item/clothing/shoes/boots/workboots/work_type = work
+		works[initial(work_type.name)] = work_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(works))
 
 /datum/gear/shoes/colored
 	display_name = "shoes, colored selection"

@@ -5,15 +5,12 @@
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/cargotech,
-		/obj/item/clothing/under/rank/cargotech/skirt,
-		/obj/item/clothing/under/rank/cargotech/jeans,
-		/obj/item/clothing/under/rank/cargotech/jeans/female,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo,
 		/obj/item/clothing/shoes/boots/winter/supply,
 		/obj/item/clothing/shoes/black,
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/radio/headset/headset_cargo/alt,
-		/obj/item/clothing/gloves/black,
+		/obj/item/clothing/gloves/duty,
 		/obj/item/clothing/gloves/fingerless,
 		/obj/item/clothing/head/soft)
 
@@ -33,13 +30,10 @@
 
 	starts_with = list(
 		/obj/item/clothing/under/rank/cargo,
-		/obj/item/clothing/under/rank/cargo/skirt,
-		/obj/item/clothing/under/rank/cargo/jeans,
-		/obj/item/clothing/under/rank/cargo/jeans/female,
 		/obj/item/clothing/shoes/brown,
 		/obj/item/radio/headset/headset_cargo,
 		/obj/item/radio/headset/headset_cargo/alt,
-		/obj/item/clothing/gloves/black,
+		/obj/item/clothing/gloves/duty,
 		/obj/item/clothing/gloves/fingerless,
 		/obj/item/clothing/suit/fire,
 		/obj/item/tank/emergency/oxygen,
@@ -67,7 +61,8 @@
 	starts_with = list(
 		/obj/item/radio/headset/headset_mine,
 		/obj/item/clothing/under/rank/miner,
-		/obj/item/clothing/gloves/black,
+		/obj/item/clothing/accessory/storage/overalls,
+		/obj/item/clothing/gloves/duty,
 		/obj/item/clothing/shoes/black,
 		/obj/item/analyzer,
 		/obj/item/storage/bag/ore,

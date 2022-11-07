@@ -145,8 +145,6 @@
 	skirttype["skirt, virologist"] = /obj/item/clothing/under/rank/virologist/skirt
 	skirttype["skirt, medical"] = /obj/item/clothing/under/rank/medical/skirt
 	skirttype["skirt, scientist"] = /obj/item/clothing/under/rank/scientist/skirt
-	skirttype["skirt, cargo"] = /obj/item/clothing/under/rank/cargotech/skirt
-	skirttype["skirt, quartermaster"] = /obj/item/clothing/under/rank/cargotech/skirt
 	gear_tweaks += new/datum/gear_tweak/path(skirttype)
 
 /datum/gear/uniform/job_turtle
@@ -163,25 +161,38 @@
 	turtletype["turtleneck, medical"] = /obj/item/clothing/under/rank/medical/turtleneck
 	gear_tweaks += new/datum/gear_tweak/path(turtletype)
 
-/datum/gear/uniform/jeans_qm
-	display_name = "jeans, QM"
+/datum/gear/uniform/uniform_cargo
+	display_name = "uniform, cargo selection"
+	description = "A selection of standard uniforms for cargo department employees."
+	path = /obj/item/clothing/under/rank/cargotech/jeans
+	allowed_roles = list("Quartermaster", "Shaft Miner", "Cargo Technician")
+
+/datum/gear/uniform/uniform_cargo/New()
+	..()
+	var/cargotype = list()
+	cargotype["cargo uniform, shorts"] = /obj/item/clothing/under/rank/cargotech/shorts
+	cargotype["cargo uniform, jeans"] = /obj/item/clothing/under/rank/cargotech/jeans
+	cargotype["cargo uniform, feminine jeans"] = /obj/item/clothing/under/rank/cargotech/jeans/female
+	cargotype["cargo uniform, skirt"] = /obj/item/clothing/under/rank/cargotech/skirt
+	gear_tweaks += new/datum/gear_tweak/path(cargotype)
+
+/datum/gear/uniform/uniform_qm
+	display_name = "uniform, quartermaster selection"
+	description = "A selection of standard uniforms for the quartermaster."
 	path = /obj/item/clothing/under/rank/cargo/jeans
 	allowed_roles = list("Quartermaster")
 
-/datum/gear/uniform/jeans_qmf
-	display_name = "jeans, feminine QM"
-	path = /obj/item/clothing/under/rank/cargo/jeans/female
-	allowed_roles = list("Quartermaster")
+/datum/gear/uniform/uniform_qm/New()
+	..()
+	var/qmtype = list()
+	qmtype["quartermaster uniform, jeans"] = /obj/item/clothing/under/rank/cargo/jeans
+	qmtype["quartermaster uniform, feminine jeans"] = /obj/item/clothing/under/rank/cargo/jeans/female
+	qmtype["quartermaster uniform, skirt"] = /obj/item/clothing/under/rank/cargo/skirt
+	gear_tweaks += new/datum/gear_tweak/path(qmtype)
 
-/datum/gear/uniform/jeans_cargo
-	display_name = "jeans, cargo"
-	path = /obj/item/clothing/under/rank/cargotech/jeans
-	allowed_roles = list("Quartermaster","Cargo Technician")
-
-/datum/gear/uniform/jeans_cargof
-	display_name = "jeans, feminine cargo"
-	path = /obj/item/clothing/under/rank/cargotech/jeans/female
-	allowed_roles = list("Quartermaster","Cargo Technician")
+/datum/gear/uniform/old_miner
+	display_name = "overalls, purple shirt"
+	path = /obj/item/clothing/under/rank/miner/old
 
 /datum/gear/uniform/suit_lawyer
 	display_name = "suit, one-piece selection"
@@ -468,7 +479,7 @@
 	path = /obj/item/clothing/under/circuitry
 
 /datum/gear/uniform/sleekoverall
-	display_name = "sleek overalls"
+	display_name = "overalls, sleek"
 	path = /obj/item/clothing/under/overalls/sleek
 
 /datum/gear/uniform/sarired

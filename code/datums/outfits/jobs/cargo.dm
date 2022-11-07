@@ -1,11 +1,11 @@
 /decl/hierarchy/outfit/job/cargo
 	l_ear = /obj/item/radio/headset/headset_cargo
 	hierarchy_type = /decl/hierarchy/outfit/job/cargo
+	shoes = /obj/item/clothing/shoes/boots/workboots
 
 /decl/hierarchy/outfit/job/cargo/qm
 	name = OUTFIT_JOB_NAME("Cargo")
 	uniform = /obj/item/clothing/under/rank/cargo
-	shoes = /obj/item/clothing/shoes/brown
 	glasses = /obj/item/clothing/glasses/sunglasses
 	l_hand = /obj/item/clipboard
 	id_type = /obj/item/card/id/cargo/head
@@ -19,7 +19,7 @@
 
 /decl/hierarchy/outfit/job/cargo/mining
 	name = OUTFIT_JOB_NAME("Shaft miner")
-	uniform = /obj/item/clothing/under/rank/miner
+	uniform = /obj/item/clothing/under/rank/miner{ starting_accessories=list(/obj/item/clothing/accessory/storage/overalls) }
 	l_ear = /obj/item/radio/headset/headset_mine
 	backpack = /obj/item/storage/backpack/industrial
 	satchel_one  = /obj/item/storage/backpack/satchel/eng
