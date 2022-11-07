@@ -213,6 +213,10 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 
 	var/list/original_armor
 
+	/// A convenience value for whether this drake is the trained subtype.
+	var/trained_drake = FALSE
+
+
 var/global/list/wounds_being_tended_by_drakes = list()
 /mob/living/simple_mob/animal/sif/grafadreka/proc/can_tend_wounds(var/mob/living/friend)
 
@@ -258,6 +262,7 @@ var/global/list/wounds_being_tended_by_drakes = list()
 	original_armor = armor
 	update_icon()
 
+
 /mob/living/simple_mob/animal/sif/grafadreka/examine(var/mob/living/user)
 	. = ..()
 	if(istype(user, /mob/living/simple_mob/animal/sif/grafadreka) || isobserver(user))
@@ -268,6 +273,13 @@ var/global/list/wounds_being_tended_by_drakes = list()
 			. += SPAN_WARNING("[G.His] sap reserves are running low.")
 		else
 			. += SPAN_DANGER("[G.His] sap reserves are depleted.")
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/do_interaction(atom/atom)
+	if (atom.interaction_grafadreka(src))
+		return ATTACK_SUCCESSFUL
+	return ..()
+
 
 /mob/living/simple_mob/animal/sif/grafadreka/can_projectile_attack(var/atom/A)
 	if(a_intent != I_HURT || world.time < next_spit)
@@ -640,3 +652,37 @@ var/global/list/wounds_being_tended_by_drakes = list()
 	projectiletype = /obj/item/projectile/drake_spit/weak
 	maxHealth = 60
 	health = 60
+
+
+/// Behaviors for being booped by drakes. If falsy, follow through to other behaviors.
+/atom/proc/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	return
+
+
+/obj/structure/simple_door/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	if (drake.a_intent == I_HURT)
+		return ..()
+	if (!state && !isSwitchingStates)
+		Open()
+
+
+/obj/structure/loot_pile/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	if (drake.a_intent == I_HURT)
+		return ..()
+	attack_hand(drake)
+
+
+/obj/item/bikehorn/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	if (drake.a_intent != I_HELP)
+		return ..()
+	if (!do_after(drake, 1 SECOND, src))
+		return
+	drake.visible_message(
+		SPAN_ITALIC("\The [drake] gnaws on \a [src]."),
+		SPAN_ITALIC("You gnaw on \the [src]."),
+		range = 5
+	)
+	attack_self(drake)
