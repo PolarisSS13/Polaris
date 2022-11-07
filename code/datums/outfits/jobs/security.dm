@@ -26,10 +26,8 @@
 
 /decl/hierarchy/outfit/job/security/detective
 	name = OUTFIT_JOB_NAME("Detective")
-	head = /obj/item/clothing/head/det
 	uniform = /obj/item/clothing/under/det
 	suit = /obj/item/clothing/suit/storage/det_trench
-	l_pocket = /obj/item/flame/lighter/zippo
 	shoes = /obj/item/clothing/shoes/laceup
 	r_hand = /obj/item/storage/briefcase/crimekit
 	id_type = /obj/item/card/id/security/detective
@@ -38,9 +36,9 @@
 	satchel_one = /obj/item/storage/backpack/satchel/norm
 	backpack_contents = list(/obj/item/storage/box/evidence = 1)
 
-/decl/hierarchy/outfit/job/security/detective/forensic
+/decl/hierarchy/outfit/job/security/forensic
 	name = OUTFIT_JOB_NAME("Forensic technician")
-	head = null
+	uniform = /obj/item/clothing/under/rank/security/forensics
 	suit = /obj/item/clothing/suit/storage/forensics/blue
 
 /decl/hierarchy/outfit/job/security/officer
