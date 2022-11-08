@@ -7,7 +7,7 @@
 /obj/item/reagent_containers/food
 	possible_transfer_amounts = null
 	volume = 50 //Sets the default container amount for all food items.
-	description_info = "Food can be alt-clicked to rename it."
+	description_info = "Food can use the Rename Food verb in the Object Tab to rename it."
 	var/filling_color = "#FFFFFF" //Used by sandwiches and custom food.
 	drop_sound = 'sound/items/drop/food.ogg'
 	pickup_sound = 'sound/items/pickup/food.ogg'
