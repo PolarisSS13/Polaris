@@ -13,6 +13,7 @@
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'		// Normal icon set.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi'	// Mutated icon set.
+	var/limb_blend = ICON_ADD                               // Specify a blending mode for limbs and tail.
 
 	var/speech_bubble_appearance = "normal"					// Part of icon_state to use for speech bubbles when talking.	See talk.dmi for available icons.
 	var/fire_icon_state = "humanoid"						// The icon_state used inside OnFire.dmi for when on fire.
@@ -257,10 +258,6 @@
 		/datum/mob_descriptor/height,
 		/datum/mob_descriptor/build
 		)
-
-	//This is used in character setup preview generation (prefences_setup.dm) and human mob
-	//rendering (update_icons.dm)
-	var/color_mult = 0
 
 	//This is for overriding tail rendering with a specific icon in icobase, for static
 	//tails only, since tails would wag when dead if you used this

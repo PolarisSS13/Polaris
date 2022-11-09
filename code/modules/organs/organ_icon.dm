@@ -170,8 +170,9 @@ var/global/list/limb_icon_cache = list()
 		icon_cache_key += "_tone_[s_tone]"
 	else
 		if(s_col && s_col.len >= 3)
-			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), s_col_blend)
-			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[s_col_blend]"
+			var/blend = species?.limb_blend || ICON_ADD
+			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), blend)
+			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[blend]"
 
 	// Translucency.
 	if(nonsolid) applying += rgb(,,,180) // SO INTUITIVE TY BYOND
