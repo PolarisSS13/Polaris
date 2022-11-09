@@ -71,6 +71,7 @@
 	name_language = LANGUAGE_UNATHI
 	species_language = LANGUAGE_UNATHI
 	health_hud_intensity = 2.5
+	chem_strength_alcohol = 0.75
 
 	min_age = 32
 	max_age = 260
@@ -195,6 +196,7 @@
 	name_language = LANGUAGE_SIIK
 	species_language = LANGUAGE_SIIK
 	health_hud_intensity = 2.5
+	chem_strength_alcohol = 1.25
 
 	min_age = 17
 	max_age = 80
@@ -293,6 +295,7 @@
 	species_language = LANGUAGE_SKRELLIAN
 	assisted_langs = list(LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_ROOTLOCAL, LANGUAGE_ROOTGLOBAL, LANGUAGE_VOX)
 	health_hud_intensity = 2
+	chem_strength_alcohol = 5
 
 	water_movement = -3
 
@@ -500,6 +503,7 @@
 	show_ssd = "completely quiescent"
 	health_hud_intensity = 2.5
 	item_slowdown_mod = 0.1
+	chem_strength_alcohol = 0
 
 	num_alternate_languages = 2
 	name_language = LANGUAGE_ROOTLOCAL
