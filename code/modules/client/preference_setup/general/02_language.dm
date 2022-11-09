@@ -16,7 +16,7 @@
 		var/datum/species/S = GLOB.all_species[pref.species]
 		if(!istype(S))
 			return
-			
+
 		if(pref.alternate_languages.len > S.num_alternate_languages)
 			pref.alternate_languages.len = S.num_alternate_languages // Truncate to allowed length
 

@@ -112,13 +112,21 @@
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
 	job_description = "A Xenobiologist studies esoteric lifeforms, usually in the relative safety of their lab. They attempt to find ways to benefit \
 						from the byproducts of these lifeforms, and their main subject at present is the Giant Slime."
-	alt_titles = list("Xenobotanist" = /datum/alt_title/xenobot)
+	alt_titles = list(
+		"Xenobotanist" = /datum/alt_title/xenobot,
+		"Xenofauna Technician" = /datum/alt_title/xenovet
+	)
 
 // Xenibiologist Alt Titles
 /datum/alt_title/xenobot
 	title = "Xenobotanist"
 	title_blurb = "A Xenobotanist grows and cares for a variety of abnormal, custom made, and frequently dangerous plant life. When the products of these plants \
 					is both safe and beneficial to the station, they may choose to introduce it to the rest of the crew."
+
+/datum/alt_title/xenovet
+	title = "Xenofauna Technician"
+	title_blurb = "A Xenofauna Technician works with the alien fauna living in the territory around the station, often out in the field. They are also responsible \
+					for training and tending to the station's small drake population."
 
 //////////////////////////////////
 //			Roboticist

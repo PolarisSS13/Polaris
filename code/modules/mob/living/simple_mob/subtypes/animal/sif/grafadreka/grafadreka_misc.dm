@@ -106,17 +106,6 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	weaken = 0
 	eyeblur = 2
 
-
-/obj/structure/animal_den/ghost_join/grafadreka
-	name = "drake den"
-	critter = /mob/living/simple_mob/animal/sif/grafadreka
-
-
-/obj/structure/animal_den/ghost_join/grafadreka_hatchling
-	name = "drake hatchling den"
-	critter = /mob/living/simple_mob/animal/sif/grafadreka/hatchling
-
-
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
 	glow_colour = get_random_colour(TRUE)
 	fur_colour =  get_random_colour(TRUE)

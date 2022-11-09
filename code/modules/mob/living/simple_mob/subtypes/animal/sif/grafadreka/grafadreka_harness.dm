@@ -8,6 +8,7 @@
 	var/const/ATTACHED_RADIO = "radio"
 	var/const/ATTACHED_ARMOR = "armor plate"
 	var/const/ATTACHED_LIGHT = "light"
+	var/const/ATTACHED_ID = "access card"
 
 	/// An attachable_types list shared between drake harness instances.
 	var/static/list/grafadreka_attachable_types = list(
@@ -21,8 +22,13 @@
 			ATTACHED_ARMOR,
 			/obj/item/storage/internal/animal_harness/grafadreka/proc/UpdateArmor
 		),
+		/obj/item/card/id = ATTACHED_ID,
 		/obj/item/flashlight = ATTACHED_LIGHT
 	)
+
+/obj/item/storage/internal/animal_harness/grafadreka/GetIdCard()
+	return attached_items[ATTACHED_ID]
+
 
 /obj/item/storage/internal/animal_harness/grafadreka/Destroy()
 	attachable_types = null
@@ -60,36 +66,3 @@
 		/obj/item/storage/mre/menu13
 	))
 	new mre_type (src)
-
-
-// Station/Science drake harness contents on spawn
-/obj/item/storage/internal/animal_harness/grafadreka/expedition/CreateAttachments()
-	var/mob/living/owner = loc
-	if (!istype(owner))
-		return
-	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
-	new /obj/item/stack/medical/bruise_pack (src)
-	new /obj/item/stack/medical/ointment (src)
-	new /obj/item/storage/mre/menu13 (src) // The good stuff
-	var/obj/item/gps/explorer/on/gps = new (owner)
-	gps.SetTag(owner.name)
-	attached_items[ATTACHED_GPS] = gps
-	attached_items[ATTACHED_LIGHT] = new /obj/item/flashlight/glowstick/grafadreka (owner)
-
-
-
-/obj/item/flashlight/glowstick/grafadreka
-	name = "high duration glowstick"
-	action_button_name = null
-
-
-/obj/item/flashlight/glowstick/grafadreka/Initialize()
-	. = ..()
-	var/obj/item/flashlight/glowstick/archetype = pick(typesof(/obj/item/flashlight/glowstick) - type)
-	flashlight_colour = initial(archetype.flashlight_colour)
-	icon_state = initial(archetype.icon_state)
-	item_state = initial(archetype.item_state)
-	fuel = rand(3200, 4800)
-	on = TRUE
-	update_icon()
-	START_PROCESSING(SSobj, src)
