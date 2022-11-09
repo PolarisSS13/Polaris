@@ -53,10 +53,12 @@
 
 	flags = NO_SCAN | NO_DEFIB
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
-	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR | HAS_HAIR_COLOR
+	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR
 
 	blood_color = "#9066BD"
 	flesh_color = "#808D11"
+	tail = "voxtail"
+	tail_hair = "quills"
 
 	reagent_tag = IS_VOX
 
