@@ -15,6 +15,14 @@
 		/datum/unarmed_attack/bite/strong
 	)
 
+	// Vox are resistant to chems in general
+	chem_strength_heal =    0.35
+	chem_strength_tox =     0.35
+	chem_strength_alcohol = 0.35
+	chem_strength_pain =    0.35
+
+	taste_sensitivity = TASTE_DULL // it would have to be, wouldn't it
+
 	rarity_value = 5
 	blurb = "The Vox are the broken remnants of a once-proud race, now reduced to little more than \
 	scavenging vermin who prey on isolated stations, ships or planets to keep their own ancient arkships \
@@ -25,7 +33,6 @@
 	experience."
 	catalogue_data = list(/datum/category_item/catalogue/fauna/vox)
 
-//	taste_sensitivity = TASTE_DULL
 
 	slowdown = -0.5
 
