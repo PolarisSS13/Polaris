@@ -915,12 +915,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		if(!species_tail_anim && species.icobase_tail) species_tail_anim = species.icobase //Allow override of file for non-animated tails
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species?.limb_blend || ICON_ADD)
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species?.tail_blend || ICON_ADD)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
 			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), species?.limb_blend || ICON_ADD)
+			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), species?.tail_hair_blend || ICON_ADD)
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 
@@ -1075,7 +1075,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	//If you are FBP with wing style and didn't set a custom one
 	if(synthetic && synthetic.includes_wing && !wing_style)
 		var/icon/wing_s = new/icon("icon" = synthetic.icon, "icon_state" = "wing") //I dunno. If synths have some custom wing?
-		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.limb_blend || ICON_ADD)
+		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.limb_blend || ICON_ADD) // Are wings even used on Polaris? This might need an additional blend mode var.
 		return image(wing_s)
 
 	//If you have custom wings selected
@@ -1125,7 +1125,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	var/datum/robolimb/model = isSynthetic()
 	if(istype(model) && model.includes_tail && !tail_style)
 		var/icon/tail_s = new/icon("icon" = synthetic.icon, "icon_state" = "tail")
-		tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.limb_blend || ICON_ADD)
+		tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.tail_blend || ICON_ADD)
 		return image(tail_s)
 
 	//If you have a custom tail selected

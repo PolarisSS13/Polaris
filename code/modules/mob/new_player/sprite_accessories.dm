@@ -2112,7 +2112,7 @@ shaved
 /datum/sprite_accessory/marking/vox/scutes
 	name = "Vox Scutes"
 	icon_state = "scutes"
-	body_parts = list(BP_L_HAND, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
+	body_parts = list(BP_L_ARM, BP_L_HAND, BP_R_ARM, BP_R_HAND, BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)
 
 /datum/sprite_accessory/marking/vox/arm_markings
 	name = "Vox Arm Markings (Left)"

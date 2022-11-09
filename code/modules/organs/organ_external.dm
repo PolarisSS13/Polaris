@@ -42,6 +42,7 @@
 	var/list/s_col                     // skin colour
 	var/list/h_col                     // hair colour
 	var/body_hair                      // Icon blend for body hair if any.
+
 	var/mob/living/applied_pressure
 	var/list/markings = list()         // Markings (body_markings) to apply to the icon
 

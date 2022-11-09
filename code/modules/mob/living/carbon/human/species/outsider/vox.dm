@@ -60,6 +60,7 @@
 	flesh_color = "#808D11"
 	tail = "voxtail"
 	tail_hair = "quills"
+	tail_blend = ICON_MULTIPLY
 
 	reagent_tag = IS_VOX
 

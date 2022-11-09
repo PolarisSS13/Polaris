@@ -119,7 +119,7 @@ var/global/list/limb_icon_cache = list()
 				for(var/M in markings)
 					var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
 					var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-					mark_s.Blend(markings[M]["color"], ICON_ADD)
+					mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
 					add_overlay(mark_s) //So when it's not on your body, it has icons
 					mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 					icon_cache_key += "[M][markings[M]["color"]]"
@@ -139,7 +139,7 @@ var/global/list/limb_icon_cache = list()
 			for(var/M in markings)
 				var/datum/sprite_accessory/marking/mark_style = markings[M]["datum"]
 				var/icon/mark_s = new/icon("icon" = mark_style.icon, "icon_state" = "[mark_style.icon_state]-[organ_tag]")
-				mark_s.Blend(markings[M]["color"], ICON_ADD)
+				mark_s.Blend(markings[M]["color"], mark_style.color_blend_mode)
 				add_overlay(mark_s) //So when it's not on your body, it has icons
 				mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 				icon_cache_key += "[M][markings[M]["color"]]"
@@ -168,11 +168,10 @@ var/global/list/limb_icon_cache = list()
 		else
 			applying.Blend(rgb(-s_tone,  -s_tone,  -s_tone), ICON_SUBTRACT)
 		icon_cache_key += "_tone_[s_tone]"
-	else
-		if(s_col && s_col.len >= 3)
-			var/blend = species?.limb_blend || ICON_ADD
-			applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), blend)
-			icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[blend]"
+	else if(s_col && s_col.len >= 3)
+		var/blend = species?.limb_blend || ICON_ADD
+		applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), blend)
+		icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[blend]"
 
 	// Translucency.
 	if(nonsolid) applying += rgb(,,,180) // SO INTUITIVE TY BYOND
