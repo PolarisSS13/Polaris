@@ -261,18 +261,18 @@
 		R.activate_module(src)
 		R.hud_used.update_robot_modules_display()
 
-/obj/item/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/attackby(obj/item/W, mob/user)
 	. = ..()
-	if(istype(W, /obj/item/storage))
+	if(!. && istype(W, /obj/item/storage))
 		var/obj/item/storage/S = W
 		if(S.use_to_pickup)
 			if(S.collection_mode) //Mode is set to collect all items
 				if(isturf(src.loc))
 					S.gather_all(src.loc, user)
-
-			else if(S.can_be_inserted(src))
-				S.handle_item_insertion(src)
-	return
+					return TRUE
+		if(S.can_be_inserted(src))
+			S.handle_item_insertion(src)
+			return TRUE
 
 /obj/item/proc/talk_into(mob/M as mob, text)
 	return

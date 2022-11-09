@@ -353,7 +353,8 @@
 //The stop_warning parameter will stop the insertion message from being displayed. It is intended for cases where you are inserting multiple items at once,
 //such as when picking up all the items on a tile with one click.
 /obj/item/storage/proc/handle_item_insertion(obj/item/W as obj, prevent_warning = 0)
-	if(!istype(W)) return 0
+	if(!istype(W))
+		return FALSE
 
 	if(usr)
 		usr.remove_from_mob(W,target = src) //If given a target, handles forceMove()
@@ -382,7 +383,7 @@
 		W.on_enter_storage(src)
 
 	update_icon()
-	return 1
+	return TRUE
 
 //Call this proc to handle the removal of an item from the storage item. The item will be moved to the atom sent as new_target
 /obj/item/storage/proc/remove_from_storage(obj/item/W as obj, atom/new_location)
@@ -420,10 +421,14 @@
 
 //This proc is called when you want to place an item into the storage item.
 /obj/item/storage/attackby(obj/item/W as obj, mob/user as mob, silent)
-	..()
 
+	. = ..()
+	if(.)
+		return
+
+	//Robots can't interact with storage items.
 	if(isrobot(user))
-		return //Robots can't interact with storage items.
+		return FALSE
 
 	if(istype(W, /obj/item/lightreplacer))
 		var/obj/item/lightreplacer/LP = W
@@ -439,10 +444,10 @@
 		if(amt_inserted)
 			if (!silent)
 				to_chat(user, "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining.")
-			return
+		return TRUE
 
 	if(!can_be_inserted(W))
-		return
+		return FALSE
 
 	if(istype(W, /obj/item/tray))
 		var/obj/item/tray/T = W
@@ -450,14 +455,14 @@
 			if(prob(85))
 				if (!silent)
 					to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
-				return
-			else
-				W.forceMove(get_turf(user))
-				if ((user.client && user.s_active != src))
-					user.client.screen -= W
-				W.dropped(user)
-				if (!silent)
-					to_chat(user, "<span class='warning'>God damn it!</span>")
+				return TRUE
+			W.forceMove(get_turf(user))
+			if ((user.client && user.s_active != src))
+				user.client.screen -= W
+			W.dropped(user)
+			if (!silent)
+				to_chat(user, "<span class='warning'>God damn it!</span>")
+			return TRUE
 
 	W.add_fingerprint(user)
 	return handle_item_insertion(W, silent)
