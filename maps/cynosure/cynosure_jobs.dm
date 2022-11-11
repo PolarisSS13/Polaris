@@ -247,6 +247,8 @@ var/global/const/access_explorer = 43
 		qdel(player)
 		prompt_rename(doggo)
 		var/obj/item/storage/internal/animal_harness/grafadreka/harness = doggo.harness
+		if (!istype(harness))
+			return doggo
 		var/obj/item/gps/gps = harness.attached_items[harness.ATTACHED_GPS]
 		if (gps)
 			gps.SetTag(doggo.name)

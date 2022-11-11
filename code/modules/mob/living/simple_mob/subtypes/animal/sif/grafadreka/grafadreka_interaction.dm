@@ -5,7 +5,6 @@
 
 /* Simple drake interactions */
 
-
 /obj/structure/simple_door/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
 	. = TRUE
 	if (drake.a_intent == I_HURT)
@@ -36,7 +35,6 @@
 
 
 /* Trained drake interactions */
-
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
 	if (drake == src && a_intent == I_GRAB)

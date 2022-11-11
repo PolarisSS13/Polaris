@@ -9,7 +9,7 @@
 	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
 	movement_cooldown = 1.5 // ~Red~ trained ones go faster.
 	dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
-	harness = /obj/item/storage/internal/animal_harness/grafadreka
+	harness = /obj/item/storage/internal/animal_harness/grafadreka/trained
 	trained_drake = TRUE
 
 	/// On clicking with an item, stuff that should use behaviors instead of being placed in storage.

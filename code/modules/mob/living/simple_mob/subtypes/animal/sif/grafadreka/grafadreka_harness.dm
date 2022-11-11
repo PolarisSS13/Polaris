@@ -1,4 +1,5 @@
 /obj/item/storage/internal/animal_harness/grafadreka
+	abstract_type = /obj/item/storage/internal/animal_harness/grafadreka
 	name = "grafadreka harness"
 	self_attach_delay = 3 SECONDS
 
@@ -40,14 +41,6 @@
 	if (!istype(owner))
 		log_debug("Drake harness created without a drake!")
 		return INITIALIZE_HINT_QDEL
-	var/obj/item/gps/explorer/on/gps = new (owner)
-	gps.SetTag(owner.name)
-	attached_items[ATTACHED_GPS] = gps
-	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
-	attached_items[ATTACHED_LIGHT] = new /obj/item/flashlight/glowstick/grafadreka (owner)
-	new /obj/item/stack/medical/bruise_pack (src)
-	new /obj/item/stack/medical/ointment (src)
-	new /obj/item/storage/mre/menu13 (src)
 
 
 /obj/item/storage/internal/animal_harness/grafadreka/proc/UpdateArmor()
@@ -59,6 +52,32 @@
 		return
 	for (var/key in armor.armor)
 		armor[key] = max(owner.original_armor[key], armor.armor[key])
+
+
+// Basic trained drake harness contents on spawn
+/obj/item/storage/internal/animal_harness/grafadreka/trained/CreateAttachments()
+	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
+	new /obj/item/stack/medical/bruise_pack (src)
+	new /obj/item/stack/medical/ointment (src)
+	var/obj/item/storage/mre/mre_type = pick(typesof(/obj/item/storage/mre) - list(
+		/obj/item/storage/mre/menu11,
+		/obj/item/storage/mre/menu12,
+		/obj/item/storage/mre/menu13
+	))
+	new mre_type (src)
+
+
+// Station/Science drake harness contents on spawn
+/obj/item/storage/internal/animal_harness/grafadreka/expedition/CreateAttachments()
+	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
+	new /obj/item/stack/medical/bruise_pack (src)
+	new /obj/item/stack/medical/ointment (src)
+	new /obj/item/storage/mre/menu13 (src) // The good stuff
+	var/obj/item/gps/explorer/on/gps = new (owner)
+	gps.SetTag(owner.name)
+	attached_items[ATTACHED_GPS] = gps
+	attached_items[ATTACHED_LIGHT] = new /obj/item/flashlight/glowstick/grafadreka (owner)
+
 
 
 /obj/item/flashlight/glowstick/grafadreka

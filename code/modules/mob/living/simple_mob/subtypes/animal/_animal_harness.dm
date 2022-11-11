@@ -38,6 +38,7 @@
 	for (var/path in attachable_types)
 		var/key = attachable_types[path]
 		attached_items[key] = null
+	CreateAttachments()
 
 
 /obj/item/storage/internal/animal_harness/attackby(obj/item/item, mob/living/user, silent)
@@ -45,28 +46,29 @@
 	if (user == loc) // Animals can only shove stuff in their storage.
 		return ..()
 	for (var/path in attachable_types)
-		if (istype(item, path))
-			var/key = attachable_types[path]
-			var/handler
-			if (islist(key))
-				handler = key[2]
-				key = key[1]
-			if (attached_items[key])
-				if (!silent)
-					var/datum/gender/gender
-					if (ismob(loc))
-						var/mob/living/simple_mob/animal/owner = loc
-						gender = gender_datums[owner.get_visible_gender()]
-					to_chat(user, SPAN_WARNING("\The [loc] already has \a [key] attached to [gender ? gender.his : "its"] harness."))
-				return
-			if (!user.unEquip(item, target = loc))
-				return
+		if (!istype(item, path))
+			continue
+		var/key = attachable_types[path]
+		var/handler
+		if (islist(key))
+			handler = key[2]
+			key = key[1]
+		if (attached_items[key])
 			if (!silent)
-				user.visible_message(SPAN_NOTICE("\The [user] attaches \the [item] to \the [loc]'s harness."))
-			attached_items[key] = item
-			if (handler)
-				call(src, handler)(item)
+				var/datum/gender/gender
+				if (ismob(loc))
+					var/mob/living/simple_mob/animal/owner = loc
+					gender = gender_datums[owner.get_visible_gender()]
+				to_chat(user, SPAN_WARNING("\The [loc] already has \a [key] attached to [gender ? gender.his : "its"] harness."))
 			return
+		if (!user.unEquip(item, target = loc))
+			return
+		if (!silent)
+			user.visible_message(SPAN_NOTICE("\The [user] attaches \the [item] to \the [loc]'s harness."))
+		attached_items[key] = item
+		if (handler)
+			call(src, handler)(item)
+		return
 	return ..()
 
 
@@ -100,6 +102,10 @@
 			attachment.dropInto(get_turf(src))
 			attached_items[key] = null
 			return attachment
+
+
+/obj/item/storage/internal/animal_harness/proc/CreateAttachments()
+	return
 
 
 /mob/living/simple_mob/animal
@@ -141,8 +147,8 @@
 	if (!user.check_dexterity(MOB_DEXTERITY_SIMPLE_MACHINES))
 		return
 	var/list/attached = harness.GetAttachedKeys()
+	var/datum/gender/gender = gender_datums[get_visible_gender()]
 	if (!length(attached))
-		var/datum/gender/gender = gender_datums[get_visible_gender()]
 		to_chat(user, SPAN_WARNING("\The [src] has nothing attached to [gender.his] [harness.name]."))
 		return
 	var/obj/item/response = input(user, "Select attachment to remove:") as null | anything in attached
@@ -154,13 +160,14 @@
 	if (!Adjacent(user) || user.incapacitated())
 		to_chat(user, SPAN_WARNING("You are in no condition to do that."))
 		return
-	var/datum/gender/gender = gender_datums[get_visible_gender()]
 	user.visible_message(
 		SPAN_ITALIC("\The [user] begins to remove \a [response] from [(user == src) ? "[gender.his]" : "\the [src]'s"] harness."),
 		SPAN_ITALIC("You begin to remove \the [response] from [(user == src) ? "your" : "\the [src]'s"] harness."),
 		range = 5
 	)
 	if (!do_after(user, (user == src) ? harness.self_attach_delay : harness.other_attach_delay, loc))
+		return
+	if (QDELETED(harness))
 		return
 	if (!(response in harness.GetAttachedKeys()))
 		to_chat(user, SPAN_WARNING("\The [response] is already missing from \the [src]."))
