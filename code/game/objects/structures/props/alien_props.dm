@@ -101,7 +101,6 @@
 /obj/item/prop/alien/junk
 	name = "alien object"
 	desc = "You have no idea what this thing does."
-	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "health"
