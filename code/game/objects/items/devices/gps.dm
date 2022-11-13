@@ -324,10 +324,8 @@ var/global/list/GPS_list = list()
 
 	if(href_list["tag"])
 		var/a = input("Please enter desired tag.", name, gps_tag) as text
-		a = uppertext(copytext(sanitize(a), 1, 11))
 		if(in_range(src, usr))
-			gps_tag = a
-			name = "global positioning system ([gps_tag])"
+			SetTag(a)
 			to_chat(usr, "You set your GPS's tag to '[gps_tag]'.")
 			. = TRUE
 
@@ -345,6 +343,12 @@ var/global/list/GPS_list = list()
 
 	if(. && loc == usr)
 		display(usr)
+
+
+/obj/item/gps/proc/SetTag(new_tag)
+	gps_tag = uppertext(copytext(sanitize(new_tag), 1, 11))
+	name = "global positioning system ([gps_tag])"
+
 
 /obj/item/gps/on // Defaults to off to avoid polluting the signal list with a bunch of GPSes without owners. If you need to spawn active ones, use these.
 	tracking = TRUE
