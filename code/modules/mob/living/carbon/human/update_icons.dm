@@ -250,10 +250,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 				icon_key += "[rgb(part.s_col[1],part.s_col[2],part.s_col[3])]"
 			if(part.body_hair && part.h_col && part.h_col.len >= 3)
 				icon_key += "[rgb(part.h_col[1],part.h_col[2],part.h_col[3])]"
-				if(species.color_mult)
-					icon_key += "[ICON_MULTIPLY]"
-				else
-					icon_key += "[ICON_ADD]"
+				icon_key += "[species?.limb_blend || ICON_ADD]"
 			else
 				icon_key += "#000000"
 
@@ -891,7 +888,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	remove_layer(TAIL_NORTH_LAYER)
 	remove_layer(TAIL_SOUTH_LAYER)
 
-	var tail_layer = GET_TAIL_LAYER
+	var/tail_layer = GET_TAIL_LAYER
 
 	var/image/tail_image = get_tail_image()
 	if(tail_image)
@@ -918,12 +915,12 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 		if(!species_tail_anim && species.icobase_tail) species_tail_anim = species.icobase //Allow override of file for non-animated tails
 		if(!species_tail_anim) species_tail_anim = 'icons/effects/species.dmi'
 		tail_icon = new/icon(species_tail_anim)
-		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
+		tail_icon.Blend(rgb(r_skin, g_skin, b_skin), species?.tail_blend || ICON_ADD)
 		// The following will not work with animated tails.
 		var/use_species_tail = species.get_tail_hair(src)
 		if(use_species_tail)
 			var/icon/hair_icon = icon('icons/effects/species.dmi', "[species.get_tail(src)]_[use_species_tail]")
-			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), species.color_mult ? ICON_MULTIPLY : ICON_ADD)				//Check for species color_mult
+			hair_icon.Blend(rgb(r_hair, g_hair, b_hair), species?.tail_hair_blend || ICON_ADD)
 			tail_icon.Blend(hair_icon, ICON_OVERLAY)
 		tail_icon_cache[icon_key] = tail_icon
 
@@ -1078,7 +1075,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	//If you are FBP with wing style and didn't set a custom one
 	if(synthetic && synthetic.includes_wing && !wing_style)
 		var/icon/wing_s = new/icon("icon" = synthetic.icon, "icon_state" = "wing") //I dunno. If synths have some custom wing?
-		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
+		wing_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.limb_blend || ICON_ADD) // Are wings even used on Polaris? This might need an additional blend mode var.
 		return image(wing_s)
 
 	//If you have custom wings selected
@@ -1128,7 +1125,7 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	var/datum/robolimb/model = isSynthetic()
 	if(istype(model) && model.includes_tail && !tail_style)
 		var/icon/tail_s = new/icon("icon" = synthetic.icon, "icon_state" = "tail")
-		tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species.color_mult ? ICON_MULTIPLY : ICON_ADD)
+		tail_s.Blend(rgb(src.r_skin, src.g_skin, src.b_skin), species?.tail_blend || ICON_ADD)
 		return image(tail_s)
 
 	//If you have a custom tail selected
