@@ -33,39 +33,64 @@
 /obj/structure/flora/tree/can_harvest(var/obj/item/I, var/ignore_tool = FALSE)
 	return (!is_stump && (ignore_tool || (harvest_tool && istype(I, harvest_tool))) && harvest_loot && harvest_loot.len && harvest_count < max_harvests)
 
-/obj/structure/flora/tree/attackby(var/obj/item/W, var/mob/living/user)
-	if(can_harvest(W))
-		..(W, user)
+
+/obj/structure/flora/tree/attackby(obj/item/item, mob/living/user)
+	if (can_harvest(item))
+		..(item, user)
 		return
-
-	if(!istype(W))
+	if (!istype(item))
 		return ..()
-
-	if(is_stump)
-		if(istype(W,/obj/item/shovel))
-			if(do_after(user, 5 SECONDS))
-				visible_message("<span class='notice'>\The [user] digs up \the [src] stump with \the [W].</span>")
+	if (is_stump)
+		if (istype(item, /obj/item/shovel))
+			if (do_after(user, 5 SECONDS))
+				visible_message("<span class='notice'>\The [user] digs up \the [src] stump with \the [item].</span>")
 				qdel(src)
 		return
+	TryChop(user, item)
 
-	visible_message("<span class='danger'>\The [user] hits \the [src] with \the [W]!</span>")
 
-	var/damage_to_do = W.force
-	if(!W.sharp && !W.edge)
-		damage_to_do = round(damage_to_do / 4)
-	if(damage_to_do > 0)
-		if(W.sharp && W.edge)
-			playsound(src, 'sound/effects/woodcutting.ogg', 50, 1)
-		else
-			playsound(src, W.hitsound, 50, 1)
-		if(damage_to_do > 5 && !indestructable)
-			adjust_health(-damage_to_do)
-		else
-			to_chat(user, "<span class='warning'>\The [W] is ineffective at harming \the [src].</span>")
-
-	hit_animation()
-	user.setClickCooldown(user.get_attack_speed(W))
+/obj/structure/flora/tree/proc/TryChop(mob/living/user, obj/item/item)
+	var/damage
+	var/chop
+	var/cooldown
+	var/simple_attack_sound
+	if (!item)
+		var/mob/living/simple_mob/simple = user
+		if (!istype(simple))
+			return
+		damage = rand(simple.melee_damage_lower, simple.melee_damage_upper)
+		chop = simple.attack_sharp
+		if (!chop)
+			damage *= 0.25
+		cooldown = simple.base_attack_cooldown
+		simple_attack_sound = simple.attack_sound
+	else
+		damage = item.force
+		chop = item.sharp && item.edge
+		if (!item.sharp && !item.edge)
+			damage *= 0.25
+		cooldown = user.get_attack_speed(item)
+	user.visible_message(
+		SPAN_ITALIC("\The [user] hits \a [src][item ? " with \a [item]": ""]!"),
+		SPAN_ITALIC("You hit \the [src][item ? " with \the [item]": ""]!"),
+		range = 5
+	)
+	damage = round(max(0, damage))
+	if (damage)
+		if (chop)
+			playsound(src, 'sound/effects/woodcutting.ogg', 50, TRUE)
+		else if (item)
+			playsound(src, item.hitsound, 50, TRUE)
+		else if (simple_attack_sound)
+			playsound(src, simple_attack_sound, 50, TRUE)
+	if (indestructable || damage < 5)
+		to_chat(user, SPAN_WARNING("[item ? "\The [item]" : "You"] cannot damage \the [src]."))
+	else
+		adjust_health(-damage)
+	user.setClickCooldown(cooldown)
 	user.do_attack_animation(src)
+	hit_animation()
+
 
 // Shakes the tree slightly, more or less stolen from lockers.
 /obj/structure/flora/tree/proc/hit_animation()
@@ -76,6 +101,7 @@
 	M.Translate(0, 16*(icon_scale_y-1))
 	animate(src, transform=turn(M, shake_animation_degrees * shake_dir), pixel_x=init_px + 2*shake_dir, time=1)
 	animate(transform=M, pixel_x=init_px, time=6, easing=ELASTIC_EASING)
+
 
 // Used when the tree gets hurt.
 /obj/structure/flora/tree/proc/adjust_health(var/amount, var/damage_wood = FALSE)

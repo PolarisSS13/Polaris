@@ -34,6 +34,28 @@
 	attack_self(drake)
 
 
+// This should be generalized out to other simples if they become normally playable.
+/obj/structure/flora/tree/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	if (drake.a_intent != I_HURT)
+		return ..()
+	if (is_stump)
+		drake.visible_message(
+			SPAN_ITALIC("\The [drake] starts to dig at the stump of \a [src]."),
+			SPAN_ITALIC("You start to dig up the stump of \the [src]."),
+			range = 5
+		)
+		if (do_after(drake, 5 SECONDS, src) && !QDELETED(src))
+			drake.visible_message(
+				SPAN_ITALIC("\The [drake] unearths a stump."),
+				SPAN_NOTICE("You finish digging up the stump."),
+				range = 1
+			)
+			qdel(src)
+		return
+	TryChop(drake)
+
+
 /* Trained drake interactions */
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
