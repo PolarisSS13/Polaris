@@ -25,9 +25,9 @@
 	var/obj/screen/storage/storage_start = null //storage UI
 	var/obj/screen/storage/storage_continue = null
 	var/obj/screen/storage/storage_end = null
-	var/obj/screen/storage/stored_start = null
-	var/obj/screen/storage/stored_continue = null
-	var/obj/screen/storage/stored_end = null
+	var/obj/stored_start = null
+	var/obj/stored_continue = null
+	var/obj/stored_end = null
 	var/obj/screen/close/closer = null
 	var/use_to_pickup	//Set this to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
 	var/display_contents_with_number	//Set this to make the storage item group contents of the same type and display them as a number.
@@ -36,7 +36,6 @@
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
 	var/list/starts_with //Things to spawn on the box on spawn
-	var/empty //Mapper override to spawn an empty version of a container that usually has stuff
 
 
 /obj/item/storage/Destroy()
@@ -62,44 +61,40 @@
 		verbs += /obj/item/storage/verb/toggle_gathering_mode
 	else
 		verbs -= /obj/item/storage/verb/toggle_gathering_mode
-	boxes = new /obj/screen/storage
-	boxes.name = "storage"
+	boxes = new
 	boxes.master = src
 	boxes.icon_state = "block"
 	boxes.screen_loc = "7,7 to 10,8"
-	storage_start = new /obj/screen/storage
-	storage_start.name = "storage"
+	storage_start = new
 	storage_start.master = src
 	storage_start.icon_state = "storage_start"
 	storage_start.screen_loc = "7,7 to 10,8"
-	storage_continue = new /obj/screen/storage
-	storage_continue.name = "storage"
+	storage_continue = new
 	storage_continue.master = src
 	storage_continue.icon_state = "storage_continue"
 	storage_continue.screen_loc = "7,7 to 10,8"
-	storage_end = new /obj/screen/storage
-	storage_end.name = "storage"
+	storage_end = new
 	storage_end.master = src
 	storage_end.icon_state = "storage_end"
 	storage_end.screen_loc = "7,7 to 10,8"
-	stored_start = new /obj //we just need these to hold the icon
+	stored_start = new
 	stored_start.icon_state = "stored_start"
-	stored_continue = new /obj
+	stored_continue = new
 	stored_continue.icon_state = "stored_continue"
-	stored_end = new /obj
+	stored_end = new
 	stored_end.icon_state = "stored_end"
-	closer = new /obj/screen/close
+	closer = new
 	closer.master = src
 	closer.icon_state = "storage_close"
 	closer.hud_layerise()
 	orient2hud()
-	if (length(starts_with) && !empty)
+	if (islist(starts_with))
 		for (var/newtype in starts_with)
 			var/count = starts_with[newtype] || 1
 			while (count)
 				count--
 				new newtype (src)
-		starts_with = null //Reduce list count.
+		starts_with = null
 	calibrate_size()
 
 
