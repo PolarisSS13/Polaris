@@ -96,6 +96,11 @@
 				new newtype (src)
 		starts_with = null
 	calibrate_size()
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/item/storage/LateInitialize()
+	LateInitializeName()
 
 
 /obj/item/storage/MouseDrop(obj/over_object as obj)
@@ -665,6 +670,11 @@
 		can_hold[I.type]++
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
+
+
+/obj/item/storage/proc/LateInitializeName()
+	return
+
 
 /*
  * Trinket Box - READDING SOON
