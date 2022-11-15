@@ -36,7 +36,6 @@
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/Initialize()
-	. = ..()
 	if (ispath(harness, /obj/item/storage/internal/animal_harness))
 		harness = new harness(src)
 		harness.attached_radio = new /obj/item/radio(src)
@@ -45,11 +44,12 @@
 		if (harness)
 			log_error("[type] initialized with an invalid harness [harness]")
 		harness = null
-
+	// Do this after creating the harness so the update icon proc doesn't runtime.
+	. = ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/examine(mob/living/user)
 	. = ..()
-	if (harness)
+	if (istype(harness))
 		. += "\The [src] is wearing \a [harness]."
 		for (var/obj/item/thing in list(harness.attached_gps, harness.attached_plate, harness.attached_radio))
 			. += "There is \a [thing] attached."
@@ -94,7 +94,7 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/update_icon()
 	. = ..()
-	if (harness)
+	if (istype(harness))
 		var/image/I = image(icon, "[current_icon_state]-pannier")
 		I.color = harness.color
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
@@ -112,14 +112,14 @@
 			if (istype(item, pass_type))
 				return ..()
 	// Open our storage, if we have it.
-	if (harness?.attackby(item, user))
+	if (istype(harness) && harness.attackby(item, user))
 		regenerate_harness_verbs()
 		return TRUE
 	return ..()
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/regenerate_harness_verbs()
-	if (!harness)
+	if (!istype(harness))
 		verbs -= list(
 			/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_gps,
 			/mob/living/simple_mob/animal/sif/grafadreka/trained/proc/remove_attached_plate,
@@ -154,7 +154,7 @@
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/DropItem()
-	if (!length(harness?.contents))
+	if(!istype(harness) || !length(harness.contents))
 		to_chat(src, SPAN_WARNING("You have nothing to drop."))
 		return ATTACK_FAILED
 	var/list/attached = list(harness.attached_gps, harness.attached_radio, harness.attached_plate)
@@ -205,7 +205,7 @@
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/CollectItem(obj/item/item)
 	if (!item.simulated || item.abstract || !item.Adjacent(src))
 		return ATTACK_FAILED
-	if (!harness)
+	if (!istype(harness))
 		to_chat(src, SPAN_WARNING("Your harness is missing; you cannot store \the [item]."))
 		return ATTACK_FAILED
 	if (item.anchored)
@@ -215,7 +215,7 @@
 	if (!do_after(src, 5 SECONDS, item))
 		return ATTACK_FAILED
 	var/datum/gender/gender = gender_datums[get_visible_gender()]
-	if (harness?.attackby(item, src, TRUE))
+	if (istype(harness) && harness.attackby(item, src, TRUE))
 		visible_message(
 			SPAN_ITALIC("\The [src] grabs \a [item] in [gender.his] teeth and noses it into [gender.his] harness pouch."),
 			SPAN_NOTICE("You grab \the [item] in your teeth and push it into your harness pouch."),
