@@ -20,6 +20,9 @@
 	handle_name_change(usr)
 
 /obj/item/reagent_containers/food/proc/handle_name_change(var/mob/living/user)
+	if(!isliving(user) || user.stat == DEAD)
+		to_chat(user, SPAN_NOTICE("The dead can't cook!"))
+		return
 	var/n_name = sanitizeSafe(input(user, "What would you like to name \the [src]? Leave blank to reset.", "Food Naming", null) as text, MAX_NAME_LEN)
 	if(!n_name)
 		n_name = initial(name)
