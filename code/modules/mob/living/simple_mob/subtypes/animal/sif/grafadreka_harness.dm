@@ -82,7 +82,7 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/recalculate_armor()
 	armor = list()
-	if(harness?.attached_plate)
+	if(istype(harness) && harness.attached_plate)
 		for(var/armor_key in harness.attached_plate.armor)
 			armor[armor_key] = max(original_armor[armor_key], harness.attached_plate.armor[armor_key])
 
@@ -90,7 +90,7 @@
 	set name = "Remove Attached Plate"
 	set category = "IC"
 	set src in view(1)
-	if(harness?.attached_plate)
+	if(istype(harness) && harness.attached_plate)
 		harness.attached_plate.dropInto(get_turf(src))
 		if(usr == src)
 			var/datum/gender/G = gender_datums[get_visible_gender()]
@@ -106,7 +106,7 @@
 	set name = "Remove Attached GPS"
 	set category = "IC"
 	set src in view(1)
-	if(harness?.attached_gps)
+	if(istype(harness) && harness.attached_gps)
 		harness.attached_gps.dropInto(get_turf(src))
 		if(usr == src)
 			var/datum/gender/G = gender_datums[get_visible_gender()]
@@ -121,7 +121,7 @@
 	set name = "Remove Attached Radio"
 	set category = "IC"
 	set src in view(1)
-	if(harness?.attached_radio)
+	if(istype(harness) && harness.attached_radio)
 		harness.attached_radio.dropInto(get_turf(src))
 		if(usr == src)
 			var/datum/gender/G = gender_datums[get_visible_gender()]
