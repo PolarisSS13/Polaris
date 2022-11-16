@@ -29750,16 +29750,16 @@
 /obj/item/assembly/prox_sensor,
 /obj/item/assembly/prox_sensor,
 /obj/item/storage/firstaid/regular{
-	empty = 1;
-	name = "First-Aid (empty)"
+	name = "First-Aid (empty)";
+	starts_with = null
 	},
 /obj/item/storage/firstaid/regular{
-	empty = 1;
-	name = "First-Aid (empty)"
+	name = "First-Aid (empty)";
+	starts_with = null
 	},
 /obj/item/storage/firstaid/regular{
-	empty = 1;
-	name = "First-Aid (empty)"
+	name = "First-Aid (empty)";
+	starts_with = null
 	},
 /obj/item/healthanalyzer,
 /obj/item/healthanalyzer,

@@ -38,15 +38,12 @@ var/global/list/random_weighted_donuts = list(
 	max_storage_space = ITEMSIZE_COST_SMALL * 6
 	can_hold = list(/obj/item/reagent_containers/food/snacks/donut)
 	foldable = /obj/item/stack/material/cardboard
-	//starts_with = list(/obj/item/reagent_containers/food/snacks/donut/normal = 6)
 
 /obj/item/storage/box/donut/Initialize()
-	if(!empty)
-		for(var/i in 1 to 6)
-			var/type_to_spawn = pickweight(random_weighted_donuts)
-			new type_to_spawn(src)
+	PopulateDonutSelection()
 	. = ..()
 	update_icon()
+
 
 /obj/item/storage/box/donut/update_icon()
 	cut_overlays()
@@ -57,8 +54,16 @@ var/global/list/random_weighted_donuts = list(
 		add_overlay(ma)
 		x_offset += 3
 
-/obj/item/storage/box/donut/empty
-	empty = TRUE
+
+/obj/item/storage/box/donut/proc/PopulateDonutSelection()
+	starts_with = list()
+	for (var/i = 1 to 6)
+		starts_with += pickweight(random_weighted_donuts)
+
+
+/obj/item/storage/box/donut/empty/PopulateDonutSelection()
+	return
+
 
 /obj/item/storage/box/wormcan
 	icon = 'icons/obj/food.dmi'

@@ -112977,16 +112977,16 @@
 	pixel_y = 4
 	},
 /obj/item/storage/firstaid/regular{
-	empty = 1;
-	name = "First-Aid (empty)"
+	name = "First-Aid (empty)";
+	starts_with = null
 	},
 /obj/item/storage/firstaid/regular{
-	empty = 1;
-	name = "First-Aid (empty)"
+	name = "First-Aid (empty)";
+	starts_with = null
 	},
 /obj/item/storage/firstaid/regular{
-	empty = 1;
-	name = "First-Aid (empty)"
+	name = "First-Aid (empty)";
+	starts_with = null
 	},
 /obj/item/healthanalyzer,
 /obj/item/healthanalyzer,

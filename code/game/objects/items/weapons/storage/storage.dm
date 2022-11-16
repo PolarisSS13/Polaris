@@ -25,9 +25,9 @@
 	var/obj/screen/storage/storage_start = null //storage UI
 	var/obj/screen/storage/storage_continue = null
 	var/obj/screen/storage/storage_end = null
-	var/obj/screen/storage/stored_start = null
-	var/obj/screen/storage/stored_continue = null
-	var/obj/screen/storage/stored_end = null
+	var/obj/stored_start = null
+	var/obj/stored_continue = null
+	var/obj/stored_end = null
 	var/obj/screen/close/closer = null
 	var/use_to_pickup	//Set this to make it possible to use this item in an inverse way, so you can have the item in your hand and click items on the floor to pick them up.
 	var/display_contents_with_number	//Set this to make the storage item group contents of the same type and display them as a number.
@@ -36,19 +36,72 @@
 	var/collection_mode = 1;  //0 = pick one at a time, 1 = pick all on tile
 	var/use_sound = "rustle"	//sound played when used. null for no sound.
 	var/list/starts_with //Things to spawn on the box on spawn
-	var/empty //Mapper override to spawn an empty version of a container that usually has stuff
+
 
 /obj/item/storage/Destroy()
 	close_all()
 	QDEL_NULL(boxes)
-	QDEL_NULL(src.storage_start)
-	QDEL_NULL(src.storage_continue)
-	QDEL_NULL(src.storage_end)
-	QDEL_NULL(src.stored_start)
-	QDEL_NULL(src.stored_continue)
-	QDEL_NULL(src.stored_end)
+	QDEL_NULL(storage_start)
+	QDEL_NULL(storage_continue)
+	QDEL_NULL(storage_end)
+	QDEL_NULL(stored_start)
+	QDEL_NULL(stored_continue)
+	QDEL_NULL(stored_end)
 	QDEL_NULL(closer)
+	return ..()
+
+
+/obj/item/storage/Initialize()
 	. = ..()
+	if (allow_quick_empty)
+		verbs += /obj/item/storage/verb/quick_empty
+	else
+		verbs -= /obj/item/storage/verb/quick_empty
+	if (allow_quick_gather)
+		verbs += /obj/item/storage/verb/toggle_gathering_mode
+	else
+		verbs -= /obj/item/storage/verb/toggle_gathering_mode
+	boxes = new
+	boxes.master = src
+	boxes.icon_state = "block"
+	boxes.screen_loc = "7,7 to 10,8"
+	storage_start = new
+	storage_start.master = src
+	storage_start.icon_state = "storage_start"
+	storage_start.screen_loc = "7,7 to 10,8"
+	storage_continue = new
+	storage_continue.master = src
+	storage_continue.icon_state = "storage_continue"
+	storage_continue.screen_loc = "7,7 to 10,8"
+	storage_end = new
+	storage_end.master = src
+	storage_end.icon_state = "storage_end"
+	storage_end.screen_loc = "7,7 to 10,8"
+	stored_start = new
+	stored_start.icon_state = "stored_start"
+	stored_continue = new
+	stored_continue.icon_state = "stored_continue"
+	stored_end = new
+	stored_end.icon_state = "stored_end"
+	closer = new
+	closer.master = src
+	closer.icon_state = "storage_close"
+	closer.hud_layerise()
+	orient2hud()
+	if (islist(starts_with))
+		for (var/newtype in starts_with)
+			var/count = starts_with[newtype] || 1
+			while (count)
+				count--
+				new newtype (src)
+		starts_with = null
+	calibrate_size()
+	return INITIALIZE_HINT_LATELOAD
+
+
+/obj/item/storage/LateInitialize()
+	LateInitializeName()
+
 
 /obj/item/storage/MouseDrop(obj/over_object as obj)
 	if(!canremove)
@@ -539,68 +592,6 @@
 	for(var/obj/item/I in contents)
 		remove_from_storage(I, T)
 
-/obj/item/storage/Initialize()
-	. = ..()
-
-	if(allow_quick_empty)
-		verbs += /obj/item/storage/verb/quick_empty
-	else
-		verbs -= /obj/item/storage/verb/quick_empty
-
-	if(allow_quick_gather)
-		verbs += /obj/item/storage/verb/toggle_gathering_mode
-	else
-		verbs -= /obj/item/storage/verb/toggle_gathering_mode
-
-	src.boxes = new /obj/screen/storage(  )
-	src.boxes.name = "storage"
-	src.boxes.master = src
-	src.boxes.icon_state = "block"
-	src.boxes.screen_loc = "7,7 to 10,8"
-
-	src.storage_start = new /obj/screen/storage(  )
-	src.storage_start.name = "storage"
-	src.storage_start.master = src
-	src.storage_start.icon_state = "storage_start"
-	src.storage_start.screen_loc = "7,7 to 10,8"
-
-	src.storage_continue = new /obj/screen/storage(  )
-	src.storage_continue.name = "storage"
-	src.storage_continue.master = src
-	src.storage_continue.icon_state = "storage_continue"
-	src.storage_continue.screen_loc = "7,7 to 10,8"
-
-	src.storage_end = new /obj/screen/storage(  )
-	src.storage_end.name = "storage"
-	src.storage_end.master = src
-	src.storage_end.icon_state = "storage_end"
-	src.storage_end.screen_loc = "7,7 to 10,8"
-
-	src.stored_start = new /obj //we just need these to hold the icon
-	src.stored_start.icon_state = "stored_start"
-
-	src.stored_continue = new /obj
-	src.stored_continue.icon_state = "stored_continue"
-
-	src.stored_end = new /obj
-	src.stored_end.icon_state = "stored_end"
-
-	src.closer = new /obj/screen/close(  )
-	src.closer.master = src
-	src.closer.icon_state = "storage_close"
-	src.closer.hud_layerise()
-	orient2hud()
-
-	if(LAZYLEN(starts_with) && !empty)
-		for(var/newtype in starts_with)
-			var/count = starts_with[newtype] || 1 //Could have left it blank.
-			while(count)
-				count--
-				new newtype(src)
-		starts_with = null //Reduce list count.
-
-	calibrate_size()
-
 /obj/item/storage/proc/calibrate_size()
 	var/total_storage_space = 0
 	for(var/obj/item/I in contents)
@@ -684,6 +675,11 @@
 		can_hold[I.type]++
 		max_w_class = max(I.w_class, max_w_class)
 		max_storage_space += I.get_storage_cost()
+
+
+/obj/item/storage/proc/LateInitializeName()
+	return
+
 
 /*
  * Trinket Box - READDING SOON
