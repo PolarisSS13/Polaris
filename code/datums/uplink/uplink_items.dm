@@ -75,10 +75,10 @@ var/global/datum/uplink/uplink = new()
 
 	return TRUE
 
-/datum/uplink_item/proc/cost(obj/item/uplink/U, mob/M)
-	. = item_cost
-	if(U)
-		. = U.get_item_cost(src, .)
+/datum/uplink_item/proc/cost(obj/item/uplink/uplink, available_telecrystals)
+	if (uplink)
+		return uplink.GetAdjustedCost(src, item_cost)
+	return item_cost
 
 /datum/uplink_item/proc/description()
 	return desc
