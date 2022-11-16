@@ -42,7 +42,7 @@
 	data["on"] = on
 	data["open"] = open
 	data["locked"] = locked
-	
+
 	data["vocal"] = vocal
 	data["amount"] = amount
 
@@ -58,7 +58,7 @@
 		data["eattiles"] = eattiles
 		data["maketiles"] = maketiles
 		data["bmode"] = dir2text(targetdirection)
-	
+
 	return data
 
 /mob/living/bot/floorbot/attack_hand(var/mob/user)
@@ -76,7 +76,7 @@
 /mob/living/bot/floorbot/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if(..())
 		return TRUE
-	
+
 	add_fingerprint(src)
 
 	switch(action)
@@ -86,7 +86,7 @@
 			else
 				turn_on()
 			. = TRUE
-	
+
 	if(locked && !issilicon(usr))
 		return
 
@@ -344,13 +344,15 @@
 
 /* Assembly */
 
-/obj/item/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/floor/T, mob/living/user as mob)
+/obj/item/storage/toolbox/mechanical/attackby(var/obj/item/stack/tile/floor/T, mob/living/user)
+
 	if(!istype(T, /obj/item/stack/tile/floor))
-		..()
-		return
+		return ..()
+
 	if(contents.len >= 1)
 		to_chat(user, "<span class='notice'>They wont fit in as there is already stuff inside.</span>")
-		return
+		return TRUE
+
 	if(user.s_active)
 		user.s_active.close(user)
 	if(T.use(10))
@@ -361,7 +363,7 @@
 		qdel(src)
 	else
 		to_chat(user, "<span class='warning'>You need 10 floor tiles for a floorbot.</span>")
-	return
+	return TRUE
 
 /obj/item/toolbox_tiles
 	desc = "It's a toolbox with tiles sticking out the top"

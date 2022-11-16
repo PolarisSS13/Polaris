@@ -420,7 +420,7 @@
 	return 1
 
 //This proc is called when you want to place an item into the storage item.
-/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob, silent)
+/obj/item/storage/attackby(obj/item/W, mob/user, silent)
 
 	. = ..()
 	if(.)

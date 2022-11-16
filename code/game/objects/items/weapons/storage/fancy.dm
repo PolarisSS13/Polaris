@@ -130,16 +130,17 @@
 		add_overlay(image('icons/obj/crayons.dmi',crayon.colourName))
 	appearance = ma
 
-/obj/item/storage/fancy/crayons/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/fancy/crayons/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/pen/crayon))
-		switch(W:colourName)
+		var/obj/item/pen/crayon/crayon = W
+		switch(crayon.colourName)
 			if("mime")
 				to_chat(user, "This crayon is too sad to be contained in this box.")
-				return
+				return TRUE
 			if("rainbow")
 				to_chat(user, "This crayon is too powerful to be contained in this box.")
-				return
-	..()
+				return TRUE
+	return ..()
 
 /obj/item/storage/fancy/markers
 	name = "box of markers"
@@ -172,16 +173,17 @@
 		ma.add_overlay(image('icons/obj/crayons.dmi',"m"+marker.colourName))
 	appearance = ma
 
-/obj/item/storage/fancy/markers/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/fancy/markers/attackby(obj/item/W, mob/user)
 	if(istype(W,/obj/item/pen/crayon/marker))
-		switch(W:colourName)
+		var/obj/item/pen/crayon/marker/marker = W
+		switch(marker.colourName)
 			if("mime")
 				to_chat(user, "This marker is too depressing to be contained in this box.")
-				return
+				return TRUE
 			if("rainbow")
 				to_chat(user, "This marker is too childish to be contained in this box.")
-				return
-	..()
+				return TRUE
+	return ..()
 
 /*
  * Cracker Packet
@@ -407,9 +409,10 @@
 	else
 		add_overlay("ledb")
 
-/obj/item/storage/lockbox/vials/attackby(obj/item/W as obj, mob/user as mob)
-	..()
-	update_icon()
+/obj/item/storage/lockbox/vials/attackby(obj/item/W, mob/user)
+	. = ..()
+	if(.)
+		update_icon()
 
 /*
  * Box of Chocolates/Heart Box

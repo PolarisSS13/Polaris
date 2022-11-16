@@ -33,7 +33,8 @@
 	if(Adjacent(user))
 		. += "The service panel is [src.open ? "open" : "closed"]."
 
-/obj/item/storage/secure/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/secure/attackby(obj/item/W, mob/user)
+
 	if(locked)
 		if (istype(W, /obj/item/melee/energy/blade) && emag_act(INFINITY, user, "You slice through the lock of \the [src]"))
 			var/datum/effect_system/spark_spread/spark_system = new /datum/effect_system/spark_spread()
@@ -41,14 +42,15 @@
 			spark_system.start()
 			playsound(src, 'sound/weapons/blade1.ogg', 50, 1)
 			playsound(src, "sparks", 50, 1)
-			return
+			return TRUE
 
 		if (W.is_screwdriver())
 			if (do_after(user, 20 * W.toolspeed))
 				src.open =! src.open
 				playsound(src, W.usesound, 50, 1)
 				user.show_message(text("<span class='notice'>You [] the service panel.</span>", (src.open ? "open" : "close")))
-			return
+			return TRUE
+
 		if (istype(W, /obj/item/multitool) && (src.open == 1)&& (!src.l_hacking))
 			user.show_message("<span class='notice'>Now attempting to reset internal memory, please hold.</span>", 1)
 			src.l_hacking = 1
@@ -64,15 +66,15 @@
 				else
 					user.show_message("<span class='warning'>Unable to reset internal memory.</span>", 1)
 					src.l_hacking = 0
-			else	src.l_hacking = 0
-			return
+			else
+				src.l_hacking = 0
+			return  TRUE
 		//At this point you have exhausted all the special things to do when locked
 		// ... but it's still locked.
-		return
+		return TRUE
 
 	// -> storage/attackby() what with handle insertion, etc
-	..()
-
+	return ..()
 
 /obj/item/storage/secure/MouseDrop(over_object, src_location, over_location)
 	if (locked)
