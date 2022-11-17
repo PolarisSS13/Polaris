@@ -24,10 +24,6 @@
 	// caps the amount drakes can heal with their sap wound tending interaction.
 	sap_heal_threshold = min(sap_heal_threshold, (round(health / getMaxHealth() / scarification_period)+1) * scarification_period)
 
-/mob/living/simple_mob/animal/sif/rejuvenate()
-	sap_heal_threshold = 1
-	. = ..()
-
 /mob/living/simple_mob/animal/sif/examine(mob/user)
 	. = ..()
 	if(stat != DEAD)

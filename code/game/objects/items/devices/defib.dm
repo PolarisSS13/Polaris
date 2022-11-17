@@ -346,6 +346,12 @@
 	return 0
 
 /obj/item/shockpaddles/attack(mob/living/M, mob/living/user, var/target_zone)
+
+	if(istype(M, /mob/living/simple_mob) && user.a_intent == I_HELP)
+		var/mob/living/simple_mob/critter = M
+		if(critter.attempt_healing(user, src))
+			return TRUE
+
 	var/mob/living/carbon/human/H = M
 	if(!istype(H) || user.a_intent == I_HURT)
 		return ..() //Do a regular attack. Harm intent shocking happens as a hit effect
@@ -353,13 +359,10 @@
 	if(can_use(user, H))
 		busy = 1
 		update_icon()
-
 		do_revive(H, user)
-
 		busy = 0
 		update_icon()
-
-	return 1
+	return TRUE
 
 //Since harm-intent now skips the delay for deliberate placement, you have to be able to hit them in combat in order to shock people.
 /obj/item/shockpaddles/apply_hit_effect(mob/living/target, mob/living/user, var/hit_zone)
