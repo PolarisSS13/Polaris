@@ -35,7 +35,7 @@ SUBSYSTEM_DEF(atoms)
 	text2file(initlog, "[log_path]/initialize.log")
 
 
-/datum/controller/subsystem/atoms/proc/InitializeAtoms()
+/datum/controller/subsystem/atoms/proc/InitializeAtoms(list/atom/submap_atoms)
 	if (atom_init_stage <= INITIALIZATION_INSSATOMS_LATE)
 		return
 	atom_init_stage = INITIALIZATION_INNEW_MAPLOAD
@@ -43,13 +43,14 @@ SUBSYSTEM_DEF(atoms)
 	var/count = 0
 	var/atom/created
 	var/list/arguments
-	for (var/i = 1 to length(created_atoms))
-		created = created_atoms[i]
+	var/list/atom/initialize_queue = submap_atoms || created_atoms
+	for (var/i = 1 to length(initialize_queue))
+		created = initialize_queue[i]
 		if (!(created.atom_flags & ATOM_INITIALIZED))
-			arguments = created_atoms[created] ? mapload_arg + created_atoms[created] : mapload_arg
+			arguments = initialize_queue[created] ? mapload_arg + initialize_queue[created] : mapload_arg
 			InitAtom(created, arguments)
 			CHECK_TICK
-	created_atoms.Cut()
+	initialize_queue.Cut()
 	if (!subsystem_initialized)
 		for (var/atom/atom in world)
 			if (!(atom.atom_flags & ATOM_INITIALIZED))
