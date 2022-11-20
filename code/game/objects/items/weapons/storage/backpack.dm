@@ -49,12 +49,12 @@
 	name = "dufflebag of holding"
 	icon_state = "holdingduffle"
 
-/obj/item/storage/backpack/holding/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/backpack/holding/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/storage/backpack/holding))
 		to_chat(user, "<span class='warning'>The Bluespace interfaces of the two devices conflict and malfunction.</span>")
 		qdel(W)
-		return
-	. = ..()
+		return TRUE
+	return ..()
 
 //Please don't clutter the parent storage item with stupid hacks.
 /obj/item/storage/backpack/holding/can_be_inserted(obj/item/W as obj, stop_messages = 0)

@@ -204,7 +204,7 @@
 		I.color = wrapper_color
 		add_overlay(I)
 
-/obj/item/storage/pill_bottle/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/storage/pill_bottle/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/pen) || istype(W, /obj/item/flashlight/pen))
 		var/tmp_label = sanitizeSafe(input(user, "Enter a label for [name]", "Label", label_text), MAX_NAME_LEN)
 		if(length(tmp_label) > 50)
@@ -217,8 +217,8 @@
 			to_chat(user, "<span class='notice'>You set the label to \"[tmp_label]\".</span>")
 			label_text = tmp_label
 			update_name_label()
-	else
-		..()
+		return TRUE
+	return ..()
 
 /obj/item/storage/pill_bottle/proc/update_name_label()
 	if(!label_text)

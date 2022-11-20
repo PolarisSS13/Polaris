@@ -19,7 +19,7 @@
 	if (pockets.handle_mousedrop(usr, over_object))
 		..(over_object)
 
-/obj/item/clothing/suit/storage/attackby(obj/item/W as obj, mob/user as mob)
+/obj/item/clothing/suit/storage/attackby(obj/item/W, mob/user)
 	. = ..()
 	if(!.)
 		return pockets.attackby(W, user)

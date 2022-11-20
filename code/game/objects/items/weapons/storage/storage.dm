@@ -473,15 +473,11 @@
 	return 1
 
 //This proc is called when you want to place an item into the storage item.
-/obj/item/storage/attackby(obj/item/W as obj, mob/user as mob, silent)
-
-	. = ..()
-	if(.)
-		return
+/obj/item/storage/attackby(obj/item/W, mob/user, silent)
 
 	//Robots can't interact with storage items.
 	if(isrobot(user))
-		return FALSE
+		return ..()
 
 	if(istype(W, /obj/item/lightreplacer))
 		var/obj/item/lightreplacer/LP = W
@@ -499,26 +495,25 @@
 				to_chat(user, "You inserted [amt_inserted] light\s into \the [LP.name]. You have [LP.uses] light\s remaining.")
 		return TRUE
 
-	if(!can_be_inserted(W))
-		return FALSE
-
-	if(istype(W, /obj/item/tray))
-		var/obj/item/tray/T = W
-		if(T.calc_carry() > 0)
-			if(prob(85))
+	if(can_be_inserted(W))
+		if(istype(W, /obj/item/tray))
+			var/obj/item/tray/T = W
+			if(T.calc_carry() > 0)
+				if(prob(85))
+					if (!silent)
+						to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
+					return TRUE
+				W.forceMove(get_turf(user))
+				if ((user.client && user.s_active != src))
+					user.client.screen -= W
+				W.dropped(user)
 				if (!silent)
-					to_chat(user, "<span class='warning'>The tray won't fit in [src].</span>")
+					to_chat(user, "<span class='warning'>God damn it!</span>")
 				return TRUE
-			W.forceMove(get_turf(user))
-			if ((user.client && user.s_active != src))
-				user.client.screen -= W
-			W.dropped(user)
-			if (!silent)
-				to_chat(user, "<span class='warning'>God damn it!</span>")
-			return TRUE
+		W.add_fingerprint(user)
+		return handle_item_insertion(W, silent)
 
-	W.add_fingerprint(user)
-	return handle_item_insertion(W, silent)
+	return ..()
 
 /obj/item/storage/dropped(mob/user as mob)
 	return
