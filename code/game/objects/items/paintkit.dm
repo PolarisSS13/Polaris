@@ -60,8 +60,8 @@
 	..()
 
 /// Ponchos specifically, but other accessories may eventually need this.
-/// Consequence of snowflake-y teshari code. 
-/obj/item/kit/accessory 
+/// Consequence of snowflake-y teshari code.
+/obj/item/kit/accessory
 	name = "accessory modification kit"
 	desc = "A kit for modifying accessories."
 
@@ -76,6 +76,17 @@
 			P.sprite_sheets[SPECIES_TESHARI] = new_icon_override_file  /// Will look the same on teshari and other species.
 			P.item_state = new_icon
 			to_chat(user, "You set about modifying the poncho into [new_name].")
+		return ..()
+
+/// General clothing items, that need to set item_state..
+/obj/item/kit/clothing
+	name = "clothing modification kit"
+	desc = "A kit for modifying clothing."
+
+/obj/item/kit/clothing/customize(var/obj/item/clothing/I, var/mob/user)
+	if(istype(I) && can_customize(I))
+		I.sprite_sheets[SPECIES_TESHARI] = new_icon_override_file  /// Will look the same on teshari and other species.
+		I.item_state = new_icon
 		return ..()
 
 // Root hardsuit kit defines.
