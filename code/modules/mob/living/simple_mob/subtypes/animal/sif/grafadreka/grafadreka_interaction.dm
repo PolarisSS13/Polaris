@@ -20,6 +20,26 @@
 	attack_hand(drake)
 
 
+/obj/structure/boulder/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	drake.visible_message(
+		SPAN_ITALIC("\The [drake] claws away at \a [src]."),
+		SPAN_ITALIC("You dig industriously at \the [src]."),
+		range = 5
+	)
+	if (!do_after(drake, 2 SECONDS, src))
+		return
+	excavation_level += rand(25, 50)
+	if (excavation_level < 100)
+		to_chat(drake, SPAN_WARNING("\The [src] withstands your attempts - this time."))
+		return
+	visible_message(
+		SPAN_WARNING("\The [src] crumbles away to debris."),
+		range = 5
+	)
+	qdel(src)
+
+
 /obj/item/bikehorn/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
 	. = TRUE
 	if (drake.a_intent != I_HELP)
