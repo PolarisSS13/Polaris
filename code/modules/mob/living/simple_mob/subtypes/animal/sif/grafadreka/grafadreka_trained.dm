@@ -19,6 +19,11 @@
 		/obj/item/reagent_containers/syringe
 	)
 
+	var/static/list/trained_drake_languages = list(
+		LANGUAGE_GALCOM,
+		LANGUAGE_SIVIAN
+	)
+
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/Destroy()
 	if (istype(harness))
@@ -58,7 +63,7 @@
 
 // universal_understand is buggy and produces double lines, so we'll just do this hack instead.
 /mob/living/simple_mob/animal/sif/grafadreka/trained/say_understands(mob/other, datum/language/speaking)
-	if (!speaking || speaking.name == LANGUAGE_GALCOM)
+	if (!speaking || (speaking.name in trained_drake_languages))
 		return TRUE
 	return ..()
 
