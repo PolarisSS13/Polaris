@@ -55,7 +55,7 @@
 			return
 	return ..()
 
-/obj/item/weapon/material/shard/afterattack(var/atom/target, mob/living/carbon/human/user as mob, proximity)
+/obj/item/material/shard/afterattack(atom/target, mob/living/carbon/human/user, proximity)
 	if(!proximity)
 		return
 	var/active_hand //hand the shard is in
