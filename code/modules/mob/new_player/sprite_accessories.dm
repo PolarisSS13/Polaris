@@ -2208,7 +2208,6 @@ shaved
 
 	//Empty list is unrestricted. Should only restrict the ones that make NO SENSE on other species,
 	//like Tajaran inner-ear coloring overlay stuff.
-	species_allowed = list()
 	species_allowed = list(SPECIES_HUMAN,SPECIES_SKRELL,SPECIES_TAJ,SPECIES_HUMAN_VATBORN,SPECIES_UNATHI,SPECIES_ZADDAT)
 
 	color_blend_mode = ICON_ADD
