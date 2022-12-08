@@ -158,7 +158,7 @@
 		if(H.seed && !H.dead)
 			H.health += 0.05 * coef
 			++trays
-	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), frames.len * 100)
+	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), length(frames) * 100)
 
 /obj/machinery/honey_extractor
 	name = "honey extractor"
