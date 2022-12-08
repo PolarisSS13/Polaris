@@ -58,7 +58,7 @@
 		if(closed)
 			to_chat(user, SPAN_NOTICE("You need to open \the [src] with a crowbar before inserting \the [I]."))
 			return
-		if(frames.len >= maxFrames)
+		if(length(frames) >= maxFrames)
 			to_chat(user, SPAN_NOTICE("There is no place for an another frame."))
 			return
 		var/obj/item/honey_frame/H = I
