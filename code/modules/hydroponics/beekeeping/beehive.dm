@@ -100,7 +100,7 @@
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
 		if(length(frames))
 			to_chat(user, "[length(frames)] frames installed, [round(honeycombs / 100)] filled.")
-			if(honeycombs < frames.len * 100)
+			if(honeycombs < length(frames) * 100)
 				to_chat(user, "Next frame is [round(honeycombs % 100)]% full.")
 		else
 			to_chat(user, "No frames installed.")
