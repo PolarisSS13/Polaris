@@ -18,7 +18,7 @@
 	if(closed)
 		add_overlay("lid")
 	if(length(frames))
-		add_overlay("empty[frames.len]")
+		add_overlay("empty[length(frames)]")
 	if(honeycombs >= 100)
 		add_overlay("full[round(honeycombs / 100)]")
 	if(!smoked)
