@@ -17,8 +17,8 @@
 	icon_state = "beehive"
 	if(closed)
 		add_overlay("lid")
-	if(LAZYLEN(frames))
-		add_overlay("empty[frames.len]")
+	if(length(frames))
+		add_overlay("empty[length(frames)]")
 	if(honeycombs >= 100)
 		add_overlay("full[round(honeycombs / 100)]")
 	if(!smoked)
@@ -58,7 +58,7 @@
 		if(closed)
 			to_chat(user, SPAN_NOTICE("You need to open \the [src] with a crowbar before inserting \the [I]."))
 			return
-		if(frames.len >= maxFrames)
+		if(length(frames) >= maxFrames)
 			to_chat(user, SPAN_NOTICE("There is no place for an another frame."))
 			return
 		var/obj/item/honey_frame/H = I
@@ -98,9 +98,9 @@
 	else if(istype(I, /obj/item/analyzer/plant_analyzer))
 		to_chat(user, SPAN_NOTICE("Scan result of \the [src]..."))
 		to_chat(user, "Beehive is [bee_count ? "[round(bee_count)]% full" : "empty"].[bee_count > 90 ? " Colony is ready to split." : ""]")
-		if(LAZYLEN(frames))
-			to_chat(user, "[frames.len] frames installed, [round(honeycombs / 100)] filled.")
-			if(honeycombs < frames.len * 100)
+		if(length(frames))
+			to_chat(user, "[length(frames)] frames installed, [round(honeycombs / 100)] filled.")
+			if(honeycombs < length(frames) * 100)
 				to_chat(user, "Next frame is [round(honeycombs % 100)]% full.")
 		else
 			to_chat(user, "No frames installed.")
@@ -112,7 +112,7 @@
 			to_chat(user, SPAN_NOTICE("You can't dismantle \the [src] with these bees inside."))
 			return
 		if(LAZYLEN(frames))
-			to_chat(user, SPAN_NOTICE("You can't dismantle \the [src] with [frames.len] frames still inside!"))
+			to_chat(user, SPAN_NOTICE("You can't dismantle \the [src] with [length(frames)] frames still inside!"))
 			return
 		to_chat(user, SPAN_NOTICE("You start dismantling \the [src]..."))
 		playsound(src, I.usesound, 50, 1)
@@ -131,7 +131,7 @@
 			to_chat(user, SPAN_NOTICE("The bees won't let you take the honeycombs out like this, smoke them first."))
 			return
 		user.visible_message(SPAN_NOTICE("[user] starts taking the honeycombs out of \the [src]."), SPAN_NOTICE("You start taking the honeycombs out of \the [src]..."))
-		while(honeycombs >= 100 && LAZYLEN(frames) && do_after(user, 30))
+		while(honeycombs >= 100 && length(frames) && do_after(user, 30))
 			var/obj/item/honey_frame/H = pop(frames)
 			H.honey = 20
 			honeycombs -= 100
@@ -158,7 +158,7 @@
 		if(H.seed && !H.dead)
 			H.health += 0.05 * coef
 			++trays
-	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), frames.len * 100)
+	honeycombs = min(honeycombs + 0.1 * coef * min(trays, 5), length(frames) * 100)
 
 /obj/machinery/honey_extractor
 	name = "honey extractor"
