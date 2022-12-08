@@ -17,7 +17,7 @@
 	icon_state = "beehive"
 	if(closed)
 		add_overlay("lid")
-	if(LAZYLEN(frames))
+	if(length(frames))
 		add_overlay("empty[frames.len]")
 	if(honeycombs >= 100)
 		add_overlay("full[round(honeycombs / 100)]")
