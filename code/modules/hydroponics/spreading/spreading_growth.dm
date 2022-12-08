@@ -108,7 +108,7 @@
 			for(var/i in 1 to max_spread)
 				if(prob(spread_chance))
 					sleep(rand(3,5))
-					if(!neighbors.len)
+					if(!length(neighbors))
 						break
 					spread_to(pick(neighbors))
 
