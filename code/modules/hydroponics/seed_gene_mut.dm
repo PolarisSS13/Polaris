@@ -119,9 +119,6 @@
 	if(prob(60))
 		S.set_trait(TRAIT_HIGHKPA_TOLERANCE, S.get_trait(TRAIT_HIGHKPA_TOLERANCE)+rand(-10,10),500,100)
 
-	if(prob(20))
-		S.set_trait(TRAIT_ALTER_TEMP, min(20, max(-20, S.get_trait(TRAIT_ALTER_TEMP)+rand(-10,10))))
-
 /decl/plantgene/vigour/mutate(var/datum/seed/S, var/turf/T)
 	if(prob(65))
 		S.set_trait(TRAIT_PRODUCTION, S.get_trait(TRAIT_PRODUCTION)+rand(-1,1),10,0)
