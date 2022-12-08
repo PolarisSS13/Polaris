@@ -101,7 +101,7 @@
 			visible_message(SPAN_WARNING("\The [src] hisses, releasing a cloud of spores!"), SPAN_WARNING("Something nearby hisses loudly!"))
 			seed.create_spores(get_turf(src))
 
-		if(neighbors.len && prob(spread_chance))
+		if(length(neighbors) && prob(spread_chance))
 			//spread to 1-3 adjacent turfs depending on yield trait.
 			var/max_spread = between(1, round(seed.get_trait(TRAIT_YIELD)*3/14), 3)
 
