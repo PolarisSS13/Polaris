@@ -243,7 +243,7 @@
 
 	for(var/direction in cardinal)
 		var/turf/T = get_step(L, direction)
-		var/obj/structure/blob/BB = locate(/obj/structure/blob) in T
+		var/obj/structure/blob/B = locate(/obj/structure/blob) in T
 		if(B && B.overmind == src)
 			return TRUE
 	return FALSE
