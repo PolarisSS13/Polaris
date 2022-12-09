@@ -226,7 +226,7 @@
 		if(!M.occupant)
 			continue // Just a hunk of metal
 		if(can_attack(M.occupant))
-			potential_targets += L
+			potential_targets += M
 
 	if(potential_targets.len)
 		var/mob/living/victim = pick(potential_targets)

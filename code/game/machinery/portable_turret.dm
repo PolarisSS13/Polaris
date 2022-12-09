@@ -746,27 +746,26 @@
 	for(var/turf/T in oview(world.view, src))
 		seenturfs += T
 
-	for(var/mob in living_mob_list)
-		var/mob/M = mob
+	for(var/mob/M as anything in living_mob_list)
 		if(M.z != z || !(get_turf(M) in seenturfs)) // Skip
 			continue
-		switch(assess_living(L))
+		switch(assess_living(M))
 			if(TURRET_PRIORITY_TARGET)
-				targets += L
+				targets += M
 			if(TURRET_SECONDARY_TARGET)
-				secondarytargets += L
+				secondarytargets += M
 
 	for(var/obj/mecha/M as anything in mechas_list)
 		if(M.z != z || !(get_turf(M) in seenturfs)) // Skip
 			continue
 		switch(assess_mecha(M))
 			if(TURRET_PRIORITY_TARGET)
-				targets += L
+				targets += M
 			if(TURRET_SECONDARY_TARGET)
-				secondarytargets += L
+				secondarytargets += M
 
-	if(!tryToShootAt(targets) &&
-	   !tryToShootAt(secondarytargets) &&
+	if(!tryToShootAt(targets) && \
+	   !tryToShootAt(secondarytargets) && \
 	   --timeout <= 0)
 		popDown() // no valid targets, close the cover
 
@@ -829,7 +828,7 @@
 
 /obj/machinery/porta_turret/proc/assess_mecha(var/obj/mecha/M)
 	if(!istype(M))
-		return TURRENT_NOT_TARGET
+		return TURRET_NOT_TARGET
 
 	if(!M.occupant)
 		return check_all ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
