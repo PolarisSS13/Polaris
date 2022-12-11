@@ -1,96 +1,102 @@
 
-/**********************Ore box**************************/
 /obj/structure/ore_box
-	icon = 'icons/obj/mining.dmi'
-	icon_state = "orebox0"
 	name = "ore box"
 	desc = "A heavy box used for storing ore."
-	density = 1
-	var/last_update = 0
-	var/list/stored_ore = list()
+	icon = 'icons/obj/mining.dmi'
+	icon_state = "orebox0"
+	density = TRUE
 
-/obj/structure/ore_box/attackby(obj/item/W as obj, mob/user as mob)
-	if (istype(W, /obj/item/ore))
-		user.remove_from_mob(W)
-		src.contents += W
+	/// Rebuild stored_ore if true. Becomes true when contents changes.
+	var/stored_ore_dirty
 
-	else if (istype(W, /obj/item/storage))
-		var/obj/item/storage/S = W
-		if(!S.contents.len)
-			return
-		S.hide_from(usr)
-		for(var/obj/item/ore/O in S.contents)
-			S.remove_from_storage(O, src) //This will move the item to this item's contents
-		to_chat(user, "<span class='notice'>You empty the satchel into the box.</span>")
+	/// The current ore contents of the bag formatted by english_list.
+	var/stored_ore
 
-	update_ore_count()
-
-	return
-
-/obj/structure/ore_box/proc/update_ore_count()
-
-	stored_ore = list()
-
-	for(var/obj/item/ore/O in contents)
-
-		if(stored_ore[O.name])
-			stored_ore[O.name]++
-		else
-			stored_ore[O.name] = 1
 
 /obj/structure/ore_box/examine(mob/user)
 	. = ..()
+	if (!Adjacent(user) && !isobserver(user))
+		return
+	if (isliving(user))
+		add_fingerprint(user)
+	if (stored_ore_dirty)
+		stored_ore_dirty = FALSE
+		stored_ore = null
+		var/list/ores = list()
+		for (var/obj/item/ore/ore in contents)
+			++ores[ore.name]
+		var/list/chunks = list()
+		for (var/name in ores)
+			chunks += "[ores[name]] [name]"
+		if (length(chunks))
+			stored_ore = "It contains [english_list(chunks)]"
+	. += SPAN_ITALIC(stored_ore || "It is empty.")
 
-	if(!Adjacent(user)) //Can only check the contents of ore boxes if you can physically reach them.
-		return .
 
-	add_fingerprint(user)
+/obj/structure/ore_box/attackby(obj/item/item, mob/living/user)
+	if (istype(item, /obj/item/ore))
+		user.remove_from_mob(item, src)
+		stored_ore_dirty = TRUE
+		return TRUE
+	var/obj/item/storage/storage = item
+	if (istype(storage))
+		. = TRUE
+		var/length = length(storage.contents)
+		if (!length)
+			to_chat(user, SPAN_WARNING("\The [storage] is empty."))
+			return
+		var/gathered
+		var/obj/item/storage/bag/ore/bag = item
+		if (istype(bag))
+			bag.stored_ore_dirty = TRUE
+			contents += bag.contents
+			gathered = TRUE
+		else
+			for (var/obj/item/ore/ore in storage)
+				storage.remove_from_storage(ore, src)
+				++gathered
+		if (gathered)
+			to_chat(user, SPAN_ITALIC("You empty \the [storage] into \the [src]."))
+			stored_ore_dirty = TRUE
+		else
+			to_chat(user, SPAN_WARNING("\The [storage] contained no ore."))
 
-	if(!contents.len)
-		. += "It is empty."
-		return .
 
-	if(world.time > last_update + 10)
-		update_ore_count()
-		last_update = world.time
+/obj/structure/ore_box/ex_act(severity)
+	var/turf/turf = get_turf(src)
+	switch (severity)
+		if (1)
+			if (turf == loc)
+				turf.contents += contents
+			qdel(src)
+		if (2)
+			if (prob(50))
+				return
+			if (turf == loc)
+				turf.contents += contents
+			qdel(src)
 
-	. += "It holds:"
-	for(var/ore in stored_ore)
-		. += "- [stored_ore[ore]] [ore]"
 
 /obj/structure/ore_box/verb/empty_box()
 	set name = "Empty Ore Box"
 	set category = "Object"
 	set src in view(1)
-
-	if(!ishuman(usr) && !isrobot(usr)) //Only living, intelligent creatures with gripping aparatti can empty ore boxes.
-		to_chat(usr, "<span class='warning'>You are physically incapable of emptying the ore box.</span>")
+	var/mob/living/user = usr
+	if (!(ishuman(user) || isrobot(user)))
+		to_chat(user, SPAN_WARNING("You're not dextrous enough to do that."))
 		return
-
-	if(usr.stat || usr.restrained())
+	if (!Adjacent(user))
 		return
-
-	if(!Adjacent(usr)) //You can only empty the box if you can physically reach it
-		to_chat(usr, "You cannot reach the ore box.")
+	if (user.stat || user.restrained())
+		to_chat(user, SPAN_WARNING("You're in no condition to do that."))
 		return
-
-	add_fingerprint(usr)
-
-	if(contents.len < 1)
-		to_chat(usr, "<span class='warning'>The ore box is empty.</span>")
+	add_fingerprint(user)
+	if (!length(contents))
+		to_chat(user, SPAN_WARNING("\The [src] is empty."))
 		return
-
-	for (var/obj/item/ore/O in contents)
-		contents -= O
-		O.loc = src.loc
-	to_chat(usr, "<span class='notice'>You empty the ore box.</span>")
-
-	return
-
-/obj/structure/ore_box/ex_act(severity)
-	if(severity == 1.0 || (severity < 3.0 && prob(50)))
-		for (var/obj/item/ore/O in contents)
-			O.loc = src.loc
-			O.ex_act(severity++)
-		qdel(src)
-		return
+	user.visible_message(
+		SPAN_ITALIC("\The [user] empties \a [src]."),
+		SPAN_ITALIC("You empty \the [src]."),
+		range = 5
+	)
+	loc.contents += contents
