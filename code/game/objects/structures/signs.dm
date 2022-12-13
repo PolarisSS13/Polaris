@@ -948,6 +948,7 @@
 	icon = 'icons/obj/christmas.dmi'
 	icon_state = "xmaslights"
 	layer = 4.9
+	plane = PLANE_LIGHTING_ABOVE
 
 /obj/structure/sign/christmas/wreath
 	name = "wreath"
