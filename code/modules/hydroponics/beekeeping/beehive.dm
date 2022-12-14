@@ -224,7 +224,7 @@
 	update_icon()
 
 /obj/item/honey_frame/update_icon()
-	. = ..()
+	..()
 
 	overlays.Cut()
 	if(honey > 0)
