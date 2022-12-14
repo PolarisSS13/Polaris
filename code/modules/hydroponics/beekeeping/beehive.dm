@@ -111,7 +111,7 @@
 		if(bee_count)
 			to_chat(user, SPAN_NOTICE("You can't dismantle \the [src] with these bees inside."))
 			return
-		if(LAZYLEN(frames))
+		if(length(frames))
 			to_chat(user, SPAN_NOTICE("You can't dismantle \the [src] with [length(frames)] frames still inside!"))
 			return
 		to_chat(user, SPAN_NOTICE("You start dismantling \the [src]..."))
