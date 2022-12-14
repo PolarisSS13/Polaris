@@ -16,7 +16,7 @@
 			/obj/item/reagent_containers/food/snacks/tofu = 4,
 			/obj/item/reagent_containers/food/snacks/meat = 4,
 			/obj/item/reagent_containers/food/condiment/yeast = 3,
-			/obj/item/weapon/reagent_containers/food/condiment/sprinkles = 1
+			/obj/item/reagent_containers/food/condiment/sprinkles = 1
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate/freezer/centauri
