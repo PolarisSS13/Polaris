@@ -355,7 +355,8 @@
 	hud_state = "flame"
 
 /obj/item/projectile/bullet/incendiary/flamethrower/after_move()
-	. = ..()
+	..()
+
 
 	var/turf/T = get_turf(src)
 	if(istype(T))
