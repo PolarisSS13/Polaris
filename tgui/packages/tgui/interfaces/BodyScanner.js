@@ -15,20 +15,9 @@ const abnormalities = [
     + ' possibly cancerous. Surgical removal is recommended.'],
   ['hasVirus', 'bad', occupant => 'Viral pathogen detected in blood stream.'],
   ['blind', 'average', occupant => 'Cataracts detected.'],
-  ['colourblind', 'average', occupant => 
+  ['colourblind', 'average', occupant =>
     'Photoreceptor abnormalities detected.'],
   ['nearsighted', 'average', occupant => 'Retinal misalignment detected.'],
-  /* VOREStation Add */
-  ['humanPrey', 'average', occupant => {
-    return 'Foreign Humanoid(s) detected: ' + occupant.humanPrey;
-  }],
-  ['livingPrey', 'average', occupant => {
-    return 'Foreign Creature(s) detected: ' + occupant.livingPrey;
-  }],
-  ['objectPrey', 'average', occupant => {
-    return 'Foreign Object(s) detected: ' + occupant.objectPrey;
-  }],
-  /* VOREStation Add End */
 ];
 
 const damages = [
@@ -182,12 +171,6 @@ const BodyScannerMainOccupant = (props, context) => {
             value={round(occupant.blood.percent, 0)}
           />%)
         </LabeledList.Item>
-        {/* VOREStation Add */}
-        <LabeledList.Item label="Weight">
-          {round(data.occupant.weight) + "lbs, "
-            + round(data.occupant.weight/2.20463) + "kgs"}
-        </LabeledList.Item>
-        {/* VOREStation Add End */}
       </LabeledList>
     </Section>
   );
@@ -266,13 +249,6 @@ const BodyScannerMainAbnormalities = props => {
     || occupant.colourblind
     || occupant.nearsighted
     || occupant.hasVirus;
-
-  /* VOREStation Add */
-  hasAbnormalities = hasAbnormalities
-    || occupant.humanPrey
-    || occupant.livingPrey
-    || occupant.objectPrey;
-  /* VOREStation Add End */
 
   if (!hasAbnormalities) {
     return (
