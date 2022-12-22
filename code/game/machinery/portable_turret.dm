@@ -93,6 +93,7 @@
 	var/timeout = 10		// When a turret pops up, then finds nothing to shoot at, this number decrements until 0, when it pops down.
 	var/can_salvage = TRUE	// If false, salvaging doesn't give you anything.
 
+
 /obj/machinery/porta_turret/crescent
 	req_one_access = list(access_cent_specops)
 	enabled = FALSE
@@ -106,22 +107,26 @@
 	check_all = FALSE
 	check_down = TRUE
 
+
 /obj/machinery/porta_turret/can_catalogue(mob/user) // Dead turrets can't be scanned.
 	if(stat & BROKEN)
 		to_chat(user, span("warning", "\The [src] was destroyed, so it cannot be scanned."))
 		return FALSE
 	return ..()
 
+
 /obj/machinery/porta_turret/stationary
 	ailock = TRUE
 	lethal = TRUE
 	installation = /obj/item/gun/energy/laser
+
 
 /obj/machinery/porta_turret/stationary/syndie // Generic turrets for POIs that need to not shoot their buddies.
 	req_one_access = list(access_syndicate)
 	enabled = TRUE
 	check_all = TRUE
 	faction = "syndicate" // Make sure this equals the faction that the mobs in the POI have or they will fight each other.
+
 
 /obj/machinery/porta_turret/ai_defense
 	name = "defense turret"
@@ -130,6 +135,7 @@
 	installation = /obj/item/gun/energy/xray // For the armor pen.
 	health = 250 // Since lasers do 40 each.
 	maxhealth = 250
+
 
 /datum/category_item/catalogue/anomalous/precursor_a/alien_turret
 	name = "Precursor Alpha Object - Turrets"
@@ -142,6 +148,7 @@
 	species that built the turret had intended for it to have that quality, or if it was an incidental \
 	quirk of how they designed their electronics."
 	value = CATALOGUER_REWARD_MEDIUM
+
 
 /obj/machinery/porta_turret/alien // The kind used on the UFO submap.
 	name = "interior anti-boarding turret"
@@ -158,12 +165,14 @@
 	maxhealth = 250
 	turret_type = "alien"
 
+
 /obj/machinery/porta_turret/alien/destroyed // Turrets that are already dead, to act as a warning of what the rest of the submap contains.
 	name = "broken interior anti-boarding turret"
 	desc = "A very tough looking turret made by alien hands. This one looks destroyed, thankfully."
 	icon_state = "destroyed_target_prism_alien"
 	stat = BROKEN
 	can_salvage = FALSE // So you need to actually kill a turret to get the alien gun.
+
 
 /obj/machinery/porta_turret/industrial
 	name = "industrial turret"
@@ -174,6 +183,7 @@
 	health = 200
 	maxhealth = 200
 	turret_type = "industrial"
+
 
 /obj/machinery/porta_turret/industrial/bullet_act(obj/item/projectile/Proj)
 	var/damage = round(Proj.get_structure_damage() * 1.33)
@@ -190,8 +200,10 @@
 
 	take_damage(damage)
 
+
 /obj/machinery/porta_turret/industrial/attack_generic(mob/living/L, damage)
 	return ..(L, damage * 0.8)
+
 
 /obj/machinery/porta_turret/industrial/teleport_defense
 	name = "defense turret"
@@ -201,12 +213,14 @@
 	health = 250
 	maxhealth = 250
 
+
 /obj/machinery/porta_turret/poi	//These are always angry
 	enabled = TRUE
 	lethal = TRUE
 	ailock = TRUE
 	check_all = TRUE
 	can_salvage = FALSE	// So you can't just twoshot a turret and get a fancy gun
+
 
 /obj/machinery/porta_turret/lasertag
 	name = "lasertag turret"
@@ -228,15 +242,18 @@
 	check_all = FALSE
 	check_down = FALSE
 
+
 /obj/machinery/porta_turret/lasertag/red
 	turret_type = "red"
 	installation = /obj/item/gun/energy/lasertag/red
 	check_weapons = TRUE // Used to target blue players
 
+
 /obj/machinery/porta_turret/lasertag/blue
 	turret_type = "blue"
 	installation = /obj/item/gun/energy/lasertag/blue
 	check_synth = TRUE // Used to target red players
+
 
 /obj/machinery/porta_turret/lasertag/assess_living(var/mob/living/L)
 	if(!ishuman(L))
@@ -262,6 +279,7 @@
 		if(istype(M.wear_suit, /obj/item/clothing/suit/bluetag) && check_weapons) // Checks if they are a blue player
 			return TURRET_PRIORITY_TARGET
 
+
 /obj/machinery/porta_turret/lasertag/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
 	data["access"] = !isLocked(user)
@@ -283,6 +301,7 @@
 		ui.open()
 		ui.set_auto_update(1)
 
+
 /obj/machinery/porta_turret/lasertag/Topic(href, href_list)
 	if(..())
 		return 1
@@ -300,6 +319,7 @@
 
 		return 1
 
+
 /obj/machinery/porta_turret/Initialize()
 	//Sets up a spark system
 	spark_system = new /datum/effect_system/spark_spread
@@ -314,10 +334,12 @@
 	add_overlay(turret_opened_overlay)
 	return ..()
 
+
 /obj/machinery/porta_turret/Destroy()
 	qdel(spark_system)
 	spark_system = null
 	return ..()
+
 
 /obj/machinery/porta_turret/update_icon()
 	if(stat & BROKEN) // Turret is dead.
@@ -370,6 +392,7 @@
 
 	weapon_setup(installation)
 
+
 /obj/machinery/porta_turret/proc/weapon_setup(var/guntype)
 	switch(guntype)
 		if(/obj/item/gun/energy/gun/burst)
@@ -401,6 +424,7 @@
 			lethal_shot_sound = 'sound/weapons/eluger.ogg'
 			shot_sound = 'sound/weapons/Taser.ogg'
 
+
 /obj/machinery/porta_turret/proc/isLocked(mob/user)
 	if(ailock && issilicon(user))
 		to_chat(user, "<span class='notice'>There seems to be a firewall preventing you from accessing this device.</span>")
@@ -412,17 +436,20 @@
 
 	return 0
 
+
 /obj/machinery/porta_turret/attack_ai(mob/user)
 	if(isLocked(user))
 		return
 
 	ui_interact(user)
 
+
 /obj/machinery/porta_turret/attack_hand(mob/user)
 	if(isLocked(user))
 		return
 
 	ui_interact(user)
+
 
 /obj/machinery/porta_turret/ui_interact(mob/user, ui_key = "main", var/datum/nanoui/ui = null, var/force_open = 1)
 	var/data[0]
@@ -451,9 +478,11 @@
 		ui.open()
 		ui.set_auto_update(1)
 
+
 /obj/machinery/porta_turret/proc/HasController()
 	var/area/A = get_area(src)
 	return A && A.turret_controls.len > 0
+
 
 /obj/machinery/porta_turret/CanUseTopic(var/mob/user)
 	if(HasController())
@@ -468,6 +497,7 @@
 		return STATUS_CLOSE
 
 	return ..()
+
 
 /obj/machinery/porta_turret/Topic(href, href_list)
 	if(..())
@@ -497,6 +527,7 @@
 			check_down = value
 
 		return 1
+
 
 /obj/machinery/porta_turret/power_change()
 	if(powered())
@@ -581,6 +612,7 @@
 					attacked = 0
 		..()
 
+
 /obj/machinery/porta_turret/attack_generic(mob/living/L, damage)
 	if(isanimal(L))
 		var/mob/living/simple_mob/S = L
@@ -592,6 +624,7 @@
 			return 1
 		visible_message("<span class='notice'>\The [L] bonks \the [src]'s casing!</span>")
 	return ..()
+
 
 /obj/machinery/porta_turret/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
@@ -606,6 +639,7 @@
 		enabled = TRUE //turns it back on. The cover popUp() popDown() are automatically called in process(), no need to define it here
 		return 1
 
+
 /obj/machinery/porta_turret/take_damage(var/force)
 	if(!raised && !raising)
 		force = force / 8
@@ -617,6 +651,7 @@
 		spark_system.start()
 	if(health <= 0)
 		die()	//the death process :(
+
 
 /obj/machinery/porta_turret/bullet_act(obj/item/projectile/Proj)
 	var/damage = Proj.get_structure_damage()
@@ -634,6 +669,7 @@
 	..()
 
 	take_damage(damage)
+
 
 /obj/machinery/porta_turret/emp_act(severity)
 	if(enabled)
@@ -654,10 +690,12 @@
 
 	..()
 
+
 /obj/machinery/porta_turret/ai_defense/emp_act(severity)
 	if(prob(33)) // One in three chance to resist an EMP.  This is significant if an AoE EMP is involved against multiple turrets.
 		return
 	..()
+
 
 /obj/machinery/porta_turret/alien/emp_act(severity) // This is overrided to give an EMP resistance as well as avoid scambling the turret settings.
 	if(prob(75)) // Superior alien technology, I guess.
@@ -666,6 +704,7 @@
 	spawn(rand(1 MINUTE, 2 MINUTES))
 		if(!enabled)
 			enabled = TRUE
+
 
 /obj/machinery/porta_turret/ex_act(severity)
 	switch (severity)
@@ -679,11 +718,13 @@
 		if(3)
 			take_damage(initial(health) * 8 / 3) //Level 4 is too weak to bother turrets
 
+
 /obj/machinery/porta_turret/proc/die()	//called when the turret dies, ie, health <= 0
 	health = 0
 	stat |= BROKEN	//enables the BROKEN bit
 	spark_system.start()	//creates some sparks because they look cool
 	update_icon()
+
 
 /obj/machinery/porta_turret/process()
 	//the main machinery process
@@ -705,44 +746,39 @@
 	for(var/turf/T in oview(world.view, src))
 		seenturfs += T
 
-	for(var/mob in living_mob_list)
-		var/mob/M = mob
-		if(M.z != z) //Skip
+	for(var/mob/M as anything in living_mob_list)
+		if(M.z != z || !(get_turf(M) in seenturfs)) // Skip
 			continue
-		if(get_turf(M) in seenturfs)
-			assess_and_assign(mob, targets, secondarytargets)
+		switch(assess_living(M))
+			if(TURRET_PRIORITY_TARGET)
+				targets += M
+			if(TURRET_SECONDARY_TARGET)
+				secondarytargets += M
 
-	/* This was dumb. Why do this and then check line of sight later?
-	for(var/mob/M in mobs_in_xray_view(world.view, src))
-		assess_and_assign(M, targets, secondarytargets)
-	*/
+	for(var/obj/mecha/M as anything in mechas_list)
+		if(M.z != z || !(get_turf(M) in seenturfs)) // Skip
+			continue
+		switch(assess_mecha(M))
+			if(TURRET_PRIORITY_TARGET)
+				targets += M
+			if(TURRET_SECONDARY_TARGET)
+				secondarytargets += M
 
-	if(!tryToShootAt(targets))
-		if(!tryToShootAt(secondarytargets)) // if no valid targets, go for secondary targets
-			timeout--
-			if(timeout <= 0)
-				spawn()
-					popDown() // no valid targets, close the cover
+	if(!tryToShootAt(targets) && \
+	   !tryToShootAt(secondarytargets) && \
+	   --timeout <= 0)
+		popDown() // no valid targets, close the cover
 
 	if(auto_repair && (health < maxhealth))
 		use_power(20000)
 		health = min(health+1, maxhealth) // 1HP for 20kJ
 
-/obj/machinery/porta_turret/proc/assess_and_assign(var/mob/living/L, var/list/targets, var/list/secondarytargets)
-	switch(assess_living(L))
-		if(TURRET_PRIORITY_TARGET)
-			targets += L
-		if(TURRET_SECONDARY_TARGET)
-			secondarytargets += L
 
 /obj/machinery/porta_turret/proc/assess_living(var/mob/living/L)
 	if(!istype(L))
 		return TURRET_NOT_TARGET
 
 	if(L.invisibility >= INVISIBILITY_LEVEL_ONE) // Cannot see him. see_invisible is a mob-var
-		return TURRET_NOT_TARGET
-
-	if(!L)
 		return TURRET_NOT_TARGET
 
 	if(faction && L.faction == faction)
@@ -789,6 +825,17 @@
 
 	return TURRET_PRIORITY_TARGET	//if the perp has passed all previous tests, congrats, it is now a "shoot-me!" nominee
 
+
+/obj/machinery/porta_turret/proc/assess_mecha(var/obj/mecha/M)
+	if(!istype(M))
+		return TURRET_NOT_TARGET
+
+	if(!M.occupant)
+		return check_all ? TURRET_SECONDARY_TARGET : TURRET_NOT_TARGET
+
+	return assess_living(M.occupant)
+
+
 /obj/machinery/porta_turret/proc/assess_perp(var/mob/living/carbon/human/H)
 	if(!H || !istype(H))
 		return 0
@@ -797,6 +844,7 @@
 		return 10
 
 	return H.assess_perp(src, check_access, check_weapons, check_records, check_arrest)
+
 
 /obj/machinery/porta_turret/proc/tryToShootAt(var/list/mob/living/targets)
 	if(targets.len && last_target && (last_target in targets) && target(last_target))
@@ -810,6 +858,7 @@
 
 
 /obj/machinery/porta_turret/proc/popUp()	//pops the turret up
+	set waitfor = FALSE
 	if(disabled)
 		return
 	if(raising || raised)
@@ -830,7 +879,9 @@
 	update_icon()
 	timeout = 10
 
+
 /obj/machinery/porta_turret/proc/popDown()	//pops the turret down
+	set waitfor = FALSE
 	last_target = null
 	if(disabled)
 		return
@@ -852,24 +903,26 @@
 	update_icon()
 	timeout = 10
 
+
 /obj/machinery/porta_turret/proc/set_raised_raising(var/incoming_raised, var/incoming_raising)
 	raised = incoming_raised
 	raising = incoming_raising
 	density = raised || raising
 
+
 /obj/machinery/porta_turret/proc/target(var/mob/living/target)
 	if(disabled)
-		return
+		return FALSE
 	if(target)
 		last_target = target
-		spawn()
-			popUp()				//pop the turret up if it's not already up.
+		popUp()				//pop the turret up if it's not already up.
 		set_dir(get_dir(src, target))	//even if you can't shoot, follow the target
 		playsound(src, 'sound/machines/turrets/turret_rotate.ogg', 100, 1) // Play rotating sound
 		spawn()
 			shootAt(target)
-		return 1
-	return
+		return TRUE
+	return FALSE
+
 
 /obj/machinery/porta_turret/proc/shootAt(var/mob/living/target)
 	//any emagged turrets will shoot extremely fast! This not only is deadly, but drains a lot power!
@@ -881,9 +934,7 @@
 			sleep(shot_delay)
 			last_fired = FALSE
 
-	var/turf/T = get_turf(src)
-	var/turf/U = get_turf(target)
-	if(!istype(T) || !istype(U))
+	if(!isturf(get_turf(src)) || !isturf(get_turf(target)))
 		return
 
 	if(!raised) //the turret has to be raised in order to fire - makes sense, right?
@@ -898,9 +949,12 @@
 		A = new projectile(loc)
 		playsound(src, shot_sound, 75, 1)
 
-	// Lethal/emagged turrets use twice the power due to higher energy beams
-	// Emagged turrets again use twice as much power due to higher firing rates
-	use_power(reqpower * (2 * (emagged || lethal)) * (2 * emagged))
+	var/power_mult = 1
+	if(emagged)
+		power_mult = 4 // Lethal beams + higher rate of fire
+	else if(lethal)
+		power_mult = 2 // Lethal beams
+	use_power(reqpower * power_mult)
 
 	//Turrets aim for the center of mass by default.
 	//If the target is grabbing someone then the turret smartly aims for extremities
@@ -919,6 +973,7 @@
 	// Reset the time needed to go back down, since we just tried to shoot at someone.
 	timeout = 10
 
+
 /datum/turret_checks
 	var/enabled
 	var/lethal
@@ -930,6 +985,7 @@
 	var/check_anomalies
 	var/check_all
 	var/ailock
+
 
 /obj/machinery/porta_turret/proc/setState(var/datum/turret_checks/TC)
 	if(controllock)
@@ -953,6 +1009,7 @@
 		Known as "turret frame"s
 */
 
+
 /obj/machinery/porta_turret_construct
 	name = "turret frame"
 	icon = 'icons/obj/turrets.dmi'
@@ -963,6 +1020,7 @@
 	var/finish_name="turret"	//the name applied to the product turret
 	var/installation = null		//the gun type installed
 	var/gun_charge = 0			//the gun charge of the gun type installed
+
 
 /obj/machinery/porta_turret_construct/attackby(obj/item/I, mob/user)
 	//this is a bit unwieldy but self-explanatory
@@ -1127,6 +1185,7 @@
 
 	..()
 
+
 /obj/machinery/porta_turret_construct/attack_hand(mob/user)
 	switch(build_step)
 		if(4)
@@ -1146,8 +1205,10 @@
 			new /obj/item/assembly/prox_sensor(loc)
 			build_step = 4
 
+
 /obj/machinery/porta_turret_construct/attack_ai()
 	return
+
 
 /atom/movable/porta_turret_cover
 	icon = 'icons/obj/turrets.dmi'
