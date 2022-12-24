@@ -92,16 +92,16 @@
 
 //Orange emergency space suit
 /obj/item/clothing/head/helmet/space/emergency
-	name = "Emergency Space Helmet"
+	name = "emergency soft helmet"
 	icon_state = "emergencyhelm"
-	desc = "A simple helmet with a built in light, smells like mothballs."
+	desc = "A simple airtight helmet with a wide-angle visor, meant to pair with a snowsuit.  It comes with a head-mounted flashlight."
 	flags_inv = HIDEMASK|HIDEEARS|HIDEEYES|HIDEFACE|BLOCKHAIR
 	flash_protection = FLASH_PROTECTION_NONE
 
 /obj/item/clothing/suit/space/emergency
-	name = "Emergency Softsuit"
+	name = "emergency softsuit"
 	icon_state = "emergency_softsuit"
-	desc = "A thin, ungainly softsuit colored in blaze orange for rescuers to easily locate, looks pretty fragile."
+	desc = "An airtight emergency suit made of thermal foil, colored in reflective blaze orange for rescuers to easily locate. It's too fragile to protect you from hail or hungry animals, but it does do a good job of keeping you from freezing to death."
 	slowdown = 2
 
 //civilian recreational spacesuit
