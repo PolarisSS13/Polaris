@@ -18,8 +18,7 @@ var/global/list/obj/item/communicator/all_communicators = list()
 
 /obj/item/communicator
 	name = "communicator"
-	desc = "A personal device used to enable long range dialog between two people, utilizing existing telecommunications infrastructure to allow \
-	communications across different stations, planets, or even star systems."
+	desc = "A T-14.2 communicator, popular across the galaxy for it's simplicity to use."
 	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
@@ -340,13 +339,14 @@ var/global/list/obj/item/communicator/all_communicators = list()
 //It's the 26th century. We should have smart watches by now.
 /obj/item/communicator/watch
 	name = "communicator watch"
-	desc = "A personal device used to enable long range dialog between two people, utilizing existing telecommunications infrastructure to allow \
-	communications across different stations, planets, or even star systems. You can wear this one on your wrist!"
+	desc = "A T-14.2-W wristbound communicator, all the function of the T-14.2, now in a hands-free format!"
 	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "commwatch"
 	slot_flags = SLOT_GLOVES
+	note = "Thank you for choosing the T-14.2-W Communicator, this is your notepad!"
+
 
 /obj/item/communicator/watch/update_icon()
 	if(video_source)
@@ -364,13 +364,12 @@ var/global/list/obj/item/communicator/all_communicators = list()
 	icon_state = initial(icon_state)
 
 /obj/item/communicator/sleek
-	desc = "A personal device used to enable long range dialog between two people, utilizing existing telecommunications infrastructure to allow \
-	communications across different stations, planets, or even star systems. This one has a large, sleek touch screen."
+	desc = "A sleek, high-end communicator, featuring a large touchscreen."
 	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
 	icon_state = "commsleek"
-	note = "Thank you for choosing the T-17.4 Communicator, this is your notepad!" //Current note in the notepad function
+	note = "Thank you for choosing the T-17.4 Communicator, this is your notepad!"
 
 
 /obj/item/communicator/sleek/update_icon()
@@ -384,6 +383,46 @@ var/global/list/obj/item/communicator/all_communicators = list()
 
 	if(alert_called)
 		icon_state = "commsleek-called"
+		return
+
+	icon_state = initial(icon_state)
+
+/obj/item/communicator/flip
+	desc = "The S-12 Flip, An affordable communicator with a clamshell design."
+	icon_state = "commflip"
+	note = "Thank you for choosing the S-12 Flip, this is your notepad!" //Current note in the notepad function
+
+/obj/item/communicator/flip/update_icon()
+	if(video_source)
+		icon_state = "commflip-video"
+		return
+
+	if(voice_mobs.len || communicating.len)
+		icon_state = "commflip-active"
+		return
+
+	if(alert_called)
+		icon_state = "commflip-called"
+		return
+
+	icon_state = initial(icon_state)
+
+/obj/item/communicator/rugged
+	desc = "The RB-65, voted most robust communicator 2566!"
+	icon_state = "commrugged"
+	note = "Thank you for choosing the RB-65 Communicator, this is your notepad!" //Current note in the notepad function
+
+/obj/item/communicator/rugged/update_icon()
+	if(video_source)
+		icon_state = "commrugged-video"
+		return
+
+	if(voice_mobs.len || communicating.len)
+		icon_state = "commrugged-active"
+		return
+
+	if(alert_called)
+		icon_state = "commrugged-called"
 		return
 
 	icon_state = initial(icon_state)

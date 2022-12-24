@@ -2,6 +2,10 @@
 	display_name = "cane"
 	path = /obj/item/cane
 
+/datum/gear/cane/telescopic
+	display_name = "cane, telescopic"
+	path = /obj/item/cane/telescopic
+
 /datum/gear/cane/white
 	display_name = "cane, white"
 	path = /obj/item/cane/white
@@ -9,6 +13,10 @@
 /datum/gear/cane/white2
 	display_name = "cane, white, telescopic"
 	path = /obj/item/cane/white/collapsible
+
+/datum/gear/cane/white3
+	display_name = "cane, white, folding"
+	path = /obj/item/cane/white/collapsible/folding
 
 /datum/gear/crutch
 	display_name = "crutch"

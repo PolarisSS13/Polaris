@@ -36,6 +36,8 @@
 	commtype["communicator"] = /obj/item/communicator
 	commtype["communicator, watch"] = /obj/item/communicator/watch
 	commtype["communicator, sleek"] = /obj/item/communicator/sleek
+	commtype["communicator, flip"] = /obj/item/communicator/flip
+	commtype["communicator, rugged"] = /obj/item/communicator/rugged
 	gear_tweaks += new/datum/gear_tweak/path(commtype)
 
 /datum/gear/utility/codex

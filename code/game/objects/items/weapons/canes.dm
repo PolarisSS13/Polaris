@@ -19,6 +19,45 @@
 	icon_state = "crutch"
 	item_state = "crutch"
 
+/obj/item/cane/telescopic
+	name = "telescopic cane"
+	desc = "A compact cane which can be collapsed for storage."
+	icon_state = "telecanein"
+	force = 3
+	var/on = 0
+
+//Code for Telescopic Cane writen by Gozulio
+
+/obj/item/cane/telescopic/attack_self(mob/user as mob)
+	on = !on
+	if(on)
+		user.visible_message("<span class='notice'>\The [user] extends the cane.</span>",\
+				"<span class='warning'>You extend the cane.</span>",\
+				"You hear an ominous click.")
+		icon_state = "telecaneout"
+		item_state_slots = list(slot_r_hand_str = "telecane", slot_l_hand_str = "telecane")
+		w_class = ITEMSIZE_NORMAL
+		force = 5
+		attack_verb = list("smacked", "struck", "cracked", "beaten")
+	else
+		user.visible_message("<span class='notice'>\The [user] retracts the  cane.</span>",\
+		"<span class='notice'>You retract the cane.</span>",\
+		"You hear a click.")
+		icon_state = "telecanein"
+		item_state_slots = list(slot_r_hand_str = null, slot_l_hand_str = null)
+		w_class = ITEMSIZE_SMALL
+		force = 3
+		attack_verb = list("hit", "poked", "prodded")
+
+	if(istype(user,/mob/living/carbon/human))
+		var/mob/living/carbon/human/H = user
+		H.update_inv_l_hand()
+		H.update_inv_r_hand()
+
+	playsound(src, 'sound/weapons/empty.ogg', 50, 1)
+	add_fingerprint(user)
+	return TRUE
+
 /obj/item/cane/concealed
 	var/concealed_blade
 
@@ -93,23 +132,27 @@
 	w_class = ITEMSIZE_SMALL
 	force = 3
 	var/on = 0
+	var/unfoldverb = "extend"
+	var/foldverb = "collapse"
+	var/unfoldicon = "whitecane1out"
+	var/foldicon = "whitecane1in"
 
 /obj/item/cane/white/collapsible/attack_self(mob/user as mob)
 	on = !on
 	if(on)
-		user.visible_message("<span class='notice'>\The [user] extends the white cane.</span>",\
-				"<span class='warning'>You extend the white cane.</span>",\
+		user.visible_message("<span class='notice'>\The [user] [unfoldverb]s the white cane.</span>",\
+				"<span class='warning'>You [unfoldverb] the white cane.</span>",\
 				"You hear an ominous click.")
-		icon_state = "whitecane1out"
+		icon_state = "[unfoldicon]"
 		item_state_slots = list(slot_r_hand_str = "whitecane", slot_l_hand_str = "whitecane")
 		w_class = ITEMSIZE_NORMAL
 		force = 5
 		attack_verb = list("smacked", "struck", "cracked", "beaten")
 	else
-		user.visible_message("<span class='notice'>\The [user] collapses the white cane.</span>",\
-		"<span class='notice'>You collapse the white cane.</span>",\
+		user.visible_message("<span class='notice'>\The [user] [foldverb]s the white cane.</span>",\
+		"<span class='notice'>You [foldverb] the white cane.</span>",\
 		"You hear a click.")
-		icon_state = "whitecane1in"
+		icon_state = "[foldicon]"
 		item_state_slots = list(slot_r_hand_str = null, slot_l_hand_str = null)
 		w_class = ITEMSIZE_SMALL
 		force = 3
@@ -123,3 +166,12 @@
 	playsound(src, 'sound/weapons/empty.ogg', 50, 1)
 	add_fingerprint(user)
 	return TRUE
+
+/obj/item/cane/white/collapsible/folding
+	name = "folding white cane"
+	desc = "A folding white cane. They are commonly used by the blind or visually impaired as a mobility tool or as a courtesy to others."
+	icon_state = "whitecane2in"
+	unfoldverb = "unfold"
+	foldverb = "fold"
+	unfoldicon = "whitecane2out"
+	foldicon = "whitecane2in"
