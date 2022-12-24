@@ -66,6 +66,7 @@ var/global/list/lunchables_snacks_ = list(/obj/item/reagent_containers/food/snac
                                    /obj/item/reagent_containers/food/snacks/honeybun,
                                    /obj/item/reagent_containers/food/snacks/custardbun,
                                    /obj/item/reagent_containers/food/snacks/honeytoast,
+                                   /obj/item/reagent_containers/food/snacks/cookie,
                                    /obj/item/reagent_containers/food/snacks/cookiesnack,
                                    /obj/item/reagent_containers/food/snacks/fruitbar,
                                    /obj/item/reagent_containers/food/snacks/semki,

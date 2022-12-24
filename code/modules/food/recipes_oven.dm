@@ -299,7 +299,7 @@
 		/obj/item/reagent_containers/food/snacks/dough,
 		/obj/item/reagent_containers/food/snacks/chocolatebar
 	)
-	result = /obj/item/reagent_containers/food/snacks/cookiesnack
+	result = /obj/item/reagent_containers/food/snacks/cookie
 	result_quantity = 4
 	reagent_mix = RECIPE_REAGENT_REPLACE
 

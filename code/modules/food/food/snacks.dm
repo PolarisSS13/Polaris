@@ -6172,6 +6172,15 @@
 	. = ..()
 	reagents.add_reagent("sugar", 5)
 
+/obj/item/reagent_containers/food/snacks/cookie
+	name = "cookie"
+	desc = "COOKIE!!!"
+	icon_state = "COOKIE!!!"
+	filling_color = "#DBC94F"
+	center_of_mass = list("x"=17, "y"=18)
+	nutriment_amt = 5
+	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
+	bitesize = 1
 /obj/item/reagent_containers/food/snacks/cookiesnack
 	name = "Carps Ahoy! miniature cookies"
 	desc = "Now 100% carpotoxin free!"
