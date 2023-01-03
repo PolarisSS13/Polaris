@@ -15,7 +15,7 @@
 	// Sample the color of the combined reagents
 	var/datum/reagents/R = new(120)
 	for(var/list/chem in reagents)
-		R.add_reagent(chem[0], chem[1], chem[2])
+		R.add_reagent(chem[1], chem[2], chem[3])
 	effect_color = R.get_color()
 	qdel(R)
 
@@ -29,7 +29,7 @@
 	spawn()
 		var/obj/effect/vfx/water/splash = new(T)
 		splash.create_reagents(15)
-		splash.reagents.add_reagent("blood", 10,list("blood_colour" = effect_color))
+		splash.reagents.add_reagent("blood", 10, list("blood_colour" = effect_color))
 		splash.set_color()
 
 		splash.set_up(T, 2, 3)
