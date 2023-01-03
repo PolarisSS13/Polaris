@@ -1,18 +1,17 @@
 /datum/gear/cane
-	display_name = "cane"
+	display_name = "cane selection"
 	path = /obj/item/cane
 
-/datum/gear/cane/white
-	display_name = "cane, white"
-	path = /obj/item/cane/white
-
-/datum/gear/cane/white2
-	display_name = "cane, white, telescopic"
-	path = /obj/item/cane/white/collapsible
-
-/datum/gear/crutch
-	display_name = "crutch"
-	path = /obj/item/cane/crutch
+/datum/gear/cane/New()
+	..()
+	var/canetype = list()
+	canetype["walking cane"] = /obj/item/cane
+	canetype["telescopic walking cane"] = /obj/item/cane/telescopic
+	canetype["white cane"] = /obj/item/cane/white
+	canetype["telescopic white cane"] = /obj/item/cane/white/collapsible
+	canetype["folding white cane"] = /obj/item/cane/white/collapsible/folding
+	canetype["crutch"] = /obj/item/cane/crutch
+	gear_tweaks += new/datum/gear_tweak/path(canetype)
 
 /datum/gear/dice
 	display_name = "dice pack"
