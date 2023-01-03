@@ -262,6 +262,20 @@
 	extra_overlay = "seromitail_feathers_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
+/datum/sprite_accessory/tail/special/tesharitail_pattern_1
+	name = "teshari tail (pattern 1)"
+	icon_state = "teshitail"
+	extra_overlay = "teshi_pattern_1"
+	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_ADD
+
+/datum/sprite_accessory/tail/special/tesharitail_pattern_2
+	name = "teshari tail (pattern 2)"
+	icon_state = "teshitail"
+	extra_overlay = "teshi_pattern_2"
+	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_ADD
+
 /datum/sprite_accessory/tail/special/tesharitail_noplume
 	name = "teshari tail, no plumage"
 	icon_state = "teshtail_noplume_s"
