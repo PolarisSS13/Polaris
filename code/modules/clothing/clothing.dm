@@ -432,7 +432,7 @@
 	var/brightness_on
 	var/on = 0
 	var/image/helmet_light
-	var/allow_hair_covering = TRUE
+	var/allow_hair_toggle = TRUE
 
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi',
@@ -532,14 +532,14 @@
 
 /obj/item/clothing/head/Initialize(mapload, material_key)
 	. = ..()
-	if(allow_hair_covering)
+	if(allow_hair_toggle)
 		verbs += /obj/item/clothing/head/proc/toggle_block_hair
 
 /obj/item/clothing/head/proc/toggle_block_hair()
 	set name = "Toggle Hair Coverage"
 	set category = "Object"
 
-	if(allow_hair_covering)
+	if(allow_hair_toggle)
 		flags_inv ^= BLOCKHEADHAIR
 		to_chat(usr, SPAN_NOTICE("[src] will now [flags_inv & BLOCKHEADHAIR ? "hide" : "show"] hair."))
 		if(ishuman(usr))
