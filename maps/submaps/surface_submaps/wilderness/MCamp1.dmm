@@ -29,7 +29,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/MilitaryCamp1)
 "i" = (
-/obj/effect/mine,
+/obj/random/landmine,
 /turf/template_noop,
 /area/submap/MilitaryCamp1)
 "j" = (
@@ -82,7 +82,6 @@
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "u" = (
-/obj/effect/mine,
 /obj/random/landmine,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
@@ -135,7 +134,7 @@
 /area/submap/MilitaryCamp1)
 "F" = (
 /obj/machinery/door/airlock,
-/obj/effect/mine,
+/obj/random/landmine,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "G" = (
