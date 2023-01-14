@@ -18,6 +18,9 @@
 	description = "A complex slurry of lipids, proteins, metal particulate and long polymer chains. Ubiquitous to vox-inhabited stations and equipment."
 	strength = 6
 	scannable = FALSE
+	taste_mult = 4
+	metabolism = REM * 4
+	ingest_met = REM * 4
 
 /datum/reagent/toxin/voxslurry/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien != IS_VOX)
@@ -37,12 +40,13 @@
 	description = "A complex serum composed of vox-manufactured nanomachines, complex protein chains and microscopic bundles of metallic fibers."
 	strength = 8
 	scannable = FALSE
+	metabolism = REM * 4
+	ingest_met = REM * 4
 
 /datum/reagent/toxin/voxmeds/affect_touch(var/mob/living/carbon/M, var/alien, var/removed)
 	affect_blood(M, alien, removed)
 
 /datum/reagent/toxin/voxmeds/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-
 	if(alien != IS_VOX)
 		// Mostly copied from mutagen.
 		. = ..()
@@ -82,7 +86,7 @@
 	id = "voxbooze"
 	description = "Vox clades brew this noxious concoction in half-empty fuel tanks using whatever dregs come to hand."
 	taste_description = "burning, acrid foulness"
-	taste_mult = 2.5
+	taste_mult = 10 // hard to taste anything else over this
 	color = "#22aa88"
 	strength = 7
 
