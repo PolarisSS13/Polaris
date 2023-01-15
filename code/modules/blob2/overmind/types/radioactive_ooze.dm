@@ -22,6 +22,3 @@
 
 /datum/blob_type/radioactive_ooze/on_pulse(var/obj/structure/blob/B)
 	SSradiation.radiate(B, 200)
-
-/datum/blob_type/radioactive_ooze/on_chunk_tick(obj/item/blobcore_chunk/B)
-	SSradiation.radiate(B, rand(25,100))

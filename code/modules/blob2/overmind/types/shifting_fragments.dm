@@ -34,7 +34,3 @@
 	if(istype(B, /obj/structure/blob/normal) || (istype(B, /obj/structure/blob/shield) && prob(25)))
 		new_B.forceMove(get_turf(B))
 		B.forceMove(T)
-
-/datum/blob_type/shifting_fragments/on_chunk_use(obj/item/blobcore_chunk/B, mob/living/user)
-	user.add_modifier(/datum/modifier/sprinting, 2 MINUTES)
-	return

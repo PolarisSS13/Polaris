@@ -37,14 +37,3 @@
 		B.visible_message("<span class='danger'>The dying mass is rapidly consumed by the nearby [other]!</span>")
 		if(other.overmind)
 			other.overmind.add_points(rand(1,4))
-
-/datum/blob_type/ravenous_macrophage/on_chunk_tick(obj/item/blobcore_chunk/B)
-	var/mob/living/L = locate() in range(world.view, B)
-	if(prob(5) && !L.stat)	// There's some active living thing nearby, produce offgas.
-		B.visible_message("<span class='alien'>\icon [B] \The [B] disgorches a cloud of noxious gas!</span>")
-		var/turf/T = get_turf(B)
-		var/datum/effect_system/smoke_spread/noxious/BS = new /datum/effect_system/smoke_spread/noxious
-		BS.attach(T)
-		BS.set_up(3, 0, T)
-		playsound(T, 'sound/effects/smoke.ogg', 50, 1, -3)
-		BS.start()

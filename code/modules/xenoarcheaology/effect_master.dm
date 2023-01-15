@@ -294,37 +294,39 @@
 
 
 /datum/component/artifact_master/proc/on_attackby()
-	var/obj/item/W = args[2]
+	var/obj/item/W = args[0]
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
 		if (istype(W, /obj/item/reagent_containers))
 			if(W.reagents.has_reagent("hydrogen", 1) || W.reagents.has_reagent("water", 1))
 				if(my_effect.trigger == TRIGGER_WATER)
-					my_effect.ToggleActivate()
+					return my_effect.ToggleActivate()
 			else if(W.reagents.has_reagent("sacid", 1) || W.reagents.has_reagent("pacid", 1) || W.reagents.has_reagent("diethylamine", 1))
 				if(my_effect.trigger == TRIGGER_ACID)
-					my_effect.ToggleActivate()
+					return my_effect.ToggleActivate()
 			else if(W.reagents.has_reagent("phoron", 1) || W.reagents.has_reagent("thermite", 1))
 				if(my_effect.trigger == TRIGGER_VOLATILE)
-					my_effect.ToggleActivate()
+					return my_effect.ToggleActivate()
 			else if(W.reagents.has_reagent("toxin", 1) || W.reagents.has_reagent("cyanide", 1) || W.reagents.has_reagent("amatoxin", 1) || W.reagents.has_reagent("neurotoxin", 1))
 				if(my_effect.trigger == TRIGGER_TOXIN)
-					my_effect.ToggleActivate()
+					return my_effect.ToggleActivate()
 		else if(istype(W,/obj/item/melee/baton) && W:status ||\
 				istype(W,/obj/item/melee/energy) ||\
 				istype(W,/obj/item/melee/cultblade) ||\
 				istype(W,/obj/item/card/emag) ||\
 				istype(W,/obj/item/multitool))
 			if (my_effect.trigger == TRIGGER_ENERGY)
-				my_effect.ToggleActivate()
+				return my_effect.ToggleActivate()
 
 		else if (istype(W,/obj/item/flame) && W:lit ||\
 				istype(W,/obj/item/weldingtool) && W:welding)
 			if(my_effect.trigger == TRIGGER_HEAT)
-				my_effect.ToggleActivate()
+				return my_effect.ToggleActivate()
 		else
 			if (my_effect.trigger == TRIGGER_FORCE && W.force >= 10)
-				my_effect.ToggleActivate()
+				return my_effect.ToggleActivate()
+		return my_effect.attackby(args[1], args[0])
+
 
 /datum/component/artifact_master/proc/on_reagent()
 	var/datum/reagent/Touching = args[2]
@@ -348,10 +350,13 @@
 			if(my_effect.trigger == TRIGGER_TOXIN)
 				my_effect.ToggleActivate()
 
-/datum/component/artifact_master/proc/on_moved()
+/datum/component/artifact_master/proc/on_moved(var/list/arguments)
+	var/turf/old_loc = get_turf(holder) // If we don't get an oldturf, at least try to use the new one.
+	if(LAZYLEN(arguments) && isturf(arguments[0]))
+		old_loc = arguments[0]
 	for(var/datum/artifact_effect/my_effect in my_effects)
 		if(my_effect)
-			my_effect.UpdateMove()
+			my_effect.UpdateMove(old_loc)
 
 /datum/component/artifact_master/process()
 	if(!holder)	// Some instances can be created and rapidly lose their holder, if they are destroyed rapidly on creation. IE, during excavation.
@@ -368,10 +373,6 @@
 		var/atom/movable/HA = holder
 		if(HA.pulledby)
 			on_bumped(holder, HA.pulledby)
-
-	for(var/datum/artifact_effect/my_effect in my_effects)
-		if(my_effect)
-			my_effect.UpdateMove()
 
 	//if any of our effects rely on environmental factors, work that out
 	var/trigger_cold = 0
@@ -426,4 +427,3 @@
 		//NITROGEN GAS ACTIVATION
 		if(my_effect.trigger == TRIGGER_NITRO && (trigger_nitro ^ my_effect.activated))
 			my_effect.ToggleActivate()
-

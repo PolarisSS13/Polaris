@@ -24,11 +24,3 @@
 
 /datum/blob_type/electromagnetic_web/on_attack(obj/structure/blob/B, mob/living/victim)
 	victim.emp_act(2)
-
-/datum/blob_type/electromagnetic_web/on_chunk_tick(obj/item/blobcore_chunk/B)
-	var/turf/T = get_turf(B)
-	if(!T)
-		return
-
-	for(var/mob/living/L in view(2, T))
-		L.add_modifier(/datum/modifier/faraday, 30 SECONDS)

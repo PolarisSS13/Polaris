@@ -110,9 +110,6 @@ var/global/list/blob_cores = list()
 	point_rate = new_rate
 
 /obj/structure/blob/core/Destroy()
-	var/turf/T = get_turf(src)
-	new /obj/item/blobcore_chunk(T, overmind.blob_type)
-
 	blob_cores -= src
 	if(overmind)
 		overmind.blob_core = null

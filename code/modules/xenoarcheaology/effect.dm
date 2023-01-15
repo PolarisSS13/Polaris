@@ -68,29 +68,31 @@
 /datum/artifact_effect/proc/ToggleActivate(reveal_toggle = TRUE)
 	set waitfor = FALSE
 	var/atom/target = get_master_holder()
-	if (world.time - last_activation > 1 SECOND)
-		last_activation = world.time
+	if (world.time - last_activation < 1 SECOND)
+		return FALSE
+	last_activation = world.time
+	if (activated)
+		activated = 0
+	else
+		activated = 1
+	if (reveal_toggle && target)
+		if (!isliving(target))
+			target.update_icon()
+		var/display_msg
 		if (activated)
-			activated = 0
+			display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
 		else
-			activated = 1
-		if (reveal_toggle && target)
-			if (!isliving(target))
-				target.update_icon()
-			var/display_msg
+			display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
+		if (active_effect)
 			if (activated)
-				display_msg = pick("momentarily glows brightly!","distorts slightly for a moment!","flickers slightly!","vibrates!","shimmers slightly for a moment!")
+				target.underlays.Add(active_effect)
 			else
-				display_msg = pick("grows dull!","fades in intensity!","suddenly becomes very still!","suddenly becomes very quiet!")
-			if (active_effect)
-				if (activated)
-					target.underlays.Add(active_effect)
-				else
-					target.underlays.Remove(active_effect)
-			var/atom/toplevelholder = target
-			while (!istype(toplevelholder.loc, /turf))
-				toplevelholder = toplevelholder.loc
-			toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
+				target.underlays.Remove(active_effect)
+		var/atom/toplevelholder = target
+		while (!istype(toplevelholder.loc, /turf))
+			toplevelholder = toplevelholder.loc
+		toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
+	return TRUE
 
 
 /datum/artifact_effect/proc/DoEffectTouch(mob/living/user)
@@ -105,9 +107,12 @@
 	return
 
 
-/datum/artifact_effect/proc/UpdateMove()
+/datum/artifact_effect/proc/UpdateMove(var/turf/old_loc)
 	return
 
+
+/datum/artifact_effect/proc/attackby(mob/living/user, obj/item/I)
+	return FALSE
 
 /datum/artifact_effect/proc/getDescription()
 	. = "<b>"

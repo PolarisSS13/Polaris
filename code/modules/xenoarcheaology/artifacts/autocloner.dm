@@ -26,7 +26,9 @@
 		/mob/living/simple_mob/animal/space/alien,
 		/mob/living/simple_mob/animal/space/bear,
 		/mob/living/simple_mob/creature,
-		/mob/living/simple_mob/slime/xenobio)
+		/mob/living/simple_mob/slime/xenobio,
+		/mob/living/simple_mob/blob/spore/weak,
+		/mob/living/simple_mob/blob/spore/infesting)
 	else
 		spawn_type = pick(\
 		/mob/living/simple_mob/animal/passive/cat,

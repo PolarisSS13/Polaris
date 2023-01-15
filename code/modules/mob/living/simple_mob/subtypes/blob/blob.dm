@@ -72,18 +72,5 @@
 		return TRUE
 	return ..()
 
-/mob/living/simple_mob/blob/IIsAlly(mob/living/L)
-	var/ally = ..(L)
-	if(!ally)
-		var/list/items = L.get_all_held_items()
-		for(var/obj/item/I in items)
-			if(istype(I, /obj/item/blobcore_chunk))
-				var/obj/item/blobcore_chunk/BC = I
-				if(!overmind || (BC.blob_type && overmind.blob_type.type == BC.blob_type.type) || BC.blob_type.faction == faction)
-					ally = TRUE
-				break
-
-	return ally
-
 /decl/mob_organ_names/blob
 	hit_zones = list("mass")

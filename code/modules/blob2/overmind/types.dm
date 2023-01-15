@@ -95,19 +95,3 @@
 // Spore handle_special call.
 /datum/blob_type/proc/on_spore_lifetick(mob/living/simple_mob/blob/spore/S)
 	return
-
-// Blob core chunk process.
-/datum/blob_type/proc/on_chunk_tick(obj/item/blobcore_chunk/B)
-	return
-
-// Blob core chunk use in-hand.
-/datum/blob_type/proc/on_chunk_use(obj/item/blobcore_chunk/B, mob/user)
-	return
-
-// Proc that is unique to the blob type.
-/datum/blob_type/proc/chunk_unique(obj/item/blobcore_chunk/B, var/list/extra_args = null)
-	return
-
-// Set up the blob type for the chunk.
-/datum/blob_type/proc/chunk_setup(obj/item/blobcore_chunk/B)
-	return

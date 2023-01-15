@@ -30,30 +30,3 @@
 		B.blob_attack_animation(attacker, B.overmind)
 		attacker.blob_act(B)
 	return ..()
-
-// We're expecting 1 to be a target, 2 to be an old move loc, and 3 to be a new move loc.
-/datum/blob_type/reactive_spines/chunk_unique(obj/item/blobcore_chunk/B, var/list/extra_data = null)
-	if(!LAZYLEN(extra_data))
-		return
-
-	var/atom/movable/A = extra_data[1]
-
-	if(istype(A, /mob/living) && world.time > (B.last_passive_use + B.passive_ability_cooldown) && B.should_tick)
-		B.last_passive_use = world.time
-		var/mob/living/L = A
-
-		var/mob/living/carrier = B.get_carrier()
-
-		if(!istype(carrier) || L.z != carrier.z || L == carrier || get_dist(L, carrier) > 3)
-			return
-
-		var/obj/item/projectile/P = new spore_projectile(get_turf(B))
-
-		carrier.visible_message("<span class='danger'>\The [B] fires a spine at \the [L]!</span>")
-		P.launch_projectile(L, BP_TORSO, carrier)
-
-	return
-
-/datum/blob_type/reactive_spines/chunk_setup(obj/item/blobcore_chunk/B)
-	GLOB.moved_event.register_global(B, /obj/item/blobcore_chunk/proc/call_chunk_unique)
-	return
