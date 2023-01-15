@@ -1,5 +1,5 @@
 var/global/list/obj/machinery/photocopier/faxmachine/allfaxes = list()
-var/global/list/admin_departments = list("[using_map.boss_name]", "Sif Governmental Authority", "Supply")
+var/global/list/admin_departments = list("[using_map.boss_name]", "Vir Governmental Authority", "Supply")
 var/global/list/alldepartments = list()
 
 var/global/list/adminfaxes = list()	//cache for faxes that have been sent to admins
@@ -200,8 +200,8 @@ var/global/list/adminfaxes = list()	//cache for faxes that have been sent to adm
 	// Sadly, we can't use a switch statement here due to not using a constant value for the current map's centcom name.
 	if(destination == using_map.boss_name)
 		message_admins(sender, "[uppertext(using_map.boss_short)] FAX", rcvdcopy, "CentComFaxReply", "#006100")
-	else if(destination == "Sif Governmental Authority")
-		message_admins(sender, "SIF GOVERNMENT FAX", rcvdcopy, "CentComFaxReply", "#1F66A0")
+	else if(destination == "Vir Governmental Authority")
+		message_admins(sender, "VIR GOVERNMENT FAX", rcvdcopy, "CentComFaxReply", "#1F66A0")
 	else if(destination == "Supply")
 		message_admins(sender, "[uppertext(using_map.boss_short)] SUPPLY FAX", rcvdcopy, "CentComFaxReply", "#5F4519")
 	else
@@ -236,7 +236,7 @@ var/global/list/adminfaxes = list()	//cache for faxes that have been sent to adm
 		if(check_rights((R_ADMIN|R_MOD|R_EVENT),0,C))
 			to_chat(C,msg)
 			C << 'sound/machines/printer.ogg'
-	
+
 	// Webhooks don't parse the HTML on the paper, so we gotta strip them out so it's still readable.
 	var/summary = make_summary(sent)
 	summary = paper_html_to_plaintext(summary)

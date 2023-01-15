@@ -21,7 +21,7 @@
 	data = "Vir is an A-type main sequence star with 81% more mass than Sol (the humans' home star), and almost nine times as bright.  It \
 	has a white glow, and a diameter that is about 34% larger than Sol. It has six major planets in its orbit.\
 	<br><br>\
-	Vir is mainly administered on [quick_link("Sif")] by the [quick_link("Sif Governmental Authority")], as Sif \
+	Vir is mainly administered on [quick_link("Sif")] by the [quick_link("Vir Governmental Authority")], as Sif \
 	was the first planet to be colonized, however VGA lays claim to all planets orbiting Vir.  The planets \
 	are named after figures in ancient human mythology (Norse), due to the original surveyor for the system deciding to do so. \
 	Some installations carry on this tradition."
@@ -67,7 +67,7 @@
 	keywords += list("Sif")
 	data = "Sif is a terrestrial planet and third closest planet to Vir. It possesses oceans, a breathable atmosphere, \
 	a magnetic field, weather, and acceptable gravity. It is currently the capital planet of Vir. Its center of government is the \
-	equatorial city and site of the first settlement, New Reykjavik, which houses the [quick_link("Sif Governmental Authority")].\
+	equatorial city and site of the first settlement, New Reykjavik, which houses the [quick_link("Vir Governmental Authority")].\
 	<br><br>\
 	Sif has many desirable traits which made it the first planet to be colonized in Vir, however it also has various quirks which \
 	may disorient humans used to conditions on planet Earth.  Atmospheric pressure is lower than 'normal', which may cause difficulty \
@@ -80,7 +80,7 @@
 	keywords += list("Vir Interstellar Spaceport")
 	data = "The Vir Interstellar Spaceport is a large facility in orbit of the planet [quick_link("Sif")] which handles the loading and \
 	unloading, refuelling, and general maintenance of large spacecraft. The main structure is owned by the \
-	[quick_link("Sif Governmental Authority")], but individual offices, docking/loading bays, and warehouses are often leased to individuals \
+	[quick_link("Vir Governmental Authority")], but individual offices, docking/loading bays, and warehouses are often leased to individuals \
 	or organisations.  The position of the spaceport allows it to function not only as a key node for transport inside the Vir \
 	system, especially to and from the planet Sif, but also as a key stopping point interstellar craft travelling via Vir which need refuelling. \
 	<br><br>\
