@@ -131,8 +131,10 @@ var/global/datum/planet/sif/planet_sif = null
 		WEATHER_OVERCAST	= 30,
 		WEATHER_LIGHT_SNOW	= 20,
 		WEATHER_SNOW		= 5,
-		WEATHER_BLIZZARD	= 2.5,
-		WEATHER_HAIL		= 5
+		WEATHER_BLIZZARD	= 5,
+		WEATHER_RAIN		= 5,
+		WEATHER_STORM		= 2.5,
+		WEATHER_HAIL		= 2.5
 		)
 
 /datum/weather/sif
@@ -165,6 +167,7 @@ var/global/datum/planet/sif/planet_sif = null
 		WEATHER_OVERCAST = 50,
 		WEATHER_LIGHT_SNOW = 10,
 		WEATHER_SNOW = 5,
+		WEATHER_RAIN = 5,
 		WEATHER_HAIL = 5
 		)
 	observed_message = "It is overcast, all you can see are clouds."
@@ -280,6 +283,8 @@ var/global/datum/planet/sif/planet_sif = null
 	transition_chances = list(
 		WEATHER_OVERCAST = 25,
 		WEATHER_LIGHT_SNOW = 10,
+		WEATHER_RAIN = 50,
+		WEATHER_STORM = 10,
 		WEATHER_HAIL = 5
 		)
 	observed_message = "It is raining."
@@ -336,6 +341,8 @@ var/global/datum/planet/sif/planet_sif = null
 
 
 	transition_chances = list(
+		WEATHER_RAIN = 45,
+		WEATHER_STORM = 40,
 		WEATHER_HAIL = 10,
 		WEATHER_OVERCAST = 5
 		)
@@ -386,8 +393,10 @@ var/global/datum/planet/sif/planet_sif = null
 	effect_message = "<span class='warning'>The hail smacks into you!</span>"
 
 	transition_chances = list(
+		WEATHER_RAIN = 45,
+		WEATHER_STORM = 40,
 		WEATHER_HAIL = 10,
-		WEATHER_OVERCAST = 10 //higher chance to switch to overcase since rain/storm are off
+		WEATHER_OVERCAST = 5
 		)
 	observed_message = "Ice is falling from the sky."
 	transition_messages = list(
