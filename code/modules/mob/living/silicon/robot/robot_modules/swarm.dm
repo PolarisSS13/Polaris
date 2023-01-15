@@ -1,5 +1,6 @@
 /obj/item/robot_module/drone/swarm
 	name = "swarm drone module"
+	unavailable_by_default = TRUE
 	var/id
 
 /obj/item/robot_module/drone/swarm/Initialize(var/ml)

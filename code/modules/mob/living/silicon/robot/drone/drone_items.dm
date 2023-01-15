@@ -129,6 +129,17 @@
 
 		)
 
+/obj/item/gripper/cultivator
+	name = "cultivator gripper"
+	icon_state = "gripper"
+	desc = "A simple grasping tool used to perform tasks in the xenobiology division, such as handling plant samples and disks."
+	can_hold = list(
+		/obj/item/reagent_containers/glass,
+		/obj/item/seeds,
+		/obj/item/slime_extract,
+		/obj/item/disk/botany
+	)
+
 /obj/item/gripper/circuit
 	name = "circuit assembly gripper"
 	icon_state = "gripper-circ"

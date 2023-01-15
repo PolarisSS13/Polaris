@@ -3,10 +3,11 @@
 // The module that borgs on the surface have.  Generally has a lot of useful tools in exchange for questionable loyalty to the crew.
 /obj/item/robot_module/robot/lost
 	name = "lost robot module"
+	unavailable_by_default = TRUE
 	hide_on_manifest = TRUE
 	sprites = list(
-					"Drone" = "drone-lost"
-				)
+		"Drone" = "drone-lost"
+	)
 
 /obj/item/robot_module/robot/lost/Initialize(var/ml)
 
@@ -45,6 +46,7 @@
 
 /obj/item/robot_module/robot/gravekeeper
 	name = "gravekeeper robot module"
+	unavailable_by_default = TRUE
 	hide_on_manifest = TRUE
 	sprites = list(
 					"Drone" = "drone-gravekeeper",

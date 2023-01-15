@@ -59,7 +59,13 @@
 	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
 	job_description = "A Cyborg is a mobile station synthetic, piloted by a cybernetically preserved brain. It is considered a person, but is still required \
 						to follow its Laws."
-	alt_titles = list("Robot" = /datum/alt_title/robot, "Drone" = /datum/alt_title/drone)
+	alt_titles = list(
+		"Robot" = /datum/alt_title/robot,
+		"Drone" = /datum/alt_title/drone,
+		"Cyborg, Flying",
+		"Robot, Flying" = /datum/alt_title/robot,
+		"Drone, Flying" = /datum/alt_title/drone
+	)
 
 // Cyborg Alt Titles
 /datum/alt_title/robot

@@ -179,10 +179,6 @@
 	if(species.flags & NO_SLIP)
 		return 0
 
-	var/obj/item/tank/jetpack/thrust = get_jetpack()
-	if(thrust?.can_thrust(0.01))
-		return 0
-
 	if(stat)
 		prob_slip = 0 // Changing this to zero to make it line up with the comment, and also, make more sense.
 
@@ -191,13 +187,16 @@
 		prob_slip = 0
 
 	//Check hands and mod slip
-	if(!l_hand)	prob_slip -= 2
-	else if(l_hand.w_class <= 2)	prob_slip -= 1
-	if (!r_hand)	prob_slip -= 2
-	else if(r_hand.w_class <= 2)	prob_slip -= 1
+	if(!l_hand)
+		prob_slip -= 2
+	else if(l_hand.w_class <= 2)
+		prob_slip -= 1
+	if (!r_hand)
+		prob_slip -= 2
+	else if(r_hand.w_class <= 2)
+		prob_slip -= 1
 
-	prob_slip = round(prob_slip)
-	return(prob_slip)
+	return round(prob_slip)
 
 // Handle footstep sounds
 /mob/living/carbon/human/handle_footstep(var/turf/T)

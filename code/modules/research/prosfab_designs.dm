@@ -277,7 +277,7 @@
 /datum/design/item/prosfab/cyborg/exoskeleton
 	name = "Robot Exoskeleton"
 	id = "robot_exoskeleton"
-	build_path = /obj/item/robot_parts/robot_suit
+	build_path = /obj/item/robot_parts/frame
 	time = 50
 	materials = list(MAT_STEEL = 37500)
 
@@ -365,6 +365,11 @@
 	name = "Armour Plating (Platform)"
 	id = "platform_armour"
 	build_path = /obj/item/robot_parts/robot_component/armour_platform
+
+/datum/design/item/prosfab/cyborg/component/armour_heavy
+	name = "Armour Plating (Light)"
+	id = "light_armour"
+	build_path = /obj/item/robot_parts/robot_component/armour_light
 
 /datum/design/item/prosfab/cyborg/component/ai_shell
 	name = "AI Remote Interface"

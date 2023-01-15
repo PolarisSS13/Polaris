@@ -3,6 +3,7 @@
 /obj/item/robot_module/robot/syndicate
 	name = "illegal robot module"
 	hide_on_manifest = TRUE
+	unavailable_by_default = TRUE
 	languages = list(
 					LANGUAGE_SOL_COMMON = 1,
 					LANGUAGE_SIVIAN = 0,

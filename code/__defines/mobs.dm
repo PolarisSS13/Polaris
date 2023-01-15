@@ -351,6 +351,10 @@
 #define SA_ROBOTIC	3
 #define SA_HUMANOID	4
 
+// Robot module categorization
+#define ROBOT_MODULE_TYPE_GROUNDED "grounded"
+#define ROBOT_MODULE_TYPE_FLYING   "flying"
+
 // More refined version of SA_* ""intelligence"" separators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'
 #define MOB_CLASS_NONE 			0	// Default value, and used to invert for _ALL.

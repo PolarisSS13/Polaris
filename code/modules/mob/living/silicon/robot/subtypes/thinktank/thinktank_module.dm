@@ -1,6 +1,7 @@
 /obj/item/robot_module/robot/platform
 
 	hide_on_manifest = TRUE
+	unavailable_by_default = TRUE
 
 	var/pupil_color =     COLOR_CYAN
 	var/base_color =      COLOR_WHITE
@@ -11,7 +12,7 @@
 
 	var/list/decals
 	var/list/available_decals = list(
-		"Stripe" = "stripe", 
+		"Stripe" = "stripe",
 		"Vertical Stripe" = "stripe_vertical"
 	)
 
@@ -31,7 +32,7 @@
 	var/new_pupil_color = input(usr, "Select a pupil colour.", "Pupil Colour Selection") as color|null
 	if(usr.incapacitated() || QDELETED(usr) || QDELETED(src) || loc != usr)
 		return
-	
+
 	pupil_color = new_pupil_color || initial(pupil_color)
 	usr.update_icon()
 
@@ -68,7 +69,7 @@
 	modules += bandaid
 	synths += medicine
 
-	var/obj/item/gun/energy/phasegun/mounted/cyborg/phasegun = new(src) 
+	var/obj/item/gun/energy/phasegun/mounted/cyborg/phasegun = new(src)
 	modules += phasegun
 
 	emag = new /obj/item/chainsaw(src)

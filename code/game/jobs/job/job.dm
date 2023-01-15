@@ -205,6 +205,5 @@
 
 /datum/job/proc/handle_nonhuman_mob(var/mob/living/carbon/human/player, var/alt_title)
 	if(mob_type & JOB_SILICON_ROBOT)
-		return player.Robotize()
-	if(mob_type & JOB_SILICON_AI)
-		return player
+		return player.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
+	return player

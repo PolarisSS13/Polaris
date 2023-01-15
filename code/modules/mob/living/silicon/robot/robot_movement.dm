@@ -27,7 +27,7 @@
 		return 0
 
 	var/datum/robot_component/actuator/A = get_component("actuator")
-	if (cell_use_power(A.active_usage))
+	if (cell_use_power(A.active_usage * power_efficiency))
 		return ..()
 
 /mob/living/silicon/robot/Moved(atom/old_loc, direction, forced = FALSE)

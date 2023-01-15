@@ -358,8 +358,11 @@
 
 	corpse = /obj/effect/landmark/mobcorpse/syndicatecommando
 
+/mob/living/simple_mob/humanoid/merc/melee/sword/space/Allow_Spacemove(var/dense_object, check_drift = 0)
+	return TRUE
+
 /mob/living/simple_mob/humanoid/merc/melee/sword/space/Process_Spacemove(var/check_drift = 0)
-	return
+	return TRUE
 
 // Ranged Space Merc
 /mob/living/simple_mob/humanoid/merc/ranged/space
@@ -384,8 +387,11 @@
 
 	corpse = /obj/effect/landmark/mobcorpse/syndicatecommando
 
+/mob/living/simple_mob/humanoid/merc/ranged/space/Allow_Spacemove(var/dense_object, check_drift = 0)
+	return TRUE
+
 /mob/living/simple_mob/humanoid/merc/ranged/space/Process_Spacemove(var/check_drift = 0)
-	return
+	return TRUE
 
 
 
