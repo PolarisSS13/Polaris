@@ -47,7 +47,8 @@
 	icon_state = "atmos_fire"
 	sprite_sheets = list(
 		SPECIES_TAJARAN = 'icons/mob/species/tajaran/helmet.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi'
 		)
 
 /obj/item/clothing/head/hardhat/firefighter
@@ -66,7 +67,8 @@
 	flash_protection = FLASH_PROTECTION_MODERATE
 	sprite_sheets = list(
 		SPECIES_TAJARAN = 'icons/mob/species/tajaran/helmet.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/helmet.dmi',
+		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi'
 		)
 
 /obj/item/clothing/head/hardhat/firefighter/chief

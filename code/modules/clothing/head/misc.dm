@@ -341,7 +341,7 @@
 	icon_state = "cowl"
 	body_parts_covered = 0
 
-/obj/item/clothing/head/cowl
+/obj/item/clothing/head/cowl/white
 	name = "white cowl"
 	desc = "A gold-lined white cowl. It gives off uncomfortable cult vibes, but fancy."
 	icon_state = "whitecowl"
@@ -366,7 +366,8 @@
 	icon_state = "buckethat"
 	icon_state = "buckethat"
 	sprite_sheets = list(
-		SPECIES_TAJARAN = 'icons/mob/species/tajaran/helmet.dmi'
+		SPECIES_TAJARAN = 'icons/mob/species/tajaran/helmet.dmi',
+		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi'
 		)
 
 //Corporate Berets
