@@ -1191,3 +1191,45 @@ I said no!
 	reagents = list("enzyme" = 20, "virusfood" = 5, "nutriment" = 15, "protein" = 15) // labor intensive
 	items = list()
 	result = /obj/item/storage/box/wings/tray
+
+/datum/recipe/dynsoup
+	reagents = list("water" = 10)
+	fruit = list("dyn leaf" = 2, "cabbage" = 1, "tomato" = 1)
+	result = /obj/item/reagent_containers/food/snacks/dynsoup
+	reagent_mix = RECIPE_REAGENT_REPLACE
+
+/datum/recipe/zantiri
+	reagents = list("water" = 10)
+	fruit = list("guami" = 2, "eki" = 1)
+	result = /obj/item/reagent_containers/food/snacks/zantiri
+	reagent_mix = RECIPE_REAGENT_REPLACE
+
+/datum/recipe/neaerastew
+	reagents = list("dynjuice" = 10, "water" = 10)
+	fruit = list("guami" = 2, "eki" = 2)
+	items = list(/obj/item/reagent_containers/food/snacks/meat/neaera)
+	result = /obj/item/reagent_containers/food/snacks/stew/neaera
+	reagent_mix = RECIPE_REAGENT_REPLACE
+
+/datum/recipe/fjylozynboiled
+	fruit = list("fjylozyn" = 1)
+	reagents = list("water" = 5)
+	reagent_mix = RECIPE_REAGENT_REPLACE
+	result = /obj/item/reagent_containers/food/snacks/fjylozynboiled
+
+/datum/recipe/kirani_stew
+	fruit = list("qazal" = 1)
+	reagents = list("kirani_jelly" = 10)
+	items = list(/obj/item/reagent_containers/food/snacks/meat/neaera)
+	result = /obj/item/reagent_containers/food/snacks/kirani_stew
+	reagent_mix = RECIPE_REAGENT_REPLACE
+
+/datum/recipe/qazal_noodles
+	fruit = list("kirani" = 1, "gauli" = 1)
+	items = list(
+		/obj/item/reagent_containers/food/snacks/qazal_doughstrip,
+		/obj/item/reagent_containers/food/snacks/qazal_doughstrip,
+		/obj/item/reagent_containers/food/snacks/qazal_doughstrip
+	)
+	result = /obj/item/reagent_containers/food/snacks/qazal_noodles
+	reagent_mix = RECIPE_REAGENT_REPLACE
