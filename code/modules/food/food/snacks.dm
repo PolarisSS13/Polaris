@@ -7765,7 +7765,7 @@
 
 /obj/item/reagent_containers/food/snacks/stuffed_gauli
 	name = "stuffed ga'uli pod"
-	desc = "A cooked ga'uli pod, stuffed with meat and minced kirani fruit,"
+	desc = "A cooked ga'uli pod, stuffed with meat and minced kirani fruit."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "stuffed_gauli_pod"
 	nutriment_amt = 4
@@ -7807,4 +7807,4 @@
 	icon_state = "kirani_jellypuff"
 	nutriment_amt = 8
 	bitesize = 2
-	nutriment_desc = list("puffed minty qa'zal bread" = 1, "super-sweet kiri jelly" = 1)
+	nutriment_desc = list("puffed minty qa'zal bread" = 1, "super-sweet kirani jelly" = 1)
