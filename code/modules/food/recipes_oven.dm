@@ -749,7 +749,7 @@
 
 /datum/recipe/lortl
 	appliance = OVEN
-	fruit = list("q'lort" = 1)
+	fruit = list("qlort" = 1)
 	reagents = list("sodiumchloride" = 1)
 	result_quantity = 3
 	result = /obj/item/reagent_containers/food/snacks/lortl

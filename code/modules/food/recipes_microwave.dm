@@ -1192,6 +1192,7 @@ I said no!
 	items = list()
 	result = /obj/item/storage/box/wings/tray
 
+//// qerrbalak stuff
 /datum/recipe/dynsoup
 	reagents = list("water" = 10)
 	fruit = list("dyn leaf" = 2, "cabbage" = 1, "tomato" = 1)
@@ -1211,11 +1212,11 @@ I said no!
 	result = /obj/item/reagent_containers/food/snacks/stew/neaera
 	reagent_mix = RECIPE_REAGENT_REPLACE
 
-/datum/recipe/fjylozynboiled
-	fruit = list("fjylozyn" = 1)
+/datum/recipe/qalozynboiled
+	fruit = list("qalozyn" = 1)
 	reagents = list("water" = 5)
 	reagent_mix = RECIPE_REAGENT_REPLACE
-	result = /obj/item/reagent_containers/food/snacks/fjylozynboiled
+	result = /obj/item/reagent_containers/food/snacks/qalozynboiled
 
 /datum/recipe/kirani_stew
 	fruit = list("qazal" = 1)

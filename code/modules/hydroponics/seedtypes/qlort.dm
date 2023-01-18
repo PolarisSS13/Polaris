@@ -4,7 +4,7 @@
 	display_name = "q'lort"
 	mutants = null
 	chems = list("nutriment" = list(3, 5))
-	kitchen_tag = "q'lort"
+	kitchen_tag = "qlort"
 
 /datum/seed/qlort/New()
 	..()

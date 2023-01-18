@@ -4465,7 +4465,6 @@
 	glass_name = "kvass"
 	glass_desc = "A hearty glass of Slavic brew."
 
-//ADDITIONS BELOW THIS LINE MADE ON 15/01/2023
 //Querbalak stuff
 /datum/reagent/drink/juice/dyn
 	name = "Dyn juice"

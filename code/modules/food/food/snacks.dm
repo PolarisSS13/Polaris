@@ -7556,7 +7556,7 @@
 
 /obj/item/reagent_containers/food/snacks/stew/neaera
 	name = "neaera stew"
-	desc = "A neaera meat stewed in a mixture of water and dyn juice, garnished with guami and eki. Often cooked in large batches to feed many teshari pack members."
+	desc = "Neaera meat stewed in a mixture of water and dyn juice, garnished with guami and eki. Often cooked in large batches to feed many teshari pack members."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_stew"
 	filling_color = "#7C66DD"
@@ -7650,11 +7650,11 @@
 		fruit_icon_cache["slice-#B1E4BE"] = I
 	add_overlay(fruit_icon_cache["slice-#B1E4BE"])
 
-/obj/item/reagent_containers/food/snacks/fjylozynboiled
-	name = "boiled fjylozyn"
+/obj/item/reagent_containers/food/snacks/qalozynboiled
+	name = "boiled qa'lozyn"
 	desc = "A Qerr'balakian vegetable, normally poisonous, but boiling makes it safe to eat."
 	icon = 'icons/obj/food_syn.dmi'
-	icon_state = "fjylozyn_boiled"
+	icon_state = "qalozyn_boiled"
 	nutriment_amt = 4
 	nutriment_desc = list("sweet turnips" = 4)
 	bitesize = 2
@@ -7663,7 +7663,7 @@
 /obj/item/reagent_containers/food/snacks/garani
 	name = "garani"
 	icon = 'icons/obj/food_syn.dmi'
-	desc = "Neaera liver stuffed with boiled fjylozyn and fried in oil. A popular light meal for teshari."
+	desc = "Neaera liver stuffed with boiled qa'lozyn and fried in oil. A popular light meal for teshari."
 	icon_state = "garani"
 	nutriment_amt = 8
 	nutriment_desc = list("fatty meat" = 4, "sweet turnips" = 4)

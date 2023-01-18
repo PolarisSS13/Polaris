@@ -361,8 +361,8 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/qlortseed
 	seed_type = "qlort"
 
-/obj/item/seeds/fjylozynseed
-	seed_type = "fjylozyn"
+/obj/item/seeds/qalozynseed
+	seed_type = "qalozyn"
 
 /obj/item/seeds/qazal
 	seed_type = "qazal"

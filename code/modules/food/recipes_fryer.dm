@@ -207,8 +207,8 @@
 /datum/recipe/garani
 	appliance = FRYER
 	items = list(
-		/obj/item/reagent_containers/food/snacks/fjylozynboiled,
-		/obj/item/reagent_containers/food/snacks/fjylozynboiled,
+		/obj/item/reagent_containers/food/snacks/qalozynboiled,
+		/obj/item/reagent_containers/food/snacks/qalozynboiled,
 		/obj/item/organ/internal/liver/neaera
 	)
 	result = /obj/item/reagent_containers/food/snacks/garani

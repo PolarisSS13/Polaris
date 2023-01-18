@@ -518,7 +518,7 @@
 					/obj/item/seeds/ekiseed = 3,
 					/obj/item/seeds/guamiseed = 3,
 					/obj/item/seeds/qlortseed = 3,
-					/obj/item/seeds/fjylozynseed = 3,
+					/obj/item/seeds/qalozynseed = 3,
 					/obj/item/seeds/qazal = 3,
 					/obj/item/seeds/gauli = 3,
 					/obj/item/seeds/kirani = 3
