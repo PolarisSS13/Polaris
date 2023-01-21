@@ -1,6 +1,6 @@
 // DM Environment file for baystation12.dme.
 // All manual changes should be made outside the BEGIN_ and END_ blocks.
- // New source code should be placed in .dm files: choose File/New --> Code File.
+// New source code should be placed in .dm files: choose File/New --> Code File.
 // BEGIN_INTERNALS
 // END_INTERNALS
 // BEGIN_FILE_DIR
@@ -434,7 +434,6 @@
 #include "code\datums\wires\explosive.dm"
 #include "code\datums\wires\grid_checker.dm"
 #include "code\datums\wires\jukebox.dm"
-#include "code\datums\wires\mines.dm"
 #include "code\datums\wires\particle_accelerator.dm"
 #include "code\datums\wires\radio.dm"
 #include "code\datums\wires\robot.dm"
@@ -900,7 +899,6 @@
 #include "code\game\objects\effects\glowshroom.dm"
 #include "code\game\objects\effects\item_pickup_ghost.dm"
 #include "code\game\objects\effects\landmarks.dm"
-#include "code\game\objects\effects\mines.dm"
 #include "code\game\objects\effects\misc.dm"
 #include "code\game\objects\effects\overlays.dm"
 #include "code\game\objects\effects\portals.dm"
@@ -1012,6 +1010,18 @@
 #include "code\game\objects\items\devices\radio\jammer.dm"
 #include "code\game\objects\items\devices\radio\radio.dm"
 #include "code\game\objects\items\devices\radio\radiopack.dm"
+#include "code\game\objects\items\mines\_mine.dm"
+#include "code\game\objects\items\mines\_mine_payload.dm"
+#include "code\game\objects\items\mines\mine_assembly.dm"
+#include "code\game\objects\items\mines\mine_dnascamble.dm"
+#include "code\game\objects\items\mines\mine_emp.dm"
+#include "code\game\objects\items\mines\mine_frag.dm"
+#include "code\game\objects\items\mines\mine_incendiary.dm"
+#include "code\game\objects\items\mines\mine_kick.dm"
+#include "code\game\objects\items\mines\mine_napalm.dm"
+#include "code\game\objects\items\mines\mine_sleeping.dm"
+#include "code\game\objects\items\mines\mine_stun.dm"
+#include "code\game\objects\items\mines\mine_training.dm"
 #include "code\game\objects\items\robot\robot_items.dm"
 #include "code\game\objects\items\robot\robot_parts.dm"
 #include "code\game\objects\items\robot\robot_upgrades.dm"
