@@ -149,10 +149,8 @@ var/global/list/slot_equipment_priority = list( \
 /mob/proc/drop_from_inventory(var/obj/item/W, var/atom/target)
 	if(W)
 		remove_from_mob(W, target)
-		if(!(W && W.loc))
-			return 1 // self destroying objects (tk, grabs)
-		return 1
-	return 0
+		return TRUE
+	return FALSE
 
 //Drops the item in our left hand
 /mob/proc/drop_l_hand(var/atom/Target)
@@ -222,8 +220,7 @@ var/global/list/slot_equipment_priority = list( \
 		else
 			I.dropInto(drop_location())
 		I.dropped(src)
-	return 1
-
+	return TRUE
 
 //Returns the item equipped to the specified slot, if any.
 /mob/proc/get_equipped_item(var/slot)
