@@ -24,39 +24,34 @@
 		/obj/item/flashlight = ATTACHED_LIGHT
 	)
 
-	/// The drake that owns this harness.
-	var/mob/living/simple_mob/animal/sif/grafadreka/trained/owner
-
-
 /obj/item/storage/internal/animal_harness/grafadreka/Destroy()
 	attachable_types = null
-	owner = null
 	return ..()
 
 
 /obj/item/storage/internal/animal_harness/grafadreka/Initialize(mapload)
 	attachable_types = grafadreka_attachable_types
 	. = ..()
-	owner = loc
-	if (!istype(owner))
-		log_debug("Drake harness created without a drake!")
-		return INITIALIZE_HINT_QDEL
 
 
 /obj/item/storage/internal/animal_harness/grafadreka/proc/UpdateArmor()
-	if (!owner)
+	var/mob/living/simple_mob/animal/sif/grafadreka/drake = loc
+	if (!istype(drake))
 		return
 	var/obj/item/clothing/accessory/armor = attached_items[ATTACHED_ARMOR]
 	if (!armor)
-		owner.armor = owner.original_armor
+		drake.armor = drake.original_armor
 		return
 	for (var/key in armor.armor)
-		armor[key] = max(owner.original_armor[key], armor.armor[key])
+		armor[key] = max(drake.original_armor[key], armor.armor[key])
 
 
 // Basic trained drake harness contents on spawn
 /obj/item/storage/internal/animal_harness/grafadreka/trained/CreateAttachments()
-	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
+	var/mob/living/owner = loc
+	if (!istype(owner))
+		return
+	attached_items[ATTACHED_RADIO] = new /obj/item/radio(owner)
 	new /obj/item/stack/medical/bruise_pack (src)
 	new /obj/item/stack/medical/ointment (src)
 	var/obj/item/storage/mre/mre_type = pick(typesof(/obj/item/storage/mre) - list(
@@ -69,6 +64,9 @@
 
 // Station/Science drake harness contents on spawn
 /obj/item/storage/internal/animal_harness/grafadreka/expedition/CreateAttachments()
+	var/mob/living/owner = loc
+	if (!istype(owner))
+		return
 	attached_items[ATTACHED_RADIO] = new /obj/item/radio (owner)
 	new /obj/item/stack/medical/bruise_pack (src)
 	new /obj/item/stack/medical/ointment (src)
