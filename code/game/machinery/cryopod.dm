@@ -484,8 +484,9 @@
 	log_and_message_admins("[key_name(to_despawn)] ([to_despawn.mind.role_alt_title]) entered cryostorage.")
 
 	var/datum/job/J = SSjob.get_job(job)
-	announce.autosay("[to_despawn.real_name], [J?.substitute_announce_title || to_despawn.mind.role_alt_title], [on_store_message]", "[on_store_name]", announce_channel, using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE))
-	visible_message("<span class='notice'>\The [initial(name)] [on_store_visible_message_1] [to_despawn.real_name] [on_store_visible_message_2]</span>", 3)
+	if(!J || J.announce_arrival_and_despawn)
+		announce.autosay("[to_despawn.real_name], [J?.substitute_announce_title || to_despawn.mind.role_alt_title], [on_store_message]", "[on_store_name]", announce_channel, using_map.get_map_levels(z, TRUE, om_range = DEFAULT_OVERMAP_RANGE))
+	visible_message(SPAN_NOTICE("\The [initial(name)] [on_store_visible_message_1] [to_despawn.real_name] [on_store_visible_message_2]"), VISIBLE_MESSAGE)
 
 	//This should guarantee that ghosts don't spawn.
 	to_despawn.ckey = null
