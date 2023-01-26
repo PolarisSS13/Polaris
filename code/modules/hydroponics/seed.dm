@@ -21,9 +21,7 @@
 	var/kitchen_tag                // Used by the reagent grinder.
 	var/trash_type                 // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
-	var/has_mob_product            // Mob products. (Dionaea, Walking Mushrooms, Angry Tomatoes)
 	var/apply_color_to_mob = TRUE  // Do we color the mob to match the plant?
-	var/has_item_product           // Item products. (Eggy)
 	var/force_layer
 
 // Making the assumption anything in HYDRO-ponics is capable of processing water, and nutrients commonly associated with it, leaving us with the below to be tweaked.
@@ -72,6 +70,8 @@
 	set_trait(TRAIT_BENEFICIAL_REAG,      null)         // Reagents considered uniquely 'beneficial' by a plant. This should be an associated list of lists, or null. Examples in tray.dm. nested list: health, yield, mut
 	set_trait(TRAIT_MUTAGENIC_REAG,       null)         // Reagents considered uniquely 'mutagenic' by a plant. This should be an associated list, or null. Examples in tray.dm
 	set_trait(TRAIT_TOXIC_REAG,           null)         // Reagents considered uniquely 'toxic' by a plant. This should be an associated list, or null. Examples in tray.dm
+	set_trait(TRAIT_UNIQUE_PRODUCT,       null)			// If set, the plant will produce an atom of that type. May be an item or mob. Examples: Killer tomato, Diona
+	set_trait(TRAIT_SPEAKING,             FALSE)		// If True, the plant will whisper or talk. Produce will occasionally become talkative.
 
 	spawn(5)
 		sleep(-1)
@@ -544,10 +544,16 @@
 		set_trait(TRAIT_SPORING,1)
 
 	if(prob(5))
+		var/unique_product_path
 		if(prob(30))
-			has_mob_product = pickweight(GLOB.plant_mob_products)
+			unique_product_path = pickweight(GLOB.plant_mob_products)
 		else
-			has_item_product = pickweight(GLOB.plant_item_products)
+			unique_product_path = pickweight(GLOB.plant_item_products)
+
+		set_trait(TRAIT_UNIQUE_PRODUCT, unique_product_path)
+
+	if(prob(1))
+		set_trait(TRAIT_SPEAKING, !get_trait(TRAIT_SPEAKING))
 
 	set_trait(TRAIT_ENDURANCE,rand(60,100))
 	set_trait(TRAIT_YIELD,rand(3,15))
@@ -649,7 +655,18 @@
 					else
 						source_turf.visible_message("<span class='notice'>\The [display_name]'s glow dims...</span>")
 			if(11)
-				set_trait(TRAIT_TELEPORTING,1)
+				if(prob(degree*2))
+					set_trait(TRAIT_TELEPORTING, !get_trait(TRAIT_TELEPORTING))
+				if(prob(degree))
+					var/unique_product_path
+					if(prob(30))
+						unique_product_path = pickweight(GLOB.plant_mob_products)
+					else
+						unique_product_path = pickweight(GLOB.plant_item_products)
+
+					set_trait(TRAIT_UNIQUE_PRODUCT, unique_product_path)
+				if(prob(degree*2))
+					set_trait(TRAIT_SPEAKING, !get_trait(TRAIT_SPEAKING))
 
 	return
 
@@ -708,10 +725,6 @@
 			var/list/new_gasses = gene.values["[TRAIT_CONSUME_GASSES]"]
 			consume_gasses |= new_gasses
 			gene.values["[TRAIT_CONSUME_GASSES]"] = null
-		if(GENE_METABOLISM)
-			has_mob_product = gene.values["mob_product"]
-			has_item_product = gene.values["item_product"]
-			gene.values["mob_product"] = null
 
 	for(var/trait in gene.values)
 		set_trait(trait,gene.values["[trait]"])
@@ -740,8 +753,6 @@
 		if(GENE_HARDINESS)
 			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
 		if(GENE_METABOLISM)
-			P.values["mob_product"] = has_mob_product
-			P.values["item_product"] = has_item_product
 			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
 		if(GENE_VIGOUR)
 			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
@@ -757,7 +768,7 @@
 		if(GENE_FRUIT)
 			traits_to_copy = list(TRAIT_STINGS,TRAIT_EXPLOSIVE,TRAIT_FLESH_COLOUR,TRAIT_JUICY)
 		if(GENE_SPECIAL)
-			traits_to_copy = list(TRAIT_TELEPORTING)
+			traits_to_copy = list(TRAIT_TELEPORTING, TRAIT_UNIQUE_PRODUCT, TRAIT_SPEAKING)
 
 	for(var/trait in traits_to_copy)
 		P.values["[trait]"] = get_trait(trait)
@@ -804,12 +815,11 @@
 					total_yield = get_trait(TRAIT_YIELD) + rand(yield_mod)
 				total_yield = max(1,total_yield)
 
+		var/path_product = get_trait(TRAIT_UNIQUE_PRODUCT)
 		for(var/i = 0;i<total_yield;i++)
 			var/obj/item/product
-			if(has_mob_product)
-				product = new has_mob_product(get_turf(user),name)
-			else if(has_item_product)
-				product = new has_item_product(get_turf(user))
+			if(path_product)
+				product = new path_product(get_turf(user))
 			else
 				product = new /obj/item/reagent_containers/food/snacks/grown(get_turf(user),name)
 			if (get_trait(TRAIT_PRODUCT_COLOUR))
@@ -834,6 +844,9 @@
 			if(istype(product,/mob/living))
 				product.visible_message("<span class='notice'>The pod disgorges [product]!</span>")
 				handle_living_product(product)
+			else
+				if(get_trait(TRAIT_SPEAKING) && prob(3))
+					product.talking_atom = new /datum/talking_atom(product)
 
 // When the seed in this machine mutates/is modified, the tray seed value
 // is set to a new datum copied from the original. This datum won't actually
@@ -850,8 +863,6 @@
 	new_seed.can_self_harvest = can_self_harvest
 	new_seed.kitchen_tag =      kitchen_tag
 	new_seed.trash_type =       trash_type
-	new_seed.has_mob_product =  has_mob_product
-	new_seed.has_item_product = has_item_product
 
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()

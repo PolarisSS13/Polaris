@@ -28,4 +28,7 @@
 	kitchen_tag = "egg-plant"
 	mutants = null
 	chems = list("nutriment" = list(1,5), "egg" = list(3,12))
-	has_item_product = /obj/item/reagent_containers/food/snacks/egg/purple
+
+/datum/seed/eggplant/egg/New()
+	..()
+	set_trait(TRAIT_UNIQUE_PRODUCT, /obj/item/reagent_containers/food/snacks/egg/purple)

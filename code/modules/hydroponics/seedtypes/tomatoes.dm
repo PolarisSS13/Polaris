@@ -41,10 +41,10 @@
 	display_name = "killer tomato plant"
 	mutants = null
 	can_self_harvest = 1
-	has_mob_product = /mob/living/simple_mob/tomato
 
 /datum/seed/tomato/killer/New()
 	..()
+	set_trait(TRAIT_UNIQUE_PRODUCT, /mob/living/simple_mob/tomato)
 	set_trait(TRAIT_YIELD,2)
 	set_trait(TRAIT_PRODUCT_COLOUR,"#A86747")
 

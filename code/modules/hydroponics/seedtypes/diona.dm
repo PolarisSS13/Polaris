@@ -5,7 +5,6 @@
 	display_name = "replicant pods"
 	can_self_harvest = 1
 	apply_color_to_mob = FALSE
-	has_mob_product = /mob/living/carbon/alien/diona
 
 /datum/seed/diona/New()
 	..()
@@ -19,3 +18,4 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#799957")
 	set_trait(TRAIT_PLANT_COLOUR,"#66804B")
 	set_trait(TRAIT_PLANT_ICON,"alien4")
+	set_trait(TRAIT_UNIQUE_PRODUCT, /mob/living/carbon/alien/diona)

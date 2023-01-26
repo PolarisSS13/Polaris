@@ -187,6 +187,9 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 /obj/item/seeds/plumpmycelium
 	seed_type = "plumphelmet"
 
+/obj/item/seeds/brainmycelium
+	seed_type = "braincap"
+
 /obj/item/seeds/plastellmycelium
 	seed_type = "plastic"
 

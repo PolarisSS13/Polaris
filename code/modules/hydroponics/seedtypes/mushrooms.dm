@@ -43,7 +43,7 @@
 	name = "plumphelmet"
 	seed_name = "plump helmet"
 	display_name = "plump helmet mushrooms"
-	mutants = list("walkingmushroom","towercap")
+	mutants = list("walkingmushroom","towercap", "braincap")
 	chems = list("nutriment" = list(2,10))
 	kitchen_tag = "plumphelmet"
 
@@ -132,7 +132,6 @@
 	display_name = "tower caps"
 	chems = list("woodpulp" = list(10,1))
 	mutants = list("redcap")
-	has_item_product = /obj/item/stack/material/log
 
 /datum/seed/mushroom/towercap/New()
 	..()
@@ -141,18 +140,18 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#79A36D")
 	set_trait(TRAIT_PLANT_COLOUR,"#857F41")
 	set_trait(TRAIT_PLANT_ICON,"mushroom8")
-
+	set_trait(TRAIT_UNIQUE_PRODUCT, /obj/item/stack/material/log)
 /datum/seed/mushroom/towercap/red
 	name = "redcap"
 	seed_name = "red cap"
 	display_name = "red caps"
 	chems = list("woodpulp" = list(10,1), "tannin" = list(1,10))
 	mutants = null
-	has_item_product = null
 
 /datum/seed/mushroom/towercap/red/New()
 	..()
 	set_trait(TRAIT_PRODUCT_COLOUR,"#b81414")
+	set_trait(TRAIT_UNIQUE_PRODUCT, null)
 
 /datum/seed/mushroom/glowshroom
 	name = "glowshroom"
@@ -210,3 +209,23 @@
 	set_trait(TRAIT_PLANT_COLOUR,"#f8e6f4")
 	set_trait(TRAIT_PLANT_ICON,"mushroom9")
 	set_trait(TRAIT_SPORING, TRUE)
+
+/datum/seed/mushroom/thinker
+	name = "braincap"
+	seed_name = "brain cap"
+	display_name = "brain cap sporangium"
+	mutants = list("walkingmushroom","towercap", "braincap")
+	chems = list("nutriment" = list(2,10), )
+	kitchen_tag = "braincap"
+
+/datum/seed/mushroom/thinker/New()
+	..()
+	set_trait(TRAIT_MATURATION,7)
+	set_trait(TRAIT_YIELD,3)
+	set_trait(TRAIT_POTENCY,5)
+	set_trait(TRAIT_PRODUCT_ICON,"mushroom9")
+	set_trait(TRAIT_PRODUCT_COLOUR,"#b33b55")
+	set_trait(TRAIT_PLANT_COLOUR,"#92002c")
+	set_trait(TRAIT_PLANT_ICON,"mushroom7")
+	set_trait(TRAIT_LIGHT_TOLERANCE, 3)
+	set_trait(TRAIT_SPEAKING, TRUE)

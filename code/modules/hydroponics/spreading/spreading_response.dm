@@ -93,7 +93,7 @@
 	if(has_buckled_mobs())
 		return
 
-	if(victim.buckled || victim.anchored)
+	if(victim.buckled || victim.anchored || victim.faction == "plant")
 		return
 
 	//grabbing people

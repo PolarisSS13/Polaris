@@ -136,7 +136,7 @@
 
 /obj/machinery/portable_atmospherics/hydroponics/attack_ghost(var/mob/observer/dead/user)
 
-	if(!(harvest && seed && seed.has_mob_product))
+	if(!(harvest && seed && istype(seed.get_trait(TRAIT_UNIQUE_PRODUCT), /mob/living)))
 		return
 
 	var/datum/ghosttrap/plant/G = get_ghost_trap("living plant")
@@ -234,6 +234,9 @@
 	update_icon()
 
 /obj/machinery/portable_atmospherics/hydroponics/proc/die()
+	if(seed.get_trait(TRAIT_SPEAKING))
+		visible_message("\The [seed.display_name] whimpers," + SPAN_OCCULT("[pick(" \"Sorry.. we're sorry..\""," \"It's quiet...\""," \"So it goes...\"")]"), SPAN_NOTICE("Something mumbles nearby."))
+
 	dead = 1
 	mutation_level = 0
 	harvest = 0
@@ -320,6 +323,11 @@
 		seed.harvest(user,yield_mod)
 	else
 		seed.harvest(get_turf(src),yield_mod)
+
+	if(seed.get_trait(TRAIT_SPEAKING) && prob(80))
+		visible_message("\The [seed.display_name] [pick("whines","mumbles","mutters")], " + SPAN_OCCULT("[pick("\"That's not yours...\"", "\"Why..?\"", "\"Okay...\"", "\"Stop it...\"")]"), range = 2)
+
+
 	// Reset values.
 	harvest = 0
 	lastproduce = age
@@ -359,7 +367,10 @@
 /obj/machinery/portable_atmospherics/hydroponics/proc/weed_invasion()
 
 	//Remove the seed if something is already planted.
-	if(seed) seed = null
+	if(seed)
+		if(!dead && seed.get_trait(TRAIT_SPEAKING))
+			visible_message("\The [seed.display_name] whimpers," + SPAN_OCCULT("[pick(" \"Sorry.. we're sorry..\""," \"It hurts...\""," \"So it goes...\"")]"), SPAN_NOTICE("Something mumbles nearby."))
+		seed = null
 	seed = plant_controller.seeds[pick(list("reishi","nettle","amanita","mushrooms","plumphelmet","towercap","harebells","weeds"))]
 	if(!seed) return //Weed does not exist, someone fucked up.
 
@@ -453,6 +464,10 @@
 
 	dead = 0
 	mutate(1)
+
+	if(seed.get_trait(TRAIT_SPEAKING) && prob(90))
+		visible_message("\The [seed.display_name] mutters," + SPAN_OCCULT("[pick(" \"Good as new...\""," \"Right as rain...\""," \"Yaay...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+
 	age = 0
 	health = seed.get_trait(TRAIT_ENDURANCE)
 	lastcycle = world.time
@@ -484,6 +499,9 @@
 			return
 
 		// Create a sample.
+		if(seed.get_trait(TRAIT_SPEAKING) && prob(30))
+			visible_message("\The [seed.display_name] growls," + SPAN_OCCULT("[pick(" \"What is that for..\""," \"It hurts...\""," \"Mean...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+
 		seed.harvest(user,yield_mod,1)
 		health -= (rand(3,5)*10)
 
@@ -531,7 +549,10 @@
 			plant_seeds(S)
 
 		else
-			to_chat(user, "<span class='danger'>\The [src] already has seeds in it!</span>")
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(20))
+				visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Occupied..\""," \"We're here already...\""," \"Stop it...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+			else
+				to_chat(user, "<span class='danger'>\The [src] already has seeds in it!</span>")
 
 	else if (istype(O, /obj/item/material/minihoe))  // The minihoe
 
@@ -539,6 +560,11 @@
 			user.visible_message("<span class='danger'>[user] starts uprooting the weeds.</span>", "<span class='danger'>You remove the weeds from the [src].</span>")
 			weedlevel = 0
 			update_icon()
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(70))
+				visible_message("\The [seed.display_name] sighs," + SPAN_OCCULT("[pick(" \"Thank you...\""," \"...Nice...\""," \"Thanks...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+				for(var/obj/machinery/portable_atmospherics/hydroponics/Hydro in oview(world.view, get_turf(src)))
+					if(Hydro.seed && Hydro.seed.get_trait(TRAIT_SPEAKING) && Hydro.weedlevel > 0 && prob(10))
+						Hydro.visible_message("\The [seed.display_name] whines," + SPAN_OCCULT("[pick(" \"Us too..\""," \"It's cramped...\""," \"Help...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 		else
 			to_chat(user, "<span class='danger'>This plot is completely devoid of weeds. It doesn't need uprooting.</span>")
 
@@ -553,7 +579,8 @@
 			S.handle_item_insertion(G, 1)
 
 	else if ( istype(O, /obj/item/plantspray) )
-
+		if(seed && !dead && seed.get_trait(TRAIT_SPEAKING) && prob(30))
+			visible_message("\The [seed.display_name] hisses," + SPAN_OCCULT("[pick(" \"Gross..\""," \"It hurts...\""," \"Regret it...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 		var/obj/item/plantspray/spray = O
 		user.remove_from_mob(O)
 		toxins += spray.toxicity
@@ -590,6 +617,8 @@
 		user.setClickCooldown(user.get_attack_speed(O))
 		user.visible_message("<span class='danger'>\The [seed.display_name] has been attacked by [user] with \the [O]!</span>")
 		if(!dead)
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(10))
+				visible_message("\The [seed.display_name] whimpers," + SPAN_OCCULT("[pick(" \"Sorry.. we're sorry..\""," \"It hurts...\""," \"No..!\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 			health -= O.force
 			check_health()
 

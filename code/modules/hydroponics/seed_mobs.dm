@@ -20,3 +20,34 @@
 				var/obj/item/seeds/S = new(get_turf(host))
 				S.seed_type = name
 				S.update_seed()
+
+// Returns null, if the plant doesn't produce mobs, or the mob produced.
+/datum/seed/proc/create_hostile_mob(var/turf/T)
+	if(!T)
+		return
+
+	if(ispath(get_trait(TRAIT_UNIQUE_PRODUCT), /mob/living))
+		var/MobPath = get_trait(TRAIT_UNIQUE_PRODUCT)
+		var/mob/living/L = new MobPath(T)
+		L.faction = "plant"	// Plants together strong.
+
+		if(!L.ai_holder)
+			if(ishuman(L))	// By default, the only humanoid that plants can make is a monkey. Hence, prior reference.
+				L.ai_holder = new /datum/ai_holder/simple_mob/humanoid/hostile(L)
+				L.a_intent = I_HURT
+				if(!L.hud_used)
+					L.hud_used = new /datum/hud(L)
+					L.create_mob_hud(L.hud_used)
+			else
+				L.ai_holder = new /datum/ai_holder/simple_mob/guard(L)
+			L.ai_holder.hostile = TRUE
+		else
+			L.ai_holder.hostile = TRUE
+
+		if(ishuman(L))
+			var/mob/living/carbon/human/H = L
+			H.real_name = "[display_name] [H.real_name]"
+
+		L.name = "[display_name] [L.name]"
+
+		return L

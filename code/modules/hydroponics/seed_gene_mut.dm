@@ -139,3 +139,15 @@
 /decl/plantgene/special/mutate(var/datum/seed/S)
 	if(prob(65))
 		S.set_trait(TRAIT_TELEPORTING, !S.get_trait(TRAIT_TELEPORTING))
+
+	if(prob(20))
+		var/unique_product_path
+		if(prob(30))
+			unique_product_path = pickweight(GLOB.plant_mob_products)
+		else
+			unique_product_path = pickweight(GLOB.plant_item_products)
+
+		S.set_trait(TRAIT_UNIQUE_PRODUCT, unique_product_path)
+
+	if(prob(20))
+		S.set_trait(TRAIT_SPEAKING, !S.get_trait(TRAIT_SPEAKING))

@@ -41,6 +41,12 @@
 		if(neighbor.seed == src.seed)
 			neighbor.neighbors -= T
 
+/obj/effect/plant/proc/count_nearby_mobs()
+	. = 0
+	for(var/mob/living/L in range(world.view, src))
+		if(L.stat != DEAD)
+			. += 1
+
 /obj/effect/plant/process()
 
 	// Something is very wrong, kill ourselves.
@@ -94,12 +100,34 @@
 		if(!has_buckled_mobs())
 			for(var/turf/neighbor in neighbors)
 				for(var/mob/living/M in neighbor)
-					if(seed.get_trait(TRAIT_SPREAD) >= 2 && (M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)))))
+					if(seed.get_trait(TRAIT_SPREAD) >= 2 && (M.faction != "plant") &&(M.lying || prob(round(seed.get_trait(TRAIT_POTENCY)))) && (!M.faction != "plant"))
 						entangle(M)
 
 		if(seed.get_trait(TRAIT_SPORING) && prob(1))
 			visible_message(SPAN_WARNING("\The [src] hisses, releasing a cloud of spores!"), SPAN_WARNING("Something nearby hisses loudly!"))
 			seed.create_spores(get_turf(src))
+
+		if(prob(1) && (ispath(seed.get_trait(TRAIT_UNIQUE_PRODUCT), /mob/living)) && (count_nearby_mobs() < 3))
+			var/mob/living/Offspring = seed.create_hostile_mob(get_turf(src))
+			if(istype(Offspring))
+				visible_message(SPAN_DANGER("\The [src] disgorges \the [Offspring]!"))
+
+		if(seed.get_trait(TRAIT_SPEAKING) && prob(5))
+			visible_message(SPAN_OCCULT("\The [src] whispers [pick("strangely","uncomfortably","disturbingly","serenely")]."), SPAN_WARNING("Something nearby mumbles."))
+			visible_message(SPAN_NOTICE("\The [src] whispers,")+ SPAN_OCCULT("[pick(\
+			"\"You smell nice...\"",\
+			"\"I see you...\"",\
+			"\"Stop and smell \the [seed.display_name]s...\"",\
+			"\"Are you still there...\"",\
+			"\"Come back...\"",\
+			"\"Don't fight...\"",\
+			"\"A fine garden...\"",\
+			"\"Too much..?\"",\
+			"\"We'll be here...\"",\
+			"\"To the stars...\"",\
+			"\"They're just [seed.seed_noun]\"",\
+			"\"Bones are great fertilizer...\""\
+			)]."), SPAN_OCCULT("Something's whispering to you."), range = 2)
 
 		if(length(neighbors) && prob(spread_chance))
 			//spread to 1-3 adjacent turfs depending on yield trait.

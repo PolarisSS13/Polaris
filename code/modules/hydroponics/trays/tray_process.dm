@@ -62,8 +62,15 @@
 	var/healthmod = rand(1,3) * HYDRO_SPEED_MULTIPLIER
 	if(seed.get_trait(TRAIT_REQUIRES_NUTRIENTS) && prob(35))
 		health += (nutrilevel < 2 ? -healthmod : healthmod)
+
+		if(seed.get_trait(TRAIT_SPEAKING) && nutrilevel < 2 && prob(20))
+			visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Hungry..\""," \"Food..?\""," \"Help...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+
 	if(seed.get_trait(TRAIT_REQUIRES_WATER) && prob(35))
 		health += (waterlevel < 10 ? -healthmod : healthmod)
+
+		if(seed.get_trait(TRAIT_SPEAKING) && waterlevel < 10 && prob(20))
+			visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Thirsty..\""," \"Water..?\""," \"Help...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 
 	// Check that pressure, heat and light are all within bounds.
 	// First, handle an open system or an unconnected closed system.
@@ -92,6 +99,10 @@
 		var/toxin_uptake = max(1,round(toxins/10))
 		if(toxins > seed.get_trait(TRAIT_TOXINS_TOLERANCE))
 			health -= toxin_uptake
+
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(10))
+				visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Gross..\""," \"Not tasty...\""," \"Eww...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+
 		toxins -= toxin_uptake
 
 	// Check for pests and weeds.
@@ -100,16 +111,29 @@
 		if(seed.get_trait(TRAIT_CARNIVOROUS))
 			health += HYDRO_SPEED_MULTIPLIER
 			pestlevel -= HYDRO_SPEED_MULTIPLIER
+
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(5))
+				visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Munch...\""," \"Crunch...\""," \"Haha...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 		else if (pestlevel >= seed.get_trait(TRAIT_PEST_TOLERANCE))
 			health -= HYDRO_SPEED_MULTIPLIER
+
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(5))
+				visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Ow...\""," \"Biting...\""," \"Help...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 
 	// Some plants thrive and live off of weeds.
 	if(weedlevel > 0)
 		if(seed.get_trait(TRAIT_PARASITE))
 			health += HYDRO_SPEED_MULTIPLIER
 			weedlevel -= HYDRO_SPEED_MULTIPLIER
+
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(5))
+				visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Sip...\""," \"Sup...\""," \"Haha...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
+
 		else if (weedlevel >= seed.get_trait(TRAIT_WEED_TOLERANCE))
 			health -= HYDRO_SPEED_MULTIPLIER
+
+			if(seed.get_trait(TRAIT_SPEAKING) && prob(5))
+				visible_message("\The [seed.display_name] mumbles," + SPAN_OCCULT("[pick(" \"Cramped...\""," \"Occupied...\""," \"Help...\"")]"), SPAN_NOTICE("Something mumbles nearby."), range = 2)
 
 	// Handle life and death.
 	// When the plant dies, weeds thrive and pests die off.

@@ -7,7 +7,6 @@
 	chems = list("nutriment" = list(1,10), "protein" = list(1,5), "enzyme" = list(0,3))
 	kitchen_tag = "wabback"
 	mutants = list("blackwabback","wildwabback")
-	has_item_product = /obj/item/stack/material/cloth
 
 /datum/seed/wabback/New()
 	..()
@@ -25,7 +24,7 @@
 	set_trait(TRAIT_CARNIVOROUS,1)
 	set_trait(TRAIT_HARVEST_REPEAT,1)
 	set_trait(TRAIT_SPREAD,1)
-
+	set_trait(TRAIT_UNIQUE_PRODUCT, /obj/item/stack/material/cloth)
 /datum/seed/wabback/vine
 	name = "blackwabback"
 	seed_name = "black wabback"
@@ -43,7 +42,6 @@
 	seed_name = "wild wabback"
 	display_name = "wild wabback"
 	mutants = list("whitewabback")
-	has_item_product = null
 	chems = list("nutriment" = list(1,15), "protein" = list(0,2), "enzyme" = list(0,1))
 
 /datum/seed/wabback/wild/New()
@@ -52,3 +50,4 @@
 	set_trait(TRAIT_WATER_CONSUMPTION, 7)
 	set_trait(TRAIT_NUTRIENT_CONSUMPTION, 0.1)
 	set_trait(TRAIT_YIELD,5)
+	set_trait(TRAIT_UNIQUE_PRODUCT, null)

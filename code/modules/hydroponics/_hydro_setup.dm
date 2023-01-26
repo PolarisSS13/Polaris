@@ -62,6 +62,8 @@
 #define TRAIT_BENEFICIAL_REAG      41
 #define TRAIT_MUTAGENIC_REAG       42
 #define TRAIT_TOXIC_REAG           43
+#define TRAIT_UNIQUE_PRODUCT       44
+#define TRAIT_SPEAKING             45
 
 // Global list initialization for plants.
 
