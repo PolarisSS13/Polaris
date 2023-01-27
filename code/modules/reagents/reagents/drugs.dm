@@ -171,6 +171,76 @@
 			M.emote(pick("twitch", "giggle"))
 			prob_proc = FALSE
 
+/datum/reagent/drugs/braindance
+	name = "Braindance"
+	id = "braindance"
+	description = "A strange fluid typically derived from a sentient fungus. It sometimes moves on its own."
+	taste_description = "nostalgia"
+	color = "#9f6db6"
+	high_message_list = list("Your mind drifts to a time long ago...",
+	"You've been here before...",
+	"It's all so familiar...",
+	"It feels like you've fallen through time...")
+	sober_message_list = list("Where did the time go?", "You feel painfully nostalgic.", "You feel.. homesick.")
+
+	affects_robots = TRUE	// Sapient fungus goo, interacts with robots.
+	affects_dead = TRUE
+
+/datum/reagent/drugs/braindance/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	..()
+
+	var/threshold = 5 * M.species.chem_strength_tox
+	if(alien == IS_SKRELL)
+		threshold = 1.2
+
+	if(alien == IS_SLIME)
+		threshold = 0.8
+
+	M.druggy = max(M.druggy, 30)
+
+	var/effective_dose = dose
+	if(issmall(M))
+		effective_dose *= 2
+	if(effective_dose < 1 * threshold)
+		M.apply_effect(3, DROWSY)
+		if(prob(5))
+			M.Move(get_step(M, M.dir))
+		if(prob(1) && prob_proc == TRUE)
+			to_chat(M, SPAN_OCCULT("[pick("Drifting", "Floating", "Walking", "Flying", "Hovering")] away, on a [pick("cold", "warm", "mild", "chilly", "hot")] [pick("Summer", "Winter", "Autumnal", "Spring")] [pick("Day","Morning","Noon","Afternoon","Evening","Night","Midnight")]...."))
+			prob_proc = FALSE
+	else if(effective_dose < 2 * threshold)
+		M.apply_effect(4, DROWSY)
+		if(prob(7))
+			M.Move(get_step(M, M.dir))
+		if(prob(1) && prob_proc == TRUE)
+			to_chat(M, SPAN_OCCULT("Just like yesterday... [pick("everything changed...","they left...","they arrived...","it started...","it began...")]"))
+			prob_proc = FALSE
+	else
+		M.apply_effect(5, DROWSY)
+		M.make_dizzy(3)
+		M.adjustHalLoss(effective_dose / 10 * removed)
+		if(prob(10))
+			M.Move(get_step(M, M.dir))
+		if(prob(1) && prob_proc == TRUE)
+			to_chat(M, SPAN_OCCULT("Then everything [pick("flew", "moved", "bounced", "jolted")] [pick("up","down","left","right","forward","backward","that way","this way")] and [pick("started over", "changed again", "reset", "ended")] that day.."))
+			prob_proc = FALSE
+
+/datum/reagent/drugs/braindance/overdose(var/mob/living/M as mob)
+	if(prob_proc == TRUE && prob(40))
+		M.hallucination = max(M.hallucination, round(dose * REM))
+		prob_proc = FALSE
+
+	M.apply_effect(3, EYE_BLUR)
+
+	if(!M.isSynthetic(M))
+		M.adjustBrainLoss(-0.1 * REM)
+		M.adjustToxLoss(0.5*REM)
+
+	else
+		M.adjustToxLoss(REM)
+
+	..()
+
 /datum/reagent/drugs/talum_quem
 	name = "Talum-quem"
 	id = "talum_quem"

@@ -214,8 +214,8 @@
 	name = "braincap"
 	seed_name = "brain cap"
 	display_name = "brain cap sporangium"
-	mutants = list("walkingmushroom","towercap", "braincap")
-	chems = list("nutriment" = list(2,10), )
+	mutants = null
+	chems = list("nutriment" = list(2,10), "braindance" = list(2,4), "dmt" = list(3,6))
 	kitchen_tag = "braincap"
 
 /datum/seed/mushroom/thinker/New()
