@@ -92,6 +92,14 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	eyeblur = 5
 	fire_sound = 'sound/effects/splat.ogg'
 
+/obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
+	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
+	if(ishuman(target))
+		stun = 0
+		weaken = 0
+		var/mob/living/carbon/human/victim = target
+		victim.AdjustConfused(3)
+	. = ..()
 
 /obj/item/projectile/drake_spit/weak
 	stun = 0
