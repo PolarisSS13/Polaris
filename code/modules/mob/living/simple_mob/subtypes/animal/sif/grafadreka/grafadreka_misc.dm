@@ -95,15 +95,15 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
 	if(ishuman(target))
+		var/mob/living/carbon/human/victim = target
+		victim.AdjustConfused(max(stun, weaken))
 		stun = 0
 		weaken = 0
-		var/mob/living/carbon/human/victim = target
-		victim.AdjustConfused(3)
-	. = ..()
+		. = ..()
 
 /obj/item/projectile/drake_spit/weak
-	stun = 0
-	weaken = 0
+	stun = 1
+	weaken = 1
 	eyeblur = 2
 
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
