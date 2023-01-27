@@ -87,6 +87,7 @@ var/global/const/access_explorer = 43
 	offmap_spawn = TRUE
 	substitute_announce_title = "Colonist"
 	banned_job_species = null
+	announce_arrival_and_despawn = FALSE
 	alt_titles = list(
 		CRASH_SURVIVOR_TITLE = /datum/alt_title/crash_survivor,
 		DRAKE_SURVIVOR_TITLE = /datum/alt_title/working_drake

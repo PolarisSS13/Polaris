@@ -450,11 +450,12 @@
 
 	ticker.mode.latespawn(character)
 
+	var/do_announce = join_props["announce"] && join_message && announce_channel
 	if(J.mob_type & JOB_SILICON)
-		if(join_message && announce_channel)
+		if(do_announce)
 			AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
 	else
-		if(join_message && announce_channel)
+		if(do_announce)
 			AnnounceArrival(character, J?.substitute_announce_title || rank, join_message, announce_channel, character.z)
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
