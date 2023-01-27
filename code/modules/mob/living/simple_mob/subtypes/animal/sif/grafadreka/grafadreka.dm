@@ -104,6 +104,8 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	return ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
+	if(is_baby)
+		verbs |= /mob/living/proc/hide
 	stored_sap = rand(20, 30)
 	nutrition = rand(400,500)
 	if (gender == NEUTER)
