@@ -131,12 +131,10 @@
 
 /mob/living/simple_mob/animal/examine(mob/living/user)
 	. = ..()
-	if (!harness)
-		return
-	. += "\The [src] is wearing \a [harness]."
-	for (var/obj/item/item in harness.GetAttachedItems())
-		. += "There is \a [item] attached."
-
+	if (harness)
+		. += "\The [src] is wearing \a [harness]."
+		for (var/obj/item/item in harness.GetAttachedItems())
+			. += "There is \a [item] attached."
 
 /mob/living/simple_mob/animal/proc/RemoveAttachmentVerb()
 	set name = "Remove Harness Attachment"

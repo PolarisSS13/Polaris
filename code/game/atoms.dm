@@ -212,6 +212,8 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 			found += A.search_contents_for(path,filter_path)
 	return found
 
+/atom/proc/get_examine_desc()
+	return desc
 
 /atom/proc/examine(mob/user, infix = "", suffix = "")
 	var/f_name = "\a [src][infix]."
@@ -224,7 +226,7 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 			f_name += "<span class='danger'>blood-stained</span> [name][infix]!"
 		else
 			f_name += "oil-stained [name][infix]."
-	var/list/output = list("[bicon(src)] That's [f_name] [suffix]", desc)
+	var/list/output = list("[bicon(src)] That's [f_name] [suffix]", get_examine_desc())
 	if (user.client?.prefs.examine_text_mode == EXAMINE_MODE_SWITCH_TO_PANEL)
 		user.client.statpanel = "Examine"
 	else if (user.client)

@@ -32,10 +32,8 @@
 /decl/mob_organ_names/quadruped //Most subtypes have this basic body layout.
 	hit_zones = list("head", "torso", "left foreleg", "right foreleg", "left hind leg", "right hind leg", "tail")
 
-/mob/living/simple_mob/animal/examine(var/mob/user)
-	. = ..()
-	if(flavor_text)
-		. += flavor_text
+/mob/living/simple_mob/animal/get_examine_desc()
+	return flavor_text || desc
 
 /mob/living/simple_mob/animal/verb/set_flavour_text()
 	set name = "Set Flavour Text"
