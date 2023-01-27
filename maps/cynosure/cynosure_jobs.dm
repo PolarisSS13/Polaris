@@ -285,9 +285,8 @@ var/global/const/access_explorer = 43
 			for(var/language in P.alternate_languages)
 				LAZYDISTINCTADD(drake.understands_languages, language)
 
-			var/obj/item/storage/internal/animal_harness/grafadreka/harness = drake.harness
-			if (istype(harness))
-				var/obj/item/gps/gps = harness.attached_items[harness.ATTACHED_GPS]
+			if (drake.harness?.attached_items)
+				var/obj/item/gps/gps = drake.harness.attached_items[drake.harness.ATTACHED_GPS]
 				if (gps)
 					gps.SetTag(drake.name)
 
@@ -327,7 +326,7 @@ var/global/const/access_explorer = 43
 	access = list(access_explorer, access_research)
 
 
-/obj/item/storage/internal/animal_harness/grafadreka/expedition
+/obj/item/storage/animal_harness/grafadreka/expedition
 	name = "expedition harness"
 	color = null
 	icon_state = "explorer"
@@ -351,7 +350,7 @@ var/global/const/access_explorer = 43
 
 
 // Station/Science drake harness contents on spawn
-/obj/item/storage/internal/animal_harness/grafadreka/expedition/CreateAttachments()
+/obj/item/storage/animal_harness/grafadreka/expedition/CreateAttachments()
 	var/mob/living/owner = loc
 	if(!istype(owner))
 		return
@@ -371,7 +370,7 @@ var/global/const/access_explorer = 43
 You have been <b>trained by the Xenobiology department</b> to assist with expeditions and field work, and are an official part of the Exploration staff."
 You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> (on <b><font color = '#009900'>help intent</font></b>).
 Using <font color='#e0a000'>grab intent</font> you can pick up and drop items by clicking them or yourself, and can interact with some simple machines like buttons and levers."}
-	harness = /obj/item/storage/internal/animal_harness/grafadreka/expedition
+	harness = /obj/item/storage/animal_harness/grafadreka/expedition
 
 /obj/item/book/manual/drake_handling
 	name = "Care And Handling Of The Sivian Snow Drake v0.1.12b"

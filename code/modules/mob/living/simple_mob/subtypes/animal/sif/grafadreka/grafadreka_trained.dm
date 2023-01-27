@@ -9,83 +9,12 @@ Using <font color='#e0a000'>grab intent</font> you can pick up and drop items by
 	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
 	movement_cooldown = 1.5 // ~~Red~~ trained ones go faster.
 	dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
-	harness = /obj/item/storage/internal/animal_harness/grafadreka/trained
+	harness = /obj/item/storage/animal_harness/grafadreka/trained
 	trained_drake = TRUE
 	understands_languages = list(
 		LANGUAGE_GALCOM,
 		LANGUAGE_SIVIAN
 	)
-
-	/// On clicking with an item, stuff that should use behaviors instead of being placed in storage.
-	var/static/list/allow_type_to_pass = list(
-		/obj/item/healthanalyzer,
-		/obj/item/stack/medical,
-		/obj/item/reagent_containers/syringe,
-		/obj/item/shockpaddles
-	)
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Destroy()
-	if (istype(harness))
-		QDEL_NULL(harness)
-	return ..()
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/GetIdCard()
-	return harness?.GetIdCard()
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/add_glow()
-	. = ..()
-	if (. && harness)
-		var/image/I = .
-		I.icon_state = "[I.icon_state]-[harness.icon_state]"
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Logout()
-	..()
-	if (stat != DEAD)
-		lying = TRUE
-		resting = TRUE
-		sitting = FALSE
-		Sleeping(2)
-		update_icon()
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/Login()
-	..()
-	SetSleeping(0)
-	update_icon()
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/attack_hand(mob/living/user)
-	// Permit headpats/smacks
-	if (!harness || user.a_intent == I_HURT || (user.a_intent == I_HELP && user.zone_sel?.selecting == BP_HEAD))
-		return ..()
-	return harness.handle_attack_hand(user)
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/update_icon()
-	. = ..()
-	if (harness)
-		var/image/I = image(harness.icon, "[current_icon_state]-[harness.icon_state]")
-		I.color = harness.color
-		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
-		if (offset_compiled_icon)
-			I.pixel_x = offset_compiled_icon
-		add_overlay(I)
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/trained/attackby(obj/item/item, mob/user)
-	if (user.a_intent == I_HURT)
-		return ..()
-	if (user.a_intent == I_HELP)
-		for (var/pass_type in allow_type_to_pass)
-			if (istype(item, pass_type))
-				return ..()
-	if (harness?.attackby(item, user))
-		return TRUE
-	return ..()
-
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/proc/DropItem()
 	if (!length(harness?.contents))
