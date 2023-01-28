@@ -44,15 +44,28 @@
 	contraband = 1
 
 /datum/supply_pack/munitions/bolt_rifles_militia
- 	name = "Weapon - Surplus militia rifles"
- 	contains = list(
- 			/obj/item/gun/projectile/shotgun/pump/rifle = 3,
- 			/obj/item/ammo_magazine/clip/c762 = 6
- 			)
- 	cost = 50
- 	contraband = 1
- 	containertype = /obj/structure/closet/crate/hedberg
- 	containername = "Ballistic weapons crate"
+	name = "Weapon - Surplus militia rifles"
+	contains = list(
+			/obj/item/gun/projectile/shotgun/pump/rifle = 3,
+			/obj/item/ammo_magazine/clip/c762 = 6
+			)
+	cost = 50
+	contraband = 1
+	containertype = /obj/structure/closet/crate/hedberg
+	containername = "Ballistic weapons crate"
+
+/datum/supply_pack/hydro/fungus
+	name = "Fungal Crate"
+	contains = list(
+			/obj/item/seeds/braincapmycelium = 3,
+			/obj/item/seeds/sporemycelium = 3,
+			/obj/item/seeds/angelmycelium = 1
+			)
+	cost = 50
+	contraband = 1
+	containertype = /obj/structure/closet/crate/carp
+	containername = "Hydroponics crate"
+	access = access_hydroponics
 
 /datum/supply_pack/randomised/misc/telecrate //you get something awesome, a couple of decent things, and a few weak/filler things
 	name = "ERR_NULL_ENTRY" //null crate! also dream maker is hell,
