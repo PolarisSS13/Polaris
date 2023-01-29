@@ -99,7 +99,6 @@
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
-	charisma = rand(5, 15)
 	stored_sap = rand(20, 30)
 	nutrition = rand(400,500)
 	if (gender == NEUTER)
@@ -109,6 +108,7 @@
 	create_reagents(50)
 	. = ..()
 	original_armor = armor
+	reset_charisma()
 	update_icon()
 
 
@@ -121,13 +121,21 @@
 
 /mob/living/simple_mob/animal/sif/grafadreka/Login()
 	. = ..()
-	charisma = (client && !is_baby) ? INFINITY : 0
+	reset_charisma()
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/proc/reset_charisma()
+	if(client)
+		charisma = rand(100, 200)
+	else if(is_baby)
+		charisma = 0
+	else
+		charisma = rand(5,15)
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/Logout()
 	. = ..()
-	if (!client)
-		charisma = rand(5, 15)
+	reset_charisma()
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/examine(mob/living/user)
@@ -441,7 +449,11 @@ var/global/list/wounds_being_tended_by_drakes = list()
 		if (follower == src || follower.is_baby || follower.stat == DEAD || follower.faction != faction)
 			continue
 		pack = TRUE
-		if (!leader || follower.charisma > leader.charisma)
+		if (!leader)
+			leader = follower
+		if(follower.charisma == leader.charisma)
+			follower.charisma-- // to avoid deadlocks
+		if (follower.charisma > leader.charisma)
 			leader = follower
 	if (pack)
 		return leader
