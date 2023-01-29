@@ -274,6 +274,9 @@
 /obj/effect/landmark/start{
 	name = "Survivalist"
 	},
+/obj/effect/landmark/start{
+	name = "Trained Drake"
+	},
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
 "Mf" = (

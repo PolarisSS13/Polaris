@@ -352,6 +352,16 @@
 	mode = SYRINGE_INJECT
 	update_icon()
 
+/obj/item/reagent_containers/syringe/bicaridine
+	name = "Syringe (bicaridine)"
+	desc = "Contains bicaridine."
+
+/obj/item/reagent_containers/syringe/bicaridine/Initialize()
+	. = ..()
+	reagents.add_reagent("bicaridine", 15)
+	mode = SYRINGE_INJECT
+	update_icon()
+
 /obj/item/reagent_containers/syringe/antiviral
 	name = "Syringe (spaceacillin)"
 	desc = "Contains antiviral agents."

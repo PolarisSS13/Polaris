@@ -4,6 +4,8 @@
 	color = COLOR_BEASTY_BROWN
 	max_w_class = ITEMSIZE_LARGE
 	max_storage_space = INVENTORY_STANDARD_SPACE
+	icon_state = "harness"
+	icon = 'icons/mob/drake_harness.dmi'
 
 	/// Null, or a list of (/obj/item/foo = "item key"), or (/path = ("item key", proc/handler)).
 	var/list/attachable_types

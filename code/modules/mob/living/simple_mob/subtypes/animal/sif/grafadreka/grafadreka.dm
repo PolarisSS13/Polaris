@@ -1,10 +1,9 @@
 /mob/living/simple_mob/animal/sif/grafadreka
 	name = "grafadreka"
 	desc = "A large, sleek snow drake with heavy claws, powerful jaws and many pale spines along its body."
-	player_msg = "You are a large Sivian pack predator in symbiosis with the local bioluminescent bacteria. You can eat glowing \
-	tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> \
-	(on <b><font color = '#009900'>help intent</font></b>).<br>There are humans moving through your territory; whether you help them get home safely, or treat them as a snack, \
-	is up to you."
+	player_msg = {"<b>You are a large Sivian pack predator.</b>
+There are humans moving through your territory; whether you help them get home safely, or treat them as a snack, is up to you.
+You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> (on <b><font color = '#009900'>help intent</font></b>)."}
 	color = "#608894"
 	icon = 'icons/mob/drake_adult.dmi'
 	catalogue_data = list(/datum/category_item/catalogue/fauna/grafadreka)
@@ -96,7 +95,13 @@
 
 	/// A convenience value for whether this drake is the trained subtype.
 	var/trained_drake = FALSE
+	var/list/understands_languages
 
+// universal_understand is buggy and produces double lines, so we'll just do this hack instead.
+/mob/living/simple_mob/animal/sif/grafadreka/say_understands(mob/other, datum/language/speaking)
+	if (!speaking || (speaking.name in understands_languages))
+		return TRUE
+	return ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
 	charisma = rand(5, 15)
