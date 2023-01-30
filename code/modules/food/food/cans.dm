@@ -354,7 +354,7 @@
 /obj/item/reagent_containers/food/drinks/cans/dyn
 	name = "\improper Cooling Breeze"
 	desc = "The most refreshing thing you can find on the market, based on a Qerr'balakian medicinal plant. Contains no salt or sugar."
-	description_fluff = "A drink imported from Querr'balak, now available in human space!"
+	description_fluff = "A drink imported from Qerr'balak, now available in human space!"
 	icon_state = "dyncan"
 
 /obj/item/reagent_containers/food/drinks/cans/dyn/Initialize()

@@ -4469,17 +4469,17 @@
 /datum/reagent/drink/juice/dyn
 	name = "Dyn juice"
 	id = "dynjuice"
-	description = "Juice from a Qerr'balakian herb. Good for you, but normally not consumed undiluted."
+	description = "Juice from a Qerr'balakian herb. Good for you, but usually diluted for potability."
 	taste_description = "astringent menthol"
 	color = "#00e0e0"
 	glass_name = "dyn juice"
-	glass_desc = "Juice from a Qerr'balakian herb. Good for you, but normally not consumed undiluted."
+	glass_desc = "Juice from a Qerr'balakian herb. Good for you, but usually diluted for potability."
 	sugary = FALSE
 
 /datum/reagent/drink/tea/dyn
 	name = "Dyn tea"
 	id = "dynhot"
-	description = "An old-fashioned, but traditional skrellian drink with documented medicinal properties."
+	description = "A traditional skrellian drink with documented medicinal properties."
 	color = "#00e0e0"
 	taste_description = "peppermint water"
 	allergen_type = null //no caffine here
@@ -4501,7 +4501,7 @@
 /datum/reagent/nutriment/qazal_flour
 	name = "Qa'zal flour"
 	id = "qazal_flour"
-	description = "Harvested from ground qa'zal, this is one of the main ingriedents in qa'zal bread."
+	description = "Harvested from ground qa'zal, this is one of the main ingredients in qa'zal bread."
 	taste_description = "chalky, sweet dryness"
 	reagent_state = SOLID
 	nutriment_factor = 1
@@ -4517,6 +4517,6 @@
 /datum/reagent/drink/gauli_juice
 	name = "Ga'uli juice"
 	id = "gauli_juice"
-	description = "Juice from a ga'uli pod, used within skrell and teshari cooking."
+	description = "Juice from a ga'uli pod, used in skrellian and teshari cooking."
 	color = "#6f83a6"
 	taste_description = "mintyness"

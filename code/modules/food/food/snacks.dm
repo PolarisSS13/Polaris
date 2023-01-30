@@ -7527,7 +7527,7 @@
 
 /obj/item/reagent_containers/food/snacks/dynsoup
 	name = "dyn soup"
-	desc = "A modified skrellian recipe, swapping out some ingredients for ones from earth"
+	desc = "An imported skrellian recipe, with certain substitions for ingredients not commonly available outside of Skrellian space."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "dynsoup"
 	bitesize = 5
@@ -7570,7 +7570,7 @@
 
 /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy
 	name = "plate of candied neaera eyes"
-	desc = "Candied neaera eyes shaped into cubes. The mix of savoury and sweet is generally acceptable for most species, although the dish is not commonly liked due to the use of eyes."
+	desc = "Candied neaera eyes shaped into cubes. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
 	icon_state = "neaera_candied_eyes20"
 	trash = /obj/item/trash/candybowl
 	vendingobject = /obj/item/reagent_containers/food/snacks/neaeracandy
@@ -7599,7 +7599,7 @@
 
 /obj/item/reagent_containers/food/snacks/neaeracandy
 	name = "candied neaera eye"
-	desc = "A candied neaera eye shaped into a cube. The mix of savoury and sweet is generally acceptable for most species, although the dish is not commonly liked due to the use of eyes."
+	desc = "A candied neaera eye shaped into a cube. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_candied_eye"
 	nutriment_desc = list("creamy, fatty meat" = 3)
@@ -7613,7 +7613,7 @@
 
 /obj/item/reagent_containers/food/snacks/neaerakabob
 	name = "neaera-kabob"
-	desc = "Neaera meat and organs that have been cooked on a skewer."
+	desc = "Neaera meat and giblets that have been cooked on a skewer."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_skewer"
 	trash = /obj/item/stack/rods
@@ -7652,7 +7652,7 @@
 
 /obj/item/reagent_containers/food/snacks/qalozynboiled
 	name = "boiled qa'lozyn"
-	desc = "A Qerr'balakian vegetable, normally poisonous, but boiling makes it safe to eat."
+	desc = "A Qerr'balakian vegetable. Poisonous raw, but rendered edible by boiling."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "qalozyn_boiled"
 	nutriment_amt = 4
@@ -7802,7 +7802,7 @@
 
 /obj/item/reagent_containers/food/snacks/kirani_jellypuff
 	name = "kirani jellypuff"
-	desc = "A piece of qa'zal bread puffed and rolled into a thick disk, containing a kirani jelly filling and sprinkled with qa'zal flour. Just one will never be enough."
+	desc = "A piece of qa'zal bread containing a kirani jelly filling and sprinkled with qa'zal flour. Just one will never be enough."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "kirani_jellypuff"
 	nutriment_amt = 8
