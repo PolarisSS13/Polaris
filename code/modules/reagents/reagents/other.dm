@@ -452,7 +452,7 @@
 	..()
 	if(iscarbon(M))
 		var/mob/living/carbon/C = M
-		C.clean_blood()
+		C.clean_blood(TRUE)
 
 /datum/reagent/space_cleaner/touch_obj(var/obj/O)
 	..()
