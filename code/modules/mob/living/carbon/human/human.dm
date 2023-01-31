@@ -672,7 +672,7 @@
 	return 1
 
 /mob/living/carbon/human/IsAdvancedToolUser(var/silent)
-	if(species.has_fine_manipulation)
+	if(species.has_fine_manipulation(src))
 		return 1
 	if(!silent)
 		to_chat(src, "<span class='warning'>You don't have the dexterity to use that!</span>")
@@ -1132,6 +1132,12 @@
 
 	maxHealth = species.total_health
 
+	// Large species.
+	default_pixel_x = initial(pixel_x) + species.pixel_offset_x
+	default_pixel_y = initial(pixel_y) + species.pixel_offset_y
+	pixel_x = default_pixel_x
+	pixel_y = default_pixel_y
+
 	if(LAZYLEN(descriptors))
 		descriptors = null
 
@@ -1476,8 +1482,8 @@
 	set category = "IC"
 
 	if(stat) return
-	pulling_punches = !pulling_punches
-	to_chat(src, "<span class='notice'>You are now [pulling_punches ? "pulling your punches" : "not pulling your punches"].</span>")
+
+	species.toggle_stance(usr)
 	return
 
 /mob/living/carbon/human/should_have_organ(var/organ_check)

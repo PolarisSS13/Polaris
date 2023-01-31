@@ -40,6 +40,15 @@
 	var/icon_scale_y = 1										// Makes the icon taller/shorter.
 
 	var/race_key = 0										// Used for mob icon cache string.
+	var/pixel_offset_x = 0                    	// Used for offsetting large icons.
+	var/pixel_offset_y = 0                    	// Used for offsetting large icons.
+	var/pixel_offset_z = 0                    	// Used for offsetting large icons.
+	var/antaghud_offset_x = 0                 	// As above, but specifically for the antagHUD indicator.
+	var/antaghud_offset_y = 0                 	// As above, but specifically for the antagHUD indicator.
+
+	var/list/equip_adjust = list()				// List matrix for determining pixel offset of equipped items.
+	var/list/equip_overlays = list()
+
 	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
@@ -104,6 +113,8 @@
 	var/flash_mod =     1								// Stun from blindness modifier (flashes and flashbangs)
 	var/flash_burn =    0								// how much damage to take from being flashed if light hypersensitive
 	var/sound_mod =     1								// Multiplier to the effective *range* of flashbangs. a flashbang's bang hits an entire screen radius, with some falloff.
+
+	var/list/natural_armour_values = null				// List of armor values the species has by default.
 
 	var/chem_strength_heal =    1						// Multiplier to most beneficial chem strength
 	var/chem_strength_pain =    1						// Multiplier to painkiller strength (could be used in a negative trait to simulate long-term addiction reducing effects, etc.)
@@ -549,3 +560,70 @@
 		H.b_skin = hex2num(copytext(base_color,6,8))
 		return TRUE
 	return FALSE
+
+/datum/species/proc/has_fine_manipulation(mob/living/carbon/human/H)
+	return has_fine_manipulation
+
+/datum/species/proc/toggle_stance(mob/living/carbon/human/H)
+	if(!H.incapacitated())
+		H.pulling_punches = !H.pulling_punches
+		to_chat(H, SPAN_NOTICE("You are now [H.pulling_punches ? "pulling your punches" : "not pulling your punches"]."))
+
+/datum/species/proc/disarm_attackhand(mob/living/carbon/human/attacker, mob/living/carbon/human/target)
+	add_attack_logs(attacker,target,"Disarmed")
+
+	attacker.do_attack_animation(target)
+
+	if(target.w_uniform)
+		target.w_uniform.add_fingerprint(attacker)
+	var/obj/item/organ/external/affecting = target.get_organ(ran_zone(attacker.zone_sel.selecting))
+
+	var/list/holding = list(target.get_active_hand() = 40, target.get_inactive_hand() = 20)
+
+	//See if they have any guns that might go off
+	for(var/obj/item/gun/W in holding)
+		if(W && prob(holding[W]))
+			var/list/turfs = list()
+			for(var/turf/T in view(world.view, target))
+				turfs += T
+			if(turfs.len)
+				var/turf/T_target = pick(turfs)
+				target.visible_message("<span class='danger'>[target]'s [W] goes off during the struggle!</span>")
+				return W.afterattack(T_target,target)
+
+	if(target.last_push_time + 30 > world.time)
+		target.visible_message("<span class='warning'>[attacker] has weakly pushed [target]!</span>")
+		return
+
+	var/randn = rand(1, 100)
+	target.last_push_time = world.time
+	// We ARE wearing shoes OR
+	// We as a species CAN be slipped when barefoot
+	// And also 1 in 4 because rngesus
+	if((target.shoes || !(target.species.flags & NO_SLIP)) && randn <= 25)
+		var/armor_check = target.run_armor_check(affecting, "melee")
+		target.apply_effect(3, WEAKEN, armor_check)
+		playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+		if(armor_check < 60)
+			target.visible_message("<span class='danger'>[attacker] has pushed [target]!</span>")
+		else
+			target.visible_message("<span class='warning'>[attacker] attempted to push [target]!</span>")
+		return
+
+	if(randn <= 60)
+		//See about breaking grips or pulls
+		if(target.break_all_grabs(attacker))
+			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+			return
+
+		//Actually disarm them
+		for(var/obj/item/I in holding)
+			if(I)
+				target.drop_from_inventory(I)
+				target.visible_message("<span class='danger'>[attacker] has disarmed [target]!</span>")
+				playsound(target, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
+				return
+
+	playsound(target, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
+	target.visible_message("<font color='red'> <B>[attacker] attempted to disarm [target]!</B></font>")
+

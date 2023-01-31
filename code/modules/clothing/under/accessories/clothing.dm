@@ -58,7 +58,8 @@
 	w_class = ITEMSIZE_NORMAL
 	slot = ACCESSORY_SLOT_OVER
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
+		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi'
 	)
 	var/icon_override_state		/// Change this for mid-round and paintkit.
 	var/fire_resist = T0C+100

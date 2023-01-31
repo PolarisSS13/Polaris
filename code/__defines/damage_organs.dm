@@ -66,3 +66,10 @@
 #define MODULAR_BODYPART_INVALID    0 // Cannot be detached or reattached.
 #define MODULAR_BODYPART_PROSTHETIC 1 // Can be detached or reattached freely.
 #define MODULAR_BODYPART_CYBERNETIC 2 // Can be detached or reattached to compatible parent organs.
+
+//Blood levels. These are percentages based on the species blood_volume far.
+#define BLOOD_VOLUME_FULL    100
+#define BLOOD_VOLUME_SAFE    85
+#define BLOOD_VOLUME_OKAY    70
+#define BLOOD_VOLUME_BAD     60
+#define BLOOD_VOLUME_SURVIVE 30

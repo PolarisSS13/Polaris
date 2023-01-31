@@ -296,7 +296,9 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	attack_verb = list("challenged")
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/gloves.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/gloves.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/gloves.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/gloves.dmi'
 		)
 	drop_sound = 'sound/items/drop/gloves.ogg'
 	pickup_sound = 'sound/items/pickup/gloves.ogg'
@@ -407,7 +409,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	w_class = ITEMSIZE_TINY
 	icon = 'icons/obj/clothing/rings.dmi'
 	gender = NEUTER
-	species_restricted = list("exclude", SPECIES_DIONA)
+	species_restricted = list("exclude", SPECIES_DIONA, SPECIES_NABBER, SPECIES_NABBER_MONARCH)
 	siemens_coefficient = 1
 	glove_level = 1
 	fingerprint_chance = 100
@@ -563,11 +565,16 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	slot_flags = SLOT_MASK
 	body_parts_covered = FACE|EYES
 	blood_sprite_state = "maskblood"
+
+	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_NABBER_MONARCH)
+
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/masks.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
 		SPECIES_TAJ = 'icons/mob/species/tajaran/mask.dmi',
-		SPECIES_UNATHI = 'icons/mob/species/unathi/mask.dmi'
+		SPECIES_UNATHI = 'icons/mob/species/unathi/mask.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/mask.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/mask.dmi'
 		)
 
 	var/voicechange = 0
@@ -616,7 +623,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	slowdown = SHOES_SLOWDOWN
 	force = 2
 	var/overshoes = 0
-	species_restricted = list("exclude",SPECIES_TESHARI, SPECIES_VOX)
+	species_restricted = list("exclude",SPECIES_TESHARI, SPECIES_VOX, SPECIES_NABBER, SPECIES_NABBER_MONARCH)
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/shoes.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/shoes.dmi'
@@ -723,10 +730,11 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	preserve_item = 1
 	equip_sound = 'sound/items/jumpsuit_equip.ogg'
 
-
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/suit.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/suit.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/suit.dmi'
 		)
 
 	valid_accessory_slots = (ACCESSORY_SLOT_OVER | ACCESSORY_SLOT_ARMBAND)
@@ -781,9 +789,12 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	var/displays_id = 1
 	var/rolled_down = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
 	var/rolled_sleeves = -1 //0 = unrolled, 1 = rolled, -1 = cannot be toggled
+
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/uniform.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/uniform.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/uniform.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/uniform.dmi'
 		)
 
 	//convenience var for defining the icon state for the overlay used when the clothing is worn.

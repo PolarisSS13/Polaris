@@ -162,7 +162,9 @@
 /datum/reagent/toxin/phoron/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_SLIME)
 		M.adjust_fire_stacks(removed * 3) //Not quite 'converting' it. It's like mixing fuel into a jelly. You get explosive, or at least combustible, jelly.
-	..()
+
+	if(alien != IS_INSECTOID && alien != IS_XENOS)	// Xenomorphs and Nabbers have interactions with phoron.
+		..()
 
 /datum/reagent/toxin/phoron/touch_turf(var/turf/simulated/T, var/amount)
 	..()
@@ -929,6 +931,43 @@
 			randmuti(M)
 			to_chat(M, "<span class='warning'>You feel odd!</span>")
 	M.apply_effect(6 * removed, IRRADIATE, 0)
+
+/datum/reagent/acetone
+	name = "Acetone"
+	id = "acetone"
+	description = "A colorless liquid solvent used in chemical synthesis."
+	taste_description = "acid"
+	reagent_state = LIQUID
+	color = "#808080"
+	metabolism = REM * 0.2
+
+/datum/reagent/acetone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
+	if(alien == IS_INSECTOID)
+		return
+
+	if(alien == IS_SLIME)
+		M.adjust_fire_stacks(removed * 1)
+
+	M.adjustToxLoss(removed * 6)
+	M.apply_effect(5 * removed, SLUR)
+	M.druggy = max(M.druggy, 5)
+
+/datum/reagent/acetone/touch_obj(obj/O)	//I copied this wholesale from ethanol and could likely be converted into a shared proc. ~Techhead // I copied this wholesale from Bay. ~Mechoid
+	if(istype(O, /obj/item/paper))
+		var/obj/item/paper/paperaffected = O
+		paperaffected.clearpaper()
+		to_chat(usr, "The solution dissolves the ink on the paper.")
+		return
+	if(istype(O, /obj/item/book))
+		if(volume < 5)
+			return
+		if(istype(O, /obj/item/book/tome))
+			to_chat(usr, SPAN_NOTICE("The solution does nothing. Whatever this is, it isn't normal ink."))
+			return
+		var/obj/item/book/affectedbook = O
+		affectedbook.dat = null
+		to_chat(usr, SPAN_NOTICE("The solution dissolves the ink on the book."))
+	return
 
 /*
  * Hostile nanomachines.
