@@ -195,17 +195,17 @@
 
 /decl/emote/audible/croon
 	key = "croon"
-	emote_message_3p = "USER croons..."
+	emote_message_3p = "croons..."
 	emote_sound = list('sound/voice/croon1.ogg', 'sound/voice/croon2.ogg')
 
 /decl/emote/audible/lwarble
 	key = "lwarble"
-	emote_message_3p = "USER lets out a low, throaty warble!"
+	emote_message_3p = "lets out a low, throaty warble!"
 	emote_sound = 'sound/voice/lwarble.ogg'
 
 /decl/emote/audible/croak
 	key = "croak"
-	emote_message_3p = "USER croaks!"
+	emote_message_3p = "croaks!"
 	emote_sound = 'sound/voice/croak.ogg'
 
 /decl/emote/audible/vox_shriek
