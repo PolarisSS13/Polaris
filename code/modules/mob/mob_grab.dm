@@ -1,12 +1,11 @@
 // Assoc list of grab types, name=path.
 GLOBAL_LIST_EMPTY(all_grabobjects)
 
+// Grabs return a deletion flag in their initialize if they don't have a target and owner. Fortunately, we can still get their name before they do so.
 /hook/startup/proc/setup_grab_list()
 	for(var/path in typesof(/obj/item/grab))
 		var/obj/G = new path
 		GLOB.all_grabobjects[G.name] = path
-		if(!QDELETED(G))
-			qdel(G)
 
 	return TRUE
 
