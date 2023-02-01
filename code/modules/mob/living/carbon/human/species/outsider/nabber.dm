@@ -53,11 +53,11 @@
 	reagent_tag =	IS_INSECTOID
 
 	natural_armour_values = list(
-		melee = ARMOR_MELEE_KNIVES,
-		bullet = ARMOR_BALLISTIC_MINOR,
-		bomb = ARMOR_BOMB_PADDED,
-		bio = ARMOR_BIO_SHIELDED,
-		rad = 0.5*ARMOR_RAD_MINOR
+		melee = 15,
+		bullet = 10,
+		bomb = 30,
+		bio = 100,
+		rad = 2.5
 		)
 
 	gluttonous = 1
