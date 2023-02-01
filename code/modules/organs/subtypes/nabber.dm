@@ -247,24 +247,24 @@
 
 	//Effects of bloodloss
 	switch(blood_volume)
-		if (BLOOD_VOLUME_FULL)
+		if (85 to 100)
 			lowblood_tally = 0
-		if(BLOOD_VOLUME_OKAY to BLOOD_VOLUME_SAFE)
+		if(70 to 85)
 			lowblood_tally = 2
 			if(prob(1))
 				to_chat(owner, SPAN_WARNING("You're finding it difficult to move."))
-		if(BLOOD_VOLUME_BAD to BLOOD_VOLUME_OKAY)
+		if(60 to 70)
 			lowblood_tally = 4
 			if(prob(1))
 				to_chat(owner, SPAN_WARNING("Moving has become very difficult."))
-		if(BLOOD_VOLUME_SURVIVE to BLOOD_VOLUME_BAD)
+		if(30 to 60)
 			lowblood_tally = 6
 			if(prob(15))
 				to_chat(owner, SPAN_WARNING("You're almost unable to move!"))
 				if(!owner.pulling_punches)
 					var/datum/species/nabber/nab = species
 					nab.arm_swap(owner, TRUE)
-		if(-(INFINITY) to BLOOD_VOLUME_SURVIVE)
+		if(-(INFINITY) to 30)
 			lowblood_tally = 10
 			if(prob(30) && !owner.pulling_punches)
 				var/datum/species/nabber/nab = species
