@@ -33,6 +33,15 @@
 		/obj/item/cell/device/weapon = 2,
 		/obj/item/clothing/accessory/permit/gun/planetside)
 
+/obj/structure/closet/secure_closet/guncabinet/tranq
+	name = "phase pistol cabinet" //"tranquilizer rifle cabinet"
+	req_one_access = list(access_xenofauna,access_medical)
+	starts_with = list(
+		/obj/item/gun/energy/phasegun/pistol = 2,
+		/obj/item/cell/device/weapon = 2,
+		/obj/item/clothing/accessory/permit/gun/planetside
+	)
+
 //Explorer Lockers
 
 /obj/structure/closet/secure_closet/explorer
@@ -59,6 +68,40 @@
 		)
 
 /obj/structure/closet/secure_closet/explorer/Initialize()
+	if(prob(50))
+		starts_with += /obj/item/storage/backpack/rucksack
+	else
+		starts_with += /obj/item/storage/backpack/satchel/norm
+	if(prob(75))
+		starts_with += /obj/item/material/knife/tacknife/survival
+	else
+		starts_with += /obj/item/material/knife/machete
+	return ..()
+
+//Xenofauna tech lockers
+/obj/structure/closet/secure_closet/xenofauna
+	name = "xenofauna technician locker"
+	req_access = list(access_xenofauna)
+	starts_with = list(
+		/obj/item/clothing/under/explorer,
+		/obj/item/clothing/suit/armor/pcarrier/explorer/light,
+		/obj/item/clothing/head/helmet/explorer,
+		/obj/item/clothing/suit/storage/hooded/explorer,
+		/obj/item/clothing/mask/gas/explorer,
+		/obj/item/clothing/shoes/boots/winter/explorer,
+		/obj/item/clothing/gloves/black,
+		/obj/item/radio/headset/explorer,
+		/obj/item/flashlight,
+		/obj/item/gps/explorer,
+		/obj/item/storage/box/flare,
+		/obj/item/geiger,
+		/obj/item/cell/device,
+		/obj/item/radio,
+		/obj/item/stack/marker_beacon/thirty,
+		/obj/item/cataloguer
+		)
+
+/obj/structure/closet/secure_closet/xenofauna/Initialize()
 	if(prob(50))
 		starts_with += /obj/item/storage/backpack/rucksack
 	else
