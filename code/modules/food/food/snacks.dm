@@ -802,10 +802,18 @@
 	center_of_mass = list("x"=16, "y"=16)
 	bitesize = 3
 
-/obj/item/reagent_containers/food/snacks/organ/Initialize()
+/obj/item/reagent_containers/food/snacks/organ/Initialize(var/ml, var/obj/item/organ/donor)
 	. = ..()
 	reagents.add_reagent("protein", rand(3,5))
 	reagents.add_reagent("toxin", rand(1,3))
+	if(donor)
+		appearance = donor
+		if(donor.reagents?.total_volume)
+			donor.reagents.trans_to(src, donor.reagents.total_volume)
+		fingerprints =       donor.fingerprints?.Copy()
+		fingerprintshidden = donor.fingerprintshidden?.Copy()
+		fingerprintslast =   donor.fingerprintslast
+		qdel(donor)
 
 /obj/item/reagent_containers/food/snacks/tofu
 	name = "Tofu"

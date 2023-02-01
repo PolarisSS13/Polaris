@@ -104,10 +104,9 @@
 
 	if(istype(snack, /obj/item/organ))
 		var/obj/item/organ/organ = snack
-		if(organ.meat_type)
-			snack = new organ.meat_type(src)
-			qdel(organ)
-	else if(!istype(snack) || !snack.reagents?.total_volume)
+		if(organ.meat_type) // Let's assume not having a meat_type means it's not edible.
+			snack = new /obj/item/reagent_containers/food/snacks/organ(get_turf(snack), snack)
+	if(!istype(snack) || !snack.reagents?.total_volume)
 		to_chat(src, SPAN_WARNING("\The [snack] doesn't seem edible."))
 		return
 
