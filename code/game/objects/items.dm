@@ -822,16 +822,15 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return icon_override
 
 	//2: species-specific sprite sheets (skipped for inhands)
-	if(LAZYLEN(sprite_sheets))
-		var/sheet = sprite_sheets[body_type]
-		if(sheet && !inhands && (!check_state || check_state_in_icon(sheet, check_state)))
+	if(!inhands)
+		var/sheet = LAZYACCESS(sprite_sheets, body_type)
+		if(sheet && (!check_state || check_state_in_icon(sheet, check_state)))
 			return sheet
 
 	//3: slot-specific sprite sheets
-	if(LAZYLEN(item_icons))
-		var/sheet = item_icons[slot_name]
-		if(sheet)
-			return sheet
+	var/sheet = LAZYACCESS(item_icons, slot_name)
+	if(sheet)
+		return sheet
 
 	//4: item's default icon
 	if(default_worn_icon)

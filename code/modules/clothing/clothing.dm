@@ -155,7 +155,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 
 	//Set icon
 	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
-		sprite_sheets[target_species] = sprite_sheets_refit[target_species]
+		LAZYSET(sprite_sheets, target_species, sprite_sheets_refit[target_species])
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -176,7 +176,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 
 	//Set icon
 	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
-		sprite_sheets[target_species] = sprite_sheets_refit[target_species]
+		LAZYSET(sprite_sheets, target_species, sprite_sheets_refit[target_species])
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -516,7 +516,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 
 		// Generate and cache the on-mob icon, which is used in update_inv_head().
 		var/body_type = (H && H.species.get_bodytype(H))
-		var/cache_key = "[light_overlay][body_type && sprite_sheets[body_type] ? "_[body_type]" : ""]"
+		var/cache_key = "[light_overlay][body_type && LAZYACCESS(sprite_sheets, body_type) ? "_[body_type]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = LAZYACCESS(sprite_sheets,body_type) || 'icons/mob/light_overlays.dmi'
 			light_overlay_cache[cache_key] = image(icon = use_icon, icon_state = "[light_overlay]")
@@ -865,14 +865,15 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 
 /obj/item/clothing/under/proc/update_rolldown_status()
 	var/mob/living/carbon/human/H
-	if(istype(src.loc, /mob/living/carbon/human))
-		H = src.loc
+	if(ishuman(loc))
+		H = loc
 
 	var/icon/under_icon
+	var/body_type = H?.species.get_bodytype(H)
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(body_type  && LAZYACCESS(sprite_sheets, body_type))
+		under_icon = LAZYACCESS(sprite_sheets, body_type)
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else if ("[worn_state]_s" in cached_icon_states(rolled_down_icon))
@@ -888,14 +889,15 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 
 /obj/item/clothing/under/proc/update_rollsleeves_status()
 	var/mob/living/carbon/human/H
-	if(istype(src.loc, /mob/living/carbon/human))
-		H = src.loc
+	if(ishuman(loc))
+		H = loc
 
 	var/icon/under_icon
+	var/body_type = H?.species.get_bodytype(H)
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(H && LAZYACCESS(sprite_sheets, body_type))
+		under_icon = LAZYACCESS(sprite_sheets, body_type)
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else if ("[worn_state]_s" in cached_icon_states(rolled_down_sleeves_icon))
