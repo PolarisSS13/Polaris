@@ -441,7 +441,9 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/head.dmi'
+		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/head.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/head.dmi'
 		)
 	drop_sound = 'sound/items/drop/hat.ogg'
 	pickup_sound = 'sound/items/pickup/hat.ogg'

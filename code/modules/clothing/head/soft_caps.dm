@@ -7,12 +7,6 @@
 	siemens_coefficient = 0.9
 	body_parts_covered = 0
 
-	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi',
-		SPECIES_VOX = 'icons/mob/species/vox/head.dmi',
-		SPECIES_NABBER = 'icons/mob/species/nabber/head.dmi'
-		)
-
 /obj/item/clothing/head/soft/dropped()
 	icon_state = initial(icon_state)
 	flipped=0
