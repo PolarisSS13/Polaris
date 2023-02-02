@@ -911,7 +911,8 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 			rolled_sleeves = 0
 	else
 		rolled_sleeves = -1
-	if(H) update_clothing_icon()
+	if(H)
+		update_clothing_icon()
 
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))

@@ -797,11 +797,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(alpha != 255)
 		standing.alpha = alpha
 
-	/*
 	if(!inhands)
-		apply_custom(standing_icon)		//Pre-image overridable proc to customize the thing  /// Unused on Polaris
-		apply_addblends(icon2use,standing_icon)		//Some items have ICON_ADD blend shaders /// Check if overlays work, otherwise fold into cached icon gen
-	*/
+		apply_custom(standing)              // Overridable proc to customize the overlay.
+		apply_addblends(standing, icon2use) // Some items add overlays/shaders.
 
 	if(istype(clip_mask)) //For tails clipping off parts of uniforms and suits.
 		standing.filters += filter(type = "alpha", icon = clip_mask)
@@ -871,15 +869,16 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return BODY_LAYER+default_layer
 
 //Apply the addblend blends onto the icon
-/obj/item/proc/apply_addblends(var/source_icon, var/icon/standing_icon)
-
+/obj/item/proc/apply_addblends(var/image/standing, var/icon/source_icon)
 	//If we have addblends, blend them onto the provided icon
-	if(addblends && standing_icon && source_icon)
-		var/addblend_icon = icon("icon" = source_icon, "icon_state" = addblends)
-		standing_icon.Blend(addblend_icon, ICON_ADD)
+	if(addblends && standing && source_icon)
+		var/image/I = image(source_icon, addblends)
+		I.blend_mode = BLEND_ADD
+		standing.overlays += I
+	return standing
 
 //STUB
-/obj/item/proc/apply_custom(var/icon/standing_icon)
+/obj/item/proc/apply_custom(var/image/standing)
 	return standing_icon
 
 //STUB

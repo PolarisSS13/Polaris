@@ -14,9 +14,7 @@
 
 //UNIFORM: Always appends "_s" to iconstate, stupidly.
 /obj/item/clothing/under/get_worn_icon_state(var/slot_name)
-	var/state2use = ..()
-	state2use += "_s"
-	return state2use
+	return "[..()]_s"
 
 //HELMET: May have a lighting overlay
 /obj/item/clothing/head/get_worn_overlay(var/mob/living/wearer, var/body_type, var/slot_name, var/inhands, var/default_icon, var/default_layer, var/icon/clip_mask)
