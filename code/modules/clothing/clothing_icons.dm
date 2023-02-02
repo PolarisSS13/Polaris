@@ -2,6 +2,7 @@
 	if(LAZYLEN(accessories))
 		for(var/obj/item/clothing/accessory/A in accessories)
 			standing.add_overlay(A.get_mob_overlay())
+	return standing
 
 /obj/item/clothing/apply_blood(var/image/standing)
 	if(blood_DNA && blood_sprite_state && ishuman(loc))
@@ -9,6 +10,7 @@
 		var/image/bloodsies	= image(icon = H.species.get_blood_mask(H), icon_state = blood_sprite_state)
 		bloodsies.color		= blood_color
 		standing.add_overlay(bloodsies)
+	return standing
 
 //UNIFORM: Always appends "_s" to iconstate, stupidly.
 /obj/item/clothing/under/get_worn_icon_state(var/slot_name)
@@ -33,3 +35,4 @@
 		var/image/bloodsies	= image(icon = H.species.get_blood_mask(H), icon_state = blood_sprite_state)
 		bloodsies.color		= blood_color
 		standing.add_overlay(bloodsies)
+	return standing
