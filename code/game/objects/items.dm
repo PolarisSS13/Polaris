@@ -790,24 +790,24 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			if(slot_l_hand_str)
 				state2use += "_l"
 
-	// testing("[src] (\ref[src]) - Slot: [slot_name], Inhands: [inhands], Worn Icon:[icon2use], Worn State:[state2use], Worn Layer:[layer2use]")
-
 	var/using_spritesheet = !inhands && (icon2use == LAZYACCESS(sprite_sheets, body_type)) // TODO: arg to get_worn_icon to avoid doing this separately.
 	var/image/standing = (!using_spritesheet && species?.get_offset_overlay_image(icon2use, state2use, color, slot_name, layer2use)) || overlay_image(icon2use, state2use, color, layer2use)
 	if(alpha != 255)
 		standing.alpha = alpha
 
 	if(!inhands)
-		apply_custom(standing)              // Overridable proc to customize the overlay.
-		apply_addblends(standing, icon2use) // Some items add overlays/shaders.
+		apply_custom_to_worn_overlay(standing)              // Overridable proc to customize the overlay.
+		apply_addblends_to_worn_overlay(standing, icon2use) // Some items add overlays/shaders.
 
 	if(istype(clip_mask)) //For tails clipping off parts of uniforms and suits.
 		standing.filters += filter(type = "alpha", icon = clip_mask)
 
 	//Apply any special features
 	if(!inhands)
-		apply_blood(standing)			//Some items show blood when bloodied
-		apply_accessories(standing)		//Some items sport accessories like webbing
+		apply_blood_to_worn_overlay(standing)			//Some items show blood when bloodied
+		apply_accessories_to_worn_overlay(standing)		//Some items sport accessories like webbing
+
+	testing("[src] (\ref[src]) - Slot: [slot_name], Inhands: [inhands], Worn Icon:[icon2use], Worn State:[state2use], Worn Layer:[layer2use], [standing?.icon || "no icon"], [standing?.icon_state || "no state"]")
 
 	//Return our overlay
 	return standing
@@ -869,7 +869,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return BODY_LAYER+default_layer
 
 //Apply the addblend blends onto the icon
-/obj/item/proc/apply_addblends(var/image/standing, var/icon/source_icon)
+/obj/item/proc/apply_addblends_to_worn_overlay(var/image/standing, var/icon/source_icon)
 	//If we have addblends, blend them onto the provided icon
 	if(addblends && standing && source_icon)
 		var/image/I = image(source_icon, addblends)
@@ -878,15 +878,15 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	return standing
 
 //STUB
-/obj/item/proc/apply_custom(var/image/standing)
-	return standing_icon
-
-//STUB
-/obj/item/proc/apply_blood(var/image/standing)
+/obj/item/proc/apply_custom_to_worn_overlay(var/image/standing)
 	return standing
 
 //STUB
-/obj/item/proc/apply_accessories(var/image/standing)
+/obj/item/proc/apply_blood_to_worn_overlay(var/image/standing)
+	return standing
+
+//STUB
+/obj/item/proc/apply_accessories_to_worn_overlay(var/image/standing)
 	return standing
 
 /obj/item/MouseEntered(location,control,params)
