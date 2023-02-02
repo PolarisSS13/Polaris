@@ -1,3 +1,5 @@
+var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets and /obj/item/clothing/head/update_icon()
+
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9

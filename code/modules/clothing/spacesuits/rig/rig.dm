@@ -200,7 +200,7 @@
 				M.unEquip(piece)
 			piece.forceMove(src)
 
-/obj/item/rig/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
+/obj/item/rig/get_worn_icon_file(var/body_type, var/slot_name, var/default_icon, var/inhands, var/check_state)
 	if(!inhands && (slot_name == slot_back_str || slot_name == slot_belt_str))
 		if(icon_override)
 			return icon_override
