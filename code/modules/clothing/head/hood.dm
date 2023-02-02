@@ -212,3 +212,8 @@
 	desc = "A hood that looks vaguely like a siffet's head. Guaranteed to traumatize your Promethean coworkers."
 	icon_state = "siffet"
 	item_state_slots = list(slot_r_hand_str = "siffet", slot_l_hand_str = "siffet")
+
+/obj/item/clothing/head/hood/winter/hidesuit
+	name = "hide hood"
+	desc = "A hood attached to a heavy leather protective suit."
+	icon_state = "hidesuit_hood"

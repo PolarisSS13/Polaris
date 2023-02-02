@@ -398,3 +398,9 @@
 		/obj/item/radio,
 		/obj/item/pickaxe
 		)
+
+/obj/item/clothing/suit/storage/hooded/wintercoat/hidesuit
+	name = "hide oversuit"
+	desc = "A full-body suit made of stitched together hide, meant to protect against the elements."
+	icon_state = "hidesuit"
+	hoodtype = /obj/item/clothing/head/hood/winter/hidesuit

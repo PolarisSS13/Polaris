@@ -10,6 +10,8 @@
 	var/sound_channel
 	var/current_track
 	var/music_volume = 50
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi')
 
 /obj/item/clothing/head/headphones/Initialize()
 	. = ..()
@@ -103,3 +105,15 @@
 			play_music(usr)
 		interact(usr)
 	updateUsrDialog()
+
+/obj/item/clothing/head/headphones/earphones
+	name = "earphones"
+	desc = "A pair of wired earphones. Even now, 3.5mm jacks are still in use."
+	icon_state = "earphones"
+	volume_multiplier = 0.7 //not as ear covering, so doesn't dull sound as much
+
+/obj/item/clothing/head/headphones/earbuds
+	name = "earbuds"
+	desc = "A pair of wireless earbuds."
+	icon_state = "earbuds"
+	volume_multiplier = 0.7

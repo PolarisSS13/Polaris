@@ -400,3 +400,22 @@
 	watchtype["watch, holographic"] = /obj/item/clothing/accessory/watch/holo
 	watchtype["watch, leather"] = /obj/item/clothing/accessory/watch/leather
 	gear_tweaks += new/datum/gear_tweak/path(watchtype)
+
+/datum/gear/accessory/waistpack
+	display_name = "waist pack (colorable)"
+	path = /obj/item/storage/belt/waistpack
+	cost = 2
+
+/datum/gear/accessory/waistpack/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+
+/datum/gear/accessory/waistpackbig
+	display_name = "waist pack, large (colorable)"
+	path = /obj/item/storage/belt/waistpack/big
+	cost = 3
+
+/datum/gear/accessory/waistpackbig/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice

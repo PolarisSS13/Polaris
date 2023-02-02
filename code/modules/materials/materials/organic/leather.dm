@@ -35,5 +35,6 @@
 		new /datum/stack_recipe("[display_name] bracelet", /obj/item/clothing/accessory/bracelet/material, 1, on_floor = 1, supplied_material = "[name]", pass_stack_color = TRUE),
 		new /datum/stack_recipe("[display_name] armor plate", /obj/item/material/armor_plating, 1, time = 20, on_floor = 1, supplied_material = "[name]", pass_stack_color = TRUE),
 		new /datum/stack_recipe("empty sandbag", /obj/item/stack/emptysandbag, 2, time = 2 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]"),
-		new /datum/stack_recipe("whip", /obj/item/material/whip, 5, time = 15 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]")
+		new /datum/stack_recipe("whip", /obj/item/material/whip, 5, time = 15 SECONDS, pass_stack_color = TRUE, supplied_material = "[name]"),
+		new /datum/stack_recipe("hide oversuit", /obj/item/clothing/suit/storage/hooded/wintercoat/hidesuit, 10, time = 15 SECONDS, pass_stack_color = FALSE, recycle_material = "[name]")
 	)

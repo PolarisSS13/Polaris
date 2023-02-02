@@ -464,3 +464,21 @@
 	can_hold = list(
 		/obj/item/ammo_casing/afoam_dart
 		)
+
+/obj/item/storage/belt/waistpack
+	name = "waist pack"
+	desc = "A small bag designed to be worn on the waist. May make your butt look big."
+	icon_state = "waistpack"
+	item_state = "waistpack"
+	storage_slots = null
+	max_w_class = ITEMSIZE_SMALL
+	max_storage_space = ITEMSIZE_COST_SMALL * 4
+
+/obj/item/storage/belt/waistpack/big
+	name = "large waist pack"
+	desc = "A bag designed to be worn on the waist. Definitely makes your butt look big."
+	icon_state = "waistpack_big"
+	item_state = "waistpack_big"
+	w_class = ITEMSIZE_LARGE
+	max_w_class = ITEMSIZE_NORMAL
+	max_storage_space = ITEMSIZE_COST_NORMAL * 4

@@ -1197,3 +1197,39 @@ Uniforms and such
 	name = "hazard cohesion suit"
 	desc = "An orange cohesion suit with yellow hazard stripes intended to assist Prometheans in maintaining their form and prevent direct skin exposure."
 	icon_state = "cohesionsuit_hazard"
+
+/obj/item/clothing/under/utility/supply
+	name = "supply utility uniform"
+	desc = "A comfortable turtleneck and black utility trousers. This one has accents in the supply department's color."
+	icon_state = "util_cargo"
+	worn_state = "util_cargo"
+
+/obj/item/clothing/under/utility/engineering
+	name = "engineering utility uniform"
+	desc = "A comfortable turtleneck and black utility trousers. This one has accents in the engineering department's color."
+	icon_state = "util_eng"
+	worn_state = "util_eng"
+
+/obj/item/clothing/under/utility/medical
+	name = "medical utility uniform"
+	desc = "A comfortable turtleneck and black utility trousers. This one has accents in the medical department's color."
+	icon_state = "util_med"
+	worn_state = "util_med"
+
+/obj/item/clothing/under/utility/science
+	name = "research utility uniform"
+	desc = "A comfortable turtleneck and black utility trousers. This one has accents in the research department's color."
+	icon_state = "util_sci"
+	worn_state = "util_sci"
+
+/obj/item/clothing/under/utility/security
+	name = "security utility uniform"
+	desc = "A comfortable turtleneck and black utility trousers. This one has accents in the security department's color."
+	icon_state = "util_sec"
+	worn_state = "util_sec"
+
+/obj/item/clothing/under/utility/command
+	name = "command utility uniform"
+	desc = "A comfortable turtleneck and black utility trousers. This one has accents in command's color."
+	icon_state = "util_com"
+	worn_state = "util_com"

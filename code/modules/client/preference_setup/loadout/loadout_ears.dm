@@ -6,13 +6,30 @@
 	sort_category = "Earwear"
 
 /datum/gear/ears/headphones
-	display_name = "headphones"
+	display_name = "headphone selection"
+	description = "A selection of headphones."
 	path = /obj/item/clothing/head/headphones
+
+/datum/gear/ears/headphones/New()
+	..()
+	var/headphones = list()
+	headphones["headphones"] = /obj/item/clothing/head/headphones
+	headphones["earphones"] = /obj/item/clothing/head/headphones/earphones
+	headphones["earbuds"] = /obj/item/clothing/head/headphones/earbuds
+	gear_tweaks += new/datum/gear_tweak/path(headphones)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/ears/circuitry
 	display_name = "earwear, circuitry (empty)"
 	path = /obj/item/clothing/ears/circuitry
 
+/datum/gear/ears/earwarmers
+	display_name = "ear warmers"
+	path = /obj/item/clothing/ears/earwarmers
+
+/datum/gear/ears/earwarmers/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/ears/earrings
 	display_name = "earring selection"
