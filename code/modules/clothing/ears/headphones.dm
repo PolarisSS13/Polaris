@@ -20,6 +20,7 @@
 
 /obj/item/clothing/head/headphones/update_icon()
 	..()
+	cut_overlays()
 	icon_state = initial(icon_state)
 	if(headphones_on)
 		icon_state = "[icon_state]_on"
@@ -106,14 +107,14 @@
 		interact(usr)
 	updateUsrDialog()
 
-/obj/item/clothing/head/headphones/earphones
-	name = "earphones"
-	desc = "A pair of wired earphones. Even now, 3.5mm jacks are still in use."
-	icon_state = "earphones"
-	volume_multiplier = 0.7 //not as ear covering, so doesn't dull sound as much
-
 /obj/item/clothing/head/headphones/earbuds
 	name = "earbuds"
-	desc = "A pair of wireless earbuds."
+	desc = "A pair of wired earbuds. Even now, 3.5mm jacks are still in use."
 	icon_state = "earbuds"
+	volume_multiplier = 0.7 //not as ear covering, so doesn't dull sound as much
+
+/obj/item/clothing/head/headphones/wirelessearbuds
+	name = "wireless earbuds"
+	desc = "A pair of wireless earbuds."
+	icon_state = "wireless_earbuds"
 	volume_multiplier = 0.7

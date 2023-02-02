@@ -403,7 +403,7 @@
 	item_state = "fannypack_leather"
 	max_w_class = ITEMSIZE_SMALL
 	storage_slots = null
-	max_storage_space = ITEMSIZE_COST_NORMAL * 2
+	max_storage_space = ITEMSIZE_COST_SMALL * 4
 
 /obj/item/storage/belt/fannypack/black
  	name = "black fannypack"
@@ -470,8 +470,8 @@
 	desc = "A small bag designed to be worn on the waist. May make your butt look big."
 	icon_state = "waistpack"
 	item_state = "waistpack"
-	storage_slots = null
 	max_w_class = ITEMSIZE_SMALL
+	storage_slots = null
 	max_storage_space = ITEMSIZE_COST_SMALL * 4
 
 /obj/item/storage/belt/waistpack/big
@@ -480,5 +480,5 @@
 	icon_state = "waistpack_big"
 	item_state = "waistpack_big"
 	w_class = ITEMSIZE_LARGE
-	max_w_class = ITEMSIZE_NORMAL
-	max_storage_space = ITEMSIZE_COST_NORMAL * 4
+	max_w_class = ITEMSIZE_SMALL
+	max_storage_space = ITEMSIZE_COST_SMALL * 8

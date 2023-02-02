@@ -663,3 +663,19 @@
 		var/obj/item/clothing/under/costume/costume_type = costume
 		costumes[initial(costume_type.name)] = costume_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
+
+/datum/gear/uniform/accented
+	display_name = "accented departmental uniform selection"
+	description = "A selection of black uniforms with departmental accents."
+	path = /obj/item/clothing/under/accented
+
+/datum/gear/uniform/accented/New()
+	..()
+	var/accented = list()
+	accented["command accented uniform"] = /obj/item/clothing/under/accented
+	accented["supply accented uniform"] = /obj/item/clothing/under/accented/supply
+	accented["engineering accented uniform"] = /obj/item/clothing/under/accented/engineering
+	accented["medical accented uniform"] = /obj/item/clothing/under/accented/medical
+	accented["science accented uniform"] = /obj/item/clothing/under/accented/science
+	accented["security accented uniform"] = /obj/item/clothing/under/accented/security
+	gear_tweaks += new/datum/gear_tweak/path(accented)

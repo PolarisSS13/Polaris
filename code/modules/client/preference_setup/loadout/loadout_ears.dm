@@ -14,18 +14,18 @@
 	..()
 	var/headphones = list()
 	headphones["headphones"] = /obj/item/clothing/head/headphones
-	headphones["earphones"] = /obj/item/clothing/head/headphones/earphones
 	headphones["earbuds"] = /obj/item/clothing/head/headphones/earbuds
+	headphones["wireless earbuds"] = /obj/item/clothing/head/headphones/wirelessearbuds
 	gear_tweaks += new/datum/gear_tweak/path(headphones)
-	gear_tweaks += gear_tweak_free_color_choice
+//	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/ears/circuitry
 	display_name = "earwear, circuitry (empty)"
 	path = /obj/item/clothing/ears/circuitry
 
 /datum/gear/ears/earwarmers
-	display_name = "ear warmers"
-	path = /obj/item/clothing/ears/earwarmers
+	display_name = "ear warmers (colorable)"
+	path = /obj/item/clothing/ears/earmuffs/earwarmers
 
 /datum/gear/ears/earwarmers/New()
 	..()

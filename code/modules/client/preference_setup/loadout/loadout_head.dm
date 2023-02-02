@@ -408,7 +408,7 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
 
 /datum/gear/head/wooly
-	display_name = "wooly hat (recolorable)"
+	display_name = "wooly hat (colorable)"
 	path = /obj/item/clothing/head/wooly
 
 /datum/gear/head/wooly/New()

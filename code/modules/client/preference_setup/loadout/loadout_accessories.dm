@@ -195,7 +195,7 @@
 
 /datum/gear/accessory/fannypack
 	display_name = "fannypack selection"
-	cost = 2
+	cost = 1
 	path = /obj/item/storage/belt/fannypack
 
 /datum/gear/accessory/fannypack/New()
@@ -404,7 +404,7 @@
 /datum/gear/accessory/waistpack
 	display_name = "waist pack (colorable)"
 	path = /obj/item/storage/belt/waistpack
-	cost = 2
+	cost = 1
 
 /datum/gear/accessory/waistpack/New()
 	..()
@@ -414,7 +414,7 @@
 /datum/gear/accessory/waistpackbig
 	display_name = "waist pack, large (colorable)"
 	path = /obj/item/storage/belt/waistpack/big
-	cost = 3
+	cost = 2
 
 /datum/gear/accessory/waistpackbig/New()
 	..()

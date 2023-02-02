@@ -176,7 +176,7 @@
 	name = "white hearing aid"
 	icon_state = "hearing_aid_white"
 
-/obj/item/clothing/ears/earwarmers
+/obj/item/clothing/ears/earmuffs/earwarmers
 	name = "ear warmers"
 	desc ="A pair of fuzzy ear warmers."
 	icon = 'icons/obj/clothing/ears.dmi'
