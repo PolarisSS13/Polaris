@@ -12,7 +12,7 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	icon_dead = "doggo_lying"
 	icon_rest = "doggo_lying"
 	projectileverb = "spits"
-	friendly = list("headbutts", "grooms", "play-bites", "rubs against")
+	friendly = list("sniffs")
 	bitesize = 10 // chomp
 	gender = NEUTER
 
@@ -161,10 +161,32 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	return ..()
 
 
+
 /mob/living/simple_mob/animal/sif/grafadreka/get_available_emotes()
-	if (!is_baby)
-		return global._default_mob_emotes | /decl/emote/audible/drake_howl
-	return global._default_mob_emotes
+	if(is_baby)
+		var/static/list/_baby_drake_emotes = list(
+			/decl/emote/audible/drake_hatchling_growl,
+			/decl/emote/audible/drake_hatchling_whine,
+			/decl/emote/audible/drake_hatchling_yelp,
+			/decl/emote/audible/drake_warn/hatchling,
+			/decl/emote/audible/drake_sneeze
+		)
+		return global._default_mob_emotes | _baby_drake_emotes
+	else
+		var/static/list/_adult_drake_emotes = list(
+			/decl/emote/audible/drake_warble,
+			/decl/emote/audible/drake_purr,
+			/decl/emote/audible/drake_grumble,
+			/decl/emote/audible/drake_huff,
+			/decl/emote/audible/drake_rattle,
+			/decl/emote/audible/drake_warn,
+			/decl/emote/audible/drake_rumble,
+			/decl/emote/audible/drake_roar,
+			/decl/emote/audible/drake_sneeze,
+			/decl/emote/visible/drake_headbutt
+		)
+		return global._default_mob_emotes | _adult_drake_emotes
+
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/lay_down()

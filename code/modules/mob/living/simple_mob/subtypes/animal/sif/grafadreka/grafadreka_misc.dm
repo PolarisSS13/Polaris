@@ -45,7 +45,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 /datum/say_list/grafadreka
 	speak = list("Chff!", "Skhh.", "Rrrss...")
 	emote_see = list("scratches its ears","grooms its spines", "sways its tail", "claws at the ground")
-	emote_hear = list("hisses", "rattles", "rasps", "barks")
+	emote_hear = list("hisses", "rattles", "rasps", "barks", "warbles")
 
 
 /decl/mob_organ_names/grafadreka
@@ -61,21 +61,6 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 		"tail spines",
 		"tail"
 	)
-
-
-/decl/emote/audible/drake_howl
-	key = "dhowl"
-	emote_message_3p = "lifts USER_THEIR head up and gives an eerie howl."
-	emote_sound = 'sound/effects/drakehowl_close.ogg'
-	broadcast_sound ='sound/effects/drakehowl_far.ogg'
-	emote_cooldown = 20 SECONDS
-	broadcast_distance = 90
-
-
-/decl/emote/audible/drake_howl/broadcast_emote_to(send_sound, mob/target, direction)
-	. = ..()
-	if (.)
-		to_chat(target, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]."))
 
 
 /obj/item/projectile/drake_spit
