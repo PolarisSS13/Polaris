@@ -589,7 +589,7 @@
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
-		var/body_type = wearer.species.get_bodytype(wearer)
+		var/body_type = wearer?.species.get_bodytype(wearer)
 		if(wearer && LAZYACCESS(sprite_sheets, body_type))
 			species_icon = LAZYACCESS(sprite_sheets, body_type)
 		mob_icon = icon(icon = species_icon, icon_state = "[icon_state]")

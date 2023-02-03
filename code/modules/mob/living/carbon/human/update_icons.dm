@@ -8,7 +8,7 @@ var/global/list/wing_icon_cache = list() // See tail.
 var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 /proc/overlay_image(icon, icon_state, color, layer, flags)
-	var/image/ret = image(icon = icon, icon_state = icon_state)
+	var/image/ret = image(icon, icon_state)
 	if(!isnull(color))
 		ret.color = color
 	if(!isnull(flags))
