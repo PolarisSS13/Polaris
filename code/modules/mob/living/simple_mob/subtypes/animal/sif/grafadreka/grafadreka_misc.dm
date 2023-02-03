@@ -64,7 +64,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 
 
 /obj/item/projectile/drake_spit
-	name = "drake spit"
+	name = "drake spittle"
 	icon_state = "ice_1"
 	damage = 0
 	embed_chance = 0
@@ -75,7 +75,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	stun = 3
 	weaken = 3
 	eyeblur = 5
-	fire_sound = 'sound/effects/splat.ogg'
+	fire_sound = 'sound/voice/drakes/drake_spit.ogg'
 
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
@@ -90,6 +90,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	stun = 0
 	weaken = 0
 	eyeblur = 2
+	fire_sound = 'sound/voice/drakes/hatchling_spit.ogg'
 
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
 	glow_colour = get_random_colour(TRUE)
