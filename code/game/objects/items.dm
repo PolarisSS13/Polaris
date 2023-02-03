@@ -790,16 +790,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			if(slot_l_hand_str)
 				state2use += "_l"
 
-	//var/using_fallback = FALSE // Testing var
 	var/using_spritesheet = !inhands && (icon2use == LAZYACCESS(sprite_sheets, body_type)) // TODO: arg to get_worn_icon to avoid doing this separately.
 	var/image/standing
 	if(!using_spritesheet && species)
 		standing = species.get_offset_overlay_image(icon2use, state2use, color, slot_name, layer2use)
-		if(!standing)
-			//using_fallback = TRUE // Testing var
-			standing = overlay_image(icon2use, state2use, color, layer2use)
-	else
-		overlay_image(icon2use, state2use, color, layer2use)
+	if(!standing)
+		standing = overlay_image(icon2use, state2use, color, layer2use)
 
 	if(alpha != 255)
 		standing.alpha = alpha
