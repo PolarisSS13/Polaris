@@ -7,14 +7,22 @@ var/global/list/tail_icon_cache = list() //key is [species.race_key][r_skin][g_s
 var/global/list/wing_icon_cache = list() // See tail.
 var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
+var/global/list/_index_extended_clothing_icon_cache= list()
 /proc/overlay_image(icon, icon_state, color, layer, flags)
+	// Polaris has a system for extending clothing icons for suits and uniforms by an index,
+	// which requires us to identify an icon string being passed in as the previous system
+	// used icon() universally. This is pretty problematic as a method but unpicking it is
+	// going to be a big job and this will work for now.
+	if(istext(icon))
+		if(!global._index_extended_clothing_icon_cache[icon])
+			global._index_extended_clothing_icon_cache[icon] = new /icon(icon)
+		icon = global._index_extended_clothing_icon_cache[icon]
+	// End string icon path hack.
+
 	var/image/ret = image(icon, icon_state)
-	if(!isnull(color))
-		ret.color = color
-	if(!isnull(flags))
-		ret.appearance_flags = flags
-	if(!isnull(layer))
-		ret.layer = layer
+	ret.color = color
+	ret.appearance_flags = flags
+	ret.layer = layer
 	return ret
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -594,9 +602,9 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	var/uniform_sprite
 
 	if(under.index)
-		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON]_[under.index].dmi"
+		uniform_sprite = "[INV_W_UNIFORM_DEF_STRING]_[under.index].dmi"
 	else
-		uniform_sprite = "[INV_W_UNIFORM_DEF_ICON].dmi"
+		uniform_sprite = INV_W_UNIFORM_DEF_ICON
 
 	//Build a uniform sprite
 	var/icon/c_mask = tail_style?.clip_mask
@@ -775,11 +783,11 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 	var/suit_sprite
 
 	if(istype(suit) && suit.index)
-		suit_sprite = "[INV_SUIT_DEF_ICON]_[suit.index].dmi"
+		suit_sprite = "[INV_SUIT_DEF_STRING]_[suit.index].dmi"
 	else if(istype(suit, /obj/item/clothing) && !isnull(suit.update_icon_define))
 		suit_sprite = suit.update_icon_define
 	else
-		suit_sprite = "[INV_SUIT_DEF_ICON].dmi"
+		suit_sprite = INV_SUIT_DEF_ICON
 
 	var/icon/c_mask = null
 	overlays_standing[SUIT_LAYER] = wear_suit.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), slot_name = slot_wear_suit_str, default_icon = suit_sprite, default_layer = SUIT_LAYER, clip_mask = c_mask)
