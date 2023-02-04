@@ -39,6 +39,13 @@
 	emote_cooldown = 20 SECONDS
 	broadcast_distance = 65
 
-/decl/emote/audible/whistle/summon/broadcast_emote_to(var/send_sound, var/mob/target, var/direction)
-	if((. = ..()))
-		to_chat(target, SPAN_NOTICE("You hear a piercing whistle from somewhere to the [dir2text(direction)]."))
+/decl/emote/audible/whistle/summon/broadcast_emote_to(var/send_sound, var/mob/target, var/origin_z, var/direction)
+	. = ..()
+	if (.)
+		var/turf/T = get_turf(target)
+		if(!T || T.z == origin_z)
+			to_chat(target, SPAN_NOTICE("You hear a piercing whistle from somewhere to the [dir2text(direction)]."))
+		else if(T.z < origin_z)
+			to_chat(target, SPAN_NOTICE("You hear a piercing whistle from somewhere above you, to the [dir2text(direction)]."))
+		else
+			to_chat(target, SPAN_NOTICE("You hear a piercing whistle from somewhere below you, to the [dir2text(direction)]."))

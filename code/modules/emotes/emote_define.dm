@@ -1,7 +1,7 @@
 // Note about emote messages:
 // - USER / TARGET will be replaced with the relevant name, in bold.
-// - USER_THEM / TARGET_THEM / USER_THEIR / TARGET_THEIR will be replaced with a
-//   gender-appropriate version of the same.
+// - USER_THEM / TARGET_THEM / USER_THEIR / TARGET_THEIR / USER_THEY / TARGET_THEY
+//   will be replaced with a gender-appropriate version of the same.
 // - Impaired messages do not do any substitutions.
 
 var/global/list/emotes_by_key
@@ -94,6 +94,9 @@ var/global/list/emotes_by_key
 		LAZYINITLIST(.)
 		.["broadcast"] = broadcast_sound
 
+/decl/emote/proc/finalize_target(var/atom/target)
+	return TRUE
+
 /decl/emote/proc/do_emote(var/atom/user, var/extra_params)
 
 	if(ismob(user) && check_restraints)
@@ -127,7 +130,7 @@ var/global/list/emotes_by_key
 				target_dist = new_target_dist
 				target = thing
 
-		if(!target)
+		if(!finalize_target(user, target))
 			to_chat(user, SPAN_WARNING("You cannot see a '[extra_params]' within range."))
 			return FALSE
 
@@ -176,8 +179,10 @@ var/global/list/emotes_by_key
 	if(istype(target))
 		var/datum/gender/target_gender = gender_datums[target.get_visible_gender()]
 		. = replacetext(., "TARGET_THEM",  target_gender.him)
+		. = replacetext(., "TARGET_THEY",  target_gender.he)
 		. = replacetext(., "TARGET_THEIR", target_gender.his)
 		. = replacetext(., "TARGET_SELF",  target_gender.himself)
+		. = replacetext(., "TARGET_S",     target_gender.s)
 		. = replacetext(., "TARGET",       "<b>\the [target]</b>")
 
 /decl/emote/proc/replace_user_tokens(var/msg, var/atom/user)
@@ -185,8 +190,10 @@ var/global/list/emotes_by_key
 	if(istype(user))
 		var/datum/gender/user_gender = gender_datums[user.get_visible_gender()]
 		. = replacetext(., "USER_THEM",  user_gender.him)
+		. = replacetext(., "USER_THEY",  user_gender.he)
 		. = replacetext(., "USER_THEIR", user_gender.his)
 		. = replacetext(., "USER_SELF",  user_gender.himself)
+		. = replacetext(., "USER_S",     user_gender.s)
 		. = replacetext(., "USER",       "<b>\the [user]</b>")
 
 /decl/emote/proc/get_radio_message(var/atom/user)
@@ -194,7 +201,7 @@ var/global/list/emotes_by_key
 		return emote_message_radio_synthetic
 	return emote_message_radio
 
-/decl/emote/proc/do_extra(var/atom/user, var/atom/target)
+/decl/emote/proc/do_extra(mob/user, atom/target)
 	return
 
 /decl/emote/proc/do_sound(var/atom/user)
@@ -251,9 +258,9 @@ var/global/list/emotes_by_key
 			continue
 		if(!isnull(broadcast_distance) && get_dist(reference_point, user_turf) > broadcast_distance)
 			continue
-		broadcast_emote_to(sound_to_broadcast, listener, direction)
+		broadcast_emote_to(sound_to_broadcast, listener, user_turf.z, direction)
 
-/decl/emote/proc/broadcast_emote_to(var/send_sound, var/mob/target, var/direction)
+/decl/emote/proc/broadcast_emote_to(var/send_sound, var/mob/target, var/origin_z, var/direction)
 	var/turf/sound_origin = get_turf(target)
 	target.playsound_local(get_step(sound_origin, direction) || sound_origin, send_sound, broadcast_volume)
 	return TRUE

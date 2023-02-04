@@ -45,7 +45,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 /datum/say_list/grafadreka
 	speak = list("Chff!", "Skhh.", "Rrrss...")
 	emote_see = list("scratches its ears","grooms its spines", "sways its tail", "claws at the ground")
-	emote_hear = list("hisses", "rattles", "rasps", "barks")
+	emote_hear = list("hisses", "rattles", "rasps", "barks", "warbles")
 
 
 /decl/mob_organ_names/grafadreka
@@ -63,23 +63,8 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	)
 
 
-/decl/emote/audible/drake_howl
-	key = "dhowl"
-	emote_message_3p = "lifts USER_THEIR head up and gives an eerie howl."
-	emote_sound = 'sound/effects/drakehowl_close.ogg'
-	broadcast_sound ='sound/effects/drakehowl_far.ogg'
-	emote_cooldown = 20 SECONDS
-	broadcast_distance = 90
-
-
-/decl/emote/audible/drake_howl/broadcast_emote_to(send_sound, mob/target, direction)
-	. = ..()
-	if (.)
-		to_chat(target, SPAN_NOTICE("You hear an eerie howl from somewhere to the [dir2text(direction)]."))
-
-
 /obj/item/projectile/drake_spit
-	name = "drake spit"
+	name = "drake spittle"
 	icon_state = "ice_1"
 	damage = 0
 	embed_chance = 0
@@ -90,7 +75,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	stun = 3
 	weaken = 3
 	eyeblur = 5
-	fire_sound = 'sound/effects/splat.ogg'
+	fire_sound = 'sound/voice/drakes/drake_spit.ogg'
 
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
@@ -105,6 +90,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	stun = 0
 	weaken = 0
 	eyeblur = 2
+	fire_sound = 'sound/voice/drakes/hatchling_spit.ogg'
 
 /mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
 	glow_colour = get_random_colour(TRUE)
