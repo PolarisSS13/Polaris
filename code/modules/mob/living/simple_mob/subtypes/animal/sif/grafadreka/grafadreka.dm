@@ -104,6 +104,8 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	return ..()
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
+	if(is_baby)
+		verbs |= /mob/living/proc/hide
 	stored_sap = rand(20, 30)
 	nutrition = rand(400,500)
 	if (gender == NEUTER)
@@ -387,6 +389,11 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	if (. && tox_damage && spend_sap(5))
 		var/mob/living/M = A
 		M.adjustToxLoss(tox_damage)
+		// It would be nice if we could keep track of the wound we just dealt, and give
+		// infections directly, but alas simplemob attack code is not great for that.
+		if(iscarbon(M))
+			var/mob/living/carbon/C = M
+			C.germ_level = max(C.germ_level, INFECTION_LEVEL_TWO)
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/rejuvenate()

@@ -39,7 +39,7 @@ Grafadrekas are capable of exerting bite pressures in excess of 900 PSI, which a
 They have been observed to occasionally attack and kill colonists, generally when conditions are too poor to hunt their usual prey. Despite this, and despite their disposition being generally skittish and avoidant of colonists, some Sivian communities hold that they have been observed to guide or protect lost travellers.
 <br><br>
 Field studies suggest analytical abilities on par with some species of cepholapods, but their symbiotic physiology rapidly fails in captivity, making laboratory testing difficult. Their inability to make use of tools or form wider social groups beyond a handful of individuals has been hypothesised to prevent the expression of more complex social behaviors."}
-	value = CATALOGUER_REWARD_HARD
+	value = CATALOGUER_REWARD_EASY
 
 
 /datum/say_list/grafadreka
@@ -80,15 +80,15 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
 	if(ishuman(target))
+		var/mob/living/carbon/human/victim = target
+		victim.AdjustConfused(max(stun, weaken))
 		stun = 0
 		weaken = 0
-		var/mob/living/carbon/human/victim = target
-		victim.AdjustConfused(3)
-	. = ..()
+		. = ..()
 
 /obj/item/projectile/drake_spit/weak
-	stun = 0
-	weaken = 0
+	stun = 1
+	weaken = 1
 	eyeblur = 2
 	fire_sound = 'sound/voice/drakes/hatchling_spit.ogg'
 
