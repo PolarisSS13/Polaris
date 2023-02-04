@@ -38,7 +38,7 @@
 		to_chat(M, "This Shroud has already been customized!")
 		return 0
 
-	suit_style = input(M, "Which suit style would you like?") in list("Engineer", "Spacer", "Knight", "Fashion", "Bishop", "Hegemony", "Rugged", "Soft", "Ancient", "Healer", "Clockwork", "Retro")
+	suit_style = input(M, "Which suit style would you like?") in list("Engineer", "Spacer", "Knight", "Fashion", "Bishop", "Hegemony", "Rugged", "Soft", "Ancient", "Healer", "Clockwork", "Retro", "Retro - Pink")
 	switch(suit_style)
 		if("Engineer")
 			name = "\improper Engineer's Guild Shroud"
@@ -161,6 +161,18 @@
 				helmet.desc = "A classic design for the modern age."
 				helmet.icon_state = "zaddat_retro"
 				helmet.item_state = "zaddat_retro"
+		if("Retro - Pink")
+			name = "pink retro Shroud"
+			base_name = "pink retro Shroud"
+			desc = "In 2572, the Dzaz Fashion House released this hasty recolor of one of their Shroud designs shamelessly appropriated from human media to universal acclaim."
+			icon_state = "zaddat_retro_pink"
+			item_state = "zaddat_retro_pink"
+			if(helmet)
+				helmet.name = "pink retro Shroud helmet"
+				helmet.desc = "A classic design for the modern age. Now at least fifteen percent more feminine."
+				helmet.icon_state = "zaddat_retro_pink"
+				helmet.item_state = "zaddat_retro_pink"
+
 
 	to_chat(M, "You finish customizing your Shroud. Looking good!")
 	has_been_customized = TRUE
