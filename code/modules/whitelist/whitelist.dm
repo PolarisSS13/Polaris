@@ -47,13 +47,13 @@ var/list/whitelistable = list(
 /client/proc/is_whitelisted(var/w_key)
 	if(istype(w_key, /datum))
 		var/datum/D = w_key
-		w_key = D.name
+		w_key = D:name
 	if(!istext(w_key))
 		return FALSE // Not set.
 	return key in global.whitelists[ckey]
 
 
-/proc/is_alien_whitelisted(mob/M, var/datum/species/species)
+/proc/is_alien_whitelisted(mob/M, datum/species/species)
 	//They are admin or the whitelist isn't in use
 	if(whitelist_overrides(M))
 		return TRUE
@@ -70,7 +70,7 @@ var/list/whitelistable = list(
 	return C.is_whitelisted(species.name)
 
 
-/proc/is_lang_whitelisted(mob/M, var/datum/language/language)
+/proc/is_lang_whitelisted(mob/M, datum/language/language)
 	//They are admin or the whitelist isn't in use
 	if(whitelist_overrides(M))
 		return TRUE
@@ -78,7 +78,7 @@ var/list/whitelistable = list(
 	var/client/C = (!isclient(M)) ? M.client : M
 
 	//You did something wrong
-	if(!istype(C) || !istype(language.name))
+	if(!istype(C) || !istype(language))
 		return FALSE
 
 	//The language isn't even whitelisted

@@ -20,7 +20,7 @@
 /client/proc/add_whitelist(var/w_key)
 	if(istype(w_key, /datum))
 		var/datum/D = w_key
-		w_key = D.name
+		w_key = D:name
 	if(!istext(w_key))
 		return FALSE // Not set.
 	// If they're already whitelisted, do nothing (Also loads the whitelist)
@@ -29,13 +29,13 @@
 
 	log_and_message_admins("[usr ? usr : "SYSTEM"] gave [w_key] whitelist to [src]", usr)
 	global.whitelists[ckey] += w_key
-	write_whitelists()
+	write_whitelist()
 
 // Remove the selected path from the player's whitelists.
 /client/proc/remove_whitelist(var/w_key)
 	if(istype(w_key, /datum))
 		var/datum/D = w_key
-		w_key = D.name
+		w_key = D:name
 	if(!istext(w_key))
 		return FALSE // Not set.
 	// If they're not whitelisted, do nothing (Also loads the whitelist)
@@ -44,7 +44,7 @@
 
 	log_and_message_admins("[usr ? usr : "SYSTEM"] removed [w_key] whitelist from [src]", usr)
 	global.whitelists[ckey] -= w_key
-	write_whitelists()
+	write_whitelist()
 
 
 /client/proc/admin_add_whitelist()
@@ -67,7 +67,8 @@
 
 	// Get the person to whitelist.
 	if(!key)
-		key = input(src, "Please enter the CKEY of the player whose whitelist you wish to modify:", "Whitelist ckey", "") as text|null	if(!key || !length(key))
+		key = input(src, "Please enter the CKEY of the player whose whitelist you wish to modify:", "Whitelist ckey", "") as text|null
+	if(!key || !length(key))
 		return
 
 	key = ckey(key)
@@ -86,12 +87,13 @@
 		global.whitelists[key] += entry
 	else
 		if(!islist(global.whitelists[key]))
+			to_chat(src, SPAN_NOTICE("[key] isn't whitelisted for anything!"))
 			return
 		global.whitelists[key] -= entry
 
 	log_and_message_admins("[src] [set_value ? "gave [entry] whitelist to" : "removed [entry] whitelist from"] [key]", src)
 
-	write_whitelists()
+	write_whitelist()
 
 
 /client/vv_get_dropdown()
