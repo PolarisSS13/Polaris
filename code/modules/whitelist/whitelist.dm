@@ -3,8 +3,8 @@ var/list/whitelistable = list(
 	SPECIES_DIONA,
 	SPECIES_PROMETHEAN,
 	SPECIES_SKRELL,
-	SPECIES_TESHARI,
 	SPECIES_TAJ,
+	SPECIES_TESHARI,
 	SPECIES_UNATHI,
 	SPECIES_VOX,
 	SPECIES_ZADDAT,
@@ -30,8 +30,10 @@ var/list/whitelistable = list(
 	to_chat(src, "You are whitelisted for:")
 	to_chat(src, jointext(get_whitelists_list(), "\n"))
 
+
 /client/proc/get_whitelists_list()
 	return (ckey in global.whitelists) ? global.whitelists[ckey] : list()
+
 
 /proc/load_whitelist(var/key)
 	var/filename = "config/whitelists.json"

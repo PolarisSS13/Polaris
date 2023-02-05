@@ -28,7 +28,9 @@
 		return
 
 	log_and_message_admins("[usr ? usr : "SYSTEM"] gave [w_key] whitelist to [src]", usr)
-	global.whitelists[ckey] += w_key
+	if(!islist(global.whitelists[ckey(ckey)]))
+		global.whitelists[ckey(ckey)] = list()
+	global.whitelists[ckey(ckey)] += w_key
 	write_whitelist()
 
 // Remove the selected path from the player's whitelists.
@@ -74,13 +76,15 @@
 	key = ckey(key)
 
 	// Get the whitelist thing to modify.
-	var/entry = input(src, "Please enter the path of the whitelist you wish to modify:", "Whitelist target", "") as null|anything in global.whitelistable
+	var/entry = input(src, "Please enter the name of the whitelist you wish to modify:", "Whitelist target", "") as null|anything in global.whitelistable
 	if(!entry)
 		return
 
 	if(set_value)
 		if(!islist(global.whitelists[key]))
 			global.whitelists[key] = list()
+		else
+			to_world("is a list: [global.whitelists[ckey(ckey)]]")
 		if(entry in global.whitelists[key])
 			to_chat(src, SPAN_NOTICE("[key] is already whitelisted for [entry]!"))
 			return
@@ -107,18 +111,13 @@
 	IF_VV_OPTION(VV_HK_ADD_WHITELIST)
 		if(!check_rights(R_ADMIN|R_DEBUG))
 			return
-		var/entry = input(usr, "Please enter the whitelist you wish to add:", "Whitelist target", "") as null|anything in global.whitelistable
-		if(!entry)
-			return
 		var/client/C = locate(href_list["target"])
 		if(istype(C))
-			C.add_whitelist(entry)
+			usr.client.admin_modify_whitelist(TRUE, ckey(C.ckey))
+
 	IF_VV_OPTION(VV_HK_DEL_WHITELIST)
 		if(!check_rights(R_ADMIN|R_DEBUG))
 			return
-		var/entry = input(usr, "Please enter the whitelist you wish to remove:", "Whitelist target", "") as text|anything in global.whitelistable
-		if(!entry)
-			return
 		var/client/C = locate(href_list["target"])
 		if(istype(C))
-			C.remove_whitelist(entry)
+			usr.client.admin_modify_whitelist(FALSE, ckey(C.ckey))
