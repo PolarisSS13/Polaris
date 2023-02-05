@@ -275,7 +275,7 @@ var/global/datum/planet/sif/planet_sif = null
 /datum/weather/sif/rain
 	name = "rain"
 	icon_state = "rain"
-	wind_high = 2
+	wind_high = 1
 	wind_low = 0
 	light_modifier = 0.5
 	effect_message = "<span class='warning'>Rain falls on you.</span>"
