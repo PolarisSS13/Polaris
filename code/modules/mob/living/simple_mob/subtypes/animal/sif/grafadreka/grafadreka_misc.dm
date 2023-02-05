@@ -84,7 +84,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 		victim.AdjustConfused(max(stun, weaken))
 		stun = 0
 		weaken = 0
-		. = ..()
+	. = ..()
 
 /obj/item/projectile/drake_spit/weak
 	stun = 1
