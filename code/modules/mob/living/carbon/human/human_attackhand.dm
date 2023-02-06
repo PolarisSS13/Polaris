@@ -117,7 +117,6 @@
 				return
 			M.put_in_active_hand(G)
 			G.synch()
-			LAssailant = M
 
 			H.do_attack_animation(src)
 			playsound(src, 'sound/weapons/thudswoosh.ogg', 50, 1, -1)
