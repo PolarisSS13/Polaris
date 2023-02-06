@@ -48,39 +48,15 @@
 			L.visible_message(SPAN_WARNING("\The [L] [response_harm] \the [src]!"))
 			L.do_attack_animation(src)
 
-// When somoene clicks us with an item in hand
+// When somoene clicks us with an item in hand.
 /mob/living/simple_mob/attackby(var/obj/item/O, var/mob/user)
 
-	if(istype(O, /obj/item/stack/medical) && (mob_class & (MOB_CLASS_HUMANOID|MOB_CLASS_ANIMAL)))
+	// Attempt to apply healing items, nanopaste, etc.
+	if(attempt_healing(user, O))
+		return TRUE
 
-		var/datum/gender/T = gender_datums[get_visible_gender()]
-		if(stat == DEAD)
-			to_chat(user, SPAN_WARNING("\The [src] is dead, medical items won't bring [T.him] back to life."))
-			return
-
-		var/obj/item/stack/medical/MED = O
-		if(health >= getMaxHealth())
-			to_chat(user, SPAN_WARNING("\The [src] does not need medical treatment."))
-			return
-
-		if(!((MED.heal_burn && getFireLoss()) || (MED.heal_brute && getBruteLoss())))
-			to_chat(user, SPAN_WARNING("\The [MED] does not seem appropriate to treat \the [src]."))
-			return
-
-		if(MED.get_amount() < 1)
-			to_chat(user, SPAN_WARNING("You do not have enough of \the [MED] to treat \the [src]."))
-			return
-
-		if(length(MED.apply_sounds))
-			playsound(user, pick(MED.apply_sounds), 25)
-
-		if(do_mob(user, src, 2 SECONDS) && MED.get_amount() >= 1 && health < getMaxHealth())
-			heal_organ_damage(MED.heal_brute * 25, MED.heal_burn * 25)
-			visible_message(SPAN_NOTICE("\The [user] applies \the [MED] to \the [src]."))
-			MED.use(1)
-		return
-
-	if(can_butcher(user, O))	//if the animal can be butchered, do so and return. It's likely to be gibbed.
+	//if the animal can be butchered, do so and return. It's likely to be gibbed.
+	if(can_butcher(user, O))
 		harvest(user, O)
 		return
 

@@ -7,7 +7,7 @@ Using <font color='#e0a000'>grab intent</font> you can pick up and drop items by
 	faction = "station"
 	ai_holder_type = null // These guys should not exist without players.
 	gender = PLURAL // Will take gender from prefs = set to non-NEUTER here to avoid randomizing in Initialize().
-	movement_cooldown = 1.5 // ~Red~ trained ones go faster.
+	movement_cooldown = 1.5 // ~~Red~~ trained ones go faster.
 	dexterity = MOB_DEXTERITY_SIMPLE_MACHINES
 	harness = /obj/item/storage/internal/animal_harness/grafadreka/trained
 	trained_drake = TRUE
@@ -20,7 +20,8 @@ Using <font color='#e0a000'>grab intent</font> you can pick up and drop items by
 	var/static/list/allow_type_to_pass = list(
 		/obj/item/healthanalyzer,
 		/obj/item/stack/medical,
-		/obj/item/reagent_containers/syringe
+		/obj/item/reagent_containers/syringe,
+		/obj/item/shockpaddles
 	)
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/Destroy()

@@ -2464,6 +2464,7 @@
 #include "code\modules\mob\living\simple_mob\defense.dm"
 #include "code\modules\mob\living\simple_mob\hands.dm"
 #include "code\modules\mob\living\simple_mob\harvesting.dm"
+#include "code\modules\mob\living\simple_mob\healing.dm"
 #include "code\modules\mob\living\simple_mob\life.dm"
 #include "code\modules\mob\living\simple_mob\on_click.dm"
 #include "code\modules\mob\living\simple_mob\simple_hud.dm"
