@@ -1,5 +1,5 @@
 //Dionaea regenerate health and nutrition in light.
-/mob/living/carbon/nymph/handle_environment(datum/gas_mixture/environment)
+/mob/living/carbon/diona/handle_environment(datum/gas_mixture/environment)
 	var/light_amount = 0 //how much light there is in the place, affects receiving nutrition and healing
 	if(isturf(loc)) //else, there's considered to be no light
 		var/turf/T = loc
@@ -18,7 +18,7 @@
 
 
 // Alien larva are quite simple.
-/mob/living/carbon/nymph/Life()
+/mob/living/carbon/diona/Life()
 	set invisibility = 0
 	set background = 1
 	if(transforming || !loc)
@@ -33,7 +33,7 @@
 	update_icons()
 
 
-/mob/living/carbon/nymph/handle_mutations_and_radiation()
+/mob/living/carbon/diona/handle_mutations_and_radiation()
 	// Currently Dionaea like to eat radiation
 	if(!radiation)
 		return
@@ -47,7 +47,7 @@
 	return
 
 
-/mob/living/carbon/nymph/handle_regular_status_updates()
+/mob/living/carbon/diona/handle_regular_status_updates()
 	if(stat == DEAD)
 		SetBlinded(TRUE)
 		silent = FALSE
@@ -88,7 +88,7 @@
 	return TRUE
 
 
-/mob/living/carbon/nymph/handle_regular_hud_updates()
+/mob/living/carbon/diona/handle_regular_hud_updates()
 	if(stat == DEAD)
 		sight |= SEE_TURFS
 		sight |= SEE_MOBS
@@ -125,7 +125,7 @@
 	return TRUE
 
 
-/mob/living/carbon/nymph/handle_environment(var/datum/gas_mixture/environment)
+/mob/living/carbon/diona/handle_environment(var/datum/gas_mixture/environment)
 	if(!environment)
 		return
 
@@ -138,7 +138,7 @@
 		clear_alert("alien_fire")
 
 
-/mob/living/carbon/nymph/handle_fire()
+/mob/living/carbon/diona/handle_fire()
 	. = ..()
 	if(!.) // True == Not on fire
 		bodytemperature += BODYTEMP_HEATING_MAX //If you're on fire, you heat up!

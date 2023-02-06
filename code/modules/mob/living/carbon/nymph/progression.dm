@@ -1,4 +1,4 @@
-/mob/living/carbon/nymph/proc/confirm_evolution()
+/mob/living/carbon/diona/proc/confirm_evolution()
 	if(!is_alien_whitelisted(src, GLOB.all_species[SPECIES_DIONA]))
 		alert(src, "You are currently not whitelisted to play as a full diona.")
 		return null
@@ -21,7 +21,7 @@
 	return SPECIES_DIONA
 
 
-/mob/living/carbon/nymph/verb/evolve()
+/mob/living/carbon/diona/verb/evolve()
 	set name = "Evolve"
 	set desc = "Evolve into your adult form."
 	set category = "Abilities"
@@ -68,7 +68,7 @@
 	qdel(src)
 
 
-/mob/living/carbon/nymph/proc/update_progression()
+/mob/living/carbon/diona/proc/update_progression()
 	if(amount_grown < max_grown)
 		amount_grown++
 	return

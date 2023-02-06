@@ -24,7 +24,7 @@ var/global/list/_nymph_default_emotes = list(
 	/decl/emote/audible/chirp
 )
 
-/mob/living/carbon/nymph
+/mob/living/carbon/diona
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
@@ -57,17 +57,17 @@ var/global/list/_nymph_default_emotes = list(
 	var/instance_num
 
 
-/mob/living/carbon/nymph/get_available_emotes()
+/mob/living/carbon/diona/get_available_emotes()
 	return global._nymph_default_emotes
 
 
-/mob/living/carbon/nymph/Initialize()
+/mob/living/carbon/diona/Initialize()
 	. = ..()
 	time_of_birth = world.time
 
 	verbs += /mob/living/proc/ventcrawl
 	verbs += /mob/living/proc/hide
-	verbs += /mob/living/carbon/nymph/proc/merge
+	verbs += /mob/living/carbon/diona/proc/merge
 
 	instance_num = rand(1, 1000)
 	name = "[initial(name)] ([instance_num])"
@@ -79,12 +79,12 @@ var/global/list/_nymph_default_emotes = list(
 	add_language(LANGUAGE_GALCOM)
 
 
-/mob/living/carbon/nymph/put_in_hands(var/obj/item/W) // No hands.
+/mob/living/carbon/diona/put_in_hands(var/obj/item/W) // No hands.
 	W.loc = get_turf(src)
 	return TRUE
 
 
-/mob/living/carbon/nymph/proc/wear_hat(var/obj/item/new_hat)
+/mob/living/carbon/diona/proc/wear_hat(var/obj/item/new_hat)
 	if(hat)
 		return
 	hat = new_hat
@@ -92,7 +92,7 @@ var/global/list/_nymph_default_emotes = list(
 	update_icons()
 
 
-/mob/living/carbon/nymph/proc/handle_npc(var/mob/living/carbon/nymph/D)
+/mob/living/carbon/diona/proc/handle_npc(var/mob/living/carbon/diona/D)
 	if(D.stat != CONSCIOUS)
 		return
 	if(prob(33) && D.canmove && isturf(D.loc) && !D.pulledby) //won't move if being pulled
@@ -101,22 +101,22 @@ var/global/list/_nymph_default_emotes = list(
 		D.emote(pick("scratch","jump","chirp","roll"))
 
 
-/mob/living/carbon/nymph/u_equip(obj/item/W as obj)
+/mob/living/carbon/diona/u_equip(obj/item/W as obj)
 	return
 
 
-/mob/living/carbon/nymph/Stat()
+/mob/living/carbon/diona/Stat()
 	..()
 	stat(null, "Progress: [amount_grown]/[max_grown]")
 
 
-/mob/living/carbon/nymph/get_default_language()
+/mob/living/carbon/diona/get_default_language()
 	if(default_language)
 		return default_language
 	return GLOB.all_languages["Skathari"]
 
 
-/mob/living/carbon/nymph/say_quote(var/message, var/datum/language/speaking = null)
+/mob/living/carbon/diona/say_quote(var/message, var/datum/language/speaking = null)
 	var/verb = pick(speak_emote)
 	var/ending = copytext(message, length(message))
 	if(speaking && (speaking.name != "Galactic Common"))
@@ -126,5 +126,5 @@ var/global/list/_nymph_default_emotes = list(
 	return verb
 
 
-/mob/living/carbon/nymph/death(gibbed)
+/mob/living/carbon/diona/death(gibbed)
 	return ..(gibbed,death_msg)

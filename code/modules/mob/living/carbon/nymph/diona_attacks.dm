@@ -1,4 +1,4 @@
-/mob/living/carbon/nymph/MouseDrop(var/atom/over_object)
+/mob/living/carbon/diona/MouseDrop(var/atom/over_object)
 	var/mob/living/carbon/human/H = over_object
 	if(!istype(H) || !Adjacent(H))
 		return ..()
@@ -12,7 +12,7 @@
 		return ..()
 
 
-/mob/living/carbon/nymph/attackby(var/obj/item/W, var/mob/user)
+/mob/living/carbon/diona/attackby(var/obj/item/W, var/mob/user)
 	if(user.a_intent == "help" && istype(W, /obj/item/clothing/head))
 		if(hat)
 			to_chat(user, "<span class='warning'>\The [src] is already wearing \the [hat].</span>")
@@ -24,11 +24,11 @@
 	return ..()
 
 
-/mob/living/carbon/nymph/attack_ui(slot_id)
+/mob/living/carbon/diona/attack_ui(slot_id)
 	return
 
 
-/mob/living/carbon/nymph/attack_hand(mob/living/carbon/M as mob)
+/mob/living/carbon/diona/attack_hand(mob/living/carbon/M as mob)
 	..()
 	switch(M.a_intent)
 		if(I_HELP)
@@ -73,7 +73,7 @@
 			updatehealth()
 
 
-/mob/living/carbon/nymph/ex_act(severity)
+/mob/living/carbon/diona/ex_act(severity)
 	if(!blinded)
 		flash_eyes()
 
