@@ -675,3 +675,12 @@ Drinks Data
 
 /datum/reagent/ethanol/mojito
 	glass_icon_state = "mojito"
+
+/datum/reagent/drink/juice/dyn
+	glass_icon_state = "dynjuice"
+
+/datum/reagent/drink/tea/dyn
+	glass_icon_state = "dynhot"
+
+/datum/reagent/drink/tea/icetea/dyn
+	glass_icon_state = "dyncold"

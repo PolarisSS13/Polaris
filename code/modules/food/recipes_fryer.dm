@@ -203,3 +203,13 @@
 	)
 	coating = /datum/reagent/nutriment/coating/batter
 	result = /obj/item/reagent_containers/food/snacks/locust_cooked
+
+/datum/recipe/garani
+	appliance = FRYER
+	items = list(
+		/obj/item/reagent_containers/food/snacks/qalozynboiled,
+		/obj/item/reagent_containers/food/snacks/qalozynboiled,
+		/obj/item/organ/internal/liver/neaera
+	)
+	result = /obj/item/reagent_containers/food/snacks/garani
+	reagent_mix = RECIPE_REAGENT_REPLACE

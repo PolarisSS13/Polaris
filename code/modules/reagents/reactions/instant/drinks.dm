@@ -1264,3 +1264,17 @@
 	result = "ayahuasca"
 	required_reagents = list("water" = 1, "dmt" = 2, "honey" = 1)
 	result_amount = 3
+
+/decl/chemical_reaction/instant/drinks/dyntea
+	name = "Dyn tea"
+	id = "dynhot"
+	result = "dynhot"
+	required_reagents = list("dynjuice" = 1, "water" = 4)
+	result_amount = 5
+
+/decl/chemical_reaction/instant/drinks/dynicetea
+	name = "Dyn iced tea"
+	id = "dyncold"
+	result = "dyncold"
+	required_reagents = list("dynjuice" = 1, "ice" = 2, "sodawater" = 2)
+	result_amount = 5

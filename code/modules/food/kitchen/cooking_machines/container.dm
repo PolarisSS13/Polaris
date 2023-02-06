@@ -16,7 +16,9 @@
 		/obj/item/clothing/head/wizard,
 		/obj/item/clothing/head/cakehat,
 		/obj/item/clothing/mask/gas/costume,
-		/obj/item/clothing/head/beret
+		/obj/item/clothing/head/beret,
+		/obj/item/stack/rods,
+		/obj/item/organ/internal
 	)
 
 /obj/item/reagent_containers/cooking_container/Initialize()

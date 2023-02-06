@@ -58,3 +58,14 @@
 		. = ..()
 		reagents.remove_reagent("triglyceride", INFINITY)
 		//Chicken is low fat. Less total calories than other meats
+
+/obj/item/reagent_containers/food/snacks/meat/neaera
+	name = "neaera meat"
+	desc = "A slab of.. blue meat?"
+	icon_state = "neaera_meat"
+
+/obj/item/reagent_containers/food/snacks/meat/neaera/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 3)
+	reagents.add_reagent("seafood", 3)
+	reagents.add_reagent("triglyceride", 2)

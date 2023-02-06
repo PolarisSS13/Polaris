@@ -83,6 +83,7 @@
 					/obj/item/reagent_containers/food/drinks/bottle/limejuice = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/lemonjuice = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/applejuice = 5,
+					/obj/item/reagent_containers/food/drinks/bottle/dynjuice = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/milk = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/cream = 5,
 					/obj/item/reagent_containers/food/drinks/bottle/cola = 5,
@@ -231,7 +232,8 @@
 					/obj/item/reagent_containers/food/drinks/cans/iced_tea = 10,
 					/obj/item/reagent_containers/food/drinks/cans/grape_juice = 10,
 					/obj/item/reagent_containers/food/drinks/cans/gingerale = 10,
-					/obj/item/reagent_containers/food/drinks/cans/root_beer = 10)
+					/obj/item/reagent_containers/food/drinks/cans/root_beer = 10,
+					/obj/item/reagent_containers/food/drinks/cans/dyn = 5)
 
 	contraband = list(/obj/item/reagent_containers/food/drinks/cans/thirteenloko = 5,
 					/obj/item/reagent_containers/food/snacks/liquidfood = 6)
@@ -247,7 +249,8 @@
 					/obj/item/reagent_containers/food/drinks/cans/iced_tea = 1,
 					/obj/item/reagent_containers/food/drinks/cans/grape_juice = 1,
 					/obj/item/reagent_containers/food/drinks/cans/gingerale = 1,
-					/obj/item/reagent_containers/food/drinks/cans/root_beer = 1)
+					/obj/item/reagent_containers/food/drinks/cans/root_beer = 1,
+					/obj/item/reagent_containers/food/drinks/cans/dyn = 3)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
 
@@ -510,7 +513,16 @@
 					/obj/item/seeds/pumpkinseed = 3,
 					/obj/item/seeds/cherryseed = 3,
 					/obj/item/seeds/plastiseed = 3,
-					/obj/item/seeds/riceseed = 3)
+					/obj/item/seeds/riceseed = 3,
+					/obj/item/seeds/dynseed = 3,
+					/obj/item/seeds/ekiseed = 3,
+					/obj/item/seeds/guamiseed = 3,
+					/obj/item/seeds/qlortseed = 3,
+					/obj/item/seeds/qalozynseed = 3,
+					/obj/item/seeds/qazal = 3,
+					/obj/item/seeds/gauli = 3,
+					/obj/item/seeds/kirani = 3
+		)
 	contraband = list(/obj/item/seeds/amanitamycelium = 2,
 					/obj/item/seeds/glowshroom = 2,
 					/obj/item/seeds/libertymycelium = 2,

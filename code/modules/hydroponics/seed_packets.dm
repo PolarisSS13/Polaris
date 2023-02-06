@@ -348,3 +348,27 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 
 /obj/item/seeds/nutmeg
 	seed_type = "nutmeg"
+
+/obj/item/seeds/dynseed
+	seed_type = "dyn"
+
+/obj/item/seeds/guamiseed
+	seed_type = "guami"
+
+/obj/item/seeds/ekiseed
+	seed_type = "eki"
+
+/obj/item/seeds/qlortseed
+	seed_type = "qlort"
+
+/obj/item/seeds/qalozynseed
+	seed_type = "qalozyn"
+
+/obj/item/seeds/qazal
+	seed_type = "qazal"
+
+/obj/item/seeds/gauli
+	seed_type = "gauli"
+
+/obj/item/seeds/kirani
+	seed_type = "kirani"

@@ -5076,6 +5076,7 @@
 	icon_state = "chip_basket"
 	trash = /obj/item/trash/chipbasket
 	var/vendingobject = /obj/item/reagent_containers/food/snacks/chip
+	var/unitname = "chip"
 	nutriment_desc = list("tortilla chips" = 10)
 	bitesize = 1
 	nutriment_amt = 10
@@ -5087,9 +5088,9 @@
 	returningitem.bitesize = bitesize/2
 	user.put_in_hands(returningitem)
 	if (reagents && reagents.total_volume)
-		to_chat(user, "You take a chip from the plate.")
+		to_chat(user, "You take a [unitname] from the plate.")
 	else
-		to_chat(user, "You take the last chip from the plate.")
+		to_chat(user, "You take the last [unitname] from the plate.")
 		var/obj/waste = new trash(loc)
 		if (loc == user)
 			user.put_in_hands(waste)
@@ -5106,6 +5107,7 @@
 	name = "plate of nachos"
 	desc = "A very cheesy nacho plate."
 	icon_state = "nachos"
+	unitname = "nacho"
 	trash = /obj/item/trash/plate
 	vendingobject = /obj/item/reagent_containers/food/snacks/chip/nacho
 	nutriment_desc = list("tortilla chips" = 10)
@@ -7530,3 +7532,287 @@
 /obj/item/reagent_containers/food/snacks/sharkmeatcubes/Initialize()
 	. = ..()
 	reagents.add_reagent("potatojuice", 30) // for people who want to get fat, FAST.
+
+/obj/item/reagent_containers/food/snacks/dynsoup
+	name = "dyn soup"
+	desc = "An imported skrellian recipe, with certain substitions for ingredients not commonly available outside of Skrellian space."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "dynsoup"
+	bitesize = 5
+	nutriment_amt = 8
+	nutriment_desc = list("peppermint" = 2, "salad" = 4, "hot stew" = 2)
+
+/obj/item/reagent_containers/food/snacks/dynsoup/Initialize()
+	. = ..()
+	reagents.add_reagent("water", 5)
+	reagents.add_reagent("dynjuice", 4)
+	reagents.add_reagent("tomatojuice", 4)
+
+/obj/item/reagent_containers/food/snacks/zantiri
+	name = "zantiri"
+	desc = "A soupy mush comprised of guami and eki, two plants native to Qerr'balak. In a bowl, it looks not unlike staring into a starry sky."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "zantiri"
+	bitesize = 5
+	nutriment_amt = 9
+	nutriment_desc = list("inky mush" = 5, "crunchy lichen" = 4)
+
+/obj/item/reagent_containers/food/snacks/zantiri/Initialize()
+	. = ..()
+	reagents.add_reagent("water", 6)
+	reagents.add_reagent("nutriment", 8)
+
+/obj/item/reagent_containers/food/snacks/stew/neaera
+	name = "neaera stew"
+	desc = "Neaera meat stewed in a mixture of water and dyn juice, garnished with guami and eki. Often cooked in large batches to feed many teshari pack members."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "neaera_stew"
+	filling_color = "#7C66DD"
+	nutriment_desc = list("meaty mushroom" = 6, "crunchy lichen" = 6, "peppermint" = 6)
+
+/obj/item/reagent_containers/food/snacks/stew/neaera/Initialize()
+	. = ..()
+	reagents.add_reagent("nutriment", 4)
+	reagents.add_reagent("seafood", 6)
+	reagents.add_reagent("dynjuice", 4)
+
+/obj/item/reagent_containers/food/snacks/chipplate/neaeracandy
+	name = "plate of candied neaera eyes"
+	desc = "Candied neaera eyes shaped into cubes. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
+	icon_state = "neaera_candied_eyes20"
+	trash = /obj/item/trash/candybowl
+	vendingobject = /obj/item/reagent_containers/food/snacks/neaeracandy
+	nutriment_desc = list("creamy, fatty meat" = 20)
+	bitesize = 1
+	unitname = "eye"
+	nutriment_amt = 20
+	filling_color = "#7C66DD"
+
+/obj/item/reagent_containers/food/snacks/chipplate/neaeracandy/Initialize()
+	. = ..()
+	reagents.add_reagent("seafood", 20)
+
+/obj/item/reagent_containers/food/snacks/chipplate/neaeracandy/update_icon()
+	switch(reagents.total_volume)
+		if(1)
+			icon_state = "neaera_candied_eyes1"
+		if(2 to 5)
+			icon_state = "neaera_candied_eyes5"
+		if(6 to 10)
+			icon_state = "neaera_candied_eyes10"
+		if(11 to 15)
+			icon_state = "neaera_candied_eyes15"
+		if(20 to INFINITY)
+			icon_state = "neaera_candied_eyes20"
+
+/obj/item/reagent_containers/food/snacks/neaeracandy
+	name = "candied neaera eye"
+	desc = "A candied neaera eye shaped into a cube. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "neaera_candied_eye"
+	nutriment_desc = list("creamy, fatty meat" = 3)
+	bitesize = 2
+	nutriment_amt = 3
+	filling_color = "#7C66DD"
+
+/obj/item/reagent_containers/food/snacks/neaeracandy/Initialize()
+	. = ..()
+	reagents.add_reagent("seafood", 3)
+
+/obj/item/reagent_containers/food/snacks/neaerakabob
+	name = "neaera-kabob"
+	desc = "Neaera meat and giblets that have been cooked on a skewer."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "neaera_skewer"
+	trash = /obj/item/stack/rods
+	filling_color = "#7C66DD"
+	center_of_mass = list("x"=17, "y"=15)
+	nutriment_desc = list("fatty meat" = 2)
+	nutriment_amt = 4
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/neaeracandy/Initialize()
+	. = ..()
+	reagents.add_reagent("seafood", 4)
+
+/obj/item/reagent_containers/food/snacks/lortl
+	name = "lortl"
+	desc = "Dehydrated and salted q'lort slices, a very common Skrellian snack."
+	icon = 'icons/obj/hydroponics_misc.dmi'
+	filling_color = "#B7D6BF"
+	bitesize = 2
+	nutriment_amt = 2
+	nutriment_desc = list("dried fruit" = 2)
+
+/obj/item/reagent_containers/food/snacks/lortl/Initialize()
+	. = ..()
+	reagents.add_reagent("sodiumchloride", 2)
+	if(!fruit_icon_cache["rind-#B1E4BE"])
+		var/image/I = image(icon,"fruit_rind")
+		I.color = "#B1E4BE"
+		fruit_icon_cache["rind-#B1E4BE"] = I
+	add_overlay(fruit_icon_cache["rind-#B1E4BE"])
+	if(!fruit_icon_cache["slice-#B1E4BE"])
+		var/image/I = image(icon,"fruit_slice")
+		I.color = "#9FE4B0"
+		fruit_icon_cache["slice-#B1E4BE"] = I
+	add_overlay(fruit_icon_cache["slice-#B1E4BE"])
+
+/obj/item/reagent_containers/food/snacks/qalozynboiled
+	name = "boiled qa'lozyn"
+	desc = "A Qerr'balakian vegetable. Poisonous raw, but rendered edible by boiling."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "qalozyn_boiled"
+	nutriment_amt = 4
+	nutriment_desc = list("sweet turnips" = 4)
+	bitesize = 2
+	filling_color = "#7C66DD"
+
+/obj/item/reagent_containers/food/snacks/garani
+	name = "garani"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "Neaera liver stuffed with boiled qa'lozyn and fried in oil. A popular light meal for teshari."
+	icon_state = "garani"
+	nutriment_amt = 8
+	nutriment_desc = list("fatty meat" = 4, "sweet turnips" = 4)
+	bitesize = 3
+	filling_color = "#7C66DD"
+
+/obj/item/reagent_containers/food/snacks/ganami/Initialize()
+	. = ..()
+	reagents.add_reagent("seafood", 4)
+
+/obj/item/reagent_containers/food/snacks/qazal_dough
+	name = "qa'zal dough"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "A coarse, stretchy, skrellian dough made from qa'zal flour and ga'uli juice in a striking purple color."
+	icon_state = "qazal_dough"
+	bitesize = 2
+	nutriment_amt = 3
+	nutriment_desc = list("minty dough" = 3)
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/qazal_dough/attackby(obj/item/W as obj, mob/user as mob)
+	if(istype(W,/obj/item/material/kitchen/rollingpin))
+		new /obj/item/reagent_containers/food/snacks/sliceable/qazal_flatdough(src)
+		to_chat(user, "You flatten the dough.")
+		qdel(src)
+
+/obj/item/reagent_containers/food/snacks/sliceable/qazal_flatdough
+	name = "flattened qa'zal dough"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "A flattened, stretchy purple dough"
+	icon_state = "flat_qazal_dough"
+	bitesize = 2
+	nutriment_amt = 3
+	nutriment_desc = list("minty dough" = 3)
+	slice_path = /obj/item/reagent_containers/food/snacks/qazal_doughstrip
+	slices_num = 3
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/qazal_doughstrip
+	name = "qa'zal dough strip"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "Thick-cut segments of qa'zal dough formed into what resembles a chewy, purple pasta."
+	icon_state = "qazal_pasta"
+	bitesize = 2
+	nutriment_amt = 3
+	nutriment_desc = list("minty pasta" = 1)
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/sliceable/qazal_bread
+	name = "qa'zal bread"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "A loaf of soft qa'zal bread in a striking dark purple color, ready to be cut into slices. It's surprisingly stretchy, and smells quite minty."
+	icon_state = "qazal_loaf"
+	nutriment_amt = 20
+	slices_num = 5
+	nutriment_desc = list("minty bread" = 5)
+	slice_path = /obj/item/reagent_containers/food/snacks/slice/qazal_bread_slice
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/slice/qazal_bread_slice
+	name = "qa'zal bread slice"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "A slice of stretchy qa'zal bread."
+	icon_state = "qazal_bread_slice"
+	whole_path = /obj/item/reagent_containers/food/snacks/sliceable/qazal_bread
+	nutriment_desc = list("minty bread" = 1)
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/slice/qazal_bread_slice/filled
+	filled = TRUE
+
+/obj/item/reagent_containers/food/snacks/grilled_qazal_flatbread
+	name = "grilled qa'zal flatbread"
+	desc = "Crispy, grilled qa'zal flatbread. No longer as stretchy, but it smells absolutely amazing."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "grilled_qazal_flatbread"
+	nutriment_amt = 8
+	bitesize = 1
+	nutriment_desc = list("minty flatbread" = 1)
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/baked_gauli
+	name = "baked ga'uli"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "A ga'uli pod baked in an oven, causing the minty liquid inside to condense and the exterior to soften, giving the vegetable a hard-boiled egg consistency. Remarkably tasty and healthy!"
+	icon_state = "baked_gauli"
+	nutriment_amt = 4
+	nutriment_desc = list("zesty mintyness" = 1)
+	filling_color = "#B97BD9"
+
+/obj/item/reagent_containers/food/snacks/baked_kirani
+	name = "baked kirani"
+	icon = 'icons/obj/food_syn.dmi'
+	desc = "A kirani fruit baked in an oven, causing the jelly inside to caramelize into a jelly donut-like crispy treat."
+	icon_state = "baked_kirani"
+	nutriment_amt = 4
+	nutriment_desc = list("crispy sweetness" = 2, "caramelized jelly" = 2)
+	filling_color = "#993C5C"
+
+/obj/item/reagent_containers/food/snacks/stuffed_gauli
+	name = "stuffed ga'uli pod"
+	desc = "A cooked ga'uli pod, stuffed with meat and minced kirani fruit."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "stuffed_gauli_pod"
+	nutriment_amt = 4
+	bitesize = 1
+	nutriment_desc = list("meat" = 1, "sweet kirani" = 1,  "minty ga'uli" = 1)
+
+/obj/item/reagent_containers/food/snacks/stuffed_gauli/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 4, nutriment_desc)
+
+/obj/item/reagent_containers/food/snacks/kirani_stew
+	name = "kirani stew"
+	desc = "Meat mixed with finely sliced qa'zal, drizzled in kirani jelly sauce, just the perfect balance of savory and sweet."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "kirani_stew"
+	nutriment_amt = 8
+	trash = /obj/item/trash/snack_bowl
+	bitesize = 1
+	nutriment_desc = list("minty qa'zal" = 1, "sweet kirani jelly" = 1)
+
+/obj/item/reagent_containers/food/snacks/kirani_stew/Initialize()
+	. = ..()
+	reagents.add_reagent("protein", 4, nutriment_desc)
+
+/obj/item/reagent_containers/food/snacks/qazal_noodles
+	name = "qa'zal noodles"
+	desc = "Qa'zal pasta mixed in a bowl with chopped kirani fruit and gu'ali pods. It looks bizarre and seems kind of slimy, but the taste cannot be denied."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "qazal_noodles"
+	trash = /obj/item/trash/snack_bowl
+	nutriment_amt = 8
+	bitesize = 1
+	nutriment_desc = list("chewy qa'zal noodles" = 1, "minty gu'ali juice" = 1, "sweet kirani jelly" = 1)
+
+/obj/item/reagent_containers/food/snacks/kirani_jellypuff
+	name = "kirani jellypuff"
+	desc = "A piece of qa'zal bread containing a kirani jelly filling and sprinkled with qa'zal flour. Just one will never be enough."
+	icon = 'icons/obj/food_syn.dmi'
+	icon_state = "kirani_jellypuff"
+	nutriment_amt = 8
+	bitesize = 2
+	nutriment_desc = list("puffed minty qa'zal bread" = 1, "super-sweet kirani jelly" = 1)

@@ -402,3 +402,7 @@
 /obj/item/trash/smolburrito
 	name = "burrito packaging"
 	icon_state = "smolburrito"
+
+/obj/item/trash/candybowl
+	name = "candy bowl"
+	icon_state = "candy_bowl"
