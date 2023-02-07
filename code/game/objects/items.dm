@@ -776,11 +776,16 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 
 //Worn icon generation for on-mob sprites
 /obj/item/proc/get_worn_overlay(var/mob/living/wearer, var/body_type, var/slot_name, var/inhands, var/default_icon, var/default_layer, var/icon/clip_mask)
+
 	//Get the required information about the base icon
 	var/datum/species/species = wearer.get_species()
 	var/state2use = get_worn_icon_state(slot_name = slot_name)
 	var/icon2use =  get_worn_icon_file(body_type = body_type, slot_name = slot_name, default_icon = default_icon, inhands = inhands, check_state = state2use)
 	var/layer2use = get_worn_layer(default_layer = default_layer)
+	var/using_spritesheet = !inhands && (icon2use == LAZYACCESS(sprite_sheets, body_type))
+
+	if(istext(icon2use))
+		icon2use = resolve_text_icon(icon2use)
 
 	//Snowflakey inhand icons in a specific slot
 	if(inhands && icon2use == icon_override)
@@ -790,12 +795,11 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 			if(slot_l_hand_str)
 				state2use += "_l"
 
-	var/using_spritesheet = !inhands && (icon2use == LAZYACCESS(sprite_sheets, body_type)) // TODO: arg to get_worn_icon to avoid doing this separately.
 	var/image/standing
 	if(!using_spritesheet && species)
 		standing = species.get_offset_overlay_image(icon2use, state2use, color, slot_name, layer2use)
 	if(!standing)
-		standing = overlay_image(icon2use, state2use, color, layer2use)
+		standing = overlay_image(icon2use, state2use, color, layer2use, RESET_COLOR)
 
 	if(alpha != 255)
 		standing.alpha = alpha
@@ -812,7 +816,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		apply_blood_to_worn_overlay(standing)			//Some items show blood when bloodied
 		apply_accessories_to_worn_overlay(standing)		//Some items sport accessories like webbing
 
-	//testing("[src] (\ref[src]) - Spritesheet: [using_spritesheet], Fallback: [using_fallback], Slot: [slot_name], Inhands: [inhands], Worn Icon:[icon2use], Worn State:[state2use], Worn Layer:[layer2use], Standing:[standing ? "\ref[standing]" : "null"] ([standing?.icon || "no icon"], [standing?.icon_state || "no state"])")
+	//testing("[src] (\ref[src]) - Spritesheet: [using_spritesheet], Slot: [slot_name], Inhands: [inhands], Worn Icon:[icon2use], Worn State:[state2use], Worn Layer:[layer2use], Standing:[standing ? "\ref[standing]" : "null"] ([standing?.icon || "no icon"], [standing?.icon_state || "no state"])")
 
 	//Return our overlay
 	return standing
@@ -827,8 +831,12 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	//2: species-specific sprite sheets (skipped for inhands)
 	if(!inhands)
 		var/sheet = LAZYACCESS(sprite_sheets, body_type)
-		if(sheet && (!check_state || check_state_in_icon(sheet, check_state)))
-			return sheet
+		if(sheet)
+			if(!check_state)
+				return sheet
+			sheet = resolve_text_icon(sheet)
+			if(check_state_in_icon(check_state, sheet))
+				return sheet
 
 	//3: slot-specific sprite sheets
 	var/sheet = LAZYACCESS(item_icons, slot_name)
@@ -840,11 +848,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		return default_worn_icon
 
 	//5: provided default_icon
-	if(default_icon)
-		return default_icon
-
-	//6: give up
-	return
+	return default_icon
 
 //Returns the state that should be used for the worn icon
 /obj/item/proc/get_worn_icon_state(var/slot_name)

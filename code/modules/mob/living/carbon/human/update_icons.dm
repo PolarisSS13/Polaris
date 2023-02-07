@@ -9,21 +9,23 @@ var/global/list/damage_icon_parts = list() //see UpdateDamageIcon()
 
 var/global/list/_index_extended_clothing_icon_cache= list()
 /proc/overlay_image(icon, icon_state, color, layer, flags)
-	// Polaris has a system for extending clothing icons for suits and uniforms by an index,
-	// which requires us to identify an icon string being passed in as the previous system
-	// used icon() universally. This is pretty problematic as a method but unpicking it is
-	// going to be a big job and this will work for now.
-	if(istext(icon))
-		if(!global._index_extended_clothing_icon_cache[icon])
-			global._index_extended_clothing_icon_cache[icon] = new /icon(icon)
-		icon = global._index_extended_clothing_icon_cache[icon]
-	// End string icon path hack.
-
 	var/image/ret = image(icon, icon_state)
 	ret.color = color
 	ret.appearance_flags = flags
 	ret.layer = layer
 	return ret
+
+/proc/resolve_text_icon(var/iconstring)
+	// Polaris has a system for extending clothing icons for suits and uniforms by an index,
+	// which requires us to identify an icon string being passed in as the previous system
+	// used icon() universally. This is pretty problematic as a method but unpicking it is
+	// going to be a big job and this will work for now.
+	if(istext(iconstring))
+		if(!global._index_extended_clothing_icon_cache[iconstring])
+			global._index_extended_clothing_icon_cache[iconstring] = new /icon(iconstring)
+		return global._index_extended_clothing_icon_cache[iconstring]
+	return iconstring
+	// End string icon path hack.
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 // # Human Icon Updating System
@@ -237,7 +239,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	//0 = destroyed, 1 = normal, 2 = robotic, 3 = necrotic.
 
 	//Create a new, blank icon for our mob to use.
-	var/icon/stand_icon = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi', icon_state = "blank")
+	var/icon/stand_icon = new(species.icon_template, icon_state = "blank")
 
 	var/g = (gender == MALE ? "male" : "female")
 	var/icon_key = "[species.get_race_key(src)][g][s_tone][r_skin][g_skin][b_skin]"
@@ -309,7 +311,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 			//That part makes left and right legs drawn topmost and lowermost when human looks WEST or EAST
 			//And no change in rendering for other parts (they icon_position is 0, so goes to 'else' part)
 			if(part.icon_position & (LEFT | RIGHT))
-				var/icon/temp2 = new(species.icon_template ? species.icon_template : 'icons/mob/human.dmi', icon_state = "blank")
+				var/icon/temp2 = new(species.icon_template, icon_state = "blank")
 				temp2.Insert(new/icon(temp,dir=NORTH),dir=NORTH)
 				temp2.Insert(new/icon(temp,dir=SOUTH),dir=SOUTH)
 				if(!(part.icon_position & LEFT))
@@ -881,7 +883,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	if(!r_hand)
 		return //No hand, no bother.
 
-	overlays_standing[R_HAND_LAYER] = r_hand.get_worn_overlay(wearer = src, inhands = TRUE, slot_name = slot_r_hand_str, default_layer = R_HAND_LAYER)
+	overlays_standing[R_HAND_LAYER] = r_hand.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), inhands = TRUE, slot_name = slot_r_hand_str, default_layer = R_HAND_LAYER)
 
 	apply_layer(R_HAND_LAYER)
 
@@ -894,7 +896,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	if(!l_hand)
 		return //No hand, no bother.
 
-	overlays_standing[L_HAND_LAYER] = l_hand.get_worn_overlay(wearer = src, inhands = TRUE, slot_name = slot_l_hand_str, default_icon = INV_L_HAND_DEF_ICON, default_layer = L_HAND_LAYER)
+	overlays_standing[L_HAND_LAYER] = l_hand.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), inhands = TRUE, slot_name = slot_l_hand_str, default_icon = INV_L_HAND_DEF_ICON, default_layer = L_HAND_LAYER)
 
 	apply_layer(L_HAND_LAYER)
 

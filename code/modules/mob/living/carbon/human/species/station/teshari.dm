@@ -160,8 +160,8 @@
 
 /datum/species/teshari/New()
 	equip_adjust = list(
-		slot_l_ear_str =     list("[NORTH]" = list("x" =  1, "y" = -5), "[EAST]" = list("x" =  -2, "y" = -5), "[SOUTH]" = list("x" = -1, "y" = -5), "[WEST]" = list("x" =  0, "y" = -5)),
-		slot_r_ear_str =     list("[NORTH]" = list("x" =  1, "y" = -5), "[EAST]" = list("x" =   0, "y" = -5), "[SOUTH]" = list("x" = -1, "y" = -5), "[WEST]" = list("x" =  2, "y" = -5)),
+		slot_l_ear_str =     list("[NORTH]" = list("x" =  1, "y" = -5), "[EAST]" = list("x" =  -2, "y" = -5), "[SOUTH]" = list("x" = -1, "y" = -4), "[WEST]" = list("x" =  0, "y" = -5)),
+		slot_r_ear_str =     list("[NORTH]" = list("x" =  1, "y" = -4), "[EAST]" = list("x" =   0, "y" = -5), "[SOUTH]" = list("x" = -1, "y" = -5), "[WEST]" = list("x" =  2, "y" = -5)),
 		slot_l_hand_str =    list("[NORTH]" = list("x" =  3, "y" = -3), "[EAST]" = list("x" =   1, "y" = -3), "[SOUTH]" = list("x" = -3, "y" = -3), "[WEST]" = list("x" = -5, "y" = -3)),
 		slot_r_hand_str =    list("[NORTH]" = list("x" = -3, "y" = -3), "[EAST]" = list("x" =   5, "y" = -3), "[SOUTH]" = list("x" =  3, "y" = -3), "[WEST]" = list("x" = -1, "y" = -3)),
 		slot_head_str =      list("[NORTH]" = list("x" =  0, "y" = -5), "[EAST]" = list("x" =   1, "y" = -5), "[SOUTH]" = list("x" =  0, "y" = -5), "[WEST]" = list("x" = -1, "y" = -5)),
