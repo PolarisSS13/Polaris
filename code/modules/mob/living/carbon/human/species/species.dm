@@ -12,7 +12,7 @@
 
 	// Icon/appearance vars.
 	var/icobase = 'icons/mob/human_races/r_human.dmi'		 // Normal icon set.
-	var/icon_template = 'icons/mob/human_races/template.dmi' // Used for mob icon generation for non-32x32 species.
+	var/icon_template = 'icons/mob/human_races/template.dmi' // Used for mob icon generation.
 	var/deform = 'icons/mob/human_races/r_def_human.dmi'	 // Mutated icon set.
 	var/limb_blend = ICON_ADD								 // Specify a blending mode for limb colourisation.
 
