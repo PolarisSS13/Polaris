@@ -46,9 +46,6 @@
 	var/antaghud_offset_x = 0                 	// As above, but specifically for the antagHUD indicator.
 	var/antaghud_offset_y = 0                 	// As above, but specifically for the antagHUD indicator.
 
-	var/list/equip_adjust = list()				// List matrix for determining pixel offset of equipped items.
-	var/list/equip_overlays = list()
-
 	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune

@@ -2730,6 +2730,7 @@
 #include "code\modules\organs\subtypes\machine.dm"
 #include "code\modules\organs\subtypes\neaera.dm"
 #include "code\modules\organs\subtypes\nabber.dm"
+#include "code\modules\organs\subtypes\neaera.dm"
 #include "code\modules\organs\subtypes\replicant.dm"
 #include "code\modules\organs\subtypes\skrell.dm"
 #include "code\modules\organs\subtypes\slime.dm"
