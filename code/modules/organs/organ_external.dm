@@ -1155,6 +1155,13 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/derobotize(var/restore_organs = TRUE)
 	. = ..()
 	if (!.) return
+	var/datum/robolimb/R = all_robolimbs[model]
+	if (R)
+		brute_mod /= R.robo_brute_mod
+		burn_mod /= R.robo_burn_mod
+	else
+		brute_mod = initial(brute_mod)
+		burn_mod = initial(burn_mod)
 	model = null
 	force_icon = initial(force_icon)
 	name = initial(name)
@@ -1163,13 +1170,6 @@ Note that amputating the affected organ does in fact remove the infection from t
 	cannot_break = initial(cannot_break)
 	drop_sound = initial(drop_sound)
 	pickup_sound = initial(pickup_sound)
-	var/datum/robolimb/R = all_robolimbs[model]
-	if (R)
-		brute_mod /= R.robo_brute_mod
-		burn_mod /= R.robo_burn_mod
-	else
-		brute_mod = initial(brute_mod)
-		burn_mod = initial(burn_mod)
 	if (restore_organs && LAZYLEN(owner?.species?.has_organ))
 		for(var/obj/item/organ/thing in internal_organs)
 			if(istype(thing))
