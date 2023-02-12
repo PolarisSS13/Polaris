@@ -183,4 +183,25 @@
 
 // This tells AI mobs to not be dumb and step on mines willingly.
 /obj/item/mine/is_safe_to_step(mob/living/L)
-	return !istype(L, /obj/mecha) && (!isliving(L) || L.hovering)
+	var/safe = FALSE
+
+	if(!armed)
+		safe = TRUE
+
+	if(!safe)	// If we're safe from having the flying component, skip to just returning.
+		if(!isliving(L))	// IF we're not alive, check if we're a mecha
+			if(ismecha(L))
+				var/obj/mecha/M = L
+				if(M.flying)
+					safe = TRUE
+				for(var/obj/item/mecha_parts/mecha_equipment/Mequip in M.equipment)
+					if(safe)
+						break
+					safe = Mequip.check_hover()
+			else
+				safe = TRUE
+
+		else if(L.hovering)	// If we're alive, check if we're otherwise hovering.
+			safe = TRUE
+
+	return safe
