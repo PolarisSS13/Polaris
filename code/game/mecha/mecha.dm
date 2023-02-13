@@ -788,7 +788,7 @@
 	if(T.movement_cost)
 		tally += T.movement_cost
 
-	return max(2, round(tally, 0.1))	// Round the total to the nearest 5th. Can't go lower than 2 ticks. Even humans have a delay longer than that.
+	return max(1, round(tally, 0.1))	// Round the total to the nearest 10th. Can't go lower than 1 tick. Even humans have a delay longer than that.
 
 /obj/mecha/proc/dyndomove(direction)
 	if(!can_move)
