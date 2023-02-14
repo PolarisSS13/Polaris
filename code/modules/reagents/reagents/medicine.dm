@@ -421,7 +421,7 @@
 	scannable = 1
 
 /datum/reagent/mortiferin/on_mob_life(var/mob/living/carbon/M, var/alien, var/datum/reagents/metabolism/location)
-	if(M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump_corpse))
+	if(M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump/corpse))
 		affects_dead = TRUE
 	else
 		affects_dead = FALSE
@@ -429,7 +429,7 @@
 	. = ..(M, alien, location)
 
 /datum/reagent/mortiferin/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
-	if(M.bodytemperature < (T0C - 10) || (M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump_corpse)))
+	if(M.bodytemperature < (T0C - 10) || (M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump/corpse)))
 		var/chem_effective = 1 * M.species.chem_strength_heal
 		if(alien == IS_SLIME)
 			if(prob(10))
@@ -466,7 +466,7 @@
 
 /datum/reagent/necroxadone/affect_blood(var/mob/living/carbon/M, var/alien, var/removed)
 	var/chem_effective = 1 * M.species.chem_strength_heal
-	if(M.bodytemperature < 170 || (M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump_corpse)))
+	if(M.bodytemperature < 170 || (M.stat == DEAD && M.has_modifier_of_type(/datum/modifier/bloodpump/corpse)))
 		if(alien == IS_SLIME)
 			if(prob(10))
 				to_chat(M, "<span class='danger'>It's so cold. Something causes your cellular mass to harden sporadically, resulting in seizure-like twitching.</span>")
