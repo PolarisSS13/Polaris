@@ -18,7 +18,7 @@
 	if(holder.stat == DEAD)
 		src.expire()
 
-/datum/modifier/bloodpump_corpse
+/datum/modifier/bloodpump/corpse
 	name = "forced blood pumping"
 	desc = "Your blood flows thanks to the wonderful power of science."
 
