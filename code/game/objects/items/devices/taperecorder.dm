@@ -92,7 +92,7 @@
 /obj/item/taperecorder/hear_talk(mob/M, list/message_pieces, verb)
 	var/msg = multilingual_to_message(message_pieces, requires_machine_understands = TRUE, with_capitalization = TRUE)
 	if(mytape && recording)
-		mytape.record_speech("[M.name] [verb], \"[msg]\"")
+		mytape.record_speech("[M.voice] [verb], \"[msg]\"")
 
 
 /obj/item/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
