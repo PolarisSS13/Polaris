@@ -27,11 +27,12 @@
 
 /obj/mecha/medical/odysseus/moved_inside(var/mob/living/carbon/human/H as mob)
 	if(..())
-		if(H.glasses)
-			occupant_message("<font color='red'>[H.glasses] prevent you from using [src] [hud]</font>")
-		else
-			H.glasses = hud
-			H.recalculate_vis()
+		if(istype(H))
+			if(H.glasses)
+				occupant_message("<font color='red'>[H.glasses] prevent you from using [src] [hud]</font>")
+			else
+				H.glasses = hud
+				H.recalculate_vis()
 		return 1
 	else
 		return 0

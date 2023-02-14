@@ -5,6 +5,7 @@
 	max_universal_equip = 1
 	max_special_equip = 1
 
+	melee_sound = 'sound/weapons/resonator_blast.ogg'
 	stomp_sound = 'sound/mecha/mechmove01.ogg'
 
 	cargo_capacity = 1
