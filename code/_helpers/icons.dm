@@ -707,8 +707,6 @@ world
 	if(!base_icon_dir)
 		base_icon_dir = curdir
 
-	to_world("base_icon_dir for image [A] defdir [defdir] deficon [deficon] defstate [defstate] defblend [defblend] dir is [base_icon_dir] time [world.time]")
-
 	ASSERT(!BLEND_DEFAULT)		//I might just be stupid but lets make sure this define is 0.
 
 	var/curblend = A.blend_mode || defblend
