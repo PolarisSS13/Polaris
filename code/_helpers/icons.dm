@@ -707,6 +707,8 @@ world
 	if(!base_icon_dir)
 		base_icon_dir = curdir
 
+	to_world("base_icon_dir for image [A] defdir [defdir] deficon [deficon] defstate [defstate] defblend [defblend] dir is [base_icon_dir] time [world.time]")
+
 	ASSERT(!BLEND_DEFAULT)		//I might just be stupid but lets make sure this define is 0.
 
 	var/curblend = A.blend_mode || defblend
@@ -764,7 +766,7 @@ world
 				curblend = BLEND_OVERLAY
 				add = icon(I.icon, I.icon_state, base_icon_dir)
 			else // 'I' is an appearance object.
-				add = getFlatIcon(image(I), I.dir||curdir, curicon, curstate, curblend, FALSE, no_anim)
+				add = getFlatIcon(image(I), curdir, curicon, curstate, curblend, FALSE, no_anim)
 			if(!add)
 				continue
 			// Find the new dimensions of the flat icon to fit the added overlay
