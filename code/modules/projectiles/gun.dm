@@ -225,6 +225,10 @@
 	Fire(A,user,params) //Otherwise, fire normally.
 */
 
+// Can the weapon be click-dragged to fire on turfs when able.
+/obj/item/gun/proc/can_autofire()
+	return FALSE
+
 /obj/item/gun/attack(atom/A, mob/living/user, def_zone)
 	if (A == user && user.zone_sel.selecting == O_MOUTH && !mouthshoot)
 		handle_suicide(user)
