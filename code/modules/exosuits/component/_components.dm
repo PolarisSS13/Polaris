@@ -17,6 +17,12 @@
 	matter = list(MATERIAL_STEEL = 15000, MATERIAL_PLASTIC = 1000, MATERIAL_OSMIUM = 500)
 	dir = SOUTH
 
+/obj/item/mech_component/proc/query_color(var/mob/living/user)
+	if(user)
+		var/input = input("Modify part color:", "Color", color) as color|null
+		if(input)
+			return set_colour(input)
+
 /obj/item/mech_component/proc/set_colour(new_colour)
 	var/last_colour = color
 	color = new_colour
@@ -47,6 +53,7 @@
 /obj/item/mech_component/proc/install_component(var/obj/item/thing, var/mob/user)
 	if(user.unEquip(thing, src))
 		user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
+		thing.forceMove(src)
 		update_components()
 		return 1
 
@@ -102,6 +109,10 @@
 		return
 	if(istype(thing, /obj/item/stack/cable_coil))
 		repair_burn_generic(thing, user)
+		return
+
+	if(thing.has_tool_quality(TOOL_MULTITOOL))
+		query_color(user)
 		return
 
 	return ..()

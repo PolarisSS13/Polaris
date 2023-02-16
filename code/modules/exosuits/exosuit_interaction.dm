@@ -47,14 +47,19 @@
 
 /datum/click_handler/default/mech/OnDblClick(var/atom/A, var/params)
 	OnClick(A, params)
-
-/mob/living/exosuit/allow_click_through(atom/A, params, mob/user)
-	if(LAZYISIN(pilots, user) && !hatch_closed)
+*/
+/mob/living/exosuit/allow_click_through(atom/A, mob/user)
+	if((user in pilots))
 		return TRUE
 	. = ..()
-*/
+
+/mob/living/exosuit/click_through(atom/A, mob/user, params)
+	return ClickOn(A, params, user)
 
 /mob/living/exosuit/ClickOn(var/atom/A, var/params, var/mob/user)
+	if(!user)
+		user = src
+
 	if(!checkClickCooldown()) // Hard check, before anything else, to avoid crashing
 		return
 
@@ -67,8 +72,9 @@
 	var/adj = A.Adjacent(src) // Why in the fuck isn't Adjacent() commutative.
 
 	var/modifiers = params2list(params)
+
 	if(modifiers["shift"])
-		ShiftClickOn(A)
+		user.ShiftClickOn(A)
 		return 0
 
 	if(!(user in pilots) && user != src)
@@ -77,22 +83,6 @@
 	// Are we facing the target?
 	if(A.loc != src && !(get_dir(src, A) & dir))
 		return
-
-	if(modifiers["shift"] && modifiers["ctrl"])
-		CtrlShiftClickOn(A)
-		return 1
-	if(modifiers["shift"] && modifiers["middle"])
-		ShiftMiddleClickOn(A)
-		return 1
-	if(modifiers["middle"])
-		MiddleClickOn(A)
-		return 1
-	if(modifiers["alt"]) // alt and alt-gr (rightalt)
-		AltClickOn(A)
-		return 1
-	if(modifiers["ctrl"])
-		CtrlClickOn(A)
-		return 1
 
 	if(!arms)
 		to_chat(user, SPAN_WARNING("\The [src] has no manipulators!"))
@@ -118,7 +108,7 @@
 	var/atom/movable/AM = A
 	var/fail_prob = (user != src && istype(AM) && AM.loc != src) ? 15 : 0
 	var/failed = FALSE
-	if(prob(fail_prob))
+	if(fail_prob && prob(fail_prob))
 		to_chat(user, SPAN_DANGER("Your incompetence leads you to target the wrong thing with the exosuit!"))
 		failed = TRUE
 	else if(emp_damage > EMP_ATTACK_DISRUPT && prob(emp_damage*2))
@@ -148,7 +138,7 @@
 
 			// Slip up and attack yourself maybe.
 			failed = FALSE
-			if(prob(fail_prob))
+			if(fail_prob && prob(fail_prob))
 				to_chat(user, SPAN_DANGER("You artlessly shove the exosuit controls the wrong way!"))
 				failed = TRUE
 			else if(emp_damage>EMP_MOVE_DISRUPT && prob(10))
@@ -308,17 +298,10 @@
 		to_chat(user, SPAN_WARNING("\The [src] could not be installed in that hardpoint."))
 		return
 /*
-	else if(istype(thing, /obj/item/device/kit/paint))
+	else if(istype(thing, /obj/item/kit/decal))
 		user.visible_message(SPAN_NOTICE("\The [user] opens \the [thing] and spends some quality time customising \the [src]."))
-		var/obj/item/device/kit/paint/P = thing
-		SetName(P.new_name)
-		desc = P.new_desc
-		for(var/obj/item/mech_component/comp in list(arms, legs, head, body))
-			comp.decal = P.new_icon
-		if(P.new_icon_file)
-			icon = P.new_icon_file
-		queue_icon_update()kit/paint
-		P.use(1, user)
+		var/obj/item/kit/paint/exo/P = thing
+		P.customize(src, user)
 		return 1
 */
 	else

@@ -18,7 +18,7 @@
 
 /mob/living/exosuit/relaymove(var/mob/user, var/direction)
 	. = FALSE
-	if(length(pilots) && (user in pilots))
+	if(length(pilots) && (user in pilots) && world.time > next_move)
 		. = Move(get_step(src, direction), direction)
 
 /mob/living/exosuit/Move(atom/newloc, direct, movetime)
@@ -65,7 +65,8 @@
 		if(!newloc)
 			newloc = get_step(src, direct)
 		if(newloc && legs && legs.can_move_on(loc, newloc))
-			. = Move(newloc)
+			. = ..(newloc, direct)
+			next_move = world.time + legs.move_delay
 			if(. && !istype(loc, /turf/space))
 				playsound(src.loc, mech_step_sound, 40, 1)
 	return .
