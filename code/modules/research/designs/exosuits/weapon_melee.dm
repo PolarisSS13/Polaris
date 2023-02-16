@@ -10,7 +10,7 @@
 
 /datum/design/item/mechfab/trueexo/equip/melee/mechete/durasteel
 	name = "Durasteel Exosuit Machete"
-	id = "exosuit_weapon_mechete"
+	id = "exosuit_weapon_durasteel_mechete"
 	materials = list(MAT_TITANIUM = 5000, MAT_DURASTEEL = 6000)
 	build_path = /obj/item/mech_equipment/mounted_system/melee/mechete/durasteel
 
