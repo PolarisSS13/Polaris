@@ -7,7 +7,8 @@
 	var/history = ""			// Historical discription of the organization's origins  Currently unused.
 	var/work = ""				// Short description of their work, eg "an arms manufacturer"
 	var/headquarters = ""		// Location of the organization's HQ.  Currently unused.
-	var/motto = ""				// A motto/jingle/whatever, if they have one.  Currently unused.
+	var/motto = ""				// A motto/jingle/whatever, if they have one.
+	var/shady = 10				// The odds of them being denied a flight route. mostly a function of their reputation though unfamiliarity with local traffic rules is also a factor
 
 	var/list/ship_prefixes = list()	//Some might have more than one! Like NanoTrasen. Value is the mission they perform, e.g. ("ABC" = "mission desc")
 	var/list/ship_names = list(		//Names of spaceships.  This is a mostly generic list that all the other organizations inherit from if they don't have anything better.
@@ -469,18 +470,19 @@
 		)
 
 /datum/lore/organization/tsc/morpheus
-	name = "Morpheus Cyberkinetics"
-	short_name = "Morpheus"
+	name = "Morpheus Cyberkinetics - Sol Branch"
+	short_name = "Morpheus Sol"
 	acronym = "MC"
 	desc = "The only large corporation run by positronic intelligences, Morpheus caters almost exclusively to their sensibilities \
-	and needs. A product of the synthetic colony of Shelf, Morpheus eschews traditional advertising to keep their prices low and \
+	and needs. Originally product of the synthetic colony of Shelf, Morpheus eschews traditional advertising to keep their prices low and \
 	relied on word of mouth among positronics to reach their current economic dominance. Morpheus in exchange lobbies heavily for \
 	positronic rights, sponsors positronics through their Jans-Fhriede test, and tends to other positronic concerns to earn them \
-	the good-will of the positronics, and the ire of those who wish to exploit them."
+	the good-will of the positronics, and the ire of those who wish to exploit them. Morpheus Sol is legally distinct from its \
+	Shelfican counterpart, though both are notionally headed by the same board of directors."
 	history = ""
 	work = "cybernetics manufacturer"
-	headquarters = "Shelf"
-	motto = ""
+	headquarters = "Sophia, El"
+	motto = "#6 Get bent, meatbags."
 
 	ship_prefixes = list("MTV" = "freight")
 	// Culture names, because Anewbe told me so.

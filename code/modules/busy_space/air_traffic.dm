@@ -90,7 +90,7 @@ var/global/datum/lore/atc_controller/atc = new/datum/lore/atc_controller
 	else
 		chatter_type = pick(2;"emerg",5;"wrong_freq","normal") //Be nice to have wrong_lang...
 
-	var/yes = prob(90) //Chance for them to say yes vs no
+	var/yes = prob(source.shady) //Chance for them to say yes vs no
 
 	var/request = pick(requests)
 	var/callname = pick(alt_atc_names)
@@ -117,6 +117,8 @@ var/global/datum/lore/atc_controller/atc = new/datum/lore/atc_controller
 			full_request = "[callname], this is [combined_name] on a [mission] [pick(mission_noun)] to [destname], [pick(request_verb)] [request]."
 			full_response = "[combined_name], this is [using_map.station_short] TraCon, [response]." //Station TraCon always calls themselves TraCon
 			full_closure = "[using_map.station_short] TraCon, [yes ? "thank you" : "understood"], good day." //They always copy what TraCon called themselves in the end when they realize they said it wrong
+			if(source.motto && prob(10) || source.motto == "With Major Bill's, you won't pay major bills!") //ten percent chance of postpending the motto, unless it's MBT, in which case it will literally always do that
+				full_closure += " " + source.motto
 
 	//Ship sends request to ATC
 	msg(full_request,"[prefix] [shipname]")
