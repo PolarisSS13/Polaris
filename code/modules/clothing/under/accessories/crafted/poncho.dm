@@ -81,7 +81,7 @@
 	update_icon()
 	update_clothing_icon()
 
-/obj/item/clothing/accessory/storage/poncho/crafted/make_worn_icon(var/body_type, var/slot_name, var/inhands, var/default_icon, var/default_layer, var/icon/clip_mask = null)
+/obj/item/clothing/accessory/storage/poncho/crafted/get_worn_overlay(var/mob/living/wearer, var/body_type, var/slot_name, var/inhands, var/default_icon, var/default_layer, var/icon/clip_mask)
 	var/image/standing = ..()
 	if(standing && slot_name == slot_wear_suit_str)
 		var/use_icon = LAZYACCESS(sprite_sheets, body_type) || icon_override

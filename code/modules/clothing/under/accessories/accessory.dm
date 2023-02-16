@@ -53,12 +53,13 @@
 		else if(on_rolled["rolled"] && C.rolled_sleeves > 0)
 			tmp_icon_state = on_rolled["rolled"]
 
+	var/body_type = wearer.species.get_bodytype(wearer)
 	if(icon_override)
 		if("[tmp_icon_state]_mob" in cached_icon_states(icon_override))
 			tmp_icon_state = "[tmp_icon_state]_mob"
 		mob_overlay = image("icon" = icon_override, "icon_state" = "[tmp_icon_state]")
-	else if(wearer && sprite_sheets[wearer.species.get_bodytype(wearer)]) //Teshari can finally into webbing, too!
-		mob_overlay = image("icon" = sprite_sheets[wearer.species.get_bodytype(wearer)], "icon_state" = "[tmp_icon_state]")
+	else if(wearer && LAZYACCESS(sprite_sheets, body_type)) //Teshari can finally into webbing, too!
+		mob_overlay = image("icon" = LAZYACCESS(sprite_sheets, body_type), "icon_state" = "[tmp_icon_state]")
 	else
 		mob_overlay = image("icon" = INV_ACCESSORIES_DEF_ICON, "icon_state" = "[tmp_icon_state]")
 	if(addblends)
