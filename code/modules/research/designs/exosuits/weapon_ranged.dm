@@ -26,7 +26,7 @@
 	id = "exosuit_weapon_rifle_ammo"
 	materials = list(MAT_STEEL = 4000, MAT_PLASTIC = 500, MAT_GRAPHITE = 500)
 	req_tech = list(TECH_MATERIAL = 4, TECH_COMBAT = 4, TECH_MAGNET = 2)
-	build_path = /obj/item/ammo_magazine/mech/rifle/drum
+	build_path = /obj/item/ammo_magazine/mech/rifle
 
 /datum/design/item/mechfab/trueexo/equip/gun/lmg
 	name = "Exosuit LMG"

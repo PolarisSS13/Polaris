@@ -29,7 +29,7 @@
 
 /datum/design/item/mechfab/trueexo/armor/combat
 	name = "Combat Exosuit Armor"
-	id = "exosuit_armor_em"
+	id = "exosuit_armor_combat"
 	build_path = /obj/item/robot_parts/robot_component/armour/exosuit/combat
 	req_tech = list(TECH_MATERIAL = 5, TECH_COMBAT = 5)
 	materials = list(MAT_TITANIUM = 5000, MAT_DIAMOND = 3000)
