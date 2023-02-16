@@ -70,6 +70,7 @@
 	icon_state = "light_body"
 	max_damage = 50
 	power_use = 5
+	mech_health = 200
 	has_hardpoints = list(HARDPOINT_BACK)
 	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminum laminates to provide an optimized cockpit experience."
 

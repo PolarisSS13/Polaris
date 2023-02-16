@@ -18,3 +18,40 @@
 	turn_delay = 7
 	power_use = 150
 	color = COLOR_WHITE
+
+/obj/item/mech_component/chassis/pod
+	name = "spherical exosuit chassis"
+	hatch_descriptor = "hatch"
+	pilot_coverage = 100
+	transparent_cabin = TRUE
+	exosuit_desc_string = "a spherical chassis"
+	icon_state = "pod_body"
+	max_damage = 70
+	power_use = 5
+	has_hardpoints = list(HARDPOINT_BACK)
+	desc = "The Katamari series cockpits won a massive government tender a few years back. No one is sure why, but these terrible things keep popping up on every government-run facility."
+
+/obj/item/mech_component/chassis/pod/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
+
+/obj/item/mech_component/chassis/pod/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 4),
+			"[SOUTH]" = list("x" = 8,  "y" = 4),
+			"[EAST]"  = list("x" = 12,  "y" = 4),
+			"[WEST]"  = list("x" = 4,  "y" = 4)
+		),
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 10,  "y" = 8),
+			"[WEST]"  = list("x" = 6, "y" = 8)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/pod/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
