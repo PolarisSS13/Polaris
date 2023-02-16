@@ -7,7 +7,7 @@
 	var/obj/carrying
 	origin_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
 
-/obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, click_params)
+/obj/item/mech_equipment/clamp/resolve_attackby(atom/A, mob/user, attack_modifier, click_parameters)
 	if(istype(A, /obj/structure/closet) && owner)
 		return 0
 	return ..()

@@ -1,4 +1,4 @@
-/mob/living/exosuit/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0)
+/mob/living/exosuit/apply_effect(var/effect = 0,var/effecttype = STUN, var/blocked = 0, var/check_protection = 1)
 	if(!effect || (blocked >= 100))
 		return 0
 	if(LAZYLEN(pilots) && (!hatch_closed || !prob(body.pilot_coverage)))
