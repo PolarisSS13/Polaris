@@ -172,7 +172,7 @@
 	handle_hud_icons_health()
 	var/obj/item/cell/C = get_cell()
 	if(istype(C))
-		hud_power.maptext = "[round(get_cell().charge)]/[round(get_cell().maxcharge)]"
+		hud_power.maptext = "[round(C.charge)]/[round(C.maxcharge)]"
 	else hud_power.maptext = "CHECK POWER"
 	refresh_hud()
 
@@ -180,7 +180,8 @@
 
 	hud_health.overlays.Cut()
 
-	if(!body || !get_cell() || (get_cell().charge <= 0))
+	var/obj/item/cell/MyC = get_cell()
+	if(!body || !MyC || (MyC.charge <= 0))
 		return
 
 	if(!body.diagnostics || !body.diagnostics.is_functional() || ((emp_damage>EMP_GUI_DISRUPT) && prob(emp_damage*2)))

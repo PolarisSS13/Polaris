@@ -54,7 +54,7 @@
 	//Air!
 	var/use_air      = FALSE
 
-	var/next_move = 0
+	var/next_step = 0
 
 	// Interface stuff.
 	var/list/hud_elements = list()
