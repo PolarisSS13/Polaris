@@ -18,7 +18,7 @@
 
 /mob/living/exosuit/relaymove(var/mob/user, var/direction)
 	. = FALSE
-	if(length(pilots) && (user in pilots) && world.time > next_move)
+	if(length(pilots) && (user in pilots) && world.time > next_step)
 		. = Move(get_step(src, direction), direction)
 
 /mob/living/exosuit/Move(atom/newloc, direct, movetime)
@@ -29,23 +29,23 @@
 
 	if(!legs)
 		to_chat(src, SPAN_WARNING("\The [src] has no means of propulsion!"))
-		next_move = world.time + 3 // Just to stop them from getting spammed with messages.
+		next_step = world.time + 3 // Just to stop them from getting spammed with messages.
 		return FALSE
 
 	if(!legs.motivator || !legs.motivator.is_functional())
 		to_chat(src, SPAN_WARNING("Your motivators are damaged! You can't move!"))
-		next_move = world.time + 15
+		next_step = world.time + 15
 		return FALSE
 
 	if(maintenance_protocols)
 		to_chat(src, SPAN_WARNING("Maintenance protocols are in effect."))
-		next_move = world.time + 3 // Just to stop them from getting spammed with messages.
+		next_step = world.time + 3 // Just to stop them from getting spammed with messages.
 		return FALSE
 
 	var/obj/item/cell/C = get_cell()
 	if(!C || !C.check_charge(legs.power_use * CELLRATE))
 		to_chat(src, SPAN_WARNING("The power indicator flashes briefly."))
-		next_move = world.time + 3 //On fast exosuits this got annoying fast
+		next_step = world.time + 3 //On fast exosuits this got annoying fast
 		return FALSE
 
 	if(emp_damage >= EMP_MOVE_DISRUPT && prob(30))
@@ -59,14 +59,14 @@
 	if(dir != direct)
 		playsound(loc, mech_turn_sound, 40,1)
 		set_dir(direct)
-		next_move = world.time + legs.turn_delay
+		next_step = world.time + legs.turn_delay
 		return FALSE
 	else
 		if(!newloc)
 			newloc = get_step(src, direct)
 		if(newloc && legs && legs.can_move_on(loc, newloc))
 			. = ..(newloc, direct)
-			next_move = world.time + legs.move_delay
+			next_step = world.time + legs.move_delay
 			if(. && !istype(loc, /turf/space))
 				playsound(src.loc, mech_step_sound, 40, 1)
 	return .

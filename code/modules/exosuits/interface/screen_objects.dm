@@ -56,7 +56,8 @@
 		return
 
 	var/list/new_overlays = list()
-	if(!owner.get_cell() || (owner.get_cell().charge <= 0))
+	var/obj/item/cell/OwnerCell = owner.get_cell()
+	if(!OwnerCell || (OwnerCell.charge <= 0))
 		overlays.Cut()
 		return
 
