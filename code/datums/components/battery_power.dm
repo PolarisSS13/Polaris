@@ -24,7 +24,7 @@
 		to_chat(user, SPAN_WARNING("\The [M] has no cell to remove."))
 		return
 	cell.dropInto(M.loc)
-	user.put_in_any_hand_if_possible(cell)
+	user.put_in_active_hand(cell)
 	cell.add_fingerprint(user)
 	user.visible_message(SPAN_NOTICE("\The [user] removes \the [cell] from \the [M]."), SPAN_NOTICE("You remove \the [cell] from \the [M]."))
 	M.update_icon()
