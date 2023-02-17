@@ -1,128 +1,108 @@
 /obj/machinery/floodlight
-	name = "Emergency Floodlight"
-	desc = "Let there be light!"
+	name = "emergency floodlight"
+	desc = "A high-intensity flood lamp on a wheeled platform. It runs on a replaceable power cell."
 	icon = 'icons/obj/machines/floodlight.dmi'
-	icon_state = "flood00"
-	density = 1
-	var/on = 0
-	var/obj/item/cell/cell = null
-	var/use = 200 // 200W light
-	var/unlocked = 0
-	var/open = 0
-	var/brightness_on = 8		//can't remember what the maxed out value is
+	icon_state = "floodlight"
+	density = TRUE
+	active_power_usage = 200
+	var/panel_locked = TRUE
+	var/brightness_on = 8
+	var/datum/component/battery_power/BP
 
 /obj/machinery/floodlight/Initialize()
 	. = ..()
-	cell = new(src)
+	BP = AddComponent(/datum/component/battery_power)
+	if (BP)
+		BP.cell = new(src)
+
+/obj/machinery/floodlight/examine(mob/user)
+	. = ..()
+	if (!panel_open && !panel_locked)
+		. += "The screws on the maintenance hatch have been loosened."
+	else if (panel_open)
+		. += "The maintenance hatch is open and [BP?.cell ? "there's \a [BP.cell] inside" : "the cell has been removed"]."
 
 /obj/machinery/floodlight/update_icon()
 	cut_overlays()
-	icon_state = "flood[open ? "o" : ""][open && cell ? "b" : ""]0[on]"
+	if (use_power == USE_POWER_ACTIVE)
+		add_overlay("floodlight_on")
+	if (panel_open)
+		add_overlay("floodlight_open")
+		if (BP?.cell)
+			add_overlay("floodlight_cell")
 
 /obj/machinery/floodlight/process()
-	if(!on)
+	if (use_power != USE_POWER_ACTIVE)
 		return
-
-	if(!cell || (cell.charge < (use * CELLRATE)))
-		turn_off(1)
+	else if (!BP?.draw_power(get_power_usage() * CELLRATE))
+		visible_message(SPAN_WARNING("\The [src]'s power cell dies!"))
+		toggle(null, FALSE)
 		return
+	// If the cell is almost empty, rarely "flicker" the light. Aesthetic only.
+	else if ((BP.cell?.percent() < 10) && prob(5))
+		flicker()
 
-	// If the cell is almost empty rarely "flicker" the light. Aesthetic only.
-	if((cell.percent() < 10) && prob(5))
-		set_light(brightness_on/2, brightness_on/4)
-		spawn(20)
-			if(on)
-				set_light(brightness_on, brightness_on/2)
+/obj/machinery/floodlight/proc/flicker()
+	set waitfor = FALSE
+	set_light(brightness_on / 2, brightness_on / 4)
+	sleep(0.5 SECONDS)
+	if (use_power == USE_POWER_ACTIVE)
+		set_light(brightness_on, brightness_on / 2)
 
-	cell.use(use*CELLRATE)
-
-
-// Returns 0 on failure and 1 on success
-/obj/machinery/floodlight/proc/turn_on(var/loud = 0)
-	if(!cell)
-		return 0
-	if(cell.charge < (use * CELLRATE))
-		return 0
-
-	on = 1
-	set_light(brightness_on, brightness_on / 2)
-	update_icon()
-	if(loud)
-		visible_message("\The [src] turns on.")
-	return 1
-
-/obj/machinery/floodlight/proc/turn_off(var/loud = 0)
-	on = 0
-	set_light(0, 0)
-	update_icon()
-	if(loud)
-		visible_message("\The [src] shuts down.")
-
-/obj/machinery/floodlight/attack_ai(mob/user as mob)
-	if(istype(user, /mob/living/silicon/robot) && Adjacent(user))
-		return attack_hand(user)
-
-	if(on)
-		turn_off(1)
+/obj/machinery/floodlight/proc/toggle(mob/living/user, to_enable, loud)
+	if (to_enable)
+		if (!BP?.cell?.check_charge(active_power_usage * CELLRATE))
+			to_chat(user, SPAN_WARNING("You flick \the [src]'s power switch, but nothing happens."))
+			return
+		update_use_power(USE_POWER_ACTIVE)
+		set_light(brightness_on, brightness_on / 2)
 	else
-		if(!turn_on(1))
-			to_chat(user, "You try to turn on \the [src] but it does not work.")
-
-/obj/machinery/floodlight/attack_hand(mob/user as mob)
-	if(open && cell)
-		if(ishuman(user))
-			if(!user.get_active_hand())
-				user.put_in_hands(cell)
-				cell.loc = user.loc
+		update_use_power(USE_POWER_IDLE)
+		set_light(0, 0)
+	update_icon()
+	if (loud)
+		if (!user)
+			visible_message(SPAN_NOTICE("\The [src] turns [use_power == USE_POWER_ACTIVE ? "on" : "off"]."))
 		else
-			cell.loc = src.loc
+			user.visible_message(
+				SPAN_NOTICE("\The [user] turns [use_power == USE_POWER_ACTIVE ? "on" : "off"] \the [src]."),
+				SPAN_NOTICE("You turn [use_power == USE_POWER_ACTIVE ? "on" : "off"] \the [src]."))
+	return TRUE
 
-		cell.add_fingerprint(user)
-		cell.update_icon()
+/obj/machinery/floodlight/attack_ai(mob/user)
+	if (istype(user, /mob/living/silicon/robot) && Adjacent(user))
+		return attack_hand(user)
+	to_chat(user, SPAN_WARNING("\The [src] is manually controlled; you can't activate it remotely."))
+	return
 
-		cell = null
-		on = 0
-		set_light(0)
-		to_chat(user, "You remove the power cell")
+/obj/machinery/floodlight/attack_hand(mob/user)
+	. = ..()
+	if (!panel_open)
+		toggle(user, use_power != USE_POWER_ACTIVE, TRUE)
+	else if (!BP?.cell) // Automatically disable if the user took out the cell as part of the interaction
+		toggle(null, FALSE)
+
+/obj/machinery/floodlight/attackby(obj/item/O, mob/user)
+	if (O.has_tool_quality(TOOL_CROWBAR))
+		if (panel_locked)
+			to_chat(user, SPAN_WARNING("You'll need to remove the screws before you can pry open \the [src]'s maintenance hatch."))
+			return
+		panel_open = !panel_open
+		user.visible_message(
+			SPAN_NOTICE("\The [user] pries \the [src]'s maintenance hatch [panel_open ? "open" : "shut"]."),
+			SPAN_NOTICE("You lever \the [src]'s maintenance hatch [panel_open ? "open" : "shut"].")
+		)
+		playsound(src, 'sound/items/Deconstruct.ogg', 50, TRUE)
 		update_icon()
 		return
-
-	if(on)
-		turn_off(1)
-	else
-		if(!turn_on(1))
-			to_chat(user, "You try to turn on \the [src] but it does not work.")
-
-	update_icon()
-
-/obj/machinery/floodlight/attackby(obj/item/W as obj, mob/user as mob)
-	if(W.is_screwdriver())
-		if(!open)
-			if(unlocked)
-				unlocked = 0
-				to_chat(user, "You screw the battery panel in place.")
-			else
-				unlocked = 1
-				to_chat(user, "You unscrew the battery panel.")
-
-	if(W.is_crowbar())
-		if(unlocked)
-			if(open)
-				open = 0
-				cut_overlays()
-				to_chat(user, "You crowbar the battery panel in place.")
-			else
-				if(unlocked)
-					open = 1
-					to_chat(user, "You remove the battery panel.")
-
-	if(istype(W, /obj/item/cell))
-		if(open)
-			if(cell)
-				to_chat(user, "There is a power cell already installed.")
-			else
-				user.drop_item()
-				W.loc = src
-				cell = W
-				to_chat(user, "You insert the power cell.")
-	update_icon()
+	else if (O.has_tool_quality(TOOL_SCREWDRIVER))
+		if (panel_open)
+			to_chat(user, SPAN_WARNING("The maintenance hatch is wide open!"))
+			return
+		panel_locked = !panel_locked
+		user.visible_message(
+			SPAN_NOTICE("\The [user] [panel_locked ? "tightens" : "loosens"] the screws on \the [src]'s maintenance hatch."),
+			SPAN_NOTICE("You [panel_locked ? "tighten" : "loosen"] the screws on the maintenance hatch.")
+		)
+		playsound(src, 'sound/items/Screwdriver.ogg', 50, TRUE)
+	. = ..()

@@ -301,6 +301,7 @@
 #include "code\datums\autolathe\medical.dm"
 #include "code\datums\autolathe\tools.dm"
 #include "code\datums\components\_component.dm"
+#include "code\datums\components\battery_power.dm"
 #include "code\datums\components\crafting\crafting.dm"
 #include "code\datums\components\crafting\crafting_external.dm"
 #include "code\datums\components\crafting\recipes.dm"
