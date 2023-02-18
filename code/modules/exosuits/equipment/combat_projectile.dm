@@ -82,6 +82,7 @@
 
 /obj/item/ammo_magazine/mech
 	icon_state = "ashot-mag"
+	desc = "A large magazine for a mech's gun. Looks way too big for a normal gun."
 
 /obj/item/ammo_magazine/mech/attack_self(mob/user)
 	to_chat(user, SPAN_WARNING("It's pretty hard to extract ammo from a magazine that fits on a mech. You'll have to do it one round at a time."))
@@ -89,7 +90,6 @@
 
 /obj/item/ammo_magazine/mech/smg_top
 	name = "large 7mm magazine"
-	desc = "A large magazine for a mech's gun. Looks way too big for a normal gun."
 	ammo_type = /obj/item/ammo_casing/a9mm
 	caliber = "9mm"
 	max_ammo = 90

@@ -58,7 +58,7 @@
 /obj/item/mech_component/sensors/attackby(var/obj/item/thing, var/mob/user)
 	if(istype(thing, /obj/item/mech_component/control_module))
 		if(software)
-			to_chat(user, SPAN_WARNING("\The [src] already has a control modules installed."))
+			to_chat(user, SPAN_WARNING("\The [src] already has a control module installed."))
 			return
 		if(install_component(thing, user)) software = thing
 	else if(istype(thing,/obj/item/robot_parts/robot_component/radio))
