@@ -1,6 +1,6 @@
 /obj/item/flash
 	name = "flash"
-	desc = "Used for blinding and being an asshole."
+	desc = "Used to blind and disorient."
 	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
