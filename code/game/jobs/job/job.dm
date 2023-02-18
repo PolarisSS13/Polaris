@@ -38,6 +38,9 @@
 	// Description of the job's role and minimum responsibilities.
 	var/job_description = "This Job doesn't have a description! Please report it!"
 
+	/// A list of skill IDs associated to their respective rank. Allows a job to start with certain skills guaranteed.
+	var/list/skills = null
+
 /datum/job/New()
 	. = ..()
 	department_accounts = department_accounts || departments_managed
@@ -90,6 +93,27 @@
 		H.mind.initial_account = M
 
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
+
+/// Applies the skills from this job and its alt title to human `H`.
+/datum/job/proc/setup_skills(mob/living/carbon/human/H, alt_title = null)
+	if (!istype(H) || !H.mind)
+		return
+	var/list/to_add = skills.Copy()
+	/*if (alt_titles && alt_title) // Alt title skills are todo for when alt titles aren't awful
+		var/datum/alt_title/A = alt_titles[alt_title]
+		to_world("Title present and skill length - [A ? "y" : "n"], [A ? initial(A.title_skills)?.len : "n/a"]")
+		for (var/V in initial(A.title_skills))
+			to_world("Comparing skill [V]")
+			if (!to_add[V])
+				to_world("Not present in base job. Adding at rank [initial(A.title_skills)[V]]")
+				to_add[V] = initial(A.title_skills)[V]
+			else if (to_add[V] < initial(A.title_skills)[V])
+				to_world("Present in base job, but lower rank. Upping to rank [initial(A.title_skills)[V]]")
+				to_add[V] = initial(A.title_skills)[V]
+			else
+				to_world("Present in base job at same rank. No change")*/
+	for (var/V in to_add)
+		H.mind.add_skill(V, to_add[V] ? to_add[V] : 1)
 
 // overrideable separately so AIs/borgs can have cardborg hats without unneccessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)

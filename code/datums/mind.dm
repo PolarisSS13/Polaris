@@ -75,6 +75,9 @@
 	//used to store what traits the player had picked out in their preferences before joining, in text form.
 	var/list/traits = list()
 
+	/// A list of skill datums this mind is trained in, associated to their IDs.
+	var/list/skills = list()
+
 /datum/mind/New(var/key)
 	src.key = key
 	purchase_log = list()
@@ -496,6 +499,37 @@
 	. = G
 	if(G)
 		G.reenter_corpse()
+
+/// Checks if this mind has a skill of the provided ID.
+/// Will check if the skill has any rank by default, but can be given an optional argument to check for that rank instead.
+/datum/mind/proc/has_skill(skill_id, rank = 1)
+	return skills[skill_id]?.rank >= rank
+
+/// Adds a skill to this mind if it doesn't have one.
+/// If `rank` is defined, will also upgrade existing skills to the provided rank.
+/datum/mind/proc/add_skill(skill_id, rank = 1)
+	if (has_skill(skill_id))
+		skills[skill_id].rank = max(skills[skill_id].rank, rank)
+		return
+	for (var/ST in subtypesof(/datum/new_skill))
+		var/datum/new_skill/S = ST
+		if (initial(S.id) == skill_id)
+			var/datum/new_skill/NS = new S
+			NS.rank = rank
+			skills[skill_id] = NS
+			for (var/FB in NS.freebies)
+				to_world("found a freebie: [FB]")
+				add_skill(FB, NS.freebies[FB] ? NS.freebies[FB] : 1)
+			return has_skill(skill_id, rank)
+
+/// Removes a skill from this mind with given ID `skill_id`.
+/datum/mind/proc/remove_skill(skill_id)
+	var/datum/new_skill/S = skills[skill_id]
+	if (!S)
+		return FALSE
+	skills.Remove(skill_id)
+	qdel(S)
+	return has_skill(skill_id)
 
 //Initialisation procs
 /mob/living/proc/mind_initialize()

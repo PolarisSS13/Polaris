@@ -398,6 +398,10 @@ var/global/datum/controller/occupations/job_master
 		// Set up their account
 		job.setup_account(H)
 
+		// Set up their skills, if they have any
+		if (job.skills)
+			job.setup_skills(H, H.mind ? H.mind.role_alt_title : null)
+
 		// Equip job items.
 		job.equip(H, H.mind ? H.mind.role_alt_title : "")
 
