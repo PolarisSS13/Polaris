@@ -13,6 +13,7 @@
 	minimal_access = list(access_chapel_office, access_crematorium)
 
 	outfit_type = /decl/hierarchy/outfit/job/chaplain
+	skills = list(SKILL_PSYCHOLOGY)
 	job_description = "The Chaplain ministers to the spiritual needs of the crew."
 	alt_titles = list("Counselor" = /datum/alt_title/counselor)
 

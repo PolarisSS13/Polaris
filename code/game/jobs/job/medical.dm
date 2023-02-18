@@ -163,7 +163,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
-	skills = list(SKILL_MEDICIN)
+	skills = list(SKILL_PSYCHOLOGY)
 	job_description = "A Psychiatrist provides mental health services to crew members in need. They may also be called upon to determine whatever \
 					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs."
 	alt_titles = list("Psychologist" = /datum/alt_title/psychologist)

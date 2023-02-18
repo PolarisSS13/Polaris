@@ -5,6 +5,7 @@
 #define SKILL_ANATOMY "anatomy"
 #define SKILL_CHEMISTRY "chemistry"
 #define SKILL_FIRST_AID "first_aid"
+#define SKILL_PSYCHOLOGY "psychology"
 #define SKILL_VIROLOGY "virology"
 
 /datum/new_skill/medicine
@@ -40,6 +41,12 @@
 	id = SKILL_FIRST_AID
 	name = "First Aid"
 	desc = "You know how to treat typical wounds. You can salve burns with ointment, patch cuts and bruises with gauze, and safely use a syringe to deliver chemicals. You know which medicines do what, even if you can't make them yourself."
+	tree = SKILL_TREE_MEDICINE
+
+/datum/new_skill/psychology
+	id = SKILL_PSYCHOLOGY
+	name = "Psychology"
+	desc = "Intelligent minds are an impossible machine, but you know a little about how to help keep them running. You understand thought processes and the way people tend to act, and you can offer comfort and counseling to help ease the pains of isolation."
 	tree = SKILL_TREE_MEDICINE
 
 /datum/new_skill/virology
