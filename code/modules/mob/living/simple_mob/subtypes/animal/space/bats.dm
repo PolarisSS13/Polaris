@@ -61,13 +61,14 @@
 /datum/category_item/catalogue/fauna/razor_bat
 	name = "Nispean Fauna - Razor Bat"
 	desc = "These sharp-toothed flying mammalian animals are adapted to the oxygen-deficient \
-	and hostile jungles of Nisp, and as a result are frightening capable of surviving in harsh, \
+	and hostile jungles of Nisp, and as a result are frighteningly capable of surviving in harsh, \
 	even near-airless environments. In higher-oxygen environments, these bats can reach the size \
 	of a human head, though they struggle to thrive in low temperatures without proper shelter.\
 	<br><br>\
-	The Razor Bat is exclusively carnivorous, feeding on the blood of prey of all sizes, an\
-	act which often proves fatal to smaller targets. Remarkably, the bat can survive up to a\
-	week without feeding, though underfed specimens are notoriously aggressive.\
+	The Razor Bat is exclusively carnivorous, feeding on the blood of prey of all sizes by inflicting\
+	cuts with its eponymous razor-sharp fangs, an act which often proves fatal to smaller targets.\
+	Remarkably, the bat can survive up to a week without feeding, though underfed specimens are \
+	notoriously aggressive.\
 	<br><br>\
 	With the human colonisation of Kess-Gendar, the Razor Bat gained a bad habit of stowing \
 	away undetected in the maintenance spaces of ships departing Nisp, and have become a minor\
