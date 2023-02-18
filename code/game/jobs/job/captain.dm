@@ -29,6 +29,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	banned_job_species = list(SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, SPECIES_VOX, "mechanical", "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/captain
+	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_MANAGEMENT, SKILL_SCIENCE)
 	job_description = "The Site Manager manages the other Command Staff, and through them the rest of the station. Though they have access to everything, \
 						they do not understand everything, and are expected to delegate tasks to the appropriate crew member. The Site Manager is expected to \
 						have an understanding of Standard Operating Procedure, and is subject to it, and legal action, in the same way as every other crew member."
@@ -76,6 +77,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	banned_job_species = list(SPECIES_PROMETHEAN, SPECIES_ZADDAT, SPECIES_VOX, "digital", SPECIES_DIONA)
 
 	outfit_type = /decl/hierarchy/outfit/job/hop
+	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_MANAGEMENT)
 	job_description = "The Head of Personnel manages the Service department, the Exploration team, and most other civilians. They also \
 						manage the Supply department, through the Quartermaster. In addition, the Head of Personnel oversees the personal accounts \
 						of the crew, including their money and access. If necessary, the Head of Personnel is first in line to assume Acting Command."
@@ -120,5 +122,6 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimal_access = list(access_heads, access_keycard_auth)
 
 	outfit_type = /decl/hierarchy/outfit/job/secretary
+	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW)
 	job_description = "A Command Secretary handles paperwork duty for the Heads of Staff, so they can better focus on managing their departments. \
 						They are not Heads of Staff, and have no real authority."

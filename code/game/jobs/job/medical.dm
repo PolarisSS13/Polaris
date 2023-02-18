@@ -30,6 +30,7 @@
 	banned_job_species = list(SPECIES_VOX, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/cmo
+	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_MANAGEMENT, SKILL_MEDICINE, SKILL_ANATOMY = 2, SKILL_CHEMISTRY, SKILL_FIRST_AID, SKILL_VIROLOGY)
 	job_description = "The CMO manages the Medical department and is a position requiring experience and skill; their goal is to ensure that their \
 						staff keep the station's crew healthy and whole. They are primarily interested in making sure that patients are safely found and \
 						transported to Medical for treatment. They are expected to keep the crew informed about threats to their health and safety, and \
@@ -52,7 +53,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_genetics, access_eva)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_virology, access_eva)
 	outfit_type = /decl/hierarchy/outfit/job/medical/doctor
-	skills = list(SKILL_MEDICINE, SKILL_FIRST_AID, SKILL_ANATOMY, SKILL_CHEMISTRY)
+	skills = list(SKILL_MEDICINE, SKILL_ANATOMY, SKILL_FIRST_AID)
 	job_description = "A Medical Doctor is a Jack-of-All-Trades Medical title, covering a variety of skill levels and minor specializations. They are likely \
 						familiar with basic first aid, and a number of accompanying medications, and can generally save, if not cure, a majority of the \
 						patients they encounter."
@@ -112,6 +113,7 @@
 	min_age_by_species = list(SPECIES_PROMETHEAN = 3)
 
 	outfit_type = /decl/hierarchy/outfit/job/medical/chemist
+	skills = list(SKILL_MEDICINE, SKILL_CHEMISTRY, SKILL_FIRST_AID)
 	job_description = "A Chemist produces and maintains a stock of basic to advanced chemicals for medical and occasionally research use. \
 						They are likely to know the use and dangers of many lab-produced chemicals."
 	alt_titles = list("Pharmacist" = /datum/alt_title/pharmacist)
@@ -161,6 +163,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_psychiatrist)
 	outfit_type = /decl/hierarchy/outfit/job/medical/psychiatrist
+	skills = list(SKILL_MEDICIN)
 	job_description = "A Psychiatrist provides mental health services to crew members in need. They may also be called upon to determine whatever \
 					ails the mentally unwell, frequently under Security supervision. They understand the effects of various psychoactive drugs."
 	alt_titles = list("Psychologist" = /datum/alt_title/psychologist)
@@ -190,6 +193,7 @@
 	access = list(access_medical, access_medical_equip, access_morgue, access_surgery, access_chemistry, access_virology, access_eva, access_maint_tunnels, access_external_airlocks, access_psychiatrist)
 	minimal_access = list(access_medical, access_medical_equip, access_morgue, access_eva, access_maint_tunnels, access_external_airlocks)
 	outfit_type = /decl/hierarchy/outfit/job/medical/paramedic
+	skills = list(SKILL_MEDICINE, SKILL_ANATOMY, SKILL_FIRST_AID)
 	job_description = "A Paramedic is primarily concerned with the recovery of patients who are unable to make it to the Medical Department on their own. \
 						They may also be called upon to keep patients stable when Medical is busy or understaffed."
 	alt_titles = list("Emergency Medical Technician" = /datum/alt_title/emt)

@@ -500,6 +500,12 @@
 	if(G)
 		G.reenter_corpse()
 
+/// Checks if this mind has a skill tree's parent node unlocked.
+/datum/mind/proc/has_skill_tree(tree_id)
+	for (var/datum/new_skill/S in skills)
+		if (S.tree == tree_id && S.tree_parent)
+			return TRUE
+
 /// Checks if this mind has a skill of the provided ID.
 /// Will check if the skill has any rank by default, but can be given an optional argument to check for that rank instead.
 /datum/mind/proc/has_skill(skill_id, rank = 1)
@@ -518,7 +524,6 @@
 			NS.rank = rank
 			skills[skill_id] = NS
 			for (var/FB in NS.freebies)
-				to_world("found a freebie: [FB]")
 				add_skill(FB, NS.freebies[FB] ? NS.freebies[FB] : 1)
 			return has_skill(skill_id, rank)
 

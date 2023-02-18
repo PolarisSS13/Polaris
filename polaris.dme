@@ -391,7 +391,6 @@
 #include "code\datums\skills\logistics.dm"
 #include "code\datums\skills\medical.dm"
 #include "code\datums\skills\misc.dm"
-#include "code\datums\skills\physique.dm"
 #include "code\datums\skills\science.dm"
 #include "code\datums\supplypacks\atmospherics.dm"
 #include "code\datums\supplypacks\contraband.dm"
