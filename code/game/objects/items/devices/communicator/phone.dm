@@ -89,7 +89,7 @@
 		to_chat(user, "<span class='notice'>[bicon(src)] Connecting to [candidate].</span>")
 	to_chat(new_voice, "<span class='notice'>[bicon(src)] Attempting to call [src].</span>")
 	sleep(10)
-	to_chat(new_voice, "<span class='notice'>[bicon(src)] Dialing to [station_name()], Kara Subsystem, [system_name()].</span>")
+	to_chat(new_voice, "<span class='notice'>[bicon(src)] Dialing to [station_name()], Londuneyja, Sif, [system_name()].</span>")
 	sleep(20)
 	to_chat(new_voice, "<span class='notice'>[bicon(src)] Connecting to [station_name()] telecommunications array.</span>")
 	sleep(40)
