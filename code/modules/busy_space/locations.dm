@@ -1,7 +1,7 @@
 /datum/lore/location
 	var/desc = ""
-	var/types = list()
+	var/mission_types = list()
 
 /datum/lore/location/New(a,b)
 	desc = a
-	types = b
+	mission_types = b

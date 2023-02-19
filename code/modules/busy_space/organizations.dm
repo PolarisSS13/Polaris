@@ -1,14 +1,20 @@
 //Datums for different companies that can be used by busy_space
 /datum/lore/organization
-	var/name = ""				// Organization's name
-	var/short_name = ""			// Organization's shortname (NanoTrasen for "NanoTrasen Incorporated")
-	var/acronym = ""			// Organization's acronym, e.g. 'NT' for NanoTrasen'.
-	var/desc = ""				// One or two paragraph description of the organization, but only current stuff.  Currently unused.
-	var/history = ""			// Historical discription of the organization's origins  Currently unused.
-	var/work = ""				// Short description of their work, eg "an arms manufacturer"
-	var/headquarters = ""		// Location of the organization's HQ.  Currently unused.
-	var/motto = ""				// A motto/jingle/whatever, if they have one.
-	var/shady = 10				// The odds of them being denied a flight route. mostly a function of their reputation though unfamiliarity with local traffic rules is also a factor
+	var/name = ""															// Organization's name
+	var/short_name = ""														// Organization's shortname (NanoTrasen for "NanoTrasen Incorporated")
+	var/acronym = ""														// Organization's acronym, e.g. 'NT' for NanoTrasen'.
+	var/desc = ""															// One or two paragraph description of the organization, but only current stuff.  Currently unused.
+	var/history = ""														// Historical discription of the organization's origins  Currently unused.
+	var/work = ""															// Short description of their work, eg "an arms manufacturer"
+	var/headquarters = ""													// Location of the organization's HQ.  Currently unused.
+	var/motto = ""															// A motto/jingle/whatever, if they have one.
+	var/legit = 90															// The odds of them being approved a flight route. mostly a function of their reputation though unfamiliarity with local traffic rules is also a factor
+	var/annoying = 10														// The odds they'll say their motto at the end of a successfully negotiatiated route.
+	var/serviced = list(/datum/lore/system/sol = 1)							// systems they work in, weighted
+	var/missions = list()		// mission types they run
+//	var/special_locations = list()											// individual locations they might run missions to outside of their serviced systems
+	var/mission_noun = list("flight","mission","route")						// used for random mission generation
+	var/current_ship = ""												// the most recent ship from this org to have talked on the tracon
 
 	var/list/ship_prefixes = list()	//Some might have more than one! Like NanoTrasen. Value is the mission they perform, e.g. ("ABC" = "mission desc")
 	var/list/ship_names = list(		//Names of spaceships.  This is a mostly generic list that all the other organizations inherit from if they don't have anything better.
@@ -165,6 +171,7 @@
 
 /datum/lore/organization/New()
 	..()
+	missions += new /datum/lore/mission/prebuilt/transport/default
 	if(autogenerate_destination_names) // Lets pad out the destination names.
 		var/i = rand(6, 10)
 		var/list/star_names = list(
@@ -175,6 +182,82 @@
 		while(i)
 			destination_names.Add("a [pick(destination_types)] in [pick(star_names)]")
 			i--
+
+/datum/lore/organization/proc/generate_mission()
+	current_ship = "ITV Testing"
+	// pick what system we're going to run in
+	var/datum/lore/system/destination_system = pickweight(serviced)
+	if(destination_system)
+		destination_system = new destination_system
+	to_world("destination selected")
+
+	//shuffle
+	missions = shuffle(missions)
+	destination_system.locations = shuffle(destination_system.locations)
+	to_world(jointext(destination_system.locations, ""))
+	to_world("shuffled")
+
+	//init other variables
+	var/destination_mission_types = list()
+	var/possible_mission_types = list()
+	to_world("vars initialized")
+
+	//find what missions we can run
+	for(var/datum/lore/mission/x in missions)
+		possible_mission_types |= x.mission_type
+
+	to_world("source mission types populated:")
+	to_world(jointext(possible_mission_types, ""))
+
+	//populate destination_missions with all the mission types in that system
+	for(var/datum/lore/location/x in destination_system.locations)
+		destination_mission_types |= x.mission_types
+
+
+	to_world("destination mission types populated:")
+	to_world(jointext(destination_mission_types, ""))
+
+	// only find missions in the system we can run
+	possible_mission_types &= destination_mission_types
+
+	to_world("union found")
+	to_world(jointext(possible_mission_types, ""))
+
+	//sanity checking
+	if(!possible_mission_types)
+		to_world("sanity check failed")
+		return "ERROR" //change to fail silently after testing
+
+	//select a mission we can run
+	var/datum/lore/mission/selected_mission
+	for(var/datum/lore/mission/x in missions)
+		if(x.mission_type in possible_mission_types)
+			selected_mission = x
+			to_world("mission selected")
+			to_world(selected_mission.mission_type)
+			break
+		else
+			to_world("mission failed selection")
+
+	//select a place to do it at
+	var/datum/lore/location/selected_location
+	for(var/datum/lore/location/x in destination_system.locations)
+		if(selected_mission.mission_type in x.mission_types)
+			selected_location = x
+			to_world("destination selected")
+			to_world(selected_location.desc)
+			break
+		else
+			world << "destination selection failed"
+
+	//set our ship name for consistancy on the tracon
+	current_ship = "[selected_mission.prefix] [pick(ship_names)]"
+	to_world("ship name selected")
+	world.log << current_ship
+
+	//finally return our answer
+	return "[current_ship] on a [pick(selected_mission.mission_strings)] [pick(mission_noun)] to [selected_location.desc]"
+
 
 //////////////////////////////////////////////////////////////////////////////////
 
@@ -200,6 +283,15 @@
 	motto = ""
 
 	ship_prefixes = list("NSV" = "exploration", "NTV" = "hauling", "NDV" = "patrol", "NRV" = "emergency response", "NDV" = "asset protection")
+	missions = list( // they get almost every mission type because they're like the protagonists
+		new /datum/lore/mission/prebuilt/medical("NMV"),
+		new /datum/lore/mission/prebuilt/transport("NTV"),
+		new /datum/lore/mission/prebuilt/defense("NDV"),
+		new /datum/lore/mission/prebuilt/freight("NFV"),
+		new /datum/lore/mission/prebuilt/industrial("NIV"),
+		new /datum/lore/mission/prebuilt/scientific("NSV")
+		)
+
 	//Scientist naming scheme
 	ship_names = list(
 		"Bardeen",
@@ -262,7 +354,6 @@
 		var/string_to_test = "[using_map.station_name] in [using_map.starsys_name]"
 		if(string_to_test in destination_names)
 			destination_names.Remove(string_to_test)
-
 
 
 /datum/lore/organization/tsc/hephaestus
@@ -617,6 +708,7 @@
 	work = "courier and passenger transit"
 	headquarters = "Mars, Sol"
 	motto = "With Major Bill's, you won't pay major bills!"
+	annoying = 100 //oh god
 
 	ship_prefixes = list("TTV" = "transport", "TTV" = "luxury transit")
 	destination_names = list()
@@ -628,7 +720,7 @@
 	history = ""
 	work = "trade and transit"
 	headquarters = "N/A"
-	motto = "N/A"
+	motto = ""
 
 	ship_prefixes = list("IEV" = "prospecting", "IEC" = "prospecting", "IFV" = "bulk freight", "ITV" = "passenger transport", "ITC" = "just-in-time delivery")
 	destination_names = list()
@@ -640,7 +732,7 @@
 	history = ""
 	work = "trade and transit"
 	headquarters = "N/A"
-	motto = "N/A"
+	motto = ""
 	autogenerate_destination_names = FALSE
 
 	ship_prefixes = list("ITC" = "local shuttle service", "ITC" = "luxury transit", "ITC" = "pleasure cruise", "ITC" = "private transport", "IFC" = "courier", "IFC" = "local delivery", "IIC" = "maintenance", "IMC" = "medical response")
@@ -851,4 +943,3 @@
 						"rendezvous to an incursion site in Oasis",
 						"rendezvous to an incursion site in Gavel"
 						)
-

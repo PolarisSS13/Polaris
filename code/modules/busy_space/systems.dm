@@ -18,9 +18,9 @@
 			if(rand(length(planets))) // equal chance of an event in local space or any individual planet
 				initial = pick(planetary_destinations)
 				if(initial in list("an outpost", "a facility")) //clunky but w/e
-					mission = ATC_TYPICAL
+					mission = list(ATC_TYPICAL)
 				else
-					mission = ATC_ALL
+					mission = list(ATC_ALL)
 				locations += new /datum/lore/location((initial + " on " + pick(planets) + ", " + name), mission)
 			else
 				initial = pick(space_destinations)
@@ -28,19 +28,21 @@
 					mission = list(ATC_TRANS, ATC_FREIGHT, ATC_DEF, ATC_INDU) //generally unmanned so no medical or science jobs
 				else if(initial in list("an anomaly"))
 					mission = list(ATC_DEF, ATC_SCI) //theres kinda only two things to do about mysterious space wedgies)
-				else if (initial in list("a dockyard", "a station", "a vessel", "a spaceport", "an outpost", "a facility"))
-					mission = ATC_TYPICAL
+				else if(initial in list("a dockyard", "a station", "a vessel", "a spaceport", "an outpost", "a facility"))
+					mission = list(ATC_TYPICAL)
 				else
-					mission = ATC_ALL
-				locations += new /datum/lore/location((initial + " in " + name), mission)
+					mission = list(ATC_ALL)
+				locations += new /datum/lore/location("[initial] in [name]", mission)
 			i--
+		locations += new /datum/lore/location("in [name]", list(ATC_ALL)) //disable after testing?
 
 /datum/lore/system/ganesha
 	name = "Ganesha"
 	desc = "Can you believe that shit has been on the timeline since like 2016 and its never even made it onto the map. the south dakota of space."
 	planets = list("It Probably Has One??")
 
-
+/datum/lore/system/sol
+	name = "Sol"
 /*
 /datum/lore/system/vir
 	name = "Vir"
