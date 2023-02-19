@@ -81,11 +81,7 @@
 		to_chat(src, "<font color='blue'>You are not injured enough to succumb to death!</font>")
 
 /mob/living/proc/updatehealth()
-	if(status_flags & GODMODE)
-		health = 100
-		set_stat(CONSCIOUS)
-	else
-		health = getMaxHealth() - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss
+	health = getMaxHealth() - getOxyLoss() - getToxLoss() - getFireLoss() - getBruteLoss() - getCloneLoss() - halloss
 
 //This proc is used for mobs which are affected by pressure to calculate the amount of pressure that actually
 //affects them once clothing is factored in. ~Errorage
@@ -149,8 +145,6 @@
 
 //'include_robo' only applies to healing, for legacy purposes, as all damage typically hurts both types of organs
 /mob/living/proc/adjustBruteLoss(var/amount,var/include_robo)
-	if(status_flags & GODMODE)	return 0	//godmode
-
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.incoming_damage_percent))
@@ -169,7 +163,6 @@
 	return oxyloss
 
 /mob/living/proc/adjustOxyLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
@@ -186,14 +179,12 @@
 	updatehealth()
 
 /mob/living/proc/setOxyLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	oxyloss = amount
 
 /mob/living/proc/getToxLoss()
 	return toxloss
 
 /mob/living/proc/adjustToxLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
@@ -210,7 +201,6 @@
 	updatehealth()
 
 /mob/living/proc/setToxLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	toxloss = amount
 
 /mob/living/proc/getFireLoss()
@@ -224,7 +214,6 @@
 
 //'include_robo' only applies to healing, for legacy purposes, as all damage typically hurts both types of organs
 /mob/living/proc/adjustFireLoss(var/amount,var/include_robo)
-	if(status_flags & GODMODE)	return 0	//godmode
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.incoming_damage_percent))
@@ -243,8 +232,6 @@
 	return cloneloss
 
 /mob/living/proc/adjustCloneLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
-
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.incoming_damage_percent))
@@ -260,25 +247,21 @@
 	updatehealth()
 
 /mob/living/proc/setCloneLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	cloneloss = amount
 
 /mob/living/proc/getBrainLoss()
 	return brainloss
 
 /mob/living/proc/adjustBrainLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	brainloss = min(max(brainloss + amount, 0),(getMaxHealth()*2))
 
 /mob/living/proc/setBrainLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	brainloss = amount
 
 /mob/living/proc/getHalLoss()
 	return halloss
 
 /mob/living/proc/adjustHalLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	if(amount > 0)
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.incoming_damage_percent))
@@ -295,7 +278,6 @@
 	updatehealth()
 
 /mob/living/proc/setHalLoss(var/amount)
-	if(status_flags & GODMODE)	return 0	//godmode
 	halloss = amount
 
 // Use this to get a mob's max health whenever possible.  Reading maxHealth directly will give inaccurate results if any modifiers exist.
