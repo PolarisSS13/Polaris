@@ -113,9 +113,9 @@
 	show_additional_info_to(usr)
 
 /obj/item/card/id/proc/show_additional_info_to(var/mob/user)
-	to_chat(usr, "The blood type on the card is [blood_type].")
-	to_chat(usr, "The DNA hash on the card is [dna_hash].")
-	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
+	to_chat(user, "The blood type on the card is [blood_type].")
+	to_chat(user, "The DNA hash on the card is [dna_hash].")
+	to_chat(user, "The fingerprint hash on the card is [fingerprint_hash].")
 	return
 
 /obj/item/card/id/get_worn_icon_state(var/slot_name)
@@ -336,4 +336,4 @@
 	return
 
 /obj/item/card/id/union/show_tgui(var/mob/user)
-	return desc
+	return
