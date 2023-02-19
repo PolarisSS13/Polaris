@@ -509,14 +509,16 @@
 /// Checks if this mind has a skill of the provided ID.
 /// Will check if the skill has any rank by default, but can be given an optional argument to check for that rank instead.
 /datum/mind/proc/has_skill(skill_id, rank = 1)
-	return skills[skill_id]?.rank >= rank
+	var/datum/new_skill/S = skills[skill_id]
+	return S?.rank >= rank
 
 /// Adds a skill to this mind if it doesn't have one.
 /// If `rank` is defined, will also upgrade existing skills to the provided rank.
 /datum/mind/proc/add_skill(skill_id, rank = 1)
 	if (has_skill(skill_id))
-		skills[skill_id].rank = max(skills[skill_id].rank, rank)
-		return
+		var/datum/new_skill/S = skills[skill_id]
+		S.rank = max(S.rank, rank)
+		return TRUE
 	for (var/ST in subtypesof(/datum/new_skill))
 		var/datum/new_skill/S = ST
 		if (initial(S.id) == skill_id)
