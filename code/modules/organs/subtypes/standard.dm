@@ -39,6 +39,11 @@
 		owner.synthetic = R
 	return FALSE
 
+/obj/item/organ/external/chest/derobotize()
+	. = ..()
+	if (!.) return
+	owner?.synthetic = null
+
 /obj/item/organ/external/chest/handle_germ_effects()
 	. = ..() //Should return an infection level
 	if(!. || (status & ORGAN_DEAD)) return //If it's already above 2, it's become necrotic and we can just not worry about it.
@@ -292,6 +297,12 @@
 		else
 			LAZYREMOVE(organ_verbs, /mob/living/carbon/human/proc/setmonitor_state)
 		handle_organ_mod_special()
+
+/obj/item/organ/external/head/derobotize()
+	. = ..()
+	if (!.) return
+	LAZYREMOVE(organ_verbs, /mob/living/carbon/human/proc/setmonitor_state)
+	handle_organ_mod_special()
 
 /obj/item/organ/external/head/removed()
 	if(owner)
