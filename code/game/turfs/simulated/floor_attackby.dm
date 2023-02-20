@@ -12,12 +12,12 @@
 	if (snow_layers) // Snowy turfs have to be cleared out before anything else can be done with them
 		if (istype(C, /obj/item/shovel))
 			user.visible_message(
-				SPAN_NOTICE("\The [user] starts clearing \the [snow] with \the [C.name]..."),
-				SPAN_NOTICE("You start clearing \the [snow] with your [C.name]..."))
+				SPAN_NOTICE("\The [user] starts clearing \the [src] with \the [C.name]..."),
+				SPAN_NOTICE("You start clearing \the [src] with your [C.name]..."))
 			if(do_after(user, 4 SECONDS * C.toolspeed))
 				user.visible_message(
-					SPAN_NOTICE("\The [user] finishes clearing \the [snow]."),
-					SPAN_NOTICE("You clear out \the [snow] and leave it in a pile nearby."))
+					SPAN_NOTICE("\The [user] finishes clearing \the [src]."),
+					SPAN_NOTICE("You clear out \the [src] and leave it in a pile nearby."))
 				var/obj/item/stack/material/snow/S = new(src)
 				S.amount = 5 * snow_layers
 				set_snow(0)
