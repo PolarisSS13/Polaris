@@ -31,7 +31,9 @@
 	heat_capacity = 10000
 	var/lava = 0
 
+	/// Measures how thick the snow on this turf is. Currently this is an arbitrary number; anything higher than 2 isn't meaningful. 0 means there's no snow.
 	var/snow_layers = 0
+	/// When characters walk over snowy floors, they leave footprints (see Entered()). This list holds those footprints and gets read when updating the icon.
 	var/list/snow_footprints = list()
 
 /turf/simulated/floor/is_plating()

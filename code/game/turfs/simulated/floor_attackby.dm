@@ -9,16 +9,18 @@
 			attack_tile(C, L) // Be on help intent if you want to decon something.
 			return
 
-	if (snow_layers)
+	if (snow_layers) // Snowy turfs have to be cleared out before anything else can be done with them
 		if (istype(C, /obj/item/shovel))
-			to_chat(user, SPAN_NOTICE("You begin to remove \the [src] with your [C.name]."))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts clearing \the [snow] with \the [C.name]..."),
+				SPAN_NOTICE("You start clearing \the [snow] with your [C.name]..."))
 			if(do_after(user, 4 SECONDS * C.toolspeed))
-				to_chat(user, SPAN_NOTICE("\The [src] has been dug up, and now lies in a pile nearby."))
+				user.visible_message(
+					SPAN_NOTICE("\The [user] finishes clearing \the [snow]."),
+					SPAN_NOTICE("You clear out \the [snow] and leave it in a pile nearby."))
 				var/obj/item/stack/material/snow/S = new(src)
 				S.amount = 5 * snow_layers
 				set_snow(0)
-			else
-				to_chat(user, SPAN_NOTICE("You decide to not finish removing \the [src]."))
 		else
 			to_chat(user, SPAN_WARNING("Remove the snow with a shovel first!"))
 		return TRUE
@@ -135,11 +137,11 @@
 
 /turf/simulated/floor/attack_hand(mob/user)
 	if (snow_layers)
-		visible_message("[user] starts scooping up some snow.", "You start scooping up some snow.")
+		visible_message(SPAN_NOTICE("[user] starts scooping up some snow..."), SPAN_NOTICE("You start scooping up some snow..."))
 		if(do_after(user, 1 SECOND))
 			var/obj/S = new /obj/item/stack/material/snow(user.loc)
 			user.put_in_hands(S)
-			visible_message("[user] scoops up a pile of snow.", "You scoop up a pile of snow.")
+			visible_message(SPAN_NOTICE("[user] scoops up a pile of snow."), SPAN_NOTICE("You scoop up a pile of snow."))
 
 /turf/simulated/floor/proc/try_deconstruct_tile(obj/item/W as obj, mob/user as mob)
 	if(W.is_crowbar())
