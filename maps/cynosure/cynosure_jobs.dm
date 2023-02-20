@@ -33,7 +33,7 @@ var/global/const/access_explorer = 43
 	minimal_access = list(access_explorer, access_research)
 
 	outfit_type = /decl/hierarchy/outfit/job/explorer2
-	skills = list(SKILL_SCIENCE, SKILL_SURVIVAL)
+	skills = list(/datum/new_skill/science, /datum/new_skill/survival)
 	job_description = "An Explorer searches for interesting things on the surface of Sif, and returns them to the station."
 
 	alt_titles = list(
@@ -80,7 +80,7 @@ var/global/const/access_explorer = 43
 	access = list()
 	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/survivalist
-	skills = list(SKILL_ATHLETICS, SKILL_SURVIVAL, SKILL_COMBAT)
+	skills = list(/datum/new_skill/athletics, /datum/new_skill/survival, /datum/new_skill/combat)
 	job_description = "There are a few small groups of people living in the wilderness of Sif, and they occasionally venture to the Cynosure to trade, ask for help, or just have someone to talk to."
 	assignable = FALSE
 	has_headset = FALSE

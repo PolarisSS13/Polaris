@@ -32,7 +32,7 @@
 	banned_job_species = list(SPECIES_VOX, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/science/rd
-	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_MANAGEMENT, SKILL_SCIENCE, SKILL_XENOARCHAEOLOGY, SKILL_XENOBIOLOGY, SKILL_XENOBOTANY)
+	skills = list(/datum/new_skill/logistics, /datum/new_skill/corporate_law, /datum/new_skill/management, /datum/new_skill/science, /datum/new_skill/xenoarchaeology, /datum/new_skill/xenobiology, /datum/new_skill/xenobotany)
 	job_description = "The Research Director manages and maintains the Research department. They are required to ensure the safety of the entire crew, \
 						at least with regards to anything occuring in the Research department, and to inform the crew of any disruptions that \
 						might originate from Research. The Research Director often has at least passing knowledge of most of the Research department, but \
@@ -66,7 +66,7 @@
 	minimal_player_age = 14
 
 	outfit_type = /decl/hierarchy/outfit/job/science/scientist
-	skills = list(SKILL_SCIENCE)
+	skills = list(/datum/new_skill/science)
 	job_description = "A Scientist is a generalist working in the Research department, with general knowledge of the scientific process, as well as \
 						the principles and requirements of Research and Development. They may also formulate experiments of their own devising, if \
 						they find an appropriate topic."
@@ -112,7 +112,7 @@
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
-	skills = list(SKILL_SCIENCE, SKILL_XENOBIOLOGY)
+	skills = list(/datum/new_skill/science, /datum/new_skill/xenobiology)
 	job_description = "A Xenobiologist studies esoteric lifeforms, usually in the relative safety of their lab. They attempt to find ways to benefit \
 						from the byproducts of these lifeforms, and their main subject at present is the Giant Slime."
 	alt_titles = list(
@@ -152,7 +152,7 @@
 	banned_job_species = list(SPECIES_VOX, "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
-	skills = list(SKILL_SCIENCE, SKILL_COMPLEX_DEVICES = 2, SKILL_ELECTRONICS)
+	skills = list(/datum/new_skill/science, /datum/new_skill/complex_devices = 2, /datum/new_skill/electronics)
 	job_description = "A Roboticist maintains and repairs the station's synthetics, including crew with prosthetic limbs. \
 						They can also assist the station by producing simple robots and even pilotable exosuits."
 	alt_titles = list("Biomechanical Engineer" = /datum/alt_title/biomech, "Mechatronic Engineer" = /datum/alt_title/mech_tech)

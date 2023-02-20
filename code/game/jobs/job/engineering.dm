@@ -34,7 +34,7 @@
 	minimal_player_age = 7
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/chief_engineer
-	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_INFORMATION_TECHNOLOGY, SKILL_MANAGEMENT, SKILL_ENGINEERING, SKILL_ATMOSPHERICS, SKILL_CONSTRUCTION = 2, SKILL_ELECTRONICS, SKILL_SUPERMATTER, SKILL_COMPLEX_DEVICES = 2) // CE's gotta have a lot of talents
+	skills = list(/datum/new_skill/logistics, /datum/new_skill/corporate_law, /datum/new_skill/information_technology, /datum/new_skill/management, /datum/new_skill/engineering, /datum/new_skill/atmospherics, /datum/new_skill/construction = 2, /datum/new_skill/electronics, /datum/new_skill/supermatter, /datum/new_skill/complex_devices = 2) // CE's gotta have a lot of talents
 	job_description = "The Chief Engineer manages the Engineering Department, ensuring that the Engineers work on what needs to be done, handling distribution \
 						of manpower as much as they handle hands-on operations and repairs. They are also expected to keep the rest of the station informed of \
 						any structural threats to the station that may be hazardous to health or disruptive to work."
@@ -62,7 +62,7 @@
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/engineer
-	skills = list(SKILL_ENGINEERING, SKILL_CONSTRUCTION = 2, SKILL_ELECTRONICS, SKILL_SUPERMATTER)
+	skills = list(/datum/new_skill/engineering, /datum/new_skill/construction = 2, /datum/new_skill/electronics, /datum/new_skill/supermatter)
 	job_description = "An Engineer keeps the station running. They repair damages, keep the atmosphere stable, and ensure that power is being \
 						generated and distributed. On quiet shifts, they may be called upon to make cosmetic alterations to the station."
 
@@ -103,6 +103,6 @@
 	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
 
 	outfit_type = /decl/hierarchy/outfit/job/engineering/atmos
-	skills = list(SKILL_ENGINEERING, SKILL_ATMOSPHERICS, SKILL_CONSTRUCTION = 2, SKILL_SUPERMATTER)
+	skills = list(/datum/new_skill/engineering, /datum/new_skill/atmospherics, /datum/new_skill/construction = 2, /datum/new_skill/supermatter)
 	job_description = "An Atmospheric Technician is primarily concerned with keeping the station's atmosphere breathable. They are expected to have a good \
 						understanding of the pipes, vents, and scrubbers that move gasses around the station, and to be familiar with proper firefighting procedure."

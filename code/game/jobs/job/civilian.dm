@@ -18,7 +18,7 @@
 	minimal_access = list(access_bar)
 
 	outfit_type = /decl/hierarchy/outfit/job/service/bartender
-	skills = list(SKILL_MIXOLOGY)
+	skills = list(/datum/new_skill/mixology)
 	job_description = "A Bartender mixes drinks for the crew. They generally have permission to charge for drinks or deny service to unruly patrons."
 	alt_titles = list("Barista" = /datum/alt_title/barista)
 
@@ -47,7 +47,7 @@
 	minimal_access = list(access_kitchen)
 
 	outfit_type = /decl/hierarchy/outfit/job/service/chef
-	skills = list(SKILL_COOKING)
+	skills = list(/datum/new_skill/cooking)
 	job_description = "A Chef cooks food for the crew. They generally have permission to charge for food or deny service to unruly diners."
 	alt_titles = list("Cook" = /datum/alt_title/cook)
 
@@ -75,7 +75,7 @@
 	minimal_access = list(access_hydroponics)
 
 	outfit_type = /decl/hierarchy/outfit/job/service/gardener
-	skills = list(SKILL_BOTANY)
+	skills = list(/datum/new_skill/botany)
 	job_description = "A Botanist grows plants for the Chef and Bartender."
 	alt_titles = list("Gardener" = /datum/alt_title/gardener)
 
@@ -110,7 +110,7 @@
 	ideal_character_age = 40
 
 	outfit_type = /decl/hierarchy/outfit/job/cargo/qm
-	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_MANAGEMENT)
+	skills = list(/datum/new_skill/logistics, /datum/new_skill/corporate_law, /datum/new_skill/management)
 	job_description = "The Quartermaster manages the Supply department, checking cargo orders and ensuring supplies get to where they are needed."
 	alt_titles = list("Supply Chief" = /datum/alt_title/supply_chief)
 
@@ -135,7 +135,7 @@
 	minimal_access = list(access_maint_tunnels, access_cargo, access_cargo_bot, access_mailsorting)
 
 	outfit_type = /decl/hierarchy/outfit/job/cargo/cargo_tech
-	skills = list(SKILL_LOGISTICS)
+	skills = list(/datum/new_skill/logistics)
 	job_description = "A Cargo Technician fills and delivers cargo orders. They are encouraged to return delivered crates to the Cargo Shuttle, \
 						because Central Command gives a partial refund."
 
@@ -158,7 +158,7 @@
 	minimal_access = list(access_mining, access_mining_station, access_mailsorting)
 
 	outfit_type = /decl/hierarchy/outfit/job/cargo/mining
-	skills = list(SKILL_ATHLETICS)
+	skills = list(/datum/new_skill/athletics)
 	job_description = "A Shaft Miner mines and processes minerals to be delivered to departments that need them."
 	alt_titles = list("Drill Technician" = /datum/alt_title/drill_tech)
 
@@ -209,7 +209,7 @@
 	minimal_access = list(access_library)
 
 	outfit_type = /decl/hierarchy/outfit/job/librarian
-	skills = list(SKILL_LOGISTICS)
+	skills = list(/datum/new_skill/logistics)
 	job_description = "The Librarian curates the book selection in the Library, so the crew might enjoy it."
 	alt_titles = list("Journalist" = /datum/alt_title/journalist, "Writer" = /datum/alt_title/writer)
 
@@ -245,7 +245,7 @@
 	banned_job_species = list(SPECIES_VOX, SPECIES_PROMETHEAN, SPECIES_UNATHI, SPECIES_DIONA, SPECIES_TESHARI, SPECIES_ZADDAT, "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/internal_affairs_agent
-	skills = list(SKILL_LOGISTICS, SKILL_CORPORATE_LAW, SKILL_MANAGEMENT)
+	skills = list(/datum/new_skill/logistics, /datum/new_skill/corporate_law, /datum/new_skill/management)
 	job_description = "An Internal Affairs Agent makes sure that the crew is following Standard Operating Procedure. They also \
 						handle complaints against crew members, and can have issues brought to the attention of Central Command, \
 						assuming their paperwork is in order."

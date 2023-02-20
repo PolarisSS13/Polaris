@@ -75,7 +75,7 @@
 	//used to store what traits the player had picked out in their preferences before joining, in text form.
 	var/list/traits = list()
 
-	/// A list of skill datums this mind is trained in, associated to their IDs.
+	/// A list of skill datums this mind is trained in, associated to their typepath.
 	var/list/skills = list()
 
 /datum/mind/New(var/key)
@@ -502,9 +502,8 @@
 
 /// Checks if this mind has a skill tree's parent node unlocked.
 /datum/mind/proc/has_skill_tree(tree_id)
-	for (var/datum/new_skill/S in skills)
-		if (S.tree == tree_id && S.tree_parent)
-			return TRUE
+	var/datum/new_skill/S = skills[tree_id]
+	return S?.tree == tree_id && S.tree_parent
 
 /// Checks if this mind has a skill of the provided ID.
 /// Will check if the skill has any rank by default, but can be given an optional argument to check for that rank instead.
@@ -515,19 +514,18 @@
 /// Adds a skill to this mind if it doesn't have one.
 /// If `rank` is defined, will also upgrade existing skills to the provided rank.
 /datum/mind/proc/add_skill(skill_id, rank = 1)
+	if (!ispath(skill_id, /datum/new_skill)) // Sanity check is necessary here, but other skill procs handle it on their own without runtimes
+		return
 	if (has_skill(skill_id))
 		var/datum/new_skill/S = skills[skill_id]
 		S.rank = max(S.rank, rank)
 		return TRUE
-	for (var/ST in subtypesof(/datum/new_skill))
-		var/datum/new_skill/S = ST
-		if (initial(S.id) == skill_id)
-			var/datum/new_skill/NS = new S
-			NS.rank = rank
-			skills[skill_id] = NS
-			for (var/FB in NS.freebies)
-				add_skill(FB, NS.freebies[FB] ? NS.freebies[FB] : 1)
-			return has_skill(skill_id, rank)
+	var/datum/new_skill/NS = new skill_id
+	NS.rank = rank
+	skills[skill_id] = NS
+	for (var/FB in NS.freebies)
+		add_skill(FB, NS.freebies[FB] ? NS.freebies[FB] : 1)
+	return has_skill(skill_id, rank)
 
 /// Removes a skill from this mind with given ID `skill_id`.
 /datum/mind/proc/remove_skill(skill_id)
