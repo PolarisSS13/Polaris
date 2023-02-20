@@ -91,7 +91,7 @@
 
 	if(W.is_screwdriver())
 		visible_message(SPAN_NOTICE("\The [user] begins carefully adjusting \the [src]'s casing."))
-		if(do_after(user, 5 SECONDS, src))
+		if(do_after(user, 15 SECONDS, src))
 			panel_open = !panel_open
 			visible_message(SPAN_NOTICE("\The [user] carefully [panel_open ? "opens" : "closes"] the casing of \the [src]."))
 			update_icon()
@@ -103,7 +103,7 @@
 	if(armed)
 		if(panel_open && W.is_wirecutter())
 			visible_message(SPAN_NOTICE("\The [user] begins painstakingly disarming \the [src]..."))
-			if(do_after(user, 10 SECONDS, src))
+			if(do_after(user, 30 SECONDS, src))
 				visible_message(SPAN_NOTICE("\The [user] disarms \the [src]!"))
 				disarm()
 				return TRUE
@@ -148,7 +148,7 @@
 			new_turf.register_dangerous_object(src)
 
 /obj/item/mine/proc/trigger_payload(var/mob/living/M)
-	if(!triggering && payload)
+	if(!triggering && payload && armed)
 		triggering = TRUE
 		if(ismob(loc))
 			var/mob/holder = loc
