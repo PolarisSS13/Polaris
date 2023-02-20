@@ -19,7 +19,6 @@
 		'sound/effects/footstep/plating3.ogg',
 		'sound/effects/footstep/plating4.ogg',
 		'sound/effects/footstep/plating5.ogg'))
-
 	var/list/old_decals = null
 
 	// Flooring data.
@@ -32,8 +31,25 @@
 	heat_capacity = 10000
 	var/lava = 0
 
+	var/snow_layers = 0
+	var/list/snow_footprints = list()
+
 /turf/simulated/floor/is_plating()
 	return (!flooring || flooring.is_plating)
+
+/turf/simulated/floor/get_movement_cost()
+	return max(movement_cost, min(snow_layers, 2))
+
+/turf/simulated/floor/Entered(atom/A, atom/OL)
+	if(isliving(A) && snow_layers)
+		var/mob/living/L = A
+		var/footprint_state = L.get_snow_footprint_state()
+		if(!footprint_state)
+			return ..()
+		var/mdir = "[A.dir]"
+		snow_footprints[mdir] = footprint_state
+		update_icon(TRUE)
+	. = ..()
 
 /turf/simulated/floor/Initialize(mapload, floortype)
 	. = ..()
@@ -55,6 +71,14 @@
 /turf/simulated/floor/LateInitialize()
 	. = ..()
 	update_icon(1)
+
+/turf/simulated/floor/proc/adjust_snow(amt)
+	snow_layers = max(0, snow_layers + amt)
+	update_icon(TRUE)
+
+/turf/simulated/floor/proc/set_snow(amt)
+	snow_layers = max(0, amt)
+	update_icon(TRUE)
 
 /turf/simulated/floor/proc/swap_decals()
 	var/current_decals = decals

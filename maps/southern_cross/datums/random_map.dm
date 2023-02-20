@@ -36,7 +36,7 @@
 		if(6 to 8)
 			return /turf/simulated/floor/outdoors/grass/sif/forest/planetuse
 		if(9)
-			return /turf/simulated/floor/outdoors/snow/sif/planetuse
+			return /turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed
 
 /datum/random_map/noise/sif/get_additional_spawns(var/value, var/turf/T)
 	if(prob(60))
@@ -81,7 +81,7 @@
 		if(4 to 6)
 			return /turf/simulated/floor/outdoors/grass/sif/forest/planetuse
 		if(7 to 9)
-			return /turf/simulated/floor/outdoors/snow/sif/planetuse
+			return /turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed
 
 /datum/random_map/noise/sif/forest/get_additional_spawns(var/value, var/turf/T)
 	if(prob(25))
