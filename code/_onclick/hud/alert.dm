@@ -256,7 +256,7 @@ or something covering your eyes."
 
 /obj/screen/alert/high
 	name = "High"
-	desc = "Whoa, you're tripping balls! Careful you don't get addicted... if you aren't already."
+	desc = "Whoa, you're tripping balls!"
 	icon_state = "high"
 
 /obj/screen/alert/embeddedobject

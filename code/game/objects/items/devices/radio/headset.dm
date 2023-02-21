@@ -212,13 +212,13 @@
 
 /obj/item/radio/headset/heads/rd
 	name = "research director's headset"
-	desc = "Headset of the resident eccentric."
+	desc = "Headset of the eccentric-in-chief."
 	icon_state = "com_headset"
 	ks2type = /obj/item/encryptionkey/heads/rd
 
 /obj/item/radio/headset/heads/rd/alt
 	name = "research director's bowman headset"
-	desc = "Headset of the resident eccentric."
+	desc = "Headset of the eccentric-in-chief."
 	icon_state = "com_headset_alt"
 	ks2type = /obj/item/encryptionkey/heads/rd
 
