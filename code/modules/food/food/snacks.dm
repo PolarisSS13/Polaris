@@ -6671,7 +6671,7 @@
 	.=..()
 	reagents.add_reagent("capsaicin", 5)
 
-/obj/item/reagent_containers/food/snacks/sun_snax //ADDITION 04/14/2021
+/obj/item/reagent_containers/food/snacks/sun_snax
 	name = "\improper Sun Snax!"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "sun_snax"
@@ -6771,7 +6771,7 @@
 	.=..()
 	reagents.add_reagent("capsaicin",1)
 
-/obj/item/reagent_containers/food/snacks/wasabi_peas //ADDITION 04/14/2021
+/obj/item/reagent_containers/food/snacks/wasabi_peas
 	name = "\improper Hadokikku Peas"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "wasabi_peas"

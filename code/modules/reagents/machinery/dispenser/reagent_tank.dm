@@ -436,5 +436,5 @@
 	amount_per_transfer_from_this = 10
 
 /obj/structure/reagent_dispensers/he3/Initialize()
-	..()
+	. = ..()
 	reagents.add_reagent("helium3",1000)
