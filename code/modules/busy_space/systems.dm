@@ -559,13 +559,13 @@
 	desc = "The home system of the Skrell, and some less important aliens."
 	autogenerate_destinations = FALSE //qerrvalis is a truly stupidly long distance away so a random medical mission to a minor colony isn't going to happen
 	locations = list( //teshari who?
-		new /datum/lore/location("a historical site in Qarr'kloa, Qerrbalak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
-		new /datum/lore/location("a historical site in Mi'qoxi, Qerrbalak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
-		new /datum/lore/location("a historical site in Kal'lo, Qerrbalak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
-		new /datum/lore/location("an archeological dig in Qarr'kloa, Qerrbalak, Qerr'Valis", list(ATC_TRANS, ATC_SCI)),
-		new /datum/lore/location("a bulk phoron distibutor in Mo'glar, Qerrbalak, Qerr'Valis", list(ATC_FREIGHT)),
-		new /datum/lore/location("the Academy on Gli'morr, Qerrbalak, Qerr'Valis", list(ATC_SCI, ATC_TRANS)),
-		new /datum/lore/location("a SolGov embassy on Qerrbalak, Qerr'Valis", list(ATC_DIPLO)),
+		new /datum/lore/location("a historical site in Qarr'kloa, Qerr'balak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
+		new /datum/lore/location("a historical site in Mi'qoxi, Qerr'balak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
+		new /datum/lore/location("a historical site in Kal'lo, Qerr'balak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
+		new /datum/lore/location("an archeological dig in Qarr'kloa, Qerr'balak, Qerr'Valis", list(ATC_TRANS, ATC_SCI)),
+		new /datum/lore/location("a bulk phoron distibutor in Mo'glar, Qerr'balak, Qerr'Valis", list(ATC_FREIGHT)),
+		new /datum/lore/location("the Academy on Gli'morr, Qerr'balak, Qerr'Valis", list(ATC_SCI, ATC_TRANS)),
+		new /datum/lore/location("a SolGov embassy on Qerr'balak, Qerr'Valis", list(ATC_DIPLO)),
 		)
 
 //skipping Ue-Orsi unless I hear that they have returned to being a place you could go
