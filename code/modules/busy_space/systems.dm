@@ -135,7 +135,7 @@
 		new /datum/lore/location("the Radiance Energy Chain", list(ATC_FREIGHT, ATC_DEF, ATC_INDU)),
 		new /datum/lore/location("a corporate colony in the Kara subsystem", list(ATC_ALL_CIV)), //padding-- there should probably be more than one named kara colony anyway
 		new /datum/lore/location("an independent colony in the Kara subsystem", list(ATC_ALL_CIV)),
-		new /datum/lore/location("a Phoron mine in the Kara subsystem", list(ATC_TYPICAL)),
+		new /datum/lore/location("a phoron mine in the Kara subsystem", list(ATC_TYPICAL)),
 		new /datum/lore/location("a xenoarcheological dig in the Kara subsystem", list(ATC_TYPICAL, ATC_SCI)),
 		new /datum/lore/location("an Incursion derelict in local space", list(ATC_SALVAGE, ATC_DEF, ATC_SCI, ATC_INDU)),
 		new /datum/lore/location("Colony Bright", list(ATC_TYPICAL, ATC_DIPLO)),
@@ -563,7 +563,7 @@
 		new /datum/lore/location("a historical site in Mi'qoxi, Qerrbalak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
 		new /datum/lore/location("a historical site in Kal'lo, Qerrbalak, Qerr'Valis", list(ATC_LUX, ATC_TRANS)),
 		new /datum/lore/location("an archeological dig in Qarr'kloa, Qerrbalak, Qerr'Valis", list(ATC_TRANS, ATC_SCI)),
-		new /datum/lore/location("a bulk Phoron distibutor in Mo'glar, Qerrbalak, Qerr'Valis", list(ATC_FREIGHT)),
+		new /datum/lore/location("a bulk phoron distibutor in Mo'glar, Qerrbalak, Qerr'Valis", list(ATC_FREIGHT)),
 		new /datum/lore/location("the Academy on Gli'morr, Qerrbalak, Qerr'Valis", list(ATC_SCI, ATC_TRANS)),
 		new /datum/lore/location("a SolGov embassy on Qerrbalak, Qerr'Valis", list(ATC_DIPLO)),
 		)

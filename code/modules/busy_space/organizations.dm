@@ -226,7 +226,7 @@
 	short_name = "NanoTrasen"
 	acronym = "NT"
 	desc = "NanoTrasen is one of the foremost research and development companies in SolGov space. \
-	Originally focused on consumer products, their swift move into the field of Phoron has lead to \
+	Originally focused on consumer products, their swift move into the field of phoron has lead to \
 	them being the foremost experts on the substance and its uses. In the modern day, NanoTrasen prides \
 	itself on being an early adopter to as many new technologies as possible, often offering the newest \
 	products to their employees. In an effort to combat complaints about being 'guinea pigs', Nanotrasen \
@@ -497,7 +497,7 @@
 	name = "Zeng-Hu Pharmaceuticals"
 	short_name = "Zeng-Hu"
 	acronym = "ZH"
-	desc = "Zeng-Hu is an old TSC, based in the Sol system. Until the discovery of Phoron, Zeng-Hu maintained a stranglehold \
+	desc = "Zeng-Hu is an old TSC, based in the Sol system. Until the discovery of phoron, Zeng-Hu maintained a stranglehold \
 	on the market for medications, and many household names are patentted by Zeng-Hu-- Bicaridyne, Dylovene, Tricordrizine, \
 	and Dexalin all came from a Zeng-Hu medical laboratory. Zeng-Hu's fortunes have been in decline as Nanotrasen's near monopoly \
 	on phoron research cuts into their R&D and Vey-Med's superior medical equipment effectively decimated their own equipment \
@@ -541,7 +541,7 @@
 	and even mid-class automobiles a fixture of many households. Less famously, Ward-Takahashi also supplies most \
 	of the AI cores on which vital control systems are mounted, and it is this branch of their industry that has \
 	led to their tertiary interest in the development and sale of high-grade AI systems. Ward-Takahashi's economies \
-	of scale frequently steal market share from Nanotrasen's high-price products, leading to a bitter rivalry in the \
+	of scale frequently steal market share from NanoTrasen's high-price products, leading to a bitter rivalry in the \
 	consumer electronics market."
 	history = ""
 	work = "electronics manufacturer"
@@ -1017,7 +1017,7 @@
 	out of New Reykjavik on Sif. It is a representative democratic government, and a fully recognised member of the \
 	Confederation.\
 	<br><br>\
-	Corporate entities such as Nanotrasen which operate on Sif, in Vir space, or on other bodies in the Vir system must \
+	Corporate entities such as NanoTrasen which operate on Sif, in Vir space, or on other bodies in the Vir system must \
 	all comply with legislation as determined by the VGA and SolGov. As a result, any serious criminal offences, \
 	industrial accidents, or concerning events should be forwarded to the VGA in the event that assistance or \
 	communication is required from the Vir Police, Vir Defence Force, Vir Interior Ministry, or other important groups."
