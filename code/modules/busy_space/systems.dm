@@ -40,7 +40,6 @@
 					mission = list(ATC_ALL_CIV)
 				locations += new /datum/lore/location("[initial] in [name]", mission)
 			i--
-		locations += new /datum/lore/location("[name]", list(ATC_ALL)) //disable after testing?
 
 //some of the locations with identical mission types could be compressed with pick expressions in a single location datum to improve weighting
 //this usually isn't super necessary and is often outright counterproductive so I haven't really done it
