@@ -23,7 +23,7 @@
 	mission_type = ATC_TRANS
 
 /datum/lore/mission/prebuilt/freight
-	mission_strings = list("freight", "hauling", "bulk transport", "materials delivery")
+	mission_strings = list("freight", "hauling", "bulk transport", "materials delivery", "energy relay")
 	mission_type = ATC_FREIGHT
 
 /datum/lore/mission/prebuilt/defense
@@ -39,12 +39,16 @@
 	mission_type = ATC_SCI
 
 /datum/lore/mission/prebuilt/diplomatic
-	mission_strings = list("diplomatic") //theres not a lot of words for 'diplomatic'
+	mission_strings = list("diplomatic", "dignitary transport", "cultural exchange")
 	mission_type = ATC_DIPLO
 
 /datum/lore/mission/prebuilt/luxury
 	mission_strings = list("luxury cruise", "pleasure cruise", "VIP transport", "sight-seeing", "vacation")
 	mission_type = ATC_LUX
+
+/datum/lore/mission/prebuilt/salvage
+	mission_strings = list("salvage", "scrap gathering", "damage assessment", "material recovery", "data recovery", "effects recovery", "in-situ repair")
+	mission_type = ATC_SALVAGE
 
 /datum/lore/mission/prebuilt/transport/default
 	prefix = "ITV"

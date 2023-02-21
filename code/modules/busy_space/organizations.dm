@@ -15,6 +15,9 @@
 //	var/special_locations = list()											// individual locations they might run missions to outside of their serviced systems
 	var/mission_noun = list("flight","mission","route")						// used for random mission generation
 	var/current_ship = ""												// the most recent ship from this org to have talked on the tracon
+	var/list/destination_names = list()
+	var/autogenerate_destination_names
+	var/autogenerate_destinations
 
 	var/list/ship_prefixes = list()	//Some might have more than one! Like NanoTrasen. Value is the mission they perform, e.g. ("ABC" = "mission desc")
 	var/list/ship_names = list(		//Names of spaceships.  This is a mostly generic list that all the other organizations inherit from if they don't have anything better.
@@ -166,22 +169,6 @@
 		"King of the Unathi",
 		"Ishtar's Grace"
 		)
-	var/list/destination_names = list()	//Names of static holdings that the organization's ships visit regularly.
-	var/autogenerate_destination_names = TRUE
-
-/datum/lore/organization/New()
-	..()
-	missions += new /datum/lore/mission/prebuilt/transport/default
-	if(autogenerate_destination_names) // Lets pad out the destination names.
-		var/i = rand(6, 10)
-		var/list/star_names = list(
-			"Sol", "Alpha Centauri", "Tau Ceti", "Zhu Que", "Oasis", "Vir", "Gavel", "Ganesha",
-			"Saint Columbia", "Altair", "Sidhe", "New Ohio", "Parvati", "Mahi-Mahi", "Nyx", "New Seoul", "Abel's Rest", "Relan", "Natuna", "Terminus",
-			"Kess-Gendar", "Raphael", "Phact", "Altair", "El", "Eutopia", "Qerr'valis", "Qerrna-Lakirr", "Rarkajar", "Thoth", "Jahan's Post", "Kauq'xum", "Silk", "New Singapore", "Stove", "Viola", "Love")
-		var/list/destination_types = list("dockyard", "station", "vessel", "waystation", "telecommunications satellite", "spaceport", "anomaly", "colony", "outpost")
-		while(i)
-			destination_names.Add("a [pick(destination_types)] in [pick(star_names)]")
-			i--
 
 /datum/lore/organization/proc/generate_mission()
 	current_ship = "ITV Testing"
