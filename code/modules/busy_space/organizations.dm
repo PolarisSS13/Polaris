@@ -38,6 +38,7 @@
 		"Explorer",
 		"Swift",
 		"Dragonfly",
+		"Hollyhock",
 		"Ascendant",
 		"Tenacious",
 		"Pioneer",
