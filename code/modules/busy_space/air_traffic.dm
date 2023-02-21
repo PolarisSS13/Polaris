@@ -113,7 +113,7 @@ var/global/datum/lore/atc_controller/atc = new/datum/lore/atc_controller
 			full_request = "[callname], this is [source.short_name] [mission_text], [pick(request_verb)] [request]."
 			full_response = "[combined_name], this is [using_map.station_short] TraCon, [response]." //Station TraCon always calls themselves TraCon
 			full_closure = "[using_map.station_short] TraCon, [yes ? "thank you" : "understood"], good day." //They always copy what TraCon called themselves in the end when they realize they said it wrong
-			if(source.motto && prob(source.annoying))
+			if(source.motto && prob(source.annoying) && yes)
 				full_closure += " " + source.motto
 
 	//Ship sends request to ATC

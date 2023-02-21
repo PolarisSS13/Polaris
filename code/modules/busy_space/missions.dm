@@ -15,15 +15,15 @@
 //Default mission types for ease of populating organizations
 //Most orgs that do medical missions are going to run comperable kinds of medical mission
 /datum/lore/mission/prebuilt/medical
-	mission_strings = list("medical", "medical resupply", "hospital", "pathogen containment")
+	mission_strings = list("medical", "medical resupply", "hospital", "vaccine distribution")
 	mission_type = ATC_MED
 
 /datum/lore/mission/prebuilt/transport
-	mission_strings = list("transport", "passenger transport", "general transport", "courier", "just-in-time delivery")
+	mission_strings = list("transport", "passenger transport", "general transport", "courier")
 	mission_type = ATC_TRANS
 
 /datum/lore/mission/prebuilt/freight
-	mission_strings = list("freight", "hauling", "bulk transport", "materials delivery", "energy relay")
+	mission_strings = list("freight", "hauling", "bulk transport", "materials delivery")
 	mission_type = ATC_FREIGHT
 
 /datum/lore/mission/prebuilt/defense
@@ -49,6 +49,14 @@
 /datum/lore/mission/prebuilt/salvage
 	mission_strings = list("salvage", "scrap gathering", "damage assessment", "material recovery", "data recovery", "effects recovery", "in-situ repair")
 	mission_type = ATC_SALVAGE
+
+/datum/lore/mission/prebuilt/medical_response
+	mission_strings = list("medical response", "emergency triage", "first response", "pathogen containment")
+	mission_type = ATC_MED
+
+/datum/lore/mission/prebuilt/defense_response
+	mission_strings = list("crisis response", "SOS investigation", "high-priority escort", "rescue")
+	mission_type = ATC_DEF
 
 /datum/lore/mission/prebuilt/transport/default
 	prefix = "ITV"

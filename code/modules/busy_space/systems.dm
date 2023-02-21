@@ -17,7 +17,7 @@
 			var/mission = list()
 			if(rand(length(planets))) // equal chance of an event in local space or any individual planet
 				initial = pick(planetary_destinations)
-				if(initial in list("an outpost", "a facility", "a commune")) //commune isn't in the default list but it's used in casini's reach and natuna
+				if(initial in list("an outpost", "a facility", "a commune", "a settlement")) //some of these aren't in the default list but are used down the line
 					mission = list(ATC_TYPICAL)
 				else if(initial in list("a ruin"))
 					mission = list(ATC_SALVAGE)
@@ -48,6 +48,8 @@
 //for reference: ATC_TYPICAL is medical, defense, freight, transport, and industrial missions-- the kind of traffic you'd see to a small settlement or independent colony of little note
 //ATC_ALL_CIV has ATC_TYPICAL plus luxury and scientific missions too, so it's the kind of traffic you'd see to a major cultural center
 //ATC_ALL has ATC_ALL_CIV plus diplomatic and salvage missions and really isn't appropriate for use in most places
+
+//ATC_SCI might need to get split into academic stuff and 'weird space wedgies'
 
 //SCG major systems
 /datum/lore/system/sol
@@ -445,7 +447,7 @@
 
 //human independents
 /datum/lore/system/natuna
-	name = "Natuna Barisal"
+	name = "Natuna Barisal" //we have unicode support but i think radio might still shit itself
 	desc = "Seceeded from SolGov over all the racism and casteism. Now it's home to pirates and also got invaded by the Hegemony"
 	planets = list("Natuna Barisal c") //its this or 'the planet' or 'natuna barisal, natuna barisal'-- the planet and the system share a name
 	locations = list(
@@ -525,11 +527,14 @@
 /datum/lore/system/rarkajar
 	name = "Rarkajar"
 	desc = "The home system of the Tajaran race."
-	planets = list("Merelar")
+	planets = list("Meralar")
 	locations = list(
 		new /datum/lore/location("a helium-3 extractor on Keoalar, Rarkajar", list(ATC_TYPICAL)),
 		new /datum/lore/location("a geological survey site on Aipira, Rarkajar", list(ATC_TYPICAL, ATC_SCI)),
-		new /datum/lore/location("the SolGov embassy on Merelar, Rarkajar", list(ATC_DIPLO, ATC_TRANS)),
+		new /datum/lore/location("the SolGov embassy on Meralar, Rarkajar", list(ATC_DIPLO, ATC_TRANS)),
+		new /datum/lore/location("Nalyar on Meralar, Rarkajar", list(ATC_ALL_CIV)),
+		new /datum/lore/location("Jormitar on Meralar, Rarkajar", list(ATC_ALL_CIV)),
+		new /datum/lore/location("Mi'dynh Al'Manq on Meralar, Rarkajar", list(ATC_ALL_CIV)),
 		)
 
 /datum/lore/system/rarkajar/New()
