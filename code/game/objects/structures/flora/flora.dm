@@ -455,7 +455,7 @@
 
 /obj/structure/flora/pottedplant/xmas
 	name = "small christmas tree"
-	desc = "This is a tiny well lit decorative christmas tree."
+	desc = "This is a tiny well lit decorative Christmas tree."
 	icon_state = "plant-xmas"
 
 /obj/structure/flora/mushroom
@@ -486,7 +486,7 @@
 	it to spread much farther than before, with the assistance of humans.\
 	<br><br>\
 	In Sif's early history, Sivian settlers found this plant while they were establishing mines. Their ability \
-	to emit low, but consistant amounts of light made them desirable to the settlers. They would often cultivate \
+	to emit low, but consistent amounts of light made them desirable to the settlers. They would often cultivate \
 	this plant inside man-made tunnels and mines to act as a backup source of light that would not need \
 	electricity. This technique has saved many lost miners, and this practice continues to this day."
 	value = CATALOGUER_REWARD_EASY

@@ -47,7 +47,7 @@ Location where the teleport begins, target that will teleport, distance to go, d
 Random error in tile placement x, error in tile placement y, and block offset.
 Block offset tells the proc how to place the box. Behind teleport location, relative to starting location, forward, etc.
 Negative values for offset are accepted, think of it in relation to North, -x is west, -y is south. Error defaults to positive.
-Turf and target are seperate in case you want to teleport some distance from a turf the target is not standing on or something.
+Turf and target are separate in case you want to teleport some distance from a turf the target is not standing on or something.
 */
 
 	var/dirx = 0//Generic location finding variable.
@@ -1558,8 +1558,8 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 	. = stack_trace_storage
 	stack_trace_storage = null
 
-// \ref behaviour got changed in 512 so this is necesary to replicate old behaviour.
-// If it ever becomes necesary to get a more performant REF(), this lies here in wait
+// \ref behaviour got changed in 512 so this is necessary to replicate old behaviour.
+// If it ever becomes necessary to get a more performant REF(), this lies here in wait
 // #define REF(thing) (thing && istype(thing, /datum) && (thing:datum_flags & DF_USE_TAG) && thing:tag ? "[thing:tag]" : "\ref[thing]")
 /proc/REF(input)
 	if(istype(input, /datum))

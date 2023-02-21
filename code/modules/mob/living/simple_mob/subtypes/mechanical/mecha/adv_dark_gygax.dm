@@ -177,7 +177,7 @@
 
 		sleep(1 SECOND)
 
-	// Shoot a tesla bolt, and flashes people who are looking at the mecha without sufficent eye protection.
+	// Shoot a tesla bolt, and flashes people who are looking at the mecha without sufficient eye protection.
 	visible_message(span("warning", "\The [energy_ball] explodes in a flash of light, sending a shock everywhere!"))
 	playsound(src, 'sound/effects/lightningbolt.ogg', 100, 1, extrarange = 30)
 	tesla_zap(src.loc, 5, ELECTRIC_ZAP_POWER, FALSE)
@@ -270,7 +270,7 @@
 
 // The Advanced Dark Gygax's AI.
 // The mob has three special attacks, based on the current intent.
-// This AI choose the appropiate intent for the situation, and tries to ensure it doesn't kill itself by firing missiles at its feet.
+// This AI choose the appropriate intent for the situation, and tries to ensure it doesn't kill itself by firing missiles at its feet.
 /datum/ai_holder/simple_mob/intentional/adv_dark_gygax
 	conserve_ammo = TRUE					// Might help avoid 'I shoot the wall forever' cheese.
 	var/closest_desired_distance = 1		// Otherwise run up to them to be able to potentially shock or punch them.

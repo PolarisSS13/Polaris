@@ -4,7 +4,7 @@
 //Picks from the list, with some safeties, and returns the "default" arg if it fails
 #define DEFAULTPICK(L, default) ((istype(L, /list) && L:len) ? pick(L) : default)
 
-// Ensures L is initailized after this point
+// Ensures L is initialized after this point
 #define LAZYINITLIST(L) if (!L) L = list()
 
 // Sets a L back to null iff it is empty
@@ -13,12 +13,12 @@
 // Removes I from list L, and sets I to null if it is now empty
 #define LAZYREMOVE(L, I) if(L) { L -= I; if(!length(L)) { L = null; } }
 
-// Adds I to L, initalizing L if necessary
+// Adds I to L, initializing L if necessary
 #define LAZYADD(L, I) if(!L) { L = list(); } L += I;
 
 #define LAZYOR(L, I) if(!L) { L = list(); } L |= I;
 
-// Adds I to L, initalizing L if necessary, if I is not already in L
+// Adds I to L, initializing L if necessary, if I is not already in L
 #define LAZYDISTINCTADD(L, I) if(!L) { L = list(); } L |= I;
 
 #define LAZYFIND(L, V) L ? L.Find(V) : 0

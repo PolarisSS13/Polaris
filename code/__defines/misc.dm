@@ -33,9 +33,9 @@
 // For secHUDs and medHUDs and variants. The number is the location of the image on the list hud_list of humans.
 #define      HEALTH_HUD 1 // A simple line rounding the mob's number health.
 #define      STATUS_HUD 2 // Alive, dead, diseased, etc.
-#define          ID_HUD 3 // The job asigned to your ID.
+#define          ID_HUD 3 // The job assigned to your ID.
 #define      WANTED_HUD 4 // Wanted, released, paroled, security status.
-#define    IMPLOYAL_HUD 5 // Loyality implant.
+#define    IMPLOYAL_HUD 5 // Loyalty implant.
 #define     IMPCHEM_HUD 6 // Chemical implant.
 #define    IMPTRACK_HUD 7 // Tracking implant.
 #define SPECIALROLE_HUD 8 // AntagHUD image.
@@ -161,7 +161,7 @@
 #define CAT_HIDDEN 2
 #define CAT_COIN   4
 
-//Antag Faction Visbility
+//Antag Faction Visibility
 #define ANTAG_HIDDEN	"Hidden"
 #define ANTAG_SHARED	"Shared"
 #define ANTAG_KNOWN		"Known"
@@ -189,7 +189,7 @@
 #define TSC_WT		"Ward-Takahashi"
 #define TSC_BC		"Bishop Cybernetics"
 #define TSC_MORPH	"Morpheus"
-#define TSC_XION	"Xion" // Not really needed but consistancy I guess.
+#define TSC_XION	"Xion" // Not really needed but consistency I guess.
 #define TSC_GIL 	"Gilthari"
 
 #define MIDNIGHT_ROLLOVER		864000	//number of deciseconds in a day
@@ -222,7 +222,7 @@
 #define USE_FAIL_NOT_IN_USER 6
 #define USE_FAIL_IS_SILICON 7
 
-// This creates a consistant definition for creating global lists, automatically inserting objects into it when they are created, and removing them when deleted.
+// This creates a consistent definition for creating global lists, automatically inserting objects into it when they are created, and removing them when deleted.
 // It is very good for removing the 'in world' junk that exists in the codebase painlessly.
 // First argument is the list name/path desired, e.g. 'all_candles' would be 'var/list/all_candles = list()'.
 // Second argument is the path the list is expected to contain. Note that children will also get added to the global list.

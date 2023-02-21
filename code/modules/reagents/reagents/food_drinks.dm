@@ -2216,13 +2216,13 @@
 /datum/reagent/drink/sweetsundaeramen
 	name = "Dessert Ramen"
 	id = "dessertramen"
-	description = "How many things can you add to a cup of ramen before it begins to question its existance?"
+	description = "How many things can you add to a cup of ramen before it begins to question its exitance?"
 	taste_description = "unbearable sweetness"
 	color = "#4444FF"
 	nutrition = 5
 
 	glass_name = "Sweet Sundae Ramen"
-	glass_desc = "How many things can you add to a cup of ramen before it begins to question its existance?"
+	glass_desc = "How many things can you add to a cup of ramen before it begins to question its existence?"
 
 /datum/reagent/drink/ice
 	name = "Ice"

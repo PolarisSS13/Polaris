@@ -50,7 +50,7 @@
 
 /datum/technomancer/equipment/recycling
 	name = "Recycling Core"
-	desc = "This core is optimized for energy efficency, being able to sometimes recover energy that would have been lost with other \
+	desc = "This core is optimized for energy efficiency, being able to sometimes recover energy that would have been lost with other \
 	cores.  Each time energy is spent, there is a 30% chance of recovering half of what was spent.<br>\
 	<font color='green'>Capacity: 12k</font><br>\
 	<font color='red'>Recharge: 40/s</font><br>\
@@ -88,7 +88,7 @@
 /datum/technomancer/equipment/overcharged
 	name = "Overcharged Core"
 	desc = "A core that was created in order to get the most power out of functions.  It does this by shoving the most power into \
-	those functions, so it is the opposite of energy efficent, however the enhancement of functions is second to none for other \
+	those functions, so it is the opposite of energy efficient, however the enhancement of functions is second to none for other \
 	cores.<br>\
 	<font color='red'>Capacity: 15k (effectively 7.5k)</font><br>\
 	<font color='red'>Recharge: 40/s</font><br>\

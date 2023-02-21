@@ -56,7 +56,7 @@
 	for(var/mob/living/L in faction_friends)
 		if(L == holder) // Lets not call ourselves.
 			continue
-		if(holder.z != L.z) // On seperate z-level.
+		if(holder.z != L.z) // On separate z-level.
 			continue
 		if(get_dist(L, holder) > call_distance) // Too far to 'hear' the call for help.
 			continue
@@ -103,7 +103,7 @@
 		if(get_dist(holder, friend) <= vision_range) // Within our sight.
 			ai_log("help_requested() : Help requested by [friend], and within target sharing range.", AI_LOG_INFO)
 			last_conflict_time = world.time // So we attack immediately and not threaten.
-			give_target(their_target, urgent = TRUE) // This will set us to the appropiate stance.
+			give_target(their_target, urgent = TRUE) // This will set us to the appropriate stance.
 			ai_log("help_requested() : Given target [target] by [friend]. Exiting", AI_LOG_DEBUG)
 			return
 

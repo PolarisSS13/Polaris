@@ -157,14 +157,14 @@
 		dat += "<A href='?src=\ref[src];newline=1'>Add Line</A><BR><BR>"
 		if(help)
 			dat += {"<B><A href='?src=\ref[src];help=1'>Hide Help</A></B><BR>
-					Lines are a series of chords, separated by commas (,), each with notes seperated by hyphens (-).<br>
+					Lines are a series of chords, separated by commas (,), each with notes separated by hyphens (-).<br>
 					Every note in a chord will play together, with chord timed by the tempo.<br>
 					<br>
 					Notes are played by the names of the note, and optionally, the accidental, and/or the octave number.<br>
 					By default, every note is natural and in octave 3. Defining otherwise is remembered for each note.<br>
 					Example: <i>C,D,E,F,G,A,B</i> will play a C major scale.<br>
 					After a note has an accidental placed, it will be remembered: <i>C,C4,C,C3</i> is <i>C3,C4,C4,C3</i><br>
-					Chords can be played simply by seperating each note with a hyphon: <i>A-C#,Cn-E,E-G#,Gn-B</i><br>
+					Chords can be played simply by separating each note with a hyphen: <i>A-C#,Cn-E,E-G#,Gn-B</i><br>
 					A pause may be denoted by an empty chord: <i>C,E,,C,G</i><br>
 					To make a chord be a different time, end it with /x, where the chord length will be length<br>
 					defined by tempo / x: <i>C,G/2,E/4</i><br>

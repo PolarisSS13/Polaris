@@ -10,7 +10,7 @@
 
 /obj/machinery/shield_gen/external/advanced
 	name = "advanced hull shield generator"
-	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated.  This version comes with a more efficent shield matrix."
+	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated.  This version comes with a more efficient shield matrix."
 	energy_conversion_rate = 0.0012
 
 //Search for space turfs within range that are adjacent to a simulated turf.

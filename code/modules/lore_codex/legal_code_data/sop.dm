@@ -27,7 +27,7 @@
 	All crew members and visitors, with exceptions listed below, are to wear the following at minimum: A shirt that covers the chest, pants, shorts or skirts that \
 	go no shorter than two inches above the knee, and some form of foot covering.  Those in departments considered to be emergency services (Security, \
 	Medical, Engineering) should wear a marker denoting their department, examples being armbands, uniforms, badges, or other means.  Those in a department \
-	are expected to wear clothes appropiate to protect against common risks for the department.  Off duty personnel, visitors, and those engaging in certain recreational \
+	are expected to wear clothes appropriate to protect against common risks for the department.  Off duty personnel, visitors, and those engaging in certain recreational \
 	areas such as the Pool (if one is available on your facility) have less strict dresscode, however clothing of some form must still be worn in public.\
 	<br><br>\
 	Exceptions: Skrell, Teshari, and Unathi are expected to cover at minimum their lower bodies.  Tajaran males may go topless, as a means to keep cool.  \
@@ -41,11 +41,11 @@
 	less risk to other crew members, if possible.\
 	<br>\
 	<h3>EVA Procedure</h3>\
-	Extravehicular activity should only be done by EVA trained and certified crew members, if there is no emergency.  If an emergency is occuring, NanoTrasen \
+	Extravehicular activity should only be done by EVA trained and certified crew members, if there is no emergency.  If an emergency is occurring, NanoTrasen \
 	provides high visibility, easy to seal emergency softsuits inside blue emergency lockers located at key locations inside your facility.  Regardless, \
 	for your own safety, you should only enter or exit the facility from designated external airlocks, which contain an air cycling system.  It is both \
 	wasteful and potentially dangerous to 'force' an external airlock to open before cycling has completed.  Before cycling out into the void, the person going \
-	on EVA should double check that their internal oxygen supply (or cooling system, if they are a synthetic) is functioning properly and that they have an adaquate \
+	on EVA should double check that their internal oxygen supply (or cooling system, if they are a synthetic) is functioning properly and that they have an adequate \
 	amount of oxygen inside the tank.  Magnetic boots are also highly suggested if the person will be scaling the sides of your facility, to prevent drifting away \
 	from the facility.\
 	<br><br>\
@@ -80,7 +80,7 @@
 	<h3>Demotion</h3>\
 	A member of the Command Crew may call for the demotion of any member of their department for disregarding safety protocol, disobeying orders with serious consequences, \
 	or other gross incompetence.  Certain infractions necessitate that a guilty crew member receive a demotion.  Demotion is to be performed by the Head of Personnel, or the \
-	Station Director, as soon as possible.  The demoted crewmember is to be present during the demotion, unless it is caused by a criminal sentence.  If said crewmemeber \
+	Station Director, as soon as possible.  The demoted crewmember is to be present during the demotion, unless it is caused by a criminal sentence.  If said crewmember \
 	refuses to comply with a demotion order, Security is to escort them to the Head of Personnel's office.\
 	<br>\
 	Any demoted crewmember must return all equipment and non-personal items to their previous department, including departmental jumpsuits and radios.  If a demoted \
@@ -102,7 +102,7 @@
 	<h3>Command Crew Demotions</h3>\
 	If a member of the Command crew is suspected to be incompetent, or in breach of SOP, the Station Director has discretion to demote the guilty Command crewmember.  \
 	If there is no Station Director, or the Station Director themselves is guilty, they may be demoted after a vote of no confidence by the remaining Command crew \
-	and relevant station crew.  For the Station Director, the vote is only to be among the remaining Command crew.  Misuse of this privilage may warrant an \
+	and relevant station crew.  For the Station Director, the vote is only to be among the remaining Command crew.  Misuse of this privilege may warrant an \
 	Internal Affairs investigation for wrongful dismissal.\
 	<br>\
 	<h3>Communications with Central Command</h3>\
@@ -125,7 +125,7 @@
 	<h3>Engine Safety</h3>\
 	Your facility's engine is what provides the majority of electricity to the rest of your facility.  As such, the engine is to have priority over \
 	all other engineering issues, including breaches, if an issue with the engine exists.  This book assumes your facility is using one or more thermoelectric engines \
-	(generally referred to as TEGs), driven by a Supermatter crystal.  If this is not the case, please consult the documentation for your specific engine for safety precauctions.\
+	(generally referred to as TEGs), driven by a Supermatter crystal.  If this is not the case, please consult the documentation for your specific engine for safety precautions.\
 	<br>\
 	The Supermatter crystal is what presents the most danger to a crewmember.  The Supermatter is to remain isolated inside the engine room, inside \
 	its own chamber, for several reasons.  First, Supermatter reacts poorly to oxygen, harming the crystal and causing heat.  Second, <b>the crystal \
@@ -160,7 +160,7 @@
 	was damaged.  As such, cosmetic details should be done last.  Breach repairs always have priority over construction projects.\
 	<br>\
 	<h3>Delamination</h3>\
-	The Supermatter is volatile, and can undergo the process of 'delamination' if sufficently damaged.  To help warn against this, all Supermatter crystals \
+	The Supermatter is volatile, and can undergo the process of 'delamination' if sufficiently damaged.  To help warn against this, all Supermatter crystals \
 	come with a small monitoring microcontroller, which will warn the Engineering department if the Supermatter is being damaged.  Damage can result from \
 	excessive heat, vacuum exposure, or physical impacts.  If the Supermatter achieves delamination, it will cause a massive explosion, deliver a \
 	massive dose of radiation to everyone in or near your facility, and may cause hallucinations.  Delamination prevention should be prioritized above \
@@ -203,7 +203,7 @@
 	<h3>Cloning Procedure</h3>\
 	Persons whom have committed suicide are not to be cloned.  Individuals are also to not be cloned if there is a Do Not Clone (generally referred \
 	to as DNC) order in their medical records, or if the individual has had a DNC order declared against them by the Station Director, Chief \
-	Medical Officer, or Head of Security.  If any of this occurs, procede to Portmortem Storage.\
+	Medical Officer, or Head of Security.  If any of this occurs, proceed to Portmortem Storage.\
 	<br>\
 	Some individuals may have special instructions in their Postmortem Instructions, generally found in their medical records.  \
 	Be sure to read them before committing to cloning someone.  In particular, some instructions may express a desire to be placed \
@@ -214,12 +214,12 @@
 	<br>\
 	Ensure that all cloning equipment, including the cryogenic tubes, are functional and ready before cloning begins.  Once \
 	this is done, scan the deceased.  Up to three scans are to be made per attempt.  If the deceased suffers Mental Interface Failure, \
-	procede to Postmortem Storage.  Further attempts at resuscitation may be made at later times, at the medical teams' discretion. \
+	proceed to Postmortem Storage.  Further attempts at resuscitation may be made at later times, at the medical teams' discretion. \
 	<br>\
-	If the deceased is sufficently scanned, remove their possessions and clothing off of the deceased body, for use by the future new clone.  \
+	If the deceased is sufficiently scanned, remove their possessions and clothing off of the deceased body, for use by the future new clone.  \
 	Move the cadaver into the morgue, as per Postmortem Storage.  Begin the cloning process.  Possessions are to be gathered in a manner that \
 	facilitates transporting them along with the clone.  Upon the cloning process being complete and the new clone being created, the \
-	clone is to be placed inside a croygenic tube as quickly as possible.  Cloning is not a painless experience, and it is best if \
+	clone is to be placed inside a cryogenic tube as quickly as possible.  Cloning is not a painless experience, and it is best if \
 	the patient reawakens inside a functional body.  Once their body is fully functional, dress and process the newly cloned patient, \
 	informing them of any procedures performed on them, including the cloning itself.\
 	<br>\
@@ -250,18 +250,18 @@
 	a specific specimen is completely harmless and safe.\
 	<br>\
 	<h3>Toxins Safety</h3>\
-	Toxins potentially has the greatest capability to harm the experimentor as well as their co-workers, so always be vigilent.  \
+	Toxins potentially has the greatest capability to harm the experimenter as well as their co-workers, so always be vigilant.  \
 	The incinerator is designed to withstand phoron fires, however extremely hot fires can cause damage to the incinerator.  \
-	The experimentor and anyone inside the Toxins section should wear protective clothing while the incinerator is active, and \
+	The experimenter and anyone inside the Toxins section should wear protective clothing while the incinerator is active, and \
 	<b>the incinerator should NEVER be left unattended while in use.</b>  If damage to the walls of the incinerator are observed, \
 	the chamber should be vented into space immediately, to abort the burn, then vacating the lab until the flames are extinguished.\
 	<br>\
-	Another danger of Toxins is that the experimentor will be handling explosives at some point, in order to test on the \
+	Another danger of Toxins is that the experimenter will be handling explosives at some point, in order to test on the \
 	Toxins Testing Range.  <b>Explosives are to be tested at the Testing Range, and absolutely no where else.</b>  \
-	When placing an explosive on the mass driver to fire to the Testing Range, the experimentor should triple check that their \
+	When placing an explosive on the mass driver to fire to the Testing Range, the experimenter should triple check that their \
 	explosive's signaler frequency and code is unique (if using a signaler).  <b>Verify that the signaler's frequency and code do not match multiple \
 	explosives.</b>  Check for any signs of life near the Testing Range before detonation, and warn the facility that an Toxins Test will be \
-	occuring shortly, as otherwise it may scare the crew and may endanger anyone near the Testing Range.\
+	occurring shortly, as otherwise it may scare the crew and may endanger anyone near the Testing Range.\
 	<br>\
 	<h3>Robotics</h3>\
 	Robotics exists to service the facility's synthetics, crewmembers with prosthetics, create and maintain exosuits, and create and \
@@ -269,7 +269,7 @@
 	<br>\
 	Cyborgification, the process of an organic person's brain being transplanted into a Man-Machine-Interface (MMI), should only be done to \
 	a person upon their death, and if their medical records state a desire to be placed inside a synthetic body instead of a desire to be cloned.  \
-	Persons who have commited suicide, or persons who have Do-Not-Clone (DNC) orders which don't specifically list cyborgification as an alternative are \
+	Persons who have committed suicide, or persons who have Do-Not-Clone (DNC) orders which don't specifically list cyborgification as an alternative are \
 	not to be placed inside an MMI.  Still-living persons who wish to be placed inside an MMI should be ignored.\
 	<br>\
 	Lawbound Synthetics are to not have their lawset tampered with.  Any errors with the lawset, intentional or resulting from an ionic storm, should \
@@ -314,7 +314,7 @@
 	<br>\
 	<h3>Locations</h3>\
 	Secure areas are recommended to be left unbolted, which includes the AI Upload, Secure Technical Storage, and the Teleporter(s).  The Vault should remain sealed.  \
-	Heads of Staff may enter the AI Upload alone, although they must have sufficent justification. \
+	Heads of Staff may enter the AI Upload alone, although they must have sufficient justification. \
 	<br>\
 	<h3>Crew</h3>\
 	Crew members and visitors may freely walk in the hallways and other public areas.  Suit sensors are recommended, but not mandatory.  \

@@ -146,7 +146,7 @@
 
 /obj/item/storage/box/syndie_kit/chameleon
 	name = "chameleon kit"
-	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold seperately."
+	desc = "Comes with all the clothes you need to impersonate most people.  Acting lessons sold separately."
 	starts_with = list(
 		/obj/item/storage/backpack/chameleon/full,
 		/obj/item/gun/energy/chameleon

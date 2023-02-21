@@ -156,7 +156,7 @@
 
 	if(href_list["toggle_visibility"])
 		switch(network_visibility)
-			if(1) //Visible, becoming invisbile
+			if(1) //Visible, becoming invisible
 				network_visibility = 0
 				if(camera)
 					camera.remove_network(NETWORK_COMMUNICATORS)

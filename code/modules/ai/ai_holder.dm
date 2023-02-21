@@ -1,5 +1,5 @@
 // This is a datum-based artificial intelligence for simple mobs (and possibly others) to use.
-// The neat thing with having this here instead of on the mob is that it is independant of Life(), and that different mobs
+// The neat thing with having this here instead of on the mob is that it is independent of Life(), and that different mobs
 // can use a more or less complex AI by giving it a different datum.
 
 /mob/living

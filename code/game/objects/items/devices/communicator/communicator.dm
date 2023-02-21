@@ -156,7 +156,7 @@ var/global/list/obj/item/communicator/all_communicators = list()
 
 // Proc: add_to_EPv2()
 // Parameters: 1 (hex - a single hexadecimal character)
-// Description: Called when someone is manually dialing with nanoUI.  Adds colons when appropiate.
+// Description: Called when someone is manually dialing with nanoUI.  Adds colons when appropriate.
 /obj/item/communicator/proc/add_to_EPv2(var/hex)
 	var/length = length(target_address)
 	if(length >= 24)

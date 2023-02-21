@@ -135,7 +135,7 @@
 	my_slime.update_mood()
 	my_slime.visible_message(span("danger", "\The [my_slime] enrages!"))
 
-// Called when using a pacification agent (or it's Kendrick being initalized).
+// Called when using a pacification agent (or it's Kendrick being initialized).
 /datum/ai_holder/simple_mob/xenobio_slime/proc/pacify()
 	remove_target() // So it stops trying to kill them.
 	rabid = FALSE

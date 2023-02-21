@@ -34,4 +34,4 @@
 		L.add_modifier(/datum/modifier/deep_wounds, 30 SECONDS)
 
 /decl/mob_organ_names/wraith
-	hit_zones = list("body", "eye", "crystaline spike", "left claw", "right claw")
+	hit_zones = list("body", "eye", "crystalline spike", "left claw", "right claw")

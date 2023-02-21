@@ -490,7 +490,7 @@
 
 /mob/proc/start_pulling(var/atom/movable/AM)
 
-	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themself OR the object being pulled is inside something: abort!
+	if ( !AM || !usr || src==AM || !isturf(src.loc) )	//if there's no person pulling OR the person is pulling themselves OR the object being pulled is inside something: abort!
 		return
 
 	if (AM.anchored)
@@ -1105,7 +1105,7 @@
 
 // This handles setting the client's color variable, which makes everything look a specific color.
 // This proc is here so it can be called without needing to check if the client exists, or if the client relogs.
-// This is for inheritence since /mob/living will serve most cases. If you need ghosts to use this you'll have to implement that yourself.
+// This is for inheritance since /mob/living will serve most cases. If you need ghosts to use this you'll have to implement that yourself.
 /mob/proc/update_client_color()
 	if(client && client.color)
 		animate(client, color = null, time = 10)

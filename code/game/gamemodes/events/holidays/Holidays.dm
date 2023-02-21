@@ -53,7 +53,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(2)	//Feb
 			switch(DD)
 				if(2)
-					Holiday["Groundhog Day"] = "An unoffical holiday based on medieval folklore that originated on Earth, \
+					Holiday["Groundhog Day"] = "An unofficial holiday based on medieval folklore that originated on Earth, \
 					that involves the reverence of a prophetic animal - traditionally a badger, fox or groundhog - that was \
 					said to be able to predict, or even control the changing of the seasons. In Vir, the humble Siffet  \
 					sometimes assumes this role."
@@ -65,7 +65,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					carry or hang elaborate paper lanterns that are thought to bring good luck. Today, electric lights are often used \
 					in environments where open flames would be hazardous or non-functional."
 				if(17)
-					Holiday["Random Acts of Kindness Day"] = "An unoffical holiday that challenges everyone to perform \
+					Holiday["Random Acts of Kindness Day"] = "An unofficial holiday that challenges everyone to perform \
 					acts of kindness to their friends, co-workers, and strangers, with no strings attached."
 				if(23)
 					Holiday["Vir Friendship Day"] = "A day observing the anniversary of the end of the Karan Wars, formation of VirGov, \
@@ -78,7 +78,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Holiday["Qixm-tes"] = "Qixm-tes, or 'Day of mourning', is a skrell holiday where skrell gather at places \
 					of worship and sing a song of mourning for all those who have died in service to their kingdoms."
 				if(14)
-					Holiday["Pi Day"] = "An unoffical holiday celebrating the mathematical constant Pi.  It is celebrated on \
+					Holiday["Pi Day"] = "An unofficial holiday celebrating the mathematical constant Pi.  It is celebrated on \
 					March 14th, as the digits form 3 14, the first three significant digits of Pi.  Observance of Pi Day generally \
 					involve eating (or throwing) pie, due to a pun.  Pies also tend to be round, and thus relatable to Pi."
 				if(17)
@@ -99,7 +99,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(4)	//Apr
 			switch(DD)
 				if(1)
-					Holiday["April Fool's Day"] = "A human holiday that endevours one to pull pranks and spread hoaxes on their friends."
+					Holiday["April Fool's Day"] = "A human holiday that endeavours one to pull pranks and spread hoaxes on their friends."
 				if(5)
 					Holiday["First Day of Passover"] = "The first of eight days of a human holiday celebrating the exodus of ancient Jewish people \
 					from slavery, and of the spring harvest. On Pluto and Kishar, the holiday is also sometimes associated with their \
@@ -115,7 +115,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					range of varying Teshari cultural festivals onto one day. Official celebrations mostly involve time set aside for \
 					the veneration of spirits, but many Teshari resent the attempt to homogenize their pack cultures."
 				if(22)
-					Holiday["Environment Day"] = "A celebration of enviromentalism. Originally named Earth Day, in honour of its \
+					Holiday["Environment Day"] = "A celebration of environmentalism. Originally named Earth Day, in honour of its \
 					originating planet, but since expanded to encompass all worlds and their natural environments, whatever they \
 					may be."
 
@@ -123,7 +123,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 			switch(DD)
 				if(1)
 					Holiday["Interstellar Workers' Day"] = "Also known as May Day, this holiday celebrates the work of laborers and \
-					the working class. It is not designated as a public holiday in most colonies due to a perceieved assocation with \
+					the working class. It is not designated as a public holiday in most colonies due to a perceived association with \
 					'union agitation'."
 				if(14)
 					Holiday["Eid al-Fitr"] = "A feast day marking the end of the month-long Ramadan fasting period observed by many Unitarians. \
@@ -164,7 +164,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Annexation of Ceres and Selene Federation territories on Luna, Mars and Venus by the United Nations after \
 					7 years of war. A public holiday in most workplaces since 2118, but not this one."
 				if(30)
-					Holiday["Friendship Day"] = "An unoffical holiday that recognizes the value of friends and companionship.  Indeed, not having someone watch \
+					Holiday["Friendship Day"] = "An unofficial holiday that recognizes the value of friends and companionship.  Indeed, not having someone watch \
 					your back while in space can be dangerous, and the cold, isolating nature of space makes friends all the more important."
 
 		if(8)	//Aug
@@ -186,16 +186,16 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					communities hold parties in order to remember loved ones who passed, unlike Qixm-tes, this applies to everyone \
 					and is a joyful celebration."
 				if(19)
-					Holiday["Talk-Like-a-Pirate Day"] = "Ahoy, matey! It be the unoffical holiday celebratin' the salty \
+					Holiday["Talk-Like-a-Pirate Day"] = "Ahoy, matey! It be the unofficial holiday celebratin' the salty \
 					sea humor of speakin' like the pirates of old."
 				if(20)
 					Holiday["Rosh Hashanah"] = "An old human holiday that marks the traditional Hebrew new year, and the first of \
 					the High Holy Days in modern Unitarianism, beginning with ten-day period of penitence and prayer."
 				if(28)
-					Holiday["Stupid-Questions Day"] = "Known as Ask A Stupid Question Day, it is an unoffical holiday \
+					Holiday["Stupid-Questions Day"] = "Known as Ask A Stupid Question Day, it is an unofficial holiday \
 					created by teachers in Sol, very long ago, to encourage students to ask more questions in the classroom."
 				if(30)
-					Holiday["Yom Kippur"] = "A day of fasting, absintence, and intensive prayer. One of the most holy days \
+					Holiday["Yom Kippur"] = "A day of fasting, abstinence, and intensive prayer. One of the most holy days \
 					in the Unitarian Church, who standardized the date in the 22nd century."
 
 		if(10)	//Oct
@@ -249,7 +249,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					giving, decorating, family reunions, and a fat red human breaking into people's homes to steal milk and cookies."
 				if(25)
 					Holiday["Christmas"] = "Christmas is a very old holiday that originated in Earth, Sol.  It was a \
-					religious holiday for the Christian religion, which would later form Unitarianism. Nowdays, the holiday is celebrated \
+					religious holiday for the Christian religion, which would later form Unitarianism. Nowadays, the holiday is celebrated \
 					generally by giving gifts, symbolic decoration, and reuniting with one's family.  It also features a mythical fat \
 					red human, known as Santa, who broke into people's homes to loot cookies and milk."
 				if(31)

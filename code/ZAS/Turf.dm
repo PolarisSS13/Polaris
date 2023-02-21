@@ -48,7 +48,7 @@
 /*
 	Simple heuristic for determining if removing the turf from it's zone will not partition the zone (A very bad thing).
 	Instead of analyzing the entire zone, we only check the nearest 3x3 turfs surrounding the src turf.
-	This implementation may produce false negatives but it (hopefully) will not produce any false postiives.
+	This implementation may produce false negatives but it (hopefully) will not produce any false positives.
 */
 
 /turf/simulated/proc/can_safely_remove_from_zone()

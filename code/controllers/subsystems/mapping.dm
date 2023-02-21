@@ -52,7 +52,7 @@ SUBSYSTEM_DEF(mapping)
 /datum/controller/subsystem/mapping/proc/load_map_templates()
 	for(var/T in subtypesof(/datum/map_template))
 		var/datum/map_template/template = T
-		if(!(initial(template.mappath))) // If it's missing the actual path its probably a base type or being used for inheritence.
+		if(!(initial(template.mappath))) // If it's missing the actual path its probably a base type or being used for inheritance.
 			continue
 		template = new T()
 		map_templates[template.name] = template
@@ -104,7 +104,7 @@ SUBSYSTEM_DEF(mapping)
 	for(var/zl in z_levels)
 		var/turf/T = locate(1, 1, zl)
 		if(!T)
-			stack_trace("Submap area seeding was given a non-existant z-level ([zl]).")
+			stack_trace("Submap area seeding was given a non-existent z-level ([zl]).")
 			return
 	
 	var/time_started_overall = REALTIMEOFDAY
@@ -130,7 +130,7 @@ SUBSYSTEM_DEF(mapping)
 	CHECK_TICK
 
 	var/list/loaded_submap_names = list()
-	var/list/template_groups_used = list() // Used to avoid spawning three seperate versions of the same PoI.
+	var/list/template_groups_used = list() // Used to avoid spawning three separate versions of the same PoI.
 
 	log_mapload("Going to seed submaps of subtype '[desired_map_template_type]' with a budget of [budget].")
 

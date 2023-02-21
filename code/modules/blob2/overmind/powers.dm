@@ -63,7 +63,7 @@
 /mob/observer/blob/verb/auto_resource()
 	set category = "Blob"
 	set name = "Auto Resource Blob (40)"
-	set desc = "Automatically places a resource tower near a node or your core, at a sufficent distance."
+	set desc = "Automatically places a resource tower near a node or your core, at a sufficient distance."
 
 	if(!blob_type.can_build_resources)
 		return FALSE
@@ -107,7 +107,7 @@
 /mob/observer/blob/verb/auto_factory()
 	set category = "Blob"
 	set name = "Auto Factory Blob (60)"
-	set desc = "Automatically places a resource tower near a node or your core, at a sufficent distance."
+	set desc = "Automatically places a resource tower near a node or your core, at a sufficient distance."
 
 	if(!blob_type.can_build_factories)
 		return FALSE
@@ -152,7 +152,7 @@
 /mob/observer/blob/verb/auto_node()
 	set category = "Blob"
 	set name = "Auto Node Blob (100)"
-	set desc = "Automatically places a node blob at a sufficent distance."
+	set desc = "Automatically places a node blob at a sufficient distance."
 
 	if(!blob_type.can_build_nodes)
 		return FALSE

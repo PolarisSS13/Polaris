@@ -2,7 +2,7 @@
 
 // Items that ask to be called every cycle.
 var/global/datum/datacore/data_core = null
-var/global/list/machines                 = list()	// ALL Machines, wether processing or not.
+var/global/list/machines                 = list()	// ALL Machines, whether processing or not.
 var/global/list/processing_machines      = list()	// TODO - Move into SSmachines
 var/global/list/processing_power_items   = list()	// TODO - Move into SSmachines
 var/global/list/active_diseases          = list()
@@ -38,7 +38,7 @@ var/global/game_year			= (text2num(time2text(world.realtime, "YYYY")) + 552)
 var/global/round_progressing = 1
 
 var/global/master_mode       = "extended" // "extended"
-var/global/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forceably choose this mode.
+var/global/secret_force_mode = "secret"   // if this is anything but "secret", the secret rotation will forcibly choose this mode.
 
 var/global/host = null //only here until check @ code\modules\ghosttrap\trap.dm:112 is fixed
 
@@ -49,7 +49,7 @@ var/global/list/lastsignalers = list() // Keeps last 100 signals here in format:
 var/global/list/lawchanges    = list() // Stores who uploaded laws to which silicon-based lifeform, and what the law was.
 var/global/list/reg_dna       = list()
 
-var/global/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and repawning as a mouse. In minutes.
+var/global/mouse_respawn_time = 5 // Amount of time that must pass between a player dying as a mouse and respawning as a mouse. In minutes.
 
 var/global/list/monkeystart     = list()
 var/global/list/wizardstart     = list()
