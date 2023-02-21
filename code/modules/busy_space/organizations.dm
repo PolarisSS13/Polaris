@@ -9,28 +9,14 @@
 	var/headquarters = ""													// Location of the organization's HQ.  Currently unused.
 	var/motto = ""															// A motto/jingle/whatever, if they have one.
 	var/legit = 90															// The odds of them being approved a flight route. mostly a function of their reputation though unfamiliarity with local traffic rules is also a factor
-	var/annoying = 100														// The odds they'll say their motto at the end of a successfully negotiatiated route.
+	var/annoying = 10														// The odds they'll say their motto at the end of a successfully negotiatiated route.
 	var/serviced = list(/datum/lore/system/sol = 1)							// systems they work in, weighted
 	var/missions = list()		// mission types they run
-//	var/special_locations = list()											// individual locations they might run missions to outside of their serviced systems
+	var/special_locations = list()											// individual locations they might run missions to outside of their serviced systems
 	var/mission_noun = list("flight","mission","route")						// used for random mission generation
 	var/current_ship = ""												// the most recent ship from this org to have talked on the tracon
-//	var/list/destination_names = list()
-	var/autogenerate_destination_names
-	var/autogenerate_destinations
-/*
-	var/missions = list(
-		new /datum/lore/mission/prebuilt/medical("IMV"),
-		new /datum/lore/mission/prebuilt/transport("ITV"),
-		new /datum/lore/mission/prebuilt/freight("IFV"),
-		new /datum/lore/mission/prebuilt/industrial("IIV"),
-		new /datum/lore/mission/prebuilt/defense("IDV"),
-		new /datum/lore/mission/prebuilt/luxury("ITV"),
-		new /datum/lore/mission/prebuilt/diplomatic("IDV"),
-		new /datum/lore/mission/prebuilt/scientific("ISV"),
-		new /datum/lore/mission/prebuilt/salvage("IIV"),
-		)
-*/
+//todo, implement per-org special locations
+
 	var/list/ship_names = list(		//Names of spaceships.  This is a mostly generic list that all the other organizations inherit from if they don't have anything better.
 		"Kestrel",
 		"Beacon",
