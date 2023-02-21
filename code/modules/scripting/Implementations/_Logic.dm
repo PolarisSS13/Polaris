@@ -193,7 +193,7 @@ Just found out there was already a string explode function, did some benchmarkin
 
 		return newstring
 
-// I don't know if it's neccesary to make my own proc, but I think I have to to be able to check for istext.
+// I don't know if it's necessary to make my own proc, but I think I have to to be able to check for istext.
 /proc/n_str2num(var/string)
 	if(istext(string))
 		return text2num(string)

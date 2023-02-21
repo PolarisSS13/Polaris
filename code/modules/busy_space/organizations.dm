@@ -336,9 +336,9 @@
 	name = "Vey-Medical"
 	short_name = "Vey-Med"
 	acronym = "VM"
-	desc = "Vey-Med is one of the newer TSCs on the block and is notable for being largely owned and opperated by Skrell. \
+	desc = "Vey-Med is one of the newer TSCs on the block and is notable for being largely owned and operated by Skrell. \
 	Despite the suspicion and prejudice leveled at them for their alien origin, Vey-Med has obtained market dominance in \
-	the sale of medical equipment-- from surgical tools to large medical devices to the Oddyseus trauma response mecha \
+	the sale of medical equipment-- from surgical tools to large medical devices to the Odysseus trauma response mecha \
 	and everything in between. Their equipment tends to be top-of-the-line, most obviously shown by their incredibly \
 	human-like FBP designs. Vey's rise to stardom came from their introduction of ressurective cloning, although in \
 	recent years they've been forced to diversify as their patents expired and NanoTrasen-made medications became \

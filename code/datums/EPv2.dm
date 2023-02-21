@@ -118,7 +118,7 @@ var/global/list/all_exonet_connections = list()
 // Proc: send_message()
 // Parameters: 3 (target_address - the desired address to send the message to, data_type - text stating what the content is meant to be used for,
 // 		content - the actual 'message' being sent to the address)
-// Description: Sends the message to target_address, by calling receive_message() on the desired datum.  Returns true if the message is recieved.
+// Description: Sends the message to target_address, by calling receive_message() on the desired datum.  Returns true if the message is received.
 /datum/exonet_protocol/proc/send_message(var/target_address, var/data_type, var/content)
 	if(!address)
 		return FALSE

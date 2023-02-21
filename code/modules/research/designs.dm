@@ -10,7 +10,7 @@ The currently supporting non-reagent materials:
 
 Don't add new keyword/IDs if they are made from an existing one (such as rods which are made from metal). Only add raw materials.
 
-Design Guidlines
+Design Guidelines
 - When adding new designs, check rdreadme.dm to see what kind of things have already been made and where new stuff is needed.
 - A single sheet of anything is 2000 units of material. Materials besides metal/glass require help from other jobs (mining for
 other types of metals and chemistry for reagents).
@@ -22,7 +22,7 @@ other types of metals and chemistry for reagents).
 	var/name = null					//Name of the created object. If null it will be 'guessed' from build_path if possible.
 	var/desc = null					//Description of the created object. If null it will use group_desc and name where applicable.
 	var/item_name = null			//An item name before it is modified by various name-modifying procs
-	var/id = "id"					//ID of the created object for easy refernece. Alphanumeric, lower-case, no symbols.
+	var/id = "id"					//ID of the created object for easy reference. Alphanumeric, lower-case, no symbols.
 	var/list/req_tech = list()		//IDs of that techs the object originated from and the minimum level requirements.
 	var/build_type = null			//Flag as to what kind machine the design is built in. See defines.
 	var/list/materials = list()		//List of materials. Format: "id" = amount.
@@ -44,7 +44,7 @@ other types of metals and chemistry for reagents).
 	return
 
 /datum/design/proc/AssembleDesignName()
-	if(!name && build_path)					//Get name from build path if posible
+	if(!name && build_path)					//Get name from build path if possible
 		var/atom/movable/A = build_path
 		name = initial(A.name)
 		item_name = name
@@ -56,7 +56,7 @@ other types of metals and chemistry for reagents).
 	return
 
 //Returns a new instance of the item for this design
-//This is to allow additional initialization to be performed, including possibly additional contructor arguments.
+//This is to allow additional initialization to be performed, including possibly additional constructor arguments.
 /datum/design/proc/Fabricate(var/newloc, var/fabricator)
 	return new build_path(newloc)
 

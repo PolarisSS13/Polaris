@@ -9,7 +9,7 @@ SUBSYSTEM_DEF(ticker)
 	flags = SS_NO_TICK_CHECK | SS_KEEP_TIMING
 	runlevels = RUNLEVEL_LOBBY | RUNLEVEL_SETUP | RUNLEVEL_GAME | RUNLEVEL_POSTGAME // Every runlevel!
 
-	var/const/restart_timeout = 3 MINUTES	// Default time to wait before rebooting in desiseconds.
+	var/const/restart_timeout = 3 MINUTES	// Default time to wait before rebooting in deciseconds.
 	var/current_state = GAME_STATE_INIT	// We aren't even at pregame yet // TODO replace with CURRENT_GAME_STATE
 
 	/* Relies upon the following globals (TODO move those in here) */
@@ -24,7 +24,7 @@ SUBSYSTEM_DEF(ticker)
 	var/datum/game_mode/mode = null		// The actual gamemode, if selected.
 
 	var/end_game_state = END_GAME_NOT_OVER	// Track where we are ending game/round
-	var/restart_timeleft				// Time remaining until restart in desiseconds
+	var/restart_timeleft				// Time remaining until restart in deciseconds
 	var/last_restart_notify				// world.time of last restart warning.
 	var/delay_end = FALSE               // If set, the round will not restart on its own.
 
@@ -48,7 +48,7 @@ SUBSYSTEM_DEF(ticker)
 // This global variable exists for legacy support so we don't have to rename every 'ticker' to 'SSticker' yet.
 var/global/datum/controller/subsystem/ticker/ticker
 /datum/controller/subsystem/ticker/OnNew()
-	global.ticker = src // TODO - Remove this! Change everything to point at SSticker intead
+	global.ticker = src // TODO - Remove this! Change everything to point at SSticker instead
 
 /datum/controller/subsystem/ticker/Initialize(timeofday)
 	pregame_timeleft = config.pregame_time

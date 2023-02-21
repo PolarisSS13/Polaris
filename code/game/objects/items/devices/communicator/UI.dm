@@ -54,7 +54,7 @@
 	for(var/obj/item/communicator/comm in communicating)
 		connected_communicators[++connected_communicators.len] = list("name" = sanitize(comm.name), "true_name" = sanitize(comm.name), "ref" = "\ref[comm]")
 
-	//Devices that have been messaged or recieved messages from.
+	//Devices that have been messaged or received messages from.
 	for(var/obj/item/communicator/comm in im_contacts)
 		if(comm.exonet)
 			im_contacts_ui[++im_contacts_ui.len] = list("name" = sanitize(comm.name), "address" = comm.exonet.address, "ref" = "\ref[comm]")

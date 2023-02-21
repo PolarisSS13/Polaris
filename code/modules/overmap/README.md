@@ -31,7 +31,7 @@ Represents a zlevel on the overmap. Spawned by metaobjects at the startup.
 Remember to call ..() in children, it updates ship's current sector.
 
 subtype /ship of this object represents spacefaring vessels.
-It has 'current_sector' var that keeps refernce to, well, sector ship currently in.
+It has 'current_sector' var that keeps reference to, well, sector ship currently in.
 
 *************************************************************
 Helm console
@@ -66,11 +66,11 @@ Guide to how make new sector
 0.Map
 Remember to define shuttle areas if you want sector be accessible via shuttles.
 Currently there are no other ways to reach sectors from ships.
-In examples, 4x6 shuttle area is used. In case of shuttle area being too big, it will apear in bottom left corner of it.
+In examples, 4x6 shuttle area is used. In case of shuttle area being too big, it will appear in bottom left corner of it.
 
 Remember to put a helm console and engine control console on ship maps.
 Ships need engines to move. Currently there are only thermal engines.
-Thermal engines are just a unary atmopheric machine, like a vent. They need high-pressure gas input to produce more thrust.
+Thermal engines are just a unary atmospheric machine, like a vent. They need high-pressure gas input to produce more thrust.
 
 
 1.Metaobject
