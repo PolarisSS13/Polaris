@@ -348,7 +348,7 @@
 
 	missions = list(
 		new/datum/lore/mission/prebuilt/defense("HDV"),
-		new/datum/lore/mission/prebuilt/industrial("HIV"),//extremely unfortunate prefix. can probably fudge it as HFV or HLV if this is too unpleasant
+		new/datum/lore/mission/prebuilt/industrial("HLV"),//to avoid unfortunate prefixes
 		new/datum/lore/mission/prebuilt/freight("HFV"),
 		new/datum/lore/mission/prebuilt/transport("HTV"),
 		new/datum/lore/mission("HSV", list("weapons testing", "materials testing", "data exchange"), ATC_SCI),//might produce slightly weird results vis a vis location

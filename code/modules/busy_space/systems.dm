@@ -133,7 +133,7 @@
 		new /datum/lore/location("the rings of Kara", list(ATC_LUX)),
 		new /datum/lore/location("the rings of Rota", list(ATC_LUX)),
 		new /datum/lore/location("the Radiance Energy Chain", list(ATC_FREIGHT, ATC_DEF, ATC_INDU)),
-		new /datum/lore/location("a Nanotrasen colony in the Kara subsystem", list(ATC_ALL_CIV)), //padding-- there should probably be more than one named kara colony anyway
+		new /datum/lore/location("a corporate colony in the Kara subsystem", list(ATC_ALL_CIV)), //padding-- there should probably be more than one named kara colony anyway
 		new /datum/lore/location("an independent colony in the Kara subsystem", list(ATC_ALL_CIV)),
 		new /datum/lore/location("a Phoron mine in the Kara subsystem", list(ATC_TYPICAL)),
 		new /datum/lore/location("a xenoarcheological dig in the Kara subsystem", list(ATC_TYPICAL, ATC_SCI)),
