@@ -30,7 +30,7 @@
 					mission = list(ATC_TRANS, ATC_FREIGHT, ATC_DEF, ATC_INDU) //generally unmanned so no medical or science jobs
 				else if(initial in list("an anomaly"))
 					mission = list(ATC_DEF, ATC_SCI) //theres kinda only two things to do about mysterious space wedgies)
-				else if(initial in list("a Skathari hotspot"))
+				else if(initial in list("a skathari hotspot"))
 					mission = list(ATC_DEF, ATC_MED)
 				else if(initial in list("a dockyard", "a station", "a vessel", "a spaceport", "an outpost", "a facility"))
 					mission = list(ATC_TYPICAL)
@@ -76,7 +76,7 @@
 		new /datum/lore/location("the Moghes Hegemony embassy in Tycho, Luna, Sol", list(ATC_DIPLO)),
 		new /datum/lore/location("the Five Arrows embassy in Tycho, Luna, Sol", list(ATC_DIPLO)),
 		new /datum/lore/location("the Almach Protectorate embassy in Tycho, Luna, Sol", list(ATC_DIPLO)),
-		new /datum/lore/location("a Skrellian embassy in Little Qerrbalak, Luna, Sol", list(ATC_DIPLO)),
+		new /datum/lore/location("a skrellian embassy in Little Qerrbalak, Luna, Sol", list(ATC_DIPLO)),
 		new /datum/lore/location("an independent embassy on Luna, Sol", list(ATC_DIPLO)),
 		new /datum/lore/location("a dome on Luna, Sol", list(ATC_ALL_CIV)), //padding -- Luna's kind of a big deal relative to its number of named sites
 		new /datum/lore/location("a city on Luna, Sol", list(ATC_ALL_CIV)),
@@ -343,7 +343,7 @@
 	desc = "The Hegemony invaded and occupied this system in 2508 and somehow has resisted all human efforts to detail it further"
 	locations = list(
 		new /datum/lore/location("a Fleet base in Abel's Rest", list(ATC_TRANS, ATC_INDU, ATC_FREIGHT)),
-		new /datum/lore/location("an Unathi exclave in Abel's Rest", list(ATC_TYPICAL, ATC_DIPLO)),
+		new /datum/lore/location("an unathi exclave in Abel's Rest", list(ATC_TYPICAL, ATC_DIPLO)),
 		new /datum/lore/location("a First Contact derelict in Abel's Rest", list(ATC_SALVAGE)),
 		)
 
@@ -589,7 +589,7 @@
 	desc = "Atom bombs and dying stars. Whythe was home to the Wythe Superweapon, the firing of which caused the Far Kingdoms invasion and the Skathari Incursion. Woops. Currently decimated by the Incursion and considered uninhabitable."
 	autogenerate_destinations = FALSE
 	locations = list(
-		new /datum/lore/location("a Skathari incursion in Whythe", list(ATC_DEF)),
+		new /datum/lore/location("a skathari incursion in Whythe", list(ATC_DEF)),
 		new /datum/lore/location("the remains of Vigilance Station in Whythe", list(ATC_SALVAGE, ATC_SCI)),
 		new /datum/lore/location("a classified site in Whythe", list(ATC_DEF, ATC_SALVAGE, ATC_SCI)),
 		)
