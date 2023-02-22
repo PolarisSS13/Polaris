@@ -67,7 +67,7 @@
 	var/is_snowy
 	if (istype(loc, /turf/simulated/floor))
 		var/turf/simulated/floor/F = loc
-		is_snowy = F.snow_layers > 0
+		is_snowy = F.has_snow()
 	if(istype(loc, /turf/simulated/floor/water))
 		speed_mod = outdoors_speed_mod * 4 //It kind of floats due to its tires, but it is slow.
 	else if(istype(loc, /turf/simulated/floor/outdoors/rocks))

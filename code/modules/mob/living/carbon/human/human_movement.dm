@@ -123,10 +123,10 @@
 		return 0
 
 	var/movecost = T.get_movement_cost()
-	var/snow_layers = 0
+	var/snow_layers = SNOW_NONE
 	if (istype(T, /turf/simulated/floor)) // isfloor() doesn't work here, since snow is specifically on simulated floors only
 		var/turf/simulated/floor/F = T
-		snow_layers = F.snow_layers
+		snow_layers = max(SNOW_NONE, F.snow_layers)
 	if(movecost)
 		var/turf_move_cost = movecost
 		if(istype(T, /turf/simulated/floor/water))

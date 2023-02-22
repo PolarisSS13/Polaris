@@ -9,7 +9,7 @@
 			attack_tile(C, L) // Be on help intent if you want to decon something.
 			return
 
-	if (snow_layers) // Snowy turfs have to be cleared out before anything else can be done with them
+	if (has_snow()) // Snowy turfs have to be cleared out before anything else can be done with them
 		if (istype(C, /obj/item/shovel))
 			user.visible_message(
 				SPAN_NOTICE("\The [user] starts clearing \the [src] with \the [C.name]..."),
@@ -136,7 +136,7 @@
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 
 /turf/simulated/floor/attack_hand(mob/user)
-	if (snow_layers)
+	if (has_snow())
 		visible_message(SPAN_NOTICE("[user] starts scooping up some snow..."), SPAN_NOTICE("You start scooping up some snow..."))
 		if(do_after(user, 1 SECOND))
 			var/obj/S = new /obj/item/stack/material/snow(user.loc)

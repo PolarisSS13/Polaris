@@ -27,7 +27,7 @@
 	. = ..()
 
 /turf/simulated/floor/outdoors/attackby(obj/item/C, mob/user)
-	if (!snow_layers) // If we have snow, fall back to the base attackby() that has snow clearing logic
+	if (!has_snow()) // If we have snow, fall back to the base attackby() that has snow clearing logic
 		if(can_dig && istype(C, /obj/item/shovel))
 			to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
 			var/delay = (3 SECONDS * C.toolspeed)

@@ -43,11 +43,11 @@
 	return (!flooring || flooring.is_plating)
 
 /turf/simulated/floor/get_movement_cost()
-	return max(movement_cost, min(snow_layers, 2))
+	return max(movement_cost, clamp(snow_layers, SNOW_NONE, SNOW_HEAVY))
 
 /turf/simulated/floor/Entered(atom/A, atom/OL)
 	. = ..()
-	if(isliving(A) && snow_layers)
+	if(isliving(A) && has_snow())
 		var/mob/living/L = A
 		var/footprint_state = L.get_snow_footprint_state()
 		if(!footprint_state)
@@ -77,17 +77,25 @@
 	. = ..()
 	update_icon(1)
 
+/// Increases the number of snow layers on this turf by `amt`. Negative values decrease instead.
 /turf/simulated/floor/proc/adjust_snow(amt)
-	if (snow_layers == NEVER_HAS_SNOW)
+	if (snow_layers <= NEVER_HAS_SNOW)
 		return
-	snow_layers = max(0, snow_layers + amt)
+	snow_layers = max(SNOW_NONE, snow_layers + amt)
 	update_icon(TRUE)
 
+/// Sets the number of snow layers on this turf to be equal to `amt`.
 /turf/simulated/floor/proc/set_snow(amt)
-	if (snow_layers == NEVER_HAS_SNOW)
+	if (snow_layers <= NEVER_HAS_SNOW)
 		return
-	snow_layers = max(0, amt)
+	snow_layers = max(SNOW_NONE, amt)
 	update_icon(TRUE)
+
+/// Checks whether or not this turf has snow layers equal to `amt`.
+/// `amt` defaults to `SNOW_LIGHT`, meaning that running the proc with no arguments
+/// will check if the turf has any snow at all.
+/turf/simulated/floor/proc/has_snow(amt = SNOW_LIGHT)
+	return snow_layers >= amt
 
 /turf/simulated/floor/proc/swap_decals()
 	var/current_decals = decals

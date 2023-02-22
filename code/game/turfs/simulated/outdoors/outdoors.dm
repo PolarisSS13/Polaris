@@ -134,7 +134,8 @@ var/global/list/turf_edge_cache = list()
 	return
 
 /turf/simulated/floor/outdoors/chill()
-	snow_layers = min(snow_layers + 1, 2)
+	if (!has_snow(SNOW_HEAVY))
+		adjust_snow(1)
 
 /turf/simulated/floor/outdoors/ex_act(severity)
 	switch(severity)

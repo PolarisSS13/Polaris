@@ -20,8 +20,8 @@ var/global/image/no_ceiling_image = null
 	// Snowify before anything - if we're covered in snow layers, then use data for the snow turf and adjust edge blending
 	// This is pretty damn snowflakey (pun not intended) but it should suffice unless further generalization is desired that turf layers can't handle,
 	// like the ground being covered in something other than snow (sand, dust, etc)
-	var/decl/flooring/effective_flooring = snow_layers ? get_flooring_data(/decl/flooring/snow) : flooring
-	edge_blending_priority = snow_layers ? 6 : initial(edge_blending_priority)
+	var/decl/flooring/effective_flooring = has_snow() ? get_flooring_data(/decl/flooring/snow) : flooring
+	edge_blending_priority = has_snow() ? 6 : initial(edge_blending_priority)
 	if(effective_flooring)
 		// Set initial icon and strings.
 		name = effective_flooring.name
@@ -34,7 +34,7 @@ var/global/image/no_ceiling_image = null
 		// which we specifically want to avoid here because snow shouldn't overwrite the turf - just cover it up.
 		footstep_sounds = effective_flooring.footstep_sounds
 
-		if(flooring_override && !snow_layers)
+		if(flooring_override && !has_snow())
 			icon_state = flooring_override
 		else
 			icon_state = effective_flooring.icon_base
@@ -81,8 +81,8 @@ var/global/image/no_ceiling_image = null
 					if(!effective_flooring.test_link(src, T))
 						add_overlay(effective_flooring.get_flooring_overlay("[effective_flooring.icon_base]-corner-[SOUTHWEST]", "[effective_flooring.icon_base]_corners", SOUTHWEST))
 
-	// Re-apply floor decals
-	if(LAZYLEN(decals))
+	// Re-apply floor decals (except if they're covered up by snow)
+	if(LAZYLEN(decals) && !has_snow())
 		add_overlay(decals)
 
 	if(is_plating() && !(isnull(broken) && isnull(burnt))) //temp, todo
@@ -94,7 +94,7 @@ var/global/image/no_ceiling_image = null
 		if(!isnull(burnt) && (effective_flooring.flags & TURF_CAN_BURN))
 			add_overlay(effective_flooring.get_flooring_overlay("[effective_flooring.icon_base]-burned-[burnt]","burned[burnt]"))
 
-	if (snow_layers)
+	if (has_snow())
 		for(var/F in snow_footprints)
 			add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = snow_footprints[F], dir = text2num(F)))
 	else

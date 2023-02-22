@@ -39,7 +39,7 @@
 
 /turf/simulated/floor/get_description_interaction()
 	. = ..()
-	if (snow_layers)
+	if (has_snow())
 		. += "Use a shovel on it to get rid of the snow and reveal the ground beneath."
 		. += "Use an empty hand on it to scoop up some snow, which you can use to make snowballs or snowmen."
 	else if(broken || burnt)
