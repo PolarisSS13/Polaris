@@ -95,9 +95,8 @@ var/global/image/no_ceiling_image = null
 			add_overlay(effective_flooring.get_flooring_overlay("[effective_flooring.icon_base]-burned-[burnt]","burned[burnt]"))
 
 	if (snow_layers)
-		if (snow_footprints.len)
-			for(var/F in snow_footprints)
-				add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = snow_footprints[F], dir = text2num(F)))
+		for(var/F in snow_footprints)
+			add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = snow_footprints[F], dir = text2num(F)))
 	else
 		clearlist(snow_footprints)
 

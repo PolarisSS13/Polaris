@@ -54,7 +54,7 @@
 	temperature	= TEMPERATURE_SIF
 
 /turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed
-	snow_layers = 2
+	snow_layers = SNOW_HEAVY
 
 /turf/simulated/mineral/sif
 	oxygen		= MOLES_O2SIF

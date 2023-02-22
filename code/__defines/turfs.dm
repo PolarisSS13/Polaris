@@ -26,3 +26,9 @@
 #define OUTDOORS_NO			0	// Ditto.
 #define OUTDOORS_AREA		-1	// If a turf has this, it will defer to the area's settings on init.
 								// Note that after init, it will be either YES or NO.
+
+// Used to represent how much snow a turf has.
+#define NEVER_HAS_SNOW -1 // If a floor's `snow_layers` is set to this, it can never accrue snow.
+#define SNOW_NONE 0
+#define SNOW_LIGHT 1
+#define SNOW_HEAVY 2

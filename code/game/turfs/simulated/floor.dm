@@ -31,8 +31,11 @@
 	heat_capacity = 10000
 	var/lava = 0
 
-	/// Measures how thick the snow on this turf is. Currently this is an arbitrary number; anything higher than 2 isn't meaningful. 0 means there's no snow.
-	var/snow_layers = 0
+	/// Measures how thick the snow on this turf is.
+	/// Currently this is an arbitrary number; anything higher than 2 isn't meaningful. 0 means there's no snow.
+	/// A turf whose `snow_layers` is `NEVER_HAS_SNOW` cannot accrue snow.
+	/// Check `__defines/turfs.dm` for relevant defines.
+	var/snow_layers = SNOW_NONE
 	/// When characters walk over snowy floors, they leave footprints (see Entered()). This list holds those footprints and gets read when updating the icon.
 	var/list/snow_footprints = list()
 
@@ -43,15 +46,15 @@
 	return max(movement_cost, min(snow_layers, 2))
 
 /turf/simulated/floor/Entered(atom/A, atom/OL)
+	. = ..()
 	if(isliving(A) && snow_layers)
 		var/mob/living/L = A
 		var/footprint_state = L.get_snow_footprint_state()
 		if(!footprint_state)
-			return ..()
+			return
 		var/mdir = "[A.dir]"
 		snow_footprints[mdir] = footprint_state
 		update_icon(TRUE)
-	. = ..()
 
 /turf/simulated/floor/Initialize(mapload, floortype)
 	. = ..()
@@ -75,10 +78,14 @@
 	update_icon(1)
 
 /turf/simulated/floor/proc/adjust_snow(amt)
+	if (snow_layers == NEVER_HAS_SNOW)
+		return
 	snow_layers = max(0, snow_layers + amt)
 	update_icon(TRUE)
 
 /turf/simulated/floor/proc/set_snow(amt)
+	if (snow_layers == NEVER_HAS_SNOW)
+		return
 	snow_layers = max(0, amt)
 	update_icon(TRUE)
 

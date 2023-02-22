@@ -14,15 +14,11 @@
 
 	can_dirty = FALSE	// It's water
 
+	snow_layers = NEVER_HAS_SNOW // It's water
+
 	var/depth = 1 // Higher numbers indicates deeper water.
 
 	var/reagent_type = "water"
-
-/turf/simulated/floor/water/adjust_snow(amt)
-	return
-
-/turf/simulated/floor/water/set_snow(amt)
-	return
 
 /turf/simulated/floor/water/Initialize()
 	. = ..()

@@ -39,7 +39,7 @@
 	outdoors = OUTDOORS_YES
 
 /turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed
-	snow_layers = 2
+	snow_layers = SNOW_HEAVY
 
 /turf/simulated/floor/outdoors/grass/sif/planetuse
 	oxygen		= MOLES_O2SIF

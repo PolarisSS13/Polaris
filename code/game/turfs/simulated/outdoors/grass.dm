@@ -40,9 +40,6 @@
 	catalogue_data = list(/datum/category_item/catalogue/flora/sif_grass)
 	catalogue_delay = 2 SECONDS
 
-/turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed
-	snow_layers = 2
-
 /turf/simulated/floor/outdoors/grass/forest
 	name = "thick grass"
 	icon_state = "grass-dark0"
