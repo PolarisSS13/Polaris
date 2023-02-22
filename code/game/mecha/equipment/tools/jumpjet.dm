@@ -57,10 +57,7 @@
 
 
 /obj/item/mecha_parts/mecha_equipment/tool/jumpjet/proc/toggle(var/forcestate)
-	if(!isnull(forcestate))
-		enabled = forcestate
-	else
-		enabled = !enabled
+	enabled = !isnull(forcestate) ? forcestate : !enabled
 
 	hoverloop = 0
 
@@ -82,8 +79,7 @@
 		chassis.use_power(energy_drain)
 		chassis.pixel_z = 3 * sin(hoverloop) + 10
 		hoverloop += 30
-		if(hoverloop >= 360)
-			hoverloop = 0
+		hoverloop %= 360
 
 		playsound(src,hover_sound,20,1)
 

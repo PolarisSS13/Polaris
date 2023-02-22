@@ -237,14 +237,11 @@
 	return FALSE
 
 /obj/mecha/can_fall()
-	. = TRUE
-	var/maintain_hover = FALSE
+	. = flying
 	for(var/obj/item/mecha_parts/mecha_equipment/equip in equipment)
-		maintain_hover = equip.check_hover()
-		if(maintain_hover)
-			. = FALSE
-			break
-	return .
+		if(equip.check_hover())
+			return FALSE
+	return
 
 /obj/item/pipe/can_fall()
 	. = ..()

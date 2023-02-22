@@ -9,3 +9,13 @@
 		return BP_TORSO
 
 	return occupant.zone_sel.selecting
+
+/obj/mecha/proc/in_flight()
+	var/safe = FALSE
+	if(M.flying)
+		safe = TRUE
+	for(var/obj/item/mecha_parts/mecha_equipment/Mequip in M.equipment)
+		if(safe)
+			break
+		safe = Mequip.check_hover()
+	return safe
