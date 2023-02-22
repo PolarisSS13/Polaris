@@ -629,7 +629,7 @@ var/global/list/ai_verbs_default = list(
 					if(targets.len)
 						input = input("Select a crew member:") as null|anything in targets //The definition of "crew member" is a little loose...
 						//This is torture, I know. If someone knows a better way...
-						if(!input) return
+						if(QDELETED(input) || !input) return
 						var/new_holo = getHologramIcon(getCompoundIcon(targets[input]))
 						qdel(holo_icon)
 						holo_icon = new_holo
@@ -724,7 +724,7 @@ var/global/list/ai_verbs_default = list(
 							if("female skrell")
 								holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrf"))
 
-		else	return
+
 
 
 //Toggles the luminosity and applies it by re-entereing the camera.
