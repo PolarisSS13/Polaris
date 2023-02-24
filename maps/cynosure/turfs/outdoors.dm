@@ -38,6 +38,8 @@
 	temperature	= TEMPERATURE_SIF
 	outdoors = OUTDOORS_YES
 
+/// This should be used for Cynosure-specific files and PoIs when placing down snowy tiles.
+/// For non-specific maps that still need snow, you should use `/obj/effect/landmark/snowy_turf` on top of other floors.
 /turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed
 	snow_layers = SNOW_HEAVY
 
