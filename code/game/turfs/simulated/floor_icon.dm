@@ -98,7 +98,7 @@ var/global/image/no_ceiling_image = null
 		for(var/F in snow_footprints)
 			add_overlay(image(icon = 'icons/turf/outdoors.dmi', icon_state = snow_footprints[F], dir = text2num(F)))
 	else
-		clearlist(snow_footprints)
+		LAZYCLEARLIST(snow_footprints)
 
 	if(update_neighbors)
 		for(var/turf/simulated/floor/F in range(src, 1))

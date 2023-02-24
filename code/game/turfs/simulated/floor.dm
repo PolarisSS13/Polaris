@@ -37,7 +37,7 @@
 	/// Check `__defines/turfs.dm` for relevant defines.
 	var/snow_layers = SNOW_NONE
 	/// When characters walk over snowy floors, they leave footprints (see Entered()). This list holds those footprints and gets read when updating the icon.
-	var/list/snow_footprints = list()
+	var/list/snow_footprints
 
 /turf/simulated/floor/is_plating()
 	return (!flooring || flooring.is_plating)
@@ -53,7 +53,7 @@
 		if(!footprint_state)
 			return
 		var/mdir = "[A.dir]"
-		snow_footprints[mdir] = footprint_state
+		LAZYSET(snow_footprints, mdir, footprint_state)
 		update_icon(TRUE)
 
 /turf/simulated/floor/Initialize(mapload, floortype)
