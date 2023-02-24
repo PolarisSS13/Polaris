@@ -3259,6 +3259,13 @@
 /obj/item/toy/chess/rook_white,
 /turf/simulated/floor/holofloor/wmarble,
 /area/holodeck/source_chess)
+"dLe" = (
+/obj/effect/floor_decal/arrow,
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "monotile"
+	},
+/area/centcom/terminal)
 "dLk" = (
 /obj/structure/table/standard,
 /obj/item/deck/cards,
@@ -18164,13 +18171,9 @@
 /turf/simulated/shuttle/floor,
 /area/shuttle/escape/centcom)
 "tJi" = (
-/obj/machinery/door/airlock/external{
-	frequency = 1380;
-	icon_state = "door_locked";
-	id_tag = "centcom_dock_airlock";
-	locked = 1;
-	name = "Arrivals Airlock";
-	req_access = list(13)
+/obj/machinery/disposal/deliveryChute{
+	dir = 8;
+	name = "cargo chute"
 	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/plating.dmi';
@@ -21094,6 +21097,21 @@
 	icon_state = "white"
 	},
 /area/shuttle/trade)
+"wMZ" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 8
+	},
+/obj/effect/floor_decal/corner/green/border{
+	dir = 8
+	},
+/obj/effect/floor_decal/arrivals{
+	pixel_x = 16
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "steel"
+	},
+/area/centcom/terminal)
 "wNd" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/organ/internal/stack,
@@ -21858,6 +21876,21 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_courtroom)
+"xAi" = (
+/obj/effect/floor_decal/borderfloor{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/green/border{
+	dir = 4
+	},
+/obj/effect/floor_decal/arrivals/right{
+	pixel_x = -16
+	},
+/turf/unsimulated/floor{
+	icon = 'icons/turf/flooring/tiles.dmi';
+	icon_state = "steel"
+	},
+/area/centcom/terminal)
 "xAp" = (
 /obj/structure/flora/grass/both,
 /turf/simulated/floor/holofloor/snow,
@@ -35619,7 +35652,7 @@ xdw
 rdN
 sLv
 sLv
-sLv
+wMZ
 lMN
 qTA
 rLA
@@ -35875,7 +35908,7 @@ gSq
 quS
 qTA
 qTA
-qTA
+dLe
 quS
 qTA
 qTA
@@ -36133,7 +36166,7 @@ xdw
 vjU
 lFQ
 lFQ
-lFQ
+xAi
 pxt
 qTA
 rLA
@@ -40271,8 +40304,8 @@ wqh
 qUO
 sLv
 nxV
-puk
-puk
+nxV
+nxV
 puk
 puk
 puk
