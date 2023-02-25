@@ -15,8 +15,7 @@
 	num_contained = 5
 	contains = list(
 			/obj/item/pack/cardemon,
-			/obj/item/pack/spaceball,
-			/obj/item/deck/holder
+			/obj/item/pack/spaceball
 			)
 	name = "Trading Card Crate"
 	cost = 10
