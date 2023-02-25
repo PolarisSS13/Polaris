@@ -18,4 +18,4 @@
 	set_trait(TRAIT_PRODUCT_COLOUR,"#799957")
 	set_trait(TRAIT_PLANT_COLOUR,"#66804B")
 	set_trait(TRAIT_PLANT_ICON,"alien4")
-	set_trait(TRAIT_UNIQUE_PRODUCT, /mob/living/carbon/alien/diona)
+	set_trait(TRAIT_UNIQUE_PRODUCT, /mob/living/carbon/diona)
