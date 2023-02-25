@@ -347,7 +347,7 @@
 				user.put_in_hands(src)
 	return
 
-/obj/item/pack/ /// Put new packs in random spawner in code/game/objects/random/misc.dm
+/obj/item/pack/
 	name = "Card Pack"
 	desc = "For those with disposible income."
 
