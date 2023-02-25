@@ -148,6 +148,7 @@
 		if(!islist(pickablecards[P.name]))
 			pickablecards[P.name] = list()
 		pickablecards[P.name] += P
+	sortTim(pickablecards, /proc/cmp_text_asc)
 	var/pickedcard = input("Which card do you want to remove from the deck?")	as null|anything in pickablecards
 	if(!pickedcard || !LAZYLEN(pickablecards[pickedcard]) || !usr || !src)
 		return
@@ -230,6 +231,29 @@
 		user.visible_message("<span class = 'notice'>\The [user] deals [dcard] card(s) to \the [target].</span>")
 	H.throw_at(get_step(target,target.dir),10,1,H)
 
+
+/obj/item/deck/verb/cheater_deal() /// Takes from the bottom of the deck, chance to expose your cheat.
+	set category = "Object"
+	set name = "Deal From Bottom"
+	set desc = "Deal a card from the bottom of a deck, like a cheater."
+	set src in view(1)
+
+	if(!cards.len)
+		to_chat(usr,"<span class='notice'>There are no cards in the deck.</span>")
+		return
+
+	var/list/players = list()
+	for(var/mob/living/player in viewers(3))
+		if(!player.stat)
+			players += player
+	var/mob/living/M = input("Who do you wish to deal a card?") as null|anything in players
+	if(!usr || !src || !M) return
+
+	if(prob(30))
+		usr.visible_message("<span class = 'warning'>\The [usr] dealt from the bottom of the deck!</span>")
+
+	moveElement(cards, cards.len, 1) /// Deal_at moves the first card in the list.
+	deal_at(usr, M, 1)
 
 /obj/item/cardhand/attackby(obj/O as obj, mob/user as mob)
 	if(cards.len == 1 && istype(O, /obj/item/pen))
