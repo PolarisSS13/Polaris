@@ -158,9 +158,8 @@
 		//Don't eat things when the lathe is open. No more accidentally lathing your jaws of life.
 		if(O.is_multitool() || O.is_wirecutter())
 			wires.Interact(user)
-			return
-		else
-			return 0
+			return TRUE
+		return FALSE
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
 		return 0
