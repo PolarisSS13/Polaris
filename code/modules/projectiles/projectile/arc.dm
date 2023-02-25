@@ -201,3 +201,45 @@
 				acid = new(T)
 				acid.reagents.add_reagent("stomacid", 5)
 				acid.update_icon()
+
+/obj/item/projectile/arc/moltenchunk
+	name = "molten chunk"
+	icon_state = "fireball2"
+	damage = 20
+	damage_type = SEARING
+	armor_penetration = 5
+	fire_sound = 'sound/weapons/towelwhip.ogg'
+
+	var/obj/Ore = /obj/item/ore
+
+	var/min_count = 2
+	var/max_count = 5
+
+/obj/item/projectile/arc/moltenchunk/on_impact(turf/T)
+	for(var/mob/living/L in T)
+		attack_mob(L)
+
+	if(Ore)
+		var/spawncount = rand(min_count,max_count)
+		if(spawncount > 1)
+			visible_message(SPAN_WARNING("\The [src] shatters on impact, sending [initial(Ore.name)] fragments everywhere!"))
+			for(var/I = 1; I < spawncount; I++)
+				var/obj/OreChunk = new Ore(T)
+				OreChunk = new Ore(T)
+				OreChunk.throw_at_random(TRUE, 3, 1)
+
+		else
+			visible_message(SPAN_WARNING("\The [src] crumples on impact, leaving \a [initial(Ore.name)] behind!"))
+			new Ore(T)
+
+/obj/item/projectile/arc/moltenchunk/Initialize(var/atom/newloc, var/orepath)
+	. = ..(newloc)
+
+	if(orepath)
+		Ore = orepath
+
+/obj/item/projectile/arc/moltenchunk/outcrop
+	Ore = /obj/structure/outcrop
+
+/obj/item/projectile/arc/moltenchunk/outcrop/gold
+	Ore = /obj/structure/outcrop/gold
