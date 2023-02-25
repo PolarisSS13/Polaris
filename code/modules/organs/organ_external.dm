@@ -1155,6 +1155,8 @@ Note that amputating the affected organ does in fact remove the infection from t
 /obj/item/organ/external/derobotize(var/restore_organs = TRUE)
 	. = ..()
 	if (!.) return
+	var/obj/item/organ/external/parent = owner?.organs_by_name[parent_organ]
+	if (parent && parent.robotic) return FALSE
 	var/datum/robolimb/R = all_robolimbs[model]
 	if (R)
 		brute_mod /= R.robo_brute_mod
