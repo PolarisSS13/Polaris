@@ -679,14 +679,14 @@
 			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever.
 
 /obj/mecha/proc/melee_action(atom/T)
-	if(internal_damage&MECHA_INT_CONTROL_LOST)
+	if(internal_damage & MECHA_INT_CONTROL_LOST)
 		T = safepick(oview(1,src))
 	if(!melee_can_hit)
 		return
 
-	if(istype(T, /mob/living))
+	if(isliving(T))
 		var/mob/living/M = T
-		if(src.occupant.a_intent == I_HURT || istype(src.occupant, /mob/living/carbon/brain)) //Brains cannot change intents; Exo-piloting brains lack any form of physical feedback for control, limiting the ability to 'play nice'.
+		if(src.occupant.a_intent == I_HURT || isbrain(src.occupant)) //Brains cannot change intents; Exo-piloting brains lack any form of physical feedback for control, limiting the ability to 'play nice'.
 			playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
 			do_attack_animation(T)
 			if(damtype == "brute")
@@ -706,9 +706,9 @@
 							update |= temp.take_damage(0, rand(force/2, force))
 						if("tox")
 							if(H.reagents)
-								if(H.reagents.get_reagent_amount("carpotoxin") + force < force*2)
+								if(H.reagents.get_reagent_amount("carpotoxin") < force*2)
 									H.reagents.add_reagent("carpotoxin", force)
-								if(H.reagents.get_reagent_amount("cryptobiolin") + force < force*2)
+								if(H.reagents.get_reagent_amount("cryptobiolin") < force*2)
 									H.reagents.add_reagent("cryptobiolin", force)
 						if("halloss")
 							H.stun_effect_act(1, force / 2, BP_TORSO, src)
@@ -734,7 +734,7 @@
 						return
 				M.updatehealth()
 			src.occupant_message("You hit [T].")
-			src.visible_message("<font color='red'><b>[src.name] hits [T].</b></font>")
+			src.visible_message(SPAN_DANGER("[src.name] hits [T]"))
 		else
 			step_away(M,src)
 			src.occupant_message("You push [T] out of the way.")
@@ -751,7 +751,7 @@
 		if(src.occupant.a_intent == I_HURT || istype(src.occupant, /mob/living/carbon/brain)) // Don't smash unless we mean it
 			if(damtype == "brute")
 				src.occupant_message("You hit [T].")
-				src.visible_message("<font color='red'><b>[src.name] hits [T]</b></font>")
+				src.visible_message(SPAN_DANGER("[src.name] hits [T]"))
 				playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
 				do_attack_animation(T)
 

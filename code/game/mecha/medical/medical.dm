@@ -18,11 +18,34 @@
 		/obj/item/mecha_parts/component/electrical
 		)
 
+	var/obj/item/clothing/glasses/hud/health/mech/hud
+
 /obj/mecha/medical/Initialize()
 	. = ..()
 	var/turf/T = get_turf(src)
 	if(isPlayerLevel(T.z))
 		new /obj/item/mecha_parts/mecha_tracking(src)
+
+	hud = new /obj/item/clothing/glasses/hud/health/mech(src)
+	return
+
+/obj/mecha/medical/moved_inside(var/mob/living/carbon/human/H as mob)
+	. = ..()
+	if(istype(H))
+		if(H.glasses)
+			occupant_message("<font color='red'>[H.glasses] prevent you from using [src] [hud]</font>")
+		else
+			H.glasses = hud
+			H.recalculate_vis()
+
+/obj/mecha/medical/odysseus/go_out()
+	if(ishuman(occupant))
+		var/mob/living/carbon/human/H = occupant
+		if(H.glasses == hud)
+			H.glasses = null
+			H.recalculate_vis()
+	..()
+	return
 
 /*	// One horrific bastardization of glorious inheritence dead. A billion to go. ~Mech
 /obj/mecha/medical/mechturn(direction)
