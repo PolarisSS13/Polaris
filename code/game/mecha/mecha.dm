@@ -696,7 +696,7 @@
 				var/mob/living/carbon/human/H = T
 
 				var/obj/item/organ/external/temp = H.get_organ(pick(BP_TORSO, BP_TORSO, BP_TORSO, BP_HEAD))
-				if(temp)
+				if(!istype(temp))
 					var/update = 0
 					switch(damtype)
 						if("brute")
@@ -740,15 +740,10 @@
 			src.occupant_message("You push [T] out of the way.")
 			src.visible_message("[src] pushes [T] out of the way.")
 
-		melee_can_hit = 0
-		if(do_after(melee_cooldown))
-			melee_can_hit = 1
-		return
-
 	else
 		if(istype(T, /obj/machinery/disposal)) // Stops mechs from climbing into disposals
 			return
-		if(src.occupant.a_intent == I_HURT || istype(src.occupant, /mob/living/carbon/brain)) // Don't smash unless we mean it
+		if(src.occupant.a_intent == I_HURT || isbrain(src.occupant)) // Don't smash unless we mean it
 			if(damtype == "brute")
 				src.occupant_message("You hit [T].")
 				src.visible_message(SPAN_DANGER("[src.name] hits [T]"))
@@ -760,10 +755,9 @@
 				else
 					T:take_damage(force)
 
-				melee_can_hit = 0
-
-				if(do_after(melee_cooldown))
-					melee_can_hit = 1
+	melee_can_hit = 0
+	if(do_after(melee_cooldown))
+		melee_can_hit = 1
 	return
 
 /obj/mecha/proc/range_action(atom/target)
