@@ -55,6 +55,7 @@
 	gluttonous = 1
 	blood_volume = 400
 	hunger_factor = 0.2
+	hearboost = 3 //Big heckin chonker ultragigamega-ears.
 
 	ambiguous_genders = TRUE
 
