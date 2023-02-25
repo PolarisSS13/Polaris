@@ -4430,16 +4430,6 @@
 	if(dose * strength >= strength * 2.5) // Slurring takes longer. Again, intentional.
 		M.slurring = max(M.slurring, 30)
 
-/datum/reagent/nutriment/magicdust
-	name = "Magic Dust"
-	id = "magicdust"
-	description = "A dust harvested from gnomes, aptly named by pre-industrial civilizations."
-	taste_description = "something tingly"
-	taste_mult = 2
-	reagent_state = LIQUID
-	nutriment_factor = 40 //very filling
-	color = "#d169b2"
-
 /datum/reagent/drink/soda/kompot
 	name = "Kompot"
 	id = "kompot"
