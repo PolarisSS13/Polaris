@@ -627,10 +627,11 @@ var/global/list/ai_verbs_default = list(
 				if("Crew Member") //A seeable crew member (or a dog)
 					var/list/targets = trackable_mobs()
 					if(targets.len)
-						input = input("Select a crew member:") as null|anything in targets //The definition of "crew member" is a little loose...
+						var/mob/living/Target
+						Target = input("Select a crew member:") as null|anything in targets //The definition of "crew member" is a little loose...
 						//This is torture, I know. If someone knows a better way...
-						if(QDELETED(input) || !input) return
-						var/new_holo = getHologramIcon(getCompoundIcon(targets[input]))
+						if(QDELETED(Target) || !Target) return
+						var/new_holo = getHologramIcon(getCompoundIcon(targets[Target]))
 						qdel(holo_icon)
 						holo_icon = new_holo
 
