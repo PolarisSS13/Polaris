@@ -186,10 +186,13 @@
 	if(!armed)
 		return TRUE
 
-	if(isliving(L) && L.hovering)
-		return TRUE
+	if(isliving(L))
+		if(L.hovering)
+			return TRUE
 	else if(ismecha(L))
 		var/obj/mecha/M = L
 		return M.in_flight()
 	else
 		return TRUE
+
+	return FALSE
