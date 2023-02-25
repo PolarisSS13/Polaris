@@ -17,7 +17,7 @@
 	var/brightness_level = "medium"
 	var/power_usage
 	var/power_use = 1
-	var/starts_with_cell = 1 //should it start with a cell?
+	var/starts_with_cell = TRUE //should it start with a cell?
 
 /obj/item/flashlight/Initialize()
 	. = ..()
@@ -237,7 +237,7 @@
 		..()
 
 /obj/item/flashlight/empty //For autolathes so you can't duplicate infinite cells
-	starts_with_cell = 0
+	starts_with_cell = FALSE
 
 /obj/item/flashlight/pen
 	name = "penlight"

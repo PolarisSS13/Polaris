@@ -24,7 +24,7 @@
 	var/max_cooling = 15				// in degrees per second - probably don't need to mess with heat capacity here
 	var/charge_consumption = 3			// charge per second at max_cooling
 	var/thermostat = T20C
-	var/starts_with_cell = 1
+	var/starts_with_cell = TRUE
 
 	//TODO: make it heat up the surroundings when not in space
 
@@ -207,4 +207,4 @@
 			. += "It doesn't have a power cell installed."
 
 /obj/item/suit_cooling_unit/empty //No duplicating cells with autolathes any more.
-	starts_with_cell = 0
+	starts_with_cell = FALSE

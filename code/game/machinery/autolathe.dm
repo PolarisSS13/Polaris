@@ -363,7 +363,7 @@
 	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.6. Maximum rating of parts is 5
 
 /obj/machinery/autolathe/dismantle()
-	if(LAZYLEN(stored_materials))
+	if(LAZYLEN(stored_material))
 		for(var/mat in stored_material)
 			var/datum/material/M = get_material_by_name(mat)
 			if(!istype(M))
