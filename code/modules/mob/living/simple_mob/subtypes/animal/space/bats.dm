@@ -60,9 +60,9 @@
 
 /datum/category_item/catalogue/fauna/razor_bat
 	name = "Nispean Fauna - Razor Bat"
-	desc = "These sharp-toothed flying mammalian animals are adapted to the oxygen-deficient \
+	desc = "These sharp-toothed flying mammalian animals are adapted to the nitrous-oxide rich \
 	and hostile jungles of Nisp, and as a result are frighteningly capable of surviving in harsh, \
-	even near-airless environments. In higher-oxygen environments, these bats can reach the size \
+	even near-airless environments. In high oxygen environments, these bats can reach the size \
 	of a human head, though they struggle to thrive in low temperatures without proper shelter.\
 	<br><br>\
 	The Razor Bat is exclusively carnivorous, feeding on the blood of prey of all sizes by inflicting\
