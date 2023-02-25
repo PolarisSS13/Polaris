@@ -62,6 +62,7 @@
 		floortype = initial_flooring
 	if(floortype)
 		set_flooring(get_flooring_data(floortype), TRUE)
+		refresh_snow(FALSE)
 		. = INITIALIZE_HINT_LATELOAD // We'll update our icons after everyone is ready
 	else
 		footstep_sounds = base_footstep_sounds
@@ -75,8 +76,7 @@
 
 /turf/simulated/floor/LateInitialize()
 	. = ..()
-	// refresh_snow() calls update_icon(TRUE) as well, so this ensures that roundstart snowy turfs are handled correctly
-	refresh_snow()
+	update_icon(TRUE)
 
 /// Increases the number of snow layers on this turf by `amt`. Negative values decrease instead.
 /turf/simulated/floor/proc/adjust_snow(amt)
@@ -98,13 +98,14 @@
 /turf/simulated/floor/proc/has_snow(amt = SNOW_LIGHT)
 	return snow_layers >= amt
 
-/turf/simulated/floor/proc/refresh_snow()
+/turf/simulated/floor/proc/refresh_snow(do_icon_update = TRUE)
 	if (has_snow())
 		edge_blending_priority = 6
 	else
 		edge_blending_priority = initial(edge_blending_priority)
 	refresh_footstep_sounds()
-	update_icon(TRUE)
+	if (do_icon_update)
+		update_icon(TRUE)
 
 /turf/simulated/floor/proc/refresh_footstep_sounds()
 	if (has_snow())
