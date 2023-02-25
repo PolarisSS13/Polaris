@@ -194,8 +194,9 @@
 	possible_mission_types &= destination_mission_types
 
 	//sanity checking
-	if(!possible_mission_types)
-		return "ERROR" //change to fail silently after testing
+	if(!possible_mission_types) //an org was given a system that contains no missions they run. let's fail gracefully about it
+		current_ship = "vessel [pick("SOL", "VIR", "STC", "ACE")]-575-[rand(0,999999)]" //unnamed ship
+		return "[current ship], traveling to local registrar" //instantly identifiable as an error but still immersive
 
 	//select a mission we can run
 	var/datum/lore/mission/selected_mission
@@ -1116,7 +1117,7 @@
 		/datum/lore/system/zhu_que = 10,
 		/datum/lore/system/love = 5,
 		/datum/lore/system/isavaus_gamble = 3,
-		/datum/lore/system/whythe = 3 //not in scg space but im sure they can still get at it
+		/datum/lore/system/whythe = 2 //not in scg space but im sure they can still get at it
 		)
 
 //kind of experimental
@@ -1141,8 +1142,6 @@
 		/datum/lore/system/vounna = 5,
 		/datum/lore/system/sidhe = 5,
 		/datum/lore/system/new_cairo = 3, //funny bugs
-//		/datum/lore/system/mahimahi = 5, //uncomment these if theyre ever like, detailed enough to have a specific named embassy
-//		/datum/lore/system/kauqxum = 5,
 		)
 //TODO add 5 Arrows, Protectorate, Pearlshield
 //maybe some other flavorful government agencies like the EIO or the GSA or SOFI

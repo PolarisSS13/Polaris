@@ -153,7 +153,7 @@
 		new /datum/lore/location("Oyo-ni-aaye on Kishar, Alpha Centauri", list(ATC_ALL_CIV)),
 		new /datum/lore/location("Valhalla in Heaven, Alpha Centauri", list(ATC_TYPICAL)),
 		new /datum/lore/location("Elyisum in Heaven, Alpha Centauri", list(ATC_TYPICAL)),
-		new /datum/lore/location("Ragnarok, Alpha Centauri", list(ATC_INDU, ATC_FREIGHT)),
+		new /datum/lore/location("the remains of Ragnarok, Alpha Centauri", list(ATC_INDU, ATC_FREIGHT, ATC_SCI)),
 		new /datum/lore/location("The Rings in Heaven, Alpha Centauri", list(ATC_ALL_CIV)),
 		new /datum/lore/location("The Angelic College at Heaven, Alpha Centauri", list(ATC_SCI))
 		)
@@ -404,8 +404,8 @@
 	locations = list(
 		new /datum/lore/location("Skylight on Angessa's Pearl", list(ATC_ALL_CIV, ATC_DIPLO)),
 		new /datum/lore/location("Melt on Angessa's Pearl", list(ATC_TRANS, ATC_FREIGHT)), // melt doesn't get emergency responders
-		new /datum/lore/location("Angessa's Grave on Angessa's Pearl", list(ATC_TRANS, ATC_LUX, ATC_MED)),
-		new /datum/lore/location("Tsunami on Angessa's Pearl", list(ATC_TYPICAL)),
+		new /datum/lore/location("Angessa's Grave on Angessa's Pearl", list(ATC_TYPICAL, ATC_SCI, ATC_DIPLO)),
+		new /datum/lore/location("Tsunami on Angessa's Pearl", list(ATC_ALL_CIV, ATC_DIPLO)),
 		new /datum/lore/location("a demonstration on Angessa's Pearl", list(ATC_DEF, ATC_MED)),
 		new /datum/lore/location("a Far Kingdoms wreck in Exalt's Light", list(ATC_SALVAGE, ATC_SCI))
 		)
