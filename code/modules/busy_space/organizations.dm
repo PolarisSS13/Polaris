@@ -251,7 +251,7 @@
 		new /datum/lore/mission/prebuilt/scientific("NSV"),
 		new /datum/lore/mission/prebuilt/salvage("NIV"),
 		new /datum/lore/mission/prebuilt/medical_response("NRV"),
-		new /datum/lore/mission/prebuilt/defense_response("NRV"),
+		new /datum/lore/mission/prebuilt/defense_response("NRV")
 		)
 
 	serviced = list( //again, protagonists, so this is something close to a map by trade distance of human+tajaran space
@@ -283,7 +283,7 @@
 		/datum/lore/system/terminus = 2,
 		/datum/lore/system/eutopia = 2,
 		/datum/lore/system/altair = 2,
-		/datum/lore/system/neon_light = 1,
+		/datum/lore/system/neon_light = 1
 		)
 
 
@@ -351,7 +351,7 @@
 		new/datum/lore/mission/prebuilt/industrial("HLV"),//to avoid unfortunate prefixes
 		new/datum/lore/mission/prebuilt/freight("HFV"),
 		new/datum/lore/mission/prebuilt/transport("HTV"),
-		new/datum/lore/mission("HSV", list("weapons testing", "materials testing", "data exchange"), ATC_SCI),//might produce slightly weird results vis a vis location
+		new/datum/lore/mission("HSV", list("weapons testing", "materials testing", "data exchange"), ATC_SCI) //might produce slightly weird results vis a vis location
 		)
 
 	serviced = list(
@@ -443,7 +443,7 @@
 		new/datum/lore/mission/prebuilt/medical("VMV"),
 		new/datum/lore/mission/prebuilt/medical_response("VRV"),
 		new/datum/lore/mission/prebuilt/scientific("VSV"),
-		new/datum/lore/mission/prebuilt/transport("VTV"),
+		new/datum/lore/mission/prebuilt/transport("VTV")
 		)
 
 	serviced = list(
@@ -464,7 +464,7 @@
 		/datum/lore/system/relan = 5,
 		/datum/lore/system/vounna = 5,
 		/datum/lore/system/el = 2,
-		/datum/lore/system/eutopia = 2,
+		/datum/lore/system/eutopia = 2
 		)
 
 	// Mostly Diona names
@@ -512,7 +512,7 @@
 	missions = list(
 		new /datum/lore/mission/prebuilt/medical("ZMV"), //they dont really like. do emergency medical shit. they just kind of sell drugs.
 		new /datum/lore/mission/prebuilt/transport("ZTV"),
-		new /datum/lore/mission/prebuilt/scientific("ZSV"),
+		new /datum/lore/mission/prebuilt/scientific("ZSV")
 		)
 
 	serviced = list( //some of this list is veering perilously close to just making shit up tbh
@@ -530,7 +530,7 @@
 		/datum/lore/system/love = 2,
 		/datum/lore/system/zhu_que = 2,
 		/datum/lore/system/sidhe = 2,
-		/datum/lore/system/vounna = 2, //i imagine theyre mostly being squeezed out of the almachi investment rush given kalediscope and their poor positioning in general
+		/datum/lore/system/vounna = 2 //i imagine theyre mostly being squeezed out of the almachi investment rush given kalediscope and their poor positioning in general
 		)
 
 /datum/lore/organization/tsc/ward_takahashi
@@ -554,7 +554,7 @@
 		new /datum/lore/mission/prebuilt/transport("WTV"),
 		new /datum/lore/mission/prebuilt/industrial("WIV"),
 		new /datum/lore/mission/prebuilt/scientific("WSV"),
-		new /datum/lore/mission/prebuilt/defense("WDV"),
+		new /datum/lore/mission/prebuilt/defense("WDV")
 		)
 
 	serviced = list( //pretty similar to the NT map-- they're NT's biggest competitor on like, half their things
@@ -586,7 +586,7 @@
 		/datum/lore/system/jahans_post = 2,
 		/datum/lore/system/abels_rest = 2,
 		/datum/lore/system/raphael = 2,
-		/datum/lore/system/neon_light = 1,
+		/datum/lore/system/neon_light = 1
 		)
 
 	ship_names = list(
@@ -653,7 +653,7 @@
 		/datum/lore/system/altair = 2, //they dont /sell/ here but they produce here
 		/datum/lore/system/eutopia = 2,
 		/datum/lore/system/relan = 2,
-		/datum/lore/system/neon_light = 1,
+		/datum/lore/system/neon_light = 1
 		)
 
 /datum/lore/organization/tsc/morpheus
@@ -676,7 +676,7 @@
 		new /datum/lore/mission/prebuilt/freight("MFV"),
 		new /datum/lore/mission/prebuilt/transport("MTV"),
 		new /datum/lore/mission/prebuilt/scientific("MSV"), // this is the MSV We Didn't Do It! on a data collection flight to an anomaly in whythe
-		new /datum/lore/mission/prebuilt/defense("MDV"), //ive been giving defense fleets to every "major" TSC but morph's narrow focus and Obvious Sleeziness means they might not even want one?
+		new /datum/lore/mission/prebuilt/defense("MDV") //ive been giving defense fleets to every "major" TSC but morph's narrow focus and Obvious Sleeziness means they might not even want one?
 		)
 
 	serviced = list( //pretty flat weighting structure -- a lot of posi-majority systems are on the other end of Sol so it kinda works out that way
@@ -697,7 +697,7 @@
 		/datum/lore/system/love = 2,
 		/datum/lore/system/neon_light = 2,
 		/datum/lore/system/alpha_centauri = 2,
-		/datum/lore/system/whythe = 1, //oh god
+		/datum/lore/system/whythe = 1 //oh god
 		)
 	ship_names = list(
 		"Nervous Energy",
@@ -845,7 +845,7 @@
 		/datum/lore/system/vounna = 2,
 		/datum/lore/system/mesomori = 2,
 		/datum/lore/system/arrathiir = 2,
-		/datum/lore/system/isavaus_gamble = 1, //they used to run salvage ops here and might as well keep doing it
+		/datum/lore/system/isavaus_gamble = 1 //they used to run salvage ops here and might as well keep doing it
 		)
 
 /datum/lore/organization/tsc/mbt
@@ -864,7 +864,7 @@
 	missions = list(
 		new /datum/lore/mission/prebuilt/transport("TTV"),
 		new /datum/lore/mission/prebuilt/freight("TFV"),
-		new /datum/lore/mission/prebuilt/luxury("TTV"),
+		new /datum/lore/mission/prebuilt/luxury("TTV")
 		)
 
 	serviced = list( // and THIS is basically just a population map of known space, slightly adjusted for distance
@@ -896,7 +896,7 @@
 		/datum/lore/system/mesomori = 2,
 		/datum/lore/system/vounna = 2,
 		/datum/lore/system/arrathiir = 2,
-		/datum/lore/system/neon_light = 2,
+		/datum/lore/system/neon_light = 2
 		)
 
 //TODO: add in other tscs-- kaleidoscope, SAARE, and PCRC for sure but maybe also gilthari,grayson, aether
@@ -915,7 +915,7 @@
 		new /datum/lore/mission/prebuilt/transport("ITV"),
 		new /datum/lore/mission/prebuilt/freight("IFV"),
 		new /datum/lore/mission/prebuilt/industrial("IIV"),
-		new /datum/lore/mission/prebuilt/salvage("IIV"),
+		new /datum/lore/mission/prebuilt/salvage("IIV")
 		)
 
 	serviced = list( // basically an adjusted version of the Major Bills chart but a little more evenly weighted, with some more bias towards otherwise underserved systems and with some more off-the-grid locations about it
@@ -949,7 +949,7 @@
 		/datum/lore/system/mesomori = 2,
 		/datum/lore/system/vounna = 2,
 		/datum/lore/system/arrathiir = 2,
-		/datum/lore/system/isavaus_gamble = 2, //literally dont even worry officer i super have a permit for this
+		/datum/lore/system/isavaus_gamble = 2 //literally dont even worry officer i super have a permit for this
 		)
 
 /datum/lore/organization/local_traffic
@@ -970,7 +970,7 @@
 		new /datum/lore/mission/prebuilt/luxury("ITC"),
 		new /datum/lore/mission/prebuilt/medical_response("IMC"),
 		new /datum/lore/mission/prebuilt/defense_response("IDC"),
-		new /datum/lore/mission/prebuilt/salvage("IIC"),
+		new /datum/lore/mission/prebuilt/salvage("IIC")
 		)
 
 	serviced = list(
@@ -1031,13 +1031,13 @@
 		new /datum/lore/mission("VGA", list("energy relay", "emergency resupply", "restricted material transport"), ATC_FREIGHT),
 		new /datum/lore/mission("VGA", list("refugee transport", "prison transport"), ATC_TRANS),
 		new /datum/lore/mission/prebuilt/diplomatic("VGA"), //local zaddat colonies
-		new /datum/lore/mission/prebuilt/scientific("VGA"),
+		new /datum/lore/mission/prebuilt/scientific("VGA")
 		)
 
 	serviced = list(
 		/datum/lore/system/vir = 10, //unsurprisingly, mostly stays in vir
 		/datum/lore/system/gavel = 1, //sometimes does some limited local cooperative diplomacy or emergency response
-		/datum/lore/system/oasis = 1,
+		/datum/lore/system/oasis = 1
 		)
 
 	ship_names = list(
@@ -1098,7 +1098,7 @@
 		new /datum/lore/mission/prebuilt/scientific("SCG-S"),
 		new /datum/lore/mission/prebuilt/diplomatic("SCG-D"), //local zaddat colonies, independent earth nations, internal diplomatic missions to embassies in Sol, abels rest. actual foreign diplomacy happens elsewhere
 		new /datum/lore/mission/prebuilt/medical_response("SCG-M"),
-		new /datum/lore/mission/prebuilt/defense_response("SCG-D"),
+		new /datum/lore/mission/prebuilt/defense_response("SCG-D")
 		)
 
 	serviced = list(
@@ -1116,7 +1116,7 @@
 		/datum/lore/system/zhu_que = 10,
 		/datum/lore/system/love = 5,
 		/datum/lore/system/isavaus_gamble = 3,
-		/datum/lore/system/whythe = 3, //not in scg space but im sure they can still get at it
+		/datum/lore/system/whythe = 3 //not in scg space but im sure they can still get at it
 		)
 
 //kind of experimental
@@ -1163,13 +1163,13 @@
 
 	missions = list(
 		new /datum/lore/mission("VGA-PV", list("defense", "patrol", "military response", "joint exercise"), ATC_DEF),
-		new /datum/lore/mission/prebuilt/defense_response("VGA-PC"),
+		new /datum/lore/mission/prebuilt/defense_response("VGA-PC")
 		)
 
 	serviced = list(
 		/datum/lore/system/vir = 10,
 		/datum/lore/system/gavel = 1,
-		/datum/lore/system/oasis = 1,
+		/datum/lore/system/oasis = 1
 		)
 
 	ship_names = list(
