@@ -75,27 +75,45 @@
 
 /turf/simulated/floor/LateInitialize()
 	. = ..()
-	update_icon(1)
+	// refresh_snow() calls update_icon(TRUE) as well, so this ensures that roundstart snowy turfs are handled correctly
+	refresh_snow()
 
 /// Increases the number of snow layers on this turf by `amt`. Negative values decrease instead.
 /turf/simulated/floor/proc/adjust_snow(amt)
-	if (snow_layers <= NEVER_HAS_SNOW)
+	if (snow_layers <= NEVER_HAS_SNOW || amt == 0)
 		return
 	snow_layers = max(SNOW_NONE, snow_layers + amt)
-	update_icon(TRUE)
+	refresh_snow()
 
 /// Sets the number of snow layers on this turf to be equal to `amt`.
 /turf/simulated/floor/proc/set_snow(amt)
-	if (snow_layers <= NEVER_HAS_SNOW)
+	if (snow_layers <= NEVER_HAS_SNOW || snow_layers == amt)
 		return
 	snow_layers = max(SNOW_NONE, amt)
-	update_icon(TRUE)
+	refresh_snow()
 
 /// Checks whether or not this turf has snow layers equal to `amt`.
 /// `amt` defaults to `SNOW_LIGHT`, meaning that running the proc with no arguments
 /// will check if the turf has any snow at all.
 /turf/simulated/floor/proc/has_snow(amt = SNOW_LIGHT)
 	return snow_layers >= amt
+
+/turf/simulated/floor/proc/refresh_snow()
+	if (has_snow())
+		edge_blending_priority = 6
+	else
+		edge_blending_priority = initial(edge_blending_priority)
+	refresh_footstep_sounds()
+	update_icon(TRUE)
+
+/turf/simulated/floor/proc/refresh_footstep_sounds()
+	if (has_snow())
+		var/decl/flooring/snow = GET_DECL(/decl/flooring/snow)
+		footstep_sounds = snow?.footstep_sounds
+	else if (flooring)
+		footstep_sounds = flooring.footstep_sounds
+	else
+		footstep_sounds = base_footstep_sounds
 
 /turf/simulated/floor/proc/swap_decals()
 	var/current_decals = decals
@@ -107,7 +125,7 @@
 	if(is_plating() && !initializing) // Plating -> Flooring
 		swap_decals()
 	flooring = newflooring
-	footstep_sounds = newflooring.footstep_sounds
+	refresh_footstep_sounds()
 	if(!initializing)
 		update_icon(1)
 	levelupdate()

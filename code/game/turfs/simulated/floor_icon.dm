@@ -20,19 +20,12 @@ var/global/image/no_ceiling_image = null
 	// Snowify before anything - if we're covered in snow layers, then use data for the snow turf and adjust edge blending
 	// This is pretty damn snowflakey (pun not intended) but it should suffice unless further generalization is desired that turf layers can't handle,
 	// like the ground being covered in something other than snow (sand, dust, etc)
-	var/decl/flooring/effective_flooring = has_snow() ? get_flooring_data(/decl/flooring/snow) : flooring
-	edge_blending_priority = has_snow() ? 6 : initial(edge_blending_priority)
+	var/decl/flooring/effective_flooring = has_snow() ? GET_DECL(/decl/flooring/snow) : flooring
 	if(effective_flooring)
 		// Set initial icon and strings.
 		name = effective_flooring.name
 		desc = effective_flooring.desc
 		icon = effective_flooring.icon
-
-		// this should definitely not go with the icons!
-		// however, there's no better place to put it!
-		// the only place footstep_sounds are changed in realtime is in set_flooring(),
-		// which we specifically want to avoid here because snow shouldn't overwrite the turf - just cover it up.
-		footstep_sounds = effective_flooring.footstep_sounds
 
 		if(flooring_override && !has_snow())
 			icon_state = flooring_override

@@ -27,29 +27,30 @@
 	. = ..()
 
 /turf/simulated/floor/outdoors/attackby(obj/item/C, mob/user)
-	if (!has_snow()) // If we have snow, fall back to the base attackby() that has snow clearing logic
-		if(can_dig && istype(C, /obj/item/shovel))
-			to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
-			var/delay = (3 SECONDS * C.toolspeed)
-			user.setClickCooldown(delay)
-			if(do_after(user, delay, src))
-				if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in contents))
-					var/obj/machinery/portable_atmospherics/hydroponics/soil/soil = new(src)
-					user.visible_message(SPAN_NOTICE("\The [user] digs \a [soil] into \the [src]."))
+	if (has_snow())
+		return ..()
+	if(can_dig && istype(C, /obj/item/shovel))
+		to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
+		var/delay = (3 SECONDS * C.toolspeed)
+		user.setClickCooldown(delay)
+		if(do_after(user, delay, src))
+			if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in contents))
+				var/obj/machinery/portable_atmospherics/hydroponics/soil/soil = new(src)
+				user.visible_message(SPAN_NOTICE("\The [user] digs \a [soil] into \the [src]."))
+			else
+				var/loot_type = get_loot_type()
+				if(loot_type)
+					loot_count--
+					var/obj/item/loot = new loot_type(src)
+					to_chat(user, SPAN_NOTICE("You dug up \a [loot]!"))
 				else
-					var/loot_type = get_loot_type()
-					if(loot_type)
-						loot_count--
-						var/obj/item/loot = new loot_type(src)
-						to_chat(user, SPAN_NOTICE("You dug up \a [loot]!"))
-					else
-						to_chat(user, SPAN_NOTICE("You didn't find anything of note in \the [src]."))
-			return TRUE
+					to_chat(user, SPAN_NOTICE("You didn't find anything of note in \the [src]."))
+		return TRUE
 
-		if(istype(C, /obj/item/stack/tile/floor))
-			var/obj/item/stack/stack = C
-			stack.use(1)
-			ChangeTurf(/turf/simulated/floor, preserve_outdoors = TRUE)
-			return TRUE
+	if(istype(C, /obj/item/stack/tile/floor))
+		var/obj/item/stack/stack = C
+		stack.use(1)
+		ChangeTurf(/turf/simulated/floor, preserve_outdoors = TRUE)
+		return TRUE
 
 	. = ..()

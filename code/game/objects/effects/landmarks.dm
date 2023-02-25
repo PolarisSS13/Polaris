@@ -273,7 +273,7 @@
 
 /obj/effect/landmark/snowy_turf
 	name = "snowy turf"
-	desc = "This landmark will cause the turf it's on to become covered in snow during load."
+	desc = "This landmark will cause the turf it's on to become covered in snow during Initialize()."
 	icon = 'icons/turf/outdoors.dmi'
 	icon_state = "snow"
 	alpha = 25
