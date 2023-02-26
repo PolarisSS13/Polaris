@@ -1061,5 +1061,5 @@
 			prob(5);/obj/item/flame/lighter/zippo/moff,
 			prob(5);/obj/item/flame/lighter/zippo/rainbow,
 			prob(5);/obj/item/flame/lighter/zippo/red,
-			prob(5);/obj/item/flame/lighter/zippo/royal,
+			prob(5);/obj/item/flame/lighter/zippo/royal
 			)
