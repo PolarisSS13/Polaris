@@ -44,7 +44,9 @@
 		/obj/item/clothing/shoes/boots/winter/medical,
 		/obj/item/clothing/under/rank/nursesuit,
 		/obj/item/clothing/head/nursehat,
-		/obj/item/storage/box/freezer = 3)
+		/obj/item/storage/box/freezer = 3,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/medical
+	)
 
 /obj/structure/closet/secure_closet/medical3/Initialize()
 	if(prob(50))
@@ -121,8 +123,9 @@
 		/obj/item/clothing/accessory/storage/white_vest,
 		/obj/item/taperoll/medical,
 		/obj/item/gps/medical,
-		/obj/item/geiger
-		)
+		/obj/item/geiger,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/medical
+	)
 
 /obj/structure/closet/secure_closet/CMO
 	name = "chief medical officer's locker"
@@ -150,7 +153,9 @@
 		/obj/item/clothing/suit/bio_suit/cmo,
 		/obj/item/clothing/head/bio_hood/cmo,
 		/obj/item/clothing/shoes/white,
-		/obj/item/gps/medical/cmo)
+		/obj/item/gps/medical/cmo,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/cmo
+	)
 
 /obj/structure/closet/secure_closet/CMO/Initialize()
 	if(prob(50))
@@ -224,7 +229,9 @@
 		/obj/item/taperecorder,
 		/obj/item/cassette_tape/random = 3,
 		/obj/item/camera,
-		/obj/item/toy/plushie/therapy/blue)
+		/obj/item/toy/plushie/therapy/blue,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/medical
+	)
 
 
 /obj/structure/closet/secure_closet/medical_wall
@@ -246,7 +253,8 @@
 		/obj/item/storage/pill_bottle/tramadol,
 		/obj/item/storage/pill_bottle/antitox,
 		/obj/item/storage/pill_bottle/carbon,
-		/obj/random/medical/pillbottle)
+		/obj/random/medical/pillbottle
+	)
 
 
 /obj/structure/closet/secure_closet/medical_wall/anesthetics
@@ -256,4 +264,5 @@
 
 	starts_with = list(
 		/obj/item/tank/anesthetic = 3,
-		/obj/item/clothing/mask/breath/medical = 3)
+		/obj/item/clothing/mask/breath/medical = 3
+	)

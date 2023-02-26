@@ -9,7 +9,7 @@
 		/obj/item/reagent_containers/food/condiment/carton/flour/rustic = 1,
 		/obj/item/reagent_containers/food/condiment/carton/sugar/rustic = 1,
 		/obj/item/reagent_containers/food/condiment/spacespice = 2
-		)
+	)
 
 /obj/structure/closet/secure_closet/freezer/kitchen/mining
 	req_access = list()
@@ -22,7 +22,8 @@
 	door_anim_time = 0 //Unsupported
 
 	starts_with = list(
-		/obj/item/reagent_containers/food/snacks/meat/monkey = 10)
+		/obj/item/reagent_containers/food/snacks/meat/monkey = 10
+	)
 
 
 /obj/structure/closet/secure_closet/freezer/fridge
@@ -35,7 +36,8 @@
 		/obj/item/reagent_containers/food/drinks/milk = 6,
 		/obj/item/reagent_containers/food/drinks/soymilk = 4,
 		/obj/item/storage/fancy/egg_box = 4,
-		/obj/item/reagent_containers/hypospray/autoinjector/biginjector/glucose = 2)
+		/obj/item/reagent_containers/hypospray/autoinjector/biginjector/glucose = 2
+	)
 
 
 /obj/structure/closet/secure_closet/freezer/money
@@ -45,8 +47,8 @@
 	req_access = list(access_heads_vault)
 	door_anim_time = 0 //Unsupported
 
-
 	starts_with = list(
 		/obj/item/spacecash/c1000 = 3,
 		/obj/item/spacecash/c500 = 4,
-		/obj/item/spacecash/c200 = 5)
+		/obj/item/spacecash/c200 = 5
+	)

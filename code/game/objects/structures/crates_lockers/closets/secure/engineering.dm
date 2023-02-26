@@ -31,7 +31,9 @@
 		/obj/item/taperoll/engineering,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
 		/obj/item/clothing/shoes/boots/winter/engineering,
-		/obj/item/tank/emergency/oxygen/engi)
+		/obj/item/tank/emergency/oxygen/engi,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/ce
+	)
 
 /obj/structure/closet/secure_closet/engineering_chief/Initialize()
 	if(prob(50))
@@ -51,7 +53,8 @@
 		/obj/item/clothing/gloves/yellow = 2,
 		/obj/item/storage/toolbox/electrical = 3,
 		/obj/item/module/power_control = 3,
-		/obj/item/multitool = 3)
+		/obj/item/multitool = 3
+	)
 
 
 /obj/structure/closet/secure_closet/engineering_welding
@@ -63,7 +66,8 @@
 		/obj/item/clothing/head/welding = 3,
 		/obj/item/weldingtool/largetank = 3,
 		/obj/item/weldpack = 3,
-		/obj/item/clothing/glasses/welding = 3)
+		/obj/item/clothing/glasses/welding = 3
+	)
 
 /obj/structure/closet/secure_closet/engineering_personal
 	name = "engineer's locker"
@@ -85,7 +89,8 @@
 		/obj/item/clothing/head/hardhat,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/engineering,
 		/obj/item/clothing/shoes/boots/winter/engineering,
-		/obj/item/tank/emergency/oxygen/engi)
+		/obj/item/tank/emergency/oxygen/engi
+	)
 
 /obj/structure/closet/secure_closet/engineering_personal/Initialize()
 	if(prob(50))
@@ -117,7 +122,9 @@
 		/obj/item/taperoll/atmos,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/engineering/atmos,
 		/obj/item/clothing/shoes/boots/winter/atmos,
-		/obj/item/tank/emergency/oxygen/engi)
+		/obj/item/tank/emergency/oxygen/engi,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/atmos
+	)
 
 /obj/structure/closet/secure_closet/atmos_personal/Initialize()
 	if(prob(50))

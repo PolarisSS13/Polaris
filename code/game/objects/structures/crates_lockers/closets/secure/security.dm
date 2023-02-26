@@ -14,7 +14,9 @@
 		/obj/item/gun/energy/gun,
 		/obj/item/melee/telebaton,
 		/obj/item/flash,
-		/obj/item/storage/box/ids)
+		/obj/item/storage/box/ids,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/captain
+	)
 
 
 /obj/structure/closet/secure_closet/hop
@@ -31,7 +33,8 @@
 		/obj/item/storage/box/ids = 2,
 		/obj/item/gun/energy/gun,
 		/obj/item/gun/projectile/sec/flash,
-		/obj/item/flash)
+		/obj/item/flash
+	)
 
 /obj/structure/closet/secure_closet/hop2
 	name = "head of personnel's attire"
@@ -58,7 +61,9 @@
 		/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 		/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit/skirt,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/hop,
-		/obj/item/clothing/glasses/sunglasses)
+		/obj/item/clothing/glasses/sunglasses,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/hop
+	)
 
 
 /obj/structure/closet/secure_closet/hos
@@ -102,7 +107,9 @@
 		/obj/item/clothing/shoes/boots/winter/security,
 		/obj/item/flashlight/maglight,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/clothing/mask/gas/sechailer/swat/hos)
+		/obj/item/clothing/mask/gas/sechailer/swat/hos,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/hos
+	)
 
 /obj/structure/closet/secure_closet/hos/Initialize()
 	if(prob(50))
@@ -148,7 +155,8 @@
 		/obj/item/flashlight/maglight,
 		/obj/item/megaphone,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/clothing/mask/gas/sechailer/swat/warden)
+		/obj/item/clothing/mask/gas/sechailer/swat/warden,
+	)
 
 /obj/structure/closet/secure_closet/warden/Initialize()
 	if(prob(50))
@@ -187,7 +195,8 @@
 		/obj/item/cell/device/weapon,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/security,
 		/obj/item/clothing/shoes/boots/winter/security,
-		/obj/item/flashlight/maglight)
+		/obj/item/flashlight/maglight
+	)
 
 /obj/structure/closet/secure_closet/security/Initialize()
 	if(prob(50))
@@ -246,7 +255,8 @@
 		/obj/item/storage/briefcase/crimekit,
 		/obj/item/taperecorder,
 		/obj/item/storage/bag/detective,
-		/obj/item/cassette_tape/random = 3)
+		/obj/item/cassette_tape/random = 3
+	)
 
 /obj/structure/closet/secure_closet/injection
 	name = "lethal injections locker"
@@ -254,7 +264,8 @@
 	closet_appearance = /decl/closet_appearance/secure_closet/courtroom
 
 	starts_with = list(
-		/obj/item/reagent_containers/syringe/ld50_syringe/choral = 2)
+		/obj/item/reagent_containers/syringe/ld50_syringe/choral = 2
+	)
 
 GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/brig)
 
@@ -267,7 +278,8 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 
 	starts_with = list(
 		/obj/item/clothing/under/color/prison,
-		/obj/item/clothing/shoes/orange)
+		/obj/item/clothing/shoes/orange
+	)
 
 /obj/structure/closet/secure_closet/posters
 	name = "morale storage"
@@ -279,7 +291,8 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/poster/nanotrasen,
 		/obj/item/poster/nanotrasen,
 		/obj/item/poster/nanotrasen,
-		/obj/item/poster/nanotrasen)
+		/obj/item/poster/nanotrasen
+	)
 
 /obj/structure/closet/secure_closet/courtroom
 	name = "courtroom locker"
@@ -292,7 +305,8 @@ GLOBAL_LIST_BOILERPLATE(all_brig_closets, /obj/structure/closet/secure_closet/br
 		/obj/item/pen,
 		/obj/item/clothing/suit/costume/judgerobe,
 		/obj/item/clothing/head/powdered_wig,
-		/obj/item/storage/briefcase)
+		/obj/item/storage/briefcase
+	)
 
 
 /obj/structure/closet/secure_closet/wall

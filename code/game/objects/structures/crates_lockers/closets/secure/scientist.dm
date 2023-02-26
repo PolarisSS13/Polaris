@@ -11,7 +11,8 @@
 		/obj/item/tank/air,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
-		/obj/item/clothing/shoes/boots/winter/science)
+		/obj/item/clothing/shoes/boots/winter/science
+	)
 
 /obj/structure/closet/secure_closet/scientist/Initialize()
 	if(prob(50))
@@ -45,7 +46,9 @@
 		/obj/item/flash,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science/rd,
-		/obj/item/clothing/shoes/boots/winter/science)
+		/obj/item/clothing/shoes/boots/winter/science,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/rd
+	)
 
 /obj/structure/closet/secure_closet/xenoarchaeologist
 	name = "Xenoarchaeologist Locker"
@@ -60,7 +63,8 @@
 		/obj/item/clothing/glasses/science,
 		/obj/item/radio/headset/headset_sci,
 		/obj/item/storage/belt/archaeology,
-		/obj/item/storage/excavation)
+		/obj/item/storage/excavation
+	)
 
 /obj/structure/closet/excavation
 	name = "Excavation tools"
@@ -81,4 +85,5 @@
 		/obj/item/measuring_tape,
 		/obj/item/pickaxe/hand,
 		/obj/item/storage/bag/fossils,
-		/obj/item/hand_labeler)
+		/obj/item/hand_labeler
+	)

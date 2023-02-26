@@ -12,7 +12,9 @@
 		/obj/item/radio/headset/headset_cargo/alt,
 		/obj/item/clothing/gloves/duty,
 		/obj/item/clothing/gloves/fingerless,
-		/obj/item/clothing/head/soft)
+		/obj/item/clothing/head/soft,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/cargo
+	)
 
 /obj/structure/closet/secure_closet/cargotech/Initialize()
 	if(prob(75))
@@ -42,7 +44,9 @@
 		/obj/item/clothing/head/soft,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/cargo/qm,
-		/obj/item/clothing/shoes/boots/winter/supply)
+		/obj/item/clothing/shoes/boots/winter/supply,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/cargo
+	)
 
 /obj/structure/closet/secure_closet/quartermaster/Initialize()
 	if(prob(75))
@@ -72,7 +76,9 @@
 		/obj/item/clothing/glasses/material,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/miner,
 		/obj/item/clothing/shoes/boots/winter/mining,
-		/obj/item/stack/marker_beacon/thirty)
+		/obj/item/stack/marker_beacon/thirty,
+		/obj/item/clothing/accessory/storage/poncho/roles/cloak/mining
+	)
 
 /obj/structure/closet/secure_closet/miner/Initialize()
 	if(prob(50))
