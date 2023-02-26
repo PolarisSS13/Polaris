@@ -196,7 +196,7 @@
 	//sanity checking
 	if(!possible_mission_types) //an org was given a system that contains no missions they run. let's fail gracefully about it
 		current_ship = "vessel [pick("SOL", "VIR", "STC", "ACE")]-575-[rand(0,999999)]" //unnamed ship
-		return "[current ship], traveling to local registrar" //instantly identifiable as an error but still immersive
+		return "[current_ship], traveling to local registrar" //instantly identifiable as an error but still immersive
 
 	//select a mission we can run
 	var/datum/lore/mission/selected_mission
