@@ -23,6 +23,8 @@ var/global/list/joblist = list()					//list of all jobstypes, minus borg and AI
 #define all_genders_define_list list(MALE,FEMALE,PLURAL,NEUTER)
 #define all_genders_text_list list("Male","Female","Plural","Neuter")
 
+var/global/list/mannequins_
+
 // Times that players are allowed to respawn ("ckey" = world.time)
 GLOBAL_LIST_EMPTY(respawn_timers)
 
@@ -102,13 +104,13 @@ var/global/list/string_slot_flags = list(
 	"holster" = SLOT_HOLSTER
 )
 
-GLOBAL_LIST_EMPTY(mannequins)
-/proc/get_mannequin(var/ckey = "NULL")
-	var/mob/living/carbon/human/dummy/mannequin/M = GLOB.mannequins[ckey]
-	if(!istype(M))
-		GLOB.mannequins[ckey] = new /mob/living/carbon/human/dummy/mannequin(null)
-		M = GLOB.mannequins[ckey]
-	return M
+/proc/get_mannequin(var/ckey)
+	if(!mannequins_)
+		mannequins_ = new()
+ 	. = mannequins_[ckey]
+	if(!.)
+		. = new/mob/living/carbon/human/dummy/mannequin()
+		mannequins_[ckey] = .
 
 //////////////////////////
 /////Initial Building/////
