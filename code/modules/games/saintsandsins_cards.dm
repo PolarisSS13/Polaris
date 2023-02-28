@@ -61,20 +61,17 @@
 	var/list/spell_weights = build_card_weights_list(pack_type, /decl/sas_card/spell)
 	var/datum/playingcard/saintsandsins/P
 	var/i
-	var/decl/sas_card/cardpicker
-	var/card_front
+	var/decl/sas_card/picked_card
 	for(i=0, i<how_many_cards, i++)
-		if(i == 0) // Just pick one.
-			cardpicker = pickweight(heretic_weights)
-			card_front = "saintsandsins_heretic"
-		else
-			cardpicker = pickweight(spell_weights)
-			card_front = "saintsandsins_spell"
-		cardpicker = decls_repository.get_decl(cardpicker)
 		P = new()
-		P.name = cardpicker
-		P.desc = cardpicker
-		P.card_icon = card_front
+		if(i == 0) // Just pick one Heretic.
+			picked_card = pickweight(heretic_weights)
+			P.card_icon = "saintsandsins_heretic"
+		else
+			picked_card = pickweight(spell_weights)
+			P.card_icon = "saintsandsins_spell"
+		P.name = picked_card.name
+		P.desc = picked_card.desc
 		P.back_icon = "card_back_saintsandsins"
 		cards += P
 
@@ -93,9 +90,11 @@
 
 /obj/item/pack/saintsandsins/proc/build_card_weights_list(pack_type, root_type)
 	. = list()
-	for (var/decl/sas_card/C in decls_repository.get_decls_of_subtype(root_type))
-		if (pack_type in C.pack_probability)
-			.[C.type] = C.pack_probability[pack_type] || 1
+	var/list/card_types = decls_repository.get_decls_of_subtype(root_type)
+	for(var/card_type in card_types)
+		var/decl/sas_card/C = card_types[card_type]
+		if(pack_type in C.pack_probability)
+			.[C] = C.pack_probability[pack_type] || 1
 
 /*
 // Builder pack cards can appear in other packs to fluff them up. Pack-specific are less likely to do so.
@@ -145,7 +144,7 @@
 /decl/sas_card/heretic/woebringer_colette
 	name = "Woebringer Colette"
 	health = 21
-	desc = "ACTIVE: Deal 2 damage of any damage type while taking 2 damage of the same type."
+	ability = "ACTIVE: Deal 2 damage of any damage type while taking 2 damage of the same type."
 	pack_probability = list(
 		CARDPACK_BASICWITCH = 8
 	)
@@ -153,7 +152,7 @@
 /decl/sas_card/heretic/orpheus_the_blind
 	name = "Orpheus the Blind"
 	health = 18
-	desc = "PASSIVE: When below half health, take half damage per spell, rounded up."
+	ability = "PASSIVE: When below half health, take half damage per spell, rounded up."
 	pack_probability = list(
 		CARDPACK_BASICWITCH = 4
 	)
