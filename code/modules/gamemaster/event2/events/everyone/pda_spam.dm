@@ -80,16 +80,18 @@
 	var/message = null
 	switch(rand(1, 8))
 		if(1)
-			sender = pick("MaxBet","MaxBet Online Casino","There is no better time to register","I'm excited for you to join us")
+			sender = pick("MaxBet","MaxBet Online Casino","There is no better time to register","I'm excited for you to join us","Join millions of lucky players...")
 			message = pick("Triple deposits are waiting for you at MaxBet Online when you register to play with us.",\
 			"You can qualify for a 200% Welcome Bonus at MaxBet Online when you sign up today.",\
 			"Once you are a player with MaxBet, you will also receive lucrative weekly and monthly promotions.",\
+			"Life-changing winnings* await when you register with MaxBet today.",\
 			"You will be able to enjoy over 450 top-flight casino games at MaxBet.")
 		if(2)
 			sender = pick(300;"QuickDatingSystem",200;"Find your almachi bride",50;"Tajaran beauties are waiting",50;"Find your secret skrell crush",50;"Beautiful unathi brides")
 			message = pick("Your profile caught my attention and I wanted to write and say hello (QuickDating).",\
 			"If you will write to me on my email [pick(pick(first_names_female),(pick(first_names_male)))]@[pick(last_names)].[pick(".xo.vr","ck","tj","ur","gov","nt","xo.sh")] I shall necessarily send you a photo (QuickDating).",\
 			"I want that we write each other and I hope, that you will like my profile and you will answer me (QuickDating).",\
+			"Meet local [pick("boys", "girls", "singles", "drones")] in [pick("Vir", "Sif", "Londunseyja", "Low Sif Orbit", "[using_map.station_name]")]",\
 			"You have (1) new message!",\
 			"You have (2) new profile views!")
 		if(3)
@@ -100,7 +102,7 @@
 			"Your package is being held at [using_map.starsys_name] customs until payment of fee at (this page)",
 			"You have a pending transactions ,log in is required for verifcation!",\
 			" 100K NT.|EUNOIACOIN �nly Th89            <HOT>",\
-			"You have won a FREE [pick("Cyber Solutions household drone", "Xion power drill", "Oasis Vacation", "Bishop Rook fitting session", "ThinkTronic PDA upgrade", "Ward-Takahashi communicator", "Charlemagne von Rheinland personal voidcraft", "lifetime supply of Cheesie Honkers", "RayZar personal energy weapon", "Kaleidoscope Cosmetics gene-therapy consultation")]",\
+			"You have won a FREE [pick("Cyber Solutions household drone", "Xion power drill", "Oasis Vacation", "Bishop Rook fitting session", "ThinkTronic PDA upgrade", "Ward-Takahashi communicator", "Charlemagne von Rheinland personal voidcraft", "lifetime supply of Cheesie Honkers", "RayZar personal energy weapon", "Kaleidoscope Cosmetics gene-therapy consultation")]!",\
 			"We have been filed with a complaint from one of your customers in respect of their business relations with you.",\
 			"We kindly ask you to open the COMPLAINT REPORT (attached) to reply on this complaint..")
 		if(4)
@@ -108,7 +110,7 @@
 			message = pick("DR MAXMAN: REAL Doctors, REAL Science, REAL Results!",\
 			"Dr. Maxman was created by George Acuilar, M.D, a [using_map.boss_short] Certified Urologist who has treated over 70,000 patients region wide with '[pick("male","female", "other")] problems'.",\
 			"After seven years of research, Dr Acuilar and his team came up with this simple breakthrough [pick("male","female", "other")] enhancement formula.",\
-			"Men of all species report AMAZING increases in length, width and stamina.")
+			"[pick("Men", "Women", "USR_GENDER")] of all species report AMAZING increases in length, width and stamina.")
 		if(5)
 			sender = pick("Dr","Crown prince","King Regent","Professor", "Princess", "God King", "Captain")
 			sender += " " + pick("Charat","Baqari","Saama","Rarakhan","Jiria","Zhabir")
