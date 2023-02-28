@@ -113,7 +113,7 @@
 			sender = pick("Dr","Crown prince","King Regent","Professor", "Princess", "God King", "Captain")
 			sender += " " + pick("Charat","Baqari","Saama","Rarakhan","Jiria","Zhabir")
 			sender += " " + pick("Jivare","Nekhem","Gra'rit","Hakheet","Rrhazmir","Mirruhk","Sanudrra")
-			message = pick("YOUR FUND HAS BEEN MOVED TO [pick("Antananarivo","Rarkajar","Selem","Rakari","Andromeda","Terminus","Sidhe","Corona","Smith","Relan","Atlantis")] DEVELOPMENTARY BANK FOR ONWARD REMITTANCE.",\
+			message = pick("YOUR FUND HAS BEEN MOVED TO [uppertext(pick("Antananarivo","Rarkajar","Selem","Rakari","Andromeda","Terminus","Sidhe","Corona","Smith","Relan","Atlantis"))] DEVELOPMENTARY BANK FOR ONWARD REMITTANCE.",\
 			"We are happy to inform you that due to the delay, we have been instructed to IMMEDIATELY deposit all funds into your account",\
 			"Dear fund beneficiary, We have please to inform you that overdue funds payment has finally been approved and released for payment",\
 			"Due to my lack of agents I require an off-world financial account to immediately deposit the sum of 1 POINT FIVE MILLION thalers.",\
