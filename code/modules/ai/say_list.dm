@@ -71,9 +71,23 @@
 	say_threaten = list("Get out of here!", "Hey! Private Property!")
 	say_stand_down = list("Good.")
 	say_escalate = list("Your funeral!", "Bring it!")
-	
+
 	threaten_sound = 'sound/weapons/TargetOn.ogg'
 	stand_down_sound = 'sound/weapons/TargetOff.ogg'
+
+
+/datum/say_list/android_scientist
+	speak = list("A few more tests and we can get out of this hellhole!",
+				"I don't see why we need to wear these ridiculous outfits.",
+				"Did you hear something?")
+	emote_see = list("sniffs", "coughs", "taps his foot", "looks around", "fiddles with his labcoat")
+	say_understood = list("You've got it!", "Sure thing!")
+	say_cannot = list("Nuh uh!", "No way!")
+	say_maybe_target = list("Did you see that?", "Is anyone there?", "Who's there?")
+	say_got_target = list("Alright, come get some!", "Have some of this!", "Don't you mess with us!")
+	say_threaten = list("Hey! Who're you?", "Stop, I'm with the science team!")
+	say_stand_down = list("Okay, cool!")
+	say_escalate = list("Wait a second, you're not with us!", "Oh, hell!")
 
 /datum/say_list/malf_drone
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
