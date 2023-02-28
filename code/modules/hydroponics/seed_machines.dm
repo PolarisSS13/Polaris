@@ -76,7 +76,7 @@
 		eject_disk = 0
 		if(loaded_disk)
 			loaded_disk.loc = get_turf(src)
-			visible_message("[bicon(src)] [src] beeps and spits out [loaded_disk].</span>")
+			visible_message("<span class='filter_notice'>[bicon(src)] [src] beeps and spits out [loaded_disk].</span>")
 			loaded_disk = null
 
 /obj/machinery/botany/attackby(obj/item/W as obj, mob/user as mob)

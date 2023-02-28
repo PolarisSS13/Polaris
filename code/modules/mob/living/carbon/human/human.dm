@@ -505,14 +505,14 @@
 						if (R.fields["id"] == E.fields["id"])
 							if(hasHUD(usr,"medical"))
 								var/list/medical_hud_text = list()
-								medical_hud_text += "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]")
-								medical_hud_text += "<b>DNA:</b> [R.fields["b_dna"]]")
-								medical_hud_text += "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]")
-								medical_hud_text += "<b>Details:</b> [R.fields["mi_dis_d"]]")
-								medical_hud_text += "<b>Major Disabilities:</b> [R.fields["ma_dis"]]")
-								medical_hud_text += "<b>Details:</b> [R.fields["ma_dis_d"]]")
-								medical_hud_text += "<b>Notes:</b> [R.fields["notes"]]")
-								medical_hud_text += "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>")
+								medical_hud_text += "<b>Name:</b> [R.fields["name"]]	<b>Blood Type:</b> [R.fields["b_type"]]"
+								medical_hud_text += "<b>DNA:</b> [R.fields["b_dna"]]"
+								medical_hud_text += "<b>Minor Disabilities:</b> [R.fields["mi_dis"]]"
+								medical_hud_text += "<b>Details:</b> [R.fields["mi_dis_d"]]"
+								medical_hud_text += "<b>Major Disabilities:</b> [R.fields["ma_dis"]]"
+								medical_hud_text += "<b>Details:</b> [R.fields["ma_dis_d"]]"
+								medical_hud_text += "<b>Notes:</b> [R.fields["notes"]]"
+								medical_hud_text += "<a href='?src=\ref[src];medrecordComment=`'>\[View Comment Log\]</a>"
 								to_chat(usr, "<span class='filter_notice'>[jointext(medical_hud_text, "<br>")]</span>")
 								read = 1
 

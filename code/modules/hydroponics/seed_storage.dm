@@ -514,7 +514,7 @@
 		if (loaded)
 			user.visible_message("<span class ='filter_notice'>[user] puts the seeds from \the [O.name] into \the [src].</span>", "<span class ='filter_notice'>You put the seeds from \the [O.name] into \the [src].</span>")
 		else
-			to_chat(user, "<span class ='filter_notice'><span class='notice'>There are no seeds in \the [O.name].</span>")
+			to_chat(user, "<span class='notice'>There are no seeds in \the [O.name].</span>")
 		return
 	else if(O.is_wrench())
 		playsound(src, O.usesound, 50, 1)
