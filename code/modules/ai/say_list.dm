@@ -31,6 +31,7 @@
 	var/list/say_threaten = list()		// When threatening someone.
 	var/list/say_stand_down = list()	// When the threatened thing goes away.
 	var/list/say_escalate = list()		// When the threatened thing doesn't go away.
+	var/list/say_retreat = list()
 
 	var/threaten_sound = null			// Sound file played when the mob's AI calls threaten_target() for the first time.
 	var/stand_down_sound = null			// Sound file played when the mob's AI loses sight of the threatened target.
@@ -54,6 +55,7 @@
 	say_threaten = list("You best leave, this booty is mine.", "No plank to walk on, just walk away.")
 	say_stand_down = list("Good.")
 	say_escalate = list("Yarr! The booty is mine!")
+	say_retreat = list("I be retreating, matey!")
 
 // Mercs!
 /datum/say_list/merc
@@ -71,23 +73,31 @@
 	say_threaten = list("Get out of here!", "Hey! Private Property!")
 	say_stand_down = list("Good.")
 	say_escalate = list("Your funeral!", "Bring it!")
+	say_retreat = list("Fuck! Pulling back!", "Shit!", "Oh, hell!")
 
 	threaten_sound = 'sound/weapons/TargetOn.ogg'
 	stand_down_sound = 'sound/weapons/TargetOff.ogg'
 
 
 /datum/say_list/android_scientist
-	speak = list("A few more tests and we can get out of this hellhole!",
-				"I don't see why we need to wear these ridiculous outfits.",
-				"Did you hear something?")
-	emote_see = list("sniffs", "coughs", "taps his foot", "looks around", "fiddles with his labcoat")
-	say_understood = list("You've got it!", "Sure thing!")
-	say_cannot = list("Nuh uh!", "No way!")
-	say_maybe_target = list("Did you see that?", "Is anyone there?", "Who's there?")
-	say_got_target = list("Alright, come get some!", "Have some of this!", "Don't you mess with us!")
-	say_threaten = list("Hey! Who're you?", "Stop, I'm with the science team!")
-	say_stand_down = list("Okay, cool!")
-	say_escalate = list("Wait a second, you're not with us!", "Oh, hell!")
+	speak = list(
+		"Resuming task: Collect data.",
+		"No anomalies found.",
+		"Error: No data sources found."
+		)
+	emote_hear = list("beeps quietly", "emits a soft buzz", "whirrs idly")
+	emote_see = list("scans the area", "focuses on an object", "shifts in place")
+	say_understood = list("Confirmed.", "Acknowledged.")
+	say_cannot = list("Declined.", "Refused.")
+	say_maybe_target = list("Unknown entity detected.  Investigating.", "Possible breach detected.", "Investigating.")
+	say_got_target = list("Threat detected.", "New task: Engage target.", "Data collection engaged.", "Engaging target.")
+	say_threaten = list("Warning: Do not interfere with data collection or face consequences.", "Warning to target: Will engage offensively.")
+	say_stand_down = list("Stand-down accepted. Disengaging.")
+	say_escalate = list("Warning expired. Engaging.", "Rectifying security breach.", "Warning expired.")
+	say_retreat = list("Disengaging.")
+
+	threaten_sound = 'sound/weapons/TargetOn.ogg'
+	stand_down_sound = 'sound/weapons/TargetOff.ogg'
 
 /datum/say_list/malf_drone
 	speak = list("ALERT.","Hostile-ile-ile entities dee-twhoooo-wected.","Threat parameterszzzz- szzet.","Bring sub-sub-sub-systems uuuup to combat alert alpha-a-a.")
@@ -128,6 +138,11 @@
 	say_cannot = list("Denied.", "Negative.")
 	say_maybe_target = list("Possible threat detected.  Investigating.", "Motion detected.", "Investigating.")
 	say_got_target = list("Threat detected.", "New task: Remove threat.", "Threat removal engaged.", "Engaging target.")
+	say_threaten = list("Warning: Vacate area.", "Warning to threat: Will engage lethally.")
+	say_stand_down = list("Stand-down accepted. Disengaging.")
+	say_escalate = list("Warning expired. Engaging.", "Threat removal engaged.")
+	say_retreat = list("Disengaging.")
+
 
 /datum/say_list/lizard
 	emote_hear = list("hisses")
