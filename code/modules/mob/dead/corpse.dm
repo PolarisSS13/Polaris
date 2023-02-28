@@ -131,15 +131,15 @@
 	name = "Android Drone"
 
 	var/list/brandList = list(
-		BP_L_ARM = "Unbranded",
-		BP_R_ARM = "Unbranded",
 		BP_L_HAND = "Unbranded",
-		BP_R_HAND = "Unbranded",
-		BP_L_LEG = "Unbranded",
-		BP_R_LEG = "Unbranded",
+		BP_R_HAND  = "Unbranded",
 		BP_L_FOOT = "Unbranded",
 		BP_R_FOOT = "Unbranded",
-		BP_HEAD = "Bishop",
+		BP_L_ARM = "Unbranded",
+		BP_R_ARM = "Unbranded",
+		BP_L_LEG = "Unbranded",
+		BP_R_LEG = "Unbranded",
+		BP_HEAD = "Unbranded",
 		BP_TORSO = "Unbranded",
 		BP_GROIN = "Unbranded"
 		)
@@ -160,7 +160,8 @@
 	for (var/limb in brandList)
 		var/obj/item/organ/external/E = M.get_organ(limb)
 		if(E)
-			E.robotize(brandList[limb], skip_prosthetics = TRUE)
+			E.robotize(brandList[limb])
+
 
 	/*for (var/obj/item/organ/external/i in M.organs)
 		world.log << i.organ_tag
@@ -223,17 +224,36 @@
 	corpseshoes = /obj/item/clothing/shoes/boots/duty
 
 	brandList = list(
-		BP_L_ARM = "Cyber Solutions - Wight",
-		BP_R_ARM =  "Cyber Solutions - Wight",
 		BP_L_HAND =  "Cyber Solutions - Wight",
 		BP_R_HAND = "Cyber Solutions - Wight",
-		BP_L_LEG =  "Cyber Solutions - Wight",
-		BP_R_LEG =  "Cyber Solutions - Wight",
 		BP_L_FOOT =  "Cyber Solutions - Wight",
 		BP_R_FOOT =  "Cyber Solutions - Wight",
+		BP_L_ARM = "Cyber Solutions - Wight",
+		BP_R_ARM =  "Cyber Solutions - Wight",
+		BP_L_LEG =  "Cyber Solutions - Wight",
+		BP_R_LEG =  "Cyber Solutions - Wight",
 		BP_HEAD = "Zeng-Hu",
 		BP_TORSO =  "Cyber Solutions - Wight",
 		BP_GROIN =  "Cyber Solutions - Wight"
+		)
+
+/obj/effect/landmark/mobcorpse/android/combat
+	name = "Combat Drone"
+	corpseuniform = /obj/item/clothing/under/utility/grey
+	corpsesuit = /obj/item/clothing/suit/armor/vest/alt
+	corpseshoes = /obj/item/clothing/shoes/boots/duty
+	brandList = list(
+		BP_L_HAND =  "Cyber Solutions",
+		BP_R_HAND = "Cyber Solutions",
+		BP_L_FOOT =  "Cyber Solutions - Outdated",
+		BP_R_FOOT =  "Cyber Solutions - Outdated",
+		BP_L_ARM = "Cyber Solutions",
+		BP_R_ARM =  "Cyber Solutions",
+		BP_L_LEG =  "Cyber Solutions - Outdated",
+		BP_R_LEG =  "Cyber Solutions - Outdated",
+		BP_HEAD = "Hephaestus - Athena",
+		BP_TORSO =  "Hephaestus - Athena",
+		BP_GROIN =  "Hephaestus - Athena"
 		)
 
 
