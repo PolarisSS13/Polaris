@@ -1189,6 +1189,7 @@
 #include "code\game\objects\random\mechs.dm"
 #include "code\game\objects\random\misc.dm"
 #include "code\game\objects\random\mob.dm"
+#include "code\game\objects\random\recreation.dm"
 #include "code\game\objects\random\spacesuits.dm"
 #include "code\game\objects\random\unidentified\medicine.dm"
 #include "code\game\objects\structures\animal_den.dm"
