@@ -34,10 +34,12 @@
 		/obj/item/clothing/accessory/permit/gun/planetside)
 
 /obj/structure/closet/secure_closet/guncabinet/tranq
-	name = "phase pistol cabinet" //"tranquilizer rifle cabinet"
+	name = "tranquilizer rifle cabinet"
 	req_one_access = list(access_xenofauna,access_medical)
 	starts_with = list(
-		/obj/item/gun/energy/phasegun/pistol = 2,
+		/obj/item/gun/energy/phasegun/tranq_rifle = 2,
+		/obj/item/gun/energy/phasegun/tranq_pistol,
+		/obj/item/gun/energy/phasegun/pistol,
 		/obj/item/cell/device/weapon = 2,
 		/obj/item/clothing/accessory/permit/gun/planetside
 	)

@@ -163,6 +163,11 @@
 	// Used for if the mob can drop limbs. Overrides the icon cache key, so it doesn't keep remaking the icon needlessly.
 	var/limb_icon_key
 
+	/// If above zero, decrement in Life(); on zero, put the mob to sleep for thirty seconds.
+	var/tranq_countdown = 0
+	/// A temporary storage value for the duration of any tranquilizer effect.
+	var/tranq_duration
+
 /mob/living/simple_mob/Initialize()
 	verbs -= /mob/verb/observe
 	health = maxHealth
@@ -288,3 +293,17 @@
 
 /decl/mob_organ_names
 	var/list/hit_zones = list("body") //When in doubt, it's probably got a body.
+
+/mob/living/simple_mob/handle_sleeping()
+	if(sleeping || stat != CONSCIOUS)
+		tranq_countdown = null
+		tranq_duration = null
+	else if(tranq_countdown > 0)
+		tranq_countdown--
+		if(tranq_countdown <= 0)
+			if(client)
+				to_chat(src, SPAN_DANGER("You fall asleep!"))
+			SetSleeping(max(1, round(tranq_duration / SSmobs.wait)))
+		else if(prob(5) && client)
+			to_chat(src, SPAN_WARNING("You feel [pick("dizzy", "woozy", "sleepy")]..."))
+	return ..()
