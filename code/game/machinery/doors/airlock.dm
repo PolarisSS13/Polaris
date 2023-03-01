@@ -1057,17 +1057,20 @@ About the new airlock wires panel:
 			return
 		else
 			return
-	else if(C.is_screwdriver())
+	else if(C.is_screwdriver()) //we don't want screwdrivers to toggle the door, so...
 		if (src.p_open)
 			if (stat & BROKEN)
 				to_chat(usr, "<span class='warning'>The panel is broken and cannot be closed.</span>")
-			else
+			else //close the panel, do the sound, update the icon, but don't toggle the door
 				src.p_open = 0
 				playsound(src, C.usesound, 50, 1)
-		else
+				src.update_icon()
+				return
+		else //open the panel, do the sound, update the icon, open the wires menu but don't toggle the door
 			src.p_open = 1
 			playsound(src, C.usesound, 50, 1)
-		src.update_icon()
+			src.update_icon()
+			return src.attack_hand(user)
 	else if(C.is_wirecutter())
 		return src.attack_hand(user)
 	else if(istype(C, /obj/item/multitool))
