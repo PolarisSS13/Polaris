@@ -89,7 +89,7 @@
 		if(2)
 			sender = pick(300;"QuickDatingSystem",200;"Find your almachi bride",50;"Tajaran beauties are waiting",50;"Find your secret skrell crush",50;"Beautiful unathi brides")
 			message = pick("Your profile caught my attention and I wanted to write and say hello (QuickDating).",\
-			"If you will write to me on my email [pick(pick(first_names_female),(pick(first_names_male)))]@[pick(last_names)].[pick(".xo.vr","ck","tj","ur","gov","nt","xo.sh")] I shall necessarily send you a photo (QuickDating).",\
+			"If you will write to me on my email [pick(pick(first_names_female),(pick(first_names_male)))]@[pick(last_names)].[pick("xo.vr","ck","tj","ur","gov","nt","xo.sh")] I shall necessarily send you a photo (QuickDating).",\
 			"I want that we write each other and I hope, that you will like my profile and you will answer me (QuickDating).",\
 			"Meet local [pick("boys", "girls", "singles", "drones")] in [pick("Vir", "Sif", "Londunseyja", "Low Sif Orbit", "[using_map.station_name]")]",\
 			"You have (1) new message!",\
@@ -102,7 +102,7 @@
 			"Your package is being held at [using_map.starsys_name] customs until payment of fee at (this page)",
 			"You have a pending transactions ,log in is required for verifcation!",\
 			" 100K NT.|EUNOIACOIN �nly Th89            <HOT>",\
-			"You have won a FREE [pick("Cyber Solutions household drone", "Xion power drill", "Oasis Vacation", "Bishop Rook fitting session", "ThinkTronic PDA upgrade", "Ward-Takahashi communicator", "Charlemagne von Rheinland personal voidcraft", "lifetime supply of Cheesie Honkers", "RayZar personal energy weapon", "Kaleidoscope Cosmetics gene-therapy consultation")]!",\
+			"You have won a FREE [pick("Cyber Solutions household drone", "Xion power drill", "Oasis Vacation", "Bishop Rook fitting session", "NanoThreads makeover experience", "home autofabrication system", "MBT interstellar cruise", "custom cybernetic household companion", "full-immersion VR system", "personal robot chef unit", "ThinkTronic PDA upgrade", "Ward-Takahashi communicator", "Nispean Safari Experience", "case of Lite-Speed beer", "Charlemagne von Rheinland personal voidcraft", "lifetime supply of Cheesie Honkers", "RayZar personal energy weapon", "Kaleidoscope Cosmetics gene-therapy consultation")]!",\
 			"We have been filed with a complaint from one of your customers in respect of their business relations with you.",\
 			"We kindly ask you to open the COMPLAINT REPORT (attached) to reply on this complaint..")
 		if(4)
