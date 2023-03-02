@@ -2014,7 +2014,6 @@
 #include "code\modules\hydroponics\seedtypes\eki.dm"
 #include "code\modules\hydroponics\seedtypes\flowers.dm"
 #include "code\modules\hydroponics\seedtypes\gelthi.dm"
-#include "code\modules\hydroponics\seedtypes\gnomes.dm"
 #include "code\modules\hydroponics\seedtypes\grapes.dm"
 #include "code\modules\hydroponics\seedtypes\grass.dm"
 #include "code\modules\hydroponics\seedtypes\guali.dm"
