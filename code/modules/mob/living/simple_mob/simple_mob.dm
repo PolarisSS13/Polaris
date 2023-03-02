@@ -247,9 +247,9 @@
 	if(m_intent == "walk")
 		. *= 1.5
 
-	 . += config.animal_delay
+	. += config.animal_delay
 
-	 . += ..()
+	. += ..()
 
 
 /mob/living/simple_mob/Stat()
