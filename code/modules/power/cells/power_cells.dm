@@ -137,7 +137,7 @@
 	desc += " This one has already been used."
 	cut_overlays()
 	target.adjust_nutrition(amount)
-	user.custom_emote(message = "connects \the [src] to [user == target ? "their" : "[target]'s"] charging port, expending it.")
+	user.custom_emote(VISIBLE_MESSAGE, "connects \the [src] to [user == target ? "their" : "[target]'s"] charging port, expending it.")
 
 /obj/item/cell/emergency_light
 	name = "miniature power cell"

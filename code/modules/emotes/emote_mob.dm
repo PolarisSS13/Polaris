@@ -97,7 +97,7 @@
 	message = html_decode(message)
 
 	name_anchor = findtext(message, "*")
-	if(name_anchor > 0) // User supplied emote with visible_emote token (default ^)
+	if(name_anchor > 0) // User supplied emote with visible_emote token
 		pretext = copytext(message, 1, name_anchor)
 		subtext = copytext(message, name_anchor + 1, length(message) + 1)
 	else
