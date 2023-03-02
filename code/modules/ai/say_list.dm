@@ -90,10 +90,10 @@
 	say_understood = list("Confirmed.", "Acknowledged.")
 	say_cannot = list("Declined.", "Refused.")
 	say_maybe_target = list("Unknown entity detected.  Investigating.", "Possible breach detected.", "Investigating.")
-	say_got_target = list("Threat detected.", "New task: Engage target.", "Data collection engaged.", "Engaging target.")
-	say_threaten = list("Warning: Do not interfere with data collection or face consequences.", "Warning to target: Will engage offensively.")
+	say_got_target = list("Threat detected.", "Defending facility.", "Engaging target.")
+	say_threaten = list("Unknown entity: Present authorization.", "Unknown entity. Scanning.")
 	say_stand_down = list("Stand-down accepted. Disengaging.")
-	say_escalate = list("Warning expired. Engaging.", "Rectifying security breach.", "Warning expired.")
+	say_escalate = list("Threat detected. Rectifying.", "Verification expired. Engaging.")
 	say_retreat = list("Disengaging.")
 
 	threaten_sound = 'sound/weapons/TargetOn.ogg'

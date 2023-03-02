@@ -1,83 +1,123 @@
-"a" = (/turf/simulated/floor/tiled,/area/submap/Research1)
-"c" = (/turf/simulated/wall,/area/submap/Research1)
-"d" = (/turf/template_noop,/area/template_noop)
-"e" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"f" = (/mob/living/simple_mob/humanoid/android/combat,/turf/simulated/floor/tiled,/area/submap/Research1)
-"g" = (/turf/template_noop,/area/submap/Research1)
-"h" = (/mob/living/carbon/human/monkey{faction = "drone"},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"i" = (/obj/structure/table/standard,/obj/item/cell/device/weapon/empty,/turf/simulated/floor/tiled,/area/submap/Research1)
-"j" = (/obj/structure/closet/medical_wall{pixel_y = 30},/turf/simulated/floor/tiled,/area/submap/Research1)
-"k" = (/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
-"l" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/table/woodentable,/turf/simulated/floor/tiled,/area/submap/Research1)
-"m" = (/mob/living/carbon/human/monkey{faction = "drone"},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"n" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/obj/structure/closet,/obj/item/clothing/suit/armor/vest/alt,/obj/item/clothing/head/helmet/pcrc,/obj/item/clothing/shoes/boots/duty,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
-"o" = (/obj/structure/table/rack,/obj/item/storage/box/flashbangs,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
-"p" = (/obj/structure/table/rack,/obj/machinery/door/window/holowindoor{dir = 8},/obj/random/multiple/gun/projectile/smg,/turf/simulated/floor/tiled,/area/submap/Research1)
-"q" = (/obj/machinery/recharge_station,/turf/simulated/floor/tiled,/area/submap/Research1)
-"r" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/submap/Research1)
-"s" = (/obj/structure/closet/l3closet/general,/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
-"t" = (/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
-"u" = (/obj/structure/sink{dir = 8},/turf/simulated/floor/tiled,/area/submap/Research1)
-"v" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/turf/simulated/floor,/area/submap/Research1)
-"w" = (/obj/structure/table/rack,/obj/random/projectile/scrapped_pistol,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
-"x" = (/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled,/area/submap/Research1)
-"y" = (/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/tiled,/area/submap/Research1)
-"z" = (/obj/machinery/dna_scannernew,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"A" = (/mob/living/simple_mob/humanoid/android/scientist,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
-"B" = (/obj/structure/toilet{dir = 4},/turf/simulated/floor/tiled,/area/submap/Research1)
-"C" = (/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"D" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Research1)
-"E" = (/obj/machinery/door/window/holowindoor{dir = 2},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"F" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled,/area/submap/Research1)
-"G" = (/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
-"H" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled,/area/submap/Research1)
-"I" = (/obj/structure/table/standard,/obj/item/storage/box/monkeycubes/farwacubes,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"K" = (/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
-"L" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled,/area/submap/Research1)
-"M" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled,/area/submap/Research1)
-"N" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/submap/Research1)
-"O" = (/obj/machinery/light{dir = 8; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/submap/Research1)
-"P" = (/obj/structure/table/rack,/obj/machinery/door/window/holowindoor{dir = 8},/obj/random/energy,/turf/simulated/floor/tiled,/area/submap/Research1)
-"Q" = (/mob/living/simple_mob/humanoid/android/scientist,/turf/simulated/floor/tiled,/area/submap/Research1)
-"R" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/table/woodentable,/obj/structure/table/woodentable,/turf/simulated/floor/tiled,/area/submap/Research1)
-"S" = (/obj/machinery/light/small{dir = 8; pixel_y = 0},/turf/simulated/floor/tiled,/area/submap/Research1)
-"T" = (/obj/structure/window/reinforced,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"U" = (/obj/structure/closet,/obj/item/clothing/suit/armor/vest/alt,/obj/item/clothing/head/helmet/pcrc,/obj/item/clothing/shoes/boots/duty,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
-"V" = (/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/window/holowindoor{dir = 8},/obj/random/handgun,/turf/simulated/floor/tiled,/area/submap/Research1)
-"W" = (/obj/structure/table/standard,/obj/random/grenade/lethal,/turf/simulated/floor/tiled,/area/submap/Research1)
-"X" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/submap/Research1)
-"Y" = (/mob/living/simple_mob/humanoid/android/scientist,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
-"Z" = (/obj/structure/table/standard,/obj/item/storage/box/monkeycubes,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"be" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/table/woodentable,/obj/item/pen{pixel_x = -8},/obj/item/paper{info = "[i]Can't believe they made me check in on this place. What a hellhole, none of the drones care for even the slightest spot of conversation. Oh well, at least the data they're sending back is still good.[/i]"},/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"bn" = (/turf/template_noop,/area/template_noop)
+"bp" = (/obj/structure/closet,/obj/item/clothing/suit/armor/vest/alt,/obj/item/clothing/shoes/boots/duty,/obj/item/clothing/gloves/swat,/obj/item/clothing/under/color/white,/obj/item/clothing/head/helmet,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
+"bv" = (/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
+"bE" = (/mob/living/simple_mob/humanoid/android/scientist,/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
+"bM" = (/obj/random/grenade/lethal,/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/submap/Research1)
+"bO" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/turf/simulated/floor,/area/submap/Research1)
+"dq" = (/obj/structure/table/standard,/obj/item/storage/toolbox/electrical,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"dY" = (/obj/machinery/computer/cloning,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"eg" = (/mob/living/carbon/human/monkey{faction = "drone"},/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"ei" = (/obj/structure/salvageable/server,/turf/simulated/floor/tiled/eris/dark,/area/submap/Research1)
+"ex" = (/obj/structure/table/steel_reinforced,/turf/simulated/floor/tiled,/area/submap/Research1)
+"eH" = (/obj/structure/table/rack,/obj/item/storage/box/flashbangs,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
+"fD" = (/obj/structure/table/rack,/obj/machinery/door/window/holowindoor{dir = 8},/obj/random/energy,/turf/simulated/floor/tiled,/area/submap/Research1)
+"fR" = (/turf/simulated/floor/tiled/eris/white,/area/submap/Research1)
+"fW" = (/obj/machinery/light,/turf/simulated/floor/tiled,/area/submap/Research1)
+"gG" = (/obj/structure/bed/chair/office/dark{dir = 4},/turf/simulated/floor/tiled,/area/submap/Research1)
+"hh" = (/obj/structure/salvageable/server,/turf/simulated/floor/tiled/techfloor,/area/submap/Research1)
+"ia" = (/obj/structure/sign/warning/server_room{pixel_y = -32},/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
+"im" = (/obj/machinery/light{dir = 4; icon_state = "tube1"; pixel_x = 0},/turf/simulated/floor/tiled,/area/submap/Research1)
+"iU" = (/obj/machinery/door/airlock,/turf/simulated/floor/tiled,/area/submap/Research1)
+"iZ" = (/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"jh" = (/obj/machinery/light,/obj/structure/table/steel_reinforced,/obj/structure/salvageable/personal,/turf/simulated/floor/tiled,/area/submap/Research1)
+"jK" = (/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"kR" = (/obj/structure/salvageable/data,/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/submap/Research1)
+"mq" = (/obj/structure/salvageable/bliss,/turf/simulated/floor/tiled/techfloor,/area/submap/Research1)
+"ok" = (/obj/structure/salvageable/machine,/turf/template_noop,/area/submap/Research1)
+"oJ" = (/obj/structure/closet/medical_wall{pixel_y = 30},/obj/item/stack/medical/bruise_pack,/obj/item/stack/medical/bruise_pack,/obj/item/stack/medical/ointment,/obj/item/stack/medical/ointment,/obj/item/reagent_containers/hypospray/autoinjector,/obj/random/medical/pillbottle,/obj/item/healthanalyzer,/turf/simulated/floor/tiled,/area/submap/Research1)
+"oV" = (/obj/structure/table/standard,/obj/item/storage/toolbox/mechanical,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"pE" = (/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
+"pN" = (/obj/structure/salvageable/console_os,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"qm" = (/obj/machinery/light{dir = 1},/turf/simulated/floor/tiled,/area/submap/Research1)
+"qy" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/submap/Research1)
+"rM" = (/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"sL" = (/obj/structure/sign/warning/server_room{pixel_x = 32},/turf/simulated/floor/tiled,/area/submap/Research1)
+"uS" = (/mob/living/simple_mob/humanoid/android/scientist,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"vd" = (/obj/structure/salvageable/data,/obj/structure/window/reinforced{dir = 4},/obj/machinery/door/window/holowindoor{dir = 2},/turf/simulated/floor/tiled,/area/submap/Research1)
+"wa" = (/obj/machinery/recharge_station,/turf/simulated/floor/tiled,/area/submap/Research1)
+"wM" = (/obj/structure/salvageable/autolathe,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"xf" = (/obj/structure/salvageable/data,/obj/machinery/door/window/holowindoor{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/submap/Research1)
+"xr" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/table/woodentable,/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"yA" = (/obj/structure/loot_pile/maint/junk,/turf/template_noop,/area/submap/Research1)
+"yL" = (/obj/structure/bed/chair/office/dark{dir = 8},/turf/simulated/floor/tiled,/area/submap/Research1)
+"zt" = (/obj/machinery/door/window/holowindoor{dir = 2},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"zI" = (/obj/structure/table/rack,/obj/structure/window/reinforced{dir = 1},/obj/machinery/door/window/holowindoor{dir = 8},/obj/random/handgun,/turf/simulated/floor/tiled,/area/submap/Research1)
+"zT" = (/obj/structure/closet/toolcloset,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"zW" = (/mob/living/simple_mob/humanoid/android/scientist,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Ah" = (/obj/machinery/dna_scannernew,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"Ai" = (/obj/machinery/light{dir = 8; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/submap/Research1)
+"Ar" = (/obj/machinery/door/window/holowindoor{dir = 1},/turf/simulated/floor/tiled,/area/submap/Research1)
+"As" = (/obj/item/cell/device/weapon/empty,/obj/structure/table/steel,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Au" = (/obj/machinery/light{dir = 8; icon_state = "tube1"},/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Ay" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Bh" = (/obj/structure/table/standard,/obj/structure/salvageable/personal,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Bn" = (/obj/structure/window/reinforced,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"Cd" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/table/woodentable,/obj/item/paper_bin,/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"Ck" = (/mob/living/carbon/human/monkey{faction = "drone"},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"De" = (/obj/structure/sink{dir = 8; pixel_x = -11},/obj/structure/mirror{pixel_x = -28},/turf/simulated/floor/tiled/eris/white,/area/submap/Research1)
+"Dv" = (/obj/structure/table/standard,/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Ej" = (/turf/template_noop,/area/submap/Research1)
+"EI" = (/obj/machinery/door/window/holowindoor{dir = 2},/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
+"FD" = (/obj/structure/table/rack,/obj/random/projectile/scrapped_pistol,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
+"FK" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/window/reinforced{dir = 4},/obj/structure/table/woodentable,/obj/structure/table/woodentable,/obj/random/zippo,/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"FS" = (/obj/structure/sign/warning/server_room{pixel_x = -32},/turf/simulated/floor/tiled,/area/submap/Research1)
+"Gk" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/turf/simulated/floor/tiled/eris/white,/area/submap/Research1)
+"GP" = (/obj/structure/salvageable/data,/obj/structure/window/reinforced{dir = 8},/obj/machinery/door/window/holowindoor{dir = 2},/turf/simulated/floor/tiled,/area/submap/Research1)
+"Hg" = (/obj/structure/table/standard,/obj/item/disk/limb/cybersolutions,/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"HF" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/Research1)
+"Il" = (/turf/simulated/floor/tiled,/area/submap/Research1)
+"IL" = (/turf/simulated/wall,/area/submap/Research1)
+"IT" = (/mob/living/simple_mob/humanoid/android/combat,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Kx" = (/obj/structure/toilet{dir = 4},/turf/simulated/floor/tiled/eris/white,/area/submap/Research1)
+"OK" = (/obj/structure/filingcabinet,/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"Pb" = (/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
+"PT" = (/obj/effect/floor_decal/borderfloor{dir = 1},/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"QJ" = (/obj/structure/table/woodentable,/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"RD" = (/obj/machinery/light/small{dir = 8; pixel_y = 0},/turf/simulated/floor/tiled,/area/submap/Research1)
+"RV" = (/turf/simulated/floor/tiled/neutral,/area/submap/Research1)
+"Tx" = (/obj/structure/window/reinforced{dir = 1},/obj/structure/table/woodentable,/obj/structure/salvageable/personal,/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"TG" = (/obj/structure/bed/chair/office/dark{dir = 1},/turf/simulated/floor/tiled/milspec,/area/submap/Research1)
+"UX" = (/obj/machinery/light/small{dir = 4; pixel_y = 0},/obj/structure/closet,/obj/item/clothing/suit/armor/vest/alt,/obj/item/clothing/shoes/boots/duty,/obj/item/clothing/gloves/swat,/obj/item/clothing/under/color/white,/obj/item/clothing/head/helmet,/turf/simulated/floor/tiled/milspec/dark,/area/submap/Research1)
+"VB" = (/obj/structure/closet/l3closet/general,/turf/simulated/floor/tiled/eris/steel,/area/submap/Research1)
+"VN" = (/obj/structure/salvageable/machine,/turf/simulated/floor/tiled,/area/submap/Research1)
+"Wm" = (/obj/structure/salvageable/data,/obj/structure/window/reinforced,/obj/machinery/door/window/holowindoor{dir = 8},/turf/simulated/floor/tiled/techfloor,/area/submap/Research1)
+"Wp" = (/obj/structure/table/rack,/obj/machinery/door/window/holowindoor{dir = 8},/obj/random/multiple/gun/projectile/smg,/turf/simulated/floor/tiled,/area/submap/Research1)
+"WG" = (/obj/machinery/light/small,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"XI" = (/obj/structure/table/standard,/obj/item/storage/box/monkeycubes/farwacubes{pixel_y = 5; pixel_x = -2},/obj/item/storage/box/monkeycubes{pixel_x = 1; pixel_y = 1},/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"XJ" = (/obj/structure/table/standard,/obj/item/disk/data,/turf/simulated/floor/tiled/dark,/area/submap/Research1)
+"Yh" = (/obj/structure/salvageable/data,/obj/structure/window/reinforced{dir = 4},/turf/simulated/floor/tiled/techfloor,/area/submap/Research1)
+"Zs" = (/obj/structure/salvageable/data,/turf/simulated/floor/tiled/eris/dark,/area/submap/Research1)
 
 (1,1,1) = {"
-dddddddddddddddddddddddddddddd
-dggggggggggggggggggggggggggggd
-dggggggggggggggggggggggggggggd
-dggggDDggggggggggggggggggggggd
-dgggDDDgggggggccvccccccccccggd
-dggDDDDgggggggcowtHaaaaaaacggd
-dgggggggggggggHtttcaaaaaaacggd
-dgggggggggggggcttncaaaaQaacggd
-dgggggggggggggcttUcOaaaaaycggd
-dgccccccccccccccHccllllRaacggd
-dgccaaaaaaacaacaaacaFMFxaacggd
-dgcqaaXaaaaHaaHaaaHaaaaaaacggd
-dgcaaacKKAKcSacaaaccccccHccggd
-dgcaaacKKKKcaacaaaacWNiaaacggd
-dgcaaacKKKKcHHcOaaacaaaaaacggd
-dgccHccccHccaacaaaaHaafaaVcggd
-dgcaaaraaaHaaacaaaacaaaaapcggd
-dgcaaaaaaaHaaacaaaacaaXaaPcggd
-dgcccccccHccOacccccccHcccccggd
-dgcCChmcskscaaaajaaaaaaaavgggd
-dgcTETTcskscaaaaaaaXaaaaavgggd
-dgcCCCIckkGccHccccccccHHccgggd
-dgczCCZckkkcBLcggggggggggggggd
-dgcCCYCHkkkcuacggggggggggggggd
-dgcCCeCckkkccccggggggggggggggd
-dgccccccccccgggggggggggggggggd
-dggggggggggggggggggggggggggggd
-dggggggggggggggggggggggggggggd
-dggggggggggggggggggggggggggggd
-dddddddddddddddddddddddddddddd
+bnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjEjEjEjHFHFEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjEjEjHFHFHFEjEjEjEjEjEjEjILILbOILILILILILILILILILILEjEjbn
+bnEjEjHFHFHFHFEjEjEjEjEjEjEjILeHFDpEiUIlIlIlkRhhYhIlILEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjiUpEpEpEILIlIlIlArArArIlILEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjILpEpEUXILIlIlIlIlzWIlIlILEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjyAyAILiapEbpILAuAyDvAyDvIlimILEjEjbn
+bnEjILILILILILILILILILILILILILILiUILILxrTxCdbeFKPTPTILEjEjbn
+bnEjILILVNIlIlIlIlIlIlILIlIlILvdIlGPILOKTGQJTGrMjKjKILEjEjbn
+bnEjILwaITIlfWIlIlIlIliUIlIliUIlIlIliUjKjKjKjKjKjKjKILEjEjbn
+bnEjILIlIlIlILoVRVuSHgILRDsLILIlIlIlILILILILILILiUILILEjEjbn
+bnEjILIlIlIlILdqRVRVpNILIlIlILIlIlIlxfILbMAsAsIlIlIlILEjEjbn
+bnEjILwaIlIlILzTRVRVwMILiUiUILAiIlIlWmILFSIlIlITIlIlILEjEjbn
+bnEjILILiUILILILILILILILIlIlILhhIlITIliUIlIlIlIlIlzIILEjEjbn
+bnEjqyIlIlIlqmIlIlIliUIlIlIlILmqIlIlIlILIlIlexIlIlWpILEjEjbn
+bnEjqyIlIlIlIlIlIlIliUIlIlIlILhhIlgGBhILIlIljhyLIlfDILEjEjbn
+bnEjILILILILILILILiUILILAiIlILILILILILILILiUILILILILILEjEjbn
+bnEjILiZiZegCkILVBPbVBILIlIlIlIloJIlIlIlIlIlIlIlIlbOEjEjEjbn
+bnEjILBnztBnBnILVBPbVBILIlIlIlIlIlzWIlfWIlIlIlIlIlbOEjEjEjbn
+bnEjILiZiZiZXIILPbPbbvILILiUILILILILILILILILiUiUILILEjEjEjbn
+bnEjILAhiZiZXJILPbbEPbILKxGkILEjEjEjEjyAokEjEjEjEjEjEjEjEjbn
+bnEjILdYiZiZiZiUEIEIEIILDefRILEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjILAhiZWGiZILZseiZsILILILILEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjILILILILILILILILILILEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjEjbn
+bnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbnbn
 "}

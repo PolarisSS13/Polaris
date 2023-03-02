@@ -146,8 +146,6 @@
 
 
 	corpseid = 0
-	//corpseidjob = "Researcher"
-	//corpseidjob = "Syndicate"
 
 /obj/effect/landmark/mobcorpse/android/createCorpse()
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)
@@ -161,15 +159,6 @@
 		var/obj/item/organ/external/E = M.get_organ(limb)
 		if(E)
 			E.robotize(brandList[limb])
-
-
-	/*for (var/obj/item/organ/external/i in M.organs)
-		world.log << i.organ_tag
-		world.log << brandList[i.organ_tag]
-		i.robotize(brandList[i.organ_tag], 1)*/
-
-	//for (var/obj/item/organ/i in M.internal_organs)//makes it all robot
-	//	i.robotize()
 
 	if(src.corpseuniform)
 		M.equip_to_slot_or_del(new src.corpseuniform(M), slot_w_uniform)
@@ -241,8 +230,8 @@
 	name = "Combat Drone"
 	corpseuniform = /obj/item/clothing/under/utility/grey
 	corpsesuit = /obj/item/clothing/suit/armor/vest/alt
-	corpseshoes = /obj/item/clothing/shoes/boots/swat
-	corpsegloves = obj/item/clothing/gloves/swat
+	corpseshoes = /obj/item/clothing/shoes/boots/duty
+	corpsegloves = /obj/item/clothing/gloves/swat
 	brandList = list(
 		BP_L_HAND =  "Unbranded - Mantis Prosis",
 		BP_R_HAND = "Unbranded - Mantis Prosis",
