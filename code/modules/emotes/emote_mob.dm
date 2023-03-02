@@ -48,10 +48,6 @@
 			return custom_emote(m_type, message)
 
 		if(act == "custom")
-			if(!message)
-				message = sanitize(input("Enter an emote to display.") as text|null)
-			if(!message)
-				return
 			if (!m_type)
 				if(alert(src, "Is this an audible emote?", "Emote", "Yes", "No") == "No")
 					m_type = VISIBLE_MESSAGE
@@ -145,14 +141,23 @@
 
 	set waitfor = FALSE // Due to input() below and this being used in Life() procs.
 
-	if((usr && stat) || (!use_me && usr == src))
+	if(stat != CONSCIOUS || (!use_me && usr == src))
 		to_chat(src, "You are unable to emote.")
 		return
 
 	if(!message)
-		message = input(src,"Choose an emote to display.") as text|null
-	message = sanitize(message)
+		message = input(usr, "Please enter an emote to display. You can use \"*\" to reposition your character name within the emote.") as text|null
+		// Recheck due to input()
+		if(stat != CONSCIOUS || (!use_me && usr == src))
+			to_chat(src, "You are unable to emote.")
+			return
+
+	message = sanitize(message, encode = FALSE) // This is getting double-encoded somewhere along the line.
 	if(!message)
+		return
+
+	var/turf/T = get_turf(src)
+	if(!T)
 		return
 
 	var/list/formatted
@@ -170,30 +175,21 @@
 	runemessage = replacetext(runemessage,".","",length(runemessage),length(runemessage)+1)
 
 	log_emote("[pretext][nametext][subtext]", src) //Log before we add junk
-	message = "<span class='emote'>[pretext]<b>[nametext]</b>[subtext]</span>"
-	if(message)
-		message = encode_html_emphasis(message)
+	message = encode_html_emphasis("<span class='emote'>[pretext]<b>[nametext]</b>[subtext]</span>")
 
-		// Hearing gasp and such every five seconds is not good emotes were not global for a reason.
-		// Maybe some people are okay with that.
-		var/turf/T = get_turf(src)
-		if(!T) return
-		var/list/in_range = get_mobs_and_objs_in_view_fast(T,range,2,remote_ghosts = client ? TRUE : FALSE)
-		var/list/m_viewers = in_range["mobs"]
-		var/list/o_viewers = in_range["objs"]
+	var/list/in_range = get_mobs_and_objs_in_view_fast(T,range,2,remote_ghosts = client ? TRUE : FALSE)
+	var/list/m_viewers = in_range["mobs"]
+	var/list/o_viewers = in_range["objs"]
 
-		for(var/mob in m_viewers)
-			var/mob/M = mob
-			spawn(0) // It's possible that it could be deleted in the meantime, or that it runtimes.
-				if(M)
-					if(isobserver(M))
-						M.show_message("<span class='emote'>[pretext]<b>[ghost_follow_link(src, M, nametext)]</b>[subtext]</span>", m_type)
-					else
-						M.show_message(message, m_type)
-					M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
+	for(var/mob/M as anything in m_viewers)
+		if(isobserver(M))
+			M.show_message("<span class='emote'>[pretext]<b>[ghost_follow_link(src, M, nametext)]</b>[subtext]</span>", m_type)
+		else
+			M.show_message(message, m_type)
+		M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
 
-		for(var/obj/O as anything in o_viewers)
-			O.see_emote(src, message, m_type)
+	for(var/obj/O as anything in o_viewers)
+		O.see_emote(src, message, m_type)
 
 // Specific mob type exceptions below.
 /mob/living/carbon/human/emote(act, m_type, message)

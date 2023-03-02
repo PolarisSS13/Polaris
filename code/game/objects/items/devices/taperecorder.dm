@@ -102,6 +102,7 @@
 
 
 /obj/item/taperecorder/show_message(msg, type, alt, alt_type)
+	..()
 	var/recordedtext
 	if (msg && type == AUDIBLE_MESSAGE) //must be hearable
 		recordedtext = msg

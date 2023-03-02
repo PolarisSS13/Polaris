@@ -106,6 +106,7 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 		master.show_message(rendered, AUDIBLE_MESSAGE)
 
 /obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
+	..()
 	var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[msg]</span></span></i>"
 	for(var/mob/living/silicon/ai/master in masters)
 		master.show_message(rendered, type)

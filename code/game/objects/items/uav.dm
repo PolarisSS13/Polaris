@@ -307,10 +307,11 @@
 		master.show_message(rendered, AUDIBLE_MESSAGE)
 
 /obj/item/uav/show_message(msg, type, alt, alt_type)
+	..()
+	var/rendered = "<i><span class='game say'>UAV received, <span class='message'>[msg]</span></span></i>"
 	for(var/wr_master in masters)
 		var/weakref/wr = wr_master
 		var/mob/master = wr.resolve()
-		var/rendered = "<i><span class='game say'>UAV received, <span class='message'>[msg]</span></span></i>"
 		master.show_message(rendered, type)
 
 /obj/item/uav/take_damage(var/damage)
