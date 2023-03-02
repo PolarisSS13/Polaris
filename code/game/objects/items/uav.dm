@@ -296,14 +296,15 @@
 		var/list/combined = master.combine_message(message_pieces, verb, M)
 		var/message = combined["formatted"]
 		var/rendered = "<i><span class='game say'>UAV received: <span class='name'>[name_used]</span> [message]</span></i>"
-		master.show_message(rendered, 2)
+		master.show_message(rendered, AUDIBLE_MESSAGE)
 
 /obj/item/uav/see_emote(var/mob/living/M, text)
+	..()
+	var/rendered = "<i><span class='game say'>UAV received, <span class='message'>[text]</span></span></i>"
 	for(var/wr_master in masters)
 		var/weakref/wr = wr_master
 		var/mob/master = wr.resolve()
-		var/rendered = "<i><span class='game say'>UAV received, <span class='message'>[text]</span></span></i>"
-		master.show_message(rendered, 2)
+		master.show_message(rendered, AUDIBLE_MESSAGE)
 
 /obj/item/uav/show_message(msg, type, alt, alt_type)
 	for(var/wr_master in masters)

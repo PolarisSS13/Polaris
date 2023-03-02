@@ -149,16 +149,14 @@
 		to_chat(src, "You are unable to emote.")
 		return
 
-	var/input
 	if(!message)
-		input = sanitize(input(src,"Choose an emote to display.") as text|null)
-	else
-		input = message
+		message = input(src,"Choose an emote to display.") as text|null
+	message = sanitize(message)
+	if(!message)
+		return
 
 	var/list/formatted
 	var/runemessage
-	if(!input)
-		return
 
 	formatted = format_emote(src, message)
 	var/pretext =  formatted["pretext"]
@@ -194,11 +192,8 @@
 						M.show_message(message, m_type)
 					M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
 
-		for(var/obj in o_viewers)
-			var/obj/O = obj
-			spawn(0)
-				if(O)
-					O.see_emote(src, message, m_type)
+		for(var/obj/O as anything in o_viewers)
+			O.see_emote(src, message, m_type)
 
 // Specific mob type exceptions below.
 /mob/living/carbon/human/emote(act, m_type, message)
