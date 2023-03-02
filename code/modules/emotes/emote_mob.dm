@@ -157,21 +157,22 @@
 
 	var/list/formatted
 	var/runemessage
-	if(input)
-		formatted = format_emote(src, message)
-		message = formatted["pretext"] + formatted["nametext"] + formatted["subtext"]
-		runemessage = formatted["subtext"]
-		// This is just personal preference (but I'm objectively right) that custom emotes shouldn't have periods at the end in runechat
-		runemessage = replacetext(runemessage,".","",length(runemessage),length(runemessage)+1)
-	else
+	if(!input)
 		return
 
-	if(input)
-		log_emote(message,src) //Log before we add junk
-		message = "<span class='emote'><B>[src]</B> [input]</span>"
+	formatted = format_emote(src, message)
+	var/pretext =  formatted["pretext"]
+	var/nametext = formatted["nametext"]
+	var/subtext =  formatted["subtext"]
+	if(pretext) // If we have a split emote we need to show the pretext and name.
+		runemessage = "[pretext][nametext][subtext]"
 	else
-		return
+		runemessage = subtext
+	// This is just personal preference (but I'm objectively right) that custom emotes shouldn't have periods at the end in runechat
+	runemessage = replacetext(runemessage,".","",length(runemessage),length(runemessage)+1)
 
+	log_emote("[pretext][nametext][subtext]", src) //Log before we add junk
+	message = "<span class='emote'>[pretext]<b>[nametext]</b>[subtext]</span>"
 	if(message)
 		message = encode_html_emphasis(message)
 
@@ -188,8 +189,9 @@
 			spawn(0) // It's possible that it could be deleted in the meantime, or that it runtimes.
 				if(M)
 					if(isobserver(M))
-						message = "<span class='emote'><B>[src]</B> ([ghost_follow_link(src, M)]) [input]</span>"
-					M.show_message(message, m_type)
+						M.show_message("<span class='emote'>[pretext]<b>[ghost_follow_link(src, M, nametext)]</b>[subtext]</span>", m_type)
+					else
+						M.show_message(message, m_type)
 					M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
 
 		for(var/obj in o_viewers)
@@ -197,8 +199,6 @@
 			spawn(0)
 				if(O)
 					O.see_emote(src, message, m_type)
-
-
 
 // Specific mob type exceptions below.
 /mob/living/carbon/human/emote(act, m_type, message)
