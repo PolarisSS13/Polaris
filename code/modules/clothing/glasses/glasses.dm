@@ -26,6 +26,9 @@ BLIND     // can't see anything
 	var/active = 1
 	var/activation_sound = 'sound/items/goggles_charge.ogg'
 	var/obj/screen/overlay = null
+	var/obj/screen/stored_overlay = null //Stores the overlay when not in use.
+	var/has_overlay = FALSE
+	var/overlay_enabled = FALSE
 	var/list/away_planes //Holder for disabled planes
 	drop_sound = 'sound/items/drop/accessory.ogg'
 	pickup_sound = 'sound/items/pickup/accessory.ogg'
@@ -73,6 +76,26 @@ BLIND     // can't see anything
 	user.update_action_buttons()
 	user.recalculate_vis()
 
+/obj/item/clothing/glasses/AltClick(mob/living/user)
+	..()
+	toggle_overlay(user)
+
+/obj/item/clothing/glasses/proc/toggle_overlay(mob/living/user)
+	if(has_overlay)
+		if(overlay_enabled == TRUE)
+			overlay_enabled = FALSE
+			stored_overlay = overlay
+			overlay = null
+			to_chat(user, span("notice", "You disable the cosmetic overlay on \the [src]."))
+		else
+			overlay_enabled = TRUE
+			overlay = stored_overlay
+			stored_overlay = null
+			to_chat(user, span("notice", "You enable the cosmetic overlay on \the [src]."))
+		user.recalculate_vis()
+	else
+		return
+
 /obj/item/clothing/glasses/attack_self(mob/user)
 	if(toggleable)
 		if(!can_toggle(user))
@@ -80,9 +103,9 @@ BLIND     // can't see anything
 		else
 			toggle_active(user)
 			if(active)
-				to_chat(user, span("notice", "You activate the optical matrix on the [src]."))
+				to_chat(user, span("notice", "You activate the optical matrix on \the [src]. Alt-click to toggle the overlay separately."))
 			else
-				to_chat(user, span("notice", "You deactivate the optical matrix on the [src]."))
+				to_chat(user, span("notice", "You deactivate the optical matrix on \the [src]."))
 	..()
 
 /obj/item/clothing/glasses/meson
@@ -93,6 +116,8 @@ BLIND     // can't see anything
 	action_button_name = "Toggle Goggles"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2)
 	toggleable = 1
+	has_overlay = TRUE
+	overlay_enabled = TRUE
 	vision_flags = SEE_TURFS
 	enables_planes = list(VIS_FULLBRIGHT, VIS_MESONS)
 
@@ -115,7 +140,7 @@ BLIND     // can't see anything
 
 /obj/item/clothing/glasses/meson/aviator/prescription
 	name = "prescription engineering aviators"
-	desc = "Engineering Aviators with prescription lenses."
+	desc = "Engineering aviators with prescription lenses."
 	prescription = 1
 
 /obj/item/clothing/glasses/hud/health/aviator
@@ -133,11 +158,13 @@ BLIND     // can't see anything
 	prescription = 6
 
 /obj/item/clothing/glasses/science
-	name = "Science Goggles"
+	name = "science goggles"
 	desc = "The goggles do nothing!"
 	icon_state = "purple"
 	item_state_slots = list(slot_r_hand_str = "glasses", slot_l_hand_str = "glasses")
 	toggleable = 1
+	has_overlay = TRUE
+	overlay_enabled = TRUE
 	action_button_name = "Toggle Goggles"
 	item_flags = AIRTIGHT
 
@@ -161,6 +188,8 @@ BLIND     // can't see anything
 	origin_tech = list(TECH_MAGNET = 2)
 	darkness_view = 7
 	toggleable = 1
+	has_overlay = TRUE
+	overlay_enabled = TRUE
 	action_button_name = "Toggle Goggles"
 	off_state = "denight"
 	flash_protection = FLASH_PROTECTION_REDUCED
@@ -237,6 +266,8 @@ BLIND     // can't see anything
 	item_state_slots = list(slot_r_hand_str = "glasses", slot_l_hand_str = "glasses")
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3)
 	toggleable = 1
+	has_overlay = TRUE
+	overlay_enabled = TRUE
 	action_button_name = "Toggle Goggles"
 	vision_flags = SEE_OBJS
 	enables_planes = list(VIS_FULLBRIGHT)
@@ -257,6 +288,8 @@ BLIND     // can't see anything
 	origin_tech = list(TECH_MAGNET = 2, TECH_BLUESPACE = 1)
 	darkness_view = 5
 	toggleable = 1
+	has_overlay = TRUE
+	overlay_enabled = TRUE
 	action_button_name = "Toggle Goggles"
 	off_state = "denight"
 	vision_flags = SEE_OBJS | SEE_TURFS
@@ -500,6 +533,8 @@ BLIND     // can't see anything
 	item_state_slots = list(slot_r_hand_str = "glasses", slot_l_hand_str = "glasses")
 	origin_tech = list(TECH_MAGNET = 3)
 	toggleable = 1
+	has_overlay = TRUE
+	overlay_enabled = TRUE
 	action_button_name = "Toggle Goggles"
 	vision_flags = SEE_MOBS
 	enables_planes = list(VIS_FULLBRIGHT, VIS_CLOAKED)
