@@ -9,9 +9,6 @@
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 5
-	},
 /turf/simulated/floor/tiled/old_tile/white,
 /area/submap/Research1)
 "aX" = (
@@ -53,9 +50,6 @@
 	pixel_x = 0
 	},
 /obj/effect/floor_decal/borderfloorwhite{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/purple/border{
 	dir = 4
 	},
 /obj/structure/window/reinforced,
@@ -125,13 +119,10 @@
 /area/submap/Research1)
 "dY" = (
 /obj/machinery/computer/cloning,
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "eg" = (
 /mob/living/carbon/human/monkey{
@@ -143,13 +134,10 @@
 /obj/machinery/light/small{
 	dir = 1
 	},
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "ei" = (
 /turf/simulated/floor/outdoors/newdirt,
@@ -216,14 +204,10 @@
 	dir = 2
 	},
 /obj/effect/floor_decal/borderfloorwhite/corner,
-/obj/effect/floor_decal/corner/purple/bordercorner,
 /turf/simulated/floor/tiled/old_tile/white,
 /area/submap/Research1)
 "gF" = (
 /obj/effect/floor_decal/borderfloorwhite{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/purple/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/old_tile/white,
@@ -342,13 +326,10 @@
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "iZ" = (
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 9
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "jh" = (
 /obj/machinery/light,
@@ -360,15 +341,12 @@
 /turf/simulated/floor/tiled/milspec,
 /area/submap/Research1)
 "kd" = (
-/obj/effect/floor_decal/borderfloorwhite{
-	dir = 9
-	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 9
-	},
 /obj/structure/table/standard,
 /obj/item/storage/box/syringes,
-/turf/simulated/floor/tiled/old_tile/white,
+/obj/effect/floor_decal/borderfloor{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "kR" = (
 /obj/structure/salvageable/data,
@@ -435,17 +413,11 @@
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 6
-	},
 /turf/simulated/floor/tiled/old_tile/white,
 /area/submap/Research1)
 "nF" = (
 /obj/structure/closet/l3closet/general,
 /obj/effect/floor_decal/borderfloorwhite{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/purple/border{
 	dir = 4
 	},
 /obj/structure/window/reinforced,
@@ -538,13 +510,10 @@
 /area/submap/Research1)
 "qC" = (
 /obj/structure/window/reinforced,
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "qF" = (
 /obj/effect/floor_decal/steeldecal/steel_decals4{
@@ -589,7 +558,7 @@
 	dir = 10
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals4,
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "sL" = (
 /obj/structure/sign/warning/server_room{
@@ -613,13 +582,10 @@
 /area/submap/Research1)
 "uj" = (
 /obj/machinery/dna_scannernew,
-/obj/effect/floor_decal/borderfloorwhite{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/purple/border{
+/obj/effect/floor_decal/borderfloor{
 	dir = 10
 	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "un" = (
 /obj/effect/floor_decal/borderfloor{
@@ -627,6 +593,10 @@
 	},
 /obj/effect/floor_decal/borderfloor/corner2{
 	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 8;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
@@ -705,9 +675,8 @@
 /area/submap/Research1)
 "xb" = (
 /obj/structure/window/reinforced,
-/obj/effect/floor_decal/borderfloorwhite/corner,
-/obj/effect/floor_decal/corner/purple/bordercorner,
-/turf/simulated/floor/tiled/old_tile/white,
+/obj/effect/floor_decal/borderfloor,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "xf" = (
 /obj/structure/salvageable/data,
@@ -742,13 +711,10 @@
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "yr" = (
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 6
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "yA" = (
 /obj/structure/loot_pile/maint/junk,
@@ -794,32 +760,21 @@
 /area/submap/Research1)
 "Ah" = (
 /obj/machinery/dna_scannernew,
-/obj/effect/floor_decal/borderfloorwhite{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/old_tile/white,
-/area/submap/Research1)
-"Ai" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
+	},
+/turf/simulated/floor/tiled/steel,
+/area/submap/Research1)
+"Ai" = (
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "Am" = (
-/obj/effect/floor_decal/borderfloorwhite/corner{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/purple/bordercorner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/obj/machinery/door/airlock/research,
+/turf/simulated/floor/tiled,
 /area/submap/Research1)
 "Ap" = (
 /obj/effect/floor_decal/steeldecal/steel_decals10{
@@ -876,13 +831,10 @@
 /area/submap/Research1)
 "Bn" = (
 /obj/structure/window/reinforced,
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 10
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 10
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "BI" = (
 /turf/simulated/floor/outdoors/dirt/sif/planetuse,
@@ -896,13 +848,10 @@
 /turf/simulated/floor/tiled/milspec,
 /area/submap/Research1)
 "Ck" = (
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "Cw" = (
 /obj/effect/floor_decal/borderfloor{
@@ -916,9 +865,6 @@
 "CJ" = (
 /obj/structure/closet/l3closet/general,
 /obj/effect/floor_decal/borderfloorwhite{
-	dir = 8
-	},
-/obj/effect/floor_decal/corner/purple/border{
 	dir = 8
 	},
 /obj/structure/window/reinforced,
@@ -1075,9 +1021,6 @@
 /obj/effect/floor_decal/borderfloorwhite/corner{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/bordercorner{
-	dir = 1
-	},
 /turf/simulated/floor/tiled/old_tile/white,
 /area/submap/Research1)
 "HF" = (
@@ -1199,6 +1142,12 @@
 /obj/item/toy/desk/newtoncradle,
 /turf/simulated/floor/tiled/milspec,
 /area/submap/Research1)
+"Ra" = (
+/obj/machinery/door/window/holowindoor{
+	dir = 2
+	},
+/turf/simulated/floor/tiled/steel,
+/area/submap/Research1)
 "Rn" = (
 /obj/effect/floor_decal/steeldecal/steel_decals5{
 	dir = 8
@@ -1260,9 +1209,6 @@
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 8
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 8
-	},
 /obj/structure/window/reinforced,
 /obj/machinery/shower{
 	dir = 4
@@ -1270,7 +1216,7 @@
 /turf/simulated/floor/tiled/old_tile/white,
 /area/submap/Research1)
 "Ue" = (
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "Uq" = (
 /obj/effect/floor_decal/techfloor/corner{
@@ -1279,13 +1225,10 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/submap/Research1)
 "Uv" = (
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "UX" = (
 /obj/machinery/light/small{
@@ -1311,9 +1254,6 @@
 "VB" = (
 /obj/structure/closet/l3closet/general,
 /obj/effect/floor_decal/borderfloorwhite{
-	dir = 9
-	},
-/obj/effect/floor_decal/corner/purple/border{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/old_tile/white,
@@ -1343,9 +1283,8 @@
 /area/submap/Research1)
 "WG" = (
 /obj/machinery/light/small,
-/obj/effect/floor_decal/borderfloorwhite,
-/obj/effect/floor_decal/corner/purple/border,
-/turf/simulated/floor/tiled/old_tile/white,
+/obj/effect/floor_decal/borderfloor,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "Xq" = (
 /obj/effect/floor_decal/steeldecal/steel_decals5{
@@ -1369,24 +1308,18 @@
 	pixel_x = 1;
 	pixel_y = 1
 	},
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 5
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 5
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "XJ" = (
 /obj/structure/table/standard,
 /obj/item/disk/data,
-/obj/effect/floor_decal/borderfloorwhite{
+/obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/old_tile/white,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "XT" = (
 /obj/effect/floor_decal/borderfloor,
@@ -1418,15 +1351,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/Research1)
 "Yo" = (
-/obj/effect/floor_decal/borderfloorwhite,
-/obj/effect/floor_decal/corner/purple/border,
-/turf/simulated/floor/tiled/old_tile/white,
+/obj/effect/floor_decal/borderfloor,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "YL" = (
 /obj/structure/sign/warning/secure_area{
 	pixel_x = 32
 	},
-/turf/template_noop,
+/turf/simulated/floor/outdoors/newdirt,
 /area/submap/Research1)
 "Zk" = (
 /obj/effect/floor_decal/techfloor/corner{
@@ -1588,7 +1520,7 @@ nQ
 UY
 IL
 Uv
-zt
+Ra
 Ue
 Ue
 Ue
@@ -1621,7 +1553,7 @@ UY
 IL
 eg
 xb
-Am
+Uv
 Ue
 Ue
 WG
@@ -1776,8 +1708,8 @@ Hg
 pN
 wM
 IL
-aX
-aX
+SL
+SL
 IL
 ax
 nF
@@ -1838,7 +1770,7 @@ Cw
 yc
 RD
 Ht
-aX
+SL
 XU
 Il
 Il
@@ -1870,7 +1802,7 @@ Cw
 Gn
 sL
 pr
-aX
+SL
 dm
 Fh
 Fh
@@ -1934,7 +1866,7 @@ vd
 yc
 un
 vk
-Ai
+vk
 lS
 mq
 DC
@@ -1955,13 +1887,13 @@ bn
 bn
 Ej
 Ej
-Ej
+ei
 bO
 FD
 pE
 pE
 ue
-SL
+aX
 nQ
 Il
 Il
@@ -1987,7 +1919,7 @@ bn
 bn
 Ej
 Ej
-Ej
+ei
 IL
 fR
 EG
@@ -2021,18 +1953,18 @@ Ej
 Ej
 Ej
 IL
-aX
+SL
 IL
 IL
 IL
 IL
 IL
-iU
+Am
 IL
 xf
 Wm
 Gn
-Il
+Ai
 Bh
 IL
 dG
@@ -2063,7 +1995,7 @@ jK
 IL
 IL
 IL
-iU
+Am
 IL
 IL
 IL
@@ -2165,7 +2097,7 @@ jh
 IL
 Il
 gU
-aX
+SL
 BI
 Ej
 Ej
@@ -2197,7 +2129,7 @@ yL
 IL
 Il
 At
-aX
+SL
 BI
 BI
 Ej
@@ -2220,7 +2152,7 @@ Il
 PT
 jK
 jK
-aX
+SL
 PU
 Il
 gJ
