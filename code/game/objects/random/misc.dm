@@ -1043,3 +1043,15 @@
 			prob(5);/obj/item/clothing/head/helmet/newkyoto,
 			prob(5);/obj/item/clothing/head/helmet/space/void/scg/heavy
 			)
+
+/obj/random/dufflebag
+	desc = "This is a random non-department-specific dufflebag."
+
+/obj/random/dufflebag/item_to_spawn()
+	return pick(
+			prob(10);/obj/item/storage/backpack/dufflebag,
+			prob(10);/obj/item/storage/backpack/dufflebag/brown,
+			prob(10);/obj/item/storage/backpack/dufflebag/white,
+			prob(5);/obj/item/storage/backpack/dufflebag/hydro,
+			prob(2);/obj/item/storage/backpack/dufflebag/solgov
+			)
