@@ -96,7 +96,7 @@ var/global/list/_human_default_emotes = list(
 /mob/living/carbon/human/get_available_emotes()
 	. = global._human_default_emotes
 	if(length(species?.default_emotes))
-		. |= species.default_emotes
+		return . | species.default_emotes
 
 /mob/living/carbon/human/verb/pose()
 	set name = "Set Pose"

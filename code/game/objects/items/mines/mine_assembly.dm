@@ -1,6 +1,9 @@
 /obj/item/mine/assembly
 	name = "mine assembly"
 	desc = "A small pressure-triggered device. Accepts grenades and tank transfer valves."
+
+	payload = null
+
 	var/static/list/accepts_items = list(
 		/obj/item/transfer_valve = /datum/mine_payload/assembly/tank_transfer_valve,
 		/obj/item/grenade        = /datum/mine_payload/assembly/grenade
@@ -9,7 +12,7 @@
 /obj/item/mine/assembly/attackby(obj/item/W, mob/living/user)
 	if(!armed && !triggering)
 		var/datum/mine_payload/assembly/attached_payload = payload
-		if(attached_payload.attached)
+		if(attached_payload?.attached)
 			if(W.is_screwdriver())
 				to_chat(user, "You disconnect \the [src]'s [attached_payload.attached.name] and remove it.")
 				attached_payload.attached.forceMove(get_turf(user))

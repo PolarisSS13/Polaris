@@ -38,7 +38,7 @@
 	if(!istype(blood))
 		blood = new(T)
 	for(var/list/chem in reagents)
-		blood.reagents.add_reagent(chem[0], chem[1] * chargelevel, LAZYLEN(chem) > 2 ? chem[2] : null)
+		blood.reagents.add_reagent(chem[1], chem[2] * chargelevel, LAZYLEN(chem) > 2 ? chem[3] : null)
 	blood.update_icon()
 	chargelevel = round(0.8 * chargelevel)
 
