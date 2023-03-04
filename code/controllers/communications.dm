@@ -109,7 +109,7 @@ var/global/const/AI_FREQ	= 1343
 var/global/const/DTH_FREQ	= 1341
 var/global/const/SYND_FREQ = 1213
 var/global/const/RAID_FREQ	= 1277
-var/global/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a diona exclusive frequency.
+var/global/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a Diona exclusive frequency.
 
 // department channels
 var/global/const/PUB_FREQ = 1459

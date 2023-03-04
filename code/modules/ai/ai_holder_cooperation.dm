@@ -108,7 +108,7 @@
 			return
 
 	// Otherwise they're outside our sight, lack a target, or aren't AI controlled, but within call range.
-	// So assuming we're AI controlled, we'll go to them and see whats wrong.
+	// So assuming we're AI controlled, we'll go to them and see what's wrong.
 	ai_log("help_requested() : Help requested by [friend], going to go to friend.", AI_LOG_INFO)
 	if(their_target)
 		add_attacker(their_target) // We won't wait and 'warn' them while they're stabbing our ally

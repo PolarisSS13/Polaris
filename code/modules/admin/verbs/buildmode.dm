@@ -386,7 +386,7 @@
 					to_chat(usr, "[object.type]")
 
 		if(BUILDMODE_EDIT)
-			if(pa.Find("left")) //I cant believe this shit actually compiles.
+			if(pa.Find("left")) //I can't believe this shit actually compiles.
 				if(object.vars.Find(holder.buildmode.varholder))
 					log_admin("[key_name(usr)] modified [object.name]'s [holder.buildmode.varholder] to [holder.buildmode.valueholder]")
 					object.vars[holder.buildmode.varholder] = holder.buildmode.valueholder

@@ -226,7 +226,7 @@
 		edit = text2num(href_list["edit"]) - 1
 	if(href_list["repeat"]) //Changing this from a toggle to a number of repeats to avoid infinite loops.
 		if(playing)
-			return //So that people cant keep adding to repeat. If the do it intentionally, it could result in the server crashing.
+			return //So that people can't keep adding to repeat. If the do it intentionally, it could result in the server crashing.
 		repeat += round(text2num(href_list["repeat"]))
 		if(repeat < 0)
 			repeat = 0

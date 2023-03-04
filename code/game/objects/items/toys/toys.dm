@@ -968,14 +968,14 @@
 	return ..()
 
 /obj/item/toy/plushie/nymph
-	name = "diona nymph plush"
-	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
+	name = "Diona nymph plush"
+	desc = "A plushie of an adorable Diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
 	icon_state = "nymphplushie"
 	pokephrase = "Chirp!"
 
 /obj/item/toy/plushie/teshari
-	name = "teshari plush"
-	desc = "This is a plush teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
+	name = "Teshari plush"
+	desc = "This is a plush Teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
 	icon_state = "teshariplushie"
 	pokephrase = "Rya!"
 
@@ -1004,8 +1004,8 @@
 	pokephrase = "Sksksk!"
 
 /obj/item/toy/plushie/farwa
-	name = "farwa plush"
-	desc = "A farwa plush doll. It's soft and comforting!"
+	name = "Farwa plush"
+	desc = "A Farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
 	pokephrase = "Squaw!"
 

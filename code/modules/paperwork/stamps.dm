@@ -18,7 +18,7 @@
 	/// The authority this stamp represents. Used where the full object name would be inappropriate.
 	var/authority_name = ""
 
-	/// Any trailing posessiveness for authority_name.
+	/// Any trailing possessiveness for authority_name.
 	var/authority_suffix = ""
 
 

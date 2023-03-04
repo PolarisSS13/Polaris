@@ -52,7 +52,7 @@
 		if((T20C + 20) to (T0C + 70))
 			health = max(0, health - 1)
 	if(health <= 0)
-		griefProtection() //I dont like putting this in process() but it's the best I can do without re-writing a chunk of rd servers.
+		griefProtection() //I don't like putting this in process() but it's the best I can do without re-writing a chunk of rd servers.
 		files.known_designs = list()
 		for(var/datum/tech/T in files.known_tech)
 			if(prob(1))

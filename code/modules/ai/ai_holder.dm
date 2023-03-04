@@ -167,7 +167,7 @@
 		var/list/choices = list()
 		for(var/typechoice in types)
 			var/list/found = list()
-			for(var/mob in searching) // Isnt't there a helper for this, maybe? I forget.
+			for(var/mob in searching) // Isn't there a helper for this, maybe? I forget.
 				var/atom/M = mob
 				if(!(M.z in levels_working))
 					continue

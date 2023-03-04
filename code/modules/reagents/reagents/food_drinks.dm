@@ -83,7 +83,7 @@
 
 /datum/reagent/nutriment/coating/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 
-	//We'll assume that the batter isnt going to be regurgitated and eaten by someone else. Only show this once
+	//We'll assume that the batter isn't going to be regurgitated and eaten by someone else. Only show this once
 	if(data["cooked"] != 1)
 		if (!messaged)
 			to_chat(M, "<span class='warning'>Ugh, this raw [name] tastes disgusting.</span>")
@@ -2466,12 +2466,12 @@
 /datum/reagent/drink/tropicalfizz
 	name = "Tropical Fizz"
 	id = "tropicalfizz"
-	description = "One sip and you're in the bahamas."
+	description = "One sip and you're in the Bahamas."
 	taste_description = "tropical"
 	color = "#69375C"
 
 	glass_name = "tropical fizz"
-	glass_desc = "One sip and you're in the bahamas."
+	glass_desc = "One sip and you're in the Bahamas."
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
 	allergen_type = ALLERGEN_FRUIT //Made with several fruit juices
@@ -2479,12 +2479,12 @@
 /datum/reagent/drink/fauxfizz
 	name = "Faux Fizz"
 	id = "fauxfizz"
-	description = "One sip and you're in the bahamas... maybe."
+	description = "One sip and you're in the Bahamas... maybe."
 	taste_description = "slightly tropical"
 	color = "#69375C"
 
 	glass_name = "tropical fizz"
-	glass_desc = "One sip and you're in the bahamas... maybe."
+	glass_desc = "One sip and you're in the Bahamas... maybe."
 	glass_icon = DRINK_ICON_NOISY
 	glass_special = list(DRINK_FIZZ)
 	allergen_type = ALLERGEN_FRUIT //made with several fruit juices
@@ -2509,7 +2509,7 @@
 /datum/reagent/ethanol/ale
 	name = "Ale"
 	id = "ale"
-	description = "A dark alchoholic beverage made by malted barley and yeast."
+	description = "A dark alcoholic beverage made by malted barley and yeast."
 	taste_description = "hearty barley ale"
 	color = "#4C3100"
 	strength = 50
@@ -2570,7 +2570,7 @@
 /datum/reagent/ethanol/cognac
 	name = "Cognac"
 	id = "cognac"
-	description = "A sweet and strongly alchoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
+	description = "A sweet and strongly alcoholic drink, made after numerous distillations and years of maturing. Classy as fornication."
 	taste_description = "rich and smooth alcohol"
 	taste_mult = 1.1
 	color = "#AB3C05"
@@ -2623,7 +2623,7 @@
 
 	allergen_type = ALLERGEN_FRUIT //Made from juniper berries
 
-//Base type for alchoholic drinks containing coffee
+//Base type for alcoholic drinks containing coffee
 /datum/reagent/ethanol/coffee
 	overdose = 45
 	allergen_type = ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Contains coffee or is made from coffee
@@ -2655,7 +2655,7 @@
 	M.make_jittery(5)
 
 /datum/reagent/ethanol/coffee/kahlua
-	name = "Kahlua"
+	name = "Kahlúa"
 	id = "kahlua"
 	description = "A widely known, Mexican coffee-flavored liqueur. In production since 1936!"
 	taste_description = "spiked latte"
@@ -2809,7 +2809,7 @@
 /datum/reagent/ethanol/redwine
 	name = "Red Wine"
 	id = "redwine"
-	description = "An premium alchoholic beverage made from distilled grape juice."
+	description = "An premium alcoholic beverage made from distilled grape juice."
 	taste_description = "bitter sweetness"
 	color = "#7E4043" // rgb: 126, 64, 67
 	strength = 15
@@ -2822,7 +2822,7 @@
 /datum/reagent/ethanol/whitewine
 	name = "White Wine"
 	id = "whitewine"
-	description = "An premium alchoholic beverage made from fermenting of the non-coloured pulp of grapes."
+	description = "An premium alcoholic beverage made from fermenting of the non-coloured pulp of grapes."
 	taste_description = "light fruity flavor"
 	color = "#F4EFB0" // rgb: 244, 239, 176
 	strength = 15
@@ -2835,7 +2835,7 @@
 /datum/reagent/ethanol/carnoth
 	name = "Carnoth"
 	id = "carnoth"
-	description = "An premium alchoholic beverage made with multiple hybridized species of grapes that give it a dark maroon coloration."
+	description = "An premium alcoholic beverage made with multiple hybridized species of grapes that give it a dark maroon coloration."
 	taste_description = "alcoholic sweet flavor"
 	color = "#5B0000" // rgb: 0, 100, 35
 	strength = 20
@@ -2995,21 +2995,21 @@
 	glass_name = "Atomic Bomb"
 	glass_desc = "We cannot take legal responsibility for your actions after imbibing."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from b52 which contains kahlua(coffee/caffeine), cognac(fruit), and irish cream(Whiskey(grains),cream(dairy))
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from b52 which contains Kahlúa(coffee/caffeine), cognac(fruit), and Irish cream(Whiskey(grains),cream(dairy))
 
 /datum/reagent/ethanol/coffee/b52
 	name = "B-52"
 	id = "b52"
-	description = "Kahlua, Irish cream, and cognac. You will get bombed."
+	description = "Kahlúa, Irish cream, and cognac. You will get bombed."
 	taste_description = "coffee, almonds, and whiskey"
 	taste_mult = 1.3
 	color = "#997650"
 	strength = 12
 
 	glass_name = "B-52"
-	glass_desc = "Kahlua, Irish cream, and cognac. You will get bombed."
+	glass_desc = "Kahlúa, Irish cream, and cognac. You will get bombed."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from kahlua(coffee/caffeine), cognac(fruit), and irish cream(Whiskey(grains),cream(dairy))
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from Kahlúa(coffee/caffeine), cognac(fruit), and Irish cream(Whiskey(grains),cream(dairy))
 
 /datum/reagent/ethanol/bahama_mama
 	name = "Bahama mama"
@@ -3095,7 +3095,7 @@
 	glass_name = "Black Russian"
 	glass_desc = "For the lactose-intolerant. Still as classy as a White Russian."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from vodka(grains) and kahlua(coffee/caffeine)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from vodka(grains) and Kahlúa(coffee/caffeine)
 
 /datum/reagent/ethanol/bloody_mary
 	name = "Bloody Mary"
@@ -3208,7 +3208,7 @@
 
 	glass_name = "Devil's Kiss"
 	glass_desc = "Creepy time!"
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Made from kahlua (Coffee)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Made from Kahlúa (Coffee)
 
 /datum/reagent/ethanol/driestmartini
 	name = "Driest Martini"
@@ -3323,7 +3323,7 @@
 /datum/reagent/ethanol/hooch
 	name = "Hooch"
 	id = "hooch"
-	description = "Either someone's failure at cocktail making or attempt in alchohol production. In any case, do you really want to drink that?"
+	description = "Either someone's failure at cocktail making or attempt in alcohol production. In any case, do you really want to drink that?"
 	taste_description = "pure alcohol"
 	color = "#4C3100"
 	strength = 25
@@ -3356,9 +3356,9 @@
 	strength = 15
 
 	glass_name = "Irish Car Bomb"
-	glass_desc = "An irish car bomb."
+	glass_desc = "An Irish car bomb."
 
-	allergen_type = ALLERGEN_DAIRY|ALLERGEN_GRAINS //Made from ale(grains) and irish cream(whiskey(grains), cream(dairy))
+	allergen_type = ALLERGEN_DAIRY|ALLERGEN_GRAINS //Made from ale(grains) and Irish cream(whiskey(grains), cream(dairy))
 
 /datum/reagent/ethanol/coffee/irishcoffee
 	name = "Irish Coffee"
@@ -3371,7 +3371,7 @@
 	glass_name = "Irish coffee"
 	glass_desc = "Coffee and alcohol. More fun than a Mimosa to drink in the morning."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from Coffee(coffee/caffeine) and irish cream(whiskey(grains), cream(dairy))
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_STIMULANT //Made from Coffee(coffee/caffeine) and Irish cream(whiskey(grains), cream(dairy))
 
 /datum/reagent/ethanol/irish_cream
 	name = "Irish Cream"
@@ -3423,7 +3423,7 @@
 
 	glass_name = "Manhattan Project"
 	glass_desc = "A scientist's drink of choice, for thinking how to blow up the station."
-	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from manhattan which is made from whiskey(grains), and vermouth(fruit)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from Manhattan which is made from whiskey(grains), and vermouth(fruit)
 
 /datum/reagent/ethanol/manly_dorf
 	name = "The Manly Dorf"
@@ -3434,7 +3434,7 @@
 	strength = 25
 
 	glass_name = "The Manly Dorf"
-	glass_desc = "A manly concotion made from Ale and Beer. Intended for true men only."
+	glass_desc = "A manly concoction made from Ale and Beer. Intended for true men only."
 
 	allergen_type = ALLERGEN_GRAINS //Made from beer(grains) and ale(grains)
 
@@ -3584,7 +3584,7 @@
 	glass_name = "Snow White"
 	glass_desc = "A cold refreshment."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_FRUIT|ALLERGEN_STIMULANT //made from Pineapple juice(fruit), lemon_lime(fruit), and kahlua(coffee/caffine)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_FRUIT|ALLERGEN_STIMULANT //made from Pineapple juice(fruit), lemon_lime(fruit), and Kahlúa(coffee/caffine)
 
 /datum/reagent/ethanol/suidream
 	name = "Sui Dream"
@@ -3669,7 +3669,7 @@
 /datum/reagent/ethanol/vodkatonic
 	name = "Vodka and Tonic"
 	id = "vodkatonic"
-	description = "For when a gin and tonic isn't russian enough."
+	description = "For when a gin and tonic isn't Russian enough."
 	taste_description = "tart bitterness"
 	color = "#0064C8" // rgb: 0, 100, 200
 	strength = 15
@@ -3690,7 +3690,7 @@
 	glass_name = "White Russian"
 	glass_desc = "A very nice looking drink. But that's just, like, your opinion, man."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_GRAINS|ALLERGEN_DAIRY|ALLERGEN_STIMULANT //Made from black russian(vodka(grains), kahlua(coffee/caffeine)) and cream(dairy)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_GRAINS|ALLERGEN_DAIRY|ALLERGEN_STIMULANT //Made from black Russian(vodka(grains), Kahlúa(coffee/caffeine)) and cream(dairy)
 
 /datum/reagent/ethanol/whiskey_cola
 	name = "Whiskey Cola"
@@ -3824,15 +3824,15 @@
 /datum/reagent/ethanol/coffee/elysiumfacepunch
 	name = "Elysium Facepunch"
 	id = "elysiumfacepunch"
-	description = "A loathesome cocktail favored by Heaven's skeleton shift workers."
+	description = "A loathsome cocktail favored by Heaven's skeleton shift workers."
 	taste_description = "sour coffee"
 	color = "#8f7729"
 	strength = 20
 
 	glass_name = "Elysium Facepunch"
-	glass_desc = "A loathesome cocktail favored by Heaven's skeleton shift workers."
+	glass_desc = "A loathsome cocktail favored by Heaven's skeleton shift workers."
 
-	allergen_type = ALLERGEN_COFFEE|ALLERGEN_FRUIT|ALLERGEN_STIMULANT //Made from kahlua(Coffee/caffeine) and lemonjuice(fruit)
+	allergen_type = ALLERGEN_COFFEE|ALLERGEN_FRUIT|ALLERGEN_STIMULANT //Made from Kahlúa(Coffee/caffeine) and lemonjuice(fruit)
 
 /datum/reagent/ethanol/erebusmoonrise
 	name = "Erebus Moonrise"
@@ -3952,13 +3952,13 @@
 /datum/reagent/ethanol/bitters
 	name = "Bitters"
 	id = "bitters"
-	description = "An aromatic, typically alcohol-based infusions of bittering botanticals and flavoring agents like fruit peels, spices, dried flowers, and herbs."
+	description = "An aromatic, typically alcohol-based infusions of bittering botanicals and flavoring agents like fruit peels, spices, dried flowers, and herbs."
 	taste_description = "sharp bitterness"
 	color = "#9b6241" // rgb(155, 98, 65)
 	strength = 50
 
 	glass_name = "Bitters"
-	glass_desc = "An aromatic, typically alcohol-based infusions of bittering botanticals and flavoring agents like fruit peels, spices, dried flowers, and herbs."
+	glass_desc = "An aromatic, typically alcohol-based infusions of bittering botanicals and flavoring agents like fruit peels, spices, dried flowers, and herbs."
 
 /datum/reagent/ethanol/soemmerfire
 	name = "Soemmer Fire"
@@ -3971,7 +3971,7 @@
 	glass_name = "Soemmer Fire"
 	glass_desc = "A painfully hot mixed drink, for when you absolutely need to hurt right now."
 
-	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from manhattan(whiskey(grains), vermouth(fruit))
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_FRUIT //Made from Manhattan(whiskey(grains), vermouth(fruit))
 
 /datum/reagent/drink/soemmerfire/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	..()
@@ -4003,7 +4003,7 @@
 	glass_name = "Morning After"
 	glass_desc = "The finest hair of the dog, coming up!"
 
-	allergen_type = ALLERGEN_GRAINS|ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Made from sbiten(vodka(grain)) and coffee(coffee/caffine)
+	allergen_type = ALLERGEN_GRAINS|ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Made from sbiten(vodka(grain)) and coffee(coffee/caffeine)
 
 /datum/reagent/ethanol/vesper
 	name = "Vesper"
@@ -4250,7 +4250,7 @@
 	name = "Godka"
 	id = "godka"
 	description = "Number one drink AND fueling choice for Russians multiverse-wide."
-	taste_description = "russian steel and a hint of grain"
+	taste_description = "Russian steel and a hint of grain"
 	color = "#0064C8"
 	strength = 50
 
@@ -4279,7 +4279,7 @@
 /datum/reagent/ethanol/holywine
 	name = "Angel Ichor"
 	id = "holywine"
-	description = "A premium alchoholic beverage made from distilled angel blood."
+	description = "A premium alcoholic beverage made from distilled angel blood."
 	taste_description = "wings in a glass, and a hint of grape"
 	color = "#C4921E"
 	strength = 20
@@ -4330,7 +4330,7 @@
 	glass_name = "Angel's Kiss"
 	glass_desc = "Miracle time!"
 
-	allergen_type = ALLERGEN_FRUIT|ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Made from holy wine(fruit), and kahlua(coffee)
+	allergen_type = ALLERGEN_FRUIT|ALLERGEN_COFFEE|ALLERGEN_STIMULANT //Made from holy wine(fruit), and Kahlúa(coffee)
 
 /datum/reagent/ethanol/ichor_mead
 	name = "Ichor Mead"

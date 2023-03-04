@@ -508,10 +508,10 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 					. += "\tPacemaker-assisted [organ_name]"
 				if("lungs")
 					. += "\tAssisted [organ_name]"
-				if("voicebox") //on adding voiceboxes for speaking skrell/similar replacements
+				if("voicebox") //on adding voiceboxes for speaking Skrell/similar replacements
 					. += "\tSurgically altered [organ_name]"
 				if("eyes")
-					. += "\tRetinal overlayed [organ_name]"
+					. += "\tRetinal overlaid [organ_name]"
 				if("brain")
 					. += "\tAssisted-interface [organ_name]"
 				else

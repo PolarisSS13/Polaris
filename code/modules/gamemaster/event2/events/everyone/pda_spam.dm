@@ -86,7 +86,7 @@
 			"Once you are a player with MaxBet, you will also receive lucrative weekly and monthly promotions.",\
 			"You will be able to enjoy over 450 top-flight casino games at MaxBet.")
 		if(2)
-			sender = pick(300;"QuickDatingSystem",200;"Find your Russian bride",50;"Tajaran beauties are waiting",50;"Find your secret skrell crush",50;"Beautiful unathi brides")
+			sender = pick(300;"QuickDatingSystem",200;"Find your Russian bride",50;"Tajaran beauties are waiting",50;"Find your secret Skrell crush",50;"Beautiful Unathi brides")
 			message = pick("Your profile caught my attention and I wanted to write and say hello (QuickDating).",\
 			"If you will write to me on my email [pick(first_names_female)]@[pick(last_names)].[pick("ru","ck","tj","ur","nt")] I shall necessarily send you a photo (QuickDating).",\
 			"I want that we write each other and I hope, that you will like my profile and you will answer me (QuickDating).",\
@@ -97,7 +97,7 @@
 			message = pick("Luxury watches for Blowout sale prices!",\
 			"Watches, Jewelry & Accessories, Bags & Wallets !",\
 			"Deposit 100$ and get 300$ totally free!",\
-			" 100K NT.|WOWGOLD �nly $89            <HOT>",\
+			" 100K NT.|WOWGOLD Only $89            <HOT>",\
 			"We have been filed with a complaint from one of your customers in respect of their business relations with you.",\
 			"We kindly ask you to open the COMPLAINT REPORT (attached) to reply on this complaint..")
 		if(4)

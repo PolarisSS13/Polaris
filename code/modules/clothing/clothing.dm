@@ -149,7 +149,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	//Set species_restricted list
 	switch(target_species)
 		if(SPECIES_HUMAN, SPECIES_SKRELL)	//humanoid bodytypes
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //skrell/humans can wear each other's suits
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //Skrell/humans can wear each other's suits
 		else
 			species_restricted = list(target_species)
 
@@ -169,7 +169,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	//Set species_restricted list
 	switch(target_species)
 		if(SPECIES_SKRELL)
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //skrell helmets fit humans too
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //Srell helmets fit humans too
 
 		else
 			species_restricted = list(target_species)

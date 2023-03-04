@@ -87,7 +87,7 @@
 		if (NORTHWEST) return 315
 		if (SOUTHWEST) return 225
 
-// Returns the angle in english
+// Returns the angle in English
 /proc/angle2text(var/degree)
 	return dir2text(angle2dir(degree))
 

@@ -12,7 +12,7 @@
  */
 /obj/effect/alien
 	name = "alien thing"
-	desc = "theres something alien about this"
+	desc = "there's something alien about this"
 	icon = 'icons/mob/alien.dmi'
 
 /*
@@ -20,7 +20,7 @@
  */
 /obj/effect/alien/resin
 	name = "magmellite coating"
-	desc = "Looks like some kind of crystaline growth."
+	desc = "Looks like some kind of crystalline growth."
 	icon_state = "resin"
 
 	density = 1
@@ -32,7 +32,7 @@
 
 /obj/effect/alien/resin/wall
 	name = "magmellite wall"
-	desc = "Matter reformed into a crystaline wall."
+	desc = "Matter reformed into a crystalline wall."
 	icon_state = "resinwall" //same as resin, but consistency ho!
 
 /obj/effect/alien/resin/membrane

@@ -1122,7 +1122,7 @@
 		return
 
 	if(opened)//Cover is open
-		if(emagged)	return//Prevents the X has hit Y with Z message also you cant emag them twice
+		if(emagged)	return//Prevents the X has hit Y with Z message also you can't emag them twice
 		if(wiresexposed)
 			to_chat(user, "You must close the panel first")
 			return

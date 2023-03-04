@@ -1075,7 +1075,7 @@
 	name = "09/24/64 - Kaleidoscope Announce Exclusive Almach Deal"
 	data = "Mere days after the announcement of the reopening of Almachi-Solar trade, the Kaleidoscope Cosmetics corporation has confirmed that they have secured 'exclusive rights' to genetic products produced by several major manufacturers in the Angessa's Pearl system formerly owned by The Exalt - the insular mercurial theocracy of Exalt's Light - and recently handed over to the Almach Protectorate Government.\
 	<br><br>\
-	The details of the company's trade agreement have not been made public, but have reportedly already been approved by both the APG and SCG. The promptness of the agreement suggests to some that negotitations had been underway well before the announcement of the Protectorate's passing grade. Though cooperation between trans-stellar interests and government entities is far from unusual, such dealings with foreign governments - such as those widely made as 'open secrets' with Eutopia - are considered distasteful by many within the Icarus Front.\
+	The details of the company's trade agreement have not been made public, but have reportedly already been approved by both the APG and SCG. The promptness of the agreement suggests to some that negotiations had been underway well before the announcement of the Protectorate's passing grade. Though cooperation between trans-stellar interests and government entities is far from unusual, such dealings with foreign governments - such as those widely made as 'open secrets' with Eutopia - are considered distasteful by many within the Icarus Front.\
 	<br><br>\
 	The Angessan products Kaleidoscope intends to offer have also not been made public, but are all to be thoroughly screened by the Transgressive Technologies Commission before being made available, though 'failing' proposals may be approved for use exclusively within Protectorate territory."
 
@@ -1091,7 +1091,7 @@
 	<br><br>\
 	The XIV Sri Chamarajendra with crew of 32, and IIV Reimarus with 9 are both reported to have lost contact with the system's spaceport while undertaking far-orbit salvage operations on decommissioned and abandoned facilities, including the ILS Harvest Moon which detonated with all hands earlier this year. The disappearances have spurred the system government to request greater anti-piracy support from the SCG, which has been much reduced since the Almach War and increased tensions on the Hegemony border.\
 	<br><br>\
-	While Proximal to the independent and often 'lawless' Eutopia system, as well as the Rarkajar Rift, infamous prowl of the human-tajaran Jaguar Gang, the Isavau's System has rarely been a direct target for such large-scale apparent hijackings, and no group has yet claimed credit or demanded ransom."
+	While Proximal to the independent and often 'lawless' Eutopia system, as well as the Rarkajar Rift, infamous prowl of the human-Tajaran Jaguar Gang, the Isavau's System has rarely been a direct target for such large-scale apparent hijackings, and no group has yet claimed credit or demanded ransom."
 
 /datum/lore/codex/page/article95
 	name = "12/27/64 - NanoTrasen Accused In Satisfaction Poll Fixing"

@@ -208,7 +208,7 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 			pixel_y = -128
 			grav_pull = 10
 			consume_range = 4
-			dissipate = 0 //It cant go smaller due to e loss.
+			dissipate = 0 //It can't go smaller due to e loss.
 			cut_overlays()
 			if(chained)
 				add_overlay("chain_s9")
@@ -226,7 +226,7 @@ GLOBAL_LIST_BOILERPLATE(all_singularities, /obj/singularity)
 			pixel_y = -160
 			grav_pull = 16
 			consume_range = 5
-			dissipate = 0 //It cant go smaller due to e loss
+			dissipate = 0 //It can't go smaller due to e loss
 			event_chance = 25 //Events will fire off more often.
 			if(chained)
 				add_overlay("chain_s9")

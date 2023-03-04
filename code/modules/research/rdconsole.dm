@@ -284,7 +284,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(!sync)
 			to_chat(usr, "<span class='notice'>You must connect to the network first.</span>")
 		else
-			griefProtection() //Putting this here because I dont trust the sync process
+			griefProtection() //Putting this here because I don't trust the sync process
 			spawn(3 SECONDS)
 				if(src)
 					for(var/obj/machinery/r_n_d/server/S in machines)

@@ -16,7 +16,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 	Get_Holiday()
 	return 1
 
-//sets up the Holiday global variable. Shouldbe called on game configuration or something.
+//sets up the Holiday global variable. Should be called on game configuration or something.
 /proc/Get_Holiday()
 	if(!Holiday)	return		// Holiday stuff was not enabled in the config!
 
@@ -37,7 +37,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Standard Calendar."
 				if(12)
 					Holiday["Vertalliq-Qerr"] = "Vertalliq-Qerr, translated to mean 'Festival of the Royals', is a \
-					skrell holiday that celebrates the Qerr-Katish and all they have provided for the rest of skrell society, \
+					Skrell holiday that celebrates the Qerr-Katish and all they have provided for the rest of Skrell society, \
 					it often features colourful displays and skilled performers take this time to show off some of their more \
 					elaborate displays."
 				if(14)
@@ -75,7 +75,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(3)	//Mar
 			switch(DD)
 				if(3)
-					Holiday["Qixm-tes"] = "Qixm-tes, or 'Day of mourning', is a skrell holiday where skrell gather at places \
+					Holiday["Qixm-tes"] = "Qixm-tes, or 'Day of mourning', is a Skrell holiday where Skrell gather at places \
 					of worship and sing a song of mourning for all those who have died in service to their kingdoms."
 				if(14)
 					Holiday["Pi Day"] = "An unofficial holiday celebrating the mathematical constant Pi.  It is celebrated on \
@@ -111,7 +111,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					as performing regular prayers and charitable acts. Traditionally lasting one Earth lunar cycle, the dates were \
 					standardized by the Unitarian Church in the 22nd century."
 				if(15)
-					Holiday["Ka'merr Heritage Day"] = "A skrell-instituted formal holiday intended to standardize the dating of a wide \
+					Holiday["Ka'merr Heritage Day"] = "A Skrell-instituted formal holiday intended to standardize the dating of a wide \
 					range of varying Teshari cultural festivals onto one day. Official celebrations mostly involve time set aside for \
 					the veneration of spirits, but many Teshari resent the attempt to homogenize their pack cultures."
 				if(22)
@@ -135,7 +135,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Observance of this day varies throughout human space, but most common traditions are the act of bringing flowers to graves,\
 					attending parades, and the wearing of poppies (either paper or real) in one's clothing."
 				if(28)
-					Holiday["Jiql-tes"] = "A skrellian holiday that translates to 'Day of Celebration', skrell communities \
+					Holiday["Jiql-tes"] = "A Skrellian holiday that translates to 'Day of Celebration', Skrell communities \
 					gather for a grand feast and give gifts to friends and close relatives."
 
 		if(6)	//Jun
@@ -150,7 +150,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					Holiday["Civil Servant's Day"] = "Civil Servant's Day is a holiday observed in SCG member states that honors civil servants everywhere,\
 					(especially those who are members of the armed forces and the emergency services), or have been or have been civil servants in the past."
 				if(25)
-					Holiday["Merhyat Njarha"] = "A Njarir'Akhan tajaran tradition translating to \"Harmony of the House\", in which Njarjirii citizens pay \
+					Holiday["Merhyat Njarha"] = "A Njarir'Akhan Tajaran tradition translating to \"Harmony of the House\", in which Njarjirii citizens pay \
 					homage to their ruling house and their ancestors. Traditions include large communal meals and dances hosted by the ruling house, \
 					and the intensive upkeep of community spaces."
 
@@ -170,9 +170,9 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(8)	//Aug
 			switch(DD)
 				if(11)
-					Holiday["Tajaran Contact Day"] = "The anniversary of first contact between SolGov and the tajaran species, widely observed\
-					throughout tajaran and human space. Marks the date that in 2513, a human exploration team investigating electromagnetic \
-					emissions from the Meralar system made radio contact with the tajaran scientific outpost that had broadcast them."
+					Holiday["Tajaran Contact Day"] = "The anniversary of first contact between SolGov and the Tajaran species, widely observed\
+					throughout Tajaran and human space. Marks the date that in 2513, a human exploration team investigating electromagnetic \
+					emissions from the Meralar system made radio contact with the Tajaran scientific outpost that had broadcast them."
 				if(20)
 					Holiday["Obon"] = "An ancient Earth holiday originating in east Asia, for the honouring of one's ancestral spirits. \
 					Traditions include the maintenance of grave sites and memorials, and community traditional dance performances."
@@ -182,7 +182,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(9)	//Sep
 			switch(DD)
 				if(17)
-					Holiday["Qill-xamr"] = "Translated to 'Night of the dead', it is a skrell holiday where skrell \
+					Holiday["Qill-xamr"] = "Translated to 'Night of the dead', it is a Skrell holiday where Skrell \
 					communities hold parties in order to remember loved ones who passed, unlike Qixm-tes, this applies to everyone \
 					and is a joyful celebration."
 				if(19)
@@ -201,12 +201,12 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(10)	//Oct
 			switch(DD)
 				if(9)
-					Holiday["Lief Eriksson Day"] = "A day commemorating Norse explorer Lief Eriksson, an early Scandinavian cultural figure \
+					Holiday["Leif Eriksson Day"] = "A day commemorating Norse explorer Leif Eriksson, an early Scandinavian cultural figure \
 					who is thought to have been the first European to set foot in North America. He continues to be celebrated on Sif as a symbol of \
-					nordic adventuring spirit, and seen by many as a spiritual forerunner to the colonization of Vir."
+					Nordic adventuring spirit, and seen by many as a spiritual forerunner to the colonization of Vir."
 				if(10)
-					Holiday["SCV Lief Eriksson Day"] = "A day commemorating the official establishment of New Reykjavik by a Scandinavian Union colony \
-					ship - the SCV Lief Eriksson - in 2209, marking the first human settlement on the surface of Sif. Some believe the exact date was fudged."
+					Holiday["SCV Leif Eriksson Day"] = "A day commemorating the official establishment of New Reykjavik by a Scandinavian Union colony \
+					ship - the SCV Leif Eriksson - in 2209, marking the first human settlement on the surface of Sif. Some believe the exact date was fudged."
 				if(16)
 					Holiday["Boss' Day"] = "Boss' Day has traditionally been a day for employees to thank their bosses for the difficult work that they do \
 					throughout the year. This day was created for the purpose of strengthening the bond between employer and employee."
@@ -242,7 +242,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 					These days, SolGov ensures that past efforts were not in vein, and continues to honor this holiday across the galaxy as a historical \
 					reminder."
 				if(22)
-					Holiday["Vertalliq-qixim"] = "A skrellian holiday that celebrates the skrell's first landing on one of \
+					Holiday["Vertalliq-qixim"] = "A Skrellian holiday that celebrates the Skrell's first landing on one of \
 					their moons. It's often celebrated with grand festivals."
 				if(24)
 					Holiday["Christmas Eve"] = "The eve of Christmas, an old holiday from Earth that mainly involves gift \
