@@ -10,36 +10,35 @@
 
 /datum/lore/system/New()
 	..()
-	if(autogenerate_destinations)
-		var/i = 3
-		while(i) // three random places per system per round should be plenty
-			var/initial = ""
-			var/mission = list()
-			if(rand(length(planets))) // equal chance of an event in local space or any individual planet
-				initial = pick(planetary_destinations)
-				if(initial in list("an outpost", "a facility", "a commune", "a settlement")) //some of these aren't in the default list but are used down the line
-					mission = list(ATC_TYPICAL)
-				else if(initial in list("a ruin"))
-					mission = list(ATC_SALVAGE)
-				else
-					mission = list(ATC_ALL_CIV)
-				locations += new /datum/lore/location((initial + " on " + pick(planets) + ", " + name), mission)
+	if(!autogenerate_destinations)
+		return
+	for(var/i in 1 to 3)// three random places per system per round should be plenty
+		var/initial = ""
+		var/mission = list()
+		if(rand(length(planets))) // equal chance of an event in local space or any individual planet
+			initial = pick(planetary_destinations)
+			if(initial in list("an outpost", "a facility", "a commune", "a settlement")) //some of these aren't in the default list but are used down the line
+				mission = list(ATC_TYPICAL)
+			else if(initial in list("a ruin"))
+				mission = list(ATC_SALVAGE)
 			else
-				initial = pick(space_destinations)
-				if(initial in list("a waystation", "a satellite"))
-					mission = list(ATC_TRANS, ATC_FREIGHT, ATC_DEF, ATC_INDU) //generally unmanned so no medical or science jobs
-				else if(initial in list("an anomaly"))
-					mission = list(ATC_DEF, ATC_SCI) //theres kinda only two things to do about mysterious space wedgies)
-				else if(initial in list("a skathari hotspot"))
-					mission = list(ATC_DEF, ATC_MED)
-				else if(initial in list("a dockyard", "a station", "a vessel", "a spaceport", "an outpost", "a facility"))
-					mission = list(ATC_TYPICAL)
-				else if(initial in list("a derelict", "a wreck"))
-					mission = list(ATC_SALVAGE)
-				else
-					mission = list(ATC_ALL_CIV)
-				locations += new /datum/lore/location("[initial] in [name]", mission)
-			i--
+				mission = list(ATC_ALL_CIV)
+			locations += new /datum/lore/location((initial + " on " + pick(planets) + ", " + name), mission)
+		else
+			initial = pick(space_destinations)
+			if(initial in list("a waystation", "a satellite"))
+				mission = list(ATC_TRANS, ATC_FREIGHT, ATC_DEF, ATC_INDU) //generally unmanned so no medical or science jobs
+			else if(initial in list("an anomaly"))
+				mission = list(ATC_DEF, ATC_SCI) //theres kinda only two things to do about mysterious space wedgies)
+			else if(initial in list("a skathari hotspot"))
+				mission = list(ATC_DEF, ATC_MED)
+			else if(initial in list("a dockyard", "a station", "a vessel", "a spaceport", "an outpost", "a facility"))
+				mission = list(ATC_TYPICAL)
+			else if(initial in list("a derelict", "a wreck"))
+				mission = list(ATC_SALVAGE)
+			else
+				mission = list(ATC_ALL_CIV)
+			locations += new /datum/lore/location("[initial] in [name]", mission)
 
 //some of the locations with identical mission types could be compressed with pick expressions in a single location datum to improve weighting
 //this usually isn't super necessary and is often outright counterproductive so I haven't really done it

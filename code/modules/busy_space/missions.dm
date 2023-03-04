@@ -3,10 +3,10 @@
 	var/mission_strings = list()
 	var/mission_type = ""
 
-/datum/lore/mission/New(a,b,c)
-	prefix = a
-	mission_strings = b
-	mission_type = c
+/datum/lore/mission/New(_prefix,_mission_strings,_mission_type)
+	prefix = _prefix
+	mission_strings = _mission_strings
+	mission_type = _mission_type
 
 /datum/lore/mission/prebuilt
 /datum/lore/mission/prebuilt/New(a)

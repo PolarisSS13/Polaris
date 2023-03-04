@@ -48,9 +48,7 @@ var/global/datum/lore/atc_controller/atc = new/datum/lore/atc_controller
 	msg("Automated Shuttle, cleared to complete routine transfer from [using_map.station_name] to [using_map.dock_name].")
 
 /datum/lore/atc_controller/proc/random_convo()
-	var/one = pick(loremaster.organizations) //These will pick an index, not an instance
-
-	var/datum/lore/organization/source = loremaster.organizations[one] //Resolve to the instances
+	var/datum/lore/organization/source = loremaster.organizations[pick(loremaster.organizations)]
 
 	//get the relevant mission string from our org.
 	//will also give us a new ship name
