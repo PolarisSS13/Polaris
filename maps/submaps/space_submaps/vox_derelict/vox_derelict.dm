@@ -134,17 +134,55 @@
 	name = "Vox Raider"
 	corpse_outfit = /decl/hierarchy/outfit/vox/raider
 
-// TODO Mobs need icons and logic
+/decl/mob_organ_names/vox_drone
+	hit_zones = list(
+		"chassis",
+		"crown",
+		"tail",
+		"left claw",
+		"right claw",
+		"left motivator",
+		"right motivator"
+	)
+
+/datum/ai_holder/simple_mob/vox_drone
+	pointblank = TRUE
+	conserve_ammo = TRUE
+	firing_lanes = TRUE
+	can_flee = FALSE
+
+/datum/say_list/vox_drone
+
 /mob/living/simple_mob/mechanical/ark_adjunct
-	name = "vox drone"
+	name = "vox worker drone"
 	desc = "Some kind of vox-made drone, all clicking bioalloy and glowing magenta lights."
-	color = COLOR_GREEN_GRAY
+	icon = 'maps/submaps/space_submaps/vox_derelict/icons/vox_mobs.dmi'
+	icon_state = "improvised"
+	icon_living = "improvised"
+	icon_dead = "improvised_dead"
+	faction = "vox_ark"
+	maxHealth = 3 LASERS_TO_KILL
+	health = 3 LASERS_TO_KILL
+	water_resist = 1
+	movement_sound = 'sound/effects/servostep.ogg'
+	attacktext = list("slashed")
+	organ_names = /decl/mob_organ_names/vox_drone
+	ai_holder_type = /datum/ai_holder/simple_mob/vox_drone
+	say_list_type = /datum/say_list/vox_drone
+	melee_damage_lower = 8
+	melee_damage_upper = 8
+	attack_armor_pen = 5
 
 /mob/living/simple_mob/mechanical/ark_adjunct/soldier
 	name = "vox soldier drone"
-
-/mob/living/simple_mob/mechanical/ark_adjunct/worker
-	name = "vox worker drone"
+	icon_state = "arkmade"
+	icon_living = "arkmade"
+	icon_dead = "arkmade_dead"
+	maxHealth = 6 LASERS_TO_KILL
+	health = 6 LASERS_TO_KILL
+	melee_damage_lower = 15
+	melee_damage_upper = 25
+	attack_armor_pen = 25
 
 // VOX PROPS: todo proper icons
 /obj/machinery/portable_atmospherics/hydroponics/vox
