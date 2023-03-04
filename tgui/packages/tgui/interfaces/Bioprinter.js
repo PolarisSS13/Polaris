@@ -15,7 +15,7 @@ export const Bioprinter = (props, context) => {
         <Modal textAlign="center"
           fontSize={2}
           color="red">
-          <Icon name="spinner" spin={true} /> PRINTING...<br/><br/>
+          <Icon name="spinner" spin /> PRINTING...<br /><br />
           <Button
             icon="ban"
             content="Cancel"
@@ -42,23 +42,24 @@ export const Bioprinter = (props, context) => {
               />
             </Fragment>
           )}>
-            {!data.biomassContainer ? <Box inline color="bad">No biomass container inserted.</Box>
+            {!data.biomassContainer
+              ? <Box inline color="bad">No biomass container inserted.</Box>
               : <Box inline><b>Stored biomass:</b> {data.biomassVolume}/{data.biomassMax}</Box>}<br />
-            {!data.dna ? <Box inline color="bad">No DNA sample inserted.</Box>
-              : <Box inline>
-                <b>DNA hash:</b> {data.dnaHash}<br />
-                <b>DNA species:</b> {data.dnaSpecies}<br />
-              </Box>}<br />
+            {!data.dna
+              ? <Box inline color="bad">No DNA sample inserted.</Box>
+              : <Box inline><b>DNA sample:</b> {data.dnaSpecies}, {data.dnaHash}</Box>}<br />
             <b>Time to print:</b> {data.printTime / 10} seconds
           </Section>
           <Section title="Printing" scrollable>
             {data.products.map(product => (
-              <Flex>
+              <Flex key={product.name}>
                 <Flex.Item basis="33%" grow={1}>
                   <Box inline color={product.anomalous ? "purple" : "label"}>{product.name}</Box>
                 </Flex.Item>
                 <Flex.Item basis="33%" grow={1}>
-                  {product.canPrint ? <Box>{product.cost}/{product.cost}</Box> : <Box>{data.biomassVolume}/{product.cost}</Box>}
+                  {product.canPrint
+                    ? <Box>{product.cost}/{product.cost}</Box>
+                    : <Box>{data.biomassVolume}/{product.cost}</Box>}
                 </Flex.Item>
                 <Flex.Item>
                   <Button
