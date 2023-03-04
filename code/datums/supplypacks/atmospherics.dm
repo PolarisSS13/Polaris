@@ -86,7 +86,7 @@
 	name = "Internals crate"
 	contains = list(
 			/obj/item/clothing/mask/gas = 3,
-			/obj/item/tank/air = 3
+			/obj/item/tank/oxygen = 3
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate/aether

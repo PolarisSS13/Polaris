@@ -691,7 +691,7 @@
 /mob/living/carbon/human/get_species()
 	if(!species)
 		set_species()
-	return species.name
+	return species
 
 /mob/living/carbon/human/proc/play_xylophone()
 	if(!src.xylophone)

@@ -144,7 +144,7 @@
 		user.visible_message("[user] turns [src] off.", "You turn off [src].")
 		cooking = FALSE // Stop cooking here, too, just in case.
 
-	playsound(src, 'sound/machines/click.ogg', 40, 1)
+	playsound(src, "button", 40, 1)
 	update_icon()
 
 /obj/machinery/appliance/AICtrlClick(mob/user)
@@ -655,7 +655,7 @@
 		if (isSynthetic())
 			src.composition_reagent = "iron"
 		else
-			if(istype(src, /mob/living/carbon/human/diona) || istype(src, /mob/living/carbon/alien/diona))
+			if(istype(src, /mob/living/carbon/human/diona) || istype(src, /mob/living/carbon/diona))
 				src.composition_reagent = "nutriment" // diona are plants, not meat
 			else
 				src.composition_reagent = "protein"

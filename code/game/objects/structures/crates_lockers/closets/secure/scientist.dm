@@ -8,7 +8,7 @@
 		/obj/item/clothing/suit/storage/toggle/labcoat,
 		/obj/item/clothing/shoes/white,
 		/obj/item/radio/headset/headset_sci,
-		/obj/item/tank/air,
+		/obj/item/tank/oxygen,
 		/obj/item/clothing/mask/gas,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,
 		/obj/item/clothing/shoes/boots/winter/science)
@@ -40,7 +40,7 @@
 		/obj/item/clothing/gloves/sterile/latex,
 		/obj/item/radio/headset/heads/rd,
 		/obj/item/radio/headset/heads/rd/alt,
-		/obj/item/tank/air,
+		/obj/item/tank/oxygen,
 		/obj/item/clothing/mask/gas,
 		/obj/item/flash,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/science,

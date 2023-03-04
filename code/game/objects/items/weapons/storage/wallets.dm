@@ -24,7 +24,7 @@
 		/obj/item/forensics,
 		/obj/item/glass_extra,
 		/obj/item/haircomb,
-		/obj/item/hand,
+		/obj/item/cardhand,
 		/obj/item/key,
 		/obj/item/lipstick,
 		/obj/item/paper,

@@ -528,11 +528,6 @@
 				to_chat(src, "<span class='warning'>Somebody has a grip on them!</span>")
 				return
 
-		if(!iscarbon(src))
-			M.LAssailant = null
-		else
-			M.LAssailant = usr
-
 	else if(isobj(AM))
 		var/obj/I = AM
 		if(!can_pull_size || can_pull_size < I.w_class)
@@ -584,7 +579,7 @@
 /mob/proc/is_mechanical()
 	if(mind && (mind.assigned_role == "Cyborg" || mind.assigned_role == "AI"))
 		return 1
-	return istype(src, /mob/living/silicon) || get_species() == "Machine"
+	return istype(src, /mob/living/silicon) || get_species_name() == "Machine"
 
 /mob/proc/is_ready()
 	return client && !!mind
@@ -840,7 +835,11 @@
 	losebreath = clamp(amount, 0, 25)
 
 /mob/proc/get_species()
-	return ""
+	return
+
+/mob/proc/get_species_name()
+	var/datum/species/my_species = get_species()
+	return my_species?.name
 
 /mob/proc/flash_weak_pain()
 	flick("weak_pain",pain)

@@ -260,8 +260,8 @@
 		mannequin.dna = new /datum/dna(null)
 	mannequin.delete_inventory(TRUE)
 	dress_preview_mob(mannequin)
-	mannequin.toggle_tail(setting = TRUE)
-	mannequin.toggle_wing(setting = TRUE)
+	mannequin.toggle_tail(setting = animations_toggle)
+	mannequin.toggle_wing(setting = animations_toggle)
 	mannequin.ImmediateOverlayUpdate()
 
 	update_character_previews(new /mutable_appearance(mannequin))
