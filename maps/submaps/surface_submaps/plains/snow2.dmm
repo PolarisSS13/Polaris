@@ -1,6 +1,6 @@
 "a" = (/turf/template_noop,/area/template_noop)
 "b" = (/turf/template_noop,/area/submap/smol2)
-"c" = (/turf/simulated/floor/outdoors/snow,/area/submap/smol2)
+"c" = (/obj/effect/landmark/snowy_turf,/turf/template_noop,/area/submap/smol2)
 
 (1,1,1) = {"
 aaaaaaaaaaaaaaa

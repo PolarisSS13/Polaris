@@ -34,10 +34,10 @@
 
 		var/turf/T = get_turf(src)
 		if(istype(T))
-			return T.attackby(O, user)	
-	
+			return T.attackby(O, user)
+
 	. = ..()
-	
+
 
 // Holder for vine plants.
 // Icons for plants are generated as overlays, so setting it to invisible wouldn't work.

@@ -6497,7 +6497,7 @@
 	name = "\improper Suhariki"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "croutons"
-	desc = "Fried bread cubes. Popular in Terran territories."
+	desc = "Fried bread cubes. Popular in some Solar territories."
 	trash = /obj/item/trash/croutons
 	filling_color = "#c6b17f"
 	center_of_mass = list ("x"=15, "y"=9)
@@ -6671,7 +6671,7 @@
 	.=..()
 	reagents.add_reagent("capsaicin", 5)
 
-/obj/item/reagent_containers/food/snacks/sun_snax //ADDITION 04/14/2021
+/obj/item/reagent_containers/food/snacks/sun_snax
 	name = "\improper Sun Snax!"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "sun_snax"
@@ -6771,7 +6771,7 @@
 	.=..()
 	reagents.add_reagent("capsaicin",1)
 
-/obj/item/reagent_containers/food/snacks/wasabi_peas //ADDITION 04/14/2021
+/obj/item/reagent_containers/food/snacks/wasabi_peas
 	name = "\improper Hadokikku Peas"
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "wasabi_peas"
@@ -6983,7 +6983,7 @@
 /obj/item/reagent_containers/food/snacks/canned/maps
 	name = "\improper MAPS"
 	icon_state = "maps"
-	desc = "A re-branding of a classic Terran snack! Contains mostly edible ingredients."
+	desc = "A re-branding of a classic Earth snack! Contains mostly edible ingredients."
 	trash = /obj/item/trash/maps
 	filling_color = "#330066"
 	center_of_mass = list("x"=15, "y"=9)
