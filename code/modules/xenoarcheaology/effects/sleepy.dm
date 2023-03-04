@@ -4,7 +4,7 @@
 	effect_color = "#a36fa1"
 
 
-/datum/artifact_effect/sleepy/New()
+/datum/artifact_effect/uncommon/sleepy/New()
 	..()
 	effect_type = pick(EFFECT_PSIONIC, EFFECT_ORGANIC)
 
