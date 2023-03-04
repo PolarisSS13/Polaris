@@ -7,22 +7,22 @@
 	icon = 'icons/obj/surgery.dmi'
 	icon_state = "bioprinter"
 
-	anchored = 1
-	density = 1
+	anchored = TRUE
+	density = TRUE
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 40
 	active_power_usage = 300
 
 	var/obj/item/reagent_containers/container = null		// This is the beaker that holds all of the biomass
 
-	var/print_delay = 100
-	var/base_print_delay = 100	// For Adminbus reasons
+	var/print_delay = 10 SECONDS
+	var/base_print_delay = 10 SECONDS // For Adminbus reasons
 	var/printing
+	var/print_timer
 	var/loaded_dna //Blood sample for DNA hashing.
+
 	var/malfunctioning = FALSE	// May cause rejection, or the printing of some alien limb instead!
-
 	var/complex_organs = FALSE	// Can it print more 'complex' organs?
-
 	var/anomalous_organs = FALSE	// Can it print anomalous organs?
 
 	// These should be subtypes of /obj/item/organ
@@ -78,14 +78,6 @@
 /obj/machinery/organ_printer/Initialize()
 	. = ..()
 	default_apply_parts()
-	
-/obj/machinery/organ_printer/examine(var/mob/user)
-	. = ..()
-	var/biomass = get_biomass_volume()
-	if(biomass)
-		. += "<span class='notice'>It is loaded with [biomass] units of biomass.</span>"
-	else
-		. += "<span class='notice'>It is not loaded with any biomass.</span>"
 
 /obj/machinery/organ_printer/RefreshParts()
 	// Print Delay updating
@@ -117,84 +109,85 @@
 	. = ..()
 
 /obj/machinery/organ_printer/attack_hand(mob/user)
-
-	if(stat & (BROKEN|NOPOWER))
+	if (stat & (BROKEN|NOPOWER))
 		return
-
-	if(panel_open)
-		to_chat(user, "<span class='warning'>Close the panel first!</span>")
+	else if (panel_open)
+		to_chat(user, SPAN_WARNING("Close the panel first!"))
 		return
+	tgui_interact(user)
 
-	if(printing)
-		to_chat(user, "<span class='notice'>\The [src] is busy!</span>")
-		return
+/obj/machinery/organ_printer/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+	ui = SStgui.try_update_ui(user, src, ui)
+	if(!ui)
+		ui = new(user, src, "Bioprinter", name)
+		ui.open()
 
-	if(container)
-		var/response = alert(user, "What do you want to do?", "Bioprinter Menu", "Print Limbs", "Cancel")
-		if(response == "Print Limbs")
-			printing_menu(user)
-	else
-		to_chat(user, "<span class='warning'>\The [src] can't operate without a reagent reservoir!</span>")
+/obj/machinery/organ_printer/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
+	var/list/data[0]
 
-/obj/machinery/organ_printer/proc/printing_menu(mob/user)
-	var/list/possible_list = list()
+	data["biomassContainer"] = container
+	data["biomassVolume"] = get_biomass_volume()
+	data["biomassMax"] = container?.reagents.maximum_volume
 
-	possible_list |= products
+	data["printTime"] = print_delay
+	data["isPrinting"] = printing
 
-	if(complex_organs)
-		possible_list |= complex_products
+	data["dna"] = loaded_dna
+	data["dnaHash"] = loaded_dna?["blood_DNA"]
+	// This is pretty hacky, but it seems like the blood sample doesn't otherwise keep its species data handy
+	var/mob/living/carbon/human/donor = loaded_dna?["donor"]
+	data["dnaSpecies"] = donor?.species ? donor.species.name : "N/A"
 
-	if(anomalous_organs)
-		possible_list |= anomalous_products
+	var/list/products_data = list()
+	for (var/O in products)
+		products_data +=  list(list(
+			"name" = O,
+			"cost" = products[O][2],
+			"canPrint" = get_biomass_volume() >= products[O][2] && loaded_dna,
+			"anomalous" = anomalous_products.Find(O)
+		))
+	data["products"] = products_data
 
-	var/choice = input("What would you like to print?") as null|anything in possible_list
+	return data
 
-	if(!choice || printing || (stat & (BROKEN|NOPOWER)))
-		return
+/obj/machinery/organ_printer/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
+	if (..())
+		return TRUE
+	switch (action)
+		if ("ejectBeaker")
+			if (container)
+				container.forceMove(get_turf(src))
+				if (usr.Adjacent(src))
+					usr.put_in_active_hand(container)
+				container = null
+		if ("flushDNA")
+			if (loaded_dna)
+				loaded_dna = null
+				visible_message(SPAN_NOTICE("\The [src] whirrs as it flushes its most recent DNA sample."))
+		if ("printOrgan")
+			var/organ_name = params["organName"]
+			var/product_entry = products[organ_name]
+			var/atom/product_path = product_entry?[1]
+			if (!product_entry || !product_path || get_biomass_volume() < product_entry[2])
+				return
+			container.reagents.remove_reagent("biomass", product_entry[2])
+			playsound(src, "switch", 30)
+			visible_message(SPAN_NOTICE("\The [src] fills with fluid and begins to print a new [initial(product_path.name)]."))
+			set_active(TRUE)
+			print_timer = addtimer(CALLBACK(src, .proc/print_organ, product_entry[1]), print_delay, TIMER_STOPPABLE)
+		if ("cancelPrint")
+			if (!print_timer)
+				return
+			playsound(src, "switch", 30)
+			playsound(src, 'sound/effects/squelch1.ogg', 40, TRUE)
+			visible_message(SPAN_DANGER("\The [src] gurgles as it cancels its current task and discards the pulpy biomass."))
+			deltimer(print_timer)
+			set_active(FALSE)
 
-	if(!can_print(choice, possible_list[choice][2]))
-		return
-
-	container.reagents.remove_reagent("biomass", possible_list[choice][2])
-
-	update_use_power(USE_POWER_ACTIVE)
-	printing = 1
+/obj/machinery/organ_printer/proc/set_active(active, silent)
+	update_use_power(active ? USE_POWER_ACTIVE : USE_POWER_IDLE)
+	printing = active
 	update_icon()
-
-	visible_message("<span class='notice'>\The [src] begins churning.</span>")
-
-	sleep(print_delay)
-
-	update_use_power(USE_POWER_IDLE)
-	printing = 0
-	update_icon()
-
-	if(!choice || !src || (stat & (BROKEN|NOPOWER)))
-		return
-
-	print_organ(possible_list[choice][1])
-
-	return
-
-/obj/machinery/organ_printer/verb/eject_beaker()
-	set name = "Eject Beaker"
-	set category = "Object"
-	set src in oview(1)
-
-	if(usr.stat != 0)
-		return
-	add_fingerprint(usr)
-	remove_beaker()
-	return
-
-// Does exactly what it says it does
-// Returns 1 if it succeeds, 0 if it fails. Added in case someone wants to add messages to the user.
-/obj/machinery/organ_printer/proc/remove_beaker()
-	if(container)
-		container.forceMove(get_turf(src))
-		container = null
-		return 1
-	return 0
 
 // Checks for reagents, then reports how much biomass it has in it
 /obj/machinery/organ_printer/proc/get_biomass_volume()
@@ -206,19 +199,10 @@
 
 	return biomass_count
 
-/obj/machinery/organ_printer/proc/can_print(var/choice, var/masscount = 0)
-	var/biomass = get_biomass_volume()
-	if(biomass < masscount)
-		visible_message("<span class='notice'>\The [src] displays a warning: 'Not enough biomass. [biomass] stored and [masscount] needed.'</span>")
-		return 0
-
-	if(!loaded_dna || !loaded_dna["donor"])
-		visible_message("<span class='info'>\The [src] displays a warning: 'No DNA saved. Insert a blood sample.'</span>")
-		return 0
-
-	return 1
-
 /obj/machinery/organ_printer/proc/print_organ(var/choice)
+	update_use_power(USE_POWER_IDLE)
+	printing = 0
+	update_icon()
 	var/new_organ = choice
 	var/obj/item/organ/O = new new_organ(get_turf(src))
 	O.status |= ORGAN_CUT_AWAY
@@ -282,98 +266,39 @@
 
 /obj/machinery/organ_printer/flesh/print_organ(var/choice)
 	var/obj/item/organ/O = ..()
-
-	playsound(src, 'sound/machines/ding.ogg', 50, 1)
-	visible_message("<span class='info'>\The [src] dings, then spits out \a [O].</span>")
+	playsound(src, 'sound/machines/kitchen/microwave/microwave-end.ogg', 50, TRUE)
+	visible_message(SPAN_NOTICE("\The [src] dings and spits out a newly-grown [O.name]."))
 	return O
 
 /obj/machinery/organ_printer/flesh/attackby(obj/item/W, mob/user)
-	// DNA sample from syringe.
-	if(istype(W,/obj/item/reagent_containers/syringe))	//TODO: Make this actually empty the syringe
+	if (istype(W, /obj/item/reagent_containers/syringe))
 		var/obj/item/reagent_containers/syringe/S = W
-		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && injected.data)
-			loaded_dna = injected.data
-			S.reagents.remove_reagent("blood", injected.volume)
-			to_chat(user, "<span class='info'>You scan the blood sample into the bioprinter.</span>")
+		var/datum/reagent/blood/sample = S.reagents.get_reagent("blood")
+		if (!sample?.data)
+			to_chat(user, SPAN_WARNING("\The [W] doesn't contain a valid blood sample."))
+			return
+		loaded_dna = sample.data
+		S.reagents.clear_reagents()
+		S.mode = 0 // wow! we can't use the define because syringes.dm loads after bioprinter.dm! this is agony!
+		S.update_icon()
+		user.visible_message(
+			SPAN_NOTICE("\The [user] fills \the [src] with a blood sample."),
+			SPAN_NOTICE("You inject \the [src] with a blood sample from \the [W].")
+		)
 		return
-	else if(istype(W,/obj/item/reagent_containers/glass))
+	else if (istype(W, /obj/item/reagent_containers/glass))
+		if (container)
+			to_chat(user, SPAN_WARNING("\The [src] already has a container loaded."))
+			return
 		var/obj/item/reagent_containers/glass/G = W
-		if(container)
-			to_chat(user, "<span class='warning'>\The [src] already has a container loaded!</span>")
+		if (!do_after(user, 1 SECOND))
 			return
-		else if(do_after(user, 1 SECOND))
-			user.visible_message("[user] has loaded \the [G] into \the [src].", "You load \the [G] into \the [src].")
-			container = G
-			user.drop_item()
-			G.forceMove(src)
+		user.visible_message(
+			SPAN_NOTICE("\The [user] loads \the [G] into \the [src]."),
+			SPAN_NOTICE("You load \the [G] into \the [src]'s feedstock chamber.")
+		)
+		user.drop_from_inventory(G)
+		G.forceMove(src)
+		container = G
 		return
-
-	return ..()
-// END FLESH ORGAN PRINTER
-
-
-/* Roboprinter is made obsolete by the system already in place and mapped into Robotics
-/obj/item/circuitboard/roboprinter
-	name = "roboprinter circuit"
-	build_path = /obj/machinery/organ_printer/robot
-	board_type = new /datum/frame/frame_types/machine
-	origin_tech = list(TECH_DATA = 3, TECH_BIO = 3)
-	req_components = list(
-							/obj/item/stack/cable_coil = 2,
-							/obj/item/stock_parts/matter_bin = 2,
-							/obj/item/stock_parts/manipulator = 2)
-
-// ROBOT ORGAN PRINTER
-// Still Requires DNA, /obj/machinery/pros_fab is better for limbs
-/obj/machinery/organ_printer/robot
-	name = "prosthetic organ fabricator"
-	desc = "It's a machine that prints prosthetic organs."
-	icon_state = "roboprinter"
-	circuit = /obj/item/circuitboard/roboprinter
-
-	var/matter_amount_per_sheet = 10
-	var/matter_type = MAT_STEEL
-
-/obj/machinery/organ_printer/robot/full/Initialize()
 	. = ..()
-	stored_matter = max_stored_matter
-
-/obj/machinery/organ_printer/robot/dismantle()
-	if(stored_matter >= matter_amount_per_sheet)
-		new /obj/item/stack/material/steel(get_turf(src), FLOOR(stored_matter/matter_amount_per_sheet, 1))
-	return ..()
-
-/obj/machinery/organ_printer/robot/print_organ(var/choice)
-	var/obj/item/organ/O = ..()
-	O.robotize()
-	O.status |= ORGAN_CUT_AWAY  // robotize() resets status to 0
-	playsound(src, 'sound/machines/ding.ogg', 50, 1)
-	audible_message("<span class='info'>\The [src] dings, then spits out \a [O].</span>")
-	return O
-
-/obj/machinery/organ_printer/robot/attackby(var/obj/item/W, var/mob/user)
-	if(istype(W, /obj/item/stack/material) && W.get_material_name() == matter_type)
-		if((max_stored_matter-stored_matter) < matter_amount_per_sheet)
-			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
-			return
-		var/obj/item/stack/S = W
-		var/space_left = max_stored_matter - stored_matter
-		var/sheets_to_take = min(S.amount, FLOOR(space_left/matter_amount_per_sheet, 1))
-		if(sheets_to_take <= 0)
-			to_chat(user, "<span class='warning'>\The [src] is too full.</span>")
-			return
-		stored_matter = min(max_stored_matter, stored_matter + (sheets_to_take*matter_amount_per_sheet))
-		to_chat(user, "<span class='info'>\The [src] processes \the [W]. Levels of stored matter now: [stored_matter]</span>")
-		S.use(sheets_to_take)
-		return
-	else if(istype(W,/obj/item/reagent_containers/syringe))	//TODO: Make this actuall empty the syringe
-		var/obj/item/reagent_containers/syringe/S = W
-		var/datum/reagent/blood/injected = locate() in S.reagents.reagent_list //Grab some blood
-		if(injected && injected.data)
-			loaded_dna = injected.data
-			to_chat(user, "<span class='info'>You scan the blood sample into the bioprinter.</span>")
-		return
-	return ..()
-// END ROBOT ORGAN PRINTER
-*/
