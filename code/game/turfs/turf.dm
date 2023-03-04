@@ -394,3 +394,6 @@
 		ChangeTurf(/turf/simulated/floor/airless, preserve_outdoors = TRUE)
 		return TRUE
 	return FALSE
+
+/turf/proc/get_movement_cost()
+	return movement_cost
