@@ -105,10 +105,6 @@ GLOBAL_LIST_INIT(plant_item_products, list(
 	/obj/item/spacecash/c10 = 1
 	))
 
-GLOBAL_LIST_INIT(forbidden_plant_growth_sprites, list(
-	"gnomes"
-	))
+GLOBAL_LIST_INIT(forbidden_plant_growth_sprites, list())
 
-GLOBAL_LIST_INIT(forbidden_plant_product_sprites, list(
-	"gnomes"
-	))
+GLOBAL_LIST_INIT(forbidden_plant_product_sprites, list())

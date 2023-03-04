@@ -346,13 +346,34 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	// Destroy/cyborgize organs and limbs.
 	character.synthetic = null //Clear the existing var.
+	var/list/to_unamputate = list()
+	for(var/name in list(BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG))
+		var/status = pref.organ_data[name]
+		var/obj/item/organ/external/O = character.organs_by_name[name]
+		if (!O)
+			if (status != "amputated")
+				var/is_robotic = pref.organ_data[BP_TORSO] == "cyborg"
+				var/obj/item/organ/external/newpath = character.species?.has_limbs[name]?["path"]
+				if (!newpath)
+					continue
+				var/parent_name = initial(newpath.parent_organ)
+				var/obj/item/organ/external/I = character.organs_by_name[parent_name]
+				if (!I && pref.organ_data[parent_name] != "amputated")
+					to_unamputate[parent_name] = list("path" = character.species.has_limbs[parent_name]?["path"], "robotic" = is_robotic, "model" = pref.rlimb_data[BP_TORSO])
+				is_robotic ||= I?.robotic
+				to_unamputate[name] = list("path" = newpath, "robotic" = is_robotic, "model" = pref.rlimb_data[parent_name]||pref.rlimb_data[BP_TORSO])
+	for(var/name in to_unamputate)
+		var/newpath = to_unamputate[name]["path"]
+		if (!ispath(newpath)) continue
+		var/obj/item/organ/external/s = new newpath(character)
+		if (to_unamputate[name]["robotic"])
+			s.robotize(to_unamputate[name]["model"])
+
 	for(var/name in list(BP_HEAD, BP_L_HAND, BP_R_HAND, BP_L_ARM, BP_R_ARM, BP_L_FOOT, BP_R_FOOT, BP_L_LEG, BP_R_LEG, BP_GROIN, BP_TORSO))
 		var/status = pref.organ_data[name]
 		var/obj/item/organ/external/O = character.organs_by_name[name]
 		if(O)
-			if(status == null)
-				O.derobotize()
-			else if(status == "amputated")
+			if(status == "amputated")
 				O.remove_rejuv()
 			else if(status == "cyborg")
 				if(pref.rlimb_data[name])
@@ -362,15 +383,15 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 
 	for(var/name in list(O_HEART,O_EYES,O_VOICE,O_LUNGS,O_LIVER,O_KIDNEYS,O_SPLEEN,O_STOMACH,O_INTESTINE,O_BRAIN))
 		var/status = pref.organ_data[name]
+		if(!status)
+			continue
 		var/obj/item/organ/I = character.internal_organs_by_name[name]
 		if(istype(I, /obj/item/organ/internal/brain))
 			var/obj/item/organ/external/E = character.get_organ(I.parent_organ)
 			if(E.robotic < ORGAN_ASSISTED)
 				continue
 		if(I)
-			if(status == null)
-				I.derobotize()
-			else if(status == "assisted")
+			if(status == "assisted")
 				I.mechassist()
 			else if(status == "mechanical")
 				I.robotize()

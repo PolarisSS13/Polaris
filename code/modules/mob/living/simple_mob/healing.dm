@@ -152,6 +152,8 @@
 		visible_message(SPAN_WARNING("\The [src] twitches a bit, but then falls still."))
 		return FALSE
 
+	visible_message(SPAN_NOTICE("\The [src] is shocked back to life!"))
+
 	// Set the health to what it was prior to rejuve, with a bit of wiggle-room for totally dead critters.
 	var/initial_brute = bruteloss
 	var/initial_burn =  fireloss

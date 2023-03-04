@@ -14,7 +14,7 @@
 	var/other = list()
 	var/hotkeybuttons = list()
 	var/slot_info = list()
-	
+
 	HUD.adding = adding
 	HUD.other = other
 	HUD.hotkeybuttons = hotkeybuttons //These can be disabled for hotkey users
@@ -132,7 +132,7 @@
 		using = new /obj/screen()
 		using.name = "mov_intent"
 		using.icon = HUD.ui_style
-		using.icon_state = (m_intent == "run" ? "running" : "walking")
+		using.icon_state = move_intent.hud_icon_state
 		using.screen_loc = ui_movi
 		using.color = HUD.ui_color
 		using.alpha = HUD.ui_alpha
