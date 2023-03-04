@@ -9,7 +9,7 @@
 	range = RANGED
 	step_delay = 0.2 SECONDS
 
-	required_type = list(/obj/mecha/working/hoverpod, /obj/mecha/combat/gygax/serenity, /obj/mecha/combat/marauder)
+	required_type = list(/obj/mecha/working/hoverpod, /obj/mecha/medical/serenity, /obj/mecha/combat/marauder)
 
 	var/hover_sound = 'sound/machines/generator/generator_end.ogg'
 
