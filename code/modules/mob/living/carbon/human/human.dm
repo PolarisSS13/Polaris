@@ -1105,12 +1105,7 @@
 	if(species.icon_scale_x != 1 || species.icon_scale_y != 1)
 		update_transform()
 
-	if(species.base_color && default_colour)
-		//Apply colour.
-		r_skin = hex2num(copytext(species.base_color,2,4))
-		g_skin = hex2num(copytext(species.base_color,4,6))
-		b_skin = hex2num(copytext(species.base_color,6,8))
-	else
+	if(!default_colour || !species.apply_default_colours(src))
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
