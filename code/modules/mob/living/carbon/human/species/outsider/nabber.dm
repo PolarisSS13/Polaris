@@ -326,7 +326,7 @@
 	blood_color = "#4d3d50"
 	flesh_color = "#4d3d50"
 
-	icon_template = null	// They're 32x32 unlike their larger subjects.
+	icon_template = 'icons/mob/human_races/template.dmi'
 	icobase = 'icons/mob/human_races/nabber/monarch/body.dmi'
 	deform = 'icons/mob/human_races/nabber/monarch/body.dmi'
 	blood_mask = 'icons/mob/human_races/nabber/monarch/blood_mask.dmi'
