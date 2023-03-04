@@ -9,7 +9,7 @@
 	effect_type = pick(EFFECT_ELECTRO, EFFECT_PARTICLE)
 
 
-/datum/artifact_effect/robohurt/DoEffectTouch(mob/living/user)
+/datum/artifact_effect/uncommon/robohurt/DoEffectTouch(mob/living/user)
 	if (user)
 		if (istype(user, /mob/living/silicon/robot))
 			var/mob/living/silicon/robot/R = user
