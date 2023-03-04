@@ -848,6 +848,7 @@
 #include "code\game\mecha\equipment\tools\hardpoint_actuator.dm"
 #include "code\game\mecha\equipment\tools\inflatables.dm"
 #include "code\game\mecha\equipment\tools\jetpack.dm"
+#include "code\game\mecha\equipment\tools\jumpjet.dm"
 #include "code\game\mecha\equipment\tools\orescanner.dm"
 #include "code\game\mecha\equipment\tools\passenger.dm"
 #include "code\game\mecha\equipment\tools\powertool.dm"
