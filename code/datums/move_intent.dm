@@ -10,7 +10,7 @@
 
 /decl/move_intent/walk/Initialize()
 	. = ..()
-	move_delay = config.run_speed
+	move_delay = config.walk_speed
 
 // Running
 /decl/move_intent/run
@@ -19,4 +19,4 @@
 
 /decl/move_intent/run/Initialize()
 	. = ..()
-	move_delay = config.walk_speed
+	move_delay = config.run_speed
