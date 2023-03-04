@@ -41,12 +41,12 @@
 			stacktype = material.stack_type
 
 /obj/item/stack/tile/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 	if (istype(W, /obj/item/weldingtool))
 		var/obj/item/weldingtool/WT = W
 
 		if(can_weld == FALSE)
 			to_chat("You can't reform these into their original components.")
+			return
 
 		if(get_amount() < 4)
 			to_chat(user, "<span class='warning'>You need at least four tiles to do this.</span>")
@@ -55,15 +55,15 @@
 		if(WT.remove_fuel(0,user))
 			new welds_into(usr.loc)
 			usr.update_icon()
-			for (var/mob/M in viewers(src))
-				M.show_message("<span class='notice'>[src] is shaped by [user.name] with the welding tool.</span>", 3, "<span class='notice'>You hear welding.</span>", 2)
+			visible_message("<span class='notice'>\The [src] is shaped by [user.name] with the welding tool.</span>","You hear welding.")
 			var/obj/item/stack/tile/T = src
 			src = null
 			var/replace = (user.get_inactive_hand()==T)
 			T.use(4)
 			if (!T && replace)
 				user.put_in_hands(welds_into)
-		return
+		return TRUE
+	return ..()
 
 /*
  * Grass

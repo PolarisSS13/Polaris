@@ -1062,12 +1062,12 @@ About the new airlock wires panel:
 			if (stat & BROKEN)
 				to_chat(usr, "<span class='warning'>The panel is broken and cannot be closed.</span>")
 			else //close the panel, do the sound, update the icon, but don't toggle the door
-				src.p_open = 0
+				src.p_open = FALSE
 				playsound(src, C.usesound, 50, 1)
 				src.update_icon()
 				return
 		else //open the panel, do the sound, update the icon, open the wires menu but don't toggle the door
-			src.p_open = 1
+			src.p_open = TRUE
 			playsound(src, C.usesound, 50, 1)
 			src.update_icon()
 			return src.attack_hand(user)
@@ -1149,7 +1149,7 @@ About the new airlock wires panel:
 	..()
 
 /obj/machinery/door/airlock/set_broken()
-	src.p_open = 1
+	src.p_open = TRUE
 	stat |= BROKEN
 	if (secured_wires)
 		lock()
