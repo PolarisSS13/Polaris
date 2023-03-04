@@ -41,7 +41,7 @@
 
 	/// A list of all the products that this bioprinter can produce by default.
 	/// 1 unit of biomass (the default fuel) costs 1 unit of phoron,
-	/// so each organ costs roughly 20u of phoron (1 sheet) and each limb costs 60u of phoron (3 sheets).
+	/// so each organ costs roughly 20u of phoron (1 sheet) and each limb costs 40u of phoron (2 sheets).
 	var/list/products = list(
 		"Heart"   = list(/obj/item/organ/internal/heart,  20),
 		"Lungs"   = list(/obj/item/organ/internal/lungs,  20),
@@ -231,7 +231,7 @@
 				return
 			container.reagents.remove_reagent(biomass_id, product_entry[2])
 			playsound(src, "switch", 30)
-			visible_message(SPAN_NOTICE("\The [src] fills with fluid and begins to print a new [initial(product_path.name)]."))
+			visible_message(SPAN_NOTICE("\The [src] fills with fluid and begins to print \a [initial(product_path.name)]."))
 			print_timer = addtimer(CALLBACK(src, .proc/print_organ, product_entry[1]), print_delay, TIMER_STOPPABLE)
 			set_active(TRUE)
 			. = TRUE
@@ -290,7 +290,8 @@
 
 	print_timer = null
 	playsound(src, 'sound/machines/kitchen/microwave/microwave-end.ogg', 50, TRUE)
-	visible_message(SPAN_NOTICE("\The [src] dings and spits out a newly-grown [O.name]."))
+	visible_message(SPAN_NOTICE("\The [src] dings and spits out \a [O.name]."))
+	set_active(FALSE)
 	return O
 
 /obj/item/circuitboard/bioprinter
