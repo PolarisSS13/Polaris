@@ -44,8 +44,7 @@
 		if(H.glasses == hud)
 			H.glasses = null
 			H.recalculate_vis()
-	..()
-	return
+	return ..()
 
 /*	// One horrific bastardization of glorious inheritence dead. A billion to go. ~Mech
 /obj/mecha/medical/mechturn(direction)

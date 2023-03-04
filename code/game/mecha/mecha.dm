@@ -684,6 +684,9 @@
 	if(!melee_can_hit)
 		return
 
+	if(istype(T, /obj/machinery/disposal)) // Stops mechs from climbing into disposals
+		return
+
 	if(isliving(T))
 		var/mob/living/M = T
 		if(src.occupant.a_intent == I_HURT || isbrain(src.occupant)) //Brains cannot change intents; Exo-piloting brains lack any form of physical feedback for control, limiting the ability to 'play nice'.
@@ -696,7 +699,7 @@
 				var/mob/living/carbon/human/H = T
 
 				var/obj/item/organ/external/temp = H.get_organ(pick(BP_TORSO, BP_TORSO, BP_TORSO, BP_HEAD))
-				if(!istype(temp))
+				if(istype(temp))
 					var/update = 0
 					switch(damtype)
 						if("brute")
@@ -741,8 +744,6 @@
 			src.visible_message("[src] pushes [T] out of the way.")
 
 	else
-		if(istype(T, /obj/machinery/disposal)) // Stops mechs from climbing into disposals
-			return
 		if(src.occupant.a_intent == I_HURT || isbrain(src.occupant)) // Don't smash unless we mean it
 			if(damtype == "brute")
 				src.occupant_message("You hit [T].")
