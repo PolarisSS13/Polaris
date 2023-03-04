@@ -883,6 +883,7 @@
 #include "code\game\mecha\equipment\weapons\fire\incendiary.dm"
 #include "code\game\mecha\medical\medical.dm"
 #include "code\game\mecha\medical\odysseus.dm"
+#include "code\game\mecha\medical\serenity.dm"
 #include "code\game\mecha\space\hoverpod.dm"
 #include "code\game\mecha\space\shuttle.dm"
 #include "code\game\mecha\working\ripley.dm"
