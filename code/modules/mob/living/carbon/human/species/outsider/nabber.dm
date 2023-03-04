@@ -109,6 +109,7 @@
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 3,
+		/datum/mob_descriptor/build = 3,
 		/datum/mob_descriptor/body_length = 0
 		)
 
