@@ -41,8 +41,10 @@
 			stacktype = material.stack_type
 
 /obj/item/stack/tile/attackby(obj/item/W as obj, mob/user as mob)
-	..()
 	if (istype(W, /obj/item/weldingtool))
+		// do the thing
+		return TRUE
+	return ..()
 		var/obj/item/weldingtool/WT = W
 
 		if(can_weld == FALSE)
