@@ -1,6 +1,6 @@
 import { Fragment } from 'inferno';
 import { useBackend } from '../backend';
-import { Box, Button, LabeledList, Modal, Section } from '../components';
+import { Box, Button, Flex, Icon, Modal, Section } from '../components';
 import { Window } from '../layouts';
 
 export const Bioprinter = (props, context) => {
@@ -9,13 +9,13 @@ export const Bioprinter = (props, context) => {
   return (
     <Window
       width={450}
-      height={150 + 30 * data.products.length}
-      resizable>
+      height={90 + 30 * data.products.length}
+      resizable scrollable>
       {data.isPrinting && (
         <Modal textAlign="center"
           fontSize={2}
           color="red">
-          WORKING...<br />
+          <Icon name="spinner" spin={true} /> PRINTING...<br/><br/>
           <Button
             icon="ban"
             content="Cancel"
@@ -23,7 +23,7 @@ export const Bioprinter = (props, context) => {
             onClick={() => act('cancelPrint')}
           />
         </Modal>
-      )}
+      ) || null}
       <Window.Content>
         <Box>
           <Section title="Summary" buttons={(
@@ -51,27 +51,27 @@ export const Bioprinter = (props, context) => {
               </Box>}<br />
             <b>Time to print:</b> {data.printTime / 10} seconds
           </Section>
-          <Section title="Printing">
-            <LabeledList>
-              {data.products.map(product => (
-                <LabeledList.Item
-                  className="candystripe"
-                  label={product.name}
-                  labelColor={product.anomalous ? "purple" : "label"}
-                  buttons={(
-                    <Button
-                      icon="plus"
-                      content="Print"
-                      disabled={!product.canPrint}
-                      onClick={() => act('printOrgan', {
-                        organName: product.name,
-                      })}
-                    />
-                  )}>
+          <Section title="Printing" scrollable>
+            {data.products.map(product => (
+              <Flex>
+                <Flex.Item basis="33%" grow={1}>
+                  <Box inline color={product.anomalous ? "purple" : "label"}>{product.name}</Box>
+                </Flex.Item>
+                <Flex.Item basis="33%" grow={1}>
                   {product.canPrint ? <Box>{product.cost}/{product.cost}</Box> : <Box>{data.biomassVolume}/{product.cost}</Box>}
-                </LabeledList.Item>
-              ))}
-            </LabeledList>
+                </Flex.Item>
+                <Flex.Item>
+                  <Button
+                    icon="plus"
+                    content="Print"
+                    disabled={!product.canPrint}
+                    onClick={() => act('printOrgan', {
+                      organName: product.name,
+                    })}
+                  />
+                </Flex.Item>
+              </Flex>
+            ))}
           </Section>
         </Box>
       </Window.Content>
