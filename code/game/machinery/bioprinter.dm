@@ -248,7 +248,8 @@
 // FLESH ORGAN PRINTER
 /obj/machinery/organ_printer/flesh
 	name = "bioprinter"
-	desc = "It's a machine that prints replacement organs."
+	desc = "This is a growth chamber capable of quickly producing fresh body parts to fuel your inner mad scientist (or to perform transplants with, if you're boring like that.) Blood samples and biomass go in, kidneys come out."
+	description_fluff = "Bioprinting new body parts can take days or even weeks, depending on the thing in question. However, some printers - like this one - can be built to run on a specialized phoron-based feedstock, allowing surrogate organs and appendages to be assembled in a matter of seconds. Printing in this way is insanely expensive, though, which prevents it from enjoying the ubiquity that slower machines do."
 	icon_state = "bioprinter"
 	circuit = /obj/item/circuitboard/bioprinter
 
@@ -279,7 +280,7 @@
 			return
 		loaded_dna = sample.data
 		S.reagents.clear_reagents()
-		S.mode = 0 // wow! we can't use the define because syringes.dm loads after bioprinter.dm! this is agony!
+		S.mode = SYRINGE_DRAW
 		S.update_icon()
 		user.visible_message(
 			SPAN_NOTICE("\The [user] fills \the [src] with a blood sample."),
@@ -295,7 +296,7 @@
 			return
 		user.visible_message(
 			SPAN_NOTICE("\The [user] loads \the [G] into \the [src]."),
-			SPAN_NOTICE("You load \the [G] into \the [src]'s feedstock chamber.")
+			SPAN_NOTICE("You load \the [G] into \the [src].")
 		)
 		user.drop_from_inventory(G)
 		G.forceMove(src)
