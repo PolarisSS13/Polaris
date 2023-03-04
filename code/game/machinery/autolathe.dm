@@ -380,5 +380,4 @@
 				S.amount = round(stored_material[mat] / S.perunit)
 			else
 				qdel(S) //Prevents stacks smaller than 1
-	..()
-	return 1
+	return ..()
