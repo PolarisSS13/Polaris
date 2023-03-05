@@ -150,6 +150,9 @@
 /obj/effect/landmark/mobcorpse/android/createCorpse()
 	var/mob/living/carbon/human/M = new /mob/living/carbon/human (src.loc)
 	M.real_name = src.name
+	for(var/injuries in 1 to rand(3,5))
+		var/deal_brute = rand(round(M.species.total_health * 0.10), round(M.species.total_health * 0.30))
+		M.take_overall_damage(deal_brute, "Death Trauma")
 	M.set_stat(DEAD) //Kills the new mob
 
 	M.internal_organs_by_name[O_BRAIN].digitize() //special cases
@@ -221,14 +224,14 @@
 		BP_R_ARM =  "Cyber Solutions - Wight",
 		BP_L_LEG =  "Cyber Solutions - Wight",
 		BP_R_LEG =  "Cyber Solutions - Wight",
-		BP_HEAD = "Zeng-Hu",
+		BP_HEAD = "Grayson",
 		BP_TORSO =  "Cyber Solutions - Wight",
 		BP_GROIN =  "Cyber Solutions - Wight"
 		)
 
 /obj/effect/landmark/mobcorpse/android/combat
 	name = "Combat Drone"
-	corpseuniform = /obj/item/clothing/under/utility/grey
+	corpseuniform = /obj/item/clothing/under/color/white
 	corpsesuit = /obj/item/clothing/suit/armor/vest/alt
 	corpseshoes = /obj/item/clothing/shoes/boots/duty
 	corpsegloves = /obj/item/clothing/gloves/swat

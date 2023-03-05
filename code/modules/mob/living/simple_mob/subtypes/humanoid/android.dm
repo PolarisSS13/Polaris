@@ -15,6 +15,7 @@
 	can_flee = FALSE
 	call_distance = 6 //higher communication distance
 	can_breakthrough = TRUE //Can break through doors
+	threaten_delay = 10 SECONDS
 	var/run_if_this_close = 4 //will be aggressive
 
 /mob/living/simple_mob/humanoid/android/isSynthetic()
@@ -23,8 +24,8 @@
 /mob/living/simple_mob/humanoid/android
 	name = "android drone"
 	desc = "A humanoid robot - a marking on the side of its head denotes its status as a C-class drone."
-	icon_state = "syndicateranged"
-	icon_living = "syndicateranged"
+	icon_state = "robocombat"
+	icon_living = "robocombat"
 	corpse = /obj/effect/landmark/mobcorpse/android
 	say_list_type = /datum/say_list/hivebot
 	ai_holder_type = /datum/ai_holder/simple_mob/humanoid/android
@@ -49,8 +50,8 @@
 /mob/living/simple_mob/humanoid/android/combat //concept is they are a bit more accurate, tougher, hit harder, but most importantly are way more aggressive
 	name = "combat unit"
 	desc = "An autonomous humanoid drone that was evidently built for combat."
-	icon_state = "syndicateranged"
-	icon_living = "syndicateranged"
+	icon_state = "robocombat"
+	icon_living = "robocombat"
 	ai_holder_type = /datum/ai_holder/simple_mob/humanoid/android/violent
 	corpse = /obj/effect/landmark/mobcorpse/android/combat
 	armor = list(melee = 30, bullet = 20, laser = 20, energy = 10, bomb = 10, bio = 100, rad = 100)
@@ -69,8 +70,8 @@
 /mob/living/simple_mob/humanoid/android/scientist
 	name = "scientific drone"
 	desc = "A humanoid drone outfitted to perform some kind of scientific experiments."
-	icon_state = "syndicateranged"
-	icon_living = "syndicateranged"
+	icon_state = "roboscientist"
+	icon_living = "roboscientist"
 	corpse = /obj/effect/landmark/mobcorpse/android/scientist
 	say_list_type = /datum/say_list/android_scientist
 
