@@ -535,3 +535,39 @@
 	color = "#970d52"
 	high_message_list = list("You feel tired.", "You feel very drowsy.", "You feel extremely relaxed.")
 	sober_message_list = list("You feel awake and alert.", "You feel like you don't need to sleep.", "You feel extremely tense.")
+
+/datum/reagent/drugs/amitryptyline
+	name = "Amitryptyline"
+	id = "amitryptyline"
+	description = "A tricyclic antidepressant medication used to treat nerve pain, back pain, migraines and depressive illness."
+	taste_description = "chalk"
+	color = "#800e47"
+	high_message_list = list("You feel a little drowsy.", "You feel content.")
+	sober_message_list = list("You feel awake.", "You feel active.", "You feel more numb.")
+
+/datum/reagent/drugs/fluoxetine
+	name = "Fluoxetine"
+	id = "fluoxetine"
+	description = "An SSRI antidepressant medication used to treat depressive illness, obsessive-compulsive disorder and some eating disorders."
+	taste_description = "chalk"
+	color = "#b8005c"
+	high_message_list = list("You feel like things are brighter.", "Everything feels a little more vivid.")
+	sober_message_list = list("You feel like things are darker.", "Everything feels a little more dull.")
+
+/datum/reagent/drugs/carbamazepine
+	name = "Carbamazepine"
+	id = "carbamazepine"
+	description = "An anticonvulsant medication used to treat epilepsy, nerve pain, and sometimes bipolar disorder."
+	taste_description = "chalk"
+	color = "#75003b"
+	high_message_list = list("You feel more in control.", "You feel as if time is moving slower.")
+	sober_message_list = list("You feel less in control...", "You feel twitchy.", "You feel as if time is moving faster.")
+
+/datum/reagent/drugs/diphenhydramine
+	name = "Diphenhydramine"
+	id = "diphenhydramine"
+	description = "An antihistamine medication used for the relief of allergies, motion sickness and insomnia."
+	taste_description = "caramel"
+	color = "#5a1136"
+	high_message_list = list("You feel a little drowsy.")
+	sober_message_list = list("You feel alert.")
