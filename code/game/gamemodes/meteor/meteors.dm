@@ -59,7 +59,7 @@ var/global/list/meteors_catastrophic = list(
 	var/obj/effect/meteor/M = new Me(pickedstart)
 
 	if(M.planetary && !pickedgoal.outdoors)
-		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE)
+		var/list/Targ = check_trajectory(pickedgoal, pickedstart, PASSTABLE|PASSTREE)
 		if(LAZYLEN(Targ))
 			var/turf/TargetTurf = get_step(get_turf(Targ[1]), get_dir(pickedgoal, pickedstart))
 			if(get_dist(pickedstart, Targ[1]) < get_dist(pickedstart, pickedgoal))
@@ -239,7 +239,7 @@ var/global/list/meteors_catastrophic = list(
 		Move(EndTurf, delay)
 		if(get_turf(src) == StartTurf)	// If it doesn't move, IE, is blocked by something, take a hit.
 			get_hit()
-		
+
 		if(allow_recursion)
 			if(!QDELETED(src))
 				addtimer(CALLBACK(src, .proc/move_toward, target, delay, allow_recursion), delay)
