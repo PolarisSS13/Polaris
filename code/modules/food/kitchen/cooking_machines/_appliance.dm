@@ -144,7 +144,7 @@
 		user.visible_message("<span class='filter_notice'>[user] turns [src] off.</span>", "<span class='filter_notice'>You turn off [src].</span>")
 		cooking = FALSE // Stop cooking here, too, just in case.
 
-	playsound(src, 'sound/machines/click.ogg', 40, 1)
+	playsound(src, "button", 40, 1)
 	update_icon()
 
 /obj/machinery/appliance/AICtrlClick(mob/user)

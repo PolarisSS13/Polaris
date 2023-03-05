@@ -20,6 +20,7 @@
 	var/disabled = 0
 	var/shocked = 0
 	var/busy = 0
+	var/datum/looping_sound/fabricator/soundloop
 
 	var/mat_efficiency = 1
 	var/build_time = 50
@@ -42,12 +43,14 @@
 		stored_material[Name] = 0
 		storage_capacity[Name] = 0
 
+	soundloop = new(list(src), FALSE)
 	default_apply_parts()
 	RefreshParts()
 
 /obj/machinery/autolathe/Destroy()
 	qdel(wires)
 	wires = null
+	QDEL_NULL(soundloop)
 	return ..()
 
 /obj/machinery/autolathe/proc/update_recipe_list()
@@ -276,6 +279,7 @@
 			return
 
 		busy = 1
+		soundloop.start()
 		update_use_power(USE_POWER_ACTIVE)
 
 		//Check if we still have the materials.
@@ -295,6 +299,7 @@
 		sleep(build_time)
 
 		busy = 0
+		soundloop.stop()
 		update_use_power(USE_POWER_IDLE)
 		update_icon() // So lid opens
 

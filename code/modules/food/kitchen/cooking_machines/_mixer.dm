@@ -119,7 +119,7 @@ fundamental differences
 		use_power = 0
 		if(usr)
 			usr.visible_message("<span class='filter_notice'>[usr] turns the [src] off.</span>", "<span class='filter_notice'>You turn off \the [src].</span>")
-	playsound(src, 'sound/machines/click.ogg', 40, 1)
+	playsound(src, "button", 40, 1)
 	update_icon()
 
 /obj/machinery/appliance/mixer/can_insert(var/obj/item/I, var/mob/user)
@@ -132,7 +132,7 @@ fundamental differences
 /obj/machinery/appliance/mixer/finish_cooking(var/datum/cooking_item/CI)
 	..()
 	stat |= POWEROFF
-	playsound(src, 'sound/machines/click.ogg', 40, 1)
+	playsound(src, "button", 40, 1)
 	use_power = 0
 	CI.reset()
 	update_icon()

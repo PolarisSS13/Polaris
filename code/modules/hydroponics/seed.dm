@@ -457,7 +457,6 @@
 
 		var/list/banned_chems = list(
 			"adminordrazine",
-			"magicdust",
 			"nutriment"
 			)
 

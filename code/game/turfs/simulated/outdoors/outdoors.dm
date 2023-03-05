@@ -134,10 +134,8 @@ var/global/list/turf_edge_cache = list()
 	return
 
 /turf/simulated/floor/outdoors/chill()
-	promote(/turf/simulated/floor/outdoors/snow)
-
-/turf/simulated/floor/outdoors/snow/chill()
-	return // Todo: Add heavy snow.
+	if (!has_snow(SNOW_HEAVY))
+		adjust_snow(1)
 
 /turf/simulated/floor/outdoors/ex_act(severity)
 	switch(severity)
@@ -147,4 +145,5 @@ var/global/list/turf_edge_cache = list()
 		if(3)
 			if(prob(66))
 				return
+	set_snow(0)
 	demote()
