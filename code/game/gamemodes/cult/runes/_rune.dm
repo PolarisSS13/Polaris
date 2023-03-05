@@ -11,6 +11,8 @@
 	var/invocation
 	/// If true, cultists invoking this rune will whisper, instead of speaking normally.
 	var/whispered
+	/// A list of "words" used to form this rune.
+	var/list/circle_words
 	/// AIs see runes as blood splatters. This variable tracks the image shown in the rune's place.
 	var/image/blood_image
 	/// How many cultists need to be adjacent to this rune and able to speak in order to activate it.
@@ -34,13 +36,11 @@
 	QDEL_NULL(blood_image)
 	..()
 
-/obj/effect/newrune/examine(mob/user)
-	. = ..()
-	if (iscultist(user) || isobserver(user))
-		if (rune_name)
-			. += SPAN_OCCULT("This is a <b>[rune_name]</b> rune.")
-			if (rune_desc)
-				. += SPAN_OCCULT(rune_desc)
+/obj/effect/newrune/get_examine_desc()
+	if ((isobserver(usr) || iscultist(usr)) && rune_name && rune_desc)
+		return SPAN_OCCULT("This is a <b>[rune_name]</b> rune.<br>[rune_desc]")
+	else
+		return desc
 
 /obj/effect/newrune/attackby(obj/item/I, mob/user)
 	if (istype(I, /obj/item/book/tome) && iscultist(user))

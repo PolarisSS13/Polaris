@@ -166,7 +166,7 @@ var/global/list/be_special_flags = list(
 
 /*
 Changeling Defines
-*/ 
+*/
 #define CHANGELING_POWER_INHERENT "Inherent"
 #define CHANGELING_POWER_ARMOR "Armor"
 #define CHANGELING_POWER_STINGS "Stings"
@@ -174,3 +174,27 @@ Changeling Defines
 #define CHANGELING_POWER_HEALTH "Health"
 #define CHANGELING_POWER_ENHANCEMENTS "Enhancements"
 #define CHANGELING_POWER_WEAPONS "Weapons"
+
+// English cult words. Each one should represent a concept.
+#define CULT_WORD_BLOOD "blood"
+#define CULT_WORD_DESTROY "destroy"
+#define CULT_WORD_HELL "hell"
+#define CULT_WORD_HIDE "hide"
+#define CULT_WORD_JOIN "join"
+#define CULT_WORD_OTHER "other"
+#define CULT_WORD_SELF "self"
+#define CULT_WORD_SEE "see"
+#define CULT_WORD_TECHNOLOGY "technology"
+#define CULT_WORD_TRAVEL "travel"
+
+// Culty cult words. These are gibberish and can basically be whatever.
+#define CULT_WORD_BALAQ "balaq"
+#define CULT_WORD_CERTUM "certum"
+#define CULT_WORD_EGO "ego"
+#define CULT_WORD_GEERI "geeri"
+#define CULT_WORD_IRE "ire"
+#define CULT_WORD_KARAZET "karazet"
+#define CULT_WORD_JATKAA "jatkaa"
+#define CULT_WORD_MGAR "mgar"
+#define CULT_WORD_NAHLIZET "nahlizet"
+#define CULT_WORD_VERI "veri"

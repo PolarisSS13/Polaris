@@ -38,9 +38,27 @@ var/global/datum/antagonist/cultist/cult
 	var/list/sacrificed = list()
 	var/list/harvested = list()
 
+	/**
+	 * So here's how the cult vocabulary works:
+	 * * There are two lists of words: one contains English words representing concepts ("blood", "other", "technology", etc) while the other are culty gibberish. Both of these lists have the same amount of total words in them.
+	 * * At runtime, each cult word is correlated to a random English word representing its meaning. On one round the word "ego" might mean "technology", but on another it might mean "hell", and so on.
+	 * * This list is populated as an associative list with each English word associated with its cult word counterpart.
+	 *
+	 * The word lists are found in `english_words` and `cult_words` on `/datum/antagonist/cultist`, and are populated from defines to avoid string copy-paste.
+	 */
+	var/list/vocabulary
+	var/list/english_words = list(CULT_WORD_BLOOD, CULT_WORD_DESTROY, CULT_WORD_HELL, CULT_WORD_HIDE, CULT_WORD_JOIN, CULT_WORD_OTHER, CULT_WORD_SELF, CULT_WORD_SEE, CULT_WORD_TECHNOLOGY, CULT_WORD_TRAVEL)
+	var/list/cult_words = list(CULT_WORD_BALAQ, CULT_WORD_CERTUM, CULT_WORD_EGO, CULT_WORD_GEERI, CULT_WORD_IRE, CULT_WORD_KARAZET, CULT_WORD_JATKAA, CULT_WORD_MGAR, CULT_WORD_NAHLIZET, CULT_WORD_VERI)
+
 /datum/antagonist/cultist/New()
 	..()
 	cult = src
+	if (!LAZYLEN(vocabulary))
+		var/list/gibberish = cult_words
+		for (var/eng in english_words)
+			var/culty = pick(gibberish)
+			LAZYSET(vocabulary, eng, culty)
+			gibberish -= culty
 
 /datum/antagonist/cultist/create_global_objectives()
 
