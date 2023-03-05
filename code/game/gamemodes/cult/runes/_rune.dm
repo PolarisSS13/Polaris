@@ -59,9 +59,14 @@
 	if (can_contribute(user, FALSE))
 		do_invocation(user)
 
-/// Type-specific checks to check if this rune can be invoked or not. Always returns `TRUE` unless overridden.
+/// Type-specific check for if this rune can be invoked or not. Always returns `TRUE` unless overridden.
 /obj/effect/newrune/proc/can_invoke(mob/living/invoker)
 	return TRUE
+
+/// Type-specific check to get required invokers. This lets runes require different invokers under certain conditions.
+/// If it's a rune with dynamic requirements, you might benefit from giving that invoker a message explaining why they need more people.
+/obj/effect/newrune/proc/get_required_invokers(mob/living/invoker)
+	return required_invokers
 
 /**
  * Checks if a given mob can participate as an invoker for this rune.
@@ -94,12 +99,13 @@
 		return
 	var/list/invokers = list()
 	invokers += user
+	var/req_invokers = get_required_invokers(user)
 	for (var/mob/living/L in range(1, src) - user)
-		if (invokers.len >= required_invokers)
+		if (invokers.len >= req_invokers)
 			break
 		else if (can_contribute(L))
 			invokers.Add(L)
-	if (invokers.len < required_invokers)
+	if (invokers.len < req_invokers)
 		fizzle()
 		return
 	if (invocation)
