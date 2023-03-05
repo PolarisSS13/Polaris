@@ -24,7 +24,7 @@
 	pixel_x = -8
 	},
 /obj/item/paper{
-	info = "[i]Can't believe they made me check in on this place. What a hellhole, none of the drones care for even the slightest spot of conversation. Oh well, at least the data they're sending back is still good.[/i]"
+	info = "Can't believe they made me check in on this place. What a hellhole, none of the drones care for even the slightest spot of conversation. Oh well, at least the data they're sending back is still good."
 	},
 /turf/simulated/floor/tiled/milspec,
 /area/submap/Research1)
@@ -65,7 +65,6 @@
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "bE" = (
-/mob/living/simple_mob/humanoid/android/scientist,
 /turf/simulated/floor/tiled/old_tile/white,
 /area/submap/Research1)
 "bM" = (
@@ -196,7 +195,7 @@
 /turf/simulated/floor/tiled/milspec/dark,
 /area/submap/Research1)
 "fW" = (
-/obj/machinery/light,
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled/steel_grid,
 /area/submap/Research1)
 "fZ" = (
@@ -282,15 +281,15 @@
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "io" = (
-/obj/machinery/light{
-	dir = 8;
-	icon_state = "tube1"
-	},
 /obj/effect/floor_decal/borderfloor/corner{
 	dir = 8
 	},
 /obj/effect/floor_decal/corner/beige/bordercorner{
 	dir = 8
+	},
+/obj/machinery/light/small{
+	dir = 8;
+	pixel_y = 0
 	},
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
@@ -332,9 +331,9 @@
 /turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "jh" = (
-/obj/machinery/light,
-/obj/structure/table/steel_reinforced,
 /obj/structure/salvageable/personal,
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "jK" = (
@@ -436,7 +435,8 @@
 /obj/effect/floor_decal/steeldecal/steel_decals_central6,
 /obj/structure/sign/poster{
 	pixel_y = 32;
-	poster_decl = /decl/poster/nanotrasen/bay_24
+	poster_decl = /decl/poster/nanotrasen/bay_24;
+	dir = 1
 	},
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
@@ -783,6 +783,9 @@
 /obj/effect/floor_decal/steeldecal/steel_decals10{
 	dir = 1
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "Ar" = (
@@ -882,10 +885,9 @@
 /turf/simulated/floor/tiled/neutral,
 /area/submap/Research1)
 "Dv" = (
-/obj/structure/table/standard,
-/obj/structure/table/standard,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/beige/border,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "DC" = (
@@ -938,7 +940,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/structure/table/woodentable,
 /obj/structure/table/woodentable,
 /obj/random/zippo,
 /turf/simulated/floor/tiled/milspec,
@@ -1007,6 +1008,10 @@
 	dir = 1
 	},
 /obj/item/implantcase/language/eal,
+/obj/machinery/light/small{
+	dir = 4;
+	pixel_y = 0
+	},
 /turf/simulated/floor/tiled/neutral,
 /area/submap/Research1)
 "Ht" = (
@@ -1165,6 +1170,7 @@
 /mob/living/simple_mob/humanoid/android/scientist,
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/beige/border,
+/obj/machinery/light/small,
 /turf/simulated/floor/tiled,
 /area/submap/Research1)
 "RV" = (
@@ -1338,10 +1344,8 @@
 /turf/simulated/floor/tiled/steel_ridged,
 /area/submap/Research1)
 "Yg" = (
-/obj/machinery/light,
-/obj/effect/floor_decal/borderfloor,
-/obj/effect/floor_decal/corner/beige/border,
-/turf/simulated/floor/tiled,
+/mob/living/simple_mob/humanoid/android/scientist,
+/turf/simulated/floor/tiled/steel,
 /area/submap/Research1)
 "Yh" = (
 /obj/structure/salvageable/data,
@@ -1554,7 +1558,7 @@ IL
 eg
 xb
 Uv
-Ue
+Yg
 Ue
 WG
 IL
@@ -2000,7 +2004,7 @@ IL
 IL
 IL
 ir
-Yg
+UY
 IL
 yA
 Ej
@@ -2052,7 +2056,7 @@ IL
 ve
 Zk
 lF
-Dv
+wb
 Cd
 QJ
 qV
@@ -2095,7 +2099,7 @@ Il
 ex
 jh
 IL
-Il
+Dv
 gU
 SL
 BI
