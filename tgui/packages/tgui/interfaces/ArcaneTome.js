@@ -16,27 +16,26 @@ export const ArcaneTome = (props, context) => {
         <Tabs>
           <Tabs.Tab
             selected={tabIndex === 0}
-            onClick={() => { act("turnPage"), setTabIndex(0) }}>
+            onClick={() => { act("turnPage"); setTabIndex(0); }}>
             Archives
           </Tabs.Tab>
           <Tabs.Tab
             selected={tabIndex === 1}
-            onClick={() => { act("turnPage"), setTabIndex(1) }}>
+            onClick={() => { act("turnPage"); setTabIndex(1); }}>
             Runes
           </Tabs.Tab>
         </Tabs>
         <Section>
           {
-            tabIndex === 0 &&
-            ("TBD")
-            ||
-            tabIndex === 1 &&
-            (
+            tabIndex === 0
+            && ("TBD")
+            || tabIndex === 1
+            && (
               <Flex
                 direction="column"
                 align="center">
                 {data.runes.map(entry => (
-                  <Flex.Item>
+                  <Flex.Item key={entry.name}>
                     <Button
                       textAlign="center"
                       content={entry.name}
