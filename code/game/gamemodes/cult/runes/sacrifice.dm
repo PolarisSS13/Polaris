@@ -1,6 +1,7 @@
 /obj/effect/newrune/sacrifice
 	rune_name = "Sacrifice"
 	rune_desc = "Offer a living thing or a body to the Geometer of Blood. Living beings require three invokers to sacrifice, while dead beings require only one."
+	rune_shorthand = "Offers a creature to the Geometer for consumption."
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_BLOOD, CULT_WORD_JOIN)
 	invocation = "Barhah hra zar'garis!"
 	var/mob/living/sacrificing
@@ -55,6 +56,7 @@
 		SPAN_DANGER("The runes beneath [L] widen into a gaping void. Something yanks [G.him] in before they snap shut."),
 		!iscultist(L) ? SPAN_DANGER("You are dragged into the runes as they widen into a gaping maw!") : SPAN_OCCULT("Yes! Yes! The Geometer accepts you!")
 	)
+	sacrificing = L
 	if (sacrificing.mind && cult.sacrifice_target == sacrificing.mind)
 		for (var/mob/living/C in invokers)
 			to_chat(C, SPAN_OCCULT("The Geometer of Blood is sated. Your objective is now complete."))

@@ -19,6 +19,8 @@
 	var/required_invokers = 1
 	/// The actual name of this rune (like "Sacrifice", "Convert", or so on), shown to cultists or ghosts that examine it.
 	var/rune_name
+	/// Very short description of the rune's functionality, to be shown as a tooltip in the tome.
+	var/rune_shorthand
 	/// As `rune_name`, but for a description of what the rune actually does.
 	var/rune_desc
 
@@ -43,7 +45,7 @@
 		return desc
 
 /obj/effect/newrune/attackby(obj/item/I, mob/user)
-	if (istype(I, /obj/item/book/tome) && iscultist(user))
+	if (istype(I, /obj/item/arcane_tome) && iscultist(user))
 		to_chat(user, SPAN_NOTICE("You retrace your steps, carefully undoing the lines of \the [src]."))
 		qdel(src)
 		return

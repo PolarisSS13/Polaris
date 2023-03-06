@@ -1,6 +1,7 @@
 /obj/effect/newrune/communicate
 	rune_name = "Communicate"
 	rune_desc = "Allows you to communicate with other cultists."
+	rune_shorthand = "Allows silent communication with other followers."
 	circle_words = list(CULT_WORD_SELF, CULT_WORD_OTHER, CULT_WORD_TECHNOLOGY)
 	invocation = "O bidai nabora se'sma!"
 

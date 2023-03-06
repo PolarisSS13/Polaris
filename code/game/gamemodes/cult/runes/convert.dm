@@ -1,6 +1,7 @@
 /obj/effect/newrune/convert
 	rune_name = "Convert"
 	rune_desc = "A ubiquitous incantation, necessary to educate the innocent. Exposing a nonbeliever's mind to Nar-Sie will typically convert them, but stubborn or resilient individuals may be able to resist Its influence until they succumb or are overwhelmed by the revelation. Some people - typically those possessed of high authority - are able to resist Nar-Sie's influence and will entirely refuse to abandon their old beliefs."
+	rune_shorthand = "Attempts to convert a nonbeliever to the fold."
 	circle_words = list(CULT_WORD_JOIN, CULT_WORD_BLOOD, CULT_WORD_SELF)
 	invocation = "Mah'weyh pleggh at e'ntrath!"
 	var/mob/living/converting
