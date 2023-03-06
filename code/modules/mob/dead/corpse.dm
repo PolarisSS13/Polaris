@@ -155,8 +155,10 @@
 		M.take_overall_damage(deal_brute, "Death Trauma")
 	M.set_stat(DEAD) //Kills the new mob
 
-	M.internal_organs_by_name[O_BRAIN].digitize() //special cases
-	M.internal_organs_by_name[O_EYES].robotize()
+	var/obj/item/organ/internal/brain = M.internal_organs_by_name[O_BRAIN] //specific special cases
+	brain.digitize()
+	var/obj/item/organ/internal/eyes = M.internal_organs_by_name[O_EYES]
+	eyes.robotize()
 
 	for (var/limb in brandList)
 		var/obj/item/organ/external/E = M.get_organ(limb)
