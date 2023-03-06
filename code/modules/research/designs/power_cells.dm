@@ -53,15 +53,6 @@
 	category = "Misc"
 	sort_string = "BAAAD"
 
-/datum/design/item/powercell/spike
-	name = "modified"
-	id = "spike_cell"
-	req_tech = list(TECH_POWER = 3, TECH_MATERIAL = 2, TECH_ILLEGAL = 3)
-	materials = list(MAT_STEEL = 2000, MAT_GOLD = 500, MAT_ALUMINIUM = 2000, MAT_GLASS = 70)
-	build_path = /obj/item/cell/spike
-	category = "Misc"
-	sort_string = "BAAAE"
-
 /datum/design/item/powercell/device
 	name = "device"
 	build_type = PROTOLATHE
