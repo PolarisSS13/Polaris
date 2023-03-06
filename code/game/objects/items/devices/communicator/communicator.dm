@@ -74,6 +74,7 @@ var/global/list/obj/item/communicator/all_communicators = list()
 	var/update_ticks = 0
 	var/newsfeed_channel = 0
 	var/static_name = null
+	var/can_rename = 1
 
 // Proc: New()
 // Parameters: None
@@ -96,17 +97,17 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Parameters: None
 // Description: Tries to register ourselves to the mob that we've presumably spawned in. Not the most amazing way of doing this.
 /obj/item/communicator/proc/register_to_holder()
-    if(static_name)
-        register_device(static_name)
-        initialize_exonet(loc)
-    if(ismob(loc))
-        register_device(loc.name)
-        initialize_exonet(loc)
-    else if(istype(loc, /obj/item/storage))
-        var/obj/item/storage/S = loc
-        if(ismob(S.loc))
-            register_device(S.loc.name)
-            initialize_exonet(S.loc)
+	if(static_name)
+		register_device(static_name)
+		initialize_exonet(loc)
+	if(ismob(loc))
+		register_device(loc.name)
+		initialize_exonet(loc)
+	else if(istype(loc, /obj/item/storage))
+		var/obj/item/storage/S = loc
+		if(ismob(S.loc))
+			register_device(S.loc.name)
+			initialize_exonet(S.loc)
 
 // Proc: examine()
 // Parameters: user - the user doing the examining
@@ -279,17 +280,17 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Parameters: 1 (user - the person to use their name for)
 // Description: Updates the owner's name and the device's name.
 /obj/item/communicator/proc/register_device(new_name)
-    if(!new_name)
-        return
-    owner = new_name
+	if(!new_name)
+		return
+	owner = new_name
 
-    if(static_name)
-        name = "[new_name]"
-    else
-        name = "[new_name]'s [initial(name)]"
-    if(camera)
-        camera.name = name
-        camera.c_tag = name
+	if(static_name)
+		name = "[new_name]"
+	else
+		name = "[new_name]'s [initial(name)]"
+	if(camera)
+		camera.name = name
+		camera.c_tag = name
 
 // Proc: Destroy()
 // Parameters: None

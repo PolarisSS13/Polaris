@@ -10449,11 +10449,18 @@
 	id = "BrigFoyer";
 	layer = 2.9;
 	name = "Foyer Doors";
+	pixel_x = 6;
 	pixel_y = 6
 	},
 /obj/item/sticky_pad/random{
 	pixel_x = 8;
 	pixel_y = -1
+	},
+/obj/item/communicator/desktop{
+	occupation = "security";
+	pixel_x = -9;
+	pixel_y = 5;
+	static_name = "security lobby communicator"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/security/lobby)
@@ -40020,6 +40027,7 @@
 	pixel_y = 5
 	},
 /obj/item/communicator/desktop{
+	occupation = "medical";
 	pixel_x = -8;
 	static_name = "medical lobby communicator"
 	},
@@ -50000,6 +50008,7 @@
 	layer = 3.3
 	},
 /obj/item/communicator/desktop{
+	occupation = "kitchen";
 	static_name = "kitchen communicator"
 	},
 /turf/simulated/floor/tiled/eris/cafe,
@@ -50811,6 +50820,7 @@
 	pixel_y = -1
 	},
 /obj/item/communicator/desktop{
+	occupation = "engineering";
 	pixel_x = 14;
 	static_name = "engineering lobby communicator"
 	},
@@ -52465,6 +52475,7 @@
 	},
 /obj/item/deskbell,
 /obj/item/communicator/desktop{
+	occupation = "bar";
 	pixel_x = -12;
 	static_name = "bar communicator"
 	},

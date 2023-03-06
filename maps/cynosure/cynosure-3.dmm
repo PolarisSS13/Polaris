@@ -2186,6 +2186,7 @@
 	dir = 6
 	},
 /obj/item/communicator/desktop{
+	occupation = "research";
 	pixel_x = 3;
 	static_name = "research lobby communicator"
 	},
@@ -5977,6 +5978,7 @@
 	dir = 1
 	},
 /obj/item/communicator/desktop{
+	occupation = "cargo";
 	pixel_x = -16;
 	pixel_y = 6;
 	static_name = "cargo lobby communicator"
@@ -6649,6 +6651,7 @@
 	},
 /obj/effect/zone_divider,
 /obj/item/communicator/desktop{
+	occupation = "internal affairs";
 	pixel_x = -3;
 	pixel_y = 4;
 	static_name = "internal affairs office communicator"
@@ -26778,6 +26781,7 @@
 	pixel_x = -32
 	},
 /obj/item/communicator/desktop{
+	occupation = "site manager";
 	pixel_y = -12;
 	static_name = "site manager's office communicator"
 	},
@@ -27391,7 +27395,10 @@
 /area/surface/station/rnd/research)
 "rSN" = (
 /obj/structure/table/standard,
-/obj/item/sticky_pad/random,
+/obj/item/communicator/desktop{
+	occupation = "public";
+	static_name = "public communicator"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/secondary/secondfloor/dormhallway)
 "rSS" = (
@@ -37787,6 +37794,10 @@
 "yjT" = (
 /obj/structure/table/standard,
 /obj/item/toy/plushie/corgi,
+/obj/item/sticky_pad/random{
+	pixel_x = 4;
+	pixel_y = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/secondary/secondfloor/dormhallway)
 "yka" = (
