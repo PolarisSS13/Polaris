@@ -10,5 +10,6 @@
 	if (T)
 		T.hotspot_expose(700, 125)
 	visible_message(SPAN_DANGER("A wave of heat emanates outwards from the runes as they shimmer and vanish."))
+	playsound(src, 'sound/items/Welder.ogg', 50, TRUE)
 	empulse(T, 2, 3, 4, 5)
 	qdel(src)

@@ -60,10 +60,10 @@
 		shears.visible_message(SPAN_WARNING("\The [shears] drops unceremoniously to the ground."))
 		playsound(shears, "bodyfall", 50, TRUE)
 		if (lamb)
-		lamb.visible_message(
-			SPAN_WARNING("\The [lamb] drops unceremoniously to the ground."),
-			SPAN_DANGER("The force releases its hold on you, and you fall back to the ground!")
-		)
+			lamb.visible_message(
+				SPAN_WARNING("\The [lamb] drops unceremoniously to the ground."),
+				SPAN_DANGER("The force releases its hold on you, and you fall back to the ground!")
+			)
 		playsound(lamb, "bodyfall", 50, TRUE)
 
 /obj/effect/newrune/raise_dead/proc/resurrect(mob/living/carbon/human/shears, mob/living/carbon/human/lamb, mob/living/invoker)

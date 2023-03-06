@@ -51,7 +51,7 @@
 /obj/item/clothing/head/culthood
 	name = "cult hood"
 	icon_state = "culthood"
-	desc = "A hood worn by the followers of an unknown god."
+	desc = "Chips of wet magmellite and strips of leathery textile are melded together into stiff cloth. Its surface is warm and shudders at the touch."
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ARCANE = 1)
 	flags_inv = HIDEFACE
 	body_parts_covered = HEAD
@@ -75,7 +75,7 @@
 
 /obj/item/clothing/suit/cultrobes
 	name = "cult robes"
-	desc = "A set of armored robes worn by the followers of an unknown god."
+	desc = "Chips of wet magmellite and strips of leathery textile are melded together into stiff cloth. Its surface is warm and shudders at the touch."
 	icon_state = "cultrobes"
 	origin_tech = list(TECH_MATERIAL = 3, TECH_ARCANE = 1)
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
