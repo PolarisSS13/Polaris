@@ -12548,7 +12548,7 @@
 	dir = 1
 	},
 /obj/machinery/power/emitter{
-	desc = "It is a heavy duty industrial laser. Someone has stencilled a pair of tiny skulls onto the side."
+	desc = "It is a heavy duty industrial laser. This one seems a little more ominous than the rest, somehow..."
 	},
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 1
