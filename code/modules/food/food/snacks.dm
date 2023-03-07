@@ -2499,7 +2499,7 @@
 	filling_color = "#FAC9FF"
 	center_of_mass = list("x"=15, "y"=8)
 	nutriment_amt = 8
-	nutriment_desc = list("sour tomato" = 4, "sour beets" = 4, "vinegar" = "4")
+	nutriment_desc = list("sour tomato" = 4, "sour beets" = 4, "vinegar" = 4)
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/beetsoup/Initialize()
