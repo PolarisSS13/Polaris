@@ -3,6 +3,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/rawsticks
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No raw tater
 	result = /obj/item/reagent_containers/food/snacks/fries
 
 /datum/recipe/cheesyfries
@@ -11,6 +12,7 @@
 		/obj/item/reagent_containers/food/snacks/fries,
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/reagent_containers/food/snacks/cheesyfries
 
 /datum/recipe/jpoppers
@@ -39,6 +41,7 @@
 	coating = /datum/reagent/nutriment/coating/batter
 	fruit = list("onion" = 1)
 	result = /obj/item/reagent_containers/food/snacks/onionrings
+	reagent_mix = RECIPE_REAGENT_REPLACE //So it doesn't taste of onions and fried onions
 
 //Meaty Recipes
 //====================
@@ -49,6 +52,7 @@
 		/obj/item/reagent_containers/food/snacks/dough,
 		/obj/item/reagent_containers/food/snacks/carpmeat
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/cubancarp
 
 /datum/recipe/batteredsausage
@@ -94,6 +98,7 @@
 	result = /obj/item/reagent_containers/food/snacks/friedmushroom
 
 /datum/recipe/fishfingers
+	appliance = FRYER
 	items = list(
 		/obj/item/reagent_containers/food/snacks/carpmeat,
 	)
@@ -128,6 +133,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/doughslice
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/donut/plain/jelly
 	result_quantity = 2
 
@@ -152,6 +158,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/doughslice
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/donut/plain
 	result_quantity = 2
 

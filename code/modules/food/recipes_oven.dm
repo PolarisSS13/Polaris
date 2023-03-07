@@ -3,6 +3,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/rawsticks
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No raw tater
 	result = /obj/item/reagent_containers/food/snacks/ovenchips
 
 //Roasts
@@ -40,6 +41,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/chicken,
 		/obj/item/reagent_containers/food/snacks/stuffing
 		)
+	reagent_mix = RECIPE_REAGENT_REPLACE //Turkeyfy
 	result = /obj/item/reagent_containers/food/snacks/sliceable/turkey
 
 /datum/recipe/tofurkey
@@ -81,6 +83,7 @@
 		/obj/item/reagent_containers/food/snacks/dough,
 		/obj/item/reagent_containers/food/snacks/dough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	reagents = list("sodiumchloride" = 1, "yeast" = 5)
 	result = /obj/item/reagent_containers/food/snacks/sliceable/bread
 
@@ -91,6 +94,7 @@
 		/obj/item/reagent_containers/food/snacks/dough,
 		/obj/item/reagent_containers/food/snacks/dough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/baguette
 
 
@@ -107,6 +111,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/tofubread
 
 
@@ -118,6 +123,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/creamcheesebread
 
 /datum/recipe/flatbread
@@ -125,6 +131,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/flatbread
 
 /datum/recipe/tortilla
@@ -133,6 +140,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/tortilla
 
 /datum/recipe/meatbread
@@ -148,6 +156,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/meatbread
 
 /datum/recipe/syntibread
@@ -163,6 +172,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/meatbread
 
 /datum/recipe/xenomeatbread
@@ -178,6 +188,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/xenomeatbread
 
 /datum/recipe/bananabread
@@ -189,6 +200,7 @@
 		/obj/item/reagent_containers/food/snacks/dough,
 		/obj/item/reagent_containers/food/snacks/dough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/bananabread
 
 
@@ -197,6 +209,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/dough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/bun
 
 //Predesigned pies
@@ -208,6 +221,7 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/reagent_containers/food/snacks/meat
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/meatpie
 
 /datum/recipe/tofupie
@@ -216,6 +230,7 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/reagent_containers/food/snacks/tofu
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/tofupie
 
 /datum/recipe/xemeatpie
@@ -224,6 +239,7 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/reagent_containers/food/snacks/xenomeat
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/xemeatpie
 
 /datum/recipe/pie
@@ -231,6 +247,7 @@
 	fruit = list("banana" = 1)
 	reagents = list("sugar" = 5)
 	items = list(/obj/item/reagent_containers/food/snacks/sliceable/flatdough)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/pie
 
 /datum/recipe/cherrypie
@@ -240,24 +257,28 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/cherrypie
 
 /datum/recipe/amanita_pie
 	appliance = OVEN
 	reagents = list("amatoxin" = 5)
 	items = list(/obj/item/reagent_containers/food/snacks/sliceable/flatdough)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/amanita_pie
 
 /datum/recipe/plump_pie
 	appliance = OVEN
 	fruit = list("plumphelmet" = 1)
 	items = list(/obj/item/reagent_containers/food/snacks/sliceable/flatdough)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/plump_pie
 
 /datum/recipe/applepie
 	appliance = OVEN
 	fruit = list("apple" = 1)
 	items = list(/obj/item/reagent_containers/food/snacks/sliceable/flatdough)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/applepie
 
 /datum/recipe/pumpkinpie
@@ -265,6 +286,7 @@
 	fruit = list("pumpkin" = 1)
 	reagents = list("sugar" = 5)
 	items = list(/obj/item/reagent_containers/food/snacks/sliceable/flatdough)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pumpkinpie
 
 /datum/recipe/appletart
@@ -346,6 +368,7 @@
 	appliance = OVEN
 	fruit = list("berries" = 2)
 	reagents = list("milk" = 5, "flour" = 15, "cream" = 10, "coco" = 5, "egg" = 6)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/buchedenoel
 
 /datum/recipe/cinnamonbun
@@ -354,6 +377,7 @@
 	items = list(
 		/obj/item/reagent_containers/food/snacks/dough
 		)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/cinnamonbun
 	result_quantity = 4
 
@@ -370,6 +394,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/margherita
 
 /datum/recipe/meatpizza
@@ -382,6 +407,7 @@
 		/obj/item/reagent_containers/food/snacks/meat,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza
 
 /datum/recipe/syntipizza
@@ -394,6 +420,7 @@
 		/obj/item/reagent_containers/food/snacks/meat/syntiflesh,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/meatpizza
 
 /datum/recipe/mushroompizza
@@ -403,7 +430,6 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
-
 	reagent_mix = RECIPE_REAGENT_REPLACE //No vomit taste in finished product from chanterelles
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/mushroompizza
 
@@ -414,6 +440,7 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/vegetablepizza
 
 /datum/recipe/pineapplepizza
@@ -425,6 +452,7 @@
 		/obj/item/reagent_containers/food/snacks/pineapple_ring,
 		/obj/item/reagent_containers/food/snacks/pineapple_ring
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/sliceable/pizza/pineapple
 
 //Spicy
@@ -446,7 +474,7 @@
 	appliance = OVEN
 	reagents = list("milk" = 5, "flour" = 15, "sugar" = 15, "egg" = 9, "vanilla" = 1)
 	result = /obj/item/reagent_containers/food/snacks/sliceable/plaincake
-	reagent_mix = RECIPE_REAGENT_REPLACE
+	reagent_mix = RECIPE_REAGENT_REPLACE // No flour, egg etc.
 
 /datum/recipe/cake/carrot
 	appliance = OVEN
@@ -517,6 +545,7 @@
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough,
 		/obj/item/reagent_containers/food/snacks/sliceable/flatdough
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/pancakes
 
 /datum/recipe/pancakes/berry
@@ -541,6 +570,7 @@
 		/obj/item/reagent_containers/food/snacks/dough
 	)
 	reagents = list("milk" = 5, "egg" = 3,"honey" = 5)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/honeybun
 
 //Bacon
@@ -565,6 +595,7 @@
 		/obj/item/reagent_containers/food/snacks/meatball,
 		/obj/item/reagent_containers/food/snacks/cheesewedge
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/meat_pocket
 	result_quantity = 2
 
@@ -579,6 +610,7 @@
 		/obj/item/reagent_containers/food/snacks/bacon,
 		/obj/item/reagent_containers/food/snacks/bacon
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/bacon_flatbread
 
 /datum/recipe/truffle
@@ -733,7 +765,7 @@
 		/obj/item/reagent_containers/food/snacks/dough,
 		/obj/item/organ/internal/eyes/neaera
 	)
-	result = /obj/item/reagent_containers/food/snacks/neaeracandy
+	result = /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy
 	result_quantity = 6
 	reagent_mix = RECIPE_REAGENT_REPLACE
 

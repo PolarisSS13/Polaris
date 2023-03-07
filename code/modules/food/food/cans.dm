@@ -32,6 +32,7 @@
 /obj/item/reagent_containers/food/drinks/cans/waterbottle
 	name = "bottled water"
 	desc = "Ice cold and utterly tasteless, this 'all-natural' mineral water comes 'fresh' from one of NanoTrasen's heavy-duty bottling plants in the Sivian poles."
+	description_fluff = "This is a generic, NanoTrasen branded bottle of water.  The company swears on the quality of the water, saying it comes from the Sivian poles.  Most people disregard that and assume it's recycled from hydroponics trays."
 	icon_state = "waterbottle"
 	center_of_mass = list("x"=16, "y"=8)
 	drop_sound = 'sound/items/drop/disk.ogg'
@@ -164,6 +165,7 @@
 /obj/item/reagent_containers/food/drinks/cans/sodawater
 	name = "soda water"
 	desc = "A can of soda water. Still water's more refreshing cousin."
+	description_fluff = "This is a NanoTrasen branded can of soda water.  They use the same water for this that they use for the bottled water that they sell, which may explain why the stuff isn't exactly flying off of the shelves."
 	icon_state = "sodawater"
 	center_of_mass = list("x"=16, "y"=8)
 
@@ -270,7 +272,7 @@
 /obj/item/reagent_containers/food/drinks/cans/terra_cola
 	name = "\improper Terra-Cola"
 	desc = "Made by the people. Served to the people."
-	description_fluff = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative Terran insulation technology."
+	description_fluff = "A can of the only soft drink state approved for the benefit of the people. Served at room temperature regardless of ambient temperatures thanks to innovative 'Terran' insulation technology."
 	icon_state = "terra_cola"
 	center_of_mass = list("x"=16, "y"=8)
 
@@ -323,7 +325,7 @@
 
 /obj/item/reagent_containers/food/drinks/cans/grape_cola
 	name = "\improper Gravity Grape"
-	desc = "Get down with Newton's favorite corbonated science experiment!"
+	desc = "Get down with Newton's favorite carbonated science experiment!"
 	icon_state = "grapesoda"
 	center_of_mass = list("x"=16, "y"=8)
 
@@ -374,8 +376,9 @@
 	reagents.add_reagent("beer", 30)
 
 /obj/item/reagent_containers/food/drinks/cans/alecan
-	name = "\improper Spacecastle Pale Ale"
-	desc = "A delicious IPA that's canned for your pleasure. Drink up!"
+	name = "\improper Hushed Whisper Pale Ale"
+	desc = "A delicious Sivian IPA that's canned for your pleasure. Drink up!"
+	description_fluff = "Named for one of history's most infamous pirates, Qar’raqel, who ruled over Natuna before suffering a mysterious fate. This ale is brewed on Sif by a small company... Owned by Centauri Provisions."
 	icon_state = "alecan"
 	center_of_mass = list("x"=16, "y"=8)
 
