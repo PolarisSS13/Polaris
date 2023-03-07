@@ -34,10 +34,8 @@
 	max_storage = list(
 		/obj/item/stack/material/steel =     150,
 		/obj/item/stack/material/glass =     150,
-		/obj/item/stack/material/rglass =    150,
 		/obj/item/stack/material/copper =    150,
 		/obj/item/stack/material/wood =      150,
-		/obj/item/stack/material/sifwood =   150,
 		/obj/item/stack/material/plastic =   150,
 		/obj/item/stack/material/phoron =    100,
 		/obj/item/stack/material/plasteel =  50,
