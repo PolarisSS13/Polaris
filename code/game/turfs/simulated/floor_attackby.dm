@@ -142,6 +142,7 @@
 			var/obj/S = new /obj/item/stack/material/snow(user.loc)
 			user.put_in_hands(S)
 			visible_message(SPAN_NOTICE("[user] scoops up a pile of snow."), SPAN_NOTICE("You scoop up a pile of snow."))
+		return
 	return ..()
 
 /turf/simulated/floor/proc/try_deconstruct_tile(obj/item/W as obj, mob/user as mob)
