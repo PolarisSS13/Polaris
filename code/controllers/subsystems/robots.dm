@@ -9,15 +9,17 @@ SUBSYSTEM_DEF(robots)
 	var/list/all_module_names            = list()
 
 	var/list/mob_types_by_title = list(
-		"robot, flying"  = /mob/living/silicon/robot/flying,
-		"drone, flying"  = /mob/living/silicon/robot/flying
+		"robot, flying"  =  /mob/living/silicon/robot/flying,
+		"drone, flying"  =  /mob/living/silicon/robot/flying,
+		"drone, platform" = /mob/living/silicon/robot/platform
 	)
 
 	var/list/mmi_types_by_title = list(
 		"robot"          = /obj/item/mmi/digital/posibrain,
-		"drone"          = /obj/item/mmi/digital/robot,
 		"robot, flying"  = /obj/item/mmi/digital/posibrain,
-		"drone, flying"  = /obj/item/mmi/digital/robot
+		"drone"          = /obj/item/mmi/digital/robot,
+		"drone, flying"  = /obj/item/mmi/digital/robot,
+		"drone, platform" = /obj/item/mmi/digital/robot
 	)
 
 /datum/controller/subsystem/robots/Initialize(start_uptime)

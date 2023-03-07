@@ -9,17 +9,23 @@
 				recharging_atom.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
 			recharging = null
 
-		if(length(stored_atoms))
-			for(var/weakref/stored_ref in stored_atoms)
+		var/obj/item/robot_module/robot/platform/thinktank_module = module
+		if(istype(thinktank_module) && length(thinktank_module.stored_atoms))
+			for(var/weakref/stored_ref in thinktank_module.stored_atoms)
 				var/atom/movable/dropping = stored_ref.resolve()
 				if(istype(dropping) && !QDELETED(dropping) && dropping.loc == src)
 					dropping.dropInto(loc)
 					dropping.throw_at(get_edge_target_turf(src,pick(GLOB.alldirs)),rand(1,3),30)
-			stored_atoms = null
+			thinktank_module.stored_atoms = null
 
 	. = ..()
 
 /mob/living/silicon/robot/platform/proc/can_store_atom(var/atom/movable/storing, var/mob/user)
+
+	var/obj/item/robot_module/robot/platform/thinktank_module = module
+	if(!istype(thinktank_module))
+		to_chat(user, SPAN_WARNING("Select a module first!"))
+		return FALSE
 
 	if(!istype(storing))
 		var/storing_target = (user == src) ? "yourself" : "\the [src]"
@@ -38,7 +44,7 @@
 		to_chat(user, SPAN_WARNING("You cannot store [storing_target] inside [storing_target]!"))
 		return FALSE
 
-	if(length(stored_atoms) >= max_stored_atoms)
+	if(length(thinktank_module.stored_atoms) >= thinktank_module.max_stored_atoms)
 		var/storing_target = (user == src) ? "Your" : "\The [src]'s"
 		to_chat(user, SPAN_WARNING("[storing_target] cargo compartment is full."))
 		return FALSE
@@ -50,13 +56,13 @@
 			to_chat(user, SPAN_WARNING("\The [storing] is too big for [storing_target]."))
 			return FALSE
 
-	for(var/store_type in can_store_types)
+	for(var/store_type in thinktank_module.can_store_types)
 		if(istype(storing, store_type))
 			. = TRUE
 			break
 
 	if(.)
-		for(var/store_type in cannot_store_types)
+		for(var/store_type in thinktank_module.cannot_store_types)
 			if(istype(storing, store_type))
 				. = FALSE
 				break
@@ -65,20 +71,25 @@
 		to_chat(user, SPAN_WARNING("You cannot store \the [storing] inside [storing_target]."))
 
 /mob/living/silicon/robot/platform/proc/store_atom(var/atom/movable/storing, var/mob/user)
-	if(istype(storing))
+	var/obj/item/robot_module/robot/platform/thinktank_module = module
+	if(istype(thinktank_module) && istype(storing))
 		storing.forceMove(src)
-		LAZYDISTINCTADD(stored_atoms, weakref(storing))
+		LAZYDISTINCTADD(thinktank_module.stored_atoms, weakref(storing))
 
 /mob/living/silicon/robot/platform/proc/drop_stored_atom(var/atom/movable/ejecting, var/mob/user)
 
-	if(!ejecting && length(stored_atoms))
-		var/weakref/stored_ref = stored_atoms[1]
+	var/obj/item/robot_module/robot/platform/thinktank_module = module
+	if(!istype(thinktank_module))
+		return
+
+	if(!ejecting && length(thinktank_module.stored_atoms))
+		var/weakref/stored_ref = thinktank_module.stored_atoms[1]
 		if(!istype(stored_ref))
-			LAZYREMOVE(stored_atoms, stored_ref)
+			LAZYREMOVE(thinktank_module.stored_atoms, stored_ref)
 		else
 			ejecting = stored_ref?.resolve()
 
-	LAZYREMOVE(stored_atoms, weakref(ejecting))
+	LAZYREMOVE(thinktank_module.stored_atoms, weakref(ejecting))
 	if(istype(ejecting) && !QDELETED(ejecting) && ejecting.loc == src)
 		ejecting.dropInto(loc)
 		if(user == src)
@@ -90,14 +101,15 @@
 	if(isrobot(user) && user.Adjacent(src))
 		return try_remove_cargo(user)
 	return ..()
-	
+
 /mob/living/silicon/robot/platform/proc/try_remove_cargo(var/mob/user)
-	if(!length(stored_atoms) || !istype(user))
+	var/obj/item/robot_module/robot/platform/thinktank_module = module
+	if(!istype(thinktank_module) || !length(thinktank_module.stored_atoms) || !istype(user))
 		return FALSE
-	var/weakref/remove_ref = stored_atoms[length(stored_atoms)]
+	var/weakref/remove_ref = thinktank_module.stored_atoms[length(thinktank_module.stored_atoms)]
 	var/atom/movable/removing = remove_ref?.resolve()
 	if(!istype(removing) || QDELETED(removing) || removing.loc != src)
-		LAZYREMOVE(stored_atoms, remove_ref)
+		LAZYREMOVE(thinktank_module.stored_atoms, remove_ref)
 	else
 		user.visible_message(SPAN_NOTICE("\The [user] begins unloading \the [removing] from \the [src]'s cargo compartment."))
 		if(do_after(user, 3 SECONDS, src) && !QDELETED(removing) && removing.loc == src)
@@ -113,7 +125,8 @@
 		to_chat(src, SPAN_WARNING("You are not in any state to do that."))
 		return
 
-	if(length(stored_atoms))
+	var/obj/item/robot_module/robot/platform/thinktank_module = module
+	if(istype(thinktank_module) && length(thinktank_module.stored_atoms))
 		drop_stored_atom(user = src)
 	else
 		to_chat(src, SPAN_WARNING("You have nothing in your cargo compartment."))

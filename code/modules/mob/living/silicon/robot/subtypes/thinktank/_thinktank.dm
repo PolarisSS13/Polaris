@@ -1,18 +1,3 @@
-// Spawner landmarks are used because platforms that are mapped during
-// SSatoms init try to Initialize() twice. I have no idea why and I am 
-// not paid enough to spend more time trying to debug it.
-/obj/effect/landmark/robot_platform
-	name = "recon platform spawner"
-	icon = 'icons/mob/screen1.dmi'
-	icon_state = "x3"
-	delete_me = TRUE
-	var/platform_type
-
-/obj/effect/landmark/robot_platform/Initialize()
-	if(platform_type)
-		new platform_type(get_turf(src))
-	return ..()
-
 /mob/living/silicon/robot/platform
 	name = "support platform"
 	desc = "A large quadrupedal AI platform, colloquially known as a 'think-tank' due to the flexible onboard intelligence."
@@ -33,6 +18,8 @@
 	mob_push_flags =  HEAVY
 	mob_size =        MOB_LARGE
 
+	module_category = ROBOT_MODULE_TYPE_PLATFORM
+
 	var/has_had_player = FALSE
 	var/const/platform_respawn_time = 3 MINUTES
 
@@ -41,19 +28,6 @@
 	var/tmp/recharger_charge_amount = 10 KILOWATTS
 	var/tmp/recharger_tick_cost =     80 KILOWATTS
 	var/weakref/recharging
-
-	var/list/stored_atoms
-	var/max_stored_atoms = 1
-	var/static/list/can_store_types = list(
-		/mob/living,
-		/obj/item,
-		/obj/structure,
-		/obj/machinery
-	)
-	// Currently set to prevent tonks hauling a deliaminating SM into the middle of the station.
-	var/static/list/cannot_store_types = list(
-		/obj/machinery/power/supermatter
-	)
 
 /mob/living/silicon/robot/platform/Login()
 	. = ..()
@@ -82,11 +56,13 @@
 	components["armour"] =         new /datum/robot_component/armour/platform(src)
 
 /mob/living/silicon/robot/platform/Destroy()
-	for(var/weakref/drop_ref in stored_atoms)
-		var/atom/movable/drop_atom = drop_ref.resolve()
-		if(istype(drop_atom) && !QDELETED(drop_atom) && drop_atom.loc == src)
-			drop_atom.dropInto(loc)
-	stored_atoms = null
+	var/obj/item/robot_module/robot/platform/thinktank_module = module
+	if(istype(thinktank_module))
+		for(var/weakref/drop_ref in thinktank_module.stored_atoms)
+			var/atom/movable/drop_atom = drop_ref.resolve()
+			if(istype(drop_atom) && !QDELETED(drop_atom) && drop_atom.loc == src)
+				drop_atom.dropInto(loc)
+		thinktank_module.stored_atoms = null
 	if(recharging)
 		var/obj/item/recharging_atom = recharging.resolve()
 		if(istype(recharging_atom) && recharging_atom.loc == src)
@@ -108,9 +84,10 @@
 		else
 			. += "Its recharging port is empty."
 
-		if(length(stored_atoms))
+		var/obj/item/robot_module/robot/platform/thinktank_module = module
+		if(istype(thinktank_module) && length(thinktank_module.stored_atoms))
 			var/list/atom_names = list()
-			for(var/weakref/stored_ref in stored_atoms)
+			for(var/weakref/stored_ref in thinktank_module.stored_atoms)
 				var/atom/movable/AM = stored_ref.resolve()
 				if(istype(AM))
 					atom_names += "\a [AM]"

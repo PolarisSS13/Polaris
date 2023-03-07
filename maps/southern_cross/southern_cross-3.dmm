@@ -13977,7 +13977,6 @@
 	dir = 4
 	},
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/robot_platform/explorer,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/garage)
 "GT" = (
@@ -14102,7 +14101,6 @@
 "Lz" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/robot_platform/explorer,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/garage)
 "LH" = (

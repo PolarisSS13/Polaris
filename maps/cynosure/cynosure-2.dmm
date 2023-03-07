@@ -20941,7 +20941,6 @@
 /area/shuttle/exploration/general)
 "jDG" = (
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/robot_platform/cargo,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/quartermaster/lockerroom)
 "jDW" = (
@@ -43241,7 +43240,6 @@
 /area/surface/station/quartermaster/lockerroom)
 "tdK" = (
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/robot_platform/explorer,
 /obj/machinery/firealarm{
 	pixel_y = 24
 	},

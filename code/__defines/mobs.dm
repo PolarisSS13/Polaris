@@ -354,6 +354,7 @@
 // Robot module categorization
 #define ROBOT_MODULE_TYPE_GROUNDED "grounded"
 #define ROBOT_MODULE_TYPE_FLYING   "flying"
+#define ROBOT_MODULE_TYPE_PLATFORM "platform"
 
 // More refined version of SA_* ""intelligence"" separators.
 // Now includes bitflags, so to target two classes you just do 'MOB_CLASS_ANIMAL|MOB_CLASS_HUMANOID'

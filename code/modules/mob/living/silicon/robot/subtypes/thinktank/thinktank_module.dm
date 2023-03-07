@@ -1,6 +1,7 @@
 /obj/item/robot_module/robot/platform
 
 	hide_on_manifest = TRUE
+	module_category = ROBOT_MODULE_TYPE_PLATFORM
 	unavailable_by_default = TRUE
 
 	var/pupil_color =     COLOR_CYAN
@@ -16,11 +17,21 @@
 		"Vertical Stripe" = "stripe_vertical"
 	)
 
-// Only show on manifest if they have a player.
-/obj/item/robot_module/robot/platform/hide_on_manifest()
-	if(isrobot(loc))
-		var/mob/living/silicon/robot/R = loc
-		return !R.key
+	var/list/stored_atoms
+	var/max_stored_atoms = 1
+	var/static/list/can_store_types = list(
+		/mob/living,
+		/obj/item,
+		/obj/structure,
+		/obj/machinery
+	)
+	// Currently set to prevent tonks hauling a deliaminating SM into the middle of the station.
+	var/static/list/cannot_store_types = list(
+		/obj/machinery/power/supermatter
+	)
+
+/obj/item/robot_module/robot/platform/Destroy()
+	QDEL_NULL_LIST(stored_atoms)
 	return ..()
 
 /obj/item/robot_module/robot/platform/verb/set_eye_colour()
@@ -37,6 +48,7 @@
 	usr.update_icon()
 
 /obj/item/robot_module/robot/platform/explorer
+	unavailable_by_default = FALSE
 	armor_color = "#528052"
 	eye_color =   "#7b7b46"
 	decals = list(
@@ -84,6 +96,7 @@
 			pew.charge_tick = 0
 
 /obj/item/robot_module/robot/platform/cargo
+	unavailable_by_default = FALSE
 	armor_color = "#d5b222"
 	eye_color =   "#686846"
 	decals = list(
@@ -92,6 +105,7 @@
 	)
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
+	max_stored_atoms = 3
 
 /obj/item/robot_module/robot/platform/cargo/Initialize()
 
@@ -109,3 +123,32 @@
 	var/obj/item/packageWrap/wrapper = locate() in modules
 	if(wrapper.amount < initial(wrapper.amount))
 		wrapper.amount++
+
+/*
+/mob/living/silicon/robot/platform/explorer
+	name = "recon platform"
+	desc = "A large quadrupedal AI platform, colloquially known as a 'think-tank' due to the flexible onboard intelligence. This one is lightly armoured and fitted with all-terrain wheels."
+	modtype = "Recon"
+	module = /obj/item/robot_module/robot/platform/explorer
+
+/mob/living/silicon/robot/platform/explorer/Initialize()
+	. = ..()
+	laws = new /datum/ai_laws/explorer
+
+/mob/living/silicon/robot/platform/explorer/welcome_client()
+	..()
+	if(client) // ganbatte tachikoma-san
+		to_chat(src, SPAN_NOTICE("You are tasked with supporting the Exploration and Science staff as they unearth the secrets of the planet. Do your best!"))
+
+/mob/living/silicon/robot/platform/cargo
+	name = "logistics platform"
+	desc = "A large quadrupedal AI platform, colloquially known as a 'think-tank' due to the flexible onboard intelligence. This one has an expanded storage compartment."
+	modtype = "Logistics"
+	module = /obj/item/robot_module/robot/platform/cargo
+	max_stored_atoms = 3
+
+/mob/living/silicon/robot/platform/cargo/welcome_client()
+	..()
+	if(client)
+		to_chat(src, SPAN_NOTICE("You are tasked with supporting the Cargo and Supply staff as they handle operational logistics. Do your best!"))
+*/
