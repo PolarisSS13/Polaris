@@ -3489,7 +3489,7 @@
 	center_of_mass = list("x"=16, "y"=13)
 	nutriment_amt = 4
 	nutriment_desc = list("uncooked dough" = 3)
-	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_EGGS //We're going to call the egg a gameplay abstraction for the mostpart, but you JUST put an egg in here...=
+	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_EGGS //We're going to call the egg a gameplay abstraction for the mostpart, but for now you JUST put an egg in here...=
 
 // Dough + rolling pin = flat dough
 /obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
