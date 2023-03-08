@@ -1,4 +1,7 @@
 #define EMITTER_DAMAGE_POWER_TRANSFER 450 //used to transfer power to containment field generators
+#define STATE_LOOSE 0 //unanchored
+#define STATE_WRENCHED 1 //wrenched
+#define STATE_WELDED 2 //wrenched and welded. dormant - can be activated now
 
 /obj/machinery/power/emitter
 	name = "emitter"
@@ -13,16 +16,18 @@
 	use_power = USE_POWER_OFF	//uses powernet power, not APC power
 	active_power_usage = 30000	//30 kW laser. I guess that means 30 kJ per shot.
 
-	var/active = 0
-	var/powered = 0
+	var/active = FALSE
+	var/powered = FALSE
 	var/fire_delay = 100
 	var/max_burst_delay = 100
 	var/min_burst_delay = 20
 	var/burst_shots = 3
 	var/last_shot = 0
 	var/shot_number = 0
-	var/state = 0
-	var/locked = 0
+	var/state = STATE_LOOSE
+	var/locked = FALSE
+	var/safety = FALSE //Are the safeties enabled?
+	var/safety_override = FALSE //Multitool to disable the safeties... or emag to disable permanently.
 
 	var/burst_delay = 2
 	var/initial_fire_delay = 100
@@ -43,8 +48,15 @@
 
 /obj/machinery/power/emitter/Initialize()
 	. = ..()
-	if(state == 2 && anchored)
+	if(state == STATE_WELDED && anchored)
 		connect_to_network()
+	if(emagged) //So they can start emagged, if for some ungodly reason you want to torment the engineers.
+		emag_act()
+
+/obj/machinery/power/emitter/faulty
+	name = "ominous emitter"
+	desc = "If you can see it, it can see you."
+	emagged = TRUE
 
 /obj/machinery/power/emitter/Destroy()
 	message_admins("Emitter deleted at ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
@@ -63,31 +75,34 @@
 	activate(user)
 
 /obj/machinery/power/emitter/proc/activate(mob/user as mob)
-	if(state == 2)
+	if(state == STATE_WELDED)
 		if(!powernet)
 			to_chat(user, "\The [src] isn't connected to a wire.")
 			return 1
-		if(!src.locked)
-			if(src.active==1)
-				src.active = 0
-				to_chat(user, "You turn off [src].")
-				message_admins("Emitter turned off by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-				log_game("EMITTER([x],[y],[z]) OFF by [key_name(user)]")
-				investigate_log("turned <font color='red'>off</font> by [user.key]","singulo")
-			else
-				src.active = 1
-				to_chat(user, "You turn on [src].")
-				src.shot_number = 0
-				src.fire_delay = get_initial_fire_delay()
-				message_admins("Emitter turned on by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
-				log_game("EMITTER([x],[y],[z]) ON by [key_name(user)]")
-				investigate_log("turned <font color='green'>on</font> by [user.key]","singulo")
-			update_icon()
-		else
-			to_chat(user, "<span class='warning'>The controls are locked!</span>")
-	else
-		to_chat(user, "<span class='warning'>\The [src] needs to be firmly secured to the floor first.</span>")
-		return 1
+	if(state != STATE_WELDED)
+		to_chat(user, SPAN_WARNING("\The [src] needs to be firmly secured to the floor first."))
+		return TRUE
+
+	if(!powernet && active_power_usage)
+		to_chat(user, SPAN_WARNING("\The [src] has no power!"))
+		return TRUE
+
+	if(src.locked)
+		to_chat(user, SPAN_WARNING("The controls are locked!"))
+		return TRUE
+
+	active = !active
+	var/status = active ? "on" : "off"
+	to_chat(user, "You turn [status] \the [src].")
+	if(!safety)
+		update_safety()
+
+	message_admins("Emitter turned [status] by [key_name(user, user.client)](<A HREF='?_src_=holder;adminmoreinfo=\ref[user]'>?</A>) in ([x],[y],[z] - <A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)",0,1)
+	log_game("EMITTER([x],[y],[z]) [status] by [key_name(user)]")
+	investigate_log("turned <font color='red'>[status]</font> by [user.key]","singulo")
+
+	update_icon()
+	return TRUE
 
 
 /obj/machinery/power/emitter/emp_act(var/severity)//Emitters are hardened but still might have issues
@@ -101,10 +116,15 @@
 /obj/machinery/power/emitter/process()
 	if(stat & (BROKEN))
 		return
-	if(src.state != 2 || (!powernet && active_power_usage))
-		src.active = 0
+	if(src.state != STATE_WELDED || (!powernet && active_power_usage))
+		src.active = FALSE
+		src.safety = FALSE //Don't bother with the targeting laser if we're unpowered.
 		update_icon()
 		return
+	if(safety) // Being emagged will prevent the safety from being enabled
+		var/list/hit = check_trajectory(get_step(src, dir), src)
+		src.Beam(LAZYACCESS(hit, hit?.len), icon_state = "sniper_beam", time = 2 SECONDS, maxdistance = 50) //Refreshes on process() so short duration is fine.
+
 	if(((src.last_shot + src.fire_delay) <= world.time) && (src.active == 1))
 
 		var/actual_load = draw_power(active_power_usage)
@@ -147,27 +167,31 @@
 
 /obj/machinery/power/emitter/attackby(obj/item/W, mob/user)
 
+	if(istype(W, /obj/item/multitool))
+		toggle_safety_override(user)
+		return
+
 	if(W.is_wrench())
 		if(active)
 			to_chat(user, "Turn off [src] first.")
 			return
 		switch(state)
-			if(0)
-				state = 1
+			if(STATE_LOOSE)
+				state = STATE_WRENCHED
 				playsound(src, W.usesound, 75, 1)
 				user.visible_message("[user.name] secures [src] to the floor.", \
 					"You secure the external reinforcing bolts to the floor.", \
 					"You hear a ratchet.")
 				src.anchored = 1
-			if(1)
-				state = 0
+			if(STATE_WRENCHED)
+				state = STATE_LOOSE
 				playsound(src, W.usesound, 75, 1)
 				user.visible_message("[user.name] unsecures [src] reinforcing bolts from the floor.", \
 					"You undo the external reinforcing bolts.", \
 					"You hear a ratchet.")
 				src.anchored = 0
 				disconnect_from_network()
-			if(2)
+			if(STATE_WELDED)
 				to_chat(user, "<span class='warning'>\The [src] needs to be unwelded from the floor.</span>")
 		return
 
@@ -177,9 +201,9 @@
 			to_chat(user, "Turn off [src] first.")
 			return
 		switch(state)
-			if(0)
+			if(STATE_LOOSE)
 				to_chat(user, "<span class='warning'>\The [src] needs to be wrenched to the floor.</span>")
-			if(1)
+			if(STATE_WRENCHED)
 				if (WT.remove_fuel(0,user))
 					playsound(src, WT.usesound, 50, 1)
 					user.visible_message("[user.name] starts to weld [src] to the floor.", \
@@ -187,12 +211,12 @@
 						"You hear welding")
 					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
-						state = 2
+						state = STATE_WELDED
 						to_chat(user, "You weld [src] to the floor.")
 						connect_to_network()
 				else
 					to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
-			if(2)
+			if(STATE_WELDED)
 				if (WT.remove_fuel(0,user))
 					playsound(src, WT.usesound, 50, 1)
 					user.visible_message("[user.name] starts to cut [src] free from the floor.", \
@@ -200,7 +224,7 @@
 						"You hear welding")
 					if (do_after(user,20 * WT.toolspeed))
 						if(!src || !WT.isOn()) return
-						state = 1
+						state = STATE_WRENCHED
 						to_chat(user, "You cut [src] free from the floor.")
 						disconnect_from_network()
 				else
@@ -241,9 +265,14 @@
 
 /obj/machinery/power/emitter/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
-		locked = 0
-		emagged = 1
-		user.visible_message("[user.name] emags [src].","<span class='warning'>You short out the lock.</span>")
+		locked = FALSE
+		emagged = TRUE
+		safety = FALSE
+		burst_shots = rand(3,5) //An unpredictable number of shots...
+		min_burst_delay = rand(0,20) //... with an unpredictable rate of fire.
+		max_burst_delay = rand(21,100) //These aren't safe at all...
+		initial_fire_delay = rand(0,100) //... but they fire more often? Worth it?
+		user.visible_message("[user.name] tampers with [src]'s electronics.","<span class='warning'>You short out [src]'s electronics.</span>")
 		return 1
 
 /obj/machinery/power/emitter/bullet_act(var/obj/item/projectile/P)
@@ -289,3 +318,50 @@
 
 /obj/machinery/power/emitter/proc/get_emitter_beam()
 	return new /obj/item/projectile/beam/emitter(get_turf(src))
+
+
+//Safety mechanisms - 2023-03-07/2023-03-23
+//Added due to in-character Union actions (and multiple disintegrated arms)
+//Summary: when the emitter is dormant, a targeting laser can be present (toggled with alt-click).
+//When the emitter is firing, the targeting laser WILL be present.
+//Multitools temporarily disable the targeting software. Emags permanently disable the targeting software... and scramble the fire delays.
+/obj/machinery/power/emitter/AltClick(mob/user)
+	. = ..()
+	try_toggle_safety(user)
+
+/obj/machinery/power/emitter/proc/update_safety()
+	safety = !emagged && (powernet || !active_power_usage) && (!safety_override || active) //Emagged, overridden or depowered = no safety. Otherwise, toggle.
+
+/obj/machinery/power/emitter/proc/can_toggle_safety(mob/user)
+	if(state != STATE_WELDED)
+		to_chat(user, "<span class='notice'>You can't adjust the emitter's targeting laser without securing it first.</span>")
+		return FALSE
+	if(active)
+		to_chat(user, "<span class='danger'>You can't adjust \the [src]'s targeting laser while it's firing!</span>")
+		return FALSE
+	if(safety_override)
+		to_chat(user, "<span class='danger'>\The [src]'s targeting laser has been manually disabled!</span>")
+		return FALSE
+	if(emagged) //You weren't standing in front of it, right?
+		to_chat(user, "<span class='warning'>The targeting laser on [src] short-circuits!</span>")
+		activate(user)
+		return FALSE
+	return TRUE
+
+/obj/machinery/power/emitter/proc/try_toggle_safety(mob/user) //Enable or disable the targeting laser when it's dormant
+	if(!can_toggle_safety(user))
+		return
+	to_chat(user, "You [safety ? "disable" : "enable"] \the [src]'s targeting laser.") //give feedback to user!
+	toggle_safety()
+	return
+
+/obj/machinery/power/emitter/proc/toggle_safety_override(mob/user) //Prevent the targeting laser from showing up at all
+	if(!emagged && state == STATE_WELDED && !active)
+		safety_override = !safety_override
+		if(safety_override)
+			to_chat(user, "You disable [src]'s targeting software. It was just getting in the way anyway.")
+		else
+			to_chat(user, "In a brief moment of wisdom, you reenable [src]'s targeting software.")
+		update_safety()
+	else
+		can_toggle_safety(user) //If it's emagged, active, or unsecured, give us the failure message. Otherwise, flip the override.
