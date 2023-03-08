@@ -7,7 +7,7 @@
 		"Drone" = "drone-sec",
 		"Eyebot" = "eyebot-security"
 	)
-	equipment = list(
+	modules = list(
 		/obj/item/evidencebag,
 		/obj/item/forensics/sample_kit,
 		/obj/item/forensics/sample_kit/powder,
@@ -25,10 +25,10 @@
 	emag = /obj/item/gun/energy/laser/mounted
 
 /obj/item/robot_module/flying/forensics/respawn_consumable(mob/living/silicon/robot/R, amount)
-	var/obj/item/reagent_containers/spray/luminol/luminol = locate() in equipment
+	var/obj/item/reagent_containers/spray/luminol/luminol = locate() in modules
 	if(!luminol)
 		luminol = new(src)
-		equipment += luminol
+		modules += luminol
 	if(luminol.reagents.total_volume < luminol.volume)
 		var/adding = min(luminol.volume-luminol.reagents.total_volume, 2*amount)
 		if(adding > 0)

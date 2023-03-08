@@ -7,7 +7,7 @@
 		"Drone" = "drone-engineer",
 		"Eyebot" = "eyebot-engineering"
 	)
-	equipment = list(
+	modules = list(
 		/obj/item/borg/sight/meson,
 		/obj/item/extinguisher,
 		/obj/item/weldingtool/largetank,
@@ -51,7 +51,7 @@
 	var/datum/matter_synth/plasteel/plasteel = locate() in synths
 	var/datum/matter_synth/wire/wire =         locate() in synths
 
-	var/obj/item/matter_decompiler/MD = locate() in equipment
+	var/obj/item/matter_decompiler/MD = locate() in modules
 	MD.metal = metal
 	MD.glass = glass
 
@@ -61,25 +61,25 @@
 		 /obj/item/stack/tile/floor/cyborg,
 		 /obj/item/stack/material/cyborg/glass/reinforced
 		))
-		var/obj/item/stack/stack = locate(thing) in equipment
+		var/obj/item/stack/stack = locate(thing) in modules
 		LAZYDISTINCTADD(stack.synths, metal)
 
 	for(var/thing in list(
 		 /obj/item/stack/material/cyborg/glass/reinforced,
 		 /obj/item/stack/material/cyborg/glass
 		))
-		var/obj/item/stack/stack = locate(thing) in equipment
+		var/obj/item/stack/stack = locate(thing) in modules
 		LAZYDISTINCTADD(stack.synths, glass)
 
-	var/obj/item/stack/cable_coil/cyborg/C = locate() in equipment
+	var/obj/item/stack/cable_coil/cyborg/C = locate() in modules
 	C.synths = list(wire)
 
-	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in equipment
+	var/obj/item/stack/material/cyborg/plasteel/PL = locate() in modules
 	PL.synths = list(plasteel)
 	. = ..()
 
 /obj/item/robot_module/flying/repair/respawn_consumable(mob/living/silicon/robot/R, amount)
-	var/obj/item/lightreplacer/LR = locate() in equipment
+	var/obj/item/lightreplacer/LR = locate() in modules
 	if(LR)
 		LR.Charge(R, amount)
 	..()

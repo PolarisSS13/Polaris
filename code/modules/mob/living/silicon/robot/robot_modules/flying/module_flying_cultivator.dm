@@ -7,7 +7,7 @@
 	)
 	sprites = list("Drone" = "drone-hydro")
 
-	equipment = list(
+	modules = list(
 		/obj/item/storage/bag/plants,
 		/obj/item/tool/wirecutters/clippers,
 		/obj/item/material/minihoe,

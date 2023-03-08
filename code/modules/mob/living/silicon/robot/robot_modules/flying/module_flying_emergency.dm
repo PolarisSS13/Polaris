@@ -8,7 +8,7 @@
 		"Drone" = "drone-medical",
 		"Eyebot" = "eyebot-medical"
 	)
-	equipment = list(
+	modules = list(
 		/obj/item/flash,
 		/obj/item/borg/sight/hud/med,
 		/obj/item/healthanalyzer,
@@ -36,13 +36,13 @@
 
 /obj/item/robot_module/flying/emergency/finalize_emag()
 	. = ..()
-	emag.reagents.add_reagent(/datum/reagent/acid/polyacid, 250)
+	emag.reagents.add_reagent("pacid", 250)
 	emag.name = "polyacid spray"
 
 /obj/item/robot_module/flying/emergency/finalize_equipment()
 	. = ..()
 	for(var/thing in list(/obj/item/stack/medical/advanced/ointment, /obj/item/stack/medical/advanced/bruise_pack, /obj/item/stack/medical/splint))
-		var/obj/item/stack/medical/stack = locate(thing) in equipment
+		var/obj/item/stack/medical/stack = locate(thing) in modules
 		stack.uses_charge = 1
 		stack.charge_costs = list(1000)
 
@@ -54,7 +54,7 @@
 		 /obj/item/stack/medical/advanced/bruise_pack,
 		 /obj/item/stack/medical/splint
 		))
-		var/obj/item/stack/medical/stack = locate(thing) in equipment
+		var/obj/item/stack/medical/stack = locate(thing) in modules
 		stack.synths = list(medicine)
 
 /obj/item/robot_module/flying/emergency/respawn_consumable(mob/living/silicon/robot/R, amount)

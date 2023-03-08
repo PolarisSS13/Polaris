@@ -4,7 +4,7 @@
 	icon_state = "std_module"
 	w_class = ITEMSIZE_NO_CONTAINER
 	item_state = "std_mod"
-	var/list/equipment
+
 	var/unavailable_by_default
 	var/display_name
 	var/hide_on_manifest = FALSE
@@ -35,6 +35,12 @@
 	var/list/subsystems = list()
 	var/list/obj/item/borg/upgrade/supported_upgrades = list()
 
+	var/list/universal_equipment = list(
+		/obj/item/flash/robot,
+		/obj/item/tool/crowbar/cyborg,
+		/obj/item/extinguisher,
+		/obj/item/gps/robot
+	)
 	// Module categorization values.
 	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
 	var/upgrade_locked = FALSE
@@ -75,29 +81,31 @@
 	R.set_module_sprites(sprites)
 	addtimer(CALLBACK(R, /mob/living/silicon/robot/proc/choose_icon, R.module_sprites.len + 1, R.module_sprites), 0)
 
-	for(var/obj/item/I in modules)
-		I.canremove = 0
-
 /obj/item/robot_module/proc/build_equipment()
-	for(var/thing in equipment)
+	SHOULD_CALL_PARENT(TRUE)
+	for(var/thing in (modules|universal_equipment))
+		modules -= thing
 		if(ispath(thing, /obj/item))
 			modules += new thing(src)
 		else if(isitem(thing))
 			var/obj/item/I = thing
 			I.forceMove(src)
-			modules |= I
+			modules += I
 		else
 			log_debug("Invalid var type in [type] equipment creation - [thing]")
 
 /obj/item/robot_module/proc/finalize_equipment()
-	for(var/obj/item/I in equipment)
+	SHOULD_CALL_PARENT(TRUE)
+	for(var/obj/item/I in modules)
 		I.canremove = FALSE
 
 /obj/item/robot_module/proc/build_emag()
+	SHOULD_CALL_PARENT(TRUE)
 	if(ispath(emag))
 		emag = new emag(src)
 
 /obj/item/robot_module/proc/finalize_emag()
+	SHOULD_CALL_PARENT(TRUE)
 	if(istype(emag))
 		emag.canremove = FALSE
 	else
@@ -105,6 +113,7 @@
 		emag = null
 
 /obj/item/robot_module/proc/build_synths()
+	SHOULD_CALL_PARENT(TRUE)
 	for(var/thing in synths)
 		if(ispath(thing, /datum/matter_synth))
 			if(!isnull(synths[thing]))
@@ -117,6 +126,7 @@
 			log_debug("Invalid var type in [type] synth creation - [thing]")
 
 /obj/item/robot_module/proc/finalize_synths()
+	SHOULD_CALL_PARENT(TRUE)
 	return
 
 /obj/item/robot_module/proc/Reset(var/mob/living/silicon/robot/R)

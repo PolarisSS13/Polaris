@@ -59,32 +59,28 @@
 		"Science" = 1,
 		"Explorer" = 1
 	)
+	modules = list(
+		/obj/item/tool/wrench/cyborg,
+		/obj/item/weldingtool/electric/mounted/cyborg,
+		/obj/item/tool/wirecutters/cyborg,
+		/obj/item/tool/screwdriver/cyborg,
+		/obj/item/pickaxe/plasmacutter,
+		/obj/item/material/knife/machete/cyborg,
+		/obj/item/gun/energy/phasegun/mounted/cyborg,
+		/obj/item/stack/medical/bruise_pack
+	)
+	emag = /obj/item/chainsaw
+	synths = list(
+		/datum/matter_synth/medicine = 7500
+	)
 
-/obj/item/robot_module/robot/platform/explorer/Initialize()
-
-	. = ..()
-	if(. != INITIALIZE_HINT_NORMAL)
-		return
-
-	modules += new /obj/item/tool/wrench/cyborg(src)
-	modules += new /obj/item/weldingtool/electric/mounted/cyborg(src)
-	modules += new /obj/item/tool/wirecutters/cyborg(src)
-	modules += new /obj/item/tool/screwdriver/cyborg(src)
-	modules += new /obj/item/pickaxe/plasmacutter(src)
-	modules += new /obj/item/material/knife/machete/cyborg(src)
-
-	var/datum/matter_synth/medicine = new /datum/matter_synth/medicine(7500)
-	var/obj/item/stack/medical/bruise_pack/bandaid = new(src)
+/obj/item/robot_module/robot/platform/explorer/finalize_synths()
+	..()
+	var/datum/matter_synth/medicine/medicine = locate() in synths
+	var/obj/item/stack/medical/bruise_pack/bandaid = locate() in modules
 	bandaid.uses_charge = 1
 	bandaid.charge_costs = list(1000)
 	bandaid.synths = list(medicine)
-	modules += bandaid
-	synths += medicine
-
-	var/obj/item/gun/energy/phasegun/mounted/cyborg/phasegun = new(src)
-	modules += phasegun
-
-	emag = new /obj/item/chainsaw(src)
 
 /obj/item/robot_module/robot/platform/explorer/respawn_consumable(var/mob/living/silicon/robot/R, rate)
 	. = ..()
@@ -106,17 +102,12 @@
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
 	max_stored_atoms = 3
-
-/obj/item/robot_module/robot/platform/cargo/Initialize()
-
-	. = ..()
-	if(. != INITIALIZE_HINT_NORMAL)
-		return
-
-	modules += new /obj/item/packageWrap(src)
-	modules += new /obj/item/pen/multi(src)
-	modules += new /obj/item/destTagger(src)
-	emag = new /obj/item/stamp/denied
+	modules = list(
+		/obj/item/packageWrap,
+		/obj/item/pen/multi,
+		/obj/item/destTagger,
+	)
+	emag = /obj/item/stamp/denied
 
 /obj/item/robot_module/robot/platform/cargo/respawn_consumable(mob/living/silicon/robot/R, rate)
 	. = ..()
@@ -144,8 +135,6 @@
 	name = "logistics platform"
 	desc = "A large quadrupedal AI platform, colloquially known as a 'think-tank' due to the flexible onboard intelligence. This one has an expanded storage compartment."
 	modtype = "Logistics"
-	module = /obj/item/robot_module/robot/platform/cargo
-	max_stored_atoms = 3
 
 /mob/living/silicon/robot/platform/cargo/welcome_client()
 	..()

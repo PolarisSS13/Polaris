@@ -6,7 +6,7 @@
 		"Supply" = TRUE
 		)
 	sprites = list("Drone" = "drone-service")
-	equipment = list(
+	modules = list(
 		/obj/item/flash,
 		/obj/item/pen/robopen,
 		/obj/item/form_printer,
