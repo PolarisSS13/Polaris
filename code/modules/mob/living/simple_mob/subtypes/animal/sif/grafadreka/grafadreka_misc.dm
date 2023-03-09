@@ -63,6 +63,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	)
 
 
+
 /obj/item/projectile/drake_spit
 	name = "drake spittle"
 	icon_state = "ice_1"
@@ -76,6 +77,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	weaken = 3
 	eyeblur = 5
 	fire_sound = 'sound/voice/drakes/drake_spit.ogg'
+
 
 /obj/item/projectile/drake_spit/on_hit(atom/target, blocked, def_zone)
 	// Stun is needed to effectively hunt simplemobs, but it's OP against humans.
