@@ -126,7 +126,7 @@
 /obj/item/clothing/under/skirt/swept
 	name = "swept skirt"
 	desc = "A skirt that is swept to one side."
-	icon_state = "skirt_swept"
+	icon_state = "skirt_swept_black"
 
 /obj/item/clothing/under/skirt/loincloth
 	name = "loincloth"
@@ -138,6 +138,61 @@
 	desc = "A simple pleated skirt. It's like high school all over again."
 	icon_state = "pleated"
 	addblends = "pleated_a"
+
+//Colorable skirts
+/obj/item/clothing/under/skirt/colorable
+	name = "skirt"
+	desc = "A rather plain looking skirt."
+	icon_state = "skirt_casual"
+
+/obj/item/clothing/under/skirt/colorable/puffy
+	icon_state = "skirt_puffy"
+
+/obj/item/clothing/under/skirt/colorable/skater
+	desc = "A skirt with loose frills."
+	icon_state = "skirt_skater"
+
+/obj/item/clothing/under/skirt/colorable/pleated
+	desc = "A short skirt featuring pleat trailing up from the hem."
+	icon_state = "skirt_pleated"
+
+/obj/item/clothing/under/skirt/colorable/pencil
+	name = "pencil skirt"
+	desc = "A short skirt that's almost as thin as a pencil. Almost."
+	icon_state = "skirt_pencil"
+
+/obj/item/clothing/under/skirt/colorable/plaid
+	name = "plaid skirt"
+	desc = "A skirt featuring a plaid pattern."
+	icon_state = "skirt_plaid"
+
+/obj/item/clothing/under/skirt/colorable/tube
+	desc = "A long thin skirt that trails beyond the knees."
+	icon_state = "skirt_tube"
+
+/obj/item/clothing/under/skirt/colorable/long
+	name = "long skirt"
+	icon_state = "skirt_long"
+
+/obj/item/clothing/under/skirt/colorable/high
+	name = "high skirt"
+	desc = "A skirt that rests at the waist instead of the hips."
+	icon_state = "skirt_high"
+
+/obj/item/clothing/under/skirt/colorable/swept
+	name = "swept skirt"
+	desc = "A skirt with an angled hem; shorter on one side, longer on the other, like a sweep."
+	icon_state = "skirt_swept"
+
+/obj/item/clothing/under/skirt/colorable/jumper
+	name = "jumper skirt"
+	desc = "A skirt that's held up by suspenders."
+	icon_state = "skirt_jumper"
+
+/obj/item/clothing/under/skirt/colorable/jumperdress
+	name = "jumper dress"
+	desc = "A dress held up by suspenders. Not quite a skirt anymore."
+	icon_state = "skirt_jumperdress"
 
 /obj/item/clothing/under/skirt/outfit
 	name = "black skirt"

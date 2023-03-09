@@ -448,8 +448,8 @@
 	. = ..(ml, MAT_BRONZE)
 
 /obj/item/clothing/accessory/halfcape
-	name = "half cape"
-	desc = "A tasteful half-cape, suitible for European nobles and retro anime protagonists."
+	name = "retro half cape"
+	desc = "A tasteful half-cape with epaulettes, suitible for European nobles and retro anime protagonists."
 	icon_state = "halfcape"
 	slot = ACCESSORY_SLOT_DECOR
 

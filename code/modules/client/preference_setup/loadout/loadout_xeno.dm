@@ -6,10 +6,13 @@
 	sort_category = "Xenowear"
 
 /datum/gear/head/zhan_scarf
-	display_name = "Zhan headscarf"
+	display_name = "Zhan headscarf (colorable)"
 	path = /obj/item/clothing/head/tajaran/scarf
 	whitelisted = SPECIES_TAJ
 
+/datum/gear/head/zhan_scarf/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
 /datum/gear/suit/unathi_mantle
 	display_name = "hide mantle (Unathi)"
 	path = /obj/item/clothing/suit/unathi/mantle

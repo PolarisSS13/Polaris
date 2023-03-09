@@ -86,6 +86,7 @@ something, make sure it's not in one of the other lists.*/
 				prob(3);/obj/item/clothing/suit/storage/toggle/hoodie/blue,
 				prob(3);/obj/item/clothing/suit/storage/toggle/hoodie/red,
 				prob(3);/obj/item/clothing/suit/storage/toggle/hoodie/yellow,
+				prob(3);/obj/item/clothing/suit/storage/hooded/toggle/colorable/random,
 				prob(3);/obj/item/clothing/suit/storage/toggle/brown_jacket,
 				prob(3);/obj/item/clothing/suit/storage/toggle/leather_jacket,
 				prob(1);/obj/item/clothing/suit/storage/vest/press,

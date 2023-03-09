@@ -174,6 +174,11 @@
 	drop_sound = 'sound/items/drop/clothing.ogg'
 	pickup_sound = 'sound/items/pickup/clothing.ogg'
 
+/obj/item/clothing/shoes/ceremonial_guards
+	name = "ceremonial leg guards"
+	desc = "A pair of shin guards with gold inlay that cut off around the ankle."
+	icon_state = "ceremonial_guards"
+
 /obj/item/clothing/shoes/ranger
 	var/bootcolor = "white"
 	name = "ranger boots"

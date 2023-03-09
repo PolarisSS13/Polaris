@@ -73,21 +73,31 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/uniform/qipao_colorable
+	display_name = "qipao selection (colorable)"
+	path = /obj/item/clothing/under/qipao/colorable
+
+/datum/gear/uniform/qipao_colorable/New()
+	..()
+	var/paotype = list()
+	paotype["qipao, gold trim"] = /obj/item/clothing/under/qipao/colorable
+	paotype["qipao, slim"] = /obj/item/clothing/under/qipao2
+	paotype["qipao, short"] = /obj/item/clothing/under/qipao
+	gear_tweaks += new/datum/gear_tweak/path(paotype)
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/uniform/qipao
-	display_name = "qipao"
-	path = /obj/item/clothing/under/qipao
+	display_name = "qipao selection"
+	description = "Skirts to cover your lower body, in various styles."
+	path = /obj/item/clothing/under/skirt
 
 /datum/gear/uniform/qipao/New()
 	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
-/datum/gear/uniform/qipao2
-	display_name = "qipao, slim"
-	path = /obj/item/clothing/under/qipao2
-
-/datum/gear/uniform/qipao2/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
+	var/paotype = list()
+	paotype["qipao, black"] = /obj/item/clothing/under/qipao/black
+	paotype["qipao, white"] = /obj/item/clothing/under/qipao/white
+	paotype["qipao, red"] = /obj/item/clothing/under/qipao/red
+	gear_tweaks += new/datum/gear_tweak/path(paotype)
 
 /datum/gear/uniform/skirt
 	display_name = "skirt, selection"
@@ -376,7 +386,7 @@
 	path = /obj/item/clothing/under/dress/sailordress
 
 /datum/gear/uniform/dresses/eveninggown
-	display_name = "evening gown, red"
+	display_name = "dress, evening gown, red"
 	path = /obj/item/clothing/under/dress/redeveninggown
 
 /datum/gear/uniform/dresses/maid
@@ -595,7 +605,7 @@
 	path = /obj/item/clothing/under/cyberpunkpants
 
 /datum/gear/uniform/whitegown
-	display_name = "white gown"
+	display_name = "dress, white gown"
 	path = /obj/item/clothing/under/wedding/whitegown
 
 /datum/gear/uniform/floofdress
@@ -607,7 +617,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/blackngold
-	display_name = "black and gold gown"
+	display_name = "dress, black and gold gown"
 	path = /obj/item/clothing/under/blackngold
 
 /datum/gear/uniform/sheerblue
@@ -663,3 +673,37 @@
 		var/obj/item/clothing/under/costume/costume_type = costume
 		costumes[initial(costume_type.name)] = costume_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
+
+/datum/gear/uniform/ceremonial
+	display_name = "outfit, ceremonial selection"
+	path = /obj/item/clothing/under/dress/ceremonial
+
+/datum/gear/uniform/ceremonial/New()
+	..()
+	var/hopunitype = list()
+	hopunitype["Ceremonial corset with bodystocking"] = /obj/item/clothing/under/dress/ceremonial
+	hopunitype["Ceremonial corset without bodystocking"] = /obj/item/clothing/under/dress/ceremonial/sheerless
+	gear_tweaks += new/datum/gear_tweak/path(hopunitype)
+
+//Colorable skirts
+/datum/gear/uniform/coloredskirts
+	display_name = "skirt selection, colorable"
+	path = /obj/item/clothing/under/skirt/colorable
+
+/datum/gear/uniform/coloredskirts/New()
+	..()
+	var/list/skirts = list(
+	"casual skirt"=/obj/item/clothing/under/skirt/colorable,
+	"puffy skirt"=/obj/item/clothing/under/skirt/colorable/puffy,
+	"skater skirt"=/obj/item/clothing/under/skirt/colorable/skater,
+	"pleated skirt"=/obj/item/clothing/under/skirt/colorable/pleated,
+	"pencil skirt"=/obj/item/clothing/under/skirt/colorable/pencil,
+	"plaid skirt"=/obj/item/clothing/under/skirt/colorable/plaid,
+	"tube skirt"=/obj/item/clothing/under/skirt/colorable/tube,
+	"long skirt"=/obj/item/clothing/under/skirt/colorable/long,
+	"high skirt"=/obj/item/clothing/under/skirt/colorable/high,
+	"swept skirt"=/obj/item/clothing/under/skirt/colorable/swept,
+	"jumper skirt"=/obj/item/clothing/under/skirt/colorable/jumper,
+	"jumper dress"=/obj/item/clothing/under/skirt/colorable/jumperdress
+	)
+	gear_tweaks += list(new/datum/gear_tweak/path(skirts), gear_tweak_free_color_choice)

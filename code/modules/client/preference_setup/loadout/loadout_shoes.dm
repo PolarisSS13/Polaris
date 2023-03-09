@@ -107,6 +107,10 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/shoes/flats/alt
+	display_name = "shoes, flats alt (colorable)"
+	path = /obj/item/clothing/shoes/flats/white/color/alt
+
 /datum/gear/shoes/cowboy
 	display_name = "boots, cowboy selection"
 	path = /obj/item/clothing/shoes/boots/cowboy
@@ -171,3 +175,7 @@
 /datum/gear/shoes/circuitry
 	display_name = "boots, circuitry (empty)"
 	path = /obj/item/clothing/shoes/circuitry
+
+/datum/gear/shoes/ceremonial_guards
+	display_name = "ceremonial leg guards"
+	path = /obj/item/clothing/shoes/ceremonial_guards

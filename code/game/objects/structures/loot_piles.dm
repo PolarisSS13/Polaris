@@ -180,6 +180,7 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/clothing/suit/storage/toggle/hoodie/blue,
 		/obj/item/clothing/suit/storage/toggle/hoodie/red,
 		/obj/item/clothing/suit/storage/toggle/hoodie/yellow,
+		/obj/item/clothing/suit/storage/hooded/toggle/colorable/random,
 		/obj/item/clothing/suit/storage/toggle/brown_jacket,
 		/obj/item/clothing/suit/storage/toggle/leather_jacket,
 		/obj/item/clothing/suit/storage/apron,

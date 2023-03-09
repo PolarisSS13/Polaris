@@ -125,8 +125,8 @@
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(hazards))
 
 /datum/gear/suit/hoodie
-	display_name = "hoodie selection"
-	description = "A selection of hooded sweatshirts."
+	display_name = "hoodie, baggy selection"
+	description = "A selection of hooded sweatshirts, with non-functional hoods."
 	path = /obj/item/clothing/suit/storage/toggle/hoodie
 	cost = 2
 
@@ -197,7 +197,7 @@
 
 /datum/gear/suit/cloak_department
 	display_name = "cloak, departmental selection"
-	description = "A selection of cloaks in departmental colours."
+	description = "A selection of cloaks and capelets in departmental colours."
 	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/cargo
 
 /datum/gear/suit/cloak_department/New()
@@ -214,6 +214,56 @@
 
 /datum/gear/suit/cloak_custom/New()
 	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/suit/cloak_chaplain
+	display_name = "cloak, ceremonial selection"
+	description = "A selection of cloaks typically worn in ceremonial contexts."
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/ceremonial
+
+/datum/gear/suit/cloak_chaplain/New()
+	..()
+	var/coattype = list()
+	coattype["cloak, Pleromanist"] = /obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel
+	coattype["cloak, Unitarian"] = /obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel/alt
+	coattype["cloak, ceremonial"] = /obj/item/clothing/accessory/storage/poncho/roles/cloak/ceremonial
+	gear_tweaks += new/datum/gear_tweak/path(coattype)
+
+//Half cloak
+/datum/gear/suit/cloak_half
+	display_name = "cloak, half, colorable"
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/half
+
+/datum/gear/suit/cloak_half/New()
+	gear_tweaks += gear_tweak_free_color_choice
+
+//Shoulder cloak
+/datum/gear/suit/cloak_shoulder
+	display_name = "cloak, left shoulder (colorable)"
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder
+
+/datum/gear/suit/cloak_shoulder/New()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/suit/cloak_shoulder_right
+	display_name = "cloak, right shoulder (colorable)"
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder/right
+
+/datum/gear/suit/cloak_shoulder_right/New()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/suit/capelet
+	display_name = "cloak, capelet (colorable)"
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet
+
+/datum/gear/suit/capelet/New()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/suit/roughcloak
+	display_name = "cloak, rough (colorable)"
+	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/half
+
+/datum/gear/suit/roughcloak/New()
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/unathi_robe
@@ -400,3 +450,18 @@
 		var/obj/item/clothing/suit/costume/costume_type = costume
 		costumes[initial(costume_type.name)] = costume_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
+
+/datum/gear/suit/choodies
+	display_name = "hoodie selection (colorable)"
+	description = "A selection of hoodies with functional hoods."
+	path = /obj/item/clothing/suit/storage/hooded/toggle/colorable
+
+/datum/gear/suit/choodies/New()
+	..()
+	var/list/choodies = list(
+		"normal hoodie"=/obj/item/clothing/suit/storage/hooded/toggle/colorable,
+		"sleeveless hoodie"=/obj/item/clothing/suit/storage/hooded/toggle/colorable/sleeveless,
+		"cropped hoodie"=/obj/item/clothing/suit/storage/hooded/toggle/colorable/cropped
+	)
+	gear_tweaks += gear_tweak_free_color_choice
+	gear_tweaks += new/datum/gear_tweak/path(choodies)

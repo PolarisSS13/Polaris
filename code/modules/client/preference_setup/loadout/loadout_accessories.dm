@@ -289,6 +289,8 @@
 	display_name = "cape, full"
 	path = /obj/item/clothing/accessory/fullcape
 
+
+
 /datum/gear/accessory/sash
 	display_name = "sash (colorable)"
 	path = /obj/item/clothing/accessory/sash
@@ -400,3 +402,11 @@
 	watchtype["watch, holographic"] = /obj/item/clothing/accessory/watch/holo
 	watchtype["watch, leather"] = /obj/item/clothing/accessory/watch/leather
 	gear_tweaks += new/datum/gear_tweak/path(watchtype)
+
+/datum/gear/accessory/ceremonial_bracers
+	display_name = "ceremonial bracers"
+	path = /obj/item/clothing/accessory/ceremonial_bracers
+
+/datum/gear/accessory/ceremonial_loins
+	display_name = "ceremonial loincloth"
+	path = /obj/item/clothing/accessory/ceremonial_loins
