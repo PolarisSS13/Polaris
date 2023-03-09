@@ -293,3 +293,32 @@
 	damage = 15
 	SA_bonus_damage = 60	// 75 total on animals
 	hud_state = "laser_heat"
+
+/obj/item/projectile/energy/phase/tranq
+	name = "tranquilizer wave"
+	range = 10
+	damage = 0
+	nodamage = TRUE
+	SA_bonus_damage = 0
+	hud_state = "laser_heat"
+	var/tranq_duration = 30 SECONDS
+	var/tranq_delay =    10 SECONDS
+	var/tranq_delay_modifier = 0.7
+
+/obj/item/projectile/energy/phase/tranq/weak
+	range = 6
+	tranq_duration = 20 SECONDS
+	tranq_delay =    15 SECONDS
+	tranq_delay_modifier = 0.9
+
+// Being hit with a tranq shot either shaves a percentage off the remaining delay, or starts the timer.
+/obj/item/projectile/energy/phase/tranq/apply_SA_vulnerability(var/mob/living/simple_mob/victim)
+	..()
+	if(!istype(victim) || victim.stat != CONSCIOUS || !(SA_vulnerability & victim.mob_class))
+		return
+	if(victim.tranq_countdown <= 0)
+		victim.tranq_countdown = tranq_duration / SSmobs.wait
+	else
+		victim.tranq_countdown *= tranq_delay_modifier
+	victim.tranq_duration = (victim.tranq_duration > 0) ? min(tranq_duration, victim.tranq_duration) : tranq_duration
+	victim.tranq_countdown = max(1, round(victim.tranq_countdown))
