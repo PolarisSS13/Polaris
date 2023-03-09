@@ -5018,7 +5018,7 @@
 /obj/item/reagent_containers/food/snacks/chipplate/attack_hand(mob/user as mob)
 	var/obj/item/reagent_containers/food/snacks/returningitem = new vendingobject(loc)
 	returningitem.reagents.clear_reagents()
-	reagents.trans_to(returningitem, bitesize)
+	reagents.trans_to_obj(returningitem, bitesize)
 	returningitem.bitesize = bitesize/2
 	user.put_in_hands(returningitem)
 	if (reagents && reagents.total_volume)
@@ -5073,7 +5073,7 @@
 	if(returningitem)
 		returningitem.reagents.clear_reagents() //Clear the new chip
 		var/memed = 0
-		item.reagents.trans_to(returningitem, item.reagents.total_volume) //Old chip to new chip
+		item.reagents.trans_to_obj(returningitem, item.reagents.total_volume) //Old chip to new chip
 		if(item.icon_state == "chip_half")
 			returningitem.icon_state = "[returningitem.icon_state]_half"
 			returningitem.bitesize = clamp(returningitem.reagents.total_volume,1,10)
@@ -5085,7 +5085,7 @@
 		else
 			returningitem.bitesize = clamp(returningitem.reagents.total_volume*0.5,1,10)
 		qdel(item)
-		reagents.trans_to(returningitem, bitesize) //Dip to new chip
+		reagents.trans_to_obj(returningitem, bitesize) //Dip to new chip
 		user.put_in_hands(returningitem)
 
 		if (reagents && reagents.total_volume)
