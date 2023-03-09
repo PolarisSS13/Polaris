@@ -666,7 +666,6 @@
 		/obj/item/extinguisher,
 		/obj/item/pipe_painter,
 		/obj/item/floor_painter,
-		/obj/item/tank/jetpack/carbondioxide,
 		/obj/item/matter_decompiler,
 		/obj/item/stack/material/cyborg/steel,
 		/obj/item/stack/material/cyborg/glass,
@@ -678,6 +677,7 @@
 		/obj/item/stack/material/cyborg/wood,
 		/obj/item/stack/material/cyborg/plastic
 	)
+	jetpack = /obj/item/tank/jetpack/carbondioxide
 	emag = /obj/item/pickaxe/plasmacutter
 	synths = list(
 		/datum/matter_synth/metal = 25000,
@@ -686,13 +686,6 @@
 		/datum/matter_synth/plastic = 25000,
 		/datum/matter_synth/wire = 30
 	)
-
-/obj/item/robot_module/drone/finalize_equipment()
-	. = ..()
-	var/obj/item/tank/jetpack/carbondioxide/jetpack = locate() in modules
-	var/mob/living/silicon/robot/robit = loc
-	if(istype(robit) && jetpack)
-		robit.internals = jetpack
 
 /obj/item/robot_module/drone/finalize_synths()
 	. = ..()

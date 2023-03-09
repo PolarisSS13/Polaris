@@ -30,10 +30,11 @@
 	var/list/modules = list()
 	var/list/datum/matter_synth/synths = list()
 	var/obj/item/emag = null
-	var/obj/item/borg/upgrade/jetpack = null
 	var/obj/item/borg/upgrade/advhealth = null
 	var/list/subsystems = list()
 	var/list/obj/item/borg/upgrade/supported_upgrades = list()
+
+	var/obj/item/tank/jetpack/jetpack
 
 	var/list/universal_equipment = list(
 		/obj/item/flash/robot,
@@ -93,11 +94,23 @@
 			modules += I
 		else
 			log_debug("Invalid var type in [type] equipment creation - [thing]")
+	if(ispath(jetpack))
+		jetpack = new jetpack(src)
 
 /obj/item/robot_module/proc/finalize_equipment()
 	SHOULD_CALL_PARENT(TRUE)
 	for(var/obj/item/I in modules)
 		I.canremove = FALSE
+	if(jetpack)
+		if(istype(jetpack))
+			jetpack.canremove = FALSE
+			var/mob/living/silicon/robot/robit = loc
+			if(istype(robit))
+				jetpack.forceMove(robit)
+				robit.internals = jetpack
+		else
+			log_debug("Invalid var type in [type] jetpack creation - [jetpack]")
+			jetpack = null
 
 /obj/item/robot_module/proc/build_emag()
 	SHOULD_CALL_PARENT(TRUE)
@@ -106,11 +119,12 @@
 
 /obj/item/robot_module/proc/finalize_emag()
 	SHOULD_CALL_PARENT(TRUE)
-	if(istype(emag))
-		emag.canremove = FALSE
-	else
-		log_debug("Invalid var type in [type] emag creation - [emag]")
-		emag = null
+	if(emag)
+		if(istype(emag))
+			emag.canremove = FALSE
+		else
+			log_debug("Invalid var type in [type] emag creation - [emag]")
+			emag = null
 
 /obj/item/robot_module/proc/build_synths()
 	SHOULD_CALL_PARENT(TRUE)
@@ -140,16 +154,10 @@
 	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
 
 /obj/item/robot_module/Destroy()
-	for(var/module in modules)
-		qdel(module)
-	for(var/synth in synths)
-		qdel(synth)
-	modules.Cut()
-	synths.Cut()
-	qdel(emag)
-	qdel(jetpack)
-	emag = null
-	jetpack = null
+	QDEL_NULL_LIST(modules)
+	QDEL_NULL_LIST(synths)
+	QDEL_NULL(emag)
+	QDEL_NULL(jetpack)
 	return ..()
 
 /obj/item/robot_module/emp_act(severity)

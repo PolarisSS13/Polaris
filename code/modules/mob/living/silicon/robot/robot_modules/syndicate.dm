@@ -37,8 +37,8 @@
 		/obj/item/gps/robot,
 		/obj/item/pinpointer/shuttle/merc,
 		/obj/item/melee/energy/sword,
-		/obj/item/tank/jetpack/carbondioxide
 	)
+	jetpack = /obj/item/tank/jetpack/carbondioxide
 	synths = list(
 		/datum/matter_synth/cloth = 40000
 	)
@@ -53,10 +53,8 @@
 
 /obj/item/robot_module/robot/syndicate/finalize_equipment()
 	. = ..()
-	var/obj/item/tank/jetpack/carbondioxide/jetpack = locate() in modules
 	var/mob/living/silicon/robot/R = loc
 	if(istype(R))
-		R.internals = jetpack
 		id = R.idcard
 		modules += id
 

@@ -37760,7 +37760,6 @@
 /area/surface/station/library)
 "qCU" = (
 /obj/machinery/mech_recharger,
-/obj/effect/landmark/robot_platform/explorer,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/garage)
 "qCW" = (

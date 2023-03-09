@@ -1,7 +1,5 @@
 /mob/living/silicon/robot/get_jetpack()
-	if(module)
-		for(var/obj/item/tank/jetpack/J in module.modules)
-			return J
+	return module?.jetpack
 
 /mob/living/silicon/robot/Check_Shoegrip()
 	return module && module.no_slip

@@ -15,10 +15,10 @@ SUBSYSTEM_DEF(robots)
 	)
 
 	var/list/mmi_types_by_title = list(
-		"robot"          = /obj/item/mmi/digital/posibrain,
-		"robot, flying"  = /obj/item/mmi/digital/posibrain,
-		"drone"          = /obj/item/mmi/digital/robot,
-		"drone, flying"  = /obj/item/mmi/digital/robot,
+		"robot"          =  /obj/item/mmi/digital/posibrain,
+		"robot, flying"  =  /obj/item/mmi/digital/posibrain,
+		"drone"          =  /obj/item/mmi/digital/robot,
+		"drone, flying"  =  /obj/item/mmi/digital/robot,
 		"drone, platform" = /obj/item/mmi/digital/robot
 	)
 
