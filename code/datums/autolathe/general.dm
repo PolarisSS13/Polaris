@@ -51,7 +51,7 @@
 
 /datum/category_item/autolathe/general/flashlight
 	name = "flashlight"
-	path =/obj/item/flashlight
+	path =/obj/item/flashlight/empty
 
 /datum/category_item/autolathe/general/floor_light
 	name = "floor light"
@@ -79,7 +79,7 @@
 
 /datum/category_item/autolathe/general/suit_cooler
 	name = "suit cooling unit"
-	path =/obj/item/suit_cooling_unit
+	path =/obj/item/suit_cooling_unit/empty
 
 /datum/category_item/autolathe/general/weldermask
 	name = "welding mask"
