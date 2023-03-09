@@ -1,17 +1,3 @@
-var/global/list/flooring_types
-
-/proc/populate_flooring_types()
-	flooring_types = list()
-	for (var/flooring_path in typesof(/decl/flooring))
-		flooring_types["[flooring_path]"] = new flooring_path
-
-/proc/get_flooring_data(var/flooring_path)
-	if(!flooring_types)
-		flooring_types = list()
-	if(!flooring_types["[flooring_path]"])
-		flooring_types["[flooring_path]"] = new flooring_path
-	return flooring_types["[flooring_path]"]
-
 // State values:
 // [icon_base]: initial base icon_state without edges or corners.
 // if has_base_range is set, append 0-has_base_range ie.

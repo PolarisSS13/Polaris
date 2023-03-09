@@ -40,9 +40,6 @@
 	// Create frame types.
 	populate_frame_types()
 
-	// Create floor types.
-	populate_flooring_types()
-
 	// Create robolimbs for chargen.
 	populate_robolimb_list()
 
@@ -98,7 +95,7 @@ var/global/world_topic_spam_protect_time = world.timeofday
 		s["players"] = 0
 		s["stationtime"] = stationtime2text()
 		s["roundduration"] = roundduration2text()
-		s["map"] = strip_improper(using_map.full_name) //Done to remove the non-UTF-8 text macros 
+		s["map"] = strip_improper(using_map.full_name) //Done to remove the non-UTF-8 text macros
 
 		if(input["status"] == "2") // Shiny new hip status.
 			var/active = 0
@@ -510,7 +507,7 @@ var/global/world_topic_spam_protect_time = world.timeofday
 	features += config.abandon_allowed ? "respawn" : "no respawn"
 
 	features += config.persistence_disabled ? "persistence disabled" : "persistence enabled"
-	
+
 	features += config.persistence_ignore_mapload ? "persistence mapload disabled" : "persistence mapload enabled"
 
 	if (config && config.allow_vote_mode)
@@ -682,10 +679,10 @@ var/global/game_id = null
 	game_id = ""
 
 	var/list/c = list(
-		"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", 
-		"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", 
-		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", 
-		"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", 
+		"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
+		"n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z",
+		"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+		"N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z",
 		"1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
 		)
 	var/l = c.len
