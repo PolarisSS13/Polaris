@@ -147,7 +147,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 /obj/machinery/vending/emag_act(var/remaining_charges, var/mob/user)
 	if(!emagged)
 		emagged = 1
-		to_chat(user, "You short out \the [src]'s product lock.")
+		to_chat(user, "<span class='filter_notice'>You short out \the [src]'s product lock.</span>")
 		return 1
 
 /obj/machinery/vending/attackby(obj/item/W as obj, mob/user as mob)
@@ -183,9 +183,9 @@ GLOBAL_LIST_EMPTY(vending_products)
 	else if(W.is_wrench())
 		playsound(src, W.usesound, 100, 1)
 		if(anchored)
-			user.visible_message("[user] begins unsecuring \the [src] from the floor.", "You start unsecuring \the [src] from the floor.")
+			user.visible_message("<span class='filter_notice'>[user] begins unsecuring \the [src] from the floor.</span>", "<span class='filter_notice'>You start unsecuring \the [src] from the floor.</span>")
 		else
-			user.visible_message("[user] begins securing \the [src] to the floor.", "You start securing \the [src] to the floor.")
+			user.visible_message("<span class='filter_notice'>[user] begins securing \the [src] to the floor.</span>", "<span class='filter_notice'>You start securing \the [src] to the floor.</span>")
 
 		if(do_after(user, 20 * W.toolspeed))
 			if(!src) return
@@ -426,7 +426,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 				return FALSE
 
 			if(!coin)
-				to_chat(usr, "There is no coin in this machine.")
+				to_chat(usr, "<span class='filter_notice'>There is no coin in this machine.</span>")
 				return
 
 			coin.forceMove(src.loc)
@@ -477,7 +477,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 			var/obj/item/card/id/C = H.GetIdCard()
 
 			if(!vendor_account || vendor_account.suspended)
-				to_chat(usr, "Vendor account offline. Unable to process transaction.")
+				to_chat(usr, "<span class='filter_notice'>Vendor account offline. Unable to process transaction.</span>")
 				flick("[icon_state]-deny",src)
 				vend_ready = TRUE
 				return
@@ -618,7 +618,7 @@ GLOBAL_LIST_EMPTY(vending_products)
 		return 0
 
 	if (src.anchored || usr:stat)
-		to_chat(usr, "It is bolted down!")
+		to_chat(usr, "<span class='filter_notice'>It is bolted down!</span>")
 		return 0
 	src.set_dir(turn(src.dir, 270))
 	return 1
