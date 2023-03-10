@@ -3571,8 +3571,6 @@
 	pixel_y = 32
 	},
 /obj/structure/table/woodentable,
-/obj/structure/table/woodentable,
-/obj/structure/table/woodentable,
 /obj/item/storage/box/donkpockets,
 /turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -21351,6 +21349,9 @@
 /obj/item/radio/intercom{
 	dir = 8;
 	pixel_x = -21
+	},
+/obj/machinery/light{
+	dir = 8
 	},
 /turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
