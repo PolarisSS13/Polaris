@@ -11,7 +11,7 @@
 	var/busy = 0
 	var/obj/machinery/computer/rdconsole/linked_console
 
-	var/list/materials = list()		// Materials this machine can accept.
+	materials = list()		// Materials this machine can accept.
 	var/list/hidden_materials = list()	// Materials this machine will not display, unless it contains them. Must be in the materials list as well.
 
 /obj/machinery/r_n_d/attack_hand(mob/user as mob)

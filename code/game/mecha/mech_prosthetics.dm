@@ -13,7 +13,7 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0)
+	materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0)
 	var/list/hidden_materials = list(MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM)
 	var/res_max_amount = 200000
 
@@ -66,19 +66,8 @@
 		icon_state = "[icon_state]_work"
 
 /obj/machinery/pros_fabricator/dismantle()
-	if(LAZYLEN(materials))
-		for(var/mat in materials)
-			var/datum/material/M = get_material_by_name(mat)
-			if(!istype(M))
-				continue
-			if(materials[mat] == 0) //Maybe don't try and make null mats...
-				continue
-			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
-			if(materials[mat] >= S.perunit)
-				S.amount = round(materials[mat] / S.perunit)
-			else
-				qdel(S) //Prevents stacks smaller than 1
-	return ..()
+	eject_materials() //Proc on obj/machinery in code/game/machinery/machinery.dm
+	..()
 
 /obj/machinery/pros_fabricator/RefreshParts()
 	res_max_amount = 0
@@ -337,24 +326,6 @@
 				continue
 		if(!hidden_mat)
 			. += list(list("mat" = capitalize(T), "amt" = materials[T]))
-
-/obj/machinery/pros_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
-	var/recursive = amount == -1 ? 1 : 0
-	var/matstring = lowertext(material)
-	var/datum/material/M = get_material_by_name(matstring)
-
-	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
-	if(amount <= 0)
-		amount = S.max_amount
-	var/ejected = min(round(materials[matstring] / S.perunit), amount)
-	S.amount = min(ejected, amount)
-	if(S.amount <= 0)
-		qdel(S)
-		return
-	materials[matstring] -= ejected * S.perunit
-	if(recursive && materials[matstring] >= S.perunit)
-		eject_materials(matstring, -1)
-	update_busy()
 
 /obj/machinery/pros_fabricator/proc/sync()
 	sync_message = "Error: no console found."
