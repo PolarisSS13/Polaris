@@ -80,11 +80,20 @@
 	mat_efficiency = max(1 - (T - 2) / 8, 0.2)
 	speed = T / 2
 
-/obj/machinery/r_n_d/protolathe/dismantle()
-	for(var/f in materials)
-		eject_materials(f, -1)
-	..()
-
+/obj/machinery/protolathe/dismantle()
+	if(LAZYLEN(materials))
+		for(var/mat in materials)
+			var/datum/material/M = get_material_by_name(mat)
+			if(!istype(M))
+				continue
+			if(materials[mat] == 0) //Maybe don't try and make null mats...
+				continue
+			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+			if(materials[mat] >= S.perunit)
+				S.amount = round(materials[mat] / S.perunit)
+			else
+				qdel(S) //Prevents stacks smaller than 1
+	return ..()
 
 /obj/machinery/r_n_d/protolathe/update_icon()
 	cut_overlays()

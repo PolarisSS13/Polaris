@@ -1,7 +1,7 @@
 /datum/material/grass
-	name = MAT_GRASS
+	name = "grass"
 	display_name = "grass"
-	stack_type = /obj/item/stack/tile/grass
+	stack_type = /obj/item/stack/material/grass
 	ignition_point = T0C+300
 	melting_point = T0C+300
 	protectiveness = 0
@@ -27,5 +27,6 @@
 			new /datum/stack_recipe("pink-and-purple flowers", /obj/structure/flora/ausbushes/ppflowers, 3, one_per_turf = 0, on_floor = 1, recycle_material = "[name]"),
 			new /datum/stack_recipe("sparse grass", /obj/structure/flora/ausbushes/sparsegrass, 3, one_per_turf = 0, on_floor = 1, recycle_material = "[name]"),
 			new /datum/stack_recipe("full grass", /obj/structure/flora/ausbushes/fullgrass, 3, one_per_turf = 0, on_floor = 1, recycle_material = "[name]")
-			))
+			)),
+		new /datum/stack_recipe("grass floor tile", /obj/item/stack/tile/grass, 1, 4, 20, pass_stack_color = TRUE, recycle_material = "[name]"),
 	)

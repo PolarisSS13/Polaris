@@ -70,9 +70,19 @@
 		add_overlay("mechfab-active")
 
 /obj/machinery/mecha_part_fabricator/dismantle()
-	for(var/f in materials)
-		eject_materials(f, -1)
-	..()
+	if(LAZYLEN(materials))
+		for(var/mat in materials)
+			var/datum/material/M = get_material_by_name(mat)
+			if(!istype(M))
+				continue
+			if(materials[mat] == 0) //Maybe don't try and make null mats...
+				continue
+			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+			if(materials[mat] >= S.perunit)
+				S.amount = round(materials[mat] / S.perunit)
+			else
+				qdel(S) //Prevents stacks smaller than 1
+	return ..()
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
 	res_max_amount = 0

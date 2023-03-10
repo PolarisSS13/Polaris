@@ -20,25 +20,14 @@
 	drop_sound = 'sound/items/drop/axe.ogg'
 	pickup_sound = 'sound/items/pickup/axe.ogg'
 
-//crafting / welding vars
-	var/datum/material/material //*sigh* i guess this is how we're doing this.
-	var/craftable = FALSE //set to TRUE for tiles you can craft stuff from directly, like grass
+//welding vars
 	var/can_weld = FALSE //set to TRUE for tiles you can reforge into their components via welding, like metal
 	var/welds_into = /obj/item/stack/material/steel //what you get from the welding. defaults to steel.
-	var/default_type = DEFAULT_WALL_MATERIAL
-
 
 
 /obj/item/stack/tile/Initialize()
 	. = ..()
 	randpixel_xy()
-	if(craftable)
-		material = get_material_by_name("[default_type]")
-		if(!material)
-			return INITIALIZE_HINT_QDEL
-		if(material) //sanity check
-			recipes = material.get_recipes()
-			stacktype = material.stack_type
 
 /obj/item/stack/tile/attackby(obj/item/W as obj, mob/user as mob)
 	if (istype(W, /obj/item/weldingtool))
@@ -73,7 +62,6 @@
 	singular_name = "grass floor tile"
 	desc = "A patch of grass like they often use on golf courses."
 	icon_state = "tile_grass"
-	default_type = "grass"
 	force = 1.0
 	throwforce = 1.0
 	throw_speed = 5
@@ -83,7 +71,6 @@
 	no_variants = FALSE
 	drop_sound = 'sound/items/drop/herb.ogg'
 	pickup_sound = 'sound/items/pickup/herb.ogg'
-	craftable = TRUE
 
 /obj/item/stack/tile/grass/sif
 	name = "sivian grass tile"
