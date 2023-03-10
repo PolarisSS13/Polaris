@@ -20770,6 +20770,7 @@
 /obj/effect/decal/warning_stripes{
 	layer = 2.8
 	},
+/obj/item/toy/plushie/bee,
 /turf/simulated/floor/plating,
 /area/surface/station/rnd/xenobiology/xenoflora)
 "jBw" = (
@@ -29772,6 +29773,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/item/toy/plushie/slime,
 /turf/simulated/floor/plating,
 /area/surface/station/garage)
 "npU" = (
@@ -37101,6 +37103,7 @@
 /obj/item/honey_frame,
 /obj/item/bee_pack,
 /obj/item/tool/crowbar,
+/obj/item/toy/plushie/bee,
 /turf/simulated/floor/tiled/hydro,
 /area/surface/station/hydroponics)
 "qrb" = (

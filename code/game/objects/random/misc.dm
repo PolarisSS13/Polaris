@@ -707,6 +707,12 @@
 				/obj/item/toy/plushie/robo_corgi,
 				/obj/item/toy/plushie/siamese_cat,
 				/obj/item/toy/plushie/spider,
+				/obj/item/toy/plushie/slime,
+				/obj/item/toy/plushie/bee,
+				/obj/item/toy/plushie/robot,
+				/obj/item/toy/plushie/shark,
+				/obj/item/toy/plushie/shark/trans,
+				/obj/item/toy/plushie/siffet,
 				/obj/item/toy/plushie/tabby_cat,
 				/obj/item/toy/plushie/tuxedo_cat,
 				/obj/item/toy/plushie/white_cat)

@@ -1219,6 +1219,42 @@
 	icon_state = "fumoplushie"
 	pokephrase = "I just don't think about losing."
 
+//yall out here arguing squids v foxes when blahaj exists???
+/obj/item/toy/plushie/shark
+	name = "shark plushie"
+	desc = "Three feet of condensed love and recycled polyester. It's incredibly huggable."
+	w_class = ITEMSIZE_SMALL //it might be compressible but it's still 3ft long
+	icon_state = "blahaj"
+
+/obj/item/toy/plushie/shark/trans
+	name = "trans shark plushie"
+	desc = "Three feet of condensed love and recycled polyester. This one will always accept you for who you are."
+	icon_state = "transblahaj"
+
+/obj/item/toy/plushie/bee
+	name = "bee plushie"
+	desc = "According to all known laws of astronautics, there is no way that this plushie should be as adorable as it is."
+	icon_state = "beeplushie"
+	item_state = "egg5"
+
+/obj/item/toy/plushie/robot
+	name = "robot plushie"
+	desc = "This one comes with tiny LED lights to simulate a loading screen!"
+	icon_state = "roboplushie"
+	item_state = "electronic"
+
+/obj/item/toy/plushie/slime
+	name = "slime plushie"
+	desc = "Almost as squishy as the real thing!"
+	icon_state = "slimeplushie"
+	item_state = "egg1"
+
+/obj/item/toy/plushie/siffet
+	name = "siffet plushie"
+	desc = "So cuddly. So impossibly cuddly."
+	icon_state = "siffet"
+	item_state = "egg3"
+
 //Toy cult sword
 /obj/item/toy/cultsword
 	name = "foam sword"

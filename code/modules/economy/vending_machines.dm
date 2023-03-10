@@ -742,17 +742,22 @@
 					/obj/item/toy/plushie/therapy/orange = 2,
 					/obj/item/toy/plushie/therapy/green = 2,
 					/obj/item/toy/plushie/nymph = 2,
+					/obj/item/toy/plushie/bee = 2,
 					/obj/item/toy/plushie/mouse = 2,
 					/obj/item/toy/plushie/kitten = 2,
 					/obj/item/toy/plushie/lizard = 2,
 					/obj/item/toy/plushie/spider = 2,
+					/obj/item/toy/plushie/slime = 2,
 					/obj/item/toy/plushie/farwa = 2,
+					/obj/item/toy/plushie/siffet = 2,
 					/obj/item/toy/plushie/corgi = 1,
 					/obj/item/toy/plushie/octopus = 1,
 					/obj/item/toy/plushie/face_hugger = 1,
 					/obj/item/toy/plushie/carp = 1,
 					/obj/item/toy/plushie/deer = 1,
 					/obj/item/toy/plushie/tabby_cat = 1,
+					/obj/item/toy/plushie/shark = 1,
+					/obj/item/toy/plushie/robot = 2,
 					/obj/item/threadneedle = 3)
 	premium = list(/obj/item/reagent_containers/food/drinks/bottle/champagne = 1,
 					/obj/item/storage/trinketbox = 2)
@@ -771,18 +776,24 @@
 					/obj/item/toy/plushie/therapy/orange = 20,
 					/obj/item/toy/plushie/therapy/green = 20,
 					/obj/item/toy/plushie/nymph = 35,
+					/obj/item/toy/plushie/bee = 35,
 					/obj/item/toy/plushie/mouse = 35,
 					/obj/item/toy/plushie/kitten = 35,
 					/obj/item/toy/plushie/lizard = 35,
 					/obj/item/toy/plushie/spider = 35,
+					/obj/item/toy/plushie/slime = 35,
 					/obj/item/toy/plushie/farwa = 35,
+					/obj/item/toy/plushie/siffet = 35,
 					/obj/item/toy/plushie/corgi = 50,
 					/obj/item/toy/plushie/octopus = 50,
 					/obj/item/toy/plushie/face_hugger = 50,
 					/obj/item/toy/plushie/carp = 50,
 					/obj/item/toy/plushie/deer = 50,
 					/obj/item/toy/plushie/tabby_cat = 50,
+					/obj/item/toy/plushie/shark = 50,
+					/obj/item/toy/plushie/robot = 75, //This one is animated!
 					/obj/item/threadneedle = 2)
+	contraband = list(/obj/item/toy/plushie/shark/trans	 = 1)
 
 
 /obj/machinery/vending/fishing

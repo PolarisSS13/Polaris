@@ -236,9 +236,17 @@
 
 
 /datum/trait/modifier/mental/arachnophobe
-	name = "Arachnophobic"
-	desc = "Spiders are quite creepy to most people, however for you, those chitters of pure evil inspire pure dread and fear."
+	name = "Mildly Arachnophobic"
+	desc = "Spiders are quite creepy to most people. You try to be a little extra cautious of them."
 	modifier_type = /datum/modifier/trait/phobia/arachnophobe
+	mutually_exclusive = list(/datum/trait/modifier/mental/arachnophobe_severe)
+
+
+/datum/trait/modifier/mental/arachnophobe_severe
+	name = "Severely Arachnophobic"
+	desc = "Spiders are quite creepy to most people; however for you, those chitters of pure evil inspire pure dread and fear."
+	modifier_type = /datum/modifier/trait/phobia/arachnophobe/severe
+	mutually_exclusive = list(/datum/trait/modifier/mental/arachnophobe)
 
 
 /datum/trait/modifier/mental/nyctophobe
@@ -261,9 +269,17 @@
 
 
 /datum/trait/modifier/mental/blennophobe
-	name = "Blennophobia"
-	desc = "Slimes are quite dangerous, but just the aspect of something being slimey is uncomfortable."
+	name = "Mild Blennophobia"
+	desc = "Slimes are quite dangerous. You like to think of it as a healthy aversion to them."
 	modifier_type = /datum/modifier/trait/phobia/blennophobe
+	mutually_exclusive = list(/datum/trait/modifier/mental/blennophobe_severe)
+
+/datum/trait/modifier/mental/blennophobe_severe
+	name = "Severe Blennophobia"
+	desc = "Slimes are quite dangerous, but just the aspect of something being slimy is uncomfortable."
+	modifier_type = /datum/modifier/trait/phobia/blennophobe/severe
+	mutually_exclusive = list(/datum/trait/modifier/mental/blennophobe)
+
 
 /datum/trait/modifier/mental/trypanophobe
 	name = "Trypanophobia"

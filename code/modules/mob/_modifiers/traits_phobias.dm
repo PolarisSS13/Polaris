@@ -15,6 +15,8 @@
 	var/list/full_fear_up = list()		// Similar to above, but for the cap.
 	var/list/full_fear_down = list()	// Ditto.
 
+	var/severe = FALSE //2023-03-09, set to TRUE for severe phobias.
+
 /datum/modifier/trait/phobia/tick()
 	if(holder.stat)
 		return // You got bigger problems.
@@ -157,8 +159,8 @@
 
 
 /datum/modifier/trait/phobia/arachnophobe
-	name = "arachnophobia"
-	desc = "Spiders are quite creepy to most people, however for you, those chitters of pure evil inspire pure dread and fear."
+	name = "mild arachnophobia"
+	desc = "Spiders are quite creepy to most people. You try to be a little extra cautious of them."
 	fear_decay_rate = 1
 
 	on_created_text = "<span class='warning'>You are terrified of seeing spiders.</span>"
@@ -201,7 +203,8 @@
 	var/fear_amount = 0
 	for(var/atom/thing in view(5, holder)) // See haemophobia for why this is 5.
 		if(istype(thing, /obj/effect/decal/cleanable/spiderling_remains)) // Dead spiderlings are a bit spooky.
-			fear_amount += 1
+			if(severe)
+				fear_amount += 1
 
 		if(istype(thing, /obj/effect/spider/spiderling)) // Live spiderlings are also spooky.
 			fear_amount += 2
@@ -226,6 +229,10 @@
 					fear_amount += 8
 	return fear_amount
 
+/datum/modifier/trait/phobia/arachnophobe/severe
+	name = "severe arachnophobia"
+	desc = "Spiders are quite creepy to most people; however for you, those chitters of pure evil inspire pure dread and fear."
+	severe = TRUE //Includes dead spiderlings.
 
 /datum/modifier/trait/phobia/nyctophobe
 	name = "nyctophobia"
@@ -372,8 +379,8 @@
 	return fear_amount
 
 /datum/modifier/trait/phobia/blennophobe
-	name = "blennophobia"
-	desc = "Slimes are quite dangerous, but just the aspect of something being slimey is uncomfortable."
+	name = "mild blennophobia"
+	desc = "Slimes are quite dangerous. You like to think of it as a healthy aversion to them."
 	fear_decay_rate = 1
 
 	on_created_text = "<span class='warning'>You are disgusted and horrified by slime.</span>"
@@ -416,13 +423,19 @@
 			fear_amount += 3
 
 		if(istype(thing, /obj/effect/alien/resin)) // Resin's a bit slimy according to its own description.
-			fear_amount += 1
+			if(severe)
+				fear_amount += 1
 
 		if(istype(thing, /obj/item/weed_extract))
+			if(severe)
+				fear_amount += 1
+
+		if(istype(thing, /obj/item/toy/plushie/slime)) //Squish squish.
 			fear_amount += 1
 
 		if(istype(thing, /obj/effect/decal/cleanable/mucus)) // Blennophobia apparently includes mucus, so!
-			fear_amount += 2
+			if(severe)
+				fear_amount += 2
 
 		if(istype(thing, /obj/item/slime_extract)) // Gooey.
 			fear_amount += 1
@@ -453,14 +466,20 @@
 				else
 					fear_amount += 10 // It's huge and feral.
 
-			if(istype(L, /mob/living/carbon/human))
+			if((istype(L, /mob/living/carbon/human))) //Very amusing feature: this makes blennophobic prometheans and severely blennophobic skrell fear themselves.
 				var/mob/living/carbon/human/S = L
-				if(istype(S.species, /datum/species/skrell)) //Skrell ARE slimey.
-					fear_amount += 1
+				if(istype(S.species, /datum/species/skrell)) //Skrell ARE slimy.
+					if(severe)
+						fear_amount += 1
 				if(istype(S.species, /datum/species/shapeshifter/promethean))
 					fear_amount += 4
 
 	return fear_amount
+
+/datum/modifier/trait/phobia/blennophobe/severe
+	name = "severe blennophobia"
+	desc = "Slimes are quite dangerous, but just the aspect of something being slimy is uncomfortable."
+	severe = TRUE //Includes weed extract, resin, mucus and skrell.
 
 /datum/modifier/trait/phobia/trypanophobe
 	name = "trypanophobia"
