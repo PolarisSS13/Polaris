@@ -94,6 +94,25 @@
 			else if(AI.discipline)
 				. += "It has been subjugated by force, at least for now."
 
+/mob/living/simple_mob/slime/xenobio/attackby(obj/item/I, mob/user)
+	// If you're feeling really confident, you can hand-feed your slimes
+	if (I.is_slime_food() && user.a_intent == I_HELP)
+		var/datum/ai_holder/simple_mob/xenobio_slime/AI = ai_holder
+		if (!istype(AI))
+			to_chat(user, SPAN_WARNING("\The [src] doesn't seem to be interested in \the [I]."))
+		else if (ismob(AI.target) || AI.rabid)
+			to_chat(user, SPAN_WARNING("\The [src] is a little too preoccupied to be interested in \the [I]!"))
+		else if (AI.resentment > AI.discipline || !AI.obedience)
+			to_chat(user, SPAN_WARNING("\The [src] shows no interest in \the [I]."))
+		else
+			I.slime_chomp(src)
+			if (prob(25))
+				AI.delayed_say("[pick("Thank you...", "Food...", "Thanks...")]")
+			AI.evolve_and_reproduce()
+			user.setClickCooldown(2 SECONDS)
+		return
+	return ..()
+
 /mob/living/simple_mob/slime/xenobio/proc/make_adult()
 	if(is_adult)
 		return

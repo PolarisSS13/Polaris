@@ -5,6 +5,7 @@
 	icon_state = "gib1"
 	basecolor = SYNTH_BLOOD_COLOUR
 	random_icon_states = list("gib1", "gib2", "gib3", "gib4", "gib5", "gib6", "gib7")
+	slime_food = FALSE
 	generic_filth = FALSE
 	persistent = FALSE
 
