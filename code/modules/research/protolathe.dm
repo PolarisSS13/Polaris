@@ -80,7 +80,7 @@
 	mat_efficiency = max(1 - (T - 2) / 8, 0.2)
 	speed = T / 2
 
-/obj/machinery/protolathe/dismantle()
+/obj/machinery/r_n_d/protolathe/dismantle()
 	if(LAZYLEN(materials))
 		for(var/mat in materials)
 			var/datum/material/M = get_material_by_name(mat)
