@@ -1204,3 +1204,6 @@
 			to_chat(src, SPAN_WARNING("You aren't dextrous enough to [target ? "use \the [target]" : "do that"]."))
 		return FALSE
 	return TRUE
+
+/mob/proc/hearing_boost_range()
+	return hearing_boost_range

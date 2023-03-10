@@ -1671,3 +1671,6 @@
 
 /mob/living/carbon/human/leaves_tracks_type()
 	return species.get_move_trail(src)
+
+/mob/living/carbon/human/hearing_boost_range()
+	return (hearing_boost_range + species.hearboost)
