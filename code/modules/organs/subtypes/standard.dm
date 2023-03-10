@@ -336,7 +336,7 @@
 		"<span class='notice'>You make \the [I] kiss \the [src]!.</span>")
 	return ..()
 
-/obj/item/organ/external/head/get_icon()
+/obj/item/organ/external/head/get_icon(var/skeletal, var/can_apply_transparency = TRUE)
 	..()
 
 	//The overlays are not drawn on the mob, they are used for if the head is removed and becomes an item
@@ -386,6 +386,9 @@
 		icon_cache_key += "[M][markings[M]["color"]]"
 
 	add_overlay(get_hair_icon())
+
+	if (nonsolid && can_apply_transparency)
+		mob_icon += rgb(,,,180) //do it here so any markings become transparent as well
 
 	return mob_icon
 
