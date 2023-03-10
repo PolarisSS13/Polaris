@@ -467,7 +467,7 @@
 					fear_amount += 10 // It's huge and feral.
 
 			if((istype(L, /mob/living/carbon/human))) //Very amusing feature: this makes blennophobic prometheans and severely blennophobic skrell fear themselves.
-				var/mob/living/carbon/human/S = L
+				var/mob/living/carbon/human/S = L //that might actually be a bug but i can't figure out how to fix it so it stays
 				if(istype(S.species, /datum/species/skrell)) //Skrell ARE slimy.
 					if(severe)
 						fear_amount += 1
