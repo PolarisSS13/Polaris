@@ -337,7 +337,6 @@
 		facedir(direction)
 
 /obj/screen/click_catcher
-	name = "Darkness"
 	icon = 'icons/mob/screen_gen.dmi'
 	icon_state = "click_catcher"
 	plane = CLICKCATCHER_PLANE
