@@ -869,10 +869,14 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/robotics)
 "aCF" = (
-/obj/structure/bed/chair{
-	dir = 8
+/obj/structure/window/reinforced{
+	dir = 4
 	},
-/turf/simulated/floor/tiled/techmaint,
+/obj/structure/table/woodentable,
+/obj/structure/flora/pottedplant/flower{
+	pixel_y = 8
+	},
+/turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "aDu" = (
 /obj/structure/disposalpipe/segment{
@@ -1067,6 +1071,10 @@
 	},
 /obj/effect/floor_decal/corner/green/bordercorner2{
 	dir = 10
+	},
+/obj/structure/extinguisher_cabinet{
+	dir = 8;
+	pixel_x = -30
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -1902,6 +1910,12 @@
 "bsk" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/engineering/reactor_monitoring)
+"bsw" = (
+/obj/structure/bed/chair/comfy/orange{
+	dir = 8
+	},
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "bsy" = (
 /obj/machinery/door/firedoor/glass,
 /obj/structure/grille,
@@ -2313,6 +2327,10 @@
 	},
 /obj/effect/floor_decal/steeldecal/steel_decals5{
 	dir = 4
+	},
+/obj/machinery/camera/network/second_floor{
+	c_tag = "Second Floor - West Skybridge 3";
+	dir = 8
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -3547,6 +3565,17 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/surface/station/storage/art)
+"cnw" = (
+/obj/machinery/computer/security/telescreen/entertainment{
+	icon_state = "frame";
+	pixel_y = 32
+	},
+/obj/structure/table/woodentable,
+/obj/structure/table/woodentable,
+/obj/structure/table/woodentable,
+/obj/item/storage/box/donkpockets,
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "cnN" = (
 /obj/machinery/door/firedoor/glass,
 /obj/structure/grille,
@@ -6640,8 +6669,12 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway/sndaccess)
 "esY" = (
-/obj/structure/table/glass,
-/turf/simulated/floor/tiled/techmaint,
+/obj/structure/table/woodentable,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/microwave,
+/turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "eta" = (
 /obj/effect/floor_decal/industrial/warning{
@@ -7144,6 +7177,18 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/research)
+"eNW" = (
+/obj/structure/table/woodentable,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/firealarm{
+	dir = 1;
+	pixel_y = -24
+	},
+/obj/item/paper_bin,
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "eOn" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -9560,6 +9605,12 @@
 "glf" = (
 /turf/simulated/wall/r_concrete,
 /area/surface/station/maintenance/substation/medbay/snd)
+"gma" = (
+/obj/machinery/newscaster{
+	pixel_y = -28
+	},
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "gmx" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/machinery/atmospherics/portables_connector{
@@ -12352,6 +12403,11 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/command/teleporter)
+"hVH" = (
+/obj/structure/table/woodentable,
+/obj/random/plushie,
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "hWl" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
@@ -12804,6 +12860,9 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/atmos)
+"igu" = (
+/turf/simulated/floor/carpet/purcarpet,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "igY" = (
 /turf/simulated/wall,
 /area/surface/station/medical/virology)
@@ -20281,19 +20340,10 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/ai_monitored/storage/eva)
 "mYW" = (
-/obj/structure/table/glass,
-/obj/structure/flora/pottedplant/fern{
-	pixel_y = 8
+/obj/machinery/door/window/eastleft{
+	name = "Skybridge Lounge"
 	},
-/obj/machinery/camera/network/second_floor{
-	c_tag = "Second Floor - West Skybridge 2";
-	dir = 4
-	},
-/obj/item/radio/intercom{
-	dir = 8;
-	pixel_x = -21
-	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "mZt" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -21293,6 +21343,17 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/security/prison)
+"nId" = (
+/obj/machinery/camera/network/second_floor{
+	c_tag = "Second Floor - West Skybridge Lounge";
+	dir = 4
+	},
+/obj/item/radio/intercom{
+	dir = 8;
+	pixel_x = -21
+	},
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "nJj" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -27359,6 +27420,7 @@
 "rSN" = (
 /obj/structure/table/standard,
 /obj/item/sticky_pad/random,
+/obj/item/storage/box/donut,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/secondary/secondfloor/dormhallway)
 "rSS" = (
@@ -29313,6 +29375,12 @@
 	},
 /turf/simulated/floor/tiled/eris,
 /area/surface/station/medical/virology)
+"taw" = (
+/obj/structure/bed/chair/comfy/red{
+	dir = 1
+	},
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "tbh" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
@@ -30150,6 +30218,10 @@
 "twZ" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/rnd/lab)
+"txi" = (
+/obj/structure/bed/chair/comfy/orange,
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "txx" = (
 /obj/structure/sign/clock{
 	pixel_y = 32
@@ -34235,6 +34307,16 @@
 /obj/effect/floor_decal/corner/green/border,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
+"wow" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/table/woodentable,
+/obj/structure/flora/pottedplant/fern{
+	pixel_y = 8
+	},
+/turf/simulated/floor/wood,
+/area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "woW" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/blue/border,
@@ -36760,14 +36842,9 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/command/operations)
 "xHQ" = (
-/obj/structure/bed/chair{
-	dir = 8
-	},
-/obj/structure/extinguisher_cabinet{
-	dir = 1;
-	pixel_y = 30
-	},
-/turf/simulated/floor/tiled/techmaint,
+/obj/structure/table/woodentable,
+/obj/random/mug,
+/turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "xIo" = (
 /obj/structure/window/reinforced{
@@ -37437,14 +37514,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/hallway/secondary/secondfloor/command)
 "yaG" = (
-/obj/structure/bed/chair{
+/obj/structure/bed/chair/comfy/red{
 	dir = 8
 	},
-/obj/machinery/firealarm{
-	dir = 1;
-	pixel_y = -24
-	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "yaW" = (
 /obj/effect/floor_decal/industrial/warning,
@@ -58097,13 +58170,13 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+kDg
+jbk
+jbk
+kDg
+jbk
+jbk
+kDg
 ddU
 ddU
 ddU
@@ -58354,13 +58427,13 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+jbk
+xHQ
+taw
+nId
+txi
+hVH
+jbk
 ddU
 ddU
 ddU
@@ -58611,13 +58684,13 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+jbk
+yaG
+igu
+igu
+igu
+bsw
+jbk
 ddU
 ddU
 ddU
@@ -58867,15 +58940,15 @@ ddU
 ddU
 ddU
 ddU
+ddU
 kDg
-jbk
-sfj
-jbk
+cnw
+igu
+igu
+igu
+gma
 kDg
-jbk
-sfj
-jbk
-kDg
+ddU
 ddU
 ddU
 ddU
@@ -59125,13 +59198,13 @@ jbk
 iLw
 kDg
 kDg
-xHQ
+kDg
 esY
 aCF
 mYW
-aCF
-esY
-yaG
+wow
+eNW
+kDg
 kDg
 kDg
 jbk
