@@ -489,4 +489,4 @@ Class Procs:
 					S.amount = round(materials[mat] / S.perunit)
 				else
 					qdel(S) //Prevents stacks smaller than 1
-		return ..()
+		return
