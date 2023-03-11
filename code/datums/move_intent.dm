@@ -49,3 +49,12 @@
 	hud_icon_state = "running"
 	flags = MOVEMENT_INTENT_WALKING | MOVEMENT_INTENT_RUNNING
 	move_delay = 0
+
+// Robot movement intents.
+/decl/move_intent/walk/robot/Initialize()
+	. = ..()
+	move_delay += config.robot_delay
+
+/decl/move_intent/run/robot/Initialize()
+	. = ..()
+	move_delay += config.robot_delay
