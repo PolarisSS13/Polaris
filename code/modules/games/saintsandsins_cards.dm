@@ -150,7 +150,7 @@
 /decl/sas_card/heretic/dutiful_mephistopheles
 	name = "Dutiful Mephistopheles"
 	health = 19
-	ability = "PASSIVE: Reduces Decay damage received by 2 while increasing Holy by 3."
+	ability = "PASSIVE: Reduces Decay damage taken by 2 while increasing Holy damage taken by 3."
 	pack_probability = list(
 		CARDPACK_BASICWITCH = 6
 	)
@@ -158,7 +158,7 @@
 /decl/sas_card/heretic/woebringer_colette
 	name = "Woebringer Colette"
 	health = 21
-	ability = "ACTIVE: Deal 2 damage of any damage type while taking 2 damage of the same type."
+	ability = "ACTIVE: Deal 2 damage of any damage type. Take 2 damage of the same type."
 	pack_probability = list(
 		CARDPACK_BASICWITCH = 8
 	)
@@ -166,7 +166,7 @@
 /decl/sas_card/heretic/orpheus_the_blind
 	name = "Orpheus the Blind"
 	health = 18
-	ability = "PASSIVE: When below half health, take half damage per spell, rounded up."
+	ability = "PASSIVE: When below half health, take half damage from spells, rounded up."
 	pack_probability = list(
 		CARDPACK_BASICWITCH = 4
 	)
@@ -182,7 +182,7 @@
 /decl/sas_card/heretic/exalted_atomus
 	name = "Exalted Atomus"
 	health = 17
-	ability = "ACTIVE: Declare a damage type at the start of caster's turn. Nullify that damage type for one round."
+	ability = "ACTIVE: Declare a damage type at the start of your turn. Nullify that damage type until the start of your next turn."
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 4,
 		CARDPACK_FATEBRINGER = 4
@@ -199,7 +199,7 @@
 /decl/sas_card/heretic/slovenly_pritchard
 	name = "Slovenly Pritchard"
 	health = 18
-	ability = "PASSIVE: Nullify Holy damage received. This can only occur once per round."
+	ability = "PASSIVE: Nullify the first instance of Holy damage received each round."
 	pack_probability = list(
 		CARDPACK_FATEBRINGER = 5
 	)
@@ -368,7 +368,7 @@
 
 /decl/sas_card/spell/protection_ward
 	name = "Protection Ward"
-	ability = "Nullifies the next damage from a spell used on its caster."
+	ability = "Nullifies damage from the next spell targeting the caster."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_BASICWITCH = 8
@@ -473,7 +473,7 @@
 
 /decl/sas_card/spell/a_glass_darkly
 	name = "A Glass Darkly"
-	ability = "Doubles the damage of the caster's next KEY spell."
+	ability = "Doubles the damage of the caster's next Key spell."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 7
@@ -497,7 +497,7 @@
 
 /decl/sas_card/spell/grotesque_experiment
 	name = "Grotesque Experiment"
-	ability = "Nullifies another Heretic's spell and they draw a card."
+	ability = "Nullify a spell. Its caster draws a card."
 	spell_type = REACTION_TYPE
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 5
@@ -513,7 +513,7 @@
 
 /decl/sas_card/spell/rosemary_and_thyme
 	name = "Rosemary and Thyme"
-	ability = "Purges any damage-over-time spells on caster."
+	ability = "Nullifies all damage-over-time spells currently on caster."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 6
@@ -521,7 +521,7 @@
 
 /decl/sas_card/spell/culling_of_the_firstborn
 	name = "Culling of the Firstborn"
-	ability = "Caster shares spell damage with casting Heretic."
+	ability = "Caster of the target spell splits the damage with its original target, rounding up."
 	spell_type = REACTION_TYPE
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 7
@@ -529,7 +529,7 @@
 
 /decl/sas_card/spell/blood_boil
 	name = "Blood Boil"
-	ability = "Deals 1 Decay and 2 Fire damage to Heretic."
+	ability = "Deals 1 Decay and 2 Fire damage to target."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 7
@@ -537,7 +537,7 @@
 
 /decl/sas_card/spell/transmogrification
 	name = "Transmogrification"
-	ability = "Deals 2 damage of caster's chosen damage type."
+	ability = "Caster chooses a damage type. Deals 2 damage of that type to target."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_ALCHEMIST = 6
@@ -562,7 +562,7 @@
 
 /decl/sas_card/spell/cast_down
 	name = "Cast Down"
-	ability = "Nullifies spell and returns it to that caster's hand."
+	ability = "Nullifies target spell and returns it to its caster's hand."
 	spell_type = REACTION_TYPE
 	pack_probability = list(
 		CARDPACK_FATEBRINGER = 6
@@ -570,7 +570,7 @@
 
 /decl/sas_card/spell/blood_tithe
 	name = "Blood Tithe"
-	ability = "Roll 1d4. Deal that much Water damage to ALL Heretics, including caster."
+	ability = "Roll 1d4. Deal that much Water damage to ALL Heretics."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_FATEBRINGER = 6
@@ -586,7 +586,7 @@
 
 /decl/sas_card/spell/hatred
 	name = "Hatred"
-	ability = "Share damage received with another Heretic."
+	ability = "Split damage received with another Heretic, rounding up."
 	spell_type = REACTION_TYPE
 	pack_probability = list(
 		CARDPACK_FATEBRINGER = 7
@@ -626,7 +626,7 @@
 
 /decl/sas_card/spell/ancient_pact
 	name = "Ancient Pact"
-	ability = "All damage of last received damage type will be healed instead for one round."
+	ability = "Until the start of your next turn, all damage of last received damage type will be healed instead."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_FATEBRINGER = 6
@@ -642,7 +642,7 @@
 
 /decl/sas_card/spell/trial_of_the_witch
 	name = "Trial of the Witch"
-	ability = "If no damage was done by caster last round, deal 4 Earth damage to target. If there was, deal 1 Wind damage to target."
+	ability = "If the caster dealt no damage last round, deal 4 Earth damage to target. Else, deal 1 Wind damage to target."
 	spell_type = KEY_TYPE
 	pack_probability = list(
 		CARDPACK_FATEBRINGER = 4
