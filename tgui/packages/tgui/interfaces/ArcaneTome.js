@@ -1,9 +1,9 @@
 import { Fragment } from 'inferno';
 import { useBackend, useLocalState } from '../backend';
-import { Box, Button, Dropdown, Flex, Icon, Input, Modal, Section, Tabs } from '../components';
+import { Box, Button, Flex, Section, Tabs } from '../components';
 import { Window } from '../layouts';
 
-export const ArcaneTome = (props, context) => {
+export const ArcaneTome = context => {
   const { act, data } = useBackend(context);
   const [tabIndex, setTabIndex] = useLocalState(context, 'tabIndex', 0);
   const [compactMode, setCompactMode] = useLocalState(context, 'compactMode', 0);
@@ -12,6 +12,7 @@ export const ArcaneTome = (props, context) => {
     <Window
       width={500}
       height={600}
+      theme="syndicate"
       resizable scrollable>
       <Window.Content scrollable>
         <Tabs>
@@ -39,31 +40,39 @@ export const ArcaneTome = (props, context) => {
                   content="Compact mode"
                   checked={compactMode}
                   onClick={() => setCompactMode(!compactMode)} /><br />
-                {!compactMode && <Fragment>
-                  {data.runes.map(entry => (
-                    <Flex.Item key={entry.name} mb={1}>
-                      <Section title={entry.name}>
-                        {entry.invokers > 1 && (<Fragment><i>Required invokers:</i> {entry.invokers}<br /><br /></Fragment>) || ""}
-                        {entry.talisman && (<Fragment><i>Can be made into a talisman</i><br /><br /></Fragment>) || ""}
-                        {entry.shorthand}<br /><br />
-                        <Button
-                          textAlign="center"
-                          content="Scribe"
-                          onClick={() => act("writeRune", { runePath: entry.typepath })}
-                        />
-                      </Section>
-                    </Flex.Item>
-                  ))}</Fragment> ||
-                  <Box align="center">
-                    <i>Entries marked with an asterisk (*) can be made into a talisman.</i><br/><br/>
-                    {data.runes.map(entry => (
-                      <Flex.Item key={entry.name} mb={1}>
-                        <Button
-                          content={(entry.talisman && entry.name + " *" || entry.name) + (entry.invokers > 1 && " (" + entry.invokers + " invokers)" || "")}
-                          tooltip={entry.shorthand}
-                          onClick={() => act("writeRune", { runePath: entry.typepath })}/>
-                      </Flex.Item>
-                    ))}</Box>}
+                {!compactMode
+                  && (
+                    <Box>
+                      {data.runes.map(entry => (
+                        <Flex.Item key={entry.name} mb={1}>
+                          <Section title={entry.name}>
+                            {entry.invokers > 1
+                              && (<Fragment><i>Required invokers:</i> {entry.invokers}<br /><br /></Fragment>) || ""}
+                            {entry.talisman
+                              && (<Fragment><i>Can be made into a talisman</i><br /><br /></Fragment>) || ""}
+                            {entry.shorthand}<br /><br />
+                            <Button
+                              textAlign="center"
+                              content="Scribe"
+                              onClick={() => act("writeRune", { runePath: entry.typepath })}
+                            />
+                          </Section>
+                        </Flex.Item>
+                      ))}
+                    </Box>)
+                  || (
+                    <Box align="center">
+                      <i>Entries marked with an asterisk (*) can be made into a talisman.</i><br /><br />
+                      {data.runes.map(entry => (
+                        <Flex.Item key={entry.name} mb={1}>
+                          <Button
+                            content={(entry.talisman && entry.name + " *" || entry.name)
+                              + (entry.invokers > 1 && " (" + entry.invokers + " invokers)" || "")}
+                            tooltip={entry.shorthand}
+                            onClick={() => act("writeRune", { runePath: entry.typepath })} />
+                        </Flex.Item>
+                      ))}
+                    </Box>)}
               </Flex>
             )
             || null

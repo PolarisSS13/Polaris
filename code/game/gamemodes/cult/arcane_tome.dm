@@ -13,6 +13,8 @@
 	w_class = ITEMSIZE_SMALL
 	drop_sound = 'sound/items/drop/book.ogg'
 	pickup_sound = 'sound/items/pickup/book.ogg'
+	/// How long it takes to draw a rune using this tome. Non-positive values are instant.
+	var/scribe_speed = 5 SECONDS
 
 /obj/item/arcane_tome/get_examine_desc()
 	if (iscultist(usr) || isobserver(usr))
@@ -75,8 +77,8 @@
 		var/hit_zone = M.resolve_item_attack(src, user, target_zone)
 		if(hit_zone)
 			user.visible_message(
-				SPAN_DANGER("You burn \the [M] with \the [src]!"),
-				SPAN_DANGER("\The [user] bathes \the [M] in red light from \the [src]'s cover!")
+				SPAN_DANGER("\The [user] bathes \the [M] in red light from \the [src]'s cover!"),
+				SPAN_DANGER("You burn \the [M] with \the [src]!")
 			)
 			to_chat(M, SPAN_DANGER("You feel a searing heat inside!"))
 			playsound(src, 'sound/weapons/sear.ogg', 50, TRUE, -1)
@@ -85,6 +87,9 @@
 	. = ..()
 
 /obj/item/arcane_tome/proc/scribe_rune(mob/living/user, obj/effect/rune_type)
+	if (locate(/obj/effect/newrune) in get_turf(user))
+		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
+		return
 	var/datum/gender/G = gender_datums[user.get_visible_gender()]
 	user.visible_message(
 		SPAN_WARNING("\The [user] slices open [G.his] skin and begins painting on symbols on the floor with [G.his] own blood!"),
@@ -92,12 +97,18 @@
 		SPAN_WARNING("You hear droplets softly splattering on the ground."),
 		range = 3)
 	user.apply_damage(1, BRUTE)
-	if (!do_after(user, 5 SECONDS))
+	if (!do_after(user, max(0, scribe_speed)))
+		return
+	if (locate(/obj/effect/newrune) in get_turf(user))
+		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
 	user.visible_message(
 		SPAN_WARNING("\The [user] paints arcane markings with [G.his] own blood!"),
 		SPAN_DANGER("You finish drawing the arcane markings of the Geometer."),
 		range = 3
 	)
-	var/obj/effect/newrune/NR = new rune_type (get_turf(src))
+	var/obj/effect/newrune/NR = new rune_type (get_turf(user))
 	NR.after_scribe(user)
+
+/obj/item/arcane_tome/admin
+	scribe_speed = 0 // Instant
