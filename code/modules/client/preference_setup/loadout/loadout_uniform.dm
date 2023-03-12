@@ -74,7 +74,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/qipao_colorable
-	display_name = "qipao selection (colorable)"
+	display_name = "qipao, selection (colorable)"
 	path = /obj/item/clothing/under/qipao/colorable
 
 /datum/gear/uniform/qipao_colorable/New()
@@ -83,11 +83,10 @@
 	paotype["qipao, gold trim"] = /obj/item/clothing/under/qipao/colorable
 	paotype["qipao, slim"] = /obj/item/clothing/under/qipao2
 	paotype["qipao, short"] = /obj/item/clothing/under/qipao
-	gear_tweaks += new/datum/gear_tweak/path(paotype)
-	gear_tweaks += gear_tweak_free_color_choice
+	gear_tweaks += list(new/datum/gear_tweak/path(paotype), gear_tweak_free_color_choice)
 
 /datum/gear/uniform/qipao
-	display_name = "qipao selection"
+	display_name = "qipao, pre-colored selection"
 	description = "Skirts to cover your lower body, in various styles."
 	path = /obj/item/clothing/under/skirt
 
@@ -348,30 +347,21 @@
 	hopunitype["HoP dress"] = /obj/item/clothing/under/dress/dress_hop
 	hopunitype["HR director"] = /obj/item/clothing/under/dress/dress_hr
 	gear_tweaks += new/datum/gear_tweak/path(hopunitype)
-
-/datum/gear/uniform/shortplaindress
-	display_name = "dress, plain (colorable)"
-	path = /obj/item/clothing/under/dress/white3
-
-/datum/gear/uniform/shortplaindress/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
-/datum/gear/uniform/longdress
-	display_name = "dress, long (colorable)"
-	path = /obj/item/clothing/under/dress/white2
-
-/datum/gear/uniform/longdress/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
-/datum/gear/uniform/longwidedress
-	display_name = "dress, long and wide (colorable)"
+/datum/gear/uniform/dresses_colorable
+	display_name = "dress, colorable selection"
 	path = /obj/item/clothing/under/dress/white4
 
-/datum/gear/uniform/longwidedress/New()
+/datum/gear/uniform/dresses_colorable/New()
 	..()
-	gear_tweaks += gear_tweak_free_color_choice
+	var/list/dresses = list(
+	"plain dress"=/obj/item/clothing/under/dress/white3,
+	"short, sleeveless dress"=/obj/item/clothing/under/dress/little_strapless,
+	"long, sleeveless dress"=/obj/item/clothing/under/dress/long_strapless,
+	"long dress"=/obj/item/clothing/under/dress/white2,
+	"long, wide dress"=/obj/item/clothing/under/dress/white4
+	)
+	gear_tweaks += list(new/datum/gear_tweak/path(dresses), gear_tweak_free_color_choice)
+
 
 /datum/gear/uniform/reddress
 	display_name = "dress, red with belt"

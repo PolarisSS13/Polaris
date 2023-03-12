@@ -509,6 +509,18 @@
 	icon_state = "goldwrap"
 	index = 1
 
+/obj/item/clothing/under/dress/little_strapless
+	name = "short strapless dress"
+	desc = "The classic little black dress now comes in colours other than black."
+	icon_state = "littlestrapless"
+	index = 1
+
+/obj/item/clothing/under/dress/long_strapless
+	name = "long strapless dress"
+	desc = "A sleek sleeveless dress for the modern sophisticate."
+	icon_state = "longstrapless"
+	index = 1
+
 /obj/item/clothing/under/dress/ceremonial
 	name = "ceremonial corset"
 	desc = "A regal black and gold tight corset with silky sleeves. A sheer bodystocking accompanies it."
@@ -518,7 +530,6 @@
 /obj/item/clothing/under/dress/ceremonial/sheerless
 	desc = "A regal black and gold tight corset with silky sleeves."
 	worn_state = "ceremonial_c"
-
 
 /*
  * wedding stuff
