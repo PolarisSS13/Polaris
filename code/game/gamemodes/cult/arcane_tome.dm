@@ -42,6 +42,8 @@
 	var/list/rune_data = list()
 	for (var/V in subtypesof(/obj/effect/newrune))
 		var/obj/effect/newrune/NR = V
+		if (!initial(NR.can_write))
+			continue
 		rune_data += list(list(
 			"name" = initial(NR.rune_name),
 			"invokers" = initial(NR.required_invokers),

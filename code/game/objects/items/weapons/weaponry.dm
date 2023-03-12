@@ -44,13 +44,6 @@
 			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 			return
 
-/obj/item/nullrod/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
-		return
-	if (istype(A, /turf/simulated/floor))
-		to_chat(user, "<span class='notice'>You hit the floor with the [src].</span>")
-		call(/obj/effect/rune/proc/revealrunes)(src)
-
 /obj/item/energy_net
 	name = "energy net"
 	desc = "It's a net made of green energy."

@@ -18,7 +18,7 @@
 	return
 
 /obj/item/book/cultify()
-	new /obj/item/book/tome(loc)
+	new /obj/item/arcane_tome(loc)
 	..()
 
 /obj/item/material/sword/cultify()

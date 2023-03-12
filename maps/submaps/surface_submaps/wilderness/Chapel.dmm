@@ -2,7 +2,7 @@
 "ab" = (/turf/simulated/floor/outdoors/rocks,/area/template_noop)
 "ac" = (/turf/simulated/wall/log_sif,/area/submap/Chapel1)
 "ad" = (/obj/structure/lightpost,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/Chapel1)
-"ae" = (/obj/structure/closet/hydrant{pixel_y = 32},/obj/item/book/tome,/turf/simulated/floor/wood/sif,/area/submap/Chapel1)
+"ae" = (/obj/structure/closet/hydrant{pixel_y = 32},/obj/item/arcane_tome,/turf/simulated/floor/wood/sif,/area/submap/Chapel1)
 "af" = (/obj/item/flame/candle/everburn,/turf/simulated/floor/outdoors/rocks,/area/template_noop)
 "ag" = (/obj/structure/bookcase,/turf/simulated/floor/wood/sif,/area/submap/Chapel1)
 "ah" = (/turf/simulated/floor/outdoors/grass/sif,/area/template_noop)

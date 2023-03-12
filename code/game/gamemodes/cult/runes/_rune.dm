@@ -25,6 +25,8 @@
 	var/rune_shorthand
 	/// As `rune_name`, but for a description of what the rune actually does.
 	var/rune_desc
+	/// If FALSE, this rune won't appear on the tome's rune list.
+	var/can_write = TRUE
 
 /obj/effect/newrune/Initialize()
 	. = ..()
@@ -137,3 +139,22 @@
 /// Applies unique effects to a talisman created by this rune before the rune is destroyed.
 /obj/effect/newrune/proc/apply_to_talisman(obj/item/paper/newtalisman/T)
 	return
+
+/// "Random" rune with no function, used for generating spooky runes in mapgen.
+/obj/effect/newrune/mapgen
+	rune_name = "malformed"
+	rune_desc = "These meaningless scratchings serve no purpose, save to show one's devotion."
+	can_write = FALSE
+	circle_words = list() // Needs to be an empty list to prevent runtimes in Initialize()
+
+/obj/effect/newrune/mapgen/Initialize()
+	..()
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/effect/newrune/mapgen/LateInitialize()
+	var/list/words = cult.english_words
+	for (var/i in 1 to 3)
+		var/word = pick(words)
+		circle_words.Add(word)
+		words.Remove(word)
+	update_icon()

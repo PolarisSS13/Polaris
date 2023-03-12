@@ -4,7 +4,7 @@
 	rune_shorthand = "Creates and equips a set of protective robes as well as a sword."
 	talisman_path = /obj/item/paper/newtalisman/armor
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_DESTROY, CULT_WORD_OTHER)
-	invocation = "N'ath reth sh'yro eth d'raggathnor!"
+	invocation = "Sa tatha najin!"
 
 /obj/effect/newrune/armor/invoke(list/invokers)
 	var/mob/living/L = invokers[1]

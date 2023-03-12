@@ -1,7 +1,7 @@
 /obj/item/paper/newtalisman/armor
 	talisman_name = "Armor"
 	talisman_desc = "Equips its invoker with a set of followers' armor, equivalent to the rune from which it was drawn."
-	invocation = "N'ath reth sh'yro eth d'raggathnor!"
+	invocation = "Sa tatha najin!"
 
 /obj/item/paper/newtalisman/armor/invoke(mob/living/user)
 	user.equip_to_slot_or_del(new /obj/item/clothing/head/culthood/alt(user), slot_head)
