@@ -1,17 +1,17 @@
-/obj/effect/newrune/teleport
+/obj/effect/rune/teleport
 	rune_name = "Teleport"
 	rune_desc = "When invoked, teleports anything on top of itself to another Teleport rune sharing the same keyword."
-	talisman_path = /obj/item/paper/newtalisman/teleport
+	talisman_path = /obj/item/paper/talisman/teleport
 	circle_words = list(CULT_WORD_TRAVEL, CULT_WORD_SELF, CULT_WORD_OTHER)
 	invocation = "Sas'so c'arta forbici!"
 	var/key_word = CULT_WORD_OTHER
 
-/obj/effect/newrune/teleport/examine(mob/user, infix, suffix)
+/obj/effect/rune/teleport/examine(mob/user, infix, suffix)
 	. = ..()
 	if (iscultist(user) || isobserver(user))
 		. += SPAN_DANGER("This rune has a key word of \"[key_word]\".")
 
-/obj/effect/newrune/teleport/after_scribe(mob/living/author)
+/obj/effect/rune/teleport/after_scribe(mob/living/author)
 	var/word = input(author, "Choose a key word for this rune.", rune_name) as null|anything in cult.english_words
 	if (QDELETED(src) || QDELETED(author))
 		return
@@ -22,9 +22,9 @@
 		circle_words[3] = word
 	update_icon()
 
-/obj/effect/newrune/teleport/can_invoke(mob/living/invoker)
+/obj/effect/rune/teleport/can_invoke(mob/living/invoker)
 	var/valid_runes = 0
-	for (var/obj/effect/newrune/teleport/T in cult.all_runes - src)
+	for (var/obj/effect/rune/teleport/T in cult.all_runes - src)
 		if (T.key_word == key_word)
 			valid_runes++
 	if (!valid_runes)
@@ -32,14 +32,14 @@
 		return
 	return TRUE
 
-/obj/effect/newrune/teleport/invoke(list/invokers)
+/obj/effect/rune/teleport/invoke(list/invokers)
 	var/list/runes
-	for (var/obj/effect/newrune/teleport/T in cult.all_runes - src)
+	for (var/obj/effect/rune/teleport/T in cult.all_runes - src)
 		if (T.key_word == key_word)
 			LAZYADD(runes, T)
 	if (!LAZYLEN(runes))
 		return fizzle()
-	var/obj/effect/newrune/teleport/T = pick(runes)
+	var/obj/effect/rune/teleport/T = pick(runes)
 	var/turf/new_loc = get_turf(T)
 	for (var/mob/living/L in get_turf(src))
 		to_chat(L, SPAN_WARNING("You are dragged through space!"))
@@ -50,6 +50,6 @@
 	visible_message(SPAN_DANGER("\The [src] emit\s a burst of red light!"))
 	T.visible_message(SPAN_DANGER("\The [src] emit\s a burst of red light!"))
 
-/obj/effect/newrune/teleport/apply_to_talisman(obj/item/paper/newtalisman/T)
-	var/obj/item/paper/newtalisman/teleport/TP = T
+/obj/effect/rune/teleport/apply_to_talisman(obj/item/paper/newtalisman/T)
+	var/obj/item/paper/talisman/teleport/TP = T
 	TP.key_word = key_word

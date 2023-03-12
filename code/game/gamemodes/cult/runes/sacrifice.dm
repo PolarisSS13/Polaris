@@ -1,4 +1,4 @@
-/obj/effect/newrune/sacrifice
+/obj/effect/rune/sacrifice
 	rune_name = "Sacrifice"
 	rune_desc = "Offer a living thing or a body to the Geometer of Blood. Living beings require three invokers to sacrifice, while dead beings require only one."
 	rune_shorthand = "Offers a creature to the Geometer for consumption."
@@ -7,7 +7,7 @@
 	var/mob/living/sacrificing
 
 /// Fetches a sacrifice on top of this rune, aiming for the most "valuable" one (by way of species rarity, role, objective, and so on).
-/obj/effect/newrune/sacrifice/proc/get_sacrifical_lamb()
+/obj/effect/rune/sacrifice/proc/get_sacrifical_lamb()
 	var/list/sacrifices
 	for (var/mob/living/L in get_turf(src))
 		var/datum/mind/M = L.mind
@@ -33,7 +33,7 @@
 		return worthiest_sacrifice
 	return
 
-/obj/effect/newrune/sacrifice/get_required_invokers(mob/living/invoker)
+/obj/effect/rune/sacrifice/get_required_invokers(mob/living/invoker)
 	var/mob/living/L = get_sacrifical_lamb()
 	if (!L)
 		return required_invokers
@@ -44,12 +44,12 @@
 		to_chat(invoker, SPAN_NOTICE("This sacrifice yet lives, necessitating multiple invokers."))
 		return 3
 
-/obj/effect/newrune/sacrifice/can_invoke(mob/living/invoker)
+/obj/effect/rune/sacrifice/can_invoke(mob/living/invoker)
 	if (sacrificing)
 		to_chat(invoker, SPAN_WARNING("The Geometer is already receiving a sacrifice."))
 	return sacrificing == null
 
-/obj/effect/newrune/sacrifice/invoke(list/invokers)
+/obj/effect/rune/sacrifice/invoke(list/invokers)
 	var/mob/living/L = get_sacrifical_lamb()
 	if (!L)
 		return fizzle()

@@ -1,4 +1,4 @@
-/obj/effect/newrune/drain_blood
+/obj/effect/rune/drain_blood
 	rune_name = "Drain Blood"
 	rune_desc = "Drains the blood of humans placed on top of all Drain Blood runes (no matter their location), healing the invoker based on the total amount drained."
 	rune_shorthand = "Drain the blood of humans on top of all Drain Blood runes in the world in order to heal the invoker."
@@ -7,17 +7,17 @@
 	var/remaining_blood = 0
 	var/mob/living/carbon/human/cultist
 
-/obj/effect/newrune/drain_blood/Destroy()
+/obj/effect/rune/drain_blood/Destroy()
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 
-/obj/effect/newrune/drain_blood/invoke(list/invokers)
+/obj/effect/rune/drain_blood/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
 	if (cultist)
 		to_chat(L, SPAN_WARNING("Another person is already drawing blood from this rune."))
 		return
 	var/total_blood = 0
-	for (var/obj/effect/newrune/drain_blood/DB in cult.all_runes)
+	for (var/obj/effect/rune/drain_blood/DB in cult.all_runes)
 		for (var/mob/living/carbon/human/H in get_turf(DB))
 			if (H.stat == DEAD)
 				continue
@@ -39,7 +39,7 @@
 		remaining_blood = total_blood / 5
 		START_PROCESSING(SSfastprocess, src)
 
-/obj/effect/newrune/drain_blood/process()
+/obj/effect/rune/drain_blood/process()
 	if (!remaining_blood || !cultist)
 		cultist = null
 		STOP_PROCESSING(SSfastprocess, src)

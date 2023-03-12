@@ -284,7 +284,7 @@
 			var/turf/simulated/T = src
 			T.dirt = 0
 		for(var/obj/effect/O in src)
-			if(istype(O,/obj/effect/newrune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				qdel(O)
 	else
 		to_chat(user, "<span class='warning'>\The [source] is too dry to wash that.</span>")

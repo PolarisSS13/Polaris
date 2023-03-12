@@ -1,9 +1,9 @@
-/obj/item/paper/newtalisman/blind
+/obj/item/paper/talisman/blind
 	talisman_name = "Blind"
 	talisman_desc = "Induces blindness in nonbelievers within two tiles."
 	invocation = "Sti'kaliesin!"
 
-/obj/item/paper/newtalisman/blind/invoke(mob/living/user)
+/obj/item/paper/talisman/blind/invoke(mob/living/user)
 	to_chat(user, SPAN_WARNING("The talisman in your hands turns to gray dust, blinding nearby nonbelievers."))
 	var/list/affected = list()
 	for (var/mob/living/L in viewers(2, src))

@@ -27,7 +27,7 @@
 			var/turf/simulated/T = src
 			T.dirt = 0
 		for(var/obj/effect/O in src)
-			if(istype(O,/obj/effect/newrune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
+			if(istype(O,/obj/effect/rune) || istype(O,/obj/effect/decal/cleanable) || istype(O,/obj/effect/overlay))
 				qdel(O)
 /*	//Reagent code changed at some point and the below doesn't work.  To be fixed later.
 	source.reagents.reaction(src, TOUCH, 10)	//10 is the multiplier for the reaction effect. probably needed to wet the floor properly.
@@ -35,7 +35,7 @@
 */
 /obj/item/mop_deploy/afterattack(atom/A, mob/user, proximity)
 	if(!proximity) return
-	if(istype(A, /turf) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay) || istype(A, /obj/effect/newrune))
+	if(istype(A, /turf) || istype(A, /obj/effect/decal/cleanable) || istype(A, /obj/effect/overlay) || istype(A, /obj/effect/rune))
 		user.visible_message("<span class='warning'>[user] begins to clean \the [get_turf(A)].</span>")
 
 		if(do_after(user, 40))

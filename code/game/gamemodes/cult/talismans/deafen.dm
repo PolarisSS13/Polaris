@@ -1,9 +1,9 @@
-/obj/item/paper/newtalisman/deafen
+/obj/item/paper/talisman/deafen
 	talisman_name = "Deafen"
 	talisman_desc = "Induces deafness in all nearby nonbelievers."
 	invocation = "Sti'kaliedir!"
 
-/obj/item/paper/newtalisman/deafen/invoke(mob/living/user)
+/obj/item/paper/talisman/deafen/invoke(mob/living/user)
 	user.visible_message(
 		SPAN_WARNING("Dust flows from \the [user]'s hands, and the world goes quiet..."),
 		SPAN_WARNING("The talisman in your hands turns to gray dust, deafening nearby nonbelievers."),

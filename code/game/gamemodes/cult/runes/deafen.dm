@@ -1,12 +1,12 @@
-/obj/effect/newrune/deafen
+/obj/effect/rune/deafen
 	rune_name = "Deafen"
 	rune_desc = "Deafens all non-cultists near the rune."
 	rune_shorthand = "Deafens all non-cultists near the rune. Functions similarly in talisman form."
-	talisman_path = /obj/item/paper/newtalisman/deafen
+	talisman_path = /obj/item/paper/talisman/deafen
 	circle_words = list(CULT_WORD_HIDE, CULT_WORD_OTHER, CULT_WORD_SEE)
 	invocation = "Dedo ol'btoh!"
 
-/obj/effect/newrune/deafen/invoke(list/invokers)
+/obj/effect/rune/deafen/invoke(list/invokers)
 	visible_message(SPAN_DANGER("The runes dissipate into fine dust."))
 	var/list/affected = list()
 	for (var/mob/living/L in hearers(7, src))

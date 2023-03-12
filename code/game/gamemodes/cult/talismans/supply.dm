@@ -1,16 +1,16 @@
-/obj/item/paper/newtalisman/supply
+/obj/item/paper/talisman/supply
 	talisman_name = "Supply"
 	talisman_desc = "A densely-scrawled talisman with several functions, used to start a new cult."
 	delete_self = FALSE
 	invocation = null
 	var/uses = 5
 
-/obj/item/paper/newtalisman/supply/examine(mob/user)
+/obj/item/paper/talisman/supply/examine(mob/user)
 	. = ..()
 	if (iscultist(user) || isobserver(user))
 		to_chat(user, SPAN_OCCULT("[uses] use\s remain\s."))
 
-/obj/item/paper/newtalisman/supply/invoke(mob/living/user)
+/obj/item/paper/talisman/supply/invoke(mob/living/user)
 	var/dat = "There are <b>[uses]</b> bloody runes on the parchment.<br/>"
 	dat += "Please choose the chant to be imbued into the fabric of reality.<br/>"
 	dat += "<hr>"
@@ -27,31 +27,31 @@
 	popup.set_content(dat)
 	popup.open()
 
-/obj/item/paper/newtalisman/supply/Topic(href, href_list)
+/obj/item/paper/talisman/supply/Topic(href, href_list)
 	var/mob/living/L = usr
 	if (QDELETED(src) || !iscultist(L) || L.incapacitated() || !in_range(src, L))
 		return
 	var/atom/movable/atom_type
 	switch (href_list["rune"])
 		if ("newtome")
-			atom_type = /obj/item/paper/newtalisman/summon_tome
+			atom_type = /obj/item/paper/talisman/summon_tome
 		if ("teleport")
 			var/word = input(L, "Choose a key word for the talisman. When used, it will teleport you to a random Teleport rune with the same key word.", name) as null|anything in cult.english_words
 			if (QDELETED(src) || QDELETED(L) || !iscultist(L) || !word)
 				return
-			var/obj/item/paper/newtalisman/teleport/T = new(get_turf(L))
+			var/obj/item/paper/talisman/teleport/T = new(get_turf(L))
 			T.key_word = word
 			to_chat(L, SPAN_OCCULT("You etch the talisman into the fabric of reality with the key word \"[word]\"."))
 		if ("emp")
-			atom_type = /obj/item/paper/newtalisman/emp
+			atom_type = /obj/item/paper/talisman/emp
 		if ("conceal")
-			atom_type = /obj/item/paper/newtalisman/hide_runes
+			atom_type = /obj/item/paper/talisman/hide_runes
 		if ("communicate")
-			atom_type = /obj/item/paper/newtalisman/communicate
+			atom_type = /obj/item/paper/talisman/communicate
 		if ("runestun")
-			atom_type = /obj/item/paper/newtalisman/stun
+			atom_type = /obj/item/paper/talisman/stun
 		if ("armor")
-			atom_type = /obj/item/paper/newtalisman/armor
+			atom_type = /obj/item/paper/talisman/armor
 		if ("soulstone")
 			atom_type = /obj/item/soulstone
 		if ("construct")
@@ -60,7 +60,7 @@
 		var/atom/movable/AM = new atom_type (get_turf(L))
 		if (isitem(AM))
 			L.put_in_hands(AM)
-		to_chat(L, SPAN_OCCULT("You etch [istype(AM, /obj/item/paper/newtalisman) ? "the talisman" : "\the [AM]"] into the fabric of reality."))
+		to_chat(L, SPAN_OCCULT("You etch [istype(AM, /obj/item/paper/talisman) ? "the talisman" : "\the [AM]"] into the fabric of reality."))
 	uses--
 	if (!uses)
 		to_chat(L, SPAN_WARNING("\The [src] dissolves into hot ash as the last of its power is used."))

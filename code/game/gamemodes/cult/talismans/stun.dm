@@ -1,14 +1,14 @@
-/obj/item/paper/newtalisman/stun
+/obj/item/paper/talisman/stun
 	talisman_name = "Stun"
 	talisman_desc = "Forces the concentrated energy of a stun rune into a struck target, immediately knocking them to the ground. Humans will be prevented from speaking for a time."
 	invocation = "Dream sign 'Evil Sealing Talisman'!" // I think this is a touhou reference
 
-/obj/item/paper/newtalisman/stun/attack_self(mob/living/user)
+/obj/item/paper/talisman/stun/attack_self(mob/living/user)
 	if (iscultist(user))
 		to_chat(user, SPAN_NOTICE("To use this talisman, attack someone with it."))
 	return
 
-/obj/item/paper/newtalisman/stun/attack(mob/living/carbon/T, mob/living/user)
+/obj/item/paper/talisman/stun/attack(mob/living/carbon/T, mob/living/user)
 	if (iscultist(user) && user.a_intent == I_HURT)
 		if (invocation)
 			!whispered ? user.say(invocation) : user.whisper(invocation)
@@ -18,7 +18,7 @@
 		return
 	return ..()
 
-/obj/item/paper/newtalisman/stun/proc/stun(mob/living/user, mob/living/target)
+/obj/item/paper/talisman/stun/proc/stun(mob/living/user, mob/living/target)
 	user.visible_message(
 		SPAN_DANGER("\The [user] thrusts \the [src] into \the [target]'s face!"),
 		SPAN_DANGER("You invoke the talisman at [target]!")

@@ -1,4 +1,4 @@
-/obj/effect/newrune/free_cultist
+/obj/effect/rune/free_cultist
 	rune_name = "Free Cultist"
 	rune_desc = "Reaches out through space and breaks a follower free of their restraints, no matter where they are. This required at least three invokers and causes heavy strain on all involved."
 	required_invokers = 3
@@ -7,7 +7,7 @@
 	var/timeout
 	var/mob/living/current_invoker
 
-/obj/effect/newrune/free_cultist/can_invoke(mob/living/invoker)
+/obj/effect/rune/free_cultist/can_invoke(mob/living/invoker)
 	if (timeout > world.time && invoker != current_invoker)
 		to_chat(invoker, SPAN_WARNING("Allow the current invoker a moment to choose before overriding their will."))
 		return
@@ -15,7 +15,7 @@
 		to_chat(invoker, SPAN_DANGER("You have taken too long to choose a follower to free. [invoker] has overridden your will in the choice."))
 	return TRUE
 
-/obj/effect/newrune/free_cultist/invoke(list/invokers)
+/obj/effect/rune/free_cultist/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
 	var/list/candidates = list()
 	for (var/mob/living/C in player_list - L)
@@ -53,7 +53,7 @@
 	to_chat(choice, SPAN_DANGER("You feel a small surge of vitality as your peers channel their life force to free you of your bonds."))
 	qdel(src)
 
-/obj/effect/newrune/free_cultist/proc/can_free(mob/living/L)
+/obj/effect/rune/free_cultist/proc/can_free(mob/living/L)
 	if (!L)
 		return
 	else if (L.restrained())

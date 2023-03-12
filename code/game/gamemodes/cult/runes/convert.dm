@@ -1,4 +1,4 @@
-/obj/effect/newrune/convert
+/obj/effect/rune/convert
 	rune_name = "Convert"
 	rune_desc = "A ubiquitous incantation, necessary to educate the innocent. Exposing a nonbeliever's mind to Nar-Sie will typically convert them, but stubborn or resilient individuals may be able to resist Its influence until they succumb or are overwhelmed by the revelation. Some people - typically those possessed of high authority - are able to resist Nar-Sie's influence and will entirely refuse to abandon their old beliefs."
 	rune_shorthand = "Attempts to convert a nonbeliever to the fold."
@@ -9,16 +9,16 @@
 	var/impudence = 0
 	var/impudence_timer = 0
 
-/obj/effect/newrune/convert/proc/can_convert(mob/living/victim)
+/obj/effect/rune/convert/proc/can_convert(mob/living/victim)
 	return !iscultist(victim) && victim.client && victim.stat != DEAD && victim.mind
 
-/obj/effect/newrune/convert/can_invoke(mob/living/invoker)
+/obj/effect/rune/convert/can_invoke(mob/living/invoker)
 	for (var/mob/living/L in get_turf(src))
 		if (can_convert(L))
 			return TRUE
 	return
 
-/obj/effect/newrune/convert/invoke(list/invokers)
+/obj/effect/rune/convert/invoke(list/invokers)
 	var/mob/living/user = invokers[1]
 	if (converting)
 		to_chat(user, SPAN_WARNING("You sense that the Dark One's power is already working away at [converting]."))
@@ -45,7 +45,7 @@
 	START_PROCESSING(SSprocessing, src)
 	process()
 
-/obj/effect/newrune/convert/process()
+/obj/effect/rune/convert/process()
 	if (!converting || !converting.mind || !converting.client || !can_convert(converting) || !cult.can_become_antag(converting.mind) || get_turf(converting) != get_turf(src))
 		if (!converting)
 			to_chat(converting, SPAN_DANGER("And then, just like that, it was gone. The blackness recedes, and you are yourself again."))

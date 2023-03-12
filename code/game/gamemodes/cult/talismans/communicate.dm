@@ -1,11 +1,11 @@
-/obj/item/paper/newtalisman/communicate
+/obj/item/paper/talisman/communicate
 	talisman_name = "Communicate"
 	talisman_desc = "Allows you to communicate with other cultists."
 	invocation = "O bidai nabora se'sma!"
 	whispered = TRUE
 	delete_self = FALSE
 
-/obj/item/paper/newtalisman/communicate/invoke(mob/living/user)
+/obj/item/paper/talisman/communicate/invoke(mob/living/user)
 	// This is more or less a verbatim copy of the communicate rune
 	var/input = input(user, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "") as null|text
 	if (!input || !CanInteract(user, physical_state))

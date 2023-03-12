@@ -1,25 +1,25 @@
-/obj/effect/newrune/raise_dead
+/obj/effect/rune/raise_dead
 	rune_name = "Raise Dead"
 	rune_desc = "This rune allows for the resurrection of any dead person. You will need a dead human body and a living human sacrifice. Make 2 raise dead runes. Put a living, awake human on top of one, and a dead body on the other one. When you invoke the rune, the life force of the living human will be transferred into the dead body, allowing a ghost standing on top of the dead body to enter it, instantly and fully healing it. Use other runes to ensure there is a ghost ready to be resurrected."
 	rune_shorthand = "Brings a dead body to life using the sacrifice of a living human on another copy of the rune."
 	circle_words = list(CULT_WORD_BLOOD, CULT_WORD_JOIN, CULT_WORD_SELF)
 	invocation = "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!"
 
-/obj/effect/newrune/raise_dead/proc/get_targets()
+/obj/effect/rune/raise_dead/proc/get_targets()
 	var/to_raise = null
 	var/to_sacrifice = null
 	for (var/mob/living/carbon/human/H in get_turf(src))
 		if (H.stat == DEAD)
 			to_raise = H
 			break
-	for (var/obj/effect/newrune/raise_dead/R in orange(1, src))
+	for (var/obj/effect/rune/raise_dead/R in orange(1, src))
 		for (var/mob/living/carbon/human/H in get_turf(R))
 			if (H.stat != DEAD)
 				to_sacrifice = H
 				break
 	return list(to_raise, to_sacrifice)
 
-/obj/effect/newrune/raise_dead/can_invoke(mob/living/invoker)
+/obj/effect/rune/raise_dead/can_invoke(mob/living/invoker)
 	var/list/targets = get_targets()
 	if (!targets[1])
 		return
@@ -38,7 +38,7 @@
 		return
 	return TRUE
 
-/obj/effect/newrune/raise_dead/invoke(list/invokers)
+/obj/effect/rune/raise_dead/invoke(list/invokers)
 	var/list/targets = get_targets()
 	var/mob/living/L = invokers[1]
 	var/mob/living/carbon/human/shears = targets[1]
@@ -66,7 +66,7 @@
 			)
 		playsound(lamb, "bodyfall", 50, TRUE)
 
-/obj/effect/newrune/raise_dead/proc/resurrect(mob/living/carbon/human/shears, mob/living/carbon/human/lamb, mob/living/invoker)
+/obj/effect/rune/raise_dead/proc/resurrect(mob/living/carbon/human/shears, mob/living/carbon/human/lamb, mob/living/invoker)
 	var/list/targets = get_targets()
 	if (targets[1] != shears || targets[2] != lamb)
 		to_chat(invoker, SPAN_DANGER("The ritual's subjects were moved before it could complete."))

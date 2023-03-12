@@ -1,12 +1,12 @@
-/obj/effect/newrune/communicate
+/obj/effect/rune/communicate
 	rune_name = "Communicate"
 	rune_desc = "Allows you to communicate with other cultists."
 	rune_shorthand = "Allows undetectable communication with other followers."
-	talisman_path = /obj/item/paper/newtalisman/communicate
+	talisman_path = /obj/item/paper/talisman/communicate
 	circle_words = list(CULT_WORD_SELF, CULT_WORD_OTHER, CULT_WORD_TECHNOLOGY)
 	invocation = "O bidai nabora se'sma!"
 
-/obj/effect/newrune/communicate/invoke(list/invokers)
+/obj/effect/rune/communicate/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
 	var/input = input(L, "Please choose a message to tell to the other acolytes.", "Voice of Blood", "") as null|text
 	if (!input || !CanInteract(L, physical_state))

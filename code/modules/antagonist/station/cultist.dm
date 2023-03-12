@@ -79,7 +79,7 @@ var/global/datum/antagonist/cultist/cult
 	if(!..())
 		return 0
 
-	var/obj/item/paper/newtalisman/supply/T = new(get_turf(player))
+	var/obj/item/paper/talisman/supply/T = new(get_turf(player))
 	var/list/slots = list (
 		"backpack" = slot_in_backpack,
 		"left pocket" = slot_l_store,

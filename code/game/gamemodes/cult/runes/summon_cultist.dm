@@ -1,4 +1,4 @@
-/obj/effect/newrune/summon_cultist
+/obj/effect/rune/summon_cultist
 	rune_name = "Summon Cultist"
 	rune_desc = "Reaches out through space and drags a fellow cultist to the location of the rune. They must not be restrained in any way. The rune requires three invokers, and causes heavy strain on all involved."
 	required_invokers = 3
@@ -7,7 +7,7 @@
 	var/timeout
 	var/mob/living/current_invoker
 
-/obj/effect/newrune/summon_cultist/can_invoke(mob/living/invoker)
+/obj/effect/rune/summon_cultist/can_invoke(mob/living/invoker)
 	if (timeout > world.time && invoker != current_invoker)
 		to_chat(invoker, SPAN_WARNING("Allow the current invoker a moment to choose before overriding their will."))
 		return
@@ -15,7 +15,7 @@
 		to_chat(invoker, SPAN_DANGER("You have taken too long to choose a follower to free. [invoker] has overridden your will in the choice."))
 	return TRUE
 
-/obj/effect/newrune/summon_cultist/invoke(list/invokers)
+/obj/effect/rune/summon_cultist/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
 	var/list/candidates = list()
 	for (var/mob/living/C in player_list - L)
@@ -55,7 +55,7 @@
 	)
 	qdel(src)
 
-/obj/effect/newrune/summon_cultist/proc/can_summon(mob/living/L)
+/obj/effect/rune/summon_cultist/proc/can_summon(mob/living/L)
 	if (!L)
 		return
 	else if (L.restrained())

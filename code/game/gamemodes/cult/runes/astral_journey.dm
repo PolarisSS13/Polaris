@@ -1,4 +1,4 @@
-/obj/effect/newrune/astral_journey
+/obj/effect/rune/astral_journey
 	rune_name = "Astral Journey"
 	rune_desc = "Gently rips your life from your body, allowing you to observe your surroundings as a ghost. Your body wll continuously take damage while you remain in this state, so ensure your journey does not remain overlong or you may never return from it."
 	rune_shorthand = "Explore your surroundings in ghost form while your body remains atop the rune."
@@ -7,11 +7,11 @@
 	var/mob/living/traveler
 	var/mob/observer/dead/ghost
 
-/obj/effect/newrune/astral_journey/Destroy()
+/obj/effect/rune/astral_journey/Destroy()
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
-/obj/effect/newrune/astral_journey/can_invoke(mob/living/invoker)
+/obj/effect/rune/astral_journey/can_invoke(mob/living/invoker)
 	if (traveler)
 		to_chat(invoker, SPAN_WARNING("\The [traveler] is already using this rune."))
 		return
@@ -20,7 +20,7 @@
 		return
 	return TRUE
 
-/obj/effect/newrune/astral_journey/invoke(list/invokers)
+/obj/effect/rune/astral_journey/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
 	var/datum/gender/TU = gender_datums[L.get_visible_gender()]
 	L.visible_message(
@@ -30,7 +30,7 @@
 	)
 	set_traveler(L)
 
-/obj/effect/newrune/astral_journey/proc/set_traveler(mob/living/L, return_to_body)
+/obj/effect/rune/astral_journey/proc/set_traveler(mob/living/L, return_to_body)
 	if (!L)
 		if (traveler)
 			traveler.ajourn = FALSE
@@ -55,7 +55,7 @@
 		announce_ghost_joinleave(ghost, TRUE, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place!")
 		START_PROCESSING(SSprocessing, src)
 
-/obj/effect/newrune/astral_journey/process()
+/obj/effect/rune/astral_journey/process()
 	if (!traveler || traveler.stat == DEAD)
 		if (ghost)
 			to_chat(ghost, SPAN_DANGER(FONT_LARGE("Your body has [!traveler ? "been destroyed. You are doomed to wander here forever" : "died. You are doomed to wander here forever, unless it is returned to life."]")))

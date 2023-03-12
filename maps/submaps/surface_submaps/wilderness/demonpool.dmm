@@ -146,7 +146,7 @@
 /area/template_noop)
 "jG" = (
 /obj/effect/spawner/gibs/human,
-/obj/effect/newrune/mapgen,
+/obj/effect/rune/mapgen,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "jK" = (
@@ -557,7 +557,7 @@
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Qv" = (
-/obj/effect/newrune/mapgen,
+/obj/effect/rune/mapgen,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Qz" = (

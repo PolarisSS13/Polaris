@@ -40,8 +40,8 @@
 	var/list/data = list()
 
 	var/list/rune_data = list()
-	for (var/V in subtypesof(/obj/effect/newrune))
-		var/obj/effect/newrune/NR = V
+	for (var/V in subtypesof(/obj/effect/rune))
+		var/obj/effect/rune/NR = V
 		if (!initial(NR.can_write))
 			continue
 		rune_data += list(list(
@@ -62,8 +62,8 @@
 		if ("turnPage")
 			playsound(src, "pageturn", 25, TRUE)
 		if ("writeRune")
-			var/obj/effect/newrune/R = text2path(params["runePath"])
-			if (!ispath(R, /obj/effect/newrune))
+			var/obj/effect/rune/R = text2path(params["runePath"])
+			if (!ispath(R, /obj/effect/rune))
 				return
 			scribe_rune(usr, R)
 			return
@@ -89,7 +89,7 @@
 	. = ..()
 
 /obj/item/arcane_tome/proc/scribe_rune(mob/living/user, obj/effect/rune_type)
-	if (locate(/obj/effect/newrune) in get_turf(user))
+	if (locate(/obj/effect/rune) in get_turf(user))
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
 	var/datum/gender/G = gender_datums[user.get_visible_gender()]
@@ -101,7 +101,7 @@
 	user.apply_damage(1, BRUTE)
 	if (!do_after(user, max(0, scribe_speed)))
 		return
-	if (locate(/obj/effect/newrune) in get_turf(user))
+	if (locate(/obj/effect/rune) in get_turf(user))
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
 	user.visible_message(
@@ -109,7 +109,7 @@
 		SPAN_DANGER("You finish drawing the arcane markings of the Geometer."),
 		range = 3
 	)
-	var/obj/effect/newrune/NR = new rune_type (get_turf(user))
+	var/obj/effect/rune/NR = new rune_type (get_turf(user))
 	NR.after_scribe(user)
 
 /obj/item/arcane_tome/admin
