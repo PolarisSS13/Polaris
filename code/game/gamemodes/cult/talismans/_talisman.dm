@@ -10,7 +10,9 @@
 	/// The words spoken by a cultist activating this talisman.
 	var/invocation = "Look at this photograph!"
 	/// If true, cultists invoking this talisman will whisper, instead of speaking normally.
-	var/whispered
+	var/whispered = TRUE
+	/// If TRUE, the talisman will be deleted after invocation.
+	var/delete_self = TRUE
 
 /obj/item/paper/newtalisman/get_examine_desc()
 	if ((isobserver(usr) || iscultist(usr)) && talisman_name && talisman_desc)
@@ -23,15 +25,14 @@
 		return
 	return ..()
 
-/obj/item/paper/newtalisman/attack(mob/living/carbon/T, mob/living/user)
-	if (iscultist(user) && user.a_intent == I_HURT)
-		if (invocation)
-			!whispered ? user.say(invocation) : user.whisper(invocation)
-		add_attack_logs(user, T, "[lowertext(talisman_name)] talisman")
-		invoke(user, T)
-		qdel(src)
+/obj/item/paper/newtalisman/attack_self(mob/living/user)
+	if (iscultist(user))
+		invoke(user)
+		!whispered ? user.say(invocation) : user.whisper(invocation)
+		if (delete_self)
+			qdel(src)
 		return
 	return ..()
 
-/obj/item/paper/newtalisman/proc/invoke(mob/living/user, mob/living/target)
+/obj/item/paper/newtalisman/proc/invoke(mob/living/user)
 	return

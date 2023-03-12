@@ -2,6 +2,7 @@
 	rune_name = "Summon Tome"
 	rune_desc = "Manifests another copy of the Geometer's scripture."
 	rune_shorthand = "Creates a new arcane tome."
+	talisman_path = /obj/item/paper/newtalisman/summon_tome
 	circle_words = list(CULT_WORD_SEE, CULT_WORD_BLOOD, CULT_WORD_HELL)
 	invocation = "N'ath reth sh'yro eth d'raggathnor!"
 
