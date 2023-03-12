@@ -112,7 +112,8 @@
 		else if (can_contribute(L))
 			invokers.Add(L)
 	if (invokers.len < req_invokers)
-		fizzle()
+		for (var/mob/living/invoker in invokers)
+			to_chat(invoker, SPAN_WARNING("You need more invokers to use this rune. (Have [invokers.len], need [req_invokers])"))
 		return
 	if (invocation)
 		for (var/mob/living/L in invokers)

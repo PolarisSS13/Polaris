@@ -36,3 +36,15 @@
 
 /obj/item/paper/newtalisman/proc/invoke(mob/living/user)
 	return
+
+/*
+Here's a template you can copy-paste to quickly get started on making a new talisman:
+
+/obj/item/paper/newtalisman/SUBTYPE
+	talisman_name = "TYPE"
+	talisman_desc = "DESC"
+	invocation = "Bruh"
+
+/obj/item/paper/newtalisman/SUBTYPE/invoke(mob/living/user)
+	return
+*/

@@ -42,6 +42,8 @@
 		var/obj/effect/newrune/NR = V
 		rune_data += list(list(
 			"name" = initial(NR.rune_name),
+			"invokers" = initial(NR.required_invokers),
+			"talisman" = initial(NR.talisman_path),
 			"shorthand" = initial(NR.rune_shorthand) ? initial(NR.rune_shorthand) : initial(NR.rune_desc),
 			"typepath" = NR
 		))

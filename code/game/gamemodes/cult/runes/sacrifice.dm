@@ -35,11 +35,13 @@
 
 /obj/effect/newrune/sacrifice/get_required_invokers(mob/living/invoker)
 	var/mob/living/L = get_sacrifical_lamb()
-	if (L?.mind && cult?.sacrifice_target == L.mind)
-		to_chat(invoker, SPAN_WARNING("This sacrifice's earthly bonds are too strong. You need more invokers to succeed in in presenting them to the Geometer."))
+	if (!L)
+		return required_invokers
+	if (L.mind && cult.sacrifice_target == L.mind)
+		to_chat(invoker, SPAN_NOTICE("This sacrifice's earthly bonds necessitates multiple invokers."))
 		return 3
-	else if (L?.stat != DEAD)
-		to_chat(invoker, SPAN_WARNING("This sacrifice yet lives. You need more invokers to succeed in in presenting them to the Geometer."))
+	else if (L.stat != DEAD)
+		to_chat(invoker, SPAN_NOTICE("This sacrifice yet lives, necessitating multiple invokers."))
 		return 3
 
 /obj/effect/newrune/sacrifice/can_invoke(mob/living/invoker)
