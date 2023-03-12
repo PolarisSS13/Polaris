@@ -1,5 +1,7 @@
 /obj/effect/newrune/astral_journey
 	rune_name = "Astral Journey"
+	rune_desc = "Gently rips your life from your body, allowing you to observe your surroundings as a ghost. Your body wll continuously take damage while you remain in this state, so ensure your journey does not remain overlong or you may never return from it."
+	rune_shorthand = "Explore your surroundings in ghost form while your body remains atop the rune."
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_TRAVEL, CULT_WORD_SELF)
 	invocation = "Fwe'sh mah erl nyag r'ya!"
 	var/mob/living/traveler
@@ -29,7 +31,7 @@
 	if (!L)
 		if (traveler)
 			traveler.ajourn = FALSE
-			if (return_to_body)
+			if (return_to_body && ghost)
 				if (ghost.reenter_corpse())
 					to_chat(ghost, SPAN_DANGER("You are painfully jerked back to reality as the binding sigils force you back into your body."))
 				else

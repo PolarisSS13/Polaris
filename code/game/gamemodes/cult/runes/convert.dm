@@ -41,17 +41,20 @@
 			SPAN_DANGER(FONT_LARGE("...and you're able to force it out of your mind. You need to get away from here as fast as you can!"))
 		)
 		return
-	impudence = 0
+	impudence = 1
 	START_PROCESSING(SSprocessing, src)
 	process()
 
 /obj/effect/newrune/convert/process()
-	if (!converting || !can_convert(converting) || !cult.can_become_antag(converting) || get_turf(converting) != get_turf(src))
+	if (!converting || !converting.mind || !converting.client || !can_convert(converting) || !cult.can_become_antag(converting.mind) || get_turf(converting) != get_turf(src))
 		if (!converting)
 			to_chat(converting, SPAN_DANGER("And then, just like that, it was gone. The blackness recedes, and you are yourself again."))
 		converting = null
 		waiting_for_input = FALSE
 		STOP_PROCESSING(SSprocessing, src)
+		return
+	if (impudence_timer)
+		impudence_timer--
 		return
 	if (!waiting_for_input)
 		spawn()
@@ -60,12 +63,14 @@
 			waiting_for_input = FALSE
 			if (choice == "Submit!")
 				cult.add_antagonist(converting.mind)
-				converting = null
 				converting.hallucination = 0
 				to_chat(converting, SPAN_OCCULT("Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root."))
 				to_chat(converting, SPAN_OCCULT("Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back."))
+				converting = null
 				STOP_PROCESSING(SSprocessing, src)
 	if (impudence)
+		var/prev_color = converting.client.color
+		animate(converting.client, converting.client.color = COLOR_RED, converting.client.color = prev_color, time = 8 SECONDS)
 		converting.take_overall_damage(0, min(5 * impudence, 20))
 		switch (converting.getFireLoss())
 			if (0 to 25)

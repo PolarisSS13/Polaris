@@ -1,7 +1,7 @@
 /obj/effect/newrune/armor
 	rune_name = "Armor"
 	rune_desc = "When this rune is invoked, either from a rune or a talisman, it will equip its invoker with the armor of the followers of Nar-Sie. To use this rune to its fullest extent, make sure you are not wearing any form of headgear, armor, gloves or shoes, and make sure you are not holding anything in your hands."
-	rune_shorthand = "Creates and equips a set of protective robes."
+	rune_shorthand = "Creates and equips a set of protective robes as well as a sword."
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_DESTROY, CULT_WORD_OTHER)
 	invocation = "N'ath reth sh'yro eth d'raggathnor!"
 

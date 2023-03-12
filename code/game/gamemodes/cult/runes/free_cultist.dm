@@ -1,5 +1,6 @@
 /obj/effect/newrune/free_cultist
 	rune_name = "Free Cultist"
+	rune_desc = "Reaches out through space and breaks a follower free of their restraints, no matter where they are. This required at least three invokers and causes heavy strain on all involved."
 	required_invokers = 3
 	circle_words = list(CULT_WORD_TRAVEL, CULT_WORD_TECHNOLOGY, CULT_WORD_OTHER)
 	invocation = "Khari'd! Gual'te nikka!"
@@ -18,7 +19,7 @@
 	var/mob/living/L = invokers[1]
 	var/list/candidates = list()
 	for (var/mob/living/C in player_list - L)
-		if (iscultist(C) && can_free(L) && !invokers.Find(C))
+		if (iscultist(C) && can_free(C) && !invokers.Find(C))
 			candidates.Add(C)
 	if (!candidates.len)
 		to_chat(L, SPAN_WARNING("None of your peers need to be freed in this way."))
@@ -28,10 +29,10 @@
 	var/mob/living/carbon/human/choice = input(L, "Choose a follower to free.", rune_name) as null|anything in candidates
 	if (!can_free(choice))
 		return fizzle()
+	var/datum/gender/G = gender_datums[choice.get_gender()]
 	for (var/mob/living/C in invokers)
-		var/datum/gender/G = gender_datums[C.get_gender()]
-		to_chat(C, SPAN_DANGER("You reach out through space, freeing [choice] of [G.his] bonds."))
-		C.take_overall_damage(round(15 / invokers), 0)
+		to_chat(C, SPAN_DANGER("You reach out together through space, freeing [choice] of [G.his] bonds."))
+		C.take_overall_damage(round(15 / invokers.len), 0)
 	if (choice.handcuffed)
 		choice.drop_from_inventory(choice.handcuffed)
 	if (choice.legcuffed)
