@@ -30,13 +30,15 @@
 	blood_image.override = TRUE
 	for (var/mob/living/silicon/ai/AI in player_list)
 		AI.client?.images += blood_image
+	LAZYDISTINCTADD(cult.all_runes, src)
 	update_icon()
 
 /obj/effect/newrune/Destroy()
 	for (var/mob/living/silicon/ai/AI in player_list)
 		AI.client?.images -= blood_image
 	QDEL_NULL(blood_image)
-	..()
+	LAZYREMOVE(cult.all_runes, src)
+	return ..()
 
 /obj/effect/newrune/get_examine_desc()
 	if ((isobserver(usr) || iscultist(usr)) && rune_name && rune_desc)
@@ -124,3 +126,7 @@
 /// To reference the person who triggered the activation of the rune, use `invokers[1]`.
 /obj/effect/newrune/proc/invoke(list/invokers)
 	fizzle()
+
+/// Does something after creating this rune. By default, nothing extra happens.
+/obj/effect/newrune/proc/after_scribe(mob/living/writer)
+	return

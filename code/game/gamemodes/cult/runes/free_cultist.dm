@@ -27,7 +27,7 @@
 	timeout = world.time + 5 SECONDS
 	current_invoker = L
 	var/mob/living/carbon/human/choice = input(L, "Choose a follower to free.", rune_name) as null|anything in candidates
-	if (!can_free(choice))
+	if (!can_free(choice) || L != current_invoker)
 		return fizzle()
 	var/datum/gender/G = gender_datums[choice.get_gender()]
 	for (var/mob/living/C in invokers)

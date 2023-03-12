@@ -12,14 +12,17 @@
 	STOP_PROCESSING(SSfastprocess, src)
 	return ..()
 
+/obj/effect/newrune/see_invisible/can_invoke(mob/living/invoker)
+	if (oracle)
+		to_chat(invoker, SPAN_WARNING("[invoker == oracle ? "You are" : "Another is"] already using this rune."))
+		return
+	else if (get_turf(invoker) != get_turf(src))
+		to_chat(invoker, SPAN_WARNING("You must stand on top of this rune to use it."))
+		return
+	return TRUE
+
 /obj/effect/newrune/see_invisible/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
-	if (oracle)
-		to_chat(L, SPAN_WARNING("[L == oracle ? "You are" : "Another is"] already using this rune."))
-		return fizzle()
-	else if (get_turf(L) != get_turf(src))
-		to_chat(L, SPAN_WARNING("You must stand on top of this rune to use it."))
-		return fizzle()
 	to_chat(L, SPAN_WARNING("The world beyond opens to your eyes."))
 	oracle = L
 	oracle.seer = TRUE

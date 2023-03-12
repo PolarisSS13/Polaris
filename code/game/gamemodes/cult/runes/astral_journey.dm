@@ -11,14 +11,17 @@
 	STOP_PROCESSING(SSprocessing, src)
 	return ..()
 
+/obj/effect/newrune/astral_journey/can_invoke(mob/living/invoker)
+	if (traveler)
+		to_chat(invoker, SPAN_WARNING("\The [traveler] is already using this rune."))
+		return
+	if (get_turf(invoker) != get_turf(src))
+		to_chat(invoker, SPAN_WARNING("You must stand on top of this rune to use it."))
+		return
+	return TRUE
+
 /obj/effect/newrune/astral_journey/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
-	if (traveler)
-		to_chat(L, SPAN_WARNING("\The [traveler] is already using this rune."))
-		return fizzle()
-	if (get_turf(L) != get_turf(src))
-		to_chat(L, SPAN_WARNING("You must stand on top of this rune to use it."))
-		return fizzle()
 	var/datum/gender/TU = gender_datums[L.get_visible_gender()]
 	L.visible_message(
 		SPAN_WARNING("\The [L]'s eyes glow blue as [TU.he] freeze[TU.s] in place, absolutely motionless."),

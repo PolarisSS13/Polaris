@@ -42,7 +42,7 @@
 		var/obj/effect/newrune/NR = V
 		rune_data += list(list(
 			"name" = initial(NR.rune_name),
-			"shorthand" = initial(NR.rune_shorthand) ? initial(NR.shorthand) : initial(NR.rune_desc),
+			"shorthand" = initial(NR.rune_shorthand) ? initial(NR.rune_shorthand) : initial(NR.rune_desc),
 			"typepath" = NR
 		))
 	data["runes"] = rune_data
@@ -97,4 +97,5 @@
 		SPAN_DANGER("You finish drawing the arcane markings of the Geometer."),
 		range = 3
 	)
-	new rune_type (get_turf(src))
+	var/obj/effect/newrune/NR = new rune_type (get_turf(src))
+	NR.after_scribe(user)

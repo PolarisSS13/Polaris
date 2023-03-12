@@ -37,6 +37,7 @@ var/global/datum/antagonist/cultist/cult
 	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
 	var/list/sacrificed = list()
 	var/list/harvested = list()
+	var/list/all_runes
 
 	/**
 	 * So here's how the cult vocabulary works:

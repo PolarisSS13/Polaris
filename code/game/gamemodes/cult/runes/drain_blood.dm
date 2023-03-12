@@ -1,5 +1,7 @@
 /obj/effect/newrune/drain_blood
 	rune_name = "Drain Blood"
+	rune_desc = "Drains the blood of humans placed on top of all Drain Blood runes (no matter their location), healing the invoker based on the total amount drained."
+	rune_shorthand = "Drain the blood of humans on top of all Drain Blood runes in the world in order to heal the invoker."
 	circle_words = list(CULT_WORD_TRAVEL, CULT_WORD_BLOOD, CULT_WORD_SELF)
 	invocation = "Yu'gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!"
 	var/remaining_blood = 0
@@ -15,7 +17,7 @@
 		to_chat(L, SPAN_WARNING("Another person is already drawing blood from this rune."))
 		return
 	var/total_blood = 0
-	for (var/obj/effect/newrune/drain_blood/DB in world) // todo: replace this with something not horrendous
+	for (var/obj/effect/newrune/drain_blood/DB in cult.all_runes)
 		for (var/mob/living/carbon/human/H in get_turf(DB))
 			if (H.stat == DEAD)
 				continue
