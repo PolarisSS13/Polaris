@@ -50,6 +50,6 @@
 	visible_message(SPAN_DANGER("\The [src] emit\s a burst of red light!"))
 	T.visible_message(SPAN_DANGER("\The [src] emit\s a burst of red light!"))
 
-/obj/effect/rune/teleport/apply_to_talisman(obj/item/paper/newtalisman/T)
+/obj/effect/rune/teleport/apply_to_talisman(obj/item/paper/talisman/T)
 	var/obj/item/paper/talisman/teleport/TP = T
 	TP.key_word = key_word

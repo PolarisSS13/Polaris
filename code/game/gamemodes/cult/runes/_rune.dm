@@ -137,7 +137,7 @@
 	return
 
 /// Applies unique effects to a talisman created by this rune before the rune is destroyed.
-/obj/effect/rune/proc/apply_to_talisman(obj/item/paper/newtalisman/T)
+/obj/effect/rune/proc/apply_to_talisman(obj/item/paper/talisman/T)
 	return
 
 /// "Random" rune with no function, used for generating spooky runes in mapgen.

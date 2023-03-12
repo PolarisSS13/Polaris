@@ -48,6 +48,9 @@ var/global/datum/antagonist/cultist/cult
 	var/list/english_words = list(CULT_WORD_BLOOD, CULT_WORD_DESTROY, CULT_WORD_HELL, CULT_WORD_HIDE, CULT_WORD_JOIN, CULT_WORD_OTHER, CULT_WORD_SELF, CULT_WORD_SEE, CULT_WORD_TECHNOLOGY, CULT_WORD_TRAVEL)
 	var/list/cult_words = list(CULT_WORD_BALAQ, CULT_WORD_CERTUM, CULT_WORD_EGO, CULT_WORD_GEERI, CULT_WORD_IRE, CULT_WORD_KARAZET, CULT_WORD_JATKAA, CULT_WORD_MGAR, CULT_WORD_NAHLIZET, CULT_WORD_VERI)
 
+	/// A list of all runes in the game world.
+	var/list/all_runes
+
 /datum/antagonist/cultist/New()
 	..()
 	cult = src
