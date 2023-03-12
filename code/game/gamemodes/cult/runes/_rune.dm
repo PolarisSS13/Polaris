@@ -1,3 +1,4 @@
+/// Runes are effectively "spell circles", and are the main source of abilities for cultists.
 /obj/effect/rune
 	name = "rune"
 	desc = "A strange collection of symbols drawn in what looks to be blood."
@@ -25,7 +26,7 @@
 	var/rune_shorthand
 	/// As `rune_name`, but for a description of what the rune actually does.
 	var/rune_desc
-	/// If FALSE, this rune won't appear on the tome's rune list.
+	/// If false, this rune won't appear on the tome's rune list.
 	var/can_write = TRUE
 
 /obj/effect/rune/Initialize()
@@ -59,8 +60,6 @@
 		to_chat(user, SPAN_NOTICE("The scratchings lose coherence and dissolve into puddles of blood that quickly sizzle and disappear."))
 		qdel(src)
 		return
-	else if (istype(I, /obj/item/soap) || istype(I, /obj/item/mop))
-		to_chat(user, SPAN_WARNING("No matter how hard you try, the scratchings just won't seem to come out."))
 	return
 
 /obj/effect/rune/attack_hand(mob/living/user)
@@ -152,7 +151,7 @@
 	return INITIALIZE_HINT_LATELOAD
 
 /obj/effect/rune/mapgen/LateInitialize()
-	var/list/words = cult.english_words
+	var/list/words = cult.english_words.Copy()
 	for (var/i in 1 to 3)
 		var/word = pick(words)
 		circle_words.Add(word)

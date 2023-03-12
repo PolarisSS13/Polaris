@@ -1,3 +1,4 @@
+/// Effectively portable runes, created with the Imbue Talisman rune. Talismans are usually similar to the runes they're created from.
 /obj/item/paper/talisman
 	icon_state = "paper_talisman"
 	info = "<center><img src='talisman.png'></center><br/><br/>"

@@ -2,6 +2,7 @@
 	talisman_name = "Stun"
 	talisman_desc = "Forces the concentrated energy of a stun rune into a struck target, immediately knocking them to the ground. Humans will be prevented from speaking for a time."
 	invocation = "Dream sign 'Evil Sealing Talisman'!" // I think this is a touhou reference
+	whispered = FALSE
 
 /obj/item/paper/talisman/stun/attack_self(mob/living/user)
 	if (iscultist(user))
