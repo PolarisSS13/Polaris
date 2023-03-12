@@ -34,6 +34,7 @@
 	var/rigged = 0
 	var/spam_flag = 0
 	var/age = 0
+	var/can_write = TRUE
 	var/last_modified_ckey
 
 	var/was_maploaded = FALSE // This tracks if the paper was created on mapload.
@@ -575,6 +576,9 @@
 	else if(istype(P, /obj/item/pen))
 		if(icon_state == "scrap")
 			to_chat(usr, "<span class='warning'>\The [src] is too crumpled to write on.</span>")
+			return
+		if (!can_write)
+			to_chat(usr, SPAN_WARNING("Nothing you write on \the [src] seems to stick."))
 			return
 
 		var/obj/item/pen/robopen/RP = P

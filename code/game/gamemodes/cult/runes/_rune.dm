@@ -15,6 +15,8 @@
 	var/list/circle_words
 	/// AIs see runes as blood splatters. This variable tracks the image shown in the rune's place.
 	var/image/blood_image
+	/// The talisman that this rune will create when used by the Imbue Talisman rune.
+	var/obj/item/paper/newtalisman/talisman_path
 	/// How many cultists need to be adjacent to this rune and able to speak in order to activate it.
 	var/required_invokers = 1
 	/// The actual name of this rune (like "Sacrifice", "Convert", or so on), shown to cultists or ghosts that examine it.
@@ -129,4 +131,8 @@
 
 /// Does something after creating this rune. By default, nothing extra happens.
 /obj/effect/newrune/proc/after_scribe(mob/living/writer)
+	return
+
+/// Applies unique effects to a talisman created by this rune before the rune is destroyed.
+/obj/effect/newrune/proc/apply_to_talisman(obj/item/paper/newtalisman/T)
 	return
