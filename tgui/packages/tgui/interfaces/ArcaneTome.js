@@ -3,7 +3,7 @@ import { useBackend, useLocalState } from '../backend';
 import { Box, Button, Flex, Section, Tabs } from '../components';
 import { Window } from '../layouts';
 
-export const ArcaneTome = context => {
+export const ArcaneTome = (props, context) => {
   const { act, data } = useBackend(context);
   const [tabIndex, setTabIndex] = useLocalState(context, 'tabIndex', 0);
   const [compactMode, setCompactMode] = useLocalState(context, 'compactMode', 0);
@@ -12,7 +12,7 @@ export const ArcaneTome = context => {
     <Window
       width={500}
       height={600}
-      theme="syndicate"
+      theme="spooky"
       resizable scrollable>
       <Window.Content scrollable>
         <Tabs>
@@ -30,7 +30,7 @@ export const ArcaneTome = context => {
         <Section>
           {
             tabIndex === 0
-            && ("TBD")
+            && ("Nya")
             || tabIndex === 1
             && (
               <Flex
