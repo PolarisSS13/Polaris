@@ -12,7 +12,7 @@
 	if (iscultist(user) && user.a_intent == I_HURT)
 		if (invocation)
 			!whispered ? user.say(invocation) : user.whisper(invocation)
-		add_attack_logs(user, T, "[lowertext(talisman_name)] talisman")
+		add_attack_logs(user, T, "stun talisman")
 		stun(user, T)
 		qdel(src)
 		return

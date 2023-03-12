@@ -1,7 +1,8 @@
 /obj/effect/newrune/emp
 	rune_name = "Disable Technology"
-	rune_desc = "Emits a strong electromagnetic pulse in a short radius, disabling or harming nearby electronics."
+	rune_desc = "Emits a strong electromagnetic pulse in a medium-sized radius, disabling or harming nearby electronics."
 	rune_shorthand = "Emits a strong, short-ranged EMP."
+	talisman_path = /obj/item/paper/newtalisman/emp
 	circle_words = list(CULT_WORD_DESTROY, CULT_WORD_SEE, CULT_WORD_TECHNOLOGY)
 	invocation = "Ta'gh fara'qha fel d'amar det!"
 

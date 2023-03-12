@@ -16,5 +16,5 @@
 			L.stuttering = min(1, L.stuttering)
 			L.Weaken(1)
 			L.Stun(1)
-		add_attack_logs(invokers[1], L, "stun rune")
+	add_attack_logs(invokers[1], viewers(src), "stun rune")
 	qdel(src)
