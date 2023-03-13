@@ -32,7 +32,7 @@
 	var/obj/effect/rune/chosen = pick(valid_runes)
 	var/obj/item/paper/talisman/T = new chosen.talisman_path (get_turf(src))
 	chosen.apply_to_talisman(T)
-	visible_message(SPAN_WARNING("The words from the runes slither onto \the [P], forming wet red symbols on its surface."))
+	visible_message(SPAN_NOTICE("The words from the runes slither onto \the [P], forming wet red symbols on its surface."))
 	qdel(P)
 	qdel(chosen)
 	qdel(src)

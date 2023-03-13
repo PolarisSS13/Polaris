@@ -56,7 +56,7 @@
 			if (R.invisibility == SEE_INVISIBLE_CULT)
 				R.invisibility = 0
 				R.alpha = 255
-			R.visible_message(SPAN_WARNING("\A [src] appears to the [dir2text(get_dir(R, target))]!"))
+				R.visible_message(SPAN_WARNING("\A [R] appears to the [dir2text(get_dir(R, target))]!"))
 		user.setClickCooldown(2 SECONDS)
 
 /obj/item/energy_net

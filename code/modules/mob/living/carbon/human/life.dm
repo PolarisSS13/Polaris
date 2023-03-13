@@ -1446,6 +1446,9 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
+		if (seer)
+			see_invisible = SEE_INVISIBLE_OBSERVER
+
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.vision_flags))
 				sight |= M.vision_flags

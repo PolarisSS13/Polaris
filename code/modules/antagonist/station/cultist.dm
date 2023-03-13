@@ -125,3 +125,8 @@ var/global/datum/antagonist/cultist/cult
 		if(L && (L.imp_in == player.current))
 			return 0
 	return 1
+
+/datum/antagonist/cultist/proc/cult_speak(mob/speaker, message)
+	for (var/mob/M in player_list)
+		if (iscultist(M) || isobserver(M))
+			to_chat(M, SPAN_OCCULT("[speaker.GetVoice()][speaker.GetAltName()] intones, \"[message]\""))

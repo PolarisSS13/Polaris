@@ -16,7 +16,7 @@
 
 /obj/effect/rune/reveal_runes
 	rune_name = "Reveal Runes"
-	rune_desc = "Reverses the effects of <i>Hide Runes</i>, causing all nearby invisible runes to become visible once more."
+	rune_desc = "Reverses the effects of Hide Runes, causing all nearby invisible runes to become visible once more."
 	talisman_path = /obj/item/paper/talisman/reveal_runes
 	circle_words = list(CULT_WORD_BLOOD, CULT_WORD_SEE, CULT_WORD_HIDE)
 	invocation = "Nikt'o barada kla'atu!"

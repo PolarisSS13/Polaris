@@ -1,7 +1,6 @@
 /obj/effect/rune/drain_blood
 	rune_name = "Drain Blood"
-	rune_desc = "Drains the blood of humans placed on top of all Drain Blood runes (no matter their location), healing the invoker based on the total amount drained."
-	rune_shorthand = "Drain the blood of humans on top of all Drain Blood runes in the world in order to heal the invoker."
+	rune_desc = "Drains the blood of humans on top of all existing runes of this type. The invoker will be healed and regenerate their own blood in the process."
 	circle_words = list(CULT_WORD_TRAVEL, CULT_WORD_BLOOD, CULT_WORD_SELF)
 	invocation = "Yu'gular faras desdae. Havas mithum javara. Umathar uf'kal thenar!"
 	var/remaining_blood = 0
@@ -21,16 +20,16 @@
 		for (var/mob/living/carbon/human/H in get_turf(DB))
 			if (H.stat == DEAD)
 				continue
-			to_chat(H, SPAN_DANGER("You feel a heavy sense of weakness."))
-			var/drain = rand(1, 25)
-			H.take_overall_damage(drain)
+			to_chat(H, SPAN_DANGER("Warm crimson light pulses beneath you. You feel extremely [pick("dizzy", "woozy", "faint", "disoriented", "unsteady")]."))
+			var/drain = rand(10, 25)
+			H.remove_blood(drain)
 			total_blood += drain
 	if (!total_blood)
 		return fizzle()
 	var/datum/gender/G = gender_datums[L.get_visible_gender()]
 	L.visible_message(
 		SPAN_WARNING("\The [src] glows a sullen red as \the [L] presses [G.himself] against it. Blood seeps through the scrawlings."),
-		SPAN_DANGER("Blood flows from \the [src] into your frail moral body. You feel... empowered.")
+		SPAN_NOTICE("Blood flows from \the [src] into your frail moral body. You feel... empowered.")
 	)
 	L.heal_organ_damage(total_blood % 5)
 	total_blood -= total_blood % 5
@@ -46,6 +45,7 @@
 		return
 	remaining_blood--
 	cultist.heal_organ_damage(5, 0)
+	cultist.add_chemical_effect(CE_BLOODRESTORE, 2)
 	for (var/obj/item/organ/I in cultist.internal_organs)
 		if (I.damage > 0)
 			I.damage = max(I.damage - 5, 0)

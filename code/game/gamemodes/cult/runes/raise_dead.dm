@@ -1,7 +1,7 @@
 /obj/effect/rune/raise_dead
 	rune_name = "Raise Dead"
 	rune_desc = "This rune allows for the resurrection of any dead person. You will need a dead human body and a living human sacrifice. Make 2 raise dead runes. Put a living, awake human on top of one, and a dead body on the other one. When you invoke the rune, the life force of the living human will be transferred into the dead body, allowing a ghost standing on top of the dead body to enter it, instantly and fully healing it. Use other runes to ensure there is a ghost ready to be resurrected."
-	rune_shorthand = "Brings a dead body to life using the sacrifice of a living human on another copy of the rune."
+	rune_shorthand = "Brings a dead body to life using the sacrifice of a living human on another copy of the rune. If the dead body is not a cultist, they will become one."
 	circle_words = list(CULT_WORD_BLOOD, CULT_WORD_JOIN, CULT_WORD_SELF)
 	invocation = "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!"
 
@@ -43,7 +43,7 @@
 	var/mob/living/L = invokers[1]
 	var/mob/living/carbon/human/shears = targets[1]
 	var/mob/living/carbon/human/lamb = targets[2]
-	to_chat(L, SPAN_OCCULT("The ritual is begun. Both bodies must remain in place..."))
+	to_chat(L, SPAN_NOTICE("The ritual is begun. Both bodies must remain in place..."))
 	shears.visible_message(SPAN_WARNING("\The [shears] is yanked upwards by invisible strings, dangling in the air like a puppet."))
 	lamb.visible_message(
 		SPAN_WARNING("\The [lamb] is yanked upwards by invisible strings, dangling in the air like a puppet."),
@@ -55,7 +55,7 @@
 	if (do_after(shears, 5 SECONDS, lamb, FALSE, incapacitation_flags = INCAPACITATION_NONE))
 		resurrect(shears, lamb)
 		return
-	to_chat(L, SPAN_OCCULT("The ritual's participants must remain stationary!"))
+	to_chat(L, SPAN_NOTICE("The ritual's participants must remain stationary!"))
 	if (shears)
 		shears.visible_message(SPAN_WARNING("\The [shears] drops unceremoniously to the ground."))
 		playsound(shears, "bodyfall", 50, TRUE)
@@ -69,7 +69,7 @@
 /obj/effect/rune/raise_dead/proc/resurrect(mob/living/carbon/human/shears, mob/living/carbon/human/lamb, mob/living/invoker)
 	var/list/targets = get_targets()
 	if (targets[1] != shears || targets[2] != lamb)
-		to_chat(invoker, SPAN_DANGER("The ritual's subjects were moved before it could complete."))
+		to_chat(invoker, SPAN_WARNING("The ritual's subjects were moved before it could complete."))
 		return
 	if (!shears.client || !shears.mind)
 		shears.visible_message(SPAN_WARNING("\The [shears] drops unceremoniously to the ground."))
@@ -79,7 +79,7 @@
 		)
 		playsound(shears, "bodyfall", 50, TRUE)
 		playsound(lamb, "bodyfall", 50, TRUE)
-		to_chat(invoker, SPAN_DANGER("The deceased's spirit did not return to its body. It may if you try again, or it may not."))
+		to_chat(invoker, SPAN_WARNING("The deceased's spirit did not return to its body. It may if you try again, or it may not."))
 		return
 	var/datum/gender/GS = gender_datums[shears.get_visible_gender()]
 	lamb.visible_message(

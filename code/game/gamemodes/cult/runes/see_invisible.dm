@@ -23,10 +23,10 @@
 
 /obj/effect/rune/see_invisible/invoke(list/invokers)
 	var/mob/living/L = invokers[1]
-	to_chat(L, SPAN_WARNING("The world beyond opens to your eyes."))
+	to_chat(L, SPAN_NOTICE("The world beyond opens to your eyes."))
 	oracle = L
 	oracle.seer = TRUE
-	oracle.see_invisible = INVISIBILITY_OBSERVER
+	oracle.see_invisible = SEE_INVISIBLE_OBSERVER
 	START_PROCESSING(SSfastprocess, src)
 
 /obj/effect/rune/see_invisible/process()

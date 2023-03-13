@@ -1,3 +1,5 @@
+/// Arcane tomes are the quintessential cultist "tool" and are used to draw runes, smack things with, and other such things.
+/// The interface they open (ArcaneTome.js) also contains a lot of in-game documentation about how the antagonist works.
 /obj/item/arcane_tome
 	name = "arcane tome"
 	desc = "An old, dusty tome with frayed edges and a sinister-looking cover."
@@ -93,20 +95,33 @@
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
 	var/datum/gender/G = gender_datums[user.get_visible_gender()]
+	var/blood_name = "blood"
+	var/synth = user.isSynthetic()
+	if (ishuman(user))
+		var/mob/living/carbon/human/H = user
+		blood_name = H.species?.get_blood_name()
+	user.apply_damage(1, BRUTE, pick(BP_L_HAND, BP_R_HAND), sharp = TRUE, edge = TRUE, used_weapon = "long, precise cut")
 	user.visible_message(
-		SPAN_WARNING("\The [user] slices open [G.his] skin and begins painting on symbols on the floor with [G.his] own blood!"),
-		SPAN_DANGER("You slice open your skin and begin drawing a rune on the floor whilst invoking the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."),
+		SPAN_WARNING("\The [user] [!synth ? "slices open [G.his] skin" : "tears open [G.his] circulation"] and begins painting on symbols on the floor with [G.his] own [blood_name]"),
+		SPAN_NOTICE("You [!synth ? "slice open your skin" : "tear open your circulation"] and begin drawing a rune on the floor whilst invoking the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."),
 		SPAN_WARNING("You hear droplets softly splattering on the ground."),
-		range = 3)
-	user.apply_damage(1, BRUTE)
+		range = 3
+	)
+	if (ishuman(user))
+		var/mob/living/carbon/human/H = user
+		for (var/i in 1 to 4)
+			spawn (max(0, scribe_speed - 1 SECOND) / i)
+				H.drip(1)
 	if (!do_after(user, max(0, scribe_speed)))
 		return
 	if (locate(/obj/effect/rune) in get_turf(user))
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
+	for (var/obj/effect/decal/cleanable/blood/B in get_turf(user))
+		qdel(B)
 	user.visible_message(
-		SPAN_WARNING("\The [user] paints arcane markings with [G.his] own blood!"),
-		SPAN_DANGER("You finish drawing the arcane markings of the Geometer."),
+		SPAN_WARNING("\The [user] paints arcane markings with [G.his] own [blood_name]!"),
+		SPAN_NOTICE("You finish drawing the arcane markings of the Geometer."),
 		range = 3
 	)
 	var/obj/effect/rune/NR = new rune_type (get_turf(user))

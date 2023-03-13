@@ -41,6 +41,8 @@
 			SPAN_DANGER(FONT_LARGE("...and you're able to force it out of your mind. You need to get away from here as fast as you can!"))
 		)
 		return
+	else
+		to_chat(user, SPAN_NOTICE("The ritual is begun. You must keep [converting] atop the rune until [G.him] succumb[G.s] to the Geometer's influence... or die from its revelation."))
 	impudence = 1
 	START_PROCESSING(SSprocessing, src)
 	process()

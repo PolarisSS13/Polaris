@@ -12,7 +12,5 @@
 		return
 	input = sanitize(input)
 	log_and_message_admins("used a communicate talisman to say '[input]'", usr)
-	for (var/mob/M in player_list)
-		if (iscultist(M) || isobserver(M))
-			to_chat(M, SPAN_OCCULT(input))
+	cult.cult_speak(user, input)
 	qdel(src)
