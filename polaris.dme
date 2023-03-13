@@ -544,6 +544,7 @@
 #include "code\game\gamemodes\cult\runes\convert.dm"
 #include "code\game\gamemodes\cult\runes\deafen.dm"
 #include "code\game\gamemodes\cult\runes\drain_blood.dm"
+#include "code\game\gamemodes\cult\runes\emp.dm"
 #include "code\game\gamemodes\cult\runes\free_cultist.dm"
 #include "code\game\gamemodes\cult\runes\hide_and_reveal.dm"
 #include "code\game\gamemodes\cult\runes\imbue_talisman.dm"
