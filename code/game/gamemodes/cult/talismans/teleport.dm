@@ -8,7 +8,7 @@
 /obj/item/paper/talisman/teleport/examine(mob/user)
 	. = ..()
 	if (iscultist(user) || isobserver(user))
-		. += SPAN_OCCULT("Its key word is \"[key_word]\".")
+		. += SPAN_DANGER("This talisman's key word is \"[key_word]\".")
 
 /obj/item/paper/talisman/teleport/invoke(mob/living/user)
 	var/list/runes

@@ -62,7 +62,7 @@
 	if (sacrificing.mind && cult.sacrifice_target == sacrificing.mind)
 		for (var/mob/living/C in invokers)
 			to_chat(C, SPAN_OCCULT("The Geometer of Blood is sated. Your objective is now complete."))
-		cult.sacrificed += sacrificing
+		LAZYADD(cult.sacrificed, sacrificing)
 	else
 		for (var/mob/living/C in invokers)
 			to_chat(C, SPAN_OCCULT("The Geometer of Blood feasts on your sacrifice. You have pleased It."))

@@ -9,7 +9,7 @@
 /obj/effect/rune/teleport/examine(mob/user, infix, suffix)
 	. = ..()
 	if (iscultist(user) || isobserver(user))
-		. += SPAN_DANGER("This rune has a key word of \"[key_word]\".")
+		. += SPAN_DANGER("This rune's key word is \"[key_word]\".")
 
 /obj/effect/rune/teleport/after_scribe(mob/living/author)
 	var/word = input(author, "Choose a key word for this rune.", rune_name) as null|anything in cult.english_words

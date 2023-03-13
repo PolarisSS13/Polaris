@@ -35,6 +35,8 @@
 		return
 	return ..()
 
+/// The per-type proc for the talisman actually doing something on activation. This is what you want to override.
+/// Some talismans (like Stun) have their own logic and thus ignore this proc.
 /obj/item/paper/talisman/proc/invoke(mob/living/user)
 	return
 

@@ -861,7 +861,7 @@ var/global/list/all_objectives = list()
 	if(target) explanation_text = "Sacrifice [target.name], the [target.assigned_role]. You will need the sacrifice rune (Hell blood join) and three acolytes to do so."
 
 /datum/objective/cult/sacrifice/check_completion()
-	return (target && cult && !cult.sacrificed.Find(target))
+	return (target && cult && LAZYFIND(cult.sacrificed, target))
 
 /datum/objective/rev/find_target()
 	..()
@@ -896,4 +896,3 @@ var/global/list/all_objectives = list()
 			rval = 2
 		return 0
 	return rval
-

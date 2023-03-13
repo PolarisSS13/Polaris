@@ -12,5 +12,5 @@
 	var/datum/gender/G = gender_datums[user.get_visible_gender()]
 	user.visible_message(
 		SPAN_DANGER("\The [src] expands to briefly envelop \the [user]'s body before [G.he] tears through it in a gushing spurt of black sludge."),
-		SPAN_DANGER("The talisman expands to wrap you tightly, and you allow it to shroud you with tainted magmellite before you tear through the un-paper.")
+		SPAN_NOTICE("The talisman expands to wrap you tightly, and you allow it to shroud you with tainted magmellite before you tear through the un-paper.")
 	)

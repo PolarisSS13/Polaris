@@ -10,6 +10,9 @@
 	if (narsie_cometh)
 		to_chat(invoker, SPAN_WARNING("The Geometer has already been called forth."))
 		return
+	else if (!cult.allow_narsie)
+		to_chat(invoker, SPAN_WARNING("The Geometer does not wish the veil destroyed here this day."))
+		return
 	return TRUE
 
 /obj/effect/rune/tear_reality/invoke(list/invokers)

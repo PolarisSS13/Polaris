@@ -35,14 +35,16 @@
 	blood_image.override = TRUE
 	for (var/mob/living/silicon/ai/AI in player_list)
 		AI.client?.images += blood_image
-	LAZYDISTINCTADD(cult.all_runes, src)
+	if (cult)
+		LAZYDISTINCTADD(cult.all_runes, src)
 	update_icon()
 
 /obj/effect/rune/Destroy()
 	for (var/mob/living/silicon/ai/AI in player_list)
 		AI.client?.images -= blood_image
 	QDEL_NULL(blood_image)
-	LAZYREMOVE(cult.all_runes, src)
+	if (cult)
+		LAZYREMOVE(cult.all_runes, src)
 	return ..()
 
 /obj/effect/rune/get_examine_desc()
@@ -78,23 +80,24 @@
 /**
  * Checks if a given mob can participate as an invoker for this rune.
  *
- * By default, a mob must be a human, a cultist, and able to speak.
+ * By default, a mob must be a human or construct, a cultist, and able to speak.
  * Arguments:
  * * `invoker` - The mob being checked as a possible contributor
  * * `silent` - If non-true, shows an error message to the mob being checked. Defaults to `TRUE`
  */
 /obj/effect/rune/proc/can_contribute(mob/living/invoker, silent = TRUE)
 	var/fail_message
-	if (!ishuman(invoker))
-		return
-	var/mob/living/carbon/human/H = invoker
-	if (!iscultist(H))
+	if (!iscultist(invoker))
 		fail_message = "You can't mouth the arcane scratchings without fumbling over them."
-	else if (H.is_muzzled() || H.silent || (H.sdisabilities & MUTE))
-		fail_message = "You can't speak the words of \the [src]."
+	if (ishuman(invoker))
+		var/mob/living/carbon/human/H = invoker
+		if (H.is_muzzled() || H.silent || (H.sdisabilities & MUTE))
+			fail_message = "You can't speak the words of \the [src]."
+	else if (!istype(invoker, /mob/living/simple_mob/construct))
+		fail_message = "Your mind cannot comprehend the words of \the [src]."
 	if (fail_message)
 		if (!silent)
-			to_chat(H, SPAN_WARNING(fail_message))
+			to_chat(invoker, SPAN_WARNING(fail_message))
 		return
 	return TRUE
 
@@ -147,13 +150,20 @@
 	circle_words = list() // Needs to be an empty list to prevent runtimes in Initialize()
 
 /obj/effect/rune/mapgen/Initialize()
-	..()
-	return INITIALIZE_HINT_LATELOAD
+	. = ..()
+	START_PROCESSING(SSfastprocess, src)
 
-/obj/effect/rune/mapgen/LateInitialize()
+/obj/effect/rune/mapgen/Destroy()
+	STOP_PROCESSING(SSfastprocess, src)
+	return ..()
+
+// This is a very janky way to circumvent the fact that the antag subsystem initializes after the mapping subsystem
+// By running this in process(), we ensure that it happens only once the round has started, which makes sure that the word list is always populated
+/obj/effect/rune/mapgen/process()
 	var/list/words = cult.english_words.Copy()
 	for (var/i in 1 to 3)
 		var/word = pick(words)
 		circle_words.Add(word)
 		words.Remove(word)
 	update_icon()
+	STOP_PROCESSING(SSfastprocess, src)

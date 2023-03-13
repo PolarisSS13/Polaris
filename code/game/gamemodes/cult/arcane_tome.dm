@@ -90,6 +90,8 @@
 		return
 	. = ..()
 
+/// Causes `user` to attempt to create a rune of type `rune_type`, using their blood (or equivalent) as the medium.
+/// Inflicts a small amount of damage to the hands and creates blood decals in the process that remain if interrupted.
 /obj/item/arcane_tome/proc/scribe_rune(mob/living/user, obj/effect/rune_type)
 	if (locate(/obj/effect/rune) in get_turf(user))
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))

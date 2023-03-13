@@ -31,10 +31,16 @@ var/global/datum/antagonist/cultist/cult
 	initial_spawn_target = 6
 	antaghud_indicator = "hudcultist"
 
-	var/allow_narsie = 1
+	/// Whether or not the Tear Reality rune can be used.
+	var/allow_narsie = TRUE
+	/// The mind datum of the mob that this cult must sacrifice to fulfill their objective.
 	var/datum/mind/sacrifice_target
-	var/list/sacrificed = list()
-	var/list/harvested = list()
+	/// A list of all mobs that this cult has sacrificed. Uses lazylist macros.
+	var/list/sacrificed
+	/// A list of all non-cultists that have been killed by Nar-Sie (in the rare event that an admin spawns it or something.) Uses lazylist macros.
+	var/list/harvested
+	/// A list of all runes in the game world. Uses lazylist macros.
+	var/list/all_runes
 
 	/**
 	 * So here's how the cult vocabulary works:
@@ -47,9 +53,6 @@ var/global/datum/antagonist/cultist/cult
 	var/list/vocabulary
 	var/list/english_words = list(CULT_WORD_BLOOD, CULT_WORD_DESTROY, CULT_WORD_HELL, CULT_WORD_HIDE, CULT_WORD_JOIN, CULT_WORD_OTHER, CULT_WORD_SELF, CULT_WORD_SEE, CULT_WORD_TECHNOLOGY, CULT_WORD_TRAVEL)
 	var/list/cult_words = list(CULT_WORD_BALAQ, CULT_WORD_CERTUM, CULT_WORD_EGO, CULT_WORD_GEERI, CULT_WORD_IRE, CULT_WORD_KARAZET, CULT_WORD_JATKAA, CULT_WORD_MGAR, CULT_WORD_NAHLIZET, CULT_WORD_VERI)
-
-	/// A list of all runes in the game world.
-	var/list/all_runes
 
 /datum/antagonist/cultist/New()
 	..()
