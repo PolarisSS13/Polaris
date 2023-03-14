@@ -47,7 +47,7 @@
 		to_chat(user, SPAN_WARNING("An overwhelming feeling of dread comes over you as you pick up \the [src]. It would be wise to be rid of this blade quickly."))
 		user.make_dizzy(120)
 	else if (isconstruct(user))
-		to_chat(user, SPAN_WARNING("The [src] hisses, as it is discontent with your acquisition of it. It would be wise to return it to a worthy mortal quickly."))
+		to_chat(user, SPAN_WARNING("\The [src] hisses, as it is discontent with your acquisition of it. It would be wise to return it to a worthy mortal quickly."))
 
 
 // Actual cultists spawn with a hooded variant found in hooded.dm; everything below here is legacy for older maps, and has yet to be gutted

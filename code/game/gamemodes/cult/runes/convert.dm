@@ -10,7 +10,7 @@
 	var/impudence_timer = 0
 
 /obj/effect/rune/convert/proc/can_convert(mob/living/victim)
-	return !iscultist(victim) && victim.client && victim.stat != DEAD && victim.mind
+	return victim && !iscultist(victim) && victim.client && victim.stat != DEAD && victim.mind
 
 /obj/effect/rune/convert/can_invoke(mob/living/invoker)
 	for (var/mob/living/L in get_turf(src))
@@ -48,9 +48,9 @@
 	process()
 
 /obj/effect/rune/convert/process()
-	if (!converting || !converting.mind || !converting.client || !can_convert(converting) || !cult.can_become_antag(converting.mind) || get_turf(converting) != get_turf(src))
-		if (!converting)
-			to_chat(converting, SPAN_DANGER("And then, just like that, it was gone. The blackness recedes, and you are yourself again."))
+	if (!can_convert(converting) || !cult.can_become_antag(converting.mind) || get_turf(converting) != get_turf(src))
+		if (converting)
+			to_chat(converting, SPAN_DANGER("And then, just like that, it was gone. The blackness slowly recedes, and you are yourself again. It has taken something precious from you."))
 		converting = null
 		waiting_for_input = FALSE
 		STOP_PROCESSING(SSprocessing, src)
@@ -71,8 +71,6 @@
 				converting = null
 				STOP_PROCESSING(SSprocessing, src)
 	if (impudence)
-		var/prev_color = converting.client.color
-		animate(converting.client, converting.client.color = COLOR_RED, converting.client.color = prev_color, time = 8 SECONDS)
 		converting.take_overall_damage(0, min(5 * impudence, 20))
 		switch (converting.getFireLoss())
 			if (0 to 25)

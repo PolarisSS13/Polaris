@@ -268,7 +268,6 @@ This is the proc mobs get to turn into a ghost. Forked from ghostize due to comp
 	if(mind.current.key && copytext(mind.current.key,1,2)!="@")	//makes sure we don't accidentally kick any clients
 		to_chat(usr, "<span class='warning'>Another consciousness is in your body... it is resisting you.</span>")
 		return
-	mind.current.ajourn=0
 	mind.current.key = key
 	mind.current.teleop = null
 	if(istype(mind.current.loc, /obj/structure/morgue))

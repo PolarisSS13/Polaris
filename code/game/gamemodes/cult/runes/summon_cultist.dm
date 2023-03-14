@@ -32,7 +32,7 @@
 	if (choice && !can_summon(choice))
 		var/datum/gender/G = gender_datums[choice.get_gender()]
 		for (var/mob/living/L2 in invokers)
-			to_chat(L2, SPAN_WARNING("You cannot summon [choice], for [G.he] [G.is] bound in place. You must free [G.him] first."))
+			to_chat(L2, SPAN_WARNING("You cannot summon \the [choice], for [G.he] [G.is] bound in place. You must free [G.him] first."))
 	for (var/mob/living/C in invokers)
 		to_chat(C, SPAN_DANGER("You reach out together through space, dragging [choice] to your location."))
 		C.take_overall_damage(round(25 / invokers.len), 0)
@@ -50,7 +50,7 @@
 	choice.lying = TRUE
 	choice.regenerate_icons()
 	choice.visible_message(
-		SPAN_WARNING("The runes bubble, and [choice] is thrust through them onto the ground!"),
+		SPAN_WARNING("The runes bubble, and \the [choice] is thrust through them onto the ground!"),
 		SPAN_DANGER("...and you emerge on top of the runes they used to bring you forth.")
 	)
 	qdel(src)

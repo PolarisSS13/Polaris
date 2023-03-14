@@ -33,7 +33,6 @@
 /obj/effect/rune/astral_journey/proc/set_traveler(mob/living/L, return_to_body)
 	if (!L)
 		if (traveler)
-			traveler.ajourn = FALSE
 			if (return_to_body && ghost)
 				if (ghost.reenter_corpse())
 					to_chat(ghost, SPAN_DANGER("You are painfully jerked back to reality as the binding sigils force you back into your body."))
@@ -47,7 +46,6 @@
 		STOP_PROCESSING(SSprocessing, src)
 	else
 		traveler = L
-		traveler.ajourn = TRUE
 		ghost = traveler.ghostize(TRUE)
 		ghost.forbid_seeing_deadchat = TRUE
 		ghost.name = "???"
