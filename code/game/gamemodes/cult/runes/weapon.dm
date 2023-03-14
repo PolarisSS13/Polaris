@@ -1,6 +1,6 @@
 /obj/effect/rune/weapon
 	rune_name = "Weapon"
-	rune_desc = "Creates a deadly blade, adept at maiming and dismemberment. It will reject nonbelievers, preventing them from wielding it as a weapon. Use sparingly, for the Geometer disdains bloodshed not executed at Its behest."
+	rune_desc = "Creates a deadly blade, adept at maiming and dismemberment. Use sparingly, for the Geometer disdains bloodshed not executed at Its behest."
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_DESTROY, CULT_WORD_OTHER)
 	invocation = "Sa tatha rajin!"
 

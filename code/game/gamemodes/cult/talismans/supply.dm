@@ -1,7 +1,7 @@
 /// This is a unique talisman given to roundstart cultists, and is the only source of soul stones and construct shells for them until they make an artificer.
 /obj/item/paper/talisman/supply
 	talisman_name = "Supply"
-	talisman_desc = "A densely-scrawled talisman with several functions, used to start a new cult."
+	talisman_desc = "An irreplaceable talisman densely packed with varying invocations, providing all the tools you need to start a new cult. Make sure you get a tome, if you don't have one already."
 	delete_self = FALSE
 	invocation = null
 	var/uses = 5

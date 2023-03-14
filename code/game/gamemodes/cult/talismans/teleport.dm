@@ -1,7 +1,7 @@
 /obj/item/paper/talisman/teleport
 	talisman_name = "Teleport"
 	talisman_desc = "Teleports its invoker to the location of a random Teleport rune with the same keyword."
-	tome_desc = "On activation, teleports its user to a random rune of the same keyword."
+	tome_desc = "Disposable; teleports only the user. The talisman's keyword will reflect that of the rune used to create it."
 	invocation = "Sas'so c'arta forbici!"
 	delete_self = FALSE
 	var/key_word = CULT_WORD_OTHER

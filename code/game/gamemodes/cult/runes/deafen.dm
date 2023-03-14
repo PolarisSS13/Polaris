@@ -1,7 +1,6 @@
 /obj/effect/rune/deafen
 	rune_name = "Deafen"
 	rune_desc = "Deafens all non-cultists near the rune."
-	rune_shorthand = "Deafens all non-cultists near the rune. Functions similarly in talisman form."
 	talisman_path = /obj/item/paper/talisman/deafen
 	circle_words = list(CULT_WORD_HIDE, CULT_WORD_OTHER, CULT_WORD_SEE)
 	invocation = "Dedo ol'btoh!"

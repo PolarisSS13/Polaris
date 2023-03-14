@@ -1,7 +1,6 @@
 /obj/effect/rune/stun
 	rune_name = "Stun"
-	rune_desc = "This rune is specialized for use in talismans; invoked on its own, its only effect is to disorient nearby beings. As a talisman, all of its energy is instead forced into the talisman's target, immediately knocking them to the ground and preventing them from speaking."
-	rune_shorthand = "Releases a small burst of undirected stunning force. Much more effective in talisman form."
+	rune_desc = "This rune is specialized for use in talismans; invoked on its own, its only effect is to slightly disorient nearby beings."
 	talisman_path = /obj/item/paper/talisman/stun
 	circle_words = list(CULT_WORD_JOIN, CULT_WORD_HIDE, CULT_WORD_TECHNOLOGY)
 	invocation = "Fuu ma'jin!"

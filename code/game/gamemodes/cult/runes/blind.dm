@@ -1,7 +1,6 @@
 /obj/effect/rune/blind
 	rune_name = "Blind"
 	rune_desc = "Blinds all non-cultists near the rune."
-	rune_shorthand = "Blinds all non-cultists near the rune. Functions similarly in talisman form."
 	talisman_path = /obj/item/paper/talisman/blind
 	circle_words = list(CULT_WORD_DESTROY, CULT_WORD_SEE, CULT_WORD_OTHER)
 	invocation = "Sti'kaliesin!"

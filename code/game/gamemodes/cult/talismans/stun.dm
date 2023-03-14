@@ -1,7 +1,7 @@
 /obj/item/paper/talisman/stun
 	talisman_name = "Stun"
 	talisman_desc = "Forces the concentrated energy of a stun rune into a struck target, immediately knocking them to the ground. Humans will be prevented from speaking for a time."
-	tome_desc = "Switch to Harm intent and strike a target to forcefully knock them to the ground and silence them for a time."
+	tome_desc = "Forces concentrated energy into a struck target, knocking them to the ground and preventing them from speaking. Must be on Harm intent to use."
 	invocation = "Dream sign 'Evil Sealing Talisman'!" // I think this is a touhou reference
 	whispered = FALSE
 

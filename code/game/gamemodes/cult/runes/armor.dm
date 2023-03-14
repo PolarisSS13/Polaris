@@ -1,7 +1,7 @@
 /obj/effect/rune/armor
 	rune_name = "Armor"
-	rune_desc = "When this rune is invoked, either from a rune or a talisman, it will equip its invoker with protective robes. To use this rune to its fullest extent, make sure you are not wearing any form of headgear, armor, or shoes."
-	rune_shorthand = "Creates and equips a set of protective, conspicuous robes."
+	rune_desc = "When this rune is invoked, either from a rune or a talisman, it will equip its invoker with protective robes. To use this rune to its fullest extent, make sure you are not wearing any form of armor or shoes."
+	rune_shorthand = "Equips its invoker a set of protective but conspicuous robes. Any articles of clothing that cannot be equipped will not be created."
 	talisman_path = /obj/item/paper/talisman/armor
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_DESTROY, CULT_WORD_SELF)
 	invocation = "Sa tatha najin!"

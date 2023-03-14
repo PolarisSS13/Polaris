@@ -110,7 +110,7 @@
 		SPAN_WARNING("You hear droplets softly splattering on the ground."),
 		range = 3
 	)
-	if (ishuman(user))
+	if (ishuman(user) && !max(0, scribe_speed)) // Only drip blood if it actually takes time to write the rune
 		var/mob/living/carbon/human/H = user
 		for (var/i in 1 to 4)
 			spawn (max(0, scribe_speed - 1 SECOND) / i)
