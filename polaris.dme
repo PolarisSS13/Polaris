@@ -1946,6 +1946,7 @@
 #include "code\modules\gamemaster\event2\events\engineering\dust.dm"
 #include "code\modules\gamemaster\event2\events\engineering\gas_leak.dm"
 #include "code\modules\gamemaster\event2\events\engineering\grid_check.dm"
+#include "code\modules\gamemaster\event2\events\engineering\planet_meteor_defense.dm"
 #include "code\modules\gamemaster\event2\events\engineering\space_meteor_defense.dm"
 #include "code\modules\gamemaster\event2\events\engineering\spacevine.dm"
 #include "code\modules\gamemaster\event2\events\engineering\wallrot.dm"

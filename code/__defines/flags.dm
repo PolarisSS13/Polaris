@@ -67,6 +67,7 @@
 #define PASSGRILLE				(1<<2)
 #define PASSBLOB				(1<<3)
 #define PASSMOB					(1<<4)
+#define PASSTREE				(1<<5)
 
 
 /* -- /obj/effect/shuttle_landmark/var/landmark_flags -- */
