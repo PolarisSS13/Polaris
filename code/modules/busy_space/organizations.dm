@@ -194,8 +194,8 @@
 	possible_mission_types &= destination_mission_types
 
 	//sanity checking
-	if(!possible_mission_types) //an org was given a system that contains no missions they run. let's fail gracefully about it
-		current_ship = "vessel [pick("SOL", "VIR", "STC", "ACE")]-575-[rand(0,999999)]" //unnamed ship
+	if(!length(possible_mission_types)) //an org was given a system that contains no missions they run. let's fail gracefully about it
+		current_ship = "[pick("SOL", "VIR", "STC", "ACE")]-575-[rand(100000,999999)]" //unnamed ship
 		return "[current_ship], traveling to local registrar" //instantly identifiable as an error but still immersive
 
 	//select a mission we can run
