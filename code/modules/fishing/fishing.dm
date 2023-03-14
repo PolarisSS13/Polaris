@@ -3,6 +3,7 @@
  */
 
 GLOBAL_LIST_INIT(generic_fishing_rare_list, list(
+		/mob/living/simple_mob/animal/passive/fish/planetcarp = 1,
 		/mob/living/simple_mob/animal/passive/fish/solarfish = 1,
 		/mob/living/simple_mob/animal/passive/fish/icebass = 5,
 		/mob/living/simple_mob/animal/passive/fish/koi = 3
