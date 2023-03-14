@@ -2,6 +2,7 @@
 	name = "observer"
 	desc = "This shouldn't appear"
 	density = 0
+	move_intents = list(/decl/move_intent/no_delay)
 
 /mob/observer/dead
 	name = "ghost"

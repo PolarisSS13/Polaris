@@ -34,7 +34,7 @@
 	zone_sel = null
 
 /mob/Initialize()
-	move_intent = GET_DECL(/decl/move_intent/run) // Sets the initial move_intent.
+	move_intent = GET_DECL(move_intents[1]) // Sets the initial move_intent.
 	mob_list += src
 	if(stat == DEAD)
 		dead_mob_list += src
