@@ -26,7 +26,8 @@
 
 	var/old_name = atom_holder.name
 	atom_holder.name = "[atom_holder.name] ([label])"
-	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
+	var/decl/observ/name_set/N = GET_DECL(/decl/observ/name_set)
+	N.raise_event(src, old_name, atom_holder.name)
 	return TRUE
 
 /datum/extension/labels/proc/RemoveLabel(var/mob/user, var/label)
@@ -49,7 +50,8 @@
 	var/old_name = atom_holder.name
 	// We find and replace the first instance, since that's the one we removed from the list
 	atom_holder.name = replacetext(atom_holder.name, full_label, "", index, index + length(full_label))
-	events_repository.raise_event(/decl/observ/name_set, src, old_name, atom_holder.name)
+	var/decl/observ/name_set/N = GET_DECL(/decl/observ/name_set)
+	N.raise_event(src, old_name, atom_holder.name)
 	return TRUE
 
 /datum/extension/labels/proc/RemoveAllLabels()

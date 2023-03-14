@@ -49,8 +49,8 @@
 	idcard = new idcard_type(src)
 	set_id_info(idcard)
 
-/mob/living/silicon/SetName(pickedName as text)
-	real_name = pickedName
+/mob/living/silicon/SetName(new_name as text)
+	real_name = new_name
 	name = real_name
 	..()
 
