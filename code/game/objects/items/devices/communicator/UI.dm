@@ -150,9 +150,12 @@
 	if(..())
 		return 1
 	if(href_list["rename"])
-		var/new_name = sanitizeSafe(input(usr,"Please enter your name.","Communicator",usr.name) )
-		if(new_name)
-			register_device(new_name)
+		if(!can_rename)
+			to_chat(usr, "Renaming forbidden on this device.")
+		else
+			var/new_name = sanitizeSafe(input(usr,"Please enter your name.","Communicator",usr.name) )
+			if(new_name)
+				register_device(new_name)
 
 	if(href_list["toggle_visibility"])
 		switch(network_visibility)
