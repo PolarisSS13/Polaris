@@ -62,3 +62,5 @@
 
 //check if all bitflags specified are present
 #define CHECK_MULTIPLE_BITFIELDS(flagvar, flags)	((flagvar & (flags)) == flags)
+
+#define PRINT_STACK_TRACE(X) get_stack_trace(X, __FILE__, __LINE__)
