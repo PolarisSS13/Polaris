@@ -183,6 +183,18 @@
 	desc = "An old-fashioned fur-lined hood."
 	icon_state = "vintagepark_hood"
 
+/obj/item/clothing/head/hood/cult
+	name = "cult hood"
+	icon_state = "cult_hoodalt"
+	desc = "Chips of wet magmellite and strips of leathery textile are melded together into stiff cloth. Its surface is warm and shudders at the touch."
+	flags_inv = HIDEEARS | HIDEFACE | BLOCKHAIR
+	min_cold_protection_temperature = SPACE_HELMET_MIN_COLD_PROTECTION_TEMPERATURE
+	siemens_coefficient = 0
+	armor = list(melee = 50, bullet = 30, laser = 50, energy = 80, bomb = 25, bio = 10, rad = 0)
+
+/obj/item/clothing/head/hood/cult/cultify()
+	return
+
 // Explorer gear
 /obj/item/clothing/head/hood/explorer
 	name = "explorer hood"

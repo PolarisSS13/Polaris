@@ -8,6 +8,8 @@
 	var/talisman_name
 	/// A description of what this talisman actually does.
 	var/talisman_desc
+	/// Specifically shown in the arcane tome, alongside the rune's description.
+	var/tome_desc
 	/// The words spoken by a cultist activating this talisman.
 	var/invocation = "Look at this photograph!"
 	/// If true, cultists invoking this talisman will whisper, instead of speaking normally.

@@ -1,6 +1,7 @@
 /obj/item/paper/talisman/emp
 	talisman_name = "Disable Technology"
 	talisman_desc = "Emits a strong electromagnetic pulse in a small radius, disabling or harming nearby electronics."
+	tome_desc = "Shorter range."
 	invocation = "Ta'gh fara'qha fel d'amar det!"
 
 /obj/item/paper/talisman/emp/invoke(mob/living/user)

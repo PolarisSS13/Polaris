@@ -1,6 +1,7 @@
 /obj/item/melee/cultblade
 	name = "cult blade"
-	desc = "An arcane weapon wielded by the followers of an unknown god."
+	desc = "A wicked sword made of serrated black metal, with a very slightly curving blade evoking a khopesh. The grip is studded with dull spikes."
+	description_antag = "Through some anomalous means, this weapon refuses to be wielded by any other than the followers of Nar-Sie. Attempting to wield it without being a cultist yourself is like to result in disaster."
 	icon_state = "cultblade"
 	origin_tech = list(TECH_COMBAT = 1, TECH_ARCANE = 1)
 	w_class = ITEMSIZE_LARGE

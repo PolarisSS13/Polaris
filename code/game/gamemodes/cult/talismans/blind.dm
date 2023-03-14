@@ -1,6 +1,7 @@
 /obj/item/paper/talisman/blind
 	talisman_name = "Blind"
 	talisman_desc = "Induces blindness in nonbelievers within two tiles."
+	tome_desc = "Shorter range."
 	invocation = "Sti'kaliesin!"
 
 /obj/item/paper/talisman/blind/invoke(mob/living/user)

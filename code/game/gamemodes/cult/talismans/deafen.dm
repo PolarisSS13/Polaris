@@ -1,6 +1,7 @@
 /obj/item/paper/talisman/deafen
 	talisman_name = "Deafen"
 	talisman_desc = "Induces deafness in all nearby nonbelievers."
+	tome_desc = "Shorter range."
 	invocation = "Sti'kaliedir!"
 
 /obj/item/paper/talisman/deafen/invoke(mob/living/user)

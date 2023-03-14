@@ -398,3 +398,18 @@
 		/obj/item/radio,
 		/obj/item/pickaxe
 		)
+
+/obj/item/clothing/suit/storage/hooded/cult
+	name = "cult robes"
+	desc = "Chips of wet magmellite and strips of leathery textile are melded together into stiff cloth. Its surface is warm and shudders at the touch."
+	icon_state = "cultrobesalt"
+	origin_tech = list(TECH_MATERIAL = 3, TECH_ARCANE = 1)
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO|LEGS|ARMS
+	flags_inv = HIDEJUMPSUIT
+	hoodtype = /obj/item/clothing/head/hood/cult
+	siemens_coefficient = 0
+	armor = list(melee = 50, bullet = 30, laser = 50, energy = 80, bomb = 25, bio = 10, rad = 0)
+	allowed = list(/obj/item/arcane_tome, /obj/item/melee/cultblade)
+
+/obj/item/clothing/suit/storage/hooded/cult/cultify()
+	return

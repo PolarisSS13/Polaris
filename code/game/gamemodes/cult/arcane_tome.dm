@@ -46,10 +46,11 @@
 		var/obj/effect/rune/NR = V
 		if (!initial(NR.can_write))
 			continue
+		var/obj/item/paper/talisman/T = initial(NR.talisman_path)
 		rune_data += list(list(
 			"name" = initial(NR.rune_name),
 			"invokers" = initial(NR.required_invokers),
-			"talisman" = initial(NR.talisman_path),
+			"talisman" = T ? initial(T.tome_desc) : null,
 			"shorthand" = initial(NR.rune_shorthand) ? initial(NR.rune_shorthand) : initial(NR.rune_desc),
 			"typepath" = NR
 		))
@@ -79,12 +80,12 @@
 		user.setClickCooldown(user.get_attack_speed(src))
 		user.do_attack_animation(M)
 		var/hit_zone = M.resolve_item_attack(src, user, target_zone)
-		if(hit_zone)
-			user.visible_message(
-				SPAN_DANGER("\The [user] bathes \the [M] in red light from \the [src]'s cover!"),
+		if (hit_zone)
+			M.interact_message(user,
+				SPAN_DANGER("\The [user] bathes \the [M] in red light from \the [src]!"),
+				SPAN_DANGER("\The [user] bathes you in burning red light from \the [src]!"),
 				SPAN_DANGER("You burn \the [M] with \the [src]!")
 			)
-			to_chat(M, SPAN_DANGER("You feel a searing heat inside!"))
 			playsound(src, 'sound/weapons/sear.ogg', 50, TRUE, -1)
 			M.apply_damage(rand(5, 20), BURN, hit_zone, used_weapon = "internal burns")
 		return
@@ -104,7 +105,7 @@
 		blood_name = H.species?.get_blood_name()
 	user.apply_damage(1, BRUTE, pick(BP_L_HAND, BP_R_HAND), sharp = TRUE, edge = TRUE, used_weapon = "long, precise cut")
 	user.visible_message(
-		SPAN_WARNING("\The [user] [!synth ? "slices open [G.his] skin" : "tears open [G.his] circulation"] and begins painting on symbols on the floor with [G.his] own [blood_name]"),
+		SPAN_WARNING("\The [user] [!synth ? "slices open [G.his] skin" : "tears open [G.his] circulation"] and begins painting on symbols on the floor with [G.his] own [blood_name]!"),
 		SPAN_NOTICE("You [!synth ? "slice open your skin" : "tear open your circulation"] and begin drawing a rune on the floor whilst invoking the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."),
 		SPAN_WARNING("You hear droplets softly splattering on the ground."),
 		range = 3

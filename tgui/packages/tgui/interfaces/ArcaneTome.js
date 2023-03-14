@@ -115,9 +115,9 @@ export const ArcaneTome = (props, context) => {
                           <Section title={entry.name}>
                             {entry.invokers > 1
                               && (<Fragment><i>Required invokers:</i> {entry.invokers}<br /><br /></Fragment>) || ""}
-                            {entry.talisman
-                              && (<Fragment><i>Can be made into a talisman</i><br /><br /></Fragment>) || ""}
                             {entry.shorthand}<br /><br />
+                            {entry.talisman
+                              && (<Fragment><i>Talisman effect:</i> {entry.talisman}<br /><br /></Fragment>) || ""}
                             <Button
                               textAlign="center"
                               content="Scribe"

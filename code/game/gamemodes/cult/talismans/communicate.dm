@@ -1,6 +1,7 @@
 /obj/item/paper/talisman/communicate
 	talisman_name = "Communicate"
 	talisman_desc = "Allows you to communicate with other cultists."
+	tome_desc = "Send a single message upon invocation."
 	invocation = "O bidai nabora se'sma!"
 	whispered = TRUE
 	delete_self = FALSE
