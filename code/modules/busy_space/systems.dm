@@ -107,7 +107,7 @@
 		new /datum/lore/location("a detention facility on Io, Jupiter subsystem, Sol", list(ATC_MED, ATC_TRANS)),
 		new /datum/lore/location("Europa, Jupiter subsystem, Sol", list(ATC_ALL_CIV)),
 		new /datum/lore/location("Titania, Uranus subsystem, Sol", list(ATC_TYPICAL)),
-		new /datum/lore/location("Oberon Institute of Artificial Intelligence, Uranus Subsystem, Sol", list(ATC_SCI)),
+		new /datum/lore/location("Oberon Institute of Artificial Intelligence, Uranus subsystem, Sol", list(ATC_SCI)),
 		new /datum/lore/location("Neptune, Sol", list(ATC_TYPICAL))
 		)
 
