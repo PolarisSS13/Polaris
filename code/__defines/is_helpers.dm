@@ -51,6 +51,8 @@
 
 #define isbot(A)		istype(A, /mob/living/bot)
 
+#define isconstruct(A)	istype(A, /mob/living/simple_mob/construct)
+
 #define ismecha(A)		istype(A, /obj/mecha)
 #define isvehicle(A)	istype(A, /obj/vehicle)
 
