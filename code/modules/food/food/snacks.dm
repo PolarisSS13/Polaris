@@ -233,8 +233,11 @@
 	// Reagents are only for carbons (for now), so we calculate and apply nutrition manually
 	var/nutrition_total = 1
 	if (reagents?.total_volume)
-		for (var/datum/reagent/nutriment/N in reagents.reagent_list)
-			nutrition_total += N.nutriment_factor / (N.allergen_type & ALLERGEN_MEAT ? 15 : 30)
+		for (var/V in reagents.reagent_list)
+			var/datum/reagent/R = V
+			if (istype(R, /datum/reagent/nutriment))
+				var/datum/reagent/nutriment/N = R
+				nutrition_total += N.volume * round(N.nutriment_factor / (N.allergen_type & ALLERGEN_MEAT ? 15 : 30))
 	slime.adjust_nutrition(nutrition_total)
 	slime.visible_message(
 		SPAN_NOTICE("\The [slime] [pick("absorbs", "consumes", "devours", "eats", "engulfs", "envelops", "schlorps up", "vacuums up")] \the [src]!"),
