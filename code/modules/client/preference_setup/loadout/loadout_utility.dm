@@ -121,7 +121,7 @@
 
 /datum/gear/utility/battery
 	display_name = "cell, device"
-	path = /obj/item/cell/device
+	path = /obj/item/stock_parts/cell/device
 
 /datum/gear/utility/pen
 	display_name = "fountain pen"

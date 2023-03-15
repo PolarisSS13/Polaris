@@ -3,7 +3,7 @@
 	desc = "For the modern approach to smoking."
 	icon = 'icons/obj/ecig.dmi'
 	var/active = 0
-	//var/obj/item/cell/ec_cell = /obj/item/cell/device
+	//var/obj/item/stock_parts/cell/ec_cell = /obj/item/stock_parts/cell/device
 	var/cartridge_type = /obj/item/reagent_containers/ecig_cartridge/med_nicotine
 	var/obj/item/reagent_containers/ecig_cartridge/ec_cartridge
 	w_class = ITEMSIZE_TINY
@@ -151,7 +151,7 @@
 	w_class = ITEMSIZE_TINY
 	icon = 'icons/obj/ecig.dmi'
 	icon_state = "ecartridge"
-	matter = list("metal" = 50, "glass" = 10)
+	matter = list("metal" = 50, MAT_GLASS = 10)
 	volume = 20
 	atom_flags = ATOM_REAGENTS_IS_OPEN
 

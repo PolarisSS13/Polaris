@@ -31,7 +31,7 @@ var/global/list/light_type_cache = list()
 	var/fixture_type = /obj/machinery/light
 	var/sheets_refunded = 2
 	var/obj/machinery/light/newlight = null
-	var/obj/item/cell/cell = null
+	var/obj/item/stock_parts/cell/cell = null
 
 	var/cell_connectors = TRUE
 
@@ -85,7 +85,7 @@ var/global/list/light_type_cache = list()
 
 /obj/machinery/light_construct/attackby(obj/item/W as obj, mob/user as mob)
 	src.add_fingerprint(user)
-	if(istype(W, /obj/item/cell/emergency_light))
+	if(istype(W, /obj/item/stock_parts/cell/emergency_light))
 		if(!cell_connectors)
 			to_chat(user, "<span class='warning'>This [name] can't support a power cell!</span>")
 			return
@@ -230,7 +230,7 @@ var/global/list/light_type_cache = list()
 
 	var/auto_flicker = FALSE // If true, will constantly flicker, so long as someone is around to see it (otherwise its a waste of CPU).
 
-	var/obj/item/cell/emergency_light/cell
+	var/obj/item/stock_parts/cell/emergency_light/cell
 	var/start_with_cell = TRUE	// if true, this fixture generates a very weak cell at roundstart
 
 	var/emergency_mode = FALSE	// if true, the light is in emergency mode
@@ -290,7 +290,7 @@ var/global/list/light_type_cache = list()
 		lamp_shade = 0
 		update_icon()
 	else if(start_with_cell && !no_emergency)
-		cell = new/obj/item/cell/emergency_light(src)
+		cell = new/obj/item/stock_parts/cell/emergency_light(src)
 
 
 /obj/machinery/light/flamp/flicker
@@ -323,7 +323,7 @@ var/global/list/light_type_cache = list()
 		set_dir(construct.dir)
 	else
 		if(start_with_cell && !no_emergency)
-			cell = new/obj/item/cell/emergency_light(src)
+			cell = new/obj/item/stock_parts/cell/emergency_light(src)
 		var/obj/item/light/L = get_light_type_instance(light_type)
 		update_from_bulb(L)
 		if(prob(L.broken_chance))
@@ -865,7 +865,7 @@ var/global/list/light_type_cache = list()
 	icon_state = "ltube"
 	base_state = "ltube"
 	item_state = "c_tube"
-	matter = list("glass" = 100)
+	matter = list(MAT_GLASS = 100)
 	brightness_range = 7	// luminosity when on, also used in power calculation
 	brightness_power = 6
 
@@ -884,7 +884,7 @@ var/global/list/light_type_cache = list()
 	icon_state = "lbulb"
 	base_state = "lbulb"
 	item_state = "contvapour"
-	matter = list("glass" = 100)
+	matter = list(MAT_GLASS = 100)
 	brightness_range = 5
 	brightness_power = 4
 	brightness_color = LIGHT_COLOR_INCANDESCENT_BULB
@@ -907,7 +907,7 @@ var/global/list/light_type_cache = list()
 	icon_state = "fbulb"
 	base_state = "fbulb"
 	item_state = "egg4"
-	matter = list("glass" = 100)
+	matter = list(MAT_GLASS = 100)
 
 // update the icon state and description of the light
 /obj/item/light/update_icon()

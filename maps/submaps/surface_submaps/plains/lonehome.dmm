@@ -136,7 +136,7 @@
 "Sp" = (/obj/item/material/shard,/obj/item/material/shard{pixel_x = 5; pixel_y = 3},/turf/simulated/floor/outdoors/dirt,/area/submap/lonehome)
 "SN" = (/obj/structure/bed/chair/wood/wings{dir = 1},/obj/effect/spawner/gibs/human,/turf/simulated/floor/carpet/sblucarpet,/area/submap/lonehome)
 "Tg" = (/obj/item/material/kitchen/utensil/fork,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/submap/lonehome)
-"Tw" = (/obj/item/cell/high/empty,/turf/simulated/floor/carpet/sblucarpet,/area/submap/lonehome)
+"Tw" = (/obj/item/stock_parts/cell/high/empty,/turf/simulated/floor/carpet/sblucarpet,/area/submap/lonehome)
 "TX" = (/obj/item/clothing/suit/storage/apron/white,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/white,/area/submap/lonehome)
 "Uj" = (/obj/machinery/light/small,/obj/item/ore/diamond,/obj/structure/sign/goldenplaque{desc = "Done No Harm."; name = "Best Doctor 2552"; pixel_y = -32},/obj/structure/table/wooden_reinforced,/turf/simulated/floor/wood,/area/submap/lonehome)
 "UA" = (/obj/structure/fence/door/opened,/turf/template_noop,/area/submap/lonehome)

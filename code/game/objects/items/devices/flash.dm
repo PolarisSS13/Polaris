@@ -29,11 +29,11 @@
 
 	var/base_icon = "flash"
 
-	var/obj/item/cell/power_supply //What type of power cell this uses
+	var/obj/item/stock_parts/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 30 //How much energy is needed to flash.
 	var/use_external_power = FALSE // Do we use charge from an external source?
 
-	var/cell_type = /obj/item/cell/device
+	var/cell_type = /obj/item/stock_parts/cell/device
 
 /obj/item/flash/Initialize()
 	. = ..()
@@ -59,7 +59,7 @@
 		..()
 
 /obj/item/flash/update_icon()
-	var/obj/item/cell/battery = power_supply
+	var/obj/item/stock_parts/cell/battery = power_supply
 
 	if(use_external_power)
 		battery = get_external_power_supply()
@@ -102,7 +102,7 @@
 			break
 
 		else if(use_external_power)
-			var/obj/item/cell/external = get_external_power_supply()
+			var/obj/item/stock_parts/cell/external = get_external_power_supply()
 			if(!external || !external.use(charge_cost)) //Take power from the borg or rig!
 				break
 
@@ -120,7 +120,7 @@
 /obj/item/flash/proc/check_capacitor(var/mob/user)
 	//spamming the flash before it's fully charged (60 seconds) increases the chance of it breaking
 	//It will never break on the first use.
-	var/obj/item/cell/battery = power_supply
+	var/obj/item/stock_parts/cell/battery = power_supply
 
 	if(use_external_power)
 		battery = get_external_power_supply()

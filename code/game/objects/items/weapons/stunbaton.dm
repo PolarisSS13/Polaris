@@ -19,7 +19,7 @@
 	var/stunforce = 0
 	var/agonyforce = 60
 	var/status = 0		//whether the thing is on or not
-	var/obj/item/cell/bcell = null
+	var/obj/item/stock_parts/cell/bcell = null
 	var/hitcost = 240
 	var/use_external_power = FALSE //only used to determine if it's a cyborg baton
 
@@ -65,7 +65,7 @@
 
 /obj/item/melee/baton/loaded/Initialize() //this one starts with a cell pre-installed.
 	. = ..()
-	bcell = new/obj/item/cell/device/weapon(src)
+	bcell = new/obj/item/stock_parts/cell/device/weapon(src)
 	update_icon()
 
 /obj/item/melee/baton/proc/deductcharge(var/chrgdeductamt)
@@ -102,8 +102,8 @@
 /obj/item/melee/baton/attackby(obj/item/W, mob/user)
 	if(use_external_power)
 		return
-	if(istype(W, /obj/item/cell))
-		if(istype(W, /obj/item/cell/device))
+	if(istype(W, /obj/item/stock_parts/cell))
+		if(istype(W, /obj/item/stock_parts/cell/device))
 			if(!bcell)
 				user.drop_item()
 				W.loc = src
@@ -220,8 +220,8 @@
 	slot_flags = null
 
 /obj/item/melee/baton/cattleprod/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/cell))
-		if(!istype(W, /obj/item/cell/device))
+	if(istype(W, /obj/item/stock_parts/cell))
+		if(!istype(W, /obj/item/stock_parts/cell/device))
 			if(!bcell)
 				user.drop_item()
 				W.loc = src

@@ -4,11 +4,11 @@
 	icon_state = "energy"
 	fire_sound_text = "laser blast"
 
-	var/obj/item/cell/power_supply //What type of power cell this uses
+	var/obj/item/stock_parts/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 240 //How much energy is needed to fire.
 
-	var/accept_cell_type = /obj/item/cell/device
-	var/cell_type = /obj/item/cell/device/weapon
+	var/accept_cell_type = /obj/item/stock_parts/cell/device
+	var/cell_type = /obj/item/stock_parts/cell/device/weapon
 	projectile_type = /obj/item/projectile/beam/practice
 
 	var/modifystate
@@ -27,7 +27,7 @@
 /obj/item/gun/energy/Initialize()
 	. = ..()
 	if(self_recharge)
-		power_supply = new /obj/item/cell/device/weapon(src)
+		power_supply = new /obj/item/stock_parts/cell/device/weapon(src)
 		START_PROCESSING(SSobj, src)
 	else
 		if(cell_type)
@@ -58,7 +58,7 @@
 			var/rechargeamt = power_supply.maxcharge*0.2
 
 			if(use_external_power)
-				var/obj/item/cell/external = get_external_power_supply()
+				var/obj/item/stock_parts/cell/external = get_external_power_supply()
 				if(!external || !external.use(rechargeamt)) //Take power from the borg...
 					return 0
 
@@ -112,18 +112,18 @@
 	if(!power_supply) return null
 	if(!ispath(projectile_type)) return null
 	if(!power_supply.checked_use(charge_cost)) return null
-	var/mob/living/M = loc // TGMC Ammo HUD 
-	if(istype(M)) // TGMC Ammo HUD 
+	var/mob/living/M = loc // TGMC Ammo HUD
+	if(istype(M)) // TGMC Ammo HUD
 		M?.hud_used.update_ammo_hud(M, src)
 	return new projectile_type(src)
 
 /obj/item/gun/energy/proc/load_ammo(var/obj/item/C, mob/user)
-	if(istype(C, /obj/item/cell))
+	if(istype(C, /obj/item/stock_parts/cell))
 		if(self_recharge || battery_lock)
 			to_chat(user, "<span class='notice'>[src] does not have a battery port.</span>")
 			return
 		if(istype(C, accept_cell_type))
-			var/obj/item/cell/P = C
+			var/obj/item/stock_parts/cell/P = C
 			if(power_supply)
 				to_chat(user, "<span class='notice'>[src] already has a power cell.</span>")
 			else
@@ -223,7 +223,7 @@
 
 /obj/item/gun/energy/proc/start_recharge()
 	if(power_supply == null)
-		power_supply = new /obj/item/cell/device/weapon(src)
+		power_supply = new /obj/item/stock_parts/cell/device/weapon(src)
 	self_recharge = 1
 	START_PROCESSING(SSobj, src)
 	update_icon()

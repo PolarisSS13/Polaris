@@ -374,7 +374,7 @@
 /area/submap/Diner)
 "bl" = (
 /obj/structure/table/woodentable,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell/high,
 /turf/simulated/floor/lino,
 /area/submap/Diner)
 "bm" = (

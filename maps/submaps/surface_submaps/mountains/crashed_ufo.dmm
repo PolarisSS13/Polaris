@@ -60,7 +60,7 @@
 "bh" = (/obj/effect/decal/remains/mouse,/turf/simulated/shuttle/floor/alien,/area/submap/cave/crashed_ufo)
 "bi" = (/obj/structure/closet/alien,/obj/item/prop/alien/junk,/obj/item/prop/alien/junk,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bj" = (/obj/machinery/porta_turret/alien/destroyed{ icon_state = "destroyed_target_prism"; dir = 6},/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
-"bk" = (/obj/item/cell/device/weapon/empty,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
+"bk" = (/obj/item/stock_parts/cell/device/weapon/empty,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bl" = (/obj/machinery/porta_turret/alien/destroyed{ icon_state = "destroyed_target_prism"; dir = 10},/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bm" = (/obj/item/gun/energy/retro/empty,/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)
 "bn" = (/obj/item/gps{gps_tag = "COMDOM1"},/turf/simulated/shuttle/floor/alienplating,/area/submap/cave/crashed_ufo)

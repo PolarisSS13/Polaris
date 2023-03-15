@@ -84,7 +84,7 @@
 	w_class = ITEMSIZE_HUGE
 	charge_cost = 300
 	projectile_type = /obj/item/projectile/beam/stun/darkmatter
-	cell_type = /obj/item/cell/device/weapon/recharge
+	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
 	battery_lock = 1
 	accuracy = 30
 
@@ -145,7 +145,7 @@
 	icon_state = "noise"
 	item_state = "noise"
 	w_class = ITEMSIZE_HUGE
-	cell_type = /obj/item/cell/device/weapon/recharge
+	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
 	battery_lock = 1
 	charge_cost = 400
 

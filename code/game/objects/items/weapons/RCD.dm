@@ -177,13 +177,13 @@
 	name = "electric rapid construction device"
 	desc = "A device used to rapidly build and deconstruct. It runs directly off of electricity, no matter cartridges needed."
 	icon_state = "electric_rcd"
-	var/obj/item/cell/cell = null
+	var/obj/item/stock_parts/cell/cell = null
 	var/make_cell = TRUE // If false, initialize() won't spawn a cell for this.
 	var/electric_cost_coefficent = 83.33 // Higher numbers make it less efficent. 86.3... means it should matche the standard RCD capacity on a 10k cell.
 
 /obj/item/rcd/electric/Initialize()
 	if(make_cell)
-		cell = new /obj/item/cell/high(src)
+		cell = new /obj/item/stock_parts/cell/high(src)
 	return ..()
 
 /obj/item/rcd/electric/Destroy()
@@ -195,7 +195,7 @@
 	return cell
 
 /obj/item/rcd/electric/can_afford(amount) // This makes it so borgs won't drain their last sliver of charge by mistake, as a bonus.
-	var/obj/item/cell/cell = get_cell()
+	var/obj/item/stock_parts/cell/cell = get_cell()
 	if(cell)
 		return cell.check_charge(amount * electric_cost_coefficent)
 	return FALSE
@@ -203,11 +203,11 @@
 /obj/item/rcd/electric/consume_resources(amount)
 	if(!can_afford(amount))
 		return FALSE
-	var/obj/item/cell/cell = get_cell()
+	var/obj/item/stock_parts/cell/cell = get_cell()
 	return cell.checked_use(amount * electric_cost_coefficent)
 
 /obj/item/rcd/electric/display_resources()
-	var/obj/item/cell/cell = get_cell()
+	var/obj/item/stock_parts/cell/cell = get_cell()
 	if(cell)
 		return "The power source connected to \the [src] has a charge of [cell.percent()]%."
 	return "It lacks a source of power, and cannot function."
@@ -303,12 +303,12 @@
 	item_state = "rcdammo"
 	w_class = ITEMSIZE_SMALL
 	origin_tech = list(TECH_MATERIAL = 2)
-	matter = list(DEFAULT_WALL_MATERIAL = 30000,"glass" = 15000)
+	matter = list(DEFAULT_WALL_MATERIAL = 30000,MAT_GLASS = 15000)
 	var/remaining = RCD_MAX_CAPACITY / 3
 
 /obj/item/rcd_ammo/large
 	name = "high-capacity matter cartridge"
 	desc = "Do not ingest."
-	matter = list(DEFAULT_WALL_MATERIAL = 45000,"glass" = 22500)
+	matter = list(DEFAULT_WALL_MATERIAL = 45000,MAT_GLASS = 22500)
 	origin_tech = list(TECH_MATERIAL = 4)
 	remaining = RCD_MAX_CAPACITY

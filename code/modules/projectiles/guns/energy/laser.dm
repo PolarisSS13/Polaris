@@ -46,7 +46,7 @@
 	projectile_type = /obj/item/projectile/beam/practice
 	charge_cost = 48
 
-	cell_type = /obj/item/cell/device
+	cell_type = /obj/item/stock_parts/cell/device
 
 	firemodes = list(
 		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 48),
@@ -143,7 +143,7 @@
 	charge_cost = 480 // Five shots.
 
 	projectile_type = /obj/item/projectile/beam/cyan
-	cell_type = /obj/item/cell/device/weapon/recharge/alien // Self charges.
+	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge/alien // Self charges.
 	origin_tech = list(TECH_COMBAT = 8, TECH_MAGNET = 7)
 	modifystate = "alienpistol"
 
@@ -163,7 +163,7 @@
 	origin_tech = null
 	fire_delay = 10		//Old pistol
 	charge_cost = 480	//to compensate a bit for self-recharging
-	cell_type = /obj/item/cell/device/weapon/recharge/captain
+	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge/captain
 	battery_lock = 1
 
 /obj/item/gun/energy/lasercannon
@@ -285,7 +285,7 @@
 	origin_tech = list(TECH_COMBAT = 1, TECH_MAGNET = 2)
 	matter = list(MAT_STEEL = 2000)
 	projectile_type = /obj/item/projectile/beam/lasertag/blue
-	cell_type = /obj/item/cell/device/weapon/recharge
+	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
 	battery_lock = 1
 	var/required_vest
 

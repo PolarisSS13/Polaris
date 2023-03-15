@@ -203,7 +203,7 @@
 					to_chat(user, "<span class='notice'>Mop attached.</span>")
 
 		if(8)
-			if(istype(W, /obj/item/cell))
+			if(istype(W, /obj/item/stock_parts/cell))
 				build_step++
 				to_chat(user, "<span class='notice'>You complete the ED-CLN.</span>")
 				var/turf/T = get_turf(src)

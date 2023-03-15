@@ -17,8 +17,8 @@
 	// If it uses energy.
 	var/use_cell = FALSE
 	var/hitcost = 120
-	var/obj/item/cell/bcell = null
-	var/cell_type = /obj/item/cell/device
+	var/obj/item/stock_parts/cell/bcell = null
+	var/cell_type = /obj/item/stock_parts/cell/device
 	item_icons = list(
 			slot_l_hand_str = 'icons/mob/items/lefthand_melee.dmi',
 			slot_r_hand_str = 'icons/mob/items/righthand_melee.dmi',
@@ -249,7 +249,7 @@
 
 /obj/item/melee/energy/axe/charge/loaded/Initialize()
 	. = ..()
-	bcell = new/obj/item/cell/device/weapon(src)
+	bcell = new/obj/item/stock_parts/cell/device/weapon(src)
 
 /*
  * Energy Sword
@@ -409,7 +409,7 @@
 
 /obj/item/melee/energy/sword/charge/loaded/Initialize()
 	. = ..()
-	bcell = new/obj/item/cell/device/weapon(src)
+	bcell = new/obj/item/stock_parts/cell/device/weapon(src)
 
 //Energy Blade (ninja uses this)
 

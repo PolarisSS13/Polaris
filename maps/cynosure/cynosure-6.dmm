@@ -2124,9 +2124,9 @@
 /obj/item/gun/energy/gun,
 /obj/item/gun/energy/gun,
 /obj/item/gun/energy/gun,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
 /turf/unsimulated/floor{
 	icon_state = "dark"
 	},
@@ -4270,10 +4270,10 @@
 /area/centcom/suppy)
 "eWA" = (
 /obj/structure/table/steel_reinforced,
-/obj/item/cell/high,
-/obj/item/cell/high,
-/obj/item/cell/hyper,
-/obj/item/cell/potato,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/hyper,
+/obj/item/stock_parts/cell/potato,
 /obj/structure/window/reinforced,
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
@@ -4523,8 +4523,8 @@
 "fjf" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/item/cell/high,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"
@@ -8947,13 +8947,13 @@
 /obj/machinery/cell_charger,
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/item/cell/high,
-/obj/item/cell/high,
-/obj/item/cell/high{
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/cell/high{
+/obj/item/stock_parts/cell/high{
 	pixel_x = 4;
 	pixel_y = 4
 	},
@@ -16677,10 +16677,10 @@
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/cell/high{
+/obj/item/stock_parts/cell/high{
 	pixel_y = -4
 	},
-/obj/item/cell/high,
+/obj/item/stock_parts/cell/high,
 /obj/item/defib_kit/compact/combat/loaded{
 	pixel_x = -2;
 	pixel_y = -2
@@ -21711,12 +21711,12 @@
 /area/centcom/terminal)
 "xrA" = (
 /obj/structure/table/reinforced,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/techfloor.dmi';
 	icon_state = "techfloor_gray"
@@ -21873,7 +21873,7 @@
 /obj/item/tank/emergency/oxygen/double,
 /obj/item/tank/emergency/oxygen/double,
 /obj/effect/floor_decal/industrial/outline/blue,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell/high,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "dark"

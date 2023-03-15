@@ -30,7 +30,7 @@
 	..()
 
 /obj/item/melee/baton/slime/loaded/Initialize()
-	bcell = new/obj/item/cell/device(src)
+	bcell = new/obj/item/stock_parts/cell/device(src)
 	update_icon()
 	return ..()
 

@@ -96,8 +96,8 @@
 	contains = list(
 			/obj/item/storage/toolbox/electrical = 2,
 			/obj/item/clothing/gloves/yellow = 2,
-			/obj/item/cell = 2,
-			/obj/item/cell/high = 2
+			/obj/item/stock_parts/cell = 2,
+			/obj/item/stock_parts/cell/high = 2
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate/ward

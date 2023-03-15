@@ -9,7 +9,7 @@
 	icon = 'icons/obj/uav.dmi'
 	icon_state = "uav"
 
-	var/obj/item/cell/cell
+	var/obj/item/stock_parts/cell/cell
 	var/cell_type = null //Can put a starting cell here
 
 	density = 1 //Is dense, but not anchored, so you can swap with it
@@ -39,7 +39,7 @@
 	var/no_masters_time = 0
 
 /obj/item/uav/loaded
-	cell_type = /obj/item/cell/high
+	cell_type = /obj/item/stock_parts/cell/high
 
 /obj/item/uav/Initialize()
 	. = ..()
@@ -107,7 +107,7 @@
 			cell.forceMove(get_turf(src))
 			cell = null
 
-	else if(istype(I, /obj/item/cell) && !cell)
+	else if(istype(I, /obj/item/stock_parts/cell) && !cell)
 		if(do_after(user, 3 SECONDS, src))
 			to_chat(user, "<span class='notice'>You insert [I] into [nickname].</span>")
 			playsound(src, 'sound/items/deconstruct.ogg', 50, 1)

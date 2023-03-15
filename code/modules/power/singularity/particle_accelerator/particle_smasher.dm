@@ -355,7 +355,7 @@
 	probability = 50
 
 /datum/particle_smasher_recipe/phoron_valhollide
-	reagents = list("phoron" = 10, "pacid" = 10)
+	reagents = list(MAT_PHORON = 10, "pacid" = 10)
 
 	result = /obj/item/stack/material/valhollide
 	required_material = /obj/item/stack/material/phoron
@@ -368,7 +368,7 @@
 	probability = 10
 
 /datum/particle_smasher_recipe/valhollide_supermatter
-	reagents = list("phoron" = 300)
+	reagents = list(MAT_PHORON = 300)
 
 	result = /obj/item/stack/material/supermatter
 	required_material = /obj/item/stack/material/valhollide

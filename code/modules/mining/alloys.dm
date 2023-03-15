@@ -11,8 +11,8 @@
 /datum/alloy/durasteel
 	metaltag = "durasteel"
 	requires = list(
-		"diamond" = 1,
-		"platinum" = 1,
+		MAT_DIAMOND = 1,
+		MAT_PLATINUM = 1,
 		"carbon" = 2,
 		"hematite" = 2
 		)
@@ -22,7 +22,7 @@
 /datum/alloy/plasteel
 	metaltag = "plasteel"
 	requires = list(
-		"platinum" = 1,
+		MAT_PLATINUM = 1,
 		"carbon" = 2,
 		"hematite" = 2
 		)
@@ -40,7 +40,7 @@
 /datum/alloy/borosilicate
 	metaltag = "borosilicate glass"
 	requires = list(
-		"platinum" = 1,
+		MAT_PLATINUM = 1,
 		"sand" = 2
 		)
 	product = /obj/item/stack/material/glass/phoronglass
@@ -48,7 +48,7 @@
 /datum/alloy/bronze
 	metaltag = "bronze"
 	requires = list(
-		"copper" = 2,
-		"tin" = 1
+		MAT_COPPER = 2,
+		MAT_TIN = 1
 		)
 	product = /obj/item/stack/material/bronze

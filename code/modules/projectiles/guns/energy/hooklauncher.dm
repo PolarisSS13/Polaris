@@ -14,7 +14,7 @@
 	charge_cost = 300
 	charge_meter = FALSE
 
-	cell_type = /obj/item/cell/device/weapon
+	cell_type = /obj/item/stock_parts/cell/device/weapon
 	projectile_type = /obj/item/projectile/energy/hook
 
 // An easily concealable not-ripoff version. It would be silenced, if it didn't make it blatant you're the one using it.
@@ -28,7 +28,7 @@
 
 	w_class = ITEMSIZE_TINY
 
-	cell_type = /obj/item/cell/device/weapon/recharge/alien
+	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge/alien
 	battery_lock = TRUE
 	charge_cost = 400
 

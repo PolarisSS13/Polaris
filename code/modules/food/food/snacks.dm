@@ -4053,7 +4053,7 @@
 	icon_state = "rosesalad"
 	filling_color = "#FF3867"
 	nutriment_amt = 10
-	nutriment_desc = list("bittersweet" = 10, "iron" = 5)
+	nutriment_desc = list("bittersweet" = 10, MAT_IRON = 5)
 	bitesize = 4
 
 /obj/item/reagent_containers/food/snacks/rosesalad/Initialize()

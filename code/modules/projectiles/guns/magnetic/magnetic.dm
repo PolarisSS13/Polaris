@@ -15,7 +15,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 4, TECH_ILLEGAL = 2, TECH_MAGNET = 4)
 	w_class = ITEMSIZE_LARGE
 
-	var/obj/item/cell/cell                              // Currently installed powercell.
+	var/obj/item/stock_parts/cell/cell                              // Currently installed powercell.
 	var/obj/item/stock_parts/capacitor/capacitor        // Installed capacitor. Higher rating == faster charge between shots. Set to a path to spawn with one of that type.
 	var/removable_components = TRUE                            // Whether or not the gun can be dismantled.
 	var/gun_unreliable = 15                                    // Percentage chance of detonating in your hands.
@@ -144,7 +144,7 @@
 /obj/item/gun/magnetic/attackby(var/obj/item/thing, var/mob/user)
 
 	if(removable_components)
-		if(istype(thing, /obj/item/cell))
+		if(istype(thing, /obj/item/stock_parts/cell))
 			if(cell)
 				to_chat(user, "<span class='warning'>\The [src] already has \a [cell] installed.</span>")
 				return
@@ -304,7 +304,7 @@
 	return new projectile_type(src)
 
 /obj/item/gun/magnetic/fuelrod/Initialize()
-	cell = new /obj/item/cell/high
+	cell = new /obj/item/stock_parts/cell/high
 	capacitor = new /obj/item/stock_parts/capacitor
 	. = ..()
 

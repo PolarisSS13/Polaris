@@ -25,7 +25,7 @@ var/global/const/DRINK_ICON_NOISY = "_noise"
 	possible_transfer_amounts = list(5,10,15,30)
 	atom_flags = ATOM_REAGENTS_IS_OPEN
 
-	matter = list("glass" = 60)
+	matter = list(MAT_GLASS = 60)
 
 /obj/item/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
 	. = ..()

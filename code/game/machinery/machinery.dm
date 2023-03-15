@@ -308,11 +308,11 @@ Class Procs:
 	RefreshParts()
 
 /obj/machinery/proc/default_use_hicell()
-	var/obj/item/cell/C = locate(/obj/item/cell) in component_parts
+	var/obj/item/stock_parts/cell/C = locate(/obj/item/stock_parts/cell) in component_parts
 	if(C)
 		component_parts -= C
 		qdel(C)
-		C = new /obj/item/cell/high(src)
+		C = new /obj/item/stock_parts/cell/high(src)
 		component_parts += C
 		return C
 

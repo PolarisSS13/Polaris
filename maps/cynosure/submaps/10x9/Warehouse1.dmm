@@ -101,10 +101,10 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/brown/border,
 /obj/structure/closet/crate/large/einstein,
-/obj/item/cell,
-/obj/item/cell,
-/obj/item/cell/high,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell,
+/obj/item/stock_parts/cell,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
 /obj/random/powercell,
 /obj/random/powercell,
 /obj/machinery/alarm{
@@ -189,7 +189,7 @@
 /obj/structure/closet/crate/focalpoint,
 /obj/item/module/power_control,
 /obj/item/stack/cable_coil/random,
-/obj/item/cell/apc,
+/obj/item/stock_parts/cell/apc,
 /turf/simulated/floor/plating,
 /area/template_noop)
 "w" = (

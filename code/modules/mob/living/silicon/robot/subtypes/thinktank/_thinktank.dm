@@ -1,5 +1,5 @@
 // Spawner landmarks are used because platforms that are mapped during
-// SSatoms init try to Initialize() twice. I have no idea why and I am 
+// SSatoms init try to Initialize() twice. I have no idea why and I am
 // not paid enough to spend more time trying to debug it.
 /obj/effect/landmark/robot_platform
 	name = "recon platform spawner"
@@ -20,7 +20,7 @@
 	icon_state = "tachi"
 	color = "#68a2f2"
 
-	cell =        /obj/item/cell/mech
+	cell =        /obj/item/stock_parts/cell/mech
 	idcard_type = /obj/item/card/id/platform
 	module =      /obj/item/robot_module/robot/platform
 
@@ -99,7 +99,7 @@
 	if(distance <= 3)
 
 		if(recharging)
-			var/obj/item/cell/recharging_atom = recharging.resolve()
+			var/obj/item/stock_parts/cell/recharging_atom = recharging.resolve()
 			if(istype(recharging_atom) && !QDELETED(recharging_atom))
 				. += "It has \a [recharging_atom] slotted into its recharging port."
 				. += "The cell readout shows [round(recharging_atom.percent(),1)]% charge."
@@ -152,7 +152,7 @@
 
 		if(recharging)
 
-			var/obj/item/cell/recharging_atom = recharging.resolve()
+			var/obj/item/stock_parts/cell/recharging_atom = recharging.resolve()
 			if(!istype(recharging_atom) || QDELETED(recharging_atom) || recharging_atom.loc != src)
 				recharging = null
 				return

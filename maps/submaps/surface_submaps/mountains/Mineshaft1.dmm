@@ -8,8 +8,8 @@
 /area/submap/cave/AMine1)
 "bd" = (
 /obj/structure/table/standard,
-/obj/item/cell/high,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high,
 /turf/simulated/floor/concrete,
 /area/submap/cave/AMine1)
 "cv" = (

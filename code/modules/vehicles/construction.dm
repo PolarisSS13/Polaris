@@ -14,7 +14,7 @@
 	w_class = 5
 
 	var/build_stage = 0
-	var/obj/item/cell/cell = null
+	var/obj/item/stock_parts/cell/cell = null
 
 /obj/item/vehicle_assembly/Initialize()
 	. = ..()
@@ -98,7 +98,7 @@
 				return
 
 		if(4)
-			if(istype(W, /obj/item/cell))
+			if(istype(W, /obj/item/stock_parts/cell))
 				user.drop_item()
 				W.forceMove(src)
 				cell = W
@@ -250,7 +250,7 @@
 				return
 
 		if(5)
-			if(istype(W, /obj/item/cell))
+			if(istype(W, /obj/item/stock_parts/cell))
 				user.drop_item()
 				W.forceMove(src)
 				cell = W
@@ -329,7 +329,7 @@
 				return
 
 		if(4)
-			if(istype(W, /obj/item/cell))
+			if(istype(W, /obj/item/stock_parts/cell))
 				user.drop_item()
 				W.forceMove(src)
 				cell = W

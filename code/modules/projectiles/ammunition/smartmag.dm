@@ -22,7 +22,7 @@
 
 	var/obj/item/gun/holding_gun = null	// What gun are we in, if any?
 
-	var/obj/item/cell/device/attached_cell = null	// What cell are we using, if any?
+	var/obj/item/stock_parts/cell/device/attached_cell = null	// What cell are we using, if any?
 
 	var/emagged = 0		// If you emag the smart mag, you can get the bullets out by clicking it
 
@@ -73,7 +73,7 @@
 	return FALSE
 
 /obj/item/ammo_magazine/smart/attackby(var/obj/item/I as obj, mob/user)
-	if(istype(I, /obj/item/cell/device))
+	if(istype(I, /obj/item/stock_parts/cell/device))
 		if(attached_cell)
 			to_chat(user, "<span class='notice'>\The [src] already has a [attached_cell.name] attached.</span>")
 			return

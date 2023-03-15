@@ -10,7 +10,7 @@
 	active_power_usage = 40000	//40 kW
 	var/efficiency = 40000 //will provide the modified power rate when upgraded
 	var/obj/item/charging = null
-	var/list/allowed_devices = list(/obj/item/gun/energy, /obj/item/melee/baton, /obj/item/modular_computer, /obj/item/computer_hardware/battery_module, /obj/item/cell, /obj/item/flashlight, /obj/item/electronic_assembly, /obj/item/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/flash, /obj/item/defib_kit)
+	var/list/allowed_devices = list(/obj/item/gun/energy, /obj/item/melee/baton, /obj/item/modular_computer, /obj/item/computer_hardware/battery_module, /obj/item/stock_parts/cell, /obj/item/flashlight, /obj/item/electronic_assembly, /obj/item/weldingtool/electric, /obj/item/ammo_magazine/smart, /obj/item/flash, /obj/item/defib_kit)
 	var/icon_state_charged = "recharger2"
 	var/icon_state_charging = "recharger1"
 	var/icon_state_idle = "recharger0" //also when unpowered
@@ -27,7 +27,7 @@
 	if(get_dist(user, src) <= 5)
 		. += "[charging ? "[charging]" : "Nothing"] is in [src]."
 		if(charging)
-			var/obj/item/cell/C = charging.get_cell()
+			var/obj/item/stock_parts/cell/C = charging.get_cell()
 			. += "Current charge: [C.charge] / [C.maxcharge]"
 
 /obj/machinery/recharger/attackby(obj/item/G as obj, mob/user as mob)
@@ -123,7 +123,7 @@
 		update_use_power(USE_POWER_IDLE)
 		icon_state = icon_state_idle
 	else
-		var/obj/item/cell/C = charging.get_cell()
+		var/obj/item/stock_parts/cell/C = charging.get_cell()
 		if(istype(C))
 			if(!C.fully_charged())
 				icon_state = icon_state_charging
@@ -139,7 +139,7 @@
 		return
 
 	if(charging)
-		var/obj/item/cell/C = charging.get_cell()
+		var/obj/item/stock_parts/cell/C = charging.get_cell()
 		if(istype(C))
 			C.emp_act(severity)
 
@@ -166,7 +166,7 @@
 	layer = ABOVE_TURF_LAYER
 	active_power_usage = 60000	//60 kW , It's more specialized than the standalone recharger (guns, batons, and flashlights only) so make it more powerful
 	efficiency = 60000
-	allowed_devices = list(/obj/item/gun/energy, /obj/item/gun/magnetic, /obj/item/melee/baton, /obj/item/flashlight, /obj/item/cell/device)
+	allowed_devices = list(/obj/item/gun/energy, /obj/item/gun/magnetic, /obj/item/melee/baton, /obj/item/flashlight, /obj/item/stock_parts/cell/device)
 	icon_state_charged = "wrecharger2"
 	icon_state_charging = "wrecharger1"
 	icon_state_idle = "wrecharger0"

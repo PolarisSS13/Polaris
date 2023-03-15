@@ -73,7 +73,7 @@
 	var/tension = 0                         // Current draw on the bow.
 	var/max_tension = 5                     // Highest possible tension.
 	var/release_speed = 5                   // Speed per unit of tension.
-	var/obj/item/cell/cell = null    // Used for firing superheated rods.
+	var/obj/item/stock_parts/cell/cell = null    // Used for firing superheated rods.
 	var/current_user                        // Used to check if the crossbow has changed hands since being drawn.
 
 /obj/item/gun/launcher/crossbow/update_release_force()
@@ -165,7 +165,7 @@
 				superheat_rod(user)
 			return
 
-	if(istype(W, /obj/item/cell))
+	if(istype(W, /obj/item/stock_parts/cell))
 		if(!cell)
 			user.drop_item()
 			cell = W

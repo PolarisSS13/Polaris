@@ -44,7 +44,7 @@
 "aR" = (/obj/structure/simple_door/wood,/turf/simulated/floor/carpet/sblucarpet,/area/submap/house1)
 "aS" = (/turf/simulated/floor/carpet/sblucarpet,/area/submap/house1)
 "aT" = (/obj/machinery/space_heater,/turf/simulated/floor/carpet/sblucarpet,/area/submap/house1)
-"aU" = (/obj/structure/table/rack,/obj/item/cell/device,/obj/item/cell/device,/obj/item/cell/device,/obj/item/clothing/under/explorer/armored,/obj/item/clothing/accessory/armor/armorplate/tactical,/turf/simulated/floor/wood,/area/submap/house1)
+"aU" = (/obj/structure/table/rack,/obj/item/stock_parts/cell/device,/obj/item/stock_parts/cell/device,/obj/item/stock_parts/cell/device,/obj/item/clothing/under/explorer/armored,/obj/item/clothing/accessory/armor/armorplate/tactical,/turf/simulated/floor/wood,/area/submap/house1)
 "aV" = (/obj/item/flashlight/lantern,/turf/simulated/floor/wood,/area/submap/house1)
 "aW" = (/obj/machinery/space_heater,/turf/simulated/floor/wood,/area/submap/house1)
 "aX" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/submap/house1)

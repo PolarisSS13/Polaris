@@ -161,7 +161,7 @@
 					to_chat(user, "<span class='notice'>Taser gun attached.</span>")
 
 		if(9)
-			if(istype(W, /obj/item/cell))
+			if(istype(W, /obj/item/stock_parts/cell))
 				build_step++
 				to_chat(user, "<span class='notice'>You complete the ED-209.</span>")
 				var/turf/T = get_turf(src)
@@ -170,4 +170,3 @@
 				qdel(W)
 				user.drop_from_inventory(src)
 				qdel(src)
-

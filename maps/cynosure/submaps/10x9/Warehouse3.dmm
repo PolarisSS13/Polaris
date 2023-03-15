@@ -204,8 +204,8 @@
 	dir = 6
 	},
 /obj/structure/closet/crate/einstein,
-/obj/item/cell,
-/obj/item/cell,
+/obj/item/stock_parts/cell,
+/obj/item/stock_parts/cell,
 /obj/random/powercell,
 /obj/random/powercell,
 /turf/simulated/floor/tiled/steel_dirty,
@@ -252,9 +252,9 @@
 	dir = 8
 	},
 /obj/structure/closet/crate/large/secure/heph,
-/obj/item/cell/device/weapon/empty,
-/obj/item/cell/device/weapon/empty,
-/obj/item/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon/empty,
+/obj/item/stock_parts/cell/device/weapon/empty,
+/obj/item/stock_parts/cell/device/weapon,
 /turf/simulated/floor/tiled/steel_dirty,
 /area/template_noop)
 "H" = (

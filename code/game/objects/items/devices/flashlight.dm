@@ -5,14 +5,14 @@
 	icon_state = "flashlight"
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
-	matter = list(MAT_STEEL = 50,"glass" = 20)
+	matter = list(MAT_STEEL = 50,MAT_GLASS = 20)
 	action_button_name = "Toggle Flashlight"
 	var/on = 0
 	var/brightness_on = 4 //luminosity when on
 	var/flashlight_power = 0.8	//lighting power when on
 	var/flashlight_colour = LIGHT_COLOR_INCANDESCENT_FLASHLIGHT	//lighting colour when on
-	var/obj/item/cell/cell
-	var/cell_type = /obj/item/cell/device
+	var/obj/item/stock_parts/cell/cell
+	var/cell_type = /obj/item/stock_parts/cell/device
 	var/list/brightness_levels
 	var/brightness_level = "medium"
 	var/power_usage
@@ -27,7 +27,7 @@
 		power_usage = brightness_levels[brightness_level]
 	else
 		verbs -= /obj/item/flashlight/verb/toggle
-	
+
 	update_icon()
 
 /obj/item/flashlight/Destroy()
@@ -217,8 +217,8 @@
 
 /obj/item/flashlight/attackby(obj/item/W, mob/user as mob)
 	if(power_use)
-		if(istype(W, /obj/item/cell))
-			if(istype(W, /obj/item/cell/device))
+		if(istype(W, /obj/item/stock_parts/cell))
+			if(istype(W, /obj/item/stock_parts/cell/device))
 				if(!cell)
 					user.drop_item()
 					W.loc = src
@@ -275,7 +275,7 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEMSIZE_SMALL
 	attack_verb = list ("smacked", "thwacked", "thunked")
-	matter = list(MAT_STEEL = 200,"glass" = 50)
+	matter = list(MAT_STEEL = 200,MAT_GLASS = 50)
 	hitsound = "swing_hit"
 
 /obj/item/flashlight/drone

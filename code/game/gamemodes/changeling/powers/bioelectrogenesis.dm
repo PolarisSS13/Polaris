@@ -66,15 +66,15 @@
 			var/list/L = new() //We make a new list to avoid copypasta.
 
 			//Check our hand.
-			if(istype(held_item,/obj/item/cell))
+			if(istype(held_item,/obj/item/stock_parts/cell))
 				L.Add(held_item)
 
 			//Now check our hand's item's contents, so we can recharge guns and other stuff.
-			for(var/obj/item/cell/cell in held_item.contents)
+			for(var/obj/item/stock_parts/cell/cell in held_item.contents)
 				L.Add(cell)
 
 			//Now for the actual recharging.
-			for(var/obj/item/cell/cell in L)
+			for(var/obj/item/stock_parts/cell/cell in L)
 				visible_message("<span class='warning'>Some sparks fall out from \the [src.name]\'s [held_item]!</span>",
 				"<span class='warning'>Our hand channels raw electricity into \the [held_item].</span>",
 				"<span class='italics'>You hear sparks!</span>")
@@ -185,7 +185,7 @@
 			var/success = 0
 			var/obj/T = target
 			//We can also recharge things we touch, such as APCs or hardsuits.
-			for(var/obj/item/cell/cell in T.contents)
+			for(var/obj/item/stock_parts/cell/cell in T.contents)
 				visible_message("<span class='warning'>Some sparks fall out from \the [target]!</span>",
 				"<span class='warning'>Our hand channels raw electricity into \the [target].</span>",
 				"<span class='italics'>You hear sparks!</span>")

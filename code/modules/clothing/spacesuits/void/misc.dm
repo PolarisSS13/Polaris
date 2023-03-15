@@ -36,7 +36,7 @@
 			/obj/item/holowarrant,
 			/obj/item/megaphone,
 			/obj/item/ammo_magazine,
-			/obj/item/cell
+			/obj/item/stock_parts/cell
 			)
 
 //Tajaran Pearlshield Coalition Spacesuit

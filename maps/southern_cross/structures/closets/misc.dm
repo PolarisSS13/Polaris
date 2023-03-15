@@ -30,7 +30,7 @@
 	starts_with = list(
 		/obj/item/gun/energy/phasegun = 2,
 		/obj/item/gun/energy/phasegun/pistol,
-		/obj/item/cell/device/weapon = 2,
+		/obj/item/stock_parts/cell/device/weapon = 2,
 		/obj/item/clothing/accessory/permit/gun/planetside)
 
 //Explorer Lockers
@@ -52,7 +52,7 @@
 		/obj/item/gps/explorer,
 		/obj/item/storage/box/flare,
 		/obj/item/geiger,
-		/obj/item/cell/device,
+		/obj/item/stock_parts/cell/device,
 		/obj/item/radio,
 		/obj/item/stack/marker_beacon/thirty,
 		/obj/item/cataloguer
@@ -124,7 +124,7 @@
 		/obj/item/reagent_containers/food/snacks/liquidfood,
 		/obj/item/reagent_containers/food/drinks/cans/waterbottle,
 		/obj/item/storage/box/flare,
-		/obj/item/cell/device,
+		/obj/item/stock_parts/cell/device,
 		/obj/item/radio)
 
 /obj/structure/closet/secure_closet/pilot/Initialize()

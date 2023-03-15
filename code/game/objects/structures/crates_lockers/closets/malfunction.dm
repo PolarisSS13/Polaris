@@ -8,5 +8,5 @@
 		/obj/item/clothing/head/helmet/space/void,
 		/obj/item/clothing/suit/space/void,
 		/obj/item/tool/crowbar,
-		/obj/item/cell,
+		/obj/item/stock_parts/cell,
 		/obj/item/multitool)

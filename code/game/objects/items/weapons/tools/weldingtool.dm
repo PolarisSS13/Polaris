@@ -17,7 +17,7 @@
 	w_class = ITEMSIZE_SMALL
 
 	//Cost to make in the autolathe
-	matter = list(MAT_STEEL = 70, "glass" = 30)
+	matter = list(MAT_STEEL = 70, MAT_GLASS = 30)
 
 	//R&D tech level
 	origin_tech = list(TECH_ENGINEERING = 1)
@@ -359,7 +359,7 @@
 	icon_state = "indwelder"
 	max_fuel = 40
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_PHORON = 2)
-	matter = list(MAT_STEEL = 70, "glass" = 60)
+	matter = list(MAT_STEEL = 70, MAT_GLASS = 60)
 
 /obj/item/weldingtool/largetank/cyborg
 	name = "integrated welding tool"
@@ -373,7 +373,7 @@
 	max_fuel = 80
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 3)
-	matter = list(MAT_STEEL = 70, "glass" = 120)
+	matter = list(MAT_STEEL = 70, MAT_GLASS = 120)
 
 /obj/item/weldingtool/mini
 	name = "emergency welding tool"
@@ -435,7 +435,7 @@
 	max_fuel = 40
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_PHORON = 3)
-	matter = list(MAT_STEEL = 70, "glass" = 120)
+	matter = list(MAT_STEEL = 70, MAT_GLASS = 120)
 	toolspeed = 0.5
 	change_icons = 0
 	flame_intensity = 3
@@ -532,9 +532,9 @@
 	icon_state = "arcwelder"
 	max_fuel = 0	//We'll handle the consumption later.
 	item_state = "ewelder"
-	var/obj/item/cell/power_supply //What type of power cell this uses
+	var/obj/item/stock_parts/cell/power_supply //What type of power cell this uses
 	var/charge_cost = 24	//The rough equivalent of 1 unit of fuel, based on us wanting 10 welds per battery
-	var/cell_type = /obj/item/cell/device
+	var/cell_type = /obj/item/stock_parts/cell/device
 	var/use_external_power = 0	//If in a borg or hardsuit, this needs to = 1
 	flame_color = "#00CCFF"  // Blue-ish, to set it apart from the gas flames.
 	acti_sound = 'sound/effects/sparks4.ogg'
@@ -550,7 +550,7 @@
 	else if(cell_type)
 		power_supply = new cell_type(src)
 	else
-		power_supply = new /obj/item/cell/device(src)
+		power_supply = new /obj/item/stock_parts/cell/device(src)
 	update_icon()
 
 /obj/item/weldingtool/electric/get_cell()
@@ -566,7 +566,7 @@
 
 /obj/item/weldingtool/electric/get_fuel()
 	if(use_external_power)
-		var/obj/item/cell/external = get_external_power_supply()
+		var/obj/item/stock_parts/cell/external = get_external_power_supply()
 		if(external)
 			return external.charge
 	else if(power_supply)
@@ -576,7 +576,7 @@
 
 /obj/item/weldingtool/electric/get_max_fuel()
 	if(use_external_power)
-		var/obj/item/cell/external = get_external_power_supply()
+		var/obj/item/stock_parts/cell/external = get_external_power_supply()
 		if(external)
 			return external.maxcharge
 	else if(power_supply)
@@ -589,7 +589,7 @@
 	if(get_fuel() >= amount)
 		power_supply.checked_use(charge_cost)
 		if(use_external_power)
-			var/obj/item/cell/external = get_external_power_supply()
+			var/obj/item/stock_parts/cell/external = get_external_power_supply()
 			if(!external || !external.use(charge_cost)) //Take power from the borg...
 				power_supply.give(charge_cost)	//Give it back to the cell.
 		if(M)
@@ -617,8 +617,8 @@
 		return ..()
 
 /obj/item/weldingtool/electric/attackby(obj/item/W, mob/user as mob)
-	if(istype(W, /obj/item/cell))
-		if(istype(W, /obj/item/cell/device))
+	if(istype(W, /obj/item/stock_parts/cell))
+		if(istype(W, /obj/item/stock_parts/cell/device))
 			if(!power_supply)
 				user.drop_item()
 				W.loc = src

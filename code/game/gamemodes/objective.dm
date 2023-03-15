@@ -450,7 +450,7 @@ var/global/list/all_objectives = list()
 		"nuclear gun" = /obj/item/gun/energy/gun/nuclear,
 		"diamond drill" = /obj/item/pickaxe/diamonddrill,
 		"bag of holding" = /obj/item/storage/backpack/holding,
-		"hyper-capacity cell" = /obj/item/cell/hyper,
+		"hyper-capacity cell" = /obj/item/stock_parts/cell/hyper,
 		"10 diamonds" = /obj/item/stack/material/diamond,
 		"50 gold bars" = /obj/item/stack/material/gold,
 		"25 refined uranium bars" = /obj/item/stack/material/uranium,
@@ -896,4 +896,3 @@ var/global/list/all_objectives = list()
 			rval = 2
 		return 0
 	return rval
-

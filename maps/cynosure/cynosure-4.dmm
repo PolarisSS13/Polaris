@@ -180,7 +180,7 @@
 /obj/effect/floor_decal/corner/blue/border{
 	dir = 9
 	},
-/obj/item/cell,
+/obj/item/stock_parts/cell,
 /turf/simulated/floor/tiled/techmaint,
 /area/tcommsat/cynosure/teleporter)
 "cw" = (

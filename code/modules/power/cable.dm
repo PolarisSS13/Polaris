@@ -23,7 +23,7 @@ By design, d1 is the smallest direction and d2 is the highest
 */
 var/global/list/possible_cable_coil_colours = list(
 		"White" = COLOR_WHITE,
-		"Silver" = COLOR_SILVER,
+		MAT_SILVER = COLOR_SILVER,
 		"Gray" = COLOR_GRAY,
 		"Black" = COLOR_BLACK,
 		"Red" = COLOR_RED,
@@ -503,7 +503,7 @@ var/global/list/possible_cable_coil_colours = list(
 	w_class = ITEMSIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
-	matter = list(MAT_STEEL = 50, "glass" = 20)
+	matter = list(MAT_STEEL = 50, MAT_GLASS = 20)
 	slot_flags = SLOT_BELT
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
@@ -943,7 +943,7 @@ var/global/list/possible_cable_coil_colours = list(
 	w_class = ITEMSIZE_SMALL
 	throw_speed = 2
 	throw_range = 5
-	matter = list(MAT_STEEL = 50, "glass" = 20)
+	matter = list(MAT_STEEL = 50, MAT_GLASS = 20)
 	slot_flags = SLOT_BELT
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = null

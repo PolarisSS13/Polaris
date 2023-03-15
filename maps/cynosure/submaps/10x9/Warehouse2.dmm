@@ -322,8 +322,8 @@
 	dir = 8
 	},
 /obj/random/powercell,
-/obj/item/cell,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell,
+/obj/item/stock_parts/cell/high,
 /obj/machinery/alarm{
 	dir = 1;
 	pixel_y = -22

@@ -26,7 +26,7 @@
 	name = "Custom wirer tool"
 	id = "wirer"
 	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	materials = list(MAT_STEEL = 5000, "glass" = 2500)
+	materials = list(MAT_STEEL = 5000, MAT_GLASS = 2500)
 	build_path = /obj/item/integrated_electronics/wirer
 	sort_string = "UCAAA"
 
@@ -34,7 +34,7 @@
 	name = "Custom circuit debugger tool"
 	id = "debugger"
 	req_tech = list(TECH_MATERIAL = 2, TECH_ENGINEERING = 2)
-	materials = list(MAT_STEEL = 5000, "glass" = 2500)
+	materials = list(MAT_STEEL = 5000, MAT_GLASS = 2500)
 	build_path = /obj/item/integrated_electronics/debugger
 	sort_string = "UCBBB"
 

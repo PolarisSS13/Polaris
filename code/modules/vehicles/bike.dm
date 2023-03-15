@@ -30,7 +30,7 @@
 
 /obj/vehicle/bike/Initialize()
 	. = ..()
-	cell = new /obj/item/cell/high(src)
+	cell = new /obj/item/stock_parts/cell/high(src)
 	ion = new /datum/effect_system/ion_trail_follow()
 	ion.set_up(src)
 	turn_off()

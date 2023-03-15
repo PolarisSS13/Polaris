@@ -74,7 +74,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Shotgun crate"
 	access = access_armory
-	
+
 /datum/supply_pack/munitions/shotgunsemi
 	name = "Weapons - Semi-Automatic Shotgun crate"
 	contains = list(
@@ -244,7 +244,7 @@
 
 /datum/supply_pack/munitions/pcellammo
 	name = "Ammunition - Power cell"
-	contains = list(/obj/item/cell/device/weapon = 3)
+	contains = list(/obj/item/stock_parts/cell/device/weapon = 3)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Energy ammunition crate"

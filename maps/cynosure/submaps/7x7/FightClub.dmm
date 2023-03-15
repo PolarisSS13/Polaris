@@ -15,7 +15,7 @@
 	operating = 0;
 	pixel_y = -24
 	},
-/obj/item/cell/high/empty,
+/obj/item/stock_parts/cell/high/empty,
 /turf/simulated/floor/plating,
 /area/template_noop)
 "m" = (

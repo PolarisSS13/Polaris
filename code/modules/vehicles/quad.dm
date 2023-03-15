@@ -28,7 +28,7 @@
 	var/outdoors_speed_mod = 0.7 //The general 'outdoors' speed. I.E., the general difference you'll be at when driving outside.
 
 /obj/vehicle/train/engine/quadbike/Initialize()
-	cell = new /obj/item/cell/high(src)
+	cell = new /obj/item/stock_parts/cell/high(src)
 	key = new key_type(src)
 	soundloop = new(list(src), FALSE)
 	. = ..()

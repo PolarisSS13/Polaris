@@ -24,7 +24,7 @@
 /turf/template_noop,
 /area/submap/methlab)
 "bA" = (
-/obj/item/cell/hyper,
+/obj/item/stock_parts/cell/hyper,
 /turf/simulated/floor/tiled/steel_dirty,
 /area/submap/methlab)
 "bJ" = (

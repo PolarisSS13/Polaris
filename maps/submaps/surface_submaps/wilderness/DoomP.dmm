@@ -375,8 +375,8 @@
 /area/submap/DoomP)
 "bq" = (
 /obj/structure/table/rack,
-/obj/item/cell/device/weapon,
-/obj/item/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
+/obj/item/stock_parts/cell/device/weapon,
 /obj/random/multiple/gun/projectile/handgun,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/DoomP)

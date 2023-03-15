@@ -21,8 +21,8 @@
 	name = "Carthatoline"
 	id = "carthatoline"
 	result = "carthatoline"
-	required_reagents = list("anti_toxin" = 1, "carbon" = 2, "phoron" = 0.1)
-	catalysts = list("phoron" = 1)
+	required_reagents = list("anti_toxin" = 1, "carbon" = 2, MAT_PHORON = 0.1)
+	catalysts = list(MAT_PHORON = 1)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/paracetamol
@@ -44,7 +44,7 @@
 	id = "oxycodone"
 	result = "oxycodone"
 	required_reagents = list("ethanol" = 1, "tramadol" = 1)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 1
 
 /decl/chemical_reaction/instant/sterilizine
@@ -79,7 +79,7 @@
 	name = "Thermite"
 	id = "thermite"
 	result = "thermite"
-	required_reagents = list("aluminum" = 1, "iron" = 1, "oxygen" = 1)
+	required_reagents = list("aluminum" = 1, MAT_IRON = 1, "oxygen" = 1)
 	result_amount = 3
 
 /decl/chemical_reaction/instant/bliss
@@ -144,15 +144,15 @@
 	id = "peridaxon"
 	result = "peridaxon"
 	required_reagents = list("bicaridine" = 2, "clonexadone" = 2)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/osteodaxon
 	name = "Osteodaxon"
 	id = "osteodaxon"
 	result = "osteodaxon"
-	required_reagents = list("bicaridine" = 2, "phoron" = 0.1, "carpotoxin" = 1)
-	catalysts = list("phoron" = 5)
+	required_reagents = list("bicaridine" = 2, MAT_PHORON = 0.1, "carpotoxin" = 1)
+	catalysts = list(MAT_PHORON = 5)
 	inhibitors = list("clonexadone" = 1) // Messes with cryox
 	result_amount = 2
 
@@ -160,8 +160,8 @@
 	name = "Respirodaxon"
 	id = "respirodaxon"
 	result = "respirodaxon"
-	required_reagents = list("dexalinp" = 2, "biomass" = 2, "phoron" = 1)
-	catalysts = list("phoron" = 5)
+	required_reagents = list("dexalinp" = 2, "biomass" = 2, MAT_PHORON = 1)
+	catalysts = list(MAT_PHORON = 5)
 	inhibitors = list("dexalin" = 1)
 	result_amount = 2
 
@@ -170,7 +170,7 @@
 	id = "gastirodaxon"
 	result = "gastirodaxon"
 	required_reagents = list("carthatoline" = 1, "biomass" = 2, "tungsten" = 2)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	inhibitors = list("lithium" = 1)
 	result_amount = 3
 
@@ -179,7 +179,7 @@
 	id = "hepanephrodaxon"
 	result = "hepanephrodaxon"
 	required_reagents = list("carthatoline" = 2, "biomass" = 2, "lithium" = 1)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	inhibitors = list("tungsten" = 1)
 	result_amount = 2
 
@@ -188,7 +188,7 @@
 	id = "cordradaxon"
 	result = "cordradaxon"
 	required_reagents = list("potassium_chlorophoride" = 1, "biomass" = 2, "bicaridine" = 2)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	inhibitors = list("clonexadone" = 1)
 	result_amount = 2
 
@@ -203,8 +203,8 @@
 	name = "Leporazine"
 	id = "leporazine"
 	result = "leporazine"
-	required_reagents = list("silicon" = 1, "copper" = 1)
-	catalysts = list("phoron" = 5)
+	required_reagents = list("silicon" = 1, MAT_COPPER = 1)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/cryptobiolin
@@ -232,8 +232,8 @@
 	name = "Dexalin"
 	id = "dexalin"
 	result = "dexalin"
-	required_reagents = list("oxygen" = 2, "phoron" = 0.1)
-	catalysts = list("phoron" = 1)
+	required_reagents = list("oxygen" = 2, MAT_PHORON = 0.1)
+	catalysts = list(MAT_PHORON = 1)
 	inhibitors = list("water" = 1) // Messes with cryox
 	result_amount = 1
 
@@ -248,7 +248,7 @@
 	name = "Dexalin Plus"
 	id = "dexalinp"
 	result = "dexalinp"
-	required_reagents = list("dexalin" = 1, "carbon" = 1, "iron" = 1)
+	required_reagents = list("dexalin" = 1, "carbon" = 1, MAT_IRON = 1)
 	result_amount = 3
 
 /decl/chemical_reaction/instant/bicaridine
@@ -263,14 +263,14 @@
 	name = "Myelamine"
 	id = "myelamine"
 	result = "myelamine"
-	required_reagents = list("bicaridine" = 1, "iron" = 2, "spidertoxin" = 1)
+	required_reagents = list("bicaridine" = 1, MAT_IRON = 2, "spidertoxin" = 1)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/royale
 	name = "Royale"
 	id = "royale"
 	result = "royale"
-	required_reagents = list("copper" = 1, "phosphorus" = 1, "sulfur" = 1)
+	required_reagents = list(MAT_COPPER = 1, "phosphorus" = 1, "sulfur" = 1)
 	result_amount = 3
 
 /decl/chemical_reaction/instant/hyperzine
@@ -306,8 +306,8 @@
 	name = "Clonexadone"
 	id = "clonexadone"
 	result = "clonexadone"
-	required_reagents = list("cryoxadone" = 1, "sodium" = 1, "phoron" = 0.1)
-	catalysts = list("phoron" = 5)
+	required_reagents = list("cryoxadone" = 1, "sodium" = 1, MAT_PHORON = 0.1)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/mortiferin
@@ -316,7 +316,7 @@
 	result = "mortiferin"
 	required_reagents = list("cryptobiolin" = 1, "clonexadone" = 1, "corophizine" = 1)
 	result_amount = 2
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 
 /decl/chemical_reaction/instant/spaceacillin
 	name = "Spaceacillin"
@@ -329,8 +329,8 @@
 	name = "Corophizine"
 	id = "corophizine"
 	result = "corophizine"
-	required_reagents = list("spaceacillin" = 1, "carbon" = 1, "phoron" = 0.1)
-	catalysts = list("phoron" = 5)
+	required_reagents = list("spaceacillin" = 1, "carbon" = 1, MAT_PHORON = 0.1)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/immunosuprizine
@@ -338,7 +338,7 @@
 	id = "immunosuprizine"
 	result = "immunosuprizine"
 	required_reagents = list("corophizine" = 1, "tungsten" = 1, "sacid" = 1)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/imidazoline
@@ -388,14 +388,14 @@
 	name = "Potassium Chlorophoride"
 	id = "potassium_chlorophoride"
 	result = "potassium_chlorophoride"
-	required_reagents = list("potassium_chloride" = 1, "phoron" = 1, "chloralhydrate" = 1)
+	required_reagents = list("potassium_chloride" = 1, MAT_PHORON = 1, "chloralhydrate" = 1)
 	result_amount = 4
 
 /decl/chemical_reaction/instant/zombiepowder
 	name = "Zombie Powder"
 	id = "zombiepowder"
 	result = "zombiepowder"
-	required_reagents = list("carpotoxin" = 5, "stoxin" = 5, "copper" = 5)
+	required_reagents = list("carpotoxin" = 5, "stoxin" = 5, MAT_COPPER = 5)
 	result_amount = 2
 
 /decl/chemical_reaction/instant/carpotoxin
@@ -433,7 +433,7 @@
 	id = "ammonia"
 	result = "ammonia"
 	required_reagents = list("hydrogen" = 3, "nitrogen" = 1)
-	inhibitors = list("phoron" = 1) // Messes with lexorin
+	inhibitors = list(MAT_PHORON = 1) // Messes with lexorin
 	result_amount = 3
 
 /decl/chemical_reaction/instant/diethylamine
@@ -497,7 +497,7 @@
 	id = "condensedcapsaicin"
 	result = "condensedcapsaicin"
 	required_reagents = list("capsaicin" = 2)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 1
 
 /decl/chemical_reaction/instant/coolant
@@ -512,14 +512,14 @@
 	name = "Rezadone"
 	id = "rezadone"
 	result = "rezadone"
-	required_reagents = list("carpotoxin" = 1, "cryptobiolin" = 1, "copper" = 1)
+	required_reagents = list("carpotoxin" = 1, "cryptobiolin" = 1, MAT_COPPER = 1)
 	result_amount = 3
 
 /decl/chemical_reaction/instant/lexorin
 	name = "Lexorin"
 	id = "lexorin"
 	result = "lexorin"
-	required_reagents = list("phoron" = 1, "hydrogen" = 1, "nitrogen" = 1)
+	required_reagents = list(MAT_PHORON = 1, "hydrogen" = 1, "nitrogen" = 1)
 	result_amount = 3
 
 /decl/chemical_reaction/instant/methylphenidate
@@ -591,7 +591,7 @@
 	name = "Solid Iron"
 	id = "solidiron"
 	result = null
-	required_reagents = list("frostoil" = 5, "iron" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, MAT_IRON = REAGENTS_PER_SHEET)
 	result_amount = 1
 	var/sheet_to_give = /obj/item/stack/material/iron
 
@@ -603,35 +603,35 @@
 /decl/chemical_reaction/instant/solidification/phoron
 	name = "Solid Phoron"
 	id = "solidphoron"
-	required_reagents = list("frostoil" = 5, "phoron" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, MAT_PHORON = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/phoron
 
 
 /decl/chemical_reaction/instant/solidification/silver
 	name = "Solid Silver"
 	id = "solidsilver"
-	required_reagents = list("frostoil" = 5, "silver" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, MAT_SILVER = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/silver
 
 
 /decl/chemical_reaction/instant/solidification/gold
 	name = "Solid Gold"
 	id = "solidgold"
-	required_reagents = list("frostoil" = 5, "gold" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, MAT_GOLD = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/gold
 
 
 /decl/chemical_reaction/instant/solidification/platinum
 	name = "Solid Platinum"
 	id = "solidplatinum"
-	required_reagents = list("frostoil" = 5, "platinum" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, MAT_PLATINUM = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/platinum
 
 
 /decl/chemical_reaction/instant/solidification/uranium
 	name = "Solid Uranium"
 	id = "soliduranium"
-	required_reagents = list("frostoil" = 5, "uranium" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 5, MAT_URANIUM = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/uranium
 
 
@@ -653,7 +653,7 @@
 /decl/chemical_reaction/instant/solidification/plasteel
 	name = "Solid Plasteel"
 	id = "solidplasteel"
-	required_reagents = list("frostoil" = 10, "plasteel" = REAGENTS_PER_SHEET)
+	required_reagents = list("frostoil" = 10, MAT_PLASTEEL = REAGENTS_PER_SHEET)
 	sheet_to_give = /obj/item/stack/material/plasteel
 
 
@@ -734,7 +734,7 @@
 	name = "EMP Pulse"
 	id = "emp_pulse"
 	result = null
-	required_reagents = list("uranium" = 1, "iron" = 1) // Yes, laugh, it's the best recipe I could think of that makes a little bit of sense
+	required_reagents = list(MAT_URANIUM = 1, MAT_IRON = 1) // Yes, laugh, it's the best recipe I could think of that makes a little bit of sense
 	result_amount = 2
 
 /decl/chemical_reaction/instant/emp_pulse/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -770,7 +770,7 @@
 	name = "Napalm"
 	id = "napalm"
 	result = null
-	required_reagents = list("aluminum" = 1, "phoron" = 1, "sacid" = 1 )
+	required_reagents = list("aluminum" = 1, MAT_PHORON = 1, "sacid" = 1 )
 	result_amount = 1
 
 /decl/chemical_reaction/instant/napalm/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -841,7 +841,7 @@
 	name = "Iron Foam"
 	id = "ironlfoam"
 	result = null
-	required_reagents = list("iron" = 3, "foaming_agent" = 1, "pacid" = 1)
+	required_reagents = list(MAT_IRON = 3, "foaming_agent" = 1, "pacid" = 1)
 	result_amount = 5
 
 /decl/chemical_reaction/instant/ironfoam/on_reaction(var/datum/reagents/holder, var/created_volume)
@@ -1095,7 +1095,7 @@
 	name = "Hydrophoron"
 	id = "hydrophoron"
 	result = "hydrophoron"
-	required_reagents = list("hydrogen" = 1, "phoron" = 1)
+	required_reagents = list("hydrogen" = 1, MAT_PHORON = 1)
 	inhibitors = list("nitrogen" = 1) //So it doesn't mess with lexorin
 	result_amount = 2
 
@@ -1126,7 +1126,7 @@
 	id = "malish-qualem"
 	result = "malish-qualem"
 	required_reagents = list("immunosuprizine" = 1, "qerr_quem" = 1, "inaprovaline" = 1)
-	catalysts = list("phoron" = 5)
+	catalysts = list(MAT_PHORON = 5)
 	result_amount = 2
 
 // Biomass, for cloning and bioprinters
@@ -1134,7 +1134,7 @@
 	name = "Biomass"
 	id = "biomass"
 	result = "biomass"
-	required_reagents = list("protein" = 1, "sugar" = 1, "phoron" = 1)
+	required_reagents = list("protein" = 1, "sugar" = 1, MAT_PHORON = 1)
 	result_amount = 1	// Roughly 20u per phoron sheet
 
 //Cube Food Colonies

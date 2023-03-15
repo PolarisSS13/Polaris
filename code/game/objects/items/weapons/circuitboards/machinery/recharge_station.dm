@@ -11,4 +11,4 @@
 							/obj/item/stack/cable_coil = 5,
 							/obj/item/stock_parts/capacitor = 2,
 							/obj/item/stock_parts/manipulator = 2,
-							/obj/item/cell = 1)
+							/obj/item/stock_parts/cell = 1)

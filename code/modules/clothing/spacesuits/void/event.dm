@@ -66,7 +66,7 @@
 			/obj/item/geiger,
 			/obj/item/tool,
 			/obj/item/weldingtool,
-			/obj/item/cell,
+			/obj/item/stock_parts/cell,
 			/obj/item/pickaxe,
 			/obj/item/measuring_tape,
 			/obj/item/lightreplacer,
@@ -105,7 +105,7 @@
 			/obj/item/stack/medical,
 			/obj/item/gps,
 			/obj/item/radio/beacon,
-			/obj/item/cell
+			/obj/item/stock_parts/cell
 			)
 
 //Marine Crewsuit (BLUE, SHIELD)
@@ -142,7 +142,7 @@
 			/obj/item/holowarrant,
 			/obj/item/megaphone,
 			/obj/item/ammo_magazine,
-			/obj/item/cell
+			/obj/item/stock_parts/cell
 			)
 
 //Officer Crewsuit (GOLD, X)
@@ -180,7 +180,7 @@
 			/obj/item/holowarrant,
 			/obj/item/megaphone,
 			/obj/item/ammo_magazine,
-			/obj/item/cell
+			/obj/item/stock_parts/cell
 			)
 
 //Pilot Crewsuit (ROYAL BLUE, I)
@@ -257,7 +257,7 @@
 			/obj/item/stack/marker_beacon,
 			/obj/item/stack/flag,
 			/obj/item/clipboard,
-			/obj/item/cell
+			/obj/item/stock_parts/cell
 			)
 
 //Mercenary Crewsuit (RED, CROSS)
@@ -297,5 +297,5 @@
 			/obj/item/spaceflare,
 			/obj/item/powersink,
 			/obj/item/radio_jammer,
-			/obj/item/cell
+			/obj/item/stock_parts/cell
 			)

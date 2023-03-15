@@ -227,7 +227,7 @@ research holder datum.
 	item_state = "card-id"
 	randpixel = 5
 	w_class = ITEMSIZE_SMALL
-	matter = list(MAT_STEEL = 30, "glass" = 10)
+	matter = list(MAT_STEEL = 30, MAT_GLASS = 10)
 	var/datum/tech/stored
 
 /obj/item/disk/tech_disk/Initialize()
@@ -242,7 +242,7 @@ research holder datum.
 	item_state = "card-id"
 	randpixel = 5
 	w_class = ITEMSIZE_SMALL
-	matter = list(MAT_STEEL = 30, "glass" = 10)
+	matter = list(MAT_STEEL = 30, MAT_GLASS = 10)
 	var/datum/design/blueprint
 
 /obj/item/disk/design_disk/Initialize()

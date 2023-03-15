@@ -19,17 +19,17 @@
 
 	var/list/ore_types = list(
 		"hematite" = /obj/item/ore/iron,
-		"uranium" = /obj/item/ore/uranium,
-		"gold" = /obj/item/ore/gold,
-		"silver" = /obj/item/ore/silver,
-		"diamond" = /obj/item/ore/diamond,
-		"phoron" = /obj/item/ore/phoron,
-		"osmium" = /obj/item/ore/osmium,
+		MAT_URANIUM = /obj/item/ore/uranium,
+		MAT_GOLD = /obj/item/ore/gold,
+		MAT_SILVER = /obj/item/ore/silver,
+		MAT_DIAMOND = /obj/item/ore/diamond,
+		MAT_PHORON = /obj/item/ore/phoron,
+		MAT_OSMIUM = /obj/item/ore/osmium,
 		"hydrogen" = /obj/item/ore/hydrogen,
 		"silicates" = /obj/item/ore/glass,
 		"carbon" = /obj/item/ore/coal,
-		"copper" = /obj/item/ore/copper,
-	//	"tin" = /obj/item/ore/tin,
+		MAT_COPPER = /obj/item/ore/copper,
+	//	MAT_TIN = /obj/item/ore/tin,
 		"bauxite" = /obj/item/ore/bauxite,
 		"rutile" = /obj/item/ore/rutile
 		)
@@ -39,19 +39,19 @@
 	var/capacity
 	var/charge_use
 	var/exotic_drilling
-	var/obj/item/cell/cell = null
+	var/obj/item/stock_parts/cell/cell = null
 
 	// Found with an advanced laser. exotic_drilling >= 1
 	var/list/ore_types_uncommon = list(
 		MAT_MARBLE = /obj/item/ore/marble,
-		"painite" = /obj/item/ore/painite,
-		"quartz" = /obj/item/ore/quartz,
+		MAT_PAINITE = /obj/item/ore/painite,
+		MAT_QUARTZ = /obj/item/ore/quartz,
 		MAT_LEAD = /obj/item/ore/lead
 		)
 
 	// Found with an ultra laser. exotic_drilling >= 2
 	var/list/ore_types_rare = list(
-		"magmellite" = /obj/item/ore/magmellite,
+		MAT_MAGMELLITE = /obj/item/ore/magmellite,
 		MAT_VERDANTIUM = /obj/item/ore/verdantium
 		)
 
@@ -68,7 +68,7 @@
 	return cell
 
 /obj/machinery/mining/drill/loaded
-	cell = /obj/item/cell/high
+	cell = /obj/item/stock_parts/cell/high
 
 /obj/machinery/mining/drill/process()
 
@@ -175,7 +175,7 @@
 			return
 	if(!panel_open || active) return ..()
 
-	if(istype(O, /obj/item/cell))
+	if(istype(O, /obj/item/stock_parts/cell))
 		if(cell)
 			to_chat(user, "The drill already has a cell installed.")
 		else
@@ -250,7 +250,7 @@
 			capacity = 200 * P.rating
 		if(istype(P, /obj/item/stock_parts/capacitor))
 			charge_use -= 10 * P.rating
-	cell = locate(/obj/item/cell) in component_parts
+	cell = locate(/obj/item/stock_parts/cell) in component_parts
 
 /obj/machinery/mining/drill/proc/check_supports()
 

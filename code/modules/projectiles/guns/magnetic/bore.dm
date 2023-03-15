@@ -82,7 +82,7 @@
 		return "<span class='notice'>It has [mat_storage] out of [max_mat_storage] units of [ammo_material] loaded.</span>"
 	else
 		return "<span class='warning'>It\'s out of [ammo_material]!</span>"
-	
+
 
 /obj/item/gun/magnetic/matfed/attackby(var/obj/item/thing, var/mob/user)
 	if(removable_components)
@@ -267,5 +267,5 @@
 		generator_state = GEN_OFF
 
 /obj/item/gun/magnetic/matfed/phoronbore/loaded
-	cell = /obj/item/cell/apc
+	cell = /obj/item/stock_parts/cell/apc
 	capacitor = /obj/item/stock_parts/capacitor

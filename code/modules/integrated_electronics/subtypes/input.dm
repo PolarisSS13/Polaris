@@ -700,11 +700,11 @@
 	if(AM)
 
 
-		var/obj/item/cell/cell = null
-		if(istype(AM, /obj/item/cell)) // Is this already a cell?
+		var/obj/item/stock_parts/cell/cell = null
+		if(istype(AM, /obj/item/stock_parts/cell)) // Is this already a cell?
 			cell = AM
 		else // If not, maybe there's a cell inside it?
-			for(var/obj/item/cell/C in AM.contents)
+			for(var/obj/item/stock_parts/cell/C in AM.contents)
 				if(C) // Find one cell to charge.
 					cell = C
 					break

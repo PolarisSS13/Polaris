@@ -9,14 +9,14 @@
 	name = "basic hard drive"
 	id = "hdd_basic"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
-	materials = list(MAT_STEEL = 2000, "glass" = 100)
+	materials = list(MAT_STEEL = 2000, MAT_GLASS = 100)
 	build_path = /obj/item/computer_hardware/hard_drive/
 	sort_string = "VAAAA"
 
 /datum/design/item/modularcomponent/disk/advanced
 	name = "advanced hard drive"
 	id = "hdd_advanced"
-	materials = list(MAT_STEEL = 4000, "glass" = 200)
+	materials = list(MAT_STEEL = 4000, MAT_GLASS = 200)
 	build_path = /obj/item/computer_hardware/hard_drive/advanced
 	sort_string = "VAAAB"
 
@@ -24,7 +24,7 @@
 	name = "super hard drive"
 	id = "hdd_super"
 	req_tech = list(TECH_DATA = 3, TECH_ENGINEERING = 3)
-	materials = list(MAT_STEEL = 8000, "glass" = 400)
+	materials = list(MAT_STEEL = 8000, MAT_GLASS = 400)
 	build_path = /obj/item/computer_hardware/hard_drive/super
 	sort_string = "VAAAC"
 
@@ -32,7 +32,7 @@
 	name = "cluster hard drive"
 	id = "hdd_cluster"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 4)
-	materials = list(MAT_STEEL = 16000, "glass" = 800)
+	materials = list(MAT_STEEL = 16000, MAT_GLASS = 800)
 	build_path = /obj/item/computer_hardware/hard_drive/cluster
 	sort_string = "VAAAD"
 
@@ -40,7 +40,7 @@
 	name = "small hard drive"
 	id = "hdd_small"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 2)
-	materials = list(MAT_STEEL = 4000, "glass" = 200)
+	materials = list(MAT_STEEL = 4000, MAT_GLASS = 200)
 	build_path = /obj/item/computer_hardware/hard_drive/small
 	sort_string = "VAAAE"
 
@@ -48,7 +48,7 @@
 	name = "micro hard drive"
 	id = "hdd_micro"
 	req_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1)
-	materials = list(MAT_STEEL = 2000, "glass" = 100)
+	materials = list(MAT_STEEL = 2000, MAT_GLASS = 100)
 	build_path = /obj/item/computer_hardware/hard_drive/micro
 	sort_string = "VAAAF"
 
@@ -58,7 +58,7 @@
 	name = "basic network card"
 	id = "netcard_basic"
 	req_tech = list(TECH_DATA = 2, TECH_ENGINEERING = 1)
-	materials = list(MAT_STEEL = 500, "glass" = 100)
+	materials = list(MAT_STEEL = 500, MAT_GLASS = 100)
 	build_path = /obj/item/computer_hardware/network_card
 	sort_string = "VBAAA"
 
@@ -66,7 +66,7 @@
 	name = "advanced network card"
 	id = "netcard_advanced"
 	req_tech = list(TECH_DATA = 4, TECH_ENGINEERING = 2)
-	materials = list(MAT_STEEL = 1000, "glass" = 200)
+	materials = list(MAT_STEEL = 1000, MAT_GLASS = 200)
 	build_path = /obj/item/computer_hardware/network_card/advanced
 	sort_string = "VBAAB"
 
@@ -74,7 +74,7 @@
 	name = "wired network card"
 	id = "netcard_wired"
 	req_tech = list(TECH_DATA = 5, TECH_ENGINEERING = 3)
-	materials = list(MAT_STEEL = 5000, "glass" = 400)
+	materials = list(MAT_STEEL = 5000, MAT_GLASS = 400)
 	build_path = /obj/item/computer_hardware/network_card/wired
 	sort_string = "VBAAC"
 
@@ -198,7 +198,7 @@
 	name = "basic data crystal"
 	id = "portadrive_basic"
 	req_tech = list(TECH_DATA = 1)
-	materials = list("glass" = 8000)
+	materials = list(MAT_GLASS = 8000)
 	build_path = /obj/item/computer_hardware/hard_drive/portable
 	sort_string = "VFAAA"
 
@@ -206,7 +206,7 @@
 	name = "advanced data crystal"
 	id = "portadrive_advanced"
 	req_tech = list(TECH_DATA = 2)
-	materials = list("glass" = 16000)
+	materials = list(MAT_GLASS = 16000)
 	build_path = /obj/item/computer_hardware/hard_drive/portable/advanced
 	sort_string = "VFAAB"
 
@@ -214,6 +214,6 @@
 	name = "super data crystal"
 	id = "portadrive_super"
 	req_tech = list(TECH_DATA = 4)
-	materials = list("glass" = 32000)
+	materials = list(MAT_GLASS = 32000)
 	build_path = /obj/item/computer_hardware/hard_drive/portable/super
 	sort_string = "VFAAC"

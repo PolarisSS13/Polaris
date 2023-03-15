@@ -93,7 +93,7 @@
 			update_icon()
 			return 1
 
-		else if(!cell && istype(W,/obj/item/cell))
+		else if(!cell && istype(W,/obj/item/stock_parts/cell))
 
 			if(!user.unEquip(W))
 				return

@@ -19288,8 +19288,8 @@
 "iWF" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
-/obj/item/cell/high,
-/obj/item/cell/high{
+/obj/item/stock_parts/cell/high,
+/obj/item/stock_parts/cell/high{
 	pixel_y = -4
 	},
 /turf/simulated/floor/reinforced,
@@ -28986,7 +28986,7 @@
 "nic" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/item/cell/high,
+/obj/item/stock_parts/cell/high,
 /obj/item/tool/wrench,
 /obj/item/stack/cable_coil,
 /obj/item/stack/cable_coil{

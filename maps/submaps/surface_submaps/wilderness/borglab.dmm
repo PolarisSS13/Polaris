@@ -242,7 +242,7 @@
 /obj/item/reagent_containers/food/snacks/burrito_cheese,
 /obj/effect/floor_decal/rust,
 /obj/effect/floor_decal/rust,
-/obj/item/cell/super/empty,
+/obj/item/stock_parts/cell/super/empty,
 /turf/simulated/floor/tiled,
 /area/submap/BorgLab)
 "gh" = (

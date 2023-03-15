@@ -97,8 +97,8 @@
 	The device is also capable of 'frankenstein'-ing a corpse, long after normal technology would be able to save them. The body will still be tied to the\
 	normal damage limits for survival, however, so care must be taken."
 	icon_state = "material"
-	var/battery_type = /obj/item/cell/device/weapon/recharge
-	var/obj/item/cell/battery = null
+	var/battery_type = /obj/item/stock_parts/cell/device/weapon/recharge
+	var/obj/item/stock_parts/cell/battery = null
 
 /obj/item/clothing/gloves/ring/buzzer/get_cell()
 	return battery

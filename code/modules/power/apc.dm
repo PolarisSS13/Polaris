@@ -61,16 +61,16 @@ GLOBAL_LIST_EMPTY(apcs)
 	is_critical = 1
 
 /obj/machinery/power/apc/high
-	cell_type = /obj/item/cell/high
+	cell_type = /obj/item/stock_parts/cell/high
 
 /obj/machinery/power/apc/super
-	cell_type = /obj/item/cell/super
+	cell_type = /obj/item/stock_parts/cell/super
 
 /obj/machinery/power/apc/super/critical
 	is_critical = 1
 
 /obj/machinery/power/apc/hyper
-	cell_type = /obj/item/cell/hyper
+	cell_type = /obj/item/stock_parts/cell/hyper
 
 /obj/machinery/power/apc/alarms_hidden
 	alarms_hidden = TRUE
@@ -87,10 +87,10 @@ GLOBAL_LIST_EMPTY(apcs)
 	req_access = list(access_engine_equip)
 	var/area/area
 	var/areastring = null
-	var/obj/item/cell/cell
+	var/obj/item/stock_parts/cell/cell
 	var/chargelevel = 0.0005  // Cap for how fast APC cells charge, as a percentage-per-tick (0.01 means cellcharge is capped to 1% per second)
 	var/start_charge = 90				// initial cell charge %
-	var/cell_type = /obj/item/cell/apc
+	var/cell_type = /obj/item/stock_parts/cell/apc
 	var/opened = 0 //0=closed, 1=opened, 2=cover removed
 	var/shorted = 0
 	var/grid_check = FALSE
@@ -134,7 +134,7 @@ GLOBAL_LIST_EMPTY(apcs)
 	var/static/list/status_overlays_lighting
 	var/static/list/status_overlays_environ
 	var/alarms_hidden = FALSE //If power alarms from this APC are visible on consoles
-	
+
 	var/nightshift_lights = FALSE
 	var/nightshift_setting = NIGHTSHIFT_AUTO
 	var/last_nightshift_switch = 0
@@ -514,7 +514,7 @@ GLOBAL_LIST_EMPTY(apcs)
 		else
 			opened = 1
 			update_icon()
-	else if	(istype(W, /obj/item/cell) && opened)	// trying to put a cell inside
+	else if	(istype(W, /obj/item/stock_parts/cell) && opened)	// trying to put a cell inside
 		if(cell)
 			to_chat(user, "The [name] already has a power cell installed.")
 			return

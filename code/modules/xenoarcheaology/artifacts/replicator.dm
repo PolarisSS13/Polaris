@@ -46,7 +46,7 @@
 	/obj/item/clothing/head/cone,
 	/obj/item/tool/crowbar,
 	/obj/item/clipboard,
-	/obj/item/cell,
+	/obj/item/stock_parts/cell,
 	/obj/item/surgical/circular_saw,
 	/obj/item/material/knife/machete/hatchet,
 	/obj/item/handcuffs,

@@ -7,7 +7,7 @@
 	center_of_mass = list("x" = 16,"y" = 10)
 	atom_flags = ATOM_REAGENTS_IS_OPEN
 	item_flags = NOBLUDGEON
-	matter = list("glass" = 300, MAT_STEEL = 300)
+	matter = list(MAT_GLASS = 300, MAT_STEEL = 300)
 	slot_flags = SLOT_BELT
 	throwforce = 3
 	w_class = ITEMSIZE_SMALL

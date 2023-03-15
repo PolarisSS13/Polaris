@@ -289,8 +289,8 @@
 			prob(2);list(
 				/obj/item/melee/baton/cattleprod,
 				/obj/item/melee/baton/cattleprod,
-				/obj/item/cell/high,
-				/obj/item/cell/high,
+				/obj/item/stock_parts/cell/high,
+				/obj/item/stock_parts/cell/high,
 				/obj/structure/closet/crate
 			),
 			prob(2);list(
@@ -723,7 +723,7 @@
 				/obj/item/module/power_control,
 				/obj/item/stack/cable_coil,
 				/obj/item/frame/apc,
-				/obj/item/cell/apc,
+				/obj/item/stock_parts/cell/apc,
 				/obj/structure/closet/crate/focalpoint //FOCAL APC
 			),
 			prob(5);list(
@@ -760,10 +760,10 @@
 			prob(2);list(
 				/obj/random/energy,
 				/obj/random/energy,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
 				/obj/structure/closet/crate/secure/heph //HEPHAESTUS ENERGY
 			),
 			prob(1);list(
@@ -1020,7 +1020,7 @@
 				/obj/item/module/power_control,
 				/obj/item/stack/cable_coil,
 				/obj/item/frame/apc,
-				/obj/item/cell/apc,
+				/obj/item/stock_parts/cell/apc,
 				/obj/structure/closet/crate/focalpoint //FOCAL APC
 			),
 			prob(5);list(
@@ -1256,16 +1256,16 @@
 			prob(2);list(
 				/obj/random/energy,
 				/obj/random/energy,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
 				/obj/random/energy,
 				/obj/random/energy,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
-				/obj/item/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
+				/obj/item/stock_parts/cell/device/weapon,
 				/obj/structure/closet/crate/large/secure/heph //HEPH ENERGY
 			),
 			prob(2);list(

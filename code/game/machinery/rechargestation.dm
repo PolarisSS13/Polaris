@@ -9,7 +9,7 @@
 	use_power = USE_POWER_IDLE
 	idle_power_usage = 50
 	var/mob/occupant = null
-	var/obj/item/cell/cell = null
+	var/obj/item/stock_parts/cell/cell = null
 	var/icon_update_tick = 0	// Used to rebuild the overlay only once every 10 ticks
 	var/charging = 0
 
@@ -120,7 +120,7 @@
 						rigchest.calc_breach_damage()
 						to_chat(H, "<span class='notice'>[rigchest] is repaired!</span>")
 				if(wornrig.cell)
-					var/obj/item/cell/rigcell = wornrig.cell
+					var/obj/item/stock_parts/cell/rigcell = wornrig.cell
 					var/diff = min(rigcell.maxcharge - rigcell.charge, charging_power * CELLRATE) // Capped by charging_power / tick
 					var/charge_used = cell.use(diff)
 					rigcell.give(charge_used)
@@ -181,7 +181,7 @@
 			cap_rating += P.rating
 		if(istype(P, /obj/item/stock_parts/manipulator))
 			man_rating += P.rating
-	cell = locate(/obj/item/cell) in component_parts
+	cell = locate(/obj/item/stock_parts/cell) in component_parts
 
 	charging_power = 40000 + 40000 * cap_rating
 	restore_power_active = 10000 + 15000 * cap_rating
