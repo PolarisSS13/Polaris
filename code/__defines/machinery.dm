@@ -17,6 +17,11 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define USE_POWER_IDLE   1	// Machine is using power at its idle power level
 #define USE_POWER_ACTIVE 2	// Machine is using power at its active power level
 
+/// Bitflags for a machine's preferences on when it should start processing. For use with machinery's `processing_flags` var.
+#define START_PROCESSING_ON_INIT (1<<0) /// Indicates the machine will automatically start processing right after it's `Initialize()` is ran.
+#define START_PROCESSING_MANUALLY (1<<1) /// Machines with this flag will not start processing when it's spawned. Use this if you want to manually control when a machine starts processing.
+
+
 // Channel numbers for power.
 #define CURRENT_CHANNEL -1 // Passed as an argument this means "use whatever current channel is"
 #define EQUIP   1
@@ -150,8 +155,6 @@ if (!(DATUM.datum_flags & DF_ISPROCESSING)) {\
 #define STOP_PROCESSING_IN_LIST(DATUM, LIST) LIST.Remove(DATUM);DATUM.datum_flags &= ~DF_ISPROCESSING
 
 // Note - I would prefer these be defined machines.dm, but some are used prior in file order. ~Leshana
-#define START_MACHINE_PROCESSING(Datum) START_PROCESSING_IN_LIST(Datum, global.processing_machines)
-#define STOP_MACHINE_PROCESSING(Datum) STOP_PROCESSING_IN_LIST(Datum, global.processing_machines)
 
 #define START_PROCESSING_PIPENET(Datum) START_PROCESSING_IN_LIST(Datum, global.pipe_networks)
 #define STOP_PROCESSING_PIPENET(Datum) STOP_PROCESSING_IN_LIST(Datum, global.pipe_networks)
@@ -165,4 +168,4 @@ if (!(DATUM.datum_flags & DF_ISPROCESSING)) {\
 // Computer login types
 #define LOGIN_TYPE_NORMAL 1
 #define LOGIN_TYPE_AI 2
-#define LOGIN_TYPE_ROBOT 3 
+#define LOGIN_TYPE_ROBOT 3

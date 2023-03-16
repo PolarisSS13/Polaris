@@ -26,11 +26,12 @@ SUBSYSTEM_DEF(machines)
 
 	// TODO - PHASE 2 - Switch these from globals to instance vars
 	// var/list/pipenets      = list()
-	// var/list/machinery     = list()
+	var/list/machinery			= list()
 	// var/list/powernets     = list()
 	// var/list/power_objects = list()
+	var/list/processing 		= list()
 
-	var/list/current_run = list()
+	var/list/current_run 		= list()
 
 /datum/controller/subsystem/machines/Initialize(timeofday)
 	makepowernets()
@@ -89,10 +90,10 @@ SUBSYSTEM_DEF(machines)
 	msg += "PO:[round(cost_power_objects,1)]"
 	msg += "} "
 	msg += "PI:[global.pipe_networks.len]|"
-	msg += "MC:[global.processing_machines.len]|"
+	msg += "MC:[processing.len]|"
 	msg += "PN:[global.powernets.len]|"
 	msg += "PO:[global.processing_power_items.len]|"
-	msg += "MC/MS:[round((cost ? global.processing_machines.len/cost_machinery : 0),0.1)]"
+	msg += "MC/MS:[round((cost ? processing.len/cost_machinery : 0),0.1)]"
 	..(jointext(msg, null))
 
 /datum/controller/subsystem/machines/proc/process_pipenets(resumed = 0)
@@ -114,7 +115,7 @@ SUBSYSTEM_DEF(machines)
 
 /datum/controller/subsystem/machines/proc/process_machinery(resumed = 0)
 	if (!resumed)
-		src.current_run = global.processing_machines.Copy()
+		src.current_run = processing.Copy()
 
 	var/list/current_run = src.current_run
 	while(current_run.len)
@@ -122,7 +123,7 @@ SUBSYSTEM_DEF(machines)
 		current_run.len--
 
 		if(!istype(M) || QDELETED(M) || (M.process(wait) == PROCESS_KILL))
-			global.processing_machines.Remove(M)
+			processing.Remove(M)
 			if(!QDELETED(M))
 				DISABLE_BITFIELD(M.datum_flags, DF_ISPROCESSING)
 		if(MC_TICK_CHECK)
