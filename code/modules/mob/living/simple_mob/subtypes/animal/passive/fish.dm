@@ -108,7 +108,7 @@
 
 /mob/living/simple_mob/animal/passive/fish/planetcarp
 	name = "carp"
-	tt_desc = "E Cyprinus purpuracarpio"
+	tt_desc = "S Cyprinus purpuracarpio"
 	icon_state = "carp-swim"
 	icon_living = "carp-swim"
 	icon_dead = "carp-dead"
