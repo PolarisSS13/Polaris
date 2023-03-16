@@ -44134,6 +44134,9 @@
 	pixel_y = 2
 	},
 /obj/item/reagent_containers/glass/bucket,
+/obj/item/shovel/spade,
+/obj/item/shovel/spade,
+/obj/item/shovel/spade,
 /turf/simulated/floor/tiled/hydro,
 /area/surface/station/hydroponics)
 "tzy" = (
@@ -54049,6 +54052,8 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
+/obj/item/shovel/spade,
+/obj/item/shovel/spade,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/rnd/xenobiology/xenoflora)
 "xYt" = (
