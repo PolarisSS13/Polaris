@@ -903,7 +903,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	if(!r_hand)
 		return //No hand, no bother.
 
-	overlays_standing[R_HAND_LAYER] = r_hand.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), inhands = TRUE, slot_name = slot_r_hand_str, default_layer = R_HAND_LAYER)
+	overlays_standing[R_HAND_LAYER] = r_hand.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), inhands = TRUE, slot_name = slot_r_hand_str, default_icon = INV_R_HAND_DEF_ICON, default_layer = R_HAND_LAYER)
 
 	apply_layer(R_HAND_LAYER)
 
