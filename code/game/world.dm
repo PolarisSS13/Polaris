@@ -21,8 +21,9 @@
 
 	callHook("startup")
 	init_vchat()
+	//Emergency Fix
 	load_mods()
-	load_whitelist()
+	//end-emergency fix
 
 	src.update_status()
 
