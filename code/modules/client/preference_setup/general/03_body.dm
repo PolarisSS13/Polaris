@@ -78,7 +78,7 @@ var/global/list/valid_bloodtypes = list("A+", "A-", "B+", "B-", "AB+", "AB-", "O
 		// That last list is entirely arbitrary. Take complaints up with Kholdstare.
 		if((istype(client) && check_rights(R_ADMIN | R_EVENT | R_FUN, 0, client)) || \
 				(LAZYLEN(instance.species_allowed) && species && (species in instance.species_allowed)) || \
-				(config.genemod_whitelist && client.is_whitelisted("Genemods") && LAZYLEN(instance.whitelist_allowed) && (species in instance.whitelist_allowed)))
+				(config.genemod_whitelist && client.is_whitelisted(/whitelist/genemod) && LAZYLEN(instance.whitelist_allowed) && (species in instance.whitelist_allowed)))
 			.[instance.name] = instance
 
 /datum/category_item/player_setup_item/general/body
