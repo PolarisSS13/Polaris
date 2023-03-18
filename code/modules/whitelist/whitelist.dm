@@ -35,7 +35,7 @@ var/list/whitelistable = list(
 	return (ckey in global.whitelists) ? global.whitelists[ckey] : list()
 
 
-/proc/load_whitelist()
+/proc/load_whitelist(var/key)
 	var/filename = "config/whitelists.json"
 	try
 		if(fexists(filename))

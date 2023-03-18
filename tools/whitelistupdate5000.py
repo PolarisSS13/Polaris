@@ -4,18 +4,13 @@ import json
 def scan_whitelist():
     whitelist_dict = {}
     path = "../data/player_saves"
-   for subdir in os.listdir(path):
+    for subdir in os.listdir(path):
         path = f"../data/player_saves/{subdir}"
-        if not os.path.isdir(path):
-            continue
         for player_dir in os.listdir(path):
             whitelist_file = f"{path}/{player_dir}/whitelist.json"
-            print(f"Opening {whitelist_file}")
             if not os.path.exists(whitelist_file):
                 continue
             with open(whitelist_file) as contents:
-                if os.path.getsize(whitelist_file) == 1:
-                    continue
                 whitelist_dict[player_dir] = []
                 for key in json.load(contents):
                     whitelist_dict[player_dir].append(translate_key(key))
