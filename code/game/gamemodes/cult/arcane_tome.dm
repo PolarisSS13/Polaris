@@ -2,7 +2,7 @@
 #define TAB_RUNES 2
 
 /// Arcane tomes are the quintessential cultist "tool" and are used to draw runes, smack things with, and other such things.
-/// The interface they open (ArcaneTome.js) also contains a lot of in-game documentation about how the antagonist works.
+/// The interface they open (arcane_tome.tmpl) also contains a lot of in-game documentation about how the antagonist works.
 /obj/item/arcane_tome
 	name = "arcane tome"
 	desc = "An old, dusty tome with frayed edges and a sinister-looking cover."
@@ -18,11 +18,16 @@
 	w_class = ITEMSIZE_SMALL
 	drop_sound = 'sound/items/drop/book.ogg'
 	pickup_sound = 'sound/items/pickup/book.ogg'
+
+	/// Whether or not a rune is already being written with this tome.
+	var/scribing = FALSE
 	/// How long it takes to draw a rune using this tome. Non-positive values are instant.
 	var/scribe_speed = 5 SECONDS
 	/// This tome's selected UI tab.
-	var/selected_tab = TAB_ARCHIVES
-	var/archives_entry = 0
+	var/tab = TAB_ARCHIVES
+	/// The selected archive entry in the UI.
+	var/archive = 0
+	/// If TRUE, the rune list in the tome's UI will be displayed in a more concise way.
 	var/compact_mode = FALSE
 
 /obj/item/arcane_tome/get_examine_desc()
@@ -34,22 +39,23 @@
 /obj/item/arcane_tome/attack_self(mob/user)
 	if (!iscultist(user))
 		to_chat(user, "The book is full of illegible scribbles and crudely-drawn shapes. Is this a joke...?")
+		return
 	ui_interact(user)
 
 /obj/item/arcane_tome/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, master_ui, datum/topic_state/state)
 	if (!iscultist(user))
 		return
-	var/dat = ui_data()
- 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, dat, force_open = force_open)
+	var/list/data = build_ui_data()
+ 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open = force_open)
 	if (!ui)
-		archives_entry = 0
-		dat["archives_entry"] = selected_tab
+		archive = 0
+		data["archive"] = archive
 		ui = new(user, src, ui_key, "arcane_tome.tmpl", "Arcane Tome", 500, 600)
-		ui.set_initial_data(dat)
+		ui.set_initial_data(data)
 		ui.open()
 		playsound(user, 'sound/bureaucracy/bookopen.ogg', 25, TRUE)
 
-/obj/item/arcane_tome/proc/ui_data()
+/obj/item/arcane_tome/proc/build_ui_data()
 	var/dat[0]
 	var/runes[0]
 	for (var/V in subtypesof(/obj/effect/rune))
@@ -65,8 +71,8 @@
 			"typepath" = NR
 		)
 	dat["runes"] = runes
-	dat["selected_tab"] = selected_tab
-	dat["archives_entry"] = archives_entry
+	dat["tab"] = tab
+	dat["archive"] = archive
 	dat["compact_mode"] = compact_mode
 	return dat
 
@@ -74,10 +80,10 @@
 	if (..() || !iscultist(usr))
 		return TRUE
 	if (href_list["switch_tab"])
-		selected_tab = text2num(href_list["switch_tab"])
+		tab = text2num(href_list["switch_tab"])
 		playsound(src, "pageturn", 25, TRUE)
 	if (href_list["switch_archive"])
-		archives_entry = text2num(href_list["switch_archive"])
+		archive = text2num(href_list["switch_archive"])
 		playsound(src, "pageturn", 25, TRUE)
 	if (href_list["compact_mode"])
 		compact_mode = !compact_mode
@@ -113,6 +119,9 @@
 	if (locate(/obj/effect/rune) in get_turf(user))
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
+	if (scribing)
+		to_chat(user, SPAN_WARNING("You can only scribe one rune at a time."))
+		return
 	var/datum/gender/G = gender_datums[user.get_visible_gender()]
 	var/blood_name = "blood"
 	var/synth = user.isSynthetic()
@@ -126,13 +135,16 @@
 		SPAN_WARNING("You hear droplets softly splattering on the ground."),
 		range = 3
 	)
+	scribing = TRUE
 	if (ishuman(user) && !max(0, scribe_speed)) // Only drip blood if it actually takes time to write the rune
 		var/mob/living/carbon/human/H = user
 		for (var/i in 1 to 4)
 			spawn (max(0, scribe_speed - 1 SECOND) / i)
 				H.drip(1)
 	if (!do_after(user, max(0, scribe_speed)))
+		scribing = FALSE
 		return
+	scribing = FALSE
 	if (locate(/obj/effect/rune) in get_turf(user))
 		to_chat(user, SPAN_WARNING("You can only fit one rune on any given space."))
 		return
@@ -146,14 +158,14 @@
 	var/obj/effect/rune/NR = new rune_type (get_turf(user))
 	NR.after_scribe(user)
 
-/// Debug tome that automatically converts someone on pickup. Should never appear regularly.
+/// Debug tome that automatically converts on pickup. Should never appear regularly.
 /obj/item/arcane_tome/debug
 	scribe_speed = 1 SECOND // Not quite instant, but close to it
 
-/obj/item/arcane_tome/debug/pickup()
+/obj/item/arcane_tome/debug/pickup(mob/living/user)
 	. = ..()
-	if (usr.mind)
-		cult.add_antagonist(usr.mind)
+	if (user.mind)
+		cult.add_antagonist(user.mind)
 
 #undef TAB_ARCHIVES
 #undef TAB_RUNES
