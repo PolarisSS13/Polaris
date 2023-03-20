@@ -89,9 +89,9 @@
 	update_icon()
 
 
-/obj/item/taperecorder/hear_talk(mob/M, list/message_pieces, verb)
+/obj/item/taperecorder/hear_talk(mob/living/M, list/message_pieces, verb)
 	var/msg = multilingual_to_message(message_pieces, requires_machine_understands = TRUE, with_capitalization = TRUE)
-	var/voice = M.voice_name //This seems to already be defined on Mob/
+	var/voice = M.GetVoice() //Defined on living, returns name for normal mobs/
 	if(mytape && recording)
 		mytape.record_speech("[voice] [verb], \"[msg]\"")
 
