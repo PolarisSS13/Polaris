@@ -1,0 +1,62 @@
+{{:helper.spookyMode()}}
+{{:helper.link("Archives", null, { 'switch_tab': 1 }, data.selected_tab == 1 ? 'selected' : null)}}
+{{:helper.link("Runes", null, { 'switch_tab': 2 }, data.selected_tab == 2 ? 'selected' : null)}}
+<br/><br/>
+{{if data.selected_tab == 1}}
+	<i>You are a cultist of <b>Nar-Sie</b>, the One who Sees, the Geometer of Blood. It has revealed to you the fact of Its existence by necessity, and graciously inducted you into Its followers so that you may better serve Its will.
+	<br/><br/>
+	These archives serve as an <b>out-of-character</b> knowledge base for information about the cult, how your abilities work, and your ultimate goals. Refer back to it any time you are lost!</i>
+	<br/><hr/>
+	{{:helper.link("What is this?", null, { 'switch_archive' : 1 }, data.archives_entry == 1 ? 'selected' : null)}}
+	{{:helper.link("What are runes?", null, { 'switch_archive' : 2 }, data.archives_entry == 2 ? 'selected' : null)}}
+	{{:helper.link("What are talismans?", null, { 'switch_archive' : 3 }, data.archives_entry == 3 ? 'selected' : null)}}
+	{{:helper.link("What should I do?", null, { 'switch_archive' : 4 }, data.archives_entry == 4 ? 'selected' : null)}}
+	<br/><br/>
+	{{if data.archives_entry == 1}}
+		You are holding an <b>arcane tome</b>, a book that contains the rites and scriptures of the Geometer. <b>Every cultist should have a tome unless they have a good reason not to.</b> In addition to this informational page, you can browse <b>Runes</b> within a dedicated section of the tome, allowing you to see their functions or scribe them onto the ground.
+		<br /><br />
+		If need be, your tome can serve as a weapon as well. Simply switch to Harm intent and attack your foes with it to deal burn damage. Naturally, it will be abundantly obvious to the target that you are doing something otherworldly and very harmful.
+	{{else data.archives_entry == 2}}
+		<b>Runes</b> are eldritch scrawlings, etched with precise shapes and words to invoke the power of Nar-Sie. They are the primary source of your power as a cultist, and they allow you to perform anomalous feats alike to magic. Some runes can be made into <b>talismans</b> that offer something akin to their abilities in a more portable form.
+		<br /><br />
+		There are many different types of rune, each with their own functions and methods of use. In order to create a rune, you use your own blood, meaning that you will take a small amount of damage each time you create one. To invoke a rune, simply click on it with an empty hand.
+		<br /><br />
+		Runes are naturally very conspicuous, and you should be careful to keep them well-hidden to avoid drawing unnecessary suspicion. You can erase a rune by clicking on it with your tome - leaving no trace of its existence - or just mop it up like any regular spill.
+		<br /><br />
+		Notably, AIs cannot perceive runes. Instead, they just see them as a regular pool of blood. That is still conspicuous in its own right, mind you!
+	{{else data.archives_entry == 3}}
+		Runes are essential for success, but they can be difficult to lay down quickly. <b>Talismans</b> can be of use there; by invoking the <i>Imbue Talisman</i> rune with a blank sheet of paper on top and a relevant rune nearby, that rune can be inscribed onto the paper, which can then be activated at any time to mirror its effects.
+		<br /><br />
+		The effects of talismans are usually equivalent to that of their respective rune, but weaker. Some, however, can be vastly different; the Stun talisman, for instance, causes a heavy stun to a single target struck with the talisman, instead of disorienting everyone nearby. Cultists starting aboard the station are equipped with a special Supply talisman that allows them to make certain talismans for free or to create soul shards and construct shells.
+	{{else data.archives_entry == 4}}
+		Depends! Stealth and infiltration are your best ally, so unless you have already been ousted, it is never a bad idea to simply go back to what you were doing as if nothing had transpired. You can keep in touch with other cultists across distances and z-levels by using a <i>Communicate</i> rune, and coordinating in this manner is very important.
+		<br /><br />
+		When you feel ready to introduce more people to the fold, you should go about it carefully. The <i>Convert</i> rune is opt-in - the convertee can simply keep refusing to join the cult and will take increasing damage instead - so above all else, remember to <b>roleplay</b> and make it an interesting experience. Avoid just stunning someone and dragging them to the rune - lead up to it. Talk to them, manipulate them. Make their conversion <i>mean</i> something.
+	{{/if}}
+{{else data.selected_tab == 2}}
+	{{:helper.link(data.compact_mode ? "Switch to standard display" : "Switch to compact display", null, { "compact_mode" : 1 })}}
+	<br/><hr/>
+	{{if !data.compact_mode}}
+		{{for data.runes}}
+			<div class="item">
+				<div class="itemLabel">
+					{{:helper.link(value.name, null, { "write_rune" : value.typepath })}}
+				</div>
+				<div class="itemContent">
+					{{:value.shorthand}}
+					{{if value.talisman}}
+						<br/><br/><b><i>Talisman effect - </i></b>{{:value.talisman}}
+					{{/if}}
+				</div>
+			</div>
+			<hr/>
+		{{/for}}
+	{{else}}
+		<div align="center">
+			<i>Entries marked with an asterisk (*) can be made into a talisman.</i><br /><br />
+			{{for data.runes}}
+				{{:helper.link(value.talisman ? value.name + " *" : value.name, null, { "write_rune" : value.typepath })}}
+			{{/for}}
+		</div>
+	{{/if}}
+{{/if}}

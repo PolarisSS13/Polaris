@@ -1,3 +1,6 @@
+#define TAB_ARCHIVES 1
+#define TAB_RUNES 2
+
 /// Arcane tomes are the quintessential cultist "tool" and are used to draw runes, smack things with, and other such things.
 /// The interface they open (ArcaneTome.js) also contains a lot of in-game documentation about how the antagonist works.
 /obj/item/arcane_tome
@@ -17,6 +20,10 @@
 	pickup_sound = 'sound/items/pickup/book.ogg'
 	/// How long it takes to draw a rune using this tome. Non-positive values are instant.
 	var/scribe_speed = 5 SECONDS
+	/// This tome's selected UI tab.
+	var/selected_tab = TAB_ARCHIVES
+	var/archives_entry = 0
+	var/compact_mode = FALSE
 
 /obj/item/arcane_tome/get_examine_desc()
 	if (iscultist(usr) || isobserver(usr))
@@ -27,49 +34,58 @@
 /obj/item/arcane_tome/attack_self(mob/user)
 	if (!iscultist(user))
 		to_chat(user, "The book is full of illegible scribbles and crudely-drawn shapes. Is this a joke...?")
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/item/arcane_tome/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
+/obj/item/arcane_tome/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, master_ui, datum/topic_state/state)
 	if (!iscultist(user))
 		return
-	ui = SStgui.try_update_ui(user, src, ui)
+	var/dat = ui_data()
+ 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, dat, force_open = force_open)
 	if (!ui)
-		ui = new(user, src, "ArcaneTome", name)
+		archives_entry = 0
+		dat["archives_entry"] = selected_tab
+		ui = new(user, src, ui_key, "arcane_tome.tmpl", "Arcane Tome", 500, 600)
+		ui.set_initial_data(dat)
 		ui.open()
 		playsound(user, 'sound/bureaucracy/bookopen.ogg', 25, TRUE)
 
-/obj/item/arcane_tome/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
-	var/list/data = list()
-
-	var/list/rune_data = list()
+/obj/item/arcane_tome/proc/ui_data()
+	var/dat[0]
+	var/runes[0]
 	for (var/V in subtypesof(/obj/effect/rune))
 		var/obj/effect/rune/NR = V
 		if (!initial(NR.can_write))
 			continue
 		var/obj/item/paper/talisman/T = initial(NR.talisman_path)
-		rune_data += list(list(
+		runes[++runes.len] = list(
 			"name" = initial(NR.rune_name),
 			"invokers" = initial(NR.required_invokers),
 			"talisman" = T ? initial(T.tome_desc) : null,
 			"shorthand" = initial(NR.rune_shorthand) ? initial(NR.rune_shorthand) : initial(NR.rune_desc),
 			"typepath" = NR
-		))
-	data["runes"] = rune_data
+		)
+	dat["runes"] = runes
+	dat["selected_tab"] = selected_tab
+	dat["archives_entry"] = archives_entry
+	dat["compact_mode"] = compact_mode
+	return dat
 
-	return data
-
-/obj/item/arcane_tome/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
-	if (..())
+/obj/item/arcane_tome/Topic(href, href_list, datum/topic_state/state)
+	if (..() || !iscultist(usr))
 		return TRUE
-	switch (action)
-		if ("turnPage")
-			playsound(src, "pageturn", 25, TRUE)
-		if ("writeRune")
-			var/obj/effect/rune/R = text2path(params["runePath"])
-			if (!ispath(R, /obj/effect/rune))
-				return
+	if (href_list["switch_tab"])
+		selected_tab = text2num(href_list["switch_tab"])
+		playsound(src, "pageturn", 25, TRUE)
+	if (href_list["switch_archive"])
+		archives_entry = text2num(href_list["switch_archive"])
+		playsound(src, "pageturn", 25, TRUE)
+	if (href_list["compact_mode"])
+		compact_mode = !compact_mode
+	if (href_list["write_rune"])
+		var/obj/effect/rune/R = text2path(href_list["write_rune"])
+		if (ispath(R, /obj/effect/rune))
 			scribe_rune(usr, R)
-			return
+	SSnanoui.update_uis(src)
 
 /obj/item/arcane_tome/attack(mob/living/M, mob/living/user, target_zone, attack_modifier)
 	// This is basically a reimplementation of weapon logic for cultists only
@@ -130,5 +146,14 @@
 	var/obj/effect/rune/NR = new rune_type (get_turf(user))
 	NR.after_scribe(user)
 
-/obj/item/arcane_tome/admin
-	scribe_speed = 0 // Instant
+/// Debug tome that automatically converts someone on pickup. Should never appear regularly.
+/obj/item/arcane_tome/debug
+	scribe_speed = 1 SECOND // Not quite instant, but close to it
+
+/obj/item/arcane_tome/debug/pickup()
+	. = ..()
+	if (usr.mind)
+		cult.add_antagonist(usr.mind)
+
+#undef TAB_ARCHIVES
+#undef TAB_RUNES
