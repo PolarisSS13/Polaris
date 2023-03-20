@@ -27,7 +27,6 @@ import './styles/themes/paper.scss';
 import './styles/themes/pda-retro.scss';
 import './styles/themes/retro.scss';
 import './styles/themes/syndicate.scss';
-import './styles/themes/spooky.scss';
 
 import { perf } from 'common/perf';
 import { render } from 'inferno';
