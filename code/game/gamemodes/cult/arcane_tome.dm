@@ -46,7 +46,7 @@
 	if (!iscultist(user))
 		return
 	var/list/data = build_ui_data()
- 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open = force_open)
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open = force_open)
 	if (!ui)
 		archive = 0
 		data["archive"] = archive
@@ -132,7 +132,7 @@
 	user.visible_message(
 		SPAN_WARNING("\The [user] [!synth ? "slices open [G.his] skin" : "tears open [G.his] circulation"] and begins painting on symbols on the floor with [G.his] own [blood_name]!"),
 		SPAN_NOTICE("You [!synth ? "slice open your skin" : "tear open your circulation"] and begin drawing a rune on the floor whilst invoking the ritual that binds your life essence with the dark arcane energies flowing through the surrounding world."),
-		SPAN_WARNING("You hear droplets softly splattering on the ground."),
+		SPAN_WARNING("You hear droplets softly spattering onto the ground."),
 		range = 3
 	)
 	scribing = TRUE
@@ -142,6 +142,7 @@
 			spawn (max(0, scribe_speed - 1 SECOND) / i)
 				H.drip(1)
 	if (!do_after(user, max(0, scribe_speed)))
+		to_chat(user, SPAN_WARNING("The ritual is interrupted. Your [blood_name] splatters onto the ground."))
 		scribing = FALSE
 		return
 	scribing = FALSE

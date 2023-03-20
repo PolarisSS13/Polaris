@@ -51,6 +51,7 @@
 					<br/>
 					{{if value.invokers > 1}}
 						<br/><b><i>Required invokers - </i></b>{{:value.invokers}}
+					{{/if}}
 					{{if value.talisman}}
 						<br/><b><i>Talisman effect - </i></b>{{:value.talisman}}
 					{{/if}}
@@ -62,7 +63,7 @@
 		<div align="center">
 			<i>Entries marked with an asterisk (*) can be made into a talisman.</i><br /><br />
 			{{for data.runes}}
-				{{:helper.link({{:helper.string('{0}{1}{2}', value.name, value.talisman ? " *" : "", value.invokers > 1 ? " (" + value.invokers + " invokers)" : "")}}, null, { "write_rune" : value.typepath })}}
+				{{:helper.link(value.name + (value.talisman ? " *" : "") + (value.invokers > 1 ? " (" + value.invokers + " invokers)" : ""), null, { "write_rune" : value.typepath })}}
 			{{/for}}
 		</div>
 	{{/if}}
