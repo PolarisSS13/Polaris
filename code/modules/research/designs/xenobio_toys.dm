@@ -25,6 +25,6 @@
 	desc = "A hand-held body scanner able to learn information about slimes."
 	id = "slime_scanner"
 	req_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
-	materials = list(MAT_STEEL = 500, MAT_GLASS = 500)
+	materials = list(MAT_STEEL = 500, "glass" = 500)
 	build_path = /obj/item/slime_scanner
 	sort_string = "HBAAA"

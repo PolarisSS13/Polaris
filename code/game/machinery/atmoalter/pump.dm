@@ -23,7 +23,7 @@
 
 /obj/machinery/portable_atmospherics/powered/pump/Initialize()
 	. = ..()
-	cell = new/obj/item/stock_parts/cell/apc(src)
+	cell = new/obj/item/cell/apc(src)
 
 	var/list/air_mix = StandardAirMix()
 	src.air_contents.adjust_multi("oxygen", air_mix["oxygen"], "nitrogen", air_mix["nitrogen"])
@@ -141,7 +141,7 @@
 	data["default_pressure"] = round(initial(target_pressure))
 	data["min_pressure"] = round(pressuremin)
 	data["max_pressure"] = round(pressuremax)
-
+	
 	data["powerDraw"] = round(last_power_draw)
 	data["cellCharge"] = cell ? cell.charge : 0
 	data["cellMaxCharge"] = cell ? cell.maxcharge : 1
@@ -152,7 +152,7 @@
 		data["holding"]["pressure"] = round(holding.air_contents.return_pressure() > 0 ? holding.air_contents.return_pressure() : 0)
 	else
 		data["holding"] = null
-
+	
 	return data
 
 /obj/machinery/portable_atmospherics/powered/pump/tgui_act(action, params)

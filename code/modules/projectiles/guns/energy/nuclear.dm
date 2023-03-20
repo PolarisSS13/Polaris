@@ -56,7 +56,7 @@
 	force = 8 //looks heavier than a pistol
 	w_class = ITEMSIZE_LARGE	//Looks bigger than a pistol, too.
 	fire_delay = 6	//This one's not a handgun, it should have the same fire delay as everything else
-	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
+	cell_type = /obj/item/cell/device/weapon/recharge
 	battery_lock = 1
 	modifystate = null
 

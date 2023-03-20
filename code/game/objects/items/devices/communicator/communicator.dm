@@ -28,7 +28,7 @@ var/global/list/obj/item/communicator/all_communicators = list()
 	show_messages = 1
 
 	origin_tech = list(TECH_ENGINEERING = 2, TECH_MAGNET = 2, TECH_BLUESPACE = 2, TECH_DATA = 2)
-	matter = list(MAT_STEEL = 30,MAT_GLASS = 10)
+	matter = list(MAT_STEEL = 30,"glass" = 10)
 
 	var/video_range = 4
 	var/obj/machinery/camera/communicator/video_source	// Their camera

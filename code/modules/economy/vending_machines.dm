@@ -633,7 +633,7 @@
 	products = list(/obj/item/geiger = 4,
 					/obj/item/clothing/glasses/meson = 2,
 					/obj/item/multitool = 4,
-					/obj/item/stock_parts/cell/high = 10,
+					/obj/item/cell/high = 10,
 					/obj/item/airlock_electronics = 10,
 					/obj/item/module/power_control = 10,
 					/obj/item/circuitboard/airalarm = 10,
@@ -661,7 +661,7 @@
 					/obj/item/circuitboard/body_scanner,
 					/obj/item/circuitboard/sleeper,
 					/obj/item/circuitboard/dna_analyzer)
-	contraband = list(/obj/item/stock_parts/cell/potato = 3)
+	contraband = list(/obj/item/cell/potato = 3)
 	premium = list(/obj/item/storage/belt/utility = 3)
 	product_records = list()
 	req_log_access = access_ce
@@ -686,7 +686,7 @@
 					/obj/item/tool/wrench = 12,
 					/obj/item/t_scanner = 12,
 					/obj/item/stack/cable_coil/heavyduty = 8,
-					/obj/item/stock_parts/cell = 8,
+					/obj/item/cell = 8,
 					/obj/item/weldingtool = 8,
 					/obj/item/clothing/head/welding = 8,
 					/obj/item/light/tube = 10,
@@ -708,7 +708,7 @@
 					/obj/item/clothing/under/rank/roboticist = 4,
 					/obj/item/stack/cable_coil = 4,
 					/obj/item/flash = 4,
-					/obj/item/stock_parts/cell/high = 12,
+					/obj/item/cell/high = 12,
 					/obj/item/assembly/prox_sensor = 3,
 					/obj/item/assembly/signaler = 3,
 					/obj/item/healthanalyzer = 3,

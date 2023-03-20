@@ -280,7 +280,7 @@
 	siemens_coefficient = 0.9
 	blood_sprite_state = "bloodyhands"
 	var/wired = 0
-	var/obj/item/stock_parts/cell/cell = 0
+	var/obj/item/cell/cell = 0
 	var/fingerprint_chance = 0	//How likely the glove is to let fingerprints through
 	var/obj/item/clothing/gloves/ring = null		//Covered ring
 	var/mob/living/carbon/human/wearer = null	//Used for covered rings when dropping

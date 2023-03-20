@@ -86,7 +86,7 @@ var/global/list/fusion_reactions
 /decl/fusion_reaction/iron_iron
 	p_react = "iron"
 	s_react = "iron"
-	products = list(MAT_SILVER = 1, MAT_GOLD = 1, MAT_PLATINUM = 1) // Not realistic but w/e
+	products = list("silver" = 1, "gold" = 1, "platinum" = 1) // Not realistic but w/e
 	energy_consumption = 10
 	energy_production = 0
 	instability = 2

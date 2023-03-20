@@ -561,7 +561,7 @@
 			"nitrogen" = "[round(n2_level*100,0.1)]",\
 			"oxygen" = "[round(o2_level*100,0.1)]",\
 			"carbon_dioxide" = "[round(co2_level*100,0.1)]",\
-			MAT_PHORON = "[round(phoron_level*100,0.01)]",\
+			"phoron" = "[round(phoron_level*100,0.01)]",\
 			"other" = "[round(unknown_level, 0.01)]",\
 			"temp" = "[round(environment.temperature-T0C,0.1)]",\
 			"reading" = TRUE\

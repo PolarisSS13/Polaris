@@ -346,7 +346,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	throw_speed = 4
 	throw_range = 20
 
-	matter = list(MAT_STEEL = 30,MAT_GLASS = 20)
+	matter = list(MAT_STEEL = 30,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 1, TECH_ENGINEERING = 1)
 
@@ -387,7 +387,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	throw_speed = 4
 	throw_range = 20
 
-	matter = list(MAT_STEEL = 30,MAT_GLASS = 20)
+	matter = list(MAT_STEEL = 30,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
@@ -450,7 +450,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	throwforce = 5
 	throw_speed = 4
 	throw_range = 20
-	matter = list(MAT_STEEL = 30,MAT_GLASS = 20)
+	matter = list(MAT_STEEL = 30,"glass" = 20)
 
 	origin_tech = list(TECH_MAGNET = 2, TECH_BIO = 2)
 	var/details = 0
@@ -499,7 +499,7 @@ HALOGEN COUNTER	- Radcount on mobs
 	throwforce = 0
 	throw_speed = 3
 	throw_range = 7
-	matter = list(MAT_STEEL = 30,MAT_GLASS = 20)
+	matter = list(MAT_STEEL = 30,"glass" = 20)
 
 /obj/item/slime_scanner/attack(mob/living/M as mob, mob/living/user as mob)
 	if(!istype(M, /mob/living/simple_mob/slime/xenobio))

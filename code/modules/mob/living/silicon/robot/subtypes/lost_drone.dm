@@ -19,7 +19,7 @@
 	updatename("Lost")
 
 	if(!cell)
-		cell = new /obj/item/stock_parts/cell/high(src) // 15k cell, as recharging stations are a lot more rare on the Surface.
+		cell = new /obj/item/cell/high(src) // 15k cell, as recharging stations are a lot more rare on the Surface.
 
 	playsound(src, 'sound/mecha/nominalsyndi.ogg', 75, 0)
 

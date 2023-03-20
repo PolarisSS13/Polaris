@@ -2527,7 +2527,7 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /obj/item/tool/screwdriver,
 /obj/item/tool/wrench,
 /obj/item/tool/crowbar,
@@ -2744,7 +2744,7 @@
 	},
 /obj/machinery/cell_charger,
 /obj/structure/table/steel_reinforced,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /obj/item/storage/belt/utility,
 /obj/item/pickaxe,
 /turf/simulated/floor/tiled,
@@ -7814,7 +7814,7 @@
 /obj/effect/catwalk_plated/dark,
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/medbay/bmt)
 "qs" = (
@@ -11435,7 +11435,7 @@
 "xQ" = (
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /obj/effect/floor_decal/industrial/warning,
 /obj/machinery/alarm{
 	dir = 4;
@@ -11695,7 +11695,7 @@
 	},
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /obj/machinery/alarm{
 	dir = 8;
 	pixel_x = 22
@@ -12742,7 +12742,7 @@
 /obj/effect/floor_decal/steeldecal/steel_decals_central7{
 	dir = 1
 	},
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/mining_main)
 "Az" = (
@@ -17973,8 +17973,8 @@
 	},
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high,
+/obj/item/cell/high{
 	pixel_y = -4
 	},
 /turf/simulated/floor/tiled/steel/sif/planetuse{
@@ -19690,7 +19690,7 @@
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
 /obj/item/multitool,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /obj/item/stack/cable_coil{
 	pixel_x = 2;
 	pixel_y = 2

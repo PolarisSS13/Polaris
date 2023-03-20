@@ -304,7 +304,7 @@ Protectiveness | Armor %
 	default_material = "durasteel"
 
 /obj/item/clothing/suit/armor/material/makeshift/glass
-	default_material = MAT_GLASS
+	default_material = "glass"
 
 // Used to craft sheet armor, and possibly other things in the Future(tm).
 /obj/item/material/armor_plating

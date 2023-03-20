@@ -175,21 +175,21 @@
 		"carbon" = 1,
 		"raw copper" = 1,
 		"raw tin" = 1,
-		MAT_MAGMELLITE = 3,
-		MAT_PAINITE = 3,
-		MAT_QUARTZ = 3,
+		"magmellite" = 3,
+		"painite" = 3,
+		"quartz" = 3,
 		"raw bauxite" = 5,
-		MAT_PHORON = 15,
-		MAT_SILVER = 16,
-		MAT_GOLD = 18,
-		MAT_MARBLE = 20,
+		"phoron" = 15,
+		"silver" = 16,
+		"gold" = 18,
+		"marble" = 20,
 		"rutile" = 20,
-		MAT_URANIUM = 30,
-		MAT_DIAMOND = 50,
-		MAT_PLATINUM = 40,
-		MAT_LEAD = 40,
-		MAT_METALHYDROGEN = 40,
-		MAT_VERDANTIUM = 60)
+		"uranium" = 30,
+		"diamond" = 50,
+		"platinum" = 40,
+		"lead" = 40,
+		"mhydrogen" = 40,
+		"verdantium" = 60)
 
 /obj/machinery/mineral/processing_unit/Initialize()
 	. = ..()
@@ -338,3 +338,4 @@
 #undef PROCESS_SMELT
 #undef PROCESS_COMPRESS
 #undef PROCESS_ALLOY
+

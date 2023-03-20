@@ -138,7 +138,7 @@
 	var/power_rating
 	var/power_losses
 	var/last_power_draw = 0
-	var/obj/item/stock_parts/cell/cell
+	var/obj/item/cell/cell
 	var/use_cell = TRUE
 	var/removeable_cell = TRUE
 
@@ -150,12 +150,12 @@
 	return 0
 
 /obj/machinery/portable_atmospherics/powered/attackby(obj/item/I, mob/user)
-	if(use_cell && istype(I, /obj/item/stock_parts/cell))
+	if(use_cell && istype(I, /obj/item/cell))
 		if(cell)
 			to_chat(user, "There is already a power cell installed.")
 			return
 
-		var/obj/item/stock_parts/cell/C = I
+		var/obj/item/cell/C = I
 
 		user.drop_item()
 		C.add_fingerprint(user)

@@ -93,21 +93,21 @@
 /datum/design/item/stock_part/basic_capacitor
 	id = "basic_capacitor"
 	req_tech = list(TECH_POWER = 1)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 50)
+	materials = list(MAT_STEEL = 50, "glass" = 50)
 	build_path = /obj/item/stock_parts/capacitor
 	sort_string = "AAACA"
 
 /datum/design/item/stock_part/adv_capacitor
 	id = "adv_capacitor"
 	req_tech = list(TECH_POWER = 3)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 50)
+	materials = list(MAT_STEEL = 50, "glass" = 50)
 	build_path = /obj/item/stock_parts/capacitor/adv
 	sort_string = "AAACB"
 
 /datum/design/item/stock_part/super_capacitor
 	id = "super_capacitor"
 	req_tech = list(TECH_POWER = 5, TECH_MATERIAL = 4)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 50, MAT_GOLD = 20)
+	materials = list(MAT_STEEL = 50, "glass" = 50, "gold" = 20)
 	build_path = /obj/item/stock_parts/capacitor/super
 	sort_string = "AAACC"
 
@@ -130,21 +130,21 @@
 /datum/design/item/stock_part/basic_sensor
 	id = "basic_sensor"
 	req_tech = list(TECH_MAGNET = 1)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 20)
+	materials = list(MAT_STEEL = 50, "glass" = 20)
 	build_path = /obj/item/stock_parts/scanning_module
 	sort_string = "AAADA"
 
 /datum/design/item/stock_part/adv_sensor
 	id = "adv_sensor"
 	req_tech = list(TECH_MAGNET = 3)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 20)
+	materials = list(MAT_STEEL = 50, "glass" = 20)
 	build_path = /obj/item/stock_parts/scanning_module/adv
 	sort_string = "AAADB"
 
 /datum/design/item/stock_part/phasic_sensor
 	id = "phasic_sensor"
 	req_tech = list(TECH_MAGNET = 5, TECH_MATERIAL = 3)
-	materials = list(MAT_STEEL = 50, MAT_GLASS = 20, MAT_SILVER = 10)
+	materials = list(MAT_STEEL = 50, "glass" = 20, "silver" = 10)
 	build_path = /obj/item/stock_parts/scanning_module/phasic
 	sort_string = "AAADC"
 
@@ -167,21 +167,21 @@
 /datum/design/item/stock_part/basic_micro_laser
 	id = "basic_micro_laser"
 	req_tech = list(TECH_MAGNET = 1)
-	materials = list(MAT_STEEL = 10, MAT_GLASS = 20)
+	materials = list(MAT_STEEL = 10, "glass" = 20)
 	build_path = /obj/item/stock_parts/micro_laser
 	sort_string = "AAAEA"
 
 /datum/design/item/stock_part/high_micro_laser
 	id = "high_micro_laser"
 	req_tech = list(TECH_MAGNET = 3)
-	materials = list(MAT_STEEL = 10, MAT_GLASS = 20)
+	materials = list(MAT_STEEL = 10, "glass" = 20)
 	build_path = /obj/item/stock_parts/micro_laser/high
 	sort_string = "AAAEB"
 
 /datum/design/item/stock_part/ultra_micro_laser
 	id = "ultra_micro_laser"
 	req_tech = list(TECH_MAGNET = 5, TECH_MATERIAL = 5)
-	materials = list(MAT_STEEL = 10, MAT_GLASS = 20, MAT_URANIUM = 10)
+	materials = list(MAT_STEEL = 10, "glass" = 20, "uranium" = 10)
 	build_path = /obj/item/stock_parts/micro_laser/ultra
 	sort_string = "AAAEC"
 
@@ -207,7 +207,7 @@
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts."
 	id = "rped"
 	req_tech = list(TECH_ENGINEERING = 3, TECH_MATERIAL = 3)
-	materials = list(MAT_STEEL = 15000, MAT_GLASS = 5000)
+	materials = list(MAT_STEEL = 15000, "glass" = 5000)
 	build_path = /obj/item/storage/part_replacer
 	sort_string = "ABAAA"
 
@@ -216,6 +216,6 @@
 	desc = "Special mechanical module made to store, sort, and apply standard machine parts.  This one has a greatly upgraded storage capacity."
 	id = "arped"
 	req_tech = list(TECH_ENGINEERING = 5, TECH_MATERIAL = 5)
-	materials = list(MAT_STEEL = 30000, MAT_GLASS = 10000)
+	materials = list(MAT_STEEL = 30000, "glass" = 10000)
 	build_path = /obj/item/storage/part_replacer/adv
 	sort_string = "ABAAB"

@@ -45,7 +45,7 @@
 	projectile_type = /obj/item/projectile/energy/floramut
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 3, TECH_POWER = 3)
 	modifystate = "floramut"
-	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
+	cell_type = /obj/item/cell/device/weapon/recharge
 	battery_lock = 1
 	var/decl/plantgene/gene = null
 
@@ -93,7 +93,7 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEMSIZE_LARGE
 	projectile_type = /obj/item/projectile/meteor
-	cell_type = /obj/item/stock_parts/cell/potato
+	cell_type = /obj/item/cell/potato
 	charge_cost = 100
 	self_recharge = 1
 	recharge_time = 5 //Time it takes for shots to recharge (in ticks)
@@ -136,7 +136,7 @@
 	charge_cost = 480
 	projectile_type = /obj/item/projectile/change
 	origin_tech = null
-	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
+	cell_type = /obj/item/cell/device/weapon/recharge
 	battery_lock = 1
 	charge_meter = 0
 
@@ -188,7 +188,7 @@
 	w_class = ITEMSIZE_HUGE
 	charge_cost = 24 // 100 shots, it's a spray and pray (to RNGesus) weapon.
 	projectile_type = /obj/item/projectile/energy/blue_pellet
-	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
+	cell_type = /obj/item/cell/device/weapon/recharge
 	battery_lock = 1
 	accuracy = 75 // Suppressive weapons don't work too well if there's no risk of being hit.
 	burst_delay = 1 // Burst faster than average.
@@ -212,8 +212,8 @@
 
 	charge_cost = 10000 // Uses large cells, can at max have 3 shots.
 	projectile_type = /obj/item/projectile/beam/tungsten
-	cell_type = /obj/item/stock_parts/cell/high
-	accept_cell_type = /obj/item/stock_parts/cell
+	cell_type = /obj/item/cell/high
+	accept_cell_type = /obj/item/cell
 
 	accuracy = 75
 	charge_meter = 0

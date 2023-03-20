@@ -4,7 +4,7 @@
 	result = "protoslurry"
 	result_amount = 4
 	required_reagents = list(
-		MAT_IRON =    1,
+		"iron" =    1,
 		"carbon" =  1,
 		"protein" = 2
 	)

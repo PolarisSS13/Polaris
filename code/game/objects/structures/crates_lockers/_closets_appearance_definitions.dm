@@ -1364,7 +1364,7 @@
 	color = COLOR_LIGHT_CYAN
 	decals = null
 	extra_decals = list(
-		MAT_GLASS = COLOR_WHITE
+		"glass" = COLOR_WHITE
 	)
 
 /decl/closet_appearance/wall/medical
@@ -1381,7 +1381,7 @@
 	decals = null
 	extra_decals = list(
 		"stripes" = COLOR_BEASTY_BROWN,
-		MAT_GLASS = COLOR_WHITE
+		"glass" = COLOR_WHITE
 	)
 
 /decl/closet_appearance/wall/hydrant
@@ -1389,7 +1389,7 @@
 	decals = null
 	extra_decals = list(
 		"stripes" = COLOR_OFF_WHITE,
-		MAT_GLASS = COLOR_WHITE
+		"glass" = COLOR_WHITE
 	)
 
 // Wall cabinets
@@ -1419,7 +1419,7 @@
 	decals = null
 	extra_decals = list(
 		"stripes" = COLOR_OFF_WHITE,
-		MAT_GLASS = COLOR_WHITE
+		"glass" = COLOR_WHITE
 	)
 
 // Carts

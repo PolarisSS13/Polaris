@@ -53,8 +53,8 @@
 			I.used = 0
 			charged_item = I
 
-	if(istype(target, /obj/item/stock_parts/cell/))
-		var/obj/item/stock_parts/cell/C = target
+	if(istype(target, /obj/item/cell/))
+		var/obj/item/cell/C = target
 		if(prob(80))
 			C.maxcharge -= 200
 			if(C.maxcharge <= 1) //Div by 0 protection

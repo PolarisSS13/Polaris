@@ -168,7 +168,7 @@
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "P" = (
-/obj/item/stock_parts/cell/device/weapon/empty,
+/obj/item/cell/device/weapon/empty,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "V" = (
@@ -176,7 +176,7 @@
 /area/submap/MilitaryCamp1)
 "Z" = (
 /mob/living/simple_mob/mechanical/viscerator,
-/obj/item/stock_parts/cell/device/weapon/empty,
+/obj/item/cell/device/weapon/empty,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 

@@ -18,7 +18,7 @@
 	updatename("Syndicate")
 
 	if(!cell)
-		cell = new /obj/item/stock_parts/cell/high(src) // 15k cell, because Antag.
+		cell = new /obj/item/cell/high(src) // 15k cell, because Antag.
 
 	laws = new /datum/ai_laws/syndicate_override()
 

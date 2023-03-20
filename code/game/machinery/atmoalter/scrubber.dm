@@ -22,7 +22,7 @@
 
 /obj/machinery/portable_atmospherics/powered/scrubber/Initialize()
 	. = ..()
-	cell = new/obj/item/stock_parts/cell/apc(src)
+	cell = new/obj/item/cell/apc(src)
 
 /obj/machinery/portable_atmospherics/powered/scrubber/emp_act(severity)
 	if(stat & (BROKEN|NOPOWER))
@@ -109,7 +109,7 @@
 	data["on"] = on ? 1 : 0
 	data["connected"] = connected_port ? 1 : 0
 	data["pressure"] = round(air_contents.return_pressure() > 0 ? air_contents.return_pressure() : 0)
-
+	
 	data["rate"] = round(volume_rate)
 	data["minrate"] = round(minrate)
 	data["maxrate"] = round(maxrate)
@@ -199,7 +199,7 @@
 		update_use_power(new_use_power)
 	if(!on)
 		return
-
+	
 	var/power_draw = -1
 
 	var/datum/gas_mixture/environment = loc.return_air()
@@ -228,7 +228,7 @@
 		return
 
 	//doesn't use power cells
-	if(istype(I, /obj/item/stock_parts/cell))
+	if(istype(I, /obj/item/cell))
 		return
 	if(I.is_screwdriver())
 		return

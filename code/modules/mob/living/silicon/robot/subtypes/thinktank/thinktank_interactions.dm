@@ -17,7 +17,7 @@
 
 /mob/living/silicon/robot/platform/attackby(obj/item/W, mob/user)
 
-	if(istype(W, /obj/item/stock_parts/cell) && !opened)
+	if(istype(W, /obj/item/cell) && !opened)
 		if(recharging)
 			to_chat(user, SPAN_WARNING("\The [src] already has \a [recharging.resolve()] inserted into its recharging port."))
 		else if(user.unEquip(W))
@@ -43,7 +43,7 @@
 
 	if(jobban_isbanned(user, "Robot"))
 		to_chat(user, SPAN_WARNING("You are banned from synthetic roles and cannot take control of \the [src]."))
-		return
+		return 
 
 	// Boilerplate from drone fabs, unsure if there's a shared proc to use instead.
 	var/deathtime = world.time - user.timeofdeath

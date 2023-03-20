@@ -44,7 +44,7 @@
 "aR" = (/obj/structure/simple_door/wood,/turf/simulated/floor/carpet/sblucarpet,/area/template_noop)
 "aS" = (/turf/simulated/floor/carpet/sblucarpet,/area/template_noop)
 "aT" = (/obj/machinery/space_heater,/turf/simulated/floor/carpet/sblucarpet,/area/template_noop)
-"aU" = (/obj/structure/table/rack,/obj/item/clothing/under/explorer,/obj/item/stock_parts/cell/device,/obj/item/stock_parts/cell/device,/obj/item/stock_parts/cell/device,/turf/simulated/floor/wood,/area/template_noop)
+"aU" = (/obj/structure/table/rack,/obj/item/clothing/under/explorer,/obj/item/cell/device,/obj/item/cell/device,/obj/item/cell/device,/turf/simulated/floor/wood,/area/template_noop)
 "aV" = (/obj/item/flashlight/lantern,/turf/simulated/floor/wood,/area/template_noop)
 "aW" = (/obj/machinery/space_heater,/turf/simulated/floor/wood,/area/template_noop)
 "aX" = (/obj/structure/coatrack,/turf/simulated/floor/wood,/area/template_noop)

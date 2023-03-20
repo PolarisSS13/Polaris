@@ -57,8 +57,8 @@
 
 	var/done = FALSE
 	var/obj/mecha/mech = charging
-	var/obj/item/stock_parts/cell/cell = charging.get_cell()
-	if(cell)
+	var/obj/item/cell/cell = charging.get_cell()
+	if(cell)	
 		var/t = min(charge, cell.maxcharge - cell.charge)
 		if(t > 0)
 			if(istype(mech))

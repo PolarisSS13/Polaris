@@ -1845,7 +1845,7 @@
 	icon_state = "warning_dust"
 	},
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/surface/outpost/mining_main/cave)
 "dK" = (
@@ -1985,7 +1985,7 @@
 	dir = 1;
 	icon_state = "warning_dust"
 	},
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/surface/outpost/mining_main/cave)
 "dW" = (

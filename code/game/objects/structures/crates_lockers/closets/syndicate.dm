@@ -13,7 +13,7 @@
 		/obj/item/clothing/head/helmet/space/void/merc,
 		/obj/item/clothing/suit/space/void/merc,
 		/obj/item/tool/crowbar/red,
-		/obj/item/stock_parts/cell/high,
+		/obj/item/cell/high,
 		/obj/item/card/id/syndicate,
 		/obj/item/multitool,
 		/obj/item/shield/energy,

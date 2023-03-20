@@ -182,7 +182,7 @@
 			if(C.use(5))
 				//TODO: generalize this.
 				to_chat(user, "<span class='notice'>You add some cable to the [src.name] and slide it inside the battery casing.</span>")
-				var/obj/item/stock_parts/cell/potato/pocell = new /obj/item/stock_parts/cell/potato(get_turf(user))
+				var/obj/item/cell/potato/pocell = new /obj/item/cell/potato(get_turf(user))
 				if(src.loc == user && istype(user,/mob/living/carbon/human))
 					user.put_in_hands(pocell)
 				pocell.maxcharge = src.potency * 10

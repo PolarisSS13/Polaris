@@ -17,7 +17,7 @@
 			/obj/item/assembly/prox_sensor = 3,
 			/obj/item/storage/toolbox/electrical,
 			/obj/item/flash = 4,
-			/obj/item/stock_parts/cell/high = 2
+			/obj/item/cell/high = 2
 			)
 	cost = 10
 	containertype = /obj/structure/closet/crate/secure/nanotrasen

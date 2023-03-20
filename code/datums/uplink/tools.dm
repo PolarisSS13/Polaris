@@ -89,7 +89,7 @@
 /datum/uplink_item/item/tools/wall_elecrtifier
 	name = "Wall Electrifier"
 	item_cost = 5
-	path = /obj/item/stock_parts/cell/spike
+	path = /obj/item/cell/spike
 	desc = "A modified powercell which will electrify walls and reinforced floors in a 3x3 tile range around it. Always active."
 
 /datum/uplink_item/item/tools/emag

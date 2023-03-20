@@ -53,7 +53,7 @@
 		/obj/item/tool/wrench,
 		/obj/item/multitool,
 		/obj/item/flashlight,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/stack/cable_coil,
 		/obj/item/t_scanner,
 		/obj/item/analyzer,
@@ -146,7 +146,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/tool/crowbar,
 		/obj/item/flashlight,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/extinguisher/mini,
 		/obj/item/storage/quickdraw/syringe_case
 		)
@@ -169,7 +169,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/ammo_casing/a12g,
 		/obj/item/ammo_magazine,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/reagent_containers/food/snacks/donut/,
 		/obj/item/melee/baton,
 		/obj/item/gun/energy/taser,
@@ -206,7 +206,7 @@
 		/obj/item/cassette_tape,
 		/obj/item/clothing/glasses,
 		/obj/item/flashlight,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/reagent_containers/spray/luminol,
 		/obj/item/sample,
 		/obj/item/forensics/sample_kit/powder,
@@ -299,7 +299,7 @@
 		/obj/item/clothing/glasses,
 		/obj/item/tool/crowbar,
 		/obj/item/flashlight,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/extinguisher/mini,
 		/obj/item/surgical
 		)
@@ -347,7 +347,7 @@
 	can_hold = list(
 		/obj/item/clothing/glasses,
 		/obj/item/flashlight,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/grenade,
 		/obj/item/pda,
 		/obj/item/radio/headset,
@@ -375,7 +375,7 @@
 		/obj/item/gps,
 		/obj/item/measuring_tape,
 		/obj/item/flashlight,
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/pickaxe,
 		/obj/item/depth_scanner,
 		/obj/item/camera,

@@ -14,7 +14,7 @@
 
 	//Has a list of items that it can hold.
 	var/list/can_hold = list(
-		/obj/item/stock_parts/cell,
+		/obj/item/cell,
 		/obj/item/airlock_electronics,
 		/obj/item/tracker_electronics,
 		/obj/item/module/power_control,
@@ -58,7 +58,7 @@
 	icon_state = "gripper-mining"
 
 	can_hold = list(
-	/obj/item/stock_parts/cell,
+	/obj/item/cell,
 	/obj/item/stock_parts
 	)
 
@@ -109,7 +109,7 @@
 	desc = "A simple grasping tool suited to assist in a wide array of research applications."
 
 	can_hold = list(
-		/obj/item/stock_parts/cell,
+		/obj/item/cell,
 		/obj/item/stock_parts,
 		/obj/item/mmi,
 		/obj/item/robot_parts,
@@ -135,7 +135,7 @@
 	desc = "A complex grasping tool used for working with circuitry."
 
 	can_hold = list(
-		/obj/item/stock_parts/cell/device,
+		/obj/item/cell/device,
 		/obj/item/electronic_assembly,
 		/obj/item/assembly/electronic_assembly,
 		/obj/item/clothing/under/circuitry,

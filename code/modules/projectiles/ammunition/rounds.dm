@@ -69,7 +69,7 @@
 	desc = "A .38 bullet casing fitted with a single-use ion pulse generator."
 	icon_state = "empcasing"
 	projectile_type = /obj/item/projectile/ion/small
-	matter = list(MAT_STEEL = 130, MAT_URANIUM = 100)
+	matter = list(MAT_STEEL = 130, "uranium" = 100)
 
 /obj/item/ammo_casing/a38/bb
 	desc = "A .38 BB."
@@ -193,7 +193,7 @@
 	desc = "A .45 bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
 	icon_state = "empcasing"
-	matter = list(MAT_STEEL = 130, MAT_URANIUM = 100)
+	matter = list(MAT_STEEL = 130, "uranium" = 100)
 
 /obj/item/ammo_casing/a45/hp
 	desc = "A .45 hollow-point bullet casing."
@@ -221,7 +221,7 @@
 	desc = "A 10mm bullet casing fitted with a single-use ion pulse generator."
 	projectile_type = /obj/item/projectile/ion/small
 	icon_state = "empcasing"
-	matter = list(MAT_STEEL = 130, MAT_URANIUM = 100)
+	matter = list(MAT_STEEL = 130, "uranium" = 100)
 
 /obj/item/ammo_casing/a10mm/bb
 	desc = "A 10mm BB."
@@ -275,7 +275,7 @@
 	desc = "A 12 gauge taser cartridge."
 	icon_state = "stunshell"
 	projectile_type = /obj/item/projectile/energy/electrode/stunshot
-	matter = list(MAT_STEEL = 360, MAT_GLASS = 720)
+	matter = list(MAT_STEEL = 360, "glass" = 720)
 
 /obj/item/ammo_casing/a12g/stunshell/emp_act(severity)
 	if(prob(100/severity)) BB = null
@@ -287,7 +287,7 @@
 	desc = "A chemical shell used to signal distress or provide illumination."
 	icon_state = "fshell"
 	projectile_type = /obj/item/projectile/energy/flash/flare
-	matter = list(MAT_STEEL = 90, MAT_GLASS = 90)
+	matter = list(MAT_STEEL = 90, "glass" = 90)
 
 /obj/item/ammo_casing/a12g/emp
 	name = "ion shell"
@@ -295,7 +295,7 @@
 	icon_state = "empshell"
 	projectile_type = /obj/item/projectile/ion
 //	projectile_type = /obj/item/projectile/bullet/shotgun/ion
-	matter = list(MAT_STEEL = 360, MAT_URANIUM = 240)
+	matter = list(MAT_STEEL = 360, "uranium" = 240)
 
 /obj/item/ammo_casing/a12g/flechette
 	name = "shotgun flechette"
@@ -365,7 +365,7 @@
 /obj/item/ammo_casing/a145/highvel
 	desc = "A 14.5mm sabot shell."
 	projectile_type = /obj/item/projectile/bullet/rifle/a145
-
+	
 /obj/item/ammo_casing/a145/bb
 	desc = "A 14.5mm BB. That'll take someone's eye out."
 	projectile_type = /obj/item/projectile/bullet/bb

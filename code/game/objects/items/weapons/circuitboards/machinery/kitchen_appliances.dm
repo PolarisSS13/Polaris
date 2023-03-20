@@ -4,7 +4,7 @@
 	build_path = /obj/machinery/microwave
 	board_type = new /datum/frame/frame_types/microwave
 	contain_parts = 0
-	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+	matter = list(MAT_STEEL = 50, "glass" = 50)
 	req_components = list(
 							/obj/item/stock_parts/console_screen = 1,
 							/obj/item/stock_parts/capacitor = 3, // Original Capacitor count was 1
@@ -17,7 +17,7 @@
 	desc = "The circuitboard for an oven."
 	build_path = /obj/machinery/appliance/cooker/oven
 	board_type = new /datum/frame/frame_types/oven
-	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+	matter = list(MAT_STEEL = 50, "glass" = 50)
 	req_components = list(
 							/obj/item/stock_parts/capacitor = 3,
 							/obj/item/stock_parts/scanning_module = 1,
@@ -32,7 +32,7 @@
 							/obj/item/stock_parts/capacitor = 3,
 							/obj/item/stock_parts/scanning_module = 1,
 							/obj/item/stock_parts/matter_bin = 2)
-
+							
 /obj/item/circuitboard/grill
 	name = T_BOARD("grill")
 	desc = "The circuitboard for an industrial grill."
@@ -67,7 +67,7 @@
 	name = T_BOARD("deluxe microwave")
 	build_path = /obj/machinery/microwave/advanced
 	board_type = new /datum/frame/frame_types/microwave
-	matter = list(MAT_STEEL = 50, MAT_GLASS = 50)
+	matter = list(MAT_STEEL = 50, "glass" = 50)
 	req_components = list(
 							/obj/item/stock_parts/console_screen = 1,
 							/obj/item/stock_parts/motor = 1,

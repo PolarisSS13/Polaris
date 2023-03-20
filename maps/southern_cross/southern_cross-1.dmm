@@ -13296,7 +13296,7 @@
 /area/tcomm/entrance)
 "aAw" = (
 /obj/structure/table/standard,
-/obj/item/stock_parts/cell,
+/obj/item/cell,
 /obj/structure/extinguisher_cabinet{
 	pixel_y = 30
 	},
@@ -13552,11 +13552,11 @@
 "aAU" = (
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -21047,7 +21047,7 @@
 	pixel_y = 5
 	},
 /obj/item/multitool,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -25159,16 +25159,16 @@
 	pixel_x = -24
 	},
 /obj/structure/table/steel,
-/obj/item/stock_parts/cell/device/weapon{
+/obj/item/cell/device/weapon{
 	pixel_x = 4;
 	pixel_y = 4
 	},
-/obj/item/stock_parts/cell/device/weapon{
+/obj/item/cell/device/weapon{
 	pixel_x = 2;
 	pixel_y = 2
 	},
-/obj/item/stock_parts/cell/device/weapon,
-/obj/item/stock_parts/cell/device/weapon{
+/obj/item/cell/device/weapon,
+/obj/item/cell/device/weapon{
 	pixel_x = -2;
 	pixel_y = -2
 	},
@@ -37624,11 +37624,11 @@
 "bsh" = (
 /obj/structure/table/reinforced,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -45254,7 +45254,7 @@
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
 /obj/item/stack/cable_coil,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -51587,11 +51587,11 @@
 "bRe" = (
 /obj/structure/table/standard,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -51961,11 +51961,11 @@
 /obj/item/stack/cable_coil,
 /obj/item/multitool,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -55689,7 +55689,7 @@
 "bZk" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -56490,7 +56490,7 @@
 	},
 /obj/item/airlock_electronics,
 /obj/item/airlock_electronics,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
 /obj/item/stack/material/glass/phoronrglass{
 	amount = 20
 	},
@@ -56583,11 +56583,11 @@
 	pixel_x = -12;
 	pixel_y = -24
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -67823,11 +67823,11 @@
 	pixel_x = 3;
 	pixel_y = -7
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -76111,7 +76111,7 @@
 	},
 /obj/structure/table/steel,
 /obj/machinery/cell_charger,
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000
 	},
@@ -76630,7 +76630,7 @@
 	layer = 2.9
 	},
 /obj/item/module/power_control,
-/obj/item/stock_parts/cell{
+/obj/item/cell{
 	maxcharge = 2000
 	},
 /obj/effect/floor_decal/borderfloor{
@@ -92898,7 +92898,7 @@
 	name = "Station Intercom (General)";
 	pixel_y = 21
 	},
-/obj/item/stock_parts/cell/apc,
+/obj/item/cell/apc,
 /turf/simulated/floor/plating,
 /area/construction/seconddeck/construction2)
 "dqV" = (
@@ -112944,25 +112944,25 @@
 /turf/simulated/floor/plating,
 /area/maintenance/substation/central)
 "ebQ" = (
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000;
 	pixel_x = 5;
 	pixel_y = -5
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000;
 	pixel_x = 5;
 	pixel_y = -5
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000;
 	pixel_x = 5;
 	pixel_y = -5
 	},
-/obj/item/stock_parts/cell/high{
+/obj/item/cell/high{
 	charge = 100;
 	maxcharge = 15000;
 	pixel_x = 5;

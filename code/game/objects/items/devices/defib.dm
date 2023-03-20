@@ -17,7 +17,7 @@
 	action_button_name = "Remove/Replace Paddles"
 
 	var/obj/item/shockpaddles/linked/paddles
-	var/obj/item/stock_parts/cell/bcell = null
+	var/obj/item/cell/bcell = null
 
 /obj/item/defib_kit/get_cell()
 	return bcell
@@ -39,7 +39,7 @@
 	QDEL_NULL(bcell)
 
 /obj/item/defib_kit/loaded //starts with a cell
-	bcell = /obj/item/stock_parts/cell/apc
+	bcell = /obj/item/cell/apc
 
 
 /obj/item/defib_kit/update_icon()
@@ -84,7 +84,7 @@
 /obj/item/defib_kit/attackby(obj/item/W, mob/user, params)
 	if(W == paddles)
 		reattach_paddles(user)
-	else if(istype(W, /obj/item/stock_parts/cell))
+	else if(istype(W, /obj/item/cell))
 		if(bcell)
 			to_chat(user, "<span class='notice'>\the [src] already has a cell.</span>")
 		else
@@ -176,7 +176,7 @@
 	origin_tech = list(TECH_BIO = 5, TECH_POWER = 3)
 
 /obj/item/defib_kit/compact/loaded
-	bcell = /obj/item/stock_parts/cell/high
+	bcell = /obj/item/cell/high
 
 
 /obj/item/defib_kit/compact/combat
@@ -185,7 +185,7 @@
 	paddles = /obj/item/shockpaddles/linked/combat
 
 /obj/item/defib_kit/compact/combat/loaded
-	bcell = /obj/item/stock_parts/cell/high
+	bcell = /obj/item/cell/high
 
 /obj/item/shockpaddles/linked/combat
 	combat = 1
@@ -673,7 +673,7 @@
 	paddles = /obj/item/shockpaddles/linked/jumper
 
 /obj/item/defib_kit/jumper_kit/loaded
-	bcell = /obj/item/stock_parts/cell/high
+	bcell = /obj/item/cell/high
 
 /obj/item/shockpaddles/linked/jumper
 	name = "jumper cables"

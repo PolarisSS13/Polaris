@@ -276,7 +276,7 @@ GLOBAL_LIST_BOILERPLATE(all_brain_organs, /obj/item/organ/internal/brain)
 	name = "Promethean Revival"
 	id = "prom_revival"
 	result = null
-	required_reagents = list(MAT_PHORON = 40)
+	required_reagents = list("phoron" = 40)
 	result_amount = 1
 
 /decl/chemical_reaction/instant/promethean_brain_revival/can_happen(var/datum/reagents/holder)

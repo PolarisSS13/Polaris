@@ -31,7 +31,7 @@
 "lj" = (/obj/structure/table/wooden_reinforced,/obj/item/material/kitchen/rollingpin,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/oldhotel)
 "ly" = (/obj/structure/bed/double/padded,/obj/item/bedsheet/mimedouble,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "lZ" = (/obj/structure/table/woodentable,/obj/item/trash/tray,/turf/simulated/floor/carpet/blue,/area/submap/oldhotel)
-"mr" = (/obj/structure/table/woodentable,/obj/item/stock_parts/cell/hyper,/turf/simulated/floor/wood,/area/submap/oldhotel)
+"mr" = (/obj/structure/table/woodentable,/obj/item/cell/hyper,/turf/simulated/floor/wood,/area/submap/oldhotel)
 "mR" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/oldhotel)
 "nD" = (/turf/simulated/floor,/area/submap/oldhotel)
 "nG" = (/obj/item/material/shard,/turf/simulated/floor/outdoors/dirt,/area/submap/oldhotel)

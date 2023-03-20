@@ -9,7 +9,7 @@
 	active_power_usage = 60000	//60 kW. (this the power drawn when charging)
 	var/efficiency = 60000 //will provide the modified power rate when upgraded
 	power_channel = EQUIP
-	var/obj/item/stock_parts/cell/charging = null
+	var/obj/item/cell/charging = null
 	var/chargelevel = -1
 	circuit = /obj/item/circuitboard/cell_charger
 
@@ -45,8 +45,8 @@
 	if(stat & BROKEN)
 		return
 
-	if(istype(W, /obj/item/stock_parts/cell) && anchored)
-		if(istype(W, /obj/item/stock_parts/cell/device))
+	if(istype(W, /obj/item/cell) && anchored)
+		if(istype(W, /obj/item/cell/device))
 			to_chat(user, "<span class='warning'>\The [src] isn't fitted for that type of cell.</span>")
 			return
 		if(charging)

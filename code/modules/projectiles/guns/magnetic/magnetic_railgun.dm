@@ -15,7 +15,7 @@
 	load_type = /obj/item/rcd_ammo
 	projectile_type = /obj/item/projectile/bullet/magnetic/slug
 
-	cell = /obj/item/stock_parts/cell/hyper
+	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv
 	loaded = /obj/item/rcd_ammo/large
 	removable_components = FALSE
@@ -55,7 +55,7 @@
 	desc = "The Mars Military Industries MI-227 Meteor. Originally a vehicle-mounted turret weapon for heavy anti-vehicular and anti-structural fire, the fact that it was made man-portable is mindboggling in itself."
 	icon_state = "heavy_railgun"
 
-	cell = /obj/item/stock_parts/cell/infinite
+	cell = /obj/item/cell/infinite
 	capacitor = /obj/item/stock_parts/capacitor/super
 	fire_delay = 0
 
@@ -83,7 +83,7 @@
 	icon_state = "flechette_gun"
 	item_state = "z8carbine"
 
-	cell = /obj/item/stock_parts/cell/hyper
+	cell = /obj/item/cell/hyper
 	capacitor = /obj/item/stock_parts/capacitor/adv
 
 	fire_delay = 0
@@ -114,7 +114,7 @@
 	item_state = "combatrevolver"
 	w_class = ITEMSIZE_SMALL
 
-	cell = /obj/item/stock_parts/cell/super
+	cell = /obj/item/cell/super
 	capacitor = /obj/item/stock_parts/capacitor
 
 	fire_delay = 0
@@ -147,7 +147,7 @@
 
 	removable_components = TRUE
 
-	cell = /obj/item/stock_parts/cell/device/weapon
+	cell = /obj/item/cell/device/weapon
 	capacitor = /obj/item/stock_parts/capacitor
 
 	fire_delay = 8
@@ -180,7 +180,7 @@
 
 	slowdown_held = 0.1
 
-	cell = /obj/item/stock_parts/cell/device/weapon
+	cell = /obj/item/cell/device/weapon
 	capacitor = /obj/item/stock_parts/capacitor
 
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
@@ -209,7 +209,7 @@
 	icon_state = "railgun_sifguard"
 	item_state = "z8carbine"
 
-	cell = /obj/item/stock_parts/cell/high
+	cell = /obj/item/cell/high
 	capacitor = /obj/item/stock_parts/capacitor/adv
 
 	slot_flags = SLOT_BACK

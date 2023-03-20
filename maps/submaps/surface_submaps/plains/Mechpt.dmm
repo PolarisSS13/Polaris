@@ -22,8 +22,8 @@
 "f" = (
 /obj/structure/railing,
 /obj/structure/table/woodentable,
-/obj/item/stock_parts/cell/high,
-/obj/item/stock_parts/cell/high,
+/obj/item/cell/high,
+/obj/item/cell/high,
 /turf/template_noop,
 /area/submap/Mechpt)
 "g" = (
@@ -111,8 +111,8 @@
 	icon_state = "railing0"
 	},
 /obj/structure/table/woodentable,
-/obj/item/stock_parts/cell/high,
-/obj/item/stock_parts/cell/device/weapon,
+/obj/item/cell/high,
+/obj/item/cell/device/weapon,
 /turf/template_noop,
 /area/submap/Mechpt)
 "v" = (

@@ -49,7 +49,7 @@
 	var/minimum_penetration = 15		//Incoming damage won't be fully applied if you don't have at least 20. Almost all AP clears this.
 	var/fail_penetration_value = 0.66	//By how much failing to penetrate reduces your shit. 66% by default. 100dmg = 66dmg if failed pen
 
-	var/obj/item/stock_parts/cell/cell
+	var/obj/item/cell/cell
 	var/state = MECHA_OPERATING
 	var/list/log = new
 	var/last_message = 0
@@ -449,12 +449,12 @@
 	internal_tank = new /obj/machinery/portable_atmospherics/canister/air(src)
 	return internal_tank
 
-/obj/mecha/proc/add_cell(var/obj/item/stock_parts/cell/C=null)
+/obj/mecha/proc/add_cell(var/obj/item/cell/C=null)
 	if(C)
 		C.forceMove(src)
 		cell = C
 		return
-	cell = new /obj/item/stock_parts/cell/mech(src)
+	cell = new /obj/item/cell/mech(src)
 
 /obj/mecha/get_cell()
 	return cell
@@ -1496,7 +1496,7 @@
 				src.log_message("Eject attempt made using maintenance controls - rejected.")
 		return
 
-	else if(istype(W, /obj/item/stock_parts/cell))
+	else if(istype(W, /obj/item/cell))
 		if(state==MECHA_CELL_OUT)
 			if(!src.cell)
 				to_chat(user, "You install the powercell")

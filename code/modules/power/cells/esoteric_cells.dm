@@ -1,5 +1,5 @@
 
-/obj/item/stock_parts/cell/spike
+/obj/item/cell/spike
 	name = "modified power cell"
 	desc = "A modified power cell sitting in a highly conductive chassis."
 	origin_tech = list(TECH_POWER = 2)
@@ -9,7 +9,7 @@
 	self_recharge = TRUE
 	charge_amount = 150
 
-/obj/item/stock_parts/cell/spike/process()
+/obj/item/cell/spike/process()
 	..()
 
 	var/turf/Center = get_turf(src)

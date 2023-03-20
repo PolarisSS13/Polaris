@@ -20,7 +20,7 @@
 	updatename("Gravekeeper")
 
 	if(!cell)
-		cell = new /obj/item/stock_parts/cell/high(src) // 15k cell, as recharging stations are a lot more rare on the Surface.
+		cell = new /obj/item/cell/high(src) // 15k cell, as recharging stations are a lot more rare on the Surface.
 
 	laws = new /datum/ai_laws/gravekeeper()
 

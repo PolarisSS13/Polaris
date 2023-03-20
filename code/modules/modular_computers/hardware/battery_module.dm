@@ -8,7 +8,7 @@
 	malfunction_probability = 1
 	origin_tech = list(TECH_POWER = 1, TECH_ENGINEERING = 1)
 	var/battery_rating = 750
-	var/obj/item/stock_parts/cell/battery = null
+	var/obj/item/cell/battery = null
 
 /obj/item/computer_hardware/battery_module/advanced
 	name = "advanced battery"
@@ -58,14 +58,14 @@
 
 /obj/item/computer_hardware/battery_module/lambda/Initialize()
 	. = ..()
-	battery = new/obj/item/stock_parts/cell/infinite(src)
+	battery = new/obj/item/cell/infinite(src)
 
 /obj/item/computer_hardware/battery_module/diagnostics(var/mob/user)
 	..()
 	to_chat(user, "Internal battery charge: [battery.charge]/[battery.maxcharge] CU")
 
 /obj/item/computer_hardware/battery_module/Initialize()
-	battery = new/obj/item/stock_parts/cell(src)
+	battery = new/obj/item/cell(src)
 	battery.maxcharge = battery_rating
 	battery.charge = 0
 	. = ..()

@@ -49,7 +49,7 @@
 	silenced = 1
 	projectile_type = /obj/item/projectile/energy/bolt
 	charge_cost = 480
-	cell_type = /obj/item/stock_parts/cell/device/weapon/recharge
+	cell_type = /obj/item/cell/device/weapon/recharge
 	battery_lock = 1
 	charge_meter = 0
 

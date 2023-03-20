@@ -481,7 +481,7 @@
 				/obj/item/surgical/retractor/alien,
 				/obj/item/surgical/scalpel/alien,
 				/obj/item/surgical/surgicaldrill/alien,
-				/obj/item/stock_parts/cell/device/weapon/recharge/alien,
+				/obj/item/cell/device/weapon/recharge/alien,
 				/obj/item/clothing/suit/armor/alien,
 				/obj/item/clothing/head/helmet/alien,
 				/obj/item/clothing/head/psy_crown/wrath
@@ -548,7 +548,7 @@
 
 		if(ARCHAEO_BATTERY)
 			// Battery!
-			var/new_path = pick(subtypesof(/obj/item/stock_parts/cell))
+			var/new_path = pick(subtypesof(/obj/item/cell))
 			new_item = new new_path(src.loc)
 			new_item.name = pick("cell", "battery", "device")
 

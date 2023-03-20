@@ -104,7 +104,7 @@
 "bZ" = (/obj/structure/closet/crate,/obj/item/stack/cable_coil/random_belt,/obj/random/cash,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "ca" = (/obj/structure/table/woodentable,/obj/item/melee/umbrella/random,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "cb" = (/obj/structure/closet/cabinet,/obj/random/gun/random,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
-"cc" = (/obj/structure/closet/cabinet,/obj/item/stock_parts/cell/device/weapon,/obj/item/stock_parts/cell/device/weapon,/obj/random/medical,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
+"cc" = (/obj/structure/closet/cabinet,/obj/item/cell/device/weapon,/obj/item/cell/device/weapon,/obj/random/medical,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "cd" = (/obj/structure/table/woodentable,/obj/item/flashlight/lamp/green,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "ce" = (/obj/structure/bed/double,/obj/item/bedsheet/rddouble,/obj/structure/curtain/open/bed,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "cf" = (/obj/structure/table/woodentable,/obj/item/storage/wallet/random,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)

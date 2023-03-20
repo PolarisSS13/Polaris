@@ -16,7 +16,7 @@
 	circuit = /obj/item/circuitboard/fluidpump
 	active_power_usage = 200 * CELLRATE
 
-	var/obj/item/stock_parts/cell/cell = null
+	var/obj/item/cell/cell = null
 	var/obj/item/hose_connector/output/Output = null
 	var/reagents_per_cycle = 40
 	var/on = 0
@@ -57,7 +57,7 @@
 	src.reagents.trans_to_holder(R, src.reagents.total_volume)
 	qdel(src.reagents)
 	src.reagents = R
-
+	
 /obj/machinery/pump/update_icon()
 	..()
 	cut_overlays()
@@ -81,7 +81,7 @@
 /obj/machinery/pump/process()
 	if(!on)
 		return
-
+	
 	if(!anchored || !(cell?.use(active_power_usage)))
 		set_state(FALSE)
 		return
@@ -151,14 +151,14 @@
 			"<span class='notice'>You remove the battery panel.</span>" \
 		)
 		open = !open
-
+	
 	else if(W.is_wrench())
 		if(on)
 			to_chat(user, "<span class='notice'>\The [src] is active. Turn it off before trying to move it!</span>")
 			return FALSE
 		default_unfasten_wrench(user, W, 2 SECONDS)
 
-	else if(istype(W, /obj/item/stock_parts/cell) && open)
+	else if(istype(W, /obj/item/cell) && open)
 		if(istype(cell))
 			to_chat(user, "<span class='notice'>There is a power cell already installed.</span>")
 			return FALSE

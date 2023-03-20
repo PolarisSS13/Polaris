@@ -34,7 +34,7 @@
 "aH" = (/obj/item/storage/toolbox/mechanical,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
 "aI" = (/obj/structure/table/steel_reinforced,/obj/item/radio/phone,/obj/random_multi/single_item/sfr_headset,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
 "aJ" = (/obj/structure/table/steel_reinforced,/obj/item/radio/intercom/syndicate{desc = "Talk through this."; name = "station intercom (General)"},/obj/item/multitool,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
-"aK" = (/obj/structure/table/steel_reinforced,/obj/item/radio,/obj/machinery/power/apc{cell_type = /obj/item/stock_parts/cell/hyper; dir = 4; environ = 1; equipment = 1; lighting = 1; locked = 0; name = "Sif Free Radio APC"; operating = 0; pixel_x = 24},/obj/structure/cable/yellow,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
+"aK" = (/obj/structure/table/steel_reinforced,/obj/item/radio,/obj/machinery/power/apc{cell_type = /obj/item/cell/hyper; dir = 4; environ = 1; equipment = 1; lighting = 1; locked = 0; name = "Sif Free Radio APC"; operating = 0; pixel_x = 24},/obj/structure/cable/yellow,/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)
 "aL" = (/obj/effect/overlay/snow/floor,/obj/structure/cable/yellow,/obj/machinery/power/solar,/turf/simulated/floor{outdoors = 1},/area/submap/DJOutpost1)
 "aM" = (/obj/item/gps/internal/poi,/obj/machinery/door/airlock/maintenance/int,/turf/simulated/floor/tiled/techfloor/grid,/area/submap/DJOutpost1)
 "aN" = (/obj/structure/table/bench/padded,/obj/random/humanoidremains{spawn_nothing_percentage = 60},/turf/simulated/floor/tiled/techfloor,/area/submap/DJOutpost1)

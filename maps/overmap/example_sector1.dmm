@@ -258,7 +258,7 @@
 "eX" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc{dir = 4; name = "east bump"; pixel_x = 24},/turf/simulated/floor,/area/tcommsat/entrance)
 "eY" = (/obj/structure/sign/vacuum,/turf/simulated/wall/r_wall,/area/tcommsat/entrance)
 "eZ" = (/obj/machinery/atmospherics/pipe/tank/air,/turf/simulated/floor{dir = 9; icon_state = "warning"},/area/tcommsat/entrance)
-"fa" = (/obj/item/stock_parts/cell,/turf/simulated/floor,/area/tcommsat/entrance)
+"fa" = (/obj/item/cell,/turf/simulated/floor,/area/tcommsat/entrance)
 "fb" = (/obj/structure/closet/malf/suits,/turf/simulated/floor,/area/tcommsat/entrance)
 "fc" = (/obj/machinery/door/airlock/external{frequency = 1381; icon_state = "door_locked"; id_tag = "telecoms_outer"; locked = 1; name = "External Access"; req_access = null; req_access_txt = "10;13"},/obj/machinery/access_button{command = "cycle_interior"; frequency = 1381; master_tag = "telecoms_airlock"; name = "interior access button"; pixel_x = -7; pixel_y = 25; req_access_txt = "13"},/turf/simulated/floor/plating,/area/tcommsat/entrance)
 "fd" = (/obj/machinery/camera/xray{c_tag = "External Airlock"; network = list("Tcomsat")},/obj/machinery/atmospherics/unary/vent_pump/high_volume{dir = 4; frequency = 1381; id_tag = "telecoms_pump"},/obj/machinery/embedded_controller/radio/airlock/airlock_controller{tag_airpump = "telecoms_pump"; tag_exterior_door = "telecoms_outer"; frequency = 1381; id_tag = "telecoms_airlock"; tag_interior_door = "telecoms_inner"; pixel_x = 0; pixel_y = -25; req_access_txt = "13"; tag_chamber_sensor = "telecoms_sensor"},/obj/machinery/airlock_sensor{frequency = 1381; id_tag = "telecoms_sensor"; pixel_x = 12; pixel_y = -25},/turf/simulated/floor/plating,/area/tcommsat/entrance)

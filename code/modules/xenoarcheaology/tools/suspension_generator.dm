@@ -5,7 +5,7 @@
 	icon_state = "suspension"
 	density = 1
 	req_access = list(access_research)
-	var/obj/item/stock_parts/cell/cell
+	var/obj/item/cell/cell
 	var/obj/item/card/id/auth_card
 	var/locked = 1
 	var/power_use = 5
@@ -13,7 +13,7 @@
 
 /obj/machinery/suspension_gen/Initialize()
 	. = ..()
-	src.cell = new /obj/item/stock_parts/cell/high(src)
+	src.cell = new /obj/item/cell/high(src)
 
 /obj/machinery/suspension_gen/process()
 	if(suspension_field)
@@ -145,7 +145,7 @@
 			update_icon()
 		else
 			to_chat(user, "<span class='warning'>You are unable to secure [src] while it is active!</span>")
-	else if (istype(W, /obj/item/stock_parts/cell))
+	else if (istype(W, /obj/item/cell))
 		if(panel_open)
 			if(cell)
 				to_chat(user, "<span class='warning'>There is a power cell already installed.</span>")

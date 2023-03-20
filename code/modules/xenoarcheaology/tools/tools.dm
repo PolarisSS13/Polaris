@@ -37,7 +37,7 @@
 	icon_state = "xenoarch_scanner"
 	item_state = "analyzer"
 	origin_tech = list(TECH_BLUESPACE = 3, TECH_MAGNET = 3)
-	matter = list(MAT_STEEL = 10000,MAT_GLASS = 5000)
+	matter = list(MAT_STEEL = 10000,"glass" = 5000)
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 
@@ -96,7 +96,7 @@
 	icon_state = "depth_scanner"
 	item_state = "xenoarch_device"
 	origin_tech = list(TECH_MAGNET = 2, TECH_ENGINEERING = 2, TECH_BLUESPACE = 2)
-	matter = list(MAT_STEEL = 1000,MAT_GLASS = 1000)
+	matter = list(MAT_STEEL = 1000,"glass" = 1000)
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/list/positive_locations = list()
@@ -227,7 +227,7 @@
 	icon_state = "pinoff"	//pinonfar, pinonmedium, pinonclose, pinondirect, pinonnull
 	item_state = "electronic"
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 2, TECH_BLUESPACE = 3)
-	matter = list(MAT_STEEL = 1000,MAT_GLASS = 500)
+	matter = list(MAT_STEEL = 1000,"glass" = 500)
 	var/frequency = PUB_FREQ
 	var/scan_ticks = 0
 	var/obj/item/radio/target_radio
@@ -323,7 +323,7 @@
 	item_state = "lampgreen"
 	icon = 'icons/obj/xenoarchaeology.dmi'
 	origin_tech = list(TECH_MAGNET = 3, TECH_ENGINEERING = 3, TECH_BLUESPACE = 2)
-	matter = list(MAT_STEEL = 10000,MAT_GLASS = 5000)
+	matter = list(MAT_STEEL = 10000,"glass" = 5000)
 	w_class = ITEMSIZE_SMALL
 	slot_flags = SLOT_BELT
 	var/mode = 1 //Start off scanning. 1 = scanning, 0 = measuring
@@ -351,3 +351,4 @@
 	set name = "Scan for Anomalies"
 	set desc = "Scan for artifacts and anomalies within your vicinity."
 	anomaly_scanner.interact(user)
+

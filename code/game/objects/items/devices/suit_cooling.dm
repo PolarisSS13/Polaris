@@ -15,12 +15,12 @@
 	throw_range = 4
 	action_button_name = "Toggle Heatsink"
 
-	matter = list("steel" = 15000, MAT_GLASS = 3500)
+	matter = list("steel" = 15000, "glass" = 3500)
 	origin_tech = list(TECH_MAGNET = 2, TECH_MATERIAL = 2)
 
 	var/on = 0				//is it turned on?
 	var/cover_open = 0		//is the cover open?
-	var/obj/item/stock_parts/cell/cell
+	var/obj/item/cell/cell
 	var/max_cooling = 15				// in degrees per second - probably don't need to mess with heat capacity here
 	var/charge_consumption = 3			// charge per second at max_cooling
 	var/thermostat = T20C
@@ -32,7 +32,7 @@
 
 /obj/item/suit_cooling_unit/Initialize()
 	. = ..()
-	cell = new/obj/item/stock_parts/cell/high(src)	//comes not with the crappy default power cell - because this is dedicated EVA equipment
+	cell = new/obj/item/cell/high(src)	//comes not with the crappy default power cell - because this is dedicated EVA equipment
 
 /obj/item/suit_cooling_unit/Destroy()
 	QDEL_NULL(cell)
@@ -157,7 +157,7 @@
 		updateicon()
 		return
 
-	if (istype(W, /obj/item/stock_parts/cell))
+	if (istype(W, /obj/item/cell))
 		if(cover_open)
 			if(cell)
 				to_chat(user, "There is a [cell] already installed here.")

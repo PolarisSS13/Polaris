@@ -13,7 +13,7 @@
 	thrown_force_divisor = 0.5
 	item_state = "shard-glass"
 	attack_verb = list("stabbed", "slashed", "sliced", "cut")
-	default_material = MAT_GLASS
+	default_material = "glass"
 	unbreakable = 1 //It's already broken.
 	drops_debris = 0
 

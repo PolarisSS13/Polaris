@@ -94,7 +94,7 @@
 
 	req_access = list(access_syndicate)
 
-	cell_type =  /obj/item/stock_parts/cell/hyper
+	cell_type =  /obj/item/cell/hyper
 
 	initial_modules = list(
 		/obj/item/rig_module/mounted/energy_blade,
@@ -114,7 +114,7 @@
 
 	req_access = list(access_syndicate)
 
-	cell_type =  /obj/item/stock_parts/cell/hyper
+	cell_type =  /obj/item/cell/hyper
 
 	initial_modules = list(
 		/obj/item/rig_module/stealth_field,

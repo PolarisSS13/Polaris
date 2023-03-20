@@ -31,7 +31,7 @@
 	var/powered = 0		//set if vehicle is powered and should use fuel when moving
 	var/move_delay = 1	//set this to limit the speed of the vehicle
 
-	var/obj/item/stock_parts/cell/cell
+	var/obj/item/cell/cell
 	var/charge_use = 5	//set this to adjust the amount of power the vehicle uses per move
 
 	var/paint_color = "#666666" //For vehicles with special paint overlays.
@@ -101,7 +101,7 @@
 		else if(W.is_crowbar() && cell && open)
 			remove_cell(user)
 
-		else if(istype(W, /obj/item/stock_parts/cell) && !cell && open)
+		else if(istype(W, /obj/item/cell) && !cell && open)
 			insert_cell(W, user)
 		else if(istype(W, /obj/item/weldingtool))
 			var/obj/item/weldingtool/T = W
@@ -273,7 +273,7 @@
 		turn_on()
 		return
 
-/obj/vehicle/proc/insert_cell(var/obj/item/stock_parts/cell/C, var/mob/living/carbon/human/H)
+/obj/vehicle/proc/insert_cell(var/obj/item/cell/C, var/mob/living/carbon/human/H)
 	if(!mechanical)
 		return
 	if(cell)

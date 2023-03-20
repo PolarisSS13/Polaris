@@ -4,7 +4,7 @@
 	name = "modular weapon"
 	desc = "You shouldn't be seeing this. Contact your local time-police station."
 	icon_state = "mod_pistol"
-	cell_type = /obj/item/stock_parts/cell/device/weapon
+	cell_type = /obj/item/cell/device/weapon
 	charge_cost = 120
 
 	var/max_components = 3 //How many components we can hold.
@@ -133,7 +133,7 @@
 		if(self_recharge || battery_lock)
 			to_chat(user, "<span class='notice'>[src] does not have a battery port.</span>")
 			return
-		var/obj/item/stock_parts/cell/P = C
+		var/obj/item/cell/P = C
 		if(power_supply)
 			to_chat(user, "<span class='notice'>[src] already has a power cell.</span>")
 		else
@@ -170,6 +170,6 @@
 	max_components = 14
 	desc = "Say hello, to my little friend!"
 	one_handed_penalty = 4 //dual wielding = no.
-	cell_type = /obj/item/stock_parts/cell //We're bigger. We can use much larger power cells.
+	cell_type = /obj/item/cell //We're bigger. We can use much larger power cells.
 	origin_tech = list(TECH_COMBAT = 6, TECH_MAGNET = 6, TECH_MATERIAL = 5, TECH_BLUESPACE = 4) //its a damn cannon capable of holding a huge amount of parts.
 	burst_delay = 4 //preventing extreme silliness.
