@@ -19,9 +19,7 @@
 	var/power_drained = 0 			// Amount of power drained.
 	var/max_power = 1e9				// Detonation point.
 	var/mode = 0					// 0 = off, 1=clamped (off), 2=operating
-	var/drained_this_tick = 0		// This is unfortunately necessary to ensure we process powersinks BEFORE other machinery such as APCs.
 
-	var/datum/powernet/PN			// Our powernet
 	var/obj/structure/cable/attached		// the attached cable
 
 
@@ -84,23 +82,19 @@
 	if(!attached)
 		return 0
 
-	if(drained_this_tick)
-		return 1
-	drained_this_tick = 1
-
 	var/drained = 0
 
-	if(!PN)
+	if(!attached.powernet)
 		return 1
 
 	set_light(12)
-	PN.trigger_warning()
+	attached.powernet.trigger_warning()
 	// found a powernet, so drain up to max power from it
-	drained = PN.draw_power(drain_rate)
+	drained = attached.powernet.draw_power(drain_rate)
 	// if tried to drain more than available on powernet
 	// now look for APCs and drain their cells
 	if(drained < drain_rate)
-		for(var/obj/machinery/power/terminal/T in PN.nodes)
+		for(var/obj/machinery/power/terminal/T in attached.powernet.nodes)
 			// Enough power drained this tick, no need to torture more APCs
 			if(drained >= drain_rate)
 				break
@@ -116,7 +110,6 @@
 
 
 /obj/item/powersink/process()
-	drained_this_tick = 0
 	power_drained -= min(dissipation_rate, power_drained)
 	if(power_drained > max_power * 0.95)
 		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
@@ -124,7 +117,3 @@
 		explosion(src.loc, 3,6,9,12)
 		qdel(src)
 		return
-	if(attached && attached.powernet)
-		PN = attached.powernet
-	else
-		PN = null
