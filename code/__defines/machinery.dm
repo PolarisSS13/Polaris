@@ -144,26 +144,20 @@ var/global/list/restricted_camera_networks = list(NETWORK_ERT,NETWORK_MERCENARY,
 #define SUPERMATTER_EMERGENCY 5		// Integrity < 25%
 #define SUPERMATTER_DELAMINATING 6	// Pretty obvious.
 
-//wIP - PORT ALL OF THESE TO SUBSYSTEMS AND GET RID OF THE WHOLE LIST PROCESS THING
-// Fancy-pants START/STOP_PROCESSING() macros that lets us custom define what the list is.
-#define START_PROCESSING_IN_LIST(DATUM, LIST) \
-if (!(DATUM.datum_flags & DF_ISPROCESSING)) {\
-	LIST += DATUM;\
-	DATUM.datum_flags |= DF_ISPROCESSING\
-}
+// SSmachines categories
+#define SSMACHINES_MACHINERY_LIST	0 // The default, most things processed by SSmachines are the machinery type
+#define SSMACHINES_POWERNETS_LIST	1 // Powernets to be processed
+#define SSMACHINES_POWEROBJS_LIST	2 // Power objects to be processed (only powersinks atm)
+#define SSMACHINES_PIPENETS_LIST	3 // Pipenets to be worked through
 
-#define STOP_PROCESSING_IN_LIST(DATUM, LIST) LIST.Remove(DATUM);DATUM.datum_flags &= ~DF_ISPROCESSING
-
-// Note - I would prefer these be defined machines.dm, but some are used prior in file order. ~Leshana
-
-#define START_PROCESSING_PIPENET(Datum) START_PROCESSING_IN_LIST(Datum, global.pipe_networks)
-#define STOP_PROCESSING_PIPENET(Datum) STOP_PROCESSING_IN_LIST(Datum, global.pipe_networks)
-
-#define START_PROCESSING_POWERNET(Datum) START_PROCESSING_IN_LIST(Datum, global.powernets)
-#define STOP_PROCESSING_POWERNET(Datum) STOP_PROCESSING_IN_LIST(Datum, global.powernets)
-
-#define START_PROCESSING_POWER_OBJECT(Datum) START_PROCESSING_IN_LIST(Datum, global.processing_power_items)
-#define STOP_PROCESSING_POWER_OBJECT(Datum) STOP_PROCESSING_IN_LIST(Datum, global.processing_power_items)
+/// Takes a datum and optionally a flag (`SSMACHINES_MACHINERY_LIST` (default), `SSMACHINES_POWERNETS_LIST`, `SSMACHINES_POWEROJBS_LIST`, `SSMACHINES_PIPENETS_LIST`) and adds that datum
+/// to SSmachines
+#define START_PROCESSING_MACHINERY(Datum, List) if (!(Datum.datum_flags & DF_ISPROCESSING)) {Datum.datum_flags |= DF_ISPROCESSING;SSmachines.start_processing(Datum, List)}
+#define STOP_PROCESSING_MACHINERY(Datum, List) Datum.datum_flags &= ~DF_ISPROCESSING;SSmachines.stop_processing(Datum, List)
+/// Takes a datum and optionally a flag (`SSMACHINES_MACHINERY_LIST` (default), `SSMACHINES_POWERNETS_LIST`, `SSMACHINES_POWEROJBS_LIST`, `SSMACHINES_PIPENETS_LIST`) and removes that datum
+/// from SSmachines
+#define START_SPEED_PROCESSING(Datum) if (!(Datum.datum_flags & DF_ISPROCESSING)) {Datum.datum_flags |= DF_ISPROCESSING;SSfastprocess.processing += Datum}
+#define STOP_SPEED_PROCESSING(Datum) Datum.datum_flags &= ~DF_ISPROCESSING;SSfastprocess.processing -= Datum
 
 // Computer login types
 #define LOGIN_TYPE_NORMAL 1

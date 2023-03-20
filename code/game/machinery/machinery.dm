@@ -112,30 +112,31 @@ Class Procs:
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/obj/item/circuitboard/circuit = null
 
+	// Use the fastprocess subsystem instead of SSMachines?
 	var/speed_process = FALSE
+	// The subsystem we will be using
 	var/subsystem_type = /datum/controller/subsystem/machines
 
 	required_dexterity = MOB_DEXTERITY_TOUCHSCREENS
 
 /// Helper proc for telling a machine to start processing with the subsystem type that is located in its `subsystem_type` var.
 /obj/machinery/proc/begin_processing()
-	var/datum/controller/subsystem/processing/subsystem = locate(subsystem_type) in Master.subsystems
-	START_PROCESSING(subsystem, src)
+	START_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
 
 /// Helper proc for telling a machine to stop processing with the subsystem type that is located in its `subsystem_type` var.
 /obj/machinery/proc/end_processing()
-	var/datum/controller/subsystem/processing/subsystem = locate(subsystem_type) in Master.subsystems
-	STOP_PROCESSING(subsystem, src)
+	STOP_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
 
 /// Helper proc for telling a machine to start processing with the subsystem type that is located in its `subsystem_type` var.
 /obj/machinery/proc/begin_speed_processing()
-	subsystem_type = /datum/controller/subsystem/processing/fastprocess
-	begin_processing()
+	end_processing()
+	START_SPEED_PROCESSING(src)
 
 /// Helper proc for telling a machine to stop processing with the subsystem type that is located in its `subsystem_type` var.
 /obj/machinery/proc/end_speed_processing()
-	end_processing()
-	subsystem_type = /datum/controller/subsystem/machines
+	STOP_SPEED_PROCESSING(src)
+	begin_processing()
+
 
 
 /obj/machinery/Initialize(var/ml, direction=0)
@@ -150,7 +151,7 @@ Class Procs:
 	if(ispath(circuit))
 		circuit = new circuit(src)
 	if(!speed_process)
-		begin_processing()
+		START_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
 	else
 		begin_speed_processing()
 	if(!ml)
@@ -158,7 +159,7 @@ Class Procs:
 
 /obj/machinery/Destroy()
 	if(!speed_process)
-		end_processing()
+		STOP_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
 	else
 		end_speed_processing()
 	global.machines -= src
