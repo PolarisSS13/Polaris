@@ -72,8 +72,8 @@
 	icon_state = "labeler[mode]"
 	if(mode)
 		to_chat(user, SPAN_NOTICE("You turn on \the [src]."))
-		//Now let them chose the text.
-		var/str = sanitizeSafe(input(user,"Label text?","Set label",""), MAX_NAME_LEN)
+		//Now let them choose the text.
+		var/str = html_decode(sanitizeSafe(input(user,"Label text?","Set label",""), MAX_NAME_LEN))
 		if(!str || !length(str))
 			to_chat(user, SPAN_WARNING("Invalid text."))
 			return

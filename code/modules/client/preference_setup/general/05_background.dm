@@ -107,27 +107,27 @@
 		if(!choice || !CanUseTopic(user))
 			return TOPIC_NOACTION
 		if(choice == "Other")
-			var/raw_choice = sanitize(input(user, "Please enter a religon.", "Character Preference")  as text|null, MAX_NAME_LEN)
+			var/raw_choice = sanitize(input(user, "Please enter a religion.", "Character Preference")  as text|null, MAX_NAME_LEN)
 			if(raw_choice)
 				pref.religion = sanitize(raw_choice)
 		else
 			pref.religion = choice
 		return TOPIC_REFRESH
 
-	else if(href_list["set_medical_records"])
-		var/new_medical = sanitize(input(user,"Enter medical information here.","Character Preference", html_decode(pref.med_record)) as message|null, MAX_RECORD_LENGTH, extra = 0)
+	else if(href_list["set_medical_records"]) //2023-03-18, we're using sanitizeSafe() in order to remove <> entirely, allowing us to safely decode it on the pref screen
+		var/new_medical = html_decode(sanitizeSafe(input(user,"Enter medical information here.","Character Preference", html_decode(pref.med_record)) as message|null, MAX_RECORD_LENGTH, extra = 0))
 		if(!isnull(new_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.med_record = new_medical
 		return TOPIC_REFRESH
 
-	else if(href_list["set_general_records"])
-		var/new_general = sanitize(input(user,"Enter employment information here.","Character Preference", html_decode(pref.gen_record)) as message|null, MAX_RECORD_LENGTH, extra = 0)
+	else if(href_list["set_general_records"]) //2023-03-20, this allows people to use apostrophes in their records!
+		var/new_general = html_decode(sanitizeSafe(input(user,"Enter employment information here.","Character Preference", html_decode(pref.gen_record)) as message|null, MAX_RECORD_LENGTH, extra = 0))
 		if(!isnull(new_general) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.gen_record = new_general
 		return TOPIC_REFRESH
 
-	else if(href_list["set_security_records"])
-		var/sec_medical = sanitize(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_RECORD_LENGTH, extra = 0)
+	else if(href_list["set_security_records"]) //Note that html exploits still won't work here because we removed <> earlier.
+		var/sec_medical = html_decode(sanitizeSafe(input(user,"Enter security information here.","Character Preference", html_decode(pref.sec_record)) as message|null, MAX_RECORD_LENGTH, extra = 0))
 		if(!isnull(sec_medical) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.sec_record = sec_medical
 		return TOPIC_REFRESH

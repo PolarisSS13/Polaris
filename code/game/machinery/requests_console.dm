@@ -152,7 +152,7 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 			reset_message(1)
 
 	if(href_list["writeAnnouncement"])
-		var/new_message = sanitize(input("Write your message:", "Awaiting Input", ""))
+		var/new_message = sanitize(input("Write your message:", "Awaiting Input", "") as message|null, extra = 0) //Lets you write longer announcements.
 		if(new_message)
 			message = new_message
 		else
@@ -204,13 +204,14 @@ var/global/list/obj/machinery/requests_console/allConsoles = list()
 	if(computer_deconstruction_screwdriver(user, O))
 		return
 	if(istype(O, /obj/item/multitool))
-		var/input = sanitize(input(usr, "What Department ID would you like to give this request console?", "Multitool-Request Console Interface", department))
+		var/input = html_decode(sanitize(input(usr, "What Department ID would you like to give this request console?", "Multitool-Request Console Interface", department)))
 		if(!input)
 			to_chat(usr, "No input found. Please hang up and try your call again.")
 			return
 		department = input
 		announcement.title = "[department] announcement"
 		announcement.newscast = 1
+		announcementConsole = 1 //2023-03-20, fixes deconstruction breaking announcement function
 
 		name = "[department] Requests Console"
 		allConsoles += src
