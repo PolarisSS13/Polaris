@@ -318,6 +318,12 @@ var/global/const/access_xenobiology = 55
 	desc = "Xenobiology Lab"
 	region = ACCESS_REGION_RESEARCH
 
+var/global/const/access_xenofauna = 67
+/datum/access/xenofauna
+	id = access_xenofauna
+	desc = "Xenofauna Lab"
+	region = ACCESS_REGION_RESEARCH
+
 var/global/const/access_ce = 56
 /datum/access/ce
 	id = access_ce
@@ -473,3 +479,9 @@ var/global/const/access_alien = 300 // For things like crashed ships.
 	id = access_alien
 	desc = "#%_^&*@!"
 	access_type = ACCESS_TYPE_PRIVATE
+
+var/global/const/access_union = 120
+/datum/access/union
+	id = access_union
+	desc = "Union Representative"
+	region = ACCESS_REGION_COMMAND

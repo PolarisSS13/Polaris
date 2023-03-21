@@ -33,9 +33,12 @@
 /obj/item/card/id/examine(mob/user)
 	. = ..()
 	if(in_range(user, src))
-		tgui_interact(user) //Not chat related
+		show_tgui(user)
 	else
 		. += "<span class='warning'>It is too far away to read.</span>"
+
+/obj/item/card/id/proc/show_tgui(var/mob/user)
+	tgui_interact(user) //Not chat related
 
 /obj/item/card/id/proc/prevent_tracking()
 	return 0
@@ -107,9 +110,12 @@
 	set src in usr
 
 	to_chat(usr, "[bicon(src)] [src.name]: The current assignment on the card is [src.assignment].")
-	to_chat(usr, "The blood type on the card is [blood_type].")
-	to_chat(usr, "The DNA hash on the card is [dna_hash].")
-	to_chat(usr, "The fingerprint hash on the card is [fingerprint_hash].")
+	show_additional_info_to(usr)
+
+/obj/item/card/id/proc/show_additional_info_to(var/mob/user)
+	to_chat(user, "The blood type on the card is [blood_type].")
+	to_chat(user, "The DNA hash on the card is [dna_hash].")
+	to_chat(user, "The fingerprint hash on the card is [fingerprint_hash].")
 	return
 
 /obj/item/card/id/get_worn_icon_state(var/slot_name)
@@ -143,7 +149,7 @@
 
 /obj/item/card/id/gold/captain/spare
 	name = "\improper Site Manager's spare ID"
-	desc = "The spare ID of the High Lord himself."
+	desc = "The emergency spare ID for the station's very own Big Cheese."
 	icon_state = "gold-id-alternate"
 	registered_name = "Site Manager"
 
@@ -166,7 +172,7 @@
 	assignment = "Synthetic"
 	access = list(
 		access_synth, access_mining, access_mining_station, access_mining_office, access_research,
-		access_xenoarch, access_xenobiology, access_external_airlocks, access_robotics, access_tox, 
+		access_xenoarch, access_xenobiology, access_xenofauna, access_external_airlocks, access_robotics, access_tox,
 		access_tox_storage, access_maint_tunnels, access_mailsorting, access_cargo, access_cargo_bot
 	)
 
@@ -319,3 +325,15 @@
 	icon_state = "generic"
 	primary_color = rgb(142,94,0)
 	secondary_color = rgb(191,159,95)
+
+/obj/item/card/id/union
+	name = "union representative ID"
+	desc = "An access card issued to the elected NanoTrasen Union Representative of Cynosure."
+	assignment = "Union Representative"
+	access = list(access_union)
+
+/obj/item/card/id/union/show_additional_info_to(var/mob/user)
+	return
+
+/obj/item/card/id/union/show_tgui(var/mob/user)
+	return

@@ -28,6 +28,7 @@
 		/obj/item/storage/belt/security,
 		/obj/item/flash,
 		/obj/item/melee/baton/loaded,
+		/obj/item/gun/energy/gun,
 		/obj/item/cell/device/weapon,
 		/obj/item/clothing/accessory/holster/waist,
 		/obj/item/melee/telebaton,

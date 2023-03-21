@@ -72,7 +72,7 @@
 		if(istype(I, /obj/item/clothing/accessory/storage/poncho))
 			var/obj/item/clothing/accessory/storage/poncho/P = I
 			P.icon_override_state = new_icon_override_file
-			P.sprite_sheets[SPECIES_TESHARI] = new_icon_override_file  /// Will look the same on teshari and other species.
+			LAZYSET(P.sprite_sheets, SPECIES_TESHARI, new_icon_override_file)  /// Will look the same on teshari and other species.
 			P.item_state = new_icon
 			to_chat(user, "You set about modifying the poncho into [new_name].")
 		return ..()
@@ -84,7 +84,7 @@
 
 /obj/item/kit/clothing/customize(var/obj/item/clothing/I, var/mob/user)
 	if(istype(I) && can_customize(I))
-		I.sprite_sheets[SPECIES_TESHARI] = new_icon_override_file  /// Will look the same on teshari and other species.
+		LAZYSET(I.sprite_sheets, SPECIES_TESHARI, new_icon_override_file)  /// Will look the same on teshari and other species.
 		I.item_state = new_icon
 		return ..()
 
@@ -129,10 +129,8 @@
 			suit.desc = new_desc
 			suit.icon_state = "[new_icon]_suit"
 			suit.toggleicon = "[new_icon]_suit"
-			suit.item_state = "[new_icon]_suit"
 			var/obj/item/clothing/head/hood/S = suit.hood
 			S.icon_state = "[new_icon]_helmet"
-			S.item_state = "[new_icon]_helmet"
 			if(new_icon_file)
 				suit.icon = new_icon_file
 				S.icon = new_icon_file

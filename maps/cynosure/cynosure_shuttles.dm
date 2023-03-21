@@ -443,6 +443,8 @@ ESCAPE_POD(1)
 	vessel_mass = 2000
 	vessel_size = SHIP_SIZE_SMALL
 	shuttle = "NTC Calvera"
+	icon_state = "calvera"
+	moving_state = "calvera_moving"
 
 /obj/machinery/computer/shuttle_control/explore/explorer_shuttle
 	name = "takeoff and landing console"

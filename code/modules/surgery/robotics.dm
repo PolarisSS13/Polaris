@@ -48,8 +48,8 @@
 
 /datum/surgery_step/robotics/unscrew_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].", \
-	"You start to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	user.visible_message("<span class='filter_notice'>[user] starts to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>", \
+	"<span class='filter_notice'>You start to unscrew the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>")
 	..()
 
 /datum/surgery_step/robotics/unscrew_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -85,8 +85,8 @@
 
 /datum/surgery_step/robotics/open_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].",
-	"You start to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].")
+	user.visible_message("<span class='filter_notice'>[user] starts to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>",
+	"<span class='filter_notice'>You start to pry open the maintenance hatch on [target]'s [affected.name] with \the [tool].</span>")
 	..()
 
 /datum/surgery_step/robotics/open_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -122,8 +122,8 @@
 
 /datum/surgery_step/robotics/close_hatch/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] begins to close and secure the hatch on [target]'s [affected.name] with \the [tool]." , \
-	"You begin to close and secure the hatch on [target]'s [affected.name] with \the [tool].")
+	user.visible_message("<span class='filter_notice'>[user] begins to close and secure the hatch on [target]'s [affected.name] with \the [tool].</span>" , \
+	"<span class='filter_notice'>You begin to close and secure the hatch on [target]'s [affected.name] with \the [tool].</span>")
 	..()
 
 /datum/surgery_step/robotics/close_hatch/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -162,8 +162,8 @@
 
 /datum/surgery_step/robotics/repair_brute/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] begins to patch damage to [target]'s [affected.name]'s support structure with \the [tool]." , \
-	"You begin to patch damage to [target]'s [affected.name]'s support structure with \the [tool].")
+	user.visible_message("<span class='filter_notice'>[user] begins to patch damage to [target]'s [affected.name]'s support structure with \the [tool].</span>" , \
+	"<span class='filter_notice'>You begin to patch damage to [target]'s [affected.name]'s support structure with \the [tool].</span>")
 	..()
 
 /datum/surgery_step/robotics/repair_brute/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -210,8 +210,8 @@
 
 /datum/surgery_step/robotics/repair_burn/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] begins to splice new cabling into [target]'s [affected.name]." , \
-	"You begin to splice new cabling into [target]'s [affected.name].")
+	user.visible_message("<span class='filter_notice'>[user] begins to splice new cabling into [target]'s [affected.name].</span>" , \
+	"<span class='filter_notice'>You begin to splice new cabling into [target]'s [affected.name].</span>")
 	..()
 
 /datum/surgery_step/robotics/repair_burn/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -262,8 +262,8 @@
 	for(var/obj/item/organ/I in affected.internal_organs)
 		if(I && I.damage > 0)
 			if(I.robotic >= ORGAN_ROBOT)
-				user.visible_message("[user] starts mending the damage to [target]'s [I.name]'s mechanisms.", \
-				"You start mending the damage to [target]'s [I.name]'s mechanisms." )
+				user.visible_message("<span class='filter_notice'>[user] starts mending the damage to [target]'s [I.name]'s mechanisms.</span>", \
+				"<span class='filter_notice'>You start mending the damage to [target]'s [I.name]'s mechanisms.</span>" )
 
 	target.custom_pain("The pain in your [affected.name] is living hell!",1)
 	..()
@@ -334,8 +334,8 @@
 	return ..() && organ_to_remove
 
 /datum/surgery_step/robotics/detatch_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] starts to decouple [target]'s [target.op_stage.current_organ] with \the [tool].", \
-	"You start to decouple [target]'s [target.op_stage.current_organ] with \the [tool]." )
+	user.visible_message("<span class='filter_notice'>[user] starts to decouple [target]'s [target.op_stage.current_organ] with \the [tool].</span>", \
+	"<span class='filter_notice'>You start to decouple [target]'s [target.op_stage.current_organ] with \the [tool].</span>" )
 	..()
 
 /datum/surgery_step/robotics/detatch_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -383,8 +383,8 @@
 	return ..()
 
 /datum/surgery_step/robotics/attach_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	user.visible_message("[user] begins reattaching [target]'s [target.op_stage.current_organ] with \the [tool].", \
-	"You start reattaching [target]'s [target.op_stage.current_organ] with \the [tool].")
+	user.visible_message("<span class='filter_notice'>[user] begins reattaching [target]'s [target.op_stage.current_organ] with \the [tool].</span>", \
+	"<span class='filter_notice'>You start reattaching [target]'s [target.op_stage.current_organ] with \the [tool].</span>")
 	..()
 
 /datum/surgery_step/robotics/attach_organ_robotic/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -443,8 +443,8 @@
 
 /datum/surgery_step/robotics/install_mmi/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts installing \the [tool] into [target]'s [affected.name].", \
-	"You start installing \the [tool] into [target]'s [affected.name].")
+	user.visible_message("<span class='filter_notice'>[user] starts installing \the [tool] into [target]'s [affected.name].</span>", \
+	"<span class='filter_notice'>You start installing \the [tool] into [target]'s [affected.name].</span>")
 	..()
 
 /datum/surgery_step/robotics/install_mmi/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -530,8 +530,8 @@
 
 /datum/surgery_step/robotics/install_nymph/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
-	user.visible_message("[user] starts setting \the [tool] into [target]'s [affected.name].", \
-	"You start setting \the [tool] into [target]'s [affected.name].")
+	user.visible_message("<span class='filter_notice'>[user] starts setting \the [tool] into [target]'s [affected.name].</span>", \
+	"<span class='filter_notice'>You start setting \the [tool] into [target]'s [affected.name].</span>")
 	..()
 
 /datum/surgery_step/robotics/install_nymph/end_step(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
@@ -542,7 +542,7 @@
 	var/obj/item/holder/diona/N = tool
 	var/obj/item/organ/internal/brain/cephalon/cephalon = new(target, 1)
 	target.internal_organs_by_name["brain"] = cephalon
-	var/mob/living/carbon/alien/diona/D = N.held_mob
+	var/mob/living/carbon/diona/D = N.held_mob
 	user.drop_from_inventory(tool)
 
 	if(D && D.mind)

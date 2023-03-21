@@ -97,11 +97,19 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	var/trained_drake = FALSE
 	var/list/understands_languages
 
-// universal_understand is buggy and produces double lines, so we'll just do this hack instead.
-/mob/living/simple_mob/animal/sif/grafadreka/say_understands(mob/other, datum/language/speaking)
-	if (!speaking || (speaking.name in understands_languages))
-		return TRUE
+	/// On clicking with an item, stuff that should use behaviors instead of being placed in storage.
+	var/static/list/allow_type_to_pass = list(
+		/obj/item/healthanalyzer,
+		/obj/item/stack/medical,
+		/obj/item/reagent_containers/syringe,
+		/obj/item/shockpaddles
+	)
+
+/mob/living/simple_mob/animal/sif/grafadreka/Destroy()
+	if (istype(harness))
+		QDEL_NULL(harness)
 	return ..()
+
 
 /mob/living/simple_mob/animal/sif/grafadreka/Initialize()
 	if(is_baby)
@@ -119,6 +127,13 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	update_icon()
 
 
+// universal_understand is buggy and produces double lines, so we'll just do this hack instead.
+/mob/living/simple_mob/animal/sif/grafadreka/say_understands(mob/other, datum/language/speaking)
+	if (!speaking || (speaking.name in understands_languages))
+		return TRUE
+	return ..()
+
+
 /mob/living/simple_mob/animal/sif/grafadreka/Stat()
 	. = ..()
 	if (statpanel("Status"))
@@ -129,6 +144,9 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 /mob/living/simple_mob/animal/sif/grafadreka/Login()
 	. = ..()
 	reset_charisma()
+	SetSleeping(0)
+	update_icon()
+	QDEL_NULL(ai_holder) // Disable AI so player drakes don't maul prometheans to death when aghosted
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/reset_charisma()
@@ -195,9 +213,9 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	if (sitting)
 		to_chat(src, SPAN_NOTICE("You are now lying down."))
 		sitting = FALSE
-		update_icon()
 	else
 		..()
+	update_icon()
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/can_projectile_attack(atom/target)
@@ -231,7 +249,19 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/Life()
+
+	// First up we knock ourselves out if we're expected to have a client and don't -
+	// this is to avoid aghosted or logged out drakes going wild on Teshari on the station.
+	if (stat != DEAD && key && !client)
+		if(!lying || !resting || sitting)
+			lying = TRUE
+			resting = TRUE
+			sitting = FALSE
+			update_icon()
+		Sleeping(2)
+
 	. = ..()
+
 	if (stat == CONSCIOUS)
 		// Don't make clientless drakes lose nutrition or they'll all go feral.
 		if (!resting && client)
@@ -264,6 +294,7 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	. = ..()
 	if (sitting && stat == CONSCIOUS)
 		icon_state = "[initial(icon_state)]_sitting"
+
 	var/list/add_images = list()
 	var/image/I = image(icon, "[icon_state]")
 	I.color = base_colour
@@ -274,19 +305,34 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	I = image(icon, "[icon_state]-claws")
 	I.color = claw_colour
 	add_images += I
+
 	if (stat == CONSCIOUS && !sleeping)
 		I = image(icon, "[icon_state]-eye_overlay")
 		I.color = eye_colour
 		add_images += I
+
 	if (stat != DEAD)
-		var/glow = add_glow()
+		var/image/glow = image(icon, "[icon_state]-glow")
+		glow.color = glow_colour
+		glow.plane = PLANE_LIGHTING_ABOVE
+		glow.alpha = 35 + round(220 * clamp(stored_sap/max_stored_sap, 0, 1))
+		if (harness)
+			glow.icon_state = "[glow.icon_state]-[harness.icon_state]"
 		if (glow)
 			add_images += glow
+
+	if (harness)
+		I = image(harness.icon, "[icon_state]-[harness.icon_state]")
+		I.color = harness.color
+		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
+		add_images += I
+
 	for (var/image/adding in add_images)
 		adding.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
 		if (offset_compiled_icon)
 			adding.pixel_x = offset_compiled_icon // Offset here so that things like modifiers, runechat text, etc. are centered
 		add_overlay(adding)
+
 	// We do this last so the default mob icon_state can be used for the overlays.
 	current_icon_state = icon_state
 	icon_state = "blank"
@@ -404,15 +450,6 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 
 /mob/living/simple_mob/animal/sif/grafadreka/has_appetite()
 	return reagents && abs(reagents.total_volume - reagents.maximum_volume) >= 10
-
-
-/mob/living/simple_mob/animal/sif/grafadreka/proc/add_glow()
-	var/image/I = image(icon, "[icon_state]-glow")
-	I.color = glow_colour
-	I.plane = PLANE_LIGHTING_ABOVE
-	I.alpha = 35 + round(220 * clamp(stored_sap/max_stored_sap, 0, 1))
-	return I
-
 
 /mob/living/simple_mob/animal/sif/grafadreka/proc/has_sap(amount)
 	return stored_sap >= amount
@@ -550,3 +587,24 @@ var/global/list/wounds_being_tended_by_drakes = list()
 			to_chat(drake, SPAN_NOTICE("<b>The pack leader wishes for you to follow them.</b>"))
 		else if (drake.ai_holder)
 			drake.ai_holder.set_follow(src)
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/GetIdCard()
+	return harness?.GetIdCard()
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/attack_hand(mob/living/user)
+	// Permit headpats/smacks
+	if (!harness || user.a_intent == I_HURT || (user.a_intent == I_HELP && user.zone_sel?.selecting == BP_HEAD))
+		return ..()
+	return harness.attack_hand(user)
+
+
+/mob/living/simple_mob/animal/sif/grafadreka/attackby(obj/item/item, mob/user)
+	if (user.a_intent == I_HURT)
+		return ..()
+	if (user.a_intent == I_HELP && is_type_in_list(item, allow_type_to_pass))
+		return ..()
+	if (harness?.attackby(item, user))
+		return TRUE
+	return ..()

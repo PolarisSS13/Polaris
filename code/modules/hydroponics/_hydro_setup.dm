@@ -80,7 +80,7 @@ GLOBAL_LIST_INIT(plant_mob_products, list(
 	/mob/living/simple_mob/animal/passive/mouse = 1,
 	/mob/living/simple_mob/animal/space/carp = 1,
 	/mob/living/carbon/human/monkey = 1,
-	/mob/living/carbon/alien/diona = 1
+	/mob/living/carbon/diona = 1
 	))
 
 GLOBAL_LIST_INIT(plant_item_products, list(
@@ -105,10 +105,6 @@ GLOBAL_LIST_INIT(plant_item_products, list(
 	/obj/item/spacecash/c10 = 1
 	))
 
-GLOBAL_LIST_INIT(forbidden_plant_growth_sprites, list(
-	"gnomes"
-	))
+GLOBAL_LIST_INIT(forbidden_plant_growth_sprites, list())
 
-GLOBAL_LIST_INIT(forbidden_plant_product_sprites, list(
-	"gnomes"
-	))
+GLOBAL_LIST_INIT(forbidden_plant_product_sprites, list())

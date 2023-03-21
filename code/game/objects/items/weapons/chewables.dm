@@ -234,7 +234,7 @@
 	color = reagents.get_color()
 	update_icon()
 
-/obj/item/storage/box/pocky //ADDITION 04/17/2021
+/obj/item/storage/box/pocky
 	name = "\improper Totemo yoi Pocky"
 	desc = "A bundle of chocolate-coated bisquit sticks."
 	icon = 'icons/obj/food_snacks.dmi'
@@ -249,7 +249,7 @@
 	foldable = null
 	trash = /obj/item/trash/pocky
 
-/obj/item/clothing/mask/chewable/candy/pocky //ADDITION 04/17/2021
+/obj/item/clothing/mask/chewable/candy/pocky
 	name = "chocolate pocky"
 	desc = "A chocolate-coated biscuit stick."
 	icon_state = "pocky"

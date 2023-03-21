@@ -1,6 +1,6 @@
 /obj/item/flash
 	name = "flash"
-	desc = "Used for blinding and being an asshole."
+	desc = "Used to blind and disorient."
 	icon = 'icons/obj/device.dmi'
 	pickup_sound = 'sound/items/pickup/device.ogg'
 	drop_sound = 'sound/items/drop/device.ogg'
@@ -216,18 +216,34 @@
 			sleep(5)
 			qdel(animation)
 
+	var/datum/gender/TT = gender_datums[M.get_visible_gender()]
 	if(!flashfail)
 		flick("flash2", src)
 		if(!issilicon(M))
-
-			user.visible_message("<span class='disarm'>[user] blinds [M] with the flash!</span>")
+			M.interact_message(user,
+				SPAN_DANGER("\The [user] blinds \the [M] with \the [src]!"),
+				SPAN_DANGER("\The [user] blinds you with \the [src]!"),
+				SPAN_DANGER("You blind \the [M] with \the [src]!"),
+				SPAN_DANGER("\The [user] blinds [TT.himself] with \the [src]!"),
+				SPAN_DANGER("You blind yourself with \the [src]! Why?")
+			)
 		else
-
-			user.visible_message("<span class='notice'>[user] overloads [M]'s sensors with the flash!</span>")
+			M.interact_message(user,
+				SPAN_DANGER("\The [user] overloads \the [M]'s sensors with \the [src]!"),
+				SPAN_DANGER("\The [user] overloads your sensors with \the [src]!"),
+				SPAN_DANGER("You overload \the [M]'s sensors with \the [src]!"),
+				SPAN_DANGER("\The [user] overloads [TT.his] own sensors with \the [src]!"),
+				SPAN_DANGER("You overload your own sensors with \the [src]! Why?")
+			)
 			M.Weaken(rand(5,10))
 	else
-
-		user.visible_message("<span class='notice'>[user] fails to blind [M] with the flash!</span>")
+		M.interact_message(user,
+			SPAN_DANGER("\The [user] fails to blind \the [M] with \the [src]!"),
+			SPAN_DANGER("\The [user] fails to blind you with \the [src]!"),
+			SPAN_DANGER("You fail to blind \the [M] with \the [src]!"),
+			SPAN_DANGER("\The [user] fails to blind [TT.himself] with \the [src]!"),
+			SPAN_DANGER("You fail to blind yourself with \the [src]!"),
+		)
 
 	return
 

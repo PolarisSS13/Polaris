@@ -214,7 +214,7 @@
 							if(G.amount>=G.max_amount)
 								continue
 							G.attackby(NG, user)
-						to_chat(user, "You add the newly-formed wood to the stack. It now contains [NG.amount] planks.")
+						to_chat(user, "<span class='filter_notice'>You add the newly-formed wood to the stack. It now contains [NG.amount] planks.</span>")
 					qdel(src)
 					return
 
@@ -225,31 +225,31 @@
 					return
 
 				if(seed.kitchen_tag == "potato" || !isnull(seed.chems["potato"]))
-					to_chat(user, "You slice \the [src] into sticks.")
+					to_chat(user, "<span class='filter_notice'>You slice \the [src] into sticks.</span>")
 					new /obj/item/reagent_containers/food/snacks/rawsticks(get_turf(src))
 					qdel(src)
 					return
 
 				if(!isnull(seed.chems["carrotjuice"]))
-					to_chat(user, "You slice \the [src] into sticks.")
+					to_chat(user, "<span class='filter_notice'>You slice \the [src] into sticks.</span>")
 					new /obj/item/reagent_containers/food/snacks/carrotfries(get_turf(src))
 					qdel(src)
 					return
 
 				if(!isnull(seed.chems["pineapplejuice"]))
-					to_chat(user, "You slice \the [src] into rings.")
+					to_chat(user, "<span class='filter_notice'>You slice \the [src] into rings.</span>")
 					new /obj/item/reagent_containers/food/snacks/pineapple_ring(get_turf(src))
 					qdel(src)
 					return
 
 				if(!isnull(seed.chems["soymilk"]))
-					to_chat(user, "You roughly chop up \the [src].")
+					to_chat(user, "<span class='filter_notice'>You roughly chop up \the [src].</span>")
 					new /obj/item/reagent_containers/food/snacks/soydope(get_turf(src))
 					qdel(src)
 					return
 
 				if(seed.get_trait(TRAIT_FLESH_COLOUR))
-					to_chat(user, "You slice up \the [src].")
+					to_chat(user, "<span class='filter_notice'>You slice up \the [src].</span>")
 					var/slices = rand(3,5)
 					var/reagents_to_transfer = round(reagents.total_volume/slices)
 					for(var/i=1; i<=slices; i++)
@@ -306,7 +306,7 @@
 				if(NG.amount>=NG.max_amount)
 					continue
 				NG.attackby(G, user)
-			to_chat(user, "You add the newly-formed grass to the stack. It now contains [G.amount] tiles.")
+			to_chat(user, "<span class='filter_notice'>You add the newly-formed grass to the stack. It now contains [G.amount] tiles.</span>")
 		qdel(src)
 		return
 

@@ -213,8 +213,8 @@
 //Calculates a scaling factor for scalding damage, based on the temperature of the oil and creature's heat resistance
 /datum/reagent/nutriment/triglyceride/oil/proc/heatdamage(var/mob/living/carbon/M)
 	var/threshold = 360//Human heatdamage threshold
-	var/datum/species/S = M.get_species(1)
-	if (S && istype(S))
+	var/datum/species/S = M.get_species()
+	if (istype(S))
 		threshold = S.heat_level_1
 
 	//If temperature is too low to burn, return a factor of 0. no damage
@@ -223,7 +223,7 @@
 
 	//Step = degrees above heat level 1 for 1.0 multiplier
 	var/step = 60
-	if (S && istype(S))
+	if (istype(S))
 		step = (S.heat_level_2 - S.heat_level_1)*1.5
 
 	. = data["temperature"] - threshold
@@ -4429,18 +4429,6 @@
 		M.make_dizzy(24) // Intentionally higher than normal to compensate for it's previous effects.
 	if(dose * strength >= strength * 2.5) // Slurring takes longer. Again, intentional.
 		M.slurring = max(M.slurring, 30)
-
-/datum/reagent/nutriment/magicdust
-	name = "Magic Dust"
-	id = "magicdust"
-	description = "A dust harvested from gnomes, aptly named by pre-industrial civilizations."
-	taste_description = "something tingly"
-	taste_mult = 2
-	reagent_state = LIQUID
-	nutriment_factor = 40 //very filling
-	color = "#d169b2"
-
-//ADDITIONS BELOW THIS LINE MADE ON 04/03/2021
 
 /datum/reagent/drink/soda/kompot
 	name = "Kompot"

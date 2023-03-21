@@ -293,6 +293,7 @@
 
 						for(var/i=0,i<total,i++)
 							new A.product(output.loc)
+							playsound(src, 'sound/machines/clunk.ogg', 50, 1)
 
 			else if(ores_processing[metal] == PROCESS_COMPRESS && O.compresses_to) //Compressing.
 
@@ -308,6 +309,7 @@
 					ores_stored[metal]-=2
 					sheets+=2
 					new M.stack_type(output.loc)
+					playsound(src, 'sound/machines/clunk.ogg', 50, 1)
 
 			else if(ores_processing[metal] == PROCESS_SMELT && O.smelts_to) //Smelting.
 
@@ -321,10 +323,12 @@
 					ores_stored[metal]--
 					sheets++
 					new M.stack_type(output.loc)
+					playsound(src, 'sound/machines/clunk.ogg', 50, 1)
 			else
 				ores_stored[metal]--
 				sheets++
 				new /obj/item/ore/slag(output.loc)
+				playsound(src, 'sound/machines/clunk.ogg', 50, 1)
 		else
 			continue
 
@@ -338,4 +342,3 @@
 #undef PROCESS_SMELT
 #undef PROCESS_COMPRESS
 #undef PROCESS_ALLOY
-

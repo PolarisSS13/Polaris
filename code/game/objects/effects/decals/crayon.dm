@@ -6,8 +6,7 @@
 	anchored = 1
 
 /obj/effect/decal/cleanable/crayon/Initialize(var/ml, main = "#FFFFFF",shade = "#000000",var/type = "rune")
-	. = ..()
-
+	. = ..(ml, 0) // mapload, age
 	name = type
 	desc = "A [type] drawn in crayon."
 

@@ -419,7 +419,7 @@
 					continue
 				src.throw_impact(A,speed)
 
-/atom/movable/proc/throw_at(atom/target, range, speed, thrower)
+/atom/movable/proc/throw_at(atom/target, range, speed, thrower, arc = 0)
 	set waitfor = FALSE
 	if(!target || !src)
 		return 0
@@ -435,6 +435,7 @@
 			src.throwing = 2 // really strong throw!
 
 	var/dist_travelled = 0
+	var/total_distance = get_dist(target, throw_source)
 	var/dist_since_sleep = 0
 	var/area/a = get_area(src.loc)
 
@@ -496,8 +497,19 @@
 			sleep(1)
 		a = get_area(src.loc)
 		// and yet it moves
+
+		var/arc_progress = between(0, dist_travelled/total_distance, 1)
+		var/sine_position = arc_progress * 180
+		var/pixel_z_position = arc * sin(sine_position)
+
 		if(src.does_spin)
-			src.SpinAnimation(speed = 4, loops = 1)
+			src.SpinAnimation(speed = 4, loops = 1, pixel_z_offset = pixel_z_position)
+
+		else
+			animate(src, pixel_z = pixel_z_position, time = 1, flags = ANIMATION_END_NOW)
+
+	if(!isnull(arc))
+		pixel_z = initial(pixel_z)	// reset pixel_z after the arc animation
 
 	//done throwing, either because it hit something or it finished moving
 	if(isobj(src)) src.throw_impact(get_turf(src),speed)

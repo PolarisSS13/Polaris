@@ -320,7 +320,7 @@
 		return
 	if(isnum(angle))
 		setAngle(angle)
-	var/turf/starting = get_turf(src)
+	starting = get_turf(src)
 	if(isnull(Angle))	//Try to resolve through offsets if there's no angle set.
 		if(isnull(xo) || isnull(yo))
 			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after angle was null!")
@@ -820,3 +820,9 @@
 		if(silenced)
 			volume = 5
 		playsound(A, hitsound_wall, volume, 1, -1)
+
+
+/obj/item/projectile/proc/apply_SA_vulnerability(var/mob/living/simple_mob/victim)
+	if(!nodamage && SA_bonus_damage && istype(victim) && (SA_vulnerability & victim.mob_class))
+		return SA_bonus_damage
+	return 0

@@ -60,7 +60,11 @@
 	var/datum/effect_system/spark_spread/spark_system = new
 	var/lights = 0
 	var/lights_power = 6
-	var/force = 0
+
+	var/force = 15	// Damage value used for punching.
+	var/melee_cooldown = 10	// Cooldown for punching.
+	var/melee_can_hit = FALSE	// If set to true, the exosuit will be able to punch.
+	var/melee_sound = 'sound/weapons/heavysmash.ogg'
 
 	var/mech_faction = null
 	var/firstactivation = 0 			//It's simple. If it's 0, no one entered it yet. Otherwise someone entered it at least once.
@@ -142,6 +146,8 @@
 //Mech actions
 
 	var/strafing = 0 				//Are we strafing or not?
+
+	var/flying = 0					//Are we flying, or no?
 
 	var/defence_mode_possible = 0 	//Can we even use defence mode? This is used to assign it to mechs and check for verbs.
 	var/defence_mode = 0 			//Are we in defence mode
@@ -674,7 +680,87 @@
 		if(src_object in view(2, src))
 			return STATUS_UPDATE //if they're close enough, allow the occupant to see the screen through the viewport or whatever.
 
-/obj/mecha/proc/melee_action(atom/target)
+/obj/mecha/proc/melee_action(atom/T)
+	if(internal_damage & MECHA_INT_CONTROL_LOST)
+		T = safepick(oview(1,src))
+	if(!melee_can_hit)
+		return
+
+	if(istype(T, /obj/machinery/disposal)) // Stops mechs from climbing into disposals
+		return
+
+	if(isliving(T))
+		var/mob/living/M = T
+		if(src.occupant.a_intent == I_HURT || isbrain(src.occupant)) //Brains cannot change intents; Exo-piloting brains lack any form of physical feedback for control, limiting the ability to 'play nice'.
+			playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
+			do_attack_animation(T)
+			if(damtype == "brute")
+				step_away(M,src,15)
+
+			if(ishuman(T))
+				var/mob/living/carbon/human/H = T
+
+				var/obj/item/organ/external/temp = H.get_organ(pick(BP_TORSO, BP_TORSO, BP_TORSO, BP_HEAD))
+				if(istype(temp))
+					var/update = 0
+					switch(damtype)
+						if("brute")
+							H.Paralyse(1)
+							update |= temp.take_damage(rand(force/2, force), 0)
+						if("fire")
+							update |= temp.take_damage(0, rand(force/2, force))
+						if("tox")
+							if(H.reagents)
+								if(H.reagents.get_reagent_amount("carpotoxin") < force*2)
+									H.reagents.add_reagent("carpotoxin", force)
+								if(H.reagents.get_reagent_amount("cryptobiolin") < force*2)
+									H.reagents.add_reagent("cryptobiolin", force)
+						if("halloss")
+							H.stun_effect_act(1, force / 2, BP_TORSO, src)
+						else
+							return
+					if(update)	H.UpdateDamageIcon()
+				H.updatehealth()
+
+			else
+				switch(damtype)
+					if("brute")
+						M.Paralyse(1)
+						M.take_overall_damage(rand(force/2, force))
+					if("fire")
+						M.take_overall_damage(0, rand(force/2, force))
+					if("tox")
+						if(M.reagents)
+							if(M.reagents.get_reagent_amount("carpotoxin") + force < force*2)
+								M.reagents.add_reagent("carpotoxin", force)
+							if(M.reagents.get_reagent_amount("cryptobiolin") + force < force*2)
+								M.reagents.add_reagent("cryptobiolin", force)
+					else
+						return
+				M.updatehealth()
+			src.occupant_message("You hit [T].")
+			src.visible_message(SPAN_DANGER("[src.name] hits [T]"))
+		else
+			step_away(M,src)
+			src.occupant_message("You push [T] out of the way.")
+			src.visible_message("[src] pushes [T] out of the way.")
+
+	else
+		if(src.occupant.a_intent == I_HURT || isbrain(src.occupant)) // Don't smash unless we mean it
+			if(damtype == "brute")
+				src.occupant_message("You hit [T].")
+				src.visible_message(SPAN_DANGER("[src.name] hits [T]"))
+				playsound(src, 'sound/weapons/heavysmash.ogg', 50, 1)
+				do_attack_animation(T)
+
+				if(istype(T, /obj/structure/girder))
+					T:take_damage(force * 3) //Girders have 200 health by default. Steel, non-reinforced walls take four combat exosuit punches, girders take (with this value-mod) two, girders took five without.
+				else
+					T:take_damage(force)
+
+	melee_can_hit = 0
+	if(do_after(melee_cooldown))
+		melee_can_hit = 1
 	return
 
 /obj/mecha/proc/range_action(atom/target)
@@ -728,9 +814,12 @@
 	return domove(direction)
 
 /obj/mecha/proc/can_ztravel()
-	for(var/obj/item/mecha_parts/mecha_equipment/tool/jetpack/jp in equipment)
-		return jp.equip_ready
-	return FALSE
+	. = FALSE
+	for(var/obj/item/mecha_parts/mecha_equipment/equip in equipment)
+		. = equip.check_ztravel()
+		if(.)
+			break
+	return
 
 /obj/mecha/proc/domove(direction)
 
@@ -765,6 +854,7 @@
 
 	if(strafing)
 		tally = round(tally * actuator.strafing_multiplier)
+		tally += 0.2 SECONDS
 
 	for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
 		if(istype(ME, /obj/item/mecha_parts/mecha_equipment/speedboost))
@@ -777,6 +867,10 @@
 
 	if(overload)	// At the end, because this would normally just make the mech *slower* since tally wasn't starting at 0.
 		tally = min(1, round(tally/2))
+
+	var/turf/T = get_turf(src)	// At the end of the end, because no matter how fast a mech is, if a turf is rough terrain, you're going to have trouble.
+	if(T.movement_cost)
+		tally += T.movement_cost
 
 	return max(1, round(tally, 0.1))	// Round the total to the nearest 10th. Can't go lower than 1 tick. Even humans have a delay longer than that.
 
@@ -2860,3 +2954,33 @@
 	playsound(src, 'sound/effects/attackblob.ogg', 50, 1)
 
 	return ..()
+
+/obj/mecha/throw_impact(var/atom/hit_atom, var/speed)
+	. = ..(hit_atom, speed)
+
+	for(var/obj/item/mecha_parts/mecha_equipment/ME in equipment)
+		if(istype(ME, /obj/item/mecha_parts/mecha_equipment/tool/jumpjet))
+			flying = FALSE
+
+/obj/mecha/hit_check(var/speed)
+	if(src.throwing)
+		for(var/atom/A in get_turf(src))
+			if(A == src) continue
+			if(isliving(A))
+				if(A:lying) continue
+				src.throw_impact(A,speed)
+			if(isobj(A))
+				if(!A.density || A.throwpass)
+					continue
+				// Special handling of windows, which are dense but block only from some directions
+				if(istype(A, /obj/structure/window))
+					var/obj/structure/window/W = A
+					if (!W.is_fulltile() && !(turn(src.last_move, 180) & A.dir))
+						continue
+				// Same thing for (closed) windoors, which have the same problem
+				else if(istype(A, /obj/machinery/door/window) && !(turn(src.last_move, 180) & A.dir))
+					continue
+
+				if(flying && A.CanPass(src))
+					continue
+				src.throw_impact(A,speed)

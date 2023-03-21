@@ -251,7 +251,7 @@ var/global/list/mining_overlay_cache = list()
 	if(random_icon)
 		dir = pick(alldirs)
 		. = INITIALIZE_HINT_LATELOAD
-	var/decl/flooring/F = get_flooring_data(/decl/flooring/sand)
+	var/decl/flooring/F = GET_DECL(/decl/flooring/sand)
 	footstep_sounds = F?.footstep_sounds
 
 /turf/simulated/mineral/LateInitialize()
@@ -716,7 +716,7 @@ var/global/list/mining_overlay_cache = list()
 
 /turf/simulated/mineral/proc/artifact_debris(var/severity = 0)
 	//cael's patented random limited drop componentized loot system!
-	//sky's patented not-fucking-retarded overhaul!
+	//sky's patented non-mischievious overhaul!
 
 	//Give a random amount of loot from 1 to 3 or 5, varying on severity.
 	for(var/j in 1 to rand(1, 3 + max(min(severity, 1), 0) * 2))

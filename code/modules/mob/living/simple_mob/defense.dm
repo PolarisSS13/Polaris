@@ -1,10 +1,7 @@
 // Hit by a projectile.
 /mob/living/simple_mob/bullet_act(var/obj/item/projectile/P)
 	//Projectiles with bonus SA damage
-	if(!P.nodamage)
-	//	if(!P.SA_vulnerability || P.SA_vulnerability == intelligence_level)
-		if(P.SA_vulnerability & mob_class)
-			P.damage += P.SA_bonus_damage
+	P.damage += P.apply_SA_vulnerability(src)
 	. = ..()
 
 
@@ -37,7 +34,6 @@
 
 			G.synch()
 			G.affecting = src
-			LAssailant = L
 
 			L.visible_message(SPAN_WARNING("\The [L] has grabbed [src] passively!"))
 			L.do_attack_animation(src)

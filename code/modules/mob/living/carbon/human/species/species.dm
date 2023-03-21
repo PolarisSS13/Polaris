@@ -11,9 +11,10 @@
 	var/list/catalogue_data = null							// A list of /datum/category_item/catalogue datums, for the cataloguer, or null.
 
 	// Icon/appearance vars.
-	var/icobase = 'icons/mob/human_races/r_human.dmi'		// Normal icon set.
-	var/deform = 'icons/mob/human_races/r_def_human.dmi'	// Mutated icon set.
-	var/limb_blend = ICON_ADD								// Specify a blending mode for limb colourisation.
+	var/icobase = 'icons/mob/human_races/r_human.dmi'		 // Normal icon set.
+	var/icon_template = 'icons/mob/human_races/template.dmi' // Used for mob icon generation.
+	var/deform = 'icons/mob/human_races/r_def_human.dmi'	 // Mutated icon set.
+	var/limb_blend = ICON_ADD								 // Specify a blending mode for limb colourisation.
 
 	var/speech_bubble_appearance = "normal"					// Part of icon_state to use for speech bubbles when talking.	See talk.dmi for available icons.
 	var/fire_icon_state = "humanoid"						// The icon_state used inside OnFire.dmi for when on fire.
@@ -39,7 +40,6 @@
 	var/icon_scale_y = 1										// Makes the icon taller/shorter.
 
 	var/race_key = 0										// Used for mob icon cache string.
-	var/icon/icon_template									// Used for mob icon generation for non-32x32 species.
 	var/mob_size	= MOB_MEDIUM
 	var/show_ssd = "fast asleep"
 	var/virus_immune
@@ -53,6 +53,7 @@
 	var/blood_level_fatal = 0.4								//"Fatal" blood level; below this, you take extremely high oxydamage
 	var/hunger_factor = 0.05								// Multiplier for hunger.
 	var/active_regen_mult = 1								// Multiplier for 'Regenerate' power speed, in human_powers.dm
+	var/hearboost = 0 										//Extra ranger on whisper hearing. 0 is adjacent.
 
 	var/taste_sensitivity = TASTE_NORMAL							// How sensitive the species is to minute tastes.
 	var/allergens = null									// Things that will make this species very sick
@@ -536,4 +537,13 @@
 		H.adjustToxLoss(amount)
 
 /datum/species/proc/handle_falling(mob/living/carbon/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
+	return FALSE
+
+/datum/species/proc/apply_default_colours(var/mob/living/carbon/human/H)
+	if(base_color)
+		//Apply colour.
+		H.r_skin = hex2num(copytext(base_color,2,4))
+		H.g_skin = hex2num(copytext(base_color,4,6))
+		H.b_skin = hex2num(copytext(base_color,6,8))
+		return TRUE
 	return FALSE

@@ -37,7 +37,7 @@
 
 /mob/living/simple_mob/proc/do_help_interaction(var/atom/A)
 	if(isliving(A))
-		custom_emote(1,"[pick(friendly)] \the [A]!")
+		custom_emote(VISIBLE_MESSAGE,"[pick(friendly)] \the [A]!")
 		return TRUE
 	return FALSE
 
@@ -45,7 +45,7 @@
 	if(can_special_attack(A) && special_attack_target(A))
 		return
 	else if(melee_damage_upper == 0 && istype(A,/mob/living))
-		custom_emote(1,"[pick(friendly)] \the [A]!")
+		custom_emote(VISIBLE_MESSAGE,"[pick(friendly)] \the [A]!")
 	else
 		attack_target(A)
 

@@ -200,7 +200,7 @@
 				M.unEquip(piece)
 			piece.forceMove(src)
 
-/obj/item/rig/get_worn_icon_file(var/body_type,var/slot_name,var/default_icon,var/inhands)
+/obj/item/rig/get_worn_icon_file(var/body_type, var/slot_name, var/default_icon, var/inhands, var/check_state)
 	if(!inhands && (slot_name == slot_back_str || slot_name == slot_belt_str))
 		if(icon_override)
 			return icon_override
@@ -589,8 +589,9 @@
 		var/species_icon = 'icons/mob/rig_back.dmi'
 		// Since setting mob_icon will override the species checks in
 		// update_inv_wear_suit(), handle species checks here.
-		if(wearer && sprite_sheets && sprite_sheets[wearer.species.get_bodytype(wearer)])
-			species_icon =  sprite_sheets[wearer.species.get_bodytype(wearer)]
+		var/body_type = wearer?.species.get_bodytype(wearer)
+		if(wearer && LAZYACCESS(sprite_sheets, body_type))
+			species_icon = LAZYACCESS(sprite_sheets, body_type)
 		mob_icon = icon(icon = species_icon, icon_state = "[icon_state]")
 
 	if(installed_modules.len)
