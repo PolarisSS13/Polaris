@@ -17,7 +17,7 @@
 		if(prob(1))
 			owner.custom_pain("Your abdomen feels like it's tearing itself apart!",1)
 			if(!IS_WALKING(owner))
-				owner.set_move_intent(/decl/move_intent/walk)
+				owner.set_move_intent(owner.get_movement_intent_with_flag(MOVEMENT_INTENT_WALKING))
 
 /obj/item/organ/internal/intestine/xeno
 	color = "#555555"

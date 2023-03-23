@@ -13,7 +13,7 @@
 	active_power_usage = 4 KILOWATTS
 	heating_power = 4000
 	idle_power_usage = 2 KILOWATTS
-	
+
 	optimal_power = 1.2 // Things on the grill cook .6 faster - this is now the fastest appliance to heat and to cook on. BURGERS GO SIZZLE.
 
 	stat = POWEROFF // Starts turned off.
@@ -22,18 +22,18 @@
 	optimal_temp = 120 + T0C
 	min_temp = 60 + T0C
 	resistance = 8 KILOWATTS // Very fast to heat up.
-	
+
 	max_contents = 3 // Arbitrary number, 3 grill 'racks'
 	container_type = /obj/item/reagent_containers/cooking_container/grill
-	
+
 /obj/machinery/appliance/cooker/grill/Initialize()
 	. = ..()
 	grill_loop = new(list(src), FALSE)
-	
+
 /obj/machinery/appliance/cooker/grill/Destroy()
 	QDEL_NULL(grill_loop)
 	return ..()
-	
+
 /obj/machinery/appliance/cooker/grill/update_icon() // TODO: Cooking icon
 	if(!stat)
 		icon_state = on_icon
@@ -59,14 +59,14 @@
 	if (stat & POWEROFF)//Its turned off
 		stat &= ~POWEROFF
 		if (usr)
-			usr.visible_message("[usr] turns \the [src] on", "You turn on \the [src].")
+			usr.visible_message("<span class='filter_notice'>[usr] turns \the [src] on.</span>", "<span class='filter_notice'>You turn on \the [src].</span>")
 			get_cooking_work(CI)
 			use_power = 2
 	else //It's on, turn it off
 		stat |= POWEROFF
 		use_power = 0
 		if (usr)
-			usr.visible_message("[usr] turns \the [src] off", "You turn off \the [src].")
+			usr.visible_message("<span class='filter_notice'>[usr] turns \the [src] off.</span>", "<span class='filter_notice'>You turn off \the [src].</span>")
 	playsound(src, 'sound/machines/click.ogg', 40, 1)
 	update_icon()
 
@@ -95,7 +95,7 @@
 			var/datum/cooking_item/CI = a
 			if (CI.container)
 				if (!CI.container.check_contents())
-					to_chat(user, "There's nothing in the [src] you can remove!")
+					to_chat(user, "<span class='filter_notice'>There's nothing in the [src] you can remove!</span>")
 					return
 
 				for (var/obj/item/I in CI.container)

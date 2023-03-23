@@ -2167,15 +2167,28 @@
 /area/surface/station/engineering/atmos/monitoring)
 "bzc" = (
 /obj/structure/table/glass,
-/obj/item/paper_bin,
-/obj/item/clipboard,
-/obj/item/folder/white,
-/obj/item/pen,
+/obj/item/paper_bin{
+	pixel_x = -14
+	},
+/obj/item/clipboard{
+	pixel_x = -14
+	},
+/obj/item/folder/white{
+	pixel_x = -14
+	},
+/obj/item/pen{
+	pixel_x = -12
+	},
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 6
 	},
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 6
+	},
+/obj/item/communicator/desktop{
+	occupation = "research";
+	pixel_x = 3;
+	static_name = "research lobby communicator"
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/lab)
@@ -5964,6 +5977,12 @@
 /obj/effect/floor_decal/corner/brown/border{
 	dir = 1
 	},
+/obj/item/communicator/desktop{
+	occupation = "cargo";
+	pixel_x = -16;
+	pixel_y = 6;
+	static_name = "cargo lobby communicator"
+	},
 /turf/simulated/floor/tiled,
 /area/surface/station/quartermaster/office)
 "dUz" = (
@@ -6622,12 +6641,21 @@
 	pixel_x = -21
 	},
 /obj/item/material/ashtray/glass,
-/obj/item/flashlight/lamp/green,
+/obj/item/flashlight/lamp/green{
+	pixel_x = 12;
+	pixel_y = 10
+	},
 /obj/item/sticky_pad/random{
-	pixel_x = 8;
+	pixel_x = 16;
 	pixel_y = -1
 	},
 /obj/effect/zone_divider,
+/obj/item/communicator/desktop{
+	occupation = "internal affairs";
+	pixel_x = -3;
+	pixel_y = 4;
+	static_name = "internal affairs office communicator"
+	},
 /turf/simulated/floor/wood,
 /area/surface/station/command/internalaffairs)
 "esP" = (
@@ -8860,7 +8888,7 @@
 	input_tag = "cooling_in";
 	name = "Engine Cooling Control";
 	output_tag = "cooling_out";
-	sensors = list("engine_sensor" = "Engine Core")
+	sensors = list("engine_sensor"="Engine Core")
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/reactor_monitoring)
@@ -14492,8 +14520,8 @@
 	name = "Medical Suits";
 	req_one_access = list(5)
 	},
-/obj/item/clothing/suit/space/void/medical,
-/obj/item/clothing/head/helmet/space/void/medical,
+/obj/item/clothing/suit/space/void/medical/emt,
+/obj/item/clothing/head/helmet/space/void/medical/emt,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/ai_monitored/storage/eva)
 "jbk" = (
@@ -21535,7 +21563,7 @@
 	frequency = 1443;
 	level = 3;
 	name = "Distribution and Waste Monitor";
-	sensors = list("mair_in_meter" = "Mixed Air In", "air_sensor" = "Mixed Air Supply Tank", "mair_out_meter" = "Mixed Air Out", "dloop_atm_meter" = "Distribution Loop", "wloop_atm_meter" = "Engine Waste")
+	sensors = list("mair_in_meter"="Mixed Air In","air_sensor"="Mixed Air Supply Tank","mair_out_meter"="Mixed Air Out","dloop_atm_meter"="Distribution Loop","wloop_atm_meter"="Engine Waste")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/engineering/atmos)
@@ -24833,7 +24861,7 @@
 	dir = 1;
 	frequency = 1441;
 	name = "Tank Monitor";
-	sensors = list("n2_sensor" = "Nitrogen", "o2_sensor" = "Oxygen", "co2_sensor" = "Carbon Dioxide", "tox_sensor" = "Toxins", "n2o_sensor" = "Nitrous Oxide", "waste_sensor" = "Gas Mix Tank")
+	sensors = list("n2_sensor"="Nitrogen","o2_sensor"="Oxygen","co2_sensor"="Carbon Dioxide","tox_sensor"="Toxins","n2o_sensor"="Nitrous Oxide","waste_sensor"="Gas Mix Tank")
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/engineering/atmos)
@@ -26743,10 +26771,19 @@
 /area/surface/station/hallway/primary/secondfloor/west)
 "rwU" = (
 /obj/structure/table/wooden_reinforced,
-/obj/item/melee/chainofcommand,
-/obj/item/hand_tele,
+/obj/item/melee/chainofcommand{
+	pixel_y = 9
+	},
+/obj/item/hand_tele{
+	pixel_y = 9
+	},
 /obj/structure/sign/calendar{
 	pixel_x = -32
+	},
+/obj/item/communicator/desktop{
+	occupation = "site manager";
+	pixel_y = -12;
+	static_name = "site manager's office communicator"
 	},
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/captain)
@@ -27358,7 +27395,10 @@
 /area/surface/station/rnd/research)
 "rSN" = (
 /obj/structure/table/standard,
-/obj/item/sticky_pad/random,
+/obj/item/communicator/desktop{
+	occupation = "public";
+	static_name = "public communicator"
+	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/secondary/secondfloor/dormhallway)
 "rSS" = (
@@ -30246,8 +30286,8 @@
 	},
 /obj/item/clothing/shoes/magboots,
 /obj/item/clothing/mask/breath,
-/obj/item/clothing/suit/space/void/security,
-/obj/item/clothing/head/helmet/space/void/security,
+/obj/item/clothing/suit/space/void/security/riot,
+/obj/item/clothing/head/helmet/space/void/security/riot,
 /obj/structure/table/rack{
 	layer = 2.6
 	},
@@ -30436,8 +30476,8 @@
 	name = "Engineering Suits";
 	req_one_access = list(11,24)
 	},
-/obj/item/clothing/suit/space/void/engineering,
-/obj/item/clothing/head/helmet/space/void/engineering,
+/obj/item/clothing/suit/space/void/engineering/hazmat,
+/obj/item/clothing/head/helmet/space/void/engineering/hazmat,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/engineering/engine_eva)
 "tJt" = (
@@ -31669,7 +31709,7 @@
 	dir = 4
 	},
 /obj/item/toy/desk/fan{
-	pixel_y = 19
+	pixel_y = 18
 	},
 /obj/structure/sign/clock{
 	pixel_y = -32
@@ -35085,6 +35125,26 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/hallway/secondary/secondfloor/command)
+"wMC" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/item/clothing/shoes/magboots,
+/obj/item/clothing/mask/breath,
+/obj/structure/table/rack{
+	layer = 2.6
+	},
+/obj/machinery/door/window/southright{
+	name = "Engineering Suits";
+	req_one_access = list(11,24)
+	},
+/obj/item/clothing/suit/space/void/engineering/construction,
+/obj/item/clothing/head/helmet/space/void/engineering/construction,
+/turf/simulated/floor/tiled/dark,
+/area/surface/station/engineering/engine_eva)
 "wMP" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/cable/green{
@@ -37754,6 +37814,10 @@
 "yjT" = (
 /obj/structure/table/standard,
 /obj/item/toy/plushie/corgi,
+/obj/item/sticky_pad/random{
+	pixel_x = 4;
+	pixel_y = 8
+	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/secondary/secondfloor/dormhallway)
 "yka" = (
@@ -64704,18 +64768,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 ddU
 ddU
 ddU
@@ -64961,18 +65025,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 ddU
 ddU
 ddU
@@ -65218,18 +65282,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 ddU
 ddU
 ddU
@@ -65475,18 +65539,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 ddU
 ddU
 ddU
@@ -65732,18 +65796,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 ddU
 ddU
 ddU
@@ -65989,21 +66053,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 bFA
@@ -66246,21 +66310,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 qmH
@@ -66503,21 +66567,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 sBb
@@ -66760,21 +66824,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 sBb
@@ -67017,21 +67081,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 sBb
@@ -67274,21 +67338,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 sBb
@@ -67531,21 +67595,21 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 sBb
@@ -67788,22 +67852,22 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
+sBb
 sBb
 sBb
 sBb
@@ -74792,7 +74856,7 @@ ixp
 mhw
 dWs
 hWE
-gKO
+wMC
 njp
 ono
 grT

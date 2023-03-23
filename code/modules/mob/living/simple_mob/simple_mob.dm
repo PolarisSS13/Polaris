@@ -17,6 +17,11 @@
 
 	has_huds = TRUE // We do show AI status huds for buildmode players
 
+	move_intents = list(
+		/decl/move_intent/animal_run,
+		/decl/move_intent/animal_walk
+	)
+
 	var/tt_desc = null //Tooltip description
 
 	//Settings for played mobs
@@ -163,6 +168,11 @@
 	// Used for if the mob can drop limbs. Overrides the icon cache key, so it doesn't keep remaking the icon needlessly.
 	var/limb_icon_key
 
+	/// If above zero, decrement in Life(); on zero, put the mob to sleep for thirty seconds.
+	var/tranq_countdown = 0
+	/// A temporary storage value for the duration of any tranquilizer effect.
+	var/tranq_duration
+
 /mob/living/simple_mob/Initialize()
 	verbs -= /mob/verb/observe
 	health = maxHealth
@@ -220,17 +230,17 @@
 	return ..()
 */
 /mob/living/simple_mob/movement_delay()
-	. = movement_cooldown
 
 	if(force_max_speed)
 		return -3
-
+	. = 0
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.haste) && M.haste == TRUE)
 			return -3
 		if(!isnull(M.slowdown))
 			. += M.slowdown
 
+	. += ..() + movement_cooldown
 	// Turf related slowdown
 	var/turf/T = get_turf(src)
 	if(T && T.get_movement_cost() && !hovering) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
@@ -247,9 +257,7 @@
 	if(IS_WALKING(src))
 		. *= 1.5
 
-	 . += config.animal_delay
-
-	 . += ..()
+	. += ..()
 
 
 /mob/living/simple_mob/Stat()
@@ -288,3 +296,17 @@
 
 /decl/mob_organ_names
 	var/list/hit_zones = list("body") //When in doubt, it's probably got a body.
+
+/mob/living/simple_mob/handle_sleeping()
+	if(sleeping || stat != CONSCIOUS)
+		tranq_countdown = null
+		tranq_duration = null
+	else if(tranq_countdown > 0)
+		tranq_countdown--
+		if(tranq_countdown <= 0)
+			if(client)
+				to_chat(src, SPAN_DANGER("You fall asleep!"))
+			SetSleeping(max(1, round(tranq_duration / SSmobs.wait)))
+		else if(prob(5) && client)
+			to_chat(src, SPAN_WARNING("You feel [pick("dizzy", "woozy", "sleepy")]..."))
+	return ..()

@@ -61,7 +61,7 @@
 	if(!floortype && initial_flooring)
 		floortype = initial_flooring
 	if(floortype)
-		set_flooring(get_flooring_data(floortype), TRUE)
+		set_flooring(GET_DECL(floortype), TRUE)
 		refresh_snow(FALSE)
 		. = INITIALIZE_HINT_LATELOAD // We'll update our icons after everyone is ready
 	else
@@ -151,7 +151,7 @@
 			new flooring.build_type(src)
 		var/newtype = flooring.get_plating_type()
 		if(newtype) // Has a custom plating type to become
-			set_flooring(get_flooring_data(newtype))
+			set_flooring(GET_DECL(newtype))
 		else
 			flooring = null
 

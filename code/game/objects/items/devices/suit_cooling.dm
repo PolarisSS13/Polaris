@@ -24,6 +24,7 @@
 	var/max_cooling = 15				// in degrees per second - probably don't need to mess with heat capacity here
 	var/charge_consumption = 3			// charge per second at max_cooling
 	var/thermostat = T20C
+	var/starts_with_cell = TRUE
 
 	//TODO: make it heat up the surroundings when not in space
 
@@ -32,7 +33,8 @@
 
 /obj/item/suit_cooling_unit/Initialize()
 	. = ..()
-	cell = new/obj/item/cell/high(src)	//comes not with the crappy default power cell - because this is dedicated EVA equipment
+	if(starts_with_cell)
+		cell = new/obj/item/cell/high(src)	//comes not with the crappy default power cell - because this is dedicated EVA equipment
 
 /obj/item/suit_cooling_unit/Destroy()
 	QDEL_NULL(cell)
@@ -203,3 +205,6 @@
 			. += "The charge meter reads [round(cell.percent())]%."
 		else
 			. += "It doesn't have a power cell installed."
+
+/obj/item/suit_cooling_unit/empty //No duplicating cells with autolathes any more.
+	starts_with_cell = FALSE

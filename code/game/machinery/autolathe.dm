@@ -158,10 +158,11 @@
 		return
 
 	if(panel_open)
-		//Don't eat multitools or wirecutters used on an open lathe.
+		//Don't eat things when the lathe is open. No more accidentally lathing your jaws of life.
 		if(O.is_multitool() || O.is_wirecutter())
 			wires.Interact(user)
-			return
+			return TRUE
+		return FALSE
 
 	if(O.loc != user && !(istype(O,/obj/item/stack)))
 		return 0
@@ -367,14 +368,16 @@
 	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.6. Maximum rating of parts is 5
 
 /obj/machinery/autolathe/dismantle()
-	for(var/mat in stored_material)
-		var/datum/material/M = get_material_by_name(mat)
-		if(!istype(M))
-			continue
-		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
-		if(stored_material[mat] > S.perunit)
-			S.amount = round(stored_material[mat] / S.perunit)
-		else
-			qdel(S)
-	..()
-	return 1
+	if(LAZYLEN(stored_material))
+		for(var/mat in stored_material)
+			var/datum/material/M = get_material_by_name(mat)
+			if(!istype(M))
+				continue
+			if(stored_material[mat] == 0) //Maybe don't try and make null mats...
+				continue
+			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+			if(stored_material[mat] >= S.perunit)
+				S.amount = round(stored_material[mat] / S.perunit)
+			else
+				qdel(S) //Prevents stacks smaller than 1
+	return ..()

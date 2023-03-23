@@ -58,13 +58,18 @@
 		trigger_aiming(TARGET_CAN_MOVE)
 
 /mob/living/proc/set_move_intent(decl/move_intent/intent)
-	if(move_intent.type == intent)
-		return
-
 	var/new_intent = GET_DECL(intent)
 	if(isnull(new_intent))
 		return
+	if(move_intent != new_intent)
+		move_intent = new_intent
+		if(hud_used?.move_intent)
+			hud_used.move_intent.icon_state = move_intent.hud_icon_state
 
-	move_intent = new_intent
-	if(hud_used?.move_intent)
-		hud_used.move_intent.icon_state = move_intent.hud_icon_state
+/mob/living/proc/get_movement_intent_with_flag(var/flag_to_check = MOVEMENT_INTENT_WALKING)
+	if(!flag_to_check || !length(move_intents))
+		return
+	for(var/move_intent_type in move_intents)
+		var/decl/move_intent/check_intent = GET_DECL(move_intent_type)
+		if(check_intent.flags & flag_to_check)
+			return move_intent_type

@@ -99,6 +99,7 @@
 				return
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
+			var/list/flooring_types = decls_repository.get_decls_of_type(/decl/flooring)
 			for(var/flooring_type in flooring_types)
 				var/decl/flooring/F = flooring_types[flooring_type]
 				if(!F.build_type)
@@ -136,12 +137,14 @@
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
 
 /turf/simulated/floor/attack_hand(mob/user)
-	if (has_snow())
+	if (!user.pulling && has_snow())
 		visible_message(SPAN_NOTICE("[user] starts scooping up some snow..."), SPAN_NOTICE("You start scooping up some snow..."))
 		if(do_after(user, 1 SECOND))
 			var/obj/S = new /obj/item/stack/material/snow(user.loc)
 			user.put_in_hands(S)
 			visible_message(SPAN_NOTICE("[user] scoops up a pile of snow."), SPAN_NOTICE("You scoop up a pile of snow."))
+		return
+	return ..()
 
 /turf/simulated/floor/proc/try_deconstruct_tile(obj/item/W as obj, mob/user as mob)
 	if(W.is_crowbar())

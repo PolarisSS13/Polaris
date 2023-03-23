@@ -48,6 +48,7 @@
 #define MAT_DEUTERIUM		"deuterium"
 #define MAT_CONCRETE		"concrete"
 #define MAT_PLASTEELREBAR	"plasteel rebar"
+#define MAT_GRASS			"grass"
 
 
 #define DEFAULT_TABLE_MATERIAL MAT_PLASTIC

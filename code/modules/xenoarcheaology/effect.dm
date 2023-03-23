@@ -91,7 +91,7 @@
 		var/atom/toplevelholder = target
 		while (!istype(toplevelholder.loc, /turf))
 			toplevelholder = toplevelholder.loc
-		toplevelholder.visible_message("<font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font>")
+		toplevelholder.visible_message("<span class='filter_notice'><font color='red'>[bicon(toplevelholder)] [toplevelholder] [display_msg]</font></span>")
 	return TRUE
 
 

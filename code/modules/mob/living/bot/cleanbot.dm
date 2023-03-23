@@ -27,7 +27,7 @@
 
 /mob/living/bot/cleanbot/handleIdle()
 	if(!wet_floors && !spray_blood && vocal && prob(2))
-		custom_emote(2, "makes an excited booping sound!")
+		custom_emote(AUDIBLE_MESSAGE, "makes an excited booping sound!")
 		playsound(src, 'sound/machines/synth_yes.ogg', 50, 0)
 
 	if(wet_floors && prob(5)) // Make a mess
@@ -111,7 +111,7 @@
 
 	busy = 1
 	if(prob(20))
-		custom_emote(2, "begins to clean up \the [D]")
+		custom_emote(AUDIBLE_MESSAGE, "begins to clean up \the [D]")
 	update_icons()
 	var/cleantime = istype(D, /obj/effect/decal/cleanable/dirt) ? 10 : 50
 	if(do_after(src, cleantime))
