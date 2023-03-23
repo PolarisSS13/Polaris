@@ -113,6 +113,7 @@
 			SPAN_NOTICE("\The [user] fills \the [src] with a blood sample."),
 			SPAN_NOTICE("You inject \the [src] with a blood sample from \the [I].")
 		)
+		SSnanoui.update_uis(src)
 		return
 	if (istype(I, /obj/item/reagent_containers/glass))
 		if (container)
@@ -128,6 +129,7 @@
 		user.drop_from_inventory(G)
 		G.forceMove(src)
 		container = G
+		SSnanoui.update_uis(src)
 		return
 	return ..()
 
@@ -163,16 +165,18 @@
 	else if (panel_open)
 		to_chat(user, SPAN_WARNING("Close the panel first!"))
 		return
-	tgui_interact(user)
+	ui_interact(user)
 
-/obj/machinery/bioprinter/tgui_interact(mob/user, datum/tgui/ui, datum/tgui/parent_ui)
-	ui = SStgui.try_update_ui(user, src, ui)
+/obj/machinery/bioprinter/ui_interact(mob/user, ui_key, datum/nanoui/ui, force_open, master_ui, datum/topic_state/state)
+	var/list/data = build_ui_data()
+	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open = force_open)
 	if (!ui)
-		ui = new(user, src, "Bioprinter", name)
+		ui = new(user, src, ui_key, "bioprinter.tmpl", capitalize(name), 500, 650)
+		ui.set_initial_data(data)
 		ui.open()
 
-/obj/machinery/bioprinter/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
-	var/list/data = list()
+/obj/machinery/bioprinter/proc/build_ui_data()
+	var/data[0]
 
 	data["biomassContainer"] = container
 	data["biomassVolume"] = get_biomass_volume()
@@ -194,17 +198,52 @@
 	if (anomalous_organs)
 		valid_products |= anomalous_products
 
-	var/list/products_data = list()
+	var/products_data[0]
 	for (var/O in valid_products)
-		products_data +=  list(list(
+		products_data[++products_data.len] = list(
 			"name" = O,
 			"cost" = valid_products[O][2],
 			"canPrint" = (get_biomass_volume() >= valid_products[O][2]) && loaded_dna,
 			"anomalous" = anomalous_products.Find(O)
-		))
+		)
 	data["products"] = products_data
 
 	return data
+
+/obj/machinery/bioprinter/Topic(href, href_list, datum/topic_state/state)
+	if (..())
+		return TRUE
+	if (href_list["ejectBeaker"])
+		if (container)
+			container.forceMove(get_turf(src))
+			if (usr.Adjacent(src))
+				usr.put_in_active_hand(container)
+			container = null
+	if (href_list["flushDNA"])
+		if (loaded_dna)
+			loaded_dna = null
+			visible_message(SPAN_NOTICE("\The [src] whirrs and discards its most recent DNA sample."))
+	if (href_list["printOrgan"])
+		var/organ_name = href_list["printOrgan"]
+		var/list/all_products = products + complex_products + anomalous_products
+		var/product_entry = all_products[organ_name]
+		var/atom/product_path = product_entry?[1]
+		if (product_entry && product_path && get_biomass_volume() >= product_entry[2])
+			container.reagents.remove_reagent(biomass_id, product_entry[2])
+			playsound(src, "switch", 30)
+			visible_message(SPAN_NOTICE("\The [src] fills with fluid and begins to print \a [initial(product_path.name)]."))
+			print_timer = addtimer(CALLBACK(src, .proc/print_organ, product_entry[1]), print_delay, TIMER_STOPPABLE)
+			set_active(TRUE)
+	if (href_list["cancelPrint"])
+		if (print_timer)
+			playsound(src, "switch", 30)
+			playsound(src, 'sound/effects/squelch1.ogg', 40, TRUE)
+			visible_message(SPAN_WARNING("\The [src] gurgles as it cancels its current task and discards the pulpy biomass."))
+			deltimer(print_timer)
+			print_timer = null
+			set_active(FALSE)
+	SSnanoui.update_uis(src)
+	update_icon()
 
 /obj/machinery/bioprinter/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
 	if (..())
@@ -292,6 +331,7 @@
 	playsound(src, 'sound/machines/kitchen/microwave/microwave-end.ogg', 50, TRUE)
 	visible_message(SPAN_NOTICE("\The [src] dings and spits out \a [O.name]."))
 	set_active(FALSE)
+	SSnanoui.update_uis(src)
 	return O
 
 /obj/item/circuitboard/bioprinter
