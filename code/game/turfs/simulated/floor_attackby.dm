@@ -9,6 +9,22 @@
 			attack_tile(C, L) // Be on help intent if you want to decon something.
 			return
 
+	if (has_snow()) // Snowy turfs have to be cleared out before anything else can be done with them
+		if (istype(C, /obj/item/shovel))
+			user.visible_message(
+				SPAN_NOTICE("\The [user] starts clearing \the [src] with \the [C.name]..."),
+				SPAN_NOTICE("You start clearing \the [src] with your [C.name]..."))
+			if(do_after(user, 4 SECONDS * C.toolspeed))
+				user.visible_message(
+					SPAN_NOTICE("\The [user] finishes clearing \the [src]."),
+					SPAN_NOTICE("You clear out \the [src] and leave it in a pile nearby."))
+				var/obj/item/stack/material/snow/S = new(src)
+				S.amount = 5 * snow_layers
+				set_snow(0)
+		else
+			to_chat(user, SPAN_WARNING("Remove the snow with a shovel first!"))
+		return TRUE
+
 	if(!(C.has_tool_quality(TOOL_SCREWDRIVER) && flooring && (flooring.flags & TURF_REMOVE_SCREWDRIVER)))
 		if(isliving(user))
 			var/mob/living/L = user
@@ -83,6 +99,7 @@
 				return
 			var/obj/item/stack/S = C
 			var/decl/flooring/use_flooring
+			var/list/flooring_types = decls_repository.get_decls_of_type(/decl/flooring)
 			for(var/flooring_type in flooring_types)
 				var/decl/flooring/F = flooring_types[flooring_type]
 				if(!F.build_type)
@@ -118,6 +135,16 @@
 						broken = null
 					else
 						to_chat(user, "<span class='warning'>You need more welding fuel to complete this task.</span>")
+
+/turf/simulated/floor/attack_hand(mob/user)
+	if (!user.pulling && has_snow())
+		visible_message(SPAN_NOTICE("[user] starts scooping up some snow..."), SPAN_NOTICE("You start scooping up some snow..."))
+		if(do_after(user, 1 SECOND))
+			var/obj/S = new /obj/item/stack/material/snow(user.loc)
+			user.put_in_hands(S)
+			visible_message(SPAN_NOTICE("[user] scoops up a pile of snow."), SPAN_NOTICE("You scoop up a pile of snow."))
+		return
+	return ..()
 
 /turf/simulated/floor/proc/try_deconstruct_tile(obj/item/W as obj, mob/user as mob)
 	if(W.is_crowbar())

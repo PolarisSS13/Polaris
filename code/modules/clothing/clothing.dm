@@ -1,3 +1,5 @@
+var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets and /obj/item/clothing/head/update_icon()
+
 /obj/item/clothing
 	name = "clothing"
 	siemens_coefficient = 0.9
@@ -153,7 +155,7 @@
 
 	//Set icon
 	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
-		sprite_sheets[target_species] = sprite_sheets_refit[target_species]
+		LAZYSET(sprite_sheets, target_species, sprite_sheets_refit[target_species])
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -174,7 +176,7 @@
 
 	//Set icon
 	if (sprite_sheets_refit && (target_species in sprite_sheets_refit))
-		sprite_sheets[target_species] = sprite_sheets_refit[target_species]
+		LAZYSET(sprite_sheets, target_species, sprite_sheets_refit[target_species])
 
 	if (sprite_sheets_obj && (target_species in sprite_sheets_obj))
 		icon = sprite_sheets_obj[target_species]
@@ -481,8 +483,8 @@
 		else
 			D.wear_hat(src)
 			success = 1
-	else if(istype(user, /mob/living/carbon/alien/diona))
-		var/mob/living/carbon/alien/diona/D = user
+	else if(istype(user, /mob/living/carbon/diona))
+		var/mob/living/carbon/diona/D = user
 		if(D.hat)
 			success = 2
 		else
@@ -514,7 +516,7 @@
 
 		// Generate and cache the on-mob icon, which is used in update_inv_head().
 		var/body_type = (H && H.species.get_bodytype(H))
-		var/cache_key = "[light_overlay][body_type && sprite_sheets[body_type] ? "_[body_type]" : ""]"
+		var/cache_key = "[light_overlay][body_type && LAZYACCESS(sprite_sheets, body_type) ? "_[body_type]" : ""]"
 		if(!light_overlay_cache[cache_key])
 			var/use_icon = LAZYACCESS(sprite_sheets,body_type) || 'icons/mob/light_overlays.dmi'
 			light_overlay_cache[cache_key] = image(icon = use_icon, icon_state = "[light_overlay]")
@@ -863,14 +865,15 @@
 
 /obj/item/clothing/under/proc/update_rolldown_status()
 	var/mob/living/carbon/human/H
-	if(istype(src.loc, /mob/living/carbon/human))
-		H = src.loc
+	if(ishuman(loc))
+		H = loc
 
 	var/icon/under_icon
+	var/body_type = H?.species.get_bodytype(H)
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(body_type  && LAZYACCESS(sprite_sheets, body_type))
+		under_icon = LAZYACCESS(sprite_sheets, body_type)
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else if ("[worn_state]_s" in cached_icon_states(rolled_down_icon))
@@ -886,20 +889,21 @@
 
 /obj/item/clothing/under/proc/update_rollsleeves_status()
 	var/mob/living/carbon/human/H
-	if(istype(src.loc, /mob/living/carbon/human))
-		H = src.loc
+	if(ishuman(loc))
+		H = loc
 
 	var/icon/under_icon
+	var/body_type = H?.species.get_bodytype(H)
 	if(icon_override)
 		under_icon = icon_override
-	else if(H && sprite_sheets && sprite_sheets[H.species.get_bodytype(H)])
-		under_icon = sprite_sheets[H.species.get_bodytype(H)]
+	else if(H && LAZYACCESS(sprite_sheets, body_type))
+		under_icon = LAZYACCESS(sprite_sheets, body_type)
 	else if(item_icons && item_icons[slot_w_uniform_str])
 		under_icon = item_icons[slot_w_uniform_str]
 	else if ("[worn_state]_s" in cached_icon_states(rolled_down_sleeves_icon))
 		under_icon = rolled_down_sleeves_icon
 	else if(index)
-		under_icon = new /icon("[INV_W_UNIFORM_DEF_ICON]_[index].dmi")
+		under_icon = new /icon("[INV_W_UNIFORM_DEF_STRING]_[index].dmi")
 
 	// The _s is because the icon update procs append it.
 	if((under_icon == rolled_down_sleeves_icon && ("[worn_state]_s" in cached_icon_states(under_icon))) || ("[worn_state]_r_s" in cached_icon_states(under_icon)))
@@ -907,7 +911,8 @@
 			rolled_sleeves = 0
 	else
 		rolled_sleeves = -1
-	if(H) update_clothing_icon()
+	if(H)
+		update_clothing_icon()
 
 /obj/item/clothing/under/update_clothing_icon()
 	if (ismob(src.loc))

@@ -21,6 +21,7 @@
 	var/list/datum/design/queue = list()
 	var/progress = 0
 	var/busy = 0
+	var/datum/looping_sound/fabricator/soundloop
 
 	var/list/categories = list()
 	var/category = null
@@ -41,6 +42,11 @@
 	default_apply_parts()
 	files = new /datum/research(src) //Setup the research data holder.
 	update_categories()
+	soundloop = new(list(src), FALSE)
+
+/obj/machinery/mecha_part_fabricator/Destroy()
+	QDEL_NULL(soundloop)
+	return ..()
 
 /obj/machinery/mecha_part_fabricator/process()
 	..()
@@ -195,10 +201,13 @@
 	if(queue.len)
 		if(can_build(queue[1]))
 			busy = 1
+			soundloop.start()
 		else
 			busy = 0
+			soundloop.stop()
 	else
 		busy = 0
+		soundloop.stop()
 
 /obj/machinery/mecha_part_fabricator/proc/add_to_queue(var/index)
 	var/datum/design/D = files.known_designs[index]

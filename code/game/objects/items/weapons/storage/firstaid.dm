@@ -153,6 +153,21 @@
 		/obj/item/autopsy_scanner
 		)
 
+/obj/item/storage/firstaid/surgery/simple
+	starts_with = list(
+		/obj/item/surgical/bonesetter,
+		/obj/item/surgical/cautery,
+		/obj/item/surgical/circular_saw,
+		/obj/item/surgical/hemostat,
+		/obj/item/surgical/retractor,
+		/obj/item/surgical/scalpel,
+		/obj/item/surgical/surgicaldrill,
+		/obj/item/surgical/bonegel,
+		/obj/item/surgical/FixOVein,
+		/obj/item/stack/medical/advanced/bruise_pack,
+		/obj/item/autopsy_scanner
+	)
+
 /obj/item/storage/firstaid/clotting
 	name = "clotting kit"
 	desc = "Contains chemicals to stop bleeding."

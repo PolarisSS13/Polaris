@@ -1,6 +1,7 @@
 /obj/item/gun/energy
 	name = "energy gun"
 	desc = "A basic energy-based gun."
+	icon = 'icons/obj/gun_energy.dmi'
 	icon_state = "energy"
 	fire_sound_text = "laser blast"
 

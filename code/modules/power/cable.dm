@@ -498,6 +498,7 @@ var/global/list/possible_cable_coil_colours = list(
 	amount = MAXCOIL
 	max_amount = MAXCOIL
 	color = COLOR_RED
+	gender = NEUTER
 	desc = "A coil of power cable."
 	throwforce = 10
 	w_class = ITEMSIZE_SMALL
@@ -508,6 +509,7 @@ var/global/list/possible_cable_coil_colours = list(
 	item_state = "coil"
 	attack_verb = list("whipped", "lashed", "disciplined", "flogged")
 	stacktype = /obj/item/stack/cable_coil
+	singular_name = "length"
 	drop_sound = 'sound/items/drop/accessory.ogg'
 	pickup_sound = 'sound/items/pickup/accessory.ogg'
 	tool_qualities = list(TOOL_CABLE_COIL)
@@ -589,15 +591,6 @@ var/global/list/possible_cable_coil_colours = list(
 		w_class = ITEMSIZE_TINY
 	else
 		w_class = ITEMSIZE_SMALL
-
-/obj/item/stack/cable_coil/examine(mob/user)
-	. = ..()
-	if(get_amount() == 1)
-		. += "Just a short piece remains."
-	else if(get_amount() == 2)
-		. += "Just a couple of short pieces remain."
-	else if(Adjacent(user))
-		. += "There are [get_amount()] lengths of cable in the coil."
 
 /obj/item/stack/cable_coil/attackby(obj/item/W, mob/user)
 	if(istype(W, /obj/item/multitool))

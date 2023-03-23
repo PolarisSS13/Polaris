@@ -276,9 +276,9 @@
 	icon_state = "generic"
 
 /obj/random/rigsuit/item_to_spawn()
-	return pick(prob(4);/obj/item/rig/light/hacker,
+	return pick(prob(4);/obj/item/rig/light/hacker/poi,
 				prob(5);/obj/item/rig/industrial,
 				prob(5);/obj/item/rig/eva,
-				prob(4);/obj/item/rig/light/stealth,
+				prob(4);/obj/item/rig/light/stealth/poi,
 				prob(3);/obj/item/rig/hazard,
-				prob(1);/obj/item/rig/merc/empty)
+				prob(1);/obj/item/rig/merc/empty/poi)

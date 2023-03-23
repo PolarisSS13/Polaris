@@ -1,17 +1,3 @@
-var/global/list/flooring_types
-
-/proc/populate_flooring_types()
-	flooring_types = list()
-	for (var/flooring_path in typesof(/decl/flooring))
-		flooring_types["[flooring_path]"] = new flooring_path
-
-/proc/get_flooring_data(var/flooring_path)
-	if(!flooring_types)
-		flooring_types = list()
-	if(!flooring_types["[flooring_path]"])
-		flooring_types["[flooring_path]"] = new flooring_path
-	return flooring_types["[flooring_path]"]
-
 // State values:
 // [icon_base]: initial base icon_state without edges or corners.
 // if has_base_range is set, append 0-has_base_range ie.
@@ -188,7 +174,7 @@ var/global/list/flooring_types
 
 /decl/flooring/mud
 	name = "mud"
-	desc = "STICKY AND WET!"
+	desc = "Wet and fragrant mud, bane of the freshly mopped floor."
 	icon = 'icons/turf/outdoors.dmi'
 	icon_base = "mud_dark"
 	footstep_sounds = list("human" = list(
@@ -199,7 +185,7 @@ var/global/list/flooring_types
 
 /decl/flooring/asteroid
 	name = "coarse sand"
-	desc = "Gritty and unpleasant."
+	desc = "You got a pebble in your shoe just looking at it."
 	icon = 'icons/turf/flooring/asteroid.dmi'
 	icon_base = "asteroid"
 	flags = TURF_REMOVE_SHOVEL
@@ -212,8 +198,8 @@ var/global/list/flooring_types
 		'sound/effects/footstep/asteroid5.ogg'))
 
 /decl/flooring/dirt
-	name = "dirt"
-	desc = "Gritty and unpleasant, just like dirt."
+	name = "soil"
+	desc = "Widely considered to be some of the planet's top soil."
 	icon = 'icons/turf/outdoors.dmi'
 	icon_base = "dirt-dark"
 	flags = TURF_REMOVE_SHOVEL
@@ -274,7 +260,7 @@ var/global/list/flooring_types
 
 /decl/flooring/carpet
 	name = "carpet"
-	desc = "Imported and comfy."
+	desc = "Lush synthetic carpeting, perfectly engineered for easy cleaning."
 	icon = 'icons/turf/flooring/carpet.dmi'
 	icon_base = "carpet"
 	build_type = /obj/item/stack/tile/carpet
@@ -298,7 +284,7 @@ var/global/list/flooring_types
 	build_type = /obj/item/stack/tile/carpet/blucarpet
 
 /decl/flooring/carpet/turcarpet
-	name = "tur carpet"
+	name = "turquoise carpet"
 	icon_base = "turcarpet"
 	build_type = /obj/item/stack/tile/carpet/turcarpet
 
@@ -308,7 +294,7 @@ var/global/list/flooring_types
 	build_type = /obj/item/stack/tile/carpet/sblucarpet
 
 /decl/flooring/carpet/gaycarpet
-	name = "clown carpet"
+	name = "pink carpet"
 	icon_base = "gaycarpet"
 	build_type = /obj/item/stack/tile/carpet/gaycarpet
 
@@ -364,18 +350,19 @@ var/global/list/flooring_types
 		'sound/effects/footstep/floor5.ogg'))
 
 /decl/flooring/tiling/tech
-	desc = "Scuffed from the passage of countless greyshirts."
+	desc = "Metal floor tiles with a corrugated anti-slip texture."
 	icon = 'icons/turf/flooring/techfloor.dmi'
 	icon_base = "techfloor_gray"
 	build_type = /obj/item/stack/tile/floor/techgrey
 	can_paint = null
 
 /decl/flooring/tiling/tech/grid
+	desc = "Metal floor tiles with a barred anti-slip construction. Don't skin your knee!"
 	icon_base = "techfloor_grid"
 	build_type = /obj/item/stack/tile/floor/techgrid
 
 /decl/flooring/tiling/new_tile
-	name = "floor"
+	desc = "Metal floor tiles with a corrugated anti-slip texture."
 	icon_base = "tile_full"
 	flags = TURF_CAN_BREAK | TURF_CAN_BURN | TURF_IS_FRAGILE
 	build_type = null
@@ -502,8 +489,7 @@ var/global/list/flooring_types
 		'sound/effects/footstep/wood5.ogg'))
 
 /decl/flooring/wood/sif
-	name = "alien wooden floor"
-	desc = "Polished alien wood planks."
+	desc = "Polished wood planks made from sivian wood."
 	icon = 'icons/turf/flooring/wood.dmi'
 	icon_base = "sifwood"
 	build_type = /obj/item/stack/tile/wood/sif
@@ -569,7 +555,7 @@ var/global/list/flooring_types
 
 /decl/flooring/lava // Defining this in case someone DOES step on lava and survive. Somehow.
 	name = "lava"
-	desc = "Lava. Y'know. Sets you on fire. AAAAAAAAAAA"
+	desc = "It may look inviting, but it will kill you, painfully."
 	icon = 'icons/turf/outdoors.dmi'
 	icon_base = "lava"
 	is_plating = TRUE
@@ -581,7 +567,7 @@ var/global/list/flooring_types
 
 /decl/flooring/concrete
 	name = "concrete"
-	desc = "A flat area of concrete flooring."
+	desc = "A flat area of poured concrete flooring."
 	icon = 'icons/turf/concrete.dmi'
 	icon_base = "concrete"
 	is_plating = TRUE

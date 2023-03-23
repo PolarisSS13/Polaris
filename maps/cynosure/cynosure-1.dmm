@@ -253,7 +253,7 @@
 /obj/effect/floor_decal/corner/paleblue/border,
 /obj/machinery/door/airlock/medical{
 	name = "Morgue Access";
-	req_one_access = list(5, 6, 12, 47)
+	req_one_access = list(5,6,12,47)
 	},
 /obj/machinery/door/firedoor/border_only,
 /turf/simulated/floor/tiled/steel_dirty,
@@ -2480,7 +2480,7 @@
 	dir = 4;
 	frequency = 1430;
 	name = "Mixing Chamber Monitor";
-	sensors = list("toxins_mixing_exterior" = "Mixing Chamber - Exterior", "toxins_mixing_interior" = "Mixing Chamber - Interior")
+	sensors = list("toxins_mixing_exterior"="Mixing Chamber - Exterior","toxins_mixing_interior"="Mixing Chamber - Interior")
 	},
 /obj/machinery/light{
 	dir = 8
@@ -2977,6 +2977,12 @@
 /obj/machinery/door/airlock/maintenance{
 	name = "Medbay Maintenance Access";
 	req_access = list(5)
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/medical/hallway/bmt)
@@ -5086,6 +5092,18 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/surface/outpost/research/xenoarcheology/exp_prep)
+"kM" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "kN" = (
 /obj/structure/disposalpipe/segment,
 /obj/effect/floor_decal/steeldecal/steel_decals4{
@@ -7401,6 +7419,24 @@
 	},
 /turf/simulated/floor/tiled/old_tile/white,
 /area/surface/station/rnd/mixing)
+"pB" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/door/airlock/maintenance{
+	req_one_access = list(5,12,47)
+	},
+/obj/machinery/door/firedoor/border_only,
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "pC" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -7545,7 +7581,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/medical{
 	name = "Morgue Access";
-	req_one_access = list(5, 6, 12, 47)
+	req_one_access = list(5,6,12,47)
 	},
 /turf/simulated/floor/tiled/steel_dirty,
 /area/surface/station/maintenance/eaststairwell)
@@ -8081,6 +8117,27 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/mining_main)
+"qR" = (
+/obj/structure/ladder/up,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	icon_state = "16-0"
+	},
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	icon_state = "0-4"
+	},
+/obj/machinery/atmospherics/pipe/zpipe/up/scrubbers{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/zpipe/up/supply{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "qS" = (
 /obj/structure/closet/crate/medical,
 /obj/random/contraband,
@@ -9698,6 +9755,20 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/engineering/bmt)
+"ue" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "uf" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
@@ -11338,6 +11409,12 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
 "xI" = (
@@ -12193,6 +12270,20 @@
 /obj/effect/map_helper/airlock/sensor/chamber_sensor,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/outpost/research/xenoarcheology/entrance)
+"zo" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 5
+	},
+/obj/structure/cable{
+	d1 = 1;
+	d2 = 4;
+	icon_state = "1-4"
+	},
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "zq" = (
 /obj/structure/disposalpipe/segment{
 	dir = 8;
@@ -12339,6 +12430,21 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/drone_fabrication)
+"zE" = (
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 2;
+	d2 = 8;
+	icon_state = "2-8"
+	},
+/obj/random/mob/mouse,
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "zG" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -14922,7 +15028,7 @@
 /obj/effect/catwalk_plated/dark,
 /obj/machinery/door/airlock/medical{
 	name = "Morgue Access";
-	req_one_access = list(5, 6, 12, 47)
+	req_one_access = list(5,6,12,47)
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/south)
@@ -16883,9 +16989,10 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoarcheology/analysis)
 "JD" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 5
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
 	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/supply,
 /turf/simulated/floor/tiled,
 /area/surface/station/medical/hallway/bmt)
 "JE" = (
@@ -17581,6 +17688,20 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/primary/bmt/west)
+"KY" = (
+/obj/machinery/door/blast/regular/open{
+	id = "medbayquar";
+	layer = 3.3;
+	name = "Medbay Lockdown"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/surface/station/medical/hallway/bmt)
 "KZ" = (
 /turf/simulated/floor/plating,
 /area/surface/station/construction/bmt/construction3)
@@ -17885,6 +18006,10 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/mining_main/storage)
+"LJ" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "LL" = (
 /obj/structure/table/rack{
 	layer = 2.6
@@ -18051,6 +18176,21 @@
 /obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/tiled/old_cargo/gray,
 /area/surface/station/engineering/auxiliary_engineering)
+"Ma" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/machinery/light/small/no_nightshift,
+/turf/simulated/floor/plating,
+/area/surface/station/maintenance/medical/west)
 "Mb" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
@@ -18083,7 +18223,6 @@
 	pixel_x = -24;
 	pixel_y = 12
 	},
-/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
 "Me" = (
@@ -19272,7 +19411,7 @@
 	},
 /obj/machinery/door/window/eastleft{
 	name = "Garbage Outlet";
-	req_one_access = list(65, 26)
+	req_one_access = list(65,26)
 	},
 /turf/simulated/floor/tiled/steel/sif/planetuse{
 	icon_state = "steel_dirty";
@@ -20823,7 +20962,17 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/effect/catwalk_plated/dark,
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 10
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
+/obj/structure/cable{
+	d1 = 16;
+	d2 = 0;
+	icon_state = "2-8"
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
 "Rr" = (
@@ -20881,6 +21030,8 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
 "Ry" = (
@@ -23259,12 +23410,14 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/mining_main)
 "WG" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/manifold/hidden/supply{
 	dir = 4
 	},
 /obj/effect/catwalk_plated,
 /obj/effect/floor_decal/rust,
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/medical/hallway/bmt)
 "WH" = (
@@ -54282,10 +54435,10 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+jw
+jw
+jw
+jw
 HE
 HE
 HE
@@ -54539,10 +54692,10 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+jw
+qR
+LJ
+jw
 HE
 HE
 HE
@@ -54796,10 +54949,10 @@ Kj
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+jw
+zE
+zo
+jw
 HE
 HE
 HE
@@ -55053,10 +55206,10 @@ Kj
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+jw
+jw
+pB
+jw
 HE
 HE
 HE
@@ -55311,9 +55464,9 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
+jw
+ue
+jw
 HE
 HE
 HE
@@ -55568,9 +55721,9 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
+jw
+ue
+jw
 jw
 jw
 cE
@@ -55825,8 +55978,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+jw
+Ma
 jw
 jw
 dU
@@ -56082,8 +56235,8 @@ jw
 jw
 jw
 HE
-HE
-HE
+jw
+ue
 jw
 yS
 iu
@@ -56340,7 +56493,7 @@ Io
 jw
 jw
 jw
-jw
+ue
 jw
 tb
 GN
@@ -56856,7 +57009,7 @@ zz
 Pw
 Zf
 jw
-VU
+kM
 VU
 id
 QG
@@ -57113,7 +57266,7 @@ Us
 id
 id
 id
-Cb
+KY
 Cb
 id
 QG

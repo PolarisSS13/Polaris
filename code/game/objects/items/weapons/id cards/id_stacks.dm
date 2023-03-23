@@ -119,7 +119,7 @@
 	initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-dark")
 
 /obj/item/card/id/civilian/chef
-	initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-white")		
+	initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-white")
 
 /obj/item/card/id/civilian/janitor
 	initial_sprite_stack = list("base-stamp", "top-green", "stamp-n", "pips-purple")
@@ -144,3 +144,6 @@
 
 /obj/item/card/id/syndicate/officer
 	initial_sprite_stack = list("base-stamp-dark", "top-syndicate", "stamp-s", "pips-gold", "stripe-gold")
+
+/obj/item/card/id/union
+	initial_sprite_stack = list("base-stamp-gold", "top-dark", "stamp-n", "pips-gold", "stripe-black")

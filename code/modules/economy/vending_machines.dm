@@ -855,9 +855,6 @@
 					/obj/item/reagent_containers/pill/adminordrazine = 10,
 					/obj/item/tool/crowbar = 1)
 
-
-////////////////////ancient_vend (Hot Food - Old) (ADDED 04/11/2021)////////////////////////////////////////////////////
-
 /obj/machinery/vending/hotfood
 	name = "\improper Hot Foods!"
 	desc = "An old vending machine promising 'hot foods'. You doubt any of its contents are still edible."
@@ -871,8 +868,6 @@
 					/obj/item/reagent_containers/food/snacks/old/hotdog = 3,
 					/obj/item/reagent_containers/food/snacks/old/taco = 2
 					)
-
-////////////////////weeb_vend (Nippon-tan!) (ADDED 04/11/2021)/////////////////////////////////////////////////
 
 /obj/machinery/vending/weeb
 	name = "\improper Nippon-tan!"
@@ -907,8 +902,6 @@
 					/obj/item/reagent_containers/food/snacks/daifuku = 5,
 					/obj/item/reagent_containers/food/snacks/packaged/mochicake = 10
 					)
-
-////////////////////sol_vend (Mars Mart) (ADDED 04/11/2021)////////////////////////////////////////////////////
 
 /obj/machinery/vending/sol
 	name = "\improper Sol-Snacks"
@@ -946,10 +939,6 @@
 					/obj/item/storage/box/gum = 2,
 					/obj/item/storage/box/admints = 2
 					)
-
-////////////////////snix_vend (Snix!) (ADDED 04/11/2021)////////////////////////////////////////////
-
-//////a food variant of the boda machine - It carries slavic themed foods.. Mostly beer snacks./////
 
 /obj/machinery/vending/snix
 	name = "\improper Snix"
@@ -989,8 +978,6 @@
 					/obj/item/reagent_containers/food/snacks/pretzels = 8,
 					/obj/item/reagent_containers/food/snacks/hakarl = 8
 					)
-
-////////////////////snl_vend (Shop-n-Large Snacks!) (ADDED 04/16/2021)//////////////////////////////
 
 /obj/machinery/vending/snlvend
 	name = "\improper Shop-n-Large Snacks!"
@@ -1038,21 +1025,19 @@
 					/obj/item/reagent_containers/food/snacks/cookiesnack = 5
 					)
 
-///////////////////////Soviet Stuff///////////////////////////////////////
-
 /obj/machinery/vending/sovietsoda
 	name = "BODA"
 	desc = "An old sweet water vending machine,how did this end up here?"
 	description_fluff = "Originally the product of a genuine rim-world commune, BODA vendors have been produced by the Gilthari Exports luxury vending division for almost two centuries."
 	icon_state = "sovietsoda"
 	product_ads = "For Tsar and Country.;Have you fulfilled your nutrition quota today?;Very nice!;We are simple people, for this is all we eat.;If there is a person, there is a problem. If there is no person, then there is no problem."
-	products = list(/obj/item/reagent_containers/food/drinks/cans/boda = 30,		//ADDITION 04/03/2021
-					/obj/item/reagent_containers/food/drinks/cans/kompot = 20)	//ADDITION 04/03/2021
-	contraband = list(/obj/item/reagent_containers/food/drinks/cans/kvass = 20) 	//ADDITION 04/03/2021
+	products = list(/obj/item/reagent_containers/food/drinks/cans/boda = 30,
+					/obj/item/reagent_containers/food/drinks/cans/kompot = 20)
+	contraband = list(/obj/item/reagent_containers/food/drinks/cans/kvass = 20)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
 
-/obj/machinery/vending/sovietvend //ADDITION 04/20/2021
+/obj/machinery/vending/sovietvend
 	name = "Ration Station"
 	desc = "A corporate ration vendor unit. Extremely functional."
 	description_fluff = "Designed for use on remote, utilitarian corporate facilities. Perfect for extracting a little extra back from indentured miners. Often modified to accept only company scrip."
@@ -1064,8 +1049,6 @@
 					/obj/item/reagent_containers/food/snacks/packaged/meatration = 8)
 	contraband = list(/obj/item/reagent_containers/food/snacks/packaged/sweetration = 2,
 					/obj/item/reagent_containers/food/snacks/canned/ntbeans = 2)
-
-///////////////////////Radical Renard///////////////////////////////////////
 
 /obj/machinery/vending/radren
 	name = "Radical Renard Sodas"
@@ -1095,9 +1078,6 @@
 					/obj/item/reagent_containers/food/drinks/cans/gingerale = 1)
 	idle_power_usage = 211 //refrigerator - believe it or not, this is actually the average power consumption of a refrigerated vending machine according to NRCan.
 	vending_sound = "machines/vending/vending_cans.ogg"
-
-///////////////////////Donk-Soft!///////////////////////////////////////
-
 /obj/machinery/vending/donksoft
 	name = "Donk-Soft!"
 	desc = "A toy vendor owned by Donk-Soft, a NanoTrasen sub-company."

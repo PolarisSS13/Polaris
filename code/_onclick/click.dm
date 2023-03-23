@@ -337,13 +337,16 @@
 		facedir(direction)
 
 /obj/screen/click_catcher
-	name = "Darkness"
 	icon = 'icons/mob/screen_gen.dmi'
 	icon_state = "click_catcher"
 	plane = CLICKCATCHER_PLANE
 	layer = LAYER_HUD_UNDER
 	mouse_opacity = 2
 	screen_loc = "SOUTHWEST to NORTHEAST"
+
+/obj/screen/click_catcher/Initialize(mapload, ...)
+	. = ..()
+	verbs.Cut()
 
 /obj/screen/click_catcher/Click(location, control, params)
 	var/list/modifiers = params2list(params)

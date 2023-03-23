@@ -94,6 +94,7 @@
 			user.visible_message("<span class='notice'>\The [user] levers \the [manipulator] from \the [src].</span>")
 			playsound(src, thing.usesound, 50, 1)
 			mat_cost = initial(mat_cost)
+			power_cost = initial(power_cost)
 			manipulator = null
 			update_icon()
 			update_rating_mod()
@@ -107,6 +108,7 @@
 			user.drop_from_inventory(manipulator, src)
 			playsound(src, 'sound/machines/click.ogg', 10,1)
 			mat_cost = initial(mat_cost) / (2*manipulator.rating)
+			power_cost = initial(power_cost) + 50 * manipulator.get_rating()
 			user.visible_message("<span class='notice'>\The [user] slots \the [manipulator] into \the [src].</span>")
 			update_icon()
 			update_rating_mod()
@@ -173,6 +175,8 @@
 	ammo_material = MAT_PHORON
 
 	action_button_name = "Toggle internal generator"
+
+	var/winding = FALSE	// Are we winding up to fire?
 
 	var/generator_state = GEN_OFF
 	var/datum/looping_sound/small_motor/soundloop
@@ -265,6 +269,15 @@
 		soundloop.stop()
 		audible_message(SPAN_NOTICE("\The [src] goes quiet."),SPAN_NOTICE("A motor noise cuts out."), runemessage = "goes quiet")
 		generator_state = GEN_OFF
+
+/obj/item/gun/magnetic/matfed/phoronbore/special_check(mob/user)
+	if(!winding)
+		winding = TRUE
+		if(do_after(user, 1 SECOND, src) && ..())	// Super after do_after, due to clumsy check force-firing.
+			winding = FALSE
+			return TRUE
+		winding = FALSE
+	return FALSE
 
 /obj/item/gun/magnetic/matfed/phoronbore/loaded
 	cell = /obj/item/stock_parts/cell/apc

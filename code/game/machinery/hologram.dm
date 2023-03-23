@@ -99,19 +99,17 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 				master.relay_speech(M, message_pieces, verb)
 
 /obj/machinery/hologram/holopad/see_emote(mob/living/M, text)
-	if(M)
-		for(var/mob/living/silicon/ai/master in masters)
-			//var/name_used = M.GetVoice()
-			var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
-			//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
-			master.show_message(rendered, 2)
-	return
+	..()
+	var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[text]</span></span></i>"
+	for(var/mob/living/silicon/ai/master in masters)
+		//The lack of name_used is needed, because message already contains a name.  This is needed for simple mobs to emote properly.
+		master.show_message(rendered, AUDIBLE_MESSAGE)
 
 /obj/machinery/hologram/holopad/show_message(msg, type, alt, alt_type)
+	..()
+	var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[msg]</span></span></i>"
 	for(var/mob/living/silicon/ai/master in masters)
-		var/rendered = "<i><span class='game say'>Holopad received, <span class='message'>[msg]</span></span></i>"
 		master.show_message(rendered, type)
-	return
 
 /obj/machinery/hologram/holopad/proc/create_holo(mob/living/silicon/ai/A, turf/T = loc)
 	var/obj/effect/overlay/hologram = new(T)//Spawn a blank effect at the location.
@@ -120,8 +118,17 @@ For the other part of the code, check silicon say.dm. Particularly robot talk.*/
 	hologram.layer = FLY_LAYER//Above all the other objects/mobs. Or the vast majority of them.
 	hologram.anchored = 1//So space wind cannot drag it.
 	hologram.name = "[A.name] (Hologram)"//If someone decides to right click.
-	hologram.set_light(2)	//hologram lighting
-	hologram.color = color //painted holopad gives coloured holograms
+
+	if(!isnull(color))
+		hologram.color = color
+	else
+		hologram.color = A.holo_color
+
+	if(hologram.color)	//hologram lighting
+		hologram.set_light(2,1,hologram.color)
+	else
+		hologram.set_light(2)
+
 	masters[A] = hologram
 	set_light(2)			//pad lighting
 	icon_state = "holopad1"

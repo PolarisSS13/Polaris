@@ -275,7 +275,7 @@
 
 	//I'm not sure how much of this is necessary, but I would rather avoid issues.
 	if(istype(card.loc,/obj/item/rig_module))
-		to_chat(src, "There is no room to unfold inside this rig module. You're good and stuck.")
+		to_chat(src, "<span class='filter_notice'>There is no room to unfold inside this rig module. You're good and stuck.</span>")
 		return 0
 	else if(istype(card.loc,/mob))
 		var/mob/holder = card.loc
@@ -300,7 +300,7 @@
 	card.screen_loc = null
 
 	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> folds outwards, expanding into a mobile form.")
+	if(istype(T)) T.visible_message("<span class='filter_notice'><b>[src]</b> folds outwards, expanding into a mobile form.</span>")
 
 /mob/living/silicon/pai/verb/fold_up()
 	set category = "pAI Commands"
@@ -358,7 +358,7 @@
 			rig.force_rest(src)
 	else
 		resting = !resting
-		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+		to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
 
 	canmove = !resting
 
@@ -390,7 +390,7 @@
 		return
 
 	var/turf/T = get_turf(src)
-	if(istype(T)) T.visible_message("<b>[src]</b> neatly folds inwards, compacting down to a rectangular card.")
+	if(istype(T)) T.visible_message("<span class='filter_notice'><b>[src]</b> neatly folds inwards, compacting down to a rectangular card.</span>")
 
 	if(client)
 		src.stop_pulling()
@@ -476,6 +476,6 @@
 		return
 
 	close_up()
-	visible_message("<b>[src]</b> fades away from the screen, the pAI device goes silent.")
+	visible_message("<span class='filter_notice'><b>[src]</b> fades away from the screen, the pAI device goes silent.</span>")
 	card.removePersonality()
 	clear_client()

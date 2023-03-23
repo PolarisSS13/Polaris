@@ -89,9 +89,7 @@
 		for(var/datum/reagent/re in Bait.reagents.reagent_list)
 			if(re.id == "nutriment" || re.id == "protein" || re.id == "glucose" || re.id == "fishbait")
 				foodvolume += re.volume
-
 		toolspeed = initial(toolspeed) * min(0.75, (0.5 / max(0.5, (foodvolume / Bait.reagents.maximum_volume))))
-
 	else
 		toolspeed = initial(toolspeed)
 

@@ -16,6 +16,7 @@
 	var/active = 0
 	var/list/resource_field = list()
 	var/obj/item/radio/intercom/faultreporter = new /obj/item/radio/intercom{channels=list("Supply")}(null)
+	var/datum/looping_sound/mining_drill/mining_drill_loop
 
 	var/list/ore_types = list(
 		"hematite" = /obj/item/ore/iron,
@@ -63,6 +64,11 @@
 	. = ..()
 	default_apply_parts()
 	cell = default_use_hicell()
+	mining_drill_loop = new(list(src), FALSE)
+
+/obj/machinery/mining/drill/Destroy()
+	QDEL_NULL(mining_drill_loop)
+	return ..()
 
 /obj/machinery/mining/drill/get_cell()
 	return cell
@@ -207,9 +213,13 @@
 		if(use_cell_power())
 			active = !active
 			if(active)
+				if(mining_drill_loop)
+					mining_drill_loop.start(src)
 				visible_message("<span class='notice'>\The [src] lurches downwards, grinding noisily.</span>")
 				need_update_field = 1
 			else
+				if(mining_drill_loop)
+					mining_drill_loop.stop(src)
 				visible_message("<span class='notice'>\The [src] shudders to a grinding halt.</span>")
 		else
 			to_chat(user, "<span class='notice'>The drill is unpowered.</span>")
@@ -275,6 +285,8 @@
 		faultreporter.autosay(error, src.name, "Supply")
 	need_player_check = 1
 	active = 0
+	if(mining_drill_loop)
+		mining_drill_loop.stop(src)
 	update_icon()
 
 /obj/machinery/mining/drill/proc/get_resource_field()
@@ -317,6 +329,7 @@
 		for(var/obj/item/ore/O in contents)
 			O.loc = B
 		to_chat(usr, "<span class='notice'>You unload the drill's storage cache into the ore box.</span>")
+		playsound(src, 'sound/machines/clunk.ogg', 30, 1)
 	else
 		to_chat(usr, "<span class='notice'>You must move an ore box up to the drill before you can unload it.</span>")
 
