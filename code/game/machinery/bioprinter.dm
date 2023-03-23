@@ -245,48 +245,6 @@
 	SSnanoui.update_uis(src)
 	update_icon()
 
-/obj/machinery/bioprinter/tgui_act(action, list/params, datum/tgui/ui, datum/tgui_state/state)
-	if (..())
-		return TRUE
-	switch (action)
-		if ("ejectBeaker")
-			if (container)
-				container.forceMove(get_turf(src))
-				if (usr.Adjacent(src))
-					usr.put_in_active_hand(container)
-				container = null
-			. = TRUE
-		if ("flushDNA")
-			if (loaded_dna)
-				loaded_dna = null
-				visible_message(SPAN_NOTICE("\The [src] whirrs and discards its most recent DNA sample."))
-			. = TRUE
-		if ("printOrgan")
-			var/organ_name = params["organName"]
-			var/list/all_products = products + complex_products + anomalous_products
-			var/product_entry = all_products[organ_name]
-			var/atom/product_path = product_entry?[1]
-			if (!product_entry || !product_path || get_biomass_volume() < product_entry[2])
-				return
-			container.reagents.remove_reagent(biomass_id, product_entry[2])
-			playsound(src, "switch", 30)
-			visible_message(SPAN_NOTICE("\The [src] fills with fluid and begins to print \a [initial(product_path.name)]."))
-			print_timer = addtimer(CALLBACK(src, .proc/print_organ, product_entry[1]), print_delay, TIMER_STOPPABLE)
-			set_active(TRUE)
-			. = TRUE
-		if ("cancelPrint")
-			if (!print_timer)
-				return
-			playsound(src, "switch", 30)
-			playsound(src, 'sound/effects/squelch1.ogg', 40, TRUE)
-			visible_message(SPAN_WARNING("\The [src] gurgles as it cancels its current task and discards the pulpy biomass."))
-			deltimer(print_timer)
-			print_timer = null
-			set_active(FALSE)
-			. = TRUE
-	add_fingerprint(usr)
-	update_icon()
-
 /// Updates power usage in accordance with `active` and forces an icon update.
 /obj/machinery/bioprinter/proc/set_active(active)
 	update_use_power(active ? USE_POWER_ACTIVE : USE_POWER_IDLE)
