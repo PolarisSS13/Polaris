@@ -33,14 +33,14 @@ var/global/const/access_explorer = 43
 	minimal_access = list(access_explorer, access_research)
 
 	outfit_type = /decl/hierarchy/outfit/job/explorer2
-	job_description = "An Explorer searches for interesting things on the surface of Sif, and returns them to the station."
+	job_description = "An Explorer searches for interesting things in space, and returns them to the station."
 
 	alt_titles = list(
 		"Pilot" = /datum/alt_title/pilot)
 
 /datum/alt_title/pilot
 	title = "Pilot"
-	title_blurb = "A pilot ferries crew around in Cynosure Station's shuttle, the NTC Calvera."
+	title_blurb = "A pilot ferries crew around in Cynosure's shuttle, the NTC Calvera."
 	title_outfit = /decl/hierarchy/outfit/job/pilot
 
 /datum/job/paramedic
@@ -50,7 +50,7 @@ var/global/const/access_explorer = 43
 
 /datum/alt_title/sar
 	title = "Search and Rescue"
-	title_blurb = "A Search and Rescue operative recovers individuals who are injured or dead on the surface of Sif."
+	title_blurb = "A Search and Rescue operative recovers individuals who are injured or dead in space."
 	title_outfit = /decl/hierarchy/outfit/job/medical/sar
 
 /datum/job/rd
@@ -79,7 +79,7 @@ var/global/const/access_explorer = 43
 	access = list()
 	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/job/survivalist
-	job_description = "There are a few small groups of people living in the wilderness of Sif, and they occasionally venture to the Cynosure to trade, ask for help, or just have someone to talk to."
+	job_description = "There are a few small groups of people living in space, and they occasionally venture to the Cynosure to trade, ask for help, or just have someone to talk to."
 	assignable = FALSE
 	has_headset = FALSE
 	account_allowed = FALSE
@@ -104,7 +104,7 @@ var/global/const/access_explorer = 43
 
 /datum/alt_title/crash_survivor
 	title = CRASH_SURVIVOR_TITLE
-	title_blurb = "Crashing in the wilderness of Sif's anomalous region is not a recommended holiday activity."
+	title_blurb = "Crashing in the wilderness of space is not a recommended holiday activity."
 	title_outfit = /decl/hierarchy/outfit/job/survivalist/crash_survivor
 
 /datum/job/survivalist/equip(mob/living/carbon/human/H, alt_title)
@@ -216,7 +216,7 @@ var/global/const/access_explorer = 43
 	access = list()
 	minimal_access = list()
 	outfit_type = /decl/hierarchy/outfit/siffet
-	job_description = "A number of the bolder folks in Sif's anomalous region have partially domesticated some of the local wildlife as working animals."
+	job_description = "A number of the bolder folks in space have partially domesticated some of the local wildlife as working animals."
 	assignable = FALSE
 	has_headset = FALSE
 	account_allowed = FALSE
@@ -232,7 +232,7 @@ var/global/const/access_explorer = 43
 
 /datum/alt_title/drake
 	title = "Trained Drake"
-	title_blurb = "A number of the bolder folks in Sif's anomalous region have partially domesticated some of the local wildlife as working animals."
+	title_blurb = "A number of the bolder folks in space have partially domesticated some of the local wildlife as working animals."
 	var/drake_type = /mob/living/simple_mob/animal/sif/grafadreka/trained
 
 /datum/alt_title/drake/explorer_drake
@@ -242,7 +242,7 @@ var/global/const/access_explorer = 43
 
 /datum/alt_title/drake/wild_drake
 	title = "Wild Drake"
-	title_blurb = "Several packs of wild grafadreka have been pushed into the Anomalous Region by changing climate and rough weather, and sometimes come into contact with the locals."
+	title_blurb = "Several packs of wild grafadreka have been pushed into space by changing climate and rough weather, and sometimes come into contact with the locals."
 	drake_type = /mob/living/simple_mob/animal/sif/grafadreka
 
 /datum/alt_title/drake/wild_hatchling
@@ -366,17 +366,17 @@ var/global/const/access_explorer = 43
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/trained/station
-	player_msg = {"<b>You are a large Sivian pack predator working with the Science team.</b>
+	player_msg = {"<b>You are a large SPACE pack predator working with the Science team.</b>
 You have been <b>trained by the Xenobiology department</b> to assist with expeditions and field work, and are an official part of the Exploration staff."
 You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b>poisonous bite</b> (on <span class = 'danger'>harm intent</span>), as well as <b>healing saliva</b> (on <b><font color = '#009900'>help intent</font></b>).
 Using <font color='#e0a000'>grab intent</font> you can pick up and drop items by clicking them or yourself, and can interact with some simple machines like buttons and levers."}
 	harness = /obj/item/storage/animal_harness/grafadreka/expedition
 
 /obj/item/book/manual/drake_handling
-	name = "Care And Handling Of The Sivian Snow Drake v0.1.12b"
+	name = "Care And Handling Of The Space Snow Drake v0.1.12b"
 	icon_state = "book3"
 	author = "Xenoscience Team"
-	title = "Care And Handling Of The Sivian Snow Drake v0.1.12b"
+	title = "Care And Handling Of The Space Snow Drake v0.1.12b"
 
 /obj/item/book/manual/drake_handling/Initialize()
 	. = ..()

@@ -32,7 +32,7 @@
 
 	zlevel_datum_type = /datum/map_z_level/cynosure
 
-	station_name  = "Cynosure Station"
+	station_name  = "NSS Cynosure"
 	station_short = "Cynosure"
 	dock_name     = "NCS Northern Star" // Still the centcom!
 	boss_name     = "Central Command"
@@ -87,8 +87,7 @@
 		"Arrivals Shuttle",
 		"Cryogenic Storage",
 		"Cyborg Storage",
-		"Checkpoint",
-		"Wilderness"
+		"Checkpoint"
 	)
 
 
@@ -156,28 +155,6 @@
 		/datum/map_template/surface/mountains/deep
 	)
 
-	// Plains to make them less plain.
-	SSmapping.seed_area_submaps(
-		list(Z_LEVEL_STATION_TWO),
-		100,
-		/area/surface/outside/plains/normal,
-		/datum/map_template/surface/plains
-	) // Center area is WIP until map editing settles down.
-
-	// Wilderness is next.
-	SSmapping.seed_area_submaps(
-		list(Z_LEVEL_SURFACE_WILD),
-		75,
-		/area/surface/outside/wilderness/normal,
-		/datum/map_template/surface/wilderness/normal
-	)
-
-	SSmapping.seed_area_submaps(
-		list(Z_LEVEL_SURFACE_WILD),
-		75,
-		/area/surface/outside/wilderness/deep,
-		/datum/map_template/surface/wilderness/deep
-	)
 	// If Space submaps are made, add a line to make them here as well.
 
 	// Now for the tunnels.
@@ -197,11 +174,11 @@
 
 /datum/map/cynosure/get_map_info()
 	. = list()
-	. +=  "[full_name] is a a cutting-edge anomaly research facility on the frozen garden world of Sif, jewel of the Vir system.<br>"
+	. +=  "[full_name] is a a cutting-edge anomaly research facility IN SPACE!<br>"
 	. +=  "Following the Skathari Incursion, an invasion of reality-bending creatures from the remnants of a dead universe, the known galaxy has been thrown into disarray.<br>"
-	. +=  "The Solar Confederate Government struggles under its own weight, with new factions arising with promises of autonomy, security or profit like circling vultures.<br>"
-	. +=  "Humanity already stands on the precipice of a technological singularity that few are ready to face, and the winds of change whip at their backs.<br>"
-	. +=  "On the edge of Sif's Anomalous Region, NanoTrasen seeks to exploit new phenomena stirred by the Incursion... That's where you come in."
+	. +=  "For example, you could have sworn that you worked on a planet? But that's probably just your memory playing tricks on you.<br>"
+	. +=  "Humanity already stands on the precipice of a technological singularity that few are ready to face, and the (space) winds of change whip at their backs.<br>"
+	. +=  "On the edge of SPACE, NanoTrasen seeks to exploit new phenomena stirred by the Incursion... That's where you come in."
 	return jointext(., "<br>")
 
 // Skybox Settings
