@@ -115,3 +115,9 @@
 	catalogue_data = list(/datum/category_item/catalogue/information/objects/growthcanister)
 	anchored = 0
 	density = 1
+
+/mob/living/carbon/human/monkey/simeon/Initialize()
+	. = ..()
+	name = "Simeon"
+	real_name = name
+	desc = "This lab monkey has a certain glint in their eye."

@@ -890,6 +890,26 @@
 			prob(5);/obj/item/clothing/head/helmet/space/void/scg/heavy
 			)
 
+/obj/random/zippo
+	name = "Random Zippo Lighter"
+	desc = "This is a random Zippo lighter."
+
+/obj/random/zippo/item_to_spawn()
+	return pick(
+			prob(50);/obj/item/flame/lighter/zippo,
+			prob(5);/obj/item/flame/lighter/zippo/black,
+			prob(5);/obj/item/flame/lighter/zippo/blue,
+			prob(10);/obj/item/flame/lighter/zippo/capitalist,
+			prob(10);/obj/item/flame/lighter/zippo/communist,
+			prob(5);/obj/item/flame/lighter/zippo/engraved,
+			prob(5);/obj/item/flame/lighter/zippo/gold,
+			prob(5);/obj/item/flame/lighter/zippo/gonzo,
+			prob(5);/obj/item/flame/lighter/zippo/moff,
+			prob(5);/obj/item/flame/lighter/zippo/rainbow,
+			prob(5);/obj/item/flame/lighter/zippo/red,
+			prob(5);/obj/item/flame/lighter/zippo/royal
+			)
+
 /obj/random/dufflebag
 	desc = "This is a random non-department-specific dufflebag."
 
