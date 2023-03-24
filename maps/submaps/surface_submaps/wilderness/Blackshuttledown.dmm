@@ -194,7 +194,7 @@
 /turf/simulated/floor/tiled/white,
 /area/submap/Blackshuttledown)
 "aF" = (
-/obj/machinery/organ_printer/flesh,
+/obj/machinery/bioprinter,
 /obj/effect/floor_decal/corner/green/border{
 	dir = 5;
 	icon_state = "bordercolor"
