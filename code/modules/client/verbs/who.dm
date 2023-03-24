@@ -52,6 +52,7 @@
 		msg += "[line]\n"
 
 	msg += "<b>Total Players: [length(Lines)]</b>"
+	msg = "<span class='filter_notice'>[jointext(msg, "<br>")]</span>"
 	to_chat(src,msg)
 
 /client/verb/staffwho()
@@ -82,7 +83,7 @@
 		else if(check_rights(R_EVENT, FALSE, C)) // event managers
 			category = R_EVENT
 			num_event_managers_online++
-		
+
 		temp += "\t[C] is a [C.holder.rank]"
 		if(holder)
 			if(C.holder.fakekey)
@@ -122,4 +123,4 @@
 	if(config.show_event_managers)
 		msg += "\n<b> Current Event Managers ([num_event_managers_online]):</b>\n" + eventMmsg
 
-	to_chat(src,msg)
+	to_chat(src,"<span class='filter_notice'>[jointext(msg, "<br>")]</span>")

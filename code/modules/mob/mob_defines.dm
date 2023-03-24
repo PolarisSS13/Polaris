@@ -112,8 +112,13 @@
 	var/intent = null//Living
 	var/shakecamera = 0
 	var/a_intent = I_HELP//Living
-	var/m_int = null//Living
-	var/m_intent = "run"//Living
+
+	var/decl/move_intent/move_intent = null // Living.
+	var/list/move_intents = list(
+		/decl/move_intent/run,
+		/decl/move_intent/walk
+	)
+
 	var/lastKnownIP = null
 	var/obj/buckled = null//Living
 
@@ -151,6 +156,8 @@
 	var/faction = "neutral" //Used for checking whether hostile simple animals will attack you, possibly more stuff later
 
 	var/can_be_antagged = FALSE // To prevent pAIs/mice/etc from getting antag in autotraitor and future auto- modes. Uses inheritance instead of a bunch of typechecks.
+
+	var/hearing_boost_range = 0 //Extra range for whisper hearing, in tiles. Can also be adjusted for a whole species via hearboost species var.
 
 //Generic list for proc holders. Only way I can see to enable certain verbs/procs. Should be modified if needed.
 	var/proc_holder_list[] = list()//Right now unused.

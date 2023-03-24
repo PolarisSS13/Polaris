@@ -17,17 +17,19 @@
 	var/brightness_level = "medium"
 	var/power_usage
 	var/power_use = 1
+	var/starts_with_cell = TRUE //should it start with a cell?
 
 /obj/item/flashlight/Initialize()
 	. = ..()
 
 	if(power_use && cell_type)
-		cell = new cell_type(src)
+		if(starts_with_cell)
+			cell = new cell_type(src)
 		brightness_levels = list("low" = 0.25, "medium" = 0.5, "high" = 1)
 		power_usage = brightness_levels[brightness_level]
 	else
 		verbs -= /obj/item/flashlight/verb/toggle
-	
+
 	update_icon()
 
 /obj/item/flashlight/Destroy()
@@ -233,6 +235,9 @@
 
 	else
 		..()
+
+/obj/item/flashlight/empty //For autolathes so you can't duplicate infinite cells
+	starts_with_cell = FALSE
 
 /obj/item/flashlight/pen
 	name = "penlight"

@@ -27,7 +27,8 @@
 	. = ..()
 
 /turf/simulated/floor/outdoors/attackby(obj/item/C, mob/user)
-
+	if (has_snow())
+		return ..()
 	if(can_dig && istype(C, /obj/item/shovel))
 		to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
 		var/delay = (3 SECONDS * C.toolspeed)

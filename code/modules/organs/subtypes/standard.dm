@@ -39,11 +39,6 @@
 		owner.synthetic = R
 	return FALSE
 
-/obj/item/organ/external/chest/derobotize()
-	. = ..()
-	if (!.) return
-	owner?.synthetic = null
-
 /obj/item/organ/external/chest/handle_germ_effects()
 	. = ..() //Should return an infection level
 	if(!. || (status & ORGAN_DEAD)) return //If it's already above 2, it's become necrotic and we can just not worry about it.
@@ -298,12 +293,6 @@
 			LAZYREMOVE(organ_verbs, /mob/living/carbon/human/proc/setmonitor_state)
 		handle_organ_mod_special()
 
-/obj/item/organ/external/head/derobotize()
-	. = ..()
-	if (!.) return
-	LAZYREMOVE(organ_verbs, /mob/living/carbon/human/proc/setmonitor_state)
-	handle_organ_mod_special()
-
 /obj/item/organ/external/head/removed()
 	if(owner)
 		if(iscarbon(owner))
@@ -347,7 +336,7 @@
 		"<span class='notice'>You make \the [I] kiss \the [src]!.</span>")
 	return ..()
 
-/obj/item/organ/external/head/get_icon()
+/obj/item/organ/external/head/get_icon(var/skeletal, var/can_apply_transparency = TRUE)
 	..()
 
 	//The overlays are not drawn on the mob, they are used for if the head is removed and becomes an item
@@ -397,6 +386,9 @@
 		icon_cache_key += "[M][markings[M]["color"]]"
 
 	add_overlay(get_hair_icon())
+
+	if (nonsolid && can_apply_transparency)
+		mob_icon += rgb(,,,180) //do it here so any markings become transparent as well
 
 	return mob_icon
 

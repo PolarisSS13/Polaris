@@ -3260,12 +3260,15 @@
 /turf/simulated/floor/holofloor/wmarble,
 /area/holodeck/source_chess)
 "dLe" = (
-/obj/effect/floor_decal/arrow,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/effect/floor_decal/arrivals/right,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
-	icon_state = "monotile"
+	icon_state = "steel"
 	},
-/area/centcom/terminal)
+/area/centcom/main_hall)
 "dLk" = (
 /obj/structure/table/standard,
 /obj/item/deck/cards,
@@ -12232,6 +12235,7 @@
 /obj/effect/floor_decal/corner/red/bordercorner{
 	dir = 8
 	},
+/obj/effect/floor_decal/arrivals,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "steel"
@@ -15402,6 +15406,7 @@
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/bordercorner,
+/obj/effect/floor_decal/arrivals/right,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "steel"
@@ -21098,20 +21103,15 @@
 	},
 /area/shuttle/trade)
 "wMZ" = (
-/obj/effect/floor_decal/borderfloor{
-	dir = 8
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
 	},
-/obj/effect/floor_decal/corner/green/border{
-	dir = 8
-	},
-/obj/effect/floor_decal/arrivals{
-	pixel_x = 16
-	},
+/obj/effect/floor_decal/arrivals,
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
 	icon_state = "steel"
 	},
-/area/centcom/terminal)
+/area/centcom/main_hall)
 "wNd" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/organ/internal/stack,
@@ -21876,21 +21876,6 @@
 	},
 /turf/simulated/floor/holofloor/carpet,
 /area/holodeck/source_courtroom)
-"xAi" = (
-/obj/effect/floor_decal/borderfloor{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/green/border{
-	dir = 4
-	},
-/obj/effect/floor_decal/arrivals/right{
-	pixel_x = -16
-	},
-/turf/unsimulated/floor{
-	icon = 'icons/turf/flooring/tiles.dmi';
-	icon_state = "steel"
-	},
-/area/centcom/terminal)
 "xAp" = (
 /obj/structure/flora/grass/both,
 /turf/simulated/floor/holofloor/snow,
@@ -35387,7 +35372,7 @@ oqK
 wja
 rOS
 oqK
-wja
+dLe
 gBA
 hwF
 pAD
@@ -35652,7 +35637,7 @@ xdw
 rdN
 sLv
 sLv
-wMZ
+sLv
 lMN
 qTA
 rLA
@@ -35908,7 +35893,7 @@ gSq
 quS
 qTA
 qTA
-dLe
+qTA
 quS
 qTA
 qTA
@@ -36166,7 +36151,7 @@ xdw
 vjU
 lFQ
 lFQ
-xAi
+lFQ
 pxt
 qTA
 rLA
@@ -36415,7 +36400,7 @@ oqK
 wja
 rOS
 oqK
-wja
+wMZ
 gBA
 uOQ
 pAD

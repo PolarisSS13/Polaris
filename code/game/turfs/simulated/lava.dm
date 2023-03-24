@@ -14,6 +14,7 @@
 	can_build_into_floor = TRUE
 	can_dirty = FALSE
 	initial_flooring = /decl/flooring/lava // Defining this in case someone DOES step on lava and survive. Somehow.
+	snow_layers = NEVER_HAS_SNOW // Should be fairly obvious why this is here, hopefully
 
 /turf/simulated/floor/lava/outdoors
 	outdoors = OUTDOORS_YES

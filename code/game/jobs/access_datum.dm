@@ -318,6 +318,12 @@ var/global/const/access_xenobiology = 55
 	desc = "Xenobiology Lab"
 	region = ACCESS_REGION_RESEARCH
 
+var/global/const/access_xenofauna = 67
+/datum/access/xenofauna
+	id = access_xenofauna
+	desc = "Xenofauna Lab"
+	region = ACCESS_REGION_RESEARCH
+
 var/global/const/access_ce = 56
 /datum/access/ce
 	id = access_ce

@@ -34,6 +34,7 @@
 	zone_sel = null
 
 /mob/Initialize()
+	move_intent = GET_DECL(move_intents[1]) // Sets the initial move_intent.
 	mob_list += src
 	if(stat == DEAD)
 		dead_mob_list += src
@@ -45,7 +46,7 @@
 	return ..()
 
 /mob/proc/show_message(msg, type, alt, alt_type)//Message, type of message (1 or 2), alternative message, alt message type (1 or 2)
-
+	set waitfor = FALSE
 	if(!client && !teleop)	return
 
 	if (type)
@@ -65,7 +66,7 @@
 					return
 	// Added voice muffling for Issue 41.
 	if(stat == UNCONSCIOUS || sleeping > 0)
-		to_chat(src, "<I>... You can almost hear someone talking ...</I>")
+		to_chat(src, "<span class='filter_notice'><I>... You can almost hear someone talking ...</I></span>")
 	else
 		to_chat(src,msg)
 		if(teleop)
@@ -99,6 +100,63 @@
 // Not sure where to define this, so it can sit here for the rest of time.
 /atom/proc/drain_power(var/drain_check,var/surge, var/amount = 0)
 	return -1
+
+/**
+ * Very flexible visible message analogue allowing for different messages to be shown to two different mobs as well as any nearby observers.
+ *
+ * All arguments except `other` and `message` are optional, but the proc is built around using at least a few of them!
+ * * `other` - The mob that's interacting with this one
+ * * `message` - Shown to all nearby observers, e.g. "X does something to Y!"
+ * * `self_message` - Shown to the source mob, e.g. "X does something to you!"
+ * * `other_message` - Shown to the other, e.g. "You do something to Y!"
+ * * `self_target_message` - Shown to nearby mobs if `src == other`, e.g. "X do something to themselves!"
+ * * `self_targeted_message` - As above, but to the source mob themselves, e.g. "You do something to yourself!"
+ * * `blind_message` - Shown to nearby blind mobs instead of `message`, e.g. "You hear something!"
+ * * `blind_self_message` - Shown to the source mob if they're blind, e.g. "You feel something done to you!"
+ */
+/mob/proc/interact_message(mob/other, message, self_message, other_message, self_target_message, self_targeted_message, blind_message, blind_self_message, range = world.view, list/exclude_objs = null, list/exclude_mobs = null)
+	var/turf/T = get_turf(src)
+	var/list/in_range = get_mobs_and_objs_in_view_fast(T, range, remote_ghosts = FALSE)
+	T = get_turf(other)
+	// We check for anything in range of either mob, not just one
+	in_range += get_mobs_and_objs_in_view_fast(T, range, remote_ghosts = FALSE)
+	var/list/mobs = uniquelist(in_range["mobs"])
+	var/list/objs = uniquelist(in_range["objs"])
+	mobs.Remove(exclude_mobs)
+	objs.Remove(exclude_objs)
+
+	for (var/V in objs)
+		var/obj/O = V
+		O.show_message(message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+
+	for (var/V in mobs)
+		var/mob/M = V
+
+		if (self_targeted_message && other == src && M == src)
+			// Always shown even if blind/deaf, since the initiating mob will always know what they're doing to themselves
+			M.show_message(self_targeted_message)
+			continue
+
+		else if (self_message && M == src)
+			M.show_message(self_message, VISIBLE_MESSAGE, blind_self_message, AUDIBLE_MESSAGE)
+			continue
+
+		else if (M == other)
+			M.show_message(other_message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			continue
+
+		else if (!M.is_blind() && M.see_invisible >= src.invisibility)
+			M.show_message(other == src && self_target_message ? self_target_message : message, VISIBLE_MESSAGE, blind_message, AUDIBLE_MESSAGE)
+			continue
+
+		else if (blind_message)
+			M.show_message(blind_message, AUDIBLE_MESSAGE)
+			continue
+
+	if (shadow)
+		shadow.visible_message(message, self_message, blind_message, exclude_mobs, range)
+	else if (other.shadow)
+		other.shadow.visible_message(message, self_message, blind_message, exclude_mobs, range)
 
 // Show a message to all mobs and objects in earshot of this one
 // This would be for audible actions by the src mob
@@ -306,8 +364,8 @@
 
 /mob/proc/warn_flavor_changed()
 	if(flavor_text && flavor_text != "") // don't spam people that don't use it!
-		to_chat(src, "<h2 class='alert'>OOC Warning:</h2>")
-		to_chat(src, "<span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span>")
+		to_chat(src, "<span class='filter_notice'><h2 class='alert'>OOC Warning:</h2></span>")
+		to_chat(src, "<span class='filter_notice'><span class='alert'>Your flavor text is likely out of date! <a href='byond://?src=\ref[src];flavor_change=1'>Change</a></span></span>")
 
 /mob/proc/print_flavor_text()
 	if (flavor_text && flavor_text != "")
@@ -414,7 +472,7 @@
 	if(client.holder && (client.holder.rights & R_ADMIN|R_EVENT))
 		is_admin = 1
 	else if(stat != DEAD || istype(src, /mob/new_player))
-		to_chat(usr, "<font color='blue'>You must be observing to use this!</font>")
+		to_chat(usr, "<span class='filter_notice'><font color='blue'>You must be observing to use this!</font></span>")
 		return
 
 	if(is_admin && stat == DEAD)
@@ -560,7 +618,7 @@
 		playsound(src.loc, 'sound/weapons/thudswoosh.ogg', 25) //Quieter than hugging/grabbing but we still want some audio feedback
 
 		if(H.pull_damage())
-			to_chat(src, "<font color='red'><B>Pulling \the [H] in their current condition would probably be a bad idea.</B></font>")
+			to_chat(src, "<span class='filter_notice'><font color='red'><B>Pulling \the [H] in their current condition would probably be a bad idea.</B></font></span>")
 
 	//Attempted fix for people flying away through space when cuffed and dragged.
 	if(ismob(AM))
@@ -865,11 +923,11 @@
 	usr.setClickCooldown(20)
 
 	if(usr.stat == 1)
-		to_chat(usr, "You are unconcious and cannot do that!")
+		to_chat(usr, "<span class='filter_notice'>You are unconcious and cannot do that!</span>")
 		return
 
 	if(usr.restrained())
-		to_chat(usr, "You are restrained and cannot do that!")
+		to_chat(usr, "<span class='filter_notice'>You are restrained and cannot do that!</span>")
 		return
 
 	var/mob/S = src
@@ -883,9 +941,9 @@
 	valid_objects = get_visible_implants(0)
 	if(!valid_objects.len)
 		if(self)
-			to_chat(src, "You have nothing stuck in your body that is large enough to remove.")
+			to_chat(src, "<span class='filter_notice'>You have nothing stuck in your body that is large enough to remove.</span>")
 		else
-			to_chat(U, "[src] has nothing stuck in their wounds that is large enough to remove.")
+			to_chat(U, "<span class='filter_notice'>[src] has nothing stuck in their wounds that is large enough to remove.</span>")
 		return
 
 	var/obj/item/selection = input("What do you want to yank out?", "Embedded objects") in valid_objects
@@ -973,9 +1031,9 @@
 	set_face_dir()
 
 	if(!facing_dir)
-		to_chat(usr, "You are now not facing anything.")
+		to_chat(usr, "<span class='filter_notice'>You are now not facing anything.</span>")
 	else
-		to_chat(usr, "You are now facing [dir2text(facing_dir)].")
+		to_chat(usr, "<span class='filter_notice'>You are now facing [dir2text(facing_dir)].</span>")
 
 /mob/proc/set_face_dir(var/newdir)
 	if(newdir == facing_dir)
@@ -1204,3 +1262,6 @@
 			to_chat(src, SPAN_WARNING("You aren't dextrous enough to [target ? "use \the [target]" : "do that"]."))
 		return FALSE
 	return TRUE
+
+/mob/proc/hearing_boost_range()
+	return hearing_boost_range
