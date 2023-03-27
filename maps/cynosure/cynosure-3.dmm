@@ -869,9 +869,6 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/robotics)
 "aCF" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/structure/table/woodentable,
 /obj/structure/flora/pottedplant/flower{
 	pixel_y = 8
@@ -6668,9 +6665,6 @@
 /area/surface/station/engineering/hallway/sndaccess)
 "esY" = (
 /obj/structure/table/woodentable,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/machinery/microwave,
 /turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
@@ -7177,9 +7171,6 @@
 /area/surface/station/rnd/research)
 "eNW" = (
 /obj/structure/table/woodentable,
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/machinery/firealarm{
 	dir = 1;
 	pixel_y = -24
@@ -20338,9 +20329,6 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/ai_monitored/storage/eva)
 "mYW" = (
-/obj/machinery/door/window/eastleft{
-	name = "Skybridge Lounge"
-	},
 /turf/simulated/floor/wood,
 /area/surface/station/hallway/secondary/secondfloor/westskybridge)
 "mZt" = (
@@ -34309,9 +34297,6 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/secondary/secondfloor/civilian)
 "wow" = (
-/obj/structure/window/reinforced{
-	dir = 4
-	},
 /obj/structure/table/woodentable,
 /obj/structure/flora/pottedplant/fern{
 	pixel_y = 8
