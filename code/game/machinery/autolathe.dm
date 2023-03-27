@@ -292,8 +292,7 @@
 
 		//Consume materials.
 		for(var/material in making.resources)
-			if(!isnull(materials[material]))
-				materials[material] = max(0, materials[material] - round(making.resources[material] * coeff) * multiplier)
+			materials[material] = max(0, materials[material] - round(making.resources[material] * coeff) * multiplier)
 
 		update_icon() // So lid closes
 
