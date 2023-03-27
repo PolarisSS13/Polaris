@@ -49,7 +49,6 @@
 // The area near the station, so POIs don't show up right next to the outpost.
 /area/surface/outside/plains/station
 	name = "Station Perimeter"
-	always_unpowered = FALSE //So engineers can make expansions if they provide an APC.
 	icon_state = "green"
 
 //For Second Floor
