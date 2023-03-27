@@ -131,4 +131,4 @@
 /datum/looping_sound/fabricator
 	mid_sounds = list('sound/machines/fabricator/fabricator1.ogg'=1, 'sound/machines/fabricator/fabricator2.ogg'=1)
 	mid_length = 60
-	volume = 25
+	volume = 50

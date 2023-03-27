@@ -5,6 +5,7 @@
 	desc = "A rough-walled, shallow den dug into the earth."
 	density = FALSE
 	opacity = FALSE
+	anchored = TRUE
 	layer = ABOVE_TURF_LAYER
 
 /obj/structure/animal_den/Initialize()

@@ -213,9 +213,9 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	if (sitting)
 		to_chat(src, SPAN_NOTICE("You are now lying down."))
 		sitting = FALSE
-		update_icon()
 	else
 		..()
+	update_icon()
 
 
 /mob/living/simple_mob/animal/sif/grafadreka/can_projectile_attack(atom/target)
@@ -322,7 +322,7 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 			add_images += glow
 
 	if (harness)
-		I = image(harness.icon, "[current_icon_state]-[harness.icon_state]")
+		I = image(harness.icon, "[icon_state]-[harness.icon_state]")
 		I.color = harness.color
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE|KEEP_APART)
 		add_images += I

@@ -451,3 +451,8 @@ GLOBAL_LIST_INIT(all_volume_channels, list(
 #endif
 
 #define DOCK_ATTEMPT_TIMEOUT 200	//how long in ticks we wait before assuming the docking controller is broken or blown up.
+
+// Syringe usage modes.
+#define SYRINGE_DRAW 0
+#define SYRINGE_INJECT 1
+#define SYRINGE_BROKEN 2
