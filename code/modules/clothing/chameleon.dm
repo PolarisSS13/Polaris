@@ -27,7 +27,9 @@
 /obj/item/clothing/disguise(newtype)
 	var/obj/item/clothing/C = ..()
 	if (istype(C))
+		icon_override = C.icon_override
 		index = C.index
+		update_icon_define = C.update_icon_define
 	return C
 
 /proc/generate_chameleon_choices(var/basetype, var/blacklist=list())
