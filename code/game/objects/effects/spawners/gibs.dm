@@ -55,7 +55,7 @@
 /obj/effect/spawner/gibs/human
 	gib_types = list(
 		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(NORTH, NORTHEAST, NORTHWEST)),
-		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot/down, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(SOUTH, SOUTHEAST, SOUTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/down, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(SOUTH, SOUTHEAST, SOUTHWEST)),
 		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(WEST, NORTHWEST, SOUTHWEST)),
 		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(EAST, NORTHEAST, SOUTHEAST)),
 		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list()),
