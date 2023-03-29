@@ -24,6 +24,12 @@
 
 	return copy //for inheritance
 
+/obj/item/clothing/disguise(newtype)
+	var/obj/item/clothing/C = ..()
+	if (istype(C))
+		index = C.index
+	return C
+
 /proc/generate_chameleon_choices(var/basetype, var/blacklist=list())
 	. = list()
 
