@@ -129,8 +129,8 @@
 				item_state_slots[slot_l_hand_str] = wielded_item_state
 				item_state_slots[slot_r_hand_str] = wielded_item_state
 			else
-				item_state_slots[slot_l_hand_str] = initial(item_state)
-				item_state_slots[slot_r_hand_str] = initial(item_state)
+				item_state_slots[slot_l_hand_str] = item_state
+				item_state_slots[slot_r_hand_str] = item_state
 	..()
 
 
