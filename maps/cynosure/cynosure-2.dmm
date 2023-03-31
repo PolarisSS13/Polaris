@@ -17720,6 +17720,10 @@
 /obj/effect/floor_decal/corner/purple/bordercorner,
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)
+"iae" = (
+/obj/effect/wingrille_spawn,
+/turf/simulated/mineral/floor/ignore_mapgen/vacuum,
+/area/surface/outpost/checkpoint)
 "iak" = (
 /obj/effect/floor_decal/borderfloorblack{
 	dir = 6
@@ -23399,6 +23403,9 @@
 	},
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/hallway/primary/groundfloor/west)
+"kFj" = (
+/turf/simulated/wall/sifwood,
+/area/surface/outside/plains/normal)
 "kFs" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/red,
 /turf/simulated/wall,
@@ -26766,9 +26773,6 @@
 /turf/simulated/floor/bluegrid,
 /area/surface/station/ai/cyborg_station)
 "mcO" = (
-/obj/structure/bed/chair{
-	dir = 1
-	},
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 4
 	},
@@ -26781,6 +26785,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
+/obj/structure/bed/chair/wheelchair,
 /turf/simulated/floor/tiled,
 /area/surface/station/arrivals/cynosure)
 "mcT" = (
@@ -31803,6 +31808,10 @@
 "olk" = (
 /turf/simulated/wall/thull,
 /area/shuttle/large_escape_pod1/station)
+"olZ" = (
+/obj/structure/simple_door/sifwood,
+/turf/simulated/floor/tiled/asteroid_steel,
+/area/surface/outside/plains/normal)
 "omw" = (
 /obj/structure/grille,
 /obj/structure/window/reinforced/full,
@@ -55916,7 +55925,7 @@ bHg
 bHg
 bHg
 eKw
-xsG
+eKw
 xsG
 xsG
 xsG
@@ -56172,7 +56181,7 @@ bHg
 bHg
 bHg
 bHg
-xsG
+eKw
 xsG
 xsG
 xsG
@@ -57206,8 +57215,8 @@ lZX
 lZX
 lZX
 bGA
-xsG
-gvb
+iae
+kFj
 gvb
 uVc
 uVc
@@ -57463,9 +57472,9 @@ lZX
 lZX
 lZX
 aUH
-xsG
-gvb
-gvb
+lZX
+olZ
+hJJ
 hJJ
 uVc
 uVc
@@ -57720,8 +57729,8 @@ lZX
 lZX
 lZX
 bGA
-xsG
-gvb
+iae
+kFj
 gvb
 hJJ
 uVc

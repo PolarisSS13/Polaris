@@ -9,35 +9,35 @@
 	icon_state = "center"
 
 /area/surface/north
-	name = "Outpost"
+	name = "Asteroid Outpost"
 	icon_state = "north"
 
 /area/surface/south
-	name = "Lake"
+	name = "Spake"
 	icon_state = "south"
 
 /area/surface/east
-	name = "Shoreline"
+	name = "Spaceline"
 	icon_state = "east"
 
 /area/surface/west
-	name = "Snowfields"
+	name = "Asteroid fields"
 	icon_state = "west"
 
 /area/surface/northeast
-	name = "Depths"
+	name = "Space Depths"
 	icon_state = "northeast"
 
 /area/surface/northwest
-	name = "Mountains"
+	name = "Spountains"
 	icon_state = "northwest"
 
 /area/surface/southwest
-	name = "Glowing Forest"
+	name = "Asteroid Forest"
 	icon_state = "southwest"
 
 /area/surface/southeast
-	name = "Southern Shoreline"
+	name = "Southern spaceline"
 	icon_state = "southeast"
 
 /area/surface/outside
@@ -54,52 +54,52 @@
 //For Second Floor
 
 /area/surface/outside/plains/station/snd
-	name = "Plains"
+	name = "Space Plains"
 	icon_state = "blueold"
 
 // Rest of the 'plains' Z-level, for POIs.
 /area/surface/outside/plains/normal
-	name = "Plains"
+	name = "Space Plains"
 	icon_state = "yellow"
 
 // So POIs don't get embedded in rock.
 /area/surface/outside/plains/plateau
-	name = "Plateau"
+	name = "Space Plateau"
 	icon_state = "darkred"
 
 // Paths get their own area so POIs don't overwrite pathways.
 /area/surface/outside/path
-	name = "Trail"
+	name = "Asteroid Trail"
 	icon_state = "purple"
 
 /area/surface/outside/path/plains
 
 /area/surface/outside/wilderness/normal
-	name = "Wilderness"
+	name = "Space Wilderness"
 	icon_state = "yellow"
 
 /area/surface/outside/wilderness/deep
-	name = "Deep Wilderness"
+	name = "Deep Space Wilderness"
 	icon_state = "red"
 
 // So POIs don't get embedded in rock.
 /area/surface/outside/wilderness/mountains
-	name = "Mountains"
+	name = "Spountains"
 	icon_state = "darkred"
 
 /area/surface/outside/path/wilderness
 
 // Water
 /area/surface/outside/ocean
-	name = "Sea"
+	name = "Space Sea"
 	icon_state = "bluenew"
 
 /area/surface/outside/river
-	name = "River"
+	name = "Tachyon River"
 	icon_state = "bluenew"
 
 /area/surface/outside/river/gautelfr
-	name = "Gautelfr River"
+	name = "Tachyon River"
 
 /area/surface/cave
 	area_flags = AREA_FLAG_IS_RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
@@ -107,20 +107,20 @@
 
 // The bottom half that connects to the outpost and is safer.
 /area/surface/cave/explored/normal
-	name = "Tunnels"
+	name = "Proverbial Tunnels"
 	icon_state = "explored"
 
 /area/surface/cave/unexplored/normal
-	name = "Tunnels"
+	name = "Proverbial Tunnels"
 	icon_state = "unexplored"
 
 // The top half of the map that is more dangerous.
 /area/surface/cave/explored/deep
-	name = "Depths"
+	name = "Space Depths"
 	icon_state = "explored_deep"
 
 /area/surface/cave/unexplored/deep
-	name = "Depths"
+	name = "Space Depths"
 	icon_state = "unexplored_deep"
 
 //Cynosure Station
@@ -1980,7 +1980,7 @@
 
 // Wilderness spawn areas.
 /area/surface/wilderness/shack
-	name = "Wilderness Shack"
+	name = "Space Shack"
 
 /area/surface/outpost/checkpoint
-	name = "Exterior Checkpoint"
+	name = "Ill-Advised Exterior Checkpoint"

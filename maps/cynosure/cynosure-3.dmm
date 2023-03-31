@@ -412,6 +412,20 @@
 	},
 /turf/simulated/floor/tiled/old_tile/gray,
 /area/surface/station/construction/office)
+"aok" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_y = 28
+	},
+/obj/machinery/light,
+/obj/item/weldingtool/largetank{
+	start_anomalous = 1
+	},
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "apn" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -1675,6 +1689,13 @@
 /obj/effect/floor_decal/corner/brown/border,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/secondfloor/west)
+"bjf" = (
+/obj/structure/shuttle/engine/propulsion/burst{
+	dir = 8;
+	icon_state = "propulsion"
+	},
+/turf/simulated/shuttle/wall,
+/area/surface/outside/plains/station/snd)
 "bjr" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/machinery/light/small,
@@ -2477,6 +2498,26 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/rnd/workshop)
+"bGo" = (
+/obj/machinery/status_display{
+	density = 0;
+	layer = 4;
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/obj/structure/bed/chair{
+	dir = 8;
+	icon_state = "chair_preview"
+	},
+/obj/effect/decal/remains,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/item/ammo_casing/spent,
+/obj/item/clothing/under/suit_jacket/really_black,
+/obj/item/clothing/shoes/dress,
+/obj/item/clothing/glasses/sunglasses,
+/obj/random/multiple/gun/projectile/handgun,
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "bGz" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -3594,6 +3635,11 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/quartermaster/office)
+"cpc" = (
+/obj/structure/shuttle/window,
+/obj/structure/grille,
+/turf/simulated/shuttle/plating,
+/area/surface/outside/plains/station/snd)
 "cpk" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5954,7 +6000,7 @@
 "dSM" = (
 /obj/machinery/button/remote/airlock{
 	id = "sci_raccess_north";
-	name = "Door Bolt Control";
+	name = "Do Not Press This";
 	pixel_y = 24;
 	req_access = list(10);
 	specialfunctions = 4
@@ -8679,7 +8725,7 @@
 /obj/machinery/button/remote/airlock{
 	dir = 4;
 	id = "sec_raccess_north";
-	name = "Door Bolt Control";
+	name = "Better Not Press This";
 	pixel_x = -24;
 	req_access = list(1);
 	specialfunctions = 4
@@ -13348,6 +13394,9 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/ai)
+"iyd" = (
+/turf/simulated/mineral/floor/ignore_mapgen/vacuum,
+/area/surface/outside/plains/station/snd)
 "izh" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -26091,6 +26140,18 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
+"qPp" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/structure/closet/walllocker/emerglocker{
+	pixel_y = 28
+	},
+/obj/item/radio/intercom{
+	pixel_y = -26
+	},
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "qPr" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -26917,7 +26978,8 @@
 /area/surface/station/security/hallway/snd)
 "ryB" = (
 /obj/structure/sign/pods{
-	dir = 8
+	dir = 8;
+	name = "\improper POORLY PLANNED ESCAPE PODS"
 	},
 /turf/simulated/wall,
 /area/surface/station/hallway/primary/secondfloor/east)
@@ -36535,6 +36597,9 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/surface/station/security/riot_control)
+"xuJ" = (
+/turf/simulated/shuttle/wall,
+/area/surface/outside/plains/station/snd)
 "xva" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 5
@@ -37887,6 +37952,13 @@
 	},
 /turf/simulated/floor/carpet/sblucarpet,
 /area/surface/station/medical/psych)
+"yjp" = (
+/obj/machinery/door/airlock/external{
+	name = "Escape Pod Hatch";
+	welded = 1
+	},
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "yjJ" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -38092,8 +38164,8 @@ yhA
 yhA
 yhA
 yhA
-ddU
-ddU
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -38349,7 +38421,7 @@ yhA
 yhA
 yhA
 yhA
-ddU
+yhA
 ddU
 wxY
 ddU
@@ -40358,7 +40430,7 @@ ddU
 ddU
 ddU
 ddU
-ddU
+yhA
 yhA
 yhA
 yhA
@@ -40615,7 +40687,7 @@ ddU
 ddU
 ddU
 ddU
-ddU
+yhA
 yhA
 yhA
 yhA
@@ -43959,8 +44031,8 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -80335,7 +80407,7 @@ lAM
 lAM
 lAM
 kUD
-sBb
+jIE
 sBb
 sBb
 sBb
@@ -80592,7 +80664,7 @@ iMF
 hap
 aNp
 kUD
-sBb
+jIE
 sBb
 sBb
 sBb
@@ -80849,8 +80921,8 @@ iRU
 srz
 smV
 kUD
-sBb
-sBb
+jIE
+jIE
 sBb
 sBb
 rac
@@ -81106,8 +81178,8 @@ lAM
 lAM
 lAM
 kUD
-sBb
-sBb
+jIE
+jIE
 sBb
 sBb
 pmc
@@ -81363,8 +81435,8 @@ iMF
 hap
 mLF
 kUD
-sBb
-sBb
+jIE
+jIE
 sBb
 sBb
 pmc
@@ -81620,7 +81692,7 @@ iRU
 srz
 qrW
 kUD
-sBb
+jIE
 sBb
 sBb
 sBb
@@ -81877,7 +81949,7 @@ kUD
 kUD
 kUD
 kUD
-sBb
+jIE
 sBb
 sBb
 sBb
@@ -82132,9 +82204,9 @@ eOn
 bpf
 wMP
 sBb
-sBb
-sBb
-sBb
+jIE
+jIE
+jIE
 sBb
 sBb
 sBb
@@ -82390,7 +82462,7 @@ rbU
 uND
 sBb
 sBb
-sBb
+jIE
 sBb
 sBb
 sBb
@@ -96990,10 +97062,10 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
+bjf
+yjp
+bjf
+yhA
 ddU
 ddU
 ddU
@@ -97242,16 +97314,16 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+iyd
+iyd
+xuJ
+qPp
+xuJ
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -97499,17 +97571,17 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+yhA
+yhA
+xuJ
+aok
+xuJ
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -97756,18 +97828,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+yhA
+yhA
+xuJ
+bGo
+xuJ
+yhA
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -98014,18 +98086,18 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+yhA
+xuJ
+cpc
+xuJ
+yhA
+yhA
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -98272,17 +98344,17 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+yhA
+iyd
+yhA
+yhA
+yhA
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -98529,17 +98601,17 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+yhA
+iyd
+iyd
+iyd
+iyd
+iyd
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -98787,16 +98859,16 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
+iyd
+iyd
+iyd
+iyd
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -99044,15 +99116,15 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+iyd
+iyd
+iyd
+iyd
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -99307,9 +99379,9 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
-ddU
+yhA
+yhA
+yhA
 ddU
 ddU
 ddU
@@ -99564,8 +99636,8 @@ ddU
 ddU
 ddU
 ddU
-ddU
-ddU
+yhA
+yhA
 ddU
 ddU
 ddU

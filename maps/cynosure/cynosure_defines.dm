@@ -10,20 +10,13 @@
 
 /datum/map/cynosure
 	name = "Cynosure"
-	full_name = "Cynosure Station"
+	full_name = "NSS Cynosure"
 	path = "cynosure"
 
 	lobby_screens = list('maps/cynosure/title_cynosure.png')
 
 	lobby_tracks = list(
-		/decl/music_track/chasing_time,
-		/decl/music_track/epicintro2015,
-		/decl/music_track/human,
-		/decl/music_track/marhaba,
-		/decl/music_track/treacherous_voyage,
-		/decl/music_track/asfarasitgets,
-		/decl/music_track/space_oddity,
-		/decl/music_track/martiancowboy)
+		/decl/music_track/spaceasshole)
 
 	holomap_smoosh = list(list(
 		Z_LEVEL_STATION_ONE,
@@ -178,7 +171,7 @@
 	. +=  "Following the Skathari Incursion, an invasion of reality-bending creatures from the remnants of a dead universe, the known galaxy has been thrown into disarray.<br>"
 	. +=  "For example, you could have sworn that you worked on a planet? But that's probably just your memory playing tricks on you.<br>"
 	. +=  "Humanity already stands on the precipice of a technological singularity that few are ready to face, and the (space) winds of change whip at their backs.<br>"
-	. +=  "On the edge of SPACE, NanoTrasen seeks to exploit new phenomena stirred by the Incursion... That's where you come in."
+	. +=  "On the edge of SPACE, NanoTrasen seeks to exploit new phenomena stirred by the Incursion... In space."
 	return jointext(., "<br>")
 
 // Skybox Settings
