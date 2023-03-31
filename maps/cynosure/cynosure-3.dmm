@@ -412,20 +412,6 @@
 	},
 /turf/simulated/floor/tiled/old_tile/gray,
 /area/surface/station/construction/office)
-"aok" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/machinery/vending/wallmed1{
-	name = "Emergency NanoMed";
-	pixel_y = 28
-	},
-/obj/machinery/light,
-/obj/item/weldingtool/largetank{
-	start_anomalous = 1
-	},
-/turf/simulated/shuttle/floor,
-/area/surface/outside/plains/station/snd)
 "apn" = (
 /obj/structure/cable/green{
 	d1 = 1;
@@ -765,14 +751,11 @@
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 6
 	},
-/obj/item/gun/energy/gun,
-/obj/item/gun/energy/gun{
-	pixel_x = 2;
-	pixel_y = -2
-	},
 /obj/machinery/door/window/brigdoor/westright{
 	name = "Weapons Locker"
 	},
+/obj/item/gun/projectile/pistol/toy,
+/obj/item/gun/projectile/pistol/toy,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "axl" = (
@@ -796,10 +779,10 @@
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 9
 	},
-/obj/random/energy/sec,
 /obj/machinery/door/window/brigdoor/eastleft{
 	name = "Weapons Locker"
 	},
+/obj/item/gun/projectile/automatic/toy,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/tactical)
 "ayM" = (
@@ -1689,13 +1672,6 @@
 /obj/effect/floor_decal/corner/brown/border,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/secondfloor/west)
-"bjf" = (
-/obj/structure/shuttle/engine/propulsion/burst{
-	dir = 8;
-	icon_state = "propulsion"
-	},
-/turf/simulated/shuttle/wall,
-/area/surface/outside/plains/station/snd)
 "bjr" = (
 /obj/structure/reagent_dispensers/fueltank,
 /obj/machinery/light/small,
@@ -2310,25 +2286,11 @@
 /obj/effect/floor_decal/corner_oldtile/red{
 	dir = 5
 	},
-/obj/item/storage/box/shotgunshells,
-/obj/item/storage/box/shotgunshells,
-/obj/item/storage/box/shotgunammo,
-/obj/item/storage/box/shotgunammo,
-/obj/item/ammo_magazine/m45,
-/obj/item/ammo_magazine/m45,
-/obj/item/ammo_magazine/m45,
-/obj/item/ammo_magazine/m45,
-/obj/item/ammo_magazine/m45,
-/obj/item/ammo_magazine/m45,
-/obj/item/ammo_magazine/m9mmt,
-/obj/item/ammo_magazine/m9mmt,
-/obj/item/ammo_magazine/m9mmt,
-/obj/item/ammo_magazine/s45,
-/obj/item/ammo_magazine/s45,
-/obj/item/ammo_magazine/s45,
 /obj/machinery/door/window/brigdoor/southright{
 	name = "Ammo Locker"
 	},
+/obj/item/ammo_magazine/mfoam_dart/pistol,
+/obj/item/ammo_magazine/mfoam_dart/pistol,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/tactical)
 "bAw" = (
@@ -2498,26 +2460,6 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/rnd/workshop)
-"bGo" = (
-/obj/machinery/status_display{
-	density = 0;
-	layer = 4;
-	pixel_x = 0;
-	pixel_y = -32
-	},
-/obj/structure/bed/chair{
-	dir = 8;
-	icon_state = "chair_preview"
-	},
-/obj/effect/decal/remains,
-/obj/effect/decal/cleanable/blood/splatter,
-/obj/item/ammo_casing/spent,
-/obj/item/clothing/under/suit_jacket/really_black,
-/obj/item/clothing/shoes/dress,
-/obj/item/clothing/glasses/sunglasses,
-/obj/random/multiple/gun/projectile/handgun,
-/turf/simulated/shuttle/floor,
-/area/surface/outside/plains/station/snd)
 "bGz" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -3635,11 +3577,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/quartermaster/office)
-"cpc" = (
-/obj/structure/shuttle/window,
-/obj/structure/grille,
-/turf/simulated/shuttle/plating,
-/area/surface/outside/plains/station/snd)
 "cpk" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -5054,27 +4991,13 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/item/ammo_magazine/m9mmt/rubber,
-/obj/item/ammo_magazine/m9mmt/rubber{
-	pixel_x = 2;
-	pixel_y = -2
-	},
-/obj/item/ammo_magazine/m9mmt/rubber{
-	pixel_x = 3;
-	pixel_y = -4
-	},
-/obj/item/ammo_magazine/m45/rubber,
-/obj/item/ammo_magazine/m45/rubber,
-/obj/item/ammo_magazine/m45/rubber,
-/obj/item/ammo_magazine/m45/rubber,
-/obj/item/ammo_magazine/m45/rubber,
-/obj/item/ammo_magazine/m45/rubber,
-/obj/item/ammo_magazine/s45/rubber,
-/obj/item/ammo_magazine/s45/rubber,
-/obj/item/ammo_magazine/s45/rubber,
 /obj/machinery/door/window/brigdoor/eastleft{
 	name = "Ammo Locker"
 	},
+/obj/item/ammo_magazine/mfoam_dart/pistol,
+/obj/item/ammo_magazine/mfoam_dart/pistol,
+/obj/item/ammo_magazine/mfoam_dart/pistol/smg,
+/obj/item/ammo_magazine/mfoam_dart/pistol/smg,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "dlk" = (
@@ -7863,6 +7786,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/ai_monitored/storage/eva)
+"fcP" = (
+/obj/machinery/door/airlock/external{
+	name = "Escape Pod Hatch";
+	welded = 1
+	},
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "fdJ" = (
 /obj/structure/cable/green{
 	d1 = 4;
@@ -8186,11 +8116,6 @@
 /obj/structure/window/reinforced{
 	dir = 4
 	},
-/obj/item/gun/projectile/shotgun/pump{
-	pixel_x = -1;
-	pixel_y = 2
-	},
-/obj/item/gun/projectile/shotgun/pump,
 /obj/effect/floor_decal/corner_oldtile/green{
 	dir = 6
 	},
@@ -8198,6 +8123,8 @@
 	name = "Weapons Locker"
 	},
 /obj/structure/window/reinforced,
+/obj/item/gun/projectile/shotgun/pump/toy,
+/obj/item/gun/projectile/shotgun/pump/toy,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "frn" = (
@@ -10797,23 +10724,6 @@
 /obj/effect/floor_decal/corner_oldtile/red{
 	dir = 9
 	},
-/obj/item/storage/box/flashshells,
-/obj/item/storage/box/beanbags{
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/storage/box/beanbags{
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/storage/box/stunshells{
-	pixel_x = 4;
-	pixel_y = 4
-	},
-/obj/item/storage/box/stunshells{
-	pixel_x = 4;
-	pixel_y = 4
-	},
 /obj/machinery/door/window/brigdoor/eastright{
 	name = "Ammo Locker"
 	},
@@ -12805,6 +12715,9 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/rnd/lab)
+"icY" = (
+/turf/simulated/mineral/floor/ignore_mapgen/vacuum,
+/area/surface/outside/plains/station/snd)
 "idl" = (
 /obj/machinery/alarm{
 	dir = 1;
@@ -13115,6 +13028,20 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/engineering/hallway/sndaccess)
+"ioA" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/machinery/vending/wallmed1{
+	name = "Emergency NanoMed";
+	pixel_y = 28
+	},
+/obj/machinery/light,
+/obj/item/weldingtool/largetank{
+	start_anomalous = 1
+	},
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "ipD" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/firealarm{
@@ -13394,9 +13321,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/ai)
-"iyd" = (
-/turf/simulated/mineral/floor/ignore_mapgen/vacuum,
-/area/surface/outside/plains/station/snd)
 "izh" = (
 /obj/structure/cable{
 	d1 = 4;
@@ -13639,6 +13563,9 @@
 "iEj" = (
 /turf/simulated/wall/r_wall,
 /area/surface/station/ai/upload_foyer)
+"iEp" = (
+/turf/simulated/shuttle/wall,
+/area/surface/outside/plains/station/snd)
 "iFg" = (
 /obj/structure/catwalk,
 /obj/structure/lattice,
@@ -17669,13 +17596,13 @@
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 6
 	},
-/obj/item/gun/energy/ionrifle,
 /obj/machinery/door/window/brigdoor/westleft{
 	name = "Weapon Locker"
 	},
 /obj/machinery/light{
 	dir = 4
 	},
+/obj/item/gun/projectile/shotgun/pump/toy/levergun,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "lct" = (
@@ -20144,16 +20071,14 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/clothing/accessory/armor/armorplate/laserproof,
-/obj/item/clothing/accessory/armor/legguards/laserproof,
-/obj/item/clothing/accessory/armor/armguards/laserproof,
-/obj/item/clothing/head/helmet/laserproof,
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 9
 	},
 /obj/machinery/door/window/brigdoor/eastleft{
 	name = "Laser Armor"
 	},
+/obj/item/clothing/suit/costume/bunny,
+/obj/item/clothing/head/collectable/bunnyhead,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "mOF" = (
@@ -21206,8 +21131,6 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/clothing/accessory/armor/armorplate/laserproof,
-/obj/item/clothing/head/helmet/laserproof,
 /obj/effect/floor_decal/corner_oldtile/blue{
 	dir = 9
 	},
@@ -21217,6 +21140,8 @@
 /obj/machinery/light{
 	dir = 8
 	},
+/obj/item/clothing/suit/costume/bunny,
+/obj/item/clothing/head/collectable/bunnyhead,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "nBG" = (
@@ -25105,6 +25030,11 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/surface/station/medical/patient_wing)
+"qfr" = (
+/obj/structure/shuttle/window,
+/obj/structure/grille,
+/turf/simulated/shuttle/plating,
+/area/surface/outside/plains/station/snd)
 "qfz" = (
 /obj/machinery/alarm{
 	pixel_y = 22
@@ -26140,18 +26070,6 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
-"qPp" = (
-/obj/structure/bed/chair{
-	dir = 4
-	},
-/obj/structure/closet/walllocker/emerglocker{
-	pixel_y = 28
-	},
-/obj/item/radio/intercom{
-	pixel_y = -26
-	},
-/turf/simulated/shuttle/floor,
-/area/surface/outside/plains/station/snd)
 "qPr" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -26849,6 +26767,7 @@
 /obj/machinery/door/window/brigdoor/eastright{
 	name = "Weapons Locker"
 	},
+/obj/item/gun/projectile/revolver/toy/big_iron,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/tactical)
 "rry" = (
@@ -28926,17 +28845,14 @@
 	},
 /obj/effect/floor_decal/borderfloor/corner,
 /obj/effect/floor_decal/industrial/danger/corner,
-/obj/item/clothing/accessory/armor/armorplate/bulletproof{
-	pixel_x = 2;
-	pixel_y = 2
-	},
-/obj/item/clothing/head/helmet/bulletproof,
 /obj/effect/floor_decal/corner_oldtile/green{
 	dir = 9
 	},
 /obj/machinery/door/window/brigdoor/eastright{
 	name = "Ballistic Armor"
 	},
+/obj/item/clothing/suit/costume/chickensuit,
+/obj/item/clothing/head/collectable/chicken,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "sKy" = (
@@ -29390,16 +29306,14 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
-/obj/item/clothing/accessory/armor/armorplate/bulletproof,
-/obj/item/clothing/accessory/armor/legguards/bulletproof,
-/obj/item/clothing/accessory/armor/armguards/bulletproof,
-/obj/item/clothing/head/helmet/bulletproof,
 /obj/effect/floor_decal/corner_oldtile/green{
 	dir = 9
 	},
 /obj/machinery/door/window/brigdoor/eastleft{
 	name = "Ballistic Armor"
 	},
+/obj/item/clothing/suit/costume/chickensuit,
+/obj/item/clothing/head/collectable/chicken,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/armoury)
 "sXx" = (
@@ -30535,6 +30449,18 @@
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/ai_monitored/storage/eva)
+"tCw" = (
+/obj/structure/bed/chair{
+	dir = 4
+	},
+/obj/structure/closet/walllocker/emerglocker{
+	pixel_y = 28
+	},
+/obj/item/radio/intercom{
+	pixel_y = -26
+	},
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "tDf" = (
 /obj/machinery/computer/rcon{
 	dir = 8
@@ -30778,6 +30704,13 @@
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/rnd/workshop)
+"tOw" = (
+/obj/structure/shuttle/engine/propulsion/burst{
+	dir = 8;
+	icon_state = "propulsion"
+	},
+/turf/simulated/shuttle/wall,
+/area/surface/outside/plains/station/snd)
 "tOG" = (
 /obj/structure/sign/warning/secure_area,
 /turf/simulated/wall/r_wall,
@@ -32625,6 +32558,26 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/crew_quarters/heads/cmo)
+"uYd" = (
+/obj/machinery/status_display{
+	density = 0;
+	layer = 4;
+	pixel_x = 0;
+	pixel_y = -32
+	},
+/obj/structure/bed/chair{
+	dir = 8;
+	icon_state = "chair_preview"
+	},
+/obj/effect/decal/remains,
+/obj/effect/decal/cleanable/blood/splatter,
+/obj/item/ammo_casing/spent,
+/obj/item/clothing/under/suit_jacket/really_black,
+/obj/item/clothing/shoes/dress,
+/obj/item/clothing/glasses/sunglasses,
+/obj/random/multiple/gun/projectile/handgun,
+/turf/simulated/shuttle/floor,
+/area/surface/outside/plains/station/snd)
 "uYt" = (
 /obj/structure/bed/chair/comfy/blue{
 	dir = 4
@@ -34910,7 +34863,6 @@
 /obj/effect/floor_decal/corner_oldtile/green{
 	dir = 6
 	},
-/obj/random/projectile/sec,
 /obj/machinery/door/window/brigdoor/westright{
 	name = "Weapons Locker"
 	},
@@ -35649,6 +35601,8 @@
 /obj/machinery/light{
 	dir = 1
 	},
+/obj/item/ammo_magazine/mfoam_dart/pistol,
+/obj/item/ammo_magazine/mfoam_dart/pistol,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/tactical)
 "wXy" = (
@@ -36597,9 +36551,6 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/surface/station/security/riot_control)
-"xuJ" = (
-/turf/simulated/shuttle/wall,
-/area/surface/outside/plains/station/snd)
 "xva" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 5
@@ -37952,13 +37903,6 @@
 	},
 /turf/simulated/floor/carpet/sblucarpet,
 /area/surface/station/medical/psych)
-"yjp" = (
-/obj/machinery/door/airlock/external{
-	name = "Escape Pod Hatch";
-	welded = 1
-	},
-/turf/simulated/shuttle/floor,
-/area/surface/outside/plains/station/snd)
 "yjJ" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
@@ -97062,9 +97006,9 @@ ddU
 ddU
 ddU
 ddU
-bjf
-yjp
-bjf
+tOw
+fcP
+tOw
 yhA
 ddU
 ddU
@@ -97317,11 +97261,11 @@ ddU
 yhA
 yhA
 yhA
-iyd
-iyd
-xuJ
-qPp
-xuJ
+icY
+icY
+iEp
+tCw
+iEp
 yhA
 yhA
 ddU
@@ -97576,9 +97520,9 @@ yhA
 yhA
 yhA
 yhA
-xuJ
-aok
-xuJ
+iEp
+ioA
+iEp
 yhA
 yhA
 yhA
@@ -97833,9 +97777,9 @@ yhA
 yhA
 yhA
 yhA
-xuJ
-bGo
-xuJ
+iEp
+uYd
+iEp
 yhA
 yhA
 yhA
@@ -98090,9 +98034,9 @@ yhA
 yhA
 yhA
 yhA
-xuJ
-cpc
-xuJ
+iEp
+qfr
+iEp
 yhA
 yhA
 yhA
@@ -98348,7 +98292,7 @@ yhA
 yhA
 yhA
 yhA
-iyd
+icY
 yhA
 yhA
 yhA
@@ -98605,11 +98549,11 @@ yhA
 yhA
 yhA
 yhA
-iyd
-iyd
-iyd
-iyd
-iyd
+icY
+icY
+icY
+icY
+icY
 yhA
 yhA
 ddU
@@ -98862,10 +98806,10 @@ ddU
 yhA
 yhA
 yhA
-iyd
-iyd
-iyd
-iyd
+icY
+icY
+icY
+icY
 yhA
 yhA
 yhA
@@ -99118,10 +99062,10 @@ ddU
 ddU
 yhA
 yhA
-iyd
-iyd
-iyd
-iyd
+icY
+icY
+icY
+icY
 yhA
 yhA
 yhA
