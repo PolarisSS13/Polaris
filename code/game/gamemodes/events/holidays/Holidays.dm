@@ -99,7 +99,7 @@ var/global/list/Holiday = list() //Holidays are lists now, so we can have more t
 		if(4)	//Apr
 			switch(DD)
 				if(1)
-					Holiday["April Fool's Day"] = "A human holiday that endevours one to pull pranks and spread hoaxes on their friends."
+					Holiday["April Normal Day"] = "A human holiday that endevours one to do nothing unusual. In Space."
 				if(5)
 					Holiday["First Day of Passover"] = "The first of eight days of a human holiday celebrating the exodus of ancient Jewish people \
 					from slavery, and of the spring harvest. On Pluto and Kishar, the holiday is also sometimes associated with their \

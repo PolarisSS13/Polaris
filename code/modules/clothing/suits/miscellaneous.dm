@@ -711,7 +711,7 @@
 	item_state_slots = list(slot_r_hand_str = "suit_black", slot_l_hand_str = "suit_black")
 
 /obj/item/clothing/suit/storage/toggle/hoodie/nrti
-	name = "New Reykjavik Technical Institute hoodie"
+	name = "New Spacejavik Technical Institute hoodie"
 	desc = "A warm, gray sweatshirt. It bears the letters NRT on the back, in reference to Sif's premiere technical institute."
 	icon_state = "nrti_hoodie"
 	item_state_slots = list(slot_r_hand_str = "suit_grey", slot_l_hand_str = "suit_grey")

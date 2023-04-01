@@ -133,7 +133,7 @@
 /decl/poster/nt_8
 	icon_state = "ntposter08"
 	name = "wildlife hazard"
-	desc = "This SifGov poster warns against attempting to kill a fully grown giant spider or other hostile life-form alone."
+	desc = "This SpaceGov poster warns against attempting to kill a fully grown giant spider or other hostile life-form alone."
 	listing_name = "Safety - Spiders"
 
 // A new subset of poster datum for ONLY 'Internal' NanoTrasen posters, given to Security.
@@ -326,7 +326,7 @@
 /decl/poster/nanotrasen/nt_9
 	icon_state = "ntposter09"
 	name = "Regulations and You"
-	desc = "This SifGov poster showcases an NT security guard reading from her PDA. The blurb advocates for the reader to keep corporate regulations in mind at all times, as an emergency can occur at any time."
+	desc = "This SpaceGov poster showcases an NT security guard reading from her PDA. The blurb advocates for the reader to keep corporate regulations in mind at all times, as an emergency can occur at any time."
 	listing_name = "Safety - Corporate Regulations"
 
 /decl/poster/nanotrasen/vore_17

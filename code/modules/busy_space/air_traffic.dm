@@ -57,24 +57,24 @@ var/global/datum/lore/atc_controller/atc = new/datum/lore/atc_controller
 	//Let's get some mission parameters
 
 	var/combined_name = "[source.short_name] [source.current_ship]"
-	var/alt_atc_names = list("[using_map.station_short] TraCon","[using_map.station_short] Control","[using_map.station_short] ATC","[using_map.station_short] Airspace")
-	var/wrong_atc_names = list("Sol Command","New Reykjavik StarCon", "NLS Southern Cross TraCon", "[using_map.dock_name]")
+	var/alt_atc_names = list("[using_map.station_short] SpaCon","[using_map.station_short] Control","[using_map.station_short] STC","[using_map.station_short] Spacespace")
+	var/wrong_atc_names = list("Space Command","New Spacejavik StarCon", "NLS Southern Cross TraCon", "[using_map.dock_name]")
 	var/request_verb = list("requesting","calling for","asking for")
 
 	//First response is 'yes', second is 'no'
 	var/requests = list("[using_map.station_short] transit clearance" = list("permission for transit granted", "permission for transit denied, contact regional on 953.5"),
-						"planetary flight rules" = list("authorizing planetary flight rules", "denying planetary flight rules right now due to traffic"),
+						"space flight rules" = list("authorizing space flight rules", "denying space flight rules right now due to traffic"),
 						"special flight rules" = list("authorizing special flight rules", "denying special flight rules, not allowed for your traffic class"),
-						"current solar weather info" = list("sending you the relevant information via tightbeam", "cannot fulfill your request at the moment"),
-						"current local weather info" = list("sending local weather info now", "local weather data unavailable, contact regional on 953.5"),
+						"current space weather info" = list("sending you the relevant information via tightbeam", "cannot fulfill your request at the moment"),
+						"current local (space) weather info" = list("sending local weather info now", "local weather data unavailable, contact regional on 953.5"),
 						"nearby traffic info" = list("sending you current traffic info", "no available info in your area"),
 						"remote telemetry data" = list("sending telemetry now", "no uplink from your ship, recheck your uplink and ask again"),
-						"refueling information" = list("sending refueling information now", "no fuel for your ship class in this sector"),
+						"refueling information" = list("sending refueling information now", "no fuel for your ship class in space"),
 						"a current system time sync" = list("sending time sync ping to you now", "your ship isn't compatible with our time sync, set time manually"),
 						"current system starcharts" = list("transmitting current starcharts", "your request is queued, overloaded right now"),
 						"permission to engage FTL" = list("permission to engage FTL granted, good day", "permission denied, wait for current traffic to pass"),
-						"permission to depart Sif atmosphere" = list("permission to depart granted, good day", "permission denied, wait for current traffic to pass"),
-						"permission to enter Sif atmosphere" = list("good day, permission to enter granted", "permission denied, wait for current traffic to pass"),
+						"permission to depart Space" = list("permission to depart granted, good day", "permission denied, wait for current traffic to pass"),
+						"permission to enter Space" = list("good day, permission to enter granted", "permission denied, wait for current traffic to pass"),
 						)
 
 	//Random chance things for variety

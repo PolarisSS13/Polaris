@@ -5,7 +5,7 @@
 	var/autogenerate_destinations = TRUE // should probably be true for most systems, might be false for Sif or weird shit like Isavau's / Terminus / Silk
 	var/planets = list() //planetary destinations will automatically pick an inhabited terrestrial planet to be on. no planet == no planetary destinations. major planets only
 	var/space_destinations = list("a dockyard", "a station", "a vessel", "a waystation", "a satellite", "a spaceport", "an anomaly", "a habitat", "an outpost", "a facility", "a derelict", "a wreck", "a Skathari hotspot") // should be just fine for most systems, some might want individual entries culled from the autogen
-	var/planetary_destinations = list("a colony", "a dome", "an outpost", "a city", "a facility", "a ruin") //likewise
+	var/planetary_destinations = list("a space colony", "a space dome", "a space outpost", "a space city", "a space facility", "a space ruin") //likewise
 	var/locations = list() // locations within the system. list of strings for now, might involve fancier logic later
 
 /datum/lore/system/New()
@@ -113,22 +113,19 @@
 	name = "Vir"
 	desc = "You Are Here. A crossroads system with a tendency towards sleepy isolation."
 	autogenerate_destinations = FALSE
-	planets = list("Sif")
+	planets = list("Space")
 	locations = list(
-		new /datum/lore/location("New Rekjavik", list(ATC_ALL_CIV)), //sivian locations don't need 'on sif' and virite locations dont need 'in vir'-- theyre local
-		new /datum/lore/location("Kalmar", list(ATC_ALL_CIV)),
-		new /datum/lore/location("Ekmanshalvo", list(ATC_ALL_CIV)),
-		new /datum/lore/location("a settlement on the Thorvaldsson Plains", list(ATC_TYPICAL)), //padding
-		new /datum/lore/location("a mining outpost in the Dauthabrekka Mountains", list(ATC_TYPICAL)),
-		new /datum/lore/location("a corporate facility in Stockholm-Skargard", list(ATC_TYPICAL, ATC_SCI)),
-		new /datum/lore/location("a site in the Ullran Expanse", list(ATC_MED, ATC_DEF, ATC_INDU)),
-		new /datum/lore/location("a location in the Anomalous Region", list(ATC_SCI)),
+		new /datum/lore/location("New Spacejavik", list(ATC_ALL_CIV)), //sivian locations don't need 'on sif' and virite locations dont need 'in vir'-- theyre local
+		new /datum/lore/location("Kalmspace", list(ATC_ALL_CIV)),
+		new /datum/lore/location("Ekmansspacevo", list(ATC_ALL_CIV)),
+		new /datum/lore/location("a settlement in Space", list(ATC_TYPICAL)), //padding
+		new /datum/lore/location("a mining outpost in the Dauthabrekka Asteroids", list(ATC_TYPICAL)),
+		new /datum/lore/location("a corporate facility in Spaceholm-Skargard", list(ATC_TYPICAL, ATC_SCI)),
+		new /datum/lore/location("a site in the Ullran Expanse (of space)", list(ATC_MED, ATC_DEF, ATC_INDU)),
+		new /datum/lore/location("a space location in the Anomalous Region", list(ATC_SCI)),
 		new /datum/lore/location("the NLS Southern Cross", list(ATC_DEF, ATC_INDU)),
 		new /datum/lore/location("the NCS Northern Star", list(ATC_TYPICAL, ATC_SCI)),
 		new /datum/lore/location("Vir Interstellar Spaceport", list(ATC_TYPICAL)),
-		new /datum/lore/location("Firnir", list(ATC_TYPICAL)),
-		new /datum/lore/location("Tyr", list(ATC_TYPICAL)),
-		new /datum/lore/location("Magnai", list(ATC_TYPICAL)),
 		new /datum/lore/location("the rings of Kara", list(ATC_LUX)),
 		new /datum/lore/location("the rings of Rota", list(ATC_LUX)),
 		new /datum/lore/location("the Radiance Energy Chain", list(ATC_FREIGHT, ATC_DEF, ATC_INDU)),

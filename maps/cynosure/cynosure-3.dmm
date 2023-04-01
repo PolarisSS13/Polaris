@@ -12370,7 +12370,7 @@
 /obj/structure/table/rack,
 /obj/item/flashlight/lantern,
 /obj/item/gps{
-	gps_tag = "Sif Free Radio"
+	gps_tag = "Space Free Radio"
 	},
 /turf/simulated/floor,
 /area/surface/outside/plains/station/snd)
@@ -24193,7 +24193,7 @@
 	equipment = 1;
 	lighting = 1;
 	locked = 0;
-	name = "Sif Free Radio APC";
+	name = "Space Free Radio APC";
 	operating = 0;
 	pixel_x = 24
 	},

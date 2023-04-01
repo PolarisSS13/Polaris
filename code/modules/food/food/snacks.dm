@@ -380,7 +380,7 @@
 /obj/item/reagent_containers/food/snacks/donut
 	name = "donut"
 	desc = "Goes great with Robust Coffee."
-	description_fluff = "These donuts claim to be made fresh daily in a boutique bakery in New Reykjavik and delivered to Nanotrasen's hardworking asset protection crew. They're probably synthesized."
+	description_fluff = "These donuts claim to be made fresh daily in a boutique bakery in New Spacejavik and delivered to Nanotrasen's hardworking asset protection crew. They're probably synthesized."
 	icon = 'icons/obj/food_donuts.dmi'
 	icon_state = "donut"
 	filling_color = "#D9C386"

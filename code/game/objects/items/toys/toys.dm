@@ -696,8 +696,8 @@
 	toysay = "I joined just to kill people!"
 
 /obj/item/toy/figure/vir_patrolman
-	name = "SifGuard patrolman figurine"
-	desc = "A figurine depicting a sharply dressed SifGuard law enforcement patrolman with the acronym 'VGA' on their left shoulder and cap. Apparently produced by Hedberg-Hammarstrom."
+	name = "SpaceGuard patrolman figurine"
+	desc = "A figurine depicting a sharply dressed SpaceGuard law enforcement patrolman with the acronym 'VGA' on their left shoulder and cap. Apparently produced by Hedberg-Hammarstrom."
 	icon_state = "vir_patrolman"
 	toysay = "Trust in us to keep your family safe!"
 

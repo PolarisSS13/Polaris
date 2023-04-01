@@ -21,7 +21,7 @@
 	data = "Vir is an A-type main sequence star with 81% more mass than Sol (the humans' home star), and almost nine times as bright.  It \
 	has a white glow, and a diameter that is about 34% larger than Sol. It has six major planets in its orbit.\
 	<br><br>\
-	Vir is mainly administered on [quick_link("Sif")] by the [quick_link("Vir Governmental Authority")], as Sif \
+	Vir is mainly administered by the [quick_link("Vir Governmental Authority")], in Space. \
 	was the first planet to be colonized, however VGA lays claim to all planets orbiting Vir.  The planets \
 	are named after figures in ancient human mythology (Norse), due to the original surveyor for the system deciding to do so. \
 	Some installations carry on this tradition."
@@ -65,15 +65,7 @@
 /datum/lore/codex/page/sif/add_content()
 	name = "Sif (Terrestrial Planet)"
 	keywords += list("Sif")
-	data = "Sif is a terrestrial planet and third closest planet to Vir. It possesses oceans, a breathable atmosphere, \
-	a magnetic field, weather, and acceptable gravity. It is currently the capital planet of Vir. Its center of government is the \
-	equatorial city and site of the first settlement, New Reykjavik, which houses the [quick_link("Vir Governmental Authority")].\
-	<br><br>\
-	Sif has many desirable traits which made it the first planet to be colonized in Vir, however it also has various quirks which \
-	may disorient humans used to conditions on planet Earth.  Atmospheric pressure is lower than 'normal', which may cause difficulty \
-	breathing if you are used to climate controlled artifical habitats or higher pressure planets.  The gravity is also slightly lower, at \
-	only 90% the strength of planet Earth's gravity. You may need to keep two clocks if you plan to visit \
-	or live on Sif, as the planet takes over 32 hours to complete one day.  A Sif year also takes just under five Earth years."
+	data = "Never existed, did you mean: Space?"
 
 /datum/lore/codex/page/vir_interstellar_spaceport/add_content()
 	name = "Vir Interstellar Spaceport (Artificial Satellite)"
