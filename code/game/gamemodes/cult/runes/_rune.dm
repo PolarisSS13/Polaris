@@ -151,19 +151,22 @@
 
 /obj/effect/rune/mapgen/Initialize()
 	. = ..()
-	START_PROCESSING(SSfastprocess, src)
+	// Doing this pre-roundstart will cause runtimes because Initialize is called before the antagonist subsystem sets up
+	// For pre-generated mapgen runes, they set up their appearance at roundstart via a proc in `/hook/roundstart`,
+	// which ensures that the appearance only generates once the word list is populated
+	if (ticker.HasRoundStarted())
+		generate_words()
 
-/obj/effect/rune/mapgen/Destroy()
-	STOP_PROCESSING(SSfastprocess, src)
-	return ..()
-
-// This is a very janky way to circumvent the fact that the antag subsystem initializes after the mapping subsystem
-// By running this in process(), we ensure that it happens only once the round has started, which makes sure that the word list is always populated
-/obj/effect/rune/mapgen/process()
+/// Composes this rune out of three random cult words.
+/obj/effect/rune/mapgen/proc/generate_words()
 	var/list/words = cult.english_words.Copy()
 	for (var/i in 1 to 3)
 		var/word = pick(words)
 		circle_words.Add(word)
 		words.Remove(word)
 	update_icon()
-	STOP_PROCESSING(SSfastprocess, src)
+
+/// Sets up the appearance of all random runes at mapgen. Called here instead of `Initialize()` to avoid runtimes.
+/hook/roundstart/proc/populate_malformed_runes()
+	for (var/obj/effect/rune/mapgen/M in cult.all_runes)
+		M.generate_words()
