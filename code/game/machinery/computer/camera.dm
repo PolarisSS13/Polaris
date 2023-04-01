@@ -103,6 +103,15 @@
 	light_color = "#3848B3"
 	light_power_on = 0.5
 
+/obj/machinery/computer/security/bar
+	name = "bar camera monitor"
+	desc = "Used to watch over bar functions."
+	icon_keyboard = "mining_key"
+	icon_screen = "mining"
+	network = list(NETWORK_BAR)
+	circuit = /obj/item/circuitboard/security/bar
+	light_color = "#F9BBFC" //Lonestar Ed.
+
 /obj/machinery/computer/security/mining
 	name = "outpost camera monitor"
 	desc = "Used to watch over mining operations."

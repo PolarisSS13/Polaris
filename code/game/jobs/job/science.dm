@@ -1,27 +1,69 @@
 //////////////////////////////////
-//		Research Director
+//		Ranch Overseer
 //////////////////////////////////
-/datum/job/rd
-	title = "Research Director"
-	flag = RD
-	departments_managed = list(DEPARTMENT_RESEARCH)
-	departments = list(DEPARTMENT_RESEARCH, DEPARTMENT_COMMAND)
+/datum/job/ranch_head
+	title = "Ranch Overseer"
+	flag = RANCH_HEAD
+	departments_managed = list(DEPARTMENT_RANCH)
+	departments = list(DEPARTMENT_RANCH, DEPARTMENT_COMMAND)
 	sorting_order = 2
 	department_flag = MEDSCI
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Site Manager"
+	supervisors = "the Baron, Steward and Lonestar Regulation"
+	selection_color = "#633D63"
+	req_admin_notify = 1
+	economic_modifier = 15
+	access = list(access_rd, access_heads, access_tox, access_genetics,
+			            access_tox_storage, access_maint_tunnels, access_research,
+			            access_xenobiology, access_RC_announce, access_network)
+	minimal_access = list(access_rd, access_heads, access_tox, access_genetics,
+			            access_tox_storage, access_research,
+			            access_xenobiology, access_RC_announce, access_network)
+
+	minimum_character_age = 25
+	minimal_player_age = 14
+	min_age_by_species = list(SPECIES_UNATHI = 70, "mechanical" = 10, SPECIES_HUMAN_VATBORN = 14)
+	ideal_character_age = 50
+	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
+	banned_job_species = list(SPECIES_VOX, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
+
+
+	outfit_type = /decl/hierarchy/outfit/job/science/ranch_head
+	job_description = "The Ranch Overseer manages and maintains the Ranch. These experienced farmers are present to guide their staff as they grow crops \
+						and tend livestock, as well as to inform the crew of any disruptions that might originate from the Ranch. An Overseer should have \
+						a good awareness of both the needs of crewmembers and the most profitable exports."
+	alt_titles = list("Ranch Supervisor" = /datum/alt_title/ranch_supervisor)
+
+// Ranch Overseer Alt Titles
+/datum/alt_title/ranch_supervisor
+	title = "Ranch Supervisor"
+
+//////////////////////////////////
+//			Head Mechanic
+//////////////////////////////////
+/datum/job/garage_head
+	title = "Head Mechanic"
+	flag = GARAGE_HEAD
+	departments_managed = list(DEPARTMENT_GARAGE)
+	departments = list(DEPARTMENT_GARAGE, DEPARTMENT_COMMAND)
+	sorting_order = 2
+	department_flag = MEDSCI
+	faction = "Station"
+	total_positions = 1
+	spawn_positions = 1
+	supervisors = "the Baron, Steward and Lonestar Regulation"
 	selection_color = "#AD6BAD"
 	req_admin_notify = 1
 	economic_modifier = 15
-	access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
-			            access_tox_storage, access_teleporter, access_sec_doors,
-			            access_research, access_robotics, access_xenobiology, access_xenofauna, access_ai_upload, access_tech_storage,
+	access = list(access_rd, access_heads, access_tox, access_morgue, access_maint_tunnels,
+			            access_tox_storage, access_teleporter,
+			            access_research, access_robotics, access_ai_upload, access_tech_storage,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
-	minimal_access = list(access_rd, access_heads, access_tox, access_genetics, access_morgue,
-			            access_tox_storage, access_teleporter, access_sec_doors,
-			            access_research, access_robotics, access_xenobiology, access_xenofauna, access_ai_upload, access_tech_storage,
+	minimal_access = list(access_rd, access_heads, access_tox, access_morgue,
+			            access_tox_storage, access_teleporter,
+			            access_research, access_robotics, access_ai_upload, access_tech_storage,
 			            access_RC_announce, access_keycard_auth, access_tcomsat, access_gateway, access_xenoarch, access_network)
 
 	minimum_character_age = 25
@@ -31,43 +73,13 @@
 	ideal_age_by_species = list(SPECIES_UNATHI = 140, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
 	banned_job_species = list(SPECIES_VOX, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, "digital")
 
-	outfit_type = /decl/hierarchy/outfit/job/science/rd
-	job_description = "The Research Director manages and maintains the Research department. They are required to ensure the safety of the entire crew, \
-						at least with regards to anything occuring in the Research department, and to inform the crew of any disruptions that \
-						might originate from Research. The Research Director often has at least passing knowledge of most of the Research department, but \
-						are encouraged to allow their staff to perform their own duties."
-	alt_titles = list("Research Supervisor" = /datum/alt_title/research_supervisor)
 
+	outfit_type = /decl/hierarchy/outfit/job/science/head_mechanic
+	job_description = "The Head Mechanic manages and maintains the Garage. They are in charge of the approval process of their department's production, \
+						and should keep their staff focused on the needs of the station or the relevant current exports. Though they should delegate tasks  \
+						to their staff, the Head Mechanic is expected to know a good deal about mechanical prosthetic, hard suit and vehicle construction."
 
-// Research Director Alt Titles
-/datum/alt_title/research_supervisor
-	title = "Research Supervisor"
-
-//////////////////////////////////
-//			Scientist
-//////////////////////////////////
-/datum/job/scientist
-	title = "Scientist"
-	flag = SCIENTIST
-	departments = list(DEPARTMENT_RESEARCH)
-	department_flag = MEDSCI
-	faction = "Station"
-	total_positions = 5
-	spawn_positions = 3
-	supervisors = "the Research Director"
-	selection_color = "#633D63"
-	economic_modifier = 7
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenofauna, access_xenoarch)
-	minimal_access = list(access_tox, access_tox_storage, access_research, access_xenoarch)
-	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
-	banned_job_species = list(SPECIES_VOX, "digital")
-
-	minimal_player_age = 14
-
-	outfit_type = /decl/hierarchy/outfit/job/science/scientist
-	job_description = "A Scientist is a generalist working in the Research department, with general knowledge of the scientific process, as well as \
-						the principles and requirements of Research and Development. They may also formulate experiments of their own devising, if \
-						they find an appropriate topic."
+/*
 	alt_titles = list("Xenoarchaeologist" = /datum/alt_title/xenoarch, "Anomalist" = /datum/alt_title/anomalist, \
 						"Phoron Researcher" = /datum/alt_title/phoron_research)
 
@@ -87,79 +99,73 @@
 	title_blurb = "A Phoron Researcher is a specialist in the practical applications of phoron, and has knowledge of its practical uses and dangers. \
 					Many Phoron Researchers are interested in the combustability and explosive properties of gaseous phoron, as well as the specific hazards \
 					of working with the substance in that state."
+*/
 
 //////////////////////////////////
 //			Xenobiologist
 //////////////////////////////////
 /datum/job/xenobiologist
-	title = "Xenobiologist"
+	title = "Ranch Hand"
 	flag = XENOBIOLOGIST
-	departments = list(DEPARTMENT_RESEARCH)
+	departments = list(DEPARTMENT_RANCH)
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 3
+	total_positions = 4
 	spawn_positions = 2
-	supervisors = "the Research Director"
+	supervisors = "the Ranch Overseer"
 	selection_color = "#633D63"
-	economic_modifier = 7
-	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_xenofauna, access_hydroponics)
-	minimal_access = list(access_research, access_xenobiology, access_xenofauna, access_hydroponics, access_tox_storage)
-	banned_job_species = list(SPECIES_VOX, "digital")
+	economic_modifier = 5
+	access = list(access_robotics, access_tox, access_tox_storage, access_research, access_xenobiology, access_hydroponics)
+	minimal_access = list(access_research, access_xenobiology, access_hydroponics, access_tox_storage)
 
-	minimal_player_age = 14
-	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
+	minimal_player_age = 7
 
-	outfit_type = /decl/hierarchy/outfit/job/science/xenobiologist
-	job_description = "A Xenobiologist studies esoteric lifeforms, usually in the relative safety of their lab. They attempt to find ways to benefit \
-						from the byproducts of these lifeforms, and their main subject at present is the Giant Slime."
-	alt_titles = list(
-		"Xenobotanist" = /datum/alt_title/xenobot,
-		"Xenofauna Technician" = /datum/alt_title/xenovet
-	)
+	outfit_type = /decl/hierarchy/outfit/job/science/ranch_hand
+	job_description = "A Ranch Hand works to grow and cultivate Lonestar's various GMOs. They should always be wary of the side effects their work has, as well \
+						as well as how to mitigate those effects while they work. A good knowledge of the needs of the crew is also encouraged, as the Ranch is \
+						the main food source for the facility."
+
+
+	alt_titles = list("Xenobotanist" = /datum/alt_title/xenobot, "Biologist" = /datum/alt_title/biologist, \
+						"Genetic Researcher" = /datum/alt_title/genetic_research)
 
 // Xenibiologist Alt Titles
 /datum/alt_title/xenobot
 	title = "Xenobotanist"
-	title_blurb = "A Xenobotanist grows and cares for a variety of abnormal, custom made, and frequently dangerous plant life. When the products of these plants \
-					is both safe and beneficial to the station, they may choose to introduce it to the rest of the crew."
 
-/datum/alt_title/xenovet
-	title = "Xenofauna Technician"
-	title_blurb = "A Xenofauna Technician works with the alien fauna living in the territory around the station, heading out in the field to tag and assess the \
-					local animal populations. They are also responsible for training and tending to the station's small drake population."
+/datum/alt_title/biologist
+	title = "Biologist"
+
+/datum/alt_title/genetic_research
+	title = "Genetic Researcher"
 
 //////////////////////////////////
 //			Roboticist
 //////////////////////////////////
 /datum/job/roboticist
-	title = "Roboticist"
+	title = "Mechanic"
 	flag = ROBOTICIST
-	departments = list(DEPARTMENT_RESEARCH)
+	departments = list(DEPARTMENT_GARAGE)
 	department_flag = MEDSCI
 	faction = "Station"
-	total_positions = 2
+	total_positions = 4
 	spawn_positions = 2
-	supervisors = "the Research Director"
-	selection_color = "#633D63"
+	supervisors = "the Head Mechanic"
+	selection_color = "#AD6BAD"
 	economic_modifier = 5
 	access = list(access_robotics, access_tox, access_tox_storage, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_access = list(access_robotics, access_tech_storage, access_morgue, access_research) //As a job that handles so many corpses, it makes sense for them to have morgue access.
 	minimal_player_age = 7
-	min_age_by_species = list(SPECIES_PROMETHEAN = 2)
-	banned_job_species = list(SPECIES_VOX, "digital")
 
-	outfit_type = /decl/hierarchy/outfit/job/science/roboticist
-	job_description = "A Roboticist maintains and repairs the station's synthetics, including crew with prosthetic limbs. \
+	outfit_type = /decl/hierarchy/outfit/job/science/mechanic
+	job_description = "A Mechanic maintains and repairs the station's synthetics, including crew with prosthetic limbs. \
 						They can also assist the station by producing simple robots and even pilotable exosuits."
+
 	alt_titles = list("Biomechanical Engineer" = /datum/alt_title/biomech, "Mechatronic Engineer" = /datum/alt_title/mech_tech)
 
 // Roboticist Alt Titles
 /datum/alt_title/biomech
 	title = "Biomechanical Engineer"
-	title_blurb = "A Biomechanical Engineer primarily works on prosthetics, and the organic parts attached to them. They may have some \
-					knowledge of the relatively simple surgical procedures used in making cyborgs and attaching prosthesis."
 
 /datum/alt_title/mech_tech
 	title = "Mechatronic Engineer"
-	title_blurb = "A Mechatronic Engineer focuses on the construction and maintenance of Exosuits, and should be well versed in their use. \
-					They may also be called upon to work on synthetics and prosthetics, if needed."

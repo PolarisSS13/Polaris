@@ -1,11 +1,11 @@
-var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
+var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 //////////////////////////////////
 //			Captain
 //////////////////////////////////
 
 /datum/job/captain
-	title = "Site Manager"
+	title = "Steward"
 	flag = CAPTAIN
 	departments = list(DEPARTMENT_COMMAND)
 	sorting_order = 3 // Above everyone.
@@ -14,7 +14,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "company officials and Corporate Regulations"
+	supervisors = "The Baron, the Governor and Lonestar Regulations"
 	selection_color = "#2F2F7F"
 	req_admin_notify = 1
 	access = list() 			//See get_access()
@@ -29,11 +29,10 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	banned_job_species = list(SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, SPECIES_VOX, "mechanical", "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/captain
-	job_description = "The Site Manager manages the other Command Staff, and through them the rest of the station. Though they have access to everything, \
-						they do not understand everything, and are expected to delegate tasks to the appropriate crew member. The Site Manager is expected to \
-						have an understanding of Standard Operating Procedure, and is subject to it, and legal action, in the same way as every other crew member."
-	alt_titles = list("Overseer"= /datum/alt_title/overseer)
-
+	job_description = "The Steward stands in for the Baron when he is not present, taking on their tasks for the station. They have access to everything, \
+						but they are expected to delegate jobs to the appropriate crew member if able. The Steward is expected to have a decent understanding \
+						of Lonestar Standard Operating Procedure, and is subject to it. Remember, you are an asset to Lonestar and can be replaced."
+//	alt_titles = list("Overseer"= /datum/alt_title/overseer)
 
 /*
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
@@ -47,8 +46,8 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 
 // Captain Alt Titles
-/datum/alt_title/overseer
-	title = "Overseer"
+/datum/alt_title/proxy
+	title = "Proxy"
 
 //////////////////////////////////
 //		Head of Personnel
@@ -56,14 +55,14 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 /datum/job/hop
 	title = "Head of Personnel"
 	flag = HOP
-	departments = list(DEPARTMENT_COMMAND, DEPARTMENT_CIVILIAN)
-	sorting_order = 2 // Above the QM, below captain.
+	departments = list(DEPARTMENT_COMMAND, DEPARTMENT_CIVILIAN, DEPARTMENT_CARGO)
+	sorting_order = 2 // Above the IT, below captain.
 	departments_managed = list(DEPARTMENT_CIVILIAN, DEPARTMENT_CARGO)
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 1
 	spawn_positions = 1
-	supervisors = "the Site Manager"
+	supervisors = "The Steward, the Baron and Lonestar Regulations"
 	selection_color = "#1D1D4F"
 	req_admin_notify = 1
 	minimal_player_age = 10
@@ -75,6 +74,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	ideal_age_by_species = list(SPECIES_UNATHI = 140, SPECIES_TESHARI = 27, "mechanical" = 20, SPECIES_HUMAN_VATBORN = 20)
 	banned_job_species = list(SPECIES_PROMETHEAN, SPECIES_ZADDAT, SPECIES_VOX, "digital", SPECIES_DIONA)
 
+
 	outfit_type = /decl/hierarchy/outfit/job/hop
 	job_description = "The Head of Personnel manages the Service department, the Exploration team, and most other civilians. They also \
 						manage the Supply department, through the Quartermaster. In addition, the Head of Personnel oversees the personal accounts \
@@ -83,16 +83,16 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 
 	access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
-			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_pest, access_morgue,
 			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
 			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
-			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+			            access_hop, access_RC_announce, access_keycard_auth, access_gateway, access_operations)
 	minimal_access = list(access_security, access_sec_doors, access_brig, access_forensics_lockers,
 			            access_medical, access_engine, access_change_ids, access_ai_upload, access_eva, access_heads,
-			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_construction, access_morgue,
+			            access_all_personal_lockers, access_maint_tunnels, access_bar, access_janitor, access_pest, access_morgue,
 			            access_crematorium, access_kitchen, access_cargo, access_cargo_bot, access_mailsorting, access_qm, access_hydroponics, access_lawyer,
 			            access_chapel_office, access_library, access_research, access_mining, access_heads_vault, access_mining_station,
-			            access_hop, access_RC_announce, access_keycard_auth, access_gateway)
+			            access_hop, access_RC_announce, access_keycard_auth, access_gateway, access_operations)
 
 // HOP Alt Titles
 /datum/alt_title/cro
@@ -117,7 +117,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	economic_modifier = 7
 
 	access = list(access_heads, access_keycard_auth)
-	minimal_access = list(access_heads, access_keycard_auth)
+	minimal_access = list(access_maint_tunnels, access_heads, access_keycard_auth)
 
 	outfit_type = /decl/hierarchy/outfit/job/secretary
 	job_description = "A Command Secretary handles paperwork duty for the Heads of Staff, so they can better focus on managing their departments. \

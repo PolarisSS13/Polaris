@@ -37,9 +37,15 @@
 	color = "#006600"
 	sorting_order = 4
 
-/datum/department/research
-	name = DEPARTMENT_RESEARCH
-	short_name = "Sci"
+/datum/department/garage
+	name = DEPARTMENT_GARAGE
+	short_name = "Grg"
+	color = "#A65BA6"
+	sorting_order = 4
+
+/datum/department/ranch
+	name = DEPARTMENT_RANCH
+	short_name = "Rch"
 	color = "#A65BA6"
 	sorting_order = 3
 
