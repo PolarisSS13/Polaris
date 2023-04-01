@@ -17,6 +17,11 @@
 	name = T_BOARD("security camera monitor - television")
 	build_path = /obj/machinery/computer/security/wooden_tv
 
+/obj/item/circuitboard/security/bar
+	name = T_BOARD("bar camera monitor")
+	build_path = /obj/machinery/computer/security/bar
+	network = NETWORK_BAR //Lonestar Ed.
+
 /obj/item/circuitboard/security/engineering
 	name = T_BOARD("engineering camera monitor")
 	build_path = /obj/machinery/computer/security/engineering

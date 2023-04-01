@@ -171,7 +171,9 @@
 #define DEPARTMENT_SECURITY			"Security"
 #define DEPARTMENT_ENGINEERING		"Engineering"
 #define DEPARTMENT_MEDICAL			"Medical"
-#define DEPARTMENT_RESEARCH			"Research"
+//#define DEPARTMENT_RESEARCH			"Research"
+#define DEPARTMENT_RANCH			"Ranch"	 //Lonestar Ed. dd
+#define DEPARTMENT_GARAGE			"Garage" //Lonestar Ed.
 #define DEPARTMENT_CARGO			"Cargo"
 #define DEPARTMENT_CIVILIAN			"Civilian"
 #define DEPARTMENT_PLANET			"Planetside" // I hate having this be here and not in a SC file. Hopefully someday the manifest can be rewritten to be map-agnostic.

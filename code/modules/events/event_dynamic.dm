@@ -215,7 +215,7 @@ var/global/list/event_last_fired = list()
 		if(M.mind.assigned_role in SSjob.get_job_titles_in_department(DEPARTMENT_SECURITY))
 			active_with_role["Security"]++
 
-		if(M.mind.assigned_role in SSjob.get_job_titles_in_department(DEPARTMENT_RESEARCH))
+		if(M.mind.assigned_role in SSjob.get_job_titles_in_department(DEPARTMENT_RANCH, DEPARTMENT_GARAGE))
 			active_with_role["Scientist"]++
 
 		if(M.mind.assigned_role == "AI")

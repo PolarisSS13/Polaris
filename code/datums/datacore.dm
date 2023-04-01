@@ -22,7 +22,8 @@
 	var/list/sec = new()
 	var/list/eng = new()
 	var/list/med = new()
-	var/list/sci = new()
+	var/list/rch = new()
+	var/list/grg = new()
 	var/list/car = new()
 	var/list/civ = new()
 	var/list/bot = new()
@@ -72,8 +73,11 @@
 		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_MEDICAL))
 			med[name] = rank
 			department = 1
-		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_RESEARCH))
-			sci[name] = rank
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_RANCH))
+			rch[name] = rank
+			department = 1
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_GARAGE))
+			grg[name] = rank
 			department = 1
 		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_CARGO))
 			car[name] = rank
@@ -132,10 +136,15 @@
 		for(name in med)
 			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[med[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
-	if(sci.len > 0)
-		dat += "<tr><th colspan=3>Science</th></tr>"
-		for(name in sci)
-			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[sci[name]]</td><td>[isactive[name]]</td></tr>"
+	if(rch.len > 0)
+		dat += "<tr><th colspan=3>Ranch</th></tr>"
+		for(name in rch)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[rch[name]]</td><td>[isactive[name]]</td></tr>"
+			even = !even
+	if(grg.len > 0)
+		dat += "<tr><th colspan=3>Garage</th></tr>"
+		for(name in grg)
+			dat += "<tr[even ? " class='alt'" : ""]><td>[name]</td><td>[grg[name]]</td><td>[isactive[name]]</td></tr>"
 			even = !even
 	if(car.len > 0)
 		dat += "<tr><th colspan=3>Cargo</th></tr>"
@@ -187,7 +196,8 @@ var/global/list/PDA_Manifest = list()
 	var/list/sec = list()
 	var/list/eng = list()
 	var/list/med = list()
-	var/list/sci = list()
+	var/list/rch = list()
+	var/list/grg = list()
 	var/list/car = list()
 	var/list/pla = list() // Planetside crew: Explorers, Pilots, S&S
 	var/list/civ = list()
@@ -226,11 +236,17 @@ var/global/list/PDA_Manifest = list()
 			if(depthead && med.len != 1)
 				med.Swap(1,med.len)
 
-		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_RESEARCH))
-			sci[++sci.len] = list("name" = name, "rank" = rank, "active" = isactive)
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_RANCH))
+			rch[++rch.len] = list("name" = name, "rank" = rank, "active" = isactive)
 			department = 1
-			if(depthead && sci.len != 1)
-				sci.Swap(1,sci.len)
+			if(depthead && rch.len != 1)
+				rch.Swap(1,rch.len)
+
+		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_GARAGE))
+			grg[++grg.len] = list("name" = name, "rank" = rank, "active" = isactive)
+			department = 1
+			if(depthead && grg.len != 1)
+				grg.Swap(1,grg.len)
 
 		if(SSjob.is_job_in_department(real_rank, DEPARTMENT_PLANET))
 			pla[++pla.len] = list("name" = name, "rank" = rank, "active" = isactive)
@@ -273,7 +289,8 @@ var/global/list/PDA_Manifest = list()
 		list("cat" = "Security", "elems" = sec),
 		list("cat" = "Engineering", "elems" = eng),
 		list("cat" = "Medical", "elems" = med),
-		list("cat" = "Science", "elems" = sci),
+		list("cat" = "Ranch", "elems" = rch),
+		list("cat" = "Garage", "elems" = grg),
 		list("cat" = "Cargo", "elems" = car),
 		list("cat" = "Planetside", "elems" = pla),
 		list("cat" = "Civilian", "elems" = civ),

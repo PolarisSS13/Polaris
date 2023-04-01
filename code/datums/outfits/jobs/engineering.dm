@@ -1,6 +1,5 @@
 /decl/hierarchy/outfit/job/engineering
 	hierarchy_type = /decl/hierarchy/outfit/job/engineering
-	belt = /obj/item/storage/belt/utility/full/multitool
 	l_ear = /obj/item/radio/headset/headset_eng
 	shoes = /obj/item/clothing/shoes/boots/workboots
 	r_pocket = /obj/item/t_scanner
@@ -13,7 +12,7 @@
 /decl/hierarchy/outfit/job/engineering/chief_engineer
 	name = OUTFIT_JOB_NAME("Chief engineer")
 	head = /obj/item/clothing/head/hardhat/white
-	uniform = /obj/item/clothing/under/rank/chief_engineer{ starting_accessories=list(/obj/item/clothing/accessory/storage/overalls/chief) }
+	uniform = /obj/item/clothing/under/rank/chief_engineer
 	l_ear = /obj/item/radio/headset/heads/ce
 	gloves = /obj/item/clothing/gloves/black
 	id_type = /obj/item/card/id/engineering/head
@@ -23,7 +22,7 @@
 	name = OUTFIT_JOB_NAME("Engineer")
 	head = /obj/item/clothing/head/hardhat
 	uniform = /obj/item/clothing/under/rank/engineer
-	suit = /obj/item/clothing/suit/storage/hazardvest
+	belt = /obj/item/storage/belt/utility/full
 	id_type = /obj/item/card/id/engineering
 	pda_type = /obj/item/pda/engineering
 
@@ -31,7 +30,13 @@
 	name = OUTFIT_JOB_NAME("Atmospheric technician")
 	uniform = /obj/item/clothing/under/rank/atmospheric_technician
 	head = /obj/item/clothing/head/hardhat/dblue
-	suit = /obj/item/clothing/suit/storage/hazardvest/blue
 	belt = /obj/item/storage/belt/utility/atmostech
-	id_type = /obj/item/card/id/engineering/atmos
+	id_type = /obj/item/card/id/engineering
 	pda_type = /obj/item/pda/atmos
+
+/decl/hierarchy/outfit/job/engineering/pest
+	name = OUTFIT_JOB_NAME("Pest Control")
+	uniform = /obj/item/clothing/under/hazard
+	head = /obj/item/clothing/head/hardhat/orange
+	id_type = /obj/item/card/id/engineering
+	pda_type = /obj/item/pda/cargo

@@ -417,6 +417,12 @@
 	department_open_powered = 'sound/machines/door/eng1o.ogg'
 	department_close_powered = 'sound/machines/door/eng1c.ogg'
 
+/obj/machinery/door/airlock/wood //Lonestar Ed.
+	name = "Wood Airlock"
+	icon = 'icons/obj/doors/Doorwood.dmi'
+	maxhealth = 300
+	mineral = "wood"
+
 /obj/machinery/door/airlock/gold
 	name = "Gold Airlock"
 	icon = 'icons/obj/doors/Doorgold.dmi'

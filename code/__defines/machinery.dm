@@ -56,11 +56,14 @@ var/global/defer_powernet_rebuild = 0      // True if net rebuild will be called
 #define NETWORK_ENGINEERING_OUTPOST "Engineering Outpost"
 #define NETWORK_ERT "ZeEmergencyResponseTeam"
 #define NETWORK_DEFAULT "Station"
+#define NETWORK_BAR "Saloon" //Lonestar Ed.
 #define NETWORK_MEDICAL "Medical"
 #define NETWORK_MERCENARY "MercurialNet"
 #define NETWORK_MINE "Mining Outpost"
 #define NETWORK_NORTHERN_STAR "Northern Star"
 #define NETWORK_RESEARCH "Research"
+#define NETWORK_RANCH "Food Production Ranch" //Lonestar Ed.
+#define NETWORK_GARAGE "Robotics Garage" //Lonestar Ed.
 #define NETWORK_RESEARCH_OUTPOST "Research Outpost"
 #define NETWORK_ROBOTS "Robots"
 #define NETWORK_PRISON "Prison"
@@ -165,4 +168,4 @@ if (!(DATUM.datum_flags & DF_ISPROCESSING)) {\
 // Computer login types
 #define LOGIN_TYPE_NORMAL 1
 #define LOGIN_TYPE_AI 2
-#define LOGIN_TYPE_ROBOT 3 
+#define LOGIN_TYPE_ROBOT 3

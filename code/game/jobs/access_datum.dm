@@ -262,8 +262,17 @@ var/global/const/access_network = 42
 	desc = "Station Network"
 	region = ACCESS_REGION_RESEARCH
 
-// /var/const/free_access_id = 43
-// /var/const/free_access_id = 44
+/var/const/access_barman = 43
+/datum/access/barman
+	id = access_barman
+	desc = "Bar Manager"
+	region = ACCESS_REGION_GENERAL //Lonestar Ed.
+
+/var/const/access_operations = 44
+/datum/access/operations
+	id = access_operations
+	desc = "Commando"
+	region = ACCESS_REGION_MEDBAY //Lonestar Ed.
 
 var/global/const/access_surgery = 45
 /datum/access/surgery
@@ -271,7 +280,11 @@ var/global/const/access_surgery = 45
 	desc = "Surgery"
 	region = ACCESS_REGION_MEDBAY
 
-// /var/const/free_access_id = 46
+var/global/const/access_pest = 46
+/datum/access/pest
+	id = access_pest
+	desc = "Pest Control"
+	region = ACCESS_REGION_ENGINEERING //Lonestar Ed.
 
 var/global/const/access_research = 47
 /datum/access/research
@@ -316,12 +329,6 @@ var/global/const/access_xenobiology = 55
 /datum/access/xenobiology
 	id = access_xenobiology
 	desc = "Xenobiology Lab"
-	region = ACCESS_REGION_RESEARCH
-
-var/global/const/access_xenofauna = 67
-/datum/access/xenofauna
-	id = access_xenofauna
-	desc = "Xenofauna Lab"
 	region = ACCESS_REGION_RESEARCH
 
 var/global/const/access_ce = 56
@@ -389,6 +396,18 @@ var/global/const/access_medical_equip = 66
 	id = access_medical_equip
 	desc = "Medical Equipment"
 	region = ACCESS_REGION_MEDBAY
+
+/var/const/access_pilot = 67
+/datum/access/pilot
+	id = access_pilot
+	desc = "Pilot"
+	region = ACCESS_REGION_SUPPLY //Lonestar Ed.
+
+var/global/const/access_xenofauna = 68
+/datum/access/xenofauna
+	id = access_xenofauna
+	desc = "Xenofauna Lab"
+	region = ACCESS_REGION_RESEARCH
 
 /******************
 * Central Command *
