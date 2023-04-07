@@ -106,6 +106,15 @@
 	icon_living = "koi-swim"
 	icon_dead = "koi-dead"
 
+/mob/living/simple_mob/animal/passive/fish/planetcarp
+	name = "carp"
+	tt_desc = "S Cyprinus purpuracarpio"
+	icon_state = "carp-swim"
+	icon_living = "carp-swim"
+	icon_dead = "carp-dead"
+
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat
+
 /datum/category_item/catalogue/fauna/javelin
 	name = "Sivian Fauna - Javelin Shark"
 	desc = "Classification: S Cetusan minimalix\
