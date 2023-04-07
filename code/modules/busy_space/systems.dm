@@ -4,7 +4,7 @@
 	var/history = "" //unused, but included for parity with /lore/organizations
 	var/autogenerate_destinations = TRUE // should probably be true for most systems, might be false for Sif or weird shit like Isavau's / Terminus / Silk
 	var/planets = list() //planetary destinations will automatically pick an inhabited terrestrial planet to be on. no planet == no planetary destinations. major planets only
-	var/space_destinations = list("a dockyard", "a station", "a vessel", "a waystation", "a satellite", "a spaceport", "an anomaly", "a habitat", "an outpost", "a facility", "a derelict", "a wreck", "a Skathari hotspot") // should be just fine for most systems, some might want individual entries culled from the autogen
+	var/space_destinations = list("a dockyard", "a station", "a vessel", "a waystation", "a satellite", "a spaceport", "an anomaly", "a habitat", "an outpost", "a facility", "a derelict", "a wreck", "a skathari hotspot") // should be just fine for most systems, some might want individual entries culled from the autogen
 	var/planetary_destinations = list("a colony", "a dome", "an outpost", "a city", "a facility", "a ruin") //likewise
 	var/locations = list() // locations within the system. list of strings for now, might involve fancier logic later
 
@@ -80,6 +80,8 @@
 		new /datum/lore/location("a dome on Luna, Sol", list(ATC_ALL_CIV)), //padding -- Luna's kind of a big deal relative to its number of named sites
 		new /datum/lore/location("a city on Luna, Sol", list(ATC_ALL_CIV)),
 		new /datum/lore/location("a Fleet base on Luna, Sol", list(ATC_TRANS, ATC_FREIGHT, ATC_INDU)), //fleet does their own defense and medical
+		new /datum/lore/location("Tycho Fleet Academy, Luna, Sol", list(ATC_TRANS)), //unlike basically every other school this one doesn't really do research
+		new /datum/lore/location("Elysium University, Luna, Sol", list(ATC_SCI)),
 		new /datum/lore/location("the Armstrong Museum and Gift Shop on Luna, Sol", list(ATC_LUX)),
 		new /datum/lore/location("a Second Cold War battlefield on Luna, Sol", list(ATC_LUX)),
 		new /datum/lore/location("Tharsis on Mars, Sol", list(ATC_ALL_CIV)), //more padding
@@ -105,7 +107,7 @@
 		new /datum/lore/location("a detention facility on Io, Jupiter subsystem, Sol", list(ATC_MED, ATC_TRANS)),
 		new /datum/lore/location("Europa, Jupiter subsystem, Sol", list(ATC_ALL_CIV)),
 		new /datum/lore/location("Titania, Uranus subsystem, Sol", list(ATC_TYPICAL)),
-		new /datum/lore/location("Oberon, Uranus subsystem, Sol", list(ATC_TYPICAL, ATC_SCI)), //there's ancient discord lore that has a school here??
+		new /datum/lore/location("Oberon Institute of Artificial Intelligence, Uranus subsystem, Sol", list(ATC_SCI)),
 		new /datum/lore/location("Neptune, Sol", list(ATC_TYPICAL))
 		)
 
@@ -154,7 +156,7 @@
 		new /datum/lore/location("Elyisum in Heaven, Alpha Centauri", list(ATC_TYPICAL)),
 		new /datum/lore/location("the remains of Ragnarok, Alpha Centauri", list(ATC_INDU, ATC_FREIGHT, ATC_SCI)),
 		new /datum/lore/location("The Rings in Heaven, Alpha Centauri", list(ATC_ALL_CIV)),
-		new /datum/lore/location("The Angelic College at Heaven, Alpha Centauri", list(ATC_SCI))
+		new /datum/lore/location("The Angelic College at Makon, Alpha Centauri", list(ATC_SCI))
 		)
 
 /datum/lore/system/tau_ceti
@@ -292,7 +294,7 @@
 /datum/lore/system/love
 	name = "Love"
 	desc = "Government is basically owned by a bunch of triads. Wellfare's really good though. Home to the ZMR."
-	planets = list("the planet") // ...ok. so. wiki indicates Love has a habitable world. there is no sense at all what it is called. this will generate locations in the form of "a dome on the planet in Love", which is bizzarely circumspect but basically fine. the alternative is giving them only space sites until someone names the planet.
+	planets = list("Love") // ...ok. so. wiki indicates Love has a habitable world. there is no sense at all what it is called. the funny workaround didn't look very good so I'm biting the 'new york, new york' bullet.
 	locations = list(
 		new /datum/lore/location("a 'facility' in Love", list(ATC_ALL_CIV)), //i find this funny but you can nyx it if you want
 		new /datum/lore/location("a pharmacy in Love", list(ATC_ALL_CIV)), // this is probably the more serious version of the above
@@ -442,7 +444,15 @@
 /datum/lore/system/mahimahi
 	name = "Mahi-Mahi"
 	desc = "Primarily an organic agricultural world, the planet is divided into two distinct economic and cultural sectors."
-	planets = list("the planet") //its the same dumb thing as Love
+	planets = list("Mahi-Mahi") //its the same dumb thing as Love
+	locations = list(
+		new /datum/lore/location("Mohomoorea, Mahi-Mahi", list(ATC_TYPICAL)), //hot fresh lore off the presses
+		new /datum/lore/location("Sombreciel, Mahi-Mahi", list(ATC_TYPICAL)),
+		new /datum/lore/location("Lahaina, Mahi-Mahi", list(ATC_ALL_CIV, ATC_DIPLO)),
+		new /datum/lore/location("Maramahou, Mahi-Mahi", list(ATC_ALL_CIV, ATC_DIPLO)),
+		new /datum/lore/location("Whiro, Mahi-Mahi", list(ATC_ALL_CIV, ATC_DIPLO))
+		)
+
 
 //human independents
 /datum/lore/system/natuna
@@ -501,7 +511,8 @@
 		new /datum/lore/location("a farm on Malthus, Ricardo subsystem, Eutopia", list(ATC_TYPICAL)),
 		new /datum/lore/location("a plastics plant on Malthus, Ricardo subsystem, Eutopia", list(ATC_TYPICAL)),
 		new /datum/lore/location("The Halo, Eutopia", list(ATC_INDU, ATC_FREIGHT)),
-		new /datum/lore/location("Kroptkin, Eutopia", list(ATC_TYPICAL, ATC_LUX)), //rich people are weird
+		new /datum/lore/location("The remains of Kroptkin, Eutopia", list(ATC_LUX)), //rich people are weird
+		new /datum/lore/location("Reagan Interstellar Spaceport, Eutopia", list(ATC_TYPICAL, ATC_DIPLO)),
 		new /datum/lore/location("a casino in Eutopia", list(ATC_TYPICAL, ATC_LUX)),
 		new /datum/lore/location("a resort in Eutopia", list(ATC_TYPICAL, ATC_LUX)),
 		new /datum/lore/location("a five-star restaurant in Eutopia", list(ATC_TYPICAL)),
