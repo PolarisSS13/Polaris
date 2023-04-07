@@ -17,6 +17,7 @@
 	armor = list(melee = 0, bullet = 0, laser = 0, energy = 0, bomb = 0, bio = 100, rad = 100)
 	max_pressure_protection = 5   * ONE_ATMOSPHERE // Not very good protection, but if an anomaly starts doing gas stuff you're not screwed
 	min_pressure_protection = 0.4 * ONE_ATMOSPHERE
+	flags_inv = HIDEEARS|BLOCKHEADHAIR
 
 /obj/item/clothing/suit/space/anomaly
 	name = "Excavation suit"
@@ -34,3 +35,4 @@
 	icon_state = "cespace_helmet"
 	item_state = "cespace_helmet"
 	armor = list(melee = 0, bullet = 0, laser = 0,energy = 0, bomb = 0, bio = 100, rad = 100)
+	flags_inv = HIDEEARS|BLOCKHEADHAIR

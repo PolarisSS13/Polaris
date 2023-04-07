@@ -39,17 +39,6 @@
 	flags_inv = BLOCKHAIR
 	siemens_coefficient = 0.6
 
-//how is this a space helmet?
-/obj/item/clothing/head/helmet/space/deathsquad/beret
-	name = "officer's beret"
-	desc = "An armored beret commonly used by special operations officers."
-	icon_state = "beret_badge"
-	item_state_slots = list(slot_r_hand_str = "beret", slot_l_hand_str = "beret")
-	armor = list(melee = 65, bullet = 55, laser = 35,energy = 20, bomb = 30, bio = 30, rad = 30)
-	item_flags = EMPTY_BITFIELD
-	flags_inv = BLOCKHAIR
-	siemens_coefficient = 0.9
-
 //Space santa outfit suit
 /obj/item/clothing/head/helmet/space/santahat
 	name = "Santa's hat"
@@ -74,7 +63,7 @@
 	icon_state = "pirate"
 	armor = list(melee = 60, bullet = 50, laser = 30,energy = 15, bomb = 30, bio = 30, rad = 30)
 	item_flags = EMPTY_BITFIELD
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = 0
 	siemens_coefficient = 0.9
 
