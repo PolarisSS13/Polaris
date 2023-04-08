@@ -126,7 +126,7 @@
 				LAZYDISTINCTADD(yummies, M)
 	if (!LAZYLEN(yummies))
 		return
-	var/atom/yummy = pick(yummies)
+	var/atom/yummy
 	var/closest_distance = get_dist(holder, yummy)
 	for (var/atom/M in yummies) // Find the closest snack!
 		var/dist = get_dist(holder, M)

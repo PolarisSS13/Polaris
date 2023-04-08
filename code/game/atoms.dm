@@ -678,7 +678,7 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 
 /// Checks if slimes will target this atom and move towards it. Defaults to null.
 /atom/proc/is_slime_food()
-	return
+	return FALSE
 
 /// Called when a slime interacts with this atom as determined by `is_slime_food()`.
 /// * `slime` - The slime causing the interaction.
