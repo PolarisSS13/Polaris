@@ -581,7 +581,7 @@
 		user.visible_message(SPAN_NOTICE("[user] starts digging out [src]'s plants..."))
 		to_chat(user, SPAN_NOTICE("You start digging out [src]'s plants..."))
 		playsound(src, O.usesound, 50, 1)
-		if(do_after(user, 40 * O.toolspeed) || (!seed && !weedlevel))
+		if(do_after(user, 40 * O.toolspeed))
 			to_chat(user, SPAN_NOTICE("[user] digs out the plants in [src]!"), SPAN_NOTICE("You dig out all of [src]'s plants!"))
 			if(seed) // Chuck the seed -- it's basically just a forced remove_dead() without the verbosity
 				seed = null
