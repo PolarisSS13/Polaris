@@ -17,6 +17,10 @@
 
 /obj/structure/flora/tree/CanPass(var/atom/movable/mover, var/turf/target)
 	. = ..()
+
+	if(mover.checkpass(PASSTREE))
+		return TRUE
+
 	if(ismecha(mover))
 		var/obj/mecha/Me = mover
 		if(Me.flying)

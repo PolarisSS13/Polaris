@@ -274,14 +274,14 @@ var/global/last_chew = 0
 	target.legcuffed = lcuffs
 	target.update_inv_legcuffed()
 	if(!IS_WALKING(target))
-		target.set_move_intent(/decl/move_intent/walk)
+		target.set_move_intent(target.get_movement_intent_with_flag(MOVEMENT_INTENT_WALKING))
 	return 1
 
 /obj/item/handcuffs/legcuffs/equipped(var/mob/living/user,var/slot)
 	. = ..()
 	if(slot == slot_legcuffed)
 		if(!IS_WALKING(user))
-			user.set_move_intent(/decl/move_intent/walk)
+			user.set_move_intent(user.get_movement_intent_with_flag(MOVEMENT_INTENT_WALKING))
 
 
 /obj/item/handcuffs/legcuffs/bola
@@ -321,5 +321,5 @@ var/global/last_chew = 0
 	target.legcuffed = lcuffs
 	target.update_inv_legcuffed()
 	if(!IS_WALKING(target))
-		target.set_move_intent(/decl/move_intent/walk)
+		target.set_move_intent(target.get_movement_intent_with_flag(MOVEMENT_INTENT_WALKING))
 	return 1

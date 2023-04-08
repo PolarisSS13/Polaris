@@ -1542,10 +1542,11 @@
 //desk toys
 /obj/item/toy/desk
 	name = "desk toy master"
-	desc = "A object that does not exist. Parent Item"
+	desc = "An object that does not exist. Parent Item"
+	description_info = "Alt-click or use in hand to toggle."
 
 	var/on = 0
-	var/activation_sound = 'sound/weapons/empty.ogg'
+	var/activation_sound = 'sound/machines/button1.ogg'
 
 /obj/item/toy/desk/update_icon()
 	if(on)
@@ -1554,6 +1555,12 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/toy/desk/attack_self(mob/user)
+	toggle()
+
+/obj/item/toy/desk/AltClick()
+	toggle()
+
+/obj/item/toy/desk/proc/toggle()
 	on = !on
 	if(on && activation_sound)
 		playsound(src.loc, activation_sound, 15, 1, -3)

@@ -218,8 +218,8 @@
 	desc = "A lollipop stick devoid of pop."
 	icon = 'icons/obj/clothing/masks.dmi'
 	icon_state = "pop-stick"
-	drop_sound = 'sound/items/drop/component.ogg'
-	pickup_sound = 'sound/items/pickup/component.ogg'
+	drop_sound = 'sound/items/drop/card.ogg'
+	pickup_sound = 'sound/items/pickup/card.ogg'
 
 /obj/item/trash/spitwad
 	name = "spit wad"

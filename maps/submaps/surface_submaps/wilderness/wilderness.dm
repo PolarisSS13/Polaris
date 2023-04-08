@@ -348,3 +348,9 @@
 	desc = "Gathering of acolytes gone wrong."
 	mappath = 'maps/submaps/surface_submaps/wilderness/deathden.dmm'
 	cost = 15
+
+/datum/map_template/surface/wilderness/deep/Research
+	name = "Gene Research Lab"
+	desc = "A covert gene research lab guarded by combat drones."
+	mappath = 'maps/submaps/surface_submaps/wilderness/Research1.dmm'
+	cost = 30

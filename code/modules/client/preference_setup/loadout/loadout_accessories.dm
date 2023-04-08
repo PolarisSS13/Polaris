@@ -341,7 +341,7 @@
 /datum/gear/accessory/corpbadge
 	display_name = "investigator holobadge (IAA)"
 	path = /obj/item/clothing/accessory/badge/holo/investigator
-	allowed_roles = list("Internal affairs agent")
+	allowed_roles = list("Internal Affairs Agent")
 
 /datum/gear/accessory/pressbadge
 	display_name = "press pass, corporate"
