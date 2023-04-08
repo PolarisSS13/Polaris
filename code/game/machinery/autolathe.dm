@@ -107,10 +107,10 @@
 				//Make sure it's buildable and list requires resources.
 				for(var/material in R.resources)
 					var/coeff = (R.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
-					var/sheets = round(materials[material]/round(R.resources[material]*coeff))
+					var/sheets = round(materials[material]/(R.resources[material]*coeff))
 					if(isnull(max_sheets) || max_sheets > sheets)
 						max_sheets = sheets
-					if(!isnull(materials[material]) && materials[material] < round(R.resources[material]*coeff))
+					if(sheets < 1)
 						can_make = 0
 					if(!comma)
 						comma = 1

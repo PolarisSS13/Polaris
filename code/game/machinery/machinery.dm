@@ -476,17 +476,14 @@ Class Procs:
 	return
 
 /obj/machinery/proc/eject_materials() //Used for autolathe, protolathe, mechfab, exofab. Stuff that takes materials, basically.
-	if(materials)
-		if(LAZYLEN(materials))
-			for(var/mat in materials)
-				var/datum/material/M = get_material_by_name(mat)
-				if(!istype(M))
-					continue
-				if(materials[mat] == 0) //Maybe don't try and make null mats...
-					continue
-				var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
-				if(materials[mat] >= S.perunit)
-					S.amount = round(materials[mat] / S.perunit)
-				else
-					qdel(S) //Prevents stacks smaller than 1
-		return
+	if(LAZYLEN(materials))
+		for(var/mat in materials)
+			var/datum/material/M = get_material_by_name(mat)
+			if(!istype(M) || materials[mat] == 0)
+				continue
+			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+			if(materials[mat] >= S.perunit)
+				S.amount = round(materials[mat] / S.perunit)
+			else
+				qdel(S) //Prevents stacks smaller than 1
+	return
