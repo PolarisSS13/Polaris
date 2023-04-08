@@ -286,14 +286,12 @@
 		//Check if we still have the materials.
 		var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
 		for(var/material in making.resources)
-			if(!isnull(materials[material]))
-				if(materials[material] < round(making.resources[material] * coeff) * multiplier)
-					return
+			if(isnull(materials[material]) || materials[material] < round(making.resources[material] * coeff) * multiplier)
+				return
 
 		//Consume materials.
 		for(var/material in making.resources)
-			if(!isnull(materials[material]))
-				materials[material] = max(0, materials[material] - round(making.resources[material] * coeff) * multiplier)
+			materials[material] = max(0, materials[material] - round(making.resources[material] * coeff) * multiplier)
 
 		update_icon() // So lid closes
 
