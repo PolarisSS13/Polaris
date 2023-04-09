@@ -127,7 +127,7 @@
 	if (!LAZYLEN(yummies))
 		return
 	var/atom/yummy
-	var/closest_distance = get_dist(holder, yummy)
+	var/closest_distance = INFINITY
 	for (var/atom/M in yummies) // Find the closest snack!
 		var/dist = get_dist(holder, M)
 		if (dist < closest_distance)
