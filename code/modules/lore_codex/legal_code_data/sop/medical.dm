@@ -32,7 +32,7 @@
 	The Chief Medical Officer is fully responsible if they choose to clone a person whom has committed suicide.  \
 	Individuals are also to not be cloned if there is a Do Not Clone (generally referred to as DNC) order in their medical records, \
 	or if the individual has had a DNC order declared against them by the Station Director, Chief Medical Officer, or Head of Security.  \
-	If any of this occurs, procede to Portmortem Storage.\
+	If any of this occurs, proceed to Portmortem Storage.\
 	<br><br>\
 	Some individuals may have special instructions in their Postmortem Instructions, generally found in their medical records.  \
 	Be sure to read them before committing to cloning someone.  In particular, some instructions may express a desire to be placed \
@@ -43,12 +43,12 @@
 	<br><br>\
 	Ensure that all cloning equipment, including the cryogenic tubes, are functional and ready before cloning begins.  Once \
 	this is done, scan the deceased.  Up to three scans are to be made per attempt.  If the deceased suffers Mental Interface Failure, \
-	procede to Postmortem Storage.  Further attempts at resuscitation may be made at later times, at the medical teams' discretion. \
+	proceed to Postmortem Storage.  Further attempts at resuscitation may be made at later times, at the medical teams' discretion. \
 	<br><br>\
-	If the deceased is sufficently scanned, remove their possessions and clothing off of the deceased body, for use by the future new clone.  \
+	If the deceased is sufficiently scanned, remove their possessions and clothing off of the deceased body, for use by the future new clone.  \
 	Move the cadaver into the morgue, as per Postmortem Storage.  Begin the cloning process.  Possessions are to be gathered in a manner that \
 	facilitates transporting them along with the clone.  Upon the cloning process being complete and the new clone being created, the \
-	clone is to be placed inside a croygenic tube as quickly as possible.  Cloning is not a painless experience, and it is best if \
+	clone is to be placed inside a cryogenic tube as quickly as possible.  Cloning is not a painless experience, and it is best if \
 	the patient reawakens inside a functional body.  Once their body is fully functional, dress and process the newly cloned patient, \
 	informing them of any procedures performed on them, including the cloning itself."
 

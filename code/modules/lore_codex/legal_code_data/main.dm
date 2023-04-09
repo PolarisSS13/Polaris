@@ -3,7 +3,7 @@
 	data = "This book is meant to act as a reference for both NanoTrasen regulations, Standard Operating Procedure, and important laws of both \
 	the Vir Governmental Authority and the Solar Confederate Government. The legal interactions between Nanotrasen corporate policy and VGA/SolGov \
 	law can make for some confusing legalese.  This book was written by the Vir division of NanoTrasen in order for employees, visitors, and residents \
-	at NanoTrasen installations such as the Northen Star and the Southen Cross to know what isn't allowed, without needing to be a lawyer to read it.\
+	at NanoTrasen installations such as the Northern Star and the Southern Cross to know what isn't allowed, without needing to be a lawyer to read it.\
 	<br><br>\
 	In this book, there are two different types of rules.  Corporate Regulations, and Laws.  They each cover specific situations, and are both enforced \
 	by the Security team.  Despite this, however, the punishments vary considerably for the two types.  It should also be noted that no one is above \
@@ -27,7 +27,7 @@
 	data = "This book was written and published by NanoTrasen, for use on NanoTrasen installations from within the Vir system."
 
 
-// Special page which will hopefully enforce consistant formatting.
+// Special page which will hopefully enforce consistent formatting.
 /datum/lore/codex/page/law
 	var/definition = null // Short definition of the law violation.
 	var/suggested_punishments = null

@@ -9,7 +9,7 @@
 	var/area/target_area	// Chosen target area
 	var/area/target_turf	// Chosen target turf in target_area
 	var/gas_type			// Chosen gas to release
-	// Exclude these types and sub-types from targeting eligibilty
+	// Exclude these types and sub-types from targeting eligibility
 	var/list/area/excluded = list(
 		/area/shuttle,
 		/area/crew_quarters,

@@ -29,7 +29,7 @@ var/global/list/navbeacons = list()	// no I don't like putting this in, but it w
 	navbeacons += src
 
 // set the transponder codes assoc list from codes_txt
-// DEPRECATED - This is kept only for compatibilty with old map files! Do not use this!
+// DEPRECATED - This is kept only for compatibility with old map files! Do not use this!
 // Instead, you should replace the map instance with one of the appropriate navbeacon subtypes.
 // See the bottom of this file for a list of subtypes, make your own examples if your map needs more
 /obj/machinery/navbeacon/proc/set_codes_from_txt()

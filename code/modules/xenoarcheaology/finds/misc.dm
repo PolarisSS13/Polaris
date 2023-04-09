@@ -10,7 +10,7 @@
 	The crystals themselves are completely inert, suggesting that they do not adjust the climate they \
 	are found in, instead being acted on by their local surroundings at the time of formation. Crystals \
 	retain their characteristics when moved, even to a location with an 'opposite' environment to the one \
-	it was found in, suggesting that locations where clusters are found have had a fairly consistant environment \
+	it was found in, suggesting that locations where clusters are found have had a fairly consistent environment \
 	for a very long time.\
 	<br><br>\
 	Unfortunately, no useful purpose has been found so far for the crystals, beyond being visually pleasing \

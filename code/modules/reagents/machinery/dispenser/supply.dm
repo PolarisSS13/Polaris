@@ -194,7 +194,7 @@ SEC_PACK(calcium,   /obj/item/reagent_containers/chem_disp_cartridge/calcium,   
 // Bar-restricted (alcoholic drinks)
 //      Datum path Contents type                                                      Supply pack name                Container name                      Cost  Container access
 SEC_PACK(beer,     /obj/item/reagent_containers/chem_disp_cartridge/beer,      "Reagent refill - Beer",        "beer reagent cartridge crate",       15, access_bar)
-SEC_PACK(kahlua,   /obj/item/reagent_containers/chem_disp_cartridge/kahlua,    "Reagent refill - Kahlua",      "kahlua reagent cartridge crate",     15, access_bar)
+SEC_PACK(kahlua,   /obj/item/reagent_containers/chem_disp_cartridge/kahlua,    "Reagent refill - Kahlúa",      "Kahlúa reagent cartridge crate",     15, access_bar)
 SEC_PACK(whiskey,  /obj/item/reagent_containers/chem_disp_cartridge/whiskey,   "Reagent refill - Whiskey",     "whiskey reagent cartridge crate",    15, access_bar)
 SEC_PACK(rwine,    /obj/item/reagent_containers/chem_disp_cartridge/redwine,   "Reagent refill - Red Wine",    "red wine reagent cartridge crate",   15, access_bar)
 SEC_PACK(wwine,    /obj/item/reagent_containers/chem_disp_cartridge/whitewine, "Reagent refill - White Wine",  "white wine reagent cartridge crate", 15, access_bar)

@@ -372,7 +372,7 @@
 				<p>
 				<ol>
 					<li>Take a syringe of blood from the body you wish to turn into a Diona.</li>
-					<li>Inject 5 units of blood into the pack of dionaea-replicant seeds.</li>
+					<li>Inject 5 units of blood into the pack of Dionaea-replicant seeds.</li>
 					<li>Plant the seeds.</li>
 					<li>Tend to the plants water and nutrition levels until it is time to harvest the Diona.</li>
 				</ol>
@@ -1016,7 +1016,7 @@
 				Here's a guide for some basic drinks.
 
 				<h3>Black Russian:</h3>
-				Mix vodka and Kahlua into a glass.
+				Mix vodka and Kahlúa into a glass.
 
 				<h3>Cafe Latte:</h3>
 				Mix milk and coffee into a glass.

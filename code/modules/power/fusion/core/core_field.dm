@@ -401,7 +401,7 @@
 	//loop through the reactants in random order
 	var/list/react_pool = dormant_reactant_quantities.Copy()
 
-	//cant have any reactions if there aren't any reactants present
+	//can't have any reactions if there aren't any reactants present
 	if(react_pool.len)
 		//determine a random amount to actually react this cycle, and remove it from the standard pool
 		//this is a hack, and quite nonrealistic :(
@@ -616,8 +616,8 @@
 	return
 
 /obj/effect/fusion_em_field/proc/MRC() //spews electromagnetic pulses in an area around the core.
-	visible_message("<span class='danger'>\The [src] glows an extremely bright pink and flares out of existance!</span>")
-	global_announcer.autosay("Warning! Magnetic Resonance Cascade detected! Brace for electronic system distruption.", "Field Stability Monitor")
+	visible_message("<span class='danger'>\The [src] glows an extremely bright pink and flares out of existence!</span>")
+	global_announcer.autosay("Warning! Magnetic Resonance Cascade detected! Brace for electronic system disruption.", "Field Stability Monitor")
 	set_light(15, 15, "#ff00d8")
 	var/list/things_in_range = range(15, owned_core)
 	var/list/turfs_in_range = list()

@@ -1,5 +1,5 @@
 /obj/structure/salvageable
-	name = "broken macninery"
+	name = "broken machinery"
 	desc = "Broken beyond repair, but looks like you can still salvage something from this if you had a prying implement."
 	icon = 'icons/obj/salvageable.dmi'
 	density = 1
@@ -29,7 +29,7 @@
 			return TRUE
 	return ..()
 
-//Types themself, use them, but not the parent object
+//Types themselves, use them, but not the parent object
 
 /obj/structure/salvageable/machine
 	name = "broken machine"

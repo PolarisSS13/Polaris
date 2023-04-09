@@ -1,4 +1,4 @@
-#define TECHNOMANCER_INSTABILITY_DECAY				0.97	// Multipler for how much instability is lost per Life() tick.
+#define TECHNOMANCER_INSTABILITY_DECAY				0.97	// Multiplier for how much instability is lost per Life() tick.
 // Numbers closer to 1.0 make instability decay slower.  Instability will never decay if it's at 1.0.
 // When set to 0.98, it has a half life of roughly 35 Life() ticks, or 1.1 minutes.
 // For 0.97, it has a half life of about 23 ticks, or 46 seconds.
@@ -16,7 +16,7 @@
 
 // Proc: adjust_instability()
 // Parameters: 0
-// Description: Does nothing, because inheritence.
+// Description: Does nothing, because inheritance.
 /mob/living/proc/adjust_instability(var/amount)
 	instability = between(0, round(instability + amount, TECHNOMANCER_INSTABILITY_PRECISION), 200)
 
@@ -59,7 +59,7 @@
 	instability = between(0, round(instability, TECHNOMANCER_INSTABILITY_PRECISION), 200)
 	last_instability = instability
 
-	//This should cushon against really bad luck.
+	//This should cushion against really bad luck.
 	if(instability && last_instability_event < (world.time - 5 SECONDS) && prob(50))
 		instability_effects()
 
@@ -84,7 +84,7 @@
 */
 // Proc: instability_effects()
 // Parameters: 0
-// Description: Does a variety of bad effects to the entity holding onto the instability, with more severe effects occuring if they have
+// Description: Does a variety of bad effects to the entity holding onto the instability, with more severe effects occurring if they have
 // a lot of instability.
 /mob/living/proc/instability_effects()
 	last_instability_event = world.time

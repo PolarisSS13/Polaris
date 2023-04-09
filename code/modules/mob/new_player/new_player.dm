@@ -148,7 +148,7 @@
 			qdel(mannequin)
 
 			spawning = 1
-			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
+			src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS can't last forever yo
 
 
 			observer.started_as_observer = 1
@@ -477,7 +477,7 @@
 	dat += "<b>Welcome, [name].<br></b>"
 	dat += "Round Duration: [roundduration2text()]<br>"
 
-	if(emergency_shuttle) //In case NanoTrasen decides reposess CentCom's shuttles.
+	if(emergency_shuttle) //In case NanoTrasen decides repossess CentCom's shuttles.
 		if(emergency_shuttle.going_to_centcom()) //Shuttle is going to CentCom, not recalled
 			dat += "<font color='red'><b>The station has been evacuated.</b></font><br>"
 		if(emergency_shuttle.online())
@@ -545,7 +545,7 @@
 	else
 		client.prefs.copy_to(new_character, icon_updates = TRUE)
 
-	src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS cant last forever yo
+	src << sound(null, repeat = 0, wait = 0, volume = 85, channel = 1) // MAD JAMS can't last forever yo
 
 	if(mind)
 		mind.active = 0					//we wish to transfer the key manually

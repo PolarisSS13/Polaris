@@ -383,7 +383,7 @@
 
 	var/path = text2path(token(i))
 	if (path == null)
-		return parse_error("Nonexistant type path: [token(i)]")
+		return parse_error("Nonexistent type path: [token(i)]")
 
 	node += path
 
@@ -397,7 +397,7 @@
 		node += token(i)
 
 	else
-		parse_error("Unknown comparitor [token(i)]")
+		parse_error("Unknown comparator [token(i)]")
 
 	return i + 1
 
@@ -409,7 +409,7 @@
 		node += token(i)
 
 	else
-		parse_error("Unknown comparitor [token(i)]")
+		parse_error("Unknown comparator [token(i)]")
 
 	return i + 1
 

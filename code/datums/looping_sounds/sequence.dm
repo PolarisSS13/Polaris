@@ -60,7 +60,7 @@
 #define MORSE_DASH	"-"
 #define MORSE_BASE_DELAY 1 // If you change this you will also need to change [dot|dash]_soundfile variables.
 
-// This implements an automatic conversion of text (the sequence) into audible morse code.
+// This implements an automatic conversion of text (the sequence) into audible Morse code.
 // This can be useful for flavor purposes. For 'real' usage its suggested to also display the sequence in text form, for the benefit of those without sound.
 /datum/looping_sound/sequence/morse
 	// This is just to pass validation in the base type.
@@ -85,9 +85,9 @@
 	var/spaces_between_words = MORSE_BASE_DELAY * 7	// How many spaces are between different words.
 
 	// Morse Alphabet.
-	// Note that it is case-insensative. 'A' and 'a' will make the same sounds.
+	// Note that it is case-insensitive. 'A' and 'a' will make the same sounds.
 	// Unfortunately there isn't a nice way to implement procedure signs w/o the space inbetween the letters.
-	// Also some of the punctuation isn't super offical/widespread in real life but its the future so *shrug.
+	// Also some of the punctuation isn't super official/widespread in real life but its the future so *shrug.
 	var/static/list/morse_alphabet = list(
 		"A" = list("*", "-"),
 		"B" = list("-", "*", "*", "*"),
@@ -149,14 +149,14 @@
 
 
 /datum/looping_sound/sequence/morse/process_data(letter)
-	letter = uppertext(letter) // Make it case-insensative.
+	letter = uppertext(letter) // Make it case-insensitive.
 
 	// If it's whitespace, treat it as a (Morse) space.
 	if(letter == " ")
 		return spaces_between_words
 
 	if(!(letter in morse_alphabet))
-		CRASH("Encountered invalid character in morse sequence \"[letter]\".")
+		CRASH("Encountered invalid character in Morse sequence \"[letter]\".")
 
 	// So I heard you like sequences...
 	// Play a sequence of sounds while inside the current iteration of the outer sequence.

@@ -4,7 +4,7 @@
 		num_list += text2num(x)
 	return num_list
 
-// Splits the text of a file at seperator and returns them in a list.
+// Splits the text of a file at separator and returns them in a list.
 /proc/file2list(filename, seperator="\n")
 	return splittext(return_file_text(filename),seperator)
 
@@ -87,7 +87,7 @@
 		if (NORTHWEST) return 315
 		if (SOUTHWEST) return 225
 
-// Returns the angle in english
+// Returns the angle in English
 /proc/angle2text(var/degree)
 	return dir2text(angle2dir(degree))
 
@@ -248,7 +248,7 @@
 		return strtype
 	return copytext(strtype, delim_pos)
 
-// Concatenates a list of strings into a single string.  A seperator may optionally be provided.
+// Concatenates a list of strings into a single string.  A separator may optionally be provided.
 /proc/list2text(list/ls, sep)
 	if (ls.len <= 1) // Early-out code for empty or singleton lists.
 		return ls.len ? ls[1] : ""
@@ -333,7 +333,7 @@
 		#undef S4
 		#undef S1
 
-// Converts a string into a list by splitting the string at each delimiter found. (discarding the seperator)
+// Converts a string into a list by splitting the string at each delimiter found. (discarding the separator)
 /proc/text2list(text, delimiter="\n")
 	var/delim_len = length(delimiter)
 	if (delim_len < 1)

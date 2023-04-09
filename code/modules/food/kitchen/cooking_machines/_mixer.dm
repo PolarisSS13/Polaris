@@ -1,7 +1,7 @@
 /*
-The mixer subtype is used for  the candymaker and cereal maker. They are similar to cookers but with a few
+The mixer subtype is used for the candymaker and cereal maker. They are similar to cookers but with a few
 fundamental differences
-1. They have a single container which cant be removed. it will eject multiple contents
+1. They have a single container which can't be removed. it will eject multiple contents
 2. Items can't be added or removed once the process starts
 3. Items are all placed in the same container when added directly
 4. They do combining mode only. And will always combine the entire contents of the container into an output

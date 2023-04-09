@@ -84,7 +84,7 @@ var/global/use_preloader = FALSE
 				if(!key_len)
 					key_len = length(key)
 				else
-					throw EXCEPTION("Inconsistant key length in DMM")
+					throw EXCEPTION("Inconsistent key length in DMM")
 			if(!measureOnly)
 				grid_models[key] = dmmRegex.group[2]
 

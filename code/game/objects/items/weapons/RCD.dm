@@ -179,7 +179,7 @@
 	icon_state = "electric_rcd"
 	var/obj/item/cell/cell = null
 	var/make_cell = TRUE // If false, initialize() won't spawn a cell for this.
-	var/electric_cost_coefficent = 83.33 // Higher numbers make it less efficent. 86.3... means it should matche the standard RCD capacity on a 10k cell.
+	var/electric_cost_coefficent = 83.33 // Higher numbers make it less efficient. 86.3... means it should match the standard RCD capacity on a 10k cell.
 
 /obj/item/rcd/electric/Initialize()
 	if(make_cell)
@@ -242,7 +242,7 @@
 /obj/item/rcd/electric/mounted/borg
 	can_remove_rwalls = TRUE
 	desc = "A device used to rapidly build and deconstruct. It runs directly off of electricity, drawing directly from your cell."
-	electric_cost_coefficent = 41.66 // Twice as efficent, out of pity.
+	electric_cost_coefficent = 41.66 // Twice as efficient, out of pity.
 	toolspeed = 0.5 // Twice as fast, since borg versions typically have this.
 
 /obj/item/rcd/electric/mounted/borg/swarm
@@ -268,7 +268,7 @@
 
 // Infinite use RCD for debugging/adminbuse.
 /obj/item/rcd/debug
-	name = "self-repleshing rapid construction device"
+	name = "self-replenishing rapid construction device"
 	desc = "An RCD that appears to be plated with gold. For some reason it also seems to just \
 	be vastly superior to all other RCDs ever created, possibly due to it being colored gold."
 	icon_state = "debug_rcd"

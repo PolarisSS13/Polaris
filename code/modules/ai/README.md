@@ -11,7 +11,7 @@ When designing a new mob, all that is needed to give a mob an AI is to set
 its 'ai_holder_type' variable to the path of the AI that is desired.
 
 
-## Seperation
+## Separation
 
 In previous iterations of AI systems, the AI is generally written into the mob's code directly,
 which has some advantages, but often makes the code rigid, and also tied the speed of the AI
@@ -24,10 +24,10 @@ which is carried by the mob it controls. This gives some advantages;
 
 	Interfaces allow the base AI code to not need to know what particular mode it's controlling.
 
-	The processing of the AI is independant of the mob's Life() cycle, which allows for a
+	The processing of the AI is independent of the mob's Life() cycle, which allows for a
 	different clock rate.
 
-	Seperating the AI from the mob simplies the mob's code greatly.
+	Separating the AI from the mob simplifies the mob's code greatly.
 
 	It is more logical to think that a mob is the 'body', where as its ai_holder is
 	the 'mind'.
@@ -84,10 +84,10 @@ be too demanding on the CPU to do every half a second, such as
 re/calculating an A* path (if the mob uses A*), or running a complicated
 tension assessment to determine how brave the mob is feeling. This is the
 same delay used for certain tasks in the old implementation, but it is less
-noticable due to the mob appearing to do things inbetween those two seconds.
+noticeable due to the mob appearing to do things inbetween those two seconds.
 
 The purpose of having two tracks is to allow for 'fast' and 'slow' actions
-to be more easily encapsulated, and ensures that all ai_holders are syncronized
+to be more easily encapsulated, and ensures that all ai_holders are synchronized
 with each other, as opposed to having individual tick counters inside all of
 the ai_holder instances.  It should be noted that handle_tactics() is always
 called first, before handle_strategicals() every two seconds.
@@ -100,7 +100,7 @@ in order to avoid processing.
 When busy, the AI subsystem will skip over the ai_holder until it is no
 longer busy. The busy state is intended to be short-term, and is usually
 toggled by the mob when doing something with a delay, so that the ai_holder
-does not accidentally do something to inturrupt something important, like
+does not accidentally do something to interrupt something important, like
 a special attack.
 
 The longer term alternative to the busy state is the sleep state. Unlike
@@ -175,8 +175,8 @@ AI to have their mob say based on certain conditions, such as when threatening
 to kill another mob. Despite the name, a say_list also can contain emotes
 and some sounds.
 
-The reason that it is in a seperate datum is to allow for multiple mob types
-to have the same text, even when inheritence cannot do that, such as
+The reason that it is in a separate datum is to allow for multiple mob types
+to have the same text, even when inheritance cannot do that, such as
 mercenaries and fake piloted mecha mobs.
 
 The say_list datum is applied to the mob itself and not held inside the AI datum.
