@@ -112,8 +112,34 @@
 			adjust_discipline(-1)
 			last_discipline_decay = world.time
 
+/datum/ai_holder/simple_mob/xenobio_slime/find_target(list/possible_targets, has_targets_list)
+	if (hostile)
+		. = ..()
+	if (target || leader || rabid) // Always prioritize mobs, if we can. Otherwise, check for loose things to eat if we're not otherwise busy
+		return
+	var/list/yummies
+	for (var/atom/M in view(world.view, holder))
+		if (M.is_slime_food())
+			// Make sure that we can reach the object first, but don't try too hard at it and make sure that the thing is edible beforehand
+			var/list/path = AStar(holder.loc, M.loc, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = 1, max_node_depth = world.view * 2, id = holder.IGetID(), exclude = obstacles)
+			if (path?.len)
+				LAZYDISTINCTADD(yummies, M)
+	if (!LAZYLEN(yummies))
+		return
+	var/atom/yummy
+	var/closest_distance = INFINITY
+	for (var/atom/M in yummies) // Find the closest snack!
+		var/dist = get_dist(holder, M)
+		if (dist < closest_distance)
+			yummy = M
+			closest_distance = dist
+	give_target(yummy)
+	give_destination(yummy.loc)
+	return yummy
+
 /datum/ai_holder/simple_mob/xenobio_slime/handle_special_tactic()
 	evolve_and_reproduce()
+	nom()
 
 // Hit the correct verbs to keep the slime species going.
 /datum/ai_holder/simple_mob/xenobio_slime/proc/evolve_and_reproduce()
@@ -125,6 +151,15 @@
 		else
 			my_slime.evolve() // Turns our holder into an adult slime.
 
+/// If we have a non-mob target, attempt to eat it and then stop tracking it.
+/datum/ai_holder/simple_mob/xenobio_slime/proc/nom()
+	if (QDELETED(target) || ismob(target) || holder?.incapacitated() || !holder.Adjacent(target) || !target.is_slime_food())
+		return
+	holder.face_atom(target)
+	holder.do_attack_animation(target)
+	holder.setClickCooldown(holder.get_attack_speed())
+	target.slime_chomp(holder)
+	target = null
 
 // Called when pushed too far (or a red slime core was used).
 /datum/ai_holder/simple_mob/xenobio_slime/proc/enrage()

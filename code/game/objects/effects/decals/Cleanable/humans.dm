@@ -20,6 +20,7 @@ var/global/list/image/splatter_cache=list()
 	var/synthblood = 0
 	var/list/datum/disease2/disease/virus2 = list()
 	var/amount = 5
+	slime_food = TRUE
 	generic_filth = TRUE
 	persistent = FALSE
 
@@ -64,6 +65,10 @@ var/global/list/image/splatter_cache=list()
 	else
 		name = initial(name)
 		desc = initial(desc)
+
+/obj/effect/decal/cleanable/blood/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	slime.adjust_nutrition(max(0, amount - 1)) // Gain a bit of extra nutrition based on the amount
+	return ..()
 
 /mob/living/carbon/human/walk_through_blood(var/obj/effect/decal/cleanable/blood/blood)
 	var/obj/item/organ/external/l_foot = get_organ("l_foot")

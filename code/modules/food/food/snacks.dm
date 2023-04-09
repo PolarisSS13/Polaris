@@ -224,6 +224,31 @@
 	if(package_open_state)
 		icon_state = package_open_state
 
+/obj/item/reagent_containers/food/snacks/is_slime_food()
+	return TRUE
+
+/obj/item/reagent_containers/food/snacks/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	if (package)
+		unpackage(slime)
+	// Reagents are only for carbons (for now), so we calculate and apply nutrition manually
+	var/nutrition_total = 1
+	if (reagents?.total_volume)
+		for (var/V in reagents.reagent_list)
+			var/datum/reagent/R = V
+			if (istype(R, /datum/reagent/nutriment))
+				var/datum/reagent/nutriment/N = R
+				nutrition_total += N.volume * round(N.nutriment_factor / (N.allergen_type & ALLERGEN_MEAT ? 15 : 30))
+	slime.adjust_nutrition(nutrition_total)
+	slime.visible_message(
+		SPAN_NOTICE("\The [slime] [pick("absorbs", "consumes", "devours", "eats", "engulfs", "envelops", "schlorps up", "vacuums up")] \the [src]!"),
+		SPAN_NOTICE("You absorb \the [src]!")
+	)
+	playsound(slime, 'sound/items/eatfood.ogg', rand(10, 50), TRUE)
+	playsound(slime, 'sound/effects/slime_squish.ogg', 30, TRUE)
+	if (trash)
+		new trash (get_turf(src))
+	qdel(src)
+
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
