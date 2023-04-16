@@ -1,4 +1,12 @@
+// Placeholder to force Teshari cloaks to use sprite_sheets to avoid erroneous pixel shifting.
+/obj/item/clothing/suit/storage/teshari/Initialize()
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		LAZYSET(sprite_sheets, SPECIES_TESHARI, icon)
+// End placeholder.
+
 // Standard Cloaks
+
 /obj/item/clothing/suit/storage/teshari/cloak
 	name = "black cloak"
 	desc = "It drapes over a Teshari's shoulders and closes at the neck with pockets convienently placed inside."
@@ -862,4 +870,3 @@
 	desc = "A soft Teshari cloak made for the Janitor"
 	icon_state = "tesh_beltcloak_jani"
 	item_state = "tesh_beltcloak_jani"
-
