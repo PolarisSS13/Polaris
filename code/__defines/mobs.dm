@@ -462,7 +462,7 @@
 #define VISIBLE_GENDER_FORCE_IDENTIFYING 2
 
 /// Used by human/get_visible_gender(user, force) to return the mob's body type
-#define VISIBLE_GENDER_FORCE_BODYTPE 3
+#define VISIBLE_GENDER_FORCE_BODYTYPE 3
 
 
 // Dexterity levels for mob/proc/check_dexterity
