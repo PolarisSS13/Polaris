@@ -866,7 +866,7 @@
 			return PLURAL
 		if (VISIBLE_GENDER_FORCE_IDENTIFYING)
 			return get_gender()
-		if (VISIBLE_GENDER_FORCE_BIOLOGICAL)
+		if (VISIBLE_GENDER_FORCE_BODYTYPE)
 			return gender
 		else
 			if ((wear_mask || (head?.flags_inv & HIDEMASK)) && (wear_suit?.flags_inv & HIDEJUMPSUIT))
