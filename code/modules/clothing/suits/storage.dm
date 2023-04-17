@@ -66,20 +66,14 @@
 	set src in usr
 	if(!usr.canmove || usr.stat || usr.restrained())
 		return 0
-
-	if(open == 1) //Will check whether icon state is currently set to the "open" or "closed" state and switch it around with a message to the user
-		open = 0
-		update_icon()
-		flags_inv = HIDETIE|HIDEHOLSTER
-		to_chat(usr, "You button up the coat.")
-	else if(open == 0)
-		open = 1
-		update_icon()
-		flags_inv = HIDEHOLSTER
-		to_chat(usr, "You unbutton the coat.")
-	else //in case some goofy admin switches icon states around without switching the icon_open or icon_closed
+	if(open < 0)//in case some goofy admin switches icon states around without switching the icon_open or icon_closed
 		to_chat(usr, "You attempt to button-up the velcro on your [src], before promptly realising how silly you are.")
 		return
+	open = !open
+	flags_inv = open ? HIDETIE : HIDETIE|HIDEHOLSTER
+	update_icon()
+	to_chat(usr, "You [open ? "un" : ""]button \the [src].")
+
 	if(istype(hood,/obj/item/clothing/head/hood/toggleable)) //checks if a hood (which you should use) is attached
 		var/obj/item/clothing/head/hood/toggleable/T = hood
 		T.open = open //copy the jacket's open state to the hood

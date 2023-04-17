@@ -276,6 +276,7 @@
 	icon_state = "roughcloak"
 	item_state = "roughcloak"
 	action_button_name = "Adjust Cloak"
+	var/open = 0	//0 is closed, 1 is open
 
 /obj/item/clothing/accessory/storage/poncho/roles/cloak/half/update_clothing_icon()
 	. = ..()
@@ -284,16 +285,21 @@
 		M.update_inv_wear_suit()
 
 /obj/item/clothing/accessory/storage/poncho/roles/cloak/half/attack_self(mob/user as mob)
-	if(src.icon_state == initial(icon_state))
+	if(src.open == 0)
 		src.icon_state = "[icon_state]_open"
 		src.item_state = "[item_state]_open"
 		flags_inv = HIDETIE|HIDEHOLSTER
+		open = 1
 		to_chat(user, "You flip the cloak over your shoulder.")
-	else
+	else if(src.open == 1)
 		src.icon_state = initial(icon_state)
 		src.item_state = initial(item_state)
 		flags_inv = HIDEHOLSTER
+		open = 0
 		to_chat(user, "You pull the cloak over your shoulder.")
+	else //in case some goofy admin switches icon states around without switching the icon_open or icon_closed
+		to_chat(usr, "You attempt to flip the [src] over your shoulder, but can't quite make sense of it.")
+		return
 	update_clothing_icon()
 
 /obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder

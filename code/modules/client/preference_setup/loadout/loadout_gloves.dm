@@ -13,18 +13,19 @@
 
 /datum/gear/gloves/color/New()
 	..()
-	var/glovetype = list()
-	glovetype["gloves, black"] = /obj/item/clothing/gloves/black
-	glovetype["gloves, blue"] = path = /obj/item/clothing/gloves/blue
-	glovetype["gloves, brown"] = /obj/item/clothing/gloves/brown
-	glovetype["gloves, light-brown"] = /obj/item/clothing/gloves/light_brown
-	glovetype["gloves, green"] = /obj/item/clothing/gloves/green
-	glovetype["gloves, grey"] = /obj/item/clothing/gloves/grey
-	glovetype["gloves, orange"] = /obj/item/clothing/gloves/orange
-	glovetype["gloves, purple"] = /obj/item/clothing/gloves/purple
-	glovetype["gloves, rainbow"] = /obj/item/clothing/gloves/rainbow
-	glovetype["gloves, red"] = /obj/item/clothing/gloves/red
-	glovetype["gloves, white"] = /obj/item/clothing/gloves/white
+	var/list/glovetype = list(
+	"gloves, black" = /obj/item/clothing/gloves/black,
+	"gloves, blue" = path = /obj/item/clothing/gloves/blue,
+	"gloves, brown" = /obj/item/clothing/gloves/brown,
+	"gloves, light-brown" = /obj/item/clothing/gloves/light_brown,
+	"gloves, green" = /obj/item/clothing/gloves/green,
+	"gloves, grey" = /obj/item/clothing/gloves/grey,
+	"gloves, orange" = /obj/item/clothing/gloves/orange,
+	"gloves, purple" = /obj/item/clothing/gloves/purple,
+	"gloves, rainbow" = /obj/item/clothing/gloves/rainbow,
+	"gloves, red" = /obj/item/clothing/gloves/red,
+	"gloves, white" = /obj/item/clothing/gloves/white
+	)
 	gear_tweaks += new/datum/gear_tweak/path(glovetype)
 
 /datum/gear/gloves/latex
@@ -73,23 +74,23 @@
 
 /datum/gear/gloves/ring/New()
 	..()
-	var/ringtype = list()
-	ringtype["CTI ring"] = /obj/item/clothing/gloves/ring/cti
-	ringtype["Mariner University ring"] = /obj/item/clothing/gloves/ring/mariner
-	ringtype["engagement ring"] = /obj/item/clothing/gloves/ring/engagement
-	ringtype["signet ring"] = /obj/item/clothing/gloves/ring/seal/signet
-	ringtype["masonic ring"] = /obj/item/clothing/gloves/ring/seal/mason
-	ringtype["ring, glass"] = /obj/item/clothing/gloves/ring/material/glass
-	ringtype["ring, wood"] = /obj/item/clothing/gloves/ring/material/wood
-	ringtype["ring, plastic"] = /obj/item/clothing/gloves/ring/material/plastic
-	ringtype["ring, iron"] = /obj/item/clothing/gloves/ring/material/iron
-	ringtype["ring, bronze"] = /obj/item/clothing/gloves/ring/material/bronze
-	ringtype["ring, steel"] = /obj/item/clothing/gloves/ring/material/steel
-	ringtype["ring, copper"] = /obj/item/clothing/gloves/ring/material/copper
-	ringtype["ring, silver"] = /obj/item/clothing/gloves/ring/material/silver
-	ringtype["ring, gold"] = /obj/item/clothing/gloves/ring/material/gold
-	ringtype["ring, platinum"] = /obj/item/clothing/gloves/ring/material/platinum
-
+	var/list/ringtype = list(
+	"CTI ring" = /obj/item/clothing/gloves/ring/cti,
+	"Mariner University ring" = /obj/item/clothing/gloves/ring/mariner,
+	"engagement ring" = /obj/item/clothing/gloves/ring/engagement,
+	"signet ring" = /obj/item/clothing/gloves/ring/seal/signet,
+	"masonic ring" = /obj/item/clothing/gloves/ring/seal/mason,
+	"ring, glass" = /obj/item/clothing/gloves/ring/material/glass,
+	"ring, wood" = /obj/item/clothing/gloves/ring/material/wood,
+	"ring, plastic" = /obj/item/clothing/gloves/ring/material/plastic,
+	"ring, iron" = /obj/item/clothing/gloves/ring/material/iron,
+	"ring, bronze" = /obj/item/clothing/gloves/ring/material/bronze,
+	"ring, steel" = /obj/item/clothing/gloves/ring/material/steel,
+	"ring, copper" = /obj/item/clothing/gloves/ring/material/copper,
+	"ring, silver" = /obj/item/clothing/gloves/ring/material/silver,
+	"ring, gold" = /obj/item/clothing/gloves/ring/material/gold,
+	"ring, platinum" = /obj/item/clothing/gloves/ring/material/platinum
+	)
 	gear_tweaks += new/datum/gear_tweak/path(ringtype)
 
 /datum/gear/gloves/circuitry

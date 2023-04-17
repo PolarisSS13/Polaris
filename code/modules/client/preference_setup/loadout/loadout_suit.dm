@@ -40,10 +40,11 @@
 
 /datum/gear/suit/bomber/New()
 	..()
-	var/bombertype = list()
-	bombertype["bomber jacket"] = /obj/item/clothing/suit/storage/toggle/bomber
-	bombertype["bomber jacket, alternate"] = /obj/item/clothing/suit/storage/bomber/alt
-	bombertype["bomber jacket, retro"] = /obj/item/clothing/suit/storage/toggle/bomber/retro
+	var/list/bombertype = list(
+	"bomber jacket" = /obj/item/clothing/suit/storage/toggle/bomber,
+	"bomber jacket, alternate" = /obj/item/clothing/suit/storage/bomber/alt,
+	"bomber jacket, retro" = /obj/item/clothing/suit/storage/toggle/bomber/retro
+	)
 	gear_tweaks += new/datum/gear_tweak/path(bombertype)
 
 /datum/gear/suit/leather_jacket
@@ -53,12 +54,13 @@
 
 /datum/gear/suit/leather_jacket/New()
 	..()
-	var/ljtype = list()
-	ljtype["leather jacket, black"] = /obj/item/clothing/suit/storage/toggle/leather_jacket
-	ljtype["leather jacket, alternate black"] = /obj/item/clothing/suit/storage/leather_jacket_alt
-	ljtype["leather jacket, corporate black"] = /obj/item/clothing/suit/storage/toggle/leather_jacket/nanotrasen
-	ljtype["leather jacket, brown"] = /obj/item/clothing/suit/storage/toggle/brown_jacket
-	ljtype["leather jacket, corporate brown"] = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+	var/ljtype = list(
+	"leather jacket, black" = /obj/item/clothing/suit/storage/toggle/leather_jacket,
+	"leather jacket, alternate black" = /obj/item/clothing/suit/storage/leather_jacket_alt,
+	"leather jacket, corporate black" = /obj/item/clothing/suit/storage/toggle/leather_jacket/nanotrasen,
+	"leather jacket, brown" = /obj/item/clothing/suit/storage/toggle/brown_jacket,
+	"leather jacket, corporate brown" = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen
+	)
 	gear_tweaks += new/datum/gear_tweak/path(ljtype)
 
 /datum/gear/suit/leather_vest
@@ -68,11 +70,12 @@
 
 /datum/gear/suit/leather_vest/New()
 	..()
-	var/lvtype = list()
-	lvtype["leather vest, black"] = /obj/item/clothing/suit/storage/toggle/leather_jacket/sleeveless
-	lvtype["leather vest, corporate black"] = /obj/item/clothing/suit/storage/toggle/leather_jacket/nanotrasen/sleeveless
-	lvtype["leather vest, brown"] = /obj/item/clothing/suit/storage/toggle/brown_jacket/sleeveless
-	lvtype["leather vest, corporate brown"] = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen/sleeveless
+	var/list/lvtype = list(
+	"leather vest, black" = /obj/item/clothing/suit/storage/toggle/leather_jacket/sleeveless,
+	"leather vest, corporate black" = /obj/item/clothing/suit/storage/toggle/leather_jacket/nanotrasen/sleeveless,
+	"leather vest, brown" = /obj/item/clothing/suit/storage/toggle/brown_jacket/sleeveless,
+	"leather vest, corporate brown" = /obj/item/clothing/suit/storage/toggle/brown_jacket/nanotrasen/sleeveless
+	)
 	gear_tweaks += new/datum/gear_tweak/path(lvtype)
 
 /datum/gear/suit/mil
@@ -99,9 +102,10 @@
 
 /datum/gear/suit/trenchcoat/New()
 	..()
-	var/coattype = list()
-	coattype["trenchcoat, brown"] = /obj/item/clothing/suit/storage/trench
-	coattype["trenchcoat, grey"] = /obj/item/clothing/suit/storage/trench/grey
+	var/coattype = list(
+	"trenchcoat, brown" = /obj/item/clothing/suit/storage/trench,
+	"trenchcoat, grey" = /obj/item/clothing/suit/storage/trench/grey
+	)
 	gear_tweaks += new/datum/gear_tweak/path(coattype)
 
 /datum/gear/suit/duster
@@ -146,16 +150,17 @@
 
 /datum/gear/suit/labcoat/New()
 	..()
-	var/labcoattype = list()
-	labcoattype["labcoat, white"] = /obj/item/clothing/suit/storage/toggle/labcoat
-	labcoattype["labcoat, blue"] = /obj/item/clothing/suit/storage/toggle/labcoat/blue
-	labcoattype["labcoat, blue-edged"] = /obj/item/clothing/suit/storage/toggle/labcoat/blue_edge
-	labcoattype["labcoat, green"] = /obj/item/clothing/suit/storage/toggle/labcoat/green
-	labcoattype["labcoat, orange"] = /obj/item/clothing/suit/storage/toggle/labcoat/orange
-	labcoattype["labcoat, pink"] = /obj/item/clothing/suit/storage/toggle/labcoat/pink
-	labcoattype["labcoat, purple"] = /obj/item/clothing/suit/storage/toggle/labcoat/purple
-	labcoattype["labcoat, red"] = /obj/item/clothing/suit/storage/toggle/labcoat/red
-	labcoattype["labcoat, yellow"] = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
+	var/list/labcoattype = list(
+	"labcoat, white" = /obj/item/clothing/suit/storage/toggle/labcoat,
+	"labcoat, blue" = /obj/item/clothing/suit/storage/toggle/labcoat/blue,
+	"labcoat, blue-edged" = /obj/item/clothing/suit/storage/toggle/labcoat/blue_edge,
+	"labcoat, green" = /obj/item/clothing/suit/storage/toggle/labcoat/green,
+	"labcoat, orange" = /obj/item/clothing/suit/storage/toggle/labcoat/orange,
+	"labcoat, pink" = /obj/item/clothing/suit/storage/toggle/labcoat/pink,
+	"labcoat, purple" = /obj/item/clothing/suit/storage/toggle/labcoat/purple,
+	"labcoat, red" = /obj/item/clothing/suit/storage/toggle/labcoat/red,
+	"labcoat, yellow" = /obj/item/clothing/suit/storage/toggle/labcoat/yellow
+	)
 	gear_tweaks += new/datum/gear_tweak/path(labcoattype)
 
 /datum/gear/suit/labcoat_rd
@@ -223,10 +228,11 @@
 
 /datum/gear/suit/cloak_chaplain/New()
 	..()
-	var/coattype = list()
-	coattype["cloak, Pleromanist"] = /obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel
-	coattype["cloak, Unitarian"] = /obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel/alt
-	coattype["cloak, ceremonial"] = /obj/item/clothing/accessory/storage/poncho/roles/cloak/ceremonial
+	var/list/coattype = list(
+	"cloak, Pleromanist" = /obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel,
+	"cloak, Unitarian" = /obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel/alt,
+	"cloak, ceremonial" = /obj/item/clothing/accessory/storage/poncho/roles/cloak/ceremonial
+	)
 	gear_tweaks += new/datum/gear_tweak/path(coattype)
 
 //Half cloak
@@ -277,10 +283,11 @@
 
 /datum/gear/suit/suit_jackets/New()
 	..()
-	var/jackettype = list()
-	jackettype["suit jacket, black"] = /obj/item/clothing/suit/storage/toggle/internalaffairs
-	jackettype["suit jacket, blue"] = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket
-	jackettype["suit jacket, purple"] = /obj/item/clothing/suit/storage/toggle/lawyer/purpjacket
+	var/list/jackettype = list(
+	"suit jacket, black" = /obj/item/clothing/suit/storage/toggle/internalaffairs,
+	"suit jacket, blue" = /obj/item/clothing/suit/storage/toggle/lawyer/bluejacket,
+	"suit jacket, purple" = /obj/item/clothing/suit/storage/toggle/lawyer/purpjacket
+	)
 	gear_tweaks += new/datum/gear_tweak/path(jackettype)
 
 /datum/gear/suit/suspenders
@@ -295,11 +302,12 @@
 
 /datum/gear/suit/forensics/New()
 	..()
-	var/jackettype = list()
-	jackettype["forensics jacket, red long"] = /obj/item/clothing/suit/storage/forensics/red/long
-	jackettype["forensics jacket, red short"] = /obj/item/clothing/suit/storage/forensics/red
-	jackettype["forensics jacket, blue long"] = /obj/item/clothing/suit/storage/forensics/blue/long
-	jackettype["forensics jacket, blue short"] = /obj/item/clothing/suit/storage/forensics/blue
+	var/list/jackettype = list(
+	"forensics jacket, red long" = /obj/item/clothing/suit/storage/forensics/red/long,
+	"forensics jacket, red short" = /obj/item/clothing/suit/storage/forensics/red,
+	"forensics jacket, blue long" = /obj/item/clothing/suit/storage/forensics/blue/long,
+	"forensics jacket, blue short" = /obj/item/clothing/suit/storage/forensics/blue
+	)
 	gear_tweaks += new/datum/gear_tweak/path(jackettype)
 
 /datum/gear/suit/wintercoat
@@ -383,12 +391,13 @@
 
 /datum/gear/suit/dep_jacket/New()
 	..()
-	var/jackettype = list()
-	jackettype["department jacket, engineering"] = /obj/item/clothing/suit/storage/toggle/engi_dep_jacket
-	jackettype["department jacket, medical"] = /obj/item/clothing/suit/storage/toggle/med_dep_jacket
-	jackettype["department jacket, security"] = /obj/item/clothing/suit/storage/toggle/sec_dep_jacket
-	jackettype["department jacket, science"] = /obj/item/clothing/suit/storage/toggle/sci_dep_jacket
-	jackettype["department jacket, supply"] = /obj/item/clothing/suit/storage/toggle/supply_dep_jacket
+	var/list/jackettype = list(
+	"department jacket, engineering" = /obj/item/clothing/suit/storage/toggle/engi_dep_jacket,
+	"department jacket, medical" = /obj/item/clothing/suit/storage/toggle/med_dep_jacket,
+	"department jacket, security" = /obj/item/clothing/suit/storage/toggle/sec_dep_jacket,
+	"department jacket, science" = /obj/item/clothing/suit/storage/toggle/sci_dep_jacket,
+	"department jacket, supply" = /obj/item/clothing/suit/storage/toggle/supply_dep_jacket
+	)
 	gear_tweaks += new/datum/gear_tweak/path(jackettype)
 
 /datum/gear/suit/light_jacket
@@ -399,8 +408,8 @@
 /datum/gear/suit/light_jacket/New()
 	..()
 	var/list/jacket = list(
-		"grey light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket,
-		"dark blue light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket/blue
+	"grey light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket,
+	"dark blue light jacket" = /obj/item/clothing/suit/storage/toggle/light_jacket/blue
 	)
 	gear_tweaks += new/datum/gear_tweak/path(jacket)
 
@@ -459,9 +468,9 @@
 /datum/gear/suit/choodies/New()
 	..()
 	var/list/choodies = list(
-		"normal hoodie"=/obj/item/clothing/suit/storage/hooded/toggle/colorable,
-		"sleeveless hoodie"=/obj/item/clothing/suit/storage/hooded/toggle/colorable/sleeveless,
-		"cropped hoodie"=/obj/item/clothing/suit/storage/hooded/toggle/colorable/cropped
+	"normal hoodie" = /obj/item/clothing/suit/storage/hooded/toggle/colorable,
+	"sleeveless hoodie" = /obj/item/clothing/suit/storage/hooded/toggle/colorable/sleeveless,
+	"cropped hoodie" = /obj/item/clothing/suit/storage/hooded/toggle/colorable/cropped
 	)
 	gear_tweaks += gear_tweak_free_color_choice
 	gear_tweaks += new/datum/gear_tweak/path(choodies)

@@ -32,12 +32,13 @@
 
 /datum/gear/utility/communicator/New()
 	..()
-	var/commtype = list()
-	commtype["communicator"] = /obj/item/communicator
-	commtype["communicator, watch"] = /obj/item/communicator/watch
-	commtype["communicator, sleek"] = /obj/item/communicator/sleek
-	commtype["communicator, flip"] = /obj/item/communicator/flip
-	commtype["communicator, rugged"] = /obj/item/communicator/rugged
+	var/commtype = list(
+	"communicator" = /obj/item/communicator,
+	"communicator, watch" = /obj/item/communicator/watch,
+	"communicator, sleek" = /obj/item/communicator/sleek,
+	"communicator, flip" = /obj/item/communicator/flip,
+	"communicator, rugged" = /obj/item/communicator/rugged
+	)
 	gear_tweaks += new/datum/gear_tweak/path(commtype)
 
 /datum/gear/utility/codex

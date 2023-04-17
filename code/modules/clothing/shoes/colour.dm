@@ -90,7 +90,6 @@
 	icon_state = "flatsorange"
 	item_state_slots = list(slot_r_hand_str = "orange", slot_l_hand_str = "orange")
 
-
 /obj/item/clothing/shoes/orange
 	name = "orange shoes"
 	icon_state = "orange"
