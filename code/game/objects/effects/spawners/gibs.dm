@@ -1,80 +1,94 @@
+#define GIB_DATA_TYPE "type"
+#define GIB_DATA_AMOUNT "amount"
+#define GIB_DATA_DIRECTIONS "directions"
+
 /proc/gibs(atom/location, var/datum/dna/MobDNA, gibber_type = /obj/effect/spawner/gibs/generic, var/fleshcolor, var/bloodcolor)
-	new gibber_type(location,MobDNA,fleshcolor,bloodcolor)
+	new gibber_type(FALSE,location,MobDNA,fleshcolor,bloodcolor)
 
 /obj/effect/spawner/gibs
-	var/sparks = 0 //whether sparks spread on Gib()
-	var/list/gibtypes = list()
-	var/list/gibamounts = list()
-	var/list/gibdirections = list() //of lists
-	var/fleshcolor //Used for gibbed humans.
-	var/bloodcolor //Used for gibbed humans.
+	/// If non-null, sparks will be spawned alongside the gibs.
+	var/sparks
+	/// This is a list of associative lists, each of which is structured as such:
+	/// list("type" = typepath, "amount" = amount, "direction" = a list of possible directions)
+	/// At spawn, gib decals will be created and moved around according to their list data.
+	var/list/gib_types
+	/// Determines the color of the "chunky" bits.
+	var/flesh_color
+	/// Determines the color of the blood.
+	/// `blood_color` is a base-level atom var (used for bloody item overlays...!) so we gotta be a bit creative with the name here.
+	var/base_color
 
-/obj/effect/spawner/gibs/New(location, var/datum/dna/MobDNA, var/fleshcolor, var/bloodcolor)
-	..()
-
-	if(fleshcolor) src.fleshcolor = fleshcolor
-	if(bloodcolor) src.bloodcolor = bloodcolor
-
-	if(gibtypes.len != gibamounts.len || gibamounts.len != gibdirections.len)
-		to_world("<span class='warning'>Gib list length mismatch!</span>")
-		return
-
-	var/obj/effect/decal/cleanable/blood/gibs/gib = null
-
-	if(sparks)
+/obj/effect/spawner/gibs/do_spawn(mapload, datum/dna/dna, flesh_override, blood_override)
+	var/turf/T = get_turf(src)
+	if (sparks)
 		var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread()
-		s.set_up(2, 1, get_turf(loc)) // Not sure if it's safe to pass an arbitrary object to set_up, todo
+		s.set_up(2, 1, T)
 		s.start()
-
-	for(var/i = 1, i<= gibtypes.len, i++)
-		if(gibamounts[i])
-			for(var/j = 1, j<= gibamounts[i], j++)
-				var/gibType = gibtypes[i]
-				gib = new gibType(loc)
-
-				// Apply human species colouration to masks.
-				if(fleshcolor)
-					gib.fleshcolor = fleshcolor
-				if(bloodcolor)
-					gib.basecolor = bloodcolor
-
-				gib.update_icon()
-
-				gib.blood_DNA = list()
-				if(MobDNA)
-					gib.blood_DNA[MobDNA.unique_enzymes] = MobDNA.b_type
-				else if(istype(src, /obj/effect/spawner/gibs/human)) // Probably a monkey
-					gib.blood_DNA["Non-human DNA"] = "A+"
-				if(isturf(loc))
-					var/list/directions = gibdirections[i]
-					if(directions.len)
-						gib.streak(directions)
-
-	return INITIALIZE_HINT_QDEL
+	flesh_color = flesh_override ? flesh_override : flesh_color
+	base_color = blood_override ? blood_override : base_color
+	for (var/list/L in gib_types)
+		var/gib_type = L[GIB_DATA_TYPE]
+		var/gib_amount = L[GIB_DATA_AMOUNT] ? gib_type && L[GIB_DATA_AMOUNT] : 0
+		var/list/gib_directions = L[GIB_DATA_DIRECTIONS]
+		for (var/i in 1 to gib_amount)
+			var/obj/effect/decal/cleanable/blood/gibs/G = new gib_type (T)
+			if (istype(G))
+				if (flesh_color)
+					G.fleshcolor = flesh_color
+				if (blood_color)
+					G.basecolor = blood_color
+				G.blood_DNA = list()
+				if (dna)
+					G.blood_DNA[dna.unique_enzymes] = dna.b_type
+				else
+					G.blood_DNA["Non-human DNA"] = "A+"
+			if (LAZYLEN(gib_directions))
+				G.streak(gib_directions)
 
 /obj/effect/spawner/gibs/generic
-	gibtypes = list(/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs/core)
-	gibamounts = list(2,2,1)
-
-/obj/effect/spawner/gibs/generic/New()
-	gibdirections = list(list(WEST, NORTHWEST, SOUTHWEST, NORTH),list(EAST, NORTHEAST, SOUTHEAST, SOUTH), list())
-	..()
+	gib_types = list(
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 2, GIB_DATA_DIRECTIONS = list(WEST, NORTHWEST, SOUTHEAST, NORTH)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 2, GIB_DATA_DIRECTIONS = list(EAST, NORTHEAST, SOUTHEAST, SOUTH)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/core, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list()),
+	)
 
 /obj/effect/spawner/gibs/human
-	gibtypes = list(/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs/down,/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs,/obj/effect/decal/cleanable/blood/gibs/core)
-	gibamounts = list(1,1,1,1,1,1,1)
+	gib_types = list(
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(NORTH, NORTHEAST, NORTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/down, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(SOUTH, SOUTHEAST, SOUTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(WEST, NORTHWEST, SOUTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(EAST, NORTHEAST, SOUTHEAST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list()),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/core, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list()),
+	)
 
-/obj/effect/spawner/gibs/human/New()
-	gibdirections = list(list(NORTH, NORTHEAST, NORTHWEST),list(SOUTH, SOUTHEAST, SOUTHWEST),list(WEST, NORTHWEST, SOUTHWEST),list(EAST, NORTHEAST, SOUTHEAST), alldirs, alldirs, list())
-	gibamounts[6] = pick(0,1,2)
-	..()
+/obj/effect/spawner/gibs/human/do_spawn()
+	// Introduce an element of randomness; spread some of the decals willy-nilly, have a small range of possible extra bits
+	// `alldirs` is not a constant, so we need to manually assign them here before we spawn in the chunks
+	if (LAZYLEN(gib_types) >= 6)
+		gib_types[4][GIB_DATA_DIRECTIONS] = alldirs
+		gib_types[5][GIB_DATA_DIRECTIONS] = alldirs
+		gib_types[6][GIB_DATA_AMOUNT] = rand(0, 2)
+	return ..()
 
 /obj/effect/spawner/gibs/robot
-	sparks = 1
-	gibtypes = list(/obj/effect/decal/cleanable/blood/gibs/robot/up,/obj/effect/decal/cleanable/blood/gibs/robot/down,/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/decal/cleanable/blood/gibs/robot,/obj/effect/decal/cleanable/blood/gibs/robot/limb)
-	gibamounts = list(1,1,1,1,1,1)
+	sparks = TRUE
+	gib_types = list(
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot/up, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(NORTH, NORTHEAST, NORTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot/down, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(SOUTH, SOUTHEAST, SOUTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(WEST, NORTHWEST, SOUTHWEST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list(EAST, NORTHEAST, SOUTHEAST)),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list()),
+		list(GIB_DATA_TYPE = /obj/effect/decal/cleanable/blood/gibs/robot/limb, GIB_DATA_AMOUNT = 1, GIB_DATA_DIRECTIONS = list()),
+	)
 
-/obj/effect/spawner/gibs/robot/New()
-	gibdirections = list(list(NORTH, NORTHEAST, NORTHWEST),list(SOUTH, SOUTHEAST, SOUTHWEST),list(WEST, NORTHWEST, SOUTHWEST),list(EAST, NORTHEAST, SOUTHEAST), alldirs, alldirs)
-	gibamounts[6] = pick(0,1,2)
-	..()
+/obj/effect/spawner/gibs/robot/do_spawn()
+	if (LAZYLEN(gib_types) >= 6)
+		gib_types[4][GIB_DATA_DIRECTIONS] = alldirs
+		gib_types[5][GIB_DATA_DIRECTIONS] = alldirs
+		gib_types[6][GIB_DATA_AMOUNT] = rand(0, 2)
+	return ..()
+
+#undef GIB_DATA_TYPE
+#undef GIB_DATA_AMOUNT
+#undef GIB_DATA_DIRECTIONS
