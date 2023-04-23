@@ -58,12 +58,17 @@ var/global/list/tank_gauge_cache = list()
 
 
 /obj/item/tank/Initialize()
-	. = ..()
-
+	..()
 	src.init_proxy()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/tank/LateInitialize()
+	// Running this in Initialize() won't work for subtypes, which run their own override of Initialize() (for initial contents etc) *after* the base one
+	// Since air_contents is created in the base init, we can't just move the order of operations either (i.e. for subtypes, calling update_gauge() before the base proc)
+	// Thus, we defer it to later so that the gauge only updates after everything else is done
 	update_gauge()
 
 /obj/item/tank/Destroy()
