@@ -574,6 +574,29 @@
 		anchored = !anchored
 		to_chat(user, "<span class='filter_notice'>You [anchored ? "wrench" : "unwrench"] \the [src].</span>")
 
+	else if(istype(O, /obj/item/shovel/spade))
+		if(!weedlevel && !seed) // Don't do anything if the tray is truly empty
+			to_chat(user, SPAN_NOTICE("[src] doesn't have any plants or weeds!"))
+			return
+		user.visible_message(SPAN_NOTICE("[user] starts digging out [src]'s plants..."))
+		to_chat(user, SPAN_NOTICE("You start digging out [src]'s plants..."))
+		playsound(src, O.usesound, 50, 1)
+		if(do_after(user, 40 * O.toolspeed))
+			to_chat(user, SPAN_NOTICE("[user] digs out the plants in [src]!"), SPAN_NOTICE("You dig out all of [src]'s plants!"))
+			if(seed) // Chuck the seed -- it's basically just a forced remove_dead() without the verbosity
+				seed = null
+				dead = 0
+				sampled = 0
+				age = 0
+				yield_mod = 0
+				mutation_mod = 0
+				lastproduce = 0
+			weedlevel = 0
+			check_health()
+			force_update = 1
+			process()
+		return
+
 	else if(istype(O,/obj/item/multitool))
 		if(!anchored)
 			to_chat(user, "<span class='warning'>Anchor it first!</span>")
