@@ -4499,7 +4499,7 @@
 	name = "Kirani jelly"
 	id = "kirani_jelly"
 	description = "Sticky, sweet jelly from ground kiriani fruits."
-	taste_description = "ultra-sweet jelly"
+	taste_description = "ultra-sweet fruity jelly"
 	color = "#993c5c"
 
 /datum/reagent/drink/gauli_juice
@@ -4508,3 +4508,39 @@
 	description = "Juice from a ga'uli pod, used in skrellian and teshari cooking."
 	color = "#6f83a6"
 	taste_description = "mintyness"
+
+/datum/reagent/ethanol/kiranicider
+	name = "Kirani cider"
+	id = "kirani_cider"
+	description = "Fermented kirani jelly, popular among teshari packs."
+	taste_description = "sweet, tangy, fruity alcohol"
+	color = "#993c5c"
+	strength = 10
+	glass_name = "kirani cider"
+	glass_desc = "Fermented kirani jelly, popular among teshari packs."
+	allergen_type = ALLERGEN_FRUIT //Made from fruit
+
+/datum/reagent/ethanol/sirisaian_pole
+	name = "Sirisaian pole"
+	id = "sirisaian_pole"
+	description = "Fermented kirani mixed with ga'uli and ice, for a fruity cocktail as cold as Sirisai's poles."
+	taste_description = "chilled, minty, sweet fruit with an alcoholic kick"
+	color = "#993c5c"
+	strength = 10
+	adj_temp = -20
+	targ_temp = 220
+	glass_name = "Sirisaian pole"
+	glass_desc = "Fermented kirani mixed with ga'uli and ice, for a fruity cocktail as cold as Sirisai's poles."
+	allergen_type = ALLERGEN_FRUIT //Made with kirani and ga'uli
+
+/datum/reagent/drink/soda/kiraniade
+	name = "Kiraniade"
+	id = "kiraniade"
+	description = "Kirani jelly mixed with soda water into a more drinkable form, sweet enough to not even need extra sugar added."
+	taste_description = "super sweet, fizzy fruit"
+	color = "#993c5c"
+	adj_temp = -5
+	glass_name = "kiraniade"
+	glass_desc = "Kirani jelly mixed with soda water into a more drinkable form, sweet enough to not even need extra sugar added."
+	glass_special = list(DRINK_FIZZ)
+	allergen_type = ALLERGEN_FRUIT //Made with kirani
