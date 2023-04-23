@@ -137,8 +137,7 @@
 	is an obnoxiously warm, humid planet requiring structures to be built within large, atmospherically-filtered 'tent-like' domes. \
 	Prometheans take on vague visual and vocal features of the species they cohabitate with, sharing their predecessors' tendency to mimic nearby entities, \
 	though in physical form additionally; this is seemingly more important in their own development, as well. Despite their taken appearances, \
-	there is no known existence of a divergence between a biologically 'male' or 'female' form of the species, leading most to believe they are in fact asexual, \
-	as their predecessors are."
+	there is no known sexual differentiation between individuals, and they are widely accepted to be an asexual species, as their predecessors are."
 
 // Vatborn Lore
 /datum/lore/codex/page/vatborn/add_content()
