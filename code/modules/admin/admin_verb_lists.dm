@@ -109,7 +109,8 @@ var/global/list/admin_verbs_admin = list(
 	/datum/admins/proc/view_feedback,
 	/client/proc/debug_global_variables,
 	/client/proc/admin_add_whitelist,
-	/client/proc/admin_del_whitelist
+	/client/proc/admin_del_whitelist,
+	/datum/admins/proc/toggle_hub_visibility
 	)
 
 var/global/list/admin_verbs_ban = list(

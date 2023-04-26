@@ -10,12 +10,12 @@
 
 	config.post_load()
 
-	if(config && config.server_name != null && config.server_suffix && world.port > 0)
-		// dumb and hardcoded but I don't care~
-		config.server_name += " #[(world.port % 1000) / 100]"
-
-	if(config && config.log_runtime)
+	if (config.server_name)
+		name = config.server_name
+	if (config.log_runtime)
 		log = file("data/logs/runtime/[time2text(world.realtime,"YYYY-MM-DD-(hh-mm-ss)")]-runtime.log")
+
+	update_hub_visibility(config.hub_visible)
 
 	GLOB.timezoneOffset = get_timezone_offset()
 
