@@ -683,6 +683,7 @@
 				stat("Instances:","[world.contents.len]")
 				stat("World Time:", world.time)
 				stat("Real time of day:", REALTIMEOFDAY)
+				stat("Hub:", "Visibility [config.hub_visible?"On":"Off"], [world.reachable?"":"NOT"] Reachable")
 				stat(null)
 				if(GLOB)
 					GLOB.stat_entry()

@@ -88,6 +88,8 @@ var/global/list/gamemode_cache = list()
 	var/static/automute_on = 0					//enables automuting/spam prevention
 	var/static/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+	var/static/hub_visible = FALSE
+
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
@@ -364,6 +366,9 @@ var/global/list/gamemode_cache = list()
 
 				if ("log_ooc")
 					config.log_ooc = 1
+
+				if ("hub_visible")
+					config.hub_visible = TRUE
 
 				if ("log_access")
 					config.log_access = 1
