@@ -89,6 +89,8 @@
 	if(P.type == fuel_type && P.amount)
 		var/to_load = max(max_fuel - fuel_amount,0)
 		if(to_load >= 2000)
+			if(to_load > P.amount * 2000)
+				to_load = P.amount * 2000
 			var/sheets = round(to_load / 2000, 1)
 			if(P.amount >= sheets)
 				fuel_amount += sheets * 2000
