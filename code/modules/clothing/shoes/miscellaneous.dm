@@ -18,7 +18,7 @@
 	step_volume_mod = 0	//It's a mime
 
 /obj/item/clothing/shoes/galoshes
-	desc = "Rubber boots"
+	desc = "rubber boots"
 	name = "galoshes"
 	icon_state = "galoshes"
 	permeability_coefficient = 0.05
@@ -52,6 +52,11 @@
 	name = "plastic clogs"
 	desc = "A pair of plastic clog shoes."
 	icon_state = "clogs"
+
+
+/obj/item/clothing/shoes/sandal/clogs/random/New()
+	..()
+	color = get_random_colour()
 
 /obj/item/clothing/shoes/sandal/marisa
 	desc = "A pair of magic, black shoes."

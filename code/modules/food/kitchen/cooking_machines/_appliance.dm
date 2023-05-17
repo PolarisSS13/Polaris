@@ -1,6 +1,6 @@
 // This folder contains code that was originally ported from Apollo Station and then refactored/optimized/changed.
 
-// Tracks precooked food to stop deep fried baked grilled grilled grilled diona nymph cereal.
+// Tracks precooked food to stop deep fried baked grilled grilled grilled Diona nymph cereal.
 /obj/item/reagent_containers/food/snacks
 	var/tmp/list/cooked = list()
 
@@ -61,7 +61,7 @@
 /obj/machinery/appliance/Destroy()
 	for (var/a in cooking_objs)
 		var/datum/cooking_item/CI = a
-		qdel(CI.container)//Food is fragile, it probably doesnt survive the destruction of the machine
+		qdel(CI.container)//Food is fragile, it probably doesn't survive the destruction of the machine
 		cooking_objs -= CI
 		qdel(CI)
 	return ..()
@@ -622,7 +622,7 @@
 	var/delete = 1
 	var/status = CI.container.check_contents()
 
-	if (status == 1)//If theres only one object in a container then we extract that
+	if (status == 1)//If there's only one object in a container then we extract that
 		thing = locate(/obj/item) in CI.container
 		delete = 0
 	else//If the container is empty OR contains more than one thing, then we must extract the container

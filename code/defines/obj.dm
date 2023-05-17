@@ -102,6 +102,3 @@ var/global/list/acting_rank_prefixes = list("acting", "temporary", "interim", "p
 /obj/item/beach_ball/afterattack(atom/target as mob|obj|turf|area, mob/user as mob)
 	user.drop_item()
 	src.throw_at(target, throw_range, throw_speed, user)
-
-/obj/effect/spawner
-	name = "object spawner"

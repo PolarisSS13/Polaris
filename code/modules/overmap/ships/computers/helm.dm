@@ -24,7 +24,7 @@ GLOBAL_LIST_EMPTY(all_waypoints)
 	var/autopilot = 0
 	var/autopilot_disabled = TRUE
 	var/list/known_sectors = list()
-	var/dx		//desitnation
+	var/dx		//destination
 	var/dy		//coordinates
 	var/speedlimit = 1/(20 SECONDS) //top speed for autopilot, 5
 	var/accellimit = 0.001 //manual limiter for acceleration

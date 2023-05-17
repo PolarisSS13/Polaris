@@ -433,6 +433,7 @@ var/global/list/robot_modules = list(
 	src.emag = new /obj/item/melee/baton/robot/arm(src)
 	src.modules += new /obj/item/geiger(src)
 	src.modules += new /obj/item/rcd/electric/mounted/borg(src)
+	src.modules += new /obj/item/pipe_dispenser(src)
 	src.modules += new /obj/item/pickaxe/plasmacutter(src)
 	src.modules += new /obj/item/gripper/no_use/loader(src)
 
@@ -970,6 +971,8 @@ var/global/list/robot_modules = list(
 	var/obj/item/stack/material/cyborg/plastic/P = new (src)
 	P.synths = list(plastic)
 	src.modules += P
+
+	src.modules += new /obj/item/pipe_dispenser(src)	// At the end to go beside the construction's RCD.
 
 /obj/item/robot_module/drone/construction
 	name = "construction drone module"

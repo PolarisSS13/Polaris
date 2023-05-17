@@ -159,6 +159,7 @@
 
 /datum/gear/shoes/winter_boots/New()
 	..()
+
 	var/list/boottype = list(
 	"winter boots, atmospherics" = /obj/item/clothing/shoes/boots/winter/atmos,
 	"winter boots, brown" = /obj/item/clothing/shoes/boots/winter,
@@ -176,6 +177,14 @@
 	display_name = "boots, circuitry (empty)"
 	path = /obj/item/clothing/shoes/circuitry
 
+
+/datum/gear/shoes/clogs
+	display_name = "clogs (colorable)"
+	path = /obj/item/clothing/shoes/sandal/clogs
+
+/datum/gear/shoes/clogs/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
 /datum/gear/shoes/ceremonial_guards
 	display_name = "ceremonial leg guards"
 	path = /obj/item/clothing/shoes/ceremonial_guards

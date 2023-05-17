@@ -224,6 +224,31 @@
 	if(package_open_state)
 		icon_state = package_open_state
 
+/obj/item/reagent_containers/food/snacks/is_slime_food()
+	return TRUE
+
+/obj/item/reagent_containers/food/snacks/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	if (package)
+		unpackage(slime)
+	// Reagents are only for carbons (for now), so we calculate and apply nutrition manually
+	var/nutrition_total = 1
+	if (reagents?.total_volume)
+		for (var/V in reagents.reagent_list)
+			var/datum/reagent/R = V
+			if (istype(R, /datum/reagent/nutriment))
+				var/datum/reagent/nutriment/N = R
+				nutrition_total += N.volume * round(N.nutriment_factor / (N.allergen_type & ALLERGEN_MEAT ? 15 : 30))
+	slime.adjust_nutrition(nutrition_total)
+	slime.visible_message(
+		SPAN_NOTICE("\The [slime] [pick("absorbs", "consumes", "devours", "eats", "engulfs", "envelops", "schlorps up", "vacuums up")] \the [src]!"),
+		SPAN_NOTICE("You absorb \the [src]!")
+	)
+	playsound(slime, 'sound/items/eatfood.ogg', rand(10, 50), TRUE)
+	playsound(slime, 'sound/effects/slime_squish.ogg', 30, TRUE)
+	if (trash)
+		new trash (get_turf(src))
+	qdel(src)
+
 ////////////////////////////////////////////////////////////////////////////////
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
@@ -1645,7 +1670,7 @@
 /obj/item/reagent_containers/food/snacks/slimesoup
 	name = "slime soup"
 	desc = "If no water is available, you may substitute tears."
-	icon_state = "slimesoup" //nonexistant? - 3/1/2020 FIXED. roro's live on. - 7/14/2020 - The fuck are you smoking, roro's is stupid, name it slimesoup so it's clear wtf it is.
+	icon_state = "slimesoup" //nonexistent? - 3/1/2020 FIXED. roro's live on. - 7/14/2020 - The fuck are you smoking, roro's is stupid, name it slimesoup so it's clear wtf it is.
 	filling_color = "#C4DBA0"
 	bitesize = 5
 
@@ -1896,11 +1921,11 @@
 	wrapped = 1
 
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/farwacube
-	name = "farwa cube"
+	name = "Farwa cube"
 	monkey_type = "Farwa"
 
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped/farwacube
-	name = "farwa cube"
+	name = "Farwa cube"
 	monkey_type = "Farwa"
 
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/stokcube
@@ -1912,11 +1937,11 @@
 	monkey_type = "Stok"
 
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/neaeracube
-	name = "neaera cube"
+	name = "Neaera cube"
 	monkey_type = "Neaera"
 
 /obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped/neaeracube
-	name = "neaera cube"
+	name = "Neaera cube"
 	monkey_type = "Neaera"
 
 //Food cubes
@@ -2326,7 +2351,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatballspagetti
 	name = "Spaghetti & Meatballs"
-	desc = "Now thats a nic'e meatball!"
+	desc = "Now that's a nic'e meatball!"
 	icon_state = "meatballspagetti"
 	trash = /obj/item/trash/plate
 	filling_color = "#DE4545"
@@ -2341,7 +2366,7 @@
 
 /obj/item/reagent_containers/food/snacks/spesslaw
 	name = "Spesslaw"
-	desc = "A lawyers favourite"
+	desc = "A lawyer's favourite"
 	icon_state = "spesslaw"
 	filling_color = "#DE4545"
 	center_of_mass = list("x"=16, "y"=10)
@@ -4329,7 +4354,7 @@
 	if (!flat_icon)
 		flat_icon = getFlatIcon(src)
 	var/icon/I = flat_icon
-	color = "#FFFFFF" //Some fruits use the color var. Reset this so it doesnt tint the batter
+	color = "#FFFFFF" //Some fruits use the color var. Reset this so it doesn't tint the batter
 	I.Blend(new /icon('icons/obj/food_custom.dmi', rgb(255,255,255)),ICON_ADD)
 	I.Blend(new /icon('icons/obj/food_custom.dmi', coating.icon_raw),ICON_MULTIPLY)
 	var/image/J = image(I)
@@ -4756,7 +4781,7 @@
 
 /obj/item/reagent_containers/food/snacks/nt_muffin
 	name = "breakfast muffin"
-	desc = "An english muffin with egg, cheese, and sausage, as sold in fast food joints galaxy-wide."
+	desc = "An English muffin with egg, cheese, and sausage, as sold in fast food joints galaxy-wide."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "nt_muffin"
 	nutriment_desc = list("biscuit" = 3)
@@ -4861,7 +4886,7 @@
 
 /obj/item/reagent_containers/food/snacks/croissant
 	name = "croissant"
-	desc = "True french cuisine."
+	desc = "True French cuisine."
 	icon = 'icons/obj/food_syn.dmi'
 	filling_color = "#E3D796"
 	icon_state = "croissant"
@@ -7323,7 +7348,7 @@
 
 /obj/item/reagent_containers/food/snacks/kitsuneudon
 	name = "kitsune udon"
-	desc = "A purported favorite of kitsunes in ancient japanese myth: udon noodles, fried egg, and tofu."
+	desc = "A purported favorite of kitsunes in ancient Japanese myth: udon noodles, fried egg, and tofu."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "kitsuneudon"
 	trash = /obj/item/trash/asian_bowl
@@ -7350,7 +7375,7 @@
 
 /obj/item/reagent_containers/food/snacks/mammi
 	name = "mämmi"
-	desc = "Traditional finnish desert, some like it, others don't. It's drifting in some milk, add sugar!"
+	desc = "Traditional Finnish desert, some like it, others don't. It's drifting in some milk, add sugar!"
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "mammi"
 	trash = /obj/item/trash/plate
@@ -7535,7 +7560,7 @@
 
 /obj/item/reagent_containers/food/snacks/dynsoup
 	name = "dyn soup"
-	desc = "An imported skrellian recipe, with certain substitions for ingredients not commonly available outside of Skrellian space."
+	desc = "An imported Skrellian recipe, with certain substitutions for ingredients not commonly available outside of Skrellian space."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "dynsoup"
 	bitesize = 5
@@ -7563,7 +7588,7 @@
 	reagents.add_reagent("nutriment", 8)
 
 /obj/item/reagent_containers/food/snacks/stew/neaera
-	name = "neaera stew"
+	name = "Neaera stew"
 	desc = "Neaera meat stewed in a mixture of water and dyn juice, garnished with guami and eki. Often cooked in large batches to feed many teshari pack members."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_stew"
@@ -7577,8 +7602,8 @@
 	reagents.add_reagent("dynjuice", 4)
 
 /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy
-	name = "plate of candied neaera eyes"
-	desc = "Candied neaera eyes shaped into cubes. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
+	name = "plate of candied Neaera eyes"
+	desc = "Candied Neaera eyes shaped into cubes. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
 	icon_state = "neaera_candied_eyes20"
 	trash = /obj/item/trash/candybowl
 	vendingobject = /obj/item/reagent_containers/food/snacks/neaeracandy
@@ -7606,8 +7631,8 @@
 			icon_state = "neaera_candied_eyes20"
 
 /obj/item/reagent_containers/food/snacks/neaeracandy
-	name = "candied neaera eye"
-	desc = "A candied neaera eye shaped into a cube. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
+	name = "candied Neaera eye"
+	desc = "A candied Neaera eye shaped into a cube. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_candied_eye"
 	nutriment_desc = list("creamy, fatty meat" = 3)
@@ -7620,7 +7645,7 @@
 	reagents.add_reagent("seafood", 3)
 
 /obj/item/reagent_containers/food/snacks/neaerakabob
-	name = "neaera-kabob"
+	name = "Neaera-kabob"
 	desc = "Neaera meat and giblets that have been cooked on a skewer."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_skewer"
@@ -7671,7 +7696,7 @@
 /obj/item/reagent_containers/food/snacks/garani
 	name = "garani"
 	icon = 'icons/obj/food_syn.dmi'
-	desc = "Neaera liver stuffed with boiled qa'lozyn and fried in oil. A popular light meal for teshari."
+	desc = "Neaera liver stuffed with boiled qa'lozyn and fried in oil. A popular light meal for Teshari."
 	icon_state = "garani"
 	nutriment_amt = 8
 	nutriment_desc = list("fatty meat" = 4, "sweet turnips" = 4)
@@ -7685,7 +7710,7 @@
 /obj/item/reagent_containers/food/snacks/qazal_dough
 	name = "qa'zal dough"
 	icon = 'icons/obj/food_syn.dmi'
-	desc = "A coarse, stretchy, skrellian dough made from qa'zal flour and ga'uli juice in a striking purple color."
+	desc = "A coarse, stretchy, Skrellian dough made from qa'zal flour and ga'uli juice in a striking purple color."
 	icon_state = "qazal_dough"
 	bitesize = 2
 	nutriment_amt = 3

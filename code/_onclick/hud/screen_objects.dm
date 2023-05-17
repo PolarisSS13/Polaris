@@ -280,7 +280,7 @@
 					var/mob/living/carbon/C = L
 					if(C.legcuffed)
 						to_chat(C, "<span class='notice'>You are legcuffed! You cannot run until you get [C.legcuffed] removed!</span>")
-						C.set_move_intent(/decl/move_intent/walk) // Just incase.
+						C.set_move_intent(C.get_movement_intent_with_flag(MOVEMENT_INTENT_WALKING)) // Just incase.
 						return 1
 				var/next_move_intent = next_in_list(L.move_intent.type, L.move_intents)
 				L.set_move_intent(next_move_intent)

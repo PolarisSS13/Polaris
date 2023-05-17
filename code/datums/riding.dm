@@ -1,11 +1,11 @@
-// This is used to make things that are supposed to move while buckled more consistant and easier to handle code-wise.
+// This is used to make things that are supposed to move while buckled more consistent and easier to handle code-wise.
 
 /datum/riding
 	var/next_vehicle_move = 0			// Used for move delays
 	var/vehicle_move_delay = 2 			// Decisecond delay between movements, lower = faster, higher = slower
 	var/keytype = null					// Can give this a type to require the rider to hold the item type inhand to move the ridden atom.
 	var/nonhuman_key_exemption = FALSE	// If true, nonhumans who can't hold keys don't need them, like borgs and simplemobs.
-	var/key_name = "the keys"			// What the 'keys' for the thing being rided on would be called.
+	var/key_name = "the keys"			// What the 'keys' for the thing being ridden on would be called.
 	var/atom/movable/ridden = null 		// The thing that the datum is attached to.
 	var/only_one_driver = FALSE			// If true, only the person in 'front' (first on list of riding mobs) can drive.
 
@@ -150,8 +150,8 @@
 /datum/riding/boat/small // 'Small' boats can hold up to two people.
 
 /datum/riding/boat/small/get_offsets(pass_index) // list(dir = x, y, layer)
-	var/H = 7 // Horizontal seperation.
-	var/V = 5 // Vertical seperation.
+	var/H = 7 // Horizontal separation.
+	var/V = 5 // Vertical separation.
 	var/O = 2 // Vertical offset.
 	switch(pass_index)
 		if(1) // Person in front.
@@ -177,8 +177,8 @@
 /datum/riding/boat/big // 'Big' boats can hold up to five people.
 
 /datum/riding/boat/big/get_offsets(pass_index) // list(dir = x, y, layer)
-	var/H = 12 // Horizontal seperation. Halved when facing up-down.
-	var/V = 4 // Vertical seperation.
+	var/H = 12 // Horizontal separation. Halved when facing up-down.
+	var/V = 4 // Vertical separation.
 	var/O = 7 // Vertical offset.
 	switch(pass_index)
 		if(1) // Person in center front, first row.
@@ -229,8 +229,8 @@
 	only_one_driver = TRUE // Keep your hands to yourself back there!
 
 /datum/riding/snowmobile/get_offsets(pass_index) // list(dir = x, y, layer)
-	var/H = 3 // Horizontal seperation.
-	var/V = 2 // Vertical seperation.
+	var/H = 3 // Horizontal separation.
+	var/V = 2 // Vertical separation.
 	var/O = 2 // Vertical offset.
 	switch(pass_index)
 		if(1) // Person on front.

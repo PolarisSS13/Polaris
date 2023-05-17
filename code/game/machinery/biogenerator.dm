@@ -120,6 +120,7 @@
 					dat += "<A href='?src=\ref[src];action=create;item=plantbag;cost=320'>Plant bag</A> <FONT COLOR=green>([round(250/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=plantbaglarge;cost=640'>Large plant bag</A> <FONT COLOR=green>([round(250/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=tbelt;cost=300'>Utility belt</A> <FONT COLOR=brown>([round(300/build_eff)])</FONT><BR>"
+					dat += "<A href='?src=\ref[src];action=create;item=plantbelt;cost=300'>Botany belt</A> <FONT COLOR=green>([round(300/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=satchel;cost=400'>Leather Satchel</A> <FONT COLOR=brown>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=cashbag;cost=400'>Cash Bag</A> <FONT COLOR=brown>([round(400/build_eff)])</FONT><BR>"
 					dat += "<A href='?src=\ref[src];action=create;item=chembag;cost=400'>Chemistry Bag</A> <FONT COLOR=green>([round(400/build_eff)])</FONT><BR>"
@@ -250,6 +251,8 @@
 			new/obj/item/storage/bag/plants/large(loc)
 		if("tbelt")
 			new/obj/item/storage/belt/utility(loc)
+		if("plantbelt")
+			new/obj/item/storage/belt/plant(loc)
 		if("satchel")
 			new/obj/item/storage/backpack/satchel(loc)
 		if("cashbag")

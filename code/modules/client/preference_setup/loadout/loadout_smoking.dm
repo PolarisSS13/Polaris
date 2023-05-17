@@ -46,7 +46,7 @@
 /datum/gear/cigarettes/New()
 	..()
 	var/list/cigarettes = list()
-	for(var/cigarette in (typesof(/obj/item/storage/fancy/cigarettes) - typesof(/obj/item/storage/fancy/cigarettes/killthroat)))
+	for(var/cigarette in (typesof(/obj/item/storage/fancy/cigarettes)))
 		var/obj/item/storage/fancy/cigarettes/cigarette_brand = cigarette
 		cigarettes[initial(cigarette_brand.name)] = cigarette_brand
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(cigarettes))

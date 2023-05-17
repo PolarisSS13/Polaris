@@ -104,7 +104,7 @@
 /obj/item/bodybag/cryobag
 	name = "stasis bag"
 	desc = "A non-reusable plastic bag designed to slow down bodily functions such as circulation and breathing, \
-	especially useful if short on time or in a hostile enviroment."
+	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	icon_state = "bodybag_folded"
 	item_state = "bodybag_cryo_folded"
@@ -122,7 +122,7 @@
 /obj/structure/closet/body_bag/cryobag
 	name = "stasis bag"
 	desc = "A non-reusable plastic bag designed to slow down bodily functions such as circulation and breathing, \
-	especially useful if short on time or in a hostile enviroment."
+	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/closets/cryobag.dmi'
 	item_path = /obj/item/bodybag/cryobag
 	store_misc = 0

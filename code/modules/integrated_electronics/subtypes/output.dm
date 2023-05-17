@@ -438,7 +438,7 @@
 
 	activate_pin(2)
 
-// Updates some changable aspects of the hologram like the size or position.
+// Updates some changeable aspects of the hologram like the size or position.
 /obj/item/integrated_circuit/output/holographic_projector/proc/update_hologram()
 	if(!hologram)
 		return FALSE
@@ -455,7 +455,7 @@
 
 	return TRUE
 
-// This is a seperate function because other things besides do_work() might warrant updating position, like movement, without bothering with other parts.
+// This is a separate function because other things besides do_work() might warrant updating position, like movement, without bothering with other parts.
 /obj/item/integrated_circuit/output/holographic_projector/proc/update_hologram_position()
 	var/holo_x = get_pin_data(IC_INPUT, 4)
 	var/holo_y = get_pin_data(IC_INPUT, 5)

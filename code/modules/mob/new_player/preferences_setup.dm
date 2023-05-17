@@ -198,7 +198,7 @@
 	b_skin = blue
 
 /datum/preferences/proc/dress_preview_mob(var/mob/living/carbon/human/mannequin)
-	if(!mannequin.dna) // Special handling for preview icons before SSAtoms has initailized.
+	if(!mannequin.dna) // Special handling for preview icons before SSAtoms has initialized.
 		mannequin.dna = new /datum/dna(null)
 	copy_to(mannequin, TRUE)
 
@@ -256,7 +256,7 @@
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
-	if(!mannequin.dna) // Special handling for preview icons before SSAtoms has initailized.
+	if(!mannequin.dna) // Special handling for preview icons before SSAtoms has initialized.
 		mannequin.dna = new /datum/dna(null)
 	mannequin.delete_inventory(TRUE)
 	dress_preview_mob(mannequin)

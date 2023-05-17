@@ -73,6 +73,8 @@ var/global/list/obj/item/communicator/all_communicators = list()
 	var/list/communicating = list()
 	var/update_ticks = 0
 	var/newsfeed_channel = 0
+	var/static_name = null
+	var/can_rename = 1
 
 // Proc: New()
 // Parameters: None
@@ -95,6 +97,9 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Parameters: None
 // Description: Tries to register ourselves to the mob that we've presumably spawned in. Not the most amazing way of doing this.
 /obj/item/communicator/proc/register_to_holder()
+	if(static_name)
+		register_device(static_name)
+		initialize_exonet(loc)
 	if(ismob(loc))
 		register_device(loc.name)
 		initialize_exonet(loc)
@@ -156,7 +161,7 @@ var/global/list/obj/item/communicator/all_communicators = list()
 
 // Proc: add_to_EPv2()
 // Parameters: 1 (hex - a single hexadecimal character)
-// Description: Called when someone is manually dialing with nanoUI.  Adds colons when appropiate.
+// Description: Called when someone is manually dialing with nanoUI.  Adds colons when appropriate.
 /obj/item/communicator/proc/add_to_EPv2(var/hex)
 	var/length = length(target_address)
 	if(length >= 24)
@@ -279,7 +284,10 @@ var/global/list/obj/item/communicator/all_communicators = list()
 		return
 	owner = new_name
 
-	name = "[new_name]'s [initial(name)]"
+	if(static_name)
+		name = "[new_name]"
+	else
+		name = "[new_name]'s [initial(name)]"
 	if(camera)
 		camera.name = name
 		camera.c_tag = name

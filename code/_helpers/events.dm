@@ -32,7 +32,7 @@
 	for(var/area_type in area_types)
 		var/list/types = typesof(area_type)
 		for(var/T in types)
-			// Test for existance.
+			// Test for existence.
 			var/area/A = locate(T)
 			if(!istype(A) || !A.contents.len) // Empty contents list means it's not on the map.
 				continue

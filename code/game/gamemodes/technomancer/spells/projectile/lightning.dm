@@ -1,6 +1,6 @@
 /datum/technomancer/spell/lightning
 	name = "Lightning Strike"
-	desc = "This uses a hidden electrolaser, which creates a laser beam to ionize the enviroment, allowing for ideal conditions \
+	desc = "This uses a hidden electrolaser, which creates a laser beam to ionize the environment, allowing for ideal conditions \
 	for a directed lightning strike to occur.  The lightning is very strong, however it requires a few seconds to prepare a \
 	strike.  Lightning functions cannot miss due to distance."
 	cost = 150

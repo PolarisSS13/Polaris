@@ -264,7 +264,7 @@
 		else
 			return if_no_id
 
-//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a seperate proc as it'll be useful elsewhere
+//repurposed proc. Now it combines get_id_name() and get_face_name() to determine a mob's name variable. Made into a separate proc as it'll be useful elsewhere
 /mob/living/carbon/human/proc/get_visible_name()
 	if( wear_mask && (wear_mask.flags_inv&HIDEFACE) )	//Wearing a mask which hides our face, use id-name if possible
 		return get_id_name("Unknown")
@@ -866,7 +866,7 @@
 			return PLURAL
 		if (VISIBLE_GENDER_FORCE_IDENTIFYING)
 			return get_gender()
-		if (VISIBLE_GENDER_FORCE_BIOLOGICAL)
+		if (VISIBLE_GENDER_FORCE_BODYTYPE)
 			return gender
 		else
 			if ((wear_mask || (head?.flags_inv & HIDEMASK)) && (wear_suit?.flags_inv & HIDEJUMPSUIT))
@@ -1670,3 +1670,6 @@
 
 /mob/living/carbon/human/leaves_tracks_type()
 	return species.get_move_trail(src)
+
+/mob/living/carbon/human/hearing_boost_range()
+	return (hearing_boost_range + species.hearboost)

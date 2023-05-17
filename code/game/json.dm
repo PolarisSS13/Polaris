@@ -7,11 +7,11 @@ var/global/makejson = 1 //temp
 	if(!makejson)
 		return
 	fdel("[jsonpath]/info.json")
-		//to_chat(usr, "Error cant delete json")
+		//to_chat(usr, "Error can't delete json")
 	//else
 		//to_chat(usr, "Deleted json in public html")
 	fdel("info.json")
-		//to_chat(usr, "error cant delete local json")
+		//to_chat(usr, "error can't delete local json")
 	//else
 		//to_chat(usr, "Deleted local json")
 	var/F = file("info.json")

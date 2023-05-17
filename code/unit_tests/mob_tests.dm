@@ -49,7 +49,7 @@
 	// Act,
 	for(var/i = 1 to inputs.len)
 		set_tested_variable(test_modifier, inputs[i])
-		var/actual = round(get_test_value(subject), 0.01) // Rounding because floating point schannigans.
+		var/actual = round(get_test_value(subject), 0.01) // Rounding because floating point shenanigans.
 		if(actual != expected_outputs[i])
 			issues++
 			log_bad("Input '[inputs[i]]' did not match expected output '[expected_outputs[i]]', but was instead '[actual]'.")

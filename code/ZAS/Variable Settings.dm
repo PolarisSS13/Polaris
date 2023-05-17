@@ -7,7 +7,7 @@ var/global/vs_control/vsc = new
 
 	var/fire_firelevel_multiplier = 25
 	var/fire_firelevel_multiplier_NAME = "Fire - Firelevel Constant"
-	var/fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects mainly the extingiushing of fires."
+	var/fire_firelevel_multiplier_DESC = "Multiplied by the equation for firelevel, affects mainly the extinguishing of fires."
 
 	//Note that this parameter and the phoron heat capacity have a significant impact on TTV yield.
 	var/fire_fuel_energy_release = 866000 //J/mol. Adjusted to compensate for fire energy release being fixed, was 397000
@@ -43,7 +43,7 @@ var/global/vs_control/vsc = new
 	var/airflow_stun_pressure_DESC = "Percent of 1 Atm. at which mobs will be stunned by airflow."
 
 	var/airflow_stun_cooldown = 60
-	var/airflow_stun_cooldown_NAME = "Aiflow Stunning - Cooldown"
+	var/airflow_stun_cooldown_NAME = "Airflow Stunning - Cooldown"
 	var/airflow_stun_cooldown_DESC = "How long, in tenths of a second, to wait before stunning them again."
 
 	var/airflow_stun = 1

@@ -9,8 +9,8 @@
 	mission_type = _mission_type
 
 /datum/lore/mission/prebuilt
-/datum/lore/mission/prebuilt/New(a)
-	prefix = a
+/datum/lore/mission/prebuilt/New(_prefix)
+	prefix = _prefix
 
 //Default mission types for ease of populating organizations
 //Most orgs that do medical missions are going to run comperable kinds of medical mission

@@ -230,14 +230,15 @@
 	..()
 
 /obj/item/projectile/chameleon
-	name = "bullet"
-	icon_state = "bullet"
+	name = "phase wave"
+	icon_state = "phase"
+	fire_sound = 'sound/weapons/Gunshot_phase.ogg'
 	damage = 1 // stop trying to murderbone with a fake gun dumbass!!!
 	embed_chance = 0 // nope
 	nodamage = 1
+	range = 6
 	damage_type = HALLOSS
-	muzzle_type = /obj/effect/projectile/muzzle/bullet
-	hud_state = "monkey"
+	hud_state = "laser_heat"
 
 /obj/item/projectile/bola
 	name = "bola"

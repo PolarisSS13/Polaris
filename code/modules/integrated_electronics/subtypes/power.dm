@@ -8,7 +8,7 @@
 	extended_desc = "This circuit transmits 5 kJ of electricity every time the activator pin is pulsed. The input pin must be \
 	a reference to a machine to send electricity to.  This can be a battery, or anything containing a battery.  The machine can exist \
 	inside the assembly, or adjacent to it.  The power is sourced from the assembly's power cell.  If the target is outside of the assembly, \
-	some power is lost due to ineffiency."
+	some power is lost due to inefficiency."
 	w_class = ITEMSIZE_SMALL
 	complexity = 16
 	inputs = list("target" = IC_PINTYPE_REF)
@@ -20,16 +20,16 @@
 	activators = list("transmit" = IC_PINTYPE_PULSE_IN, "on transmit" = IC_PINTYPE_PULSE_OUT)
 	spawn_flags = IC_SPAWN_RESEARCH
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_DATA = 4, TECH_POWER = 4, TECH_MAGNET = 3)
-	power_draw_per_use = 500 // Inefficency has to come from somewhere.
+	power_draw_per_use = 500 // Inefficiency has to come from somewhere.
 	var/amount_to_move = 5000
 
 /obj/item/integrated_circuit/power/transmitter/large
 	name = "large power transmission circuit"
-	desc = "This can wirelessly transmit a lot of electricity from an assembly's battery towards a nearby machine.  Warning:  Do not operate in flammable enviroments."
+	desc = "This can wirelessly transmit a lot of electricity from an assembly's battery towards a nearby machine.  Warning:  Do not operate in flammable environments."
 	extended_desc = "This circuit transmits 20 kJ of electricity every time the activator pin is pulsed. The input pin must be \
 	a reference to a machine to send electricity to.  This can be a battery, or anything containing a battery.  The machine can exist \
 	inside the assembly, or adjacent to it.  The power is sourced from the assembly's power cell.  If the target is outside of the assembly, \
-	some power is lost due to ineffiency."
+	some power is lost due to inefficiency."
 	w_class = ITEMSIZE_LARGE
 	complexity = 32
 	origin_tech = list(TECH_ENGINEERING = 4, TECH_DATA = 4, TECH_POWER = 6, TECH_MAGNET = 5)

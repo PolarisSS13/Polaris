@@ -41,7 +41,7 @@
 /datum/ai_holder/proc/set_follow(mob/living/L, follow_for = 0)
 	ai_log("set_follow() : Entered.", AI_LOG_DEBUG)
 	if(!L)
-		ai_log("set_follow() : Was told to follow a nonexistant mob.", AI_LOG_ERROR)
+		ai_log("set_follow() : Was told to follow a nonexistent mob.", AI_LOG_ERROR)
 		return FALSE
 
 	leader = L

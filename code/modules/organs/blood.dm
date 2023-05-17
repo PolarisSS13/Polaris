@@ -152,7 +152,7 @@ var/global/const/CE_STABLE_THRESHOLD = 0.5
 		// Some species bleed out differently
 		blood_loss_divisor /= species.bloodloss_rate
 
-		// Some modifiers can make bleeding better or worse.  Higher multiplers = more bleeding.
+		// Some modifiers can make bleeding better or worse.  Higher multipliers = more bleeding.
 		var/blood_loss_modifier_multiplier = 1.0
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.bleeding_rate_percent))
@@ -274,7 +274,7 @@ var/global/const/CE_STABLE_THRESHOLD = 0.5
 		src.reagents.add_reagent(C, (text2num(chems[C]) / species.blood_volume) * amount)//adds trace chemicals to owner's blood
 	reagents.update_total()
 
-//Transfers blood from reagents to vessel, respecting blood types compatability.
+//Transfers blood from reagents to vessel, respecting blood types compatibility.
 /mob/living/carbon/human/inject_blood(var/datum/reagent/blood/injected, var/amount)
 
 	if(!should_have_organ(O_HEART))

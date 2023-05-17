@@ -117,3 +117,23 @@
 	cost = 15
 	containertype = /obj/structure/closet/crate/oculum
 	containername = "cards crate"
+
+/datum/supply_pack/recreation/sas_builder
+	contains = list(
+			/obj/item/deck/saintsandsins = 2,
+			/obj/item/pack/saintsandsins = 2,
+			/obj/random/saintsandsins_packs = 2
+			)
+	name = "Saints and Sins Builder's Crate"
+	cost = 40
+	containertype = /obj/structure/closet/crate/oculum
+	containername = "\improper Saints and Sins builder's crate"
+
+/datum/supply_pack/recreation/sas_booster
+	contains = list(
+			/obj/random/saintsandsins_packs = 6
+			)
+	name = "Saints and Sins Booster Crate"
+	cost = 20
+	containertype = /obj/structure/closet/crate/oculum
+	containername = "\improper Saints and Sins booster crate"

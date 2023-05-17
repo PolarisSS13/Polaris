@@ -2,7 +2,7 @@
 /obj/item/bodybag/cryobag/robobag
 	name = "synthmorph bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
-	especially useful if short on time or in a hostile enviroment."
+	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
 	icon_state = "bodybag_folded"
 	item_state = "bodybag_cryo_folded"
@@ -19,7 +19,7 @@
 /obj/structure/closet/body_bag/cryobag/robobag
 	name = "synthmorph bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
-	especially useful if short on time or in a hostile enviroment."
+	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
 	item_path = /obj/item/bodybag/cryobag/robobag
 	tank_type = /obj/item/tank/stasis/nitro_cryo

@@ -171,7 +171,7 @@
 	result_amount = 10
 
 /decl/chemical_reaction/instant/drinks/kahlua
-	name = "Kahlua"
+	name = "Kahlúa"
 	id = "kahlua"
 	result = "kahlua"
 	required_reagents = list("coffee" = 5, "sugar" = 5)

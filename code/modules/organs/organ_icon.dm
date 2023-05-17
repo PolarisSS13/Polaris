@@ -79,11 +79,13 @@ var/global/list/limb_icon_cache = list()
 
 	return res
 
-/obj/item/organ/external/proc/get_icon(var/skeletal)
+/obj/item/organ/external/proc/get_icon(var/skeletal, var/can_apply_transparency = TRUE)
 
 	var/gender = "m"
 	if(owner && owner.gender == FEMALE)
 		gender = "f"
+
+	var/should_apply_transparency = FALSE
 
 	if(!force_icon_key)
 		icon_cache_key = "[icon_name]_[species ? species.name : SPECIES_HUMAN]"
@@ -109,9 +111,11 @@ var/global/list/limb_icon_cache = list()
 				mob_icon = new /icon('icons/mob/human_races/r_skeleton.dmi', "[icon_name][gender ? "_[gender]" : ""]")
 			else if (robotic >= ORGAN_ROBOT)
 				mob_icon = new /icon('icons/mob/human_races/robotic.dmi', "[icon_name][gender ? "_[gender]" : ""]")
+				should_apply_transparency = TRUE
 				apply_colouration(mob_icon)
 			else
 				mob_icon = new /icon(species.get_icobase(owner, (status & ORGAN_MUTATED)), "[icon_name][gender ? "_[gender]" : ""]")
+				should_apply_transparency = TRUE
 				apply_colouration(mob_icon)
 
 			//Body markings, actually does not include head this time. Done separately above.
@@ -134,6 +138,7 @@ var/global/list/limb_icon_cache = list()
 
 	if(model)
 		icon_cache_key += "_model_[model]"
+		should_apply_transparency = TRUE
 		apply_colouration(mob_icon)
 		if(owner && owner.synth_markings)
 			for(var/M in markings)
@@ -143,6 +148,9 @@ var/global/list/limb_icon_cache = list()
 				add_overlay(mark_s) //So when it's not on your body, it has icons
 				mob_icon.Blend(mark_s, ICON_OVERLAY) //So when it's on your body, it has icons
 				icon_cache_key += "[M][markings[M]["color"]]"
+
+	if (nonsolid && !istype(src,/obj/item/organ/external/head) && can_apply_transparency && should_apply_transparency)
+		mob_icon += rgb(,,,180) //do it here so any markings become transparent as well
 
 	dir = EAST
 	icon = mob_icon
@@ -172,9 +180,6 @@ var/global/list/limb_icon_cache = list()
 		var/blend = species?.limb_blend || ICON_ADD
 		applying.Blend(rgb(s_col[1], s_col[2], s_col[3]), blend)
 		icon_cache_key += "_color_[s_col[1]]_[s_col[2]]_[s_col[3]]_[blend]"
-
-	// Translucency.
-	if(nonsolid) applying += rgb(,,,180) // SO INTUITIVE TY BYOND
 
 	return applying
 

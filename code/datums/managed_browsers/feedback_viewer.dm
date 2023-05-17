@@ -24,7 +24,7 @@
 
 /datum/managed_browser/feedback_viewer/New(client/new_client)
 	if(!check_rights(R_ADMIN|R_DEBUG|R_EVENT, new_client)) // Just in case someone figures out a way to spawn this as non-staff.
-		message_admins("[new_client] tried to view feedback with insufficent permissions.")
+		message_admins("[new_client] tried to view feedback with insufficient permissions.")
 		qdel(src)
 
 	..()
@@ -110,7 +110,7 @@
 	dat += "</body></html>"
 	return dat.Join()
 
-// Used to show the full version of feedback in a seperate window.
+// Used to show the full version of feedback in a separate window.
 /datum/managed_browser/feedback_viewer/proc/display_big_feedback(author, text)
 	var/list/dat = list("<html><body>")
 	dat += replacetext(text, "\n", "<br>")

@@ -2,6 +2,7 @@
 	name = "observer"
 	desc = "This shouldn't appear"
 	density = 0
+	move_intents = list(/decl/move_intent/no_delay)
 
 /mob/observer/dead
 	name = "ghost"
@@ -84,7 +85,7 @@
 		"Beepsky" = "secbot"
 		)
 	var/last_revive_notification = null // world.time of last notification, used to avoid spamming players from defibs or cloners.
-	var/cleanup_timer // Refernece to a timer that will delete this mob if no client returns
+	var/cleanup_timer // Reference to a timer that will delete this mob if no client returns
 
 /mob/observer/dead/Initialize()
 

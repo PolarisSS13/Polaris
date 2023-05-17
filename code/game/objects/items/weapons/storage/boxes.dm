@@ -406,8 +406,8 @@
 	starts_with = list(/obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped = 4)
 
 /obj/item/storage/box/monkeycubes/farwacubes
-	name = "farwa cube box"
-	desc = "Drymate brand farwa cubes, shipped from Meralar. Just add water!"
+	name = "Farwa cube box"
+	desc = "Drymate brand Farwa cubes, shipped from Meralar. Just add water!"
 	starts_with = list(/obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped/farwacube = 4)
 
 /obj/item/storage/box/monkeycubes/stokcubes
@@ -416,8 +416,8 @@
 	starts_with = list(/obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped/stokcube = 4)
 
 /obj/item/storage/box/monkeycubes/neaeracubes
-	name = "neaera cube box"
-	desc = "Drymate brand neaera cubes, shipped from Qerr'balak. Just add water!"
+	name = "Neaera cube box"
+	desc = "Drymate brand Neaera cubes, shipped from Qerr'balak. Just add water!"
 	starts_with = list(/obj/item/reagent_containers/food/snacks/cube/monkeycube/wrapped/neaeracube = 4)
 
 /obj/item/storage/box/ids

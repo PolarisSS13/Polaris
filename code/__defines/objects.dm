@@ -24,8 +24,8 @@
 #define ROGUELIKE_ITEM_UNCURSED		0	// Normal.
 #define ROGUELIKE_ITEM_CURSED		-1	// Does bad things, clothing cannot be taken off.
 
-// Consistant messages for certain events.
-// Consistancy is import in order to avoid giving too much information away when using an
+// Consistent messages for certain events.
+// Consistency is import in order to avoid giving too much information away when using an
 // unidentified object due to a typo or some other unique difference in message output.
 #define ROGUELIKE_MESSAGE_NOTHING "Nothing happens."
 #define ROGUELIKE_MESSAGE_UNKNOWN "Something happened, but you're not sure what."

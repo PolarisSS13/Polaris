@@ -4,7 +4,7 @@
 	icon_state = "generic_hood"
 	body_parts_covered = HEAD
 	cold_protection = HEAD
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCKHEADHAIR
 
 // Winter coats
 /obj/item/clothing/head/hood/winter

@@ -440,7 +440,6 @@
 	},
 /area/submap/DemonPool)
 "IP" = (
-/obj/effect/spawner/lootdrop,
 /turf/simulated/floor,
 /area/submap/DemonPool)
 "Jo" = (
@@ -561,7 +560,6 @@
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Qz" = (
-/obj/effect/spawner/lootdrop,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Ro" = (
@@ -664,7 +662,6 @@
 /area/submap/DemonPool)
 "ZU" = (
 /obj/effect/decal/cleanable/blood/gibs/limb,
-/obj/effect/spawner/lootdrop,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 

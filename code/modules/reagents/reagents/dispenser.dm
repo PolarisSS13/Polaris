@@ -29,7 +29,7 @@
 /datum/reagent/carbon/affect_ingest(var/mob/living/carbon/M, var/alien, var/removed)
 	if(alien == IS_DIONA)
 		return
-	if(M.ingested && M.ingested.reagent_list.len > 1) // Need to have at least 2 reagents - cabon and something to remove
+	if(M.ingested && M.ingested.reagent_list.len > 1) // Need to have at least 2 reagents - carbon and something to remove
 		var/effect = 1 / (M.ingested.reagent_list.len - 1)
 		for(var/datum/reagent/R in M.ingested.reagent_list)
 			if(R == src)

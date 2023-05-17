@@ -201,7 +201,7 @@
 
 
 /datum/trait/modifier/physical/no_clone
-	name = "Cloning Incompatability"
+	name = "Cloning Incompatibility"
 	modifier_type = /datum/modifier/no_clone
 
 /datum/trait/modifier/physical/no_clone/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)
@@ -211,7 +211,7 @@
 
 
 /datum/trait/modifier/physical/no_borg
-	name = "Cybernetic Incompatability"
+	name = "Cybernetic Incompatibility"
 	modifier_type = /datum/modifier/no_borg
 
 /datum/trait/modifier/physical/no_borg/test_for_invalidity(var/datum/category_item/player_setup_item/traits/setup)

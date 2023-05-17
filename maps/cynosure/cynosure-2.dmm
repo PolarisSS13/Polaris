@@ -10617,11 +10617,18 @@
 	id = "BrigFoyer";
 	layer = 2.9;
 	name = "Foyer Doors";
+	pixel_x = 6;
 	pixel_y = 6
 	},
 /obj/item/sticky_pad/random{
 	pixel_x = 8;
 	pixel_y = -1
+	},
+/obj/item/communicator/desktop{
+	occupation = "security";
+	pixel_x = -9;
+	pixel_y = 5;
+	static_name = "security lobby communicator"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/security/lobby)
@@ -27108,7 +27115,7 @@
 	dir = 1;
 	pixel_y = -24
 	},
-/obj/machinery/organ_printer/flesh/full,
+/obj/machinery/bioprinter/full,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/medical/cloning)
 "mjM" = (
@@ -40535,11 +40542,13 @@
 	id = "MedbayFoyer";
 	layer = 2.9;
 	name = "Foyer Door";
+	pixel_x = 6;
 	pixel_y = 5
 	},
-/obj/item/radio/phone/medbay{
-	name = "Reception Emergency Phone";
-	pixel_y = -6
+/obj/item/communicator/desktop{
+	occupation = "medical";
+	pixel_x = -8;
+	static_name = "medical lobby communicator"
 	},
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/medical/reception)
@@ -44125,6 +44134,9 @@
 	pixel_y = 2
 	},
 /obj/item/reagent_containers/glass/bucket,
+/obj/item/shovel/spade,
+/obj/item/shovel/spade,
+/obj/item/shovel/spade,
 /turf/simulated/floor/tiled/hydro,
 /area/surface/station/hydroponics)
 "tzy" = (
@@ -50572,6 +50584,19 @@
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/security/lobby)
+"wCp" = (
+/obj/structure/table/marble,
+/obj/machinery/door/blast/gate/thin{
+	dir = 2;
+	id = "kitchen";
+	layer = 3.3
+	},
+/obj/item/communicator/desktop{
+	occupation = "kitchen";
+	static_name = "kitchen communicator"
+	},
+/turf/simulated/floor/tiled/eris/cafe,
+/area/surface/station/crew_quarters/kitchen)
 "wCF" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -51400,8 +51425,13 @@
 /obj/structure/window/reinforced,
 /obj/machinery/recharger,
 /obj/item/sticky_pad/random{
-	pixel_x = 8;
+	pixel_x = -8;
 	pixel_y = -1
+	},
+/obj/item/communicator/desktop{
+	occupation = "engineering";
+	pixel_x = 14;
+	static_name = "engineering lobby communicator"
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/engineering_monitoring)
@@ -53064,11 +53094,24 @@
 /area/surface/station/hydroponics)
 "xHq" = (
 /obj/structure/table/marble,
-/obj/item/reagent_containers/food/drinks/flask/barflask,
-/obj/item/reagent_containers/food/drinks/flask/vacuumflask,
-/obj/item/flame/lighter/zippo,
-/obj/item/reagent_containers/glass/rag,
+/obj/item/reagent_containers/food/drinks/flask/barflask{
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/food/drinks/flask/vacuumflask{
+	pixel_x = 6
+	},
+/obj/item/flame/lighter/zippo{
+	pixel_x = 6
+	},
+/obj/item/reagent_containers/glass/rag{
+	pixel_x = 5
+	},
 /obj/item/deskbell,
+/obj/item/communicator/desktop{
+	occupation = "bar";
+	pixel_x = -12;
+	static_name = "bar communicator"
+	},
 /turf/simulated/floor/lino,
 /area/surface/station/crew_quarters/bar)
 "xHy" = (
@@ -54009,6 +54052,8 @@
 /obj/effect/floor_decal/corner/green/border{
 	dir = 4
 	},
+/obj/item/shovel/spade,
+/obj/item/shovel/spade,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/rnd/xenobiology/xenoflora)
 "xYt" = (
@@ -88832,7 +88877,7 @@ sfZ
 xuZ
 xod
 epo
-cKX
+wCp
 msM
 qzQ
 msM

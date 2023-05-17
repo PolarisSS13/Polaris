@@ -517,7 +517,7 @@
 /mob/living/carbon/human/mind_initialize()
 	. = ..()
 	if(!mind.assigned_role)
-		mind.assigned_role = "Assistant"	//defualt
+		mind.assigned_role = "Assistant"	//default
 
 //slime
 /mob/living/simple_mob/slime/mind_initialize()

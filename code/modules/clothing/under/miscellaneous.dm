@@ -72,7 +72,7 @@
 	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
 
 /obj/item/clothing/under/gov
-	desc = "A neat proper uniform of someone on offical business. The collar is <i>immaculately</i> starched."
+	desc = "A neat proper uniform of someone on official business. The collar is <i>immaculately</i> starched."
 	name = "Green formal uniform"
 	icon_state = "greensuit"
 	item_state_slots = list(slot_r_hand_str = "centcom", slot_l_hand_str = "centcom")
@@ -81,7 +81,7 @@
 
 /obj/item/clothing/under/gov/skirt
 	name = "Green formal skirt uniform"
-	desc = "A neat proper uniform of someone on offical business. The top button is sewn shut."
+	desc = "A neat proper uniform of someone on official business. The top button is sewn shut."
 	icon_state = "greensuit_skirt"
 
 /obj/item/clothing/under/space

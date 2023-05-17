@@ -88,6 +88,8 @@ var/global/list/gamemode_cache = list()
 	var/static/automute_on = 0					//enables automuting/spam prevention
 	var/static/jobs_have_minimal_access = 0	//determines whether jobs use minimal access or expanded access.
 
+	var/static/hub_visible = FALSE
+
 	var/cult_ghostwriter = 1               //Allows ghosts to write in blood in cult rounds...
 	var/cult_ghostwriter_req_cultists = 10 //...so long as this many cultists are active.
 
@@ -181,9 +183,6 @@ var/global/list/gamemode_cache = list()
 	//Mob specific modifiers. NOTE: These will affect different mob types in different ways
 	var/human_delay = 0
 	var/robot_delay = 0
-	var/monkey_delay = 0
-	var/alien_delay = 0
-	var/slime_delay = 0
 	var/animal_delay = 0
 
 	var/footstep_volume = 0
@@ -367,6 +366,9 @@ var/global/list/gamemode_cache = list()
 
 				if ("log_ooc")
 					config.log_ooc = 1
+
+				if ("hub_visible")
+					config.hub_visible = TRUE
 
 				if ("log_access")
 					config.log_access = 1
@@ -998,12 +1000,6 @@ var/global/list/gamemode_cache = list()
 					config.human_delay = value
 				if("robot_delay")
 					config.robot_delay = value
-				if("monkey_delay")
-					config.monkey_delay = value
-				if("alien_delay")
-					config.alien_delay = value
-				if("slime_delay")
-					config.slime_delay = value
 				if("animal_delay")
 					config.animal_delay = value
 

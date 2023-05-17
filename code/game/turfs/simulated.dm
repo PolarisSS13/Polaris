@@ -171,3 +171,15 @@
 		new /obj/effect/decal/cleanable/blood/oil(src)
 	else if(ishuman(M))
 		add_blood(M)
+
+/turf/simulated/is_slime_food()
+	return dirt >= 50
+
+/turf/simulated/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	slime.adjust_nutrition(round(dirt / 5))
+	dirt = 0
+	slime.visible_message(
+		SPAN_NOTICE("\The [slime] cleans the dirt off of \the [src]!"),
+		SPAN_NOTICE("You eat all the dirt right off \the [src].")
+	)
+	update_dirt()

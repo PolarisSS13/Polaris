@@ -5,7 +5,7 @@
 	var/threatening = FALSE				// If the mob actually gave the warning, checked so it doesn't constantly yell every tick.
 	var/threaten_delay = 3 SECONDS		// How long a 'threat' lasts, until actual fighting starts. If null, the mob never starts the fight but still does the threat.
 	var/threaten_timeout = 1 MINUTE		// If the mob threatens someone, they leave, and then come back before this timeout period, the mob escalates to fighting immediately.
-	var/last_conflict_time = null		// Last occurance of fighting being used, in world.time.
+	var/last_conflict_time = null		// Last occurrence of fighting being used, in world.time.
 	var/last_threaten_time = null		// Ditto but only for threats.
 	var/last_target_time = null			// Ditto for when we last switched targets, used to stop retaliate from gimping mobs
 
@@ -34,8 +34,8 @@
 
 		if(holder.say_list)
 			holder.ISay(safepick(holder.say_list.say_threaten))
-			playsound(holder, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-			playsound(target, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+			playsound(holder, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticeable to the target.
+			playsound(target, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistent.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
 			var/should_escalate = FALSE
@@ -57,8 +57,8 @@
 			set_stance(STANCE_IDLE)
 			if(holder.say_list)
 				holder.ISay(safepick(holder.say_list.say_stand_down))
-				playsound(holder, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticable to the target.
-				playsound(target, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistant.
+				playsound(holder, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticeable to the target.
+				playsound(target, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistent.
 
 // Determines what is deserving of a warning when STANCE_ALERT is active.
 /datum/ai_holder/proc/will_threaten(mob/living/the_target)

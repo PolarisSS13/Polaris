@@ -42,7 +42,7 @@
 #define random_id(key,min_id,max_id) uniqueness_repository.Generate(/datum/uniqueness_generator/id_random, key, min_id, max_id)
 
 
-/// Given a hexadeximal text, returns the corresponding integer
+/// Given a hexadecimal text, returns the corresponding integer
 #define hex2num(hex) (text2num(hex, 16) || 0)
 
 
