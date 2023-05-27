@@ -23,6 +23,7 @@ calculate text size per text.
 */
 /datum/reagents/proc/generate_taste_message(mob/living/carbon/taster = null)
 	var/minimum_percent = 10
+	var/taster_species = taster?.get_species_name()
 	if(ishuman(taster))
 		var/mob/living/carbon/human/H = taster
 		minimum_percent = round(10/ (H.isSynthetic() ? TASTE_DULL : H.species.taste_sensitivity))
@@ -33,20 +34,21 @@ calculate text size per text.
 		for(var/datum/reagent/R in reagent_list)
 			if(!R.taste_mult)
 				continue
-			if(R.type == /datum/reagent/nutriment)
-				var/list/taste_data = R.get_data()
-				for(var/taste in taste_data)
-					if(taste in tastes)
-						tastes[taste] += taste_data[taste]
-					else
-						tastes[taste] = taste_data[taste]
+			var/list/reagent_data = R.get_taste_data()
+			if(!reagent_data)
+				continue
+			reagent_data = cached_json_decode(reagent_data)
+			if(!islist(reagent_data) || !length(reagent_data))
+				continue
+			var/list/taste_data
+			if(taster_species in reagent_data)
+				taste_data = reagent_data[taster_species]
+			else if(TASTE_STRING_DEFAULT in reagent_data)
+				taste_data = reagent_data[TASTE_STRING_DEFAULT]
 			else
-				var/taste_desc = R.taste_description
-				var/taste_amount = get_reagent_amount(R.id) * R.taste_mult
-				if(R.taste_description in tastes)
-					tastes[taste_desc] += taste_amount
-				else
-					tastes[taste_desc] = taste_amount
+				continue
+			for(var/taste in taste_data)
+				tastes[taste] += taste_data[taste]
 
 		//deal with percentages
 		var/total_taste = 0

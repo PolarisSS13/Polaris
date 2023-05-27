@@ -30,12 +30,20 @@
 
 /obj/item/reagent_containers/food/snacks/Initialize()
 	. = ..()
+	if(nutriment_desc)
+		nutriment_desc = list(TASTE_DATA_FIELD = get_cached_taste_data("nutriment", nutriment_desc))
 	if(nutriment_amt)
-		reagents.add_reagent("nutriment",nutriment_amt,nutriment_desc)
+		reagents.add_reagent("nutriment", nutriment_amt, nutriment_desc)
 	if(nutriment_allergens && reagents)
 		for(var/datum/reagent/r in reagents.reagent_list)
 			if(r.id == "nutriment")
 				r.allergen_type = nutriment_allergens
+	if(. != INITIALIZE_HINT_QDEL)
+		return INITIALIZE_HINT_LATELOAD
+
+/obj/item/reagent_containers/food/snacks/LateInitialize()
+	. = ..()
+	nutriment_desc = null
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -423,7 +431,10 @@
 	icon = 'icons/obj/food_donuts.dmi'
 	icon_state = "donut"
 	filling_color = "#D9C386"
-	nutriment_desc = list("sweetness" = 5, "fried dough" = 5)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 5, "fried dough" = 5),
+		SPECIES_TESHARI      = list("fried dough" = 10)
+	)
 	nutriment_amt = 3
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_GRAINS
 	bitesize = 4
@@ -1188,7 +1199,10 @@
 	filling_color = "#E0CF9B"
 	center_of_mass = list("x"=17, "y"=4)
 	nutriment_amt = 6
-	nutriment_desc = list("mild sweetness" = 3, "fluffy bread" = 3)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("mild sweetness" = 3, "fluffy bread" = 3),
+		SPECIES_TESHARI      = list("fluffy bread" = 3)
+	)
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/pie
@@ -1200,7 +1214,10 @@
 	filling_color = "#FBFFB8"
 	center_of_mass = list("x"=16, "y"=13)
 	nutriment_amt = 4
-	nutriment_desc = list("sweet wholewheat crust" = 3, "whipped cream" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet wholewheat crust" = 3, "whipped cream" = 2),
+		SPECIES_TESHARI      = list("wholewheat crust" = 3, "whipped cream" = 2)
+	)
 	bitesize = 3
 
 /obj/item/reagent_containers/food/snacks/pie/Initialize()
@@ -1220,7 +1237,7 @@
 	trash = /obj/item/trash/plate
 	center_of_mass = list("x"=16, "y"=13)
 	nutriment_amt = 4
-	nutriment_desc = list("egg custard" = 2, "sweet pie crust" = 3)
+	nutriment_desc = list("egg custard" = 2, "pie crust" = 3)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_EGGS
 	bitesize = 3
 
@@ -1312,7 +1329,10 @@
 	filling_color = "#FFCCCC"
 	center_of_mass = list("x"=17, "y"=9)
 	nutriment_amt = 5
-	nutriment_desc = list("sweetness" = 2, "sour fungus" = 4, "savory pastry" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 2, "sour fungus" = 4, "savory pastry" = 2),
+		SPECIES_TESHARI      = list("subtle bitterness" = 2, "sour fungus" = 4, "savory pastry" = 2)
+	)
 	bitesize = 3
 
 /obj/item/reagent_containers/food/snacks/amanita_pie/Initialize()
@@ -1545,7 +1565,10 @@
 	filling_color = "#E8E79E"
 	center_of_mass = list("x"=15, "y"=14)
 	nutriment_amt = 3
-	nutriment_desc = list("sweet cracker" = 2, "vanilla" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet cracker" = 2, "vanilla" = 1),
+		SPECIES_TESHARI      = list("cracker" = 2, "vanilla" = 1)
+	)
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/badrecipe
@@ -2149,7 +2172,10 @@
 	filling_color = "#FF00F7"
 	center_of_mass = list("x"=15, "y"=11)
 	nutriment_amt = 8
-	nutriment_desc = list("toasted fungal umami" = 7, "sweetness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("toasted fungal umami" = 7, "sweetness" = 1),
+		SPECIES_TESHARI      = list("toasted fungal umami" = 5, "unpleasant bitterness" = 2)
+	)
 	nutriment_allergens = ALLERGEN_FUNGI
 	bitesize = 4
 
@@ -2359,7 +2385,10 @@
 	filling_color = "#F21873"
 	center_of_mass = list("x"=15, "y"=13)
 	nutriment_amt = 3
-	nutriment_desc = list("apple" = 3, "sweetness" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("apple" = 3, "sweetness" = 2),
+		SPECIES_TESHARI      = list("apple" = 3, "tacky, chewy blandness" = 1, "mild bitterness" = 1)
+	)
 	bitesize = 3
 
 /obj/item/reagent_containers/food/snacks/caramelapple
@@ -2369,7 +2398,10 @@
 	filling_color = "#F21873"
 	center_of_mass = list("x"=15, "y"=13)
 	nutriment_amt = 3
-	nutriment_desc = list("apple" = 3, "caramel" = 3, "sweetness" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("apple" = 3, "caramel" = 3, "sweetness" = 2),
+		SPECIES_TESHARI      = list("apple" = 3, "caramel" = 3, "tacky, chewy blandness" = 1, "mild bitterness" = 1)
+	)
 	bitesize = 3
 
 /obj/item/reagent_containers/food/snacks/applepie
@@ -2379,7 +2411,10 @@
 	filling_color = "#E0EDC5"
 	center_of_mass = list("x"=16, "y"=13)
 	nutriment_amt = 4
-	nutriment_desc = list("sweetness" = 2, "apple" = 2, "sweet pie crust" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 2, "apple" = 2, "sweet pie crust" = 2),
+		SPECIES_TESHARI      = list("mild bitterness" = 2, "apple" = 2, "pie crust" = 2)
+	)
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	bitesize = 3
 
@@ -2390,7 +2425,11 @@
 	filling_color = "#FF525A"
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 4
-	nutriment_desc = list("sweetness" = 2, "cherry" = 2, "sweet pie crust" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 2, "cherry" = 2, "sweet pie crust" = 2),
+		SPECIES_TESHARI      = list("mild bitterness" = 2, "cherry" = 2, "pie crust" = 2)
+	)
+
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	bitesize = 3
 
@@ -2678,7 +2717,10 @@
 	slices_num = 5
 	filling_color = "#EDE5AD"
 	center_of_mass = list("x"=16, "y"=9)
-	nutriment_desc = list("sweet bread" = 10)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet bread" = 10),
+		SPECIES_TESHARI      = list("fruity bread" = 10, "an unpleasant bitter aftertaste" = 1)
+	)
 	nutriment_amt = 10
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	bitesize = 2
@@ -2734,7 +2776,10 @@
 	slices_num = 5
 	filling_color = "#FFD675"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "carrot" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "carrot" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "carrot" = 15)
+	)
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_VEGETABLE|ALLERGEN_GRAINS|ALLERGEN_SUGARS|ALLERGEN_EGGS
 	bitesize = 2
@@ -2764,7 +2809,10 @@
 	slices_num = 5
 	filling_color = "#E6AEDB"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "slime" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "slime" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "slime" = 15)
+	)
 	nutriment_amt = 15
 	nutriment_allergens = ALLERGEN_MEAT|ALLERGEN_SUGARS|ALLERGEN_EGGS
 	bitesize = 2
@@ -2795,7 +2843,11 @@
 	slices_num = 5
 	filling_color = "#FAF7AF"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("sweet wholewheat crust" = 5, "sweet cream cheese" = 20)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet wholewheat crust" = 5, "sweet cream cheese" = 20),
+		SPECIES_TESHARI      = list("wholewheat crust" = 5, "cream cheese" = 20, "a mild bitter aftertaste" = 1)
+	)
+
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_SUGARS|ALLERGEN_EGGS
 	bitesize = 2
@@ -2847,7 +2899,10 @@
 	slices_num = 5
 	filling_color = "#F7EDD5"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "vanilla" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "vanilla" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "vanilla" = 15)
+	)
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_DAIRY|ALLERGEN_GRAINS
 
@@ -2872,7 +2927,10 @@
 	slices_num = 5
 	filling_color = "#FADA8E"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "orange marmalade" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "orange marmalade" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "oranges" = 15)
+	)
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_FRUIT
 
@@ -2897,7 +2955,10 @@
 	slices_num = 5
 	filling_color = "#CBFA8E"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lime marmalade" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "lime marmalade" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "limes" = 15)
+	)
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_FRUIT
 
@@ -2922,7 +2983,10 @@
 	slices_num = 5
 	filling_color = "#FAFA8E"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "lemon curd" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "lemon curd" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "lemon curd" = 15)
+	)
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_FRUIT
 
@@ -2947,7 +3011,10 @@
 	slices_num = 5
 	filling_color = "#805930"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "ganache" = 10, "chocolate" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "ganache" = 10, "chocolate" = 15),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "rich bitterness" = 10, "chocolate" = 15)
+	)
 	nutriment_amt = 20
 
 /obj/item/reagent_containers/food/snacks/slice/chocolatecake
@@ -2992,7 +3059,11 @@
 	slices_num = 5
 	filling_color = "#FFD6D6"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "buttercream icing" = 10)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "buttercream icing" = 10),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "buttercream icing" = 10)
+	)
+
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_DAIRY|ALLERGEN_GRAINS
 	bitesize = 3
@@ -3085,7 +3156,10 @@
 	slices_num = 5
 	filling_color = "#EBF5B8"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "baked apple" = 15)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 10, "sweetness" = 10, "baked apple" = 10),
+		SPECIES_TESHARI      = list("cake" = 10, "mild bitterness" = 5, "baked apple" = 10)
+	)
 	nutriment_amt = 25
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_FRUIT
 
@@ -3110,7 +3184,10 @@
 	slices_num = 5
 	filling_color = "#F5B951"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("sweet pie crust" = 5, "cream" = 5, "spiced pumpkin" = 5)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet pie crust" = 5, "cream" = 5, "spiced pumpkin" = 5),
+		SPECIES_TESHARI      = list("pie crust" = 5, "cream" = 5, "spiced pumpkin" = 5, "mild bitterness" = 1)
+	)
 	nutriment_amt = 15
 
 /obj/item/reagent_containers/food/snacks/slice/pumpkinpie
@@ -3250,7 +3327,7 @@
 	slice_path = /obj/item/reagent_containers/food/snacks/slice/vegetablepizza
 	slices_num = 6
 	center_of_mass = list("x"=16, "y"=11)
-	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "mozzarella cheese" = 5, "baked eggplant" = 5, "baked carrot" = 5, "sweetcorn" = 5)
+	nutriment_desc = list("pizza crust" = 10, "tomato" = 10, "mozzarella cheese" = 5, "baked eggplant" = 5, "baked carrot" = 5, "corn" = 5)
 	nutriment_amt = 40
 	nutriment_allergens = ALLERGEN_DAIRY|ALLERGEN_GRAINS|ALLERGEN_FRUIT|ALLERGEN_VEGETABLE
 	bitesize = 2
@@ -3862,7 +3939,10 @@
 	filling_color = "#A66829"
 	center_of_mass = list("x"=17, "y"=16)
 	nutriment_amt = 6
-	nutriment_desc = list("bread" = 2, "sweetness" = 3)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("bread" = 2, "sweetness" = 3),
+		SPECIES_TESHARI      = list("bread" = 3, "an unpleasant bitter aftertaste" = 1)
+	)
 	nutriment_allergens = ALLERGEN_GRAINS
 	bitesize = 2
 
@@ -3937,7 +4017,10 @@
 	filling_color = "#DBC94F"
 	icon_state = "sugarcookie"
 	nutriment_amt = 5
-	nutriment_desc = list("sweet cookie" = 5)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet cookie" = 5),
+		SPECIES_TESHARI      = list("crisp cookie" = 5, "subtle bitterness" = 1)
+	)
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_GRAINS
 	bitesize = 1
 
@@ -3952,7 +4035,7 @@
 	filling_color = "#E0CF9B"
 	center_of_mass = list("x"=17, "y"=4)
 	nutriment_amt = 6
-	nutriment_desc = list("sweet muffin" = 2, "berries" = 2)
+	nutriment_desc = list("fluffy cake" = 2, "berries" = 2)
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	bitesize = 2
 
@@ -4024,7 +4107,10 @@
 	icon_state = "flowerchildsalad"
 	filling_color = "#FF3867"
 	nutriment_amt = 10
-	nutriment_desc = list("bittersweet" = 10)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("bittersweet" = 10),
+		SPECIES_TESHARI      = list("complex floral notes" = 8, "mild bitterness" = 4)
+	)
 	bitesize = 4
 
 /obj/item/reagent_containers/food/snacks/rosesalad
@@ -4033,7 +4119,10 @@
 	icon_state = "rosesalad"
 	filling_color = "#FF3867"
 	nutriment_amt = 10
-	nutriment_desc = list("bittersweet" = 10, "iron" = 5)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("bittersweet" = 10, "iron" = 5),
+		SPECIES_TESHARI      = list("complex floral notes" = 8, "mild bitterness" = 4, "iron" = 5)
+	)
 	bitesize = 4
 
 /obj/item/reagent_containers/food/snacks/rosesalad/Initialize()
@@ -4191,7 +4280,7 @@
 	desc = "This bread's got... Raisins!"
 	icon_state = "bagelraisin"
 	nutriment_amt = 8
-	nutriment_desc = list("bread" = 4, "sweetness" = 4)
+	nutriment_desc = list("bread" = 4, "cinnamon" = 2, "dried fruit" = 2)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_FRUIT
 	bitesize = 2
 
@@ -4660,7 +4749,10 @@
 	desc = "A traditional ancient Sol recipe with a few liberties taken with meat selection."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "sweet_and_sour"
-	nutriment_desc = list("sweet and sour sauce" = 6, "fried pork" = 3)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet and sour sauce" = 6, "fried pork" = 3),
+		SPECIES_TESHARI      = list("sour, somewhat bitter sauce" = 6, "fried pork" = 3)
+	)
 	nutriment_amt = 6
 	nutriment_allergens = ALLERGEN_MEAT|ALLERGEN_GRAINS
 	trash = /obj/item/trash/plate
@@ -4754,9 +4846,13 @@
 	desc = "So retro."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "pineapple_ring"
-	nutriment_desc = list("sweetness" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 2),
+		SPECIES_TESHARI = list("mild bitterness", "caustic, fruity flavour")
+	)
 	nutriment_amt = 2
 	nutriment_allergens = ALLERGEN_SUGARS
+
 
 /obj/item/reagent_containers/food/snacks/pineapple_ring/Initialize()
 	. = ..()
@@ -4849,12 +4945,12 @@
 
 /obj/item/reagent_containers/food/snacks/croissant
 	name = "croissant"
-	desc = "True french cuisine; invented in Austria..."
+	desc = "True French cuisine; invented in Austria..."
 	icon = 'icons/obj/food_syn.dmi'
 	filling_color = "#E3D796"
 	icon_state = "croissant"
 	nutriment_amt = 4
-	nutriment_desc = list("sweet laminated pastry" = 4)
+	nutriment_desc = list("buttery pastry" = 4, "flaky bread" = 4)
 	nutriment_allergens = ALLERGEN_EGGS|ALLERGEN_GRAINS
 	bitesize = 2
 
@@ -4893,7 +4989,10 @@
 	icon_state = "pancakes"
 	trash = /obj/item/trash/plate
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_desc = list("pancake" = 6, "sweetness" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("soft, dense cake" = 6, "syrupy sweetness" = 2),
+		SPECIES_TESHARI      = list("soft, dense cake" = 6, "cloying bitterness" = 2)
+	)
 	nutriment_amt = 8
 	nutriment_allergens = ALLERGEN_EGGS|ALLERGEN_GRAINS|ALLERGEN_SUGARS|ALLERGEN_DAIRY
 	bitesize = 2
@@ -4904,7 +5003,7 @@
 	icon_state = "pancake_berry"
 	trash = /obj/item/trash/plate
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_desc = list("pancake" = 6, "baked berries" = 4)
+	nutriment_desc = list("soft, dense cake" = 6, "baked berries" = 4)
 	nutriment_amt = 10
 	nutriment_allergens = ALLERGEN_EGGS|ALLERGEN_GRAINS|ALLERGEN_SUGARS|ALLERGEN_DAIRY|ALLERGEN_FRUIT
 	bitesize = 2
@@ -5421,7 +5520,10 @@
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#58b76c"
 	nutriment_amt = 7
-	nutriment_desc = list("rice" = 2, "very powerful spices" = 3, "sweetness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("rice" = 2, "very powerful spices" = 3, "sweetness" = 1),
+		SPECIES_TESHARI      = list("rice" = 2, "rich and complex spices" = 3, "a pleasant bitter-sour note" = 1)
+	)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_DAIRY|ALLERGEN_VEGETABLE
 	center_of_mass = list("x"=16, "y"=8)
 	bitesize = 3
@@ -5623,7 +5725,10 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#301301"
 	nutriment_amt = 8
-	nutriment_desc = list("sweet bananas" = 6, "fried batter" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet bananas" = 6, "fried batter" = 2),
+		SPECIES_TESHARI = list("bananas" = 6, "fried batter" = 2)
+	)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_EGGS
 	center_of_mass = list("x"=16, "y"=11)
 	bitesize = 3
@@ -5740,7 +5845,10 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#EDE5AD"
 	nutriment_amt = 5
-	nutriment_desc = list("toasted bread" = 2, "sweet honey" = 3)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("toasted bread" = 2, "sweet honey" = 3),
+		SPECIES_TESHARI      = list("toasted bread" = 2, "rich honey" = 3, "mild bitterness" = 1)
+	)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	center_of_mass = list("x"=16, "y"=9)
 	bitesize = 4
@@ -5792,7 +5900,10 @@
 	slices_num = 5
 	filling_color = "#F5B951"
 	nutriment_amt = 20
-	nutriment_desc = list("zesty lime cream" = 14, "sweet wholewheat crust" = 6)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("zesty lime cream" = 14, "sweet wholewheat crust" = 6),
+		SPECIES_TESHARI      = list("zesty lime cream" = 14, "wholewheat crust" = 6)
+	)
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_DAIRY|ALLERGEN_SUGARS
 	center_of_mass = list("x"=16, "y"=10)
 
@@ -5804,7 +5915,10 @@
 	trash = /obj/item/trash/plate
 	filling_color = "#F5B951"
 	bitesize = 3
-	nutriment_desc = list("zesty lime cream" = 2, "sweet wholewheat crust" = 3)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("zesty lime cream" = 2, "sweet wholewheat crust" = 3),
+		SPECIES_TESHARI      = list("zesty lime cream" = 2, "wholewheat crust" = 3)
+	)
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_DAIRY|ALLERGEN_SUGARS
 	center_of_mass = list("x"=16, "y"=12)
 
@@ -6080,7 +6194,10 @@
 	icon_state = "cinnamonbun"
 	trash = null
 	nutriment_amt = 12
-	nutriment_desc = list("sweet pastry" = 4, "cinnamon sugar" = 4, "sugar frosting" = 4)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet pastry" = 4, "cinnamon sugar" = 4, "sugar frosting" = 4),
+		SPECIES_TESHARI      = list("dense pastry" = 4, "cinnamon" = 4, "crunchy frosting" = 2, "powerful bitterness" = 4)
+	)
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_DAIRY|ALLERGEN_GRAINS
 	bitesize = 1
 
@@ -6113,7 +6230,10 @@
 	filling_color = "#7D5F46"
 	center_of_mass = list("x"=15, "y"=15)
 	nutriment_amt = 10
-	nutriment_desc = list("candy" = 2, "sweetness" = 2, "fruit flavouring" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("candy" = 2, "sweetness" = 2, "fruit flavouring" = 2),
+		SPECIES_TESHARI      = list("rubbery chewiness" = 2, "chemical bitterness" = 2, "fruit flavouring" = 2)
+	)
 	bitesize = 1
 
 /obj/item/reagent_containers/food/snacks/namagashi/Initialize()
@@ -6128,7 +6248,10 @@
 	icon_state = "proteinbar"
 	trash = /obj/item/trash/candy/proteinbar
 	nutriment_amt = 9
-	nutriment_desc = list("sweetener" = 1, "protein" = 8)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("artificial sweetener" = 1, "protein" = 8),
+		SPECIES_TESHARI      = list("cloying bitterness" = 3, "protein" = 8)
+	)
 	bitesize = 6
 
 /obj/item/reagent_containers/food/snacks/candy/proteinbar/Initialize()
@@ -6158,7 +6281,11 @@
 	filling_color = "#DBC94F"
 	center_of_mass = list("x"=17, "y"=18)
 	nutriment_amt = 5
-	nutriment_desc = list("sweetness" = 3, "cookie" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 3, "cookie" = 2),
+		SPECIES_TESHARI      = list("crispness" = 2, "bitterness" = 1, "cookie" = 2)
+	)
+
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_GRAINS
 	bitesize = 1
 
@@ -6171,7 +6298,11 @@
 	trash = /obj/item/trash/cookiesnack
 	filling_color = "#DBC94F"
 	nutriment_amt = 3
-	nutriment_desc = list("sweetness" = 1, "stale cookie" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 1, "stale cookie" = 2),
+		SPECIES_TESHARI      = list("bitterness" = 1, "stale cookie" = 2)
+	)
+
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_GRAINS
 	bitesize = 1
 
@@ -6558,7 +6689,10 @@
 	trash = /obj/item/trash/syndi_cakes
 	filling_color = "#FF5D05"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("sweetness" = 3, "cake" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 3, "soggy cake" = 1),
+		SPECIES_TESHARI      = list("bitterness" = 3, "soggy cake" = 1)
+	)
 	nutriment_amt = 4
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	bitesize = 3
@@ -6602,7 +6736,10 @@
 	trash = /obj/item/trash/jupiter
 	filling_color = "#dc1919"
 	center_of_mass = list("x"=15, "y"=9)
-	nutriment_desc = list("sweetness" = 4, "vanilla" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweetness" = 4, "vanilla" = 1),
+		SPECIES_TESHARI      = list("mild bitterness" = 1, "vanilla" = 4)
+	)
 	nutriment_amt = 5
 	nutriment_allergens = ALLERGEN_SUGARS
 	bitesize = 2
@@ -6674,7 +6811,10 @@
 	trash = /obj/item/trash/oort
 	filling_color = "#3f7dd2"
 	center_of_mass = list("x"=15, "y"=9)
-	nutriment_desc = list("fizz" = 4, "sweetness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("fizz" = 4, "sweetness" = 1),
+		SPECIES_TESHARI      = list("fizz" = 4, "mild bitterness" = 1)
+	)
 	nutriment_amt = 5
 	nutriment_allergens = ALLERGEN_SUGARS
 	bitesize = 2
@@ -6717,7 +6857,10 @@
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "ricecake"
 	desc = "Ancient earth snack food made from balled up rice."
-	nutriment_desc = list("rice" = 4, "sweetness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("rice" = 4, "sweetness" = 1),
+		SPECIES_TESHARI      = list("rice" = 4, "mild bitterness" = 1)
+	)
 	nutriment_amt = 5
 	nutriment_allergens = ALLERGEN_GRAINS
 	bitesize = 2
@@ -6727,7 +6870,10 @@
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "dorayaki"
 	desc = "Two small pancake-like patties made from castella wrapped around a filling of sweet azuki bean paste."
-	nutriment_desc = list("cake" = 3, "sweetness" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 3, "sweetness" = 2),
+		SPECIES_TESHARI      = list("cake" = 3, "mild bitterness" = 1)
+	)
 	nutriment_amt = 6
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_VEGETABLE|ALLERGEN_SUGARS
 	bitesize = 2
@@ -6737,7 +6883,10 @@
 	icon = 'icons/obj/food_snacks.dmi'
 	icon_state = "daifuku"
 	desc = "Small round mochi stuffed with sweetened red bean paste."
-	nutriment_desc = list("cake" = 2, "sweetness" = 3)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 2, "sweetness" = 3),
+		SPECIES_TESHARI      = list("cake" = 3, "mild bitterness" = 1)
+	)
 	nutriment_amt = 6
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_VEGETABLE
 	bitesize = 2
@@ -7001,7 +7150,10 @@
 	trash = /obj/item/trash/appleberry
 	filling_color = "#FFFFFF"
 	center_of_mass = list("x"=15, "y"=9)
-	nutriment_desc = list("apple" = 1, "sweetness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("dried apple" = 1, "sweetness" = 1),
+		SPECIES_TESHARI      = list("dried apple" = 2, "mild bitterness" = 1)
+	)
 	nutriment_amt = 10
 	nutriment_allergens = ALLERGEN_FRUIT
 	bitesize = 2
@@ -7065,7 +7217,10 @@
 	filling_color = "#ffffff"
 	center_of_mass = list("x"=15, "y"=9)
 	nutriment_amt = 6
-	nutriment_desc = list("sweetness" = 4, "rice" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("rice" = 1, "sweetness" = 4),
+		SPECIES_TESHARI      = list("rice" = 2, "mild bitterness" = 1)
+	)
 	nutriment_allergens = ALLERGEN_VEGETABLE|ALLERGEN_SUGARS
 	bitesize = 2
 
@@ -7081,7 +7236,10 @@
 	filling_color = "#FFE591"
 	center_of_mass = list("x"=15, "y"=11)
 	nutriment_amt = 4
-	nutriment_desc = list("sweetness" = 4, "stale cake" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("stale cake" = 2, "sweetness" = 4),
+		SPECIES_TESHARI      = list("stale cake" = 2, "mild bitterness" = 1)
+	)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_SUGARS
 	bitesize = 2
 
@@ -7138,7 +7296,10 @@
 	filling_color = "#FFFFFF"
 	nutriment_amt = 4
 	center_of_mass = list("x"=15, "y"=11)
-	nutriment_desc = list("sweetness" = 5, "cake" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("cake" = 1, "sweetness" = 5),
+		SPECIES_TESHARI      = list("cake" = 2, "mild bitterness" = 1)
+	)
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/packaged/sweetration/Initialize()
@@ -7337,7 +7498,10 @@
 	trash = /obj/item/trash/asian_bowl
 	bitesize = 2
 	nutriment_amt = 6
-	nutriment_desc = list("sweet and spicy sauce" = 6)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet and spicy sauce" = 6),
+		SPECIES_TESHARI      = list("spicy, somewhat bitter sauce" = 6)
+	)
 
 /obj/item/reagent_containers/food/snacks/generalschicken/Initialize()
 	. = ..()
@@ -7351,8 +7515,12 @@
 	trash = /obj/item/trash/plate
 	bitesize = 3
 	nutriment_amt = 8
-	nutriment_desc = list("sweet rye pudding" = 3, "orange zest" = 3, "milk" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet rye pudding" = 3, "orange zest" = 3, "milk" = 2),
+		SPECIES_TESHARI      = list("rye pudding" = 3, "orange zest" = 3, "milk" = 2, "mild bitterness" = 1)
+	)
 	nutriment_allergens = ALLERGEN_DAIRY|ALLERGEN_FRUIT|ALLERGEN_GRAINS
+
 /obj/item/reagent_containers/food/snacks/lobster
 	name = "raw lobster"
 	desc = "A shifty lobster. You can try eating it, but its shell is extremely tough."
@@ -7434,7 +7602,10 @@
 	icon_state = "monkfish_cooked"
 	bitesize = 4
 	nutriment_amt = 10
-	nutriment_desc = list("oil" = 1, "sweet chili" = 3, "spring onion" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("oil" = 1, "sweet chili" = 3, "spring onion" = 2),
+		SPECIES_TESHARI      = list("oil" = 1, "chili" = 3, "spring onion" = 2)
+	)
 	nutriment_allergens = ALLERGEN_FISH
 
 /obj/item/reagent_containers/food/snacks/monkfishcooked/Initialize()
@@ -7575,12 +7746,12 @@
 	reagents.add_reagent("dynjuice", 4)
 
 /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy
-	name = "plate of candied neaera eyes"
-	desc = "Candied neaera eyes shaped into cubes. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of intact eyes."
+	name = "plate of jellied neaera eyes"
+	desc = "Jellied neaera eyes shaped into cubes. The mix of savoury and creamy is generally acceptable for most species, although many dislike the dish for its texture and habit of making eye contact during the meal."
 	icon_state = "neaera_candied_eyes20"
 	trash = /obj/item/trash/candybowl
 	vendingobject = /obj/item/reagent_containers/food/snacks/neaeracandy
-	nutriment_desc = list("sweet goo" = 2)
+	nutriment_desc = list("savoury goo" = 2)
 	bitesize = 1
 	unitname = "eye"
 	filling_color = "#7C66DD"
@@ -7603,8 +7774,8 @@
 			icon_state = "neaera_candied_eyes20"
 
 /obj/item/reagent_containers/food/snacks/neaeracandy
-	name = "candied neaera eye"
-	desc = "A candied neaera eye shaped into a cube. The mix of savoury and sweet is generally acceptable for most species, although many dislike the dish for its use of eyes."
+	name = "jellied neaera eye"
+	desc = "A jellied cube made from neaera eyes. The mix of savoury and creamy is generally acceptable for most species, although many dislike the dish for its texture and habit of making eye contact during the meal."
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "neaera_candied_eye"
 	bitesize = 2
@@ -7658,7 +7829,10 @@
 	icon = 'icons/obj/food_syn.dmi'
 	icon_state = "qalozyn_boiled"
 	nutriment_amt = 4
-	nutriment_desc = list("sweet turnips" = 4)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet turnips" = 4),
+		SPECIES_TESHARI      = list("turnips" = 2, "mild bitterness" = 2)
+	)
 	nutriment_allergens = ALLERGEN_VEGETABLE
 	bitesize = 2
 	filling_color = "#7C66DD"
@@ -7669,7 +7843,10 @@
 	desc = "Neaera liver stuffed with boiled qa'lozyn and fried in oil. A popular light meal for teshari."
 	icon_state = "garani"
 	nutriment_amt = 4
-	nutriment_desc = list("sweet turnips" = 4)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet turnips" = 4),
+		SPECIES_TESHARI      = list("turnips" = 2, "mild bitterness" = 2)
+	)
 	nutriment_allergens = ALLERGEN_FRUIT
 	bitesize = 3
 	filling_color = "#7C66DD"
@@ -7771,7 +7948,10 @@
 	desc = "A kirani fruit baked in an oven, causing the jelly inside to caramelize into a jelly donut-like crispy treat."
 	icon_state = "baked_kirani"
 	nutriment_amt = 4
-	nutriment_desc = list("crispy sweetness" = 2, "caramelized jelly" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("crispy sweetness" = 2, "caramelized jelly" = 2),
+		SPECIES_TESHARI      = list("crispy richness" = 2, "caramelized jelly" = 2)
+	)
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_SUGARS
 	filling_color = "#993C5C"
 
@@ -7783,7 +7963,10 @@
 	nutriment_amt = 4
 	nutriment_allergens = ALLERGEN_FRUIT
 	bitesize = 1
-	nutriment_desc = list("sweet kirani" = 2,  "minty ga'uli" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("sweet kirani" = 2, "minty ga'uli" = 2),
+		SPECIES_TESHARI      = list("rich kirani" = 2, "minty ga'uli" = 2)
+	)
 
 /obj/item/reagent_containers/food/snacks/stuffed_gauli/Initialize()
 	. = ..()
@@ -7798,7 +7981,10 @@
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 1
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_SUGARS
-	nutriment_desc = list("minty qa'zal" = 2, "sweet kirani jelly" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("minty qa'zal" = 2, "sweet kirani jelly" = 2),
+		SPECIES_TESHARI      = list("minty qa'zal" = 2, "rich kirani jelly" = 2)
+	)
 
 /obj/item/reagent_containers/food/snacks/kirani_stew/Initialize()
 	. = ..()
@@ -7813,7 +7999,10 @@
 	nutriment_amt = 8
 	bitesize = 1
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_SUGARS
-	nutriment_desc = list("chewy qa'zal noodles" = 1, "minty gu'ali juice" = 1, "sweet kirani jelly" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("chewy qa'zal noodles" = 1, "minty gu'ali juice" = 1, "sweet kirani jelly" = 1),
+		SPECIES_TESHARI      = list("chewy qa'zal noodles" = 1, "minty gu'ali juice" = 1, "rich kirani jelly" = 1)
+	)
 
 /obj/item/reagent_containers/food/snacks/kirani_jellypuff
 	name = "kirani jellypuff"
@@ -7823,4 +8012,7 @@
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_SUGARS
 	nutriment_amt = 8
 	bitesize = 2
-	nutriment_desc = list("puffed minty qa'zal bread" = 1, "super-sweet kirani jelly" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("puffed minty qa'zal bread" = 1, "super-sweet kirani jelly" = 1),
+		SPECIES_TESHARI      = list("puffed minty qa'zal bread" = 1, "rich kirani jelly" = 1)
+	)

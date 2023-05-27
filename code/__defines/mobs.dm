@@ -292,6 +292,9 @@
 #define TASTE_DULL 0.5 //anything below 30%
 #define TASTE_NUMB 0.1 //anything below 150%
 
+#define TASTE_STRING_DEFAULT     "default"
+#define TASTE_DATA_FIELD         "taste_strings"
+
 //Used by emotes
 #define VISIBLE_MESSAGE 1
 #define AUDIBLE_MESSAGE 2

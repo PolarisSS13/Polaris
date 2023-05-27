@@ -121,7 +121,10 @@
 	filling_color = "#FFBB00"
 	center_of_mass = list("x"=17, "y"=10)
 	nutriment_amt = 25 // Very filling.
-	nutriment_desc = list("slime" = 10, "sweetness" = 10, "bliss" = 5)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("slime" = 10, "sweetness" = 10, "bliss" = 5),
+		SPECIES_TESHARI      = list("slime" = 10, "subtle bitterness" = 10, "bliss" = 5)
+	)
 
 /obj/item/reagent_containers/food/snacks/slime/Initialize()
 	. = ..()

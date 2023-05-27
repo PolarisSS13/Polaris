@@ -181,6 +181,8 @@
 	nutriment_amt = 4
 	volume = 80
 
+// None of this nutriment_desc setting does anything but this
+// cake is such a mess that I'm not refactoring it right now soz.
 /obj/item/reagent_containers/food/snacks/chaoscakeslice/Initialize()
 	. = ..()
 	var/i = rand(1,6)
