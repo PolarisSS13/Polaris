@@ -152,7 +152,7 @@
 			to_chat(src, "You are unable to emote.")
 			return
 
-	message = sanitize(message, encode = FALSE) // This is getting double-encoded somewhere along the line.
+	message = html_decode(sanitize(message))
 	if(!message)
 		return
 
