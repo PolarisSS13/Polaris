@@ -111,6 +111,7 @@ Class Procs:
 	var/clickvol = 40		// volume
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/obj/item/circuitboard/circuit = null
+	var/list/materials = list() //Exclusively used for machines that take materials - lathes, fabricators etc. Honestly overdue for a whole lathe/fab refactor at some point.
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
@@ -472,4 +473,17 @@ Class Procs:
 	return
 
 /datum/proc/remove_visual(mob/M)
+	return
+
+/obj/machinery/proc/eject_materials() //Used for autolathe, protolathe, mechfab, exofab. Stuff that takes materials, basically.
+	if(LAZYLEN(materials))
+		for(var/mat in materials)
+			var/datum/material/M = get_material_by_name(mat)
+			if(!istype(M) || materials[mat] == 0)
+				continue
+			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+			if(materials[mat] >= S.perunit)
+				S.amount = round(materials[mat] / S.perunit)
+			else
+				qdel(S) //Prevents stacks smaller than 1
 	return

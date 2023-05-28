@@ -13,7 +13,7 @@
 
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
+	materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
 	var/list/hidden_materials = list(MAT_PLASTEEL, MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM, MAT_METALHYDROGEN, MAT_SUPERMATTER)
 	var/res_max_amount = 200000
 
@@ -70,8 +70,7 @@
 		add_overlay("mechfab-active")
 
 /obj/machinery/mecha_part_fabricator/dismantle()
-	for(var/f in materials)
-		eject_materials(f, -1)
+	eject_materials() //Proc on obj/machinery in code/game/machinery/machinery.dm
 	..()
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
@@ -289,24 +288,6 @@
 				continue
 		if(!hidden_mat)
 			. += list(list("mat" = capitalize(T), "amt" = materials[T]))
-
-/obj/machinery/mecha_part_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
-	var/recursive = amount == -1 ? 1 : 0
-	var/matstring = lowertext(material)
-	var/datum/material/M = get_material_by_name(matstring)
-
-	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
-	if(amount <= 0)
-		amount = S.max_amount
-	var/ejected = min(round(materials[matstring] / S.perunit), amount)
-	S.amount = min(ejected, amount)
-	if(S.amount <= 0)
-		qdel(S)
-		return
-	materials[matstring] -= ejected * S.perunit
-	if(recursive && materials[matstring] >= S.perunit)
-		eject_materials(matstring, -1)
-	update_busy()
 
 /obj/machinery/mecha_part_fabricator/proc/sync()
 	sync_message = "Error: no console found."
