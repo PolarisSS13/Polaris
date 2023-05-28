@@ -42,11 +42,12 @@
 
 /datum/gear/eyes/glasses/New()
 	..()
-	var/glassestype = list()
-	glassestype["prescription glasses, standard"] = /obj/item/clothing/glasses/regular
-	glassestype["prescription glasses, hipster"] = /obj/item/clothing/glasses/regular/hipster
-	glassestype["prescription glasses, rimless"] = /obj/item/clothing/glasses/regular/rimless
-	glassestype["prescription glasses, thin frame"] = /obj/item/clothing/glasses/regular/thin
+	var/list/glassestype = list(
+	"prescription glasses, standard" = /obj/item/clothing/glasses/regular,
+	"prescription glasses, hipster" = /obj/item/clothing/glasses/regular/hipster,
+	"prescription glasses, rimless" = /obj/item/clothing/glasses/regular/rimless,
+	"prescription glasses, thin frame" = /obj/item/clothing/glasses/regular/thin
+	)
 	gear_tweaks += new/datum/gear_tweak/path(glassestype)
 
 /datum/gear/eyes/glassesfake
@@ -56,10 +57,11 @@
 
 /datum/gear/eyes/glassesfake/New()
 	..()
-	var/glassestype = list()
-	glassestype["glasses, green"] = /obj/item/clothing/glasses/gglasses
-	glassestype["glasses, rimless"] = /obj/item/clothing/glasses/rimless
-	glassestype["glasses, thin frame"] = /obj/item/clothing/glasses/thin
+	var/list/glassestype = list(
+	"glasses, green" = /obj/item/clothing/glasses/gglasses,
+	"glasses, rimless" = /obj/item/clothing/glasses/rimless,
+	"glasses, thin frame" = /obj/item/clothing/glasses/thin
+	)
 	gear_tweaks += new/datum/gear_tweak/path(glassestype)
 
 /datum/gear/eyes/monocle
@@ -85,14 +87,14 @@
 
 /datum/gear/eyes/security/New()
 	..()
-	var/hudtype = list()
-	hudtype["security hud, standard"] = /obj/item/clothing/glasses/hud/security
-	hudtype["security hud, standard prescription"] = /obj/item/clothing/glasses/hud/security/prescription
-	hudtype["security hud, sunglasses"] = /obj/item/clothing/glasses/sunglasses/sechud
-	hudtype["security hud, sunglasses prescription"] = /obj/item/clothing/glasses/sunglasses/sechud/prescription
-	hudtype["security hud, aviators"] = /obj/item/clothing/glasses/sunglasses/sechud/aviator
-	hudtype["security hud, aviators prescription"] = /obj/item/clothing/glasses/sunglasses/sechud/aviator/prescription
-
+	var/list/hudtype = list(
+	"security hud, standard" = /obj/item/clothing/glasses/hud/security,
+	"security hud, standard prescription" = /obj/item/clothing/glasses/hud/security/prescription,
+	"security hud, sunglasses" = /obj/item/clothing/glasses/sunglasses/sechud,
+	"security hud, sunglasses prescription" = /obj/item/clothing/glasses/sunglasses/sechud/prescription,
+	"security hud, aviators" = /obj/item/clothing/glasses/sunglasses/sechud/aviator,
+	"security hud, aviators prescription" = /obj/item/clothing/glasses/sunglasses/sechud/aviator/prescription
+	)
 	gear_tweaks += new/datum/gear_tweak/path(hudtype)
 
 /datum/gear/eyes/medical
@@ -145,12 +147,12 @@
 
 /datum/gear/eyes/sun/New()
 	..()
-	var/hudtype = list()
-	hudtype["sunglasses, standard"] = /obj/item/clothing/glasses/sunglasses
-	hudtype["sunglasses, big"] = /obj/item/clothing/glasses/sunglasses/big
-	hudtype["sunglasses, aviators"] = /obj/item/clothing/glasses/sunglasses/aviator
-	hudtype["sunglasses, prescription"] = /obj/item/clothing/glasses/sunglasses/prescription
-
+	var/list/hudtype = list(
+	"sunglasses, standard" = /obj/item/clothing/glasses/sunglasses,
+	"sunglasses, big" = /obj/item/clothing/glasses/sunglasses/big,
+	"sunglasses, aviators" = /obj/item/clothing/glasses/sunglasses/aviator,
+	"sunglasses, prescription" = /obj/item/clothing/glasses/sunglasses/prescription
+	)
 	gear_tweaks += new/datum/gear_tweak/path(hudtype)
 
 /datum/gear/eyes/circuitry

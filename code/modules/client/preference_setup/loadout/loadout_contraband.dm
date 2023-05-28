@@ -13,13 +13,14 @@
 
 /datum/gear/contraband/pills/New()
 	..()
-	var/drug_type = list()
-	drug_type["Bliss"] = /obj/item/storage/pill_bottle/bliss
-	drug_type["Snowflake"] = /obj/item/storage/pill_bottle/snowflake
-	drug_type["Royale"] = /obj/item/storage/pill_bottle/royale
-	drug_type["Sinkhole"] = /obj/item/storage/pill_bottle/sinkhole
-	drug_type["Colorspace"] = /obj/item/storage/pill_bottle/colorspace
-	drug_type["Schnappi"] = /obj/item/storage/pill_bottle/schnappi
+	var/list/drug_type = list(
+	"Bliss" = /obj/item/storage/pill_bottle/bliss,
+	"Snowflake" = /obj/item/storage/pill_bottle/snowflake,
+	"Royale" = /obj/item/storage/pill_bottle/royale,
+	"Sinkhole" = /obj/item/storage/pill_bottle/sinkhole,
+	"Colorspace" = /obj/item/storage/pill_bottle/colorspace,
+	"Schnappi" = /obj/item/storage/pill_bottle/schnappi
+	)
 	gear_tweaks += new/datum/gear_tweak/path(drug_type)
 
 /datum/gear/contraband/rollingpaper
@@ -54,12 +55,13 @@
 
 /datum/gear/contraband/knives/New()
 	..()
-	var/knife = list()
-	knife["boot knife"] = /obj/item/material/knife/tacknife/boot
-	knife["butterfly knife"] = /obj/item/material/butterfly
-	knife["switchblade"] = /obj/item/material/butterfly/switchblade
-	knife["boxcutter"] = /obj/item/material/butterfly/boxcutter
-	knife["survival knife"] = /obj/item/material/knife/tacknife/survival
+	var/list/knife = list(
+	"boot knife" = /obj/item/material/knife/tacknife/boot,
+	"butterfly knife" = /obj/item/material/butterfly,
+	"switchblade" = /obj/item/material/butterfly/switchblade,
+	"boxcutter" = /obj/item/material/butterfly/boxcutter,
+	"survival knife" = /obj/item/material/knife/tacknife/survival
+	)
 	gear_tweaks += new/datum/gear_tweak/path(knife)
 
 /datum/gear/contraband/zipgun

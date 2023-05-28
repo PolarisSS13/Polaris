@@ -509,6 +509,27 @@
 	icon_state = "goldwrap"
 	index = 1
 
+/obj/item/clothing/under/dress/little_strapless
+	name = "short strapless dress"
+	desc = "The classic little black dress now comes in colours other than black."
+	icon_state = "littlestrapless"
+	index = 1
+
+/obj/item/clothing/under/dress/long_strapless
+	name = "long strapless dress"
+	desc = "A sleek sleeveless dress for the modern sophisticate."
+	icon_state = "longstrapless"
+	index = 1
+
+/obj/item/clothing/under/dress/ceremonial
+	name = "ceremonial corset"
+	desc = "A regal black and gold tight corset with silky sleeves. A sheer bodystocking accompanies it."
+	icon_state = "ceremonial"
+	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/dress/ceremonial/sheerless
+	desc = "A regal black and gold tight corset with silky sleeves."
+	worn_state = "ceremonial_c"
 
 /*
  * wedding stuff
@@ -752,16 +773,33 @@ Uniforms and such
 	icon_state = "cheongsam-darkblue"
 
 /obj/item/clothing/under/qipao
-	name = "qipao"
+	name = "short qipao"
 	desc = "A traditional Chinese women's garment, typically made from silk."
 	icon_state = "qipao"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/qipao/black
+	name = "black qipao"
+	icon_state = "qipao_black"
+
+/obj/item/clothing/under/qipao/red
+	name = "red qipao"
+	icon_state = "qipao_red"
+
+/obj/item/clothing/under/qipao/white
+	name = "white qipao"
+	icon_state = "qipao_white"
 
 /obj/item/clothing/under/qipao2
 	name = "slim qipao"
 	desc = "A traditional Chinese women's garment, typically made from silk. This one is fairly slim."
 	icon_state = "qipao2"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
+
+/obj/item/clothing/under/qipao/colorable
+	name = "qipao"
+	icon_state = "qipao_white"
+	starting_accessories = list(/obj/item/clothing/accessory/qipaogold)
 
 /obj/item/clothing/under/blazer
 	name = "blue blazer"

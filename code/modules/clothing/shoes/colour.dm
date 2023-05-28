@@ -57,6 +57,9 @@
 	name = "flats"
 	desc = "Sleek flats."
 
+/obj/item/clothing/shoes/flats/white/color/alt
+	icon_state = "flatsalt"
+
 /obj/item/clothing/shoes/flats/red
 	name = "red flats"
 	desc = "Ruby red flats."

@@ -32,8 +32,8 @@
 	..()
 
 /obj/item/clothing/suit/storage/hooded/proc/RemoveHood()
-	icon_state = toggleicon
 	hood_up = FALSE
+	update_icon()
 	hood.canremove = TRUE // This shouldn't matter anyways but just incase.
 	if(ishuman(hood.loc))
 		var/mob/living/carbon/H = hood.loc
@@ -55,13 +55,42 @@
 				to_chat(H, "<span class='warning'>You're already wearing something on your head!</span>")
 				return
 			else
+				if(color != hood.color)
+					hood.color = color
 				H.equip_to_slot_if_possible(hood,slot_head,0,0,1)
 				hood_up = TRUE
 				hood.canremove = FALSE
-				icon_state = "[toggleicon]_t"
+				update_icon()
 				H.update_inv_wear_suit()
 	else
 		RemoveHood()
+
+/obj/item/clothing/suit/storage/hooded/update_icon()
+	. = ..()
+	icon_state = "[toggleicon][hood_up ? "_t" : ""]"
+
+//Hoodies you can unbutton and toggle the hood of independently
+/obj/item/clothing/suit/storage/hooded/toggle/colorable
+	name = "hoodie"
+	desc = "A rather plain hoodie. If you can't find it in your closet, chances are your significant other is borrowing it."
+	icon_state = "choodie"
+	hoodtype = /obj/item/clothing/head/hood/toggleable/colorable
+	open = FALSE
+
+/obj/item/clothing/suit/storage/hooded/toggle/colorable/random/Initialize() //For mapping
+	. = ..()
+	color = pick(COLOR_GRAY20, COLOR_GRAY, COLOR_MAROON, COLOR_DARK_ORANGE, COLOR_BRASS, COLOR_PURPLE, COLOR_SKY_BLUE, COLOR_LIGHT_VIOLET )
+	update_icon()
+
+/obj/item/clothing/suit/storage/hooded/toggle/colorable/sleeveless
+	name = "sleeveless hoodie"
+	desc = "Either your arms were too hot or the sleeves vaporized when you gave someone a 'gunshow' with your muscles. Either way, the sleeves are missing."
+	icon_state = "choodie_sleeveless"
+
+/obj/item/clothing/suit/storage/hooded/toggle/colorable/cropped
+	name = "cropped hoodie"
+	desc = "It's not that this is a size too small, you just like showing off your midriff."
+	icon_state = "choodie_crop"
 
 /obj/item/clothing/suit/storage/hooded/costume
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO|ARMS

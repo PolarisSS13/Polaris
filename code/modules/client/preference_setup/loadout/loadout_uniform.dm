@@ -46,9 +46,10 @@
 
 /datum/gear/uniform/cuttop/New()
 	..()
-	var/cuttoptype = list()
-	cuttoptype["cut top, grey"] = /obj/item/clothing/under/cuttop
-	cuttoptype["cut top, red"] = /obj/item/clothing/under/cuttop/red
+	var/list/cuttoptype = list(
+	"cut top, grey" = /obj/item/clothing/under/cuttop,
+	"cut top, red" = /obj/item/clothing/under/cuttop/red
+	)
 	gear_tweaks += new/datum/gear_tweak/path(cuttoptype)
 
 /datum/gear/uniform/jumpsuit
@@ -73,21 +74,32 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/uniform/qipao_colorable
+	display_name = "qipao, selection (colorable)"
+	path = /obj/item/clothing/under/qipao/colorable
+
+/datum/gear/uniform/qipao_colorable/New()
+	..()
+	var/list/qipaos = list(
+	"qipao, gold trim" = /obj/item/clothing/under/qipao/colorable,
+	"qipao, slim" = /obj/item/clothing/under/qipao2,
+	"qipao, short" = /obj/item/clothing/under/qipao
+	)
+	gear_tweaks += list(new/datum/gear_tweak/path(qipaos), gear_tweak_free_color_choice)
+
 /datum/gear/uniform/qipao
-	display_name = "qipao"
-	path = /obj/item/clothing/under/qipao
+	display_name = "qipao, pre-colored selection"
+	description = "Skirts to cover your lower body, in various styles."
+	path = /obj/item/clothing/under/skirt
 
 /datum/gear/uniform/qipao/New()
 	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
-/datum/gear/uniform/qipao2
-	display_name = "qipao, slim"
-	path = /obj/item/clothing/under/qipao2
-
-/datum/gear/uniform/qipao2/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
+	var/list/qipaos = list(
+	"qipao, black" = /obj/item/clothing/under/qipao/black,
+	"qipao, white" = /obj/item/clothing/under/qipao/white,
+	"qipao, red" = /obj/item/clothing/under/qipao/red
+	)
+	gear_tweaks += new/datum/gear_tweak/path(qipaos)
 
 /datum/gear/uniform/skirt
 	display_name = "skirt, selection"
@@ -135,16 +147,17 @@
 
 /datum/gear/uniform/job_skirt/New()
 	..()
-	var/skirttype = list()
-	skirttype["skirt, chief engineer"] = /obj/item/clothing/under/rank/chief_engineer/skirt
-	skirttype["skirt, atmospheric technician"] = /obj/item/clothing/under/rank/atmospheric_technician/skirt
-	skirttype["skirt, engineer"] = /obj/item/clothing/under/rank/engineer/skirt
-	skirttype["skirt, roboticist"] = /obj/item/clothing/under/rank/roboticist/skirt
-	skirttype["skirt, CMO"] = /obj/item/clothing/under/rank/chief_medical_officer/skirt
-	skirttype["skirt, chemist"] = /obj/item/clothing/under/rank/chemist/skirt
-	skirttype["skirt, virologist"] = /obj/item/clothing/under/rank/virologist/skirt
-	skirttype["skirt, medical"] = /obj/item/clothing/under/rank/medical/skirt
-	skirttype["skirt, scientist"] = /obj/item/clothing/under/rank/scientist/skirt
+	var/list/skirttype = list(
+	"skirt, chief engineer" = /obj/item/clothing/under/rank/chief_engineer/skirt,
+	"skirt, atmospheric technician" = /obj/item/clothing/under/rank/atmospheric_technician/skirt,
+	"skirt, engineer" = /obj/item/clothing/under/rank/engineer/skirt,
+	"skirt, roboticist" = /obj/item/clothing/under/rank/roboticist/skirt,
+	"skirt, CMO" = /obj/item/clothing/under/rank/chief_medical_officer/skirt,
+	"skirt, chemist" = /obj/item/clothing/under/rank/chemist/skirt,
+	"skirt, virologist" = /obj/item/clothing/under/rank/virologist/skirt,
+	"skirt, medical" = /obj/item/clothing/under/rank/medical/skirt,
+	"skirt, scientist" = /obj/item/clothing/under/rank/scientist/skirt
+	)
 	gear_tweaks += new/datum/gear_tweak/path(skirttype)
 
 /datum/gear/uniform/job_turtle
@@ -154,11 +167,12 @@
 
 /datum/gear/uniform/job_turtle/New()
 	..()
-	var/turtletype = list()
-	turtletype["turtleneck, science"] = /obj/item/clothing/under/rank/scientist/turtleneck
-	turtletype["turtleneck, engineering"] = /obj/item/clothing/under/rank/engineer/turtleneck
-	turtletype["turtleneck, security"] = /obj/item/clothing/under/rank/security/turtleneck
-	turtletype["turtleneck, medical"] = /obj/item/clothing/under/rank/medical/turtleneck
+	var/list/turtletype = list(
+	"turtleneck, science" = /obj/item/clothing/under/rank/scientist/turtleneck,
+	"turtleneck, engineering" = /obj/item/clothing/under/rank/engineer/turtleneck,
+	"turtleneck, security" = /obj/item/clothing/under/rank/security/turtleneck,
+	"turtleneck, medical" = /obj/item/clothing/under/rank/medical/turtleneck
+	)
 	gear_tweaks += new/datum/gear_tweak/path(turtletype)
 
 /datum/gear/uniform/uniform_cargo
@@ -169,11 +183,12 @@
 
 /datum/gear/uniform/uniform_cargo/New()
 	..()
-	var/cargotype = list()
-	cargotype["cargo uniform, shorts"] = /obj/item/clothing/under/rank/cargotech/shorts
-	cargotype["cargo uniform, jeans"] = /obj/item/clothing/under/rank/cargotech/jeans
-	cargotype["cargo uniform, feminine jeans"] = /obj/item/clothing/under/rank/cargotech/jeans/female
-	cargotype["cargo uniform, skirt"] = /obj/item/clothing/under/rank/cargotech/skirt
+	var/list/cargotype = list(
+	"cargo uniform, shorts" = /obj/item/clothing/under/rank/cargotech/shorts,
+	"cargo uniform, jeans" = /obj/item/clothing/under/rank/cargotech/jeans,
+	"cargo uniform, feminine jeans" = /obj/item/clothing/under/rank/cargotech/jeans/female,
+	"cargo uniform, skirt" = /obj/item/clothing/under/rank/cargotech/skirt
+	)
 	gear_tweaks += new/datum/gear_tweak/path(cargotype)
 
 /datum/gear/uniform/uniform_qm
@@ -184,10 +199,11 @@
 
 /datum/gear/uniform/uniform_qm/New()
 	..()
-	var/qmtype = list()
-	qmtype["quartermaster uniform, jeans"] = /obj/item/clothing/under/rank/cargo/jeans
-	qmtype["quartermaster uniform, feminine jeans"] = /obj/item/clothing/under/rank/cargo/jeans/female
-	qmtype["quartermaster uniform, skirt"] = /obj/item/clothing/under/rank/cargo/skirt
+	var/list/qmtype = list(
+	"quartermaster uniform, jeans" = /obj/item/clothing/under/rank/cargo/jeans,
+	"quartermaster uniform, feminine jeans" = /obj/item/clothing/under/rank/cargo/jeans/female,
+	"quartermaster uniform, skirt" = /obj/item/clothing/under/rank/cargo/skirt
+	)
 	gear_tweaks += new/datum/gear_tweak/path(qmtype)
 
 /datum/gear/uniform/old_miner
@@ -263,14 +279,15 @@
 
 /datum/gear/uniform/sundress/New()
 	..()
-	var/sdresstype = list()
-	sdresstype["sundress"] = /obj/item/clothing/under/sundress
-	sdresstype["sundress, long blue"] = /obj/item/clothing/under/dress/sundress_blue
-	sdresstype["sundress, pink"] = /obj/item/clothing/under/dress/sundress_pink
-	sdresstype["sundress, pink with bow"] = /obj/item/clothing/under/dress/sundress_pinkbow
-	sdresstype["sundress, short pink"] = /obj/item/clothing/under/dress/sundress_pinkshort
-	sdresstype["sundress, white"] = /obj/item/clothing/under/sundress_white
-	sdresstype["sundress, white alt"] = /obj/item/clothing/under/dress/sundress_white
+	var/list/sdresstype = list(
+	"sundress" = /obj/item/clothing/under/sundress,
+	"sundress, long blue" = /obj/item/clothing/under/dress/sundress_blue,
+	"sundress, pink" = /obj/item/clothing/under/dress/sundress_pink,
+	"sundress, pink with bow" = /obj/item/clothing/under/dress/sundress_pinkbow,
+	"sundress, short pink" = /obj/item/clothing/under/dress/sundress_pinkshort,
+	"sundress, white" = /obj/item/clothing/under/sundress_white,
+	"sundress, white alt" = /obj/item/clothing/under/dress/sundress_white
+	)
 	gear_tweaks += new/datum/gear_tweak/path(sdresstype)
 
 /datum/gear/uniform/dress_fire
@@ -290,12 +307,13 @@
 
 /datum/gear/uniform/uniform_security/New()
 	..()
-	var/secunitype = list()
-	secunitype["officer uniform, corporate"] = /obj/item/clothing/under/rank/security/corp
-	secunitype["officer uniform, navy"] = /obj/item/clothing/under/rank/security/navyblue
-	secunitype["officer uniform, hedberg-hammarstrom"] = /obj/item/clothing/under/hedberg
-	secunitype["officer uniform, red skirt"] = /obj/item/clothing/under/rank/security/skirt
-	secunitype["detective uniform, corporate"] = /obj/item/clothing/under/det/corporate
+	var/list/secunitype = list(
+	"officer uniform, corporate" = /obj/item/clothing/under/rank/security/corp,
+	"officer uniform, navy" = /obj/item/clothing/under/rank/security/navyblue,
+	"officer uniform, hedberg-hammarstrom" = /obj/item/clothing/under/hedberg,
+	"officer uniform, red skirt" = /obj/item/clothing/under/rank/security/skirt,
+	"detective uniform, corporate" = /obj/item/clothing/under/det/corporate
+	)
 	gear_tweaks += new/datum/gear_tweak/path(secunitype)
 
 /datum/gear/uniform/uniform_warden
@@ -306,10 +324,11 @@
 
 /datum/gear/uniform/uniform_warden/New()
 	..()
-	var/warunitype = list()
-	warunitype["warden uniform, corporate"] = /obj/item/clothing/under/rank/warden/corp
-	warunitype["warden uniform, navy"] = /obj/item/clothing/under/rank/warden/navyblue
-	warunitype["warden uniform, red skirt"] = /obj/item/clothing/under/rank/warden/skirt
+	var/list/warunitype = list(
+	"warden uniform, corporate" = /obj/item/clothing/under/rank/warden/corp,
+	"warden uniform, navy" = /obj/item/clothing/under/rank/warden/navyblue,
+	"warden uniform, red skirt" = /obj/item/clothing/under/rank/warden/skirt
+	)
 	gear_tweaks += new/datum/gear_tweak/path(warunitype)
 
 /datum/gear/uniform/uniform_hos
@@ -320,10 +339,11 @@
 
 /datum/gear/uniform/uniform_hos/New()
 	..()
-	var/hosunitype = list()
-	hosunitype["HoS uniform, corporate"] = /obj/item/clothing/under/rank/head_of_security/corp
-	hosunitype["HoS uniform, navy"] = /obj/item/clothing/under/rank/head_of_security/navyblue
-	hosunitype["HoS Uniform, red skirt"] = /obj/item/clothing/under/rank/head_of_security/skirt
+	var/list/hosunitype = list(
+	"HoS uniform, corporate" = /obj/item/clothing/under/rank/head_of_security/corp,
+	"HoS uniform, navy" = /obj/item/clothing/under/rank/head_of_security/navyblue,
+	"HoS Uniform, red skirt" = /obj/item/clothing/under/rank/head_of_security/skirt
+	)
 	gear_tweaks += new/datum/gear_tweak/path(hosunitype)
 
 /datum/gear/uniform/uniform_hop
@@ -334,34 +354,26 @@
 
 /datum/gear/uniform/uniform_hop/New()
 	..()
-	var/hopunitype = list()
-	hopunitype["HoP dress"] = /obj/item/clothing/under/dress/dress_hop
-	hopunitype["HR director"] = /obj/item/clothing/under/dress/dress_hr
+	var/list/hopunitype = list(
+	"HoP dress" = /obj/item/clothing/under/dress/dress_hop,
+	"HR director" = /obj/item/clothing/under/dress/dress_hr
+	)
 	gear_tweaks += new/datum/gear_tweak/path(hopunitype)
-
-/datum/gear/uniform/shortplaindress
-	display_name = "dress, plain (colorable)"
-	path = /obj/item/clothing/under/dress/white3
-
-/datum/gear/uniform/shortplaindress/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
-/datum/gear/uniform/longdress
-	display_name = "dress, long (colorable)"
-	path = /obj/item/clothing/under/dress/white2
-
-/datum/gear/uniform/longdress/New()
-	..()
-	gear_tweaks += gear_tweak_free_color_choice
-
-/datum/gear/uniform/longwidedress
-	display_name = "dress, long and wide (colorable)"
+/datum/gear/uniform/dresses_colorable
+	display_name = "dress, colorable selection"
 	path = /obj/item/clothing/under/dress/white4
 
-/datum/gear/uniform/longwidedress/New()
+/datum/gear/uniform/dresses_colorable/New()
 	..()
-	gear_tweaks += gear_tweak_free_color_choice
+	var/list/dresses = list(
+	"plain dress" = /obj/item/clothing/under/dress/white3,
+	"short, sleeveless dress" = /obj/item/clothing/under/dress/little_strapless,
+	"long, sleeveless dress" = /obj/item/clothing/under/dress/long_strapless,
+	"long dress" = /obj/item/clothing/under/dress/white2,
+	"long, wide dress" = /obj/item/clothing/under/dress/white4
+	)
+	gear_tweaks += list(new/datum/gear_tweak/path(dresses), gear_tweak_free_color_choice)
+
 
 /datum/gear/uniform/reddress
 	display_name = "dress, red with belt"
@@ -376,7 +388,7 @@
 	path = /obj/item/clothing/under/dress/sailordress
 
 /datum/gear/uniform/dresses/eveninggown
-	display_name = "evening gown, red"
+	display_name = "dress, evening gown, red"
 	path = /obj/item/clothing/under/dress/redeveninggown
 
 /datum/gear/uniform/dresses/maid
@@ -595,7 +607,7 @@
 	path = /obj/item/clothing/under/cyberpunkpants
 
 /datum/gear/uniform/whitegown
-	display_name = "white gown"
+	display_name = "dress, white gown"
 	path = /obj/item/clothing/under/wedding/whitegown
 
 /datum/gear/uniform/floofdress
@@ -607,7 +619,7 @@
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/uniform/blackngold
-	display_name = "black and gold gown"
+	display_name = "dress, black and gold gown"
 	path = /obj/item/clothing/under/blackngold
 
 /datum/gear/uniform/sheerblue
@@ -663,3 +675,38 @@
 		var/obj/item/clothing/under/costume/costume_type = costume
 		costumes[initial(costume_type.name)] = costume_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
+
+/datum/gear/uniform/ceremonial
+	display_name = "outfit, ceremonial selection"
+	path = /obj/item/clothing/under/dress/ceremonial
+
+/datum/gear/uniform/ceremonial/New()
+	..()
+	var/list/hopunitype = list(
+	"ceremonial corset with bodystocking" = /obj/item/clothing/under/dress/ceremonial,
+	"ceremonial corset without bodystocking" = /obj/item/clothing/under/dress/ceremonial/sheerless
+	)
+	gear_tweaks += new/datum/gear_tweak/path(hopunitype)
+
+//Colorable skirts
+/datum/gear/uniform/coloredskirts
+	display_name = "skirt selection, colorable"
+	path = /obj/item/clothing/under/skirt/colorable
+
+/datum/gear/uniform/coloredskirts/New()
+	..()
+	var/list/skirts = list(
+	"casual skirt" = /obj/item/clothing/under/skirt/colorable,
+	"puffy skirt" = /obj/item/clothing/under/skirt/colorable/puffy,
+	"skater skirt" = /obj/item/clothing/under/skirt/colorable/skater,
+	"pleated skirt" = /obj/item/clothing/under/skirt/colorable/pleated,
+	"pencil skirt" = /obj/item/clothing/under/skirt/colorable/pencil,
+	"plaid skirt" = /obj/item/clothing/under/skirt/colorable/plaid,
+	"tube skirt" = /obj/item/clothing/under/skirt/colorable/tube,
+	"long skirt" = /obj/item/clothing/under/skirt/colorable/long,
+	"high skirt" = /obj/item/clothing/under/skirt/colorable/high,
+	"swept skirt" = /obj/item/clothing/under/skirt/colorable/swept,
+	"jumper skirt" = /obj/item/clothing/under/skirt/colorable/jumper,
+	"jumper dress" = /obj/item/clothing/under/skirt/colorable/jumperdress
+	)
+	gear_tweaks += list(new/datum/gear_tweak/path(skirts), gear_tweak_free_color_choice)

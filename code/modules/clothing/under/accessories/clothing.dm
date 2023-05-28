@@ -246,12 +246,123 @@
 	icon_state = "medcloak"
 	item_state = "medcloak"
 
-
 /obj/item/clothing/accessory/storage/poncho/roles/cloak/custom //A colorable cloak
 	name = "cloak"
 	desc = "A simple, bland cloak."
 	icon_state = "colorcloak"
 	item_state = "colorcloak"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/ceremonial
+	name = "ceremonial cloak"
+	desc = "A regal looking cloak of white with specks of gold woven into the fabric."
+	icon_state = "ceremonial_cloak"
+	item_state = "ceremonial_cloak"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel
+	name = "\improper Pleromanist cloak"
+	desc = "An elaborate white and gold cloak typically worn by clergy during formal Pleromanist ceremonies."
+	icon_state = "chap_plem"
+	item_state = "chap_plem"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/chapel/alt
+	name = "\improper Unitarian cloak"
+	desc = "An elaborate black and gold cloak typically worn by clergy during formal Unitarian ceremonies."
+	icon_state = "chap_unit"
+	item_state = "chap_unit"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/half
+	name = "rough half cloak"
+	desc = "The latest fashion innovations by NanoThreads; the subtle stylings of slicing a regular cloak in half! All the ponce, half the manufacturing cost!"
+	icon_state = "roughcloak"
+	item_state = "roughcloak"
+	action_button_name = "Adjust Cloak"
+	var/open = 0	//0 is closed, 1 is open
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/half/update_clothing_icon()
+	. = ..()
+	if(ismob(src.loc))
+		var/mob/M = src.loc
+		M.update_inv_wear_suit()
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/half/attack_self(mob/user as mob)
+	if(src.open == 0)
+		src.icon_state = "[icon_state]_open"
+		src.item_state = "[item_state]_open"
+		flags_inv = HIDETIE|HIDEHOLSTER
+		open = 1
+		to_chat(user, "You flip the cloak over your shoulder.")
+	else if(src.open == 1)
+		src.icon_state = initial(icon_state)
+		src.item_state = initial(item_state)
+		flags_inv = HIDEHOLSTER
+		open = 0
+		to_chat(user, "You pull the cloak over your shoulder.")
+	else //in case some goofy admin switches icon states around without switching the icon_open or icon_closed
+		to_chat(usr, "You attempt to flip the [src] over your shoulder, but can't quite make sense of it.")
+		return
+	update_clothing_icon()
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder
+	name = "left shoulder cloak"
+	desc = "A small cape that primarily covers the left shoulder. Might help you stand out more, not necessarily for the right reasons."
+	icon_state = "cape_left"
+	item_state = "cape_left"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder/right
+	name = "right shoulder cloak"
+	desc = "A small cape that primarily covers the right shoulder. Maybe fashion like this is best left to the professionals."
+	icon_state = "cape_right"
+	item_state = "cape_right"
+
+//Capelets
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet
+	name = "shoulder capelet"
+	desc = "Not a cloak and not really a cape either, but a silky fabric that rests on the neck and shoulders alone."
+	icon_state = "capelet"
+	item_state = "capelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/cargo
+	name = "cargo capelet"
+	desc = "A shoulder capelet bearing the colors of the Supply department, with a gold lapel emblazoned upon the front."
+	icon_state = "qmcapelet"
+	item_state = "qmcapelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/security
+	name = "security capelet"
+	desc = "A shoulder capelet bearing the colors of the Security department, featuring rugged molding around the collar."
+	icon_state = "hoscapelet"
+	item_state = "hoscapelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/engineering
+	name = "engineering capelet"
+	desc = "A shoulder capelet bearing the colors of the Engineering department, accenting the pristine white fabric."
+	icon_state = "cecapelet"
+	item_state = "cecapelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/research
+	name = "research capelet"
+	desc = "A shoulder capelet bearing the colors of the Research department, the material slick and hydrophobic."
+	icon_state = "rdcapelet"
+	item_state = "rdcapelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/medical
+	name = "medical capelet"
+	desc = "A shoulder capelet bearing the general colors of the Medical department, dyed a sterile nitrile cyan."
+	icon_state = "cmocapelet"
+	item_state = "cmocapelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/hop
+	name = "management capelet"
+	desc = "A shoulder capelet bearing the colors of the Head of Personnel's uniform, featuring the typical royal blue contrasted by authoritative red."
+	icon_state = "hocapelet"
+	item_state = "hopcapelet"
+
+/obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet/cap
+	name = "director capelet"
+	desc = "A shoulder capelet bearing NanoTrasen formal uniform colours, a commanding blue with regal gold inlay."
+	icon_state = "capcapelet"
+	item_state = "capcapelet"
+
 
 /obj/item/clothing/accessory/hawaii
 	name = "flower-pattern shirt"
@@ -430,3 +541,24 @@
 	name = "orange asymmetrical overcoat"
 	desc = "An asymmetrical orange overcoat in a 2560's fashion."
 	icon_state = "asymovercoat"
+
+//The gold trim from one of the qipaos, separated to an accessory to preserve the color
+/obj/item/clothing/accessory/qipaogold
+	name = "gold trim"
+	desc = "Gold trim belonging to a qipao. Why would you remove this?"
+	icon_state = "qipaogold"
+
+//Ceremonial armour set
+/obj/item/clothing/accessory/ceremonial_bracers
+	name = "ceremonial bracers"
+	desc = "A pair of metal bracers with gold inlay. They're thin and light."
+	icon_state = "ceremonialbracers"
+	body_parts_covered = ARMS
+	slot = ACCESSORY_SLOT_DECOR
+
+/obj/item/clothing/accessory/ceremonial_loins
+	name = "ceremonial loincloth"
+	desc = "A lengthy loincloth that drapes over the loins, obviously. It's quite long."
+	icon_state = "ceremonialloincloth"
+	body_parts_covered = LOWER_TORSO
+	slot = ACCESSORY_SLOT_DECOR
