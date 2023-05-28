@@ -1,9 +1,14 @@
-// Placeholder to force Teshari cloaks to use sprite_sheets to avoid erroneous pixel shifting.
+// Placeholders to force Teshari cloaks to use sprite_sheets to avoid erroneous pixel shifting.
 /obj/item/clothing/suit/storage/teshari/Initialize()
 	. = ..()
-	if(. != INITIALIZE_HINT_QDEL)
+	if(. != INITIALIZE_HINT_QDEL && !LAZYACCESS(sprite_sheets, SPECIES_TESHARI))
 		LAZYSET(sprite_sheets, SPECIES_TESHARI, icon)
-// End placeholder.
+
+/obj/item/clothing/suit/storage/hooded/teshari/Initialize()
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL && !LAZYACCESS(sprite_sheets, SPECIES_TESHARI))
+		LAZYSET(sprite_sheets, SPECIES_TESHARI, icon)
+// End placeholders.
 
 // Standard Cloaks
 
