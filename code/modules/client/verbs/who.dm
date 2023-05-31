@@ -32,9 +32,9 @@
 			var/age = C.player_age
 			switch(age)
 				if(0 to 1)
-					age = "<font color='#ff0000'><b>[age] days old</b></font>"
+					entry += " - <font color='#ff0000'><b>[age] days old</b></font>"
 				if(1 to 10)
-					age = "<font color='#ff8c00'><b>[age] days old</b></font>"
+					entry += " - <font color='#ff8c00'><b>[age] days old</b></font>"
 				else
 					entry += " - [age] days old"
 
@@ -82,7 +82,7 @@
 		else if(check_rights(R_EVENT, FALSE, C)) // event managers
 			category = R_EVENT
 			num_event_managers_online++
-		
+
 		temp += "\t[C] is a [C.holder.rank]"
 		if(holder)
 			if(C.holder.fakekey)
