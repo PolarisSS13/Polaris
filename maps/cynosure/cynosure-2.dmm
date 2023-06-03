@@ -8156,6 +8156,16 @@
 /obj/machinery/meter,
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
+"dJA" = (
+/obj/structure/railing/grey{
+	dir = 2
+	},
+/obj/structure/railing/grey{
+	dir = 4;
+	pixel_y = 8
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/plateau)
 "dJU" = (
 /obj/structure/fence/corner{
 	dir = 8
@@ -21495,6 +21505,13 @@
 /obj/machinery/door/firedoor/glass,
 /turf/simulated/floor/tiled/techfloor,
 /area/shuttle/exploration/general)
+"jQs" = (
+/obj/structure/railing/grey{
+	dir = 4;
+	pixel_y = 8
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/plateau)
 "jQE" = (
 /obj/effect/floor_decal/steeldecal/steel_decals5{
 	dir = 8
@@ -34884,6 +34901,12 @@
 "psC" = (
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/surgery)
+"psE" = (
+/obj/structure/railing/grey{
+	dir = 2
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/plateau)
 "psJ" = (
 /obj/effect/shuttle_landmark/cynosure/arrivals_station,
 /turf/simulated/floor/concrete/sif/planetuse,
@@ -39824,6 +39847,16 @@
 /obj/effect/zone_divider,
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/reactor_smes)
+"ryn" = (
+/obj/structure/railing/grey{
+	dir = 2
+	},
+/obj/structure/railing/grey{
+	dir = 8;
+	pixel_y = 9
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/plateau)
 "ryD" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -44341,6 +44374,16 @@
 /obj/effect/catwalk_plated,
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/groundfloor/south)
+"tFs" = (
+/obj/structure/railing/grey{
+	dir = 4;
+	pixel_y = 8
+	},
+/obj/structure/railing/grey{
+	dir = 2
+	},
+/turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/plateau)
 "tFB" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -49884,6 +49927,12 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/reactor_waste)
+"wiR" = (
+/obj/structure/sign/warning/falling{
+	desc = "It appears to be a sign warning against falling off the cliffs, ahead. Foolproof."
+	},
+/turf/simulated/wall/sifwood,
+/area/surface/outside/plains/plateau)
 "wjb" = (
 /obj/effect/floor_decal/industrial/warning{
 	dir = 4
@@ -72508,7 +72557,7 @@ eXA
 eXA
 eXA
 eXA
-eXA
+wiR
 eXA
 eXA
 eXA
@@ -74567,7 +74616,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -74824,7 +74873,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -75081,7 +75130,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -75338,7 +75387,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -75595,7 +75644,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+dJA
 bVN
 vwy
 vwy
@@ -75851,7 +75900,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 aHG
 vZt
 vwy
@@ -76108,7 +76157,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -76365,7 +76414,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -76622,7 +76671,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -76879,7 +76928,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -77136,7 +77185,7 @@ fyc
 eXA
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -77393,7 +77442,7 @@ fyc
 eXA
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -77650,7 +77699,7 @@ fyc
 eXA
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -77907,7 +77956,7 @@ fyc
 eXA
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -78164,7 +78213,7 @@ fyc
 eXA
 eXA
 eXA
-eXA
+dJA
 bVN
 vwy
 vwy
@@ -78420,7 +78469,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 aHG
 vZt
 vwy
@@ -78677,7 +78726,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -78934,7 +78983,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -79191,7 +79240,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -79448,7 +79497,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -79705,7 +79754,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -79962,7 +80011,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -80219,7 +80268,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+dJA
 bVN
 vwy
 vwy
@@ -80475,7 +80524,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 aHG
 vZt
 vwy
@@ -80732,7 +80781,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -80989,7 +81038,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -81246,7 +81295,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -81503,7 +81552,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -81760,7 +81809,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 oYl
 aEE
 vwy
@@ -82018,7 +82067,7 @@ fyc
 fyc
 eXA
 eXA
-eXA
+ryn
 bVN
 vwy
 vwy
@@ -82275,7 +82324,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -82532,7 +82581,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -82789,7 +82838,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -83046,7 +83095,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -83303,7 +83352,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+dJA
 bVN
 vwy
 vwy
@@ -83559,7 +83608,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 aHG
 vZt
 vwy
@@ -83816,7 +83865,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -84073,7 +84122,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -84330,7 +84379,7 @@ eXA
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -84587,7 +84636,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+dJA
 bVN
 vwy
 vwy
@@ -84843,7 +84892,7 @@ eXA
 fyc
 fyc
 fyc
-eXA
+psE
 aHG
 vZt
 vwy
@@ -85100,7 +85149,7 @@ fyc
 fyc
 fyc
 fyc
-eXA
+psE
 bVN
 vwy
 vwy
@@ -85357,7 +85406,7 @@ fyc
 fyc
 fyc
 eXA
-eXA
+psE
 bVN
 vwy
 vwy
@@ -85614,7 +85663,7 @@ eXA
 eXA
 eXA
 eXA
-eXA
+dJA
 bVN
 vwy
 vwy
@@ -85868,9 +85917,9 @@ jhv
 jhv
 jhv
 eXA
-eXA
-eXA
-eXA
+jQs
+jQs
+tFs
 aHG
 vZt
 vwy
