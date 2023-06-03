@@ -3,6 +3,7 @@
  */
 
 GLOBAL_LIST_INIT(generic_fishing_rare_list, list(
+		/mob/living/simple_mob/animal/passive/fish/planetcarp = 1,
 		/mob/living/simple_mob/animal/passive/fish/solarfish = 1,
 		/mob/living/simple_mob/animal/passive/fish/icebass = 5,
 		/mob/living/simple_mob/animal/passive/fish/koi = 3
@@ -145,7 +146,7 @@ GLOBAL_LIST_INIT(generic_fishing_chance_list, list(FISHING_RARE = 5, FISHING_UNC
 					has_fish = FALSE
 			//List of possible outcomes.
 			if(!fish_type)
-				to_chat(user,"You caught... nothing. How sad.")
+				to_chat(user,"<span class='filter_notice'>You caught... nothing. How sad.</span>")
 			else
 				var/fished = new fish_type(get_turf(user))
 				if(isliving(fished))

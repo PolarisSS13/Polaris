@@ -153,7 +153,7 @@ var/global/list/channel_to_radio_key = new
 	//Maybe they are using say/whisper to do a quick emote, so do those
 	switch(copytext(message, 1, 2))
 		if("*") return emote(copytext(message, 2))
-		if("^") return custom_emote(1, copytext(message, 2))
+		if("^") return custom_emote(VISIBLE_MESSAGE, copytext(message, 2))
 
 	//Parse the radio code and consume it
 	if(message_mode)
@@ -264,7 +264,7 @@ var/global/list/channel_to_radio_key = new
 	//Handle nonverbal languages here
 	for(var/datum/multilingual_say_piece/S in message_pieces)
 		if(S.speaking.flags & NONVERBAL)
-			custom_emote(1, "[pick(S.speaking.signlang_verb)].")
+			custom_emote(VISIBLE_MESSAGE, "[pick(S.speaking.signlang_verb)].")
 
 	//These will contain the main receivers of the message
 	var/list/listening = list()
@@ -331,20 +331,20 @@ var/global/list/channel_to_radio_key = new
 				var/dst = get_dist(get_turf(M),get_turf(src))
 				var/runechat_enabled = M.client?.is_preference_enabled(/datum/client_preference/runechat_mob)
 
-				if(dst <= message_range || (M.stat == DEAD && !forbid_seeing_deadchat)) //Inside normal message range, or dead with ears (handled in the view proc)
+				if(dst <= min(message_range + M.hearing_boost_range(), world.view) || (M.stat == DEAD && !forbid_seeing_deadchat)) //Inside normal message range, boosted whisper range, or dead with ears (handled in the view proc)
 					if(M.client && !runechat_enabled)
 						var/image/I1 = listening[M] || speech_bubble
 						images_to_clients[I1] |= M.client
 						M << I1
 					M.hear_say(message_pieces, verb, italics, src, speech_sound, sound_vol)
 				if(whispering && !isobserver(M)) //Don't even bother with these unless whispering
-					if(dst > message_range && dst <= w_scramble_range) //Inside whisper scramble range
+					if((message_range + M.hearing_boost_range() < dst) && (w_scramble_range + M.hearing_boost_range() >= dst)) //Within scramble range but not normal range
 						if(M.client && !runechat_enabled)
 							var/image/I2 = listening[M] || speech_bubble
 							images_to_clients[I2] |= M.client
 							M << I2
 						M.hear_say(stars_all(message_pieces), verb, italics, src, speech_sound, sound_vol*0.2)
-					if(dst > w_scramble_range && dst <= world.view) //Inside whisper 'visible' range
+					if((w_scramble_range + M.hearing_boost_range()) < dst && world.view >= dst) //Within visible range but not scramble range
 						M.show_message("<span class='game say'><span class='name'>[name]</span> [w_not_heard].</span>", 2)
 
 	//Object message delivery

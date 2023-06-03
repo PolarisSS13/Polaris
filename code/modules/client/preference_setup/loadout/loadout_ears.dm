@@ -21,24 +21,25 @@
 
 /datum/gear/ears/earrings/New()
 	..()
-	var/earrings = list()
-	earrings["stud, pearl"] = /obj/item/clothing/ears/earring/stud
-	earrings["stud, glass"] = /obj/item/clothing/ears/earring/stud/glass
-	earrings["stud, wood"] = /obj/item/clothing/ears/earring/stud/wood
-	earrings["stud, iron"] = /obj/item/clothing/ears/earring/stud/iron
-	earrings["stud, steel"] = /obj/item/clothing/ears/earring/stud/steel
-	earrings["stud, silver"] = /obj/item/clothing/ears/earring/stud/silver
-	earrings["stud, gold"] = /obj/item/clothing/ears/earring/stud/gold
-	earrings["stud, platinum"] = /obj/item/clothing/ears/earring/stud/platinum
-	earrings["stud, diamond"] = /obj/item/clothing/ears/earring/stud/diamond
-	earrings["dangle, glass"] = /obj/item/clothing/ears/earring/dangle/glass
-	earrings["dangle, wood"] = /obj/item/clothing/ears/earring/dangle/wood
-	earrings["dangle, iron"] = /obj/item/clothing/ears/earring/dangle/iron
-	earrings["dangle, steel"] = /obj/item/clothing/ears/earring/dangle/steel
-	earrings["dangle, silver"] = /obj/item/clothing/ears/earring/dangle/silver
-	earrings["dangle, gold"] = /obj/item/clothing/ears/earring/dangle/gold
-	earrings["dangle, platinum"] = /obj/item/clothing/ears/earring/dangle/platinum
-	earrings["dangle, diamond"] = /obj/item/clothing/ears/earring/dangle/diamond
+	var/list/earrings = list(
+	"stud, pearl" = /obj/item/clothing/ears/earring/stud,
+	"stud, glass" = /obj/item/clothing/ears/earring/stud/glass,
+	"stud, wood" = /obj/item/clothing/ears/earring/stud/wood,
+	"stud, iron" = /obj/item/clothing/ears/earring/stud/iron,
+	"stud, steel" = /obj/item/clothing/ears/earring/stud/steel,
+	"stud, silver" = /obj/item/clothing/ears/earring/stud/silver,
+	"stud, gold" = /obj/item/clothing/ears/earring/stud/gold,
+	"stud, platinum" = /obj/item/clothing/ears/earring/stud/platinum,
+	"stud, diamond" = /obj/item/clothing/ears/earring/stud/diamond,
+	"dangle, glass" = /obj/item/clothing/ears/earring/dangle/glass,
+	"dangle, wood" = /obj/item/clothing/ears/earring/dangle/wood,
+	"dangle, iron" = /obj/item/clothing/ears/earring/dangle/iron,
+	"dangle, steel" = /obj/item/clothing/ears/earring/dangle/steel,
+	"dangle, silver" = /obj/item/clothing/ears/earring/dangle/silver,
+	"dangle, gold" = /obj/item/clothing/ears/earring/dangle/gold,
+	"dangle, platinum" = /obj/item/clothing/ears/earring/dangle/platinum,
+	"dangle, diamond" = /obj/item/clothing/ears/earring/dangle/diamond
+	)
 	gear_tweaks += new/datum/gear_tweak/path(earrings)
 
 /datum/gear/ears/hearingaid
@@ -48,9 +49,10 @@
 
 /datum/gear/ears/hearingaid/New()
 	..()
-	var/hearingaids = list()
-	hearingaids["hearing aid"] = /obj/item/clothing/ears/hearingaid
-	hearingaids["black hearing aid"] = /obj/item/clothing/ears/hearingaid/black
-	hearingaids["silver hearing aid"] = /obj/item/clothing/ears/hearingaid/silver
-	hearingaids["white hearing aid"] = /obj/item/clothing/ears/hearingaid/white
+	var/list/hearingaids = list(
+	"hearing aid" = /obj/item/clothing/ears/hearingaid,
+	"black hearing aid" = /obj/item/clothing/ears/hearingaid/black,
+	"silver hearing aid" = /obj/item/clothing/ears/hearingaid/silver,
+	"white hearing aid" = /obj/item/clothing/ears/hearingaid/white
+	)
 	gear_tweaks += new/datum/gear_tweak/path(hearingaids)

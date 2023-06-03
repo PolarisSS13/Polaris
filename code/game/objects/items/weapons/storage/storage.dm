@@ -358,6 +358,7 @@
 //Set the stop_messages to stop it from printing messages
 /obj/item/storage/proc/can_be_inserted(obj/item/W as obj, stop_messages = 0)
 	if(!istype(W)) return //Not an item
+	if(W.anchored) return //It won't budge
 
 	if(usr && usr.isEquipped(W) && !usr.canUnEquip(W))
 		return 0

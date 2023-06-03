@@ -53,3 +53,8 @@
 				to_chat(user, "<span class='notice'>You add the newly-formed wood to the stack. It now contains [existing_wood.amount] planks.</span>")
 	else
 		return ..()
+
+/obj/item/stack/material/grass
+	name = "grass"
+	icon_state = "tile_grass"
+	default_type = "grass"

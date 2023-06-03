@@ -256,12 +256,14 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	if(head)
 		if(!istype(head, /obj/item/organ/external/stump))
 			icon_key += "[head.eye_icon]"
+	var/wholeicontransparent = TRUE
 	for(var/organ_tag in species.has_limbs)
 		var/obj/item/organ/external/part = organs_by_name[organ_tag]
 		if(isnull(part) || part.is_stump())
 			icon_key += "0"
 			continue
 		if(part)
+			wholeicontransparent &&= part.nonsolid
 			icon_key += "[part.species.get_race_key(part.owner)]"
 			icon_key += "[part.dna.GetUIState(DNA_UI_GENDER)]"
 			icon_key += "[part.s_tone]"
@@ -296,14 +298,17 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	else
 		//BEGIN CACHED ICON GENERATION.
 		var/obj/item/organ/external/chest = get_organ(BP_TORSO)
-		base_icon = chest.get_icon()
+		base_icon = chest.get_icon(skeleton, !wholeicontransparent)
+
+		var/apply_extra_transparency_leg = organs_by_name[BP_L_LEG] && organs_by_name[BP_R_LEG]
+		var/apply_extra_transparency_foot = organs_by_name[BP_L_FOOT] && organs_by_name[BP_R_FOOT]
 
 		var/icon/Cutter = null
 
 		for(var/obj/item/organ/external/part in organs)
-			if(isnull(part) || part.is_stump())
+			if(isnull(part) || part.is_stump() || part == chest)
 				continue
-			var/icon/temp = part.get_icon(skeleton)
+			var/icon/temp = part.get_icon(skeleton, !wholeicontransparent)
 
 			if((part.organ_tag in list(BP_L_LEG, BP_R_LEG, BP_L_FOOT, BP_R_FOOT)) && Cutter)
 				temp.Blend(Cutter, ICON_AND, x = -16)
@@ -319,15 +324,25 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 				if(!(part.icon_position & RIGHT))
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
 				base_icon.Blend(temp2, ICON_OVERLAY)
+				temp2.Insert(temp2,"blank",dir=NORTH) //faaaaairly certain this is more efficient than reloading temp2, doing this so we don't blend the icons twice (it matters more in transparent limbs)
+				temp2.Insert(temp2,"blank",dir=SOUTH)
+				temp2.Insert(temp2,"blank",dir=EAST)
+				temp2.Insert(temp2,"blank",dir=WEST)
 				if(part.icon_position & LEFT)
 					temp2.Insert(new/icon(temp,dir=EAST),dir=EAST)
 				if(part.icon_position & RIGHT)
 					temp2.Insert(new/icon(temp,dir=WEST),dir=WEST)
+				if (part.nonsolid && !wholeicontransparent) //apply a little (a lot) extra transparency to make it look better
+					if ((istype(part, /obj/item/organ/external/leg) && apply_extra_transparency_leg) || (istype(part, /obj/item/organ/external/foot) && apply_extra_transparency_foot)) //maybe
+						temp2 += rgb(,,,30)
 				base_icon.Blend(temp2, ICON_UNDERLAY)
 			else if(part.icon_position & UNDER)
 				base_icon.Blend(temp, ICON_UNDERLAY)
 			else
 				base_icon.Blend(temp, ICON_OVERLAY)
+
+		if (wholeicontransparent) //because, I mean. It's basically never gonna happen that you'll have just one non-transparent limb but if you do your icon will look meh. Still good but meh, will have some areas with higher transparencies unless you're literally just a torso and a head
+			base_icon += rgb(,,,180)
 
 		if(!skeleton)
 			if(husk)
@@ -353,7 +368,6 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	//tail
 	update_tail_showing()
 	update_wing_showing()
-
 
 /mob/living/carbon/human/proc/update_skin()
 	if(QDESTROYING(src))
@@ -462,10 +476,13 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 
 			face_standing.Blend(hair_s, ICON_OVERLAY)
 
+	var/icon/ears_s = get_ears_overlay()
+
 	if(head_organ.nonsolid || head_organ.transparent)
 		face_standing += rgb(,,,120)
+		if (ears_s)
+			ears_s += rgb(,,,180)
 
-	var/icon/ears_s = get_ears_overlay()
 	if(ears_s)
 		face_standing.Blend(ears_s, ICON_OVERLAY)
 
@@ -505,6 +522,9 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 		eyes_icon.Blend(rgb(eyes.eye_colour[1], eyes.eye_colour[2], eyes.eye_colour[3]), ICON_ADD)
 	else
 		eyes_icon.Blend(rgb(128,0,0), ICON_ADD)
+
+	if (head_organ.nonsolid)
+		eyes_icon += rgb(,,,180)
 
 	var/image/eyes_image = image(eyes_icon)
 	eyes_image.plane = PLANE_LIGHTING_ABOVE
@@ -883,7 +903,7 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	if(!r_hand)
 		return //No hand, no bother.
 
-	overlays_standing[R_HAND_LAYER] = r_hand.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), inhands = TRUE, slot_name = slot_r_hand_str, default_layer = R_HAND_LAYER)
+	overlays_standing[R_HAND_LAYER] = r_hand.get_worn_overlay(wearer = src, body_type = species.get_bodytype(src), inhands = TRUE, slot_name = slot_r_hand_str, default_icon = INV_R_HAND_DEF_ICON, default_layer = R_HAND_LAYER)
 
 	apply_layer(R_HAND_LAYER)
 
@@ -907,11 +927,14 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	remove_layer(TAIL_NORTH_LAYER)
 	remove_layer(TAIL_SOUTH_LAYER)
 
+	var/obj/item/organ/external/chest = organs_by_name[BP_TORSO]
+
 	var/tail_layer = GET_TAIL_LAYER
 
 	var/image/tail_image = get_tail_image()
 	if(tail_image)
 		tail_image.layer = BODY_LAYER+tail_layer
+		tail_image.alpha = chest?.nonsolid ? 180 : 255
 		overlays_standing[tail_layer] = tail_image
 		apply_layer(tail_layer)
 		return
@@ -921,7 +944,9 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 	//This one is actually not that bad I guess.
 	if(species_tail && !(wear_suit && wear_suit.flags_inv & HIDETAIL))
 		var/icon/tail_s = get_tail_icon()
-		overlays_standing[tail_layer] = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+tail_layer)
+		tail_image = image(icon = tail_s, icon_state = "[species_tail]_s", layer = BODY_LAYER+tail_layer)
+		tail_image.alpha = chest?.nonsolid ? 180 : 255
+		overlays_standing[tail_layer] = tail_image
 		animate_tail_reset()
 
 //TODO: Is this the appropriate place for this, and not on species...?
@@ -1015,9 +1040,12 @@ var/global/list/_index_extended_clothing_icon_cache= list()
 
 	remove_layer(WING_LAYER)
 
+	var/obj/item/organ/external/chest = organs_by_name[BP_TORSO]
+
 	var/image/wing_image = get_wing_image()
 	if(wing_image)
 		wing_image.layer = BODY_LAYER+WING_LAYER
+		wing_image.alpha = chest?.nonsolid ? 180 : 255
 		overlays_standing[WING_LAYER] = wing_image
 
 	apply_layer(WING_LAYER)

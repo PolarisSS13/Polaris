@@ -199,8 +199,17 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 				if(S.dirt > 50)
 					S.dirt = 0
 					H.adjust_nutrition(rand(10, 20))
-		if(H.clean_blood(1))
-			H.adjust_nutrition(rand(5, 15))
+		if(H.feet_blood_color || LAZYLEN(H.feet_blood_DNA))
+			LAZYCLEARLIST(H.feet_blood_DNA)
+			H.feet_blood_DNA = null
+			H.feet_blood_color = null
+			H.adjust_nutrition(rand(3, 10))
+		if(H.bloody_hands)
+			LAZYCLEARLIST(H.blood_DNA)
+			H.blood_DNA = null
+			H.hand_blood_color = null
+			H.bloody_hands = 0
+			H.adjust_nutrition(rand(3, 10))
 		if(!(H.gloves || (H.wear_suit && (H.wear_suit.body_parts_covered & HANDS))))
 			if(H.r_hand)
 				if(H.r_hand.clean_blood())
@@ -208,6 +217,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 			if(H.l_hand)
 				if(H.l_hand.clean_blood())
 					H.adjust_nutrition(rand(5, 15))
+/*
 		if(H.head)
 			if(H.head.clean_blood())
 				H.update_inv_head(0)
@@ -220,6 +230,10 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 			if(H.w_uniform.clean_blood())
 				H.update_inv_w_uniform(0)
 				H.adjust_nutrition(rand(5, 15))
+*/
+		// Prometheans themselves aren't very safe places for other biota.
+		H.germ_level = 0
+		H.update_bloodied()
 		//End cleaning code.
 
 		var/datum/gas_mixture/environment = T.return_air()
@@ -304,7 +318,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 
 			H.adjust_nutrition(-(3 * nutrition_cost)) // Costs Nutrition when damage is being repaired, corresponding to the amount of damage being repaired.
 
-			var/agony_to_apply = ((1 / starve_mod) * (nutrition_cost - strain_negation)) //Regenerating damage causes minor pain over time, if the organs responsible are nonexistant or too high on strain. Small injures will be no issue, large ones will cause problems.
+			var/agony_to_apply = ((1 / starve_mod) * (nutrition_cost - strain_negation)) //Regenerating damage causes minor pain over time, if the organs responsible are nonexistent or too high on strain. Small injures will be no issue, large ones will cause problems.
 
 			if((starve_mod <= 0.5 && (H.getHalLoss() + agony_to_apply) <= 90) || ((H.getHalLoss() + agony_to_apply) <= 70))	// Will max out at applying halloss at 70, unless they are starving; starvation regeneration will bring them up to a maximum of 120, the same amount of agony a human receives from three taser hits.
 				H.apply_damage(agony_to_apply, HALLOSS)

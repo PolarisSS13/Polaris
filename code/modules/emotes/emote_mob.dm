@@ -48,10 +48,6 @@
 			return custom_emote(m_type, message)
 
 		if(act == "custom")
-			if(!message)
-				message = sanitize(input("Enter an emote to display.") as text|null)
-			if(!message)
-				return
 			if (!m_type)
 				if(alert(src, "Is this an audible emote?", "Emote", "Yes", "No") == "No")
 					m_type = VISIBLE_MESSAGE
@@ -101,7 +97,7 @@
 	message = html_decode(message)
 
 	name_anchor = findtext(message, "*")
-	if(name_anchor > 0) // User supplied emote with visible_emote token (default ^)
+	if(name_anchor > 0) // User supplied emote with visible_emote token
 		pretext = copytext(message, 1, name_anchor)
 		subtext = copytext(message, name_anchor + 1, length(message) + 1)
 	else
@@ -145,60 +141,55 @@
 
 	set waitfor = FALSE // Due to input() below and this being used in Life() procs.
 
-	if((usr && stat) || (!use_me && usr == src))
+	if(stat != CONSCIOUS || (!use_me && usr == src))
 		to_chat(src, "You are unable to emote.")
 		return
 
-	var/input
 	if(!message)
-		input = sanitize(input(src,"Choose an emote to display.") as text|null)
-	else
-		input = message
+		message = input(usr, "Please enter an emote to display. You can use \"*\" to reposition your character name within the emote.") as text|null
+		// Recheck due to input()
+		if(stat != CONSCIOUS || (!use_me && usr == src))
+			to_chat(src, "You are unable to emote.")
+			return
+
+	message = html_decode(sanitize(message))
+	if(!message)
+		return
+
+	var/turf/T = get_turf(src)
+	if(!T)
+		return
 
 	var/list/formatted
 	var/runemessage
-	if(input)
-		formatted = format_emote(src, message)
-		message = formatted["pretext"] + formatted["nametext"] + formatted["subtext"]
-		runemessage = formatted["subtext"]
-		// This is just personal preference (but I'm objectively right) that custom emotes shouldn't have periods at the end in runechat
-		runemessage = replacetext(runemessage,".","",length(runemessage),length(runemessage)+1)
+
+	formatted = format_emote(src, message)
+	var/pretext =  formatted["pretext"]
+	var/nametext = formatted["nametext"]
+	var/subtext =  formatted["subtext"]
+	if(pretext) // If we have a split emote we need to show the pretext and name.
+		runemessage = "[pretext][nametext][subtext]"
 	else
-		return
+		runemessage = subtext
+	// This is just personal preference (but I'm objectively right) that custom emotes shouldn't have periods at the end in runechat
+	runemessage = replacetext(runemessage,".","",length(runemessage),length(runemessage)+1)
 
-	if(input)
-		log_emote(message,src) //Log before we add junk
-		message = "<span class='emote'><B>[src]</B> [input]</span>"
-	else
-		return
+	log_emote("[pretext][nametext][subtext]", src) //Log before we add junk
+	message = encode_html_emphasis("<span class='emote'>[pretext]<b>[nametext]</b>[subtext]</span>")
 
-	if(message)
-		message = encode_html_emphasis(message)
+	var/list/in_range = get_mobs_and_objs_in_view_fast(T,range,2,remote_ghosts = client ? TRUE : FALSE)
+	var/list/m_viewers = in_range["mobs"]
+	var/list/o_viewers = in_range["objs"]
 
-		// Hearing gasp and such every five seconds is not good emotes were not global for a reason.
-		// Maybe some people are okay with that.
-		var/turf/T = get_turf(src)
-		if(!T) return
-		var/list/in_range = get_mobs_and_objs_in_view_fast(T,range,2,remote_ghosts = client ? TRUE : FALSE)
-		var/list/m_viewers = in_range["mobs"]
-		var/list/o_viewers = in_range["objs"]
+	for(var/mob/M as anything in m_viewers)
+		if(isobserver(M))
+			M.show_message("<span class='emote'>[pretext]<b>[ghost_follow_link(src, M, nametext)]</b>[subtext]</span>", m_type)
+		else
+			M.show_message(message, m_type)
+		M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
 
-		for(var/mob in m_viewers)
-			var/mob/M = mob
-			spawn(0) // It's possible that it could be deleted in the meantime, or that it runtimes.
-				if(M)
-					if(isobserver(M))
-						message = "<span class='emote'><B>[src]</B> ([ghost_follow_link(src, M)]) [input]</span>"
-					M.show_message(message, m_type)
-					M.create_chat_message(src, "[runemessage]", FALSE, list("emote"), (m_type == AUDIBLE_MESSAGE))
-
-		for(var/obj in o_viewers)
-			var/obj/O = obj
-			spawn(0)
-				if(O)
-					O.see_emote(src, message, m_type)
-
-
+	for(var/obj/O as anything in o_viewers)
+		O.see_emote(src, message, m_type)
 
 // Specific mob type exceptions below.
 /mob/living/carbon/human/emote(act, m_type, message)

@@ -92,6 +92,10 @@
 	name = "stack of durasteel hull"
 	type_to_spawn = /obj/item/stack/material/durasteel/hull
 
+/obj/fiftyspawner/grass
+	name = "stack of grass"
+	type_to_spawn = /obj/item/stack/material/grass
+
 /obj/fiftyspawner/wood
 	name = "stack of wood"
 	type_to_spawn = /obj/item/stack/material/wood

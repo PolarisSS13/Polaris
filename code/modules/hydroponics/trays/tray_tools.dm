@@ -39,14 +39,14 @@
 
 /obj/item/analyzer/plant_analyzer/proc/print_report(var/mob/living/user)
 	if(!last_data)
-		to_chat(user, "There is no scan data to print.")
+		to_chat(user, "<span class='filter_notice'>There is no scan data to print.</span>")
 		return
 	var/obj/item/paper/P = new /obj/item/paper(get_turf(src))
 	P.name = "paper - [form_title]"
 	P.info = "[last_data]"
 	if(istype(user,/mob/living/carbon/human))
 		user.put_in_hands(P)
-	user.visible_message("\The [src] spits out a piece of paper.")
+	user.visible_message("<span class='filter_notice'>\The [src] spits out a piece of paper.</span>")
 	return
 
 /obj/item/analyzer/plant_analyzer/attack_self(mob/user as mob)

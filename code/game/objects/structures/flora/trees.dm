@@ -15,6 +15,17 @@
 	var/is_stump = FALSE // If true, suspends damage tracking and most other effects.
 	var/indestructable = FALSE // If true, the tree cannot die.
 
+/obj/structure/flora/tree/CanPass(var/atom/movable/mover, var/turf/target)
+	. = ..()
+
+	if(mover.checkpass(PASSTREE))
+		return TRUE
+
+	if(ismecha(mover))
+		var/obj/mecha/Me = mover
+		if(Me.flying)
+			return TRUE
+
 /obj/structure/flora/tree/Initialize()
 	icon_state = choose_icon_state()
 

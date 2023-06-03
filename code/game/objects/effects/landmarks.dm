@@ -270,3 +270,19 @@
 /obj/effect/landmark/crashed_pod
 	name = "Crash Survivor Spawn"
 	delete_me = FALSE
+
+/obj/effect/landmark/snowy_turf
+	name = "snowy turf"
+	desc = "This landmark will cause the turf it's on to become covered in snow during Initialize()."
+	icon = 'icons/turf/outdoors.dmi'
+	icon_state = "snow"
+	alpha = 25
+	/// When initializing, this landmark will set the `snow_layers` of its parent turf to this value.
+	var/snow_density = SNOW_HEAVY
+
+/obj/effect/landmark/snowy_turf/Initialize()
+	..()
+	if (istype(loc, /turf/simulated/floor))
+		var/turf/simulated/floor/F = loc
+		F.set_snow(snow_density)
+	return INITIALIZE_HINT_QDEL

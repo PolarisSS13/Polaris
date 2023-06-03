@@ -2,7 +2,7 @@
 	name = "skathari soldier"
 	desc = "Terrible insects from beyond this galaxy!"
 	description_fluff = "Also know as the 'Bluespace Bugs', these insectoid invaders began to manifest suddenly around 2565 and their ravenous hunger for the very particles upon which modern FTL technology relies brought much of galactic society to a standstill. Their ravenous hunger for physical matter on the other hand, got people moving again fast - in the other direction!"
-	tt_desc = "X Extraneus Tarlevi"
+	tt_desc = "U Extraneus skathari"
 	icon = 'icons/mob/alien.dmi'
 	icon_state = "alienh_running"
 	icon_living = "alienh_running"

@@ -102,7 +102,7 @@
 			var/mob/living/carbon/human/H = M
 			if(istype(H) && istype(H.shoes, /obj/item/clothing/shoes))
 				var/obj/item/clothing/shoes/S = H.shoes
-				S.handle_movement(src,(H.m_intent == "run" ? 1 : 0))
+				S.handle_movement(src, IS_RUNNING(H))
 				if(S.track_blood && S.blood_DNA)
 					bloodDNA = S.blood_DNA
 					bloodcolor=S.blood_color
@@ -121,7 +121,7 @@
 
 		if(src.wet)
 
-			if(M.buckled || (src.wet == 1 && M.m_intent == "walk"))
+			if(M.buckled || (src.wet == 1 && IS_WALKING(M)))
 				return
 
 			var/slip_dist = 1
@@ -171,3 +171,15 @@
 		new /obj/effect/decal/cleanable/blood/oil(src)
 	else if(ishuman(M))
 		add_blood(M)
+
+/turf/simulated/is_slime_food()
+	return dirt >= 50
+
+/turf/simulated/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	slime.adjust_nutrition(round(dirt / 5))
+	dirt = 0
+	slime.visible_message(
+		SPAN_NOTICE("\The [slime] cleans the dirt off of \the [src]!"),
+		SPAN_NOTICE("You eat all the dirt right off \the [src].")
+	)
+	update_dirt()

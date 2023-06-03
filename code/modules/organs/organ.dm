@@ -558,3 +558,16 @@ var/global/list/organ_cache = list()
 			critter.eat_food_item(src)
 		return TRUE
 	return ..()
+
+/obj/item/organ/is_slime_food()
+	return !robotic // no yucky metal
+
+/obj/item/organ/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	slime.adjust_nutrition(max(10, w_class * 10))
+	slime.visible_message(
+		SPAN_NOTICE("\The [slime] [pick("absorbs", "consumes", "devours", "eats", "engulfs", "envelops", "schlorps up", "vacuums up")] \the [src]!"),
+		SPAN_NOTICE("You absorb \the [src]!")
+	)
+	playsound(slime, 'sound/items/eatfood.ogg', rand(10, 50), TRUE)
+	playsound(slime, 'sound/effects/slime_squish.ogg', 30, TRUE)
+	qdel(src)

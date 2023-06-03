@@ -4,7 +4,7 @@
 	name = "Voidcraft - Hoverpod"
 	desc = "This is a small space-capable craft that has a round design. Can hold up to one pilot, \
 	and sometimes one or two passengers, with the right modifications made. \
-	Hoverpods have existed for a very long time, and the design has remained more or less consistant over its life. \
+	Hoverpods have existed for a very long time, and the design has remained more or less consistent over its life. \
 	They carved out a niche in short ranged transportation of cargo or crew while in space, \
 	as they were more efficient compared to using a shuttle, and required less infrastructure to use due to being compact enough \
 	to use airlocks. As such, they acted as a sort of bridge between being EVA in a spacesuit, and being inside a 'real' spacecraft.\

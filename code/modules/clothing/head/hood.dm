@@ -4,7 +4,7 @@
 	icon_state = "generic_hood"
 	body_parts_covered = HEAD
 	cold_protection = HEAD
-	flags_inv = HIDEEARS | BLOCKHAIR
+	flags_inv = HIDEEARS | BLOCKHEADHAIR
 
 // Winter coats
 /obj/item/clothing/head/hood/winter
@@ -212,3 +212,19 @@
 	desc = "A hood that looks vaguely like a siffet's head. Guaranteed to traumatize your Promethean coworkers."
 	icon_state = "siffet"
 	item_state_slots = list(slot_r_hand_str = "siffet", slot_l_hand_str = "siffet")
+
+//Hoodie Hood
+
+/obj/item/clothing/head/hood/toggleable
+	name = "super special hood"
+	desc = "This hood is so special that you weren't even supposed to lay eyes on it! Tell a developer!"
+	var/open = FALSE
+
+/obj/item/clothing/head/hood/toggleable/colorable
+	name = "hoodie hood"
+	desc = "It's the hood part of a hoodie. What kind of hoodie would it be without one? A poser, obviously."
+	icon_state = "choodie"
+
+/obj/item/clothing/head/hood/toggleable/colorable/update_icon()
+	. = ..()
+	icon_state = "[initial(icon_state)][open ? "_open" : ""]"

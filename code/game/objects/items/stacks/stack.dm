@@ -61,7 +61,7 @@
 
 	if(Adjacent(user))
 		if(!uses_charge)
-			. += "There are [src.amount] [src.singular_name]\s in the stack."
+			. += "There [src.amount == 1? "is" : "are"] [src.amount] [src.singular_name]\s in the stack."
 		else
 			. += "There is enough charge for [get_amount()]."
 

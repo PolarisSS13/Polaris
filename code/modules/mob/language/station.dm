@@ -244,7 +244,7 @@
 //Syllable Lists
 /*
 	This list really long, mainly because I can't make up my mind about which mandarin syllables should be removed,
-	and the english syllables had to be duplicated so that there is roughly a 50-50 weighting.
+	and the English syllables had to be duplicated so that there is roughly a 50-50 weighting.
 	The other 3 languages were duplicated just so they could show occasionally.
 
 	Sources:

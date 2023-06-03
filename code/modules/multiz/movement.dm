@@ -184,7 +184,7 @@
 
 //FALLING STUFF
 
-//Holds fall checks that should not be overriden by children
+//Holds fall checks that should not be overridden by children
 /atom/movable/proc/fall()
 	if(!isturf(loc))
 		return
@@ -236,9 +236,11 @@
 /atom/movable/lighting_overlay/can_fall()
 	return FALSE
 
-// Mechas are anchored, so we need to override.
 /obj/mecha/can_fall()
-	return TRUE
+	for(var/obj/item/mecha_parts/mecha_equipment/equip in equipment)
+		if(equip.check_hover())
+			return FALSE
+	return !flying
 
 /obj/item/pipe/can_fall()
 	. = ..()
@@ -329,7 +331,7 @@
 
 /atom/movable/proc/find_fall_target(var/turf/oldloc, var/turf/landing)
 	if(isopenspace(oldloc))
-		oldloc.visible_message("\The [src] falls down through \the [oldloc]!", "You hear something falling through the air.")
+		oldloc.visible_message("<span class='notice'>\The [src] falls down through \the [oldloc]!</span>", "<span class='notice'>You hear something falling through the air.</span>")
 
 	// If the turf has density, we give it first dibs
 	if (landing.density && landing.CheckFall(src))

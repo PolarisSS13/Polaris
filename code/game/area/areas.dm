@@ -24,7 +24,7 @@
 
 	var/requires_power = 1
 
-	var/always_unpowered = 0	//this gets overriden to 1 for space in area/Initialize()
+	var/always_unpowered = 0	//this gets overridden to 1 for space in area/Initialize()
 
 	// Power channel status - Is it currently energized?
 	var/power_equip = TRUE
@@ -386,7 +386,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		L.lastarea = get_area(L.loc)
 	var/area/newarea = get_area(L.loc)
 	var/area/oldarea = L.lastarea
-	if((oldarea.has_gravity == 0) && (newarea.has_gravity == 1) && (L.m_intent == "run")) // Being ready when you change areas gives you a chance to avoid falling all together.
+	if((oldarea.has_gravity == 0) && (newarea.has_gravity == 1) && IS_RUNNING(L)) // Being ready when you change areas gives you a chance to avoid falling all together.
 		thunk(L)
 		L.update_floating( L.Check_Dense_Object() )
 
@@ -397,7 +397,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		L.disable_spoiler_vision()
 
 /area/proc/play_ambience(var/mob/living/L, initial = TRUE)
-	// Ambience goes down here -- make sure to list each area seperately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
+	// Ambience goes down here -- make sure to list each area separately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
 	if(!(L && L.is_preference_enabled(/datum/client_preference/play_ambiance)))
 		return
 
@@ -447,7 +447,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 		if(istype(H.shoes, /obj/item/clothing/shoes/magboots) && (H.shoes.item_flags & NOSLIP))
 			return
 
-		if(H.m_intent == "run")
+		if(IS_RUNNING(H))
 			H.AdjustStunned(6)
 			H.AdjustWeakened(6)
 		else

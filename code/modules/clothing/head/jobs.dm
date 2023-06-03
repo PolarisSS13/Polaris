@@ -43,7 +43,7 @@
 	desc = "It's a hood that covers the head. It keeps you warm during the space winters."
 	icon_state = "chaplain_hood"
 	item_state_slots = list(slot_r_hand_str = "beret_black", slot_l_hand_str = "beret_black")
-	flags_inv = BLOCKHAIR
+	flags_inv = BLOCKHEADHAIR
 	body_parts_covered = HEAD
 
 //Chaplain but spookier

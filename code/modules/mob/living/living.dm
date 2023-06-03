@@ -69,7 +69,7 @@
 	if(!..())
 		return 0
 
-	usr.visible_message("<b>[src]</b> points to [A]")
+	usr.visible_message("<span class='filter_notice'><b>[src]</b> points to [A].</span>")
 	return 1
 
 /mob/living/verb/succumb()
@@ -662,7 +662,7 @@
 	set category = "IC"
 
 	resting = !resting
-	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"]</span>")
+	to_chat(src, "<span class='notice'>You are now [resting ? "resting" : "getting up"].</span>")
 	update_canmove()
 
 //called when the mob receives a bright flash
@@ -1012,7 +1012,7 @@
 			var/mob/living/carbon/human/H = target
 			if(H.in_throw_mode && H.a_intent == I_HELP && unEquip(item))
 				H.put_in_hands(item) // If this fails it will just end up on the floor, but that's fitting for things like dionaea.
-				visible_message("<b>[src]</b> hands \the [H] \a [item].", SPAN_NOTICE("You give \the [target] \a [item]."))
+				visible_message("<span class='filter_notice'><b>[src]</b> hands \the [H] \a [item].</span>", SPAN_NOTICE("You give \the [target] \a [item]."))
 			else
 				to_chat(src, SPAN_NOTICE("You offer \the [item] to \the [target]."))
 				do_give(H)
@@ -1119,7 +1119,7 @@
 		throw_alert("weightless", /obj/screen/alert/weightless)
 
 // Tries to turn off things that let you see through walls, like mesons.
-// Each mob does vision a bit differently so this is just for inheritence and also so overrided procs can make the vision apply instantly if they call `..()`.
+// Each mob does vision a bit differently so this is just for inheritance and also so overridden procs can make the vision apply instantly if they call `..()`.
 /mob/living/proc/disable_spoiler_vision()
 	handle_vision()
 

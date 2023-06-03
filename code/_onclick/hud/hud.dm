@@ -41,7 +41,7 @@ var/global/list/global_huds = list(
 
 /datum/global_hud/proc/setup_overlay(var/icon_state)
 	var/obj/screen/screen = new /obj/screen()
-	screen.alpha = 40 // Adjut this if you want goggle overlays to be thinner or thicker.
+	screen.alpha = 20 // Adjust this if you want goggle overlays to be thinner or thicker. Low = thin, high = thick; 2023-03-27 changed from 40 -> 20
 	screen.screen_loc = "SOUTHWEST to NORTHEAST" // Will tile up to the whole screen, scaling beyond 15x15 if needed.
 	screen.icon = 'icons/obj/hud_tiled.dmi'
 	screen.icon_state = icon_state
@@ -84,7 +84,7 @@ var/global/list/global_huds = list(
 
 	nvg = setup_overlay("nvg_hud")
 	thermal = setup_overlay("thermal_hud")
-	meson = setup_overlay("meson_hud")
+	meson = setup_overlay("nvg_hud") //2023-03-27, formerly meson_hud but nvg_hud is a little less painful to look at tbh
 	science = setup_overlay("science_hud")
 	material = setup_overlay("material_hud")
 
@@ -183,7 +183,7 @@ var/global/list/global_huds = list(
 	var/icon/ui_style
 	var/ui_color
 	var/ui_alpha
-	
+
 	// TGMC Ammo HUD Port
 	var/list/obj/screen/ammo_hud_list = list()
 
@@ -196,7 +196,7 @@ var/global/list/global_huds = list(
 
 /datum/hud/Destroy()
 	. = ..()
-	QDEL_NULL(minihuds)
+	QDEL_NULL_LIST(minihuds)
 	grab_intent = null
 	hurt_intent = null
 	disarm_intent = null
@@ -214,7 +214,9 @@ var/global/list/global_huds = list(
 	other = null
 	hotkeybuttons = null
 //	item_action_list = null // ?
-	QDEL_LIST(ammo_hud_list)
+	for (var/x in ammo_hud_list)
+		remove_ammo_hud(mymob, x)
+	ammo_hud_list = null
 	mymob = null
 
 /datum/hud/proc/hidden_inventory_update()
@@ -452,7 +454,7 @@ var/global/list/global_huds = list(
 
 /mob/new_player/add_click_catcher()
 	return
-	
+
 /* TGMC Ammo HUD Port
  * These procs call to screen_objects.dm's respective procs.
  * All these do is manage the amount of huds on screen and set the HUD.

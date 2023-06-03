@@ -6,11 +6,12 @@
 	var/static/list/blockedturfs =  list(
 		/turf/space,
 		/turf/simulated/floor/outdoors,
+		/turf/simulated/open
 	)
 
 /obj/machinery/shield_gen/external/advanced
 	name = "advanced hull shield generator"
-	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated.  This version comes with a more efficent shield matrix."
+	desc = "A machine that generates a field of energy optimized for blocking meteorites when activated.  This version comes with a more efficient shield matrix."
 	energy_conversion_rate = 0.0012
 
 //Search for space turfs within range that are adjacent to a simulated turf.
@@ -26,8 +27,20 @@
 			T = locate(gen_turf.x + x_offset, gen_turf.y + y_offset, gen_turf.z)
 			if (is_type_in_list(T,blockedturfs))
 				//check neighbors of T
-				for(var/i in orange(1, T))
-					if(istype(i, /turf/simulated) && !is_type_in_list(i,blockedturfs))
-						out += T
-						break
+				if(istype(T, /turf/simulated/open))
+					if((locate(/obj/structure/catwalk) in T) || !T.is_outdoors())	// Don't cover catwalks or indoor turfs.
+						continue
+					for(var/turf/simulated/Turf in orange(1, T))	// check adjacent turfs
+						if(!Turf.is_outdoors() && !is_type_in_list(Turf, blockedturfs))
+							out |= T
+							break
+						if(Turf.is_outdoors() && (!is_type_in_list(Turf, blockedturfs) || (locate(/obj/structure/catwalk) in Turf)))	// Is it outdoors, and not a turf we can shield, or a catwalked turf?
+							out |= T
+							break
+				else
+					for(var/i in orange(1, T))
+						if(istype(i, /turf/simulated) && !is_type_in_list(i,blockedturfs))
+							out |= T
+							break
+
 	return out

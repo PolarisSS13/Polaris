@@ -81,10 +81,8 @@
 	speed = T / 2
 
 /obj/machinery/r_n_d/protolathe/dismantle()
-	for(var/f in materials)
-		eject_materials(f, -1)
+	eject_materials() //Proc on obj/machinery in code/game/machinery/machinery.dm
 	..()
-
 
 /obj/machinery/r_n_d/protolathe/update_icon()
 	cut_overlays()
@@ -149,9 +147,9 @@
 				materials[S.material.name] += amnt
 				S.use(1)
 				count++
-			to_chat(user, "You insert [count] [sname] into the fabricator.")
+			to_chat(user, "<span class='filter_notice'>You insert [count] [sname] into the fabricator.</span>")
 	else
-		to_chat(user, "The fabricator cannot hold more [sname].")
+		to_chat(user, "<span class='filter_notice'>The fabricator cannot hold more [sname].</span>")
 	busy = 0
 
 	var/stacktype = S.type
@@ -212,29 +210,3 @@
 			if(new_item.matter && new_item.matter.len > 0)
 				for(var/i in new_item.matter)
 					new_item.matter[i] = new_item.matter[i] * mat_efficiency
-
-/obj/machinery/r_n_d/protolathe/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
-	var/recursive = amount == -1 ? 1 : 0
-	material = lowertext(material)
-	var/obj/item/stack/material/mattype
-	var/datum/material/MAT = get_material_by_name(material)
-
-	if(!MAT)
-		return
-
-	mattype = MAT.stack_type
-
-	if(!mattype)
-		return
-
-	var/obj/item/stack/material/S = new mattype(loc)
-	if(amount <= 0)
-		amount = S.max_amount
-	var/ejected = min(round(materials[material] / S.perunit), amount)
-	S.amount = min(ejected, amount)
-	if(S.amount <= 0)
-		qdel(S)
-		return
-	materials[material] -= ejected * S.perunit
-	if(recursive && materials[material] >= S.perunit)
-		eject_materials(material, -1)

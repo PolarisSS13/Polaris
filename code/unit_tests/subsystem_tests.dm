@@ -1,5 +1,5 @@
 /datum/unit_test/subsystem_shall_be_initialized
-	name = "SUBSYSTEM - INIT: Subsystems shall be initalized"
+	name = "SUBSYSTEM - INIT: Subsystems shall be initialized"
 
 /datum/unit_test/subsystem_shall_be_initialized/start_test()
 	var/list/bad_subsystems = list()

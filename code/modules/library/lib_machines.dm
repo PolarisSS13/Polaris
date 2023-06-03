@@ -177,10 +177,9 @@
 			dat += {"<A href='?src=\ref[src];switchscreen=1'>1. View General Inventory</A><BR>
 			<A href='?src=\ref[src];switchscreen=2'>2. View Checked Out Inventory</A><BR>
 			<A href='?src=\ref[src];switchscreen=3'>3. Check out a Book</A><BR>
-			<A href='?src=\ref[src];switchscreen=4'>4. Connect to NanoTrasen Archive</A><BR>
+			<A href='?src=\ref[src];switchscreen=4'>4. Connect to NanoTrasen Literature Archive</A><BR>
 			<A href='?src=\ref[src];switchscreen=5'>5. Upload New Title to Archive</A><BR>
-			<A href='?src=\ref[src];switchscreen=6'>6. Print a Bible</A><BR>
-			<A href='?src=\ref[src];switchscreen=8'>8. Access Deprecated Archive</A><BR>"}
+			<A href='?src=\ref[src];switchscreen=6'>6. Print a Holy Book</A><BR>"}
 			if(src.emagged)
 				dat += "<A href='?src=\ref[src];switchscreen=7'>7. Access the Forbidden Lore Vault</A><BR>"
 			if(src.arcanecheckout)
@@ -271,30 +270,6 @@
 			Are you absolutely sure you want to proceed? EldritchTomes Inc. takes no responsibilities for loss of sanity resulting from this action.<p>
 			<A href='?src=\ref[src];arccheckout=1'>Yes.</A><BR>
 			<A href='?src=\ref[src];switchscreen=0'>No.</A><BR>"}
-		if(8)
-			dat += "<h3>Deprecated Archive</h3>"
-			establish_old_db_connection()
-
-			dat += "<h3><font color=red>Warning: System Administrator has slated this archive for removal. Personal uploads should be taken to the NT board of internal literature.</font></h3>"
-
-			if(!dbcon_old.IsConnected())
-				dat += "<font color=red><b>ERROR</b>: Unable to contact External Archive. Please contact your system administrator for assistance.</font>"
-			else
-				dat += {"<A href='?src=\ref[src];orderbyid=1'>(Order book by SS<sup>13</sup>BN)</A><BR><BR>
-				<table>
-				<tr><td><A href='?src=\ref[src];sort=author>AUTHOR</A></td><td><A href='?src=\ref[src];sort=title>TITLE</A></td><td><A href='?src=\ref[src];sort=category>CATEGORY</A></td><td></td></tr>"}
-				var/DBQuery/query = dbcon_old.NewQuery("SELECT id, author, title, category FROM library ORDER BY [sortby]")
-				query.Execute()
-
-				while(query.NextRow())
-					var/id = query.item[1]
-					var/author = query.item[2]
-					var/title = query.item[3]
-					var/category = query.item[4]
-					dat += "<tr><td>[author]</td><td>[title]</td><td>[category]</td><td><A href='?src=\ref[src];targetid=[id]'>\[Order\]</A></td></tr>"
-				dat += "</table>"
-			dat += "<BR><A href='?src=\ref[src];switchscreen=0'>(Return to main menu)</A><BR>"
-
 	//dat += "<A HREF='?src=\ref[user];mach_close=library'>Close</A><br><br>"
 	user << browse(dat, "window=library")
 	onclose(user, "library")
@@ -350,12 +325,10 @@
 
 				else
 					for (var/mob/V in hearers(src))
-						V.show_message("<b>[src]</b>'s monitor flashes, \"Bible printer currently unavailable, please wait a moment.\"")
+						V.show_message("<b>[src]</b>'s monitor flashes, \"Holy Book printer currently unavailable, please wait a moment.\"")
 
 			if("7")
 				screenstate = 7
-			if("8")
-				screenstate = 8
 	if(href_list["arccheckout"])
 		if(src.emagged)
 			src.arcanecheckout = 1

@@ -10,7 +10,7 @@ var/global/list/default_internal_channels = list(
 	num2text(MED_I_FREQ) = list(access_medical_equip),
 	num2text(SEC_FREQ) =   list(access_security),
 	num2text(SEC_I_FREQ) = list(access_security),
-	num2text(SCI_FREQ) =   list(access_tox,access_robotics,access_xenobiology),
+	num2text(SCI_FREQ) =   list(access_tox,access_robotics,access_xenobiology,access_xenofauna),
 	num2text(SUP_FREQ) =   list(access_cargo),
 	num2text(SRV_FREQ) =   list(access_janitor, access_hydroponics)
 )
@@ -365,7 +365,7 @@ GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
 		actually transmit large mass. Headsets are the only radio devices capable
 		of sending subspace transmissions to the Communications Satellite.
 
-		A headset sends a signal to a subspace listener/reciever elsewhere in space,
+		A headset sends a signal to a subspace listener/receiver elsewhere in space,
 		the signal gets processed and logged, and an audible transmission gets sent
 		to each individual headset.
 	*/
@@ -575,7 +575,7 @@ GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
 			return -1
 	if (!on)
 		return -1
-	if (!freq) //recieved on main frequency
+	if (!freq) //received on main frequency
 		if (!listening)
 			return -1
 	else

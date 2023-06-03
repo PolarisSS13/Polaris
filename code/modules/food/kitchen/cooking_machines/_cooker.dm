@@ -25,7 +25,7 @@
 			. += "Temperature: [round(temperature - T0C, 0.1)]C / [round(optimal_temp - T0C, 0.1)]C"
 		else
 			. += "<span class='warning'>It is switched off.</span>"
-			
+
 /obj/machinery/appliance/cooker/list_contents(var/mob/user)
 	if (cooking_objs.len)
 		var/string = "Contains...</br>"
@@ -38,7 +38,7 @@
 		to_chat(user, string)
 	else
 		to_chat(user, "<span class='notice'>It's empty.</span>")
-		
+
 /obj/machinery/appliance/cooker/proc/get_efficiency()
 	// to_world("Our cooking_power is [cooking_power] and our efficiency is [(cooking_power / optimal_power) * 100].") // Debug lines, uncomment if you need to test.
 	return (cooking_power / optimal_power) * 100
@@ -74,11 +74,11 @@
 		if (temperature > T.temperature)
 			equalize_temperature()
 	..()
-	
+
 /obj/machinery/appliance/cooker/power_change()
 	. = ..()
 	update_icon() // this probably won't cause issues, but Aurora used SSIcons and queue_icon_update() instead
-	
+
 /obj/machinery/appliance/cooker/proc/update_cooking_power()
 	var/temp_scale = 0
 	if(temperature > min_temp)
@@ -86,22 +86,22 @@
 			temp_scale = 1
 		else
 			temp_scale = (temperature - min_temp) / (optimal_temp - min_temp) // If we're between min and optimal this will yield a value in the range 0-1
-		
+
 		/* // old code for reference, will be useful if/when we implement ovens with configurable temperatures - TODO recipes with optimal temps for cooking per-recipe??
 		temp_scale = (temperature - min_temp) / (optimal_temp - min_temp) // If we're between min and optimal this will yield a value in the range 0-1
-		
+
 		if(temp_scale > 1) // We're above optimal, efficiency goes down as we pass too much over it
 			if(temp_scale >= 2)
 				temp_scale = 0
 			else
 				temp_scale = 1 - (temp_scale - 1)
 		*/
-				
+
 	cooking_coeff = optimal_power * temp_scale
 	// to_world("Our cooking_power is [cooking_power] and our tempscale is [temp_scale], and our cooking_coeff is [cooking_coeff] before RefreshParts.") // Debug lines, uncomment if you need to test.
 	RefreshParts()
 	// to_world("Our cooking_power is [cooking_power] after RefreshParts.") // Debug lines, uncomment if you need to test.
-	
+
 /obj/machinery/appliance/cooker/proc/heat_up()
 	if(temperature < optimal_temp)
 		if(use_power == 1 && ((optimal_temp - temperature) > 5))
@@ -132,7 +132,7 @@
 		if(cooking_objs.len < max_contents)
 			return 1
 	else
-		//Any food items directly added need an empty container. A slot without a container cant hold food
+		//Any food items directly added need an empty container. A slot without a container can't hold food
 		for (var/datum/cooking_item/CI in cooking_objs)
 			if (CI.container.check_contents() == 0)
 				return CI
@@ -142,5 +142,5 @@
 /obj/machinery/appliance/cooker/add_content(var/obj/item/I, var/mob/user)
 	var/datum/cooking_item/CI = ..()
 	if (CI && CI.combine_target)
-		to_chat(user, "\The [I] will be used to make a [selected_option]. Output selection is returned to default for future items.")
+		to_chat(user, "<span class='filter_notice'>\The [I] will be used to make a [selected_option]. Output selection is returned to default for future items.</span>")
 		selected_option = null

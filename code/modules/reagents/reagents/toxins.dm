@@ -796,7 +796,7 @@
 /datum/reagent/cryptobiolin
 	name = "Cryptobiolin"
 	id = "cryptobiolin"
-	description = "Cryptobiolin causes confusion and dizzyness."
+	description = "Cryptobiolin causes confusion and dizziness."
 	taste_description = "sourness"
 	reagent_state = LIQUID
 	color = "#000055"

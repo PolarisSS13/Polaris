@@ -9,7 +9,7 @@ var/global/list/map_sectors = list()
 
 /turf/unsimulated/map
 	icon = 'icons/turf/space.dmi'
-	icon_state = "map"
+	icon_state = "map0"
 
 /turf/unsimulated/map/edge
 	opacity = 1
@@ -50,6 +50,7 @@ var/global/list/map_sectors = list()
 
 /turf/unsimulated/map/Initialize()
 	. = ..()
+	icon_state = "map[rand(0,6)]"
 	name = "[x]-[y]"
 	var/list/numbers = list()
 

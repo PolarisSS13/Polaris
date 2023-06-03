@@ -66,7 +66,7 @@
 	if(sleeping)
 		adjustHalLoss(-3)
 		if(mind && mind.active && client)
-			AdjustSleeping(-1)
+			handle_sleeping()
 		SetBlinded(TRUE)
 		set_stat(UNCONSCIOUS)
 	else if(resting)

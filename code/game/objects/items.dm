@@ -68,7 +68,7 @@
 	var/list/item_state_slots = list() //overrides the default item_state for particular slots.
 
 	// Used to specify the icon file to be used when the item is worn. If not set the default icon for that slot will be used.
-	// If icon_override or sprite_sheets are set they will take precendence over this, assuming they apply to the slot in question.
+	// If icon_override or sprite_sheets are set they will take precedence over this, assuming they apply to the slot in question.
 	// Only slot_l_hand/slot_r_hand are implemented at the moment. Others to be implemented as needed.
 	var/list/item_icons = list()
 
@@ -87,7 +87,7 @@
 	// Works similarly to worn sprite_sheets, except the alternate sprites are used when the clothing/refit_for_species() proc is called.
 	var/list/sprite_sheets_obj = list()
 
-	var/toolspeed = 1 // This is a multipler on how 'fast' a tool works.  e.g. setting this to 0.5 will make the tool work twice as fast.
+	var/toolspeed = 1 // This is a multiplier on how 'fast' a tool works.  e.g. setting this to 0.5 will make the tool work twice as fast.
 	var/attackspeed = DEFAULT_ATTACK_COOLDOWN // How long click delay will be when using this, in 1/10ths of a second. Checked in the user's get_attack_speed().
 	var/reach = 1 // Length of tiles it can reach, 1 is adjacent.
 	var/addblends // Icon overlay for ADD highlights when applicable.
@@ -574,7 +574,7 @@ var/global/list/slot_flags_enumeration = list(
 			to_chat(user, "<span class='danger'>You stab [M] in the eye with [src]!</span>")
 		else
 			user.visible_message( \
-				"<span class='danger'>[user] has stabbed themself with [src]!</span>", \
+				"<span class='danger'>[user] has stabbed themselves with [src]!</span>", \
 				"<span class='danger'>You stab yourself in the eyes with [src]!</span>" \
 			)
 
@@ -657,7 +657,7 @@ GLOBAL_LIST_EMPTY(blood_overlays_by_type)
 
 /obj/item/proc/showoff(mob/user)
 	for (var/mob/M in view(user))
-		M.show_message("[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a>",1)
+		M.show_message("<span class='filter_notice'>[user] holds up [src]. <a HREF=?src=\ref[M];lookitem=\ref[src]>Take a closer look.</a></span>",1)
 
 /mob/living/carbon/verb/showoff()
 	set name = "Show Held Item"
@@ -687,13 +687,13 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	var/cannotzoom
 
 	if((usr.stat && !zoom) || !(istype(usr,/mob/living/carbon/human)))
-		to_chat(usr, "You are unable to focus through the [devicename]")
+		to_chat(usr, "<span class='filter_notice'>You are unable to focus through the [devicename].</span>")
 		cannotzoom = 1
 	else if(!zoom && (global_hud.darkMask[1] in usr.client.screen))
-		to_chat(usr, "Your visor gets in the way of looking through the [devicename]")
+		to_chat(usr, "<span class='filter_notice'>Your visor gets in the way of looking through the [devicename].</span>")
 		cannotzoom = 1
 	else if(!zoom && usr.get_active_hand() != src)
-		to_chat(usr, "You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better")
+		to_chat(usr, "<span class='filter_notice'>You are too distracted to look through the [devicename], perhaps if it was in your active hand this might work better.</span>")
 		cannotzoom = 1
 
 	//We checked above if they are a human and returned already if they weren't.
@@ -723,7 +723,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 				H.client.pixel_x = -viewoffset
 				H.client.pixel_y = 0
 
-		H.visible_message("[usr] peers through the [zoomdevicename ? "[zoomdevicename] of the [src.name]" : "[src.name]"].")
+		H.visible_message("<span class='filter_notice'>[usr] peers through the [zoomdevicename ? "[zoomdevicename] of the [src.name]" : "[src.name]"].</span>")
 		if(!ignore_visor_zoom_restriction)
 			H.looking_elsewhere = TRUE
 		H.handle_vision()
@@ -741,7 +741,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		H.handle_vision()
 
 		if(!cannotzoom)
-			usr.visible_message("[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].")
+			usr.visible_message("<span class='filter_notice'>[zoomdevicename ? "[usr] looks up from the [src.name]" : "[usr] lowers the [src.name]"].</span>")
 
 	return
 

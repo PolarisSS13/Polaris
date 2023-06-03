@@ -67,15 +67,15 @@
 		for(var/mob/M in listening)
 			M.hear_holopad_talk(message_pieces, verb, src)
 		for(var/obj/O in listening_obj)
-			if(O == T) //Don't recieve your own speech
+			if(O == T) //Don't receive your own speech
 				continue
 			O.hear_talk(src, message_pieces, verb)
 		/*Radios "filter out" this conversation channel so we don't need to account for them.
 		This is another way of saying that we won't bother dealing with them.*/
 		var/list/combined = combine_message(message_pieces, verb, src)
-		to_chat(src, "<i><span class='game say'>Holopad transmitted, <span class='name'>[real_name]</span> [combined["formatted"]]</span></i>")
+		to_chat(src, "<span class='game say'><i>Holopad transmitted, <span class='name'>[real_name]</span> [combined["formatted"]]</i></span>")
 	else
-		to_chat(src, "No holopad connected.")
+		to_chat(src, "<span class='filter_notice'>No holopad connected.</span>")
 		return 0
 	return 1
 
@@ -88,7 +88,7 @@
 	var/obj/machinery/hologram/holopad/T = src.holo
 	if(T && T.masters[src])
 		var/rendered = "<span class='game say'><span class='name'>[name]</span> <span class='message'>[message]</span></span>"
-		to_chat(src, "<i><span class='game say'>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></span></i>")
+		to_chat(src, "<span class='game say'><i>Holopad action relayed, <span class='name'>[real_name]</span> <span class='message'>[message]</span></i></span>")
 		var/obj/effect/overlay/hologram = T.masters[src]
 		var/list/in_range = get_mobs_and_objs_in_view_fast(get_turf(hologram), world.view, 2) //Emotes are displayed from the hologram, not the pad
 		var/list/m_viewers = in_range["mobs"]
@@ -99,17 +99,14 @@
 				if(M)
 					M.show_message(rendered, 2)
 
-		for(var/obj/O in o_viewers)
-			if(O == T)
-				continue
-			spawn(0)
-				if(O)
-					O.see_emote(src, message)
+		for(var/obj/O as anything in o_viewers)
+			if(O != T)
+				O.see_emote(src, message)
 
 		log_emote("(HPAD) [message]", src)
 
 	else //This shouldn't occur, but better safe then sorry.
-		to_chat(src, "No holopad connected.")
+		to_chat(src, "<span class='filter_notice'>No holopad connected.</span>")
 		return 0
 	return 1
 

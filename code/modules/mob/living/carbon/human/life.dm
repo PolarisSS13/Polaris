@@ -47,11 +47,11 @@
 
 	//Apparently, the person who wrote this code designed it so that
 	//blinded get reset each cycle and then get activated later in the
-	//code. Very ugly. I dont care. Moving this stuff here so its easy
+	//code. Very ugly. I don't care. Moving this stuff here so its easy
 	//to find it.
 	blinded = 0
 
-	//TODO: seperate this out
+	//TODO: separate this out
 	// update the current life tick, can be used to e.g. only do something every 4 ticks
 	life_tick++
 
@@ -162,7 +162,7 @@
 	pressure_adjustment_coefficient = min(pressure_adjustment_coefficient, 1)
 	return pressure_adjustment_coefficient
 
-// Calculate how much of the enviroment pressure-difference affects the human.
+// Calculate how much of the environment pressure-difference affects the human.
 /mob/living/carbon/human/calculate_affecting_pressure(var/pressure)
 	var/pressure_difference
 
@@ -193,7 +193,7 @@
 /mob/living/carbon/human/handle_disabilities()
 	..()
 
-	if(stat != CONSCIOUS) //Let's not worry about tourettes if you're not conscious.
+	if(stat != CONSCIOUS) //Let's not worry about Tourette's if you're not conscious.
 		return
 
 	if (disabilities & EPILEPSY)
@@ -665,7 +665,7 @@
 
 /mob/living/carbon/human/proc/handle_allergens()
 	if(chem_effects[CE_ALLERGEN])
-		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple seperate allergen typess simultaneously hurts more
+		//first, multiply the basic species-level value by our allergen effect rating, so consuming multiple separate allergen typess simultaneously hurts more
 		var/damage_severity = species.allergen_damage_severity * chem_effects[CE_ALLERGEN]
 		var/disable_severity = species.allergen_disable_severity * chem_effects[CE_ALLERGEN]
 		if(species.allergen_reaction & AG_PHYS_DMG)
@@ -1104,8 +1104,7 @@
 				if (mind)
 					//Are they SSD? If so we'll keep them asleep but work off some of that sleep var in case of stoxin or similar.
 					if(client || sleeping > 3)
-						AdjustSleeping(-1)
-						throw_alert("asleep", /obj/screen/alert/asleep)
+						handle_sleeping()
 				if( prob(2) && health && client )
 					spawn(0)
 						emote("snore")

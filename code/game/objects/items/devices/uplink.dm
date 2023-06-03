@@ -135,22 +135,22 @@
 				data["exploit"] = list()  // Setting this to equal L.fields passes it's variables that are lists as reference instead of value.
 								 // We trade off being able to automatically add shit for more control over what gets passed to json
 								 // and if it's sanitized for html.
-				data["exploit"]["nanoui_exploit_record"] = html_encode(L.fields["exploit_record"])                         		// Change stuff into html
-				data["exploit"]["nanoui_exploit_record"] = replacetext(data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // change line breaks into <br>
-				data["exploit"]["name"] =  html_encode(L.fields["name"])
-				data["exploit"]["sex"] =  html_encode(L.fields["sex"])
-				data["exploit"]["age"] =  html_encode(L.fields["age"])
-				data["exploit"]["species"] =  html_encode(L.fields["species"])
-				data["exploit"]["rank"] =  html_encode(L.fields["rank"])
-				data["exploit"]["home_system"] =  html_encode(L.fields["home_system"])
-				data["exploit"]["citizenship"] =  html_encode(L.fields["citizenship"])
-				data["exploit"]["faction"] =  html_encode(L.fields["faction"])
-				data["exploit"]["religion"] =  html_encode(L.fields["religion"])
-				data["exploit"]["fingerprint"] =  html_encode(L.fields["fingerprint"])
+				data["exploit"]["nanoui_exploit_record"] = html_decode(L.fields["exploit_record"])                         		// This is all sanitized and encoded when it's entered.
+//				data["exploit"]["nanoui_exploit_record"] = replacetext(data["exploit"]["nanoui_exploit_record"], "\n", "<br>")    // We want to keep line breaks, though.
+				data["exploit"]["name"] =  html_decode(L.fields["name"])
+				data["exploit"]["sex"] =  html_decode(L.fields["sex"])
+				data["exploit"]["age"] =  html_decode(L.fields["age"])
+				data["exploit"]["species"] =  html_decode(L.fields["species"])
+				data["exploit"]["rank"] =  html_decode(L.fields["rank"])
+				data["exploit"]["home_system"] =  html_decode(L.fields["home_system"])
+				data["exploit"]["citizenship"] =  html_decode(L.fields["citizenship"])
+				data["exploit"]["faction"] =  html_decode(L.fields["faction"])
+				data["exploit"]["religion"] =  html_decode(L.fields["religion"])
+				data["exploit"]["fingerprint"] =  html_decode(L.fields["fingerprint"])
 				if(L.fields["antagvis"] == ANTAG_KNOWN || (faction == L.fields["antagfac"] && (L.fields["antagvis"] == ANTAG_SHARED)))
-					data["exploit"]["antagfaction"] = html_encode(L.fields["antagfac"])
+					data["exploit"]["antagfaction"] = html_decode(L.fields["antagfac"])
 				else
-					data["exploit"]["antagfaction"] = html_encode("None")
+					data["exploit"]["antagfaction"] = html_decode("None")
 				break
 	else
 		var/list/permanentData = list()

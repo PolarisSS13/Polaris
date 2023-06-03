@@ -12,7 +12,7 @@
 	var/turf/target_last_seen_turf = null 	// Where the mob last observed the target being, used if the target disappears but the mob wants to keep fighting.
 
 	var/vision_range = 7					// How far the targeting system will look for things to kill. Note that values higher than 7 are 'offscreen' and might be unsporting.
-	var/respect_alpha = TRUE				// If true, mobs with a sufficently low alpha will be treated as invisible.
+	var/respect_alpha = TRUE				// If true, mobs with a sufficiently low alpha will be treated as invisible.
 	var/alpha_vision_threshold = FAKE_INVIS_ALPHA_THRESHOLD	// Targets with an alpha less or equal to this will be considered invisible. Requires above var to be true.
 
 	var/lose_target_time = 0				// world.time when a target was lost.
@@ -206,7 +206,7 @@
 		return FALSE
 
 	if(respect_alpha && the_target.alpha <= alpha_vision_threshold) // Fake invis.
-		ai_log("can_see_target() : Target ([the_target]) was sufficently transparent to holder and is hidden. Exiting.", AI_LOG_TRACE)
+		ai_log("can_see_target() : Target ([the_target]) was sufficiently transparent to holder and is hidden. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
 	if(get_dist(holder, the_target) > view_range) // Too far away.
@@ -260,7 +260,7 @@
 		else if(check_attacker(attacker) && world.time > last_target_time + 3 SECONDS)	// Otherwise, let 'er rip
 			ai_log("react_to_attack() : Was attacked by [attacker]. Can retaliate, waited 3 seconds.", AI_LOG_INFO)
 			on_attacked(attacker) // So we attack immediately and not threaten.
-			return give_target(attacker) // Also handles setting the appropiate stance.
+			return give_target(attacker) // Also handles setting the appropriate stance.
 
 	if(stance == STANCE_SLEEP) // If we're asleep, try waking up if someone's wailing on us.
 		ai_log("react_to_attack() : AI is asleep. Waking up.", AI_LOG_TRACE)
@@ -268,7 +268,7 @@
 
 	ai_log("react_to_attack() : Was attacked by [attacker].", AI_LOG_INFO)
 	on_attacked(attacker) // So we attack immediately and not threaten.
-	return give_target(attacker, urgent = TRUE) // Also handles setting the appropiate stance.
+	return give_target(attacker, urgent = TRUE) // Also handles setting the appropriate stance.
 
 // Sets a few vars so mobs that threaten will react faster to an attacker or someone who attacked them before.
 /datum/ai_holder/proc/on_attacked(atom/movable/AM)

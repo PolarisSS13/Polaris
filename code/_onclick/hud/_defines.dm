@@ -15,10 +15,10 @@
 
 #define ui_entire_screen "WEST,SOUTH to EAST,NORTH"
 
-//Lower left, persistant menu
+//Lower left, persistent menu
 #define ui_inventory "WEST:6,SOUTH:5"
 
-//Lower center, persistant menu
+//Lower center, persistent menu
 #define ui_sstore1 "WEST+2:10,SOUTH:5"
 #define ui_id "WEST+3:12,SOUTH:5"
 #define ui_belt "WEST+4:14,SOUTH:5"
@@ -48,7 +48,7 @@
 #define ui_construct_fire "EAST-1:16,CENTER+1:13" //above health, slightly to the left
 #define ui_construct_pull "EAST-1:28,SOUTH+1:10" //above the zone_sel icon
 
-//Lower right, persistant menu
+//Lower right, persistent menu
 #define ui_dropbutton "EAST-4:22,SOUTH:5"
 #define ui_drop_throw "EAST-1:28,SOUTH+1:7"
 #define ui_pull_resist "EAST-2:26,SOUTH+1:7"
@@ -129,11 +129,11 @@
 #define ui_oclothing "WEST+1:8,SOUTH+1:7"
 #define ui_gloves "WEST+2:10,SOUTH+1:7"
 
-#define ui_glasses "WEST:6,SOUTH+2:9"
+#define ui_r_ear "WEST:6,SOUTH+2:9"
 #define ui_mask "WEST+1:8,SOUTH+2:9"
 #define ui_l_ear "WEST+2:10,SOUTH+2:9"
-#define ui_r_ear "WEST+2:10,SOUTH+3:11"
 
+#define ui_glasses "WEST:6,SOUTH+3:11"
 #define ui_head "WEST+1:8,SOUTH+3:11"
 
 //Intent small buttons

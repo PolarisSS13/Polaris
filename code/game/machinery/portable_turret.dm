@@ -697,7 +697,7 @@
 	..()
 
 
-/obj/machinery/porta_turret/alien/emp_act(severity) // This is overrided to give an EMP resistance as well as avoid scambling the turret settings.
+/obj/machinery/porta_turret/alien/emp_act(severity) // This is overridden to give an EMP resistance as well as avoid scrambling the turret settings.
 	if(prob(75)) // Superior alien technology, I guess.
 		return
 	enabled = FALSE

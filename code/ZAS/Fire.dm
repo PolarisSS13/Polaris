@@ -420,7 +420,7 @@ If it gains pressure too slowly, it may leak or just rupture instead of explodin
 				legs_exposure = 0
 			if(C.body_parts_covered & ARMS)
 				arms_exposure = 0
-	//minimize this for low-pressure enviroments
+	//minimize this for low-pressure environments
 	var/mx = 5 * firelevel/vsc.fire_firelevel_multiplier * min(pressure / ONE_ATMOSPHERE, 1)
 
 	//Always check these damage procs first if fire damage isn't working. They're probably what's wrong.

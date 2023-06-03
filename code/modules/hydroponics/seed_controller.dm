@@ -13,7 +13,7 @@
 	if(!holder)	return
 
 	if(!plant_controller || !plant_controller.gene_tag_masks)
-		to_chat(usr, "Gene masks not set.")
+		to_chat(usr, "<span class='filter_notice'>Gene masks not set.</span>")
 		return
 
 	for(var/mask in plant_controller.gene_tag_masks)

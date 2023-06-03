@@ -38,6 +38,7 @@
 /obj/structure/prop/vv_edit_var(var_name, var_value)
 	if(var_name == "state")
 		change_state(var_value)
+	return ..()
 
 
 //Misc stuff that fits no category
@@ -66,4 +67,3 @@
  * Like, I don't want to add a state machine to decorative objects. You can if you want.
  *
  */
-

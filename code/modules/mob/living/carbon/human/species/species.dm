@@ -53,6 +53,7 @@
 	var/blood_level_fatal = 0.4								//"Fatal" blood level; below this, you take extremely high oxydamage
 	var/hunger_factor = 0.05								// Multiplier for hunger.
 	var/active_regen_mult = 1								// Multiplier for 'Regenerate' power speed, in human_powers.dm
+	var/hearboost = 0 										//Extra ranger on whisper hearing. 0 is adjacent.
 
 	var/taste_sensitivity = TASTE_NORMAL							// How sensitive the species is to minute tastes.
 	var/allergens = null									// Things that will make this species very sick
@@ -98,7 +99,7 @@
 	var/burn_mod =      1								// Burn damage multiplier.
 	var/oxy_mod =       1								// Oxyloss modifier
 	var/toxins_mod =    1								// Toxloss modifier. overridden by NO_POISON flag.
-	var/radiation_mod = 1								// Radiation modifier, determines the practically negligable burn damage from direct exposure to extreme sources.
+	var/radiation_mod = 1								// Radiation modifier, determines the practically negligible burn damage from direct exposure to extreme sources.
 	var/flash_mod =     1								// Stun from blindness modifier (flashes and flashbangs)
 	var/flash_burn =    0								// how much damage to take from being flashed if light hypersensitive
 	var/sound_mod =     1								// Multiplier to the effective *range* of flashbangs. a flashbang's bang hits an entire screen radius, with some falloff.
@@ -112,7 +113,7 @@
 	var/chemOD_mod =		1						// Damage modifier for overdose; higher = more damage from ODs
 	var/pain_mod =			1						// Multiplier to pain effects; 0.5 = half, 0 = no effect (equal to NO_PAIN, really), 2 = double, etc.
 	var/spice_mod =			1						// Multiplier to spice/capsaicin/frostoil effects; 0.5 = half, 0 = no effect (immunity), 2 = double, etc.
-	var/trauma_mod = 		1						// Affects traumatic shock (how fast pain crit happens). 0 = no effect (immunity to pain crit), 2 = double etc.Overriden by "can_feel_pain" var
+	var/trauma_mod = 		1						// Affects traumatic shock (how fast pain crit happens). 0 = no effect (immunity to pain crit), 2 = double etc.Overridden by "can_feel_pain" var
 	// set below is EMP interactivity for nonsynth carbons
 	var/emp_sensitivity =		0			// bitflag. valid flags are: EMP_PAIN, EMP_BLIND, EMP_DEAFEN, EMP_CONFUSE, EMP_STUN, and EMP_(BRUTE/BURN/TOX/OXY)_DMG
 	var/emp_dmg_mod =		1			// Multiplier to all EMP damage sustained by the mob, if it's EMP-sensitive
@@ -536,4 +537,13 @@
 		H.adjustToxLoss(amount)
 
 /datum/species/proc/handle_falling(mob/living/carbon/human/H, atom/hit_atom, damage_min, damage_max, silent, planetary)
+	return FALSE
+
+/datum/species/proc/apply_default_colours(var/mob/living/carbon/human/H)
+	if(base_color)
+		//Apply colour.
+		H.r_skin = hex2num(copytext(base_color,2,4))
+		H.g_skin = hex2num(copytext(base_color,4,6))
+		H.b_skin = hex2num(copytext(base_color,6,8))
+		return TRUE
 	return FALSE

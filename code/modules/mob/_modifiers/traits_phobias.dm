@@ -666,7 +666,7 @@
 // **********
 
 /datum/modifier/trait/phobia/xenophobia/skrell
-	name = "anti-skrell sentiment"
+	name = "anti-Skrell sentiment"
 	desc = "The Skrell pretend that they are Humanity's enlightened allies, but you can see past that."
 
 	on_created_text = "<span class='warning'>Hopefully no Skrell show up today.</span>"

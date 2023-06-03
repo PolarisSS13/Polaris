@@ -89,24 +89,25 @@
 	update_icon()
 
 
-/obj/item/taperecorder/hear_talk(mob/M, list/message_pieces, verb)
+/obj/item/taperecorder/hear_talk(mob/living/M, list/message_pieces, verb)
 	var/msg = multilingual_to_message(message_pieces, requires_machine_understands = TRUE, with_capitalization = TRUE)
+	var/voice = M.GetVoice() //Defined on living, returns name for normal mobs/
 	if(mytape && recording)
-		mytape.record_speech("[M.name] [verb], \"[msg]\"")
+		mytape.record_speech("[voice] [verb], \"[msg]\"")
 
 
 /obj/item/taperecorder/see_emote(mob/M as mob, text, var/emote_type)
-	if(emote_type != 2) //only hearable emotes
-		return
-	if(mytape && recording)
+	..()
+	if(emote_type == AUDIBLE_MESSAGE && mytape && recording)
 		mytape.record_speech("[strip_html_properly(text)]")
 
 
 /obj/item/taperecorder/show_message(msg, type, alt, alt_type)
+	..()
 	var/recordedtext
-	if (msg && type == 2) //must be hearable
+	if (msg && type == AUDIBLE_MESSAGE) //must be hearable
 		recordedtext = msg
-	else if (alt && alt_type == 2)
+	else if (alt && alt_type == AUDIBLE_MESSAGE)
 		recordedtext = alt
 	else
 		return

@@ -31,9 +31,9 @@
 	var/category = ATMOS_CATEGORY
 	var/piping_layer = PIPING_LAYER_DEFAULT
 	var/obj/item/tool/wrench/tool
-	var/datum/pipe_recipe/recipe	// pipe recipie selected for display/construction
-	var/static/datum/pipe_recipe/first_atmos
-	var/static/datum/pipe_recipe/first_disposal
+	var/datum/pipe_recipe/recipe
+	var/datum/pipe_recipe/first_atmos
+	var/datum/pipe_recipe/first_disposal
 	var/mode = BUILD_MODE | DESTROY_MODE | WRENCH_MODE
 	var/static/list/pipe_layers = list(
 		"Regular" = PIPING_LAYER_REGULAR,

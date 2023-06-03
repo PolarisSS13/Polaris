@@ -340,7 +340,7 @@
 		return
 	if((ishuman(H))) //i guess carp and shit shouldn't set them off
 		var/mob/living/carbon/M = H
-		if(M.m_intent == "run")
+		if(IS_RUNNING(M))
 			to_chat(M, "<span class='warning'>You step on the snap pop!</span>")
 
 			var/datum/effect_system/spark_spread/s = new /datum/effect_system/spark_spread
@@ -968,14 +968,14 @@
 	return ..()
 
 /obj/item/toy/plushie/nymph
-	name = "diona nymph plush"
-	desc = "A plushie of an adorable diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
+	name = "Diona nymph plush"
+	desc = "A plushie of an adorable Diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
 	icon_state = "nymphplushie"
 	pokephrase = "Chirp!"
 
 /obj/item/toy/plushie/teshari
-	name = "teshari plush"
-	desc = "This is a plush teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
+	name = "Teshari plush"
+	desc = "This is a plush Teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
 	icon_state = "teshariplushie"
 	pokephrase = "Rya!"
 
@@ -1004,8 +1004,8 @@
 	pokephrase = "Sksksk!"
 
 /obj/item/toy/plushie/farwa
-	name = "farwa plush"
-	desc = "A farwa plush doll. It's soft and comforting!"
+	name = "Farwa plush"
+	desc = "A Farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
 	pokephrase = "Squaw!"
 
@@ -1542,10 +1542,11 @@
 //desk toys
 /obj/item/toy/desk
 	name = "desk toy master"
-	desc = "A object that does not exist. Parent Item"
+	desc = "An object that does not exist. Parent Item"
+	description_info = "Alt-click or use in hand to toggle."
 
 	var/on = 0
-	var/activation_sound = 'sound/weapons/empty.ogg'
+	var/activation_sound = 'sound/machines/button1.ogg'
 
 /obj/item/toy/desk/update_icon()
 	if(on)
@@ -1554,6 +1555,12 @@
 		icon_state = "[initial(icon_state)]"
 
 /obj/item/toy/desk/attack_self(mob/user)
+	toggle()
+
+/obj/item/toy/desk/AltClick()
+	toggle()
+
+/obj/item/toy/desk/proc/toggle()
 	on = !on
 	if(on && activation_sound)
 		playsound(src.loc, activation_sound, 15, 1, -3)

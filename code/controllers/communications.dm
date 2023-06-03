@@ -109,7 +109,7 @@ var/global/const/AI_FREQ	= 1343
 var/global/const/DTH_FREQ	= 1341
 var/global/const/SYND_FREQ = 1213
 var/global/const/RAID_FREQ	= 1277
-var/global/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a diona exclusive frequency.
+var/global/const/ENT_FREQ	= 1461 //entertainment frequency. This is not a Diona exclusive frequency.
 
 // department channels
 var/global/const/PUB_FREQ = 1459
@@ -194,11 +194,11 @@ var/global/list/DEPT_FREQS = list(AI_FREQ, COMM_FREQ, ENG_FREQ, ENT_FREQ, MED_FR
 //Other devices can then choose to send signals to only those devices that belong to a particular filter.
 //This is done for performance, so we don't send signals to lots of machines unnecessarily.
 
-//This filter is special because devices belonging to default also recieve signals sent to any other filter.
+//This filter is special because devices belonging to default also receive signals sent to any other filter.
 var/global/const/RADIO_DEFAULT = "radio_default"
 
 var/global/const/RADIO_TO_AIRALARM = "radio_airalarm" //air alarms
-var/global/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in recieving signals from air alarms
+var/global/const/RADIO_FROM_AIRALARM = "radio_airalarm_rcvr" //devices interested in receiving signals from air alarms
 var/global/const/RADIO_CHAT = "radio_telecoms"
 var/global/const/RADIO_ATMOSIA = "radio_atmos"
 var/global/const/RADIO_NAVBEACONS = "radio_navbeacon"

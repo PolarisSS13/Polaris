@@ -249,21 +249,21 @@
 			if (candidates.len)
 				var/obj/item/organ/external/O = pick(candidates)
 				O.mutate()
-				to_chat(src, "<span class = 'notice'>Something is not right with your [O.name]...</span>")
+				to_chat(src, "<span class='notice'>Something is not right with your [O.name]...</span>")
 				return
 	else
 		if (prob(heal_prob))
 			for (var/obj/item/organ/external/O in organs)
 				if (O.status & ORGAN_MUTATED)
 					O.unmutate()
-					to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
+					to_chat(src, "<span class='notice'>Your [O.name] is shaped normally again.</span>")
 					return
 
 	if (getCloneLoss() < 1)
 		for (var/obj/item/organ/external/O in organs)
 			if (O.status & ORGAN_MUTATED)
 				O.unmutate()
-				to_chat(src, "<span class = 'notice'>Your [O.name] is shaped normally again.</span>")
+				to_chat(src, "<span class='notice'>Your [O.name] is shaped normally again.</span>")
 	BITSET(hud_updateflag, HEALTH_HUD)
 
 // Defined here solely to take species flags into account without having to recast at mob/living level.
@@ -336,7 +336,7 @@
 	return parts
 
 //Heals ONE external organ, organ gets randomly selected from damaged ones.
-//It automatically updates damage overlays if necesary
+//It automatically updates damage overlays if necessary
 //It automatically updates health status
 /mob/living/carbon/human/heal_organ_damage(var/brute, var/burn)
 	var/list/obj/item/organ/external/parts = get_damaged_organs(brute,burn)
@@ -351,8 +351,8 @@
 /*
 In most cases it makes more sense to use apply_damage() instead! And make sure to check armour if applicable.
 */
-//Damages ONE external organ, organ gets randomly selected from damagable ones.
-//It automatically updates damage overlays if necesary
+//Damages ONE external organ, organ gets randomly selected from damageable ones.
+//It automatically updates damage overlays if necessary
 //It automatically updates health status
 /mob/living/carbon/human/take_organ_damage(var/brute, var/burn, var/sharp = 0, var/edge = 0)
 	var/list/obj/item/organ/external/parts = get_damageable_organs()

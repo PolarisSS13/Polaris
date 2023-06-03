@@ -120,7 +120,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 	//Loading a disk into it.
 	if(istype(D, /obj/item/disk))
 		if(t_disk || d_disk)
-			to_chat(user, "A disk is already loaded into the machine.")
+			to_chat(user, "<span class='filter_notice'>A disk is already loaded into the machine.</span>")
 			return
 
 		if(istype(D, /obj/item/disk/tech_disk))
@@ -284,7 +284,7 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 		if(!sync)
 			to_chat(usr, "<span class='notice'>You must connect to the network first.</span>")
 		else
-			griefProtection() //Putting this here because I dont trust the sync process
+			griefProtection() //Putting this here because I don't trust the sync process
 			spawn(3 SECONDS)
 				if(src)
 					for(var/obj/machinery/r_n_d/server/S in machines)

@@ -124,7 +124,7 @@
 
 	embed_chance = 0	//Base chance for a projectile to embed
 
-	var/fire_sound = 'sound/weapons/Gunshot_old.ogg' // Can be overriden in gun.dm's fire_sound var. It can also be null but I don't know why you'd ever want to do that. -Ace
+	var/fire_sound = 'sound/weapons/Gunshot_old.ogg' // Can be overridden in gun.dm's fire_sound var. It can also be null but I don't know why you'd ever want to do that. -Ace
 
 	var/vacuum_traversal = TRUE //Determines if the projectile can exist in vacuum, if false, the projectile will be deleted if it enters vacuum.
 
@@ -147,7 +147,7 @@
 
 /obj/item/projectile/proc/on_range() //if we want there to be effects when they reach the end of their range
 	impact_sounds(loc)
-	impact_visuals(loc) // So it does a little 'burst' effect, but not actually do anything (unless overrided).
+	impact_visuals(loc) // So it does a little 'burst' effect, but not actually do anything (unless overridden).
 	qdel(src)
 
 /obj/item/projectile/proc/return_predicted_turf_after_moves(moves, forced_angle)		//I say predicted because there's no telling that the projectile won't change direction/location in flight.
@@ -320,7 +320,7 @@
 		return
 	if(isnum(angle))
 		setAngle(angle)
-	var/turf/starting = get_turf(src)
+	starting = get_turf(src)
 	if(isnull(Angle))	//Try to resolve through offsets if there's no angle set.
 		if(isnull(xo) || isnull(yo))
 			crash_with("WARNING: Projectile [type] deleted due to being unable to resolve a target after angle was null!")
@@ -684,7 +684,7 @@
 	else
 		var/volume = vol_by_damage()
 		playsound(target_mob, hitsound, volume, 1, -1)
-		// X has fired Y is now given by the guns so you cant tell who shot you if you could not see the shooter
+		// X has fired Y is now given by the guns so you can't tell who shot you if you could not see the shooter
 		target_mob.visible_message(
 			span("danger", "\The [target_mob] was hit in the [impacted_organ] by \the [src]!"),
 			span("critical", "You've been hit in the [impacted_organ] by \the [src]!")
@@ -820,3 +820,9 @@
 		if(silenced)
 			volume = 5
 		playsound(A, hitsound_wall, volume, 1, -1)
+
+
+/obj/item/projectile/proc/apply_SA_vulnerability(var/mob/living/simple_mob/victim)
+	if(!nodamage && SA_bonus_damage && istype(victim) && (SA_vulnerability & victim.mob_class))
+		return SA_bonus_damage
+	return 0

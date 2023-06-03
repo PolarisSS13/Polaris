@@ -96,7 +96,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 		src.set_dir(angle2dir(adir))
 	return
 
-//calculates the fraction of the SSsun.sunlight that the panel recieves
+//calculates the fraction of the SSsun.sunlight that the panel receives
 /obj/machinery/power/solar/proc/update_solar_exposure()
 	if(!SSsun.sun)
 		return
@@ -112,7 +112,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 		return
 
 	sunfrac = cos(p_angle) ** 2
-	//isn't the power recieved from the incoming light proportionnal to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
+	//isn't the power received from the incoming light proportional to cos(p_angle) (Lambert's cosine law) rather than cos(p_angle)^2 ?
 
 /obj/machinery/power/solar/process()//TODO: remove/add this from machines to save on processing as needed ~Carn PRIORITY
 	if(stat & BROKEN)
@@ -281,7 +281,7 @@ GLOBAL_LIST_EMPTY(solars_list)
 
 // Used for mapping in solar arrays which automatically start itself.
 // Generally intended for far away and remote locations, where player intervention is rare.
-// In the interest of backwards compatability, this isn't named auto_start, as doing so might break downstream maps.
+// In the interest of backwards compatibility, this isn't named auto_start, as doing so might break downstream maps.
 /obj/machinery/power/solar_control/autostart
 	auto_start = SOLAR_AUTO_START_YES
 

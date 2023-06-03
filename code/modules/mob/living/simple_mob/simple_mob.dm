@@ -17,6 +17,11 @@
 
 	has_huds = TRUE // We do show AI status huds for buildmode players
 
+	move_intents = list(
+		/decl/move_intent/animal_run,
+		/decl/move_intent/animal_walk
+	)
+
 	var/tt_desc = null //Tooltip description
 
 	//Settings for played mobs
@@ -114,13 +119,13 @@
 
 	//Special attacks
 //	var/special_attack_prob = 0				// The chance to ATTEMPT a special_attack_target(). If it fails, it will do a regular attack instead.
-											// This is commented out to ease the AI attack logic by being (a bit more) determanistic.
+											// This is commented out to ease the AI attack logic by being (a bit more) deterministic.
 											// You should instead limit special attacks using the below vars instead.
 	var/special_attack_min_range = null		// The minimum distance required for an attempt to be made.
 	var/special_attack_max_range = null		// The maximum for an attempt.
 	var/special_attack_charges = null		// If set, special attacks will work off of a charge system, and won't be usable if all charges are expended. Good for grenades.
 	var/special_attack_cooldown = null		// If set, special attacks will have a cooldown between uses.
-	var/last_special_attack = null			// world.time when a special attack occured last, for cooldown calculations.
+	var/last_special_attack = null			// world.time when a special attack occurred last, for cooldown calculations.
 	var/projectileverb = "fires"
 
 	//Damage resistances
@@ -162,6 +167,11 @@
 	var/limb_icon
 	// Used for if the mob can drop limbs. Overrides the icon cache key, so it doesn't keep remaking the icon needlessly.
 	var/limb_icon_key
+
+	/// If above zero, decrement in Life(); on zero, put the mob to sleep for thirty seconds.
+	var/tranq_countdown = 0
+	/// A temporary storage value for the duration of any tranquilizer effect.
+	var/tranq_duration
 
 /mob/living/simple_mob/Initialize()
 	verbs -= /mob/verb/observe
@@ -220,36 +230,34 @@
 	return ..()
 */
 /mob/living/simple_mob/movement_delay()
-	. = movement_cooldown
 
 	if(force_max_speed)
 		return -3
-
+	. = 0
 	for(var/datum/modifier/M in modifiers)
 		if(!isnull(M.haste) && M.haste == TRUE)
 			return -3
 		if(!isnull(M.slowdown))
 			. += M.slowdown
 
+	. += ..() + movement_cooldown
 	// Turf related slowdown
 	var/turf/T = get_turf(src)
-	if(T && T.movement_cost && !hovering) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
+	if(T && T.get_movement_cost() && !hovering) // Flying mobs ignore turf-based slowdown. Aquatic mobs ignore water slowdown, and can gain bonus speed in it.
 		if(istype(T,/turf/simulated/floor/water) && aquatic_movement)
 			. -= aquatic_movement - 1
 		else
-			. += T.movement_cost
+			. += T.get_movement_cost()
 
 	if(purge)//Purged creatures will move more slowly. The more time before their purge stops, the slower they'll move.
 		if(. <= 0)
 			. = 1
 		. *= purge
 
-	if(m_intent == "walk")
+	if(IS_WALKING(src))
 		. *= 1.5
 
-	 . += config.animal_delay
-
-	 . += ..()
+	. += ..()
 
 
 /mob/living/simple_mob/Stat()
@@ -288,3 +296,17 @@
 
 /decl/mob_organ_names
 	var/list/hit_zones = list("body") //When in doubt, it's probably got a body.
+
+/mob/living/simple_mob/handle_sleeping()
+	if(sleeping || stat != CONSCIOUS)
+		tranq_countdown = null
+		tranq_duration = null
+	else if(tranq_countdown > 0)
+		tranq_countdown--
+		if(tranq_countdown <= 0)
+			if(client)
+				to_chat(src, SPAN_DANGER("You fall asleep!"))
+			SetSleeping(max(1, round(tranq_duration / SSmobs.wait)))
+		else if(prob(5) && client)
+			to_chat(src, SPAN_WARNING("You feel [pick("dizzy", "woozy", "sleepy")]..."))
+	return ..()

@@ -1,7 +1,7 @@
 /*
-The mixer subtype is used for  the candymaker and cereal maker. They are similar to cookers but with a few
+The mixer subtype is used for the candymaker and cereal maker. They are similar to cookers but with a few
 fundamental differences
-1. They have a single container which cant be removed. it will eject multiple contents
+1. They have a single container which can't be removed. it will eject multiple contents
 2. Items can't be added or removed once the process starts
 3. Items are all placed in the same container when added directly
 4. They do combining mode only. And will always combine the entire contents of the container into an output
@@ -25,12 +25,12 @@ fundamental differences
 	cooking_objs += new /datum/cooking_item(new /obj/item/reagent_containers/cooking_container(src))
 	cooking = FALSE
 	selected_option = pick(output_options)
-	
+
 	mixer_loop = new(list(src), FALSE)
-	
+
 /obj/machinery/appliance/mixer/Destroy()
 	. = ..()
-	
+
 	QDEL_NULL(mixer_loop)
 
 //Mixers cannot-not do combining mode. So the default option is removed from this. A combine target must be chosen
@@ -82,7 +82,7 @@ fundamental differences
 			var/datum/cooking_item/CI = a
 			if (CI.container)
 				if (!CI.container.check_contents())
-					to_chat(user, "There's nothing in [src] you can remove!")
+					to_chat(user, "<span class='filter_notice'>There's nothing in [src] you can remove!</span>")
 					return
 
 				for (var/obj/item/I in CI.container)
@@ -105,21 +105,21 @@ fundamental differences
 
 	var/datum/cooking_item/CI = cooking_objs[1]
 	if(!CI.container.check_contents())
-		to_chat("There's nothing in it! Add ingredients before turning [src] on!")
+		to_chat("<span class='filter_notice'>There's nothing in it! Add ingredients before turning [src] on!</span>")
 		return
 
 	if(stat & POWEROFF)//Its turned off
 		stat &= ~POWEROFF
 		if(usr)
-			usr.visible_message("[usr] turns the [src] on", "You turn on \the [src].")
+			usr.visible_message("<span class='filter_notice'>[usr] turns the [src] on.</span>", "<span class='filter_notice'>You turn on \the [src].</span>")
 			get_cooking_work(CI)
 			use_power = 2
 	else //Its on, turn it off
 		stat |= POWEROFF
 		use_power = 0
 		if(usr)
-			usr.visible_message("[usr] turns the [src] off", "You turn off \the [src].")
-	playsound(src, 'sound/machines/click.ogg', 40, 1)
+			usr.visible_message("<span class='filter_notice'>[usr] turns the [src] off.</span>", "<span class='filter_notice'>You turn off \the [src].</span>")
+	playsound(src, "button", 40, 1)
 	update_icon()
 
 /obj/machinery/appliance/mixer/can_insert(var/obj/item/I, var/mob/user)
@@ -132,7 +132,7 @@ fundamental differences
 /obj/machinery/appliance/mixer/finish_cooking(var/datum/cooking_item/CI)
 	..()
 	stat |= POWEROFF
-	playsound(src, 'sound/machines/click.ogg', 40, 1)
+	playsound(src, "button", 40, 1)
 	use_power = 0
 	CI.reset()
 	update_icon()

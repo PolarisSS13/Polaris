@@ -13,7 +13,7 @@
 	Skrell tentacle wear
 */
 /obj/item/clothing/ears/skrell
-	name = "skrell tentacle wear"
+	name = "Skrell tentacle wear"
 	desc = "Some stuff worn by skrell to adorn their head tentacles."
 	icon = 'icons/obj/clothing/ears.dmi'
 	w_class = ITEMSIZE_TINY
@@ -36,25 +36,25 @@
 
 /obj/item/clothing/ears/skrell/chain/bluejewels
 	name = "Blue jeweled golden headtail chains"
-	desc = "A delicate golden chain adorned with blue jewels worn by female skrell to decorate their head tails."
+	desc = "A delicate golden chain adorned with blue jewels worn by female Skrell to decorate their head tails."
 	icon_state = "skrell_chain_bjewel"
 	item_state_slots = list(slot_r_hand_str = "egg2", slot_l_hand_str = "egg2")
 
 /obj/item/clothing/ears/skrell/chain/redjewels
 	name = "Red jeweled golden headtail chains"
-	desc = "A delicate golden chain adorned with red jewels worn by female skrell to decorate their head tails."
+	desc = "A delicate golden chain adorned with red jewels worn by female Skrell to decorate their head tails."
 	icon_state = "skrell_chain_rjewel"
 	item_state_slots = list(slot_r_hand_str = "egg4", slot_l_hand_str = "egg4")
 
 /obj/item/clothing/ears/skrell/chain/ebony
 	name = "Ebony headtail chains"
-	desc = "A delicate ebony chain worn by female skrell to decorate their head tails."
+	desc = "A delicate ebony chain worn by female Skrell to decorate their head tails."
 	icon_state = "skrell_chain_ebony"
 	item_state_slots = list(slot_r_hand_str = "egg6", slot_l_hand_str = "egg6")
 
 /obj/item/clothing/ears/skrell/band
 	name = "Gold headtail bands"
-	desc = "Golden metallic bands worn by male skrell to adorn their head tails."
+	desc = "Golden metallic bands worn by male Skrell to adorn their head tails."
 	icon_state = "skrell_band"
 	item_state_slots = list(slot_r_hand_str = "egg5", slot_l_hand_str = "egg5")
 	drop_sound = 'sound/items/drop/ring.ogg'
@@ -62,43 +62,43 @@
 
 /obj/item/clothing/ears/skrell/band/silver
 	name = "Silver headtail bands"
-	desc = "Silver metallic bands worn by male skrell to adorn their head tails."
+	desc = "Silver metallic bands worn by male Skrell to adorn their head tails."
 	icon_state = "skrell_band_sil"
 	item_state_slots = list(slot_r_hand_str = "egg", slot_l_hand_str = "egg")
 
 /obj/item/clothing/ears/skrell/band/bluejewels
 	name = "Blue jeweled golden headtail bands"
-	desc = "Golden metallic bands adorned with blue jewels worn by male skrell to adorn their head tails."
+	desc = "Golden metallic bands adorned with blue jewels worn by male Skrell to adorn their head tails."
 	icon_state = "skrell_band_bjewel"
 	item_state_slots = list(slot_r_hand_str = "egg2", slot_l_hand_str = "egg2")
 
 /obj/item/clothing/ears/skrell/band/redjewels
 	name = "Red jeweled golden headtail bands"
-	desc = "Golden metallic bands adorned with red jewels worn by male skrell to adorn their head tails."
+	desc = "Golden metallic bands adorned with red jewels worn by male Skrell to adorn their head tails."
 	icon_state = "skrell_band_rjewel"
 	item_state_slots = list(slot_r_hand_str = "egg4", slot_l_hand_str = "egg4")
 
 /obj/item/clothing/ears/skrell/band/ebony
 	name = "Ebony headtail bands"
-	desc = "Ebony bands worn by male skrell to adorn their head tails."
+	desc = "Ebony bands worn by male Skrell to adorn their head tails."
 	icon_state = "skrell_band_ebony"
 	item_state_slots = list(slot_r_hand_str = "egg6", slot_l_hand_str = "egg6")
 
 /obj/item/clothing/ears/skrell/colored/band
 	name = "Colored headtail bands"
-	desc = "Metallic bands worn by male skrell to adorn their head tails."
+	desc = "Metallic bands worn by male Skrell to adorn their head tails."
 	icon_state = "skrell_band_sil"
 	item_state_slots = list(slot_r_hand_str = "egg", slot_l_hand_str = "egg")
 
 /obj/item/clothing/ears/skrell/colored/chain
 	name = "Colored headtail chains"
-	desc = "A delicate chain worn by female skrell to decorate their head tails."
+	desc = "A delicate chain worn by female Skrell to decorate their head tails."
 	icon_state = "skrell_chain_sil"
 	item_state_slots = list(slot_r_hand_str = "egg", slot_l_hand_str = "egg")
 
 /obj/item/clothing/ears/skrell/cloth_female
 	name = "red headtail cloth"
-	desc = "A cloth shawl worn by female skrell draped around their head tails."
+	desc = "A cloth shawl worn by female Skrell draped around their head tails."
 	icon_state = "skrell_cloth_female"
 	item_state_slots = list(slot_r_hand_str = "egg4", slot_l_hand_str = "egg4")
 

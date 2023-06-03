@@ -16,7 +16,7 @@
 /mob/living/SelfMove(turf/n, direct, movetime)
 	// If on walk intent, don't willingly step into hazardous tiles.
 	// Unless the walker is confused.
-	if(m_intent == "walk" && confused <= 0)
+	if(IS_WALKING(src) && confused <= 0)
 		if(!n.is_safe_to_enter(src))
 			to_chat(src, span("warning", "\The [n] is dangerous to move into."))
 			return FALSE // In case any code wants to know if movement happened.
@@ -68,7 +68,7 @@ default behaviour is:
 				now_pushing = 0
 				return
 
-		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being seperated from their puller
+		//BubbleWrap: people in handcuffs are always switched around as if they were on 'help' intent to prevent a person being pulled from being separated from their puller
 		var/can_swap = 1
 		if(loc.density || tmob.loc.density)
 			can_swap = 0
@@ -127,7 +127,7 @@ default behaviour is:
 	now_pushing = 0
 	. = ..()
 	if (!istype(AM, /atom/movable) || AM.anchored)
-		if(confused && prob(50) && m_intent=="run")
+		if(confused && prob(50) && IS_RUNNING(src))
 			Weaken(2)
 			playsound(src, "punch", 25, 1, -1)
 			visible_message("<span class='warning'>[src] [pick("ran", "slammed")] into \the [AM]!</span>")
@@ -203,7 +203,7 @@ default behaviour is:
 	// Will move our mob (probably)
 	. = ..() // Moved() called at this point if successful
 
-	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1) //seperated from our puller and not in the middle of a diagonal move
+	if(pulledby && moving_diagonally != FIRST_DIAG_STEP && get_dist(src, pulledby) > 1) //separated from our puller and not in the middle of a diagonal move
 		pulledby.stop_pulling()
 
 	if(s_active && !(s_active in contents) && get_turf(s_active) != get_turf(src))	//check !( s_active in contents ) first so we hopefully don't have to call get_turf() so much.

@@ -22,7 +22,7 @@
 		to_chat(src, "<span class='notice'>You will now speak whatever your standard default language is if you do not specify one when speaking.</span>")
 	default_language = language
 
-// Silicons can't neccessarily speak everything in their languages list
+// Silicons can't necessarily speak everything in their languages list
 /mob/living/silicon/set_default_language(language as null|anything in speech_synthesizer_langs)
 	..()
 

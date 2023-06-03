@@ -11,10 +11,11 @@
 
 /datum/gear/head/bandanas/New()
 	..()
-	var/bandanatype = list()
-	bandanatype["bandana, pirate-red"] = /obj/item/clothing/head/bandana
-	bandanatype["bandana, green"] = /obj/item/clothing/head/greenbandana
-	bandanatype["bandana, orange"] = /obj/item/clothing/head/orangebandana
+	var/list/bandanatype = list(
+	"bandana, pirate-red" = /obj/item/clothing/head/bandana,
+	"bandana, green" = /obj/item/clothing/head/greenbandana,
+	"bandana, orange" = /obj/item/clothing/head/orangebandana
+	)
 	gear_tweaks += new/datum/gear_tweak/path(bandanatype)
 
 /datum/gear/head/beret
@@ -23,10 +24,11 @@
 
 /datum/gear/head/beret/New()
 	..()
-	var/berettype = list()
-	berettype["beret, engineering orange"] = /obj/item/clothing/head/beret/engineering
-	berettype["beret, purple"] = /obj/item/clothing/head/beret/purple
-	berettype["beret, red"] = /obj/item/clothing/head/beret
+	var/berettype = list(
+	"beret, engineering orange" = /obj/item/clothing/head/beret/engineering,
+	"beret, purple" = /obj/item/clothing/head/beret/purple,
+	"beret, red" = /obj/item/clothing/head/beret
+	)
 	gear_tweaks += new/datum/gear_tweak/path(berettype)
 
 /datum/gear/head/beretsec
@@ -36,14 +38,15 @@
 
 /datum/gear/head/beretsec/New()
 	..()
-	var/berettype = list()
-	berettype["officer beret, navy"] = /obj/item/clothing/head/beret/sec/navy/officer
-	berettype["officer beret, corporate"] = /obj/item/clothing/head/beret/sec/corporate/officer
-	berettype["officer beret, red"] = /obj/item/clothing/head/beret/sec
-	berettype["HoS beret, navy"] = /obj/item/clothing/head/beret/sec/navy/hos
-	berettype["HoS beret, corporate"] = /obj/item/clothing/head/beret/sec/corporate/hos
-	berettype["warden beret, navy"] = /obj/item/clothing/head/beret/sec/navy/warden
-	berettype["warden beret, corporate"] = /obj/item/clothing/head/beret/sec/corporate/warden
+	var/berettype = list(
+	"officer beret, navy" = /obj/item/clothing/head/beret/sec/navy/officer,
+	"officer beret, corporate" = /obj/item/clothing/head/beret/sec/corporate/officer,
+	"officer beret, red" = /obj/item/clothing/head/beret/sec,
+	"HoS beret, navy" = /obj/item/clothing/head/beret/sec/navy/hos,
+	"HoS beret, corporate" = /obj/item/clothing/head/beret/sec/corporate/hos,
+	"warden beret, navy" = /obj/item/clothing/head/beret/sec/navy/warden,
+	"warden beret, corporate" = /obj/item/clothing/head/beret/sec/corporate/warden
+	)
 	gear_tweaks += new/datum/gear_tweak/path(berettype)
 
 /datum/gear/head/cap
@@ -52,19 +55,20 @@
 
 /datum/gear/head/cap/New()
 	..()
-	var/captype = list()
-	captype["soft cap, black"] = /obj/item/clothing/head/soft/black
-	captype["soft cap, blue"] = /obj/item/clothing/head/soft/blue
-	captype["soft cap, green"] = /obj/item/clothing/head/soft/green
-	captype["soft cap, grey"] = /obj/item/clothing/head/soft/grey
-	captype["soft cap, major bill's"] = /obj/item/clothing/head/soft/mbill
-	captype["soft cap, orange"] = /obj/item/clothing/head/soft/orange
-	captype["soft cap, purple"] = /obj/item/clothing/head/soft/purple
-	captype["soft cap, rainbow"] = /obj/item/clothing/head/soft/rainbow
-	captype["soft cap, red"] = /obj/item/clothing/head/soft/red
-	captype["soft cap, solgov"] = /obj/item/clothing/head/soft/solgov
-	captype["soft cap, white"] = /obj/item/clothing/head/soft/mime
-	captype["soft cap, yellow"] = /obj/item/clothing/head/soft/yellow
+	var/list/captype = list(
+	"soft cap, black" = /obj/item/clothing/head/soft/black,
+	"soft cap, blue" = /obj/item/clothing/head/soft/blue,
+	"soft cap, green" = /obj/item/clothing/head/soft/green,
+	"soft cap, grey" = /obj/item/clothing/head/soft/grey,
+	"soft cap, major bill's" = /obj/item/clothing/head/soft/mbill,
+	"soft cap, orange" = /obj/item/clothing/head/soft/orange,
+	"soft cap, purple" = /obj/item/clothing/head/soft/purple,
+	"soft cap, rainbow" = /obj/item/clothing/head/soft/rainbow,
+	"soft cap, red" = /obj/item/clothing/head/soft/red,
+	"soft cap, solgov" = /obj/item/clothing/head/soft/solgov,
+	"soft cap, white" = /obj/item/clothing/head/soft/mime,
+	"soft cap, yellow" = /obj/item/clothing/head/soft/yellow
+	)
 	gear_tweaks += new/datum/gear_tweak/path(captype)
 
 /datum/gear/head/sec_cap
@@ -316,12 +320,13 @@
 
 /datum/gear/head/surgery/New()
 	..()
-	var/cap_type = list()
-	cap_type["Purple cap"] = /obj/item/clothing/head/surgery/purple
-	cap_type["Blue cap"] = /obj/item/clothing/head/surgery/blue
-	cap_type["Green cap"] = /obj/item/clothing/head/surgery/green
-	cap_type["Black cap"] = /obj/item/clothing/head/surgery/black
-	cap_type["Navy cap"] = /obj/item/clothing/head/surgery/navyblue
+	var/list/cap_type = list(
+	"purple cap" = /obj/item/clothing/head/surgery/purple,
+	"blue cap" = /obj/item/clothing/head/surgery/blue,
+	"green cap" = /obj/item/clothing/head/surgery/green,
+	"black cap" = /obj/item/clothing/head/surgery/black,
+	"navy cap" = /obj/item/clothing/head/surgery/navyblue
+	)
 	gear_tweaks += new/datum/gear_tweak/path(cap_type)
 
 /datum/gear/head/hairnet

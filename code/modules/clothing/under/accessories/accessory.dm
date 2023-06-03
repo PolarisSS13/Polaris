@@ -248,7 +248,7 @@
 	icon_state = "bronze_heart"
 
 /obj/item/clothing/accessory/medal/nobel_science
-	name = "nobel sciences award"
+	name = "Nobel sciences award"
 	desc = "A bronze medal which represents significant contributions to the field of science or engineering."
 
 /obj/item/clothing/accessory/medal/silver
@@ -275,7 +275,7 @@
 
 /obj/item/clothing/accessory/medal/gold/heroism
 	name = "medal of exceptional heroism"
-	desc = "An extremely rare golden medal awarded only by high ranking officials. To recieve such a medal is the highest honor and as such, very few exist. This medal is almost never awarded to anybody but distinguished veteran staff."
+	desc = "An extremely rare golden medal awarded only by high ranking officials. To receive such a medal is the highest honor and as such, very few exist. This medal is almost never awarded to anybody but distinguished veteran staff."
 
 // Base type for 'medals' found in a "dungeon" submap, as a sort of trophy to celebrate the player's conquest.
 /obj/item/clothing/accessory/medal/dungeon
@@ -448,8 +448,8 @@
 	. = ..(ml, MAT_BRONZE)
 
 /obj/item/clothing/accessory/halfcape
-	name = "half cape"
-	desc = "A tasteful half-cape, suitible for European nobles and retro anime protagonists."
+	name = "retro half cape"
+	desc = "A tasteful half-cape with epaulettes, suitible for European nobles and retro anime protagonists."
 	icon_state = "halfcape"
 	slot = ACCESSORY_SLOT_DECOR
 

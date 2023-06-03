@@ -1,6 +1,6 @@
 /*
  * The 'fancy' path is for objects like donut boxes that show how many items are in the storage item on the sprite itself
- * .. Sorry for the shitty path name, I couldnt think of a better one.
+ * .. Sorry for the shitty path name, I couldn't think of a better one.
  *
  * WARNING: var/icon_type is used for both examine text and sprite name. Please look at the procs below and adjust your sprite names accordingly
  *
@@ -269,18 +269,18 @@
 		..()
 
 /obj/item/storage/fancy/cigarettes/dromedaryco
-	name = "\improper DromedaryCo packet"
+	name = "\improper pack of DromedaryCos"
 	desc = "A packet of six Earth-export DromedaryCo cancer sticks. A label on the packaging reads, \"Wouldn't a slow death make a change?\""
 	description_fluff = "DromedaryCo is one of Sol's oldest cigarette brands, and takes pride in having sourced tobcacco from the same Indian plantations since 2044. Popular with those willing to pay extra for a little nostalgia."
 	icon_state = "Dpacket"
-	brand = "\improper Dromedary Co. cigarette"
+	brand = "\improper Dromedary Co."
 
 /obj/item/storage/fancy/cigarettes/killthroat
-	name = "\improper AcmeCo packet"
+	name = "\improper pack of AcmeCos"
 	desc = "A packet of six AcmeCo cigarettes. For those who want to obtain a record for the most cancerous tumors on a budget."
 	description_fluff = "Available anywhere people breathe and want to breathe less, AcmeCo is the cheapest, most widespread cigarette brand in the galaxy. They taste like trash, but when you're keeping them inside your jumpsuit on a 16 hour shift, you're probably not too concerned with flavour."
 	icon_state = "Apacket"
-	brand = "\improper Acme Co. cigarette"
+	brand = "\improper Acme Co."
 
 // New exciting ways to kill your lungs! - Earthcrusher //
 

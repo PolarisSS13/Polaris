@@ -165,7 +165,7 @@
 							Right Mouse Button + shift on any mob  = Command selected mobs to follow mob regardless of faction<br>\
 							Note: The following also reset the mob's home position:<br>\
 							Right Mouse Button on tile             = Command selected mobs to move to tile (will cancel if enemies are seen)<br>\
-							Right Mouse Button + shift on tile     = Command selected mobs to reposition to tile (will not be inturrupted by enemies)<br>\
+							Right Mouse Button + shift on tile     = Command selected mobs to reposition to tile (will not be interrupted by enemies)<br>\
 							Right Mouse Button + alt on obj/turfs  = Command selected mobs to attack obj/turf<br>\
 							***********************************************************</span>")
 	return 1
@@ -386,7 +386,7 @@
 					to_chat(usr, "[object.type]")
 
 		if(BUILDMODE_EDIT)
-			if(pa.Find("left")) //I cant believe this shit actually compiles.
+			if(pa.Find("left")) //I can't believe this shit actually compiles.
 				if(object.vars.Find(holder.buildmode.varholder))
 					log_admin("[key_name(usr)] modified [object.name]'s [holder.buildmode.varholder] to [holder.buildmode.valueholder]")
 					object.vars[holder.buildmode.varholder] = holder.buildmode.valueholder
