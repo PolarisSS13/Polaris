@@ -8,6 +8,11 @@
 	. = ..()
 	if(. != INITIALIZE_HINT_QDEL)
 		LAZYSET(sprite_sheets, SPECIES_TESHARI, icon)
+
+/obj/item/clothing/head/tesh_hood/Initialize()
+	. = ..()
+	if(. != INITIALIZE_HINT_QDEL)
+		LAZYSET(sprite_sheets, SPECIES_TESHARI, icon)
 // End placeholders.
 
 // Standard Cloaks
