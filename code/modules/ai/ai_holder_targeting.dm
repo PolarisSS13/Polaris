@@ -15,6 +15,8 @@
 	var/respect_alpha = TRUE				// If true, mobs with a sufficiently low alpha will be treated as invisible.
 	var/alpha_vision_threshold = FAKE_INVIS_ALPHA_THRESHOLD	// Targets with an alpha less or equal to this will be considered invisible. Requires above var to be true.
 
+	var/ignore_opacity = FALSE				// If true, can target through opaque objects/turfs. Essentially x-ray vision.
+
 	var/lose_target_time = 0				// world.time when a target was lost.
 	var/lose_target_timeout = 5 SECONDS		// How long until a mob 'times out' and stops trying to find the mob that disappeared.
 
@@ -27,12 +29,17 @@
 // Step 1, find out what we can see.
 /datum/ai_holder/proc/list_targets()
 	. = ohearers(vision_range, holder)
+	if(ignore_opacity)	// Ignoring opacity makes this a much hungrier proc.
+		for(var/atom/movable/AM in orange(vision_range, holder))
+			if(isliving(AM) || ((ispath(preferred_target) && istype(AM, preferred_target)) || (istype(AM) && AM == preferred_target)))
+				. |= AM
+
 	. -= dview_mob // Not the dview mob!
 
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha, /obj/structure/blob))
 
 	for(var/HM in typecache_filter_list(range(vision_range, holder), hostile_machines))
-		if(can_see(holder, HM, vision_range))
+		if(ignore_opacity || can_see(holder, HM, vision_range))
 			. += HM
 
 // Step 2, filter down possible targets to things we actually care about.
@@ -213,7 +220,7 @@
 		ai_log("can_see_target() : Target ([the_target]) was too far from holder. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	if(!can_see(holder, the_target, view_range))
+	if(!ignore_opacity && !can_see(holder, the_target, view_range))
 		ai_log("can_see_target() : Target ([the_target]) failed can_see(). Exiting.", AI_LOG_TRACE)
 		return FALSE
 

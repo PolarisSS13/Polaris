@@ -398,6 +398,16 @@
 				L.Add(T)
 	return L
 
+// Same as the above, but ignores density of turfs.
+/turf/proc/CardinalTurfsWithAccessNoDensity(var/obj/item/card/id/ID)
+	var/L[] = new()
+
+	for(var/d in cardinal)
+		var/turf/T = get_step(src, d)
+		if(istype(T))
+			if(!LinkBlockedWithAccess(src, T, ID))
+				L.Add(T)
+	return L
 
 // Similar to above but not restricted to just cardinal directions.
 /turf/proc/TurfsWithAccess(var/obj/item/card/id/ID, flags)

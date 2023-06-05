@@ -94,7 +94,7 @@
 
 	hovering = TRUE
 
-	ai_holder_type = /datum/ai_holder/simple_mob/destructive/tunneling
+	ai_holder_type = /datum/ai_holder/simple_mob/destructive/worm
 
 	melee_damage_lower = 10
 	melee_damage_upper = 25
@@ -127,8 +127,8 @@
 	var/segment_count = 6
 
 /mob/living/simple_mob/animal/space/space_worm/head/apply_bonus_melee_damage(atom/A, damage_amount)
-	if(istype(A, /turf))
-		damage_amount *= 2
+	if(istype(A, /turf) || istype(A, /obj/machinery/door))
+		damage_amount *= 5
 	else if(istype(A, /obj/mecha))
 		damage_amount *= 1.5
 	return damage_amount
@@ -247,7 +247,7 @@
 
 	// Otherwise we need to keep going.
 	var/dir_to_go = get_dir(starting_turf, destination)
-	for(var/i = 1 to rand(2, 4))
+	for(var/i = 1 to rand(2, max(4, tally_segments(0))))
 		destination = get_step(destination, dir_to_go)
 
 	if(handle_charge(destination) == FALSE)
@@ -351,6 +351,12 @@
 		else
 			previous.z_transitioning = FALSE
 		previous.forceMove(old_loc)	// None of this 'ripped in half by an airlock' business.
+
+	if(open_maw)
+		for(var/atom/movable/AM in get_turf(src))
+			if(!AM.anchored && prob(30))
+				AttemptToEat(AM)
+
 	update_icon()
 
 /mob/living/simple_mob/animal/space/space_worm/head/Bump(atom/obstacle)
@@ -430,6 +436,9 @@
 					EF.visible_message("<span class='danger'>\The [src] crashes through \the [EF]!</span>")
 				else
 					EF.visible_message("<span class='danger'>\The [EF] reverberates as it returns to normal.</span>")
+
+			if(istype(objectOrMob, /obj/machinery/shieldwall))	// This shield type is explicitly a containment field, and if you somehow get a worm inside this, congrats.
+				return FALSE
 
 			if(objectOrMob)
 				objectOrMob.update_nearby_tiles(need_rebuild=1)
@@ -512,7 +521,7 @@
 	if(istype(A, /mob/living/simple_mob))
 		var/mob/living/simple_mob/SM = A
 		if(!SM.ckey)	// Players can always fight back.
-			SM.Stun(1)
+			SM.Stun(3)
 	return FALSE
 
 /mob/living/simple_mob/animal/space/space_worm/proc/stomach_special_digest(var/atom/A)	// Futureproof. Any special checks that interact with digested atoms. I.E., ore processing. Return TRUE if it should skip future digest checks.
@@ -524,6 +533,12 @@
 
 /mob/living/simple_mob/animal/space/space_worm/proc/update_body_states()
 	if(next)	// Keep us on the same page, here.
+		if(mob_class != next.mob_class)
+			mob_class = next.mob_class
+		if(plane != next.plane)
+			plane = next.plane
+		if(invisibility != next.invisibility)
+			invisibility = next.invisibility
 		if(meat_type != next.meat_type)
 			meat_type = next.meat_type
 		if(severed_head_type != next.severed_head_type)
@@ -538,10 +553,31 @@
 			faction = next.faction
 		if(icon != next.icon)
 			icon = next.icon
+
+		// Handle damage distribution, if we're alive. Dead segments are dead weight.
+		// If the next headward segment has more damage, take some of the damage to ourself.
+		if(stat != DEAD)
+			if(next.bruteloss > bruteloss)
+				var/change = round((next.bruteloss - bruteloss) / 2)
+				next.adjustBruteLoss(-change)
+				adjustBruteLoss(change)
+
+			if(next.fireloss > fireloss)
+				var/change = round((next.fireloss - fireloss) / 2)
+				next.adjustFireLoss(-change)
+				adjustFireLoss(change)
+
 	if(previous)
 		previous.update_body_states()
 		return 1
 	return 0
+
+// Returns the number of segments.
+/mob/living/simple_mob/animal/space/space_worm/proc/tally_segments(var/count = 0)
+	count++
+	if(previous)
+		return previous.tally_segments(count)
+	return count
 
 // Worm meat.
 
@@ -597,6 +633,8 @@
 
 	tt_desc = "U Tyranochaetus skathari"
 
+	mob_class = MOB_CLASS_ABERRATION
+
 	internal_organs = list(\
 		/obj/item/organ/internal/heart/grey,\
 		/obj/item/organ/internal/intestine/xeno,\
@@ -608,7 +646,11 @@
 		/obj/item/organ/internal/brain/xeno\
 		)
 
-	ai_holder_type = /datum/ai_holder/simple_mob/destructive/tunneling
+	butchery_loot = list(\
+		/obj/item/stack/animalhide/xeno = 3\
+		)
+
+	ai_holder_type = /datum/ai_holder/simple_mob/destructive/worm
 
 	severed_head_type = /mob/living/simple_mob/animal/space/space_worm/head/skath/severed
 	segment_type = /mob/living/simple_mob/animal/space/space_worm/skath
@@ -627,9 +669,17 @@
 
 /mob/living/simple_mob/animal/space/space_worm/skath
 	name = "bluespace worm"
+	butchery_loot = list(\
+		/obj/item/stack/animalhide/xeno = 3\
+		)
 
 /*
  * AI
  */
-/datum/ai_holder/simple_mob/destructive/tunneling
+/datum/ai_holder/simple_mob/destructive/worm
 	can_demolish = TRUE
+	ignore_opacity = TRUE
+
+/datum/ai_holder/simple_mob/destructive/worm/intelligent
+	astar_adjacent_proc = /turf/proc/CardinalTurfsWithAccessNoDensity
+	use_astar = TRUE
