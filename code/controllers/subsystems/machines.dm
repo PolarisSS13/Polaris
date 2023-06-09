@@ -12,14 +12,14 @@ SUBSYSTEM_DEF(machines)
 
 	var/current_step = SSMACHINES_PIPENETS
 
-	var/cost_pipenets		= 0
-	var/cost_machinery		= 0
-	var/cost_powernets		= 0
-	var/cost_power_objects	= 0
+	var/cost_pipenets       = 0
+	var/cost_machinery      = 0
+	var/cost_powernets      = 0
+	var/cost_power_objects  = 0
 
-	var/list/pipenets		= list()
-	var/list/machinery		= list()
-	var/list/powernets		= list()
+	var/list/pipenets       = list()
+	var/list/machinery      = list()
+	var/list/powernets      = list()
 	var/list/power_objects	= list()
 
 	var/list/current_run 	= list()
