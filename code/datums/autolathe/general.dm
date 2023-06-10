@@ -2,6 +2,10 @@
 	name = "bucket"
 	path =/obj/item/reagent_containers/glass/bucket
 
+/datum/category_item/autolathe/general/mop
+	name = "mop"
+	path =/obj/item/mop
+
 /datum/category_item/autolathe/general/cooler_bottle
 	name = "water-cooler bottle"
 	path =/obj/item/reagent_containers/glass/cooler_bottle
