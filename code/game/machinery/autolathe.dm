@@ -186,6 +186,16 @@
 			to_chat(user, "\The [mag] is too hazardous to put back into the autolathe while there's ammunition inside of it!")
 			return*/
 
+	if(istype(O,/obj/item/pda))
+		var/obj/item/pda/pda=O
+		if(!isnull(pda.id))
+			if(alert(user, "This PDA holds an ID card, are you sure you wish to destroy it?", "Destroy PDA","No","Yes") == "No")
+				return
+	else if(istype(O, /obj/item/card/id))
+		if(alert(user, "Are you sure you wish to destroy this ID?", "Destroy ID","No","Yes") == "No")
+			return
+
+
 	//Resources are being loaded.
 	var/obj/item/eating = O
 	if(!eating.matter)
