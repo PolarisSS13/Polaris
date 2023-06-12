@@ -153,7 +153,7 @@ var/global/list/stool_cache = list() //haha stool
 /obj/item/stool/verb/rotate_clockwise()
 	set name = "Rotate Stool Clockwise"
 	set category = "Object"
-	set src in oview(1)
+	set src in view(1)
 
 	if(!usr || !isturf(usr.loc))
 		return
