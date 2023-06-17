@@ -79,11 +79,11 @@
 				{{:value.mat}}: {{:value.amt}}/{{:data.maxres}}
 			</div>
 			<div class="itemContentMedium">
-				{{:helper.link('x1', null, {'eject' : value.mat, 'mat_type' : value.type, 'amount' : 1,}, value.amt > 2000 ? null : 'disabled')}}
-				{{:helper.link('x5', null, {'eject' : value.mat, 'mat_type' : value.type, 'amount' : 5}, value.amt > 10000 ? null : 'disabled')}}
-				{{:helper.link('x10', null, {'eject' : value.mat, 'mat_type' : value.type, 'amount' : 10}, value.amt > 20000 ? null : 'disabled')}}
-				{{:helper.link('Custom', null, {'eject' : value.mat, 'mat_type' : value.type, 'amount' : -1})}}
-				{{:helper.link('Stack', null, {'eject' : value.mat, 'mat_type' : value.type, 'amount' : 0})}}
+				{{:helper.link('x1', null, {'eject' : value.mat, 'amount' : 1}, value.amt > 2000 ? null : 'disabled')}}
+				{{:helper.link('x5', null, {'eject' : value.mat, 'amount' : 5}, value.amt > 10000 ? null : 'disabled')}}
+				{{:helper.link('x10', null, {'eject' : value.mat, 'amount' : 10}, value.amt > 20000 ? null : 'disabled')}}
+				{{:helper.link('Stack', null, {'eject' : value.mat, 'amount' : 0})}}
+				{{:helper.link('All', null, {'eject' : value.mat, 'amount' : -1})}}
 			</div>
 		</div>
 	{{/for}}

@@ -116,6 +116,8 @@ var/global/list/name_to_material
 	var/radiation_resistance = 0 // Radiation resistance, which is added on top of a material's weight for blocking radiation. Needed to make lead special without superrobust weapons.
 	var/supply_conversion_value  // Supply points per sheet that this material sells for.
 
+	var/perunit = SHEET_MATERIAL_AMOUNT //How much stacks of translate from sheet to amount
+
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
 	var/created_fulltile_window

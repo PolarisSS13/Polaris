@@ -146,7 +146,7 @@
 			manufacturer = href_list["manufacturer"]
 
 	if(href_list["eject"] && !eject_lockout)
-		eject_materials_partial(href_list["eject"], href_list["mat_type"], text2num(href_list["amount"]))
+		eject_materials_partial(href_list["eject"], text2num(href_list["amount"]))
 
 	if(href_list["sync"])
 		sync()
@@ -326,7 +326,7 @@
 				hidden_mat = TRUE
 				continue
 		if(!hidden_mat)
-			. += list(list("mat" = capitalize(T), "amt" = materials[T], "type" = T?.type))
+			. += list(list("mat" = capitalize(T), "amt" = materials[T]))
 
 /obj/machinery/pros_fabricator/proc/sync()
 	sync_message = "Error: no console found."
@@ -341,24 +341,22 @@
 		sync_message = "Sync complete."
 	update_categories()
 
-/obj/machinery/pros_fabricator/proc/eject_materials_partial(var/material, var/mattype, var/amount)
-	material = lowertext(material)
-	var/obj/item/stack/material/S = new mattype(loc)
-	eject_lockout = TRUE
-	if(amount == 0)
-		amount = S.max_amount
-	if(amount == -1)
-		var/new_amount = input("Enter how many units of [material] to eject.", "Eject Material", 1) as num|null
-		if(!new_amount)
-			return
-		else
-			amount = min(new_amount, S.max_amount)
-	eject_lockout = FALSE
+/obj/machinery/pros_fabricator/proc/eject_materials_partial(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
+	var/recursive = amount == -1 ? 1 : 0
+	var/matstring = lowertext(material)
+	var/datum/material/M = get_material_by_name(matstring)
 
-	world << "[materials[material]] | [S.perunit]"
-	var/ejected = min(round(materials[material] / S.perunit), amount)
+	if(recursive && materials[matstring] >= M.perunit)
+		eject_material_of_type(matstring)
+		return
+
+	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
+	if(amount <= 0)
+		amount = S.max_amount
+	var/ejected = min(round(materials[matstring] / S.perunit), amount)
 	S.amount = min(ejected, amount)
 	if(S.amount <= 0)
 		qdel(S)
 		return
-	materials[material] -= ejected * S.perunit
+	materials[matstring] -= ejected * S.perunit
+	update_busy()
