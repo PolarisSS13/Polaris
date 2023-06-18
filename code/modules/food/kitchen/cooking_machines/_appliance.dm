@@ -98,7 +98,7 @@
 
 	var/half_overcook = (CI.overcook_mult - 1)*0.5
 	if (progress < 1+half_overcook)
-		return "<span class='soghun'><b>It is done !</b></span>"
+		return "<span class='soghun'><b>It is done!</b></span>"
 	if (progress < CI.overcook_mult)
 		return "<span class='warning'>It looks overcooked, get it out!</span>"
 	else
@@ -635,7 +635,7 @@
 		qdel(CI)
 	else
 		CI.reset()//reset instead of deleting if the container is left inside
-	user.visible_message("<span class='notice'>\The [user] remove \the [thing] from \the [src].</span>")
+	user.visible_message("<span class='notice'>\The [user] removes \the [thing] from \the [src].</span>")
 
 /obj/machinery/appliance/proc/cook_mob(var/mob/living/victim, var/mob/user)
 	return
