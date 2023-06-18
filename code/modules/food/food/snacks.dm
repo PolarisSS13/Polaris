@@ -1169,7 +1169,7 @@
 	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/omelette
-	name = "cheese omlette"
+	name = "cheese omelette"
 	desc = "Omelette Du Fromage... That's all you can say!"
 	icon_state = "omelette"
 	trash = /obj/item/trash/plate
@@ -2294,7 +2294,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatballspagetti
 	name = "spaghetti & meatballs"
-	desc = "Now thats a nice'a meatball!"
+	desc = "Now that's a nice-y meatball!"
 	icon_state = "meatballspagetti"
 	trash = /obj/item/trash/plate
 	filling_color = "#DE4545"
@@ -2947,7 +2947,7 @@
 	slices_num = 5
 	filling_color = "#805930"
 	center_of_mass = list("x"=16, "y"=10)
-	nutriment_desc = list("cake" = 10, "sweetness" = 10, "ganasche" = 10, "chocolate" = 15)
+	nutriment_desc = list("cake" = 10, "sweetness" = 10, "ganache" = 10, "chocolate" = 15)
 	nutriment_amt = 20
 
 /obj/item/reagent_containers/food/snacks/slice/chocolatecake
@@ -4308,7 +4308,7 @@
 	if (!flat_icon)
 		flat_icon = getFlatIcon(src)
 	var/icon/I = flat_icon
-	color = "#FFFFFF" //Some fruits use the color var. Reset this so it doesnt tint the batter
+	color = "#FFFFFF" //Some fruits use the color var. Reset this so it doesn't tint the batter
 	I.Blend(new /icon('icons/obj/food_custom.dmi', rgb(255,255,255)),ICON_ADD)
 	I.Blend(new /icon('icons/obj/food_custom.dmi', coating.icon_raw),ICON_MULTIPLY)
 	var/image/J = image(I)
