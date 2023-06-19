@@ -493,7 +493,10 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Updating Database..."
 
 		if(0.1)
-			dat += "Processing and Updating Database..."
+			if(linked_lathe)
+				dat += "Processing; Updating Database and Recycling Materials to Protolathe..."
+			else
+				dat += "Processing; Updating Database..."
 
 		if(0.2)
 			dat += "SYSTEM LOCKED<BR><BR>"
@@ -645,12 +648,15 @@ won't update every console in existence) but it's more of a hassle to do. Also, 
 			dat += "Name: [linked_destroy.loaded_item.name]<BR>"
 			dat += "Origin Tech:"
 			dat += "<UL>"
-			for(var/T in linked_destroy.loaded_item.origin_tech)
-				dat += "<LI>[CallTechName(T)] [linked_destroy.loaded_item.origin_tech[T]]"
-				for(var/datum/tech/F in files.known_tech)
-					if(F.name == CallTechName(T))
-						dat += " (Current: [F.level])"
-						break
+			if(!linked_destroy.loaded_item.origin_tech || linked_destroy.loaded_item.origin_tech.len == 0)
+				dat += "No Tech origin detected. Deconstruct anyway?"
+			else
+				for(var/T in linked_destroy.loaded_item.origin_tech)
+					dat += "<LI>[CallTechName(T)] [linked_destroy.loaded_item.origin_tech[T]]"
+					for(var/datum/tech/F in files.known_tech)
+						if(F.name == CallTechName(T))
+							dat += " (Current: [F.level])"
+							break
 			dat += "</UL>"
 			dat += "<HR><A href='?src=\ref[src];deconstruct=1'>Deconstruct Item</A> || "
 			dat += "<A href='?src=\ref[src];eject_item=1'>Eject Item</A> || "
