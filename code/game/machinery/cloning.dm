@@ -110,6 +110,7 @@
 		R.dna.real_name = "clone ([rand(0,999)])"
 	H.real_name = R.dna.real_name
 	H.gender = R.gender
+	H.identifying_gender = R.identifying_gender
 	H.descriptors = R.body_descriptors
 
 	//Get the clone body ready
