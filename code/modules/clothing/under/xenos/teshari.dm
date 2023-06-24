@@ -135,7 +135,9 @@
 	name = "Undercoat"
 	desc =  "Teshari traditional garb, with a modern twist! Made of nanofibres to make it light and billowy, perfect for going fast and stylishly!"
 	icon = 'icons/mob/species/teshari/teshari_uniform.dmi'
-	icon_override = 'icons/mob/species/teshari/teshari_uniform.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/teshari_uniform.dmi'
+	)
 	icon_state = "tesh_uniform_bo"
 	item_state = "tesh_uniform_bo"
 	body_parts_covered = UPPER_TORSO|LOWER_TORSO
@@ -259,7 +261,9 @@
 
 /obj/item/clothing/under/teshari/undercoat/jobs
 	icon = 'icons/mob/species/teshari/deptjacket.dmi'
-	icon_override = 'icons/mob/species/teshari/deptjacket.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/deptjacket.dmi'
+	)
 
 /obj/item/clothing/under/teshari/undercoat/jobs/cap
 	name = "facility director undercoat"

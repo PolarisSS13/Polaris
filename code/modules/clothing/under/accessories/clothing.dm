@@ -67,9 +67,7 @@
 	..()
 	var/mob/living/carbon/human/H = loc
 	if(istype(H) && H.wear_suit == src)
-		if(H.species.name == SPECIES_TESHARI)
-			icon_override = LAZYACCESS(sprite_sheets, SPECIES_TESHARI)
-		else if(icon_override_state)
+		if(icon_override_state)
 			icon_override = icon_override_state
 		else
 			icon_override = initial(icon_override)
@@ -85,10 +83,6 @@
 	. = ..()
 	if(icon_override_state)
 		icon_override = icon_override_state
-	else if(ishuman(user))
-		var/mob/living/carbon/human/H = user
-		if(H.species.name == SPECIES_TESHARI)
-			icon_override = LAZYACCESS(sprite_sheets, SPECIES_TESHARI)
 	else
 		icon_override = initial(icon_override)
 

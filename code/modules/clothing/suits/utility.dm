@@ -101,7 +101,9 @@
 	name = "Small radiation suit"
 	desc = "A specialist suit that protects against radiation, designed specifically for use by Teshari. Made to order by Aether."
 	icon = 'icons/obj/clothing/species/teshari/suits.dmi'
-	icon_override = 'icons/mob/species/teshari/suit.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
+	)
 	icon_state = "rad_fitted"
 	species_restricted = list(SPECIES_TESHARI)
 
@@ -109,6 +111,8 @@
 	name = "Small radiation hood"
 	desc = "A specialist hood with radiation protective properties, designed specifically for use by Teshari. Made to order by Aether."
 	icon = 'icons/obj/clothing/species/teshari/hats.dmi'
-	icon_override = 'icons/mob/species/teshari/head.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/head.dmi'
+	)
 	icon_state = "rad_fitted"
 	species_restricted = list(SPECIES_TESHARI)
