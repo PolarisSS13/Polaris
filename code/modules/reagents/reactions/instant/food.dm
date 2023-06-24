@@ -1,19 +1,19 @@
 /decl/chemical_reaction/instant/food/hot_ramen
-	name = "Hot Ramen"
+	name = "hot ramen"
 	id = "hot_ramen"
 	result = "hot_ramen"
 	required_reagents = list("water" = 1, "dry_ramen" = 3)
 	result_amount = 3
 
 /decl/chemical_reaction/instant/food/hell_ramen
-	name = "Hell Ramen"
+	name = "hell ramen"
 	id = "hell_ramen"
 	result = "hell_ramen"
 	required_reagents = list("capsaicin" = 1, "hot_ramen" = 6)
 	result_amount = 6
 
 /decl/chemical_reaction/instant/food/tofu
-	name = "Tofu"
+	name = "tofu"
 	id = "tofu"
 	result = null
 	required_reagents = list("soymilk" = 10)
@@ -27,7 +27,7 @@
 	return
 
 /decl/chemical_reaction/instant/food/chocolate_bar
-	name = "Chocolate Bar"
+	name = "chocolate bar"
 	id = "chocolate_bar"
 	result = null
 	required_reagents = list("soymilk" = 2, "coco" = 2, "sugar" = 2)
@@ -40,7 +40,7 @@
 	return
 
 /decl/chemical_reaction/instant/food/chocolate_bar2
-	name = "Chocolate Bar"
+	name = "chocolate bar"
 	id = "chocolate_bar"
 	result = null
 	required_reagents = list("milk" = 2, "coco" = 2, "sugar" = 2)
@@ -53,28 +53,28 @@
 	return
 
 /decl/chemical_reaction/instant/food/soysauce
-	name = "Soy Sauce"
+	name = "soy sauce"
 	id = "soysauce"
 	result = "soysauce"
 	required_reagents = list("soymilk" = 4, "sacid" = 1)
 	result_amount = 5
 
 /decl/chemical_reaction/instant/food/ketchup
-	name = "Ketchup"
+	name = "ketchup"
 	id = "ketchup"
 	result = "ketchup"
 	required_reagents = list("tomatojuice" = 2, "water" = 1, "sugar" = 1)
 	result_amount = 4
 
 /decl/chemical_reaction/instant/food/barbecue
-	name = "Barbeque Sauce"
+	name = "barbeque sauce"
 	id = "barbecue"
 	result = "barbecue"
 	required_reagents = list("tomatojuice" = 2, "applejuice" = 1, "sugar" = 1, "spacespice" = 1)
 	result_amount = 4
 
 /decl/chemical_reaction/instant/food/peanutbutter
-	name = "Peanut Butter"
+	name = "peanut butter"
 	id = "peanutbutter"
 	result = "peanutbutter"
 	required_reagents = list("peanutoil" = 2, "sugar" = 1, "sodiumchloride" = 1)
@@ -89,7 +89,7 @@
 	result_amount = 15
 
 /decl/chemical_reaction/instant/food/cheesewheel
-	name = "Cheesewheel"
+	name = "cheesewheel"
 	id = "cheesewheel"
 	result = null
 	required_reagents = list("milk" = 40)
@@ -103,7 +103,7 @@
 	return
 
 /decl/chemical_reaction/instant/food/meatball
-	name = "Meatball"
+	name = "meatball"
 	id = "meatball"
 	result = null
 	required_reagents = list("protein" = 3, "flour" = 5)
@@ -116,7 +116,7 @@
 	return
 
 /decl/chemical_reaction/instant/food/dough
-	name = "Dough"
+	name = "dough"
 	id = "dough"
 	result = null
 	required_reagents = list("egg" = 3, "flour" = 10)
@@ -130,7 +130,7 @@
 	return
 
 /decl/chemical_reaction/instant/food/syntiflesh
-	name = "Syntiflesh"
+	name = "syntiflesh"
 	id = "syntiflesh"
 	result = null
 	required_reagents = list("blood" = 5, "clonexadone" = 5)
@@ -149,28 +149,28 @@
 */
 
 /decl/chemical_reaction/instant/food/coating/batter
-	name = "Batter"
+	name = "batter"
 	id = "batter"
 	result = "batter"
 	required_reagents = list("egg" = 3, "flour" = 10, "water" = 5, "sodiumchloride" = 2)
 	result_amount = 20
 
 /decl/chemical_reaction/instant/food/coating/beerbatter
-	name = "Beer Batter"
+	name = "beer batter"
 	id = "beerbatter"
 	result = "beerbatter"
 	required_reagents = list("egg" = 3, "flour" = 10, "beer" = 5, "sodiumchloride" = 2)
 	result_amount = 20
 
 /decl/chemical_reaction/instant/food/browniemix
-	name = "Brownie Mix"
+	name = "brownie mix"
 	id = "browniemix"
 	result = "browniemix"
 	required_reagents = list("flour" = 5, "coco" = 5, "sugar" = 5)
 	result_amount = 15
 
 /decl/chemical_reaction/instant/food/butter
-	name = "Butter"
+	name = "butter"
 	id = "butter"
 	result = null
 	required_reagents = list("cream" = 20, "sodiumchloride" = 1)

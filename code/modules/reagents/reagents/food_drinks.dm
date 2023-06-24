@@ -27,13 +27,13 @@
 	else
 		initialize_data(newdata)
 
-	//cull all tastes below 10% of total
+	//cull all tastes below 5% of total
 	var/totalFlavor = 0
 	for(var/taste in data)
 		totalFlavor += data[taste]
 	if(totalFlavor) //Let's not divide by zero for things w/o taste
 		for(var/taste in data)
-			if(data[taste]/totalFlavor < 0.1)
+			if(data[taste]/totalFlavor < 0.05)
 				data -= taste
 
 #define ANIMAL_NUTRITION_MULTIPLIER 0.5
@@ -269,7 +269,7 @@
 /datum/reagent/nutriment/protein // Bad for Skrell!
 	name = "animal protein"
 	id = "protein"
-	taste_description = "some sort of meat"
+	taste_description = "umami"
 	color = "#440000"
 	allergen_type = ALLERGEN_MEAT //"Animal protein" implies it comes from animals, therefore meat.
 
@@ -713,7 +713,7 @@
 	name = "Capsaicin Oil"
 	id = "capsaicin"
 	description = "This is what makes chilis hot."
-	taste_description = "hot peppers"
+	taste_description = "spiciness"
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	ingest_met = REM
@@ -1097,6 +1097,7 @@
 	reagent_state = LIQUID
 	color = "#ff2424"
 	strength = 10
+	allergen_type = ALLERGEN_MEAT //It's meat.
 
 /datum/reagent/toxin/plantcolony
 	name = "A colony of plant cells"
@@ -1106,6 +1107,7 @@
 	reagent_state = LIQUID
 	color = "#7ce01f"
 	strength = 10
+	allergen_type = ALLERGEN_VEGETABLE //It's plant.
 
 /datum/reagent/drink/juice/potato
 	name = "Potato Juice"

@@ -66,6 +66,6 @@
 
 /obj/item/reagent_containers/food/snacks/meat/neaera/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3)
-	reagents.add_reagent("seafood", 3)
+	reagents.add_reagent("protein", 3, list("fainty fungal meat" = 3))
+	reagents.add_reagent("seafood", 3, list("fainty fungal meat" = 3))
 	reagents.add_reagent("triglyceride", 2)
