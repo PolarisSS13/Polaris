@@ -35,11 +35,11 @@
 		"a bit smaller in build than you",
 		"smaller in build than you",
 		"much smaller in build than you",
-		"dwarfed by your height"
+		"dwarfed by your size"
 		)
 	comparative_value_descriptors_larger = list(
 		"slightly larger than you in build",
 		"built larger than you",
 		"built much larger than you",
 		"dwarfing you"
-		)
+	)
