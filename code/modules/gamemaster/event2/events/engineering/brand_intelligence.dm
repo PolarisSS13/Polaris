@@ -62,10 +62,8 @@
 	return FALSE
 
 /datum/event2/event/brand_intelligence/end()
-	if(can_propagate(vender_zero)) // The crew failed and all the machines are infected!
-		return
 	// Otherwise Vender Zero was taken out in some form.
-	if(vender_zero)
+	if(vender_zero && can_propagate(vender_zero))
 		vender_zero.visible_message(span("notice", "\The [vender_zero]'s network activity light flickers wildly \
 		for a few seconds as a small screen reads: 'Rolling out firmware reset to networked machines'."))
 	for(var/obj/machinery/vending/vender in infected_vending_machines)
