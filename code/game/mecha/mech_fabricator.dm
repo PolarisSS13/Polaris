@@ -309,7 +309,7 @@
 	update_categories()
 
 /obj/machinery/mecha_part_fabricator/proc/eject_materials_partial(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
-	var/recursive = amount == -1 ? 1 : 0
+	var/recursive = amount == -1
 	var/matstring = lowertext(material)
 	var/datum/material/M = get_material_by_name(matstring)
 	if(recursive && materials[matstring] >= M.perunit)
