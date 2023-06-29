@@ -14,23 +14,28 @@ var/global/list/seen_religions = list()
 	return
 
 var/global/list/citizenship_choices = list(
-	"Earth",
-	"Mars",
-	"Sif",
-	"Binma",
-	"Moghes",
-	"Meralar",
-	"Qerr'balak"
+	"Solar Confederate Government",
+	"Almach Protectorate",
+	"Five Arrows",
+	"Pearlshield Coalition",
+	"Moghes Hegemony",
+	"Skrellian Kingdoms",
+	"Stateless" //Sol might automatically cover stateless humans/maybe posis but this is probably common for teshari/zaddat and ubiqtuous for drones
 	)
 
 var/global/list/home_system_choices = list(
 	"Sol",
 	"Vir",
-	"Nyx",
+	"Alpha Centauri",
 	"Tau Ceti",
+	"El",
+	"New Seoul",
+	"Relan",
+	"Vounna",
 	"Qerr'valis",
-	"Epsilon Ursae Minoris",
-	"Rarkajar"
+	"Rarkajar",
+	"Uueoa-Esa",
+	"Spacer"
 	)
 
 var/global/list/faction_choices = list(
@@ -71,7 +76,9 @@ var/global/list/religion_choices = list(
 	"Kishari Faith",
 	"Hauler Faith",
 	"Nock",
+	"Starlit Path",
 	"Singulitarian Worship",
+	"The Unity,"
 	"Xilar Qall",
 	"Tajr-kii Rarkajar",
 	"Agnosticism",
