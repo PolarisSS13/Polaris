@@ -54,7 +54,17 @@ var/global/list/faction_choices = list(
 	"Xion Manufacturing Group"
 	)
 
-var/global/list/antag_faction_choices = list()	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
+var/global/list/antag_faction_choices = list(
+	"Nos Amis",
+	"Russian Mafia",
+	"Sampatti",
+	"Xin Cohong",
+	"Golden Tiger Syndicate",
+	"Jaguar Gang",
+	"Revolutionary Solar People's Party",
+	"Vystholm",
+	"Qerr-Glia"
+	)
 
 var/global/list/antag_visiblity_choices = list(
 	"Hidden",
