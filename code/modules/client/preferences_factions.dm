@@ -51,7 +51,11 @@ var/global/list/faction_choices = list(
 	"Zeng-Hu Pharmaceuticals",
 	"Hephaestus Industries",
 	"Morpheus Cyberkinetics",
-	"Xion Manufacturing Group"
+	"Xion Manufacturing Group",
+	"Hedberg-Hammarstrom",
+	"Kaleidoscope Cosmetics",
+	"Stealth Assault Enterprises",
+	"Proxima Centauri Risk Control",
 	)
 
 var/global/list/antag_faction_choices = list(
