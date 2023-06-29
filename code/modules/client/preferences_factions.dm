@@ -55,7 +55,7 @@ var/global/list/faction_choices = list(
 	"Hedberg-Hammarstrom",
 	"Kaleidoscope Cosmetics",
 	"Stealth Assault Enterprises",
-	"Proxima Centauri Risk Control",
+	"Proxima Centauri Risk Control"
 	)
 
 var/global/list/antag_faction_choices = list(
@@ -92,7 +92,7 @@ var/global/list/religion_choices = list(
 	"Nock",
 	"Starlit Path",
 	"Singulitarian Worship",
-	"The Unity,"
+	"The Unity",
 	"Xilar Qall",
 	"Tajr-kii Rarkajar",
 	"Agnosticism",
