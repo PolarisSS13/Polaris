@@ -1,0 +1,109 @@
+"bq" = (/obj/structure/toilet,/obj/machinery/light/small{dir = 1},/obj/random/plushie,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"bC" = (/obj/structure/girder,/turf/simulated/floor,/area/submap/reststop)
+"bN" = (/obj/random/soap,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"cq" = (/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"ct" = (/obj/machinery/door/window/eastleft,/obj/structure/table/rack,/obj/random/drinksoft,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"cZ" = (/obj/item/material/shard,/turf/simulated/floor/tiled,/area/submap/reststop)
+"dq" = (/obj/structure/table/rack,/obj/random/maintenance,/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled,/area/submap/reststop)
+"dv" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/outdoors/dirt/sif,/area/submap/reststop)
+"em" = (/obj/structure/table/rack,/obj/random/powercell,/turf/simulated/floor/tiled,/area/submap/reststop)
+"fh" = (/obj/structure/flora/tree/sif,/turf/template_noop,/area/submap/reststop)
+"fJ" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/tiled,/area/submap/reststop)
+"gQ" = (/obj/random/junk,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"gV" = (/obj/structure/toilet,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"hd" = (/obj/structure/sink{dir = 4; icon_state = "sink"; pixel_x = 11; pixel_y = 0},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"iO" = (/obj/machinery/power/port_gen/pacman,/obj/structure/cable{d2 = 4; icon_state = "0-4"},/turf/simulated/floor/tiled/eris/dark/techfloor_grid,/area/submap/reststop)
+"iV" = (/obj/structure/sink{dir = 8; icon_state = "sink"; pixel_x = -12; pixel_y = 2},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"jb" = (/obj/structure/flora/grass/green,/turf/template_noop,/area/submap/reststop)
+"ka" = (/obj/structure/table/rack,/obj/item/cell/high,/turf/simulated/floor/tiled,/area/submap/reststop)
+"kM" = (/obj/structure/window/reinforced{dir = 8},/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"kZ" = (/obj/structure/table/standard,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"lc" = (/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/tiled,/area/submap/reststop)
+"lk" = (/obj/machinery/light/small{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"nd" = (/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"nj" = (/obj/machinery/door/window/eastleft,/obj/structure/table/rack,/obj/random/snack,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"nS" = (/obj/structure/window/basic{dir = 8; layer = 2.8},/obj/structure/window/basic,/obj/structure/table/standard,/obj/item/toy/plushie/marble_fox,/turf/simulated/floor/tiled,/area/submap/reststop)
+"pv" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/hooded/wintercoat/parka/green,/turf/simulated/floor/tiled,/area/submap/reststop)
+"qm" = (/obj/structure/toilet,/obj/random/contraband,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"qC" = (/obj/structure/window/basic,/obj/structure/table/standard,/obj/random/plushie,/turf/simulated/floor/tiled,/area/submap/reststop)
+"sz" = (/obj/structure/table/standard,/obj/structure/flora/pottedplant,/obj/item/gun/projectile/revolver/webley,/obj/structure/window/reinforced{dir = 1},/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"sB" = (/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled,/area/submap/reststop)
+"tW" = (/obj/random/mob/mouse,/turf/simulated/floor/outdoors/dirt/sif,/area/submap/reststop)
+"uv" = (/turf/simulated/wall/wood,/area/submap/reststop)
+"uy" = (/obj/structure/curtain/open/shower,/obj/machinery/shower{dir = 8; pixel_x = -5; pixel_y = -1},/obj/item/towel/random,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"vT" = (/obj/machinery/door/airlock/glass,/turf/simulated/floor/tiled,/area/submap/reststop)
+"wj" = (/obj/machinery/door/window/eastleft,/obj/structure/table/rack,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"wN" = (/obj/structure/table/standard,/obj/random/cigarettes,/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"xb" = (/obj/random/vendordrink,/turf/simulated/floor/tiled,/area/submap/reststop)
+"xL" = (/obj/structure/table/rack,/obj/item/stack/medical/ointment,/turf/simulated/floor/tiled,/area/submap/reststop)
+"yj" = (/obj/random/vendorfood,/turf/simulated/floor/tiled,/area/submap/reststop)
+"yq" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"zW" = (/obj/structure/table/rack,/turf/simulated/floor/tiled,/area/submap/reststop)
+"Ap" = (/obj/effect/decal/cleanable/dirt,/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled,/area/submap/reststop)
+"BH" = (/obj/structure/table/standard,/turf/simulated/floor/tiled,/area/submap/reststop)
+"Ce" = (/turf/template_noop,/area/submap/reststop)
+"Ch" = (/obj/structure/flora/tree/sif,/turf/simulated/floor/outdoors/dirt/sif,/area/submap/reststop)
+"CE" = (/obj/machinery/door/airlock/freezer,/turf/simulated/floor/tiled/eris/dark/techfloor_grid,/area/submap/reststop)
+"CY" = (/obj/machinery/light{dir = 4},/obj/random/junk,/turf/simulated/floor/tiled,/area/submap/reststop)
+"Dh" = (/obj/structure/table/standard,/obj/random/tech_supply/nofail,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/tiled/eris/dark/techfloor_grid,/area/submap/reststop)
+"Ey" = (/obj/structure/table/standard,/obj/structure/window/reinforced{dir = 1},/obj/item/flame/lighter/random,/obj/item/flame/lighter/random,/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"ED" = (/obj/structure/closet/crate/trashcart,/obj/random/trash,/obj/random/trash,/obj/random/trash,/obj/random/maintenance/clean,/turf/simulated/floor/outdoors/dirt/sif,/area/submap/reststop)
+"EV" = (/obj/machinery/door/airlock/maintenance,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"Gq" = (/obj/structure/animal_den,/turf/simulated/floor/outdoors/grass/sif,/area/submap/reststop)
+"GF" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"GZ" = (/obj/structure/table/standard,/obj/random/cigarettes,/obj/random/cigarettes,/obj/machinery/light/small,/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"HM" = (/obj/effect/floor_decal/rust,/obj/structure/girder/displaced,/turf/simulated/floor/plating/sif/planetuse,/area/submap/reststop)
+"It" = (/obj/machinery/door/airlock/maintenance,/turf/simulated/floor/tiled/eris/dark/techfloor_grid,/area/submap/reststop)
+"IP" = (/turf/simulated/floor/outdoors/grass/sif,/area/submap/reststop)
+"Jd" = (/obj/structure/table/rack,/obj/random/mre,/turf/simulated/floor/tiled,/area/submap/reststop)
+"Kp" = (/obj/random/junk,/obj/machinery/light/small{dir = 4},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"LB" = (/obj/structure/cable{d2 = 8; icon_state = "0-8"},/obj/machinery/power/apc{dir = 1; name = "north bump"; pixel_y = 24},/turf/simulated/floor/tiled/eris/dark/techfloor_grid,/area/submap/reststop)
+"Ma" = (/obj/structure/table/rack,/obj/machinery/door/window/eastleft,/obj/random/drinksoft,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"Mi" = (/obj/structure/curtain/open/shower,/obj/machinery/shower{dir = 4; pixel_x = 5; pixel_y = -1},/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"Oh" = (/obj/structure/table/standard,/obj/machinery/cash_register,/obj/machinery/door/window/northleft,/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"OO" = (/obj/random/trash,/turf/simulated/floor/tiled/eris/dark/techfloor_grid,/area/submap/reststop)
+"Pm" = (/turf/template_noop,/area/template_noop)
+"QN" = (/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"Rs" = (/obj/effect/decal/cleanable/dirt,/obj/item/assembly/mousetrap/armed,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"RC" = (/obj/random/trash,/turf/simulated/floor/tiled,/area/submap/reststop)
+"UJ" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"Vj" = (/obj/machinery/door/window/westright,/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"WS" = (/obj/machinery/door/airlock/freezer,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"Xi" = (/obj/structure/table/rack,/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled,/area/submap/reststop)
+"Xz" = (/obj/structure/simple_door/wood,/turf/simulated/floor/tiled/neutral,/area/submap/reststop)
+"XD" = (/obj/structure/flora/sif/frostbelle,/turf/simulated/floor/outdoors/grass/sif,/area/submap/reststop)
+"XF" = (/turf/simulated/floor/tiled,/area/submap/reststop)
+"Yh" = (/obj/effect/wingrille_spawn,/turf/simulated/floor,/area/submap/reststop)
+"Yr" = (/obj/random/junk,/turf/simulated/floor/tiled,/area/submap/reststop)
+"YB" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/tiled,/area/submap/reststop)
+"Zc" = (/turf/simulated/floor/outdoors/dirt/sif,/area/submap/reststop)
+"Zm" = (/obj/structure/table/standard,/obj/random/drinkbottle,/turf/simulated/floor/tiled/hydro,/area/submap/reststop)
+"ZO" = (/obj/structure/flora/grass/both,/turf/template_noop,/area/submap/reststop)
+
+(1,1,1) = {"
+PmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPm
+PmCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeZcCeCeCePm
+PmCeCefhCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeZcCeCeCePm
+PmCeCeCeCeCeCeCeuvuvuvuvuvuvuvCeCeCeCeCeCeCeCeCePm
+PmCeCeCeCeuvuvuvuvgVuvbquvqmuvCeCeCeCeZcCeCeCeCePm
+PmCeCeCeCeuvMiuyuvXzuvXzuvXzuvCefhCeZcCeCeCeCeCePm
+PmCeCeCeCeuvcqQNQNQNbNQNQNGFuvCeCeCeCeCeCeCeCeCePm
+PmCeCeZcuvuvuvuvuvuvXzuviVhduvCeCeCeZOCeZcCeCeCePm
+PmCeZcdvuviOLBuvxbyjXFuvuvuvuvuvCeCeCeZcCeCeCeCePm
+PmCeZcEDuvDhOOItXFXFXFnSqCBHqCuvuvCeCeZcCeCefhCePm
+PmCeZcdvuvuvCEuvfJRCXFXFXFcZXFCYuvCeCeZcZcCeCeCePm
+PmZcZcuvuvQNUJuvXFsBdqpvemzWXFXFYhCeZcZcZcCeCeCePm
+PmCeZcEVUJgQQNnjsBIPChsBXFXFXFYBvTZcZcZcZcCeCeCePm
+PmCeCeuvlkUJQNwjsBGqXikaJdxLYBXFvTZcZcZcZcZcCeCePm
+PmCeCeuvyqQNQNnjtWsBXFXFXFXFXFRCYhCeZcZcZcZcCeCePm
+PmCeCeuvyqQNQNctsBXFlcuvszOhkZEyuvCeZcZcZcZcCeCePm
+PmCeCeuvyqUJQNMaXFYrXFkMndndndnduvCeZcZcZcZcCeCePm
+PmCeCeuvQNQNKpuvfJXFsBVjndndndnduvCeZcZcZcZcCeCePm
+PmCeCeuvuvgQRsWSYBApZckMwNGZZmZmuvCeZcZcZcCejbCePm
+PmCeCeCeuvuvuvuvbCHMuvuvuvuvuvuvuvCeCeZcZcCeCeCePm
+PmCeCeCeCeCeCeIPIPXDIPCeCeCeCeCeCeCeCeZcCeCeCeCePm
+PmCeCefhCeCeCeCeCeIPIPIPCeCeCeCeCeCeZcCeCeCeCeCePm
+PmCeCeCefhCeCeCeCeCeCeCeCeCeCeCefhCeCeCeZcCeCeCePm
+PmCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeCeZcCeCeCePm
+PmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPmPm
+"}

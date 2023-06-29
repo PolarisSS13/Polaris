@@ -288,3 +288,9 @@
 	desc = "A temporarily abandoned VR den, still functional."
 	mappath = 'maps/submaps/surface_submaps/plains/VRDen.dmm'
 	cost = 10
+
+/datum/map_template/surface/reststop
+	name = "Rest Stop"
+	desc = "Once this place was a nice spot to take a load off, now the wildlife call it home."
+	mappath = 'maps/submaps/cave_submaps/reststop.dmm'
+	cost = 20

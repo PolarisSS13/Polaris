@@ -134,3 +134,7 @@
 /area/submap/VRDen
 	name = "POI - VR Den"
 	ambience = AMBIENCE_TECH_RUINS
+	
+/area/submap/reststop
+	name = "POI - Rest Stop"
+	ambience = AMBIENCE_SIF
