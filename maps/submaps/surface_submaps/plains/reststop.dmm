@@ -246,6 +246,7 @@
 /area/submap/reststop)
 "Cy" = (
 /obj/structure/table/rack/shelf,
+/obj/random/maintenance/clean,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "Ei" = (
@@ -327,8 +328,9 @@
 /obj/machinery/power/apc{
 	dir = 1;
 	name = "north bump";
+	nightshift_setting = 2;
 	pixel_y = 24;
-	start_charge = 0
+	start_charge = -1
 	},
 /turf/simulated/floor/tiled/eris/dark/techfloor_grid,
 /area/submap/reststop)
@@ -341,7 +343,8 @@
 /obj/random/trash,
 /obj/random/trash,
 /obj/random/trash,
-/obj/random/maintenance/clean,
+/obj/random/junk,
+/obj/random/junk,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/submap/reststop)
 "Mh" = (
@@ -401,6 +404,7 @@
 /obj/structure/window/basic,
 /obj/structure/table/standard,
 /obj/random/plushie,
+/obj/random/plushie,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "WR" = (
@@ -440,9 +444,9 @@
 /turf/simulated/floor/tiled/neutral,
 /area/submap/reststop)
 "ZN" = (
-/obj/random/maintenance,
 /obj/effect/floor_decal/rust,
 /obj/structure/table/rack/shelf,
+/obj/random/maintenance/clean,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 
@@ -623,7 +627,7 @@ qv
 Mh
 bh
 bh
-bh
+bw
 bh
 bh
 qa
@@ -836,7 +840,7 @@ kJ
 kJ
 UM
 iU
-iU
+qq
 iU
 kq
 iU
