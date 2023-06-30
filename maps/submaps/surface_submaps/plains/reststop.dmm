@@ -116,7 +116,7 @@
 /area/submap/reststop)
 "mS" = (
 /obj/structure/table/rack,
-/obj/item/clothing/suit/storage/hooded/wintercoat/parka/green,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "nO" = (
@@ -385,6 +385,10 @@
 /area/submap/reststop)
 "TK" = (
 /obj/structure/flora/tree/sif,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/submap/reststop)
+"Uj" = (
+/obj/machinery/space_heater,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/submap/reststop)
 "UM" = (
@@ -725,7 +729,7 @@ iU
 fO
 iU
 qR
-Jd
+Uj
 kJ
 Ba
 Ba
