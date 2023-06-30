@@ -34,7 +34,7 @@
 
 /obj/structure/reagent_dispensers/bidon/trigger
 	name = "trigger-stasis B.I.D.O.N. canister"
-	desc = "An advanced B.I.D.O.N. canister with stasis function that can be temporarily disabled with a multitool."
+	desc = "An advanced B.I.D.O.N. canister with a stasis function that can be temporarily disabled with a multitool."
 	icon_state = "bidon_adv"
 	atom_flags = ATOM_REAGENTS_SKIP_REACTIONS //Tho its not a subtype its meant to be
 	filling_states = list(20,40,60,80,100)
@@ -52,9 +52,11 @@
 /obj/structure/reagent_dispensers/bidon/trigger/attackby(obj/item/I, mob/user)
 	if(!timing)
 		if(I.is_multitool())
+			timing=TRUE
 			to_chat(user, SPAN_NOTICE("You start the timer."))
 			spawn(10 * timer_till_mixing)
 			timer_end()
+			timing=FALSE
 			return
 	else
 		. = ..()
@@ -64,6 +66,7 @@
 	atom_flags &= ~(ATOM_REAGENTS_SKIP_REACTIONS)
 	spawn(10)
 	atom_flags |= ATOM_REAGENTS_SKIP_REACTIONS
+	reagent.handle_reactions()
 
 /obj/structure/reagent_dispensers/bidon/Initialize(mapload, ...)
 	. = ..()
