@@ -113,10 +113,6 @@
 		if(standard_pour_into(user, target, TRUE))
 			return
 
-	//Pour into if beaker is full
-	if(reagents && !reagents.get_free_space() && standard_pour_into(user, target))
-		return 1
-
 	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
 		return 1
 
