@@ -32,6 +32,9 @@
 /// This atom is queued for an overlay update.
 #define ATOM_AWAITING_OVERLAY_UPDATE (1<<5)
 
+///The Reagent cannot be refilled
+#define	ATOM_REAGENTS_NO_REFILL (1<<6)
+
 
 /* -- /turf/var/turf_flags -- */
 

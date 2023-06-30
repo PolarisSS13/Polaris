@@ -113,6 +113,9 @@ Class Procs:
 	var/obj/item/circuitboard/circuit = null
 	var/list/materials = list() //Exclusively used for machines that take materials - lathes, fabricators etc. Honestly overdue for a whole lathe/fab refactor at some point.
 
+	var/anchor_type = null //What type of object can be anchored to a machine
+	var/anchor_direction = null //The immediate directions an object can be anchored to a machine. If null, any direction is allowed.
+
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
 	required_dexterity = MOB_DEXTERITY_TOUCHSCREENS

@@ -10,9 +10,12 @@
 	anchored = 0
 	pressure_resistance = 2*ONE_ATMOSPHERE
 
+	var/volume = 5000
+
+	var/has_hose = TRUE
 	var/obj/item/hose_connector/input/active/InputSocket
 	var/obj/item/hose_connector/output/active/OutputSocket
-
+	atom_flags = ATOM_REAGENTS_NO_REFILL
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = list(10,25,50,100)
 
@@ -20,24 +23,27 @@
 	src.add_fingerprint(user)
 
 /obj/structure/reagent_dispensers/Destroy()
-	QDEL_NULL(InputSocket)
-	QDEL_NULL(OutputSocket)
+	if(has_hose)
+		QDEL_NULL(InputSocket)
+		QDEL_NULL(OutputSocket)
 
 	..()
 
 /obj/structure/reagent_dispensers/Initialize()
-	var/datum/reagents/R = new/datum/reagents(5000)
+	var/datum/reagents/R = new/datum/reagents(volume)
 	reagents = R
 	R.my_atom = src
 	if (!possible_transfer_amounts)
 		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
 
-	InputSocket = new(src)
-	InputSocket.carrier = src
-	OutputSocket = new(src)
-	OutputSocket.carrier = src
-
+	if(has_hose)
+		InputSocket = new(src)
+		InputSocket.carrier = src
+		OutputSocket = new(src)
+		OutputSocket.carrier = src
 	. = ..()
+
+
 
 /obj/structure/reagent_dispensers/examine(mob/user)
 	. = ..()
@@ -57,6 +63,9 @@
 	if (N)
 		amount_per_transfer_from_this = N
 
+/obj/structure/reagent_dispensers/blob_act()
+	qdel(src)
+
 /obj/structure/reagent_dispensers/ex_act(severity)
 	switch(severity)
 		if(1.0)
@@ -75,8 +84,6 @@
 		else
 	return
 
-/obj/structure/reagent_dispensers/blob_act()
-	qdel(src)
 
 
 
