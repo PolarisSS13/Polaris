@@ -2,7 +2,7 @@
 //this is big movable beaker
 /obj/structure/reagent_dispensers/bidon
 	name = "B.I.D.O.N. canister"
-	desc = "Bulk Industrial Dispenser Omnitech-Nanochem. A canister with acid-resistant linings intended for handling big volumes of chemicals."
+	desc = "Blue-Ink Dispenser Omnitech-Nanochem. A canister with acid-resistant linings intended for handling big volumes of chemicals."
 	icon = 'icons/obj/machines/chemistry.dmi'
 	icon_state = "bidon"
 	amount_per_transfer_from_this = 30
