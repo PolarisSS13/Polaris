@@ -275,7 +275,7 @@
 /turf/simulated/floor,
 /area/submap/reststop)
 "FJ" = (
-/obj/random/mob/mouse,
+/mob/living/simple_mob/animal/passive/hare,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/submap/reststop)
 "FM" = (
