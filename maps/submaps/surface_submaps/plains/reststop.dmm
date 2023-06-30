@@ -19,8 +19,8 @@
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "bv" = (
-/obj/structure/table/rack,
 /obj/item/cell/high,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "bw" = (
@@ -53,8 +53,8 @@
 /turf/simulated/floor/tiled/eris/dark/techfloor_grid,
 /area/submap/reststop)
 "eu" = (
-/obj/structure/table/rack,
 /obj/item/stack/medical/ointment,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "fq" = (
@@ -115,8 +115,8 @@
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "mS" = (
-/obj/structure/table/rack,
 /obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "nO" = (
@@ -181,8 +181,8 @@
 /turf/simulated/floor/tiled/eris/dark/techfloor_grid,
 /area/submap/reststop)
 "qI" = (
-/obj/structure/table/rack,
 /obj/effect/floor_decal/rust,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "qR" = (
@@ -213,9 +213,13 @@
 	},
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
+"zD" = (
+/obj/structure/reagent_dispensers/coolanttank,
+/turf/simulated/floor/tiled/neutral,
+/area/submap/reststop)
 "Ab" = (
-/obj/structure/table/rack,
 /obj/random/powercell,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "Aw" = (
@@ -241,7 +245,7 @@
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "Cy" = (
-/obj/structure/table/rack,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "Ei" = (
@@ -374,9 +378,13 @@
 	},
 /turf/simulated/floor/tiled/neutral,
 /area/submap/reststop)
+"SF" = (
+/obj/machinery/space_heater,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/submap/reststop)
 "SH" = (
-/obj/structure/table/rack,
 /obj/random/mre,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "TJ" = (
@@ -385,10 +393,6 @@
 /area/submap/reststop)
 "TK" = (
 /obj/structure/flora/tree/sif,
-/turf/simulated/floor/outdoors/dirt/sif,
-/area/submap/reststop)
-"Uj" = (
-/obj/machinery/space_heater,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/submap/reststop)
 "UM" = (
@@ -434,9 +438,9 @@
 /turf/simulated/floor/tiled/neutral,
 /area/submap/reststop)
 "ZN" = (
-/obj/structure/table/rack,
 /obj/random/maintenance,
 /obj/effect/floor_decal/rust,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 
@@ -566,7 +570,7 @@ fq
 Oo
 Oo
 Oo
-bh
+zD
 kJ
 kJ
 pi
@@ -729,7 +733,7 @@ iU
 fO
 iU
 qR
-Uj
+SF
 kJ
 Ba
 Ba
