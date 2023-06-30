@@ -9,6 +9,7 @@
 	},
 /obj/item/flame/lighter/random,
 /obj/item/flame/lighter/random,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "bs" = (
@@ -16,6 +17,7 @@
 /obj/random/cigarettes,
 /obj/random/cigarettes,
 /obj/machinery/light/small,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "bv" = (
@@ -25,7 +27,7 @@
 /area/submap/reststop)
 "bw" = (
 /obj/random/junk,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "bS" = (
 /obj/structure/simple_door/wood,
@@ -42,7 +44,7 @@
 /obj/machinery/door/window/eastleft,
 /obj/structure/table/rack,
 /obj/random/drinksoft,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "dR" = (
 /obj/structure/flora/grass/green,
@@ -50,7 +52,7 @@
 /area/submap/reststop)
 "ee" = (
 /obj/machinery/door/airlock/maintenance,
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/turf/simulated/floor/tiled/techmaint,
 /area/submap/reststop)
 "eu" = (
 /obj/item/stack/medical/ointment,
@@ -62,7 +64,7 @@
 	dir = 8
 	},
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "fO" = (
 /obj/machinery/light{
@@ -73,7 +75,7 @@
 /area/submap/reststop)
 "fS" = (
 /obj/machinery/door/airlock/freezer,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "io" = (
 /obj/structure/table/standard,
@@ -81,11 +83,14 @@
 /obj/machinery/light/small{
 	dir = 8
 	},
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/obj/item/frame/apc,
+/obj/item/module/power_control,
+/turf/simulated/floor/tiled/techmaint,
 /area/submap/reststop)
 "iR" = (
 /obj/structure/table/standard,
 /obj/random/cigarettes,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "iU" = (
@@ -153,7 +158,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "qj" = (
 /obj/structure/curtain/open/shower,
@@ -170,7 +175,7 @@
 /area/submap/reststop)
 "qv" = (
 /obj/machinery/door/airlock/freezer,
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/turf/simulated/floor/tiled/techmaint,
 /area/submap/reststop)
 "qz" = (
 /obj/machinery/power/port_gen/pacman,
@@ -178,7 +183,7 @@
 	d2 = 4;
 	icon_state = "0-4"
 	},
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/turf/simulated/floor/tiled/techmaint,
 /area/submap/reststop)
 "qI" = (
 /obj/effect/floor_decal/rust,
@@ -192,7 +197,7 @@
 "uh" = (
 /obj/machinery/door/window/eastleft,
 /obj/structure/table/rack,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "vf" = (
 /obj/machinery/light{
@@ -204,18 +209,19 @@
 /area/submap/reststop)
 "wj" = (
 /obj/random/vendorfood,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/dark,
 /area/submap/reststop)
 "yz" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced{
 	dir = 1
 	},
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "zD" = (
 /obj/structure/reagent_dispensers/coolanttank,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "Ab" = (
 /obj/random/powercell,
@@ -242,11 +248,10 @@
 /obj/structure/window/basic,
 /obj/structure/table/standard,
 /obj/item/toy/plushie/marble_fox,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/dark,
 /area/submap/reststop)
 "Cy" = (
 /obj/structure/table/rack/shelf,
-/obj/random/maintenance/clean,
 /turf/simulated/floor/tiled,
 /area/submap/reststop)
 "Ei" = (
@@ -256,6 +261,7 @@
 /obj/structure/window/reinforced{
 	dir = 1
 	},
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "Ej" = (
@@ -269,6 +275,7 @@
 /obj/structure/window/reinforced{
 	dir = 8
 	},
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "ED" = (
@@ -276,11 +283,15 @@
 /obj/structure/window/reinforced/full,
 /turf/simulated/floor,
 /area/submap/reststop)
+"Ff" = (
+/turf/simulated/floor/tiled/freezer,
+/area/submap/reststop)
 "FJ" = (
 /mob/living/simple_mob/animal/passive/hare,
-/turf/simulated/floor/outdoors/dirt/sif,
+/turf/simulated/floor/tiled,
 /area/submap/reststop)
 "FM" = (
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "FP" = (
@@ -295,6 +306,7 @@
 "Gf" = (
 /obj/structure/table/standard,
 /obj/random/drinkbottle,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "GS" = (
@@ -303,18 +315,19 @@
 /area/submap/reststop)
 "Hj" = (
 /obj/structure/table/standard,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/dark,
 /area/submap/reststop)
 "IF" = (
 /obj/machinery/door/window/eastleft,
 /obj/structure/table/rack,
 /obj/random/snack,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "IQ" = (
 /obj/structure/table/standard,
 /obj/machinery/cash_register,
 /obj/machinery/door/window/northleft,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "Jd" = (
@@ -325,18 +338,11 @@
 	d2 = 8;
 	icon_state = "0-8"
 	},
-/obj/machinery/power/apc{
-	dir = 1;
-	name = "north bump";
-	nightshift_setting = 2;
-	pixel_y = 24;
-	start_charge = -1
-	},
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/turf/simulated/floor/tiled/techmaint,
 /area/submap/reststop)
 "KT" = (
 /obj/random/vendordrink,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/dark,
 /area/submap/reststop)
 "Lz" = (
 /obj/structure/closet/crate/trashcart,
@@ -349,7 +355,7 @@
 /area/submap/reststop)
 "Mh" = (
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "Na" = (
 /obj/structure/flora/sif/frostbelle,
@@ -357,7 +363,7 @@
 /area/submap/reststop)
 "Oo" = (
 /obj/structure/loot_pile/maint/trash,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "OM" = (
 /obj/random/soap,
@@ -405,25 +411,26 @@
 /obj/structure/table/standard,
 /obj/random/plushie,
 /obj/random/plushie,
-/turf/simulated/floor/tiled,
+/turf/simulated/floor/tiled/dark,
 /area/submap/reststop)
 "WR" = (
 /obj/random/trash,
-/turf/simulated/floor/tiled/eris/dark/techfloor_grid,
+/turf/simulated/floor/tiled/techmaint,
 /area/submap/reststop)
 "Xm" = (
 /obj/structure/table/rack,
 /obj/machinery/door/window/eastleft,
 /obj/random/drinksoft,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "XM" = (
 /obj/effect/decal/cleanable/dirt,
 /obj/item/assembly/mousetrap/armed,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/tiled/freezer,
 /area/submap/reststop)
 "Ym" = (
 /obj/machinery/door/window/westright,
+/obj/effect/floor_decal/corner_oldtile/red/diagonal,
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "Zd" = (
@@ -436,12 +443,10 @@
 /turf/simulated/floor/tiled/neutral,
 /area/submap/reststop)
 "ZE" = (
-/obj/structure/toilet,
 /obj/machinery/light/small{
-	dir = 1
+	dir = 4
 	},
-/obj/random/maintenance,
-/turf/simulated/floor/tiled/neutral,
+/turf/simulated/floor/outdoors/dirt/sif,
 /area/submap/reststop)
 "ZN" = (
 /obj/effect/floor_decal/rust,
@@ -516,7 +521,7 @@ pi
 Jd
 Jd
 Jd
-Jd
+ZE
 Jd
 pi
 pi
@@ -597,13 +602,13 @@ kJ
 qz
 io
 kJ
-bh
+Ff
 bw
 Mh
-bh
-bh
+Ff
+Ff
 Mh
-bh
+Ff
 bw
 kJ
 pi
@@ -625,11 +630,11 @@ Jp
 WR
 qv
 Mh
-bh
-bh
+Ff
+Ff
 bw
-bh
-bh
+Ff
+Ff
 qa
 XM
 kJ
@@ -698,7 +703,7 @@ lh
 pi
 pi
 kJ
-ZE
+cQ
 bS
 bh
 kJ
@@ -729,7 +734,7 @@ kJ
 kJ
 OM
 bS
-iU
+kq
 iU
 iU
 ZN
