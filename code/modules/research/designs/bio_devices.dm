@@ -59,3 +59,26 @@
 	build_path = /obj/item/analyzer/plant_analyzer
 	sort_string = "JAADA"
 
+/datum/design/item/biotech/bidon
+	desc = "A lumbering metal drum used to hold large amounts of chemicals."
+	id = "bidon"
+	req_tech = list(TECH_MATERIAL = 4, TECH_BIO = 4)
+	materials = list(MAT_STEEL = 2000, "glass" = 1000)
+	build_path = /obj/structure/reagent_dispensers/bidon
+	sort_string = "IAAAC"
+
+/datum/design/item/biotech/advanced_bidon
+	desc = "A lumbering metal drum used to hold large amounts of chemicals in sustained cryostasis."
+	id = "advanced_bidon"
+	req_tech = list(TECH_MATERIAL = 6, TECH_BIO = 4, TECH_DATA = 5)
+	materials = list(MAT_STEEL = 2000, "glass" = 1000, MAT_SILVER = 100)
+	build_path = /obj/structure/reagent_dispensers/bidon/advanced
+	sort_string = "IAAAD"
+
+/datum/design/item/biotech/trigger_bidon
+	desc = "A dubiously legal metal drum that can be triggered to mix all of its contents at the same time."
+	id = "trigger_bidon"
+	req_tech = list(TECH_MATERIAL = 6, TECH_BIO = 4, TECH_DATA = 5, TECH_ILLEGAL = 3)
+	materials = list(MAT_STEEL = 2000, "glass" = 1000, MAT_GOLD = 500)
+	build_path = /obj/structure/reagent_dispensers/bidon/trigger
+	sort_string = "IAAAE"
