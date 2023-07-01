@@ -3,40 +3,40 @@
 /obj/structure/ore_box,
 /obj/effect/floor_decal/corner/yellow/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "af" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "ay" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/asteroid_steel,
-/area/space)
+/area/submap/CollapsedMine)
 "aD" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "aJ" = (
 /obj/effect/spawner/gibs/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "aO" = (
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "bf" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bi" = (
 /obj/effect/floor_decal/corner/red/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bl" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
@@ -44,30 +44,30 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bn" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bp" = (
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bs" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bu" = (
 /obj/machinery/computer/arcade,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "bx" = (
 /obj/machinery/sleep_console{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "bH" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/eastright,
@@ -75,33 +75,33 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bI" = (
 /obj/structure/bed/padded,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bJ" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /obj/item/ore/glass,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "bK" = (
 /obj/item/ore/slag{
 	desc = "Well at least Arthur doesn't have to share now...";
 	name = "pet rock"
 	},
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "bQ" = (
 /obj/effect/decal/cleanable/filth,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "bR" = (
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "cb" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/paleblue/border{
@@ -109,7 +109,7 @@
 	},
 /obj/item/reagent_containers/blood/OMinus,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "cg" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/paleblue/border{
@@ -117,78 +117,78 @@
 	},
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "ch" = (
 /mob/living/simple_mob/animal/giant_spider/tunneler,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "ck" = (
 /turf/simulated/floor/tiled/asteroid_steel,
-/area/space)
+/area/submap/CollapsedMine)
 "cr" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /mob/living/simple_mob/mechanical/mining_drone,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ct" = (
 /obj/random/junk,
 /obj/structure/table/woodentable,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "cz" = (
 /turf/simulated/mineral/ignore_mapgen,
 /area/template_noop)
 "cB" = (
 /obj/item/material/shard,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "cH" = (
 /obj/machinery/light/poi{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "cX" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "db" = (
 /obj/effect/spider/spiderling/non_growing,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "dc" = (
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "dq" = (
 /obj/structure/girder/displaced,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "dt" = (
 /turf/simulated/wall/concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "dC" = (
 /obj/structure/loot_pile/maint/junk,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "dI" = (
 /obj/structure/barricade,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "dM" = (
 /obj/machinery/door/airlock/glass_security,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "dU" = (
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "dV" = (
 /obj/structure/table/standard,
 /obj/structure/table/standard,
@@ -199,36 +199,36 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "ea" = (
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ee" = (
 /obj/random/outcrop,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "eg" = (
 /obj/effect/decal/cleanable/blood,
 /obj/random/maintenance/security,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ei" = (
 /obj/machinery/light/small/flicker{
 	dir = 1
 	},
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "ej" = (
 /obj/structure/salvageable/console_os{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "ek" = (
 /obj/structure/loot_pile/surface/medicine_cabinet,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "er" = (
 /obj/structure/window/reinforced/holowindow{
 	dir = 4
@@ -236,7 +236,7 @@
 /obj/structure/table/rack/gun_rack,
 /obj/random/projectile/sec,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "eu" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/head/collectable/police,
@@ -245,7 +245,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "eQ" = (
 /obj/machinery/computer/security/telescreen/entertainment{
 	icon_state = "frame";
@@ -258,7 +258,7 @@
 /obj/item/pickaxe/hand,
 /obj/item/shovel,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "fc" = (
 /mob/living/simple_mob/animal/giant_spider/electric,
 /obj/effect/spider/stickyweb/dark,
@@ -266,7 +266,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "fd" = (
 /obj/item/material/shard,
 /obj/effect/floor_decal/corner/red/border{
@@ -274,73 +274,73 @@
 	},
 /obj/structure/flora/pottedplant/dead,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "fm" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "fn" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spawner/gibs/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "fp" = (
 /obj/machinery/light/flicker,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "fG" = (
 /obj/effect/spider/stickyweb,
 /obj/structure/loot_pile/maint,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "fP" = (
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "fS" = (
 /obj/machinery/optable,
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/remains/mummy1,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "fT" = (
 /turf/simulated/floor/wood/broken,
-/area/space)
+/area/submap/CollapsedMine)
 "gh" = (
 /obj/structure/barricade,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "gi" = (
 /obj/random/toolbox,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "gm" = (
 /obj/effect/floor_decal/techfloor/hole/right,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "go" = (
 /obj/structure/table/rack/shelf/steel,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "gD" = (
 /obj/effect/spider/stickyweb,
 /mob/living/simple_mob/animal/giant_spider/lurker,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "gJ" = (
 /obj/machinery/mech_recharger,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "gQ" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/rigged,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "gY" = (
 /obj/structure/closet/crate/freezer,
 /obj/random/meat,
@@ -349,43 +349,43 @@
 /obj/random/meat,
 /obj/random/meat,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "ha" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 5
 	},
 /obj/structure/table/bench/sifwooden/padded,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "hd" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/tech_supply/nofail,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "hf" = (
 /obj/machinery/washing_machine,
 /obj/item/clothing/under/corp/grayson,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "hg" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "hh" = (
 /obj/structure/animal_den,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "hs" = (
 /obj/random/mob/spider/mutant,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ht" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "hx" = (
 /obj/structure/window/reinforced/holowindow{
 	dir = 4
@@ -393,23 +393,23 @@
 /obj/random/handgun/sec,
 /obj/structure/table/rack/gun_rack,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "hB" = (
 /obj/effect/decal/remains/human,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "hF" = (
 /obj/machinery/door/airlock{
 	welded = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "hG" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/floor_decal/corner/red/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "hI" = (
 /obj/machinery/shower{
 	dir = 8;
@@ -418,17 +418,17 @@
 	},
 /obj/structure/curtain/open/shower/security,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/submap/CollapsedMine)
 "hK" = (
 /obj/structure/curtain/open/bed,
 /obj/machinery/shower,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "hN" = (
 /obj/structure/table/rack,
 /obj/structure/table/rack,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "hV" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/floor_decal/corner/red/border{
@@ -438,110 +438,110 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ib" = (
 /obj/machinery/vending/dinnerware,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "ig" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "in" = (
 /obj/random/trash,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "ip" = (
 /obj/item/cell/high,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "iq" = (
 /obj/structure/salvageable/console_os{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ir" = (
 /obj/effect/floor_decal/corner/red/border,
 /obj/machinery/light/flicker,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "iu" = (
 /obj/structure/closet/crate/grayson,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "iw" = (
 /obj/structure/bed/chair/comfy/teal{
 	dir = 8
 	},
 /obj/item/toy/plushie/marble_fox,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "ix" = (
 /obj/structure/loot_pile/maint,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "iz" = (
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/tiled/asteroid_steel,
-/area/space)
+/area/submap/CollapsedMine)
 "iB" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/towel/random,
 /obj/item/towel/random,
 /obj/machinery/light/small/poi,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "iE" = (
 /obj/structure/ore_box,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "iF" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/paleblue/border,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "iK" = (
 /obj/structure/table/woodentable,
 /obj/item/ammo_casing/a45,
 /obj/item/material/knife/machete/hatchet,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "iL" = (
 /obj/machinery/neonsign/cafe,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "iN" = (
 /obj/random/mob/spider/mutant,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "iP" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "iT" = (
 /obj/structure/bed/chair/wood{
 	dir = 1
 	},
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "iU" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/vomit,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "iW" = (
 /obj/random/projectile/scrapped_smg,
 /obj/structure/table/steel_reinforced,
@@ -551,17 +551,17 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "jc" = (
 /mob/living/simple_mob/mechanical/mining_drone,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "jf" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/spiderling,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "jo" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
@@ -570,71 +570,71 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "jt" = (
 /obj/structure/table/rack,
 /obj/item/storage/box/flare,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "jx" = (
 /obj/machinery/sleep_console{
 	dir = 4
 	},
 /obj/effect/floor_decal/corner/paleblue/border,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "jA" = (
 /obj/random/maintenance/anom,
 /obj/effect/spawner/gibs/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "jB" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "jG" = (
 /obj/structure/table/rack/shelf,
 /obj/item/clothing/head/collectable/police,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "jJ" = (
 /obj/random/snack,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "jK" = (
 /obj/structure/bed/chair/wood{
 	dir = 1
 	},
 /turf/simulated/floor/wood/broken,
-/area/space)
+/area/submap/CollapsedMine)
 "jM" = (
 /obj/effect/spider/stickyweb,
 /mob/living/simple_mob/animal/giant_spider/tunneler,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "jO" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "ko" = (
 /obj/machinery/washing_machine,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "kv" = (
 /obj/structure/closet/crate/grayson,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "kI" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "kO" = (
 /obj/item/material/shard,
 /obj/structure/table/steel_reinforced,
@@ -642,168 +642,168 @@
 /obj/effect/spider/stickyweb/dark,
 /obj/effect/floor_decal/corner/red/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "kY" = (
 /obj/structure/table/bench/sifwooden/padded,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "lc" = (
 /obj/structure/table/rack/gun_rack,
 /obj/item/shield/riot,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "lg" = (
 /obj/structure/bed/roller,
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "lo" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "lq" = (
 /obj/item/ore/glass,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "lt" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "lR" = (
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "lS" = (
 /obj/effect/floor_decal/corner/red/border,
 /mob/living/simple_mob/animal/giant_spider/electric,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "mf" = (
 /obj/effect/floor_decal/corner/yellow/border,
 /mob/living/simple_mob/animal/giant_spider{
 	health = 15
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "mh" = (
 /obj/effect/floor_decal/carpet,
 /obj/random/snack,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "mk" = (
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "ml" = (
 /obj/structure/bed/chair/office/dark,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "mv" = (
 /obj/effect/floor_decal/corner/pink/border,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "mz" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "mH" = (
 /obj/structure/girder/reinforced,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "mM" = (
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "mU" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "nb" = (
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/template_noop)
 "nf" = (
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "ng" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "nq" = (
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "nu" = (
 /obj/effect/floor_decal/carpet,
 /obj/random/junk,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "ny" = (
 /obj/structure/table/woodentable,
 /obj/item/gun/energy/mininglaser,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "nD" = (
 /obj/item/material/shard,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "nL" = (
 /obj/structure/animal_den,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "nW" = (
 /obj/structure/reagent_dispensers/fueltank,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "oe" = (
 /obj/effect/spider/stickyweb,
 /obj/random/meat,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "oj" = (
 /obj/structure/table/woodentable,
 /obj/item/cell/device/weapon/empty,
 /obj/item/clothing/accessory/material/makeshift/armguards,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "oJ" = (
 /obj/random/meat,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "oV" = (
 /obj/structure/closet/secure_closet/freezer/fridge,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "pb" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "pe" = (
 /obj/structure/loot_pile/surface,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "pi" = (
 /obj/effect/spawner/gibs,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "pm" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
@@ -811,16 +811,16 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "px" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "py" = (
 /obj/structure/table/steel_reinforced,
 /obj/effect/spider/spiderling/non_growing,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "pD" = (
 /obj/effect/floor_decal/carpet,
 /obj/structure/closet/crate/grayson,
@@ -830,19 +830,19 @@
 /obj/random/junk,
 /obj/random/dufflebag,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "pL" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/asteroid_steel,
-/area/space)
+/area/submap/CollapsedMine)
 "pR" = (
 /obj/structure/table/rack/shelf/steel,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "pT" = (
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "qc" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/eastleft,
@@ -850,45 +850,45 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "qd" = (
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "qe" = (
 /obj/structure/table/rack,
 /obj/item/shovel,
 /obj/item/pickaxe/drill,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "qs" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/spiderling_remains,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "qD" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/light/small/poi{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "qI" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
 	},
 /obj/structure/table/bench/sifwooden/padded,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "qV" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 9
 	},
 /obj/structure/flora/pottedplant/dead,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "qX" = (
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 6
@@ -896,33 +896,33 @@
 /obj/machinery/iv_drip,
 /obj/item/reagent_containers/blood/empty,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "rg" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "rl" = (
 /obj/item/stack/material/wood{
 	amount = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "rm" = (
 /obj/item/material/shard,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ro" = (
 /obj/structure/table/steel_reinforced,
 /obj/effect/spider/stickyweb/dark,
 /obj/effect/floor_decal/corner/red/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "rz" = (
 /mob/living/simple_mob/mechanical/mining_drone,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "rE" = (
 /obj/structure/closet/crate/grayson,
 /obj/effect/floor_decal/corner/yellow/border{
@@ -930,13 +930,13 @@
 	},
 /obj/effect/decal/remains/mummy1,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "rG" = (
 /obj/random/mob/spider/mutant,
 /obj/random/mob/spider/mutant,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "rR" = (
 /obj/effect/spider/spiderling/non_growing,
 /obj/effect/spider/stickyweb,
@@ -944,43 +944,43 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "rV" = (
 /obj/structure/sign/warning,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "rY" = (
 /obj/item/pickaxe/hand,
 /turf/simulated/floor/tiled/old_cargo/green,
-/area/space)
+/area/submap/CollapsedMine)
 "sm" = (
 /obj/structure/window/basic{
 	dir = 8
 	},
 /obj/machinery/light/small/poi,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/submap/CollapsedMine)
 "so" = (
 /obj/structure/table/marble,
 /obj/item/deskbell,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "sr" = (
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "sA" = (
 /obj/machinery/power/apc,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "sB" = (
 /obj/random/mob/spider,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "sC" = (
 /obj/random/outcrop,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "sI" = (
 /obj/structure/table/steel_reinforced,
 /obj/effect/spider/stickyweb/dark,
@@ -988,58 +988,58 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "sR" = (
 /obj/structure/loot_pile/maint/junk,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "tk" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/decal/remains/human,
 /obj/item/clothing/under/corp/grayson,
 /obj/item/clothing/shoes/boots/workboots,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "tl" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /mob/living/simple_mob/animal/giant_spider/tunneler,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "tu" = (
 /obj/structure/ore_box,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "tD" = (
 /obj/item/clothing/accessory/armor/armguards,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "tJ" = (
 /obj/random/mob/spider,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "tM" = (
 /obj/machinery/light/small/poi{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "tR" = (
 /obj/random/mob/spider/nurse,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "tU" = (
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "tW" = (
 /mob/living/simple_mob/mechanical/mining_drone,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ul" = (
 /obj/structure/salvageable/console_broken_os{
 	dir = 4
@@ -1048,11 +1048,11 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "up" = (
 /obj/machinery/door/airlock/glass_medical,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "us" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/tech_supply/component,
@@ -1060,55 +1060,55 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "uu" = (
 /obj/structure/table/marble,
 /obj/random/medical/lite/anom,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "uw" = (
 /obj/structure/ore_box,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "uC" = (
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "uL" = (
 /obj/structure/loot_pile/mecha/ripley,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "uR" = (
 /obj/random/mob/spider/nurse,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "uU" = (
 /obj/random/ammo,
 /obj/structure/table/rack/shelf,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vb" = (
 /obj/effect/floor_decal/techfloor/hole,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vd" = (
 /obj/effect/decal/cleanable/blood/gibs/robot,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "vf" = (
 /obj/machinery/door/airlock/multi_tile/metal,
 /obj/structure/barricade,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vg" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -1118,21 +1118,21 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vj" = (
 /obj/structure/table/marble,
 /obj/machinery/chemical_dispenser/bar_coffee,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "vp" = (
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vv" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/remains/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "vw" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 5
@@ -1141,75 +1141,75 @@
 /obj/item/pickaxe/hand,
 /obj/item/storage/excavation,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vN" = (
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "vU" = (
 /obj/structure/table/rack,
 /obj/item/shovel,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "vZ" = (
 /obj/structure/table/standard,
 /obj/item/storage/firstaid/surgery,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "wa" = (
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wc" = (
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "wf" = (
 /obj/structure/simple_door/wood,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wh" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
 /obj/structure/flora/pottedplant/dead,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wi" = (
 /obj/item/clothing/suit/space/void/mining/alt,
 /obj/item/clothing/head/helmet/space/void/mining/alt,
 /obj/effect/decal/remains/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "wl" = (
 /obj/item/cell/device/weapon/empty,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wm" = (
 /obj/effect/floor_decal/carpet,
 /obj/machinery/light/small/poi{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "ww" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spawner/gibs,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "wz" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wB" = (
 /obj/effect/spider/stickyweb,
 /obj/item/stack/material/wood{
 	amount = 10
 	},
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "wF" = (
 /obj/random/tech_supply,
 /obj/structure/table/steel_reinforced,
@@ -1218,22 +1218,22 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wL" = (
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/random/material/refined,
 /obj/random/material/refined,
 /obj/structure/closet/crate/grayson,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "wP" = (
 /obj/item/material/shard,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "wR" = (
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "xg" = (
 /obj/structure/salvageable/console_broken_os{
 	dir = 1
@@ -1242,7 +1242,7 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "xh" = (
 /obj/structure/closet/secure_closet/medical_wall/anesthetics{
 	pixel_x = -32
@@ -1252,16 +1252,16 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "xo" = (
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "xz" = (
 /obj/machinery/appliance/cooker/oven,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "xA" = (
 /obj/machinery/light/small/poi{
 	dir = 4
@@ -1271,24 +1271,24 @@
 	},
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "xB" = (
 /obj/structure/bed/chair/wood{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "xM" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/browndouble,
 /obj/effect/decal/remains/mummy1,
 /obj/random/snack,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "xR" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "xS" = (
 /obj/effect/floor_decal/carpet,
 /obj/structure/closet/wardrobe,
@@ -1296,40 +1296,40 @@
 /obj/item/clothing/under/corp/grayson_jump,
 /obj/item/clothing/head/hardhat/dblue,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "xZ" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/tech_supply/component,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "yr" = (
 /obj/item/ammo_casing/a45,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "yv" = (
 /obj/machinery/door/airlock/security,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "yw" = (
 /obj/machinery/door/airlock/security{
 	locked = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "yJ" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "yN" = (
 /obj/machinery/door/airlock/glass_security{
 	name = "Security Cells";
 	req_access = list(1)
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "yO" = (
 /obj/machinery/shower{
 	dir = 8;
@@ -1339,54 +1339,54 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/submap/CollapsedMine)
 "yY" = (
 /obj/structure/bed/chair/wood,
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/tiled/old_cargo/green,
-/area/space)
+/area/submap/CollapsedMine)
 "zk" = (
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "zs" = (
 /obj/structure/barricade,
 /obj/effect/floor_decal/corner/yellow/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "zw" = (
 /obj/random/junk,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "zy" = (
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "zA" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "zE" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "zM" = (
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "zY" = (
 /obj/random/mob/spider,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ac" = (
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/tiled/old_cargo/green,
-/area/space)
+/area/submap/CollapsedMine)
 "Al" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/maintenance/security,
@@ -1395,29 +1395,29 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "An" = (
 /obj/structure/table/woodentable,
 /obj/item/cell/device/weapon,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ap" = (
 /obj/structure/table/rack,
 /obj/random/powercell,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "AO" = (
 /obj/effect/floor_decal/corner/paleblue/border,
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "AP" = (
 /obj/machinery/vending/snack,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "AQ" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
@@ -1425,13 +1425,13 @@
 /obj/random/maintenance/security,
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "AV" = (
 /obj/structure/window/basic{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "AX" = (
 /obj/structure/closet/wardrobe,
 /obj/item/clothing/under/corp/grayson,
@@ -1440,7 +1440,7 @@
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "Ba" = (
 /obj/structure/closet/wardrobe,
 /obj/item/clothing/under/corp/grayson_jump,
@@ -1449,33 +1449,33 @@
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "Bc" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
 /obj/random/mob/spider/mutant,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Bh" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/browndouble,
 /obj/effect/decal/remains/mummy1,
 /obj/random/junk/anom,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "Bq" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Bt" = (
 /obj/effect/spider/stickyweb,
 /obj/structure/loot_pile/maint/trash,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "By" = (
 /obj/machinery/computer/security/telescreen/entertainment{
 	icon_state = "frame";
@@ -1486,28 +1486,28 @@
 	},
 /obj/structure/table/rack/shelf/steel,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "BH" = (
 /obj/structure/table/woodentable,
 /obj/random/junk,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "BL" = (
 /obj/structure/table/rack/gun_rack,
 /obj/item/clothing/accessory/armor/armorplate/bulletproof,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "BV" = (
 /obj/structure/barricade,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Cr" = (
 /obj/effect/wingrille_spawn/reinforced,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "Cv" = (
 /obj/structure/table/standard,
 /obj/structure/window/reinforced{
@@ -1518,22 +1518,22 @@
 	},
 /obj/item/toy/desk/fan,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "CB" = (
 /obj/effect/spider/stickyweb/dark,
 /obj/random/junk,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "CL" = (
 /obj/structure/table/woodentable,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "CR" = (
 /obj/structure/table/standard,
 /obj/item/pen,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "CS" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/tech_supply,
@@ -1541,13 +1541,13 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Dh" = (
 /obj/effect/floor_decal/corner/paleblue/border,
 /obj/effect/decal/cleanable/blood/drip,
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Dm" = (
 /obj/item/frame/apc,
 /obj/structure/closet/crate/grayson,
@@ -1556,14 +1556,14 @@
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Do" = (
 /obj/structure/curtain/open/bed,
 /obj/machinery/shower,
 /obj/effect/decal/remains/mummy2,
 /obj/random/revolver,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "Dq" = (
 /obj/structure/window/reinforced{
 	dir = 4
@@ -1571,7 +1571,7 @@
 /obj/structure/filingcabinet/chestdrawer,
 /obj/effect/floor_decal/corner/paleblue/border,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "DF" = (
 /obj/structure/table/steel_reinforced,
 /obj/structure/window/reinforced{
@@ -1582,50 +1582,50 @@
 	dir = 5
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "DI" = (
 /obj/structure/sign/directions/medical/surgery,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "DP" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /obj/random/mob/spider,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "DR" = (
 /obj/structure/table/marble,
 /obj/machinery/chemical_dispenser/bar_alc,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "DX" = (
 /obj/machinery/door/airlock/multi_tile/metal,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ed" = (
 /obj/random/mob/spider,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Eo" = (
 /obj/structure/bed/chair/wood{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/old_cargo/green,
-/area/space)
+/area/submap/CollapsedMine)
 "Eq" = (
 /obj/item/material/shard,
 /obj/structure/grille/broken,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "Et" = (
 /obj/structure/closet/secure_closet/brig{
 	id = "Cell 1";
 	name = "Cell 1 Locker"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "EC" = (
 /obj/item/ore/slag,
 /obj/item/ore/gold,
@@ -1650,25 +1650,25 @@
 /obj/item/ore/diamond,
 /obj/structure/closet/crate/grayson,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "EE" = (
 /obj/structure/loot_pile/maint,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "EO" = (
 /obj/structure/sink{
 	pixel_y = 16
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "EQ" = (
 /obj/structure/girder/displaced,
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/plating,
-/area/space)
+/area/submap/CollapsedMine)
 "ET" = (
 /obj/structure/table/bench/sifwooden/padded,
 /obj/effect/floor_decal/corner/paleblue/border{
@@ -1676,7 +1676,7 @@
 	},
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Ft" = (
 /obj/effect/floor_decal/carpet,
 /obj/machinery/light/small/poi{
@@ -1684,27 +1684,27 @@
 	},
 /obj/random/snack,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "Fz" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "FG" = (
 /obj/structure/kitchenspike,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "FH" = (
 /obj/item/ore/glass,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "FR" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "FS" = (
 /obj/structure/closet/wardrobe/detective,
 /obj/item/camera{
@@ -1718,7 +1718,7 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "FV" = (
 /obj/structure/table/standard,
 /obj/item/roller/adv,
@@ -1726,36 +1726,36 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Gb" = (
 /obj/item/ore/glass,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "Gc" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 5
 	},
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Gg" = (
 /obj/effect/spawner/gibs/human,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Go" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Gs" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/paleblue/border,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Gt" = (
 /obj/random/junk,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "Gu" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/floor_decal/corner/red/border{
@@ -1763,23 +1763,23 @@
 	},
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Gv" = (
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "GM" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
 	},
 /obj/structure/table/bench/sifwooden/padded,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "GN" = (
 /obj/structure/bed/roller,
 /obj/effect/decal/remains/mummy1,
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "GR" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
@@ -1788,15 +1788,15 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "GV" = (
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Hd" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "He" = (
 /obj/item/beartrap/hunting{
 	anchored = 1;
@@ -1804,7 +1804,7 @@
 	start_anomalous = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Hq" = (
 /obj/structure/closet/crate/grayson,
 /obj/item/ore/slag,
@@ -1827,7 +1827,7 @@
 /obj/item/ore/coal,
 /obj/item/ore/coal,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "Hv" = (
 /obj/machinery/sleeper{
 	dir = 4
@@ -1837,31 +1837,31 @@
 	},
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "HA" = (
 /obj/random/vendorfood,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "HE" = (
 /obj/effect/floor_decal/corner/red/border,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "HL" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "HP" = (
 /obj/structure/curtain/open/privacy,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "HR" = (
 /obj/item/pickaxe/drill,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "HV" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/decal/remains/human,
@@ -1871,35 +1871,35 @@
 /obj/item/pickaxe/drill,
 /obj/random/multiple/gun/projectile/rifle,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "HW" = (
 /obj/structure/table/woodentable,
 /obj/item/cell/device/weapon,
 /obj/random/maintenance,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "HZ" = (
 /obj/structure/bed/chair/wood{
 	dir = 4
 	},
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Ig" = (
 /obj/structure/barricade,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Io" = (
 /obj/structure/table/rack,
 /obj/item/stack/marker_beacon,
 /obj/item/stack/marker_beacon,
 /obj/item/gps/mining,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "Ip" = (
 /obj/random/meat,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Ir" = (
 /obj/structure/table/standard,
 /obj/structure/table/standard,
@@ -1907,33 +1907,33 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Is" = (
 /mob/living/simple_mob/animal/giant_spider{
 	health = 15
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Ix" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Iz" = (
 /obj/structure/table/woodentable,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "IA" = (
 /obj/structure/table/woodentable,
 /obj/random/medical/lite/anom,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "ID" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
 /mob/living/simple_mob/animal/giant_spider/electric,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "IE" = (
 /obj/structure/salvageable/console_broken_os{
 	dir = 4
@@ -1945,34 +1945,34 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "II" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/browndouble,
 /obj/random/plushie/anom,
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "IK" = (
 /obj/random/mob/spider,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "IR" = (
 /obj/machinery/vending/security,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "IT" = (
 /obj/machinery/mech_recharger,
 /obj/mecha/working/ripley/mining,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "IV" = (
 /obj/effect/floor_decal/carpet,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "IX" = (
 /obj/structure/salvageable/console_broken_os{
 	dir = 4
@@ -1981,61 +1981,61 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "IZ" = (
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "Je" = (
 /obj/effect/spider/stickyweb/dark,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Jf" = (
 /turf/simulated/mineral/ore,
-/area/space)
+/area/submap/CollapsedMine)
 "Jg" = (
 /obj/structure/table/bench/sifwooden/padded,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Jj" = (
 /obj/item/ore/glass,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Jl" = (
 /obj/structure/table/woodentable,
 /obj/item/shovel,
 /obj/random/tool,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Jm" = (
 /mob/living/simple_mob/mechanical/mecha/ripley{
 	faction = "malf_drone"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Jn" = (
 /obj/structure/ore_box,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Jv" = (
 /obj/effect/floor_decal/carpet,
 /obj/item/weldingtool/largetank,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "JA" = (
 /obj/machinery/recharge_station,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "JH" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/flashlight/lamp,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "JI" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 9
@@ -2043,7 +2043,7 @@
 /obj/structure/table/steel_reinforced,
 /obj/random/mug/anom,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "JJ" = (
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 4
@@ -2054,55 +2054,55 @@
 	},
 /obj/item/pen,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "JK" = (
 /obj/structure/table/standard,
 /obj/item/pickaxe,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "JM" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
 	},
 /obj/structure/closet/wardrobe/red,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ke" = (
 /obj/effect/decal/cleanable/flour,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Ko" = (
 /obj/structure/sign/greencross,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "Ky" = (
 /obj/structure/loot_pile/mecha/ripley,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "KE" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "KK" = (
 /mob/living/simple_mob/animal/giant_spider/tunneler,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "KV" = (
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "KX" = (
 /obj/machinery/iv_drip,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Ld" = (
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Lf" = (
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 6
@@ -2112,11 +2112,11 @@
 /obj/effect/decal/remains/mummy1,
 /obj/random/medical/lite/anom,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Ly" = (
 /obj/structure/loot_pile/surface,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "LK" = (
 /obj/structure/window/reinforced/holowindow{
 	dir = 1
@@ -2127,7 +2127,7 @@
 /obj/structure/table/rack/gun_rack,
 /obj/random/ammo,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "LM" = (
 /obj/item/material/shard,
 /obj/structure/table/steel_reinforced,
@@ -2136,16 +2136,16 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "LQ" = (
 /obj/item/material/shard,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "LR" = (
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "LS" = (
 /obj/machinery/sleeper{
 	dir = 4
@@ -2155,39 +2155,39 @@
 	},
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "LU" = (
 /obj/random/outcrop,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "LW" = (
 /obj/item/stool/padded{
 	dir = 1
 	},
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Mk" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ml" = (
 /obj/random/mob/spider,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "MM" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "MT" = (
 /obj/random/vendorall,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "MU" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/yellow/border{
@@ -2196,85 +2196,85 @@
 /obj/effect/decal/remains/human,
 /obj/item/clothing/under/corp/grayson,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "MW" = (
 /obj/structure/barricade,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ne" = (
 /obj/effect/decal/cleanable/vomit,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Nj" = (
 /obj/random/contraband,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "Nn" = (
 /obj/structure/loot_pile/surface/medicine_cabinet/fresh,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "Np" = (
 /obj/structure/bed/roller,
 /obj/effect/decal/remains/mummy1,
 /obj/random/medical/pillbottle,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Nx" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "NC" = (
 /obj/random/mob/spider,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "ND" = (
 /obj/item/broken_device,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "NL" = (
 /obj/effect/decal/cleanable/blood/drip,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "NS" = (
 /obj/effect/floor_decal/corner/paleblue/border,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "NV" = (
 /obj/structure/table/marble,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Om" = (
 /obj/structure/filingcabinet/chestdrawer,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Oo" = (
 /obj/structure/table/marble,
 /obj/item/ammo_casing/a12g/pellet,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Ov" = (
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Ow" = (
 /obj/structure/kitchenspike,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "Oy" = (
 /obj/structure/table/standard,
 /obj/random/medical,
@@ -2282,38 +2282,38 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "OD" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/towel/random,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "OL" = (
 /obj/structure/bed/padded,
 /obj/item/toy/plushie/spider,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "OX" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Pa" = (
 /obj/structure/table/rack,
 /obj/random/powercell/anom,
 /obj/random/powercell,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Pg" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Pk" = (
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 10
 	},
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Po" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
@@ -2322,10 +2322,10 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Pq" = (
 /turf/simulated/mineral/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Py" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 4
@@ -2334,22 +2334,22 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "PB" = (
 /obj/structure/toilet{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "PK" = (
 /obj/machinery/door/airlock,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "PS" = (
 /obj/effect/floor_decal/corner/red/border,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Qb" = (
 /obj/structure/window/basic{
 	dir = 8
@@ -2359,15 +2359,15 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/submap/CollapsedMine)
 "Qd" = (
 /obj/item/ore/glass,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "Qg" = (
 /obj/structure/bed/padded,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Qj" = (
 /obj/random/junk,
 /obj/item/beartrap/hunting{
@@ -2376,56 +2376,56 @@
 	start_anomalous = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "Ql" = (
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/wood/broken,
-/area/space)
+/area/submap/CollapsedMine)
 "Qq" = (
 /obj/effect/spider/stickyweb,
 /obj/structure/loot_pile/surface,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Qr" = (
 /obj/structure/salvageable/console_broken_os{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "QK" = (
 /obj/structure/ore_box,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "QN" = (
 /obj/structure/barricade,
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "QO" = (
 /obj/structure/bed/chair/wood,
 /obj/item/ammo_casing/a45,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "QV" = (
 /obj/structure/closet/secure_closet/freezer,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "Rf" = (
 /obj/effect/spider/stickyweb,
 /mob/living/simple_mob/animal/giant_spider/lurker,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Ri" = (
 /obj/structure/sink{
 	pixel_y = 17
 	},
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "Ry" = (
 /obj/random/maintenance/security,
 /obj/structure/table/rack/gun_rack,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "RM" = (
 /obj/effect/floor_decal/carpet,
 /obj/machinery/light/small/poi{
@@ -2433,7 +2433,7 @@
 	},
 /mob/living/simple_mob/animal/giant_spider/lurker,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "Sa" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
@@ -2441,68 +2441,68 @@
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Sf" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Sp" = (
 /obj/structure/barricade,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Sv" = (
 /obj/effect/floor_decal/techfloor/hole/right,
 /obj/effect/floor_decal/corner/yellow/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "SA" = (
 /obj/structure/sink{
 	pixel_y = 17
 	},
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "SM" = (
 /obj/effect/spider/stickyweb,
 /obj/random/meat,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "SP" = (
 /obj/structure/loot_pile/maint/trash,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "ST" = (
 /obj/item/stack/cable_coil/random,
 /obj/item/cell/hyper/empty,
 /obj/effect/floor_decal/corner/yellow/border,
 /obj/random/tool/power,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Tc" = (
 /obj/effect/decal/remains/ribcage,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "Tj" = (
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 6
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "To" = (
 /obj/effect/spider/spiderling/non_growing,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Tu" = (
 /obj/structure/table/bench/sifwooden/padded,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "TB" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 5
@@ -2510,23 +2510,23 @@
 /obj/effect/floor_decal/industrial/hatch/yellow,
 /obj/effect/decal/cleanable/cobweb2,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "TH" = (
 /obj/random/mob/spider/mutant,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "TK" = (
 /obj/structure/salvageable/console_broken_os{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "TR" = (
 /obj/item/stack/material/wood{
 	amount = 10
 	},
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "TV" = (
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/template_noop)
@@ -2542,32 +2542,32 @@
 /obj/random/meat,
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "Ui" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 9
 	},
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Un" = (
 /obj/structure/toilet{
 	dir = 8
 	},
 /obj/random/junk,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "Uq" = (
 /obj/machinery/light/small/poi{
 	dir = 8
 	},
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "Us" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/pen,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "UF" = (
 /mob/living/simple_mob/mechanical/mecha/odysseus{
 	name = "Nightingale";
@@ -2575,7 +2575,7 @@
 	faction = "malf_drone"
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "UI" = (
 /obj/effect/decal/remains/human,
 /obj/item/clothing/under/corp/grayson,
@@ -2583,7 +2583,7 @@
 /obj/item/shovel,
 /obj/item/clothing/shoes/boots/workboots,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "UM" = (
 /obj/structure/closet/wardrobe,
 /obj/item/clothing/under/corp/grayson,
@@ -2591,103 +2591,103 @@
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "UU" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Vf" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 10
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Vg" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Vj" = (
 /turf/simulated/floor/tiled/old_cargo/green,
-/area/space)
+/area/submap/CollapsedMine)
 "Vp" = (
 /obj/random/outcrop,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "Vr" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/area/submap/CollapsedMine)
 "Vu" = (
 /obj/machinery/light/small/flicker{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "VB" = (
 /obj/structure/table/standard,
 /obj/item/clothing/suit/chef,
 /obj/item/clothing/head/chefhat,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "VE" = (
 /obj/structure/bed/chair/wood{
 	dir = 1
 	},
 /obj/random/junk,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "VG" = (
 /mob/living/simple_mob/mechanical/mecha/ripley/firefighter{
 	faction = "malf_drone"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "VH" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 8
 	},
 /obj/structure/dogbed,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "VL" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "VP" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "VT" = (
 /obj/machinery/washing_machine,
 /obj/machinery/light/small/poi{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "VW" = (
 /obj/item/ammo_casing/a12g/pellet,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "VX" = (
 /obj/random/mob/spider/nurse,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "Wx" = (
 /obj/machinery/appliance/cooker/grill,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Wy" = (
 /obj/structure/table/steel_reinforced,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "WC" = (
 /obj/effect/decal/remains,
 /obj/effect/spider/stickyweb/dark,
@@ -2695,17 +2695,17 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "WF" = (
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "WH" = (
 /obj/structure/prop/machine/tgmc_console3,
 /obj/effect/floor_decal/corner/red/border{
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "WI" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
@@ -2714,52 +2714,52 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "WL" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 5
 	},
 /obj/random/medical/lite,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "WO" = (
 /obj/random/mob/spider,
 /turf/template_noop,
-/area/space)
+/area/submap/CollapsedMine)
 "WP" = (
 /obj/effect/floor_decal/corner/yellow/border,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "WY" = (
 /obj/structure/sign/warning/secure_area/armory,
 /turf/simulated/wall/r_concrete,
-/area/space)
+/area/submap/CollapsedMine)
 "Xg" = (
 /obj/structure/bed/chair/wood{
 	dir = 1
 	},
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Xs" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
 /obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "XG" = (
 /obj/machinery/shower,
 /obj/structure/curtain/open/bed,
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "XM" = (
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "XT" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 9
@@ -2767,27 +2767,27 @@
 /obj/structure/table/rack/shelf/steel,
 /obj/item/pickaxe/drill,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "XW" = (
 /obj/effect/spawner/gibs,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "XY" = (
 /obj/random/meat,
 /mob/living/simple_mob/animal/giant_spider/carrier,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "Yg" = (
 /obj/random/vendordrink,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Yh" = (
 /obj/machinery/vending/cigarette,
 /turf/simulated/floor/wood,
-/area/space)
+/area/submap/CollapsedMine)
 "Yv" = (
 /obj/structure/table/steel_reinforced,
 /obj/random/tech_supply/component,
@@ -2796,54 +2796,54 @@
 	dir = 9
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Yy" = (
 /mob/living/simple_mob/mechanical/mecha/ripley/deathripley{
 	faction = "malf_drone"
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "YE" = (
 /turf/simulated/floor/tiled/techfloor/grid,
-/area/space)
+/area/submap/CollapsedMine)
 "YG" = (
 /obj/structure/bed/double,
 /obj/item/bedsheet/browndouble,
 /turf/simulated/floor/carpet,
-/area/space)
+/area/submap/CollapsedMine)
 "YH" = (
 /mob/living/simple_mob/animal/giant_spider/webslinger,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "YJ" = (
 /obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Zb" = (
 /obj/structure/loot_pile/maint,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "Zm" = (
 /obj/machinery/appliance/cooker/fryer,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 "Zq" = (
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 1
 	},
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/white,
-/area/space)
+/area/submap/CollapsedMine)
 "Zs" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/freezer,
-/area/space)
+/area/submap/CollapsedMine)
 "ZE" = (
 /obj/effect/decal/remains/human,
 /obj/random/maintenance/security,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ZF" = (
 /obj/item/cell/high,
 /obj/effect/decal/cleanable/blood,
@@ -2852,15 +2852,15 @@
 	},
 /obj/item/clothing/under/corp/grayson,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ZI" = (
 /obj/effect/decal/cleanable/spiderling_remains,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ZR" = (
 /obj/random/junk,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "ZU" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/toy/desk/officetoy,
@@ -2868,18 +2868,18 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ZV" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/spiderling,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/space)
+/area/submap/CollapsedMine)
 "ZW" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/eastleft,
 /turf/simulated/floor/tiled/techfloor,
-/area/space)
+/area/submap/CollapsedMine)
 "ZX" = (
 /obj/item/beartrap/hunting{
 	anchored = 1;
@@ -2887,12 +2887,12 @@
 	start_anomalous = 1
 	},
 /turf/simulated/floor/tiled/dark,
-/area/space)
+/area/submap/CollapsedMine)
 "ZY" = (
 /obj/structure/table/standard,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/eris/cafe,
-/area/space)
+/area/submap/CollapsedMine)
 
 (1,1,1) = {"
 TW
@@ -3048,10 +3048,10 @@ nb
 nb
 nb
 nb
-nb
-nb
-nb
-nb
+dc
+dc
+dc
+dc
 Pq
 Pq
 Pq
@@ -6415,7 +6415,7 @@ dc
 Qd
 TW
 nb
-nb
+dc
 dc
 TW
 TW

@@ -361,3 +361,4 @@
 	desc = "A Grayson expeditionary base, filled with spiders and drone defenders."
 	mappath = 'maps/submaps/surface_submaps/wilderness/collapsedmine.dmm'
 	cost = 45
+
