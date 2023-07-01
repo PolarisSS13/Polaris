@@ -21,6 +21,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"aJ" = (
+/obj/effect/spawner/gibs/human,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "aO" = (
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/mineral/floor/ignore_mapgen,
@@ -42,8 +46,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "bn" = (
-/obj/random/maintenance/anom,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "bp" = (
 /obj/random/junk,
@@ -91,6 +95,10 @@
 	},
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
+"bQ" = (
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/tiled/eris/cafe,
+/area/space)
 "bR" = (
 /turf/simulated/floor/tiled/freezer,
 /area/space)
@@ -117,14 +125,30 @@
 "ck" = (
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/space)
+"cr" = (
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 1
+	},
+/mob/living/simple_mob/mechanical/mining_drone,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "ct" = (
 /obj/random/junk,
 /obj/structure/table/woodentable,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"cz" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/template_noop)
 "cB" = (
 /obj/item/material/shard,
 /turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
+"cH" = (
+/obj/machinery/light/poi{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "cX" = (
 /obj/machinery/floodlight,
@@ -185,9 +209,8 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "eg" = (
-/obj/structure/bed/chair/office/dark{
-	dir = 1
-	},
+/obj/effect/decal/cleanable/blood,
+/obj/random/maintenance/security,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "ei" = (
@@ -206,6 +229,14 @@
 /obj/structure/loot_pile/surface/medicine_cabinet,
 /turf/simulated/wall/r_concrete,
 /area/space)
+"er" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/obj/structure/table/rack/gun_rack,
+/obj/random/projectile/sec,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "eu" = (
 /obj/structure/table/steel_reinforced,
 /obj/item/clothing/head/collectable/police,
@@ -213,6 +244,19 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
 	},
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"eQ" = (
+/obj/machinery/computer/security/telescreen/entertainment{
+	icon_state = "frame";
+	pixel_y = 32
+	},
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 1
+	},
+/obj/structure/table/rack/shelf/steel,
+/obj/item/pickaxe/hand,
+/obj/item/shovel,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "fc" = (
@@ -228,6 +272,7 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
 	},
+/obj/structure/flora/pottedplant/dead,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "fm" = (
@@ -237,19 +282,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "fn" = (
-/mob/living/simple_mob/humanoid/merc{
-	health = 15;
-	maxHealth = 15
-	},
-/obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/spider/stickyweb,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "fp" = (
-/obj/structure/window/basic{
-	dir = 8
-	},
-/obj/item/towel/random,
-/turf/simulated/floor/tiled/techfloor/grid,
+/obj/machinery/light/flicker,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "fG" = (
 /obj/effect/spider/stickyweb,
@@ -266,6 +305,9 @@
 /obj/effect/decal/remains/mummy1,
 /turf/simulated/floor/tiled/white,
 /area/space)
+"fT" = (
+/turf/simulated/floor/wood/broken,
+/area/space)
 "gh" = (
 /obj/structure/barricade,
 /turf/simulated/floor/wood,
@@ -281,6 +323,10 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"go" = (
+/obj/structure/table/rack/shelf/steel,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/space)
 "gD" = (
 /obj/effect/spider/stickyweb,
 /mob/living/simple_mob/animal/giant_spider/lurker,
@@ -288,6 +334,11 @@
 /area/space)
 "gJ" = (
 /obj/machinery/mech_recharger,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"gQ" = (
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/item/mecha_parts/mecha_equipment/weapon/ballistic/lmg/rigged,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "gY" = (
@@ -331,10 +382,28 @@
 /obj/random/mob/spider/mutant,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"ht" = (
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/tiled/white,
+/area/space)
+"hx" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 4
+	},
+/obj/random/handgun/sec,
+/obj/structure/table/rack/gun_rack,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "hB" = (
 /obj/effect/decal/remains/human,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
+"hF" = (
+/obj/machinery/door/airlock{
+	welded = 1
+	},
+/turf/simulated/floor/tiled/dark,
 /area/space)
 "hG" = (
 /obj/effect/spider/stickyweb,
@@ -356,13 +425,19 @@
 /turf/simulated/floor/tiled/dark,
 /area/space)
 "hN" = (
-/obj/machinery/sleeper{
+/obj/structure/table/rack,
+/obj/structure/table/rack,
+/turf/template_noop,
+/area/space)
+"hV" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/floor_decal/corner/red/border{
+	dir = 6
+	},
+/obj/machinery/light/small/flicker{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/paleblue/border{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "ib" = (
 /obj/machinery/vending/dinnerware,
@@ -375,13 +450,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "in" = (
-/obj/structure/salvageable/console_broken_os{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/red/border{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/random/trash,
+/turf/simulated/floor/wood,
 /area/space)
 "ip" = (
 /obj/item/cell/high,
@@ -392,6 +462,15 @@
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"ir" = (
+/obj/effect/floor_decal/corner/red/border,
+/obj/machinery/light/flicker,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"iu" = (
+/obj/structure/closet/crate/grayson,
+/turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
 "iw" = (
 /obj/structure/bed/chair/comfy/teal{
@@ -411,6 +490,17 @@
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/space)
+"iB" = (
+/obj/structure/table/steel_reinforced,
+/obj/item/towel/random,
+/obj/item/towel/random,
+/obj/machinery/light/small/poi,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"iE" = (
+/obj/structure/ore_box,
+/turf/template_noop,
+/area/space)
 "iF" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 1
@@ -428,6 +518,10 @@
 /obj/machinery/neonsign/cafe,
 /turf/simulated/wall/r_concrete,
 /area/space)
+"iN" = (
+/obj/random/mob/spider/mutant,
+/turf/template_noop,
+/area/space)
 "iP" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/paleblue/border{
@@ -442,11 +536,11 @@
 /turf/simulated/floor/wood,
 /area/space)
 "iU" = (
-/obj/effect/floor_decal/carpet,
-/obj/structure/closet/wardrobe,
-/obj/item/clothing/shoes/boots/workboots,
-/obj/item/clothing/under/corp/grayson_jump,
-/turf/simulated/floor/carpet,
+/obj/effect/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/vomit,
+/turf/simulated/floor/tiled/white,
 /area/space)
 "iW" = (
 /obj/random/projectile/scrapped_smg,
@@ -489,20 +583,30 @@
 /obj/effect/floor_decal/corner/paleblue/border,
 /turf/simulated/floor/tiled/white,
 /area/space)
+"jA" = (
+/obj/random/maintenance/anom,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "jB" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/space)
 "jG" = (
+/obj/structure/table/rack/shelf,
 /obj/item/clothing/head/collectable/police,
-/obj/structure/table/rack/shelf/steel,
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "jJ" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/floor_decal/corner/paleblue/border,
-/turf/simulated/floor/tiled/white,
+/obj/random/snack,
+/turf/simulated/floor/carpet,
+/area/space)
+"jK" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/turf/simulated/floor/wood/broken,
 /area/space)
 "jM" = (
 /obj/effect/spider/stickyweb,
@@ -547,10 +651,9 @@
 /turf/simulated/floor/tiled/white,
 /area/space)
 "lc" = (
-/obj/structure/table/rack/shelf/steel,
-/obj/structure/table/rack/shelf/steel,
-/obj/random/ammo,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/rack/gun_rack,
+/obj/item/shield/riot,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "lg" = (
 /obj/structure/bed/roller,
@@ -568,21 +671,33 @@
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
+"lt" = (
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 1
+	},
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "lR" = (
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "lS" = (
-/obj/structure/bed/roller,
-/obj/effect/decal/remains/mummy1,
+/obj/effect/floor_decal/corner/red/border,
+/mob/living/simple_mob/animal/giant_spider/electric,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "mf" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/floor_decal/corner/paleblue/border{
-	dir = 1
+/obj/effect/floor_decal/corner/yellow/border,
+/mob/living/simple_mob/animal/giant_spider{
+	health = 15
 	},
-/turf/simulated/floor/tiled/white,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"mh" = (
+/obj/effect/floor_decal/carpet,
+/obj/random/snack,
+/turf/simulated/floor/carpet,
 /area/space)
 "mk" = (
 /obj/effect/decal/cleanable/blood,
@@ -618,12 +733,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "nb" = (
-/mob/living/simple_mob/mechanical/mecha/odysseus{
-	name = "Nightingale";
-	desc = "These exosuits are developed and produced by Vey-Med. This one has a syringe gun and the name `Nightingale` painted on its side."
-	},
-/turf/simulated/floor/tiled/white,
-/area/space)
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/template_noop)
 "nf" = (
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/wood,
@@ -655,14 +766,19 @@
 /obj/structure/animal_den,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
+"nW" = (
+/obj/structure/reagent_dispensers/fueltank,
+/turf/simulated/floor/wood,
+/area/space)
 "oe" = (
 /obj/effect/spider/stickyweb,
 /obj/random/meat,
 /turf/simulated/floor/tiled/freezer,
 /area/space)
 "oj" = (
-/mob/living/simple_mob/animal/giant_spider/lurker,
-/obj/item/material/shard,
+/obj/structure/table/woodentable,
+/obj/item/cell/device/weapon/empty,
+/obj/item/clothing/accessory/material/makeshift/armguards,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "oJ" = (
@@ -684,6 +800,10 @@
 /obj/structure/loot_pile/surface,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
+"pi" = (
+/obj/effect/spawner/gibs,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "pm" = (
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb/dark,
@@ -693,12 +813,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "px" = (
-/mob/living/simple_mob/humanoid/merc{
-	health = 15;
-	maxHealth = 15
-	},
-/obj/effect/spider/stickyweb,
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/decal/cleanable/blood/gibs/robot,
+/turf/simulated/floor/tiled/dark,
 /area/space)
 "py" = (
 /obj/structure/table/steel_reinforced,
@@ -739,11 +855,24 @@
 /obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/space)
+"qe" = (
+/obj/structure/table/rack,
+/obj/item/shovel,
+/obj/item/pickaxe/drill,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/space)
 "qs" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
 /obj/effect/decal/cleanable/spiderling_remains,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"qD" = (
+/obj/structure/table/steel_reinforced,
+/obj/machinery/light/small/poi{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "qI" = (
@@ -791,11 +920,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "rz" = (
-/obj/structure/closet/wardrobe,
-/obj/item/clothing/under/corp/grayson,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
-/obj/item/clothing/shoes/boots/workboots,
-/turf/simulated/floor/carpet,
+/mob/living/simple_mob/mechanical/mining_drone,
+/turf/simulated/floor/tiled/dark,
+/area/space)
+"rE" = (
+/obj/structure/closet/crate/grayson,
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 9
+	},
+/obj/effect/decal/remains/mummy1,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "rG" = (
 /obj/random/mob/spider/mutant,
@@ -816,19 +950,15 @@
 /turf/simulated/wall/r_concrete,
 /area/space)
 "rY" = (
-/obj/structure/window/reinforced/holowindow{
-	dir = 1
-	},
-/obj/structure/window/reinforced/holowindow{
-	dir = 8
-	},
-/obj/structure/table/rack/shelf/steel,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/item/pickaxe/hand,
+/turf/simulated/floor/tiled/old_cargo/green,
 /area/space)
 "sm" = (
-/obj/structure/table/woodentable,
-/obj/item/cell/device/weapon/empty,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/window/basic{
+	dir = 8
+	},
+/obj/machinery/light/small/poi,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
 "so" = (
 /obj/structure/table/marble,
@@ -838,6 +968,10 @@
 "sr" = (
 /obj/structure/salvageable/computer,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"sA" = (
+/obj/machinery/power/apc,
+/turf/simulated/wall/r_concrete,
 /area/space)
 "sB" = (
 /obj/random/mob/spider,
@@ -879,9 +1013,19 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"tD" = (
+/obj/item/clothing/accessory/armor/armguards,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "tJ" = (
 /obj/random/mob/spider,
 /turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
+"tM" = (
+/obj/machinery/light/small/poi{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "tR" = (
 /obj/random/mob/spider/nurse,
@@ -933,10 +1077,20 @@
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"uL" = (
+/obj/structure/loot_pile/mecha/ripley,
+/obj/effect/spider/stickyweb,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "uR" = (
 /obj/random/mob/spider/nurse,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
+"uU" = (
+/obj/random/ammo,
+/obj/structure/table/rack/shelf,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "vb" = (
 /obj/effect/floor_decal/techfloor/hole,
@@ -975,17 +1129,27 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "vv" = (
-/obj/structure/table/rack/shelf/steel,
-/obj/random/projectile/sec,
+/obj/effect/spider/stickyweb,
+/obj/effect/decal/remains/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
-"vN" = (
-/obj/structure/window/reinforced/holowindow{
-	dir = 4
+"vw" = (
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 5
 	},
 /obj/structure/table/rack/shelf/steel,
-/obj/random/handgun/sec,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/item/pickaxe/hand,
+/obj/item/storage/excavation,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"vN" = (
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"vU" = (
+/obj/structure/table/rack,
+/obj/item/shovel,
+/turf/template_noop,
 /area/space)
 "vZ" = (
 /obj/structure/table/standard,
@@ -1004,9 +1168,17 @@
 /obj/structure/simple_door/wood,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"wh" = (
+/obj/effect/floor_decal/corner/red/border{
+	dir = 10
+	},
+/obj/structure/flora/pottedplant/dead,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "wi" = (
-/obj/effect/spider/stickyweb,
-/obj/effect/decal/cleanable/blood/gibs,
+/obj/item/clothing/suit/space/void/mining/alt,
+/obj/item/clothing/head/helmet/space/void/mining/alt,
+/obj/effect/decal/remains/human,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "wl" = (
@@ -1014,9 +1186,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "wm" = (
+/obj/effect/floor_decal/carpet,
+/obj/machinery/light/small/poi{
+	dir = 4
+	},
+/turf/simulated/floor/carpet,
+/area/space)
+"ww" = (
 /obj/effect/spider/stickyweb,
-/obj/random/plushie/anom,
-/turf/simulated/floor/tiled/freezer,
+/obj/effect/spawner/gibs,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "wz" = (
 /obj/effect/floor_decal/corner/red/border{
@@ -1025,14 +1204,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "wB" = (
-/obj/machinery/computer/security/telescreen/entertainment{
-	icon_state = "frame";
-	pixel_y = 32
+/obj/effect/spider/stickyweb,
+/obj/item/stack/material/wood{
+	amount = 10
 	},
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "wF" = (
 /obj/random/tech_supply,
@@ -1103,17 +1279,23 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "xM" = (
-/obj/structure/loot_pile/mecha/durand,
-/obj/effect/spider/stickyweb,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/structure/bed/double,
+/obj/item/bedsheet/browndouble,
+/obj/effect/decal/remains/mummy1,
+/obj/random/snack,
+/turf/simulated/floor/carpet,
 /area/space)
 "xR" = (
 /obj/effect/decal/cleanable/blood/gibs,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "xS" = (
-/obj/machinery/power/apc/hyper,
-/turf/simulated/wall/r_concrete,
+/obj/effect/floor_decal/carpet,
+/obj/structure/closet/wardrobe,
+/obj/item/clothing/shoes/boots/workboots,
+/obj/item/clothing/under/corp/grayson_jump,
+/obj/item/clothing/head/hardhat/dblue,
+/turf/simulated/floor/carpet,
 /area/space)
 "xZ" = (
 /obj/structure/table/steel_reinforced,
@@ -1173,8 +1355,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "zw" = (
-/mob/living/simple_mob/mechanical/mecha/ripley,
-/turf/simulated/floor/tiled/techfloor,
+/obj/random/junk,
+/turf/simulated/floor/wood,
 /area/space)
 "zy" = (
 /obj/effect/floor_decal/corner/pink/border{
@@ -1224,6 +1406,11 @@
 /obj/random/powercell,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"AO" = (
+/obj/effect/floor_decal/corner/paleblue/border,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/white,
+/area/space)
 "AP" = (
 /obj/machinery/vending/snack,
 /obj/effect/floor_decal/corner/yellow/border{
@@ -1245,11 +1432,30 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"AX" = (
+/obj/structure/closet/wardrobe,
+/obj/item/clothing/under/corp/grayson,
+/obj/item/clothing/accessory/badge/corporate_tag/grayson,
+/obj/item/clothing/head/hardhat/dblue,
+/obj/item/clothing/shoes/boots/workboots,
+/obj/item/clothing/head/hardhat/dblue,
+/turf/simulated/floor/carpet,
+/area/space)
+"Ba" = (
+/obj/structure/closet/wardrobe,
+/obj/item/clothing/under/corp/grayson_jump,
+/obj/item/clothing/accessory/badge/corporate_tag/grayson,
+/obj/item/clothing/head/hardhat/dblue,
+/obj/item/clothing/shoes/boots/workboots,
+/obj/item/clothing/head/hardhat/dblue,
+/turf/simulated/floor/carpet,
+/area/space)
 "Bc" = (
-/obj/effect/spider/stickyweb,
-/obj/item/clothing/suit/space/void/mining/alt,
-/obj/item/clothing/head/helmet/space/void/mining/alt,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 4
+	},
+/obj/random/mob/spider/mutant,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Bh" = (
 /obj/structure/bed/double,
@@ -1271,13 +1477,24 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "By" = (
-/obj/effect/spider/stickyweb,
-/obj/structure/loot_pile/surface,
+/obj/machinery/computer/security/telescreen/entertainment{
+	icon_state = "frame";
+	pixel_y = 32
+	},
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 1
+	},
+/obj/structure/table/rack/shelf/steel,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "BH" = (
 /obj/structure/table/woodentable,
 /obj/random/junk,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"BL" = (
+/obj/structure/table/rack/gun_rack,
+/obj/item/clothing/accessory/armor/armorplate/bulletproof,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "BV" = (
@@ -1371,10 +1588,10 @@
 /turf/simulated/wall/r_concrete,
 /area/space)
 "DP" = (
-/obj/structure/bed/chair/wood{
-	dir = 8
-	},
-/turf/simulated/floor/wood,
+/obj/effect/spider/stickyweb,
+/obj/effect/spider/stickyweb,
+/obj/random/mob/spider,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "DR" = (
 /obj/structure/table/marble,
@@ -1453,18 +1670,19 @@
 /turf/simulated/floor/plating,
 /area/space)
 "ET" = (
-/obj/structure/window/reinforced/holowindow{
+/obj/structure/table/bench/sifwooden/padded,
+/obj/effect/floor_decal/corner/paleblue/border{
 	dir = 4
 	},
-/obj/structure/table/rack/shelf/steel,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/tiled/white,
 /area/space)
 "Ft" = (
-/obj/structure/closet/wardrobe,
-/obj/item/clothing/under/corp/grayson,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
-/obj/item/clothing/head/hardhat/dblue,
-/obj/item/clothing/shoes/boots/workboots,
+/obj/effect/floor_decal/carpet,
+/obj/machinery/light/small/poi{
+	dir = 4
+	},
+/obj/random/snack,
 /turf/simulated/floor/carpet,
 /area/space)
 "Fz" = (
@@ -1520,6 +1738,11 @@
 /obj/structure/table/standard,
 /turf/simulated/floor/tiled/white,
 /area/space)
+"Gg" = (
+/obj/effect/spawner/gibs/human,
+/obj/effect/spider/stickyweb,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "Go" = (
 /obj/random/trash,
 /turf/simulated/floor/tiled/techfloor,
@@ -1533,6 +1756,14 @@
 /obj/random/junk,
 /turf/simulated/floor/carpet,
 /area/space)
+"Gu" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/floor_decal/corner/red/border{
+	dir = 6
+	},
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "Gv" = (
 /turf/simulated/floor/tiled/dark,
 /area/space)
@@ -1544,11 +1775,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "GN" = (
-/obj/structure/closet/secure_closet/brig{
-	id = "Cell 1";
-	name = "Cell 1 Locker"
-	},
-/obj/effect/spider/stickyweb,
+/obj/structure/bed/roller,
+/obj/effect/decal/remains/mummy1,
+/obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "GR" = (
@@ -1569,8 +1798,11 @@
 /turf/simulated/floor/tiled/dark,
 /area/space)
 "He" = (
-/obj/structure/table/standard,
-/obj/item/pickaxe/jackhammer,
+/obj/item/beartrap/hunting{
+	anchored = 1;
+	deployed = 1;
+	start_anomalous = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Hq" = (
@@ -1596,11 +1828,26 @@
 /obj/item/ore/coal,
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
+"Hv" = (
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/paleblue/border{
+	dir = 4
+	},
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/tiled/white,
+/area/space)
 "HA" = (
 /obj/random/vendorfood,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"HE" = (
+/obj/effect/floor_decal/corner/red/border,
+/obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "HL" = (
@@ -1642,9 +1889,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Io" = (
-/obj/structure/table/rack/shelf/steel,
-/obj/random/ammo,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/structure/table/rack,
+/obj/item/stack/marker_beacon,
+/obj/item/stack/marker_beacon,
+/obj/item/gps/mining,
+/turf/template_noop,
 /area/space)
 "Ip" = (
 /obj/random/meat,
@@ -1659,6 +1908,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/space)
+"Is" = (
+/mob/living/simple_mob/animal/giant_spider{
+	health = 15
+	},
+/turf/simulated/floor/tiled/white,
+/area/space)
+"Ix" = (
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/wood,
+/area/space)
 "Iz" = (
 /obj/structure/table/woodentable,
 /turf/simulated/floor/wood,
@@ -1668,9 +1927,31 @@
 /obj/random/medical/lite/anom,
 /turf/simulated/floor/wood,
 /area/space)
-"II" = (
-/obj/structure/loot_pile/surface,
+"ID" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/mob/living/simple_mob/animal/giant_spider/electric,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"IE" = (
+/obj/structure/salvageable/console_broken_os{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/red/border{
+	dir = 8
+	},
+/obj/machinery/light/poi{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"II" = (
+/obj/structure/bed/double,
+/obj/item/bedsheet/browndouble,
+/obj/random/plushie/anom,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/carpet,
 /area/space)
 "IK" = (
 /obj/random/mob/spider,
@@ -1681,6 +1962,11 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 1
 	},
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"IT" = (
+/obj/machinery/mech_recharger,
+/obj/mecha/working/ripley/mining,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "IV" = (
@@ -1707,8 +1993,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Jf" = (
-/mob/living/simple_mob/mechanical/mecha/ripley/firefighter,
-/turf/simulated/floor/tiled/old_cargo/green,
+/turf/simulated/mineral/ore,
 /area/space)
 "Jg" = (
 /obj/structure/table/bench/sifwooden/padded,
@@ -1728,9 +2013,8 @@
 /turf/simulated/floor/wood,
 /area/space)
 "Jm" = (
-/mob/living/simple_mob/humanoid/merc{
-	health = 15;
-	maxHealth = 15
+/mob/living/simple_mob/mechanical/mecha/ripley{
+	faction = "malf_drone"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
@@ -1739,8 +2023,9 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "Jv" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/floor_decal/carpet,
+/obj/item/weldingtool/largetank,
+/turf/simulated/floor/carpet,
 /area/space)
 "JA" = (
 /obj/machinery/recharge_station,
@@ -1770,6 +2055,11 @@
 /obj/item/pen,
 /turf/simulated/floor/tiled/white,
 /area/space)
+"JK" = (
+/obj/structure/table/standard,
+/obj/item/pickaxe,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "JM" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
@@ -1777,9 +2067,17 @@
 /obj/structure/closet/wardrobe/red,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"Ke" = (
+/obj/effect/decal/cleanable/flour,
+/turf/simulated/floor/tiled/eris/cafe,
+/area/space)
 "Ko" = (
 /obj/structure/sign/greencross,
 /turf/simulated/wall/r_concrete,
+/area/space)
+"Ky" = (
+/obj/structure/loot_pile/mecha/ripley,
+/turf/template_noop,
 /area/space)
 "KE" = (
 /obj/effect/floor_decal/corner/yellow/border{
@@ -1819,6 +2117,17 @@
 /obj/structure/loot_pile/surface,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
+"LK" = (
+/obj/structure/window/reinforced/holowindow{
+	dir = 1
+	},
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
+/obj/structure/table/rack/gun_rack,
+/obj/random/ammo,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "LM" = (
 /obj/item/material/shard,
 /obj/structure/table/steel_reinforced,
@@ -1837,6 +2146,16 @@
 /obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"LS" = (
+/obj/machinery/sleeper{
+	dir = 4
+	},
+/obj/effect/floor_decal/corner/paleblue/border{
+	dir = 6
+	},
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/tiled/white,
+/area/space)
 "LU" = (
 /obj/random/outcrop,
 /turf/template_noop,
@@ -1850,6 +2169,10 @@
 "Mk" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"Ml" = (
+/obj/random/mob/spider,
+/turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
 "MM" = (
 /obj/effect/spider/stickyweb,
@@ -1882,10 +2205,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Ne" = (
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 9
-	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/decal/cleanable/vomit,
+/turf/simulated/floor/tiled/white,
+/area/space)
+"Nj" = (
+/obj/random/contraband,
+/turf/simulated/floor/tiled/dark,
 /area/space)
 "Nn" = (
 /obj/structure/loot_pile/surface/medicine_cabinet/fresh,
@@ -1904,13 +2229,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "NC" = (
-/obj/machinery/sleeper{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/paleblue/border{
-	dir = 6
-	},
-/turf/simulated/floor/tiled/white,
+/obj/random/mob/spider,
+/obj/effect/spider/stickyweb,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
+"ND" = (
+/obj/item/broken_device,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "NL" = (
 /obj/effect/decal/cleanable/blood/drip,
@@ -1968,6 +2293,10 @@
 /obj/item/toy/plushie/spider,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
+"OX" = (
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/tiled/eris/cafe,
+/area/space)
 "Pa" = (
 /obj/structure/table/rack,
 /obj/random/powercell/anom,
@@ -2017,10 +2346,19 @@
 /turf/simulated/floor/tiled/dark,
 /area/space)
 "PS" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/towel/random,
-/obj/item/towel/random,
+/obj/effect/floor_decal/corner/red/border,
+/obj/effect/spider/stickyweb/dark,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"Qb" = (
+/obj/structure/window/basic{
+	dir = 8
+	},
+/obj/item/towel/random,
+/obj/machinery/light/small/poi{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/space)
 "Qd" = (
 /obj/item/ore/glass,
@@ -2029,6 +2367,19 @@
 "Qg" = (
 /obj/structure/bed/padded,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"Qj" = (
+/obj/random/junk,
+/obj/item/beartrap/hunting{
+	anchored = 1;
+	deployed = 1;
+	start_anomalous = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/space)
+"Ql" = (
+/obj/structure/bed/chair/wood,
+/turf/simulated/floor/wood/broken,
 /area/space)
 "Qq" = (
 /obj/effect/spider/stickyweb,
@@ -2059,15 +2410,29 @@
 /obj/structure/closet/secure_closet/freezer,
 /turf/simulated/floor/tiled/freezer,
 /area/space)
+"Rf" = (
+/obj/effect/spider/stickyweb,
+/mob/living/simple_mob/animal/giant_spider/lurker,
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
 "Ri" = (
 /obj/structure/sink{
 	pixel_y = 17
 	},
 /turf/simulated/floor/tiled/dark,
 /area/space)
-"RM" = (
-/mob/living/simple_mob/mechanical/mecha/ripley/deathripley,
+"Ry" = (
+/obj/random/maintenance/security,
+/obj/structure/table/rack/gun_rack,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"RM" = (
+/obj/effect/floor_decal/carpet,
+/obj/machinery/light/small/poi{
+	dir = 4
+	},
+/mob/living/simple_mob/animal/giant_spider/lurker,
+/turf/simulated/floor/carpet,
 /area/space)
 "Sa" = (
 /obj/effect/spider/stickyweb,
@@ -2162,17 +2527,41 @@
 	},
 /turf/simulated/floor/wood,
 /area/space)
+"TV" = (
+/turf/simulated/mineral/floor/ignore_mapgen,
+/area/template_noop)
 "TW" = (
-/obj/structure/table/rack,
-/obj/item/pickaxe/drill,
-/obj/item/shovel,
-/turf/simulated/floor/outdoors/dirt/sif,
-/area/space)
+/turf/template_noop,
+/area/template_noop)
 "Ue" = (
-/obj/structure/bed/double,
-/obj/item/bedsheet/browndouble,
-/obj/random/contraband,
-/turf/simulated/floor/carpet,
+/obj/structure/closet/crate/freezer,
+/obj/random/meat,
+/obj/effect/spider/stickyweb,
+/obj/random/meat,
+/obj/random/meat,
+/obj/random/meat,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/freezer,
+/area/space)
+"Ui" = (
+/obj/effect/floor_decal/corner/red/border{
+	dir = 9
+	},
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"Un" = (
+/obj/structure/toilet{
+	dir = 8
+	},
+/obj/random/junk,
+/turf/simulated/floor/tiled/dark,
+/area/space)
+"Uq" = (
+/obj/machinery/light/small/poi{
+	dir = 8
+	},
+/turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
 "Us" = (
 /obj/structure/table/steel_reinforced,
@@ -2180,9 +2569,12 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "UF" = (
-/obj/effect/floor_decal/carpet,
-/obj/item/clothing/head/hardhat/dblue,
-/turf/simulated/floor/carpet,
+/mob/living/simple_mob/mechanical/mecha/odysseus{
+	name = "Nightingale";
+	desc = "These exosuits are developed and produced by Vey-Med. This one has a syringe gun and the name `Nightingale` painted on its side.";
+	faction = "malf_drone"
+	},
+/turf/simulated/floor/tiled/white,
 /area/space)
 "UI" = (
 /obj/effect/decal/remains/human,
@@ -2192,10 +2584,29 @@
 /obj/item/clothing/shoes/boots/workboots,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
+"UM" = (
+/obj/structure/closet/wardrobe,
+/obj/item/clothing/under/corp/grayson,
+/obj/item/clothing/accessory/badge/corporate_tag/grayson,
+/obj/item/clothing/shoes/boots/workboots,
+/obj/item/clothing/head/hardhat/dblue,
+/turf/simulated/floor/carpet,
+/area/space)
+"UU" = (
+/obj/random/trash,
+/turf/simulated/floor/tiled/eris/cafe,
+/area/space)
 "Vf" = (
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 10
 	},
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
+"Vg" = (
+/obj/effect/floor_decal/corner/red/border{
+	dir = 1
+	},
+/obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Vj" = (
@@ -2206,12 +2617,14 @@
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/space)
 "Vr" = (
-/mob/living/simple_mob/humanoid/merc{
-	health = 15;
-	maxHealth = 15
+/obj/effect/decal/remains/human,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/space)
+"Vu" = (
+/obj/machinery/light/small/flicker{
+	dir = 4
 	},
-/obj/effect/spider/stickyweb,
-/turf/simulated/floor/tiled/freezer,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "VB" = (
 /obj/structure/table/standard,
@@ -2219,13 +2632,25 @@
 /obj/item/clothing/head/chefhat,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/space)
+"VE" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/random/junk,
+/turf/simulated/floor/wood,
+/area/space)
+"VG" = (
+/mob/living/simple_mob/mechanical/mecha/ripley/firefighter{
+	faction = "malf_drone"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/space)
 "VH" = (
-/obj/structure/closet/wardrobe,
-/obj/item/clothing/under/corp/grayson_jump,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
-/obj/item/clothing/head/hardhat/dblue,
-/obj/item/clothing/shoes/boots/workboots,
-/turf/simulated/floor/carpet,
+/obj/effect/floor_decal/corner/red/border{
+	dir = 8
+	},
+/obj/structure/dogbed,
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "VL" = (
 /obj/structure/bed/chair/office/dark{
@@ -2237,6 +2662,13 @@
 /obj/effect/spider/stickyweb,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
+/area/space)
+"VT" = (
+/obj/machinery/washing_machine,
+/obj/machinery/light/small/poi{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/space)
 "VW" = (
 /obj/item/ammo_casing/a12g/pellet,
@@ -2302,6 +2734,13 @@
 /obj/structure/sign/warning/secure_area/armory,
 /turf/simulated/wall/r_concrete,
 /area/space)
+"Xg" = (
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/wood,
+/area/space)
 "Xs" = (
 /obj/effect/floor_decal/corner/red/border{
 	dir = 10
@@ -2322,11 +2761,16 @@
 /turf/simulated/floor/tiled/white,
 /area/space)
 "XT" = (
-/obj/structure/closet/crate/grayson,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 9
 	},
+/obj/structure/table/rack/shelf/steel,
+/obj/item/pickaxe/drill,
 /turf/simulated/floor/tiled/techfloor,
+/area/space)
+"XW" = (
+/obj/effect/spawner/gibs,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/space)
 "XY" = (
 /obj/random/meat,
@@ -2354,9 +2798,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
 "Yy" = (
-/obj/effect/decal/cleanable/blood/gibs,
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 1
+/mob/living/simple_mob/mechanical/mecha/ripley/deathripley{
+	faction = "malf_drone"
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/space)
@@ -2369,10 +2812,8 @@
 /turf/simulated/floor/carpet,
 /area/space)
 "YH" = (
-/obj/structure/window/basic{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor/grid,
+/mob/living/simple_mob/animal/giant_spider/webslinger,
+/turf/simulated/floor/tiled/eris/cafe,
 /area/space)
 "YJ" = (
 /obj/effect/decal/cleanable/blood/drip,
@@ -2386,10 +2827,17 @@
 /obj/machinery/appliance/cooker/fryer,
 /turf/simulated/floor/tiled/eris/cafe,
 /area/space)
+"Zq" = (
+/obj/effect/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/white,
+/area/space)
 "Zs" = (
-/obj/random/maintenance/security,
-/obj/structure/table/rack/shelf/steel,
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/spider/stickyweb,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/tiled/freezer,
 /area/space)
 "ZE" = (
 /obj/effect/decal/remains/human,
@@ -2447,135 +2895,136 @@
 /area/space)
 
 (1,1,1) = {"
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (2,1,1) = {"
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
 Pq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+cz
+TW
+TW
+TW
+nb
+nb
+nb
+TW
+TW
+TW
+nb
+nb
+nb
+nb
+nb
+nb
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Pq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (3,1,1) = {"
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -2588,55 +3037,55 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Pq
+Pq
+Pq
+nb
+nb
+nb
+nb
+nb
+nb
+nb
+nb
+nb
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+TW
+TW
+TW
+nb
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (4,1,1) = {"
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -2655,15 +3104,16 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Vp
+dc
+KK
+Qd
 Pq
 Pq
 Pq
@@ -2678,26 +3128,52 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Pq
+Pq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (5,1,1) = {"
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+Pq
+Pq
+Pq
+Pq
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+nL
 Pq
 Pq
 Pq
@@ -2718,110 +3194,22 @@ Pq
 Pq
 Pq
 Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-WO
-nq
-nq
-nq
-nq
-nq
+dc
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (6,1,1) = {"
-nq
-nq
-nq
-Pq
-Pq
-Pq
-Pq
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-"}
-(7,1,1) = {"
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -2868,21 +3256,21 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+dc
+dc
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
-(8,1,1) = {"
-nq
-nq
+(7,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -2930,21 +3318,21 @@ IZ
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Ml
+dc
+dc
+TW
+TW
+TW
+TW
+nb
+TW
 "}
-(9,1,1) = {"
-nq
-nq
+(8,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -2965,7 +3353,7 @@ LR
 Ig
 LR
 ea
-ea
+He
 ea
 ea
 Ld
@@ -2978,7 +3366,7 @@ IZ
 jO
 Cv
 ul
-IZ
+dt
 Oy
 WF
 WF
@@ -2995,28 +3383,28 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+TW
 "}
-(10,1,1) = {"
-nq
-nq
+(9,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
-mU
+gQ
 MU
 ea
-Jv
+vN
 ea
 ea
-ea
+vN
 ea
 ea
 HR
@@ -3040,9 +3428,9 @@ qV
 WF
 xo
 iF
-IZ
+dt
 ng
-WF
+ht
 Pg
 NS
 DI
@@ -3058,29 +3446,29 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
 "}
-(11,1,1) = {"
-nq
-nq
+(10,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
-gJ
+IT
 KE
 ea
 ea
+ND
 ea
 ea
 ea
-Jv
-tW
+Jm
 ea
 Pq
 Pq
@@ -3088,13 +3476,13 @@ Pq
 LR
 Ig
 LR
-ea
-ea
 He
+ea
+JK
 lg
-lS
+GN
 Np
-vp
+ea
 ea
 YJ
 vf
@@ -3103,9 +3491,9 @@ WF
 CR
 NS
 HP
-mf
+Zq
 WF
-nb
+UF
 Dh
 up
 Pg
@@ -3122,14 +3510,14 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
 "}
-(12,1,1) = {"
-nq
+(11,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -3156,7 +3544,7 @@ IZ
 IZ
 IZ
 IZ
-ea
+He
 ea
 ea
 QN
@@ -3164,11 +3552,11 @@ ng
 WF
 dV
 Dq
-IZ
+dt
 NL
+Is
 WF
-WF
-jJ
+AO
 Cr
 zy
 JJ
@@ -3185,13 +3573,13 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
+TW
+TW
 "}
-(13,1,1) = {"
-nq
+(12,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -3202,7 +3590,7 @@ ea
 ea
 ea
 ST
-xS
+sA
 IZ
 Pq
 Pq
@@ -3224,10 +3612,10 @@ pR
 IZ
 Tu
 WF
-WF
+Ne
 NS
 up
-ng
+iU
 bx
 mk
 jx
@@ -3248,20 +3636,20 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
+TW
 "}
-(14,1,1) = {"
-nq
+(13,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
 IZ
 mU
-Yy
+lt
 ea
-RM
+Yy
 ea
 Dm
 IZ
@@ -3273,7 +3661,7 @@ hh
 Jj
 dU
 dU
-Pq
+Jf
 Pq
 Pq
 Pq
@@ -3285,14 +3673,14 @@ Ig
 Ig
 IZ
 Gc
-kY
+ET
 kY
 Jg
-IZ
+dt
 WL
-hN
+Hv
 KX
-NC
+LS
 IZ
 Pq
 Pq
@@ -3310,12 +3698,12 @@ Pq
 Pq
 IZ
 Pq
-nq
-nq
-nq
+TW
 "}
-(15,1,1) = {"
-nq
+(14,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -3328,13 +3716,13 @@ ip
 sC
 Sp
 Pq
-dU
+aJ
 lq
 Pq
 wc
 dU
 Pq
-Pq
+Jf
 Pq
 Pq
 Pq
@@ -3372,12 +3760,12 @@ Pq
 IZ
 IZ
 IZ
-nq
-nq
-nq
+TW
 "}
-(16,1,1) = {"
-nq
+(15,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -3391,7 +3779,7 @@ Pq
 Jn
 Pq
 Pq
-tJ
+dU
 wc
 wc
 Pq
@@ -3409,14 +3797,14 @@ ea
 ea
 IZ
 hf
-tW
+ea
 ea
 OD
 IZ
 kI
 kI
 wL
-ea
+tM
 VL
 Wy
 IZ
@@ -3434,12 +3822,12 @@ dU
 dU
 IZ
 rV
-nq
-nq
-nq
+TW
 "}
-(17,1,1) = {"
-nq
+(16,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -3454,8 +3842,8 @@ Pq
 Pq
 Pq
 dU
-Pq
-VP
+Jf
+DP
 wc
 dU
 IZ
@@ -3470,10 +3858,10 @@ ea
 ea
 ea
 IZ
-ko
+VT
 ea
 ea
-PS
+iB
 IZ
 ea
 ea
@@ -3496,19 +3884,19 @@ dU
 dU
 dU
 nq
-dU
-nq
-nq
+TV
 "}
-(18,1,1) = {"
-nq
+(17,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
 IZ
 IZ
-KE
-ea
+cr
+vN
 ae
 IZ
 IZ
@@ -3536,7 +3924,7 @@ ea
 ea
 ea
 ea
-ea
+Jm
 ea
 ea
 ea
@@ -3558,13 +3946,13 @@ dU
 dU
 dU
 dU
-nq
-nq
-nq
+TW
 "}
-(19,1,1) = {"
-nq
-nq
+(18,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -3581,9 +3969,9 @@ Pq
 Pq
 Pq
 Sp
+zw
 KV
-KV
-tU
+Ql
 Iz
 KV
 KV
@@ -3595,7 +3983,7 @@ ea
 ea
 ea
 ea
-zw
+ea
 ea
 ea
 ea
@@ -3620,14 +4008,14 @@ dU
 dU
 IZ
 IZ
-nq
-nq
-nq
+TW
 "}
-(20,1,1) = {"
-nq
-nq
-nq
+(19,1,1) = {"
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -3639,7 +4027,7 @@ HV
 wc
 Pq
 Pq
-Pq
+Jf
 Pq
 Pq
 IZ
@@ -3647,7 +4035,7 @@ KV
 KV
 KV
 KV
-KV
+in
 tU
 Iz
 iT
@@ -3656,10 +4044,10 @@ YJ
 ea
 ea
 IZ
-fp
+Qb
 YE
 YE
-YH
+sm
 IZ
 ea
 ea
@@ -3682,14 +4070,14 @@ Pq
 IZ
 IZ
 IZ
-nq
-nq
-nq
+TW
 "}
-(21,1,1) = {"
-nq
-nq
-nq
+(20,1,1) = {"
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -3700,11 +4088,11 @@ Pq
 Pq
 wc
 Pq
-IZ
-IZ
-IZ
-IZ
-IZ
+dt
+dt
+dt
+dt
+dt
 mM
 NV
 NV
@@ -3716,17 +4104,17 @@ iT
 bs
 ea
 YJ
-ea
+fp
 IZ
 yO
 yO
 yO
 yO
 IZ
-mU
-mU
 kI
-ea
+mU
+mU
+Vu
 Nx
 Wy
 IZ
@@ -3744,14 +4132,14 @@ Pq
 Pq
 IZ
 Pq
-nq
-nq
-nq
+TW
 "}
-(22,1,1) = {"
-nq
-nq
-nq
+(21,1,1) = {"
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -3762,11 +4150,11 @@ Pq
 wc
 VP
 SM
-IZ
+dt
 xz
 Wx
 ib
-IZ
+dt
 mM
 mM
 NV
@@ -3774,7 +4162,7 @@ LW
 KV
 tU
 Iz
-iT
+VE
 Eq
 ea
 ea
@@ -3806,14 +4194,14 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
+TW
 "}
-(23,1,1) = {"
-nq
-nq
-nq
+(22,1,1) = {"
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -3824,15 +4212,15 @@ IZ
 IZ
 IZ
 aO
-IZ
+dt
 zk
-mM
+bQ
 mM
 qd
 mM
-mM
+UU
 Oo
-KV
+fT
 KV
 KV
 KV
@@ -3844,7 +4232,7 @@ ea
 IZ
 IZ
 IX
-in
+IE
 Om
 IZ
 IZ
@@ -3855,7 +4243,7 @@ IZ
 IZ
 IZ
 ko
-Wy
+qD
 IZ
 JI
 jo
@@ -3864,33 +4252,33 @@ Xs
 IZ
 Pq
 Pq
+Jf
 Pq
 Pq
 Pq
-Pq
-nq
-nq
-nq
+TW
 "}
-(24,1,1) = {"
-nq
-nq
-nq
+(23,1,1) = {"
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 IZ
 Pq
 dU
-dU
+hh
 IZ
 oe
 oe
-wc
-IZ
+fn
+dt
 mM
 mM
 ZY
-IZ
+dt
 NV
 mM
 NV
@@ -3902,14 +4290,14 @@ KV
 iL
 ea
 ea
-EC
+ea
 IZ
 WH
 VL
 ea
-bi
+lS
 ea
-yJ
+Ui
 pb
 pb
 pb
@@ -3928,27 +4316,27 @@ Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 dc
-dc
-nq
-nq
+nb
 "}
-(25,1,1) = {"
-nq
-nq
-nq
+(24,1,1) = {"
+TW
+TW
+TW
+TW
+TW
 Pq
-Pq
+Jf
 IZ
 Pq
 Pq
 Jj
 IZ
 FG
-wm
+pT
 oJ
-IZ
+dt
 mM
 mM
 ZY
@@ -3957,10 +4345,10 @@ DR
 mM
 NV
 KV
+zw
 KV
 KV
-KV
-KV
+fT
 wf
 ea
 ea
@@ -3972,7 +4360,7 @@ qc
 vg
 bs
 Fz
-oj
+nD
 ea
 ea
 ea
@@ -3992,13 +4380,13 @@ Pq
 Pq
 Pq
 dc
-dc
-dc
-nq
+nb
 "}
-(26,1,1) = {"
-nq
-nq
+(25,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4010,8 +4398,8 @@ IZ
 gY
 pT
 bR
-IZ
-mM
+dt
+OX
 zk
 ZY
 Cr
@@ -4054,14 +4442,14 @@ Pq
 Pq
 Pq
 Qd
-dc
-dc
-nq
+nb
 "}
-(27,1,1) = {"
-nq
-nq
-Pq
+(26,1,1) = {"
+TW
+TW
+TW
+TW
+Jf
 Pq
 Pq
 IZ
@@ -4069,21 +4457,21 @@ Pq
 Pq
 ch
 IZ
-gY
+Ue
 oJ
 XY
-IZ
+dt
 zk
 zk
 ZY
-IZ
+dt
 NV
 mM
 NV
 VW
 nf
 KV
-KV
+in
 KV
 IZ
 ea
@@ -4097,7 +4485,7 @@ bi
 dM
 Fz
 ea
-bi
+PS
 IZ
 IZ
 IZ
@@ -4116,12 +4504,12 @@ nL
 Qd
 dc
 dc
-nq
-dc
-nq
+TW
 "}
-(28,1,1) = {"
-nq
+(27,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 UI
@@ -4133,14 +4521,14 @@ HL
 IZ
 QV
 VX
-Vr
-IZ
+pT
+dt
 jB
 zk
-mM
+UU
 NV
 mM
-mM
+bQ
 NV
 LW
 cX
@@ -4162,8 +4550,8 @@ ea
 hG
 bs
 bI
-GN
-By
+lR
+lR
 IZ
 Pq
 Pq
@@ -4178,17 +4566,17 @@ KK
 dc
 dc
 dc
-nq
-nq
-nq
+TW
 "}
-(29,1,1) = {"
-nq
+(28,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 Pq
 Pq
 WP
@@ -4198,8 +4586,8 @@ oJ
 oJ
 pT
 zE
-mM
-mM
+YH
+Ke
 so
 mM
 mM
@@ -4212,7 +4600,7 @@ yr
 bs
 ea
 ea
-ea
+sR
 IZ
 ha
 GM
@@ -4221,7 +4609,7 @@ qI
 bs
 mz
 ea
-bi
+HE
 lR
 lR
 lR
@@ -4234,18 +4622,18 @@ Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 Vp
 dc
 dc
 dc
 Pq
-dc
-nq
-nq
+nb
 "}
-(30,1,1) = {"
-nq
+(29,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4257,17 +4645,17 @@ Sv
 IZ
 Ip
 pT
-pT
-IZ
+Zs
+dt
 Zm
 oV
 VB
-IZ
+dt
 mM
 NV
 NV
 KV
-KV
+Ix
 tU
 iK
 iT
@@ -4282,19 +4670,19 @@ bs
 bs
 IZ
 IR
-ea
-bi
+lR
+ir
 IZ
+dt
+dt
+dt
 IZ
-IZ
-IZ
-IZ
 Pq
 Pq
 Pq
 Pq
-Pq
-Pq
+Jf
+Jf
 Pq
 Qd
 dc
@@ -4302,15 +4690,15 @@ dc
 dc
 dc
 dc
-dc
-nq
-nq
+nb
 "}
-(31,1,1) = {"
-nq
-nq
+(30,1,1) = {"
+TW
+TW
+TW
+TW
 Pq
-Pq
+Jf
 Pq
 IZ
 KE
@@ -4319,33 +4707,33 @@ Jj
 IZ
 IZ
 aO
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
+dt
+dt
+dt
+dt
+dt
+dt
 KV
 KV
 IK
-KV
+zw
 KV
 tU
 Iz
-iT
+Xg
 IZ
-ea
+cH
 ea
 ea
 bs
 FS
 ZU
-pb
-wz
+VH
+wh
 bs
 Fz
 ea
-bi
+HE
 yN
 ea
 ea
@@ -4353,23 +4741,23 @@ ea
 IZ
 Pq
 Pq
+Jf
+Jf
 Pq
 Pq
 Pq
-Pq
-Pq
 dc
 dc
 dc
 dc
 dc
 dc
-dc
-dc
-nq
+nb
 "}
-(32,1,1) = {"
-nq
+(31,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4391,7 +4779,7 @@ gh
 gh
 tU
 Jl
-iT
+jK
 nf
 IK
 GV
@@ -4402,7 +4790,7 @@ ea
 bs
 ml
 py
-eg
+ID
 bi
 ea
 Fz
@@ -4410,12 +4798,12 @@ ea
 bi
 bs
 OL
+ea
 Et
-II
 IZ
 Pq
 Pq
-Pq
+Jf
 Pq
 Pq
 Vp
@@ -4425,13 +4813,13 @@ dc
 dc
 dc
 dc
-dc
-dc
-nq
-nq
+Qd
+nb
 "}
-(33,1,1) = {"
-nq
+(32,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4452,7 +4840,7 @@ IZ
 IZ
 GV
 KV
-DP
+nW
 TR
 KV
 bu
@@ -4467,19 +4855,19 @@ JH
 ea
 bi
 ea
-Fz
+Vg
 ea
 bi
 IZ
+dt
+dt
+dt
 IZ
-IZ
-IZ
-IZ
 Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 dc
 dc
 dc
@@ -4488,12 +4876,12 @@ dc
 dc
 dc
 dc
-Qd
-nq
-nq
+nb
 "}
-(34,1,1) = {"
-nq
+(33,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4513,14 +4901,14 @@ Pq
 Pq
 IZ
 IZ
-wc
+wB
 IZ
 tJ
-wc
+wB
 IZ
 IZ
 IZ
-ea
+EC
 ea
 ea
 wP
@@ -4535,13 +4923,13 @@ bi
 yN
 ea
 ea
-ea
+bn
 IZ
 Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 dc
 dc
 dc
@@ -4550,12 +4938,12 @@ dc
 dc
 dc
 dc
-dc
-nq
-nq
+nb
 "}
-(35,1,1) = {"
-nq
+(34,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4569,22 +4957,22 @@ sC
 dU
 Pq
 Pq
-dU
+HL
 Jj
-dU
-Pq
-Pq
-Pq
 tJ
-xR
+Pq
+Pq
+Pq
+NC
+Gg
 wc
-wc
+Rf
 wc
 Pq
 IZ
 Pq
 ea
-sR
+ea
 IZ
 IZ
 IZ
@@ -4592,18 +4980,18 @@ IZ
 IZ
 IZ
 Fz
-Jm
+ea
 bi
 bs
 Qg
+ea
 Et
-II
 IZ
 Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 dc
 dc
 dc
@@ -4611,13 +4999,13 @@ dc
 dc
 dc
 dc
-dc
-dc
-nq
-nq
+nb
+nb
 "}
-(36,1,1) = {"
-nq
+(35,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4646,7 +5034,7 @@ Pq
 IZ
 ea
 ea
-Jv
+vN
 IZ
 Pq
 Pq
@@ -4655,7 +5043,7 @@ IZ
 IZ
 zA
 sB
-hg
+Gu
 IZ
 IZ
 IZ
@@ -4665,21 +5053,21 @@ Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 dc
 dc
-TW
+qe
 QK
 QK
 jt
 dc
-dc
-nq
-nq
-nq
+nb
+TW
 "}
-(37,1,1) = {"
-nq
+(36,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4724,9 +5112,9 @@ Pq
 Pq
 Pq
 Pq
+Jf
 Pq
-Pq
-Pq
+Jf
 dc
 dc
 dc
@@ -4735,13 +5123,13 @@ dc
 dc
 dc
 dc
-dc
-nq
-nq
-nq
+nb
+TW
 "}
-(38,1,1) = {"
-nq
+(37,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -4749,7 +5137,7 @@ IZ
 IZ
 Sf
 tW
-WP
+mf
 IZ
 IZ
 Pq
@@ -4763,7 +5151,7 @@ Qq
 Pq
 wc
 dU
-dU
+aJ
 Pq
 Pq
 Pq
@@ -4785,8 +5173,8 @@ IZ
 IZ
 Pq
 Pq
-Pq
-Pq
+Jf
+Jf
 Pq
 Pq
 Qd
@@ -4796,19 +5184,19 @@ dc
 dc
 dc
 dc
-Qd
 dc
-nq
-nq
-nq
+nb
+TW
 "}
-(39,1,1) = {"
-nq
+(38,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
 IZ
-XT
+rE
 ea
 Go
 ea
@@ -4820,8 +5208,8 @@ hh
 tl
 Qq
 Qq
-Bc
-dU
+wc
+wi
 aO
 wc
 wc
@@ -4840,15 +5228,15 @@ Pq
 IZ
 WC
 LQ
-ea
+bn
 sB
 Je
 IZ
 IZ
 IZ
 Pq
-Pq
-Pq
+Jf
+Jf
 Pq
 Pq
 nL
@@ -4859,20 +5247,20 @@ dc
 dc
 dc
 dc
-dc
-nq
-nq
-nq
+nb
+TW
 "}
-(40,1,1) = {"
-nq
+(39,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
-Ne
+XT
 ea
 ea
-ea
+vN
 wl
 ea
 Vf
@@ -4882,7 +5270,7 @@ Pq
 wc
 VP
 wc
-bn
+jA
 Pq
 wc
 VP
@@ -4896,13 +5284,13 @@ lR
 Pq
 Pq
 Pq
-xM
+uL
 Pq
 Pq
 Pq
 Ed
-fn
-Jv
+vp
+pi
 ea
 wa
 fc
@@ -4910,7 +5298,7 @@ IZ
 IZ
 IZ
 Pq
-Pq
+Jf
 Pq
 IZ
 ei
@@ -4920,20 +5308,20 @@ nq
 nq
 dc
 dc
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
 "}
-(41,1,1) = {"
-nq
+(40,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
-wB
+By
 fP
-sm
+oj
 Eo
 Ac
 CL
@@ -4959,13 +5347,13 @@ rG
 Bt
 Pq
 wc
-wi
+ww
 Pq
 Pq
 CB
 FH
 hs
-nD
+rm
 ZE
 vp
 eu
@@ -4976,20 +5364,20 @@ Pq
 Pq
 QK
 dc
+Vr
 dc
 dc
-dc
 nq
 dc
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
 "}
-(42,1,1) = {"
-nq
+(41,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -5024,12 +5412,12 @@ wc
 wc
 wc
 wc
-dU
-rY
-Zs
-jG
+aJ
+LK
+Ry
+BL
 ea
-ea
+vN
 ro
 IZ
 IZ
@@ -5043,15 +5431,15 @@ dc
 dc
 nq
 nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
 "}
-(43,1,1) = {"
-nq
+(42,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -5059,7 +5447,7 @@ AP
 ea
 ea
 Vj
-Vj
+rY
 ea
 ea
 Go
@@ -5079,7 +5467,7 @@ Pq
 Pq
 Tc
 tJ
-xR
+Gg
 wc
 wc
 Pq
@@ -5087,10 +5475,10 @@ ZV
 wc
 uR
 dU
-vv
+jG
 IZ
-lc
-ea
+uU
+bn
 rm
 kO
 IZ
@@ -5105,23 +5493,23 @@ dc
 dc
 dc
 nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
 "}
-(44,1,1) = {"
-nq
+(43,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
 MT
 ea
-ea
+VG
 Vj
-Jf
+Vj
 ea
 ea
 ea
@@ -5147,11 +5535,11 @@ fG
 Pq
 Pq
 Pq
-wc
-dU
-Io
-ET
-vN
+vv
+XW
+lc
+er
+hx
 ea
 lR
 Al
@@ -5167,15 +5555,15 @@ dc
 dc
 dc
 nq
-nq
-nq
-nq
-nq
-nq
-nq
+WO
+TW
+TW
+TW
 "}
-(45,1,1) = {"
-nq
+(44,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 IZ
@@ -5213,15 +5601,15 @@ wc
 hh
 cB
 ea
-dU
+HL
 tR
-hg
+hV
 IZ
 IZ
 IZ
+Jf
 Pq
 Pq
-Pq
 dc
 dc
 dc
@@ -5229,19 +5617,19 @@ dc
 dc
 nq
 nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
 "}
-(46,1,1) = {"
-nq
+(45,1,1) = {"
+TW
+TW
+Pq
 Pq
 Pq
 IZ
-wB
+eQ
 fP
 HW
 Eo
@@ -5250,7 +5638,7 @@ ct
 xB
 ea
 ea
-pR
+LR
 BV
 Pq
 lo
@@ -5272,17 +5660,17 @@ IZ
 IZ
 IZ
 Pq
-vp
-ea
-sB
-px
+eg
+tD
+Ed
+lR
 hg
 IZ
 IZ
 IZ
 Pq
-Pq
-Pq
+Jf
+Jf
 Pq
 Vp
 dc
@@ -5290,25 +5678,25 @@ dc
 dc
 dc
 dc
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
 "}
-(47,1,1) = {"
-nq
+(46,1,1) = {"
+TW
+TW
+Pq
 Pq
 Pq
 IZ
-fm
+vw
 ea
 Go
 ea
 ea
-ea
+vN
 ea
 ea
 bp
@@ -5322,7 +5710,7 @@ TH
 dU
 dU
 ea
-hh
+dU
 ea
 ea
 ea
@@ -5344,24 +5732,24 @@ IZ
 Pq
 Pq
 Pq
+Jf
 Pq
-Pq
 dc
 dc
 dc
 dc
 dc
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Io
+TW
+TW
+TW
+TW
+TW
 "}
-(48,1,1) = {"
-nq
+(47,1,1) = {"
+TW
+TW
+Pq
 Pq
 Pq
 IZ
@@ -5381,12 +5769,12 @@ aD
 Pq
 aD
 Pq
-dU
+HL
 Pq
 Pq
 Pq
-dU
-aD
+hh
+Bc
 aD
 lR
 Pq
@@ -5406,112 +5794,112 @@ Pq
 Pq
 Pq
 Pq
+Jf
+Pq
+dc
+dc
+dc
+dc
+dc
+hN
+TW
+TW
+TW
+TW
+TW
+"}
+(48,1,1) = {"
+TW
+TW
 Pq
 Pq
+Pq
+Pq
+IZ
+IZ
+IZ
+px
+IZ
+IZ
+IZ
+hF
+IZ
+IZ
+IZ
+PK
+IZ
+IZ
+IZ
+PK
+IZ
+IZ
+IZ
+PK
+IZ
+IZ
+IZ
+PK
+IZ
+IZ
+Pq
+Pq
+Pq
+Pq
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+Pq
+Pq
+Pq
+Pq
+Pq
+Jf
+Pq
+Jf
+nq
+nq
 dc
 dc
 dc
-dc
-dc
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
 "}
 (49,1,1) = {"
-nq
-Pq
-Pq
-Pq
-IZ
-IZ
-IZ
-PK
-IZ
-IZ
-IZ
-PK
-IZ
-IZ
-IZ
-PK
-IZ
-IZ
-IZ
-PK
-IZ
-IZ
-IZ
-PK
-IZ
-IZ
-IZ
-PK
-IZ
-IZ
+TW
+TW
 Pq
 Pq
 Pq
 Pq
 IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-dc
-dc
-dc
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-"}
-(50,1,1) = {"
-nq
-Pq
-Pq
-Pq
-IZ
-rz
+UM
 pD
 Gv
 dt
-rz
+UM
+Jv
+ZX
+dt
+AX
 IV
 Gv
 dt
-Ft
+AX
 IV
-Gv
+wR
 dt
-Ft
-IV
-Gv
-dt
-VH
+Ba
 nu
 wR
 dt
 ej
-iU
+xS
 Gv
 IZ
 Pq
@@ -5532,32 +5920,32 @@ Pq
 Pq
 Pq
 Pq
-Pq
+Jf
 LU
 dc
 dc
 dc
 dc
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
 "}
-(51,1,1) = {"
-nq
+(50,1,1) = {"
+TW
+TW
+Pq
 Pq
 Pq
 Pq
 IZ
 zM
-UF
-Gv
-dt
-zM
 IV
+rz
+dt
+jJ
+mh
 Gv
 dt
 zM
@@ -5600,42 +5988,42 @@ dc
 dc
 dc
 dc
-nq
+TW
 dc
-dc
-nq
-nq
-nq
-nq
+nb
+TW
+TW
 "}
-(52,1,1) = {"
-nq
+(51,1,1) = {"
+TW
+TW
+Pq
 Pq
 Pq
 Pq
 IZ
-Ue
-IV
+II
+wm
 Hd
 dt
-YG
-IV
-wR
+xM
+Ft
+Qj
 dt
 YG
-IV
+RM
 Gv
 dt
 YG
-IV
+wm
 wR
 dt
 Bh
-IV
+wm
 Gv
 dt
 YG
-IV
+wm
 Gv
 IZ
 Pq
@@ -5656,7 +6044,7 @@ Pq
 Pq
 Pq
 Pq
-nq
+Ky
 nq
 nq
 dc
@@ -5664,86 +6052,86 @@ dc
 dc
 dc
 Qd
+nb
+TW
+TW
+"}
+(52,1,1) = {"
+TW
+TW
+Pq
+Pq
+Pq
+Pq
+IZ
+IZ
+IZ
+PK
+dt
+IZ
+IZ
+hF
+dt
+IZ
+IZ
+PK
+dt
+IZ
+IZ
+PK
+dt
+IZ
+IZ
+PK
+dt
+IZ
+IZ
+PK
+IZ
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Jf
+Jf
+Jf
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+nq
+nq
+nq
 dc
-nq
-nq
-nq
-nq
+dc
+dc
+dc
+dc
+TW
+TW
+TW
 "}
 (53,1,1) = {"
-nq
-Pq
-Pq
-Pq
-IZ
-IZ
-IZ
-PK
-dt
-IZ
-IZ
-PK
-dt
-IZ
-IZ
-PK
-dt
-IZ
-IZ
-PK
-dt
-IZ
-IZ
-PK
-dt
-IZ
-IZ
-PK
-IZ
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-nq
-dc
-dc
-dc
-dc
-dc
-nq
-nq
-nq
-nq
-nq
-"}
-(54,1,1) = {"
-nq
+TW
+TW
+TW
 Pq
 Pq
 Pq
 IZ
 hK
-Gv
+Nj
 Gv
 dt
 hK
-wR
+Gv
 Gv
 dt
 hK
@@ -5766,17 +6154,17 @@ Pq
 Pq
 Pq
 Pq
+Jf
+Jf
+Pq
+Jf
+Jf
 Pq
 Pq
 Pq
 Pq
 Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
+IZ
 Pq
 nq
 Gb
@@ -5787,15 +6175,15 @@ dc
 dc
 dc
 dc
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
 "}
-(55,1,1) = {"
-nq
+(54,1,1) = {"
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -5813,7 +6201,7 @@ PB
 Gv
 dt
 SA
-PB
+Un
 wR
 dt
 SA
@@ -5828,24 +6216,76 @@ Pq
 Pq
 Pq
 Pq
+Jf
 Pq
 Pq
 Pq
+Jf
+Jf
 Pq
 Pq
 Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
+iu
+Uq
+dc
 Gb
 nq
 nq
-WO
+iN
 nq
 nq
+dc
+dc
+TW
+TW
+TW
+TW
+TW
+"}
+(55,1,1) = {"
+TW
+TW
+TW
+Pq
+Pq
+Pq
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+IZ
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
 dc
 dc
 nq
@@ -5855,37 +6295,20 @@ nq
 nq
 nq
 nq
+dc
+dc
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (56,1,1) = {"
-nq
-Pq
-Pq
-Pq
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
-IZ
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -5901,27 +6324,53 @@ Pq
 Pq
 Pq
 Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Pq
+Jf
+go
+go
+dc
+dc
+dc
+dc
+dc
+vU
+iE
+dc
+dc
+dc
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (57,1,1) = {"
-nq
-Pq
-Pq
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -5942,6 +6391,9 @@ Pq
 Pq
 Pq
 dc
+dc
+dc
+Jf
 Pq
 Pq
 Pq
@@ -5949,39 +6401,39 @@ Pq
 Pq
 Pq
 Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+dc
+Vp
+Vp
+dc
+dc
+dc
+dc
+dc
+Qd
+TW
+nb
+nb
+dc
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (58,1,1) = {"
-nq
+TW
+TW
+TW
+TW
+TW
 Pq
 Pq
 Pq
@@ -5989,180 +6441,176 @@ Pq
 Pq
 Pq
 Pq
+TW
 Pq
 Pq
 Pq
 Pq
 Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
+cz
+TW
+TW
 dc
 dc
 dc
+dc
+TW
+TW
+TW
 Pq
 Pq
 Pq
 Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+Jf
+TW
+TW
+TW
+TW
+TW
+nb
+dc
+dc
+dc
+dc
+WO
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (59,1,1) = {"
-nq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-Pq
-nq
-nq
-dc
-dc
-dc
-dc
-nq
-nq
-nq
-Pq
-Pq
-Pq
-Pq
-nq
-Pq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
 (60,1,1) = {"
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
-nq
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
+TW
 "}
