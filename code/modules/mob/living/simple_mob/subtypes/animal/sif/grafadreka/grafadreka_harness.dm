@@ -19,7 +19,8 @@
 			/obj/item/storage/animal_harness/grafadreka/proc/UpdateArmor
 		),
 		/obj/item/card/id = ATTACHED_ID,
-		/obj/item/flashlight = ATTACHED_LIGHT
+		/obj/item/flashlight = ATTACHED_LIGHT,
+		/obj/item/clothing/accessory/medal = ATTACHED_TAG
 	)
 
 

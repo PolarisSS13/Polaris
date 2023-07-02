@@ -469,7 +469,6 @@
 	name = "pride pin"
 	desc = "A pin displaying pride in one's identity."
 	icon_state = "pride"
-	slot = ACCESSORY_SLOT_MEDAL
 
 /obj/item/clothing/accessory/medal/pride/bi
 	name = "bisexual pride pin"
