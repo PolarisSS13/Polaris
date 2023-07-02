@@ -138,7 +138,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "cz" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/sif,
 /area/template_noop)
 "cB" = (
 /obj/item/material/shard,
@@ -2302,7 +2302,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Pq" = (
-/turf/simulated/mineral/ignore_mapgen,
+/turf/simulated/mineral/sif,
 /area/submap/CollapsedMine)
 "Py" = (
 /obj/effect/floor_decal/corner/red/border{
