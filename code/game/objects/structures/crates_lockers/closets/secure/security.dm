@@ -84,7 +84,7 @@
 		/obj/item/shield/riot,
 		/obj/item/shield/riot/tele,
 		/obj/item/storage/box/holobadge/hos,
-		/obj/item/clothing/accessory/badge/holo/hos,
+		/obj/item/clothing/accessory/medal/badge/holo/hos,
 		/obj/item/reagent_containers/spray/pepper,
 		/obj/item/tool/crowbar/red,
 		/obj/item/storage/box/flashbangs,
@@ -134,7 +134,7 @@
 		/obj/item/radio/headset/headset_sec/alt,
 		/obj/item/clothing/glasses/sunglasses/sechud,
 		/obj/item/taperoll/police,
-		/obj/item/clothing/accessory/badge/holo/warden,
+		/obj/item/clothing/accessory/medal/badge/holo/warden,
 		/obj/item/storage/box/flashbangs,
 		/obj/item/storage/belt/security,
 		/obj/item/reagent_containers/spray/pepper,
@@ -230,7 +230,7 @@
 	close_sound = 'sound/machines/closet/closet_wood_close.ogg'
 
 	starts_with = list(
-		/obj/item/clothing/accessory/badge/holo/detective,
+		/obj/item/clothing/accessory/medal/badge/holo/detective,
 		/obj/item/clothing/gloves/black,
 		/obj/item/gunbox,
 		/obj/item/gun/energy/stunrevolver/vintage,

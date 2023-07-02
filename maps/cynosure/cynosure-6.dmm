@@ -10661,9 +10661,9 @@
 /area/shuttle/merchant/home)
 "lMq" = (
 /obj/structure/table/standard,
-/obj/item/clothing/accessory/permit,
-/obj/item/clothing/accessory/permit,
-/obj/item/clothing/accessory/permit,
+/obj/item/clothing/accessory/medal/permit,
+/obj/item/clothing/accessory/medal/permit,
+/obj/item/clothing/accessory/medal/permit,
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},

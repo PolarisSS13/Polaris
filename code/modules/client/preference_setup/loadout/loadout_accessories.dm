@@ -336,28 +336,28 @@
 
 /datum/gear/accessory/pride
 	display_name = "pride pin selection"
-	path = /obj/item/clothing/accessory/pride
+	path = /obj/item/clothing/accessory/medal/pride
 
 /datum/gear/accessory/pride/New()
 	..()
 	var/list/pridepins = list()
-	for(var/pridepin in typesof(/obj/item/clothing/accessory/pride))
-		var/obj/item/clothing/accessory/pridepin_type = pridepin
+	for(var/pridepin in typesof(/obj/item/clothing/accessory/medal/pride))
+		var/obj/item/clothing/accessory/medal/pridepin_type = pridepin
 		pridepins[initial(pridepin_type.name)] = pridepin_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pridepins))
 
 /datum/gear/accessory/corpbadge
 	display_name = "investigator holobadge (IAA)"
-	path = /obj/item/clothing/accessory/badge/holo/investigator
+	path = /obj/item/clothing/accessory/medal/badge/holo/investigator
 	allowed_roles = list("Internal Affairs Agent")
 
 /datum/gear/accessory/pressbadge
 	display_name = "press pass, corporate"
-	path = /obj/item/clothing/accessory/badge/press
+	path = /obj/item/clothing/accessory/medal/badge/press
 
 /datum/gear/accessory/pressbadgefreelance
 	display_name = "press pass, freelance"
-	path = /obj/item/clothing/accessory/badge/press/independent
+	path = /obj/item/clothing/accessory/medal/badge/press/independent
 
 /datum/gear/accessory/legbrace
 	display_name = "leg braces"

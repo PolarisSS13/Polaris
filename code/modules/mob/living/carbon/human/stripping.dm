@@ -46,7 +46,7 @@
 			if(!A || suit.loc != src || !(A in suit.accessories))
 				return
 
-			if(istype(A, /obj/item/clothing/accessory/badge) || istype(A, /obj/item/clothing/accessory/medal))
+			if(istype(A, /obj/item/clothing/accessory/medal/badge) || istype(A, /obj/item/clothing/accessory/medal))
 				user.visible_message("<span class='danger'>\The [user] tears off \the [A] from [src]'s [suit.name]!</span>")
 			add_attack_logs(user,src,"Stripped [A.name] off [suit.name]")
 			A.on_removed(user)
@@ -67,7 +67,7 @@
 			var/obj/item/grab/grab = held
 			if(istype(grab) && grab.affecting == src)
 				stripping = TRUE
-		
+
 	if(stripping)
 		if(!istype(target_slot))  // They aren't holding anything valid and there's nothing to remove, why are we even here?
 			return

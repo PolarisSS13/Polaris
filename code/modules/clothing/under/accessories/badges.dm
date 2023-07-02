@@ -4,23 +4,22 @@
 	or they can be emagged to accept any ID for use in disguises.
 */
 
-/obj/item/clothing/accessory/badge
+/obj/item/clothing/accessory/medal/badge
 	name = "detective's badge"
 	desc = "NanoTrasen Security Department detective's badge, made from gold."
 	icon_state = "marshalbadge"
 	slot_flags = SLOT_BELT | SLOT_TIE
-	slot = ACCESSORY_SLOT_MEDAL
 
 	var/stored_name
 	var/badge_string = "Corporate Security"
 
-/obj/item/clothing/accessory/badge/proc/set_name(var/new_name)
+/obj/item/clothing/accessory/medal/badge/proc/set_name(var/new_name)
 	stored_name = new_name
 	name = "[initial(name)] ([stored_name])"
 
-/obj/item/clothing/accessory/badge/proc/set_desc(var/mob/living/carbon/human/H)
+/obj/item/clothing/accessory/medal/badge/proc/set_desc(var/mob/living/carbon/human/H)
 
-/obj/item/clothing/accessory/badge/attack_self(mob/user as mob)
+/obj/item/clothing/accessory/medal/badge/attack_self(mob/user as mob)
 
 	if(!stored_name)
 		to_chat(user, "You polish your old badge fondly, shining up the surface.")
@@ -33,47 +32,47 @@
 		else
 			user.visible_message("<span class='notice'>[user] displays their [src.name].\nIt reads: [badge_string].</span>","<span class='notice'>You display your [src.name]. It reads: [badge_string].</span>")
 
-/obj/item/clothing/accessory/badge/attack(mob/living/carbon/human/M, mob/living/user)
+/obj/item/clothing/accessory/medal/badge/attack(mob/living/carbon/human/M, mob/living/user)
 	if(isliving(user))
 		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, thrusting [src] into their face insistently.</span>","<span class='danger'>You invade [M]'s personal space, thrusting [src] into their face insistently.</span>")
 		user.do_attack_animation(M)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
 
 // Sheriff Badge (toy)
-/obj/item/clothing/accessory/badge/sheriff
+/obj/item/clothing/accessory/medal/badge/sheriff
 	name = "sheriff badge"
 	desc = "This town ain't big enough for the two of us, pardner."
 	icon_state = "sheriff_toy"
 	item_state = "sheriff_toy"
 
-/obj/item/clothing/accessory/badge/sheriff/attack_self(mob/user as mob)
+/obj/item/clothing/accessory/medal/badge/sheriff/attack_self(mob/user as mob)
 	user.visible_message("[user] shows their sheriff badge. There's a new sheriff in town!",\
 		"You flash the sheriff badge to everyone around you!")
 
-/obj/item/clothing/accessory/badge/sheriff/attack(mob/living/carbon/human/M, mob/living/user)
+/obj/item/clothing/accessory/medal/badge/sheriff/attack(mob/living/carbon/human/M, mob/living/user)
 	if(isliving(user))
 		user.visible_message("<span class='danger'>[user] invades [M]'s personal space, the sheriff badge into their face!.</span>","<span class='danger'>You invade [M]'s personal space, thrusting the sheriff badge into their face insistently.</span>")
 		user.do_attack_animation(M)
 		user.setClickCooldown(DEFAULT_QUICK_COOLDOWN) //to prevent spam
 
 //Security Holobadges
-/obj/item/clothing/accessory/badge/holo
+/obj/item/clothing/accessory/medal/badge/holo
 	name = "holobadge"
 	desc = "This glowing blue badge marks the holder as law enforcement."
 	icon_state = "holobadge"
 	var/emagged //Emagging removes Sec check.
 
-/obj/item/clothing/accessory/badge/holo/cord
+/obj/item/clothing/accessory/medal/badge/holo/cord
 	icon_state = "holobadge-cord"
 	slot_flags = SLOT_MASK | SLOT_TIE | SLOT_BELT
 
-/obj/item/clothing/accessory/badge/holo/attack_self(mob/user as mob)
+/obj/item/clothing/accessory/medal/badge/holo/attack_self(mob/user as mob)
 	if(!stored_name)
 		to_chat(user, "Waving around a holobadge before swiping an ID would be pretty pointless.")
 		return
 	return ..()
 
-/obj/item/clothing/accessory/badge/holo/emag_act(var/remaining_charges, var/mob/user)
+/obj/item/clothing/accessory/medal/badge/holo/emag_act(var/remaining_charges, var/mob/user)
 	if (emagged)
 		to_chat(user, "<span class='danger'>\The [src] is already cracked.</span>")
 		return
@@ -82,7 +81,7 @@
 		to_chat(user, "<span class='danger'>You crack the holobadge security checks.</span>")
 		return 1
 
-/obj/item/clothing/accessory/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
+/obj/item/clothing/accessory/medal/badge/holo/attackby(var/obj/item/O as obj, var/mob/user as mob)
 	if(istype(O, /obj/item/card/id) || istype(O, /obj/item/pda))
 
 		var/obj/item/card/id/id_card = null
@@ -105,30 +104,30 @@
 	name = "holobadge box"
 	desc = "A box claiming to contain holobadges."
 	starts_with = list(
-		/obj/item/clothing/accessory/badge/holo = 4,
-		/obj/item/clothing/accessory/badge/holo/officer = 2,
-		/obj/item/clothing/accessory/badge/holo/cord = 2
+		/obj/item/clothing/accessory/medal/badge/holo = 4,
+		/obj/item/clothing/accessory/medal/badge/holo/officer = 2,
+		/obj/item/clothing/accessory/medal/badge/holo/cord = 2
 	)
 
-/obj/item/clothing/accessory/badge/holo/officer
+/obj/item/clothing/accessory/medal/badge/holo/officer
 	name = "officer's badge"
 	desc = "A bronze corporate security badge. Stamped with the words 'Security Officer.'"
 	icon_state = "bronzebadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
-/obj/item/clothing/accessory/badge/holo/warden
+/obj/item/clothing/accessory/medal/badge/holo/warden
 	name = "warden's holobadge"
 	desc = "A silver corporate security badge. Stamped with the words 'Warden.'"
 	icon_state = "silverbadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
-/obj/item/clothing/accessory/badge/holo/hos
+/obj/item/clothing/accessory/medal/badge/holo/hos
 	name = "head of security's holobadge"
 	desc = "An immaculately polished gold security badge. Stamped with the words 'Head of Security.'"
 	icon_state = "goldbadge"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
-/obj/item/clothing/accessory/badge/holo/detective
+/obj/item/clothing/accessory/medal/badge/holo/detective
 	name = "detective's holobadge"
 	desc = "An immaculately polished gold security badge on leather. Labeled 'Detective.'"
 	icon_state = "marshalbadge"
@@ -138,22 +137,22 @@
 	name = "holobadge box"
 	desc = "A box claiming to contain holobadges."
 	starts_with = list(
-		/obj/item/clothing/accessory/badge/holo = 2,
-		/obj/item/clothing/accessory/badge/holo/warden = 1,
-		/obj/item/clothing/accessory/badge/holo/detective = 2,
-		/obj/item/clothing/accessory/badge/holo/hos = 1,
-		/obj/item/clothing/accessory/badge/holo/cord = 1
+		/obj/item/clothing/accessory/medal/badge/holo = 2,
+		/obj/item/clothing/accessory/medal/badge/holo/warden = 1,
+		/obj/item/clothing/accessory/medal/badge/holo/detective = 2,
+		/obj/item/clothing/accessory/medal/badge/holo/hos = 1,
+		/obj/item/clothing/accessory/medal/badge/holo/cord = 1
 
 	)
 
-/obj/item/clothing/accessory/badge/holo/investigator
+/obj/item/clothing/accessory/medal/badge/holo/investigator
 	name = "\improper Internal Investigations holobadge"
 	desc = "This badge marks the holder as an internal affairs investigator."
 	icon_state = "invbadge"
 	badge_string = "Internal Investigations"
 	slot_flags = SLOT_TIE | SLOT_BELT
 
-/obj/item/clothing/accessory/badge/holo/sheriff
+/obj/item/clothing/accessory/medal/badge/holo/sheriff
 	name = "sheriff badge"
 	desc = "A star-shaped brass badge denoting who the law is around these parts."
 	icon_state = "sheriff"
@@ -161,24 +160,24 @@
 
 //Other badges
 
-/obj/item/clothing/accessory/badge/old
+/obj/item/clothing/accessory/medal/badge/old
 	name = "faded badge"
 	desc = "A faded law enforcement badge in an older design."
 	icon_state = "badge_round"
 
-/obj/item/clothing/accessory/badge/solid
+/obj/item/clothing/accessory/medal/badge/solid
 	name = "\improper SolGov ID badge"
 	desc = "A descriptive identification badge with the holder's credentials. This one indicates the holder is representing the SCG."
 	icon_state = "solbadge"
 	badge_string = null
 
-/obj/item/clothing/accessory/badge/ntid
+/obj/item/clothing/accessory/medal/badge/ntid
 	name = "\improper NT ID badge"
 	desc = "A descriptive identification badge with the holder's credentials. This one has red marks with the NanoTrasen logo on it."
 	icon_state = "ntbadge"
 	badge_string = null
 
-/obj/item/clothing/accessory/badge/press
+/obj/item/clothing/accessory/medal/badge/press
 	name = "corporate press pass"
 	desc = "A corporate reporter's pass, emblazoned with the NanoTrasen logo."
 	icon_state = "pressbadge"
@@ -189,13 +188,13 @@
 	drop_sound = 'sound/items/drop/rubber.ogg'
 	pickup_sound = 'sound/items/pickup/rubber.ogg'
 
-/obj/item/clothing/accessory/badge/press/independent
+/obj/item/clothing/accessory/medal/badge/press/independent
 	name = "press pass"
 	desc = "A freelance journalist's pass, certified by Oculum Broadcast."
 	icon_state = "pressbadge-i"
 	badge_string = "Freelance Journalist"
 
-/obj/item/clothing/accessory/badge/press/plastic
+/obj/item/clothing/accessory/medal/badge/press/plastic
 	name = "plastic press pass"
 	desc = "A journalist's 'pass' shaped, for whatever reason, like a security badge. It is made of plastic."
 	icon_state = "pbadge"
@@ -204,62 +203,62 @@
 
 // Synthmorph bag / Corporation badges. Primarily used on the robobag, but can be worn. Default is NT.
 
-/obj/item/clothing/accessory/badge/corporate_tag
+/obj/item/clothing/accessory/medal/badge/corporate_tag
 	name = "NanoTrasen Badge"
 	desc = "A plain metallic plate that might denote the wearer as a member of NanoTrasen."
 	icon_state = "tag_nt"
 	item_state = "badge"
 	badge_string = "NanoTrasen"
 
-/obj/item/clothing/accessory/badge/corporate_tag/morpheus
+/obj/item/clothing/accessory/medal/badge/corporate_tag/morpheus
 	name = "Morpheus Badge"
 	desc = "A plain metallic plate that might denote the wearer as a member of Morpheus Cyberkinetics."
 	icon_state = "tag_blank"
 	badge_string = "Morpheus"
 
-/obj/item/clothing/accessory/badge/corporate_tag/wardtaka
+/obj/item/clothing/accessory/medal/badge/corporate_tag/wardtaka
 	name = "Ward-Takahashi Badge"
 	desc = "A plain metallic plate that might denote the wearer as a member of Ward-Takahashi."
 	icon_state = "tag_ward"
 	badge_string = "Ward-Takahashi"
 
-/obj/item/clothing/accessory/badge/corporate_tag/zenghu
+/obj/item/clothing/accessory/medal/badge/corporate_tag/zenghu
 	name = "Zeng-Hu Badge"
 	desc = "A plain metallic plate that might denote the wearer as a member of Zeng-Hu."
 	icon_state = "tag_zeng"
 	badge_string = "Zeng-Hu"
 
-/obj/item/clothing/accessory/badge/corporate_tag/gilthari
+/obj/item/clothing/accessory/medal/badge/corporate_tag/gilthari
 	name = "Gilthari Badge"
 	desc = "An opulent metallic plate that might denote the wearer as a member of Gilthari."
 	icon_state = "tag_gil"
 	badge_string = "Gilthari"
 
-/obj/item/clothing/accessory/badge/corporate_tag/veymed
+/obj/item/clothing/accessory/medal/badge/corporate_tag/veymed
 	name = "Vey-Medical Badge"
 	desc = "A plain metallic plate that might denote the wearer as a member of Vey-Medical."
 	icon_state = "tag_vey"
 	badge_string = "Vey-Medical"
 
-/obj/item/clothing/accessory/badge/corporate_tag/hephaestus
+/obj/item/clothing/accessory/medal/badge/corporate_tag/hephaestus
 	name = "Hephaestus Badge"
 	desc = "A rugged metallic plate that might denote the wearer as a member of Hephaestus."
 	icon_state = "tag_heph"
 	badge_string = "Hephaestus"
 
-/obj/item/clothing/accessory/badge/corporate_tag/grayson
+/obj/item/clothing/accessory/medal/badge/corporate_tag/grayson
 	name = "Grayson Badge"
 	desc = "A rugged metallic plate that might denote the wearer as a member of Grayson."
 	icon_state = "tag_grayson"
 	badge_string = "Grayson"
 
-/obj/item/clothing/accessory/badge/corporate_tag/xion
+/obj/item/clothing/accessory/medal/badge/corporate_tag/xion
 	name = "Xion Badge"
 	desc = "A rugged metallic plate that might denote the wearer as a member of Xion."
 	icon_state = "tag_xion"
 	badge_string = "Xion"
 
-/obj/item/clothing/accessory/badge/corporate_tag/bishop
+/obj/item/clothing/accessory/medal/badge/corporate_tag/bishop
 	name = "Bishop Badge"
 	desc = "A sleek metallic plate that might denote the wearer as a member of Bishop."
 	icon_state = "tag_bishop"

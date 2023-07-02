@@ -17,11 +17,11 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	id_type = /obj/item/card/id/science/explorer
 	id_pda_assignment = "Explorer"
 	flags = OUTFIT_HAS_BACKPACK|OUTFIT_COMPREHENSIVE_SURVIVAL
-	backpack_contents = list(/obj/item/clothing/accessory/permit/gun/planetside = 1)
+	backpack_contents = list(/obj/item/clothing/accessory/medal/permit/gun/planetside = 1)
 
 /decl/hierarchy/outfit/job/explorer2/post_equip(mob/living/carbon/human/H)
 	..()
-	for(var/obj/item/clothing/accessory/permit/gun/planetside/permit in H.back.contents)
+	for(var/obj/item/clothing/accessory/medal/permit/gun/planetside/permit in H.back.contents)
 		permit.set_name(H.real_name)
 
 /decl/hierarchy/outfit/job/explorer2/technician
