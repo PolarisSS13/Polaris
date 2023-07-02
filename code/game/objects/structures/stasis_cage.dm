@@ -52,18 +52,33 @@
 	if(!istype(over_object) || !Adjacent(over_object) || !CanMouseDrop(over_object, usr))
 		return ..()
 
-	if(!sleeping && !istype(buckled, /obj/effect/energy_net))
+	if(src != usr && !(sleeping || lying) && !istype(buckled, /obj/effect/energy_net))
 		to_chat(usr, SPAN_WARNING("It's going to be difficult to load \the [src] into \the [over_object] without putting it to sleep or capturing it in a net."))
 		return
 
-	usr.visible_message(
-		SPAN_NOTICE("\The [usr] begins loading \the [src] into \the [over_object]."),
-		SPAN_NOTICE("You begin loading \the [src] into \the [over_object].")
-	)
+	if(usr == src)
+		usr.visible_message(
+			SPAN_NOTICE("\The [src] starts climbing into [src] \the [over_object]."),
+			SPAN_NOTICE("You start climbing into \the [over_object].")
+		)
+	else
+		usr.visible_message(
+			SPAN_NOTICE("\The [usr] begins loading \the [src] into \the [over_object]."),
+			SPAN_NOTICE("You begin loading \the [src] into \the [over_object].")
+		)
+
 	Bumped(usr)
-	if(do_after(usr, 20, over_object))
+	if(!do_after(usr, 20, over_object))
+		return
+
+	if(usr == src)
+		usr.visible_message(
+			SPAN_NOTICE("\The [usr] climbs into \the [over_object]."),
+			SPAN_NOTICE("You climb into \the [over_object].")
+		)
+	else
 		usr.visible_message(
 			SPAN_NOTICE("\The [usr] finishes loading \the [src] into \the [over_object]."),
 			SPAN_NOTICE("You finish loading \the [src] into \the [over_object].")
 		)
-		over_object.contain(src)
+	over_object.contain(src)
