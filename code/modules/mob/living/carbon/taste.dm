@@ -22,10 +22,10 @@ catalogue the 'taste strength' of each one
 calculate text size per text.
 */
 /datum/reagents/proc/generate_taste_message(mob/living/carbon/taster = null)
-	var/minimum_percent = 15
+	var/minimum_percent = 10
 	if(ishuman(taster))
 		var/mob/living/carbon/human/H = taster
-		minimum_percent = round(15/ (H.isSynthetic() ? TASTE_DULL : H.species.taste_sensitivity))
+		minimum_percent = round(10/ (H.isSynthetic() ? TASTE_DULL : H.species.taste_sensitivity))
 
 	var/list/out = list()
 	var/list/tastes = list() //descriptor = strength
@@ -33,7 +33,7 @@ calculate text size per text.
 		for(var/datum/reagent/R in reagent_list)
 			if(!R.taste_mult)
 				continue
-			if(istype(R, /datum/reagent/nutriment))
+			if(R.type == /datum/reagent/nutriment)
 				var/list/taste_data = R.get_data()
 				for(var/taste in taste_data)
 					if(taste in tastes)

@@ -1572,7 +1572,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatsteak/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, "grilled meat")
+	reagents.add_reagent("protein", 4, list("grilled meat" = 4))
 	reagents.add_reagent("sodiumchloride", 1)
 	reagents.add_reagent("blackpepper", 1)
 
@@ -7580,6 +7580,7 @@
 	icon_state = "neaera_candied_eyes20"
 	trash = /obj/item/trash/candybowl
 	vendingobject = /obj/item/reagent_containers/food/snacks/neaeracandy
+	nutriment_desc = list("sweet goo" = 2)
 	bitesize = 1
 	unitname = "eye"
 	filling_color = "#7C66DD"
@@ -7623,7 +7624,7 @@
 	center_of_mass = list("x"=17, "y"=15)
 	bitesize = 2
 
-/obj/item/reagent_containers/food/snacks/neaeracandy/Initialize()
+/obj/item/reagent_containers/food/snacks/neaerakabob/Initialize()
 	. = ..()
 	reagents.add_reagent("seafood", 4, list("fatty meat" = 2))
 
@@ -7673,7 +7674,7 @@
 	bitesize = 3
 	filling_color = "#7C66DD"
 
-/obj/item/reagent_containers/food/snacks/ganami/Initialize()
+/obj/item/reagent_containers/food/snacks/garani/Initialize()
 	. = ..()
 	reagents.add_reagent("seafood", 4, list("fatty meat" = 4))
 
@@ -7782,11 +7783,11 @@
 	nutriment_amt = 4
 	nutriment_allergens = ALLERGEN_FRUIT
 	bitesize = 1
-	nutriment_desc = list("meat" = 1, "sweet kirani" = 1,  "minty ga'uli" = 1)
+	nutriment_desc = list("sweet kirani" = 2,  "minty ga'uli" = 2)
 
 /obj/item/reagent_containers/food/snacks/stuffed_gauli/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, nutriment_desc)
+	reagents.add_reagent("protein", 4, list("steamed meat" = 4))
 
 /obj/item/reagent_containers/food/snacks/kirani_stew
 	name = "kirani stew"
@@ -7797,11 +7798,11 @@
 	trash = /obj/item/trash/snack_bowl
 	bitesize = 1
 	nutriment_allergens = ALLERGEN_FRUIT|ALLERGEN_SUGARS
-	nutriment_desc = list("minty qa'zal" = 1, "sweet kirani jelly" = 1)
+	nutriment_desc = list("minty qa'zal" = 2, "sweet kirani jelly" = 2)
 
 /obj/item/reagent_containers/food/snacks/kirani_stew/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, nutriment_desc)
+	reagents.add_reagent("protein", 4, list("stewed meat" = 4))
 
 /obj/item/reagent_containers/food/snacks/qazal_noodles
 	name = "qa'zal noodles"
