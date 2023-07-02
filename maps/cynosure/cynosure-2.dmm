@@ -23423,7 +23423,7 @@
 	},
 /obj/machinery/computer/security/telescreen{
 	name = "Test Chamber Monitor";
-	network = list("Miscellaneous  Reseach");
+	network = list("Miscellaneous Research");
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/white,
