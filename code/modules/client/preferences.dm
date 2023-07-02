@@ -73,8 +73,8 @@ var/global/list/preferences_datums = list()
 
 		//Some faction information.
 	var/home_system = "Unset"           //System of birth.
-	var/citizenship = "None"            //Current home system.
-	var/faction = "None"                //General associated faction.
+	var/citizenship = "Solar Confederate Government"            //Nation of citizenship
+	var/faction = "NanoTrasen"                //General associated faction.
 	var/religion = "None"               //Religious association.
 	var/antag_faction = "None"			//Antag associated faction.
 	var/antag_vis = "Hidden"			//How visible antag association is to others.
