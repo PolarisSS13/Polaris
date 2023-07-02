@@ -20756,9 +20756,9 @@
 	dir = 6
 	},
 /obj/structure/closet/wardrobe/red,
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo/cord,
+/obj/item/clothing/accessory/medal/badge/holo,
+/obj/item/clothing/accessory/medal/badge/holo,
+/obj/item/clothing/accessory/medal/badge/holo/cord,
 /obj/item/clothing/suit/storage/hazardvest/green,
 /obj/item/clothing/suit/storage/hazardvest/green,
 /turf/simulated/floor/tiled/techmaint,
