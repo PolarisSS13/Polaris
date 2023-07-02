@@ -13850,6 +13850,7 @@
 	c_tag = "Ground Floor - East Hallway 1";
 	dir = 4
 	},
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenofauna)
 "giV" = (
@@ -15340,10 +15341,6 @@
 	name = "north bump";
 	pixel_y = 24
 	},
-/obj/machinery/alarm{
-	dir = 4;
-	pixel_x = -22
-	},
 /obj/structure/cable/green{
 	d2 = 4;
 	icon_state = "0-4"
@@ -15355,6 +15352,10 @@
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
+/obj/machinery/alarm/outside{
+	dir = 4;
+	pixel_x = -22
+	},
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)
 "gPq" = (
@@ -48704,6 +48705,10 @@
 /obj/machinery/camera/network/ground_floor{
 	c_tag = "Ground Floor - Garage";
 	dir = 8
+	},
+/obj/machinery/alarm/outside{
+	dir = 8;
+	pixel_x = 22
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)

@@ -100,6 +100,10 @@
 	TLV["temperature"] =	list(20, 40, 140, 160) // K
 	target_temperature = 90
 
+/obj/machinery/alarm/outside/Initialize(mapload)
+	. = ..()
+	TLV["temperature"] =	list(T0C-26, T0C-10, T0C+40, T0C+66) // K
+
 /obj/machinery/alarm/Initialize(mapload)
 	. = ..()
 	first_run()
@@ -527,7 +531,7 @@
 			"unit" = "%",
 			"danger_level" = get_danger_level(environment.gas[gas_id] * partial_pressure, TLV[gas_id])
 		))
-	
+
 	if(!locked || issilicon(user) || data["remoteUser"])
 		data["vents"] = list()
 		for(var/id_tag in A.air_vent_names)
@@ -632,7 +636,7 @@
 			else
 				target_temperature = input_temperature + T0C
 		return TRUE
-	
+
 	// Account for remote users here.
 	// Yes, this is kinda snowflaky; however, I would argue it would be far more snowflakey
 	// to include "custom hrefs" and all the other bullshit that nano states have just for the
