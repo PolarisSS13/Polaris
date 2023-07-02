@@ -13,6 +13,14 @@
 		Open()
 
 
+/obj/structure/fence/door/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	if (drake.a_intent == I_HURT)
+		return ..()
+	if (!open && !locked)
+		toggle(drake)
+
+
 /obj/structure/loot_pile/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
 	. = TRUE
 	if (drake.a_intent == I_HURT)
