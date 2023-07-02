@@ -360,7 +360,8 @@
 		/obj/item/megaphone,
 		/obj/item/taperoll,
 		/obj/item/reagent_containers/spray,
-		/obj/item/soap
+		/obj/item/soap,
+		/obj/item/tool/crowbar
 		)
 
 /obj/item/storage/belt/archaeology
