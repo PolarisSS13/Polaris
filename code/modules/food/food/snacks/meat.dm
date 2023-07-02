@@ -55,9 +55,9 @@
 	filling_color = "#BBBBAA"
 
 /obj/item/reagent_containers/food/snacks/meat/chicken/Initialize()
-		. = ..()
-		reagents.remove_reagent("triglyceride", INFINITY)
-		//Chicken is low fat. Less total calories than other meats
+	. = ..()
+	reagents.remove_reagent("triglyceride", INFINITY)
+	//Chicken is low fat. Less total calories than other meats
 
 /obj/item/reagent_containers/food/snacks/meat/neaera
 	name = "Neaera meat"
