@@ -7787,7 +7787,7 @@
 
 /obj/item/reagent_containers/food/snacks/stuffed_gauli/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, "steamed meat")
+	reagents.add_reagent("protein", 4, list("steamed meat" = 4))
 
 /obj/item/reagent_containers/food/snacks/kirani_stew
 	name = "kirani stew"
@@ -7802,7 +7802,7 @@
 
 /obj/item/reagent_containers/food/snacks/kirani_stew/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, "stewed meat")
+	reagents.add_reagent("protein", 4, list("stewed meat" = 4))
 
 /obj/item/reagent_containers/food/snacks/qazal_noodles
 	name = "qa'zal noodles"
