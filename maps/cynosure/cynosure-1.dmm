@@ -7431,10 +7431,11 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
 	},
-/obj/machinery/door/airlock/maintenance{
-	req_one_access = list(5,12,47)
-	},
 /obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/maintenance{
+	req_access = list(12, 67);
+	name = "Xenofauna Maintenance Access"
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
 "pC" = (

@@ -127,9 +127,6 @@
 /area/surface/station/hallway/primary/groundfloor/north)
 "aef" = (
 /obj/effect/floor_decal/corner/purple/bordercorner{
-	dir = 1
-	},
-/obj/effect/floor_decal/corner/purple/bordercorner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled/techmaint,
@@ -2021,6 +2018,10 @@
 	name = "Trained Drake"
 	},
 /obj/structure/animal_den,
+/obj/machinery/camera/network/ground_floor{
+	c_tag = "Ground Floor - East Hallway 1";
+	dir = 4
+	},
 /turf/simulated/floor/outdoors/dirt/sif,
 /area/rnd/xenobiology/xenofauna)
 "aXC" = (
@@ -11262,7 +11263,7 @@
 "eYF" = (
 /obj/machinery/door/airlock/glass_research{
 	name = "Xenofauna Lab";
-	req_one_access = list(55)
+	req_one_access = list(67)
 	},
 /obj/machinery/door/firedoor/border_only,
 /obj/effect/floor_decal/corner/purple/bordercorner,
@@ -13834,6 +13835,10 @@
 	},
 /obj/item/reagent_containers/syringe/bicaridine,
 /obj/item/storage/firstaid/surgery/simple,
+/obj/machinery/camera/network/ground_floor{
+	c_tag = "Ground Floor - East Hallway 1";
+	dir = 4
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenofauna)
 "giV" = (
@@ -17003,6 +17008,7 @@
 /obj/effect/landmark/start{
 	name = "Xenofauna Technician"
 	},
+/obj/item/book/manual/drake_handling,
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)
 "hGr" = (
@@ -17889,6 +17895,10 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_x = -18;
 	pixel_y = -4
+	},
+/obj/machinery/camera/network/ground_floor{
+	c_tag = "Ground Floor - East Hallway 1";
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)
@@ -19397,7 +19407,7 @@
 	},
 /obj/machinery/door/airlock/glass_research{
 	name = "Xenofauna Lab";
-	req_one_access = list(55)
+	req_one_access = list(67)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/rnd/xenobiology/xenofauna)
@@ -25251,12 +25261,10 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/etc)
 "lwJ" = (
-/obj/structure/table/steel_reinforced,
-/obj/item/book/manual/drake_handling,
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 9
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
 	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenofauna)
 "lwM" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
@@ -26155,7 +26163,6 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/security/processing)
 "lQt" = (
-/obj/structure/plasticflaps/mining,
 /obj/effect/floor_decal/corner/purple/bordercorner{
 	dir = 4
 	},
@@ -26163,7 +26170,9 @@
 	dir = 1
 	},
 /obj/machinery/door/firedoor/border_only,
-/turf/simulated/floor/tiled/techmaint,
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/plasticflaps/xenofauna,
+/turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenofauna)
 "lQz" = (
 /obj/machinery/atmospherics/unary/vent_scrubber/on,
@@ -34249,7 +34258,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass_research{
 	name = "Xenofauna Lab";
-	req_one_access = list(55)
+	req_one_access = list(67)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/rnd/xenobiology/xenofauna)
@@ -35727,6 +35736,17 @@
 	},
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/rnd/exploration)
+"pLh" = (
+/obj/effect/landmark/start{
+	name = "Trained Drake"
+	},
+/obj/structure/animal_den,
+/obj/machinery/camera/network/ground_floor{
+	c_tag = "Ground Floor - Garage";
+	dir = 8
+	},
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/rnd/xenobiology/xenofauna)
 "pLr" = (
 /obj/machinery/door/firedoor/glass,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -37431,10 +37451,10 @@
 /turf/simulated/floor/carpet,
 /area/surface/station/library)
 "qwP" = (
-/obj/effect/floor_decal/corner/purple/border{
-	dir = 10
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
 	},
-/turf/simulated/floor/tiled/techmaint,
+/turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenofauna)
 "qwT" = (
 /obj/structure/flora/ausbushes/sparsegrass,
@@ -41132,9 +41152,6 @@
 /area/shuttle/exploration/general)
 "sem" = (
 /obj/effect/floor_decal/corner/purple/bordercorner,
-/obj/effect/floor_decal/corner/purple/bordercorner{
-	dir = 8
-	},
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)
 "seC" = (
@@ -47577,7 +47594,9 @@
 /turf/simulated/floor/bluegrid,
 /area/surface/station/ai/server_room)
 "vfE" = (
-/obj/machinery/door/window/brigdoor/northleft,
+/obj/machinery/door/window/brigdoor/northleft{
+	req_access = list(67)
+	},
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenofauna)
 "vfM" = (
@@ -48679,6 +48698,10 @@
 	},
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 1
+	},
+/obj/machinery/camera/network/ground_floor{
+	c_tag = "Ground Floor - Garage";
+	dir = 8
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/rnd/xenobiology/xenofauna)
@@ -51259,18 +51282,6 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/interrogation)
-"wPB" = (
-/obj/machinery/door/firedoor/border_only,
-/obj/machinery/door/airlock/glass_research{
-	name = "Xenofauna Lab";
-	req_one_access = list(55)
-	},
-/obj/effect/floor_decal/corner/purple/bordercorner,
-/obj/effect/floor_decal/corner/purple/bordercorner{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/steel_grid,
-/area/rnd/xenobiology/xenofauna)
 "wPJ" = (
 /obj/machinery/atmospherics/pipe/simple/heat_exchanging{
 	dir = 6
@@ -83461,7 +83472,7 @@ xbF
 kRE
 kRE
 jUn
-aWY
+pLh
 jUn
 jUn
 iRX
@@ -84233,7 +84244,7 @@ kRE
 kRE
 kRE
 vfV
-wPB
+bok
 dzA
 dwh
 pYW

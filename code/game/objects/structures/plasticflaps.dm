@@ -67,3 +67,11 @@
 	desc = "Heavy duty, airtight, plastic flaps. Have extra safety installed, preventing passage of living beings."
 	can_atmos_pass = ATMOS_PASS_NO
 	can_pass_lying = FALSE
+
+/obj/structure/plasticflaps/xenofauna
+	name = "animal access flaps"
+	can_atmos_pass = ATMOS_PASS_NO
+	can_pass_lying = FALSE
+	mobs_can_pass = list(
+		/mob/living/simple_mob/animal
+	)
