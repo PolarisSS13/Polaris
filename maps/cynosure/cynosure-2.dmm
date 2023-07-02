@@ -3219,6 +3219,17 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/medical/etc)
+"bwx" = (
+/obj/effect/landmark/start{
+	name = "Trained Drake"
+	},
+/obj/structure/animal_den,
+/obj/machinery/camera/network/ground_floor{
+	c_tag = "Ground Floor - Garage";
+	dir = 8
+	},
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/rnd/xenobiology/xenofauna)
 "bwR" = (
 /obj/structure/stairs/spawner/north,
 /turf/simulated/floor/plating,
@@ -20745,9 +20756,9 @@
 	dir = 6
 	},
 /obj/structure/closet/wardrobe/red,
-/obj/item/clothing/accessory/medal/badge/holo,
-/obj/item/clothing/accessory/medal/badge/holo,
-/obj/item/clothing/accessory/medal/badge/holo/cord,
+/obj/item/clothing/accessory/badge/holo,
+/obj/item/clothing/accessory/badge/holo,
+/obj/item/clothing/accessory/badge/holo/cord,
 /obj/item/clothing/suit/storage/hazardvest/green,
 /obj/item/clothing/suit/storage/hazardvest/green,
 /turf/simulated/floor/tiled/techmaint,
@@ -25264,6 +25275,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 5
 	},
+/obj/structure/stasis_cage,
 /turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenofauna)
 "lwM" = (
@@ -35736,17 +35748,6 @@
 	},
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/rnd/exploration)
-"pLh" = (
-/obj/effect/landmark/start{
-	name = "Trained Drake"
-	},
-/obj/structure/animal_den,
-/obj/machinery/camera/network/ground_floor{
-	c_tag = "Ground Floor - Garage";
-	dir = 8
-	},
-/turf/simulated/floor/outdoors/dirt/sif,
-/area/rnd/xenobiology/xenofauna)
 "pLr" = (
 /obj/machinery/door/firedoor/glass,
 /obj/effect/floor_decal/industrial/hatch/yellow,
@@ -37454,6 +37455,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 6
 	},
+/obj/structure/stasis_cage,
 /turf/simulated/floor/plating,
 /area/rnd/xenobiology/xenofauna)
 "qwT" = (
@@ -83472,7 +83474,7 @@ xbF
 kRE
 kRE
 jUn
-pLh
+bwx
 jUn
 jUn
 iRX
