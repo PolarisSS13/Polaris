@@ -6955,9 +6955,6 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/janitor)
-"dgP" = (
-/turf/simulated/floor/outdoors/dirt/sif/planetuse/presnowed,
-/area/space)
 "diu" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
 /obj/structure/table/rack,
@@ -21781,7 +21778,7 @@
 	icon_state = "steel_dirty";
 	initial_flooring = /decl/flooring/tiling/steel_dirty
 	},
-/area/space)
+/area/surface/outside/plains/station)
 "jUL" = (
 /obj/machinery/cryopod/robot/door/checkpoint,
 /turf/simulated/floor/outdoors/dirt/sif,
@@ -23426,7 +23423,7 @@
 	},
 /obj/machinery/computer/security/telescreen{
 	name = "Test Chamber Monitor";
-	network = list("Miscellaneous Reseach");
+	network = list("Miscellaneous  Reseach");
 	pixel_y = -32
 	},
 /turf/simulated/floor/tiled/white,
@@ -39648,7 +39645,7 @@
 /obj/machinery/camera/network/research{
 	c_tag = "Research - Miscellaneous Test Chamber";
 	dir = 5;
-	network = list("Research","Miscellaneous Reseach")
+	network = list("Research","Miscellaneous  Reseach")
 	},
 /turf/simulated/floor/reinforced,
 /area/surface/station/rnd/misc_lab)
@@ -83314,7 +83311,7 @@ cVy
 son
 qVN
 cVy
-dgP
+aqn
 hAR
 sTw
 hAR
@@ -83571,7 +83568,7 @@ cVy
 pqo
 pro
 cVy
-dgP
+aqn
 xyp
 sTw
 xyp
