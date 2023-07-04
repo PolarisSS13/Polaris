@@ -1636,26 +1636,52 @@
 		return
 
 	else if(istype(W,/obj/item/stack/nanopaste))
-		if(state >= MECHA_PANEL_LOOSE)
-			var/obj/item/stack/nanopaste/NP = W
+		if(state < MECHA_PANEL_LOOSE)
+			to_chat(user, SPAN_WARNING("You can't reach \the [src]'s internal components."))
+			return
 
+		var/obj/item/stack/nanopaste/nanopaste = W
+		while(!QDELETED(user) && !QDELETED(src) && do_after(user, 1 SECOND, src))
+
+			// Get a component to attempt a repair on.
+			var/obj/item/mecha_parts/component/component
 			for(var/slot in internal_components)
-				var/obj/item/mecha_parts/component/C = internal_components[slot]
+				var/obj/item/mecha_parts/component/check_component = internal_components[slot]
+				if(!QDELETED(check_component) && check_component.integrity < check_component.max_integrity)
+					component = check_component
+					break
 
-				if(C)
+			// We've run out of components to fix.
+			if(!component)
+				to_chat(user, SPAN_NOTICE("Nothing to repair!"))
+				break
 
-					if(C.integrity < C.max_integrity)
-						while(C.integrity < C.max_integrity && NP && do_after(user, 1 SECOND, src))
-							if(NP.use(1))
-								C.adjust_integrity(10)
+			// Spend some time on the work.
+			if(!do_after(user, 1 SECOND, src))
+				break
 
-						to_chat(user, "<span class='notice'>You repair damage to \the [C].</span>")
+			// Something has destroyed us or the mech, or we're incapacitated or moved away.
+			if(QDELETED(user) || QDELETED(src) || QDELETED(component) || component.loc != src)
+				break
 
-			return
+			// Out of repair gel.
+			if(QDELETED(nanopaste) || !nanopaste.use(1))
+				to_chat(user, SPAN_WARNING("You're out of nanopaste!"))
+				break
 
-		else
-			to_chat(user, "<span class='notice'>You can't reach \the [src]'s internal components.</span>")
-			return
+			// Handle the actual repair.
+			component.adjust_integrity(10)
+			if(component.integrity >= component.max_integrity)
+				to_chat(user, SPAN_NOTICE("You repair the damage to \the [component]."))
+			else
+				to_chat(user, SPAN_NOTICE("You repair some of the damage to \the [component]."))
+
+			// Do another nanopaste check to avoid wasting a second on a do_after.
+			if(QDELETED(nanopaste) || !nanopaste.can_use(1))
+				to_chat(user, SPAN_WARNING("You're out of nanopaste!"))
+				break
+
+		return
 
 	else
 		call((proc_res["dynattackby"]||src), "dynattackby")(W,user)
