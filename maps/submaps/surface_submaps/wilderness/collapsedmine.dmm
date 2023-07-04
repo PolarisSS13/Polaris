@@ -685,11 +685,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "mf" = (
-/obj/effect/floor_decal/corner/yellow/border,
-/mob/living/simple_mob/animal/giant_spider{
-	health = 15
-	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/simulated/floor/plating,
 /area/submap/CollapsedMine)
 "mh" = (
 /obj/effect/floor_decal/carpet,
@@ -1218,7 +1216,8 @@
 /area/submap/CollapsedMine)
 "wP" = (
 /obj/item/material/shard,
-/turf/simulated/floor/plating,
+/obj/structure/grille,
+/turf/space,
 /area/submap/CollapsedMine)
 "wR" = (
 /obj/random/junk,
@@ -1895,12 +1894,6 @@
 /obj/structure/table/standard,
 /obj/effect/floor_decal/corner/pink/border{
 	dir = 9
-	},
-/turf/simulated/floor/tiled/white,
-/area/submap/CollapsedMine)
-"Is" = (
-/mob/living/simple_mob/animal/giant_spider{
-	health = 15
 	},
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
@@ -3268,7 +3261,7 @@ cb
 XM
 cg
 FV
-Cr
+mf
 Ir
 af
 xh
@@ -3330,7 +3323,7 @@ Oy
 WF
 WF
 Gs
-Cr
+mf
 vZ
 WF
 WF
@@ -3513,10 +3506,10 @@ dV
 Dq
 dt
 NL
-Is
+WF
 WF
 AO
-Cr
+mf
 zy
 JJ
 Lf
@@ -4317,7 +4310,7 @@ DF
 bH
 qc
 vg
-bs
+mf
 Fz
 nD
 ea
@@ -4379,7 +4372,7 @@ yJ
 pb
 pb
 wz
-bs
+mf
 Fz
 ea
 ea
@@ -4507,7 +4500,7 @@ dM
 Fz
 ea
 hG
-bs
+ea
 bI
 lR
 lR
@@ -4565,7 +4558,7 @@ ha
 GM
 GM
 qI
-bs
+mf
 mz
 ea
 HE
@@ -4623,10 +4616,10 @@ rl
 rl
 Ig
 IZ
-bs
-bs
-bs
-bs
+mf
+mf
+mf
+mf
 IZ
 IR
 lR
@@ -4684,12 +4677,12 @@ IZ
 cH
 ea
 ea
-bs
+mf
 FS
 ZU
 VH
 wh
-bs
+mf
 Fz
 ea
 HE
@@ -4746,7 +4739,7 @@ IZ
 ea
 vp
 ea
-bs
+mf
 ml
 py
 ID
@@ -4755,7 +4748,7 @@ ea
 Fz
 ea
 bi
-bs
+ea
 OL
 ea
 Et
@@ -4808,7 +4801,7 @@ IZ
 ea
 ea
 nD
-bs
+mf
 Fz
 JH
 ea
@@ -4875,7 +4868,7 @@ zA
 ig
 ig
 fd
-bs
+mf
 Fz
 ea
 bi
@@ -4941,7 +4934,7 @@ IZ
 Fz
 ea
 bi
-bs
+ea
 Qg
 ea
 Et
@@ -5096,7 +5089,7 @@ IZ
 IZ
 Sf
 tW
-mf
+WP
 IZ
 IZ
 Jf
