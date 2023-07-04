@@ -1,5 +1,7 @@
 //#define TESTING
 
+//#define SURGERYDEBUG 1
+
 // Items that ask to be called every cycle.
 var/global/datum/datacore/data_core = null
 var/global/list/machines                 = list()	// ALL Machines, whether processing or not.
