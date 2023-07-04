@@ -23,11 +23,13 @@
 /area/submap/CollapsedMine)
 "aJ" = (
 /obj/effect/spawner/gibs/human,
+/obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "aO" = (
-/obj/effect/spider/stickyweb/dark,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/effect/decal/cleanable/blood,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "bf" = (
 /obj/effect/floor_decal/industrial/outline/yellow,
@@ -54,8 +56,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "bs" = (
-/obj/structure/grille/broken,
-/obj/item/material/shard,
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
 /turf/simulated/floor/plating,
 /area/submap/CollapsedMine)
 "bu" = (
@@ -68,15 +70,6 @@
 	dir = 4
 	},
 /turf/simulated/floor/tiled/white,
-/area/submap/CollapsedMine)
-"bB" = (
-/obj/item/clothing/under/corp/grayson,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
-/obj/item/clothing/shoes/boots/workboots,
-/obj/item/clothing/head/hardhat/dblue,
-/obj/item/clothing/gloves/duty,
-/obj/structure/closet,
-/turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
 "bH" = (
 /obj/structure/table/steel_reinforced,
@@ -93,9 +86,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "bJ" = (
-/obj/machinery/light{
-	dir = 8
-	},
+/mob/living/simple_mob/animal/giant_spider/lurker,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "bK" = (
@@ -111,11 +102,6 @@
 /area/submap/CollapsedMine)
 "bR" = (
 /turf/simulated/floor/tiled/freezer,
-/area/submap/CollapsedMine)
-"bX" = (
-/obj/structure/table/woodentable,
-/obj/item/cell/device/weapon/empty,
-/turf/simulated/floor/tiled/old_cargo/green,
 /area/submap/CollapsedMine)
 "cb" = (
 /obj/structure/table/standard,
@@ -135,7 +121,7 @@
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
 "ch" = (
-/mob/living/simple_mob/animal/giant_spider/tunneler,
+/obj/random/mob/spider,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "ck" = (
@@ -158,42 +144,26 @@
 /turf/simulated/mineral/ignore_mapgen,
 /area/template_noop)
 "cB" = (
-/obj/effect/spider/stickyweb,
-/obj/random/mob/spider,
-/turf/simulated/mineral/floor/ignore_mapgen,
-/area/submap/CollapsedMine)
-"cG" = (
-/obj/random/junk,
-/obj/random/junk,
-/turf/simulated/floor/tiled/dark,
+/obj/machinery/light,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "cH" = (
-/obj/item/stool/padded{
-	dir = 1
+/obj/structure/bed/chair/sofa/beige{
+	dir = 4
 	},
-/obj/random/junk,
-/turf/simulated/floor/wood,
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "cX" = (
 /obj/machinery/floodlight,
 /turf/simulated/floor/wood,
-/area/submap/CollapsedMine)
-"da" = (
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled/eris/cafe,
 /area/submap/CollapsedMine)
 "db" = (
 /obj/effect/spider/spiderling/non_growing,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "dc" = (
-/obj/structure/bed/chair/sofa/beige/corner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "dq" = (
 /obj/structure/girder/displaced,
@@ -245,12 +215,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "ei" = (
-/obj/structure/table/marble,
-/obj/machinery/light{
-	dir = 1
-	},
-/obj/random/junk,
-/turf/simulated/floor/tiled/eris/cafe,
+/obj/machinery/light,
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "ej" = (
 /obj/structure/salvageable/console_os{
@@ -278,8 +244,12 @@
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
-"ey" = (
-/obj/item/clothing/glasses/welding,
+"ex" = (
+/obj/structure/sink{
+	pixel_y = 17
+	},
+/obj/random/junk,
+/obj/random/junk,
 /turf/simulated/floor/tiled/dark,
 /area/submap/CollapsedMine)
 "eQ" = (
@@ -330,15 +300,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "fG" = (
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/wood,
+/obj/structure/loot_pile/maint/junk,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "fP" = (
-/obj/effect/decal/cleanable/blood,
-/obj/item/material/shard,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/marble,
+/obj/item/ammo_casing/a45,
+/turf/simulated/floor/tiled/eris/cafe,
 /area/submap/CollapsedMine)
 "fS" = (
 /obj/machinery/optable,
@@ -369,14 +337,13 @@
 /area/submap/CollapsedMine)
 "go" = (
 /obj/structure/table/rack/shelf/steel,
+/obj/random/tool,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "gD" = (
-/obj/structure/table/marble,
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/eris/cafe,
+/obj/item/ore/glass,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "gJ" = (
 /obj/machinery/mech_recharger,
@@ -424,15 +391,6 @@
 /obj/structure/animal_den,
 /obj/machinery/light,
 /turf/simulated/mineral/floor/ignore_mapgen,
-/area/submap/CollapsedMine)
-"ho" = (
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 10
-	},
-/obj/machinery/light{
-	dir = 8
-	},
-/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "hs" = (
 /obj/random/mob/spider/mutant,
@@ -689,6 +647,11 @@
 /obj/machinery/washing_machine,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
+"kq" = (
+/obj/effect/spider/stickyweb,
+/obj/structure/grille/broken,
+/turf/simulated/floor/plating,
+/area/submap/CollapsedMine)
 "kv" = (
 /obj/structure/closet/crate/grayson,
 /obj/effect/floor_decal/corner/yellow/border{
@@ -765,16 +728,15 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "mf" = (
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 4
-	},
-/obj/structure/ore_box,
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/woodentable,
+/turf/simulated/floor/tiled/old_cargo/green,
 /area/submap/CollapsedMine)
 "mh" = (
-/obj/effect/spider/stickyweb,
-/obj/structure/grille/broken,
-/turf/simulated/floor/plating,
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 10
+	},
+/obj/structure/loot_pile/maint/trash,
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "mk" = (
 /obj/effect/decal/cleanable/blood,
@@ -787,13 +749,20 @@
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
+"mt" = (
+/obj/machinery/light{
+	dir = 1
+	},
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled/eris/cafe,
+/area/submap/CollapsedMine)
 "mv" = (
 /obj/effect/floor_decal/corner/pink/border,
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
 "mz" = (
-/obj/machinery/light,
-/turf/simulated/floor/wood,
+/obj/structure/table/standard,
+/turf/simulated/floor/tiled/eris/cafe,
 /area/submap/CollapsedMine)
 "mH" = (
 /obj/structure/girder/reinforced,
@@ -863,12 +832,16 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "pe" = (
-/mob/living/simple_mob/animal/giant_spider/lurker,
+/obj/effect/floor_decal/corner/yellow/border,
+/obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "pi" = (
-/mob/living/simple_mob/animal/giant_spider/lurker,
-/turf/simulated/floor/tiled/dark,
+/obj/item/stool/padded{
+	dir = 1
+	},
+/obj/random/junk,
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "pm" = (
 /obj/effect/spider/stickyweb,
@@ -936,7 +909,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "qD" = (
-/obj/structure/loot_pile/maint/technical,
+/obj/effect/spider/stickyweb,
+/mob/living/simple_mob/animal/giant_spider/hunter,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "qI" = (
@@ -1003,7 +977,6 @@
 /area/submap/CollapsedMine)
 "rG" = (
 /obj/random/mob/spider/mutant,
-/obj/random/mob/spider/mutant,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
@@ -1039,14 +1012,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "sA" = (
-/obj/machinery/recharge_station,
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 4
-	},
-/obj/machinery/light{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/woodentable,
+/obj/item/cell/device/weapon/empty,
+/turf/simulated/floor/tiled/old_cargo/green,
 /area/submap/CollapsedMine)
 "sB" = (
 /obj/random/mob/spider,
@@ -1106,9 +1074,11 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "tR" = (
-/obj/structure/bed/chair/wood,
-/obj/item/ammo_casing/a12g/pellet,
-/turf/simulated/floor/wood,
+/obj/structure/table/marble,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/eris/cafe,
 /area/submap/CollapsedMine)
 "tU" = (
 /obj/structure/bed/chair/wood,
@@ -1148,14 +1118,7 @@
 /turf/simulated/floor/tiled/eris/cafe,
 /area/submap/CollapsedMine)
 "uw" = (
-/obj/item/material/shard,
-/obj/structure/table/steel_reinforced,
-/obj/effect/spider/stickyweb/dark,
-/obj/effect/floor_decal/corner/red/border{
-	dir = 4
-	},
-/obj/random/maintenance/security,
-/obj/structure/window/reinforced/holowindow{
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1169,8 +1132,11 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "uR" = (
+/obj/machinery/light{
+	dir = 1
+	},
 /obj/effect/spider/stickyweb,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "uU" = (
 /obj/random/ammo,
@@ -1247,8 +1213,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "wc" = (
+/obj/effect/spider/stickyweb,
 /obj/random/mob/spider,
-/obj/effect/spider/stickyweb/dark,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "wf" = (
@@ -1263,17 +1229,19 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "wi" = (
-/obj/structure/table/woodentable,
-/obj/random/maintenance,
-/turf/simulated/floor/tiled/old_cargo/green,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "wl" = (
 /obj/item/cell/device/weapon/empty,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "wm" = (
-/obj/structure/table/standard,
-/turf/simulated/floor/tiled/eris/cafe,
+/obj/effect/floor_decal/carpet,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
 "ww" = (
 /obj/effect/spider/stickyweb,
@@ -1356,10 +1324,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "xB" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/machinery/light{
-	dir = 1
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 4
 	},
+/obj/structure/ore_box,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "xM" = (
@@ -1400,11 +1368,6 @@
 	locked = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
-/area/submap/CollapsedMine)
-"yx" = (
-/obj/effect/spider/stickyweb,
-/mob/living/simple_mob/animal/giant_spider/hunter,
-/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "yJ" = (
 /obj/effect/floor_decal/corner/red/border{
@@ -1562,6 +1525,13 @@
 /obj/random/junk/anom,
 /turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
+"Bk" = (
+/obj/effect/decal/cleanable/blood/drip,
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
 "Bq" = (
 /obj/effect/decal/cleanable/blood,
 /obj/effect/floor_decal/corner/yellow/border{
@@ -1570,9 +1540,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Bt" = (
-/obj/structure/table/woodentable,
-/obj/item/ammo_casing/a45,
-/turf/simulated/floor/wood,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "By" = (
 /obj/machinery/computer/security/telescreen/entertainment{
@@ -1609,13 +1578,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Cr" = (
-/obj/effect/floor_decal/corner/paleblue/border{
-	dir = 1
-	},
-/obj/machinery/light{
-	dir = 1
-	},
-/turf/simulated/floor/tiled/white,
+/obj/random/mob/spider,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "Cv" = (
 /obj/structure/table/standard,
@@ -1700,9 +1665,11 @@
 /turf/simulated/wall/r_concrete,
 /area/submap/CollapsedMine)
 "DP" = (
-/obj/structure/table/marble,
-/obj/item/ammo_casing/a45,
-/turf/simulated/floor/tiled/eris/cafe,
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/obj/machinery/light,
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "DR" = (
 /obj/structure/table/marble,
@@ -1719,15 +1686,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Eo" = (
-/obj/structure/bed/chair/sofa/beige{
-	dir = 4
-	},
-/turf/simulated/floor/tiled/techfloor,
+/obj/structure/table/woodentable,
+/obj/random/maintenance,
+/turf/simulated/floor/tiled/old_cargo/green,
 /area/submap/CollapsedMine)
 "Eq" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/turf/simulated/floor/plating,
+/obj/structure/bed/chair/wood,
+/obj/item/ammo_casing/a12g/pellet,
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "Et" = (
 /obj/structure/closet/secure_closet/brig{
@@ -1762,8 +1728,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "EE" = (
-/obj/effect/decal/remains/mummy1,
-/turf/simulated/floor/tiled/techfloor,
+/obj/machinery/door/airlock{
+	p_open = 1
+	},
+/turf/simulated/floor/tiled/dark,
 /area/submap/CollapsedMine)
 "EO" = (
 /obj/structure/sink{
@@ -1784,12 +1752,14 @@
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
+"Fk" = (
+/obj/effect/decal/remains/mummy1,
+/turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
 "Ft" = (
-/obj/effect/floor_decal/carpet,
-/obj/machinery/light/small{
-	dir = 4
-	},
-/turf/simulated/floor/carpet,
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/tiled/dark,
 /area/submap/CollapsedMine)
 "Fz" = (
 /obj/effect/floor_decal/corner/red/border{
@@ -1848,9 +1818,10 @@
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
 "Gg" = (
-/obj/effect/spawner/gibs/human,
-/obj/effect/spider/stickyweb,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/structure/bed/chair/sofa/beige/corner{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Go" = (
 /obj/random/trash,
@@ -1996,11 +1967,6 @@
 /obj/structure/barricade,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
-"Ij" = (
-/obj/machinery/light,
-/obj/effect/decal/cleanable/blood/drip,
-/turf/simulated/floor/wood,
-/area/submap/CollapsedMine)
 "Io" = (
 /obj/structure/table/rack,
 /obj/item/stack/marker_beacon,
@@ -2013,6 +1979,10 @@
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
+"Iq" = (
+/mob/living/simple_mob/animal/giant_spider/lurker,
+/turf/simulated/floor/tiled/dark,
+/area/submap/CollapsedMine)
 "Ir" = (
 /obj/structure/table/standard,
 /obj/structure/table/standard,
@@ -2022,8 +1992,9 @@
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
 "Is" = (
-/obj/random/mob/spider,
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/structure/table/woodentable,
+/obj/item/ammo_casing/a45,
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "Ix" = (
 /obj/effect/decal/remains/human,
@@ -2065,10 +2036,8 @@
 /turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
 "IK" = (
-/obj/machinery/door/airlock{
-	p_open = 1
-	},
-/turf/simulated/floor/tiled/dark,
+/mob/living/simple_mob/animal/giant_spider/tunneler,
+/turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "IR" = (
 /obj/machinery/vending/security,
@@ -2109,10 +2078,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Jf" = (
-/obj/machinery/light{
-	dir = 1
+/obj/machinery/recharge_station,
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 4
 	},
-/obj/effect/spider/stickyweb,
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Jg" = (
@@ -2317,12 +2289,12 @@
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
 "Nj" = (
-/obj/structure/sink{
-	pixel_y = 17
+/obj/structure/table/marble,
+/obj/machinery/light{
+	dir = 1
 	},
 /obj/random/junk,
-/obj/random/junk,
-/turf/simulated/floor/tiled/dark,
+/turf/simulated/floor/tiled/eris/cafe,
 /area/submap/CollapsedMine)
 "Nn" = (
 /obj/structure/loot_pile/surface/medicine_cabinet/fresh,
@@ -2340,7 +2312,6 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "NC" = (
-/obj/random/mob/spider,
 /obj/effect/spider/stickyweb,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
@@ -2478,21 +2449,44 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Qj" = (
-/obj/item/ore/glass,
-/obj/effect/spider/stickyweb,
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/floor_decal/corner/paleblue/border{
+	dir = 1
+	},
+/obj/machinery/light{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/submap/CollapsedMine)
+"Qk" = (
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "Ql" = (
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/wood/broken,
 /area/submap/CollapsedMine)
 "Qq" = (
-/obj/structure/loot_pile/maint/junk,
+/obj/structure/loot_pile/maint/technical,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "Qr" = (
 /obj/machinery/light,
 /obj/structure/loot_pile/maint/technical,
+/turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
+"QB" = (
+/obj/item/material/shard,
+/obj/structure/table/steel_reinforced,
+/obj/effect/spider/stickyweb/dark,
+/obj/effect/floor_decal/corner/red/border{
+	dir = 4
+	},
+/obj/random/maintenance/security,
+/obj/structure/window/reinforced/holowindow{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "QN" = (
@@ -2527,9 +2521,13 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "RM" = (
-/obj/effect/floor_decal/corner/yellow/border,
-/obj/structure/ore_box,
-/turf/simulated/floor/tiled/techfloor,
+/obj/item/clothing/under/corp/grayson,
+/obj/item/clothing/accessory/badge/corporate_tag/grayson,
+/obj/item/clothing/shoes/boots/workboots,
+/obj/item/clothing/head/hardhat/dblue,
+/obj/item/clothing/gloves/duty,
+/obj/structure/closet,
+/turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
 "Sa" = (
 /obj/effect/spider/stickyweb,
@@ -2615,7 +2613,8 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "TH" = (
-/turf/simulated/mineral/floor/ignore_mapgen,
+/obj/item/clothing/glasses/welding,
+/turf/simulated/floor/tiled/dark,
 /area/submap/CollapsedMine)
 "TK" = (
 /obj/structure/salvageable/console_broken_os{
@@ -2653,15 +2652,14 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Un" = (
-/obj/structure/table/woodentable,
-/turf/simulated/floor/tiled/old_cargo/green,
+/obj/effect/spider/spiderling,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Uq" = (
-/obj/structure/bed/chair/wood{
-	dir = 1
-	},
-/obj/machinery/light,
-/turf/simulated/floor/wood,
+/obj/structure/grille/broken,
+/obj/item/material/shard,
+/turf/simulated/floor/plating,
 /area/submap/CollapsedMine)
 "Us" = (
 /obj/structure/table/steel_reinforced,
@@ -2696,7 +2694,9 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 10
 	},
-/obj/structure/loot_pile/maint/trash,
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Vg" = (
@@ -2936,11 +2936,6 @@
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/tiled/freezer,
 /area/submap/CollapsedMine)
-"Zy" = (
-/obj/effect/spider/spiderling,
-/obj/effect/spider/stickyweb,
-/turf/simulated/floor/tiled/techfloor,
-/area/submap/CollapsedMine)
 "ZE" = (
 /obj/effect/decal/remains/human,
 /obj/random/maintenance/security,
@@ -3149,10 +3144,10 @@ TV
 TV
 TV
 TV
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 Pq
 Pq
 Pq
@@ -3212,8 +3207,8 @@ Pq
 Pq
 Pq
 sC
-TH
-Is
+dc
+ch
 Jj
 Pq
 Pq
@@ -3295,7 +3290,7 @@ Pq
 Pq
 Pq
 Pq
-TH
+dc
 TW
 TW
 TW
@@ -3357,8 +3352,8 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
+dc
+dc
 TW
 TW
 TW
@@ -3410,7 +3405,7 @@ cb
 XM
 cg
 FV
-Eq
+bs
 Ir
 af
 xh
@@ -3419,9 +3414,9 @@ IZ
 Pq
 Pq
 Pq
-Is
-TH
-TH
+ch
+dc
+dc
 TW
 TW
 TW
@@ -3455,7 +3450,7 @@ Ig
 LR
 ea
 He
-bJ
+uw
 ea
 Ld
 Mk
@@ -3472,7 +3467,7 @@ Oy
 WF
 WF
 Gs
-Eq
+bs
 vZ
 WF
 WF
@@ -3530,7 +3525,7 @@ WF
 xo
 iF
 dt
-Cr
+Qj
 ht
 Pg
 NS
@@ -3630,7 +3625,7 @@ ea
 ea
 gi
 ZF
-sA
+Jf
 Ov
 Pq
 Pq
@@ -3658,7 +3653,7 @@ NL
 WF
 WF
 AO
-Eq
+bs
 zy
 JJ
 Lf
@@ -3699,7 +3694,7 @@ IZ
 IZ
 sC
 Pq
-TH
+dc
 Jj
 Pq
 Pq
@@ -3760,8 +3755,8 @@ Pq
 Pq
 jf
 Jj
-TH
-TH
+dc
+dc
 Pq
 Pq
 Pq
@@ -3817,11 +3812,11 @@ ip
 sC
 Sp
 Pq
-Gg
+aJ
 lq
 Pq
-uR
-TH
+NC
+dc
 Pq
 Pq
 Pq
@@ -3831,7 +3826,7 @@ Pq
 Pq
 Pq
 IZ
-xB
+Bk
 LR
 LR
 IZ
@@ -3880,9 +3875,9 @@ Pq
 Jn
 Pq
 Pq
-TH
-uR
-cB
+dc
+NC
+wc
 Pq
 Pq
 Pq
@@ -3918,9 +3913,9 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
+dc
+dc
+dc
 IZ
 rV
 TW
@@ -3942,11 +3937,11 @@ IZ
 Pq
 Pq
 Pq
-TH
+dc
 Pq
-aO
-uR
-TH
+wi
+NC
+dc
 IZ
 IZ
 IZ
@@ -3977,13 +3972,13 @@ ck
 Pq
 Pq
 Pq
-TH
+dc
 Pq
 Jj
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 nq
 TV
 "}
@@ -4003,16 +3998,16 @@ IZ
 IZ
 Pq
 Pq
-TH
-ch
+dc
+IK
 Pq
 Pq
-TH
+dc
 Jj
-fG
+Qk
 KV
 HZ
-fG
+Qk
 KV
 Yh
 IZ
@@ -4037,16 +4032,16 @@ DX
 ck
 ck
 iz
-TH
-TH
-TH
-TH
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
+dc
+dc
+dc
+dc
 TW
 "}
 (18,1,1) = {"
@@ -4063,9 +4058,9 @@ LR
 zs
 IZ
 Pq
-uR
-uR
-TH
+NC
+NC
+dc
 sC
 Pq
 Pq
@@ -4101,12 +4096,12 @@ ck
 ck
 iz
 iz
-TH
-TH
+dc
+dc
 Pq
 Pq
-TH
-TH
+dc
+dc
 IZ
 IZ
 TW
@@ -4125,7 +4120,7 @@ Ig
 Pq
 Pq
 HV
-uR
+NC
 Pq
 Pq
 Pq
@@ -4139,7 +4134,7 @@ KV
 in
 tU
 Iz
-Uq
+DP
 IZ
 YJ
 ea
@@ -4187,7 +4182,7 @@ Pq
 Pq
 Pq
 Pq
-uR
+NC
 Pq
 dt
 dt
@@ -4202,7 +4197,7 @@ KV
 QO
 Iz
 iT
-Eq
+bs
 ea
 YJ
 fp
@@ -4248,7 +4243,7 @@ KE
 Jj
 Pq
 Pq
-uR
+NC
 VP
 SM
 dt
@@ -4264,7 +4259,7 @@ KV
 tU
 Iz
 VE
-Eq
+bs
 Ig
 ea
 ea
@@ -4284,9 +4279,9 @@ IZ
 IZ
 IZ
 IZ
-Eq
+bs
 ZW
-Eq
+bs
 IZ
 IZ
 Pq
@@ -4312,7 +4307,7 @@ Pq
 IZ
 IZ
 IZ
-aO
+wi
 dt
 zk
 bQ
@@ -4326,7 +4321,7 @@ KV
 KV
 KV
 KV
-bs
+Uq
 YJ
 ea
 ea
@@ -4369,25 +4364,25 @@ Pq
 Pq
 IZ
 Pq
-TH
+dc
 hh
 IZ
 oe
 oe
 fn
 dt
-da
+mt
 OX
 ZY
 dt
-ei
+Nj
 mM
 NV
-cH
+pi
 KV
 VW
 KV
-Ij
+cB
 iL
 ea
 ea
@@ -4418,7 +4413,7 @@ Pq
 Pq
 Pq
 Pq
-TH
+dc
 TV
 "}
 (24,1,1) = {"
@@ -4438,10 +4433,10 @@ FG
 pT
 oJ
 dt
-wm
+mz
 mM
 ZY
-Eq
+bs
 DR
 mM
 NV
@@ -4459,11 +4454,11 @@ DF
 bH
 qc
 vg
-bs
+Uq
 Fz
 nD
 ea
-pe
+bJ
 ea
 hG
 IZ
@@ -4480,7 +4475,7 @@ Pq
 Pq
 Pq
 Pq
-TH
+dc
 TV
 "}
 (25,1,1) = {"
@@ -4500,10 +4495,10 @@ gY
 pT
 bR
 dt
-wm
+mz
 zk
 ZY
-Eq
+bs
 vj
 mM
 uu
@@ -4521,7 +4516,7 @@ yJ
 pb
 pb
 wz
-Eq
+bs
 Fz
 ea
 ea
@@ -4556,7 +4551,7 @@ Pq
 IZ
 Pq
 Pq
-ch
+IK
 IZ
 Ue
 oJ
@@ -4566,14 +4561,14 @@ VX
 zk
 ZY
 dt
-gD
+tR
 mM
 NV
 VW
 nf
 zw
 in
-mz
+ei
 IZ
 ea
 ea
@@ -4603,8 +4598,8 @@ Pq
 Pq
 jf
 Jj
-TH
-TH
+dc
+dc
 TW
 "}
 (27,1,1) = {"
@@ -4636,7 +4631,7 @@ cX
 KV
 KV
 KV
-Eq
+bs
 ea
 ea
 ea
@@ -4663,10 +4658,10 @@ Pq
 Pq
 Pq
 Pq
-Is
-TH
-TH
-TH
+ch
+dc
+dc
+dc
 TW
 "}
 (28,1,1) = {"
@@ -4692,13 +4687,13 @@ Ke
 so
 mM
 mM
-DP
+fP
 LW
 KV
 tU
 IA
 yr
-Eq
+bs
 ea
 ea
 fp
@@ -4707,11 +4702,11 @@ ha
 GM
 GM
 qI
-Eq
+bs
 Fz
 ea
 HE
-mh
+kq
 lR
 lR
 zY
@@ -4725,10 +4720,10 @@ Pq
 Pq
 Pq
 sC
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 TV
 "}
 (29,1,1) = {"
@@ -4760,15 +4755,15 @@ Ix
 tU
 iK
 iT
-Eq
+bs
 ea
 ea
 ea
 IZ
-Eq
-Eq
-Eq
-Eq
+bs
+bs
+bs
+bs
 IZ
 IR
 ea
@@ -4786,11 +4781,11 @@ Pq
 Pq
 Pq
 Jj
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 TV
 "}
 (30,1,1) = {"
@@ -4807,7 +4802,7 @@ ea
 Jj
 IZ
 IZ
-aO
+wi
 dt
 dt
 dt
@@ -4820,18 +4815,18 @@ KV
 zw
 KV
 tU
-Bt
+Is
 Xg
 IZ
 ea
 ea
 ea
-Eq
+bs
 FS
 ZU
 VH
 wh
-Eq
+bs
 Fz
 ea
 HE
@@ -4847,12 +4842,12 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
 TV
 "}
 (31,1,1) = {"
@@ -4866,7 +4861,7 @@ Pq
 IZ
 KE
 ea
-uR
+NC
 IZ
 Pq
 Jj
@@ -4878,7 +4873,7 @@ Pq
 IZ
 gh
 gh
-tR
+Eq
 Jl
 jK
 nf
@@ -4888,16 +4883,16 @@ IZ
 ea
 vp
 ea
-Eq
+bs
 ml
 py
 ID
 bi
-Eq
+bs
 Fz
 ea
 bi
-Eq
+bs
 OL
 ea
 Et
@@ -4909,11 +4904,11 @@ Pq
 Pq
 sC
 sC
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 Jj
 TV
 "}
@@ -4927,12 +4922,12 @@ Pq
 Pq
 IZ
 gm
-Is
-TH
-aO
-uR
-TH
-uR
+ch
+dc
+wi
+NC
+dc
+NC
 Pq
 Pq
 Pq
@@ -4950,7 +4945,7 @@ IZ
 ea
 ea
 nD
-Eq
+bs
 Fz
 JH
 ea
@@ -4969,14 +4964,14 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
+dc
+dc
 TV
 "}
 (33,1,1) = {"
@@ -4992,11 +4987,11 @@ vb
 Jj
 Pq
 Pq
-uR
-TH
-TH
-uR
-uR
+NC
+dc
+dc
+NC
+NC
 Pq
 Pq
 Pq
@@ -5017,28 +5012,28 @@ zA
 ig
 ig
 fd
-Eq
+bs
 Fz
 lR
 bi
 yN
 ea
 Et
-EE
+Fk
 IZ
 Pq
 Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
+dc
+dc
 TV
 "}
 (34,1,1) = {"
@@ -5055,20 +5050,20 @@ Pq
 Pq
 Pq
 sC
-TH
+dc
 Pq
 Pq
 HL
 Jj
-Is
+ch
 Pq
 Pq
 Pq
 NC
-Gg
-uR
+aJ
+NC
 Rf
-uR
+NC
 Pq
 IZ
 Pq
@@ -5083,7 +5078,7 @@ IZ
 Fz
 ea
 HE
-Eq
+bs
 Qg
 ea
 ea
@@ -5093,13 +5088,13 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
+dc
 TV
 TV
 "}
@@ -5116,24 +5111,24 @@ Pq
 Pq
 zs
 IZ
-Qq
-TH
+fG
+dc
 Pq
 Pq
 Pq
 Pq
-uR
-uR
-uR
-uR
+NC
+NC
+NC
+NC
 Pq
 Pq
-aO
-aO
+wi
+wi
 ee
 Pq
 IZ
-Jf
+uR
 lR
 vN
 IZ
@@ -5155,13 +5150,13 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
+dc
+dc
 qe
 Jn
 Jn
 jt
-TH
+dc
 TV
 TW
 "}
@@ -5179,24 +5174,24 @@ rl
 WP
 IZ
 Pq
-uR
-uR
+NC
+NC
 Pq
 Pq
 Pq
 Pq
 Pq
 Pq
-uR
-TH
-uR
-uR
-uR
+NC
+dc
+NC
+NC
+NC
 Pq
 Pq
 IZ
 lR
-Qj
+gD
 lR
 IZ
 Pq
@@ -5216,14 +5211,14 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
+dc
+dc
 TV
 TW
 "}
@@ -5242,23 +5237,23 @@ WP
 IZ
 IZ
 Pq
-uR
+NC
 lq
 Pq
 Pq
 Pq
-Qq
-Qq
+fG
+fG
 Pq
-uR
-TH
-aJ
+NC
+dc
+Bt
 Pq
 Pq
 Pq
 mH
-Zy
-yx
+Un
+qD
 lR
 IZ
 Pq
@@ -5279,13 +5274,13 @@ Pq
 Pq
 Pq
 Jj
-TH
-TH
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
+dc
+dc
 TV
 TW
 "}
@@ -5301,22 +5296,22 @@ rE
 ea
 Go
 ea
-ho
+Vf
 IZ
 IZ
 Pq
 jf
 tl
+fG
 Qq
-qD
-uR
-aO
-aO
-uR
-uR
+NC
+wi
+wi
+NC
+NC
 hB
-uR
-uR
+NC
+NC
 Pq
 mH
 Pq
@@ -5341,13 +5336,13 @@ Pq
 Pq
 Pq
 jf
-TH
-TH
+dc
+dc
 nq
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 TV
 TW
 "}
@@ -5364,24 +5359,24 @@ ea
 vN
 wl
 ea
-Vf
+mh
 IZ
 IZ
 Pq
-uR
+NC
 VP
-uR
+NC
 jA
 Pq
-uR
+NC
 VP
 Pq
 Pq
-Is
+ch
 jf
-uR
+NC
 rg
-uR
+NC
 Pq
 Pq
 Pq
@@ -5402,13 +5397,13 @@ Pq
 Pq
 Pq
 IZ
-TH
-ch
-TH
+dc
+IK
+dc
 nq
 nq
-TH
-TH
+dc
+dc
 TW
 TW
 TW
@@ -5423,31 +5418,31 @@ IZ
 By
 ea
 oj
-Eo
-Eo
-dc
+cH
+cH
+Gg
 ea
-Vf
+mh
 IZ
 IZ
 Pq
-uR
-uR
-uR
-uR
-uR
-Qq
+NC
+NC
+NC
+NC
+NC
+fG
 Pq
 Pq
 Pq
 Pq
-uR
-uR
+NC
+NC
 rg
 rG
-uR
+NC
 Pq
-uR
+NC
 ww
 Pq
 Pq
@@ -5456,7 +5451,7 @@ FH
 hs
 rm
 ZE
-fP
+aO
 eu
 IZ
 IZ
@@ -5464,12 +5459,12 @@ Pq
 Pq
 Pq
 Jn
-TH
+dc
 HL
-TH
-TH
+dc
+dc
 nq
-TH
+dc
 TW
 TW
 TW
@@ -5485,8 +5480,8 @@ IZ
 Yg
 ea
 ny
-wi
-bX
+Eo
+sA
 BH
 ea
 ea
@@ -5494,24 +5489,24 @@ xg
 IZ
 Pq
 Pq
-uR
-uR
-uR
-Qq
+NC
+NC
+NC
+fG
 Pq
 Pq
 Pq
 Pq
 Pq
-uR
+NC
 db
 Jj
-uR
-uR
-uR
-uR
-uR
-uR
+NC
+NC
+NC
+NC
+NC
+NC
 lR
 vN
 LK
@@ -5525,11 +5520,11 @@ IZ
 Pq
 Pq
 Pq
-Qq
-TH
-TH
-TH
-TH
+fG
+dc
+dc
+dc
+dc
 nq
 nq
 TW
@@ -5556,7 +5551,7 @@ Qr
 IZ
 Pq
 Pq
-wc
+Cr
 Pq
 Pq
 Pq
@@ -5567,14 +5562,14 @@ Pq
 Pq
 Pq
 Tc
-Is
-Gg
-uR
-uR
+ch
+aJ
+NC
+NC
 Pq
 ZV
-uR
-uR
+NC
+NC
 bn
 jG
 IZ
@@ -5589,10 +5584,10 @@ Pq
 Pq
 SP
 bK
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 nq
 TW
 TW
@@ -5614,11 +5609,11 @@ Vj
 ea
 ea
 ea
-RM
+pe
 IZ
 IZ
 Pq
-uR
+NC
 Pq
 Pq
 Pq
@@ -5630,9 +5625,9 @@ Pq
 Pq
 sC
 xR
-uR
-uR
-Qq
+NC
+NC
+fG
 Pq
 Pq
 Pq
@@ -5650,11 +5645,11 @@ Pq
 Pq
 Pq
 Hq
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 nq
 WO
 TW
@@ -5671,7 +5666,7 @@ IZ
 HA
 wl
 An
-Un
+mf
 Ac
 CL
 ea
@@ -5681,7 +5676,7 @@ kv
 IZ
 IZ
 Jj
-uR
+NC
 IZ
 IZ
 Pq
@@ -5691,14 +5686,14 @@ IZ
 IZ
 IZ
 IZ
-uR
+NC
 Pq
 jM
 Pq
 Pq
 IZ
 Pq
-uR
+NC
 jf
 ea
 ea
@@ -5711,11 +5706,11 @@ IZ
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 nq
 nq
 TW
@@ -5744,7 +5739,7 @@ BV
 Pq
 lo
 Jj
-TH
+dc
 Pq
 lo
 Pq
@@ -5755,7 +5750,7 @@ lo
 lR
 lR
 lR
-uR
+NC
 Pq
 IZ
 IZ
@@ -5774,11 +5769,11 @@ Pq
 Pq
 Pq
 sC
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 TW
 TW
 TW
@@ -5806,12 +5801,12 @@ Ig
 Pq
 ea
 ea
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 sB
-TH
+dc
 ea
 ea
 ea
@@ -5825,7 +5820,7 @@ IZ
 IZ
 sI
 LM
-uw
+QB
 iW
 IZ
 IZ
@@ -5835,11 +5830,11 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 Io
 TW
 TW
@@ -5865,11 +5860,11 @@ Bq
 aD
 aD
 MW
-mf
+xB
 Pq
 Pq
 Bc
-TH
+dc
 HL
 Pq
 Pq
@@ -5897,11 +5892,11 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 hN
 TW
 TW
@@ -5931,7 +5926,7 @@ PK
 IZ
 IZ
 IZ
-IK
+EE
 IZ
 IZ
 IZ
@@ -5962,9 +5957,9 @@ Pq
 Pq
 nq
 nq
-TH
-TH
-TH
+dc
+dc
+dc
 TW
 TW
 TW
@@ -5983,7 +5978,7 @@ UM
 pD
 Gv
 dt
-bB
+RM
 Jv
 ZX
 dt
@@ -5993,7 +5988,7 @@ Gv
 dt
 AX
 IV
-pi
+Iq
 dt
 Ba
 nu
@@ -6023,10 +6018,10 @@ Pq
 Pq
 Pq
 LU
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 TW
 TW
 TW
@@ -6047,7 +6042,7 @@ rz
 dt
 jJ
 IV
-ey
+TH
 dt
 zM
 nu
@@ -6085,12 +6080,12 @@ Pq
 Pq
 Pq
 nq
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 TW
-TH
+dc
 TV
 TW
 TW
@@ -6104,27 +6099,27 @@ Pq
 Pq
 IZ
 II
-Ft
+wm
 Hd
 dt
 xM
-Ft
+wm
 ZX
 dt
 YG
-Ft
+wm
 Gv
 dt
 YG
-Ft
+wm
 wR
 dt
 Bh
-Ft
+wm
 Gv
 dt
 YG
-Ft
+wm
 Gv
 IZ
 Pq
@@ -6148,10 +6143,10 @@ Pq
 Ky
 nq
 nq
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 Jj
 TV
 TW
@@ -6210,11 +6205,11 @@ Pq
 nq
 nq
 nq
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 TW
 TW
 TW
@@ -6240,7 +6235,7 @@ Gv
 Gv
 dt
 Do
-cG
+Ft
 ZX
 dt
 XG
@@ -6272,10 +6267,10 @@ Gb
 nq
 nq
 nq
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 TW
 TW
 TW
@@ -6301,7 +6296,7 @@ Ri
 PB
 wR
 dt
-Nj
+ex
 PB
 Gv
 dt
@@ -6327,16 +6322,16 @@ Pq
 Pq
 Pq
 iu
-TH
-TH
+dc
+dc
 Gb
 nq
 nq
 iN
 nq
 nq
-TH
-TH
+dc
+dc
 TW
 TW
 TW
@@ -6387,8 +6382,8 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
+dc
+dc
 nq
 nq
 nq
@@ -6396,8 +6391,8 @@ nq
 nq
 nq
 nq
-TH
-TH
+dc
+dc
 TW
 TW
 TW
@@ -6449,16 +6444,16 @@ Pq
 Pq
 go
 go
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 vU
 iE
-TH
-TH
-TH
+dc
+dc
+dc
 TW
 TW
 TW
@@ -6491,9 +6486,9 @@ Pq
 Pq
 Pq
 Pq
-TH
-TH
-TH
+dc
+dc
+dc
 Pq
 Pq
 Pq
@@ -6505,19 +6500,19 @@ Pq
 TW
 TW
 TW
-TH
+dc
 sC
 sC
-TH
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
+dc
 Jj
 TW
 TV
-TH
-TH
+dc
+dc
 TW
 TW
 TW
@@ -6551,10 +6546,10 @@ Pq
 cz
 TW
 TW
-TH
-TH
-TH
-TH
+dc
+dc
+dc
+dc
 TW
 TW
 TW
@@ -6570,11 +6565,11 @@ TW
 TW
 TW
 TV
-TH
-TH
-TH
-TH
-WO
+dc
+dc
+dc
+dc
+nq
 TW
 TW
 TW
