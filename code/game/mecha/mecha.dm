@@ -479,12 +479,6 @@
 	radio.icon_state = icon_state
 	radio.subspace_transmission = 1
 
-/obj/mecha/proc/do_after(delay as num)
-	sleep(delay)
-	if(src)
-		return 1
-	return 0
-
 /obj/mecha/proc/enter_after(delay as num, var/mob/user as mob, var/numticks = 5)
 	var/delayfraction = delay/numticks
 
@@ -1641,7 +1635,7 @@
 			return
 
 		var/obj/item/stack/nanopaste/nanopaste = W
-		while(!QDELETED(user) && !QDELETED(src) && do_after(user, 1 SECOND, src))
+		while(!QDELETED(user) && !QDELETED(src))
 
 			// Get a component to attempt a repair on.
 			var/obj/item/mecha_parts/component/component
@@ -1656,12 +1650,8 @@
 				to_chat(user, SPAN_NOTICE("Nothing to repair!"))
 				break
 
-			// Spend some time on the work.
-			if(!do_after(user, 1 SECOND, src))
-				break
-
 			// Something has destroyed us or the mech, or we're incapacitated or moved away.
-			if(QDELETED(user) || QDELETED(src) || QDELETED(component) || component.loc != src)
+			if(QDELETED(user) || QDELETED(src) || QDELETED(component) || component.loc != src || !do_after(user, 1 SECOND, src))
 				break
 
 			// Out of repair gel.
@@ -2716,14 +2706,16 @@
 		src.occupant_message("Recalibrating coordination system.")
 		src.log_message("Recalibration of coordination system started.")
 		var/T = src.loc
-		if(do_after(100))
-			if(T == src.loc)
-				src.clearInternalDamage(MECHA_INT_CONTROL_LOST)
-				src.occupant_message("<font color='blue'>Recalibration successful.</font>")
-				src.log_message("Recalibration of coordination system finished with 0 errors.")
-			else
-				src.occupant_message("<font color='red'>Recalibration failed.</font>")
-				src.log_message("Recalibration of coordination system failed with 1 error.",1)
+		sleep(100)
+		if(QDELETED(src))
+			return
+		if(T == src.loc)
+			src.clearInternalDamage(MECHA_INT_CONTROL_LOST)
+			src.occupant_message("<font color='blue'>Recalibration successful.</font>")
+			src.log_message("Recalibration of coordination system finished with 0 errors.")
+		else
+			src.occupant_message("<font color='red'>Recalibration failed.</font>")
+			src.log_message("Recalibration of coordination system failed with 1 error.",1)
 	if(href_list["drop_from_cargo"])
 		var/obj/O = locate(href_list["drop_from_cargo"])
 		if(O && (O in src.cargo))

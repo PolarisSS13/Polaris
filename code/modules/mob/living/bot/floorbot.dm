@@ -285,7 +285,7 @@
 			while(amount + 4 <= maxAmount)
 				busy = TRUE
 				update_icons()
-				if(do_after(5 SECONDS))
+				if(do_after(src, 5 SECONDS))
 					if(M)
 						M.use(1)
 						addTiles(4)
