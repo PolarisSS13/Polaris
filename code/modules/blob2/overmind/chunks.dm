@@ -18,11 +18,6 @@
 
 // Base artifact master for chunks. //
 
-/datum/component/artifact_master/blob
-	make_effects = list(
-		/datum/artifact_effect/uncommon/fortify
-	)
-
 /obj/item/blob_chunk
 	name = "chunk"
 	icon = 'icons/mob/blob.dmi'
@@ -32,6 +27,8 @@
 
 /obj/item/blob_chunk/Initialize(var/newloc, var/datum/blob_type/new_type)
 	. = ..()
+
+	create_reagents(120)
 
 	if(ispath(blob_type))
 		blob_type = new()
@@ -48,7 +45,14 @@
 
 		name = "[blob_type.name] [initial(name)]"
 		color = blob_type.color
+		origin_tech = blob_type.core_tech.Copy()
 
+// Artifact master solely for blobs. //
+
+/datum/component/artifact_master/blob
+	make_effects = list(
+		/datum/artifact_effect/uncommon/fortify
+	)
 
 /datum/component/artifact_master/blob/do_setup()
 	..()
