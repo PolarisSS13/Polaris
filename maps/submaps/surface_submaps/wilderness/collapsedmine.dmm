@@ -276,6 +276,9 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 5
 	},
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "fn" = (
@@ -685,9 +688,10 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "mf" = (
-/obj/structure/grille,
-/obj/structure/window/reinforced/full,
-/turf/simulated/floor/plating,
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "mh" = (
 /obj/effect/floor_decal/carpet,
@@ -831,6 +835,15 @@
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/tiled/freezer,
 /area/submap/CollapsedMine)
+"pX" = (
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 10
+	},
+/obj/machinery/light{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
 "qc" = (
 /obj/structure/table/steel_reinforced,
 /obj/machinery/door/window/eastleft,
@@ -917,6 +930,9 @@
 	dir = 9
 	},
 /obj/effect/decal/remains/mummy1,
+/obj/machinery/light{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "rG" = (
@@ -958,7 +974,9 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "sA" = (
-/obj/machinery/power/apc,
+/obj/machinery/power/apc{
+	start_charge = 1
+	},
 /turf/simulated/wall/r_concrete,
 /area/submap/CollapsedMine)
 "sB" = (
@@ -1045,6 +1063,9 @@
 /obj/structure/table/steel_reinforced,
 /obj/random/tech_supply/component,
 /obj/effect/floor_decal/corner/yellow/border{
+	dir = 8
+	},
+/obj/machinery/light{
 	dir = 8
 	},
 /turf/simulated/floor/tiled/techfloor,
@@ -1175,7 +1196,7 @@
 /area/submap/CollapsedMine)
 "wm" = (
 /obj/effect/floor_decal/carpet,
-/obj/machinery/light/small/poi{
+/obj/machinery/light/small{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
@@ -1393,6 +1414,16 @@
 "Ap" = (
 /obj/structure/table/rack,
 /obj/random/powercell,
+/turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
+"Ay" = (
+/obj/machinery/recharge_station,
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "AO" = (
@@ -1668,10 +1699,10 @@
 /area/submap/CollapsedMine)
 "Ft" = (
 /obj/effect/floor_decal/carpet,
-/obj/machinery/light/small/poi{
+/obj/random/snack,
+/obj/machinery/light/small{
 	dir = 4
 	},
-/obj/random/snack,
 /turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
 "Fz" = (
@@ -1897,6 +1928,16 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/submap/CollapsedMine)
+"Is" = (
+/obj/effect/floor_decal/corner/yellow/border{
+	dir = 4
+	},
+/obj/machinery/light{
+	dir = 4;
+	icon_state = "tube1"
+	},
+/turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
 "Ix" = (
 /obj/effect/decal/remains/human,
 /turf/simulated/floor/wood,
@@ -1950,6 +1991,9 @@
 "IT" = (
 /obj/machinery/mech_recharger,
 /obj/mecha/working/ripley/mining,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "IV" = (
@@ -2272,6 +2316,9 @@
 /obj/structure/table/rack,
 /obj/random/powercell/anom,
 /obj/random/powercell,
+/obj/machinery/light{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Pg" = (
@@ -2293,6 +2340,11 @@
 	dir = 1
 	},
 /turf/simulated/floor/tiled/techfloor,
+/area/submap/CollapsedMine)
+"Pq" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/simulated/floor/plating,
 /area/submap/CollapsedMine)
 "Py" = (
 /obj/effect/floor_decal/corner/red/border{
@@ -2354,6 +2406,7 @@
 /obj/structure/salvageable/console_broken_os{
 	dir = 1
 	},
+/obj/machinery/light,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "QN" = (
@@ -2388,10 +2441,10 @@
 /area/submap/CollapsedMine)
 "RM" = (
 /obj/effect/floor_decal/carpet,
-/obj/machinery/light/small/poi{
+/mob/living/simple_mob/animal/giant_spider/lurker,
+/obj/machinery/light/small{
 	dir = 4
 	},
-/mob/living/simple_mob/animal/giant_spider/lurker,
 /turf/simulated/floor/carpet,
 /area/submap/CollapsedMine)
 "Sa" = (
@@ -2449,6 +2502,9 @@
 /obj/machinery/recharge_station,
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 6
+	},
+/obj/machinery/light{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
@@ -3261,7 +3317,7 @@ cb
 XM
 cg
 FV
-mf
+Pq
 Ir
 af
 xh
@@ -3306,7 +3362,7 @@ Ig
 LR
 ea
 He
-ea
+mf
 ea
 Ld
 Mk
@@ -3323,7 +3379,7 @@ Oy
 WF
 WF
 Gs
-mf
+Pq
 vZ
 WF
 WF
@@ -3481,7 +3537,7 @@ ea
 ea
 gi
 ZF
-Ov
+Ay
 Ov
 Jf
 Jf
@@ -3509,7 +3565,7 @@ NL
 WF
 WF
 AO
-mf
+Pq
 zy
 JJ
 Lf
@@ -4310,7 +4366,7 @@ DF
 bH
 qc
 vg
-mf
+Pq
 Fz
 nD
 ea
@@ -4372,7 +4428,7 @@ yJ
 pb
 pb
 wz
-mf
+Pq
 Fz
 ea
 ea
@@ -4558,7 +4614,7 @@ ha
 GM
 GM
 qI
-mf
+Pq
 mz
 ea
 HE
@@ -4616,10 +4672,10 @@ rl
 rl
 Ig
 IZ
-mf
-mf
-mf
-mf
+Pq
+Pq
+Pq
+Pq
 IZ
 IR
 lR
@@ -4677,12 +4733,12 @@ IZ
 cH
 ea
 ea
-mf
+Pq
 FS
 ZU
 VH
 wh
-mf
+Pq
 Fz
 ea
 HE
@@ -4739,7 +4795,7 @@ IZ
 ea
 vp
 ea
-mf
+Pq
 ml
 py
 ID
@@ -4801,7 +4857,7 @@ IZ
 ea
 ea
 nD
-mf
+Pq
 Fz
 JH
 ea
@@ -4868,7 +4924,7 @@ zA
 ig
 ig
 fd
-mf
+Pq
 Fz
 ea
 bi
@@ -5152,7 +5208,7 @@ rE
 ea
 Go
 ea
-Vf
+pX
 IZ
 IZ
 Jf
@@ -5710,7 +5766,7 @@ fm
 WI
 aD
 aD
-aD
+Is
 aD
 Bq
 aD
