@@ -16,12 +16,15 @@
 	brute_multiplier = 2.0
 	spread_modifier = 0.35 // Ranged projectiles tend to have a higher material cost, so ease up on the spreading.
 	ai_aggressiveness = 40
-	chunk_passive_ability_cooldown = 0.5 SECONDS
+	chunk_effect_cooldown = 0.5 SECONDS
 	attack_message = "The blob stabs you"
 	attack_message_living = ", and you feel sharp spines pierce your flesh"
 	attack_message_synth = ", and your external plating is pierced by sharp spines"
 	attack_verb = "stabs"
 	spore_projectile = /obj/item/projectile/bullet/thorn
+
+	chunk_master = /datum/component/artifact_master/blob/reactive_spines
+	chunk_effect_range = 3
 
 // Even if the melee attack is enough to one-shot this blob, it gets to retaliate at least once.
 /datum/blob_type/reactive_spines/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)
@@ -30,3 +33,8 @@
 		B.blob_attack_animation(attacker, B.overmind)
 		attacker.blob_act(B)
 	return ..()
+
+/datum/component/artifact_master/blob/reactive_spines
+	make_effects = list(
+		/datum/artifact_effect/extreme/spines
+	)

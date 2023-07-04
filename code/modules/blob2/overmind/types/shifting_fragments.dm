@@ -13,9 +13,11 @@
 	burn_multiplier = 0.5
 	spread_modifier = 0.5
 	ai_aggressiveness = 30
-	chunk_active_ability_cooldown = 3 MINUTES
+	chunk_effect_cooldown = 3 MINUTES
 	attack_message = "A fragment strikes you"
 	attack_verb = "strikes"
+
+	chunk_master = /datum/component/artifact_master/blob/shifting_fragments
 
 /datum/blob_type/shifting_fragments/on_received_damage(var/obj/structure/blob/B, damage, damage_type)
 	if(damage > 0 && prob(60))
@@ -34,3 +36,8 @@
 	if(istype(B, /obj/structure/blob/normal) || (istype(B, /obj/structure/blob/shield) && prob(25)))
 		new_B.forceMove(get_turf(B))
 		B.forceMove(T)
+
+/datum/component/artifact_master/blob/shifting_fragments
+	make_effects = list(
+		/datum/artifact_effect/common/sprinting
+	)

@@ -22,3 +22,11 @@
 	attack_verb = "lashes"
 	spore_projectile = /obj/item/projectile/arc/spore
 	factory_type = /obj/structure/blob/factory/turret
+
+	chunk_master = /datum/component/artifact_master/blob/roiling_mold
+	chunk_effect_range = 2
+
+/datum/component/artifact_master/blob/roiling_mold
+	make_effects = list(
+		/datum/artifact_effect/extreme/spines/spore
+	)

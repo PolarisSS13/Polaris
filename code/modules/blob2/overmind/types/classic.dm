@@ -10,3 +10,10 @@
 	can_build_nodes = FALSE
 	spread_modifier = 1.0
 	ai_aggressiveness = 0
+
+	chunk_master = /datum/component/artifact_master/blob/classic
+
+/datum/component/artifact_master/blob/classic
+	make_effects = list(
+		/datum/artifact_effect/common/sweating
+	)

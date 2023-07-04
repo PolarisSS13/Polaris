@@ -47,10 +47,6 @@
 	var/node_type = /obj/structure/blob/node
 	var/shield_type = /obj/structure/blob/shield
 
-	var/list/core_tech = list(TECH_BIO = 4, TECH_MATERIAL = 3)	// Tech for the item created when a core is destroyed.
-	var/chunk_active_type = BLOB_CHUNK_TOGGLE
-	var/chunk_active_ability_cooldown = 20 SECONDS
-	var/chunk_passive_ability_cooldown = 5 SECONDS
 
 // Called when a blob receives damage.  This needs to return the final damage or blobs will be immortal.
 /datum/blob_type/proc/on_received_damage(var/obj/structure/blob/B, damage, damage_type)
@@ -95,3 +91,50 @@
 // Spore handle_special call.
 /datum/blob_type/proc/on_spore_lifetick(mob/living/simple_mob/blob/spore/S)
 	return
+
+/datum/blob_type/proc/create_descendant()
+	var/datum/blob_type/descendant = new src.type()
+	descendant.generation = generation + 1
+	descendant.name = name
+	descendant.desc = desc
+	descendant.effect_desc = effect_desc
+	descendant.ai_desc = ai_desc
+	descendant.color = color
+	descendant.complementary_color = complementary_color
+
+	descendant.faction = faction
+
+	descendant.attack_message = attack_message
+	descendant.attack_message_living = attack_message_living
+	descendant.attack_message_synth = attack_message_synth
+	descendant.attack_verb = attack_verb
+	descendant.damage_type = damage_type
+	descendant.armor_check = armor_check
+	descendant.armor_pen = armor_pen
+	descendant.damage_lower = damage_lower
+	descendant.damage_upper = damage_upper
+
+	descendant.brute_multiplier = brute_multiplier
+	descendant.burn_multiplier = burn_multiplier
+	descendant.spread_modifier = spread_modifier
+	descendant.slow_spread_with_size = slow_spread_with_size
+	descendant.ai_aggressiveness = ai_aggressiveness
+
+	descendant.can_build_factories = can_build_factories
+	descendant.can_build_resources = can_build_resources
+	descendant.can_build_nodes = can_build_nodes
+
+	descendant.spore_type = spore_type
+	descendant.ranged_spores = ranged_spores
+	descendant.spore_firesound = spore_firesound
+	descendant.spore_range = spore_range
+	descendant.spore_projectile = spore_projectile
+	descendant.spore_accuracy = spore_accuracy
+	descendant.spore_dispersion = spore_dispersion
+
+	descendant.factory_type = factory_type
+	descendant.resource_type = resource_type
+	descendant.node_type = node_type
+	descendant.shield_type = shield_type
+
+	return descendant
