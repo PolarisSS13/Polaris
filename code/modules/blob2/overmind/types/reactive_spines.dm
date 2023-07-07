@@ -23,8 +23,11 @@
 	attack_verb = "stabs"
 	spore_projectile = /obj/item/projectile/bullet/thorn
 
-	chunk_master = /datum/component/artifact_master/blob/reactive_spines
 	chunk_effect_range = 3
+	chunk_type = /obj/item/blob_chunk/reactive_spines
+
+/obj/item/blob_chunk/reactive_spines
+	blob_effect_master_type = /datum/component/artifact_master/blob/reactive_spines
 
 // Even if the melee attack is enough to one-shot this blob, it gets to retaliate at least once.
 /datum/blob_type/reactive_spines/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)

@@ -20,7 +20,10 @@
 	attack_message_synth = ", and your system reports lower internal temperatures"
 	attack_verb = "stabs"
 
-	chunk_master = /datum/component/artifact_master/blob/cryogenic_goo
+	chunk_type = /obj/item/blob_chunk/cryogenic_goo
+
+/obj/item/blob_chunk/cryogenic_goo
+	blob_effect_master_type = /datum/component/artifact_master/blob/cryogenic_goo
 
 /datum/blob_type/cryogenic_goo/on_attack(obj/structure/blob/B, mob/living/victim)
 	if(ishuman(victim))

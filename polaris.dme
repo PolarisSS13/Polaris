@@ -2979,6 +2979,7 @@
 #include "code\modules\reagents\reactions\_reactions.dm"
 #include "code\modules\reagents\reactions\distilling\distilling.dm"
 #include "code\modules\reagents\reactions\fusion\fusion.dm"
+#include "code\modules\reagents\reactions\instant\blob.dm"
 #include "code\modules\reagents\reactions\instant\drinks.dm"
 #include "code\modules\reagents\reactions\instant\food.dm"
 #include "code\modules\reagents\reactions\instant\instant.dm"

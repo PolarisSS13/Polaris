@@ -11,7 +11,10 @@
 	spread_modifier = 1.0
 	ai_aggressiveness = 0
 
-	chunk_master = /datum/component/artifact_master/blob/classic
+	chunk_type = /obj/item/blob_chunk/classic
+
+/obj/item/blob_chunk/classic
+	blob_effect_master_type = /datum/component/artifact_master/blob/classic
 
 /datum/component/artifact_master/blob/classic
 	make_effects = list(

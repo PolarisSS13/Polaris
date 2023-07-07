@@ -21,7 +21,10 @@
 	attack_message_synth = ", and your body begins to corrode"
 	attack_verb = "splashes"
 
-	chunk_master = /datum/component/artifact_master/blob/ravenous_macrophage
+	chunk_type = /obj/item/blob_chunk/ravenous_macrophage
+
+/obj/item/blob_chunk/ravenous_macrophage
+	blob_effect_master_type = /datum/component/artifact_master/blob/ravenous_macrophage
 
 /datum/blob_type/ravenous_macrophage/on_pulse(var/obj/structure/blob/B)
 	var/mob/living/L = locate() in range(world.view, B)

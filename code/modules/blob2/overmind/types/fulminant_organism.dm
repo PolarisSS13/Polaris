@@ -19,7 +19,10 @@
 	spore_type = /mob/living/simple_mob/blob/spore/weak
 	chunk_effect_cooldown = 60 SECONDS
 
-	chunk_master = /datum/component/artifact_master/blob/fulminant_organism
+	chunk_type = /obj/item/blob_chunk/fulminant_organism
+
+/obj/item/blob_chunk/fulminant_organism
+	blob_effect_master_type = /datum/component/artifact_master/blob/fulminant_organism
 
 /datum/blob_type/fulminant_organism/on_expand(var/obj/structure/blob/B, var/obj/structure/blob/new_B, var/turf/T, var/mob/observer/blob/O)
 	if(prob(10)) // 10% chance to make a weak spore when expanding.

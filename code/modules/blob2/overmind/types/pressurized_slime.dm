@@ -20,7 +20,10 @@
 	attack_message_synth = ", and the fluid wears down on your components"
 	attack_verb = "splashes"
 
-	chunk_master = /datum/component/artifact_master/blob/pressurized_slime
+	chunk_type = /obj/item/blob_chunk/pressurized_slime
+
+/obj/item/blob_chunk/pressurized_slime
+	blob_effect_master_type = /datum/component/artifact_master/blob/pressurized_slime
 
 /datum/blob_type/pressurized_slime/on_attack(obj/structure/blob/B, mob/living/victim, def_zone)
 	victim.water_act(5)

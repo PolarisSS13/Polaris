@@ -22,7 +22,10 @@
 	attack_verb = "blasts"
 	var/exploding = FALSE
 
-	chunk_master =	/datum/component/artifact_master/blob/explosive_lattice
+	chunk_type = /obj/item/blob_chunk/explosive_lattice
+
+/obj/item/blob_chunk/explosive_lattice
+	blob_effect_master_type = /datum/component/artifact_master/blob/explosive_lattice
 
 /datum/blob_type/explosive_lattice/on_attack(obj/structure/blob/B, mob/living/victim, def_zone) // This doesn't use actual bombs since they're too strong and it would hurt the blob.
 	if(exploding) // We're busy, don't infinite loop us.

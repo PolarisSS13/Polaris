@@ -17,7 +17,10 @@
 	attack_message_synth = ", and your external plating melts"
 	attack_verb = "splashes"
 
-	chunk_master = /datum/component/artifact_master/blob/blazing_oil
+	chunk_type = /obj/item/blob_chunk/blazing_oil
+
+/obj/item/blob_chunk/blazing_oil
+	blob_effect_master_type = /datum/component/artifact_master/blob/blazing_oil
 
 /datum/blob_type/blazing_oil/on_attack(obj/structure/blob/B, mob/living/victim)
 	victim.fire_act() // Burn them.

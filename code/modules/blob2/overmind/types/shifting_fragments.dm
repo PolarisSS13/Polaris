@@ -17,7 +17,10 @@
 	attack_message = "A fragment strikes you"
 	attack_verb = "strikes"
 
-	chunk_master = /datum/component/artifact_master/blob/shifting_fragments
+	chunk_type = /obj/item/blob_chunk/shifting_fragments
+
+/obj/item/blob_chunk/shifting_fragments
+	blob_effect_master_type = /datum/component/artifact_master/blob/shifting_fragments
 
 /datum/blob_type/shifting_fragments/on_received_damage(var/obj/structure/blob/B, damage, damage_type)
 	if(damage > 0 && prob(60))

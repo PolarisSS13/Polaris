@@ -18,7 +18,10 @@
 	spore_type = /mob/living/simple_mob/blob/spore/infesting
 	chunk_effect_cooldown = 2 MINUTES
 
-	chunk_master = /datum/component/artifact_master/blob/fungal_bloom
+	chunk_type = /obj/item/blob_chunk/fungal_bloom
+
+/obj/item/blob_chunk/fungal_bloom
+	blob_effect_master_type = /datum/component/artifact_master/blob/fungal_bloom
 
 /datum/blob_type/fungal_bloom/on_spore_death(mob/living/simple_mob/blob/spore/S)
 	if(S.is_infesting)

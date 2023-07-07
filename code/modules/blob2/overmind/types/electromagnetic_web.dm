@@ -18,8 +18,11 @@
 	attack_message_synth = ", and your electronics get badly damaged"
 	attack_verb = "lashes"
 
-	chunk_master = /datum/component/artifact_master/blob/electromagnetic_web
 	chunk_effect_range = 3
+	chunk_type = /obj/item/blob_chunk/electromagnetic_web
+
+/obj/item/blob_chunk/electromagnetic_web
+	blob_effect_master_type = /datum/component/artifact_master/blob/electromagnetic_web
 
 /datum/blob_type/electromagnetic_web/on_death(obj/structure/blob/B)
 	empulse(B.loc, 0, 1, 2)
