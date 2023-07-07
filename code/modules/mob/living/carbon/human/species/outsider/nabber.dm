@@ -40,7 +40,6 @@
 
 	limb_blend = ICON_MULTIPLY
 
-	slowdown = -0.5
 	rarity_value = 5
 	hud_type = /datum/hud_data/nabber
 
@@ -70,7 +69,7 @@
 
 	flags = NO_SCAN | NO_SLIP | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR
-	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_FBP_CHARGEN
+	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED | SPECIES_NO_FBP_CONSTRUCTION | SPECIES_NO_POSIBRAIN
 
 	bump_flag = HEAVY
 	push_flags = ALLMOBS

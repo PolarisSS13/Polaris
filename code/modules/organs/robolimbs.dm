@@ -492,7 +492,7 @@ var/global/const/standard_monitor_styles = "blank=ipc_blank;\
 	company = "Arkmade"
 	icon = 'icons/mob/human_races/cyberlimbs/vox/primalis.dmi'
 	unavailable_to_build = TRUE
-	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_TAJ, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT)
+	species_cannot_use = list(SPECIES_TESHARI, SPECIES_PROMETHEAN, SPECIES_DIONA, SPECIES_HUMAN, SPECIES_TAJ, SPECIES_HUMAN_VATBORN, SPECIES_UNATHI, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_NABBER, SPECIES_NABBER_MONARCH)
 	suggested_species = SPECIES_VOX
 
 /datum/robolimb/vox/crap

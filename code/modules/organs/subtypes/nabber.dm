@@ -53,11 +53,7 @@
 
 /obj/item/organ/internal/voicebox/nabber
 	name = "vocal synthesiser"
-	assists_languages = list(LANGUAGE_SOL_COMMON, LANGUAGE_GUTTER, LANGUAGE_TRADEBAND, LANGUAGE_EAL, LANGUAGE_GALCOM, LANGUAGE_SIVIAN)
-
-/obj/item/organ/internal/voicebox/nabber/Initialize()
-	. = ..()
-	robotize()
+	assists_languages = list(LANGUAGE_EAL)
 
 // Eyes and the 'glasses' associated with them.
 
@@ -254,18 +250,18 @@
 			if(prob(1))
 				to_chat(owner, SPAN_WARNING("You're finding it difficult to move."))
 		if(60 to 70)
-			lowblood_tally = 4
+			lowblood_tally = 3
 			if(prob(1))
 				to_chat(owner, SPAN_WARNING("Moving has become very difficult."))
 		if(30 to 60)
-			lowblood_tally = 6
+			lowblood_tally = 4
 			if(prob(15))
 				to_chat(owner, SPAN_WARNING("You're almost unable to move!"))
 				if(!owner.pulling_punches)
 					var/datum/species/nabber/nab = species
 					nab.arm_swap(owner, TRUE)
 		if(-(INFINITY) to 30)
-			lowblood_tally = 10
+			lowblood_tally = 8
 			if(prob(30) && !owner.pulling_punches)
 				var/datum/species/nabber/nab = species
 				nab.arm_swap(owner, TRUE)
