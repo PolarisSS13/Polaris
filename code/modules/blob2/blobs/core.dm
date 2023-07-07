@@ -144,7 +144,7 @@ var/global/list/blob_cores = list()
 //		overmind.update_health_hud()
 	pulse_area(overmind, 15, BLOB_CORE_PULSE_RANGE, BLOB_CORE_EXPAND_RANGE)
 	for(var/obj/structure/blob/normal/B in range(1, src))
-		if(prob(5))
+		if(B.overmind == overmind && prob(5))
 			B.change_to(/obj/structure/blob/shield/core, overmind)
 
 	overmind.blob_type.on_core_process(src)
