@@ -126,15 +126,16 @@
 	return "haemolymph"
 
 /datum/species/nabber/can_overcome_gravity(mob/living/carbon/human/H)
-	var/datum/gas_mixture/mixture = H.loc.return_air()
+	if(H.stat == CONSCIOUS)
+		var/datum/gas_mixture/mixture = H.loc.return_air()
 
-	if(mixture)
-		var/pressure = mixture.return_pressure()
-		if(pressure > 50)
-			var/turf/below = GetBelow(H)
-			var/turf/T = H.loc
-			if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
-				return TRUE
+		if(mixture)
+			var/pressure = mixture.return_pressure()
+			if(pressure > 50)
+				var/turf/below = GetBelow(H)
+				var/turf/T = H.loc
+				if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
+					return TRUE
 
 	return FALSE
 
@@ -145,41 +146,43 @@
 
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
 /datum/species/nabber/can_fall(mob/living/carbon/human/H)
-	var/datum/gas_mixture/mixture = H.loc.return_air()
+	if(H.stat == CONSCIOUS)
+		var/datum/gas_mixture/mixture = H.loc.return_air()
 
-	//nabbers should not be trying to break their fall on stairs.
-	var/turf/T = GetBelow(H.loc)
-	for(var/obj/O in T)
-		if(istype(O, /obj/structure/stairs))
-			return TRUE
-	if(mixture)
-		var/pressure = mixture.return_pressure()
-		if(pressure > 80)
-			return FALSE
+		//nabbers should not be trying to break their fall on stairs.
+		var/turf/T = GetBelow(H.loc)
+		for(var/obj/O in T)
+			if(istype(O, /obj/structure/stairs))
+				return TRUE
+		if(mixture)
+			var/pressure = mixture.return_pressure()
+			if(pressure > 80)
+				return FALSE
 
 	return TRUE
 
 // Even when nabbers do fall, if there's enough air pressure they won't hurt themselves.
 /datum/species/nabber/handle_falling(mob/living/carbon/human/H, turf/landing, damage_min, damage_max, silent, planetary)
 
-	var/datum/gas_mixture/mixture = H.loc.return_air()
+	if(H.stat == CONSCIOUS)
+		var/datum/gas_mixture/mixture = H.loc.return_air()
 
-	var/turf/T = GetBelow(H.loc)
+		var/turf/T = GetBelow(H.loc)
 
-	//Nabbers should not be trying to break their fall on stairs.
-	for(var/obj/O in T)
-		if(istype(O, /obj/structure/stairs))
-			return FALSE
+		//Nabbers should not be trying to break their fall on stairs.
+		for(var/obj/O in T)
+			if(istype(O, /obj/structure/stairs))
+				return FALSE
 
-	if(mixture)
-		var/pressure = mixture.return_pressure()
-		if(pressure > 50)
-			if(istype(landing, /turf/simulated/open))
-				H.visible_message("\The [H] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
-			else
-				H.visible_message("\The [H] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")
+		if(mixture)
+			var/pressure = mixture.return_pressure()
+			if(pressure > 50)
+				if(istype(landing, /turf/simulated/open))
+					H.visible_message("\The [H] descends from the deck above through \the [landing]!", "Your wings slow your descent.")
+				else
+					H.visible_message("\The [H] buzzes down from \the [landing], wings slowing their descent!", "You land on \the [landing], folding your wings.")
 
-			return TRUE
+				return TRUE
 
 	return FALSE
 
