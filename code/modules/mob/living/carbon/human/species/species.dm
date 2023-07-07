@@ -149,6 +149,10 @@
 	var/breath_cold_level_2 = 180							// Cold gas damage level 2 below this point.
 	var/breath_cold_level_3 = 100							// Cold gas damage level 3 below this point.
 
+	//For sleeby lizerbz
+	var/slowed_cold_level = 0
+	var/weaken_cold_level = 0
+
 	var/cold_discomfort_level = 285							// Aesthetic messages about feeling chilly.
 	var/list/cold_discomfort_strings = list(
 		"You feel chilly.",

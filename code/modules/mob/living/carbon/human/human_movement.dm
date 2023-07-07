@@ -53,7 +53,9 @@
 	if(FAT in src.mutations)
 		. += 1.5
 
-	if (bodytemperature < species.cold_level_1)
+	if(species.slowed_cold_level && bodytemperature < species.slowed_cold_level)
+		. += (species.cold_level_1 - bodytemperature) / 5
+	else if (bodytemperature < species.cold_level_1)
 		. += (species.cold_level_1 - bodytemperature) / 10 * 1.75
 
 	. += max(2 * stance_damage, 0) //damaged/missing feet or legs is slow

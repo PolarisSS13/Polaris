@@ -780,6 +780,13 @@
 
 
 		if(!istype(loc, /obj/machinery/atmospherics/unary/cryo_cell))
+			if (species.weaken_cold_level && bodytemperature <= species.weaken_cold_level)
+				if(!lying)
+					to_chat(src, "<span class='danger'>The cold saps the strength from your body. You just want to sleep...</span>")
+					emote("collapse")
+				Weaken(2)
+
+
 			var/cold_dam = 0
 			if(bodytemperature <= species.cold_level_1)
 				if(bodytemperature <= species.cold_level_2)
