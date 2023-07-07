@@ -22,6 +22,7 @@
 	chunk_type = /obj/item/blob_chunk/electromagnetic_web
 
 /obj/item/blob_chunk/electromagnetic_web
+	default_blob = /datum/blob_type/electromagnetic_web
 	blob_effect_master_type = /datum/component/artifact_master/blob/electromagnetic_web
 
 /datum/blob_type/electromagnetic_web/on_death(obj/structure/blob/B)

@@ -23,6 +23,7 @@
 	chunk_type = /obj/item/blob_chunk/radioactive_ooze
 
 /obj/item/blob_chunk/radioactive_ooze
+	default_blob = /datum/blob_type/radioactive_ooze
 	blob_effect_master_type = /datum/component/artifact_master/blob/radioactive_ooze
 
 /datum/blob_type/radioactive_ooze/on_pulse(var/obj/structure/blob/B)

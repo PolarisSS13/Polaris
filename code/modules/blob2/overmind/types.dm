@@ -92,60 +92,6 @@
 /datum/blob_type/proc/on_spore_lifetick(mob/living/simple_mob/blob/spore/S)
 	return
 
-/datum/blob_type/proc/create_descendant()
-	var/datum/blob_type/descendant = new src.type()
-	descendant.name = name
-	descendant.desc = desc
-	descendant.effect_desc = effect_desc
-	descendant.ai_desc = ai_desc
-	descendant.color = color
-	descendant.complementary_color = complementary_color
-
-	descendant.faction = faction
-
-	descendant.attack_message = attack_message
-	descendant.attack_message_living = attack_message_living
-	descendant.attack_message_synth = attack_message_synth
-	descendant.attack_verb = attack_verb
-	descendant.damage_type = damage_type
-	descendant.armor_check = armor_check
-	descendant.armor_pen = armor_pen
-	descendant.damage_lower = damage_lower
-	descendant.damage_upper = damage_upper
-
-	descendant.brute_multiplier = brute_multiplier
-	descendant.burn_multiplier = burn_multiplier
-	descendant.spread_modifier = spread_modifier
-	descendant.slow_spread_with_size = slow_spread_with_size
-	descendant.ai_aggressiveness = ai_aggressiveness
-
-	descendant.can_build_factories = can_build_factories
-	descendant.can_build_resources = can_build_resources
-	descendant.can_build_nodes = can_build_nodes
-
-	descendant.spore_type = spore_type
-	descendant.ranged_spores = ranged_spores
-	descendant.spore_firesound = spore_firesound
-	descendant.spore_range = spore_range
-	descendant.spore_projectile = spore_projectile
-	descendant.spore_accuracy = spore_accuracy
-	descendant.spore_dispersion = spore_dispersion
-
-	descendant.factory_type = factory_type
-	descendant.resource_type = resource_type
-	descendant.node_type = node_type
-	descendant.shield_type = shield_type
-
-	descendant.core_tech = core_tech.Copy()
-
-	descendant.chunk_type = chunk_type
-	descendant.chunk_effect_cooldown = chunk_effect_cooldown
-	descendant.chunk_effect_range = chunk_effect_range
-
-	descendant.generation = generation + 1
-
-	return descendant
-
 /datum/blob_type/proc/listify_vars()
 	var/list/transfer_vars = list()
 
@@ -246,7 +192,7 @@
 		node_type = incoming_vars["node_type"]
 		shield_type = incoming_vars["shield_type"]
 
-		core_tech = incoming_vars["core_tech"]
+		core_tech = incoming_vars["core_tech"].Copy()
 
 		chunk_type = incoming_vars["chunk_type"]
 		chunk_effect_cooldown = incoming_vars["chunk_effect_cooldown"]

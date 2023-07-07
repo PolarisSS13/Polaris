@@ -23,6 +23,7 @@
 	chunk_type = /obj/item/blob_chunk/pressurized_slime
 
 /obj/item/blob_chunk/pressurized_slime
+	default_blob = /datum/blob_type/pressurized_slime
 	blob_effect_master_type = /datum/component/artifact_master/blob/pressurized_slime
 
 /datum/blob_type/pressurized_slime/on_attack(obj/structure/blob/B, mob/living/victim, def_zone)

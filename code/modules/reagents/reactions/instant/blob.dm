@@ -15,4 +15,6 @@
 
 /decl/chemical_reaction/instant/blob_chunk_revival/on_reaction(var/datum/reagents/holder)
 	var/obj/item/blob_chunk/chunk = holder.my_atom
-	chunk.reviveBlob()
+	if(chunk.can_revive)
+		chunk.can_revive = FALSE
+		chunk.reviveBlob()

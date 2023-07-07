@@ -13,3 +13,9 @@
 
 	brute_multiplier = 0.35
 	burn_multiplier = 0.8
+
+	chunk_type = /obj/item/blob_chunk/barnacle
+
+/obj/item/blob_chunk/barnacle
+	default_blob = /datum/blob_type/barnacle
+	blob_effect_master_type = /datum/component/artifact_master/blob

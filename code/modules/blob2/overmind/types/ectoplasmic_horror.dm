@@ -29,6 +29,7 @@
 	chunk_type = /obj/item/blob_chunk/ectoplasmic_horror
 
 /obj/item/blob_chunk/ectoplasmic_horror
+	default_blob = /datum/blob_type/ectoplasmic_horror
 	blob_effect_master_type = /datum/component/artifact_master/blob/ectoplasmic_horror
 
 /datum/blob_type/ectoplasmic_horror/on_pulse(var/obj/structure/blob/B)

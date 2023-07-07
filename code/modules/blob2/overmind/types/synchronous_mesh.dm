@@ -22,6 +22,7 @@
 	chunk_type = /obj/item/blob_chunk/synchronous_mesh
 
 /obj/item/blob_chunk/synchronous_mesh
+	default_blob = /datum/blob_type/synchronous_mesh
 	blob_effect_master_type = /datum/component/artifact_master/blob/synchronous_mesh
 
 /datum/blob_type/synchronous_mesh/on_attack(obj/structure/blob/B, mob/living/victim)

@@ -14,6 +14,7 @@
 	chunk_type = /obj/item/blob_chunk/classic
 
 /obj/item/blob_chunk/classic
+	default_blob = /datum/blob_type/classic
 	blob_effect_master_type = /datum/component/artifact_master/blob/classic
 
 /datum/component/artifact_master/blob/classic

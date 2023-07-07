@@ -27,6 +27,7 @@
 	chunk_type = /obj/item/blob_chunk/reactive_spines
 
 /obj/item/blob_chunk/reactive_spines
+	default_blob = /datum/blob_type/reactive_spines
 	blob_effect_master_type = /datum/component/artifact_master/blob/reactive_spines
 
 // Even if the melee attack is enough to one-shot this blob, it gets to retaliate at least once.
