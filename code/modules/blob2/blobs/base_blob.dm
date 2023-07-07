@@ -87,7 +87,6 @@ GLOBAL_LIST_EMPTY(all_blobs)
 
 /obj/structure/blob/proc/pulsed()
 	if(QDELETED(src))
-		crash_with("[src] has been previously deleted. Moving to nullspace for garbage collection.")
 		loc = null
 		overmind = null
 		return

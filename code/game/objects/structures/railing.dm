@@ -67,8 +67,8 @@
 /obj/structure/railing/blob_act(var/obj/structure/blob/B)
 	. = ..()
 
-	if(B?.blob_type)
-		take_damage(rand(B.blob_type.damage_lower, B.blob_type.damage_upper))
+	if(B?.overmind?.blob_type)
+		take_damage(rand(B.overmind.blob_type.damage_lower, B.overmind.blob_type.damage_upper))
 		return
 
 	take_damage(rand(10,30))
