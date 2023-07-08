@@ -126,15 +126,17 @@
 
 /datum/species/nabber/can_overcome_gravity(mob/living/carbon/human/H)
 	if(H.stat == CONSCIOUS)
-		var/datum/gas_mixture/mixture = H.loc.return_air()
+		var/obj/item/organ/external/chest/Torso = H.organs_by_name[BP_TORSO]
+		if(!Torso.is_broken() || !(Torso.is_bruised() && prob(5)))
+			var/datum/gas_mixture/mixture = H.loc.return_air()
 
-		if(mixture)
-			var/pressure = mixture.return_pressure()
-			if(pressure > 50)
-				var/turf/below = GetBelow(H)
-				var/turf/T = H.loc
-				if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
-					return TRUE
+			if(mixture)
+				var/pressure = mixture.return_pressure()
+				if(pressure > 50)
+					var/turf/below = GetBelow(H)
+					var/turf/T = H.loc
+					if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
+						return TRUE
 
 	return FALSE
 
@@ -146,17 +148,19 @@
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
 /datum/species/nabber/can_fall(mob/living/carbon/human/H)
 	if(H.stat == CONSCIOUS)
-		var/datum/gas_mixture/mixture = H.loc.return_air()
+		var/obj/item/organ/external/chest/Torso = H.organs_by_name[BP_TORSO]
+		if(!Torso.is_broken() || !(Torso.is_bruised() && prob(5)))
+			var/datum/gas_mixture/mixture = H.loc.return_air()
 
-		//nabbers should not be trying to break their fall on stairs.
-		var/turf/T = GetBelow(H.loc)
-		for(var/obj/O in T)
-			if(istype(O, /obj/structure/stairs))
-				return TRUE
-		if(mixture)
-			var/pressure = mixture.return_pressure()
-			if(pressure > 80)
-				return FALSE
+			//nabbers should not be trying to break their fall on stairs.
+			var/turf/T = GetBelow(H.loc)
+			for(var/obj/O in T)
+				if(istype(O, /obj/structure/stairs))
+					return TRUE
+			if(mixture)
+				var/pressure = mixture.return_pressure()
+				if(pressure > 80)
+					return FALSE
 
 	return TRUE
 
