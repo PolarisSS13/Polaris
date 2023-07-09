@@ -117,7 +117,7 @@
 	if (!locate(/mob) in . && !leader && !rabid)
 		for(var/atom/movable/M in view(vision_range, holder))
 			if (M.is_slime_food())
-				var/list/path_to = AStar(holder.loc, M.loc, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = 1, max_node_depth = world.view * 2, id = holder.IGetID(), exclude = obstacles, flags = ASTAR_BLOCKED_BY_WINDOWS)
+				var/list/path_to = AStar(holder.loc, M.loc, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = 0, max_node_depth = world.view * 2, id = holder.IGetID(), exclude = obstacles, flags = ASTAR_BLOCKED_BY_WINDOWS)
 				if (path_to?.len)
 					. += M
 
