@@ -4,3 +4,6 @@
 
 #define IS_WALKING(X) (X?.move_intent?.flags & MOVEMENT_INTENT_WALKING)
 #define IS_RUNNING(X) (X?.move_intent?.flags & MOVEMENT_INTENT_RUNNING)
+
+// Causes AStar paths to be blocked by windows that can't be passed through; usually, they go straight through.
+#define ASTAR_BLOCKED_BY_WINDOWS 1
