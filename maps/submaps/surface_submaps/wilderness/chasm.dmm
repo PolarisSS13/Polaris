@@ -29,7 +29,7 @@
 "pk" = (/obj/random/maintenance,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "qx" = (/obj/structure/cliff/automatic{dir = 2},/obj/item/bone/arm,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/Chasm)
 "qB" = (/obj/random/trash,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
-"rI" = (/obj/effect/decal/cleanable/dirt,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
+"rI" = (/obj/effect/decal/cleanable/dirt,/obj/effect/spider/stickyweb/dark,/obj/item/clothing/suit/caution{desc = "A badly damaged and warped wet floor sign. Its half-melted plastic cause it to sag towards the ground."; name = "battered wet floor sign"},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "rR" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "rY" = (/obj/structure/cliff/automatic{dir = 8},/obj/structure/ledge/ledge_stairs{dir = 1},/obj/structure/barricade,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/Chasm)
 "sg" = (/obj/structure/loot_pile/mecha/odysseus,/turf/simulated/floor/outdoors/rocks{outdoors = 0},/area/submap/Chasm)
