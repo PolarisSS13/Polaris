@@ -323,8 +323,11 @@ var/global/const/access_explorer = 43
 
 /obj/item/card/id/drake_expedition
 	name = "animal access card"
-	access = list(access_explorer, access_research)
-
+	access = list(
+		access_explorer,
+		access_research,
+		access_xenofauna
+	)
 
 /obj/item/storage/animal_harness/grafadreka/expedition
 	name = "expedition harness"

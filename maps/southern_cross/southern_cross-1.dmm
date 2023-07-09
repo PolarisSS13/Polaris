@@ -26231,9 +26231,9 @@
 /area/security/security_restroom)
 "aYL" = (
 /obj/structure/closet/wardrobe/red,
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo,
-/obj/item/clothing/accessory/badge/holo/cord,
+/obj/item/clothing/accessory/medal/badge/holo,
+/obj/item/clothing/accessory/medal/badge/holo,
+/obj/item/clothing/accessory/medal/badge/holo/cord,
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 4
 	},

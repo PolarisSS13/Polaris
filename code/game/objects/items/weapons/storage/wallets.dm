@@ -34,8 +34,8 @@
 		/obj/item/sample,
 		/obj/item/tool/screwdriver,
 		/obj/item/stamp,
-		/obj/item/clothing/accessory/permit,
-		/obj/item/clothing/accessory/badge,
+		/obj/item/clothing/accessory/medal/permit,
+		/obj/item/clothing/accessory/medal/badge,
 		/obj/item/makeover
 		)
 	cant_hold = list(/obj/item/tool/screwdriver/power)

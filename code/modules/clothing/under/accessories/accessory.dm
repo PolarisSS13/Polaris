@@ -465,37 +465,36 @@
 	icon_state = "sash"
 	slot = ACCESSORY_SLOT_OVER
 
-/obj/item/clothing/accessory/pride
+/obj/item/clothing/accessory/medal/pride
 	name = "pride pin"
 	desc = "A pin displaying pride in one's identity."
 	icon_state = "pride"
-	slot = ACCESSORY_SLOT_MEDAL
 
-/obj/item/clothing/accessory/pride/bi
+/obj/item/clothing/accessory/medal/pride/bi
 	name = "bisexual pride pin"
 	icon_state = "pride_bi"
 
-/obj/item/clothing/accessory/pride/trans
+/obj/item/clothing/accessory/medal/pride/trans
 	name = "transgender pride pin"
 	icon_state = "pride_trans"
 
-/obj/item/clothing/accessory/pride/ace
+/obj/item/clothing/accessory/medal/pride/ace
 	name = "asexual pride pin"
 	icon_state = "pride_ace"
 
-/obj/item/clothing/accessory/pride/enby
+/obj/item/clothing/accessory/medal/pride/enby
 	name = "nonbinary pride pin"
 	icon_state = "pride_enby"
 
-/obj/item/clothing/accessory/pride/pan
+/obj/item/clothing/accessory/medal/pride/pan
 	name = "pansexual pride pin"
 	icon_state = "pride_pan"
 
-/obj/item/clothing/accessory/pride/lesbian
+/obj/item/clothing/accessory/medal/pride/lesbian
 	name = "lesbian pride pin"
 	icon_state = "pride_lesbian"
 
-/obj/item/clothing/accessory/pride/intersex
+/obj/item/clothing/accessory/medal/pride/intersex
 	name = "intersex pride pin"
 	icon_state = "pride_intersex"
 

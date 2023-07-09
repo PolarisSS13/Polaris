@@ -14,6 +14,7 @@
 	var/const/ATTACHED_ARMOR = "armor plate"
 	var/const/ATTACHED_LIGHT = "light"
 	var/const/ATTACHED_ID =    "access card"
+	var/const/ATTACHED_TAG =   "tag"
 
 	/// Contains valid types that the harness will attach to.
 	var/list/harnessable_types
