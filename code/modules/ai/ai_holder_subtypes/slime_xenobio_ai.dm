@@ -145,6 +145,11 @@
 	target.slime_chomp(holder)
 	target = null
 
+/datum/ai_holder/simple_mob/xenobio_slime/request_help()
+	if (target && !ismob(target)) // we absolutely, completely do not need help from other slimes when targeting a pile of dirt
+		return
+	. = ..()
+
 /datum/ai_holder/simple_mob/xenobio_slime/can_violently_breakthrough()
 	if (target && !ismob(target))
 		return FALSE
