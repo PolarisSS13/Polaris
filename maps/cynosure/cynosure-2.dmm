@@ -2751,6 +2751,12 @@
 	},
 /turf/simulated/floor/reinforced,
 /area/surface/station/rnd/misc_lab)
+"bmB" = (
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "bmW" = (
 /turf/simulated/floor/water,
 /area/surface/outside/plains/station)
@@ -8170,8 +8176,7 @@
 	dir = 2
 	},
 /obj/structure/railing/grey{
-	dir = 4;
-	pixel_y = 8
+	dir = 4
 	},
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/plateau)
@@ -15389,6 +15394,15 @@
 /obj/effect/zone_divider,
 /turf/simulated/wall,
 /area/surface/station/engineering/reactor_room)
+"gQc" = (
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "gQu" = (
 /obj/effect/floor_decal/borderfloorwhite,
 /obj/effect/floor_decal/corner/paleblue/border,
@@ -20940,6 +20954,12 @@
 /obj/effect/floor_decal/steeldecal/steel_decals_central2,
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/park)
+"jDZ" = (
+/obj/structure/railing/grey{
+	dir = 2
+	},
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "jEc" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/glass_medical{
@@ -21526,8 +21546,7 @@
 /area/shuttle/exploration/general)
 "jQs" = (
 /obj/structure/railing/grey{
-	dir = 4;
-	pixel_y = 8
+	dir = 4
 	},
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/plateau)
@@ -23572,6 +23591,12 @@
 /obj/effect/floor_decal/industrial/outline/yellow,
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/quartermaster/storage)
+"kGl" = (
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "kGs" = (
 /obj/effect/floor_decal/corner/purple/bordercorner{
 	dir = 1
@@ -37839,6 +37864,15 @@
 /obj/effect/zone_divider,
 /turf/simulated/wall,
 /area/surface/station/engineering/reactor_airlock)
+"qEF" = (
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/obj/structure/railing/grey{
+	dir = 2
+	},
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "qEU" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/fuel{
 	dir = 10
@@ -39570,6 +39604,12 @@
 /obj/effect/floor_decal/rust,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/medical/cloning)
+"rsl" = (
+/obj/structure/railing/grey{
+	dir = 4
+	},
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "rsE" = (
 /turf/simulated/floor/tiled/old_cargo/gray,
 /area/surface/station/janitor)
@@ -39872,8 +39912,7 @@
 	dir = 2
 	},
 /obj/structure/railing/grey{
-	dir = 8;
-	pixel_y = 9
+	dir = 8
 	},
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/plateau)
@@ -44396,14 +44435,13 @@
 /area/surface/station/hallway/primary/groundfloor/south)
 "tFs" = (
 /obj/structure/railing/grey{
-	dir = 4;
-	pixel_y = 8
+	dir = 8
 	},
 /obj/structure/railing/grey{
 	dir = 2
 	},
-/turf/simulated/floor/outdoors/mask,
-/area/surface/outside/plains/plateau)
+/turf/simulated/open,
+/area/surface/outside/plains/station)
 "tFB" = (
 /obj/structure/disposalpipe/segment,
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
@@ -54074,6 +54112,15 @@
 	},
 /obj/effect/zone_divider,
 /turf/simulated/floor/outdoors/mask,
+/area/surface/outside/plains/station)
+"xXg" = (
+/obj/structure/railing/grey{
+	dir = 1
+	},
+/obj/structure/railing/grey{
+	dir = 8
+	},
+/turf/simulated/open,
 /area/surface/outside/plains/station)
 "xXF" = (
 /obj/structure/closet{
@@ -75022,9 +75069,9 @@ nCe
 nCe
 yel
 cxc
-cMW
-cMW
-cMW
+xXg
+bmB
+tFs
 cxc
 nCe
 nCe
@@ -75279,9 +75326,9 @@ nCe
 nCe
 sLu
 cxc
+kGl
 cMW
-cMW
-cMW
+jDZ
 cxc
 nCe
 nCe
@@ -75536,9 +75583,9 @@ nCe
 nCe
 yel
 cxc
-cMW
-cMW
-cMW
+gQc
+rsl
+qEF
 cxc
 nCe
 nCe
@@ -85939,7 +85986,7 @@ jhv
 eXA
 jQs
 jQs
-tFs
+dJA
 aHG
 vZt
 vwy
