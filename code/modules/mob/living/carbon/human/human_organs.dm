@@ -200,6 +200,7 @@
 	if(g != gender)
 		gender = g
 
-	if(dna.GetUIState(DNA_UI_GENDER) ^ gender == FEMALE) // XOR will catch both cases where they do not match
-		dna.SetUIState(DNA_UI_GENDER, gender == FEMALE)
+	var/new_gender_bool = gender != MALE
+	if(dna.GetUIState(DNA_UI_GENDER) != new_gender_bool)
+		dna.SetUIState(DNA_UI_GENDER, new_gender_bool)
 		sync_organ_dna(dna)
