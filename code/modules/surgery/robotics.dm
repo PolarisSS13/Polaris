@@ -8,35 +8,17 @@
 
 /datum/surgery_step/robotics/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (isslime(target))
-		#ifdef SURGERYDEBUG
-		log_debug("surgery_step/robotics/can_use Surgery step returned 0; target is slime")
-		#endif
 		return 0
 	if (target_zone == O_EYES)	//there are specific steps for eye surgery
-		#ifdef SURGERYDEBUG
-		log_debug("surgery_step/robotics/can_use Surgery step returned 0; target zone is eyes")
-		#endif
 		return 0
 	if (!hasorgans(target))
-		#ifdef SURGERYDEBUG
-		log_debug("surgery_step/robotics/can_use Surgery step returned 0; target has no organs")
-		#endif
 		return 0
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 	if (affected == null)
-		#ifdef SURGERYDEBUG
-		log_debug("surgery_step/robotics/can_use Surgery step returned 0; external organ returned null")
-		#endif
 		return 0
 	if (affected.status & ORGAN_DESTROYED)
-		#ifdef SURGERYDEBUG
-		log_debug("surgery_step/robotics/can_use Surgery step returned 0; external organ returned null")
-		#endif
 		return 0
 	if (!(affected.robotic >= ORGAN_ROBOT))
-		#ifdef SURGERYDEBUG
-		log_debug("surgery_step/robotics/can_use Surgery step returned 0; External organ was deemed to be not robotic")
-		#endif
 		return 0
 	if(coverage_check(user, target, affected, tool))
 		return 0
@@ -261,9 +243,6 @@
 	max_duration = 90
 
 /datum/surgery_step/robotics/fix_organ_robotic/can_use(mob/living/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	#ifdef SURGERYDEBUG
-	log_debug("Began robotics/fix_organ_robotic/can_use for [user] on [target_zone]")
-	#endif
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
@@ -276,17 +255,11 @@
 	return affected.open == (affected.encased ? 3 : 2) && is_organ_damaged
 
 /datum/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
-	#ifdef SURGERYDEBUG
-	log_debug("Began fix_organ_robotic/begin_step for [user] on [target_zone]")
-	#endif
 	if (!hasorgans(target))
 		return
 	var/obj/item/organ/external/affected = target.get_organ(target_zone)
 
 	for(var/obj/item/organ/I in affected.internal_organs)
-		#ifdef SURGERYDEBUG
-		log_debug("robotics/fix_organ_robotic/begin_step- processing [I] in [user]")
-		#endif
 		if(I && I.damage > 0)
 			if(I.robotic >= ORGAN_ROBOT)
 				user.visible_message("<span class='filter_notice'>[user] starts mending the damage to [target]'s [I.name]'s mechanisms.</span>", \
