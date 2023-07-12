@@ -1623,7 +1623,6 @@
 /area/submap/CollapsedMine)
 "AX" = (
 /obj/item/clothing/under/corp/grayson,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
 /obj/item/clothing/head/hardhat/dblue,
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
@@ -1633,7 +1632,6 @@
 /area/submap/CollapsedMine)
 "Ba" = (
 /obj/item/clothing/under/corp/grayson_jump,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
 /obj/item/clothing/head/hardhat/dblue,
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
@@ -1872,7 +1870,6 @@
 /area/submap/CollapsedMine)
 "EE" = (
 /obj/item/clothing/under/corp/grayson,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
 /obj/item/clothing/gloves/duty,
@@ -2894,7 +2891,6 @@
 /area/submap/CollapsedMine)
 "UM" = (
 /obj/item/clothing/under/corp/grayson,
-/obj/item/clothing/accessory/badge/corporate_tag/grayson,
 /obj/item/clothing/shoes/boots/workboots,
 /obj/item/clothing/head/hardhat/dblue,
 /obj/structure/closet,
