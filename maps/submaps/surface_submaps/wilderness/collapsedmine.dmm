@@ -148,13 +148,6 @@
 "ck" = (
 /turf/simulated/floor/tiled/asteroid_steel,
 /area/submap/CollapsedMine)
-"cr" = (
-/obj/effect/floor_decal/corner/yellow/border{
-	dir = 1
-	},
-/mob/living/simple_mob/mechanical/mining_drone,
-/turf/simulated/floor/tiled/techfloor,
-/area/submap/CollapsedMine)
 "ct" = (
 /obj/structure/bed/chair/sofa/beige/corner{
 	dir = 8
@@ -316,6 +309,7 @@
 /obj/machinery/light{
 	dir = 4
 	},
+/mob/living/simple_mob/mechanical/mining_drone,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "fn" = (
@@ -632,11 +626,6 @@
 /obj/effect/floor_decal/corner/red/border{
 	dir = 6
 	},
-/turf/simulated/floor/tiled/techfloor,
-/area/submap/CollapsedMine)
-"jc" = (
-/mob/living/simple_mob/mechanical/mining_drone,
-/obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "jf" = (
@@ -1167,10 +1156,6 @@
 "tU" = (
 /obj/structure/bed/chair/wood,
 /turf/simulated/floor/wood,
-/area/submap/CollapsedMine)
-"tW" = (
-/mob/living/simple_mob/mechanical/mining_drone,
-/turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "ul" = (
 /obj/structure/salvageable/console_broken_os{
@@ -2961,6 +2946,7 @@
 /turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "VG" = (
+/obj/random/junk,
 /mob/living/simple_mob/mechanical/mecha/ripley/firefighter{
 	faction = "malf_drone"
 	},
@@ -3612,7 +3598,7 @@ IZ
 IZ
 CS
 Zb
-jc
+vp
 ZI
 ea
 xZ
@@ -4229,7 +4215,7 @@ Sp
 Sp
 IZ
 IZ
-cr
+KE
 vN
 ae
 IZ
@@ -5470,7 +5456,7 @@ Sp
 IZ
 IZ
 Sf
-tW
+ea
 WP
 IZ
 IZ
@@ -5778,12 +5764,12 @@ Sp
 Sp
 IZ
 AP
-VG
+ea
 ea
 Vj
 rY
 ea
-bp
+VG
 Go
 Qr
 IZ
@@ -5971,7 +5957,7 @@ yY
 ct
 ea
 ea
-tW
+ea
 ea
 BV
 Sp
