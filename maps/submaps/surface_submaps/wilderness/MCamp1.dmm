@@ -95,8 +95,8 @@
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "vP" = (
-/obj/structure/table/standard,
 /obj/random/energy,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "vX" = (
@@ -167,6 +167,10 @@
 /obj/item/bedsheet/blue,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
+"Lg" = (
+/obj/structure/table/rack/shelf,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
 "LX" = (
 /obj/machinery/door/airlock/maintenance/sec,
 /turf/simulated/floor/concrete,
@@ -200,6 +204,10 @@
 /obj/random/landmine,
 /turf/template_noop,
 /area/submap/MilitaryCamp1)
+"Qz" = (
+/obj/item/cell/device/weapon/empty,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
 "QX" = (
 /obj/effect/decal/remains,
 /obj/random/landmine,
@@ -221,9 +229,9 @@
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "WY" = (
-/obj/structure/table/standard,
 /obj/random/dufflebag,
 /mob/living/simple_mob/mechanical/viscerator,
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "YB" = (
@@ -360,7 +368,7 @@ Jh
 Uy
 RD
 RD
-RD
+Qz
 Ep
 Ep
 Ep
@@ -422,7 +430,7 @@ Jh
 RD
 DX
 WY
-qF
+Lg
 vP
 DX
 RD
