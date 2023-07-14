@@ -159,18 +159,12 @@ SUBSYSTEM_DEF(machines)
   *
   * `var/list = SSMACHINES_MACHINERY_LIST` - list to be added to, defaults to machines
   */
-/datum/controller/subsystem/machines/proc/start_processing(dat, var/list = SSMACHINES_MACHINERY_LIST)
-	if(list == SSMACHINES_MACHINERY_LIST)
-		machinery += dat
-	else if(list == SSMACHINES_POWERNETS_LIST)
-		powernets += dat
-	else if(list == SSMACHINES_POWEROBJS_LIST)
-		power_objects += dat
-	else if(list == SSMACHINES_PIPENETS_LIST)
-		pipenets += dat
-	else
-		return
-	return
+/datum/controller/subsystem/machines/proc/start_processing(dat, list = SSMACHINES_MACHINERY_LIST)
+	switch(list)
+		if(SSMACHINES_MACHINERY_LIST) machinery += dat
+		if(SSMACHINES_POWERNETS_LIST) powernets += dat
+		if(SSMACHINES_POWEROBJS_LIST) power_objects += dat
+		if(SSMACHINES_PIPENETS_LIST)  pipenets += dat
 
 /** Removes a datum from this subsystem
   *
@@ -178,19 +172,12 @@ SUBSYSTEM_DEF(machines)
   *
   *```var/list``` = SSMACHINES_MACHINERY_LIST` - list to be removed from, defaults to machines
   */
-/datum/controller/subsystem/machines/proc/stop_processing(dat, var/list = SSMACHINES_MACHINERY_LIST)
-	if(list == SSMACHINES_MACHINERY_LIST)
-		machinery -= dat
-	else if(list == SSMACHINES_POWERNETS_LIST)
-		powernets -= dat
-	else if(list == SSMACHINES_POWEROBJS_LIST)
-		power_objects -= dat
-	else if(list == SSMACHINES_PIPENETS_LIST)
-		pipenets -= dat
-	else
-		return
-	return
-
+/datum/controller/subsystem/machines/proc/stop_processing(dat, list = SSMACHINES_MACHINERY_LIST)
+	switch(list)
+		if(SSMACHINES_MACHINERY_LIST) machinery -= dat
+		if(SSMACHINES_POWERNETS_LIST) powernets -= dat
+		if(SSMACHINES_POWEROBJS_LIST) power_objects -= dat
+		if(SSMACHINES_PIPENETS_LIST)  pipenets -= dat
 
 #undef SSMACHINES_PIPENETS
 #undef SSMACHINES_MACHINERY
