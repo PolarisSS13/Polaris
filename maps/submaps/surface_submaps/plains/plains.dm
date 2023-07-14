@@ -38,6 +38,7 @@
 #include "priderock.dmm"
 #include "oldhotel.dmm"
 #include "VRDen.dmm"
+#include "reststop.dmm"
 #endif
 
 
