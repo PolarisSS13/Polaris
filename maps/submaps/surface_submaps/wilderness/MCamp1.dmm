@@ -10,6 +10,10 @@
 "do" = (
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/MilitaryCamp1)
+"dM" = (
+/obj/item/cell/device/weapon/empty,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
 "fS" = (
 /obj/structure/closet,
 /obj/random/maintenance/clean,
@@ -41,6 +45,7 @@
 "ln" = (
 /obj/effect/decal/remains,
 /obj/random/maintenance/anom,
+/mob/living/simple_mob/mechanical/viscerator,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "lO" = (
@@ -167,10 +172,6 @@
 /obj/item/bedsheet/blue,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"Lg" = (
-/obj/structure/table/rack/shelf,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
 "LX" = (
 /obj/machinery/door/airlock/maintenance/sec,
 /turf/simulated/floor/concrete,
@@ -204,8 +205,8 @@
 /obj/random/landmine,
 /turf/template_noop,
 /area/submap/MilitaryCamp1)
-"Qz" = (
-/obj/item/cell/device/weapon/empty,
+"QD" = (
+/obj/structure/table/rack/shelf,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "QX" = (
@@ -230,7 +231,6 @@
 /area/submap/MilitaryCamp1)
 "WY" = (
 /obj/random/dufflebag,
-/mob/living/simple_mob/mechanical/viscerator,
 /obj/structure/table/rack/shelf,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
@@ -368,7 +368,7 @@ Jh
 Uy
 RD
 RD
-Qz
+dM
 Ep
 Ep
 Ep
@@ -430,7 +430,7 @@ Jh
 RD
 DX
 WY
-Lg
+QD
 vP
 DX
 RD
@@ -451,7 +451,7 @@ Ep
 RD
 RD
 DX
-RD
+Jh
 Uy
 Jh
 LX
@@ -474,7 +474,7 @@ RD
 Jh
 DX
 ln
-RD
+Jh
 LY
 DX
 RD
