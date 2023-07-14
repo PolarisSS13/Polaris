@@ -128,7 +128,7 @@
 			loading = TRUE
 			while(mat_storage + SHEET_MATERIAL_AMOUNT <= max_mat_storage && do_after(user,1.5 SECONDS))
 				mat_storage += SHEET_MATERIAL_AMOUNT
-				playsound(src, 'sound/effects/phasein.ogg', 15, 1)
+				playsound(src, 'sound/effects/phoronborer.ogg', 15, 1)
 				M.use(1)
 				success = TRUE
 			loading = FALSE
