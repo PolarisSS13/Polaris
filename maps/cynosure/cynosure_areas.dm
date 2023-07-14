@@ -1217,6 +1217,9 @@
 	name = "\improper Research - Mech Bay"
 	icon_state = "mechbay"
 
+/area/surface/station/rnd/testingsite
+	name = "\improper Research - Testing Site"
+
 //Security
 
 /area/surface/station/security
