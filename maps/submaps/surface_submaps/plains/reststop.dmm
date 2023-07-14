@@ -126,7 +126,7 @@
 /area/submap/reststop)
 "nO" = (
 /obj/structure/loot_pile/maint/junk,
-/turf/simulated/floor/outdoors/dirt/sif,
+/turf/simulated/floor/outdoors/dirt,
 /area/submap/reststop)
 "nW" = (
 /obj/structure/toilet,
@@ -301,7 +301,7 @@
 "FT" = (
 /obj/effect/floor_decal/rust,
 /obj/structure/girder/displaced,
-/turf/simulated/floor/plating/sif/planetuse,
+/turf/simulated/floor/plating,
 /area/submap/reststop)
 "Gf" = (
 /obj/structure/table/standard,
@@ -331,7 +331,7 @@
 /turf/simulated/floor/tiled/hydro,
 /area/submap/reststop)
 "Jd" = (
-/turf/simulated/floor/outdoors/dirt/sif,
+/turf/simulated/floor/outdoors/dirt,
 /area/submap/reststop)
 "Jp" = (
 /obj/structure/cable{
@@ -351,7 +351,7 @@
 /obj/random/trash,
 /obj/random/junk,
 /obj/random/junk,
-/turf/simulated/floor/outdoors/dirt/sif,
+/turf/simulated/floor/outdoors/dirt,
 /area/submap/reststop)
 "Mh" = (
 /obj/effect/decal/cleanable/dirt,
@@ -404,7 +404,7 @@
 /area/submap/reststop)
 "TK" = (
 /obj/structure/flora/tree/sif,
-/turf/simulated/floor/outdoors/dirt/sif,
+/turf/simulated/floor/outdoors/dirt,
 /area/submap/reststop)
 "UM" = (
 /obj/structure/window/basic,
@@ -446,7 +446,7 @@
 /obj/machinery/light/small{
 	dir = 4
 	},
-/turf/simulated/floor/outdoors/dirt/sif,
+/turf/simulated/floor/outdoors/dirt,
 /area/submap/reststop)
 "ZN" = (
 /obj/effect/floor_decal/rust,
