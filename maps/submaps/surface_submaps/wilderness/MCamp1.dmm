@@ -1,679 +1,679 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
-"ap" = (
+"bB" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"cH" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"do" = (
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/MilitaryCamp1)
+"fS" = (
+/obj/structure/closet,
+/obj/random/maintenance/clean,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"ge" = (
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"jr" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"ju" = (
+/obj/structure/bed/roller,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"jL" = (
+/turf/simulated/floor,
+/area/submap/MilitaryCamp1)
+"kd" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/obj/item/stack/rods,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"kv" = (
+/obj/structure/bed/chair/office/dark,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"ln" = (
+/obj/effect/decal/remains,
+/obj/random/maintenance/anom,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"lO" = (
 /obj/structure/bed/chair/office/dark{
 	dir = 1
 	},
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"bj" = (
+"mE" = (
+/obj/machinery/computer/security,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"nl" = (
 /obj/structure/table/standard,
 /mob/living/simple_mob/mechanical/viscerator,
 /obj/item/paper_bin,
 /obj/item/pen,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"iv" = (
+"nW" = (
+/obj/structure/flora/bush,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"or" = (
+/obj/item/stack/rods,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"ow" = (
+/obj/structure/bed/padded,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"pI" = (
+/obj/structure/barricade,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"qi" = (
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"qx" = (
+/obj/structure/flora/tree/dead,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"qF" = (
+/obj/structure/table/standard,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"uo" = (
+/obj/structure/closet,
+/obj/random/toolbox,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"vP" = (
+/obj/structure/table/standard,
+/obj/random/energy,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"vX" = (
 /mob/living/simple_mob/mechanical/viscerator,
+/obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"iX" = (
+"xo" = (
 /obj/random/landmine,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"je" = (
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/MilitaryCamp1)
-"mX" = (
-/obj/machinery/door/airlock,
+"xt" = (
+/obj/structure/filingcabinet/chestdrawer,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"oh" = (
+"ye" = (
+/obj/random/junk,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"yr" = (
+/obj/effect/decal/cleanable/blood,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"zZ" = (
 /obj/random/helmet,
 /obj/structure/closet,
 /obj/random/maintenance,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"oQ" = (
-/turf/simulated/floor,
-/area/submap/MilitaryCamp1)
-"pd" = (
-/obj/effect/decal/remains,
-/obj/random/maintenance/anom,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"pj" = (
-/obj/structure/loot_pile/maint/technical,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"qU" = (
-/obj/structure/closet,
-/obj/random/maintenance/clean,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"tu" = (
-/obj/item/material/shard,
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"tU" = (
-/obj/structure/bed/padded,
-/obj/item/bedsheet/blue,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"tW" = (
-/obj/structure/flora/tree/sif,
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"uJ" = (
-/obj/effect/decal/remains,
-/obj/structure/bed/padded,
-/obj/item/bedsheet/blue,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"vd" = (
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"wa" = (
+"Af" = (
 /obj/item/material/shard,
 /mob/living/simple_mob/mechanical/viscerator,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"xC" = (
-/obj/machinery/iv_drip,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"xF" = (
-/obj/random/landmine,
 /turf/template_noop,
 /area/submap/MilitaryCamp1)
-"yz" = (
+"By" = (
 /mob/living/simple_mob/mechanical/viscerator,
+/obj/item/material/shard,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"yX" = (
-/mob/living/simple_mob/mechanical/viscerator,
-/obj/structure/bed/padded,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"zn" = (
-/obj/random/junk,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Bi" = (
-/obj/effect/decal/remains,
-/obj/random/landmine,
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"Ce" = (
+"CF" = (
 /obj/structure/girder,
 /turf/simulated/floor,
 /area/submap/MilitaryCamp1)
-"Cg" = (
-/turf/simulated/mineral/ignore_mapgen,
-/area/submap/MilitaryCamp1)
-"CH" = (
-/obj/structure/flora/bush,
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"Dt" = (
-/obj/random/firstaid,
-/obj/structure/table/standard,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Dx" = (
+"DX" = (
 /turf/simulated/wall/r_concrete,
 /area/submap/MilitaryCamp1)
-"DD" = (
-/obj/structure/table/standard,
-/obj/random/energy,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"DM" = (
-/obj/effect/decal/cleanable/blood,
+"DZ" = (
+/obj/structure/flora/tree/sif,
 /turf/template_noop,
 /area/submap/MilitaryCamp1)
 "Ep" = (
-/obj/item/stack/rods,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Ho" = (
-/obj/structure/flora/tree/dead,
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"IE" = (
-/obj/structure/closet,
-/obj/random/toolbox,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Jl" = (
-/mob/living/simple_mob/mechanical/viscerator,
-/obj/item/stack/rods,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"KG" = (
-/obj/item/material/shard,
-/mob/living/simple_mob/mechanical/viscerator,
-/turf/template_noop,
-/area/submap/MilitaryCamp1)
-"KH" = (
-/obj/structure/bed/chair/office/dark,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Ln" = (
-/turf/template_noop,
-/area/template_noop)
-"Mc" = (
-/obj/structure/filingcabinet/chestdrawer,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Mg" = (
-/obj/random/landmine,
-/turf/simulated/floor/outdoors/dirt,
-/area/submap/MilitaryCamp1)
-"ML" = (
 /turf/simulated/wall/concrete,
 /area/submap/MilitaryCamp1)
-"Nk" = (
-/obj/machinery/computer/security,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Nl" = (
-/obj/machinery/door/airlock/maintenance/sec,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"NK" = (
-/obj/structure/loot_pile/surface/medicine_cabinet,
-/turf/simulated/wall/concrete,
-/area/submap/MilitaryCamp1)
-"NV" = (
-/obj/structure/table/standard,
-/obj/random/dufflebag,
-/mob/living/simple_mob/mechanical/viscerator,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Oo" = (
-/obj/structure/bed/padded,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"PW" = (
-/obj/structure/bed/roller,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Ql" = (
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Rh" = (
-/obj/structure/barricade,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Sg" = (
-/mob/living/simple_mob/mechanical/viscerator,
-/obj/effect/decal/cleanable/blood,
-/turf/simulated/floor/concrete,
-/area/submap/MilitaryCamp1)
-"Sl" = (
+"Iu" = (
 /mob/living/simple_mob/mechanical/viscerator,
 /obj/structure/bed/chair/office/dark{
 	dir = 8
 	},
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"Vp" = (
+"Jh" = (
 /mob/living/simple_mob/mechanical/viscerator,
-/obj/item/material/shard,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"WR" = (
-/mob/living/simple_mob/mechanical/viscerator,
-/turf/template_noop,
+"Lb" = (
+/obj/effect/decal/remains,
+/obj/structure/bed/padded,
+/obj/item/bedsheet/blue,
+/turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"XM" = (
+"LX" = (
+/obj/machinery/door/airlock/maintenance/sec,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"LY" = (
+/obj/item/material/shard,
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"Nv" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/submap/MilitaryCamp1)
+"Og" = (
+/obj/structure/loot_pile/surface/medicine_cabinet,
+/turf/simulated/wall/concrete,
+/area/submap/MilitaryCamp1)
+"OI" = (
+/turf/template_noop,
+/area/template_noop)
+"Pu" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/obj/structure/bed/padded,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"PF" = (
+/obj/random/firstaid,
 /obj/structure/table/standard,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
-"ZC" = (
-/obj/structure/loot_pile/maint/junk,
+"Qx" = (
+/obj/random/landmine,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"QX" = (
+/obj/effect/decal/remains,
+/obj/random/landmine,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"RD" = (
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"Uy" = (
+/obj/random/landmine,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"UC" = (
+/obj/machinery/iv_drip,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"WT" = (
+/obj/machinery/door/airlock,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"WY" = (
+/obj/structure/table/standard,
+/obj/random/dufflebag,
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"YB" = (
+/obj/item/material/shard,
+/turf/template_noop,
+/area/submap/MilitaryCamp1)
+"Zz" = (
+/obj/structure/bed/padded,
+/obj/item/bedsheet/blue,
+/mob/living/simple_mob/mechanical/viscerator,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 
 (1,1,1) = {"
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
 "}
 (2,1,1) = {"
-Ln
-vd
-Cg
-Cg
-Cg
-xF
-DM
-Ho
-DM
-vd
-Bi
-vd
-Cg
-Cg
-Cg
-DM
-vd
-xF
-vd
-Ln
+OI
+ge
+Nv
+Nv
+Nv
+Qx
+yr
+qx
+yr
+ge
+QX
+ge
+Nv
+Nv
+Nv
+yr
+ge
+Qx
+ge
+OI
 "}
 (3,1,1) = {"
-Ln
-Cg
-Cg
-Cg
-Cg
-Cg
-je
-Mg
-WR
-vd
-vd
-Cg
-Cg
-Cg
-Cg
-Cg
-vd
-Ho
-vd
-Ln
+OI
+Nv
+Nv
+Nv
+Nv
+Nv
+do
+xo
+cH
+ge
+ge
+Nv
+Nv
+Nv
+Nv
+Nv
+ge
+qx
+ge
+OI
 "}
 (4,1,1) = {"
-Ln
-Cg
-Cg
-Cg
-ML
-ML
-ML
-Sg
-ML
-XM
-ML
-ML
-ML
-Cg
-Cg
-Cg
-Cg
-vd
-xF
-Ln
+OI
+Nv
+Nv
+Nv
+Ep
+Ep
+Ep
+vX
+Ep
+qF
+Ep
+Ep
+Ep
+Nv
+Nv
+Nv
+Nv
+ge
+Qx
+OI
 "}
 (5,1,1) = {"
-Ln
-Cg
-Cg
-ML
-ML
-pj
-Ql
-Ql
-Ql
-Ql
-yz
-Ql
-ML
-ML
-Cg
-Cg
-Cg
-Cg
-vd
-Ln
+OI
+Nv
+Nv
+Ep
+Ep
+bB
+RD
+RD
+RD
+RD
+Jh
+RD
+Ep
+Ep
+Nv
+Nv
+Nv
+Nv
+ge
+OI
 "}
 (6,1,1) = {"
-Ln
-Cg
-Cg
-ML
-ZC
-Jl
-Ql
-Ql
-yz
-iX
-Ql
-Ql
-Ql
-ML
-ML
-ML
-ML
-Cg
-Cg
-Ln
+OI
+Nv
+Nv
+Ep
+jr
+kd
+RD
+RD
+Jh
+Uy
+RD
+RD
+RD
+Ep
+Ep
+Ep
+Ep
+Nv
+Nv
+OI
 "}
 (7,1,1) = {"
-Ln
-DM
-Cg
-ML
-Ql
-Ql
-Ql
-KH
-XM
-ap
-Ql
-Vp
-Ql
-ML
-bj
-Nk
-ML
-Cg
-Cg
-Ln
+OI
+yr
+Nv
+Ep
+RD
+RD
+RD
+kv
+qF
+lO
+RD
+By
+RD
+Ep
+nl
+mE
+Ep
+Nv
+Nv
+OI
 "}
 (8,1,1) = {"
-Ln
-xF
-CH
-Ce
-Rh
-Ql
-Dx
-Dx
-Dx
-Dx
-Dx
-Rh
-Ql
-mX
-Vp
-Sl
-ML
-Cg
-Cg
-Ln
+OI
+Qx
+nW
+CF
+pI
+RD
+DX
+DX
+DX
+DX
+DX
+pI
+RD
+WT
+By
+Iu
+Ep
+Nv
+Nv
+OI
 "}
 (9,1,1) = {"
-Ln
-vd
-xF
-oQ
-yz
-Ql
-Dx
-NV
-XM
-DD
-Dx
-Ql
-Ql
-ML
-IE
-Mc
-ML
-Cg
-vd
-Ln
+OI
+ge
+Qx
+jL
+Jh
+RD
+DX
+WY
+qF
+vP
+DX
+RD
+RD
+Ep
+uo
+xt
+Ep
+Nv
+ge
+OI
 "}
 (10,1,1) = {"
-Ln
-vd
-xF
-ML
-Ql
-Ql
-Dx
-Ql
-iX
-yz
-Nl
-Ql
-yz
-ML
-ML
-ML
-ML
-Cg
-vd
-Ln
+OI
+ge
+Qx
+Ep
+RD
+RD
+DX
+RD
+Uy
+Jh
+LX
+RD
+Jh
+Ep
+Ep
+Ep
+Ep
+Nv
+ge
+OI
 "}
 (11,1,1) = {"
-Ln
-vd
-vd
-ML
-Ql
-yz
-Dx
-pd
-Ql
-wa
-Dx
-Ql
-Ql
-ML
-Cg
-Cg
-Cg
-Cg
-xF
-Ln
+OI
+ge
+ge
+Ep
+RD
+Jh
+DX
+ln
+RD
+LY
+DX
+RD
+RD
+Ep
+Nv
+Nv
+Nv
+Nv
+Qx
+OI
 "}
 (12,1,1) = {"
-Ln
-xF
-tW
-ML
-mX
-ML
-Dx
-Ce
-Dx
-Dx
-Dx
-mX
-ML
-ML
-Cg
-Cg
-Cg
-xF
-vd
-Ln
+OI
+Qx
+DZ
+Ep
+WT
+Ep
+DX
+CF
+DX
+DX
+DX
+WT
+Ep
+Ep
+Nv
+Nv
+Nv
+Qx
+ge
+OI
 "}
 (13,1,1) = {"
-Ln
-vd
-Cg
-ML
-yz
-PW
-Dt
-ML
-oh
-qU
-qU
-Ql
-zn
-ML
-Cg
-je
-CH
-KG
-vd
-Ln
+OI
+ge
+Nv
+Ep
+Jh
+ju
+PF
+Ep
+zZ
+fS
+fS
+RD
+ye
+Ep
+Nv
+do
+nW
+Af
+ge
+OI
 "}
 (14,1,1) = {"
-Ln
-Cg
-Cg
-NK
-xC
-Vp
-yz
-mX
-Ql
-zn
-yz
-Ep
-Ql
-oQ
-je
-xF
-vd
-vd
-xF
-Ln
+OI
+Nv
+Nv
+Og
+UC
+By
+Jh
+WT
+RD
+ye
+Jh
+or
+RD
+jL
+do
+Qx
+ge
+ge
+Qx
+OI
 "}
 (15,1,1) = {"
-Ln
-Cg
-Cg
-ML
-ML
-Oo
-yX
-ML
-Ql
-yz
-Ql
-yz
-Ql
-Ce
-Mg
-tu
-vd
-Ho
-vd
-Ln
+OI
+Nv
+Nv
+Ep
+Ep
+ow
+Pu
+Ep
+RD
+Jh
+RD
+Jh
+RD
+CF
+xo
+YB
+ge
+qx
+ge
+OI
 "}
 (16,1,1) = {"
-Ln
-Cg
-Cg
-Cg
-ML
-ML
-ML
-ML
-iv
-uJ
-tU
-uJ
-tU
-ML
-vd
-WR
-vd
-vd
-vd
-Ln
+OI
+Nv
+Nv
+Nv
+Ep
+Ep
+Ep
+Ep
+Zz
+Lb
+qi
+Lb
+qi
+Ep
+ge
+cH
+ge
+ge
+ge
+OI
 "}
 (17,1,1) = {"
-Ln
-Cg
-Cg
-Cg
-Cg
-Cg
-Cg
-ML
-ML
-ML
-ML
-ML
-ML
-ML
-Cg
-vd
-xF
-vd
-WR
-Ln
+OI
+Nv
+Nv
+Nv
+Nv
+Nv
+Nv
+Ep
+Ep
+Ep
+Ep
+Ep
+Ep
+Ep
+Nv
+ge
+Qx
+ge
+cH
+OI
 "}
 (18,1,1) = {"
-Ln
-vd
-Cg
-Cg
-Cg
-Cg
-vd
-vd
-xF
-vd
-vd
-xF
-vd
-Cg
-Cg
-tW
-vd
-DM
-vd
-Ln
+OI
+ge
+Nv
+Nv
+Nv
+Nv
+ge
+ge
+Qx
+ge
+ge
+Qx
+ge
+Nv
+Nv
+DZ
+ge
+yr
+ge
+OI
 "}
 (19,1,1) = {"
-Ln
-vd
-vd
-xF
-vd
-vd
-xF
-vd
-vd
-Ho
-vd
-vd
-vd
-vd
-xF
-vd
-vd
-vd
-xF
-Ln
+OI
+ge
+ge
+Qx
+ge
+ge
+Qx
+ge
+ge
+qx
+ge
+ge
+ge
+ge
+Qx
+ge
+ge
+ge
+Qx
+OI
 "}
 (20,1,1) = {"
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
-Ln
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
+OI
 "}
