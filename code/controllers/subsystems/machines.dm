@@ -157,7 +157,7 @@ SUBSYSTEM_DEF(machines)
   *
   * `dat` - datum to be added
   *
-  * `var/list = SSMACHINES_MACHINERY_LIST` - list to be added to, defaults to machines
+  * `list = SSMACHINES_MACHINERY_LIST` - list to be added to, defaults to machines
   */
 /datum/controller/subsystem/machines/proc/start_processing(dat, list = SSMACHINES_MACHINERY_LIST)
 	switch(list)
@@ -170,7 +170,7 @@ SUBSYSTEM_DEF(machines)
   *
   * ```dat``` - datum to be removed
   *
-  *```var/list``` = SSMACHINES_MACHINERY_LIST` - list to be removed from, defaults to machines
+  *```list``` = SSMACHINES_MACHINERY_LIST` - list to be removed from, defaults to machines
   */
 /datum/controller/subsystem/machines/proc/stop_processing(dat, list = SSMACHINES_MACHINERY_LIST)
 	switch(list)
