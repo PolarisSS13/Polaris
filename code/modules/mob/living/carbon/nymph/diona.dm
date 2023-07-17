@@ -30,6 +30,7 @@ var/global/list/_nymph_default_emotes = list(
 	speak_emote = list("chirrups")
 	icon_state = "nymph"
 	item_state = "nymph"
+	icon = 'icons/mob/alien.dmi'
 	species_language = LANGUAGE_ROOTLOCAL
 	only_species_language = TRUE
 	gender = NEUTER
