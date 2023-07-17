@@ -5,56 +5,74 @@
 
 	cut_overlays()
 	underlays.Cut()
+
+	var/use_armor_color
+	var/use_pupil_color
+	var/use_base_color
+	var/use_eye_color
+	var/use_state
+	var/list/use_decals
 	var/obj/item/robot_module/robot/platform/tank_module = module
-	if(!istype(tank_module))
-		icon = initial(icon)
-		icon_state = initial(icon_state)
-		color = initial(color)
-		return
+	if(istype(tank_module))
+		use_pupil_color = tank_module.pupil_color
+		use_base_color  = tank_module.base_color
+		use_eye_color   = tank_module.eye_color
+		use_armor_color = tank_module.armor_color
+		icon            = tank_module.user_icon
+		use_state       = tank_module.user_icon_state
+		use_decals      = tank_module.decals
+	else
+		tank_module     = /obj/item/robot_module/robot/platform
+		use_pupil_color = initial(tank_module.pupil_color)
+		use_base_color  = initial(tank_module.base_color)
+		use_eye_color   = initial(tank_module.eye_color)
+		use_armor_color = initial(tank_module.armor_color)
+		icon            = initial(tank_module.user_icon)
+		use_state       = initial(tank_module.user_icon_state)
 
 	// This is necessary due to Polaris' liberal use of KEEP_TOGETHER and propensity for scaling transforms.
 	// If we just apply state/colour to the base icon, RESET_COLOR on the additional overlays is ignored.
-	icon = tank_module.user_icon
 	icon_state = "blank"
 	color = null
-	var/image/I = image(tank_module.user_icon, tank_module.user_icon_state)
-	I.color = tank_module.base_color
+
+	var/image/I = image(icon, use_state)
+	I.color = use_base_color
 	I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
 	underlays += I
 
-	if(tank_module.armor_color)
-		I = image(icon, "[tank_module.user_icon_state]_armour")
-		I.color = tank_module.armor_color
+	if(use_armor_color)
+		I = image(icon, "[use_state]_armour")
+		I.color = use_armor_color
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
 		add_overlay(I)
 
-	for(var/decal in tank_module.decals)
-		I = image(icon, "[tank_module.user_icon_state]_[decal]")
-		I.color = tank_module.decals[decal]
+	for(var/decal in use_decals)
+		I = image(icon, "[use_state]_[decal]")
+		I.color = use_decals[decal]
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
 		add_overlay(I)
 
-	if(tank_module.eye_color)
-		I = image(icon, "[tank_module.user_icon_state]_eyes")
-		I.color = tank_module.eye_color
+	if(use_eye_color)
+		I = image(icon, "[use_state]_eyes")
+		I.color = use_eye_color
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
 		add_overlay(I)
 
-	if(client && key && stat == CONSCIOUS && tank_module.pupil_color)
-		I = image(icon, "[tank_module.user_icon_state]_pupils")
-		I.color = tank_module.pupil_color
+	if(use_pupil_color && client && key && stat == CONSCIOUS)
+		I = image(icon, "[use_state]_pupils")
+		I.color = use_pupil_color
 		I.plane = PLANE_LIGHTING_ABOVE
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
 		add_overlay(I)
 
 	if(opened)
-		add_overlay("[tank_module.user_icon_state]-open")
+		add_overlay("[use_state]-open")
 		if(wiresexposed)
-			I = image(icon, "[tank_module.user_icon_state]-wires")
+			I = image(icon, "[use_state]-wires")
 		else if(cell)
-			I = image(icon, "[tank_module.user_icon_state]-cell")
+			I = image(icon, "[use_state]-cell")
 		else
-			I = image(icon, "[tank_module.user_icon_state]-nowires")
+			I = image(icon, "[use_state]-nowires")
 		I.appearance_flags |= (RESET_COLOR|PIXEL_SCALE)
 		add_overlay(I)
 

@@ -7,7 +7,6 @@
 
 	cell =        /obj/item/cell/mech
 	idcard_type = /obj/item/card/id/platform
-	module =      /obj/item/robot_module/robot/platform
 
 	lawupdate = FALSE
 	modtype = "Standard"
@@ -21,6 +20,7 @@
 	dismantle_type = /obj/item/robot_parts/frame/platform
 	module_category = ROBOT_MODULE_TYPE_PLATFORM
 
+	var/mapped = FALSE
 	var/has_had_player = FALSE
 	var/const/platform_respawn_time = 3 MINUTES
 
@@ -41,9 +41,10 @@
 
 /mob/living/silicon/robot/platform/Initialize(var/mapload)
 	. = ..()
-	if(!mmi)
-		mmi = new /obj/item/mmi/digital/robot(src)
-	SetName("inactive [initial(name)]")
+	if(mapped)
+		if(!mmi)
+			mmi = new /obj/item/mmi/digital/robot(src)
+		SetName("inactive [initial(name)]")
 	updateicon()
 
 // Copypasting from root proc to avoid calling ..() and accidentally creating duplicate armour etc.
@@ -104,9 +105,6 @@
 	. = ..()
 	if(ispath(module, /obj/item/robot_module))
 		module = new module(src)
-
-/mob/living/silicon/robot/platform/module_reset()
-	return FALSE
 
 /mob/living/silicon/robot/platform/use_power()
 	. = ..()
