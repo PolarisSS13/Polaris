@@ -4,26 +4,27 @@
 
 /datum/seed
 	//Tracking.
-	var/uid                        // Unique identifier.
-	var/name                       // Index for global list.
-	var/seed_name                  // Plant name for seed packet.
-	var/seed_noun = "seeds"        // Descriptor for packet.
-	var/display_name               // Prettier name.
-	var/roundstart                 // If set, seed will not display variety number.
-	var/mysterious                 // Only used for the random seed packets.
-	var/can_self_harvest = 0       // Mostly used for living mobs.
-	var/growth_stages = 0          // Number of stages the plant passes through before it is mature.
-	var/list/traits = list()       // Initialized in New()
-	var/list/mutants               // Possible predefined mutant varieties, if any.
-	var/list/chems                 // Chemicals that plant produces in products/injects into victim.
-	var/list/consume_gasses        // The plant will absorb these gasses during its life.
-	var/list/exude_gasses          // The plant will exude these gasses during its life.
-	var/kitchen_tag                // Used by the reagent grinder.
-	var/trash_type                 // Garbage item produced when eaten.
+	var/uid                                                   // Unique identifier.
+	var/name                                                  // Index for global list.
+	var/seed_name                                             // Plant name for seed packet.
+	var/seed_noun = "seeds"                                   // Descriptor for packet.
+	var/display_name                                          // Prettier name.
+	var/roundstart                                            // If set, seed will not display variety number.
+	var/mysterious                                            // Only used for the random seed packets.
+	var/can_self_harvest = 0                                  // Mostly used for living mobs.
+	var/growth_stages = 0                                     // Number of stages the plant passes through before it is mature.
+	var/list/traits = list()                                  // Initialized in New()
+	var/list/mutants                                          // Possible predefined mutant varieties, if any.
+	var/list/chems                                            // Chemicals that plant produces in products/injects into victim.
+	var/list/consume_gasses                                   // The plant will absorb these gasses during its life.
+	var/list/exude_gasses                                     // The plant will exude these gasses during its life.
+	var/kitchen_tag                                           // Used by the reagent grinder.
+	var/trash_type                                            // Garbage item produced when eaten.
 	var/splat_type = /obj/effect/decal/cleanable/fruit_smudge // Graffiti decal.
-	var/has_mob_product            // Mob products. (Dionaea, Walking Mushrooms, Angry Tomatoes)
-	var/apply_color_to_mob = TRUE  // Do we color the mob to match the plant?
-	var/has_item_product           // Item products. (Eggy)
+	var/has_mob_product                                       // Mob products. (Dionaea, Walking Mushrooms, Angry Tomatoes)
+	var/mob_product_requires_player = FALSE                   // Whether or not the mob product requires a player.
+	var/apply_color_to_mob = TRUE                             // Do we color the mob to match the plant?
+	var/has_item_product                                      // Item products. (Eggy)
 	var/force_layer
 
 // Making the assumption anything in HYDRO-ponics is capable of processing water, and nutrients commonly associated with it, leaving us with the below to be tweaked.
@@ -545,6 +546,7 @@
 	if(prob(5))
 		if(prob(30))
 			has_mob_product = pickweight(GLOB.plant_mob_products)
+			mob_product_requires_player = FALSE
 		else
 			has_item_product = pickweight(GLOB.plant_item_products)
 
@@ -708,9 +710,11 @@
 			consume_gasses |= new_gasses
 			gene.values["[TRAIT_CONSUME_GASSES]"] = null
 		if(GENE_METABOLISM)
-			has_mob_product = gene.values["mob_product"]
-			has_item_product = gene.values["item_product"]
-			gene.values["mob_product"] = null
+			has_mob_product             = gene.values["mob_product"]
+			mob_product_requires_player = gene.values["mob_product_requires_player"]
+			has_item_product            = gene.values["item_product"]
+			gene.values["mob_product"]                 = null
+			gene.values["mob_product_requires_player"] = null
 
 	for(var/trait in gene.values)
 		set_trait(trait,gene.values["[trait]"])
@@ -739,8 +743,9 @@
 		if(GENE_HARDINESS)
 			traits_to_copy = list(TRAIT_TOXINS_TOLERANCE,TRAIT_PEST_TOLERANCE,TRAIT_WEED_TOLERANCE,TRAIT_ENDURANCE)
 		if(GENE_METABOLISM)
-			P.values["mob_product"] = has_mob_product
-			P.values["item_product"] = has_item_product
+			P.values["mob_product"]                 = has_mob_product
+			P.values["mob_product_requires_player"] = mob_product_requires_player
+			P.values["item_product"]                = has_item_product
 			traits_to_copy = list(TRAIT_REQUIRES_NUTRIENTS,TRAIT_REQUIRES_WATER,TRAIT_ALTER_TEMP)
 		if(GENE_VIGOUR)
 			traits_to_copy = list(TRAIT_PRODUCTION,TRAIT_MATURATION,TRAIT_YIELD,TRAIT_SPREAD)
@@ -843,14 +848,15 @@
 
 	//Set up some basic information.
 	var/datum/seed/new_seed = new
-	new_seed.name =            "new line"
-	new_seed.uid =              0
-	new_seed.roundstart =       0
-	new_seed.can_self_harvest = can_self_harvest
-	new_seed.kitchen_tag =      kitchen_tag
-	new_seed.trash_type =       trash_type
-	new_seed.has_mob_product =  has_mob_product
-	new_seed.has_item_product = has_item_product
+	new_seed.name                        = "new line"
+	new_seed.uid                         = 0
+	new_seed.roundstart                  = 0
+	new_seed.can_self_harvest            = can_self_harvest
+	new_seed.kitchen_tag                 = kitchen_tag
+	new_seed.trash_type                  = trash_type
+	new_seed.has_mob_product             = has_mob_product
+	new_seed.mob_product_requires_player = mob_product_requires_player
+	new_seed.has_item_product            = has_item_product
 
 	//Copy over everything else.
 	if(mutants)        new_seed.mutants = mutants.Copy()
