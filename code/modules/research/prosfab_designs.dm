@@ -281,6 +281,20 @@
 	time = 50
 	materials = list(MAT_STEEL = 37500)
 
+/datum/design/item/prosfab/cyborg/exoskeleton_flying
+	name = "Flying Robot Exoskeleton"
+	id = "robot_exoskeleton_flyer"
+	build_path = /obj/item/robot_parts/frame/flyer
+	time = 40
+	materials = list(MAT_STEEL = 32500)
+
+/datum/design/item/prosfab/cyborg/exoskeleton_platform
+	name = "Platform Exoskeleton"
+	id = "robot_exoskeleton_platform"
+	build_path = /obj/item/robot_parts/frame/platform
+	time = 60
+	materials = list(MAT_STEEL = 42500)
+
 /datum/design/item/prosfab/cyborg/torso
 	name = "Robot Torso"
 	id = "robot_torso"

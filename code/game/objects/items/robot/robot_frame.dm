@@ -168,3 +168,16 @@
 		BP_TORSO = /obj/item/robot_parts/chest,
 		BP_HEAD  = /obj/item/robot_parts/head
 	)
+
+/obj/item/robot_parts/frame/platform
+	name = "flying robot frame"
+	icon = 'icons/obj/robot_parts_flying.dmi'
+	product = /mob/living/silicon/robot/platform
+	required_parts = list(
+		BP_L_ARM = /obj/item/robot_parts/l_arm,
+		BP_R_ARM = /obj/item/robot_parts/r_arm,
+		BP_L_LEG = /obj/item/robot_parts/l_leg,
+		BP_R_LEG = /obj/item/robot_parts/r_leg,
+		BP_TORSO = /obj/item/robot_parts/chest,
+		BP_HEAD  = /obj/item/robot_parts/head
+	)

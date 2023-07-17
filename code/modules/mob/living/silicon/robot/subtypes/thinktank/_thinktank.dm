@@ -18,6 +18,7 @@
 	mob_push_flags =  HEAVY
 	mob_size =        MOB_LARGE
 
+	dismantle_type = /obj/item/robot_parts/frame/platform
 	module_category = ROBOT_MODULE_TYPE_PLATFORM
 
 	var/has_had_player = FALSE
