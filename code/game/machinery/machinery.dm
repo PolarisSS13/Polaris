@@ -489,7 +489,7 @@ Class Procs:
 	return
 
 /obj/machinery/proc/eject_material_of_type(var/incoming_material) //Used for autolathe, protolathe, mechfab, exofab. Stuff that takes materials, basically.
-	if(!LAZYACCESS(materials[incoming_material]))
+	if(!LAZYLEN(materials[incoming_material]))
 		return
 	var/datum/material/M = get_material_by_name(incoming_material)
 	if(!istype(M))
