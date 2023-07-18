@@ -364,8 +364,8 @@
 
 /obj/item/ammo_casing/a145/highvel
 	desc = "A 14.5mm sabot shell."
-	projectile_type = /obj/item/projectile/bullet/rifle/a145
-	
+	projectile_type = /obj/item/projectile/bullet/rifle/a145/highvel
+
 /obj/item/ammo_casing/a145/bb
 	desc = "A 14.5mm BB. That'll take someone's eye out."
 	projectile_type = /obj/item/projectile/bullet/bb
