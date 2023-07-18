@@ -66,7 +66,7 @@
 	atom_flags &= ~(ATOM_REAGENTS_SKIP_REACTIONS)
 	spawn(10)
 	atom_flags |= ATOM_REAGENTS_SKIP_REACTIONS
-	reagent.handle_reactions()
+	reagents.handle_reactions()
 
 /obj/structure/reagent_dispensers/bidon/Initialize(mapload, ...)
 	. = ..()
