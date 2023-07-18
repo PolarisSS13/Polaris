@@ -129,6 +129,9 @@ var/global/list/pre_init_created_atoms // atom creation ordering means some stuf
 /atom/proc/is_open_container()
 	return atom_flags & ATOM_REAGENTS_IS_OPEN
 
+/atom/proc/can_refill()
+	return atom_flags & ~ATOM_REAGENTS_NO_REFILL
+
 /*//Convenience proc to see whether a container can be accessed in a certain way.
 
 	proc/can_subract_container()

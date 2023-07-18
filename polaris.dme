@@ -2983,6 +2983,7 @@
 #include "code\modules\reagents\reactions\instant\instant.dm"
 #include "code\modules\reagents\reactions\instant\vox.dm"
 #include "code\modules\reagents\reagent_containers\_reagent_containers.dm"
+#include "code\modules\reagents\reagent_containers\bidon.dm"
 #include "code\modules\reagents\reagent_containers\blood_pack.dm"
 #include "code\modules\reagents\reagent_containers\borghypo.dm"
 #include "code\modules\reagents\reagent_containers\dropper.dm"
