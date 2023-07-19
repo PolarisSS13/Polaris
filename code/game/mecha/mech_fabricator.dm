@@ -11,10 +11,14 @@
 	req_access = list(access_robotics)
 	circuit = /obj/item/circuitboard/mechfab
 
+	var/list/href_data
+	var/topic_result
+
 	var/speed = 1
 	var/mat_efficiency = 1
 	materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
 	var/list/hidden_materials = list(MAT_PLASTEEL, MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM, MAT_METALHYDROGEN, MAT_SUPERMATTER)
+	var/eject_lockout = FALSE
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -108,6 +112,7 @@
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
+	href_data = data
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Exosuit Fabricator UI", 800, 600)
@@ -116,6 +121,7 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/mecha_part_fabricator/Topic(href, href_list)
+	topic_result = href_list
 	if(..())
 		return
 
@@ -129,8 +135,8 @@
 		if(href_list["category"] in categories)
 			category = href_list["category"]
 
-	if(href_list["eject"])
-		eject_materials(href_list["eject"], text2num(href_list["amount"]))
+	if(href_list["eject"] && !eject_lockout)
+		eject_materials_partial(href_list["eject"], text2num(href_list["amount"]))
 
 	if(href_list["sync"])
 		sync()
@@ -301,3 +307,22 @@
 		files.RefreshResearch()
 		sync_message = "Sync complete."
 	update_categories()
+
+/obj/machinery/mecha_part_fabricator/proc/eject_materials_partial(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
+	var/recursive = amount == -1
+	var/matstring = lowertext(material)
+	var/datum/material/M = get_material_by_name(matstring)
+	if(recursive && materials[matstring] >= M.perunit)
+		eject_material_of_type(matstring)
+		return
+
+	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
+	if(amount <= 0)
+		amount = S.max_amount
+	var/ejected = min(round(materials[matstring] / S.perunit), amount)
+	S.amount = min(ejected, amount)
+	if(S.amount <= 0)
+		qdel(S)
+		return
+	materials[matstring] -= ejected * S.perunit
+	update_busy()

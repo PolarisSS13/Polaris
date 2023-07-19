@@ -15,6 +15,7 @@
 	var/mat_efficiency = 1
 	materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0)
 	var/list/hidden_materials = list(MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM)
+	var/eject_lockout = FALSE
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -144,8 +145,8 @@
 		if(href_list["manufacturer"] in all_robolimbs)
 			manufacturer = href_list["manufacturer"]
 
-	if(href_list["eject"])
-		eject_materials(href_list["eject"], text2num(href_list["amount"]))
+	if(href_list["eject"] && !eject_lockout)
+		eject_materials_partial(href_list["eject"], text2num(href_list["amount"]))
 
 	if(href_list["sync"])
 		sync()
@@ -339,3 +340,23 @@
 		files.RefreshResearch()
 		sync_message = "Sync complete."
 	update_categories()
+
+/obj/machinery/pros_fabricator/proc/eject_materials_partial(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
+	var/recursive = amount == -1 ? 1 : 0
+	var/matstring = lowertext(material)
+	var/datum/material/M = get_material_by_name(matstring)
+
+	if(recursive && materials[matstring] >= M.perunit)
+		eject_material_of_type(matstring)
+		return
+
+	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
+	if(amount <= 0)
+		amount = S.max_amount
+	var/ejected = min(round(materials[matstring] / S.perunit), amount)
+	S.amount = min(ejected, amount)
+	if(S.amount <= 0)
+		qdel(S)
+		return
+	materials[matstring] -= ejected * S.perunit
+	update_busy()
