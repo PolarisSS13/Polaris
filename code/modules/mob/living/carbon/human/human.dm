@@ -1100,11 +1100,7 @@
 
 	species = get_species_by_key(new_species)
 
-	if(species.language)
-		add_language(species.language)
-
-	if(species.default_language)
-		add_language(species.default_language)
+	apply_species_cultural_info()
 
 	if(species.icon_scale_x != 1 || species.icon_scale_y != 1)
 		update_transform()

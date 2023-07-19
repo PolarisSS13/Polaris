@@ -210,23 +210,6 @@
 
 	return FALSE
 
-/mob/living/carbon/human/proc/update_languages()
-	world << "HECK"
-
-/mob/living/carbon/human/proc/set_cultural_value(var/token, var/decl/cultural_info/_culture, var/defer_language_update)
-	if(ispath(_culture, /decl/cultural_info))
-		_culture = GET_DECL(_culture)
-	if(istype(_culture))
-		LAZYSET(cultural_info, token, _culture)
-		if(!defer_language_update)
-			update_languages()
-
-/mob/living/carbon/human/proc/get_cultural_value(var/token)
-	. = LAZYACCESS(cultural_info, token)
-	if(!istype(., /decl/cultural_info))
-		. = using_map.default_cultural_info[token]
-		crash_with("get_cultural_value() tried to return a non-instance value for token '[token]' - full culture list: [json_encode(cultural_info)] default species culture list: [json_encode(using_map.default_cultural_info)]")
-
 #undef HUMAN_EATING_NO_ISSUE
 #undef HUMAN_EATING_NO_MOUTH
 #undef HUMAN_EATING_BLOCKED_MOUTH

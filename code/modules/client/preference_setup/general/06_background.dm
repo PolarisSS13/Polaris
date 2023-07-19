@@ -76,6 +76,7 @@
 	. = ..()
 	for(var/token in pref.cultural_info)
 		character.set_cultural_value(token, pref.cultural_info[token], defer_language_update = TRUE)
+	character.update_languages()
 
 /datum/category_item/player_setup_item/general/background/content()
 	. = ..()
