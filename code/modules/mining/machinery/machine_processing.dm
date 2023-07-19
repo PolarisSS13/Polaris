@@ -215,11 +215,11 @@
 	else
 		speed_process = !speed_process // switching gears
 	if(speed_process) // high gear
-		STOP_MACHINE_PROCESSING(src)
-		START_PROCESSING(SSfastprocess, src)
+		end_processing()
+		begin_speed_processing()
 	else // low gear
-		STOP_PROCESSING(SSfastprocess, src)
-		START_MACHINE_PROCESSING(src)
+		end_speed_processing()
+		begin_processing()
 	for(var/obj/machinery/mineral/unloading_machine/unloader in refinery_area.contents)
 		unloader.toggle_speed()
 	for(var/obj/machinery/conveyor_switch/cswitch in refinery_area.contents)

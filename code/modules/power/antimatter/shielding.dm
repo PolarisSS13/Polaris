@@ -147,7 +147,7 @@
 
 /obj/machinery/am_shielding/proc/setup_core()
 	processing = 1
-	START_MACHINE_PROCESSING(src)
+	begin_processing()
 	if(!control_unit)	return
 	control_unit.linked_cores.Add(src)
 	control_unit.reported_core_efficiency += efficiency

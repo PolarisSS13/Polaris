@@ -109,11 +109,11 @@
 	else
 		speed_process = !speed_process // switching gears
 	if(speed_process) // high gear
-		STOP_MACHINE_PROCESSING(src)
-		START_PROCESSING(SSfastprocess, src)
+		end_processing()
+		begin_speed_processing()
 	else // low gear
-		STOP_PROCESSING(SSfastprocess, src)
-		START_MACHINE_PROCESSING(src)
+		end_speed_processing()
+		begin_processing()
 
 /obj/machinery/mineral/stacking_machine/process()
 	if (src.output && src.input)
