@@ -88,6 +88,9 @@
 	..(null,"suddenly breaks apart.")
 	qdel(src)
 
+/mob/living/simple_mob/mechanical/mining_drone/Allow_Spacemove(var/dense_object, check_drift = 0)
+	return TRUE
+
 /mob/living/simple_mob/mechanical/mining_drone/Process_Spacemove(var/check_drift = 0)
 	return TRUE
 

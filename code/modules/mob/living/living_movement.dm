@@ -249,7 +249,7 @@ default behaviour is:
 
 /mob/living/proc/inertial_drift()
 	if(x > 1 && x < (world.maxx) && y > 1 && y < (world.maxy))
-		if(Process_Spacemove(1))
+		if(Process_Spacemove(TRUE))
 			inertia_dir = 0
 			return
 

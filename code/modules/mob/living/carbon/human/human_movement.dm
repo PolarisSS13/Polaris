@@ -173,24 +173,6 @@
 			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
 				return module.jets
 
-/mob/living/carbon/human/Process_Spacemove(var/check_drift = 0)
-	//Can we act?
-	if(restrained())	return 0
-
-	if(..()) //Can move due to other reasons, don't use jetpack fuel
-		return 1
-
-	//Do we have a working jetpack?
-	var/obj/item/tank/jetpack/thrust = get_jetpack()
-
-	if(thrust)
-		if(((!check_drift) || (check_drift && thrust.stabilization_on)) && (!lying) && (thrust.do_thrust(0.01, src)))
-			inertia_dir = 0
-			return 1
-
-	return 0
-
-
 /mob/living/carbon/human/Process_Spaceslipping(var/prob_slip = 5)
 	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.
 
