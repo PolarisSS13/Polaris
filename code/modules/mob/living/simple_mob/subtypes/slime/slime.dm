@@ -82,9 +82,6 @@ var/global/list/_slime_default_emotes = list(
 
 	can_enter_vent_with = list(/obj/item/clothing/head)
 
-/mob/living/simple_mob/slime/Allow_Spacemove(var/dense_object, check_drift = 0)
-	return TRUE
-
 /mob/living/simple_mob/slime/get_available_emotes()
 	return global._slime_default_emotes
 

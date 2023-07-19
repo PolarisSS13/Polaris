@@ -40,9 +40,6 @@
 	ion_trail.start()
 	return ..()
 
-/mob/living/simple_mob/mechanical/mecha/hoverpod/Allow_Spacemove(var/dense_object, check_drift = 0)
-	return TRUE
-
 /mob/living/simple_mob/mechanical/mecha/hoverpod/Process_Spacemove(var/check_drift = 0)
 	return TRUE
 

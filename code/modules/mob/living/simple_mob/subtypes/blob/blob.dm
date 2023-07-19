@@ -67,11 +67,10 @@
 		return TRUE
 	return ..()
 
-/mob/living/simple_mob/blob/Allow_Spacemove()
-	return (locate(/obj/structure/blob) in range(1, src))
-
-/mob/living/simple_mob/blob/Process_Spacemove(var/check_drift = 0)
-	return Allow_Spacemove(null, check_drift) || ..()
+/mob/living/simple_mob/blob/Process_Spacemove()
+	for(var/obj/structure/blob/B in range(1, src))
+		return TRUE
+	return ..()
 
 /decl/mob_organ_names/blob
 	hit_zones = list("mass")
