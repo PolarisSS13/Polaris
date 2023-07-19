@@ -84,7 +84,7 @@
 /obj/item/robot_parts/chest
 	name = "torso"
 	desc = "A heavily reinforced case containing cyborg logic boards, with space for a standard power cell."
-	icon_state = "chest"
+	icon_state = "torso"
 	part = list(BP_GROIN,BP_TORSO)
 	bp_tag = BP_TORSO
 	var/wires = 0.0

@@ -267,6 +267,9 @@
 
 	var/is_crisis_mode = crisis_override || (security_level == SEC_LEVEL_RED)
 	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode, override)
+	if(!length(robot_modules))
+		to_chat(src, SPAN_WARNING("For some reason, no modules are available to you. Please report this on the issue tracker!"))
+		return
 
 	if(!override)
 		if(is_crisis_mode)

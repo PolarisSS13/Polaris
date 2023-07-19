@@ -57,6 +57,7 @@
 	assignable = FALSE
 	mob_type = JOB_SILICON_ROBOT
 	outfit_type = /decl/hierarchy/outfit/job/silicon/cyborg
+	substitute_announce_title = "Stationbound Synthetic"
 	job_description = "A Cyborg is a mobile station synthetic, piloted by a cybernetically preserved brain. It is considered a person, but is still required \
 						to follow its Laws."
 	alt_titles = list(

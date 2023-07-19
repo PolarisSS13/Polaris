@@ -22,10 +22,10 @@
 	update_icon()
 
 /obj/item/robot_parts/frame/update_icon()
-	overlays.Cut()
+	cut_overlays()
 	for(var/part in required_parts)
 		if(parts[part])
-			overlays += "[part]+o"
+			add_overlay("[part]+o")
 
 /obj/item/robot_parts/frame/proc/check_completion()
 	for(var/part in required_parts)
@@ -170,8 +170,8 @@
 	)
 
 /obj/item/robot_parts/frame/platform
-	name = "flying robot frame"
-	icon = 'icons/obj/robot_parts_flying.dmi'
+	name = "large robot frame"
+	icon = 'icons/obj/robot_parts_platform.dmi'
 	product = /mob/living/silicon/robot/platform
 	required_parts = list(
 		BP_L_ARM = /obj/item/robot_parts/l_arm,

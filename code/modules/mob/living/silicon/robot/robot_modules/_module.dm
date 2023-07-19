@@ -129,15 +129,16 @@
 /obj/item/robot_module/proc/build_synths()
 	SHOULD_CALL_PARENT(TRUE)
 	for(var/thing in synths)
-		if(ispath(thing, /datum/matter_synth))
-			if(!isnull(synths[thing]))
-				synths += new thing(synths[thing])
-			else
-				synths += new thing
-		else if(istype(thing, /datum/matter_synth))
-			synths |= thing
-		else
+		if(istype(thing, /datum/matter_synth))
+			continue
+		if(!ispath(thing, /datum/matter_synth))
 			log_debug("Invalid var type in [type] synth creation - [thing]")
+			continue
+		if(isnull(synths[thing]))
+			synths += new thing
+		else
+			synths += new thing(synths[thing])
+		synths -= thing
 
 /obj/item/robot_module/proc/finalize_synths()
 	SHOULD_CALL_PARENT(TRUE)

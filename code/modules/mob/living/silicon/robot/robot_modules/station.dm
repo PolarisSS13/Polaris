@@ -273,7 +273,7 @@
 	var/obj/item/matter_decompiler/MD =        locate() in modules
 	MD.metal = metal
 	MD.glass = glass
-	var/obj/item/stack/material/cyborg/steel/M =locate() in modules
+	var/obj/item/stack/material/cyborg/steel/M = locate() in modules
 	M.synths = list(metal)
 	var/obj/item/stack/material/cyborg/glass/G = locate() in modules
 	G.synths = list(glass)

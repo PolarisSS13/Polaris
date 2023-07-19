@@ -49,6 +49,7 @@
 
 /obj/item/robot_module/robot/platform/explorer
 	name = "recon platform module"
+	display_name = "Recon"
 	unavailable_by_default = FALSE
 	armor_color = "#528052"
 	eye_color =   "#7b7b46"
@@ -94,6 +95,7 @@
 
 /obj/item/robot_module/robot/platform/cargo
 	name = "logistics platform module"
+	display_name = "Logistics"
 	unavailable_by_default = FALSE
 	armor_color = "#d5b222"
 	eye_color =   "#686846"
