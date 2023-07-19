@@ -912,7 +912,7 @@
 		return
 
 	if((istype(wearer.loc, /turf/space)) || (wearer.lastarea.has_gravity == 0))
-		if(!wearer.Process_Spacemove(0))
+		if(!wearer.Process_Spacemove(FALSE))
 			return 0
 
 	if(malfunctioning)

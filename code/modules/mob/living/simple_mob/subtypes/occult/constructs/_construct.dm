@@ -142,8 +142,11 @@
 			. += "<span class='warning'><B>It looks severely dented!</B></span>"
 
 //Constructs levitate, can fall from a shuttle with no harm, and are piloted by either damned spirits or some otherworldly entity. Let 'em float in space.
-/mob/living/simple_mob/construct/Process_Spacemove()
-	return 1
+/mob/living/simple_mob/construct/Allow_Spacemove(var/dense_object)
+	return TRUE
+
+/mob/living/simple_mob/construct/Process_Spacemove(var/check_drift = 0)
+	return TRUE
 
 /*
 // Glowing Procs
