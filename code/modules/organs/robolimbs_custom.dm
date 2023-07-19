@@ -67,7 +67,7 @@
 	suggested_species = "Tajara"
 
 /datum/robolimb/dsi_tajaran/New()
-	species_cannot_use = GLOB.all_species.Copy()
+	species_cannot_use = get_all_species(copy = TRUE)
 //	species_cannot_use -= SPECIES_TAJ
 
 /obj/item/disk/limb/dsi_tajaran
@@ -85,7 +85,7 @@
 	suggested_species = "Unathi"
 
 /datum/robolimb/dsi_lizard/New()
-	species_cannot_use = GLOB.all_species.Copy()
+	species_cannot_use = get_all_species(copy = TRUE)
 //	species_cannot_use -= SPECIES_UNATHI
 
 /obj/item/disk/limb/dsi_lizard
@@ -170,7 +170,7 @@
 	suggested_species = SPECIES_TESHARI
 
 /datum/robolimb/dsi_teshari/New()
-	species_cannot_use = GLOB.all_species.Copy()
+	species_cannot_use = get_all_species(copy = TRUE)
 //	species_cannot_use -= SPECIES_TESHARI
 //	species_cannot_use -= SPECIES_CUSTOM
 	..()

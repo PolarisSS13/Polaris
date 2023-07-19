@@ -15,7 +15,7 @@
 	if(species == new_species)
 		return
 
-	if(!(new_species in GLOB.all_species))
+	if(!(new_species in get_all_species()))
 		return
 
 	set_species(new_species)
@@ -53,7 +53,7 @@
 
 	update_hair()
 	return 1
-	
+
 /mob/living/carbon/human/proc/change_hair_gradient(var/hair_gradient)
 	if(!hair_gradient)
 		return
@@ -124,7 +124,7 @@
 
 	update_hair()
 	return 1
-	
+
 /mob/living/carbon/human/proc/change_grad_color(var/red, var/green, var/blue)
 	if(red == r_grad && green == g_grad && blue == b_grad)
 		return
@@ -177,8 +177,8 @@
 
 /mob/living/carbon/human/proc/generate_valid_species(var/check_whitelist = 1, var/list/whitelist = list(), var/list/blacklist = list())
 	var/list/valid_species = new()
-	for(var/current_species_name in GLOB.all_species)
-		var/datum/species/current_species = GLOB.all_species[current_species_name]
+	for(var/current_species_name in get_all_species())
+		var/datum/species/current_species = get_species_by_key(current_species_name)
 
 		if(check_whitelist && config.usealienwhitelist && !check_rights(R_ADMIN|R_EVENT, 0, src)) //If we're using the whitelist, make sure to check it!
 			if(!(current_species.spawn_flags & SPECIES_CAN_JOIN))

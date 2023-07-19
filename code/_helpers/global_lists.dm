@@ -48,11 +48,10 @@ var/global/list/ear_styles_list = list()	// Stores /datum/sprite_accessory/ears 
 var/global/list/tail_styles_list = list()	// Stores /datum/sprite_accessory/tail indexed by type
 var/global/list/wing_styles_list = list()	// Stores /datum/sprite_accessory/wing indexed by type
 
-GLOBAL_LIST_INIT(custom_species_bases, new) // Species that can be used for a Custom Species icon base
-	//Underwear
+//Underwear
 var/global/datum/category_collection/underwear/global_underwear = new()
 
-	//Backpacks
+//Backpacks
 var/global/list/backbaglist = list("Nothing", "Backpack", "Satchel", "Satchel Alt", "Messenger Bag", "Sports Bag", "Black Rucksack", "Blue Rucksack", "Green Rucksack", "Navy Rucksack", "Tan Rucksack")
 var/global/list/pdachoicelist = list("Default", "Slim", "Old", "Rugged", "Holographic", "Wrist-Bound")
 var/global/list/exclude_jobs = list(/datum/job/ai,/datum/job/cyborg)
@@ -188,26 +187,6 @@ var/global/list/string_slot_flags = list(
 					GLOB.language_key_conflicts[L.key] = list(GLOB.language_keys[L.key])
 				GLOB.language_key_conflicts[L.key] += L
 
-	//Species
-	var/rkey = 0
-	paths = typesof(/datum/species)
-	for(var/T in paths)
-
-		rkey++
-
-		var/datum/species/S = T
-		if(!initial(S.name))
-			continue
-
-		S = new T
-		S.race_key = rkey //Used in mob icon caching.
-		GLOB.all_species[S.name] = S
-
-		if(!(S.spawn_flags & SPECIES_IS_RESTRICTED))
-			GLOB.playable_species += S.name
-		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
-			GLOB.whitelisted_species += S.name
-
 	//Ores
 	paths = subtypesof(/ore)
 	for(var/oretype in paths)
@@ -237,38 +216,6 @@ var/global/list/string_slot_flags = list(
 
 	init_crafting_recipes(GLOB.crafting_recipes)
 
-/*
-	// Custom species traits
-	paths = typesof(/datum/trait) - /datum/trait
-	for(var/path in paths)
-		var/datum/trait/instance = new path()
-		if(!instance.name)
-			continue //A prototype or something
-		var/cost = instance.cost
-		traits_costs[path] = cost
-		all_traits[path] = instance
-		switch(cost)
-			if(-INFINITY to -0.1)
-				negative_traits[path] = instance
-			if(0)
-				neutral_traits[path] = instance
-			if(0.1 to INFINITY)
-				positive_traits[path] = instance
-*/
-
-	// Custom species icon bases
-	var/list/blacklisted_icons = list(/*SPECIES_CUSTOM,*/SPECIES_PROMETHEAN) //Just ones that won't work well.
-	var/list/whitelisted_icons = list(/*SPECIES_FENNEC,SPECIES_XENOHYBRID*/) //Include these anyway
-	for(var/species_name in GLOB.playable_species)
-		if(species_name in blacklisted_icons)
-			continue
-		var/datum/species/S = GLOB.all_species[species_name]
-		if(S.spawn_flags & SPECIES_IS_WHITELISTED)
-			continue
-		GLOB.custom_species_bases += species_name
-	for(var/species_name in whitelisted_icons)
-		GLOB.custom_species_bases += species_name
-
 	return 1 // Hooks must return 1
 
 
@@ -292,3 +239,31 @@ var/global/list/string_slot_flags = list(
 */
 //Hexidecimal numbers
 var/global/list/hexNums = list("0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "A", "B", "C", "D", "E", "F")
+
+// This is all placeholder procs for an eventual PR to change them to use decls.
+var/global/list/all_species
+var/global/list/playable_species // A list of ALL playable species, whitelisted, latejoin or otherwise.
+/proc/build_species_lists()
+	if(global.all_species)
+		return
+	global.all_species      = list()
+	global.playable_species = list()
+	for(var/species_type in subtypesof(/datum/species))
+		var/datum/species/species = species_type
+		if(!initial(species.name))
+			continue
+		species = new species
+		global.all_species[species.name] = species
+		if(!(species.spawn_flags & SPECIES_IS_RESTRICTED))
+			global.playable_species += species.name
+	global.playable_species |= SPECIES_HUMAN
+
+/proc/get_species_by_key(var/species_key)
+	build_species_lists()
+	. = global.all_species[species_key]
+/proc/get_all_species(var/copy = FALSE)
+	build_species_lists()
+	. = copy ? global.all_species.Copy() : global.all_species
+/proc/get_playable_species(var/copy = FALSE)
+	build_species_lists()
+	. = copy ? global.playable_species.Copy() : global.playable_species

@@ -342,12 +342,16 @@ var/global/list/PDA_Manifest = list()
 		G.fields["m_stat"]		= "Stable"
 		G.fields["sex"]			= gender2text(H.gender)
 		G.fields["species"]		= H.get_species_name()
-/*
-		G.fields["home_system"]	= H.home_system
-		G.fields["citizenship"]	= H.citizenship
-		G.fields["faction"]		= H.personal_faction
-		G.fields["religion"]	= H.religion
-*/
+
+		var/decl/cultural_info/culture = GET_DECL(H.client.prefs.cultural_info[TAG_HOMEWORLD])
+		G.fields["home_system"] = culture.name
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_CULTURE])
+		G.fields["citizenship"] = culture.name
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_FACTION])
+		G.fields["faction"]     = culture.name
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_RELIGION])
+		G.fields["religion"]    = culture.name
+
 		if(H.gen_record && !jobban_isbanned(H, "Records"))
 			G.fields["notes"] = H.gen_record
 
@@ -390,12 +394,16 @@ var/global/list/PDA_Manifest = list()
 		L.fields["enzymes"]		= H.dna.SE // Used in respawning
 		L.fields["identity"]	= H.dna.UI // "
 		L.fields["species"]		= H.get_species_name()
-/*
-		L.fields["home_system"]	= H.home_system
-		L.fields["citizenship"]	= H.citizenship
-		L.fields["faction"]		= H.personal_faction
-		L.fields["religion"]	= H.religion
-*/
+
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_HOMEWORLD])
+		L.fields["home_system"] = culture.name
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_CULTURE])
+		L.fields["citizenship"] = culture.name
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_FACTION])
+		L.fields["faction"]     = culture.name
+		culture = GET_DECL(H.client.prefs.cultural_info[TAG_RELIGION])
+		L.fields["religion"]    = culture.name
+
 		L.fields["image"]		= icon(cached_character_icon(H), dir = SOUTH)
 		L.fields["antagfac"]	= H.antag_faction
 		L.fields["antagvis"]	= H.antag_vis

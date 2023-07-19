@@ -42,14 +42,14 @@
 	if(severity >= 2 && prob(33))
 		resistance += 10
 
-	if(GLOB.all_species.len)
+	if(length(get_all_species()))
 		affected_species = get_infectable_species()
 
 /proc/get_infectable_species()
 	var/list/meat = list()
 	var/list/res = list()
-	for (var/specie in GLOB.all_species)
-		var/datum/species/S = GLOB.all_species[specie]
+	for (var/specie in get_all_species())
+		var/datum/species/S = get_species_by_key(specie)
 		if(!S.get_virus_immune())
 			meat += S
 	if(meat.len)
@@ -151,7 +151,7 @@
 	if (prob(5) && prob(100-resistance)) // The more resistant the disease,the lower the chance of randomly developing the antibodies
 		antigen = list(pick(ALL_ANTIGENS))
 		antigen |= pick(ALL_ANTIGENS)
-	if (prob(5) && GLOB.all_species.len)
+	if (prob(5) && length(get_all_species()))
 		affected_species = get_infectable_species()
 	if (prob(10))
 		resistance += rand(1,9)
@@ -248,7 +248,7 @@ var/global/list/virusDB = list()
 		"species" = jointext(affected_species, ", "),
 		"ref" = "\ref[src]",
 	)
-	
+
 	var/list/symptoms = list()
 	for(var/datum/disease2/effectholder/E in effects)
 		symptoms.Add(list(list(

@@ -273,9 +273,9 @@
 		malfunctioned = TRUE
 		var/possible_species = list(SPECIES_HUMAN, SPECIES_VOX, SPECIES_SKRELL, SPECIES_ZADDAT, SPECIES_UNATHI, SPECIES_GOLEM, SPECIES_SHADOW)
 		var/new_species = pick(possible_species)
-		if (!GLOB.all_species[new_species])
+		if (!get_species_by_key(new_species))
 			new_species = SPECIES_HUMAN
-		O.species = GLOB.all_species[new_species]
+		O.species = get_species_by_key(new_species)
 
 	if (istype(O, /obj/item/organ/external) && !malfunctioned)
 		var/obj/item/organ/external/E = O

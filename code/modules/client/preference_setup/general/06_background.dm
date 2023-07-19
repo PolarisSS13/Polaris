@@ -1,5 +1,5 @@
 #define GET_ALLOWED_VALUES(write_to, check_key) \
-	var/datum/species/S = GLOB.all_species[pref.species]; \
+	var/datum/species/S = get_species_by_key(pref.species); \
 	if(!S) { \
 		write_to = list(); \
 	} else if(S.force_cultural_info[check_key]) { \
@@ -43,7 +43,7 @@
 		pref.cultural_info -= token
 		for(var/ftype in all_cultural_decls)
 			var/decl/cultural_info/culture = all_cultural_decls[ftype]
-			if(lowertext(culture.name) == entry)
+			if(culture.name && lowertext(culture.name) == entry)
 				pref.cultural_info[token] = culture.type
 				break
 
@@ -72,8 +72,14 @@
 				entry = culture.name
 		S[token] << entry
 
+/datum/category_item/player_setup_item/general/background/copy_to_mob(mob/living/carbon/human/character)
+	. = ..()
+	for(var/token in pref.cultural_info)
+		character.set_cultural_value(token, pref.cultural_info[token], defer_language_update = TRUE)
+
 /datum/category_item/player_setup_item/general/background/content()
-	. = list()
+	. = ..()
+	. += "<b>Background Information</b><br>"
 	for(var/token in ALL_CULTURAL_TAGS)
 
 		var/decl/cultural_info/culture = GET_DECL(pref.cultural_info[token])
@@ -87,6 +93,8 @@
 			. += "<tr><td colspan=3><center>"
 			for(var/culture_path in valid_values)
 				var/decl/cultural_info/culture_data = GET_DECL(culture_path)
+				if(!culture_data.name)
+					continue
 				if(pref.cultural_info[token] == culture_data.type)
 					. += "<span class='linkOn'>[culture_data.name]</span> "
 				else
@@ -112,7 +120,7 @@
 		if(href_list["toggle_verbose_[token]"])
 			hidden[token] = !hidden[token]
 			return TOPIC_REFRESH
-		
+
 		if(href_list["expand_options_[token]"])
 			expanded[token] = !expanded[token]
 			return TOPIC_REFRESH

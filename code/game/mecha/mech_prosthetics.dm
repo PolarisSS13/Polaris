@@ -181,7 +181,7 @@
 
 	if(istype(I,/obj/item/disk/species))
 		var/obj/item/disk/species/D = I
-		if(!D.species || !(D.species in GLOB.all_species))
+		if(!D.species || !(D.species in get_all_species()))
 			to_chat(user, "<span class='warning'>This disk seems to be corrupted!</span>")
 		else
 			to_chat(user, "<span class='notice'>Uploading modification files for [D.species]...</span>")

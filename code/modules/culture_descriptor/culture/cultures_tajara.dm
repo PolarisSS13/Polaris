@@ -1,8 +1,9 @@
-/decl/cultural_info/culture/tajaran/hrararan
+/decl/cultural_info/culture/tajaran
 	name = "Hrararan"
 	description = "Hrarar are the most numerous tajaran ethnicity on Meralar, and were the most heavily represented tajarans in the diplomatic delegations that dealt with humans through the early post-contact years. This led to a fairly entrenched image of the Hrarar as the '\"average\" tajaran among humans and their other interstellar neighbours. Many Hrararan cultures are based on strong traditions and ideals, and the patchwork of nations and city-states that make up their lands often infight on matters of honour and religious one-upmanship."
 	economic_power = 0.9
 	subversive_potential = 1.1
+	restricted_to_species = list(SPECIES_TAJ)
 
 /decl/cultural_info/culture/tajaran/njarirakhan
 	name = "Njarir'Akhani"

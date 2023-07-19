@@ -89,10 +89,10 @@ var/global/list/organ_cache = list()
 		max_damage = min_broken_damage * 2
 	if(iscarbon(owner))
 		var/mob/living/carbon/C = owner
-		species = GLOB.all_species[SPECIES_HUMAN]
+		species = get_species_by_key(SPECIES_HUMAN)
 		if(owner.dna)
 			dna = C.dna.Clone()
-			species = GLOB.all_species[dna.species]
+			species = get_species_by_key(dna.species)
 		else
 			log_debug("[src] at [loc] spawned without a proper DNA.")
 		var/mob/living/carbon/human/H = C
@@ -108,7 +108,7 @@ var/global/list/organ_cache = list()
 					blood_DNA = list()
 				blood_DNA[dna.unique_enzymes] = dna.b_type
 	else
-		species = GLOB.all_species["Human"]
+		species = get_species_by_key(SPECIES_HUMAN)
 
 	handle_organ_mod_special()
 

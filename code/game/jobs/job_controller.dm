@@ -366,7 +366,7 @@ var/global/datum/controller/occupations/job_master
 					permitted = TRUE
 
 				// Check if they're whitelisted for this gear (in alien whitelist? seriously?)
-				if(permitted && G.whitelisted && !is_alien_whitelisted(H, GLOB.all_species[G.whitelisted]))
+				if(permitted && G.whitelisted && !is_alien_whitelisted(H, get_species_by_key(G.whitelisted)))
 					permitted = FALSE
 
 				if(permitted && length(G.available_to_backgrounds))

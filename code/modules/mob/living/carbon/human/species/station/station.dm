@@ -615,7 +615,7 @@
 	if(H.isSynthetic())
 		H.visible_message("<span class='danger'>\The [H] collapses into parts, revealing a solitary diona nymph at the core.</span>")
 
-		H.species = GLOB.all_species[SPECIES_HUMAN] // This is hard-set to default the body to a normal FBP, without changing anything.
+		H.species = get_species_by_key(SPECIES_HUMAN) // This is hard-set to default the body to a normal FBP, without changing anything.
 
 		for(var/obj/item/organ/internal/diona/Org in H.internal_organs) // Remove Nymph organs.
 			qdel(Org)

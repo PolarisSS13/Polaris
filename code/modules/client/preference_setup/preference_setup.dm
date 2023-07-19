@@ -280,7 +280,7 @@
 				. = new_brain
 
 /datum/category_item/player_setup_item/proc/get_min_age()
-	var/datum/species/S = GLOB.all_species[pref.species ? pref.species : "Human"]
+	var/datum/species/S = get_species_by_key(pref.species ? pref.species : SPECIES_HUMAN)
 	if(!is_FBP())
 		return S.min_age // If they're not a robot, we can just use the species var.
 	var/FBP_type = get_FBP_type()
@@ -294,7 +294,7 @@
 	return S.min_age // welp
 
 /datum/category_item/player_setup_item/proc/get_max_age()
-	var/datum/species/S = GLOB.all_species[pref.species ? pref.species : "Human"]
+	var/datum/species/S = get_species_by_key(pref.species ? pref.species : SPECIES_HUMAN)
 	if(!is_FBP())
 		return S.max_age // If they're not a robot, we can just use the species var.
 	var/FBP_type = get_FBP_type()

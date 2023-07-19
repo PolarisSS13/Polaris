@@ -206,11 +206,11 @@
 			to_chat(usr, "<span class='danger'>The station is currently exploding. Joining would go poorly.</span>")
 			return
 
-		if(!is_alien_whitelisted(src, GLOB.all_species[client.prefs.species]))
+		if(!is_alien_whitelisted(src, get_species_by_key(client.prefs.species)))
 			alert(src, "You are currently not whitelisted to play [client.prefs.species].")
 			return 0
 
-		var/datum/species/S = GLOB.all_species[client.prefs.species]
+		var/datum/species/S = get_species_by_key(client.prefs.species)
 		if(!(S.spawn_flags & SPECIES_CAN_JOIN))
 			alert(src,"Your current species, [client.prefs.species], is not available for play on the station.")
 			return 0
@@ -532,7 +532,7 @@
 	var/use_species_name
 	var/datum/species/chosen_species
 	if(client.prefs.species)
-		chosen_species = GLOB.all_species[client.prefs.species]
+		chosen_species = get_species_by_key(client.prefs.species)
 		use_species_name = chosen_species.get_station_variant() //Only used by pariahs atm.
 
 	if(chosen_species && use_species_name)
@@ -611,10 +611,10 @@
 
 /mob/new_player/get_species()
 	if(client.prefs.species)
-		var/datum/species/chosen_species = GLOB.all_species[client.prefs.species]
+		var/datum/species/chosen_species = get_species_by_key(client.prefs.species)
 		if(chosen_species && is_alien_whitelisted(src, chosen_species))
 			return chosen_species
-	return GLOB.all_species[SPECIES_HUMAN]
+	return get_species_by_key(SPECIES_HUMAN)
 
 /mob/new_player/get_gender()
 	if(!client || !client.prefs) ..()

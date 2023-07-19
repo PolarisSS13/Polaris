@@ -189,7 +189,7 @@
 
 	if(Chest.robotic >= 2)
 		visible_message("<span class='warning'>\The [src] shudders slightly, then ejects a cluster of nymphs with a wet slithering noise.</span>")
-		species = GLOB.all_species[SPECIES_HUMAN] // This is hard-set to default the body to a normal FBP, without changing anything.
+		species = get_species_by_key(SPECIES_HUMAN) // This is hard-set to default the body to a normal FBP, without changing anything.
 
 		// Bust it
 		src.death()

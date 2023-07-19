@@ -284,6 +284,7 @@
 	var/list/available_cultural_info
 	var/list/force_cultural_info
 	var/list/default_cultural_info
+
 /datum/species/proc/update_attack_types()
 	unarmed_attacks = list()
 	for(var/u_type in unarmed_types)

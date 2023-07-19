@@ -40,7 +40,7 @@
 /proc/sanitize_name(name, species = SPECIES_HUMAN, robot = 0)
 	var/datum/species/current_species
 	if(species)
-		current_species = GLOB.all_species[species]
+		current_species = get_species_by_key(species)
 
 	return current_species ? current_species.sanitize_name(name, robot) : sanitizeName(name, MAX_NAME_LEN, robot)
 
@@ -48,7 +48,7 @@
 
 	var/datum/species/current_species
 	if(species)
-		current_species = GLOB.all_species[species]
+		current_species = get_species_by_key(species)
 
 	if(!current_species || current_species.name_language == null)
 		if(gender==FEMALE)

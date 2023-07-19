@@ -1,4 +1,5 @@
 /decl/cultural_info/location/skrell
+	restricted_to_species = list(SPECIES_SKRELL)
 
 /decl/cultural_info/location/skrell/QerrValis_QerrBalak
 

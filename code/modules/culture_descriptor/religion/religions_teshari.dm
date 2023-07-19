@@ -1,4 +1,5 @@
 /decl/cultural_info/religion/teshari
+	restricted_to_species = list(SPECIES_TESHARI)
 
 /decl/cultural_info/religion/teshari/PackSpiritualism
 	name = "Teshari Pack Spiritualism"
