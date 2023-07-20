@@ -154,6 +154,7 @@
 	)
 
 	default_emotes = list(
+		/decl/emote/audible/warble,
 		/decl/emote/audible/teshsqueak,
 		/decl/emote/audible/teshchirp,
 		/decl/emote/audible/teshtrill
