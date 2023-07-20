@@ -14,7 +14,6 @@
 		"Android"          = "droid",
 		"Insekt"           = "insekt-Default",
 		"Usagi-II"         = "tall2standard",
-		"Pyralis"          = "Glitterfly-Standard",
 		"Decapod"          = "decapod-Standard",
 		"Pneuma"           = "pneuma-Standard",
 		"Tower"            = "drider-Standard"
@@ -30,7 +29,9 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Cabeiri" = "eyebot-standard"
+		"Drone"    = "drone-standard",
+		"Pyralis"  = "Glitterfly-Standard",
+		"Cabeiri"  = "eyebot-standard"
 	)
 
 /obj/item/robot_module/robot/medical
@@ -55,10 +56,8 @@
 		"Basic"            = "Medbot",
 		"Advanced Droid"   = "droid-medical",
 		"Needles"          = "medicalrobot",
-		"Handy"            = "handy-med",
 		"Insekt"           = "insekt-Med",
 		"Usagi-II"         = "tall2medical",
-		"Pyralis"          = "Glitterfly-Surgeon",
 		"Decapod"          = "decapod-Surgeon",
 		"Pneuma"           = "pneuma-Surgeon",
 		"Tower"            = "drider-Surgeon"
@@ -93,8 +92,10 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Drone"  = "drone-medical",
-		"Eyebot" = "eyebot-medical"
+		"Handy"   = "handy-med",
+		"Drone"   = "drone-surgery",
+		"Eyebot"  = "eyebot-medical",
+		"Pyralis" = "Glitterfly-Surgeon"
 	)
 
 /obj/item/robot_module/robot/medical/surgeon/finalize_emag()
@@ -145,7 +146,6 @@
 		"Needles"          = "medicalrobot",
 		"Insekt"           = "insekt-Med",
 		"Usagi-II"         = "tall2medical",
-		"Pyralis"          = "Glitterfly-Crisis",
 		"Decapod"          = "decapod-Crisis",
 		"Pneuma"           = "pneuma-Crisis",
 		"Tower"            = "drider-Crisis"
@@ -174,8 +174,10 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Drone"  = "drone-medical",
-		"Eyebot" = "eyebot-medical"
+		"Drone"           = "drone-medical",
+		"Chemistry Drone" = "drone-chemistry",
+		"Eyebot"          = "eyebot-medical",
+		"Pyralis"         = "Glitterfly-Crisis"
 	)
 
 /obj/item/robot_module/robot/medical/crisis/finalize_emag()
@@ -233,9 +235,7 @@
 		"Landmate"           = "landmate",
 		"Landmate - Treaded" = "engiborg+tread",
 		"Treadwell"          = "treadwell",
-		"Handy"              = "handy-engineer",
 		"Usagi-II"           = "tall2engineer",
-		"Pyralis"            = "Glitterfly-Engineering",
 		"Decapod"            = "decapod-Engineering",
 		"Pneuma"             = "pneuma-Engineering",
 		"Tower"              = "drider-Engineering"
@@ -322,8 +322,10 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Drone"  = "drone-engineer",
-		"Eyebot" = "eyebot-engineering"
+		"Handy"   = "handy-engineer",
+		"Drone"   = "drone-engineer",
+		"Eyebot"  = "eyebot-engineering",
+		"Pyralis" = "Glitterfly-Engineering",
 	)
 
 /obj/item/robot_module/robot/security
@@ -355,10 +357,10 @@
 		"XI-GUS"             = "spidersec",
 		"XI-ALP"             = "heavySec",
 		"Basic"              = "secborg",
+		"Hedge Knight"       = "Security",
 		"Black Knight"       = "securityrobot",
 		"Insekt"             = "insekt-Sec",
 		"Usagi-II"           = "tall2security",
-		"Pyralis"            = "Glitterfly-Security",
 		"Decapod"            = "decapod-Security",
 		"Pneuma"             = "pneuma-Security",
 		"Tower"              = "drider-Security"
@@ -368,8 +370,9 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Drone"  = "drone-sec",
-		"Eyebot" = "eyebot-security"
+		"Pyralis" = "Glitterfly-Security",
+		"Drone"   = "drone-sec",
+		"Eyebot"  = "eyebot-security"
 	)
 
 /obj/item/robot_module/robot/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
@@ -401,8 +404,8 @@
 		"Basic"            = "JanBot2",
 		"Mopbot"           = "janitorrobot",
 		"Mop Gear Rex"     = "mopgearrex",
+		"Usagi"            = "tallblue",
 		"Usagi-II"         = "tall2janitor",
-		"Pyralis"          = "Glitterfly-Janitor",
 		"Decapod"          = "decapod-Janitor",
 		"Pneuma"           = "pneuma-Janitor",
 		"Tower"            = "drider-Janitor"
@@ -419,7 +422,9 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Cabeiri" = "eyebot-janitor",
+		"Drone"   = "drone-janitor",
+		"Pyralis" = "Glitterfly-Janitor",
+		"Cabeiri" = "eyebot-janitor"
 	)
 
 /obj/item/robot_module/robot/janitor/finalize_emag()
@@ -473,9 +478,9 @@
 		"Standard"         = "Service2",
 		"Waitress"         = "Service",
 		"Bro"              = "Brobot",
+		"Usagi"            = "tall2clown",
 		"Rich"             = "maximillion",
 		"Usagi-II"         = "tall2service",
-		"Pyralis"          = "Glitterfly-Service",
 		"Decapod"          = "decapod-Service",
 		"Pneuma"           = "pneuma-Service",
 		"Tower"            = "drider-Service"
@@ -503,6 +508,7 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
+		"Pyralis"           = "Glitterfly-Service",
 		"Eyebot"            = "eyebot-standard",
 		"Service Drone"     = "drone-service",
 		"Hydroponics Drone" = "drone-hydro"
@@ -541,10 +547,10 @@
 		"Rich"             = "maximillion",
 		"Default"          = "Service2",
 		"Usagi-II"         = "tall2service",
-		"Pyralis"          = "Glitterfly-Clerical",
 		"Decapod"          = "decapod-Clerical",
 		"Pneuma"           = "pneuma-Clerical",
-		"Tower"            = "drider-Clerical"
+		"Tower"            = "drider-Clerical",
+		"Hedge"            = "Hydrobot"
 	)
 	modules = list(
 		/obj/item/pen/robopen,
@@ -561,8 +567,11 @@
 	can_be_pushed = TRUE
 	sprites = list(
 		"Eyebot"            = "eyebot-standard",
+		"Drone"             = "drone-blu",
 		"Service Drone"     = "drone-service",
-		"Hydroponics Drone" = "drone-hydro"
+		"Gravekeeper"       = "drone-gravekeeper",
+		"Hydroponics Drone" = "drone-hydro",
+		"Pyralis"           = "Glitterfly-Clerical"
 	)
 
 /obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
@@ -588,7 +597,6 @@
 		"Advanced Droid"    = "droid-miner",
 		"Treadhead"         = "Miner",
 		"Usagi-II"          = "tall2miner",
-		"Pyralis"           = "Glitterfly-Miner",
 		"Decapod"           = "decapod-Miner",
 		"Pneuma"            = "pneuma-Miner",
 		"Tower"             = "drider-Miner"
@@ -609,7 +617,9 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Cabeiri" = "eyebot-miner"
+		"Drone"   = "drone-miner",
+		"Cabeiri" = "eyebot-miner",
+		"Pyralis" = "Glitterfly-Miner"
 	)
 
 /obj/item/robot_module/robot/research
@@ -622,10 +632,8 @@
 		"WTDove"     = "whitespider",
 		"WTOperator" = "sleekscience",
 		"Droid"      = "droid-science",
-		"Handy"      = "handy-science",
 		"Insekt"     = "insekt-Sci",
 		"Usagi-II"   = "tall2peace",
-		"Pyralis"    = "Glitterfly-Research",
 		"Decapod"    = "decapod-Research",
 		"Pneuma"     = "pneuma-Research",
 		"Tower"      = "drider-Research"
@@ -668,6 +676,9 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
+		"Handy"   = "handy-science",
+		"Drone"   = "drone-science",
+		"Pyralis" = "Glitterfly-Research",
 		"Cabeiri" = "eyebot-science"
 	)
 
@@ -712,16 +723,11 @@
 	)
 	emag = /obj/item/gun/energy/lasercannon/mounted
 
-/obj/item/robot_module/robot/security/combat/flying
-	module_category = ROBOT_MODULE_TYPE_FLYING
-	can_be_pushed = TRUE
-	sprites = list(
-		"Cabeiri" = "eyebot-standard"
-	)
-
 /* Drones */
 /obj/item/robot_module/drone
 	name = "drone module"
+	display_name = "Drone"
+	sprites = list("Drone" = "repairbot")
 	unavailable_by_default = TRUE
 	hide_on_manifest = TRUE
 	no_slip = TRUE
@@ -800,7 +806,9 @@
 
 /obj/item/robot_module/drone/construction
 	name = "construction drone module"
+	display_name = "Construction Drone"
 	hide_on_manifest = TRUE
+	sprites = list("Drone" = "constructiondrone")
 	channels = list("Engineering" = 1)
 	languages = list()
 
@@ -815,8 +823,10 @@
 
 /obj/item/robot_module/drone/mining
 	name = "miner drone module"
+	display_name = "Mining Drone"
 	channels = list("Supply" = 1)
 	networks = list(NETWORK_MINE)
+	sprites = list("Drone" = "miningdrone")
 	modules = list(
 		/obj/item/borg/sight/material,
 		/obj/item/pickaxe/borgdrill,

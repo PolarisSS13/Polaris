@@ -108,6 +108,7 @@
 			return TRUE
 		if(user.unEquip(W, src))
 			src.cell = W
+			W.forceMove(src)
 			to_chat(user, SPAN_NOTICE("You insert the cell!"))
 		return TRUE
 
@@ -205,11 +206,13 @@
 		if(!user.unEquip(W, src))
 			return
 		src.flash2 = W
+		W.forceMove(src)
 		to_chat(user, SPAN_NOTICE("You insert the flash into the eye socket!"))
 	else
 		if(!user.unEquip(W, src))
 			return
 		src.flash1 = W
+		W.forceMove(src)
 		to_chat(user, SPAN_NOTICE("You insert the flash into the eye socket!"))
 
 

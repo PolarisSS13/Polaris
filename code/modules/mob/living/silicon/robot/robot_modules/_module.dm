@@ -154,11 +154,22 @@
 		R.radio.recalculateChannels()
 	R.choose_icon(0, R.set_module_sprites(list("Default" = "robot")))
 
+// This can qdel before init if spawned outside a mob, so
+// Destroy() needs to be a bit nuanced to avoid runtimes.
 /obj/item/robot_module/Destroy()
-	QDEL_NULL_LIST(modules)
-	QDEL_NULL_LIST(synths)
-	QDEL_NULL(emag)
-	QDEL_NULL(jetpack)
+	for(var/datum/thing in modules)
+		qdel(thing)
+// Robot icons unit test needs the module types list.
+#ifndef UNIT_TEST
+	modules = null
+#endif
+	for(var/datum/thing in synths)
+		qdel(thing)
+	synths = null
+	if(istype(emag))
+		QDEL_NULL(emag)
+	if(istype(jetpack))
+		QDEL_NULL(jetpack)
 	return ..()
 
 /obj/item/robot_module/emp_act(severity)

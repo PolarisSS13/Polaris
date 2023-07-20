@@ -1,7 +1,7 @@
 /mob/living/silicon/robot/platform
 	name = "support platform"
 	desc = "A large quadrupedal AI platform, colloquially known as a 'think-tank' due to the flexible onboard intelligence."
-	icon = 'icons/mob/robots_thinktank.dmi'
+	icon = 'icons/mob/robots/robots_platform.dmi'
 	icon_state = "tachi"
 	color = "#68a2f2"
 

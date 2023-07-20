@@ -14,6 +14,16 @@
 	var/created_name = ""
 	var/product = /mob/living/silicon/robot
 
+/obj/item/robot_parts/frame/examine(mob/user)
+	. = ..()
+	if(check_completion())
+		. += SPAN_NOTICE("It is ready to receive a controlling intelligence.")
+	else
+		for(var/part in required_parts)
+			if(!parts[part])
+				var/obj/item/part_type = part
+				. += SPAN_WARNING("It is missing \a [initial(part_type.name)]")
+
 /obj/item/robot_parts/frame/update_model_info(var/model)
 	return FALSE
 
@@ -59,6 +69,7 @@
 			return
 		if(part.can_install(user) && user.unEquip(W, src))
 			parts[part.bp_tag] = part
+			part.forceMove(src)
 			update_icon()
 
 	// Install an MMI/brain.

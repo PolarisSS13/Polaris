@@ -1,5 +1,6 @@
 /obj/item/robot_module/drone/swarm
 	name = "swarm drone module"
+	display_name = "Swarm Drone"
 	unavailable_by_default = TRUE
 	modules = list(
 		/obj/item/rcd/electric/mounted/borg/swarm,

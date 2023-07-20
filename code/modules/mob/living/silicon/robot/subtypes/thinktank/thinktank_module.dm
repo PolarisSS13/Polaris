@@ -1,6 +1,5 @@
 /obj/item/robot_module/robot/platform
 
-	hide_on_manifest = TRUE
 	module_category = ROBOT_MODULE_TYPE_PLATFORM
 	unavailable_by_default = TRUE
 
@@ -8,7 +7,7 @@
 	var/base_color =      COLOR_WHITE
 	var/eye_color =       COLOR_BEIGE
 	var/armor_color =    "#68a2f2"
-	var/user_icon =       'icons/mob/robots_thinktank.dmi'
+	var/user_icon =       'icons/mob/robots/robots_platform.dmi'
 	var/user_icon_state = "tachi"
 
 	var/list/decals

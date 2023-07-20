@@ -2,6 +2,7 @@
 
 /obj/item/robot_module/robot/syndicate
 	name = "illegal robot module"
+	display_name = "Subverted"
 	hide_on_manifest = TRUE
 	unavailable_by_default = TRUE
 	languages = list(
@@ -22,13 +23,12 @@
 					LANGUAGE_ZADDAT = 0
 					)
 	sprites = list(
-		"Cerberus" = "syndie_bloodhound",
+		"Cerberus"           = "syndie_bloodhound",
 		"Cerberus - Treaded" = "syndie_treadhound",
-		"Ares" = "squats",
-		"Telemachus" = "toiletbotantag",
-		"WTOperator" = "hosborg",
-		"XI-GUS" = "spidersyndi",
-		"XI-ALP" = "syndi-heavy"
+		"Ares"               = "squats",
+		"Telemachus"         = "toiletbotantag",
+		"XI-GUS"             = "spidersyndi",
+		"XI-ALP"             = "syndi-heavy"
 	)
 	universal_equipment = list(
 		/obj/item/flash/robot,
