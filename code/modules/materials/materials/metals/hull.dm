@@ -7,8 +7,8 @@
 	icon_reinf = "reinf_mesh"
 	icon_colour = "#666677"
 
-/datum/material/steel/hull/place_sheet(var/turf/target) //Deconstructed into normal steel sheets.
-	new /obj/item/stack/material/steel(target)
+/datum/material/steel/hull/get_place_stack_type() //Deconstructed into normal steel sheets.
+	return /obj/item/stack/material/steel
 
 /datum/material/plasteel/hull
 	name = MAT_PLASTEELHULL
@@ -19,8 +19,8 @@
 	icon_colour = "#777788"
 	explosion_resistance = 40
 
-/datum/material/plasteel/hull/place_sheet(var/turf/target) //Deconstructed into normal plasteel sheets.
-	new /obj/item/stack/material/plasteel(target)
+/datum/material/plasteel/hull/get_place_stack_type() //Deconstructed into normal plasteel sheets.
+	return /obj/item/stack/material/plasteel
 
 /datum/material/durasteel/hull //The 'Hardball' of starship hulls.
 	name = MAT_DURASTEELHULL
@@ -31,8 +31,8 @@
 	explosion_resistance = 90
 	reflectivity = 0.9
 
-/datum/material/durasteel/hull/place_sheet(var/turf/target) //Deconstructed into normal durasteel sheets.
-	new /obj/item/stack/material/durasteel(target)
+/datum/material/durasteel/hull/get_place_stack_type() //Deconstructed into normal durasteel sheets.
+	return /obj/item/stack/material/durasteel
 
 /datum/material/titanium/hull
 	name = MAT_TITANIUMHULL
@@ -40,8 +40,8 @@
 	icon_base = "hull"
 	icon_reinf = "reinf_mesh"
 
-/datum/material/titanium/hull/place_sheet(var/turf/target) //Deconstructed into normal titanium sheets.
-	new /obj/item/stack/material/titanium(target)
+/datum/material/titanium/hull/get_place_stack_type() //Deconstructed into normal titanium sheets.
+	return /obj/item/stack/material/titanium
 
 /datum/material/morphium/hull
 	name = MAT_MORPHIUMHULL
@@ -49,5 +49,5 @@
 	icon_base = "hull"
 	icon_reinf = "reinf_mesh"
 
-/datum/material/morphium/hull/place_sheet(var/turf/target)
-	new /obj/item/stack/material/morphium(target)
+/datum/material/morphium/hull/get_place_stack_type()
+	return /obj/item/stack/material/morphium

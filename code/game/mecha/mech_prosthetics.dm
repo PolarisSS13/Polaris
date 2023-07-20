@@ -208,7 +208,7 @@
 					S.use(1)
 					count++
 				to_chat(user, "You insert [count] [sname] into the fabricator.")
-				update_busy()
+				refresh_queue()
 		else
 			to_chat(user, "The fabricator cannot hold more [sname].")
 
@@ -235,7 +235,7 @@
 		if(1)
 			visible_message("[bicon(src)] <b>[src]</b> beeps: \"No records in User DB\"")
 
-/obj/machinery/pros_fabricator/proc/update_busy()
+/obj/machinery/pros_fabricator/refresh_queue()
 	if(queue.len)
 		if(can_build(queue[1]))
 			busy = 1
@@ -250,13 +250,13 @@
 /obj/machinery/pros_fabricator/proc/add_to_queue(var/index)
 	var/datum/design/D = files.known_designs[index]
 	queue += D
-	update_busy()
+	refresh_queue()
 
 /obj/machinery/pros_fabricator/proc/remove_from_queue(var/index)
 	if(index == 1)
 		progress = 0
 	queue.Cut(index, index + 1)
-	update_busy()
+	refresh_queue()
 
 /obj/machinery/pros_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
@@ -340,23 +340,3 @@
 		files.RefreshResearch()
 		sync_message = "Sync complete."
 	update_categories()
-
-/obj/machinery/pros_fabricator/proc/eject_materials_partial(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
-	var/recursive = amount == -1 ? 1 : 0
-	var/matstring = lowertext(material)
-	var/datum/material/M = get_material_by_name(matstring)
-
-	if(recursive && materials[matstring] >= M.perunit)
-		eject_material_of_type(matstring)
-		return
-
-	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
-	if(amount <= 0)
-		amount = S.max_amount
-	var/ejected = min(round(materials[matstring] / S.perunit), amount)
-	S.amount = min(ejected, amount)
-	if(S.amount <= 0)
-		qdel(S)
-		return
-	materials[matstring] -= ejected * S.perunit
-	update_busy()

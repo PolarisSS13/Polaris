@@ -39,7 +39,6 @@
 	for(var/Name in name_to_material)
 		if(Name in materials)
 			continue
-
 		materials[Name] = 0
 		storage_capacity[Name] = 0
 
