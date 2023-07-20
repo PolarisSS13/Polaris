@@ -3,22 +3,21 @@
 	display_name = "Standard"
 	sprites = list(
 		"M-USE NanoTrasen" = "robot",
-		"Cabeiri" = "eyebot-standard",
-		"Haruka" = "marinaSD",
-		"Usagi" = "tallflower",
-		"Telemachus" = "toiletbot",
-		"WTOperator" = "sleekstandard",
-		"WTOmni" = "omoikane",
-		"XI-GUS" = "spider",
-		"XI-ALP" = "heavyStandard",
-		"Basic" = "robot_old",
-		"Android" = "droid",
-		"Insekt" = "insekt-Default",
-		"Usagi-II" = "tall2standard",
-		"Pyralis" = "Glitterfly-Standard",
-		"Decapod" = "decapod-Standard",
-		"Pneuma" = "pneuma-Standard",
-		"Tower" = "drider-Standard"
+		"Haruka"           = "marinaSD",
+		"Usagi"            = "tallflower",
+		"Telemachus"       = "toiletbot",
+		"WTOperator"       = "sleekstandard",
+		"WTOmni"           = "omoikane",
+		"XI-GUS"           = "spider",
+		"XI-ALP"           = "heavyStandard",
+		"Basic"            = "robot_old",
+		"Android"          = "droid",
+		"Insekt"           = "insekt-Default",
+		"Usagi-II"         = "tall2standard",
+		"Pyralis"          = "Glitterfly-Standard",
+		"Decapod"          = "decapod-Standard",
+		"Pneuma"           = "pneuma-Standard",
+		"Tower"            = "drider-Standard"
 	)
 	modules = list(
 		/obj/item/melee/baton/loaded,
@@ -26,6 +25,13 @@
 		/obj/item/healthanalyzer
 	)
 	emag = /obj/item/melee/energy/sword
+
+/obj/item/robot_module/robot/standard/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Cabeiri" = "eyebot-standard"
+	)
 
 /obj/item/robot_module/robot/medical
 	name = "medical robot module"
@@ -40,22 +46,22 @@
 	display_name = "Surgeon"
 	sprites = list(
 		"M-USE NanoTrasen" = "robotMedi",
-		"Haruka" = "marinaMD",
-		"Minako" = "arachne",
-		"Usagi" = "tallwhite",
-		"Telemachus" = "toiletbotsurgeon",
-		"WTOperator" = "sleekcmo",
-		"XI-ALP" = "heavyMed",
-		"Basic" = "Medbot",
-		"Advanced Droid" = "droid-medical",
-		"Needles" = "medicalrobot",
-		"Handy" = "handy-med",
-		"Insekt" = "insekt-Med",
-		"Usagi-II" = "tall2medical",
-		"Pyralis" = "Glitterfly-Surgeon",
-		"Decapod" = "decapod-Surgeon",
-		"Pneuma" = "pneuma-Surgeon",
-		"Tower" = "drider-Surgeon"
+		"Haruka"           = "marinaMD",
+		"Minako"           = "arachne",
+		"Usagi"            = "tallwhite",
+		"Telemachus"       = "toiletbotsurgeon",
+		"WTOperator"       = "sleekcmo",
+		"XI-ALP"           = "heavyMed",
+		"Basic"            = "Medbot",
+		"Advanced Droid"   = "droid-medical",
+		"Needles"          = "medicalrobot",
+		"Handy"            = "handy-med",
+		"Insekt"           = "insekt-Med",
+		"Usagi-II"         = "tall2medical",
+		"Pyralis"          = "Glitterfly-Surgeon",
+		"Decapod"          = "decapod-Surgeon",
+		"Pneuma"           = "pneuma-Surgeon",
+		"Tower"            = "drider-Surgeon"
 	)
 	modules = list(
 		/obj/item/healthanalyzer,
@@ -81,6 +87,14 @@
 	emag = /obj/item/reagent_containers/spray
 	synths = list(
 		/datum/matter_synth/medicine = 10000
+	)
+
+/obj/item/robot_module/robot/medical/surgeon/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Drone"  = "drone-medical",
+		"Eyebot" = "eyebot-medical"
 	)
 
 /obj/item/robot_module/robot/medical/surgeon/finalize_emag()
@@ -120,21 +134,21 @@
 	display_name = "Crisis"
 	sprites = list(
 		"M-USE NanoTrasen" = "robotMedi",
-		"Haruka" = "marinaMD",
-		"Minako" = "arachne",
-		"Usagi" = "tallwhite",
-		"Telemachus" = "toiletbotmedical",
-		"WTOperator" = "sleekmedic",
-		"XI-ALP" = "heavyMed",
-		"Basic" = "Medbot",
-		"Advanced Droid" = "droid-medical",
-		"Needles" = "medicalrobot",
-		"Insekt" = "insekt-Med",
-		"Usagi-II" = "tall2medical",
-		"Pyralis" = "Glitterfly-Crisis",
-		"Decapod" = "decapod-Crisis",
-		"Pneuma" = "pneuma-Crisis",
-		"Tower" = "drider-Crisis"
+		"Haruka"           = "marinaMD",
+		"Minako"           = "arachne",
+		"Usagi"            = "tallwhite",
+		"Telemachus"       = "toiletbotmedical",
+		"WTOperator"       = "sleekmedic",
+		"XI-ALP"           = "heavyMed",
+		"Basic"            = "Medbot",
+		"Advanced Droid"   = "droid-medical",
+		"Needles"          = "medicalrobot",
+		"Insekt"           = "insekt-Med",
+		"Usagi-II"         = "tall2medical",
+		"Pyralis"          = "Glitterfly-Crisis",
+		"Decapod"          = "decapod-Crisis",
+		"Pneuma"           = "pneuma-Crisis",
+		"Tower"            = "drider-Crisis"
 	)
 	modules = list(
 		/obj/item/healthanalyzer,
@@ -154,6 +168,14 @@
 	emag = /obj/item/reagent_containers/spray
 	synths = list(
 		/datum/matter_synth/medicine = 15000
+	)
+
+/obj/item/robot_module/robot/medical/crisis/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Drone"  = "drone-medical",
+		"Eyebot" = "eyebot-medical"
 	)
 
 /obj/item/robot_module/robot/medical/crisis/finalize_emag()
@@ -199,24 +221,24 @@
 	networks = list(NETWORK_ENGINEERING)
 	subsystems = list(/mob/living/silicon/proc/subsystem_power_monitor)
 	sprites = list(
-		"M-USE NanoTrasen" = "robotEngi",
-		"Haruka" = "marinaENG",
-		"Usagi" = "tallyellow",
-		"Telemachus" = "toiletbotengineering",
-		"WTOperator" = "sleekce",
-		"XI-GUS" = "spidereng",
-		"XI-ALP" = "heavyEng",
-		"Basic" = "Engineering",
-		"Antique" = "engineerrobot",
-		"Landmate" = "landmate",
+		"M-USE NanoTrasen"   = "robotEngi",
+		"Haruka"             = "marinaENG",
+		"Usagi"              = "tallyellow",
+		"Telemachus"         = "toiletbotengineering",
+		"WTOperator"         = "sleekce",
+		"XI-GUS"             = "spidereng",
+		"XI-ALP"             = "heavyEng",
+		"Basic"              = "Engineering",
+		"Antique"            = "engineerrobot",
+		"Landmate"           = "landmate",
 		"Landmate - Treaded" = "engiborg+tread",
-		"Treadwell" = "treadwell",
-		"Handy" = "handy-engineer",
-		"Usagi-II" = "tall2engineer",
-		"Pyralis" = "Glitterfly-Engineering",
-		"Decapod" = "decapod-Engineering",
-		"Pneuma" = "pneuma-Engineering",
-		"Tower" = "drider-Engineering"
+		"Treadwell"          = "treadwell",
+		"Handy"              = "handy-engineer",
+		"Usagi-II"           = "tall2engineer",
+		"Pyralis"            = "Glitterfly-Engineering",
+		"Decapod"            = "decapod-Engineering",
+		"Pneuma"             = "pneuma-Engineering",
+		"Tower"              = "drider-Engineering"
 	)
 	modules = list(
 		/obj/item/borg/sight/meson,
@@ -262,7 +284,7 @@
 		/datum/matter_synth/wire
 	)
 
-/obj/item/robot_module/robot/engineering/general/finalize_synths()
+/obj/item/robot_module/robot/engineering/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/metal/metal =       locate() in synths
 	var/datum/matter_synth/glass/glass =       locate() in synths
@@ -296,6 +318,14 @@
 	var/obj/item/stack/material/cyborg/plastic/PL = locate() in modules
 	PL.synths = list(plastic)
 
+/obj/item/robot_module/robot/engineering/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Drone"  = "drone-engineer",
+		"Eyebot" = "eyebot-engineering"
+	)
+
 /obj/item/robot_module/robot/security
 	name = "security robot module"
 	display_name = "Security"
@@ -304,27 +334,6 @@
 	subsystems = list(/mob/living/silicon/proc/subsystem_crew_monitor)
 	can_be_pushed = 0
 	supported_upgrades = list(/obj/item/borg/upgrade/tasercooler)
-
-/obj/item/robot_module/robot/security/general
-	sprites = list(
-		"M-USE NanoTrasen" = "robotSecy",
-		"Cerberus" = "bloodhound",
-		"Cerberus - Treaded" = "treadhound",
-		"Haruka" = "marinaSC",
-		"Usagi" = "tallred",
-		"Telemachus" = "toiletbotsecurity",
-		"WTOperator" = "sleeksecurity",
-		"XI-GUS" = "spidersec",
-		"XI-ALP" = "heavySec",
-		"Basic" = "secborg",
-		"Black Knight" = "securityrobot",
-		"Insekt" = "insekt-Sec",
-		"Usagi-II" = "tall2security",
-		"Pyralis" = "Glitterfly-Security",
-		"Decapod" = "decapod-Security",
-		"Pneuma" = "pneuma-Security",
-		"Tower" = "drider-Security"
-	)
 	modules = list(
 		/obj/item/handcuffs/cyborg,
 		/obj/item/melee/baton/robot,
@@ -335,6 +344,33 @@
 		/obj/item/gripper/security
 	)
 	emag = /obj/item/gun/energy/laser/mounted
+	sprites = list(
+		"M-USE NanoTrasen"   = "robotSecy",
+		"Cerberus"           = "bloodhound",
+		"Cerberus - Treaded" = "treadhound",
+		"Haruka"             = "marinaSC",
+		"Usagi"              = "tallred",
+		"Telemachus"         = "toiletbotsecurity",
+		"WTOperator"         = "sleeksecurity",
+		"XI-GUS"             = "spidersec",
+		"XI-ALP"             = "heavySec",
+		"Basic"              = "secborg",
+		"Black Knight"       = "securityrobot",
+		"Insekt"             = "insekt-Sec",
+		"Usagi-II"           = "tall2security",
+		"Pyralis"            = "Glitterfly-Security",
+		"Decapod"            = "decapod-Security",
+		"Pneuma"             = "pneuma-Security",
+		"Tower"              = "drider-Security"
+	)
+
+/obj/item/robot_module/robot/security/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Drone"  = "drone-sec",
+		"Eyebot" = "eyebot-security"
+	)
 
 /obj/item/robot_module/robot/security/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/flash/F = locate() in src.modules
@@ -357,20 +393,19 @@
 	channels = list("Service" = 1)
 	sprites = list(
 		"M-USE NanoTrasen" = "robotJani",
-		"Arachne" = "crawler",
-		"Cabeiri" = "eyebot-janitor",
-		"Haruka" = "marinaJN",
-		"Telemachus" = "toiletbotjanitor",
-		"WTOperator" = "sleekjanitor",
-		"XI-ALP" = "heavyRes",
-		"Basic" = "JanBot2",
-		"Mopbot"  = "janitorrobot",
-		"Mop Gear Rex" = "mopgearrex",
-		"Usagi-II" = "tall2janitor",
-		"Pyralis" = "Glitterfly-Janitor",
-		"Decapod" = "decapod-Janitor",
-		"Pneuma" = "pneuma-Janitor",
-		"Tower" = "drider-Janitor"
+		"Arachne"          = "crawler",
+		"Haruka"           = "marinaJN",
+		"Telemachus"       = "toiletbotjanitor",
+		"WTOperator"       = "sleekjanitor",
+		"XI-ALP"           = "heavyRes",
+		"Basic"            = "JanBot2",
+		"Mopbot"           = "janitorrobot",
+		"Mop Gear Rex"     = "mopgearrex",
+		"Usagi-II"         = "tall2janitor",
+		"Pyralis"          = "Glitterfly-Janitor",
+		"Decapod"          = "decapod-Janitor",
+		"Pneuma"           = "pneuma-Janitor",
+		"Tower"            = "drider-Janitor"
 	)
 	modules = list(
 		/obj/item/soap/nanotrasen,
@@ -379,6 +414,13 @@
 		/obj/item/lightreplacer
 	)
 	emag = /obj/item/reagent_containers/spray
+
+/obj/item/robot_module/robot/janitor/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Cabeiri" = "eyebot-janitor",
+	)
 
 /obj/item/robot_module/robot/janitor/finalize_emag()
 	. = ..()
@@ -394,7 +436,6 @@
 
 /obj/item/robot_module/robot/clerical
 	name = "service robot module"
-	display_name = "Service"
 	channels = list(
 		"Service" = 1,
 		"Command" = 1
@@ -421,24 +462,23 @@
 	display_name = "Butler"
 	sprites = list(
 		"M-USE NanoTrasen" = "robotServ",
-		"Cabeiri" = "eyebot-standard",
-		"Haruka" = "marinaSV",
-		"Michiru" = "maidbot",
-		"Usagi" = "tallgreen",
-		"Telemachus" = "toiletbot",
-		"WTOperator" = "sleekservice",
-		"WTOmni" = "omoikane",
-		"XI-GUS" = "spider",
-		"XI-ALP" = "heavyServ",
-		"Standard" = "Service2",
-		"Waitress" = "Service",
-		"Bro" = "Brobot",
-		"Rich" = "maximillion",
-		"Usagi-II" = "tall2service",
-		"Pyralis" = "Glitterfly-Service",
-		"Decapod" = "decapod-Service",
-		"Pneuma" = "pneuma-Service",
-		"Tower" = "drider-Service"
+		"Haruka"           = "marinaSV",
+		"Michiru"          = "maidbot",
+		"Usagi"            = "tallgreen",
+		"Telemachus"       = "toiletbot",
+		"WTOperator"       = "sleekservice",
+		"WTOmni"           = "omoikane",
+		"XI-GUS"           = "spider",
+		"XI-ALP"           = "heavyServ",
+		"Standard"         = "Service2",
+		"Waitress"         = "Service",
+		"Bro"              = "Brobot",
+		"Rich"             = "maximillion",
+		"Usagi-II"         = "tall2service",
+		"Pyralis"          = "Glitterfly-Service",
+		"Decapod"          = "decapod-Service",
+		"Pneuma"           = "pneuma-Service",
+		"Tower"            = "drider-Service"
 	)
 	modules = list(
 		/obj/item/gripper/service,
@@ -458,6 +498,15 @@
 		/obj/item/rsf
 	)
 	emag = /obj/item/reagent_containers/food/drinks/bottle/small/beer
+
+/obj/item/robot_module/robot/clerical/butler/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Eyebot"            = "eyebot-standard",
+		"Service Drone"     = "drone-service",
+		"Hydroponics Drone" = "drone-hydro"
+	)
 
 /obj/item/robot_module/robot/clerical/butler/finalize_emag()
 	. = ..()
@@ -480,23 +529,22 @@
 	display_name = "Clerical"
 	sprites = list(
 		"M-USE NanoTrasen" = "robotCler",
-		"Cabeiri" = "eyebot-standard",
-		"Haruka" = "marinaSV",
-		"Usagi" = "tallgreen",
-		"Telemachus" = "toiletbot",
-		"WTOperator" = "sleekclerical",
-		"WTOmni" = "omoikane",
-		"XI-GUS" = "spidercom",
-		"XI-ALP" = "heavyServ",
-		"Waitress" = "Service",
-		"Bro" = "Brobot",
-		"Rich" = "maximillion",
-		"Default" = "Service2",
-		"Usagi-II" = "tall2service",
-		"Pyralis" = "Glitterfly-Clerical",
-		"Decapod" = "decapod-Clerical",
-		"Pneuma" = "pneuma-Clerical",
-		"Tower" = "drider-Clerical"
+		"Haruka"           = "marinaSV",
+		"Usagi"            = "tallgreen",
+		"Telemachus"       = "toiletbot",
+		"WTOperator"       = "sleekclerical",
+		"WTOmni"           = "omoikane",
+		"XI-GUS"           = "spidercom",
+		"XI-ALP"           = "heavyServ",
+		"Waitress"         = "Service",
+		"Bro"              = "Brobot",
+		"Rich"             = "maximillion",
+		"Default"          = "Service2",
+		"Usagi-II"         = "tall2service",
+		"Pyralis"          = "Glitterfly-Clerical",
+		"Decapod"          = "decapod-Clerical",
+		"Pneuma"           = "pneuma-Clerical",
+		"Tower"            = "drider-Clerical"
 	)
 	modules = list(
 		/obj/item/pen/robopen,
@@ -507,6 +555,15 @@
 		/obj/item/stamp/denied
 	)
 	emag = /obj/item/pen/chameleon
+
+/obj/item/robot_module/robot/clerical/general/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Eyebot"            = "eyebot-standard",
+		"Service Drone"     = "drone-service",
+		"Hydroponics Drone" = "drone-hydro"
+	)
 
 /obj/item/robot_module/general/butler/respawn_consumable(var/mob/living/silicon/robot/R, var/amount)
 	var/obj/item/reagent_containers/food/condiment/enzyme/E = locate() in src.modules
@@ -522,20 +579,19 @@
 	networks = list(NETWORK_MINE)
 	sprites = list(
 		"NM-USE NanoTrasen" = "robotMine",
-		"Cabeiri" = "eyebot-miner",
-		"Haruka" = "marinaMN",
-		"Telemachus" = "toiletbotminer",
-		"WTOperator" = "sleekminer",
-		"XI-GUS" = "spidermining",
-		"XI-ALP" = "heavyMiner",
-		"Basic" = "Miner_old",
-		"Advanced Droid" = "droid-miner",
-		"Treadhead" = "Miner",
-		"Usagi-II" = "tall2miner",
-		"Pyralis" = "Glitterfly-Miner",
-		"Decapod" = "decapod-Miner",
-		"Pneuma" = "pneuma-Miner",
-		"Tower" = "drider-Miner"
+		"Haruka"            = "marinaMN",
+		"Telemachus"        = "toiletbotminer",
+		"WTOperator"        = "sleekminer",
+		"XI-GUS"            = "spidermining",
+		"XI-ALP"            = "heavyMiner",
+		"Basic"             = "Miner_old",
+		"Advanced Droid"    = "droid-miner",
+		"Treadhead"         = "Miner",
+		"Usagi-II"          = "tall2miner",
+		"Pyralis"           = "Glitterfly-Miner",
+		"Decapod"           = "decapod-Miner",
+		"Pneuma"            = "pneuma-Miner",
+		"Tower"             = "drider-Miner"
 	)
 	modules = list(
 		/obj/item/borg/sight/material,
@@ -549,24 +605,30 @@
 	)
 	emag = /obj/item/pickaxe/diamonddrill
 
+/obj/item/robot_module/robot/miner/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Cabeiri" = "eyebot-miner"
+	)
+
 /obj/item/robot_module/robot/research
 	name = "research module"
 	display_name = "Research"
 	channels = list("Science" = 1)
 	sprites = list(
-		"L'Ouef" = "peaceborg",
-		"Cabeiri" = "eyebot-science",
-		"Haruka" = "marinaSCI",
-		"WTDove" = "whitespider",
+		"L'Ouef"     = "peaceborg",
+		"Haruka"     = "marinaSCI",
+		"WTDove"     = "whitespider",
 		"WTOperator" = "sleekscience",
-		"Droid" = "droid-science",
-		"Handy" = "handy-science",
-		"Insekt" = "insekt-Sci",
-		"Usagi-II" = "tall2peace",
-		"Pyralis" = "Glitterfly-Research",
-		"Decapod" = "decapod-Research",
-		"Pneuma" = "pneuma-Research",
-		"Tower" = "drider-Research"
+		"Droid"      = "droid-science",
+		"Handy"      = "handy-science",
+		"Insekt"     = "insekt-Sci",
+		"Usagi-II"   = "tall2peace",
+		"Pyralis"    = "Glitterfly-Research",
+		"Decapod"    = "decapod-Research",
+		"Pneuma"     = "pneuma-Research",
+		"Tower"      = "drider-Research"
 	)
 	modules = list(
 		/obj/item/portable_destructive_analyzer,
@@ -602,6 +664,13 @@
 		/datum/matter_synth/wire
 	)
 
+/obj/item/robot_module/robot/research/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Cabeiri" = "eyebot-science"
+	)
+
 /obj/item/robot_module/robot/research/finalize_synths()
 	. = ..()
 	var/datum/matter_synth/nanite =  locate() in synths
@@ -628,10 +697,10 @@
 	crisis_locked = TRUE
 	hide_on_manifest = TRUE
 	sprites = list(
-		"Haruka" = "marinaCB",
+		"Haruka"         = "marinaCB",
 		"Combat Android" = "droid-combat",
-		"Insekt" = "insekt-Combat",
-		"Decapod" = "decapod-Combat"
+		"Insekt"         = "insekt-Combat",
+		"Decapod"        = "decapod-Combat"
 	)
 	modules = list(
 		/obj/item/flash,
@@ -642,6 +711,13 @@
 		/obj/item/borg/combat/mobility
 	)
 	emag = /obj/item/gun/energy/lasercannon/mounted
+
+/obj/item/robot_module/robot/security/combat/flying
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	can_be_pushed = TRUE
+	sprites = list(
+		"Cabeiri" = "eyebot-standard"
+	)
 
 /* Drones */
 /obj/item/robot_module/drone
