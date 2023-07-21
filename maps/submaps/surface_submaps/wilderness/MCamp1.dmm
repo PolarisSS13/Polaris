@@ -10,6 +10,10 @@
 "do" = (
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/MilitaryCamp1)
+"dH" = (
+/obj/machinery/light/small,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
 "dM" = (
 /obj/item/cell/device/weapon/empty,
 /turf/simulated/floor/concrete,
@@ -18,6 +22,10 @@
 /obj/structure/closet,
 /obj/random/maintenance/clean,
 /turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"gc" = (
+/obj/structure/foamedmetal,
+/turf/simulated/floor,
 /area/submap/MilitaryCamp1)
 "ge" = (
 /turf/template_noop,
@@ -31,6 +39,7 @@
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "jL" = (
+/obj/structure/inflatable,
 /turf/simulated/floor,
 /area/submap/MilitaryCamp1)
 "kd" = (
@@ -56,6 +65,9 @@
 /area/submap/MilitaryCamp1)
 "mE" = (
 /obj/machinery/computer/security,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "nl" = (
@@ -75,6 +87,9 @@
 /area/submap/MilitaryCamp1)
 "ow" = (
 /obj/structure/bed/padded,
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "pI" = (
@@ -92,6 +107,14 @@
 /area/submap/MilitaryCamp1)
 "qF" = (
 /obj/structure/table/standard,
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/item/frame/apc,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"tS" = (
+/obj/item/material/shard,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "uo" = (
@@ -105,8 +128,12 @@
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "vX" = (
+/obj/structure/foamedmetal,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"wc" = (
+/obj/random/landmine,
 /mob/living/simple_mob/mechanical/viscerator,
-/obj/effect/decal/cleanable/blood,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "xo" = (
@@ -135,6 +162,10 @@
 /obj/item/material/shard,
 /mob/living/simple_mob/mechanical/viscerator,
 /turf/template_noop,
+/area/submap/MilitaryCamp1)
+"AH" = (
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "By" = (
 /mob/living/simple_mob/mechanical/viscerator,
@@ -166,10 +197,25 @@
 /mob/living/simple_mob/mechanical/viscerator,
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
+"JM" = (
+/obj/structure/closet,
+/obj/random/maintenance/clean,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
 "Lb" = (
 /obj/effect/decal/remains,
 /obj/structure/bed/padded,
 /obj/item/bedsheet/blue,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"LQ" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/obj/machinery/light/small{
+	dir = 4
+	},
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "LX" = (
@@ -199,6 +245,12 @@
 "PF" = (
 /obj/random/firstaid,
 /obj/structure/table/standard,
+/turf/simulated/floor/concrete,
+/area/submap/MilitaryCamp1)
+"Qv" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/concrete,
 /area/submap/MilitaryCamp1)
 "Qx" = (
@@ -321,7 +373,7 @@ Ep
 Ep
 vX
 Ep
-qF
+WT
 Ep
 Ep
 Ep
@@ -343,7 +395,7 @@ bB
 RD
 RD
 RD
-RD
+AH
 Jh
 RD
 Ep
@@ -363,8 +415,8 @@ Ep
 jr
 kd
 RD
-RD
 Jh
+RD
 Uy
 RD
 RD
@@ -403,7 +455,7 @@ OI
 OI
 Qx
 nW
-CF
+gc
 pI
 RD
 DX
@@ -427,13 +479,13 @@ ge
 Qx
 jL
 Jh
-RD
+dH
 DX
 WY
 QD
 vP
 DX
-RD
+Qv
 RD
 Ep
 uo
@@ -452,7 +504,7 @@ RD
 RD
 DX
 Jh
-Uy
+wc
 Jh
 LX
 RD
@@ -474,7 +526,7 @@ RD
 Jh
 DX
 ln
-Jh
+LQ
 LY
 DX
 RD
@@ -519,7 +571,7 @@ ju
 PF
 Ep
 zZ
-fS
+JM
 fS
 RD
 ye
@@ -545,7 +597,7 @@ ye
 Jh
 or
 RD
-jL
+gc
 do
 Qx
 ge
@@ -564,10 +616,10 @@ Pu
 Ep
 RD
 Jh
-RD
+tS
 Jh
 RD
-CF
+gc
 xo
 YB
 ge
@@ -616,7 +668,7 @@ Nv
 ge
 Qx
 ge
-cH
+ge
 OI
 "}
 (18,1,1) = {"
@@ -652,7 +704,7 @@ Qx
 ge
 ge
 qx
-ge
+cH
 ge
 ge
 ge
