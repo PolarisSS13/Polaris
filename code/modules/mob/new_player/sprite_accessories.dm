@@ -1680,6 +1680,34 @@ shaved
 	icon            = 'icons/mob/hair_unathi.dmi'
 	icon_add        = 'icons/mob/hair_unathi_add.dmi'
 
+/datum/sprite_accessory/hair/una/finhawk
+	name = "Unathi Finhawk"
+	icon_state = "fin_hawk"
+
+/datum/sprite_accessory/hair/una/downcurve_horns
+	name = "Downward-Curved Unathi Horns"
+	icon_state = "curved_down"
+
+/datum/sprite_accessory/hair/una/upcurve_horns
+	name = "Upward-Curved Unathi Horns"
+	icon_state = "curved_up"
+
+/datum/sprite_accessory/hair/una/samurai_horns
+	name = "Unathi Samurai Horns"
+	icon_state = "samurai"
+
+/datum/sprite_accessory/hair/una/big_frills
+	name = "Big Unathi Frills"
+	icon_state = "big_frills"
+
+/datum/sprite_accessory/hair/una/head_spikes
+	name = "Unathi Head Spikes"
+	icon_state = "head_spikes"
+
+/datum/sprite_accessory/hair/una/overgrown_spikes
+	name = "Overgrown Unathi Head Spikes"
+	icon_state = "overgrown_head_spikes"
+
 /datum/sprite_accessory/hair/una/cobrahood
 	name = "Unathi Cobra Hood"
 	icon_state = "unathi_cobrahood"
