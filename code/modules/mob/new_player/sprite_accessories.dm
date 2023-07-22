@@ -1688,9 +1688,11 @@ shaved
 //Unathi Head-Bits
 
 /datum/sprite_accessory/hair/una
-	name = "Long Unathi Spines"
-	icon_state = "soghun_longspines"
+	name            = "Long Unathi Spines"
+	icon_state      = "soghun_longspines"
 	species_allowed = list(SPECIES_UNATHI)
+	icon            = 'icons/mob/hair_unathi.dmi'
+	icon_add        = 'icons/mob/hair_unathi_add.dmi'
 
 /datum/sprite_accessory/hair/una/spines_short
 	name = "Short Unathi Spines"
