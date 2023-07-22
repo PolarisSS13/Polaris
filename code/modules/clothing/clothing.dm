@@ -695,9 +695,6 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	update_icon()
 	return ..()
 
-/obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	return
-
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))
 		var/mob/M = src.loc
