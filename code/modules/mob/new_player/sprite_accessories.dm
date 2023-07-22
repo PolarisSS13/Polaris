@@ -1728,9 +1728,11 @@ shaved
 //Skrell 'hairstyles'
 
 /datum/sprite_accessory/hair/skr
-	name = "Tentacles, Average"
-	icon_state = "skrell_short"
+	name            = "Tentacles, Average"
+	icon_state      = "skrell_short"
 	species_allowed = list(SPECIES_SKRELL, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	icon            = 'icons/mob/hair_skrell.dmi'
+	icon_add        = 'icons/mob/hair_skrell_add.dmi'
 
 /datum/sprite_accessory/hair/skr/pullback
 	name = "Tentacles, Average, Pullback"
