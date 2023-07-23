@@ -326,7 +326,7 @@
 							H.adjustOxyLoss(-(rand(1,8)))
 
 				if(H.stat == DEAD)
-					H.add_modifier(/datum/modifier/bloodpump_corpse, 6 SECONDS)
+					H.add_modifier(/datum/modifier/bloodpump/corpse, 6 SECONDS)
 
 				else
 					H.add_modifier(/datum/modifier/bloodpump, 6 SECONDS)
