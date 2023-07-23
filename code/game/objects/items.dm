@@ -971,3 +971,9 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 		if (!user.check_dexterity(test_dexterity, src, silent)) // Handles its own failure message.
 			return
 	return FALSE
+
+/obj/item/proc/is_mob_movement_sensitive()
+	return FALSE
+
+/obj/item/proc/handle_movement(var/turf/walking, var/running)
+	return FALSE

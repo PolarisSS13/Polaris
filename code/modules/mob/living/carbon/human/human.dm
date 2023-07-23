@@ -1673,3 +1673,17 @@
 
 /mob/living/carbon/human/hearing_boost_range()
 	return (hearing_boost_range + species.hearboost)
+
+// Add gear to this proc that needs to be checked for movement sensitivity.
+// Keep in mind this list will be iterated every single time the mob moves.
+// This should really be a signal or something but augh.
+/mob/living/carbon/human/proc/get_movement_sensitive_gear()
+	// Clown shoes.
+	if(shoes && shoes.is_mob_movement_sensitive())
+		LAZYADD(., shoes)
+	// Tail bells.
+	var/obj/item/clothing/uniform = w_uniform
+	if(istype(uniform) && length(uniform.accessories))
+		for(var/obj/item/accessory in uniform.accessories)
+			if(accessory.is_mob_movement_sensitive())
+				LAZYADD(., accessory)
