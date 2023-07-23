@@ -86,6 +86,10 @@ GLOBAL_LIST_EMPTY(all_blobs)
 		overmind.blob_type.on_emp(src, severity)
 
 /obj/structure/blob/proc/pulsed()
+	if(QDELETED(src))
+		loc = null
+		overmind = null
+		return
 	if(pulse_timestamp <= world.time)
 		consume_tile()
 		if(heal_timestamp <= world.time)
@@ -96,6 +100,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 		if(overmind)
 			faction = overmind.blob_type.faction
 			overmind.blob_type.on_pulse(src)
+		fall()	// Make sure to obey gravity.
 		return TRUE //we did it, we were pulsed!
 	return FALSE //oh no we failed
 
@@ -169,6 +174,11 @@ GLOBAL_LIST_EMPTY(all_blobs)
 		make_blob = FALSE
 		T.blob_act(src) //hit the turf if it is
 
+	if((locate(/obj/structure/stairs/middle) in T) && (locate(/obj/structure/stairs/bottom) in get_turf(src)))	// If we're growing against stairs, check for an open space above to grow 'up' the stairs.
+		var/turf/TAbove = GetAbove(src)
+		if(TAbove.CanZPass(src, UP))	// Can we pass through the turf above us to enter the tile? If so, swap T to that, we're going upstairs.
+			T = TAbove
+
 	for(var/atom/A in T)
 		if(!A.CanPass(src, T)) //is anything in the turf impassable
 			make_blob = FALSE
@@ -192,6 +202,21 @@ GLOBAL_LIST_EMPTY(all_blobs)
 	else
 		blob_attack_animation(T, controller) //if we can't, animate that we attacked
 
+/obj/structure/blob/fall_impact(var/atom/hit_atom, var/damage_min = 0, var/damage_max = 10, var/silent = FALSE, var/planetary = FALSE)
+	..()
+	playsound(src, 'sound/effects/splat.ogg', 50, 1)
+	consume_tile()
+
+/obj/structure/blob/can_fall()	// Despite popular belief, the blob's belief in its ability to fly doesn't matter. (Unless something else is holding it up)
+	if(overmind)
+		for(var/direction in cardinal)
+			var/turf/other_T = get_step(get_turf(src), direction)
+			if(other_T)
+				var/obj/structure/blob/B = locate(/obj/structure/blob/shield) in other_T
+				if(B && B.overmind)
+					return FALSE
+	return TRUE
+
 /obj/structure/blob/proc/do_slide_animation(var/obj/structure/blob/B, var/turf/T, var/expand_reaction)
 	set waitfor = FALSE
 	sleep(1) // To have the slide animation work.
@@ -201,6 +226,9 @@ GLOBAL_LIST_EMPTY(all_blobs)
 	B.density = initial(B.density)
 	B.forceMove(T)
 	B.update_icon()
+
+	B.fall()
+
 	if(B.overmind && expand_reaction)
 		B.overmind.blob_type.on_expand(src, B, T, B.overmind)
 
@@ -417,6 +445,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 		qdel(src)
 	else
 		update_icon()
+		fall()
 
 /obj/effect/temporary_effect/blob_attack
 	name = "blob"

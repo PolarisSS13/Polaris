@@ -62,6 +62,7 @@ var/global/list/overminds = list()
 		if(B && B.overmind == src)
 			B.overmind = null
 			B.update_icon() //reset anything that was ours
+			B.fall()	// No longer held up by whatever blob horror the core had going on (if any), fall like a really gross rock.
 
 	for(var/BLO in blob_mobs)
 		var/mob/living/simple_mob/blob/spore/BM = BLO
@@ -165,3 +166,6 @@ var/global/list/overminds = list()
 
 	log_say(message, src)
 	return 1
+
+/mob/observer/blob/can_fall()
+	return FALSE
