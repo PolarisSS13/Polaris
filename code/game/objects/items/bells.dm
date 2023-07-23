@@ -88,7 +88,7 @@
 	if(!istype(W))
 		return
 	if(W.is_wrench() && isturf(loc))
-		if(do_after(5))
+		if(do_after(user, 5, src))
 			if(!src) return
 			to_chat(user, "<span class='notice'>You dissasemble the desk bell</span>")
 			new /obj/item/stack/material/steel(get_turf(src), 1)
