@@ -131,8 +131,8 @@
 	impact_type = /obj/effect/projectile/impact/laser_em
 
 /obj/item/projectile/beam/heavylaser/cannon
-	damage = 80
-	armor_penetration = 50
+	damage = 75
+	armor_penetration = 40
 	light_color = "#FF0D00"
 	hud_state = "laser_overcharge"
 
@@ -140,8 +140,8 @@
 	name = "xray beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/eluger.ogg'
-	damage = 25
-	armor_penetration = 50
+	damage = 35
+	armor_penetration = 60
 	light_color = "#00CC33"
 	hud_state = "laser_sniper"
 
@@ -265,8 +265,8 @@
 	name = "sniper beam"
 	icon_state = "xray"
 	fire_sound = 'sound/weapons/gauss_shoot.ogg'
-	damage = 50
-	armor_penetration = 10
+	damage = 45
+	armor_penetration = 20
 	light_color = "#00CC33"
 	hud_state = "laser_sniper"
 

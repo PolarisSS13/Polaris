@@ -6,22 +6,23 @@
 	item_state = null	//so the human update icon uses the icon_state instead.
 	projectile_type = /obj/item/projectile/beam/stun
 	charge_cost = 480
+	fire_delay = 0.8 SECONDS
 
 /obj/item/gun/energy/taser/mounted
 	name = "mounted taser gun"
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge = TRUE
+	use_external_power = TRUE
 
 /obj/item/gun/energy/taser/mounted/augment
-	self_recharge = 1
-	use_external_power = 0
+	self_recharge = TRUE
+	use_external_power = FALSE
 	use_organic_power = TRUE
 	canremove = FALSE
 
 /obj/item/gun/energy/taser/mounted/cyborg
 	name = "taser gun"
-	charge_cost = 400
-	recharge_time = 7 //Time it takes for shots to recharge (in ticks)
+	charge_cost = 480
+	recharge_time = 0.6 SECONDS
 
 /obj/item/gun/energy/taser/disabler
 	name = "disabler"
@@ -75,7 +76,7 @@
 	icon_state = "plasma_stun"
 	item_state = "plasma_stun"
 	origin_tech = list(TECH_COMBAT = 2, TECH_MATERIAL = 2, TECH_POWER = 3)
-	fire_delay = 20
+	fire_delay = 2 SECONDS
 	charge_cost = 600
 	projectile_type = /obj/item/projectile/energy/plasmastun
 
@@ -93,6 +94,7 @@
 	item_state = "stunrevolver"
 	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 	projectile_type = /obj/item/projectile/energy/electrode/strong
+	fire_delay = 0.8 SECONDS
 	charge_cost = 300
 
 /obj/item/gun/energy/stunrevolver/vintage
@@ -105,7 +107,6 @@
 	their own variants of the Stun Revolver."
 	icon_state = "vinstunrevolver"
 	item_state = "stunrevolver"
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)
 
 /obj/item/gun/energy/stunrevolver/snubnose
 	name = "snub stun revolver"
@@ -118,4 +119,3 @@
 	icon_state = "snubstunrevolver"
 	item_state = "stunrevolver"
 	w_class = ITEMSIZE_SMALL
-	origin_tech = list(TECH_COMBAT = 3, TECH_MATERIAL = 3, TECH_POWER = 2)

@@ -36,13 +36,13 @@
 	one_handed_penalty = 0
 
 /obj/item/gun/energy/phasegun/mounted
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge = TRUE
+	use_external_power = TRUE
 	one_handed_penalty = 0
 
 /obj/item/gun/energy/phasegun/mounted/cyborg
 	charge_cost = 400
-	recharge_time = 7
+	recharge_time = 0.6 SECONDS
 
 /obj/item/gun/energy/phasegun/pistol
 	name = "phase pistol"
@@ -57,12 +57,12 @@
 
 /obj/item/gun/energy/phasegun/pistol/mounted
 	name = "mounted phase pistol"
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge = TRUE
+	use_external_power = TRUE
 
 /obj/item/gun/energy/phasegun/pistol/mounted/cyborg
 	charge_cost = 400
-	recharge_time = 7
+	recharge_time = 0.6 SECONDS
 
 /obj/item/gun/energy/phasegun/rifle
 	name = "phase rifle"
