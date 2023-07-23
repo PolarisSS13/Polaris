@@ -1753,6 +1753,7 @@
 #include "code\modules\clothing\under\accessories\torch.dm"
 #include "code\modules\clothing\under\accessories\crafted\poncho.dm"
 #include "code\modules\clothing\under\accessories\temperature\poncho.dm"
+#include "code\modules\clothing\under\accessories\xeno\teshari.dm"
 #include "code\modules\clothing\under\jobs\civilian.dm"
 #include "code\modules\clothing\under\jobs\engineering.dm"
 #include "code\modules\clothing\under\jobs\medsci.dm"

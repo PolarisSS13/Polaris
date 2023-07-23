@@ -338,3 +338,119 @@
 /datum/gear/shoes/teshwrap/New()
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshbag
+	display_name = "Teshari tailbags"
+	path = /obj/item/storage/backpack/teshbag
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+	cost = 3
+
+/datum/gear/accessory/teshtailwrap
+	display_name = "Teshari tail wrap"
+	path = /obj/item/clothing/accessory/teshtail/wrap
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshtailwrap/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshtailwraplong
+	display_name = "Teshari tail wrap, long"
+	path = /obj/item/clothing/accessory/teshtail/wrap/long
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshtailwraplong/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshtailbells
+	display_name = "Teshari tail bells"
+	path = /obj/item/clothing/accessory/teshtail/bells
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshbangle
+	display_name = "Teshari tail bangle, base"
+	path = /obj/item/clothing/accessory/teshtail/bangle
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+	cost = 0 //for these, so you can select all three or mix and match without taking three points.
+
+/datum/gear/accessory/teshbangle/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshbangle2
+	display_name = "Teshari tail bangle, middle"
+	path = /obj/item/clothing/accessory/teshtail/bangle/middle
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+	cost = 0
+
+/datum/gear/accessory/teshbangle2/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshbangle3
+	display_name = "Teshari tail bangle, end"
+	path = /obj/item/clothing/accessory/teshtail/bangle/end
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+	cost = 0
+
+/datum/gear/accessory/teshbangle3/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshplume
+	display_name = "Teshari artifical tailplume"
+	path = /obj/item/clothing/accessory/teshtail/plumage
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshplume/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshchains
+	display_name = "Teshari tail chains"
+	path = /obj/item/clothing/accessory/teshtail/chains
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshchains/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshchainslong
+	display_name = "Teshari tail chains, long"
+	path = /obj/item/clothing/accessory/teshtail/chains/long
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshchainslong/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshchainsdangle
+	display_name = "Teshari tail chains, dangling"
+	path = /obj/item/clothing/accessory/teshtail/chains/dangle
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshchainsdangle/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/teshchainslongdangle
+	display_name = "Teshari tail chains, long and dangling"
+	path = /obj/item/clothing/accessory/teshtail/chains/longdangle
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshchainslongdangle/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
