@@ -112,30 +112,14 @@
 			adjust_discipline(-1)
 			last_discipline_decay = world.time
 
-/datum/ai_holder/simple_mob/xenobio_slime/find_target(list/possible_targets, has_targets_list)
-	if (hostile)
-		. = ..()
-	if (target || leader || rabid) // Always prioritize mobs, if we can. Otherwise, check for loose things to eat if we're not otherwise busy
-		return
-	var/list/yummies
-	for (var/atom/M in view(world.view, holder))
-		if (M.is_slime_food())
-			// Make sure that we can reach the object first, but don't try too hard at it and make sure that the thing is edible beforehand
-			var/list/path = AStar(holder.loc, M.loc, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = 1, max_node_depth = world.view * 2, id = holder.IGetID(), exclude = obstacles)
-			if (path?.len)
-				LAZYDISTINCTADD(yummies, M)
-	if (!LAZYLEN(yummies))
-		return
-	var/atom/yummy
-	var/closest_distance = INFINITY
-	for (var/atom/M in yummies) // Find the closest snack!
-		var/dist = get_dist(holder, M)
-		if (dist < closest_distance)
-			yummy = M
-			closest_distance = dist
-	give_target(yummy)
-	give_destination(yummy.loc)
-	return yummy
+/datum/ai_holder/simple_mob/xenobio_slime/list_targets()
+	. = ..()
+	if (!locate(/mob) in . && !leader && !rabid)
+		for(var/atom/movable/M in view(vision_range, holder))
+			if (M.is_slime_food())
+				var/list/path_to = AStar(holder.loc, M.loc, astar_adjacent_proc, /turf/proc/Distance, min_target_dist = 0, max_node_depth = world.view * 2, id = holder.IGetID(), exclude = obstacles, flags = ASTAR_BLOCKED_BY_WINDOWS)
+				if (path_to?.len)
+					. += M
 
 /datum/ai_holder/simple_mob/xenobio_slime/handle_special_tactic()
 	evolve_and_reproduce()
@@ -160,6 +144,16 @@
 	holder.setClickCooldown(holder.get_attack_speed())
 	target.slime_chomp(holder)
 	target = null
+
+/datum/ai_holder/simple_mob/xenobio_slime/request_help()
+	if (target && !ismob(target)) // we absolutely, completely do not need help from other slimes when targeting a pile of dirt
+		return
+	. = ..()
+
+/datum/ai_holder/simple_mob/xenobio_slime/can_violently_breakthrough()
+	if (target && !ismob(target))
+		return FALSE
+	return TRUE
 
 // Called when pushed too far (or a red slime core was used).
 /datum/ai_holder/simple_mob/xenobio_slime/proc/enrage()
