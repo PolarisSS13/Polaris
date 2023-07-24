@@ -22,6 +22,7 @@
 	name = "teshari tail bells"
 	desc = "A set of lightweight, jangly tail bells."
 	icon_state = "tailbells"
+	gender = PLURAL
 	var/static/list/dingaling_sound = list(
 		'sound/misc/dingaling1.ogg',
 		'sound/misc/dingaling2.ogg',
