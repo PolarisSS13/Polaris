@@ -35,9 +35,9 @@
 /obj/machinery/atmospherics/pipe/proc/set_leaking(var/new_leaking)
 	if(new_leaking && !leaking)
 		if(!speed_process)
-			begin_processing()
+			START_MACHINE_PROCESSING(src)
 		else
-			begin_speed_processing()
+			START_PROCESSING(SSfastprocess, src)
 		leaking = TRUE
 		if(parent)
 			parent.leaks |= src
@@ -45,9 +45,9 @@
 				parent.network.leaks |= src
 	else if (!new_leaking && leaking)
 		if(!speed_process)
-			end_processing()
+			STOP_MACHINE_PROCESSING(src)
 		else
-			end_speed_processing()
+			STOP_PROCESSING(SSfastprocess, src)
 		leaking = FALSE
 		if(parent)
 			parent.leaks -= src

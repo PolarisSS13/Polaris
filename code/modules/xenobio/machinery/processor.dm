@@ -24,7 +24,7 @@
 		return
 	if(to_be_processed.len)
 		spawn(1)
-			start_processing()
+			begin_processing()
 	else
 		to_chat(user, "<span class='warning'>The processor is empty.</span>")
 		playsound(src, 'sound/machines/buzz-sigh.ogg', 50, 1)
@@ -60,7 +60,7 @@
 	AM.forceMove(src)
 	visible_message("<span class='notice'>\the [user] places [AM] inside \the [src].</span>")
 
-/obj/machinery/processor/proc/start_processing()
+/obj/machinery/processor/proc/begin_processing()
 	if(processing)
 		return // Already doing it.
 	processing = TRUE

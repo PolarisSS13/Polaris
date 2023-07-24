@@ -27,11 +27,11 @@
 	else
 		speed_process = !speed_process // switching gears
 	if(speed_process) // high gear
-		end_processing()
-		begin_speed_processing()
+		STOP_MACHINE_PROCESSING(src)
+		START_PROCESSING(SSfastprocess, src)
 	else // low gear
-		end_speed_processing()
-		begin_processing()
+		STOP_PROCESSING(SSfastprocess, src)
+		START_MACHINE_PROCESSING(src)
 
 /obj/machinery/mineral/unloading_machine/process()
 	if (src.output && src.input)

@@ -643,7 +643,7 @@ About the new airlock wires panel:
 		backup_power_lost_until = world.time + SecondsToTicks(10)
 
 	if(main_power_lost_until > 0 || backup_power_lost_until > 0)
-		begin_processing()
+		START_MACHINE_PROCESSING(src)
 
 	// Disable electricity if required
 	if(electrified_until && isAllPowerLoss())
@@ -655,7 +655,7 @@ About the new airlock wires panel:
 	backup_power_lost_until = backupPowerCablesCut() ? -1 : world.time + SecondsToTicks(60)
 
 	if(backup_power_lost_until > 0)
-		begin_processing()
+		START_MACHINE_PROCESSING(src)
 
 	// Disable electricity if required
 	if(electrified_until && isAllPowerLoss())
@@ -700,7 +700,7 @@ About the new airlock wires panel:
 		src.electrified_until = duration == -1 ? -1 : world.time + SecondsToTicks(duration)
 
 	if(electrified_until > 0)
-		begin_processing()
+		START_MACHINE_PROCESSING(src)
 
 	if(feedback && message)
 		to_chat(usr,message)
