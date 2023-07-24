@@ -14,7 +14,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	//var/datum/gas_mixture/air_transient = null
 
 /datum/pipe_network/Destroy()
-	STOP_PROCESSING_MACHINERY(src, SSMACHINES_PIPENETS_LIST)
+	STOP_PROCESSING_PIPENET(src)
 	for(var/datum/pipeline/line_member in line_members)
 		line_member.network = null
 	for(var/obj/machinery/atmospherics/normal_member in normal_members)
@@ -48,7 +48,7 @@ var/global/list/datum/pipe_network/pipe_networks = list()	// TODO - Move into SS
 	update_network_gases()
 
 	if((normal_members.len>0)||(line_members.len>0))
-		START_PROCESSING_MACHINERY(src, SSMACHINES_PIPENETS_LIST)
+		START_PROCESSING_PIPENET(src)
 	else
 		qdel(src)
 

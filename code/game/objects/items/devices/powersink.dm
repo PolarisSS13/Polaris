@@ -19,12 +19,14 @@
 	var/power_drained = 0 			// Amount of power drained.
 	var/max_power = 1e9				// Detonation point.
 	var/mode = 0					// 0 = off, 1=clamped (off), 2=operating
+	var/drained_this_tick = 0		// This is unfortunately necessary to ensure we process powersinks BEFORE other machinery such as APCs.
 
+	var/datum/powernet/PN			// Our powernet
 	var/obj/structure/cable/attached		// the attached cable
 
-
 /obj/item/powersink/Destroy()
-	STOP_PROCESSING_MACHINERY(src, SSMACHINES_POWEROBJS_LIST)
+	STOP_PROCESSING(SSobj, src)
+	STOP_PROCESSING_POWER_OBJECT(src)
 	..()
 
 /obj/item/powersink/attackby(var/obj/item/I, var/mob/user)
@@ -47,7 +49,8 @@
 				return
 		else
 			if (mode == 2)
-				START_PROCESSING_MACHINERY(src, SSMACHINES_POWEROBJS_LIST)
+				STOP_PROCESSING(SSobj, src) // Now the power sink actually stops draining the station's power if you unhook it. --NeoFite
+				STOP_PROCESSING_POWER_OBJECT(src)
 			anchored = 0
 			mode = 0
 			src.visible_message("<span class='notice'>[user] detaches [src] from the cable!</span>")
@@ -70,31 +73,38 @@
 			src.visible_message("<span class='notice'>[user] activates [src]!</span>")
 			mode = 2
 			icon_state = "powersink1"
-			START_PROCESSING_MACHINERY(src, SSMACHINES_POWEROBJS_LIST)
+			START_PROCESSING(SSobj, src)
+			datum_flags &= ~DF_ISPROCESSING // Have to reset this flag so that PROCESSING_POWER_OBJECT can re-add it. It fails if the flag is already present. - Ater
+			START_PROCESSING_POWER_OBJECT(src)
 		if(2)  //This switch option wasn't originally included. It exists now. --NeoFite
 			src.visible_message("<span class='notice'>[user] deactivates [src]!</span>")
 			mode = 1
 			set_light(0)
 			icon_state = "powersink0"
-			STOP_PROCESSING_MACHINERY(src, SSMACHINES_POWEROBJS_LIST)
+			STOP_PROCESSING(SSobj, src)
+			STOP_PROCESSING_POWER_OBJECT(src)
 
 /obj/item/powersink/pwr_drain()
 	if(!attached)
 		return 0
 
+	if(drained_this_tick)
+		return 1
+	drained_this_tick = 1
+
 	var/drained = 0
 
-	if(!attached.powernet)
+	if(!PN)
 		return 1
 
 	set_light(12)
-	attached.powernet.trigger_warning()
+	PN.trigger_warning()
 	// found a powernet, so drain up to max power from it
-	drained = attached.powernet.draw_power(drain_rate)
+	drained = PN.draw_power(drain_rate)
 	// if tried to drain more than available on powernet
 	// now look for APCs and drain their cells
 	if(drained < drain_rate)
-		for(var/obj/machinery/power/terminal/T in attached.powernet.nodes)
+		for(var/obj/machinery/power/terminal/T in PN.nodes)
 			// Enough power drained this tick, no need to torture more APCs
 			if(drained >= drain_rate)
 				break
@@ -110,6 +120,7 @@
 
 
 /obj/item/powersink/process()
+	drained_this_tick = 0
 	power_drained -= min(dissipation_rate, power_drained)
 	if(power_drained > max_power * 0.95)
 		playsound(src, 'sound/effects/screech.ogg', 100, 1, 1)
@@ -117,3 +128,7 @@
 		explosion(src.loc, 3,6,9,12)
 		qdel(src)
 		return
+	if(attached && attached.powernet)
+		PN = attached.powernet
+	else
+		PN = null

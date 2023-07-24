@@ -95,7 +95,7 @@
 			singulo.target = src
 	icon_state = "[icontype]1"
 	active = 1
-	begin_processing()
+	START_MACHINE_PROCESSING(src)
 	if(user)
 		to_chat(user, "<span class='notice'>You activate the beacon.</span>")
 

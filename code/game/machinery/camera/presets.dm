@@ -171,9 +171,9 @@ var/global/list/engineering_networks = list(
 	var/list/my_area = by_area[A.name]
 	my_area += src
 	var/number = my_area.len
-
+	
 	c_tag = "[A.name] #[number]"
-
+	
 /obj/machinery/camera/autoname/Destroy()
 	var/area/A = get_area(src)
 	if(!A || !by_area || !by_area[A.name])
@@ -215,7 +215,7 @@ var/global/list/engineering_networks = list(
 		return //nooooo
 	assembly.upgrades.Add(new /obj/item/assembly/prox_sensor(assembly))
 	setPowerUsage()
-	begin_processing()
+	START_MACHINE_PROCESSING(src)
 	sense_proximity(callback = /atom/proc/HasProximity)
 	update_coverage()
 

@@ -113,56 +113,32 @@ Class Procs:
 	var/obj/item/circuitboard/circuit = null
 	var/list/materials = list() //Exclusively used for machines that take materials - lathes, fabricators etc. Honestly overdue for a whole lathe/fab refactor at some point.
 
-	// Use the fastprocess subsystem instead of SSMachines?
-	var/speed_process = FALSE
-	// The subsystem we will be using
-	var/subsystem_type = /datum/controller/subsystem/machines
+	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
 	required_dexterity = MOB_DEXTERITY_TOUCHSCREENS
 
-/// Helper proc for telling a machine to start processing with the subsystem type that is located in its `subsystem_type` var.
-/obj/machinery/proc/begin_processing()
-	START_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
 
-/// Helper proc for telling a machine to stop processing with the subsystem type that is located in its `subsystem_type` var.
-/obj/machinery/proc/end_processing()
-	STOP_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
-
-/// Helper proc for telling a machine to start processing with the subsystem type that is located in its `subsystem_type` var.
-/obj/machinery/proc/begin_speed_processing()
-	end_processing()
-	START_SPEED_PROCESSING(src)
-
-/// Helper proc for telling a machine to stop processing with the subsystem type that is located in its `subsystem_type` var.
-/obj/machinery/proc/end_speed_processing()
-	STOP_SPEED_PROCESSING(src)
-	begin_processing()
-
-
-
-/obj/machinery/Initialize(var/ml, direction=0)
+/obj/machinery/Initialize(var/ml, d=0)
 	. = ..()
-
-	if(direction)
-		set_dir(direction)
-
+	if(d)
+		set_dir(d)
 	if(ispath(circuit))
 		circuit = new circuit(src)
 	global.machines += src
 	if(ispath(circuit))
 		circuit = new circuit(src)
 	if(!speed_process)
-		START_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
+		START_MACHINE_PROCESSING(src)
 	else
-		begin_speed_processing()
+		START_PROCESSING(SSfastprocess, src)
 	if(!ml)
 		power_change()
 
 /obj/machinery/Destroy()
 	if(!speed_process)
-		STOP_PROCESSING_MACHINERY(src, SSMACHINES_MACHINERY_LIST)
+		STOP_MACHINE_PROCESSING(src)
 	else
-		end_speed_processing()
+		STOP_PROCESSING(SSfastprocess, src)
 	global.machines -= src
 	if(component_parts)
 		for(var/atom/A in component_parts)
