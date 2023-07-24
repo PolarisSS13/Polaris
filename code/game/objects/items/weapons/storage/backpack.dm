@@ -20,7 +20,7 @@
 	pickup_sound = 'sound/items/pickup/backpack.ogg'
 	var/list/species_restricted = null
 
-/obj/item/storage/backpack/mob_can_equip(M as mob, slot, disable_warning = FALSE)
+/obj/item/storage/backpack/mob_can_equip(M, slot, disable_warning = FALSE)
 
 	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
 	if (!..())
