@@ -36,20 +36,23 @@
 	set category = "Object"
 	set src in view(usr, 1)
 
-	setLabel(L, usr)
+	var/datum/extension/labels/lext = get_or_create_extension(src, /datum/extension/labels)
+	if(lext)
+		for(var/lab in lext.labels)
+			lext.RemoveLabel(null, lab)
+		if(length(L))
+			lext.AttachLabel(null, L)
 
 /obj/item/reagent_containers/chem_disp_cartridge/proc/setLabel(L, mob/user = null)
-	if(L)
-		if(user)
-			to_chat(user, "<span class='notice'>You set the label on \the [src] to '[L]'.</span>")
+	var/datum/extension/labels/lext = get_or_create_extension(src, /datum/extension/labels)
+	if(lext)
+		for(var/lab in lext.labels)
+			lext.RemoveLabel(null, lab)
 
-		label = L
-		name = "[initial(name)] - '[L]'"
-	else
-		if(user)
-			to_chat(user, "<span class='notice'>You clear the label on \the [src].</span>")
-		label = ""
-		name = initial(name)
+		if(length(L))
+			lext.AttachLabel(user, L)
+		else if(user)
+			to_chat(user, SPAN_NOTICE("You clear the label on \the [src]."))
 
 /obj/item/reagent_containers/chem_disp_cartridge/attack_self()
 	..()

@@ -29,43 +29,53 @@
 	if(length(A.name) + length(label) > 64)
 		to_chat(user, SPAN_WARNING("\The [src]'s label too big."))
 		return
-	if(istype(A, /mob/living/silicon/robot/platform))
-		var/mob/living/silicon/robot/platform/P = A
-		if(!P.allowed(user))
-			to_chat(usr, SPAN_WARNING("Access denied."))
-		else if(P.client || P.key)
-			to_chat(user, SPAN_NOTICE("You rename \the [P] to [label]."))
-			to_chat(P, SPAN_NOTICE("\The [user] renames you to [label]."))
-			P.custom_name = label
-			P.SetName(P.custom_name)
-		else
-			to_chat(user, SPAN_WARNING("\The [src] is inactive and cannot be renamed."))
-		return
-	if(ishuman(A))
-		to_chat(user, SPAN_WARNING("The label refuses to stick to [A.name]."))
-		return
-	if(issilicon(A))
-		to_chat(user, SPAN_WARNING("The label refuses to stick to [A.name]."))
-		return
-	if(isobserver(A))
-		to_chat(user, SPAN_WARNING("[src] passes through [A.name]."))
-		return
-	if(istype(A, /obj/item/reagent_containers/glass))
-		to_chat(user, SPAN_WARNING("The label can't stick to the [A.name] (Try using a pen)."))
-		return
-	if(istype(A, /obj/machinery/portable_atmospherics/hydroponics))
-		var/obj/machinery/portable_atmospherics/hydroponics/tray = A
-		if(!tray.mechanical)
-			to_chat(user, SPAN_WARNING("How are you going to label that?"))
-			return
-		tray.labelled = label
-		spawn(1)
-			tray.update_icon()
 
-	user.visible_message( \
-		SPAN_NOTICE("\The [user] labels [A] as [label]."), \
-		SPAN_NOTICE("You label [A] as [label]."))
-	A.name = "[A.name] ([label])"
+	if(has_extension(A, /datum/extension/labels))
+		var/datum/extension/labels/L = get_extension(A, /datum/extension/labels)
+		if(!L.CanAttachLabel(user, label))
+			return
+	A.attach_label(user, src, label)
+
+/atom/proc/attach_label(var/user, var/atom/labeler, var/label_text)
+	to_chat(user, "<span class='notice'>The label refuses to stick to [name].</span>")
+
+/mob/observer/attach_label(var/user, var/atom/labeler, var/label_text)
+	to_chat(user, "<span class='notice'>\The [labeler] passes through \the [src].</span>")
+
+/obj/machinery/portable_atmospherics/hydroponics/attach_label(var/user, var/atom/labeler, var/label_text)
+	if(!mechanical)
+		to_chat(user, "<span class='notice'>How are you going to label that?</span>")
+		return
+	..()
+	update_icon()
+
+/obj/attach_label(var/user, var/atom/labeler, var/label_text)
+	if(!simulated)
+		return
+	var/datum/extension/labels/L = get_or_create_extension(src, /datum/extension/labels)
+	return L.AttachLabel(user, label_text)
+
+/mob/living/silicon/robot/platform/attach_label(var/user, var/atom/labeler, var/label_text)
+	if(!allowed(user))
+		to_chat(usr, SPAN_WARNING("Access denied."))
+	else if(client || key)
+		to_chat(user, SPAN_NOTICE("You rename \the [src] to [label_text]."))
+		to_chat(src, SPAN_NOTICE("\The [user] renames you to [label_text]."))
+		SetName(label_text)
+	else
+		to_chat(user, SPAN_WARNING("\The [src] is inactive and cannot be renamed."))
+
+/obj/item/reagent_containers/glass/attach_label(var/user, var/atom/labeler, var/label_text)
+	to_chat(user, SPAN_WARNING("The label can't stick to the [name] (Try using a pen)."))
+	return
+
+/obj/machinery/portable_atmospherics/hydroponics/attach_label(var/user, var/atom/labeler, var/label_text)
+	if(!mechanical)
+		to_chat(user, SPAN_WARNING("How are you going to label that?"))
+		return
+	..()
+	spawn(1)
+		update_icon()
 
 /obj/item/hand_labeler/attack_self(mob/user as mob)
 	mode = !mode
