@@ -63,9 +63,11 @@
 		if (!initial(NR.can_write))
 			continue
 		var/obj/item/paper/talisman/T = initial(NR.talisman_path)
+		var/req_invokers = initial(NR.required_invokers)
+		var/invokers_text = initial(NR.invokers_text)
 		runes[++runes.len] = list(
 			"name" = initial(NR.rune_name),
-			"invokers" = initial(NR.required_invokers),
+			"invoker_data" = invokers_text != null ? invokers_text : (req_invokers > 1 ? req_invokers : null),
 			"talisman" = T ? initial(T.tome_desc) : null,
 			"shorthand" = initial(NR.rune_shorthand) ? initial(NR.rune_shorthand) : initial(NR.rune_desc),
 			"typepath" = NR

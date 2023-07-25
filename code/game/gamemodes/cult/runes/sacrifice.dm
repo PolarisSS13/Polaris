@@ -1,9 +1,10 @@
 /obj/effect/rune/sacrifice
 	rune_name = "Sacrifice"
 	rune_desc = "Offer a living thing or a body to the Geometer of Blood. Living beings require three invokers to sacrifice, while dead beings require only one."
-	rune_shorthand = "Offers a creature to the Geometer for consumption."
+	rune_shorthand = "Offers a creature to the Geometer for consumption. Living beings require three invokers; dead being require only one."
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_BLOOD, CULT_WORD_JOIN)
 	invocation = "Barhah hra zar'garis!"
+	invokers_text = "1 or 3"
 	var/mob/living/sacrificing
 
 /// Fetches a sacrifice on top of this rune, aiming for the most "valuable" one (by way of species rarity, role, objective, and so on).

@@ -20,6 +20,8 @@
 	var/obj/item/paper/talisman/talisman_path
 	/// How many cultists need to be adjacent to this rune and able to speak in order to activate it.
 	var/required_invokers = 1
+	/// If non-null, this will be displayed in the rune's tome description instead of the invoker number.
+	var/invokers_text
 	/// The actual name of this rune (like "Sacrifice", "Convert", or so on), shown to cultists or ghosts that examine it.
 	var/rune_name
 	/// Very short description of the rune's functionality, to be shown as a tooltip in the tome.

@@ -17,7 +17,7 @@
 		<br /><br />
 		The tome is an essential tool, and every cultist should have one unless they have a good reason not to. It's small enough to fit into pockets, webbing, and so on, so it should be easy to find a place to squeeze it. That being said, arcane tomes are strange things to nonbelievers, and security may become concerned if they see one, especially near runes; try and keep it concealed.
 		<br /><br />
-		If need be, your tome can serve as a weapon as well. Simply switch to Harm intent and attack your foes with it to deal burn damage. Naturally, it will be abundantly obvious to the target that you are doing something otherworldly and very harmful.
+		If need be, your tome can serve as a weapon as well. Simply switch to Harm intent and attack your foes with it to deal burn damage. Naturally, doing so will be abundantly obvious to your target and everyone around.
 	{{else data.archive == 2}}
 		<b>Runes</b> are eldritch scrawlings, etched with precise shapes and words to invoke the power of Nar-Sie. They are the primary source of your power as a cultist, and they allow you to perform anomalous feats akin to magic. Some runes can be made into <b>talismans</b> that offer something akin to their abilities in a more portable form.
 		<br /><br />
@@ -49,8 +49,8 @@
 				<div class="itemContent">
 					{{:value.shorthand}}
 					<br/>
-					{{if value.invokers > 1}}
-						<br/><b><i>Required invokers - </i></b>{{:value.invokers}}
+					{{if value.invoker_data}}
+						<br/><b><i>Required invokers - </i></b>{{:value.invoker_data}}
 					{{/if}}
 					{{if value.talisman}}
 						<br/><b><i>Talisman effect - </i></b>{{:value.talisman}}
@@ -63,7 +63,7 @@
 		<div align="center">
 			<i>Entries marked with an asterisk (*) can be made into a talisman.</i><br /><br />
 			{{for data.runes}}
-				{{:helper.link(value.name + (value.talisman ? " *" : "") + (value.invokers > 1 ? " (" + value.invokers + " invokers)" : ""), null, { "write_rune" : value.typepath })}}
+				{{:helper.link(value.name + (value.talisman ? " *" : "") + (value.invoker_data ? " (" + value.invoker_data + " invokers)" : ""), null, { "write_rune" : value.typepath })}}
 			{{/for}}
 		</div>
 	{{/if}}
