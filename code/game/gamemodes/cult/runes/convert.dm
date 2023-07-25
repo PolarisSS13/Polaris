@@ -29,7 +29,7 @@
 			break
 	var/datum/gender/G = gender_datums[converting.get_visible_gender()]
 	converting.visible_message(
-		SPAN_DANGER("[converting] writhes in agony as the markings below [G.him] glow a sullen, bloody red."),
+		SPAN_DANGER("[converting] writhes as the markings below [G.him] glow a sullen, bloody red."),
 		SPAN_DANGER("AAAAAAHHHH-")
 	)
 	converting.emote("scream")
@@ -42,7 +42,7 @@
 		)
 		return
 	else
-		to_chat(user, SPAN_NOTICE("The ritual is begun. You must keep [converting] atop the rune until [G.him] succumb[G.s] to the Geometer's influence... or die from its revelation."))
+		to_chat(user, SPAN_NOTICE("The ritual is begun. You must keep [converting] atop the rune until [G.he] succumb[G.s] to the Geometer's influence - or die[G.s] from the revelation."))
 	impudence = 1
 	START_PROCESSING(SSprocessing, src)
 	process()
@@ -50,7 +50,7 @@
 /obj/effect/rune/convert/process()
 	if (!can_convert(converting) || !cult.can_become_antag(converting.mind) || get_turf(converting) != get_turf(src))
 		if (converting)
-			to_chat(converting, SPAN_DANGER("And then, just like that, it was gone. The blackness slowly recedes, and you are yourself again. It has taken something precious from you."))
+			to_chat(converting, SPAN_DANGER("And then, just like that, it was gone. The blackness slowly recedes, and you are yourself again. Are you still whole?"))
 		converting = null
 		waiting_for_input = FALSE
 		STOP_PROCESSING(SSprocessing, src)
@@ -64,29 +64,28 @@
 			var/choice = alert(converting, "Submit to the presence invading your head?", "Submit to Nar-Sie", "Submit!", "Resist!")
 			waiting_for_input = FALSE
 			if (choice == "Submit!")
-				cult.add_antagonist(converting.mind)
-				converting.hallucination = 0
 				to_chat(converting, SPAN_OCCULT("Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root."))
 				to_chat(converting, SPAN_OCCULT("Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back."))
+				cult.add_antagonist(converting.mind)
+				converting.hallucination = 0
 				converting = null
 				STOP_PROCESSING(SSprocessing, src)
 	if (impudence)
 		converting.take_overall_damage(0, min(5 * impudence, 20))
+		converting.apply_effect(min(5 * impudence, 20), AGONY)
 		switch (converting.getFireLoss())
 			if (0 to 25)
 				to_chat(converting, SPAN_DANGER("You feel like every part of you is on fire as you force yourself to resist the corruption invading every corner of your mind."))
-			if(25 to 45)
-				to_chat(converting, SPAN_DANGER("Everything is so, so hot. It feels like it's inside your body. Inside your <i>soul</i>."))
-			if(45 to 75)
-				to_chat(converting, SPAN_DANGER("Flickering images of a vast, vast, dark thing engulf your vision. Your will is crumbling."))
+			if (45 to 75)
+				to_chat(converting, SPAN_DANGER("Flickering images of a vast, vast, dark thing engulf your vision. Everything is so, so hot."))
 				converting.apply_effect(rand(1, 10), STUTTER)
-			if(75 to 100)
-				to_chat(converting, SPAN_DANGER("You feel like you're being cremated. Images of unspeakable horrors are bombarding the last remnants of your mental resistance."))
+			if (75 to 100)
+				to_chat(converting, SPAN_DANGER("You feel like you're being cremated. Images of unspeakable horror flicker through your senses like a slideshow."))
 				converting.hallucination = min(converting.hallucination + 100, 500)
 				converting.apply_effect(10, STUTTER)
 				converting.adjustBrainLoss(1)
-			if(100 to INFINITY)
-				to_chat(converting, SPAN_DANGER("You are broken. Everything is on fire. You feel yourself slipping away, drawn towards inexorable nothingness."))
+			if (100 to INFINITY)
+				to_chat(converting, SPAN_DANGER("Everything is on fire. You feel yourself coming apart, drawn towards inexorable nothingness."))
 				converting.hallucination = min(converting.hallucination + 100, 500)
 				converting.apply_effect(15, STUTTER)
 				converting.adjustBrainLoss(1)

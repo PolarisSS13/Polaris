@@ -1,6 +1,7 @@
 /obj/effect/rune/imbue_talisman
 	rune_name = "Imbue Talisman"
-	rune_desc = "Etches the markings of a nearby rune onto a piece of paper on top of this one. Only some runes can be made into talismans."
+	rune_desc = "Used to create talismans. To use, place a sheet of paper onto this rune, then scribe a different type of rune adjacent to this one. Invoke this one afterwards, and the other rune will be etched onto the paper, creating a talisman out of it. Only some runes can be made into talismans."
+	rune_shorthand = "Used to create talismans out of sheets of paper and other runes."
 	circle_words = list(CULT_WORD_HELL, CULT_WORD_TECHNOLOGY, CULT_WORD_JOIN)
 	invocation = "H'drak v'loso, mir'kanas verbot!"
 

@@ -1,13 +1,13 @@
 /obj/item/paper/talisman/stun
 	talisman_name = "Stun"
-	talisman_desc = "Forces the concentrated energy of a stun rune into a struck target, immediately knocking them to the ground. Humans will be prevented from speaking for a time."
-	tome_desc = "Forces concentrated energy into a struck target, knocking them to the ground and preventing them from speaking. Must be on Harm intent to use."
-	invocation = "Dream sign 'Evil Sealing Talisman'!" // I think this is a touhou reference
+	talisman_desc = "Forces concentrated energy into a struck target, immediately knocking them to the ground. Humans will be prevented from speaking for a time. This will be obvious to anyone nearby."
+	tome_desc = "Forces concentrated energy into a struck target, knocking them to the ground and preventing them from speaking. This is obvious to anyone nearby."
+	invocation = "Dream sign 'Evil Sealing Talisman'!" // I think this is a touhou reference, but I'm not sure - I kept it from the old implementation just in case
 	whispered = FALSE
 
 /obj/item/paper/talisman/stun/attack_self(mob/living/user)
 	if (iscultist(user))
-		to_chat(user, SPAN_NOTICE("To use this talisman, attack someone with it."))
+		to_chat(user, SPAN_NOTICE("To use this talisman, attack someone with it while on Harm intent."))
 	return
 
 /obj/item/paper/talisman/stun/attack(mob/living/carbon/T, mob/living/user)

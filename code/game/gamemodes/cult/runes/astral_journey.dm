@@ -50,7 +50,7 @@
 		ghost.forbid_seeing_deadchat = TRUE
 		ghost.name = "???"
 		ghost.color = COLOR_LIGHT_RED
-		announce_ghost_joinleave(ghost, TRUE, "You feel that they had to use some [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place!")
+		announce_ghost_joinleave(ghost, TRUE, "You feel that they had to use [pick("dark", "black", "blood", "forgotten", "forbidden")] magic to [pick("invade","disturb","disrupt","infest","taint","spoil","blight")] this place!")
 		START_PROCESSING(SSprocessing, src)
 
 /obj/effect/rune/astral_journey/process()

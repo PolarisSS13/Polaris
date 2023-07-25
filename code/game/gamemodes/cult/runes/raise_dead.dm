@@ -1,6 +1,6 @@
 /obj/effect/rune/raise_dead
 	rune_name = "Raise Dead"
-	rune_desc = "This rune allows for the resurrection of any dead person. You will need a dead human body and a living human sacrifice. Make 2 raise dead runes. Put a living, awake human on top of one, and a dead body on the other one. When you invoke the rune, the life force of the living human will be transferred into the dead body, allowing a ghost standing on top of the dead body to enter it, instantly and fully healing it. Use other runes to ensure there is a ghost ready to be resurrected."
+	rune_desc = "This rune allows for the resurrection of a dead body. You will need two copies of this rune - place a living human on top of one to use as a sacrifice, and the corpse you wish to resurrect on the other one. If the ritual is successful, the corpse will return to life, while the sacrifice will be torn apart."
 	rune_shorthand = "Brings a dead body to life using the sacrifice of a living human on another copy of the rune. If the dead body is not a cultist, they will become one."
 	circle_words = list(CULT_WORD_BLOOD, CULT_WORD_JOIN, CULT_WORD_SELF)
 	invocation = "Pasnar val'keriam usinar. Savrae ines amutan. Yam'toth remium il'tarat!"
@@ -53,7 +53,7 @@
 	if (ghost)
 		ghost.notify_revive("The cultist [L.real_name] is attempting to raise you from the dead. Return to your body if you wish to be risen into the service of Nar-Sie!", 'sound/effects/genetics.ogg', source = src)
 	if (do_after(shears, 5 SECONDS, lamb, FALSE, incapacitation_flags = INCAPACITATION_NONE))
-		resurrect(shears, lamb)
+		resurrect(shears, lamb, invokers[1])
 		return
 	to_chat(L, SPAN_NOTICE("The ritual's participants must remain stationary!"))
 	if (shears)
@@ -75,11 +75,11 @@
 		shears.visible_message(SPAN_WARNING("\The [shears] drops unceremoniously to the ground."))
 		lamb.visible_message(
 			SPAN_WARNING("\The [lamb] drops unceremoniously to the ground."),
-			SPAN_DANGER("THe force releases its hold on you, and you fall back to the ground!")
+			SPAN_DANGER("The force releases its hold on you, and you fall back to the ground!")
 		)
 		playsound(shears, "bodyfall", 50, TRUE)
 		playsound(lamb, "bodyfall", 50, TRUE)
-		to_chat(invoker, SPAN_WARNING("The deceased's spirit did not return to its body. It may if you try again, or it may not."))
+		to_chat(invoker, SPAN_WARNING("The deceased's spirit did not return to its body. It might work if you try again, or it might not."))
 		return
 	var/datum/gender/GS = gender_datums[shears.get_visible_gender()]
 	lamb.visible_message(
@@ -90,13 +90,11 @@
 	for (var/obj/item/organ/external/E in lamb.organs)
 		E.droplimb(FALSE, DROPLIMB_EDGE)
 	shears.revive()
-	shears.visible_message(
-		SPAN_DANGER("\The [shears] convulses violently as [GS.he] suddenly comes back to life!"),
-		SPAN_DANGER("Life... you're alive again...")
-	)
+	shears.visible_message(SPAN_DANGER("\The [shears] convulses violently as [GS.he] suddenly comes back to life!"))
+	to_chat(shears, SPAN_DANGER(FONT_LARGE("You are enveloped in a burning red light, plucked from death and forced back into your corpse like a taxidermist might stuff an animal.")))
 	if (!iscultist(shears))
-		cult.add_antagonist(shears.mind)
 		to_chat(shears, SPAN_OCCULT("Your blood pulses. Your head throbs. The world goes red. All at once you are aware of a horrible, horrible truth. The veil of reality has been ripped away and in the festering wound left behind something sinister takes root."))
 		to_chat(shears, SPAN_OCCULT("Assist your new compatriots in their dark dealings. Their goal is yours, and yours is theirs. You serve the Dark One above all else. Bring It back."))
+		cult.add_antagonist(shears.mind)
 	shears.flash_eyes(override_blindness_check = TRUE)
 	shears.Paralyse(10)

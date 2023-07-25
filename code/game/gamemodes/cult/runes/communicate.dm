@@ -1,6 +1,6 @@
 /obj/effect/rune/communicate
 	rune_name = "Communicate"
-	rune_desc = "Allows you to communicate with other cultists by speaking aloud next to the rune. Can be muted or unmuted through invocation."
+	rune_desc = "Allows you to communicate with other cultists by speaking or whispering aloud next to the rune. The rune can be muted or unmuted by invoking it."
 	talisman_path = /obj/item/paper/talisman/communicate
 	circle_words = list(CULT_WORD_SELF, CULT_WORD_OTHER, CULT_WORD_TECHNOLOGY)
 	invocation = "O bidai nabora se'sma!"

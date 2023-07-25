@@ -168,7 +168,8 @@
 		words.Remove(word)
 	update_icon()
 
-/// Sets up the appearance of all random runes at mapgen. Called here instead of `Initialize()` to avoid runtimes.
+/// Sets up the appearance of all random runes that were placed before roundstart. Called here instead of `Initialize()` to avoid runtimes.
 /hook/roundstart/proc/populate_malformed_runes()
 	for (var/obj/effect/rune/mapgen/M in cult.all_runes)
 		M.generate_words()
+	return TRUE
