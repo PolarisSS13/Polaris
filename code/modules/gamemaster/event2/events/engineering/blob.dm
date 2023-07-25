@@ -106,11 +106,15 @@
 /datum/event2/event/blob/start()
 	if(!open_turfs.len)
 		set_up()
-	for(var/i = 1 to number_of_blobs)
+	var/i = number_of_blobs
+	while(i && length(open_turfs))
 		var/turf/T = pick(open_turfs)
+		open_turfs -= T // So we can't put two cores on the same tile if doing multiblob.
+		if(locate(/obj/structure/blob) in T)
+			continue
+		i--
 		var/obj/structure/blob/core/new_blob = new spawn_blob_type(T)
 		blobs += weakref(new_blob)
-		open_turfs -= T // So we can't put two cores on the same tile if doing multiblob.
 		log_debug("Spawned [new_blob.overmind.blob_type.name] blob at [get_area(new_blob)].")
 
 /datum/event2/event/blob/should_end()

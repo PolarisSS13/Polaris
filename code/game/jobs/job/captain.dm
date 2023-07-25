@@ -25,7 +25,7 @@ var/global/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	minimum_character_age = 25
 	min_age_by_species = list(SPECIES_HUMAN_VATBORN = 14)
 	ideal_character_age = 70 // Old geezer captains ftw
-	ideal_age_by_species = list(SPECIES_HUMAN_VATBORN = 55) /// Vatborn live shorter, no other race eligible for captain besides human/skrell
+	ideal_age_by_species = list(SPECIES_HUMAN_VATBORN = 55) /// Vatborn live shorter, no other race eligible for captain besides human/Skrell
 	banned_job_species = list(SPECIES_UNATHI, SPECIES_TAJ, SPECIES_TESHARI, SPECIES_DIONA, SPECIES_PROMETHEAN, SPECIES_ZADDAT, SPECIES_VOX, "mechanical", "digital")
 
 	outfit_type = /decl/hierarchy/outfit/job/captain

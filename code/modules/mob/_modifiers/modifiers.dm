@@ -26,7 +26,7 @@
 	var/filter_instance = null			// Instance of a filter created with the `filter_parameters` list. This exists to make `animate()` calls easier. Don't set manually.
 
 	// Now for all the different effects.
-	// Percentage modifiers are expressed as a multipler. (e.g. +25% damage should be written as 1.25)
+	// Percentage modifiers are expressed as a multiplier. (e.g. +25% damage should be written as 1.25)
 	var/max_health_flat					// Adjusts max health by a flat (e.g. +20) amount.  Note this is added to base health.
 	var/max_health_percent				// Adjusts max health by a percentage (e.g. -30%).
 	var/disable_duration_percent		// Adjusts duration of 'disables' (stun, weaken, paralyze, confusion, sleep, halloss, etc)  Setting to 0 will grant immunity.
@@ -55,13 +55,13 @@
 	var/emp_modifier					// Added to the EMP strength, which is an inverse scale from 1 to 4, with 1 being the strongest EMP. 5 is a nullification.
 	var/explosion_modifier				// Added to the bomb strength, which is an inverse scale from 1 to 3, with 1 being gibstrength. 4 is a nullification.
 
-	// Note that these are combined with the mob's real armor values additatively. You can also omit specific armor types.
+	// Note that these are combined with the mob's real armor values additively. You can also omit specific armor types.
 	var/list/armor_percent = null		// List of armor values to add to the holder when doing armor calculations. This is for percentage based armor. E.g. 50 = half damage.
 	var/list/armor_flat = null			// Same as above but only for flat armor calculations. E.g. 5 = 5 less damage (this comes after percentage).
 	// Unlike armor, this is multiplicative. Two 50% protection modifiers will be combined into 75% protection (assuming no base protection on the mob).
 	var/heat_protection = null			// Modifies how 'heat' protection is calculated, like wearing a firesuit. 1 = full protection.
 	var/cold_protection = null			// Ditto, but for cold, like wearing a winter coat.
-	var/siemens_coefficient = null		// Similar to above two vars but 0 = full protection, to be consistant with siemens numbers everywhere else.
+	var/siemens_coefficient = null		// Similar to above two vars but 0 = full protection, to be consistent with siemens numbers everywhere else.
 
 	var/vision_flags					// Vision flags to add to the mob. SEE_MOB, SEE_OBJ, etc.
 
@@ -272,7 +272,7 @@
 
 
 
-// Helper to format multiplers (e.g. 1.4) to percentages (like '40%')
+// Helper to format multipliers (e.g. 1.4) to percentages (like '40%')
 /proc/multipler_to_percentage(var/multi, var/abs = FALSE)
 	if(abs)
 		return "[abs( ((multi - 1) * 100) )]%"

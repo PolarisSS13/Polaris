@@ -15,7 +15,7 @@
  * Misc
  */
 
-//Returns a list in plain english as a string
+//Returns a list in plain English as a string
 /proc/english_list(var/list/input, nothing_text = "nothing", and_text = " and ", comma_text = ", ", final_comma_text = ",")
 	// this proc cannot be merged with counting_english_list to maintain compatibility
 	// with shoddy use of this proc for code logic and for cases that require original order

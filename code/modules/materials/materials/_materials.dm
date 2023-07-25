@@ -62,6 +62,7 @@ var/global/list/name_to_material
 
 // Safety proc to make sure the material list exists before trying to grab from it.
 /proc/get_material_by_name(name)
+	name = lowertext(name)
 	if(!name_to_material)
 		populate_material_list()
 	return name_to_material[name]
@@ -115,6 +116,8 @@ var/global/list/name_to_material
 	var/luminescence
 	var/radiation_resistance = 0 // Radiation resistance, which is added on top of a material's weight for blocking radiation. Needed to make lead special without superrobust weapons.
 	var/supply_conversion_value  // Supply points per sheet that this material sells for.
+
+	var/perunit = SHEET_MATERIAL_AMOUNT //How much stacks of translate from sheet to amount
 
 	// Placeholder vars for the time being, todo properly integrate windows/light tiles/rods.
 	var/created_window
@@ -225,10 +228,14 @@ var/global/list/name_to_material
 /datum/material/proc/place_dismantled_product(var/turf/target)
 	place_sheet(target)
 
+/datum/material/proc/get_place_stack_type()
+	return stack_type
+
 // Debris product. Used ALL THE TIME.
-/datum/material/proc/place_sheet(var/turf/target)
-	if(stack_type)
-		return new stack_type(target)
+/datum/material/proc/place_sheet(var/turf/target, var/amount)
+	var/place_stack_type = get_place_stack_type()
+	if(place_stack_type)
+		return new place_stack_type(target, amount)
 
 // As above.
 /datum/material/proc/place_shard(var/turf/target)

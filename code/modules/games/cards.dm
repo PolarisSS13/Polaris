@@ -349,7 +349,7 @@
 
 /obj/item/pack/
 	name = "Card Pack"
-	desc = "For those with disposible income."
+	desc = "For those with disposable income."
 
 	icon_state = "card_pack"
 	icon = 'icons/obj/playing_cards.dmi'

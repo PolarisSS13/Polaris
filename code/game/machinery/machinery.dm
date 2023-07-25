@@ -111,6 +111,7 @@ Class Procs:
 	var/clickvol = 40		// volume
 	var/interact_offline = 0 // Can the machine be interacted with while de-powered.
 	var/obj/item/circuitboard/circuit = null
+	var/list/materials = list() //Exclusively used for machines that take materials - lathes, fabricators etc. Honestly overdue for a whole lathe/fab refactor at some point.
 
 	var/speed_process = FALSE			//If false, SSmachines. If true, SSfastprocess.
 
@@ -472,4 +473,70 @@ Class Procs:
 	return
 
 /datum/proc/remove_visual(mob/M)
+	return
+
+/obj/machinery/proc/eject_materials() //Used for autolathe, protolathe, mechfab, exofab. Stuff that takes materials, basically.
+	if(LAZYLEN(materials))
+		for(var/mat in materials)
+			var/datum/material/M = get_material_by_name(mat)
+			if(!istype(M) || materials[mat] == 0)
+				continue
+			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+			if(materials[mat] >= S.perunit)
+				S.amount = round(materials[mat] / S.perunit)
+			else
+				qdel(S) //Prevents stacks smaller than 1
+	return
+
+/obj/machinery/proc/eject_material_of_type(var/incoming_material) //Used for autolathe, protolathe, mechfab, exofab. Stuff that takes materials, basically.
+	if(!LAZYACCESS(materials, incoming_material))
+		return
+	var/datum/material/M = get_material_by_name(incoming_material)
+	if(!istype(M))
+		return
+	while(materials[incoming_material] > M.perunit)
+		var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
+		S.amount = min(round(materials[incoming_material] / S.perunit), S.max_amount)
+		materials[incoming_material] -= (S.amount * S.perunit)
+	return
+
+// 0 amount = 0 means ejecting a full stack; -1 means eject everything
+/obj/machinery/proc/eject_materials_partial(var/material, var/amount)
+
+	// Does the mat we want to dump exist?
+	var/matstring = lowertext(material)
+	var/datum/material/M = matstring && get_material_by_name(matstring)
+	if(!istype(M))
+		return
+
+	// If we're dumping the entire cache we can just use the general proc.
+	if(amount == -1 && materials[matstring] >= M.perunit)
+		eject_material_of_type(matstring)
+		return
+
+	// Get our stack place type for metadata retrieval via initial()
+	// Does this mat even have an ejectable stack form?
+	var/obj/item/stack/material/S = M.get_place_stack_type()
+	if(!ispath(S, /obj/item/stack))
+		return
+
+	// Place the maximum available based on the material store, or the target amount, whichever is lower (to avoid duplicating mats)
+	if(amount <= 0)
+		amount = initial(S.max_amount)
+	amount = clamp(amount, 0, round(materials[matstring] / initial(S.perunit)))
+
+	// Can we actually eject a viable sheet object?
+	if(amount <= 0)
+		return
+
+	// Fire it out the chute, ptooie.
+	S = M.place_sheet(get_turf(src), amount)
+	if(istype(S) && !QDELETED(S))
+		materials[matstring] = max(0, materials[matstring] - round(S.amount * S.perunit))
+
+	// Refresh our queue (if we handle queues; see below)
+	refresh_queue()
+
+// Stub for above proc. Implemented on exosuit fabricators and prosthetics fabricators.
+/obj/machinery/proc/refresh_queue()
 	return

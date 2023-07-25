@@ -4,13 +4,14 @@
 
 /datum/gear/cane/New()
 	..()
-	var/canetype = list()
-	canetype["walking cane"] = /obj/item/cane
-	canetype["telescopic walking cane"] = /obj/item/cane/telescopic
-	canetype["white cane"] = /obj/item/cane/white
-	canetype["telescopic white cane"] = /obj/item/cane/white/collapsible
-	canetype["folding white cane"] = /obj/item/cane/white/collapsible/folding
-	canetype["crutch"] = /obj/item/cane/crutch
+	var/list/canetype = list(
+	"walking cane" = /obj/item/cane,
+	"telescopic walking cane" = /obj/item/cane/telescopic,
+	"white cane" = /obj/item/cane/white,
+	"telescopic white cane" = /obj/item/cane/white/collapsible,
+	"folding white cane" = /obj/item/cane/white/collapsible/folding,
+	"crutch" = /obj/item/cane/crutch
+	)
 	gear_tweaks += new/datum/gear_tweak/path(canetype)
 
 /datum/gear/dice
@@ -73,13 +74,14 @@
 
 /datum/gear/toy/New()
 	..()
-	var/toytype = list()
-	toytype["Blink toy"] = /obj/item/toy/blink
-	toytype["Gravitational singularity"] = /obj/item/toy/spinningtoy
-	toytype["Water flower"] = /obj/item/reagent_containers/spray/waterflower
-	toytype["Bosun's whistle"] = /obj/item/toy/bosunwhistle
-	toytype["Magic 8 Ball"] = /obj/item/toy/eight_ball
-	toytype["Magic Conch shell"] = /obj/item/toy/eight_ball/conch
+	var/list/toytype = list(
+	"blink toy" = /obj/item/toy/blink,
+	"gravitational singularity" = /obj/item/toy/spinningtoy,
+	"water flower" = /obj/item/reagent_containers/spray/waterflower,
+	"bosun's whistle" = /obj/item/toy/bosunwhistle,
+	"magic 8 ball" = /obj/item/toy/eight_ball,
+	"magic conch shell" = /obj/item/toy/eight_ball/conch
+	)
 	gear_tweaks += new/datum/gear_tweak/path(toytype)
 
 
@@ -123,41 +125,42 @@
 
 /datum/gear/coffeemug/New()
 	..()
-	var/list/coffeemugs = list()
-	coffeemugs["plain coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug
-	coffeemugs["SCG coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/sol
-	coffeemugs["Fleet coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/fleet
-	coffeemugs["Five Arrows coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/fivearrows
-	coffeemugs["Pearlshield coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/psc
-	coffeemugs["Almach Association coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/alma
-	coffeemugs["Almach Protectorate coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/almp
-	coffeemugs["NT coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/nt
-	coffeemugs["Wulf Aeronautics mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/metal/wulf
-	coffeemugs["Gilthari Exports coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/gilthari
-	coffeemugs["Zeng-Hu coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/zeng
-	coffeemugs["Ward-Takahashi coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/wt
-	coffeemugs["Aether Atmospherics coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/aether
-	coffeemugs["Bishop Cybernetics coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/bishop
-	coffeemugs["Oculum Broadcast coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/oculum
-	coffeemugs["#1 coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/one
-	coffeemugs["#1 monkey coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/puni
-	coffeemugs["heart coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/heart
-	coffeemugs["pawn coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/pawn
-	coffeemugs["diona coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/diona
-	coffeemugs["british coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/britcup
-	coffeemugs["NCS Northern Star coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tourist
-	coffeemugs["flame coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/flame
-	coffeemugs["blue coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/blue
-	coffeemugs["black coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/black
-	coffeemugs["green coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/green
-	coffeemugs["dark green coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/green/dark
-	coffeemugs["rainbow coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/rainbow
-	coffeemugs["metal coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/metal
-	coffeemugs["glass coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/glass
-	coffeemugs["tall coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall
-	coffeemugs["tall black coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall/black
-	coffeemugs["tall metal coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall/metal
-	coffeemugs["tall rainbow coffee mug"] = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall/rainbow
+	var/list/coffeemugs = list(
+	"plain coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug,
+	"SCG coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/sol,
+	"Fleet coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/fleet,
+	"Five Arrows coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/fivearrows,
+	"Pearlshield coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/psc,
+	"Almach Association coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/alma,
+	"Almach Protectorate coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/almp,
+	"NT coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/nt,
+	"Wulf Aeronautics mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/metal/wulf,
+	"Gilthari Exports coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/gilthari,
+	"Zeng-Hu coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/zeng,
+	"Ward-Takahashi coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/wt,
+	"Aether Atmospherics coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/aether,
+	"Bishop Cybernetics coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/bishop,
+	"Oculum Broadcast coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/oculum,
+	"#1 coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/one,
+	"#1 monkey coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/puni,
+	"heart coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/heart,
+	"pawn coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/pawn,
+	"diona coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/diona,
+	"british coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/britcup,
+	"NCS Northern Star coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tourist,
+	"flame coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/flame,
+	"blue coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/blue,
+	"black coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/black,
+	"green coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/green,
+	"dark green coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/green/dark,
+	"rainbow coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/rainbow,
+	"metal coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/metal,
+	"glass coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/glass,
+	"tall coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall,
+	"tall black coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall/black,
+	"tall metal coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall/metal,
+	"tall rainbow coffee mug" = /obj/item/reagent_containers/food/drinks/glass2/coffeemug/tall/rainbow
+	)
 	gear_tweaks += new /datum/gear_tweak/path(coffeemugs)
 	gear_tweaks += new /datum/gear_tweak/reagents(lunchables_drink_reagents())
 

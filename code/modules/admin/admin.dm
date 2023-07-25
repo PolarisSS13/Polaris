@@ -1652,3 +1652,16 @@ var/global/floorIsLava = 0
 		qdel(P)
 		faxreply = null
 	return
+
+
+/datum/admins/proc/toggle_hub_visibility()
+	set category = "Server"
+	set desc = "Globally Toggles Hub Visibility"
+	set name = "Toggle Hub Visibility"
+	if(!check_rights(R_ADMIN))
+		return
+	world.update_hub_visibility()
+	var/long_message = "Updated hub visibility. The server is now [config.hub_visible ? "visible" : "invisible"]."
+	if (config.hub_visible && !world.reachable)
+		message_admins("WARNING: The server will not show up on the hub because byond is detecting that a firewall is blocking incoming connections.")
+	log_and_message_admins(long_message)

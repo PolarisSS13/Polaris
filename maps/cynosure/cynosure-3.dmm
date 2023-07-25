@@ -2045,6 +2045,7 @@
 /obj/effect/floor_decal/corner/yellow/bordercorner{
 	dir = 1
 	},
+/obj/item/gps,
 /turf/simulated/floor/tiled,
 /area/surface/station/storage/art)
 "bvI" = (
@@ -4396,6 +4397,8 @@
 	req_one_access = list(18)
 	},
 /obj/structure/window/reinforced,
+/obj/item/gps,
+/obj/item/gps,
 /turf/simulated/floor/tiled/old_cargo/gray,
 /area/surface/station/ai_monitored/storage/eva)
 "cRg" = (

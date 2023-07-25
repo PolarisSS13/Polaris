@@ -101,7 +101,7 @@
 	mob_push_flags = ~HEAVY
 	mob_swap_flags = ~HEAVY
 
-	var/identifying_gender // In case the human identifies as another gender than it's biological
+	var/identifying_gender // In case the human identifies as another gender than it's base body type
 
 	var/list/descriptors	// For comparative examine code
 

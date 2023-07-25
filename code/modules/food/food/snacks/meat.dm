@@ -16,7 +16,7 @@
 
 	if (!isnull(cooked_icon))
 		icon_state = cooked_icon
-		flat_icon = null //Force regenating the flat icon for coatings, since we've changed the icon of the thing being coated
+		flat_icon = null //Force regenerating the flat icon for coatings, since we've changed the icon of the thing being coated
 	..()
 
 	if (name == initial(name))
@@ -36,7 +36,7 @@
 	name = "synthetic meat"
 	desc = "A synthetic slab of flesh."
 
-// Seperate definitions because some food likes to know if it's human.
+// Separate definitions because some food likes to know if it's human.
 // TODO: rewrite kitchen code to check a var on the meat item so we can remove
 // all these sybtypes.
 /obj/item/reagent_containers/food/snacks/meat/human
@@ -55,17 +55,17 @@
 	filling_color = "#BBBBAA"
 
 /obj/item/reagent_containers/food/snacks/meat/chicken/Initialize()
-		. = ..()
-		reagents.remove_reagent("triglyceride", INFINITY)
-		//Chicken is low fat. Less total calories than other meats
+	. = ..()
+	reagents.remove_reagent("triglyceride", INFINITY)
+	//Chicken is low fat. Less total calories than other meats
 
 /obj/item/reagent_containers/food/snacks/meat/neaera
-	name = "neaera meat"
+	name = "Neaera meat"
 	desc = "A slab of.. blue meat?"
 	icon_state = "neaera_meat"
 
 /obj/item/reagent_containers/food/snacks/meat/neaera/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3)
-	reagents.add_reagent("seafood", 3)
+	reagents.add_reagent("protein", 3, list("fainty fungal meat" = 3))
+	reagents.add_reagent("seafood", 3, list("fainty fungal meat" = 3))
 	reagents.add_reagent("triglyceride", 2)

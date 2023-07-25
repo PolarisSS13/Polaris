@@ -11,10 +11,14 @@
 	req_access = list(access_robotics)
 	circuit = /obj/item/circuitboard/mechfab
 
+	var/list/href_data
+	var/topic_result
+
 	var/speed = 1
 	var/mat_efficiency = 1
-	var/list/materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
+	materials = list(MAT_STEEL = 0, "glass" = 0, "plastic" = 0, MAT_GRAPHITE = 0, MAT_PLASTEEL = 0, "gold" = 0, "silver" = 0, MAT_LEAD = 0, "osmium" = 0, "diamond" = 0, MAT_DURASTEEL = 0, "phoron" = 0, "uranium" = 0, MAT_VERDANTIUM = 0, MAT_MORPHIUM = 0, MAT_METALHYDROGEN = 0, MAT_SUPERMATTER = 0)
 	var/list/hidden_materials = list(MAT_PLASTEEL, MAT_DURASTEEL, MAT_GRAPHITE, MAT_VERDANTIUM, MAT_MORPHIUM, MAT_METALHYDROGEN, MAT_SUPERMATTER)
+	var/eject_lockout = FALSE
 	var/res_max_amount = 200000
 
 	var/datum/research/files
@@ -34,9 +38,7 @@
 	for(var/Name in name_to_material)
 		if(Name in materials)
 			continue
-
 		hidden_materials |= Name
-
 		materials[Name] = 0
 
 	default_apply_parts()
@@ -70,8 +72,7 @@
 		add_overlay("mechfab-active")
 
 /obj/machinery/mecha_part_fabricator/dismantle()
-	for(var/f in materials)
-		eject_materials(f, -1)
+	eject_materials() //Proc on obj/machinery in code/game/machinery/machinery.dm
 	..()
 
 /obj/machinery/mecha_part_fabricator/RefreshParts()
@@ -109,6 +110,7 @@
 	if(current)
 		data["builtperc"] = round((progress / current.time) * 100)
 
+	href_data = data
 	ui = SSnanoui.try_update_ui(user, src, ui_key, ui, data, force_open)
 	if(!ui)
 		ui = new(user, src, ui_key, "mechfab.tmpl", "Exosuit Fabricator UI", 800, 600)
@@ -117,6 +119,7 @@
 		ui.set_auto_update(1)
 
 /obj/machinery/mecha_part_fabricator/Topic(href, href_list)
+	topic_result = href_list
 	if(..())
 		return
 
@@ -130,8 +133,8 @@
 		if(href_list["category"] in categories)
 			category = href_list["category"]
 
-	if(href_list["eject"])
-		eject_materials(href_list["eject"], text2num(href_list["amount"]))
+	if(href_list["eject"] && !eject_lockout)
+		eject_materials_partial(href_list["eject"], text2num(href_list["amount"]))
 
 	if(href_list["sync"])
 		sync()
@@ -170,7 +173,7 @@
 					S.use(1)
 					count++
 				to_chat(user, "You insert [count] [sname] into the fabricator.")
-				update_busy()
+				refresh_queue()
 		else
 			to_chat(user, "The fabricator cannot hold more [sname].")
 
@@ -197,7 +200,7 @@
 		if(1)
 			visible_message("[bicon(src)] <b>[src]</b> beeps: \"No records in User DB\"")
 
-/obj/machinery/mecha_part_fabricator/proc/update_busy()
+/obj/machinery/mecha_part_fabricator/refresh_queue()
 	if(queue.len)
 		if(can_build(queue[1]))
 			busy = 1
@@ -212,13 +215,13 @@
 /obj/machinery/mecha_part_fabricator/proc/add_to_queue(var/index)
 	var/datum/design/D = files.known_designs[index]
 	queue += D
-	update_busy()
+	refresh_queue()
 
 /obj/machinery/mecha_part_fabricator/proc/remove_from_queue(var/index)
 	if(index == 1)
 		progress = 0
 	queue.Cut(index, index + 1)
-	update_busy()
+	refresh_queue()
 
 /obj/machinery/mecha_part_fabricator/proc/can_build(var/datum/design/D)
 	for(var/M in D.materials)
@@ -289,24 +292,6 @@
 				continue
 		if(!hidden_mat)
 			. += list(list("mat" = capitalize(T), "amt" = materials[T]))
-
-/obj/machinery/mecha_part_fabricator/proc/eject_materials(var/material, var/amount) // 0 amount = 0 means ejecting a full stack; -1 means eject everything
-	var/recursive = amount == -1 ? 1 : 0
-	var/matstring = lowertext(material)
-	var/datum/material/M = get_material_by_name(matstring)
-
-	var/obj/item/stack/material/S = M.place_sheet(get_turf(src))
-	if(amount <= 0)
-		amount = S.max_amount
-	var/ejected = min(round(materials[matstring] / S.perunit), amount)
-	S.amount = min(ejected, amount)
-	if(S.amount <= 0)
-		qdel(S)
-		return
-	materials[matstring] -= ejected * S.perunit
-	if(recursive && materials[matstring] >= S.perunit)
-		eject_materials(matstring, -1)
-	update_busy()
 
 /obj/machinery/mecha_part_fabricator/proc/sync()
 	sync_message = "Error: no console found."

@@ -178,7 +178,7 @@
 	while(AI && AI.stat != DEAD)
 		// This is absolutely evil and I love it.
 		if(AI.deployed_shell && prob(AI.oxyloss)) //You feel it creeping? Eventually will reach 100, resulting in the second half of the AI's remaining life being lonely.
-			AI.disconnect_shell("Disconnecting from remote shell due to insufficent power.")
+			AI.disconnect_shell("Disconnecting from remote shell due to insufficient power.")
 		AI.adjustOxyLoss(2)
 		AI.updatehealth()
 		sleep(10)

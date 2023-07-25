@@ -363,8 +363,8 @@
 
 	if(deadmin_holder)
 		deadmin_holder.reassociate()
-		log_admin("[src] re-admined themself.")
-		message_admins("[src] re-admined themself.", 1)
+		log_admin("[src] re-admined themselves.")
+		message_admins("[src] re-admined themselves.", 1)
 		to_chat(src, "<span class='filter_system interface'>You now have the keys to control the planet, or at least a small space station</span>")
 		verbs -= /client/proc/readmin_self
 
@@ -374,8 +374,8 @@
 
 	if(holder)
 		if(alert("Confirm self-deadmin for the round? You can't re-admin yourself without someone promoting you.",,"Yes","No") == "Yes")
-			log_admin("[src] deadmined themself.")
-			message_admins("[src] deadmined themself.", 1)
+			log_admin("[src] deadmined themselves.")
+			message_admins("[src] deadmined themselves.", 1)
 			deadmin()
 			to_chat(src, "<span class='filter_system interface'>You are now a normal player.</span>")
 			verbs |= /client/proc/readmin_self

@@ -1,7 +1,7 @@
 /obj/item/gun/energy/laser
 	name = "laser rifle"
 	desc = "A Hephaestus Industries G40E rifle, designed to kill with concentrated energy blasts.  This variant has the ability to \
-	switch between standard fire and a more efficent but weaker 'suppressive' fire."
+	switch between standard fire and a more efficient but weaker 'suppressive' fire."
 	description_fluff = "The leading arms producer in the SCG, Hephaestus typically only uses its 'top level' branding for its military-grade equipment used by armed forces across human space."
 	icon_state = "laser"
 	item_state = "laser"
@@ -31,7 +31,7 @@
 /obj/item/gun/energy/laser/mounted/augment
 	name = "arm-laser"
 	desc = "A cruel malformation of a Hephaestus Industries G40E rifle, designed to kill with concentrated energy blasts, all while being stowable in the arm. This variant has the ability to \
-	switch between standard fire and a more efficent but weaker 'suppressive' fire."
+	switch between standard fire and a more efficient but weaker 'suppressive' fire."
 	use_external_power = FALSE
 	use_organic_power = TRUE
 	wielded_item_state = null
@@ -68,7 +68,6 @@
 	name = "mining-laser rifle"
 	desc = "A Hephaestus Industries G22T rifle, now only produced for its impeccable ability to break stone with its pulsating blasts."
 	description_fluff = "The leading arms producer in the SCG, Hephaestus typically only uses its 'top level' branding for its military-grade equipment used by armed forces across human space."
-	icon = 'icons/obj/gun2.dmi'
 	icon_state = "mininglaser"
 	item_state = "laser"
 	wielded_item_state = "laser-wielded"

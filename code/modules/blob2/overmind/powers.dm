@@ -63,7 +63,7 @@
 /mob/observer/blob/verb/auto_resource()
 	set category = "Blob"
 	set name = "Auto Resource Blob (40)"
-	set desc = "Automatically places a resource tower near a node or your core, at a sufficent distance."
+	set desc = "Automatically places a resource tower near a node or your core, at a sufficient distance."
 
 	if(!blob_type.can_build_resources)
 		return FALSE
@@ -107,7 +107,7 @@
 /mob/observer/blob/verb/auto_factory()
 	set category = "Blob"
 	set name = "Auto Factory Blob (60)"
-	set desc = "Automatically places a resource tower near a node or your core, at a sufficent distance."
+	set desc = "Automatically places a resource tower near a node or your core, at a sufficient distance."
 
 	if(!blob_type.can_build_factories)
 		return FALSE
@@ -152,7 +152,7 @@
 /mob/observer/blob/verb/auto_node()
 	set category = "Blob"
 	set name = "Auto Node Blob (100)"
-	set desc = "Automatically places a node blob at a sufficent distance."
+	set desc = "Automatically places a node blob at a sufficient distance."
 
 	if(!blob_type.can_build_nodes)
 		return FALSE
@@ -199,8 +199,24 @@
 			if(B && B.overmind == src)
 				break
 
+	// Only player-blobs can currently move up or down at will. AI-blobs can only fall downward.
+	if(!B)	// No cardinals, check if it can creep down from above or build up from below.
+		var/list/T_ZChecks = list()
+
+		T_ZChecks["UP"] = GetAbove(T)
+		T_ZChecks["DOWN"]= GetBelow(T)
+
+		for(var/zdir in T_ZChecks)
+			var/turf/T_check = T_ZChecks[zdir]
+			if(!T_check)
+				continue
+			B = locate(/obj/structure/blob) in T_check
+			if(B && T.CanZPass(B, (zdir == "UP") ? DOWN : UP))	// Can the blob [B] from [zdir] pass into the target turf by moving in the opposite direction. IE, A blob above enter by moving downward, or reverse.
+				break
+			B = null	// If both checks fail, B must be nulled for the next check.
+
 	if(!B)
-		to_chat(src, "<span class='warning'>There is no blob cardinally adjacent to the target tile!</span>")
+		to_chat(src, "<span class='warning'>There is no blob cardinally or vertically adjacent to the target tile!</span>")
 		return
 
 	if(!can_buy(4))

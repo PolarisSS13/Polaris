@@ -100,17 +100,19 @@
 			var/bloodcolor=""
 
 			var/mob/living/carbon/human/H = M
-			if(istype(H) && istype(H.shoes, /obj/item/clothing/shoes))
-				var/obj/item/clothing/shoes/S = H.shoes
-				S.handle_movement(src, IS_RUNNING(H))
-				if(S.track_blood && S.blood_DNA)
-					bloodDNA = S.blood_DNA
-					bloodcolor=S.blood_color
-					S.track_blood--
-			else if(M.track_blood && M.feet_blood_DNA)
-				bloodDNA = M.feet_blood_DNA
-				bloodcolor = M.feet_blood_color
-				M.track_blood--
+			if(istype(H))
+				if(istype(H.shoes, /obj/item/clothing/shoes))
+					var/obj/item/clothing/shoes/S = H.shoes
+					if(S.track_blood && S.blood_DNA)
+						bloodDNA = S.blood_DNA
+						bloodcolor=S.blood_color
+						S.track_blood--
+				else if(M.track_blood && M.feet_blood_DNA)
+					bloodDNA = M.feet_blood_DNA
+					bloodcolor = M.feet_blood_color
+					M.track_blood--
+				for(var/obj/item/thing in H.get_movement_sensitive_gear())
+					thing.handle_movement(src, IS_RUNNING(H))
 
 			if(bloodDNA)
 				src.AddTracks(track_type, bloodDNA , M.dir, 0, bloodcolor) // Coming
@@ -171,3 +173,15 @@
 		new /obj/effect/decal/cleanable/blood/oil(src)
 	else if(ishuman(M))
 		add_blood(M)
+
+/turf/simulated/is_slime_food()
+	return dirt >= 50
+
+/turf/simulated/slime_chomp(mob/living/simple_mob/slime/xenobio/slime)
+	slime.adjust_nutrition(round(dirt / 5))
+	dirt = 0
+	slime.visible_message(
+		SPAN_NOTICE("\The [slime] cleans the dirt off of \the [src]!"),
+		SPAN_NOTICE("You eat all the dirt right off \the [src].")
+	)
+	update_dirt()

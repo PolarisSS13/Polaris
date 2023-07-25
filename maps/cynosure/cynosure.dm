@@ -15,6 +15,7 @@
 	#include "loadout/loadout_uniform.dm"
 
 	#include "datums/supplypacks/munitions.dm"
+	#include "datums/supplypacks/science.dm"
 	#include "datums/random_map.dm"
 	#include "datums/spawn.dm"
 

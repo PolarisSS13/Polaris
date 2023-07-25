@@ -8,18 +8,29 @@
 
 	desc = copy.desc
 	name = copy.name
+	icon = copy.icon
 	icon_state = copy.icon_state
 	item_state = copy.item_state
 	body_parts_covered = copy.body_parts_covered
 	flags_inv = copy.flags_inv
 
-	item_icons = copy.item_icons.Copy()
-	if(copy.item_state_slots) //Runtime prevention for backpacks
+	if (copy.item_icons)
+		item_icons = copy.item_icons.Copy()
+	if (copy.item_state_slots) //Runtime prevention for backpacks
 		item_state_slots = copy.item_state_slots.Copy()
-	sprite_sheets = copy.sprite_sheets.Copy()
-	//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
+	if (copy.sprite_sheets)
+		sprite_sheets = copy.sprite_sheets.Copy()
+		//copying sprite_sheets_obj should be unnecessary as chameleon items are not refittable.
 
 	return copy //for inheritance
+
+/obj/item/clothing/disguise(newtype)
+	var/obj/item/clothing/C = ..()
+	if (istype(C))
+		icon_override = C.icon_override
+		index = C.index
+		update_icon_define = C.update_icon_define
+	return C
 
 /proc/generate_chameleon_choices(var/basetype, var/blacklist=list())
 	. = list()
@@ -84,7 +95,7 @@
 /obj/item/clothing/head/chameleon/Initialize()
 	. = ..()
 	if(!clothing_choices)
-		var/blocked = list(src.type, /obj/item/clothing/head/justice,)//Prevent infinite loops and bad hats.
+		var/blocked = list(src.type)//Prevent infinite loops and bad hats.
 		clothing_choices = generate_chameleon_choices(/obj/item/clothing/head, blocked)
 
 /obj/item/clothing/head/chameleon/emp_act(severity) //Because we don't have psych for all slots right now but still want a downside to EMP.  In this case your cover's blown.
@@ -409,14 +420,15 @@
 //**Chameleon Gun**
 //*****************
 /obj/item/gun/energy/chameleon
-	name = "desert eagle"
+	name = "phase pistol"
 	desc = "A hologram projector in the shape of a gun. There is a dial on the side to change the gun's disguise."
-	icon_state = "deagle"
+	icon_state = "phase"
+	item_state = "taser"
+	modifystate = "phase"
 	w_class = ITEMSIZE_NORMAL
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 2, TECH_ILLEGAL = 4)
 	matter = list()
 
-	fire_sound = 'sound/weapons/Gunshot1.ogg'
 	projectile_type = /obj/item/projectile/chameleon
 	charge_meter = 0
 	charge_cost = 48 //uses next to no power, since it's just holograms
@@ -424,15 +436,23 @@
 
 	var/obj/item/projectile/copy_projectile
 	var/static/list/gun_choices
+	/// Without these being here, duplicate options appear in the list that result in null icons
+	var/static/list/gun_blacklist = list(
+		/obj/item/gun/energy/laser/xenoarch,
+		/obj/item/gun/energy/laser/practice/xenoarch,
+		/obj/item/gun/energy/xray/xenoarch,
+		/obj/item/gun/energy/captain/xenoarch
+	)
 
 /obj/item/gun/energy/chameleon/Initialize()
 	. = ..()
 
 	if(!gun_choices)
 		gun_choices = list()
-		for(var/gun_type in typesof(/obj/item/gun/) - src.type)
+		for(var/gun_type in typesof(/obj/item/gun/) - (gun_blacklist + type))
 			var/obj/item/gun/G = gun_type
 			src.gun_choices[initial(G.name)] = gun_type
+		gun_choices = sortList(gun_choices)
 	return
 
 /obj/item/gun/energy/chameleon/consume_next_projectile()
@@ -443,32 +463,34 @@
 		P.icon_state = initial(copy_projectile.icon_state)
 		P.pass_flags = initial(copy_projectile.pass_flags)
 		P.fire_sound = initial(copy_projectile.fire_sound)
+		P.hitsound = initial(copy_projectile.hitsound)
+		P.hitsound_wall = initial(copy_projectile.hitsound_wall)
 		P.hitscan = initial(copy_projectile.hitscan)
 		P.speed = initial(copy_projectile.speed)
+		P.range = initial(copy_projectile.range)
 		P.muzzle_type = initial(copy_projectile.muzzle_type)
 		P.tracer_type = initial(copy_projectile.tracer_type)
 		P.impact_type = initial(copy_projectile.impact_type)
 	return P
 
 /obj/item/gun/energy/chameleon/emp_act(severity)
-	name = "desert eagle"
-	desc = "It's a desert eagle."
-	icon_state = "deagle"
+	disguise(type)
 	update_icon()
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
 
 /obj/item/gun/energy/chameleon/disguise(var/newtype)
 	var/obj/item/gun/copy = ..()
 
 	flags_inv = copy.flags_inv
-	if(copy.fire_sound)
-		fire_sound = copy.fire_sound
+	fire_sound = copy.fire_sound ? copy.fire_sound : null
+	if (istype(copy, /obj/item/gun/energy))
+		var/obj/item/gun/energy/E = copy
+		modifystate = E.modifystate ? E.modifystate : E.icon_state
 	else
-		fire_sound = null
+		modifystate = copy.icon_state
+	item_state_slots = copy.item_state_slots
+	wielded_item_state = copy.wielded_item_state
 	fire_sound_text = copy.fire_sound_text
+	fire_delay = copy.fire_delay
 
 	var/obj/item/gun/G = copy
 	if(istype(G))
@@ -487,9 +509,4 @@
 		return
 
 	disguise(gun_choices[picked])
-
-	//so our overlays update.
-	if (ismob(src.loc))
-		var/mob/M = src.loc
-		M.update_inv_r_hand()
-		M.update_inv_l_hand()
+	update_icon()

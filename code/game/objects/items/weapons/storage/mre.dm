@@ -134,7 +134,7 @@ MRE Stuff
 
 /obj/item/storage/mre/menu9
 	name = "vegan MRE"
-	meal_desc = "This one is menu 9, boiled rice (skrell-safe)."
+	meal_desc = "This one is menu 9, boiled rice (Skrell-safe)."
 	icon_state = "vegmre"
 	starts_with = list(
 	/obj/item/storage/mrebag/menu9,

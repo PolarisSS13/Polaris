@@ -54,6 +54,9 @@
 	if(extra)
 		input = replace_characters(input, list("\n"=" ","\t"=" "))
 
+	input = html_decode(input) 	//this prevents double-encoding, but does nothing if it's not encoded already.
+								//For sending text to HTML UIs (eg browse() ), ensure encode = 1.
+
 	if(encode)
 		// The below \ escapes have a space inserted to attempt to enable CI auto-checking of span class usage. Please do not remove the space.
 		//In addition to processing html, html_encode removes byond formatting codes like "\ red", "\ i" and other.

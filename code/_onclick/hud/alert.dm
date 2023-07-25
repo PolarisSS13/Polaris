@@ -203,7 +203,7 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	icon_state = "hot"
 
 /obj/screen/alert/hot/robot
-	desc = "The air around you is too hot for a humanoid. Be careful to avoid exposing them to this enviroment."
+	desc = "The air around you is too hot for a humanoid. Be careful to avoid exposing them to this environment."
 
 /obj/screen/alert/chilly
 	name = "Too Chilly"
@@ -216,7 +216,7 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	icon_state = "cold"
 
 /obj/screen/alert/cold/robot
-	desc = "The air around you is too cold for a humanoid. Be careful to avoid exposing them to this enviroment."
+	desc = "The air around you is too cold for a humanoid. Be careful to avoid exposing them to this environment."
 
 /obj/screen/alert/lowpressure
 	name = "Low Pressure"
@@ -251,7 +251,7 @@ or something covering your eyes."
 
 /obj/screen/alert/confused
 	name = "Confused"
-	desc = "You're confused, and may stumble into things! This may be from concussive effects, drugs, or dizzyness. Walking will help reduce incidents."
+	desc = "You're confused, and may stumble into things! This may be from concussive effects, drugs, or dizziness. Walking will help reduce incidents."
 	icon_state = "confused"
 
 /obj/screen/alert/high

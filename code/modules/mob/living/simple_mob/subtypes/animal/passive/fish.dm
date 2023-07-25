@@ -47,7 +47,7 @@
 // Makes the AI unable to willingly go on land.
 /mob/living/simple_mob/animal/passive/fish/IMove(turf/newloc, safety = TRUE)
 	if(is_type_in_list(newloc, suitable_turf_types))
-		return ..() // Procede as normal.
+		return ..() // Proceed as normal.
 	return MOVEMENT_FAILED // Don't leave the water!
 
 // Take damage if we are not in water
@@ -105,6 +105,15 @@
 	icon_state = "koi-swim"
 	icon_living = "koi-swim"
 	icon_dead = "koi-dead"
+
+/mob/living/simple_mob/animal/passive/fish/planetcarp
+	name = "carp"
+	tt_desc = "S Cyprinus purpuracarpio"
+	icon_state = "carp-swim"
+	icon_living = "carp-swim"
+	icon_dead = "carp-dead"
+
+	meat_type = /obj/item/reagent_containers/food/snacks/carpmeat
 
 /datum/category_item/catalogue/fauna/javelin
 	name = "Sivian Fauna - Javelin Shark"

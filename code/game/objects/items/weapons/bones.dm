@@ -17,11 +17,11 @@
 	throwforce = 7
 
 /obj/item/bone/skull/tajaran
-	desc = "A skull. Judging by the shape and size, you'd guess that it might be tajaran."
+	desc = "A skull. Judging by the shape and size, you'd guess that it might be Tajaran."
 	icon_state = "tajskull"
 
 /obj/item/bone/skull/unathi
-	desc = "A skull. Judging by the shape and size, you'd guess that it might be unathi."
+	desc = "A skull. Judging by the shape and size, you'd guess that it might be Unathi."
 	icon_state = "unaskull"
 
 /obj/item/bone/skull/unknown

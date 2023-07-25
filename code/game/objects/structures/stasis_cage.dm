@@ -24,7 +24,6 @@
 /obj/structure/stasis_cage/proc/contain(var/mob/living/simple_mob/animal)
 	if(contained || !istype(animal))
 		return
-
 	contained = animal
 	animal.forceMove(src)
 	animal.in_stasis = 1
@@ -36,7 +35,6 @@
 /obj/structure/stasis_cage/proc/release()
 	if(!contained)
 		return
-
 	contained.dropInto(src)
 	if(contained.buckled && istype(contained.buckled, /obj/effect/energy_net))
 		contained.buckled.dropInto(src)
@@ -48,20 +46,39 @@
 
 /obj/structure/stasis_cage/Destroy()
 	release()
-
 	return ..()
 
 /mob/living/simple_mob/MouseDrop(var/obj/structure/stasis_cage/over_object)
-	if(istype(over_object) && Adjacent(over_object) && CanMouseDrop(over_object, usr))
-
-		if(!src.buckled || !istype(src.buckled, /obj/effect/energy_net))
-			to_chat(usr, "It's going to be difficult to convince \the [src] to move into \the [over_object] without capturing it in a net.")
-			return
-
-		usr.visible_message("[usr] begins stuffing \the [src] into \the [over_object].", "You begin stuffing \the [src] into \the [over_object].")
-		Bumped(usr)
-		if(do_after(usr, 20, over_object))
-			usr.visible_message("[usr] has stuffed \the [src] into \the [over_object].", "You have stuffed \the [src] into \the [over_object].")
-			over_object.contain(src)
-	else
+	if(!istype(over_object) || !Adjacent(over_object) || !CanMouseDrop(over_object, usr))
 		return ..()
+
+	if(src != usr && !(sleeping || lying) && !istype(buckled, /obj/effect/energy_net))
+		to_chat(usr, SPAN_WARNING("It's going to be difficult to load \the [src] into \the [over_object] without putting it to sleep or capturing it in a net."))
+		return
+
+	if(usr == src)
+		usr.visible_message(
+			SPAN_NOTICE("\The [src] starts climbing into [src] \the [over_object]."),
+			SPAN_NOTICE("You start climbing into \the [over_object].")
+		)
+	else
+		usr.visible_message(
+			SPAN_NOTICE("\The [usr] begins loading \the [src] into \the [over_object]."),
+			SPAN_NOTICE("You begin loading \the [src] into \the [over_object].")
+		)
+
+	Bumped(usr)
+	if(!do_after(usr, 20, over_object))
+		return
+
+	if(usr == src)
+		usr.visible_message(
+			SPAN_NOTICE("\The [usr] climbs into \the [over_object]."),
+			SPAN_NOTICE("You climb into \the [over_object].")
+		)
+	else
+		usr.visible_message(
+			SPAN_NOTICE("\The [usr] finishes loading \the [src] into \the [over_object]."),
+			SPAN_NOTICE("You finish loading \the [src] into \the [over_object].")
+		)
+	over_object.contain(src)

@@ -2,6 +2,7 @@ var/global/list/_human_default_emotes = list(
 	/decl/emote/visible/blink,
 	/decl/emote/audible/synth,
 	/decl/emote/audible/synth/ping,
+	/decl/emote/audible/synth/bing,
 	/decl/emote/audible/synth/buzz,
 	/decl/emote/audible/synth/confirm,
 	/decl/emote/audible/synth/deny,

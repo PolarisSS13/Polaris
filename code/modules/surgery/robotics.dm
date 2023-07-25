@@ -252,7 +252,7 @@
 		if(I.damage > 0 && (I.robotic >= ORGAN_ROBOT))
 			is_organ_damaged = 1
 			break
-	return affected.open == 3 && is_organ_damaged
+	return affected.open == (affected.encased ? 3 : 2) && is_organ_damaged
 
 /datum/surgery_step/robotics/fix_organ_robotic/begin_step(mob/user, mob/living/carbon/human/target, target_zone, obj/item/tool)
 	if (!hasorgans(target))

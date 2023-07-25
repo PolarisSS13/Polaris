@@ -37,18 +37,18 @@
 
 /datum/gear/shoes/colored/New()
 	..()
-	var/shoetype = list()
-	shoetype["shoes, black"] = /obj/item/clothing/shoes/black
-	shoetype["shoes, blue"] = /obj/item/clothing/shoes/blue
-	shoetype["shoes, brown"] = /obj/item/clothing/shoes/brown
-	shoetype["shoes, green"] = /obj/item/clothing/shoes/green
-	shoetype["shoes, orange"] = /obj/item/clothing/shoes/orange
-	shoetype["shoes, purple"] = /obj/item/clothing/shoes/purple
-	shoetype["shoes, rainbow"] = /obj/item/clothing/shoes/rainbow
-	shoetype["shoes, red"] = /obj/item/clothing/shoes/red
-	shoetype["shoes, white"] = /obj/item/clothing/shoes/white
-	shoetype["shoes, yellow"] = /obj/item/clothing/shoes/yellow
-
+	var/list/shoetype = list(
+	"shoes, black" = /obj/item/clothing/shoes/black,
+	"shoes, blue" = /obj/item/clothing/shoes/blue,
+	"shoes, brown" = /obj/item/clothing/shoes/brown,
+	"shoes, green" = /obj/item/clothing/shoes/green,
+	"shoes, orange" = /obj/item/clothing/shoes/orange,
+	"shoes, purple" = /obj/item/clothing/shoes/purple,
+	"shoes, rainbow" = /obj/item/clothing/shoes/rainbow,
+	"shoes, red" = /obj/item/clothing/shoes/red,
+	"shoes, white" = /obj/item/clothing/shoes/white,
+	"shoes, yellow" = /obj/item/clothing/shoes/yellow
+	)
 	gear_tweaks += new/datum/gear_tweak/path(shoetype)
 
 /datum/gear/shoes/lacey
@@ -107,6 +107,10 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/shoes/flats/alt
+	display_name = "shoes, flats alt (colorable)"
+	path = /obj/item/clothing/shoes/flats/white/color/alt
+
 /datum/gear/shoes/cowboy
 	display_name = "boots, cowboy selection"
 	path = /obj/item/clothing/shoes/boots/cowboy
@@ -155,19 +159,32 @@
 
 /datum/gear/shoes/winter_boots/New()
 	..()
-	var/boottype = list()
-	boottype["winter boots, atmospherics"] = /obj/item/clothing/shoes/boots/winter/atmos
-	boottype["winter boots, brown"] = /obj/item/clothing/shoes/boots/winter
-	boottype["winter boots, engineering"] = /obj/item/clothing/shoes/boots/winter/engineering
-	boottype["winter boots, hydroponics"] = /obj/item/clothing/shoes/boots/winter/hydro
-	boottype["winter boots, management"] = /obj/item/clothing/shoes/boots/winter/command
-	boottype["winter boots, medical"] = /obj/item/clothing/shoes/boots/winter/medical
-	boottype["winter boots, mining"] = /obj/item/clothing/shoes/boots/winter/mining
-	boottype["winter boots, science"] = /obj/item/clothing/shoes/boots/winter/science
-	boottype["winter boots, security"] = /obj/item/clothing/shoes/boots/winter/security
-	boottype["winter boots, supply"] = /obj/item/clothing/shoes/boots/winter/supply
 
+	var/list/boottype = list(
+	"winter boots, atmospherics" = /obj/item/clothing/shoes/boots/winter/atmos,
+	"winter boots, brown" = /obj/item/clothing/shoes/boots/winter,
+	"winter boots, engineering" = /obj/item/clothing/shoes/boots/winter/engineering,
+	"winter boots, hydroponics" = /obj/item/clothing/shoes/boots/winter/hydro,
+	"winter boots, management" = /obj/item/clothing/shoes/boots/winter/command,
+	"winter boots, medical" = /obj/item/clothing/shoes/boots/winter/medical,
+	"winter boots, mining" = /obj/item/clothing/shoes/boots/winter/mining,
+	"winter boots, science" = /obj/item/clothing/shoes/boots/winter/science,
+	"winter boots, security" = /obj/item/clothing/shoes/boots/winter/security,
+	"winter boots, supply" = /obj/item/clothing/shoes/boots/winter/supply
+	)
 	gear_tweaks += new/datum/gear_tweak/path(boottype)
 /datum/gear/shoes/circuitry
 	display_name = "boots, circuitry (empty)"
 	path = /obj/item/clothing/shoes/circuitry
+
+
+/datum/gear/shoes/clogs
+	display_name = "clogs (colorable)"
+	path = /obj/item/clothing/shoes/sandal/clogs
+
+/datum/gear/shoes/clogs/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+/datum/gear/shoes/ceremonial_guards
+	display_name = "ceremonial leg guards"
+	path = /obj/item/clothing/shoes/ceremonial_guards

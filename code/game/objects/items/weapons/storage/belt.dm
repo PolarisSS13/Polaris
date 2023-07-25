@@ -187,7 +187,7 @@
 		/obj/item/hailer,
 		/obj/item/megaphone,
 		/obj/item/melee,
-		/obj/item/clothing/accessory/badge,
+		/obj/item/clothing/accessory/medal/badge,
 		/obj/item/gun/projectile/sec,
 		/obj/item/gun/projectile/p92x,
 		/obj/item/taperoll,
@@ -218,7 +218,7 @@
 		/obj/item/camera,
 		/obj/item/autopsy_scanner,
 		/obj/item/mass_spectrometer,
-		/obj/item/clothing/accessory/badge,
+		/obj/item/clothing/accessory/medal/badge,
 		/obj/item/reagent_scanner,
 		/obj/item/reagent_containers/dropper,
 		/obj/item/reagent_containers/syringe,
@@ -360,7 +360,8 @@
 		/obj/item/megaphone,
 		/obj/item/taperoll,
 		/obj/item/reagent_containers/spray,
-		/obj/item/soap
+		/obj/item/soap,
+		/obj/item/tool/crowbar
 		)
 
 /obj/item/storage/belt/archaeology
@@ -464,3 +465,21 @@
 	can_hold = list(
 		/obj/item/ammo_casing/afoam_dart
 		)
+
+/obj/item/storage/belt/plant
+	name = "botany toolbelt"
+	desc = "A belt to hold various botanical tools."
+	icon_state = "plantbelt"
+	storage_slots = 8
+	can_hold = list(
+		/obj/item/reagent_containers/glass/bottle,
+		/obj/item/reagent_containers/glass/beaker,
+		/obj/item/material/minihoe,
+		/obj/item/shovel/spade,
+		/obj/item/material/knife/machete/hatchet,
+		/obj/item/analyzer/plant_analyzer,
+		/obj/item/gun/energy/floragun,
+		/obj/item/tool/wirecutters,
+		/obj/item/tool/wrench,
+		/obj/item/multitool,
+	)

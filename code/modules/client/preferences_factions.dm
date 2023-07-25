@@ -14,23 +14,28 @@ var/global/list/seen_religions = list()
 	return
 
 var/global/list/citizenship_choices = list(
-	"Earth",
-	"Mars",
-	"Sif",
-	"Binma",
-	"Moghes",
-	"Meralar",
-	"Qerr'balak"
+	"Solar Confederate Government",
+	"Almach Protectorate",
+	"Five Arrows",
+	"Pearlshield Coalition",
+	"Moghes Hegemony",
+	"Skrellian Kingdoms",
+	"Stateless" //Sol might automatically cover stateless humans/maybe posis but this is probably common for teshari/zaddat and ubiqtuous for drones
 	)
 
 var/global/list/home_system_choices = list(
 	"Sol",
 	"Vir",
-	"Nyx",
+	"Alpha Centauri",
 	"Tau Ceti",
+	"El",
+	"New Seoul",
+	"Relan",
+	"Vounna",
 	"Qerr'valis",
-	"Epsilon Ursae Minoris",
-	"Rarkajar"
+	"Rarkajar",
+	"Uueoa-Esa",
+	"Spacer"
 	)
 
 var/global/list/faction_choices = list(
@@ -46,10 +51,24 @@ var/global/list/faction_choices = list(
 	"Zeng-Hu Pharmaceuticals",
 	"Hephaestus Industries",
 	"Morpheus Cyberkinetics",
-	"Xion Manufacturing Group"
+	"Xion Manufacturing Group",
+	"Hedberg-Hammarstrom",
+	"Kaleidoscope Cosmetics",
+	"Stealth Assault Enterprises",
+	"Proxima Centauri Risk Control"
 	)
 
-var/global/list/antag_faction_choices = list()	//Should be populated after brainstorming. Leaving as blank in case brainstorming does not occur.
+var/global/list/antag_faction_choices = list(
+	"Nos Amis",
+	"Russian Mafia",
+	"Sampatti",
+	"Xin Cohong",
+	"Golden Tiger Syndicate",
+	"Jaguar Gang",
+	"Revolutionary Solar People's Party",
+	"Vystholm",
+	"Qerr-Glia"
+	)
 
 var/global/list/antag_visiblity_choices = list(
 	"Hidden",
@@ -71,7 +90,9 @@ var/global/list/religion_choices = list(
 	"Kishari Faith",
 	"Hauler Faith",
 	"Nock",
+	"Starlit Path",
 	"Singulitarian Worship",
+	"The Unity",
 	"Xilar Qall",
 	"Tajr-kii Rarkajar",
 	"Agnosticism",

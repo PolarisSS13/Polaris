@@ -97,7 +97,7 @@
 	HTML += "Assembly Cloning: [can_clone ? "Available": "Unavailable"].<br>"
 	if(assembly_to_clone)
 		HTML += "Assembly '[assembly_to_clone.name]' loaded.<br>"
-	HTML += "Crossed out circuits mean that the printer is not sufficentally upgraded to create that circuit.<br>"
+	HTML += "Crossed out circuits mean that the printer is not sufficiently upgraded to create that circuit.<br>"
 	HTML += "<hr>"
 	HTML += "Categories:"
 	for(var/category in SScircuit.circuit_fabricator_recipe_list)

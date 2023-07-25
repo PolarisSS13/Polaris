@@ -3120,7 +3120,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
@@ -4902,11 +4902,6 @@
 /obj/item/clothing/head/pin/flower/blue,
 /obj/item/clothing/head/pin/flower/orange,
 /obj/item/clothing/head/pin/flower/pink,
-/obj/item/clothing/head/justice,
-/obj/item/clothing/head/justice/blue,
-/obj/item/clothing/head/justice/green,
-/obj/item/clothing/head/justice/pink,
-/obj/item/clothing/head/justice/yellow,
 /obj/item/clothing/head/collectable/philosopher_wig,
 /obj/item/clothing/head/collectable/plaguedoctorhat,
 /obj/item/clothing/head/collectable/xenos,
@@ -5317,7 +5312,8 @@
 /area/ninja_dojo/dojo)
 "fZU" = (
 /obj/machinery/door/airlock/centcom{
-	name = "Storage"
+	name = "Storage";
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -5453,7 +5449,8 @@
 "ggE" = (
 /obj/machinery/door/airlock/centcom{
 	icon_state = "door_locked";
-	locked = 1
+	locked = 1;
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -9130,7 +9127,8 @@
 /area/wizard_station)
 "kje" = (
 /obj/machinery/door/airlock/centcom{
-	name = "Suit Storage"
+	name = "Suit Storage";
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -9218,7 +9216,7 @@
 "knf" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Kitchen";
-	req_access = list(150)
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "white"
@@ -10663,9 +10661,9 @@
 /area/shuttle/merchant/home)
 "lMq" = (
 /obj/structure/table/standard,
-/obj/item/clothing/accessory/permit,
-/obj/item/clothing/accessory/permit,
-/obj/item/clothing/accessory/permit,
+/obj/item/clothing/accessory/medal/permit,
+/obj/item/clothing/accessory/medal/permit,
+/obj/item/clothing/accessory/medal/permit,
 /turf/unsimulated/floor{
 	icon_state = "steel"
 	},
@@ -11200,7 +11198,8 @@
 /area/space)
 "mpf" = (
 /obj/machinery/door/airlock/centcom{
-	name = "Armory"
+	name = "Armory";
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -11301,7 +11300,7 @@
 "muV" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Barracks";
-	req_access = list(150)
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "cult";
@@ -12276,7 +12275,7 @@
 "nAf" = (
 /obj/machinery/door/airlock/centcom{
 	name = "Barracks";
-	req_access = list(150)
+	req_one_access = list(150)
 	},
 /turf/unsimulated/floor{
 	icon_state = "lino"
@@ -14326,7 +14325,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor{
 	icon = 'icons/turf/flooring/tiles.dmi';
@@ -14657,7 +14656,7 @@
 	dir = 4;
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/unsimulated/floor{
 	icon_state = "dark"
@@ -15254,7 +15253,7 @@
 	dir = 4;
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
@@ -18972,7 +18971,7 @@
 /obj/machinery/vending/cigarette{
 	name = "hacked cigarette machine";
 	prices = list();
-	products = list(/obj/item/storage/fancy/cigarettes = 10, /obj/item/storage/box/matches = 10, /obj/item/flame/lighter/zippo = 4, /obj/item/clothing/mask/smokable/cigarette/cigar/havana = 2)
+	products = list(/obj/item/storage/fancy/cigarettes=10,/obj/item/storage/box/matches=10,/obj/item/flame/lighter/zippo=4,/obj/item/clothing/mask/smokable/cigarette/cigar/havana=2)
 	},
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
@@ -20115,7 +20114,7 @@
 /obj/machinery/vending/assist{
 	contraband = null;
 	name = "AntagCorpVend";
-	products = list(/obj/item/assembly/prox_sensor = 5, /obj/item/assembly/signaler = 4, /obj/item/assembly/infra = 4, /obj/item/assembly/prox_sensor = 4, /obj/item/handcuffs = 8, /obj/item/flash = 4, /obj/item/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
+	products = list(/obj/item/assembly/prox_sensor=5,/obj/item/assembly/signaler=4,/obj/item/assembly/infra=4,/obj/item/assembly/prox_sensor=4,/obj/item/handcuffs=8,/obj/item/flash=4,/obj/item/cartridge/signal=4,/obj/item/clothing/glasses/sunglasses=4)
 	},
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
@@ -22152,7 +22151,7 @@
 	contraband = null;
 	dir = 1;
 	name = "Old Vending Machine";
-	products = list(/obj/item/assembly/prox_sensor = 5, /obj/item/assembly/signaler = 4, /obj/item/assembly/infra = 4, /obj/item/assembly/prox_sensor = 4, /obj/item/handcuffs = 8, /obj/item/flash = 4, /obj/item/cartridge/signal = 4, /obj/item/clothing/glasses/sunglasses = 4)
+	products = list(/obj/item/assembly/prox_sensor=5,/obj/item/assembly/signaler=4,/obj/item/assembly/infra=4,/obj/item/assembly/prox_sensor=4,/obj/item/handcuffs=8,/obj/item/flash=4,/obj/item/cartridge/signal=4,/obj/item/clothing/glasses/sunglasses=4)
 	},
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)

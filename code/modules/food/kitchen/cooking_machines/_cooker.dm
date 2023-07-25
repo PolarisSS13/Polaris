@@ -132,7 +132,7 @@
 		if(cooking_objs.len < max_contents)
 			return 1
 	else
-		//Any food items directly added need an empty container. A slot without a container cant hold food
+		//Any food items directly added need an empty container. A slot without a container can't hold food
 		for (var/datum/cooking_item/CI in cooking_objs)
 			if (CI.container.check_contents() == 0)
 				return CI

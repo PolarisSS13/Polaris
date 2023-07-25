@@ -158,7 +158,7 @@
 //A harvest item for serviceborgs.
 /obj/item/robot_harvester
 	name = "auto harvester"
-	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficently."
+	desc = "A hand-held harvest tool that resembles a sickle.  It uses energy to cut plant matter very efficiently."
 	icon = 'icons/obj/weapons.dmi'
 	icon_state = "autoharvester"
 

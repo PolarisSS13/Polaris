@@ -136,7 +136,7 @@
 	price_tag = 5
 
 /datum/reagent/ethanol/coffee/brave_bull // Not an original liquor in its own. But since it's a mix of purely Tequila
-	price_tag = 5						 // and Kahlua, it's basically just another one and gets the same price.
+	price_tag = 5						 // and Kahlúa, it's basically just another one and gets the same price.
 
 
 // Wines //

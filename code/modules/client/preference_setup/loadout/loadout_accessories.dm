@@ -157,10 +157,11 @@
 
 /datum/gear/accessory/webbing_vest/New()
 	..()
-	var/webbingtype = list()
-	webbingtype["webbing, brown"] = /obj/item/clothing/accessory/storage/brown_vest
-	webbingtype["webbing, black"] = /obj/item/clothing/accessory/storage/black_vest
-	webbingtype["webbing, white"] = /obj/item/clothing/accessory/storage/white_vest
+	var/list/webbingtype = list(
+	"webbing, brown" = /obj/item/clothing/accessory/storage/brown_vest,
+	"webbing, black" = /obj/item/clothing/accessory/storage/black_vest,
+	"webbing, white" = /obj/item/clothing/accessory/storage/white_vest
+	)
 	gear_tweaks += new/datum/gear_tweak/path(webbingtype)
 
 /datum/gear/accessory/webbing_simple
@@ -175,10 +176,11 @@
 
 /datum/gear/accessory/drop_pouches/New()
 	..()
-	var/pouchtype = list()
-	pouchtype["drop pouches, brown"] = /obj/item/clothing/accessory/storage/brown_drop_pouches
-	pouchtype["drop pouches, black"] = /obj/item/clothing/accessory/storage/black_drop_pouches
-	pouchtype["drop pouches, white"] = /obj/item/clothing/accessory/storage/white_drop_pouches
+	var/list/pouchtype = list(
+	"drop pouches, brown" = /obj/item/clothing/accessory/storage/brown_drop_pouches,
+	"drop pouches, black" = /obj/item/clothing/accessory/storage/black_drop_pouches,
+	"drop pouches, white" = /obj/item/clothing/accessory/storage/white_drop_pouches
+	)
 	gear_tweaks += new/datum/gear_tweak/path(pouchtype)
 
 /datum/gear/accessory/overalls
@@ -188,9 +190,10 @@
 
 /datum/gear/accessory/overalls/New()
 	..()
-	var/overalltype = list()
-	overalltype["overalls, high-vis stripe"] = /obj/item/clothing/accessory/storage/overalls
-	overalltype["overalls, brown"] = /obj/item/clothing/accessory/storage/overalls/engineer
+	var/overalltype = list(
+	"overalls, high-vis stripe" = /obj/item/clothing/accessory/storage/overalls,
+	"overalls, brown" = /obj/item/clothing/accessory/storage/overalls/engineer
+	)
 	gear_tweaks += new/datum/gear_tweak/path(overalltype)
 
 /datum/gear/accessory/fannypack
@@ -205,6 +208,7 @@
 		var/obj/item/storage/belt/fannypack/fanny_type = fanny
 		fannys[initial(fanny_type.name)] = fanny_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(fannys))
+
 /datum/gear/accessory/chaps
 	display_name = "chaps, brown"
 	path = /obj/item/clothing/accessory/chaps
@@ -219,10 +223,11 @@
 
 /datum/gear/accessory/hawaii/New()
 	..()
-	var/list/shirts = list()
-	shirts["blue hawaii shirt"] = /obj/item/clothing/accessory/hawaii
-	shirts["red hawaii shirt"] = /obj/item/clothing/accessory/hawaii/red
-	shirts["random colored hawaii shirt"] = /obj/item/clothing/accessory/hawaii/random
+	var/list/shirts = list(
+	"blue hawaii shirt" = /obj/item/clothing/accessory/hawaii,
+	"red hawaii shirt" = /obj/item/clothing/accessory/hawaii/red,
+	"random colored hawaii shirt" = /obj/item/clothing/accessory/hawaii/random
+	)
 	gear_tweaks += new/datum/gear_tweak/path(shirts)
 
 /datum/gear/accessory/sweater
@@ -245,19 +250,20 @@
 
 /datum/gear/accessory/bracelet/material/New()
 	..()
-	var/bracelettype = list()
-	bracelettype["bracelet, steel"] = /obj/item/clothing/accessory/bracelet/material/steel
-	bracelettype["bracelet, iron"] = /obj/item/clothing/accessory/bracelet/material/iron
-	bracelettype["bracelet, silver"] = /obj/item/clothing/accessory/bracelet/material/silver
-	bracelettype["bracelet, gold"] = /obj/item/clothing/accessory/bracelet/material/gold
-	bracelettype["bracelet, platinum"] = /obj/item/clothing/accessory/bracelet/material/platinum
-	bracelettype["bracelet, glass"] = /obj/item/clothing/accessory/bracelet/material/glass
-	bracelettype["bracelet, wood"] = /obj/item/clothing/accessory/bracelet/material/wood
-	bracelettype["bracelet, sivian wood"] = /obj/item/clothing/accessory/bracelet/material/sifwood
-	bracelettype["bracelet, plastic"] = /obj/item/clothing/accessory/bracelet/material/plastic
-	bracelettype["bracelet, copper"] = /obj/item/clothing/accessory/bracelet/material/copper
-	bracelettype["bracelet, bronze"] = /obj/item/clothing/accessory/bracelet/material/bronze
-	bracelettype["bracelet, friendship"] = /obj/item/clothing/accessory/bracelet/friendship
+	var/list/bracelettype = list(
+	"bracelet, steel" = /obj/item/clothing/accessory/bracelet/material/steel,
+	"bracelet, iron" = /obj/item/clothing/accessory/bracelet/material/iron,
+	"bracelet, silver" = /obj/item/clothing/accessory/bracelet/material/silver,
+	"bracelet, gold" = /obj/item/clothing/accessory/bracelet/material/gold,
+	"bracelet, platinum" = /obj/item/clothing/accessory/bracelet/material/platinum,
+	"bracelet, glass" = /obj/item/clothing/accessory/bracelet/material/glass,
+	"bracelet, wood" = /obj/item/clothing/accessory/bracelet/material/wood,
+	"bracelet, sivian wood" = /obj/item/clothing/accessory/bracelet/material/sifwood,
+	"bracelet, plastic" = /obj/item/clothing/accessory/bracelet/material/plastic,
+	"bracelet, copper" = /obj/item/clothing/accessory/bracelet/material/copper,
+	"bracelet, bronze" = /obj/item/clothing/accessory/bracelet/material/bronze,
+	"bracelet, friendship" = /obj/item/clothing/accessory/bracelet/friendship
+	)
 	gear_tweaks += new/datum/gear_tweak/path(bracelettype)
 
 /datum/gear/accessory/bracelet/slap
@@ -288,6 +294,8 @@
 /datum/gear/accessory/fullcape
 	display_name = "cape, full"
 	path = /obj/item/clothing/accessory/fullcape
+
+
 
 /datum/gear/accessory/sash
 	display_name = "sash (colorable)"
@@ -328,28 +336,28 @@
 
 /datum/gear/accessory/pride
 	display_name = "pride pin selection"
-	path = /obj/item/clothing/accessory/pride
+	path = /obj/item/clothing/accessory/medal/pride
 
 /datum/gear/accessory/pride/New()
 	..()
 	var/list/pridepins = list()
-	for(var/pridepin in typesof(/obj/item/clothing/accessory/pride))
-		var/obj/item/clothing/accessory/pridepin_type = pridepin
+	for(var/pridepin in typesof(/obj/item/clothing/accessory/medal/pride))
+		var/obj/item/clothing/accessory/medal/pridepin_type = pridepin
 		pridepins[initial(pridepin_type.name)] = pridepin_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(pridepins))
 
 /datum/gear/accessory/corpbadge
 	display_name = "investigator holobadge (IAA)"
-	path = /obj/item/clothing/accessory/badge/holo/investigator
-	allowed_roles = list("Internal affairs agent")
+	path = /obj/item/clothing/accessory/medal/badge/holo/investigator
+	allowed_roles = list("Internal Affairs Agent")
 
 /datum/gear/accessory/pressbadge
 	display_name = "press pass, corporate"
-	path = /obj/item/clothing/accessory/badge/press
+	path = /obj/item/clothing/accessory/medal/badge/press
 
 /datum/gear/accessory/pressbadgefreelance
 	display_name = "press pass, freelance"
-	path = /obj/item/clothing/accessory/badge/press/independent
+	path = /obj/item/clothing/accessory/medal/badge/press/independent
 
 /datum/gear/accessory/legbrace
 	display_name = "leg braces"
@@ -367,18 +375,19 @@
 
 /datum/gear/accessory/necklace/New()
 	..()
-	var/necklacetype = list()
-	necklacetype["necklace, steel"] = /obj/item/clothing/accessory/necklace/steel
-	necklacetype["necklace, iron"] = /obj/item/clothing/accessory/necklace/iron
-	necklacetype["necklace, silver"] = /obj/item/clothing/accessory/necklace/silver
-	necklacetype["necklace, gold"] = /obj/item/clothing/accessory/necklace/gold
-	necklacetype["necklace, platinum"] = /obj/item/clothing/accessory/necklace/platinum
-	necklacetype["necklace, glass"] = /obj/item/clothing/accessory/necklace/glass
-	necklacetype["necklace, wood"] = /obj/item/clothing/accessory/necklace/wood
-	necklacetype["necklace, sivian wood"] = /obj/item/clothing/accessory/necklace/sifwood
-	necklacetype["necklace, plastic"] = /obj/item/clothing/accessory/necklace/plastic
-	necklacetype["necklace, copper"] = /obj/item/clothing/accessory/necklace/copper
-	necklacetype["necklace, bronze"] = /obj/item/clothing/accessory/necklace/bronze
+	var/list/necklacetype = list(
+	"necklace, steel" = /obj/item/clothing/accessory/necklace/steel,
+	"necklace, iron" = /obj/item/clothing/accessory/necklace/iron,
+	"necklace, silver" = /obj/item/clothing/accessory/necklace/silver,
+	"necklace, gold" = /obj/item/clothing/accessory/necklace/gold,
+	"necklace, platinum" = /obj/item/clothing/accessory/necklace/platinum,
+	"necklace, glass" = /obj/item/clothing/accessory/necklace/glass,
+	"necklace, wood" = /obj/item/clothing/accessory/necklace/wood,
+	"necklace, sivian wood" = /obj/item/clothing/accessory/necklace/sifwood,
+	"necklace, plastic" = /obj/item/clothing/accessory/necklace/plastic,
+	"necklace, copper" = /obj/item/clothing/accessory/necklace/copper,
+	"necklace, bronze" = /obj/item/clothing/accessory/necklace/bronze
+	)
 	gear_tweaks += new/datum/gear_tweak/path(necklacetype)
 
 /datum/gear/accessory/neckerchief/New()
@@ -393,10 +402,19 @@
 
 /datum/gear/accessory/watch/New()
 	..()
-	var/watchtype = list()
-	watchtype["watch"] = /obj/item/clothing/accessory/watch
-	watchtype["watch, silver"] = /obj/item/clothing/accessory/watch/silver
-	watchtype["watch, gold"] = /obj/item/clothing/accessory/watch/gold
-	watchtype["watch, holographic"] = /obj/item/clothing/accessory/watch/holo
-	watchtype["watch, leather"] = /obj/item/clothing/accessory/watch/leather
+	var/list/watchtype = list(
+	"watch" = /obj/item/clothing/accessory/watch,
+	"watch, silver" = /obj/item/clothing/accessory/watch/silver,
+	"watch, gold" = /obj/item/clothing/accessory/watch/gold,
+	"watch, holographic" = /obj/item/clothing/accessory/watch/holo,
+	"watch, leather" = /obj/item/clothing/accessory/watch/leather
+	)
 	gear_tweaks += new/datum/gear_tweak/path(watchtype)
+
+/datum/gear/accessory/ceremonial_bracers
+	display_name = "ceremonial bracers"
+	path = /obj/item/clothing/accessory/ceremonial_bracers
+
+/datum/gear/accessory/ceremonial_loins
+	display_name = "ceremonial loincloth"
+	path = /obj/item/clothing/accessory/ceremonial_loins

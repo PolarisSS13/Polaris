@@ -432,6 +432,7 @@
 	R.gender = subject.gender
 	R.body_descriptors = subject.descriptors
 	R.flavor = subject.flavor_texts.Copy()
+	R.identifying_gender = subject.identifying_gender
 	for(var/datum/modifier/mod in subject.modifiers)
 		if(mod.flags & MODIFIER_GENETIC)
 			R.genetic_modifiers.Add(mod.type)

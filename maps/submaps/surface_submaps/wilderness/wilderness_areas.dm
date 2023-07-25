@@ -182,3 +182,12 @@
 /area/submap/DeathDen
 	name = "POI - Death Den"
 	ambience = AMBIENCE_FOREBODING
+
+/area/submap/Research1
+	name = "POI - Gene Lab"
+	ambience = AMBIENCE_HIGHSEC
+	requires_power = FALSE
+
+/area/submap/CollapsedMine
+	name = "POI - Collapsed Mine"
+	ambience = AMBIENCE_FOREBODING

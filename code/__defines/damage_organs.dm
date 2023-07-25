@@ -9,6 +9,7 @@
 #define ELECTROCUTE "electrocute"
 #define BIOACID   "bioacid"
 #define SEARING   "searing"
+#define ELECTROMAG "electromag"
 
 #define CUT       "cut"
 #define BRUISE    "bruise"
@@ -16,7 +17,7 @@
 
 #define STUN      "stun"
 #define WEAKEN    "weaken"
-#define PARALYZE  "paralize"
+#define PARALYZE  "paralyze"
 #define IRRADIATE "irradiate"
 #define AGONY     "agony"     // Added in PAIN!
 #define SLUR      "slur"

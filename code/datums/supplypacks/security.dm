@@ -493,7 +493,7 @@
 			/obj/item/clothing/suit/storage/forensics/red,
 			/obj/item/clothing/suit/storage/forensics/blue,
 			/obj/item/clothing/under/det/corporate = 2,
-			/obj/item/clothing/accessory/badge/holo/detective = 2,
+			/obj/item/clothing/accessory/medal/badge/holo/detective = 2,
 			/obj/item/clothing/gloves/black = 2
 			)
 	cost = 10
@@ -507,8 +507,8 @@
 			/obj/item/clothing/suit/storage/vest/officer,
 			/obj/item/clothing/head/helmet,
 			/obj/item/cartridge/security,
-			/obj/item/clothing/accessory/badge/holo,
-			/obj/item/clothing/accessory/badge/holo/cord,
+			/obj/item/clothing/accessory/medal/badge/holo,
+			/obj/item/clothing/accessory/medal/badge/holo/cord,
 			/obj/item/radio/headset/headset_sec,
 			/obj/item/storage/belt/security,
 			/obj/item/flash,
@@ -545,7 +545,7 @@
 			/obj/item/clothing/glasses/sunglasses/sechud,
 			/obj/item/taperoll/police,
 			/obj/item/hailer,
-			/obj/item/clothing/accessory/badge/holo/warden,
+			/obj/item/clothing/accessory/medal/badge/holo/warden,
 			/obj/item/storage/box/flashbangs,
 			/obj/item/storage/belt/security,
 			/obj/item/reagent_containers/spray/pepper,
@@ -573,7 +573,7 @@
 			/obj/item/storage/belt/security,
 			/obj/item/flash,
 			/obj/item/hailer,
-			/obj/item/clothing/accessory/badge/holo/hos,
+			/obj/item/clothing/accessory/medal/badge/holo/hos,
 			/obj/item/clothing/accessory/holster/waist,
 			/obj/item/melee/telebaton,
 			/obj/item/shield/riot/tele,

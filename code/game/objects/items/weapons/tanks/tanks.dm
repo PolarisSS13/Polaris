@@ -49,7 +49,7 @@ var/global/list/tank_gauge_cache = list()
 
 	description_antag = "Each tank may be incited to burn by attaching wires and an igniter assembly, though the igniter can only be used once and the mixture only burn if the igniter pushes a flammable gas mixture above the minimum burn temperature (126ºC). \
 	Wired and assembled tanks may be disarmed with a set of wirecutters. Any exploding or rupturing tank will generate shrapnel, assuming their relief valves have been welded beforehand. Even if not, they can be incited to expel hot gas on ignition if pushed above 173ºC. \
-	Relatively easy to make, the single tank bomb requries no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
+	Relatively easy to make, the single tank bomb requires no tank transfer valve, and is still a fairly formidable weapon that can be manufactured from any tank."
 
 /obj/item/tank/proc/init_proxy()
 	var/obj/item/tankassemblyproxy/proxy = new /obj/item/tankassemblyproxy(src)
@@ -58,12 +58,17 @@ var/global/list/tank_gauge_cache = list()
 
 
 /obj/item/tank/Initialize()
-	. = ..()
-
+	..()
 	src.init_proxy()
 	src.air_contents = new /datum/gas_mixture()
 	src.air_contents.volume = volume //liters
 	src.air_contents.temperature = T20C
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/tank/LateInitialize()
+	// Running this in Initialize() won't work for subtypes, which run their own override of Initialize() (for initial contents etc) *after* the base one
+	// Since air_contents is created in the base init, we can't just move the order of operations either (i.e. for subtypes, calling update_gauge() before the base proc)
+	// Thus, we defer it to later so that the gauge only updates after everything else is done
 	update_gauge()
 
 /obj/item/tank/Destroy()

@@ -31,7 +31,7 @@
 		/obj/item/gun/energy/phasegun = 2,
 		/obj/item/gun/energy/phasegun/pistol,
 		/obj/item/cell/device/weapon = 2,
-		/obj/item/clothing/accessory/permit/gun/planetside)
+		/obj/item/clothing/accessory/medal/permit/gun/planetside)
 
 /obj/structure/closet/secure_closet/guncabinet/tranq
 	name = "tranquilizer rifle cabinet"
@@ -41,7 +41,7 @@
 		/obj/item/gun/energy/phasegun/tranq_pistol,
 		/obj/item/gun/energy/phasegun/pistol,
 		/obj/item/cell/device/weapon = 2,
-		/obj/item/clothing/accessory/permit/gun/planetside
+		/obj/item/clothing/accessory/medal/permit/gun/planetside
 	)
 
 //Explorer Lockers

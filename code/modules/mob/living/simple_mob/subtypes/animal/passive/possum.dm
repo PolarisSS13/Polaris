@@ -111,7 +111,7 @@
 /mob/living/simple_mob/animal/passive/opossum
 	name = "opossum"
 	real_name = "opossum"
-	tt_desc = "Didelphis astrum"
+	tt_desc = "E Didelphis astrum"
 	desc = "It's an opossum, a small scavenging marsupial."
 	icon_state = "possum"
 	item_state = "possum"
@@ -196,7 +196,7 @@
 	icon_living = "poppy"
 	icon_dead = "poppy_dead"
 	icon_rest = "poppy_dead"
-	tt_desc = "Didelphis astrum salutem"
+	tt_desc = "E Didelphis astrum salutem"
 	organ_names = /decl/mob_organ_names/poppy
 	holder_type = /obj/item/holder/possum/poppy
 	ai_holder_type = /datum/ai_holder/simple_mob/passive/possum/poppy

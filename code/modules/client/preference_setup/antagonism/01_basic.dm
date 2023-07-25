@@ -44,11 +44,11 @@ var/global/list/uplink_locations = list("PDA", "Headset", "None")
 		return TOPIC_REFRESH
 
 	if(href_list["exploitable_record"])
-		var/exploitmsg = sanitize(input(user,"Set exploitable information about you here.","Exploitable Information", html_decode(pref.exploit_record)) as message|null, MAX_RECORD_LENGTH, extra = 0)
+		var/exploitmsg = html_decode(sanitizeSafe(input(user,"Set exploitable information about you here.","Exploitable Information", html_decode(pref.exploit_record)) as message|null, MAX_RECORD_LENGTH, extra = 0))
 		if(!isnull(exploitmsg) && !jobban_isbanned(user, "Records") && CanUseTopic(user))
 			pref.exploit_record = exploitmsg
 			return TOPIC_REFRESH
-			
+
 	if(href_list["antagfaction"])
 		var/choice = input(user, "Please choose an antagonistic faction to work for.", "Character Preference", pref.antag_faction) as null|anything in antag_faction_choices + list("None","Other")
 		if(!choice || !CanUseTopic(user))
@@ -60,7 +60,7 @@ var/global/list/uplink_locations = list("PDA", "Headset", "None")
 		else
 			pref.antag_faction = choice
 		return TOPIC_REFRESH
-		
+
 	if(href_list["antagvis"])
 		var/choice = input(user, "Please choose an antagonistic visibility level.", "Character Preference", pref.antag_vis) as null|anything in antag_visiblity_choices
 		if(!choice || !CanUseTopic(user))

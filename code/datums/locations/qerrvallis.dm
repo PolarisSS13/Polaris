@@ -46,8 +46,8 @@
 /datum/locations/kallo
 	name = "Kal'lo"
 	desc = "A relatively recent city compared to the other major cities of the planet, Kal'lo quickly rose in status by fathering some of the most \
-	important figures of modern skrellian society. It is notably the birthplace of Xikrra Kol'goa, who wrote the Lo'glo'mog'rri in 46 BCE, \
-	the constitutional code that is still used by most of the skrellian states in the galaxy."
+	important figures of modern Skrellian society. It is notably the birthplace of Xikrra Kol'goa, who wrote the Lo'glo'mog'rri in 46 BCE, \
+	the constitutional code that is still used by most of the Skrellian states in the galaxy."
 
 /datum/locations/glimorr
 	name = "Gli'morr"

@@ -24,6 +24,7 @@
 	var/languages=null
 	var/list/flavor=null
 	var/gender = null
+	var/identifying_gender = null
 	var/list/body_descriptors = null
 	var/list/genetic_modifiers = list() // Modifiers with the MODIFIER_GENETIC flag are saved.  Note that only the type is saved, not an instance.
 
@@ -54,6 +55,7 @@
 	newrecord.implant = implant
 	newrecord.flavor = flavor
 	newrecord.gender = gender
+	newrecord.identifying_gender = identifying_gender
 	newrecord.body_descriptors = body_descriptors.Copy()
 	newrecord.genetic_modifiers = genetic_modifiers.Copy()
 	return newrecord

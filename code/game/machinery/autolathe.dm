@@ -12,7 +12,7 @@
 
 	circuit = /obj/item/circuitboard/autolathe
 	var/datum/category_collection/autolathe/machine_recipes
-	var/list/stored_material =  list(MAT_STEEL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
+	materials =  list(MAT_STEEL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
 	var/list/storage_capacity = list(MAT_STEEL = 0, MAT_GLASS = 0, MAT_PLASTEEL = 0, MAT_PLASTIC = 0)
 	var/datum/category_group/autolathe/current_category
 
@@ -37,10 +37,9 @@
 	wires = new(src)
 
 	for(var/Name in name_to_material)
-		if(Name in stored_material)
+		if(Name in materials)
 			continue
-
-		stored_material[Name] = 0
+		materials[Name] = 0
 		storage_capacity[Name] = 0
 
 	soundloop = new(list(src), FALSE)
@@ -77,12 +76,12 @@
 		var/list/material_top = list("<tr>")
 		var/list/material_bottom = list("<tr>")
 
-		for(var/material in stored_material)
+		for(var/material in materials)
 			if(material != MAT_STEEL && material != MAT_GLASS) // Don't show the Extras unless people care enough to put them in.
-				if(stored_material[material] <= 0)
+				if(materials[material] <= 0)
 					continue
 			material_top += "<td width = '25%' align = center><b>[material]</b></td>"
-			material_bottom += "<td width = '25%' align = center>[stored_material[material]]<b>/[storage_capacity[material]]</b></td>"
+			material_bottom += "<td width = '25%' align = center>[materials[material]]<b>/[storage_capacity[material]]</b></td>"
 
 		dat += "[material_top.Join()]</tr>[material_bottom.Join()]</tr></table><hr>"
 		dat += "<b>Filter:</b> <a href='?src=\ref[src];setfilter=1'>[filtertext ? filtertext : "None Set"]</a><br>"
@@ -107,10 +106,10 @@
 				//Make sure it's buildable and list requires resources.
 				for(var/material in R.resources)
 					var/coeff = (R.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
-					var/sheets = round(stored_material[material]/round(R.resources[material]*coeff))
+					var/sheets = round(materials[material]/(R.resources[material]*coeff))
 					if(isnull(max_sheets) || max_sheets > sheets)
 						max_sheets = sheets
-					if(!isnull(stored_material[material]) && stored_material[material] < round(R.resources[material]*coeff))
+					if(sheets < 1)
 						can_make = 0
 					if(!comma)
 						comma = 1
@@ -203,21 +202,21 @@
 		matter_inputs = eating.matter
 
 	for(var/material in matter_inputs)
-		if(isnull(stored_material[material]) || isnull(storage_capacity[material]))
+		if(isnull(materials[material]) || isnull(storage_capacity[material]))
 			continue
-		if(stored_material[material] >= storage_capacity[material])
+		if(materials[material] >= storage_capacity[material])
 			continue
 		var/total_material = matter_inputs[material]
 		//If it's a stack, we eat multiple sheets.
 		if(istype(eating,/obj/item/stack))
 			var/obj/item/stack/stack = eating
 			total_material *= stack.get_amount()
-		if(stored_material[material] + total_material > storage_capacity[material])
-			total_material = storage_capacity[material] - stored_material[material]
+		if(materials[material] + total_material > storage_capacity[material])
+			total_material = storage_capacity[material] - materials[material]
 			filltype = 1
 		else
 			filltype = 2
-		stored_material[material] += total_material
+		materials[material] += total_material
 		total_used += total_material
 		mass_per_sheet += matter_inputs[material]
 	if(!filltype)
@@ -286,14 +285,12 @@
 		//Check if we still have the materials.
 		var/coeff = (making.no_scale ? 1 : mat_efficiency) //stacks are unaffected by production coefficient
 		for(var/material in making.resources)
-			if(!isnull(stored_material[material]))
-				if(stored_material[material] < round(making.resources[material] * coeff) * multiplier)
-					return
+			if(isnull(materials[material]) || materials[material] < round(making.resources[material] * coeff) * multiplier)
+				return
 
 		//Consume materials.
 		for(var/material in making.resources)
-			if(!isnull(stored_material[material]))
-				stored_material[material] = max(0, stored_material[material] - round(making.resources[material] * coeff) * multiplier)
+			materials[material] = max(0, materials[material] - round(making.resources[material] * coeff) * multiplier)
 
 		update_icon() // So lid closes
 
@@ -368,16 +365,5 @@
 	mat_efficiency = 1.1 - man_rating * 0.1// Normally, price is 1.25 the amount of material, so this shouldn't go higher than 0.6. Maximum rating of parts is 5
 
 /obj/machinery/autolathe/dismantle()
-	if(LAZYLEN(stored_material))
-		for(var/mat in stored_material)
-			var/datum/material/M = get_material_by_name(mat)
-			if(!istype(M))
-				continue
-			if(stored_material[mat] == 0) //Maybe don't try and make null mats...
-				continue
-			var/obj/item/stack/material/S = new M.stack_type(get_turf(src))
-			if(stored_material[mat] >= S.perunit)
-				S.amount = round(stored_material[mat] / S.perunit)
-			else
-				qdel(S) //Prevents stacks smaller than 1
-	return ..()
+	eject_materials() //obj/machinery proc, in machinery/machinery.dm
+	..()

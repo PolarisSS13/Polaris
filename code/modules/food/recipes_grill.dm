@@ -194,6 +194,7 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 		/obj/item/reagent_containers/food/snacks/boiledegg,
 	)
+	reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 	result = /obj/item/reagent_containers/food/snacks/superbiteburger
 
 /datum/recipe/slimeburger
@@ -228,7 +229,7 @@
 		/obj/item/reagent_containers/food/snacks/bacon,
 		/obj/item/reagent_containers/food/snacks/bacon
 	)
-	result = /obj/item/reagent_containers/food/snacks/burger/bacon
+	result = /obj/item/reagent_containers/food/snacks/baconburger
 
 /datum/recipe/omelette
 	appliance = GRILL
@@ -237,7 +238,6 @@
 		/obj/item/reagent_containers/food/snacks/cheesewedge,
 	)
 	reagents = list("egg" = 6)
-	reagent_mix = RECIPE_REAGENT_REPLACE
 	result = /obj/item/reagent_containers/food/snacks/omelette
 
 /datum/recipe/omurice
@@ -330,4 +330,5 @@
 /datum/recipe/qazalflatbread
 		appliance = GRILL
 		items = list(/obj/item/reagent_containers/food/snacks/sliceable/qazal_flatdough)
+		reagent_mix = RECIPE_REAGENT_REPLACE //No Dough
 		result = /obj/item/reagent_containers/food/snacks/grilled_qazal_flatbread

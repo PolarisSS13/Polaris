@@ -1,5 +1,5 @@
 // This is a datum-based artificial intelligence for simple mobs (and possibly others) to use.
-// The neat thing with having this here instead of on the mob is that it is independant of Life(), and that different mobs
+// The neat thing with having this here instead of on the mob is that it is independent of Life(), and that different mobs
 // can use a more or less complex AI by giving it a different datum.
 
 /mob/living
@@ -167,7 +167,7 @@
 		var/list/choices = list()
 		for(var/typechoice in types)
 			var/list/found = list()
-			for(var/mob in searching) // Isnt't there a helper for this, maybe? I forget.
+			for(var/mob in searching) // Isn't there a helper for this, maybe? I forget.
 				var/atom/M = mob
 				if(!(M.z in levels_working))
 					continue
@@ -453,10 +453,10 @@
 				walk_to_target()
 		if(STANCE_MOVE)
 			if(hostile && find_target()) // This will switch its stance.
-				ai_log("handle_stance_strategical() : STANCE_MOVE, found target and was inturrupted.", AI_LOG_TRACE)
+				ai_log("handle_stance_strategical() : STANCE_MOVE, found target and was interrupted.", AI_LOG_TRACE)
 		if(STANCE_FOLLOW)
 			if(hostile && find_target()) // This will switch its stance.
-				ai_log("handle_stance_strategical() : STANCE_FOLLOW, found target and was inturrupted.", AI_LOG_TRACE)
+				ai_log("handle_stance_strategical() : STANCE_FOLLOW, found target and was interrupted.", AI_LOG_TRACE)
 			else if(leader)
 				ai_log("handle_stance_strategical() : STANCE_FOLLOW, going to calculate_path([leader]).", AI_LOG_TRACE)
 				calculate_path(leader)

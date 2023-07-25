@@ -3,7 +3,9 @@
 	name = "black cloak"
 	desc = "It drapes over a Teshari's shoulders and closes at the neck with pockets convienently placed inside."
 	icon = 'icons/mob/species/teshari/teshari_cloak.dmi'
-	icon_override = 'icons/mob/species/teshari/teshari_cloak.dmi'
+	sprite_sheets = list(
+			SPECIES_TESHARI = 'icons/mob/species/teshari/teshari_cloak.dmi'
+	)
 	icon_state = "tesh_cloak_bn"
 	item_state = "tesh_cloak_bn"
 	species_restricted = list(SPECIES_TESHARI)
@@ -133,7 +135,9 @@
 // Job Cloaks
 /obj/item/clothing/suit/storage/teshari/cloak/jobs
 	icon = 'icons/mob/species/teshari/deptcloak.dmi'
-	icon_override = 'icons/mob/species/teshari/deptcloak.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/deptcloak.dmi'
+	)
 
 /obj/item/clothing/suit/storage/teshari/cloak/jobs/cap
 	name = "facility director cloak"
@@ -214,7 +218,7 @@
 	item_state = "tesh_cloak_para"
 
 /obj/item/clothing/suit/storage/teshari/cloak/jobs/psych
-	name = " psychiatrist cloak"
+	name = "psychiatrist cloak"
 	desc = "A soft Teshari cloak made for the Psychiatrist"
 	icon_state = "tesh_cloak_psych"
 	item_state = "tesh_cloak_psych"
@@ -276,10 +280,12 @@
 //Misc
 
 /obj/item/clothing/suit/storage/toggle/labcoat/teshari
-	name = "Teshari labcoat"
+	name = "small labcoat"
 	desc = "A small suit that protects against minor chemical spills. This one is a good fit on Teshari."
 	icon = 'icons/obj/clothing/species/teshari/suits.dmi'
-	icon_override = 'icons/mob/species/teshari/suit.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
+	)
 	icon_state = "tesh_labcoat"
 	species_restricted = list(SPECIES_TESHARI)
 
@@ -287,7 +293,9 @@
 	name = "small black coat"
 	desc = "A coat that seems too small to fit a human."
 	icon = 'icons/obj/clothing/species/teshari/suits.dmi'
-	icon_override = 'icons/mob/species/teshari/suit.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
+	)
 	icon_state = "tesharicoat"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
 	species_restricted = list(SPECIES_TESHARI)
@@ -296,16 +304,20 @@
 	name = "small coat"
 	desc = "A coat that seems too small to fit a human."
 	icon = 'icons/obj/clothing/species/teshari/suits.dmi'
-	icon_override = 'icons/mob/species/teshari/suit.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/suit.dmi'
+	)
 	icon_state = "tesharicoatwhite"
 	body_parts_covered = UPPER_TORSO|ARMS|LOWER_TORSO|LEGS
 	species_restricted = list(SPECIES_TESHARI)
 
 //Hooded teshari cloaks
 /obj/item/clothing/suit/storage/hooded/teshari
-	name = "Hooded Teshari Cloak"
-	desc = "A soft teshari cloak with an added hood."
-	icon_override = 'icons/mob/species/teshari/teshari_hood.dmi'
+	name = "hooded cloak"
+	desc = "A soft Teshari cloak with an added hood."
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/teshari_hood.dmi'
+	)
 	icon = 'icons/mob/species/teshari/teshari_hood.dmi'
 	icon_state = "tesh_hcloak_bo"
 	item_state_slots = list(slot_r_hand_str = "tesh_hcloak_bo", slot_l_hand_str = "tesh_hcloak_bo")
@@ -317,9 +329,11 @@
 	allowed = list (/obj/item/pen, /obj/item/paper, /obj/item/flashlight,/obj/item/tank/emergency/oxygen, /obj/item/storage/fancy/cigarettes, /obj/item/storage/box/matches, /obj/item/reagent_containers/food/drinks/flask)
 
 /obj/item/clothing/head/tesh_hood
-	name = "Cloak Hood"
+	name = "cloak hood"
 	desc = "A hood attached to a teshari cloak."
-	icon_override = 'icons/mob/species/teshari/teshari_hood.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/teshari_hood.dmi'
+	)
 	icon = 'icons/mob/species/teshari/teshari_hood.dmi'
 	icon_state = "tesh_hood_bo"
 	item_state_slots = list(slot_r_hand_str = "tesh_hood_bo", slot_l_hand_str = "tesh_hood_bo")
@@ -607,7 +621,9 @@
 	name = "belted cloak"
 	desc = "A more ridged and stylized Teshari cloak."
 	icon = 'icons/mob/species/teshari/teshari_cloak.dmi'
-	icon_override = 'icons/mob/species/teshari/teshari_cloak.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/teshari_cloak.dmi'
+	)
 	icon_state = "tesh_beltcloak_bo"
 	item_state = "tesh_beltcloak_bo"
 	species_restricted = list(SPECIES_TESHARI)
@@ -741,7 +757,9 @@
 //Belted job cloaks
 /obj/item/clothing/suit/storage/teshari/beltcloak/jobs
 	icon = 'icons/mob/species/teshari/deptcloak.dmi'
-	icon_override = 'icons/mob/species/teshari/deptcloak.dmi'
+	sprite_sheets = list(
+		SPECIES_TESHARI = 'icons/mob/species/teshari/deptcloak.dmi'
+	)
 
 /obj/item/clothing/suit/storage/teshari/beltcloak/jobs/cargo
 	name = "cargo belted cloak"
@@ -862,4 +880,3 @@
 	desc = "A soft Teshari cloak made for the Janitor"
 	icon_state = "tesh_beltcloak_jani"
 	item_state = "tesh_beltcloak_jani"
-

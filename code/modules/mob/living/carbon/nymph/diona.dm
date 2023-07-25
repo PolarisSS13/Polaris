@@ -28,6 +28,7 @@ var/global/list/_nymph_default_emotes = list(
 	name = "diona nymph"
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
+	icon = 'icons/mob/alien.dmi'
 	icon_state = "nymph"
 	item_state = "nymph"
 	species_language = LANGUAGE_ROOTLOCAL
@@ -128,3 +129,17 @@ var/global/list/_nymph_default_emotes = list(
 
 /mob/living/carbon/diona/death(gibbed)
 	return ..(gibbed,death_msg)
+
+
+/mob/living/carbon/diona/attack_ghost(mob/observer/dead/user)
+	if(client || key || ckey)
+		to_chat(user, SPAN_WARNING("\The [src] already has a player."))
+	if(alert(user, "Do you wish to take control of \the [src]?", "Chirp Time", "No", "Yes") == "No")
+		return
+	if(QDELETED(src) || QDELETED(user) || !user.client)
+		return
+	if(client || key || ckey)
+		to_chat(user, SPAN_WARNING("\The [src] already has a player."))
+	var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
+	if(P.assess_candidate(user))
+		P.transfer_personality(user, src)

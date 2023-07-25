@@ -6,7 +6,7 @@ var/global/list/lunchables_lunches_ = list(/obj/item/reagent_containers/food/sna
                                   /obj/item/reagent_containers/food/snacks/slice/meatpizza/filled,
                                   /obj/item/reagent_containers/food/snacks/slice/mushroompizza/filled,
                                   /obj/item/reagent_containers/food/snacks/slice/vegetablepizza/filled,
-                                  /obj/item/reagent_containers/food/snacks/pineappleslice/filled,
+                                  /obj/item/reagent_containers/food/snacks/slice/pineapple/filled,
                                   /obj/item/reagent_containers/food/snacks/tastybread,
                                   /obj/item/reagent_containers/food/snacks/bagelplain,
                                   /obj/item/reagent_containers/food/snacks/bagelsunflower,

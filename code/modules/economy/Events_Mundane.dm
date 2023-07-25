@@ -8,14 +8,14 @@
 
 	var/datum/trade_destination/affected_dest = pick(weighted_mundaneevent_locations)
 	var/body = pick(
-	"Tree stuck in tajaran; firefighters baffled.",\
+	"Tree stuck in Tajaran; firefighters baffled.",\
 	"Armadillos want aardvarks removed from dictionary claims 'here first'.",\
 	"Angel found dancing on pinhead ordered to stop; cited for public nuisance.",\
 	"Letters claim they are better than number; 'Always have been'.",\
 	"Pens proclaim pencils obsolete, 'lead is dead'.",\
 	"Rock and paper sues scissors for discrimination.",\
 	"Steak tell-all book reveals he never liked sitting by potato.",\
-	"Woodchuck stops counting how many times he�s chucked 'Never again'.",\
+	"Woodchuck stops counting how many times he's chucked 'Never again'.",\
 	"[affected_dest.name] clerk first person able to pronounce '@*$%!'.",\
 	"[affected_dest.name] delis serving boiled paperback dictionaries, 'Adjectives chewy' customers declare.",\
 	"[affected_dest.name] weather deemed 'boring'; meteors and rad storms to be imported.",\
@@ -24,15 +24,15 @@
 	"Question mark worshipped as deity by ancient [affected_dest.name] dwellers.",\
 	"Spilled milk causes whole [affected_dest.name] populace to cry.",\
 	"World largest carp patty at display on [affected_dest.name].",\
-	"'Here kitty kitty' no longer preferred tajaran retrieval technique.",\
+	"'Here kitty kitty' no longer preferred Tajaran retrieval technique.",\
 	"Man travels 7000 light years to retrieve lost hankie, 'It was my favourite'.",\
 	"New bowling lane that shoots mini-meteors at bowlers very popular.",\
 	"[pick("Unathi","Spacer")] gets tattoo of "+using_map.starsys_name+" on chest '[pick("[using_map.boss_short]","star","starship","asteroid")] tickles most'.",\
 	"Skrell marries computer; wedding attended by 100 modems.",\
 	"Chef reports successfully using harmonica as cheese grater.",\
 	"[using_map.company_name] invents handkerchief that says 'Bless you' after sneeze.",\
-	"Clone accused of posing for other clones�s school photo.",\
-	"Clone accused of stealing other clones�s employee of the month award.",\
+	"Clone accused of posing for other clone's school photo.",\
+	"Clone accused of stealing other clone's employee of the month award.",\
 	"Woman robs station with hair dryer; crewmen love new style.",\
 	"This space for rent.",\
 	"[affected_dest.name] Baker Wins Pickled Crumpet Toss Three Years Running",\

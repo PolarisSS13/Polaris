@@ -191,6 +191,7 @@
 		handleFrustrated(0)
 
 /mob/living/bot/proc/handleAI()
+	set waitfor = FALSE
 	if(ignore_list.len)
 		for(var/atom/A in ignore_list)
 			if(!A || !A.loc || prob(1))
@@ -385,7 +386,7 @@
 
 // Returns the surrounding cardinal turfs with open links
 // Including through doors openable with the ID
-/turf/proc/CardinalTurfsWithAccess(var/obj/item/card/id/ID)
+/turf/proc/CardinalTurfsWithAccess(var/obj/item/card/id/ID, flags)
 	var/L[] = new()
 
 	//	for(var/turf/simulated/t in oview(src,1))
@@ -393,44 +394,44 @@
 	for(var/d in cardinal)
 		var/turf/T = get_step(src, d)
 		if(istype(T) && !T.density)
-			if(!LinkBlockedWithAccess(src, T, ID))
+			if(!LinkBlockedWithAccess(src, T, ID, flags))
 				L.Add(T)
 	return L
 
 
 // Similar to above but not restricted to just cardinal directions.
-/turf/proc/TurfsWithAccess(var/obj/item/card/id/ID)
+/turf/proc/TurfsWithAccess(var/obj/item/card/id/ID, flags)
 	var/L[] = new()
 
 	for(var/d in alldirs)
 		var/turf/T = get_step(src, d)
 		if(istype(T) && !T.density)
-			if(!LinkBlockedWithAccess(src, T, ID))
+			if(!LinkBlockedWithAccess(src, T, ID, flags))
 				L.Add(T)
 	return L
 
 
 // Returns true if a link between A and B is blocked
 // Movement through doors allowed if ID has access
-/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID)
+/proc/LinkBlockedWithAccess(turf/A, turf/B, obj/item/card/id/ID, flags)
 
 	if(A == null || B == null) return 1
 	var/adir = get_dir(A,B)
 	var/rdir = get_dir(B,A)
 	if((adir & (NORTH|SOUTH)) && (adir & (EAST|WEST)))	//	diagonal
 		var/iStep = get_step(A,adir&(NORTH|SOUTH))
-		if(!LinkBlockedWithAccess(A,iStep, ID) && !LinkBlockedWithAccess(iStep,B,ID))
+		if(!LinkBlockedWithAccess(A,iStep, ID, flags) && !LinkBlockedWithAccess(iStep,B,ID, flags))
 			return 0
 
 		var/pStep = get_step(A,adir&(EAST|WEST))
-		if(!LinkBlockedWithAccess(A,pStep,ID) && !LinkBlockedWithAccess(pStep,B,ID))
+		if(!LinkBlockedWithAccess(A,pStep,ID, flags) && !LinkBlockedWithAccess(pStep,B,ID, flags))
 			return 0
 		return 1
 
-	if(DirBlockedWithAccess(A,adir, ID))
+	if(DirBlockedWithAccess(A,adir, ID, flags))
 		return 1
 
-	if(DirBlockedWithAccess(B,rdir, ID))
+	if(DirBlockedWithAccess(B,rdir, ID, flags))
 		return 1
 
 	for(var/obj/O in B)
@@ -441,11 +442,18 @@
 
 // Returns true if direction is blocked from loc
 // Checks doors against access with given ID
-/proc/DirBlockedWithAccess(turf/loc,var/dir,var/obj/item/card/id/ID)
+/proc/DirBlockedWithAccess(turf/loc,var/dir,var/obj/item/card/id/ID, flags)
 	for(var/obj/structure/window/D in loc)
-		if(!D.density)			continue
-		if(D.dir == SOUTHWEST)	return 1
-		if(D.dir == dir)		return 1
+		if (flags & ASTAR_BLOCKED_BY_WINDOWS)
+			if (D.is_fulltile())
+				return TRUE
+		else
+			if(!D.density)
+				continue
+			if(D.dir == SOUTHWEST)
+				return TRUE
+		if (D.dir & dir)
+			return TRUE
 
 	for(var/obj/machinery/door/D in loc)
 		if(!D.density)			continue

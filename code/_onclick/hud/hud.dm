@@ -41,7 +41,7 @@ var/global/list/global_huds = list(
 
 /datum/global_hud/proc/setup_overlay(var/icon_state)
 	var/obj/screen/screen = new /obj/screen()
-	screen.alpha = 40 // Adjut this if you want goggle overlays to be thinner or thicker.
+	screen.alpha = 20 // Adjust this if you want goggle overlays to be thinner or thicker. Low = thin, high = thick; 2023-03-27 changed from 40 -> 20
 	screen.screen_loc = "SOUTHWEST to NORTHEAST" // Will tile up to the whole screen, scaling beyond 15x15 if needed.
 	screen.icon = 'icons/obj/hud_tiled.dmi'
 	screen.icon_state = icon_state
@@ -84,7 +84,7 @@ var/global/list/global_huds = list(
 
 	nvg = setup_overlay("nvg_hud")
 	thermal = setup_overlay("thermal_hud")
-	meson = setup_overlay("meson_hud")
+	meson = setup_overlay("nvg_hud") //2023-03-27, formerly meson_hud but nvg_hud is a little less painful to look at tbh
 	science = setup_overlay("science_hud")
 	material = setup_overlay("material_hud")
 

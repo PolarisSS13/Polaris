@@ -61,7 +61,7 @@
 
 /obj/item/integrated_circuit/trig/tangent
 	name = "tan circuit"
-	desc = "Outputs the tangent of A.  Guaranteed to not go on a tangent about its existance."
+	desc = "Outputs the tangent of A.  Guaranteed to not go on a tangent about its existence."
 	icon_state = "tangent"
 	inputs = list("A" = IC_PINTYPE_NUMBER)
 	spawn_flags = IC_SPAWN_DEFAULT|IC_SPAWN_RESEARCH

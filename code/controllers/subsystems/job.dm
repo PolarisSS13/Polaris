@@ -103,7 +103,7 @@ SUBSYSTEM_DEF(job)
 			job_titles += J
 		return job_titles
 
-	job_debug_message("Was asked to get job titles for a non-existant department '[target_department_name]'.")
+	job_debug_message("Was asked to get job titles for a non-existent department '[target_department_name]'.")
 	return list()
 
 // Returns a reference to the primary department datum that a job is in.

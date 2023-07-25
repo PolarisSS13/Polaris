@@ -47,7 +47,7 @@ Location where the teleport begins, target that will teleport, distance to go, d
 Random error in tile placement x, error in tile placement y, and block offset.
 Block offset tells the proc how to place the box. Behind teleport location, relative to starting location, forward, etc.
 Negative values for offset are accepted, think of it in relation to North, -x is west, -y is south. Error defaults to positive.
-Turf and target are seperate in case you want to teleport some distance from a turf the target is not standing on or something.
+Turf and target are separate in case you want to teleport some distance from a turf the target is not standing on or something.
 */
 
 	var/dirx = 0//Generic location finding variable.
@@ -249,7 +249,7 @@ Turf and target are seperate in case you want to teleport some distance from a t
 			return 0
 	return 1
 
-//Ensure the frequency is within bounds of what it should be sending/recieving at
+//Ensure the frequency is within bounds of what it should be sending/receiving at
 /proc/sanitize_frequency(var/f, var/low = PUBLIC_LOW_FREQ, var/high = PUBLIC_HIGH_FREQ)
 	f = round(f)
 	f = max(low, f)
@@ -1172,14 +1172,13 @@ var/global/list/common_tools = list(
 
 // Returns an instance of a valid surgery surface.
 /mob/living/proc/get_surgery_surface(mob/living/user)
-	if(!lying && user != src)
-		return null // Not lying down means no surface.
-	var/obj/surface = null
-	for(var/obj/O in loc) // Looks for the best surface.
-		if(O.surgery_odds)
-			if(!surface || surface.surgery_odds < O)
+	// Not lying down means no surface.
+	if(lying || user == src)
+		// Looks for the best surface.
+		var/obj/surface
+		for(var/obj/O in loc)
+			if(!surface || surface.surgery_odds < O.surgery_odds)
 				surface = O
-	if(surface)
 		return surface
 
 /proc/reverse_direction(var/dir)
@@ -1570,8 +1569,8 @@ GLOBAL_REAL_VAR(list/stack_trace_storage)
 	. = stack_trace_storage
 	stack_trace_storage = null
 
-// \ref behaviour got changed in 512 so this is necesary to replicate old behaviour.
-// If it ever becomes necesary to get a more performant REF(), this lies here in wait
+// \ref behaviour got changed in 512 so this is necessary to replicate old behaviour.
+// If it ever becomes necessary to get a more performant REF(), this lies here in wait
 // #define REF(thing) (thing && istype(thing, /datum) && (thing:datum_flags & DF_USE_TAG) && thing:tag ? "[thing:tag]" : "\ref[thing]")
 /proc/REF(input)
 	if(istype(input, /datum))

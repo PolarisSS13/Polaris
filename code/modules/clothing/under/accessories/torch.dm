@@ -111,30 +111,29 @@ medals
 /******
 ribbons
 ******/
-/obj/item/clothing/accessory/ribbon/solgov
+/obj/item/clothing/accessory/medal/ribbon/solgov
 	name = "ribbon"
 	desc = "A simple military decoration."
 	icon_state = "ribbon_marksman"
 	on_rolled = list("down" = "none")
-	slot = ACCESSORY_SLOT_MEDAL
 	w_class = ITEMSIZE_TINY
 
-/obj/item/clothing/accessory/ribbon/solgov/marksman
+/obj/item/clothing/accessory/medal/ribbon/solgov/marksman
 	name = "marksmanship ribbon"
 	desc = "A military decoration awarded to members of the SCG for good marksmanship scores in training. Common in the days of energy weapons."
 	icon_state = "ribbon_marksman"
 
-/obj/item/clothing/accessory/ribbon/solgov/peace
+/obj/item/clothing/accessory/medal/ribbon/solgov/peace
 	name = "peacekeeping ribbon"
 	desc = "A military decoration awarded to members of the SCG for service during a peacekeeping operation."
 	icon_state = "ribbon_peace"
 
-/obj/item/clothing/accessory/ribbon/solgov/frontier
+/obj/item/clothing/accessory/medal/ribbon/solgov/frontier
 	name = "frontier ribbon"
 	desc = "A military decoration awarded to members of the SCG for service along the frontier."
 	icon_state = "ribbon_frontier"
 
-/obj/item/clothing/accessory/ribbon/solgov/instructor
+/obj/item/clothing/accessory/medal/ribbon/solgov/instructor
 	name = "instructor ribbon"
 	desc = "A military decoration awarded to members of the SCG for service as an instructor."
 	icon_state = "ribbon_instructor"
@@ -196,14 +195,14 @@ specialty pins
 /*****
 badges
 *****/
-/obj/item/clothing/accessory/badge/solgov/security
+/obj/item/clothing/accessory/medal/badge/solgov/security
 	name = "security forces badge"
 	desc = "A silver law enforcement badge. Stamped with the words 'Master at Arms'."
 	icon_state = "silverbadge"
 	slot_flags = SLOT_TIE
 	badge_string = "Sol Central Government"
 
-/obj/item/clothing/accessory/badge/solgov/tags
+/obj/item/clothing/accessory/medal/badge/solgov/tags
 	name = "dog tags"
 	desc = "Plain identification tags made from a durable metal. They are stamped with a variety of informational details."
 	gender = PLURAL
@@ -211,7 +210,7 @@ badges
 	badge_string = "Sol Central Government"
 	slot_flags = SLOT_MASK | SLOT_TIE
 
-/obj/item/clothing/accessory/badge/solgov/tags/Initialize()
+/obj/item/clothing/accessory/medal/badge/solgov/tags/Initialize()
 	. = ..()
 	var/mob/living/carbon/human/H
 	H = get_holder_of_type(src, /mob/living/carbon/human)
@@ -219,13 +218,13 @@ badges
 		set_name(H.real_name)
 		set_desc(H)
 
-/obj/item/clothing/accessory/badge/solgov/tags/set_desc(var/mob/living/carbon/human/H)
+/obj/item/clothing/accessory/medal/badge/solgov/tags/set_desc(var/mob/living/carbon/human/H)
 	if(!istype(H))
 		return
 	var/religion = "Unset"
 	desc = "[initial(desc)]\nName: [H.real_name] ([H.get_species_name()])\nReligion: [religion]\nBlood type: [H.b_type]"
 
-/obj/item/clothing/accessory/badge/solgov/representative
+/obj/item/clothing/accessory/medal/badge/solgov/representative
 	name = "representative's badge"
 	desc = "A leather-backed plastic badge with a variety of information printed on it. Belongs to a representative of the Sol Central Government."
 	icon_state = "solbadge"

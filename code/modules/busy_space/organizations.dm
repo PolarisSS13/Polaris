@@ -194,8 +194,8 @@
 	possible_mission_types &= destination_mission_types
 
 	//sanity checking
-	if(!possible_mission_types) //an org was given a system that contains no missions they run. let's fail gracefully about it
-		current_ship = "vessel [pick("SOL", "VIR", "STC", "ACE")]-575-[rand(0,999999)]" //unnamed ship
+	if(!length(possible_mission_types)) //an org was given a system that contains no missions they run. let's fail gracefully about it
+		current_ship = "[pick("SOL", "VIR", "STC", "ACE")]-575-[rand(100000,999999)]" //unnamed ship
 		return "[current_ship], traveling to local registrar" //instantly identifiable as an error but still immersive
 
 	//select a mission we can run
@@ -427,9 +427,9 @@
 	name = "Vey-Medical"
 	short_name = "Vey-Med"
 	acronym = "VM"
-	desc = "Vey-Med is one of the newer TSCs on the block and is notable for being largely owned and opperated by Skrell. \
+	desc = "Vey-Med is one of the newer TSCs on the block and is notable for being largely owned and operated by Skrell. \
 	Despite the suspicion and prejudice leveled at them for their alien origin, Vey-Med has obtained market dominance in \
-	the sale of medical equipment-- from surgical tools to large medical devices to the Oddyseus trauma response mecha \
+	the sale of medical equipment-- from surgical tools to large medical devices to the Odysseus trauma response mecha \
 	and everything in between. Their equipment tends to be top-of-the-line, most obviously shown by their incredibly \
 	human-like FBP designs. Vey's rise to stardom came from their introduction of ressurective cloning, although in \
 	recent years they've been forced to diversify as their patents expired and NanoTrasen-made medications became \

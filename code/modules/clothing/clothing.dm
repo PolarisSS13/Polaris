@@ -149,7 +149,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	//Set species_restricted list
 	switch(target_species)
 		if(SPECIES_HUMAN, SPECIES_SKRELL)	//humanoid bodytypes
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //skrell/humans can wear each other's suits
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //Skrell/humans can wear each other's suits
 		else
 			species_restricted = list(target_species)
 
@@ -169,7 +169,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	//Set species_restricted list
 	switch(target_species)
 		if(SPECIES_SKRELL)
-			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //skrell helmets fit humans too
+			species_restricted = list(SPECIES_HUMAN, SPECIES_SKRELL, SPECIES_PROMETHEAN) //Srell helmets fit humans too
 
 		else
 			species_restricted = list(target_species)
@@ -191,7 +191,8 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	throwforce = 2
 	slot_flags = SLOT_EARS
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi')
+		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi'
+	)
 
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
 	if (!user) return
@@ -693,9 +694,6 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 /obj/item/clothing/shoes/clean_blood()
 	update_icon()
 	return ..()
-
-/obj/item/clothing/shoes/proc/handle_movement(var/turf/walking, var/running)
-	return
 
 /obj/item/clothing/shoes/update_clothing_icon()
 	if (ismob(src.loc))

@@ -9,7 +9,7 @@ GLOBAL_LIST_EMPTY(all_beam_points)
 	// General variables.
 	var/list/my_beams = list() // Instances of beams. Deleting one will kill the beam.
 	var/id = "A" // Two beam_points must share the same ID to be connected to each other.
-	var/max_beams = 10 // How many concurrent beams to seperate beam_points to have at once. Set to zero to only act as targets for other beam_points.
+	var/max_beams = 10 // How many concurrent beams to separate beam_points to have at once. Set to zero to only act as targets for other beam_points.
 	var/seek_range = 7 // How far to look for an end beam_point when not having a beam. Defaults to screen height/width. Make sure this is below beam_max_distance.
 
 	// Controls how and when the beam is created.

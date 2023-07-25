@@ -2,7 +2,7 @@
 /obj/item/bodybag/cryobag/robobag
 	name = "synthmorph bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
-	especially useful if short on time or in a hostile enviroment."
+	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
 	icon_state = "bodybag_folded"
 	item_state = "bodybag_cryo_folded"
@@ -19,12 +19,12 @@
 /obj/structure/closet/body_bag/cryobag/robobag
 	name = "synthmorph bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
-	especially useful if short on time or in a hostile enviroment."
+	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
 	item_path = /obj/item/bodybag/cryobag/robobag
 	tank_type = /obj/item/tank/stasis/nitro_cryo
 	stasis_level = 2	// Lower than the normal cryobag, because it's not made for meat that dies. It's made for robots and is freezing.
-	var/obj/item/clothing/accessory/badge/corptag	// The tag on the bag.
+	var/obj/item/clothing/accessory/medal/badge/corptag	// The tag on the bag.
 
 /obj/structure/closet/body_bag/cryobag/robobag/examine(mob/user)
 	. = ..()
@@ -36,13 +36,13 @@
 	..()
 	if(corptag)
 		var/corptag_icon_state = "tag_blank"
-		if(istype(corptag,/obj/item/clothing/accessory/badge/holo/detective) || istype(corptag,/obj/item/clothing/accessory/badge/holo/detective) || istype(corptag, /obj/item/clothing/accessory/badge/holo/hos) || istype(corptag, /obj/item/clothing/accessory/badge/old) || istype(corptag, /obj/item/clothing/accessory/badge/sheriff))
+		if(istype(corptag,/obj/item/clothing/accessory/medal/badge/holo/detective) || istype(corptag,/obj/item/clothing/accessory/medal/badge/holo/detective) || istype(corptag, /obj/item/clothing/accessory/medal/badge/holo/hos) || istype(corptag, /obj/item/clothing/accessory/medal/badge/old) || istype(corptag, /obj/item/clothing/accessory/medal/badge/sheriff))
 			corptag_icon_state = "tag_badge_gold"
-		else if(istype(corptag, /obj/item/clothing/accessory/badge/holo/warden))
+		else if(istype(corptag, /obj/item/clothing/accessory/medal/badge/holo/warden))
 			corptag_icon_state = "tag_badge_silver"
-		else if(istype(corptag, /obj/item/clothing/accessory/badge/holo))
+		else if(istype(corptag, /obj/item/clothing/accessory/medal/badge/holo))
 			corptag_icon_state = "tag_badge_blue"
-		else if(istype(corptag, /obj/item/clothing/accessory/badge/corporate_tag))
+		else if(istype(corptag, /obj/item/clothing/accessory/medal/badge/corporate_tag))
 			corptag_icon_state = corptag.icon_state
 
 		add_overlay(corptag_icon_state)
@@ -86,7 +86,7 @@
 			for(var/mob/living/L in contents)
 				analyzer.attack(L,user)
 
-		else if(istype(W, /obj/item/clothing/accessory/badge))
+		else if(istype(W, /obj/item/clothing/accessory/medal/badge))
 			if(corptag)
 				var/old_tag = corptag
 				corptag.forceMove(get_turf(src))

@@ -150,6 +150,20 @@ var/global/list/stool_cache = list() //haha stool
 	else
 		..()
 
+/obj/item/stool/verb/rotate_clockwise()
+	set name = "Rotate Stool Clockwise"
+	set category = "Object"
+	set src in view(1)
+
+	if(!usr || !isturf(usr.loc))
+		return
+	if(usr.stat || usr.restrained())
+		return
+	if(ismouse(usr) || (isobserver(usr) && !config.ghost_interaction))
+		return
+
+	src.set_dir(turn(src.dir, 270))
+
 /obj/item/stool/barstool
 	name = "bar stool"
 	desc = "Apply butt."

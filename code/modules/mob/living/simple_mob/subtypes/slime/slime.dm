@@ -143,7 +143,7 @@ var/global/list/_slime_default_emotes = list(
 		I.appearance_flags = RESET_COLOR
 		add_overlay(I)
 
-// Controls the 'mood' overlay. Overrided in subtypes for specific behaviour.
+// Controls the 'mood' overlay. Overridden in subtypes for specific behaviour.
 /mob/living/simple_mob/slime/proc/update_mood()
 	mood = "feral" // This is to avoid another override in the /feral subtype.
 

@@ -2159,7 +2159,7 @@ shaved
 	name = "Tajaran Smallsatche"
 	icon_state = "facial_smallstache"
 
-//unathi horn beards and the like
+//Unathi horn beards and the like
 
 /datum/sprite_accessory/facial_hair/una
 	name = "Unathi Chin Horn"
@@ -4021,7 +4021,7 @@ shaved
 	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN)
 
 /datum/sprite_accessory/skin/tajaran
-	name = "Default tajaran skin"
+	name = "Default Tajaran skin"
 	icon_state = "default"
 	icon = 'icons/mob/human_races/r_tajaran.dmi'
 	species_allowed = list(SPECIES_TAJ)
@@ -4033,7 +4033,7 @@ shaved
 	species_allowed = list(SPECIES_UNATHI)
 
 /datum/sprite_accessory/skin/skrell
-	name = "Default skrell skin"
+	name = "Default Skrell skin"
 	icon_state = "default"
 	icon = 'icons/mob/human_races/r_skrell.dmi'
 	species_allowed = list(SPECIES_SKRELL)

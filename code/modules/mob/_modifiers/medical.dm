@@ -18,7 +18,7 @@
 	if(holder.stat == DEAD)
 		src.expire()
 
-/datum/modifier/bloodpump_corpse
+/datum/modifier/bloodpump/corpse
 	name = "forced blood pumping"
 	desc = "Your blood flows thanks to the wonderful power of science."
 
@@ -28,8 +28,9 @@
 
 	pulse_set_level = PULSE_SLOW
 
-/datum/modifier/bloodpump/corpse/check_if_valid()
-	..()
+/datum/modifier/bloodpump/corpse/check_if_valid() // Don't want this to expire on corpses, so cover the baseline time check.
+	if(expire_at && expire_at < world.time)
+		src.expire()
 	if(holder.stat != DEAD)
 		src.expire()
 

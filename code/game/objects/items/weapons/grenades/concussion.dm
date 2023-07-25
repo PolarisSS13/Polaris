@@ -1,4 +1,4 @@
-//Concussion, or 'dizzyness' grenades.
+//Concussion, or 'dizziness' grenades.
 
 /obj/item/grenade/concussion
 	name = "concussion grenade"

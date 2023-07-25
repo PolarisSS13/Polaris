@@ -7,7 +7,7 @@
 		return
 
 	if(isnull(tx) || isnull(ty) || isnull(tz) || isnull(range))
-		to_chat(usr, "<span class='filter_notice'>Capture Map Part, captures part of a map using camara like rendering.</span>")
+		to_chat(usr, "<span class='filter_notice'>Capture Map Part, captures part of a map using camera like rendering.</span>")
 		to_chat(usr, "<span class='filter_notice'>Usage: Capture-Map-Part target_x_cord target_y_cord target_z_cord range.</span>")
 		to_chat(usr, "<span class='filter_notice'>Target coordinates specify bottom left corner of the capture, range defines render distance to opposite corner.</span>")
 		return
@@ -26,7 +26,7 @@
 					turfstocapture.Add(T)
 				else
 					if(!hasasked)
-						var/answer = alert("Capture includes non existant turf, Continue capture?","Continue capture?", "No", "Yes")
+						var/answer = alert("Capture includes non existent turf, Continue capture?","Continue capture?", "No", "Yes")
 						hasasked = 1
 						if(answer == "No")
 							return
