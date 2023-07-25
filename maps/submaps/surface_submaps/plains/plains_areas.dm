@@ -135,6 +135,6 @@
 	name = "POI - VR Den"
 	ambience = AMBIENCE_TECH_RUINS
 	
-/area/submap/RestStop
+/area/submap/reststop
 	name = "POI - Rest Stop"
 	ambience = AMBIENCE_SIF
