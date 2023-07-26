@@ -294,6 +294,7 @@
 
 #define TASTE_STRING_DEFAULT     "default"
 #define TASTE_DATA_FIELD         "taste_strings"
+#define TASTE_DATA(DATA)         list(TASTE_DATA_FIELD = DATA)
 
 //Used by emotes
 #define VISIBLE_MESSAGE 1

@@ -31,7 +31,7 @@
 /obj/item/reagent_containers/food/snacks/Initialize()
 	. = ..()
 	if(nutriment_desc)
-		nutriment_desc = list(TASTE_DATA_FIELD = get_cached_taste_data("nutriment", nutriment_desc))
+		nutriment_desc = TASTE_DATA(get_cached_taste_data("nutriment", nutriment_desc))
 	if(nutriment_amt)
 		reagents.add_reagent("nutriment", nutriment_amt, nutriment_desc)
 	if(nutriment_allergens && reagents)
@@ -317,7 +317,7 @@
 ///obj/item/reagent_containers/food/snacks/xenoburger/Initialize()			//Don't mess with this. (We use Initialize now instead of New())
 //	. = ..()																//Same here.
 //	reagents.add_reagent("xenomicrobes", 10)								//This is what is in the food item. you may copy/paste this line of code for all the contents.
-//	reagents.add_reagent("protein", 10, list("caustic meat" = 10))			//As above. Subtypes of nutriment may be assigned taste string overrides as so. It's recommended to add e.g. protein for meats as these nutriment subtypes often have special behaviour (e.g. unathi meat benefits), pre-built allergens etc.
+//	reagents.add_reagent("protein", 10, TASTE_DATA(list("caustic meat" = 10)))			//As above. Subtypes of nutriment may be assigned taste string overrides as so. It's recommended to add e.g. protein for meats as these nutriment subtypes often have special behaviour (e.g. unathi meat benefits), pre-built allergens etc.
 
 
 
@@ -884,7 +884,7 @@
 
 /obj/item/reagent_containers/food/snacks/fishfingers/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 4, list("fried fish" = 4))
+	reagents.add_reagent("seafood", 4, TASTE_DATA(list("fried fish" = 4)))
 
 /obj/item/reagent_containers/food/snacks/zestfish
 	name = "zesty fish"
@@ -896,7 +896,7 @@
 
 /obj/item/reagent_containers/food/snacks/zestfish/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 4, list("lemon-infused fish meat" = 4))
+	reagents.add_reagent("seafood", 4, TASTE_DATA(list("lemon-infused fish meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/mushroomslice
 	name = "mushroom slice"
@@ -932,7 +932,7 @@
 
 /obj/item/reagent_containers/food/snacks/bearmeat/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 12, list("gamey meat" = 12))
+	reagents.add_reagent("protein", 12, TASTE_DATA(list("gamey meat" = 12)))
 	reagents.add_reagent("hyperzine", 5)
 
 /obj/item/reagent_containers/food/snacks/xenomeat
@@ -945,7 +945,7 @@
 
 /obj/item/reagent_containers/food/snacks/xenomeat/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("faintly metallic meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("faintly metallic meat" = 6)))
 	reagents.add_reagent("pacid",6)
 
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat // Substitute for recipes requiring xeno meat.
@@ -971,7 +971,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatball/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("ground meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("ground meat" = 3)))
 
 /obj/item/reagent_containers/food/snacks/sausage
 	name = "sausage"
@@ -983,7 +983,7 @@
 
 /obj/item/reagent_containers/food/snacks/sausage/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("mildly seasoned meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("mildly seasoned meat" = 6)))
 
 /obj/item/reagent_containers/food/snacks/donkpocket
 	name = "\improper Donk-pocket"
@@ -999,7 +999,7 @@
 
 /obj/item/reagent_containers/food/snacks/donkpocket/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 2, list("salty meat mush" = 2))
+	reagents.add_reagent("protein", 2, TASTE_DATA(list("salty meat mush" = 2)))
 
 /obj/item/reagent_containers/food/snacks/donkpocket/proc/heat()
 	warm = 1
@@ -1045,7 +1045,7 @@
 
 /obj/item/reagent_containers/food/snacks/brainburger/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("buttery meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("buttery meat" = 6)))
 	reagents.add_reagent("alkysine", 6)
 
 /obj/item/reagent_containers/food/snacks/ghostburger
@@ -1072,7 +1072,7 @@
 
 /obj/item/reagent_containers/food/snacks/human/burger/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("mild pork" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("mild pork" = 6)))
 
 /obj/item/reagent_containers/food/snacks/cheeseburger
 	name = "cheeseburger"
@@ -1084,7 +1084,7 @@
 
 /obj/item/reagent_containers/food/snacks/cheeseburger/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("grilled meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("grilled meat" = 3)))
 
 /obj/item/reagent_containers/food/snacks/monkeyburger
 	name = "burger"
@@ -1098,7 +1098,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkeyburger/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("grilled meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("grilled meat" = 3)))
 
 /obj/item/reagent_containers/food/snacks/fishburger
 	name = "fried fish sandwich"
@@ -1112,7 +1112,7 @@
 
 /obj/item/reagent_containers/food/snacks/fishburger/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 6, list("fried fish" = 6))
+	reagents.add_reagent("seafood", 6, TASTE_DATA(list("fried fish" = 6)))
 
 /obj/item/reagent_containers/food/snacks/tofuburger
 	name = "tofu burger"
@@ -1157,7 +1157,7 @@
 
 /obj/item/reagent_containers/food/snacks/xenoburger/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("unpleasantly metallic meat" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("unpleasantly metallic meat" = 8)))
 
 /obj/item/reagent_containers/food/snacks/clownburger
 	name = "clown burger"
@@ -1282,7 +1282,7 @@
 
 /obj/item/reagent_containers/food/snacks/soylentgreen/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 10, list("stale bread paste" = 5, "unidentifiable meat" = 5))
+	reagents.add_reagent("protein", 10, TASTE_DATA(list("stale bread paste" = 5, "unidentifiable meat" = 5)))
 
 /obj/item/reagent_containers/food/snacks/soylenviridians
 	name = "soylent virdians"
@@ -1308,7 +1308,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatpie/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("lightly seasoned mince" = 4, "meat gravy" = 4))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("lightly seasoned mince" = 4, "meat gravy" = 4)))
 
 /obj/item/reagent_containers/food/snacks/tofupie
 	name = "tofu-pie"
@@ -1369,7 +1369,7 @@
 
 /obj/item/reagent_containers/food/snacks/xemeatpie/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 10, list("unpleasantly metallic meat" = 10))
+	reagents.add_reagent("protein", 10, TASTE_DATA(list("unpleasantly metallic meat" = 10)))
 
 /obj/item/reagent_containers/food/snacks/wingfangchu
 	name = "sticky alien wings"
@@ -1382,7 +1382,7 @@
 
 /obj/item/reagent_containers/food/snacks/wingfangchu/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("unpleasantly metallic meat" = 5, "hoisin sauce" = 5))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("unpleasantly metallic meat" = 5, "hoisin sauce" = 5)))
 
 /obj/item/reagent_containers/food/snacks/human/kabob
 	name = "-kabob"
@@ -1395,7 +1395,7 @@
 
 /obj/item/reagent_containers/food/snacks/human/kabob/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("mild chargrilled pork" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("mild chargrilled pork" = 8)))
 
 /obj/item/reagent_containers/food/snacks/monkeykabob
 	name = "meat-kabob"
@@ -1408,7 +1408,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkeykabob/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("chargrilled meat" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("chargrilled meat" = 8)))
 
 /obj/item/reagent_containers/food/snacks/tofukabob
 	name = "tofu-kabob"
@@ -1436,7 +1436,7 @@
 
 /obj/item/reagent_containers/food/snacks/cubancarp/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 3, list("spicy fish meat" = 3))
+	reagents.add_reagent("seafood", 3, TASTE_DATA(list("spiced fish meat" = 3)))
 	reagents.add_reagent("capsaicin", 3)
 
 /obj/item/reagent_containers/food/snacks/popcorn
@@ -1520,7 +1520,7 @@
 
 /obj/item/reagent_containers/food/snacks/blackpudding/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 2, list("seasoned meat" = 2))
+	reagents.add_reagent("protein", 2, TASTE_DATA(list("seasoned meat" = 2)))
 	reagents.add_reagent("blood", 5)
 
 /obj/item/reagent_containers/food/snacks/soydope
@@ -1595,7 +1595,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatsteak/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("grilled meat" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("grilled meat" = 4)))
 	reagents.add_reagent("sodiumchloride", 1)
 	reagents.add_reagent("blackpepper", 1)
 
@@ -1652,7 +1652,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatballsoup/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("meat dumplings" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("meat dumplings" = 8)))
 
 /obj/item/reagent_containers/food/snacks/slimesoup
 	name = "slime soup"
@@ -1673,7 +1673,7 @@
 
 /obj/item/reagent_containers/food/snacks/bloodsoup/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 2, list("something distinctly un-tomato-like" = 2))
+	reagents.add_reagent("protein", 2, TASTE_DATA(list("something distinctly un-tomato-like" = 2)))
 	reagents.add_reagent("blood", 10)
 
 /obj/item/reagent_containers/food/snacks/clownstears
@@ -1784,7 +1784,7 @@
 	reagents.add_reagent("water", 10)
 	if(prob(25))
 		src.desc = "A wish come true!"
-		reagents.add_reagent("nutriment", 8, list("something good" = 8))
+		reagents.add_reagent("nutriment", 8, TASTE_DATA(list("something good" = 8)))
 
 /obj/item/reagent_containers/food/snacks/hotchili
 	name = "hot chili"
@@ -1799,7 +1799,7 @@
 
 /obj/item/reagent_containers/food/snacks/hotchili/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("stewed meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("stewed meat" = 3)))
 	reagents.add_reagent("capsaicin", 3)
 	reagents.add_reagent("tomatojuice", 2)
 
@@ -1816,7 +1816,7 @@
 
 /obj/item/reagent_containers/food/snacks/coldchili/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("chilled meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("chilled meat" = 3)))
 	reagents.add_reagent("frostoil", 3)
 	reagents.add_reagent("tomatojuice", 2)
 
@@ -1951,7 +1951,7 @@
 
 /obj/item/reagent_containers/food/snacks/proteinslab/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 35, list("bitter chyme" = 35))
+	reagents.add_reagent("protein", 35, TASTE_DATA(list("bitter chyme" = 35)))
 
 /obj/item/reagent_containers/food/snacks/cube/nutriment
 	name = "nutriment cube"
@@ -2053,7 +2053,7 @@
 
 /obj/item/reagent_containers/food/snacks/enchiladas/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("spiced meats" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("spiced meats" = 6)))
 	reagents.add_reagent("capsaicin", 6)
 
 /obj/item/reagent_containers/food/snacks/monkeysdelight
@@ -2120,7 +2120,7 @@
 
 /obj/item/reagent_containers/food/snacks/clubsandwich/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("chicken" = 3, "bacon" = 3))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("chicken" = 3, "bacon" = 3)))
 
 /obj/item/reagent_containers/food/snacks/toastedsandwich
 	name = "toasted sandwich"
@@ -2332,7 +2332,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatballspagetti/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("ground meat" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("ground meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/spesslaw
 	name = "beef stroganoff"
@@ -5261,7 +5261,7 @@
 
 /obj/item/reagent_containers/food/snacks/burrito/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("spiced minced meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("spiced minced meat" = 6)))
 
 /obj/item/reagent_containers/food/snacks/burrito_vegan
 	name = "vegan burrito"
@@ -5276,7 +5276,7 @@
 
 /obj/item/reagent_containers/food/snacks/burrito_vegan/Initialize()
 	. = ..()
-	reagents.add_reagent("tofu", 6, list("spiced tofu" = 6))
+	reagents.add_reagent("tofu", 6, TASTE_DATA(list("spiced tofu" = 6)))
 
 
 /obj/item/reagent_containers/food/snacks/burrito_spicy
@@ -5292,7 +5292,7 @@
 
 /obj/item/reagent_containers/food/snacks/burrito_spicy/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("spicy minced meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("spiced minced meat" = 6)))
 
 /obj/item/reagent_containers/food/snacks/burrito_cheese
 	name = "carne queso burrito"
@@ -5307,7 +5307,7 @@
 
 /obj/item/reagent_containers/food/snacks/burrito_cheese/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("spiced minced meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("spiced minced meat" = 6)))
 
 /obj/item/reagent_containers/food/snacks/burrito_hell
 	name = "el diablo"
@@ -5322,7 +5322,7 @@
 
 /obj/item/reagent_containers/food/snacks/burrito_hell/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 9, list("brimstone" = 9))
+	reagents.add_reagent("protein", 9, TASTE_DATA(list("brimstone" = 9)))
 	reagents.add_reagent("condensedcapsaicin", 10) //what could possibly go wrong
 
 /obj/item/reagent_containers/food/snacks/meatburrito
@@ -5336,7 +5336,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatburrito/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("spiced meat strips" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("spiced meat strips" = 6)))
 
 /obj/item/reagent_containers/food/snacks/cheeseburrito
 	name = "Cheese burrito"
@@ -5363,7 +5363,7 @@
 
 /obj/item/reagent_containers/food/snacks/burrito_cheese_spicy/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("spicy meat strips" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("spiced meat strips" = 6)))
 
 /obj/item/reagent_containers/food/snacks/fuegoburrito
 	name = "fuego phoron burrito"
@@ -5394,8 +5394,8 @@
 
 /obj/item/reagent_containers/food/snacks/breakfast_wrap/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("bacon" = 4))
-	reagents.add_reagent("egg", 3, list("scrambled egg" = 3))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("bacon" = 4)))
+	reagents.add_reagent("egg", 3, TASTE_DATA(list("scrambled egg" = 3)))
 
 /obj/item/reagent_containers/food/snacks/burrito_mystery
 	name = "burrito misterioso"
@@ -5418,7 +5418,7 @@
 /obj/item/reagent_containers/food/snacks/hatchling_suprise/Initialize()
 	. = ..()
 	reagents.add_reagent("egg", 2)
-	reagents.add_reagent("protein", 4, list("bacon" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("bacon" = 4)))
 
 /obj/item/reagent_containers/food/snacks/red_sun_special
 	name = "red sun special"
@@ -5432,7 +5432,7 @@
 
 /obj/item/reagent_containers/food/snacks/red_sun_special/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 2, list("smoked sausage" = 2))
+	reagents.add_reagent("protein", 2, TASTE_DATA(list("smoked sausage" = 2)))
 
 /obj/item/reagent_containers/food/snacks/riztizkzi_sea
 	name = "moghesian sea delight"
@@ -5443,8 +5443,8 @@
 
 /obj/item/reagent_containers/food/snacks/riztizkzi_sea/Initialize()
 	. = ..()
-	reagents.add_reagent("blood", 10, list("congealed blood" = 10))
-	reagents.add_reagent("egg", 6, list("raw egg" = 6))
+	reagents.add_reagent("blood", 10, TASTE_DATA(list("congealed blood" = 10)))
+	reagents.add_reagent("egg", 6, TASTE_DATA(list("raw egg" = 6)))
 
 /obj/item/reagent_containers/food/snacks/father_breakfast
 	name = "breakfast of champions"
@@ -5456,7 +5456,7 @@
 /obj/item/reagent_containers/food/snacks/father_breakfast/Initialize()
 	. = ..()
 	reagents.add_reagent("egg", 6)
-	reagents.add_reagent("protein", 10, list("grilled steak" = 5, "grilled sausage" = 5))
+	reagents.add_reagent("protein", 10, TASTE_DATA(list("grilled steak" = 5, "grilled sausage" = 5)))
 
 /obj/item/reagent_containers/food/snacks/stuffed_meatball
 	name = "stuffed meatball"
@@ -5466,7 +5466,7 @@
 
 /obj/item/reagent_containers/food/snacks/stuffed_meatball/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("seasoned meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("seasoned meat" = 3)))
 
 /obj/item/reagent_containers/food/snacks/egg_pancake
 	name = "meat pancake"
@@ -5477,7 +5477,7 @@
 
 /obj/item/reagent_containers/food/snacks/egg_pancake/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("meat patty" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("meat patty" = 6)))
 	reagents.add_reagent("egg", 2)
 
 /obj/item/reagent_containers/food/snacks/sliceable/grilled_carp
@@ -5494,7 +5494,7 @@
 
 /obj/item/reagent_containers/food/snacks/sliceable/grilled_carp/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 12, list("grilled fish" = 12))
+	reagents.add_reagent("seafood", 12, TASTE_DATA(list("grilled fish" = 12)))
 
 /obj/item/reagent_containers/food/snacks/grilled_carp_slice
 	name = "\improper Njarir Merana Grill slice"
@@ -5519,7 +5519,7 @@
 
 /obj/item/reagent_containers/food/snacks/redcurry/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 7, list("aromatic meat" = 7))
+	reagents.add_reagent("protein", 7, TASTE_DATA(list("aromatic meat" = 7)))
 
 /obj/item/reagent_containers/food/snacks/greencurry
 	name = "green curry"
@@ -5540,7 +5540,7 @@
 
 /obj/item/reagent_containers/food/snacks/greencurry/Initialize()
 	. = ..()
-	reagents.add_reagent("tofu", 6, list("spicy tofu" = 6))
+	reagents.add_reagent("tofu", 6, TASTE_DATA(list("spiced tofu" = 6)))
 	reagents.add_reagent("capsaicin", 2)
 
 /obj/item/reagent_containers/food/snacks/yellowcurry
@@ -5568,7 +5568,7 @@
 
 /obj/item/reagent_containers/food/snacks/bearburger/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("bear meat" = 4)) //So spawned burgers will not be empty I guess?
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("bear meat" = 4))) //So spawned burgers will not be empty I guess?
 
 /obj/item/reagent_containers/food/snacks/bearchili
 	name = "bear chili"
@@ -5630,7 +5630,7 @@
 
 /obj/item/reagent_containers/food/snacks/bibimbap/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("marinated meat" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("marinated meat" = 8)))
 
 /obj/item/reagent_containers/food/snacks/lomein
 	name = "lo mein"
@@ -5648,7 +5648,7 @@
 
 /obj/item/reagent_containers/food/snacks/lomein/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 2, list("stir-fried meat" = 2))
+	reagents.add_reagent("protein", 2, TASTE_DATA(list("stir-fried meat" = 2)))
 
 /obj/item/reagent_containers/food/snacks/friedrice
 	name = "fried rice"
@@ -5678,7 +5678,7 @@
 
 /obj/item/reagent_containers/food/snacks/chickenfillet/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("fried chicken" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("fried chicken" = 8)))
 
 /obj/item/reagent_containers/food/snacks/chickennoodlesoup
 	name = "chicken noodle soup"
@@ -5695,7 +5695,7 @@
 
 /obj/item/reagent_containers/food/snacks/chickennoodlesoup/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("chicken" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("chicken" - 4)))
 	reagents.add_reagent("water", 5)
 
 /obj/item/reagent_containers/food/snacks/chilicheesefries
@@ -5760,7 +5760,7 @@
 
 /obj/item/reagent_containers/food/snacks/meatbun/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("fried ground meat" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("fried ground meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/spicedmeatbun
 	name = "char sui meat bun"
@@ -5776,7 +5776,7 @@
 
 /obj/item/reagent_containers/food/snacks/spicedmeatbun/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("fried ground meat" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("fried ground meat" = 3)))
 
 /obj/item/reagent_containers/food/snacks/custardbun
 	name = "custard bun"
@@ -5806,7 +5806,7 @@
 
 /obj/item/reagent_containers/food/snacks/chickenmomo/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("chicken mince" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("chicken mince" = 6)))
 
 /obj/item/reagent_containers/food/snacks/veggiemomo
 	name = "veggie momo"
@@ -5897,7 +5897,7 @@
 
 /obj/item/reagent_containers/food/snacks/ribplate/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("barbecued meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("barbecued meat" = 6)))
 	reagents.add_reagent("triglyceride", 2)
 	reagents.add_reagent("blackpepper", 1)
 	reagents.add_reagent("honey", 5)
@@ -6046,7 +6046,7 @@
 
 /obj/item/reagent_containers/food/snacks/lasagna/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("baked ground meat" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("baked ground meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/gigapuddi
 	name = "Astro-Pudding"
@@ -6113,7 +6113,7 @@
 
 /obj/item/reagent_containers/food/snacks/sliceable/turkey/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 20, list("turkey meat" = 20))
+	reagents.add_reagent("protein", 20, TASTE_DATA(list("turkey meat" = 20)))
 	reagents.add_reagent("blackpepper", 1)
 	reagents.add_reagent("sodiumchloride", 1)
 	reagents.add_reagent("triglyceride", 1)
@@ -6269,7 +6269,7 @@
 
 /obj/item/reagent_containers/food/snacks/candy/proteinbar/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("chalk" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("chalk" = 4)))
 	reagents.add_reagent("sugar", 4)
 
 /obj/item/reagent_containers/food/snacks/candy/gummy
@@ -6559,7 +6559,7 @@
 
 /obj/item/reagent_containers/food/snacks/sosjerky/Initialize()
 	. =..()
-	reagents.add_reagent("protein", 8, list("dried meat" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("dried meat" = 8)))
 
 
 /obj/item/reagent_containers/food/snacks/tuna
@@ -6577,7 +6577,7 @@
 
 /obj/item/reagent_containers/food/snacks/tuna/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 4, list("dried fish" = 4))
+	reagents.add_reagent("seafood", 4, TASTE_DATA(list("dried fish" = 4)))
 
 /obj/item/reagent_containers/food/snacks/pistachios
 	name = "pistachios"
@@ -6648,7 +6648,7 @@
 
 /obj/item/reagent_containers/food/snacks/salo/true/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("greasy dried meat" = 8))
+	reagents.add_reagent("protein", 8, TASTE_DATA(list("greasy dried meat" = 8)))
 
 /obj/item/reagent_containers/food/snacks/driedfish
 	name = "\improper Vobla"
@@ -7080,7 +7080,7 @@
 
 /obj/item/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
-	reagents.add_reagent("protein", 4, list("corned beef" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("corned beef" = 4)))
 	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/reagent_containers/food/snacks/canned/beans
@@ -7128,7 +7128,7 @@
 
 /obj/item/reagent_containers/food/snacks/canned/caviar/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 5, list("salty fish eggs" = 5))
+	reagents.add_reagent("seafood", 5, TASTE_DATA(list("salty fish eggs" = 5)))
 
 /obj/item/reagent_containers/food/snacks/canned/caviar/true
 	name = "\improper Authentic Soyuz Caviar"
@@ -7159,7 +7159,7 @@
 
 /obj/item/reagent_containers/food/snacks/maps/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("slimy meat" = 6))
+	reagents.add_reagent("protein", 6, TASTE_DATA(list("slimy meat" = 6)))
 	reagents.add_reagent("sodiumchloride", 2)
 
 /obj/item/reagent_containers/food/snacks/canned/appleberry
@@ -7191,7 +7191,7 @@
 
 /obj/item/reagent_containers/food/snacks/canned/ntbeans/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 2, list("bacon bits" = 2))
+	reagents.add_reagent("protein", 2, TASTE_DATA(list("bacon bits" = 2)))
 
 //////////////Packaged Food - break open and eat//////////////
 
@@ -7378,7 +7378,7 @@
 
 /obj/item/reagent_containers/food/snacks/sliceable/sushi/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 10, list("fresh fish" = 10))
+	reagents.add_reagent("seafood", 10, TASTE_DATA(list("fresh fish" = 10)))
 
 /obj/item/reagent_containers/food/snacks/slice/sushi
 	name = "piece of sushi"
@@ -7403,7 +7403,7 @@
 
 /obj/item/reagent_containers/food/snacks/goulash/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 5, list("stewed meat" = 5))
+	reagents.add_reagent("protein", 5, TASTE_DATA(list("stewed meat" = 5)))
 	reagents.add_reagent("water", 5)
 
 
@@ -7418,7 +7418,7 @@
 
 /obj/item/reagent_containers/food/snacks/donerkebab/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 5, list("seasoned meat" = 5))
+	reagents.add_reagent("protein", 5, TASTE_DATA(list("seasoned meat" = 5)))
 
 /obj/item/reagent_containers/food/snacks/roastbeef
 	name = "roast beef"
@@ -7430,7 +7430,7 @@
 
 /obj/item/reagent_containers/food/snacks/roastbeef/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 12, list("roasted meat" = 12))
+	reagents.add_reagent("protein", 12, TASTE_DATA(list("roasted meat" = 12)))
 
 
 /obj/item/reagent_containers/food/snacks/reishicup
@@ -7483,7 +7483,7 @@
 
 /obj/item/reagent_containers/food/snacks/chickenwing/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("chicken" = 3))
+	reagents.add_reagent("protein", 3, TASTE_DATA(list("chicken" = 3)))
 
 /obj/item/reagent_containers/food/snacks/hotandsoursoup
 	name = "hot & sour soup"
@@ -7527,7 +7527,7 @@
 
 /obj/item/reagent_containers/food/snacks/generalschicken/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("fried chicken" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("fried chicken" = 4)))
 
 /obj/item/reagent_containers/food/snacks/mammi
 	name = "mämmi"
@@ -7565,7 +7565,7 @@
 
 /obj/item/reagent_containers/food/snacks/lobstercooked/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 20, list("lobster meat" = 20))
+	reagents.add_reagent("seafood", 20, TASTE_DATA(list("lobster meat" = 20)))
 	reagents.add_reagent("tricordrazine", 5)
 	reagents.add_reagent("iron", 5)
 
@@ -7590,7 +7590,7 @@
 
 /obj/item/reagent_containers/food/snacks/cuttlefishcooked/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 15, list("cuttlefish meat" = 15))
+	reagents.add_reagent("seafood", 15, TASTE_DATA(list("cuttlefish meat" = 15)))
 
 /obj/item/reagent_containers/food/snacks/sliceable/monkfish
 	name = "extra large monkfish"
@@ -7615,7 +7615,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkfishfillet/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 5, list("monkfish meat" = 5))
+	reagents.add_reagent("seafood", 5, TASTE_DATA(list("monkfish meat" = 5)))
 
 /obj/item/reagent_containers/food/snacks/monkfishcooked
 	name = "seasoned monkfish"
@@ -7632,7 +7632,7 @@
 
 /obj/item/reagent_containers/food/snacks/monkfishcooked/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 8, list("monkfish meat" = 8))
+	reagents.add_reagent("seafood", 8, TASTE_DATA(list("monkfish meat" = 8)))
 
 /obj/item/reagent_containers/food/snacks/sliceable/monkfishremains
 	name = "monkfish remains"
@@ -7663,7 +7663,7 @@
 
 /obj/item/reagent_containers/food/snacks/sliceable/sharkchunk/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 35, list("shark meat" = 20))
+	reagents.add_reagent("seafood", 35, TASTE_DATA(list("shark meat" = 20)))
 
 /obj/item/reagent_containers/food/snacks/carpmeat/fish/sharkmeat
 	name = "slice of sharkmeat"
@@ -7676,7 +7676,7 @@
 
 /obj/item/reagent_containers/food/snacks/carpmeat/fish/sharkmeat/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 2, list("shark meat" = 20))
+	reagents.add_reagent("seafood", 2, TASTE_DATA(list("shark meat" = 20)))
 
 /obj/item/reagent_containers/food/snacks/sharkmeatcooked
 	name = "shark steak"
@@ -7691,7 +7691,7 @@
 
 /obj/item/reagent_containers/food/snacks/sharkmeatcooked/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 10, list("shark meat" = 10))
+	reagents.add_reagent("seafood", 10, TASTE_DATA(list("shark meat" = 10)))
 
 /obj/item/reagent_containers/food/snacks/sharkmeatdip
 	name = "hot shark shank"
@@ -7706,7 +7706,7 @@
 /obj/item/reagent_containers/food/snacks/sharkmeatdip/Initialize()
 	. = ..()
 	reagents.add_reagent("capsaicin", 4)
-	reagents.add_reagent("seafood", 6, list("spicy shark meat" = 6))
+	reagents.add_reagent("seafood", 6, TASTE_DATA(list("spiced shark meat" = 6)))
 
 /obj/item/reagent_containers/food/snacks/sharkmeatcubes
 	name = "shark cubes"
@@ -7720,7 +7720,7 @@
 
 /obj/item/reagent_containers/food/snacks/sharkmeatcubes/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 30, list("rotting fish" = 30)) // for people who want to get fat, FAST.
+	reagents.add_reagent("seafood", 30, TASTE_DATA(list("rotting fish" = 30))) // for people who want to get fat, FAST.
 
 /obj/item/reagent_containers/food/snacks/dynsoup
 	name = "dyn soup"
@@ -7764,7 +7764,7 @@
 
 /obj/item/reagent_containers/food/snacks/stew/neaera/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 6, list("fatty meat" = 6))
+	reagents.add_reagent("seafood", 6, TASTE_DATA(list("fatty meat" = 6)))
 	reagents.add_reagent("dynjuice", 4)
 
 /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy
@@ -7780,7 +7780,7 @@
 
 /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 20, list("creamy, fatty meat" = 20))
+	reagents.add_reagent("seafood", 20, TASTE_DATA(list("creamy, fatty meat" = 20)))
 
 /obj/item/reagent_containers/food/snacks/chipplate/neaeracandy/update_icon()
 	switch(reagents.total_volume)
@@ -7805,7 +7805,7 @@
 
 /obj/item/reagent_containers/food/snacks/neaeracandy/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 3, list("creamy, fatty meat" = 3))
+	reagents.add_reagent("seafood", 3, TASTE_DATA(list("creamy, fatty meat" = 3)))
 
 /obj/item/reagent_containers/food/snacks/neaerakabob
 	name = "neaera-kabob"
@@ -7819,7 +7819,7 @@
 
 /obj/item/reagent_containers/food/snacks/neaerakabob/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 4, list("fatty meat" = 2))
+	reagents.add_reagent("seafood", 4, TASTE_DATA(list("fatty meat" = 2)))
 
 /obj/item/reagent_containers/food/snacks/lortl
 	name = "lortl"
@@ -7875,7 +7875,7 @@
 
 /obj/item/reagent_containers/food/snacks/garani/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 4, list("fatty meat" = 4))
+	reagents.add_reagent("seafood", 4, TASTE_DATA(list("fatty meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/qazal_dough
 	name = "qa'zal dough"
@@ -7992,7 +7992,7 @@
 
 /obj/item/reagent_containers/food/snacks/stuffed_gauli/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("steamed meat" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("steamed meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/kirani_stew
 	name = "kirani stew"
@@ -8010,7 +8010,7 @@
 
 /obj/item/reagent_containers/food/snacks/kirani_stew/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("stewed meat" = 4))
+	reagents.add_reagent("protein", 4, TASTE_DATA(list("stewed meat" = 4)))
 
 /obj/item/reagent_containers/food/snacks/qazal_noodles
 	name = "qa'zal noodles"
