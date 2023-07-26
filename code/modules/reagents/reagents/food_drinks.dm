@@ -745,7 +745,10 @@
 	name = "Capsaicin Oil"
 	id = "capsaicin"
 	description = "This is what makes chilis hot."
-	taste_description = "spiciness"
+	taste_description = list(
+		TASTE_STRING_DEFAULT = list("spiciness" = 10),
+		SPECIES_TESHARI = list("cloying richness" = 10)
+	)
 	taste_mult = 1.5
 	reagent_state = LIQUID
 	ingest_met = REM
@@ -3858,7 +3861,10 @@
 	name = "Redeemer's Brew"
 	id = "unathiliquor"
 	description = "This barely qualifies as a drink, and could give jet fuel a run for its money. Also known to cause feelings of euphoria and numbness."
-	taste_description = "spiced numbness"
+	taste_description = list(
+		TASTE_STRING_DEFAULT = list("spiced numbness" = 10),
+		SPECIES_TESHARI = list("rich numbness" = 10)
+	)
 	color = "#242424"
 	strength = 5
 

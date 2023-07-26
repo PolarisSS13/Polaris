@@ -5229,7 +5229,11 @@
 	nachotrans = /obj/item/reagent_containers/food/snacks/chip/nacho/salsa
 	chiptrans = /obj/item/reagent_containers/food/snacks/chip/salsa
 	icon_state = "dip_salsa"
-	nutriment_desc = list("spicy tomato" = 20)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("spicy tomato" = 20),
+		SPECIES_TESHARI = list("fruity notes" = 10, "rich tomato" = 10)
+	)
+
 	nutriment_amt = 20
 	nutriment_allergens = ALLERGEN_VEGETABLE
 
@@ -5350,7 +5354,10 @@
 	icon_state = "burrito_cheese_spicy"
 	bitesize = 4
 	center_of_mass = list("x"=16, "y"=16)
-	nutriment_desc = list("tortilla" = 2, "cheese" = 2, "spicy beans" = 2, "chili peppers" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("tortilla" = 2, "cheese" = 2, "spicy beans" = 2, "chili peppers" = 2),
+		SPECIES_TESHARI = list("tortilla" = 2, "cheese" = 2, "beans" = 2, "fruity peppers" = 2)
+	)
 	nutriment_amt = 6
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_MEAT|ALLERGEN_DAIRY|ALLERGEN_BEANS
 
@@ -5363,7 +5370,10 @@
 	desc = "A super spicy vegetarian burrito."
 	icon_state = "fuegoburrito"
 	nutriment_amt = 6
-	nutriment_desc = list("chili peppers" = 2, "spicy beans" = 2, "tortilla" = 2)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("chili peppers" = 2, "spicy beans" = 2, "tortilla" = 2),
+		SPECIES_TESHARI = list("fruity peppers" = 2, "beans" = 2, "tortilla" = 2)
+	)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_BEANS
 	bitesize = 2
 
@@ -5610,7 +5620,10 @@
 	trash = /obj/item/trash/snack_bowl
 	filling_color = "#4f2100"
 	nutriment_amt = 12
-	nutriment_desc = list("fried egg" = 4, "sauted vegetables" = 4, "spicy gochujang" = 4)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("fried egg" = 4, "sauted vegetables" = 4, "spicy gochujang" = 4),
+		SPECIES_TESHARI = list("fried egg" = 4, "sauted vegetables" = 4, "rich gochujang" = 4)
+	)
 	nutriment_allergens = ALLERGEN_VEGETABLE|ALLERGEN_EGGS|ALLERGEN_GRAINS
 	center_of_mass = list("x"=15, "y"=9)
 	bitesize = 4
@@ -6897,7 +6910,10 @@
 	icon_state = "weebonuts"
 	trash = /obj/item/trash/weebonuts
 	desc = "A bag of Red Alert! brand spicy nuts. Goes well with your beer!"
-	nutriment_desc = list("nuts" = 4, "spicyness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("nuts" = 4, "spicyness" = 1),
+		SPECIES_TESHARI = list("nuts" = 4, "a strange, cloying aftertaste" = 1)
+	)
 	nutriment_amt = 5
 	nutriment_allergens = ALLERGEN_SEEDS
 	bitesize = 2
@@ -6912,7 +6928,10 @@
 	icon_state = "wasabi_peas"
 	trash = /obj/item/trash/wasabi_peas
 	desc = "A bag of Hadokikku brand wasabi peas, a delicious snack most definitely not imported directly from Sol, despite the advertisements."
-	nutriment_desc = list("peas" = 4, "spicyness" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("peas" = 4, "spicyness" = 1),
+		SPECIES_TESHARI = list("peas" = 4, "a strange, cloying aftertaste" = 1)
+	)
 	nutriment_amt = 6
 	nutriment_allergens = ALLERGEN_VEGETABLE
 	bitesize = 2
@@ -7474,7 +7493,10 @@
 	trash = /obj/item/trash/asian_bowl
 	bitesize = 2
 	nutriment_amt = 6
-	nutriment_desc = list("spicyness" = 4, "sourness" = 4, "tofu" = 1)
+	nutriment_desc = list(
+		TASTE_STRING_DEFAULT = list("spicyness" = 4, "sourness" = 4, "tofu" = 1),
+		SPECIES_TESHARI = list("cloying heat" = 4, "sourness" = 4, "tofu" = 1)
+	)
 	nutriment_allergens = ALLERGEN_FUNGI|ALLERGEN_BEANS|ALLERGEN_VEGETABLE
 
 /obj/item/reagent_containers/food/snacks/hotandsoursoup/Initialize()
