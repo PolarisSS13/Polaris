@@ -181,6 +181,11 @@
 	name = "jagged flufftail"
 	icon_state = "ztail"
 
+/datum/sprite_accessory/tail/snaketail
+	name = "snake tail"
+	icon_state = "snaketail"
+	whitelist_allowed = list() // Too excessive
+
 /datum/sprite_accessory/tail/vulpan_alt
 	name = "canine alt style"
 	icon_state = "vulptail_alt"
@@ -227,8 +232,9 @@
 
 /datum/sprite_accessory/tail/special/unathi_yeosa
 	name = "Yeosa'unathi tail"
-	icon_state = "snaketail"
+	icon_state = "unathitail_yeosa_s"
 	species_allowed = list(SPECIES_UNATHI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tajaran
 	name = "Tajaran tail"
