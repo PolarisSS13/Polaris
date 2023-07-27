@@ -335,6 +335,7 @@ var/global/list/##LIST_NAME = list();\
 #define VOLUME_CHANNEL_AMBIENCE "Ambience"
 #define VOLUME_CHANNEL_ALARMS "Alarms"
 #define VOLUME_CHANNEL_DOORS "Doors"
+#define VOLUME_CHANNEL_SYSTEM "System"
 
 // Make sure you update this or clients won't be able to adjust the channel
 GLOBAL_LIST_INIT(all_volume_channels, list(
@@ -342,6 +343,7 @@ GLOBAL_LIST_INIT(all_volume_channels, list(
 	VOLUME_CHANNEL_AMBIENCE,
 	VOLUME_CHANNEL_ALARMS,
 	VOLUME_CHANNEL_DOORS,
+	VOLUME_CHANNEL_SYSTEM,
 ))
 
 /*
