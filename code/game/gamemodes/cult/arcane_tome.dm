@@ -163,7 +163,11 @@
 
 /// Debug tome that automatically converts on pickup. Should never appear regularly.
 /obj/item/arcane_tome/debug
+	name = "debug tome"
 	scribe_speed = 1 SECOND // Not quite instant, but close to it
+
+/obj/item/arcane_tome/debug/get_examine_desc()
+	return SPAN_DANGER("This should never appear in normal play - report this on the issue tracker if you see it in a normal round!")
 
 /obj/item/arcane_tome/debug/pickup(mob/living/user)
 	. = ..()
