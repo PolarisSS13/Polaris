@@ -105,8 +105,8 @@ var/global/list/ventcrawl_machinery = list(
 	if(canmove && pipe)
 		return pipe
 
-/mob/living/carbon/alien/ventcrawl_carry()
-	return 1
+/mob/living/carbon/diona/ventcrawl_carry()
+	return TRUE
 
 /mob/living/var/ventcrawl_layer = 3
 

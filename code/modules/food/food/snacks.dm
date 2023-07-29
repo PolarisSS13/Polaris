@@ -258,18 +258,13 @@
 /// FOOD END
 ////////////////////////////////////////////////////////////////////////////////
 /obj/item/reagent_containers/food/snacks/attack_generic(var/mob/living/user)
-	if(!isanimal(user) && !isalien(user))
+	if(!isanimal(user))
 		return
-	if(isanimal(user))
-		var/mob/living/simple_mob/animal/critter = user
-		if(!critter.has_appetite())
-			to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
-			return TRUE
-		critter.eat_food_item(src, bitesize)
-	else
-		user.visible_message("<b>[user]</b> nibbles away at \the [src].","You nibble away at \the [src].")
-		if(reagents)
-			reagents.trans_to_mob(user, bitesize, CHEM_INGEST)
+	var/mob/living/simple_mob/animal/critter = user
+	if(!critter.has_appetite())
+		to_chat(critter, SPAN_WARNING("You don't have much of an appetite at the moment."))
+		return TRUE
+	critter.eat_food_item(src, bitesize)
 	bitecount++
 	spawn(5)
 		if(!src && !user.client)

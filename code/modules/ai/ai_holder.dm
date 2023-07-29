@@ -9,7 +9,7 @@
 /mob/living/Initialize()
 	if(ai_holder_type)
 		ai_holder = new ai_holder_type(src)
-		if(istype(src, /mob/living/carbon/human))
+		if(ishuman(src))
 			var/mob/living/carbon/human/H = src
 			H.hud_used = new /datum/hud(H)
 			H.create_mob_hud(H.hud_used)
@@ -429,11 +429,11 @@
 		if(STANCE_IDLE)
 			if(speak_chance) // In the long loop since otherwise it wont shut up.
 				handle_idle_speaking()
-			
+
 			if(hostile)
 				ai_log("handle_stance_strategical() : STANCE_IDLE, going to find_target().", AI_LOG_TRACE)
 				find_target()
-			
+
 			if(should_go_home())
 				ai_log("handle_stance_tactical() : STANCE_IDLE, going to go home.", AI_LOG_TRACE)
 				go_home()

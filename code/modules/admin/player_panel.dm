@@ -233,8 +233,6 @@
 						M_job = "slime"
 					else if(issmall(M))
 						M_job = "Monkey"
-					else if(isalien(M))
-						M_job = "Alien"
 					else
 						M_job = "Carbon-based"
 
@@ -344,8 +342,6 @@
 			dat += "<td>Ghost</td>"
 		else if(issmall(M))
 			dat += "<td>Monkey</td>"
-		else if(isalien(M))
-			dat += "<td>Alien</td>"
 		else
 			dat += "<td>Unknown</td>"
 
