@@ -149,3 +149,8 @@ var/global/list/_nymph_default_emotes = list(
 	hud_list[STATUS_HUD]      = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_STATUS)
 	hud_list[LIFE_HUD]        = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_LIFE)
 	add_overlay(hud_list)
+
+/mob/living/carbon/diona/Stat()
+	..()
+	if (statpanel("Status"))
+		stat(null, text("Growth: [round(amount_grown/max_grown)]%"))
