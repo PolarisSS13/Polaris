@@ -24,8 +24,13 @@ var/global/list/_nymph_default_emotes = list(
 	/decl/emote/audible/chirp
 )
 
+/datum/say_list/diona
+	emote_hear = list("chirps")
+	emote_see = list("jumps", "rolls", "scrathes")
+
 /mob/living/carbon/diona
 	name = "diona nymph"
+	desc = "A skittery little creature."
 	voice_name = "diona nymph"
 	speak_emote = list("chirrups")
 	icon = 'icons/mob/alien.dmi'
@@ -47,6 +52,10 @@ var/global/list/_nymph_default_emotes = list(
 	mob_size = 4
 
 	inventory_panel_type = null // Disable inventory by default
+	has_huds = TRUE
+
+	say_list_type = /datum/say_list/diona
+	ai_holder_type = /datum/ai_holder/simple_mob/passive
 
 	var/can_namepick_as_adult = TRUE
 	var/adult_name = "diona gestalt"
@@ -93,15 +102,6 @@ var/global/list/_nymph_default_emotes = list(
 	update_icons()
 
 
-/mob/living/carbon/diona/proc/handle_npc(var/mob/living/carbon/diona/D)
-	if(D.stat != CONSCIOUS)
-		return
-	if(prob(33) && D.canmove && isturf(D.loc) && !D.pulledby) //won't move if being pulled
-		step(D, pick(cardinal))
-	if(prob(1))
-		D.emote(pick("scratch","jump","chirp","roll"))
-
-
 /mob/living/carbon/diona/u_equip(obj/item/W as obj)
 	return
 
@@ -143,3 +143,9 @@ var/global/list/_nymph_default_emotes = list(
 	var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
 	if(P.assess_candidate(user))
 		P.transfer_personality(user, src)
+
+/mob/living/carbon/diona/make_hud_overlays()
+	hud_list[HEALTH_HUD]      = gen_hud_image(ingame_hud_med, src, "100", plane = PLANE_CH_HEALTH)
+	hud_list[STATUS_HUD]      = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_STATUS)
+	hud_list[LIFE_HUD]        = gen_hud_image(ingame_hud, src, "hudhealthy", plane = PLANE_CH_LIFE)
+	add_overlay(hud_list)

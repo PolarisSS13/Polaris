@@ -13,9 +13,6 @@
 		adjustToxLoss(-1)
 		adjustOxyLoss(-1)
 
- 	if(!client)
- 		handle_npc(src)
-
 
 // Alien larva are quite simple.
 /mob/living/carbon/diona/Life()
@@ -123,20 +120,6 @@
 		if(machine?.check_eye(src) < 0 || (client && !client.adminobs))
 			reset_view(null)
 	return TRUE
-
-
-/mob/living/carbon/diona/handle_environment(var/datum/gas_mixture/environment)
-	if(!environment)
-		return
-
-	if(environment.temperature > (T0C+66))
-		adjustFireLoss((environment.temperature - (T0C+66))/5) // Might be too high, check in testing.
-		throw_alert("alien_fire", /obj/screen/alert/alien_fire)
-		if(prob(20))
-			to_chat(src,SPAN_DANGER( "You feel a searing heat!"))
-	else
-		clear_alert("alien_fire")
-
 
 /mob/living/carbon/diona/handle_fire()
 	. = ..()
