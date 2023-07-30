@@ -14,6 +14,9 @@
 	desc = "A strip of cloth to decorate a teshari's tail."
 	icon_state = "tailwrap"
 
+/obj/item/clothing/accessory/teshtail/wrap/alt
+	icon_state = "tailwrap2"
+
 /obj/item/clothing/accessory/teshtail/wrap/long
 	name = " long teshari tail wrap"
 	icon_state = "tailwrap_long"

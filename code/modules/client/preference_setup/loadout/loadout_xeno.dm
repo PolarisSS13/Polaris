@@ -356,6 +356,16 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/accessory/teshtailwrapalt
+	display_name = "Teshari tail wrap, alt"
+	path = /obj/item/clothing/accessory/teshtail/wrap/alt
+	sort_category = "Xenowear"
+	whitelisted = SPECIES_TESHARI
+
+/datum/gear/accessory/teshtailwrapalt/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/accessory/teshtailwraplong
 	display_name = "Teshari tail wrap, long"
 	path = /obj/item/clothing/accessory/teshtail/wrap/long
