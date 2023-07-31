@@ -2075,6 +2075,7 @@ shaved
 	icon = 'icons/mob/hair_vox.dmi'
 	icon_add = 'icons/mob/hair_vox_add.dmi'
 	icon_state = "vox_longbraid"
+	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_VOX)
 
 /datum/sprite_accessory/hair/vox/braid_short
