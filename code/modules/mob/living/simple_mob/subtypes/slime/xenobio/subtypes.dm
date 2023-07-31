@@ -149,6 +149,12 @@
 			/mob/living/simple_mob/slime/xenobio/orange
 		)
 
+
+/mob/living/simple_mob/slime/xenobio/yellow/ICheckRangedAttack(atom/A)
+	if (!ismob(A))
+		return FALSE
+	return ..()
+
 /mob/living/simple_mob/slime/xenobio/yellow/apply_melee_effects(atom/A)
 	..()
 	if(isliving(A))
