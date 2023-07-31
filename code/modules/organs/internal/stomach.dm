@@ -3,29 +3,35 @@
 	icon_state = "stomach"
 	organ_tag = O_STOMACH
 	parent_organ = BP_GROIN
-
 	unacidable = TRUE	// Don't melt when holding your acid, dangit.
 
 	var/acidtype = "stomacid"	// Incase you want some stomach organ with, say, polyacid instead, or sulphuric.
 	var/max_acid_volume = 30
-
+	var/stomach_capacity
 	var/deadly_hold = TRUE	// Does the stomach do damage to mobs eaten by its owner? Xenos should probably have this FALSE.
 
 /obj/item/organ/internal/stomach/Initialize()
 	. = ..()
-	if(reagents)
-		reagents.maximum_volume = 30
-	else
+	if(!reagents)
 		create_reagents(30)
+	reagents.maximum_volume = 30
+	return INITIALIZE_HINT_LATELOAD
+
+/obj/item/organ/internal/stomach/LateInitialize()
+	. = ..()
+	if(species && !stomach_capacity)
+		stomach_capacity = species.stomach_capacity
 
 /obj/item/organ/internal/stomach/handle_organ_proc_special()
-	if(owner && istype(owner, /mob/living/carbon/human))
+	if(istype(owner, /mob/living/carbon/human))
 		if(reagents)
 			if(reagents.total_volume + 2 < max_acid_volume && prob(20))
 				reagents.add_reagent(acidtype, rand(1,2))
-
-			for(var/mob/living/L in owner.stomach_contents) // Splashes mobs inside with acid. Twice as effective as being splashed with the same acid outside the body.
-				reagents.trans_to(L, 2, 2, 0)
+			if(reagents.total_volume)
+				for(var/mob/living/L in owner.stomach_contents) // Splashes mobs inside with acid. Twice as effective as being splashed with the same acid outside the body.
+					reagents.trans_to(L, 2, 2, 0)
+				for(var/atom/movable/AM in contents)
+					reagents.touch(AM)
 
 		if(is_broken() && prob(1))
 			owner.custom_pain("There's a twisting pain in your abdomen!",1)
@@ -45,6 +51,46 @@
 			owner.adjustToxLoss(3)
 			owner.vomit(FALSE, TRUE)
 
+/obj/item/organ/internal/stomach/proc/can_eat_atom(var/atom/movable/food)
+	return !isnull(get_devour_time(food))
+
+/obj/item/organ/internal/stomach/proc/is_full(var/atom/movable/food)
+	var/total = round(reagents?.total_volume / 10)
+	for(var/a in contents + food)
+		if(ismob(a))
+			var/mob/M = a
+			total += M.mob_size
+		else if(isobj(a))
+			var/obj/item/I = a
+			total += I.get_storage_cost()
+		else
+			continue
+		if(total > stomach_capacity)
+			return TRUE
+	return FALSE
+
+/obj/item/organ/internal/stomach/proc/get_devour_time(var/atom/movable/food)
+	if(istype(food, /obj/item/holder)) // Don't eat holders. They are special.
+		food = locate(/mob) in food
+	if(iscarbon(food) || isanimal(food))
+		var/mob/living/L = food
+		if((species.gluttonous & GLUT_TINY) && (L.mob_size <= MOB_TINY) && !ishuman(food)) // Anything MOB_TINY or smaller
+			return DEVOUR_SLOW
+		else if((species.gluttonous & GLUT_SMALLER) && owner.mob_size > L.mob_size) // Anything we're larger than
+			return DEVOUR_SLOW
+		else if(species.gluttonous & GLUT_ANYTHING) // Eat anything ever
+			return DEVOUR_FAST
+	else if(istype(food, /obj/item))
+		var/obj/item/I = food
+		var/cost = I.get_storage_cost()
+		if(cost < ITEMSIZE_COST_NO_CONTAINER)
+			if((species.gluttonous & GLUT_ITEM_TINY) && cost < ITEMSIZE_COST_NORMAL)
+				return DEVOUR_SLOW
+			else if((species.gluttonous & GLUT_ITEM_NORMAL) && cost <= ITEMSIZE_COST_NORMAL)
+				return DEVOUR_SLOW
+			else if(species.gluttonous & GLUT_ITEM_ANYTHING)
+				return DEVOUR_FAST
+
 /obj/item/organ/internal/stomach/xeno
 	color = "#555555"
 	acidtype = "pacid"
@@ -53,20 +99,14 @@
 	name = "reagent cycler"
 	icon_state = "cycler"
 	organ_tag = O_CYCLER
-
 	robotic = ORGAN_ROBOT
-
 	acidtype = "sacid"
 
 /obj/item/organ/internal/stomach/machine/handle_organ_proc_special()
 	..()
 	if(owner && owner.stat != DEAD)
 		owner.bodytemperature += round(owner.robobody_count * 0.25, 0.1)
-
 		if(ishuman(owner))
 			var/mob/living/carbon/human/H = owner
-
 			if(H.ingested?.total_volume && H.bloodstr)
 				H.ingested.trans_to_holder(H.bloodstr, rand(2,5))
-
-	return

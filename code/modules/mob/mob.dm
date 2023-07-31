@@ -1266,3 +1266,6 @@
 
 /mob/proc/hearing_boost_range()
 	return hearing_boost_range
+
+/mob/proc/devour(atom/movable/victim)
+	return

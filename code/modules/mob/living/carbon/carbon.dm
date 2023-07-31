@@ -561,3 +561,83 @@
 		return ingest(holder, ingested, amount, multiplier, copy)
 	if(chem_type == CHEM_TOUCH)
 		return holder.trans_to_holder(touching, amount, multiplier, copy)
+
+
+/mob/living/carbon/devour(atom/movable/victim)
+	var/can_eat = can_devour(victim)
+	if(!can_eat)
+		return FALSE
+	var/eat_speed = 100
+	if(can_eat == DEVOUR_FAST)
+		eat_speed = 30
+	visible_message(SPAN_DANGER("\The [src] is attempting to devour \the [victim] whole!"))
+	var/action_target = victim
+	if(isobj(victim))
+		action_target = src
+	if(!do_mob(src, action_target, eat_speed))
+		return FALSE
+	visible_message(SPAN_DANGER("\The [src] devours \the [victim] whole!"))
+	if(ismob(victim))
+		add_attack_logs(src, victim, "devoured")
+	else
+		drop_from_inventory(victim)
+	move_to_stomach(victim)
+	return TRUE
+
+/mob/living/carbon/proc/can_devour(atom/movable/victim, var/silent = FALSE)
+
+	if(!should_have_organ(O_STOMACH))
+		return FALSE
+
+	var/obj/item/organ/internal/stomach/stomach = get_internal_organ(O_STOMACH)
+	if(!istype(stomach) || stomach.is_broken())
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your stomach is not functional!"))
+		return FALSE
+
+	if(!stomach.can_eat_atom(victim))
+		if(!silent)
+			to_chat(src, SPAN_WARNING("You are not capable of devouring \the [victim] whole!"))
+		return FALSE
+
+	if(stomach.is_full(victim))
+		if(!silent)
+			to_chat(src, SPAN_WARNING("Your [stomach.name] is full!"))
+		return FALSE
+
+	return stomach.get_devour_time(victim)
+
+/mob/living/carbon/proc/move_to_stomach(atom/movable/victim)
+	SHOULD_CALL_PARENT(FALSE)
+	var/mob/mob_victim = victim
+	if(istype(mob_victim, /obj/item/holder))
+		mob_victim = locate(/mob) in mob_victim
+		if(mob_victim && mob_victim != victim)
+			stomach_contents.Add(mob_victim)
+			qdel(victim)
+	else
+		stomach_contents.Add(victim)
+
+/mob/living/carbon/empty_stomach(var/blood_vomit)
+
+	for(var/atom/movable/thing in stomach_contents)
+		thing.dropInto(get_turf(src))
+		if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
+			thing.throw_at(get_edge_target_turf(src,dir),7,7,src)
+
+	visible_message(SPAN_DANGER("\The [src] throws up!"),SPAN_DANGER("You throw up!"))
+	playsound(loc, 'sound/effects/splat.ogg', 50, 1)
+	Stun(5)
+
+	var/turf/simulated/T = get_turf(src)	//TODO: Make add_blood_floor remove blood from human mobs
+	if(istype(T))
+		if(blood_vomit)
+			T.add_blood_floor(src)
+		else
+			T.add_vomit_floor(src, 1)
+	if(blood_vomit)
+		if(getBruteLoss() < 50)
+			adjustBruteLoss(3)
+		else
+			adjust_nutrition(-40)
+			adjustToxLoss(-3)

@@ -1109,7 +1109,7 @@
 	if(species.icon_scale_x != 1 || species.icon_scale_y != 1)
 		update_transform()
 
-	if(!default_colour || !species.apply_default_colours(src))
+	if(!default_colour)
 		r_skin = 0
 		g_skin = 0
 		b_skin = 0
@@ -1125,6 +1125,8 @@
 	dexterity = species.dexterity
 
 	species.create_organs(src)
+
+	species.apply_default_colours(src)
 
 	species.handle_post_spawn(src)
 
@@ -1687,3 +1689,38 @@
 		for(var/obj/item/accessory in uniform.accessories)
 			if(accessory.is_mob_movement_sensitive())
 				LAZYADD(., accessory)
+
+/mob/living/carbon/human/empty_stomach(var/blood_vomit)
+	if(should_have_organ(O_STOMACH))
+		var/turf/dumping_loc = get_turf(src)
+		for(var/atom/movable/thing as anything in stomach_contents)
+			thing.dropInto(dumping_loc)
+			if(species.gluttonous & GLUT_PROJECTILE_VOMIT)
+				thing.throw_at(get_edge_target_turf(src,dir),7,7,src)
+	if(!blood_vomit && should_have_organ(O_LIVER))
+		var/obj/item/organ/internal/L = get_internal_organ(O_LIVER)
+		blood_vomit = !istype(L) || L.is_broken()
+	..(blood_vomit)
+
+/mob/living/carbon/human/move_to_stomach(atom/movable/victim)
+	var/obj/item/organ/internal/stomach = get_internal_organ(O_STOMACH)
+	if(istype(stomach))
+		var/mob/mob_victim = victim
+		if(istype(mob_victim, /obj/item/holder))
+			mob_victim = locate(/mob) in mob_victim
+			if(mob_victim && victim != mob_victim)
+				mob_victim.forceMove(stomach)
+				qdel(victim)
+		else
+			victim.forceMove(stomach)
+
+/mob/living/carbon/human/attackby(obj/item/I, mob/user)
+	var/user_zone_sel = user.zone_sel?.selecting
+	if(user == src && user_zone_sel == O_MOUTH && can_devour(I, silent = TRUE))
+		var/obj/item/blocked = check_mouth_coverage()
+		if(blocked)
+			to_chat(user, SPAN_WARNING("\The [blocked] is in the way!"))
+			return TRUE
+		if(devour(I))
+			return TRUE
+	return ..()
