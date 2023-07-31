@@ -2086,6 +2086,10 @@ shaved
 	name = "Short Vox Quills"
 	icon_state = "vox_shortquills"
 
+/datum/sprite_accessory/hair/vox/quills_long
+	name = "Long Vox Quills"
+	icon_state = "vox_longquills"
+
 /datum/sprite_accessory/hair/vox/quills_kingly
 	name = "Kingly Vox Quills"
 	icon_state = "vox_kingly"
