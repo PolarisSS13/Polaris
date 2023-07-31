@@ -52936,6 +52936,11 @@
 	c_tag = "CIV - Pool East";
 	dir = 8
 	},
+/obj/item/reagent_containers/hypospray/autoinjector/detox{
+	filled_reagents = list("anti_toxin" = 10);
+	amount_per_transfer_from_this = 10;
+	volume = 10
+	},
 /turf/simulated/floor/tiled/freezer,
 /area/surface/station/crew_quarters/pool)
 "xAM" = (
@@ -53160,6 +53165,16 @@
 /obj/item/bodybag/cryobag,
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/pill_bottle/spaceacillin,
+/obj/item/reagent_containers/hypospray/autoinjector/detox{
+	filled_reagents = list("anti_toxin" = 10);
+	amount_per_transfer_from_this = 10;
+	volume = 10
+	},
+/obj/item/reagent_containers/hypospray/autoinjector/detox{
+	filled_reagents = list("anti_toxin" = 10);
+	amount_per_transfer_from_this = 10;
+	volume = 10
+	},
 /turf/simulated/floor/wood,
 /area/surface/station/crew_quarters/cafeteria)
 "xFI" = (
