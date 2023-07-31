@@ -235,20 +235,13 @@
 	)
 	gear_tweaks += new/datum/gear_tweak/path(coattype)
 
-//Half cloak
-/datum/gear/suit/cloak_half
-	display_name = "cloak, half, colorable"
-	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/half
-
-/datum/gear/suit/cloak_half/New()
-	gear_tweaks += gear_tweak_free_color_choice
-
 //Shoulder cloak
 /datum/gear/suit/cloak_shoulder
 	display_name = "cloak, left shoulder (colorable)"
 	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder
 
 /datum/gear/suit/cloak_shoulder/New()
+	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/cloak_shoulder_right
@@ -256,6 +249,7 @@
 	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/shoulder/right
 
 /datum/gear/suit/cloak_shoulder_right/New()
+	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/capelet
@@ -263,13 +257,15 @@
 	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/capelet
 
 /datum/gear/suit/capelet/New()
+	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/roughcloak
-	display_name = "cloak, rough (colorable)"
+	display_name = "cloak, rough halfcloak (colorable)"
 	path = /obj/item/clothing/accessory/storage/poncho/roles/cloak/half
 
 /datum/gear/suit/roughcloak/New()
+	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/suit/unathi_robe
