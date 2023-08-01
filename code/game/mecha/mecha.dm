@@ -753,9 +753,13 @@
 					T:take_damage(force)
 
 	melee_can_hit = 0
-	if(do_after(melee_cooldown))
+	if(mech_delay(melee_cooldown))
 		melee_can_hit = 1
 	return
+
+/obj/mecha/proc/mech_delay(var/delay)
+	sleep(delay)
+	return !QDELETED(src)
 
 /obj/mecha/proc/range_action(atom/target)
 	return
@@ -953,7 +957,7 @@
 				float_direction = direction
 				start_process(MECHA_PROC_MOVEMENT)
 				src.log_message("<span class='warning'>Movement control lost. Inertial movement started.</span>")
-		if(do_after(get_step_delay()))
+		if(mech_delay(get_step_delay()))
 			can_move = 1
 		return 1
 	return 0
@@ -2666,7 +2670,7 @@
 		var/mob/occupant = P.occupant
 
 		user.visible_message("<span class='notice'>\The [user] begins opening the hatch on \the [P]...</span>", "<span class='notice'>You begin opening the hatch on \the [P]...</span>")
-		if (!do_after(user, 40))
+		if (!do_after(user, 4 SECONDS))
 			return
 
 		user.visible_message("<span class='notice'>\The [user] opens the hatch on \the [P] and removes [occupant]!</span>", "<span class='notice'>You open the hatch on \the [P] and remove [occupant]!</span>")
