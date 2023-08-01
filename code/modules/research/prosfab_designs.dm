@@ -380,7 +380,7 @@
 	id = "platform_armour"
 	build_path = /obj/item/robot_parts/robot_component/armour_platform
 
-/datum/design/item/prosfab/cyborg/component/armour_heavy
+/datum/design/item/prosfab/cyborg/component/armour_light
 	name = "Armour Plating (Light)"
 	id = "light_armour"
 	build_path = /obj/item/robot_parts/robot_component/armour_light

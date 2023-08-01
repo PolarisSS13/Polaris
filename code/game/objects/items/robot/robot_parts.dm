@@ -140,7 +140,7 @@
 
 			// Create a new, nonliving human.
 			var/mob/living/carbon/human/H = new /mob/living/carbon/human(get_turf(loc))
-			H.death(0, "no message")
+			H.death(0, DEATHGASP_NO_MESSAGE)
 			H.set_species(species)
 			H.fully_replace_character_name(name)
 
