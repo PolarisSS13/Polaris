@@ -15,7 +15,7 @@
 
 	//Flavour text for robots.
 	S["flavour_texts_robot_Default"] >> pref.flavour_texts_robot["Default"]
-	for(var/module in robot_module_types)
+	for(var/module in SSrobots.all_module_names)
 		S["flavour_texts_robot_[module]"] >> pref.flavour_texts_robot[module]
 
 /datum/category_item/player_setup_item/general/flavor/save_character(var/savefile/S)
@@ -30,7 +30,7 @@
 	S["flavor_texts_feet"]		<< pref.flavor_texts["feet"]
 
 	S["flavour_texts_robot_Default"] << pref.flavour_texts_robot["Default"]
-	for(var/module in robot_module_types)
+	for(var/module in SSrobots.all_module_names)
 		S["flavour_texts_robot_[module]"] << pref.flavour_texts_robot[module]
 
 /datum/category_item/player_setup_item/general/flavor/sanitize_character()
@@ -129,7 +129,7 @@
 	HTML += "<a href='?src=\ref[src];flavour_text_robot=Default'>Default:</a> "
 	HTML += TextPreview(pref.flavour_texts_robot["Default"])
 	HTML += "<hr />"
-	for(var/module in robot_module_types)
+	for(var/module in SSrobots.all_module_names)
 		HTML += "<a href='?src=\ref[src];flavour_text_robot=[module]'>[module]:</a> "
 		HTML += TextPreview(pref.flavour_texts_robot[module])
 		HTML += "<br>"

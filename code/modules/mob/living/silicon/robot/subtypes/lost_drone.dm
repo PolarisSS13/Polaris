@@ -1,4 +1,4 @@
-/mob/living/silicon/robot/lost
+/mob/living/silicon/robot/flying/lost
 	lawupdate = 0
 	scrambledcodes = 1
 	icon_state = "drone-lost"
@@ -8,7 +8,7 @@
 	idcard_type = /obj/item/card/id
 	icon_selected = FALSE
 
-/mob/living/silicon/robot/lost/init()
+/mob/living/silicon/robot/flying/lost/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
 
 	mmi = new /obj/item/mmi/digital/robot(src)
@@ -23,12 +23,12 @@
 
 	playsound(src, 'sound/mecha/nominalsyndi.ogg', 75, 0)
 
-/mob/living/silicon/robot/lost/speech_bubble_appearance()
+/mob/living/silicon/robot/flying/lost/speech_bubble_appearance()
 	return "synthetic_evil"
 
-/mob/living/silicon/robot/lost/randomlaws
+/mob/living/silicon/robot/flying/lost/randomlaws
 
-/mob/living/silicon/robot/lost/randomlaws/init()
+/mob/living/silicon/robot/flying/lost/randomlaws/init()
 	..()
 	laws = give_random_lawset()
 

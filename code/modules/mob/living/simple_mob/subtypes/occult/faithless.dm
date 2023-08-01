@@ -43,7 +43,7 @@
 	minbodytemp = 0
 
 /mob/living/simple_mob/faithless/Process_Spacemove(var/check_drift = 0)
-	return 1
+	return TRUE
 
 /mob/living/simple_mob/faithless/apply_melee_effects(var/atom/A)
 	if(isliving(A))

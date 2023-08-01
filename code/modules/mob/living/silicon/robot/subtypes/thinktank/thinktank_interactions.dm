@@ -34,7 +34,7 @@
 
 /mob/living/silicon/robot/platform/attack_ghost(mob/observer/ghost/user)
 
-	if(client || key || stat == DEAD || !ticker || !ticker.mode)
+	if(!mapped || client || key || stat == DEAD || !ticker || !ticker.mode)
 		return ..()
 
 	var/confirm = alert("Do you wish to take control of \the [src]?", "Platform Control", "No", "Yes")
@@ -43,7 +43,7 @@
 
 	if(jobban_isbanned(user, "Robot"))
 		to_chat(user, SPAN_WARNING("You are banned from synthetic roles and cannot take control of \the [src]."))
-		return 
+		return
 
 	// Boilerplate from drone fabs, unsure if there's a shared proc to use instead.
 	var/deathtime = world.time - user.timeofdeath

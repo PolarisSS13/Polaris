@@ -82,6 +82,11 @@
 	external_type = /obj/item/robot_parts/robot_component/armour_platform
 	max_damage = 140
 
+/datum/robot_component/armour/light
+	name = "lightweight armour plating"
+	external_type = /obj/item/robot_parts/robot_component/armour_light
+	max_damage = 75
+
 // ACTUATOR
 // Enables movement.
 // Uses no power when idle. Uses 200J for each tile the cyborg moves.
@@ -181,13 +186,13 @@
 
 // Initializes cyborg's components. Technically, adds default set of components to new borgs
 /mob/living/silicon/robot/proc/initialize_components()
-	components["actuator"] = new/datum/robot_component/actuator(src)
-	components["radio"] = new/datum/robot_component/radio(src)
-	components["power cell"] = new/datum/robot_component/cell(src)
-	components["diagnosis unit"] = new/datum/robot_component/diagnosis_unit(src)
-	components["camera"] = new/datum/robot_component/camera(src)
-	components["comms"] = new/datum/robot_component/binary_communication(src)
-	components["armour"] = new/datum/robot_component/armour(src)
+	components["actuator"] =       new /datum/robot_component/actuator(src)
+	components["radio"] =          new /datum/robot_component/radio(src)
+	components["power cell"] =     new /datum/robot_component/cell(src)
+	components["diagnosis unit"] = new /datum/robot_component/diagnosis_unit(src)
+	components["camera"] =         new /datum/robot_component/camera(src)
+	components["comms"] =          new /datum/robot_component/binary_communication(src)
+	components["armour"] =         new /datum/robot_component/armour(src)
 
 // Checks if component is functioning
 /mob/living/silicon/robot/proc/is_component_functioning(module_name)
@@ -257,6 +262,12 @@
 	icon_state = "armor"
 	icon_state_broken = "armor_broken"
 	color = COLOR_GRAY80
+
+/obj/item/robot_parts/robot_component/armour_light
+	name = "lightweight armour plating"
+	desc = "A pair of flexible, light armor plates, used to protect the internals of robots equipped with anti-gravity frames."
+	icon_state = "armor_l"
+	icon_state_broken = "armor_l_broken"
 
 /obj/item/robot_parts/robot_component/camera
 	name = "camera"

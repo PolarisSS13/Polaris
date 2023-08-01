@@ -14,7 +14,7 @@
 
 /obj/effect/decal/remains/robot
 	desc = "They look like the remains of something mechanical. They have a strange aura about them."
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robot_gibs.dmi'
 	icon_state = "remainsrobot"
 
 /obj/effect/decal/remains/mouse

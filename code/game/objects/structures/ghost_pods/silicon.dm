@@ -17,7 +17,7 @@
 
 /obj/structure/ghost_pod/manual/lost_drone/create_occupant(var/mob/M)
 	density = FALSE
-	var/mob/living/silicon/robot/lost/randomlaws/R = new(get_turf(src))
+	var/mob/living/silicon/robot/flying/lost/randomlaws/R = new(get_turf(src))
 	R.adjustBruteLoss(rand(5, 30))
 	R.adjustFireLoss(rand(5, 10))
 	if(M.mind)

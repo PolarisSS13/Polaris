@@ -133,22 +133,17 @@
 	require_module = 1
 
 /obj/item/borg/upgrade/jetpack/action(var/mob/living/silicon/robot/R)
-	if(..()) return 0
+	if(..())
+		return FALSE
 
-	var/obj/item/tank/jetpack/carbondioxide/T = locate() in R.module
-	if(!T)
-		T = locate() in R.module.contents
-	if(!T)
-		T = locate() in R.module.modules
-	if(!T)
-		R.module.modules += new/obj/item/tank/jetpack/carbondioxide(R.module)
-		for(var/obj/item/tank/jetpack/carbondioxide in R.module.modules)
-			R.internals = src
-		return 1
-	if(T)
-		to_chat(R, "Upgrade mounting error!  No suitable hardpoint detected!")
+	if(R.module.jetpack)
+		to_chat(R, "Upgrade mounting error! No suitable hardpoint detected!")
 		to_chat(usr, "There's no mounting point for the module!")
-		return 0
+		return FALSE
+
+	R.module.jetpack = new /obj/item/tank/jetpack/carbondioxide(R.module)
+	R.internals = R.module.jetpack
+	return TRUE
 
 /obj/item/borg/upgrade/advhealth
 	name = "advanced health analyzer module"

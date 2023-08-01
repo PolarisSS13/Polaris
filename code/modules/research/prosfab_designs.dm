@@ -277,9 +277,23 @@
 /datum/design/item/prosfab/cyborg/exoskeleton
 	name = "Robot Exoskeleton"
 	id = "robot_exoskeleton"
-	build_path = /obj/item/robot_parts/robot_suit
+	build_path = /obj/item/robot_parts/frame
 	time = 50
 	materials = list(MAT_STEEL = 37500)
+
+/datum/design/item/prosfab/cyborg/exoskeleton_flying
+	name = "Flying Robot Exoskeleton"
+	id = "robot_exoskeleton_flyer"
+	build_path = /obj/item/robot_parts/frame/flyer
+	time = 40
+	materials = list(MAT_STEEL = 32500)
+
+/datum/design/item/prosfab/cyborg/exoskeleton_platform
+	name = "Platform Exoskeleton"
+	id = "robot_exoskeleton_platform"
+	build_path = /obj/item/robot_parts/frame/platform
+	time = 60
+	materials = list(MAT_STEEL = 42500)
 
 /datum/design/item/prosfab/cyborg/torso
 	name = "Robot Torso"
@@ -365,6 +379,11 @@
 	name = "Armour Plating (Platform)"
 	id = "platform_armour"
 	build_path = /obj/item/robot_parts/robot_component/armour_platform
+
+/datum/design/item/prosfab/cyborg/component/armour_light
+	name = "Armour Plating (Light)"
+	id = "light_armour"
+	build_path = /obj/item/robot_parts/robot_component/armour_light
 
 /datum/design/item/prosfab/cyborg/component/ai_shell
 	name = "AI Remote Interface"

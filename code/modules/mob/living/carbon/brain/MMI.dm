@@ -211,7 +211,7 @@
 				. += "<span class='deadsay'>It appears to be completely inactive.</span>"
 	else
 		. += "<span class='deadsay'>It appears to be completely inactive.</span>"
-		
+
 /obj/item/mmi/digital/emp_act(severity)
 	if(!src.brainmob)
 		return

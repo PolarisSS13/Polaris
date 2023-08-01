@@ -3,7 +3,7 @@
 /mob/living/silicon/robot
 	name = "Cyborg"
 	real_name = "Cyborg"
-	icon = 'icons/mob/robots.dmi'
+	icon = 'icons/mob/robots/robots_grounded.dmi'
 	icon_state = "robot"
 	maxHealth = 200
 	health = 200
@@ -14,6 +14,7 @@
 
 	var/lights_on = 0 // Is our integrated light on?
 	var/used_power_this_tick = 0
+	var/power_efficiency = 1
 	var/sight_mode = 0
 	var/custom_name = ""
 	var/custom_sprite = 0 //Due to all the sprites involved, a var for our custom borgs may be best
@@ -22,6 +23,8 @@
 	var/crisis_override = 0
 	var/integrated_light_power = 6
 	var/datum/wires/robot/wires
+	var/module_category = ROBOT_MODULE_TYPE_GROUNDED
+	var/dismantle_type = /obj/item/robot_parts/frame
 
 	can_be_antagged = TRUE
 
@@ -75,7 +78,6 @@
 	var/viewalerts = 0
 	var/modtype = "Default"
 	var/lower_mod = 0
-	var/jetpack = 0
 	var/datum/effect_system/ion_trail_follow/ion_trail = null
 	var/datum/effect_system/spark_spread/spark_system//So they can initialize sparks whenever/N
 	var/jeton = 0
@@ -258,28 +260,42 @@
 	updateicon()
 	return module_sprites
 
-/mob/living/silicon/robot/proc/pick_module()
-	if(module)
-		return
-	var/list/modules = list()
-	modules.Add(robot_module_types)
-	if((crisis && security_level == SEC_LEVEL_RED) || crisis_override) //Leaving this in until it's balanced appropriately.
-		to_chat(src, "<font color='red'>Crisis mode active. Combat module available.</font>")
-		modules+="Combat"
-	modtype = input("Please, select a module!", "Robot module", null, null) as null|anything in modules
+/mob/living/silicon/robot/proc/pick_module(override)
 
-	if(module)
+	if(module && !override)
 		return
-	if(!(modtype in robot_modules))
+
+	var/is_crisis_mode = crisis_override || (security_level == SEC_LEVEL_RED)
+	var/list/robot_modules = SSrobots.get_available_modules(module_category, is_crisis_mode, override)
+	if(!length(robot_modules))
+		to_chat(src, SPAN_WARNING("For some reason, no modules are available to you. Please report this on the issue tracker!"))
+		return
+
+	if(!override)
+		if(is_crisis_mode)
+			to_chat(src, SPAN_WARNING("Crisis mode active. Additional modules available."))
+		modtype = input("Please select a module!", "Robot module", null, null) as null|anything in robot_modules
+	else
+		if(module)
+			QDEL_NULL(module)
+		modtype = override
+
+	if(module || !modtype)
 		return
 
 	var/module_type = robot_modules[modtype]
+	if(!module_type)
+		to_chat(src, SPAN_WARNING("You are unable to select a module."))
+		return
+
 	new module_type(src)
 
-	hands.icon_state = lowertext(modtype)
+	if(hands)
+		hands.icon_state = lowertext(modtype)
 	feedback_inc("cyborg_[lowertext(modtype)]",1)
 	updatename()
-	notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
+	if(module)
+		notify_ai(ROBOT_NOTIFICATION_NEW_MODULE, module.name)
 
 /mob/living/silicon/robot/proc/update_braintype()
 	if(istype(mmi, /obj/item/mmi/digital/posibrain))
@@ -416,18 +432,10 @@
 // this function displays jetpack pressure in the stat panel
 /mob/living/silicon/robot/proc/show_jetpack_pressure()
 	// if you have a jetpack, show the internal tank pressure
-	var/obj/item/tank/jetpack/current_jetpack = installed_jetpack()
+	var/obj/item/tank/jetpack/current_jetpack = get_jetpack()
 	if (current_jetpack)
 		stat("Internal Atmosphere Info", current_jetpack.name)
 		stat("Tank Pressure", current_jetpack.air_contents.return_pressure())
-
-
-// this function returns the robots jetpack, if one is installed
-/mob/living/silicon/robot/proc/installed_jetpack()
-	if(module)
-		return (locate(/obj/item/tank/jetpack) in module.modules)
-	return 0
-
 
 // this function displays the cyborgs current cell charge in the stat panel
 /mob/living/silicon/robot/proc/show_cell_power()
@@ -555,13 +563,8 @@
 				to_chat(user, "<span class='filter_notice'>You jam the crowbar into the robot and begin levering [mmi].</span>")
 				sleep(30)
 				to_chat(user, "<span class='filter_notice'>You damage some parts of the chassis, but eventually manage to rip out [mmi]!</span>")
-				var/obj/item/robot_parts/robot_suit/C = new/obj/item/robot_parts/robot_suit(loc)
-				C.l_leg = new/obj/item/robot_parts/l_leg(C)
-				C.r_leg = new/obj/item/robot_parts/r_leg(C)
-				C.l_arm = new/obj/item/robot_parts/l_arm(C)
-				C.r_arm = new/obj/item/robot_parts/r_arm(C)
-				C.updateicon()
-				new/obj/item/robot_parts/chest(loc)
+				var/obj/item/robot_parts/frame/C = new dismantle_type(loc)
+				C.dismantled_from(src)
 				qdel(src)
 			else
 				// Okay we're not removing the cell or an MMI, but maybe something else?
@@ -1016,7 +1019,7 @@
 	if(icontype == "Custom")
 		icon = CUSTOM_ITEM_SYNTH
 	else // This is to fix an issue where someone with a custom borg sprite chooses a non-custom sprite and turns invisible.
-		icon = 'icons/mob/robots.dmi'
+		icon = initial(icon)
 	icon_state = module_sprites[icontype]
 	updateicon()
 

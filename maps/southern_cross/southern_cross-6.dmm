@@ -2135,7 +2135,7 @@
 "Pc" = (/obj/structure/table/steel,/obj/machinery/recharger,/obj/machinery/light/small{dir = 4},/turf/simulated/shuttle/floor/darkred,/area/skipjack_station/start)
 "Pd" = (/obj/machinery/portable_atmospherics/canister/oxygen,/turf/simulated/shuttle/floor/darkred,/area/skipjack_station/start)
 "Pe" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
-"Pf" = (/obj/item/robot_parts/robot_suit,/obj/item/robot_parts/r_leg,/obj/item/robot_parts/r_arm,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
+"Pf" = (/obj/item/robot_parts/frame,/obj/item/robot_parts/r_leg,/obj/item/robot_parts/r_arm,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
 "Pg" = (/obj/structure/flight_left{icon_state = "left"; dir = 8},/turf/simulated/shuttle/floor/voidcraft,/area/syndicate_station/start)
 "Ph" = (/obj/item/radio/intercom{desc = "Talk through this. Evilly"; frequency = 1213; name = "Syndicate Intercom"; pixel_x = 32; subspace_transmission = 1; syndie = 1},/turf/simulated/shuttle/floor/voidcraft/light,/area/syndicate_station/start)
 "Pi" = (/obj/item/radio/intercom{desc = "Talk through this. Evilly"; frequency = 1213; name = "Syndicate Intercom"; pixel_x = -32; subspace_transmission = 1; syndie = 1},/turf/simulated/shuttle/floor/voidcraft/dark,/area/syndicate_station/start)

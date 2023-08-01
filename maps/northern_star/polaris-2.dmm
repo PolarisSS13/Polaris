@@ -2285,7 +2285,7 @@
 "RW" = (/obj/structure/table/rack,/obj/item/grenade/empgrenade,/obj/item/grenade/flashbang,/obj/item/grenade/spawnergrenade/manhacks,/turf/simulated/shuttle/floor/red,/area/skipjack_station/start)
 "RX" = (/obj/structure/table/steel,/obj/machinery/recharger,/obj/machinery/light/small{dir = 4},/turf/simulated/shuttle/floor/red,/area/skipjack_station/start)
 "RY" = (/obj/structure/reagent_dispensers/fueltank,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
-"RZ" = (/obj/item/robot_parts/robot_suit,/obj/item/robot_parts/r_leg,/obj/item/robot_parts/r_arm,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
+"RZ" = (/obj/item/robot_parts/frame,/obj/item/robot_parts/r_leg,/obj/item/robot_parts/r_arm,/turf/simulated/shuttle/plating,/area/skipjack_station/start)
 "Sa" = (/obj/machinery/computer/communications,/turf/unsimulated/floor{icon_state = "dark"},/area/wizard_station)
 "Sb" = (/obj/structure/sign/double/map/left{pixel_y = 32},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)
 "Sc" = (/obj/structure/sign/double/map/right{pixel_y = 32},/turf/unsimulated/floor{icon_state = "vault"; dir = 5},/area/wizard_station)

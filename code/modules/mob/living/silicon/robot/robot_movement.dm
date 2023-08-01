@@ -1,29 +1,11 @@
 /mob/living/silicon/robot/get_jetpack()
-	if(module)
-		for(var/obj/item/tank/jetpack/J in module.modules)
-			return J
+	return module?.jetpack
 
 /mob/living/silicon/robot/Check_Shoegrip()
 	return module && module.no_slip
 
 /mob/living/silicon/robot/Process_Spaceslipping(var/prob_slip)
-	var/obj/item/tank/jetpack/thrust = get_jetpack()
-	if(thrust?.can_thrust(0.01))
-		return 0
-	if(module && module.no_slip)
-		return 0
-	..(prob_slip)
-
-/mob/living/silicon/robot/Process_Spacemove(var/check_drift = 0)
-	if(..())//Can move due to other reasons, don't use jetpack fuel
-		return 1
-
-	var/obj/item/tank/jetpack/thrust = get_jetpack()
-	if(thrust && (!check_drift || (check_drift && thrust.stabilization_on)) && thrust.do_thrust(0.01))
-		inertia_dir = 0
-		return 1
-
-	return 0
+	return ..(module?.no_slip ? 0 : prob_slip)
 
  //No longer needed, but I'll leave it here incase we plan to re-use it.
 /mob/living/silicon/robot/movement_delay()
@@ -43,7 +25,7 @@
 		return 0
 
 	var/datum/robot_component/actuator/A = get_component("actuator")
-	if (cell_use_power(A.active_usage))
+	if (cell_use_power(A.active_usage * power_efficiency))
 		return ..()
 
 /mob/living/silicon/robot/Moved(atom/old_loc, direction, forced = FALSE)

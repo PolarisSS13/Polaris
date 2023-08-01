@@ -29,18 +29,6 @@
 	if(length(A.name) + length(label) > 64)
 		to_chat(user, SPAN_WARNING("\The [src]'s label too big."))
 		return
-	if(istype(A, /mob/living/silicon/robot/platform))
-		var/mob/living/silicon/robot/platform/P = A
-		if(!P.allowed(user))
-			to_chat(usr, SPAN_WARNING("Access denied."))
-		else if(P.client || P.key)
-			to_chat(user, SPAN_NOTICE("You rename \the [P] to [label]."))
-			to_chat(P, SPAN_NOTICE("\The [user] renames you to [label]."))
-			P.custom_name = label
-			P.SetName(P.custom_name)
-		else
-			to_chat(user, SPAN_WARNING("\The [src] is inactive and cannot be renamed."))
-		return
 	if(ishuman(A))
 		to_chat(user, SPAN_WARNING("The label refuses to stick to [A.name]."))
 		return

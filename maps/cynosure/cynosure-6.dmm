@@ -7793,7 +7793,7 @@
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/escape/centcom)
 "iNR" = (
-/obj/item/robot_parts/robot_suit,
+/obj/item/robot_parts/frame,
 /obj/item/robot_parts/r_leg,
 /obj/item/robot_parts/r_arm,
 /turf/simulated/shuttle/plating,

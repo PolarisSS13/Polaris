@@ -419,6 +419,13 @@
 
 	var/datum/job/J = SSjob.get_job(rank)
 
+	// Get the appropriate announcement title.
+	var/announce_rank = rank
+	if(J?.substitute_announce_title)
+		announce_rank = J.substitute_announce_title
+	else if(character.mind.role_alt_title)
+		announce_rank = character.mind.role_alt_title
+
 	// AIs don't need a spawnpoint, they must spawn at an empty core
 	if(J.mob_type & JOB_SILICON_AI)
 
@@ -431,7 +438,7 @@
 		// AIize the character, but don't move them yet
 		character = character.AIize(move = FALSE) // Dupe of code in /datum/controller/subsystem/ticker/proc/create_characters() for non-latespawn, unify?
 
-		AnnounceCyborg(character, rank, "has been transferred to the empty core in \the [character.loc.loc]")
+		AnnounceCyborg(character, announce_rank, "has been transferred to the empty core in \the [character.loc.loc]")
 		ticker.mode.latespawn(character)
 
 		qdel(C) //Deletes empty core (really?)
@@ -453,10 +460,10 @@
 	var/do_announce = join_props["announce"] && join_message && announce_channel
 	if(J.mob_type & JOB_SILICON)
 		if(do_announce)
-			AnnounceCyborg(character, rank, join_message, announce_channel, character.z)
+			AnnounceCyborg(character, announce_rank, join_message, announce_channel, character.z)
 	else
 		if(do_announce)
-			AnnounceArrival(character, J?.substitute_announce_title || rank, join_message, announce_channel, character.z)
+			AnnounceArrival(character, announce_rank, join_message, announce_channel, character.z)
 		data_core.manifest_inject(character)
 		ticker.minds += character.mind//Cyborgs and AIs handle this in the transform proc.	//TODO!!!!! ~Carn
 
@@ -465,8 +472,6 @@
 /mob/new_player/proc/AnnounceCyborg(var/mob/living/character, var/rank, var/join_message, var/channel, var/zlevel)
 	if (ticker.current_state == GAME_STATE_PLAYING)
 		var/list/zlevels = zlevel ? using_map.get_map_levels(zlevel, TRUE, om_range = DEFAULT_OVERMAP_RANGE) : null
-		if(character.mind.role_alt_title)
-			rank = character.mind.role_alt_title
 		// can't use their name here, since cyborg namepicking is done post-spawn, so we'll just say "A new Cyborg has arrived"/"A new Android has arrived"/etc.
 		global_announcer.autosay("A new[rank ? " [rank]" : " visitor" ] [join_message ? join_message : "has arrived on the station"].", "Arrivals Announcement Computer", channel, zlevels)
 

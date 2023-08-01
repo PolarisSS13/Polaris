@@ -3,86 +3,68 @@
 // The module that borgs on the surface have.  Generally has a lot of useful tools in exchange for questionable loyalty to the crew.
 /obj/item/robot_module/robot/lost
 	name = "lost robot module"
+	display_name = "Unregistered"
+	module_category = ROBOT_MODULE_TYPE_FLYING
+	unavailable_by_default = TRUE
 	hide_on_manifest = TRUE
 	sprites = list(
-					"Drone" = "drone-lost"
-				)
+		"Drone" = "drone-lost"
+	)
+	modules = list(
+		/obj/item/melee/baton/shocker/robot,
+		/obj/item/handcuffs/cyborg,
+		/obj/item/borg/combat/shield,
+		/obj/item/healthanalyzer,
+		/obj/item/reagent_containers/borghypo/lost,
+		/obj/item/weldingtool/electric/mounted,
+		/obj/item/tool/screwdriver/cyborg,
+		/obj/item/tool/wrench/cyborg,
+		/obj/item/tool/wirecutters/cyborg,
+		/obj/item/multitool,
+		/obj/item/robotanalyzer,
+		/obj/item/stack/cable_coil/cyborg
+	)
+	emag = /obj/item/gun/energy/retro/mounted
+	synths = list(
+		/datum/matter_synth/wire
+	)
 
-/obj/item/robot_module/robot/lost/Initialize(var/ml)
-
+/obj/item/robot_module/robot/lost/finalize_synths()
 	. = ..()
-	if(. != INITIALIZE_HINT_NORMAL)
-		return
-
-	// Sec
-	src.modules += new /obj/item/melee/baton/shocker/robot(src)
-	src.modules += new /obj/item/handcuffs/cyborg(src)
-	src.modules += new /obj/item/borg/combat/shield(src)
-
-	// Med
-	src.modules += new /obj/item/healthanalyzer(src)
-	src.modules += new /obj/item/reagent_containers/borghypo/lost(src)
-
-	// Engi
-	src.modules += new /obj/item/weldingtool/electric/mounted(src)
-	src.modules += new /obj/item/tool/screwdriver/cyborg(src)
-	src.modules += new /obj/item/tool/wrench/cyborg(src)
-	src.modules += new /obj/item/tool/wirecutters/cyborg(src)
-	src.modules += new /obj/item/multitool(src)
-
-	// Sci
-	src.modules += new /obj/item/robotanalyzer(src)
-
-	// Potato
-	src.emag = new /obj/item/gun/energy/retro/mounted(src)
-
-	var/datum/matter_synth/wire = new /datum/matter_synth/wire()
-	synths += wire
-
-	var/obj/item/stack/cable_coil/cyborg/C = new /obj/item/stack/cable_coil/cyborg(src)
+	var/datum/matter_synth/wire/wire = locate() in synths
+	var/obj/item/stack/cable_coil/cyborg/C = locate() in modules
 	C.synths = list(wire)
-	src.modules += C
 
 /obj/item/robot_module/robot/gravekeeper
 	name = "gravekeeper robot module"
+	display_name = "Gravekeeper"
+	unavailable_by_default = TRUE
 	hide_on_manifest = TRUE
 	sprites = list(
-					"Drone" = "drone-gravekeeper",
-					"Sleek" = "sleek-gravekeeper"
-				)
+		"Gravekeeper" = "sleek-gravekeeper"
+	)
+	modules = list(
+		/obj/item/melee/baton/shocker/robot,
+		/obj/item/borg/combat/shield,
+		/obj/item/weldingtool/electric/mounted,
+		/obj/item/tool/screwdriver/cyborg,
+		/obj/item/tool/wrench/cyborg,
+		/obj/item/material/minihoe,
+		/obj/item/material/knife/machete/hatchet,
+		/obj/item/analyzer/plant_analyzer,
+		/obj/item/storage/bag/plants,
+		/obj/item/robot_harvester,
+		/obj/item/shovel,
+		/obj/item/gripper/gravekeeper
+	)
+	emag = /obj/item/gun/energy/retro/mounted
+	synths = list(
+		/datum/matter_synth/wood = 25000
+	)
 
-/obj/item/robot_module/robot/gravekeeper/Initialize(var/ml)
-
+/obj/item/robot_module/robot/gravekeeper/finalize_synths()
 	. = ..()
-	if(. != INITIALIZE_HINT_NORMAL)
-		return
-
-	// For fending off animals and looters
-	src.modules += new /obj/item/melee/baton/shocker/robot(src)
-	src.modules += new /obj/item/borg/combat/shield(src)
-
-	// For repairing gravemarkers
-	src.modules += new /obj/item/weldingtool/electric/mounted(src)
-	src.modules += new /obj/item/tool/screwdriver/cyborg(src)
-	src.modules += new /obj/item/tool/wrench/cyborg(src)
-
-	// For growing flowers
-	src.modules += new /obj/item/material/minihoe(src)
-	src.modules += new /obj/item/material/knife/machete/hatchet(src)
-	src.modules += new /obj/item/analyzer/plant_analyzer(src)
-	src.modules += new /obj/item/storage/bag/plants(src)
-	src.modules += new /obj/item/robot_harvester(src)
-
-	// For digging and beautifying graves
-	src.modules += new /obj/item/shovel(src)
-	src.modules += new /obj/item/gripper/gravekeeper(src)
-
-	// For really persistent looters
-	src.emag = new /obj/item/gun/energy/retro/mounted(src)
-
-	var/datum/matter_synth/wood = new /datum/matter_synth/wood(25000)
-	synths += wood
-
-	var/obj/item/stack/material/cyborg/wood/W = new (src)
+	var/datum/matter_synth/wood/wood = locate() in synths
+	var/obj/item/stack/material/cyborg/wood/W = locate() in modules
 	W.synths = list(wood)
 	src.modules += W
