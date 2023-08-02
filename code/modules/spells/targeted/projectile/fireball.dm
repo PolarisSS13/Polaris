@@ -1,14 +1,14 @@
 /spell/targeted/projectile/dumbfire/fireball
 	name = "Fireball"
-	desc = "This spell fires a fireball at a target and does not require wizard garb."
+	desc = "This fires a fireball at a target and does not require special equipment."
 
 	proj_type = /obj/item/projectile/spell_projectile/fireball
 
 	school = "evocation"
 	charge_max = 100
 	spell_flags = 0
-	invocation = "ONI SOMA"
-	invocation_type = SpI_SHOUT
+	invocation = "manifests heat from within their body!"
+	invocation_type = SpI_EMOTE
 	range = 20
 	cooldown_min = 20 //10 deciseconds reduction per rank
 
