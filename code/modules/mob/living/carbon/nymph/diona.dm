@@ -85,6 +85,7 @@ var/global/list/_nymph_default_emotes = list(
 	regenerate_icons()
 
 	species = GLOB.all_species[SPECIES_DIONA]
+	add_language(LANGUAGE_ROOTLOCAL)
 	add_language(LANGUAGE_ROOTGLOBAL)
 	add_language(LANGUAGE_GALCOM)
 
