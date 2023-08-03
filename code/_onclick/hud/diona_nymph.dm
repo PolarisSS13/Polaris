@@ -23,6 +23,14 @@
 	healths.name = "health"
 	healths.screen_loc = ui_alien_health
 
+	zone_sel = new /obj/screen/zone_sel( null )
+	zone_sel.icon = HUD.ui_style
+	zone_sel.color = HUD.ui_color
+	zone_sel.alpha = HUD.ui_alpha
+	zone_sel.cut_overlays()
+	zone_sel.add_overlay(image('icons/mob/zone_sel.dmi', "[zone_sel.selecting]"))
+	HUD.adding += zone_sel
+
 	if(client && apply_to_client)
 		client.screen = list()
 		client.screen += list(healths)
