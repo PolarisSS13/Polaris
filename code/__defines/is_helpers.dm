@@ -40,7 +40,6 @@
 #define isxeno(A)		istype(A, /mob/living/simple_mob/animal/space/alien)
 
 #define iscarbon(A)		istype(A, /mob/living/carbon)
-#define isalien(A)		istype(A, /mob/living/carbon/alien)
 #define isbrain(A)		istype(A, /mob/living/carbon/brain)
 #define ishuman(A)		istype(A, /mob/living/carbon/human)
 

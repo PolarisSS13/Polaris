@@ -94,7 +94,7 @@ var/global/list/ghost_traps
 // Allows people to set their own name. May or may not need to be removed for posibrains if people are dumbasses.
 /datum/ghosttrap/proc/set_new_name(var/mob/target)
 	var/newname = sanitizeSafe(input(target,"Enter a name, or leave blank for the default name.", "Name change","") as text, MAX_NAME_LEN)
-	if (newname != "")
+	if (newname)
 		target.real_name = newname
 		target.name = target.real_name
 

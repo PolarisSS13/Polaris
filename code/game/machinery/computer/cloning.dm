@@ -379,15 +379,9 @@
 	if(scan_brain && !can_brainscan())
 		return
 	if(isnull(subject) || (!(ishuman(subject))) || (!subject.dna))
-		if(isalien(subject))
-			set_scan_temp("Xenomorphs are not scannable.", "bad")
-			SStgui.update_uis(src)
-			return
-		// can add more conditions for specific non-human messages here
-		else
-			set_scan_temp("Subject species is not scannable.", "bad")
-			SStgui.update_uis(src)
-			return
+		set_scan_temp("Subject species is not scannable.", "bad")
+		SStgui.update_uis(src)
+		return
 	if(!subject.has_brain())
 		if(ishuman(subject))
 			var/mob/living/carbon/human/H = subject

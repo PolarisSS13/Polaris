@@ -591,16 +591,9 @@ var/global/list/all_objectives = list()
 			continue
 		captured_amount += worth
 
-	for(var/mob/living/carbon/alien/larva/M in A)//Larva are important for research.
-		if(M.stat==2)
-			captured_amount+=0.5
-			continue
-		captured_amount+=1
-
-
 	if(captured_amount<target_amount)
-		return 0
-	return 1
+		return FALSE
+	return TRUE
 
 
 /datum/objective/absorb/proc/gen_amount_goal(var/lowbound = 4, var/highbound = 6)
@@ -896,4 +889,3 @@ var/global/list/all_objectives = list()
 			rval = 2
 		return 0
 	return rval
-

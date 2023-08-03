@@ -89,8 +89,6 @@
 	return "alien [caste_name] ([alien_number])"
 
 /datum/species/xenos/can_understand(var/mob/other)
-	if(istype(other, /mob/living/carbon/alien/larva))
-		return TRUE
 	return FALSE
 
 /datum/species/xenos/hug(var/mob/living/carbon/human/H,var/mob/living/target)

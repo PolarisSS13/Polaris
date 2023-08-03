@@ -1,6 +1,5 @@
-/mob/living/carbon/alien/create_mob_hud(datum/hud/HUD, apply_to_client = TRUE)
+/mob/living/carbon/diona/create_mob_hud(datum/hud/HUD, apply_to_client = TRUE)
 	..()
-
 	HUD.ui_style = 'icons/mob/screen1_alien.dmi'
 
 	HUD.adding = list()
@@ -23,6 +22,14 @@
 	healths.icon_state = "health0"
 	healths.name = "health"
 	healths.screen_loc = ui_alien_health
+
+	zone_sel = new /obj/screen/zone_sel( null )
+	zone_sel.icon = HUD.ui_style
+	zone_sel.color = HUD.ui_color
+	zone_sel.alpha = HUD.ui_alpha
+	zone_sel.cut_overlays()
+	zone_sel.add_overlay(image('icons/mob/zone_sel.dmi', "[zone_sel.selecting]"))
+	HUD.adding += zone_sel
 
 	if(client && apply_to_client)
 		client.screen = list()
