@@ -71,7 +71,7 @@ var/global/datum/species/shapeshifter/promethean/prometheans
 	body_temperature = T20C	// Room temperature
 
 	rarity_value = 5
-	siemens_coefficient = 0.8
+	shock_vulnerability = 0.8
 
 	water_resistance = 0
 	water_damage_mod = 0.3

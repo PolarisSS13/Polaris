@@ -11,7 +11,7 @@
 	rarity_value = 3
 
 	has_fine_manipulation = 0
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 	gluttonous = GLUT_SMALLER
 
 	brute_mod = 0.5 // Hardened carapace.

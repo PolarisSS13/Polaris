@@ -55,7 +55,7 @@
 
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
-	siemens_coefficient = 0.2
+	shock_vulnerability = 0.2
 
 	flags = NO_SCAN
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED

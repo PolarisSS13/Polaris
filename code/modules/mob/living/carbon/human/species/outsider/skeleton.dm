@@ -32,7 +32,7 @@
 	flash_mod =     0
 	chemOD_mod =	0
 
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 
 	death_message = "falls over and stops moving!"
 	knockout_message = "falls over and stops moving!"
