@@ -423,7 +423,7 @@
 	icon = 'icons/obj/food_donuts.dmi'
 	icon_state = "donut"
 	filling_color = "#D9C386"
-	nutriment_desc = list("sweetness", "fried dough")
+	nutriment_desc = list("sweetness" = 5, "fried dough" = 5)
 	nutriment_amt = 3
 	nutriment_allergens = ALLERGEN_SUGARS|ALLERGEN_EGGS|ALLERGEN_GRAINS
 	bitesize = 4
@@ -2009,7 +2009,7 @@
 	filling_color = "#E3D681"
 	center_of_mass = list("x"=16, "y"=11)
 	nutriment_amt = 10
-	nutriment_desc = list("bread" = 4, "egg" = 2, "grease")
+	nutriment_desc = list("bread" = 4, "egg" = 2, "grease" = 2)
 	nutriment_allergens = ALLERGEN_MEAT|ALLERGEN_EGGS|ALLERGEN_DAIRY
 	bitesize = 3
 
@@ -2550,7 +2550,7 @@
 	filling_color = "#76B87F"
 	center_of_mass = list("x"=17, "y"=11)
 	nutriment_amt = 6
-	nutriment_desc = list("100% real salad")
+	nutriment_desc = list("100% real salad" = 10)
 	bitesize = 3
 
 /obj/item/reagent_containers/food/snacks/validsalad/Initialize()
@@ -3158,7 +3158,7 @@
 
 
 /obj/item/reagent_containers/food/snacks/slice/margherita
-	name = "/improper Margherita slice"
+	name = "\improper Margherita slice"
 	desc = "A slice of the classic pizza."
 	icon_state = "pizzamargheritaslice"
 	filling_color = "#BAA14C"
@@ -4422,7 +4422,7 @@
 	center_of_mass = list("x"=10, "y"=6)
 	do_coating_prefix = 0
 	nutriment_amt = 6
-	nutriment_desc = list("chilli pepper" = 2, "fried batter")
+	nutriment_desc = list("chilli pepper" = 2, "fried batter" = 2)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_FRUIT
 	bitesize = 3
 
@@ -4451,7 +4451,7 @@
 	do_coating_prefix = 0
 	bitesize = 1.5
 	nutriment_amt = 3
-	nutriment_desc = list("fried beer batter" = 2, "fried chicken = 5")
+	nutriment_desc = list("fried beer batter" = 2, "fried chicken" = 5)
 	nutriment_allergens = ALLERGEN_MEAT|ALLERGEN_GRAINS
 
 /obj/item/reagent_containers/food/snacks/chickenkatsu/Initialize()
@@ -5357,7 +5357,7 @@
 
 /obj/item/reagent_containers/food/snacks/stuffed_meatball/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 3, list("seasoned meat"))
+	reagents.add_reagent("protein", 3, list("seasoned meat" = 3))
 
 /obj/item/reagent_containers/food/snacks/egg_pancake
 	name = "meat pancake"
@@ -5368,7 +5368,7 @@
 
 /obj/item/reagent_containers/food/snacks/egg_pancake/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 6, list("meat patty"))
+	reagents.add_reagent("protein", 6, list("meat patty" = 6))
 	reagents.add_reagent("egg", 2)
 
 /obj/item/reagent_containers/food/snacks/sliceable/grilled_carp
@@ -5385,7 +5385,7 @@
 
 /obj/item/reagent_containers/food/snacks/sliceable/grilled_carp/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 12, list("grilled fish"))
+	reagents.add_reagent("seafood", 12, list("grilled fish" = 12))
 
 /obj/item/reagent_containers/food/snacks/grilled_carp_slice
 	name = "\improper Njarir Merana Grill slice"
@@ -5580,7 +5580,7 @@
 
 /obj/item/reagent_containers/food/snacks/chickennoodlesoup/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 4, list("chicken"))
+	reagents.add_reagent("protein", 4, list("chicken" = 4))
 	reagents.add_reagent("water", 5)
 
 /obj/item/reagent_containers/food/snacks/chilicheesefries
@@ -5699,7 +5699,7 @@
 	trash = /obj/item/trash/snacktray
 	filling_color = "#edd7d7"
 	nutriment_amt = 13
-	nutriment_desc = list("minced vegetables" = 5, "ginger and herb seasoning" = 5, "steamed dough = 3")
+	nutriment_desc = list("minced vegetables" = 5, "ginger and herb seasoning" = 5, "steamed dough" = 3)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_VEGETABLE
 	center_of_mass = list("x"=15, "y"=9)
 	bitesize = 3
@@ -6504,7 +6504,7 @@
 
 /obj/item/reagent_containers/food/snacks/salo/true/Initialize()
 	. = ..()
-	reagents.add_reagent("protein", 8, list("greasy dried meat"))
+	reagents.add_reagent("protein", 8, list("greasy dried meat" = 8))
 
 /obj/item/reagent_containers/food/snacks/driedfish
 	name = "\improper Vobla"
@@ -6912,7 +6912,7 @@
 
 /obj/item/reagent_containers/food/snacks/canned/beef/Initialize()
 	.=..()
-	reagents.add_reagent("protein", 4, list("corned beef"))
+	reagents.add_reagent("protein", 4, list("corned beef" = 4))
 	reagents.add_reagent("sodiumchloride", 1)
 
 /obj/item/reagent_containers/food/snacks/canned/beans
