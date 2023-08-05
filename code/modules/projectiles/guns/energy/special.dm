@@ -10,6 +10,7 @@
 	force = 10
 	slot_flags = SLOT_BACK
 	projectile_type = /obj/item/projectile/ion
+	fire_delay = 0.8 SECONDS
 
 /obj/item/gun/energy/ionrifle/emp_act(severity)
 	..(max(severity, 4)) //so it doesn't EMP itself, I guess
@@ -27,6 +28,7 @@
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	charge_cost = 480
 	projectile_type = /obj/item/projectile/ion/pistol
+	fire_delay = 1 SECOND
 
 /obj/item/gun/energy/decloner
 	name = "biological demolecularisor"

@@ -55,9 +55,8 @@
 	slime-based xeno lifeforms at a distance.  It is ineffective at stunning non-slimy lifeforms such as humanoids."
 
 /obj/item/gun/energy/taser/xeno/robot // Borg version
-	self_recharge = 1
-	use_external_power = 1
-	recharge_time = 3
+	self_recharge = TRUE
+	use_external_power = TRUE
 
 /obj/item/gun/energy/taser/xeno/sec //NT's corner-cutting option for their on-station security.
 	desc = "An NT Mk30 NL retrofitted to fire beams for subduing non-humanoid slimy xeno life forms."
@@ -69,9 +68,8 @@
 	description_fluff = "An NT Mk30 NL retrofitted after the events that occurred aboard the NRS Prometheus."
 
 /obj/item/gun/energy/taser/xeno/sec/robot //Cyborg variant of the security xeno-taser.
-	self_recharge = 1
-	use_external_power = 1
-	recharge_time = 3
+	self_recharge = TRUE
+	use_external_power = TRUE
 
 /obj/item/projectile/beam/stun/xeno
 	icon_state = "omni"

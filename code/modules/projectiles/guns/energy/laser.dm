@@ -6,7 +6,7 @@
 	icon_state = "laser"
 	item_state = "laser"
 	wielded_item_state = "laser-wielded"
-	fire_delay = 8
+	fire_delay = 0.8 SECONDS
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEMSIZE_LARGE
 	force = 10
@@ -16,16 +16,16 @@
 	one_handed_penalty = 30
 
 	firemodes = list(
-		list(mode_name="normal", fire_delay=8, projectile_type=/obj/item/projectile/beam/midlaser, charge_cost = 240),
-		list(mode_name="suppressive", fire_delay=5, projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 60),
-		)
+		list(mode_name = "normal", projectile_type = /obj/item/projectile/beam/midlaser, charge_cost = 240),
+		list(mode_name = "suppressive", fire_delay = 0.6 SECONDS, projectile_type = /obj/item/projectile/beam/weaklaser, charge_cost = 60),
+	)
 
 /obj/item/gun/energy/laser/empty
 	cell_type = null
 
 /obj/item/gun/energy/laser/mounted
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge = TRUE
+	use_external_power = TRUE
 	one_handed_penalty = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
 
 /obj/item/gun/energy/laser/mounted/augment
@@ -49,9 +49,9 @@
 	cell_type = /obj/item/cell/device
 
 	firemodes = list(
-		list(mode_name="normal", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 48),
-		list(mode_name="suppressive", projectile_type=/obj/item/projectile/beam/practice, charge_cost = 12),
-		)
+		list(mode_name = "normal", projectile_type = /obj/item/projectile/beam/practice, charge_cost = 48),
+		list(mode_name = "suppressive", projectile_type = /obj/item/projectile/beam/practice, charge_cost = 12),
+	)
 
 //Functionally identical, but slightly higher tech due to rarer.
 /obj/item/gun/energy/laser/sleek
@@ -71,7 +71,7 @@
 	icon_state = "mininglaser"
 	item_state = "laser"
 	wielded_item_state = "laser-wielded"
-	fire_delay = 8
+	fire_delay = 0.8 SECONDS
 	slot_flags = SLOT_BELT|SLOT_BACK
 	w_class = ITEMSIZE_LARGE
 	force = 15
@@ -81,9 +81,9 @@
 	one_handed_penalty = 30
 
 	firemodes = list(
-		list(mode_name="mining", fire_delay=8, projectile_type=/obj/item/projectile/beam/mininglaser, charge_cost = 200),
-		list(mode_name="deter", fire_delay=5, projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 80),
-		)
+		list(mode_name = "mining", projectile_type = /obj/item/projectile/beam/mininglaser, charge_cost = 200),
+		list(mode_name = "deter", fire_delay = 0.6 SECONDS, projectile_type=/obj/item/projectile/beam/weaklaser, charge_cost = 80),
+	)
 
 /obj/item/gun/energy/retro
 	name = "retro laser"
@@ -93,11 +93,11 @@
 	slot_flags = SLOT_BELT
 	w_class = ITEMSIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
-	fire_delay = 10 //old technology
+	fire_delay = 1 SECOND //old technology
 
 /obj/item/gun/energy/retro/mounted
-	self_recharge = 1
-	use_external_power = 1
+	self_recharge = TRUE
+	use_external_power = TRUE
 
 /obj/item/gun/energy/retro/empty
 	icon_state = "retro"
@@ -138,7 +138,7 @@
 	catalogue_data = list(/datum/category_item/catalogue/anomalous/precursor_a/alien_pistol)
 	icon_state = "alienpistol"
 	item_state = "alienpistol"
-	fire_delay = 10 // Handguns should be inferior to two-handed weapons. Even alien ones I suppose.
+	fire_delay = 1 SECOND // Handguns should be inferior to two-handed weapons. Even alien ones I suppose.
 	charge_cost = 480 // Five shots.
 
 	projectile_type = /obj/item/projectile/beam/cyan
@@ -160,7 +160,7 @@
 	w_class = ITEMSIZE_NORMAL
 	projectile_type = /obj/item/projectile/beam
 	origin_tech = null
-	fire_delay = 10		//Old pistol
+	fire_delay = 1 SECOND	//Old pistol
 	charge_cost = 480	//to compensate a bit for self-recharging
 	cell_type = /obj/item/cell/device/weapon/recharge/captain
 	battery_lock = 1
@@ -176,22 +176,21 @@
 	slot_flags = SLOT_BELT|SLOT_BACK
 	projectile_type = /obj/item/projectile/beam/heavylaser/cannon
 	battery_lock = 1
-	fire_delay = 20
+	fire_delay = 2 SECONDS
 	w_class = ITEMSIZE_LARGE
 	one_handed_penalty = 90 // The thing's heavy and huge.
 	accuracy = 45
 	charge_cost = 600
+	recharge_time = 1 SECOND
 
 /obj/item/gun/energy/lasercannon/mounted
 	name = "mounted laser cannon"
-	self_recharge = 1
-	use_external_power = 1
-	recharge_time = 10
+	self_recharge = TRUE
+	use_external_power = TRUE
 	accuracy = 0 // Mounted cannons are just fine the way they are.
 	one_handed_penalty = 0 // Not sure if two-handing gets checked for mounted weapons, but better safe than sorry.
 	projectile_type = /obj/item/projectile/beam/heavylaser
 	charge_cost = 400
-	fire_delay = 20
 
 /obj/item/gun/energy/xray
 	name = "xray laser gun"
@@ -202,6 +201,7 @@
 	origin_tech = list(TECH_COMBAT = 5, TECH_MATERIAL = 3, TECH_MAGNET = 2)
 	projectile_type = /obj/item/projectile/beam/xray
 	charge_cost = 200
+	fire_delay = 0.8 SECONDS
 
 /obj/item/gun/energy/sniperrifle
 	name = "marksman energy rifle"
@@ -218,11 +218,11 @@
 	action_button_name = "Use Scope"
 	battery_lock = 1
 	charge_cost = 600
-	fire_delay = 35
+	fire_delay = 3.5 SECONDS
 	force = 10
 	w_class = ITEMSIZE_HUGE // So it can't fit in a backpack.
 	accuracy = -45 //shooting at the hip
-	scoped_accuracy = 50
+	scoped_accuracy = 75
 	one_handed_penalty = 60 // The weapon itself is heavy, and the long barrel makes it hard to hold steady with just one hand.
 
 /obj/item/gun/energy/sniperrifle/ui_action_click()
@@ -246,7 +246,7 @@
 	slot_flags = SLOT_BACK
 	action_button_name = "Aim Down Sights"
 	charge_cost = 1300
-	fire_delay = 20
+	fire_delay = 2 SECONDS
 	force = 8
 	w_class = ITEMSIZE_LARGE
 	accuracy = 10

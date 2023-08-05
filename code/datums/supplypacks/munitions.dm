@@ -74,7 +74,7 @@
 	containertype = /obj/structure/closet/crate/secure/weapon
 	containername = "Shotgun crate"
 	access = access_armory
-	
+
 /datum/supply_pack/munitions/shotgunsemi
 	name = "Weapons - Semi-Automatic Shotgun crate"
 	contains = list(
@@ -96,11 +96,11 @@
 	access = access_armory
 
 /datum/supply_pack/munitions/burstlaser
-	name = "Weapons - Burst laser"
+	name = "Weapons - Burst Energy Gun"
 	contains = list(/obj/item/gun/energy/gun/burst = 2)
 	cost = 50
 	containertype = /obj/structure/closet/crate/secure/lawson
-	containername = "Burst laser crate"
+	containername = "Burst Energy Gun crate"
 	access = access_armory
 
 /datum/supply_pack/munitions/ionweapons
