@@ -79,7 +79,8 @@ var/global/datum/controller/subsystem/ticker/ticker
 /datum/controller/subsystem/ticker/proc/pregame_welcome()
 	to_world("<span class='boldannounce notice'><em>Welcome to the pregame lobby!</em></span>")
 	to_world("<span class='boldannounce notice'>Please set up your character and select ready. The round will start in [pregame_timeleft] seconds.</span>")
-	world << sound('sound/misc/server-ready.ogg', volume = 100)
+	for (var/mob/M in player_list)
+		M.playsound_local(null, 'sound/misc/server-ready.ogg', 100, FALSE, is_global = TRUE, volume_channel = VOLUME_CHANNEL_SYSTEM)
 
 // Called during GAME_STATE_PREGAME (RUNLEVEL_LOBBY)
 /datum/controller/subsystem/ticker/proc/pregame_tick()
@@ -185,7 +186,8 @@ var/global/datum/controller/subsystem/ticker/ticker
 			if (S.name != "AI")
 				qdel(S)
 		to_world("<span class='boldannounce notice'><em>Enjoy the game!</em></span>")
-		world << sound('sound/AI/welcome.ogg') // Skie
+		for (var/mob/M in player_list)
+			M.playsound_local(null, 'sound/AI/welcome.ogg', 100, FALSE, is_global = TRUE, volume_channel = VOLUME_CHANNEL_SYSTEM)
 		//Holiday Round-start stuff	~Carn
 		Holiday_Game_Start()
 
