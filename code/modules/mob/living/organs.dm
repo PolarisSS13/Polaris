@@ -16,6 +16,9 @@
 		zone = BP_HEAD
 	return organs_by_name[zone]
 
+/mob/living/proc/get_internal_organ(var/zone)
+	return zone && internal_organs_by_name[zone]
+
 /mob/living/gib()
 	for(var/path in internal_organs)
 		if(ispath(path))

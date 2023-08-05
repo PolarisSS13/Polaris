@@ -26,13 +26,6 @@
 		return L.mob_size <= MOB_TINY
 	return 0
 
-
-/proc/ismini(A)
-	if(A && istype(A, /mob/living))
-		var/mob/living/L = A
-		return L.mob_size <= MOB_MINISCULE
-	return 0
-
 /mob/living/silicon/isSynthetic()
 	return 1
 

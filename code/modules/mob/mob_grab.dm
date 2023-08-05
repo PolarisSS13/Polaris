@@ -333,8 +333,8 @@
 					pin_down(affecting, assailant)
 
 	//clicking on yourself while grabbing them
-	if(M == assailant && state >= GRAB_AGGRESSIVE)
-		devour(affecting, assailant)
+	if(M == assailant && state >= GRAB_AGGRESSIVE && assailant.devour(affecting))
+		qdel(src)
 
 /obj/item/grab/dropped()
 	loc = null
