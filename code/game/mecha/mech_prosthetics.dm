@@ -172,7 +172,7 @@
 			to_chat(user, "<span class='warning'>This disk seems to be corrupted!</span>")
 		else
 			to_chat(user, "<span class='notice'>Installing blueprint files for [D.company]...</span>")
-			if(do_after(user,50,src))
+			if(do_after(user, 5 SECONDS, src))
 				var/datum/robolimb/R = all_robolimbs[D.company]
 				R.unavailable_to_build = 0
 				to_chat(user, "<span class='notice'>Installed [D.company] blueprints!</span>")
@@ -185,7 +185,7 @@
 			to_chat(user, "<span class='warning'>This disk seems to be corrupted!</span>")
 		else
 			to_chat(user, "<span class='notice'>Uploading modification files for [D.species]...</span>")
-			if(do_after(user,50,src))
+			if(do_after(user, 5 SECONDS, src))
 				species_types |= D.species
 				to_chat(user, "<span class='notice'>Uploaded [D.species] files!</span>")
 				qdel(I)
