@@ -2142,6 +2142,7 @@ shaved
 	icon = 'icons/mob/hair_vox.dmi'
 	icon_add = 'icons/mob/hair_vox_add.dmi'
 	icon_state = "vox_longbraid"
+	color_blend_mode = ICON_MULTIPLY
 	species_allowed = list(SPECIES_VOX)
 
 /datum/sprite_accessory/hair/vox/braid_short
@@ -2151,6 +2152,10 @@ shaved
 /datum/sprite_accessory/hair/vox/quills_short
 	name = "Short Vox Quills"
 	icon_state = "vox_shortquills"
+
+/datum/sprite_accessory/hair/vox/quills_long
+	name = "Long Vox Quills"
+	icon_state = "vox_longquills"
 
 /datum/sprite_accessory/hair/vox/quills_kingly
 	name = "Kingly Vox Quills"
