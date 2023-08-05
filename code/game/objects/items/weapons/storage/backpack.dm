@@ -18,6 +18,29 @@
 	var/side = 0 //0 = right, 1 = left
 	drop_sound = 'sound/items/drop/backpack.ogg'
 	pickup_sound = 'sound/items/pickup/backpack.ogg'
+	var/list/species_restricted = null
+
+/obj/item/storage/backpack/mob_can_equip(M, slot, disable_warning = FALSE)
+
+	//if we can't equip the item anyway, don't bother with species_restricted (cuts down on spam)
+	if (!..())
+		return 0
+
+	if(LAZYLEN(species_restricted) && istype(M,/mob/living/carbon/human))
+		var/exclusive = null
+		var/wearable = null
+		var/mob/living/carbon/human/H = M
+
+		if("exclude" in species_restricted)
+			exclusive = 1
+
+		if(H.species)
+			wearable = exclusive ^ (H.species.get_bodytype(H) in species_restricted)
+
+			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
+				to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
+				return 0
+	return 1
 
 
 /obj/item/storage/backpack/equipped(var/mob/user, var/slot)
@@ -554,3 +577,12 @@
 	 Unlike the show claims, it is not a phoron-enhanced satchel of holding with plot-relevant content."
 	icon = 'icons/obj/clothing/ranger.dmi'
 	icon_state = "ranger_satchel"
+
+/obj/item/storage/backpack/teshbag
+	name = "tailbags"
+	gender = PLURAL
+	desc = "A pair of small, connected bags, designed to strap around the base of a teshari's tail."
+	icon_state = "teshbag"
+	species_restricted = list(SPECIES_TESHARI)
+	max_w_class = ITEMSIZE_NORMAL
+	max_storage_space = ITEMSIZE_COST_NORMAL * 5
