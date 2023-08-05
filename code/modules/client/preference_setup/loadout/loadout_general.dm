@@ -70,7 +70,7 @@
 /datum/gear/toy
 	display_name = "toy selection"
 	description = "Choose from a number of toys."
-	path = /obj/item/toy/
+	path = /obj/item/toy/blink
 
 /datum/gear/toy/New()
 	..()
