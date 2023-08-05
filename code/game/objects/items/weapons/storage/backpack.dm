@@ -35,12 +35,7 @@
 			exclusive = 1
 
 		if(H.species)
-			if(exclusive)
-				if(!(H.species.get_bodytype(H) in species_restricted))
-					wearable = 1
-			else
-				if(H.species.get_bodytype(H) in species_restricted)
-					wearable = 1
+			wearable = exclusive ^ (H.species.get_bodytype(H) in species_restricted)
 
 			if(!wearable && !(slot in list(slot_l_store, slot_r_store, slot_s_store)))
 				to_chat(H, "<span class='danger'>Your species cannot wear [src].</span>")
