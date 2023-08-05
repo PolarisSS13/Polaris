@@ -968,16 +968,22 @@
 	return ..()
 
 /obj/item/toy/plushie/nymph
-	name = "Diona nymph plush"
+	name = "\improper Diona nymph plush"
 	desc = "A plushie of an adorable Diona nymph! While its level of self-awareness is still being debated, its level of cuteness is not."
 	icon_state = "nymphplushie"
 	pokephrase = "Chirp!"
 
 /obj/item/toy/plushie/teshari
-	name = "Teshari plush"
+	name = "\improper Teshari plush"
 	desc = "This is a plush Teshari. Very soft, with a pompom on the tail. The toy is made well, as if alive. Looks like she is sleeping. Shhh!"
 	icon_state = "teshariplushie"
 	pokephrase = "Rya!"
+
+/obj/item/toy/plushie/zaddat
+	name = "\improper Zaddat plush"
+	desc = "A plushie depicting a stylized Zaddat Shroud, presumably with a little Zaddat inside. It's suspiciously cute."
+	icon_state = "zaddatplushie"
+	pokephrase = "Chirrp~!" //Rating: NOT cute, Zaddat only make this sound when they are stressed!
 
 /obj/item/toy/plushie/mouse
 	name = "mouse plush"
@@ -1004,7 +1010,7 @@
 	pokephrase = "Sksksk!"
 
 /obj/item/toy/plushie/farwa
-	name = "Farwa plush"
+	name = "\improper Farwa plush"
 	desc = "A Farwa plush doll. It's soft and comforting!"
 	icon_state = "farwaplushie"
 	pokephrase = "Squaw!"
@@ -1214,7 +1220,7 @@
 	item_state = "egg3" // It's the green egg in items_left/righthand
 
 /obj/item/toy/plushie/fumo
-	name = "Fumo"
+	name = "\improper Fumo"
 	desc = "A plushie of a....?."
 	icon_state = "fumoplushie"
 	pokephrase = "I just don't think about losing."
