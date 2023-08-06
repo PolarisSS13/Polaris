@@ -203,7 +203,11 @@
 		return FALSE
 	return TRUE
 
+// If this proc returns a mob, further equip procs are not called and things like
+// loadout will be bypassed.
 /datum/job/proc/handle_nonhuman_mob(var/mob/living/carbon/human/player, var/alt_title)
 	if(mob_type & JOB_SILICON_ROBOT)
 		return player.Robotize(SSrobots.get_mob_type_by_title(alt_title || title))
-	return player
+	if(mob_type & JOB_SILICON_AI)
+		return player // Handled by AIIze() call in equip logic
+	return null
