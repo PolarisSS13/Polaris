@@ -1,7 +1,6 @@
 /mob/living/silicon/robot/flying
 	desc = "A utility robot with an anti-gravity hover unit and a lightweight frame."
 	icon = 'icons/mob/robots/robots_flying.dmi'
-	icon_state = "drone-standard"
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	dismantle_type = /obj/item/robot_parts/frame/flyer
 	power_efficiency = 0.75

@@ -21,7 +21,7 @@
 	else
 		for(var/part in required_parts)
 			if(!parts[part])
-				var/obj/item/part_type = part
+				var/obj/item/part_type = required_parts[part]
 				. += SPAN_WARNING("It is missing \a [initial(part_type.name)]")
 
 /obj/item/robot_parts/frame/update_model_info(var/model)

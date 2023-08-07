@@ -29,7 +29,7 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Drone"    = "drone-standard",
+		"Drone"    = "robot",
 		"Pyralis"  = "Glitterfly-Standard",
 		"Cabeiri"  = "eyebot-standard"
 	)
