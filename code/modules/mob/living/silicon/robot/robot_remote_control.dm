@@ -133,7 +133,7 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x3"
 	delete_me = TRUE
-	var/robot_type = /mob/living/silicon/robot/ai_shell
+	var/shell_type = /mob/living/silicon/robot/ai_shell
 
 /obj/effect/landmark/free_ai_shell/Initialize()
 	if(config.allow_ai_shells && config.give_free_ai_shell)
@@ -141,4 +141,4 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 	return ..()
 
 /obj/effect/landmark/free_ai_shell/flying
-	robot_type = /mob/living/silicon/robot/flying/ai_shell
+	shell_type = /mob/living/silicon/robot/flying/ai_shell

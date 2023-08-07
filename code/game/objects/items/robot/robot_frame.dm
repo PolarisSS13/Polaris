@@ -84,8 +84,8 @@
 			return
 
 		var/obj/item/mmi/M = W
+		var/mob/living/carbon/brain/B = M.brainmob
 		if(!istype(M, /obj/item/mmi/inert))
-			var/mob/living/carbon/brain/B = M.brainmob
 			if(!B)
 				to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
 				return
@@ -125,7 +125,8 @@
 		O.invisibility = 0
 		O.custom_name = created_name
 		O.updatename("Default")
-		B.mind.transfer_to(O)
+		if(B)
+			B.mind.transfer_to(O)
 		if(O.mind && O.mind.assigned_role)
 			O.job = O.mind.assigned_role
 		else
