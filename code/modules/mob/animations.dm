@@ -113,7 +113,6 @@ note dizziness decrements automatically in the mob's Life() proc.
 			stop_floating()
 		return
 	floatiness = n
-
 	if(floatiness && !is_floating)
 		start_floating()
 	else if(!floatiness && is_floating)

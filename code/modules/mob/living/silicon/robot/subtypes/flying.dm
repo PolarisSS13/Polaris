@@ -11,6 +11,12 @@
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 
+/mob/living/silicon/robot/flying/update_floating()
+	if(hovering)
+		make_floating(10)
+		return
+	..()
+
 /mob/living/silicon/robot/flying/initialize_components()
 	components["actuator"] =       new/datum/robot_component/actuator(src)
 	components["radio"] =          new/datum/robot_component/radio(src)
@@ -28,16 +34,18 @@
 		start_hovering()
 
 /mob/living/silicon/robot/flying/proc/start_hovering()
-	hovering = TRUE
-	pass_flags |= PASSTABLE
-	default_pixel_y = 0
-	make_floating(10)
+	if(!hovering)
+		hovering = TRUE
+		pass_flags |= PASSTABLE
+		default_pixel_y = 0
+	update_floating()
 
 /mob/living/silicon/robot/flying/proc/stop_hovering()
-	hovering = FALSE
-	pass_flags &= ~PASSTABLE
-	default_pixel_y = -8
-	stop_floating()
+	if(hovering)
+		hovering = FALSE
+		pass_flags &= ~PASSTABLE
+		default_pixel_y = -8
+	update_floating()
 
 /mob/living/silicon/robot/flying/death()
 	. = ..()
