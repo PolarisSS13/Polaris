@@ -13,7 +13,7 @@
 
 /mob/living/silicon/robot/flying/update_floating()
 	if(hovering)
-		make_floating(10)
+		make_floating(TRUE)
 		return
 	..()
 
