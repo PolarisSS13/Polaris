@@ -84,37 +84,39 @@
 			return
 
 		var/obj/item/mmi/M = W
-		var/mob/living/carbon/brain/B = M.brainmob
-		if(!B)
-			to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
-			return
+		if(!istype(M, /obj/item/mmi/inert))
+			var/mob/living/carbon/brain/B = M.brainmob
+			if(!B)
+				to_chat(user, SPAN_WARNING("Sticking an empty [W.name] into the frame would sort of defeat the purpose."))
+				return
 
-		if(jobban_isbanned(B, "Robot"))
-			to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
-			return
+			if(jobban_isbanned(B, "Cyborg"))
+				to_chat(user, SPAN_WARNING("\The [W] does not seem to fit."))
+				return
 
-		if(B.stat == DEAD)
-			to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
-			return
+			if(B.stat == DEAD)
+				to_chat(user, SPAN_WARNING("Sticking a dead [W.name] into the frame would sort of defeat the purpose."))
+				return
 
-		var/ghost_can_reenter = 0
-		if(B.mind)
-			if(B.key)
-				ghost_can_reenter = TRUE
-			else
-				for(var/mob/observer/dead/G in player_list)
-					if(G.can_reenter_corpse && G.mind == B.mind)
-						ghost_can_reenter = TRUE
-						//Jamming a ghosted brain into a borg is likely detrimental, and may result in some problems.
-						to_chat(user, SPAN_NOTICE("\The [W] is completely unresponsive, but it may be able to auto-resuscitate if you leave it be for awhile."))
-						break
+			var/ghost_can_reenter = 0
+			if(B.mind)
+				if(B.key)
+					ghost_can_reenter = TRUE
+				else
+					for(var/mob/observer/dead/G in player_list)
+						if(G.can_reenter_corpse && G.mind == B.mind)
+							ghost_can_reenter = TRUE
+							//Jamming a ghosted brain into a borg is likely detrimental, and may result in some problems.
+							to_chat(user, SPAN_NOTICE("\The [W] is completely unresponsive, but it may be able to auto-resuscitate if you leave it be for awhile."))
+							break
 
-		if(!ghost_can_reenter)
-			to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
-			return
+			if(!ghost_can_reenter)
+				to_chat(user, SPAN_WARNING("\The [W] is completely unresponsive; there's no point."))
+				return
 
 		if(!user.unEquip(W))
 			return
+
 		var/mob/living/silicon/robot/O = new product(get_turf(loc))
 		if(!O)
 			return
