@@ -79,6 +79,7 @@
 	icon_state = "cyborg_upgrade2"
 	item_state = "cyborg_upgrade"
 	require_module = 1
+	var/move_delay_reduction = 0.5
 
 /obj/item/borg/upgrade/vtec/action(var/mob/living/silicon/robot/R)
 	if(..()) return 0
@@ -88,6 +89,13 @@
 
 	R.speed--
 	return 1
+/obj/item/borg/upgrade/vtec/action(mob/living/silicon/robot/robot)
+	if (..())
+		return FALSE
+	if (robot.speed == (initial(robot.speed) - move_delay_reduction))
+		return FALSE
+	robot.speed -= move_delay_reduction
+	return TRUE
 
 
 /obj/item/borg/upgrade/tasercooler
