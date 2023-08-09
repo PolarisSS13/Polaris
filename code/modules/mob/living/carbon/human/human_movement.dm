@@ -165,13 +165,12 @@
 #undef HUMAN_LOWEST_SLOWDOWN
 
 /mob/living/carbon/human/get_jetpack()
-	if(back)
-		var/obj/item/rig/rig = get_rig()
-		if(istype(back, /obj/item/tank/jetpack))
-			return back
-		else if(istype(rig))
-			for(var/obj/item/rig_module/maneuvering_jets/module in rig.installed_modules)
-				return module.jets
+	if(istype(back, /obj/item/tank/jetpack))
+		return back
+	var/obj/item/rig/rig = get_rig()
+	for(var/obj/item/rig_module/maneuvering_jets/module in rig?.installed_modules)
+		return module.jets
+	return ..()
 
 /mob/living/carbon/human/Process_Spaceslipping(var/prob_slip = 5)
 	//If knocked out we might just hit it and stop.  This makes it possible to get dead bodies and such.

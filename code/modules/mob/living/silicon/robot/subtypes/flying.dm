@@ -45,7 +45,7 @@
 	if(!QDELETED(src) && stat == DEAD)
 		stop_hovering()
 
-/mob/living/silicon/robot/flying/Allow_Spacemove(var/dense_object, check_drift = 0)
+/mob/living/silicon/robot/flying/Allow_Spacemove(var/dense_object)
 	return hovering || ..()
 
 /mob/living/silicon/robot/flying/Process_Spaceslipping(var/prob_slip = 5)

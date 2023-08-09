@@ -403,9 +403,7 @@
 	var/obj/item/tank/jetpack/J = get_jetpack()
 	if(J?.can_thrust(0.01))
 		return TRUE
-	if(!dense_object) //Nothing to push off of so end here
-		return FALSE
-	return TRUE
+	return !!dense_object
 
 ///Process_Spacemove
 ///Called by /client/Move()
@@ -417,7 +415,7 @@
 		return FALSE
 
 	var/dense_object = Check_Dense_Object()
-	if(!Allow_Spacemove())
+	if(!Allow_Spacemove(dense_object))
 		update_floating(dense_object)
 		return FALSE
 
