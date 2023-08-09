@@ -5325,7 +5325,7 @@
 	. = ..()
 	reagents.add_reagent("protein", 2, list("smoked sausage" = 2))
 
- /obj/item/reagent_containers/food/snacks/riztizkzi_sea
+/obj/item/reagent_containers/food/snacks/riztizkzi_sea
 	name = "moghesian sea delight"
 	desc = "Three raw eggs floating in a sea of blood. An authentic replication of an ancient Unathi delicacy."
 	icon = 'icons/obj/food_syn.dmi'
