@@ -135,12 +135,14 @@ var/global/list/_nymph_default_emotes = list(
 /mob/living/carbon/diona/attack_ghost(mob/observer/dead/user)
 	if(client || key || ckey)
 		to_chat(user, SPAN_WARNING("\The [src] already has a player."))
+		return
 	if(alert(user, "Do you wish to take control of \the [src]?", "Chirp Time", "No", "Yes") == "No")
 		return
 	if(QDELETED(src) || QDELETED(user) || !user.client)
 		return
 	if(client || key || ckey)
 		to_chat(user, SPAN_WARNING("\The [src] already has a player."))
+		return
 	var/datum/ghosttrap/plant/P = get_ghost_trap("living plant")
 	if(P.assess_candidate(user))
 		P.transfer_personality(user, src)
