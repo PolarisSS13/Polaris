@@ -27,6 +27,11 @@ var/global/list/turf_edge_cache = list()
 	var/can_dig = FALSE
 	var/loot_count
 
+/turf/simulated/floor/outdoors/examine(var/mob/user)
+	. = ..()
+	if(!has_snow())
+		. += "A shovel could be used on help intent to dig up worms or rocks, harm intent to dig a grave, or any other intent to dig a plot for planting."
+
 /turf/simulated/floor/outdoors/proc/get_loot_type()
 	if(loot_count)
 		return pickweight(list(
