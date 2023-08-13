@@ -83,7 +83,7 @@
 		H.b_skin = 0
 		H.dna.ResetUIFrom(H)
 
-		H.real_name = "Synthmorph #[rand(100,999)]"
+		H.real_name = "Synthbody #[rand(100,999)]"
 		H.name = H.real_name
 		H.dir = 2
 		H.add_language(LANGUAGE_EAL)
@@ -460,10 +460,10 @@
 	materials = list(MAT_STEEL = 25000, MAT_GLASS = 3000, MAT_GOLD = 350)
 	build_path = /obj/item/borg/upgrade/language
 
-// Synthmorph Bags.
+// Synthbody Bags.
 
-/datum/design/item/prosfab/synthmorphbag
-	name = "Synthmorph Storage Bag"
+/datum/design/item/prosfab/synthbodybag
+	name = "Synthbody Storage Bag"
 	desc = "Used to store or slowly defragment an FBP."
 	id = "misc_synth_bag"
 	materials = list(MAT_STEEL = 250, MAT_GLASS = 250, MAT_PLASTIC = 2000)

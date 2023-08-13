@@ -1,6 +1,6 @@
 
 /obj/item/bodybag/cryobag/robobag
-	name = "synthmorph bag"
+	name = "synthbody bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
 	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
@@ -17,7 +17,7 @@
 	qdel(src)
 
 /obj/structure/closet/body_bag/cryobag/robobag
-	name = "synthmorph bag"
+	name = "synthbody bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
 	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
@@ -34,7 +34,7 @@
 /obj/structure/closet/body_bag/cryobag/robobag/update_icon()
 	if(opened)
 		icon_state = "open"
-	else if (contents.len)
+	else if (length(contents))
 		icon_state = "closed_occupied"
 	else
 		icon_state = "closed_unlocked"
