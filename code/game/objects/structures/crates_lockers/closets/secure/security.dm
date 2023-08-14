@@ -28,10 +28,11 @@
 		/obj/item/cartridge/hop,
 		/obj/item/radio/headset/heads/hop,
 		/obj/item/radio/headset/heads/hop/alt,
-		/obj/item/storage/box/ids = 2,
+		/obj/item/storage/box/ids,
 		/obj/item/gun/energy/gun,
 		/obj/item/gun/projectile/sec/flash,
-		/obj/item/flash)
+		/obj/item/flash
+	)
 
 /obj/structure/closet/secure_closet/hop2
 	name = "head of personnel's attire"
@@ -54,11 +55,12 @@
 		/obj/item/clothing/shoes/laceup/brown,
 		/obj/item/clothing/shoes/white,
 		/obj/item/clothing/under/rank/head_of_personnel_whimsy,
-		/obj/item/clothing/head/caphat/hop,
+		/obj/item/clothing/head/hop,
 		/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit,
 		/obj/item/clothing/under/gimmick/rank/head_of_personnel/suit/skirt,
 		/obj/item/clothing/suit/storage/hooded/wintercoat/hop,
-		/obj/item/clothing/glasses/sunglasses)
+		/obj/item/clothing/glasses/sunglasses
+	)
 
 
 /obj/structure/closet/secure_closet/hos
