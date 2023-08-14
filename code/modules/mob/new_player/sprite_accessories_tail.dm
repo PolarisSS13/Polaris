@@ -269,54 +269,54 @@
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 
 /datum/sprite_accessory/tail/special/tesharitail_pattern_1
-	name = "Teshari tail (pattern 1)"
+	name = "Teshari, pattern 1"
 	icon_state = "teshitail"
 	extra_overlay = "teshi_pattern_1"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_pattern_2
-	name = "Teshari tail (pattern 2)"
+	name = "Teshari, pattern 2"
 	icon_state = "teshitail"
 	extra_overlay = "teshi_pattern_2"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_noplume
-	name = "Teshari tail, no plumage"
+	name = "Teshari, no plumage"
 	icon_state = "teshtail_noplume_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_noplume_feathered
-	name = "Teshari tail, no plumage w/feathers"
+	name = "Teshari, no plumage, feathers"
 	icon_state = "teshtail_noplume_s"
 	extra_overlay = "teshtail_noplume_feathers_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged
-	name = "Teshari tail, damaged"
+	name = "Teshari, damaged"
 	icon_state = "teshtail_damaged_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_feathered
-	name = "Teshari tail, damaged w/feathers"
+	name = "Teshari, damaged, feathers"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_feathers_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_unbranded
-	name = "Teshari tail, damaged w/ unbranded prosthetic"
+	name = "Teshari, damaged, unbranded prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_prosthetic_unbranded_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_unbranded_feathered
-	name = "Teshari tail, damaged w/feathers + unbranded prosthetic"
+	name = "Teshari, damaged, feathers, unbranded prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_feathers_s"
 	extra_overlay2 = "teshtail_damaged_prosthetic_unbranded_s"
@@ -324,29 +324,37 @@
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_cenilimi
-	name = "Teshari tail, damaged w/ Cenilimi Cybernetics prosthetic"
+	name = "Teshari, damaged, Cenilimi prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_prosthetic_cenilimi_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_cenilimi_feathered
-	name = "Teshari tail, damaged w/feathers + Cenilimi Cybernetics prosthetic"
+	name = "Teshari, damaged, feathers, Cenilimi prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_feathers_s"
 	extra_overlay2 = "teshtail_damaged_prosthetic_cenilimi_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
+/datum/sprite_accessory/tail/special/tesharitail_damaged_cenilimi_synthfeather
+	name = "Teshari, damaged, synthfeather Cenilimi prosthetic"
+	icon_state = "teshtail_damaged_s"
+	extra_overlay = "teshtail_damaged_prosthetic_cenilimi_s"
+	extra_overlay2 = "teshtail_feathers_s"
+	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_ADD
+
 /datum/sprite_accessory/tail/special/tesharitail_damaged_wood
-	name = "Teshari tail, damaged w/ wooden prosthetic"
+	name = "Teshari, damaged, wooden prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_prosthetic_wood_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_wood_feathered
-	name = "Teshari tail, damaged w/feathers + wooden prosthetic"
+	name = "Teshari, damaged, feathers, wooden prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_feathers_s"
 	extra_overlay2 = "teshtail_damaged_prosthetic_wood_s"
@@ -354,14 +362,14 @@
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_sifwood
-	name = "Teshari tail, damaged w/ Sivian wooden prosthetic"
+	name = "Teshari,, damaged, Sivian wooden prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_prosthetic_wood_sif_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_damaged_sifwood_feathered
-	name = "Teshari tail, damaged w/feathers + Sivian wooden prosthetic"
+	name = "Teshari, damaged, feathers, Sivian wooden prosthetic"
 	icon_state = "teshtail_damaged_s"
 	extra_overlay = "teshtail_damaged_feathers_s"
 	extra_overlay2 = "teshtail_damaged_prosthetic_wood_sif_s"
@@ -369,27 +377,27 @@
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby
-	name = "teshari tail, stubby"
+	name = "Teshari, stubby"
 	icon_state = "teshtail_stubby_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_feathered
-	name = "Teshari tail, stubby w/feathers"
+	name = "Teshari, stubby, feathers"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_feathers_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_unbranded
-	name = "Teshari tail, stubby w/ unbranded prosthetic"
+	name = "Teshari, stubby, unbranded prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_prosthetic_unbranded_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_unbranded_feathered
-	name = "Teshari tail, stubby w/ feathers + unbranded prosthetic"
+	name = "Teshari, stubby, feathers, unbranded prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_feathers_s"
 	extra_overlay2 = "teshtail_stubby_prosthetic_unbranded_s"
@@ -397,29 +405,37 @@
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_cenilimi
-	name = "Teshari tail, stubby w/ Cenilimi Cybernetics prosthetic"
+	name = "Teshari, stubby, Cenilimi prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_prosthetic_cenilimi_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_cenilimi_feathered
-	name = "Teshari tail, stubby w/ feathers + Cenilimi Cybernetics prosthetic"
+	name = "Teshari, stubby, feathers, Cenilimi Cybernetics prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_feathers_s"
 	extra_overlay2 = "teshtail_stubby_prosthetic_cenilimi_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
+/datum/sprite_accessory/tail/special/tesharitail_stubby_cenilimi_synthfeather
+	name = "Teshari, stubby, synthfeather Cenilimi prosthetic"
+	icon_state = "teshtail_stubby_s"
+	extra_overlay = "teshtail_stubby_prosthetic_cenilimi_s"
+	extra_overlay2 = "teshtail_feathers_s"
+	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_ADD
+
 /datum/sprite_accessory/tail/special/tesharitail_stubby_wood
-	name = "Teshari tail, stubby w/ wooden prosthetic"
+	name = "Teshari, stubby, wooden prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_prosthetic_wood_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_wood_feathered
-	name = "Teshari tail, stubby w/feathers + wooden prosthetic"
+	name = "Teshari, stubby, feathers, wooden prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_feathers_s"
 	extra_overlay2 = "teshtail_stubby_prosthetic_wood_s"
@@ -427,14 +443,14 @@
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_sifwood
-	name = "Teshari tail, stubby w/ Sivian wooden prosthetic"
+	name = "Teshari, stubby, Sivian wooden prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_prosthetic_wood_sif_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_stubby_sifwood_feathered
-	name = "Teshari tail, stubby w/feathers + Sivian wooden prosthetic"
+	name = "Teshari, stubby, feathers, Sivian wooden prosthetic"
 	icon_state = "teshtail_stubby_s"
 	extra_overlay = "teshtail_stubby_feathers_s"
 	extra_overlay2 = "teshtail_stubby_prosthetic_wood_sif_s"
@@ -442,16 +458,23 @@
 	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_prosthetic_unbranded
-	name = "Teshari tail, unbranded prosthetic"
+	name = "Teshari, unbranded prosthetic"
 	icon_state = "teshtail_prosthetic_unbranded_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
-	do_colouration = FALSE
+	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/tesharitail_prosthetic_cenilimi
-	name = "Teshari tail, Cenilimi Cybernetics prosthetic"
+	name = "Teshari, Cenilimi prosthetic"
 	icon_state = "teshtail_prosthetic_cenilimi_s"
 	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
-	do_colouration = FALSE
+	color_blend_mode = ICON_ADD
+
+/datum/sprite_accessory/tail/special/tesharitail_prosthetic_cenilimi_synthfeather
+	name = "Teshari, synthfeather Cenilimi prosthetic"
+	icon_state = "teshtail_prosthetic_cenilimi_s"
+	extra_overlay = "teshtail_feathers_s"
+	species_allowed = list(SPECIES_TESHARI, SPECIES_EVENT1, SPECIES_EVENT2, SPECIES_EVENT3)
+	color_blend_mode = ICON_ADD
 
 /datum/sprite_accessory/tail/special/unathihc
 	name = "Unathi tail"
