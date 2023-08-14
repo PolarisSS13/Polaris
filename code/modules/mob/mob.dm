@@ -405,16 +405,18 @@
 	// Try harder to find a key to use
 	if(!keytouse && key)
 		keytouse = ckey(key)
-	else if(!keytouse && mind?.key)
+	if (!keytouse && mind?.key)
 		keytouse = ckey(mind.key)
-
+	if (!keytouse)
+		return
 	GLOB.respawn_timers[keytouse] = world.time + time
+
 
 /mob/observer/dead/set_respawn_timer()
 	if(config.antag_hud_restricted && has_enabled_antagHUD)
 		..(-1)
 	else
-		return // Don't set it, no need
+		..()
 
 /mob/verb/abandon_mob()
 	set name = "Return to Menu"
