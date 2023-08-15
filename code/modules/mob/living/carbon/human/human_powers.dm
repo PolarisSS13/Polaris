@@ -122,12 +122,19 @@
 	set category = "Abilities"
 
 	if(stomach_contents.len)
-		for(var/mob/M in src)
-			if(M in stomach_contents)
-				stomach_contents.Remove(M)
-				M.loc = loc
-		src.visible_message("<span class='filter_warning'><font color='red'><B>[src] hurls out the contents of their stomach!</B></font></span>")
-	return
+		for(var/atom/movable/AM in src)
+			stomach_contents -= AM
+			AM.dropInto(loc)
+			. = TRUE
+
+	var/obj/item/organ/internal/stomach = get_internal_organ(O_STOMACH)
+	if(stomach)
+		for(var/atom/movable/AM in stomach)
+			AM.dropInto(loc)
+			. = TRUE
+
+	if(.)
+		visible_message("<span class='filter_warning'><font color='red'><B>[src] hurls out the contents of their stomach!</B></font></span>")
 
 /mob/living/carbon/human/proc/psychic_whisper(mob/M as mob in oview())
 	set name = "Psychic Whisper"
