@@ -1,6 +1,6 @@
 
 /obj/item/bodybag/cryobag/robobag
-	name = "synthmorph bag"
+	name = "synthbody bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
 	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
@@ -17,7 +17,7 @@
 	qdel(src)
 
 /obj/structure/closet/body_bag/cryobag/robobag
-	name = "synthmorph bag"
+	name = "synthbody bag"
 	desc = "A reusable polymer bag designed to slow down synthetic functions such as data corruption and coolant flow, \
 	especially useful if short on time or in a hostile environment."
 	icon = 'icons/obj/robobag.dmi'
@@ -32,8 +32,15 @@
 		. += "<span class='notice'>[src] has a [corptag] attached to it.</span>"
 
 /obj/structure/closet/body_bag/cryobag/robobag/update_icon()
+	if(opened)
+		icon_state = "open"
+	else if (length(contents))
+		icon_state = "closed_occupied"
+	else
+		icon_state = "closed_unlocked"
+
 	cut_overlays()
-	..()
+
 	if(corptag)
 		var/corptag_icon_state = "tag_blank"
 		if(istype(corptag,/obj/item/clothing/accessory/medal/badge/holo/detective) || istype(corptag,/obj/item/clothing/accessory/medal/badge/holo/detective) || istype(corptag, /obj/item/clothing/accessory/medal/badge/holo/hos) || istype(corptag, /obj/item/clothing/accessory/medal/badge/old) || istype(corptag, /obj/item/clothing/accessory/medal/badge/sheriff))
@@ -109,8 +116,8 @@
 	desc = "Your software is being debugged."
 	mob_overlay_state = "signal_blue"
 
-	on_created_text = "<span class='notice'>You feel something pour over your senses.</span>"
-	on_expired_text = "<span class='notice'>Your mind is clear once more.</span>"
+	on_created_text = "<span class='notice'>You feel something cloud over your senses.</span>"
+	on_expired_text = "<span class='notice'>Your senses are clear once more.</span>"
 	stacks = MODIFIER_STACK_FORBID
 
 /datum/modifier/fbp_debug/tick()

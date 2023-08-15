@@ -201,7 +201,7 @@
 	badge_string = "Sicurity Journelist"
 	w_class = ITEMSIZE_SMALL
 
-// Synthmorph bag / Corporation badges. Primarily used on the robobag, but can be worn. Default is NT.
+// Synthbody bag / Corporation badges. Primarily used on the robobag, but can be worn. Default is NT.
 
 /obj/item/clothing/accessory/medal/badge/corporate_tag
 	name = "NanoTrasen Badge"
