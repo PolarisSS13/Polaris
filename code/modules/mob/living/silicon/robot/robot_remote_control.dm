@@ -7,8 +7,13 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 	var/deployed = FALSE
 	var/mob/living/silicon/ai/mainframe = null
 
-// Premade AI shell, for roundstart shells.
+// Premade AI shells, for roundstart landmark spawn.
 /mob/living/silicon/robot/ai_shell/Initialize()
+	mmi = new /obj/item/mmi/inert/ai_remote(src)
+	post_mmi_setup()
+	return ..()
+
+/mob/living/silicon/robot/flying/ai_shell/Initialize()
 	mmi = new /obj/item/mmi/inert/ai_remote(src)
 	post_mmi_setup()
 	return ..()
@@ -128,8 +133,12 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 	icon = 'icons/mob/screen1.dmi'
 	icon_state = "x3"
 	delete_me = TRUE
+	var/shell_type = /mob/living/silicon/robot/ai_shell
 
 /obj/effect/landmark/free_ai_shell/Initialize()
 	if(config.allow_ai_shells && config.give_free_ai_shell)
-		new /mob/living/silicon/robot/ai_shell(get_turf(src))
+		new shell_type(get_turf(src))
 	return ..()
+
+/obj/effect/landmark/free_ai_shell/flying
+	shell_type = /mob/living/silicon/robot/flying/ai_shell

@@ -29,7 +29,7 @@
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
-		"Drone"    = "drone-standard",
+		"Drone"    = "robot",
 		"Pyralis"  = "Glitterfly-Standard",
 		"Cabeiri"  = "eyebot-standard"
 	)
@@ -463,8 +463,8 @@
 		LANGUAGE_ZADDAT		= 1,
 	)
 
-/obj/item/robot_module/robot/clerical/butler
-	display_name = "Butler"
+/obj/item/robot_module/robot/clerical/service
+	display_name = "Service"
 	sprites = list(
 		"M-USE NanoTrasen" = "robotServ",
 		"Haruka"           = "marinaSV",
@@ -504,7 +504,7 @@
 	)
 	emag = /obj/item/reagent_containers/food/drinks/bottle/small/beer
 
-/obj/item/robot_module/robot/clerical/butler/flying
+/obj/item/robot_module/robot/clerical/service/flying
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	can_be_pushed = TRUE
 	sprites = list(
@@ -514,7 +514,7 @@
 		"Hydroponics Drone" = "drone-hydro"
 	)
 
-/obj/item/robot_module/robot/clerical/butler/finalize_emag()
+/obj/item/robot_module/robot/clerical/service/finalize_emag()
 	. = ..()
 	if(!emag.reagents)
 		emag.create_reagents(50)
@@ -523,7 +523,7 @@
 	emag.reagents.add_reagent("beer2", 50)
 	emag.name = "Mickey Finn's Special Brew"
 
-/obj/item/robot_module/robot/clerical/butler/finalize_equipment()
+/obj/item/robot_module/robot/clerical/service/finalize_equipment()
 	. = ..()
 	var/obj/item/rsf/M = locate() in modules
 	M.stored_matter = 30

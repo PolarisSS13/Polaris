@@ -1,7 +1,6 @@
 /mob/living/silicon/robot/flying
 	desc = "A utility robot with an anti-gravity hover unit and a lightweight frame."
 	icon = 'icons/mob/robots/robots_flying.dmi'
-	icon_state = "drone-standard"
 	module_category = ROBOT_MODULE_TYPE_FLYING
 	dismantle_type = /obj/item/robot_parts/frame/flyer
 	power_efficiency = 0.75
@@ -11,6 +10,12 @@
 	mob_bump_flag =  SIMPLE_ANIMAL
 	mob_swap_flags = MONKEY|SLIME|SIMPLE_ANIMAL
 	mob_push_flags = MONKEY|SLIME|SIMPLE_ANIMAL
+
+/mob/living/silicon/robot/flying/update_floating()
+	if(hovering)
+		make_floating(TRUE)
+		return
+	..()
 
 /mob/living/silicon/robot/flying/initialize_components()
 	components["actuator"] =       new/datum/robot_component/actuator(src)
@@ -29,16 +34,18 @@
 		start_hovering()
 
 /mob/living/silicon/robot/flying/proc/start_hovering()
-	hovering = TRUE
-	pass_flags |= PASSTABLE
-	default_pixel_y = 0
-	make_floating(10)
+	if(!hovering)
+		hovering = TRUE
+		pass_flags |= PASSTABLE
+		default_pixel_y = 0
+	update_floating()
 
 /mob/living/silicon/robot/flying/proc/stop_hovering()
-	hovering = FALSE
-	pass_flags &= ~PASSTABLE
-	default_pixel_y = -8
-	stop_floating()
+	if(hovering)
+		hovering = FALSE
+		pass_flags &= ~PASSTABLE
+		default_pixel_y = -8
+	update_floating()
 
 /mob/living/silicon/robot/flying/death()
 	. = ..()
