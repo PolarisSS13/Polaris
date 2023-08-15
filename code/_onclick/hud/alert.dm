@@ -163,6 +163,7 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	icon_state = "v_fat"
 
 /obj/screen/alert/fat/synth
+	name = "Fully Charged"
 	desc = "Your battery is full! Don't overvolt it."
 	icon_state = "c_fat"
 
@@ -176,6 +177,7 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	icon_state = "v_hungry"
 
 /obj/screen/alert/hungry/synth
+	name = "Low Battery"
 	desc = "Battery's running a bit low, could use a topoff."
 	icon_state = "c_hungry"
 
@@ -189,6 +191,7 @@ The box in your backpack has an oxygen tank and gas mask in it."
 	icon_state = "v_starving"
 
 /obj/screen/alert/starving/synth
+	name = "Very Low Battery"
 	desc = "Your battery is about to die! Charge it ASAP!"
 	icon_state = "c_starving"
 
