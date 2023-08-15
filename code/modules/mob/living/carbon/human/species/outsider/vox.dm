@@ -55,7 +55,7 @@
 
 	breath_type = "nitrogen"
 	poison_type = "oxygen"
-	siemens_coefficient = 0.2
+	shock_vulnerability = 0.2
 
 	flags = NO_SCAN
 	spawn_flags = SPECIES_CAN_JOIN | SPECIES_IS_WHITELISTED
@@ -210,3 +210,15 @@
 				"datum" = body_marking_styles_list["Vox Claws"]
 			)
 	return TRUE
+
+// Nerfs some vox aspects if you aren't an antag (ie. raider, merc)
+// TODO: raider/non-raider voxforms, if there's some way to do that nicely...
+/datum/species/vox/can_shred(mob/living/carbon/human/H, ignore_intent)
+	if(H.mind && player_is_antag(H.mind))
+		return ..()
+	return FALSE
+
+/datum/species/vox/get_siemens_coefficient(var/mob/living/carbon/human/H)
+	if(H.mind && player_is_antag(H.mind))
+		return ..()
+	return 0.65 // resistant, but still able to be tased/shocked to an extent

@@ -91,7 +91,7 @@ Variables you may want to make use of are:
 	flash_mod = 0.9
 	sound_mod = 0.9
 	chemOD_mod = 0.9
-	siemens_coefficient = 0.9
+	shock_vulnerability = 0.9
 
 	spawn_flags = SPECIES_IS_RESTRICTED
 	appearance_flags = HAS_SKIN_TONE | HAS_EYE_COLOR
@@ -199,7 +199,7 @@ Variables you may want to make use of are:
 
 /datum/species/event1/proc/toggle_cloning()
 	flags ^= NO_SCAN
-	
+
 /datum/species/event1/proc/toggle_defibbing()
 	flags ^= NO_DEFIB
 

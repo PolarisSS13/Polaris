@@ -131,3 +131,6 @@
 
 /datum/species/proc/get_slowdown(var/mob/living/carbon/human/H)
 	return slowdown
+
+/datum/species/proc/get_siemens_coefficient(var/mob/living/carbon/human/H)
+	return shock_vulnerability

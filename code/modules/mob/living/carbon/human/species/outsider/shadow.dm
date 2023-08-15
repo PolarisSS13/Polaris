@@ -10,7 +10,7 @@
 	light_dam = 2
 	darksight = 8
 	has_organ = list()
-	siemens_coefficient = 0
+	shock_vulnerability = 0
 
 	blood_color = "#CCCCCC"
 	flesh_color = "#AAAAAA"

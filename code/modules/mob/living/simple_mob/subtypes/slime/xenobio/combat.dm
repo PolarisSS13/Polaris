@@ -12,7 +12,7 @@
 
 				if(ishuman(L))
 					var/mob/living/carbon/human/H = L
-					stun_power *= max(H.species.siemens_coefficient, 0)
+					stun_power *= max(H.species.get_siemens_coefficient(H), 0)
 
 				if(prob(stun_power * 10)) // Try an electric shock.
 					power_charge = max(0, power_charge - 3)

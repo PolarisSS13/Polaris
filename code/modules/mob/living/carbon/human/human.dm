@@ -310,7 +310,7 @@
 	if (!def_zone)
 		def_zone = pick("l_hand", "r_hand")
 
-	if(species.siemens_coefficient == -1)
+	if(species.get_siemens_coefficient(src) == -1)
 		if(stored_shock_by_ref["\ref[src]"])
 			stored_shock_by_ref["\ref[src]"] += shock_damage
 		else
