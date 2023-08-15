@@ -25,3 +25,10 @@
 
 	to_chat(usr, "<span class='notice'>You will [allow_self_surgery ? "now" : "no longer"] attempt to operate upon yourself.</span>")
 	log_admin("DEBUG \[[world.timeofday]\]: [src.ckey ? "[src.name]:([src.ckey])" : "[src.name]"] has [allow_self_surgery ? "Enabled" : "Disabled"] self surgery.")
+
+/mob/living/proc/toggle_pass_table()
+	set name = "Toggle Agility"
+	set desc = "Allows you to start/stop hopping over things such as hydroponics trays, tables, and railings."
+	set category = "Abilities"
+	pass_flags ^= PASSTABLE
+	to_chat(src, "You [pass_flags & PASSTABLE ? "will" : "will NOT"] move over tables/railings/trays!")
