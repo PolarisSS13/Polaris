@@ -32,10 +32,11 @@
 	icon_state = "officercap"
 
 //HOP
-/obj/item/clothing/head/caphat/hop
-	name = "crew resource's hat"
-	desc = "A stylish hat that both protects you from enraged former-crewmembers and gives you a false sense of authority."
+/obj/item/clothing/head/hop
+	name = "head of personnel's cap"
+	desc = "A stylish cap that both protects you from enraged former-crewmembers and gives you a false sense of authority."
 	icon_state = "hopcap"
+	body_parts_covered = 0
 
 //Chaplain
 /obj/item/clothing/head/chaplain_hood
