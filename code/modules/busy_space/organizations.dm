@@ -1078,12 +1078,12 @@
 	<br><br>\
 	SolGov defines top-level law (such as sapient rights and transgressive \
 	technology) and acts as an intermediary council for problems involving member states, but leaves most other law for \
-	states to define themselves. The member states of SolGov obey these laws, pay confederate taxes, and provide each \
+	states to define themselves. The member states of SolGov obey these laws, pay confederation taxes, and provide each \
 	other with military aid, in exchange for membership in the largest free trade, customs, and military union in the \
 	known galaxy. Each state appoints two representatives to the Colonial Assembly where issues are voted upon. \
 	The vast majority of human states are members of SolGov.\
 	<br><br>\
-	Sol's military forces are divided between central confederate forces and local defense forces, although it reserves \
+	Sol's military forces are divided between central confederation forces and local defense forces, although it reserves \
 	the right to nationalize the defense forces in the event of a major crisis, such as the SolGov-Hegemony War."
 	history = "" // Todo
 	work = "governing polity of humanity's Confederation"
@@ -1198,4 +1198,4 @@
 			"Draken",
 			"Gladan",
 			"Falken"
-			)
+	)
