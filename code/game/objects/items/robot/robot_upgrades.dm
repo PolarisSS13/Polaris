@@ -1,6 +1,5 @@
 /*
  * Cyborg/Robot Upgrades
- *
  * Contains various robot upgrade modules.
  */
 /obj/item/borg/upgrade
@@ -20,9 +19,7 @@
 
 	return TRUE
 
-/*
- * Reset Module
- */
+
 /obj/item/borg/upgrade/reset
 	name = "robotic module reset board"
 	desc = "Used to reset a cyborg's module. Destroys any other upgrades applied to the robot."
@@ -37,9 +34,7 @@
 	R.module_reset()
 	return TRUE
 
-/*
- * Rename Module
- */
+
 /obj/item/borg/upgrade/rename
 	name = "robot reclassification board"
 	desc = "Used to rename a cyborg."
@@ -61,9 +56,7 @@
 	R.real_name = heldname
 	return TRUE
 
-/*
- * Restart Module
- */
+
 /obj/item/borg/upgrade/restart
 	name = "robot emergency restart module"
 	desc = "Used to force a restart of a disabled-but-repaired robot, bringing it back online."
@@ -86,10 +79,7 @@
 	R.notify_ai(ROBOT_NOTIFICATION_NEW_UNIT)
 	return TRUE
 
-/*
- * VTEC Module
- */
-#define VTEC_MOVE_DELAY_REDUCTION 0.5
+
 /obj/item/borg/upgrade/vtec
 	name = "robotic VTEC Module"
 	desc = "Used to kick in a robot's VTEC systems, increasing their speed."
@@ -97,21 +87,18 @@
 	item_state = "cyborg_upgrade"
 	require_module = TRUE
 
+	var/move_delay_reduction = 0.5
+
 /obj/item/borg/upgrade/vtec/action(mob/living/silicon/robot/R)
 	if(!..())
 		return FALSE
-	if(R.speed == (initial(R.speed) - VTEC_MOVE_DELAY_REDUCTION))
+	if(R.speed == (initial(R.speed) - move_delay_reduction))
 		return FALSE
 
-	R.speed -= VTEC_MOVE_DELAY_REDUCTION
+	R.speed -= move_delay_reduction
 	return TRUE
-#undef VTEC_MOVE_DELAY_REDUCTION
 
-/*
- * Taser Cooling Module
- *
- * This actually reduces the recharge time, not the fire delay.
- */
+
 /obj/item/borg/upgrade/tasercooler
 	name = "robotic Rapid Taser Cooling Module"
 	desc = "Used to cool a mounted taser, increasing the potential current in it and thus its recharge rate."
@@ -136,6 +123,7 @@
 		to_chat(usr, SPAN_WARNING("This robot has had its taser removed!"))
 		return FALSE
 
+	// This actually reduces the recharge time, not the fire delay.
 	if(T.recharge_time <= 2)
 		to_chat(R, "Maximum cooling achieved for this hardpoint!")
 		to_chat(usr, "There's no room for another cooling unit!")
@@ -144,9 +132,7 @@
 		T.recharge_time = max(2 , T.recharge_time - 4)
 	return TRUE
 
-/*
- * Jetpack Module
- */
+
 /obj/item/borg/upgrade/jetpack
 	name = "robot jetpack"
 	desc = "A carbon dioxide jetpack suitable for low-gravity operations."
@@ -166,9 +152,7 @@
 	R.internals = R.module.jetpack
 	return TRUE
 
-/*
- * Advanced Health Scanner Module
- */
+
 /obj/item/borg/upgrade/advhealth
 	name = "advanced health analyzer module"
 	desc = "A carbon dioxide jetpack suitable for low-gravity operations."
@@ -193,9 +177,7 @@
 		to_chat(usr, "There's no mounting point for the module!")
 		return FALSE
 
-/*
- * Scrambled Equipment Module
- */
+
 /obj/item/borg/upgrade/syndicate
 	name = "scrambled equipment module"
 	desc = "Unlocks new and often deadly module specific items of a robot"
@@ -212,9 +194,7 @@
 	R.emag_items = TRUE
 	return TRUE
 
-/*
- * Language Module
- */
+
 /obj/item/borg/upgrade/language
 	name = "language module"
 	desc = "Used to let cyborgs other than clerical or service speak a variety of languages."
