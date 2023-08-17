@@ -297,7 +297,7 @@
 				ai_log("destroy_surroundings() : Attacking closed door.", AI_LOG_INFO)
 				return melee_attack(D)
 
-		if(can_demolish)	// Demolish walls, and girders.
+		if(can_demolish)	// Demolish walls, girders, barricades, and trees.
 			if(istype(problem_turf, /turf/simulated/wall))
 				ai_log("destroy_surroundings() : Attacking wall.", AI_LOG_INFO)
 				return melee_attack(problem_turf)
@@ -307,7 +307,15 @@
 				return melee_attack(problem_turf)
 
 			if(istype(obstacle, /obj/structure/girder))
-				ai_log("destroy_surroundings() : Attacking girder structure.", AI_LOG_INFO)
+				ai_log("destroy_surroundings() : Attacking girder.", AI_LOG_INFO)
+				return melee_attack(obstacle)
+
+			if(istype(obstacle, /obj/structure/barricade))
+				ai_log("destroy_surroundings() : Attacking barricade.", AI_LOG_INFO)
+				return melee_attack(obstacle)
+
+			if(istype(obstacle, /obj/structure/flora/tree))
+				ai_log("destroy_surroundings() : Attacking tree.", AI_LOG_INFO)
 				return melee_attack(obstacle)
 
 	ai_log("destroy_surroundings() : Exiting due to nothing to attack.", AI_LOG_INFO)

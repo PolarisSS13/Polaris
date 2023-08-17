@@ -59,6 +59,10 @@
 		return
 	TryChop(user, item)
 
+/obj/structure/flora/tree/attack_generic(mob/user, damage, attack_verb)
+	. = ..()
+	if(!.)
+		TryChop(user)
 
 /obj/structure/flora/tree/proc/TryChop(mob/living/user, obj/item/item)
 	var/damage
