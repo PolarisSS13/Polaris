@@ -107,7 +107,7 @@
 			var/list/directions = list(WEST, NORTH, SOUTH, EAST)
 			for(var/direction_from_obj in directions)
 				for (var/obj/machinery/valid_machine in get_step(get_turf(src), direction_from_obj))
-					if(valid_machine.anchor_type && ispath(valid_machine.anchor_type, /obj/structure/reagent_dispensers/bidon))
+					if(ispath(valid_machine.anchor_type) && istype(src, valid_machine.anchor_type))
 						if(valid_machine.anchor_direction)
 							if(valid_machine.anchor_direction == reverse_direction(direction_from_obj))
 								anchored_machine = valid_machine
