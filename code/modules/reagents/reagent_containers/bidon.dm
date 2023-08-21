@@ -125,8 +125,6 @@
 					lid = FALSE
 					atom_flags |= ATOM_REAGENTS_IS_OPEN
 					playsound(src,'sound/items/trayhit2.ogg',50,1)
-				update_icon()
-				return
 	else if(lid)
 		to_chat(user, SPAN_NOTICE("Remove the lid first."))
 		return
