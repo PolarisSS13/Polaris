@@ -29,8 +29,8 @@
 /turf/simulated/floor/tiled/milspec/dark,
 /area/submap/XenoHive)
 "ee" = (
-/obj/item/material/shard,
 /obj/structure/grille/broken,
+/obj/item/material/shard/phoron,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/XenoHive)
 "eB" = (
@@ -117,18 +117,26 @@
 /turf/simulated/floor/tiled/white,
 /area/submap/XenoHive)
 "lD" = (
-/mob/living/simple_mob/animal/space/alien/queen/empress,
 /obj/effect/alien/weeds,
-/turf/simulated/floor/tiled/techfloor,
+/obj/effect/alien/resin/wall,
+/turf/simulated/floor/plating,
 /area/submap/XenoHive)
 "lH" = (
-/obj/effect/alien/resin/wall,
-/obj/effect/alien/resin/wall,
-/turf/simulated/wall/r_wall,
+/obj/effect/alien/weeds,
+/obj/effect/alien/resin/membrane,
+/turf/simulated/floor/plating,
 /area/submap/XenoHive)
 "mf" = (
 /obj/effect/alien/weeds,
 /mob/living/simple_mob/animal/space/alien/drone,
+/turf/simulated/floor/tiled/white,
+/area/submap/XenoHive)
+"mi" = (
+/obj/structure/table/steel_reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/random/tool/power,
 /turf/simulated/floor/tiled/white,
 /area/submap/XenoHive)
 "mV" = (
@@ -137,7 +145,7 @@
 /area/submap/XenoHive)
 "mW" = (
 /obj/structure/grille,
-/obj/structure/window/reinforced/full,
+/obj/structure/window/phoronreinforced/full,
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/XenoHive)
 "nd" = (
@@ -158,7 +166,7 @@
 /obj/effect/alien/weeds,
 /obj/structure/simple_door/resin,
 /obj/effect/decal/cleanable/blood/drip,
-/turf/space,
+/turf/simulated/floor/tiled/milspec/dark,
 /area/submap/XenoHive)
 "nV" = (
 /obj/structure/grille,
@@ -223,6 +231,7 @@
 /area/submap/XenoHive)
 "vG" = (
 /obj/machinery/door/airlock/highsecurity,
+/obj/effect/alien/weeds,
 /turf/simulated/floor/tiled/dark,
 /area/submap/XenoHive)
 "vU" = (
@@ -335,7 +344,7 @@
 "GV" = (
 /obj/structure/table/steel_reinforced,
 /obj/effect/alien/weeds,
-/obj/item/reagent_containers/food/snacks/truffle/random,
+/obj/item/cell/device/weapon/recharge,
 /turf/simulated/floor/tiled/white,
 /area/submap/XenoHive)
 "Hb" = (
@@ -353,6 +362,7 @@
 /obj/random/maintenance/security,
 /obj/random/projectile/scrapped_bulldog,
 /obj/effect/decal/cleanable/blood,
+/obj/item/melee/energy/axe/charge/loaded,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/XenoHive)
 "Ii" = (
@@ -364,6 +374,12 @@
 /obj/effect/floor_decal/milspec/box,
 /obj/machinery/telecomms/broadcaster,
 /turf/simulated/floor/tiled/milspec/raised,
+/area/submap/XenoHive)
+"Jm" = (
+/obj/effect/alien/weeds,
+/obj/structure/bed/nest,
+/obj/item/toy/plushie/face_hugger,
+/turf/simulated/floor/plating,
 /area/submap/XenoHive)
 "Jn" = (
 /obj/structure/table/steel_reinforced,
@@ -462,6 +478,8 @@
 "Qn" = (
 /obj/effect/alien/weeds,
 /obj/structure/table/steel_reinforced,
+/obj/random/tool/power,
+/obj/random/powercell/anom,
 /turf/simulated/floor/tiled/white,
 /area/submap/XenoHive)
 "QO" = (
@@ -469,6 +487,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 8
 	},
+/obj/random/maintenance/medical,
 /obj/random/maintenance/medical,
 /turf/simulated/floor/tiled/white,
 /area/submap/XenoHive)
@@ -495,8 +514,7 @@
 /area/submap/XenoHive)
 "SB" = (
 /obj/effect/alien/weeds,
-/mob/living/simple_mob/animal/space/alien/queen/empress,
-/turf/simulated/floor/tiled/techfloor,
+/turf/simulated/floor/outdoors/dirt,
 /area/submap/XenoHive)
 "ST" = (
 /obj/structure/salvageable/server,
@@ -511,6 +529,11 @@
 /obj/effect/alien/weeds,
 /obj/structure/loot_pile/surface/bones,
 /turf/simulated/floor/tiled/techfloor/grid,
+/area/submap/XenoHive)
+"Uv" = (
+/obj/effect/alien/resin/wall,
+/obj/effect/alien/weeds,
+/turf/simulated/wall/r_wall,
 /area/submap/XenoHive)
 "UJ" = (
 /obj/machinery/light/small/emergency{
@@ -742,9 +765,9 @@ Lq
 ut
 Yp
 Cy
-lD
+MN
 Cy
-SB
+MN
 ut
 Lq
 fz
@@ -828,8 +851,8 @@ TZ
 Gt
 Rp
 Lq
-XW
 JL
+Jm
 fT
 Ln
 km
@@ -849,13 +872,13 @@ Rj
 FQ
 Jn
 QO
-QO
+mi
 KM
 Pd
 Qn
 GV
 Lq
-XW
+lD
 Lg
 BT
 BT
@@ -883,7 +906,7 @@ Pd
 Pd
 yE
 XW
-JL
+lD
 El
 BT
 WU
@@ -910,7 +933,7 @@ Pd
 lb
 Lq
 XW
-Ln
+lH
 El
 BT
 Cx
@@ -966,9 +989,9 @@ WR
 XW
 Ln
 Ln
-Ln
+Uv
 CF
-Rj
+Uv
 Rj
 Rj
 Rj
@@ -983,7 +1006,7 @@ rp
 rp
 rp
 Rj
-Ln
+Uv
 BT
 BT
 Wi
@@ -1107,7 +1130,7 @@ Yt
 BT
 BT
 vG
-fM
+SB
 RA
 go
 "}
@@ -1125,7 +1148,7 @@ uI
 Mt
 uI
 ST
-Rj
+Ln
 BT
 BT
 fX
