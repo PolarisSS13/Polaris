@@ -133,10 +133,7 @@
 		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
-	var/trans = 0
-	if(pour_all)
-		trans = reagents.trans_to(target, reagents.total_volume)
-	else
-		trans = reagents.trans_to(target, amount_per_transfer_from_this)
+	var/trans = pour_all ? reagents.total_volume : amount_per_transfer_from_this
+	trans = reagents.trans_to(target, trans)
 	to_chat(user, "<span class='notice'>You transfer [trans] units of the solution to [target].</span>")
 	return 1

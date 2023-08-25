@@ -76,9 +76,9 @@
 	. = ..()
 	if(get_dist(user, src) <= 2)
 		if(lid)
-			to_chat(user, SPAN_NOTICE("It has lid on it."))
+			. += "It has lid on it."
 		if(reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("It's filled with [reagents.total_volume]/[volume] units of reagents."))
+			. += "It's filled with [reagents.total_volume]/[volume] units of reagents."
 
 /obj/structure/reagent_dispensers/bidon/attack_hand(mob/user as mob)
 	//Prevent the bidon from being messed with while it is anchored.
@@ -107,7 +107,7 @@
 			var/list/directions = list(WEST, NORTH, SOUTH, EAST)
 			for(var/direction_from_obj in directions)
 				for (var/obj/machinery/valid_machine in get_step(get_turf(src), direction_from_obj))
-					if(valid_machine.anchor_type && ispath(valid_machine.anchor_type, /obj/structure/reagent_dispensers/bidon))
+					if(ispath(valid_machine.anchor_type) && istype(src, valid_machine.anchor_type))
 						if(valid_machine.anchor_direction)
 							if(valid_machine.anchor_direction == reverse_direction(direction_from_obj))
 								anchored_machine = valid_machine
@@ -125,8 +125,6 @@
 					lid = FALSE
 					atom_flags |= ATOM_REAGENTS_IS_OPEN
 					playsound(src,'sound/items/trayhit2.ogg',50,1)
-				update_icon()
-				return
 	else if(lid)
 		to_chat(user, SPAN_NOTICE("Remove the lid first."))
 		return
@@ -154,12 +152,11 @@
 			return increment
 
 /obj/structure/reagent_dispensers/bidon/advanced/examine(mob/user)
-	if(!..(user, 2))
-		return
-	if(reagents.reagent_list.len)
+	. = ..()
+	if(reagents.reagent_list.len && get_dist(user, src) <= 2)
 		for(var/I in reagents.reagent_list)
 			var/datum/reagent/R = I
-			to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
+			. += "[R.volume] units of [R.name]"
 
 //Department starting protein to get the process off the ground
 /obj/structure/reagent_dispensers/bidon/protein_can/si
