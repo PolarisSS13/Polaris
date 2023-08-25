@@ -152,12 +152,11 @@
 			return increment
 
 /obj/structure/reagent_dispensers/bidon/advanced/examine(mob/user)
-	if(!..(user, 2))
-		return
-	if(reagents.reagent_list.len)
+	. = ..()
+	if(reagents.reagent_list.len && get_dist(user, src) <= 2)
 		for(var/I in reagents.reagent_list)
 			var/datum/reagent/R = I
-			to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
+			. += "[R.volume] units of [R.name]"
 
 //Preset Bidon of Animal Protein for testing
 /obj/structure/reagent_dispensers/bidon/protein_can
