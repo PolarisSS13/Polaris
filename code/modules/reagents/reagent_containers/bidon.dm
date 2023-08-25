@@ -76,9 +76,9 @@
 	. = ..()
 	if(get_dist(user, src) <= 2)
 		if(lid)
-			to_chat(user, SPAN_NOTICE("It has lid on it."))
+			. += "It has lid on it."
 		if(reagents.total_volume)
-			to_chat(user, SPAN_NOTICE("It's filled with [reagents.total_volume]/[volume] units of reagents."))
+			. += "It's filled with [reagents.total_volume]/[volume] units of reagents."
 
 /obj/structure/reagent_dispensers/bidon/attack_hand(mob/user as mob)
 	//Prevent the bidon from being messed with while it is anchored.
