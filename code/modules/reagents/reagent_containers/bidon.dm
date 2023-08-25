@@ -63,7 +63,6 @@
 
 /obj/structure/reagent_dispensers/bidon/trigger/proc/timer_end()
 	atom_flags &= ~(ATOM_REAGENTS_SKIP_REACTIONS)
-	spawn(1 SECOND)
 	reagents.handle_reactions()
 	atom_flags |= ATOM_REAGENTS_SKIP_REACTIONS
 
