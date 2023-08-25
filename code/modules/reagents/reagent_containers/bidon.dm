@@ -54,8 +54,7 @@
 		if(I.is_multitool())
 			timing=TRUE
 			to_chat(user, SPAN_NOTICE("You start the timer."))
-			spawn(10 * timer_till_mixing)
-			timer_end()
+			addtimer(CALLBACK(src, ./proc/timer_end), (1 SECOND * timer_till_mixing))
 			timing=FALSE
 			return
 	else
@@ -64,9 +63,10 @@
 
 /obj/structure/reagent_dispensers/bidon/trigger/proc/timer_end()
 	atom_flags &= ~(ATOM_REAGENTS_SKIP_REACTIONS)
-	spawn(10)
-	atom_flags |= ATOM_REAGENTS_SKIP_REACTIONS
+	spawn(1 SECOND)
 	reagents.handle_reactions()
+	atom_flags |= ATOM_REAGENTS_SKIP_REACTIONS
+
 
 /obj/structure/reagent_dispensers/bidon/Initialize(mapload, ...)
 	. = ..()
@@ -160,11 +160,6 @@
 		for(var/I in reagents.reagent_list)
 			var/datum/reagent/R = I
 			to_chat(user, "<span class='notice'>[R.volume] units of [R.name]</span>")
-
-//Preset Bidon of Animal Protein for testing
-/obj/structure/reagent_dispensers/bidon/protein_can
-	starting_reagent = "protein"
-
 
 //Department starting protein to get the process off the ground
 /obj/structure/reagent_dispensers/bidon/protein_can/si
