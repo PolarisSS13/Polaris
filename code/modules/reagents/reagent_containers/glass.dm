@@ -109,9 +109,8 @@
 
 
 	//Disarm intent tries to empty the beaker
-	if(user.a_intent == I_DISARM)
-		if(standard_pour_into(user, target, TRUE))
-			return
+	if(user.a_intent == I_DISARM && standard_pour_into(user, target, TRUE))
+		return TRUE
 
 	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
 		return 1
