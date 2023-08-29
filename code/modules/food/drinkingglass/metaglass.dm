@@ -688,5 +688,5 @@ Drinks Data
 /datum/reagent/drink/soda/kiraniade
 	glass_icon_state = "kiraniade"
 
-/datum/reagent/ethanol/sirisaian_pole
-	glass_icon_state = "sirisaian_pole"
+/datum/reagent/ethanol/sirisaii_pole
+	glass_icon_state = "sirisaii_pole"

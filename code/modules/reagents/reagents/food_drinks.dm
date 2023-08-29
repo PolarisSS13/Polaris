@@ -4522,16 +4522,16 @@
 	glass_desc = "Fermented kirani jelly, popular among teshari packs."
 	allergen_type = ALLERGEN_FRUIT //Made from fruit
 
-/datum/reagent/ethanol/sirisaian_pole
-	name = "Sirisaian pole"
-	id = "sirisaian_pole"
+/datum/reagent/ethanol/sirisaii_pole
+	name = "Sirisaii pole"
+	id = "sirisaii_pole"
 	description = "Fermented kirani mixed with ga'uli and ice, for a fruity cocktail as cold as Sirisai's poles."
 	taste_description = "chilled, minty, sweet fruit with an alcoholic kick"
 	color = "#993c5c"
 	strength = 10
 	adj_temp = -20
 	targ_temp = 220
-	glass_name = "Sirisaian pole"
+	glass_name = "Sirisaii pole"
 	glass_desc = "Fermented kirani mixed with ga'uli and ice, for a fruity cocktail as cold as Sirisai's poles."
 	allergen_type = ALLERGEN_FRUIT //Made with kirani and ga'uli
 
