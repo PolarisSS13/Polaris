@@ -671,8 +671,8 @@ var/global/list/ai_verbs_default = list(
 						"female unathi",
 						"male tajaran",
 						"female tajaran",
-						"male tesharii",
-						"female tesharii",
+						"male teshari",
+						"female teshari",
 						"male skrell",
 						"female skrell"
 					)
@@ -716,9 +716,9 @@ var/global/list/ai_verbs_default = list(
 								holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotajm"))
 							if("female tajaran")
 								holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotajf"))
-							if("male tesharii")
+							if("male teshari")
 								holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotesm"))
-							if("female tesharii")
+							if("female teshari")
 								holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holotesf"))
 							if("male skrell")
 								holo_icon = getHologramIcon(icon('icons/mob/AI.dmi',"holoskrm"))

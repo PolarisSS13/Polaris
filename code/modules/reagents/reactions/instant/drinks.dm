@@ -1294,9 +1294,9 @@
 	required_reagents = list("kirani_jelly" = 1, "sodawater" = 2)
 	result_amount = 3
 
-/decl/chemical_reaction/instant/drinks/sirisaian_pole
-	name = "Sirisaian pole"
-	id = "sirisaian_pole"
-	result = "sirisaian_pole"
+/decl/chemical_reaction/instant/drinks/sirisaii_pole
+	name = "Sirisaii pole"
+	id = "sirisaii_pole"
+	result = "sirisaii_pole"
 	required_reagents = list("kirani_cider" = 1, "gauli_juice" = 1, "ice" = 1)
 	result_amount = 3
