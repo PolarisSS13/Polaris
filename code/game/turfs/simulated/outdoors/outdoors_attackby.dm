@@ -27,24 +27,45 @@
 	. = ..()
 
 /turf/simulated/floor/outdoors/attackby(obj/item/C, mob/user)
+
 	if (has_snow())
 		return ..()
+
 	if(can_dig && istype(C, /obj/item/shovel))
 		to_chat(user, SPAN_NOTICE("\The [user] begins digging into \the [src] with \the [C]."))
 		var/delay = (3 SECONDS * C.toolspeed)
 		user.setClickCooldown(delay)
-		if(do_after(user, delay, src))
-			if(!(locate(/obj/machinery/portable_atmospherics/hydroponics/soil) in contents))
-				var/obj/machinery/portable_atmospherics/hydroponics/soil/soil = new(src)
-				user.visible_message(SPAN_NOTICE("\The [user] digs \a [soil] into \the [src]."))
+		if(!do_after(user, delay, src))
+			return TRUE
+
+		var/dig_loot = user.a_intent == I_HELP
+		if(!dig_loot)
+			var/static/list/check_types = list(
+				/obj/machinery/portable_atmospherics/hydroponics/soil,
+				/obj/structure/animal_den,
+				/obj/structure/closet/grave
+			)
+			for(var/check_type in check_types)
+				if(locate(check_type) in contents)
+					dig_loot = TRUE
+					break
+		if(dig_loot)
+			var/loot_type = get_loot_type()
+			if(loot_type)
+				loot_count--
+				var/obj/item/loot = new loot_type(src)
+				to_chat(user, SPAN_NOTICE("You dug up \a [loot]!"))
 			else
-				var/loot_type = get_loot_type()
-				if(loot_type)
-					loot_count--
-					var/obj/item/loot = new loot_type(src)
-					to_chat(user, SPAN_NOTICE("You dug up \a [loot]!"))
+				to_chat(user, SPAN_NOTICE("You didn't find anything of note in \the [src]."))
+		else
+			var/soil
+			switch(user.a_intent)
+				if(I_HURT)
+					soil = new /obj/structure/closet/grave(src)
 				else
-					to_chat(user, SPAN_NOTICE("You didn't find anything of note in \the [src]."))
+					soil = new /obj/machinery/portable_atmospherics/hydroponics/soil(src)
+			if(soil)
+				user.visible_message(SPAN_NOTICE("\The [user] digs \a [soil] into \the [src]."))
 		return TRUE
 
 	if(istype(C, /obj/item/stack/tile/floor))
