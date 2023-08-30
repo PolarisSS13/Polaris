@@ -3,7 +3,7 @@
 #define GIB_DATA_DIRECTIONS "directions"
 
 /proc/gibs(atom/location, var/datum/dna/MobDNA, gibber_type = /obj/effect/spawner/gibs/generic, var/fleshcolor, var/bloodcolor)
-	new gibber_type(FALSE,location,MobDNA,fleshcolor,bloodcolor)
+	new gibber_type(location, MobDNA, fleshcolor, bloodcolor)
 
 /obj/effect/spawner/gibs
 	/// If non-null, sparks will be spawned alongside the gibs.

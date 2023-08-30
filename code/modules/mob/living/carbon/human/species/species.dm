@@ -54,6 +54,7 @@
 	var/hunger_factor = 0.05								// Multiplier for hunger.
 	var/active_regen_mult = 1								// Multiplier for 'Regenerate' power speed, in human_powers.dm
 	var/hearboost = 0 										//Extra ranger on whisper hearing. 0 is adjacent.
+	var/checks_gibber_safety = TRUE							// This species is only gibbable in the gibber if it has been emagged.
 
 	var/taste_sensitivity = TASTE_NORMAL							// How sensitive the species is to minute tastes.
 	var/allergens = null									// Things that will make this species very sick
