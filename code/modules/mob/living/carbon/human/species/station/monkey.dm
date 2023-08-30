@@ -16,6 +16,8 @@
 	show_ssd = null
 	health_hud_intensity = 2
 
+	checks_gibber_safety = FALSE
+
 	gibbed_anim = "gibbed-m"
 	dusted_anim = "dust-m"
 	death_message = "lets out a faint chimper as it collapses and stops moving..."

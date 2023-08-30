@@ -130,10 +130,10 @@
 		to_chat(user, "<span class='danger'>This is not suitable for the gibber!</span>")
 		return
 
-	if(istype(victim,/mob/living/carbon/human) && !emagged)
+	var/datum/species/victim_species = victim?.get_species()
+	if(victim_species?.checks_gibber_safety && !emagged)
 		to_chat(user, "<span class='danger'>The gibber safety guard is engaged!</span>")
 		return
-
 
 	if(victim.abiotic(1))
 		to_chat(user, "<span class='danger'>Subject may not have abiotic items on.</span>")
@@ -175,7 +175,7 @@
 	return
 
 
-/obj/machinery/gibber/proc/startgibbing(mob/user as mob)
+/obj/machinery/gibber/proc/startgibbing(mob/user)
 	if(src.operating)
 		return
 	if(!src.occupant)
@@ -191,8 +191,9 @@
 	var/slab_count = 2 + occupant.meat_amount
 	var/slab_type = occupant.meat_type ? occupant.meat_type : /obj/item/reagent_containers/food/snacks/meat
 	var/slab_nutrition = src.occupant.nutrition / 15
+	var/slab_reagents = round(occupant.reagents?.total_volume / slab_count,1)
 
-	var/list/byproducts = occupant?.butchery_loot?.Copy()
+	var/list/byproducts = occupant.butchery_loot?.Copy()
 
 	if(istype(src.occupant,/mob/living/carbon/human))
 		var/mob/living/carbon/human/H = occupant
@@ -204,14 +205,13 @@
 		slab_nutrition *= 0.5
 	slab_nutrition /= slab_count
 
-	while(slab_count)
-		slab_count--
+	for(var/slab = 1 to slab_count)
 		var/obj/item/reagent_containers/food/snacks/meat/new_meat = new slab_type(src, rand(3,8))
 		if(istype(new_meat))
 			new_meat.name = "[slab_name] [new_meat.name]"
-			new_meat.reagents.add_reagent("nutriment",slab_nutrition)
-			if(src.occupant.reagents)
-				src.occupant.reagents.trans_to_obj(new_meat, round(occupant.reagents.total_volume/slab_count,1))
+			new_meat.reagents.add_reagent("nutriment", slab_nutrition)
+			if(slab_reagents > 0)
+				occupant.reagents.trans_to_obj(new_meat, slab_reagents)
 
 	add_attack_logs(user,occupant,"Used [src] to gib")
 
@@ -243,5 +243,3 @@
 			thing.throw_at(get_edge_target_turf(src,gib_throw_dir),rand(0,3),emagged ? 100 : 50) // Being pelted with bits of meat and bone would hurt.
 
 		update_icon()
-
-
