@@ -222,7 +222,10 @@
 	name = "Stimm"
 	id = "stimm"
 	description = "A homemade stimulant with some serious side-effects."
-	taste_description = "sweetness"
+	taste_description = list(
+		SPECIES_TESHARI      = "chalk",
+		TASTE_STRING_DEFAULT = "sweetness"
+	)
 	taste_mult = 1.8
 	color = "#d0583a"
 	metabolism = REM * 3
@@ -489,7 +492,10 @@
 	name = "Pyrotoxin"
 	id = "thermite_v"
 	description = "A biologically produced compound capable of melting steel or other metals, similarly to thermite."
-	taste_description = "sweet chalk"
+	taste_description = list(
+		SPECIES_TESHARI      = "chalk",
+		TASTE_STRING_DEFAULT = "sweet chalk"
+	)
 	reagent_state = SOLID
 	color = "#673910"
 	touch_met = 50

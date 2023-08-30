@@ -36,7 +36,10 @@
 /datum/reagent/toxin/voxmeds
 	name = "repair gel"
 	id = "voxmeds"
-	taste_description = "fizzing sweetness"
+	taste_description = list(
+		SPECIES_TESHARI      = "fizziness",
+		TASTE_STRING_DEFAULT = "fizzing sweetness"
+	)
 	description = "A complex serum composed of vox-manufactured nanomachines, complex protein chains and microscopic bundles of metallic fibers."
 	strength = 8
 	scannable = FALSE

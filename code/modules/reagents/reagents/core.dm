@@ -15,18 +15,8 @@
 	glass_desc = "Are you sure this is tomato juice?"
 
 /datum/reagent/blood/initialize_data(var/newdata)
-	..()
-	if(data && data["blood_colour"])
-		color = data["blood_colour"]
-
-	return
-
-/datum/reagent/blood/get_data() // Just in case you have a reagent that handles data differently.
-	var/t = data.Copy()
-	if(t["virus2"])
-		var/list/v = t["virus2"]
-		t["virus2"] = v.Copy()
-	return t
+	. = ..()
+	color = LAZYACCESS(data, "blood_colour") || COLOR_RED
 
 /datum/reagent/blood/touch_turf(var/turf/simulated/T)
 	if(!istype(T) || volume < 3)
@@ -116,11 +106,10 @@
 
 /datum/reagent/blood/synthblood/initialize_data(var/newdata)
 	..()
-	if(data && !data["blood_type"])
-		data["blood_type"] = "O-"
-	if(data && data["species"])
-		data["species"] = null
-	return
+	if(data)
+		if(!data["blood_type"])
+			data["blood_type"] = "O-"
+		data -= "species"
 
 /datum/reagent/blood/synthblood/dilute
 	name = "synthetic plasma"

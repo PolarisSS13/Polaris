@@ -128,19 +128,16 @@
 	if(istype(M) && !istype(M, /mob/observer)) //painting ghosts: not allowed
 		M.color = color //maybe someday change this to paint only clothes and exposed body parts for human mobs.
 
-/datum/reagent/paint/get_data()
-	return color
-
 /datum/reagent/paint/initialize_data(var/newdata)
-	color = newdata
-	return
+	. = ..()
+	color = LAZYACCESS(data, "color") || COLOR_WHITE
 
 /datum/reagent/paint/mix_data(var/newdata, var/newamount)
+	. = ..()
 	var/list/colors = list(0, 0, 0, 0)
 	var/tot_w = 0
-
 	var/hex1 = uppertext(color)
-	var/hex2 = uppertext(newdata)
+	var/hex2 = uppertext(LAZYACCESS(newdata, "color") || COLOR_WHITE)
 	if(length(hex1) == 7)
 		hex1 += "FF"
 	if(length(hex2) == 7)
@@ -157,9 +154,8 @@
 	colors[3] += hex2num(copytext(hex2, 6, 8)) * newamount
 	colors[4] += hex2num(copytext(hex2, 8, 10)) * newamount
 	tot_w += newamount
-
 	color = rgb(colors[1] / tot_w, colors[2] / tot_w, colors[3] / tot_w, colors[4] / tot_w)
-	return
+	LAZYSET(data, "color", color)
 
 /* Things that didn't fit anywhere else */
 
@@ -416,7 +412,10 @@
 	name = "Thermite"
 	id = "thermite"
 	description = "Thermite produces an aluminothermic reaction known as a thermite reaction. Can be used to melt walls."
-	taste_description = "sweet tasting metal"
+	taste_description = list(
+		SPECIES_TESHARI = "metallic tones",
+		TASTE_STRING_DEFAULT = "metallic sweetness"
+	)
 	reagent_state = SOLID
 	color = "#673910"
 	touch_met = 50
@@ -552,7 +551,10 @@
 	name = "Glycerol"
 	id = "glycerol"
 	description = "Glycerol is a simple polyol compound. Glycerol is sweet-tasting and of low toxicity."
-	taste_description = "sweetness"
+	taste_description = list(
+		SPECIES_TESHARI      = "blandness",
+		TASTE_STRING_DEFAULT = "sweetness"
+	)
 	reagent_state = LIQUID
 	color = "#808080"
 

@@ -1,5 +1,66 @@
+var/global/list/_cached_taste_data = list()
+/proc/get_cached_taste_data(var/rid, var/list/input, var/list/existing)
 
+	// Generate our cache key.
+	var/cache_key = list(rid)
+	if(input)
+		cache_key += json_encode(input)
+	if(existing)
+		cache_key += json_encode(existing)
+	cache_key = jointext(cache_key, null)
 
+	if(!global._cached_taste_data[cache_key])
+
+		// Ensure taste data is an associative list of categories to
+		// associative lists of taste strings to numerical weights.
+		// ie. list(TASTE_STRING_DEFAULT = list("foo" = 1, "bar" = 10))
+
+		// Validate input is structured as expected and set our cached value.
+		// Take a deep copy to avoid accidental mutation elsewhere.
+		var/list/taste = list()
+		if(!input)
+			taste = list()
+		else if(!islist(input))
+			taste = list(input)
+		else
+			taste = deepCopyList(input)
+
+		if(!taste[TASTE_STRING_DEFAULT])
+			taste = list(TASTE_STRING_DEFAULT = taste)
+
+		// Wrap single values in lists for categories.
+		for(var/taste_cat in taste)
+			if(isnull(taste[taste_cat]))
+				taste -= taste_cat
+			else if(!islist(taste[taste_cat]))
+				taste[taste_cat] = list(taste[taste_cat])
+
+		// Update with pre-existing info.
+		if(existing)
+			for(var/taste_cat in existing)
+				if(taste[taste_cat])
+					// Mix
+					for(var/taste_string in existing[taste_cat])
+						if(!isnum(taste[taste_cat][taste_string]))
+							taste[taste_cat][taste_string] = 1
+						if(isnum(existing[taste_cat][taste_string]))
+							taste[taste_cat][taste_string] += existing[taste_cat][taste_string]
+						else
+							taste[taste_cat][taste_string] += 1
+				else
+					// Wholesale copy
+					taste[taste_cat] = existing[taste_cat]
+
+		// Make sure every string has a numerical weighting.
+		for(var/taste_cat in taste)
+			for(var/taste_string in taste[taste_cat])
+				if(!isnum(taste[taste_cat][taste_string]))
+					taste[taste_cat][taste_string] = 1
+
+		// Cache our generated taste data for later.
+		global._cached_taste_data[cache_key] = json_encode(taste)
+
+	return global._cached_taste_data[cache_key]
 
 /datum/reagent
 	var/name = "Reagent"
@@ -195,19 +256,31 @@
 	M.adjustToxLoss(min(removed * overdose_mod * round(3 + 3 * volume / overdose), 3.6))
 
 /datum/reagent/proc/initialize_data(var/newdata) // Called when the reagent is created.
-	if(!isnull(newdata))
+	SHOULD_CALL_PARENT(TRUE)
+	if(islist(newdata) && length(newdata))
 		data = newdata
-	return
 
+// Returns FALSE if no further mixing is needed, TRUE if it is.
 /datum/reagent/proc/mix_data(var/newdata, var/newamount) // You have a reagent with data, and new reagent with its own data get added, how do you deal with that?
-	return
+	SHOULD_CALL_PARENT(TRUE)
+	if(!islist(data) && islist(newdata) && length(newdata))
+		initialize_data(newdata)
+		return FALSE
+	return TRUE
+
+/datum/reagent/proc/get_initial_data(var/list/newdata)
+	if(taste_description)
+		var/newtastedata = get_cached_taste_data(id, taste_description, LAZYACCESS(newdata, TASTE_DATA_FIELD))
+		taste_description = null // This proc is never called except after new(), so ditch this to avoid memory use.
+		LAZYSET(newdata, TASTE_DATA_FIELD, newtastedata)
+	return newdata
 
 /datum/reagent/proc/get_data() // Just in case you have a reagent that handles data differently.
-	if(data && istype(data, /list))
-		return data.Copy()
-	else if(data)
-		return data
-	return null
+	return islist(data) && length(data) ? data.Copy() : null
+
+/datum/reagent/proc/get_taste_data()
+	var/list/ret = get_data()
+	return LAZYACCESS(ret, TASTE_DATA_FIELD)
 
 /datum/reagent/Destroy() // This should only be called by the holder, so it's already handled clearing its references
 	holder = null

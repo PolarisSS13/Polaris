@@ -299,7 +299,10 @@
 	name = "Potassium"
 	id = "potassium"
 	description = "A soft, low-melting solid that can easily be cut with a knife. Reacts violently with water."
-	taste_description = "sweetness" //potassium is bitter in higher doses but sweet in lower ones.
+	taste_description = list(
+		TASTE_STRING_DEFAULT = "sweetness",
+		SPECIES_TESHARI      = "mild bitterness"
+	) //potassium is bitter in higher doses but sweet in lower ones.
 	reagent_state = SOLID
 	color = "#A0A0A0"
 
@@ -445,7 +448,10 @@
 	name = "Sugar"
 	id = "sugar"
 	description = "The organic compound commonly known as table sugar and sometimes called saccharose. This white, odorless, crystalline powder has a pleasing, sweet taste."
-	taste_description = "sugar"
+	taste_description = list(
+		SPECIES_TESHARI      = "chalk",
+		TASTE_STRING_DEFAULT = "sugar"
+	)
 	taste_mult = 1.8
 	reagent_state = SOLID
 	color = "#FFFFFF"
