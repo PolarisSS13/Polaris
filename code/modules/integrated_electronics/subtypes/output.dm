@@ -483,8 +483,7 @@
 	if(istype(AM) && assembly)
 		if(AM in view(get_turf(src))) // It must be able to 'see' the object it will copy.
 			hologram = new(src)
-			var/icon/holo_icon = getHologramIcon(getFlatIcon(AM), no_color = TRUE)
-		//	holo_icon.GrayScale() // So it looks better colored.
+			var/icon/holo_icon = getHologramIcon(getFlatIcon(AM))
 			if(holo_color) // The color pin should ensure that it is a valid hex.
 				holo_icon.ColorTone(holo_color)
 			hologram.icon = holo_icon

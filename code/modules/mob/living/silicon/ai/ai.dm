@@ -54,7 +54,7 @@ var/global/list/ai_verbs_default = list(
 	var/aiRestorePowerRoutine = 0
 	var/viewalerts = 0
 	var/icon/holo_icon//Default is assigned when AI is created.
-	var/holo_color = null
+	var/holo_color = "#7db4e1"
 	var/list/connected_robots = list()
 	var/obj/item/pda/ai/aiPDA = null
 	var/obj/item/communicator/aiCommunicator = null
@@ -627,11 +627,13 @@ var/global/list/ai_verbs_default = list(
 				if("Crew Member") //A seeable crew member (or a dog)
 					var/list/targets = trackable_mobs()
 					if(targets.len)
-						var/mob/living/Target
-						Target = input("Select a crew member:") as null|anything in targets //The definition of "crew member" is a little loose...
-						//This is torture, I know. If someone knows a better way...
-						if(QDELETED(Target) || !Target) return
-						var/new_holo = getHologramIcon(getCompoundIcon(targets[Target]))
+						var/mob/living/Target = input("Select a crew member:") as null|anything in targets //The definition of "crew member" is a little loose...
+						if(!Target)
+							return
+						Target = targets[Target]
+						if(!istype(Target) || QDELETED(Target))
+							return
+						var/new_holo = getHologramIcon(getCompoundIcon(Target))
 						qdel(holo_icon)
 						holo_icon = new_holo
 

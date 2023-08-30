@@ -102,7 +102,7 @@
 	var/list/cameras = list()
 
 /mob/living/silicon/ai/proc/trackable_mobs()
-	if(usr.stat == 2)
+	if(usr.stat == DEAD)
 		return list()
 
 	var/datum/trackable/TB = new()

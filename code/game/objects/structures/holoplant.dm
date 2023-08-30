@@ -84,7 +84,7 @@
 	if(!state)
 		state = pick(possible_plants)
 	var/plant_icon = icon(icon, state)
-	return getHologramIcon(plant_icon, 0)
+	return getHologramIcon(plant_icon, FALSE)
 
 /obj/machinery/holoplant/emag_act()
 	if(emagged)
