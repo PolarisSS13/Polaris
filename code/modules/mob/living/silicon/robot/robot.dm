@@ -100,7 +100,13 @@
 		/mob/living/silicon/robot/proc/robot_checklaws
 	)
 
-/mob/living/silicon/robot/Initialize(var/ml, var/unfinished = 0)
+/mob/living/silicon/robot/Initialize(var/ml, var/unfinished = 0, var/obj/item/mmi/supplied_mmi)
+
+	if(istype(supplied_mmi))
+		supplied_mmi.forceMove(src)
+		mmi = supplied_mmi
+		post_mmi_setup()
+
 	spark_system = new /datum/effect_system/spark_spread()
 	spark_system.set_up(5, 0, src)
 	spark_system.attach(src)

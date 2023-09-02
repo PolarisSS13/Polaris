@@ -56,11 +56,9 @@
 		/spell/aoe_turf/conjure/swarmer/melee
 		)
 
-/mob/living/silicon/robot/drone/swarm/Initialize()
+/mob/living/silicon/robot/drone/swarm/Initialize(var/ml, var/unfinished = 0, var/supplied_mmi)
 	. = ..()
-
 	add_language(LANGUAGE_SWARMBOT, 1)
-
 	for(var/spell in spell_setup)
 		src.add_spell(new spell, "nano_spell_ready", /obj/screen/movable/spell_master/swarm)
 
@@ -110,4 +108,3 @@
 		/spell/aoe_turf/conjure/forcewall/swarm,
 		/spell/aoe_turf/blink/swarm
 		)
-

@@ -149,14 +149,13 @@
 	for(var/t in organs)
 		qdel(t)
 
-	var/mob/living/silicon/robot/O = new supplied_robot_type( loc )
+	var/mmi_type = SSrobots.get_mmi_type_by_title(mind?.role_alt_title ? mind.role_alt_title : mind?.assigned_role)
+	var/mob/living/silicon/robot/O = new supplied_robot_type(loc, FALSE, (mmi_type ? new mmi_type : null))
 
 	// cyborgs produced by Robotize get an automatic power cell
 	O.cell = new(O)
 	O.cell.maxcharge = 7500
 	O.cell.charge = 7500
-
-
 	O.gender = gender
 	O.invisibility = 0
 
@@ -171,12 +170,8 @@
 
 	O.loc = loc
 	O.job = "Cyborg"
-
-	if(O.mind.assigned_role == "Cyborg")
-		var/mmi_type = SSrobots.get_mmi_type_by_title(O.mind.role_alt_title ? O.mind.role_alt_title : O.mind.assigned_role)
-		if(mmi_type)
-			O.mmi = new mmi_type(O)
-			O.mmi.transfer_identity(src)
+	if(istype(O.mmi))
+		O.mmi.transfer_identity(src)
 
 	if(O.client && O.client.prefs)
 		var/datum/preferences/B = O.client.prefs

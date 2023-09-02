@@ -6,7 +6,7 @@
 	lawchannel = "State"
 	idcard_type = /obj/item/card/id/syndicate
 
-/mob/living/silicon/robot/syndicate/Initialize()
+/mob/living/silicon/robot/syndicate/Initialize(var/ml, var/unfinished = 0, var/supplied_mmi)
 	if(!cell)
 		cell = new /obj/item/cell(src)
 		cell.maxcharge = 25000
