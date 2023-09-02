@@ -8,10 +8,13 @@
 	idcard_type = /obj/item/card/id/syndicate
 	icon_selected = FALSE
 
+/mob/living/silicon/robot/syndicate/Initialize(ml, unfinished, supplied_mmi)
+	if(!supplied_mmi)
+		supplied_mmi = new /obj/item/mmi/digital/robot(src)
+	. = ..()
+
 /mob/living/silicon/robot/syndicate/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
-
-	mmi = new /obj/item/mmi/digital/robot(src)
 	cut_overlays()
 	init_id()
 

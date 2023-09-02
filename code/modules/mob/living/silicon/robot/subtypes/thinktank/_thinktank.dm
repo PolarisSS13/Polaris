@@ -39,12 +39,12 @@
 	if(mind)
 		mind.name = real_name
 
-/mob/living/silicon/robot/platform/Initialize(var/mapload)
-	. = ..()
+/mob/living/silicon/robot/platform/Initialize(var/ml, var/unfinished = 0, var/supplied_mmi)
 	if(mapped)
-		if(!mmi)
-			mmi = new /obj/item/mmi/digital/robot(src)
+		if(!supplied_mmi)
+			supplied_mmi = new /obj/item/mmi/digital/robot(src)
 		SetName("inactive [initial(name)]")
+	. = ..()
 	updateicon()
 
 // Copypasting from root proc to avoid calling ..() and accidentally creating duplicate armour etc.

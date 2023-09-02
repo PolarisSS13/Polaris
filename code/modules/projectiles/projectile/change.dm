@@ -46,12 +46,11 @@
 		var/randomize = pick(options)
 		switch(randomize)
 			if("robot")
-				new_mob = new /mob/living/silicon/robot(M.loc)
+				new_mob = new /mob/living/silicon/robot(M.loc, FALSE, new /obj/item/mmi)
 				new_mob.gender = M.gender
 				new_mob.invisibility = 0
 				new_mob.job = "Cyborg"
 				var/mob/living/silicon/robot/Robot = new_mob
-				Robot.mmi = new /obj/item/mmi(new_mob)
 				Robot.mmi.transfer_identity(M)	//Does not transfer key/client.
 			if("slime")
 				new_mob = new /mob/living/simple_mob/slime/xenobio(M.loc)

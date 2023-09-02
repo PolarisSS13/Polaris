@@ -117,11 +117,10 @@
 		if(!user.unEquip(W))
 			return
 
-		var/mob/living/silicon/robot/O = new product(get_turf(loc))
+		var/mob/living/silicon/robot/O = new product(get_turf(loc), FALSE, W)
 		if(!O)
 			return
 
-		O.mmi = W
 		O.invisibility = 0
 		O.custom_name = created_name
 		O.updatename("Default")

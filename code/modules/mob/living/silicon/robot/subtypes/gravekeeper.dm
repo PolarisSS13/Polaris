@@ -9,9 +9,13 @@
 	icon_selected = FALSE
 	can_be_antagged = FALSE
 
+/mob/living/silicon/robot/gravekeeper/Initialize(ml, unfinished, supplied_mmi)
+	if(!supplied_mmi)
+		supplied_mmi = new /obj/item/mmi/digital/robot(src)
+	. = ..()
+
 /mob/living/silicon/robot/gravekeeper/init()
 	aiCamera = new/obj/item/camera/siliconcam/robot_camera(src)
-	mmi = new /obj/item/mmi/digital/robot(src)
 	module = new /obj/item/robot_module/robot/gravekeeper(src)
 	cut_overlays()
 	init_id()

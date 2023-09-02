@@ -8,14 +8,14 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 	var/mob/living/silicon/ai/mainframe = null
 
 // Premade AI shells, for roundstart landmark spawn.
-/mob/living/silicon/robot/ai_shell/Initialize()
-	mmi = new /obj/item/mmi/inert/ai_remote(src)
-	post_mmi_setup()
+/mob/living/silicon/robot/ai_shell/Initialize(var/ml, var/unfinished = 0, var/supplied_mmi)
+	if(!supplied_mmi)
+		supplied_mmi = new /obj/item/mmi/inert/ai_remote(src)
 	return ..()
 
-/mob/living/silicon/robot/flying/ai_shell/Initialize()
-	mmi = new /obj/item/mmi/inert/ai_remote(src)
-	post_mmi_setup()
+/mob/living/silicon/robot/flying/ai_shell/Initialize(var/ml, var/unfinished = 0, var/supplied_mmi)
+	if(!supplied_mmi)
+		supplied_mmi = new /obj/item/mmi/inert/ai_remote(src)
 	return ..()
 
 // Call after inserting or instantiating an MMI.
@@ -25,7 +25,6 @@ GLOBAL_LIST_EMPTY(available_ai_shells)
 		playsound(src, 'sound/machines/twobeep.ogg', 50, 0)
 	else
 		playsound(src, 'sound/voice/liveagain.ogg', 75, 1)
-	return
 
 /mob/living/silicon/robot/proc/make_shell()
 	shell = TRUE

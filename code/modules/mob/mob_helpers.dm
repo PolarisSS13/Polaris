@@ -278,7 +278,7 @@ It's fairly easy to fix if dealing with single letters but not so much with comp
 		return
 	M.shakecamera = 1
 	spawn(1)
-		if(!M.client)
+		if(QDELETED(M) || !M.client)
 			return
 
 		var/atom/oldeye=M.client.eye
