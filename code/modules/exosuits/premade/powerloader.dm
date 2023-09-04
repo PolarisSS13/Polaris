@@ -113,7 +113,7 @@
 		body = new /obj/item/mech_component/chassis/heavy(src)
 		body.color = "#385b3c"
 
-	..()
+	. = ..()
 
 	material = get_material_by_name(MAT_PLASTEEL)
 
