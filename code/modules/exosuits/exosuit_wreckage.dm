@@ -21,11 +21,11 @@
 					if(exosuit.remove_system(hardpoint))
 						thing.forceMove(src)
 
-	..()
+	return ..()
 
 /obj/structure/exosuit_wreckage/powerloader/Initialize(var/newloc)
 	var/mob/living/exosuit/Exo = new /mob/living/exosuit/premade/powerloader(src)
-	..(newloc, Exo, FALSE)
+	return ..(newloc, Exo, FALSE)
 
 /obj/structure/exosuit_wreckage/attack_hand(var/mob/user)
 	if(contents.len)
