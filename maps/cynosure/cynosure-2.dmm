@@ -15428,9 +15428,9 @@
 	icon_state = "0-4"
 	},
 /obj/structure/table/rack,
-/obj/item/gps/explorer,
-/obj/item/gps/explorer,
-/obj/item/gps/explorer,
+/obj/item/gps/xenofauna,
+/obj/item/gps/xenofauna,
+/obj/item/gps/xenofauna,
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,

@@ -2791,6 +2791,7 @@
 #include "code\modules\persistence\filth.dm"
 #include "code\modules\persistence\graffiti.dm"
 #include "code\modules\persistence\noticeboard.dm"
+#include "code\modules\persistence\specimens.dm"
 #include "code\modules\persistence\datum\persistence_datum.dm"
 #include "code\modules\persistence\effects\filth.dm"
 #include "code\modules\persistence\effects\graffiti.dm"
