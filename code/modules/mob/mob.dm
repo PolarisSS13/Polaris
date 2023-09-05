@@ -426,10 +426,9 @@
 		to_chat(usr, "<span class='notice'><B>You must be dead to use this!</B></span>")
 		return
 
-	// Final chance to abort "respawning"
-	if(mind && timeofdeath) // They had spawned before
+	if (should_confirm_respawn()) // They had spawned before
 		var/choice = alert(usr, "Returning to the menu will prevent your character from being revived in-round. Are you sure?", "Confirmation", "No, wait", "Yes, leave")
-		if(choice == "No, wait")
+		if (choice != "Yes, leave")
 			return
 
 	// Beyond this point, you're going to respawn
@@ -456,6 +455,11 @@
 	if(M.mind)
 		M.mind.reset()
 	return
+
+
+/mob/proc/should_confirm_respawn()
+	return mind && timeofdeath
+
 
 /client/verb/changes()
 	set name = "Changelog"
