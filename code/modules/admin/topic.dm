@@ -543,10 +543,25 @@
 
 		jobs += "</tr></table>"
 
+	// Offstation (Green)
+		counter = 0
+		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
+		jobs += "<tr bgcolor='ccffcc'><th colspan=2>Offstation Positions</th></tr><tr align='center'>"
+		if(jobban_isbanned(M, "Trained Drake"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Trained Drake;jobban4=\ref[M]'><font color=red>Trained Drake</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Trained Drake;jobban4=\ref[M]'>Trained Drake</a></td>"
+
+		if(jobban_isbanned(M, "Survivalist"))
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Survivalist;jobban4=\ref[M]'><font color=red>Survivalist</font></a></td>"
+		else
+			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=Survivalist;jobban4=\ref[M]'>Survivalist</a></td>"
+		jobs += "</tr></table>"
+
 	//Non-Human (Green)
 		counter = 0
 		jobs += "<table cellpadding='1' cellspacing='0' width='100%'>"
-		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC))+1]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
+		jobs += "<tr bgcolor='ccffcc'><th colspan='[length(SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC))+2]'><a href='?src=\ref[src];jobban3=nonhumandept;jobban4=\ref[M]'>Non-human Positions</a></th></tr><tr align='center'>"
 		for(var/jobPos in SSjob.get_job_titles_in_department(DEPARTMENT_SYNTHETIC))
 			if(!jobPos)	continue
 			var/datum/job/job = job_master.GetJob(jobPos)
@@ -573,6 +588,7 @@
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'><font color=red>AntagHUD</font></a></td>"
 		else
 			jobs += "<td width='20%'><a href='?src=\ref[src];jobban3=AntagHUD;jobban4=\ref[M]'>AntagHUD</a></td>"
+
 		jobs += "</tr></table>"
 
 	//Antagonist (Orange)
