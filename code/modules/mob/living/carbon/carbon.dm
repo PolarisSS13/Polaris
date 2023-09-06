@@ -10,9 +10,7 @@
 
 /mob/living/carbon/Life()
 	..()
-
 	handle_viruses()
-
 	// Increase germ_level regularly
 	if(germ_level < GERM_LEVEL_AMBIENT && prob(30))	//if you're just standing there, you shouldn't get more germs beyond an ambient level
 		germ_level++
@@ -392,16 +390,6 @@
 		if(PULSE_THREADY)
 			return method ? ">250" : "extremely weak and fast, patient's artery feels like a thread"
 //			output for machines^	^^^^^^^output for people^^^^^^^^^
-
-/mob/living/carbon/verb/mob_sleep()
-	set name = "Sleep"
-	set category = "IC"
-
-	if(usr.sleeping)
-		to_chat(usr, "<font color='red'>You are already sleeping</font>")
-		return
-	if(alert(src,"You sure you want to sleep for a while?","Sleep","Yes","No") == "Yes")
-		usr.AdjustSleeping(20)
 
 /mob/living/carbon/Bump(atom/A)
 	if(now_pushing)
