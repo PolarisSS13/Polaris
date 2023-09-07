@@ -1150,3 +1150,16 @@
 
 /mob/living/proc/empty_stomach()
 	return
+
+/mob/living
+	var/toggled_sleeping = FALSE
+
+/mob/living/verb/mob_sleep()
+	set name = "Sleep"
+	set category = "IC"
+	if(!toggled_sleeping && alert(src, "Are you sure you wish to go to sleep? You will snooze until using the Sleep verb again.", "Sleepy Time", "No", "Yes") == "No")
+		return
+	toggled_sleeping = !toggled_sleeping
+	to_chat(src, SPAN_NOTICE("You are [toggled_sleeping ? "now voluntarily sleeping. Use the Sleep verb again to wake up." : "no longer voluntarily sleeping"]."))
+	if(toggled_sleeping)
+		Sleeping(1)

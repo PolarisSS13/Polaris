@@ -16,13 +16,12 @@
 	handle_light()
 
 	if(stat != DEAD)
+
 		//Breathing, if applicable
 		handle_breathing()
 
 		//Mutations and radiation
 		handle_mutations_and_radiation()
-
-
 
 		//Blood
 		handle_blood()
@@ -123,6 +122,8 @@
 	handle_confused()
 
 /mob/living/proc/handle_sleeping()
+	if(stat != DEAD && toggled_sleeping)
+		Sleeping(2)
 	if(sleeping)
 		AdjustSleeping(-1)
 		throw_alert("asleep", /obj/screen/alert/asleep)
