@@ -275,6 +275,7 @@
 					if(!amount || !arguments["id"])
 						return
 					tgui_act("remove", list("id" = arguments["id"], "amount" = amount), ui, state)
+
 				if("create_condi_pack")
 					if(!condi || !reagents.total_volume)
 						return
@@ -283,8 +284,10 @@
 					var/obj/item/reagent_containers/pill/P = new(loc)
 					P.name = "[answer] pack"
 					P.desc = "A small condiment pack. The label says it contains [answer]."
-					P.icon_state = "bouilloncube"//Reskinned monkey cube
+					P.icon_state = "cube"
 					reagents.trans_to_obj(P, 10)
+					P.color = P.reagents.get_color()
+
 				if("create_pill")
 					if(condi || !reagents.total_volume)
 						return
