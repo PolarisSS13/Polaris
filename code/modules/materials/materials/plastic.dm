@@ -30,7 +30,8 @@
 		new /datum/stack_recipe("lampshade", /obj/item/lampshade, 1, time = 1, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("plastic net", /obj/item/material/fishing_net, 25, time = 1 MINUTE, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("plastic fishtank", /obj/item/glass_jar/fish/plastic, 2, time = 30 SECONDS, recycle_material = "[name]"),
-		new /datum/stack_recipe("reagent tubing", /obj/item/stack/hose, 1, 4, 20, pass_stack_color = TRUE, recycle_material = "[name]")
+		new /datum/stack_recipe("reagent tubing", /obj/item/stack/hose, 1, 4, 20, pass_stack_color = TRUE, recycle_material = "[name]"),
+		new /datum/stack_recipe("playing chip", /obj/item/poker_chip/c100, 1, 100, 20, pass_stack_color = TRUE, recycle_material = "[name]")
 	)
 
 /datum/material/cardboard

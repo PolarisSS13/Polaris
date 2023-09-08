@@ -444,6 +444,13 @@
 	icon_state = "mousetraps"
 	starts_with = list(/obj/item/assembly/mousetrap = 7)
 
+/obj/item/storage/box/poker_chips
+	name = "box of poker chips"
+	desc = "This box contains playing chips."
+	icon = 'icons/obj/storage.dmi'
+	icon_state = "poker_chips"
+	starts_with = list(/obj/item/poker_chip/c5000 = 7)
+
 /obj/item/storage/box/pillbottles
 	name = "box of pill bottles"
 	desc = "It has pictures of pill bottles on its front."

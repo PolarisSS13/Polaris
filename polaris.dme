@@ -1046,6 +1046,7 @@
 #include "code\game\objects\items\stacks\tiles\tile_types.dm"
 #include "code\game\objects\items\toys\godfigures.dm"
 #include "code\game\objects\items\toys\mech_toys.dm"
+#include "code\game\objects\items\toys\poker_chips.dm"
 #include "code\game\objects\items\toys\toys.dm"
 #include "code\game\objects\items\weapons\AI_modules.dm"
 #include "code\game\objects\items\weapons\augment_items.dm"
