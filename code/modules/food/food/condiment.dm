@@ -471,14 +471,11 @@
 	randpixel_xy()
 
 /obj/item/reagent_containers/food/condiment/carton/update_icon()
-	overlays.Cut()
-
+	cut_overlays()
 	if(reagents.total_volume)
 		var/image/filling = image('icons/obj/food.dmi', src, "[icon_state]10")
-
 		filling.icon_state = "[icon_state]-[clamp(round(100 * reagents.total_volume / volume, 25), 0, 100)]"
-
-		overlays += filling
+		add_overlay(filling)
 
 /obj/item/reagent_containers/food/condiment/carton/flour/rustic
 	name = "flour sack"

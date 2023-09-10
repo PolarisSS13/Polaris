@@ -41,7 +41,7 @@
 //	appearance = ma
 
 
-// If your simple mob's update_icon() call calls overlays.Cut(), this needs to be called after this, or manually apply modifier_overly to overlays.
+// Call this if your simple mob cuts overlays.
 /mob/living/simple_mob/update_modifier_visuals()
 	var/image/effects = null
 	if(modifier_overlay)

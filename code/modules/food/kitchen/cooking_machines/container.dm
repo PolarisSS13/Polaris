@@ -166,21 +166,24 @@
 				holder.trans_to(I, weights[I] / total)
 
 /obj/item/reagent_containers/cooking_container/update_icon()
-	overlays.Cut()
-
+	cut_overlays()
 	if(food_items)
 		var/image/filling = image('icons/obj/cooking_machines.dmi', src, "[icon_state]10")
-
 		var/percent = round((food_items / max_space) * 100)
 		switch(percent)
-			if(0 to 2)	        filling.icon_state = "[icon_state]"
-			if(3 to 24)         filling.icon_state = "[icon_state]1"
-			if(25 to 49)        filling.icon_state = "[icon_state]2"
-			if(50 to 74)        filling.icon_state = "[icon_state]3"
-			if(75 to 79)        filling.icon_state = "[icon_state]4"
-			if(80 to INFINITY)  filling.icon_state = "[icon_state]5"
-
-		overlays += filling
+			if(0 to 2)
+				filling.icon_state = "[icon_state]"
+			if(3 to 24)
+				filling.icon_state = "[icon_state]1"
+			if(25 to 49)
+				filling.icon_state = "[icon_state]2"
+			if(50 to 74)
+				filling.icon_state = "[icon_state]3"
+			if(75 to 79)
+				filling.icon_state = "[icon_state]4"
+			if(80 to INFINITY)
+				filling.icon_state = "[icon_state]5"
+		add_overlay(filling)
 
 /obj/item/reagent_containers/cooking_container/oven
 	name = "oven dish"
