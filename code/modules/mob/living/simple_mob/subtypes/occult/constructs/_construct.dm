@@ -144,15 +144,3 @@
 //Constructs levitate, can fall from a shuttle with no harm, and are piloted by either damned spirits or some otherworldly entity. Let 'em float in space.
 /mob/living/simple_mob/construct/Process_Spacemove(var/check_drift = 0)
 	return TRUE
-
-/*
-// Glowing Procs
-/mob/living/simple_mob/construct/proc/add_glow()
-	var/image/eye_glow = image(icon,"glow-[icon_state]")
-	eye_glow.plane = PLANE_LIGHTING_ABOVE
-	overlays += eye_glow
-	set_light(2, -2, l_color = "#FFFFFF")
-
-/mob/living/simple_mob/construct/proc/remove_glow()
-	overlays.Cut()
-*/

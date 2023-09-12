@@ -883,7 +883,7 @@ modules/mob/living/carbon/human/life.dm if you die, you will be zoomed out.
 	if(addblends && standing && source_icon)
 		var/image/I = image(source_icon, addblends)
 		I.blend_mode = BLEND_ADD
-		standing.overlays += I
+		standing.add_overlay(I)
 	return standing
 
 //STUB

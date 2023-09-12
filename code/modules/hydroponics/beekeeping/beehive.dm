@@ -225,8 +225,7 @@
 
 /obj/item/honey_frame/update_icon()
 	..()
-
-	overlays.Cut()
+	cut_overlays()
 	if(honey > 0)
 		add_overlay("honeycomb")
 
