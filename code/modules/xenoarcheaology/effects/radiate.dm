@@ -25,4 +25,4 @@
 /datum/artifact_effect/rare/radiate/DoEffectPulse()
 	var/atom/holder = get_master_holder()
 	if (holder)
-		SSradiation.radiate(holder, ((radiation_amount * 25) * (sqrt(src.effectrange)))) //Need to get feedback on this
+		SSradiation.radiate(holder, sqrt(effectrange) * radiation_amount * 4)
