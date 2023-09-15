@@ -51,8 +51,10 @@
 				if(S.open >= 2)
 					if(do_after(user,5 * toolspeed))
 						S.heal_damage(20, 20, robo_repair = 1)
+						M.adjustToxLoss(5)
 				else if(do_after(user,5 * toolspeed))
 					S.heal_damage(10,10, robo_repair =1)
+					M.adjustToxLoss(5) // to prevent spamming
 				H.updatehealth()
 				use(1)
 				user.visible_message("<span class='notice'>\The [user] applies some nanite paste on [user != M ? "[M]'s [S.name]" : "[S]"] with [src].</span>",\
