@@ -20,8 +20,8 @@
 
 /mob/living/exosuit/premade/combat/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/manipulators/combat
 	name = "combat arms"
@@ -77,4 +77,4 @@
 		)
 	)
 
-	. = ..()
+	return ..()

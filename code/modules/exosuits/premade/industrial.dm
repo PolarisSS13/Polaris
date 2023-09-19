@@ -27,8 +27,8 @@
 
 /mob/living/exosuit/premade/industrial/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/manipulators/industrial
 	name = "exosuit arms"
@@ -106,7 +106,7 @@
 		body.color = "#6c8aaf"
 
 /mob/living/exosuit/premade/industrial/mechete/spawn_mech_equipment()
-	install_system(new /obj/item/mech_equipment/mounted_system/melee/mechete(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/melee/mechete(src), HARDPOINT_RIGHT_HAND)
 
 /mob/living/exosuit/premade/industrial/flames_red
 	name = "APLU \"Firestarter\""
@@ -139,12 +139,12 @@
 
 	material = get_material_by_name(MAT_PLASTEEL)
 
-	. = ..()
+	return ..()
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/sensors/firefighter/prebuild()
 	..()
@@ -170,6 +170,6 @@
 		damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
 
 /mob/living/exosuit/premade/industrial/old/spawn_mech_equipment()
-	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)

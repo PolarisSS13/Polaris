@@ -18,12 +18,12 @@
 
 	body.armour = new /obj/item/robot_parts/robot_component/armour/exosuit(src)
 
-	. = ..()
+	return ..()
 
 /mob/living/exosuit/premade/powerloader/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/manipulators/powerloader
 	name = "exosuit arms"
@@ -119,8 +119,8 @@
 
 /mob/living/exosuit/premade/firefighter/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/drill(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/extinguisher(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/sensors/firefighter/prebuild()
 	..()
@@ -146,6 +146,6 @@
 		damaged.take_brute_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
 
 /mob/living/exosuit/premade/powerloader/old/spawn_mech_equipment()
-	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
