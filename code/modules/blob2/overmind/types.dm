@@ -192,7 +192,8 @@
 		node_type = incoming_vars["node_type"]
 		shield_type = incoming_vars["shield_type"]
 
-		core_tech = incoming_vars["core_tech"].Copy()
+		var/list/new_core_tech = incoming_vars["core_tech"]
+		core_tech = islist(new_core_tech) ? new_core_tech : list()
 
 		chunk_type = incoming_vars["chunk_type"]
 		chunk_effect_cooldown = incoming_vars["chunk_effect_cooldown"]
