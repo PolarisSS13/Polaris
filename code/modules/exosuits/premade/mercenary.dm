@@ -27,8 +27,8 @@
 
 /mob/living/exosuit/premade/mercenary/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser/ion(src), HARDPOINT_RIGHT_HAND)
 
 /obj/item/mech_component/manipulators/mercenary
 	name = "mercenary arms"
@@ -103,5 +103,5 @@
 		body.color = COLOR_DARK_GUNMETAL
 
 /mob/living/exosuit/premade/mercenary/merc/spawn_mech_equipment()
-	install_system(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_RIGHT_HAND)

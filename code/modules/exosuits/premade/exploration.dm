@@ -31,6 +31,6 @@
 		damaged.take_burn_damage((damaged.max_damage / 4 ) * MECH_COMPONENT_DAMAGE_DAMAGED)
 
 /mob/living/exosuit/premade/light/exploration/spawn_mech_equipment()
-	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
-	install_system(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
-	install_system(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
+	install_system_initialize(new /obj/item/mech_equipment/clamp(src), HARDPOINT_RIGHT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/mounted_system/taser/laser(src), HARDPOINT_LEFT_HAND)

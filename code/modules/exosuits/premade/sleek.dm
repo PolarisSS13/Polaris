@@ -24,13 +24,13 @@
 	if(!body)
 		body = new /obj/item/mech_component/chassis/sleek/painted(src)
 
-	. = ..()
+	return ..()
 
 /mob/living/exosuit/premade/sleek/spawn_mech_equipment()
 	..()
-	install_system(new /obj/item/mech_equipment/catapult(src), HARDPOINT_LEFT_HAND)
-	install_system(new /obj/item/mech_equipment/sleeper(src), HARDPOINT_BACK)
-	install_system(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
+	install_system_initialize(new /obj/item/mech_equipment/catapult(src), HARDPOINT_LEFT_HAND)
+	install_system_initialize(new /obj/item/mech_equipment/sleeper(src), HARDPOINT_BACK)
+	install_system_initialize(new /obj/item/mech_equipment/light(src), HARDPOINT_HEAD)
 
 /obj/item/mech_component/manipulators/sleek
 	name = "sleek arms"
@@ -94,4 +94,4 @@
 			"[WEST]"  = list("x" = 13, "y" = 0)
 		)
 	)
-	. = ..()
+	return ..()

@@ -110,6 +110,44 @@
 
 	return 1
 
+/mob/living/exosuit/proc/install_system_initialize(var/obj/item/system, var/system_hardpoint)
+
+	if(hardpoints_locked || hardpoints[system_hardpoint])
+		return FALSE
+
+	var/obj/item/mech_equipment/ME = system
+	if(istype(ME))
+		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
+			return FALSE
+		if(ME.restricted_software)
+			if(!head || !head.software)
+				return FALSE
+			var/found
+			for(var/software in ME.restricted_software)
+				if(software in head.software.installed_software)
+					found = TRUE
+					break
+			if(!found)
+				return FALSE
+		ME.installed(src)
+		GLOB.destroyed_event.register(system, src, .proc/forget_module)
+
+
+	system.forceMove(src)
+	hardpoints[system_hardpoint] = system
+
+	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
+	H.holding = system
+
+	system.screen_loc = H.screen_loc
+	system.hud_layerise()
+
+	hud_elements |= system
+	refresh_hud()
+	update_icon()
+
+	return 1
+
 /mob/living/exosuit/proc/remove_system(var/system_hardpoint, var/mob/user, var/force)
 
 	if((hardpoints_locked && !force) || !hardpoints[system_hardpoint])
