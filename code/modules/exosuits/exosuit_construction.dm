@@ -193,3 +193,37 @@
 		playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
 	return 1
+
+/mob/living/exosuit/proc/remove_system_initialize(var/system_hardpoint, var/mob/exosuit, var/force)
+
+	if((hardpoints_locked && !force) || !hardpoints[system_hardpoint])
+		return 0
+
+	var/obj/item/system = hardpoints[system_hardpoint]
+
+	hardpoints[system_hardpoint] = null
+
+	if(system_hardpoint == selected_hardpoint)
+		clear_selected_hardpoint()
+
+	var/obj/item/mech_equipment/ME = system
+	if(istype(ME))
+		ME.uninstalled()
+//	system.forceMove(get_turf(src)) // Managed by the wreckage.
+	system.screen_loc = null
+	system.layer = initial(system.layer)
+	GLOB.destroyed_event.unregister(system, src, .proc/forget_module)
+
+	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
+	H.holding = null
+
+	for(var/thing in pilots)
+		var/mob/pilot = thing
+		if(pilot && pilot.client)
+			pilot.client.screen -= system
+
+	hud_elements -= system
+	refresh_hud()
+	update_icon()
+
+	return 1

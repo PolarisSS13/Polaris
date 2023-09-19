@@ -18,7 +18,7 @@
 			for(var/hardpoint in exosuit.hardpoints)
 				if(exosuit.hardpoints[hardpoint] && prob(40))
 					var/obj/item/thing = exosuit.hardpoints[hardpoint]
-					if(exosuit.remove_system(hardpoint))
+					if(exosuit.remove_system_initialize(hardpoint))
 						thing.forceMove(src)
 
 	return ..()
