@@ -595,3 +595,8 @@ BLIND     // can't see anything
 			to_chat(usr, "You push \the [src] up from in front of your eyes.")
 		update_clothing_icon()
 		usr.update_action_buttons()
+
+/obj/item/clothing/glasses/masquerade
+	name = "masquerade mask"
+	desc = "A fancy party mask that only covers your eyes. No one will have any idea who you are!"
+	icon_state = "masquerade"

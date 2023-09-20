@@ -418,3 +418,20 @@
 /datum/gear/accessory/ceremonial_loins
 	display_name = "ceremonial loincloth"
 	path = /obj/item/clothing/accessory/ceremonial_loins
+
+/datum/gear/accessory/frontbow
+	display_name = "ribbon bow, front (colorable)"
+	path = /obj/item/clothing/accessory/frontbow
+
+/datum/gear/accessory/frontbow/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/accessory/backbow
+	display_name = "ribbon bow, back (colorable)"
+	path = /obj/item/clothing/accessory/backbow
+
+/datum/gear/accessory/backbow/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+

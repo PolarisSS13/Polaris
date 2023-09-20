@@ -710,3 +710,19 @@
 	"jumper dress" = /obj/item/clothing/under/skirt/colorable/jumperdress
 	)
 	gear_tweaks += list(new/datum/gear_tweak/path(skirts), gear_tweak_free_color_choice)
+
+
+//Magical Girl Outfits
+/datum/gear/uniform/magicalgirl
+	display_name = "outfit, magical girl selection"
+	description = "A selection of magical girl costumes worn on the clothing slot."
+	path = /obj/item/clothing/under/magicalgirl
+
+/datum/gear/uniform/magicalgirl/New()
+	..()
+	var/list/costumes = list()
+	for(var/costume in typesof(/obj/item/clothing/under/magicalgirl))
+		var/obj/item/clothing/under/magicalgirl/costume_type = costume
+		costumes[initial(costume_type.name)] = costume_type
+	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
+
