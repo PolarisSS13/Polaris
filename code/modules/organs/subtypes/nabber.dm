@@ -203,7 +203,7 @@
 	parent_organ = BP_GROIN
 
 /obj/item/organ/internal/lungs/insectoid/nabber/Initialize()
-	..()
+	. = ..()
 
 	if(istype(owner))
 		owner.reagents.add_reagent("phoron", 5)
@@ -270,4 +270,4 @@
 				owner.Paralyse(1)
 				var/obj/item/organ/internal/I = pick(owner.internal_organs)
 				I.take_damage(5)
-	..()
+	return ..()

@@ -14,6 +14,8 @@
 	language = LANGUAGE_GALCOM
 	species_language = LANGUAGE_ROOTLOCAL
 
+	num_alternate_languages = 2
+
 	assisted_langs = list(LANGUAGE_GALCOM, LANGUAGE_SIVIAN, LANGUAGE_TRADEBAND, LANGUAGE_GUTTER, LANGUAGE_UNATHI, LANGUAGE_SKRELLIAN, LANGUAGE_SKRELLIANFAR, LANGUAGE_EAL, LANGUAGE_TERMINUS, LANGUAGE_ROOTGLOBAL)
 	min_age = 8
 	max_age = 40
@@ -59,7 +61,8 @@
 		rad = 2.5
 		)
 
-	gluttonous = 1
+	gluttonous = GLUT_SMALLER
+	taste_sensitivity = TASTE_SENSITIVE
 	mob_size = MOB_LARGE
 	blood_volume = 840
 
@@ -114,10 +117,11 @@
 
 /datum/species/nabber/New()
 	equip_adjust = list(
-		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
+		slot_wear_suit_str = list("[NORTH]" = list("x" = 0, "y" = 9), "[EAST]" = list("x" = 0, "y" = 9), "[SOUTH]" = list("x" = 0, "y" = 9), "[WEST]" = list("x" = 0, "y" = 9)),
+		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 8),  "[EAST]" = list("x" = 0, "y" = 9),  "[SOUTH]" = list("x" = 0, "y" = 9),  "[WEST]" = list("x" = 0, "y" = 9)),
 		slot_back_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
 		slot_belt_str =    list("[NORTH]" = list("x" = 0, "y" = 0),  "[EAST]" = list("x" = 8, "y" = 0),  "[SOUTH]" = list("x" = 0, "y" = 0),  "[WEST]" = list("x" = -8, "y" = 0)),
-		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 0, "y" = 11), "[SOUTH]" = list("x" = 0, "y" = 11), "[WEST]" = list("x" = 0, "y" = 11))
+		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 3, "y" = 10), "[SOUTH]" = list("x" = 0, "y" = 9), "[WEST]" = list("x" = -3, "y" = 10))
 	)
 	..()
 
