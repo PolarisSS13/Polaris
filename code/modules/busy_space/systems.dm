@@ -237,7 +237,7 @@
 		new /datum/lore/location("the Void Star in Nyx", list(ATC_TRANS, ATC_FREIGHT, ATC_LUX)),
 		new /datum/lore/location("Euthenia, Nyx", list(ATC_TYPICAL)),
 		new /datum/lore/location("an Incursion wreck in Nyx", list(ATC_SALVAGE)),
-		new /datum/lore/location("the Erebus Path Anomaly in Nyx", list(ATC_SCI)),
+		new /datum/lore/location("the Erebus Path Anomaly in Nyx", list(ATC_SCI))
 		)
 
 /datum/lore/system/altair //hey do you think altair like. survived the incursion actually
@@ -247,7 +247,7 @@
 	locations = list(
 		new /datum/lore/location("The Stack in Altair", list(ATC_TRANS, ATC_MED, ATC_DEF)),
 		new /datum/lore/location("Becquerel Station in Altair", list(ATC_TYPICAL)),
-		new /datum/lore/location("The Altair Walled Garden", list(ATC_TRANS, ATC_MED)),
+		new /datum/lore/location("The Altair Walled Garden", list(ATC_TRANS, ATC_MED))
 		)
 
 /datum/lore/system/altair/New()
