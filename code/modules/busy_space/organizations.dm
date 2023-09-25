@@ -1270,7 +1270,6 @@
 		/datum/lore/system/raphael = 10,
 		/datum/lore/system/altair = 10,
 		/datum/lore/system/zhu_que = 10,
-		/datum/lore/system/procyon = 10,
 		/datum/lore/system/love = 5,
 		/datum/lore/system/rubicon = 5,
 		/datum/lore/system/procyon = 5,
