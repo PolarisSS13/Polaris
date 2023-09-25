@@ -240,7 +240,7 @@
 	history = "" // To be written someday.
 	work = "research giant"
 	headquarters = "Luna, Sol"
-	motto = ""
+	motto = "A better tomorrow, today!"
 	legit = 95 //they own the local airspace
 
 	missions = list( // they get almost every mission type because they're, you know, NT
@@ -277,6 +277,8 @@
 		/datum/lore/system/exalts_light = 5,
 		/datum/lore/system/rarkajar = 5,
 		/datum/lore/system/raphael = 5, //they own one of the raphaelite colonies
+		/datum/lore/system/rubicon = 3,
+		/datum/lore/system/procyon = 3,
 		/datum/lore/system/mesomori = 2,
 		/datum/lore/system/arrathiir = 2,
 		/datum/lore/system/jahans_post = 2,
@@ -578,15 +580,16 @@
 		/datum/lore/system/relan = 5,
 		/datum/lore/system/exalts_light = 5,
 		/datum/lore/system/rarkajar = 5,
-		/datum/lore/system/terminus = 5,
 		/datum/lore/system/eutopia = 5, //computer manufacturers love unfree labor
 		/datum/lore/system/altair = 5,
 		/datum/lore/system/phact = 5, //historic ties. the name also helps
+		/datum/lore/system/procyon = 3,
 		/datum/lore/system/mesomori = 2,
 		/datum/lore/system/arrathiir = 2,
 		/datum/lore/system/jahans_post = 2,
 		/datum/lore/system/abels_rest = 2,
 		/datum/lore/system/raphael = 2,
+		/datum/lore/system/terminus = 2,
 		/datum/lore/system/neon_light = 1
 		)
 
@@ -633,7 +636,7 @@
 	Positronic Rights Group and puts it in ideological (but not economic) comptetition with Morpheus Cyberkinetics."
 	history = ""
 	work = "cybernetics and augmentation manufacturer"
-	headquarters = ""
+	headquarters = "New Seoul"
 	motto = ""
 
 	missions = list(
@@ -698,6 +701,7 @@
 		/datum/lore/system/love = 2,
 		/datum/lore/system/neon_light = 2,
 		/datum/lore/system/alpha_centauri = 2,
+		/datum/lore/system/rubicon = 2,
 		/datum/lore/system/whythe = 1 //oh god
 		)
 	ship_names = list(
@@ -841,6 +845,7 @@
 		/datum/lore/system/raphael = 5, // they own a celestial body here too
 		/datum/lore/system/rarkajar = 5, // i love building extractive capital in developing nations
 		/datum/lore/system/exalts_light = 5,
+		/datum/lore/system/rubicon = 5,
 		/datum/lore/system/relan = 2, //i think relan mostly nationalized a bunch of their industries but like. they are not really in a bargaining position rn
 		/datum/lore/system/eutopia = 2,
 		/datum/lore/system/vounna = 2,
@@ -890,7 +895,6 @@
 		/datum/lore/system/jahans_post = 5,
 		/datum/lore/system/relan = 5,
 		/datum/lore/system/exalts_light = 5,
-		/datum/lore/system/terminus = 3,
 		/datum/lore/system/phact = 3, //people really want to see the dumb castle
 		/datum/lore/system/qerrvalis = 3,
 		/datum/lore/system/nyx = 3,
@@ -900,12 +904,158 @@
 		/datum/lore/system/neon_light = 2
 		)
 
-//TODO: add in other tscs-- kaleidoscope, SAARE, and PCRC for sure but maybe also gilthari,grayson, aether
+/datum/lore/organization/tsc/gilthari
+	name = "Gilthari Exports"
+	short_name = "Gilthari"
+	desc = "Gilthari is Sol’s premier supplier of luxury goods, specializing in extracting money from the rich and successful. \
+	Their largest holdings are in gambling, but they maintain subsidiaries in everything from VR equipment to luxury watches. \
+	Their holdings in mass media are a smaller but still important part of their empire. Gilthari is known for treating its \
+	positronic employees very well, sparking a number of conspiracy theories. The gorgeous FBP model that Gilthari provides them \
+	is a symbol of the corporation’s wealth and reach ludicrous prices when available on the black market, with licit ownership of \
+	the chassis limited, by contract, to employees."
+	work = "gambling, luxury consumer goods, resorts"
+	headquarters = "Earth, Sol" //this seems likely
+	motto = "Feel the gentle warmth of your Lucky Star." // they're really pushing their cigarette imprint lately
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/luxury("ITV"), //there is simply no non-luxurious gilthari transport mission
+		new /datum/lore/mission/prebuilt/freight("IFV") //i am assured these are also luxurious
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 20,
+		/datum/lore/system/sol = 25,
+		/datum/lore/system/oasis = 30,
+		/datum/lore/system/kess_gendar = 20,
+		/datum/lore/system/alpha_centauri = 20,
+		/datum/lore/system/tau_ceti = 20,
+		/datum/lore/system/el = 15,
+		/datum/lore/system/mahimahi = 10,
+		/datum/lore/system/zhu_que = 10,
+		/datum/lore/system/love = 10,
+		/datum/lore/system/eutopia = 10,
+		/datum/lore/system/gavel = 10, // kind of shit but nearby
+		/datum/lore/system/abels_rest = 5, // whatever the unathi version of a shitty tourist luau is
+		/datum/lore/system/phact = 3, //rich people REALLY want to go see the dumb castle
+		/datum/lore/system/rarkajar = 2
+		)
+
+/datum/lore/organization/tsc/kaleidoscope
+	name = "Kaleidoscope Cosmetics"
+	short_name = "Kaleidoscope"
+	desc = "Kaleidoscope Cosmetics is the newest Transtellar Corporation on the galactic stage, having \
+	only been officially recognised as such on the Solar Galactic Exchange (SGEX) after a merger with Genix \
+	Therapeutic Systems - who had recently acquired a large number of former Almach-based corporate assets - \
+	in the aftermath of the Almach War. Kaleidoscope products are found almost everywhere in human space, with a \
+	massive market share in personal care and textile products. Originally known for their high-quality ingredients and \
+	natural fibres obtained through genetically modified plants and animals, after the Almach War and their rise to TSC \
+	status their name became synonymous with cosmetic genetic modification, pushing the envelope - or the limit - on what \
+	the Five Points allow, and immediately coming under scrutiny from the Transgressive Technologies Commission. \
+	Kaleidoscope was one of the few TSCs to be heavily invested in the Almach Protectorate prior to the withdrawal \
+	of the Far Kingdoms occupation and the easing of Skrellian trade restrictions, and as a result has been \
+	at the forefront of the Almachi investment rush.The company markets itself as the only retailer providing \
+	\"Real\" genetic cosmetics. Popular modifications include changes in hair and eye colour, \"true permanent\" \
+	tattoos, exotic face and ear re-shaping, and \"all-natural\" anti-aging treatments. Their good fortunes and \
+	heavy presence in the Almach Protectorate has lead many to speculate that a campaign of diversification may \
+	be in Kaleidoscope's future."
+	legit = 85 // ambigiously foreign
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/transport("ITV"),
+		new /datum/lore/mission/prebuilt/medical("IMV")
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 20,
+		/datum/lore/system/sol = 10,
+		/datum/lore/system/oasis = 20,
+		/datum/lore/system/exalts_light = 20,
+		/datum/lore/system/new_seoul = 15,
+		/datum/lore/system/vounna = 15,
+		/datum/lore/system/relan = 10,
+		/datum/lore/system/love = 5,
+		/datum/lore/system/tau_ceti = 10,
+		/datum/lore/system/alpha_centauri = 5,
+		/datum/lore/system/rubicon = 5
+		)
+
+/datum/lore/organization/tsc/saare
+	name = "Stealth Assault Enterprises"
+	short_name = "SAARE" //no, i don't know why
+	acronym = "SAARE"
+	desc = "SAARE have consistently the worst reputation of any TSC. This is because they are a paramilitary group \
+	specializing in deniability and secrecy. Although publically they work in asset recovery, they have a substantiated \
+	reputation for info-theft and piracy that has lead to them butting heads with the law on more than one occasion. \
+	Nonetheless, they are an invaluable part of the Solar economy, and other TSCs and small colonial governments keep them in business."
+	headquarters = "Heaven, Alpha Centauri"
+	legit = 80 // war crimes inc
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/defense("IDV"),
+		new /datum/lore/mission/prebuilt/defense_response("IDV")
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 15,
+		/datum/lore/system/sol = 5,
+		/datum/lore/system/gavel = 15,
+		/datum/lore/system/exalts_light = 15,
+		/datum/lore/system/neon_light = 15,
+		/datum/lore/system/relan =10,
+		/datum/lore/system/alpha_centauri = 10,
+		/datum/lore/system/oasis = 10,
+		/datum/lore/system/love = 10,
+		/datum/lore/system/zhu_que = 10,
+		/datum/lore/system/el = 10,
+		/datum/lore/system/eutopia = 5,
+		/datum/lore/system/vounna = 5,
+		/datum/lore/system/raphael = 5,
+		/datum/lore/system/rubicon = 5,
+		/datum/lore/system/terminus = 3,
+		/datum/lore/system/rarkajar = 2,
+		)
+
+/datum/lore/organization/tsc/pcrc
+	name = "Proxima Centauri Risk Control"
+	short_name = "PCRC"
+	acronym = "PCRC"
+	desc = "PCRC is the softer, PR-friendlier version of SAARE, specializing in defense and security ops. PCRC is a favorite \
+	for those with more money than troops, such as certain colonial governments and other TSCs. Competition with SAARE is fairly low, \
+	as PCRC enjoys its reputation because SAARE exists. PCRC is also known for corporate bodyguarding and other low-risk security operations."
+	headquarters = "Kishar, Alpha Centauri"
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/defense("IDV"),
+		new /datum/lore/mission/prebuilt/defense_response("IDV"),
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 20,
+		/datum/lore/system/sol = 15,
+		/datum/lore/system/alpha_centauri = 20,
+		/datum/lore/system/oasis = 15,
+		/datum/lore/system/new_seoul = 15,
+		/datum/lore/system/vounna = 10,
+		/datum/lore/system/gavel = 10,
+		/datum/lore/system/tau_ceti = 10,
+		/datum/lore/system/zhu_que = 10,
+		/datum/lore/system/love = 10,
+		/datum/lore/system/eutopia = 5,
+		/datum/lore/system/el = 5,
+		/datum/lore/system/mahimahi = 5,
+		/datum/lore/system/abels_rest = 5,
+		/datum/lore/system/neon_light = 5,
+		/datum/lore/system/sidhe = 5,
+		)
+
+//TODO: add in other tscs-- grayson? aether? centauri provisions?
 
 /datum/lore/organization/tsc/independent
 	name = "Free Traders"
 	short_name = "Free Trader"
-	desc = "Though less common now than they were in the decades before the Sol Economic Organization took power, independent traders remain an important part of the galactic economy, owing in no small part to protective tarrifs established by the Free Trade Union in the late twenty-forth century."
+	desc = "Though less common now than they were in the decades before the Sol Economic Organization took power, independent traders \
+	remain an important part of the galactic economy, owing in no small part to protective tarrifs established by the Free Trade Union \
+	in the late twenty-forth century."
 	history = ""
 	work = "trade and transit"
 	headquarters = "N/A"
@@ -926,12 +1076,14 @@
 		/datum/lore/system/tau_ceti = 15,
 		/datum/lore/system/zhu_que = 15,
 		/datum/lore/system/love = 15,
+		/datum/lore/system/rubicon = 15,
 		/datum/lore/system/kess_gendar = 10,
 		/datum/lore/system/new_seoul = 10,
 		/datum/lore/system/kauqxum = 10,
 		/datum/lore/system/gavel = 10,
 		/datum/lore/system/oasis = 10,
 		/datum/lore/system/el = 10,
+		/datum/lore/system/procyon = 5,
 		/datum/lore/system/abels_rest = 5,
 		/datum/lore/system/mahimahi = 5,
 		/datum/lore/system/saint_columbia = 5,
@@ -945,7 +1097,6 @@
 		/datum/lore/system/casinis_reach = 5, //i laborously enscribed special snowflake code for an authentically immersive communard experience and then have them trading with exactly one org
 		/datum/lore/system/nyx = 5,
 		/datum/lore/system/neon_light = 3,
-		/datum/lore/system/terminus = 3,
 		/datum/lore/system/phact = 2,
 		/datum/lore/system/mesomori = 2,
 		/datum/lore/system/vounna = 2,
@@ -956,7 +1107,8 @@
 /datum/lore/organization/local_traffic
 	name = "independent traffic"
 	short_name = "local traffic"
-	desc = "Private civilian crafts make up a small portion of Vir's space traffic. While most people use corporate shuttles to get around, luxury transports and local haulers still play an important role in daily life."
+	desc = "Private civilian crafts make up a small portion of Vir's space traffic. While most people use corporate shuttles to get \
+	around, luxury transports and local haulers still play an important role in daily life."
 	history = ""
 	work = "trade and transit"
 	headquarters = "N/A"
@@ -1109,14 +1261,21 @@
 		/datum/lore/system/tau_ceti = 20,
 		/datum/lore/system/kess_gendar = 20,
 		/datum/lore/system/saint_columbia = 20,
+		/datum/lore/system/new_ohio = 20,
+		/datum/lore/system/oasis = 15,
+		/datum/lore/system/gavel = 15,
 		/datum/lore/system/jahans_post = 15,
 		/datum/lore/system/abels_rest = 15,
 		/datum/lore/system/el = 10,
 		/datum/lore/system/raphael = 10,
 		/datum/lore/system/altair = 10,
 		/datum/lore/system/zhu_que = 10,
+		/datum/lore/system/procyon = 10,
 		/datum/lore/system/love = 5,
+		/datum/lore/system/rubicon = 5,
+		/datum/lore/system/procyon = 5,
 		/datum/lore/system/isavaus_gamble = 3,
+		/datum/lore/system/terminus = 3,
 		/datum/lore/system/whythe = 2 //not in scg space but im sure they can still get at it
 		)
 
@@ -1133,6 +1292,7 @@
 		/datum/lore/system/rarkajar = 15,
 		/datum/lore/system/new_seoul = 15,
 		/datum/lore/system/relan = 15,
+		/datum/lore/system/raphael = 15, //ongoing vox crisis
 		/datum/lore/system/casinis_reach = 10, //independent single systems
 		/datum/lore/system/eutopia = 10,
 		/datum/lore/system/phact = 10,
@@ -1143,8 +1303,280 @@
 		/datum/lore/system/sidhe = 5,
 		/datum/lore/system/new_cairo = 3, //funny bugs
 		)
-//TODO add 5 Arrows, Protectorate, Pearlshield
-//maybe some other flavorful government agencies like the EIO or the GSA or SOFI
+
+/datum/lore/organization/gov/solgov/gsa
+	name = "Solar Confederate Government Galactic Survey Administration"
+	short_name = "Galactic Survey"
+	acronym = "GSA"
+	work = "surveying new worlds"
+
+	missions = list(
+		new /datum/lore/mission("SCG-E", list("tachyon assay", "planetary survey", "first-in", "cataloging", "biological survey"), ATC_SCI),
+		)
+
+	serviced = list(
+		/datum/lore/system/dummy/gsa = 1
+		)
+
+//TODO: maybe EIO, SOFI
+
+//foreign governments
+/datum/lore/organization/gov/almach
+	name = "Almach Protectorate Government"
+	short_name = "Almach Protectorate"
+	acronym = "APG"
+	desc = "Taking the place of the short-lived Almach Association, the Almach Protectorate was formed in 2564 by the \
+	Treaty of Whythe at the conclusion of the Almach War as a Skrellian collaboration government occupying the Association's \
+	former territory. As a result of the Skathari Incursion, much of the Skrellian government oversight withdrew from \
+	the Protectorate, which has practically devolved into a loose trade and military league consisting of regional governments \
+	in the Relan, Exalt's Light, and Vounna systems and outlying systems. It is noteworthy for strong Mercurial and transhumanist \
+	sentiments resulting in a markedly different culture from that accepted in SolGov, and for extreme levels of economic and political instability."
+	history = ""
+	work = "slowly imploding"
+	headquarters = "Carter Interstellar Spaceport, Relan"
+	motto = "" //they really should have one tho
+	legit = 75 // hahaha no
+
+	ship_names = list(
+	"Absolutely No You-Know-What",//shelfican style names could probably be pulled from the Morpheus list at runtime
+	"Just Read The Instructions",
+	"Normal Ship Name",
+	"I Thought He Was With You",
+	"We Didn't Do It!",
+	"God-Eater", //Angessian style names.
+	"Hands of Many Skills",
+	"Eternity's Striving",
+	"Castle of Water", //"normal" / relani style names could be drawn from the default ship name list at runtime... except that a bunch of those are kind of Icarus-y and would be weird
+	"Star Rat",
+	"Fu Xing",
+	"Haste",
+	"City of Dreams",
+	"Light Streaming Through Interminable Branches", //skrellian style names pulled from the Vey-Med list
+	"Smoke Brought Up From A Terrible Fire",
+	"King Xae'uoque",
+	"Memory of Kel'xi",
+	"Xi'Kroo's Herald"
+	)
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/diplomatic("APG"), //they don't really do foreign aid or investment or joint maneuvers so it's basically just this
+		new /datum/lore/mission/("APG", list("data exchange", "joint research", "expert consultation"), ATC_SCI)
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 10,
+		/datum/lore/system/sol = 20,
+		/datum/lore/system/new_seoul = 15,
+		/datum/lore/system/rarkajar = 10,
+		/datum/lore/system/neon_light = 10,
+		/datum/lore/system/oasis = 5,
+		/datum/lore/system/kess_gendar = 5,
+		/datum/lore/system/tau_ceti = 5,
+		/datum/lore/system/el = 5,
+		/datum/lore/system/sidhe = 5,
+		/datum/lore/system/casinis_reach = 5,
+		/datum/lore/system/natuna = 3,
+		/datum/lore/system/qerrvalis = 2,
+		/datum/lore/system/love = 2 //zmr
+		)
+
+/datum/lore/organization/gov/five_arrows
+	name = "The Five Arrows"
+	short_name = "Five Arrows"
+	acronym = "FA"
+	desc = "The Five Arrows is an independent human governmental entity consisting of five star systems which seceeded from the Solar \
+	Confederate Government in 2570, following perceived failures following the Skathari Incursion. They were later joined by a remote Skrell \
+	colony world seeking better regional protection. The formation of this state led to the creation of the SCG's Regional Blocs in an effort \
+	to prevent additional secessions."
+	history = ""
+	work = "taking their ball and going home"
+	headquarters = "New Seoul"
+	motto = ""
+	legit = 80 // better than almach but still Foreign
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/medical("FA-MV"),
+		new /datum/lore/mission/("FA-RV", list("joint training", "combined operation", "miltary exercise"), ATC_DEF),
+		new /datum/lore/mission/("FA-SV", list("data exchange", "joint research", "expert consultation"), ATC_SCI),
+		new /datum/lore/mission/("FA-TV", list("transport", "passenger transport", "VIP transport", "refugee transport"), ATC_TRANS),
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 10,
+		/datum/lore/system/new_seoul = 25,
+		/datum/lore/system/kauqxum = 20,
+		/datum/lore/system/mahimahi = 20,
+		/datum/lore/system/sidhe = 15,
+		/datum/lore/system/oasis = 15,
+		/datum/lore/system/el = 15,
+		/datum/lore/system/natuna = 10
+		)
+
+/datum/lore/organization/gov/five_arrows/diplo_corps
+	missions = list(
+		new /datum/lore/mission/prebuilt/diplomatic("FA-D")
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 10,
+		/datum/lore/system/sol = 15,
+		/datum/lore/system/natuna = 10,
+		/datum/lore/system/qerrvalis = 5,
+		/datum/lore/system/rarkajar = 5,
+		/datum/lore/system/love = 5
+		)
+
+// TODO: pearlshield and skrell
+
+/datum/lore/organization/gov/hegemony
+	name = "Moghes Hegemony"
+	short_name = "Hegemony"
+	desc = " The Unity currently control the majority of Unathi space, under a government known as the Moghes Hegemony, \
+	after the homeworld of the Unathi. Clans are run by the oldest members of each of the families in said clan; the Unathi \
+	have great respect for the wisdom of their Elders. Day to day matters are handled by the Circle of Elders, but the official \
+	leader of a clan is titled Grand Elder, and they are elected roughly every 10 Earth years from this Circle. In many respects \
+	the Grand Elder is little more than prestigious figurehead position, with their obligations to the clan overriding their \
+	obligations to act in the interests of their family, but they do have the final say in all tied votes on the Circle. \
+	The Hegemony is comprised almost entirely of Unity Clans." //yes, this is literally all we have on them
+	history = ""
+	work = "being scary"
+	headquarters = "Moghes, Uueoa-Esa"
+	legit = 70 // we did it we found something more sus than Morpheus
+
+	ship_names = list(
+		"Trickster's Guile",
+		"The Innocence of Teeth Upon the Necks of the Unworthy",
+		"Heavy Hearts and Steady Hands ",
+		"Reclaiming What Was Never Lost",
+		"Illuminator's Humor",
+		"Bared Neck and Claw",
+		"The Devotion of Holding Together What Will Never Unify",
+		"Bright Eyes Watching"
+		)
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/diplomatic("HEG-DV") //while joint operations etc happen theyre rare enough to be the focus of an ongoing arc
+		)
+
+	serviced = list(
+		/datum/lore/system/sol = 20,
+		/datum/lore/system/new_seoul = 15,
+		/datum/lore/system/relan = 15,
+		/datum/lore/system/vounna = 5,
+		/datum/lore/system/exalts_light = 5,
+		/datum/lore/system/rarkajar = 5,
+		/datum/lore/system/qerrvalis = 5 //conspiciously missing from vir, love, and natuna. deadbeat dad ass space empire
+		)
+
+
+/datum/lore/organization/gov/zaddat
+
+	ship_names = list(
+		"Gentle",
+		"Fortunate",
+		"Willing",
+		"Enduring",
+		"Careful",
+		"Broad",
+		"Necessary",
+		"Ancient",
+		"Equal",
+		"Perfect",
+		"Seperate",
+		"Tested",
+		"Ceaseless",
+		"Frequent",
+		"Holy",
+		"Incredible",
+		"Brave",
+		"Magnificent",
+		"Distant",
+		"Incandescent"
+		)
+
+/datum/lore/organization/gov/zaddat/zsac
+	name = "Zaddat Special Autonomous Consortium"
+	short_name = "ZSAC"
+	acronym = "ZSAC"
+	desc = "The ZSAC is a \"dependent state\" of SolGov, a unique legal status codified during the Age of Seccession \
+	but never actually applied until the ZSAC formed in 2570. Under this status, the ZSAC is bound to confederation \
+	law but not to the law of any individual member state. They also retain first rights to any habitable world discovered \
+	by their fleet, although this provision remains strictly academic. They are expected to provide for their own defense, \
+	which they do primarily through contracts with Solar mercenaries.The ZSAC is the most \"traditional\" of the blocs in many \
+	senses, retaining Spacer Guild leadership and seeing itself as the Spacer Fleet's only true successor. The traditional \
+	migrant labor-based economic system remains in place as well, although modern difficulties in travel have lead the \
+	organization to increasingly favor long-duration contracts. ZSAC colonies are almost universally overcrowded, with any \
+	amount of personal space being a hard-won reward for many grueling contracts. The Consortium lacks any formal religion, and \
+	a casual sort of \"secular Unity\" predominates. The ZSAC includes most Colonies based out of the systems of Vir, Oasis, \
+	New Ohio, and Saint Columbia, and has some members within the Core Worlds."
+	history = ""
+	work = "try and find a new planet so we don't all die in space"
+	headquarters = "Colony Bright, Vir"
+	legit = 85 // bugs
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/medical("Colony"),
+		new /datum/lore/mission/prebuilt/transport("Colony"),
+		new /datum/lore/mission/prebuilt/freight("Colony"),
+		new /datum/lore/mission/prebuilt/industrial("Colony"),
+		new /datum/lore/mission/prebuilt/diplomatic("Colony"),
+		new /datum/lore/mission/prebuilt/salvage("Colony"),
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 20,
+		/datum/lore/system/sol = 5,
+		/datum/lore/system/gavel = 15,
+		/datum/lore/system/oasis = 15,
+		/datum/lore/system/new_ohio = 15,
+		/datum/lore/system/kess_gendar = 10,
+		/datum/lore/system/saint_columbia = 10,
+		/datum/lore/system/alpha_centauri = 5,
+		/datum/lore/system/zhu_que = 5,
+		/datum/lore/system/kauqxum = 5,
+		/datum/lore/system/new_seoul = 5,
+		)
+
+/datum/lore/organization/gov/zaddat/zmr
+	name = "Zaddat Migratory Republic"
+	short_name = "ZMR"
+	acronym = "ZMR"
+	desc = "The ZMR is a fully independent nation lead by the Noble Guild, though subject to a number of unequal treaties with SolGov. \
+	These include compliance to Solar technological policy, a requirement to cooperate with Solar authorities investigating confederation \
+	crimes, and one-sided tariffs. They have an independent fleet composed largely of militia-style converted civilian vessels and run by \
+	the War Guild. Though still operating within the traditional Guild system, the ZMR rejects many of the Spacer Fleet's institutions, \
+	including the Unity and Spacer Guild leadership, with many zaddat viewing a full return to the ancient Monarchies an inevitability. \
+	Popular rhetoric on ZMR Colonies often veers into the nationalistic, with leadership calling for a rejection of all Hegemony-era \
+	limitations and some demagogues decrying SolGov's protectionism. While there are fewer Zaddat per Colony than in the ZSAC, the \
+	overcrowding problem is nearly as bad, as much of the Colonies' habitible space has been turned into production floors and much effort \
+	has gone into arming ships instead of building them.The ZMR associates closely with many of the Inner Bowl's legally gray elements, and \
+	ZMR vessels are banned from entering the Core Worlds and parts of the Golden Crescent. Their capital is the Colony Daring in the Love system."
+	history = ""
+	work = "be a fucked up military government"
+	headquarters = "Colony Daring, Love"
+	legit = 80 //extra shady bugs
+
+	missions = list(
+		new /datum/lore/mission/prebuilt/medical("Colony"),
+		new /datum/lore/mission/prebuilt/transport("Colony"),
+		new /datum/lore/mission/prebuilt/freight("Colony"),
+		new /datum/lore/mission/prebuilt/industrial("Colony"),
+		new /datum/lore/mission/prebuilt/diplomatic("Colony"),
+		new /datum/lore/mission/prebuilt/salvage("Colony"),
+		new /datum/lore/mission/prebuilt/defense("IDV"), // colonies do not get into shooting wars
+		)
+
+	serviced = list(
+		/datum/lore/system/vir = 10,
+		/datum/lore/system/sol = 5,
+		/datum/lore/system/love = 20,
+		/datum/lore/system/zhu_que = 15,
+		/datum/lore/system/procyon = 10,
+		/datum/lore/system/altair = 5,
+		/datum/lore/system/gavel = 5,
+		/datum/lore/system/oasis = 5,
+		/datum/lore/system/kess_gendar = 5
+		)
 
 // Military
 
