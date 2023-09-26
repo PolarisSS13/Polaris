@@ -9,8 +9,6 @@
 	max_heat_protection_temperature = ARMOR_MAX_HEAT_PROTECTION_TEMPERATURE
 	siemens_coefficient = 0.6
 
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_NABBER_MONARCH)
-
 /obj/item/clothing/suit/mob_can_equip(var/mob/living/carbon/human/H, slot, disable_warning = FALSE)
 	if(..()) //This will only run if no other problems occurred when equipping.
 		for(var/obj/item/clothing/I in list(H.gloves, H.shoes))

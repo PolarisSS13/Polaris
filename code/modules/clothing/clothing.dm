@@ -191,7 +191,9 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	throwforce = 2
 	slot_flags = SLOT_EARS
 	sprite_sheets = list(
-		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi'
+		SPECIES_TESHARI = 'icons/mob/species/teshari/ears.dmi',
+		SPECIES_NABBER = 'icons/mob/species/nabber/ears.dmi',
+		SPECIES_NABBER_MONARCH = 'icons/mob/species/nabber/monarch/ears.dmi'
 	)
 
 /obj/item/clothing/ears/attack_hand(mob/user as mob)
