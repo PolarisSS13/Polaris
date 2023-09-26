@@ -50,6 +50,10 @@
 	burn_mod =  1.35
 	radiation_mod = 0.5
 	pain_mod = 0.5
+	flash_mod = 1.5
+
+	darksight = 5
+	nocturnal_sight = TRUE
 
 	reagent_tag =	IS_INSECTOID
 
@@ -69,6 +73,18 @@
 	heat_level_1 = 410 //Default 360 - Higher is better
 	heat_level_2 = 440 //Default 400
 	heat_level_3 = 800 //Default 1000
+
+	heat_discomfort_strings = list(
+		"Your limbs flush.",
+		"You feel uncomfortably warm.",
+		"Your carapace creaks in the heat."
+		)
+
+	cold_discomfort_strings = list(
+		"You feel chilly.",
+		"You shiver suddenly.",
+		"Your carapace tightens in the cold."
+		)
 
 	flags = NO_SCAN | NO_SLIP | NO_MINOR_CUT
 	appearance_flags = HAS_SKIN_COLOR | HAS_EYE_COLOR | HAS_HAIR_COLOR
@@ -101,13 +117,15 @@
 		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid/nabber),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid/nabber),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid/nabber),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid/nabber)
 		)
 
 	unarmed_types = list(/datum/unarmed_attack/nabber)
+
+	ambiguous_genders = TRUE
 
 	descriptors = list(
 		/datum/mob_descriptor/height = 3,
@@ -129,7 +147,7 @@
 	return "haemolymph"
 
 /datum/species/nabber/can_overcome_gravity(mob/living/carbon/human/H)
-	if(H.stat == CONSCIOUS)
+	if(H.stat == CONSCIOUS && !H.back)	// Must be awake, and not wearing anything over their back.
 		var/obj/item/organ/external/chest/Torso = H.organs_by_name[BP_TORSO]
 		if(!Torso.is_broken() || !(Torso.is_bruised() && prob(5)))
 			var/datum/gas_mixture/mixture = H.loc.return_air()
@@ -142,7 +160,7 @@
 					if(!T.CanZPass(H, DOWN) || !below.CanZPass(H, DOWN))
 						return TRUE
 
-	return FALSE
+	return ..(H)
 
 /datum/species/nabber/handle_environment_special(mob/living/carbon/human/H)
 	if(!H.on_fire && H.fire_stacks < 2)
@@ -151,7 +169,7 @@
 
 // Nabbers will only fall when there isn't enough air pressure for them to keep themselves aloft.
 /datum/species/nabber/can_fall(mob/living/carbon/human/H)
-	if(H.stat == CONSCIOUS)
+	if(H.stat == CONSCIOUS && !H.back)	// Awake, and not wearing anything on the back.
 		var/obj/item/organ/external/chest/Torso = H.organs_by_name[BP_TORSO]
 		if(!Torso.is_broken() || !(Torso.is_bruised() && prob(5)))
 			var/datum/gas_mixture/mixture = H.loc.return_air()
@@ -170,8 +188,7 @@
 
 // Even when nabbers do fall, if there's enough air pressure they won't hurt themselves.
 /datum/species/nabber/handle_falling(mob/living/carbon/human/H, turf/landing, damage_min, damage_max, silent, planetary)
-
-	if(H.stat == CONSCIOUS)
+	if(H.stat == CONSCIOUS && !H.back)	// Awake, and not wearing anything on the back.
 		var/datum/gas_mixture/mixture = H.loc.return_air()
 
 		var/turf/T = GetBelow(H.loc)
@@ -350,10 +367,16 @@
 		BP_L_HAND = list("path" = /obj/item/organ/external/hand/insectoid),
 		BP_R_ARM =  list("path" = /obj/item/organ/external/arm/right/insectoid),
 		BP_R_HAND = list("path" = /obj/item/organ/external/hand/right/insectoid),
-		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid),
-		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid),
-		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid),
-		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid)
+		BP_R_LEG =  list("path" = /obj/item/organ/external/leg/right/insectoid/nabber),
+		BP_L_LEG =  list("path" = /obj/item/organ/external/leg/insectoid/nabber),
+		BP_L_FOOT = list("path" = /obj/item/organ/external/foot/insectoid/nabber),
+		BP_R_FOOT = list("path" = /obj/item/organ/external/foot/right/insectoid/nabber)
+		)
+
+	descriptors = list(
+		/datum/mob_descriptor/height = 0,
+		/datum/mob_descriptor/build = -1,
+		/datum/mob_descriptor/body_length = -2
 		)
 
 /datum/species/nabber/queen/New()

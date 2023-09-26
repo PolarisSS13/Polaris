@@ -44,6 +44,11 @@
 /mob/proc/get_ear_protection()
 	return 0
 
+// Returns 0 to 1, based on turf light level. 1 is fullbright.
+/mob/proc/get_ambient_lumcount()
+	var/turf/T = get_turf(src)
+	return T.get_lumcount()
+
 /mob/proc/break_cloak()
 	return
 

@@ -15,21 +15,21 @@
 	encased = "carapace"
 
 /obj/item/organ/external/leg/insectoid
-	name = "left tail side"
+	name = "left hindlimb"
 	icon_position = LEFT
 	encased = "carapace"
 
 /obj/item/organ/external/leg/right/insectoid
-	name = "right tail side"
+	name = "right hindlimb"
 	encased = "carapace"
 
 /obj/item/organ/external/foot/insectoid
-	name = "left tail tip"
+	name = "left tarsus"
 	icon_position = LEFT
 	encased = "carapace"
 
 /obj/item/organ/external/foot/right/insectoid
-	name = "right tail tip"
+	name = "right tarsus"
 	icon_position = RIGHT
 	encased = "carapace"
 

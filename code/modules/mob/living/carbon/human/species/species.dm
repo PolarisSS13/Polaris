@@ -50,6 +50,7 @@
 	var/show_ssd = "fast asleep"
 	var/virus_immune
 	var/short_sighted										// Permanent weldervision.
+	var/nocturnal_sight										// Weldervision, only in light.
 	var/blood_name = "blood"								// Name for the species' blood.
 	var/blood_volume = 560									// Initial blood volume.
 	var/bloodloss_rate = 1									// Multiplier for how fast a species bleeds out. Higher = Faster
@@ -623,4 +624,3 @@
 
 	playsound(target, 'sound/weapons/punchmiss.ogg', 25, 1, -1)
 	target.visible_message("<font color='red'> <B>[attacker] attempted to disarm [target]!</B></font>")
-
