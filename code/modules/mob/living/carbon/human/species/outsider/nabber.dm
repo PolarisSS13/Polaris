@@ -139,7 +139,8 @@
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = 8),  "[EAST]" = list("x" = 0, "y" = 9),  "[SOUTH]" = list("x" = 0, "y" = 9),  "[WEST]" = list("x" = 0, "y" = 9)),
 		slot_back_str =    list("[NORTH]" = list("x" = 0, "y" = 7),  "[EAST]" = list("x" = 0, "y" = 8),  "[SOUTH]" = list("x" = 0, "y" = 8),  "[WEST]" = list("x" = 0, "y" = 8)),
 		slot_belt_str =    list("[NORTH]" = list("x" = 0, "y" = 0),  "[EAST]" = list("x" = 8, "y" = 0),  "[SOUTH]" = list("x" = 0, "y" = 0),  "[WEST]" = list("x" = -8, "y" = 0)),
-		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 3, "y" = 10), "[SOUTH]" = list("x" = 0, "y" = 9), "[WEST]" = list("x" = -3, "y" = 10))
+		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 3, "y" = 10), "[SOUTH]" = list("x" = 0, "y" = 9), "[WEST]" = list("x" = -3, "y" = 10)),
+		slot_wear_mask_str = list("[NORTH]" = list("x" = 0, "y" = 10), "[EAST]" = list("x" = 3, "y" = 9), "[SOUTH]" = list("x" = 0, "y" = 9), "[WEST]" = list("x" = -3, "y" = 9))
 	)
 	..()
 
@@ -385,5 +386,6 @@
 		slot_head_str =    list("[NORTH]" = list("x" = 0, "y" = -6),  "[EAST]" = list("x" = 4, "y" = -6),  "[SOUTH]" = list("x" = 0, "y" = -6),  "[WEST]" = list("x" = -4, "y" = -6)),
 		slot_back_str =    list("[NORTH]" = list("x" = 0, "y" = -4),  "[EAST]" = list("x" = 3, "y" = -4),  "[SOUTH]" = list("x" = 0, "y" = -4),  "[WEST]" = list("x" = -3, "y" = -4)),
 		slot_belt_str =    list("[NORTH]" = list("x" = 0, "y" = -2),  "[EAST]" = list("x" = 8, "y" = -2),  "[SOUTH]" = list("x" = 0, "y" = -2),  "[WEST]" = list("x" = -8, "y" = -2)),
-		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = -3), "[EAST]" = list("x" = 3, "y" = -3), "[SOUTH]" = list("x" = 0, "y" = -3), "[WEST]" = list("x" = -3, "y" = -3))
+		slot_glasses_str = list("[NORTH]" = list("x" = 0, "y" = -3), "[EAST]" = list("x" = 3, "y" = -3), "[SOUTH]" = list("x" = 0, "y" = -3), "[WEST]" = list("x" = -3, "y" = -3)),
+		slot_wear_mask_str = list("[NORTH]" = list("x" = 0, "y" = -3), "[EAST]" = list("x" = 3, "y" = -3), "[SOUTH]" = list("x" = 0, "y" = -3), "[WEST]" = list("x" = -3, "y" = -3))
 	)

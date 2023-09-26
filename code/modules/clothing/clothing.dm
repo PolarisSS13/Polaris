@@ -568,8 +568,6 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	body_parts_covered = FACE|EYES
 	blood_sprite_state = "maskblood"
 
-	species_restricted = list("exclude", SPECIES_NABBER, SPECIES_NABBER_MONARCH)
-
 	sprite_sheets = list(
 		SPECIES_TESHARI = 'icons/mob/species/teshari/masks.dmi',
 		SPECIES_VOX = 'icons/mob/species/vox/masks.dmi',
