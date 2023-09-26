@@ -690,3 +690,6 @@ Drinks Data
 
 /datum/reagent/ethanol/sirisaii_pole
 	glass_icon_state = "sirisaii_pole"
+
+/datum/reagent/drink/meatshake
+	glass_icon_state = "meatshake"

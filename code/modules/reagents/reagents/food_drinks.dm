@@ -4716,3 +4716,13 @@
 	glass_desc = "Kirani jelly mixed with soda water into a more drinkable form, sweet enough to not even need extra sugar added."
 	glass_special = list(DRINK_FIZZ)
 	allergen_type = ALLERGEN_FRUIT //Made with kirani
+
+/datum/reagent/drink/meatshake
+	name = "Meatshake"
+	id = "meatshake"
+	color = "#bc1e00"
+	description = "A drink made from blended meat and cream, invented by teshari mixologists."
+	taste_description = "creamy liquified meat"
+	glass_name = "meatshake"
+	glass_desc = "A drink made from blended meat and cream, invented by some teshari mixologists."
+	allergen_type = ALLERGEN_MEAT|ALLERGEN_DAIRY //made with meat and cream

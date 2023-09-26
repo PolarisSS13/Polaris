@@ -1300,3 +1300,10 @@
 	result = "sirisaii_pole"
 	required_reagents = list("kirani_cider" = 1, "gauli_juice" = 1, "ice" = 1)
 	result_amount = 3
+
+/decl/chemical_reaction/instant/drinks/meatshake
+	name = "Meatshake"
+	id = "meatshake"
+	result = "meatshake"
+	required_reagents = list("cream" = 1, "protein" = 1, "water" = 1)
+	result_amount = 3
