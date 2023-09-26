@@ -4721,8 +4721,8 @@
 	name = "Meatshake"
 	id = "meatshake"
 	color = "#bc1e00"
-	description = "A drink made from blended meat and cream, invented by teshari mixologists."
+	description = "An incredibly straightforward slurry of meat and cream. Refreshing, nutritious, and affordable - if you have the stomach for it."
 	taste_description = "creamy liquified meat"
 	glass_name = "meatshake"
-	glass_desc = "A drink made from blended meat and cream, invented by some teshari mixologists."
+	glass_desc = "An incredibly straightforward slurry of meat and cream. Refreshing, nutritious, and affordable - if you have the stomach for it."
 	allergen_type = ALLERGEN_MEAT|ALLERGEN_DAIRY //made with meat and cream
