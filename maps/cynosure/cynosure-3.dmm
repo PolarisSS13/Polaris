@@ -313,8 +313,9 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
-/obj/structure/sign/calendar{
-	pixel_x = 32
+/obj/item/radio/intercom{
+	dir = 4;
+	pixel_x = 21
 	},
 /turf/simulated/floor/wood,
 /area/unionoffice)
@@ -10791,12 +10792,7 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 9
 	},
-/obj/item/sticky_pad/poster/yellow{
-	pixel_x = -1
-	},
-/obj/item/sticky_pad/poster/blue{
-	pixel_y = 8
-	},
+/obj/item/sticky_pad/poster,
 /turf/simulated/floor/tiled,
 /area/surface/station/storage/art)
 "gTr" = (
@@ -34525,9 +34521,8 @@
 /area/surface/station/hallway/primary/secondfloor/east)
 "wvP" = (
 /obj/effect/zone_divider,
-/obj/item/radio/intercom{
-	dir = 4;
-	pixel_x = 21
+/obj/structure/sign/calendar{
+	pixel_x = 32
 	},
 /turf/simulated/floor/wood,
 /area/unionoffice)
