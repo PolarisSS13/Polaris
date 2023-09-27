@@ -1,5 +1,5 @@
 /obj/item/sticky_pad/poster
-	name = "adhesive poster pad"
+	name = "adhesive poster stack"
 	desc = "A stack of A3 papers with adhesive strips for attaching to walls."
 	icon = 'icons/obj/stickyposter.dmi'
 	color = COLOR_WHITE
