@@ -18,6 +18,14 @@
 	display_name = "greatcoat"
 	path = /obj/item/clothing/suit/greatcoat
 
+/datum/gear/suit/greatcoat_white
+	display_name = "greatcoat, colorable"
+	path = /obj/item/clothing/suit/greatcoat/white
+
+/datum/gear/suit/greatcoat_white/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/suit/leather_coat
 	display_name = "leather coat"
 	path = /obj/item/clothing/suit/leathercoat
