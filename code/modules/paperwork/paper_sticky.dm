@@ -7,6 +7,7 @@
 	icon_state = "pad_full"
 	item_state = "paper"
 	w_class = ITEMSIZE_SMALL
+	var/papername = "sticky note"
 
 	var/papers = 50
 	var/written_text
@@ -50,7 +51,7 @@
 /obj/item/sticky_pad/examine(var/mob/user)
 	. = ..()
 	if(.)
-		to_chat(user, SPAN_NOTICE("It has [papers] [name]\s left in the stack."))
+		to_chat(user, SPAN_NOTICE("It has [papers] [papername]\s left in the stack."))
 
 /obj/item/sticky_pad/attack_hand(var/mob/user)
 	var/obj/item/paper/paper = new paper_type(get_turf(src))

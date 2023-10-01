@@ -4,8 +4,9 @@
 	icon = 'icons/obj/stickyposter.dmi'
 	color = COLOR_WHITE
 	icon_state = "poster_full"
-	description_info = "Click to remove a sticky poster from the pile. Click-drag to yourself to pick up the stack. Sticky posters stuck to surfaces/objects will persist for 50 rounds."
+	description_info = "Click to remove an adhesive poster from the pile. Click-drag to yourself to pick up the stack. Sticky posters stuck to surfaces/objects will persist for 50 rounds."
 	paper_type = /obj/item/paper/sticky/poster
+	papername = "adhesive poster"
 
 /obj/item/sticky_pad/poster/update_icon()
 	if(papers <= 15)
