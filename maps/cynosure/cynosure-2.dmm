@@ -36378,10 +36378,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/ai/upload)
-"qbj" = (
-/obj/turbolift_map_holder/cynosure/center,
-/turf/unsimulated/mask,
-/area/surface/station/hallway/primary/groundfloor/east)
 "qbC" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/grille,
@@ -52932,8 +52928,8 @@
 	dir = 8
 	},
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin" = 10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin" = 10);
 	volume = 10
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -53161,13 +53157,13 @@
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/pill_bottle/spaceacillin,
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin" = 10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin" = 10);
 	volume = 10
 	},
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin" = 10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin" = 10);
 	volume = 10
 	},
 /turf/simulated/floor/wood,
@@ -91543,7 +91539,7 @@ fRF
 mOM
 mOM
 mOM
-qbj
+mOM
 fRF
 lQW
 ekU

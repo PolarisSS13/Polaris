@@ -21939,8 +21939,8 @@
 "olt" = (
 /obj/structure/bed/chair/wood/pine{
 	color = "#3a6ecf";
-	name = "undersized chair";
-	desc = "Damn, that's uncomfortable..."
+	desc = "Damn, that's uncomfortable...";
+	name = "undersized chair"
 	},
 /turf/simulated/floor/wood,
 /area/unionoffice)
@@ -30628,8 +30628,8 @@
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/pill_bottle/spaceacillin,
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin"=10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin"=10);
 	volume = 10
 	},
 /turf/simulated/floor/tiled,

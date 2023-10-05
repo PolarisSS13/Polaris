@@ -281,7 +281,7 @@
 	specialfunctions = 4
 	},
 /turf/simulated/floor/plating,
-/area/surface/station/construction/elevator)
+/area/surface/station/hallway/primary/bmt/east)
 "aG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1355,8 +1355,8 @@
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/south)
 "cN" = (
-/turf/simulated/wall/concrete,
-/area/surface/station/construction/elevator)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/surface/station/hallway/primary/bmt/east)
 "cO" = (
 /turf/simulated/mineral/ignore_mapgen/sif,
 /area/surface/cave/unexplored/deep)
@@ -1836,7 +1836,7 @@
 /area/surface/station/maintenance/storage/emergency/bmtswest)
 "dP" = (
 /turf/simulated/wall/r_concrete,
-/area/surface/station/construction/elevator)
+/area/surface/station/hallway/primary/bmt/east)
 "dQ" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/borderfloorwhite{
@@ -4031,10 +4031,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/effect/floor_decal/borderfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green/border{
+/obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -4976,7 +4976,7 @@
 /area/surface/station/engineering/hallway/bmt)
 "kr" = (
 /turf/simulated/floor/plating,
-/area/surface/station/construction/elevator)
+/area/surface/station/hallway/primary/bmt/east)
 "ks" = (
 /turf/simulated/wall/concrete,
 /area/surface/station/hallway/secondary/bmt/eaststairwell)
@@ -18672,14 +18672,8 @@
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/storage/emergency/bmtswest)
 "MK" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/borderfloor/corner{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/green/bordercorner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
+/obj/turbolift_map_holder/cynosure/center,
+/turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/bmt/east)
 "ML" = (
 /obj/machinery/conveyor{
@@ -61144,7 +61138,7 @@ Ur
 Rh
 Rh
 iA
-MK
+hs
 Qz
 QZ
 rP
@@ -61399,10 +61393,10 @@ HS
 dT
 pi
 Ai
+eE
 TQ
 TQ
 TQ
-IO
 TQ
 TQ
 YR
@@ -61912,7 +61906,7 @@ dP
 kr
 kr
 kr
-kr
+MK
 dP
 IO
 IO
