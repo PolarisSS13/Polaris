@@ -1370,7 +1370,7 @@
 	name = "lift (basement)"
 	lift_floor_label = "Basement"
 	lift_floor_name = "Basement"
-	lift_announce_str = "Arriving at Basement: Mining.Storage. Toxins. Vault."
+	lift_announce_str = "Arriving at Basement: Mining. Storage. Toxins. Vault."
 	base_turf = /turf/simulated/floor
 
 /area/turbolift/west_gnd
@@ -1411,7 +1411,7 @@
 	name = "lift (basement)"
 	lift_floor_label = "Basement"
 	lift_floor_name = "Basement"
-	lift_announce_str = "Arriving at Basement: Mining.Storage. Toxins. Vault."
+	lift_announce_str = "Arriving at Basement: Mining. Storage. Toxins. Vault."
 	base_turf = /turf/simulated/floor
 
 /area/turbolift/center_gnd
