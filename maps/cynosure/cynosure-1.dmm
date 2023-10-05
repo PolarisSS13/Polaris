@@ -5216,7 +5216,7 @@
 	},
 /obj/machinery/door/airlock/research{
 	name = "Long Term Storage";
-	req_one_access = list(65)
+	req_one_access = list(47)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/research/xenoarcheology/longtermstorage)
@@ -23244,6 +23244,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
+"VV" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/research{
+	name = "Long Term Storage";
+	req_one_access = list(47)
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/surface/outpost/research/xenoarcheology/longtermstorage)
 "VW" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -54627,7 +54635,7 @@ iz
 Qw
 ux
 rw
-Hv
+VV
 jz
 Wc
 kL
