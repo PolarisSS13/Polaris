@@ -23,6 +23,8 @@
 	icon_living = "pit"
 	icon_dead = "pit_dead"
 
+	ai_holder_type = /datum/ai_holder/simple_mob/xray/demolishing
+
 	maxHealth = 175
 	health = 175
 
