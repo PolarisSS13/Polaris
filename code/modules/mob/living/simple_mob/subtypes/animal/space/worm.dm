@@ -31,7 +31,7 @@
 
 	organ_names = /decl/mob_organ_names/wormlike
 
-	ai_holder_type = null
+	ai_holder_type = /datum/ai_holder/simple_mob/inert
 
 	mob_class = MOB_CLASS_ABERRATION	// It's a monster.
 
