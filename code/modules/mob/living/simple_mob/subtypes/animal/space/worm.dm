@@ -623,59 +623,9 @@
 	..()
 
 /*
- * Bluespace Worm
- */
-
-/mob/living/simple_mob/animal/space/space_worm/head/skath
-	name = "bluespace worm cephalon"
-	desc = "The cephalon of a bluespace worm"
-	icon = 'icons/mob/skathworm.dmi'
-
-	tt_desc = "U Tyranochaetus skathari"
-
-	mob_class = MOB_CLASS_ABERRATION
-
-	internal_organs = list(\
-		/obj/item/organ/internal/heart/grey,\
-		/obj/item/organ/internal/intestine/xeno,\
-		/obj/item/organ/internal/lungs/grey,\
-		/obj/item/organ/internal/xenos/plasmavessel,\
-		/obj/item/organ/internal/xenos/acidgland,\
-		/obj/item/organ/internal/immunehub,\
-		/obj/item/organ/internal/xenos/hivenode,\
-		/obj/item/organ/internal/brain/xeno\
-		)
-
-	butchery_loot = list(\
-		/obj/item/stack/animalhide/xeno = 3\
-		)
-
-	ai_holder_type = /datum/ai_holder/simple_mob/destructive/worm
-
-	severed_head_type = /mob/living/simple_mob/animal/space/space_worm/head/skath/severed
-	segment_type = /mob/living/simple_mob/animal/space/space_worm/skath
-
-	digested_sheet = /obj/item/stack/material/magmellite
-
-/mob/living/simple_mob/animal/space/space_worm/head/skath/severed
-	segment_count = 0
-	severed = TRUE
-
-/mob/living/simple_mob/animal/space/space_worm/head/skath/short
-	segment_count = 3
-
-/mob/living/simple_mob/animal/space/space_worm/head/skath/long
-	segment_count = 10
-
-/mob/living/simple_mob/animal/space/space_worm/skath
-	name = "bluespace worm"
-	butchery_loot = list(\
-		/obj/item/stack/animalhide/xeno = 3\
-		)
-
-/*
  * AI
  */
+
 /datum/ai_holder/simple_mob/destructive/worm
 	can_demolish = TRUE
 	ignore_opacity = TRUE
