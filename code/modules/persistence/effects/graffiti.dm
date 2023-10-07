@@ -16,6 +16,12 @@
 			return FALSE
 	return TRUE
 
+/datum/persistent/graffiti/CheckTokenSanity(var/list/token)
+	// byond's json implementation is "questionable", and uses types as keys and values without quotes sometimes even though they aren't valid json
+	token["pixel_x"] = istext(token["pixel_x"]) ? text2num(token["pixel_x"]) : token["pixel_x"]
+	token["pixel_y"] = istext(token["pixel_y"]) ? text2num(token["pixel_y"]) : token["pixel_y"]
+	return ..() && isnum(token["pixel_x"]) && isnum(token["pixel_y"])
+
 /datum/persistent/graffiti/CreateEntryInstance(var/turf/creating, var/list/token)
 	var/obj/effect/decal/writing/inst = new /obj/effect/decal/writing(creating, token["age"]+1, token["message"], token["author"])
 	if(token["icon_state"])
