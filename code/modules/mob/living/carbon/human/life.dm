@@ -1420,14 +1420,6 @@
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
 
-		if(seer==1)
-			var/obj/effect/rune/R = locate() in loc
-			if(R && R.word1 == cultwords["see"] && R.word2 == cultwords["hell"] && R.word3 == cultwords["join"])
-				see_invisible = SEE_INVISIBLE_CULT
-			else
-				see_invisible = see_invisible_default
-				seer = 0
-
 		if(!seedarkness)
 			sight = species.get_vision_flags(src)
 			see_in_dark = 8
@@ -1453,6 +1445,9 @@
 			sight |= SEE_TURFS|SEE_MOBS|SEE_OBJS
 			see_in_dark = 8
 			if(!druggy)		see_invisible = SEE_INVISIBLE_LEVEL_TWO
+
+		if (seer)
+			see_invisible = SEE_INVISIBLE_OBSERVER
 
 		for(var/datum/modifier/M in modifiers)
 			if(!isnull(M.vision_flags))

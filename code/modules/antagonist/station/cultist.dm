@@ -31,16 +31,38 @@ var/global/datum/antagonist/cultist/cult
 	initial_spawn_target = 6
 	antaghud_indicator = "hudcultist"
 
-	var/allow_narsie = 1
+	/// Whether or not the Tear Reality rune can be used.
+	var/allow_narsie = TRUE
+	/// The mind datum of the mob that this cult must sacrifice to fulfill their objective.
 	var/datum/mind/sacrifice_target
-	var/list/startwords = list("blood","join","self","hell")
-	var/list/allwords = list("travel","self","see","hell","blood","join","tech","destroy", "other", "hide")
-	var/list/sacrificed = list()
-	var/list/harvested = list()
+	/// A list of all mobs that this cult has sacrificed. Uses lazylist macros.
+	var/list/sacrificed
+	/// A list of all non-cultists that have been killed by Nar-Sie (in the rare event that an admin spawns it or something.) Uses lazylist macros.
+	var/list/harvested
+	/// A list of all runes in the game world. Uses lazylist macros.
+	var/list/all_runes
+
+	/**
+	 * So here's how the cult vocabulary works:
+	 * * There are two lists of words: one contains English words representing concepts ("blood", "other", "technology", etc) while the other are culty gibberish. Both of these lists have the same amount of total words in them.
+	 * * At runtime, each cult word is correlated to a random English word representing its meaning. On one round the word "ego" might mean "technology", but on another it might mean "hell", and so on.
+	 * * This list is populated as an associative list with each English word associated with its cult word counterpart.
+	 *
+	 * The word lists are found in `english_words` and `cult_words` on `/datum/antagonist/cultist`, and are populated from defines to avoid string copy-paste.
+	 */
+	var/list/vocabulary
+	var/list/english_words = list(CULT_WORD_BLOOD, CULT_WORD_DESTROY, CULT_WORD_HELL, CULT_WORD_HIDE, CULT_WORD_JOIN, CULT_WORD_OTHER, CULT_WORD_SELF, CULT_WORD_SEE, CULT_WORD_TECHNOLOGY, CULT_WORD_TRAVEL)
+	var/list/cult_words = list(CULT_WORD_BALAQ, CULT_WORD_CERTUM, CULT_WORD_EGO, CULT_WORD_GEERI, CULT_WORD_IRE, CULT_WORD_KARAZET, CULT_WORD_JATKAA, CULT_WORD_MGAR, CULT_WORD_NAHLIZET, CULT_WORD_VERI)
 
 /datum/antagonist/cultist/New()
 	..()
 	cult = src
+	if (!LAZYLEN(vocabulary))
+		var/list/gibberish = cult_words
+		for (var/eng in english_words)
+			var/culty = pick(gibberish)
+			LAZYSET(vocabulary, eng, culty)
+			gibberish -= culty
 
 /datum/antagonist/cultist/create_global_objectives()
 
@@ -79,28 +101,6 @@ var/global/datum/antagonist/cultist/cult
 	if(S && istype(S))
 		T.loc = S
 
-/datum/antagonist/cultist/greet(var/datum/mind/player)
-	if(!..())
-		return 0
-	grant_runeword(player.current)
-
-/datum/antagonist/cultist/proc/grant_runeword(mob/living/carbon/human/cult_mob, var/word)
-
-	if (!word)
-		if(startwords.len > 0)
-			word=pick(startwords)
-			startwords -= word
-		else
-			word = pick(allwords)
-
-	// Ensure runes are randomized.
-	if(!cultwords["travel"])
-		runerandom()
-
-	var/wordexp = "[cultwords[word]] is [word]..."
-	to_chat(cult_mob, "<span class='warning'>You remember one thing from the dark teachings of your master... [wordexp]</span>")
-	cult_mob.mind.store_memory("You remember that <B>[wordexp]</B>", 0, 0)
-
 /datum/antagonist/cultist/remove_antagonist(var/datum/mind/player, var/show_message, var/implanted)
 	if(!..())
 		return 0
@@ -128,3 +128,8 @@ var/global/datum/antagonist/cultist/cult
 		if(L && (L.imp_in == player.current))
 			return 0
 	return 1
+
+/datum/antagonist/cultist/proc/cult_speak(mob/speaker, message)
+	for (var/mob/M in player_list)
+		if (iscultist(M) || isobserver(M))
+			to_chat(M, SPAN_OCCULT("[speaker.GetVoice()][speaker.GetAltName()] intones, \"[message]\""))

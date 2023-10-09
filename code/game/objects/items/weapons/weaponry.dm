@@ -44,12 +44,20 @@
 			M.visible_message("<span class='danger'>\The [user] waves \the [src] over \the [M]'s head.</span>")
 			return
 
-/obj/item/nullrod/afterattack(atom/A, mob/user as mob, proximity)
-	if(!proximity)
+/obj/item/nullrod/afterattack(atom/target, mob/user, proximity_flag, click_parameters)
+	if (!proximity_flag)
 		return
-	if (istype(A, /turf/simulated/floor))
-		to_chat(user, "<span class='notice'>You hit the floor with the [src].</span>")
-		call(/obj/effect/rune/proc/revealrunes)(src)
+	if (isfloor(target))
+		user.visible_message(
+			SPAN_NOTICE("\The [user] taps \the [src] against \the [target]."),
+			SPAN_NOTICE("You tap \the [src] against \the [target].")
+		)
+		for (var/obj/effect/rune/R in range(4, get_turf(target)))
+			if (R.invisibility == SEE_INVISIBLE_CULT)
+				R.invisibility = 0
+				R.alpha = 255
+				R.visible_message(SPAN_WARNING("\A [R] appears to the [dir2text(get_dir(R, target))]!"))
+		user.setClickCooldown(2 SECONDS)
 
 /obj/item/energy_net
 	name = "energy net"

@@ -15,7 +15,7 @@
 "o" = (/obj/structure/loot_pile/maint/technical,/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "p" = (/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
 "q" = (/obj/structure/table/woodentable,/obj/item/flame/lighter/zippo/royal,/obj/item/clothing/mask/smokable/pipe,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)
-"r" = (/obj/effect/rune,/obj/effect/decal/remains/human,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
+"r" = (/obj/effect/rune/mapgen,/obj/effect/decal/remains/human,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "s" = (/obj/effect/decal/cleanable/blood,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "t" = (/obj/machinery/artifact,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/AbandonedTemple)
 "u" = (/obj/structure/bed/chair/comfy/brown{dir = 4},/obj/effect/decal/cleanable/blood,/turf/simulated/floor/carpet/turcarpet,/area/submap/AbandonedTemple)

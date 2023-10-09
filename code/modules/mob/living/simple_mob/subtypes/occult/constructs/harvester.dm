@@ -36,8 +36,7 @@
 	construct_spells = list(
 			/spell/aoe_turf/knock/harvester,
 			/spell/targeted/construct_advanced/inversion_beam,
-			/spell/targeted/construct_advanced/agonizing_sphere,
-			/spell/rune_write
+			/spell/targeted/construct_advanced/agonizing_sphere
 		)
 
 /decl/mob_organ_names/harvester

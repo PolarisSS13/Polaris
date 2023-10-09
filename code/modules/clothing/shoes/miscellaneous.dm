@@ -87,8 +87,8 @@
 		playsound(src, "clownstep", 20, 1)
 
 /obj/item/clothing/shoes/cult
-	name = "boots"
-	desc = "A pair of boots worn by the followers of an unknown god."
+	name = "cult boots"
+	desc = "Chips of wet magmellite and strips of leathery textile are melded together into stiff cloth. Its surface is warm and shudders at the touch."
 	icon_state = "cult"
 	item_state_slots = list(slot_r_hand_str = "cult", slot_l_hand_str = "cult")
 	force = 2

@@ -15,6 +15,21 @@ NanoBaseHelpers = function ()
 
 				return '';
 			},
+
+			// As above, but for culty stuff
+			spookyMode: function() {
+				$('body').css("color", "#9A9A9A");
+				$('body').css("background-color", "#0D0C0C");
+				$('body').css("background-image", "url('uiBackground-Cult.png')");
+				$('body').css("background-position", "50% 0");
+				$('body').css("background-repeat", "repeat-x");
+
+				$('#uiTitleText').css("color", "#777777");
+				// Hide the NT icon completely
+				$('#uiTitleFluff').css("width", "0px");
+				$('#uiTitleFluff').css("height", "0px");
+				return '';
+			},
 			// Generate a Byond link
 			link: function( text, icon, parameters, status, elementClass, elementId) {
 
@@ -129,12 +144,12 @@ NanoBaseHelpers = function ()
 				{
 					showText = '';
 				}
-				
+
 				if (typeof difClass == 'undefined' || !difClass)
 				{
 					difClass = ''
 				}
-				
+
 				if(typeof direction == 'undefined' || !direction)
 				{
 					direction = 'width'
@@ -143,9 +158,9 @@ NanoBaseHelpers = function ()
 				{
 					direction = 'height'
 				}
-				
+
 				var percentage = Math.round((value - rangeMin) / (rangeMax - rangeMin) * 100);
-				
+
 				return '<div class="displayBar' + difClass + ' ' + styleClass + '"><div class="displayBar' + difClass + 'Fill ' + styleClass + '" style="' + direction + ': ' + percentage + '%;"></div><div class="displayBar' + difClass + 'Text ' + styleClass + '">' + showText + '</div></div>';
 			},
 			// Display DNA Blocks (for the DNA Modifier UI)
@@ -203,7 +218,7 @@ NanoBaseHelpers = function ()
 				return html;
 			}
 		};
-		
+
 	return {
         addHelpers: function ()
 		{
@@ -217,14 +232,7 @@ NanoBaseHelpers = function ()
 				{
 					NanoTemplate.removeHelper(helperKey);
 				}
-			}            
+			}
         }
 	};
 } ();
- 
-
-
-
-
-
-

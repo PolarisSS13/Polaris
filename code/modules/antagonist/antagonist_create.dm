@@ -101,7 +101,7 @@
 /datum/antagonist/proc/greet(var/datum/mind/player)
 	// Makes it harder to miss if you're alt-tabbed or not paying attention.
 	if(antag_sound)
-		sound_to(player.current, sound(antag_sound))
+		player.current.playsound_local(player.current.loc, antag_sound, 50, is_global = TRUE)
 	window_flash(player.current.client)
 
 	// Basic intro text.
