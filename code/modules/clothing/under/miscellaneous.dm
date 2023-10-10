@@ -282,6 +282,11 @@
 	desc = "A simple maid uniform for housekeeping."
 	icon_state = "janimaid"
 
+/obj/item/clothing/under/dress/maid/proper
+	name = "maid dress"
+	desc = "A proper black dress with a frilly white apron."
+	icon_state = "propermaid"
+
 /obj/item/clothing/under/dress/dress_fire
 	name = "flame dress"
 	desc = "A small black dress with blue flames print on it."
