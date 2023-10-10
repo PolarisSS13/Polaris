@@ -36378,10 +36378,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/ai/upload)
-"qbj" = (
-/obj/turbolift_map_holder/cynosure/center,
-/turf/unsimulated/mask,
-/area/surface/station/hallway/primary/groundfloor/east)
 "qbC" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/grille,
@@ -91543,7 +91539,7 @@ fRF
 mOM
 mOM
 mOM
-qbj
+mOM
 fRF
 lQW
 ekU
