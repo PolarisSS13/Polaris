@@ -286,6 +286,10 @@
 	item_state_slots = list(slot_r_hand_str = "greatcoat", slot_l_hand_str = "greatcoat")
 	flags_inv = HIDEHOLSTER
 
+/obj/item/clothing/suit/greatcoat/white
+	icon_state = "greatcoat_white"
+	item_state_slots = list(slot_r_hand_str = "duster", slot_l_hand_str = "duster")
+
 /obj/item/clothing/suit/straight_jacket //A misspelling from time immemorial...
 	name = "straitjacket"
 	desc = "A suit that completely restrains the wearer."

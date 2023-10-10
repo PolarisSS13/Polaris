@@ -158,3 +158,65 @@
 	unicolor = "yellow"
 
 //End of old costumes
+
+//magical girl outfits
+/obj/item/clothing/under/magicalgirl
+	name = "magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particularly popular among Lunar cosplayers."
+	icon_state = "magicalgirl_classic"
+	item_state_slots = list(slot_r_hand_str = "lightblue", slot_l_hand_str = "lightblue")
+
+/obj/item/clothing/under/magicalgirl/blue
+	name = "blue magical girl costume"
+	desc = "It's just like one of your Japanese animes! Despite not being inherently transhumanist, this costume's particularly among Mercurials."
+	icon_state = "magicalgirl_blue"
+	item_state_slots = list(slot_r_hand_str = "blue", slot_l_hand_str = "blue")
+
+/obj/item/clothing/under/magicalgirl/red
+	name = "red magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particularly popular among Martian cosplayers."
+	icon_state = "magicalgirl_red"
+	item_state_slots = list(slot_r_hand_str = "red", slot_l_hand_str = "red")
+
+/obj/item/clothing/under/magicalgirl/green
+	name = "green magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particular popular among cosplayers from Callisto."
+	icon_state = "magicalgirl_green"
+	item_state_slots = list(slot_r_hand_str = "green", slot_l_hand_str = "green")
+
+/obj/item/clothing/under/magicalgirl/orange
+	name = "orange magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particularly popular among Venusian cosplayers."
+	icon_state = "magicalgirl_orange"
+	item_state_slots = list(slot_r_hand_str = "orange", slot_l_hand_str = "orange")
+
+/obj/item/clothing/under/magicalgirl/pink
+	name = "pink magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particularly popular among Lunar cosplayers."
+	icon_state = "magicalgirl_pink"
+	item_state_slots = list(slot_r_hand_str = "pink", slot_l_hand_str = "pink")
+
+/obj/item/clothing/under/magicalgirl/purple
+	name = "purple magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particularly popular among Titanian cosplayers."
+	icon_state = "magicalgirl_purple"
+	item_state_slots = list(slot_r_hand_str = "purple", slot_l_hand_str = "purple")
+
+/obj/item/clothing/under/magicalgirl/navy
+	name = "navy magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume would probably be a hit on Uranus."
+	icon_state = "magicalgirl_navy"
+	item_state_slots = list(slot_r_hand_str = "blue", slot_l_hand_str = "blue")
+
+/obj/item/clothing/under/magicalgirl/turquoise
+	name = "turquoise magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume would probably be a hit on Neptune."
+	icon_state = "magicalgirl_turquoise"
+	item_state_slots = list(slot_r_hand_str = "lightblue", slot_l_hand_str = "lightblue")
+
+/obj/item/clothing/under/magicalgirl/black
+	name = "black magical girl costume"
+	desc = "It's just like one of your Japanese animes! This costume's particularly popular among Plutonian cosplayers."
+	icon_state = "magicalgirl_black"
+	item_state_slots = list(slot_r_hand_str = "black", slot_l_hand_str = "black")
+

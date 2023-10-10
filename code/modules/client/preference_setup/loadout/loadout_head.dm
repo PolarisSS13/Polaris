@@ -287,6 +287,14 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/head/bow/large
+	display_name = "hair bow, large (colorable)"
+	path = /obj/item/clothing/head/pin/bow/big
+
+/datum/gear/head/bow/large/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
 /datum/gear/head/welding/
 	display_name = "welding helmet selection (engineering/robotics)"
 	path = /obj/item/clothing/head/welding

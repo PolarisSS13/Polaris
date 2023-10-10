@@ -603,3 +603,17 @@
 	desc = "A Gilthari ZeitMeister classic, a finely tuned wristwatch with a fancy leather strap."
 	description_fluff = "Made from real synth leather."
 	icon_state = "watch_leather"
+
+//magical girl ribbon bows
+
+/obj/item/clothing/accessory/frontbow
+	name = "ribbon bow"
+	desc = "An oversized bow that sits just below the collar. Seems like something a magical girl would wear."
+	icon_state = "frontbow"
+	slot = ACCESSORY_SLOT_TIE
+
+/obj/item/clothing/accessory/backbow
+	name = "waist bow"
+	desc = "An oversized bow that sits on the small of your back. Seems like something a magical girl would wear."
+	icon_state = "backbow"
+	slot = ACCESSORY_SLOT_DECOR

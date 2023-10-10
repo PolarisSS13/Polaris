@@ -158,3 +158,11 @@
 /datum/gear/eyes/circuitry
 	display_name = "goggles, circuitry (empty)"
 	path = /obj/item/clothing/glasses/circuitry
+
+/datum/gear/eyes/masquerade
+	display_name = "masquerade mask (colorable)"
+	path = /obj/item/clothing/glasses/masquerade
+
+/datum/gear/eyes/masquerade/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
