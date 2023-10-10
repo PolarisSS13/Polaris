@@ -44876,8 +44876,6 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
 "tMk" = (
-/obj/structure/flora/ausbushes/sparsegrass,
-/obj/structure/flora/ausbushes/brflowers,
 /obj/machinery/light/spot{
 	dir = 1
 	},
@@ -44885,7 +44883,7 @@
 	dir = 1
 	},
 /obj/machinery/disposal,
-/turf/simulated/floor/grass,
+/turf/simulated/floor/tiled/hydro,
 /area/surface/station/park)
 "tMq" = (
 /obj/machinery/door/firedoor/glass,
