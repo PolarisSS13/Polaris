@@ -169,7 +169,7 @@
 				prob(33);/mob/living/simple_mob/animal/giant_spider/lurker,
 				prob(33);/mob/living/simple_mob/animal/giant_spider/tunneler,
 				prob(40);/mob/living/simple_mob/animal/giant_spider/pepper,
-				prob(20);/mob/living/simple_mob/animal/giant_spider/thermic,
+				prob(10);/mob/living/simple_mob/animal/giant_spider/thermic,
 				prob(40);/mob/living/simple_mob/animal/giant_spider/electric,
 				prob(1);/mob/living/simple_mob/animal/giant_spider/phorogenic,
 				prob(40);/mob/living/simple_mob/animal/giant_spider/frost)
