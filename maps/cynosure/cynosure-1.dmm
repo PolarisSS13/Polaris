@@ -5216,7 +5216,7 @@
 	},
 /obj/machinery/door/airlock/research{
 	name = "Long Term Storage";
-	req_one_access = list(65)
+	req_one_access = list(47)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/research/xenoarcheology/longtermstorage)
@@ -7531,7 +7531,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Xenofauna Maintenance Access";
-	req_access = list(12, 67)
+	req_access = list(12,67)
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
@@ -8973,6 +8973,11 @@
 	},
 /turf/simulated/floor/tiled/old_cargo/gray,
 /area/surface/station/medical/morgue)
+"sr" = (
+/turf/simulated/wall/r_concrete{
+	desc = "You get the feeling you shouldn't mine around these."
+	},
+/area/surface/cave/explored/normal)
 "ss" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/borderfloor{
@@ -23239,6 +23244,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
+"VV" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/research{
+	name = "Long Term Storage";
+	req_one_access = list(47)
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/surface/outpost/research/xenoarcheology/longtermstorage)
 "VW" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -45481,8 +45494,8 @@ Kj
 Kj
 Kj
 Kj
-Fp
-Fp
+sr
+sr
 Kj
 Kj
 HE
@@ -45498,8 +45511,8 @@ HE
 HE
 HE
 HE
-Fp
-Fp
+HE
+HE
 HE
 HE
 HE
@@ -45739,7 +45752,7 @@ mV
 Kj
 HE
 Fp
-Fp
+sr
 Kj
 Kj
 Kj
@@ -45755,6 +45768,7 @@ HE
 HE
 HE
 HE
+HE
 Fp
 Fp
 HE
@@ -45786,9 +45800,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -46013,6 +46026,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -46042,10 +46057,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -50267,6 +50280,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -50283,10 +50298,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 Kj
@@ -50524,6 +50537,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -50540,10 +50555,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51667,6 +51680,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51696,10 +51711,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51924,6 +51937,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51953,10 +51968,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -54622,7 +54635,7 @@ iz
 Qw
 ux
 rw
-Hv
+VV
 jz
 Wc
 kL
@@ -55009,8 +55022,8 @@ HE
 HE
 HE
 HE
-Fp
-Fp
+HE
+HE
 HE
 HE
 HE
@@ -55266,8 +55279,8 @@ HE
 HE
 HE
 HE
-Fp
-Fp
+HE
+HE
 HE
 HE
 HE
@@ -57064,6 +57077,8 @@ Kj
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57093,10 +57108,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57224,8 +57237,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57321,6 +57334,8 @@ Kj
 Kj
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57350,10 +57365,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57481,8 +57494,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61064,6 +61077,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61077,10 +61092,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61321,6 +61334,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61334,10 +61349,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -62983,6 +62996,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -63004,10 +63019,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -63240,6 +63253,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -63261,10 +63276,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -70677,8 +70690,8 @@ HE
 HE
 HE
 WS
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -70934,8 +70947,8 @@ HE
 HE
 HE
 WS
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74496,6 +74509,8 @@ HE
 Kj
 Kj
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74515,10 +74530,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74753,6 +74766,8 @@ HE
 Kj
 Kj
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74772,10 +74787,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -80428,8 +80441,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -80685,8 +80698,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
