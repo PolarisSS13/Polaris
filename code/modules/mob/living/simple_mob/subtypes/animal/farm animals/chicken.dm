@@ -29,6 +29,8 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 	meat_amount = 2
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken
 
+	holder_type = /obj/item/holder/chicken
+
 	var/eggsleft = 0
 	var/body_color
 
@@ -130,6 +132,8 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken
 
 	var/amount_grown = 0
+
+	holder_type = /obj/item/holder/chick
 
 /mob/living/simple_mob/animal/passive/chick/Initialize()
 	. = ..()
