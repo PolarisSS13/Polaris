@@ -444,6 +444,8 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 
 /mob/living/simple_mob/animal/sif/grafadreka/rejuvenate()
 	remove_modifiers_of_type(/datum/modifier/sifsap_salve, TRUE)
+	sap_heal_threshold = initial(sap_heal_threshold)
+	nutrition = rand(400, 500)
 	stored_sap = rand(20, 30)
 	..()
 
