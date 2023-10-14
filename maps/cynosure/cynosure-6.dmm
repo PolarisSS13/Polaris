@@ -1546,7 +1546,9 @@
 "bIS" = (
 /obj/effect/shuttle_landmark/cynosure/arrivals_offsite,
 /obj/effect/floor_decal/milspec/color/blue,
-/obj/effect/floor_decal/milspec/hatchmarks,
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
 "bJF" = (
@@ -1991,6 +1993,9 @@
 "clN" = (
 /obj/effect/shuttle_landmark/cynosure/escape/offsite,
 /obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/escape/centcom)
 "clW" = (
@@ -2505,7 +2510,9 @@
 /area/centcom/bar)
 "cSk" = (
 /obj/effect/floor_decal/milspec/color/blue,
-/obj/effect/floor_decal/milspec/hatchmarks,
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 4
+	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/arrival/pre_game)
 "cSr" = (
@@ -2994,6 +3001,16 @@
 	},
 /turf/simulated/shuttle/plating/airless,
 /area/shuttle/merchant/home)
+"dzE" = (
+/obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/milspec/color/white/half{
+	dir = 1
+	},
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/escape/centcom)
 "dzS" = (
 /obj/effect/floor_decal/borderfloorwhite{
 	dir = 4
@@ -4671,6 +4688,13 @@
 	icon_state = "dark"
 	},
 /area/centcom/creed)
+"fnI" = (
+/obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/arrival/pre_game)
 "fnR" = (
 /obj/effect/floor_decal/carpet,
 /obj/effect/floor_decal/carpet{
@@ -7364,6 +7388,13 @@
 	icon_state = "white"
 	},
 /area/syndicate_station)
+"iqd" = (
+/obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/escape/centcom)
 "irx" = (
 /obj/structure/bed/chair/shuttle,
 /obj/machinery/light/no_nightshift{
@@ -9300,7 +9331,9 @@
 /area/centcom/terminal)
 "kpG" = (
 /obj/effect/floor_decal/milspec/color/blue,
-/obj/effect/floor_decal/milspec/hatchmarks,
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 8
+	},
 /turf/simulated/floor/tiled/milspec/dark,
 /area/shuttle/escape/centcom)
 "kqh" = (
@@ -11980,6 +12013,12 @@
 	},
 /turf/simulated/floor/holofloor/tiled/dark,
 /area/holodeck/source_basketball)
+"neS" = (
+/obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/milspec/color/silver/half,
+/obj/effect/floor_decal/wheelchair,
+/turf/simulated/floor/tiled/milspec/sterile,
+/area/shuttle/escape/centcom)
 "nfO" = (
 /obj/structure/bed/chair{
 	dir = 4
@@ -17865,6 +17904,16 @@
 	},
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
+"trI" = (
+/obj/effect/landmark{
+	name = "JoinLate"
+	},
+/obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/wheelchair{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/milspec/sterile,
+/area/shuttle/arrival/pre_game)
 "tsG" = (
 /obj/structure/window/reinforced{
 	dir = 1;
@@ -17958,6 +18007,16 @@
 	icon_state = "dark"
 	},
 /area/syndicate_station)
+"tvD" = (
+/obj/effect/floor_decal/milspec/color/blue,
+/obj/effect/floor_decal/milspec/color/white/half{
+	dir = 1
+	},
+/obj/effect/floor_decal/shuttle_exit{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/milspec/dark,
+/area/shuttle/escape/centcom)
 "tvU" = (
 /obj/machinery/computer/security/nuclear,
 /turf/simulated/shuttle/floor/voidcraft,
@@ -21605,6 +21664,16 @@
 	icon_state = "techfloor_gray"
 	},
 /area/centcom/specops)
+"xkx" = (
+/obj/effect/landmark{
+	name = "JoinLate"
+	},
+/obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/wheelchair{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/milspec/sterile,
+/area/shuttle/arrival/pre_game)
 "xkU" = (
 /obj/effect/floor_decal/corner/green{
 	dir = 6
@@ -30345,13 +30414,13 @@ tQa
 tQa
 thM
 bIS
-cSk
+fnI
 rBk
 bAY
 bAY
 uGT
-cSk
-cSk
+fnI
+fnI
 thM
 mZd
 ucH
@@ -30863,7 +30932,7 @@ jbe
 fDX
 fDX
 fDX
-fDX
+xkx
 lpv
 pNU
 jbe
@@ -31377,7 +31446,7 @@ jbe
 bAY
 bAY
 bAY
-bAY
+trI
 lpv
 pNU
 jbe
@@ -36685,8 +36754,8 @@ qXg
 qXg
 bXb
 qXg
-umC
-iNK
+tvD
+kpG
 sdu
 eVJ
 omB
@@ -37455,7 +37524,7 @@ iNK
 qXg
 qXg
 qXg
-qXg
+neS
 umC
 txG
 eVJ
@@ -37969,7 +38038,7 @@ iNK
 qXg
 qXg
 qXg
-qXg
+neS
 umC
 jyo
 eVJ
@@ -38735,13 +38804,13 @@ eMi
 xiF
 eMi
 pGP
-kpG
-kpG
+iqd
+iqd
 qXg
 qXg
 irx
 qXg
-umC
+dzE
 clN
 xCV
 eVJ
