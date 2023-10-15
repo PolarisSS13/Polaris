@@ -17905,12 +17905,12 @@
 /turf/simulated/shuttle/floor/voidcraft,
 /area/syndicate_station/start)
 "trI" = (
+/obj/effect/floor_decal/milspec/color/white,
+/obj/structure/bed/chair/shuttle{
+	dir = 4
+	},
 /obj/effect/landmark{
 	name = "JoinLate"
-	},
-/obj/effect/floor_decal/milspec/color/white,
-/obj/effect/floor_decal/wheelchair{
-	dir = 4
 	},
 /turf/simulated/floor/tiled/milspec/sterile,
 /area/shuttle/arrival/pre_game)
@@ -21304,6 +21304,12 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/centcom/bar)
+"wTo" = (
+/obj/effect/floor_decal/milspec/color/white,
+/obj/effect/floor_decal/milspec/color/silver/half,
+/obj/structure/bed/chair/shuttle,
+/turf/simulated/floor/tiled/milspec/sterile,
+/area/shuttle/escape/centcom)
 "wTz" = (
 /turf/simulated/wall/tgmc/window/white/reinf,
 /area/shuttle/transport1/centcom)
@@ -37524,7 +37530,7 @@ iNK
 qXg
 qXg
 qXg
-neS
+wTo
 umC
 txG
 eVJ
