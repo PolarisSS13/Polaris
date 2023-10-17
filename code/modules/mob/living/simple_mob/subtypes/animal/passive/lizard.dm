@@ -23,6 +23,8 @@
 
 	say_list_type = /datum/say_list/lizard
 
+	holder_type = /obj/item/holder/lizard
+
 /mob/living/simple_mob/animal/passive/lizard/large
 	desc = "A cute, big lizard."
 	maxHealth = 20
@@ -32,6 +34,7 @@
 	melee_damage_upper = 15
 
 	attack_sharp = TRUE
+	holder_type = null
 
 /mob/living/simple_mob/animal/passive/lizard/large/Initialize()
 	. = ..()

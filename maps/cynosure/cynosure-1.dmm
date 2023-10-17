@@ -281,7 +281,7 @@
 	specialfunctions = 4
 	},
 /turf/simulated/floor/plating,
-/area/surface/station/construction/elevator)
+/area/surface/station/hallway/primary/bmt/east)
 "aG" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 4
@@ -1355,8 +1355,8 @@
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/south)
 "cN" = (
-/turf/simulated/wall/concrete,
-/area/surface/station/construction/elevator)
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/surface/station/hallway/primary/bmt/east)
 "cO" = (
 /turf/simulated/mineral/ignore_mapgen/sif,
 /area/surface/cave/unexplored/deep)
@@ -1836,7 +1836,7 @@
 /area/surface/station/maintenance/storage/emergency/bmtswest)
 "dP" = (
 /turf/simulated/wall/r_concrete,
-/area/surface/station/construction/elevator)
+/area/surface/station/hallway/primary/bmt/east)
 "dQ" = (
 /obj/structure/closet/emcloset,
 /obj/effect/floor_decal/borderfloorwhite{
@@ -4031,10 +4031,10 @@
 /obj/machinery/atmospherics/unary/vent_pump/on{
 	dir = 8
 	},
-/obj/effect/floor_decal/borderfloor{
+/obj/effect/floor_decal/borderfloor/corner{
 	dir = 4
 	},
-/obj/effect/floor_decal/corner/green/border{
+/obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 4
 	},
 /turf/simulated/floor/tiled,
@@ -4976,7 +4976,7 @@
 /area/surface/station/engineering/hallway/bmt)
 "kr" = (
 /turf/simulated/floor/plating,
-/area/surface/station/construction/elevator)
+/area/surface/station/hallway/primary/bmt/east)
 "ks" = (
 /turf/simulated/wall/concrete,
 /area/surface/station/hallway/secondary/bmt/eaststairwell)
@@ -5216,7 +5216,7 @@
 	},
 /obj/machinery/door/airlock/research{
 	name = "Long Term Storage";
-	req_one_access = list(65)
+	req_one_access = list(47)
 	},
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/outpost/research/xenoarcheology/longtermstorage)
@@ -7531,7 +7531,7 @@
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/door/airlock/maintenance{
 	name = "Xenofauna Maintenance Access";
-	req_access = list(12, 67)
+	req_access = list(12,67)
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
@@ -8973,6 +8973,11 @@
 	},
 /turf/simulated/floor/tiled/old_cargo/gray,
 /area/surface/station/medical/morgue)
+"sr" = (
+/turf/simulated/wall/r_concrete{
+	desc = "You get the feeling you shouldn't mine around these."
+	},
+/area/surface/cave/explored/normal)
 "ss" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
 /obj/effect/floor_decal/borderfloor{
@@ -18672,14 +18677,8 @@
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/storage/emergency/bmtswest)
 "MK" = (
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
-/obj/effect/floor_decal/borderfloor/corner{
-	dir = 4
-	},
-/obj/effect/floor_decal/corner/green/bordercorner{
-	dir = 4
-	},
-/turf/simulated/floor/tiled,
+/obj/turbolift_map_holder/cynosure/center,
+/turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/bmt/east)
 "ML" = (
 /obj/machinery/conveyor{
@@ -23245,6 +23244,14 @@
 	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/medical/west)
+"VV" = (
+/obj/machinery/door/firedoor/border_only,
+/obj/machinery/door/airlock/research{
+	name = "Long Term Storage";
+	req_one_access = list(47)
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/surface/outpost/research/xenoarcheology/longtermstorage)
 "VW" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/machinery/atmospherics/pipe/simple/hidden{
@@ -45487,8 +45494,8 @@ Kj
 Kj
 Kj
 Kj
-Fp
-Fp
+sr
+sr
 Kj
 Kj
 HE
@@ -45504,8 +45511,8 @@ HE
 HE
 HE
 HE
-Fp
-Fp
+HE
+HE
 HE
 HE
 HE
@@ -45745,7 +45752,7 @@ mV
 Kj
 HE
 Fp
-Fp
+sr
 Kj
 Kj
 Kj
@@ -45761,6 +45768,7 @@ HE
 HE
 HE
 HE
+HE
 Fp
 Fp
 HE
@@ -45792,9 +45800,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -46019,6 +46026,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -46048,10 +46057,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -50273,6 +50280,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -50289,10 +50298,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 Kj
@@ -50530,6 +50537,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -50546,10 +50555,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51673,6 +51680,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51702,10 +51711,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51930,6 +51937,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -51959,10 +51968,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -54628,7 +54635,7 @@ iz
 Qw
 ux
 rw
-Hv
+VV
 jz
 Wc
 kL
@@ -55015,8 +55022,8 @@ HE
 HE
 HE
 HE
-Fp
-Fp
+HE
+HE
 HE
 HE
 HE
@@ -55272,8 +55279,8 @@ HE
 HE
 HE
 HE
-Fp
-Fp
+HE
+HE
 HE
 HE
 HE
@@ -57070,6 +57077,8 @@ Kj
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57099,10 +57108,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57230,8 +57237,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57327,6 +57334,8 @@ Kj
 Kj
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57356,10 +57365,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -57487,8 +57494,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61070,6 +61077,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61083,10 +61092,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61144,7 +61151,7 @@ Ur
 Rh
 Rh
 iA
-MK
+hs
 Qz
 QZ
 rP
@@ -61327,6 +61334,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61340,10 +61349,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -61399,10 +61406,10 @@ HS
 dT
 pi
 Ai
+eE
 TQ
 TQ
 TQ
-IO
 TQ
 TQ
 YR
@@ -61912,7 +61919,7 @@ dP
 kr
 kr
 kr
-kr
+MK
 dP
 IO
 IO
@@ -62989,6 +62996,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -63010,10 +63019,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -63246,6 +63253,8 @@ HE
 HE
 HE
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -63267,10 +63276,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -70683,8 +70690,8 @@ HE
 HE
 HE
 WS
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -70940,8 +70947,8 @@ HE
 HE
 HE
 WS
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74502,6 +74509,8 @@ HE
 Kj
 Kj
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74521,10 +74530,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74759,6 +74766,8 @@ HE
 Kj
 Kj
 HE
+Fp
+Fp
 HE
 HE
 HE
@@ -74778,10 +74787,8 @@ HE
 HE
 HE
 HE
-HE
-HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -80434,8 +80441,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE
@@ -80691,8 +80698,8 @@ HE
 HE
 HE
 HE
-HE
-HE
+Fp
+Fp
 HE
 HE
 HE

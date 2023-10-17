@@ -2120,6 +2120,24 @@
 /obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/cargo/gnd)
+"aXD" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/effect/catwalk_plated,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
+/area/surface/station/hallway/primary/groundfloor/north)
 "aXH" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
@@ -2601,10 +2619,6 @@
 	},
 /area/surface/outside/station/reactorpond)
 "bhP" = (
-/obj/structure/disposalpipe/segment{
-	dir = 1;
-	icon_state = "pipe-c"
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
@@ -2617,6 +2631,9 @@
 	d1 = 1;
 	d2 = 4;
 	icon_state = "1-4"
+	},
+/obj/structure/disposalpipe/junction/yjunction{
+	dir = 4
 	},
 /turf/simulated/floor/tiled/monofloor{
 	dir = 4
@@ -4643,6 +4660,7 @@
 /obj/effect/floor_decal/corner/green/bordercorner{
 	dir = 8
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/groundfloor/west/elevator)
 "cdD" = (
@@ -8597,6 +8615,9 @@
 	},
 /obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers,
 /obj/effect/catwalk_plated,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/groundfloor/north)
 "dRW" = (
@@ -12462,6 +12483,7 @@
 	pixel_x = 32
 	},
 /obj/item/gps/security,
+/obj/item/gps/security,
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/security/lockerroom)
 "fAm" = (
@@ -13280,6 +13302,9 @@
 	dir = 4
 	},
 /obj/effect/catwalk_plated,
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/groundfloor/north)
 "fRM" = (
@@ -13367,7 +13392,7 @@
 	input_tag = "o2_in";
 	name = "Oxygen Tank Control";
 	output_tag = "o2_out";
-	sensors = list("o2_sensor" = "Tank")
+	sensors = list("o2_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/blue/border,
@@ -14207,6 +14232,13 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/ai/upload)
+"gqX" = (
+/obj/machinery/door/firedoor/glass,
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/plating,
+/area/surface/station/park)
 "grj" = (
 /obj/structure/table/reinforced,
 /obj/effect/floor_decal/borderfloorwhite{
@@ -16825,6 +16857,23 @@
 /obj/structure/railing,
 /turf/simulated/open,
 /area/surface/station/hallway/primary/groundfloor/east)
+"hBc" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/surface/station/hallway/primary/groundfloor/north)
 "hBh" = (
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/hallway/primary/groundfloor/east)
@@ -20460,13 +20509,13 @@
 /turf/simulated/floor/tiled/freezer,
 /area/surface/station/crew_quarters/pool)
 "jsF" = (
-/obj/machinery/vending/fitness,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
 	},
+/obj/item/banner/virgov,
 /turf/simulated/floor/tiled,
 /area/surface/station/crew_quarters/gym)
 "jtd" = (
@@ -21472,7 +21521,7 @@
 /obj/effect/floor_decal/industrial/warning/corner{
 	dir = 1
 	},
-/obj/item/banner/virgov,
+/obj/item/banner/nt,
 /turf/simulated/floor/wood/sif,
 /area/surface/station/chapel/main)
 "jPo" = (
@@ -22717,6 +22766,7 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner2{
 	dir = 8
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/reception)
 "kkZ" = (
@@ -23842,6 +23892,8 @@
 /obj/effect/floor_decal/steeldecal/steel_decals_central7{
 	dir = 1
 	},
+/obj/structure/table/standard,
+/obj/item/storage/firstaid/regular,
 /turf/simulated/floor/tiled,
 /area/surface/station/crew_quarters/gym)
 "kLh" = (
@@ -28794,6 +28846,7 @@
 /obj/effect/floor_decal/corner/paleblue/bordercorner{
 	dir = 1
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/reception)
 "mRf" = (
@@ -29433,6 +29486,10 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4;
+	icon_state = "pipe-c"
+	},
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/hallway/primary/groundfloor/north)
 "neJ" = (
@@ -29488,14 +29545,13 @@
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/kitchen)
 "ngO" = (
-/obj/structure/table/standard,
 /obj/effect/floor_decal/borderfloor{
 	dir = 1
 	},
 /obj/effect/floor_decal/corner/grey/border{
 	dir = 1
 	},
-/obj/item/storage/firstaid/regular,
+/obj/machinery/vending/fitness,
 /turf/simulated/floor/tiled,
 /area/surface/station/crew_quarters/gym)
 "nhb" = (
@@ -31387,6 +31443,9 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
+/obj/structure/disposalpipe/segment{
+	dir = 4
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/hallway/primary/groundfloor/north)
 "nZD" = (
@@ -32461,6 +32520,7 @@
 	name = "Medbay";
 	req_access = list(5)
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/steel_grid,
 /area/surface/station/medical/reception)
 "otX" = (
@@ -34825,6 +34885,7 @@
 /obj/effect/landmark{
 	name = "lightsout"
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/neutral,
 /area/surface/station/medical/reception)
 "ppO" = (
@@ -34859,6 +34920,10 @@
 /obj/structure/flora/ausbushes/palebush,
 /turf/simulated/floor/grass,
 /area/surface/station/park)
+"pqn" = (
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/white,
+/area/surface/station/medical/reception)
 "pqo" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 5
@@ -35962,6 +36027,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/groundfloor/east)
+"pQx" = (
+/obj/effect/floor_decal/corner_steel_grid{
+	dir = 5
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled,
+/area/surface/station/hallway/primary/groundfloor/north)
 "pQA" = (
 /obj/effect/floor_decal/borderfloor{
 	dir = 8
@@ -36329,6 +36404,24 @@
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/chemistry)
+"qaH" = (
+/obj/structure/cable{
+	d1 = 4;
+	d2 = 8;
+	icon_state = "4-8"
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 4
+	},
+/obj/structure/disposalpipe/segment{
+	dir = 8;
+	icon_state = "pipe-c"
+	},
+/turf/simulated/floor/tiled/monotile,
+/area/surface/station/hallway/primary/groundfloor/north)
 "qaK" = (
 /obj/structure/cable/green{
 	d1 = 2;
@@ -36378,10 +36471,6 @@
 	},
 /turf/simulated/floor/tiled/techfloor/grid,
 /area/surface/station/ai/upload)
-"qbj" = (
-/obj/turbolift_map_holder/cynosure/center,
-/turf/unsimulated/mask,
-/area/surface/station/hallway/primary/groundfloor/east)
 "qbC" = (
 /obj/machinery/door/firedoor/border_only,
 /obj/structure/grille,
@@ -37973,7 +38062,7 @@
 	input_tag = "n2_in";
 	name = "Nitrogen Tank Control";
 	output_tag = "n2_out";
-	sensors = list("n2_sensor" = "Tank")
+	sensors = list("n2_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/red/border,
@@ -38536,9 +38625,8 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
+/obj/structure/disposalpipe/junction/yjunction{
+	dir = 8
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/etc)
@@ -39001,7 +39089,7 @@
 	input_tag = "waste_in";
 	name = "Gas Mix Tank Control";
 	output_tag = "waste_out";
-	sensors = list("waste_sensor" = "Tank")
+	sensors = list("waste_sensor"="Tank")
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
@@ -39573,6 +39661,7 @@
 /obj/effect/floor_decal/corner/paleblue/border{
 	dir = 8
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/reception)
 "rpI" = (
@@ -41728,6 +41817,13 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/hallway)
+"stv" = (
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/dark,
+/area/surface/station/hallway/primary/groundfloor/west/elevator)
 "stD" = (
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
@@ -41775,7 +41871,7 @@
 	name = "Air Tank Control";
 	output_tag = "air_out";
 	pressure_setting = 2000;
-	sensors = list("air_sensor" = "Tank")
+	sensors = list("air_sensor"="Tank")
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
@@ -44779,6 +44875,16 @@
 	},
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
+"tMk" = (
+/obj/machinery/light/spot{
+	dir = 1
+	},
+/obj/structure/disposalpipe/trunk{
+	dir = 1
+	},
+/obj/machinery/disposal,
+/turf/simulated/floor/tiled/hydro,
+/area/surface/station/park)
 "tMq" = (
 /obj/machinery/door/firedoor/glass,
 /obj/machinery/door/airlock/glass_atmos{
@@ -45072,7 +45178,7 @@
 	input_tag = "co2_in";
 	name = "Carbon Dioxide Supply Control";
 	output_tag = "co2_out";
-	sensors = list("co2_sensor" = "Tank")
+	sensors = list("co2_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -46293,6 +46399,14 @@
 	},
 /turf/simulated/floor/tiled/techmaint,
 /area/surface/station/medical/hallway/gnd)
+"uyX" = (
+/obj/effect/floor_decal/corner_steel_grid{
+	dir = 10
+	},
+/obj/effect/floor_decal/industrial/warning,
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/white,
+/area/surface/station/medical/reception)
 "uzl" = (
 /obj/effect/floor_decal/techfloor{
 	dir = 9
@@ -47315,7 +47429,7 @@
 	input_tag = "tox_in";
 	name = "Phoron Supply Control";
 	output_tag = "tox_out";
-	sensors = list("tox_sensor" = "Tank")
+	sensors = list("tox_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -49811,7 +49925,7 @@
 	input_tag = "n2o_in";
 	name = "Nitrous Oxide Supply Control";
 	output_tag = "n2o_out";
-	sensors = list("n2o_sensor" = "Tank")
+	sensors = list("n2o_sensor"="Tank")
 	},
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
@@ -50150,6 +50264,7 @@
 /obj/machinery/atmospherics/unary/vent_scrubber/on{
 	dir = 8
 	},
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/reception)
 "wnd" = (
@@ -50291,6 +50406,18 @@
 	},
 /turf/simulated/floor/reinforced/airmix,
 /area/surface/station/engineering/atmos)
+"woX" = (
+/obj/machinery/door/firedoor/glass,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/machinery/door/blast/regular/open{
+	dir = 4;
+	id = "medbayquar";
+	layer = 3.3;
+	name = "Medbay Lockdown"
+	},
+/obj/structure/disposalpipe/segment,
+/turf/simulated/floor/tiled/techfloor,
+/area/surface/station/medical/reception)
 "woY" = (
 /obj/structure/cable{
 	d1 = 1;
@@ -50379,6 +50506,7 @@
 /obj/effect/floor_decal/borderfloor,
 /obj/effect/floor_decal/corner/green/border,
 /obj/machinery/light,
+/obj/structure/disposalpipe/segment,
 /turf/simulated/floor/tiled,
 /area/surface/station/hallway/primary/groundfloor/north)
 "wtw" = (
@@ -52932,8 +53060,8 @@
 	dir = 8
 	},
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin" = 10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin" = 10);
 	volume = 10
 	},
 /turf/simulated/floor/tiled/freezer,
@@ -53161,13 +53289,13 @@
 /obj/item/storage/firstaid/regular,
 /obj/item/storage/pill_bottle/spaceacillin,
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin" = 10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin" = 10);
 	volume = 10
 	},
 /obj/item/reagent_containers/hypospray/autoinjector/detox{
-	filled_reagents = list("anti_toxin" = 10);
 	amount_per_transfer_from_this = 10;
+	filled_reagents = list("anti_toxin" = 10);
 	volume = 10
 	},
 /turf/simulated/floor/wood,
@@ -78955,7 +79083,7 @@ knS
 knS
 bhP
 ccZ
-lPO
+stv
 ord
 aqn
 wCG
@@ -86136,8 +86264,8 @@ oHA
 aLm
 neE
 wtk
-jgp
-gGO
+gqX
+tMk
 pts
 bql
 oqM
@@ -86905,7 +87033,7 @@ cAX
 kAK
 obP
 lGu
-rHb
+aXD
 vmK
 pfh
 oqM
@@ -87162,7 +87290,7 @@ vzn
 ydr
 obP
 lGu
-fCf
+hBc
 vmK
 eNB
 hlM
@@ -87419,7 +87547,7 @@ dTz
 wik
 bBs
 bzH
-fCf
+hBc
 vmK
 jgp
 hlM
@@ -87676,7 +87804,7 @@ tbv
 boy
 tLq
 dbY
-fCf
+hBc
 vmK
 eNB
 hlM
@@ -87933,7 +88061,7 @@ oZb
 kLG
 dfi
 dbY
-rHb
+aXD
 eWW
 pfh
 oqM
@@ -88190,7 +88318,7 @@ oZb
 kLG
 tLq
 dbY
-rHb
+aXD
 hWJ
 pfh
 eiv
@@ -88700,11 +88828,11 @@ kkG
 rpd
 mRb
 wnc
-oZb
-fId
-jgs
-qrK
-fCf
+pqn
+uyX
+woX
+pQx
+qaH
 iyI
 jgp
 gGO
@@ -91543,7 +91671,7 @@ fRF
 mOM
 mOM
 mOM
-qbj
+mOM
 fRF
 lQW
 ekU

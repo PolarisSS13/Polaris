@@ -7,6 +7,7 @@
 	icon_state = "pad_full"
 	item_state = "paper"
 	w_class = ITEMSIZE_SMALL
+	var/papername = "sticky note"
 
 	var/papers = 50
 	var/written_text
@@ -50,11 +51,10 @@
 /obj/item/sticky_pad/examine(var/mob/user)
 	. = ..()
 	if(.)
-		to_chat(user, SPAN_NOTICE("It has [papers] sticky note\s left."))
+		to_chat(user, SPAN_NOTICE("It has [papers] [papername]\s left in the stack."))
 
 /obj/item/sticky_pad/attack_hand(var/mob/user)
 	var/obj/item/paper/paper = new paper_type(get_turf(src))
-	paper.set_content(written_text, "sticky note")
 	paper.last_modified_ckey = written_by
 	paper.color = color
 	written_text = null
@@ -94,13 +94,14 @@
 	icon = 'icons/obj/stickynotes.dmi'
 	color = COLOR_YELLOW
 	slot_flags = 0
+	var/stickytype = /datum/persistent/paper/sticky
 
 /obj/item/paper/sticky/Initialize()
 	. = ..()
 	GLOB.moved_event.register(src, src, /obj/item/paper/sticky/proc/reset_persistence_tracking)
 
 /obj/item/paper/sticky/proc/reset_persistence_tracking()
-	SSpersistence.forget_value(src, /datum/persistent/paper/sticky)
+	SSpersistence.forget_value(src, stickytype)
 	pixel_x = 0
 	pixel_y = 0
 
@@ -135,7 +136,7 @@
 			return
 
 	if(user.unEquip(src, source_turf))
-		SSpersistence.track_value(src, /datum/persistent/paper/sticky)
+		SSpersistence.track_value(src, stickytype)
 		if(params)
 			var/list/mouse_control = params2list(params)
 			if(mouse_control["icon-x"])

@@ -177,6 +177,16 @@ var/global/list/holder_mob_icon_cache = list()
 	for(var/mob/M in src.contents)
 		M.attackby(W,user)
 
+/obj/item/holder/chicken
+	origin_tech = list(TECH_BIO = 2)
+
+/obj/item/holder/chick
+	w_class = ITEMSIZE_TINY
+	origin_tech = list(TECH_BIO = 1)
+
+/obj/item/holder/lizard
+	w_class = ITEMSIZE_TINY
+
 //Mob procs and vars for scooping up
 /mob/living/var/holder_type
 
