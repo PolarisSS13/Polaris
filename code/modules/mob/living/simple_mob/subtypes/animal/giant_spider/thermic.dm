@@ -23,7 +23,7 @@
 	icon_living = "pit"
 	icon_dead = "pit_dead"
 
-	ai_holder_type = /datum/ai_holder/simple_mob/xray/demolishing
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing
 
 	maxHealth = 175
 	health = 175
@@ -38,3 +38,7 @@
 	poison_chance = 30
 	poison_per_bite = 1
 	poison_type = "thermite_v"
+
+/mob/living/simple_mob/animal/giant_spider/thermic/xray
+	desc = "Mirage-cloaked and orange, it makes you shudder to look at it. This one has simmering orange eyes with a malevolent sheen."
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing/xray

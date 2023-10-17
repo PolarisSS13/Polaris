@@ -35,6 +35,8 @@
 	health = 225
 	taser_kill = FALSE //You will need more than a peashooter to kill the juggernaut.
 
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing
+
 	melee_damage_lower = 25
 	melee_damage_upper = 40
 	attack_armor_pen = 15
@@ -82,4 +84,3 @@
 			exploded = TRUE
 			explosion(src.loc, explosion_dev_range, explosion_heavy_range, explosion_light_range, explosion_flash_range)
 	return ..()
-

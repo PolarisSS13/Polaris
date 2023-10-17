@@ -30,13 +30,13 @@
 /datum/ai_holder/simple_mob/guard/give_chase
 	home_low_priority = TRUE
 
-// Able to select targets with solid objects between them and it.
-/datum/ai_holder/simple_mob/xray
-	ignore_opacity = TRUE
-
 // Able to destroy common, but usually-ignored barriers. Walls, Trees, Barricades
-/datum/ai_holder/simple_mob/xray/demolishing
+/datum/ai_holder/simple_mob/demolishing
 	can_demolish = TRUE
+
+// Able to select targets with solid objects between them and it to make greater use of Demolishing
+/datum/ai_holder/simple_mob/demolishing/xray
+	ignore_opacity = TRUE
 
 // Doesn't really act until told to by something on the outside.
 /datum/ai_holder/simple_mob/inert
