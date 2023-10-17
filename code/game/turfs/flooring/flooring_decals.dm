@@ -1325,3 +1325,8 @@ var/global/list/floor_decals = list()
 	icon_state = "mss_green_corner"
 /obj/effect/floor_decal/milspec_sterile/green/half
 	icon_state = "mss_green_side"
+
+/obj/effect/floor_decal/wheelchair
+	icon_state = "wheelchair"
+/obj/effect/floor_decal/shuttle_exit
+	icon_state = "shuttle_exit"
