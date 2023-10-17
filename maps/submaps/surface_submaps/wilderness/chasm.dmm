@@ -4,8 +4,9 @@
 "bD" = (/turf/template_noop,/area/submap/Chasm)
 "bF" = (/obj/effect/floor_decal/industrial/warning/dust,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/Chasm)
 "cj" = (/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
-"cL" = (/obj/item/material/shard,/turf/template_noop,/area/submap/Chasm)
+"cL" = (/mob/living/simple_mob/animal/giant_spider,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "do" = (/obj/random/mob/spider/mutant,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
+"dr" = (/obj/item/stack/rods,/obj/random/mob/spider/mutant,/turf/simulated/floor/plating,/area/submap/Chasm)
 "dE" = (/turf/simulated/wall,/area/submap/Chasm)
 "eY" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/obj/effect/floor_decal/spline/plain{dir = 8},/obj/structure/railing{dir = 1},/obj/structure/railing{dir = 8},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "fj" = (/obj/item/stack/material/steel,/obj/item/stack/rods,/turf/simulated/floor/plating,/area/submap/Chasm)
@@ -15,7 +16,7 @@
 "gK" = (/obj/structure/table/reinforced,/obj/item/clothing/ears/earmuffs,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "gR" = (/obj/effect/floor_decal/industrial/warning/dust{dir = 5},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/Chasm)
 "hk" = (/obj/machinery/door/airlock/maintenance_hatch,/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
-"hG" = (/obj/structure/table/reinforced,/obj/random/tool,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
+"hG" = (/obj/structure/table/reinforced,/obj/random/tool/powermaint,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "hM" = (/obj/structure/table,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "hQ" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/obj/effect/floor_decal/spline/plain{dir = 8},/obj/structure/railing{dir = 8},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "hR" = (/obj/structure/curtain/open/bed,/obj/structure/bed,/obj/item/bedsheet/orange,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
@@ -45,8 +46,8 @@
 "oA" = (/obj/effect/floor_decal/rust,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "oB" = (/obj/structure/cliff/automatic{dir = 6},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "oF" = (/obj/item/melee/energy/axe/charge,/obj/random/humanoidremains,/obj/random/maintenance/clean,/turf/simulated/floor/outdoors/dirt,/area/submap/Chasm)
+"oK" = (/obj/structure/closet/emcloset,/obj/random/medical/lite,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "oW" = (/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
-"oX" = (/obj/structure/cliff/automatic/corner{dir = 9},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "pk" = (/obj/structure/cliff/automatic{dir = 9},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "pr" = (/obj/structure/table/reinforced,/obj/random/tech_supply/component,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "pF" = (/obj/effect/floor_decal/industrial/warning{dir = 9},/obj/structure/closet/radiation,/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
@@ -54,19 +55,19 @@
 "qx" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging,/obj/structure/catwalk,/obj/effect/floor_decal/spline/plain{dir = 1},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "qB" = (/obj/structure/sign/warning/radioactive,/turf/simulated/wall/r_wall,/area/submap/Chasm)
 "rf" = (/obj/effect/floor_decal/industrial/warning{dir = 9},/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/plating,/area/submap/Chasm)
-"rE" = (/obj/random/trash,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled,/area/submap/Chasm)
-"rR" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled,/area/submap/Chasm)
+"rE" = (/obj/structure/girder/reinforced,/obj/effect/floor_decal/rust,/turf/simulated/floor/plating,/area/submap/Chasm)
+"rR" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/item/material/shard,/obj/random/mob/spider,/turf/simulated/floor/plating,/area/submap/Chasm)
 "rY" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 9},/obj/structure/railing{dir = 1},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "sg" = (/obj/effect/floor_decal/corner/yellow/border{dir = 1},/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "st" = (/obj/item/material/shard,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
-"sR" = (/obj/machinery/door/airlock/engineering,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled,/area/submap/Chasm)
+"sR" = (/obj/structure/cliff/automatic{dir = 2},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "tg" = (/obj/random/vendordrink,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"uc" = (/obj/random/trash,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
+"uc" = (/obj/random/trash,/turf/simulated/floor/plating,/area/submap/Chasm)
 "uf" = (/obj/structure/table/reinforced,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "ut" = (/obj/effect/floor_decal/industrial/warning{dir = 6},/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
 "vd" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 10},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "vy" = (/obj/structure/bed,/obj/item/bedsheet/blue,/obj/structure/curtain/open/bed,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"vE" = (/obj/random/humanoidremains,/turf/simulated/floor/plating,/area/submap/Chasm)
+"vE" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "vV" = (/obj/structure/cliff/automatic{dir = 10},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "wg" = (/obj/effect/map_effect/radiation_emitter,/obj/item/stack/material/supermatter{start_anomalous = 1},/turf/simulated/floor/outdoors/rocks,/area/submap/Chasm)
 "wi" = (/obj/structure/cliff/automatic{dir = 4},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
@@ -80,9 +81,9 @@
 "xX" = (/obj/structure/bed/chair/office/dark{dir = 8},/obj/random/humanoidremains,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "yq" = (/obj/structure/grille,/obj/structure/window/reinforced/full,/turf/simulated/floor/plating,/area/submap/Chasm)
 "yy" = (/obj/structure/closet,/obj/item/clothing/suit/costume/sexyminer,/obj/random/maintenance/engineering,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"yD" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/item/material/shard,/obj/random/mob/spider,/turf/simulated/floor/plating,/area/submap/Chasm)
+"yD" = (/obj/structure/girder/reinforced,/obj/item/stack/material/steel,/turf/simulated/floor/plating,/area/submap/Chasm)
 "yL" = (/obj/structure/closet,/obj/random/tool/power/anom,/obj/random/maintenance/engineering,/obj/item/geiger{icon_state = "geiger_on_1"; scanning = 1},/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"zn" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
+"zn" = (/obj/random/trash,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "zs" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 10},/obj/structure/catwalk,/obj/effect/floor_decal/spline/plain{dir = 1},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "zt" = (/obj/effect/floor_decal/industrial/warning{dir = 10},/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
 "zy" = (/obj/effect/floor_decal/industrial/warning{dir = 6},/obj/structure/frame{anchored = 1},/turf/simulated/floor/plating,/area/submap/Chasm)
@@ -106,7 +107,7 @@
 "Gw" = (/obj/effect/floor_decal/corner/yellow/border{dir = 10},/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "Ha" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/machinery/portable_atmospherics/canister/empty/nitrogen,/turf/simulated/floor/plating,/area/submap/Chasm)
 "HF" = (/obj/structure/salvageable/console_broken_os{dir = 8},/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"Ig" = (/obj/structure/girder/reinforced,/obj/effect/floor_decal/rust,/turf/simulated/floor/plating,/area/submap/Chasm)
+"Ig" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "Is" = (/obj/structure/closet/radiation,/obj/item/clothing/head/radiation/teshari,/obj/item/clothing/suit/radiation/teshari,/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
 "Iv" = (/obj/structure/table,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "IF" = (/obj/effect/decal/cleanable/ash,/turf/simulated/floor/outdoors/rocks,/area/submap/Chasm)
@@ -117,13 +118,13 @@
 "KY" = (/obj/random/humanoidremains,/obj/random/multiple/gun/projectile/rifle,/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/plating,/area/submap/Chasm)
 "Lb" = (/obj/structure/cliff/automatic/corner,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "Ll" = (/obj/machinery/atmospherics/pipe/manifold/visible/green{dir = 4},/obj/structure/grille,/turf/simulated/floor/plating,/area/submap/Chasm)
-"Lt" = (/obj/structure/cliff/automatic{dir = 2},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
-"LJ" = (/obj/structure/girder/reinforced,/obj/item/stack/material/steel,/turf/simulated/floor/plating,/area/submap/Chasm)
+"Lt" = (/obj/random/trash,/obj/item/geiger{icon_state = "geiger_on_1"; scanning = 1},/turf/simulated/floor/tiled,/area/submap/Chasm)
+"LJ" = (/obj/random/trash,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "LQ" = (/obj/machinery/door/blast/regular/open,/obj/item/material/shard,/obj/item/material/shard,/turf/simulated/floor/plating,/area/submap/Chasm)
-"Me" = (/obj/random/trash,/turf/simulated/floor/plating,/area/submap/Chasm)
+"Me" = (/obj/machinery/door/airlock/engineering,/obj/effect/spider/stickyweb,/turf/simulated/floor/tiled,/area/submap/Chasm)
 "Mk" = (/obj/item/stack/rods,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 "Nq" = (/obj/effect/floor_decal/industrial/warning{dir = 10},/obj/structure/frame{anchored = 1},/turf/simulated/floor/plating,/area/submap/Chasm)
-"NN" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/random/mob/spider,/turf/simulated/floor/plating,/area/submap/Chasm)
+"NN" = (/obj/random/humanoidremains,/turf/simulated/floor/plating,/area/submap/Chasm)
 "NR" = (/obj/structure/loot_pile/maint/boxfort,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt,/area/submap/Chasm)
 "NU" = (/obj/structure/girder/reinforced,/turf/simulated/floor/plating,/area/submap/Chasm)
 "Oc" = (/obj/structure/cliff/automatic/corner{dir = 10},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
@@ -143,22 +144,21 @@
 "SA" = (/obj/effect/floor_decal/industrial/warning/dust{dir = 10},/turf/simulated/floor/tiled/asteroid_steel,/area/submap/Chasm)
 "SS" = (/obj/item/stack/rods,/turf/simulated/floor/plating,/area/submap/Chasm)
 "Tl" = (/obj/machinery/door/airlock/maintenance_hatch,/turf/simulated/floor/plating,/area/submap/Chasm)
-"TH" = (/obj/item/stack/rods,/obj/random/mob/spider/mutant,/turf/simulated/floor/plating,/area/submap/Chasm)
+"TH" = (/obj/item/material/shard,/turf/template_noop,/area/submap/Chasm)
 "TR" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 6},/obj/effect/floor_decal/spline/plain{dir = 9},/obj/structure/catwalk,/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "TX" = (/obj/effect/floor_decal/industrial/warning{dir = 5},/obj/structure/frame{anchored = 1},/turf/simulated/floor/plating,/area/submap/Chasm)
 "UK" = (/obj/effect/floor_decal/corner/yellow/border{dir = 6},/obj/effect/spider/stickyweb,/obj/random/mob/spider,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "UZ" = (/obj/effect/floor_decal/industrial/warning{dir = 5},/turf/simulated/floor/tiled/techfloor/grid,/area/submap/Chasm)
 "Vq" = (/obj/structure/loot_pile/mecha/odysseus,/obj/effect/floor_decal/corner/yellow/border{dir = 5},/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"VD" = (/mob/living/simple_mob/animal/giant_spider,/turf/simulated/floor/tiled,/area/submap/Chasm)
+"VD" = (/obj/effect/floor_decal/industrial/outline/blue,/obj/random/mob/spider,/turf/simulated/floor/plating,/area/submap/Chasm)
 "Wo" = (/obj/effect/floor_decal/industrial/outline/blue,/turf/simulated/floor/plating,/area/submap/Chasm)
 "WJ" = (/obj/structure/table/reinforced,/obj/random/toolbox,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
-"WP" = (/obj/random/trash,/obj/item/geiger{icon_state = "geiger_on_1"; scanning = 1},/turf/simulated/floor/tiled,/area/submap/Chasm)
 "XU" = (/obj/machinery/atmospherics/pipe/simple/heat_exchanging{dir = 6},/obj/structure/catwalk,/obj/effect/floor_decal/spline/plain{dir = 1},/turf/simulated/floor/water/deep{has_fish = 0},/area/submap/Chasm)
 "Yj" = (/obj/structure/curtain/open/bed,/obj/structure/bed,/obj/item/bedsheet/green,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "YU" = (/obj/structure/table/reinforced,/obj/item/geiger{icon_state = "geiger_on_1"; scanning = 1},/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
 "Zd" = (/obj/effect/floor_decal/industrial/warning/dust{dir = 6},/obj/item/material/shard,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/Chasm)
 "Zf" = (/obj/item/material/shard,/obj/item/stack/material/steel,/turf/simulated/floor/tiled,/area/submap/Chasm)
-"Zw" = (/obj/structure/closet/emcloset,/turf/simulated/floor/tiled/techmaint,/area/submap/Chasm)
+"Zw" = (/obj/structure/cliff/automatic/corner{dir = 9},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/Chasm)
 
 (1,1,1) = {"
 bDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbDbD
@@ -166,25 +166,25 @@ bDbDbDbDbDScScScbDbDbDScScScScScScScScbDbDbDbDScScBQEebDbDbD
 bDbDbDbDScScScScScScScScScScScScScScScScScbDBQBdBdBdBQScbDbD
 bDbDABABABknknknknknknknknknknknknknknknScScScjXEcBdBQEebDbD
 bDEeoAiesgVqknikufgwufyyufKFknnxtgGvnmknknScScScScScScScbDbD
-EeoAkHjWrRoosRrRrRrErREuEURYOvEUEUEUEUEpknknknknScScScScScbD
-bDScknGwwFUKknrErRVDEUEUWPEUknSSafhMxXEUEpucZwknknknknknScbD
+EeoAkHjWIgooMeIgIgznIgEuEURYOvEUEUEUEUEpknknknknScScScScScbD
+bDScknGwwFUKknznIgcLEUEULtEUknSSafhMxXEUEpLJoKknknknknknScbD
 bDScknknqBOvknvydEJidEhRaHYjknOjafOjEUpLEUEUEUknhGprWJknScbD
-bDScScknIsoWknknknknknknknfWfWcjcjcjIgOjknEUEUOvEpEpznknScbD
-bDScScknmYoWknpFUZknafafMecjcjcjcjcjcjcjIgEUEUkniJdohGknScbD
-bDScScknxqoWknztutTlafOjcjcjpkmEmEmEwPcjcjOjEULJyLEpnLknScbD
-bDbDScknknOvknhkknqBOjcjMkpkoXEeEeEeLbwPcjOjafknknfjknknScbD
+bDScScknIsoWknknknknknknknfWfWcjcjcjrEOjknEUEUOvEpEpvEknScbD
+bDScScknmYoWknpFUZknafafuccjcjcjcjcjcjcjrEEUEUkniJdohGknScbD
+bDScScknxqoWknztutTlafOjcjcjpkmEmEmEwPcjcjOjEUyDyLEpnLknScbD
+bDbDScknknOvknhkknqBOjcjMkpkZwEeEeEeLbwPcjOjafknknfjknknScbD
 bDbDScknufEURREUEpOrafcjcjjuEeEeRzoFEewicjcjafknHaWoknScScbD
-bDbDbDknIvlzRYEUQGxrSjOjcjEeRzRzRzRzEecjcjOjafknWoNNknScbDbD
-bDbDScknYUEuEUDWHFkGafcjEeRzDdRzwgRzRzEecjcjOjafMeafknScScbD
+bDbDbDknIvlzRYEUQGxrSjOjcjEeRzRzRzRzEecjcjOjafknWoVDknScbDbD
+bDbDScknYUEuEUDWHFkGafcjEeRzDdRzwgRzRzEecjcjOjafucafknScScbD
 bDScScknPXRYEUEUgKLQafcjcjRzRzIFRzRzRzEecjcjcjafSSafNUScScbD
-bDScScknDiEUlCZfHFxEafstjuEeRzRzRzRzEewicjcjOjknWoyDknScScbD
+bDScScknDiEUlCZfHFxEafstjuEeRzRzRzRzEewicjcjOjknWorRknScScbD
 bDScScknkniFknknknqBOjcjvVOcEeRzRzEeDYoBcjOjafNUKYkXknScbDbD
-bDScScScknTHafafafknafcjcjvVLtLtLtLtoBcjcjafafknknknknScbDbD
-bDScScScknafrfTXafafvEOjcjcjcjcjcjcjcjcjafafafknScScScScScbD
+bDScScSckndrafafafknafcjcjvVsRsRsRsRoBcjcjafafknknknknScbDbD
+bDScScScknafrfTXafafNNOjcjcjcjcjcjcjcjcjafafafknScScScScScbD
 bDbDScScknafNqzySSafafafOjOjcjafafOjOjcjOjafScknScScScScScbD
-bDbDScScknMeafafafknafafafafafknLlfEknafafScScScScScScScEebD
+bDbDScScknucafafafknafafafafafknLlfEknafafScScScScScScScEebD
 bDbDScScknknknqBknknknyqyqyqknknPrPrqBknknknScScScScScBQEebD
-bDbDbDScScScbDxtTRzsXUzsXUzsXUzsqxaFgRcLScScScScScNREcBQEebD
+bDbDbDScScScbDxtTRzsXUzsXUzsXUzsqxaFgRTHScScScScScNREcBQEebD
 bDbDbDbDScbDbDKzeYDQrYDQrYDQrYDQrYDIDabDbDEeEeBQBdBdBdBQEebD
 bDbDbDbDbDbDbDKzhQwnvdwnvdwnvdwnvdkRDabDEeEeBQBdBdBdBdScScbD
 bDbDnJbDbDbDbDKzRxCoQiCoKvCoKvCoKvmuDabDScScBdBdScScScScbDbD
