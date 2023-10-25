@@ -135,6 +135,14 @@
 	flags_inv = HIDEFACE|BLOCKHAIR
 	siemens_coefficient = 0
 
+/obj/item/clothing/mask/costume/ghost
+	name = "ghostly blanket"
+	desc = "Boo!"
+	icon_state = "ghost"
+	body_parts_covered = HEAD|FACE
+	item_flags = FLEXIBLEMATERIAL
+	flags_inv = HIDEFACE|BLOCKHAIR
+
 /obj/item/clothing/mask/costume/pig
 	name = "pig mask"
 	desc = "A rubber pig mask."
