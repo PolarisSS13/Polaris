@@ -38,7 +38,3 @@
 		log_debug("Doing complete outage of telecomms.")
 		for(var/obj/machinery/telecomms/T in telecomms_list)
 			T.emp_act(1)
-
-	// Communicators go down no matter what.
-	for(var/obj/machinery/exonet_node/N in machines)
-		N.emp_act(1)
