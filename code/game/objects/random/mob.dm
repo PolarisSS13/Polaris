@@ -259,8 +259,7 @@
 
 /obj/random/mob/robotic/hivebot/laser/item_to_spawn()
 	return pick(prob(30);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/laser,
-				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/backline
-				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/rapid)
+				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/backline)
 
 //Mice
 

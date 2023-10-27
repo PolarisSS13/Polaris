@@ -36,6 +36,9 @@
 /obj/item/radio{
 	start_anomalous = 1
 	},
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/wood/sif,
 /area/submap/Shelter1)
 "hd" = (
@@ -69,6 +72,12 @@
 "mc" = (
 /obj/structure/toilet,
 /turf/simulated/floor/tiled/neutral,
+/area/submap/Shelter1)
+"mw" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
 /area/submap/Shelter1)
 "sh" = (
 /obj/item/stack/material/wood/sif,
@@ -104,6 +113,9 @@
 "xq" = (
 /obj/item/stack/material/wood/sif,
 /obj/random/mob/robotic/hivebot/melee,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/wood/sif/broken,
 /area/submap/Shelter1)
 "xv" = (
@@ -188,6 +200,9 @@
 /obj/random/soap,
 /obj/random/medical,
 /obj/item/stock_parts/spring,
+/obj/machinery/light/small{
+	dir = 1
+	},
 /turf/simulated/floor/tiled/neutral,
 /area/submap/Shelter1)
 "Jp" = (
@@ -260,6 +275,9 @@
 /area/submap/Shelter1)
 "Vv" = (
 /obj/item/stack/material/steel,
+/obj/machinery/light/small{
+	dir = 8
+	},
 /turf/simulated/floor/wood/sif/broken,
 /area/submap/Shelter1)
 "WG" = (
@@ -388,7 +406,7 @@ xq
 WI
 iC
 IT
-PS
+mw
 LB
 eM
 Fp
