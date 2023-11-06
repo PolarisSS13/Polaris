@@ -37,8 +37,6 @@
 /area/submap/DemonPool)
 "bc" = (
 /obj/machinery/door/airlock,
-/obj/effect/decal/cleanable/blood,
-/obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "bh" = (
@@ -73,7 +71,6 @@
 /obj/effect/floor_decal/corner/purple/border{
 	dir = 1
 	},
-/obj/effect/decal/cleanable/blood/drip,
 /turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "de" = (
@@ -503,7 +500,6 @@
 /turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "yW" = (
-/obj/effect/decal/cleanable/blood/drip,
 /obj/item/clothing/suit/storage/toggle/labcoat,
 /obj/effect/decal/remains/human,
 /obj/item/clothing/head/culthood{
@@ -827,11 +823,6 @@
 /area/submap/DemonPool)
 "MB" = (
 /obj/machinery/door/airlock/science,
-/turf/simulated/floor/tiled/steel_grid,
-/area/submap/DemonPool)
-"ML" = (
-/obj/effect/decal/cleanable/blood/drip,
-/obj/effect/floor_decal/corner/purple/border,
 /turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "NI" = (
@@ -1471,7 +1462,7 @@ Dj
 zj
 qQ
 lo
-ML
+Hl
 eR
 Jo
 eV
