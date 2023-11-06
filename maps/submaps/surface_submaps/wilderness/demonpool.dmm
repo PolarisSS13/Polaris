@@ -322,7 +322,7 @@
 /obj/random/medical/lite,
 /obj/item/paper{
 	name = "caretaker log";
-	info = "[<I>An excerpt from a much longer and more mundane journal. There's spots for times and dates, but oddly every single one seems to have been smudged or damaged...</I>] <BR> Whole team of eggheads keep coming and going to check out the new site. Going to need more medical supplies, they leaving the lab with what look like radiation burns all over their bodies and weird looks in their eyes. One's even in the bathroom now, 'cleaning up'. <BR> Maybe that old surplus crate has some useful stuff, just need to figure out how to pop the lock."
+	info = "<I>An excerpt from a much longer and more mundane journal. There's spots for times and dates, but oddly every single one seems to have been smudged or damaged...</I> <BR> Whole team of eggheads keep coming and going to check out the new site. Going to need more medical supplies, they leaving the lab with what look like radiation burns all over their bodies and weird looks in their eyes. One's even in the bathroom now, 'cleaning up'. <BR> Maybe that old surplus crate has some useful stuff, just need to figure out how to pop the lock."
 	},
 /turf/simulated/floor/carpet,
 /area/submap/DemonPool)
