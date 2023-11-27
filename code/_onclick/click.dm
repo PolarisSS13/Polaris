@@ -79,7 +79,7 @@
 		var/obj/mecha/M = loc
 		return M.click_action(A, src, params)
 
-	else if(!isturf(loc))
+	else if(!isturf(loc) && !isnull(loc))	// If you are in Nullspace you should be adminhelping not clicking.
 		var/atom/movable/AM = loc
 		if(AM.allow_click_through(A, src))
 			return AM.click_through(A, src, params)

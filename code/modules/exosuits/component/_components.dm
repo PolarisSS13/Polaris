@@ -10,7 +10,7 @@
 	var/brute_damage = 0
 	var/burn_damage = 0
 	var/max_damage = 60
-	var/damage_state = 1
+	var/damage_state = MECH_COMPONENT_DAMAGE_UNDAMAGED
 	var/list/has_hardpoints = list()
 	var/decal
 	var/power_use = 0
@@ -18,7 +18,7 @@
 	dir = SOUTH
 
 /obj/item/mech_component/proc/query_color(var/mob/living/user)
-	if(user)
+	if(istype(user))
 		var/input = input("Modify part color:", "Color", color) as color|null
 		if(input)
 			return set_colour(input)
