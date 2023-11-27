@@ -59,8 +59,7 @@
 	return TRUE
 
 /obj/item/mech_component/proc/update_health()
-	total_damage = brute_damage + burn_damage
-	if(total_damage > max_damage) total_damage = max_damage
+	total_damage = min(max_damage, brute_damage + burn_damage)
 	damage_state = between(MECH_COMPONENT_DAMAGE_UNDAMAGED, round((total_damage/max_damage) * 4), MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
 
 /obj/item/mech_component/proc/ready_to_install()
