@@ -5832,7 +5832,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/effect/catwalk_plated/dark,
 /obj/machinery/airlock_sensor/airlock_interior{
 	dir = 8;
 	id_tag = "eng_ew2_airlock_int_sensor";
@@ -5849,6 +5848,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/rust,
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
 "cKX" = (
@@ -14098,9 +14098,6 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -14108,6 +14105,9 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
 /obj/effect/catwalk_plated/dark,
@@ -19087,10 +19087,10 @@
 /area/surface/station/crew_quarters/cafeteria)
 "iIT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/obj/effect/catwalk_plated/dark,
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/effect/catwalk_plated/dark,
 /obj/machinery/space_heater,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
@@ -19356,7 +19356,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -19365,6 +19364,9 @@
 	name = "Engineering Lockdown"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/engineering/gnd)
 "iNX" = (
@@ -27843,12 +27845,12 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
 "muC" = (
@@ -44050,6 +44052,7 @@
 	name = "Chapel";
 	sortType = "Chapel"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated,
 /obj/effect/zone_divider,
 /turf/simulated/floor/plating,
@@ -45227,12 +45230,12 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
 "tVR" = (
@@ -46093,6 +46096,9 @@
 	name = "Engineering Lockdown"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
 /turf/simulated/floor/plating,
