@@ -18,18 +18,6 @@
 	var/max_pilot_size = MOB_LARGE
 	has_hardpoints = list(HARDPOINT_BACK, HARDPOINT_LEFT_SHOULDER, HARDPOINT_RIGHT_SHOULDER)
 
-/obj/item/mech_component/chassis/New()
-	..()
-	if(isnull(pilot_positions))
-		pilot_positions = list(
-			list(
-				"[NORTH]" = list("x" = 8, "y" = 0),
-				"[SOUTH]" = list("x" = 8, "y" = 0),
-				"[EAST]"  = list("x" = 8, "y" = 0),
-				"[WEST]"  = list("x" = 8, "y" = 0)
-			)
-		)
-
 /obj/item/mech_component/chassis/Destroy()
 	QDEL_NULL(cell)
 	QDEL_NULL(diagnostics)
@@ -45,11 +33,11 @@
 
 /obj/item/mech_component/chassis/show_missing_parts(var/mob/user)
 	if(!cell)
-		to_chat(user, SPAN_WARNING("It is missing a power cell."))
+		. += SPAN_WARNING("It is missing a power cell.")
 	if(!diagnostics)
-		to_chat(user, SPAN_WARNING("It is missing a diagnostics unit."))
+		. += SPAN_WARNING("It is missing a diagnostics unit.")
 	if(!armour)
-		to_chat(user, SPAN_WARNING("It is missing exosuit armour plating."))
+		. += SPAN_WARNING("It is missing exosuit armour plating.")
 
 /obj/item/mech_component/chassis/Initialize()
 	. = ..()
@@ -59,6 +47,16 @@
 		if(air)
 			cockpit.equalize(air)
 	air_supply = new /obj/machinery/portable_atmospherics/canister/air(src)
+
+	if(isnull(pilot_positions))
+		pilot_positions = list(
+			list(
+				"[NORTH]" = list("x" = 8, "y" = 0),
+				"[SOUTH]" = list("x" = 8, "y" = 0),
+				"[EAST]"  = list("x" = 8, "y" = 0),
+				"[WEST]"  = list("x" = 8, "y" = 0)
+			)
+		)
 
 /obj/item/mech_component/chassis/proc/update_air(var/take_from_supply)
 
@@ -136,3 +134,256 @@
 /obj/item/mech_component/chassis/proc/get_armor(var/type)
 	var/list/checking = get_armor_values()
 	return checking[type]
+
+/*
+ * Variants
+ */
+
+/obj/item/mech_component/chassis/combat
+	name = "sealed exosuit chassis"
+	hatch_descriptor = "canopy"
+	pilot_coverage = 100
+	transparent_cabin =  TRUE
+	exosuit_desc_string = "an armoured chassis"
+	icon_state = "combat_body"
+	power_use = 40
+	mech_health = 350
+
+/obj/item/mech_component/chassis/combat/prebuild()
+	. = ..()
+	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+
+/obj/item/mech_component/chassis/combat/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 4,  "y" = 8),
+			"[WEST]"  = list("x" = 12, "y" = 8)
+		)
+	)
+
+	. = ..()
+
+/obj/item/mech_component/chassis/industrial
+	name = "open exosuit chassis"
+	hatch_descriptor = "roll cage"
+	pilot_coverage = 40
+	exosuit_desc_string = "an industrial rollcage"
+	desc = "An industrial roll cage. Technically OSHA compliant. Technically."
+	icon_state = "industrial_body"
+	max_damage = 100
+	power_use = 0
+
+/obj/item/mech_component/chassis/industrial/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit(src)
+
+/obj/item/mech_component/chassis/industrial/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 8,  "y" = 8),
+			"[WEST]"  = list("x" = 8,  "y" = 8)
+		),
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 16),
+			"[SOUTH]" = list("x" = 8,  "y" = 16),
+			"[EAST]"  = list("x" = 0,  "y" = 16),
+			"[WEST]"  = list("x" = 16, "y" = 16)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/heavy
+	name = "reinforced exosuit chassis"
+	hatch_descriptor = "hatch"
+	desc = "The HI-Koloss chassis is a veritable juggernaut, capable of protecting a pilot even in the most hostile of environments. It handles like a battlecruiser, however."
+	pilot_coverage = 100
+	exosuit_desc_string = "a heavily armoured chassis"
+	icon_state = "heavy_body"
+	max_damage = 150
+	mech_health = 500
+	power_use = 50
+	has_hardpoints = list(HARDPOINT_BACK)
+
+/obj/item/mech_component/chassis/heavy/prebuild()
+	. = ..()
+	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+
+/obj/item/mech_component/chassis/light
+	name = "light exosuit chassis"
+	hatch_descriptor = "canopy"
+	pilot_coverage = 100
+	transparent_cabin =  TRUE
+	hide_pilot = TRUE //Sprite too small, legs clip through, so for now hide pilot
+	exosuit_desc_string = "an open and light chassis"
+	icon_state = "light_body"
+	max_damage = 50
+	power_use = 5
+	mech_health = 200
+	has_hardpoints = list(HARDPOINT_BACK)
+	desc = "The Veymed Odysseus series cockpits combine ultralight materials and clear aluminum laminates to provide an optimized cockpit experience."
+
+/obj/item/mech_component/chassis/light/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
+
+/obj/item/mech_component/chassis/light/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = -2),
+			"[SOUTH]" = list("x" = 8,  "y" = -2),
+			"[EAST]"  = list("x" = 1,  "y" = -2),
+			"[WEST]"  = list("x" = 9,  "y" = -2)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/mercenary
+	name = "reinforced exosuit chassis"
+	hatch_descriptor = "hatch"
+	desc = "The HI-Koloss chassis is a veritable juggernaut, capable of protecting a pilot even in the most hostile of environments. It handles like a battlecruiser, however."
+	pilot_coverage = 100
+	exosuit_desc_string = "a heavily armoured chassis"
+	icon_state = "mercenary_body"
+	max_damage = 150
+	mech_health = 500
+	power_use = 50
+	has_hardpoints = list(HARDPOINT_BACK)
+
+/obj/item/mech_component/chassis/mercenary/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 9,  "y" = 2),
+			"[EAST]"  = list("x" = 4,  "y" = 8),
+			"[WEST]"  = list("x" = 12, "y" = 8)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/mercenary/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+
+/obj/item/mech_component/chassis/pod
+	name = "spherical exosuit chassis"
+	hatch_descriptor = "hatch"
+	pilot_coverage = 100
+	transparent_cabin = TRUE
+	exosuit_desc_string = "a spherical chassis"
+	icon_state = "pod_body"
+	max_damage = 70
+	power_use = 5
+	has_hardpoints = list(HARDPOINT_BACK)
+	desc = "The Katamari series cockpits won a massive government tender a few years back. No one is sure why, but these terrible things keep popping up on every government-run facility."
+
+/obj/item/mech_component/chassis/pod/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
+
+/obj/item/mech_component/chassis/pod/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 4),
+			"[SOUTH]" = list("x" = 8,  "y" = 4),
+			"[EAST]"  = list("x" = 12,  "y" = 4),
+			"[WEST]"  = list("x" = 4,  "y" = 4)
+		),
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 10,  "y" = 8),
+			"[WEST]"  = list("x" = 6, "y" = 8)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/pod/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
+
+/obj/item/mech_component/chassis/modern
+	name = "sealed exosuit chassis"
+	hatch_descriptor = "canopy"
+	pilot_coverage = 100
+	hide_pilot = TRUE
+	exosuit_desc_string = "an armoured chassis"
+	icon_state = "modern_body"
+	power_use = 40
+	mech_health = 350
+
+/obj/item/mech_component/chassis/modern/prebuild()
+	. = ..()
+	armor = new /obj/item/robot_parts/robot_component/armour/exosuit/combat(src)
+
+/obj/item/mech_component/chassis/modern/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 4,  "y" = 8),
+			"[WEST]"  = list("x" = 12, "y" = 8)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/powerloader
+	name = "open exosuit chassis"
+	hatch_descriptor = "roll cage"
+	pilot_coverage = 40
+	exosuit_desc_string = "an industrial rollcage"
+	desc = "A Xion industrial brand roll cage. Technically OSHA compliant. Technically."
+	max_damage = 100
+	power_use = 0
+
+/obj/item/mech_component/chassis/powerloader/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit(src)
+
+/obj/item/mech_component/chassis/powerloader/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 8),
+			"[SOUTH]" = list("x" = 8,  "y" = 8),
+			"[EAST]"  = list("x" = 8,  "y" = 8),
+			"[WEST]"  = list("x" = 8,  "y" = 8)
+		),
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 16),
+			"[SOUTH]" = list("x" = 8,  "y" = 16),
+			"[EAST]"  = list("x" = 0,  "y" = 16),
+			"[WEST]"  = list("x" = 16, "y" = 16)
+		)
+	)
+	. = ..()
+
+/obj/item/mech_component/chassis/sleek
+	name = "sleek exosuit chassis"
+	hatch_descriptor = "canopy"
+	pilot_coverage = 100
+	transparent_cabin =  TRUE
+	exosuit_desc_string = "an open and sleek chassis"
+	icon_state = "sleek_body"
+	max_damage = 50
+	mech_health = 200
+	power_use = 5
+	has_hardpoints = list(HARDPOINT_BACK)
+	desc = "The Veymed Odysseus series cockpits combine ultrasleek materials and clear aluminium laminates to provide an optimized cockpit experience."
+
+/obj/item/mech_component/chassis/sleek/prebuild()
+	. = ..()
+	armour = new /obj/item/robot_parts/robot_component/armour/exosuit/radproof(src)
+
+/obj/item/mech_component/chassis/sleek/Initialize()
+	pilot_positions = list(
+		list(
+			"[NORTH]" = list("x" = 8,  "y" = 0),
+			"[SOUTH]" = list("x" = 8,  "y" = 0),
+			"[EAST]"  = list("x" = 3,  "y" = 0),
+			"[WEST]"  = list("x" = 13, "y" = 0)
+		)
+	)
+	. = ..()

@@ -17,33 +17,28 @@
 	var/require_adjacent = TRUE
 
 /obj/item/mech_equipment/attack() //Generally it's not desired to be able to attack with items
-	return 0
+	return FALSE
+
+/obj/item/mech_equipment/proc/powercheck(var/mob/living/user)
+	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
+		var/obj/item/cell/OwnerCell = owner.get_cell()
+		if(OwnerCell && OwnerCell.check_charge(active_power_use * CELLRATE))
+			return TRUE
+		to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
+	return FALSE
 
 /obj/item/mech_equipment/afterattack(var/atom/target, var/mob/living/user, var/inrange, var/params)
 	if(require_adjacent)
 		if(!inrange)
 			return 0
-	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
-		if(target in owner.contents)
-			return 0
 
-		var/obj/item/cell/OwnerCell = owner.get_cell()
-		if(!(OwnerCell && OwnerCell.check_charge(active_power_use * CELLRATE)))
-			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
-			return 0
-		return 1
-	else
-		return 0
+	if(target in owner.contents)
+		return FALSE
+
+	return powercheck(user)
 
 /obj/item/mech_equipment/attack_self(var/mob/user)
-	if (owner && loc == owner && ((user in owner.pilots) || user == owner))
-		var/obj/item/cell/OwnerCell = owner.get_cell()
-		if(!(OwnerCell && OwnerCell.check_charge(active_power_use * CELLRATE)))
-			to_chat(user, SPAN_WARNING("The power indicator flashes briefly as you attempt to use \the [src]"))
-			return 0
-		return 1
-	else
-		return 0
+	return powercheck(user)
 
 /obj/item/mech_equipment/proc/installed(var/mob/living/exosuit/_owner)
 	owner = _owner
@@ -62,13 +57,10 @@
 	return src
 
 /obj/item/mech_equipment/proc/MouseDragInteraction()
-	return 0
+	return FALSE
 
 /obj/item/mech_equipment/mob_can_unequip(mob/M, slot, disable_warning)
-	. = ..()
-	if(. && owner)
-		//Installed equipment shall not be unequiped.
-		return FALSE
+	return ..() && !owner
 
 /obj/item/mech_equipment/mounted_system
 	var/holding_type

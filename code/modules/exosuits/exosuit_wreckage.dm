@@ -43,6 +43,7 @@
 	if(istype(W, /obj/item/weldingtool))
 		var/obj/item/weldingtool/WT = W
 		if(WT.welding)
+			WT.remove_fuel(1,user)
 			cutting = TRUE
 		else
 			to_chat(user, SPAN_WARNING("Turn the torch on, first."))

@@ -40,3 +40,5 @@ GLOBAL_LIST_INIT(mech_weapon_overlays, icon_states('icons/mob/mecha/mech_weapon_
 
 #define EXOFRAME_WIRED 1
 #define EXOFRAME_WIRED_ADJUSTED 2
+
+#define BAR_CAP 12

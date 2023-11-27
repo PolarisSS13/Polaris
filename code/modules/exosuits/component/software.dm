@@ -8,30 +8,30 @@
 	var/list/contains_software = list()
 
 /obj/item/weapon/circuitboard/exosystem/engineering
-	name = T_BOARD_MECH("engineering systems")
+	name = T_BOARD_MECH(MECH_SOFTWARE_ENGINEERING)
 	contains_software = list(MECH_SOFTWARE_ENGINEERING)
 	origin_tech = list(TECH_DATA = 1)
 
 /obj/item/weapon/circuitboard/exosystem/utility
-	name = T_BOARD_MECH("utility systems")
+	name = T_BOARD_MECH(MECH_SOFTWARE_UTILITY)
 	contains_software = list(MECH_SOFTWARE_UTILITY)
 	icon_state = "mcontroller"
 	origin_tech = list(TECH_DATA = 1)
 
 /obj/item/weapon/circuitboard/exosystem/medical
-	name = T_BOARD_MECH("medical systems")
+	name = T_BOARD_MECH(MECH_SOFTWARE_MEDICAL)
 	contains_software = list(MECH_SOFTWARE_MEDICAL)
 	icon_state = "mcontroller"
 	origin_tech = list(TECH_DATA = 3,TECH_BIO = 2)
 
 /obj/item/weapon/circuitboard/exosystem/weapons
-	name = T_BOARD_MECH("basic weapon systems")
+	name = T_BOARD_MECH(MECH_SOFTWARE_WEAPONS)
 	contains_software = list(MECH_SOFTWARE_WEAPONS)
 	icon_state = "mainboard"
 	origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 3)
 
 /obj/item/weapon/circuitboard/exosystem/advweapons
-	name = T_BOARD_MECH("advanced weapon systems")
+	name = T_BOARD_MECH(MECH_SOFTWARE_ADVWEAPONS)
 	contains_software = list(MECH_SOFTWARE_ADVWEAPONS)
 	icon_state = "mainboard"
 	origin_tech = list(TECH_DATA = 4, TECH_COMBAT = 5)

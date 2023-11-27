@@ -36,7 +36,7 @@
 	//Realistically a module disappearing without being uninstalled is wrong and a bug or adminbus
 	var/target = null
 	for(var/hardpoint in hardpoints)
-		if(hardpoints[hardpoint]== module_to_forget)
+		if(hardpoints[hardpoint] == module_to_forget)
 			target = hardpoint
 			break
 
@@ -54,113 +54,86 @@
 	refresh_hud()
 	update_icon()
 
-	for(var/thing in pilots)
-		var/mob/pilot = thing
-		if(pilot && pilot.client)
-			pilot.client.screen -= module_to_forget
+	for(var/mob/pilot in pilots)
+		pilot?.client.screen -= module_to_forget
+
+/mob/living/exosuit/proc/can_install_system(var/obj/item/system, var/system_hardpoint, var/mob/user)
+	if(hardpoints_locked)
+		if(user)
+			to_chat(user, SPAN_WARNING("Hardpoint system access is locked."))
+		return FALSE
+	if(hardpoints[system_hardpoint])
+		if(user)
+			to_chat(user, SPAN_WARNING("[system_hardpoint] is already in use."))
+		return FALSE
+
+	return TRUE
+
+/mob/living/exosuit/proc/do_install_system(var/obj/item/system, var/system_hardpoint)
+	var/obj/item/mech_equipment/ME = system
+	if(istype(ME))
+		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
+			return FALSE
+		if(ME.restricted_software)
+			if(!head || !head.software)
+				return FALSE
+			var/list/found_software = ME.restricted_software & head.software.installed_software
+			if(!LAZYLEN(found_software))
+				return FALSE
+		ME.installed(src)
+		GLOB.destroyed_event.register(system, src, .proc/forget_module)
+
+	system.forceMove(src)
+	hardpoints[system_hardpoint] = system
+
+	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
+	H.holding = system
+
+	system.screen_loc = H.screen_loc
+	system.hud_layerise()
+
+	hud_elements |= system
+	refresh_hud()
+	update_icon()
+
+	return TRUE
 
 /mob/living/exosuit/proc/install_system(var/obj/item/system, var/system_hardpoint, var/mob/user)
-
-	if(hardpoints_locked || hardpoints[system_hardpoint])
+	if(!can_install_system(system, system_hardpoint, user))
 		return FALSE
 
 	if(user)
-		var/delay = 30
-		if(delay > 0)
-			user.visible_message(SPAN_NOTICE("\The [user] begins trying to install \the [system] into \the [src]."))
-			if(!do_after(user, delay, src) || user.get_active_hand() != system)
-				return FALSE
-
-			if(user.unEquip(system))
-				to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
-				playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
-			else return FALSE
-
-	var/obj/item/mech_equipment/ME = system
-	if(istype(ME))
-		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
+		user.visible_message(SPAN_NOTICE("\The [user] begins to install \the [system] into \the [src]."))
+		if(!do_after(user, 30, src) || user.get_active_hand() != system)
 			return FALSE
-		if(ME.restricted_software)
-			if(!head || !head.software)
-				return FALSE
-			var/found
-			for(var/software in ME.restricted_software)
-				if(software in head.software.installed_software)
-					found = TRUE
-					break
-			if(!found)
-				return FALSE
-		ME.installed(src)
-		GLOB.destroyed_event.register(system, src, .proc/forget_module)
 
+		if(user.unEquip(system))
+			to_chat(user, SPAN_NOTICE("You install \the [system] in \the [src]'s [system_hardpoint]."))
+			playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
+		else return FALSE
 
-
-	system.forceMove(src)
-	hardpoints[system_hardpoint] = system
-
-	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	H.holding = system
-
-	system.screen_loc = H.screen_loc
-	system.hud_layerise()
-
-	hud_elements |= system
-	refresh_hud()
-	update_icon()
-
-	return 1
+	return do_install_system(system, system_hardpoint)
 
 /mob/living/exosuit/proc/install_system_initialize(var/obj/item/system, var/system_hardpoint)
-
-	if(hardpoints_locked || hardpoints[system_hardpoint])
+	if(!can_install_system(system, system_hardpoint))
 		return FALSE
 
-	var/obj/item/mech_equipment/ME = system
-	if(istype(ME))
-		if(ME.restricted_hardpoints && !(system_hardpoint in ME.restricted_hardpoints))
-			return FALSE
-		if(ME.restricted_software)
-			if(!head || !head.software)
-				return FALSE
-			var/found
-			for(var/software in ME.restricted_software)
-				if(software in head.software.installed_software)
-					found = TRUE
-					break
-			if(!found)
-				return FALSE
-		ME.installed(src)
-		GLOB.destroyed_event.register(system, src, .proc/forget_module)
+	return do_install_system(system, system_hardpoint)
 
+/mob/living/exosuit/proc/can_remove_system(var/system_hardpoint, var/mob/user, var/force)
+	if(hardpoints_locked && !force)
+		if(user)
+			to_chat(user, SPAN_WARNING("Hardpoint system access is locked."))
+		return FALSE
+	if(!hardpoints[system_hardpoint])
+		if(user)
+			to_chat(user, SPAN_NOTICE("[system_hardpoint] is unoccupied."))
+		return FALSE
 
-	system.forceMove(src)
-	hardpoints[system_hardpoint] = system
+	return TRUE
 
-	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	H.holding = system
-
-	system.screen_loc = H.screen_loc
-	system.hud_layerise()
-
-	hud_elements |= system
-	refresh_hud()
-	update_icon()
-
-	return 1
-
-/mob/living/exosuit/proc/remove_system(var/system_hardpoint, var/mob/user, var/force)
-
-	if((hardpoints_locked && !force) || !hardpoints[system_hardpoint])
-		return 0
-
+/mob/living/exosuit/proc/do_remove_system(var/system_hardpoint)
 	var/obj/item/system = hardpoints[system_hardpoint]
-	if(user)
-		var/delay = 30
-		if(delay > 0)
-			user.visible_message(SPAN_NOTICE("\The [user] begins trying to remove \the [system] from \the [src]."))
-			if(!do_after(user, delay, src) || hardpoints[system_hardpoint] != system)
-				return FALSE
-
 	hardpoints[system_hardpoint] = null
 
 	if(system_hardpoint == selected_hardpoint)
@@ -186,44 +159,34 @@
 	refresh_hud()
 	update_icon()
 
+/mob/living/exosuit/proc/remove_system(var/system_hardpoint, var/mob/user, var/force)
+
+	if(!can_remove_system(system_hardpoint, user, force))
+		return FALSE
+
+	var/obj/item/system = hardpoints[system_hardpoint]
+	if(user)
+		var/delay = 30
+		if(delay > 0)
+			user.visible_message(SPAN_NOTICE("\The [user] begins trying to remove \the [system] from \the [src]."))
+			if(!do_after(user, delay, src) || hardpoints[system_hardpoint] != system)
+				return FALSE
+
+	do_remove_system(system_hardpoint)
+
 	if(user)
 		system.forceMove(get_turf(user))
 		user.put_in_hands(system)
 		to_chat(user, SPAN_NOTICE("You remove \the [system] from \the [src]'s [system_hardpoint]."))
 		playsound(user.loc, 'sound/items/Screwdriver.ogg', 100, 1)
 
-	return 1
+	return TRUE
 
 /mob/living/exosuit/proc/remove_system_initialize(var/system_hardpoint, var/mob/exosuit, var/force)
 
-	if((hardpoints_locked && !force) || !hardpoints[system_hardpoint])
-		return 0
+	if(!can_remove_system(system_hardpoint, null, force))
+		return FALSE
 
-	var/obj/item/system = hardpoints[system_hardpoint]
+	do_remove_system(system_hardpoint)
 
-	hardpoints[system_hardpoint] = null
-
-	if(system_hardpoint == selected_hardpoint)
-		clear_selected_hardpoint()
-
-	var/obj/item/mech_equipment/ME = system
-	if(istype(ME))
-		ME.uninstalled()
-//	system.forceMove(get_turf(src)) // Managed by the wreckage.
-	system.screen_loc = null
-	system.layer = initial(system.layer)
-	GLOB.destroyed_event.unregister(system, src, .proc/forget_module)
-
-	var/obj/screen/movable/exosuit/hardpoint/H = hardpoint_hud_elements[system_hardpoint]
-	H.holding = null
-
-	for(var/thing in pilots)
-		var/mob/pilot = thing
-		if(pilot && pilot.client)
-			pilot.client.screen -= system
-
-	hud_elements -= system
-	refresh_hud()
-	update_icon()
-
-	return 1
+	return TRUE

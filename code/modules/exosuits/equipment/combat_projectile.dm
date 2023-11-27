@@ -9,6 +9,8 @@
 		A.load_ammo(O, user)
 		to_chat(user, SPAN_NOTICE("You load the ammo magazine into the [src]."))
 
+	return ..()
+
 /obj/item/mech_equipment/mounted_system/projectile/attack_self(var/mob/user)
 	. = ..()
 	if(. && holding)
