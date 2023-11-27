@@ -238,6 +238,28 @@
 				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/laser,
 				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/strong,
 				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/strong/guard)
+				
+/obj/random/mob/robotic/hivebot/melee
+	name = "Random Lesser Melee Hivebot"
+	desc = "This is a random hivebot that engages in melee but has no special ability."
+	icon_state = "robot"
+
+	mob_faction = "hivebot"
+
+/obj/random/mob/robotic/hivebot/melee/item_to_spawn()
+	return pick(prob(10);/mob/living/simple_mob/mechanical/hivebot,
+				prob(5);/mob/living/simple_mob/mechanical/hivebot/swarm)
+				
+/obj/random/mob/robotic/hivebot/laser
+	name = "Random Laser Hivebot"
+	desc = "This is a random hivebot that can shoot through obstacles and does burn damage."
+	icon_state = "robot"
+
+	mob_faction = "hivebot"
+
+/obj/random/mob/robotic/hivebot/laser/item_to_spawn()
+	return pick(prob(30);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/laser,
+				prob(5);/mob/living/simple_mob/mechanical/hivebot/ranged_damage/backline)
 
 //Mice
 

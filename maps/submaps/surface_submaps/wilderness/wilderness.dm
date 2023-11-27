@@ -286,7 +286,7 @@
 
 /datum/map_template/surface/wilderness/normal/Shelter1
 	name = "Shelter 1"
-	desc = "The remains of a resourceful, but prideful explorer."
+	desc = "The bitter end of a house after a drop pod crashed into it."
 	mappath = 'maps/submaps/surface_submaps/wilderness/Shelter.dmm'
 	cost = 10
 
