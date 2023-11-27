@@ -1,5 +1,3 @@
-#define BAR_CAP 12
-
 /mob/living/exosuit/proc/refresh_hud()
 	if(LAZYLEN(pilots))
 		for(var/thing in pilots)

@@ -1920,7 +1920,6 @@
 #include "code\modules\exosuits\premade\industrial.dm"
 #include "code\modules\exosuits\premade\light.dm"
 #include "code\modules\exosuits\premade\mercenary.dm"
-#include "code\modules\exosuits\premade\misc.dm"
 #include "code\modules\exosuits\premade\modern.dm"
 #include "code\modules\exosuits\premade\powerloader.dm"
 #include "code\modules\exosuits\premade\sleek.dm"

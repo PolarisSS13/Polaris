@@ -10,7 +10,7 @@
 				pilot.client.screen -= hud_elements
 				LAZYREMOVE(pilots, pilot)
 				UNSETEMPTY(pilots)
-		update_pilots()
+	update_pilots()
 
 	if(radio)
 		radio.on = (head && head.radio && head.radio.is_functional())
@@ -121,10 +121,3 @@
 		see_invisible = head.get_invisible()
 	if(body && (body.pilot_coverage < 100 || body.transparent_cabin))
 		sight &= ~BLIND
-/*
-/mob/living/exosuit/additional_sight_flags()
-	return sight
-
-/mob/living/exosuit/additional_see_invisible()
-	return see_invisible
-*/

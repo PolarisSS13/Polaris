@@ -36,9 +36,9 @@
 /obj/item/mech_component/examine(mob/user)
 	. = ..()
 	if(ready_to_install())
-		to_chat(user, SPAN_NOTICE("It is ready for installation."))
+		. += SPAN_NOTICE("It is ready for installation.")
 	else
-		show_missing_parts(user)
+		. += show_missing_parts(user)
 
 //These icons have multiple directions but before they're attached we only want south.
 /obj/item/mech_component/set_dir()
@@ -51,11 +51,12 @@
 	return
 
 /obj/item/mech_component/proc/install_component(var/obj/item/thing, var/mob/user)
-	if(user.unEquip(thing, src))
-		user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
-		thing.forceMove(src)
-		update_components()
-		return 1
+	if(!user.unEquip(thing, src))
+		return FALSE
+	user.visible_message(SPAN_NOTICE("\The [user] installs \the [thing] in \the [src]."))
+	thing.forceMove(src)
+	update_components()
+	return TRUE
 
 /obj/item/mech_component/proc/update_health()
 	total_damage = brute_damage + burn_damage
@@ -63,7 +64,7 @@
 	damage_state = between(MECH_COMPONENT_DAMAGE_UNDAMAGED, round((total_damage/max_damage) * 4), MECH_COMPONENT_DAMAGE_DAMAGED_TOTAL)
 
 /obj/item/mech_component/proc/ready_to_install()
-	return 1
+	return TRUE
 
 /obj/item/mech_component/proc/repair_brute_damage(var/amt)
 	take_brute_damage(-amt)
@@ -96,7 +97,9 @@
 /obj/item/mech_component/attackby(var/obj/item/thing, var/mob/user)
 	if(thing.has_tool_quality(TOOL_SCREWDRIVER))
 		if(contents.len)
-			var/obj/item/removed = pick(contents)
+			var/obj/item/removed = input("Which component would you like to remove") as null|anything in contents
+			if(!removed)
+				return
 			user.visible_message(SPAN_NOTICE("\The [user] removes \the [removed] from \the [src]."))
 			removed.forceMove(user.loc)
 			playsound(user.loc, 'sound/effects/pop.ogg', 50, 0)
@@ -124,15 +127,14 @@
 	if(!istype(WT))
 		return
 	if(!brute_damage)
-		to_chat(user, SPAN_NOTICE("You inspect \the [src] but find nothing to weld."))
+		to_chat(user, SPAN_NOTICE("You inspect \the [src] but find nothing to repair."))
 		return
 	if(!WT.welding)
 		to_chat(user, SPAN_WARNING("Turn \the [WT] on, first."))
 		return
 	if(WT.remove_fuel(1, user))
-		var/repair_value = 10
 		if(do_after(user, 10, src) && brute_damage)
-			repair_brute_damage(repair_value)
+			repair_brute_damage(10)
 			to_chat(user, SPAN_NOTICE("You mend the damage to \the [src]."))
 			playsound(user.loc, 'sound/items/Welder.ogg', 25, 1)
 
@@ -143,15 +145,14 @@
 		to_chat(user, SPAN_NOTICE("\The [src]'s wiring doesn't need replacing."))
 		return
 
-	var/needed_amount = 6
-	if(CC.get_amount() < needed_amount)
-		to_chat(user, SPAN_WARNING("You need at least [needed_amount] unit\s of cable to repair this section."))
+	if(CC.get_amount() < 6)
+		to_chat(user, SPAN_WARNING("You need at least 6 units of cable to repair this section."))
 		return
 
 	user.visible_message("\The [user] begins replacing the wiring of \the [src]...")
 
 	if(do_after(user, 10, src) && burn_damage)
-		if(QDELETED(CC) || QDELETED(src) || !CC.use(needed_amount))
+		if(QDELETED(CC) || QDELETED(src) || !CC.use(6))
 			return
 
 		repair_burn_damage(25)

@@ -44,23 +44,23 @@
 /obj/structure/heavy_vehicle_frame/examine(mob/user)
 	. = ..()
 	if(!arms)
-		to_chat(user, SPAN_WARNING("It is missing manipulators."))
+		. += SPAN_WARNING("It is missing manipulators.")
 	if(!legs)
-		to_chat(user, SPAN_WARNING("It is missing propulsion."))
+		. += SPAN_WARNING("It is missing propulsion.")
 	if(!head)
-		to_chat(user, SPAN_WARNING("It is missing sensors."))
+		. += SPAN_WARNING("It is missing sensors.")
 	if(!body)
-		to_chat(user, SPAN_WARNING("It is missing a chassis."))
+		. += SPAN_WARNING("It is missing a chassis.")
 	if(is_wired == EXOFRAME_WIRED)
-		to_chat(user, SPAN_WARNING("It has not had its wiring adjusted."))
+		. += SPAN_WARNING("It has not had its wiring adjusted.")
 	else if(!is_wired)
-		to_chat(user, SPAN_WARNING("It has not yet been wired."))
+		. += SPAN_WARNING("It has not yet been wired.")
 	if(is_reinforced == EXOFRAME_REINFORCED)
-		to_chat(user, SPAN_WARNING("It has not had its internal reinforcement secured."))
+		. += SPAN_WARNING("It has not had its internal reinforcement secured.")
 	else if(is_reinforced == EXOFRAME_REINFORCED_SECURE)
-		to_chat(user, SPAN_WARNING("It has not had its internal reinforcement welded in."))
+		. += SPAN_WARNING("It has not had its internal reinforcement welded in.")
 	else if(!is_reinforced)
-		to_chat(user, SPAN_WARNING("It does not have any internal reinforcement."))
+		. += SPAN_WARNING("It does not have any internal reinforcement.")
 
 /obj/structure/heavy_vehicle_frame/update_icon()
 	var/list/new_overlays = get_mech_images(list(legs, head, body, arms), layer)
@@ -91,10 +91,13 @@
 			is_reinforced = 0
 			return
 
+		if(!arms && !body && !legs && !head)
+			to_chat(user, SPAN_WARNING("There are no components to remove."))
+			return
+
 		var/to_remove = input("Which component would you like to remove") as null|anything in list(arms, body, legs, head)
 
 		if(!to_remove)
-			to_chat(user, SPAN_WARNING("There are no components to remove."))
 			return
 
 		if(uninstall_component(to_remove, user))

@@ -231,13 +231,12 @@
 
 /obj/item/material/knife/machete/mech/resolve_attackby(atom/A, mob/user, attack_modifier, click_parameters)
 	//Case 1: Default, you are hitting something that isn't a mob. Just do whatever, this isn't dangerous or op.
-	if (!istype(A, /mob/living))
+	if (!isliving(A))
 		return ..()
 
-	if (user.a_intent == I_HURT)
-		user.visible_message(SPAN_DANGER("\The [user] swings \the [src] at \the [A]!"))
-		playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
-		return ..()
+	user.visible_message(SPAN_DANGER("\The [user] swings \the [src] at \the [A]!"))
+	playsound(user, 'sound/mecha/mechmove03.ogg', 35, 1)
+	return ..()
 
 /obj/item/material/knife/machete/mech/attack_self(mob/living/user)
 	. = ..()
@@ -454,34 +453,32 @@
 
 	playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
 	for (var/mob/living/O in oviewers(flash_range, owner))
-		if(istype(O))
-			if(iscarbon(O))
-				var/mob/living/carbon/C = O
-				if(C.stat != DEAD)
-					var/safety = C.eyecheck()
-					if(safety <= 0)
-						var/flash_strength = 5
-						if(ishuman(C))
-							var/mob/living/carbon/human/H = C
-							flash_strength *= H.species.flash_mod
+		flash(O)
 
-							if(flash_strength > 0)
-								H.Confuse(flash_strength + 5)
-								H.Blind(flash_strength)
-								H.eye_blurry = max(H.eye_blurry, flash_strength + 5)
-								H.flash_eyes()
-								H.adjustHalLoss(halloss_per_flash * (flash_strength / 5)) // Should take four flashes to stun.
-								H.apply_damage(flash_strength * H.species.flash_burn/5, BURN, BP_HEAD, 0, 0, "Photon burns")
-
-			else if(issilicon(O) && prob(30))
-				var/mob/living/silicon/S = O
-				if(isrobot(S))
-					var/mob/living/silicon/robot/R = S
-					if(R.has_active_type(/obj/item/borg/combat/shield))
-						var/obj/item/borg/combat/shield/shield = locate() in R
-						if(shield)
-							if(shield.active)
-								shield.adjust_flash_count(R, 1)
+/obj/item/mech_equipment/flash/proc/flash(var/mob/living/L)
+	if(!istype(L))
+		return
+	if(ishuman(L))
+		var/mob/living/carbon/human/H = L
+		if(H.stat == DEAD)
+			return
+		if(H.eyecheck() > 0)
+			return
+		var/flash_strength = 5 * H.species.flash_mod
+		if(flash_strength <= 0)
+			return
+		H.Confuse(flash_strength + 5)
+		H.Blind(flash_strength)
+		H.eye_blurry = max(H.eye_blurry, flash_strength + 5)
+		H.flash_eyes()
+		H.adjustHalLoss(halloss_per_flash * (flash_strength / 5)) // Should take four flashes to stun.
+		H.apply_damage(flash_strength * H.species.flash_burn/5, BURN, BP_HEAD, 0, 0, "Photon burns")
+	else if(isrobot(L) && prob(30))
+		var/mob/living/silicon/robot/R = L
+		if(R.has_active_type(/obj/item/borg/combat/shield))
+			var/obj/item/borg/combat/shield/shield = locate() in R
+			if(shield?.active)
+				shield.adjust_flash_count(R, 1)
 
 /obj/item/mech_equipment/flash/attack_self(mob/user)
 	. = ..()
@@ -504,30 +501,4 @@
 		next_use = world.time + 15
 
 		playsound(src.loc, 'sound/weapons/flash.ogg', 100, 1)
-		if(iscarbon(O))
-			var/mob/living/carbon/C = O
-			if(C.stat != DEAD)
-				var/safety = C.eyecheck()
-				if(safety <= 0)
-					var/flash_strength = 5
-					if(ishuman(C))
-						var/mob/living/carbon/human/H = C
-						flash_strength *= H.species.flash_mod
-
-						if(flash_strength > 0)
-							H.Confuse(flash_strength + 5)
-							H.Blind(flash_strength)
-							H.eye_blurry = max(H.eye_blurry, flash_strength + 5)
-							H.flash_eyes()
-							H.adjustHalLoss(halloss_per_flash * (flash_strength / 5)) // Should take four flashes to stun.
-							H.apply_damage(flash_strength * H.species.flash_burn/5, BURN, BP_HEAD, 0, 0, "Photon burns")
-
-		else if(issilicon(O))
-			var/mob/living/silicon/S = O
-			if(isrobot(S))
-				var/mob/living/silicon/robot/R = S
-				if(R.has_active_type(/obj/item/borg/combat/shield))
-					var/obj/item/borg/combat/shield/shield = locate() in R
-					if(shield)
-						if(shield.active)
-							shield.adjust_flash_count(R, 1)
+		flash(O)

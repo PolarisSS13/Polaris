@@ -3,6 +3,7 @@
 /mob/living/exosuit
 	name = "exosuit"
 	desc = "A powerful machine piloted from a cockpit, but worn like a suit of armour."
+	description_info = "Interacting with the exosuit with an empty hand will attempt to remove the pilot, if the hatch is open."
 	density =  TRUE
 	opacity =  TRUE
 	anchored = TRUE
@@ -149,7 +150,12 @@
 
 	. = ..()
 
-/mob/living/exosuit/IsAdvancedToolUser()
+/mob/living/exosuit/IsAdvancedToolUser()	// If there's one pilot that's intelligent, assumedly they will keep the gaggle together.
+	if(LAZYLEN(pilots))
+		for(var/mob/living/L in pilots)
+			if(L.IsAdvancedToolUser() && L.stat == CONSCIOUS)
+				return TRUE
+		return FALSE
 	return TRUE
 
 /mob/living/exosuit/examine(mob/user)

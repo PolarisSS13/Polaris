@@ -141,8 +141,8 @@
 	if(locked)
 		string = locked.name + " - "
 	if(mode == 1)
-		string += "Pull"
-	else string += "Push"
+		string += "Single"
+	else string += "Area"
 	return string
 
 
@@ -265,23 +265,26 @@
 		var/obj/item/cell/C = owner.get_cell()
 		if(istype(C))
 			C.use(active_power_use * CELLRATE)
-		owner.visible_message("<span class='danger'>\The [owner] starts to drill \the [target]</span>", "<span class='warning'>You hear a large drill.</span>")
+		owner.visible_message(SPAN_DANGER("\The [owner] starts to drill \the [target]."), SPAN_DANGER("You hear a large drill."))
 
 		var/T = target.loc
 
 		//Better materials = faster drill!
 		var/delay = max(5, 20 - drill_head.material.protectiveness)
 		owner.setClickCooldown(delay) //Don't spamclick!
-		if(do_after(owner, delay, target) && drill_head)
+		if(drill_head && do_after(owner, delay, target))
 			if(src == owner.selected_system)
 				if(drill_head.durability <= 0)
 					drill_head.shatter()
 					drill_head = null
 					return
+				else if(drill_head.durability <= (drill_head.material.integrity * 0.2) && prob(20))
+					to_chat(user, SPAN_NOTICE("\The [drill_head] emits a terrible screeching!"))
 				if(istype(target, /turf/simulated/wall))
 					var/turf/simulated/wall/W = target
 					if(max(W.material.hardness, W.reinf_material ? W.reinf_material.hardness : 0) > drill_head.material.hardness)
-						to_chat(user, "<span class='warning'>\The [target] is too hard to drill through with this drill head.</span>")
+						to_chat(user, SPAN_WARNING("\The [target] is too hard to drill through with this drill head."))
+						return
 					target.ex_act(2)
 					drill_head.durability -= 1
 					log_and_message_admins("used [src] on the wall [W].", user, owner.loc)
@@ -306,6 +309,7 @@
 							for(var/obj/item/ore/ore in range(T,1))
 								if(get_dir(owner,ore)&owner.dir)
 									ore.Move(ore_box)
+							break	// Already placed our ore in a container, don't go to another.
 
 				playsound(src, 'sound/weapons/circsawhit.ogg', 50, 1)
 

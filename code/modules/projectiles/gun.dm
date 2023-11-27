@@ -181,7 +181,6 @@
 					)
 				M.drop_item()
 		else
-			to_world("No projectile, clumsy!")
 			handle_click_empty(user)
 		return 0
 	return 1
@@ -365,7 +364,6 @@
 		*/
 		var/obj/projectile = consume_next_projectile(user)
 		if(!projectile)
-			to_world("No projectile!")
 			handle_click_empty(user)
 			break
 
