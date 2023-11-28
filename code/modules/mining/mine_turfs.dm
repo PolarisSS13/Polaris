@@ -679,7 +679,7 @@ var/global/list/mining_overlay_cache = list()
 				excavate_find(prob(5), finds[1])
 	else if(rand(1,500) == 1)
 		visible_message("<span class='notice'>An old dusty crate was buried within!</span>")
-		new /obj/structure/closet/crate/secure/loot(src)
+		new /obj/structure/closet/crate/secure/decalock/loot(src)
 
 	make_floor()
 	update_icon(1)

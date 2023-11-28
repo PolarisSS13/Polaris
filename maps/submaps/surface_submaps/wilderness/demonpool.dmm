@@ -16,10 +16,7 @@
 /obj/item/bone,
 /obj/item/bone/ribs,
 /obj/item/organ/internal/eyes,
-/obj/structure/closet/crate/secure/POI{
-	desc = "A crate with a lock on it, painted in the scheme of the station's scientists.";
-	name = "science crate"
-	},
+/obj/structure/closet/crate/secure/decalock,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "ay" = (
@@ -170,10 +167,10 @@
 /obj/random/medical,
 /obj/random/firstaid,
 /obj/random/medical,
-/obj/structure/closet/crate/secure/POI{
-	desc = "A secure crate emblazoned with the NanoMed Medical livery, a subsidary of the NanoTrasen Corporation.";
-	name = "surplus med crate";
-	closet_appearance = /decl/closet_appearance/crate/secure/nanotrasenmedical
+/obj/structure/closet/crate/secure/decalock{
+	name = "decalock Nanomed crate";
+	closet_appearance = /decl/closet_appearance/crate/secure/nanotrasenmedical;
+	desc = "A secure crate emblazoned with the NanoMed Medical livery, a subsidary of the NanoTrasen Corporation."
 	},
 /turf/simulated/floor/plating,
 /area/submap/DemonPool)
@@ -410,6 +407,9 @@
 /obj/effect/decal/remains/mummy2,
 /obj/item/clothing/suit/storage/hooded/wintercoat/janitor,
 /obj/item/bedsheet/brown,
+/obj/item/stack/material/silver{
+	amount = 15
+	},
 /turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "sM" = (
@@ -575,11 +575,11 @@
 /obj/item/book/tome,
 /obj/item/spellbook/oneuse/fireball,
 /obj/item/bone/skull/unknown,
-/obj/structure/closet/crate/secure/POI{
-	desc = "A bulky, secure crate in the colors of the station science team, secured with a deca-lock. What could be inside?";
-	name = "secure science crate";
-	health = 300;
-	closet_appearance = /decl/closet_appearance/large_crate/secure
+/obj/structure/closet/crate/secure/decalock{
+	desc = "A hefty, reinforced metal crate with an electronic locking system.";
+	name = "reinforced decalock crate";
+	closet_appearance = /decl/closet_appearance/large_crate/secure;
+	health = 300
 	},
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
@@ -699,13 +699,6 @@
 	dir = 4
 	},
 /turf/simulated/floor/cult,
-/area/submap/DemonPool)
-"In" = (
-/obj/structure/closet/crate/secure/loot,
-/obj/item/stack/material/silver{
-	amount = 15
-	},
-/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "Iu" = (
 /obj/structure/sink{
@@ -1480,7 +1473,7 @@ Pu
 yS
 de
 Tt
-In
+Pu
 VK
 vk
 vA
