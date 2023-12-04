@@ -47,7 +47,7 @@
 "uf" = (/obj/structure/table/sifwoodentable,/obj/item/flashlight/lamp/green,/obj/item/paper_bin,/obj/item/pen/blade/fountain,/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
 "uz" = (/obj/effect/decal/remains,/obj/item/material/knife/tacknife/combatknife,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
 "vs" = (/obj/effect/spider/stickyweb,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"vu" = (/obj/structure/closet/crate/secure/loot,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
+"vu" = (/obj/structure/closet/crate/secure/decalock/loot,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
 "vF" = (/obj/random/mob/sif,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
 "vQ" = (/mob/living/simple_mob/mechanical/viscerator,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
 "wg" = (/obj/random/landmine,/turf/simulated/floor/wood/sif,/area/submap/CaveS)

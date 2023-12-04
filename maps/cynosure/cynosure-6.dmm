@@ -5073,7 +5073,7 @@
 /obj/effect/floor_decal/industrial/warning{
 	dir = 1
 	},
-/obj/structure/closet/crate/secure/loot,
+/obj/structure/closet/crate/secure/decalock/loot,
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
 "fKI" = (
@@ -18127,7 +18127,7 @@
 /area/skipjack_station/start)
 "tDn" = (
 /obj/effect/floor_decal/industrial/warning,
-/obj/structure/closet/crate/secure/loot,
+/obj/structure/closet/crate/secure/decalock/loot,
 /turf/simulated/shuttle/floor/black,
 /area/shuttle/merchant/home)
 "tDD" = (
