@@ -2656,6 +2656,12 @@ shaved
 	body_parts = list(BP_HEAD)
 	species_allowed = list(SPECIES_HUMAN,SPECIES_HUMAN_VATBORN,SPECIES_SKRELL)
 
+/datum/sprite_accessory/marking/masquerade
+	name = "Masquerade Mask"
+	icon_state = "masquerade"
+	body_parts = list(BP_HEAD)
+	color_blend_mode = ICON_MULTIPLY
+
 /datum/sprite_accessory/marking/tat_face_ridge
 	name = "Tattoo (Nose Ridge, Face)"
 	icon_state = "tat_face_ridge"
