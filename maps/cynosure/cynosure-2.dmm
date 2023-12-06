@@ -7126,9 +7126,6 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = -28
 	},
-/obj/item/cassette_tape/random,
-/obj/item/taperecorder,
-/obj/item/megaphone,
 /obj/structure/closet/secure_closet/hos/cynosure,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
@@ -8244,9 +8241,7 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
 "dJA" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /obj/structure/railing/grey{
 	dir = 4
 	},
@@ -21049,9 +21044,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/park)
 "jDZ" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/open,
 /area/surface/outside/plains/station)
 "jEc" = (
@@ -21214,7 +21207,8 @@
 	icon_state = "2-8"
 	},
 /obj/structure/disposalpipe/segment{
-	dir = 4
+	dir = 8;
+	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
@@ -21483,9 +21477,6 @@
 "jOp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/heads/hos)
@@ -29001,9 +28992,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/heads/hos)
 "mTi" = (
@@ -30364,11 +30352,14 @@
 "nBA" = (
 /obj/effect/floor_decal/borderfloorblack,
 /obj/effect/floor_decal/corner/blue/border,
-/obj/structure/filingcabinet,
 /obj/item/storage/secure/safe{
 	pixel_x = 5;
 	pixel_y = -26
 	},
+/obj/structure/table/reinforced,
+/obj/item/cassette_tape/random,
+/obj/item/taperecorder,
+/obj/item/megaphone,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "nCe" = (
@@ -34720,9 +34711,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "pnA" = (
@@ -35056,9 +35044,7 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/surgery)
 "psE" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/plateau)
 "psJ" = (
@@ -37982,9 +37968,7 @@
 /obj/structure/railing/grey{
 	dir = 4
 	},
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/open,
 /area/surface/outside/plains/station)
 "qEU" = (
@@ -38299,10 +38283,6 @@
 	dir = 4
 	},
 /obj/machinery/papershredder,
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -40000,9 +39980,7 @@
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/reactor_smes)
 "ryn" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /obj/structure/railing/grey{
 	dir = 8
 	},
@@ -44536,9 +44514,7 @@
 /obj/structure/railing/grey{
 	dir = 8
 	},
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/open,
 /area/surface/outside/plains/station)
 "tFB" = (
@@ -44959,6 +44935,8 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "tMQ" = (
@@ -51238,8 +51216,7 @@
 /obj/effect/floor_decal/corner/blue/bordercorner2{
 	dir = 4
 	},
-/obj/machinery/disposal,
-/obj/structure/disposalpipe/trunk,
+/obj/structure/filingcabinet,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "wMa" = (
