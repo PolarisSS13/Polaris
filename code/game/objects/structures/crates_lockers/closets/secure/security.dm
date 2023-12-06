@@ -71,7 +71,7 @@
 
 	starts_with = list(
 		/obj/item/clothing/head/helmet/HoS,
-		/obj/item/clothing/head/helmet/HoS/hat,
+		/obj/item/clothing/head/helmet/HoS/cap,
 		/obj/item/clothing/suit/storage/vest/hos,
 		/obj/item/clothing/under/rank/head_of_security/jensen,
 		/obj/item/clothing/under/rank/head_of_security/corp,
