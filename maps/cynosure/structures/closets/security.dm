@@ -36,7 +36,8 @@
 		/obj/item/clothing/shoes/boots/winter/security,
 		/obj/item/flashlight/maglight,
 		/obj/item/clothing/mask/gas/half,
-		/obj/item/clothing/mask/gas/sechailer/swat/hos
+		/obj/item/clothing/mask/gas/sechailer/swat/hos,
+		/obj/item/clothing/accessory/storage/black_vest
 	)
 
 /obj/structure/closet/secure_closet/hos/Initialize()
