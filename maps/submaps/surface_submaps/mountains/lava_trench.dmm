@@ -107,7 +107,7 @@
 "cj" = (/obj/item/clothing/head/bio_hood/anomaly,/turf/simulated/floor/tiled/old_tile,/area/submap/lava_trench/outpost)
 "ck" = (/obj/item/clothing/suit/bio_suit/anomaly,/turf/simulated/floor/tiled/old_tile,/area/submap/lava_trench/outpost)
 "co" = (/obj/machinery/floodlight,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/lava_trench)
-"cp" = (/obj/machinery/light/small/flicker,/obj/structure/closet/crate/secure/loot,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/lava_trench)
+"cp" = (/obj/machinery/light/small/flicker,/obj/structure/closet/crate/secure/decalock/loot,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/lava_trench)
 "cq" = (/obj/item/banner/nt,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/lava_trench)
 "cr" = (/obj/structure/table/steel,/obj/item/material/shard/phoron,/turf/simulated/floor/tiled/asteroid_steel,/area/submap/lava_trench)
 "cs" = (/obj/item/banner/nt,/turf/simulated/floor/outdoors/rocks/caves,/area/submap/lava_trench)

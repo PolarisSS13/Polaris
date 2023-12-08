@@ -1,96 +1,121 @@
 //MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
 "ag" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
+	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "aj" = (
-/obj/structure/sign/warning/fire,
-/turf/simulated/wall/cult,
+/obj/effect/decal/cleanable/blood,
+/obj/random/maintenance/research,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "au" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/fire,
-/obj/fire,
-/obj/fire,
-/obj/fire,
-/obj/fire,
+/obj/item/spellbook/oneuse/forcewall,
+/obj/item/bone,
+/obj/item/bone/ribs,
+/obj/item/organ/internal/eyes,
+/obj/structure/closet/crate/secure/decalock,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "ay" = (
-/obj/structure/girder/cult,
-/obj/item/material/twohanded/fireaxe/scythe{
-	start_anomalous = 1
-	},
-/turf/simulated/floor/cult,
+/obj/structure/girder,
+/obj/effect/floor_decal/rust,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "bb" = (
-/obj/item/melee/cursedblade,
+/mob/living/simple_mob/creature/cult/strong{
+	icon_scale_x = 1.2;
+	icon_scale_y = 1.2
+	},
+/obj/item/material/shard,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
+"bc" = (
+/obj/machinery/door/airlock,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
 "bh" = (
-/obj/structure/simple_door,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/item/melee/energy/sword/red,
+/obj/machinery/light/small/emergency{
+	dir = 4
 	},
+/obj/structure/loot_pile/surface/bones,
+/obj/random/maintenance/research,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"bo" = (
+/obj/effect/decal/cleanable/ash,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "bw" = (
-/obj/structure/flora/tree/sif,
-/turf/template_noop,
-/area/template_noop)
-"cn" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/machinery/light/small{
+	dir = 1
 	},
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"bz" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/random/vendordrink,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"bO" = (
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"cn" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "de" = (
-/obj/fire,
-/turf/simulated/floor,
+/turf/simulated/wall/concrete,
 /area/submap/DemonPool)
 "dG" = (
-/obj/structure/simple_door,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/structure/closet/secure_closet/personal,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"ee" = (
+/obj/random/obstruction,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "es" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/structure/loot_pile/surface/bones,
-/mob/living/simple_mob/faithless/cult/strong,
+/obj/fire,
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning/corner,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "eM" = (
-/obj/structure/table/woodentable,
-/obj/item/book,
-/obj/item/spellbook/oneuse/forcewall,
-/turf/simulated/floor,
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/obj/effect/floor_decal/rust,
+/turf/simulated/floor/tiled/asteroid_steel,
 /area/submap/DemonPool)
 "eR" = (
 /turf/simulated/wall/cult,
 /area/submap/DemonPool)
 "eV" = (
-/obj/structure/bonfire/permanent,
-/obj/structure/grille/cult,
-/turf/simulated/floor/cult,
-/area/submap/DemonPool)
+/turf/simulated/mineral/ignore_mapgen,
+/area/template_noop)
 "eW" = (
 /turf/template_noop,
 /area/template_noop)
 "fW" = (
-/obj/structure/grille/cult,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
 	},
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "gt" = (
-/obj/structure/grille/broken/cult,
-/mob/living/simple_mob/creature/cult/strong,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/random/junk,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "gF" = (
 /turf/simulated/floor/outdoors/dirt{
@@ -98,56 +123,93 @@
 	},
 /area/template_noop)
 "hr" = (
-/obj/fire,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 6
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "hF" = (
-/obj/effect/spawner/gibs/human,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/mob/living/simple_mob/creature/cult/strong,
+/obj/item/material/shard,
+/obj/item/material/shard,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
 	},
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "hO" = (
+/obj/structure/grille/cult,
+/obj/structure/window/reinforced/full,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"hP" = (
 /obj/fire,
 /obj/fire,
 /obj/fire,
+/obj/structure/grille/cult,
+/obj/structure/window/reinforced/full,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "hQ" = (
-/mob/living/simple_mob/faithless/cult/strong,
-/turf/simulated/floor/cult,
+/obj/structure/salvageable/machine_os,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"hV" = (
+/obj/structure/table/steel,
+/obj/item/taperecorder,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "hW" = (
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
+/obj/item/clothing/accessory/stethoscope,
+/obj/item/storage/belt/medical,
+/obj/random/maintenance/medical,
+/obj/random/medical,
+/obj/random/firstaid,
+/obj/random/medical,
+/obj/structure/closet/crate/secure/decalock{
+	name = "decalock Nanomed crate";
+	closet_appearance = /decl/closet_appearance/crate/secure/nanotrasenmedical;
+	desc = "A secure crate emblazoned with the NanoMed Medical livery, a subsidary of the NanoTrasen Corporation."
 	},
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "hZ" = (
-/obj/random/junk,
-/turf/template_noop,
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/asteroid_steel,
+/area/submap/DemonPool)
+"iq" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/carpet,
+/area/submap/DemonPool)
+"it" = (
+/obj/machinery/power/apc{
+	dir = 1;
+	name = "north bump";
+	pixel_y = 24;
+	operating = 0
+	},
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "jt" = (
-/obj/structure/loot_pile/surface/bones,
-/obj/item/clothing/head/culthood/alt,
-/obj/item/stack/material/silver{
-	amount = 15
-	},
+/obj/structure/cult/pylon,
+/obj/machinery/artifact_scanpad,
+/obj/fire,
+/obj/fire,
+/obj/machinery/light/small/emergency,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "jv" = (
 /turf/simulated/floor/outdoors/dirt,
 /area/template_noop)
 "jG" = (
-/obj/effect/spawner/gibs/human,
-/obj/effect/rune,
-/turf/simulated/floor/cult,
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 8
+	},
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "jK" = (
 /obj/fire,
@@ -155,10 +217,17 @@
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "jS" = (
-/obj/structure/grille/cult,
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
 	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/cult/pylon,
+/obj/machinery/door/window/eastleft,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "jX" = (
 /obj/structure/loot_pile/maint/trash,
@@ -166,469 +235,765 @@
 	outdoors = 0
 	},
 /area/submap/DemonPool)
+"kc" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 1
+	},
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
 "lo" = (
-/obj/item/clothing/suit/cultrobes/alt,
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/cult/pylon,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/machinery/door/window/southleft,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "lr" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/template_noop,
+/turf/simulated/floor/carpet,
 /area/submap/DemonPool)
 "lG" = (
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
-	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "lV" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
-	},
+/obj/random/obstruction,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "md" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
-	},
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/machinery/space_heater,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "mp" = (
-/obj/fire,
+/obj/random/trash,
 /turf/simulated/floor/outdoors/dirt{
 	outdoors = 0
 	},
 /area/submap/DemonPool)
 "mO" = (
-/obj/effect/spawner/gibs/human,
-/obj/item/clothing/head/culthood/alt,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
 /turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"mQ" = (
+/obj/effect/gateway,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "mU" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
+/obj/fire,
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
 	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
-/area/submap/DemonPool)
-"oi" = (
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
+"mX" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"nH" = (
+/obj/machinery/door/window/westright,
+/obj/structure/salvageable/data,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/structure/window/reinforced,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"oi" = (
+/obj/structure/table/standard,
+/obj/item/flashlight/lamp,
+/obj/random/medical/lite,
+/obj/item/paper{
+	name = "caretaker log";
+	info = "<I>An excerpt from a much longer and more mundane journal. There's spots for times and dates, but oddly every single one seems to have been smudged or damaged...</I> <BR> Whole team of eggheads keep coming and going to check out the new site. Going to need more medical supplies, they leaving the lab with what look like radiation burns all over their bodies and weird looks in their eyes. One's even in the bathroom now, 'cleaning up'. <BR> Maybe that old surplus crate has some useful stuff, just need to figure out how to pop the lock."
+	},
+/turf/simulated/floor/carpet,
+/area/submap/DemonPool)
 "on" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
+/obj/effect/decal/cleanable/blood,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"oN" = (
+/obj/fire,
+/obj/structure/grille/cult,
+/obj/structure/window/reinforced/full,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "pb" = (
+/obj/structure/table/standard,
+/obj/item/pen/fountain,
+/obj/item/paper_bin,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"pE" = (
 /obj/fire,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/obj/fire,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "pH" = (
-/obj/structure/grille/cult,
-/turf/simulated/floor/cult,
+/obj/effect/floor_decal/rust,
+/obj/fire,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "pX" = (
-/obj/random/junk,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/machinery/door/airlock,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "qa" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
-	},
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/obj/machinery/portable_atmospherics/powered/scrubber,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "qb" = (
-/mob/living/simple_mob/creature/cult/strong,
-/turf/simulated/floor,
+/obj/structure/grille/cult,
+/obj/machinery/door/blast/regular/open,
+/obj/structure/window/reinforced/full,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "qc" = (
-/obj/fire,
-/obj/random/curseditem,
-/turf/simulated/floor/cult,
+/obj/machinery/light/small{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "qQ" = (
 /obj/fire,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
+"rh" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/submap/DemonPool)
 "sb" = (
-/obj/item/clothing/shoes/cult,
-/obj/item/melee/energy/sword/red,
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/structure/window/reinforced,
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/window/reinforced{
+	dir = 4;
+	health = 1e+006
+	},
+/obj/structure/cult/pylon,
+/obj/machinery/door/window/westleft,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "si" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/fire,
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
 /turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"sC" = (
+/obj/effect/decal/remains/mummy2,
+/obj/item/clothing/suit/storage/hooded/wintercoat/janitor,
+/obj/item/bedsheet/brown,
+/obj/item/stack/material/silver{
+	amount = 15
+	},
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "sM" = (
-/obj/effect/gateway,
+/obj/effect/decal/cleanable/ash,
+/obj/fire,
+/obj/fire,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
+"sZ" = (
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
 "tq" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/sign/warning{
+	name = "\improper PROTECTIVE EQUIPMENT MUST BE WORN";
+	pixel_x = 32
 	},
+/obj/machinery/door/airlock/highsecurity,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "tC" = (
-/mob/living/simple_mob/creature/cult/strong,
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 5
 	},
+/obj/effect/floor_decal/rust,
+/obj/structure/table/rack,
+/obj/item/clothing/gloves/sterile/latex,
+/obj/item/clothing/glasses/science,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"vk" = (
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 8
+	},
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "vv" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
 /obj/fire,
-/mob/living/simple_mob/faithless/cult/strong,
+/obj/machinery/door/airlock/glass_research,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "vw" = (
-/turf/simulated/floor,
+/obj/structure/bed/chair/office/dark{
+	dir = 8
+	},
+/obj/fire,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"vA" = (
+/obj/fire,
+/obj/fire,
+/mob/living/simple_mob/faithless/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "vJ" = (
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/DemonPool)
 "vW" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/effect/floor_decal/rust,
+/obj/structure/table/steel,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"xl" = (
+/obj/structure/table/standard,
+/obj/item/book,
+/obj/item/flashlight/lamp/green,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"yv" = (
+/obj/structure/extinguisher_cabinet{
+	dir = 8;
+	pixel_x = -30
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"yS" = (
+/obj/structure/closet/crate,
+/obj/item/stack/material/phoron{
+	amount = 25
+	},
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"yW" = (
+/obj/item/clothing/suit/storage/toggle/labcoat,
+/obj/effect/decal/remains/human,
+/obj/item/clothing/head/culthood{
+	start_anomalous = 1
+	},
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"zi" = (
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"zj" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
+	},
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"zs" = (
+/obj/structure/table/rack,
+/obj/random/maintenance/research,
+/obj/random/junk,
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"zI" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"zS" = (
+/obj/fire,
+/mob/living/simple_mob/creature/cult,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"zU" = (
+/obj/structure/sign/warning/cold{
+	layer = 3.3;
+	pixel_y = -32
+	},
+/turf/simulated/wall/r_concrete,
+/area/submap/DemonPool)
+"zZ" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"Ag" = (
+/obj/fire,
+/obj/fire,
+/obj/effect/spawner/gibs/human,
 /mob/living/simple_mob/faithless/cult/strong{
 	health = 250;
 	melee_damage_lower = 20;
 	melee_damage_upper = 30;
-	name = "Recursive entity"
+	name = "Recursive entity";
+	icon_scale_x = 1.3;
+	icon_scale_y = 1.3
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 1
 	},
 /turf/simulated/floor/cult,
-/area/submap/DemonPool)
-"xl" = (
-/obj/random/junk,
-/turf/simulated/mineral/ignore_mapgen,
-/area/template_noop)
-"yS" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
-/area/submap/DemonPool)
-"yW" = (
-/obj/structure/cult/pylon,
-/turf/simulated/floor/cult,
-/area/submap/DemonPool)
-"zi" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
-	},
-/turf/simulated/floor/cult,
-/area/submap/DemonPool)
-"zj" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
-	},
-/turf/simulated/floor/cult,
-/area/submap/DemonPool)
-"zI" = (
-/obj/structure/grille/broken/cult,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
-/area/submap/DemonPool)
-"zU" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
-/area/submap/DemonPool)
-"zZ" = (
-/obj/random/junk,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
-/area/submap/DemonPool)
-"Ag" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt,
 /area/submap/DemonPool)
 "Ah" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/item/stool,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/machinery/door/window/westright,
+/obj/structure/window/reinforced{
+	dir = 4
 	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/obj/item/book/tome,
+/obj/item/spellbook/oneuse/fireball,
+/obj/item/bone/skull/unknown,
+/obj/structure/closet/crate/secure/decalock{
+	desc = "A hefty, reinforced metal crate with an electronic locking system.";
+	name = "reinforced decalock crate";
+	closet_appearance = /decl/closet_appearance/large_crate/secure;
+	health = 300
+	},
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Ax" = (
-/obj/structure/loot_pile/surface/bones,
-/turf/simulated/floor,
+/obj/machinery/door/airlock/maintenance/common,
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"AB" = (
+/obj/structure/girder/reinforced,
+/obj/effect/floor_decal/rust,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "AF" = (
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/machinery/door/airlock/external,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "AH" = (
 /obj/structure/cult/tome,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Bb" = (
-/obj/fire,
-/obj/fire,
-/obj/fire,
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
+/obj/effect/decal/cleanable/blood/oil,
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"Br" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
 	},
+/obj/fire,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"BO" = (
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
+	},
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/submap/DemonPool)
+"CS" = (
+/obj/item/material/shard,
+/obj/effect/floor_decal/rust,
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "CV" = (
-/obj/random/junk,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
 /area/submap/DemonPool)
 "CY" = (
-/obj/effect/spawner/gibs/human,
-/turf/simulated/floor/outdoors/rocks{
+/obj/fire,
+/obj/structure/grille,
+/obj/item/material/shard,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"Dj" = (
+/obj/structure/simple_door/cult,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"DE" = (
+/obj/fire,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"DY" = (
+/obj/random/mob/sif/hostile,
+/obj/structure/animal_den,
+/turf/simulated/floor/outdoors/dirt{
 	outdoors = 0
 	},
 /area/submap/DemonPool)
 "DZ" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
 /obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "EQ" = (
-/obj/structure/loot_pile/surface/bones,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/structure/bed/padded,
+/obj/item/bedsheet/brown,
+/turf/simulated/floor/carpet,
+/area/submap/DemonPool)
+"Fe" = (
+/obj/structure/grille/cult,
+/obj/item/material/shard,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Fq" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/mineral/ignore_mapgen,
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"Fu" = (
+/obj/structure/mirror{
+	icon_state = "mirror_broke"
+	},
+/turf/simulated/wall/concrete,
 /area/submap/DemonPool)
 "Hb" = (
 /turf/template_noop,
 /area/submap/DemonPool)
-"Hl" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/random/curseditem,
+"Hg" = (
+/obj/structure/grille,
+/obj/structure/window/reinforced/full,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
-"HW" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/obj/structure/grille/broken/cult,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+"Hh" = (
+/obj/effect/floor_decal/corner/purple/border,
+/obj/machinery/light/small,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"Hl" = (
+/obj/effect/floor_decal/corner/purple/border,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"Hq" = (
+/obj/fire,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
 	},
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"Iu" = (
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = 11
+	},
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "IP" = (
-/turf/simulated/floor,
+/obj/item/material/shard,
+/obj/fire,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Jo" = (
 /turf/simulated/mineral/ignore_mapgen,
 /area/submap/DemonPool)
+"JB" = (
+/mob/living/simple_mob/creature/cult,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
 "JK" = (
-/obj/structure/girder/cult,
-/turf/simulated/floor/outdoors/rocks{
-	outdoors = 0
-	},
+/obj/item/material/shard,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "JM" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt,
+/obj/effect/floor_decal/corner/purple/border,
+/obj/fire,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "JN" = (
-/obj/structure/flora/tree/sif,
-/turf/simulated/floor/outdoors/dirt,
-/area/template_noop)
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
 "JP" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 10
+	},
+/turf/simulated/floor/tiled/asteroid_steel,
+/area/submap/DemonPool)
+"JV" = (
+/obj/structure/bookcase{
+	name = "bookcase (Religious)"
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"JX" = (
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 8
+	},
+/obj/effect/floor_decal/rust,
+/obj/structure/salvageable/console_broken_os{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"JZ" = (
+/obj/structure/table/steel,
+/obj/machinery/light/small/emergency{
+	dir = 8
+	},
 /obj/fire,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
-"JV" = (
-/obj/structure/loot_pile/maint/trash,
-/turf/simulated/floor/outdoors/dirt,
+"Ko" = (
+/obj/machinery/light/small/emergency{
+	dir = 4
+	},
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "KM" = (
-/obj/fire,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/structure/sign/warning/high_voltage,
+/turf/simulated/wall/concrete,
 /area/submap/DemonPool)
 "KR" = (
 /obj/effect/spawner/gibs/human,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Lh" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
-	},
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
-/area/submap/DemonPool)
-"Lu" = (
-/obj/fire,
-/turf/simulated/floor/outdoors/dirt,
-/area/submap/DemonPool)
-"Lx" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/structure/loot_pile/surface/bones,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/structure/simple_door/cult,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
-"LD" = (
-/obj/structure/bonfire/permanent,
-/obj/structure/grille/cult,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+"Ll" = (
+/obj/machinery/door/window/westright,
+/obj/structure/salvageable/data,
+/obj/structure/window/reinforced{
+	dir = 4
 	},
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/effect/floor_decal/industrial/warning{
+	dir = 8
+	},
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"Lu" = (
+/obj/machinery/door/airlock/external,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/techfloor/grid,
+/area/submap/DemonPool)
+"Lx" = (
+/obj/structure/table/standard,
+/obj/structure/flora/pottedplant/overgrown{
+	pixel_y = 12
+	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"LD" = (
+/obj/effect/floor_decal/rust,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "MB" = (
-/obj/effect/gateway,
-/obj/fire,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/machinery/door/airlock/science,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "NI" = (
-/obj/effect/spawner/gibs/human,
-/obj/fire,
-/obj/effect/decal/cleanable/dirt,
+/obj/effect/decal/cleanable/blood,
+/obj/structure/toilet,
+/mob/living/simple_mob/faithless/cult/strong,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Oo" = (
-/obj/structure/grille/broken/cult,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor,
+/obj/effect/floor_decal/industrial/warning/dust{
+	dir = 8
+	},
+/turf/simulated/floor/tiled/asteroid_steel,
 /area/submap/DemonPool)
 "OK" = (
-/obj/structure/simple_door/cult,
-/obj/fire,
-/obj/fire,
-/obj/fire,
-/obj/fire,
-/turf/simulated/floor,
+/obj/structure/closet/crate/trashcart,
+/obj/random/contraband,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/DemonPool)
+"OZ" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/table/rack,
+/obj/random/maintenance,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "Pu" = (
-/obj/structure/grille/cult,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/turf/simulated/floor/plating,
+/area/submap/DemonPool)
+"PC" = (
+/obj/structure/bed/chair/sofa/black/right{
+	dir = 1
 	},
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"PG" = (
+/obj/machinery/floodlight,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "Qq" = (
-/obj/item/beartrap/hunting{
-	anchored = 1;
-	deployed = 1;
-	start_anomalous = 1
+/obj/structure/salvageable/data,
+/obj/structure/window/reinforced{
+	dir = 8
 	},
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 4
 	},
+/obj/effect/floor_decal/industrial/warning/full,
+/obj/machinery/door/window/southleft,
+/obj/machinery/door/window/northleft,
+/obj/machinery/light/small/emergency{
+	dir = 4
+	},
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "Qr" = (
-/obj/structure/closet/crate/secure/loot,
-/obj/item/spellbook/oneuse/fireball,
-/turf/simulated/floor/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 5
+	},
+/obj/effect/decal/cleanable/blood/drip,
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "Qv" = (
-/obj/effect/rune,
+/obj/structure/table/steel,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Qz" = (
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Ro" = (
-/obj/structure/simple_door,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/structure/table/rack,
+/obj/item/clothing/gloves/sterile/latex,
+/obj/item/clothing/glasses/science,
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 1
 	},
+/obj/effect/floor_decal/rust,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "RL" = (
-/obj/structure/grille/broken/cult,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/effect/floor_decal/industrial/warning{
+	dir = 10
 	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "RP" = (
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
+/obj/effect/floor_decal/corner/purple/border{
+	dir = 4
 	},
+/obj/effect/floor_decal/rust,
+/obj/fire,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"Sx" = (
+/obj/effect/decal/cleanable/dirt,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/obj/random/vendorfood,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"Tg" = (
+/obj/structure/closet/emcloset,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
+"Tt" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "Vf" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
-	},
-/turf/simulated/floor/outdoors/dirt,
-/area/submap/DemonPool)
-"Vk" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
-/area/submap/DemonPool)
-"VK" = (
-/turf/simulated/mineral/ignore_mapgen,
-/area/template_noop)
-"WV" = (
 /obj/structure/loot_pile/surface/bones,
+/obj/random/maintenance/security,
+/obj/random/projectile/scrapped_laser,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
+"Vk" = (
+/obj/machinery/door/blast/regular/open,
+/obj/structure/grille/cult,
+/obj/item/material/shard,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"VK" = (
+/turf/simulated/wall/r_concrete,
+/area/submap/DemonPool)
+"WV" = (
+/obj/effect/floor_decal/corner/purple/border,
+/obj/item/material/shard,
+/turf/simulated/floor/tiled/steel_grid,
+/area/submap/DemonPool)
 "Xe" = (
-/obj/structure/grille/broken/cult,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/structure/salvageable/computer_os,
+/turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "XB" = (
-/obj/effect/decal/cleanable/blood/gibs/body,
-/obj/fire,
+/obj/effect/decal/cleanable/ash,
+/obj/effect/spawner/gibs/human,
+/obj/item/material/shard,
+/mob/living/simple_mob/faithless/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "XJ" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
-/obj/effect/decal/cleanable/dirt,
-/mob/living/simple_mob/creature/cult/strong,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/obj/machinery/power/port_gen/pacman,
+/obj/effect/floor_decal/industrial/hatch/yellow,
+/turf/simulated/floor/plating,
 /area/submap/DemonPool)
 "XP" = (
-/obj/structure/constructshell/cult,
+/obj/effect/floor_decal/industrial/warning{
+	dir = 4
+	},
+/obj/effect/decal/cleanable/ash,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "Yk" = (
-/obj/item/clothing/shoes/cult,
+/obj/structure/bed/chair/office/dark{
+	dir = 1
+	},
+/obj/effect/decal/cleanable/ash,
+/turf/simulated/floor/cult,
+/area/submap/DemonPool)
+"Yy" = (
+/obj/structure/loot_pile/surface/bones,
+/obj/item/melee/cursedblade{
+	start_anomalous = 1
+	},
+/obj/item/clothing/suit/cultrobes,
+/mob/living/simple_mob/creature/cult,
+/obj/effect/floor_decal/industrial/warning/corner{
+	dir = 4
+	},
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 "YF" = (
@@ -637,31 +1002,29 @@
 	},
 /area/submap/DemonPool)
 "YK" = (
-/obj/structure/table/woodentable,
-/obj/item/pen/fountain,
-/turf/simulated/floor,
+/obj/effect/decal/cleanable/dirt,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "Zc" = (
-/obj/effect/spawner/gibs/human,
-/obj/item/beartrap/hunting{
-	anchored = 1;
-	deployed = 1
+/obj/effect/floor_decal/industrial/warning{
+	dir = 9
 	},
 /obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/obj/effect/decal/cleanable/dirt,
-/turf/simulated/floor/outdoors/dirt{
-	outdoors = 0
-	},
+/turf/simulated/floor/tiled/techfloor/grid,
 /area/submap/DemonPool)
 "Zj" = (
-/mob/living/simple_mob/animal/space/bats/cult/strong{
-	faction = "demon"
+/obj/effect/decal/cleanable/dirt,
+/obj/structure/bed/chair/sofa/black/left{
+	dir = 1
 	},
-/turf/simulated/floor,
+/turf/simulated/floor/tiled/steel_grid,
 /area/submap/DemonPool)
 "ZU" = (
-/obj/effect/decal/cleanable/blood/gibs/limb,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/mob/living/simple_mob/faithless/cult,
+/obj/effect/floor_decal/industrial/warning,
 /turf/simulated/floor/cult,
 /area/submap/DemonPool)
 
@@ -670,23 +1033,23 @@ eW
 eW
 eW
 eW
+eV
+eV
+eW
+eW
+eW
 eW
 eW
 jv
-eW
-jv
-eW
 jv
 eW
 eW
-eW
-eW
-eW
-eW
-eW
-eW
-eW
-eW
+eV
+eV
+eV
+eV
+eV
+eV
 eW
 eW
 eW
@@ -694,623 +1057,623 @@ eW
 "}
 (2,1,1) = {"
 eW
-bw
-eW
+Hb
+Hb
 Jo
 Jo
 Jo
-YF
-Lu
-mU
+Jo
+Hb
+vJ
 hZ
-mp
+eM
+Oo
+JP
+vJ
 Jo
 Jo
 Jo
 Jo
-eW
-eW
-eW
-jv
-eW
-jv
-VK
-VK
-VK
+Jo
+Jo
+Jo
+Jo
+Hb
+Hb
 eW
 "}
 (3,1,1) = {"
 eW
-eW
-eW
-vJ
-vJ
+Hb
 Jo
 Jo
-YF
-KM
+Jo
+Jo
+Jo
+Jo
+Jo
 zU
 zZ
+AF
+VK
 Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
+VK
+VK
+eR
+eR
+eR
+eR
+eR
+eR
 Jo
 Hb
-vJ
-VK
-VK
-VK
 eW
 "}
 (4,1,1) = {"
 eW
-eW
-Ag
-vJ
+Hb
+Jo
+Jo
+jX
+DY
 Jo
 Jo
 Jo
-Jo
-Jo
-RP
+VK
 Zc
 RL
-YF
-Jo
-Jo
-Jo
-Jo
-Jo
-Hb
-vJ
-Vf
-Hb
 VK
-eW
+VK
+eR
+JX
+JZ
+Qz
+CY
+IP
+zS
+eR
+Jo
+Jo
 eW
 "}
 (5,1,1) = {"
 eW
-vJ
-Lh
-Jo
-Jo
-Jo
-Jo
-Jo
 Jo
 Jo
 YF
+mp
+YF
+OK
+Jo
+VK
+VK
+rh
 fW
-tq
-RP
-Jo
-Jo
-Jo
-JV
-vJ
-JM
-JM
-JM
-lr
-JN
-eW
-"}
-(6,1,1) = {"
-eW
-JM
-AF
-dG
-YF
-YF
-Pu
-Jo
-Jo
-Jo
-Jo
-Jo
-RP
-zI
-Ro
-lG
-Jo
-Jo
-Hb
-JV
-Hb
-vJ
-JM
-eW
-eW
-"}
-(7,1,1) = {"
-jv
-JM
-CV
-Jo
-YF
-gt
-YF
-EQ
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Fq
-Vk
-Jo
-Jo
-Jo
-Jo
-Jo
-Hb
-Hb
-jv
-eW
-"}
-(8,1,1) = {"
-jv
-jv
 VK
 VK
 Xe
-mp
-mp
-oi
-Jo
-Jo
+vw
+vW
+qQ
+vv
+JB
+jt
 eR
-eM
+Jo
+Jo
+eV
+"}
+(6,1,1) = {"
+eW
+YF
+mp
+YF
+YF
+YF
+VK
+VK
+VK
+VK
+zZ
+Lu
+VK
+VK
+Ro
+lG
+Qz
+pH
+Hg
+qQ
+bb
+eR
+Jo
+Jo
+eV
+"}
+(7,1,1) = {"
+eW
+Jo
+Jo
+jX
+YF
+YF
+VK
+EQ
+lr
+de
+Tg
 YK
+Lx
+de
+Fq
+lG
+pE
+CS
 eR
+eR
+eR
+eR
+VK
+Jo
+eV
+"}
+(8,1,1) = {"
+eW
+Jo
+Jo
+Jo
+jX
+mp
+VK
+oi
+iq
+bc
+lG
+zi
+YK
+MB
 cn
 lG
+Qv
+lG
+LD
+tq
+BO
+ag
+VK
 Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-eW
 eW
 "}
 (9,1,1) = {"
 eW
-eW
-VK
-VK
-VK
-YF
-qQ
-YF
-jK
 Jo
-eR
-Ah
-IP
-cn
+Jo
+Jo
+VK
+Ax
+VK
+de
+pX
+de
+Sx
+lG
+lG
+de
 tC
-eR
-Jo
-eR
-eR
-eR
-eR
-eR
-Jo
+zI
+Qq
+RP
+au
+VK
+Qr
+hr
+VK
 Jo
 eW
 "}
 (10,1,1) = {"
 eW
+Jo
+Jo
 VK
 VK
+DZ
 VK
-VK
-YF
-YF
-jK
+NI
 yW
-Jo
-Jo
-Ax
-JK
+de
+bz
 lG
-Jo
-Jo
+PG
+VK
+eR
+VK
 eR
 eR
-yW
-eV
-yW
 eR
 eR
-Jo
+Lh
+eR
+VK
+Hb
 eW
 "}
 (11,1,1) = {"
 eW
-VK
-VK
-VK
-VK
-VK
-mp
-hO
-MB
+Hb
 Jo
-eR
+VK
+OZ
+DZ
+VK
+AH
+Iu
+de
+YK
 lG
 Zj
-Ax
-Jo
+VK
 eR
 eR
-XP
-jG
+KR
+Vf
+Qz
 sM
 jG
-bb
+Qz
 eR
 Jo
-VK
+eW
 "}
 (12,1,1) = {"
 eW
+Hb
+Jo
 VK
+hW
+DZ
 VK
+de
+Fu
+de
+lG
+lG
+PC
 VK
-VK
-VK
-mp
+eR
 jK
-yW
-Jo
-eR
-qb
-KR
-Jo
-Jo
-eR
-AH
+JK
 sb
-yW
-Qv
-yW
-Qr
+Xe
+Qz
+bo
+JM
 eR
 Jo
-VK
+eV
 "}
 (13,1,1) = {"
-jv
 eW
+Hb
+Jo
 VK
 VK
+DZ
 VK
-YF
-qQ
-jK
+dG
 qc
-Jo
-LD
-qQ
-Zj
-Jo
-eR
-eR
-es
+yv
+lG
+YK
+JV
+VK
 mO
-vW
+XP
+mO
+mO
+Hq
 on
 zi
 Hl
 eR
 Jo
-VK
+eV
 "}
 (14,1,1) = {"
 eW
-eW
-VK
-VK
-Xe
-mp
-YF
-oi
+Hb
 Jo
 Jo
+VK
+gt
+VK
+dG
+YK
+lG
+lG
+lG
+mX
+VK
+Vk
+qb
+hP
 eR
-vw
-jK
-aj
-eR
-qQ
-lo
-qQ
-si
-ay
-KR
+zj
+Qz
+hV
 WV
 eR
 Jo
-VK
+eV
 "}
 (15,1,1) = {"
 eW
-jv
+Hb
+Hb
+Jo
 VK
-VK
-YF
 Pu
-mp
-YF
-Jo
-Jo
-Qz
+VK
+de
+Ax
+KM
+de
 pb
-jK
-OK
-JP
+xl
+VK
+es
 XB
-qQ
-XB
+Yy
+oN
 si
-jt
+Qz
 hQ
 Yk
 eR
 Jo
-eW
+eV
 "}
 (16,1,1) = {"
-bw
-jv
-RP
-Jo
-YF
-YF
-gt
-Jo
-Jo
-qa
-NI
-qQ
-de
-au
-ZU
-qQ
-oi
-vv
-zj
-Hl
-lo
-eR
-eR
-Jo
 eW
+Hb
+Jo
+Jo
+VK
+Pu
+VK
+md
+DZ
+qa
+de
+de
+de
+VK
+ZU
+mQ
+Ag
+Dj
+zj
+qQ
+lo
+Hl
+eR
+Jo
+eV
 "}
 (17,1,1) = {"
-jv
-JM
-Ag
-dG
-YF
-YF
-Jo
-Jo
-eR
-yS
-Jo
-Jo
-Jo
-aj
-qQ
-pH
-pH
-pH
-pH
-pH
-Lx
-eR
-Jo
-Jo
 eW
+Hb
+Jo
+Jo
+VK
+bw
+Ax
+Pu
+Pu
+yS
+de
+Tt
+Pu
+VK
+vk
+vA
+hF
+hO
+zj
+Qz
+hQ
+Yk
+eR
+Jo
+eV
 "}
 (18,1,1) = {"
 eW
-vJ
-AF
 Jo
 Jo
 Jo
-Jo
-Jo
-Jo
+VK
+DZ
+VK
+it
+Ko
 XJ
-Oo
-JK
+de
+sZ
+sC
+VK
+hO
+hO
+Fe
+eR
+si
+KR
+Qv
+Hl
+eR
 Jo
-eR
-eR
-eR
-CY
-Bb
-CY
-eR
-eR
-eR
-Jo
-eW
-eW
+eV
 "}
 (19,1,1) = {"
 eW
-JM
-md
+Jo
+Jo
 YF
+AB
+Pu
+VK
+VK
+VK
+VK
+VK
+VK
+VK
+VK
+mU
+Br
+JN
+JN
+kc
+bO
+DE
+Hh
+VK
 Jo
-Jo
-Jo
-Jo
-eR
-vw
-jS
-ag
-Jo
-Jo
-Jo
-eR
-eR
-eR
-eR
-eR
-Jo
-Jo
-Jo
-eW
-eW
+eV
 "}
 (20,1,1) = {"
-jv
-jv
-vJ
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
+eW
+Hb
+YF
+YF
+VK
+Pu
+Pu
+Bb
+Pu
+DZ
+DZ
 DZ
 lV
-hW
+VK
+eR
+Qz
+aj
+jS
+Xe
+qQ
+bo
+Hl
+eR
 Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-Jo
-eW
-eW
-eW
+eV
 "}
 (21,1,1) = {"
-jv
-jv
-xl
-Jo
-Jo
-jX
+eW
 YF
 Jo
 Jo
-Jo
-Jo
-Jo
-Jo
-bh
-Jo
-Jo
-Hb
-JV
-Jo
 VK
-eW
-eW
-eW
-eW
+VK
+VK
+ee
+zs
+DZ
+VK
+ay
+VK
+VK
+eR
+eR
+Qz
+bo
+jK
+bh
+zI
+qQ
+eR
+Jo
 eW
 "}
 (22,1,1) = {"
-jv
-jv
+eW
+Jo
+Jo
+Jo
+Jo
+Jo
+VK
+VK
+VK
+VK
 VK
 YF
-YF
-YF
-YF
 Jo
+VK
+VK
+eR
+Ll
+Ah
+nH
+eR
+VK
+VK
+VK
 Jo
-YF
-hF
-pX
-Qq
-HW
-Jo
-Jo
-vJ
-Vf
-vJ
-eW
-eW
-eW
-eW
-eW
-eW
+eV
 "}
 (23,1,1) = {"
 eW
-eW
-gF
-eW
-YF
 Hb
-CV
+Hb
+Hb
+Hb
 Jo
 Jo
-hr
-zU
-RP
-VK
-VK
-VK
-vJ
-vJ
-VK
-eW
-jv
-jv
-eW
-eW
-eW
-eW
+Jo
+Jo
+Jo
+Jo
+YF
+Jo
+Jo
+Jo
+eR
+eR
+eR
+eR
+eR
+Jo
+Jo
+Jo
+Jo
+eV
 "}
 (24,1,1) = {"
 eW
-eW
-eW
-eW
-eW
-eW
-eW
-VK
-Lu
+Hb
+Hb
+CV
+Hb
+Hb
+Jo
+Jo
+Jo
+Jo
+Jo
 YF
-md
-mp
-VK
-jv
-eW
-eW
-VK
-VK
-VK
-eW
-eW
-eW
-bw
-eW
+YF
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
+Jo
 eW
 "}
 (25,1,1) = {"
@@ -1321,20 +1684,20 @@ eW
 eW
 eW
 eW
-eW
-eW
+eV
+eV
 eW
 gF
-eW
-jv
-eW
-jv
+gF
 eW
 eW
-VK
-VK
 eW
 eW
+eW
+eV
+eV
+eV
+eV
 eW
 eW
 eW
