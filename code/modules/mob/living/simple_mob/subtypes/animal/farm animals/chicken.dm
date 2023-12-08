@@ -34,6 +34,8 @@ GLOBAL_VAR_INIT(chicken_count, 0)	// How mant chickens DO we have?
 	var/eggsleft = 0
 	var/body_color
 
+	softfall = TRUE //they can glide, no going splat for them.
+
 /mob/living/simple_mob/animal/passive/chicken/Initialize()
 	. = ..()
 	if(!body_color)
