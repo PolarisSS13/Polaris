@@ -66,7 +66,7 @@
 /obj/item/blob_chunk/afterattack(var/atom/target, var/mob/user, var/proximity)
 	if(proximity && Adjacent(target))
 		user.visible_message(SPAN_WARNING("[user] holds \the [src] toward [target]."))
-		if(istype(target, /mob/living) && do_after(user, 3 SECONDS, target))
+		if(isliving(target) && do_after(user, 3 SECONDS, target))
 			var/mob/living/L = target
 
 			user.visible_message(SPAN_WARNING("[bicon(src)] \the [src] inflates slighty, before it releases a puff of gas toward [L]."))
@@ -93,7 +93,7 @@
 		name = "weakened [name]"
 		desc += " It can no longer reproduce."
 
-	if(C && C.overmind)
+	if(C?.overmind)
 		return TRUE
 
 	return
@@ -107,7 +107,7 @@
 
 /datum/component/artifact_master/blob/do_setup()
 	..()
-	if(holder && istype(holder, /obj/item/blob_chunk))
+	if(istype(holder, /obj/item/blob_chunk))
 		var/obj/item/blob_chunk/type_source = holder
 
 		for(var/datum/artifact_effect/AE in my_effects)

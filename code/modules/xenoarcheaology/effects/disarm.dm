@@ -6,7 +6,7 @@
 	effect_color = "#e17ceb"
 
 /datum/artifact_effect/uncommon/disarmament/proc/disarm(var/mob/living/L)
-	if(L.is_sentient())
+	if(istype(L) && L.is_sentient())
 		var/obj/item/Item = L.get_active_hand()
 		if(istype(Item))
 			to_chat(L, SPAN_WARNING("Something forces you to drop \the [Item]."))
