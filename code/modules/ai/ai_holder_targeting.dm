@@ -221,7 +221,7 @@
 		ai_log("can_see_target() : Target ([the_target]) was too far from holder. Exiting.", AI_LOG_TRACE)
 		return FALSE
 
-	if(!(ignore_opacity && (the_target in range(view_range, holder))) && !can_see(holder, the_target, view_range))
+	if(!(ignore_opacity && (get_dist(holder, the_target) <= view_range)) && !can_see(holder, the_target, view_range))
 		ai_log("can_see_target() : Target ([the_target]) failed can_see(). Exiting.", AI_LOG_TRACE)
 		return FALSE
 

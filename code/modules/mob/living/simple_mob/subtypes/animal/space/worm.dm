@@ -220,7 +220,7 @@
 	// Do the charge!
 	visible_message(span("danger","\The [src] charges towards \the [A]!"))
 
-	if(handle_charge(destination) == FALSE)
+	if(!handle_charge(destination))
 		set_AI_busy(FALSE)
 		return FALSE
 
@@ -250,9 +250,7 @@
 	for(var/i = 1 to rand(2, max(4, tally_segments(0))))
 		destination = get_step(destination, dir_to_go)
 
-	if(handle_charge(destination) == FALSE)
-		set_AI_busy(FALSE)
-		return FALSE
+	handle_charge(destination)	// This is overshooting, we don't really care if we hit this destination so don't check the return, just move.
 
 	set_AI_busy(FALSE)
 	return FALSE
