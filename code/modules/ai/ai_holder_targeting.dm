@@ -40,8 +40,8 @@
 			. |= AM
 
 		if(hostile_machines[AM.type])	// Is the atom in the cache of machines we care about
-			if(ignore_opacity || can_see(holder, HM, vision_range))
-				. += HM
+			if(ignore_opacity || can_see(holder, AM, vision_range))
+				. += AM
 
 // Step 2, filter down possible targets to things we actually care about.
 /datum/ai_holder/proc/find_target(var/list/possible_targets, var/has_targets_list = FALSE)
