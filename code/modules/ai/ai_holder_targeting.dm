@@ -29,18 +29,19 @@
 // Step 1, find out what we can see.
 /datum/ai_holder/proc/list_targets()
 	. = ohearers(vision_range, holder)
-	if(ignore_opacity)	// Ignoring opacity makes this a much hungrier proc.
-		for(var/atom/movable/AM in range(vision_range, holder))
-			if(isliving(AM) || ((ispath(preferred_target) && istype(AM, preferred_target)) || (istype(AM) && AM == preferred_target)))
-				. |= AM
 
 	. -= dview_mob // Not the dview mob!
 
 	var/static/hostile_machines = typecacheof(list(/obj/machinery/porta_turret, /obj/mecha, /obj/structure/blob))
 
-	for(var/HM in typecache_filter_list(range(vision_range, holder), hostile_machines))
-		if((ignore_opacity && (HM in range(vision_range, holder))) || can_see(holder, HM, vision_range))
-			. += HM
+	for(var/atom/movable/AM in range(vision_range, holder))
+		// Ignoring opacity makes this a slightly hungrier proc as we're now not just checking range for specific machine types, but also living things outside hearing but inside range.
+		if(ignore_opacity && (isliving(AM) || ((ispath(preferred_target) && istype(AM, preferred_target)) || (istype(AM) && AM == preferred_target))))
+			. |= AM
+
+		if(hostile_machines[AM.type])	// Is the atom in the cache of machines we care about
+			if(ignore_opacity || can_see(holder, HM, vision_range))
+				. += HM
 
 // Step 2, filter down possible targets to things we actually care about.
 /datum/ai_holder/proc/find_target(var/list/possible_targets, var/has_targets_list = FALSE)
