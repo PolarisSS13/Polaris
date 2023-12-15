@@ -197,8 +197,7 @@
 /turf/simulated/floor/wood/sif,
 /area/submap/CaveS)
 "sT" = (
-/obj/item/pickaxe/hand,
-/obj/item/shovel/wood,
+/obj/item/shovel,
 /turf/simulated/floor/outdoors/dirt{
 	outdoors = 0
 	},
@@ -266,6 +265,12 @@
 "xb" = (
 /obj/random/mob/spider,
 /turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"xi" = (
+/obj/item/pickaxe/hand,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
 /area/submap/CaveS)
 "xN" = (
 /obj/random/mob/spider,
@@ -1840,7 +1845,7 @@ gW
 gW
 gW
 gW
-ms
+xi
 gW
 gW
 ms
