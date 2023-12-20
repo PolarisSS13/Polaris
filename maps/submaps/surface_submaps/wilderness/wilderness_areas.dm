@@ -147,6 +147,7 @@
 	name = "POI - Acrid Lake"
 	ambience = AMBIENCE_FOREBODING
 	area_blurb = "A acrid, chemical smell comes from this pond, the vegetation around it is all dead."
+	area_blurb_category = "chemspilllake"
 
 /area/submap/FrostflyNest
 	name = "POI - Frostfly Nest"
