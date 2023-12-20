@@ -482,7 +482,7 @@
 	name = "\improper Park"
 	icon_state = "garden"
 	sound_env = STANDARD_STATION
-	area_blurb = "Sounds echo slightly within this large and open atrium, Sif's sky can be seen above through the curved glass roof windows above."
+	area_blurb = "Sounds echo slightly within this large and open atrium, Sif's sky can be seen above through the curved glass roof windows."
 	area_blurb_category = "atrium"
 
 /area/surface/station/park/skybridge
