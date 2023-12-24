@@ -53354,6 +53354,7 @@
 	},
 /obj/item/deskbell,
 /obj/item/communicator/desktop{
+	desc = "A static communicator unit, seen in homes, offices and the receptions of businesses across the galaxy. The casing on this one is covered in scuff marks and scratches, as if it has been dragged.";
 	occupation = "bar";
 	pixel_x = -12;
 	static_name = "bar communicator"
