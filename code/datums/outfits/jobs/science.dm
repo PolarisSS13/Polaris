@@ -35,7 +35,7 @@
 	uniform = /obj/item/clothing/under/xenofauna
 	id_type = /obj/item/card/id/science
 	suit = /obj/item/clothing/suit/storage/toggle/labcoat/science
-	l_ear = /obj/item/radio/headset/explorer
+	shoes = /obj/item/clothing/shoes/boots/winter
 
 /decl/hierarchy/outfit/job/science/roboticist
 	name = OUTFIT_JOB_NAME("Roboticist")
