@@ -1,4 +1,4 @@
-/turf/simulated/floor/attackby(var/obj/item/C, var/mob/user)
+/turf/simulated/floor/attackby(var/obj/item/C, var/mob/user, attack_modifier, click_parameters)
 
 	if(!C || !user)
 		return 0
@@ -29,7 +29,7 @@
 		if(isliving(user))
 			var/mob/living/L = user
 			if(L.a_intent == I_HELP && L.is_preference_enabled(/datum/client_preference/engrave_graffiti))
-				try_graffiti(L, C)
+				try_graffiti(L, C, click_parameters)
 
 	if(istype(C, /obj/item/stack/tile/roofing))
 		var/expended_tile = FALSE // To track the case. If a ceiling is built in a multiz zlevel, it also necessarily roofs it against weather

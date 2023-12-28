@@ -126,7 +126,9 @@
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 	for(var/thing in my_tracks)
-		. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
+		var/data = GetAdminDataStringFor(thing, can_modify, user)
+		if(!isnull(data))
+			. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 

@@ -1,5 +1,6 @@
 /datum/persistent/filth/trash
 	name = "trash"
+	has_admin_data = FALSE
 
 /datum/persistent/filth/trash/CheckTurfContents(var/turf/T, var/list/tokens)
 	var/too_much_trash = 0
