@@ -90,7 +90,7 @@ h1.alert, h2.alert		{color: #000000;}
 
 /* Languages */
 
-.alien					{color: #543354;}
+.alien					{color: #ae41ae;}
 .tajaran				{color: #803B56;}
 .tajaran_signlang		{color: #941C1C;}
 .akhani					{color: #AC398C;}
