@@ -1996,6 +1996,8 @@ NOTE: there are two lists of areas in the end of this file: centcom and station 
 /area/rnd/xenobiology/xenofauna
 	name = "\improper Xenofauna Lab"
 	icon_state = "xeno_f_lab"
+	area_blurb = "A smell of grafadreka lingers within this building. A few shed scales can be seen around, in corners and under furniture."
+	area_blurb_category = "xenofauna"
 
 /area/rnd/storage
 	name = "\improper Toxins Storage"
