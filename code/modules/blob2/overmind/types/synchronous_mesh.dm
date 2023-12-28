@@ -18,6 +18,13 @@
 	attack_verb = "synchronously strikes"
 	var/synchronously_attacking = FALSE
 
+	chunk_effect_range = 3
+	chunk_type = /obj/item/blob_chunk/synchronous_mesh
+
+/obj/item/blob_chunk/synchronous_mesh
+	default_blob = /datum/blob_type/synchronous_mesh
+	blob_effect_master_type = /datum/component/artifact_master/blob/synchronous_mesh
+
 /datum/blob_type/synchronous_mesh/on_attack(obj/structure/blob/B, mob/living/victim)
 	if(synchronously_attacking)
 		return
@@ -42,3 +49,8 @@
 		C.adjust_integrity(-(damage / blobs_to_hurt.len))
 
 	return damage / max(blobs_to_hurt.len, 1) // To hurt the blob that got hit.
+
+/datum/component/artifact_master/blob/synchronous_mesh
+	make_effects = list(
+		/datum/artifact_effect/extreme/lifemerger
+	)

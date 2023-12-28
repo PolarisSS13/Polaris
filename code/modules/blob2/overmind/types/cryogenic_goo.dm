@@ -14,11 +14,17 @@
 	burn_multiplier = 1.2
 	spread_modifier = 0.5
 	ai_aggressiveness = 50
-	chunk_active_ability_cooldown = 4 MINUTES
+	chunk_effect_cooldown = 4 MINUTES
 	attack_message = "The goo stabs you"
 	attack_message_living = ", and you feel an intense chill from within"
 	attack_message_synth = ", and your system reports lower internal temperatures"
 	attack_verb = "stabs"
+
+	chunk_type = /obj/item/blob_chunk/cryogenic_goo
+
+/obj/item/blob_chunk/cryogenic_goo
+	default_blob = /datum/blob_type/cryogenic_goo
+	blob_effect_master_type = /datum/component/artifact_master/blob/cryogenic_goo
 
 /datum/blob_type/cryogenic_goo/on_attack(obj/structure/blob/B, mob/living/victim)
 	if(ishuman(victim))
@@ -35,3 +41,8 @@
 			H.bodytemperature = max(H.bodytemperature - temp_change, temp_cap)
 	else // Just do some extra burn for mobs who don't process bodytemp
 		victim.adjustFireLoss(20)
+
+/datum/component/artifact_master/blob/cryogenic_goo
+	make_effects = list(
+		/datum/artifact_effect/common/cold
+	)

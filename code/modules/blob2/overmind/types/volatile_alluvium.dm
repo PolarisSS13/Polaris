@@ -26,7 +26,13 @@
 	spore_dispersion = 45
 	factory_type = /obj/structure/blob/factory/sluggish
 	resource_type = /obj/structure/blob/resource/sluggish
-	chunk_active_ability_cooldown = 2 MINUTES
+
+	chunk_effect_range = 3
+	chunk_type = /obj/item/blob_chunk/volatile_alluvium
+
+/obj/item/blob_chunk/volatile_alluvium
+	default_blob = /datum/blob_type/volatile_alluvium
+	blob_effect_master_type = /datum/component/artifact_master/blob/volatile_alluvium
 
 /datum/blob_type/volatile_alluvium/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)
 	if(damage > 0 && attacker && get_dist(B, attacker) <= 2 && prob(min(damage, 70)) && istype(attacker, /mob/living/carbon/human)) // Melee weapons of any type carried by a human will have a high chance of being stolen.
@@ -49,3 +55,8 @@
 		B.adjust_integrity(-(damage))
 		if(B && prob(damage))
 			B.visible_message("<span class='danger'>The [name] begins to crumble!</span>")
+
+/datum/component/artifact_master/blob/volatile_alluvium
+	make_effects = list(
+		/datum/artifact_effect/uncommon/disarmament
+	)

@@ -47,10 +47,6 @@
 	var/node_type = /obj/structure/blob/node
 	var/shield_type = /obj/structure/blob/shield
 
-	var/list/core_tech = list(TECH_BIO = 4, TECH_MATERIAL = 3)	// Tech for the item created when a core is destroyed.
-	var/chunk_active_type = BLOB_CHUNK_TOGGLE
-	var/chunk_active_ability_cooldown = 20 SECONDS
-	var/chunk_passive_ability_cooldown = 5 SECONDS
 
 // Called when a blob receives damage.  This needs to return the final damage or blobs will be immortal.
 /datum/blob_type/proc/on_received_damage(var/obj/structure/blob/B, damage, damage_type)
@@ -95,3 +91,112 @@
 // Spore handle_special call.
 /datum/blob_type/proc/on_spore_lifetick(mob/living/simple_mob/blob/spore/S)
 	return
+
+/datum/blob_type/proc/listify_vars()
+	var/list/transfer_vars = list()
+
+	transfer_vars["blob_type"] = type
+	transfer_vars["name"] = name
+	transfer_vars["desc"] = desc
+	transfer_vars["effect_desc"] = effect_desc
+	transfer_vars["ai_desc"] = ai_desc
+	transfer_vars["color"] = color
+	transfer_vars["complementary_color"] = complementary_color
+
+	transfer_vars["faction"] = faction
+
+	transfer_vars["attack_message"] = attack_message
+	transfer_vars["attack_message_living"] = attack_message_living
+	transfer_vars["attack_message_synth"] = attack_message_synth
+	transfer_vars["attack_verb"] = attack_verb
+	transfer_vars["damage_type"] = damage_type
+	transfer_vars["armor_check"] = armor_check
+	transfer_vars["armor_pen"] = armor_pen
+	transfer_vars["damage_lower"] = damage_lower
+	transfer_vars["damage_upper"] = damage_upper
+
+	transfer_vars["brute_multiplier"] = brute_multiplier
+	transfer_vars["burn_multiplier"] = burn_multiplier
+	transfer_vars["spread_modifier"] = spread_modifier
+	transfer_vars["slow_spread_with_size"] = slow_spread_with_size
+	transfer_vars["ai_aggressiveness"] = ai_aggressiveness
+
+	transfer_vars["can_build_factories"] = can_build_factories
+	transfer_vars["can_build_resources"] = can_build_resources
+	transfer_vars["can_build_nodes"] = can_build_nodes
+
+	transfer_vars["spore_type"] = spore_type
+	transfer_vars["ranged_spores"] = ranged_spores
+	transfer_vars["spore_firesound"] = spore_firesound
+	transfer_vars["spore_range"] = spore_range
+	transfer_vars["spore_projectile"] = spore_projectile
+	transfer_vars["spore_accuracy"] = spore_accuracy
+	transfer_vars["spore_dispersion"] = spore_dispersion
+
+	transfer_vars["factory_type"] = factory_type
+	transfer_vars["resource_type"] = resource_type
+	transfer_vars["node_type"] = node_type
+	transfer_vars["shield_type"] = shield_type
+
+	transfer_vars["core_tech"] = core_tech.Copy()
+
+	transfer_vars["chunk_type"] = chunk_type
+	transfer_vars["chunk_effect_cooldown"] = chunk_effect_cooldown
+	transfer_vars["chunk_effect_range"] = chunk_effect_range
+
+	transfer_vars["generation"] = generation
+
+	return transfer_vars
+
+/datum/blob_type/proc/apply_vars(var/list/incoming_vars)
+	if(LAZYLEN(incoming_vars))
+		name = incoming_vars["name"]
+		desc = incoming_vars["desc"]
+		effect_desc = incoming_vars["effect_desc"]
+		ai_desc = incoming_vars["ai_desc"]
+		color = incoming_vars["color"]
+		complementary_color = incoming_vars["complementary_color"]
+
+		faction = incoming_vars["faction"]
+
+		attack_message = incoming_vars["attack_message"]
+		attack_message_living = incoming_vars["attack_message_living"]
+		attack_message_synth = incoming_vars["attack_message_synth"]
+		attack_verb = incoming_vars["attack_verb"]
+		damage_type = incoming_vars["damage_type"]
+		armor_check = incoming_vars["armor_check"]
+		armor_pen = incoming_vars["armor_pen"]
+		damage_lower = incoming_vars["damage_lower"]
+		damage_upper = incoming_vars["damage_upper"]
+
+		brute_multiplier = incoming_vars["brute_multiplier"]
+		burn_multiplier = incoming_vars["burn_multiplier"]
+		spread_modifier = incoming_vars["spread_modifier"]
+		slow_spread_with_size = incoming_vars["slow_spread_with_size"]
+		ai_aggressiveness = incoming_vars["ai_aggressiveness"]
+
+		can_build_factories = incoming_vars["can_build_factories"]
+		can_build_resources = incoming_vars["can_build_resources"]
+		can_build_nodes = incoming_vars["can_build_nodes"]
+
+		spore_type = incoming_vars["spore_type"]
+		ranged_spores = incoming_vars["ranged_spores"]
+		spore_firesound = incoming_vars["spore_firesound"]
+		spore_range = incoming_vars["spore_range"]
+		spore_projectile = incoming_vars["spore_projectile"]
+		spore_accuracy = incoming_vars["spore_accuracy"]
+		spore_dispersion = incoming_vars["spore_dispersion"]
+
+		factory_type = incoming_vars["factory_type"]
+		resource_type = incoming_vars["resource_type"]
+		node_type = incoming_vars["node_type"]
+		shield_type = incoming_vars["shield_type"]
+
+		var/list/new_core_tech = incoming_vars["core_tech"]
+		core_tech = islist(new_core_tech) ? new_core_tech : list()
+
+		chunk_type = incoming_vars["chunk_type"]
+		chunk_effect_cooldown = incoming_vars["chunk_effect_cooldown"]
+		chunk_effect_range = incoming_vars["chunk_effect_range"]
+
+		generation = incoming_vars["generation"] + 1

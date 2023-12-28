@@ -113,6 +113,7 @@ var/global/list/blob_cores = list()
 	blob_cores -= src
 	if(overmind)
 		overmind.blob_core = null
+		overmind.blob_type.make_chunk(get_turf(src))
 		qdel(overmind)
 	overmind = null
 	STOP_PROCESSING(SSobj, src)

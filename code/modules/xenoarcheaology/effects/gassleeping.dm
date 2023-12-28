@@ -2,7 +2,7 @@
 	name = "N2O creation"
 
 
-/datum/artifact_effect/gassleeping/New()
+/datum/artifact_effect/rare/gassleeping/New()
 	..()
 	effect = pick(EFFECT_TOUCH, EFFECT_AURA)
 	effect_type = pick(EFFECT_BLUESPACE, EFFECT_SYNTH)

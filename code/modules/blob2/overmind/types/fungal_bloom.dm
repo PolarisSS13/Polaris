@@ -16,7 +16,12 @@
 	ai_aggressiveness = 40
 	can_build_factories = TRUE
 	spore_type = /mob/living/simple_mob/blob/spore/infesting
-	chunk_active_ability_cooldown = 2 MINUTES
+
+	chunk_type = /obj/item/blob_chunk/fungal_bloom
+
+/obj/item/blob_chunk/fungal_bloom
+	default_blob = /datum/blob_type/fungal_bloom
+	blob_effect_master_type = /datum/component/artifact_master/blob/fungal_bloom
 
 /datum/blob_type/fungal_bloom/on_spore_death(mob/living/simple_mob/blob/spore/S)
 	if(S.is_infesting)
@@ -28,3 +33,8 @@
 	else
 		B = new /obj/structure/blob/normal(T, S.overmind) // Otherwise spread it.
 		B.visible_message("<span class='danger'>\A [B] forms on \the [T] as \the [S] bursts!</span>")
+
+/datum/component/artifact_master/blob/fungal_bloom
+	make_effects = list(
+		/datum/artifact_effect/extreme/resurrect
+	)

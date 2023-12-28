@@ -22,6 +22,12 @@
 	ai_aggressiveness = 50 //Really doesn't like you near it.
 	spore_type = /mob/living/simple_mob/mechanical/hivebot/swarm
 
+	chunk_type = /obj/item/blob_chunk/fabrication_swarm
+
+/obj/item/blob_chunk/fabrication_swarm
+	default_blob = /datum/blob_type/fabrication_swarm
+	blob_effect_master_type = /datum/component/artifact_master/blob
+
 /datum/blob_type/fabrication_swarm/on_received_damage(var/obj/structure/blob/B, damage, damage_type, mob/living/attacker)
 	if(istype(B, /obj/structure/blob/normal))
 		if(damage > 0)

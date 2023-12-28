@@ -21,6 +21,12 @@
 	attack_message_synth = ", and your body begins to corrode"
 	attack_verb = "splashes"
 
+	chunk_type = /obj/item/blob_chunk/ravenous_macrophage
+
+/obj/item/blob_chunk/ravenous_macrophage
+	default_blob = /datum/blob_type/ravenous_macrophage
+	blob_effect_master_type = /datum/component/artifact_master/blob/ravenous_macrophage
+
 /datum/blob_type/ravenous_macrophage/on_pulse(var/obj/structure/blob/B)
 	var/mob/living/L = locate() in range(world.view, B)
 	if(L && prob(1) && L.mind && !L.stat)	// There's some active living thing nearby, produce offgas.
@@ -37,3 +43,8 @@
 		B.visible_message("<span class='danger'>The dying mass is rapidly consumed by the nearby [other]!</span>")
 		if(other.overmind)
 			other.overmind.add_points(rand(1,4))
+
+/datum/component/artifact_master/blob/ravenous_macrophage
+	make_effects = list(
+		/datum/artifact_effect/common/noxious
+	)

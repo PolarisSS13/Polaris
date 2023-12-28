@@ -17,7 +17,13 @@
 	ai_aggressiveness = 30 // The spores do most of the fighting.
 	can_build_factories = TRUE
 	spore_type = /mob/living/simple_mob/blob/spore/weak
-	chunk_active_ability_cooldown = 60 SECONDS
+	chunk_effect_cooldown = 60
+
+	chunk_type = /obj/item/blob_chunk/fulminant_organism
+
+/obj/item/blob_chunk/fulminant_organism
+	default_blob = /datum/blob_type/fulminant_organism
+	blob_effect_master_type = /datum/component/artifact_master/blob/fulminant_organism
 
 /datum/blob_type/fulminant_organism/on_expand(var/obj/structure/blob/B, var/obj/structure/blob/new_B, var/turf/T, var/mob/observer/blob/O)
 	if(prob(10)) // 10% chance to make a weak spore when expanding.
@@ -41,3 +47,8 @@
 		else
 			S.faction = faction
 		S.update_icons()
+
+/datum/component/artifact_master/blob/fulminant_organism
+	make_effects = list(
+		/datum/artifact_effect/uncommon/berserk
+	)
