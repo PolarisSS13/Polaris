@@ -300,7 +300,9 @@
 	damage = 0
 	nodamage = TRUE
 	SA_bonus_damage = 0
+	icon_state = "flight"
 	hud_state = "laser_heat"
+	fire_sound = 'sound/weapons/dartgun.ogg'
 	var/tranq_duration = 30 SECONDS
 	var/tranq_delay =    10 SECONDS
 	var/tranq_delay_modifier = 0.7

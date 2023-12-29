@@ -16,18 +16,18 @@
 	if(!LAZYLEN(data))
 		to_chat(user, span("warning", "\The [src] is not interesting enough to catalogue."))
 		return FALSE
-	else
-		// Check if this has nothing new on it.
-		var/has_new_data = FALSE
-		for(var/t in data)
-			var/datum/category_item/catalogue/item = GLOB.catalogue_data.resolve_item(t)
-			if(!item.visible)
-				has_new_data = TRUE
-				break
 
-		if(!has_new_data)
-			to_chat(user, span("warning", "Scanning \the [src] would provide no new information."))
-			return FALSE
+	// Check if this has nothing new on it.
+	var/has_new_data = FALSE
+	for(var/t in data)
+		var/datum/category_item/catalogue/item = GLOB.catalogue_data.resolve_item(t)
+		if(!item.visible)
+			has_new_data = TRUE
+			break
+
+	if(!has_new_data)
+		to_chat(user, span("warning", "Scanning \the [src] would provide no new information."))
+		return FALSE
 
 	return TRUE
 
@@ -53,29 +53,25 @@
 	return catalogue_data
 
 /mob/living/carbon/human/get_catalogue_data()
-	var/list/data = list()
 	// First, handle robot-ness.
 	var/beep_boop = get_FBP_type()
 	switch(beep_boop)
 		if(FBP_CYBORG)
-			data += /datum/category_item/catalogue/technology/cyborgs
+			LAZYADD(., /datum/category_item/catalogue/technology/cyborgs)
 		if(FBP_POSI)
-			data += /datum/category_item/catalogue/technology/positronics
+			LAZYADD(., /datum/category_item/catalogue/technology/positronics)
 		if(FBP_DRONE)
-			data += /datum/category_item/catalogue/technology/drone/drones
+			LAZYADD(., /datum/category_item/catalogue/technology/drone/drones)
 	// Now for species.
-	if(!(beep_boop in list(FBP_POSI, FBP_DRONE))) // Don't give the species entry if they are a posi or drone.
-		if(species && LAZYLEN(species.catalogue_data))
-			data += species.catalogue_data
-	return data
+	// Don't give the species entry if they are a posi or drone.
+	if(!(beep_boop in list(FBP_POSI, FBP_DRONE)) && species && LAZYLEN(species.catalogue_data))
+		LAZYADD(., species.catalogue_data)
 
 /mob/living/silicon/robot/get_catalogue_data()
-	var/list/data = list()
 	switch(braintype)
 		if(BORG_BRAINTYPE_CYBORG)
-			data += /datum/category_item/catalogue/technology/cyborgs
+			LAZYADD(., /datum/category_item/catalogue/technology/cyborgs)
 		if(BORG_BRAINTYPE_POSI)
-			data += /datum/category_item/catalogue/technology/positronics
+			LAZYADD(., /datum/category_item/catalogue/technology/positronics)
 		if(BORG_BRAINTYPE_DRONE)
-			data += /datum/category_item/catalogue/technology/drone/drones
-	return data
+			LAZYADD(., /datum/category_item/catalogue/technology/drone/drones)

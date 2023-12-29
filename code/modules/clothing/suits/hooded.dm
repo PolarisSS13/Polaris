@@ -425,5 +425,16 @@
 		/obj/item/material/knife,
 		/obj/item/tank,
 		/obj/item/radio,
-		/obj/item/pickaxe
-		)
+		/obj/item/pickaxe,
+		/obj/item/cataloguer,
+		/obj/item/specimen_tagger
+	)
+
+/obj/item/clothing/suit/storage/hooded/explorer/xenofauna
+	name = "xenofauna field suit"
+	desc = "A lightly armoured suit for surveying harsh environments."
+	icon_state = "xenofauna"
+	item_state = "xenofauna"
+	siemens_coefficient = 0.5
+	armor = list(melee = 20, bullet = 10, laser = 10, energy = 10, bomb = 25, bio = 90, rad = 60) // Better bio/rad protection than explo, but less armour.
+	hoodtype = /obj/item/clothing/head/hood/explorer/xenofauna

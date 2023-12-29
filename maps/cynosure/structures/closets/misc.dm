@@ -85,37 +85,25 @@
 	name = "xenofauna technician locker"
 	req_access = list(access_xenofauna)
 	starts_with = list(
-		/obj/item/clothing/under/explorer,
-		/obj/item/clothing/suit/armor/pcarrier/explorer/light,
-		/obj/item/clothing/head/helmet/explorer,
-		/obj/item/clothing/suit/storage/hooded/explorer,
+		/obj/item/clothing/under/xenofauna,
+		/obj/item/clothing/suit/storage/hooded/explorer/xenofauna,
 		/obj/item/clothing/mask/gas/explorer,
 		/obj/item/clothing/shoes/boots/winter/explorer,
 		/obj/item/clothing/gloves/black,
+		/obj/item/clothing/suit/storage/hooded/wintercoat/parka/purple,
 		/obj/item/radio/headset/explorer,
 		/obj/item/flashlight,
-		/obj/item/gps/explorer,
-		/obj/item/storage/box/flare,
+		/obj/item/gps/xenofauna,
 		/obj/item/geiger,
 		/obj/item/cell/device,
 		/obj/item/radio,
-		/obj/item/stack/marker_beacon/thirty,
-		/obj/item/cataloguer
-		)
-
-/obj/structure/closet/secure_closet/xenofauna/Initialize()
-	if(prob(50))
-		starts_with += /obj/item/storage/backpack/rucksack
-	else
-		starts_with += /obj/item/storage/backpack/satchel/norm
-	if(prob(75))
-		starts_with += /obj/item/material/knife/tacknife/survival
-	else
-		starts_with += /obj/item/material/knife/machete
-	return ..()
+		/obj/item/cataloguer,
+		/obj/item/storage/backpack/satchel/norm,
+		/obj/item/material/knife/tacknife/survival,
+		/obj/item/specimen_tagger
+	)
 
 //SAR Lockers
-
 /obj/structure/closet/secure_closet/sar
 	name = "search and rescue locker"
 	desc = "Supplies for a wilderness first responder."

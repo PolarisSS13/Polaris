@@ -14,26 +14,30 @@
 /obj/item/gun/energy/phasegun/tranq_rifle
 	name = "tranquilizer rifle"
 	desc = "A niche RayZar product designed for nonlethal animal control. A specialized emitter disrupts the nervous system of the target, eventually inducing sleep. Only rated for use on wildlife."
-	icon_state = "phaserifle"
-	item_state = "phaserifle"
-	wielded_item_state = "phaserifle-wielded"
+	icon_state = "tranqrifle"
+	item_state = "tranqrifle"
+	wielded_item_state = "tranqrifle-wielded"
 	w_class = ITEMSIZE_LARGE
 	slot_flags = SLOT_BACK
 	charge_cost = 140
 	projectile_type = /obj/item/projectile/energy/phase/tranq
 	accuracy = 15
 	one_handed_penalty = 30
+	fire_volume_silenced = 5
+	fire_volume = 15
 
 /obj/item/gun/energy/phasegun/tranq_pistol
 	name = "tranquilizer pistol"
 	desc = "A niche RayZar product designed for nonlethal animal control. A specialized emitter disrupts the nervous system of the target, eventually inducing sleep. Only rated for use on wildlife."
-	icon_state = "phase"
-	item_state = "taser"
+	icon_state = "tranq"
+	item_state = "tranq"
 	w_class = ITEMSIZE_NORMAL
 	slot_flags = SLOT_BELT|SLOT_HOLSTER
 	charge_cost = 200
 	projectile_type = /obj/item/projectile/energy/phase/tranq/weak
 	one_handed_penalty = 0
+	fire_volume_silenced = 5
+	fire_volume = 15
 
 /obj/item/gun/energy/phasegun/mounted
 	self_recharge = TRUE
