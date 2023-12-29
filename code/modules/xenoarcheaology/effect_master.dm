@@ -294,7 +294,7 @@
 
 
 /datum/component/artifact_master/proc/on_attackby()
-	var/obj/item/W = args[0]
+	var/obj/item/W = args[2]
 	for(var/datum/artifact_effect/my_effect in my_effects)
 
 		if (istype(W, /obj/item/reagent_containers))
@@ -325,11 +325,10 @@
 		else
 			if (my_effect.trigger == TRIGGER_FORCE && W.force >= 10)
 				return my_effect.ToggleActivate()
-		return my_effect.attackby(args[1], args[0])
-
+		return my_effect.attackby(args[3], args[2])
 
 /datum/component/artifact_master/proc/on_reagent()
-	var/datum/reagent/Touching = args[2]
+	var/datum/reagent/Touching = args[1]
 
 	var/list/water = list("hydrogen", "water")
 	var/list/acid = list("sacid", "pacid", "diethylamine")
