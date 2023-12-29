@@ -16,10 +16,6 @@
 	var/max_logs = 400 // maximum number of logs
 	var/log_cull_count = 10 // number of logs to cull at a time
 	var/totaltraffic = 0 // gigabytes (if > 1024, divide by 1024 -> terrabytes)
-	var/list/memory = list() // stored memory
-	var/rawcode = "" // the code to compile (raw text)
-	var/datum/TCS_Compiler/Compiler // the compiler that compiles and runs the code
-	var/autoruncode = FALSE // TRUE if the code is set to run every time a signal is picked up
 	var/encryption = "null" // encryption key: ie "password"
 	var/salt = "null" // encryption salt: ie "123comsat"
 	var/obj/item/radio/headset/server_radio
@@ -27,14 +23,11 @@
 
 /obj/machinery/telecomms/server/Destroy()
 	QDEL_NULL_LIST(log_entries)
-	QDEL_NULL(Compiler)
 	QDEL_NULL(server_radio)
 	return ..()
 
 
 /obj/machinery/telecomms/server/Initialize()
-	Compiler = new
-	Compiler.Holder = src
 	server_radio = new
 	return ..()
 
@@ -94,8 +87,6 @@
 			signal.data["server"] = src
 			var/identifier = num2text(rand(-1000, 1000) + world.time)
 			log.name = "data packet ([sha1(identifier)])"
-			if (autoruncode && Compiler)
-				Compiler.Run(signal)
 	var/send_success = relay_information(signal, /obj/machinery/telecomms/hub)
 	if (!send_success)
 		relay_information(signal, /obj/machinery/telecomms/broadcaster)
@@ -110,15 +101,6 @@
 	log.parameters["timecode"] = stationtime2text()
 	log_entries += log
 	update_logs()
-
-
-/obj/machinery/telecomms/server/proc/compile()
-	return Compiler?.Compile(rawcode)
-
-
-/obj/machinery/telecomms/server/proc/setcode(text)
-	if (istext(text))
-		rawcode = text
 
 
 /obj/machinery/telecomms/server/proc/update_logs()
