@@ -1,153 +1,2239 @@
-"ac" = (/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"aI" = (/obj/structure/table/sifwoodentable,/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"aR" = (/turf/template_noop,/area/template_noop)
-"dR" = (/obj/structure/flora/pottedplant/dead,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"es" = (/obj/random/rigsuit,/obj/item/broken_gun/laser_retro,/obj/effect/spawner/gibs/human,/turf/simulated/floor,/area/submap/CaveS)
-"eB" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"eQ" = (/obj/structure/flora/ausbushes/fullgrass,/obj/structure/flora/ausbushes/ywflowers,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"fA" = (/turf/simulated/floor/water,/area/submap/CaveS)
-"fG" = (/obj/random/multiple/corp_crate,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"gh" = (/mob/living/simple_mob/mechanical/viscerator,/turf/simulated/floor,/area/submap/CaveS)
-"gu" = (/obj/structure/animal_den,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"gF" = (/obj/machinery/computer/communications,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"gU" = (/obj/item/ammo_casing/a45,/turf/simulated/floor/outdoors/dirt,/area/submap/CaveS)
-"gW" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/CaveS)
-"hc" = (/obj/structure/flora/ausbushes/fullgrass,/turf/simulated/floor/water/deep,/area/submap/CaveS)
-"hd" = (/obj/random/mob/spider/mutant,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"ht" = (/obj/structure/flora/bush,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"hz" = (/turf/simulated/wall/sifwood,/area/submap/CaveS)
-"hX" = (/obj/structure/bed,/obj/item/bedsheet/green,/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"ii" = (/obj/random/trash,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"jb" = (/obj/random/maintenance/clean,/obj/random/maintenance/engineering,/obj/item/material/star,/obj/item/material/star,/obj/item/material/star,/obj/item/module/power_control,/obj/item/clothing/suit/costume/hotdog,/obj/structure/closet/cabinet,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"jw" = (/mob/living/simple_mob/animal/giant_spider/lurker,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"jG" = (/obj/random/obstruction,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"lm" = (/turf/simulated/floor,/area/submap/CaveS)
-"lp" = (/obj/item/ammo_casing/a45,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"lt" = (/obj/structure/boulder,/obj/structure/flora/ausbushes/reedbush,/turf/simulated/floor/water/deep,/area/submap/CaveS)
-"lS" = (/obj/random/landmine,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"mj" = (/obj/structure/flora/grass/both,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"ms" = (/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"mw" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt,/area/submap/CaveS)
-"mW" = (/obj/structure/bed,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"mX" = (/obj/random/mob/spider,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"na" = (/mob/living/simple_mob/animal/giant_spider/tunneler,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"nw" = (/obj/effect/decal/cleanable/blood/gibs,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"nX" = (/obj/random/landmine,/turf/simulated/floor,/area/submap/CaveS)
-"oq" = (/obj/structure/loot_pile/maint/technical,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"ot" = (/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"oA" = (/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif/broken,/area/submap/CaveS)
-"oE" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"pm" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"qu" = (/obj/structure/foamedmetal,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"qS" = (/obj/structure/boulder,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"sj" = (/obj/structure/bed,/obj/item/bedsheet/purple,/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"sT" = (/obj/item/pickaxe/hand,/obj/item/shovel/wood,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"ta" = (/obj/structure/loot_pile/maint/boxfort,/turf/simulated/floor,/area/submap/CaveS)
-"tY" = (/obj/random/medical/pillbottle,/obj/random/contraband,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/random/maintenance/clean,/obj/structure/closet/cabinet,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"uf" = (/obj/structure/table/sifwoodentable,/obj/item/flashlight/lamp/green,/obj/item/paper_bin,/obj/item/pen/blade/fountain,/obj/effect/spider/stickyweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"uz" = (/obj/effect/decal/remains,/obj/item/material/knife/tacknife/combatknife,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"vs" = (/obj/effect/spider/stickyweb,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"vu" = (/obj/structure/closet/crate/secure/decalock/loot,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"vF" = (/obj/random/mob/sif,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"vQ" = (/mob/living/simple_mob/mechanical/viscerator,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"wg" = (/obj/random/landmine,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"wm" = (/obj/random/junk,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"wI" = (/obj/machinery/recharge_station,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"xb" = (/obj/random/mob/spider,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"xi" = (/mob/living/simple_mob/animal/giant_spider/lurker,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"xN" = (/obj/random/mob/spider,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"yk" = (/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"yv" = (/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"yF" = (/obj/structure/boulder,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"zc" = (/obj/structure/table/bench/sifwooden,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"zi" = (/obj/effect/spider/stickyweb,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"zy" = (/obj/structure/flora/ausbushes/sparsegrass,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"zC" = (/obj/structure/flora/ausbushes/grassybush,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Bl" = (/turf/simulated/floor/water/deep,/area/submap/CaveS)
-"Bs" = (/obj/structure/table/steel,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"BI" = (/obj/structure/flora/ausbushes/sparsegrass,/turf/simulated/floor/water/deep,/area/submap/CaveS)
-"Cp" = (/turf/template_noop,/area/submap/CaveS)
-"Dq" = (/obj/structure/closet/crate,/obj/item/stack/cable_coil,/obj/item/stack/cable_coil,/obj/random/toolbox/anom,/obj/item/frame/apc,/turf/simulated/floor,/area/submap/CaveS)
-"DP" = (/obj/effect/spider/stickyweb,/obj/random/mob/spider,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"DU" = (/obj/structure/flora/tree/sif,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Eq" = (/obj/machinery/power/port_gen/pacman,/turf/simulated/floor,/area/submap/CaveS)
-"Ge" = (/obj/item/inflatable/door/torn,/turf/simulated/floor,/area/submap/CaveS)
-"Gi" = (/obj/structure/table/sifwoodentable,/obj/item/storage/laundry_basket,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Gk" = (/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"GO" = (/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Hp" = (/obj/structure/closet/secure_closet/freezer/fridge,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"HZ" = (/obj/structure/closet/crate,/obj/item/reagent_containers/hypospray,/obj/item/reagent_containers/glass/bottle/stoxin,/obj/item/reagent_containers/glass/bottle/antitoxin,/obj/item/reagent_containers/pill/antitox,/obj/item/reagent_containers/pill/paracetamol,/obj/random/firstaid,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Ia" = (/obj/structure/foamedmetal,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Jt" = (/turf/simulated/floor/wood/sif/broken,/area/submap/CaveS)
-"KX" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Lk" = (/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"LF" = (/obj/effect/decal/cleanable/cobweb,/obj/structure/closet/crate/trashcart,/obj/random/maintenance,/obj/random/maintenance,/obj/random/junk,/obj/random/junk,/obj/random/junk,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"Mn" = (/obj/item/clothing/accessory/storage/webbing,/obj/effect/decal/remains,/obj/item/gun/projectile/compact_45,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"MA" = (/obj/structure/table/sifwoodentable,/obj/random/junk,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"MC" = (/obj/random/contraband,/obj/random/contraband,/obj/effect/decal/remains,/obj/effect/spider/stickyweb/dark,/obj/random/medical/pillbottle,/obj/item/clothing/under/frontier,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"MS" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"NL" = (/obj/structure/flora/ausbushes/fullgrass,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Oo" = (/obj/machinery/recharge_station,/turf/simulated/floor,/area/submap/CaveS)
-"OU" = (/mob/living/simple_mob/mechanical/viscerator,/obj/effect/decal/cleanable/cobweb,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Pm" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"Po" = (/mob/living/simple_mob/animal/giant_spider/lurker,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"PR" = (/obj/structure/closet,/obj/random/drinkbottle/anom,/obj/random/drinkbottle,/obj/random/drinkbottle,/obj/random/drinkbottle,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"PV" = (/obj/structure/boulder,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Qf" = (/obj/random/trash,/turf/simulated/floor/wood/sif/broken,/area/submap/CaveS)
-"Qx" = (/obj/effect/spider/stickyweb,/obj/effect/spider/stickyweb,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"RA" = (/obj/structure/table/sifwoodentable,/obj/machinery/microwave,/turf/simulated/floor/wood/sif/broken,/area/submap/CaveS)
-"SC" = (/turf/simulated/floor/outdoors/dirt,/area/submap/CaveS)
-"TC" = (/obj/structure/flora/grass/brown,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Ub" = (/obj/structure/flora/grass/green,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
-"Us" = (/obj/random/powercell/anom,/obj/random/contraband,/obj/random/contraband,/obj/item/clothing/suit/storage/hooded/wintercoat,/obj/item/newspaper,/obj/item/clothing/under/frontier,/obj/structure/closet/cabinet,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"UA" = (/obj/structure/bed/chair/office/dark{dir = 8},/mob/living/simple_mob/animal/giant_spider/lurker,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Vc" = (/obj/structure/animal_den,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"Vt" = (/obj/structure/table/sifwoodentable,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"VK" = (/obj/random/mob/spider/mutant,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"Wh" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/CaveS)
-"Xa" = (/obj/random/landmine,/mob/living/simple_mob/mechanical/viscerator,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"XN" = (/obj/effect/decal/cleanable/blood/gibs,/mob/living/simple_mob/mechanical/viscerator,/turf/simulated/floor/wood/sif,/area/submap/CaveS)
-"Zz" = (/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/grass/sif/forest,/area/submap/CaveS)
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ac" = (
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"aI" = (
+/obj/structure/table/sifwoodentable,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"aR" = (
+/turf/template_noop,
+/area/template_noop)
+"dR" = (
+/obj/structure/flora/pottedplant/dead,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"es" = (
+/obj/random/rigsuit,
+/obj/item/broken_gun/laser_retro,
+/obj/effect/spawner/gibs/human,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"eB" = (
+/obj/structure/simple_door/sifwood,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"eQ" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/obj/structure/flora/ausbushes/ywflowers,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"fA" = (
+/turf/simulated/floor/water,
+/area/submap/CaveS)
+"fG" = (
+/obj/random/multiple/corp_crate,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"gh" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"gu" = (
+/obj/structure/animal_den,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"gF" = (
+/obj/machinery/computer/communications,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"gU" = (
+/obj/item/ammo_casing/a45,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/CaveS)
+"gW" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/submap/CaveS)
+"hc" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/water/deep,
+/area/submap/CaveS)
+"ht" = (
+/obj/structure/flora/bush,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"hz" = (
+/turf/simulated/wall/sifwood,
+/area/submap/CaveS)
+"hX" = (
+/obj/structure/bed,
+/obj/item/bedsheet/green,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"ii" = (
+/obj/random/trash,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"jb" = (
+/obj/random/maintenance/clean,
+/obj/random/maintenance/engineering,
+/obj/item/material/star,
+/obj/item/material/star,
+/obj/item/material/star,
+/obj/item/module/power_control,
+/obj/item/clothing/suit/costume/hotdog,
+/obj/structure/closet/cabinet,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"jw" = (
+/mob/living/simple_mob/animal/giant_spider/lurker,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"jG" = (
+/obj/random/obstruction,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"lm" = (
+/turf/simulated/floor,
+/area/submap/CaveS)
+"lp" = (
+/obj/item/ammo_casing/a45,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"lt" = (
+/obj/structure/boulder,
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/water/deep,
+/area/submap/CaveS)
+"lS" = (
+/obj/random/landmine,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"mj" = (
+/obj/structure/flora/grass/both,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"ms" = (
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"mw" = (
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/CaveS)
+"mW" = (
+/obj/structure/bed,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"mX" = (
+/obj/random/mob/spider,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"nw" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"nX" = (
+/obj/random/landmine,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"oq" = (
+/obj/structure/loot_pile/maint/technical,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"ot" = (
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"oA" = (
+/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/wood/sif,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/CaveS)
+"oE" = (
+/obj/structure/simple_door/sifwood,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"pm" = (
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"qu" = (
+/obj/structure/foamedmetal,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"qS" = (
+/obj/structure/boulder,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"sj" = (
+/obj/structure/bed,
+/obj/item/bedsheet/purple,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"sT" = (
+/obj/item/shovel,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"ta" = (
+/obj/structure/loot_pile/maint/boxfort,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"tY" = (
+/obj/random/medical/pillbottle,
+/obj/random/contraband,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/random/maintenance/clean,
+/obj/structure/closet/cabinet,
+/obj/effect/spider/stickyweb/dark,
+/obj/item/cell/device/weapon,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"uf" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/flashlight/lamp/green,
+/obj/item/paper_bin,
+/obj/item/pen/blade/fountain,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"uz" = (
+/obj/effect/decal/remains,
+/obj/item/material/knife/tacknife/combatknife,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"vs" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"vu" = (
+/obj/structure/closet/crate/secure/decalock/loot,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"vF" = (
+/obj/random/mob/sif,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"vQ" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"wg" = (
+/obj/random/landmine,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"wm" = (
+/obj/random/junk,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"wI" = (
+/obj/machinery/recharge_station,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"xb" = (
+/obj/random/mob/spider,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"xi" = (
+/obj/item/pickaxe/hand,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"xN" = (
+/obj/random/mob/spider,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"yk" = (
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"yv" = (
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"yF" = (
+/obj/structure/boulder,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"zc" = (
+/obj/structure/table/bench/sifwooden,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"zi" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"zy" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"zC" = (
+/obj/structure/flora/ausbushes/grassybush,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Bl" = (
+/turf/simulated/floor/water/deep,
+/area/submap/CaveS)
+"Bs" = (
+/obj/structure/table/steel,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"BI" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/simulated/floor/water/deep,
+/area/submap/CaveS)
+"Cp" = (
+/turf/template_noop,
+/area/submap/CaveS)
+"Dq" = (
+/obj/structure/closet/crate,
+/obj/item/stack/cable_coil,
+/obj/item/stack/cable_coil,
+/obj/random/toolbox/anom,
+/obj/item/frame/apc,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"DP" = (
+/obj/effect/spider/stickyweb,
+/obj/random/mob/spider,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"DU" = (
+/obj/structure/flora/tree/sif,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Eq" = (
+/obj/machinery/power/port_gen/pacman,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"Ge" = (
+/obj/item/inflatable/door/torn,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"Gi" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/storage/laundry_basket,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Gk" = (
+/obj/effect/decal/cleanable/cobweb,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"GO" = (
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Hp" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"HZ" = (
+/obj/structure/closet/crate,
+/obj/item/reagent_containers/hypospray,
+/obj/item/reagent_containers/glass/bottle/stoxin,
+/obj/item/reagent_containers/glass/bottle/antitoxin,
+/obj/item/reagent_containers/pill/antitox,
+/obj/item/reagent_containers/pill/paracetamol,
+/obj/random/firstaid,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Ia" = (
+/obj/structure/foamedmetal,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Jt" = (
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/CaveS)
+"KX" = (
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Lk" = (
+/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/wood/sif,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"LF" = (
+/obj/effect/decal/cleanable/cobweb,
+/obj/structure/closet/crate/trashcart,
+/obj/random/maintenance,
+/obj/random/maintenance,
+/obj/random/junk,
+/obj/random/junk,
+/obj/random/junk,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"Mn" = (
+/obj/item/clothing/accessory/storage/webbing,
+/obj/effect/decal/remains,
+/obj/item/gun/projectile/compact_45,
+/obj/effect/spider/stickyweb,
+/obj/item/ammo_magazine/m45/compact,
+/obj/item/ammo_magazine/m45/compact,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"MA" = (
+/obj/structure/table/sifwoodentable,
+/obj/random/junk,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"MC" = (
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/effect/decal/remains,
+/obj/effect/spider/stickyweb/dark,
+/obj/random/medical/pillbottle,
+/obj/item/clothing/under/frontier,
+/obj/random/projectile/scrapped_gun,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"MS" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"NL" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Oo" = (
+/obj/machinery/recharge_station,
+/turf/simulated/floor,
+/area/submap/CaveS)
+"OU" = (
+/mob/living/simple_mob/mechanical/viscerator,
+/obj/effect/decal/cleanable/cobweb,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Pm" = (
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"PR" = (
+/obj/structure/closet,
+/obj/random/drinkbottle/anom,
+/obj/random/drinkbottle,
+/obj/random/drinkbottle,
+/obj/random/drinkbottle,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"PV" = (
+/obj/structure/boulder,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Qf" = (
+/obj/random/trash,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/CaveS)
+"Qx" = (
+/obj/effect/spider/stickyweb,
+/obj/effect/spider/stickyweb,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"RA" = (
+/obj/structure/table/sifwoodentable,
+/obj/machinery/microwave,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/CaveS)
+"SC" = (
+/obj/structure/boulder,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/CaveS)
+"TC" = (
+/obj/structure/flora/grass/brown,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Ub" = (
+/obj/structure/flora/grass/green,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
+"Us" = (
+/obj/random/powercell/anom,
+/obj/random/contraband,
+/obj/random/contraband,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/newspaper,
+/obj/item/clothing/under/frontier,
+/obj/structure/closet/cabinet,
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"UA" = (
+/obj/structure/bed/chair/office/dark{
+	dir = 8
+	},
+/obj/random/mob/spider/mutant,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Vc" = (
+/obj/structure/animal_den,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"Vt" = (
+/obj/structure/table/sifwoodentable,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"VK" = (
+/obj/random/mob/spider/mutant,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"Wh" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/CaveS)
+"Xa" = (
+/obj/random/landmine,
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"XN" = (
+/obj/effect/decal/cleanable/blood/gibs,
+/mob/living/simple_mob/mechanical/viscerator,
+/turf/simulated/floor/wood/sif,
+/area/submap/CaveS)
+"Zz" = (
+/obj/effect/spider/stickyweb/dark,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/CaveS)
 
 (1,1,1) = {"
-aRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaR
-aRCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpaR
-aRCpCpCpCpCpCpCpCpCpCpCpCpCpCpgWCpCpgWCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpaR
-aRCpCpCpCpgWgWgWgWCpCpCpCpCpgWgWqSqSgWgWgWgWCpCpCpCpCpCpgWgWgWmsCpCpCpCpCpCpCpaR
-aRCpCpCpgWgWgWgWgWgWgWCpgWgWgWgWPmPmgWgWgWgWgWgWCpCpCpgWgWgWgWgWmsmsCpCpCpCpCpaR
-aRCpCpgWgWgWgWgWgWgWgWgWgWgWgWgWPmmsmsPmgWgWgWgWgWCpgWgWgWgWgWgWgWmsmsmsCpCpCpaR
-aRCpgWgWgWgWGkmsPmgWgWgWgWgWgWPmPmKXyvmsPmgWgWgWgWgWgWgWgWfAfAgWgWgWgWgWmsCpCpaR
-aRCpgWgWgWVcnaPmPmPmMCgWgWgWmsmsyvKXvsZzziPmgWgWgWgWgWgWfABlBlfAgWgWgWgWgWCpCpaR
-aRCpgWgWgWPmmsPmmwPmacMSgWPmPmyvyvKXZzyvmsPmgWgWgWgWgWgWfABlBlBlfAgWgWNLgWgWCpaR
-aRCpgWgWgWPmPmPmPmacgWmsmsmsZzKXyvKXNLyvyvmsPmPmgWgWgWfABlBlBlBlfAgWyvDUyvgWCpaR
-aRCpgWgWgWgWPmPmgWPmmsmXmsKXKXvsKXPVyvDUyvxNmsmsPmacPmfABlBlBlBlfAmsUbxiyvgWCpaR
-aRCpgWgWgWgWgWPmmsmsmsmsmsKXTCKXZzKXKXyvmjyvmsPmPmgWmsPmfABlBlBlfAmsmsNLgWgWCpaR
-aRCpgWgWgWgWgWgWqSgWPmmsPmKXyvDUUbKXKXyvyvyvPmmsSCmsmsqSPmfABlBlBlfAmsmsgWgWCpaR
-aRCpCpgWgWgWgWmsmsgWgWPmKXyvyvyvyvyvKXPmyvPmPmPmgWgWmsmsmswmfABlBlBlfAmsgWgWCpaR
-aRCpCpgWgWgWGkmsmsgWgWPmPmyvxNyvyvKXPmPmPmPmgWgWgWgWmsmsVKWhfABlBlBlfAgWgWgWCpaR
-aRCpCpgWgWgWmsgUmXmsgWqSPmPmmsmsPmQxPmgWgWgWgWgWgWLFPmmsmsmsfABlBlBlfAgWgWgWCpaR
-aRCpgWgWgWgWlpmsmsmsmsmsgWgWgWgWgWgWgWgWgWgWgWgWgWgWyFPmmsfABlBlBlhcgWgWgWgWCpaR
-aRCpgWgWgWPmPmmsmslpmsgWgWgWgWgWhzhzhzhzhzgWgWgWgWgWhzacacgWfABlhclthcgWgWzCCpaR
-aRCpgWgWgWgWacgWPmmsPmacPmgWgWgWhzEqDqlmhzhzhzgWhzhzhzhzIahzfAhclthcBlfANLyvCpaR
-aRCpgWgWgWgWPmPmgWPmacPmPmMngWgWhzesghnXGeGOGOvQmWhzfGGOGOhzgWgWBIBlBlfAeQyvCpaR
-aRCpCpgWgWgWmsPmgWgWPmmsDPPmgWgWhztalmOohzHZvQGOBshzgFUAGOhzgWgWfABlBlfAzyCpCpaR
-aRCpCpgWgWgWUbmsPmgWgWgWacgWgWgWhzhzGehzhzgWGOGOGOeBGOGOoqgWgWgWNLfAfANLyvCpCpaR
-aRCpCpgWgWgWyvyvmsmsgWgWmsgWhzhzgWOUGOnwgWhzhzeBhzhzhzLkhzhzgWgWyvzyNLyvDUCpCpaR
-aRCpCpgWgWgWgWuzyvlpmsgWlpmsoEGOykwgGOGOXaGOeBGOGOzcGOxbhzgWgWgWgWgWgWyvCpCpCpaR
-aRCpgWgWgWgWgWyvDUmsmsPomsmsoEwgXNGOykGOvQwgeBGOzcMAzcGOhzgWgWgWgWgWgWgWCpCpCpaR
-aRCpgWgWgWgWgWmjyvyvmsmsmsgWhzhzeBhzhzhzhzgWhziizcVtzcGOhzgWgWgWgWmsgWgWCpCpCpaR
-aRCpgWgWgWgWgWgWyvTCVKmsmsgWgWhzGOhzgWhzhzhzhzxbGOzcGOJthzgWgWgWgWmsgWgWCpCpCpaR
-aRCpgWgWgWgWgWgWyvyvyvlpgWgWgWhzGOGOVtGiMAdRGOGOGOGOGOQfqulSmsjGmsyvgWgWgWCpCpaR
-aRCpgWgWgWgWgWgWgWyvyvmsgWgWgWgWGOGOGOhdGOGOGOGOGOPRHpRAhzsTgWgWmsyvyvgWgWCpCpaR
-aRCpgWgWgWvugWgWgWyvyvyvgWgWgWhzhzeBhzhzeBhzhzeBhzhzhzhzhzgWgWqSyvyvmsgWgWCpCpaR
-aRCpgWgWgWgWgWgWgWgWTCyvgWgWgWhzUspmhztYothzjbGOhzgWgWgWgWmsmsyvDUyvmsgWgWCpCpaR
-aRCpgWgWgWgWgWgWgWgWgWgWgWgWgWgWpmjwhzotothzGOGOhzgWgWgWgWmshtguvFyvmsgWgWCpCpaR
-aRCpCpgWgWgWgWgWgWgWgWgWgWgWgWhzsjaIoAhXufhzwIVthzgWgWmshtyvyvyvmsmsgWgWgWCpCpaR
-aRCpCpgWgWgWgWgWgWgWgWgWgWgWgWhzhzhzhzgWhzhzhzhzhzgWgWmsmshtyvmsgWmsgWgWCpCpCpaR
-aRCpCpCpgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWmsgWgWCpgWgWCpCpCpaR
-aRCpCpCpCpgWgWgWgWCpCpgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWgWCpCpCpCpCpCpaR
-aRCpCpCpCpCpCpCpCpCpCpCpCpCpgWgWgWgWgWgWgWgWgWgWCpCpgWgWgWgWgWgWCpCpCpCpCpCpCpaR
-aRCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpgWgWgWgWgWgWgWCpCpCpCpCpgWgWCpCpCpCpCpCpCpCpCpaR
-aRCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpCpaR
-aRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaRaR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+"}
+(2,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(3,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(4,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(5,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(6,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+gW
+Vc
+Pm
+Pm
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Pm
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+vu
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(7,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+Gk
+mX
+ms
+Pm
+Pm
+gW
+gW
+gW
+Gk
+ms
+lp
+Pm
+ac
+Pm
+ms
+Ub
+yv
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(8,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+ms
+Pm
+Pm
+Pm
+Pm
+Pm
+gW
+ms
+ms
+gU
+ms
+ms
+gW
+Pm
+Pm
+ms
+yv
+uz
+yv
+mj
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(9,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+Pm
+Pm
+mw
+Pm
+gW
+ms
+qS
+ms
+ms
+mX
+ms
+ms
+Pm
+gW
+gW
+Pm
+ms
+yv
+DU
+yv
+yv
+yv
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(10,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+Pm
+Pm
+ac
+Pm
+ms
+gW
+gW
+gW
+ms
+ms
+lp
+ms
+Pm
+gW
+gW
+ms
+lp
+ms
+yv
+TC
+yv
+yv
+yv
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(11,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+MC
+ac
+gW
+ms
+ms
+Pm
+gW
+gW
+gW
+ms
+ms
+Pm
+ac
+Pm
+gW
+gW
+ms
+ms
+ms
+VK
+yv
+yv
+yv
+TC
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(12,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+MS
+ms
+ms
+ms
+ms
+Pm
+Pm
+qS
+ms
+gW
+ac
+Pm
+ms
+gW
+gW
+gW
+ms
+ms
+ms
+lp
+ms
+yv
+yv
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(13,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+ms
+ms
+ms
+Pm
+KX
+Pm
+Pm
+gW
+gW
+Pm
+Pm
+DP
+ac
+ms
+lp
+ms
+ms
+ms
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(14,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+Pm
+ms
+KX
+KX
+KX
+yv
+yv
+Pm
+gW
+gW
+gW
+Mn
+Pm
+gW
+gW
+ms
+ms
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(15,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+gW
+ms
+Pm
+Zz
+KX
+TC
+yv
+yv
+xN
+ms
+gW
+gW
+gW
+gW
+gW
+gW
+hz
+oE
+oE
+hz
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+aR
+"}
+(16,1,1) = {"
+aR
+Cp
+gW
+gW
+gW
+gW
+Pm
+ms
+yv
+KX
+vs
+KX
+DU
+yv
+yv
+ms
+gW
+gW
+gW
+gW
+gW
+gW
+hz
+GO
+wg
+hz
+hz
+hz
+gW
+hz
+hz
+gW
+hz
+hz
+gW
+gW
+gW
+Cp
+Cp
+aR
+"}
+(17,1,1) = {"
+aR
+Cp
+Cp
+qS
+Pm
+Pm
+Pm
+yv
+yv
+yv
+KX
+Zz
+Ub
+yv
+yv
+Pm
+gW
+hz
+hz
+hz
+hz
+hz
+gW
+yk
+XN
+eB
+GO
+GO
+GO
+hz
+Us
+pm
+sj
+hz
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(18,1,1) = {"
+aR
+Cp
+Cp
+qS
+Pm
+ms
+KX
+KX
+KX
+KX
+PV
+KX
+KX
+yv
+KX
+Qx
+gW
+hz
+Eq
+es
+ta
+hz
+OU
+wg
+GO
+hz
+hz
+GO
+GO
+eB
+pm
+jw
+aI
+hz
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(19,1,1) = {"
+aR
+Cp
+gW
+gW
+gW
+ms
+yv
+vs
+Zz
+NL
+yv
+KX
+KX
+KX
+Pm
+Pm
+gW
+hz
+Dq
+gh
+lm
+Ge
+GO
+GO
+yk
+hz
+gW
+Vt
+GO
+hz
+hz
+hz
+oA
+hz
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(20,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+Pm
+ms
+Zz
+yv
+yv
+DU
+yv
+yv
+Pm
+Pm
+gW
+gW
+hz
+lm
+nX
+Oo
+hz
+nw
+GO
+GO
+hz
+hz
+Gi
+xb
+hz
+tY
+ot
+hX
+gW
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(21,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+Pm
+zi
+ms
+yv
+yv
+mj
+yv
+yv
+Pm
+gW
+gW
+hz
+hz
+Ge
+hz
+hz
+gW
+Xa
+vQ
+hz
+hz
+MA
+GO
+eB
+ot
+ot
+uf
+hz
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(22,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+gW
+Pm
+Pm
+ms
+xN
+yv
+yv
+Pm
+Pm
+gW
+gW
+gW
+hz
+GO
+HZ
+gW
+hz
+GO
+wg
+gW
+hz
+dR
+GO
+hz
+hz
+hz
+hz
+hz
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(23,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+Pm
+ms
+ms
+Pm
+Pm
+gW
+gW
+gW
+gW
+hz
+GO
+vQ
+GO
+hz
+eB
+eB
+hz
+hz
+GO
+GO
+hz
+jb
+GO
+wI
+hz
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(24,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+Pm
+ms
+Pm
+ms
+Pm
+gW
+gW
+gW
+gW
+gW
+vQ
+GO
+GO
+eB
+GO
+GO
+ii
+GO
+GO
+GO
+eB
+GO
+GO
+Vt
+hz
+gW
+gW
+gW
+Cp
+Cp
+aR
+"}
+(25,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+Pm
+Pm
+SC
+gW
+gW
+gW
+gW
+gW
+hz
+mW
+Bs
+GO
+hz
+GO
+zc
+zc
+GO
+GO
+GO
+hz
+hz
+hz
+hz
+hz
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(26,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+qS
+gW
+ms
+gW
+gW
+LF
+gW
+gW
+hz
+hz
+hz
+eB
+hz
+zc
+MA
+Vt
+zc
+GO
+PR
+hz
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(27,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+Pm
+ms
+ms
+ms
+ms
+Pm
+yF
+hz
+hz
+fG
+gF
+GO
+hz
+GO
+zc
+zc
+GO
+GO
+Hp
+hz
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+aR
+"}
+(28,1,1) = {"
+aR
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+fA
+fA
+Pm
+qS
+mX
+ms
+ms
+Pm
+ac
+hz
+GO
+UA
+GO
+Lk
+xb
+GO
+GO
+Jt
+Qf
+RA
+hz
+gW
+gW
+ms
+ms
+gW
+gW
+gW
+Cp
+Cp
+aR
+"}
+(29,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+gW
+fA
+fA
+Bl
+Bl
+fA
+Pm
+ms
+ms
+ms
+ms
+ac
+Ia
+GO
+GO
+oq
+hz
+hz
+hz
+hz
+hz
+qu
+hz
+hz
+gW
+gW
+ht
+ms
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(30,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+fA
+Bl
+Bl
+Bl
+Bl
+Bl
+fA
+wm
+Wh
+ms
+fA
+gW
+hz
+hz
+hz
+gW
+hz
+gW
+gW
+gW
+gW
+lS
+sT
+gW
+ms
+ms
+yv
+ht
+gW
+gW
+gW
+gW
+Cp
+aR
+"}
+(31,1,1) = {"
+aR
+Cp
+Cp
+gW
+gW
+gW
+fA
+Bl
+Bl
+Bl
+Bl
+Bl
+Bl
+fA
+fA
+fA
+Bl
+fA
+fA
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+xi
+gW
+gW
+ms
+ht
+yv
+yv
+ms
+gW
+gW
+Cp
+Cp
+aR
+"}
+(32,1,1) = {"
+aR
+Cp
+Cp
+ms
+gW
+gW
+gW
+fA
+Bl
+Bl
+Bl
+Bl
+Bl
+Bl
+Bl
+Bl
+Bl
+Bl
+hc
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+jG
+gW
+qS
+yv
+gu
+yv
+ms
+gW
+gW
+gW
+Cp
+Cp
+aR
+"}
+(33,1,1) = {"
+aR
+Cp
+Cp
+Cp
+ms
+gW
+gW
+gW
+fA
+fA
+fA
+fA
+Bl
+Bl
+Bl
+Bl
+Bl
+hc
+lt
+BI
+fA
+NL
+yv
+gW
+gW
+gW
+gW
+ms
+ms
+yv
+DU
+vF
+ms
+gW
+gW
+gW
+Cp
+Cp
+Cp
+aR
+"}
+(34,1,1) = {"
+aR
+Cp
+Cp
+Cp
+ms
+ms
+gW
+gW
+gW
+gW
+ms
+ms
+fA
+Bl
+Bl
+Bl
+hc
+lt
+hc
+Bl
+Bl
+fA
+zy
+gW
+gW
+ms
+ms
+yv
+yv
+yv
+yv
+yv
+ms
+ms
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(35,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+ms
+gW
+gW
+gW
+yv
+Ub
+VK
+ms
+fA
+fA
+fA
+gW
+hc
+Bl
+Bl
+Bl
+fA
+NL
+gW
+gW
+gW
+gW
+gW
+yv
+ms
+ms
+ms
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(36,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+ms
+gW
+gW
+NL
+DU
+yv
+NL
+ms
+ms
+gW
+gW
+gW
+gW
+fA
+fA
+fA
+NL
+yv
+yv
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(37,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+Cp
+ms
+gW
+gW
+yv
+yv
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+NL
+eQ
+zy
+yv
+DU
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+gW
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(38,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+gW
+zC
+yv
+yv
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(39,1,1) = {"
+aR
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+Cp
+aR
+"}
+(40,1,1) = {"
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
+aR
 "}
