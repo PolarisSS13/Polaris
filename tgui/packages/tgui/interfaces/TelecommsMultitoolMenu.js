@@ -142,10 +142,8 @@ const TelecommsMultitoolMenuPolymorphicOptions = (props, context) => {
 
   const {
     // Relay
-    use_listening_level,
     use_broadcasting,
     use_receiving,
-    listening_level,
     broadcasting,
     receiving,
     // Bus
@@ -160,22 +158,13 @@ const TelecommsMultitoolMenuPolymorphicOptions = (props, context) => {
   } = props.options;
 
   // If absolutely nothing is active, we tell the user there ain't no shit here.
-  if (!use_listening_level && !use_broadcasting && !use_receiving
-      && !use_change_freq && !use_broadcast_range && !use_receive_range) {
+  if (!use_broadcasting && !use_receiving && !use_change_freq && !use_broadcast_range && !use_receive_range) {
     return <Section title="No Options Found" />;
   }
 
   return (
     <Section title="Options">
       <LabeledList>
-        {use_listening_level ? (
-          <LabeledList.Item label="Signal Locked to Station">
-            <Button
-              icon={listening_level ? "lock-closed" : "lock-open"}
-              content={listening_level ? "Yes" : "No"}
-              onClick={() => act("change_listening")} />
-          </LabeledList.Item>
-        ) : null}
         {use_broadcasting ? (
           <LabeledList.Item label="Broadcasting">
             <Button

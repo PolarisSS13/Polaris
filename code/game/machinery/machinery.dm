@@ -540,3 +540,16 @@ Class Procs:
 // Stub for above proc. Implemented on exosuit fabricators and prosthetics fabricators.
 /obj/machinery/proc/refresh_queue()
 	return
+
+
+/obj/machinery/proc/get_multitool(mob/user)
+	var/obj/item/multitool/P = null
+	if (!issilicon(user) && istype(user.get_active_hand(), /obj/item/multitool))
+		P = user.get_active_hand()
+	else if (isAI(user))
+		var/mob/living/silicon/ai/U = user
+		P = U.aiMulti
+	else if (isrobot(user) && in_range(user, src))
+		if (istype(user.get_active_hand(), /obj/item/multitool))
+			P = user.get_active_hand()
+	return P
