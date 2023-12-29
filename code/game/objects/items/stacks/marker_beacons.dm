@@ -41,7 +41,7 @@ var/global/list/marker_beacon_colors = list(
 	. = ..()
 	update_icon()
 
-/obj/item/stack/marker_beacon/examine(mob/user)
+/obj/item/stack/marker_beacon/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='notice'>Use in-hand to place a [singular_name].</span>"
 	. += "<span class='notice'>Alt-click to select a color. Current color is [picked_color].</span>"
@@ -97,7 +97,7 @@ var/global/list/marker_beacon_colors = list(
 		picked_color = mapped_in_color
 	update_icon()
 
-/obj/structure/marker_beacon/examine(mob/user)
+/obj/structure/marker_beacon/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(!perma)
 		. += "<span class='notice'>Alt-click to select a color. Current color is [picked_color].</span>"

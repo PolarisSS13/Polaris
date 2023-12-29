@@ -101,9 +101,9 @@
 
 	..()
 
-/obj/machinery/portable_atmospherics/powered/reagent_distillery/examine(mob/user)
+/obj/machinery/portable_atmospherics/powered/reagent_distillery/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += "<span class='notice'>\The [src] is powered [on ? "on" : "off"].</span>"
 
 		. += "<span class='notice'>\The [src]'s gauges read:</span>"

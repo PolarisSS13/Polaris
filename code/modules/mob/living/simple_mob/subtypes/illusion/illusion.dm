@@ -39,9 +39,9 @@
 
 // Because we can't perfectly duplicate some examine() output, we directly examine the AM it is copying.  It's messy but
 // this is to prevent easy checks from the opposing force.
-/mob/living/simple_mob/illusion/examine(mob/user)
+/mob/living/simple_mob/illusion/examine(mob/user, distance, infix, suffix)
 	if(copying)
-		return copying.examine(user)
+		return copying.examine(user, distance, infix, suffix)
 	else
 		return list("???")
 

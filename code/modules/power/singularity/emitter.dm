@@ -266,7 +266,7 @@
 		if(src)
 			qdel(src)
 
-/obj/machinery/power/emitter/examine(mob/user)
+/obj/machinery/power/emitter/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	var/integrity_percentage = round((integrity / initial(integrity)) * 100)
 	switch(integrity_percentage)

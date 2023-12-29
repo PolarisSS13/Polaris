@@ -46,10 +46,10 @@
 		IC.emp_act(severity)
 	..()
 
-/obj/item/clothing/examine(mob/user)
+/obj/item/clothing/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(IC)
-		. += IC.examine(user)
+		. += IC.examine(user, distance, infix, suffix)
 
 /obj/item/clothing/CtrlShiftClick(mob/user)
 	var/turf/T = get_turf(src)

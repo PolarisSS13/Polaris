@@ -27,7 +27,7 @@ var/global/const/DRINK_ICON_NOISY = "_noise"
 
 	matter = list("glass" = 60)
 
-/obj/item/reagent_containers/food/drinks/glass2/examine(mob/M as mob)
+/obj/item/reagent_containers/food/drinks/glass2/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
 	for(var/I in extras)

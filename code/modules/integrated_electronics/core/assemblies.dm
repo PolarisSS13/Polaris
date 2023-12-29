@@ -171,9 +171,9 @@
 		if(id_card)
 			return id_card
 
-/obj/item/electronic_assembly/examine(mob/user)
+/obj/item/electronic_assembly/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		for(var/obj/item/integrated_circuit/IC in contents)
 			. += IC.external_examine(user)
 		if(opened)

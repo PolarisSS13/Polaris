@@ -45,7 +45,7 @@
 			I.do_work()
 		return
 
-/obj/item/assembly/electronic_assembly/examine(mob/user)
+/obj/item/assembly/electronic_assembly/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(EA)
 		for(var/obj/item/integrated_circuit/IC in EA.contents)
@@ -81,4 +81,3 @@
 	if(!CanInteract(user, state = deep_inventory_state))
 		return 0
 	return 1
-

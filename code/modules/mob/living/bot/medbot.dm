@@ -416,7 +416,7 @@
 	else if(prob(tipped_status * 0.2))
 		playsound(src, 'sound/machines/warning-buzzer.ogg', 30, extrarange=-2)
 
-/mob/living/bot/medbot/examine(mob/user)
+/mob/living/bot/medbot/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(tipped_status == MEDBOT_PANIC_NONE)
 		return

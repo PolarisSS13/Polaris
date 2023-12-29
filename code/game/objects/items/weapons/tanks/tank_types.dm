@@ -20,10 +20,10 @@
 	. = ..()
 	air_contents.adjust_gas("oxygen", (6*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
-/obj/item/tank/oxygen/examine(mob/user)
+/obj/item/tank/oxygen/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(loc == user && (air_contents.gas["oxygen"] < 10))
-		. += "<span class='warning'>The meter on \the [src] indicates you are almost out of oxygen!</span>"
+	if(distance < 2 && (air_contents.gas["oxygen"] < 10))
+		. += "<span class='warning'>The meter on \the [src] indicates it is almost out of oxygen!</span>"
 
 /obj/item/tank/oxygen/yellow
 	desc = "A tank of oxygen, this one is yellow."
@@ -56,10 +56,10 @@
 	desc = "Mixed anyone?"
 	icon_state = "oxygen"
 
-/obj/item/tank/air/examine(mob/user)
+/obj/item/tank/air/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(loc == user && (air_contents.gas["oxygen"] < 1))
-		. += "<span class='warning'>The meter on \the [src] indicates you are almost out of air!</span>"
+	if(distance < 2 && (air_contents.gas["oxygen"] < 1))
+		. += "<span class='warning'>The meter on \the [src] indicates it is almost out of air!</span>"
 		user << sound('sound/effects/alert.ogg')
 
 /obj/item/tank/air/Initialize()
@@ -139,10 +139,10 @@
 	. = ..()
 	src.air_contents.adjust_gas("oxygen", (10*ONE_ATMOSPHERE)*volume/(R_IDEAL_GAS_EQUATION*T20C))
 
-/obj/item/tank/emergency/oxygen/examine(mob/user)
+/obj/item/tank/emergency/oxygen/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(loc == user && (air_contents.gas["oxygen"] < 0.2))
-		. += "<span class='danger'>The meter on the [src.name] indicates you are almost out of air!</span>"
+	if(distance < 2 && (air_contents.gas["oxygen"] < 0.2))
+		. += "<span class='danger'>The meter on the [src.name] indicates it is almost out of air!</span>"
 		user << sound('sound/effects/alert.ogg')
 
 /obj/item/tank/emergency/oxygen/engi
@@ -212,10 +212,10 @@
 	. = ..()
 	src.air_contents.adjust_gas("nitrogen", (3*ONE_ATMOSPHERE)*70/(R_IDEAL_GAS_EQUATION*T20C))
 
-/obj/item/tank/nitrogen/examine(mob/user)
+/obj/item/tank/nitrogen/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(loc == user && (air_contents.gas["nitrogen"] < 10))
-		. += "<span class='danger'>The meter on \the [src] indicates you are almost out of nitrogen!</span>"
+	if(distance < 2 && (air_contents.gas["nitrogen"] < 10))
+		. += "<span class='danger'>The meter on \the [src] indicates it is almost out of nitrogen!</span>"
 		//playsound(user, 'sound/effects/alert.ogg', 50, 1)
 
 /obj/item/tank/stasis/nitro_cryo // Synthbody bags need to have initial pressure within safe bounds for human atmospheric pressure, but low temperature to stop unwanted degredation.

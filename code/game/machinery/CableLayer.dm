@@ -48,7 +48,7 @@
 		else
 			to_chat(usr, "<span class='warning'>There's no more cable on the reel.</span>")
 
-/obj/machinery/cablelayer/examine(mob/user)
+/obj/machinery/cablelayer/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "[src]'s cable reel has [cable.amount] length\s left."
 

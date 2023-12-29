@@ -167,7 +167,7 @@
 	else
 		icon_state = "[initial(icon_state)]0"
 
-/obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user)
+/obj/item/reagent_containers/hypospray/autoinjector/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(reagents && reagents.reagent_list.len)
 		. += "<span class='notice'>It is currently loaded.</span>"

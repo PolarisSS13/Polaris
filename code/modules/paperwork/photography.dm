@@ -51,9 +51,9 @@ var/global/photo_count = 0
 			scribble = txt
 	..()
 
-/obj/item/photo/examine(mob/user)
+/obj/item/photo/examine(mob/user, distance, infix, suffix)
 	//This is one time we're not going to call parent, because photos are 'secret' unless you're close enough.
-	if(in_range(user, src))
+	if(distance < 2)
 		show(user)
 		return list(desc)
 	else

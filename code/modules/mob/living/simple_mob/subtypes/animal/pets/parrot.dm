@@ -89,7 +89,7 @@
 		to_chat(src, span("warning", "\The [user] takes your [my_headset.name] away! How cruel!"))
 		my_headset = null
 
-/mob/living/simple_mob/animal/passive/bird/parrot/examine(mob/user)
+/mob/living/simple_mob/animal/passive/bird/parrot/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(my_headset)
 		. += "It is wearing \a [my_headset]."

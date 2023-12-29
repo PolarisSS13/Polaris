@@ -98,9 +98,9 @@
 	item_storage.remove_from_storage(launched, src)
 	return launched
 
-/obj/item/gun/launcher/pneumatic/examine(mob/user)
+/obj/item/gun/launcher/pneumatic/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += "The valve is dialed to [pressure_setting]%."
 		if(tank)
 			. += "The tank dial reads [tank.air_contents.return_pressure()] kPa."
@@ -150,7 +150,7 @@
 /obj/item/cannonframe/update_icon()
 	icon_state = "pneumatic[buildstate]"
 
-/obj/item/cannonframe/examine(mob/user)
+/obj/item/cannonframe/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	switch(buildstate)
 		if(1)

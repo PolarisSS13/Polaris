@@ -12,7 +12,7 @@
 	var/uses = 1        // Uses before the kit deletes itself.
 	var/list/allowed_types = list()
 
-/obj/item/kit/examine()
+/obj/item/kit/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It has [uses] use\s left."
 
@@ -247,7 +247,7 @@
 	allowed_types = splittext(additional_data, ", ")
 
 
-/obj/item/kit/paint/examine()
+/obj/item/kit/paint/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "This kit will convert an exosuit into: [new_name]."
 	. += "This kit can be used on the following exosuit models:"

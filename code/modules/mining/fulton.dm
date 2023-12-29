@@ -12,7 +12,7 @@ var/global/list/total_extraction_beacons = list()
 	var/can_use_indoors = FALSE
 	var/safe_for_living_creatures = 1
 
-/obj/item/extraction_pack/examine()
+/obj/item/extraction_pack/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It has [uses_left] use\s remaining."
 

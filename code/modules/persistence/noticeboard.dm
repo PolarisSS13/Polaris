@@ -130,7 +130,7 @@
 /obj/structure/noticeboard/attack_hand(var/mob/user)
 	examine(user)
 
-/obj/structure/noticeboard/examine(var/mob/user)
+/obj/structure/noticeboard/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(.)
 		var/list/dat = list("<table>")

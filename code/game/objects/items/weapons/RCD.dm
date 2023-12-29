@@ -41,7 +41,7 @@
 	spark_system = null
 	return ..()
 
-/obj/item/rcd/examine(mob/user)
+/obj/item/rcd/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += display_resources()
 

@@ -31,7 +31,7 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 	QDEL_NULL(mybucket)
 	return ..()
 
-/obj/structure/janitorialcart/examine(mob/user)
+/obj/structure/janitorialcart/examine(mob/user, distance, infix, suffix)
 	. = ..(user)
 	if(istype(mybucket))
 		var/contains = mybucket.reagents.total_volume
@@ -317,9 +317,9 @@ GLOBAL_LIST_BOILERPLATE(all_janitorial_carts, /obj/structure/janitorialcart)
 	update_layer()
 
 
-/obj/structure/bed/chair/janicart/examine(mob/user)
+/obj/structure/bed/chair/janicart/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "This [callme] contains [reagents.total_volume] unit\s of water!"
 		if(mybag)
 			. += "\A [mybag] is hanging on the [callme]."

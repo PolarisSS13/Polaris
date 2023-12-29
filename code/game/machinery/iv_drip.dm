@@ -164,12 +164,10 @@
 	mode = !mode
 	to_chat(usr, "The IV drip is now [mode ? "injecting" : "taking blood"].")
 
-/obj/machinery/iv_drip/examine(mob/user)
+/obj/machinery/iv_drip/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		. += "The IV drip is [mode ? "injecting" : "taking blood"]."
-
 		if(beaker)
 			if(beaker.reagents?.reagent_list?.len)
 				. += "<span class='notice'>Attached is \a [beaker] with [beaker.reagents.total_volume] units of liquid.</span>"

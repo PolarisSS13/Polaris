@@ -58,9 +58,9 @@
 		STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/item/weldingtool/examine(mob/user)
+/obj/item/weldingtool/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(max_fuel && loc == user)
+	if(max_fuel && distance < 2)
 		. += "It contains [get_fuel()]/[src.max_fuel] units of fuel!"
 
 /obj/item/weldingtool/attack(atom/A, mob/living/user, def_zone)
@@ -557,9 +557,9 @@
 /obj/item/weldingtool/electric/get_cell()
 	return power_supply
 
-/obj/item/weldingtool/electric/examine(mob/user)
+/obj/item/weldingtool/electric/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		if(power_supply)
 			. += "It [src.name] has [get_fuel()] charge left."
 		else

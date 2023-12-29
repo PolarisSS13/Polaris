@@ -191,7 +191,7 @@ var/global/list/organ_cache = list()
 		handle_rejection()
 		handle_germ_effects()
 
-/obj/item/organ/examine(mob/user)
+/obj/item/organ/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(status & ORGAN_DEAD)
 		. += "<span class='notice'>Decay appears to have set in.</span>"

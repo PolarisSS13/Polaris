@@ -95,9 +95,9 @@
 	amount++
 
 
-/obj/item/paper_bin/examine(mob/user)
+/obj/item/paper_bin/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		if(amount)
 			. += "<span class='notice'>There " + (amount > 1 ? "are [amount] papers" : "is one paper") + " in the bin.</span>"
 		else

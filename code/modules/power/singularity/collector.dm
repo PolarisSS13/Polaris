@@ -102,9 +102,9 @@ var/global/list/rad_collectors = list()
 		return 1
 	return ..()
 
-/obj/machinery/power/rad_collector/examine(mob/user)
+/obj/machinery/power/rad_collector/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 3)
+	if(distance <= 3)
 		. += "The meter indicates that it is collecting [last_power] W."
 
 /obj/machinery/power/rad_collector/ex_act(severity)
@@ -157,4 +157,3 @@ var/global/list/rad_collectors = list()
 		flick("ca_deactive", src)
 	update_icons()
 	return
-

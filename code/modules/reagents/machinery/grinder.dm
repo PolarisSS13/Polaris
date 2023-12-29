@@ -41,9 +41,9 @@
 	beaker = new /obj/item/reagent_containers/glass/beaker/large(src)
 	default_apply_parts()
 
-/obj/machinery/reagentgrinder/examine(mob/user)
+/obj/machinery/reagentgrinder/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(!in_range(user, src) && !issilicon(user) && !isobserver(user))
+	if(distance > 1 && !issilicon(user) && !isobserver(user))
 		. += "<span class='warning'>You're too far away to examine [src]'s contents and display!</span>"
 		return
 

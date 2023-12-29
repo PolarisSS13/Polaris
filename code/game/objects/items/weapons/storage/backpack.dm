@@ -514,9 +514,9 @@
 	item_state_slots = list(slot_r_hand_str = "backpack", slot_l_hand_str = "backpack")
 	max_storage_space = ITEMSIZE_COST_NORMAL * 5
 
-/obj/item/storage/backpack/parachute/examine(mob/user)
+/obj/item/storage/backpack/parachute/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		if(parachute)
 			. += "It seems to be packed."
 		else

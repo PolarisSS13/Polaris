@@ -1,4 +1,4 @@
-/mob/living/silicon/ai/examine(mob/user)
+/mob/living/silicon/ai/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
 	if (src.stat == DEAD)
@@ -29,10 +29,10 @@
 			. += "The wireless networking light is blinking."
 
 	. += "*---------*"
-	
+
 	if(hardware && (hardware.owner == src))
 		. += hardware.get_examine_desc()
-	
+
 	user.showLaws(src)
 
 /mob/proc/showLaws(var/mob/living/silicon/S)

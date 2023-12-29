@@ -56,10 +56,9 @@
 			icon_state = "[initial(icon_state)]_3"
 		item_state = initial(icon_state)
 
-/obj/item/stack/examine(mob/user)
+/obj/item/stack/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(Adjacent(user))
+	if(distance < 2)
 		if(!uses_charge)
 			. += "There [src.amount == 1? "is" : "are"] [src.amount] [src.singular_name]\s in the stack."
 		else
@@ -76,7 +75,7 @@
 
 /obj/item/stack/tgui_data(mob/user, datum/tgui/ui, datum/tgui_state/state)
 	var/list/data = ..()
-	
+
 	data["amount"] = get_amount()
 
 	return data
@@ -120,7 +119,7 @@
 			if(get_amount() < 1)
 				qdel(src)
 				return
-			
+
 			var/datum/stack_recipe/R = locate(params["ref"])
 			if(!is_valid_recipe(R, recipes)) //href exploit protection
 				return FALSE

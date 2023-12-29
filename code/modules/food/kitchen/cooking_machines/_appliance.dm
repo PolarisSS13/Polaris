@@ -66,9 +66,9 @@
 		qdel(CI)
 	return ..()
 
-/obj/machinery/appliance/examine(var/mob/user)
+/obj/machinery/appliance/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += list_contents(user)
 
 /obj/machinery/appliance/proc/list_contents(var/mob/user)

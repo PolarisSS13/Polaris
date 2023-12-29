@@ -468,7 +468,7 @@ GLOBAL_LIST_EMPTY(smeses)
 	// Given the SMES creates another explosion on it's destruction it sounds fairly reasonable.
 	take_damage(250 / severity)
 
-/obj/machinery/power/smes/examine(var/mob/user)
+/obj/machinery/power/smes/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='filter_notice'>The service hatch is [panel_open ? "open" : "closed"].</span>"
 	if(!damage)

@@ -334,7 +334,7 @@
 	return
 
 
-/obj/machinery/door/examine(mob/user)
+/obj/machinery/door/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(src.health <= 0)
 		. += "It is broken!"

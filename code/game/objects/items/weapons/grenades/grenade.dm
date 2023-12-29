@@ -46,9 +46,9 @@
 	return*/
 
 
-/obj/item/grenade/examine(mob/user)
+/obj/item/grenade/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) == 0)
+	if(!distance)
 		if(det_time > 1)
 			. += "The timer is set to [det_time/10] seconds."
 		else if(det_time == null)

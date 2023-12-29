@@ -1119,7 +1119,7 @@
 	desc = "A basic wall clock, synced to the current system time."
 	icon_state = "clock"
 
-/obj/structure/sign/clock/examine(mob/user)
+/obj/structure/sign/clock/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "The clock shows that the time is [stationtime2text()]."
 
@@ -1128,7 +1128,7 @@
 	desc = "It's an old-school, NanoTrasen branded wall calendar. Sure, it might be obsolete with modern technology, but it's still hard to imagine an office without one."
 	icon_state = "calendar"
 
-/obj/structure/sign/calendar/examine(mob/user)
+/obj/structure/sign/calendar/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "The calendar shows that the date is [stationdate2text()]."
 	if (Holiday.len)

@@ -26,6 +26,6 @@
 /obj/item/pipe_painter/attack_self(mob/user as mob)
 	mode = input("Which colour do you want to use?", "Pipe painter", mode) in modes
 
-/obj/item/pipe_painter/examine(mob/user)
+/obj/item/pipe_painter/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It is in [mode] mode."

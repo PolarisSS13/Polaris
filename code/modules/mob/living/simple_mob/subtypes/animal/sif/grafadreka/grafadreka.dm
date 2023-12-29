@@ -163,7 +163,7 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	reset_charisma()
 
 
-/mob/living/simple_mob/animal/sif/grafadreka/examine(mob/living/user)
+/mob/living/simple_mob/animal/sif/grafadreka/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if (istype(user, /mob/living/simple_mob/animal/sif/grafadreka) || isobserver(user))
 		var/datum/gender/G = gender_datums[get_visible_gender()]

@@ -17,7 +17,7 @@
 /obj/item/stack/wetleather/get_drying_state(var/obj/rack)
 	return (drying_wetness > 0 ? "leather_wet" : "leather_dry")
 
-/obj/item/stack/wetleather/examine(var/mob/user)
+/obj/item/stack/wetleather/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += description_info
 	. += "\The [src] is [get_dryness_text()]."

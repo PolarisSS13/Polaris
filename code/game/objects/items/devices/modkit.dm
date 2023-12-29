@@ -65,7 +65,7 @@
 		user.drop_from_inventory(src)
 		qdel(src)
 
-/obj/item/modkit/examine(mob/user)
+/obj/item/modkit/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "It looks as though it modifies hardsuits to fit [target_species] users."
 

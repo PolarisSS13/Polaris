@@ -149,9 +149,9 @@
 
 	free_space -= length(strip_html_properly(new_text))
 
-/obj/item/paper/examine(mob/user)
+/obj/item/paper/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(in_range(user, src) || istype(user, /mob/observer/dead))
+	if(distance < 2 || istype(user, /mob/observer/dead))
 		show_content(usr)
 	else
 		. += "<span class='notice'>You have to go closer if you want to read it.</span>"

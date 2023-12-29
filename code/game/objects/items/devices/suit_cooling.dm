@@ -182,25 +182,21 @@
 	else
 		icon_state = "suitcooler0"
 
-/obj/item/suit_cooling_unit/examine(mob/user)
+/obj/item/suit_cooling_unit/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(Adjacent(user))
-
+	if(distance < 2)
 		if (on)
-			if (attached_to_suit(src.loc))
+			if (attached_to_suit(loc))
 				. += "It's switched on and running."
 			else
 				. += "It's switched on, but not attached to anything."
 		else
 			. += "It is switched off."
-
 		if (cover_open)
 			if(cell)
 				. += "The panel is open, exposing the [cell]."
 			else
 				. += "The panel is open."
-
 		if (cell)
 			. += "The charge meter reads [round(cell.percent())]%."
 		else

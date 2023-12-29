@@ -82,9 +82,9 @@
 	. = ..()
 	QDEL_NULL(door_obj)
 
-/obj/structure/closet/examine(mob/user)
+/obj/structure/closet/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user) || isobserver(user))
+	if(distance < 2 || isobserver(user))
 		var/content_size = 0
 		for(var/obj/item/I in contents)
 			if(!I.anchored)

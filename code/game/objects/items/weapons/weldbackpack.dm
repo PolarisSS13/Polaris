@@ -144,9 +144,9 @@
 				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
 
-/obj/item/weldpack/examine(mob/user)
+/obj/item/weldpack/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	. += "It has [src.reagents.total_volume] units of fuel left!"
+	. += "It has [reagents.total_volume] units of fuel left!"
 
 /obj/item/weldpack/survival
 	name = "emergency welding kit"

@@ -40,15 +40,13 @@
 			add_overlay("sheater-open")
 
 
-/obj/machinery/space_heater/examine(mob/user)
+/obj/machinery/space_heater/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
 	. += "The heater is [on ? "on" : "off"] and the hatch is [panel_open ? "open" : "closed"]."
 	if(panel_open)
 		. += "The power cell is [cell ? "installed" : "missing"]."
 	else
 		. += "The charge meter reads [cell ? round(cell.percent(),1) : 0]%"
-	return
 
 /obj/machinery/space_heater/powered()
 	if(cell && cell.charge)

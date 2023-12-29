@@ -76,15 +76,12 @@
 		)
 		radio_connection.post_signal(src, signal)
 
-/obj/machinery/meter/examine(mob/user)
+/obj/machinery/meter/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(get_dist(user, src) > 3 && !(istype(user, /mob/living/silicon/ai) || istype(user, /mob/observer/dead)))
+	if(distance > 3 && !(istype(user, /mob/living/silicon/ai) || istype(user, /mob/observer/dead)))
 		. += "<span class='warning'>You are too far away to read it.</span>"
-
 	else if(stat & (NOPOWER|BROKEN))
 		. += "<span class='warning'>The display is off.</span>"
-
 	else if(target)
 		var/datum/gas_mixture/environment = target.return_air()
 		if(environment)

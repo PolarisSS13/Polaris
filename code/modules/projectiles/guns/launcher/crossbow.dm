@@ -253,7 +253,7 @@
 /obj/item/crossbowframe/update_icon()
 	icon_state = "crossbowframe[buildstate]"
 
-/obj/item/crossbowframe/examine(mob/user)
+/obj/item/crossbowframe/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	switch(buildstate)
 		if(1)

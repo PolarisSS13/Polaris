@@ -83,9 +83,9 @@
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ILLEGAL = 3)
 	camtype = /obj/machinery/camera/bug/spy
 
-/obj/item/camerabug/examine(mob/user)
+/obj/item/camerabug/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) == 0)
+	if(!distance)
 		. += "It has a tiny camera inside. Needs to be both configured and brought in contact with monitor device to be fully functional."
 
 /obj/item/camerabug/update_icon()
@@ -234,9 +234,9 @@
 	item_state = "electronic"
 	origin_tech = list(TECH_DATA = 1, TECH_ENGINEERING = 1, TECH_ILLEGAL = 3)
 
-/obj/item/bug_monitor/spy/examine(mob/user)
+/obj/item/bug_monitor/spy/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "The time '12:00' is blinking in the corner of the screen and \the [src] looks very cheaply made."
 
 /obj/machinery/camera/bug/check_eye(var/mob/user as mob)

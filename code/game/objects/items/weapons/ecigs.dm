@@ -22,14 +22,13 @@
 	. = ..()
 	ec_cartridge = new cartridge_type(src)
 
-/obj/item/clothing/mask/smokable/ecig/examine(mob/user)
+/obj/item/clothing/mask/smokable/ecig/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
 	if(active)
 		. += "<span class='notice'>It is turned on.</span>"
 	else
 		. += "<span class='notice'>It is turned off.</span>"
-	if(Adjacent(user))
+	if(distance < 2)
 		if(ec_cartridge)
 			if(!ec_cartridge.reagents?.total_volume)
 				. += "<span class='notice'>Its cartridge is empty!</span>"
@@ -159,7 +158,7 @@
 	. = ..()
 	create_reagents(volume)
 
-/obj/item/reagent_containers/ecig_cartridge/examine(mob/user as mob)//to see how much left
+/obj/item/reagent_containers/ecig_cartridge/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "The cartridge has [reagents.total_volume] units of liquid remaining."
 

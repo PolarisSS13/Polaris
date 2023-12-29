@@ -10,7 +10,7 @@
 	stacktype = "hide"
 	no_variants = TRUE
 // This needs to be very clearly documented for players. Whether it should stay in the main description is up for debate.
-/obj/item/stack/animalhide/examine(var/mob/user)
+/obj/item/stack/animalhide/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += description_info
 
@@ -27,7 +27,7 @@
 				if(HS.amount < HS.max_amount)
 					H = HS
 					break
-			
+
 			 // Either we found a valid stack, in which case increment amount,
 			 // Or we need to make a new stack
 			if(istype(H))
@@ -38,7 +38,7 @@
 			// Increment the amount
 			src.use(1)
 			scraped++
-		
+
 		if(scraped)
 			to_chat(user, SPAN_NOTICE("You scrape the hair off [scraped] hide\s."))
 	else

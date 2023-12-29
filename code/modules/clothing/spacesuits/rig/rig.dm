@@ -95,7 +95,7 @@
 	var/datum/effect_system/spark_spread/spark_system
 	var/datum/mini_hud/rig/minihud
 
-/obj/item/rig/examine()
+/obj/item/rig/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(wearer)
 		for(var/obj/item/piece in list(helmet,gloves,chest,boots))

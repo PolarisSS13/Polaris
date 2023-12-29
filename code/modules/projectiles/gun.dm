@@ -713,7 +713,7 @@
 		accuracy = initial(accuracy)
 		recoil = initial(recoil)
 
-/obj/item/gun/examine(mob/user)
+/obj/item/gun/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(firemodes.len > 1)
 		var/datum/firemode/current_mode = firemodes[sel_mode]

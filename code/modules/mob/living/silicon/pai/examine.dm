@@ -1,5 +1,5 @@
-/mob/living/silicon/pai/examine(mob/user)
-	. = ..(user, infix = ", personal AI")
+/mob/living/silicon/pai/examine(mob/user, distance, infix, suffix)
+	. = ..(user, distance, ", personal AI", suffix)
 
 	switch(src.stat)
 		if(CONSCIOUS)
@@ -15,4 +15,3 @@
 		if(!findtext(pose, regex("\[.?!]$"))) // Will be zero if the last character is not a member of [.?!]
 			pose = addtext(pose,".") //Makes sure all emotes end with a period.
 		. += "<br>It is [pose]" //Extra <br> intentional
-		

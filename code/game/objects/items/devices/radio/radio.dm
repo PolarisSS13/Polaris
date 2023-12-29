@@ -596,10 +596,9 @@ GLOBAL_DATUM(autospeaker, /mob/living/silicon/ai/announcer)
 		return get_mobs_or_objects_in_view(range, src)
 
 
-/obj/item/radio/examine(mob/user)
+/obj/item/radio/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if((in_range(src, user) || loc == user))
+	if(distance < 2 || loc == user)
 		if(b_stat)
 			. += "<span class='notice'>\The [src] can be attached and modified!</span>"
 		else

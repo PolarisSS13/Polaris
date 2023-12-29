@@ -1033,9 +1033,9 @@
 	w_class = ITEMSIZE_SMALL
 	var/active = 0 //if the ship is on
 
-/obj/item/orion_ship/examine(mob/user)
+/obj/item/orion_ship/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(in_range(user, src))
+	if(distance < 2)
 		if(!active)
 			. += span("notice", "There's a little switch on the bottom. It's flipped down.")
 		else

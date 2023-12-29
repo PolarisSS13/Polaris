@@ -100,9 +100,9 @@
 			I.pixel_y = -3
 		add_overlay(I)
 
-/obj/structure/bigDelivery/examine(mob/user)
+/obj/structure/bigDelivery/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 4)
+	if(distance < 5)
 		if(sortTag)
 			. += "<span class='notice'>It is labeled \"[sortTag]\"</span>"
 		if(examtext)
@@ -208,9 +208,9 @@
 				I.pixel_y = -3
 		add_overlay(I)
 
-/obj/item/smallDelivery/examine(mob/user)
+/obj/item/smallDelivery/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 4)
+	if(distance < 5)
 		if(sortTag)
 			. += "<span class='notice'>It is labeled \"[sortTag]\"</span>"
 		if(examtext)
@@ -311,9 +311,9 @@
 		return
 	return
 
-/obj/item/packageWrap/examine(mob/user)
+/obj/item/packageWrap/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 0)
+	if(distance < 2)
 		. += "<font color='blue'>There are [amount] units of package wrap left!</font>"
 
 /obj/structure/bigDelivery/Destroy()

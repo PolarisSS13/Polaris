@@ -91,9 +91,9 @@
 				return 0
 	return null
 
-/obj/item/melee/energy/examine(mob/user)
+/obj/item/melee/energy/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(use_cell && Adjacent(user))
+	if(use_cell && distance < 2)
 		if(bcell)
 			. += "<span class='notice'>The blade is [round(bcell.percent())]% charged.</span>"
 		else
@@ -196,7 +196,7 @@
 			lcolor = sanitize_hexcolor(energy_color_input)
 		update_icon()
 
-/obj/item/melee/energy/examine(mob/user)
+/obj/item/melee/energy/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='notice'>Alt-click to recolor it.</span>"
 

@@ -66,7 +66,7 @@
 				usr.put_in_l_hand(src)
 		src.add_fingerprint(usr)
 
-/obj/item/clothing/examine(var/mob/user)
+/obj/item/clothing/examine(mob/user, distance, infix, suffix)
 	. = ..(user)
 	if(LAZYLEN(accessories))
 		. += "It has the following attached: [counting_english_list(accessories)]"

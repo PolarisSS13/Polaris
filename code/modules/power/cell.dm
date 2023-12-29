@@ -155,9 +155,9 @@
 	return amount_used
 
 
-/obj/item/cell/examine(mob/user)
+/obj/item/cell/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "It has a power rating of [maxcharge]."
 		. += "The charge meter reads [round(src.percent() )]%."
 

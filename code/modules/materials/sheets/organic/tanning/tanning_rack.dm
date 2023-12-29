@@ -35,7 +35,7 @@
 			drying.forceMove(src)
 		update_icon()
 
-/obj/structure/drying_rack/examine(var/mob/user)
+/obj/structure/drying_rack/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(drying)
 		. += "\The [drying] is [drying.get_dryness_text()]."
@@ -82,7 +82,7 @@
 		update_icon()
 	return ..()
 
-/obj/structure/drying_rack/attack_robot(var/mob/user)
+/obj/structure/drying_rack/attack_robot(mob/user)
 	if(Adjacent(user))
 		return attack_hand(user)
 	return ..()

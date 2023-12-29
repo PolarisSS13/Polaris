@@ -99,7 +99,7 @@
 	if(istype(dart))
 		fill_dart(dart)
 
-/obj/item/gun/projectile/dartgun/examine(mob/user)
+/obj/item/gun/projectile/dartgun/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(beakers.len)
 		. += "<span class='notice'>[src] contains:</span>"

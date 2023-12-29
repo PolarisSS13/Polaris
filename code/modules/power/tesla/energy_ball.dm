@@ -67,7 +67,7 @@
 	else
 		energy = 0 // ensure we dont have miniballs of miniballs
 
-/obj/singularity/energy_ball/examine(mob/user)
+/obj/singularity/energy_ball/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(orbiting_balls.len)
 		. += "The amount of orbiting mini-balls is [orbiting_balls.len]."

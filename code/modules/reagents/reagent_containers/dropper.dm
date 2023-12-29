@@ -14,9 +14,9 @@
 	drop_sound = 'sound/items/drop/glass.ogg'
 	pickup_sound = 'sound/items/pickup/glass.ogg'
 
-/obj/item/reagent_containers/dropper/examine(var/mob/user)
+/obj/item/reagent_containers/dropper/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance < 3)
 		if(reagents && reagents.reagent_list.len)
 			. += "<span class='notice'>It contains [reagents.total_volume] units of liquid.</span>"
 		else

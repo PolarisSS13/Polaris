@@ -61,7 +61,7 @@ GLOBAL_LIST_BOILERPLATE(all_seed_packs, /obj/item/seeds)
 		src.name = "sample of [seed.seed_name] [seed.seed_noun]"
 		src.desc = "It's labelled as coming from [seed.display_name]."
 
-/obj/item/seeds/examine(mob/user)
+/obj/item/seeds/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(seed && !seed.roundstart)
 		. += "It's tagged as variety #[seed.uid]."

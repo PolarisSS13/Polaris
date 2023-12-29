@@ -165,7 +165,7 @@
 		soundloop.stop()
 		return 0
 	if(!use_power)
-		soundloop.stop() 
+		soundloop.stop()
 		return 0
 	if(welded)
 		soundloop.stop()
@@ -400,9 +400,9 @@
 	else
 		..()
 
-/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user)
+/obj/machinery/atmospherics/unary/vent_pump/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "A small gauge in the corner reads [round(last_flow_rate, 0.1)] L/s; [round(last_power_draw)] W"
 	else
 		. += "You are too far away to read the gauge."

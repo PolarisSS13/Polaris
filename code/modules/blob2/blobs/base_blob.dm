@@ -69,7 +69,7 @@ GLOBAL_LIST_EMPTY(all_blobs)
 			return TRUE
 	return FALSE
 
-/obj/structure/blob/examine(mob/user)
+/obj/structure/blob/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(!overmind)
 		. += "It seems inert." // Dead blob.

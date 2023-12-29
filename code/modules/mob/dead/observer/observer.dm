@@ -169,7 +169,7 @@
 		set_cached_examine_icon(src, I, 200 SECONDS)
 	return I
 
-/mob/observer/dead/examine(mob/user)
+/mob/observer/dead/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
 	if(is_admin(user))

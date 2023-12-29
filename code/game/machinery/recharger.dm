@@ -21,10 +21,9 @@
 	. = ..()
 	default_apply_parts()
 
-/obj/machinery/recharger/examine(mob/user)
+/obj/machinery/recharger/examine(mob/user, distance, infix, suffix)
 	. = ..()
-
-	if(get_dist(user, src) <= 5)
+	if(distance < 6)
 		. += "[charging ? "[charging]" : "Nothing"] is in [src]."
 		if(charging)
 			var/obj/item/cell/C = charging.get_cell()

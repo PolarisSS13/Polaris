@@ -86,7 +86,7 @@
 	else
 		src.startgibbing(user)
 
-/obj/machinery/gibber/examine()
+/obj/machinery/gibber/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "The safety guard is [emagged ? "<span class='danger'>disabled</span>" : "enabled"]."
 

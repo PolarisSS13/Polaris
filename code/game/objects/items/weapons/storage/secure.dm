@@ -28,9 +28,9 @@
 	max_storage_space = ITEMSIZE_SMALL * 7
 	use_sound = 'sound/items/storage/briefcase.ogg'
 
-/obj/item/storage/secure/examine(mob/user)
+/obj/item/storage/secure/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(Adjacent(user))
+	if(distance < 2)
 		. += "The service panel is [src.open ? "open" : "closed"]."
 
 /obj/item/storage/secure/attackby(obj/item/W, mob/user)

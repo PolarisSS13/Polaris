@@ -256,7 +256,7 @@
 	anchored = TRUE
 	density = TRUE
 
-/obj/structure/frame/examine(mob/user)
+/obj/structure/frame/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(circuit)
 		. += "It has \a [circuit] installed."

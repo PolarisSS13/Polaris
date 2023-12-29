@@ -287,7 +287,7 @@
 			lcolor = sanitize_hexcolor(energy_color_input)
 		update_icon()
 
-/obj/item/toy/sword/examine(mob/user)
+/obj/item/toy/sword/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	. += "<span class='notice'>Alt-click to recolor it.</span>"
 
@@ -790,11 +790,11 @@
 	var/opened = FALSE	// has this been slit open? this will allow you to store an object in a plushie.
 	var/obj/item/stored_item	// Note: Stored items can't be bigger than the plushie itself.
 
-/obj/structure/plushie/examine(mob/user)
+/obj/structure/plushie/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(opened)
 		. += "<i>You notice an incision has been made on [src].</i>"
-		if(in_range(user, src) && stored_item)
+		if(distance < 2 && stored_item)
 			. += "<i>You can see something in there...</i>"
 
 /obj/structure/plushie/attack_hand(mob/user)
@@ -888,11 +888,11 @@
 	var/obj/item/stored_item	// Note: Stored items can't be bigger than the plushie itself.
 
 
-/obj/item/toy/plushie/examine(mob/user)
+/obj/item/toy/plushie/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(opened)
 		. += "<i>You notice an incision has been made on [src].</i>"
-		if(in_range(user, src) && stored_item)
+		if(distance < 2 && stored_item)
 			. += "<i>You can see something in there...</i>"
 
 /obj/item/toy/plushie/attack_self(mob/user as mob)

@@ -55,9 +55,9 @@ var/global/list/light_type_cache = list()
 		if(3)
 			icon_state = "tube-empty"
 
-/obj/machinery/light_construct/examine(mob/user)
+/obj/machinery/light_construct/examine(mob/user, distance, infix, suffix)
 	. = ..()
-	if(get_dist(user, src) <= 2)
+	if(distance <= 2)
 		switch(stage)
 			if(1)
 				. += "It's an empty frame."
@@ -459,7 +459,7 @@ var/global/list/light_type_cache = list()
 	return cell
 
 // examine verb
-/obj/machinery/light/examine(mob/user)
+/obj/machinery/light/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	var/fitting = get_fitting_name()
 	switch(status)

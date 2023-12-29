@@ -22,10 +22,10 @@
 	if(!my_guntype && !QDELETED(src))
 		qdel(src)
 
-/obj/item/broken_gun/examine(mob/user)
+/obj/item/broken_gun/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	spawn()
-		if(get_dist(get_turf(user),get_turf(src)) <= 1)
+		if(distance < 2)
 			to_chat(user, "<span class='notice'>You begin inspecting \the [src].</span>")
 
 			if(do_after(user, 5 SECONDS))

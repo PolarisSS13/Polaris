@@ -24,7 +24,7 @@
 	var/silicate = 0 // number of units of silicate
 	var/fulltile = FALSE // Set to true on full-tile variants.
 
-/obj/structure/window/examine(mob/user)
+/obj/structure/window/examine(mob/user, distance, infix, suffix)
 	. = ..()
 
 	if(health == maxhealth)

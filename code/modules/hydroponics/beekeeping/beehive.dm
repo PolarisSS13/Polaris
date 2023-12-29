@@ -30,7 +30,7 @@
 			if(81 to 100)
 				add_overlay("bees3")
 
-/obj/machinery/beehive/examine(var/mob/user)
+/obj/machinery/beehive/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(!closed)
 		. += "The lid is open."

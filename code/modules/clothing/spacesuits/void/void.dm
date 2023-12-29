@@ -70,11 +70,11 @@
 	//Cycler settings
 	var/no_cycle = FALSE	//stop this item from being put in a cycler
 
-/obj/item/clothing/suit/space/void/examine(user)
+/obj/item/clothing/suit/space/void/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	for(var/obj/item/I in list(helmet,boots,tank,cooler))
 		. += "It has \a [I] installed."
-	if(tank && in_range(src,user))
+	if(tank && distance < 2)
 		. += "<span class='notice'>The wrist-mounted pressure gauge reads [max(round(tank.air_contents.return_pressure()),0)] kPa remaining in \the [tank].</span>"
 
 /obj/item/clothing/suit/space/void/refit_for_species(var/target_species)

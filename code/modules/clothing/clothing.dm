@@ -920,7 +920,7 @@ var/global/list/light_overlay_cache = list() //see get_worn_overlay() on helmets
 	set_clothing_index()
 
 
-/obj/item/clothing/under/examine(mob/user)
+/obj/item/clothing/under/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	switch(src.sensor_mode)
 		if(0)

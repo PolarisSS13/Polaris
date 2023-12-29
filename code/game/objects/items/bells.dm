@@ -13,7 +13,7 @@
 	var/static/radial_use = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_use")
 	var/static/radial_pickup = image(icon = 'icons/mob/radial.dmi', icon_state = "radial_pickup")
 
-/obj/item/deskbell/examine(mob/user)
+/obj/item/deskbell/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(broken)
 		. += "<b>It looks damaged, the ringer is stuck firmly inside.</b>"

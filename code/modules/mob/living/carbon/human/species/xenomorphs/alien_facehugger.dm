@@ -41,7 +41,7 @@ var/global/const/MAX_ACTIVE_TIME = 400
 	if(!config.aliens_allowed)
 		return INITIALIZE_HINT_QDEL
 
-/obj/item/clothing/mask/facehugger/examine(mob/user)
+/obj/item/clothing/mask/facehugger/examine(mob/user, distance, infix, suffix)
 	..(user)
 	switch(stat)
 		if(DEAD,UNCONSCIOUS)

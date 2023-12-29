@@ -48,7 +48,7 @@
 		return
 	..()
 
-/obj/item/sticky_pad/examine(var/mob/user)
+/obj/item/sticky_pad/examine(mob/user, distance, infix, suffix)
 	. = ..()
 	if(.)
 		to_chat(user, SPAN_NOTICE("It has [papers] [papername]\s left in the stack."))
