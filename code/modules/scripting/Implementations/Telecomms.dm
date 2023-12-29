@@ -7,6 +7,10 @@
 /n_Interpreter/TCS_Interpreter
 	var/datum/TCS_Compiler/Compiler
 
+/n_Interpreter/TCS_Interpreter/Destroy()
+	QDEL_NULL(Compiler)
+	return ..()
+
 /n_Interpreter/TCS_Interpreter/HandleError(runtimeError/e)
 	Compiler.Holder.add_entry(e.ToString(), "Execution Error")
 
@@ -14,6 +18,11 @@
 	var/n_Interpreter/TCS_Interpreter/interpreter
 	var/obj/machinery/telecomms/server/Holder	// the server that is running the code
 	var/ready = 1 // 1 if ready to run code
+
+/datum/TCS_Compiler/Destroy()
+	QDEL_NULL(interpreter)
+	Holder = null
+	return ..()
 
 	/** Proc: Compile
 	 * Compile a raw block of text into a program
@@ -278,4 +287,3 @@
 	var/pass = S.relay_information(newsign, /obj/machinery/telecomms/hub)
 	if(!pass)
 		S.relay_information(newsign, /obj/machinery/telecomms/broadcaster) // send this simple message to broadcasters
-
