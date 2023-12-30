@@ -48,6 +48,29 @@
 	qdel(src)
 
 
+/obj/structure/outcrop/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
+	. = TRUE
+	drake.visible_message(
+		SPAN_ITALIC("\The [drake] claws away at \a [src]."),
+		SPAN_ITALIC("You dig industriously at \the [src]."),
+		SPAN_ITALIC("You hear something scrabbling on stone!"),
+		range = 5
+	)
+	if (!do_after(drake, 4 SECONDS, src))
+		return
+	visible_message(
+		SPAN_WARNING("\The [src] crumbles away to debris."),
+		SPAN_NOTICE("You finish digging up the [src]."),
+		SPAN_ITALIC("You hear small rocks tumbling around!"),
+		range = 5
+	)
+	var/turf/turf = get_turf(src)
+	qdel(src)
+	if (turf)
+		for (var/i = 1 to rand(mindrop, upperdrop))
+			new outcropdrop (turf)
+
+
 /obj/item/bikehorn/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/drake)
 	. = TRUE
 	if (drake.a_intent != I_HELP)
