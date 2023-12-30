@@ -6,16 +6,16 @@ SUBSYSTEM_DEF(overlays)
 	init_order = INIT_ORDER_OVERLAY
 
 	/// The queue of atoms that need overlay updates.
-	var/static/tmp/list/queue = list()
+	var/static/list/queue = list()
 
 	/// A list([icon] = list([state] = [appearance], ...), ...) cache of appearances.
-	var/static/tmp/list/state_cache = list()
+	var/static/list/state_cache = list()
 
 	/// A list([icon] = [appearance], ...) cache of appearances.
-	var/static/tmp/list/icon_cache = list()
+	var/static/list/icon_cache = list()
 
 	/// The number of appearances currently cached.
-	var/static/tmp/cache_size = 0
+	var/static/cache_size = 0
 
 
 /datum/controller/subsystem/overlays/Recover()

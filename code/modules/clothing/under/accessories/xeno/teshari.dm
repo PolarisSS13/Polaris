@@ -32,9 +32,9 @@
 		'sound/misc/dingaling3.ogg',
 		'sound/misc/dingaling4.ogg'
 	)
-	var/tmp/dingaling_volume = 260
-	var/tmp/dingaling_chance = 30
-	var/tmp/dingaling_vary = FALSE
+	var/dingaling_volume = 260
+	var/dingaling_chance = 30
+	var/dingaling_vary = FALSE
 
 /obj/item/clothing/accessory/teshtail/bells/is_mob_movement_sensitive()
 	return TRUE

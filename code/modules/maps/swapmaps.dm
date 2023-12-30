@@ -134,8 +134,8 @@ swapmap
 	var/x2		// maximum x,y,z coords (also used as width,height,depth until positioned)
 	var/y2
 	var/z2
-	var/tmp/locked	// don't move anyone to this map; it's saving or loading
-	var/tmp/mode	// save as text-mode
+	var/locked	// don't move anyone to this map; it's saving or loading
+	var/mode	// save as text-mode
 	var/ischunk		// tells the load routine to load to the specified location
 
 	New(_id,x,y,z)

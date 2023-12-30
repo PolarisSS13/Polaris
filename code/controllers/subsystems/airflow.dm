@@ -101,11 +101,11 @@ SUBSYSTEM_DEF(airflow)
 #undef CLEAR_OBJECT
 
 /atom/movable
-	var/tmp/airflow_xo
-	var/tmp/airflow_yo
-	var/tmp/airflow_od
-	var/tmp/airflow_process_delay
-	var/tmp/airflow_skip_speedcheck
+	var/airflow_xo
+	var/airflow_yo
+	var/airflow_od
+	var/airflow_process_delay
+	var/airflow_skip_speedcheck
 
 /atom/movable/proc/prepare_airflow(n)
 	if (!airflow_dest || airflow_speed < 0 || last_airflow > world.time - vsc.airflow_delay)
