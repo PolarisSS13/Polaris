@@ -64,17 +64,11 @@
 /datum/persistent/filth/CompileEntry(var/atom/entry)
 	. = ..()
 	LAZYADDASSOC(., "path", "[GetEntryPath(entry)]")
-	to_world("path is [GetEntryPath(entry)]")
 	LAZYADDASSOC(., "pixel_x", "[entry.pixel_x]")
-	to_world("pixel_x is [entry.pixel_x]")
 	LAZYADDASSOC(., "pixel_y", "[entry.pixel_y]")
-	to_world("pixel_y is [entry.pixel_y]")
 
 	if(istype(entry, /obj/effect/decal/cleanable/crayon))
 		var/obj/effect/decal/cleanable/crayon/Inst = entry
 		LAZYADDASSOC(., "art_type", "[Inst.art_type]")
-		to_world("art type is [Inst.art_type]")
 		LAZYADDASSOC(., "art_color", "[Inst.art_color]")
-		to_world("art color is [Inst.art_color]")
 		LAZYADDASSOC(., "art_shade", "[Inst.art_shade]")
-		to_world("art shade is [Inst.art_shade]")
