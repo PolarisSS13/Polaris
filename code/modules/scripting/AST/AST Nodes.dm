@@ -65,8 +65,8 @@ var/global/const/OOP_GROUP   = OOP_UNARY		+ 1   //()
 */
 /node/expression/operator_node
 	var/node/expression/exp
-	var/tmp/name
-	var/tmp/precedence
+	var/name
+	var/precedence
 
 /node/expression/operator_node/New()
 	.=..()

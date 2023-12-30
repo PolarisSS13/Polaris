@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(inactivity)
 	name = "Inactivity"
 	wait = 60 SECONDS
 	flags = SS_NO_INIT | SS_BACKGROUND
-	var/tmp/list/client_list
+	var/list/client_list
 	var/number_kicked = 0
 
 /datum/controller/subsystem/inactivity/fire(resumed, no_mc_tick)

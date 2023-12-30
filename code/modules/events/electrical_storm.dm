@@ -3,8 +3,8 @@
 	startWhen = 30			// 1 minute
 	endWhen = 60			// Set in setup()
 	has_skybox_image = TRUE
-	var/tmp/lightning_color
-	var/tmp/list/valid_apcs		// List of valid APCs.
+	var/lightning_color
+	var/list/valid_apcs		// List of valid APCs.
 
 /datum/event/electrical_storm/get_skybox_image()
 	if(!lightning_color)

@@ -2,7 +2,7 @@
 
 // Tracks precooked food to stop deep fried baked grilled grilled grilled Diona nymph cereal.
 /obj/item/reagent_containers/food/snacks
-	var/tmp/list/cooked = list()
+	var/list/cooked = list()
 
 // Root type for cooking machines. See following files for specific implementations.
 /obj/machinery/appliance

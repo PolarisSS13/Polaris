@@ -24,10 +24,10 @@
 	var/has_had_player = FALSE
 	var/const/platform_respawn_time = 3 MINUTES
 
-	var/tmp/last_recharge_state =     FALSE
-	var/tmp/recharge_complete =       FALSE
-	var/tmp/recharger_charge_amount = 10 KILOWATTS
-	var/tmp/recharger_tick_cost =     80 KILOWATTS
+	var/last_recharge_state =     FALSE
+	var/recharge_complete =       FALSE
+	var/recharger_charge_amount = 10 KILOWATTS
+	var/recharger_tick_cost =     80 KILOWATTS
 	var/weakref/recharging
 
 /mob/living/silicon/robot/platform/Login()

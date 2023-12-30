@@ -50,8 +50,8 @@
 
 
 	// helper lists
-	var/tmp/list/desc_list = list()
-	var/tmp/list/damage_list = list()
+	var/list/desc_list = list()
+	var/list/damage_list = list()
 
 /datum/wound/New(var/damage)
 

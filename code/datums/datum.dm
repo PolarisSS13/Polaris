@@ -14,8 +14,8 @@
 	var/datum_flags = EMPTY_BITFIELD
 
 #ifdef TESTING
-	var/tmp/running_find_references
-	var/tmp/last_find_references = 0
+	var/running_find_references
+	var/last_find_references = 0
 #endif
 
 // Default implementation of clean-up code.
