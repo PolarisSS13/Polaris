@@ -59,6 +59,9 @@
 	reagents.remove_reagent("triglyceride", INFINITY)
 	//Chicken is low fat. Less total calories than other meats
 
+/obj/item/reagent_containers/food/snacks/meat/chicken/teshari
+	name = "meat"
+
 /obj/item/reagent_containers/food/snacks/meat/neaera
 	name = "Neaera meat"
 	desc = "A slab of.. blue meat?"

@@ -161,6 +161,8 @@
 		/decl/emote/audible/teshtrill
 	)
 
+	meat_type = /obj/item/reagent_containers/food/snacks/meat/chicken/teshari
+
 
 /datum/species/teshari/New()
 	equip_adjust = list(
