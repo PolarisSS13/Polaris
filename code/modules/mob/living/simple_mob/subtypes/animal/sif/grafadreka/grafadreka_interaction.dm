@@ -99,6 +99,19 @@
 		return TRUE
 
 
+/obj/item/soap/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/trained/drake)
+	if (drake.trained_drake && drake.a_intent != I_GRAB)
+		playsound(src,'sound/items/eatfood.ogg', rand(10, 50), TRUE)
+		drake.visible_message(
+			SPAN_ITALIC("\The [drake] eats \a [src]."),
+			SPAN_ITALIC("You eat \the [src]."),
+			SPAN_ITALIC("You hear an odd gooey chewing sound.")
+		)
+		qdel(src)
+		return TRUE
+	return ..()
+
+
 /obj/machinery/button/interaction_grafadreka(mob/living/simple_mob/animal/sif/grafadreka/trained/drake)
 	. = TRUE
 	if (!drake.trained_drake || drake.a_intent == I_HURT)
