@@ -92,7 +92,7 @@
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unnecessary new()/qdel()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
 	if(!outfit)
 		return FALSE
@@ -159,8 +159,8 @@
 
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)
-	equip_preview(mannequin)
-	if(mannequin.back)
+	mannequin = equip_preview(mannequin)
+	if(istype(mannequin) && mannequin.back)
 		var/obj/O = mannequin.back
 		mannequin.drop_from_inventory(O)
 		qdel(O)

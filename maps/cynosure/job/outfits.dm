@@ -97,8 +97,35 @@ Keep outfits simple. Spawn with basic uniforms and minimal gear. Gear instead go
 	suit_store = /obj/item/tank/oxygen
 	mask = null
 
-// This is basically a joke for the service drake spawn alt title.
-/decl/hierarchy/outfit/siffet
+// Sort of a joke. Overrides the mob with a version of what their drake will most likely look like.
+/decl/hierarchy/outfit/drake_preview
 	name = OUTFIT_JOB_NAME("Siffet")
-	suit = /obj/item/clothing/suit/storage/hooded/costume/siffet
-	head = /obj/item/clothing/head/hood/siffet_hood
+	suit = /obj/item/clothing/suit/storage/hooded/costume/siffet/show_as_drake
+
+/obj/item/clothing/suit/storage/hooded/costume/siffet/show_as_drake
+	var/mob/living/simple_mob/animal/sif/grafadreka/secret_drake
+
+/obj/item/clothing/suit/storage/hooded/costume/siffet/show_as_drake/Initialize()
+	. = ..()
+	secret_drake = new
+
+/obj/item/clothing/suit/storage/hooded/costume/siffet/show_as_drake/Destroy()
+	QDEL_NULL(secret_drake)
+	return ..()
+
+/obj/item/clothing/suit/storage/hooded/costume/siffet/show_as_drake/get_worn_overlay(var/mob/living/wearer, var/body_type, var/slot_name, var/inhands, var/default_icon, var/default_layer, var/icon/clip_mask)
+	if(!ishuman(wearer))
+		return new /image
+	wearer.alpha = 0
+
+	var/mob/living/carbon/human/human_wearer = wearer
+	secret_drake.eye_colour  = rgb(human_wearer.r_eyes,   human_wearer.g_eyes,   human_wearer.b_eyes)
+	secret_drake.fur_colour  = rgb(human_wearer.r_facial, human_wearer.g_facial, human_wearer.b_facial)
+	secret_drake.base_colour = rgb(human_wearer.r_hair,   human_wearer.g_hair,   human_wearer.b_hair)
+	secret_drake.update_icon()
+
+	var/image/standing = new /image
+	standing.appearance = secret_drake
+	standing.pixel_x = -16
+	standing.appearance_flags |= RESET_ALPHA
+	return standing

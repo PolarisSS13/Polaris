@@ -215,7 +215,7 @@ var/global/const/access_explorer = 43
 	economic_modifier = 1
 	access = list()
 	minimal_access = list()
-	outfit_type = /decl/hierarchy/outfit/siffet
+	outfit_type = /decl/hierarchy/outfit/drake_preview
 	job_description = "A number of the bolder folks in Sif's anomalous region have partially domesticated some of the local wildlife as working animals."
 	assignable = FALSE
 	has_headset = FALSE
@@ -223,6 +223,7 @@ var/global/const/access_explorer = 43
 	offmap_spawn = TRUE
 	announce_arrival_and_despawn = FALSE
 	banned_job_species = null
+	var/list/secret_drakes = list()
 
 	alt_titles = list(
 		"Expedition Drake" = /datum/alt_title/drake/explorer_drake,
@@ -250,6 +251,21 @@ var/global/const/access_explorer = 43
 	title_blurb = "Wild grafadreka are not particularly good parents, and their hatchlings often wander away or are abandoned to their own devices."
 	drake_type = /mob/living/simple_mob/animal/sif/grafadreka/hatchling
 
+// Returns a drake mob instead of a human mob.
+/datum/job/trained_animal/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)
+	if(!prefs)
+		return ..() // Equips a silly outfit.
+	var/datum/alt_title/drake/drake_setup = alt_titles[alt_title] || /datum/alt_title/drake
+	var/drake_type = istype(drake_setup) ? drake_setup.drake_type : initial(drake_setup.drake_type)
+	var/mob/living/simple_mob/animal/sif/grafadreka/secret_drake = secret_drakes[drake_type]
+	if(!secret_drake)
+		secret_drake = new drake_type
+		secret_drake.resting = TRUE
+		secret_drake.sitting = TRUE // So they fit inside the preview box in the east/west states.
+		secret_drakes[drake_type] = secret_drake
+	apply_pref_colors_to_drake(secret_drake, prefs)
+	return secret_drake
+
 /datum/job/trained_animal/handle_nonhuman_mob(var/mob/living/carbon/human/player, var/alt_title)
 
 	var/datum/alt_title/drake/drake_setup = alt_titles[alt_title] || /datum/alt_title/drake
@@ -269,22 +285,10 @@ var/global/const/access_explorer = 43
 			critter.real_name = critter.name
 
 		if(istype(critter, /mob/living/simple_mob/animal/sif/grafadreka))
+			apply_pref_colors_to_drake(critter, P)
 			var/mob/living/simple_mob/animal/sif/grafadreka/drake = critter
-			// Protect against unset defaults creating a drake-shaped void.
-			var/col = rgb(P.r_eyes, P.g_eyes, P.b_eyes)
-			if(col != COLOR_BLACK)
-				drake.eye_colour = col
-			col = rgb(P.r_facial, P.g_facial, P.b_facial)
-			if(col != COLOR_BLACK)
-				drake.fur_colour = col
-			col = rgb(P.r_hair, P.g_hair, P.b_hair)
-			if(col != COLOR_BLACK)
-				drake.base_colour = col
-			drake.update_icon()
-
 			for(var/language in P.alternate_languages)
 				LAZYDISTINCTADD(drake.understands_languages, language)
-
 			if (drake.harness?.attached_items)
 				var/obj/item/gps/gps = drake.harness.attached_items[drake.harness.ATTACHED_GPS]
 				if (gps)
@@ -302,6 +306,19 @@ var/global/const/access_explorer = 43
 		prompt_rename(critter)
 		return critter
 
+/datum/job/trained_animal/proc/apply_pref_colors_to_drake(var/mob/living/simple_mob/animal/sif/grafadreka/drake, var/datum/preferences/prefs)
+	// Protect against unset defaults creating a drake-shaped void.
+	drake.setup_colours(force = TRUE) // reset colors to defaults
+	var/col = rgb(prefs.r_eyes, prefs.g_eyes, prefs.b_eyes)
+	if(col != COLOR_BLACK)
+		drake.eye_colour = col
+	col = rgb(prefs.r_facial, prefs.g_facial, prefs.b_facial)
+	if(col != COLOR_BLACK)
+		drake.fur_colour = col
+	col = rgb(prefs.r_hair, prefs.g_hair, prefs.b_hair)
+	if(col != COLOR_BLACK)
+		drake.base_colour = col
+	drake.update_icon()
 
 /datum/job/trained_animal/proc/prompt_rename(var/mob/player)
 

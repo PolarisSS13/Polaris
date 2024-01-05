@@ -32,7 +32,7 @@
 /datum/job/ai/is_position_available()
 	return (empty_playable_ai_cores.len != 0)
 
-/datum/job/ai/equip_preview(mob/living/carbon/human/H)
+/datum/job/ai/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/straight_jacket(H), slot_wear_suit)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/collectable/cardborg(H), slot_head)
 	return 1
@@ -85,7 +85,7 @@
 	if(!H)	return 0
 	return 1
 
-/datum/job/cyborg/equip_preview(mob/living/carbon/human/H)
+/datum/job/cyborg/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)
 	H.equip_to_slot_or_del(new /obj/item/clothing/suit/costume/cardborg(H), slot_wear_suit)
 	H.equip_to_slot_or_del(new /obj/item/clothing/head/collectable/cardborg(H), slot_head)
 	return 1
