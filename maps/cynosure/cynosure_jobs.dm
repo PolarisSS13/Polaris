@@ -215,7 +215,7 @@ var/global/const/access_explorer = 43
 	economic_modifier = 1
 	access = list()
 	minimal_access = list()
-	outfit_type = /decl/hierarchy/outfit/drake_preview
+	outfit_type = /decl/hierarchy/outfit/siffet
 	job_description = "A number of the bolder folks in Sif's anomalous region have partially domesticated some of the local wildlife as working animals."
 	assignable = FALSE
 	has_headset = FALSE
@@ -293,6 +293,21 @@ var/global/const/access_explorer = 43
 				var/obj/item/gps/gps = drake.harness.attached_items[drake.harness.ATTACHED_GPS]
 				if (gps)
 					gps.SetTag(drake.name)
+				var/obj/item/card/id/critter_card = drake.harness.attached_items[drake.harness.ATTACHED_ID]
+				if (critter_card)
+					critter_card.registered_name = critter.real_name
+					critter_card.assignment = istype(drake_setup) ? drake_setup.title : initial(drake_setup.title)
+					critter_card.sex = capitalize(critter.gender)
+					critter_card.update_name()
+
+					// Photo time
+					drake.sitting = TRUE
+					drake.resting = TRUE
+					drake.update_icon()
+					critter_card.set_id_photo(drake)
+					drake.sitting = FALSE
+					drake.resting = FALSE
+					drake.update_icon()
 
 		// Transfer over key.
 		if(player.mind)
@@ -340,11 +355,18 @@ var/global/const/access_explorer = 43
 
 /obj/item/card/id/drake_expedition
 	name = "animal access card"
+	registered_id_string = "Registration Card"
 	access = list(
 		access_explorer,
 		access_research,
 		access_xenofauna
 	)
+
+/obj/item/card/id/drake_expedition/get_id_icon(mob/M)
+	var/icon/mob_icon = ..()
+	if(istype(M, /mob/living/simple_mob/animal/sif/grafadreka))
+		mob_icon.Crop(16, 0, 48, 32)
+	return mob_icon
 
 /obj/item/storage/animal_harness/grafadreka/expedition
 	name = "expedition harness"
