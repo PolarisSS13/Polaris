@@ -175,3 +175,13 @@
 /obj/item/clothing/ears/hearingaid/white
 	name = "white hearing aid"
 	icon_state = "hearing_aid_white"
+
+/obj/item/clothing/ears/earmuffs/earwarmers
+	name = "ear warmers"
+	desc ="A pair of fuzzy ear warmers."
+	icon = 'icons/obj/clothing/ears.dmi'
+	icon_state = "ear_warmers"
+	gender = PLURAL
+	slot_flags = SLOT_EARS// | SLOT_TWOEARS twoears breaks the recolorability on it.
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
+	volume_multiplier = 0.7 //not designed to block sound like earmuffs but still covers over the ears, so blocks sound a bit

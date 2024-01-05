@@ -173,3 +173,9 @@
 
 /obj/item/clothing/gloves/ranger/yellow
 	glovecolor = "yellow"
+
+/obj/item/clothing/gloves/mittens
+	name = "mittens"
+	desc = "A pair of cozy woolen mittens."
+	icon_state = "mittens"
+	min_cold_protection_temperature = SPACE_SUIT_MIN_COLD_PROTECTION_TEMPERATURE
