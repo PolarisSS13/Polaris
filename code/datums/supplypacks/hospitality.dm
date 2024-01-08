@@ -65,6 +65,13 @@
 	containertype = /obj/structure/closet/crate/freezer/centauri
 	containername = "Pizza crate"
 
+/datum/supply_pack/hospitality/nuggets
+	name = "Nugget crate"
+	contains = list(/obj/item/storage/box/nuggets = 2)
+	cost = 15
+	containertype = /obj/structure/closet/crate/freezer/centauri
+	containername = "nugget crate"
+
 /datum/supply_pack/hospitality/gifts
 	name = "Gift crate"
 	contains = list(

@@ -5010,7 +5010,7 @@
 
 /obj/item/reagent_containers/food/snacks/nugget
 	name = "chicken nugget"
-	icon = 'icons/obj/food_syn.dmi'
+	icon = 'icons/obj/food_nuggets.dmi'
 	icon_state = "nugget_lump"
 	nutriment_desc = "mild battered chicken"
 	nutriment_allergens = ALLERGEN_EGGS|ALLERGEN_GRAINS|ALLERGEN_MEAT

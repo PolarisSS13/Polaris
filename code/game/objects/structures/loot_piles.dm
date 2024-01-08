@@ -284,6 +284,10 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/storage/box/donkpockets,
 		/obj/item/storage/box/donut,
 		/obj/item/storage/box/donut/empty,
+		/obj/item/storage/box/nuggets,
+		/obj/item/storage/box/nuggets/empty,
+		/obj/item/storage/box/nuggets/twenty/empty,
+		/obj/item/storage/box/nuggets/forty/empty,
 		/obj/item/storage/box/evidence,
 		/obj/item/storage/box/lights/mixed,
 		/obj/item/storage/box/lights/tubes,
@@ -305,7 +309,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/storage/box/smokes,
 		/obj/item/storage/box/metalfoam,
 		/obj/item/storage/box/handcuffs,
-		/obj/item/storage/box/seccarts
+		/obj/item/storage/box/seccarts,
+		/obj/item/storage/box/nuggets/twenty
 	)
 
 	rare_loot = list(
@@ -313,7 +318,8 @@ Loot piles can be depleted, if loot_depleted is turned on.  Note that players wh
 		/obj/item/storage/box/empslite,
 		/obj/item/storage/box/flashshells,
 		/obj/item/storage/box/stunshells,
-		/obj/item/storage/box/teargas
+		/obj/item/storage/box/teargas,
+		/obj/item/storage/box/nuggets/forty
 	)
 
 // One of the more useful maint piles, contains electrical components.
