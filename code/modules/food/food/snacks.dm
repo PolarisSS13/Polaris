@@ -5021,7 +5021,7 @@
 	var/shape = pick("lump", "star", "lizard", "corgi")
 	desc = "A chicken nugget vaguely shaped like a [shape]."
 	icon_state = "nugget_[shape]"
-	reagents.add_reagent("protein", 4, nutriment_desc)
+	reagents.add_reagent("protein", 3, nutriment_desc)
 
 /obj/item/reagent_containers/food/snacks/icecreamsandwich
 	name = "ice cream sandwich"

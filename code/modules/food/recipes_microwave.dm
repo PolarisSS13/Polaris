@@ -838,6 +838,7 @@ I said no!
 	)
 	reagent_mix = RECIPE_REAGENT_REPLACE
 	result = /obj/item/reagent_containers/food/snacks/nugget
+	result_quantity = 4
 
 // Chip update
 /datum/recipe/microwavetortilla
