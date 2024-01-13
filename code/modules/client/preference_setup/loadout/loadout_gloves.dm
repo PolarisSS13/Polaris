@@ -102,3 +102,11 @@
 	display_name = "gloves, botanic leather"
 	path = /obj/item/clothing/gloves/botanic_leather
 	cost = 2
+
+/datum/gear/gloves/mittens
+	display_name = "mittens (colorable)"
+	path = /obj/item/clothing/gloves/mittens
+
+/datum/gear/gloves/mittens/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice

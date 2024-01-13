@@ -56,3 +56,11 @@
 	"white hearing aid" = /obj/item/clothing/ears/hearingaid/white
 	)
 	gear_tweaks += new/datum/gear_tweak/path(hearingaids)
+
+/datum/gear/ears/earwarmers
+	display_name = "ear warmers (colorable)"
+	path = /obj/item/clothing/ears/earmuffs/earwarmers
+
+/datum/gear/ears/earwarmers/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice

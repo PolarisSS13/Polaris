@@ -423,3 +423,15 @@
 		var/obj/item/clothing/head/collectable/costume_type = costume
 		costumes[initial(costume_type.name)] = costume_type
 	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(costumes))
+
+/datum/gear/head/wooly
+	display_name = "wooly hat (colorable)"
+	path = /obj/item/clothing/head/wooly
+
+/datum/gear/head/wooly/New()
+	..()
+	gear_tweaks += gear_tweak_free_color_choice
+
+/datum/gear/head/woolynt
+	display_name = "wooly hat, nanotrasen"
+	path = /obj/item/clothing/head/wooly/nt
