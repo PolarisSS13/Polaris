@@ -5010,7 +5010,7 @@
 
 /obj/item/reagent_containers/food/snacks/nugget
 	name = "chicken nugget"
-	icon = 'icons/obj/food_syn.dmi'
+	icon = 'icons/obj/food_nuggets.dmi'
 	icon_state = "nugget_lump"
 	nutriment_desc = "mild battered chicken"
 	nutriment_allergens = ALLERGEN_EGGS|ALLERGEN_GRAINS|ALLERGEN_MEAT
@@ -5021,7 +5021,7 @@
 	var/shape = pick("lump", "star", "lizard", "corgi")
 	desc = "A chicken nugget vaguely shaped like a [shape]."
 	icon_state = "nugget_[shape]"
-	reagents.add_reagent("protein", 4, nutriment_desc)
+	reagents.add_reagent("protein", 3, nutriment_desc)
 
 /obj/item/reagent_containers/food/snacks/icecreamsandwich
 	name = "ice cream sandwich"
