@@ -324,15 +324,18 @@ var/global/const/access_explorer = 43
 /datum/job/trained_animal/proc/apply_pref_colors_to_drake(var/mob/living/simple_mob/animal/sif/grafadreka/drake, var/datum/preferences/prefs)
 	// Protect against unset defaults creating a drake-shaped void.
 	drake.setup_colours(force = TRUE) // reset colors to defaults
-	var/col = rgb(prefs.r_eyes, prefs.g_eyes, prefs.b_eyes)
-	if(col != COLOR_BLACK)
-		drake.eye_colour = col
-	col = rgb(prefs.r_facial, prefs.g_facial, prefs.b_facial)
+	var/col = rgb(prefs.r_facial, prefs.g_facial, prefs.b_facial)
 	if(col != COLOR_BLACK)
 		drake.fur_colour = col
+	col = rgb(prefs.r_grad, prefs.g_grad, prefs.b_grad)
+	if(col != COLOR_BLACK)
+		drake.claw_colour = col
 	col = rgb(prefs.r_hair, prefs.g_hair, prefs.b_hair)
 	if(col != COLOR_BLACK)
 		drake.base_colour = col
+	col = rgb(prefs.r_eyes, prefs.g_eyes, prefs.b_eyes)
+	if(col != COLOR_BLACK)
+		drake.eye_colour = col
 	drake.update_icon()
 
 /datum/job/trained_animal/proc/prompt_rename(var/mob/player)
