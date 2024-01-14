@@ -105,7 +105,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	eyeblur = 2
 	fire_sound = 'sound/voice/drakes/hatchling_spit.ogg'
 
-/mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
+/mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours(var/force = FALSE)
 	glow_colour = get_random_colour(TRUE)
 	fur_colour =  get_random_colour(TRUE)
 	claw_colour = get_random_colour(TRUE)

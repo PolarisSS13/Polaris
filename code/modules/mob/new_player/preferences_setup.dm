@@ -252,18 +252,20 @@
 
 	if((equip_preview_mob & EQUIP_PREVIEW_JOB) && previewJob)
 		mannequin.job = previewJob.title
-		previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title])
+		mannequin = previewJob.equip_preview(mannequin, player_alt_titles[previewJob.title], src)
+
+	return mannequin
 
 /datum/preferences/proc/update_preview_icon()
 	var/mob/living/carbon/human/dummy/mannequin/mannequin = get_mannequin(client_ckey)
 	if(!mannequin.dna) // Special handling for preview icons before SSAtoms has initialized.
 		mannequin.dna = new /datum/dna(null)
 	mannequin.delete_inventory(TRUE)
-	dress_preview_mob(mannequin)
-	mannequin.toggle_tail(setting = animations_toggle)
-	mannequin.toggle_wing(setting = animations_toggle)
+	mannequin = dress_preview_mob(mannequin)
+	if(ishuman(mannequin))
+		mannequin.toggle_tail(setting = animations_toggle)
+		mannequin.toggle_wing(setting = animations_toggle)
 	mannequin.ImmediateOverlayUpdate()
-
 	update_character_previews(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_highest_job()

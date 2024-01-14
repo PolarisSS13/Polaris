@@ -10,6 +10,7 @@
 
 	var/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
+	var/registered_id_string = "ID Card"
 	slot_flags = SLOT_ID | SLOT_EARS
 
 	var/age = "\[UNSET\]"
@@ -53,12 +54,14 @@
 		ui.open()
 
 /obj/item/card/id/proc/update_name()
-	name = "[src.registered_name]'s ID Card ([src.assignment])"
+	name = "[src.registered_name]'s [registered_id_string] ([src.assignment])"
+
+/obj/item/card/id/proc/get_id_icon(mob/M)
+	M.ImmediateOverlayUpdate()
+	return getFlatIcon(M, defdir = SOUTH, no_anim = TRUE)
 
 /obj/item/card/id/proc/set_id_photo(mob/M)
-	M.ImmediateOverlayUpdate()
-	var/icon/F = getFlatIcon(M, defdir = SOUTH, no_anim = TRUE)
-	front = "'data:image/png;base64,[icon2base64(F)]'"
+	front = "'data:image/png;base64,[icon2base64(get_id_icon(M))]'"
 
 /mob/proc/set_id_info(var/obj/item/card/id/id_card)
 	id_card.age = 0
