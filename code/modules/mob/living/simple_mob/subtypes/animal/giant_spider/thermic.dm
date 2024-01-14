@@ -36,3 +36,11 @@
 	poison_chance = 30
 	poison_per_bite = 1
 	poison_type = "thermite_v"
+
+/mob/living/simple_mob/animal/giant_spider/thermic/demolishing
+	desc = "Mirage-cloaked and orange, it makes you shudder to look at it. This one has carapace-coated forelimbs and simmering orange eyes."
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing
+
+/mob/living/simple_mob/animal/giant_spider/thermic/demolishing/xray
+	desc = "Mirage-cloaked and orange, it makes you shudder to look at it. This one has carapace-coated forelegs and simmering orange eyes with a malevolent sheen."
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing/xray

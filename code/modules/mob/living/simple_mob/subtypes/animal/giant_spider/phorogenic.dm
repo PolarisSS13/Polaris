@@ -83,3 +83,10 @@
 			explosion(src.loc, explosion_dev_range, explosion_heavy_range, explosion_light_range, explosion_flash_range)
 	return ..()
 
+/mob/living/simple_mob/animal/giant_spider/phorogenic/demolishing
+	desc = "Crystalline and purple, it makes you shudder to look at it. This one has carapace-covered forelimbs and haunting purple eyes."
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing/xray
+
+/mob/living/simple_mob/animal/giant_spider/phorogenic/demolishing/xray
+	desc = "Crystalline and purple, it makes you shudder to look at it. This one has carapace-covered forelimbs and haunting purple eyes with a malevolent sheen."
+	ai_holder_type = /datum/ai_holder/simple_mob/demolishing/xray
