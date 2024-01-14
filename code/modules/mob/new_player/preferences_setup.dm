@@ -265,9 +265,8 @@
 	if(ishuman(mannequin))
 		mannequin.toggle_tail(setting = animations_toggle)
 		mannequin.toggle_wing(setting = animations_toggle)
-		mannequin.ImmediateOverlayUpdate()
-	if(isliving(mannequin))
-		update_character_previews(new /mutable_appearance(mannequin))
+	mannequin.ImmediateOverlayUpdate()
+	update_character_previews(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_highest_job()
 	var/datum/job/highJob
