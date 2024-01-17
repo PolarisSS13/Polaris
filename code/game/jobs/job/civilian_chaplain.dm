@@ -159,7 +159,6 @@
 			ticker.Bible_deity_name = B.deity_name
 		feedback_set_details("religion_deity","[new_deity]")
 		feedback_set_details("religion_book","[new_book_style]")
-	return 1
 
 /* If you uncomment this, every time the mob preview updates it makes a new PDA. It seems to work just fine and display without it, so why this exists, haven't a clue. -Hawk
 /datum/job/chaplain/equip_preview(var/mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)

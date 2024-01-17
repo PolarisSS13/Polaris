@@ -203,7 +203,7 @@
 	copy_to(mannequin, TRUE)
 
 	if(!equip_preview_mob)
-		return
+		return mannequin
 
 	var/datum/job/previewJob
 	// Determine what job is marked as 'High' priority, and dress them up as such.
@@ -262,10 +262,11 @@
 		mannequin.dna = new /datum/dna(null)
 	mannequin.delete_inventory(TRUE)
 	mannequin = dress_preview_mob(mannequin)
-	if(ishuman(mannequin))
-		mannequin.toggle_tail(setting = animations_toggle)
-		mannequin.toggle_wing(setting = animations_toggle)
-	mannequin.ImmediateOverlayUpdate()
+	if(isatom(mannequin))
+		if(ishuman(mannequin))
+			mannequin.toggle_tail(setting = animations_toggle)
+			mannequin.toggle_wing(setting = animations_toggle)
+		mannequin.ImmediateOverlayUpdate()
 	update_character_previews(new /mutable_appearance(mannequin))
 
 /datum/preferences/proc/get_highest_job()
