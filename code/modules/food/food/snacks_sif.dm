@@ -24,7 +24,7 @@
 	icon = 'icons/obj/food_sivian.dmi'
 	icon_state = "gumbo"
 	trash = /obj/item/trash/gumbo_bowl
-	nutriment_amt = 6
+	nutriment_amt = 8
 	nutriment_desc = list(
 		"smoky fish"                = 3,
 		"spiced vegetables"         = 3,
@@ -36,7 +36,7 @@
 	bitesize = 3
 
 /obj/item/trash/gumbo_bowl
-	name = "bowl"
+	name = "brown bowl"
 	icon_state = "gumbo_bowl"
 
 /obj/item/reagent_containers/food/snacks/sif_jambalaya
@@ -45,7 +45,7 @@
 	gender = PLURAL
 	icon = 'icons/obj/food_sivian.dmi'
 	icon_state = "jambalaya"
-	trash = /obj/item/trash/jambalaya_bowl
+	trash = /obj/item/trash/jambalaya_plate
 	nutriment_amt = 2
 	nutriment_desc = list(
 		"rich tomato and chili" = 3,
@@ -63,9 +63,9 @@
 	reagents.add_reagent("water",       1)
 	reagents.add_reagent("rice",        1)
 
-/obj/item/trash/jambalaya_bowl
-	name = "small bowl"
-	icon_state = "small_blue_bowl"
+/obj/item/trash/jambalaya_plate
+	name = "plate"
+	icon_state = "blue_plate"
 
 /obj/item/reagent_containers/food/snacks/sif_gerjao_auga
 	name = "gerjao auga"
@@ -73,8 +73,8 @@
 	gender = PLURAL
 	icon = 'icons/obj/food_sivian.dmi'
 	icon_state = "gerjao_auga"
-	trash = /obj/item/trash/gerjao_auga_plate
-	nutriment_amt = 6
+	trash = /obj/item/trash/gerjao_auga_bowl
+	nutriment_amt = 3
 	nutriment_desc = list(
 		"sharp vinegar" = 4,
 		"bitter citrus" = 2,
@@ -85,11 +85,11 @@
 
 /obj/item/reagent_containers/food/snacks/sif_gerjao_auga/Initialize()
 	. = ..()
-	reagents.add_reagent("vinegar", 2)
+	reagents.add_reagent("vinegar", 1)
 
-/obj/item/trash/gerjao_auga_plate
-	name = "blue plate"
-	icon_state = "blue plate"
+/obj/item/trash/gerjao_auga_bowl
+	name = "small bowl"
+	icon_state = "small_blue_bowl"
 
 /*
 /obj/item/reagent_containers/food/snacks/sif_wabback_gratin

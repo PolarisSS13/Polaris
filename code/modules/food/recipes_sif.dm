@@ -22,10 +22,11 @@
 /datum/recipe/sif_jambalaya
 	appliance = OVEN
 	reagent_mix = RECIPE_REAGENT_REPLACE
-	result_quantity = 5
+	result_quantity = 5 // This is a lot, but we have no way to make a big bulk stew item and split it up currently.
 	reagents = list(
 		"water" = 5,
-		"rice"  = 10
+		"rice"  = 10,
+		"spacespice" = 2
 	)
 	items = list(
 		/obj/item/reagent_containers/food/snacks/meat,
@@ -54,10 +55,11 @@
 /datum/recipe/sif_gumbo
 	appliance = OVEN
 	reagent_mix = RECIPE_REAGENT_REPLACE
-	result_quantity = 3
+	result_quantity = 3 // See jambalaya above.
 	reagents = list(
 		"water" = 5,
-		"rice"  = 5
+		"rice"  = 5,
+		"spacespice" = 2
 	)
 	items = list(
 		/obj/item/reagent_containers/food/snacks/meat,

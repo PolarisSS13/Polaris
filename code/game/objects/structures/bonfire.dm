@@ -6,6 +6,8 @@
 	density = FALSE
 	anchored = TRUE
 	buckle_lying = FALSE
+	layer = TURF_LAYER + 0.5 // We want it to layer underneath food and things on top of it.
+
 	var/burning = FALSE
 	var/next_fuel_consumption = 0 // world.time of when next item in fuel list gets eatten to sustain the fire.
 	var/grill = FALSE
@@ -35,9 +37,21 @@
 	. = ..(ml, MAT_SIFWOOD)
 
 /obj/structure/bonfire/attackby(obj/item/W, mob/user)
+
+	// Place food on the grill.
+	if(istype(W, /obj/item/reagent_containers/food/snacks) && grill)
+		if(user.unEquip(W))
+			W.dropInto(loc)
+			// Place it on top of the grill.
+			W.pixel_x = 0
+			W.pixel_y = 12
+		return TRUE
+
 	if(istype(W, /obj/item/stack/rods) && !can_buckle && !grill)
 		var/obj/item/stack/rods/R = W
 		var/choice = input(user, "What would you like to construct?", "Bonfire") as null|anything in list("Stake","Grill")
+		if(!choice || user.incapacitated() || !Adjacent(user))
+			return TRUE
 		switch(choice)
 			if("Stake")
 				R.use(1)
@@ -53,16 +67,17 @@
 				grill = TRUE
 				to_chat(user, "<span class='notice'>You add a grill to \the [src].</span>")
 				update_icon()
-			else
-				return ..()
+		return TRUE
 
-	else if(istype(W, /obj/item/stack/material/wood) || istype(W, /obj/item/stack/material/log) )
+	if(istype(W, /obj/item/stack/material/wood) || istype(W, /obj/item/stack/material/log) )
 		add_fuel(W, user)
+		return TRUE
 
-	else if(W.is_hot())
+	if(W.is_hot())
 		ignite()
-	else
-		return ..()
+		return TRUE
+
+	return ..()
 
 /obj/structure/bonfire/attack_hand(mob/user)
 	if(has_buckled_mobs())
@@ -223,7 +238,7 @@
 			return
 	if(grill)
 		for(var/obj/item/reagent_containers/food/snacks/snack in loc)
-			snack.grill()
+			snack.grill(src)
 	else
 		burn()
 

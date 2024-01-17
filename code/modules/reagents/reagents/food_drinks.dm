@@ -691,6 +691,12 @@
 	reagent_state = SOLID
 	color = "#e08702"
 
+// Drakenip...
+/datum/reagent/spacespice/affect_animal(var/mob/living/simple_mob/animal/M, var/removed)
+	..()
+	if(istype(M, /mob/living/simple_mob/animal/sif/grafadreka))
+		M.druggy = max(M.druggy, 15)
+
 /datum/reagent/browniemix
 	name = "Brownie Mix"
 	id = "browniemix"

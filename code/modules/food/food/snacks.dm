@@ -45,22 +45,35 @@
 	. = ..()
 	nutriment_desc = null
 
-// Halfassed version of Crabs' cooking system on Cit, should be folded into that if it is ported to Polaris.
 /obj/item/reagent_containers/food/snacks
+
+	// Halfassed version of Crabs' cooking system on Cit, should
+	// be folded into that if it is ported to Polaris.
+
+	/// How many SSobj ticks of cooking the food has experienced.
 	var/backyard_grilling_progress     = 0
+	/// What object type the food cooks into.
 	var/backyard_grilling_product      = /obj/item/reagent_containers/food/snacks/badrecipe
-	var/backyard_grilling_threshold    = 5
+	/// How many SSobj ticks it takes for the food to cook.
+	var/backyard_grilling_threshold    = 10
+	/// The message shown when the food cooks.
 	var/backyard_grilling_announcement = "smokes and chars!"
+	/// The span class used for the message above. Burned food defaults to SPAN_DANGER.
+	var/backyard_grilling_span         = "notice"
 
 /obj/item/reagent_containers/food/snacks/proc/grill(var/atom/heat_source)
 	if(!backyard_grilling_product || !backyard_grilling_threshold)
 		return
 	backyard_grilling_progress++
 	if(backyard_grilling_progress >= backyard_grilling_threshold)
+		backyard_grilling_progress = 0
 		var/obj/item/food = new backyard_grilling_product
 		food.dropInto(loc)
 		if(backyard_grilling_announcement)
-			food.visible_message("\The [src] [backyard_grilling_announcement]")
+			if(istype(food, /obj/item/reagent_containers/food/snacks/badrecipe))
+				food.visible_message(SPAN_DANGER("\The [src] [backyard_grilling_announcement]"))
+			else
+				food.visible_message("<span class='[backyard_grilling_span]'>\The [src] [backyard_grilling_announcement]</span>")
 		qdel(src)
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
@@ -987,6 +1000,7 @@
 	name = "charred spider meat"
 	desc = "A slab of green meat with char lines. The poison has been burned out of it."
 	color = COLOR_LIGHT_RED
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/badrecipe
 
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/charred/add_venom()
 	return
@@ -1030,6 +1044,24 @@
 /obj/item/reagent_containers/food/snacks/donkpocket/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 2, TASTE_DATA(list("salty meat mush" = 2)))
+
+/obj/item/reagent_containers/food/snacks/donkpocket/grill(var/atom/heat_source)
+
+	backyard_grilling_progress++
+	if(backyard_grilling_progress >= backyard_grilling_threshold)
+		backyard_grilling_progress = 0
+
+		// We're already warm, so we burn.
+		if(warm)
+			var/obj/item/reagent_containers/food/snacks/badrecipe/whoops = new
+			whoops.dropInto(loc)
+			visible_message(SPAN_DANGER("\The [src] chars and blackens!"))
+			qdel(src)
+			return
+
+		// Otherwise we just warm up.
+		heat()
+		visible_message(SPAN_NOTICE("\The [src] steams gently!"))
 
 /obj/item/reagent_containers/food/snacks/donkpocket/proc/heat()
 	warm = 1
@@ -1615,9 +1647,23 @@
 	filling_color = "#211F02"
 	center_of_mass = list("x"=16, "y"=12)
 	bitesize = 2
+	backyard_grilling_product = null
 
 /obj/item/reagent_containers/food/snacks/badrecipe/grill(var/atom/heat_source)
-	return // We are already carbonized.
+	if(!backyard_grilling_progress) // Smoke on our first grill
+		// Produce nasty smoke.
+		var/datum/effect_system/smoke_spread/bad/burntfood/smoke = new /datum/effect_system/smoke_spread/bad/burntfood
+		playsound(src, 'sound/effects/smoke.ogg', 20, 1)
+		smoke.attach(src)
+		smoke.set_up(10, 0, get_turf(src), 300)
+		smoke.start()
+		// Set off fire alarms!
+		var/obj/machinery/firealarm/FA = locate() in get_area(src)
+		if(FA)
+			FA.alarm()
+	backyard_grilling_progress++
+	if(backyard_grilling_progress >= backyard_grilling_threshold)
+		qdel(src)
 
 /obj/item/reagent_containers/food/snacks/badrecipe/Initialize()
 	. = ..()

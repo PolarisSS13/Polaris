@@ -5,7 +5,7 @@
 	kitchen_tag = "potato"
 	chems = list("nutriment" = list(1,10), "potatojuice" = list(10,10))
 	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/bakedpotato
-	c = "steams as it is baked through."
+	backyard_grilling_announcement = "steams as it is baked through."
 
 /datum/seed/potato/New()
 	..()
