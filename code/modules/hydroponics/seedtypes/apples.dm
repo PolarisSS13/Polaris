@@ -45,7 +45,7 @@
 	name = "sifbulb"
 	seed_name = "sivian pod"
 	display_name = "sivian pod"
-	kitchen_tag = "apple"
+	kitchen_tag = "sifpod"
 	chems = list("nutriment" = list(1,5),"sifsap" = list(10,20))
 
 /datum/seed/apple/sif/New()
