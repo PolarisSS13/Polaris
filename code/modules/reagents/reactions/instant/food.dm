@@ -112,7 +112,7 @@
 /decl/chemical_reaction/instant/food/meatball/on_reaction(var/datum/reagents/holder, var/created_volume)
 	var/location = get_turf(holder.my_atom)
 	for(var/i = 1, i <= created_volume, i++)
-		new /obj/item/reagent_containers/food/snacks/meatball(location)
+		new /obj/item/reagent_containers/food/snacks/rawmeatball(location)
 	return
 
 /decl/chemical_reaction/instant/food/dough

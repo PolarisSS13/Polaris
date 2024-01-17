@@ -36,6 +36,7 @@
 	name = "eyebulbs"
 	seed_name = "eyebulb"
 	display_name = "eyebulbs"
+	kitchen_tag = "eyebulbs"
 	mutants = null
 	chems = list("nutriment" = list(1,3), "imidazoline" = list(3,5))
 
@@ -43,4 +44,3 @@
 	..()
 	set_trait(TRAIT_PLANT_COLOUR,"#471a73")
 	set_trait(TRAIT_PRODUCT_COLOUR,"#131217")
-

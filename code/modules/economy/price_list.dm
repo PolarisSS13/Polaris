@@ -696,7 +696,10 @@
 /obj/item/reagent_containers/food/snacks/cubancarp
 	price_tag = 5
 
-/obj/item/reagent_containers/food/snacks/loadedbakedpotato
+/obj/item/reagent_containers/food/snacks/bakedpotato
+	price_tag = 3
+
+/obj/item/reagent_containers/food/snacks/bakedpotato/loaded
 	price_tag = 5
 
 /obj/item/reagent_containers/food/snacks/fries

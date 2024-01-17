@@ -671,7 +671,7 @@
 	appliance = OVEN
 	fruit = list("potato" = 1)
 	items = list(/obj/item/reagent_containers/food/snacks/cheesewedge)
-	result = /obj/item/reagent_containers/food/snacks/loadedbakedpotato
+	result = /obj/item/reagent_containers/food/snacks/bakedpotato/loaded
 
 /datum/recipe/meatbun
 	appliance = OVEN
