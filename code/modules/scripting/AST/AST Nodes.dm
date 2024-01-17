@@ -63,16 +63,16 @@ var/global/const/OOP_GROUP   = OOP_UNARY		+ 1   //()
 	Class: operator
 	See <Binary Operators> and <Unary Operators> for subtypes.
 */
-/node/expression/operator
+/node/expression/operator_node
 	var/node/expression/exp
 	var/tmp/name
 	var/tmp/precedence
 
-/node/expression/operator/New()
+/node/expression/operator_node/New()
 	.=..()
 	if(!src.name) src.name="[src.type]"
 
-/node/expression/operator/ToString()
+/node/expression/operator_node/ToString()
 	return "operator: [name]"
 
 /*

@@ -69,29 +69,29 @@ associated values are <nS_Keyword> types of which the <n_Keyword.Parse()> proc w
 	)
 
 	var/list/unary_operators =list(
-		"!"  = /node/expression/operator/unary/LogicalNot,
-		"~"  = /node/expression/operator/unary/BitwiseNot,
-		"-"  = /node/expression/operator/unary/Minus
+		"!"  = /node/expression/operator_node/unary/LogicalNot,
+		"~"  = /node/expression/operator_node/unary/BitwiseNot,
+		"-"  = /node/expression/operator_node/unary/Minus
 	)
 
 	var/list/binary_operators=list(
-		"=="	= /node/expression/operator/binary/Equal,
-		"!="	= /node/expression/operator/binary/NotEqual,
-		">"		= /node/expression/operator/binary/Greater,
-		"<"		= /node/expression/operator/binary/Less,
-		">="	= /node/expression/operator/binary/GreaterOrEqual,
-		"<="	= /node/expression/operator/binary/LessOrEqual,
-		"&&"	= /node/expression/operator/binary/LogicalAnd,
-		"||"		= /node/expression/operator/binary/LogicalOr,
-		"&"		= /node/expression/operator/binary/BitwiseAnd,
-		"|"		= /node/expression/operator/binary/BitwiseOr,
-		"`"		= /node/expression/operator/binary/BitwiseXor,
-		"+"		= /node/expression/operator/binary/Add,
-		"-"		= /node/expression/operator/binary/Subtract,
-		"*"		= /node/expression/operator/binary/Multiply,
-		"/"		= /node/expression/operator/binary/Divide,
-		"^"		= /node/expression/operator/binary/Power,
-		"%"		= /node/expression/operator/binary/Modulo)
+		"=="	= /node/expression/operator_node/binary/Equal,
+		"!="	= /node/expression/operator_node/binary/NotEqual,
+		">"		= /node/expression/operator_node/binary/Greater,
+		"<"		= /node/expression/operator_node/binary/Less,
+		">="	= /node/expression/operator_node/binary/GreaterOrEqual,
+		"<="	= /node/expression/operator_node/binary/LessOrEqual,
+		"&&"	= /node/expression/operator_node/binary/LogicalAnd,
+		"||"		= /node/expression/operator_node/binary/LogicalOr,
+		"&"		= /node/expression/operator_node/binary/BitwiseAnd,
+		"|"		= /node/expression/operator_node/binary/BitwiseOr,
+		"`"		= /node/expression/operator_node/binary/BitwiseXor,
+		"+"		= /node/expression/operator_node/binary/Add,
+		"-"		= /node/expression/operator_node/binary/Subtract,
+		"*"		= /node/expression/operator_node/binary/Multiply,
+		"/"		= /node/expression/operator_node/binary/Divide,
+		"^"		= /node/expression/operator_node/binary/Power,
+		"%"		= /node/expression/operator_node/binary/Modulo)
 
 /n_scriptOptions/nS_Options/New()
 	.=..()
