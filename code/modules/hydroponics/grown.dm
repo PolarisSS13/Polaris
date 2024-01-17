@@ -38,6 +38,9 @@
 
 	name = "[seed.seed_name]"
 	trash = seed.get_trash_type()
+	backyard_grilling_product      = seed.backyard_grilling_product
+	backyard_grilling_threshold    = seed.backyard_grilling_threshold
+	backyard_grilling_announcement = seed.backyard_grilling_announcement
 
 	update_icon()
 

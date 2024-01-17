@@ -46,7 +46,7 @@
 				to_chat(user, "<span class='notice'>You add a rod to \the [src].</span>")
 				var/mutable_appearance/rod_underlay = mutable_appearance('icons/obj/structures.dmi', "bonfire_rod")
 				rod_underlay.pixel_y = 16
-				rod_underlay.appearance_flags = RESET_COLOR|PIXEL_SCALE|TILE_BOUND
+				rod_underlay.appearance_flags = RESET_COLOR | PIXEL_SCALE | TILE_BOUND | KEEP_APART
 				underlays += rod_underlay
 			if("Grill")
 				R.use(1)
@@ -193,14 +193,14 @@
 			if(4.6 to 10)
 				state = "bonfire_hot"
 		var/image/I = image(icon, state)
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = RESET_COLOR | KEEP_APART
 		add_overlay(I)
 
 		if(has_buckled_mobs() && get_fuel_amount() >= 5)
 			I = image(icon, "bonfire_intense")
 			I.pixel_y = 13
 			I.layer = MOB_LAYER + 0.1
-			I.appearance_flags = RESET_COLOR
+			I.appearance_flags = RESET_COLOR | KEEP_APART
 			add_overlay(I)
 
 		var/light_strength = max(get_fuel_amount() / 2, 2)
@@ -210,9 +210,8 @@
 
 	if(grill)
 		var/image/grille_image = image(icon, "bonfire_grill")
-		grille_image.appearance_flags = RESET_COLOR
+		grille_image.appearance_flags = RESET_COLOR | KEEP_APART
 		add_overlay(grille_image)
-
 
 /obj/structure/bonfire/process()
 	if(!check_oxygen())
@@ -222,7 +221,10 @@
 		if(!consume_fuel(pop(contents)))
 			extinguish()
 			return
-	if(!grill)
+	if(grill)
+		for(var/obj/item/reagent_containers/food/snacks/snack in loc)
+			snack.grill()
+	else
 		burn()
 
 	if(burning)
@@ -384,7 +386,7 @@
 			if(6.6 to 10)
 				state = "fireplace_intense" //don't need to throw a corpse inside to make it burn hotter.
 		var/image/I = image(icon, state)
-		I.appearance_flags = RESET_COLOR
+		I.appearance_flags = RESET_COLOR | KEEP_APART
 		add_overlay(I)
 
 		var/light_strength = max(get_fuel_amount() / 2, 2)

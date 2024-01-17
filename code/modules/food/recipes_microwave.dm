@@ -119,11 +119,14 @@ I said no!
 	)
 	result = /obj/item/reagent_containers/food/snacks/wingfangchu
 
-/datum/recipe/loadedbakedpotato
+/datum/recipe/bakedpotato
 	fruit = list("potato" = 1)
-	items = list(/obj/item/reagent_containers/food/snacks/cheesewedge)
 	reagent_mix = RECIPE_REAGENT_REPLACE //No raw tater
-	result = /obj/item/reagent_containers/food/snacks/loadedbakedpotato
+	result = /obj/item/reagent_containers/food/snacks/bakedpotato
+
+/datum/recipe/bakedpotato/loaded
+	items = list(/obj/item/reagent_containers/food/snacks/cheesewedge)
+	result = /obj/item/reagent_containers/food/snacks/bakedpotato/loaded
 
 /datum/recipe/microchips
 	appliance = MICROWAVE

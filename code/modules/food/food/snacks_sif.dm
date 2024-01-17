@@ -46,7 +46,7 @@
 	icon = 'icons/obj/food_sivian.dmi'
 	icon_state = "jambalaya"
 	trash = /obj/item/trash/jambalaya_bowl
-	nutriment_amt = 5
+	nutriment_amt = 2
 	nutriment_desc = list(
 		"rich tomato and chili" = 3,
 		"savoury rice"          = 5,
@@ -58,10 +58,10 @@
 
 /obj/item/reagent_containers/food/snacks/sif_jambalaya/Initialize()
 	. = ..()
-	reagents.add_reagent("protein",     3)
-	reagents.add_reagent("tomatojuice", 3)
-	reagents.add_reagent("water",       3)
-	reagents.add_reagent("rice",        3)
+	reagents.add_reagent("protein",     1)
+	reagents.add_reagent("tomatojuice", 1)
+	reagents.add_reagent("water",       1)
+	reagents.add_reagent("rice",        1)
 
 /obj/item/trash/jambalaya_bowl
 	name = "small bowl"

@@ -22,6 +22,7 @@
 /datum/recipe/sif_jambalaya
 	appliance = OVEN
 	reagent_mix = RECIPE_REAGENT_REPLACE
+	result_quantity = 5
 	reagents = list(
 		"water" = 5,
 		"rice"  = 10
@@ -53,6 +54,7 @@
 /datum/recipe/sif_gumbo
 	appliance = OVEN
 	reagent_mix = RECIPE_REAGENT_REPLACE
+	result_quantity = 3
 	reagents = list(
 		"water" = 5,
 		"rice"  = 5

@@ -45,6 +45,24 @@
 	. = ..()
 	nutriment_desc = null
 
+// Halfassed version of Crabs' cooking system on Cit, should be folded into that if it is ported to Polaris.
+/obj/item/reagent_containers/food/snacks
+	var/backyard_grilling_progress     = 0
+	var/backyard_grilling_product      = /obj/item/reagent_containers/food/snacks/badrecipe
+	var/backyard_grilling_threshold    = 5
+	var/backyard_grilling_announcement = "smokes and chars!"
+
+/obj/item/reagent_containers/food/snacks/proc/grill(var/atom/heat_source)
+	if(!backyard_grilling_product || !backyard_grilling_threshold)
+		return
+	backyard_grilling_progress++
+	if(backyard_grilling_progress >= backyard_grilling_threshold)
+		var/obj/item/food = new backyard_grilling_product
+		food.dropInto(loc)
+		if(backyard_grilling_announcement)
+			food.visible_message("\The [src] [backyard_grilling_announcement]")
+		qdel(src)
+
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
 	if(!usr)
@@ -943,10 +961,13 @@
 	center_of_mass = list("x"=16, "y"=10)
 	bitesize = 6
 
+/obj/item/reagent_containers/food/snacks/xenomeat/proc/add_venom()
+	reagents.add_reagent("pacid",6)
+
 /obj/item/reagent_containers/food/snacks/xenomeat/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 6, TASTE_DATA(list("faintly metallic meat" = 6)))
-	reagents.add_reagent("pacid",6)
+	add_venom()
 
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat // Substitute for recipes requiring xeno meat.
 	name = "spider meat"
@@ -955,11 +976,20 @@
 	filling_color = "#43DE18"
 	center_of_mass = list("x"=16, "y"=10)
 	bitesize = 6
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/charred
+	backyard_grilling_announcement = "smokes as the poison burns away."
 
-/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/Initialize()
-	. = ..()
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/add_venom()
+	..()
 	reagents.add_reagent("spidertoxin",6)
-	reagents.remove_reagent("pacid",6)
+
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/charred
+	name = "charred spider meat"
+	desc = "A slab of green meat with char lines. The poison has been burned out of it."
+	color = COLOR_LIGHT_RED
+
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/charred/add_venom()
+	return
 
 /obj/item/reagent_containers/food/snacks/meatball
 	name = "meatball"
@@ -1464,16 +1494,23 @@
 		unpopped = max(0, unpopped-1)
 	. = ..()
 
-/obj/item/reagent_containers/food/snacks/loadedbakedpotato
-	name = "loaded baked potato"
+/obj/item/reagent_containers/food/snacks/bakedpotato
+	name = "baked potato"
 	desc = "Totally baked."
-	icon_state = "loadedbakedpotato"
+	icon_state = "bakedpotato"
 	filling_color = "#9C7A68"
 	center_of_mass = list("x"=16, "y"=10)
+	nutriment_amt = 6
+	nutriment_desc = list("baked potato" = 3)
+	nutriment_allergens = ALLERGEN_VEGETABLE
+	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/bakedpotato/loaded
+	name = "loaded baked potato"
+	icon_state = "loadedbakedpotato"
 	nutriment_amt = 12
 	nutriment_desc = list("baked potato" = 3, "cheese" = 3)
 	nutriment_allergens = ALLERGEN_VEGETABLE|ALLERGEN_DAIRY
-	bitesize = 2
 
 /obj/item/reagent_containers/food/snacks/fries
 	name = "skinny fries"
@@ -1578,6 +1615,9 @@
 	filling_color = "#211F02"
 	center_of_mass = list("x"=16, "y"=12)
 	bitesize = 2
+
+/obj/item/reagent_containers/food/snacks/badrecipe/grill(var/atom/heat_source)
+	return // We are already carbonized.
 
 /obj/item/reagent_containers/food/snacks/badrecipe/Initialize()
 	. = ..()
@@ -2107,6 +2147,8 @@
 	nutriment_desc = list("bread" = 3, "cheese" = 3)
 	nutriment_allergens = ALLERGEN_DAIRY
 	bitesize = 2
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/toastedsandwich
+	backyard_grilling_announcement = "is toasted golden brown."
 
 /obj/item/reagent_containers/food/snacks/clubsandwich
 	name = "club sandwich"
@@ -3592,6 +3634,8 @@
 	nutriment_amt = 4
 	nutriment_desc = list("uncooked dough" = 3)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_EGGS //We're going to call the egg a gameplay abstraction for the mostpart, but for now you JUST put an egg in here...=
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/bun
+	backyard_grilling_announcement = "is baked into a simple bun."
 
 // Dough + rolling pin = flat dough
 /obj/item/reagent_containers/food/snacks/dough/attackby(obj/item/W as obj, mob/user as mob)
@@ -3612,7 +3656,8 @@
 	nutriment_desc = list("raw dough" = 3)
 	center_of_mass = list("x"=16, "y"=16)
 	nutriment_allergens = ALLERGEN_GRAINS|ALLERGEN_EGGS
-
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/flatbread
+	backyard_grilling_announcement = "is baked into a simple flatbread."
 
 /obj/item/reagent_containers/food/snacks/doughslice
 	name = "dough slice"
@@ -3736,6 +3781,8 @@
 	icon_state = "rawcutlet"
 	bitesize = 1
 	center_of_mass = list("x"=17, "y"=20)
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/cutlet
+	backyard_grilling_announcement = "sizzles as it is grilled through."
 
 /obj/item/reagent_containers/food/snacks/rawcutlet/Initialize()
 	. = ..()
@@ -3760,6 +3807,8 @@
 	icon_state = "rawmeatball"
 	bitesize = 2
 	center_of_mass = list("x"=16, "y"=15)
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/meatball
+	backyard_grilling_announcement = "sizzles as it is grilled through."
 
 /obj/item/reagent_containers/food/snacks/rawmeatball/Initialize()
 	. = ..()
@@ -3796,6 +3845,8 @@
 	nutriment_amt = 3
 	nutriment_desc = list("raw potato" = 3)
 	nutriment_allergens = ALLERGEN_VEGETABLE
+	// This probably should need a container and oil
+	// backyard_grilling_product = /obj/item/reagent_containers/food/snacks/fries
 
 /obj/item/reagent_containers/food/snacks/rawsunflower
 	name = "sunflower seeds"
@@ -3807,6 +3858,8 @@
 	nutriment_amt = 1
 	nutriment_desc = list("starch" = 3)
 	nutriment_allergens = ALLERGEN_SEEDS
+	// This probably should need a container and oil
+	// backyard_grilling_product = /obj/item/reagent_containers/food/snacks/roastedsunflower
 
 /obj/item/reagent_containers/food/snacks/frostbelle
 	name = "frostbelle bud"
@@ -4233,6 +4286,8 @@
 	nutriment_amt = 2
 	nutriment_desc = list("tartness" = 1)
 	w_class = ITEMSIZE_TINY
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/roast_sifpod
+	backyard_grilling_announcement = "crackles and pops as the roast hull splits open."
 
 /obj/item/reagent_containers/food/snacks/siffruit/Initialize()
 	. = ..()
