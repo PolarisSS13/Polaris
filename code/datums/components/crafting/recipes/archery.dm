@@ -5,7 +5,7 @@
 /datum/crafting_recipe/shortbow
 	name = "Shortbow"
 	result = /obj/item/gun/launcher/crossbow/bow
-	reqs = list(list(/obj/item/stack/material/wood = 10),
+	reqs = list(list(/obj/item/stack/material/fuel/wood = 10),
 		list(/obj/item/stack/material/cloth = 5))
 	time = 120
 	category = CAT_WEAPONRY
@@ -14,7 +14,7 @@
 /datum/crafting_recipe/arrow_sandstone
 	name = "Wood Arrow (Sandstone Tip)"
 	result = /obj/item/arrow/wood
-	reqs = list(list(/obj/item/stack/material/wood = 2),
+	reqs = list(list(/obj/item/stack/material/fuel/wood = 2),
 		list(/obj/item/stack/material/sandstone = 2))
 	time = 2 SECONDS
 	category = CAT_WEAPONRY
@@ -23,7 +23,7 @@
 /datum/crafting_recipe/arrow_marble
 	name = "Wood Arrow (Marble Tip)"
 	result = /obj/item/arrow/wood
-	reqs = list(list(/obj/item/stack/material/wood = 2),
+	reqs = list(list(/obj/item/stack/material/fuel/wood = 2),
 		list(/obj/item/stack/material/marble = 2))
 	time = 2 SECONDS
 	category = CAT_WEAPONRY
@@ -32,7 +32,7 @@
 /datum/crafting_recipe/arrow_chitin
 	name = "Wood Arrow (Chitin Tip)"
 	result = /obj/item/arrow/wood/chitin
-	reqs = list(list(/obj/item/stack/material/wood = 2),
+	reqs = list(list(/obj/item/stack/material/fuel/wood = 2),
 		list(/obj/item/stack/material/chitin = 2),
 		list(/obj/item/stack/material/cloth = 1))
 	time = 3 SECONDS
@@ -73,7 +73,7 @@
 /datum/crafting_recipe/arrow_wood_material
 	name = "Wood Arrow (Crude Tip)"
 	result = /obj/item/material/arrow/crude
-	reqs = list(list(/obj/item/stack/material/wood = 2),
+	reqs = list(list(/obj/item/stack/material/fuel/wood = 2),
 		list(/obj/item/material/knife/machete/hatchet/stone = 1),
 		list(/obj/item/stack/material/cloth = 1))
 	parts = list(

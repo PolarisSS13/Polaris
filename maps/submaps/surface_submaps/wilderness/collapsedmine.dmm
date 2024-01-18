@@ -1020,7 +1020,7 @@
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "rl" = (
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "rm" = (
@@ -1150,7 +1150,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "tR" = (
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "tU" = (
@@ -1185,7 +1185,7 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 4
 	},
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "uC" = (
@@ -1335,7 +1335,7 @@
 /area/submap/CollapsedMine)
 "wB" = (
 /obj/effect/spider/stickyweb,
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/mineral/floor/ignore_mapgen,
 /area/submap/CollapsedMine)
 "wF" = (
@@ -2489,7 +2489,7 @@
 /obj/effect/floor_decal/corner/yellow/border{
 	dir = 1
 	},
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "Nn" = (
@@ -2828,7 +2828,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/submap/CollapsedMine)
 "TR" = (
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/floor/wood,
 /area/submap/CollapsedMine)
 "TV" = (

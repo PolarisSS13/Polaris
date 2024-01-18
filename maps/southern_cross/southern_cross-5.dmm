@@ -97,7 +97,7 @@
 "bW" = (/obj/effect/overlay/wallrot,/turf/simulated/wall/skipjack,/area/wreck/ufoship)
 "bX" = (/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/airless,/area/wreck/ufoship)
 "bY" = (/obj/item/flashlight/flare,/turf/simulated/floor/tiled/airless,/area/wreck/ufoship)
-"bZ" = (/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/structure/ore_box,/obj/item/ore/iron,/obj/item/ore/iron,/obj/item/ore/iron,/turf/simulated/floor/airless,/area/wreck/ufoship)
+"bZ" = (/obj/item/stack/material/fuel/wood,/obj/item/stack/material/fuel/wood,/obj/structure/ore_box,/obj/item/ore/iron,/obj/item/ore/iron,/obj/item/ore/iron,/turf/simulated/floor/airless,/area/wreck/ufoship)
 "ca" = (/obj/item/clothing/head/helmet/space/deathsquad,/obj/structure/table/rack,/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/airless,/area/wreck/ufoship)
 "cb" = (/obj/machinery/compressor{dir = 4},/obj/structure/window/phoronreinforced,/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 8},/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 1},/turf/simulated/floor/reinforced/phoron,/area/wreck/ufoship)
 "cc" = (/obj/machinery/crystal,/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced,/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel,/turf/simulated/floor/reinforced/phoron,/area/wreck/ufoship)
@@ -150,7 +150,7 @@
 "cX" = (/turf/simulated/shuttle/wall,/area/wreck/supplyshuttle)
 "cY" = (/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
 "cZ" = (/obj/structure/largecrate/hoverpod,/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
-"da" = (/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/effect/decal/mecha_wreckage/hoverpod,/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
+"da" = (/obj/item/stack/material/fuel/wood,/obj/item/stack/material/fuel/wood,/obj/item/stack/material/fuel/wood,/obj/effect/decal/mecha_wreckage/hoverpod,/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
 "db" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
 "dc" = (/obj/item/frame/light,/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
 "dd" = (/obj/machinery/door/airlock/external,/turf/simulated/floor/airless,/area/wreck/supplyshuttle)
@@ -416,4 +416,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

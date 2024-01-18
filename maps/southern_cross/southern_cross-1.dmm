@@ -8717,7 +8717,7 @@
 /turf/simulated/floor,
 /area/construction/firstdeck/construction4)
 "arH" = (
-/obj/item/stack/material/wood{
+/obj/item/stack/material/fuel/wood{
 	amount = 24
 	},
 /turf/simulated/floor/wood,

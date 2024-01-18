@@ -78,7 +78,7 @@
 				update_icon()
 		return TRUE
 
-	if(istype(W, /obj/item/stack/material/wood) || istype(W, /obj/item/stack/material/log) )
+	if(istype(W, /obj/item/stack/material/fuel/wood) || istype(W, /obj/item/stack/material/fuel/log) )
 		add_fuel(W, user)
 		return TRUE
 
@@ -112,9 +112,9 @@
 /obj/structure/bonfire/proc/get_fuel_amount()
 	var/F = 0
 	for(var/A in contents)
-		if(istype(A, /obj/item/stack/material/wood))
+		if(istype(A, /obj/item/stack/material/fuel/wood))
 			F += 0.5
-		if(istype(A, /obj/item/stack/material/log))
+		if(istype(A, /obj/item/stack/material/fuel/log))
 			F += 1.0
 	return F
 
@@ -135,7 +135,7 @@
 	if(get_fuel_amount() >= 10)
 		to_chat(user, "<span class='warning'>\The [src] already has enough fuel!</span>")
 		return FALSE
-	if(istype(new_fuel, /obj/item/stack/material/wood) || istype(new_fuel, /obj/item/stack/material/log) )
+	if(istype(new_fuel, /obj/item/stack/material/fuel/wood) || istype(new_fuel, /obj/item/stack/material/fuel/log) )
 		var/obj/item/stack/F = new_fuel
 		var/obj/item/stack/S = F.split(1)
 		if(S)
@@ -156,13 +156,13 @@
 		qdel(consumed_fuel) // Don't know, don't care.
 		return FALSE
 
-	if(istype(consumed_fuel, /obj/item/stack/material/log))
+	if(istype(consumed_fuel, /obj/item/stack/material/fuel/log))
 		next_fuel_consumption = world.time + 2 MINUTES
 		qdel(consumed_fuel)
 		update_icon()
 		return TRUE
 
-	else if(istype(consumed_fuel, /obj/item/stack/material/wood)) // One log makes two planks of wood.
+	else if(istype(consumed_fuel, /obj/item/stack/material/fuel/wood)) // One log makes two planks of wood.
 		next_fuel_consumption = world.time + 1 MINUTE
 		qdel(consumed_fuel)
 		update_icon()
@@ -312,7 +312,7 @@
 	var/heating_power = 40000
 
 /obj/structure/fireplace/attackby(obj/item/W, mob/user)
-	if(istype(W, /obj/item/stack/material/wood) || istype(W, /obj/item/stack/material/log) )
+	if(istype(W, /obj/item/stack/material/fuel/wood) || istype(W, /obj/item/stack/material/fuel/log) )
 		add_fuel(W, user)
 
 	else if(W.is_hot())
@@ -327,9 +327,9 @@
 /obj/structure/fireplace/proc/get_fuel_amount()
 	var/F = 0
 	for(var/A in contents)
-		if(istype(A, /obj/item/stack/material/wood))
+		if(istype(A, /obj/item/stack/material/fuel/wood))
 			F += 0.5
-		if(istype(A, /obj/item/stack/material/log))
+		if(istype(A, /obj/item/stack/material/fuel/log))
 			F += 1.0
 	return F
 
@@ -344,7 +344,7 @@
 	if(get_fuel_amount() >= 10)
 		to_chat(user, "<span class='warning'>\The [src] already has enough fuel!</span>")
 		return FALSE
-	if(istype(new_fuel, /obj/item/stack/material/wood) || istype(new_fuel, /obj/item/stack/material/log) )
+	if(istype(new_fuel, /obj/item/stack/material/fuel/wood) || istype(new_fuel, /obj/item/stack/material/fuel/log) )
 		var/obj/item/stack/F = new_fuel
 		var/obj/item/stack/S = F.split(1)
 		if(S)
@@ -358,22 +358,17 @@
 		return FALSE
 
 /obj/structure/fireplace/proc/consume_fuel(var/obj/item/stack/consumed_fuel)
-	if(!istype(consumed_fuel))
+
+	if(!istype(consumed_fuel, /obj/item/stack/material/fuel))
 		qdel(consumed_fuel) // Don't know, don't care.
 		return FALSE
 
-	if(istype(consumed_fuel, /obj/item/stack/material/log))
-		next_fuel_consumption = world.time + 2 MINUTES
-		qdel(consumed_fuel)
-		update_icon()
-		return TRUE
+	var/obj/item/stack/material/fuel/fuel_stack = consumed_fuel
+	next_fuel_consumption = world.time + max(1 MINUTE, fuel_stack + bonfire_fuel_time)
+	fuel_stack.use(1)
+	update_icon()
+	return TRUE
 
-	else if(istype(consumed_fuel, /obj/item/stack/material/wood)) // One log makes two planks of wood.
-		next_fuel_consumption = world.time + 1 MINUTE
-		qdel(consumed_fuel)
-		update_icon()
-		return TRUE
-	return FALSE
 
 /obj/structure/fireplace/proc/check_oxygen()
 	var/datum/gas_mixture/G = loc.return_air()

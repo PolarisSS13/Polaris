@@ -1,6 +1,6 @@
 /datum/material/wood
 	name = MAT_WOOD
-	stack_type = /obj/item/stack/material/wood
+	stack_type = /obj/item/stack/material/fuel/wood
 	icon_colour = "#9c5930"
 	integrity = 50
 	icon_base = "wood"
@@ -49,7 +49,7 @@
 
 /datum/material/wood/sif
 	name = MAT_SIFWOOD
-	stack_type = /obj/item/stack/material/wood/sif
+	stack_type = /obj/item/stack/material/fuel/wood/sif
 	icon_colour = "#0099cc" // Cyan-ish
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2) // Alien wood would presumably be more interesting to the analyzer.
 
@@ -67,7 +67,7 @@
 /datum/material/wood/log
 	name = MAT_LOG
 	icon_base = "log"
-	stack_type = /obj/item/stack/material/log
+	stack_type = /obj/item/stack/material/fuel/log
 	sheet_singular_name = null
 	sheet_plural_name = "pile"
 	pass_stack_colors = TRUE
@@ -82,4 +82,4 @@
 	name = MAT_SIFLOG
 	icon_colour = "#0099cc" // Cyan-ish
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
-	stack_type = /obj/item/stack/material/log/sif
+	stack_type = /obj/item/stack/material/fuel/log/sif

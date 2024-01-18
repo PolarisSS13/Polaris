@@ -5630,8 +5630,8 @@
 /area/surface/outpost/main/bar)
 "mq" = (
 /obj/structure/table,
-/obj/item/stack/material/wood,
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/bar)
 "mr" = (

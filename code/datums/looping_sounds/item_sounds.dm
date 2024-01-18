@@ -44,6 +44,8 @@
 	speed = clamp(speed, 1, 3)
 	return ..(starttime, mid_sounds[speed])
 
+// Fire crackles were originally sourced from freesound.org and cut
+// up/faded in Audacity but I have lost the original source link. :(
 /datum/looping_sound/fire_crackles
 	start_sound = 'sound/ambience/firecrackle01.ogg'
 	start_length = 10
