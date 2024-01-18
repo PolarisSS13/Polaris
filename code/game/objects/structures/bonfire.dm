@@ -14,9 +14,13 @@
 	var/datum/material/material
 	var/set_temperature = T0C + 30	//K
 	var/heating_power = 80000
+	var/datum/looping_sound/fire_crackles/fire_loop
+	var/datum/looping_sound/grill/grill_loop // Used when food is cooking on the fire.
 
 /obj/structure/bonfire/Initialize(var/ml, material_name)
 	. = ..()
+	fire_loop  = new(list(src), FALSE)
+	grill_loop = new(list(src), FALSE)
 	if(!material_name)
 		material_name = MAT_WOOD
 	material = get_material_by_name("[material_name]")
@@ -24,6 +28,11 @@
 		qdel(src)
 		return
 	color = material.icon_colour
+
+/obj/structure/bonfire/sifwood/Destroy()
+	QDEL_NULL(fire_loop)
+	QDEL_NULL(grill_loop)
+	return ..()
 
 // Blue wood.
 /obj/structure/bonfire/sifwood/Initialize(var/ml, material_name)
@@ -176,6 +185,8 @@
 		update_icon()
 		STOP_PROCESSING(SSobj, src)
 		visible_message("<span class='notice'>\The [src] stops burning.</span>")
+		if(fire_loop?.started)
+			fire_loop.stop(src)
 
 /obj/structure/bonfire/proc/ignite()
 	if(!burning && get_fuel_amount())
@@ -183,6 +194,8 @@
 		update_icon()
 		START_PROCESSING(SSobj, src)
 		visible_message("<span class='warning'>\The [src] starts burning!</span>")
+		if(fire_loop && !fire_loop.started)
+			fire_loop.start(src)
 
 /obj/structure/bonfire/proc/burn()
 	var/turf/current_location = get_turf(src)
@@ -236,11 +249,23 @@
 		if(!consume_fuel(pop(contents)))
 			extinguish()
 			return
+
+	var/do_grill_sound = FALSE
 	if(grill)
 		for(var/obj/item/thing in view(2, src))
-			thing.dry_out(src, 3 - get_dist(thing, src), (thing.loc == loc), silent = TRUE)
+			if(thing.dry_out(src, 3 - get_dist(thing, src), (thing.loc == loc), silent = TRUE))
+				do_grill_sound = TRUE
 	else
 		burn()
+
+	if(grill_loop)
+		if(do_grill_sound)
+			if(!grill_loop.started)
+				grill_loop.start(src)
+		else
+			if(grill_loop.started)
+				grill_loop.stop(src)
+
 
 	if(!burning)
 		return

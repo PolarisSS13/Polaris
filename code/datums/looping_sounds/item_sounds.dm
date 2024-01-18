@@ -43,3 +43,16 @@
 /datum/looping_sound/small_motor/get_sound(starttime)
 	speed = clamp(speed, 1, 3)
 	return ..(starttime, mid_sounds[speed])
+
+/datum/looping_sound/fire_crackles
+	start_sound = 'sound/ambience/firecrackle01.ogg'
+	start_length = 10
+	mid_sounds = list(
+		'sound/ambience/firecrackle02.ogg',
+		'sound/ambience/firecrackle03.ogg',
+		'sound/ambience/firecrackle04.ogg',
+		'sound/ambience/firecrackle05.ogg'
+	)
+	mid_length = 10
+	end_sound = 'sound/ambience/firecrackle06.ogg'
+	volume = 10
