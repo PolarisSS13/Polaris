@@ -1,8 +1,8 @@
 /obj/structure/drying_rack
 	name = "drying rack"
 	desc = "A rack used to stretch leather out and hold it taut during the tanning process."
-	icon = 'icons/obj/kitchen.dmi'
-	icon_state = "spike"
+	icon = 'icons/obj/drying_rack.dmi'
+	icon_state = "rack"
 	var/obj/item/drying
 
 /obj/structure/drying_rack/Initialize()
@@ -32,7 +32,7 @@
 
 /obj/structure/drying_rack/update_icon()
 	cut_overlays()
-	var/drying_state = drying?.get_drying_state(src)
+	var/drying_state = drying?.get_drying_overlay(src)
 	if(drying_state)
 		add_overlay(drying_state)
 

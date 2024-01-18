@@ -237,10 +237,8 @@
 			extinguish()
 			return
 	if(grill)
-		for(var/obj/item/reagent_containers/food/snacks/snack in loc)
-			snack.grill(src)
 		for(var/obj/item/thing in view(2, src))
-			thing.dry_out(src, rand(1,4))
+			thing.dry_out(src, 3 - get_dist(thing, src), (thing.loc == loc), silent = TRUE)
 	else
 		burn()
 

@@ -14,7 +14,7 @@
 		return
 	var/do_update = FALSE
 	for(var/obj/item/thing in contents)
-		var/obj/item/product = thing.dry_out(src)
+		var/obj/item/product = thing.dry_out(src, silent = TRUE)
 		if(product)
 			product.dropInto(loc)
 			do_update = TRUE

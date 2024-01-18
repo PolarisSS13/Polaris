@@ -1907,6 +1907,7 @@
 #include "code\modules\food\food\cans.dm"
 #include "code\modules\food\food\condiment.dm"
 #include "code\modules\food\food\drinks.dm"
+#include "code\modules\food\food\jerky.dm"
 #include "code\modules\food\food\lunch.dm"
 #include "code\modules\food\food\sandwich.dm"
 #include "code\modules\food\food\snacks.dm"

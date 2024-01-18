@@ -1,26 +1,64 @@
 // Stubs/vars for use with the drying rack.
 /obj/item
-	var/drying_threshold_temperature = 500 // Kelvin, checked in fire_act()
-	var/dried_type // If set to a type, drying this item will convert it to that type.
+	// Reduced when exposed to high temperatures or put on a drying rack. When hitting zero, the item transitions to a dried state.
+	var/drying_wetness
+	// Temperature threshold for fire_act() to dry the object, in degrees Kelvin.
+	var/drying_threshold_temperature = 500
+	// If set to a type, drying this item will convert it to that type.
+	var/dried_type
 
 /obj/item/proc/is_dryable()
-	return !isnull(dried_type)
+	return drying_wetness > 0
+
+/obj/item/proc/get_dried_product()
+	return new dried_type(loc)
+
+/obj/item/stack/get_dried_product()
+	if(ispath(dried_type, /obj/item/stack))
+		return new dried_type(loc, amount)
+	return ..()
 
 // Returns null for no change, or an instance for a successful drying.
-/obj/item/proc/dry_out(var/obj/rack, var/drying_power = 1)
-	if(dried_type)
-		. = new dried_type(loc)
+/obj/item/proc/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE, var/silent = FALSE)
+	if(!dried_type)
+		return
+	if(drying_wetness > 0)
+		drying_wetness -= drying_power
+		if(drying_wetness > 0)
+			return
+	var/obj/item/thing = get_dried_product()
+	if(color)
+		thing.color = color
+	if(!silent && rack)
+		rack.visible_message(SPAN_NOTICE("The [src] is dry!"))
+	if(thing != src)
 		qdel(src)
+	return thing
 
 // Returns a string used in drying rack examine().
 /obj/item/proc/get_dryness_text(var/obj/rack)
+	if(drying_wetness > 20)
+		return "wet"
+	if(drying_wetness > 10)
+		return "damp"
+	if(drying_wetness)
+		return "almost dry"
 	return "dry"
 
 // Returns an icon_state used by drying rack update_icon().
+/obj/item/proc/get_drying_overlay(var/obj/rack)
+	var/drying_state = get_drying_state(rack)
+	if(!drying_state || !color)
+		return drying_state
+	var/image/drying_overlay = image('icons/obj/drying_rack.dmi', drying_state)
+	drying_overlay.color = color
+	drying_overlay.appearance_flags |= KEEP_APART | RESET_COLOR
+	return drying_overlay
+
 /obj/item/proc/get_drying_state(var/obj/rack)
 	return
 
 /obj/item/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	..()
 	if(exposed_temperature >= drying_threshold_temperature)
-		dry_out()
+		dry_out(drying_power = rand(2, 4), fire_exposed = TRUE, silent = TRUE)

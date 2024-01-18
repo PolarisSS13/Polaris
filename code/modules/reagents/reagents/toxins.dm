@@ -396,7 +396,7 @@
 		var/obj/item/stack/wetleather/wethide = new(O.loc, round(volume))
 		dryhide.use(round(volume))
 		if(!QDELETED(wethide) && wethide.get_amount())
-			wethide.dry_out(null, INFINITY) // dry it immediately
+			wethide.dry_out(drying_power = INFINITY, silent = TRUE) // dry it immediately
 	..()
 
 /datum/reagent/toxin/plantbgone

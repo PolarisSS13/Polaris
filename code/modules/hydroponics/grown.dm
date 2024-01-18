@@ -9,6 +9,7 @@
 	slot_flags = SLOT_HOLSTER
 	drop_sound = 'sound/items/drop/herb.ogg'
 	pickup_sound = 'sound/items/pickup/herb.ogg'
+	drying_wetness = 20
 
 	var/plantname
 	var/datum/seed/seed
@@ -63,6 +64,9 @@
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 		if(seed.get_trait(TRAIT_STINGS))
 			force = 1
+
+/obj/item/reagent_containers/food/snacks/grown/get_drying_state(var/obj/rack)
+	return seed?.drying_state || "grown"
 
 /obj/item/reagent_containers/food/snacks/grown/proc/update_desc()
 
