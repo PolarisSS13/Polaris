@@ -4,12 +4,15 @@
 	desc = "yummy"
 	icon = 'icons/obj/food.dmi'
 	icon_state = null
+	center_of_mass = list("x"=16, "y"=16)
+	w_class = ITEMSIZE_SMALL
+	force = 0
+
 	var/bitesize = 1
 	var/bitecount = 0
 	var/trash = null
 	var/slice_path
 	var/slices_num
-	var/dried_type = null
 	var/dry = 0
 	var/survivalfood = FALSE
 	var/nutriment_amt = 0
@@ -24,9 +27,18 @@
 	var/package = FALSE // If this has a wrapper on it. If true, it will print a message and ask you to remove it
 	var/package_trash // Packaged meals drop this trash type item when opened, if set
 	var/package_open_state// Packaged meals switch to this state when opened, if set
-	center_of_mass = list("x"=16, "y"=16)
-	w_class = ITEMSIZE_SMALL
-	force = 0
+
+	// Halfassed version of Crabs' cooking system on Cit, should
+	// be folded into that if it is ported to Polaris.
+
+	/// What object type the food cooks into.
+	var/backyard_grilling_product      = /obj/item/reagent_containers/food/snacks/badrecipe
+	/// How many SSobj ticks it takes for the food to cook.
+	var/backyard_grilling_rawness      = 30
+	/// The message shown when the food cooks.
+	var/backyard_grilling_announcement = "smokes and chars!"
+	/// The span class used for the message above. Burned food defaults to SPAN_DANGER.
+	var/backyard_grilling_span         = "notice"
 
 /obj/item/reagent_containers/food/snacks/Initialize()
 	. = ..()
@@ -45,28 +57,50 @@
 	. = ..()
 	nutriment_desc = null
 
-/obj/item/reagent_containers/food/snacks
+/obj/item/reagent_containers/food/snacks/is_dryable()
+	return !dry
 
-	// Halfassed version of Crabs' cooking system on Cit, should
-	// be folded into that if it is ported to Polaris.
+/obj/item/reagent_containers/food/snacks/get_dryness_text(var/obj/rack)
+	var/moistness = drying_wetness / initial(drying_wetness)
+	if(moistness > 0.65)
+		return "fresh"
+	if(moistness > 0.35)
+		return "somewhat dried"
+	if(moistness)
+		return "almost dried"
+	return "dehydrated"
 
-	/// How many SSobj ticks of cooking the food has experienced.
-	var/backyard_grilling_progress     = 0
-	/// What object type the food cooks into.
-	var/backyard_grilling_product      = /obj/item/reagent_containers/food/snacks/badrecipe
-	/// How many SSobj ticks it takes for the food to cook.
-	var/backyard_grilling_threshold    = 10
-	/// The message shown when the food cooks.
-	var/backyard_grilling_announcement = "smokes and chars!"
-	/// The span class used for the message above. Burned food defaults to SPAN_DANGER.
-	var/backyard_grilling_span         = "notice"
+/obj/item/reagent_containers/food/snacks/proc/get_backyard_grilling_text(var/obj/rack)
+	var/moistness = backyard_grilling_rawness / initial(backyard_grilling_rawness)
+	if(moistness > 0.65)
+		return "uncooked"
+	if(moistness > 0.35)
+		return "half-cooked"
+	if(moistness)
+		return "nearly cooked"
+	return "cooked"
+
+/obj/item/reagent_containers/food/snacks/examine(mob/user)
+	. = ..()
+	if(backyard_grilling_rawness > 0 && backyard_grilling_rawness != initial(backyard_grilling_rawness))
+		. += "\The [src] is [get_backyard_grilling_text()]."
+
+/obj/item/reagent_containers/food/snacks/get_dried_product()
+	if(dried_type == type && !dry)
+		dry = TRUE
+		name = "dried [name]"
+		color = "#aaaaaa"
+		return src
+	return ..()
+
+/obj/item/reagent_containers/food/snacks/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE, var/silent = FALSE)
+	return fire_exposed ? grill(rack) : ..()
 
 /obj/item/reagent_containers/food/snacks/proc/grill(var/atom/heat_source)
-	if(!backyard_grilling_product || !backyard_grilling_threshold)
-		return
-	backyard_grilling_progress++
-	if(backyard_grilling_progress >= backyard_grilling_threshold)
-		backyard_grilling_progress = 0
+	if(!backyard_grilling_product || backyard_grilling_rawness <= 0)
+		return null
+	backyard_grilling_rawness--
+	if(backyard_grilling_rawness <= 0)
 		var/obj/item/food = new backyard_grilling_product
 		food.dropInto(loc)
 		if(backyard_grilling_announcement)
@@ -75,6 +109,7 @@
 			else
 				food.visible_message("<span class='[backyard_grilling_span]'>\The [src] [backyard_grilling_announcement]</span>")
 		qdel(src)
+		return food
 
 	//Placeholder for effect that trigger on eating that aren't tied to reagents.
 /obj/item/reagent_containers/food/snacks/proc/On_Consume(var/mob/M)
@@ -883,14 +918,21 @@
 	icon_state = "fishfillet"
 	filling_color = "#FFDEFE"
 	center_of_mass = list("x"=17, "y"=13)
-	bitesize = 6
+	bitesize = 2
+	drying_wetness = 60
 
+	dried_type = /obj/item/reagent_containers/food/snacks/jerky/fish
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/grilledfish
+	backyard_grilling_announcement = "steams gently."
 	var/toxin_type = "carpotoxin"
 	var/toxin_amount = 3
 
+/obj/item/reagent_containers/food/snacks/carpmeat/get_drying_state()
+	return "fish"
+
 /obj/item/reagent_containers/food/snacks/carpmeat/Initialize()
 	. = ..()
-	reagents.add_reagent("seafood", 3)
+	reagents.add_reagent("seafood", 6)
 	if(toxin_type && toxin_amount)
 		reagents.add_reagent(toxin_type, toxin_amount)
 
@@ -902,6 +944,7 @@
 	desc = "A fillet of sivian fish meat."
 	filling_color = "#2c2cff"
 	color = "#2c2cff"
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/grilledfish/sivian
 
 /obj/item/reagent_containers/food/snacks/fishfingers
 	name = "fish fingers"
@@ -974,6 +1017,9 @@
 	center_of_mass = list("x"=16, "y"=10)
 	bitesize = 6
 
+/obj/item/reagent_containers/food/snacks/xenomeat/get_drying_state()
+	return "spidermeat"
+
 /obj/item/reagent_containers/food/snacks/xenomeat/proc/add_venom()
 	reagents.add_reagent("pacid",6)
 
@@ -991,6 +1037,8 @@
 	bitesize = 6
 	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/charred
 	backyard_grilling_announcement = "smokes as the poison burns away."
+	drying_wetness = 60
+	dried_type = /obj/item/reagent_containers/food/snacks/jerky/spider/poison
 
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/add_venom()
 	..()
@@ -1001,6 +1049,8 @@
 	desc = "A slab of green meat with char lines. The poison has been burned out of it."
 	color = COLOR_LIGHT_RED
 	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/badrecipe
+	dried_product_takes_color = FALSE
+	dried_type = /obj/item/reagent_containers/food/snacks/jerky/spider
 
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat/charred/add_venom()
 	return
@@ -1047,9 +1097,9 @@
 
 /obj/item/reagent_containers/food/snacks/donkpocket/grill(var/atom/heat_source)
 
-	backyard_grilling_progress++
-	if(backyard_grilling_progress >= backyard_grilling_threshold)
-		backyard_grilling_progress = 0
+	backyard_grilling_rawness--
+	if(backyard_grilling_rawness <= 0)
+		backyard_grilling_rawness = initial(backyard_grilling_rawness)
 
 		// We're already warm, so we burn.
 		if(warm)
@@ -1057,11 +1107,12 @@
 			whoops.dropInto(loc)
 			visible_message(SPAN_DANGER("\The [src] chars and blackens!"))
 			qdel(src)
-			return
+			return whoops
 
 		// Otherwise we just warm up.
 		heat()
 		visible_message(SPAN_NOTICE("\The [src] steams gently!"))
+		return src
 
 /obj/item/reagent_containers/food/snacks/donkpocket/proc/heat()
 	warm = 1
@@ -1648,9 +1699,10 @@
 	center_of_mass = list("x"=16, "y"=12)
 	bitesize = 2
 	backyard_grilling_product = null
+	backyard_grilling_rawness = 10
 
 /obj/item/reagent_containers/food/snacks/badrecipe/grill(var/atom/heat_source)
-	if(!backyard_grilling_progress) // Smoke on our first grill
+	if(backyard_grilling_rawness <= 0) // Smoke on our first grill
 		// Produce nasty smoke.
 		var/datum/effect_system/smoke_spread/bad/burntfood/smoke = new /datum/effect_system/smoke_spread/bad/burntfood
 		playsound(src, 'sound/effects/smoke.ogg', 20, 1)
@@ -1661,8 +1713,8 @@
 		var/obj/machinery/firealarm/FA = locate() in get_area(src)
 		if(FA)
 			FA.alarm()
-	backyard_grilling_progress++
-	if(backyard_grilling_progress >= backyard_grilling_threshold)
+	backyard_grilling_rawness--
+	if(backyard_grilling_rawness <= 0)
 		qdel(src)
 
 /obj/item/reagent_containers/food/snacks/badrecipe/Initialize()
@@ -3819,20 +3871,6 @@
 /obj/item/reagent_containers/food/snacks/taco/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 3)
-
-/obj/item/reagent_containers/food/snacks/rawcutlet
-	name = "raw cutlet"
-	desc = "A thin piece of raw meat."
-	icon = 'icons/obj/food_ingredients.dmi'
-	icon_state = "rawcutlet"
-	bitesize = 1
-	center_of_mass = list("x"=17, "y"=20)
-	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/cutlet
-	backyard_grilling_announcement = "sizzles as it is grilled through."
-
-/obj/item/reagent_containers/food/snacks/rawcutlet/Initialize()
-	. = ..()
-	reagents.add_reagent("protein", 1)
 
 /obj/item/reagent_containers/food/snacks/cutlet
 	name = "cutlet"
@@ -8139,3 +8177,17 @@
 		TASTE_STRING_DEFAULT = list("puffed minty qa'zal bread" = 1, "super-sweet kirani jelly" = 1),
 		SPECIES_TESHARI      = list("puffed minty qa'zal bread" = 1, "rich kirani jelly" = 1)
 	)
+
+/obj/item/reagent_containers/food/snacks/grilledfish
+	name = "grilled fish fillet"
+	desc = "A lightly grilled fish fillet."
+	icon_state = "grilledfish"
+	nutriment_amt = 8
+	bitesize = 2
+	nutriment_allergens = ALLERGEN_FISH
+	nutriment_desc = list("flaky grilled fish" = 5)
+
+/obj/item/reagent_containers/food/snacks/grilledfish/sivian
+	desc = "A lightly grilled fish fillet. This one is blue, so you can expect a visit from the Sif Department of Fisheries."
+	icon_state = "grilledsiffish"
+	nutriment_desc = list("flaky grilled fish" = 5, "a mild, musky aftertaste" = 1)

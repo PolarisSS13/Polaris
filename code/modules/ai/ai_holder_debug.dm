@@ -49,21 +49,21 @@
 	var/new_color = null
 	switch(stance)
 		if(STANCE_SLEEP)
-			new_color = "#FFFFFF" // White
+			new_color = "#ffffff" // White
 		if(STANCE_IDLE)
-			new_color = "#00FF00" // Green
+			new_color = "#00ff00" // Green
 		if(STANCE_ALERT)
-			new_color = "#FFFF00" // Yellow
+			new_color = "#ffff00" // Yellow
 		if(STANCE_APPROACH)
-			new_color = "#FF9933" // Orange
+			new_color = "#ff9933" // Orange
 		if(STANCE_FIGHT)
-			new_color = "#FF0000" // Red
+			new_color = "#ff0000" // Red
 		if(STANCE_MOVE)
-			new_color = "#0000FF" // Blue
+			new_color = "#0000ff" // Blue
 		if(STANCE_REPOSITION)
-			new_color = "#FF00FF" // Purple
+			new_color = "#ff00ff" // Purple
 		if(STANCE_FOLLOW)
-			new_color = "#00FFFF" // Cyan
+			new_color = "#00ffff" // Cyan
 		if(STANCE_FLEE)
 			new_color = "#666666" // Grey
 		if(STANCE_DISABLED)

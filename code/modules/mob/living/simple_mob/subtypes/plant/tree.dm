@@ -41,7 +41,7 @@
 /mob/living/simple_mob/animal/space/tree/death()
 	..(null,"is hacked into pieces!")
 	playsound(src, 'sound/effects/woodcutting.ogg', 100, 1)
-	new /obj/item/stack/material/wood(loc)
+	new /obj/item/stack/material/fuel/wood(loc)
 	qdel(src)
 
 /decl/mob_organ_names/tree

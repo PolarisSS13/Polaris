@@ -391,9 +391,12 @@
 
 /datum/reagent/toxin/fertilizer/tannin/touch_obj(var/obj/O, var/volume)
 	..()
-	if(istype(O, /obj/item/stack/hairlesshide))
-		var/obj/item/stack/hairlesshide/HH = O
-		HH.rapidcure(round(volume))
+	if(istype(O, /obj/item/stack/hairlesshide) && volume >= 1)
+		var/obj/item/stack/hairlesshide/dryhide = O
+		var/obj/item/stack/wetleather/wethide = new(O.loc, round(volume))
+		dryhide.use(round(volume))
+		if(!QDELETED(wethide) && wethide.get_amount())
+			wethide.dry_out(drying_power = INFINITY, silent = TRUE) // dry it immediately
 	..()
 
 /datum/reagent/toxin/plantbgone

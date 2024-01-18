@@ -71,7 +71,7 @@
 /obj/structure/noticeboard/proc/dismantle()
 	for(var/thing in notices)
 		remove_paper(thing, skip_icon_update = TRUE)
-	new /obj/item/stack/material/wood(get_turf(src))
+	new /obj/item/stack/material/fuel/wood(get_turf(src))
 	qdel(src)
 
 /obj/structure/noticeboard/Destroy()
@@ -187,7 +187,7 @@
 
 /obj/structure/noticeboard/anomaly/Initialize()
 	. = ..()
-	
+
 	var/obj/item/paper/P = new()
 	P.name = "Memo RE: proper analysis procedure"
 	P.info = "<br>We keep test dummies in pens here for a reason, so standard procedure should be to activate newfound alien artifacts and place the two in close proximity. Promising items I might even approve monkey testing on."

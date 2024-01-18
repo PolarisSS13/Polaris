@@ -26,7 +26,7 @@
 	if(!T)
 		to_chat(user, "<span class='notice'>You can't open this here!</span>")
 	if(W.is_crowbar())
-		new /obj/item/stack/material/wood(src)
+		new /obj/item/stack/material/fuel/wood(src)
 
 		for(var/atom/movable/AM in contents)
 			if(AM.simulated)

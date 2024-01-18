@@ -129,7 +129,7 @@
 	icon = 'icons/obj/stationobjs.dmi'
 	icon_state = "nboard00"
 	refund_amt = 4
-	refund_type = /obj/item/stack/material/wood
+	refund_type = /obj/item/stack/material/fuel/wood
 	build_machine_type = /obj/structure/noticeboard
 
 /obj/item/frame/mirror

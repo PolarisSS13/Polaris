@@ -161,10 +161,10 @@
 /turf/simulated/floor/wood/sif,
 /area/submap/CaveS)
 "oA" = (
-/obj/item/stack/material/wood/sif,
-/obj/item/stack/material/wood/sif,
-/obj/item/stack/material/wood/sif,
-/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
 /obj/effect/spider/stickyweb,
 /turf/simulated/floor/wood/sif/broken,
 /area/submap/CaveS)
@@ -390,9 +390,9 @@
 /turf/simulated/floor/outdoors/grass/sif/forest,
 /area/submap/CaveS)
 "Lk" = (
-/obj/item/stack/material/wood/sif,
-/obj/item/stack/material/wood/sif,
-/obj/item/stack/material/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
+/obj/item/stack/material/fuel/wood/sif,
 /turf/simulated/floor/wood/sif,
 /area/submap/CaveS)
 "LF" = (

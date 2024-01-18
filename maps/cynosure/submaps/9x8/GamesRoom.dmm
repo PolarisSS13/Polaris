@@ -136,7 +136,7 @@
 /turf/simulated/floor/wood,
 /area/template_noop)
 "D" = (
-/obj/item/stack/material/wood{
+/obj/item/stack/material/fuel/wood{
 	amount = 24
 	},
 /obj/machinery/light_construct/small{

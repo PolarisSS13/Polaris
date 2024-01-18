@@ -270,6 +270,19 @@
 	reagent_mix = RECIPE_REAGENT_REPLACE //Simplify end product
 	result = /obj/item/reagent_containers/food/snacks/honeytoast
 
+/datum/recipe/grilled_fish
+	appliance = GRILL
+	items = list(
+		/obj/item/reagent_containers/food/snacks/carpmeat
+	)
+	result = /obj/item/reagent_containers/food/snacks/grilledfish
+
+/datum/recipe/grilled_fish/sivian
+	items = list(
+		/obj/item/reagent_containers/food/snacks/carpmeat/fish/sif
+	)
+	result = /obj/item/reagent_containers/food/snacks/grilledfish/sivian
+
 /datum/recipe/grilled_carp
 	appliance = GRILL
 	items = list(

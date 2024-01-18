@@ -8717,7 +8717,7 @@
 /turf/simulated/floor,
 /area/construction/firstdeck/construction4)
 "arH" = (
-/obj/item/stack/material/wood{
+/obj/item/stack/material/fuel/wood{
 	amount = 24
 	},
 /turf/simulated/floor/wood,
@@ -35581,7 +35581,7 @@
 /turf/simulated/floor,
 /area/maintenance/security_port)
 "bnV" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/simulated/floor/tiled/white,
 /area/rnd/xenobiology/xenoflora)
 "bnW" = (
@@ -66398,7 +66398,7 @@
 /turf/simulated/floor/tiled/hydro,
 /area/hallway/primary/seconddeck/ascenter)
 "cus" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/simulated/floor/tiled/hydro,
 /area/hallway/primary/seconddeck/ascenter)
 "cut" = (
@@ -88120,7 +88120,7 @@
 /turf/simulated/wall,
 /area/hydroponics)
 "dhg" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/borderfloor{
 	dir = 10
 	},

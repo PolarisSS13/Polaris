@@ -5630,8 +5630,8 @@
 /area/surface/outpost/main/bar)
 "mq" = (
 /obj/structure/table,
-/obj/item/stack/material/wood,
-/obj/item/stack/material/wood,
+/obj/item/stack/material/fuel/wood,
+/obj/item/stack/material/fuel/wood,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/bar)
 "mr" = (
@@ -6153,7 +6153,7 @@
 /turf/simulated/floor/tiled,
 /area/surface/outpost/main)
 "nC" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/simulated/floor/plating,
 /area/surface/outpost/main/garage)
 "nD" = (
@@ -12957,7 +12957,7 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/outpost/research/xenoresearch/xenoflora)
 "BH" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/corner/green{
 	dir = 5
 	},

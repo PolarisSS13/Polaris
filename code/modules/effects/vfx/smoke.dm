@@ -90,11 +90,11 @@
 /obj/effect/vfx/smoke/bad/burntfood
 	color = "#000000"
 	time_to_live = 600
-	
+
 /obj/effect/vfx/smoke/bad/burntfood/process()
 	for(var/mob/living/L in get_turf(src))
 		affect(L)
-	
+
 /obj/effect/vfx/smoke/bad/burntfood/affect(var/mob/living/L) // This stuff is extra-vile.
 	if (!..())
 		return 0
@@ -132,8 +132,8 @@
 /obj/effect/vfx/smoke/elemental/fire
 	name = "burning cloud"
 	desc = "A cloud of something that is on fire."
-	color = "#FF9933"
-	light_color = "#FF0000"
+	color = COLOR_FIRE_ORANGE
+	light_color = "#ff0000"
 	light_range = 2
 	light_power = 5
 
@@ -215,7 +215,7 @@
 
 /datum/effect_system/smoke_spread/bad
 	smoke_type = /obj/effect/vfx/smoke/bad
-	
+
 /datum/effect_system/smoke_spread/bad/burntfood
 	smoke_type = /obj/effect/vfx/smoke/bad/burntfood
 
