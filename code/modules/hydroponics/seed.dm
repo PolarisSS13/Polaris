@@ -28,7 +28,7 @@
 	var/force_layer
 
 	// Backyard grilling vars. Not passed through genetics.
-	var/backyard_grilling_threshold    = 5
+	var/backyard_grilling_rawness      = 20
 	var/backyard_grilling_product      = /obj/item/reagent_containers/food/snacks/badrecipe
 	var/backyard_grilling_announcement = "smokes and chars!"
 

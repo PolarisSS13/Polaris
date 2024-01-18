@@ -20,7 +20,7 @@
 	drop_sound = 'sound/items/drop/wooden.ogg'
 	pickup_sound = 'sound/items/pickup/wooden.ogg'
 	no_variants = FALSE
-	drying_wetness = 50
+	drying_wetness = 120
 	dried_type = /obj/item/stack/material/fuel/wood/dried
 	bonfire_fuel_time = 3 MINUTES
 
@@ -57,7 +57,7 @@
 	description_info = "Use inhand to craft things, or use a sharp and edged object on this to convert it into two wooden planks."
 	drop_sound = 'sound/items/drop/wooden.ogg'
 	pickup_sound = 'sound/items/pickup/wooden.ogg'
-	drying_wetness = 80
+	drying_wetness = 180
 	dried_type = /obj/item/stack/material/fuel/log/dried
 	bonfire_fuel_time = 4 MINUTES
 	var/plank_type = /obj/item/stack/material/fuel/wood

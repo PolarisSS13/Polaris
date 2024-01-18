@@ -9,7 +9,7 @@
 	slot_flags = SLOT_HOLSTER
 	drop_sound = 'sound/items/drop/herb.ogg'
 	pickup_sound = 'sound/items/pickup/herb.ogg'
-	drying_wetness = 20
+	drying_wetness = 45
 
 	var/plantname
 	var/datum/seed/seed
@@ -40,7 +40,7 @@
 	name = "[seed.seed_name]"
 	trash = seed.get_trash_type()
 	backyard_grilling_product      = seed.backyard_grilling_product
-	backyard_grilling_threshold    = seed.backyard_grilling_threshold
+	backyard_grilling_rawness    = seed.backyard_grilling_rawness
 	backyard_grilling_announcement = seed.backyard_grilling_announcement
 
 	update_icon()

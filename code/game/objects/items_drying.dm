@@ -6,6 +6,8 @@
 	var/drying_threshold_temperature = 500
 	// If set to a type, drying this item will convert it to that type.
 	var/dried_type
+	// Set if colour should be passed to dried product.
+	var/dried_product_takes_color = TRUE
 
 /obj/item/proc/is_dryable()
 	return drying_wetness > 0
@@ -20,17 +22,23 @@
 
 // Returns null for no change, or an instance for a successful drying.
 /obj/item/proc/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE, var/silent = FALSE)
-	if(!dried_type)
+
+	if(!dried_type || !is_dryable())
 		return
+
 	if(drying_wetness > 0)
 		drying_wetness -= drying_power
 		if(drying_wetness > 0)
 			return
+
 	var/obj/item/thing = get_dried_product()
-	if(color)
+	if(!thing)
+		return
+
+	if(color && dried_product_takes_color)
 		thing.color = color
-	if(!silent && rack)
-		rack.visible_message(SPAN_NOTICE("The [src] is dry!"))
+	if(isturf(loc) && !silent)
+		visible_message(SPAN_NOTICE("\The [src] [gender == PLURAL ? "are" : "is"] dry!"))
 	if(thing != src)
 		qdel(src)
 	return thing

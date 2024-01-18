@@ -205,7 +205,7 @@
 /turf/simulated/floor/water/deep,
 /area/surface/outside/river/gautelfr)
 "zq" = (
-/obj/structure/drying_rack,
+/obj/structure/drying_rack/sifwood,
 /turf/simulated/floor/outdoors/dirt/sif/planetuse,
 /area/surface/outside/wilderness/normal)
 "zS" = (

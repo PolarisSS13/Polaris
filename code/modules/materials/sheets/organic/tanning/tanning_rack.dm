@@ -1,9 +1,19 @@
 /obj/structure/drying_rack
 	name = "drying rack"
-	desc = "A rack used to stretch leather out and hold it taut during the tanning process."
+	desc = "A rack used to hold meat or vegetables for drying, or to stretch leather out and hold it taut during the tanning process."
 	icon = 'icons/obj/drying_rack.dmi'
 	icon_state = "rack"
+	var/dismantle_product = /obj/item/stack/material/steel
+	var/dismantle_amount = 3
 	var/obj/item/drying
+
+/obj/structure/drying_rack/wood
+	icon_state = "rack_wooden"
+	dismantle_product = /obj/item/stack/material/fuel/wood
+
+/obj/structure/drying_rack/sifwood
+	icon_state = "rack_wooden_sif"
+	dismantle_product = /obj/item/stack/material/fuel/wood/sif
 
 /obj/structure/drying_rack/Initialize()
 	. = ..()
@@ -36,13 +46,28 @@
 	if(drying_state)
 		add_overlay(drying_state)
 
-/obj/structure/drying_rack/attackby(var/obj/item/I, var/mob/user)
-	if(istype(I) && I.is_dryable() && !istype(I, /obj/item/stack/material/fuel))
-		if(user.unEquip(I))
-			I.forceMove(src)
-			drying = I
+/obj/structure/drying_rack/attackby(var/obj/item/W, var/mob/user)
+
+	if(W.is_wrench())
+		playsound(src, W.usesound, 75, 1)
+		visible_message(SPAN_NOTICE("\The [user] begins dismantling \the [src]."))
+		if(do_after(user, 5 SECONDS * W.toolspeed))
+			visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."))
+			if(drying)
+				drying.dropInto(loc)
+				drying = null
+			if(dismantle_product && dismantle_amount)
+				new dismantle_product(loc, dismantle_amount)
+			qdel(src)
+		return TRUE
+
+	if(!drying && W.is_dryable() && !istype(W, /obj/item/stack/material/fuel))
+		if(user.unEquip(W))
+			W.forceMove(src)
+			drying = W
 			update_icon()
 		return TRUE
+
 	return ..()
 
 /obj/structure/drying_rack/attack_hand(var/mob/user)

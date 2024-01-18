@@ -11,7 +11,7 @@
 	no_variants = FALSE
 	max_amount = 20
 	stacktype = "wetleather"
-	drying_wetness = 30
+	drying_wetness = 120
 	dried_type = /obj/item/stack/material/leather
 
 /obj/item/stack/wetleather/get_drying_state(var/obj/rack)

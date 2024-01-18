@@ -20,6 +20,7 @@
 	destruction_desc = "splinters"
 	sheet_singular_name = "plank"
 	sheet_plural_name = "planks"
+	var/drying_rack_type = /obj/structure/drying_rack/wood
 
 /datum/material/wood/generate_recipes()
 	..()
@@ -42,7 +43,7 @@
 		new /datum/stack_recipe("coilgun stock", /obj/item/coilgun_assembly, 5, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("crude fishing rod", /obj/item/material/fishing_rod/built, 8, time = 10 SECONDS, pass_stack_color = TRUE, recycle_material = "[name]"),
 		new /datum/stack_recipe("noticeboard", /obj/structure/noticeboard, 1, recycle_material = "[name]"),
-		new /datum/stack_recipe("drying rack", /obj/structure/drying_rack, 3, one_per_turf = TRUE, time = 20, on_floor = TRUE, supplied_material = "[name]"),
+		new /datum/stack_recipe("drying rack", drying_rack_type, 3, one_per_turf = TRUE, time = 20, on_floor = TRUE, supplied_material = "[name]"),
 		new /datum/stack_recipe("roofing tile", /obj/item/stack/tile/roofing, 3, 4, 20, recycle_material = "[name]"),
 		new /datum/stack_recipe("shovel", /obj/item/shovel/wood, 2, time = 10, on_floor = TRUE, supplied_material = "[name]")
 	)
@@ -52,6 +53,7 @@
 	stack_type = /obj/item/stack/material/fuel/wood/sif
 	icon_colour = "#0099cc" // Cyan-ish
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2) // Alien wood would presumably be more interesting to the analyzer.
+	drying_rack_type = /obj/structure/drying_rack/sifwood
 
 /datum/material/wood/sif/generate_recipes()
 	..()

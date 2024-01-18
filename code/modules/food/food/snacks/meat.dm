@@ -5,7 +5,7 @@
 	health = 180
 	filling_color = "#FF1C1C"
 	center_of_mass = list("x"=16, "y"=14)
-	drying_wetness = 20
+	drying_wetness = 60
 	dried_type = /obj/item/reagent_containers/food/snacks/jerky/meat
 
 /obj/item/reagent_containers/food/snacks/meat/get_drying_state()
@@ -46,7 +46,7 @@
 	center_of_mass = list("x"=17, "y"=20)
 	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/cutlet
 	backyard_grilling_announcement = "sizzles as it is grilled through."
-	drying_wetness = 10
+	drying_wetness = 30
 	dried_type = /obj/item/reagent_containers/food/snacks/jerky/cutlet
 
 /obj/item/reagent_containers/food/snacks/rawcutlet/Initialize()

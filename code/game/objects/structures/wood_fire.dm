@@ -27,9 +27,11 @@
 	return ..()
 
 /obj/structure/wood_fire/proc/get_upgrade_options()
+	if(grill || can_buckle)
+		return null
 	if(!grill)
 		LAZYADD(., "Grill")
-	else if(!can_buckle)
+	if(!can_buckle)
 		LAZYADD(., "Stake")
 
 /obj/structure/wood_fire/proc/try_build_feature(var/mob/user, var/obj/item/stack/rods/rods)
@@ -202,19 +204,12 @@
 	if(burning)
 
 		// Draw our actual fire icon.
-		var/fire_state
-		if(fuel_amount >= 10)
-			fire_state = "[base_icon_state]_intense"
-		else if(fuel_amount >= 5)
-			fire_state = "[base_icon_state]_hot"
-		else
-			fire_state = "[base_icon_state]_warm"
-		var/image/I = image(icon, fire_state)
+		var/image/I = image(icon, ((fuel_amount >= 5) ? "[base_icon_state]_hot" : "[base_icon_state]_warm"))
 		I.appearance_flags = RESET_COLOR | KEEP_APART
 		add_overlay(I)
 
 		// If we're capable of burning buckled mobs (usually via a stake),
-		// draw a second intense fire overlay and offset it to cover the mob.
+		// draw an intense fire overlay and offset it to cover the mob.
 		if(fire_is_burning_mobs())
 			I = image(icon, "[base_icon_state]_intense")
 			I.pixel_y = 13
@@ -263,7 +258,7 @@
 
 	// See if we can dry out anything around us, or cook any food.
 	var/grilling = FALSE
-	for(var/obj/item/thing in view(2, src))
+	for(var/obj/item/thing in view(1, src))
 		var/on_top_of_fire = thing.loc == loc
 		if(on_top_of_fire)
 			if(!grilling && istype(thing, /obj/item/reagent_containers/food/snacks))
@@ -274,14 +269,13 @@
 		thing.dry_out(src, max(1, 3 - get_dist(thing, src)), on_top_of_fire)
 
 	// If we're cooking food, play a food cooking souond.
-	if(grilling)
-		if(grill_loop)
-			if(locate(/obj/item/reagent_containers/food/snacks) in contents)
-				if(!grill_loop.started)
-					grill_loop.start(src)
-			else
-				if(grill_loop.started)
-					grill_loop.stop(src)
+	if(grill_loop)
+		if(grilling)
+			if(!grill_loop.started)
+				grill_loop.start(src)
+		else
+			if(grill_loop.started)
+				grill_loop.stop(src)
 
 	// If we're low enough, don't burn anything or put out
 	// any significant heat, they need to refuel the fire.
@@ -386,4 +380,9 @@
 
 /obj/structure/wood_fire/fireplace/stove/get_fuel_overlay(var/fuel_amount)
 	. = ..()
-	LAZYADD(., "[base_icon_state]_cover")
+	if(!.)
+		. = "[base_icon_state]_cover"
+	else if(islist(.))
+		. += "[base_icon_state]_cover"
+	else
+		. = list(., "[base_icon_state]_cover")
