@@ -603,3 +603,10 @@
 
 /obj/structure/bed/chair/sofa/orange/corner
 	icon_state = "sofacorner"
+
+// Sivian wood subtype for mapping.
+/obj/structure/bed/chair/sifwood/Initialize(var/ml, var/newmaterial)
+	. = ..(ml, MAT_SIFWOOD)
+
+/obj/structure/bed/chair/sifwood/wings
+	icon_state = "wooden_chair_wings"

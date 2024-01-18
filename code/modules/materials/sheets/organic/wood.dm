@@ -1,6 +1,16 @@
 /obj/item/stack/material/fuel // abstract type, do not use
 	var/bonfire_fuel_time = 1 MINUTE
 
+/obj/item/stack/material/fuel/get_dryness_text(var/obj/rack)
+	var/moistness = drying_wetness / initial(drying_wetness)
+	if(moistness > 0.65)
+		return "fresh-cut"
+	if(moistness > 0.35)
+		return "somewhat dried"
+	if(moistness)
+		return "almost dried"
+	return "dried"
+
 /obj/item/stack/material/fuel/wood
 	name = "wooden plank"
 	icon_state = "sheet-wood"
@@ -26,6 +36,10 @@
 	dried_type = null
 	drying_wetness = null
 	bonfire_fuel_time = 6 MINUTES
+
+/obj/item/stack/material/fuel/wood/dried/update_strings()
+	. = ..()
+	name = "dried [name]"
 
 /obj/item/stack/material/fuel/wood/dried/sif
 	name = "dried sifwood plank"
@@ -61,6 +75,10 @@
 	dried_type = null
 	plank_type = /obj/item/stack/material/fuel/wood/dried
 	bonfire_fuel_time = 8 MINUTES
+
+/obj/item/stack/material/fuel/log/dried/update_strings()
+	. = ..()
+	name = "dried [name]"
 
 /obj/item/stack/material/fuel/log/dried/sif
 	name = "dried sifwood log"

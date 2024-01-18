@@ -138,7 +138,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/Shelter1)
 "yD" = (
-/obj/structure/fireplace,
+/obj/structure/wood_fire/fireplace,
 /turf/simulated/floor/wood/sif,
 /area/submap/Shelter1)
 "zh" = (

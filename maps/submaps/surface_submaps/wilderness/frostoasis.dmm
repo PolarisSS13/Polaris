@@ -6,7 +6,7 @@
 "cm" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "co" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/FrostOasis)
 "ct" = (/obj/structure/table/sifwoodentable,/obj/item/a_gift,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"cA" = (/obj/structure/fireplace,/obj/effect/decal/cleanable/dirt,/obj/structure/sign/christmas/wreath,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"cA" = (/obj/structure/wood_fire/fireplace,/obj/effect/decal/cleanable/dirt,/obj/structure/sign/christmas/wreath,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "do" = (/obj/effect/decal/cleanable/dirt,/obj/item/trash/driedfish,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "dD" = (/obj/structure/loot_pile/maint/boxfort,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "dF" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/wood,/area/submap/FrostOasis)

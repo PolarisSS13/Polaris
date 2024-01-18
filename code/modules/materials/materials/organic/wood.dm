@@ -72,10 +72,11 @@
 	sheet_plural_name = "pile"
 	pass_stack_colors = TRUE
 	supply_conversion_value = 1
+	var/bonfire_type = /obj/structure/wood_fire/bonfire/fuelled
 
 /datum/material/wood/log/generate_recipes()
 	recipes = list(
-		new /datum/stack_recipe("bonfire", /obj/structure/bonfire, 5, time = 50, supplied_material = "[name]", pass_stack_color = TRUE, recycle_material = "[name]")
+		new /datum/stack_recipe("bonfire", bonfire_type, 5, time = 5 SECONDS)
 	)
 
 /datum/material/wood/log/sif
@@ -83,3 +84,4 @@
 	icon_colour = "#0099cc" // Cyan-ish
 	stack_origin_tech = list(TECH_MATERIAL = 2, TECH_BIO = 2)
 	stack_type = /obj/item/stack/material/fuel/log/sif
+	bonfire_type = /obj/structure/wood_fire/bonfire/sifwood

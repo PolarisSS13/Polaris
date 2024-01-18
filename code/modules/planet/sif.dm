@@ -59,7 +59,7 @@ var/global/datum/planet/sif/planet_sif = null
 			low_color = "#CC3300"
 
 			high_brightness = 0.9
-			high_color = "#FF9933"
+			high_color = COLOR_FIRE_ORANGE
 			min = 0.50
 
 		if(0.70 to 1.00) // Noon

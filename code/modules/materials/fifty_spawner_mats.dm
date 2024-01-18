@@ -101,7 +101,7 @@
 	type_to_spawn = /obj/item/stack/material/fuel/wood
 
 /obj/fiftyspawner/sifwood
-	name = "stack of alien wood"
+	name = "stack of sifwood wood"
 	type_to_spawn = /obj/item/stack/material/fuel/wood/sif
 
 /obj/fiftyspawner/log
@@ -109,7 +109,7 @@
 	type_to_spawn = /obj/item/stack/material/fuel/log
 
 /obj/fiftyspawner/log/sif
-	name = "stack of alien logs"
+	name = "stack of sifwood logs"
 	type_to_spawn = /obj/item/stack/material/fuel/log/sif
 
 /obj/fiftyspawner/cloth

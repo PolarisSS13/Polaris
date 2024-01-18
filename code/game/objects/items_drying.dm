@@ -37,11 +37,12 @@
 
 // Returns a string used in drying rack examine().
 /obj/item/proc/get_dryness_text(var/obj/rack)
-	if(drying_wetness > 20)
+	var/moistness = drying_wetness / initial(drying_wetness)
+	if(moistness > 0.65)
 		return "wet"
-	if(drying_wetness > 10)
+	if(moistness > 0.35)
 		return "damp"
-	if(drying_wetness)
+	if(moistness)
 		return "almost dry"
 	return "dry"
 

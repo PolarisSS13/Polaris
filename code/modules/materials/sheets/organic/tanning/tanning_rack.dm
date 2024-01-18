@@ -36,15 +36,12 @@
 	if(drying_state)
 		add_overlay(drying_state)
 
-/obj/structure/drying_rack/attackby(var/atom/A, var/mob/user)
-	if(istype(A, /obj/item/stack/wetleather))
-		if(!drying) // If not drying anything, start drying the thing
-			if(user.unEquip(A, target = src))
-				drying = A
-		else // Drying something, add if possible
-			var/obj/item/stack/wetleather/W = A
-			W.transfer_to(drying, W.amount, TRUE)
-		update_icon()
+/obj/structure/drying_rack/attackby(var/obj/item/I, var/mob/user)
+	if(istype(I) && I.is_dryable() && !istype(I, /obj/item/stack/material/fuel))
+		if(user.unEquip(I))
+			I.forceMove(src)
+			drying = I
+			update_icon()
 		return TRUE
 	return ..()
 

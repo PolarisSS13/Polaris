@@ -3,6 +3,7 @@
 	icon = 'icons/obj/food_jerky.dmi'
 	bitesize = 2
 	w_class = ITEMSIZE_TINY
+	dry = TRUE
 
 /obj/item/reagent_containers/food/snacks/jerky/fish
 	name = "dried fish"
@@ -44,7 +45,7 @@
 /obj/item/reagent_containers/food/snacks/jerky/spider
 	name = "dried spider meat"
 	desc = "A piece of green, stringy dried meat, full of tubes. It smells faintly of acid."
-	icon_state = "spiderjerky"
+	icon_state = "spiderjerky_charred"
 
 /obj/item/reagent_containers/food/snacks/jerky/spider/get_drying_state()
 	return "meat_dried"
@@ -52,6 +53,9 @@
 /obj/item/reagent_containers/food/snacks/jerky/spider/Initialize()
 	. = ..()
 	reagents.add_reagent("protein", 5)
+
+/obj/item/reagent_containers/food/snacks/jerky/spider/poison
+	icon_state = "spiderjerky"
 
 /obj/item/reagent_containers/food/snacks/jerky/spider/poison/Initialize()
 	. = ..()

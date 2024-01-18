@@ -35,7 +35,7 @@
 "aI" = (/obj/structure/flora/pottedplant/dead,/obj/effect/spider/stickyweb,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "aJ" = (/obj/effect/spider/stickyweb,/mob/living/simple_mob/animal/giant_spider/lurker,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "aK" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
-"aL" = (/obj/structure/fireplace,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
+"aL" = (/obj/structure/wood_fire/fireplace,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "aM" = (/mob/living/simple_mob/animal/giant_spider/lurker,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "aN" = (/obj/effect/decal/cleanable/cobweb2,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)
 "aO" = (/obj/structure/bed,/obj/item/bedsheet,/turf/simulated/floor/holofloor/wood,/area/submap/Manor1)

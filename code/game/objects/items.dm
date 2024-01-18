@@ -213,7 +213,9 @@
 			size = "bulky"
 		if(ITEMSIZE_HUGE)
 			size = "huge"
-	return ..(user, "", "It is a [size] item.")
+	. = ..(user, "", "It is a [size] item.")
+	if(drying_wetness > 0 && drying_wetness != initial(drying_wetness))
+		. += "\The [src] is [get_dryness_text()]."
 
 /obj/item/attack_hand(mob/living/user as mob)
 	if (!user) return

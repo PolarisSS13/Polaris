@@ -1,6 +1,6 @@
 "ae" = (/obj/structure/railing,/obj/item/bone,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "cR" = (/obj/structure/bed/chair{dir = 1},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
-"dq" = (/obj/effect/decal/cleanable/dirt,/obj/structure/bonfire/sifwood,/turf/simulated/floor/outdoors/grass/sif,/area/submap/priderock)
+"dq" = (/obj/effect/decal/cleanable/dirt,/obj/structure/wood_fire/bonfire/sifwood,/turf/simulated/floor/outdoors/grass/sif,/area/submap/priderock)
 "dD" = (/obj/random/junk,/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "fL" = (/obj/structure/railing{dir = 8},/obj/structure/cliff/automatic{dir = 8},/turf/simulated/floor/outdoors/dirt,/area/submap/priderock)
 "hI" = (/obj/structure/table/woodentable,/turf/simulated/floor/outdoors/grass/sif,/area/submap/priderock)

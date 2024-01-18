@@ -47,6 +47,16 @@
 /obj/item/reagent_containers/food/snacks/is_dryable()
 	return !dry
 
+/obj/item/reagent_containers/food/snacks/get_dryness_text(var/obj/rack)
+	var/moistness = drying_wetness / initial(drying_wetness)
+	if(moistness > 0.65)
+		return "fresh"
+	if(moistness > 0.35)
+		return "somewhat dried"
+	if(moistness)
+		return "almost dried"
+	return "dehydrated"
+
 /obj/item/reagent_containers/food/snacks/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE, var/silent = FALSE)
 
 	// If it's a direct fire, cook the food instead.

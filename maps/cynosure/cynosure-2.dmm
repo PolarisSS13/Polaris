@@ -21249,6 +21249,10 @@
 	initial_flooring = /decl/flooring/tiling/asteroidfloor
 	},
 /area/surface/station/garage)
+"jJj" = (
+/obj/structure/wood_fire/campfire,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outside/path/plains)
 "jJq" = (
 /obj/machinery/computer/operating{
 	dir = 8
@@ -74557,7 +74561,7 @@ fyc
 fyc
 fyc
 fyc
-fyc
+jJj
 fyc
 fyc
 vwy
