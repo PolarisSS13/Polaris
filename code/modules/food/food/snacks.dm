@@ -47,7 +47,7 @@
 /obj/item/reagent_containers/food/snacks/is_dryable()
 	return !dry
 
-/obj/item/reagent_containers/food/snacks/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE)
+/obj/item/reagent_containers/food/snacks/dry_out(var/obj/rack, var/drying_power = 1, var/fire_exposed = FALSE, var/silent = FALSE)
 
 	// If it's a direct fire, cook the food instead.
 	if(fire_exposed)
@@ -60,7 +60,8 @@
 		dry = TRUE
 		name = "dried [name]"
 		color = "#aaaaaa"
-		rack?.visible_message(SPAN_NOTICE("\The [src] is dry!"))
+		if(rack && !silent)
+			rack.visible_message(SPAN_NOTICE("\The [src] is dry!"))
 		return src
 
 	return ..()
@@ -907,6 +908,8 @@
 	bitesize = 2
 	drying_wetness = 20
 	dried_type = /obj/item/reagent_containers/food/snacks/jerky/fish
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/grilledfish
+	backyard_grilling_announcement = "steams gently."
 	var/toxin_type = "carpotoxin"
 	var/toxin_amount = 3
 
@@ -927,6 +930,7 @@
 	desc = "A fillet of sivian fish meat."
 	filling_color = "#2c2cff"
 	color = "#2c2cff"
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/grilledfish/sivian
 
 /obj/item/reagent_containers/food/snacks/fishfingers
 	name = "fish fingers"
@@ -8159,3 +8163,17 @@
 		TASTE_STRING_DEFAULT = list("puffed minty qa'zal bread" = 1, "super-sweet kirani jelly" = 1),
 		SPECIES_TESHARI      = list("puffed minty qa'zal bread" = 1, "rich kirani jelly" = 1)
 	)
+
+/obj/item/reagent_containers/food/snacks/grilledfish
+	name = "grilled fish fillet"
+	desc = "A lightly grilled fish fillet."
+	icon_state = "grilledfish"
+	nutriment_amt = 8
+	bitesize = 2
+	nutriment_allergens = ALLERGEN_FISH
+	nutriment_desc = list("flaky grilled fish" = 5)
+
+/obj/item/reagent_containers/food/snacks/grilledfish/sivian
+	desc = "A lightly grilled fish fillet. This one is blue; it's probably an illegally fished native species."
+	icon_state = "grilledsiffish"
+	nutriment_desc = list("flaky grilled fish" = 5, "a mild, musky aftertaste" = 1)
