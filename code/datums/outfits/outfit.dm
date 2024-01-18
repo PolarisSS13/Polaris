@@ -3,6 +3,7 @@ var/global/list/outfits_decls_root_
 var/global/list/outfits_decls_by_type_
 
 /proc/outfit_by_type(var/outfit_type)
+	RETURN_TYPE(/decl/hierarchy/outfit)
 	if(!outfits_decls_root_)
 		init_outfit_decls()
 	return outfits_decls_by_type_[outfit_type]
@@ -117,7 +118,7 @@ var/global/list/outfits_decls_by_type_
 	post_equip(H)
 	if(W) // We set ID info last to ensure the ID photo is as correct as possible.
 		H.set_id_info(W)
-	return 1
+	return H
 
 /decl/hierarchy/outfit/proc/equip_base(mob/living/carbon/human/H)
 	pre_equip(H)
@@ -166,6 +167,8 @@ var/global/list/outfits_decls_by_type_
 
 	if(H.species)
 		H.species.equip_survival_gear(H, flags&OUTFIT_EXTENDED_SURVIVAL, flags&OUTFIT_COMPREHENSIVE_SURVIVAL)
+
+	return H
 
 /decl/hierarchy/outfit/proc/equip_id(mob/living/carbon/human/H, rank, assignment)
 	if(!id_slot || !id_type)

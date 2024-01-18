@@ -3,7 +3,7 @@ var/global/ntnrc_uid = 0
 /datum/ntnet_conversation/
 	var/id = null
 	var/title = "Untitled Conversation"
-	var/datum/computer_file/program/chatclient/operator // "Administrator" of this channel. Creator starts as channel's operator,
+	var/datum/computer_file/program/chatclient/operator_admin // "Administrator" of this channel. Creator starts as channel's operator,
 	var/list/messages = list()
 	var/list/clients = list()
 	var/password
@@ -35,7 +35,7 @@ var/global/ntnrc_uid = 0
 	clients.Add(C)
 	add_status_message("[C.username] has joined the channel.")
 	// No operator, so we assume the channel was empty. Assign this user as operator.
-	if(!operator)
+	if(!operator_admin)
 		changeop(C)
 
 /datum/ntnet_conversation/proc/remove_client(var/datum/computer_file/program/chatclient/C)
@@ -45,8 +45,8 @@ var/global/ntnrc_uid = 0
 	add_status_message("[C.username] has left the channel.")
 
 	// Channel operator left, pick new operator
-	if(C == operator)
-		operator = null
+	if(C == operator_admin)
+		operator_admin = null
 		if(clients.len)
 			var/datum/computer_file/program/chatclient/newop = pick(clients)
 			changeop(newop)
@@ -54,11 +54,11 @@ var/global/ntnrc_uid = 0
 
 /datum/ntnet_conversation/proc/changeop(var/datum/computer_file/program/chatclient/newop)
 	if(istype(newop))
-		operator = newop
+		operator_admin = newop
 		add_status_message("Channel operator status transferred to [newop.username].")
 
 /datum/ntnet_conversation/proc/change_title(var/newtitle, var/datum/computer_file/program/chatclient/client)
-	if(operator != client)
+	if(operator_admin != client)
 		return 0 // Not Authorised
 
 	add_status_message("[client.username] has changed channel title from [title] to [newtitle]")

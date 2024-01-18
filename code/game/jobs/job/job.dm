@@ -43,13 +43,10 @@
 	department_accounts = department_accounts || departments_managed
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
-	if(!outfit)
-		return FALSE
-	. = outfit.equip(H, title, alt_title)
-	return 1
+	return get_outfit(H, alt_title)?.equip(H, title, alt_title)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+	RETURN_TYPE(/decl/hierarchy/outfit)
 	if(alt_title && alt_titles)
 		var/datum/alt_title/A = alt_titles[alt_title]
 		if(A && initial(A.title_outfit))
@@ -93,10 +90,7 @@
 
 // overrideable separately so AIs/borgs can have cardborg hats without unnecessary new()/qdel()
 /datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
-	if(!outfit)
-		return FALSE
-	. = outfit.equip_base(H, title, alt_title)
+	return get_outfit(H, alt_title)?.equip_base(H, title, alt_title)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)
