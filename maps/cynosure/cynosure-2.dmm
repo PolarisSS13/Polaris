@@ -1828,7 +1828,7 @@
 /obj/effect/floor_decal/spline/plain{
 	dir = 6
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/simulated/floor/tiled/hydro,
 /area/surface/station/park)
 "aTC" = (
@@ -6103,7 +6103,7 @@
 /turf/simulated/wall,
 /area/surface/station/engineering/engineering_monitoring)
 "cPd" = (
-/obj/structure/tanning_rack,
+/obj/structure/drying_rack,
 /turf/simulated/floor/outdoors/dirt/sif{
 	outdoors = 0
 	},
@@ -22993,7 +22993,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/ai/server_room)
 "kqm" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -30180,7 +30180,7 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/engineering_monitoring)
 "nyb" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},

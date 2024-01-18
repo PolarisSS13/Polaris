@@ -239,35 +239,28 @@
 	if(grill)
 		for(var/obj/item/reagent_containers/food/snacks/snack in loc)
 			snack.grill(src)
+		for(var/obj/item/thing in view(2, src))
+			thing.dry_out(src, rand(1,4))
 	else
 		burn()
 
-	if(burning)
-		var/W = get_fuel_amount()
-		if(W >= 5)
-			var/datum/gas_mixture/env = loc.return_air()
-			if(env && abs(env.temperature - set_temperature) > 0.1)
-				var/transfer_moles = 0.25 * env.total_moles
-				var/datum/gas_mixture/removed = env.remove(transfer_moles)
-
-				if(removed)
-					var/heat_transfer = removed.get_thermal_energy_change(set_temperature)
-					if(heat_transfer > 0)
-						heat_transfer = min(heat_transfer , heating_power)
-
-						removed.add_thermal_energy(heat_transfer)
-
-				for(var/mob/living/L in view(3, src))
-					L.add_modifier(/datum/modifier/endothermic, 10 SECONDS, null, TRUE)
-
-				for(var/obj/item/stack/wetleather/WL in view(2, src))
-					if(WL.wetness >= 0)
-						WL.dry()
-						continue
-
-					WL.wetness = max(0, WL.wetness - rand(1, 4))
-
-				env.merge(removed)
+	if(!burning)
+		return
+	var/W = get_fuel_amount()
+	if(W < 5)
+		return
+	var/datum/gas_mixture/env = loc.return_air()
+	if(!env || abs(env.temperature - set_temperature) <= 0.1)
+		return
+	var/transfer_moles = 0.25 * env.total_moles
+	var/datum/gas_mixture/removed = env.remove(transfer_moles)
+	var/heat_transfer = removed?.get_thermal_energy_change(set_temperature)
+	if(heat_transfer > 0)
+		heat_transfer = min(heat_transfer, heating_power)
+		removed.add_thermal_energy(heat_transfer)
+	for(var/mob/living/L in view(3, src))
+		L.add_modifier(/datum/modifier/endothermic, 10 SECONDS, null, TRUE)
+	env.merge(removed)
 
 /obj/structure/bonfire/fire_act(datum/gas_mixture/air, exposed_temperature, exposed_volume)
 	ignite()

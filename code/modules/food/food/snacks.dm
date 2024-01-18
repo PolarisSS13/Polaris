@@ -9,7 +9,6 @@
 	var/trash = null
 	var/slice_path
 	var/slices_num
-	var/dried_type = null
 	var/dry = 0
 	var/survivalfood = FALSE
 	var/nutriment_amt = 0
@@ -44,6 +43,20 @@
 /obj/item/reagent_containers/food/snacks/LateInitialize()
 	. = ..()
 	nutriment_desc = null
+
+/obj/item/reagent_containers/food/snacks/is_dryable()
+	return !dry
+
+/obj/item/reagent_containers/food/snacks/dry_out(var/obj/rack, var/drying_power = 1)
+	if(!dried_type || dry)
+		return null
+	if(dried_type == type)
+		dry = TRUE
+		name = "dried [name]"
+		color = "#aaaaaa"
+		rack?.visible_message(SPAN_NOTICE("\The [src] is dry!"))
+		return src
+	return ..()
 
 /obj/item/reagent_containers/food/snacks
 

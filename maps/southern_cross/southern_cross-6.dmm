@@ -670,7 +670,7 @@
 "mT" = (/obj/machinery/computer/pod{id = "thunderdomegen"; name = "Thunderdome General Supply"},/turf/unsimulated/floor{icon_state = "lino"},/area/tdome/tdomeadmin)
 "mU" = (/obj/effect/floor_decal/corner/white/diagonal,/obj/machinery/appliance/cooker/oven,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/bar)
 "mV" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/material/knife/machete/hatchet,/obj/item/material/knife/machete/hatchet,/obj/item/material/minihoe,/obj/item/material/minihoe,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/bar)
-"mW" = (/obj/machinery/smartfridge/drying_rack,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/bar)
+"mW" = (/obj/machinery/smartfridge/drying_oven,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/bar)
 "mX" = (/obj/structure/table/standard{name = "plastic table frame"},/obj/item/reagent_containers/glass/bucket,/obj/item/reagent_containers/glass/bucket,/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/bar)
 "mY" = (/obj/machinery/door/airlock/centcom{name = "Maintenance Access"; opacity = 1; req_access = list(106)},/turf/unsimulated/floor{icon_state = "steel"},/area/centcom/main_hall)
 "mZ" = (/obj/structure/table/reinforced,/turf/unsimulated/floor{icon_state = "dark"},/area/centcom/command)
