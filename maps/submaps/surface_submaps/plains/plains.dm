@@ -39,11 +39,11 @@
 #include "oldhotel.dmm"
 #include "VRDen.dmm"
 #include "reststop.dmm"
-#include "animalruin-den.dmm"
-#include "crescent-den.dmm"
-#include "plainsdrake-den.dmm"
-#include "pondside-den.dmm"
-#include "swampy-den.dmm"
+#include "animalruin_den.dmm"
+#include "crescent_den.dmm"
+#include "plainsdrake_den.dmm"
+#include "pondside_den.dmm"
+#include "swampy_den.dmm"
 #endif
 
 
