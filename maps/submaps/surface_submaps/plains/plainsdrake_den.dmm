@@ -5,7 +5,7 @@
 "p" = (
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,
 /obj/effect/decal/cleanable/spiderling_remains,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "u" = (
 /obj/structure/flora/ausbushes/fullgrass,
@@ -14,15 +14,15 @@
 "y" = (
 /obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,
 /obj/random/helmet,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "A" = (
 /obj/random/outcrop,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "B" = (
 /obj/item/stack/material/chitin,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "C" = (
 /turf/template_noop,
@@ -36,7 +36,7 @@
 	mob_wander_distance = 5
 	},
 /obj/structure/animal_den,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "J" = (
 /obj/structure/flora/ausbushes/grassybush,
@@ -45,7 +45,7 @@
 "O" = (
 /obj/random/contraband,
 /obj/random/junk,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "Q" = (
 /obj/structure/flora/tree/sif,
@@ -54,10 +54,10 @@
 "W" = (
 /obj/item/stack/material/chitin,
 /obj/effect/decal/cleanable/spiderling_remains,
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 "Z" = (
-/turf/simulated/mineral/floor/sif,
+/turf/simulated/mineral/floor,
 /area/submap/plainsdrake_den)
 
 (1,1,1) = {"
