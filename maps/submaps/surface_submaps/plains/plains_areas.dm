@@ -154,7 +154,7 @@
 	ambience = AMBIENCE_SIF
 
 /area/submap/pondside_den
-	name = "POI - Ponside Den"
+	name = "POI - Pondside Den"
 	ambience = AMBIENCE_SIF
 
 /area/submap/swampy_den

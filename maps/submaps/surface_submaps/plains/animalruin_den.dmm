@@ -67,7 +67,7 @@
 /area/submap/animalruin_den)
 "W" = (
 /obj/item/stack/material/fuel/log/sif{
-	amount = 25
+	amount = 15
 	},
 /turf/template_noop,
 /area/submap/animalruin_den)

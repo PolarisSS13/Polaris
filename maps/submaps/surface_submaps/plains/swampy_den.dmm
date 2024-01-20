@@ -29,10 +29,6 @@
 "u" = (
 /turf/simulated/mineral/ignore_mapgen,
 /area/submap/swampy_den)
-"y" = (
-/obj/structure/flora/ausbushes/fernybush,
-/turf/simulated/floor/water,
-/area/submap/swampy_den)
 "B" = (
 /turf/simulated/floor/water,
 /area/submap/swampy_den)
@@ -119,7 +115,7 @@ e
 T
 B
 B
-a
+j
 a
 a
 a
@@ -136,7 +132,7 @@ e
 B
 B
 a
-j
+a
 e
 e
 a
@@ -208,7 +204,7 @@ e
 e
 u
 B
-y
+B
 B
 B
 e
@@ -224,7 +220,7 @@ a
 a
 a
 a
-a
+N
 a
 B
 e
@@ -240,7 +236,7 @@ j
 a
 S
 a
-N
+a
 a
 B
 B

@@ -9,10 +9,6 @@
 	outdoors = 0
 	},
 /area/submap/pondside_den)
-"s" = (
-/mob/living/simple_mob/animal/passive/fish/trout,
-/turf/simulated/floor/water/deep,
-/area/submap/pondside_den)
 "u" = (
 /obj/random/mob/fish,
 /turf/simulated/floor/water/deep,
@@ -32,8 +28,8 @@
 	},
 /area/submap/pondside_den)
 "H" = (
-/obj/item/material/knife/machete/hatchet/stone,
-/turf/simulated/floor/outdoors/dirt,
+/obj/structure/flora/ausbushes/stalkybush,
+/turf/simulated/floor/water,
 /area/submap/pondside_den)
 "I" = (
 /turf/simulated/mineral/ignore_mapgen,
@@ -83,7 +79,7 @@ a
 "}
 (2,1,1) = {"
 a
-a
+V
 a
 a
 a
@@ -176,7 +172,7 @@ a
 a
 K
 K
-Q
+H
 Q
 Q
 K
@@ -260,11 +256,11 @@ a
 K
 Q
 Q
-s
+v
 v
 v
 Q
-Q
+H
 K
 a
 "}
@@ -276,11 +272,11 @@ a
 a
 K
 K
+H
 Q
 Q
 Q
-Q
-Q
+H
 K
 K
 a
@@ -295,7 +291,7 @@ Y
 K
 K
 K
-H
+K
 K
 K
 K
@@ -317,5 +313,5 @@ a
 Y
 a
 a
-a
+V
 "}
