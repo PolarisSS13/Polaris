@@ -1,0 +1,257 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/submap/plainsdrake_den)
+"p" = (
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"u" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/template_noop,
+/area/submap/plainsdrake_den)
+"y" = (
+/obj/item/reagent_containers/food/snacks/xenomeat/spidermeat,
+/obj/random/helmet,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"A" = (
+/obj/random/outcrop,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"B" = (
+/obj/item/stack/material/chitin,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"C" = (
+/turf/template_noop,
+/area/submap/plainsdrake_den)
+"F" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/template_noop,
+/area/submap/plainsdrake_den)
+"G" = (
+/obj/random/mob/sif/grafadreka{
+	mob_wander_distance = 5
+	},
+/obj/structure/animal_den,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"J" = (
+/obj/structure/flora/ausbushes/grassybush,
+/turf/template_noop,
+/area/submap/plainsdrake_den)
+"O" = (
+/obj/random/contraband,
+/obj/random/junk,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"Q" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/submap/plainsdrake_den)
+"W" = (
+/obj/item/stack/material/chitin,
+/obj/effect/decal/cleanable/spiderling_remains,
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+"Z" = (
+/turf/simulated/mineral/floor,
+/area/submap/plainsdrake_den)
+
+(1,1,1) = {"
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+"}
+(2,1,1) = {"
+C
+C
+C
+a
+C
+C
+Q
+C
+C
+C
+C
+C
+C
+"}
+(3,1,1) = {"
+C
+u
+a
+a
+Z
+F
+C
+C
+C
+C
+C
+Q
+C
+"}
+(4,1,1) = {"
+C
+a
+a
+W
+Z
+Z
+a
+a
+a
+a
+C
+C
+C
+"}
+(5,1,1) = {"
+C
+a
+Z
+Z
+Z
+Z
+A
+a
+Z
+a
+a
+a
+C
+"}
+(6,1,1) = {"
+C
+a
+Z
+a
+a
+Z
+Z
+Z
+Z
+Z
+Z
+a
+C
+"}
+(7,1,1) = {"
+C
+Z
+Z
+Z
+Z
+Z
+Z
+a
+Z
+B
+Z
+Z
+Z
+"}
+(8,1,1) = {"
+Z
+Z
+a
+O
+B
+a
+p
+Z
+a
+a
+Z
+Z
+Z
+"}
+(9,1,1) = {"
+C
+a
+a
+a
+a
+a
+a
+Z
+Z
+a
+a
+Z
+a
+"}
+(10,1,1) = {"
+C
+J
+a
+C
+C
+a
+a
+G
+Z
+y
+a
+a
+a
+"}
+(11,1,1) = {"
+C
+C
+C
+C
+C
+u
+a
+a
+a
+a
+a
+a
+C
+"}
+(12,1,1) = {"
+C
+Q
+C
+C
+a
+C
+C
+C
+a
+a
+a
+C
+C
+"}
+(13,1,1) = {"
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+C
+"}

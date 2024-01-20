@@ -140,3 +140,24 @@
 /area/submap/reststop
 	name = "POI - Rest Stop"
 	ambience = AMBIENCE_SIF
+
+/area/submap/animalruin_den
+	name = "POI - Ruin Den"
+	ambience = AMBIENCE_SIF
+	
+/area/submap/crescent_den
+	name = "POI - Crescent Den"
+	ambience = AMBIENCE_SIF
+
+/area/submap/plainsdrake_den
+	name = "POI - Plains Drake Den"
+	ambience = AMBIENCE_SIF
+
+/area/submap/pondside_den
+	name = "POI - Pondside Den"
+	ambience = AMBIENCE_SIF
+
+/area/submap/swampy_den
+	name = "POI - Swamp Den"
+	ambience = AMBIENCE_SIF
+	

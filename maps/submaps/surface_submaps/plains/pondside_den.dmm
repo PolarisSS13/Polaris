@@ -1,0 +1,317 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/submap/pondside_den)
+"i" = (
+/obj/structure/animal_den,
+/obj/random/mob/sif/peaceful,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/pondside_den)
+"u" = (
+/obj/random/mob/fish,
+/turf/simulated/floor/water/deep,
+/area/submap/pondside_den)
+"v" = (
+/turf/simulated/floor/water/deep,
+/area/submap/pondside_den)
+"A" = (
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/pondside_den)
+"G" = (
+/obj/structure/boulder,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/pondside_den)
+"H" = (
+/obj/structure/flora/ausbushes/stalkybush,
+/turf/simulated/floor/water,
+/area/submap/pondside_den)
+"I" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/submap/pondside_den)
+"K" = (
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/pondside_den)
+"Q" = (
+/turf/simulated/floor/water,
+/area/submap/pondside_den)
+"V" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/submap/pondside_den)
+"X" = (
+/obj/item/material/fishing_net,
+/obj/structure/table/sifwoodentable,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/pondside_den)
+"Y" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/template_noop,
+/area/submap/pondside_den)
+"Z" = (
+/obj/structure/prop/rock/water,
+/turf/simulated/floor/water/deep,
+/area/submap/pondside_den)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+V
+a
+a
+a
+a
+I
+I
+I
+a
+V
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+I
+I
+a
+a
+a
+a
+I
+a
+"}
+(4,1,1) = {"
+a
+a
+I
+I
+I
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+a
+I
+I
+I
+A
+a
+a
+a
+a
+a
+Y
+a
+a
+a
+a
+"}
+(6,1,1) = {"
+I
+I
+i
+A
+a
+a
+a
+a
+K
+K
+K
+K
+K
+a
+a
+"}
+(7,1,1) = {"
+I
+I
+G
+A
+a
+a
+a
+K
+K
+H
+Q
+Q
+K
+K
+Y
+"}
+(8,1,1) = {"
+I
+I
+X
+A
+a
+a
+K
+K
+Q
+Q
+v
+Q
+Q
+K
+K
+"}
+(9,1,1) = {"
+a
+I
+I
+A
+a
+K
+K
+Q
+Q
+v
+v
+v
+Q
+K
+K
+"}
+(10,1,1) = {"
+a
+a
+I
+a
+a
+K
+Q
+Q
+u
+v
+v
+u
+Q
+K
+K
+"}
+(11,1,1) = {"
+a
+a
+a
+a
+V
+K
+Q
+v
+v
+Z
+v
+v
+Q
+K
+a
+"}
+(12,1,1) = {"
+a
+a
+a
+a
+a
+K
+Q
+Q
+v
+v
+v
+Q
+H
+K
+a
+"}
+(13,1,1) = {"
+a
+a
+a
+a
+a
+K
+K
+H
+Q
+Q
+Q
+H
+K
+K
+a
+"}
+(14,1,1) = {"
+a
+V
+a
+a
+a
+Y
+K
+K
+K
+K
+K
+K
+K
+Y
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+K
+K
+K
+a
+Y
+a
+a
+V
+"}

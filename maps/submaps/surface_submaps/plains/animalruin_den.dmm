@@ -1,0 +1,329 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/submap/animalruin_den)
+"h" = (
+/obj/structure/loot_pile/maint/trash,
+/turf/template_noop,
+/area/submap/animalruin_den)
+"i" = (
+/obj/structure/animal_den,
+/obj/random/mob/sif/peaceful,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/animalruin_den)
+"j" = (
+/obj/structure/wood_fire/fireplace/stove,
+/turf/simulated/floor/wood/sif,
+/area/submap/animalruin_den)
+"m" = (
+/obj/structure/flora/sif/frostbelle,
+/turf/simulated/floor/outdoors/grass/sif/forest,
+/area/submap/animalruin_den)
+"q" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/submap/animalruin_den)
+"r" = (
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/animalruin_den)
+"s" = (
+/obj/random/mouseremains,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/animalruin_den)
+"x" = (
+/obj/random/trash,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/animalruin_den)
+"y" = (
+/obj/structure/flora/grass/green,
+/turf/template_noop,
+/area/submap/animalruin_den)
+"E" = (
+/obj/item/material/shard,
+/obj/item/stack/rods,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/animalruin_den)
+"J" = (
+/obj/structure/dogbed{
+	desc = "A bed made especially for dogs, or other similarly sized pets. This one is heavily weather stained.";
+	name = "dingy dog bed"
+	},
+/obj/random/junk,
+/turf/simulated/floor/wood/sif,
+/area/submap/animalruin_den)
+"N" = (
+/turf/simulated/wall/log_sif,
+/area/submap/animalruin_den)
+"P" = (
+/obj/item/material/knife/machete/hatchet,
+/turf/simulated/floor/wood/sif,
+/area/submap/animalruin_den)
+"R" = (
+/obj/structure/flora/grass/brown,
+/turf/template_noop,
+/area/submap/animalruin_den)
+"S" = (
+/turf/simulated/floor/wood/sif,
+/area/submap/animalruin_den)
+"W" = (
+/obj/item/stack/material/fuel/log/sif{
+	amount = 15
+	},
+/turf/template_noop,
+/area/submap/animalruin_den)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+q
+a
+a
+q
+a
+a
+a
+a
+a
+a
+a
+"}
+(3,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+q
+a
+a
+a
+"}
+(4,1,1) = {"
+a
+a
+a
+a
+a
+a
+q
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(5,1,1) = {"
+a
+q
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(6,1,1) = {"
+a
+a
+a
+W
+N
+N
+E
+N
+N
+a
+a
+a
+a
+a
+a
+"}
+(7,1,1) = {"
+a
+a
+a
+R
+N
+J
+S
+S
+a
+y
+a
+a
+a
+q
+a
+"}
+(8,1,1) = {"
+a
+a
+a
+a
+s
+S
+m
+S
+q
+a
+a
+a
+a
+a
+a
+"}
+(9,1,1) = {"
+a
+a
+a
+a
+N
+j
+S
+S
+r
+a
+a
+a
+a
+a
+a
+"}
+(10,1,1) = {"
+a
+a
+q
+a
+N
+i
+S
+P
+N
+a
+a
+a
+a
+a
+a
+"}
+(11,1,1) = {"
+a
+a
+a
+a
+N
+N
+x
+y
+N
+h
+a
+a
+a
+a
+a
+"}
+(12,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(13,1,1) = {"
+a
+q
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+q
+a
+"}
+(14,1,1) = {"
+a
+a
+q
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(15,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+q
+a
+a
+"}
