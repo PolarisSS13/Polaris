@@ -1,0 +1,173 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/template_noop,
+/area/submap/crescent_den)
+"j" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/submap/crescent_den)
+"n" = (
+/obj/structure/loot_pile/maint/junk,
+/turf/template_noop,
+/area/submap/crescent_den)
+"o" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/submap/crescent_den)
+"q" = (
+/obj/random/trash,
+/obj/random/maintenance,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/crescent_den)
+"r" = (
+/obj/item/material/knife/machete/hatchet/stone,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/crescent_den)
+"s" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/template_noop,
+/area/submap/crescent_den)
+"A" = (
+/obj/structure/flora/ausbushes/stalkybush,
+/turf/template_noop,
+/area/submap/crescent_den)
+"E" = (
+/obj/structure/animal_den,
+/obj/random/mob/sif/peaceful,
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/crescent_den)
+"J" = (
+/turf/simulated/floor/outdoors/dirt{
+	outdoors = 0
+	},
+/area/submap/crescent_den)
+"S" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/template_noop,
+/area/submap/crescent_den)
+
+(1,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+a
+"}
+(2,1,1) = {"
+a
+a
+a
+a
+a
+a
+a
+a
+a
+o
+"}
+(3,1,1) = {"
+a
+a
+o
+S
+s
+j
+j
+j
+A
+a
+"}
+(4,1,1) = {"
+o
+a
+s
+A
+A
+r
+j
+j
+j
+a
+"}
+(5,1,1) = {"
+a
+S
+A
+J
+J
+J
+q
+j
+j
+j
+"}
+(6,1,1) = {"
+a
+j
+J
+J
+j
+J
+J
+j
+j
+j
+"}
+(7,1,1) = {"
+a
+j
+j
+r
+J
+J
+E
+j
+j
+j
+"}
+(8,1,1) = {"
+a
+j
+j
+j
+j
+j
+j
+j
+j
+j
+"}
+(9,1,1) = {"
+a
+a
+j
+j
+j
+j
+j
+j
+j
+A
+"}
+(10,1,1) = {"
+o
+a
+A
+j
+j
+j
+j
+n
+A
+a
+"}
