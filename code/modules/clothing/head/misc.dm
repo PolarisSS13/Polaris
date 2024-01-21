@@ -226,6 +226,14 @@
 	desc = "Because justice isn't going to dispense itself."
 	icon_state = "cowboy_wide"
 
+/obj/item/clothing/head/cowboy_hat/white
+	icon_state = "cowboy_white"
+
+/obj/item/clothing/head/cowboy_hat/white_wide
+	name = "wide-brimmed cowboy hat"
+	desc = "Because justice isn't going to dispense itself."
+	icon_state = "cowboy_white_wide"
+
 /obj/item/clothing/head/cowboy_hat/small
 	name = "small cowboy hat"
 	desc = "For the tiniest of cowboys."

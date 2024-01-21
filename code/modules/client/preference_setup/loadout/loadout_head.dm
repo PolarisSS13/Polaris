@@ -107,11 +107,28 @@
 
 /datum/gear/head/cowboy/New()
 	..()
-	var/list/hats = list()
-	for(var/hat in typesof(/obj/item/clothing/head/cowboy_hat))
-		var/obj/item/clothing/head/hat_type = hat
-		hats[initial(hat_type.name)] = hat_type
-	gear_tweaks += new/datum/gear_tweak/path(sortAssoc(hats))
+	var/list/hats = list(
+	"cowboy hat" = /obj/item/clothing/head/cowboy_hat,
+	"cowboy hat, black" = /obj/item/clothing/head/cowboy_hat/black,
+	"cowboy hat, wide" = /obj/item/clothing/head/cowboy_hat/wide,
+	"cowboy hat, small" = /obj/item/clothing/head/cowboy_hat/small,
+	)
+	gear_tweaks += new/datum/gear_tweak/path(hats)
+
+/datum/gear/head/cowboy_colorable
+	display_name = "cowboy hat (colorable)"
+
+	description = "Draw. In any color of the rainbow."
+	path = /obj/item/clothing/head/cowboy_hat/white
+
+/datum/gear/head/cowboy_colorable/New()
+	..()
+	var/list/whitehats = list(
+	"cowboy hat" = /obj/item/clothing/head/cowboy_hat/white,
+	"cowboy hat, wide" = /obj/item/clothing/head/cowboy_hat/white_wide,
+	)
+	gear_tweaks += new/datum/gear_tweak/path(whitehats)
+	gear_tweaks += gear_tweak_free_color_choice
 
 /datum/gear/head/fedora
 	display_name = "fedora, brown"
