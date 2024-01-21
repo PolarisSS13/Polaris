@@ -19,7 +19,7 @@
 /area/submap/swampy_den)
 "o" = (
 /obj/structure/animal_den,
-/obj/random/mob/sif/peaceful,
+/obj/random/mob/sif/aquatic,
 /turf/simulated/floor/outdoors/dirt,
 /area/submap/swampy_den)
 "s" = (
