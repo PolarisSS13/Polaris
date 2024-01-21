@@ -311,7 +311,7 @@
 				prob(15);/mob/living/simple_mob/animal/passive/fish/javelin,
 				prob(20);/mob/living/simple_mob/animal/passive/fish/rockfish,
 				prob(5);/mob/living/simple_mob/animal/passive/fish/solarfish,
-				prob(10);/mob/living/simple_mob/animal/passive/crab,
+				prob(10);/mob/living/simple_mob/animal/passive/crab/sif,
 				prob(1);/mob/living/simple_mob/animal/sif/hooligan_crab)
 
 /obj/random/mob/bird
