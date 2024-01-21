@@ -91,16 +91,31 @@
 	icon_state = "animal_passive"
 
 	mob_returns_home = 1
-	mob_wander_distance = 12
+	mob_wander_distance = 10
 
 /obj/random/mob/sif/peaceful/item_to_spawn()
 	return pick(prob(30);/mob/living/simple_mob/animal/sif/diyaab,
 				prob(20);/mob/living/simple_mob/animal/passive/hare,
-				prob(15);/mob/living/simple_mob/animal/passive/crab,
-				prob(15);/mob/living/simple_mob/animal/passive/penguin,
-				prob(15);/mob/living/simple_mob/animal/passive/mouse,
-				prob(15);/mob/living/simple_mob/animal/passive/dog/tamaskan,
-				prob(20);/mob/living/simple_mob/animal/sif/hooligan_crab)
+				prob(10);/mob/living/simple_mob/animal/sif/glitterfly,
+				prob(10);/mob/living/simple_mob/animal/sif/shantak/retaliate,
+				prob(10);/mob/living/simple_mob/animal/sif/sakimm,
+				prob(5);/mob/living/simple_mob/animal/passive/mouse,
+				prob(1);/mob/living/simple_mob/animal/sif/glitterfly/rare)
+				
+/obj/random/mob/sif/aquatic
+	name = "Random Aquatic Sif Animal"
+	desc = "This is a random aquatic animal that can be found on Sivian shores."
+	icon_state = "animal"
+
+	mob_returns_home = 1
+	mob_wander_distance = 10
+
+/obj/random/mob/sif/aquatic/item_to_spawn()
+	return pick(prob(30);/mob/living/simple_mob/animal/passive/crab/sif,
+				prob(25);/mob/living/simple_mob/animal/sif/duck,
+				prob(15);/mob/living/simple_mob/animal/sif/diyaab,
+				prob(5);/mob/living/simple_mob/animal/sif/hooligan_crab,
+				prob(1);/mob/living/simple_mob/animal/passive/karik)
 
 /obj/random/mob/sif/hostile
 	name = "Random Hostile Sif Animal"
