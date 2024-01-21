@@ -25,6 +25,13 @@
 
 	var/list/active_beams = list()
 
+	chunk_effect_range = 6
+	chunk_type = /obj/item/blob_chunk/ectoplasmic_horror
+
+/obj/item/blob_chunk/ectoplasmic_horror
+	default_blob = /datum/blob_type/ectoplasmic_horror
+	blob_effect_master_type = /datum/component/artifact_master/blob/ectoplasmic_horror
+
 /datum/blob_type/ectoplasmic_horror/on_pulse(var/obj/structure/blob/B)
 	if(B.type == /obj/structure/blob && (locate(/obj/structure/blob/node) in oview(2, get_turf(B))))
 		B.visible_message("<span class='alien'>The [name] quakes, before hardening.</span>")
@@ -67,3 +74,8 @@
 			animate(B,alpha = 10, alpha = initial_alpha, time = 10)
 		return 0
 	return ..()
+
+/datum/component/artifact_master/blob/ectoplasmic_horror
+	make_effects = list(
+		/datum/artifact_effect/rare/lifedrain
+	)

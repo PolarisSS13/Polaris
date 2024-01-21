@@ -2,7 +2,7 @@
 "b" = (/turf/template_noop,/area/submap/smol2)
 "c" = (/obj/structure/flora/tree/sif,/turf/template_noop,/area/submap/smol2)
 "d" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/smol2)
-"e" = (/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/obj/item/stack/material/wood/sif,/turf/template_noop,/area/submap/smol2)
+"e" = (/obj/item/stack/material/fuel/wood/sif,/obj/item/stack/material/fuel/wood/sif,/obj/item/stack/material/fuel/wood/sif,/obj/item/stack/material/fuel/wood/sif,/obj/item/stack/material/fuel/wood/sif,/obj/item/stack/material/fuel/wood/sif,/turf/template_noop,/area/submap/smol2)
 "f" = (/obj/structure/table/woodentable,/turf/template_noop,/area/submap/smol2)
 "g" = (/obj/item/stack/medical/splint,/obj/item/reagent_containers/pill/tramadol,/obj/random/firstaid,/turf/template_noop,/area/submap/smol2)
 "h" = (/obj/effect/decal/cleanable/blood,/turf/template_noop,/area/submap/smol2)

@@ -7,9 +7,10 @@
 
 	var/can_breakthrough = TRUE				// If false, the AI will not try to open a path to its goal, like opening doors.
 	var/violent_breakthrough = TRUE			// If false, the AI is not allowed to destroy things like windows or other structures in the way. Requires above var to be true.
+	var/can_demolish = FALSE				// If false, the AI is not allowed to destroy walls in the way. Requires the above var to be true.
 
 	var/stand_ground = FALSE				// If true, the AI won't try to get closer to an enemy if out of range.
-	
+
 // This does the actual attacking.
 /datum/ai_holder/proc/engage_target()
 	ai_log("engage_target() : Entering.", AI_LOG_DEBUG)
@@ -295,6 +296,27 @@
 			if(D.density)
 				ai_log("destroy_surroundings() : Attacking closed door.", AI_LOG_INFO)
 				return melee_attack(D)
+
+		if(can_demolish)	// Demolish walls, girders, barricades, and trees.
+			if(istype(problem_turf, /turf/simulated/wall))
+				ai_log("destroy_surroundings() : Attacking wall.", AI_LOG_INFO)
+				return melee_attack(problem_turf)
+
+			if(istype(problem_turf, /turf/simulated/mineral))
+				ai_log("destroy_surroundings() : Digging rock.", AI_LOG_INFO)
+				return melee_attack(problem_turf)
+
+			if(istype(obstacle, /obj/structure/girder))
+				ai_log("destroy_surroundings() : Attacking girder.", AI_LOG_INFO)
+				return melee_attack(obstacle)
+
+			if(istype(obstacle, /obj/structure/barricade))
+				ai_log("destroy_surroundings() : Attacking barricade.", AI_LOG_INFO)
+				return melee_attack(obstacle)
+
+			if(istype(obstacle, /obj/structure/flora/tree))
+				ai_log("destroy_surroundings() : Attacking tree.", AI_LOG_INFO)
+				return melee_attack(obstacle)
 
 	ai_log("destroy_surroundings() : Exiting due to nothing to attack.", AI_LOG_INFO)
 	return ATTACK_FAILED // Nothing to attack.

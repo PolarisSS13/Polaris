@@ -5,7 +5,7 @@
 	icon_state = "lantern"
 	desc = "A mining lantern."
 	brightness_on = 6			// luminosity when on
-	light_color = "FF9933" // A slight yellow/orange color.
+	light_color = COLOR_FIRE_ORANGE
 
 /*****************************Pickaxe********************************/
 

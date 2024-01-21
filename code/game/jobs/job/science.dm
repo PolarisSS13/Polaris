@@ -127,6 +127,7 @@
 	title = "Xenofauna Technician"
 	title_blurb = "A Xenofauna Technician works with the alien fauna living in the territory around the station, heading out in the field to tag and assess the \
 					local animal populations. They are also responsible for training and tending to the station's small drake population."
+	title_outfit = /decl/hierarchy/outfit/job/science/xenofauna
 
 //////////////////////////////////
 //			Roboticist

@@ -564,7 +564,7 @@
 /turf/simulated/floor/outdoors/dirt,
 /area/template_noop)
 "sK" = (
-/obj/structure/closet/crate/secure/loot,
+/obj/structure/closet/crate/secure/decalock/loot,
 /turf/simulated/floor/plating,
 /area/submap/BorgLab)
 "ta" = (
@@ -638,7 +638,7 @@
 /obj/effect/floor_decal/techfloor/orange{
 	dir = 1
 	},
-/obj/structure/closet/crate/secure/loot,
+/obj/structure/closet/crate/secure/decalock/loot,
 /turf/simulated/floor/reinforced,
 /area/submap/BorgLab)
 "wq" = (

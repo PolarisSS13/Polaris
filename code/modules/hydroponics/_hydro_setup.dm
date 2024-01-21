@@ -86,7 +86,7 @@ GLOBAL_LIST_INIT(plant_mob_products, list(
 GLOBAL_LIST_INIT(plant_item_products, list(
 	/obj/item/stack/material/cloth = 30,
 	/obj/item/stack/material/wax = 20,
-	/obj/item/stack/material/log = 30,
+	/obj/item/stack/material/fuel/log = 30,
 	/obj/item/stack/material/resin = 10,
 	/obj/item/material/shard/shrapnel = 2,
 	/obj/item/ore = 5,

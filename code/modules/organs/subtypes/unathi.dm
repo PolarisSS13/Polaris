@@ -25,6 +25,9 @@
 /obj/item/organ/internal/lungs/unathi
 	color = "#b3cbc3"
 
+/obj/item/organ/internal/voicebox/unathi
+	color = "#b3cbc3"
+
 /obj/item/organ/internal/liver/unathi
 	name = "filtration organ"
 	icon_state = "unathi_liver"

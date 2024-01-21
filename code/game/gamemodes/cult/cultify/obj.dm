@@ -14,7 +14,7 @@
 	new /obj/structure/cult/pylon(loc)
 	..()
 
-/obj/item/stack/material/wood/cultify()
+/obj/item/stack/material/fuel/wood/cultify()
 	return
 
 /obj/item/book/cultify()

@@ -1828,7 +1828,7 @@
 /obj/effect/floor_decal/spline/plain{
 	dir = 6
 	},
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /turf/simulated/floor/tiled/hydro,
 /area/surface/station/park)
 "aTC" = (
@@ -5832,7 +5832,6 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden,
 /obj/effect/floor_decal/industrial/warning/full,
-/obj/effect/catwalk_plated/dark,
 /obj/machinery/airlock_sensor/airlock_interior{
 	dir = 8;
 	id_tag = "eng_ew2_airlock_int_sensor";
@@ -5849,6 +5848,7 @@
 	icon_state = "1-2"
 	},
 /obj/effect/floor_decal/rust,
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
 "cKX" = (
@@ -6103,7 +6103,7 @@
 /turf/simulated/wall,
 /area/surface/station/engineering/engineering_monitoring)
 "cPd" = (
-/obj/structure/tanning_rack,
+/obj/structure/drying_rack,
 /turf/simulated/floor/outdoors/dirt/sif{
 	outdoors = 0
 	},
@@ -7126,9 +7126,6 @@
 /obj/machinery/recharger/wallcharger{
 	pixel_y = -28
 	},
-/obj/item/cassette_tape/random,
-/obj/item/taperecorder,
-/obj/item/megaphone,
 /obj/structure/closet/secure_closet/hos/cynosure,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
@@ -8244,9 +8241,7 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/atmos)
 "dJA" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /obj/structure/railing/grey{
 	dir = 4
 	},
@@ -14098,9 +14093,6 @@
 	icon_state = "4-8"
 	},
 /obj/effect/floor_decal/industrial/warning,
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
-	dir = 9
-	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
 	},
@@ -14108,6 +14100,9 @@
 	dir = 8
 	},
 /obj/structure/disposalpipe/segment{
+	dir = 4
+	},
+/obj/machinery/atmospherics/pipe/manifold/hidden/scrubbers{
 	dir = 4
 	},
 /obj/effect/catwalk_plated/dark,
@@ -15428,9 +15423,9 @@
 	icon_state = "0-4"
 	},
 /obj/structure/table/rack,
-/obj/item/gps/explorer,
-/obj/item/gps/explorer,
-/obj/item/gps/explorer,
+/obj/item/gps/xenofauna,
+/obj/item/gps/xenofauna,
+/obj/item/gps/xenofauna,
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
 /obj/item/melee/umbrella/random,
@@ -19087,10 +19082,10 @@
 /area/surface/station/crew_quarters/cafeteria)
 "iIT" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/universal,
-/obj/effect/catwalk_plated/dark,
 /obj/machinery/light/small{
 	dir = 8
 	},
+/obj/effect/catwalk_plated/dark,
 /obj/machinery/space_heater,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
@@ -19356,7 +19351,6 @@
 	d2 = 2;
 	icon_state = "1-2"
 	},
-/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/structure/disposalpipe/segment,
 /obj/machinery/door/blast/regular/open{
 	dir = 4;
@@ -19365,6 +19359,9 @@
 	name = "Engineering Lockdown"
 	},
 /obj/machinery/atmospherics/pipe/manifold4w/hidden/supply,
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
+	dir = 10
+	},
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/substation/engineering/gnd)
 "iNX" = (
@@ -21047,9 +21044,7 @@
 /turf/simulated/floor/tiled/monotile,
 /area/surface/station/park)
 "jDZ" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/open,
 /area/surface/outside/plains/station)
 "jEc" = (
@@ -21212,7 +21207,8 @@
 	icon_state = "2-8"
 	},
 /obj/structure/disposalpipe/segment{
-	dir = 4
+	dir = 8;
+	icon_state = "pipe-c"
 	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
@@ -21253,6 +21249,10 @@
 	initial_flooring = /decl/flooring/tiling/asteroidfloor
 	},
 /area/surface/station/garage)
+"jJj" = (
+/obj/structure/wood_fire/campfire,
+/turf/simulated/floor/outdoors/dirt/sif,
+/area/surface/outside/path/plains)
 "jJq" = (
 /obj/machinery/computer/operating{
 	dir = 8
@@ -21481,9 +21481,6 @@
 "jOp" = (
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 10
-	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
 	},
 /turf/simulated/floor/carpet,
 /area/surface/station/crew_quarters/heads/hos)
@@ -23000,7 +22997,7 @@
 /turf/simulated/floor/tiled/techfloor,
 /area/surface/station/ai/server_room)
 "kqm" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/machinery/atmospherics/pipe/simple/hidden/yellow,
 /obj/structure/disposalpipe/segment{
 	dir = 4
@@ -27843,12 +27840,12 @@
 	dir = 2;
 	icon_state = "pipe-c"
 	},
-/obj/effect/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 4;
 	d2 = 8;
 	icon_state = "4-8"
 	},
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
 "muC" = (
@@ -28997,9 +28994,6 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
-	dir = 4
-	},
-/obj/structure/disposalpipe/segment{
 	dir = 4
 	},
 /turf/simulated/floor/carpet,
@@ -30190,7 +30184,7 @@
 /turf/simulated/floor/tiled,
 /area/surface/station/engineering/engineering_monitoring)
 "nyb" = (
-/obj/machinery/smartfridge/drying_rack,
+/obj/machinery/smartfridge/drying_oven,
 /obj/effect/floor_decal/borderfloor{
 	dir = 4
 	},
@@ -30362,11 +30356,14 @@
 "nBA" = (
 /obj/effect/floor_decal/borderfloorblack,
 /obj/effect/floor_decal/corner/blue/border,
-/obj/structure/filingcabinet,
 /obj/item/storage/secure/safe{
 	pixel_x = 5;
 	pixel_y = -26
 	},
+/obj/structure/table/reinforced,
+/obj/item/cassette_tape/random,
+/obj/item/taperecorder,
+/obj/item/megaphone,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "nCe" = (
@@ -34718,9 +34715,6 @@
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
 	dir = 4
 	},
-/obj/structure/disposalpipe/segment{
-	dir = 4
-	},
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "pnA" = (
@@ -35054,9 +35048,7 @@
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/surgery)
 "psE" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/plains/plateau)
 "psJ" = (
@@ -37980,9 +37972,7 @@
 /obj/structure/railing/grey{
 	dir = 4
 	},
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/open,
 /area/surface/outside/plains/station)
 "qEU" = (
@@ -38297,10 +38287,6 @@
 	dir = 4
 	},
 /obj/machinery/papershredder,
-/obj/structure/disposalpipe/segment{
-	dir = 8;
-	icon_state = "pipe-c"
-	},
 /obj/machinery/firealarm{
 	dir = 4;
 	pixel_x = 24
@@ -38625,8 +38611,9 @@
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/structure/disposalpipe/junction/yjunction{
-	dir = 8
+/obj/structure/disposalpipe/junction{
+	dir = 1;
+	icon_state = "pipe-j2"
 	},
 /turf/simulated/floor/tiled/white,
 /area/surface/station/medical/etc)
@@ -39998,9 +39985,7 @@
 /turf/simulated/floor/plating,
 /area/surface/station/engineering/reactor_smes)
 "ryn" = (
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /obj/structure/railing/grey{
 	dir = 8
 	},
@@ -44050,6 +44035,7 @@
 	name = "Chapel";
 	sortType = "Chapel"
 	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers,
 /obj/effect/catwalk_plated,
 /obj/effect/zone_divider,
 /turf/simulated/floor/plating,
@@ -44533,9 +44519,7 @@
 /obj/structure/railing/grey{
 	dir = 8
 	},
-/obj/structure/railing/grey{
-	dir = 2
-	},
+/obj/structure/railing/grey,
 /turf/simulated/open,
 /area/surface/outside/plains/station)
 "tFB" = (
@@ -44956,6 +44940,8 @@
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/machinery/disposal,
+/obj/structure/disposalpipe/trunk,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "tMQ" = (
@@ -45227,12 +45213,12 @@
 	dir = 9
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply,
-/obj/effect/catwalk_plated/dark,
 /obj/structure/cable{
 	d1 = 1;
 	d2 = 8;
 	icon_state = "1-8"
 	},
+/obj/effect/catwalk_plated/dark,
 /turf/simulated/floor/plating,
 /area/surface/station/maintenance/east/gnd)
 "tVR" = (
@@ -46093,6 +46079,9 @@
 	name = "Engineering Lockdown"
 	},
 /obj/machinery/atmospherics/pipe/simple/hidden/supply{
+	dir = 5
+	},
+/obj/machinery/atmospherics/pipe/simple/hidden/scrubbers{
 	dir = 5
 	},
 /turf/simulated/floor/plating,
@@ -51232,8 +51221,7 @@
 /obj/effect/floor_decal/corner/blue/bordercorner2{
 	dir = 4
 	},
-/obj/machinery/disposal,
-/obj/structure/disposalpipe/trunk,
+/obj/structure/filingcabinet,
 /turf/simulated/floor/tiled/dark,
 /area/surface/station/crew_quarters/heads/hos)
 "wMa" = (
@@ -53348,6 +53336,7 @@
 	},
 /obj/item/deskbell,
 /obj/item/communicator/desktop{
+	desc = "A static communicator unit, seen in homes, offices and the receptions of businesses across the galaxy. The casing on this one is dented and covered in scuff marks.";
 	occupation = "bar";
 	pixel_x = -12;
 	static_name = "bar communicator"
@@ -74572,7 +74561,7 @@ fyc
 fyc
 fyc
 fyc
-fyc
+jJj
 fyc
 fyc
 vwy

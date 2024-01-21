@@ -20,5 +20,16 @@
 	attack_message_synth = ", and your internal systems are bombarded by ionizing radiation"
 	attack_verb = "splashes"
 
+	chunk_type = /obj/item/blob_chunk/radioactive_ooze
+
+/obj/item/blob_chunk/radioactive_ooze
+	default_blob = /datum/blob_type/radioactive_ooze
+	blob_effect_master_type = /datum/component/artifact_master/blob/radioactive_ooze
+
 /datum/blob_type/radioactive_ooze/on_pulse(var/obj/structure/blob/B)
 	SSradiation.radiate(B, 200)
+
+/datum/component/artifact_master/blob/radioactive_ooze
+	make_effects = list(
+		/datum/artifact_effect/rare/radiate
+	)

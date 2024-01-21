@@ -5,6 +5,8 @@
 	kitchen_tag = "corn"
 	chems = list("nutriment" = list(1,10), "cornoil" = list(3,15))
 	trash_type = /obj/item/corncob
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/popcorn
+	backyard_grilling_announcement = "pops enthusiastically!"
 
 /datum/seed/corn/New()
 	..()

@@ -106,6 +106,8 @@
 /area/submap/ChemSpill1
 	name = "POI - Ruptured Canister"
 	ambience = AMBIENCE_TECH_RUINS
+	area_blurb = "A acrid, chemical smell comes from this pool, the vegetation around it is all dead."
+	area_blurb_category = "chemspillpond"
 
 /area/submap/BuriedTreasure
 	name = "POI - Buried Treasure"
@@ -134,7 +136,28 @@
 /area/submap/VRDen
 	name = "POI - VR Den"
 	ambience = AMBIENCE_TECH_RUINS
-	
+
 /area/submap/reststop
 	name = "POI - Rest Stop"
 	ambience = AMBIENCE_SIF
+
+/area/submap/animalruin_den
+	name = "POI - Ruin Den"
+	ambience = AMBIENCE_SIF
+	
+/area/submap/crescent_den
+	name = "POI - Crescent Den"
+	ambience = AMBIENCE_SIF
+
+/area/submap/plainsdrake_den
+	name = "POI - Plains Drake Den"
+	ambience = AMBIENCE_SIF
+
+/area/submap/pondside_den
+	name = "POI - Pondside Den"
+	ambience = AMBIENCE_SIF
+
+/area/submap/swampy_den
+	name = "POI - Swamp Den"
+	ambience = AMBIENCE_SIF
+	

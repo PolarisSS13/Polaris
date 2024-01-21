@@ -34,8 +34,9 @@
 
 		if(holder.say_list)
 			holder.ISay(safepick(holder.say_list.say_threaten))
-			playsound(holder, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticeable to the target.
-			playsound(target, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistent.
+			if(holder.say_list.threaten_sound)
+				playsound(holder, holder.say_list.threaten_sound, 50, 1) // We do this twice to make the sound -very- noticeable to the target.
+				playsound(target, holder.say_list.threaten_sound, 50, 1) // Actual aim-mode also does that so at least it's consistent.
 	else // Otherwise we are waiting for them to go away or to wait long enough for escalate.
 		if(target in list_targets()) // Are they still visible?
 			var/should_escalate = FALSE
@@ -48,6 +49,10 @@
 				set_stance(STANCE_APPROACH)
 				if(holder.say_list)
 					holder.ISay(safepick(holder.say_list.say_escalate))
+					if(holder.say_list.attack_sound)
+						// As per threaten_sound above.
+						playsound(holder, holder.say_list.attack_sound, 50, 1)
+						playsound(target, holder.say_list.attack_sound, 50, 1)
 			else
 				return // Wait a bit.
 
@@ -57,8 +62,10 @@
 			set_stance(STANCE_IDLE)
 			if(holder.say_list)
 				holder.ISay(safepick(holder.say_list.say_stand_down))
-				playsound(holder, holder.say_list.stand_down_sound, 50, 1) // We do this twice to make the sound -very- noticeable to the target.
-				playsound(target, holder.say_list.stand_down_sound, 50, 1) // Actual aim-mode also does that so at least it's consistent.
+				if(holder.say_list.stand_down_sound)
+					// As per threaten_sound above.
+					playsound(holder, holder.say_list.stand_down_sound, 50, 1)
+					playsound(target, holder.say_list.stand_down_sound, 50, 1)
 
 // Determines what is deserving of a warning when STANCE_ALERT is active.
 /datum/ai_holder/proc/will_threaten(mob/living/the_target)

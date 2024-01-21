@@ -43,13 +43,10 @@
 	department_accounts = department_accounts || departments_managed
 
 /datum/job/proc/equip(var/mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
-	if(!outfit)
-		return FALSE
-	. = outfit.equip(H, title, alt_title)
-	return 1
+	return get_outfit(H, alt_title)?.equip(H, title, alt_title)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title)
+	RETURN_TYPE(/decl/hierarchy/outfit)
 	if(alt_title && alt_titles)
 		var/datum/alt_title/A = alt_titles[alt_title]
 		if(A && initial(A.title_outfit))
@@ -92,11 +89,8 @@
 	to_chat(H, "<span class='notice'><b>Your account number is: [M.account_number], your account pin is: [M.remote_access_pin]</b></span>")
 
 // overrideable separately so AIs/borgs can have cardborg hats without unnecessary new()/qdel()
-/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title)
-	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title)
-	if(!outfit)
-		return FALSE
-	. = outfit.equip_base(H, title, alt_title)
+/datum/job/proc/equip_preview(mob/living/carbon/human/H, var/alt_title, var/datum/preferences/prefs)
+	return get_outfit(H, alt_title)?.equip_base(H, title, alt_title)
 
 /datum/job/proc/get_access()
 	if(!config || config.jobs_have_minimal_access)
@@ -159,8 +153,8 @@
 
 /datum/job/proc/dress_mannequin(var/mob/living/carbon/human/dummy/mannequin/mannequin)
 	mannequin.delete_inventory(TRUE)
-	equip_preview(mannequin)
-	if(mannequin.back)
+	mannequin = equip_preview(mannequin)
+	if(istype(mannequin) && mannequin.back)
 		var/obj/O = mannequin.back
 		mannequin.drop_from_inventory(O)
 		qdel(O)

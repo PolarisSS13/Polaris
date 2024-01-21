@@ -9,6 +9,9 @@
 	drop_sound = 'sound/items/drop/leather.ogg'
 	pickup_sound = 'sound/items/pickup/leather.ogg'
 
+/obj/item/stack/material/leather/get_drying_state(var/obj/rack)
+	return "leather_dry"
+
 /obj/item/stack/material/cloth
 	name = "cloth"
 	icon_state = "sheet-cloth"

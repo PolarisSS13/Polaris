@@ -20,6 +20,12 @@
 	attack_message_synth = ", and the fluid wears down on your components"
 	attack_verb = "splashes"
 
+	chunk_type = /obj/item/blob_chunk/pressurized_slime
+
+/obj/item/blob_chunk/pressurized_slime
+	default_blob = /datum/blob_type/pressurized_slime
+	blob_effect_master_type = /datum/component/artifact_master/blob/pressurized_slime
+
 /datum/blob_type/pressurized_slime/on_attack(obj/structure/blob/B, mob/living/victim, def_zone)
 	victim.water_act(5)
 	var/turf/simulated/T = get_turf(victim)
@@ -46,3 +52,8 @@
 			T.wet_floor()
 		for(var/atom/movable/AM in T)
 			AM.water_act(2)
+
+/datum/component/artifact_master/blob/pressurized_slime
+	make_effects = list(
+		/datum/artifact_effect/common/extinguisher
+	)

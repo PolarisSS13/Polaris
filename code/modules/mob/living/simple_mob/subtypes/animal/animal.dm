@@ -49,6 +49,13 @@
 /mob/living/simple_mob/animal/leaves_tracks_type()
 	return tracks_type
 
+
+/mob/living/simple_mob/animal/handle_regular_hud_updates()
+	if(!client)
+		return FALSE
+	. = ..()
+	set_fullscreen(druggy, "high", /obj/screen/fullscreen/high)
+
 /mob/living/simple_mob/animal/proc/has_appetite()
 	return TRUE
 

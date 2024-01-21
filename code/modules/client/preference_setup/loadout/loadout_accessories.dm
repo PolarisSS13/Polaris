@@ -435,3 +435,19 @@
 	..()
 	gear_tweaks += gear_tweak_free_color_choice
 
+/datum/gear/accessory/charm
+	display_name = "charm selection"
+	description = "Choose from a selection of charm necklaces"
+	path = /obj/item/clothing/accessory/charm
+	cost = 1
+
+/datum/gear/accessory/charm/New()
+	..()
+	var/list/charmtype = list(
+	"wooden charm" = /obj/item/clothing/accessory/charm,
+	"sifwood charm" = /obj/item/clothing/accessory/charm/sifwood,
+	"stone charm" = /obj/item/clothing/accessory/charm/stone,
+	"metal charm" = /obj/item/clothing/accessory/charm/metal,
+	"bone charm" = /obj/item/clothing/accessory/charm/bone
+	)
+	gear_tweaks += new/datum/gear_tweak/path(charmtype)

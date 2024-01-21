@@ -617,3 +617,29 @@
 	desc = "An oversized bow that sits on the small of your back. Seems like something a magical girl would wear."
 	icon_state = "backbow"
 	slot = ACCESSORY_SLOT_DECOR
+
+/obj/item/clothing/accessory/charm
+	name = "wooden charm"
+	desc = "A simple carved wooden charm attached to a length of string."
+	icon_state = "wooden_charm"
+	w_class = ITEMSIZE_SMALL
+	slot_flags = SLOT_MASK | SLOT_TIE
+
+/obj/item/clothing/accessory/charm/sifwood
+	name = "sivian wood charm"
+	icon_state = "sifwood_charm"
+
+/obj/item/clothing/accessory/charm/stone
+	name = "stone charm"
+	desc = "A small carved stone attached to a length of string."
+	icon_state = "stone_charm"
+
+/obj/item/clothing/accessory/charm/metal
+	name = "metal charm"
+	desc = "A small disc of metal attached to a length of string."
+	icon_state = "metal_charm"
+
+/obj/item/clothing/accessory/charm/bone
+	name = "bone charm"
+	desc = "A carved bone charm attached to a length of string."
+	icon_state = "bone_charm"

@@ -65,7 +65,7 @@
 	shadeColour = input(user, "Please select the shade colour.", "Crayon colour") as color
 	return
 
-/obj/item/pen/crayon/afterattack(atom/target, mob/user as mob, proximity)
+/obj/item/pen/crayon/afterattack(atom/target, mob/user as mob, proximity, click_parameters)
 	if(!proximity) return
 	if(istype(target,/turf/simulated/floor))
 		var/drawtype = input("Choose what you'd like to draw.", "Crayon scribbles") in list("graffiti","rune","letter","arrow")
@@ -93,7 +93,18 @@
 					return
 				to_chat(user, "You start drawing an arrow on the [target.name].")
 		if(instant || do_after(user, 50))
-			new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
+
+			var/list/mouse_control = params2list(click_parameters)
+			var/p_x = 0
+			var/p_y = 0
+			if(mouse_control["icon-x"])
+				p_x = text2num(mouse_control["icon-x"]) - 16
+			if(mouse_control["icon-y"])
+				p_y = text2num(mouse_control["icon-y"]) - 16
+
+			var/atom/new_graffiti = new /obj/effect/decal/cleanable/crayon(target,colour,shadeColour,drawtype)
+			new_graffiti.pixel_x = p_x
+			new_graffiti.pixel_y = p_y
 			to_chat(user, "You finish drawing.")
 
 			if(config.log_graffiti)

@@ -11,11 +11,17 @@
 	ai_aggressiveness = 50
 	damage_type = BURN
 	burn_multiplier = 0 // Fire immunity
-	chunk_active_ability_cooldown = 4 MINUTES
+	chunk_effect_cooldown = 4 MINUTES
 	attack_message = "The blazing oil splashes you with its burning oil"
 	attack_message_living = ", and you feel your skin char and melt"
 	attack_message_synth = ", and your external plating melts"
 	attack_verb = "splashes"
+
+	chunk_type = /obj/item/blob_chunk/blazing_oil
+
+/obj/item/blob_chunk/blazing_oil
+	default_blob = /datum/blob_type/blazing_oil
+	blob_effect_master_type = /datum/component/artifact_master/blob/blazing_oil
 
 /datum/blob_type/blazing_oil/on_attack(obj/structure/blob/B, mob/living/victim)
 	victim.fire_act() // Burn them.
@@ -23,3 +29,8 @@
 /datum/blob_type/blazing_oil/on_water(obj/structure/blob/B, amount)
 	spawn(1)
 		B.adjust_integrity(-(amount * 5))
+
+/datum/component/artifact_master/blob/blazing_oil
+	make_effects = list(
+		/datum/artifact_effect/common/heat
+	)

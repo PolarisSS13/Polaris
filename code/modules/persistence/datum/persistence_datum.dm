@@ -9,6 +9,8 @@
 	var/entries_decay_at						// Set in rounds. This controls when item messages start getting scrambled.
 	var/entry_decay_weight = 0.5
 	var/has_admin_data
+	var/area_restricted = TRUE
+	var/station_restricted = TRUE
 
 /datum/persistent/New()
 	SetFilename()
@@ -71,14 +73,15 @@
 /datum/persistent/proc/IsValidEntry(var/atom/entry)
 	if(!istype(entry))
 		return FALSE
-	if(GetEntryAge(entry) >= entries_expire_at)
+	if(!isnull(entries_expire_at) && GetEntryAge(entry) >= entries_expire_at)
 		return FALSE
 	var/turf/T = get_turf(entry)
-	if(!T || !(T.z in using_map.station_levels) )
+	if(station_restricted && (!T || !(T.z in using_map.station_levels) ))
 		return FALSE
-	var/area/A = get_area(T)
-	if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
-		return FALSE
+	if(area_restricted)
+		var/area/A = get_area(T)
+		if(!A || (A.area_flags & AREA_FLAG_IS_NOT_PERSISTENT))
+			return FALSE
 	return TRUE
 
 /datum/persistent/proc/GetEntryAge(var/atom/entry)
@@ -126,7 +129,9 @@
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 	for(var/thing in my_tracks)
-		. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
+		var/data = GetAdminDataStringFor(thing, can_modify, user)
+		if(!isnull(data))
+			. += "<tr>[GetAdminDataStringFor(thing, can_modify, user)]</tr>"
 	. += "<tr><td colspan = 4><hr></td></tr>"
 
 

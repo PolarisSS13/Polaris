@@ -1,0 +1,6 @@
+author: listerla
+
+delete-after: True
+
+changes:
+  - imageadd: "Updated some device icons, including geiger counters and pinpointers, with sprites from Aurora and /tg/station."

@@ -1,5 +1,5 @@
 "a" = (/turf/template_noop,/area/submap/hotspring)
-"c" = (/obj/structure/bonfire/sifwood,/turf/simulated/floor/outdoors/dirt,/area/submap/hotspring)
+"c" = (/obj/structure/wood_fire/bonfire/sifwood,/turf/simulated/floor/outdoors/dirt,/area/submap/hotspring)
 "d" = (/obj/effect/vfx/steam,/turf/simulated/floor/water/shoreline/corner{dir = 4},/area/submap/hotspring)
 "e" = (/obj/structure/window/reinforced{dir = 8; health = 1e+006},/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/outdoors/grass/sif,/area/submap/hotspring)
 "f" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood/sif,/area/submap/hotspring)

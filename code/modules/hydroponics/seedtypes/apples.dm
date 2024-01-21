@@ -45,7 +45,9 @@
 	name = "sifbulb"
 	seed_name = "sivian pod"
 	display_name = "sivian pod"
-	kitchen_tag = "apple"
+	kitchen_tag = "sifpod"
+	backyard_grilling_product = /obj/item/reagent_containers/food/snacks/roast_sifpod
+	backyard_grilling_announcement = "crackles and pops as the roast hull splits open."
 	chems = list("nutriment" = list(1,5),"sifsap" = list(10,20))
 
 /datum/seed/apple/sif/New()

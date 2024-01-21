@@ -51,7 +51,7 @@
 "aY" = (/obj/machinery/door/airlock/hatch,/turf/simulated/floor/tiled/white/airless,/area/wreck/main)
 "aZ" = (/obj/structure/window/phoronreinforced,/turf/simulated/floor/tiled/airless,/area/wreck/main)
 "ba" = (/obj/item/flashlight/flare,/turf/simulated/floor/tiled/airless,/area/wreck/main)
-"bb" = (/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/structure/ore_box,/obj/item/ore/iron,/obj/item/ore/iron,/obj/item/ore/iron,/turf/simulated/floor/airless,/area/wreck/main)
+"bb" = (/obj/item/stack/material/fuel/wood,/obj/item/stack/material/fuel/wood,/obj/structure/ore_box,/obj/item/ore/iron,/obj/item/ore/iron,/obj/item/ore/iron,/turf/simulated/floor/airless,/area/wreck/main)
 "bc" = (/obj/item/clothing/head/helmet/space/deathsquad,/obj/structure/table/rack,/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/tiled/airless,/area/wreck/main)
 "bd" = (/obj/structure/grille,/turf/simulated/floor/airless{icon_state = "white"},/area/mine/explored)
 "be" = (/obj/machinery/crystal,/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 1},/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 4},/obj/structure/window/phoronreinforced,/obj/effect/decal/cleanable/liquid_fuel/flamethrower_fuel,/turf/simulated/floor/reinforced/phoron,/area/wreck/main)
@@ -91,7 +91,7 @@
 "bM" = (/obj/effect/decal/cleanable/molten_item,/turf/simulated/floor/airless,/area/wreck/main)
 "bN" = (/obj/structure/window/phoronreinforced{ icon_state = "phoronrwindow"; dir = 1},/turf/simulated/floor/tiled/airless,/area/wreck/main)
 "bR" = (/obj/structure/largecrate/hoverpod,/turf/simulated/floor/airless,/area/wreck/main)
-"bS" = (/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/item/stack/material/wood,/obj/effect/decal/mecha_wreckage/hoverpod,/turf/simulated/floor/airless,/area/wreck/main)
+"bS" = (/obj/item/stack/material/fuel/wood,/obj/item/stack/material/fuel/wood,/obj/item/stack/material/fuel/wood,/obj/effect/decal/mecha_wreckage/hoverpod,/turf/simulated/floor/airless,/area/wreck/main)
 "bT" = (/obj/item/stack/material/steel,/obj/item/stack/material/steel,/turf/simulated/floor/tiled/airless,/area/wreck/main)
 "bU" = (/obj/structure/table/rack,/obj/item/clothing/glasses/welding,/turf/simulated/floor/tiled/airless,/area/wreck/main)
 "bV" = (/obj/machinery/light{dir = 8; icon_state = "tube1"; pixel_y = 0},/turf/simulated/floor/airless,/area/wreck/main)
@@ -560,4 +560,3 @@ aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
 "}
-

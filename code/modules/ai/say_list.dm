@@ -35,6 +35,7 @@
 
 	var/threaten_sound = null			// Sound file played when the mob's AI calls threaten_target() for the first time.
 	var/stand_down_sound = null			// Sound file played when the mob's AI loses sight of the threatened target.
+	var/attack_sound = null             // Sound file played when the mob's AI escalates to attacking from threatening.
 
 
 

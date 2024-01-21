@@ -417,7 +417,7 @@
 
 /obj/structure/flora/pottedplant/subterranean
 	name = "subterranean potted plant"
-	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
+	desc = "This is a subterranean plant. Its bulbous ends glow faintly."
 	icon_state = "plant-20"
 	light_range = 2
 	light_power = 0.6
@@ -493,7 +493,7 @@
 
 /obj/structure/flora/sif/subterranean
 	name = "subterranean bulbs"
-	desc = "This is a subterranean plant. It's bulbous ends glow faintly."
+	desc = "This is a subterranean plant. Its bulbous ends glow faintly."
 	icon_state = "glowplant"
 	light_range = 2
 	light_power = 0.6

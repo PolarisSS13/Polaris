@@ -10,6 +10,9 @@ var/global/list/GPS_list = list()
 	origin_tech = list(TECH_MATERIAL = 2, TECH_BLUESPACE = 2, TECH_MAGNET = 1)
 	matter = list(MAT_STEEL = 500)
 
+	var/tag_category        // Any special category for this tracker to sit in (used by xenofauna tags)
+	var/list/tag_categories // Any special categories this tracker should show (used in xenofauna GPS)
+
 	var/gps_tag = "GEN0"
 	var/emped = FALSE
 	var/tracking = FALSE		// Will not show other signals or emit its own signal if false.
@@ -26,21 +29,25 @@ var/global/list/GPS_list = list()
 
 /obj/item/gps/Initialize()
 	. = ..()
-	compass = new(src)
+	create_compass()
 	GPS_list += src
-	name = "global positioning system ([gps_tag])"
+	name = "[initial(name)] ([gps_tag])"
 	update_holder()
 	update_icon()
 
+/obj/item/gps/proc/create_compass()
+	compass = new(src)
+
 /obj/item/gps/proc/check_visible_to_holder()
-	. = (holder && (holder.get_active_hand() == src || holder.get_inactive_hand() == src))
+	. = istype(compass) && holder && (holder.get_active_hand() == src || holder.get_inactive_hand() == src)
 
 /obj/item/gps/proc/update_holder()
 
 	if(holder && loc != holder)
 		GLOB.moved_event.unregister(holder, src)
 		GLOB.dir_set_event.unregister(holder, src)
-		holder.client?.screen -= compass
+		if(compass)
+			holder.client?.screen -= compass
 		holder = null
 
 	if(istype(loc, /mob))
@@ -55,12 +62,12 @@ var/global/list/GPS_list = list()
 		if(holder.client)
 			if(check_visible_to_holder())
 				holder.client.screen |= compass
-			else
+			else if(compass)
 				holder.client.screen -= compass
 	else
 		STOP_PROCESSING(SSobj, src)
 		is_in_processing_list = FALSE
-		if(holder?.client)
+		if(holder?.client && compass)
 			holder.client.screen -= compass
 
 /obj/item/gps/pickup()
@@ -96,7 +103,7 @@ var/global/list/GPS_list = list()
 	QDEL_NULL(compass)
 
 /obj/item/gps/proc/can_track(var/obj/item/gps/other, var/reachable_z_levels)
-	if(!other.tracking || other.emped || other.hide_signal)
+	if(!other.tracking || other.emped || other.hide_signal || (other.tag_category && !(other.tag_category in tag_categories)))
 		return FALSE
 	var/turf/origin = get_turf(src)
 	var/turf/target = get_turf(other)
@@ -110,7 +117,8 @@ var/global/list/GPS_list = list()
 	return (target.z in reachable_z_levels)
 
 /obj/item/gps/proc/update_compass(var/update_compass_icon)
-	compass.hide_waypoints(FALSE)
+	if(compass)
+		compass.hide_waypoints(FALSE)
 	var/turf/my_turf = get_turf(src)
 	for(var/thing in tracking_devices)
 		var/obj/item/gps/gps = locate(thing)
@@ -120,13 +128,15 @@ var/global/list/GPS_list = list()
 			continue
 		var/turf/gps_turf = get_turf(gps)
 		var/gps_tag = LAZYACCESS(showing_tracked_names, thing) ? gps.gps_tag : null
-		if(istype(gps_turf))
-			compass.set_waypoint("\ref[gps]", gps_tag, gps_turf.x, gps_turf.y, gps_turf.z, LAZYACCESS(tracking_devices, "\ref[gps]"))
-		else
-			compass.set_waypoint("\ref[gps]", gps_tag, 0, 0, 0, LAZYACCESS(tracking_devices, "\ref[gps]"))
-		if(can_track(gps) && gps_turf && my_turf && gps_turf.z == my_turf.z)
-			compass.show_waypoint("\ref[gps]")
-	compass.rebuild_overlay_lists(update_compass_icon)
+		if(compass)
+			if(istype(gps_turf))
+				compass.set_waypoint("\ref[gps]", gps_tag, gps_turf.x, gps_turf.y, gps_turf.z, LAZYACCESS(tracking_devices, "\ref[gps]"))
+			else
+				compass.set_waypoint("\ref[gps]", gps_tag, 0, 0, 0, LAZYACCESS(tracking_devices, "\ref[gps]"))
+			if(can_track(gps) && gps_turf && my_turf && gps_turf.z == my_turf.z)
+				compass.show_waypoint("\ref[gps]")
+	if(compass)
+		compass.rebuild_overlay_lists(update_compass_icon)
 
 /obj/item/gps/AltClick(mob/user)
 	toggletracking(user)
@@ -137,7 +147,7 @@ var/global/list/GPS_list = list()
 	if(emped)
 		to_chat(user, "It's busted!")
 		return
-	
+
 	toggle_tracking()
 	if(tracking)
 		to_chat(user, "[src] is no longer tracking, or visible to other GPS devices.")
@@ -194,7 +204,7 @@ var/global/list/GPS_list = list()
 	dat["curr_z"] = curr.z
 	dat["curr_z_name"] = strip_improper(using_map.get_zlevel_name(curr.z))
 	dat["z_level_detection"] = using_map.get_map_levels(curr.z, long_range)
-	
+
 	var/list/gps_list = list()
 	for(var/obj/item/gps/G in GPS_list - src)
 
@@ -250,7 +260,7 @@ var/global/list/GPS_list = list()
 				dat += "<tr>"
 				var/gps_ref = "\ref[gps["ref"]]"
 				dat += "<td>[gps["gps_tag"]]</td><td>[gps["area_name"]]</td>"
-				
+
 				if(istype(gps_data["ref"], /obj/item/gps/internal/poi))
 					dat += "<td>[gps["local"] ? "[gps["direction"]] Dist: [round(gps["distance"], 10)]m" : "[gps["z_name"]]"]</td>"
 				else
@@ -294,7 +304,8 @@ var/global/list/GPS_list = list()
 	if(href_list["stop_track"])
 		var/gps_ref = href_list["stop_track"]
 		var/obj/item/gps/gps = locate(gps_ref)
-		compass.clear_waypoint(gps_ref)
+		if(compass)
+			compass.clear_waypoint(gps_ref)
 		LAZYREMOVE(tracking_devices, gps_ref)
 		LAZYREMOVE(showing_tracked_names, gps_ref)
 		if(istype(gps) && !QDELETED(gps))
@@ -347,7 +358,7 @@ var/global/list/GPS_list = list()
 
 /obj/item/gps/proc/SetTag(new_tag)
 	gps_tag = uppertext(copytext(sanitize(new_tag), 1, 11))
-	name = "global positioning system ([gps_tag])"
+	name = "[initial(name)] ([gps_tag])"
 
 
 /obj/item/gps/on // Defaults to off to avoid polluting the signal list with a bunch of GPSes without owners. If you need to spawn active ones, use these.
@@ -391,6 +402,11 @@ var/global/list/GPS_list = list()
 /obj/item/gps/science
 	icon_state = "gps-sci"
 	gps_tag = "SCI0"
+
+/obj/item/gps/xenofauna
+	icon_state = "gps-sci"
+	gps_tag = "XEN0"
+	tag_categories = list("XENOFAUNA")
 
 /obj/item/gps/science/on
 	tracking = TRUE

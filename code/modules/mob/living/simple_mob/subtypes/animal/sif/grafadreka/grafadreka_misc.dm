@@ -43,10 +43,21 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 
 
 /datum/say_list/grafadreka
-	speak = list("Chff!", "Skhh.", "Rrrss...")
-	emote_see = list("scratches its ears","grooms its spines", "sways its tail", "claws at the ground")
-	emote_hear = list("hisses", "rattles", "rasps", "barks", "warbles")
+	speak            = list("Chff!", "Skhh.", "Rrrss...")
+	emote_see        = list("scratches its ears","grooms its spines", "sways its tail", "claws at the ground")
+	emote_hear       = list("hisses", "rattles", "rasps", "barks", "warbles")
+	say_understood   = list("Rrrn!", "Hsst!")
+	say_cannot       = list("Gruwwrrn...")
+	say_maybe_target = list("Chh?")
+	say_got_target   = list("RRSST!")
+	say_threaten     = list("Rrrrnrrnnn...", "Chssshhhk...")
+	say_stand_down   = list("Chff!")
+	say_escalate     = list("SKHH!", "CHFF!")
+	say_retreat      = list("Skhh!", "Chff!")
 
+	threaten_sound   = 'sound/voice/drakes/drake_warn.ogg'
+	attack_sound     = 'sound/voice/drakes/drake_rattle.ogg'
+	stand_down_sound = 'sound/voice/drakes/drake_grumble.ogg'
 
 /decl/mob_organ_names/grafadreka
 	hit_zones = list(
@@ -94,7 +105,7 @@ Field studies suggest analytical abilities on par with some species of cepholapo
 	eyeblur = 2
 	fire_sound = 'sound/voice/drakes/hatchling_spit.ogg'
 
-/mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours()
+/mob/living/simple_mob/animal/sif/grafadreka/rainbow/setup_colours(var/force = FALSE)
 	glow_colour = get_random_colour(TRUE)
 	fur_colour =  get_random_colour(TRUE)
 	claw_colour = get_random_colour(TRUE)

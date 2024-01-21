@@ -45,6 +45,8 @@
 	always_unpowered = TRUE
 	area_flags = AREA_FLAG_IS_RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	outdoors = OUTDOORS_YES
+	area_blurb = "The cold Sivian air blows around you. The occasional animal call can be heard in the distance. Far above you, the sky looms, sometimes a passing bird can be seen."
+	area_blurb_category = "outside"
 
 // The area near the station, so POIs don't show up right next to the outpost.
 /area/surface/outside/plains/station
@@ -97,6 +99,8 @@
 /area/surface/outside/river
 	name = "River"
 	icon_state = "bluenew"
+	area_blurb = "Cold water flows along this river, winding its way through the countryside."
+	area_blurb_category = "river"
 
 /area/surface/outside/river/gautelfr
 	name = "Gautelfr River"
@@ -104,6 +108,8 @@
 /area/surface/cave
 	area_flags = AREA_FLAG_IS_RAD_SHIELDED | AREA_FLAG_IS_NOT_PERSISTENT
 	always_unpowered = TRUE
+	area_blurb = "Cold, still air sits in these dark and dusty cavern tunnels."
+	area_blurb_category = "caves"
 
 // The bottom half that connects to the outpost and is safer.
 /area/surface/cave/explored/normal
@@ -436,6 +442,8 @@
 /area/surface/station/crew_quarters/pool
 	name = "\improper Pool"
 	icon_state = "pool"
+	area_blurb = "The smell of warm pool water sits in this room. The windows are slightly misted from condensation."
+	area_blurb_category = "pool"
 
 /area/surface/station/holodeck_control
 	name = "\improper Holodeck Control"
@@ -452,6 +460,8 @@
 /area/surface/station/janitor/
 	name = "\improper Custodial Closet"
 	icon_state = "janitor"
+	area_blurb = "A strong, concentrated smell of many cleaning supplies sit within this room."
+	area_blurb_category = "janitor"
 
 /area/surface/station/library
  	name = "\improper Library"
@@ -472,6 +482,8 @@
 	name = "\improper Park"
 	icon_state = "garden"
 	sound_env = STANDARD_STATION
+	area_blurb = "Sounds echo slightly within this large and open atrium, Sif's sky can be seen above through the curved glass roof windows."
+	area_blurb_category = "atrium"
 
 /area/surface/station/park/skybridge
 	name = "\improper Skybridge"
@@ -674,6 +686,8 @@
 	sound_env = TUNNEL_ENCLOSED
 	turf_initializer = new /datum/turf_initializer/maintenance()
 	ambience = AMBIENCE_MAINTENANCE
+	area_blurb = "Dark, tight, and filled with barely filtered air. Around you hisses compressed air through pipes, a buzz of electrical charge through wires, winding through damp maintenance corridors."
+	area_blurb_category = "maintenance"
 
 /area/surface/station/maintenance/atmos
 	name = "Atmospherics Maintenance"
@@ -854,6 +868,8 @@
 	icon_state = "medbay"
 	music = 'sound/ambience/signal.ogg'
 	holomap_color = HOLOMAP_AREACOLOR_MEDICAL
+	area_blurb = "The smells of a hospital waft through the air: strong sterilizing agents, various medicines, and sterile gloves. It's not a pleasant smell, but one you could grow to ignore."
+	area_blurb_category = "medical"
 
 /area/surface/station/medical/chemistry
 	name = "\improper Medical - Chemistry"
@@ -901,6 +917,8 @@
 	name = "\improper Medbay - Psych Room"
 	icon_state = "medbay3"
 	music = 'sound/ambience/signal.ogg'
+	area_blurb = "With a carpeted floor and comfy furniture, this room has a warmer feeling compared to the sterility of the rest of the medical wing."
+	area_blurb_category = "psych"
 
 /area/surface/station/medical/restroom
 	name = "\improper Medbay - Restroom"
@@ -996,6 +1014,8 @@
 /area/surface/outside/station/roof
 	name = "\improper Roof"
 	icon_state = "dark128"
+	area_blurb = "The sivian wilds stretch out below you from the station's rooftops. Trees light the landscape with a soft blue glow."
+	area_blurb_category = "roof"
 
 /area/surface/outside/station/reactorpond
 	name = "\improper Reactor Cooling Ponds"
@@ -1058,6 +1078,8 @@
 	name = "\improper Cargo Bay"
 	icon_state = "quartstorage"
 	sound_env = LARGE_ENCLOSED
+	area_blurb = "Scuff marks scar the floor from the movement of many crates."
+	area_blurb_category = "cargo"
 
 /area/surface/station/quartermaster/foyer
 	name = "\improper Cargo Bay Foyer"
@@ -1212,6 +1234,8 @@
 /area/surface/station/rnd/robotics
 	name = "\improper Research - Robotics Lab"
 	icon_state = "robotics"
+	area_blurb = "The scents of oil and machine lubricant fill the air in this workshop."
+	area_blurb_category = "robotics"
 
 /area/surface/station/rnd/chargebay
 	name = "\improper Research - Mech Bay"

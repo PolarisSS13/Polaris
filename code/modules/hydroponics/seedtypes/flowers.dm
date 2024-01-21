@@ -58,6 +58,7 @@
 	seed_name = "cavebulbs"
 	display_name = "cavebulbs"
 	kitchen_tag = null
+	chems = list("nutriment" = list(1,10), "spacespice" = list(1,10))
 
 /datum/seed/flower/sunflower/cavebulbs/New()
 	..()

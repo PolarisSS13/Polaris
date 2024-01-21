@@ -10,7 +10,7 @@
 "j" = (/obj/random/outcrop,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
 "r" = (/obj/random/medical/anom,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
 "x" = (/obj/random/multiple/corp_crate,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
-"B" = (/obj/structure/bonfire/sifwood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
+"B" = (/obj/structure/wood_fire/bonfire/sifwood,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
 "C" = (/obj/structure/loot_pile/surface/bones,/obj/item/clothing/suit/storage/hooded/wintercoat/science,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
 "E" = (/obj/random/material/precious,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)
 "I" = (/obj/random/maintenance/anom,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/IceCave1A)

@@ -88,6 +88,15 @@
 	emote_see = list("scratches its ear","flutters its tails", "flicks an ear", "shakes out its hair")
 	emote_hear = list("chirps", "clicks", "grumbles", "chitters")
 
+	say_understood   = list("Kurr...", "Ksss...")
+	say_cannot       = list("Kurr...", "Ksss...")
+	say_maybe_target = list("Kurr?", "Ksss?")
+	say_got_target   = list("Kurr!", "Ksss!")
+	say_threaten     = list("Kurr...", "Ksss...")
+	say_stand_down   = list("Kurr!", "Ksss!")
+	say_escalate     = list("KURR!", "KSSS!")
+	say_retreat      = list("KURR!", "KSSS!")
+
 /mob/living/simple_mob/animal/sif/kururak/leader	// Going to be the starting leader. Has some base buffs to make it more likely to stay the leader.
 	maxHealth = 250
 	health = 250
@@ -342,16 +351,16 @@
  */
 
 /datum/ai_holder/simple_mob/intentional/kururak
-	hostile = FALSE
-	retaliate = TRUE
-	cooperative = TRUE
-	can_flee = TRUE
+	hostile         = FALSE
+	retaliate       = TRUE
+	cooperative     = TRUE
+	can_flee        = TRUE
 	flee_when_dying = TRUE
+	threaten        = TRUE
 
 /datum/ai_holder/simple_mob/intentional/kururak/handle_special_strategical()
 	follow_distance = rand(initial(follow_distance), initial(follow_distance) + 2)
 	var/mob/living/simple_mob/animal/sif/kururak/K = holder
-
 	if(istype(K))
 		var/mob/living/simple_mob/animal/sif/kururak/highest_instinct = K.detect_instinct()
 		if(highest_instinct == K)

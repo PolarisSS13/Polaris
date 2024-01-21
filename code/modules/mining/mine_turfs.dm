@@ -356,6 +356,19 @@ var/global/list/mining_overlay_cache = list()
 		excavation_level += Proj.excavation_amount
 		update_archeo_overlays(Proj.excavation_amount)
 
+/turf/simulated/mineral/attack_generic(var/mob/living/L, var/damage = 0, var/attack_text = "clawed")
+	. = ..()
+	if(!damage)
+		visible_message(SPAN_NOTICE("\The [L] [attack_text] \the [src] ineffectively."))
+		return FALSE
+
+	else
+		excavation_level = excavation_level + damage
+		visible_message(SPAN_WARNING("\The [L] [attack_text] \the [src], scattering [pick("gravel", "sand", "dust")]!"))
+		if(excavation_level >= 200)
+			GetDrilled(0)
+		return TRUE
+
 /turf/simulated/mineral/Bumped(AM)
 
 	. = ..()
@@ -679,7 +692,7 @@ var/global/list/mining_overlay_cache = list()
 				excavate_find(prob(5), finds[1])
 	else if(rand(1,500) == 1)
 		visible_message("<span class='notice'>An old dusty crate was buried within!</span>")
-		new /obj/structure/closet/crate/secure/loot(src)
+		new /obj/structure/closet/crate/secure/decalock/loot(src)
 
 	make_floor()
 	update_icon(1)

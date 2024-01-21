@@ -9,6 +9,7 @@
 	slot_flags = SLOT_HOLSTER
 	drop_sound = 'sound/items/drop/herb.ogg'
 	pickup_sound = 'sound/items/pickup/herb.ogg'
+	drying_wetness = 45
 
 	var/plantname
 	var/datum/seed/seed
@@ -38,6 +39,9 @@
 
 	name = "[seed.seed_name]"
 	trash = seed.get_trash_type()
+	backyard_grilling_product      = seed.backyard_grilling_product
+	backyard_grilling_rawness    = seed.backyard_grilling_rawness
+	backyard_grilling_announcement = seed.backyard_grilling_announcement
 
 	update_icon()
 
@@ -60,6 +64,9 @@
 			bitesize = 1+round(reagents.total_volume / 2, 1)
 		if(seed.get_trait(TRAIT_STINGS))
 			force = 1
+
+/obj/item/reagent_containers/food/snacks/grown/get_drying_state(var/obj/rack)
+	return seed?.drying_state || "grown"
 
 /obj/item/reagent_containers/food/snacks/grown/proc/update_desc()
 
@@ -206,9 +213,9 @@
 					var/flesh_colour = seed.get_trait(TRAIT_FLESH_COLOUR)
 					if(!flesh_colour) flesh_colour = seed.get_trait(TRAIT_PRODUCT_COLOUR)
 					for(var/i=0,i<2,i++)
-						var/obj/item/stack/material/wood/NG = new (user.loc)
+						var/obj/item/stack/material/fuel/wood/NG = new (user.loc)
 						if(flesh_colour) NG.color = flesh_colour
-						for (var/obj/item/stack/material/wood/G in user.loc)
+						for (var/obj/item/stack/material/fuel/wood/G in user.loc)
 							if(G==NG)
 								continue
 							if(G.amount>=G.max_amount)

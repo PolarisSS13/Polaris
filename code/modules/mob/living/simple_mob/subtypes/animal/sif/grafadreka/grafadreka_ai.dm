@@ -52,14 +52,16 @@
 		ai_holder.hostile = TRUE
 
 /datum/ai_holder/simple_mob/intentional/grafadreka
-	hostile =             TRUE
-	retaliate =           TRUE
-	cooperative =         TRUE
-	can_flee =            TRUE
-	flee_when_dying =     TRUE
-	home_low_priority =   TRUE
+	intelligence_level  = AI_SMART
+	hostile             = TRUE
+	retaliate           = TRUE
+	cooperative         = TRUE
+	can_flee            = TRUE
+	flee_when_dying     = TRUE
+	home_low_priority   = TRUE
+	threaten            = TRUE
 	var/next_food_check = 0
-	var/next_sap_check =  0
+	var/next_sap_check  = 0
 	var/next_heal_check = 0
 
 /datum/ai_holder/simple_mob/intentional/grafadreka/should_flee(force)

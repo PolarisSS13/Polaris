@@ -114,7 +114,7 @@
 // Proc: get_cyborgs()
 // Parameters: 1 (operator - mob which is operating the console.)
 // Description: Returns NanoUI-friendly list of accessible cyborgs.
-/obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/operator)
+/obj/machinery/computer/robotics/proc/get_cyborgs(var/mob/operator_mob)
 	var/list/robots = list()
 
 	for(var/mob/living/silicon/robot/R in mob_list)
@@ -146,11 +146,11 @@
 		robot["master_ai"] = R.connected_ai ? R.connected_ai.name : "None"
 		robot["hackable"] = 0
 		//Antag synths should be able to hack themselves and see their hacked status.
-		if(operator && isrobot(operator) && (operator.mind.special_role && operator.mind.original == operator) && (operator == R))
+		if(operator_mob && isrobot(operator_mob) && (operator_mob.mind.special_role && operator_mob.mind.original == operator_mob) && (operator_mob == R))
 			robot["hacked"] = R.emagged ? 1 : 0
 			robot["hackable"] = R.emagged? 0 : 1
 		// Antag AIs know whether linked cyborgs are hacked or not.
-		if(operator && isAI(operator) && (R.connected_ai == operator) && (operator.mind.special_role && operator.mind.original == operator))
+		if(operator_mob && isAI(operator_mob) && (R.connected_ai == operator_mob) && (operator_mob.mind.special_role && operator_mob.mind.original == operator_mob))
 			robot["hacked"] = R.emagged ? 1 : 0
 			robot["hackable"] = R.emagged? 0 : 1
 		robots.Add(list(robot))

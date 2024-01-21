@@ -28,7 +28,7 @@
 
 	var/datum/ntnet_conversation/channel = ntnet_global.get_chat_channel_by_id(active_channel)
 	var/authed = FALSE
-	if(channel && ((channel.operator == src) || netadmin_mode))
+	if(channel && ((channel.operator_admin == src) || netadmin_mode))
 		authed = TRUE
 	switch(action)
 		if("PRG_speak")
@@ -71,7 +71,7 @@
 				return
 			var/datum/ntnet_conversation/C = new /datum/ntnet_conversation()
 			C.add_client(src)
-			C.operator = src
+			C.operator_admin = src
 			C.title = channel_title
 			active_channel = C.id
 			return TRUE
@@ -172,7 +172,7 @@
 	var/list/data = list()
 	data["can_admin"] = can_run(user, FALSE, access_network)
 	return data
-	
+
 /datum/computer_file/program/chatclient/tgui_data(mob/user)
 	if(!ntnet_global || !ntnet_global.chat_channels)
 		return list()
@@ -218,7 +218,7 @@
 					"msg" = M
 				)))
 			data["messages"] = messages
-			data["is_operator"] = (channel.operator == src) || netadmin_mode
+			data["is_operator"] = (channel.operator_admin == src) || netadmin_mode
 		else
 			data["clients"] = list()
 			data["messages"] = list()

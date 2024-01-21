@@ -1,0 +1,314 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"a" = (
+/turf/simulated/floor/water/deep,
+/area/submap/swampy_den)
+"e" = (
+/turf/template_noop,
+/area/submap/swampy_den)
+"i" = (
+/obj/structure/flora/ausbushes/grassybush,
+/turf/simulated/floor/water/deep,
+/area/submap/swampy_den)
+"j" = (
+/obj/structure/flora/ausbushes/fernybush,
+/turf/simulated/floor/water/deep,
+/area/submap/swampy_den)
+"k" = (
+/obj/structure/flora/ausbushes/fullgrass,
+/turf/template_noop,
+/area/submap/swampy_den)
+"o" = (
+/obj/structure/animal_den,
+/obj/random/mob/sif/peaceful,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/swampy_den)
+"s" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/template_noop,
+/area/submap/swampy_den)
+"u" = (
+/turf/simulated/mineral/ignore_mapgen,
+/area/submap/swampy_den)
+"B" = (
+/turf/simulated/floor/water,
+/area/submap/swampy_den)
+"I" = (
+/obj/random/fishing_junk,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/swampy_den)
+"N" = (
+/obj/structure/flora/ausbushes/reedbush,
+/turf/simulated/floor/water/deep,
+/area/submap/swampy_den)
+"S" = (
+/obj/structure/flora/ausbushes/sparsegrass,
+/turf/simulated/floor/water/deep,
+/area/submap/swampy_den)
+"T" = (
+/obj/structure/flora/ausbushes/stalkybush,
+/turf/template_noop,
+/area/submap/swampy_den)
+"V" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/submap/swampy_den)
+"Z" = (
+/obj/structure/flora/ausbushes/lavendergrass,
+/turf/template_noop,
+/area/submap/swampy_den)
+
+(1,1,1) = {"
+T
+e
+e
+e
+e
+e
+e
+e
+T
+e
+e
+e
+e
+e
+B
+"}
+(2,1,1) = {"
+e
+B
+e
+e
+e
+V
+B
+B
+B
+B
+B
+Z
+V
+e
+e
+"}
+(3,1,1) = {"
+e
+e
+k
+B
+s
+B
+B
+a
+i
+a
+B
+B
+e
+T
+e
+"}
+(4,1,1) = {"
+e
+V
+e
+T
+B
+B
+j
+a
+a
+a
+N
+B
+e
+B
+e
+"}
+(5,1,1) = {"
+B
+e
+e
+B
+B
+a
+a
+e
+e
+a
+a
+B
+T
+e
+e
+"}
+(6,1,1) = {"
+e
+e
+B
+B
+a
+N
+u
+u
+V
+a
+a
+B
+B
+B
+e
+"}
+(7,1,1) = {"
+e
+B
+B
+a
+a
+u
+u
+I
+e
+j
+a
+a
+a
+B
+k
+"}
+(8,1,1) = {"
+T
+B
+a
+a
+i
+u
+o
+e
+e
+e
+B
+a
+B
+B
+e
+"}
+(9,1,1) = {"
+e
+B
+N
+a
+a
+e
+e
+e
+u
+B
+B
+B
+B
+e
+e
+"}
+(10,1,1) = {"
+V
+B
+a
+a
+a
+a
+a
+a
+a
+N
+a
+B
+e
+e
+e
+"}
+(11,1,1) = {"
+e
+B
+B
+a
+j
+a
+S
+a
+a
+a
+B
+B
+e
+e
+V
+"}
+(12,1,1) = {"
+e
+T
+B
+B
+B
+B
+B
+B
+a
+B
+B
+e
+e
+T
+e
+"}
+(13,1,1) = {"
+B
+e
+e
+e
+T
+e
+e
+B
+B
+B
+T
+e
+B
+e
+e
+"}
+(14,1,1) = {"
+e
+e
+B
+e
+e
+B
+e
+e
+e
+e
+e
+e
+e
+e
+e
+"}
+(15,1,1) = {"
+k
+e
+e
+T
+e
+e
+e
+V
+e
+B
+e
+V
+e
+B
+k
+"}

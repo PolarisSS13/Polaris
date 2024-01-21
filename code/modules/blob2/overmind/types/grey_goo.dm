@@ -16,5 +16,13 @@
 	attack_message_synth = ", and your external plating dissolves"
 	faction = "nanomachines"
 
+	core_tech = list(TECH_ENGINEERING = 10, TECH_MATERIAL = 10, TECH_ILLEGAL = 10)
+
+	chunk_type = /obj/item/blob_chunk/grey_goo
+
+/obj/item/blob_chunk/grey_goo
+	default_blob = /datum/blob_type/grey_goo
+	blob_effect_master_type = /datum/component/artifact_master/blob
+
 /datum/blob_type/grey_goo/on_emp(obj/structure/blob/B, severity)
 	B.adjust_integrity(-(20 / severity))

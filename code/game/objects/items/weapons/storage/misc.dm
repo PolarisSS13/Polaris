@@ -64,6 +64,57 @@ var/global/list/random_weighted_donuts = list(
 /obj/item/storage/box/donut/empty/PopulateDonutSelection()
 	return
 
+/obj/item/storage/box/nuggets
+	name = "box of nuggets"
+	icon = 'icons/obj/food_nuggets.dmi'
+	icon_state = "nuggetbox_ten"
+	desc = "A share pack of golden chicken nuggets in various fun shapes. Rumours of the rare and deadly 'fifth nugget shape' remain unsubstantiated."
+	description_fluff = "While these nuggets remain beloved by children, drunks and picky eaters across the known galaxy, ongoing legal action leaves the meaning of 'chicken' in dispute."
+	center_of_mass = list("x" = 16,"y" = 9)
+	max_storage_space = ITEMSIZE_COST_SMALL * 6
+	can_hold = null
+	foldable = /obj/item/stack/material/cardboard
+	var/nugget_type = /obj/item/reagent_containers/food/snacks/nugget
+	var/nugget_amount = 10
+
+/obj/item/storage/box/nuggets/Initialize()
+	can_hold = list(nugget_type)
+	. = ..()
+	if(nugget_amount)
+		name = "[nugget_amount]-piece chicken nuggets box"
+		max_storage_space = ITEMSIZE_COST_SMALL * nugget_amount
+	immanentize_nuggets()
+	update_icon()
+
+/obj/item/storage/box/nuggets/proc/immanentize_nuggets()
+	for(var/i in 1 to nugget_amount)
+		new /obj/item/reagent_containers/food/snacks/nugget(src)
+
+/obj/item/storage/box/nuggets/update_icon()
+	if(length(contents) == 0)
+		icon_state = "[initial(icon_state)]_empty"
+	else if(length(contents) == nugget_amount)
+		icon_state = "[initial(icon_state)]_full"
+	else
+		icon_state = initial(icon_state)
+
+// Subtypes below.
+/obj/item/storage/box/nuggets/empty/immanentize_nuggets()
+	return
+
+/obj/item/storage/box/nuggets/twenty
+	nugget_amount = 20
+	icon_state = "nuggetbox_twenty"
+
+/obj/item/storage/box/nuggets/twenty/empty/immanentize_nuggets()
+	return
+
+/obj/item/storage/box/nuggets/forty
+	nugget_amount = 40
+	icon_state = "nuggetbox_forty"
+
+/obj/item/storage/box/nuggets/forty/empty/immanentize_nuggets()
+	return
 
 /obj/item/storage/box/wormcan
 	icon = 'icons/obj/food.dmi'

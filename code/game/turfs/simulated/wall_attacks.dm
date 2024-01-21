@@ -127,12 +127,12 @@
 		return success_smash(user)
 	return fail_smash(user)
 
-/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user)
+/turf/simulated/wall/attackby(var/obj/item/W, var/mob/user, attack_modifier, click_parameters)
 
 	user.setClickCooldown(user.get_attack_speed(W))
 
 	if(!construction_stage && user.a_intent == I_HELP && user.is_preference_enabled(/datum/client_preference/engrave_graffiti))
-		if(try_graffiti(user,W))
+		if(try_graffiti(user,W,click_parameters))
 			return
 
 	if (!user.IsAdvancedToolUser())

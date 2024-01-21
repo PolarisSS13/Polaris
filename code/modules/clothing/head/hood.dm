@@ -193,6 +193,13 @@
 	siemens_coefficient = 0.9
 	armor = list(melee = 30, bullet = 20, laser = 20, energy = 20, bomb = 35, bio = 75, rad = 35)
 
+/obj/item/clothing/head/hood/explorer/xenofauna
+	name = "xenofauna field hood"
+	desc = "A lightly armoured hood for surveying harsh environments."
+	icon_state = "xenofauna"
+	siemens_coefficient = 0.5
+	armor = list(melee = 20, bullet = 10, laser = 10, energy = 10, bomb = 25, bio = 90, rad = 60)
+
 // Costumes
 /obj/item/clothing/head/hood/carp_hood
 	name = "carp hood"

@@ -138,7 +138,7 @@
 /turf/simulated/floor/tiled/milspec,
 /area/submap/cave/qShuttle)
 "au" = (
-/obj/structure/closet/crate/secure/loot,
+/obj/structure/closet/crate/secure/decalock/loot,
 /obj/effect/floor_decal/milspec/color/orange,
 /obj/effect/floor_decal/milspec/cargo_arrow,
 /turf/simulated/floor/tiled/milspec,

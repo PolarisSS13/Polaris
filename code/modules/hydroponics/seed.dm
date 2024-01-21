@@ -27,6 +27,14 @@
 	var/has_item_product                                      // Item products. (Eggy)
 	var/force_layer
 
+	// Backyard grilling vars. Not passed through genetics.
+	var/backyard_grilling_rawness      = 20
+	var/backyard_grilling_product      = /obj/item/reagent_containers/food/snacks/badrecipe
+	var/backyard_grilling_announcement = "smokes and chars!"
+
+	// Used to show an icon when drying in a rack.
+	var/drying_state = "grown"
+
 // Making the assumption anything in HYDRO-ponics is capable of processing water, and nutrients commonly associated with it, leaving us with the below to be tweaked.
 	var/list/beneficial_reagents   // Reagents considered uniquely 'beneficial' by a plant.
 	var/list/mutagenic_reagents    // Reagents considered uniquely 'mutagenic' by a plant.

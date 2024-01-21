@@ -59,6 +59,10 @@
 		return
 	TryChop(user, item)
 
+/obj/structure/flora/tree/attack_generic(mob/user, damage, attack_verb)
+	. = ..()
+	if(!.)
+		TryChop(user)
 
 /obj/structure/flora/tree/proc/TryChop(mob/living/user, obj/item/item)
 	var/damage
@@ -188,7 +192,7 @@
 	icon = 'icons/obj/flora/pinetrees.dmi'
 	icon_state = "pine_1"
 	base_state = "pine"
-	product = /obj/item/stack/material/log
+	product = /obj/item/stack/material/fuel/log
 	shake_animation_degrees = 3
 
 /obj/structure/flora/tree/pine/choose_icon_state()
@@ -231,7 +235,7 @@
 	icon = 'icons/obj/flora/palmtrees.dmi'
 	icon_state = "palm1"
 	base_state = "palm"
-	product = /obj/item/stack/material/log
+	product = /obj/item/stack/material/fuel/log
 	product_amount = 5
 	health = 200
 	max_health = 200
@@ -247,7 +251,7 @@
 	icon = 'icons/obj/flora/deadtrees.dmi'
 	icon_state = "tree_1"
 	base_state = "tree"
-	product = /obj/item/stack/material/log
+	product = /obj/item/stack/material/fuel/log
 	product_amount = 5
 	health = 200
 	max_health = 200
@@ -261,7 +265,7 @@
 	icon = 'icons/obj/flora/jungletreesmall.dmi'
 	icon_state = "tree"
 	base_state = "tree"
-	product = /obj/item/stack/material/log
+	product = /obj/item/stack/material/fuel/log
 	product_amount = 10
 	health = 400
 	max_health = 400
@@ -276,7 +280,7 @@
 	icon = 'icons/obj/flora/jungletree.dmi'
 	icon_state = "tree"
 	base_state = "tree"
-	product = /obj/item/stack/material/log
+	product = /obj/item/stack/material/fuel/log
 	product_amount = 20
 	health = 800
 	max_health = 800
@@ -305,7 +309,7 @@
 	icon = 'icons/obj/flora/deadtrees.dmi'
 	icon_state = "tree_sif"
 	base_state = "tree_sif"
-	product = /obj/item/stack/material/log/sif
+	product = /obj/item/stack/material/fuel/log/sif
 	catalogue_data = list(/datum/category_item/catalogue/flora/sif_tree)
 	randomize_size = TRUE
 

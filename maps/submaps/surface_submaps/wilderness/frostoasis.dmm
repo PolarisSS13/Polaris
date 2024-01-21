@@ -1,20 +1,19 @@
 "am" = (/obj/structure/flora/ausbushes/ywflowers,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
-"bc" = (/obj/effect/decal/cleanable/dirt,/obj/random/obstruction,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
+"bc" = (/obj/effect/decal/cleanable/dirt,/obj/structure/grille,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "bB" = (/obj/structure/fence/door/opened,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "bC" = (/obj/structure/table/sifwoodentable,/obj/item/material/knife/butch,/obj/random/meat,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
-"bX" = (/obj/structure/closet/cabinet,/obj/random/maintenance/cargo,/obj/item/reagent_containers/food/snacks/driedfish,/obj/item/reagent_containers/food/snacks/driedfish,/obj/random/maintenance,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"bX" = (/obj/structure/closet/cabinet,/obj/random/maintenance/cargo,/obj/item/reagent_containers/food/snacks/driedfish,/obj/item/reagent_containers/food/snacks/driedfish,/obj/random/maintenance,/obj/random/cash,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "cm" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "co" = (/turf/simulated/mineral/ignore_mapgen,/area/submap/FrostOasis)
 "ct" = (/obj/structure/table/sifwoodentable,/obj/item/a_gift,/obj/machinery/light/small{dir = 8},/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"cA" = (/obj/structure/fireplace,/obj/effect/decal/cleanable/dirt,/obj/structure/sign/christmas/wreath,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"cA" = (/obj/structure/wood_fire/fireplace,/obj/effect/decal/cleanable/dirt,/obj/structure/sign/christmas/wreath,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "do" = (/obj/effect/decal/cleanable/dirt,/obj/item/trash/driedfish,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "dD" = (/obj/structure/loot_pile/maint/boxfort,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "dF" = (/obj/structure/simple_door/sifwood,/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"fh" = (/mob/living/simple_mob/animal/sif/glitterfly{faction = "diyaab"},/turf/simulated/floor/outdoors/dirt,/area/template_noop)
 "fj" = (/turf/simulated/floor/outdoors/ice,/area/submap/FrostOasis)
 "fH" = (/obj/effect/decal/cleanable/dirt,/obj/structure/simple_door/sifwood,/obj/structure/barricade,/turf/simulated/floor/wood/broken,/area/submap/FrostOasis)
 "fU" = (/obj/structure/sink{pixel_y = 17},/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"gl" = (/obj/machinery/shower{dir = 1},/obj/effect/decal/remains/mummy2,/obj/machinery/light/small,/obj/effect/decal/cleanable/dirt,/obj/random/gun/random/anomalous,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"gl" = (/obj/machinery/shower{dir = 1},/obj/effect/decal/remains/mummy2,/obj/machinery/light/small,/obj/effect/decal/cleanable/dirt,/obj/random/projectile/scrapped_shotgun,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "go" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light{dir = 4; icon_state = "tube1"},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "gF" = (/obj/structure/loot_pile/maint/junk,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "hf" = (/obj/structure/table/rack,/obj/item/clothing/suit/storage/hooded/wintercoat/ratvar,/turf/simulated/floor/wood,/area/submap/FrostOasis)
@@ -23,7 +22,7 @@
 "iv" = (/obj/effect/decal/cleanable/dirt,/obj/item/toy/xmastree,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "iC" = (/obj/effect/decal/cleanable/dirt,/obj/item/a_gift,/turf/simulated/floor/wood/broken,/area/submap/FrostOasis)
 "iW" = (/obj/structure/flora/ausbushes/ppflowers,/obj/effect/landmark/snowy_turf,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
-"jb" = (/obj/item/beartrap{deployed = 1; anchored = 1},/turf/simulated/floor/wood/broken,/area/submap/FrostOasis)
+"jb" = (/obj/item/beartrap{deployed = 1; anchored = 1; icon_state = "beartrap1"},/turf/simulated/floor/wood/broken,/area/submap/FrostOasis)
 "jj" = (/obj/structure/bed/chair/wood{dir = 8},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "jw" = (/obj/effect/decal/cleanable/dirt,/obj/effect/spider/stickyweb,/obj/random/mob/spider,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "jA" = (/obj/structure/fence/cut/large,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
@@ -38,7 +37,7 @@
 "me" = (/obj/effect/landmark/snowy_turf,/obj/structure/flora/tree/pine,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
 "mg" = (/obj/effect/decal/cleanable/dirt,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "mh" = (/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
-"ml" = (/mob/living/simple_mob/animal/sif/diyaab,/turf/template_noop,/area/submap/FrostOasis)
+"ml" = (/mob/living/simple_mob/animal/sif/diyaab,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "mw" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "mD" = (/obj/structure/flora/grass/both,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
 "mH" = (/obj/structure/flora/grass/green,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
@@ -46,12 +45,11 @@
 "np" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/mineral/ignore_mapgen,/area/submap/FrostOasis)
 "nB" = (/obj/structure/animal_den,/obj/effect/spider/stickyweb/dark,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "ok" = (/obj/structure/toilet{dir = 1},/obj/effect/decal/cleanable/filth,/obj/machinery/light/small,/obj/effect/spresent,/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"om" = (/obj/random/multiple/voidsuit,/obj/random/humanoidremains,/obj/item/material/twohanded/spear,/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"op" = (/obj/effect/landmark/snowy_turf,/obj/item/storage/backpack/dufflebag/syndie/ammo,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
+"om" = (/obj/random/humanoidremains,/obj/item/material/twohanded/spear,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "ou" = (/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
 "oA" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "oB" = (/obj/effect/landmark/snowy_turf,/turf/template_noop,/area/submap/FrostOasis)
-"oV" = (/obj/structure/tanning_rack,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"oV" = (/obj/structure/drying_rack,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "pB" = (/obj/effect/decal/cleanable/dirt,/obj/random/trash,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "pE" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "pH" = (/obj/effect/spider/stickyweb/dark,/obj/structure/table/standard,/obj/random/mug/anom,/turf/simulated/floor/wood,/area/submap/FrostOasis)
@@ -67,14 +65,14 @@
 "tr" = (/obj/effect/decal/cleanable/dirt,/obj/item/a_gift,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "tv" = (/obj/structure/fence,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "tT" = (/mob/living/simple_mob/animal/sif/glitterfly{faction = "diyaab"},/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
-"tV" = (/obj/item/beartrap{deployed = 1; anchored = 1},/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"tV" = (/obj/item/beartrap{deployed = 1; anchored = 1; icon_state = "beartrap1"},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "tY" = (/obj/effect/decal/cleanable/blood/drip,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "uj" = (/obj/structure/table/sifwoodentable,/obj/item/a_gift,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "uX" = (/obj/random/trash,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "vb" = (/obj/structure/window/basic/full,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "vj" = (/obj/machinery/light/small{dir = 4},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "vk" = (/obj/structure/flora/grass/green,/obj/effect/landmark/snowy_turf,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
-"vJ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/random/obstruction,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
+"vJ" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/obj/structure/inflatable/door,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "vK" = (/obj/structure/loot_pile/maint/trash,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "vL" = (/obj/item/toy/xmastree,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "wC" = (/obj/structure/animal_den,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
@@ -100,21 +98,20 @@
 "EW" = (/mob/living/simple_mob/animal/sif/shantak{faction = "diyaab"},/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "EZ" = (/obj/structure/window/basic/full,/obj/structure/curtain/black,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "Fa" = (/obj/structure/flora/tree/dead,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
-"Ff" = (/obj/structure/prop/rock/waterflat,/turf/simulated/floor/beach/water/ocean,/area/submap/FrostOasis)
+"Ff" = (/obj/structure/prop/rock/waterflat,/turf/simulated/floor/beach/water/ocean{outdoors = 1},/area/submap/FrostOasis)
 "Fl" = (/obj/structure/fence/cut/large{dir = 8; icon_state = "straight_cut3"},/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "FD" = (/obj/structure/simple_door/sifwood,/obj/structure/sign/christmas/wreath,/obj/structure/barricade,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "GB" = (/obj/structure/table/sifwoodentable,/obj/item/flame/candle/candelabra/everburn{pixel_y = 7},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "GN" = (/obj/structure/bed/chair/wood{dir = 4},/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"Ia" = (/obj/structure/tanning_rack,/obj/item/stack/wetleather,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"Ia" = (/obj/structure/drying_rack,/obj/item/stack/wetleather,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "It" = (/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt,/area/template_noop)
-"IF" = (/turf/simulated/floor/beach/water/ocean,/area/submap/FrostOasis)
+"IF" = (/turf/simulated/floor/beach/water/ocean{outdoors = 1},/area/submap/FrostOasis)
 "Ji" = (/obj/effect/spider/stickyweb,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "Jj" = (/mob/living/simple_mob/animal/sif/shantak{faction = "diyaab"},/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
 "Jz" = (/obj/structure/window/basic/full,/obj/structure/barricade,/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"JY" = (/obj/random/obstruction,/obj/effect/decal/cleanable/dirt,/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
+"JY" = (/obj/structure/grille,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "Ka" = (/obj/structure/bed/chair/wood{dir = 4},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "Kq" = (/obj/structure/flora/tree/dead,/obj/effect/landmark/snowy_turf,/turf/template_noop,/area/submap/FrostOasis)
-"KW" = (/mob/living/simple_mob/animal/sif/glitterfly{faction = "diyaab"},/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "Lt" = (/obj/structure/flora/tree/pine,/obj/effect/landmark/snowy_turf,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
 "Ly" = (/obj/structure/kitchenspike,/obj/effect/decal/cleanable/blood,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "Ma" = (/obj/structure/flora/tree/pine,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
@@ -123,8 +120,8 @@
 "Nc" = (/obj/random/outcrop,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "Nd" = (/turf/simulated/mineral/ignore_mapgen,/area/template_noop)
 "Ni" = (/obj/effect/decal/cleanable/dirt,/turf/template_noop,/area/submap/FrostOasis)
-"NY" = (/obj/structure/closet/cabinet,/obj/random/maintenance/medical,/obj/random/maintenance/engineering,/obj/random/maintenance/clean,/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"OU" = (/obj/structure/closet/cabinet,/obj/item/clothing/suit/storage/toggle/labcoat,/obj/item/clothing/ears/earring/dangle/glass,/obj/random/maintenance/medical,/obj/item/clothing/under/dress/darkred,/obj/random/contraband/anom,/obj/effect/spider/stickyweb/dark,/obj/random/cash/huge,/obj/random/maintenance/security,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"NY" = (/obj/structure/closet/cabinet,/obj/random/maintenance/medical,/obj/random/maintenance/engineering,/obj/random/maintenance/clean,/obj/random/cash/huge,/obj/random/contraband/anom,/obj/item/clothing/under/suit_jacket,/obj/random/multiple/voidsuit,/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"OU" = (/obj/structure/closet/cabinet,/obj/item/clothing/suit/storage/toggle/labcoat,/obj/item/clothing/ears/earring/dangle/glass,/obj/random/maintenance/medical,/obj/item/clothing/under/dress/darkred,/obj/effect/spider/stickyweb/dark,/obj/random/cash/huge,/obj/random/maintenance/security,/obj/item/storage/backpack/dufflebag/syndie/ammo,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "OX" = (/turf/template_noop,/area/submap/FrostOasis)
 "Pt" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/bench/padded,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "PR" = (/obj/structure/table/bench/sifwooden/padded,/obj/machinery/light/small{dir = 1},/turf/simulated/floor/wood,/area/submap/FrostOasis)
@@ -136,9 +133,9 @@
 "Se" = (/obj/structure/table/sifwoodentable,/obj/random/drinkbottle,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "TJ" = (/obj/effect/decal/cleanable/dirt,/obj/structure/table/standard,/obj/item/a_gift,/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "TZ" = (/obj/structure/table/sifwoodentable,/obj/random/drinkbottle/anom,/turf/simulated/floor/wood,/area/submap/FrostOasis)
-"Uo" = (/obj/random/obstruction,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
+"Uo" = (/obj/structure/inflatable/door,/turf/simulated/floor/outdoors/dirt,/area/submap/FrostOasis)
 "Vz" = (/obj/effect/landmark/snowy_turf,/turf/simulated/floor/outdoors/grass/sif,/area/submap/FrostOasis)
-"Wl" = (/obj/effect/decal/cleanable/dirt,/obj/item/beartrap{deployed = 1; anchored = 1},/turf/simulated/floor/wood,/area/submap/FrostOasis)
+"Wl" = (/obj/effect/decal/cleanable/dirt,/obj/item/beartrap{deployed = 1; anchored = 1; icon_state = "beartrap1"},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 "WK" = (/obj/effect/spider/stickyweb,/obj/structure/girder,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "Xf" = (/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/outdoors/dirt{outdoors = 0},/area/submap/FrostOasis)
 "Xq" = (/obj/structure/bed/chair/wood{dir = 8},/obj/effect/decal/cleanable/dirt,/turf/simulated/floor/wood,/area/submap/FrostOasis)
@@ -150,34 +147,34 @@
 "ZX" = (/obj/structure/table/standard,/obj/item/storage/fancy/blackcandle_box{start_anomalous = 1},/turf/simulated/floor/wood,/area/submap/FrostOasis)
 
 (1,1,1) = {"
-QnQnQnQnQnstQnQnQnNdNdNdNdQnQnQnQnNdNdQnQnQnQnQnstItfhQnQnQn
+QnQnQnQnQnstQnQnQnNdNdNdNdQnQnQnQnNdNdQnQnQnQnQnstItstQnQnQn
 QncocomhmhOXOXOXcocococococococococococoOXOXcocomhMAcoOXOXQn
 NdcocoxImhOXcocococozIzIzIzIcocococococococococoUoJYcococoQn
 QnmhxItTdDcococozIzIzIcAcAzIzIzIcocococococomhcocmXfcocoOXQn
 QnOXmhxIcococozIzIvLmgpEpEsUiCzIzIzIPXzIPXzIxIxIXfXfNccocoQn
-QnmhOXcococozIzIpXuXGNSepWXqpEivQRzIfUzhfUzImhnpcoXfxIcocoQn
-QnOXcocococozIzqpEZQKaGBBcjjpEtrpBfHxAtVpEzImhyicococoxIcoQn
+QnmhOXcococozIzIpXuXGNSepWXqpEivQRzIfUzhfUzIcmnpcoXfxIcocoQn
+QnOXcocococozIzqpEZQKaGBBcjjpEtrpBfHxAtVpEzIcmyicocoxIXfcoQn
 QncococococozIctjbZQGNrQTZXquXpEvjzIdFzIdFzImhOXOXDscoxIcoNd
 QncococococozIzqzqpEZQZQZQZQtVZQujzIokzIglzIhVmhmhmhmhoucoNd
 QnOXcococoqYzIvbvbzIzIWljbzIzIvbJzzIzIzIzIzIOXmhmecocococoNd
 QnOXcocoOXmhjAoBoBzIzIrFFDzIzIhVhVoBOXKqoBmhmhmhcococococoNd
-QncococomhmhtvlXmhwHPRZQZQPRwHmhmhmhoBoBmhmhoBzIzIzIzIzIcoNd
-NdcocoADmlmhrGmhmhZQZQomZQZQZQmhouLtEWmhmDmhoBEZTJPthzzIcoQn
+QncococokrmhtvlXmhwHPRZQZQPRwHmhmhmhoBoBmhmhoBzIzIzIzIzIcoNd
+NdcocoADmlOXrGmhmhZQZQomZQZQZQmhouLtEWmhmDmhoBEZTJPthzzIcoQn
 QncococoOXOXtvmhmhzIZQoVIaZQzImHLtVzvkOXOXmhmhdFpECDgozIcoQn
 QncococoOXOXtvmhmDouFajIllfjfjfjfjfjBFLtoumDmhzINYpEDazIcoNd
-QncocococococomhZDouamllfjIFIFIFIFIFfjfjllBtmhzIzIzIzIzIcoNd
+QncocococococomhZDouamllfjIFIFIFIFIFfjVzllBtmhzIzIzIzIzIcoNd
 QnOXcocococomDmhLtBtrEfjIFIFIFFfIFIFIFfjiWmhjImhcococococoNd
 QnOXcococoLtmhoBVzxIvkfjIFIFIFIFIFIFfjVziWJjmhcocococococoNd
-QnOXcocomDmhmHxILyMnVzamfjIFIFIFIFfjmHopmDmhzIzIzIzIzIcocoNd
+QnOXcocomDmhmHxILyMnVzamfjIFIFIFIFfjmHVzmDmhzIzIzIzIzIcocoNd
 QncococoxIcocoydAMlobCrEfjfjfjfjfjBFlsouMaouEZpHJiJiWKcocoNd
-QncococoxInpxIxIloxIxIouamMaBtamouVzVzmDVzmhdFQJJijwjNcocoQn
-QncococoxImhxIcoxIxIjDVzoumDouamVzjDxIxImhmhzIOUjwXYjNnBcoQn
+QncococoxIcoxIXfloxIxIouamMaBtamouVzVzmDVzmhdFQJJijwjNcocoQn
+QncococoxImhXfcoxIxIjDVzoumDouamVzjDxIxImhmhzIOUjwXYjNnBcoQn
 QnOXcocoxIoAcocoxIloxIxIxIxIouxIxIcozIzIdFEZzIzIzIzIzIcocoQn
 QncococobcvJcocoYczmYczIYcbBFlYccocozIbXdohfzIcocococococoQn
 NdcocoxImwmwcokrmhtYmhtvmhmhkrmhcocozIyXZQmYzIcocococococoQn
 NdcomhxIxIcocovKOXmhZxjAmhOXEWvKcocozIAjQuZXzIcocococococoNd
 QnmhmhcmcocoOXmhZxmhOXtvOXOXOXcococozIzIzIzIzIcococogFxIwCNd
-QnOXKWcmcococoOXOXOXOXcocococococococococococococomhxItTOXQn
+QnOXmhcmcococoOXOXOXOXcocococococococococococococomhxItTOXQn
 QnOXNimhOXcococococococoOXcococoOXOXcococococococoOXmhcomhQn
 QnQnQnQnQnQnNdNdNdNdQnQnQnQnQnQnQnQnQnQnQnNdNdQnQnstNdNdQnQn
 "}

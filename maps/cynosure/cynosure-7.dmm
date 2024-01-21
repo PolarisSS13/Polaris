@@ -10,10 +10,8 @@
 /turf/unsimulated/wall/planetary/sif,
 /area/surface/outside/wilderness/mountains)
 "bW" = (
-/obj/effect/landmark{
-	name = "JoinLateWilderness"
-	},
-/obj/structure/bed,
+/obj/structure/wood_fire/fireplace/stove,
+/obj/fiftyspawner/log/sif,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
 "ct" = (
@@ -29,6 +27,10 @@
 /obj/vehicle/boat/sifwood,
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/wilderness/normal)
+"eu" = (
+/obj/structure/simple_door/sifwood,
+/turf/simulated/floor/wood/sif,
+/area/surface/outside/wilderness/normal)
 "eZ" = (
 /turf/simulated/wall/sifwood,
 /area/surface/wilderness/shack)
@@ -42,6 +44,10 @@
 /obj/item/stack/medical/splint,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
+"fQ" = (
+/obj/structure/kitchenspike,
+/turf/simulated/floor/outdoors/dirt/sif/planetuse,
+/area/surface/outside/wilderness/normal)
 "gl" = (
 /obj/structure/cliff/automatic{
 	dir = 9
@@ -54,6 +60,16 @@
 	},
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/wilderness/mountains)
+"ic" = (
+/obj/structure/closet/cabinet,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/clothing/shoes/boots/winter,
+/obj/item/clothing/under/color/grey,
+/obj/item/clothing/mask/gas,
+/obj/item/tank/emergency/oxygen/double,
+/obj/item/melee/umbrella/random,
+/turf/simulated/floor/wood/sif,
+/area/surface/wilderness/shack)
 "id" = (
 /turf/simulated/wall/sifwood,
 /area/surface/outside/path/wilderness)
@@ -118,7 +134,8 @@
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/wilderness/mountains)
 "qr" = (
-/obj/structure/kitchenspike,
+/obj/item/storage/box/matches,
+/obj/structure/table/sifwoodentable,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
 "qT" = (
@@ -138,6 +155,9 @@
 	pixel_y = -6
 	},
 /turf/simulated/wall/concrete,
+/area/surface/outside/wilderness/normal)
+"ti" = (
+/turf/simulated/floor/outdoors/dirt/sif/planetuse,
 /area/surface/outside/wilderness/normal)
 "tC" = (
 /obj/structure/simple_door/sifwood,
@@ -184,12 +204,22 @@
 /obj/effect/zone_divider,
 /turf/simulated/floor/water/deep,
 /area/surface/outside/river/gautelfr)
+"zq" = (
+/obj/structure/drying_rack/sifwood,
+/turf/simulated/floor/outdoors/dirt/sif/planetuse,
+/area/surface/outside/wilderness/normal)
 "zS" = (
 /obj/structure/railing{
 	dir = 4
 	},
 /turf/simulated/floor/water/deep,
 /area/surface/outside/river/gautelfr)
+"zY" = (
+/obj/structure/bed/chair/sifwood/wings{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/wilderness/shack)
 "Aq" = (
 /obj/effect/zone_divider,
 /turf/simulated/floor/outdoors/mask,
@@ -200,6 +230,14 @@
 "Ay" = (
 /turf/simulated/floor/water,
 /area/surface/outside/wilderness/mountains)
+"AG" = (
+/obj/structure/bed,
+/obj/effect/landmark{
+	name = "JoinLateWilderness"
+	},
+/obj/item/bedsheet/blue,
+/turf/simulated/floor/wood/sif,
+/area/surface/wilderness/shack)
 "Be" = (
 /obj/structure/cliff/automatic{
 	dir = 8
@@ -207,6 +245,12 @@
 /obj/effect/zone_divider,
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/wilderness/mountains)
+"BH" = (
+/obj/effect/landmark/start{
+	name = "Trained Drake"
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/wilderness/shack)
 "BR" = (
 /obj/structure/cliff/automatic{
 	dir = 8
@@ -220,6 +264,13 @@
 /obj/effect/zone_divider,
 /turf/simulated/mineral/sif,
 /area/surface/outside/wilderness/mountains)
+"Ec" = (
+/obj/structure/table/sifwoodentable,
+/obj/item/material/knife,
+/obj/item/stack/cable_coil/white,
+/obj/item/material/fishing_rod/built,
+/turf/simulated/floor/outdoors/dirt/sif/planetuse,
+/area/surface/outside/wilderness/normal)
 "Eo" = (
 /obj/structure/cliff/automatic{
 	dir = 4
@@ -272,11 +323,10 @@
 /area/surface/outside/path/wilderness)
 "LN" = (
 /obj/effect/landmark/start{
-	name = "Survivalist"
-	},
-/obj/effect/landmark/start{
 	name = "Trained Drake"
 	},
+/obj/structure/dogbed,
+/obj/item/reagent_containers/food/snacks/jerky/spider/poison,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
 "Mf" = (
@@ -312,9 +362,10 @@
 /turf/simulated/floor/outdoors/grass/sif,
 /area/surface/outside/path/wilderness)
 "RA" = (
-/obj/structure/table/sifwoodentable,
-/obj/item/material/fishing_rod/built,
-/obj/item/stack/cable_coil/white,
+/obj/structure/closet/cabinet,
+/obj/item/reagent_containers/food/condiment/carton/flour/rustic,
+/obj/item/reagent_containers/food/condiment/carton/rice,
+/obj/item/reagent_containers/food/condiment/spacespice,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
 "Sa" = (
@@ -335,6 +386,15 @@
 /obj/structure/bookcase,
 /turf/simulated/floor/wood/sif,
 /area/surface/wilderness/shack)
+"Tf" = (
+/obj/structure/closet/grave/dirthole{
+	name = "latrine pit"
+	},
+/turf/simulated/floor/outdoors/dirt/sif/planetuse,
+/area/surface/outside/wilderness/normal)
+"TH" = (
+/turf/simulated/wall/sifwood,
+/area/surface/outside/wilderness/normal)
 "TP" = (
 /obj/structure/railing{
 	dir = 8
@@ -360,6 +420,12 @@
 /obj/effect/zone_divider,
 /turf/simulated/floor/outdoors/mask,
 /area/surface/outside/wilderness/mountains)
+"Xj" = (
+/obj/effect/landmark/start{
+	name = "Survivalist"
+	},
+/turf/simulated/floor/wood/sif,
+/area/surface/wilderness/shack)
 "XN" = (
 /obj/effect/zone_divider,
 /turf/simulated/floor/outdoors/mask,
@@ -53767,12 +53833,12 @@ Ax
 Ax
 Ax
 Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+ti
+ti
+ti
+ti
+ti
+ti
 UA
 jE
 Ax
@@ -54016,19 +54082,19 @@ Ax
 Ax
 eZ
 eZ
+JU
+JU
 eZ
 eZ
 eZ
 eZ
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+JU
+JU
+eZ
+eZ
+ti
+ti
+ti
 Ax
 Ax
 UA
@@ -54273,18 +54339,18 @@ Ax
 Ax
 eZ
 Tc
-bW
-LN
-bW
-eZ
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+uk
+uk
+Sc
+tC
+uk
+uk
+uk
+uk
+Sc
+tC
+ti
+ti
 Ax
 Ax
 Ax
@@ -54527,21 +54593,21 @@ Ax
 Ax
 Ax
 Ax
-Ax
+ti
 eZ
 RA
 Sc
 uk
-LN
-JU
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+uk
+eZ
+tC
+eZ
+eZ
+tC
+eZ
+eZ
+ti
+ti
 Ax
 Ax
 Ax
@@ -54784,23 +54850,23 @@ Ax
 Ax
 Ax
 Ax
-Ax
+ti
 JU
 sn
-uk
+zY
 uk
 LN
-JU
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+eZ
+Xj
+BH
+eZ
+Xj
+BH
+eZ
+ti
+TH
+eu
+TH
 Ax
 Ax
 Ax
@@ -55040,24 +55106,24 @@ Ax
 Ax
 Ax
 Ax
-Ax
-Ax
+ti
+ti
 JU
 fP
 qr
 uk
 bW
 eZ
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+AG
+ic
+eZ
+AG
+ic
+eZ
+ti
+TH
+Tf
+TH
 Ax
 Ax
 Ax
@@ -55297,24 +55363,24 @@ Ax
 Ax
 Ax
 Ax
-Ax
-Ax
+ti
+ti
 eZ
 eZ
 eZ
 tC
 eZ
 eZ
+eZ
+eZ
+eZ
+eZ
+eZ
+eZ
 Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+TH
+TH
+TH
 Ax
 Ax
 Ax
@@ -55555,17 +55621,17 @@ Ax
 Ax
 Ax
 Ax
+ti
+Ec
+fQ
+zq
+ti
+ti
+ti
 Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+ti
+ti
+ti
 Ax
 Ax
 Ax
@@ -55813,11 +55879,11 @@ Ax
 Ax
 Ax
 Ax
-Ax
-Ax
-Ax
-Ax
-Ax
+ti
+ti
+ti
+ti
+ti
 Ax
 Ax
 Ax
@@ -56073,8 +56139,8 @@ Ax
 Ax
 Ax
 Ax
-Ax
-Ax
+ti
+ti
 Ax
 Ax
 Ax
@@ -56329,9 +56395,9 @@ Ax
 Ax
 Ax
 Ax
+ti
 Ax
-Ax
-Ax
+ti
 Ax
 Ax
 Ax

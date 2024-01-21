@@ -8,7 +8,7 @@
 "ah" = (/obj/structure/table/bench/wooden,/turf/simulated/floor/outdoors/dirt,/area/submap/house1)
 "ai" = (/obj/structure/railing{dir = 8},/turf/simulated/floor/outdoors/grass/sif,/area/submap/house1)
 "aj" = (/obj/structure/target_stake,/turf/simulated/floor/outdoors/dirt,/area/submap/house1)
-"ak" = (/obj/structure/bonfire/sifwood,/turf/simulated/floor/outdoors/dirt,/area/submap/house1)
+"ak" = (/obj/structure/wood_fire/bonfire/sifwood,/turf/simulated/floor/outdoors/dirt,/area/submap/house1)
 "al" = (/obj/item/target,/turf/simulated/floor/outdoors/grass/sif,/area/submap/house1)
 "am" = (/obj/item/target/syndicate,/turf/simulated/floor/outdoors/grass/sif,/area/submap/house1)
 "an" = (/turf/simulated/wall/wood,/area/submap/house1)

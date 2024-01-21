@@ -1,68 +1,88 @@
-/obj/structure/tanning_rack
-	name = "tanning rack"
-	desc = "A rack used to stretch leather out and hold it taut during the tanning process."
-	icon = 'icons/obj/kitchen.dmi'
-	icon_state = "spike"
+/obj/structure/drying_rack
+	name = "drying rack"
+	desc = "A rack used to hold meat or vegetables for drying, or to stretch leather out and hold it taut during the tanning process."
+	icon = 'icons/obj/drying_rack.dmi'
+	icon_state = "rack"
+	var/dismantle_product = /obj/item/stack/material/steel
+	var/dismantle_amount = 3
+	var/obj/item/drying
 
-	var/obj/item/stack/wetleather/drying = null
+/obj/structure/drying_rack/wood
+	icon_state = "rack_wooden"
+	dismantle_product = /obj/item/stack/material/fuel/wood
 
-/obj/structure/tanning_rack/Initialize()
+/obj/structure/drying_rack/sifwood
+	icon_state = "rack_wooden_sif"
+	dismantle_product = /obj/item/stack/material/fuel/wood/sif
+
+/obj/structure/drying_rack/Initialize()
 	. = ..()
 	START_PROCESSING(SSobj, src) // SSObj fires ~every 2s , starting from wetness 30 takes ~1m
 
-/obj/structure/tanning_rack/Destroy()
+/obj/structure/drying_rack/Destroy()
+	QDEL_NULL(drying)
 	STOP_PROCESSING(SSobj, src)
 	return ..()
 
-/obj/structure/tanning_rack/process()
-	if(drying && drying.wetness)
-		drying.wetness = max(drying.wetness - 1, 0)
-		if(!drying.wetness)
-			visible_message("The [drying] is dry!")
-			update_icon()
+/obj/structure/drying_rack/process()
+	var/dry_product = drying?.dry_out(src)
+	if(dry_product)
+		if(drying != dry_product)
+			if(drying && !QDELETED(drying))
+				drying.dropInto(loc)
+			drying = dry_product
+		if(drying)
+			drying.forceMove(src)
+		update_icon()
 
-/obj/structure/tanning_rack/examine(var/mob/user)
+/obj/structure/drying_rack/examine(var/mob/user)
 	. = ..()
 	if(drying)
 		. += "\The [drying] is [drying.get_dryness_text()]."
 
-/obj/structure/tanning_rack/update_icon()
+/obj/structure/drying_rack/update_icon()
 	cut_overlays()
-	if(drying)
-		if(drying.wetness)
-			add_overlay("leather_wet")
-		else
-			add_overlay("leather_dry")
+	var/drying_state = drying?.get_drying_overlay(src)
+	if(drying_state)
+		add_overlay(drying_state)
 
-/obj/structure/tanning_rack/attackby(var/atom/A, var/mob/user)
-	if(istype(A, /obj/item/stack/wetleather))
-		if(!drying) // If not drying anything, start drying the thing
-			if(user.unEquip(A, target = src))
-				drying = A
-		else // Drying something, add if possible
-			var/obj/item/stack/wetleather/W = A
-			W.transfer_to(drying, W.amount, TRUE)
-		update_icon()
+/obj/structure/drying_rack/attackby(var/obj/item/W, var/mob/user)
+
+	if(W.is_wrench())
+		playsound(src, W.usesound, 75, 1)
+		visible_message(SPAN_NOTICE("\The [user] begins dismantling \the [src]."))
+		if(do_after(user, 5 SECONDS * W.toolspeed))
+			visible_message(SPAN_NOTICE("\The [user] dismantles \the [src]."))
+			if(drying)
+				drying.dropInto(loc)
+				drying = null
+			if(dismantle_product && dismantle_amount)
+				new dismantle_product(loc, dismantle_amount)
+			qdel(src)
 		return TRUE
+
+	if(!drying && W.is_dryable() && !istype(W, /obj/item/stack/material/fuel))
+		if(user.unEquip(W))
+			W.forceMove(src)
+			drying = W
+			update_icon()
+		return TRUE
+
 	return ..()
 
-/obj/structure/tanning_rack/attack_hand(var/mob/user)
+/obj/structure/drying_rack/attack_hand(var/mob/user)
 	if(drying)
-		var/obj/item/stack/S = drying
-		if(!drying.wetness) // If it's dry, make a stack of dry leather and prepare to put that in their hands
-			var/obj/item/stack/material/leather/L = new(src)
-			L.amount = drying.amount
-			drying.use(drying.amount)
-			S = L
-
 		if(ishuman(user))
 			var/mob/living/carbon/human/H = user
-			if(!H.put_in_any_hand_if_possible(S))
-				S.forceMove(get_turf(src))
+			if(!H.put_in_any_hand_if_possible(drying))
+				drying.forceMove(get_turf(src))
 		else
-			S.forceMove(get_turf(src))
+			drying.dropInto(loc)
 		drying = null
 		update_icon()
+	return ..()
 
-/obj/structure/tanning_rack/attack_robot(var/mob/user)
-	attack_hand(user) // That has checks to 
+/obj/structure/drying_rack/attack_robot(var/mob/user)
+	if(Adjacent(user))
+		return attack_hand(user)
+	return ..()

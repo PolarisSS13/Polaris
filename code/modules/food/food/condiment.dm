@@ -482,6 +482,16 @@
 	desc = "An artisanal sack of flour. Classy!"
 	icon_state = "flour_bag"
 
+/obj/item/reagent_containers/food/condiment/carton/rice
+	name = "rice sack"
+	desc = "An artisanal sack of rice. Rustic!"
+	icon_state = "flour_bag"
+
+/obj/item/reagent_containers/food/condiment/carton/rice/Initialize()
+	. = ..()
+	reagents.add_reagent("rice", 200)
+	randpixel_xy()
+
 /obj/item/reagent_containers/food/condiment/carton/sugar
 	name = "sugar carton"
 	desc = "A big carton of sugar. Sweet!"

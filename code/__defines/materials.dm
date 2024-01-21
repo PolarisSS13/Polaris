@@ -14,7 +14,7 @@
 #define MAT_WOOD			"wood"
 #define MAT_LOG				"log"
 #define MAT_SIFWOOD			"alien wood"
-#define MAT_SIFLOG			"alien log"
+#define MAT_SIFLOG			"sifwood log"
 #define MAT_STEELHULL		"steel hull"
 #define MAT_PLASTEEL		"plasteel"
 #define MAT_PLASTEELHULL	"plasteel hull"

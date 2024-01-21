@@ -1,4 +1,5 @@
 // Areas.dm
+var/global/list/area_blurb_stated_to = list() // This list of names is here to make sure we don't state our descriptive blurb to a person more than once.
 
 /area
 	var/fire = null
@@ -58,10 +59,14 @@
 	var/forbid_events = FALSE // If true, random events will not start inside this area.
 	var/no_spoilers = FALSE // If true, makes it much more difficult to see what is inside an area with things like mesons.
 	var/soundproofed = FALSE // If true, blocks sounds from other areas and prevents hearers on other areas from hearing the sounds within.
+	var/area_blurb // A text-based description of the area, can be used for sounds, notable things in the room, etc.
+	var/area_blurb_category // Used to filter description showing across subareas
 
 /area/New()
 	icon_state = ""
 	luminosity = !dynamic_lighting
+	if(isnull(area_blurb_category))
+		area_blurb_category = type
 	..()
 
 /area/Initialize()
@@ -395,6 +400,7 @@ var/global/list/mob/living/forced_ambiance_list = new
 	play_ambience(L, initial = TRUE)
 	if(no_spoilers)
 		L.disable_spoiler_vision()
+	do_area_blurb(L)
 
 /area/proc/play_ambience(var/mob/living/L, initial = TRUE)
 	// Ambience goes down here -- make sure to list each area separately for ease of adding things in later, thanks! Note: areas adjacent to each other should have the same sounds to prevent cutoff when possible.- LastyScratch
@@ -547,3 +553,32 @@ GLOBAL_DATUM(spoiler_obfuscation_image, /image)
 		add_overlay(GLOB.spoiler_obfuscation_image)
 	else
 		cut_overlay(GLOB.spoiler_obfuscation_image)
+
+/area/proc/do_area_blurb(mob/living/target_mob, override)
+	if(isnull(area_blurb))
+		if(override)
+			to_chat(target_mob, SPAN_NOTICE("No blurb set for this area."))
+		return
+
+	if(!(target_mob.ckey in global.area_blurb_stated_to[area_blurb_category]) || override)
+		LAZYADD(global.area_blurb_stated_to[area_blurb_category], target_mob.ckey)
+		to_chat(target_mob, SPAN_NOTICE("[area_blurb]"))
+
+/// A verb to view an area's blurb on demand. Overrides the check for if you have seen the blurb before so you can always see it when used.
+/mob/living/verb/show_area_blurb()
+	set name = "Show area blurb"
+	set category = "IC"
+
+	if(!incapacitated(INCAPACITATION_KNOCKOUT))
+		var/area/blurb_verb = get_area(src)
+		if(blurb_verb)
+			blurb_verb.do_area_blurb(src, TRUE)
+
+/// A ghost version of the view area blurb verb so you can view it while observing.
+/mob/observer/verb/ghost_show_area_blurb()
+	set name = "Show area blurb"
+	set category = "IC"
+
+	var/area/blurb_verb = get_area(src)
+	if(blurb_verb)
+		blurb_verb.do_area_blurb(src, TRUE)

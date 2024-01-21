@@ -10,7 +10,7 @@
 "j" = (/turf/simulated/floor/cult,/area/submap/cave/vault6)
 "k" = (/obj/random/tool/power,/obj/random/tech_supply,/turf/simulated/floor/cult,/area/submap/cave/vault6)
 "l" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 8},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/vault6)
-"m" = (/obj/structure/bonfire/permanent/sifwood,/obj/structure/grille/rustic,/turf/simulated/floor/cult,/area/submap/cave/vault6)
+"m" = (/obj/structure/wood_fire/bonfire/sifwood,/obj/structure/grille/rustic,/turf/simulated/floor/cult,/area/submap/cave/vault6)
 "n" = (/obj/random/multiple/minevault,/turf/simulated/floor/cult,/area/submap/cave/vault6)
 "o" = (/obj/structure/cliff/automatic/corner,/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/vault6)
 "p" = (/obj/structure/cliff/automatic{icon_state = "cliffbuilder"; dir = 5},/turf/simulated/mineral/floor/ignore_mapgen,/area/submap/cave/vault6)
