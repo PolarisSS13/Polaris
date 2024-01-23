@@ -161,3 +161,7 @@
 	name = "POI - Swamp Den"
 	ambience = AMBIENCE_SIF
 	
+/area/submap/TapeHouse
+	name = "POI - Tape House"
+	ambience = AMBIENCE_FOREBODING
+	
