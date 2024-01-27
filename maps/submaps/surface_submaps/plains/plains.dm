@@ -44,6 +44,7 @@
 #include "plainsdrake_den.dmm"
 #include "pondside_den.dmm"
 #include "swampy_den.dmm"
+#include "TapeHouse.dmm"
 #endif
 
 
@@ -330,3 +331,9 @@
 	desc = "A muddy animal den."
 	mappath = 'maps/submaps/surface_submaps/plains/swampy_den.dmm'
 	cost = 5
+
+/datum/map_template/surface/plains/TapeHouse
+	name = "Tape House"
+	desc = "An eerie and untouched abandoned home."
+	mappath = 'maps/submaps/surface_submaps/plains/TapeHouse.dmm'
+	cost = 15

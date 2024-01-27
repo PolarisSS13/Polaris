@@ -1,0 +1,1081 @@
+//MAP CONVERTED BY dmm2tgm.py THIS HEADER COMMENT PREVENTS RECONVERSION, DO NOT REMOVE
+"ak" = (
+/obj/structure/table/rack/shelf,
+/obj/item/reagent_containers/food/condiment/spacespice,
+/obj/item/reagent_containers/food/drinks/jar,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"ba" = (
+/obj/structure/bookcase,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"bP" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/template_noop,
+/area/submap/TapeHouse)
+"cI" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/turf/template_noop,
+/area/submap/TapeHouse)
+"dv" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/flora/grass/brown,
+/turf/simulated/floor/outdoors/grass/sif,
+/area/submap/TapeHouse)
+"dV" = (
+/obj/structure/coatrack,
+/turf/simulated/floor/carpet/bcarpet,
+/area/submap/TapeHouse)
+"ej" = (
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"eq" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/bench/sifwooden,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"eB" = (
+/obj/effect/floor_decal/spline/plain,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/TapeHouse)
+"eV" = (
+/turf/template_noop,
+/area/submap/TapeHouse)
+"fU" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 8
+	},
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
+/area/submap/TapeHouse)
+"gb" = (
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/spline/plain,
+/obj/item/trash/candle,
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"gz" = (
+/obj/effect/map_effect/interval/sound_emitter/creepy,
+/obj/effect/decal/cleanable/filth,
+/obj/item/taperecorder,
+/obj/item/clothing/shoes/boots/winter,
+/obj/item/clothing/under/dress/vneck,
+/obj/item/flashlight/empty{
+	start_anomalous = 1
+	},
+/obj/item/gun/projectile/shotgun/doublebarrel/sawn,
+/obj/item/paper/crumpled/crumpled_transcript,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"gP" = (
+/obj/structure/bed/chair/sofa/black/corner{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet,
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"gR" = (
+/obj/machinery/light/flamp,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"hE" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/carpet/bcarpet,
+/area/submap/TapeHouse)
+"jC" = (
+/obj/structure/bed/chair/sofa/black{
+	dir = 4
+	},
+/obj/item/paper/bittersweet_transcript,
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"jI" = (
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 9
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"jM" = (
+/obj/structure/table/woodentable,
+/obj/item/trash/candle,
+/obj/item/paper/determined_transcript,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"kt" = (
+/obj/machinery/light_switch,
+/turf/simulated/wall/sifwood,
+/area/submap/TapeHouse)
+"kz" = (
+/obj/item/stool/barstool/padded{
+	dir = 1
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"kJ" = (
+/obj/structure/window/reinforced,
+/obj/structure/flora/ausbushes/sunnybush,
+/turf/simulated/floor/outdoors/grass/sif,
+/area/submap/TapeHouse)
+"lk" = (
+/obj/effect/floor_decal/corner/white/diagonal,
+/obj/structure/toilet{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/submap/TapeHouse)
+"lt" = (
+/obj/structure/table/rack/shelf,
+/obj/item/reagent_containers/food/condiment/carton/flour/rustic,
+/obj/item/material/sharpeningkit,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"mZ" = (
+/obj/structure/bed/chair/sofa/black/corner{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"nk" = (
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/structure/table/bench/glass,
+/obj/item/storage/photo_album{
+	name = "worn photo album";
+	desc = "Despite this photo album's apparent use, half of the pictures seem to have been pulled from their pockets, while those that remain are blurry and faded."
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"ov" = (
+/obj/structure/table/rack/shelf,
+/obj/item/storage/box/condimentbottles,
+/obj/item/extinguisher,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"pT" = (
+/obj/machinery/shower{
+	dir = 1
+	},
+/obj/effect/floor_decal/corner/white/diagonal,
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals10{
+	dir = 9
+	},
+/obj/effect/floor_decal/steeldecal/steel_decals10{
+	dir = 10
+	},
+/obj/structure/curtain/open/shower,
+/obj/item/clothing/under/bathrobe,
+/turf/simulated/floor/tiled/eris,
+/area/submap/TapeHouse)
+"qs" = (
+/obj/structure/flora/tree/sif,
+/turf/template_noop,
+/area/submap/TapeHouse)
+"ru" = (
+/obj/structure/simple_door/sifwood,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"sp" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/flora/ausbushes/grassybush,
+/turf/simulated/floor/outdoors/grass/sif,
+/area/submap/TapeHouse)
+"sv" = (
+/obj/effect/floor_decal/corner/white/diagonal,
+/turf/simulated/floor/tiled/white,
+/area/submap/TapeHouse)
+"sw" = (
+/obj/structure/window/reinforced,
+/obj/structure/table/wooden_reinforced,
+/obj/item/pen/fountain5,
+/obj/item/paper_bin,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"sx" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 1
+	},
+/obj/structure/table/rack,
+/obj/item/material/kitchen/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/item/material/kitchen/utensil/spoon{
+	pixel_x = 2
+	},
+/obj/item/material/kitchen/utensil/fork,
+/obj/item/material/kitchen/utensil/fork,
+/obj/item/storage/box/glasses/square{
+	pixel_y = -2
+	},
+/obj/item/reagent_containers/glass/rag,
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"sF" = (
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/TapeHouse)
+"sS" = (
+/obj/structure/table/wooden_reinforced,
+/obj/item/clothing/accessory/medal/silver/valor,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"sV" = (
+/turf/simulated/floor/carpet/bcarpet,
+/area/submap/TapeHouse)
+"tI" = (
+/obj/structure/window/reinforced,
+/obj/structure/table/wooden_reinforced,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"uX" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/table/woodentable,
+/obj/item/flame/candle,
+/obj/item/camera,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"vh" = (
+/obj/effect/floor_decal/corner/white/diagonal,
+/obj/structure/mirror{
+	pixel_x = 28
+	},
+/obj/structure/sink{
+	dir = 4;
+	pixel_x = 12
+	},
+/obj/item/towel/random,
+/obj/random/medical/lite,
+/turf/simulated/floor/tiled/white,
+/area/submap/TapeHouse)
+"vD" = (
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/spline/plain,
+/obj/random/junk,
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"vI" = (
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"vM" = (
+/obj/structure/table/rack/shelf,
+/obj/item/toy/plushie/marble_fox,
+/obj/item/ammo_magazine/clip/c12g/pellet,
+/obj/structure/curtain/black,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"wz" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 8
+	},
+/obj/structure/flora/pottedplant/unusual,
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
+/area/submap/TapeHouse)
+"wJ" = (
+/obj/item/clothing/under/dress/red_swept_dress,
+/obj/structure/table/rack/shelf,
+/obj/random/maintenance/security,
+/obj/structure/curtain/black,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"xd" = (
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"xp" = (
+/obj/structure/bed/chair/wood,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"xq" = (
+/obj/structure/loot_pile/maint/trash,
+/obj/effect/decal/cleanable/filth,
+/turf/simulated/floor/outdoors/dirt,
+/area/submap/TapeHouse)
+"xs" = (
+/obj/structure/closet/secure_closet/freezer/fridge,
+/obj/effect/floor_decal/spline/plain{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"xG" = (
+/obj/effect/map_effect/interval/sound_emitter/footsteps_wood,
+/turf/simulated/wall/sifwood,
+/area/submap/TapeHouse)
+"yH" = (
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 1
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 5
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"zf" = (
+/obj/structure/table/reinforced,
+/obj/machinery/microwave,
+/obj/effect/floor_decal/spline/plain{
+	dir = 1
+	},
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"zD" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/flora/grass/both,
+/turf/simulated/floor/outdoors/grass/sif,
+/area/submap/TapeHouse)
+"Ae" = (
+/obj/structure/window/reinforced,
+/turf/template_noop,
+/area/submap/TapeHouse)
+"Cq" = (
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Cy" = (
+/obj/effect/floor_decal/corner/white/diagonal,
+/obj/item/soap/nanotrasen,
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/white,
+/area/submap/TapeHouse)
+"Cz" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/bed/chair/wood{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"CA" = (
+/obj/structure/table/rack/shelf,
+/obj/item/clothing/under/suit_jacket/charcoal,
+/obj/item/clothing/shoes/dress,
+/obj/item/clothing/under/frontier,
+/obj/random/maintenance/cargo,
+/obj/structure/curtain/black,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"CJ" = (
+/obj/structure/table/rack/shelf,
+/obj/item/reagent_containers/food/condiment/yeast,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"DF" = (
+/obj/structure/closet,
+/obj/item/clothing/suit/storage/hooded/wintercoat,
+/obj/item/cane,
+/obj/item/storage/wallet/random,
+/obj/item/flashlight/flare,
+/obj/random/contraband,
+/obj/item/ammo_magazine/clip/c12g/pellet,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"DJ" = (
+/obj/structure/flora/pottedplant/dead,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"DL" = (
+/obj/machinery/media/jukebox,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"EE" = (
+/obj/structure/bed/double/padded,
+/obj/item/bedsheet/hosdouble,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Hc" = (
+/obj/machinery/appliance/cooker/oven,
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"HM" = (
+/obj/structure/grille/rustic,
+/obj/structure/window/reinforced/full,
+/obj/structure/curtain/black,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"IE" = (
+/obj/structure/table/rack/shelf,
+/obj/item/mop,
+/obj/item/flashlight/lantern,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"IW" = (
+/obj/structure/table/rack/shelf,
+/obj/item/reagent_containers/food/condiment/carton/sugar/rustic,
+/obj/item/reagent_containers/food/drinks/jar,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"JE" = (
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 4
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 6
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"JU" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/obj/machinery/space_heater,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Ky" = (
+/obj/structure/window/reinforced{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Mr" = (
+/obj/effect/floor_decal/spline/plain,
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"My" = (
+/turf/simulated/wall/sifwood,
+/area/submap/TapeHouse)
+"MU" = (
+/obj/structure/window/reinforced,
+/obj/structure/flora/ausbushes/leafybush,
+/turf/simulated/floor/outdoors/grass/sif,
+/area/submap/TapeHouse)
+"Nv" = (
+/obj/structure/window/reinforced,
+/obj/structure/flora/ausbushes/grassybush,
+/turf/simulated/floor/outdoors/grass/sif,
+/area/submap/TapeHouse)
+"On" = (
+/obj/structure/table/wooden_reinforced,
+/obj/item/material/harpoon,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"OQ" = (
+/obj/structure/table/reinforced,
+/obj/effect/floor_decal/spline/plain,
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"PA" = (
+/obj/structure/table/wooden_reinforced,
+/obj/item/trash/small_bowl,
+/obj/item/material/kitchen/utensil/spoon,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"PV" = (
+/obj/machinery/light/small{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Rm" = (
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/structure/bed/chair/wood{
+	dir = 1
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"RK" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 4
+	},
+/obj/structure/bed/chair/wood/wings,
+/turf/simulated/floor/wood/sif/broken,
+/area/submap/TapeHouse)
+"Sh" = (
+/obj/structure/window/reinforced,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Sp" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 4
+	},
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
+/area/submap/TapeHouse)
+"TD" = (
+/obj/structure/table/wooden_reinforced,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/obj/item/trash/candle,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"TQ" = (
+/obj/structure/grille/rustic,
+/obj/structure/window/reinforced/full,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"TR" = (
+/obj/structure/table/wooden_reinforced,
+/obj/item/paper/uneasey_transcript,
+/obj/random/cigarettes,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"TY" = (
+/obj/structure/bed/chair/wood,
+/obj/structure/window/reinforced{
+	dir = 8
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Ur" = (
+/obj/structure/sink/kitchen{
+	dir = 4;
+	pixel_x = -12
+	},
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"UL" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/bed/chair/wood{
+	dir = 8;
+	icon_state = "wooden_chair"
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"UM" = (
+/obj/effect/floor_decal/spline/plain{
+	dir = 1
+	},
+/turf/simulated/floor/tiled/hydro,
+/area/submap/TapeHouse)
+"Vg" = (
+/obj/machinery/computer/security/telescreen/entertainment{
+	icon_state = "frame";
+	pixel_x = 32
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"VU" = (
+/obj/machinery/light/small{
+	dir = 1
+	},
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"Wo" = (
+/obj/structure/table/rack,
+/turf/simulated/floor/carpet/bcarpet,
+/area/submap/TapeHouse)
+"Wy" = (
+/obj/structure/window/reinforced{
+	dir = 1
+	},
+/obj/structure/flora/pottedplant/dead,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+"WR" = (
+/turf/simulated/floor/wood/sif{
+	outdoors = 0
+	},
+/area/submap/TapeHouse)
+"Xr" = (
+/obj/effect/floor_decal/carpet,
+/obj/effect/floor_decal/carpet{
+	dir = 8
+	},
+/obj/effect/floor_decal/carpet{
+	dir = 10
+	},
+/turf/simulated/floor/carpet,
+/area/submap/TapeHouse)
+"XW" = (
+/obj/item/clothing/under/utility/grey,
+/obj/item/clothing/shoes/black,
+/obj/item/flame/lighter/random,
+/obj/item/clothing/suit/storage/vest/solgov/hedberg,
+/obj/structure/table/rack/shelf,
+/obj/structure/curtain/black,
+/turf/simulated/floor/wood/sif,
+/area/submap/TapeHouse)
+
+(1,1,1) = {"
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+"}
+(2,1,1) = {"
+eV
+eV
+sF
+eV
+qs
+eV
+eV
+eV
+eV
+eV
+My
+My
+bP
+bP
+bP
+bP
+My
+My
+eV
+"}
+(3,1,1) = {"
+qs
+eV
+eV
+sF
+xq
+My
+My
+My
+My
+My
+My
+My
+TY
+TD
+PA
+Rm
+My
+My
+eV
+"}
+(4,1,1) = {"
+eV
+My
+My
+ru
+My
+My
+xs
+Hc
+Ur
+vD
+kz
+Cq
+Cq
+jI
+xd
+Xr
+Sh
+cI
+eV
+"}
+(5,1,1) = {"
+eV
+My
+ak
+Cq
+Cq
+ru
+UM
+vI
+vI
+OQ
+kz
+Cq
+My
+mZ
+jC
+gP
+Sh
+cI
+eV
+"}
+(6,1,1) = {"
+eV
+My
+lt
+Cq
+CJ
+My
+sx
+vI
+vI
+gb
+kz
+Cq
+My
+yH
+nk
+JE
+Sh
+cI
+eV
+"}
+(7,1,1) = {"
+eV
+My
+ov
+PV
+IW
+My
+zf
+vI
+vI
+Mr
+Cq
+Cq
+Cq
+PV
+Vg
+Cq
+My
+My
+eV
+"}
+(8,1,1) = {"
+eV
+My
+My
+My
+My
+My
+My
+My
+My
+xG
+DL
+Cq
+My
+My
+My
+My
+My
+My
+eV
+"}
+(9,1,1) = {"
+eV
+Ae
+eq
+Cq
+Cq
+My
+DJ
+Cq
+ba
+My
+VU
+Cq
+Cq
+sw
+cI
+eV
+eV
+eV
+eV
+"}
+(10,1,1) = {"
+qs
+Ae
+eq
+Cq
+Cq
+ru
+Cq
+Cq
+Cq
+Cq
+Cq
+Cq
+xp
+tI
+dv
+eV
+eV
+eV
+eV
+"}
+(11,1,1) = {"
+eV
+My
+My
+JU
+Cq
+My
+TR
+On
+sS
+My
+DJ
+Cq
+Cq
+tI
+sp
+eV
+eV
+qs
+eV
+"}
+(12,1,1) = {"
+eV
+My
+My
+My
+ru
+My
+My
+My
+My
+My
+My
+Cq
+kt
+My
+My
+eV
+eV
+eV
+eV
+"}
+(13,1,1) = {"
+eV
+eV
+My
+My
+Cq
+ru
+sv
+pT
+My
+IE
+My
+sV
+dV
+Wo
+TQ
+wz
+fU
+My
+eV
+"}
+(14,1,1) = {"
+eV
+eV
+Nv
+Cz
+Cq
+My
+Cy
+lk
+My
+VU
+ru
+sV
+hE
+sV
+ru
+WR
+WR
+eB
+eV
+"}
+(15,1,1) = {"
+eV
+eV
+Ae
+uX
+Cq
+My
+sv
+vh
+My
+DF
+My
+My
+My
+My
+My
+RK
+Sp
+My
+eV
+"}
+(16,1,1) = {"
+eV
+qs
+kJ
+UL
+Cq
+My
+ru
+My
+My
+My
+My
+CA
+vM
+My
+My
+eV
+eV
+eV
+eV
+"}
+(17,1,1) = {"
+eV
+eV
+MU
+Wy
+Cq
+My
+Cq
+Cq
+Cq
+ru
+Cq
+Cq
+Cq
+gz
+My
+eV
+eV
+eV
+eV
+"}
+(18,1,1) = {"
+eV
+eV
+My
+My
+VU
+ru
+Cq
+Cq
+ej
+kt
+My
+wJ
+XW
+My
+My
+eV
+eV
+eV
+qs
+"}
+(19,1,1) = {"
+eV
+eV
+My
+My
+Ky
+My
+gR
+EE
+jM
+My
+My
+My
+My
+My
+eV
+eV
+eV
+eV
+eV
+"}
+(20,1,1) = {"
+qs
+eV
+eV
+My
+zD
+My
+HM
+HM
+HM
+My
+eV
+eV
+eV
+eV
+eV
+eV
+qs
+eV
+eV
+"}
+(21,1,1) = {"
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+qs
+eV
+eV
+eV
+eV
+eV
+eV
+eV
+"}

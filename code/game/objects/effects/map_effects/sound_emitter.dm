@@ -52,6 +52,7 @@
 	sounds_to_play = list("thunder")
 	interval_lower_bound = 10 SECONDS
 	interval_upper_bound = 15 SECONDS
+	
 
 /obj/effect/map_effect/interval/sound_emitter/geiger
 	sounds_to_play = list('sound/items/geiger/low1.ogg', 'sound/items/geiger/low2.ogg', 'sound/items/geiger/low3.ogg', 'sound/items/geiger/low4.ogg')
@@ -117,3 +118,15 @@
 	sounds_to_play = list('sound/items/bikehorn.ogg')
 	interval_lower_bound = 5
 	interval_upper_bound = 1 SECOND
+	
+/obj/effect/map_effect/interval/sound_emitter/creepy
+	sounds_to_play = list('sound/hallucinations/serithi/creepy3.ogg','sound/hallucinations/serithi/creepy2.ogg')
+	interval_lower_bound = 30 SECONDS
+	interval_upper_bound = 40 SECONDS
+	sound_volume = 40
+	sound_ignore_walls = FALSE
+	
+/obj/effect/map_effect/interval/sound_emitter/footsteps_wood
+	sounds_to_play = list('sound/effects/footstep/wood1.ogg','sound/effects/footstep/wood5.ogg','sound/effects/footstep/floor1.ogg','sound/effects/footstep/floor5.ogg')
+	interval_lower_bound = 5 SECONDS
+	interval_upper_bound = 30 SECONDS

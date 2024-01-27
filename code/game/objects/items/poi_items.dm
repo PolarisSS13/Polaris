@@ -121,3 +121,31 @@
 	name = "Simeon"
 	real_name = name
 	desc = "This lab monkey has a certain glint in their eye."
+	
+/obj/item/paper/bittersweet_transcript
+	name = "bittersweet transcript"
+	
+/obj/item/paper/bittersweet_transcript/Initialize()	
+	. = ..()
+	info = {"<b>Transcript:</b><br><br>\[00:00] Recording started.<br>\[00:12] "Say what you want about them, and I sure have a lot to say, but H-H set me up with a beautiful plot to retire to."<br>\[00:26] "There's plenty of space, plenty of windows to look out into the nearby forest and watch the wildlife. They told us it's pretty safe for this part of the frontier, though I'm still glad they let me keep some surplus armor."<br>\[00:38] "The fridge is full, the tables are all set, and I even started growing lillies. They help keep the boredom away."<br>\[00:41] (Unrecognized sound) <br>\[01:02] "It doesn't stop her side of the bed from being any less cold and empty, though."<br>\[01:03] Recording stopped."}
+
+/obj/item/paper/uneasey_transcript
+	name = "uneasy transcript"
+
+/obj/item/paper/uneasey_transcript/Initialize()
+	. = ..()
+	info = {"<b>Transcript:</b><br><br>\[00:00] Recording started.<br>\[00:06] "Well, it`s been a few months."<br>\[00:17] "Everything`s great, really, I`ve been recording these short little logs to give me something to do."<br>\[00:23] "I feel less insane talking to myself if it`s into a little blinking red light, anyway, haha."<br>\[00:27] (Unrecognized sound) <br>\[00:40] "There it is, though. I don`t know if this thing picked it up, but it sounds like there`s ... pacing. I thought it was just the house settling the first few times but..."<br>\[00:48] "Looking back at other transcripts, apparently it doesn`t like anything else other than talking."<br>\[00:57] "This place feels like an enclosure sometimes. All these windows feel like they have eyes, and every tree outside has become a hiding place."<br>\[01:12] "... I think I'm losing it."<br>\[01:14] Recording stopped."}
+
+/obj/item/paper/determined_transcript
+	name = "determined transcript"
+
+/obj/item/paper/determined_transcript/Initialize()
+	. = ..()
+	info = {"<b>Transcript:</b><br><br>\[00:00] Recording started.<br>\[00:12] "It`s coming from inside the closet, but I think I get it now."<br>\[00:13] (Unrecognized sound)<br>\[00:19] "It won`t stop unless I make it."<br>\[00:29] "I`ll take a light and the recorder with me so I can have a record of what happens."<br>\[00:31] (Unrecognized sound)<br>\[00:42] "And I guess if it`s bad..."<br>\[00:45] "Lilly, I`ll see you soon."<br>\[00:59] Recording stopped."}
+
+/obj/item/paper/crumpled/crumpled_transcript
+	name = "crumpled transcript"
+
+/obj/item/paper/crumpled/crumpled_transcript/Initialize()
+	. = ..()
+	info = {"<b>Transcript:</b><br><br>\[00:00] Recording started.<br>\[00:02] (Unrecognized sound)<br>\[00:02] (Unrecognized sound)<br>\[00:07] (Unrecognized sound)<br>\[00:12] "WHAT ARE Y-"<br>\[00:12] (Unrecognized sound)<br>\[00:13] (Unrecognized sound)<br>\[00:17] (Unrecognized sound)<br>\[15:06] (Unrecognized sound)<br>\[15:06] Recording stopped."}
