@@ -8,7 +8,7 @@
 		SPECIES_TESHARI = 'icons/mob/species/teshari/id.dmi'
 		)
 
-	var/access = list()
+	var/list/access = list()
 	var/registered_name = "Unknown" // The name registered_name on the card
 	var/registered_id_string = "ID Card"
 	slot_flags = SLOT_ID | SLOT_EARS

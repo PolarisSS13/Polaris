@@ -79,6 +79,11 @@
 		var/obj/mecha/M = loc
 		return M.click_action(A, src, params)
 
+	else if(!isturf(loc) && !isnull(loc))	// If you are in Nullspace you should be adminhelping not clicking.
+		var/atom/movable/AM = loc
+		if(AM.allow_click_through(A, src))
+			return AM.click_through(A, src, params)
+
 	if(restrained())
 		setClickCooldown(10)
 		RestrainedClickOn(A)
@@ -140,6 +145,12 @@
 
 			trigger_aiming(TARGET_CAN_CLICK)
 	return 1
+
+/atom/movable/proc/click_through(var/atom/target, var/atom/movable/source, var/params)
+	return FALSE
+
+/atom/movable/proc/allow_click_through(var/atom/target, var/atom/movable/source)
+	return FALSE
 
 /mob/proc/setClickCooldown(var/timeout)
 	next_click = max(world.time + timeout, next_click)
