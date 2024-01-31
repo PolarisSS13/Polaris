@@ -22,6 +22,9 @@
 		src.verbs -= /obj/item/reagent_containers/verb/set_APTFT
 	create_reagents(volume)
 
+/obj/item/reagent_containers/on_reagent_change()
+	update_icon()
+
 /obj/item/reagent_containers/attack_self(mob/user as mob)
 	return
 
@@ -38,12 +41,14 @@
 		return 0
 
 	if(!target.reagents || !target.reagents.total_volume)
-		to_chat(user, "<span class='notice'>[target] is empty.</span>")
-		return 1
+		if(target.can_refill())
+			return 0
+		else
+			to_chat(user, "<span class='notice'>[target] is empty.</span>")
+			return 1
 
 	if(reagents && !reagents.get_free_space())
-		to_chat(user, "<span class='notice'>[src] is full.</span>")
-		return 1
+		return 0
 
 	var/trans = target.reagents.trans_to_obj(src, target:amount_per_transfer_from_this)
 	to_chat(user, "<span class='notice'>You fill [src] with [trans] units of the contents of [target].</span>")
@@ -116,8 +121,8 @@
 		feed_sound(user)
 		return TRUE
 
-/obj/item/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target) // This goes into afterattack and yes, it's atom-level
-	if(!target.is_open_container() || !target.reagents)
+/obj/item/reagent_containers/proc/standard_pour_into(var/mob/user, var/atom/target, var/pour_all = FALSE) // This goes into afterattack and yes, it's atom-level
+	if(!target.is_open_container() || !target.reagents || !target.can_refill())
 		return 0
 
 	if(!reagents || !reagents.total_volume)
@@ -128,6 +133,7 @@
 		to_chat(user, "<span class='notice'>[target] is full.</span>")
 		return 1
 
-	var/trans = reagents.trans_to(target, amount_per_transfer_from_this)
+	var/trans = pour_all ? reagents.total_volume : amount_per_transfer_from_this
+	trans = reagents.trans_to(target, trans)
 	to_chat(user, "<span class='notice'>You transfer [trans] units of the solution to [target].</span>")
 	return 1

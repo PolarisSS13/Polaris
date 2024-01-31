@@ -59,3 +59,18 @@
 	build_path = /obj/item/analyzer/plant_analyzer
 	sort_string = "JAADA"
 
+/datum/design/item/biotech/bidon
+	desc = "A canister for handling large volumes of chemicals."
+	id = "bidon"
+	req_tech = list(TECH_MATERIAL = 4, TECH_BIO = 4)
+	materials = list(MAT_STEEL = 2000, "glass" = 1000)
+	build_path = /obj/structure/reagent_dispensers/bidon
+	sort_string = "JAADB"
+
+/datum/design/item/biotech/bidon_stasis
+	desc = "A stasis canister for handling large volumes of chemicals."
+	id = "bidon_stasis"
+	req_tech = list(TECH_MATERIAL = 6, TECH_BIO = 4, TECH_DATA = 5)
+	materials = list(MAT_STEEL = 2000, "glass" = 1000, MAT_SILVER = 100)
+	build_path = /obj/structure/reagent_dispensers/bidon/stasis
+	sort_string = "JAADC"

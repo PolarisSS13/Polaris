@@ -9,10 +9,11 @@
 	density = 1
 	anchored = 0
 	pressure_resistance = 2*ONE_ATMOSPHERE
-
+	atom_flags = ATOM_REAGENTS_NO_REFILL
+	var/volume = 5000
+	var/has_hose = TRUE
 	var/obj/item/hose_connector/input/active/InputSocket
 	var/obj/item/hose_connector/output/active/OutputSocket
-
 	var/amount_per_transfer_from_this = 10
 	var/possible_transfer_amounts = list(10,25,50,100)
 
@@ -22,21 +23,20 @@
 /obj/structure/reagent_dispensers/Destroy()
 	QDEL_NULL(InputSocket)
 	QDEL_NULL(OutputSocket)
-
-	..()
+	return ..()
 
 /obj/structure/reagent_dispensers/Initialize()
-	var/datum/reagents/R = new/datum/reagents(5000)
+	var/datum/reagents/R = new/datum/reagents(volume)
 	reagents = R
 	R.my_atom = src
 	if (!possible_transfer_amounts)
 		src.verbs -= /obj/structure/reagent_dispensers/verb/set_APTFT
 
-	InputSocket = new(src)
-	InputSocket.carrier = src
-	OutputSocket = new(src)
-	OutputSocket.carrier = src
-
+	if(has_hose)
+		InputSocket = new(src)
+		InputSocket.carrier = src
+		OutputSocket = new(src)
+		OutputSocket.carrier = src
 	. = ..()
 
 /obj/structure/reagent_dispensers/examine(mob/user)

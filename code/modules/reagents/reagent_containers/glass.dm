@@ -106,6 +106,11 @@
 	for(var/type in can_be_placed_into) //Is it something it can be placed into?
 		if(istype(target, type))
 			return 1
+
+	//Disarm intent tries to empty the beaker
+	if(user.a_intent == I_DISARM && standard_pour_into(user, target, TRUE))
+		return TRUE
+
 	if(standard_dispenser_refill(user, target)) //Are they clicking a water tank/some dispenser?
 		return 1
 	if(standard_pour_into(user, target)) //Pouring into another beaker?
