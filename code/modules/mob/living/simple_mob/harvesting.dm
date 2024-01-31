@@ -29,7 +29,8 @@
 			return
 
 		if(harvest_tool)
-			. += SPAN_NOTICE("\The [src] can be [harvest_verb] with a [initial(harvest_tool.name)] every [round(harvest_cooldown, 0.1)] minutes.")
+			var/cooldown_display = round(harvest_cooldown / (1 MINUTE), 0.1)
+			. += SPAN_NOTICE("\The [src] can be [harvest_verb] with a [initial(harvest_tool.name)] every [cooldown_display] minutes.")
 			var/time_to_harvest = (harvest_recent + harvest_cooldown) - world.time
 			if(time_to_harvest > 0)
 				. += SPAN_NOTICE("It can be [harvest_verb] in [time_to_harvest / (1 MINUTE)] second(s).")
