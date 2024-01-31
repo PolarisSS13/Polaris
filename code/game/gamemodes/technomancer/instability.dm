@@ -18,7 +18,7 @@
 // Parameters: 0
 // Description: Does nothing, because inheritance.
 /mob/living/proc/adjust_instability(var/amount)
-	instability = between(0, round(instability + amount, TECHNOMANCER_INSTABILITY_PRECISION), 200)
+	instability = clamp(round(instability + amount, TECHNOMANCER_INSTABILITY_PRECISION), 0, 200)
 
 // Proc: adjust_instability()
 // Parameters: 1 (amount - how much instability to give)
@@ -56,7 +56,7 @@
 // Description: Makes instability decay.  instability_effects() handles the bad effects for having instability.  It will also hold back
 // from causing bad effects more than one every ten seconds, to prevent sudden death from angry RNG.
 /mob/living/proc/handle_instability()
-	instability = between(0, round(instability, TECHNOMANCER_INSTABILITY_PRECISION), 200)
+	instability = clamp(round(instability, TECHNOMANCER_INSTABILITY_PRECISION), 0, 200)
 	last_instability = instability
 
 	//This should cushion against really bad luck.
@@ -287,4 +287,3 @@
 		else
 			to_chat(src, "<span class='cult'><font size='4'>The purple glow makes you feel strange...</font></span>")
 	adjust_instability(amount)
-

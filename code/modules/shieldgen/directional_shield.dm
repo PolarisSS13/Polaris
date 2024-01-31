@@ -140,7 +140,7 @@
 		S.relocate()
 
 /obj/item/shield_projector/proc/adjust_health(amount)
-	shield_health = between(0, shield_health + amount, max_shield_health)
+	shield_health = clamp(shield_health + amount, 0, max_shield_health)
 	if(amount < 0)
 		if(shield_health <= 0)
 			destroy_shields()

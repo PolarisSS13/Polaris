@@ -106,7 +106,7 @@ var/global/list/active_radio_jammers = list()
 
 	var/overlay_percent = 0
 	if(power_source)
-		overlay_percent = between(0, round( power_source.percent() , 25), 100)
+		overlay_percent = clamp(round(power_source.percent(), 25), 0, 100)
 	else
 		overlay_percent = 0
 
@@ -115,4 +115,3 @@ var/global/list/active_radio_jammers = list()
 		cut_overlays()
 		add_overlay("jammer_overlay_[overlay_percent]")
 		last_overlay_percent = overlay_percent
-

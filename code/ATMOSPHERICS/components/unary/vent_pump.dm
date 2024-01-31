@@ -323,9 +323,9 @@
 		if (signal.data["set_internal_pressure"] == "default")
 			internal_pressure_bound = internal_pressure_bound_default
 		else
-			internal_pressure_bound = between(
-				0,
+			internal_pressure_bound = clamp(
 				text2num(signal.data["set_internal_pressure"]),
+				0,
 				ONE_ATMOSPHERE*50
 			)
 
@@ -333,25 +333,25 @@
 		if (signal.data["set_external_pressure"] == "default")
 			external_pressure_bound = external_pressure_bound_default
 		else
-			external_pressure_bound = between(
-				0,
+			external_pressure_bound = clamp(
 				text2num(signal.data["set_external_pressure"]),
+				0,
 				ONE_ATMOSPHERE*50
 			)
 
 	if(signal.data["adjust_internal_pressure"] != null)
-		internal_pressure_bound = between(
-			0,
+		internal_pressure_bound = clamp(
 			internal_pressure_bound + text2num(signal.data["adjust_internal_pressure"]),
+			0,
 			ONE_ATMOSPHERE*50
 		)
 
 	if(signal.data["adjust_external_pressure"] != null)
 
 
-		external_pressure_bound = between(
-			0,
+		external_pressure_bound = clamp(
 			external_pressure_bound + text2num(signal.data["adjust_external_pressure"]),
+			0,
 			ONE_ATMOSPHERE*50
 		)
 

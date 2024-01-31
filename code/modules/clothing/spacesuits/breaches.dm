@@ -44,7 +44,7 @@ var/global/list/breach_burn_descriptors = list(
 /datum/breach/proc/update_descriptor()
 
 	//Sanity...
-	class = between(1, round(class), 5)
+	class = clamp(round(class), 1, 5)
 	//Apply the correct descriptor.
 	if(damtype == BURN)
 		descriptor = breach_burn_descriptors[class]

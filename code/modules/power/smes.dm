@@ -126,7 +126,7 @@ GLOBAL_LIST_EMPTY(smeses)
 
 /obj/machinery/power/smes/proc/input_power(var/percentage, var/obj/machinery/power/terminal/term)
 	var/to_input = target_load * (percentage/100)
-	to_input = between(0, to_input, target_load)
+	to_input = clamp(to_input, 0, target_load)
 	if(percentage == 100)
 		inputting = 2
 	else if(percentage)
@@ -193,7 +193,7 @@ GLOBAL_LIST_EMPTY(smeses)
 		return
 
 	var/total_restore = output_used * (percent_load / 100) // First calculate amount of power used from our output
-	total_restore = between(0, total_restore, output_used) // Now clamp the value between 0 and actual output, just for clarity.
+	total_restore = clamp(total_restore, 0, output_used) // Now clamp the value between 0 and actual output, just for clarity.
 	total_restore = output_used - total_restore			   // And, at last, subtract used power from outputted power, to get amount of power we will give back to the SMES.
 
 	// now recharge this amount

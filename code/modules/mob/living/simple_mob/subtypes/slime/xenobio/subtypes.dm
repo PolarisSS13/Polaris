@@ -166,7 +166,7 @@
 /mob/living/simple_mob/slime/xenobio/yellow/handle_special()
 	if(stat == CONSCIOUS)
 		if(prob(25))
-			power_charge = between(0, power_charge + 1, 10)
+			power_charge = clamp(power_charge + 1, 0, 10)
 	..()
 
 /obj/item/projectile/beam/lightning/slime
@@ -461,7 +461,7 @@
 			var/mob/living/carbon/human/H = L
 			if(H.isSynthetic())
 				continue
-			H.nutrition = between(0, H.nutrition + rand(15, 25), 800)
+			H.nutrition = clamp(H.nutrition + rand(15, 25), 0, 800)
 
 /mob/living/simple_mob/slime/xenobio/cerulean
 	desc = "This slime is generally superior in a wide range of attributes, compared to the common slime.  The jack of all trades, but master of none."
@@ -609,7 +609,7 @@
 		)
 
 /mob/living/simple_mob/slime/xenobio/gold/slimebatoned(mob/living/user, amount)
-	power_charge = between(0, power_charge + amount, 10)
+	power_charge = clamp(power_charge + amount, 0, 10)
 
 /mob/living/simple_mob/slime/xenobio/gold/get_description_interaction() // So it doesn't say to use a baton on them.
 	return list()

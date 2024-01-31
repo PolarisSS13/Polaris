@@ -256,7 +256,7 @@
 	adjust_integrity(-1000) // This kills the emitter.
 
 /obj/machinery/power/emitter/proc/adjust_integrity(amount)
-	integrity = between(0, integrity + amount, initial(integrity))
+	integrity = clamp(integrity + amount, 0, initial(integrity))
 	if(integrity == 0)
 		if(powernet && avail(active_power_usage)) // If it's powered, it goes boom if killed.
 			visible_message(src, "<span class='danger'>\The [src] explodes violently!</span>", "<span class='danger'>You hear an explosion!</span>")

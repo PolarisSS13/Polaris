@@ -137,7 +137,7 @@
 	healthcheck()
 
 /obj/vehicle/proc/adjust_health(amount)
-	health = between(0, health + amount, maxhealth)
+	health = clamp(health + amount, 0, maxhealth)
 	healthcheck()
 
 /obj/vehicle/ex_act(severity)

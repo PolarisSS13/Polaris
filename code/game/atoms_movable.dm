@@ -498,7 +498,7 @@
 		a = get_area(src.loc)
 		// and yet it moves
 
-		var/arc_progress = between(0, dist_travelled/total_distance, 1)
+		var/arc_progress = clamp(dist_travelled / total_distance, 0, 1)
 		var/sine_position = arc_progress * 180
 		var/pixel_z_position = arc * sin(sine_position)
 
