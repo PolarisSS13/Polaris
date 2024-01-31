@@ -33,7 +33,7 @@ SUBSYSTEM_DEF(shuttles)
 	var/list/sectors_to_initialize                 // Used to find all sector objects at the appropriate time.
 	var/block_init_queue = TRUE                    // Block initialization of new shuttles/sectors
 
-	var/tmp/list/current_run                       // Shuttles remaining to process this fire() tick
+	var/list/current_run                       // Shuttles remaining to process this fire() tick
 
 /datum/controller/subsystem/shuttles/OnNew()
 	global.shuttle_controller = src // TODO - Remove this! Change everything to point at SSshuttles instead

@@ -6,10 +6,10 @@ SUBSYSTEM_DEF(aifast)
 	wait = 0.25 SECONDS
 
 	/// The list of AI datums to be processed.
-	var/static/tmp/list/queue = list()
+	var/static/list/queue = list()
 
 	/// The list of AI datums currently being processed.
-	var/static/tmp/list/current = list()
+	var/static/list/current = list()
 
 
 /datum/controller/subsystem/aifast/stat_entry(msg_prefix)

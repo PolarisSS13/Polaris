@@ -193,9 +193,17 @@ var/global/list/obj/item/communicator/all_communicators = list()
 // Parameters: None
 // Description: Simple check to see if the exonet node is active.
 /obj/item/communicator/proc/get_connection_to_tcomms()
-	if(node && node.on && node.allow_external_communicators)
-		return can_telecomm(src,node)
-	return 0
+	if (!node?.on || !node.allow_external_communicators)
+		return FALSE
+	if (is_jammed(src) || is_jammed(node))
+		return FALSE
+	var/sender_z = get_z(src)
+	var/receiver_z = get_z(node)
+	if (!sender_z || !receiver_z)
+		return FALSE
+	if (sender_z == receiver_z)
+		return TRUE
+	return sender_z in using_map.get_map_levels(receiver_z, TRUE, om_range = DEFAULT_OVERMAP_RANGE)
 
 // Proc: process()
 // Parameters: None

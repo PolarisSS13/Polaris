@@ -2,7 +2,7 @@ SUBSYSTEM_DEF(events)
 	name = "Events (Legacy)"
 	wait = 2 SECONDS
 
-	var/tmp/list/currentrun = null
+	var/list/currentrun = null
 
 	var/list/datum/event/active_events = list()
 	var/list/datum/event/finished_events = list()

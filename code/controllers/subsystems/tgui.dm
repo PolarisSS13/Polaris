@@ -6,16 +6,16 @@ SUBSYSTEM_DEF(tgui)
 	runlevels = RUNLEVEL_LOBBY | RUNLEVELS_DEFAULT
 
 	/// The current queue of UIs to be processed
-	var/static/tmp/list/current = list()
+	var/static/list/current = list()
 
 	/// The whole set of open UIs
-	var/static/tmp/list/open_uis = list()
+	var/static/list/open_uis = list()
 
 	/// The whole set of open UIs as ("\ref[owner]" = /datum/tgui?)
-	var/static/tmp/list/open_uis_by_src = list()
+	var/static/list/open_uis_by_src = list()
 
 	/// The template document used by all tgui instances
-	var/static/tmp/base_html
+	var/static/base_html
 
 
 /datum/controller/subsystem/tgui/Recover()

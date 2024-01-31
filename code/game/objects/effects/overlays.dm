@@ -7,7 +7,7 @@
 	name="beam"
 	icon='icons/effects/beam.dmi'
 	icon_state="b_beam"
-	var/tmp/atom/BeamSource
+	var/atom/BeamSource
 
 /obj/effect/overlay/beam/Initialize()
 	. = ..()
@@ -111,7 +111,7 @@
 	pixel_x = -32
 	pixel_y = -32
 
-// For skathari empress' telegrab warning, could replace down the line. 
+// For skathari empress' telegrab warning, could replace down the line.
 /obj/effect/overlay/skathari_telegrab
 	name = "bluespace displacement"
 	desc = "An eerie field of bluespace energy, you might want to run!"
@@ -119,7 +119,7 @@
 	icon_state = "emfield_s3"
 	alpha = 100
 	pixel_x = -32
-	pixel_y = -16 /// Line up with the big sprite that spawns it! 
+	pixel_y = -16 /// Line up with the big sprite that spawns it!
 	plane = MOB_PLANE
 	layer = BELOW_MOB_LAYER
 

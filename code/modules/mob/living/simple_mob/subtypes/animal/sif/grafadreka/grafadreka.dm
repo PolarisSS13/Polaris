@@ -73,12 +73,12 @@ You can eat glowing tree fruit to fuel your <b>ranged spitting attack</b> and <b
 	var/attacking_with_claws = TRUE
 
 	// Set during initialize and used to generate overlays.
-	var/tmp/current_icon_state // used to track our 'actual' icon state due to overlay nonsense in update_icon
-	var/tmp/fur_colour
-	var/tmp/claw_colour
-	var/tmp/glow_colour
-	var/tmp/base_colour
-	var/tmp/eye_colour
+	var/current_icon_state // used to track our 'actual' icon state due to overlay nonsense in update_icon
+	var/fur_colour
+	var/claw_colour
+	var/glow_colour
+	var/base_colour
+	var/eye_colour
 
 	var/offset_compiled_icon = -16
 	var/is_baby = FALSE

@@ -8,7 +8,7 @@
 	var/list/shuttle_area // Initial value can be either a single area type or a list of area types
 	var/obj/effect/shuttle_landmark/current_location //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
 
-	var/tmp/arrive_time = 0	//the time at which the shuttle arrives when long jumping
+	var/arrive_time = 0	//the time at which the shuttle arrives when long jumping
 	var/flags = SHUTTLE_FLAGS_NONE
 	var/process_state = IDLE_STATE // Used with SHUTTLE_FLAGS_PROCESS, as well as to store current state.
 	var/category = /datum/shuttle
@@ -28,7 +28,7 @@
 	var/mothershuttle //tag of mothershuttle
 	var/motherdock    //tag of mothershuttle landmark, defaults to starting location
 
-	var/tmp/depart_time = 0 //Similar to above, set when the shuttle leaves when long jumping. Used for progress bars.
+	var/depart_time = 0 //Similar to above, set when the shuttle leaves when long jumping. Used for progress bars.
 
 	var/debug_logging = FALSE // If set to true, the shuttle will start broadcasting its debug messages to admins
 

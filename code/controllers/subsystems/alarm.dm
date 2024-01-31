@@ -5,13 +5,13 @@ SUBSYSTEM_DEF(alarm)
 	init_order = INIT_ORDER_ALARM
 
 	/// The list of alarm handlers this subsystem processes
-	var/static/tmp/list/datum/alarm_handler/handlers
+	var/static/list/datum/alarm_handler/handlers
 
 	/// The list of alarm handlers currently being processed
-	var/static/tmp/list/current = list()
+	var/static/list/current = list()
 
 	/// The list of active alarms
-	var/static/tmp/list/active = list()
+	var/static/list/active = list()
 
 
 /datum/controller/subsystem/alarm/Initialize(timeofday)

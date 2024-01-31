@@ -10,7 +10,7 @@
 	var/datum/embedded_program/docking/shuttle_docking_controller // Controller on the shuttle (the one in use)
 	var/docking_codes
 
-	var/tmp/obj/effect/shuttle_landmark/next_location  //This is only used internally.
+	var/obj/effect/shuttle_landmark/next_location  //This is only used internally.
 	var/datum/embedded_program/docking/active_docking_controller // Controller we are docked with (or trying to)
 
 	var/obj/effect/shuttle_landmark/landmark_transition  //This variable is type-abused initially: specify the landmark_tag, not the actual landmark.
